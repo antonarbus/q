@@ -16,12 +16,6 @@ export function Login() {
     const data = await res.json()
     console.log(data)
   }
-  // async function registerUser(e: EventType) {
-  //   e.preventDefault()
-  //   const res = await fetch('/api/login')
-  //   const data = await res.text()
-  //   console.log(data)
-  // }
 
   return (
     <LoginStyled>
