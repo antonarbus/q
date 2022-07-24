@@ -1,8 +1,14 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "outDir": "dist/server",
-    "module": "commonjs"
+    "rootDir": ".",
+    "outDir": "../build/server",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs":true
   },
   "include": [
     "./**/*.ts"

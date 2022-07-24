@@ -1,13 +1,14 @@
-// server.js
-const express = require('express')
+import express, { Request as ReqType, Response as ResType, NextFunction as NextType } from 'express'
+import login from './api/login'
+
 const app = express()
 app.use(express.json()) // parses incoming requests with JSON payloads and is based on body-parser.
 
-app.get('/', (req, res) => {
+app.get('/', (req: ReqType, res:ResType) => {
   res.send('This is from express.js')
 })
 
-app.get('/api', (req, res) => {
+app.get('/api', (req: ReqType, res:ResType) => {
   res.json({ message: '/api' })
 })
 
@@ -15,7 +16,6 @@ app.get('/api', (req, res) => {
 const hi = require('./api/hi')
 app.use('/api/hi', hi)
 
-const login = require('./api/login')
 app.use('/api/login', login)
 
 app.listen(3001, () => {

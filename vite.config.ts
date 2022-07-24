@@ -44,5 +44,8 @@ export default defineConfig({
       all: true,
       src: ['src/']
     }
+  },
+  build: {
+    outDir: 'build'
   }
 })

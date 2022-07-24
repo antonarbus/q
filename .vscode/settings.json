@@ -4,9 +4,10 @@
   "javascript.validate.enable": true,
   "javascript.suggest.completeJSDocs": true,
   "cSpell.words": [
-    "toastify",
+    "copyfiles",
     "PAGEDOWN",
     "PAGEUP",
+    "toastify",
     "uotation"
   ],
 }
