@@ -12,10 +12,10 @@ app.get('/api', (req, res) => {
 })
 
 // use router from separate file
-const hi = require('./server/api/hi')
+const hi = require('./api/hi')
 app.use('/api/hi', hi)
 
-const login = require('./server/api/login')
+const login = require('./api/login')
 app.use('/api/login', login)
 
 app.listen(3001, () => {

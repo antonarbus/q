@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "server": "nodemon server.js",
+    "server": "nodemon server/server.js",
     "all": "concurrently \"npm run server\" \"npm run dev\"",
     "lint": "npx eslint . --ext .js,.ts,.tsx,.jsx",
     "fix": "npx eslint . --ext .js,.ts,.tsx,.jsx --fix",
