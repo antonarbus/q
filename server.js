@@ -11,10 +11,12 @@ app.get('/api', (req, res) => {
   res.json({ message: '/api' })
 })
 
-app.post('/api/login', (req, res) => {
-  console.log(req.body)
-  res.json({ message: '/api/login' })
-})
+// use router from separate file
+const hi = require('./api/hi')
+app.use('/api/hi', hi)
+
+const login = require('./api/login')
+app.use('/api/login', login)
 
 app.listen(3001, () => {
   console.log('server started at http://localhost:3001')

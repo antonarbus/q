@@ -1,0 +1,1 @@
+enter into the folder and run "tsc" to compile ts into js
