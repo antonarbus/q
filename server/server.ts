@@ -2,8 +2,7 @@ import express, { Request as ReqType, Response as ResType, NextFunction as NextT
 import login from './api/login'
 
 const app = express()
-app.use(express.json()) // parses incoming requests with JSON payloads and is based on body-parser.
-
+app.use(express.json()) // parses incoming requests with JSON because we use lots of json, let it be default
 app.get('/', (req: ReqType, res:ResType) => {
   res.send('This is from express.js')
 })
