@@ -15,6 +15,7 @@ import { Notifier } from '@components/Notifier'
 import './reset.css'
 import './app.css'
 import 'react-toastify/dist/ReactToastify.min.css'
+import { Register } from '@components/Register'
 
 const root = ReactDOM.createRoot(document.getElementById('root')!)
 
@@ -27,6 +28,7 @@ root.render(
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="linkA" element={<LinkA />} />
             <Route path="linkB" element={<LinkB />} />
             <Route path="linkC" element={<LinkC />} />

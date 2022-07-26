@@ -2,7 +2,7 @@ import { EventType } from '@src/types'
 import { useState } from 'react'
 import styled from 'styled-components'
 
-export function Login() {
+export function Register() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 

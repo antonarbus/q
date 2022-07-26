@@ -1,6 +1,7 @@
 import 'dotenv/config'
 import express, { Request as ReqType, Response as ResType, NextFunction as NextType } from 'express'
-import login from './api/login'
+import { loginRouter } from './api/login/login'
+import { registerRouter } from './api/register/register'
 
 console.log(process.env.MONGO_DB_USER_NAME)
 
@@ -18,7 +19,8 @@ app.get('/api', (req: ReqType, res:ResType) => {
 const hi = require('./api/hi')
 app.use('/api/hi', hi)
 
-app.use('/api/login', login)
+app.use('/api/login', loginRouter)
+app.use('/api/register', registerRouter)
 
 app.listen(3001, () => {
   console.log('server started at http://localhost:3001')

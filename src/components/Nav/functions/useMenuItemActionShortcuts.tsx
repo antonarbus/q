@@ -44,10 +44,12 @@ export function useMenuItemActionShortcuts() {
     let keysPressed: string[] = []
 
     window.addEventListener('keydown', (e) => {
+      if (!e.key) return
       keysPressed.push(e.key.toLowerCase())
     })
 
     window.addEventListener('keyup', (e) => {
+      if (!e.key) return
       keysPressed.push(e.key.toLowerCase())
       keysPressed = [...new Set(keysPressed)]
       const shortcutItem = shortcuts.find(o => {
