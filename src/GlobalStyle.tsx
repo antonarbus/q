@@ -1,21 +1,23 @@
 import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
+  * { 
+    box-sizing: border-box; 
+    margin: 0;
+    padding: 0;
+  }
+
   body {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
   }
 
   button {
-    cursor: revert;
     border: 1px solid grey;
-    border-radius: px;
+    border-radius: 4px;
     padding: 5px;
     cursor: pointer;
   }
-
-  /* Preferred box-sizing value */
-  *, *::before, *::after { box-sizing: border-box; }
 
   /* Remove list styles (bullets/numbers) */
   ol, ul, menu {
