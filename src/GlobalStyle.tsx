@@ -1,16 +1,20 @@
 import { createGlobalStyle } from 'styled-components'
+
 export const GlobalStyle = createGlobalStyle`
+
   body {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
   }
 
   button {
-    cursor: revert;
     border: 1px solid grey;
     border-radius: px;
     padding: 5px;
   }
+
+  /* css reset in 2022 */
+  /* https://elad2412.github.io/the-new-css-reset/ */
 
   *:where(:not(html, iframe, canvas, img, svg, video):not(svg *, symbol *)) {
     all: unset;
@@ -20,11 +24,13 @@ export const GlobalStyle = createGlobalStyle`
   /* Preferred box-sizing value */
   *, *::before, *::after {
     box-sizing: border-box;
+    padding: 0;
+    margin: 0;
   }
 
   /* Reapply the pointer cursor for anchor tags */
   a, button {
-    cursor: revert;
+    cursor: pointer;
   }
 
   /* Remove list styles (bullets/numbers) */
