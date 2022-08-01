@@ -31,8 +31,8 @@ export function calcNavMediaQueryParams(nav: HTMLElement, logo: HTMLElement) {
   const navItemsQty = nav.querySelectorAll('.nav-item').length
   const navItemWidth = (nav.querySelector('.nav-item') as HTMLElement).offsetWidth
   const logoWidth = (nav.querySelector('.logo-container') as HTMLElement).offsetWidth
-  const minNavWidthToIncludeAllItems = navItemWidth * navItemsQty + logoWidth + 50
-  nav.style.width = minNavWidthToIncludeAllItems + 'px'
+  const minNavWidthToIncludeAllItems = navItemWidth * navItemsQty + logoWidth
+  nav.style.width = minNavWidthToIncludeAllItems + 200 + 'px'
 
   const logoExtension = calcNavWidthWhenLogoIsOverlay()
   const logoPart = calcNavWidthWhenLogoIsOverlay({ elsToHideClass: '.app-ext' })
