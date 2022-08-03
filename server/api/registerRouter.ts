@@ -1,13 +1,14 @@
 import express, { Request as ReqType, Response as ResType, NextFunction as NextType } from 'express'
-import mongoose from 'mongoose'
-import { UserModel } from '../../models/user'
+// import mongoose from 'mongoose'
+import { connectToDb } from '../db/connectToDb'
+import { UserModel } from '../db/models/user.model'
 
 export const registerRouter = express.Router()
 
-// mongoose.connect('mongodb://xxx')
-console.log('process.env.MONGO_DB_USER_NAME', process.env.MONGO_DB_USER_NAME)
-
-mongoose.connect(process.env.MONGO_DB_CONNECTION_STRING as string)
+// const mongo = process.env.MONGO_DB_CONNECTION_STRING
+// const db = 'q'
+// mongoose.connect(`${mongo}/${db}` as string)
+connectToDb()
 
 registerRouter.post('/', async (req: ReqType, res: ResType) => {
   console.log('req.body', req.body)
