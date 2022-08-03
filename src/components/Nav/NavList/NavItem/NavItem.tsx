@@ -120,7 +120,6 @@ const LiStyled = styled.li`
     }
   }
 
-
   @media screen and (max-width: 480px) {
     position: static;
   }
