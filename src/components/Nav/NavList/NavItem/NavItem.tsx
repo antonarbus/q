@@ -7,6 +7,7 @@ import { store } from '@redux/store'
 import { useWindowSize } from 'react-use'
 import { Link } from 'react-router-dom'
 import { clickOnNavItem } from './functions/clickOnNavItem'
+import { TiArrowSortedDown } from 'react-icons/ti'
 
 type NavItemType = {
   children?: React.ReactNode,
@@ -65,7 +66,7 @@ export function NavItem({ children, id }: NavItemType) {
         {icon && <Icon icon={icon} />}
         {!icon && shouldDisplayIcon && <Icon icon={name && name[0]} />}
         {name && <span className='nav-item-name'>{name}</span>}
-        {isNestedMenu && <span className='arrow-for-nested-menu'>▼</span>}
+        {isNestedMenu && <TiArrowSortedDown className='arrow-for-nested-menu'/> }
         {children}
       </Link>
       {shouldOpenThisMenu && <Menu />}
@@ -108,9 +109,9 @@ const LiStyled = styled.li`
       position: absolute;
       top: calc(50% + 2px);
       transform: translateY(-50%);
-      right: -8px;
+      right: -11px;
       color: grey;
-      font-size: 8px;
+      height: 14px;
     }
   
     &:hover > .arrow-for-nested-menu,
