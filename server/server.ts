@@ -1,7 +1,7 @@
 import 'dotenv/config'
 import express, { Request as ReqType, Response as ResType, NextFunction as NextType } from 'express'
-import { loginRouter } from './api/login/login'
-import { registerRouter } from './api/register/register'
+import { loginRouter } from './api/loginRouter'
+import { registerRouter } from './api/registerRouter'
 
 console.log(process.env.MONGO_DB_USER_NAME)
 

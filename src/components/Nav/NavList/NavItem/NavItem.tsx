@@ -109,7 +109,7 @@ const LiStyled = styled.li`
       position: absolute;
       top: calc(50% + 2px);
       transform: translateY(-50%);
-      right: -11px;
+      right: -12px;
       color: grey;
       height: 14px;
     }
