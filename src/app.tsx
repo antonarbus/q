@@ -7,13 +7,12 @@ import { theme } from './theme'
 import { GlobalStyle } from './GlobalStyle'
 import { Main } from './components/Main'
 import { Nav } from '@components/Nav'
-import { Login } from '@components/Login'
 import { LinkA } from './routes/LinkA'
 import { LinkB } from './routes/LinkB'
 import { LinkC } from './routes/LinkC'
-import { Footer } from './components/Footer'
 import { Notifier } from '@components/Notifier'
 import { Register } from '@components/Register'
+import { Login } from '@components/Login'
 
 const root = ReactDOM.createRoot(document.getElementById('root')!)
 
