@@ -3,15 +3,18 @@ import { useState } from 'react'
 import styled from 'styled-components'
 
 export function Register() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [credentials, setCredentials] = useState({ email: '', password: '' })
+  const handleChange = (e: EventType) => {
+    const target = (e.target as HTMLInputElement)
+    setCredentials({ ...credentials, [target.name]: target.value })
+  }
 
   async function registerUser(e: EventType) {
     e.preventDefault()
     const res = await fetch('/api/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ email: credentials.email, password: credentials.password })
     })
     const data = await res.json()
     console.log(data)
@@ -26,16 +29,16 @@ export function Register() {
           name="email"
           id="email"
           placeholder='Email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={credentials.email}
+          onChange={handleChange}
         />
         <input
           type="password"
           name="password"
           id="password"
           placeholder='Password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={credentials.password}
+          onChange={handleChange}
         />
         <button type="submit">Register</button>
       </form>
