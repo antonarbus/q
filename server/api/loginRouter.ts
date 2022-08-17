@@ -17,10 +17,10 @@ loginRouter.post('/', async (req: ReqType, res: ResType) => {
       const jwtToken = sign(email, process.env.JWT_SALT as string)
       res.json({ status: 'user logged in', user, jwtToken })
     } else {
-      res.json({ status: 'error during logging in' })
+      res.json({ status: 'error during logging in', email })
     }
   } catch (error: any) {
-    const { message, number, trace, name } = error
-    res.json({ status: 'error', message, number, trace, name })
+    const { message, number, trace, name, ...rest } = error
+    res.json({ status: 'error', message, number, trace, name, ...rest })
   }
 })

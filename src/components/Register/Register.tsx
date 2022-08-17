@@ -11,14 +11,12 @@ export function Register() {
 
   async function registerUser(e: EventType) {
     e.preventDefault()
-    const res = await fetch('/api/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email: credentials.email,
-        password: credentials.password
-      })
-    })
+    const method = 'POST'
+    const headers = { 'Content-Type': 'application/json' }
+    const { email, password } = credentials
+    const body = JSON.stringify({ email, password })
+    const options = { method, headers, body }
+    const res = await fetch('/api/register', options)
     const data = await res.json()
     console.log(data)
   }
