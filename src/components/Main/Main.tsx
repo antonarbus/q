@@ -1,4 +1,5 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
 import styled from 'styled-components'
 import { DefaultViteComponent } from './DefaultViteComponent'
 
@@ -9,6 +10,7 @@ type Props = {
 export function Main({ children }: Props) {
   return (
     <MainStyled>
+      <Outlet />
       <div>Main component</div>
       <DefaultViteComponent />
       {children}

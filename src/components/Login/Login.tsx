@@ -3,6 +3,8 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 
+// todo: make component as a dialog but connect it to the link via router-dom
+
 export function Login() {
   const navigate = useNavigate()
   const [credentials, setCredentials] = useState({ email: '', password: '' })
