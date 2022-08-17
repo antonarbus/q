@@ -1,8 +1,10 @@
 import { EventType } from '@src/types'
 import { useState } from 'react'
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 
 export function Login() {
+  const navigate = useNavigate()
   const [credentials, setCredentials] = useState({ email: '', password: '' })
   const handleChange = (e: EventType) => {
     const target = (e.target as HTMLInputElement)
@@ -11,13 +13,19 @@ export function Login() {
 
   async function loginUser(e: EventType) {
     e.preventDefault()
-    const res = await fetch('/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: credentials.email, password: credentials.password })
-    })
+    const method = 'POST'
+    const headers = { 'Content-Type': 'application/json' }
+    const { email, password } = credentials
+    const body = JSON.stringify({ email, password })
+    const options = { method, headers, body }
+    const res = await fetch('/api/login', options)
     const data = await res.json()
     console.log(data)
+    if (data.status === 'user logged in') {
+      alert('logged in')
+      navigate('/')
+    }
+    if (data.status === 'error during logging in') alert('check your user name and password')
   }
 
   return (

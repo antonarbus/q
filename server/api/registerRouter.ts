@@ -10,8 +10,9 @@ registerRouter.post('/', async (req: ReqType, res: ResType) => {
   try {
     await UserModel.create({ email, password })
     res.json({ status: 'user is registered' })
-  } catch (error) {
+  } catch (error: any) {
     console.log(error)
-    res.json({ status: 'error during register', error })
+    const { message, number, trace, name, ...rest } = error
+    res.json({ status: 'error', message, number, trace, name, ...rest })
   }
 })
