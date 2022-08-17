@@ -45,10 +45,11 @@ const NavStyled = styled.nav<PropsForSC>`
   align-items: stretch;
   position: sticky;
   top: 5px;
-  margin: 5px;
+  margin: 10px;
   height: 60px;
   border-radius: 4px;
   background: rgb(52 52 52 / 95%);
+  box-shadow: 0 0px 15px 0 #0000005c;
   z-index: 2;
   contain: layout inline-size;
 
