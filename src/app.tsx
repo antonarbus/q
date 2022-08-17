@@ -24,8 +24,10 @@ root.render(
         <BrowserRouter>
           <Nav />
           <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Main />}>
+              <Route path="login" element={<Login />} />
+            </Route>
+            {/* <Route path="login" element={<Login />} /> */}
             <Route path="/register" element={<Register />} />
             <Route path="linkA" element={<LinkA />} />
             <Route path="linkB" element={<LinkB />} />
