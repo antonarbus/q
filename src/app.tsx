@@ -28,7 +28,6 @@ root.render(
               <Route path="login" element={<Login />} />
               <Route path="register" element={<Register />} />
             </Route>
-            {/* <Route path="login" element={<Login />} /> */}
             <Route path="linkA" element={<LinkA />} />
             <Route path="linkB" element={<LinkB />} />
             <Route path="linkC" element={<LinkC />} />
