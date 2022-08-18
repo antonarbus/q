@@ -4,6 +4,7 @@
   "javascript.validate.enable": true,
   "javascript.suggest.completeJSDocs": true,
   "cSpell.words": [
+    "camelcase",
     "copyfiles",
     "PAGEDOWN",
     "PAGEUP",

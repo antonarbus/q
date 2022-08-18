@@ -1,19 +1,39 @@
-import React from 'react'
+import { notify } from '@components/Notifier/notify'
+import React, { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import styled from 'styled-components'
-import { DefaultViteComponent } from './DefaultViteComponent'
+// import jwt from 'jsonwebtoken'
+// eslint-disable-next-line camelcase
+import jwt_decode from 'jwt-decode'
 
-type Props = {
-  children?: React.ReactNode
+async function getDateFromDb() {
+  const jwtToken = localStorage.getItem('jwtToken')
+  const headers = { 'x-access-token': jwtToken || '' }
+  const options = { headers }
+  const res = await fetch('/api/user', options)
+  const data = await res.json()
+  console.log(data)
 }
 
-export function Main({ children }: Props) {
+export function Main() {
+  useEffect(function checkCredentials() {
+    const jwtToken = localStorage.getItem('jwtToken')
+    console.log('jwtToken', jwtToken)
+    if (!jwtToken) return
+    const user = jwt_decode(jwtToken, { header: true })
+    if (!user) {
+      alert('not logged in, put a mark in redux and maybe redirect to login page')
+      return
+    }
+    if (user) alert('logged in, put a mark in redux')
+    console.log('user', user)
+    getDateFromDb()
+  }, [])
   return (
     <MainStyled>
       <Outlet />
-      <div>Main component</div>
-      <DefaultViteComponent />
-      {children}
+      <h3>Main component</h3>
+      <button onClick={() => notify('hi')}>say hi in bottom popup</button>
     </MainStyled>
   )
 }
