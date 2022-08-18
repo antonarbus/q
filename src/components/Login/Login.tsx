@@ -28,7 +28,9 @@ export function Login() {
       alert('logged in')
       navigate('/')
     }
-    if (data.status === 'error during logging in') alert('check your user name and password')
+    if (data.status === 'error during logging in') {
+      localStorage.removeItem('jwtToken')
+    }
   }
 
   return (
