@@ -24,6 +24,7 @@ export function Login() {
     const data = await res.json()
     console.log(data)
     if (data.status === 'user logged in') {
+      localStorage.setItem('jwtToken', data.jwtToken)
       alert('logged in')
       navigate('/')
     }

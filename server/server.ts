@@ -3,6 +3,7 @@ import express, { Request as ReqType, Response as ResType, NextFunction as NextT
 import morgan from 'morgan'
 import { loginRouter } from './api/loginRouter'
 import { registerRouter } from './api/registerRouter'
+import { userDetailsRouter } from './api/userDetailsRouter'
 
 const app = express()
 app.use(morgan('dev')) // http logs in terminal
@@ -21,6 +22,7 @@ app.use('/api/hi', hi)
 
 app.use('/api/login', loginRouter)
 app.use('/api/register', registerRouter)
+app.use('/api/user', userDetailsRouter)
 
 app.listen(3001, () => {
   console.log('server started at http://localhost:3001')

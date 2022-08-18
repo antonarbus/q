@@ -6,7 +6,6 @@ import { decrement, increment } from '@slices/counterSlice'
 import { login } from '@slices/loginSlice'
 import { fetchUsers } from '@slices/usersSlice'
 import { useDispatchTyped, useSelectorTyped } from '@store/storeHooks'
-import { notify } from '../../Notifier/notify'
 
 /**
  * Component with counter
@@ -59,8 +58,6 @@ export function DefaultViteComponent(): JSX.Element {
         </div>
       </div>
 
-      <h3>Toast</h3>
-      <button onClick={() => notify('hi')}>say hi in bottom popup</button>
     </div>
   )
 }
