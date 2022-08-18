@@ -8,7 +8,7 @@ connectToDb()
 
 export const userDetailsRouter = express.Router()
 userDetailsRouter.get('/', async (req: ReqType, res: ResType) => {
-  const jwtToken = req.headers['x-access-token'] as string
+  const jwtToken = req.headers.auth as string
   console.log('jwtToken', jwtToken)
   const jwtSalt = process.env.SALT as string
   console.log('jwtSalt', jwtSalt)

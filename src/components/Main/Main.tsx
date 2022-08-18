@@ -1,38 +1,43 @@
 import { notify } from '@components/Notifier/notify'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import styled from 'styled-components'
-// import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode'
 
-async function getDateFromDb() {
-  const jwtToken = localStorage.getItem('jwtToken')
-  const headers = { 'x-access-token': jwtToken || '' }
-  const options = { headers }
-  const res = await fetch('/api/user', options)
-  const data = await res.json()
-  console.log(data)
-}
-
 export function Main() {
+  const [user, setUser] = useState('not logged in')
+
+  async function getEmailFromDb() {
+    const jwtToken = localStorage.getItem('jwtToken')
+    const headers = { auth: jwtToken || '' }
+    const options = { headers }
+    const res = await fetch('/api/user', options)
+    const data = await res.json()
+    console.log(data)
+    setUser(data.user.email)
+  }
+
   useEffect(function checkCredentials() {
     const jwtToken = localStorage.getItem('jwtToken')
     console.log('jwtToken', jwtToken)
     if (!jwtToken) return
+    // const user = jwt_decode(jwtToken, { header: true })
     const user = jwt_decode(jwtToken, { header: true })
     if (!user) {
-      alert('not logged in, put a mark in redux and maybe redirect to login page')
+      // alert('not logged in, put a mark in redux and maybe redirect to login page')
       return
     }
-    if (user) alert('logged in, put a mark in redux')
+    // if (user) alert('logged in, put a mark in redux')
     console.log('user', user)
-    getDateFromDb()
+    getEmailFromDb()
   }, [])
   return (
     <MainStyled>
       <Outlet />
       <h3>Main component</h3>
+      <h5>User: <b>{user}</b></h5>
       <button onClick={() => notify('hi')}>say hi in bottom popup</button>
     </MainStyled>
   )
