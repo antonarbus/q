@@ -24,6 +24,8 @@ export function Login() {
     const data = await res.json()
     console.log(data)
     if (data.status === 'user logged in') {
+      // generated on server token is stored into local storage
+      // and used after for authentication
       localStorage.setItem('jwtToken', data.jwtToken)
       alert('logged in')
       navigate('/')
