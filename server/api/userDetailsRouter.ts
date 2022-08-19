@@ -8,12 +8,9 @@ connectToDb()
 
 export const userDetailsRouter = express.Router()
 userDetailsRouter.get('/', async (req: ReqType, res: ResType) => {
-  const jwtToken = req.headers.auth as string
-  console.log('jwtToken', jwtToken)
-  const jwtSalt = process.env.SALT as string
-  console.log('jwtSalt', jwtSalt)
+  const accessJwtToken = req.headers.auth as string
   try {
-    const decoded = jwt.verify(jwtToken, jwtSalt) as JwtPayload
+    const decoded = jwt.verify(accessJwtToken, process.env.JWT_ACCESS_SECRET as string) as JwtPayload
     console.log('decoded', decoded)
     const { email, password } = decoded
     const user = await UserModel.findOne({ email, password })
