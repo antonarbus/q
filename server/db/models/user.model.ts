@@ -13,11 +13,11 @@ const User = new mongoose.Schema(
       required: [true, 'email is required'],
       trim: true
     },
-    registerDate: {
+    registeredAt: {
       type: Date,
       default: Date.now
     },
-    loginDate: {
+    loggedAt: {
       type: Date,
       default: Date.now
     }
