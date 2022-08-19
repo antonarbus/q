@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 
 // todo: make component as a dialog but connect it to the link via router-dom
+// todo: store user data in redux
 
 export function Login() {
   const navigate = useNavigate()
@@ -24,14 +25,16 @@ export function Login() {
     const data = await res.json()
     console.log(data)
     if (data.status === 'user logged in') {
-      // generated on server token is stored into local storage
-      // and used after for authentication
-      localStorage.setItem('jwtToken', data.jwtToken)
+      // authorization - checking if password is correct
+      // authentication - checking if the user is the same as authorized initially
+      // after successful authorization a token is created by the server and send to the client
+      // we store it into the local storage and used after for authentication
+      localStorage.setItem('accessJwtToken', data.accessJwtToken)
       alert('logged in')
       navigate('/')
     }
     if (data.status === 'error during logging in') {
-      localStorage.removeItem('jwtToken')
+      localStorage.removeItem('accessJwtToken')
     }
   }
 

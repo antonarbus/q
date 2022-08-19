@@ -20,9 +20,11 @@ loginRouter.post('/', async (req: ReqType, res: ResType) => {
     }
     const isPasswordValid = await bcrypt.compare(password, user.password)
     if (isPasswordValid) {
+      // send token
       const { email, password } = user
-      const jwtToken = jwt.sign({ email, password }, process.env.SALT as string)
-      res.json({ status: 'user logged in', user, jwtToken })
+      const accessJwtToken = jwt.sign({ email, password }, process.env.JWT_ACCESS_SECRET as string)
+      res.json({ status: 'user logged in', user, accessJwtToken })
+      // update logging date in db
       const filter = { email }
       const update = { loggedAt: new Date() }
       await UserModel.findOneAndUpdate(filter, update)

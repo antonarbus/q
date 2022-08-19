@@ -10,8 +10,9 @@ export function Main() {
   const [user, setUser] = useState('not logged in')
 
   async function getEmailFromDb() {
-    const jwtToken = localStorage.getItem('jwtToken')
-    const headers = { auth: jwtToken || '' }
+    const accessJwtToken = localStorage.getItem('accessJwtToken')
+    if (!accessJwtToken) return
+    const headers = { auth: accessJwtToken || '' }
     const options = { headers }
     const res = await fetch('/api/user', options)
     const data = await res.json()
@@ -20,11 +21,11 @@ export function Main() {
   }
 
   useEffect(function checkCredentials() {
-    const jwtToken = localStorage.getItem('jwtToken')
-    console.log('jwtToken', jwtToken)
-    if (!jwtToken) return
-    // const user = jwt_decode(jwtToken, { header: true })
-    const user = jwt_decode(jwtToken, { header: true })
+    const accessJwtToken = localStorage.getItem('accessJwtToken')
+    console.log('accessJwtToken', accessJwtToken)
+    if (!accessJwtToken) return
+    // const user = jwt_decode(accessJwtToken, { header: true })
+    const user = jwt_decode(accessJwtToken, { header: true })
     if (!user) {
       // alert('not logged in, put a mark in redux and maybe redirect to login page')
       return
