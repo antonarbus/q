@@ -13,8 +13,13 @@ const User = new mongoose.Schema(
       required: [true, 'email is required'],
       trim: true
     },
-    jwtToken: {
-      type: String
+    registerDate: {
+      type: Date,
+      default: Date.now
+    },
+    loginDate: {
+      type: Date,
+      default: Date.now
     }
   }
 )
