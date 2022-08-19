@@ -23,6 +23,9 @@ loginRouter.post('/', async (req: ReqType, res: ResType) => {
       const { email, password } = user
       const jwtToken = jwt.sign({ email, password }, process.env.SALT as string)
       res.json({ status: 'user logged in', user, jwtToken })
+      const filter = { email }
+      const update = { loggedAt: new Date() }
+      await UserModel.findOneAndUpdate(filter, update)
     } else {
       res.json({ status: 'error during logging in', email })
     }
