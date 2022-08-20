@@ -2,7 +2,6 @@ import express, { Request as ReqType, Response as ResType, NextFunction as NextT
 import { connectToDb } from '../db/connectToDb'
 import { UserModel } from '../db/models/user.model'
 import bcrypt from 'bcryptjs'
-connectToDb()
 
 export const registerRouter = express.Router()
 registerRouter.post('/', async (req: ReqType, res: ResType) => {
@@ -11,6 +10,7 @@ registerRouter.post('/', async (req: ReqType, res: ResType) => {
   email = email.toLowerCase()
   password = await bcrypt.hash(password, 10)
   try {
+    await connectToDb()
     await UserModel.create({ email, password })
     const status = 'user is registered'
     res.json({ status })

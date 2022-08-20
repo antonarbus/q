@@ -3,26 +3,23 @@ import { connectToDb } from '../db/connectToDb'
 import { UserModel } from '../db/models/user.model'
 import jwt from 'jsonwebtoken'
 import type { JwtPayload } from 'jsonwebtoken'
-
-connectToDb()
+import { verifyToken } from '../middleware/verifyToken'
 
 export const userDetailsRouter = express.Router()
-userDetailsRouter.get('/', async (req: ReqType, res: ResType) => {
-  const accessJwtToken = req.headers.auth as string
+userDetailsRouter.get('/', verifyToken, async (req: any, res: ResType) => {
+  // const accessJwtToken = req.headers.auth as string
   try {
-    const decoded = jwt.verify(accessJwtToken, process.env.JWT_ACCESS_SECRET as string) as JwtPayload
-    console.log('decoded', decoded)
-    const { email, password } = decoded
-    const user = await UserModel.findOne({ email, password })
+    // const decoded = jwt.verify(accessJwtToken, process.env.JWT_ACCESS_SECRET as string) as JwtPayload
+    // console.log('decoded', decoded)
+    // const { email } = decoded
+    const { email } = req
+    await connectToDb()
+    const user = await UserModel.findOne({ email })
     console.log('user', user)
-    const status = 'user data is returned'
-    res.json({ status, user })
+    res.json({ status: 'ok', message: 'email is returned', email: user?.email })
   } catch (error: any) {
     const { message, number, trace, name, ...rest } = error
-    const status = 'error'
-    const myMsg = 'user data is not returned, probably invalid token'
-    const errorAsString = error.toString()
     console.log(error)
-    res.json({ status, myMsg, message, number, trace, name, errorAsString, ...rest })
+    res.json({ status: 'error', message: 'user data is not returned, probably invalid token', error: { message, number, trace, name, errorAsString: error.toString(), ...rest } })
   }
 })

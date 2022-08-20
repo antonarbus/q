@@ -24,18 +24,17 @@ export function Login() {
     const res = await fetch('/api/login', options)
     const data = await res.json()
     console.log(data)
-    if (data.status === 'user logged in') {
-      // authorization - checking if password is correct
-      // authentication - checking if the user is the same as authorized initially
-      // after successful authorization a token is created by the server and send to the client
-      // we store it into the local storage and used after for authentication
-      localStorage.setItem('accessJwtToken', data.accessJwtToken)
-      alert('logged in')
-      navigate('/')
+    if (data.status === 'error') {
+      alert('invalid credentials')
+      return localStorage.removeItem('accessJwtToken')
     }
-    if (data.status === 'error during logging in') {
-      localStorage.removeItem('accessJwtToken')
-    }
+    // authorization - checking if password is correct
+    // authentication - checking if the user is the same as authorized initially
+    // after successful authorization a token is created by the server and send to the client
+    // we store it into the local storage and used after for authentication
+    localStorage.setItem('accessJwtToken', data.accessJwtToken)
+    alert('logged in')
+    navigate('/')
   }
 
   return (
