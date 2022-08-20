@@ -1,7 +1,14 @@
 import mongoose from 'mongoose'
-const mongo = process.env.MONGO_DB_CONNECTION_STRING
+const mongoDbUrl = process.env.MONGO_DB_CONNECTION_STRING
 const db = 'q'
 
-export function connectToDb() {
-  mongoose.connect(`${mongo}/${db}` as string)
+export async function connectToDb() {
+  try {
+    await mongoose.connect(`${mongoDbUrl}/${db}` as string)
+    console.log('connected to db')
+  } catch (error: any) {
+    const errorAsString = error.toString()
+    console.log('error on db connection')
+    console.log(errorAsString)
+  }
 }

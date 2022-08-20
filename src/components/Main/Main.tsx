@@ -11,28 +11,24 @@ export function Main() {
 
   async function getEmailFromDb() {
     const accessJwtToken = localStorage.getItem('accessJwtToken')
-    if (!accessJwtToken) return
-    const headers = { auth: accessJwtToken || '' }
-    const options = { headers }
+    if (!accessJwtToken) return console.log('no token stored')
+    const options = { headers: { auth: accessJwtToken } }
     const res = await fetch('/api/user', options)
     const data = await res.json()
     console.log(data)
-    setUser(data.user.email)
   }
 
-  useEffect(function checkCredentials() {
+  useEffect(function getEmailFromToken() {
     const accessJwtToken = localStorage.getItem('accessJwtToken')
-    console.log('accessJwtToken', accessJwtToken)
     if (!accessJwtToken) return
-    // const user = jwt_decode(accessJwtToken, { header: true })
-    const user = jwt_decode(accessJwtToken, { header: true })
-    if (!user) {
-      // alert('not logged in, put a mark in redux and maybe redirect to login page')
-      return
+    try {
+      const jwtTokenPayload: {email: string | undefined} = jwt_decode(accessJwtToken)
+      const { email } = jwtTokenPayload
+      if (!email) return
+      setUser(email)
+    } catch (error) {
+      console.log(error)
     }
-    // if (user) alert('logged in, put a mark in redux')
-    console.log('user', user)
-    getEmailFromDb()
   }, [])
   return (
     <MainStyled>
@@ -40,6 +36,7 @@ export function Main() {
       <h3>Main component</h3>
       <h5>User: <b>{user}</b></h5>
       <button onClick={() => notify('hi')}>say hi in bottom popup</button>
+      <button onClick={getEmailFromDb}>get email from db</button>
     </MainStyled>
   )
 }
