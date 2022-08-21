@@ -6,26 +6,16 @@ import bcrypt from 'bcryptjs'
 
 export const activateRouter = express.Router()
 activateRouter.get('/', async (req: ReqType, res: ResType) => {
-  console.log('activate')
-  // console.log(req.body)
-  // let { email, password } = req.body
-  // try {
-  //   await connectToDb()
-  //   email = email.toLowerCase()
-  //   const user = await UserModel.findOne({ email })
-  //   if (!user) { return res.json({ status: 'error', message: 'invalid email' }) }
-  //   const isPasswordValid = await bcrypt.compare(password, user.password)
-  //   if (!isPasswordValid) { return res.json({ status: 'error', message: 'invalid password' }) }
-  //   console.log('I am here')
-  //   // send token
-  //   const accessJwtToken = jwt.sign({ email }, process.env.JWT_ACCESS_SECRET as string)
-  //   res.json({ status: 'ok', message: `user with email: ${email} logged in`, accessJwtToken })
-  //   // update logging date in db
-  //   const filter = { email }
-  //   const update = { loggedAt: new Date() }
-  //   await UserModel.findOneAndUpdate(filter, update)
-  // } catch (error: any) {
-  //   const { message, number, trace, name, ...rest } = error
-  //   res.json({ status: 'error', message, number, trace, name, errorAsString: error.toString(), ...rest })
-  // }
+  try {
+    await connectToDb()
+    const activationLink = req.params.link
+    const user = await UserModel.findOne({ activationLink })
+    if (!user) { return res.json({ status: 'error', message: 'not account with such activation link' }) }
+    user.isActivated = true
+    await user.save()
+    return res.redirect(`${process.env.DOMAIN}/login`)
+  } catch (error: any) {
+    const { message, number, trace, name, ...rest } = error
+    res.json({ status: 'error', message, number, trace, name, errorAsString: error.toString(), ...rest })
+  }
 })
