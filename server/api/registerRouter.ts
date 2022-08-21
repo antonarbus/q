@@ -3,6 +3,7 @@ import { connectToDb } from '../db/connectToDb'
 import { UserModel } from '../db/models/user.model'
 import bcrypt from 'bcryptjs'
 import { v4 as uuidv4 } from 'uuid'
+import { sendMail } from '../functions/sendMail'
 
 export const registerRouter = express.Router()
 registerRouter.post('/', async (req: ReqType, res: ResType) => {
@@ -13,9 +14,9 @@ registerRouter.post('/', async (req: ReqType, res: ResType) => {
     const user = await UserModel.findOne({ email })
     if (user) return res.json({ status: 'error', message: 'user with such email already exists' })
     const password = await bcrypt.hash(req.body.password, 10)
-    const refreshToken = 'refresh token'
     const activationLink = 'https://quotation.app/api/activate/' + uuidv4()
-    await UserModel.create({ email, password, refreshToken, activationLink })
+    await UserModel.create({ email, password, activationLink })
+    // await sendMail()
     res.json({ status: 'ok', message: 'user is registered' })
   } catch (error: any) {
     console.log(error)
