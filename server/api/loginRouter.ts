@@ -12,9 +12,9 @@ loginRouter.post('/', async (req: ReqType, res: ResType) => {
     await connectToDb()
     email = email.toLowerCase()
     const user = await UserModel.findOne({ email })
-    if (!user) { return res.json({ status: 'error', message: 'invalid email' }) }
+    if (!user) return res.json({ status: 'error', message: 'invalid email' })
     const isPasswordValid = await bcrypt.compare(password, user.password)
-    if (!isPasswordValid) { return res.json({ status: 'error', message: 'invalid password' }) }
+    if (!isPasswordValid) return res.json({ status: 'error', message: 'invalid password' })
     console.log('I am here')
     // send token
     const accessJwtToken = jwt.sign({ email }, process.env.JWT_ACCESS_SECRET as string)

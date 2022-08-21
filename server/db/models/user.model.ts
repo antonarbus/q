@@ -20,6 +20,17 @@ const User = new mongoose.Schema(
     loggedAt: {
       type: Date,
       default: Date.now
+    },
+    isActivated: {
+      type: Boolean,
+      default: false
+    },
+    activationLink: {
+      type: String
+    },
+    refreshToken: {
+      type: String,
+      required: true
     }
   }
 )
