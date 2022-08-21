@@ -9,6 +9,7 @@
     "PAGEDOWN",
     "PAGEUP",
     "toastify",
-    "uotation"
+    "uotation",
+    "uuidv"
   ],
 }
