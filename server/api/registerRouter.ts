@@ -14,9 +14,18 @@ registerRouter.post('/', async (req: ReqType, res: ResType) => {
     const user = await UserModel.findOne({ email })
     if (user) return res.json({ status: 'error', message: 'user with such email already exists' })
     const password = await bcrypt.hash(req.body.password, 10)
-    const activationLink = 'https://quotation.app/api/activate/' + uuidv4()
+    const activationLink = `${process.env.DOMAIN}/api/activate/${uuidv4()}`
     await UserModel.create({ email, password, activationLink })
-    // await sendMail()
+    await sendMail({
+      to: email,
+      subject: 'Activation for quotation.app',
+      html: `
+        <div>
+          <h1>Follow the link to confirm the registration</h1>
+          <a href="${activationLink}">${activationLink}</a>
+        </div>
+      `
+    })
     res.json({ status: 'ok', message: 'user is registered' })
   } catch (error: any) {
     console.log(error)
