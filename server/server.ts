@@ -28,7 +28,7 @@ app.use('/api/hi', hi)
 app.use('/api/register', registerRouter)
 app.use('/api/login', loginRouter)
 app.use('/api/logout', logoutRouter)
-app.use('/api/activate/:link', activateRouter)
+app.use('/api/activate', activateRouter)
 app.use('/api/refresh', refreshRouter)
 app.use('/api/user', userDetailsRouter)
 

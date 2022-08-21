@@ -5,12 +5,15 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 
 export const activateRouter = express.Router()
-activateRouter.get('/', async (req: ReqType, res: ResType) => {
+activateRouter.get('/:link', async (req: ReqType, res: ResType) => {
   try {
     await connectToDb()
-    const activationLink = req.params.link
+    const activationLink = `${process.env.DOMAIN}/api/activate/${req.params.link}`
+    console.log('req.params.link: ', req.params.link)
+    console.log('req.params: ', req.params)
+    console.log('activationLink: ', activationLink)
     const user = await UserModel.findOne({ activationLink })
-    if (!user) { return res.json({ status: 'error', message: 'not account with such activation link' }) }
+    if (!user) return res.json({ status: 'error', message: 'no account with such activation link' })
     user.isActivated = true
     await user.save()
     return res.redirect(`${process.env.DOMAIN}/login`)
