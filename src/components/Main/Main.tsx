@@ -36,7 +36,7 @@ export function Main() {
       <h3>Main component</h3>
       <h5>User: <b>{user}</b></h5>
       <button onClick={() => notify('hi')}>say hi in bottom popup</button>
-      <button onClick={getEmailFromDb}>get email from db</button>
+      <button onClick={getEmailFromDb}>get user's email from db</button>
     </MainStyled>
   )
 }
