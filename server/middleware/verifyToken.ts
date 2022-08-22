@@ -1,18 +1,13 @@
 import express, { Request as ReqType, Response as ResType, NextFunction as NextType } from 'express'
-import jwt from 'jsonwebtoken'
-import type { JwtPayload } from 'jsonwebtoken'
+import { verifyAccessJwtToken } from '../services/jwt/jwt'
 
-export function verifyToken(req: any, res: any, next: NextType) {
-  const accessJwtToken = req.headers['access-jwt-token'] as string
-  // console.log('accessJwtToken', accessJwtToken)
-  // console.log('req', req)
-  // console.log('req.headers', req.headers)
-  if (!accessJwtToken) return res.status(401).send('Not authorized')
+export function verifyToken(req: any, res: ResType, next: NextType) {
   try {
-    const { email } = jwt.verify(accessJwtToken, process.env.JWT_ACCESS_SECRET as string) as JwtPayload
+    const accessJwtToken = req.headers['access-jwt-token'] as string
+    const { email } = verifyAccessJwtToken(accessJwtToken)
     req.email = email
     next()
   } catch (error: any) {
-    return res.status(401).send('Not authorized')
+    return res.status(401).send('accessJwtToken is not verified, user is not authorized')
   }
 }
