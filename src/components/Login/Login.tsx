@@ -25,7 +25,7 @@ export function Login() {
     const data = await res.json()
     console.log(data)
     if (data.status === 'error') {
-      alert('invalid credentials')
+      alert(data.message)
       return localStorage.removeItem('accessJwtToken')
     }
     // authorization - checking if password is correct
