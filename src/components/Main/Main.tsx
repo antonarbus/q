@@ -6,23 +6,21 @@ import jwt from 'jsonwebtoken'
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode'
 import axios from 'axios'
-import { baseURL } from '@src/axios/axios'
+import { axiosWithAuth, baseURL } from '@src/axios/axios'
 
 export function Main() {
   const [user, setUser] = useState('not logged in')
 
   async function getEmailFromDb() {
-    const accessJwtToken = localStorage.getItem('accessJwtToken')
-    if (!accessJwtToken) return console.log('no token stored')
-    const options = { headers: { auth: accessJwtToken } }
-    const res = await fetch('/api/user', options)
-    const data = await res.json()
-    console.log(data)
+    const res = await axiosWithAuth('/api/user')
+    // const data = await res.json()
+    console.log(res)
   }
 
   useEffect(() => {
     async function refreshTokens() {
       try {
+        if (!localStorage.getItem('accessJwtToken')) return console.log('no run if user is logged out')
         const response = await axios.get(`${baseURL}/api/refresh`, { withCredentials: true })
         if (!response.data.accessJwtToken) return
         const accessJwtToken = response.data.accessJwtToken
