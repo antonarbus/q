@@ -3,7 +3,7 @@ import express, { Request as ReqType, Response as ResType, NextFunction as NextT
 import { UserModel } from '../db/models/user.model'
 import bcrypt from 'bcryptjs'
 import { v4 as uuidv4 } from 'uuid'
-import { sendMail } from '../functions/sendMail'
+import { sendMail } from '../services/mail/sendMail'
 import { body, validationResult } from 'express-validator'
 
 export const registerRouter = express.Router()

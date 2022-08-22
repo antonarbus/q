@@ -3,6 +3,7 @@ import express, { Request as ReqType, Response as ResType, NextFunction as NextT
 import { UserModel } from '../db/models/user.model'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
+import { getAccessJwtToken, getRefreshJwtToken, refreshJwtTokenExpirationSeconds } from '../services/jwt/jwt'
 
 export const loginRouter = express.Router()
 loginRouter.post('/', async (req: ReqType, res: ResType, next: NextType) => {
@@ -20,12 +21,14 @@ loginRouter.post('/', async (req: ReqType, res: ResType, next: NextType) => {
     if (!user.isActivated) return res.json({ status: 'error', message: 'account is not activated' })
 
     // generate jwt tokens
-    const refreshJwtTokenExpirationDays = 30
-    const accessJwtToken = jwt.sign({ email }, process.env.JWT_ACCESS_SECRET as string, { expiresIn: '8h' })
-    const refreshJwtToken = jwt.sign({ email }, process.env.JWT_REFRESH_SECRET as string, { expiresIn: `${refreshJwtTokenExpirationDays}d` })
+    // const refreshJwtTokenExpirationDays = 30
+    // const accessJwtToken = jwt.sign({ email }, process.env.JWT_ACCESS_SECRET as string, { expiresIn: '8h' })
+    const accessJwtToken = getAccessJwtToken({ email })
+    // const refreshJwtToken = jwt.sign({ email }, process.env.JWT_REFRESH_SECRET as string, { expiresIn: `${refreshJwtTokenExpirationDays}d` })
+    const refreshJwtToken = getRefreshJwtToken({ email })
 
     // put refresh token in cookie
-    res.cookie('refreshJwtToken', refreshJwtToken, { maxAge: refreshJwtTokenExpirationDays * 24 * 60 * 60 * 1000, httpOnly: true })
+    res.cookie('refreshJwtToken', refreshJwtToken, { maxAge: refreshJwtTokenExpirationSeconds * 1000, httpOnly: true })
 
     // put refresh token in db (also update login date)
     const filter = { email }
