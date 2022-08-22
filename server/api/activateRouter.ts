@@ -1,8 +1,5 @@
 import express, { Request as ReqType, Response as ResType, NextFunction as NextType } from 'express'
-// import { connectToDb } from '../db/connectToDb'
 import { UserModel } from '../db/models/user.model'
-import jwt from 'jsonwebtoken'
-import bcrypt from 'bcryptjs'
 
 export const activateRouter = express.Router()
 activateRouter.get('/:link', async (req: ReqType, res: ResType, next: NextType) => {
