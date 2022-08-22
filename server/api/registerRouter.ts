@@ -16,6 +16,7 @@ registerRouter.post(
       // validation
       const validationErrors = validationResult(req)
       if (!validationErrors.isEmpty()) return res.json({ status: 'error', message: 'validation error', validationErrors })
+
       // check if user already exists
       // await connectToDb()
       const email = req.body.email.toLowerCase()
@@ -32,7 +33,7 @@ registerRouter.post(
       const html = `<div><h1>Follow the link to confirm the registration</h1><a href="${activationLink}">${activationLink}</a></div> `
       // await sendMail({ to: email, subject, html })
 
-      // all went good, send good response
+      // all went good, send the response
       res.json({ status: 'ok', message: 'user is registered' })
     } catch (error: any) {
       next(error)

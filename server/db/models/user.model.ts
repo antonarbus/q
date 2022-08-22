@@ -28,7 +28,7 @@ const User = new mongoose.Schema(
     activationLink: {
       type: String
     },
-    refreshToken: {
+    refreshJwtToken: {
       type: String
     }
   }
