@@ -13,6 +13,6 @@ export function verifyToken(req: any, res: any, next: NextType) {
     req.email = email
     next()
   } catch (error: any) {
-    next(error)
+    return res.status(401).send('Not authorized')
   }
 }
