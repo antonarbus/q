@@ -1,31 +1,33 @@
 import express, { Request as ReqType, Response as ResType, NextFunction as NextType } from 'express'
 import { connectToDb } from '../db/connectToDb'
 import { UserModel } from '../db/models/user.model'
-import jwt from 'jsonwebtoken'
+import jwt, { JwtPayload } from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 
 export const refreshRouter = express.Router()
 refreshRouter.get('/', async (req: ReqType, res: ResType, next: NextType) => {
-  console.log('activate')
-  // console.log(req.body)
-  // let { email, password } = req.body
-  // try {
-  //   await connectToDb()
-  //   email = email.toLowerCase()
-  //   const user = await UserModel.findOne({ email })
-  //   if (!user) { return res.json({ status: 'error', message: 'invalid email' }) }
-  //   const isPasswordValid = await bcrypt.compare(password, user.password)
-  //   if (!isPasswordValid) { return res.json({ status: 'error', message: 'invalid password' }) }
-  //   console.log('I am here')
-  //   // send token
-  //   const accessJwtToken = jwt.sign({ email }, process.env.JWT_ACCESS_SECRET as string)
-  //   res.json({ status: 'ok', message: `user with email: ${email} logged in`, accessJwtToken })
-  //   // update logging date in db
-  //   const filter = { email }
-  //   const update = { loggedAt: new Date() }
-  //   await UserModel.findOneAndUpdate(filter, update)
-  // } catch (error: any) {
-  //   const { message, number, trace, name, ...rest } = error
-  //   res.json({ status: 'error', message, number, trace, name, errorAsString: error.toString(), ...rest })
-  // }
+  try {
+    // get refresh token from cookie
+    let { refreshJwtToken } = req.cookies
+    if (!refreshJwtToken) res.json({ status: 'error', message: 'no refresh token found in cookies during token refresh, probably not authorized' })
+
+    // check if token is ok
+    const { email } = jwt.verify(refreshJwtToken, process.env.JWT_REFRESH_SECRET as string) as JwtPayload
+    if (!email) res.json({ status: 'error', message: 'no user found during token refresh, probably not authorized' })
+
+    // find token in db
+    const user = await UserModel.findOne({ refreshJwtToken })
+    if (!user) return res.json({ status: 'error', message: 'no user find with such refresh token' })
+
+    // generate refresh token and save in db
+    const refreshJwtTokenExpirationDays = 30
+    refreshJwtToken = jwt.sign({ email }, process.env.JWT_REFRESH_SECRET as string, { expiresIn: `${refreshJwtTokenExpirationDays}d` })
+    res.cookie('refreshJwtToken', refreshJwtToken, { maxAge: refreshJwtTokenExpirationDays * 24 * 60 * 60 * 1000, httpOnly: true })
+    await UserModel.findOneAndUpdate({ email }, { refreshJwtToken })
+
+    // send response
+    res.json({ status: 'ok', message: `refresh token for email: ${email} is refreshed` })
+  } catch (error) {
+    next(error)
+  }
 })
