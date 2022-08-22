@@ -1,31 +1,27 @@
 import express, { Request as ReqType, Response as ResType, NextFunction as NextType } from 'express'
-import { connectToDb } from '../db/connectToDb'
 import { UserModel } from '../db/models/user.model'
-import jwt from 'jsonwebtoken'
-import bcrypt from 'bcryptjs'
+import jwt, { JwtPayload } from 'jsonwebtoken'
 
 export const logoutRouter = express.Router()
 logoutRouter.get('/', async (req: ReqType, res: ResType, next: NextType) => {
-  console.log('logout')
-  // console.log(req.body)
-  // let { email, password } = req.body
-  // try {
-  //   await connectToDb()
-  //   email = email.toLowerCase()
-  //   const user = await UserModel.findOne({ email })
-  //   if (!user) { return res.json({ status: 'error', message: 'invalid email' }) }
-  //   const isPasswordValid = await bcrypt.compare(password, user.password)
-  //   if (!isPasswordValid) { return res.json({ status: 'error', message: 'invalid password' }) }
-  //   console.log('I am here')
-  //   // send token
-  //   const accessJwtToken = jwt.sign({ email }, process.env.JWT_ACCESS_SECRET as string)
-  //   res.json({ status: 'ok', message: `user with email: ${email} logged in`, accessJwtToken })
-  //   // update logging date in db
-  //   const filter = { email }
-  //   const update = { loggedAt: new Date() }
-  //   await UserModel.findOneAndUpdate(filter, update)
-  // } catch (error: any) {
-  //   const { message, number, trace, name, ...rest } = error
-  //   res.json({ status: 'error', message, number, trace, name, errorAsString: error.toString(), ...rest })
-  // }
+  try {
+    const { refreshJwtToken } = req.cookies
+    if (!refreshJwtToken) res.json({ status: 'error', message: 'no refresh token in cookies, probably already logged out' })
+    const { email } = jwt.verify(refreshJwtToken, process.env.JWT_REFRESH_SECRET as string) as JwtPayload
+    if (!email) res.json({ status: 'error', message: 'can not retrieve email from refresh token' })
+
+    // clear refreshJwtToken from cookie
+    res.clearCookie('refreshJwtToken')
+
+    // delete token from db
+    const user = await UserModel.findOne({ refreshJwtToken })
+    if (!user) return res.json({ status: 'error', message: 'no user find with such refresh token' })
+    user.refreshJwtToken = undefined
+    await user.save()
+
+    // send response
+    res.json({ status: 'ok', message: `user with email: ${email} logged out` })
+  } catch (error) {
+    next(error)
+  }
 })
