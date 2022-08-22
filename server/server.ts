@@ -10,10 +10,12 @@ import { connectToDb } from './db/connectToDb'
 import { logoutRouter } from './api/logoutRouter'
 import { activateRouter } from './api/activateRouter'
 import { refreshRouter } from './api/refreshRouter'
+import { errorHandler } from './middleware/errorHandler'
 
 const PORT = process.env.PORT || 5000
 
 const app = express()
+connectToDb()
 app.use(morgan('dev')) // http logs in terminal
 app.use(express.json()) // parses incoming requests with JSON because we use lots of json, let it be default
 app.use(cookieParser())
@@ -32,4 +34,5 @@ app.use('/api/activate', activateRouter)
 app.use('/api/refresh', refreshRouter)
 app.use('/api/user', userDetailsRouter)
 
+app.use(errorHandler)
 app.listen(3001, () => console.log(`server started at http://localhost:${PORT}`))

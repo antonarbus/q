@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 
 export const refreshRouter = express.Router()
-refreshRouter.get('/', async (req: ReqType, res: ResType) => {
+refreshRouter.get('/', async (req: ReqType, res: ResType, next: NextType) => {
   console.log('activate')
   // console.log(req.body)
   // let { email, password } = req.body

@@ -10,7 +10,6 @@ export function verifyToken(req: any, res: any, next: NextType) {
     req.email = email
     next()
   } catch (error: any) {
-    const { status, message, number, trace, name, ...rest } = error
-    return res.status(400).json({ status: 'error', message: 'Invalid token', error: { status, message, number, trace, name, ...rest } })
+    next(error)
   }
 }

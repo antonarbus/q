@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 
 export const logoutRouter = express.Router()
-logoutRouter.get('/', async (req: ReqType, res: ResType) => {
+logoutRouter.get('/', async (req: ReqType, res: ResType, next: NextType) => {
   console.log('logout')
   // console.log(req.body)
   // let { email, password } = req.body
