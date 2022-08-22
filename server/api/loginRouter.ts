@@ -19,17 +19,21 @@ loginRouter.post('/', async (req: ReqType, res: ResType, next: NextType) => {
     // check if account is activated
     if (!user.isActivated) return res.json({ status: 'error', message: 'account is not activated' })
 
-    // get and send jwt tokens
+    // generate jwt tokens
     const refreshJwtTokenExpirationDays = 30
     const accessJwtToken = jwt.sign({ email }, process.env.JWT_ACCESS_SECRET as string, { expiresIn: '8h' })
     const refreshJwtToken = jwt.sign({ email }, process.env.JWT_REFRESH_SECRET as string, { expiresIn: `${refreshJwtTokenExpirationDays}d` })
-    res.cookie('refreshJwtToken', refreshJwtToken, { maxAge: refreshJwtTokenExpirationDays * 24 * 60 * 60 * 1000, httpOnly: true })
-    res.json({ status: 'ok', message: `user with email: ${email} logged in`, accessJwtToken })
 
-    // save login date and refresh token in db
+    // put refresh token in cookie
+    res.cookie('refreshJwtToken', refreshJwtToken, { maxAge: refreshJwtTokenExpirationDays * 24 * 60 * 60 * 1000, httpOnly: true })
+
+    // put refresh token in db (also update login date)
     const filter = { email }
     const update = { loggedAt: new Date(), refreshJwtToken }
     await UserModel.findOneAndUpdate(filter, update)
+
+    // return access token to the client
+    res.json({ status: 'ok', message: `user with email: ${email} logged in`, accessJwtToken })
   } catch (error: any) {
     next(error)
   }
