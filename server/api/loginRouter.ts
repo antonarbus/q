@@ -1,7 +1,5 @@
 import express, { Request as ReqType, Response as ResType, NextFunction as NextType } from 'express'
-// import { connectToDb } from '../db/connectToDb'
 import { UserModel } from '../db/models/user.model'
-import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import { getAccessJwtToken, getRefreshJwtToken, refreshJwtTokenExpirationSeconds } from '../services/jwt/jwt'
 
