@@ -11,6 +11,7 @@ import { logoutRouter } from './api/logoutRouter'
 import { activateRouter } from './api/activateRouter'
 import { refreshRouter } from './api/refreshRouter'
 import { errorHandler } from './middleware/errorHandler'
+import { usersRouter } from './api/usersRouter'
 
 const PORT = process.env.PORT || 5000
 
@@ -32,6 +33,7 @@ app.use('/api/login', loginRouter)
 app.use('/api/logout', logoutRouter)
 app.use('/api/activate', activateRouter)
 app.use('/api/refresh', refreshRouter)
+app.use('/api/users', usersRouter)
 app.use('/api/user', userDetailsRouter)
 
 app.use(errorHandler)

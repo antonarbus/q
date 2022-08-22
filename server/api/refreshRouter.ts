@@ -25,8 +25,11 @@ refreshRouter.get('/', async (req: ReqType, res: ResType, next: NextType) => {
     res.cookie('refreshJwtToken', refreshJwtToken, { maxAge: refreshJwtTokenExpirationDays * 24 * 60 * 60 * 1000, httpOnly: true })
     await UserModel.findOneAndUpdate({ email }, { refreshJwtToken })
 
+    // generate access token and send to client
+    const accessJwtToken = jwt.sign({ email }, process.env.JWT_ACCESS_SECRET as string, { expiresIn: '8h' })
+
     // send response
-    res.json({ status: 'ok', message: `refresh token for email: ${email} is refreshed` })
+    res.json({ status: 'ok', message: `refresh token for email: ${email} is refreshed`, accessJwtToken })
   } catch (error) {
     next(error)
   }

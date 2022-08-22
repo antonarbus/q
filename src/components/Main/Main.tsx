@@ -5,6 +5,8 @@ import styled from 'styled-components'
 import jwt from 'jsonwebtoken'
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode'
+import axios from 'axios'
+import { baseURL } from '@src/axios/axios'
 
 export function Main() {
   const [user, setUser] = useState('not logged in')
@@ -17,6 +19,26 @@ export function Main() {
     const data = await res.json()
     console.log(data)
   }
+
+  useEffect(() => {
+    async function refreshTokens() {
+      try {
+        const response = await axios.get(`${baseURL}/api/refresh`, { withCredentials: true })
+        if (!response.data.accessJwtToken) return
+        const accessJwtToken = response.data.accessJwtToken
+        const jwtTokenPayload: {email: string | undefined} = jwt_decode(accessJwtToken)
+        const { email } = jwtTokenPayload
+        if (!email) return
+        localStorage.setItem('accessJwtToken', response.data.accessJwtToken)
+        console.log(response)
+        console.log(`user with email: ${email} is refreshed`)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    refreshTokens()
+  }, [])
 
   useEffect(function getEmailFromToken() {
     const accessJwtToken = localStorage.getItem('accessJwtToken')
