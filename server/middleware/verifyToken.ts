@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken'
 import type { JwtPayload } from 'jsonwebtoken'
 
 export function verifyToken(req: any, res: any, next: NextType) {
-  const accessJwtToken = req.headers['Access-JWT-Token'] as string
+  const accessJwtToken = req.headers['['access-jwt-token']'] as string
   console.log('accessJwtToken', accessJwtToken)
   console.log('req', req)
   console.log('req.headers', req.headers)
