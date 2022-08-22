@@ -21,11 +21,11 @@ loginRouter.post('/', async (req: ReqType, res: ResType, next: NextType) => {
 
     // generate jwt tokens
     const refreshJwtTokenExpirationDays = 30
-    const accessJwtToken = jwt.sign({ email }, process.env.JWT_ACCESS_SECRET as string, { expiresIn: '10s' })
-    const refreshJwtToken = jwt.sign({ email }, process.env.JWT_REFRESH_SECRET as string, { expiresIn: '20s' })
+    const accessJwtToken = jwt.sign({ email }, process.env.JWT_ACCESS_SECRET as string, { expiresIn: '8h' })
+    const refreshJwtToken = jwt.sign({ email }, process.env.JWT_REFRESH_SECRET as string, { expiresIn: `${refreshJwtTokenExpirationDays}d` })
 
     // put refresh token in cookie
-    res.cookie('refreshJwtToken', refreshJwtToken, { maxAge: 20 * 1000, httpOnly: true })
+    res.cookie('refreshJwtToken', refreshJwtToken, { maxAge: refreshJwtTokenExpirationDays * 24 * 60 * 60 * 1000, httpOnly: true })
 
     // put refresh token in db (also update login date)
     const filter = { email }

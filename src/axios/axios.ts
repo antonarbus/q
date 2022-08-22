@@ -15,7 +15,6 @@ axiosWithAuth.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config
-    console.log(666)
     if (error.response.status === 401 && error.config && !error.config._isRetry) {
       try {
         originalRequest._isRetry = true
