@@ -1,7 +1,7 @@
 import jwt, { JwtPayload } from 'jsonwebtoken'
 
-const accessJwtTokenExpirationSeconds = 10 // 15 * 60 // 15 min
-export const refreshJwtTokenExpirationSeconds = 20 // 30 * 24 * 60 * 60 // 30 days
+const accessJwtTokenExpirationSeconds = 15 * 60 // 15 min
+export const refreshJwtTokenExpirationSeconds = 30 * 24 * 60 * 60 // 30 days
 
 export const getAccessJwtToken = (payload: string | object) => jwt.sign(payload, process.env.JWT_ACCESS_SECRET as string, { expiresIn: accessJwtTokenExpirationSeconds })
 export const getRefreshJwtToken = (payload: string | object) => jwt.sign(payload, process.env.JWT_REFRESH_SECRET as string, { expiresIn: refreshJwtTokenExpirationSeconds })
