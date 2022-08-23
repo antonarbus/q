@@ -28,10 +28,6 @@ export function Login() {
       alert(data.message)
       return localStorage.removeItem('accessJwtToken')
     }
-    // authorization - checking if password is correct
-    // authentication - checking if the user is the same as authorized initially
-    // after successful authorization a token is created by the server and send to the client
-    // we store it into the local storage and used after for authentication
     localStorage.setItem('accessJwtToken', data.accessJwtToken)
     alert('logged in')
     navigate('/')

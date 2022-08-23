@@ -39,3 +39,49 @@ loginRouter.post('/', async (req: ReqType, res: ResType, next: NextType) => {
     next(error)
   }
 })
+
+/*
+  Authorization - checking if password is correct
+  Authentication - checking if the user is the same as authorized initially
+
+  (A) The client is authorized when logging in by comparing email and
+      password against database.
+
+  (B) On successful authorization the server issues an 'access'
+      and a 'refresh' tokens for future authentication to avoid
+      providing credentials on every http request.
+
+  (C) Client stores 'access' token in the local storage and
+      attaches it inside request headers for private api requests.
+      Token is attached by 'request' interceptor in 'axiosWithAuth'
+
+  (D) For protected api 'verifyToken' middleware verifies the token.
+      If a token is ok, the request goes forward. If a token is bad
+      (compromised or outdated) a response with status(401) is returned.
+
+  (E) 'Access' token is short and expires in 15 min.
+      'Response' interceptor in 'axiosWithAuth' checks for 401 status and
+      tries to update 'access' token by presenting a 'refresh' token,
+      which has 30d expiry time.
+
+  (F) 'Refresh' token is stored in secured cookies on the login
+      and also kept in database. If 'refresh' token is valid and
+      available in database, then refreshed 'access' and 'refresh'
+      tokens are issued.
+
+  (G) If 'refresh' token is invalid or old, then 'access' token is not
+      issued, client is considered as unauthorized and new login
+      is required.
+
+  (H) If a user is deleted from the database, he is still authorized, until
+      'access' token is expired (15 min).
+
+  (I) Tokens are also checked and refreshed at the initial app
+      load in useEffect() in main component mount. That's how we determine
+      if a client logged in or out.
+
+  (J) As tokens we use JWT tokens, which contain encrypted (not hashed)
+      payload, validation time and a hash based on a secret keys, which are
+      kept on server. Server can validate the token knowing the
+      secrete keys.
+*/
