@@ -1,45 +1,49 @@
 import { notify } from '@components/Notifier/notify'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import styled from 'styled-components'
-import jwt from 'jsonwebtoken'
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode'
+import axios from 'axios'
+import { axiosWithAuth, baseURL } from '@src/axios/axios'
 
 export function Main() {
-  const [user, setUser] = useState('not logged in')
-
   async function getEmailFromDb() {
-    const accessJwtToken = localStorage.getItem('accessJwtToken')
-    if (!accessJwtToken) return
-    const headers = { auth: accessJwtToken || '' }
-    const options = { headers }
-    const res = await fetch('/api/user', options)
-    const data = await res.json()
-    console.log(data)
-    setUser(data.user.email)
+    try {
+      const res = await axiosWithAuth('/api/user')
+      // const data = await res.json()
+      console.log(res)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  useEffect(function checkCredentials() {
-    const accessJwtToken = localStorage.getItem('accessJwtToken')
-    console.log('accessJwtToken', accessJwtToken)
-    if (!accessJwtToken) return
-    // const user = jwt_decode(accessJwtToken, { header: true })
-    const user = jwt_decode(accessJwtToken, { header: true })
-    if (!user) {
-      // alert('not logged in, put a mark in redux and maybe redirect to login page')
-      return
+  useEffect(function isUserLoggedIn() {
+    async function refreshTokens() {
+      try {
+        if (!localStorage.getItem('accessJwtToken')) return
+        const response = await axios.get(`${baseURL}/api/refresh`, { withCredentials: true })
+        if (!response.data.accessJwtToken) return
+        const accessJwtToken = response.data.accessJwtToken
+        const jwtTokenPayload: {email: string | undefined} = jwt_decode(accessJwtToken)
+        const { email } = jwtTokenPayload
+        if (!email) return
+        localStorage.setItem('accessJwtToken', response.data.accessJwtToken)
+        console.log(response)
+        console.log(`tokens for user with email: ${email} are refreshed`)
+      } catch (error) {
+        console.log(error)
+      }
     }
-    // if (user) alert('logged in, put a mark in redux')
-    console.log('user', user)
-    getEmailFromDb()
+    refreshTokens()
   }, [])
+
   return (
     <MainStyled>
       <Outlet />
       <h3>Main component</h3>
-      <h5>User: <b>{user}</b></h5>
       <button onClick={() => notify('hi')}>say hi in bottom popup</button>
+      <button onClick={getEmailFromDb}>get user's email from db</button>
     </MainStyled>
   )
 }

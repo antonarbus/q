@@ -1,7 +1,15 @@
 import { EventType } from '@src/types'
-import { useState } from 'react'
+import { forwardRef, useState } from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
+import Dialog from '@mui/material/Dialog'
+import DialogContent from '@mui/material/DialogContent'
+import Slide from '@mui/material/Slide'
+import { TransitionProps } from '@mui/material/transitions'
+
+const Transition = forwardRef(function Transition(props: TransitionProps & { children: React.ReactElement<any, any>; }, ref: React.Ref<unknown>) {
+  return <Slide direction="up" ref={ref} {...props} />
+})
 
 // todo: make component as a dialog but connect it to the link via router-dom
 // todo: store user data in redux
@@ -24,43 +32,58 @@ export function Login() {
     const res = await fetch('/api/login', options)
     const data = await res.json()
     console.log(data)
-    if (data.status === 'user logged in') {
-      // authorization - checking if password is correct
-      // authentication - checking if the user is the same as authorized initially
-      // after successful authorization a token is created by the server and send to the client
-      // we store it into the local storage and used after for authentication
-      localStorage.setItem('accessJwtToken', data.accessJwtToken)
-      alert('logged in')
-      navigate('/')
+    if (data.status === 'error') {
+      alert(data.message)
+      return localStorage.removeItem('accessJwtToken')
     }
-    if (data.status === 'error during logging in') {
-      localStorage.removeItem('accessJwtToken')
-    }
+    localStorage.setItem('accessJwtToken', data.accessJwtToken)
+    alert('logged in')
+    navigate('/')
+  }
+
+  const [open, setOpen] = useState(true)
+
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
   }
 
   return (
-    <LoginStyled>
-      <h1>Login</h1>
-      <form onSubmit={loginUser}>
-        <input
-          type="text"
-          name="email"
-          id="email"
-          placeholder='Email'
-          value={credentials.email}
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          name="password"
-          id="password"
-          placeholder='Password'
-          value={credentials.password}
-          onChange={handleChange}
-        />
-        <button type="submit">Login</button>
-      </form>
-    </LoginStyled>
+    <Dialog
+      open={open}
+      TransitionComponent={Transition}
+      keepMounted
+      onClose={handleClose}
+      aria-describedby="alert-dialog-slide-description"
+    >
+      <DialogContent>
+        <LoginStyled>
+          <h1>Login</h1>
+          <form onSubmit={loginUser}>
+            <input
+              type="text"
+              name="email"
+              id="email"
+              placeholder='Email'
+              value={credentials.email}
+              onChange={handleChange}
+            />
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder='Password'
+              value={credentials.password}
+              onChange={handleChange}
+            />
+            <button type="submit">Login</button>
+          </form>
+        </LoginStyled>
+      </DialogContent>
+    </Dialog>
   )
 }
 

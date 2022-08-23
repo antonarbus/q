@@ -13,8 +13,7 @@ export function Register() {
     e.preventDefault()
     const method = 'POST'
     const headers = { 'Content-Type': 'application/json' }
-    const { email, password } = credentials
-    const body = JSON.stringify({ email, password })
+    const body = JSON.stringify(credentials)
     const options = { method, headers, body }
     const res = await fetch('/api/register', options)
     const data = await res.json()
