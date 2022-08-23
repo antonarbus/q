@@ -1,23 +1,13 @@
 import { EventType } from '@src/types'
-import { useState } from 'react'
+import { forwardRef, useState } from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-import * as React from 'react'
-import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
-import DialogTitle from '@mui/material/DialogTitle'
 import Slide from '@mui/material/Slide'
 import { TransitionProps } from '@mui/material/transitions'
 
-const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & {
-    children: React.ReactElement<any, any>;
-  },
-  ref: React.Ref<unknown>
-) {
+const Transition = forwardRef(function Transition(props: TransitionProps & { children: React.ReactElement<any, any>; }, ref: React.Ref<unknown>) {
   return <Slide direction="up" ref={ref} {...props} />
 })
 
@@ -51,7 +41,7 @@ export function Login() {
     navigate('/')
   }
 
-  const [open, setOpen] = React.useState(true)
+  const [open, setOpen] = useState(true)
 
   const handleClickOpen = () => {
     setOpen(true)
@@ -69,39 +59,30 @@ export function Login() {
       onClose={handleClose}
       aria-describedby="alert-dialog-slide-description"
     >
-      <DialogTitle>{"Use Google's location service?"}</DialogTitle>
       <DialogContent>
-        <DialogContentText id="alert-dialog-slide-description">
-          Let Google help apps determine location. This means sending anonymous
-          location data to Google, even when no apps are running.
-        </DialogContentText>
-      <LoginStyled>
-        <h1>Login</h1>
-        <form onSubmit={loginUser}>
-          <input
-            type="text"
-            name="email"
-            id="email"
-            placeholder='Email'
-            value={credentials.email}
-            onChange={handleChange}
-          />
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder='Password'
-            value={credentials.password}
-            onChange={handleChange}
-          />
-          <button type="submit">Login</button>
-        </form>
-      </LoginStyled>
+        <LoginStyled>
+          <h1>Login</h1>
+          <form onSubmit={loginUser}>
+            <input
+              type="text"
+              name="email"
+              id="email"
+              placeholder='Email'
+              value={credentials.email}
+              onChange={handleChange}
+            />
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder='Password'
+              value={credentials.password}
+              onChange={handleChange}
+            />
+            <button type="submit">Login</button>
+          </form>
+        </LoginStyled>
       </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose}>Disagree</Button>
-        <Button onClick={handleClose}>Agree</Button>
-      </DialogActions>
     </Dialog>
   )
 }
