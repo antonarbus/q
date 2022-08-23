@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { useSelectorTyped as useSelector } from '@store/storeHooks'
 import { useRef } from 'react'
 import { Icon } from './Icon'
@@ -44,9 +44,6 @@ export function NavItem({ children, id }: NavItemType) {
   * needs to open only menu under clicked navItem, otherwise multiple menus are opened under all navItems
   */
   const shouldOpenThisMenu = useSelector(state => state.nav.idsToCurrentMenuItems.at(1) === id)
-  /**
-  * get navItem details
-  */
   const navStructure = useSelector(state => state.nav.navStructure)
   const navItem = navStructure[0].menuItems!.find(menuItem => menuItem.id === id)
   const isNestedMenu = !!navItem?.menuItems

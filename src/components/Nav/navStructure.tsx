@@ -1,7 +1,7 @@
 import React from 'react'
 import { nanoid as id } from 'nanoid'
 import { BiUser } from 'react-icons/bi'
-import { FiSettings } from 'react-icons/fi'
+import { FiSettings, FiLogIn } from 'react-icons/fi'
 import { IoDocumentOutline, IoDocumentsOutline, IoSaveOutline, IoShareOutline } from 'react-icons/io5'
 import { IoIosSwap } from 'react-icons/io'
 
@@ -215,98 +215,10 @@ export const navStructure: MenuType[] = [
         link: '/linkB'
       },
       {
-        id: 'Settings',
-        icon: <FiSettings />,
-        name: 'Settings',
-        link: '/'
-      },
-      {
-        id: 'Profile',
-        icon: <BiUser />,
-        name: 'Profile',
-        menuItems: [
-          {
-            id: id(5),
-            name: 'item in menu 2',
-            icon: '😇',
-            menuItems: [
-              {
-                id: id(5),
-                name: 'item in menu 2',
-                icon: '😎',
-                menuItems: [
-                  {
-                    id: id(5),
-                    name: 'long long long long long long long long name',
-                    icon: reactIcon
-                  },
-                  {
-                    id: id(5),
-                    name: 'item in menu 2',
-                    icon: reactIcon
-                  },
-                  {
-                    id: id(5),
-                    name: 'hidden menu',
-                    icon: reactIcon,
-                    isHidden: true
-                  },
-                  {
-                    id: id(5),
-                    name: 'not hidden menu',
-                    icon: reactIcon
-                  },
-                  {
-                    id: id(5),
-                    name: 'item in menu 2',
-                    icon: reactIcon
-                  },
-                  {
-                    id: id(5),
-                    name: 'item in menu 2',
-                    icon: reactIcon
-                  },
-                  {
-                    id: id(5),
-                    name: 'item in menu 2',
-                    icon: reactIcon
-                  }
-                ]
-              },
-              {
-                id: id(5),
-                name: 'item in menu 2',
-                icon: '😎'
-              },
-              {
-                id: id(5),
-                name: 'item in menu 2',
-                icon: '😎'
-              }
-            ]
-          },
-          {
-            id: id(5),
-            name: 'hidden menu',
-            icon: '😇',
-            isHidden: true
-          },
-          {
-            id: id(5),
-            name: 'not hidden menu',
-            icon: '😇'
-          },
-          {
-            id: id(5),
-            name: 'item in menu 2',
-            icon: ''
-          },
-          {
-            id: id(5),
-            name: 'item in menu 2',
-            icon: '😇'
-          }
-        ]
+        id: 'SignIn',
+        icon: <FiLogIn />,
+        name: 'Sign in',
+        link: '/login'
       }
     ]
   }

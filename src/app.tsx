@@ -2,9 +2,9 @@ import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { ThemeProvider } from 'styled-components'
+import { ThemeProvider } from '@emotion/react'
 import { theme } from './theme'
-import { GlobalStyle } from './GlobalStyle'
+import { GlobalStyles } from './GlobalStyle'
 import { Main } from './components/Main'
 import { Nav } from '@components/Nav'
 import { LinkA } from './routes/LinkA'
@@ -13,13 +13,14 @@ import { LinkC } from './routes/LinkC'
 import { Notifier } from '@components/Notifier'
 import { Register } from '@components/Register'
 import { Login } from '@components/Login'
+import { DefaultViteComponent } from '@components/Main/DefaultViteComponent'
 
 const root = ReactDOM.createRoot(document.getElementById('root')!)
 
 root.render(
   // <React.StrictMode>
     <Provider store={store}>
-      <GlobalStyle />
+      <GlobalStyles />
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <Nav />
@@ -30,7 +31,8 @@ root.render(
             </Route>
             <Route path="linkA" element={<LinkA />} />
             <Route path="linkB" element={<LinkB />} />
-            <Route path="linkC" element={<LinkC />} />
+          <Route path="linkC" element={<LinkC />} />
+          <Route path="default" element={<DefaultViteComponent />} />
           </Routes>
           <Notifier />
         </BrowserRouter>

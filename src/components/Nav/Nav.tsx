@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef } from 'react'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { Logo } from './Logo'
 import { NavList } from './NavList'
 import { useDispatchTyped, useSelectorTyped as useSelector } from '@store/storeHooks'
@@ -48,10 +48,11 @@ const NavStyled = styled.nav<PropsForSC>`
   margin: 10px;
   height: 60px;
   border-radius: 4px;
-  background: rgb(52 52 52 / 95%);
+  background: ${props => props.theme.colors.blackBackground};
   box-shadow: 0 0px 15px 0 #0000005c;
   z-index: 2;
   contain: layout inline-size;
+  font-weight: 300;
 
   & > ul > li > a > .icon-round-wrapper {
     @media (max-width: ${props => props.mediaQueryWidth.icon}px) and (min-width: ${props => props.mediaQueryWidth.name}px) {

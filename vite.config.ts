@@ -20,10 +20,11 @@ export default defineConfig({
       babel: {
         plugins: [
           [
-            'babel-plugin-styled-components',
+            // 'babel-plugin-styled-components',
+            '@emotion/babel-plugin',
             {
               displayName: true,
-              fileName: false
+              fileName: true
             }
           ]
         ]

@@ -1,10 +1,11 @@
-import { DefaultTheme } from 'styled-components'
+// import { DefaultTheme } from 'styled-components'
 
-export const theme: DefaultTheme = {
+export const theme = {
   colors: {
     grey: 'grey',
     red: 'red',
-    closeAndBackMenuItems: '#858383'
+    closeAndBackMenuItems: '#858383',
+    blackBackground: 'rgb(52 52 52 / 95%)'
   },
   menu: {
     width: 300,
