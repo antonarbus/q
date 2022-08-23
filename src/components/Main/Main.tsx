@@ -30,7 +30,7 @@ export function Main() {
         if (!email) return
         localStorage.setItem('accessJwtToken', response.data.accessJwtToken)
         console.log(response)
-        console.log(`user with email: ${email} is refreshed`)
+        console.log(`tokens for user with email: ${email} are refreshed`)
       } catch (error) {
         console.log(error)
       }
