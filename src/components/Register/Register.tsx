@@ -1,5 +1,5 @@
 import { EventType } from '@src/types'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { forwardRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Dialog from '@mui/material/Dialog'

@@ -1,6 +1,6 @@
 import { EventType } from '@src/types'
 import { forwardRef, useState } from 'react'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { useNavigate } from 'react-router-dom'
 import Dialog from '@mui/material/Dialog'
 import DialogContent from '@mui/material/DialogContent'
@@ -18,10 +18,13 @@ import Box from '@mui/material/Box'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 const Transition = forwardRef(function Transition(props: TransitionProps & { children: React.ReactElement<any, any>; }, ref: React.Ref<unknown>) {
   return <Slide direction="up" ref={ref} {...props} />
 })
+
+const theme = createTheme()
 
 // todo: make component as a dialog but connect it to the link via router-dom
 // todo: store user data in redux
@@ -61,6 +64,7 @@ export function Login() {
 
   const handleClose = () => {
     setOpen(false)
+    navigate('/')
   }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -73,6 +77,7 @@ export function Login() {
   }
 
   return (
+    <ThemeProvider theme={theme}>
     <Dialog
       open={open}
       TransitionComponent={Transition}
@@ -129,7 +134,7 @@ export function Login() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
-                  autoFocus
+                  // autoFocus
                 />
                 <TextField
                   margin="normal"
@@ -169,7 +174,8 @@ export function Login() {
             </Box>
           </Container>
       </DialogContent>
-    </Dialog>
+      </Dialog>
+      </ThemeProvider>
   )
 }
 

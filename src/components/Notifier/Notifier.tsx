@@ -1,11 +1,7 @@
 // https://fkhadra.github.io/react-toastify/introduction/
 
 import { ToastContainer } from 'react-toastify'
-import styled from 'styled-components'
-
-// const CustomCloseBtn = () => (
-//   <i>Close</i>
-// )
+import styled from '@emotion/styled'
 
 export function Notifier() {
   return (
@@ -31,7 +27,7 @@ export function Notifier() {
 // taken from /node_modules/react-toastify/dist/ReactToastify.css
 const DivStyled = styled.div`
   --toastify-color-light: #fff;
-  --toastify-color-dark: #121212;
+  --toastify-color-dark:${props => props.theme.colors.blackBackground};
   --toastify-color-info: #3498db;
   --toastify-color-success: #07bc0c;
   --toastify-color-warning: #f1c40f;

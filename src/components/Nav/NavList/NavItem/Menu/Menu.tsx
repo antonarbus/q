@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { useDispatchTyped, useSelectorTyped as useSelector } from '@store/storeHooks'
 import { useRef } from 'react'
 import { useMenuAnimation } from './functions/useMenuAnimation'
@@ -17,7 +17,7 @@ export function Menu() {
   const fakeMenuRef = useRef() as React.MutableRefObject<HTMLDivElement>
   const idsToNextMenuItems = useSelector(state => state.nav.idsToNextMenuItems)
   const idsToCurrentMenuItems = useSelector(state => state.nav.idsToCurrentMenuItems)
-  const { goDownInMenu, goUpInMenu } = useMenuAnimation({ currentMenuRef, nextMenuRef, menuContainerRef, fakeMenuRef, idsToNextMenuItems: idsToNextMenuItems })
+  const { goDownInMenu, goUpInMenu } = useMenuAnimation({ currentMenuRef, nextMenuRef, menuContainerRef, fakeMenuRef, idsToNextMenuItems })
   globalObject.goDownInMenu = goDownInMenu
   globalObject.goUpInMenu = goUpInMenu
   useKeysForMenuNavigation()
