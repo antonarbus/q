@@ -6,9 +6,12 @@
   "cSpell.words": [
     "camelcase",
     "copyfiles",
+    "gsap",
     "PAGEDOWN",
     "PAGEUP",
+    "reduxjs",
     "toastify",
-    "uotation"
+    "uotation",
+    "uuidv"
   ],
 }

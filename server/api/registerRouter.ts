@@ -1,23 +1,41 @@
 import express, { Request as ReqType, Response as ResType, NextFunction as NextType } from 'express'
-import { connectToDb } from '../db/connectToDb'
+// import { connectToDb } from '../db/connectToDb'
 import { UserModel } from '../db/models/user.model'
 import bcrypt from 'bcryptjs'
-connectToDb()
+import { v4 as uuidv4 } from 'uuid'
+import { sendMail } from '../services/mail/sendMail'
+import { body, validationResult } from 'express-validator'
 
 export const registerRouter = express.Router()
-registerRouter.post('/', async (req: ReqType, res: ResType) => {
-  console.log('req.body', req.body)
-  let { email, password } = req.body
-  email = email.toLowerCase()
-  password = await bcrypt.hash(password, 10)
-  try {
-    await UserModel.create({ email, password })
-    const status = 'user is registered'
-    res.json({ status })
-  } catch (error: any) {
-    console.log(error)
-    const { message, number, trace, name, ...rest } = error
-    const status = 'error during registering'
-    res.json({ status, message, number, trace, name, ...rest })
-  }
-})
+registerRouter.post(
+  '/',
+  body('email').isEmail(),
+  body('password').isLength({ min: 3 }),
+  async (req: ReqType, res: ResType, next: NextType) => {
+    try {
+      // validation
+      const validationErrors = validationResult(req)
+      if (!validationErrors.isEmpty()) return res.json({ status: 'error', message: 'validation error', validationErrors })
+
+      // check if user already exists
+      // await connectToDb()
+      const email = req.body.email.toLowerCase()
+      const user = await UserModel.findOne({ email })
+      if (user) return res.json({ status: 'error', message: 'user with such email already exists' })
+
+      // save user to db
+      const password = await bcrypt.hash(req.body.password, 10)
+      const activationLink = `${process.env.DOMAIN}/api/activate/${uuidv4()}`
+      await UserModel.create({ email, password, activationLink })
+
+      // send email with activation link
+      const subject = 'Activation for quotation.app'
+      const html = `<div><h1>Follow the link to confirm the registration</h1><a href="${activationLink}">${activationLink}</a></div> `
+      // await sendMail({ to: email, subject, html })
+
+      // all went good, send the response
+      res.json({ status: 'ok', message: 'user is registered' })
+    } catch (error: any) {
+      next(error)
+    }
+  })

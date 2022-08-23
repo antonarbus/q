@@ -14,5 +14,3 @@ build
 dist-ssr
 *.local
 .env
-
-.env
