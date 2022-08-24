@@ -1,6 +1,6 @@
 import { notify } from '@components/Notifier/notify'
 import React, { useEffect } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useOutlet } from 'react-router-dom'
 import styled from '@emotion/styled'
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode'
