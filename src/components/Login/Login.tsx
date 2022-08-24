@@ -22,7 +22,13 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 const Transition = forwardRef(function Transition(props: TransitionProps & { children: React.ReactElement<any, any>; }, ref: React.Ref<unknown>) {
   const navigate = useNavigate()
-  return <Slide direction="up" ref={ref} {...props} onExited={() => navigate('/')} />
+  return (
+    <Slide
+      direction="up"
+      ref={ref}
+      {...props}
+      onExited={() => navigate('/')}
+    />)
 })
 
 const theme = createTheme()
@@ -79,7 +85,7 @@ export function Login() {
 
   return (
     <ThemeProvider theme={theme}>
-    <Dialog
+      <Dialog
       open={open}
       TransitionComponent={Transition}
       keepMounted
