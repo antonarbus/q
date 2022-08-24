@@ -32,7 +32,7 @@ const theme = createTheme()
 // todo: make component as a dialog but connect it to the link via router-dom
 // todo: store user data in redux
 
-export function Login() {
+export function ForgotPassword() {
   const navigate = useNavigate()
   const [credentials, setCredentials] = useState({ email: '', password: '' })
   const handleChange = (e: EventType) => {
@@ -42,6 +42,7 @@ export function Login() {
 
   async function loginUser(e: EventType) {
     e.preventDefault()
+    alert('reset password via email')
     const method = 'POST'
     const headers = { 'Content-Type': 'application/json' }
     const { email, password } = credentials
@@ -98,7 +99,7 @@ export function Login() {
                 component="h1"
                 variant="h5"
               >
-                Sign in
+                Reset password
               </Typography>
               <Box
                 component="form"
@@ -116,27 +117,10 @@ export function Login() {
                   placeholder="Email"
                   value={credentials.email}
                   onChange={handleChange}
-                  // autoFocus
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  placeholder="Password"
-                  value={credentials.password}
-                  onChange={handleChange}
-                />
-                <FormControlLabel
-                  control={<Checkbox value="remember" color="primary" />}
-                  label="Remember me"
+                // autoFocus
                 />
                 <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-                  Sign In
+                  Reset password
                 </Button>
                 <Grid container>
                   <Grid item xs>

@@ -48,6 +48,18 @@ export const GlobalStyles = () => (
       img {
         max-width: 100%;
       }
+
+      a {
+        color: #0083bf;
+        text-decoration-color: transparent;
+        text-decoration-line: underline;
+        text-decoration-style: solid;
+        text-decoration-thickness: 0.09em;
+      }
+      a:hover {
+        transition: text-decoration-color 300ms;
+        text-decoration-color: #0495d7;
+      }
       
       /* removes spacing between cells in tables */
       table {

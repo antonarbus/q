@@ -14,29 +14,33 @@ import { Notifier } from '@components/Notifier'
 import { Register } from '@components/Register'
 import { Login } from '@components/Login'
 import { DefaultViteComponent } from '@components/Main/DefaultViteComponent'
+import { ForgotPassword, ResetPassword } from '@components/ForgotPassword'
+import { UpdatePassword } from '@components/UpdatePassword/UpdatePassword'
 
 const root = ReactDOM.createRoot(document.getElementById('root')!)
 
 root.render(
   // <React.StrictMode>
-    <Provider store={store}>
-      <GlobalStyles />
-      <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <Nav />
-          <Routes>
-            <Route path="/" element={<Main />}>
-              <Route path="login" element={<Login />} />
-              <Route path="register" element={<Register />} />
-            </Route>
-            <Route path="linkA" element={<LinkA />} />
-            <Route path="linkB" element={<LinkB />} />
+  <Provider store={store}>
+    <GlobalStyles />
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <Nav />
+        <Routes>
+          <Route path="/" element={<Main />}>
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route path="forgotPassword" element={<ForgotPassword />} />
+            <Route path="updatePassword" element={<UpdatePassword />} />
+          </Route>
+          <Route path="linkA" element={<LinkA />} />
+          <Route path="linkB" element={<LinkB />} />
           <Route path="linkC" element={<LinkC />} />
           <Route path="default" element={<DefaultViteComponent />} />
-          </Routes>
-          <Notifier />
-        </BrowserRouter>
-      </ThemeProvider>
-    </Provider>
+        </Routes>
+        <Notifier />
+      </BrowserRouter>
+    </ThemeProvider>
+  </Provider>
   // </React.StrictMode>
 )
