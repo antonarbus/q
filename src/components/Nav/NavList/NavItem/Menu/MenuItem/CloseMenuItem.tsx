@@ -25,7 +25,7 @@ export function CloseMenuItem() {
       to={'/'}
       onClick={onClickHandler}
       onMouseEnter={() => dispatch(setMenuItemHoverIndex(1))}
-      $isHovered={isHovered}
+      state={{ isHovered }}
     >
       <Icon icon={closeIcon} />
       <TextInMenu name={<span style={{ color }}>Close</span>} />
