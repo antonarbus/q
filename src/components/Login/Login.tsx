@@ -21,7 +21,8 @@ import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 const Transition = forwardRef(function Transition(props: TransitionProps & { children: React.ReactElement<any, any>; }, ref: React.Ref<unknown>) {
-  return <Slide direction="up" ref={ref} {...props} />
+  const navigate = useNavigate()
+  return <Slide direction="up" ref={ref} {...props} onExited={() => navigate('/')} />
 })
 
 const theme = createTheme()
@@ -64,7 +65,7 @@ export function Login() {
 
   const handleClose = () => {
     setOpen(false)
-    navigate('/')
+    // navigate('/')
   }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
