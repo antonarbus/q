@@ -29,7 +29,7 @@ export function MenuItem({ menuItem, hoveredMenuItemIndex }: MenuItemType) {
       to={link || '/'}
       onClick={(e) => clickOnMenuItem(e, menuId)}
       onMouseEnter={() => dispatch(setMenuItemHoverIndex(hoveredMenuItemIndex))}
-      $isHovered={isHovered}
+      state={{ isHovered }}
     >
       {isIcon && <Icon icon={menuItem.icon} />}
       <TextInMenu reserveSpaceForIcon={isNextMenuAvailable} name={menuItem.name} />
