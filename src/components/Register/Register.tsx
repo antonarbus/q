@@ -19,12 +19,13 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { Fade, Zoom } from '@mui/material'
 
 const Transition = forwardRef(function Transition(props: TransitionProps & { children: React.ReactElement<any, any>; }, ref: React.Ref<unknown>) {
   const navigate = useNavigate()
   return (
-    <Slide
-      direction="up"
+    <Fade
+      // direction="up"
       ref={ref}
       {...props}
       onExited={() => navigate('/')}
