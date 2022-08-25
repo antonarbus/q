@@ -4,7 +4,6 @@ import styled from '@emotion/styled'
 import { Link, useNavigate } from 'react-router-dom'
 import Dialog from '@mui/material/Dialog'
 import DialogContent from '@mui/material/DialogContent'
-import Slide from '@mui/material/Slide'
 import { TransitionProps } from '@mui/material/transitions'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
@@ -19,13 +18,13 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import { Fade, Zoom } from '@mui/material'
+import { Fade, Zoom, Slide } from '@mui/material'
 
 const Transition = forwardRef(function Transition(props: TransitionProps & { children: React.ReactElement<any, any>; }, ref: React.Ref<unknown>) {
   const navigate = useNavigate()
   return (
-    <Fade
-      // direction="up"
+    <Slide
+      direction="up"
       ref={ref}
       {...props}
       onExited={() => navigate('/')}

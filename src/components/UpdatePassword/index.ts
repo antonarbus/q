@@ -1,1 +1,0 @@
-export { UpdatePassword } from './UpdatePassword'
