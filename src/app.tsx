@@ -7,15 +7,12 @@ import { theme } from './theme'
 import { GlobalStyles } from './GlobalStyles'
 import { Main } from './components/Main'
 import { Nav } from '@components/Nav'
-import { LinkA } from './routes/LinkA'
-import { LinkB } from './routes/LinkB'
-import { LinkC } from './routes/LinkC'
 import { Notifier } from '@components/Notifier'
-import { Register } from '@components/Register'
-import { Login } from '@components/Login'
 import { DefaultViteComponent } from '@components/Main/DefaultViteComponent'
-import { ForgotPassword, ResetPassword } from '@components/ForgotPassword'
-import { UpdatePassword } from '@components/UpdatePassword/UpdatePassword'
+import { Login } from '@components/Credentials/Login'
+import { Register } from '@components/Credentials/Register'
+import { ForgotPassword } from '@components/Credentials/ForgotPassword'
+import { UpdatePassword } from '@components/Credentials/UpdatePassword'
 
 const root = ReactDOM.createRoot(document.getElementById('root')!)
 
@@ -32,11 +29,8 @@ root.render(
             <Route path="register" element={<Register />} />
             <Route path="forgotPassword" element={<ForgotPassword />} />
             <Route path="updatePassword" element={<UpdatePassword />} />
+            <Route path="default" element={<DefaultViteComponent />} />
           </Route>
-          <Route path="linkA" element={<LinkA />} />
-          <Route path="linkB" element={<LinkB />} />
-          <Route path="linkC" element={<LinkC />} />
-          <Route path="default" element={<DefaultViteComponent />} />
         </Routes>
         <Notifier />
       </BrowserRouter>
