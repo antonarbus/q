@@ -7,6 +7,7 @@ import { decrement, increment } from '@slices/counterSlice'
 import { login } from '@slices/loginSlice'
 import { fetchUsers } from '@slices/usersSlice'
 import { useDispatchTyped, useSelectorTyped } from '@store/storeHooks'
+import { Backdrop } from '@components/Common/Backdrop'
 
 /**
  * Component with counter
@@ -57,6 +58,7 @@ export function DefaultViteComponent(): JSX.Element {
           {users.error && users.error}
           {!users.loading && !!users.users.length && users.users.map(user => <div key={user.id}>{user.name}</div>)}
         </div>
+        <Backdrop onClick={() => { console.log('clicked') }} />
       </div>
 
     </div>
