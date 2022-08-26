@@ -13,6 +13,12 @@ export default defineConfig({
       '/api': 'http://localhost:3001/'
     }
   },
+  esbuild: {
+    define: {
+      // to suppress warning in terminal: [vite] warning: Top-level "this" will be replaced with undefined since this file is an ECMAScript module
+      this: 'window'
+    }
+  },
   plugins: [
     react({
       // to show readable class names in styled components with vite
@@ -35,7 +41,9 @@ export default defineConfig({
     tsconfigPaths()
   ],
   // https://vitest.dev/guide/in-source.html
-  define: { 'import.meta.vitest': 'undefined' },
+  define: {
+    'import.meta.vitest': 'undefined'
+  },
   // https://www.youtube.com/watch?v=oWJpxtAl62w
   test: {
     globals: true,
