@@ -9,7 +9,6 @@ export const usersRouter = express.Router()
 usersRouter.get('/', verifyToken, async (req: any, res: ResType, next: NextType) => {
   try {
     const users = await UserModel.find()
-    console.log('users', users)
     res.json({ status: 'ok', message: 'all users', users })
   } catch (error: any) {
     next(error)

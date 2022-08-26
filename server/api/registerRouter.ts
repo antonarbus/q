@@ -5,6 +5,8 @@ import bcrypt from 'bcryptjs'
 import { v4 as uuidv4 } from 'uuid'
 import { sendMail } from '../services/mail/sendMail'
 import { body, validationResult } from 'express-validator'
+const domain = process.env.DOMAIN
+const port = process.env.PORT_FRONT_END
 
 export const registerRouter = express.Router()
 registerRouter.post(
@@ -25,7 +27,7 @@ registerRouter.post(
 
       // save user to db
       const password = await bcrypt.hash(req.body.password, 10)
-      const activationLink = `${process.env.DOMAIN}/api/activate/${uuidv4()}`
+      const activationLink = `${domain}:${port}/api/activate/${uuidv4()}`
       await UserModel.create({ email, password, activationLink })
 
       // send email with activation link

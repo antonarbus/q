@@ -1,8 +1,6 @@
 import axios from 'axios'
 
-export const baseURL = 'http://localhost:3009'
-
-export const axiosWithAuth = axios.create({ withCredentials: true, baseURL })
+export const axiosWithAuth = axios.create({ withCredentials: true })
 
 axiosWithAuth.interceptors.request.use((config) => {
   const accessJwtToken = localStorage.getItem('accessJwtToken')
@@ -21,7 +19,7 @@ axiosWithAuth.interceptors.response.use(
     if (error.response.status === 401 && error.config && !error.config._isRetry) {
       try {
         originalRequest._isRetry = true
-        const response = await axios.get(`${baseURL}/api/refresh`, { withCredentials: true })
+        const response = await axios.get('/api/refresh', { withCredentials: true })
         const accessJwtToken = response.data.accessJwtToken
         accessJwtToken && localStorage.setItem('accessJwtToken', accessJwtToken)
         !accessJwtToken && localStorage.removeItem('accessJwtToken')
