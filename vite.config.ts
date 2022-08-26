@@ -17,6 +17,7 @@ export default defineConfig({
     react({
       // to show readable class names in styled components with vite
       // https://github.com/styled-components/babel-plugin-styled-components/issues/350#issuecomment-979873241
+      jsxImportSource: '@emotion/react',
       babel: {
         plugins: [
           [

@@ -30,7 +30,11 @@
       "@src/*": ["src/*"],
       "@/*": ["/*"],
     },
-    "types": ["vite/client", "vitest/globals"]
+    "types": [
+      "vite/client", 
+      "vitest/globals",
+      "@emotion/react/types/css-prop"
+    ]
   },
   "include": ["src"],
   "references": [{ 
