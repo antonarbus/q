@@ -4,11 +4,11 @@ const db = 'q'
 
 export async function connectToDb() {
   try {
-    await mongoose.connect(`${mongoDbUrl}/${db}` as string)
+    // await mongoose.connect(`${mongoDbUrl}/${db}` as string)
+    mongoose.connect(`${mongoDbUrl}/${db}` as string)
     console.log('connected to db')
   } catch (error: any) {
-    const errorAsString = error.toString()
     console.log('error on db connection')
-    console.log(errorAsString)
+    console.log(error)
   }
 }

@@ -3,9 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
+    "start": "concurrently \"npm run start_back\" \"npm run start_front\"",
+    "stop": "npx kill-port 3005 3006",
     "start_front": "vite",
-    "start_back": "nodemon server/server.ts",
-    "start_all": "concurrently \"npm run start_back\" \"npm run start_front\"",
+    "start_back": "nodemon -L server/server.ts",
     "build_front": "tsc && vite build",
     "build_back": "cp -r ./server ./build  && cd ./server && tsc && cd -",
     "build_all": "npm run build_front && npm run build_back",
