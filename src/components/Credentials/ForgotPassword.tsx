@@ -66,6 +66,7 @@ export function ForgotPassword() {
     // navigate('/')
   }
 
+  let isAnimationPrevented = false // needed to avoid second click on backdrop which launches unwanted second animation
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>
 
   useEffect(() => {
@@ -77,6 +78,8 @@ export function ForgotPassword() {
     <ThemeProvider theme={theme}>
       <Backdrop
         onClick={() => {
+          if (isAnimationPrevented) return
+          isAnimationPrevented = true
           gsap.fromTo(
             ref.current,
             { yPercent: 0 },
