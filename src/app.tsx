@@ -11,7 +11,7 @@ import { Notifier } from '@components/Notifier'
 import { DefaultViteComponent } from '@components/Main/DefaultViteComponent'
 import { Login } from '@components/Credentials/Login'
 import { Register } from '@components/Credentials/Register'
-import { ForgotPassword } from '@components/Credentials/ForgotPassword'
+import { Reset } from '@components/Credentials/Reset'
 import { UpdatePassword } from '@components/Credentials/UpdatePassword'
 
 const root = ReactDOM.createRoot(document.getElementById('root')!)
@@ -27,7 +27,7 @@ root.render(
           <Route path="/" element={<Main />}>
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
-            <Route path="forgotPassword" element={<ForgotPassword />} />
+            <Route path="reset" element={<Reset />} />
             <Route path="updatePassword" element={<UpdatePassword />} />
             <Route path="default" element={<DefaultViteComponent />} />
           </Route>
