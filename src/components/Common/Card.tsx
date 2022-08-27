@@ -1,0 +1,45 @@
+type Props = {
+  children?: React.ReactNode;
+  content?: React.ReactNode;
+  cssProps?: React.CSSProperties
+  reference?: React.MutableRefObject<HTMLDivElement>
+}
+
+/**
+ * Just a white card
+ * @param props object with parameters
+ * @param props.children anything, goes inside tags
+ * @param props.content anything, same, but goes as a prop
+ * @param props.cssProps object with css properties, will be added to the existing ones
+*/
+
+export const Card = ({ children, content, cssProps, reference }: Props) => (
+  <div
+    css={{
+      display: 'flex',
+      flexDirection: 'column',
+      maxHeight: 'calc(100% - 64px)',
+      maxWidth: 'calc(100% - 64px)',
+      minWidth: '375px',
+      width: '400px',
+      margin: '32px',
+      padding: '40px',
+      background: 'white',
+      zIndex: 1001,
+      color: 'rgba(0, 0, 0, 0.87)',
+      borderRadius: '4px',
+      transition: 'box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+      boxShadow: '0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%)',
+      overflowY: 'auto',
+      '&:hover, &:focus-within': {
+        boxShadow: '0px 11px 15px -7px rgb(0 0 0 / 40%), 0px 24px 38px 3px rgb(0 0 0 / 28%), 0px 9px 46px 8px rgb(0 0 0 / 24%)'
+      },
+      ...cssProps
+    }}
+    onClick={(e) => e.stopPropagation()}
+    ref={reference}
+  >
+      {children}
+      {content}
+    </div>
+)

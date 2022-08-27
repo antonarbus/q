@@ -5,17 +5,9 @@ type Props = {
   color?: string
 }
 
-const css = {
-  background: 'hotpink',
-  width: '100px',
-  height: '100px',
-  '&:hover': {
-    background: 'darkorchid'
-  }
-}
-
 /**
  * Dark transparent div on top of the content
+ * @param props object with parameters
  * @param props.onClick usually a function which unmounts the parent component or changes the url
  * @param props.children anything, goes inside tags
  * @param props.content anything, same, but goes as a prop
@@ -25,9 +17,21 @@ const css = {
 export const Backdrop = ({ onClick, children, content, color }: Props) => (
   <div
     onClick={onClick}
-    css={css}
+    css={{
+      position: 'fixed',
+      top: 0,
+      bottom: 0,
+      right: 0,
+      left: 0,
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      background: 'rgba(0, 0, 0, 0.5)',
+      WebkitTapHighlightColor: 'transparent',
+      zIndex: 1000
+    }}
   >
-    I am the backdrop
     {children}
     {content}
   </div>
