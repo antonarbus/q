@@ -75,7 +75,14 @@ export function ForgotPassword() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Backdrop onClick={() => navigate('/')}>
+      <Backdrop
+        onClick={() => {
+          gsap.fromTo(
+            ref.current,
+            { yPercent: 0 },
+            { duration: 0.3, yPercent: -180, onComplete: () => navigate('/') }
+          )
+        }}>
 
         <Card reference={ref}>
           <Avatar sx={{

@@ -20,7 +20,7 @@ export const Card = ({ children, content, cssProps, reference }: Props) => (
       flexDirection: 'column',
       maxHeight: 'calc(100% - 64px)',
       maxWidth: 'calc(100% - 64px)',
-      minWidth: '375px',
+      minWidth: '300px',
       width: '400px',
       margin: '32px',
       padding: '40px',
