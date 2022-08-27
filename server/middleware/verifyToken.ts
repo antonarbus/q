@@ -8,6 +8,6 @@ export function verifyToken(req: any, res: ResType, next: NextType) {
     req.email = email // can add email in header, maybe useful for something
     next()
   } catch (error: any) {
-    return res.status(401).send('accessJwtToken is not verified, user is not authorizedddd')
+    return res.status(401).send('accessJwtToken is not verified, user is not authorized')
   }
 }

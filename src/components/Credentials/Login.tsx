@@ -95,7 +95,8 @@ export function Login() {
                 marginTop: '10px',
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'center'
+                alignItems: 'center',
+                alignSelf: 'center'
               }}
             >
               <Avatar sx={{ m: 1, bgcolor: 'black' }}>

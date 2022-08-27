@@ -58,12 +58,7 @@ export function DefaultViteComponent(): JSX.Element {
           {users.error && users.error}
           {!users.loading && !!users.users.length && users.users.map(user => <div key={user.id}>{user.name}</div>)}
         </div>
-        <Backdrop
-          onClick={() => { console.log('clicked') }}
-          color='grey'
-        />
       </div>
-
     </div>
   )
 }
