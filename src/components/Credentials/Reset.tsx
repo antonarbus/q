@@ -60,8 +60,10 @@ export function Reset() {
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>
 
   useEffect(function appearWithSlideUp() {
-    console.log(ref)
-    gsap.fromTo(ref.current, { yPercent: 120 }, { duration: 0.3, yPercent: 0 })
+    const screenHeight = window.window.innerHeight
+    const elementHeight = ref.current.offsetHeight
+    const offsetPosition = screenHeight / 2 + elementHeight / 2
+    gsap.fromTo(ref.current, { y: offsetPosition }, { duration: 0.3, y: 0 })
   }, [])
 
   return (
@@ -70,10 +72,13 @@ export function Reset() {
         onClick={function disappearWithSlideUp() {
           if (isAnimationPrevented) return
           isAnimationPrevented = true
+          const screenHeight = window.window.innerHeight
+          const elementHeight = ref.current.offsetHeight
+          const offsetPosition = screenHeight / 2 + elementHeight / 2
           gsap.fromTo(
             ref.current,
-            { yPercent: 0 },
-            { duration: 0.3, yPercent: -120, onComplete: () => navigate('/') }
+            { y: 0 },
+            { duration: 0.3, y: -offsetPosition, onComplete: () => navigate('/') }
           )
         }}>
 
