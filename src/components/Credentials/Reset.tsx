@@ -1,22 +1,12 @@
 import { EventType } from '@src/types'
-import { forwardRef, useEffect, useRef, useState } from 'react'
-import styled from '@emotion/styled'
-import { Link, useNavigate } from 'react-router-dom'
-import Dialog from '@mui/material/Dialog'
-import DialogContent from '@mui/material/DialogContent'
-import Slide from '@mui/material/Slide'
-import { TransitionProps } from '@mui/material/transitions'
+import { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
-import CssBaseline from '@mui/material/CssBaseline'
 import TextField from '@mui/material/TextField'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Checkbox from '@mui/material/Checkbox'
-import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
-import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Backdrop } from '@components/Common/Backdrop'
 import { Card } from '@components/Common/Card'
@@ -27,7 +17,7 @@ const theme = createTheme()
 // todo: make component as a dialog but connect it to the link via router-dom
 // todo: store user data in redux
 
-export function ForgotPassword() {
+export function Reset() {
   const navigate = useNavigate()
   const [credentials, setCredentials] = useState({ email: '', password: '' })
   const handleChange = (e: EventType) => {
@@ -69,7 +59,7 @@ export function ForgotPassword() {
   let isAnimationPrevented = false // needed to avoid second click on backdrop which launches unwanted second animation
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>
 
-  useEffect(() => {
+  useEffect(function appearWithSlideUp() {
     console.log(ref)
     gsap.fromTo(ref.current, { yPercent: 120 }, { duration: 0.3, yPercent: 0 })
   }, [])
@@ -77,13 +67,13 @@ export function ForgotPassword() {
   return (
     <ThemeProvider theme={theme}>
       <Backdrop
-        onClick={() => {
+        onClick={function disappearWithSlideUp() {
           if (isAnimationPrevented) return
           isAnimationPrevented = true
           gsap.fromTo(
             ref.current,
             { yPercent: 0 },
-            { duration: 0.3, yPercent: -180, onComplete: () => navigate('/') }
+            { duration: 0.3, yPercent: -120, onComplete: () => navigate('/') }
           )
         }}>
 
