@@ -31,7 +31,7 @@ export function Register() {
   const [emailOk, setEmailOk] = useState(false)
   const [confirmPasswordOk, setConfirmPasswordOk] = useState(false)
 
-  const handleChange = (e: EventType) => {
+  const handleInputsChange = (e: EventType) => {
     const target = (e.target as HTMLInputElement)
     setCredentials({ ...credentials, [target.name]: target.value })
   }
@@ -51,22 +51,22 @@ export function Register() {
   const handleClickOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
-  const isEmailOk = (email: string) => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email.toLowerCase())
-  const validateEmail = () => {
+  const isEmailPatternOk = (email: string) => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email.toLowerCase())
+  const alertIncorrectEmail = () => {
     if (credentials.email.length === 0) return
-    if (isEmailOk(credentials.email)) {
+    if (isEmailPatternOk(credentials.email)) {
       setEmailOk(true)
       return
     }
     setEmailOk(false)
     setValidateEmailOnType(true)
   }
-  useEffect(function checkIfEmailIsOkOnInputChange() {
+  useEffect(function alertIncorrectEmailOnInput() {
     if (!validateEmailOnType) return // do not check before we type email and detect that is in incorrect on blur event
-    isEmailOk(credentials.email) ? setEmailOk(true) : setEmailOk(false)
+    isEmailPatternOk(credentials.email) ? setEmailOk(true) : setEmailOk(false)
   }, [credentials.email])
 
-  const validateConfirmPassword = () => {
+  const alertMismatchedPasswords = () => {
     if (credentials.password === credentials.confirmPassword) {
       setConfirmPasswordOk(true)
       return
@@ -74,7 +74,7 @@ export function Register() {
     setConfirmPasswordOk(false)
     setValidateConfirmPasswordOnType(true)
   }
-  useEffect(function checkIfPasswordsAreSame() {
+  useEffect(function alertMismatchedPasswordsOnInput() {
     if (!validateConfirmPasswordOnType) return
     (credentials.password === credentials.confirmPassword) ? setConfirmPasswordOk(true) : setConfirmPasswordOk(false)
   }, [credentials.password, credentials.confirmPassword])
@@ -121,8 +121,8 @@ export function Register() {
                       autoComplete="email"
                       placeholder='Email'
                       value={credentials.email}
-                      onChange={handleChange}
-                      onBlur={validateEmail}
+                      onChange={handleInputsChange}
+                      onBlur={alertIncorrectEmail}
                       autoFocus
                       css={{
                         '& .MuiInputLabel-shrink': {
@@ -141,7 +141,7 @@ export function Register() {
                       autoComplete="new-password"
                       placeholder='Password'
                       value={credentials.password}
-                      onChange={handleChange}
+                      onChange={handleInputsChange}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -154,8 +154,8 @@ export function Register() {
                       autoComplete="new-password"
                       placeholder='Password'
                       value={credentials.confirmPassword}
-                      onChange={handleChange}
-                      onBlur={validateConfirmPassword}
+                      onChange={handleInputsChange}
+                      onBlur={alertMismatchedPasswords}
                       css={{
                         '& .MuiInputLabel-shrink': {
                           color: (validateConfirmPasswordOnType && !confirmPasswordOk && credentials.confirmPassword.length > 0) ? 'red' : ''
