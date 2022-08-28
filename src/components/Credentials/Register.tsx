@@ -1,5 +1,5 @@
 import { EventType } from '@src/types'
-import { forwardRef, useState } from 'react'
+import { forwardRef, useEffect, useRef, useState } from 'react'
 import styled from '@emotion/styled'
 import { Link, useNavigate } from 'react-router-dom'
 import Dialog from '@mui/material/Dialog'
@@ -20,21 +20,14 @@ import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Fade, Zoom, Slide } from '@mui/material'
 
-const Transition = forwardRef(function Transition(props: TransitionProps & { children: React.ReactElement<any, any>; }, ref: React.Ref<unknown>) {
-  const navigate = useNavigate()
-  return (
-    <Slide
-      direction="up"
-      ref={ref}
-      {...props}
-      onExited={() => navigate('/')}
-    />)
-})
-
 const theme = createTheme()
 
+const validateEmail = (email: string) => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email.toLowerCase())
+const validatePassword = (password: string) => password.trim().length !== 0
+const validateConfirmPassword = (password: string, confirmEmail: string) => password === confirmEmail
+
 export function Register() {
-  const [credentials, setCredentials] = useState({ email: '', password: '' })
+  const [credentials, setCredentials] = useState({ email: '', password: '', confirmPassword: '' })
   const handleChange = (e: EventType) => {
     const target = (e.target as HTMLInputElement)
     setCredentials({ ...credentials, [target.name]: target.value })
@@ -62,20 +55,22 @@ export function Register() {
     setOpen(false)
   }
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    const data = new FormData(event.currentTarget)
-    console.log({
-      email: data.get('email'),
-      password: data.get('password')
-    })
-  }
+  useEffect(function isEmailValid() {
+    console.log(validateEmail(credentials.email))
+  }, [credentials.email])
+
+  useEffect(function isPasswordValid() {
+    console.log(validatePassword(credentials.password))
+  }, [credentials.password])
+
+  useEffect(function isConfirmPasswordValid() {
+    console.log(validateConfirmPassword(credentials.password, credentials.confirmPassword))
+  }, [credentials.password, credentials.confirmPassword])
 
   return (
     <ThemeProvider theme={theme}>
       <Dialog
         open={open}
-        TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
@@ -105,18 +100,19 @@ export function Register() {
                 sx={{ mt: 3 }}
               >
                 <Grid container spacing={2}>
-
                   <Grid item xs={12}>
                     <TextField
                       required
                       fullWidth
                       id="email"
-                      label="Email Address"
+                      label="Email address"
                       name="email"
                       autoComplete="email"
                       placeholder='Email'
                       value={credentials.email}
                       onChange={handleChange}
+                      // inputRef={emailRef}
+                      autoFocus
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -134,9 +130,17 @@ export function Register() {
                     />
                   </Grid>
                   <Grid item xs={12}>
-                    <FormControlLabel
-                      control={<Checkbox value="allowExtraEmails" color="primary" />}
-                      label="I want to receive inspiration, marketing promotions and updates via email."
+                    <TextField
+                      required
+                      fullWidth
+                      name="confirmPassword"
+                      label="Confirm password"
+                      type="password"
+                      id="confirmPassword"
+                      autoComplete="new-password"
+                      placeholder='Password'
+                      value={credentials.confirmPassword}
+                      onChange={handleChange}
                     />
                   </Grid>
                 </Grid>

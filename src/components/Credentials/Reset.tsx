@@ -14,8 +14,7 @@ import { gsap } from 'gsap'
 
 const theme = createTheme()
 
-// todo: make component as a dialog but connect it to the link via router-dom
-// todo: store user data in redux
+// todo: add custom icon
 
 export function Reset() {
   const navigate = useNavigate()
@@ -75,11 +74,7 @@ export function Reset() {
           const screenHeight = window.window.innerHeight
           const elementHeight = ref.current.offsetHeight
           const offsetPosition = screenHeight / 2 + elementHeight / 2
-          gsap.fromTo(
-            ref.current,
-            { y: 0 },
-            { duration: 0.3, y: -offsetPosition, onComplete: () => navigate('/') }
-          )
+          gsap.fromTo(ref.current, { y: 0 }, { duration: 0.3, y: -offsetPosition, onComplete: () => navigate('/') })
         }}>
 
         <Card reference={ref}>
