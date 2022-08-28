@@ -19,11 +19,18 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 
+// todo: add email typo checker (https://www.npmjs.com/package/mailcheck)
+
 const theme = createTheme()
-let validateEmailOnType = false
 
 export function Register() {
+  const [open, setOpen] = useState(true)
   const [credentials, setCredentials] = useState({ email: '', password: '', confirmPassword: '' })
+  const [validateEmailOnType, setValidateEmailOnType] = useState(false)
+  const [validateConfirmPasswordOnType, setValidateConfirmPasswordOnType] = useState(false)
+  const [emailOk, setEmailOk] = useState(false)
+  const [confirmPasswordOk, setConfirmPasswordOk] = useState(false)
+
   const handleChange = (e: EventType) => {
     const target = (e.target as HTMLInputElement)
     setCredentials({ ...credentials, [target.name]: target.value })
@@ -41,35 +48,36 @@ export function Register() {
     console.log(data)
   }
 
-  const [open, setOpen] = useState(true)
-  const [emailOk, setEmailOk] = useState(true)
-  const [passwordOk, setPasswordOk] = useState(true)
-  const [confirmPasswordOk, setConfirmPasswordOk] = useState(true)
-
-  const handleClickOpen = () => {
-    setOpen(true)
-  }
-
-  const handleClose = () => {
-    setOpen(false)
-  }
+  const handleClickOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
 
   const isEmailOk = (email: string) => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email.toLowerCase())
-  const isPasswordOk = (password: string) => password.trim().length !== 0
-  const isConfirmPasswordOk = (password: string, confirmEmail: string) => password === confirmEmail
-
   const validateEmail = () => {
+    if (credentials.email.length === 0) return
     if (isEmailOk(credentials.email)) {
       setEmailOk(true)
       return
     }
     setEmailOk(false)
-    validateEmailOnType = true
+    setValidateEmailOnType(true)
   }
-  useEffect(() => {
-    if (!validateEmailOnType) return
+  useEffect(function checkIfEmailIsOkOnInputChange() {
+    if (!validateEmailOnType) return // do not check before we type email and detect that is in incorrect on blur event
     isEmailOk(credentials.email) ? setEmailOk(true) : setEmailOk(false)
   }, [credentials.email])
+
+  const validateConfirmPassword = () => {
+    if (credentials.password === credentials.confirmPassword) {
+      setConfirmPasswordOk(true)
+      return
+    }
+    setConfirmPasswordOk(false)
+    setValidateConfirmPasswordOnType(true)
+  }
+  useEffect(function checkIfPasswordsAreSame() {
+    if (!validateConfirmPasswordOnType) return
+    (credentials.password === credentials.confirmPassword) ? setConfirmPasswordOk(true) : setConfirmPasswordOk(false)
+  }, [credentials.password, credentials.confirmPassword])
 
   return (
     <ThemeProvider theme={theme}>
@@ -108,7 +116,7 @@ export function Register() {
                     <TextField
                       fullWidth
                       id="email"
-                      label={emailOk ? 'Email address' : 'Email address is incorrect'}
+                      label={(validateEmailOnType && !emailOk && credentials.email.length > 0) ? 'Email pattern is wrong' : 'Email'}
                       name="email"
                       autoComplete="email"
                       placeholder='Email'
@@ -118,7 +126,7 @@ export function Register() {
                       autoFocus
                       css={{
                         '& .MuiInputLabel-shrink': {
-                          color: !emailOk ? 'red' : ''
+                          color: (validateEmailOnType && !emailOk && credentials.email.length > 0) ? 'red' : ''
                         }
                       }}
                     />
@@ -127,36 +135,40 @@ export function Register() {
                     <TextField
                       fullWidth
                       name="password"
-                      label="Password"
+                      label='Password'
                       type="password"
                       id="password"
                       autoComplete="new-password"
                       placeholder='Password'
                       value={credentials.password}
                       onChange={handleChange}
-                      onBlur={() => isPasswordOk(credentials.password) ? setPasswordOk(true) : setPasswordOk(false)}
                     />
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
                       fullWidth
                       name="confirmPassword"
-                      label="Confirm password"
+                      label={(validateConfirmPasswordOnType && !confirmPasswordOk && credentials.confirmPassword.length > 0) ? 'Passwords do not match' : 'Confirm password'}
                       type="password"
                       id="confirmPassword"
                       autoComplete="new-password"
                       placeholder='Password'
                       value={credentials.confirmPassword}
                       onChange={handleChange}
-                      onBlur={() => isConfirmPasswordOk(credentials.password, credentials.confirmPassword) ? setConfirmPasswordOk(true) : setConfirmPasswordOk(false)}
+                      onBlur={validateConfirmPassword}
+                      css={{
+                        '& .MuiInputLabel-shrink': {
+                          color: (validateConfirmPasswordOnType && !confirmPasswordOk && credentials.confirmPassword.length > 0) ? 'red' : ''
+                        }
+                      }}
                     />
                   </Grid>
                 </Grid>
                 <Button
                   type="submit"
-                  // fullWidth
+                  fullWidth
                   variant="contained"
-                  disabled
+                  disabled={!emailOk || !confirmPasswordOk || credentials.password.length === 0}
                   sx={{ mt: 3, mb: 2 }}
                 >
                   Sign Up
