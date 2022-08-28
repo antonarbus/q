@@ -18,13 +18,9 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import { Fade, Zoom, Slide } from '@mui/material'
 
 const theme = createTheme()
-
-const validateEmail = (email: string) => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email.toLowerCase())
-const validatePassword = (password: string) => password.trim().length !== 0
-const validateConfirmPassword = (password: string, confirmEmail: string) => password === confirmEmail
+let validateEmailOnType = false
 
 export function Register() {
   const [credentials, setCredentials] = useState({ email: '', password: '', confirmPassword: '' })
@@ -46,6 +42,9 @@ export function Register() {
   }
 
   const [open, setOpen] = useState(true)
+  const [emailOk, setEmailOk] = useState(true)
+  const [passwordOk, setPasswordOk] = useState(true)
+  const [confirmPasswordOk, setConfirmPasswordOk] = useState(true)
 
   const handleClickOpen = () => {
     setOpen(true)
@@ -55,17 +54,22 @@ export function Register() {
     setOpen(false)
   }
 
-  useEffect(function isEmailValid() {
-    console.log(validateEmail(credentials.email))
+  const isEmailOk = (email: string) => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email.toLowerCase())
+  const isPasswordOk = (password: string) => password.trim().length !== 0
+  const isConfirmPasswordOk = (password: string, confirmEmail: string) => password === confirmEmail
+
+  const validateEmail = () => {
+    if (isEmailOk(credentials.email)) {
+      setEmailOk(true)
+      return
+    }
+    setEmailOk(false)
+    validateEmailOnType = true
+  }
+  useEffect(() => {
+    if (!validateEmailOnType) return
+    isEmailOk(credentials.email) ? setEmailOk(true) : setEmailOk(false)
   }, [credentials.email])
-
-  useEffect(function isPasswordValid() {
-    console.log(validatePassword(credentials.password))
-  }, [credentials.password])
-
-  useEffect(function isConfirmPasswordValid() {
-    console.log(validateConfirmPassword(credentials.password, credentials.confirmPassword))
-  }, [credentials.password, credentials.confirmPassword])
 
   return (
     <ThemeProvider theme={theme}>
@@ -102,22 +106,25 @@ export function Register() {
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
                     <TextField
-                      required
                       fullWidth
                       id="email"
-                      label="Email address"
+                      label={emailOk ? 'Email address' : 'Email address is incorrect'}
                       name="email"
                       autoComplete="email"
                       placeholder='Email'
                       value={credentials.email}
                       onChange={handleChange}
-                      // inputRef={emailRef}
+                      onBlur={validateEmail}
                       autoFocus
+                      css={{
+                        '& .MuiInputLabel-shrink': {
+                          color: !emailOk ? 'red' : ''
+                        }
+                      }}
                     />
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
-                      required
                       fullWidth
                       name="password"
                       label="Password"
@@ -127,11 +134,11 @@ export function Register() {
                       placeholder='Password'
                       value={credentials.password}
                       onChange={handleChange}
+                      onBlur={() => isPasswordOk(credentials.password) ? setPasswordOk(true) : setPasswordOk(false)}
                     />
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
-                      required
                       fullWidth
                       name="confirmPassword"
                       label="Confirm password"
@@ -141,13 +148,15 @@ export function Register() {
                       placeholder='Password'
                       value={credentials.confirmPassword}
                       onChange={handleChange}
+                      onBlur={() => isConfirmPasswordOk(credentials.password, credentials.confirmPassword) ? setConfirmPasswordOk(true) : setConfirmPasswordOk(false)}
                     />
                   </Grid>
                 </Grid>
                 <Button
                   type="submit"
-                  fullWidth
+                  // fullWidth
                   variant="contained"
+                  disabled
                   sx={{ mt: 3, mb: 2 }}
                 >
                   Sign Up
