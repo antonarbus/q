@@ -8,6 +8,7 @@ import { login } from '@slices/loginSlice'
 import { fetchUsers } from '@slices/usersSlice'
 import { useDispatchTyped, useSelectorTyped } from '@store/storeHooks'
 import { Backdrop } from '@components/Common/Backdrop'
+import { theme } from '@src/theme'
 
 /**
  * Component with counter
@@ -16,7 +17,7 @@ import { Backdrop } from '@components/Common/Backdrop'
 
 export function DefaultViteComponent(): JSX.Element {
   const [count, setCount] = useState(0)
-  const theme = useTheme()
+  // const theme = useTheme()
 
   const counter = useSelectorTyped(state => state.counter.counter)
   const isLogged = useSelectorTyped(state => state.login.isLogged)
@@ -26,7 +27,7 @@ export function DefaultViteComponent(): JSX.Element {
   const style = { border: '2px solid grey', padding: '10px', margin: '10px', maxWidth: '500px' }
 
   return (
-    <div style={{ border: `1px solid ${theme.colors.red}` }}>
+    <div style={{ border: `1px solid ${theme.colors.grey}` }}>
       <img
         src={logo}
         className="App-logo"
@@ -64,8 +65,7 @@ export function DefaultViteComponent(): JSX.Element {
 }
 
 const Button = styled.button`
-  border-color:  ${props => props.theme.colors.red};
-  background-color: ${props => props.theme.colors.grey};
+  border-color:  ${theme.colors.grey};
   color: white;
   cursor: pointer;
 `

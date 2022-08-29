@@ -1,8 +1,6 @@
-// import { DefaultTheme } from 'styled-components'
-
 export const theme = {
   colors: {
-    grey: 'grey',
+    grey: '#dadce1',
     red: 'red',
     closeAndBackMenuItems: '#858383',
     blackBackground: 'rgb(52 52 52 / 95%)'

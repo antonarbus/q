@@ -1,27 +1,22 @@
 import { EventType } from '@src/types'
-import { forwardRef, useEffect, useRef, useState } from 'react'
-import styled from '@emotion/styled'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Dialog from '@mui/material/Dialog'
 import DialogContent from '@mui/material/DialogContent'
-import { TransitionProps } from '@mui/material/transitions'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import CssBaseline from '@mui/material/CssBaseline'
 import TextField from '@mui/material/TextField'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Checkbox from '@mui/material/Checkbox'
-// import Link from '@mui/material/Link'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
+import LockIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 // todo: add email typo checker (https://www.npmjs.com/package/mailcheck)
 
-const theme = createTheme()
+const themeMui = createTheme()
 
 export function Register() {
   const [open, setOpen] = useState(true)
@@ -51,7 +46,7 @@ export function Register() {
   const handleClickOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
-  const isEmailPatternOk = (email: string) => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email.toLowerCase())
+  const isEmailPatternOk = (email: string) => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
   const alertIncorrectEmail = () => {
     if (credentials.email.length === 0) return
     if (isEmailPatternOk(credentials.email)) {
@@ -80,7 +75,7 @@ export function Register() {
   }, [credentials.password, credentials.confirmPassword])
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={themeMui}>
       <Dialog
         open={open}
         keepMounted
@@ -100,7 +95,7 @@ export function Register() {
               }}
             >
               <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                <LockOutlinedIcon />
+                <LockIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
                 Register

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import styled from '@emotion/styled'
+import { theme } from '@src/theme'
 
 type PropsForSC = {
   to: string
@@ -10,7 +11,7 @@ type PropsForSC = {
 
 export const MenuItemStyled = styled(Link)<PropsForSC>`
   position: relative;
-  height: ${props => props.theme.menu.menuItem.height}px;
+  height: ${theme.menu.menuItem.height}px;
   display: flex;
   flex-wrap: nowrap;
   align-items: center;

@@ -5,20 +5,24 @@ import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Backdrop } from '@components/Common/Backdrop'
 import { Card } from '@components/Common/Card'
 import { gsap } from 'gsap'
+import { GrPowerReset as ResetIcon } from 'react-icons/gr'
+import { useTheme } from '@emotion/react'
+import { theme } from '@src/theme'
 
-const theme = createTheme()
+const themeMui = createTheme()
 
 // todo: add custom icon
 
 export function Reset() {
   const navigate = useNavigate()
+  // const theme = useTheme()
   const [credentials, setCredentials] = useState({ email: '', password: '' })
+
   const handleChange = (e: EventType) => {
     const target = e.target as HTMLInputElement
     setCredentials({ ...credentials, [target.name]: target.value })
@@ -66,7 +70,7 @@ export function Reset() {
   }, [])
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={themeMui}>
       <Backdrop
         onClick={function disappearWithSlideUp() {
           if (isAnimationPrevented) return
@@ -83,7 +87,10 @@ export function Reset() {
             bgcolor: 'black',
             alignSelf: 'center'
           }}>
-            <LockOutlinedIcon />
+            <ResetIcon css={{
+              '& path': { stroke: theme.colors.grey }
+
+            }}/>
           </Avatar>
           <Typography
             component="h1"
@@ -109,7 +116,6 @@ export function Reset() {
           >
             <TextField
               margin="normal"
-              required
               fullWidth
               id="email"
               label="Email"
@@ -123,6 +129,7 @@ export function Reset() {
             <Button
               type="submit"
               variant="contained"
+              fullWidth
               // color='warning'
               sx={{
                 mt: 3,
