@@ -1,4 +1,11 @@
 export const theme = {
+  // mui part
+  palette: {
+    primary: {
+      main: '#757575'
+    }
+  },
+  // custom part
   colors: {
     grey: '#5a5a5a',
     red: 'red',

@@ -14,20 +14,10 @@ import { UpdatePassword } from '@components/Credentials/UpdatePassword'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { theme } from './theme'
 
-const themeMui = createTheme({
-  palette: {
-    primary: {
-      main: '#757575'
-    }
-  }
-})
-
-const root = ReactDOM.createRoot(document.getElementById('root')!)
-
-root.render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   // <React.StrictMode>
   <Provider store={store}>
-    <ThemeProvider theme={themeMui}>
+    <ThemeProvider theme={createTheme(theme)}>
       <GlobalStyles />
       <BrowserRouter>
         <Nav />
