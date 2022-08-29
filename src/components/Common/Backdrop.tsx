@@ -1,5 +1,6 @@
+
 type Props = {
-  onMouseDown: () => void
+  onMouseDown: any
   children?: React.ReactNode
   content?: React.ReactNode
   color?: string
