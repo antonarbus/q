@@ -17,7 +17,7 @@ import { theme } from './theme'
 const themeMui = createTheme({
   palette: {
     primary: {
-      main: theme.colors.blackBackground
+      main: '#757575'
     }
   }
 })

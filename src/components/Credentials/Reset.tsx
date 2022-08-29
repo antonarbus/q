@@ -74,7 +74,6 @@ export function Reset() {
             placeholder='Email address'
             value={credentials.email}
             onChange={handleChange}
-            // autoFocus
             inputRef={inputRef}
           />
           <Button
