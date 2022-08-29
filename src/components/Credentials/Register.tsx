@@ -12,11 +12,8 @@ import Box from '@mui/material/Box'
 import LockIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 // todo: add email typo checker (https://www.npmjs.com/package/mailcheck)
-
-const themeMui = createTheme()
 
 export function Register() {
   const [open, setOpen] = useState(true)
@@ -75,7 +72,6 @@ export function Register() {
   }, [credentials.password, credentials.confirmPassword])
 
   return (
-    <ThemeProvider theme={themeMui}>
       <Dialog
         open={open}
         keepMounted
@@ -179,6 +175,5 @@ export function Register() {
           </Container>
         </DialogContent>
       </Dialog>
-    </ThemeProvider>
   )
 }

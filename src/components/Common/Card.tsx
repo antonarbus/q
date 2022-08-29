@@ -36,7 +36,7 @@ export const Card = ({ children, content, cssProps, reference }: Props) => (
       },
       ...cssProps
     }}
-    onClick={(e) => e.stopPropagation()}
+    onMouseDown={(e) => e.stopPropagation()}
     ref={reference}
   >
       {children}

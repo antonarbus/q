@@ -16,7 +16,6 @@ import Box from '@mui/material/Box'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Fade, Zoom, Slide } from '@mui/material'
 
 const Transition = forwardRef(function Transition(
@@ -34,9 +33,6 @@ const Transition = forwardRef(function Transition(
   )
 })
 
-const themeMui = createTheme()
-
-// todo: make component as a dialog but connect it to the link via router-dom
 // todo: store user data in redux
 
 export function Login() {
@@ -78,7 +74,6 @@ export function Login() {
   }
 
   return (
-    <ThemeProvider theme={themeMui}>
       <Dialog
         open={open}
         TransitionComponent={Transition}
@@ -159,6 +154,5 @@ export function Login() {
           </Container>
         </DialogContent>
       </Dialog>
-    </ThemeProvider>
   )
 }

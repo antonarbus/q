@@ -6,21 +6,14 @@ import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Backdrop } from '@components/Common/Backdrop'
 import { Card } from '@components/Common/Card'
 import { gsap } from 'gsap'
 import { GrPowerReset as ResetIcon } from 'react-icons/gr'
-import { useTheme } from '@emotion/react'
 import { theme } from '@src/theme'
-
-const themeMui = createTheme()
-
-// todo: add custom icon
 
 export function Reset() {
   const navigate = useNavigate()
-  // const theme = useTheme()
   const [credentials, setCredentials] = useState({ email: '', password: '' })
 
   const handleChange = (e: EventType) => {
@@ -70,79 +63,51 @@ export function Reset() {
   }, [])
 
   return (
-    <ThemeProvider theme={themeMui}>
-      <Backdrop
-        onClick={function disappearWithSlideUp() {
-          if (isAnimationPrevented) return
-          isAnimationPrevented = true
-          const screenHeight = window.window.innerHeight
-          const elementHeight = ref.current.offsetHeight
-          const offsetPosition = screenHeight / 2 + elementHeight / 2
-          gsap.fromTo(ref.current, { y: 0 }, { duration: 0.3, y: -offsetPosition, onComplete: () => navigate('/') })
-        }}>
+    <Backdrop
+      onMouseDown={function disappearWithSlideUp() {
+        if (isAnimationPrevented) return
+        isAnimationPrevented = true
+        const screenHeight = window.window.innerHeight
+        const elementHeight = ref.current.offsetHeight
+        const offsetPosition = screenHeight / 2 + elementHeight / 2
+        gsap.fromTo(ref.current, { y: 0 }, { duration: 0.3, y: -offsetPosition, onComplete: () => navigate('/') })
+      }}>
 
-        <Card reference={ref}>
-          <Avatar sx={{
-            m: 1,
-            bgcolor: 'black',
-            alignSelf: 'center'
-          }}>
-            <ResetIcon css={{
-              '& path': { stroke: theme.colors.grey }
+      <Card reference={ref}>
+        <Typography
+          component="h1"
+          variant="h5"
+          sx={{ alignSelf: 'center', marginBottom: '20px' }}
+          children='Reset password'
+        />
+        <Box
+          component="form"
+          onSubmit={loginUser}
+          noValidate
+          sx={{ mt: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}
+        >
+          <TextField
+            fullWidth
+            id="email"
+            label="Email"
+            name="email"
+            autoComplete="email"
+            placeholder="Email address"
+            value={credentials.email}
+            onChange={handleChange}
+            autoFocus
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
+            // color='warning'
+            sx={{ mt: 3, mb: 2, alignSelf: 'center', color: 'white', padding: '10px' }}
+            children='Reset'
+          />
+        </Box>
+      </Card>
+    </Backdrop>
 
-            }}/>
-          </Avatar>
-          <Typography
-            component="h1"
-            variant="h5"
-            sx={{
-              alignSelf: 'center',
-              marginBottom: '20px'
-            }}
-          >
-            Reset password
-          </Typography>
-          <Box
-            component="form"
-            onSubmit={loginUser}
-            noValidate
-            sx={{
-              mt: 1,
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}
-          >
-            <TextField
-              margin="normal"
-              fullWidth
-              id="email"
-              label="Email"
-              name="email"
-              autoComplete="email"
-              placeholder="Email address"
-              value={credentials.email}
-              onChange={handleChange}
-            // autoFocus
-            />
-            <Button
-              type="submit"
-              variant="contained"
-              fullWidth
-              // color='warning'
-              sx={{
-                mt: 3,
-                mb: 2,
-                alignSelf: 'center'
-              }}
-            >
-              Reset
-            </Button>
-          </Box>
-        </Card>
-      </Backdrop>
-
-    </ThemeProvider>
   )
 }
