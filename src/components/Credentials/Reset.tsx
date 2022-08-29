@@ -1,16 +1,12 @@
 import { EventType } from '@src/types'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
 import { Backdrop } from '@components/Common/Backdrop'
 import { Card } from '@components/Common/Card'
-import { gsap } from 'gsap'
-import { GrPowerReset as ResetIcon } from 'react-icons/gr'
-import { theme } from '@src/theme'
+import { useSlideElement } from '@functions/useSlideElement'
 
 export function Reset() {
   const navigate = useNavigate()
@@ -52,41 +48,14 @@ export function Reset() {
     // navigate('/')
   }
 
-  let isAnimationPrevented = false // needed to avoid second click on backdrop which launches unwanted second animation
   const cardRef = useRef() as React.MutableRefObject<HTMLDivElement>
+  const inputRef = useRef() as React.MutableRefObject<HTMLDivElement>
 
-  function appearWithSlideUp() {
-    const screenHeight = window.window.innerHeight
-    const elementHeight = cardRef.current.offsetHeight
-    const offsetPosition = screenHeight / 2 + elementHeight / 2
-    gsap.fromTo(cardRef.current, { y: offsetPosition }, { duration: 0.3, y: 0 })
-  }
-
-  type Props = {
-    onComplete?: () => void
-  }
-
-  /**
-   * Animate card upwards off the screen and go to the root url '/'
-   * @param props object with parameters
-   * @param props.onComplete callback to be triggered after animation, for ex. we may call navigate('/url'), if no arg is provided url will be changed to '/'
-   */
-
-  function disappearWithSlideUp({ onComplete }: Props) {
-    if (isAnimationPrevented) return
-    isAnimationPrevented = true
-    const screenHeight = window.window.innerHeight
-    const elementHeight = cardRef.current.offsetHeight
-    const offsetPosition = screenHeight / 2 + elementHeight / 2
-    console.log(666)
-    gsap.fromTo(cardRef.current, { y: 0 }, { duration: 0.3, y: -offsetPosition, onComplete: onComplete || (() => navigate('/')) })
-  }
-
-  useEffect(appearWithSlideUp, [])
+  useEffect(() => useSlideElement({ intoView: true, element: cardRef.current, cb: () => inputRef.current.focus() }), [])
 
   return (
     <Backdrop
-      onMouseDown={disappearWithSlideUp}
+      onMouseDown={() => useSlideElement({ intoView: false, element: cardRef.current, cb: () => navigate('/') })}
     >
       <Card
         reference={cardRef}
@@ -105,7 +74,8 @@ export function Reset() {
             placeholder='Email address'
             value={credentials.email}
             onChange={handleChange}
-            autoFocus
+            // autoFocus
+            inputRef={inputRef}
           />
           <Button
             type='submit'
