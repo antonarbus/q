@@ -2,6 +2,7 @@
 
 import { ToastContainer } from 'react-toastify'
 import styled from '@emotion/styled'
+import { theme } from '@src/theme'
 
 export function Notifier() {
   return (
@@ -27,7 +28,7 @@ export function Notifier() {
 // taken from /node_modules/react-toastify/dist/ReactToastify.css
 const DivStyled = styled.div`
   --toastify-color-light: #fff;
-  --toastify-color-dark:${props => props.theme.colors.blackBackground};
+  --toastify-color-dark:${theme.colors.blackBackground};
   --toastify-color-info: #3498db;
   --toastify-color-success: #07bc0c;
   --toastify-color-warning: #f1c40f;

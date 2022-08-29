@@ -27,7 +27,7 @@ const Transition = forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} onExited={() => navigate('/')} />
 })
 
-const theme = createTheme()
+const themeMui = createTheme()
 
 // todo: make component as a dialog but connect it to the link via router-dom
 // todo: store user data in redux
@@ -72,7 +72,7 @@ export function UpdatePassword() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={themeMui}>
       <Dialog
         open={open}
         TransitionComponent={Transition}

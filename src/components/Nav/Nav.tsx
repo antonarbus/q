@@ -6,6 +6,7 @@ import { useDispatchTyped, useSelectorTyped as useSelector } from '@store/storeH
 import { setNavMediaQueryWidths } from '@slices/navSlice'
 import { calcNavMediaQueryParams } from './functions/calcNavMediaQueryParams'
 import { useMenuItemActionShortcuts } from './functions/useMenuItemActionShortcuts'
+import { theme } from '@src/theme'
 
 export function Nav() {
   const navRef = useRef() as React.MutableRefObject<HTMLDivElement>
@@ -48,7 +49,7 @@ const NavStyled = styled.nav<PropsForSC>`
   margin: 10px;
   height: 60px;
   border-radius: 4px;
-  background: ${props => props.theme.colors.blackBackground};
+  background: ${theme.colors.blackBackground};
   box-shadow: 0 0px 15px 0 #0000005c;
   z-index: 2;
   contain: layout inline-size;

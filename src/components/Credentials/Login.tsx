@@ -34,7 +34,7 @@ const Transition = forwardRef(function Transition(
   )
 })
 
-const theme = createTheme()
+const themeMui = createTheme()
 
 // todo: make component as a dialog but connect it to the link via router-dom
 // todo: store user data in redux
@@ -78,7 +78,7 @@ export function Login() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={themeMui}>
       <Dialog
         open={open}
         TransitionComponent={Transition}
