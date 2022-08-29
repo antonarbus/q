@@ -1,5 +1,5 @@
 type Props = {
-  onClick?: () => void
+  onMouseDown?: () => void
   children?: React.ReactNode;
   content?: React.ReactNode;
   color?: string
@@ -8,15 +8,15 @@ type Props = {
 /**
  * Dark transparent div on top of the content
  * @param props object with parameters
- * @param props.onClick usually a function which unmounts the parent component or changes the url
+ * @param props.onMouseDown usually a function which unmounts the parent component or changes the url
  * @param props.children anything, goes inside tags
  * @param props.content anything, same, but goes as a prop
  * @param props.color color for background
 */
 
-export const Backdrop = ({ onClick, children, content, color }: Props) => (
+export const Backdrop = ({ onMouseDown, children, content, color }: Props) => (
   <div
-    onClick={onClick}
+    onMouseDown={onMouseDown}
     css={{
       position: 'fixed',
       top: 0,
