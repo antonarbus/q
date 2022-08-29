@@ -21,7 +21,7 @@ export function Reset() {
     setCredentials({ ...credentials, [target.name]: target.value })
   }
 
-  async function loginUser(e: EventType) {
+  async function reset(e: EventType) {
     // e.preventDefault()
     // alert('reset password via email')
     // const method = 'POST'
@@ -53,61 +53,69 @@ export function Reset() {
   }
 
   let isAnimationPrevented = false // needed to avoid second click on backdrop which launches unwanted second animation
-  const ref = useRef() as React.MutableRefObject<HTMLDivElement>
+  const cardRef = useRef() as React.MutableRefObject<HTMLDivElement>
 
-  useEffect(function appearWithSlideUp() {
+  function appearWithSlideUp() {
     const screenHeight = window.window.innerHeight
-    const elementHeight = ref.current.offsetHeight
+    const elementHeight = cardRef.current.offsetHeight
     const offsetPosition = screenHeight / 2 + elementHeight / 2
-    gsap.fromTo(ref.current, { y: offsetPosition }, { duration: 0.3, y: 0 })
-  }, [])
+    gsap.fromTo(cardRef.current, { y: offsetPosition }, { duration: 0.3, y: 0 })
+  }
+
+  type Props = {
+    onComplete?: () => void
+  }
+
+  /**
+   * Animate card upwards off the screen and go to the root url '/'
+   * @param props object with parameters
+   * @param props.onComplete callback to be triggered after animation, for ex. we may call navigate('/url'), if no arg is provided url will be changed to '/'
+   */
+
+  function disappearWithSlideUp({ onComplete }: Props) {
+    if (isAnimationPrevented) return
+    isAnimationPrevented = true
+    const screenHeight = window.window.innerHeight
+    const elementHeight = cardRef.current.offsetHeight
+    const offsetPosition = screenHeight / 2 + elementHeight / 2
+    console.log(666)
+    gsap.fromTo(cardRef.current, { y: 0 }, { duration: 0.3, y: -offsetPosition, onComplete: onComplete || (() => navigate('/')) })
+  }
+
+  useEffect(appearWithSlideUp, [])
 
   return (
     <Backdrop
-      onMouseDown={function disappearWithSlideUp() {
-        if (isAnimationPrevented) return
-        isAnimationPrevented = true
-        const screenHeight = window.window.innerHeight
-        const elementHeight = ref.current.offsetHeight
-        const offsetPosition = screenHeight / 2 + elementHeight / 2
-        gsap.fromTo(ref.current, { y: 0 }, { duration: 0.3, y: -offsetPosition, onComplete: () => navigate('/') })
-      }}>
-
-      <Card reference={ref}>
-        <Typography
-          component="h1"
-          variant="h5"
-          sx={{ alignSelf: 'center', marginBottom: '20px' }}
-          children='Reset password'
-        />
+      onMouseDown={disappearWithSlideUp}
+    >
+      <Card
+        reference={cardRef}
+        title='Reset password'
+      >
         <Box
-          component="form"
-          onSubmit={loginUser}
-          noValidate
-          sx={{ mt: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}
+          component='form'
+          onSubmit={reset}
         >
           <TextField
             fullWidth
-            id="email"
-            label="Email"
-            name="email"
-            autoComplete="email"
-            placeholder="Email address"
+            id='email'
+            label='Email'
+            name='email'
+            autoComplete='email'
+            placeholder='Email address'
             value={credentials.email}
             onChange={handleChange}
             autoFocus
           />
           <Button
-            type="submit"
-            variant="contained"
+            type='submit'
+            variant='contained'
             fullWidth
-            // color='warning'
             sx={{ mt: 3, mb: 2, alignSelf: 'center', color: 'white', padding: '10px' }}
             children='Reset'
           />
         </Box>
       </Card>
     </Backdrop>
-
   )
 }

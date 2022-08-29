@@ -1,14 +1,14 @@
 type Props = {
-  onMouseDown?: () => void
-  children?: React.ReactNode;
-  content?: React.ReactNode;
+  onMouseDown: () => void
+  children?: React.ReactNode
+  content?: React.ReactNode
   color?: string
 }
 
 /**
  * Dark transparent div on top of the content
  * @param props object with parameters
- * @param props.onMouseDown usually a function which unmounts the parent component or changes the url
+ * @param props.onMouseDown a callback, usually a function which unmounts the parent component or changes the url
  * @param props.children anything, goes inside tags
  * @param props.content anything, same, but goes as a prop
  * @param props.color color for background
