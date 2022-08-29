@@ -1,8 +1,11 @@
+import { Typography } from '@mui/material'
+
 type Props = {
-  children?: React.ReactNode;
-  content?: React.ReactNode;
+  children?: React.ReactNode
+  content?: React.ReactNode
   cssProps?: React.CSSProperties
   reference?: React.MutableRefObject<HTMLDivElement>
+  title?: string | React.ReactNode
 }
 
 /**
@@ -13,7 +16,7 @@ type Props = {
  * @param props.cssProps object with css properties, will be added to the existing ones
 */
 
-export const Card = ({ children, content, cssProps, reference }: Props) => (
+export const Card = ({ children, content, cssProps, reference, title }: Props) => (
   <div
     css={{
       display: 'flex',
@@ -39,7 +42,16 @@ export const Card = ({ children, content, cssProps, reference }: Props) => (
     onMouseDown={(e) => e.stopPropagation()}
     ref={reference}
   >
-      {children}
-      {content}
-    </div>
+    {title && (
+      <Typography
+        component='h1'
+        variant='h5'
+        sx={{ alignSelf: 'center', marginBottom: '30px' }}
+      >
+        {title}
+      </Typography>
+    )}
+    {children}
+    {content}
+  </div>
 )

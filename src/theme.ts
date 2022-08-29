@@ -1,6 +1,6 @@
 export const theme = {
   colors: {
-    grey: '#606060',
+    grey: '#5a5a5a',
     red: 'red',
     closeAndBackMenuItems: '#858383',
     blackBackground: 'rgb(52 52 52 / 95%)'
