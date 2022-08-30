@@ -24,11 +24,13 @@ export function useSlideElement({ intoView, element, cb }: Props) {
   gsap.fromTo(
     element,
     {
-      y: intoView ? offsetPosition : 0
+      y: intoView ? offsetPosition : 0,
+      opacity: intoView ? 0 : 1 // to avoid element be shown for a fraction on component load and then sliding in from the bottom
     },
     {
       duration: 0.3,
       y: intoView ? 0 : -offsetPosition,
+      opacity: 1,
       onComplete: () => {
         isAnimationPrevented = false
         cb?.()
