@@ -43,6 +43,8 @@ export function Register() {
   const handleClickOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
+  // todo: email pattern check login move to a custom hook, at it should be used in 3 places (useEmailValidation)
+
   const isEmailPatternOk = (email: string) => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
   const alertIncorrectEmail = () => {
     if (credentials.email.length === 0) return
@@ -58,6 +60,7 @@ export function Register() {
     isEmailPatternOk(credentials.email) ? setEmailOk(true) : setEmailOk(false)
   }, [credentials.email])
 
+  // todo: also extract it into a separate custom hook, will be used in change password component (useConfirmPasswordValidation)
   const alertMismatchedPasswords = () => {
     if (credentials.password === credentials.confirmPassword) {
       setConfirmPasswordOk(true)

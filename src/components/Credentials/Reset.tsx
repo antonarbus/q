@@ -1,8 +1,7 @@
 import { EventType } from '@src/types'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
+import { Button, TextField } from '@mui/material'
 import { Backdrop } from '@components/Common/Backdrop'
 import { Card } from '@components/Common/Card'
 import { useSlideElement } from '@functions/useSlideElement'
@@ -20,6 +19,7 @@ export function Reset() {
     const headers = { 'Content-Type': 'application/json' }
     const body = JSON.stringify({ email })
     const options = { method, headers, body }
+    // todo: for error messages make a separate route with a sliding card
     const res = await fetch('/api/reset', options)
     const data = await res.json()
     console.log(data)
@@ -57,6 +57,7 @@ export function Reset() {
             variant='contained'
             fullWidth
             sx={{ mt: 3, mb: 2, alignSelf: 'center', padding: '10px' }}
+            // todo: put rotating icon inside button while waiting for the api call response
             children='Reset'
           />
         </form>
