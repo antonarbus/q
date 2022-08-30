@@ -8,7 +8,7 @@ export const theme = {
   // custom part
   colors: {
     grey: '#5a5a5a',
-    red: 'red',
+    red: '#ee6666',
     closeAndBackMenuItems: '#858383',
     blackBackground: 'rgb(52 52 52 / 95%)'
   },

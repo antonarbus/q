@@ -12,6 +12,8 @@ import Box from '@mui/material/Box'
 import LockIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
+import mailcheck from 'mailcheck'
+import { theme } from '@src/theme'
 
 // todo: add email typo checker (https://www.npmjs.com/package/mailcheck)
 
@@ -22,6 +24,7 @@ export function Register() {
   const [validateConfirmPasswordOnType, setValidateConfirmPasswordOnType] = useState(false)
   const [emailOk, setEmailOk] = useState(false)
   const [confirmPasswordOk, setConfirmPasswordOk] = useState(false)
+  const [emailSuggestion, setEmailSuggestion] = useState('')
 
   const handleInputsChange = (e: EventType) => {
     const target = (e.target as HTMLInputElement)
@@ -55,6 +58,17 @@ export function Register() {
     setEmailOk(false)
     setValidateEmailOnType(true)
   }
+  const suggestEmail = (email?: string) => {
+    mailcheck.run({
+      email: email || credentials.email,
+      suggested: function (suggestion: any) {
+        setEmailSuggestion(suggestion.full)
+      },
+      empty: function () {
+        setEmailSuggestion('')
+      }
+    })
+  }
   useEffect(function alertIncorrectEmailOnInput() {
     if (!validateEmailOnType) return // do not check before we type email and detect that is in incorrect on blur event
     isEmailPatternOk(credentials.email) ? setEmailOk(true) : setEmailOk(false)
@@ -75,108 +89,122 @@ export function Register() {
   }, [credentials.password, credentials.confirmPassword])
 
   return (
-      <Dialog
-        open={open}
-        keepMounted
-        onClose={handleClose}
-        aria-describedby="alert-dialog-slide-description"
-        BackdropProps={{ transitionDuration: 0 }}
-      >
-        <DialogContent>
-          <Container maxWidth="xs">
-            <CssBaseline />
+    <Dialog
+      open={open}
+      keepMounted
+      onClose={handleClose}
+      aria-describedby="alert-dialog-slide-description"
+      BackdropProps={{ transitionDuration: 0 }}
+    >
+      <DialogContent>
+        <Container maxWidth="xs">
+          <CssBaseline />
+          <Box
+            sx={{
+              marginTop: '10px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center'
+            }}
+          >
+            <Typography component="h1" variant="h5">
+              Register
+            </Typography>
             <Box
-              sx={{
-                marginTop: '10px',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center'
-              }}
+              component="form"
+              noValidate
+              onSubmit={registerUser}
+              sx={{ mt: 3 }}
             >
-              <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                <LockIcon />
-              </Avatar>
-              <Typography component="h1" variant="h5">
-                Register
-              </Typography>
-              <Box
-                component="form"
-                noValidate
-                onSubmit={registerUser}
-                sx={{ mt: 3 }}
-              >
-                <Grid container spacing={2}>
-                  <Grid item xs={12}>
-                    <TextField
-                      fullWidth
-                      id="email"
-                      label={(validateEmailOnType && !emailOk && credentials.email.length > 0) ? 'Email pattern is wrong' : 'Email'}
-                      name="email"
-                      autoComplete="email"
-                      placeholder='Email'
-                      value={credentials.email}
-                      onChange={handleInputsChange}
-                      onBlur={alertIncorrectEmail}
-                      autoFocus
-                      css={{
-                        '& .MuiInputLabel-shrink': {
-                          color: (validateEmailOnType && !emailOk && credentials.email.length > 0) ? 'red' : ''
-                        }
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      fullWidth
-                      name="password"
-                      label='Password'
-                      type="password"
-                      id="password"
-                      autoComplete="new-password"
-                      placeholder='Password'
-                      value={credentials.password}
-                      onChange={handleInputsChange}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      fullWidth
-                      name="confirmPassword"
-                      label={(validateConfirmPasswordOnType && !confirmPasswordOk && credentials.confirmPassword.length > 0) ? 'Passwords do not match' : 'Confirm password'}
-                      type="password"
-                      id="confirmPassword"
-                      autoComplete="new-password"
-                      placeholder='Password'
-                      value={credentials.confirmPassword}
-                      onChange={handleInputsChange}
-                      onBlur={alertMismatchedPasswords}
-                      css={{
-                        '& .MuiInputLabel-shrink': {
-                          color: (validateConfirmPasswordOnType && !confirmPasswordOk && credentials.confirmPassword.length > 0) ? 'red' : ''
-                        }
-                      }}
-                    />
-                  </Grid>
-                </Grid>
-                <Button
-                  type="submit"
+              <div css={{ position: 'relative' }}>
+                <TextField
                   fullWidth
-                  variant="contained"
-                  disabled={!emailOk || !confirmPasswordOk || credentials.password.length === 0}
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  Sign Up
-                </Button>
-                <Grid container justifyContent="flex-end">
-                  <Grid item>
-                    <Link to="/login" >
-                      Already have an account? Sign in</Link>
-                  </Grid>
+                  id="email"
+                  label={(validateEmailOnType && !emailOk && credentials.email.length > 0) ? 'Email pattern is wrong' : 'Email'}
+                  name="email"
+                  autoComplete="email"
+                  placeholder='Email'
+                  value={credentials.email}
+                  onChange={handleInputsChange}
+                  onBlur={() => {
+                    alertIncorrectEmail()
+                    suggestEmail()
+                  }}
+                  autoFocus
+                  css={{
+                    '& .MuiInputLabel-shrink': {
+                      color: (validateEmailOnType && !emailOk && credentials.email.length > 0) ? theme.colors.red : ''
+                    }
+                  }}
+                  sx={{ mb: 2 }}
+                />
+                {emailSuggestion && (
+                  <div css={{ position: 'absolute', bottom: '18px', right: '5px', fontSize: '12px', color: theme.colors.red }} >
+                    Did you mean? {' '}
+                    <a
+                      style={{ textDecoration: 'underline' }}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        setCredentials({ ...credentials, email: emailSuggestion })
+                        suggestEmail(emailSuggestion)
+                      }}
+                    >
+                      {emailSuggestion}
+                    </a>
+                  </div>
+                )}
+              </div>
+              <TextField
+                fullWidth
+                name="password"
+                label='Password'
+                type="password"
+                id="password"
+                autoComplete="new-password"
+                placeholder='Password'
+                value={credentials.password}
+                onChange={handleInputsChange}
+                sx={{ mb: 2 }}
+              />
+
+              <TextField
+                fullWidth
+                name="confirmPassword"
+                label={(validateConfirmPasswordOnType && !confirmPasswordOk && credentials.confirmPassword.length > 0) ? 'Passwords do not match' : 'Confirm password'}
+                type="password"
+                id="confirmPassword"
+                autoComplete="new-password"
+                placeholder='Password'
+                value={credentials.confirmPassword}
+                onChange={handleInputsChange}
+                onBlur={alertMismatchedPasswords}
+                css={{
+                  '& .MuiInputLabel-shrink': {
+                    color: (validateConfirmPasswordOnType && !confirmPasswordOk && credentials.confirmPassword.length > 0) ? theme.colors.red : ''
+                  }
+                }}
+                sx={{ mb: 2 }}
+              />
+
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                disabled={!emailOk || !confirmPasswordOk || credentials.password.length === 0}
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Sign Up
+              </Button>
+              <Grid container justifyContent="flex-end">
+                <Grid item>
+                  <Link to="/login" >
+                    Already have an account? Sign in</Link>
                 </Grid>
-              </Box>
+              </Grid>
             </Box>
-          </Container>
-        </DialogContent>
-      </Dialog>
+          </Box>
+        </Container>
+      </DialogContent>
+    </Dialog>
   )
 }
