@@ -3,53 +3,32 @@ import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
-import Box from '@mui/material/Box'
 import { Backdrop } from '@components/Common/Backdrop'
 import { Card } from '@components/Common/Card'
 import { useSlideElement } from '@functions/useSlideElement'
 
 export function Reset() {
   const navigate = useNavigate()
-  const [credentials, setCredentials] = useState({ email: '', password: '' })
-
-  const handleChange = (e: EventType) => {
-    const target = e.target as HTMLInputElement
-    setCredentials({ ...credentials, [target.name]: target.value })
-  }
-
-  async function reset(e: EventType) {
-    // e.preventDefault()
-    // alert('reset password via email')
-    // const method = 'POST'
-    // const headers = { 'Content-Type': 'application/json' }
-    // const { email, password } = credentials
-    // const body = JSON.stringify({ email, password })
-    // const options = { method, headers, body }
-    // const res = await fetch('/api/login', options)
-    // const data = await res.json()
-    // console.log(data)
-    // if (data.status === 'error') {
-    //   alert(data.message)
-    //   return localStorage.removeItem('accessJwtToken')
-    // }
-    // localStorage.setItem('accessJwtToken', data.accessJwtToken)
-    // alert('logged in')
-    // navigate('/')
-  }
-
-  const [open, setOpen] = useState(true)
-
-  const handleClickOpen = () => {
-    setOpen(true)
-  }
-
-  const handleClose = () => {
-    setOpen(false)
-    // navigate('/')
-  }
-
+  const [email, setEmail] = useState('')
   const cardRef = useRef() as React.MutableRefObject<HTMLDivElement>
   const inputRef = useRef() as React.MutableRefObject<HTMLDivElement>
+
+  async function mailResetPasswordLink(e: EventType) {
+    e.preventDefault()
+    alert('mail reset password link')
+    const method = 'POST'
+    const headers = { 'Content-Type': 'application/json' }
+    const body = JSON.stringify({ email })
+    const options = { method, headers, body }
+    const res = await fetch('/api/reset', options)
+    const data = await res.json()
+    console.log(data)
+    if (data.status === 'error') {
+      alert(data.message)
+      return localStorage.removeItem('accessJwtToken')
+    }
+    alert('check your mail box')
+  }
 
   useEffect(() => useSlideElement({ intoView: true, element: cardRef.current, cb: () => inputRef.current.focus() }), [])
 
@@ -61,10 +40,7 @@ export function Reset() {
         reference={cardRef}
         title='Reset password'
       >
-        <Box
-          component='form'
-          onSubmit={reset}
-        >
+        <form onSubmit={mailResetPasswordLink}>
           <TextField
             fullWidth
             id='email'
@@ -72,18 +48,18 @@ export function Reset() {
             name='email'
             autoComplete='email'
             placeholder='Email address'
-            value={credentials.email}
-            onChange={handleChange}
+            value={email}
+            onChange={e => setEmail((e.target as HTMLInputElement).value)}
             inputRef={inputRef}
           />
           <Button
             type='submit'
             variant='contained'
             fullWidth
-            sx={{ mt: 3, mb: 2, alignSelf: 'center', color: 'white', padding: '10px' }}
+            sx={{ mt: 3, mb: 2, alignSelf: 'center', padding: '10px' }}
             children='Reset'
           />
-        </Box>
+        </form>
       </Card>
     </Backdrop>
   )
