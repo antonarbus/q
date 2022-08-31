@@ -9,8 +9,8 @@ export const theme = {
   colors: {
     grey: '#5a5a5a',
     red: '#ee6666',
-    closeAndBackMenuItems: '#858383',
-    blackBackground: 'rgb(52 52 52 / 95%)'
+    topMenuItem: '#858383',
+    darkBackground: 'rgb(52 52 52 / 95%)'
   },
   menu: {
     width: 300,

@@ -15,7 +15,7 @@ import { theme } from '@src/theme'
  * @returns component with react spinner
  */
 
-export function DefaultViteComponent(): JSX.Element {
+export function Dummy(): JSX.Element {
   const [count, setCount] = useState(0)
   // const theme = useTheme()
 

@@ -49,7 +49,7 @@ const NavStyled = styled.nav<PropsForSC>`
   margin: 10px;
   height: 60px;
   border-radius: 4px;
-  background: ${theme.colors.blackBackground};
+  background: ${theme.colors.darkBackground};
   box-shadow: 0 0px 15px 0 #0000005c;
   z-index: 2;
   contain: layout inline-size;
