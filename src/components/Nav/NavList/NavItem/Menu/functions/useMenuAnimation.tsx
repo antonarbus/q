@@ -3,9 +3,9 @@ import { goDownInCurrentMenu, goDownInNextMenu, goUpInCurrentMenu, goUpInNextMen
 import { useDispatchTyped } from '@store/storeHooks'
 import { theme } from '@src/theme'
 import { gsap } from 'gsap'
-import { useIsInitRender } from '@src/functions/useIsInitRender'
 import { useEffect } from 'react'
 import { getMenuItemByIdsChain } from './getMenuItemByIdsChain'
+import { useFirstMountState } from 'react-use'
 
 type PropsType = {
   currentMenuRef: React.MutableRefObject<HTMLDivElement>
@@ -17,7 +17,7 @@ type PropsType = {
 
 export function useMenuAnimation({ currentMenuRef, nextMenuRef, menuContainerRef, fakeMenuRef, idsToNextMenuItems }: PropsType) {
   const dispatch = useDispatchTyped()
-  const isInitRender = useIsInitRender()
+  const isFirstMount = useFirstMountState()
   const duration = 0.5
   const nextMenu = getMenuItemByIdsChain(idsToNextMenuItems)
 
@@ -60,7 +60,7 @@ export function useMenuAnimation({ currentMenuRef, nextMenuRef, menuContainerRef
 
   function animateMenuHeight() {
     gsap.to(menuContainerRef.current, {
-      duration: isInitRender ? 0 : duration,
+      duration: isFirstMount ? 0 : duration,
       height: elementHeight(fakeMenuRef.current) + theme.menu.paddingTop + theme.menu.paddingBottom + theme.menu.menuItem.height
     })
   }

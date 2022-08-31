@@ -1,9 +1,10 @@
 import { EventType } from '@src/types'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Typography, Container, Box, Grid, TextField, CssBaseline, Button, DialogContent, Dialog } from '@mui/material'
+import { Typography, Container, Box, Grid, TextField, CssBaseline, Button, DialogContent, Dialog, OutlinedInput, InputAdornment, IconButton } from '@mui/material'
 import mailcheck from 'mailcheck'
 import { theme } from '@src/theme'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 
 export function Register() {
   const navigate = useNavigate()
@@ -12,6 +13,11 @@ export function Register() {
   const [open, setOpen] = useState(true)
   const handleClickOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
+
+  // show password
+
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
   // input values
   const [inputValue, setInputValue] = useState({ email: '', password: '', confirmPassword: '' })
@@ -26,19 +32,6 @@ export function Register() {
     const target = (e.target as HTMLInputElement)
     setInputFocusedOutOnes({ ...inputFocusedOutOnes, [target.name]: true })
   }
-
-  /*   // show validation msg in label only after inputs loose a focus for the first time
-  const [showEmailValidationMsg, setShowEmailValidationMsg] = useState(false)
-  useEffect(() => {
-    if (showEmailValidationMsg) return
-    !isInputFocused.email && setShowEmailValidationMsg(true)
-  }, [isInputFocused.email])
-
-  const [showConfirmPasswordValidationMsg, setShowConfirmPasswordValidationMsg] = useState(false)
-  useEffect(() => {
-    if (showConfirmPasswordValidationMsg) return
-    !isInputFocused.confirmPassword && setShowConfirmPasswordValidationMsg(true)
-  }, [isInputFocused.password, isInputFocused.confirmPassword]) */
 
   // is email ok?
   const isEmailPatternOk = (email: string) => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
@@ -178,15 +171,11 @@ export function Register() {
                   </div>
                 )}
               </div>
-
-              {
-                // todo: wrap it in div and add a button with eye icon to show / hide password
-              }
               <TextField
                 fullWidth
                 name="password"
                 label='Password'
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 id="password"
                 autoComplete="new-password"
                 placeholder='Password'
@@ -194,13 +183,26 @@ export function Register() {
                 onChange={handleInputValueChange}
                 onBlur={handleInputFocusedOutOnes}
                 sx={{ mb: 2 }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={() => setShowPassword(!showPassword)}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
               />
 
               <TextField
                 fullWidth
                 name="confirmPassword"
                 label={confirmPasswordLabel}
-                type="password"
+                type={showConfirmPassword ? 'text' : 'password'}
                 id="confirmPassword"
                 autoComplete="new-password"
                 placeholder='Password'
@@ -211,6 +213,19 @@ export function Register() {
                   '& .MuiInputLabel-shrink': {
                     color: (confirmPasswordLabel !== initConfirmPasswordLabel) ? theme.colors.red : ''
                   }
+                }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                        edge="end"
+                      >
+                        {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  )
                 }}
               />
 
