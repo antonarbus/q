@@ -67,7 +67,7 @@ export const MenuStyled = styled.div<PropsForSC>`
   width: ${theme.menu.width}px;
   padding-top: ${theme.menu.paddingTop}px;
   padding-bottom: ${theme.menu.paddingBottom}px;
-  background: rgb(52 52 52 / 98%);
+  background: ${theme.colors.darkBackground};
   backdrop-filter: blur(4px);
   border: 1px solid #474a4d;
   border-radius: 4px;

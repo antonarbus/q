@@ -4,7 +4,7 @@ import { FiLogOut, FiLogIn } from 'react-icons/fi'
 import { IoDocumentOutline, IoDocumentsOutline, IoSaveOutline, IoShareOutline } from 'react-icons/io5'
 import { IoIosSwap } from 'react-icons/io'
 
-import logo from '@components/Main/DefaultViteComponent/logo.svg'
+import logo from '@components/Main/Dummy/logo.svg'
 
 const reactIcon = React.createElement(IoShareOutline, {})
 

@@ -6,7 +6,7 @@ import { GlobalStyles } from './GlobalStyles'
 import { Main } from './components/Main'
 import { Nav } from '@components/Nav'
 import { Notifier } from '@components/Notifier'
-import { DefaultViteComponent } from '@components/Main/DefaultViteComponent'
+import { Dummy } from '@components/Main/Dummy'
 import { Login } from '@components/Credentials/Login'
 import { Register } from '@components/Credentials/Register'
 import { Reset } from '@components/Credentials/Reset'
@@ -17,7 +17,7 @@ import { theme } from './theme'
 ReactDOM.createRoot(document.getElementById('root')!).render(
   // <React.StrictMode>
   <Provider store={store}>
-    <ThemeProvider theme={createTheme(theme)}>
+    <ThemeProvider theme={createTheme(theme)}> {/* by createTheme from MUI we set global style for all MUI elements */}
       <GlobalStyles />
       <BrowserRouter>
         <Nav />
@@ -27,7 +27,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <Route path="register" element={<Register />} />
             <Route path="reset" element={<Reset />} />
             <Route path="updatePassword" element={<UpdatePassword />} />
-            <Route path="default" element={<DefaultViteComponent />} />
+            <Route path="default" element={<Dummy />} />
           </Route>
         </Routes>
         <Notifier />

@@ -1,66 +1,89 @@
 import { EventType } from '@src/types'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import Dialog from '@mui/material/Dialog'
-import DialogContent from '@mui/material/DialogContent'
-import Avatar from '@mui/material/Avatar'
-import Button from '@mui/material/Button'
-import CssBaseline from '@mui/material/CssBaseline'
-import TextField from '@mui/material/TextField'
-import Grid from '@mui/material/Grid'
-import Box from '@mui/material/Box'
-import LockIcon from '@mui/icons-material/LockOutlined'
-import Typography from '@mui/material/Typography'
-import Container from '@mui/material/Container'
+import { Typography, Container, Box, Grid, TextField, CssBaseline, Button, DialogContent, Dialog } from '@mui/material'
 import mailcheck from 'mailcheck'
 import { theme } from '@src/theme'
 
-// todo: add email typo checker (https://www.npmjs.com/package/mailcheck)
-
 export function Register() {
-  const [open, setOpen] = useState(true)
-  const [credentials, setCredentials] = useState({ email: '', password: '', confirmPassword: '' })
-  const [validateEmailOnType, setValidateEmailOnType] = useState(false)
-  const [validateConfirmPasswordOnType, setValidateConfirmPasswordOnType] = useState(false)
-  const [emailOk, setEmailOk] = useState(false)
-  const [confirmPasswordOk, setConfirmPasswordOk] = useState(false)
-  const [emailSuggestion, setEmailSuggestion] = useState('')
-
-  const handleInputsChange = (e: EventType) => {
-    const target = (e.target as HTMLInputElement)
-    setCredentials({ ...credentials, [target.name]: target.value })
-  }
   const navigate = useNavigate()
 
-  async function registerUser(e: EventType) {
-    e.preventDefault()
-    const method = 'POST'
-    const headers = { 'Content-Type': 'application/json' }
-    const body = JSON.stringify(credentials)
-    const options = { method, headers, body }
-    const res = await fetch('/api/register', options)
-    const data = await res.json()
-    console.log(data)
-  }
-
+  // sort out
+  const [open, setOpen] = useState(true)
   const handleClickOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
-  // todo: email pattern check login move to a custom hook, at it should be used in 3 places (useEmailValidation)
-
-  const isEmailPatternOk = (email: string) => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
-  const alertIncorrectEmail = () => {
-    if (credentials.email.length === 0) return
-    if (isEmailPatternOk(credentials.email)) {
-      setEmailOk(true)
-      return
-    }
-    setEmailOk(false)
-    setValidateEmailOnType(true)
+  // input values
+  const [inputValue, setInputValue] = useState({ email: '', password: '', confirmPassword: '' })
+  const handleInputValueChange = (e: EventType) => {
+    const target = (e.target as HTMLInputElement)
+    setInputValue({ ...inputValue, [target.name]: target.value })
   }
+
+  // input focused out ones (show validation msg only after first focus out)
+  const [inputFocusedOutOnes, setInputFocusedOutOnes] = useState({ email: false, password: false, confirmPassword: false })
+  const handleInputFocusedOutOnes = (e: EventType) => {
+    const target = (e.target as HTMLInputElement)
+    setInputFocusedOutOnes({ ...inputFocusedOutOnes, [target.name]: true })
+  }
+
+  /*   // show validation msg in label only after inputs loose a focus for the first time
+  const [showEmailValidationMsg, setShowEmailValidationMsg] = useState(false)
+  useEffect(() => {
+    if (showEmailValidationMsg) return
+    !isInputFocused.email && setShowEmailValidationMsg(true)
+  }, [isInputFocused.email])
+
+  const [showConfirmPasswordValidationMsg, setShowConfirmPasswordValidationMsg] = useState(false)
+  useEffect(() => {
+    if (showConfirmPasswordValidationMsg) return
+    !isInputFocused.confirmPassword && setShowConfirmPasswordValidationMsg(true)
+  }, [isInputFocused.password, isInputFocused.confirmPassword]) */
+
+  // is email ok?
+  const isEmailPatternOk = (email: string) => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
+
+  const [isEmailOk, setIsEmailOk] = useState(false)
+  useEffect(() => {
+    isEmailPatternOk(inputValue.email)
+      ? setIsEmailOk(true)
+      : setIsEmailOk(false)
+  }, [inputValue.email])
+
+  // is confirmPassword ok?
+  const [isConfirmPasswordOk, setIsConfirmPasswordOk] = useState(false)
+  useEffect(() => {
+    (inputValue.password !== '' && inputValue.password === inputValue.confirmPassword)
+      ? setIsConfirmPasswordOk(true)
+      : setIsConfirmPasswordOk(false)
+  }, [inputValue.password, inputValue.confirmPassword])
+
+  // validation msg for email
+  const initEmailLabel = 'Email'
+  const [emailLabel, setEmailLabel] = useState(initEmailLabel)
+  useEffect(() => {
+    (inputFocusedOutOnes.email && inputValue.email !== '' && !isEmailOk)
+      ? setEmailLabel('Check email pattern')
+      : setEmailLabel(initEmailLabel)
+  }, [inputValue.email, inputFocusedOutOnes.email, isEmailOk])
+
+  // validation msg for password confirmation
+  const initConfirmPasswordLabel = 'Confirm password'
+  const [confirmPasswordLabel, setConfirmPasswordLabel] = useState(initConfirmPasswordLabel)
+  useEffect(() => {
+    inputFocusedOutOnes.confirmPassword && inputValue.password !== '' && inputValue.confirmPassword !== '' && !isConfirmPasswordOk
+      ? setConfirmPasswordLabel('Passwords do not match')
+      : setConfirmPasswordLabel(initConfirmPasswordLabel)
+  }, [inputFocusedOutOnes.confirmPassword, inputValue.password, inputValue.confirmPassword, isConfirmPasswordOk])
+
+  // todo: email pattern check move to a custom hook (useEmailValidation), it should be used in 3 places
+
+  // email suggestion
+  const [emailSuggestion, setEmailSuggestion] = useState('')
+
   const suggestEmail = (email?: string) => {
     mailcheck.run({
-      email: email || credentials.email,
+      email: email || inputValue.email,
       suggested: function (suggestion: any) {
         setEmailSuggestion(suggestion.full)
       },
@@ -69,24 +92,25 @@ export function Register() {
       }
     })
   }
-  useEffect(function alertIncorrectEmailOnInput() {
-    if (!validateEmailOnType) return // do not check before we type email and detect that is in incorrect on blur event
-    isEmailPatternOk(credentials.email) ? setEmailOk(true) : setEmailOk(false)
-  }, [credentials.email])
 
-  // todo: also extract it into a separate custom hook, will be used in change password component (useConfirmPasswordValidation)
-  const alertMismatchedPasswords = () => {
-    if (credentials.password === credentials.confirmPassword) {
-      setConfirmPasswordOk(true)
-      return
-    }
-    setConfirmPasswordOk(false)
-    setValidateConfirmPasswordOnType(true)
+  // disable button
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true)
+  useEffect(() => {
+    isEmailOk && isConfirmPasswordOk
+      ? setIsButtonDisabled(false)
+      : setIsButtonDisabled(true)
+  }, [isEmailOk, isConfirmPasswordOk])
+
+  async function registerUser(e: EventType) {
+    e.preventDefault()
+    const method = 'POST'
+    const headers = { 'Content-Type': 'application/json' }
+    const body = JSON.stringify({ email: inputValue.email, password: inputValue.password })
+    const options = { method, headers, body }
+    const res = await fetch('/api/register', options)
+    const data = await res.json()
+    console.log(data)
   }
-  useEffect(function alertMismatchedPasswordsOnInput() {
-    if (!validateConfirmPasswordOnType) return
-    (credentials.password === credentials.confirmPassword) ? setConfirmPasswordOk(true) : setConfirmPasswordOk(false)
-  }, [credentials.password, credentials.confirmPassword])
 
   return (
     <Dialog
@@ -120,20 +144,20 @@ export function Register() {
                 <TextField
                   fullWidth
                   id="email"
-                  label={(validateEmailOnType && !emailOk && credentials.email.length > 0) ? 'Email pattern is wrong' : 'Email'}
+                  label={emailLabel}
                   name="email"
                   autoComplete="email"
                   placeholder='Email'
-                  value={credentials.email}
-                  onChange={handleInputsChange}
-                  onBlur={() => {
-                    alertIncorrectEmail()
+                  value={inputValue.email}
+                  onChange={handleInputValueChange}
+                  onBlur={(e) => {
+                    handleInputFocusedOutOnes(e)
                     suggestEmail()
                   }}
                   autoFocus
                   css={{
                     '& .MuiInputLabel-shrink': {
-                      color: (validateEmailOnType && !emailOk && credentials.email.length > 0) ? theme.colors.red : ''
+                      color: (emailLabel !== initEmailLabel) ? theme.colors.red : ''
                     }
                   }}
                   sx={{ mb: 2 }}
@@ -145,7 +169,7 @@ export function Register() {
                       style={{ textDecoration: 'underline' }}
                       onClick={(e) => {
                         e.preventDefault()
-                        setCredentials({ ...credentials, email: emailSuggestion })
+                        setInputValue({ ...inputValue, email: emailSuggestion })
                         suggestEmail(emailSuggestion)
                       }}
                     >
@@ -154,6 +178,10 @@ export function Register() {
                   </div>
                 )}
               </div>
+
+              {
+                // todo: wrap it in div and add a button with eye icon to show / hide password
+              }
               <TextField
                 fullWidth
                 name="password"
@@ -162,35 +190,35 @@ export function Register() {
                 id="password"
                 autoComplete="new-password"
                 placeholder='Password'
-                value={credentials.password}
-                onChange={handleInputsChange}
+                value={inputValue.password}
+                onChange={handleInputValueChange}
+                onBlur={handleInputFocusedOutOnes}
                 sx={{ mb: 2 }}
               />
 
               <TextField
                 fullWidth
                 name="confirmPassword"
-                label={(validateConfirmPasswordOnType && !confirmPasswordOk && credentials.confirmPassword.length > 0) ? 'Passwords do not match' : 'Confirm password'}
+                label={confirmPasswordLabel}
                 type="password"
                 id="confirmPassword"
                 autoComplete="new-password"
                 placeholder='Password'
-                value={credentials.confirmPassword}
-                onChange={handleInputsChange}
-                onBlur={alertMismatchedPasswords}
+                value={inputValue.confirmPassword}
+                onChange={handleInputValueChange}
+                onBlur={handleInputFocusedOutOnes}
                 css={{
                   '& .MuiInputLabel-shrink': {
-                    color: (validateConfirmPasswordOnType && !confirmPasswordOk && credentials.confirmPassword.length > 0) ? theme.colors.red : ''
+                    color: (confirmPasswordLabel !== initConfirmPasswordLabel) ? theme.colors.red : ''
                   }
                 }}
-                sx={{ mb: 2 }}
               />
 
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                disabled={!emailOk || !confirmPasswordOk || credentials.password.length === 0}
+                disabled={isButtonDisabled}
                 sx={{ mt: 3, mb: 2 }}
               >
                 Sign Up

@@ -11,7 +11,7 @@ import { EventType } from '@src/types'
 const closeIcon = createElement(CloseIcon, {})
 
 export function CloseMenuItem() {
-  const color = theme.colors.closeAndBackMenuItems
+  const color = theme.colors.topMenuItem
   const dispatch = useDispatchTyped()
   const isHovered = useSelector(state => state.nav.menuItemHoverIndex === 1)
 
