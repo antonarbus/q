@@ -1,10 +1,13 @@
 import { EventType } from '@src/types'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Typography, Container, Box, Grid, TextField, CssBaseline, Button, DialogContent, Dialog, OutlinedInput, InputAdornment, IconButton } from '@mui/material'
+import { Typography, Container, Box, Grid, TextField, CssBaseline, Button, DialogContent, Dialog, InputAdornment, IconButton, Avatar } from '@mui/material'
 import mailcheck from 'mailcheck'
 import { theme } from '@src/theme'
-import { Visibility, VisibilityOff } from '@mui/icons-material'
+import { Visibility, VisibilityOff, Lock, Person } from '@mui/icons-material'
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
+// import PersonIcon from '@mui/icons-material/Person'
+// import LockIcon from '@mui/icons-material/Lock'
 
 export function Register() {
   const navigate = useNavigate()
@@ -12,7 +15,10 @@ export function Register() {
   // sort out
   const [open, setOpen] = useState(true)
   const handleClickOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
+  const handleClose = () => {
+    setOpen(false)
+    navigate('/')
+  }
 
   // show password
 
@@ -124,6 +130,9 @@ export function Register() {
               alignItems: 'center'
             }}
           >
+            <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }}>
+              <LockOutlinedIcon />
+            </Avatar>
             <Typography component="h1" variant="h5">
               Register
             </Typography>
@@ -148,6 +157,13 @@ export function Register() {
                     suggestEmail()
                   }}
                   autoFocus
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Person />
+                      </InputAdornment>
+                    )
+                  }}
                   css={{
                     '& .MuiInputLabel-shrink': {
                       color: (emailLabel !== initEmailLabel) ? theme.colors.red : ''
@@ -184,6 +200,11 @@ export function Register() {
                 onBlur={handleInputFocusedOutOnes}
                 sx={{ mb: 2 }}
                 InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Lock />
+                    </InputAdornment>
+                  ),
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
@@ -197,7 +218,6 @@ export function Register() {
                   )
                 }}
               />
-
               <TextField
                 fullWidth
                 name="confirmPassword"
@@ -215,6 +235,11 @@ export function Register() {
                   }
                 }}
                 InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Lock />
+                    </InputAdornment>
+                  ),
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
@@ -228,20 +253,19 @@ export function Register() {
                   )
                 }}
               />
-
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 disabled={isButtonDisabled}
-                sx={{ mt: 3, mb: 2 }}
+                size='large'
+                sx={{ mt: 2, mb: 2 }}
               >
                 Sign Up
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link to="/login" >
-                    Already have an account? Sign in</Link>
+                  <Link to="/login" >Sign in?</Link>
                 </Grid>
               </Grid>
             </Box>
