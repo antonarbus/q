@@ -1,7 +1,6 @@
 import { notify } from '@components/Notifier/notify'
-import { useIsInitRender } from '@functions/useIsInitRender'
-import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useEffectOnce } from 'react-use'
 import { navStructure } from '../navStructure'
 
 type ShortcutsType = {
@@ -34,11 +33,9 @@ function searchForShortcutsInNavStructure() {
 }
 
 export function useMenuItemActionShortcuts() {
-  const isInitRender = useIsInitRender()
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (!isInitRender) return
+  useEffectOnce(() => {
     searchForShortcutsInNavStructure()
 
     let keysPressed: string[] = []
@@ -53,7 +50,7 @@ export function useMenuItemActionShortcuts() {
       keysPressed.push(e.key.toLowerCase())
       keysPressed = [...new Set(keysPressed)]
       const shortcutItem = shortcuts.find(o => {
-        const shortcutSorted = [...o.shortcut].sort() // do not sort original array
+        const shortcutSorted = [...o.shortcut].sort() // do not sort original array, but a copy
         const shortcutStr = shortcutSorted.join('')
         const pressedKeysStr = keysPressed.sort().join('')
         return shortcutStr === pressedKeysStr
@@ -69,5 +66,5 @@ export function useMenuItemActionShortcuts() {
       }
       notify(<><span style={{ color: 'orange' }}>{shortcutItem.name}</span> triggered with keyboard</>)
     })
-  }, [])
+  })
 }

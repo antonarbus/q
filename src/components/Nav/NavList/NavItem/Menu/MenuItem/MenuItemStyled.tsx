@@ -1,14 +1,17 @@
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
+import { theme } from '@src/theme'
 
 type PropsForSC = {
-  $isHovered: boolean
   to: string
+  state: {
+    isHovered: boolean
+  }
 }
 
 export const MenuItemStyled = styled(Link)<PropsForSC>`
   position: relative;
-  height: ${props => props.theme.menu.menuItem.height}px;
+  height: ${theme.menu.menuItem.height}px;
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
@@ -18,6 +21,6 @@ export const MenuItemStyled = styled(Link)<PropsForSC>`
   color: #dadce1;
   white-space: nowrap;
   text-decoration: none;
-  background-color: ${props => props.$isHovered ? '#525357' : 'initial'};
-  filter: ${props => props.$isHovered ? 'brightness(1.2)' : 'none'};
+  background-color: ${props => props.state.isHovered ? '#525357' : 'initial'};
+  filter: ${props => props.state.isHovered ? 'brightness(1.2)' : 'none'};
 `

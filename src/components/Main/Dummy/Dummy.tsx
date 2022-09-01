@@ -1,20 +1,23 @@
 import { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
-import styled, { useTheme } from 'styled-components'
+import { useTheme } from '@emotion/react'
+import styled from '@emotion/styled'
 import { decrement, increment } from '@slices/counterSlice'
 import { login } from '@slices/loginSlice'
 import { fetchUsers } from '@slices/usersSlice'
 import { useDispatchTyped, useSelectorTyped } from '@store/storeHooks'
+import { Backdrop } from '@components/Common/Backdrop'
+import { theme } from '@src/theme'
 
 /**
  * Component with counter
  * @returns component with react spinner
  */
 
-export function DefaultViteComponent(): JSX.Element {
+export function Dummy(): JSX.Element {
   const [count, setCount] = useState(0)
-  const theme = useTheme()
+  // const theme = useTheme()
 
   const counter = useSelectorTyped(state => state.counter.counter)
   const isLogged = useSelectorTyped(state => state.login.isLogged)
@@ -24,7 +27,7 @@ export function DefaultViteComponent(): JSX.Element {
   const style = { border: '2px solid grey', padding: '10px', margin: '10px', maxWidth: '500px' }
 
   return (
-    <div style={{ border: `1px solid ${theme.colors.red}` }}>
+    <div style={{ border: `1px solid ${theme.colors.grey}` }}>
       <img
         src={logo}
         className="App-logo"
@@ -57,14 +60,12 @@ export function DefaultViteComponent(): JSX.Element {
           {!users.loading && !!users.users.length && users.users.map(user => <div key={user.id}>{user.name}</div>)}
         </div>
       </div>
-
     </div>
   )
 }
 
 const Button = styled.button`
-  border-color:  ${props => props.theme.colors.red};
-  background-color: ${props => props.theme.colors.grey};
+  border-color:  ${theme.colors.grey};
   color: white;
   cursor: pointer;
 `

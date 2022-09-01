@@ -4,9 +4,12 @@
   "javascript.validate.enable": true,
   "javascript.suggest.completeJSDocs": true,
   "cSpell.words": [
+    "bgcolor",
     "camelcase",
     "copyfiles",
+    "esbuild",
     "gsap",
+    "mailcheck",
     "PAGEDOWN",
     "PAGEUP",
     "reduxjs",

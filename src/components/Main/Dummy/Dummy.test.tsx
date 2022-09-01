@@ -1,6 +1,6 @@
 import { describe, expect, it, vi, afterEach, beforeEach } from 'vitest'
 import { render, fireEvent, waitFor, screen } from '@testing-library/react'
-import { DefaultViteComponent } from './DefaultViteComponent'
+import { Dummy } from './Dummy'
 import '@testing-library/jest-dom'
 
 // https://www.youtube.com/watch?v=oWJpxtAl62w
@@ -10,11 +10,11 @@ describe('Simple working test', () => {
     expect(1 + 1).toEqual(2)
   })
   it('element should be visible', async () => {
-    render(<DefaultViteComponent />)
+    render(<Dummy />)
     expect(screen.getByText('count is: 0')).toBeInTheDocument()
   })
   it('should increment', async () => {
-    render(<DefaultViteComponent />)
+    render(<Dummy />)
     const button = screen.getByRole('button')
     fireEvent.click(button)
     await waitFor(() => expect(button).toHaveTextContent('count is: 1'))

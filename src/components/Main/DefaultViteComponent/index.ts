@@ -1,1 +1,0 @@
-export { DefaultViteComponent } from './DefaultViteComponent'

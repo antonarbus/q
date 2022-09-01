@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { Fade as BurgerIcon } from 'hamburger-react'
 import { useDispatchTyped, useSelectorTyped as useSelector } from '@store/storeHooks'
 import { toggleBurger } from '@slices/navSlice'

@@ -1,5 +1,5 @@
 import { useSelectorTyped as useSelector } from '@store/storeHooks'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 
 type Prop = {
   logoRef: React.MutableRefObject<HTMLDivElement>
@@ -48,11 +48,11 @@ const LogoContainer = styled.div<PropsForSC>`
       font-size: 30px;
     }
 
-    span:first-child {
+    span:first-of-type {
       color: white; 
     }
 
-    span:nth-child(2) {
+    span:nth-of-type(2) {
       color: #e7e7e7bf; 
 
       &:hover {

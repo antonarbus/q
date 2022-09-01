@@ -13,8 +13,6 @@ import { refreshRouter } from './api/refreshRouter'
 import { errorHandler } from './middleware/errorHandler'
 import { usersRouter } from './api/usersRouter'
 
-const PORT = process.env.PORT || 5000
-
 const app = express()
 connectToDb()
 app.use(morgan('dev')) // http logs in terminal
@@ -37,4 +35,11 @@ app.use('/api/users', usersRouter)
 app.use('/api/user', userDetailsRouter)
 
 app.use(errorHandler)
-app.listen(3001, () => console.log(`server started at http://localhost:${PORT}`))
+
+const port = process.env.PORT_BACK_END
+const domain = process.env.DOMAIN
+
+app.listen(port, () => console.log(`server started at ${domain}:${port}`)).on('error', function () {
+  // process.once('SIGUSR2', () => process.kill(process.pid, 'SIGUSR2'))
+  // process.on('SIGINT', () => process.kill(process.pid, 'SIGINT'))
+})

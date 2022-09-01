@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { FaChevronRight as ForwardIcon } from 'react-icons/fa'
 import { Icon } from '../../Icon'
 import { MenuItemStyled } from './MenuItemStyled'
@@ -29,7 +29,7 @@ export function MenuItem({ menuItem, hoveredMenuItemIndex }: MenuItemType) {
       to={link || '/'}
       onClick={(e) => clickOnMenuItem(e, menuId)}
       onMouseEnter={() => dispatch(setMenuItemHoverIndex(hoveredMenuItemIndex))}
-      $isHovered={isHovered}
+      state={{ isHovered }}
     >
       {isIcon && <Icon icon={menuItem.icon} />}
       <TextInMenu reserveSpaceForIcon={isNextMenuAvailable} name={menuItem.name} />
