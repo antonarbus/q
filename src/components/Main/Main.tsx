@@ -1,28 +1,39 @@
 import { notify } from '@components/Notifier/notify'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode'
 import axios from 'axios'
-import { axiosWithAuth, baseURL } from '@src/axios/axios'
+import { axiosWithAuth } from '@src/axios/axios'
+
+async function getEmailFromDb() {
+  try {
+    // if we just go in browser to http://localhost:3009/api/user or fetch it with just fetch or axios general instance
+    // we get msg "accessJwtToken is not verified, user is not authorized"
+    // but with axiosWithAuth we add access token to the header and check it in the middleware 'verifyToken '
+    const res = await axiosWithAuth('/api/user')
+    console.log(res)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+async function getUsersFromDb() {
+  try {
+    const res = await axiosWithAuth('/api/users')
+    console.log(res)
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 export function Main() {
-  async function getEmailFromDb() {
-    try {
-      const res = await axiosWithAuth('/api/user')
-      // const data = await res.json()
-      console.log(res)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
   useEffect(function isUserLoggedIn() {
     async function refreshTokens() {
       try {
         if (!localStorage.getItem('accessJwtToken')) return
-        const response = await axios.get(`${baseURL}/api/refresh`, { withCredentials: true })
+        const response = await axios.get('/api/refresh', { withCredentials: true })
         if (!response.data.accessJwtToken) return
         const accessJwtToken = response.data.accessJwtToken
         const jwtTokenPayload: {email: string | undefined} = jwt_decode(accessJwtToken)
@@ -44,6 +55,7 @@ export function Main() {
       <h3>Main component</h3>
       <button onClick={() => notify('hi')}>say hi in bottom popup</button>
       <button onClick={getEmailFromDb}>get user's email from db</button>
+      <button onClick={getUsersFromDb}>get users from db</button>
     </MainStyled>
   )
 }

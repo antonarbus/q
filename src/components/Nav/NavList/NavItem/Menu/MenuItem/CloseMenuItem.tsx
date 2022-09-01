@@ -11,7 +11,7 @@ import { EventType } from '@src/types'
 const closeIcon = createElement(CloseIcon, {})
 
 export function CloseMenuItem() {
-  const color = theme.colors.closeAndBackMenuItems
+  const color = theme.colors.topMenuItem
   const dispatch = useDispatchTyped()
   const isHovered = useSelector(state => state.nav.menuItemHoverIndex === 1)
 
@@ -25,7 +25,7 @@ export function CloseMenuItem() {
       to={'/'}
       onClick={onClickHandler}
       onMouseEnter={() => dispatch(setMenuItemHoverIndex(1))}
-      $isHovered={isHovered}
+      state={{ isHovered }}
     >
       <Icon icon={closeIcon} />
       <TextInMenu name={<span style={{ color }}>Close</span>} />

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { useDispatchTyped, useSelectorTyped as useSelector } from '@store/storeHooks'
 import { useRef } from 'react'
 import { useMenuAnimation } from './functions/useMenuAnimation'
@@ -9,6 +9,7 @@ import { SlidableMenuItemsContainer } from './SlidableMenuItemsContainer'
 import { TopMenuItemsContainer } from './TopMenuItemsContainer'
 import { setMenuItemHoverIndex } from '@slices/navSlice'
 import { globalObject } from '@src/globalObject'
+import { theme } from '@src/theme'
 
 export function Menu() {
   const menuContainerRef = useRef() as React.MutableRefObject<HTMLDivElement>
@@ -17,7 +18,7 @@ export function Menu() {
   const fakeMenuRef = useRef() as React.MutableRefObject<HTMLDivElement>
   const idsToNextMenuItems = useSelector(state => state.nav.idsToNextMenuItems)
   const idsToCurrentMenuItems = useSelector(state => state.nav.idsToCurrentMenuItems)
-  const { goDownInMenu, goUpInMenu } = useMenuAnimation({ currentMenuRef, nextMenuRef, menuContainerRef, fakeMenuRef, idsToNextMenuItems: idsToNextMenuItems })
+  const { goDownInMenu, goUpInMenu } = useMenuAnimation({ currentMenuRef, nextMenuRef, menuContainerRef, fakeMenuRef, idsToNextMenuItems })
   globalObject.goDownInMenu = goDownInMenu
   globalObject.goUpInMenu = goUpInMenu
   useKeysForMenuNavigation()
@@ -60,13 +61,13 @@ type PropsForSC = {
 export const MenuStyled = styled.div<PropsForSC>`
   position: absolute;
   top: calc(100% + 5px);
-  right: -${props => props.theme.menu.navItem.marginRight}px;
+  right: -${theme.menu.navItem.marginRight}px;
   /* if right corner goes over the screen fix the left instead of right */
   left: ${props => props.isMenuOutsideWindow ? '0' : 'not set'};
-  width: ${props => props.theme.menu.width}px;
-  padding-top: ${props => props.theme.menu.paddingTop}px;
-  padding-bottom: ${props => props.theme.menu.paddingBottom}px;
-  background: rgb(52 52 52 / 98%);
+  width: ${theme.menu.width}px;
+  padding-top: ${theme.menu.paddingTop}px;
+  padding-bottom: ${theme.menu.paddingBottom}px;
+  background: ${theme.colors.darkBackground};
   backdrop-filter: blur(4px);
   border: 1px solid #474a4d;
   border-radius: 4px;

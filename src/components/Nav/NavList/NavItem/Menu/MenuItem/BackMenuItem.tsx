@@ -11,7 +11,7 @@ import { EventType } from '@src/types'
 export function BackMenuItem() {
   const dispatch = useDispatchTyped()
   const isHovered = useSelector(state => state.nav.menuItemHoverIndex === 1)
-  const color = theme.colors.closeAndBackMenuItems
+  const color = theme.colors.topMenuItem
 
   const onClickHandler = (e: EventType) => {
     e.preventDefault()
@@ -23,7 +23,7 @@ export function BackMenuItem() {
       to={'/'}
       onClick={onClickHandler}
       onMouseEnter={() => dispatch(setMenuItemHoverIndex(1))}
-      $isHovered={isHovered}
+      state={{ isHovered }}
     >
       <Icon icon={<LeftArrowIcon />} />
       <TextInMenu name={<span style={{ color }}>Back</span>} />
