@@ -4,10 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Typography, Container, Box, Grid, TextField, CssBaseline, Button, DialogContent, Dialog, InputAdornment, IconButton, Avatar } from '@mui/material'
 import mailcheck from 'mailcheck'
 import { theme } from '@src/theme'
-import { Visibility, VisibilityOff, Lock, Person } from '@mui/icons-material'
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
-// import PersonIcon from '@mui/icons-material/Person'
-// import LockIcon from '@mui/icons-material/Lock'
+import { Visibility, VisibilityOff, Lock, Person, LockOutlined } from '@mui/icons-material'
 
 export function Register() {
   const navigate = useNavigate()
@@ -131,7 +128,7 @@ export function Register() {
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }}>
-              <LockOutlinedIcon />
+              <LockOutlined />
             </Avatar>
             <Typography component="h1" variant="h5">
               Register
