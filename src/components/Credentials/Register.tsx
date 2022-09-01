@@ -113,7 +113,6 @@ export function Register() {
       open={open}
       keepMounted
       onClose={handleClose}
-      aria-describedby="alert-dialog-slide-description"
       BackdropProps={{ transitionDuration: 0 }}
     >
       <DialogContent>
@@ -205,7 +204,6 @@ export function Register() {
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
-                        aria-label="toggle password visibility"
                         onClick={() => setShowPassword(!showPassword)}
                         edge="end"
                       >
@@ -240,7 +238,6 @@ export function Register() {
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
-                        aria-label="toggle password visibility"
                         onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                         edge="end"
                       >
