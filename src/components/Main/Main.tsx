@@ -53,7 +53,7 @@ export function Main() {
     <MainStyled>
       <Outlet />
       <h3>Main component</h3>
-      <button onClick={() => notify('hi')}>say hi in bottom popup</button>
+      <button onClick={() => notify({ msg: 'hi' })}>say hi in bottom popup</button>
       <button onClick={getEmailFromDb}>get user's email from db</button>
       <button onClick={getUsersFromDb}>get users from db</button>
     </MainStyled>

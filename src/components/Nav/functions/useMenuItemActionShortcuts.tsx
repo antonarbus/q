@@ -64,7 +64,7 @@ export function useMenuItemActionShortcuts() {
       if (shortcutItem.link) {
         navigate(shortcutItem.link)
       }
-      notify(<><span style={{ color: 'orange' }}>{shortcutItem.name}</span> triggered with keyboard</>)
+      notify({ msg: <><span style={{ color: 'orange' }}>{shortcutItem.name}</span> triggered with keyboard</> })
     })
   })
 }
