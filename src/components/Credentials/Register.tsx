@@ -5,6 +5,7 @@ import { Typography, Container, Box, Grid, TextField, CssBaseline, Button, Dialo
 import mailcheck from 'mailcheck'
 import { theme } from '@src/theme'
 import { Visibility, VisibilityOff, Lock, Person, LockOutlined } from '@mui/icons-material'
+import { notify } from '@components/Notifier/notify'
 
 export function Register() {
   const navigate = useNavigate()
@@ -18,7 +19,6 @@ export function Register() {
   }
 
   // show password
-
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
@@ -99,13 +99,23 @@ export function Register() {
 
   async function registerUser(e: EventType) {
     e.preventDefault()
-    const method = 'POST'
-    const headers = { 'Content-Type': 'application/json' }
-    const body = JSON.stringify({ email: inputValue.email, password: inputValue.password })
-    const options = { method, headers, body }
-    const res = await fetch('/api/register', options)
-    const data = await res.json()
-    console.log(data)
+    try {
+      const method = 'POST'
+      const headers = { 'Content-Type': 'application/json' }
+      const { email, password } = inputValue
+      const body = JSON.stringify({ email, password })
+      const options = { method, headers, body }
+      const res = await fetch('/api/register', options)
+      const data = await res.json()
+      data.status === 'error' && data.message === 'user with such email already exists' && notify({ msg: 'Already registered', type: 'info', theme: 'light' })
+      data.status === 'ok' && notify({ msg: 'Registered! Check your email and confirm registration.', theme: 'light' })
+      console.log(data)
+    } catch (err) {
+      console.log(err)
+      notify({ msg: 'Registration failed', type: 'error', theme: 'light' })
+    } finally {
+      // remove spinner from the button
+    }
   }
 
   return (
@@ -259,7 +269,7 @@ export function Register() {
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link to="/login" >Sign in?</Link>
+                  <Link to="/login" >Have an account? Log in...</Link>
                 </Grid>
               </Grid>
             </Box>
