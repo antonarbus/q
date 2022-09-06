@@ -3,7 +3,7 @@ import { gsap } from 'gsap'
 type Props = {
   element: HTMLElement
   cb?: () => void
-  intoView: boolean
+  intoView?: boolean
 }
 
 let isAnimationPrevented = false // needed to avoid second click on backdrop which launches unwanted second animation

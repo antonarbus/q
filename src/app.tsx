@@ -27,7 +27,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <Route path="register" element={<Register />} />
             <Route path="reset" element={<Reset />} />
             <Route path="updatePassword" element={<UpdatePassword />} />
-            <Route path="default" element={<Dummy />} />
+            <Route path="dummy" element={<Dummy />} />
           </Route>
         </Routes>
         <Notifier />

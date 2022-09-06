@@ -108,7 +108,7 @@ export function Register() {
       const res = await fetch('/api/register', options)
       const data = await res.json()
       data.status === 'error' && data.message === 'user with such email already exists' && notify({ msg: 'Already registered', type: 'info', theme: 'light' })
-      data.status === 'ok' && notify({ msg: 'Registered! Check your email and confirm registration.', theme: 'light' })
+      data.status === 'ok' && notify({ msg: 'Check your email and confirm registration.', theme: 'light' })
       console.log(data)
     } catch (err) {
       console.log(err)

@@ -1,6 +1,5 @@
 import { EventType } from '@src/types'
 import { forwardRef, useState } from 'react'
-import styled from '@emotion/styled'
 import { Link, useNavigate } from 'react-router-dom'
 import Dialog from '@mui/material/Dialog'
 import DialogContent from '@mui/material/DialogContent'
@@ -16,7 +15,7 @@ import Box from '@mui/material/Box'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
-import { Fade, Zoom, Slide } from '@mui/material'
+import { Slide } from '@mui/material'
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & { children: React.ReactElement<any, any> },
@@ -106,7 +105,8 @@ export function Login() {
               <Box
                 component="form"
                 onSubmit={loginUser}
-                noValidate sx={{ mt: 1 }}
+                noValidate
+                sx={{ mt: 1 }}
               >
                 <TextField
                   margin="normal"
