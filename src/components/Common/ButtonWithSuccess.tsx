@@ -3,6 +3,7 @@ import { useRef } from 'react'
 import { CloseRounded, DoneRounded } from '@mui/icons-material'
 import { useUpdateEffect } from 'react-use'
 import { gsap } from 'gsap'
+import { Render } from './Render'
 
 type Props = {
   children?: React.ReactNode
@@ -54,7 +55,7 @@ export function ButtonWithSuccess({ children, content, circleProgressSize, disab
     >
       {children}
       {content}
-      {httpStatus === 'loading' && (
+      <Render when={httpStatus === 'loading'}>
         <CircularProgress
           size={circleProgressSize || 24}
           sx={{
@@ -62,8 +63,8 @@ export function ButtonWithSuccess({ children, content, circleProgressSize, disab
             position: 'absolute'
           }}
         />
-      )}
-      {httpStatus === 'success' && (
+      </Render>
+      <Render when={httpStatus === 'success'}>
         <div
           ref={successIconRef}
           css={{
@@ -75,8 +76,8 @@ export function ButtonWithSuccess({ children, content, circleProgressSize, disab
         >
           {<DoneRounded htmlColor='#fff' />}
         </div>
-      )}
-      {httpStatus === 'error' && (
+      </Render>
+      <Render when={httpStatus === 'error'}>
         <div
           ref={errorIconRef}
           css={{
@@ -88,7 +89,7 @@ export function ButtonWithSuccess({ children, content, circleProgressSize, disab
         >
           {<CloseRounded htmlColor='#fff' />}
         </div>
-      )}
+      </Render>
     </Button>
   )
 }
