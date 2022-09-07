@@ -63,9 +63,9 @@ export function Login() {
 
   const [open, setOpen] = useState(true)
 
-  const handleClickOpen = () => {
-    setOpen(true)
-  }
+  // const handleClickOpen = () => {
+  //   setOpen(true)
+  // }
 
   const handleClose = () => {
     setOpen(false)
