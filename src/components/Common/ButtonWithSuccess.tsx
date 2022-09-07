@@ -1,6 +1,6 @@
 import { Button, CircularProgress } from '@mui/material'
 import { useRef } from 'react'
-import { PriorityHighRounded, DoneRounded } from '@mui/icons-material'
+import { CloseRounded, DoneRounded } from '@mui/icons-material'
 import { useUpdateEffect } from 'react-use'
 import { gsap } from 'gsap'
 
@@ -86,7 +86,7 @@ export function ButtonWithSuccess({ children, content, circleProgressSize, disab
             background: '#f77d7d'
           }}
         >
-          {<PriorityHighRounded htmlColor='#fff' />}
+          {<CloseRounded htmlColor='#fff' />}
         </div>
       )}
     </Button>
