@@ -1,7 +1,7 @@
 import { EventType } from '@src/types'
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button, TextField } from '@mui/material'
+import { TextField } from '@mui/material'
 import { Backdrop } from '@components/Common/Backdrop'
 import { Card } from '@components/Common/Card'
 import { useSlideElement } from '@functions/useSlideElement'
@@ -63,18 +63,11 @@ export function Reset() {
             onChange={e => setEmail((e.target as HTMLInputElement).value)}
             inputRef={inputRef}
           />
-          <Button
-            type='submit'
-            variant='contained'
-            fullWidth
-            sx={{ mt: 3, mb: 2, alignSelf: 'center', padding: '10px' }}
-            children='Reset'
-          />
           <ButtonWithSuccess
             type='submit'
-            content='Reset'
             httpStatus={httpStatus}
             setHttpStatus={setHttpStatus}
+            content='Reset'
           />
         </form>
       </Card>

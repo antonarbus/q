@@ -1,11 +1,13 @@
 import { notify } from '@components/Notifier/notify'
 import { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
-import styled from '@emotion/styled'
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode'
 import axios from 'axios'
 import { axiosWithAuth } from '@src/axios/axios'
+import { useEffectOnce } from 'react-use'
+
+const mainCss = { border: '1px solid grey', borderRadius: '6px', padding: '10px', margin: '10px' }
 
 async function getEmailFromDb() {
   try {
@@ -29,16 +31,22 @@ async function getUsersFromDb() {
 }
 
 export function Main() {
-  useEffect(function isUserLoggedIn() {
+  useEffectOnce(function isUserLoggedIn() {
     async function refreshTokens() {
+      // todo: move function into 'functions' folder in a file of folder with credentials business logic
+      // todo: separate helper files by a business logic
       try {
-        if (!localStorage.getItem('accessJwtToken')) return
+        if (!localStorage.getItem('accessJwtToken')) return console.log('user is not logged in')
         const response = await axios.get('/api/refresh', { withCredentials: true })
-        if (!response.data.accessJwtToken) return
+        if (response.data.status === 'error') {
+          console.log(response.data.message)
+          localStorage.removeItem('accessJwtToken')
+        }
+        if (!response.data.accessJwtToken) return console.log(666)
         const accessJwtToken = response.data.accessJwtToken
         const jwtTokenPayload: {email: string | undefined} = jwt_decode(accessJwtToken)
         const { email } = jwtTokenPayload
-        if (!email) return
+        if (!email) return console.log('token is not valid')
         localStorage.setItem('accessJwtToken', response.data.accessJwtToken)
         console.log(response)
         console.log(`tokens for user with email: ${email} are refreshed`)
@@ -47,22 +55,15 @@ export function Main() {
       }
     }
     refreshTokens()
-  }, [])
+  })
 
   return (
-    <MainStyled>
+    <main css={mainCss}>
       <Outlet />
       <h3>Main component</h3>
       <button onClick={() => notify({ msg: 'hi' })}>say hi in bottom popup</button>
       <button onClick={getEmailFromDb}>get user's email from db</button>
       <button onClick={getUsersFromDb}>get users from db</button>
-    </MainStyled>
+    </main>
   )
 }
-
-const MainStyled = styled.main`
-  border: 1px solid grey;
-  border-radius: 6px;
-  padding: 10px;
-  margin: 10px;
-`
