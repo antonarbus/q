@@ -1,3 +1,4 @@
+// server.ts
 import 'dotenv/config'
 import express, { Request as ReqType, Response as ResType, NextFunction as NextType } from 'express'
 import morgan from 'morgan'
@@ -39,7 +40,4 @@ app.use(errorHandler)
 const port = process.env.PORT_BACK_END
 const domain = process.env.DOMAIN
 
-app.listen(port, () => console.log(`server started at ${domain}:${port}`)).on('error', function () {
-  // process.once('SIGUSR2', () => process.kill(process.pid, 'SIGUSR2'))
-  // process.on('SIGINT', () => process.kill(process.pid, 'SIGINT'))
-})
+app.listen(port, () => console.log(`server started at ${domain}:${port}`))

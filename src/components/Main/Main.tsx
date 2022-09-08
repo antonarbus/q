@@ -1,5 +1,4 @@
 import { notify } from '@components/Notifier/notify'
-import { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode'

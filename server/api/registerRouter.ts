@@ -1,3 +1,4 @@
+// registerRouter.ts
 import express, { Request as ReqType, Response as ResType, NextFunction as NextType } from 'express'
 // import { connectToDb } from '../db/connectToDb'
 import { UserModel } from '../db/models/user.model'

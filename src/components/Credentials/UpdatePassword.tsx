@@ -36,21 +36,21 @@ export function UpdatePassword() {
   async function loginUser(e: EventType) {
     e.preventDefault()
     alert('Update password form')
-    const method = 'POST'
-    const headers = { 'Content-Type': 'application/json' }
-    const { email, password } = credentials
-    const body = JSON.stringify({ email, password })
-    const options = { method, headers, body }
-    const res = await fetch('/api/login', options)
-    const data = await res.json()
-    console.log(data)
-    if (data.status === 'error') {
-      alert(data.message)
-      return localStorage.removeItem('accessJwtToken')
-    }
-    localStorage.setItem('accessJwtToken', data.accessJwtToken)
-    alert('logged in')
-    navigate('/')
+    // const method = 'POST'
+    // const headers = { 'Content-Type': 'application/json' }
+    // const { email, password } = credentials
+    // const body = JSON.stringify({ email, password })
+    // const options = { method, headers, body }
+    // const res = await fetch('/api/login', options)
+    // const data = await res.json()
+    // console.log(data)
+    // if (data.status === 'error') {
+    //   alert(data.message)
+    //   return localStorage.removeItem('accessJwtToken')
+    // }
+    // localStorage.setItem('accessJwtToken', data.accessJwtToken)
+    // alert('logged in')
+    // navigate('/')
   }
 
   const [open, setOpen] = useState(true)
