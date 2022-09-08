@@ -1,3 +1,4 @@
+// jwt.ts
 import jwt, { JwtPayload } from 'jsonwebtoken'
 
 const accessJwtTokenExpirationSeconds = 15 * 60 // 15 min
