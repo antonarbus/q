@@ -1,4 +1,4 @@
-import { EventType } from '@src/types'
+import { EventType, httpStatusType } from '@src/types'
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { TextField } from '@mui/material'
@@ -13,7 +13,6 @@ export function Reset() {
   const [email, setEmail] = useState('')
   const cardRef = useRef() as React.MutableRefObject<HTMLDivElement>
   const inputRef = useRef() as React.MutableRefObject<HTMLDivElement>
-  type httpStatusType = 'loading' | 'error' | 'success' | ''
   const [httpStatus, setHttpStatus] = useState<httpStatusType>('')
 
   async function mailResetPasswordLink(e: EventType) {
