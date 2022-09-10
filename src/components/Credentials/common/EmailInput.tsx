@@ -5,26 +5,31 @@ import { InputAdornment, TextField } from '@mui/material'
 import { Person } from '@mui/icons-material'
 import { theme } from '@src/theme'
 import { EventType } from '@src/types'
+import { Render } from '@components/Common/Render'
 
 const isEmailPatternOk = (email: string) => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
 
 type Props = {
   email: string
   setEmail: (value: string) => void
+  isEmailOk: boolean
+  setIsEmailOk: (value: boolean) => void
 }
 
-export function EmailInput({ email, setEmail }: Props) {
-  // input value
-  const handleEmailChange = (e: EventType) => {
-    const target = (e.target as HTMLInputElement)
-    setEmail(target.value)
-  }
+/**
+ * Email input field with pattern validation and email suggestion
+ * @param props props
+ * @param props.email email string value state
+ * @param props.setEmail email state setter
+ * @param props.isEmailOk  email pattern check state, may be needed to disable action button
+ * @param props.setIsEmailOk state setter for email pattern check
+ */
 
+export function EmailInput({ email, setEmail, isEmailOk, setIsEmailOk }: Props) {
   // input focused out ones (show validation msg only after first focus out)
   const [inputFocusedOutOnes, setInputFocusedOutOnes] = useState(false)
 
   // is email pattern ok
-  const [isEmailOk, setIsEmailOk] = useState(false)
   useUpdateEffect(function checkIfEmailPatternIsOk() {
     isEmailPatternOk(email) ? setIsEmailOk(true) : setIsEmailOk(false)
   }, [email])
@@ -57,7 +62,7 @@ export function EmailInput({ email, setEmail }: Props) {
         autoComplete="email"
         placeholder='Email'
         value={email}
-        onChange={handleEmailChange}
+        onChange={(e: EventType) => setEmail((e.target as HTMLInputElement).value)}
         onBlur={() => {
           setInputFocusedOutOnes(true)
           suggestEmail()
@@ -73,7 +78,7 @@ export function EmailInput({ email, setEmail }: Props) {
           mb: 2
         }}
       />
-      {emailSuggestion && (
+      <Render when={!!emailSuggestion}>
         <div css={{ position: 'absolute', bottom: '18px', right: '5px', fontSize: '12px', color: theme.colors.red }} >
           Did you mean? {' '}
           <a
@@ -87,7 +92,7 @@ export function EmailInput({ email, setEmail }: Props) {
             {emailSuggestion}
           </a>
         </div>
-      )}
+      </Render>
     </div>
   )
 }
