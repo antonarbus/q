@@ -14,7 +14,7 @@ type Params = {
 
 export function notify({ msg, position, hideProgressBar, shouldStay, closeAfterMs, type, theme, transition }: Params) {
   const options = {
-    position: position || 'bottom-center',
+    position: position || 'top-right',
     autoClose: shouldStay ? false : (closeAfterMs || 5000) as any,
     delay: 0,
     hideProgressBar: hideProgressBar || false,
@@ -36,7 +36,7 @@ export function notify({ msg, position, hideProgressBar, shouldStay, closeAfterM
             ? Flip
             : transition === 'zoom'
               ? Zoom
-              : Slide
+              : Bounce
   }
 
   if (type === undefined || type === 'success') {

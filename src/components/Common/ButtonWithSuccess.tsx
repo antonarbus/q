@@ -18,8 +18,7 @@ type Props = {
   setError?: any
   httpStatus?: 'loading' | 'error' | 'success' | ''
   setHttpStatus?: any
-  // All other props
-  [x:string]: any;
+  [x:string]: any // all other ...restProps props
 }
 
 export function ButtonWithSuccess({ children, content, circleProgressSize, disabled, httpStatus, setHttpStatus, ...restProps }: Props) {
@@ -47,10 +46,10 @@ export function ButtonWithSuccess({ children, content, circleProgressSize, disab
   return (
     <Button
       variant="contained"
-      disabled={httpStatus !== '' || disabled}
+      disabled={(httpStatus && ['loading', 'error', 'success'].includes(httpStatus)) || disabled}
       type='submit'
       fullWidth
-      sx={{ mt: 3, mb: 2, alignSelf: 'center', padding: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+      sx={{ alignSelf: 'center', padding: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       {...restProps}
     >
       {children}
