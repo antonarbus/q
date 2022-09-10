@@ -6,6 +6,7 @@ import mailcheck from 'mailcheck'
 import { theme } from '@src/theme'
 import { Visibility, VisibilityOff, Lock, Person, LockOutlined } from '@mui/icons-material'
 import { notify } from '@components/Notifier/notify'
+import { EmailInput } from './useEmailInput'
 
 export function Register() {
   const navigate = useNavigate()
@@ -28,6 +29,7 @@ export function Register() {
     const target = (e.target as HTMLInputElement)
     setInputValue({ ...inputValue, [target.name]: target.value })
   }
+  const [email, setEmail] = useState('')
 
   // input focused out ones (show validation msg only after first focus out)
   const [inputFocusedOutOnes, setInputFocusedOutOnes] = useState({ email: false, password: false, confirmPassword: false })
@@ -41,26 +43,20 @@ export function Register() {
 
   const [isEmailOk, setIsEmailOk] = useState(false)
   useEffect(() => {
-    isEmailPatternOk(inputValue.email)
-      ? setIsEmailOk(true)
-      : setIsEmailOk(false)
+    isEmailPatternOk(inputValue.email) ? setIsEmailOk(true) : setIsEmailOk(false)
   }, [inputValue.email])
 
   // is confirmPassword ok?
   const [isConfirmPasswordOk, setIsConfirmPasswordOk] = useState(false)
   useEffect(() => {
-    (inputValue.password !== '' && inputValue.password === inputValue.confirmPassword)
-      ? setIsConfirmPasswordOk(true)
-      : setIsConfirmPasswordOk(false)
+    (inputValue.password !== '' && inputValue.password === inputValue.confirmPassword) ? setIsConfirmPasswordOk(true) : setIsConfirmPasswordOk(false)
   }, [inputValue.password, inputValue.confirmPassword])
 
   // validation msg for email
   const initEmailLabel = 'Email'
   const [emailLabel, setEmailLabel] = useState(initEmailLabel)
   useEffect(() => {
-    (inputFocusedOutOnes.email && inputValue.email !== '' && !isEmailOk)
-      ? setEmailLabel('Check email pattern')
-      : setEmailLabel(initEmailLabel)
+    (inputFocusedOutOnes.email && inputValue.email !== '' && !isEmailOk) ? setEmailLabel('Check email pattern') : setEmailLabel(initEmailLabel)
   }, [inputValue.email, inputFocusedOutOnes.email, isEmailOk])
 
   // validation msg for password confirmation
@@ -148,51 +144,7 @@ export function Register() {
               onSubmit={registerUser}
               sx={{ mt: 3 }}
             >
-              <div css={{ position: 'relative' }}>
-                <TextField
-                  fullWidth
-                  id="email"
-                  label={emailLabel}
-                  name="email"
-                  autoComplete="email"
-                  placeholder='Email'
-                  value={inputValue.email}
-                  onChange={handleInputValueChange}
-                  onBlur={(e) => {
-                    handleInputFocusedOutOnes(e)
-                    suggestEmail()
-                  }}
-                  autoFocus
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <Person />
-                      </InputAdornment>
-                    )
-                  }}
-                  css={{
-                    '& .MuiInputLabel-shrink': {
-                      color: (emailLabel !== initEmailLabel) ? theme.colors.red : ''
-                    }
-                  }}
-                  sx={{ mb: 2 }}
-                />
-                {emailSuggestion && (
-                  <div css={{ position: 'absolute', bottom: '18px', right: '5px', fontSize: '12px', color: theme.colors.red }} >
-                    Did you mean? {' '}
-                    <a
-                      style={{ textDecoration: 'underline' }}
-                      onClick={(e) => {
-                        e.preventDefault()
-                        setInputValue({ ...inputValue, email: emailSuggestion })
-                        suggestEmail(emailSuggestion)
-                      }}
-                    >
-                      {emailSuggestion}
-                    </a>
-                  </div>
-                )}
-              </div>
+              <EmailInput email={email} setEmail={setEmail}/>
               <TextField
                 fullWidth
                 name="password"
