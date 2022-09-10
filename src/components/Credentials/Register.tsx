@@ -1,12 +1,13 @@
 import { EventType } from '@src/types'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Typography, Container, Box, Grid, TextField, CssBaseline, Button, DialogContent, Dialog, InputAdornment, IconButton, Avatar } from '@mui/material'
-import mailcheck from 'mailcheck'
+import { Typography, Container, Box, Grid, CssBaseline, Button, DialogContent, Dialog, Avatar } from '@mui/material'
 import { theme } from '@src/theme'
-import { Visibility, VisibilityOff, Lock, Person, LockOutlined } from '@mui/icons-material'
+import { LockOutlined } from '@mui/icons-material'
 import { notify } from '@components/Notifier/notify'
-import { EmailInput } from './useEmailInput'
+import { EmailInput } from './common/EmailInput'
+import { PasswordInput } from './common/PasswordInput'
+import { ConfirmPasswordInput } from './common/ConfirmPasswordInput'
 
 export function Register() {
   const navigate = useNavigate()
@@ -19,86 +20,27 @@ export function Register() {
     navigate('/')
   }
 
-  // show password
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-
   // input values
-  const [inputValue, setInputValue] = useState({ email: '', password: '', confirmPassword: '' })
-  const handleInputValueChange = (e: EventType) => {
-    const target = (e.target as HTMLInputElement)
-    setInputValue({ ...inputValue, [target.name]: target.value })
-  }
+
   const [email, setEmail] = useState('')
-
-  // input focused out ones (show validation msg only after first focus out)
-  const [inputFocusedOutOnes, setInputFocusedOutOnes] = useState({ email: false, password: false, confirmPassword: false })
-  const handleInputFocusedOutOnes = (e: EventType) => {
-    const target = (e.target as HTMLInputElement)
-    setInputFocusedOutOnes({ ...inputFocusedOutOnes, [target.name]: true })
-  }
-
-  // is email ok?
-  const isEmailPatternOk = (email: string) => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
-
   const [isEmailOk, setIsEmailOk] = useState(false)
-  useEffect(() => {
-    isEmailPatternOk(inputValue.email) ? setIsEmailOk(true) : setIsEmailOk(false)
-  }, [inputValue.email])
-
-  // is confirmPassword ok?
+  const [password, setPassword] = useState('')
   const [isConfirmPasswordOk, setIsConfirmPasswordOk] = useState(false)
-  useEffect(() => {
-    (inputValue.password !== '' && inputValue.password === inputValue.confirmPassword) ? setIsConfirmPasswordOk(true) : setIsConfirmPasswordOk(false)
-  }, [inputValue.password, inputValue.confirmPassword])
-
-  // validation msg for email
-  const initEmailLabel = 'Email'
-  const [emailLabel, setEmailLabel] = useState(initEmailLabel)
-  useEffect(() => {
-    (inputFocusedOutOnes.email && inputValue.email !== '' && !isEmailOk) ? setEmailLabel('Check email pattern') : setEmailLabel(initEmailLabel)
-  }, [inputValue.email, inputFocusedOutOnes.email, isEmailOk])
-
-  // validation msg for password confirmation
-  const initConfirmPasswordLabel = 'Confirm password'
-  const [confirmPasswordLabel, setConfirmPasswordLabel] = useState(initConfirmPasswordLabel)
-  useEffect(() => {
-    inputFocusedOutOnes.confirmPassword && inputValue.password !== '' && inputValue.confirmPassword !== '' && !isConfirmPasswordOk
-      ? setConfirmPasswordLabel('Passwords do not match')
-      : setConfirmPasswordLabel(initConfirmPasswordLabel)
-  }, [inputFocusedOutOnes.confirmPassword, inputValue.password, inputValue.confirmPassword, isConfirmPasswordOk])
-
-  // todo: email pattern check move to a custom hook (useEmailValidation), it should be used in 3 places
-
-  // email suggestion
-  const [emailSuggestion, setEmailSuggestion] = useState('')
-
-  const suggestEmail = (email?: string) => {
-    mailcheck.run({
-      email: email || inputValue.email,
-      suggested: function (suggestion: any) {
-        setEmailSuggestion(suggestion.full)
-      },
-      empty: function () {
-        setEmailSuggestion('')
-      }
-    })
-  }
 
   // disable button
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
-  useEffect(() => {
-    isEmailOk && isConfirmPasswordOk
-      ? setIsButtonDisabled(false)
-      : setIsButtonDisabled(true)
-  }, [isEmailOk, isConfirmPasswordOk])
+  useEffect(() => setIsButtonDisabled(!(isEmailOk && isConfirmPasswordOk)), [isEmailOk, isConfirmPasswordOk])
 
-  async function registerUser(e: EventType) {
+  type Props = {
+    e: EventType
+    email: string
+    password: string
+  }
+  async function registerUser({ e, email, password }: Props) {
     e.preventDefault()
     try {
       const method = 'POST'
       const headers = { 'Content-Type': 'application/json' }
-      const { email, password } = inputValue
       const body = JSON.stringify({ email, password })
       const options = { method, headers, body }
       const res = await fetch('/api/register', options)
@@ -114,6 +56,10 @@ export function Register() {
     }
   }
 
+  // todo: use my custom button with success and error state
+  // todo: use custom card with animation
+  // todo: remove Grid
+
   return (
     <Dialog
       open={open}
@@ -124,91 +70,18 @@ export function Register() {
       <DialogContent>
         <Container maxWidth="xs">
           <CssBaseline />
-          <Box
-            sx={{
-              marginTop: '10px',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center'
-            }}
-          >
-            <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }}>
-              <LockOutlined />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Register
-            </Typography>
+          <Box sx={{ marginTop: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
+            <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }}><LockOutlined /></Avatar>
+            <Typography component="h1" variant="h5">Register</Typography>
             <Box
               component="form"
               noValidate
-              onSubmit={registerUser}
+              onSubmit={(e: EventType) => registerUser({ e, email, password })}
               sx={{ mt: 3 }}
             >
-              <EmailInput email={email} setEmail={setEmail}/>
-              <TextField
-                fullWidth
-                name="password"
-                label='Password'
-                type={showPassword ? 'text' : 'password'}
-                id="password"
-                autoComplete="new-password"
-                placeholder='Password'
-                value={inputValue.password}
-                onChange={handleInputValueChange}
-                onBlur={handleInputFocusedOutOnes}
-                sx={{ mb: 2 }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Lock />
-                    </InputAdornment>
-                  ),
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        onClick={() => setShowPassword(!showPassword)}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  )
-                }}
-              />
-              <TextField
-                fullWidth
-                name="confirmPassword"
-                label={confirmPasswordLabel}
-                type={showConfirmPassword ? 'text' : 'password'}
-                id="confirmPassword"
-                autoComplete="new-password"
-                placeholder='Password'
-                value={inputValue.confirmPassword}
-                onChange={handleInputValueChange}
-                onBlur={handleInputFocusedOutOnes}
-                css={{
-                  '& .MuiInputLabel-shrink': {
-                    color: (confirmPasswordLabel !== initConfirmPasswordLabel) ? theme.colors.red : ''
-                  }
-                }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Lock />
-                    </InputAdornment>
-                  ),
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                        edge="end"
-                      >
-                        {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  )
-                }}
-              />
+              <EmailInput email={email} setEmail={setEmail} isEmailOk={isEmailOk} setIsEmailOk={setIsEmailOk} />
+              <PasswordInput password={password} setPassword={setPassword} />
+              <ConfirmPasswordInput originalPassword={password} isConfirmPasswordOk={isConfirmPasswordOk} setIsConfirmPasswordOk={setIsConfirmPasswordOk} />
               <Button
                 type="submit"
                 fullWidth
@@ -221,7 +94,7 @@ export function Register() {
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link to="/login" >Have an account? Log in...</Link>
+                  <Link to="/login">Have an account? Log in...</Link>
                 </Grid>
               </Grid>
             </Box>
