@@ -1,13 +1,11 @@
 import { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
-import { useTheme } from '@emotion/react'
 import styled from '@emotion/styled'
 import { decrement, increment } from '@slices/counterSlice'
 import { login } from '@slices/loginSlice'
 import { fetchUsers } from '@slices/usersSlice'
 import { useDispatchTyped, useSelectorTyped } from '@store/storeHooks'
-import { Backdrop } from '@components/Common/Backdrop'
 import { theme } from '@src/theme'
 
 /**

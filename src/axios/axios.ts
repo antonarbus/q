@@ -1,3 +1,4 @@
+// axios.ts
 import axios from 'axios'
 
 export const axiosWithAuth = axios.create({ withCredentials: true })
