@@ -1,5 +1,5 @@
 import { slideElement } from '@functions/slideElement'
-import { useRef } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 
 type Props = {
@@ -21,7 +21,8 @@ type Props = {
 
 export const BackdropWithSlidableContent = ({ children, content, onSlideIn, onSlideOut }: Props) => {
   const contentRef = useRef() as React.MutableRefObject<HTMLDivElement>
-  useEffectOnce(() => slideElement({ intoView: true, element: contentRef.current, cb: () => onSlideIn && onSlideIn() }))
+  // useEffectOnce(() => slideElement({ intoView: true, element: contentRef.current, cb: () => onSlideIn && onSlideIn() }))
+  useLayoutEffect(() => slideElement({ intoView: true, element: contentRef.current, cb: () => onSlideIn && onSlideIn() }), [])
 
   useEffectOnce(function slideOutOnEscBtn() {
     const slideAway = (e: KeyboardEvent) => e.key === 'Escape' && slideElement({ element: contentRef.current, cb: () => onSlideOut && onSlideOut() })
