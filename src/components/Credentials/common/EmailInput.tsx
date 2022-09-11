@@ -14,6 +14,7 @@ type Props = {
   setEmail: (value: string) => void
   isEmailOk: boolean
   setIsEmailOk: (value: boolean) => void
+  inputRef?: React.MutableRefObject<HTMLDivElement>
 }
 
 /**
@@ -23,9 +24,10 @@ type Props = {
  * @param props.setEmail email state setter
  * @param props.isEmailOk  email pattern check state, may be needed to disable action button
  * @param props.setIsEmailOk state setter for email pattern check
+ * @param props.inputRef reference to the input element, for ex. to put a focus on
  */
 
-export function EmailInput({ email, setEmail, isEmailOk, setIsEmailOk }: Props) {
+export function EmailInput({ email, setEmail, isEmailOk, setIsEmailOk, inputRef }: Props) {
   // input focused out ones (show validation msg only after first focus out)
   const [inputFocusedOutOnes, setInputFocusedOutOnes] = useState(false)
 
@@ -67,7 +69,7 @@ export function EmailInput({ email, setEmail, isEmailOk, setIsEmailOk }: Props) 
           setInputFocusedOutOnes(true)
           suggestEmail()
         }}
-        autoFocus
+        // autoFocus
         InputProps={{
           startAdornment: <InputAdornment position="start"><Person /></InputAdornment>
         }}
@@ -77,6 +79,7 @@ export function EmailInput({ email, setEmail, isEmailOk, setIsEmailOk }: Props) 
           },
           mb: 2
         }}
+        inputRef={inputRef}
       />
       <Render when={!!emailSuggestion}>
         <div css={{ position: 'absolute', bottom: '18px', right: '5px', fontSize: '12px', color: theme.colors.red }} >
