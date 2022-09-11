@@ -11,17 +11,22 @@ import { ButtonCustom } from '@components/Common/ButtonCustom'
 import { useRegisterUser } from './useRegister'
 import { BackdropWithSlidableContent } from '@components/Common/BackdropWithSlidableContent'
 import { CardCustom } from '@components/Common/CardCustom'
+import { slideElement } from '@functions/slideElement'
 
 export function Register() {
   const [email, setEmail] = useState('')
   const inputRef = useRef() as React.MutableRefObject<HTMLDivElement>
+  const cardRef = useRef() as React.MutableRefObject<HTMLDivElement>
   const [isEmailOk, setIsEmailOk] = useState(false)
   const [password, setPassword] = useState('')
   const [isConfirmPasswordOk, setIsConfirmPasswordOk] = useState(false)
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
   const { registerUser, httpStatus, setHttpStatus } = useRegisterUser()
-  useEffect(() => setIsButtonDisabled(!(isEmailOk && isConfirmPasswordOk)), [isEmailOk, isConfirmPasswordOk])
   const navigate = useNavigate()
+  useEffect(
+    () => setIsButtonDisabled(!(isEmailOk && isConfirmPasswordOk)),
+    [isEmailOk, isConfirmPasswordOk]
+  )
 
   return (
     <BackdropWithSlidableContent
@@ -29,15 +34,49 @@ export function Register() {
       onSlideOut={() => navigate('/')}
     >
       <CardCustom
-        title='Register'
-        logo={<Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }}><LockOutlined /></Avatar>}
+        title="Register"
+        logo={
+          <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }}>
+            <LockOutlined />
+          </Avatar>
+        }
+        reference={cardRef}
       >
-        <form onSubmit={(e: EventType) => registerUser({ e, email, password })}>
-          <EmailInput email={email} setEmail={setEmail} isEmailOk={isEmailOk} setIsEmailOk={setIsEmailOk} inputRef={inputRef} />
-          <PasswordInput password={password} setPassword={setPassword} />
-          <ConfirmPasswordInput originalPassword={password} isConfirmPasswordOk={isConfirmPasswordOk} setIsConfirmPasswordOk={setIsConfirmPasswordOk} />
-          <ButtonCustom content='SIGN UP' disabled={isButtonDisabled} httpStatus={httpStatus} setHttpStatus={setHttpStatus} />
-          <div css={{ textAlign: 'right', marginTop: '20px' }}><Link to="/login" style={{ alignSelf: 'flex-end' }}>Have an account? Log in...</Link></div>
+        <form onSubmit={(e: EventType) => registerUser({ e, email, password })} >
+          <EmailInput
+            email={email}
+            setEmail={setEmail}
+            isEmailOk={isEmailOk}
+            setIsEmailOk={setIsEmailOk}
+            inputRef={inputRef}
+          />
+          <PasswordInput
+            password={password}
+            setPassword={setPassword}
+          />
+          <ConfirmPasswordInput
+            originalPassword={password}
+            isConfirmPasswordOk={isConfirmPasswordOk}
+            setIsConfirmPasswordOk={setIsConfirmPasswordOk}
+          />
+          <ButtonCustom
+            content="SIGN UP"
+            disabled={isButtonDisabled}
+            httpStatus={httpStatus}
+            setHttpStatus={setHttpStatus}
+          />
+          <div css={{ textAlign: 'right', marginTop: '20px' }}>
+            <Link
+              to="/login"
+              style={{ alignSelf: 'flex-end' }}
+              onClick={(e: EventType) => {
+                e.preventDefault()
+                slideElement({ element: cardRef.current, cb: () => navigate('/login') })
+              }}
+            >
+              Have an account? Log in...
+            </Link>
+          </div>
         </form>
       </CardCustom>
     </BackdropWithSlidableContent>
