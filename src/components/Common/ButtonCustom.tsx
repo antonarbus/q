@@ -21,7 +21,7 @@ type Props = {
   [x:string]: any // all other ...restProps props
 }
 
-export function ButtonWithSuccess({ children, content, circleProgressSize, disabled, httpStatus, setHttpStatus, ...restProps }: Props) {
+export function ButtonCustom({ children, content, circleProgressSize, disabled, httpStatus, setHttpStatus, ...restProps }: Props) {
   const successIconRef = useRef() as React.MutableRefObject<HTMLDivElement>
   const errorIconRef = useRef() as React.MutableRefObject<HTMLDivElement>
 
