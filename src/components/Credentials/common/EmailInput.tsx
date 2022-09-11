@@ -69,7 +69,6 @@ export function EmailInput({ email, setEmail, isEmailOk, setIsEmailOk, inputRef 
           setInputFocusedOutOnes(true)
           suggestEmail()
         }}
-        // autoFocus
         InputProps={{
           startAdornment: <InputAdornment position="start"><Person /></InputAdornment>
         }}

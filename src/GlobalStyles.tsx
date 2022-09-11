@@ -108,6 +108,16 @@ export const GlobalStyles = () => (
       :where([draggable="true"]) {
         -webkit-user-drag: element;
       }
+
+      /* hack to disable autofill color on input
+      https://stackoverflow.com/questions/2781549/removing-input-background-colour-for-chrome-autocomplete */
+      input:-webkit-autofill,
+      input:-webkit-autofill:focus {
+          transition: background-color 600000s 0s, color 600000s 0s;
+      }
+      input[data-autocompleted] {
+          background-color: transparent !important;
+      }
     `}
   />
 )
