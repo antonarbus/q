@@ -6,6 +6,7 @@ type Props = {
   cssProps?: React.CSSProperties
   reference?: React.MutableRefObject<HTMLDivElement>
   title?: string | React.ReactNode
+  logo?: React.ReactNode
 }
 
 /**
@@ -13,10 +14,12 @@ type Props = {
  * @param props object with parameters
  * @param props.children anything, goes inside tags
  * @param props.content anything, same, but goes as a prop
- * @param props.cssProps object with css properties, will be added to the existing ones
+ * @param props.cssProps css object props to be added to the existing ones
+ * @param props.title title
+ * @param props.logo logo component
 */
 
-export const CardCustom = ({ children, content, cssProps, reference, title }: Props) => (
+export const CardCustom = ({ children, content, cssProps, reference, title, logo }: Props) => (
   <div
     css={{
       display: 'flex',
@@ -42,6 +45,7 @@ export const CardCustom = ({ children, content, cssProps, reference, title }: Pr
     onMouseDown={(e) => e.stopPropagation()}
     ref={reference}
   >
+    {logo && <div css={{ alignSelf: 'center' }}>{logo}</div>}
     {title && (
       <Typography
         component='h1'
