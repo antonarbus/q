@@ -1,4 +1,3 @@
-
 type Props = {
   onMouseDown: any
   children?: React.ReactNode
@@ -15,7 +14,7 @@ type Props = {
  * @param props.color color for background
 */
 
-export const Backdrop = ({ onMouseDown, children, content, color }: Props) => (
+export const BackdropCustom = ({ onMouseDown, children, content, color }: Props) => (
   <div
     onMouseDown={onMouseDown}
     css={{

@@ -2,11 +2,11 @@ import { EventType, httpStatusType } from '@src/types'
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { TextField } from '@mui/material'
-import { Backdrop } from '@components/Common/Backdrop'
-import { Card } from '@components/Common/Card'
+import { BackdropCustom } from '@components/Common/BackdropCustom'
+import { CardCustom } from '@components/Common/CardCustom'
 import { useSlideElement } from '@functions/useSlideElement'
 import { useEffectOnce } from 'react-use'
-import { ButtonWithSuccess } from '@components/Common/ButtonWithSuccess'
+import { ButtonCustom } from '@components/Common/ButtonCustom'
 
 export function Reset() {
   const navigate = useNavigate()
@@ -40,13 +40,15 @@ export function Reset() {
     }
   }
 
+  // todo: probably add slide element prop right into BackdropCustom component
+
   useEffectOnce(() => useSlideElement({ intoView: true, element: cardRef.current, cb: () => inputRef.current.focus() }))
 
   return (
-    <Backdrop
+    <BackdropCustom
       onMouseDown={() => useSlideElement({ element: cardRef.current, cb: () => navigate('/') })}
     >
-      <Card
+      <CardCustom
         reference={cardRef}
         title='Reset password'
       >
@@ -62,14 +64,14 @@ export function Reset() {
             onChange={e => setEmail((e.target as HTMLInputElement).value)}
             inputRef={inputRef}
           />
-          <ButtonWithSuccess
+          <ButtonCustom
             type='submit'
             httpStatus={httpStatus}
             setHttpStatus={setHttpStatus}
             content='Reset'
           />
         </form>
-      </Card>
-    </Backdrop>
+      </CardCustom>
+    </BackdropCustom>
   )
 }

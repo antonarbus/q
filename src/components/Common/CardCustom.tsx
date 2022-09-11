@@ -16,7 +16,7 @@ type Props = {
  * @param props.cssProps object with css properties, will be added to the existing ones
 */
 
-export const Card = ({ children, content, cssProps, reference, title }: Props) => (
+export const CardCustom = ({ children, content, cssProps, reference, title }: Props) => (
   <div
     css={{
       display: 'flex',

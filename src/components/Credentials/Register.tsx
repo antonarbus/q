@@ -7,7 +7,7 @@ import { LockOutlined } from '@mui/icons-material'
 import { EmailInput } from './common/EmailInput'
 import { PasswordInput } from './common/PasswordInput'
 import { ConfirmPasswordInput } from './common/ConfirmPasswordInput'
-import { ButtonWithSuccess } from '@components/Common/ButtonWithSuccess'
+import { ButtonCustom } from '@components/Common/ButtonCustom'
 import { useRegisterUser } from './useRegister'
 
 export function Register() {
@@ -47,7 +47,7 @@ export function Register() {
               <EmailInput email={email} setEmail={setEmail} isEmailOk={isEmailOk} setIsEmailOk={setIsEmailOk} />
               <PasswordInput password={password} setPassword={setPassword} />
               <ConfirmPasswordInput originalPassword={password} isConfirmPasswordOk={isConfirmPasswordOk} setIsConfirmPasswordOk={setIsConfirmPasswordOk} />
-              <ButtonWithSuccess content='SIGN UP' disabled={isButtonDisabled} httpStatus={httpStatus} setHttpStatus={setHttpStatus} />
+              <ButtonCustom content='SIGN UP' disabled={isButtonDisabled} httpStatus={httpStatus} setHttpStatus={setHttpStatus} />
               <div css={{ textAlign: 'right', marginTop: '20px' }}><Link to="/login" style={{ alignSelf: 'flex-end' }}>Have an account? Log in...</Link></div>
             </form>
           </Box>
