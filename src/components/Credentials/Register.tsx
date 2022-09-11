@@ -1,14 +1,14 @@
-import { EventType, httpStatusType } from '@src/types'
+import { EventType } from '@src/types'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Typography, Container, Box, Grid, CssBaseline, Button, DialogContent, Dialog, Avatar } from '@mui/material'
+import { Typography, Container, Box, DialogContent, Dialog, Avatar } from '@mui/material'
 import { theme } from '@src/theme'
 import { LockOutlined } from '@mui/icons-material'
-import { notify } from '@components/Notifier/notify'
 import { EmailInput } from './common/EmailInput'
 import { PasswordInput } from './common/PasswordInput'
 import { ConfirmPasswordInput } from './common/ConfirmPasswordInput'
 import { ButtonWithSuccess } from '@components/Common/ButtonWithSuccess'
+import { useRegisterUser } from './useRegister'
 
 export function Register() {
   const navigate = useNavigate()
@@ -26,38 +26,10 @@ export function Register() {
   const [password, setPassword] = useState('')
   const [isConfirmPasswordOk, setIsConfirmPasswordOk] = useState(false)
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
+  const { registerUser, httpStatus, setHttpStatus } = useRegisterUser()
   useEffect(() => setIsButtonDisabled(!(isEmailOk && isConfirmPasswordOk)), [isEmailOk, isConfirmPasswordOk])
-  const [httpStatus, setHttpStatus] = useState<httpStatusType>('')
-
-  type Props = {
-    e: EventType
-    email: string
-    password: string
-  }
-  async function registerUser({ e, email, password }: Props) {
-    e.preventDefault()
-    const method = 'POST'
-    const headers = { 'Content-Type': 'application/json' }
-    const body = JSON.stringify({ email, password })
-    const options = { method, headers, body }
-    try {
-      setHttpStatus('loading')
-      const res = await fetch('/api/register', options)
-      const data = await res.json()
-      data.status === 'error' && setHttpStatus('error')
-      data.status === 'error' && data.message === 'user with such email already exists' && notify({ msg: 'Already registered', type: 'info', theme: 'light' })
-      data.status === 'ok' && setHttpStatus('success')
-      data.status === 'ok' && notify({ msg: 'Check your email and confirm registration.', theme: 'light' })
-      console.log(data)
-    } catch (err) {
-      setHttpStatus('error')
-      console.log(err)
-      notify({ msg: 'Registration failed', type: 'error', theme: 'light' })
-    }
-  }
 
   // todo: use custom card with animation
-  // todo: move function level up
 
   return (
     <Dialog
