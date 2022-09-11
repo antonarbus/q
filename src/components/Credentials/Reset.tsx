@@ -23,12 +23,27 @@ export function Reset() {
       onSlideOut={() => navigate('/')}
     >
       <CardCustom
-        title='Reset password'
-        logo={<Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }}><LockOutlined /></Avatar>}
+        title="Reset password"
+        logo={
+          <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }}>
+            <LockOutlined />
+          </Avatar>
+        }
       >
         <form onSubmit={(e: EventType) => resetPassword({ e, email })}>
-          <EmailInput email={email} setEmail={setEmail} isEmailOk={isEmailOk} setIsEmailOk={setIsEmailOk} inputRef={inputRef}/>
-          <ButtonCustom content='RESET' disabled={!isEmailOk} httpStatus={httpStatus} setHttpStatus={setHttpStatus} />
+          <EmailInput
+            email={email}
+            setEmail={setEmail}
+            isEmailOk={isEmailOk}
+            setIsEmailOk={setIsEmailOk}
+            inputRef={inputRef}
+          />
+          <ButtonCustom
+            content="RESET"
+            disabled={!isEmailOk}
+            httpStatus={httpStatus}
+            setHttpStatus={setHttpStatus}
+          />
         </form>
       </CardCustom>
     </BackdropWithSlidableContent>
