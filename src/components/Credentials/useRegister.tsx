@@ -24,7 +24,7 @@ export function useRegisterUser() {
       data.status === 'error' && setHttpStatus('error')
       data.status === 'error' && data.message === 'user with such email already exists' && notify({ msg: 'Already registered', type: 'info', theme: 'light', closeAfterMs: 5000 })
       data.status === 'ok' && setHttpStatus('success')
-      data.status === 'ok' && notify({ msg: 'Check your email and confirm registration.', theme: 'light', closeAfterMs: 5000 })
+      data.status === 'ok' && notify({ msg: 'Check your mailbox', theme: 'light', closeAfterMs: 5000 })
       console.log(data)
     } catch (err) {
       setHttpStatus('error')
