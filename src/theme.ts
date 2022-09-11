@@ -5,6 +5,11 @@ export const theme = {
       main: '#757575'
     }
   },
+  typography: {
+    button: {
+      textTransform: 'none'
+    }
+  },
   // custom part
   colors: {
     grey: '#5a5a5a',
