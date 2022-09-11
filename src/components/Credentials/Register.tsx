@@ -8,7 +8,7 @@ import { EmailInput } from './common/EmailInput'
 import { PasswordInput } from './common/PasswordInput'
 import { ConfirmPasswordInput } from './common/ConfirmPasswordInput'
 import { ButtonCustom } from '@components/Common/ButtonCustom'
-import { useRegisterUser } from './useRegister'
+import { useRegister } from './useRegister'
 import { BackdropWithSlidableContent } from '@components/Common/BackdropWithSlidableContent'
 import { CardCustom } from '@components/Common/CardCustom'
 import { slideElement } from '@functions/slideElement'
@@ -21,12 +21,9 @@ export function Register() {
   const [password, setPassword] = useState('')
   const [isConfirmPasswordOk, setIsConfirmPasswordOk] = useState(false)
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
-  const { registerUser, httpStatus, setHttpStatus } = useRegisterUser()
+  const { registerUser, httpStatus, setHttpStatus } = useRegister()
   const navigate = useNavigate()
-  useEffect(
-    () => setIsButtonDisabled(!(isEmailOk && isConfirmPasswordOk)),
-    [isEmailOk, isConfirmPasswordOk]
-  )
+  useEffect(() => setIsButtonDisabled(!(isEmailOk && isConfirmPasswordOk)), [isEmailOk, isConfirmPasswordOk])
 
   return (
     <BackdropWithSlidableContent
@@ -68,14 +65,12 @@ export function Register() {
           <div css={{ textAlign: 'right', marginTop: '20px' }}>
             <Link
               to="/login"
-              style={{ alignSelf: 'flex-end' }}
+              children='Have an account? Log in...'
               onClick={(e: EventType) => {
                 e.preventDefault()
                 slideElement({ element: cardRef.current, cb: () => navigate('/login') })
               }}
-            >
-              Have an account? Log in...
-            </Link>
+            />
           </div>
         </form>
       </CardCustom>
