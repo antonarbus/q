@@ -68,7 +68,7 @@ export function Login() {
             />
             <Link
               to="/register"
-              children='No account? Sign up...'
+              children='No account? Register'
               onClick={(e: EventType) => {
                 e.preventDefault()
                 slideElement({ element: cardRef.current, cb: () => navigate('/register') })

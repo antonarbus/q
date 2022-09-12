@@ -10,7 +10,6 @@ import { Dummy } from '@components/Main/Dummy'
 import { Login } from '@components/Credentials/Login'
 import { Register } from '@components/Credentials/Register'
 import { Reset } from '@components/Credentials/Reset'
-import { UpdatePassword } from '@components/Credentials/UpdatePassword'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { theme } from './theme'
 import { Logout } from '@components/Credentials/Logout'
@@ -28,7 +27,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <Route path="login" element={<Login />} />
             <Route path="logout" element={<Logout />} />
             <Route path="reset" element={<Reset />} />
-            <Route path="updatePassword" element={<UpdatePassword />} />
             <Route path="dummy" element={<Dummy />} />
           </Route>
         </Routes>
