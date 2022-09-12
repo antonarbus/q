@@ -35,7 +35,7 @@ loginRouter.post('/', async (req: ReqType, res: ResType, next: NextType) => {
     await UserModel.findOneAndUpdate(filter, update)
 
     // return access token to the client
-    res.json({ status: 'ok', message: `user with email: ${email} logged in and tokens are refreshedddddd`, accessJwtToken })
+    res.json({ status: 'ok', message: `user with email: ${email} logged in and tokens are refreshed`, accessJwtToken })
   } catch (error: any) {
     next(error)
   }

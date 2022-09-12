@@ -65,7 +65,7 @@ export function Register() {
           <div css={{ textAlign: 'right', marginTop: '20px' }}>
             <Link
               to="/login"
-              children='Have an account? Log in...'
+              children='Have an account? Log in'
               onClick={(e: EventType) => {
                 e.preventDefault()
                 slideElement({ element: cardRef.current, cb: () => navigate('/login') })
