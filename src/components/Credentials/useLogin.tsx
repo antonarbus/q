@@ -23,7 +23,7 @@ export function useLogin() {
       const data = await res.json()
       data.status === 'error' && setHttpStatus('error')
       data.status === 'error' && localStorage.removeItem('accessJwtToken')
-      data.status === 'error' && notify({ msg: 'Could not log in', type: 'info', theme: 'light', closeAfterMs: 5000 })
+      data.status === 'error' && notify({ msg: 'Could not log in', type: 'error', theme: 'light', closeAfterMs: 5000 })
       data.status === 'ok' && setHttpStatus('success')
       data.status === 'ok' && localStorage.setItem('accessJwtToken', data.accessJwtToken)
       data.status === 'ok' && notify({ msg: 'Logged in', theme: 'light', closeAfterMs: 5000 })

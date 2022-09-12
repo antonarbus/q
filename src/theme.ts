@@ -1,4 +1,4 @@
-export const theme = {
+export const theme: any = {
   // mui part
   palette: {
     primary: {
