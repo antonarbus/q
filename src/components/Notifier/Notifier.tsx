@@ -10,11 +10,19 @@ type Prop = {
 }
 
 const CloseIcon = ({ closeToast }: Prop) => (
-  <Close
-    sx={{ '& :hover': { color: 'black' } }}
-    fontSize='small'
-    onClick={closeToast}
-  />
+  <span css={{
+    '& :hover': {
+      transform: 'scale(1.2)',
+      transformOrigin: 'center',
+      transition: 'transform 0.2s'
+    }
+  }}>
+
+    <Close
+      fontSize='small'
+      onClick={closeToast}
+    />
+  </span>
 )
 
 export function Notifier() {
