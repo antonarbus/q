@@ -1,4 +1,4 @@
-export const theme: any = {
+export const theme = {
   // mui part
   palette: {
     primary: {
@@ -16,6 +16,14 @@ export const theme: any = {
     red: '#ee6666',
     topMenuItem: '#858383',
     darkBackground: 'rgb(52 52 52 / 95%)'
+  },
+  nav: {
+    height: 60,
+    marginTop: 10,
+    marginBottom: 10,
+    get fullHeight() {
+      return this.height + this.marginTop + this.marginBottom
+    }
   },
   menu: {
     width: 300,

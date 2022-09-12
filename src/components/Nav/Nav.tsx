@@ -46,8 +46,11 @@ const NavStyled = styled.nav<PropsForSC>`
   align-items: stretch;
   position: sticky;
   top: 5px;
-  margin: 10px;
-  height: 60px;
+  margin-top: ${theme.nav.marginTop}px;
+  margin-bottom: ${theme.nav.marginBottom}px;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: ${theme.nav.height}px;
   border-radius: 4px;
   background: ${theme.colors.darkBackground};
   box-shadow: 0 0px 15px 0 #0000005c;

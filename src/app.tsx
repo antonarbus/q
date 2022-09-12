@@ -13,6 +13,7 @@ import { Reset } from '@components/Credentials/Reset'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { theme } from './theme'
 import { Logout } from '@components/Credentials/Logout'
+import { FourZeroFour } from '@components/FourZeroFour'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   // <React.StrictMode>
@@ -29,6 +30,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <Route path="reset" element={<Reset />} />
             <Route path="dummy" element={<Dummy />} />
           </Route>
+          <Route path="*" element={<FourZeroFour />} />
         </Routes>
         <Notifier />
       </BrowserRouter>
