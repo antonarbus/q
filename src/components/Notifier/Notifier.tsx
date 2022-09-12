@@ -7,7 +7,7 @@ import CloseIcon from '@mui/icons-material/Close'
 
 export function Notifier() {
   return (
-    <DivStyled>
+    <ToastStyled>
       <ToastContainer
         position="bottom-center"
         autoClose={3000}
@@ -21,12 +21,12 @@ export function Notifier() {
         theme='dark'
         closeButton={<CloseIcon sx={{ '& :hover': { color: 'black' } }} fontSize='small' /> }
       />
-    </DivStyled>
+    </ToastStyled>
   )
 }
 
 // taken from /node_modules/react-toastify/dist/ReactToastify.css
-const DivStyled = styled.div`
+const ToastStyled = styled.div`
   --toastify-color-light: #fff;
   --toastify-color-dark:${theme.colors.darkBackground};
   --toastify-color-info: #3498db;
