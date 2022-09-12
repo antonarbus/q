@@ -3,7 +3,19 @@
 import { ToastContainer } from 'react-toastify'
 import styled from '@emotion/styled'
 import { theme } from '@src/theme'
-import CloseIcon from '@mui/icons-material/Close'
+import { Close } from '@mui/icons-material'
+
+type Prop = {
+  closeToast: any
+}
+
+const CloseIcon = ({ closeToast }: Prop) => (
+  <Close
+    sx={{ '& :hover': { color: 'black' } }}
+    fontSize='small'
+    onClick={closeToast}
+  />
+)
 
 export function Notifier() {
   return (
@@ -19,7 +31,7 @@ export function Notifier() {
         draggable
         pauseOnHover
         theme='dark'
-        closeButton={<CloseIcon sx={{ '& :hover': { color: 'black' } }} fontSize='small' /> }
+        closeButton={CloseIcon}
       />
     </ToastStyled>
   )
