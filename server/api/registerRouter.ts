@@ -13,7 +13,7 @@ export const registerRouter = express.Router()
 registerRouter.post(
   '/',
   body('email').isEmail(),
-  body('password').isLength({ min: 3 }),
+  body('password').isLength({ min: 1 }),
   async (req: ReqType, res: ResType, next: NextType) => {
     try {
       // validation

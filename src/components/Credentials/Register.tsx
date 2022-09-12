@@ -57,7 +57,7 @@ export function Register() {
             setIsConfirmPasswordOk={setIsConfirmPasswordOk}
           />
           <ButtonCustom
-            content="SIGN UP"
+            content="REGISTER"
             disabled={isButtonDisabled}
             httpStatus={httpStatus}
             setHttpStatus={setHttpStatus}
@@ -65,7 +65,7 @@ export function Register() {
           <div css={{ textAlign: 'right', marginTop: '20px' }}>
             <Link
               to="/login"
-              children='Have an account? Log in'
+              children='Log in?'
               onClick={(e: EventType) => {
                 e.preventDefault()
                 slideElement({ element: cardRef.current, cb: () => navigate('/login') })

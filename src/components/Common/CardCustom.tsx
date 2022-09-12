@@ -24,8 +24,8 @@ export const CardCustom = ({ children, content, cssProps, reference, title, logo
     css={{
       display: 'flex',
       flexDirection: 'column',
-      maxHeight: 'calc(100% - 64px)',
-      maxWidth: 'calc(100% - 64px)',
+      maxHeight: 'calc(100vh - 64px)',
+      maxWidth: 'calc(100vw - 64px)',
       minWidth: '300px',
       width: '400px',
       margin: '32px',

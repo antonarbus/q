@@ -21,15 +21,16 @@ export function useRegister() {
       setHttpStatus('loading')
       const res = await fetch('/api/register', options)
       const data = await res.json()
-      data.status === 'error' && setHttpStatus('error')
-      data.status === 'error' && data.message === 'user with such email already exists' && notify({ msg: 'Already registered', type: 'info', theme: 'light', shouldStay: true })
-      data.status === 'ok' && setHttpStatus('success')
-      data.status === 'ok' && notify({ msg: 'Check your mailbox', theme: 'light', closeAfterMs: 5000 })
+      const { status, message } = data
+      status === 'error' && setHttpStatus('error')
+      status === 'error' && message === 'user with such email already exists' && notify({ msg: 'Already registered', type: 'info', theme: 'light' })
+      status === 'ok' && setHttpStatus('success')
+      status === 'ok' && notify({ msg: 'Done! Check your mailbox.', theme: 'light' })
       console.log(data)
     } catch (err) {
       setHttpStatus('error')
       console.log(err)
-      notify({ msg: 'Registration failed', type: 'error', theme: 'light' })
+      notify({ msg: 'Internal error', type: 'error', theme: 'light' })
     }
   }
 
