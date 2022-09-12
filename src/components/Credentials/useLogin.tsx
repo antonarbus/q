@@ -21,17 +21,19 @@ export function useLogin() {
       setHttpStatus('loading')
       const res = await fetch('/api/login', options)
       const data = await res.json()
-      data.status === 'error' && setHttpStatus('error')
-      data.status === 'error' && localStorage.removeItem('accessJwtToken')
-      data.status === 'error' && notify({ msg: 'Could not log in', type: 'error', theme: 'light', closeAfterMs: 5000 })
-      data.status === 'ok' && setHttpStatus('success')
-      data.status === 'ok' && localStorage.setItem('accessJwtToken', data.accessJwtToken)
-      data.status === 'ok' && notify({ msg: 'Logged in', theme: 'light', closeAfterMs: 5000 })
+      const { status, message, accessJwtToken } = data
+      status === 'error' && setHttpStatus('error')
+      status === 'error' && localStorage.removeItem('accessJwtToken')
+      status === 'error' && message === 'invalid credentials' && notify({ msg: 'Invalid credentials', type: 'error', theme: 'light' })
+      status === 'error' && message === 'account is not activated' && notify({ msg: 'Account is not activated. Check mailbox.', type: 'error', theme: 'light' })
+      status === 'ok' && setHttpStatus('success')
+      status === 'ok' && localStorage.setItem('accessJwtToken', accessJwtToken)
+      status === 'ok' && notify({ msg: 'Logged in!', theme: 'light' })
       console.log(data)
     } catch (err) {
       setHttpStatus('error')
       console.log(err)
-      notify({ msg: 'Login failed', type: 'error', theme: 'light' })
+      notify({ msg: 'Internal error', type: 'error', theme: 'light' })
     }
   }
 

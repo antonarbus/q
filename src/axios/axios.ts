@@ -21,7 +21,7 @@ axiosWithAuth.interceptors.response.use(
       try {
         originalRequest._isRetry = true
         const response = await axios.get('/api/refresh', { withCredentials: true })
-        const accessJwtToken = response.data.accessJwtToken
+        const { accessJwtToken } = response.data
         accessJwtToken && localStorage.setItem('accessJwtToken', accessJwtToken)
         !accessJwtToken && localStorage.removeItem('accessJwtToken')
         return axiosWithAuth.request(originalRequest)
@@ -34,6 +34,7 @@ axiosWithAuth.interceptors.response.use(
     if (error.response.status === 401) {
       // todo: logout in redux
       // todo: suggest to login
+      console.log('show login card')
     }
 
     throw error

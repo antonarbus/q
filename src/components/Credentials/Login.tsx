@@ -5,12 +5,12 @@ import { Avatar } from '@mui/material'
 import { BackdropWithSlidableContent } from '@components/Common/BackdropWithSlidableContent'
 import { CardCustom } from '@components/Common/CardCustom'
 import { theme } from '@src/theme'
-import { LockOutlined } from '@mui/icons-material'
 import { EmailInput } from './common/EmailInput'
 import { PasswordInput } from './common/PasswordInput'
 import { ButtonCustom } from '@components/Common/ButtonCustom'
 import { slideElement } from '@functions/slideElement'
 import { useLogin } from './useLogin'
+import LoginRoundedIcon from '@mui/icons-material/LoginRounded'
 
 // todo: store user data in redux
 
@@ -34,7 +34,7 @@ export function Login() {
         title="Log in"
         logo={
           <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }}>
-            <LockOutlined />
+            <LoginRoundedIcon />
           </Avatar>
         }
         reference={cardRef}
@@ -60,7 +60,7 @@ export function Login() {
           <div css={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
             <Link
               to="/reset"
-              children='Forgot password?'
+              children='Reset?'
               onClick={(e: EventType) => {
                 e.preventDefault()
                 slideElement({ element: cardRef.current, cb: () => navigate('/reset') })
@@ -68,11 +68,12 @@ export function Login() {
             />
             <Link
               to="/register"
-              children='No account? Register'
+              children='Register?'
               onClick={(e: EventType) => {
                 e.preventDefault()
                 slideElement({ element: cardRef.current, cb: () => navigate('/register') })
               }}
+              css={{ textAlign: 'right' }}
             />
           </div>
         </form>

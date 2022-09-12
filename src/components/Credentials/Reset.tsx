@@ -7,8 +7,8 @@ import { useReset } from './useReset'
 import { EventType } from '@src/types'
 import { EmailInput } from './common/EmailInput'
 import { theme } from '@src/theme'
-import { LockOutlined } from '@mui/icons-material'
 import { BackdropWithSlidableContent } from '@components/Common/BackdropWithSlidableContent'
+import PasswordRoundedIcon from '@mui/icons-material/PasswordRounded'
 
 export function Reset() {
   const navigate = useNavigate()
@@ -26,7 +26,7 @@ export function Reset() {
         title="Reset password"
         logo={
           <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }}>
-            <LockOutlined />
+            <PasswordRoundedIcon />
           </Avatar>
         }
       >

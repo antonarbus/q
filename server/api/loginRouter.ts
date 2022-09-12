@@ -17,19 +17,20 @@ loginRouter.post('/', async (req: ReqType, res: ResType, next: NextType) => {
     if (!user || !isPasswordValid) return res.json({ status: 'error', message: 'invalid credentials' })
 
     // check if account is activated
-    if (!user.isActivated) return res.json({ status: 'error', message: 'account is not activated' })
+    if (!user.isActivated) {
+      // todo: send email with activation link
+      return res.json({ status: 'error', message: 'account is not activated' })
+    }
 
     // generate jwt tokens
-    // const refreshJwtTokenExpirationDays = 30
-    // const accessJwtToken = jwt.sign({ email }, process.env.JWT_ACCESS_SECRET as string, { expiresIn: '8h' })
+    // todo: add role inside
     const accessJwtToken = getAccessJwtToken({ email })
-    // const refreshJwtToken = jwt.sign({ email }, process.env.JWT_REFRESH_SECRET as string, { expiresIn: `${refreshJwtTokenExpirationDays}d` })
     const refreshJwtToken = getRefreshJwtToken({ email })
 
     // put refresh token in cookie
     res.cookie('refreshJwtToken', refreshJwtToken, { maxAge: refreshJwtTokenExpirationSeconds * 1000, httpOnly: true })
 
-    // put refresh token in db (also update login date)
+    // put refresh token in db & update login date
     const filter = { email }
     const update = { loggedAt: new Date(), refreshJwtToken }
     await UserModel.findOneAndUpdate(filter, update)
