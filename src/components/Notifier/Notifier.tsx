@@ -3,6 +3,7 @@
 import { ToastContainer } from 'react-toastify'
 import styled from '@emotion/styled'
 import { theme } from '@src/theme'
+import CloseIcon from '@mui/icons-material/Close'
 
 export function Notifier() {
   return (
@@ -18,8 +19,7 @@ export function Notifier() {
         draggable
         pauseOnHover
         theme='dark'
-        closeButton={false}
-        // closeButton={CustomCloseBtn}
+        closeButton={<CloseIcon sx={{ '& :hover': { color: 'black' } }} fontSize='small' /> }
       />
     </DivStyled>
   )
@@ -132,6 +132,9 @@ const DivStyled = styled.div`
   font-family: var(--toastify-font-family);
   cursor: pointer;
   direction: ltr;
+
+  /* hack to center the close icon */
+  align-items: center; 
 }
 .Toastify__toast--rtl {
   direction: rtl;

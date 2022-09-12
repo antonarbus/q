@@ -13,6 +13,7 @@ import { Reset } from '@components/Credentials/Reset'
 import { UpdatePassword } from '@components/Credentials/UpdatePassword'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { theme } from './theme'
+import { Logout } from '@components/Credentials/Logout'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   // <React.StrictMode>
@@ -23,8 +24,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Nav />
         <Routes>
           <Route path="/" element={<Main />}>
-            <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
+            <Route path="login" element={<Login />} />
+            <Route path="logout" element={<Logout />} />
             <Route path="reset" element={<Reset />} />
             <Route path="updatePassword" element={<UpdatePassword />} />
             <Route path="dummy" element={<Dummy />} />
