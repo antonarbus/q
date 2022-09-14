@@ -7,7 +7,6 @@ import { RequireAuth } from '@components/Credentials/RequireAuth'
 import { Main } from './components/Main'
 import { Nav } from '@components/Nav'
 import { Notifier } from '@components/Notifier'
-import { Dummy } from '@components/Main/Dummy'
 import { Login } from '@components/Credentials/Login'
 import { Register } from '@components/Credentials/Register'
 import { Reset } from '@components/Credentials/Reset'
@@ -15,6 +14,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { theme } from './theme'
 import { Logout } from '@components/Credentials/Logout'
 import { FourZeroFour } from '@components/FourZeroFour'
+import { Test } from '@components/Test'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   // <React.StrictMode>
@@ -30,9 +30,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <Route path="login" element={<Login />} />
             <Route path="logout" element={<Logout />} />
             <Route path="reset" element={<Reset />} />
-            <Route element={<RequireAuth />}>
-              <Route path="dummy" element={<Dummy />} />
-            </Route>
+          </Route>
+          <Route element={<RequireAuth />}>
+            <Route path="test" element={<Test />} />
           </Route>
           <Route path="*" element={<FourZeroFour />} />
         </Routes>
