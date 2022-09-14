@@ -3,6 +3,7 @@ import { Provider } from 'react-redux'
 import { store } from './redux/store'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { GlobalStyles } from './GlobalStyles'
+import { RequireAuth } from '@components/Credentials/RequireAuth'
 import { Main } from './components/Main'
 import { Nav } from '@components/Nav'
 import { Notifier } from '@components/Notifier'
@@ -18,6 +19,7 @@ import { FourZeroFour } from '@components/FourZeroFour'
 ReactDOM.createRoot(document.getElementById('root')!).render(
   // <React.StrictMode>
   <Provider store={store}>
+    {/* @ts-ignore */}
     <ThemeProvider theme={createTheme(theme)}> {/* by createTheme from MUI we set global style for all MUI elements */}
       <GlobalStyles />
       <BrowserRouter>
@@ -28,7 +30,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <Route path="login" element={<Login />} />
             <Route path="logout" element={<Logout />} />
             <Route path="reset" element={<Reset />} />
-            <Route path="dummy" element={<Dummy />} />
+            <Route element={<RequireAuth />}>
+              <Route path="dummy" element={<Dummy />} />
+            </Route>
           </Route>
           <Route path="*" element={<FourZeroFour />} />
         </Routes>

@@ -10,7 +10,7 @@ import { PasswordInput } from './common/PasswordInput'
 import { ButtonCustom } from '@components/Common/ButtonCustom'
 import { slideElement } from '@functions/slideElement'
 import { useLogin } from './useLogin'
-import LoginRoundedIcon from '@mui/icons-material/LoginRounded'
+import { LoginRounded } from '@mui/icons-material'
 
 // todo: store user data in redux
 
@@ -34,12 +34,12 @@ export function Login() {
         title="Log in"
         logo={
           <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }}>
-            <LoginRoundedIcon />
+            <LoginRounded />
           </Avatar>
         }
         reference={cardRef}
       >
-        <form onSubmit={(e: EventType) => loginUser({ e, email, password })} >
+        <form onSubmit={(e: EventType) => loginUser({ e, email, password, cardElement: cardRef.current })} >
           <EmailInput
             email={email}
             setEmail={setEmail}
