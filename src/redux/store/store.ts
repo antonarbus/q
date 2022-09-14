@@ -5,6 +5,7 @@ import login from '@slices/loginSlice'
 import greetings from '@slices/greetingsSlice'
 import users from '@slices/usersSlice'
 import nav from '@slices/navSlice'
+import user from '@slices/userSlice'
 
 // const logger = createLogger({}) // LOGGER MIDDLEWARE
 
@@ -14,7 +15,8 @@ export const store = configureStore({
     login,
     greetings,
     users,
-    nav
+    nav,
+    user
   },
   middleware: (defaultMiddleware) => defaultMiddleware({
     serializableCheck: false

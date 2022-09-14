@@ -9,10 +9,11 @@ type Params = {
   shouldStay?: true
   type?: 'success' | 'error' | 'warn' | 'info'
   theme?: 'light' | 'dark' | 'colored',
-  transition?: 'slide' | 'bounce' | 'flip' | 'zoom'
+  transition?: 'slide' | 'bounce' | 'flip' | 'zoom',
+  onClose?: () => void
 }
 
-export function notify({ msg, position, hideProgressBar, shouldStay, closeAfterMs, type, theme, transition }: Params) {
+export function notify({ msg, position, hideProgressBar, shouldStay, closeAfterMs, type, theme, transition, onClose }: Params) {
   const options = {
     position: position || 'top-right',
     autoClose: shouldStay ? false : (closeAfterMs || 5000) as any,
@@ -25,8 +26,8 @@ export function notify({ msg, position, hideProgressBar, shouldStay, closeAfterM
     draggable: true,
     progress: undefined,
     theme: theme || 'dark',
+    onClose,
     // onOpen: () => window.alert('Called when I open'),
-    // onClose: () => window.alert('Called when I close')
     transition:
       transition === 'slide'
         ? Slide

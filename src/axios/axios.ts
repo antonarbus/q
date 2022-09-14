@@ -1,4 +1,6 @@
 // axios.ts
+import { login, logout } from '@redux/slices/userSlice'
+import { store } from '@redux/store'
 import axios from 'axios'
 
 export const axiosWithAuth = axios.create({ withCredentials: true })
@@ -21,9 +23,15 @@ axiosWithAuth.interceptors.response.use(
       try {
         originalRequest._isRetry = true
         const response = await axios.get('/api/refresh', { withCredentials: true })
-        const { accessJwtToken } = response.data
-        accessJwtToken && localStorage.setItem('accessJwtToken', accessJwtToken)
-        !accessJwtToken && localStorage.removeItem('accessJwtToken')
+        const { accessJwtToken, email } = response.data
+        if (accessJwtToken) {
+          localStorage.setItem('accessJwtToken', accessJwtToken)
+          store.dispatch(login({ email, isLogged: true, role: 'viewer' }))
+        }
+        if (!accessJwtToken) {
+          localStorage.removeItem('accessJwtToken')
+          store.dispatch(logout())
+        }
         return axiosWithAuth.request(originalRequest)
       } catch (error) {
         console.log('not authorized')
