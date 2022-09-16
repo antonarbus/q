@@ -1,6 +1,6 @@
 import { notify } from '@components/Notifier/notify'
 import { slideElement } from '@functions/slideElement'
-import { login } from '@redux/slices/userSlice'
+import { rememberLoggedUser } from '@redux/slices/userSlice'
 import { useDispatchTyped } from '@redux/store/storeHooks'
 import { EventType, httpStatusType } from '@src/types'
 import { useState } from 'react'
@@ -41,15 +41,11 @@ export function useLogin() {
       if (status === 'ok') {
         setHttpStatus('success')
         localStorage.setItem('accessJwtToken', accessJwtToken)
-        dispatch(login({ email, isLogged: true, role: 'viewer' }))
-        notify({
-          msg: 'Logged in!',
-          theme: 'light',
-          closeAfterMs: 1000,
-          onClose: () => {
-            slideElement({ element: cardElement, cb: () => navigate(from, { replace: true }) })
-          }
-        })
+        dispatch(rememberLoggedUser({ email, isLogged: true, role: 'viewer' }))
+        notify({ msg: 'Logged in!', theme: 'light', closeAfterMs: 3000 })
+        setTimeout(() => {
+          slideElement({ element: cardElement, cb: () => navigate(from, { replace: true }) })
+        }, 2000)
       }
       console.log(data)
     } catch (err) {
