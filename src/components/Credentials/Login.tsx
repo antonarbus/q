@@ -11,7 +11,6 @@ import { ButtonCustom } from '@components/Common/ButtonCustom'
 import { slideElement } from '@functions/slideElement'
 import { useLogin } from './useLogin'
 import { LoginRounded } from '@mui/icons-material'
-import { useEffectOnce } from 'react-use'
 
 // todo: store user data in redux
 
@@ -25,8 +24,6 @@ export function Login() {
   const { loginUser, httpStatus, setHttpStatus } = useLogin()
   const navigate = useNavigate()
   useEffect(() => setIsButtonDisabled(!(isEmailOk && !!password)), [isEmailOk, password])
-  // autofill can put valid data with some delay and button should be enabled
-  // setTimeout(() => setIsButtonDisabled(!(isEmailOk && !!password)), 1000)
 
   return (
     <BackdropWithSlidableContent
