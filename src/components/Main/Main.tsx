@@ -4,7 +4,7 @@ import jwt_decode from 'jwt-decode'
 import axios from 'axios'
 import { useEffectOnce } from 'react-use'
 import { store } from '@redux/store'
-import { login } from '@redux/slices/userSlice'
+import { rememberLoggedUser } from '@redux/slices/userSlice'
 import { Dummy } from './Dummy'
 
 export function Main() {
@@ -27,7 +27,7 @@ export function Main() {
         if (!email) return console.log('token is not valid')
         localStorage.setItem('accessJwtToken', accessJwtToken)
         console.log(response)
-        store.dispatch(login({ email, isLogged: true, role: 'viewer' }))
+        store.dispatch(rememberLoggedUser({ email, isLogged: true, role: 'viewer' }))
         console.log(`tokens for ${email} are refreshed`)
       } catch (error) {
         console.log(error)

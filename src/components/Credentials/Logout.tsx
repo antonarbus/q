@@ -9,7 +9,7 @@ import { ButtonCustom } from '@components/Common/ButtonCustom'
 import { httpStatusType } from '@src/types'
 import { slideElement } from '@functions/slideElement'
 import { notify } from '@components/Notifier/notify'
-import { logout } from '@redux/slices/userSlice'
+import { forgetLoggedUser } from '@redux/slices/userSlice'
 import { useDispatchTyped } from '@redux/store/storeHooks'
 
 // todo: store user data in redux
@@ -39,7 +39,7 @@ export function Logout() {
       if (status === 'ok') {
         setHttpStatus('success')
         notify({ msg: `User with ${email} is logged out`, type: 'success', theme: 'light' })
-        dispatch(logout())
+        dispatch(forgetLoggedUser())
       }
     } catch (err) {
       console.log(err)
