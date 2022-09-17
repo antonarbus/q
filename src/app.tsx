@@ -15,6 +15,7 @@ import { theme } from './theme'
 import { Logout } from '@components/Credentials/Logout'
 import { FourZeroFour } from '@components/FourZeroFour'
 import { Test } from '@components/Test'
+import { CounterFromRedux } from '@components/CounterFromRedux'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   // <React.StrictMode>
@@ -30,6 +31,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <Route path="login" element={<Login />} />
             <Route path="logout" element={<Logout />} />
             <Route path="reset" element={<Reset />} />
+            <Route path="counter" element={<CounterFromRedux />} />
           </Route>
           <Route element={<RequireAuth />}>
             <Route path="test" element={<Test />} />
