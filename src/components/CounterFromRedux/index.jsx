@@ -2,27 +2,9 @@ import { Counter } from './Counter'
 import logo from './logo.svg'
 import './counter.css'
 import { useDispatch } from 'react-redux'
-import { useTranslation } from 'react-i18next'
-import { useSnackbar } from 'notistack'
-import { hideLoader, showLoader } from '../../store/loaderSlice'
 import { useEffectOnce } from 'react-use'
 
-export function ReduxExample () {
-  const dispatch = useDispatch()
-  const { t, i18n } = useTranslation()
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar()
-
-  useEffectOnce(() => {
-    i18n.changeLanguage('en-US')
-    enqueueSnackbar(t('message.error.general'), { variant: 'error', persist: true })
-    setTimeout(closeSnackbar, 4000)
-  })
-
-  useEffectOnce(() => {
-    dispatch(showLoader())
-    setTimeout(() => dispatch(hideLoader()), 2000)
-  })
-
+export function CounterFromRedux () {
   return (
     <div className='App'>
       <header className='App-header'>
