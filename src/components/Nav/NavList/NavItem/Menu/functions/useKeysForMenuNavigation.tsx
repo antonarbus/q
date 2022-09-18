@@ -1,6 +1,6 @@
 import { store, useDispatchTyped } from '@src/store'
 import { useEffect } from 'react'
-import { closeMenu, setMenuItemHoverIndex } from '@slices/navSlice'
+import { closeMenu, setMenuItemHoverIndex } from '@components/Nav/navSlice'
 import { getMenuItemByIdsChain } from './getMenuItemByIdsChain'
 import { globalObject } from '@src/globalObject'
 import { useNavigate } from 'react-router-dom'

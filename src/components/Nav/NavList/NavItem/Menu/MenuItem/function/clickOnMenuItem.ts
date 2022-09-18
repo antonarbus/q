@@ -1,4 +1,4 @@
-import { closeMenu } from '@redux/slices/navSlice'
+import { closeMenu } from '@components/Nav/navSlice'
 import { store } from '@src/store'
 import { globalObject } from '@src/globalObject'
 import { EventType } from '@src/types'

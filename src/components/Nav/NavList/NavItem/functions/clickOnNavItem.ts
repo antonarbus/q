@@ -1,5 +1,5 @@
 import { MenuType } from '@components/Nav/navStructure'
-import { closeMenu, openMenuWithId, setNavItemRightPos } from '@redux/slices/navSlice'
+import { closeMenu, openMenuWithId, setNavItemRightPos } from '@components/Nav/navSlice'
 import { store } from '@src/store'
 import { EventType } from '@src/types'
 

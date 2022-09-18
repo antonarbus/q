@@ -6,11 +6,11 @@ import { CardCustom } from '@components/Common/CardCustom'
 import { theme } from '@src/theme'
 import { LogoutRounded } from '@mui/icons-material'
 import { ButtonCustom } from '@components/Common/ButtonCustom'
-import { httpStatusType } from '@src/types'
 import { slideElement } from '@functions/slideElement'
 import { notify } from '@components/Notifier/notify'
-import { forgetLoggedUser } from '@redux/slices/userSlice'
 import { useDispatchTyped } from '@src/store'
+import { httpStatusType } from '@src/types'
+import { forgetLoggedUser } from './credentialsSlice'
 
 // todo: store user data in redux
 // todo: complete Logout component

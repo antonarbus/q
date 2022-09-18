@@ -1,13 +1,12 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
 // import { createLogger } from 'redux-logger'
-import login from '@slices/loginSlice'
-import greetings from '@slices/greetingsSlice'
-import users from '@slices/usersSlice'
-import nav from '@slices/navSlice'
-import user from '@slices/userSlice'
+import login from '@components/Main/Dummy/loginSlice'
+import greetings from '@components/Main/Dummy/greetingsSlice'
+import users from '@components/Main/Dummy/usersSlice'
+import nav from '@components/Nav/navSlice'
+import user from '@components/Credentials/credentialsSlice'
 import counter from '@components/CounterFromRedux/counterSlice'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-// import type { RootState, AppDispatch } from './store'
 
 // const logger = createLogger({}) // LOGGER MIDDLEWARE
 
