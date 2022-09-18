@@ -1,5 +1,5 @@
 import { isClickInsideThisElement } from '@src/functions/isClickInsideThisElement'
-import { useDispatchTyped } from '@store/storeHooks'
+import { useDispatchTyped } from '@src/store'
 import { useEffect } from 'react'
 import { closeMenu } from '@slices/navSlice'
 import { EventType } from '@src/types'

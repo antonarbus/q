@@ -1,7 +1,7 @@
 import { notify } from '@components/Notifier/notify'
 import { slideElement } from '@functions/slideElement'
 import { rememberLoggedUser } from '@redux/slices/userSlice'
-import { useDispatchTyped } from '@redux/store/storeHooks'
+import { useDispatchTyped } from '@src/store'
 import { EventType, httpStatusType } from '@src/types'
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'

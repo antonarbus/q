@@ -3,9 +3,10 @@ import { Outlet } from 'react-router-dom'
 import jwt_decode from 'jwt-decode'
 import axios from 'axios'
 import { useEffectOnce } from 'react-use'
-import { store } from '@redux/store'
+// import { store } from '@src/store'
 import { rememberLoggedUser } from '@redux/slices/userSlice'
 import { Dummy } from './Dummy'
+import { store } from '@src/store'
 
 export function Main() {
   useEffectOnce(() => {

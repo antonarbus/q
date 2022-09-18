@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import { MenuType } from '../navStructure'
 import { NavItem } from './NavItem'
 import { Burger } from './NavItem/Burger'
-import { useSelectorTyped as useSelector } from '@store/storeHooks'
+import { useSelectorTyped as useSelector } from '@src/store'
 
 export function NavList() {
   const navStructure = useSelector(state => state.nav.navStructure)

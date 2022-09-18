@@ -1,5 +1,5 @@
 import { closeMenu } from '@redux/slices/navSlice'
-import { store } from '@redux/store'
+import { store } from '@src/store'
 import { globalObject } from '@src/globalObject'
 import { EventType } from '@src/types'
 import { getMenuItemByIdsChain } from '../../functions/getMenuItemByIdsChain'

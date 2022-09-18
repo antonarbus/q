@@ -4,7 +4,7 @@ import { FaChevronLeft as LeftArrowIcon } from 'react-icons/fa'
 import { MenuItemStyled } from './MenuItemStyled'
 import { theme } from '@src/theme'
 import { setMenuItemHoverIndex } from '@slices/navSlice'
-import { useDispatchTyped, useSelectorTyped as useSelector } from '@store/storeHooks'
+import { useDispatchTyped, useSelectorTyped as useSelector } from '@src/store'
 import { globalObject } from '@src/globalObject'
 import { EventType } from '@src/types'
 
