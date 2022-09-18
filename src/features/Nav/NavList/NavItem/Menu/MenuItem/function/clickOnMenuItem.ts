@@ -1,4 +1,4 @@
-import { closeMenu } from '@features/Nav/navSlice'
+import { closeMenu } from '@features/nav/navSlice'
 import { store } from '@src/store'
 import { globalObject } from '@src/globalObject'
 import { EventType } from '@src/types'

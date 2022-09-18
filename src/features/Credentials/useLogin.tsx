@@ -1,4 +1,4 @@
-import { notify } from '@features/Notifier/notify'
+import { notify } from '@features/notifier/notify'
 import { slideElement } from '@functions/slideElement'
 import { useDispatchTyped } from '@src/store'
 import { EventType, httpStatusType } from '@src/types'

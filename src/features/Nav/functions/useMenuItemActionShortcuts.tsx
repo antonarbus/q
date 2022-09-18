@@ -1,4 +1,4 @@
-import { notify } from '@features/Notifier/notify'
+import { notify } from '@features/notifier/notify'
 import { useNavigate } from 'react-router-dom'
 import { useEffectOnce } from 'react-use'
 import { navStructure } from '../navStructure'

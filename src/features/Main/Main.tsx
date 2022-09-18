@@ -3,9 +3,9 @@ import { Outlet } from 'react-router-dom'
 import jwt_decode from 'jwt-decode'
 import axios from 'axios'
 import { useEffectOnce } from 'react-use'
-import { Dummy } from './Dummy'
+import { Dummy } from '../temp/Dummy'
 import { store } from '@src/store'
-import { rememberLoggedUser } from '@features/Credentials/credentialsSlice'
+import { rememberLoggedUser } from '@features/credentials/credentialsSlice'
 
 export function Main() {
   useEffectOnce(() => {
