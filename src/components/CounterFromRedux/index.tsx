@@ -1,8 +1,6 @@
 import { Counter } from './Counter'
 import logo from './logo.svg'
 import './counter.css'
-import { useDispatch } from 'react-redux'
-import { useEffectOnce } from 'react-use'
 
 export function CounterFromRedux () {
   return (
