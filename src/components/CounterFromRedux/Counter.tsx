@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 // import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { decrement, increment, incrementByAmount, incrementAsync, incrementIfOdd, selectCount } from './counterSlice'
 import styles from './Counter.module.css'
-import { useDispatchTyped, useSelectorTyped } from '@redux/store/storeHooks'
+import { useDispatchTyped, useSelectorTyped } from '@src/store'
 
 export function Counter() {
   const count = useSelectorTyped(selectCount)

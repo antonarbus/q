@@ -10,7 +10,7 @@ import { httpStatusType } from '@src/types'
 import { slideElement } from '@functions/slideElement'
 import { notify } from '@components/Notifier/notify'
 import { forgetLoggedUser } from '@redux/slices/userSlice'
-import { useDispatchTyped } from '@redux/store/storeHooks'
+import { useDispatchTyped } from '@src/store'
 
 // todo: store user data in redux
 // todo: complete Logout component

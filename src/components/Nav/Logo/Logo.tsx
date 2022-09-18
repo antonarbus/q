@@ -1,4 +1,4 @@
-import { useSelectorTyped as useSelector } from '@store/storeHooks'
+import { useSelectorTyped as useSelector } from '@src/store'
 import styled from '@emotion/styled'
 
 type Prop = {

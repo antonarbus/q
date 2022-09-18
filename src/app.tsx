@@ -1,6 +1,5 @@
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
-import { store } from './redux/store'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { GlobalStyles } from './GlobalStyles'
 import { RequireAuth } from '@components/Credentials/RequireAuth'
@@ -16,6 +15,7 @@ import { Logout } from '@components/Credentials/Logout'
 import { FourZeroFour } from '@components/FourZeroFour'
 import { Test } from '@components/Test'
 import { CounterFromRedux } from '@components/CounterFromRedux'
+import { store } from './store'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   // <React.StrictMode>

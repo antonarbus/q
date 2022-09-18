@@ -1,6 +1,6 @@
 // axios.ts
 import { rememberLoggedUser, forgetLoggedUser } from '@redux/slices/userSlice'
-import { store } from '@redux/store'
+import { store } from '@src/store'
 import axios from 'axios'
 
 export const axiosWithAuth = axios.create({ withCredentials: true })

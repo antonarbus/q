@@ -1,6 +1,6 @@
 import { elementHeight } from '@src/functions/elementHeight'
 import { goDownInCurrentMenu, goDownInNextMenu, goUpInCurrentMenu, goUpInNextMenu } from '@slices/navSlice'
-import { useDispatchTyped } from '@store/storeHooks'
+import { useDispatchTyped } from '@src/store'
 import { theme } from '@src/theme'
 import { gsap } from 'gsap'
 import { useEffect } from 'react'

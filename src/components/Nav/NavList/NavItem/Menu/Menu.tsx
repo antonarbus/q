@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { useDispatchTyped, useSelectorTyped as useSelector } from '@store/storeHooks'
+import { useDispatchTyped, useSelectorTyped as useSelector } from '@src/store'
 import { useRef } from 'react'
 import { useMenuAnimation } from './functions/useMenuAnimation'
 import { useKeysForMenuNavigation } from './functions/useKeysForMenuNavigation'

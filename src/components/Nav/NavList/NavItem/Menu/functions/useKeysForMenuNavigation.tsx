@@ -1,5 +1,4 @@
-import { store } from '@redux/store'
-import { useDispatchTyped } from '@store/storeHooks'
+import { store, useDispatchTyped } from '@src/store'
 import { useEffect } from 'react'
 import { closeMenu, setMenuItemHoverIndex } from '@slices/navSlice'
 import { getMenuItemByIdsChain } from './getMenuItemByIdsChain'

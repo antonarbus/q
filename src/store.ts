@@ -6,6 +6,8 @@ import users from '@slices/usersSlice'
 import nav from '@slices/navSlice'
 import user from '@slices/userSlice'
 import counter from '@components/CounterFromRedux/counterSlice'
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+// import type { RootState, AppDispatch } from './store'
 
 // const logger = createLogger({}) // LOGGER MIDDLEWARE
 
@@ -28,3 +30,7 @@ export const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
 export type AppThunk<ReturnType = void> = ThunkAction< ReturnType, RootState, unknown, Action<string> >
+
+// hooks to let types work
+export const useSelectorTyped: TypedUseSelectorHook<RootState> = useSelector
+export const useDispatchTyped = () => useDispatch<AppDispatch>()
