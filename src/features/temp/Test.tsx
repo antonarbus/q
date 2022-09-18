@@ -1,4 +1,4 @@
-import { notify } from '@features/Notifier/notify'
+import { notify } from '@features/notifier/notify'
 // eslint-disable-next-line camelcase
 import { axiosWithAuth } from '@src/axios'
 

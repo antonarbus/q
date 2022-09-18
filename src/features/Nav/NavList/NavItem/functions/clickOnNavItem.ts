@@ -1,5 +1,5 @@
-import { MenuType } from '@features/Nav/navStructure'
-import { closeMenu, openMenuWithId, setNavItemRightPos } from '@features/Nav/navSlice'
+import { MenuType } from '@features/nav/navStructure'
+import { closeMenu, openMenuWithId, setNavItemRightPos } from '@features/nav/navSlice'
 import { store } from '@src/store'
 import { EventType } from '@src/types'
 

@@ -1,5 +1,5 @@
 import { elementHeight } from '@src/functions/elementHeight'
-import { goDownInCurrentMenu, goDownInNextMenu, goUpInCurrentMenu, goUpInNextMenu } from '@features/Nav/navSlice'
+import { goDownInCurrentMenu, goDownInNextMenu, goUpInCurrentMenu, goUpInNextMenu } from '@features/nav/navSlice'
 import { useDispatchTyped } from '@src/store'
 import { theme } from '@src/theme'
 import { gsap } from 'gsap'

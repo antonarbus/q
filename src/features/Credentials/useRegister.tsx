@@ -1,4 +1,4 @@
-import { notify } from '@features/Notifier/notify'
+import { notify } from '@features/notifier/notify'
 import { EventType, httpStatusType } from '@src/types'
 import { useState } from 'react'
 

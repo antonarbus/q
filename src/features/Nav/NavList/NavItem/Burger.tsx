@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { Fade as BurgerIcon } from 'hamburger-react'
 import { useDispatchTyped, useSelectorTyped as useSelector } from '@src/store'
-import { toggleBurger } from '@features/Nav/navSlice'
+import { toggleBurger } from '@features/nav/navSlice'
 // https://hamburger-react.netlify.app/
 
 export function Burger() {

@@ -1,4 +1,4 @@
-import { MenuType, navStructure } from '@features/Nav/navStructure'
+import { MenuType, navStructure } from '@features/nav/navStructure'
 
 /**
  * returns clicked menu object from navStructure
