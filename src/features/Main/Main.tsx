@@ -10,8 +10,7 @@ import { rememberLoggedUser } from '@features/credentials/credentialsSlice'
 export function Main() {
   useEffectOnce(() => {
     async function refreshTokens() {
-      // todo: move function into 'functions' folder in a file of folder with credentials business logic
-      // todo: separate helper files by a business logic
+      // todo: move function into 'credentials' folder and run it from <App /> component
       try {
         if (!localStorage.getItem('accessJwtToken')) return console.log('user is not logged in')
         const response = await axios.get('/api/refresh', { withCredentials: true })

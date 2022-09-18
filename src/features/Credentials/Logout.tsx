@@ -13,7 +13,7 @@ import { httpStatusType } from '@src/types'
 import { forgetLoggedUser } from './credentialsSlice'
 
 // todo: store user data in redux
-// todo: complete Logout component
+// todo: remove Component and use just a function assigned to menu item
 
 export function Logout() {
   const cardRef = useRef() as React.MutableRefObject<HTMLDivElement>
