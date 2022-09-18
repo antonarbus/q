@@ -7,10 +7,10 @@ import { LockOutlined } from '@mui/icons-material'
 import { EmailInput } from './common/EmailInput'
 import { PasswordInput } from './common/PasswordInput'
 import { ConfirmPasswordInput } from './common/ConfirmPasswordInput'
-import { ButtonCustom } from '@features/Common/ButtonCustom'
+import { ButtonCustom } from '@src/common_components/ButtonCustom'
 import { useRegister } from './useRegister'
-import { BackdropWithSlidableContent } from '@features/Common/BackdropWithSlidableContent'
-import { CardCustom } from '@features/Common/CardCustom'
+import { BackdropWithSlidableContent } from '@src/common_components/BackdropWithSlidableContent'
+import { CardCustom } from '@src/common_components/CardCustom'
 import { slideElement } from '@functions/slideElement'
 
 export function Register() {

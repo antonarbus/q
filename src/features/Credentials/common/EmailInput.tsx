@@ -5,7 +5,7 @@ import { InputAdornment, TextField } from '@mui/material'
 import { Person } from '@mui/icons-material'
 import { theme } from '@src/theme'
 import { EventType } from '@src/types'
-import { Render } from '@features/Common/Render'
+import { Render } from '@src/common_components/Render'
 
 const isEmailPatternOk = (email: string) => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
 
