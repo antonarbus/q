@@ -19,9 +19,7 @@
     "baseUrl": ".",
     "paths": {
       // https://github.com/aleclarson/vite-tsconfig-paths
-      "@components/*": ["src/components/*"],
       "@features/*": ["src/features/*"],
-      "@components common/*": ["src/components common/*"],
       "@functions/*": ["src/functions/*"],
       "@redux/*": ["src/redux/*"],
       "@slices/*": ["src/redux/slices/*"],
