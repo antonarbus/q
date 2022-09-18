@@ -8,11 +8,8 @@ export function CounterFromRedux () {
       <header className='App-header'>
         <img src={logo} className='App-logo' alt='logo' />
         <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
         <span>
-          <span css={{ background: 'red' }}>Learn </span>
+          <span>Learn </span>
           <a
             className='App-link'
             href='https://reactjs.org/'
