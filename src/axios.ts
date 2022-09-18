@@ -1,5 +1,5 @@
 // axios.ts
-import { rememberLoggedUser, forgetLoggedUser } from '@redux/slices/userSlice'
+import { forgetLoggedUser, rememberLoggedUser } from '@components/Credentials/credentialsSlice'
 import { store } from '@src/store'
 import axios from 'axios'
 

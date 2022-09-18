@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
-import { login } from '@slices/loginSlice'
-import { fetchUsers } from '@slices/usersSlice'
 import { useDispatchTyped, useSelectorTyped } from '@src/store'
 import { theme } from '@src/theme'
+import { login } from './loginSlice'
+import { fetchUsers } from './usersSlice'
 
 /**
  * Component with counter

@@ -1,10 +1,11 @@
 import { notify } from '@components/Notifier/notify'
 import { slideElement } from '@functions/slideElement'
-import { rememberLoggedUser } from '@redux/slices/userSlice'
 import { useDispatchTyped } from '@src/store'
 import { EventType, httpStatusType } from '@src/types'
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+// import { rememberLoggedUser } from '@redux/slices/userSlice'
+import { rememberLoggedUser } from './credentialsSlice'
 
 export function useLogin() {
   const [httpStatus, setHttpStatus] = useState<httpStatusType>('')

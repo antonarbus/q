@@ -1,6 +1,6 @@
 import { notify } from '@components/Notifier/notify'
 // eslint-disable-next-line camelcase
-import { axiosWithAuth } from '@src/axios/axios'
+import { axiosWithAuth } from '@src/axios'
 
 async function getEmailFromDb() {
   try {
