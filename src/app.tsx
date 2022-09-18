@@ -17,8 +17,7 @@ import { Test } from '@features/temp/Test'
 import { CounterFromRedux } from '@features/counter'
 import { store } from './store'
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  // <React.StrictMode>
+const App = () => (
   <Provider store={store}>
     {/* @ts-ignore */}
     <ThemeProvider theme={createTheme(theme)}> {/* by createTheme from MUI we set global style for all MUI elements */}
@@ -42,5 +41,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       </BrowserRouter>
     </ThemeProvider>
   </Provider>
-  // </React.StrictMode>
 )
+
+ReactDOM.createRoot(document.getElementById('root')!).render(<App />)
