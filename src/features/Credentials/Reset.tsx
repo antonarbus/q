@@ -1,13 +1,13 @@
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Avatar } from '@mui/material'
-import { CardCustom } from '@features/Common/CardCustom'
-import { ButtonCustom } from '@features/Common/ButtonCustom'
+import { CardCustom } from '@src/common_components/CardCustom'
+import { ButtonCustom } from '@src/common_components/ButtonCustom'
 import { useReset } from './useReset'
 import { EventType } from '@src/types'
 import { EmailInput } from './common/EmailInput'
 import { theme } from '@src/theme'
-import { BackdropWithSlidableContent } from '@features/Common/BackdropWithSlidableContent'
+import { BackdropWithSlidableContent } from '@src/common_components/BackdropWithSlidableContent'
 import PasswordRoundedIcon from '@mui/icons-material/PasswordRounded'
 
 export function Reset() {
