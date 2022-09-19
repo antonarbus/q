@@ -2,7 +2,7 @@ import { Global, css } from '@emotion/react'
 
 export const GlobalStyles = () => (
   <Global
-      styles={css`
+    styles={css`
       body{
         color:rgba(0, 0, 0, 0.87);
         font-family:"Roboto","Helvetica","Arial",sans-serif;
