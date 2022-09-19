@@ -61,7 +61,6 @@ export const App = () => {
               <Route path="login" element={<Login />} />
               <Route path="logout" element={<Logout />} />
               <Route path="reset" element={<Reset />} />
-              <Route path="counter" element={<CounterFromRedux />} />
             </Route>
             <Route element={<RequireAuth />}>
               <Route path="test" element={<Test />} />
