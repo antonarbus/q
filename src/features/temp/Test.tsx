@@ -1,12 +1,12 @@
 import { notify } from '@features/notifier/notify'
 // eslint-disable-next-line camelcase
-import { axiosWithAuth } from '@src/axios'
+import { axiosWithAuth } from '@features/credentials/axiosWithAuth'
 
 async function getEmailFromDb() {
   try {
     // if we just go in browser to http://localhost:3009/api/user or fetch it with just fetch or axios general instance
     // we get msg "accessJwtToken is not verified, user is not authorized"
-    // but with axiosWithAuth we add access token to the header and check it in the middleware 'verifyToken '
+    // but with axiosWithAuth we add access token to the header and check it inside the middleware 'verifyToken '
     const res = await axiosWithAuth('/api/user')
     console.log(res)
   } catch (error) {
