@@ -13,7 +13,6 @@ import { Register } from '@features/credentials/Register'
 import { Reset } from '@features/credentials/Reset'
 import { Logout } from '@features/credentials/Logout'
 import { Test } from '@features/temp/Test'
-import { CounterFromRedux } from '@features/counter'
 import { rememberLoggedUser } from '@features/credentials/credentialsSlice'
 import { useEffectOnce } from 'react-use'
 import axios from 'axios'
@@ -21,9 +20,9 @@ import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 
 export const App = () => {
+  // todo: move function into 'credentials' folder into useRefreshTokens hook
   useEffectOnce(() => {
     async function refreshTokens() {
-      // todo: move function into 'credentials' folder
       try {
         if (!localStorage.getItem('accessJwtToken')) return console.log('user is not logged in')
         const response = await axios.get('/api/refresh', { withCredentials: true })

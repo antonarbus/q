@@ -1,11 +1,40 @@
 import { Counter } from './Counter'
 import logo from './logo.svg'
-import './counter.css'
+import { keyframes } from '@emotion/react'
+
+const animation = keyframes`
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+`
 
 export const CounterFromRedux = () => (
-  <div className='App'>
-    <header className='App-header'>
-      <img src={logo} className='App-logo' alt='logo' />
+  <div css={{ textAlign: 'center' }} >
+    <header
+      css={{
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: 'calc(10px + 2vmin)'
+      }}
+    >
+      <img
+        src={logo}
+        alt='logo'
+        css={{
+          height: '40vmin',
+          pointerEvents: 'none',
+          animation: `${animation} infinite 3s ease-in-out`
+        }}
+      />
       <Counter />
       <span>
         <span>Learn </span>
