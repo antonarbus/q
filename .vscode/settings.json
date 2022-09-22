@@ -9,6 +9,7 @@
     "copyfiles",
     "esbuild",
     "gsap",
+    "Immer",
     "mailcheck",
     "PAGEDOWN",
     "PAGEUP",
