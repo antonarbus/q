@@ -4,13 +4,13 @@ export const GlobalStyles = () => (
   <Global
     styles={css`
       body{
+        background-color:#f2f4f7;
         color:rgba(0, 0, 0, 0.87);
         font-family:"Roboto","Helvetica","Arial",sans-serif;
         font-weight:400;
         font-size:1rem;
         line-height:1.5;
         letter-spacing:0.00938em;
-        background-color:#fff;
       }
     
       button {
