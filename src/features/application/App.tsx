@@ -31,7 +31,7 @@ export const App = () => (
             <Route path="logout" element={<Logout />} />
             <Route path="reset" element={<Reset />} />
           </Route>
-          <Route element={<RequireAuth />}>
+          <Route element={<RequireAuth allowedRoles={['user']} />}>
             <Route path="test" element={<Test />} />
           </Route>
         </Routes>

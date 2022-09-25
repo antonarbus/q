@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   email: null,
   isLogged: false,
-  role: null
+  role: ''
 }
 
 export const credentialsSlice = createSlice({
@@ -19,7 +19,7 @@ export const credentialsSlice = createSlice({
 })
 
 /*
-  *  that is the convention, which I do not like because it is not that understandable for me
+  *  that is the convention, which I do not like much
   *  export default credentialsSlice.reducer
   *  export const { rememberLoggedUser, forgetLoggedUser } = credentialsSlice.actions
   *

@@ -20,19 +20,18 @@ export async function refreshTokens() {
     if (expirationInMin > 5) return console.log(`access token expires in ${expirationInMin} min, which is more than 5 min, so let's skip the refresh for now`)
 
     const response = await axios.get('/api/refresh', { withCredentials: true })
-    const status = response.data.status
+    const { status, accessJwtToken, role } = response.data
     if (status === 'error') {
       console.log(response.data.message)
       localStorage.removeItem('accessJwtToken')
     }
-    const accessJwtToken = response.data.accessJwtToken
     if (!accessJwtToken) return console.log('no access token in db')
     const jwtTokenPayload: {email: string | undefined} = jwt_decode(accessJwtToken)
     const { email } = jwtTokenPayload
     if (!email) return console.log('token is invalid')
     localStorage.setItem('accessJwtToken', accessJwtToken)
     console.log(response)
-    store.dispatch(credentialsSlice.actions.rememberLoggedUser({ email, isLogged: true, role: 'viewer' }))
+    store.dispatch(credentialsSlice.actions.rememberLoggedUser({ email, isLogged: true, role }))
     console.log(`tokens for ${email} are refreshed`)
   } catch (error) {
     console.log(error)

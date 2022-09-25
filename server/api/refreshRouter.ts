@@ -27,7 +27,8 @@ refreshRouter.get('/', async (req: ReqType, res: ResType, next: NextType) => {
     const accessJwtToken = getAccessJwtToken({ email })
 
     // send response
-    res.json({ status: 'ok', message: `refresh token for email: ${email} is refreshed`, accessJwtToken })
+    const { role } = user
+    res.json({ status: 'ok', message: `refresh token for email: ${email} is refreshed`, accessJwtToken, role })
   } catch (error) {
     next(error)
   }
