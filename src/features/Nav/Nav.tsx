@@ -1,12 +1,12 @@
 import { useLayoutEffect, useRef } from 'react'
 import styled from '@emotion/styled'
-import { Logo } from './Logo'
-import { NavList } from './NavList'
 import { useDispatchTyped, useSelectorTyped as useSelector } from '@src/store'
 import { setNavMediaQueryWidths } from '@features/nav/navSlice'
-import { calcNavMediaQueryParams } from './functions/calcNavMediaQueryParams'
-import { useMenuItemActionShortcuts } from './functions/useMenuItemActionShortcuts'
 import { theme } from '@src/theme'
+import { useMenuItemActionShortcuts } from './functions/useMenuItemActionShortcuts'
+import { calcNavMediaQueryParams } from './functions/calcNavMediaQueryParams'
+import { Logo } from './Logo'
+import { NavList } from './NavList'
 
 export function Nav() {
   const navRef = useRef() as React.MutableRefObject<HTMLDivElement>
