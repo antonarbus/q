@@ -6,8 +6,8 @@ const initialState = {
   role: null
 }
 
-const userSlice = createSlice({
-  name: 'userSlice',
+export const credentialsSlice = createSlice({
+  name: 'credentialsSlice',
   initialState,
   reducers: {
     rememberLoggedUser: (state, action) => {
@@ -18,5 +18,20 @@ const userSlice = createSlice({
   }
 })
 
-export default userSlice.reducer
-export const { rememberLoggedUser, forgetLoggedUser } = userSlice.actions
+/*
+  *  that is the convention, which I do not like because it is not that understandable for me
+  *  export default credentialsSlice.reducer
+  *  export const { rememberLoggedUser, forgetLoggedUser } = credentialsSlice.actions
+  *
+  *  instead just export the whole slice and
+  *
+  *  1. access in store configuration as
+  *  const store = configureStore({
+  *    reducer: {
+  *      credentials: credentialsSlice.reducer,
+  *    }
+  *  })
+  *
+  *  2. access action object as
+  *  dispatch(credentialsSlice.actions.forgetLoggedUser())
+*/

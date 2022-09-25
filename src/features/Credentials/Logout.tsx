@@ -10,7 +10,7 @@ import { slideElement } from '@functions/slideElement'
 import { notify } from '@features/notifier/notify'
 import { useDispatchTyped } from '@src/store'
 import { httpStatusType } from '@src/types'
-import { forgetLoggedUser } from './credentialsSlice'
+import { credentialsSlice } from './credentialsSlice'
 
 // todo: store user data in redux
 // todo: remove Component and use just a function assigned to menu item
@@ -39,7 +39,7 @@ export function Logout() {
       if (status === 'ok') {
         setHttpStatus('success')
         notify({ msg: `User with ${email} is logged out`, type: 'success', theme: 'light' })
-        dispatch(forgetLoggedUser())
+        dispatch(credentialsSlice.actions.forgetLoggedUser())
       }
     } catch (err) {
       console.log(err)

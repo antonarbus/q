@@ -1,7 +1,7 @@
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode'
 import { store } from '@src/store'
-import { rememberLoggedUser } from './credentialsSlice'
+import { credentialsSlice } from './credentialsSlice'
 import axios from 'axios'
 
 export async function refreshTokens() {
@@ -32,7 +32,7 @@ export async function refreshTokens() {
     if (!email) return console.log('token is invalid')
     localStorage.setItem('accessJwtToken', accessJwtToken)
     console.log(response)
-    store.dispatch(rememberLoggedUser({ email, isLogged: true, role: 'viewer' }))
+    store.dispatch(credentialsSlice.actions.rememberLoggedUser({ email, isLogged: true, role: 'viewer' }))
     console.log(`tokens for ${email} are refreshed`)
   } catch (error) {
     console.log(error)
