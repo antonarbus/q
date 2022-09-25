@@ -3,7 +3,7 @@ import { useSelectorTyped as useSelector } from '@src/store'
 
 export function RequireAuth() {
   const location = useLocation()
-  const isLogged = useSelector(state => state.user.isLogged)
+  const isLogged = useSelector(state => state.credentials.isLogged)
   return (
     isLogged
       ? <Outlet />

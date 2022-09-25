@@ -4,20 +4,20 @@ import login from '@features/temp/Dummy/loginSlice'
 import greetings from '@features/temp/Dummy/greetingsSlice'
 import users from '@features/temp/Dummy/usersSlice'
 import nav from '@features/nav/navSlice'
-import user from '@features/credentials/credentialsSlice'
 import counter from '@features/counter/counterSlice'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import { credentialsSlice } from '@features/credentials/credentialsSlice'
 
 // const logger = createLogger({}) // LOGGER MIDDLEWARE
 
 export const store = configureStore({
   reducer: {
-    login,
-    greetings,
-    users,
+    login, // temp
+    greetings, // temp
+    users, // temp
     nav,
-    user,
-    counter
+    credentials: credentialsSlice.reducer,
+    counter // counter from Redux example, good to have to check how redux is set
   },
   middleware: (defaultMiddleware) => defaultMiddleware({
     serializableCheck: false

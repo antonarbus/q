@@ -4,8 +4,7 @@ import { useDispatchTyped } from '@src/store'
 import { EventType, httpStatusType } from '@src/types'
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-// import { rememberLoggedUser } from '@redux/slices/userSlice'
-import { rememberLoggedUser } from './credentialsSlice'
+import { credentialsSlice } from './credentialsSlice'
 
 export function useLogin() {
   const [httpStatus, setHttpStatus] = useState<httpStatusType>('')
@@ -42,7 +41,7 @@ export function useLogin() {
       if (status === 'ok') {
         setHttpStatus('success')
         localStorage.setItem('accessJwtToken', accessJwtToken)
-        dispatch(rememberLoggedUser({ email, isLogged: true, role: 'viewer' }))
+        dispatch(credentialsSlice.actions.rememberLoggedUser({ email, isLogged: true, role: 'viewer' }))
         notify({ msg: 'Logged in!', theme: 'light', closeAfterMs: 3000 })
         setTimeout(() => {
           slideElement({ element: cardElement, cb: () => navigate(from, { replace: true }) })
