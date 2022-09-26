@@ -226,7 +226,7 @@ export const navStructure: MenuType[] = [
         link: '/register'
       },
       {
-        id: 'SignOut',
+        id: 'signOut',
         icon: <FiLogOut />,
         name: 'Sign out',
         // link: '/logout',

@@ -5,14 +5,16 @@ import { credentialsSlice } from './credentialsSlice'
 import axios from 'axios'
 import { jwtTokenExpirationDays } from './jwtTokenExpirationDays'
 import { jwtAccessTokenType } from '@src/types'
+import { navUpdate } from './navUpdate'
+const forgetLoggedUser = () => store.dispatch(credentialsSlice.actions.forgetLoggedUser())
+const rememberLoggedUser = ({ email, roles }: jwtAccessTokenType) => store.dispatch(credentialsSlice.actions.rememberLoggedUser({ email, isLogged: true, roles }))
 
 export async function refreshTokens() {
-  const logoutFromRedux = () => store.dispatch(credentialsSlice.actions.forgetLoggedUser())
-  const logIntoRedux = ({ email, roles }: jwtAccessTokenType) => store.dispatch(credentialsSlice.actions.rememberLoggedUser({ email, isLogged: true, roles }))
-
   try {
     const existingAccessJwtToken = localStorage.getItem('accessJwtToken')
     if (!existingAccessJwtToken) {
+      forgetLoggedUser()
+      navUpdate.logout()
       return console.log('user is not logged in')
     }
 
@@ -20,7 +22,8 @@ export async function refreshTokens() {
     if (expirationInMin > 5) {
       const payloadFromExistingAccessToken: jwtAccessTokenType = jwt_decode(existingAccessJwtToken)
       const { email, roles } = payloadFromExistingAccessToken
-      logIntoRedux({ email, roles })
+      rememberLoggedUser({ email, roles })
+      navUpdate.login()
       return console.log(`access token expires in ${expirationInMin.toFixed(2)} min, which is more than 5 min, so let's skip the refresh for now`)
     }
 
@@ -29,26 +32,30 @@ export async function refreshTokens() {
 
     if (status === 'error') {
       localStorage.removeItem('accessJwtToken')
-      logoutFromRedux()
+      forgetLoggedUser()
+      navUpdate.logout()
       return console.log(response.data.message)
     }
 
     if (!accessJwtToken) {
-      logoutFromRedux()
+      forgetLoggedUser()
+      navUpdate.logout()
       return console.log('no access token in db')
     }
 
     const payloadFromUpdatedAccessToken: jwtAccessTokenType = jwt_decode(accessJwtToken)
     const { email } = payloadFromUpdatedAccessToken
     if (!email) {
-      logoutFromRedux()
+      forgetLoggedUser()
+      navUpdate.logout()
       return console.log('token is invalid')
     }
 
     if (email) {
       localStorage.setItem('accessJwtToken', accessJwtToken)
       console.log(response)
-      logIntoRedux({ email, roles })
+      rememberLoggedUser({ email, roles })
+      navUpdate.login()
       return console.log(`tokens for ${email} are refreshed`)
     }
   } catch (error) {
