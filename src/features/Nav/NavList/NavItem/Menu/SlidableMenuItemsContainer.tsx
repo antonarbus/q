@@ -1,5 +1,5 @@
+import { getMenuItemByIdsChainSelector } from '@features/nav/navSlice'
 import { useSelectorTyped as useSelector } from '@src/store'
-import { getMenuItemByIdsChain } from './functions/getMenuItemByIdsChain'
 import { MenuItem } from './MenuItem'
 
 type Props = {
@@ -9,7 +9,8 @@ type Props = {
 }
 
 export function SlidableMenuItemsContainer({ reference, idsToMenu, className }: Props) {
-  const menuItems = getMenuItemByIdsChain(idsToMenu)
+  const menuItems = useSelector(getMenuItemByIdsChainSelector(idsToMenu))
+
   return (
     <div ref={reference} className={className}>
       {
