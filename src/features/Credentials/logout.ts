@@ -1,6 +1,7 @@
 import { notify } from '@features/notifier/notify'
 import { store } from '@src/store'
 import { credentialsSlice } from './credentialsSlice'
+import { navUpdate } from './navUpdate'
 
 // todo: hide nav items on login and logout
 
@@ -19,6 +20,7 @@ export async function logoutUser() {
     if (status === 'ok') {
       notify({ msg: `User with ${email} is logged out`, type: 'success', theme: 'light' })
       store.dispatch(credentialsSlice.actions.forgetLoggedUser())
+      navUpdate.logout()
     }
   } catch (err) {
     console.log(err)
