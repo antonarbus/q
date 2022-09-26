@@ -23,7 +23,6 @@ export function Logout() {
   const dispatch = useDispatchTyped()
 
   async function logoutUser() {
-    console.log(555)
     const method = 'GET'
     const options = { method }
     try {
@@ -40,7 +39,6 @@ export function Logout() {
       if (status === 'ok') {
         setHttpStatus('success')
         notify({ msg: `User with ${email} is logged out`, type: 'success', theme: 'light' })
-        console.log(666)
         dispatch(credentialsSlice.actions.forgetLoggedUser())
       }
     } catch (err) {
