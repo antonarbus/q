@@ -1,6 +1,6 @@
 import React from 'react'
 import { nanoid as id } from 'nanoid'
-import { FiLogOut, FiLogIn } from 'react-icons/fi'
+import { FiLogOut, FiLogIn, FiUserPlus } from 'react-icons/fi'
 import { IoDocumentOutline, IoDocumentsOutline, IoSaveOutline, IoShareOutline } from 'react-icons/io5'
 import { IoIosSwap } from 'react-icons/io'
 import logo from '@features/temp/Dummy/logo.svg'
@@ -214,22 +214,22 @@ export const navStructure: MenuType[] = [
         link: '/linkB'
       },
       {
-        id: 'signIn',
+        id: 'logIn',
         icon: <FiLogIn />,
-        name: 'Sign in',
+        name: 'Log in',
         link: '/login'
       },
       {
-        id: 'signUp',
-        icon: <FiLogIn />,
-        name: 'Sign up',
+        id: 'register',
+        icon: <FiUserPlus />,
+        name: 'Register',
         link: '/register'
       },
       {
-        id: 'signOut',
+        id: 'logOut',
         icon: <FiLogOut />,
-        name: 'Sign out',
-        // link: '/logout',
+        name: 'Log out',
+        link: '/',
         func: logoutUser
       }
     ]

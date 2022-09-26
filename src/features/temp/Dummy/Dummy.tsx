@@ -39,7 +39,7 @@ export function Dummy(): JSX.Element {
 
       <div style={style}>
         <div>isLogged: <strong>{isLogged.toString()}</strong></div>
-        <button onClick={() => dispatch(login())}>Sign in/out</button><br />
+        <button onClick={() => dispatch(login())}>Log in/out</button><br />
         <button onClick={() => dispatch(fetchUsers())}>Fetch users</button><br />
         <div>
           {users.loading && 'Loading...'}

@@ -16,6 +16,12 @@ export function clickOnNavItem({ e, navItem, id, navItemRef }: PropsType) {
   const link = navItem?.link
   const func = navItem?.func
 
+  if (link && func) {
+    // just follow the link natively and call the func
+    func()
+    return
+  }
+
   if (link) {
     // just follow the link natively
     return
