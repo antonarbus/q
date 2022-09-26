@@ -6,7 +6,7 @@ const css = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  fontSize: '20vw',
+  fontSize: '3vw',
   color: 'grey'
 }
 

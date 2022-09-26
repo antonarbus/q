@@ -14,6 +14,7 @@ import { Reset } from '@features/credentials/Reset'
 import { Logout } from '@features/credentials/Logout'
 import { Test } from '@features/temp/Test'
 import { refreshTokens } from '@features/credentials/refreshTokens'
+import { Unauthorized } from './Unauthorized'
 
 refreshTokens()
 
@@ -31,9 +32,11 @@ export const App = () => (
             <Route path="logout" element={<Logout />} />
             <Route path="reset" element={<Reset />} />
           </Route>
-          <Route element={<RequireAuth allowedRoles={['user']} />}>
+          <Route element={<RequireAuth allowedRoles={['userr']} />}>
             <Route path="test" element={<Test />} />
           </Route>
+          <Route path="unauthorized" element={<Unauthorized />} />
+
         </Routes>
         <Notifier />
       </BrowserRouter>
