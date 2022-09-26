@@ -5,6 +5,7 @@ import { globalObject } from '@src/globalObject'
 const initialState = {
   navStructure,
   burger: { isOpen: false },
+  mediaEnabled: true,
   mediaQueryWidth: { logoExtension: 0, logoPart: 0, icon: 0, name: 0, burger: 0 },
   idsToCurrentMenuItems: ['top'],
   idsToNextMenuItems: ['top'],
@@ -18,6 +19,8 @@ const navSlice = createSlice({
   reducers: {
     closeBurger: (state) => { state.burger.isOpen = false },
     toggleBurger: (state) => { state.burger.isOpen = !state.burger.isOpen },
+    disableMedia: (state) => { state.mediaEnabled = false },
+    enableMedia: (state) => { state.mediaEnabled = true },
     setNavMediaQueryWidths: (state, action) => {
       state.mediaQueryWidth.logoExtension = action.payload.logoExtension
       state.mediaQueryWidth.logoPart = action.payload.logoPart
@@ -86,5 +89,7 @@ export const {
   goDownInNextMenu,
   goUpInNextMenu,
   setMenuItemHoverIndex,
-  setPropValueByIdInNavStructure
+  setPropValueByIdInNavStructure,
+  disableMedia,
+  enableMedia
 } = navSlice.actions
