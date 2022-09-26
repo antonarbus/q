@@ -28,7 +28,6 @@ export function calcNavMediaQueryParams(nav: HTMLElement, logo: HTMLElement) {
   }
 
   // calc init min nav width to accumulate all elements
-  console.log(666)
   const navItemsQty = nav.querySelectorAll('.nav-item').length
   const navItemWidth = (nav.querySelector('.nav-item') as HTMLElement).offsetWidth
   const logoWidth = (nav.querySelector('.logo-container') as HTMLElement).offsetWidth
