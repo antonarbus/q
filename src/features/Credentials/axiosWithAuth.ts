@@ -26,7 +26,7 @@ axiosWithAuth.interceptors.response.use(
         const { accessJwtToken, email } = response.data
         if (accessJwtToken) {
           localStorage.setItem('accessJwtToken', accessJwtToken)
-          store.dispatch(credentialsSlice.actions.rememberLoggedUser({ email, isLogged: true, role: 'viewer' }))
+          store.dispatch(credentialsSlice.actions.rememberLoggedUser({ email, isLogged: true, roles: 'viewer' }))
         }
         if (!accessJwtToken) {
           localStorage.removeItem('accessJwtToken')
