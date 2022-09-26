@@ -1,4 +1,5 @@
 import { MenuType, navStructure } from '@features/nav/navStructure'
+import { RootState } from '@src/store'
 
 /**
  * returns clicked menu object from navStructure

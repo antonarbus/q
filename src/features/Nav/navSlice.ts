@@ -1,6 +1,7 @@
 import { MenuType, navStructure } from '@features/nav/navStructure'
 import { createSlice } from '@reduxjs/toolkit'
 import { globalObject } from '@src/globalObject'
+import { RootState } from '@src/store'
 
 const initialState = {
   navStructure,
@@ -93,3 +94,21 @@ export const {
   disableMedia,
   enableMedia
 } = navSlice.actions
+
+export const getMenuItemByIdsChainSelector = (idsToCurrentMenuItems: string[]) => (state: RootState) => {
+  const navStructure = state.nav.navStructure
+
+  let clicked: MenuType[] = navStructure
+  let tempMenu: MenuType[] = navStructure
+  idsToCurrentMenuItems.forEach((id: string) => {
+    if (id === 'burger') {
+      clicked = navStructure[0].menuItems!
+      return clicked
+    }
+    if (id !== 'burger') {
+      clicked = tempMenu.find(menuItem => menuItem.id === id)?.menuItems || []
+    }
+    tempMenu = clicked
+  })
+  return clicked
+}
