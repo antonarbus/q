@@ -13,6 +13,13 @@ export const clickOnMenuItem = (e: EventType, menuId: string) => {
   const link = menuItem?.link
   const func = menuItem?.func
 
+  if (link && func) {
+    // follow the link natively and call the func
+    func()
+    store.dispatch(closeMenu())
+    return
+  }
+
   if (link) {
     // just follow the link natively
     store.dispatch(closeMenu())

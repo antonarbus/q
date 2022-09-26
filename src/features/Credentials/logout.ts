@@ -3,8 +3,6 @@ import { store } from '@src/store'
 import { credentialsSlice } from './credentialsSlice'
 import { navUpdate } from './navUpdate'
 
-// todo: hide nav items on login and logout
-
 export async function logoutUser() {
   const method = 'GET'
   const options = { method }
