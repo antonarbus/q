@@ -40,9 +40,7 @@ axiosWithAuth.interceptors.response.use(
     }
 
     if (error.response.status === 401) {
-      // todo: logout in redux
-      // todo: suggest to login
-      console.log('show login card')
+      store.dispatch(credentialsSlice.actions.forgetLoggedUser())
     }
 
     throw error

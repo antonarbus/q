@@ -7,7 +7,9 @@ import axios from 'axios'
 export async function refreshTokens() {
   try {
     const existingAccessJwtToken = localStorage.getItem('accessJwtToken')
-    if (!existingAccessJwtToken) return console.log('user is not logged in')
+    if (!existingAccessJwtToken) {
+      return console.log('user is not logged in')
+    }
 
     // check when access token expires
     const exp = (JSON.parse(window.atob(existingAccessJwtToken.split('.')[1]))).exp // in seconds since 01 January 1970 GMT
@@ -17,22 +19,38 @@ export async function refreshTokens() {
     const difference = expiration - now
     const oneMin = 1 * 60 * 1000
     const expirationInMin = difference / oneMin
-    if (expirationInMin > 5) return console.log(`access token expires in ${expirationInMin} min, which is more than 5 min, so let's skip the refresh for now`)
+
+    if (expirationInMin > 5) {
+      return console.log(`access token expires in ${expirationInMin} min, which is more than 5 min, so let's skip the refresh for now`)
+    }
 
     const response = await axios.get('/api/refresh', { withCredentials: true })
     const { status, accessJwtToken, roles } = response.data
+
     if (status === 'error') {
-      console.log(response.data.message)
       localStorage.removeItem('accessJwtToken')
+      store.dispatch(credentialsSlice.actions.forgetLoggedUser())
+      return console.log(response.data.message)
     }
-    if (!accessJwtToken) return console.log('no access token in db')
+
+    if (!accessJwtToken) {
+      store.dispatch(credentialsSlice.actions.forgetLoggedUser())
+      return console.log('no access token in db')
+    }
+
     const jwtTokenPayload: {email: string | undefined} = jwt_decode(accessJwtToken)
     const { email } = jwtTokenPayload
-    if (!email) return console.log('token is invalid')
-    localStorage.setItem('accessJwtToken', accessJwtToken)
-    console.log(response)
-    store.dispatch(credentialsSlice.actions.rememberLoggedUser({ email, isLogged: true, roles }))
-    console.log(`tokens for ${email} are refreshed`)
+    if (!email) {
+      store.dispatch(credentialsSlice.actions.forgetLoggedUser())
+      return console.log('token is invalid')
+    }
+
+    if (email) {
+      localStorage.setItem('accessJwtToken', accessJwtToken)
+      console.log(response)
+      store.dispatch(credentialsSlice.actions.rememberLoggedUser({ email, isLogged: true, roles }))
+      return console.log(`tokens for ${email} are refreshed`)
+    }
   } catch (error) {
     console.log(error)
   }
