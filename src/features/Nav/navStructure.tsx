@@ -4,6 +4,7 @@ import { FiLogOut, FiLogIn } from 'react-icons/fi'
 import { IoDocumentOutline, IoDocumentsOutline, IoSaveOutline, IoShareOutline } from 'react-icons/io5'
 import { IoIosSwap } from 'react-icons/io'
 import logo from '@features/temp/Dummy/logo.svg'
+import { logoutUser } from '@features/credentials/logout'
 
 const reactIcon = React.createElement(IoShareOutline, {})
 
@@ -228,7 +229,8 @@ export const navStructure: MenuType[] = [
         id: 'SignOut',
         icon: <FiLogOut />,
         name: 'Sign out',
-        link: '/logout'
+        // link: '/logout',
+        func: logoutUser
       }
     ]
   }
