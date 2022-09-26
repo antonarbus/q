@@ -11,7 +11,6 @@ import { Notifier } from '@features/notifier'
 import { Login } from '@features/credentials/Login'
 import { Register } from '@features/credentials/Register'
 import { Reset } from '@features/credentials/Reset'
-import { Logout } from '@features/credentials/Logout'
 import { Test } from '@features/temp/Test'
 import { refreshTokens } from '@features/credentials/refreshTokens'
 import { Unauthorized } from '../credentials/Unauthorized'
@@ -29,7 +28,6 @@ export const App = () => (
           <Route path="/*" element={<Main />}>
             <Route path="register" element={<Register />} />
             <Route path="login" element={<Login />} />
-            <Route path="logout" element={<Logout />} />
             <Route path="reset" element={<Reset />} />
           </Route>
           <Route element={<RequireAuth allowedRoles={['user']} />}>

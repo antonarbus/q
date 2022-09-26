@@ -21,7 +21,7 @@ export async function refreshTokens() {
       const payloadFromExistingAccessToken: jwtAccessTokenType = jwt_decode(existingAccessJwtToken)
       const { email, roles } = payloadFromExistingAccessToken
       logIntoRedux({ email, roles })
-      return console.log(`access token expires in ${expirationInMin} min, which is more than 5 min, so let's skip the refresh for now`)
+      return console.log(`access token expires in ${expirationInMin.toFixed(2)} min, which is more than 5 min, so let's skip the refresh for now`)
     }
 
     const response = await axios.get('/api/refresh', { withCredentials: true })
