@@ -24,7 +24,9 @@ registerRouter.post(
       // await connectToDb()
       const email = req.body.email.toLowerCase()
       const user = await UserModel.findOne({ email })
-      if (user) return res.json({ status: 'error', message: 'user with such email already exists' })
+      if (user) {
+        return res.json({ status: 'error', message: 'user with such email already exists' })
+      }
 
       // save user to db
       const password = await bcrypt.hash(req.body.password, 10)

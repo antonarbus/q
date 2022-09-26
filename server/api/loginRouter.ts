@@ -2,7 +2,7 @@
 import express, { Request as ReqType, Response as ResType, NextFunction as NextType } from 'express'
 import { UserModel } from '../db/models/user.model'
 import bcrypt from 'bcryptjs'
-import { getAccessJwtToken, getRefreshJwtToken, refreshJwtTokenExpirationSeconds } from '../services/jwt/jwt'
+import { generateAccessJwtToken, generateRefreshJwtToken, refreshJwtTokenExpirationSeconds } from '../services/jwt/jwt'
 
 export const loginRouter = express.Router()
 loginRouter.post('/', async (req: ReqType, res: ResType, next: NextType) => {
@@ -23,8 +23,9 @@ loginRouter.post('/', async (req: ReqType, res: ResType, next: NextType) => {
     }
 
     // generate jwt tokens
-    const accessJwtToken = getAccessJwtToken({ email })
-    const refreshJwtToken = getRefreshJwtToken({ email })
+    const { roles } = user
+    const accessJwtToken = generateAccessJwtToken({ email, roles })
+    const refreshJwtToken = generateRefreshJwtToken({ email, roles })
 
     // put refresh token in cookie
     res.cookie('refreshJwtToken', refreshJwtToken, { maxAge: refreshJwtTokenExpirationSeconds * 1000, httpOnly: true })
@@ -35,7 +36,6 @@ loginRouter.post('/', async (req: ReqType, res: ResType, next: NextType) => {
     await UserModel.findOneAndUpdate(filter, update)
 
     // return data to the client
-    const { roles } = user
     res.json({ status: 'ok', message: `user with email: ${email} logged in and tokens are refreshed`, accessJwtToken, email, roles })
   } catch (error: any) {
     next(error)

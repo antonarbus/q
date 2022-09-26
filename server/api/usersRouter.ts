@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken'
 import type { JwtPayload } from 'jsonwebtoken'
 import { verifyToken } from '../middleware/verifyToken'
 
+// todo: delete, it is temp file not related to the project
 export const usersRouter = express.Router()
 usersRouter.get('/', verifyToken, async (req: any, res: ResType, next: NextType) => {
   try {

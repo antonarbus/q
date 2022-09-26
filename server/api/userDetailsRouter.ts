@@ -2,6 +2,7 @@ import express, { Request as ReqType, Response as ResType, NextFunction as NextT
 import { UserModel } from '../db/models/user.model'
 import { verifyToken } from '../middleware/verifyToken'
 
+// todo: delete, it is temp file not related to the projects
 export const userDetailsRouter = express.Router()
 userDetailsRouter.get('/', verifyToken, async (req: any, res: ResType, next: NextType) => {
   try {
