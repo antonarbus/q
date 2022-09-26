@@ -14,7 +14,7 @@ import { Reset } from '@features/credentials/Reset'
 import { Logout } from '@features/credentials/Logout'
 import { Test } from '@features/temp/Test'
 import { refreshTokens } from '@features/credentials/refreshTokens'
-import { Unauthorized } from './Unauthorized'
+import { Unauthorized } from '../credentials/Unauthorized'
 
 refreshTokens()
 

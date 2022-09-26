@@ -12,7 +12,6 @@ import { useDispatchTyped } from '@src/store'
 import { httpStatusType } from '@src/types'
 import { credentialsSlice } from './credentialsSlice'
 
-// todo: store user data in redux
 // todo: remove Component and use just a function assigned to menu item
 
 export function Logout() {
