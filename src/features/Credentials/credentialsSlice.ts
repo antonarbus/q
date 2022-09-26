@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   email: null,
   isLogged: false,
-  roles: ['some role']
+  roles: ['no role']
 }
 
 export const credentialsSlice = createSlice({
@@ -19,11 +19,12 @@ export const credentialsSlice = createSlice({
 })
 
 /*
-  *  that is the convention, which I do not like much
+  *  here is the convention, which I do not like because of default export and not clear traceability
+  *
   *  export default credentialsSlice.reducer
   *  export const { rememberLoggedUser, forgetLoggedUser } = credentialsSlice.actions
   *
-  *  instead just export the whole slice and
+  *  I like to export the whole slice instead and take all data directly from it, even it is more code
   *
   *  1. access in store configuration as
   *  const store = configureStore({
