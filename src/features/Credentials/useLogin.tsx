@@ -30,7 +30,7 @@ export function useLogin() {
       setHttpStatus('loading')
       const res = await fetch('/api/login', options)
       const data = await res.json()
-      const { status, message, accessJwtToken, role } = data
+      const { status, message, accessJwtToken, roles } = data
       if (status === 'error') {
         setHttpStatus('error')
         localStorage.removeItem('accessJwtToken')
@@ -41,7 +41,7 @@ export function useLogin() {
       if (status === 'ok') {
         setHttpStatus('success')
         localStorage.setItem('accessJwtToken', accessJwtToken)
-        dispatch(credentialsSlice.actions.rememberLoggedUser({ email, isLogged: true, role }))
+        dispatch(credentialsSlice.actions.rememberLoggedUser({ email, isLogged: true, roles }))
         notify({ msg: 'Logged in!', theme: 'light', closeAfterMs: 3000 })
         setTimeout(() => {
           slideElement({ element: cardElement, cb: () => navigate(from, { replace: true }) })

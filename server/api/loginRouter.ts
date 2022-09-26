@@ -23,7 +23,6 @@ loginRouter.post('/', async (req: ReqType, res: ResType, next: NextType) => {
     }
 
     // generate jwt tokens
-    // todo: add role inside
     const accessJwtToken = getAccessJwtToken({ email })
     const refreshJwtToken = getRefreshJwtToken({ email })
 
@@ -36,8 +35,8 @@ loginRouter.post('/', async (req: ReqType, res: ResType, next: NextType) => {
     await UserModel.findOneAndUpdate(filter, update)
 
     // return data to the client
-    const { role } = user
-    res.json({ status: 'ok', message: `user with email: ${email} logged in and tokens are refreshed`, accessJwtToken, email, role })
+    const { roles } = user
+    res.json({ status: 'ok', message: `user with email: ${email} logged in and tokens are refreshed`, accessJwtToken, email, roles })
   } catch (error: any) {
     next(error)
   }

@@ -32,11 +32,10 @@ export const App = () => (
             <Route path="logout" element={<Logout />} />
             <Route path="reset" element={<Reset />} />
           </Route>
-          <Route element={<RequireAuth allowedRoles={['userr']} />}>
+          <Route element={<RequireAuth allowedRoles={['user']} />}>
             <Route path="test" element={<Test />} />
           </Route>
           <Route path="unauthorized" element={<Unauthorized />} />
-
         </Routes>
         <Notifier />
       </BrowserRouter>

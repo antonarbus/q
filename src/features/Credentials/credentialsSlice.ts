@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   email: null,
   isLogged: false,
-  role: ''
+  roles: ['some role']
 }
 
 export const credentialsSlice = createSlice({
@@ -11,8 +11,8 @@ export const credentialsSlice = createSlice({
   initialState,
   reducers: {
     rememberLoggedUser: (state, action) => {
-      const { email, isLogged, role } = action.payload
-      return { ...state, email, isLogged, role }
+      const { email, isLogged, roles } = action.payload
+      return { ...state, email, isLogged, roles }
     },
     forgetLoggedUser: () => initialState
   }
