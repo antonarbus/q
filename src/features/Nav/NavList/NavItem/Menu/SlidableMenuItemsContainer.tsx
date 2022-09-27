@@ -17,11 +17,11 @@ export function SlidableMenuItemsContainer({ reference, idsToMenu, className }: 
         menuItems
           .filter(menuItem => !menuItem.isHidden)
           .map((menuItem, index) => (
-              <MenuItem
-                menuItem={menuItem}
-                key={menuItem.id}
-                hoveredMenuItemIndex={index + 2}
-              />
+            <MenuItem
+              menuItem={menuItem}
+              key={menuItem.id}
+              hoveredMenuItemIndex={index + 2}
+            />
           ))
       }
     </div>
