@@ -95,6 +95,7 @@ export const {
   enableMedia
 } = navSlice.actions
 
+// selectors
 export const getMenuItemByIdsChainSelector = (idsToCurrentMenuItems: string[]) => (state: RootState) => {
   const navStructure = state.nav.navStructure
 
