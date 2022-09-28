@@ -1,7 +1,6 @@
-import { setPropValueByIdInNavStructure } from '@features/nav/navSlice'
 import { notify } from '@features/notifier/notify'
 import { slideElement } from '@functions/slideElement'
-import { store, useDispatchTyped } from '@src/store'
+import { useDispatchTyped } from '@src/store'
 import { EventType, httpStatusType } from '@src/types'
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
