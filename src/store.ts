@@ -7,6 +7,7 @@ import nav from '@features/nav/navSlice'
 import counter from '@features/counter/counterSlice'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { credentialsSlice } from '@features/credentials/credentialsSlice'
+import { applicationSlice } from '@features/application/applicationSlice'
 
 // const logger = createLogger({}) // LOGGER MIDDLEWARE
 
@@ -17,6 +18,7 @@ export const store = configureStore({
     users, // temp
     nav,
     credentials: credentialsSlice.reducer,
+    application: applicationSlice.reducer,
     counter // counter from Redux example, good to have to check how redux is set
   },
   middleware: (defaultMiddleware) => defaultMiddleware({
