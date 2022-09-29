@@ -14,6 +14,8 @@ import { Reset } from '@features/credentials/Reset'
 import { Test } from '@features/temp/Test'
 import { refreshTokens } from '@features/credentials/refreshTokens'
 import { Unauthorized } from '../credentials/Unauthorized'
+import { Render } from '@src/common_components/Render'
+import { LoadingFullPage } from './LoadingFullPage'
 
 // todo: works synchronously and blocks the loading, but does not lead to nav elements change
 refreshTokens()
@@ -24,6 +26,7 @@ export const App = () => (
     <ThemeProvider theme={createTheme(theme)}> {/* by createTheme from MUI we set global style for all MUI elements */}
       <GlobalStyles />
       <BrowserRouter>
+        <Render when={true}><LoadingFullPage /></Render>
         <Nav />
         <Routes>
           <Route path="/*" element={<Main />}>
