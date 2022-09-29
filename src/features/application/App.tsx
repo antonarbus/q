@@ -15,6 +15,7 @@ import { Test } from '@features/temp/Test'
 import { refreshTokens } from '@features/credentials/refreshTokens'
 import { Unauthorized } from '../credentials/Unauthorized'
 
+// todo: works synchronously and blocks the loading, but does not lead to nav elements change
 refreshTokens()
 
 export const App = () => (
