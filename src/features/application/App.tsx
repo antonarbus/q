@@ -26,7 +26,7 @@ export const App = () => {
       <ThemeProvider theme={createTheme(theme)}>
         <GlobalStyles />
         <BrowserRouter>
-          <Render when={isLoading}><LoadingFullPage /></Render>
+          <Render when={true}><LoadingFullPage /></Render>
           <Nav />
           <Routes>
             <Route element={<PersistentAuth />}>
