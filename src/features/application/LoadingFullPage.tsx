@@ -1,4 +1,4 @@
-import { Loading as LoadingDots } from 'react-loading-dot'
+import { LoadingDots } from '@src/common_components/LoadingDots'
 
 export const LoadingFullPage = () => (
   <div css={{
