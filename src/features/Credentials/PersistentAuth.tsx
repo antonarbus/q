@@ -1,4 +1,3 @@
-import { LoadingFullPage } from '@src/common_components/LoadingFullPage'
 import { store, useSelectorTyped } from '@src/store'
 import { useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
@@ -12,6 +11,7 @@ import { jwtTokenExpirationDays } from './jwtTokenExpirationDays'
 import { jwtAccessTokenType } from '@src/types'
 import { navUpdate } from './navUpdate'
 import { globalObject } from '@src/globalObject'
+import { LoadingFullPage } from '@features/application/LoadingFullPage'
 const forgetLoggedUser = () => store.dispatch(credentialsSlice.actions.forgetLoggedUser())
 const rememberLoggedUser = ({ email, roles }: jwtAccessTokenType) => store.dispatch(credentialsSlice.actions.rememberLoggedUser({ email, isLogged: true, roles }))
 
@@ -74,9 +74,13 @@ export const PersistentAuth = () => {
       }
     }
 
-    !isLogged
-      ? refreshTokens()
-      : setIsLoading(false)
+    refreshTokens()
+
+    // if (isLogged) {
+    //   refreshTokens()
+    // } else {
+    //   setIsLoading(false)
+    // }
   }, [isLogged])
 
   return (
