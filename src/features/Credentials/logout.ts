@@ -25,7 +25,6 @@ export async function logoutUser() {
     console.log(err)
     notify({ msg: 'Internal error', type: 'error', theme: 'light' })
   } finally {
-    // localStorage.removeItem('accessJwtToken')
     globalObject.accessJwtToken = ''
   }
 }

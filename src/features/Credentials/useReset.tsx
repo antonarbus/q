@@ -24,7 +24,6 @@ export function useReset() {
       const data = await res.json()
       if (data.status === 'error') {
         setHttpStatus('error')
-        // localStorage.removeItem('accessJwtToken')
         globalObject.accessJwtToken = ''
       }
 

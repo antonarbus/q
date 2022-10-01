@@ -12,10 +12,10 @@ import { Register } from '@features/credentials/Register'
 import { Reset } from '@features/credentials/Reset'
 import { Test } from '@features/temp/Test'
 import { Unauthorized } from '../credentials/Unauthorized'
-import { PersistentAuth } from '@features/credentials/PersistentAuth'
 import { Render } from '@src/common_components/Render'
 import { LoadingFullPage } from './LoadingFullPage'
 import { useSelectorTyped } from '@src/store'
+import { PersistentAuth } from '@features/credentials/PersistentAuth'
 
 export const App = () => {
   const isLoading = useSelectorTyped(state => state.application.isLoading)
@@ -26,7 +26,7 @@ export const App = () => {
       <ThemeProvider theme={createTheme(theme)}>
         <GlobalStyles />
         <BrowserRouter>
-          <Render when={true}><LoadingFullPage /></Render>
+          <Render when={isLoading}><LoadingFullPage /></Render>
           <Nav />
           <Routes>
             <Route element={<PersistentAuth />}>
