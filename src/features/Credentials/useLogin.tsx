@@ -36,7 +36,6 @@ export function useLogin() {
 
       if (status === 'error') {
         setHttpStatus('error')
-        // localStorage.removeItem('accessJwtToken')
         globalObject.accessJwtToken = ''
         if (message === 'invalid credentials') {
           notify({ msg: 'Invalid credentials', type: 'error', theme: 'light' })
@@ -49,7 +48,6 @@ export function useLogin() {
 
       if (status === 'ok') {
         setHttpStatus('success')
-        // localStorage.setItem('accessJwtToken', accessJwtToken)
         globalObject.accessJwtToken = accessJwtToken
         dispatch(credentialsSlice.actions.rememberLoggedUser({ email, isLogged: true, roles }))
         notify({ msg: 'Logged in!', theme: 'light', closeAfterMs: 3000 })

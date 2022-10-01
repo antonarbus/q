@@ -10,6 +10,5 @@ export const applicationSlice = createSlice({
   reducers: {
     startLoading: (state) => { state.isLoading = true }, // type: 'applicationSlice/startLoading'
     stopLoading: (state) => { state.isLoading = false } // type: 'applicationSlice/stopLoading'
-
   }
 })

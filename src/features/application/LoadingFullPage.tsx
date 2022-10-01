@@ -1,6 +1,10 @@
 import { LoadingDots } from '@src/common_components/LoadingDots'
 
-export const LoadingFullPage = () => (
+type Props = {
+  title?: string
+}
+
+export const LoadingFullPage = ({ title }: Props) => (
   <div css={{
     position: 'fixed',
     top: 0,
@@ -18,6 +22,17 @@ export const LoadingFullPage = () => (
     WebkitTapHighlightColor: 'transparent',
     backdropFilter: 'blur(2px)'
   }}>
-    <LoadingDots background='#fff'/>
+    <div
+      css={{
+        color: '#d4d4d4',
+        fontSize: '2rem',
+        fontWeight: 300,
+        position: 'relative',
+        top: '-60px'
+      }}
+    >
+      {title}
+    </div>
+    <LoadingDots />
   </div>
 )
