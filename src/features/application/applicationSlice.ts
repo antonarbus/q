@@ -8,7 +8,8 @@ export const applicationSlice = createSlice({
   name: 'applicationSlice',
   initialState,
   reducers: {
-    startLoading: (state) => { state.isLoading = true },
-    stopLoading: (state) => { state.isLoading = false }
+    startLoading: (state) => { state.isLoading = true }, // type: 'applicationSlice/startLoading'
+    stopLoading: (state) => { state.isLoading = false } // type: 'applicationSlice/stopLoading'
+
   }
 })
