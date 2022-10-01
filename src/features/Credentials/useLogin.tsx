@@ -1,5 +1,6 @@
 import { notify } from '@features/notifier/notify'
 import { slideElement } from '@functions/slideElement'
+import { globalObject } from '@src/globalObject'
 import { useDispatchTyped } from '@src/store'
 import { EventType, httpStatusType } from '@src/types'
 import { useState } from 'react'
@@ -32,16 +33,24 @@ export function useLogin() {
       const res = await fetch('/api/login', options)
       const data = await res.json()
       const { status, message, accessJwtToken, roles } = data
+
       if (status === 'error') {
         setHttpStatus('error')
-        localStorage.removeItem('accessJwtToken')
-        message === 'invalid credentials' && notify({ msg: 'Invalid credentials', type: 'error', theme: 'light' })
-        message === 'account is not activated' && notify({ msg: 'Account is not activated. Check mailbox.', type: 'error', theme: 'light' })
+        // localStorage.removeItem('accessJwtToken')
+        globalObject.accessJwtToken = ''
+        if (message === 'invalid credentials') {
+          notify({ msg: 'Invalid credentials', type: 'error', theme: 'light' })
+        }
+        if (message === 'account is not activated') {
+          notify({ msg: 'Account is not activated. Check mailbox.', type: 'error', theme: 'light' })
+        }
         return
       }
+
       if (status === 'ok') {
         setHttpStatus('success')
-        localStorage.setItem('accessJwtToken', accessJwtToken)
+        // localStorage.setItem('accessJwtToken', accessJwtToken)
+        globalObject.accessJwtToken = accessJwtToken
         dispatch(credentialsSlice.actions.rememberLoggedUser({ email, isLogged: true, roles }))
         notify({ msg: 'Logged in!', theme: 'light', closeAfterMs: 3000 })
         navUpdate.login()

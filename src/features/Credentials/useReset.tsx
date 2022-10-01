@@ -1,4 +1,5 @@
 import { notify } from '@features/notifier/notify'
+import { globalObject } from '@src/globalObject'
 import { EventType, httpStatusType } from '@src/types'
 import { useState } from 'react'
 
@@ -21,10 +22,16 @@ export function useReset() {
       // todo: create a /reset api
       const res = await fetch('/api/reset', options)
       const data = await res.json()
-      data.status === 'error' && setHttpStatus('error')
-      data.status === 'error' && localStorage.removeItem('accessJwtToken')
-      data.status === 'ok' && setHttpStatus('success')
-      data.status === 'ok' && notify({ msg: 'Check your email box', theme: 'light', closeAfterMs: 5000 })
+      if (data.status === 'error') {
+        setHttpStatus('error')
+        // localStorage.removeItem('accessJwtToken')
+        globalObject.accessJwtToken = ''
+      }
+
+      if (data.status === 'ok') {
+        setHttpStatus('success')
+        notify({ msg: 'Check your email box', theme: 'light', closeAfterMs: 5000 })
+      }
       console.log(data)
     } catch (err) {
       setHttpStatus('error')

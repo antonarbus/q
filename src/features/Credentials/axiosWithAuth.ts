@@ -1,12 +1,14 @@
 // axios.ts
 import { credentialsSlice } from '@features/credentials/credentialsSlice'
+import { globalObject } from '@src/globalObject'
 import { store } from '@src/store'
 import axios from 'axios'
 
 export const axiosWithAuth = axios.create({ withCredentials: true })
 
 axiosWithAuth.interceptors.request.use((config) => {
-  const accessJwtToken = localStorage.getItem('accessJwtToken')
+  // const accessJwtToken = localStorage.getItem('accessJwtToken')
+  const accessJwtToken = globalObject.accessJwtToken
   if (config.headers && accessJwtToken) {
     config.headers['access-jwt-token'] = accessJwtToken
   }
@@ -25,11 +27,13 @@ axiosWithAuth.interceptors.response.use(
         const response = await axios.get('/api/refresh', { withCredentials: true })
         const { accessJwtToken, email } = response.data
         if (accessJwtToken) {
-          localStorage.setItem('accessJwtToken', accessJwtToken)
+          // localStorage.setItem('accessJwtToken', accessJwtToken)
+          globalObject.accessJwtToken = accessJwtToken
           store.dispatch(credentialsSlice.actions.rememberLoggedUser({ email, isLogged: true, roles: 'viewer' }))
         }
         if (!accessJwtToken) {
-          localStorage.removeItem('accessJwtToken')
+          // localStorage.removeItem('accessJwtToken')
+          globalObject.accessJwtToken = ''
           store.dispatch(credentialsSlice.actions.forgetLoggedUser())
         }
         return axiosWithAuth.request(originalRequest)

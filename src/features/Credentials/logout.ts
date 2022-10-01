@@ -1,4 +1,5 @@
 import { notify } from '@features/notifier/notify'
+import { globalObject } from '@src/globalObject'
 import { store } from '@src/store'
 import { credentialsSlice } from './credentialsSlice'
 import { navUpdate } from './navUpdate'
@@ -17,13 +18,14 @@ export async function logoutUser() {
     }
     if (status === 'ok') {
       notify({ msg: `User with ${email} is logged out`, type: 'success', theme: 'light' })
-      store.dispatch(credentialsSlice.actions.forgetLoggedUser())
-      navUpdate.logout()
     }
+    store.dispatch(credentialsSlice.actions.forgetLoggedUser())
+    navUpdate.logout()
   } catch (err) {
     console.log(err)
     notify({ msg: 'Internal error', type: 'error', theme: 'light' })
   } finally {
-    localStorage.removeItem('accessJwtToken')
+    // localStorage.removeItem('accessJwtToken')
+    globalObject.accessJwtToken = ''
   }
 }
