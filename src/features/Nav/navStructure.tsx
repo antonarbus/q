@@ -5,6 +5,7 @@ import { IoDocumentOutline, IoDocumentsOutline, IoSaveOutline, IoShareOutline } 
 import { IoIosSwap } from 'react-icons/io'
 import logo from '@features/temp/Dummy/logo.svg'
 import { logoutUser } from '@features/credentials/logout'
+import { Person as PersonIcon } from '@mui/icons-material'
 
 const reactIcon = React.createElement(IoShareOutline, {})
 
@@ -214,23 +215,31 @@ export const navStructure: MenuType[] = [
         link: '/linkB'
       },
       {
-        id: 'logIn',
-        icon: <FiLogIn />,
-        name: 'Log in',
-        link: '/login'
-      },
-      {
-        id: 'register',
-        icon: <FiUserPlus />,
-        name: 'Register',
-        link: '/register'
-      },
-      {
-        id: 'logOut',
-        icon: <FiLogOut />,
-        name: 'Log out',
-        link: '/',
-        func: logoutUser
+        id: 'user',
+        icon: <PersonIcon />,
+        name: 'User',
+        menuItems: [
+          {
+            id: 'logIn',
+            icon: <FiLogIn />,
+            name: 'Log in',
+            link: '/login'
+          },
+          {
+            id: 'register',
+            icon: <FiUserPlus />,
+            name: 'Register',
+            link: '/register'
+          },
+          {
+            id: 'logOut',
+            icon: <FiLogOut />,
+            name: 'Log out',
+            link: '/',
+            func: logoutUser,
+            isHidden: true
+          }
+        ]
       }
     ]
   }
