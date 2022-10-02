@@ -29,17 +29,17 @@ export const App = () => {
           <Render when={isLoading}><LoadingFullPage /></Render>
           <Nav />
           <Routes>
-            <Route path="/*" element={<Main />}>
-              <Route path="register" element={<Register />} />
-              <Route path="login" element={<Login />} />
-              <Route path="reset" element={<Reset />} />
-            </Route>
+              <Route path="/*" element={<Main />}>
+                <Route path="register" element={<Register />} />
+                <Route path="login" element={<Login />} />
+                <Route path="reset" element={<Reset />} />
+              </Route>
             <Route element={<PersistentAuth />}>
               <Route element={<RequireAuth allowedRoles={['user']} />}>
                 <Route path="test" element={<Test />} />
               </Route>
-              <Route path="unauthorized" element={<Unauthorized />} />
             </Route>
+            <Route path="unauthorized" element={<Unauthorized />} />
           </Routes>
           <Notifier />
         </BrowserRouter>
