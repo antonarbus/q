@@ -220,16 +220,16 @@ export const navStructure: MenuType[] = [
         name: 'User',
         menuItems: [
           {
-            id: 'logIn',
-            icon: <FiLogIn />,
-            name: 'Log in',
-            link: '/login'
-          },
-          {
             id: 'register',
             icon: <FiUserPlus />,
             name: 'Register',
             link: '/register'
+          },
+          {
+            id: 'logIn',
+            icon: <FiLogIn />,
+            name: 'Log in',
+            link: '/login'
           },
           {
             id: 'logOut',
