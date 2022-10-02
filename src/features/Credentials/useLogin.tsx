@@ -52,15 +52,14 @@ export function useLogin() {
         dispatch(credentialsSlice.actions.rememberLoggedUser({ email, isLogged: true, roles }))
         notify({ msg: 'Logged in!', theme: 'light', closeAfterMs: 3000 })
         navUpdate.login()
-        setTimeout(() => {
-          slideElement({ element: cardElement, cb: () => navigate(from, { replace: true }) })
-        }, 2000)
+        setTimeout(() => slideElement({ element: cardElement, cb: () => navigate(from, { replace: true }) }), 1000)
       }
       console.log(data)
     } catch (err) {
       setHttpStatus('error')
       console.log(err)
       notify({ msg: 'Internal error', type: 'error', theme: 'light' })
+      setTimeout(() => slideElement({ element: cardElement, cb: () => navigate(from, { replace: true }) }), 1000)
     }
   }
 
