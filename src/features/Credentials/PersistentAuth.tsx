@@ -9,6 +9,7 @@ export const PersistentAuth = () => {
     <>
       {
         isCheckingTokens
+          // ? null
           ? <LoadingFullPage title='Credentials check' />
           : <Outlet />
       }
