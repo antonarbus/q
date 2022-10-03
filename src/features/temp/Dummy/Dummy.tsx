@@ -5,6 +5,7 @@ import { useDispatchTyped, useSelectorTyped } from '@src/store'
 import { theme } from '@src/theme'
 import { login } from './loginSlice'
 import { fetchUsers } from './usersSlice'
+import { Link } from 'react-router-dom'
 
 /**
  * Component with counter
@@ -47,6 +48,8 @@ export function Dummy(): JSX.Element {
           {!users.loading && !!users.users.length && users.users.map(user => <div key={user.id}>{user.name}</div>)}
         </div>
       </div>
+
+      <Link to= '/test'>Link to Test</Link>
     </div>
   )
 }

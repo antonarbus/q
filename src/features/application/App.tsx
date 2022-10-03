@@ -1,4 +1,3 @@
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { RequireAuth } from '@features/credentials/RequireAuth'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
@@ -21,29 +20,26 @@ export const App = () => {
   const isLoading = useSelectorTyped(state => state.application.isLoading)
 
   return (
-    <>
-      {/* @ts-ignore */}
-      <ThemeProvider theme={createTheme(theme)}>
-        <GlobalStyles />
-        <BrowserRouter>
-          <Render when={isLoading}><LoadingFullPage /></Render>
-          <Nav />
-          <Routes>
-              <Route path="/*" element={<Main />}>
-                <Route path="register" element={<Register />} />
-                <Route path="login" element={<Login />} />
-                <Route path="reset" element={<Reset />} />
-              </Route>
-            <Route element={<PersistentAuth />}>
-              <Route element={<RequireAuth allowedRoles={['user']} />}>
-                <Route path="test" element={<Test />} />
-              </Route>
+    <ThemeProvider theme={createTheme(theme as any)}>
+      <GlobalStyles />
+      <BrowserRouter>
+        <Render when={isLoading}><LoadingFullPage /></Render>
+        <Nav />
+        <Routes>
+          <Route path="/*" element={<Main />}>
+            <Route path="register" element={<Register />} />
+            <Route path="login" element={<Login />} />
+            <Route path="reset" element={<Reset />} />
+          </Route>
+          <Route element={<PersistentAuth />}>
+            <Route element={<RequireAuth allowedRoles={['user']} />}>
+              <Route path="test" element={<Test />} />
             </Route>
-            <Route path="unauthorized" element={<Unauthorized />} />
-          </Routes>
-          <Notifier />
-        </BrowserRouter>
-      </ThemeProvider>
-    </>
+          </Route>
+          <Route path="unauthorized" element={<Unauthorized />} />
+        </Routes>
+        <Notifier />
+      </BrowserRouter>
+    </ThemeProvider>
   )
 }
