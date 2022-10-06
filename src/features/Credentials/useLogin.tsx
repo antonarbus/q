@@ -50,7 +50,7 @@ export function useLogin() {
         setHttpStatus('success')
         globalObject.accessJwtToken = accessJwtToken
         dispatch(credentialsSlice.actions.rememberLoggedUser({ email, isLogged: true, roles }))
-        notify({ msg: 'Logged in!', theme: 'light', closeAfterMs: 3000 })
+        // notify({ msg: 'Logged in!', theme: 'light', closeAfterMs: 3000 })
         navUpdate.login()
         setTimeout(() => slideElement({ element: cardElement, cb: () => navigate(from, { replace: true }) }), 1000)
       }

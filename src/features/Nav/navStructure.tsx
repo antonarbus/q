@@ -215,29 +215,23 @@ export const navStructure: MenuType[] = [
         link: '/linkB'
       },
       {
+        id: 'logIn',
+        icon: <FiLogIn />,
+        name: 'Log in',
+        link: '/login'
+      },
+      {
         id: 'user',
         icon: <PersonIcon />,
         name: 'User',
+        isHidden: true,
         menuItems: [
-          {
-            id: 'register',
-            icon: <FiUserPlus />,
-            name: 'Register',
-            link: '/register'
-          },
-          {
-            id: 'logIn',
-            icon: <FiLogIn />,
-            name: 'Log in',
-            link: '/login'
-          },
           {
             id: 'logOut',
             icon: <FiLogOut />,
             name: 'Log out',
             link: '/',
-            func: logoutUser,
-            isHidden: true
+            func: logoutUser
           }
         ]
       }
