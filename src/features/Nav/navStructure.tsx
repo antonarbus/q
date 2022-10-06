@@ -5,7 +5,7 @@ import { IoDocumentOutline, IoDocumentsOutline, IoSaveOutline, IoShareOutline } 
 import { IoIosSwap } from 'react-icons/io'
 import logo from '@features/temp/Dummy/logo.svg'
 import { logoutUser } from '@features/credentials/logout'
-import { Person as PersonIcon } from '@mui/icons-material'
+import { Person as PersonIcon, Settings as SettingsIcon } from '@mui/icons-material'
 
 const reactIcon = React.createElement(IoShareOutline, {})
 
@@ -226,6 +226,18 @@ export const navStructure: MenuType[] = [
         name: 'User',
         isHidden: true,
         menuItems: [
+          {
+            id: 'settings',
+            icon: <SettingsIcon />,
+            name: 'Settings',
+            link: '/settings'
+          },
+          {
+            id: 'profile',
+            icon: <PersonIcon />,
+            name: 'Profile',
+            link: '/profile'
+          },
           {
             id: 'logOut',
             icon: <FiLogOut />,
