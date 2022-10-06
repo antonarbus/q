@@ -17,7 +17,7 @@ export async function logoutUser() {
       message === 'no user with such refresh token' && notify({ msg: 'No user with such refresh token', type: 'info', theme: 'light' })
     }
     if (status === 'ok') {
-      notify({ msg: `User with ${email} is logged out`, type: 'success', theme: 'light' })
+      // notify({ msg: `User with ${email} is logged out`, type: 'success', theme: 'light' })
     }
     store.dispatch(credentialsSlice.actions.forgetLoggedUser())
     navUpdate.logout()

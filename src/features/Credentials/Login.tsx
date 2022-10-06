@@ -27,7 +27,7 @@ export function Login() {
 
   return (
     <BackdropWithSlidableContent
-      onSlideIn={() => inputRef.current.focus()}
+      onSlideIn={() => { /* inputRef.current.focus() */ }}
       onSlideOut={() => navigate('/')}
     >
       <CardCustom

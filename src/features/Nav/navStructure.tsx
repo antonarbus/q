@@ -223,7 +223,7 @@ export const navStructure: MenuType[] = [
       {
         id: 'user',
         icon: <PersonIcon />,
-        name: 'User',
+        name: '',
         isHidden: true,
         menuItems: [
           {
