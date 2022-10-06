@@ -221,9 +221,9 @@ export const navStructure: MenuType[] = [
         link: '/login'
       },
       {
-        id: 'user',
+        id: 'account',
         icon: <PersonIcon />,
-        name: '',
+        name: 'Account',
         isHidden: true,
         menuItems: [
           {
