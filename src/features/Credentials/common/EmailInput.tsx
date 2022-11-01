@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useUpdateEffect } from 'react-use'
+import { useEffectOnce, useUpdateEffect } from 'react-use'
 import mailcheck from 'mailcheck'
 import { InputAdornment, TextField } from '@mui/material'
 import { Person } from '@mui/icons-material'
@@ -58,9 +58,10 @@ export function EmailInput({ email, setEmail, isEmailOk, setIsEmailOk, inputRef 
     <div css={{ position: 'relative' }}>
       <TextField
         fullWidth
-        id="email"
+        // id="email"
         label={emailLabel}
-        name="email"
+        // name="email"
+        autoFocus
         autoComplete="email"
         placeholder='Email'
         value={email}
