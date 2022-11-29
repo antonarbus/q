@@ -21,33 +21,38 @@ export const ResizablePaper = ({ children }: Props) => {
         padding: '20px'
       }}
         defaultSize={{
-          width: 'inherit',
+          width: '800px',
           height: 'inherit'
         }}
-        minWidth={200}
-        minHeight={100}
-        maxWidth={600}
-        maxHeight={800}
+        minWidth='400px'
+        maxWidth='95vw'
+        // minHeight={100}
+        // maxHeight={800}
         bounds={'window' || 'parent'}
         enable={{
-          // top: true,
           right: true,
-          // bottom: true,
           left: true
+          // top: true,
+          // bottom: true,
           // topRight: false,
           // bottomRight: false,
           // bottomLeft: false,
           // topLeft: false
         }}
-        onResize={(event, direction, refToElement, delta) => {
+        onResize={(e, direction, refToElement, delta) => {
           setDirection(direction)
           setResizedBy(delta)
-          setMouseCords({ x: event.x, y: event.y })
+          setMouseCords({ x: e.x, y: e.y })
           setWidth(refToElement.style.width)
           setHeight(refToElement.style.height)
         }}
-        onResizeStart={() => { console.log('resize started') }}
-        onResizeStop={() => { console.log('resize stopped') }}
+        onResizeStart={() => {}}
+        onResizeStop={(e, direction, refToElement) => {
+          console.log('e', e)
+          console.log('direction', direction)
+          console.log('refToElement', refToElement)
+          console.log('refToElement.style.width', refToElement.style.width)
+        }}
       >
         {children}
       </Resizable>
