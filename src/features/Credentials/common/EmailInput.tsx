@@ -5,7 +5,6 @@ import { InputAdornment, TextField } from '@mui/material'
 import { Person } from '@mui/icons-material'
 import { theme } from '@src/theme'
 import { EventType } from '@src/types'
-import { Render } from '@src/common_components/Render'
 
 const isEmailPatternOk = (email: string) => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
 
@@ -81,7 +80,7 @@ export function EmailInput({ email, setEmail, isEmailOk, setIsEmailOk, inputRef 
         }}
         inputRef={inputRef}
       />
-      <Render when={!!emailSuggestion}>
+      {!!emailSuggestion && (
         <div css={{ position: 'absolute', bottom: '18px', right: '5px', fontSize: '12px', color: theme.colors.red }} >
           Did you mean? {' '}
           <a
@@ -95,7 +94,7 @@ export function EmailInput({ email, setEmail, isEmailOk, setIsEmailOk, inputRef 
             {emailSuggestion}
           </a>
         </div>
-      </Render>
+      )}
     </div>
   )
 }

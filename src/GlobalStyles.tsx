@@ -4,7 +4,7 @@ export const GlobalStyles = () => (
   <Global
     styles={css`
       body{
-        background-color:#f2f4f7;
+        background-color:#e9e9e9;
         color:rgba(0, 0, 0, 0.87);
         font-family:"Roboto","Helvetica","Arial",sans-serif;
         font-weight:400;
