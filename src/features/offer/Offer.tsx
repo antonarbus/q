@@ -21,9 +21,7 @@ export const Offer = () => {
       <div>hello</div>
       <div>hello</div>
       <div>hello</div>
-      <div>hello</div>
-      <div>hello</div>
-      <div>hello</div>
+
     </ResizablePaper>
   )
 }
