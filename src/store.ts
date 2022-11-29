@@ -1,5 +1,4 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
-// import { createLogger } from 'redux-logger'
 import login from '@features/temp/Dummy/loginSlice'
 import greetings from '@features/temp/Dummy/greetingsSlice'
 import users from '@features/temp/Dummy/usersSlice'
@@ -8,8 +7,6 @@ import counter from '@features/counter/counterSlice'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { credentialsSlice } from '@features/credentials/credentialsSlice'
 import { applicationSlice } from '@features/application/applicationSlice'
-
-// const logger = createLogger({}) // LOGGER MIDDLEWARE
 
 export const store = configureStore({
   reducer: {

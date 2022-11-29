@@ -11,7 +11,6 @@ import { Register } from '@features/credentials/Register'
 import { Reset } from '@features/credentials/Reset'
 import { Test } from '@features/temp/Test'
 import { Unauthorized } from '../credentials/Unauthorized'
-import { Render } from '@src/common_components/Render'
 import { LoadingFullPage } from './LoadingFullPage'
 import { useSelectorTyped } from '@src/store'
 import { PersistentAuth } from '@features/credentials/PersistentAuth'
@@ -23,7 +22,7 @@ export const App = () => {
     <ThemeProvider theme={createTheme(theme as any)}>
       <GlobalStyles />
       <BrowserRouter>
-        <Render when={isLoading}><LoadingFullPage /></Render>
+        {isLoading && <LoadingFullPage />}
         <Nav />
         <Routes>
           <Route path="/*" element={<Main />}>
