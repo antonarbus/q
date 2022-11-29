@@ -22,10 +22,10 @@ export const ResizablePaper = ({ children }: Props) => {
       }}
         defaultSize={{
           width: '800px',
-          height: 'inherit'
+          height: 'auto'
         }}
-        minWidth='400px'
-        maxWidth='95vw'
+        // minWidth='400px'
+        maxWidth='100%'
         // minHeight={100}
         // maxHeight={800}
         bounds={'window' || 'parent'}
