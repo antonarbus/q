@@ -14,7 +14,8 @@ export const Main = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        gap: '20px 0px'
       }}
     >
       <Outlet />

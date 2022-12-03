@@ -20,41 +20,42 @@ export const ResizablePaper = ({ children }: Props) => {
         boxShadow: '#00000033 0px 0px 10px 0px',
         padding: '20px'
       }}
-        defaultSize={{
-          width: '800px',
-          height: 'auto'
-        }}
-        // minWidth='400px'
-        maxWidth='100%'
-        // minHeight={100}
-        // maxHeight={800}
-        bounds={'window' || 'parent'}
-        enable={{
-          right: true,
-          left: true
-          // top: true,
-          // bottom: true,
-          // topRight: false,
-          // bottomRight: false,
-          // bottomLeft: false,
-          // topLeft: false
-        }}
-        onResize={(e, direction, refToElement, delta) => {
-          setDirection(direction)
-          setResizedBy(delta)
-          setMouseCords({ x: e.x, y: e.y })
-          setWidth(refToElement.style.width)
-          setHeight(refToElement.style.height)
-        }}
-        onResizeStart={() => {}}
-        onResizeStop={(e, direction, refToElement) => {
-          console.log('e', e)
-          console.log('direction', direction)
-          console.log('refToElement', refToElement)
-          console.log('refToElement.style.width', refToElement.style.width)
-        }}
-      >
-        {children}
-      </Resizable>
+      defaultSize={{
+        width: '800px',
+        height: 'auto'
+      }}
+      grid={[20, 0]}
+      minWidth='200px'
+      maxWidth='100%'
+      // minHeight={100}
+      // maxHeight={800}
+      bounds={'window' || 'parent'}
+      enable={{
+        right: true,
+        left: true
+        // top: true,
+        // bottom: true,
+        // topRight: false,
+        // bottomRight: false,
+        // bottomLeft: false,
+        // topLeft: false
+      }}
+      onResize={(e, direction, refToElement, delta) => {
+        setDirection(direction)
+        setResizedBy(delta)
+        setMouseCords({ x: e.x, y: e.y })
+        setWidth(refToElement.style.width)
+        setHeight(refToElement.style.height)
+      }}
+      onResizeStart={() => {}}
+      onResizeStop={(e, direction, refToElement) => {
+        console.log('e', e)
+        console.log('direction', direction)
+        console.log('refToElement', refToElement)
+        console.log('refToElement.style.width', refToElement.style.width)
+      }}
+    >
+      {children}
+    </Resizable>
   )
 }
