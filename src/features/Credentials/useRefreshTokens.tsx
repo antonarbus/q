@@ -13,6 +13,11 @@ const forgetLoggedUser = () => store.dispatch(credentialsSlice.actions.forgetLog
 const rememberLoggedUser = ({ email, roles }: jwtAccessTokenType) => store.dispatch(credentialsSlice.actions.rememberLoggedUser({ email, isLogged: true, roles }))
 
 export const useRefreshTokens = () => {
+  // todo: used during the app loading + at PersistentAuth
+  // todo: at Persistent auth it re-renders due to below state change
+  // todo: but at app loading do not need to do that
+  // todo: probably need to separate logic
+
   const [isCheckingTokens, setIsCheckingTokens] = useState(true)
 
   useEffectOnce(() => {

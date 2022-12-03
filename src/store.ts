@@ -7,6 +7,7 @@ import counter from '@features/counter/counterSlice'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { credentialsSlice } from '@features/credentials/credentialsSlice'
 import { applicationSlice } from '@features/application/applicationSlice'
+import { offerSlice } from '@features/offer/offerSlice'
 
 export const store = configureStore({
   reducer: {
@@ -16,7 +17,8 @@ export const store = configureStore({
     nav,
     credentials: credentialsSlice.reducer,
     application: applicationSlice.reducer,
-    counter // counter from Redux example, good to have to check how redux is set
+    counter, // counter from Redux example, good to have to check how redux is set,
+    offer: offerSlice.reducer
   },
   middleware: (defaultMiddleware) => defaultMiddleware({
     serializableCheck: false
