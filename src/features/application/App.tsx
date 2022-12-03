@@ -3,7 +3,6 @@ import { RequireAuth } from '@features/credentials/RequireAuth'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { GlobalStyles } from '../../GlobalStyles'
 import { theme } from '../../theme'
-import { Main } from '@features/main'
 import { Nav } from '@features/nav'
 import { Notifier } from '@features/notifier'
 import { Login } from '@features/credentials/Login'
@@ -14,6 +13,7 @@ import { Unauthorized } from '../credentials/Unauthorized'
 import { LoadingFullPage } from './LoadingFullPage'
 import { useSelectorTyped } from '@src/store'
 import { PersistentAuth } from '@features/credentials/PersistentAuth'
+import { Main } from './Main'
 
 export const App = () => {
   const isLoading = useSelectorTyped(state => state.application.isLoading)
