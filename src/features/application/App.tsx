@@ -17,8 +17,8 @@ import { Main } from './Main'
 import { useRefreshTokens } from '@features/credentials/useRefreshTokens'
 
 export const App = () => {
+  useRefreshTokens({ withLoadingState: false })
   const isLoading = useSelectorTyped(state => state.application.isLoading)
-  useRefreshTokens()
 
   return (
     <ThemeProvider theme={createTheme(theme as any)}>
