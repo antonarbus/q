@@ -14,9 +14,11 @@ import { LoadingFullPage } from './LoadingFullPage'
 import { useSelectorTyped } from '@src/store'
 import { PersistentAuth } from '@features/credentials/PersistentAuth'
 import { Main } from './Main'
+import { useRefreshTokens } from '@features/credentials/useRefreshTokens'
 
 export const App = () => {
   const isLoading = useSelectorTyped(state => state.application.isLoading)
+  useRefreshTokens()
 
   return (
     <ThemeProvider theme={createTheme(theme as any)}>
