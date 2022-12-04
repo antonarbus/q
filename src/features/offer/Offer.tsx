@@ -6,7 +6,7 @@ export const Offer = () => {
   const { items } = useSelectorTyped(state => state.offer)
   const itemsArr = Object.values(items)
 
-  console.log(666)
+  console.log('🚀 ~ Offer.tsx rendered')
 
   return (
     <>

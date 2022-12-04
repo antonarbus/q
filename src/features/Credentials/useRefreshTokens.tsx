@@ -12,12 +12,17 @@ import { globalObject } from '@src/globalObject'
 const forgetLoggedUser = () => store.dispatch(credentialsSlice.actions.forgetLoggedUser())
 const rememberLoggedUser = ({ email, roles }: jwtAccessTokenType) => store.dispatch(credentialsSlice.actions.rememberLoggedUser({ email, isLogged: true, roles }))
 
-export const useRefreshTokens = () => {
-  // todo: used during the app loading + at PersistentAuth
-  // todo: at Persistent auth it re-renders due to below state change
-  // todo: but at app loading do not need to do that
-  // todo: probably need to separate logic
+type Props = {
+  withLoadingState?: boolean
+}
 
+/**
+* refresh tokens hook
+* @param {boolean} withLoadingState at the app loading we want to refresh tokens,
+* but do not want to track it and re-render app, but at the pages with authentication we show spinner during credentials check
+*/
+
+export const useRefreshTokens = ({ withLoadingState }: Props) => {
   const [isCheckingTokens, setIsCheckingTokens] = useState(true)
 
   useEffectOnce(() => {
@@ -69,7 +74,7 @@ export const useRefreshTokens = () => {
       } catch (error) {
         console.log(error)
       } finally {
-        setIsCheckingTokens(false)
+        withLoadingState && setIsCheckingTokens(false)
       }
     }
 
