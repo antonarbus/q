@@ -15,6 +15,8 @@ import { useSelectorTyped } from '@src/store'
 import { PersistentAuth } from '@features/credentials/PersistentAuth'
 import { Main } from './Main'
 import { useRefreshTokens } from '@features/credentials/useRefreshTokens'
+import { templateOffer } from '@features/offer/templateOffer'
+import { globalObject } from '@src/globalObject'
 
 export const App = () => {
   useRefreshTokens({ withLoadingState: false })
