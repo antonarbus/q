@@ -1,33 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { globalObject } from '@src/globalObject'
+import { templateOffer } from './templateOffer'
 
-const initialState = {
-  items: {
-    'id 01': {
-      position: 1,
-      id: 'id 01',
-      type: 'text',
-      width: '800px',
-      innerHtml: '<div>hello</div><div>hello</div><div>hello</div>'
-    },
-    'id 02': {
-      position: 2,
-      id: 'id 02',
-      type: 'text',
-      width: '800px',
-      innerHtml: '<div>hello</div><div>hello</div><div>hello</div>'
-    }
-  }
-}
+globalObject.currentOffer = localStorage.getItem('currentOffer') === null ? { ...templateOffer } : JSON.parse(localStorage.getItem('currentOffer') || '')
 
 export const offerSlice = createSlice({
   name: 'offerSlice',
-  initialState,
+  initialState: JSON.parse(JSON.stringify(globalObject.currentOffer)),
   reducers: {
-    saveWidth: (state, action) => {
-      const { id, width } = action.payload
-      state.items[id].width = width
-    }
+    someAction: (state, action) => {}
   }
 })
 
-export const { saveWidth } = offerSlice.actions
+export const { someAction } = offerSlice.actions
