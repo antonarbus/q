@@ -1,5 +1,4 @@
-export const theme = {
-  // mui part
+const muiTheme = {
   palette: {
     primary: {
       main: '#757575'
@@ -9,8 +8,10 @@ export const theme = {
     button: {
       textTransform: 'none'
     }
-  },
-  // custom part
+  }
+}
+
+const customTheme = {
   colors: {
     grey: '#5a5a5a',
     red: '#ee6666',
@@ -38,3 +39,5 @@ export const theme = {
     }
   }
 }
+
+export const theme = { ...muiTheme, ...customTheme }
