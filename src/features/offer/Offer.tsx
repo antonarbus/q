@@ -6,8 +6,6 @@ export const Offer = () => {
   const { items } = useSelectorTyped(state => state.offer)
   const itemsArr = Object.values(items)
 
-  console.log('🚀 ~ Offer.tsx rendered')
-
   return (
     itemsArr.map((item) => {
       if (item.type === 'text') {
