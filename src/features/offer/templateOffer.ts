@@ -1,4 +1,4 @@
-export type itemType = {
+export type ItemType = {
   position: number
   id: string
   type: string
@@ -6,16 +6,22 @@ export type itemType = {
   innerHtml: string
 }
 
-export const templateOffer = {
+export type OfferType = {
   items: {
-    'id 01': {
+    [key: string]: ItemType
+  }
+}
+
+export const templateOffer: OfferType = {
+  items: {
+    'random id 01': {
       position: 1,
       id: 'id 01',
       type: 'text',
       width: '800px',
       innerHtml: '<div>hello</div><div>hello</div><div>hello</div><div>hello</div>'
     },
-    'id 02': {
+    'random id 02': {
       position: 2,
       id: 'id 02',
       type: 'text',

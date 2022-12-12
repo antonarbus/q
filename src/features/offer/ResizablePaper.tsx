@@ -2,7 +2,6 @@ import { globalObject } from '@src/globalObject'
 import { Resizable } from 're-resizable'
 import { useState } from 'react'
 import { useLocalStorage } from 'react-use'
-import { currentOffer } from './currentOffer'
 
 type Props = {
   children: React.ReactNode
@@ -13,7 +12,7 @@ type Props = {
 
 export const ResizablePaper = ({ children, id, savedWidth }: Props) => {
   const [width, setWidth] = useState('250px')
-  const [currentOfferAtLs, setCurrentOfferAtLs, removeCurrentOfferAtLs] = useLocalStorage('currentOffer')
+  const [, setCurrentOfferAtLocalStorage] = useLocalStorage('currentOffer')
 
   return (
     <Resizable
@@ -40,14 +39,8 @@ export const ResizablePaper = ({ children, id, savedWidth }: Props) => {
       }}
       onResizeStart={() => {}}
       onResizeStop={(e, direction, refToElement) => {
-        // todo: no need to save width at this point, because it re-renders the ui, save locally probably
-        console.log(globalObject.currentOffer)
-        const temp = { ...globalObject.currentOffer }
-        // console.log('temp')
-        // console.log(temp.items[id].width)
-        temp.items[id].width = width
-        globalObject.currentOffer = { ...temp }
-        setCurrentOfferAtLs(globalObject.currentOffer)
+        globalObject.currentOffer.items[id].width = width
+        setCurrentOfferAtLocalStorage(globalObject.currentOffer)
         console.log(globalObject.currentOffer.items[id].width)
       }}
     >
