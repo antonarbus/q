@@ -1,3 +1,11 @@
+export type itemType = {
+  position: number
+  id: string
+  type: string
+  width: string
+  innerHtml: string
+}
+
 export const templateOffer = {
   items: {
     'id 01': {
