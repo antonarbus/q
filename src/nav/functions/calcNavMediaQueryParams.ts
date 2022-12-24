@@ -1,4 +1,4 @@
-import { isOverflown } from '@src/functions/isOverflown'
+import { isOverflown } from '@utils/isOverflown'
 
 const shrinkElementSlightly = (el: HTMLElement) => { el.style.width = el.offsetWidth - 10 + 'px' }
 

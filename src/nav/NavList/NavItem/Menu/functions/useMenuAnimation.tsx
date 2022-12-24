@@ -1,4 +1,4 @@
-import { elementHeight } from '@src/functions/elementHeight'
+import { elementHeight } from '@utils/elementHeight'
 import { goDownInCurrentMenu, goDownInNextMenu, goUpInCurrentMenu, goUpInNextMenu } from '@src/nav/navSlice'
 import { useDispatchTyped } from '@src/store'
 import { theme } from '@src/theme'

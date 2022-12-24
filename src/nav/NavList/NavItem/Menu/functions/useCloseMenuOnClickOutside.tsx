@@ -1,4 +1,4 @@
-import { isClickInsideThisElement } from '@src/functions/isClickInsideThisElement'
+import { isClickInsideThisElement } from '@utils/isClickInsideThisElement'
 import { useDispatchTyped } from '@src/store'
 import { useEffect } from 'react'
 import { closeMenu } from '@src/nav/navSlice'

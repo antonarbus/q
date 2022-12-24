@@ -18,10 +18,9 @@
     "jsxImportSource": "@emotion/react",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["/*"],
-      "@src/*": ["src/*"],
       "@utils/*": ["src/utils/*"],
-      "@functions/*": ["src/functions/*"],
+      "@src/*": ["src/*"],
+      "@/*": ["/*"],
     },
     "types": [
       "vite/client", 
