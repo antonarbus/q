@@ -12,8 +12,7 @@ type Props = {
 export function useMediaQueryValues({ navRef, logoRef }: Props) {
   const dispatch = useDispatchTyped()
   const isFirstMount = useFirstMountState()
-  const navStructure = useSelector(state => state.nav.navStructure)
-  const mediaEnabled = useSelector(state => state.nav.mediaEnabled)
+  const { navStructure, mediaEnabled } = useSelector(state => state.nav)
 
   useLayoutEffect(() => {
     // initial calculation of media query values

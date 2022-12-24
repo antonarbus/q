@@ -16,8 +16,7 @@ export function Menu() {
   const currentMenuRef = useRef() as React.MutableRefObject<HTMLDivElement>
   const nextMenuRef = useRef() as React.MutableRefObject<HTMLDivElement>
   const fakeMenuRef = useRef() as React.MutableRefObject<HTMLDivElement>
-  const idsToNextMenuItems = useSelector(state => state.nav.idsToNextMenuItems)
-  const idsToCurrentMenuItems = useSelector(state => state.nav.idsToCurrentMenuItems)
+  const { idsToNextMenuItems, idsToCurrentMenuItems } = useSelector(state => state.nav)
   const { goDownInMenu, goUpInMenu } = useMenuAnimation({ currentMenuRef, nextMenuRef, menuContainerRef, fakeMenuRef, idsToNextMenuItems })
   globalObject.goDownInMenu = goDownInMenu
   globalObject.goUpInMenu = goUpInMenu

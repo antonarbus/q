@@ -9,8 +9,7 @@ import { useMediaQueryValues } from './functions/useMediaQueryValues'
 export function Nav() {
   const navRef = useRef() as React.MutableRefObject<HTMLDivElement>
   const logoRef = useRef() as React.MutableRefObject<HTMLDivElement>
-  const mediaQueryWidth = useSelector(state => state.nav.mediaQueryWidth)
-  const mediaEnabled = useSelector(state => state.nav.mediaEnabled)
+  const { mediaQueryWidth, mediaEnabled } = useSelector(state => state.nav)
   useMenuItemActionShortcuts()
   useMediaQueryValues({ navRef, logoRef })
 
