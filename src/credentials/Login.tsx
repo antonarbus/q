@@ -8,7 +8,7 @@ import { theme } from '@src/theme'
 import { EmailInput } from './common/EmailInput'
 import { PasswordInput } from './common/PasswordInput'
 import { ButtonCustom } from '@src/components/ButtonCustom'
-import { slideElement } from '@functions/slideElement'
+import { slideElement } from '@utils/slideElement'
 import { useLogin } from './useLogin'
 import { LoginRounded } from '@mui/icons-material'
 

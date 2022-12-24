@@ -1,9 +1,9 @@
 import { useRef } from 'react'
 import { useSelectorTyped as useSelector } from '@src/store'
 import { theme } from '@src/theme'
-import { useMenuItemActionShortcuts } from './functions/useMenuItemActionShortcuts'
 import { Logo } from './Logo'
 import { NavList } from './NavList'
+import { useMenuItemActionShortcuts } from './functions/useMenuItemActionShortcuts'
 import { useMediaQueryValues } from './functions/useMediaQueryValues'
 
 export function Nav() {

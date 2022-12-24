@@ -1,5 +1,5 @@
 import { notify } from '@src/notifier/notify'
-import { slideElement } from '@functions/slideElement'
+import { slideElement } from '@utils/slideElement'
 import { globalObject } from '@src/globalObject'
 import { useDispatchTyped } from '@src/store'
 import { EventType, httpStatusType } from '@src/types'

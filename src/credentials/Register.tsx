@@ -11,7 +11,7 @@ import { ButtonCustom } from '@src/components/ButtonCustom'
 import { useRegister } from './useRegister'
 import { BackdropWithSlidableContent } from '@src/components/BackdropWithSlidableContent'
 import { CardCustom } from '@src/components/CardCustom'
-import { slideElement } from '@functions/slideElement'
+import { slideElement } from '@utils/slideElement'
 
 export function Register() {
   const [email, setEmail] = useState('')
