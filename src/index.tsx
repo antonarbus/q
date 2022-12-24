@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom/client'
-import { App } from '@features/application/App'
+import { App } from '@src/application/App'
 import { Provider } from 'react-redux'
 import { store } from './store'
 import { disableReactDevTools } from '@fvilers/disable-react-devtools'

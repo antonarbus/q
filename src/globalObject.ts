@@ -1,4 +1,4 @@
-import { OfferType, templateOffer } from '@features/offer/templateOffer'
+import { OfferType, templateOffer } from '@src/offer/templateOffer'
 
 // put template offer or offer stored in localStorage into global variable
 const currentOffer =

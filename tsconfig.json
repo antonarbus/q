@@ -18,16 +18,10 @@
     "jsxImportSource": "@emotion/react",
     "baseUrl": ".",
     "paths": {
-      // https://github.com/aleclarson/vite-tsconfig-paths
-      "@features/*": ["src/features/*"],
-      "@functions/*": ["src/functions/*"],
-      "@redux/*": ["src/redux/*"],
-      "@slices/*": ["src/redux/slices/*"],
-      "@store/*": ["src/redux/store/*"],
-      "@routes/*": ["src/routes/*"],
-      "@utils/*": ["src/utils/*"],
-      "@src/*": ["src/*"],
       "@/*": ["/*"],
+      "@src/*": ["src/*"],
+      "@utils/*": ["src/utils/*"],
+      "@functions/*": ["src/functions/*"],
     },
     "types": [
       "vite/client", 
