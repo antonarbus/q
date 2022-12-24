@@ -4,7 +4,7 @@ import { useEffectOnce } from 'react-use'
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode'
 import axios from 'axios'
-import { jwtTokenExpirationDays } from './jwtTokenExpirationDays'
+import { tokenExpirationMinutes } from './tokenExpirationMinutes'
 import { jwtAccessTokenType } from '@src/types'
 import { navUpdate } from './navUpdate'
 import { globalObject } from '@src/globalObject'
@@ -33,7 +33,7 @@ export const useRefreshTokens = ({ withLoadingState }: Props) => {
       try {
         const existingAccessJwtToken = globalObject.accessJwtToken
         if (existingAccessJwtToken) {
-          const expirationInMin = jwtTokenExpirationDays(existingAccessJwtToken)
+          const expirationInMin = tokenExpirationMinutes(existingAccessJwtToken)
           if (expirationInMin > 5) {
             const payloadFromExistingAccessToken: jwtAccessTokenType = jwt_decode(existingAccessJwtToken)
             const { email, roles } = payloadFromExistingAccessToken
