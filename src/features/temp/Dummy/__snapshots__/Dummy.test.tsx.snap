@@ -1,3 +1,0 @@
-// Vitest Snapshot v1
-
-exports[`Simple working test > toUpperCase 1`] = `"LOWER_CASE_STRING"`;
