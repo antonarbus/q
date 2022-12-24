@@ -9,38 +9,32 @@ import { Login } from '@features/credentials/Login'
 import { Register } from '@features/credentials/Register'
 import { Reset } from '@features/credentials/Reset'
 import { Unauthorized } from '../credentials/Unauthorized'
-import { LoadingFullPage } from './LoadingFullPage'
-import { useSelectorTyped } from '@src/store'
 import { PersistentAuth } from '@features/credentials/PersistentAuth'
 import { Main } from './Main'
-import { useRefreshTokens } from '@features/credentials/useRefreshTokens'
 import { Profile } from '@features/profile/Profile'
+import { SpinnerFullPage } from '@features/spinner/SpinnerFullPage'
 
-export const App = () => {
-  useRefreshTokens({ withLoadingState: false })
-  const isLoading = useSelectorTyped(state => state.application.isLoading)
-
-  return (
-    <ThemeProvider theme={createTheme(theme as any)}>
-      <GlobalStyles />
-      <BrowserRouter>
-        {isLoading && <LoadingFullPage />}
-        <Nav />
-        <Routes>
-          <Route path="/*" element={<Main />}>
-            <Route path="register" element={<Register />} />
-            <Route path="login" element={<Login />} />
-            <Route path="reset" element={<Reset />} />
+export const App = () => (
+  <ThemeProvider theme={createTheme(theme as any)}>
+    <GlobalStyles />
+    <BrowserRouter>
+      <SpinnerFullPage />
+      <Nav />
+      <Routes>
+        <Route path="/*" element={<Main />}>
+          <Route path="register" element={<Register />} />
+          <Route path="login" element={<Login />} />
+          <Route path="reset" element={<Reset />} />
+        </Route>
+        <Route element={<PersistentAuth />}>
+          <Route element={<RequireAuth allowedRoles={['user']} />}>
+            <Route path="profile" element={<Profile />} />
+            <Route path="settings" element={<div>Settings</div>} />
           </Route>
-          <Route element={<PersistentAuth />}>
-            <Route element={<RequireAuth allowedRoles={['user']} />}>
-              <Route path="profile" element={<Profile />} />
-            </Route>
-          </Route>
-          <Route path="unauthorized" element={<Unauthorized />} />
-        </Routes>
-        <Notifier />
-      </BrowserRouter>
-    </ThemeProvider>
-  )
-}
+        </Route>
+        <Route path="unauthorized" element={<Unauthorized />} />
+      </Routes>
+      <Notifier />
+    </BrowserRouter>
+  </ThemeProvider>
+)

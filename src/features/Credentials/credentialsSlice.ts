@@ -7,7 +7,7 @@ const initialState = {
 }
 
 const credentialsSlice = createSlice({
-  name: 'credentialsSlice',
+  name: 'credentials',
   initialState,
   reducers: {
     rememberLoggedUser: (state, action) => {
