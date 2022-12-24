@@ -3,7 +3,7 @@ import { nanoid as id } from 'nanoid'
 import { FiLogOut, FiLogIn } from 'react-icons/fi'
 import { IoDocumentOutline, IoDocumentsOutline, IoSaveOutline, IoShareOutline } from 'react-icons/io5'
 import { IoIosSwap } from 'react-icons/io'
-import logo from '@features/temp/Dummy/logo.svg'
+import logo from './img/logo.svg'
 import { logoutUser } from '@features/credentials/logout'
 import { Person as PersonIcon, Settings as SettingsIcon } from '@mui/icons-material'
 

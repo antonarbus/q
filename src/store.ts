@@ -1,7 +1,4 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
-import login from '@features/temp/Dummy/loginSlice'
-import greetings from '@features/temp/Dummy/greetingsSlice'
-import users from '@features/temp/Dummy/usersSlice'
 import nav from '@features/nav/navSlice'
 import counter from '@features/counter/counterSlice'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
@@ -11,9 +8,6 @@ import { offerSlice } from '@features/offer/offerSlice'
 
 export const store = configureStore({
   reducer: {
-    login, // temp
-    greetings, // temp
-    users, // temp
     nav,
     credentials: credentialsSlice.reducer,
     application: applicationSlice.reducer,
@@ -23,7 +17,6 @@ export const store = configureStore({
   middleware: (defaultMiddleware) => defaultMiddleware({
     serializableCheck: false
   }),
-  // middleware: (defaultMiddleware) => defaultMiddleware().concat(logger),
   devTools: process.env.NODE_ENV !== 'production'
 })
 
