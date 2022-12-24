@@ -6,7 +6,7 @@ import { Dummy } from '../temp/Dummy'
 export const Main = () => (
   <main
     css={{
-      margin: '10px',
+      padding: '20px 10px',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
