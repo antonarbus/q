@@ -9,7 +9,7 @@ Authentication - checking if the user is the same as authorized initially
     and a 'refresh' tokens for future authentication to avoid
     asking for credentials on every http request.
 
-(C) Client stores 'access' token in the local storage and
+(C) Client stores 'access' token in the locally and
     attaches it inside request headers for private api requests.
     Token is attached by 'request' interceptor in 'axiosWithAuth'
 
