@@ -29,7 +29,6 @@ export const SpinnerFullPage = ({ isShowing, title }: Props) => {
         WebkitTapHighlightColor: 'transparent',
         backdropFilter: 'blur(2px)'
       }}
-      ref={ref}
     >
       <div
         css={{
