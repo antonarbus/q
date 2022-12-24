@@ -4,7 +4,7 @@ const initialState = {
   isLoading: false
 }
 
-export const applicationSlice = createSlice({
+const applicationSlice = createSlice({
   name: 'applicationSlice',
   initialState,
   reducers: {
@@ -12,3 +12,6 @@ export const applicationSlice = createSlice({
     stopLoading: (state) => { state.isLoading = false } // type: 'applicationSlice/stopLoading'
   }
 })
+
+export default applicationSlice.reducer
+export const { startLoading, stopLoading } = applicationSlice.actions

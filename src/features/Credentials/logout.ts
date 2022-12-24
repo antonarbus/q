@@ -1,7 +1,7 @@
 import { notify } from '@features/notifier/notify'
 import { globalObject } from '@src/globalObject'
 import { store } from '@src/store'
-import { credentialsSlice } from './credentialsSlice'
+import { forgetLoggedUser } from './credentialsSlice'
 import { navUpdate } from './navUpdate'
 
 export async function logoutUser() {
@@ -19,7 +19,7 @@ export async function logoutUser() {
     if (status === 'ok') {
       // notify({ msg: `User with ${email} is logged out`, type: 'success', theme: 'light' })
     }
-    store.dispatch(credentialsSlice.actions.forgetLoggedUser())
+    store.dispatch(forgetLoggedUser())
     navUpdate.logout()
   } catch (err) {
     console.log(err)

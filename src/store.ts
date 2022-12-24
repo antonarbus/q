@@ -1,18 +1,18 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
-import nav from '@features/nav/navSlice'
-import counter from '@features/counter/counterSlice'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import { credentialsSlice } from '@features/credentials/credentialsSlice'
-import { applicationSlice } from '@features/application/applicationSlice'
-import { offerSlice } from '@features/offer/offerSlice'
+import application from '@features/application/applicationSlice'
+import counter from '@features/counter/counterSlice'
+import credentials from '@features/credentials/credentialsSlice'
+import nav from '@features/nav/navSlice'
+import offer from '@features/offer/offerSlice'
 
 export const store = configureStore({
   reducer: {
+    application,
+    counter,
+    credentials,
     nav,
-    credentials: credentialsSlice.reducer,
-    application: applicationSlice.reducer,
-    counter, // counter from Redux example, good to have to check how redux is set,
-    offer: offerSlice.reducer
+    offer
   },
   middleware: (defaultMiddleware) => defaultMiddleware({
     serializableCheck: false

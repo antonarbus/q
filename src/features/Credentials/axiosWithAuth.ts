@@ -1,5 +1,5 @@
 // axios.ts
-import { credentialsSlice } from '@features/credentials/credentialsSlice'
+import { forgetLoggedUser, rememberLoggedUser } from '@features/credentials/credentialsSlice'
 import { globalObject } from '@src/globalObject'
 import { store } from '@src/store'
 import axios from 'axios'
@@ -27,11 +27,11 @@ axiosWithAuth.interceptors.response.use(
         const { accessJwtToken, email } = response.data
         if (accessJwtToken) {
           globalObject.accessJwtToken = accessJwtToken
-          store.dispatch(credentialsSlice.actions.rememberLoggedUser({ email, isLogged: true, roles: 'viewer' }))
+          store.dispatch(rememberLoggedUser({ email, isLogged: true, roles: 'viewer' }))
         }
         if (!accessJwtToken) {
           globalObject.accessJwtToken = ''
-          store.dispatch(credentialsSlice.actions.forgetLoggedUser())
+          store.dispatch(forgetLoggedUser())
         }
         return axiosWithAuth.request(originalRequest)
       } catch (error) {
@@ -41,7 +41,7 @@ axiosWithAuth.interceptors.response.use(
     }
 
     if (error.response.status === 401) {
-      store.dispatch(credentialsSlice.actions.forgetLoggedUser())
+      store.dispatch(forgetLoggedUser())
     }
 
     throw error

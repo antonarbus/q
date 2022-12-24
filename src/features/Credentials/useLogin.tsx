@@ -5,7 +5,7 @@ import { useDispatchTyped } from '@src/store'
 import { EventType, httpStatusType } from '@src/types'
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { credentialsSlice } from './credentialsSlice'
+import { credentialsSlice, rememberLoggedUser } from './credentialsSlice'
 import { navUpdate } from './navUpdate'
 
 export function useLogin() {
@@ -49,7 +49,7 @@ export function useLogin() {
       if (status === 'ok') {
         setHttpStatus('success')
         globalObject.accessJwtToken = accessJwtToken
-        dispatch(credentialsSlice.actions.rememberLoggedUser({ email, isLogged: true, roles }))
+        dispatch(rememberLoggedUser({ email, isLogged: true, roles }))
         // notify({ msg: 'Logged in!', theme: 'light', closeAfterMs: 3000 })
         navUpdate.login()
         setTimeout(() => slideElement({ element: cardElement, cb: () => navigate(from, { replace: true }) }), 1000)
