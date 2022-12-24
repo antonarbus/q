@@ -20,10 +20,16 @@ type Props = {
 * but do not want to track it and re-render app, but at the pages with authentication we show spinner during credentials check
 */
 
+// useRefreshTokens is used in <PersistentAuth /> and in <Main />
+// there is no race condition coz components are parallel and useRefreshTokens is fired only ones
+// if we put useRefreshTokens in <App /> instead of <Main /> then it will be fired twice almost at the same time and
+// toke refresh will invalidate existing token
+
 export const useRefreshTokens = ({ withLoadingState }: Props) => {
   const [isCheckingTokens, setIsCheckingTokens] = useState(true)
 
   useEffectOnce(() => {
+    console.log(666)
     async function refreshTokens() {
       try {
         const existingAccessJwtToken = globalObject.accessJwtToken
