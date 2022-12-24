@@ -15,7 +15,7 @@ const initialState = {
 }
 
 const navSlice = createSlice({
-  name: 'navSlice',
+  name: 'nav',
   initialState,
   reducers: {
     closeBurger: (state) => { state.burger.isOpen = false },

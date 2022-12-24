@@ -1,18 +1,18 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import application from '@features/application/applicationSlice'
 import counter from '@features/counter/counterSlice'
 import credentials from '@features/credentials/credentialsSlice'
 import nav from '@features/nav/navSlice'
 import offer from '@features/offer/offerSlice'
+import spinner from '@features/spinner/spinnerSlice'
 
 export const store = configureStore({
   reducer: {
-    application,
     counter,
     credentials,
     nav,
-    offer
+    offer,
+    spinner
   },
   middleware: (defaultMiddleware) => defaultMiddleware({
     serializableCheck: false
