@@ -1,10 +1,10 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import counter from '@features/counter/counterSlice'
-import credentials from '@features/credentials/credentialsSlice'
-import nav from '@features/nav/navSlice'
-import offer from '@features/offer/offerSlice'
-import spinner from '@features/spinner/spinnerSlice'
+import counter from '@src/counter/counterSlice'
+import credentials from '@src/credentials/credentialsSlice'
+import nav from '@src/nav/navSlice'
+import offer from '@src/offer/offerSlice'
+import spinner from '@src/spinner/spinnerSlice'
 
 export const store = configureStore({
   reducer: {
