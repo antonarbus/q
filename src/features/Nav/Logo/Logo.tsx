@@ -1,5 +1,6 @@
 import { useSelectorTyped as useSelector } from '@src/store'
 import styled from '@emotion/styled'
+import { Link } from 'react-router-dom'
 
 type Prop = {
   logoRef: React.MutableRefObject<HTMLDivElement>
@@ -49,11 +50,11 @@ export function Logo({ logoRef }: Prop) {
         }
       }}
     >
-      <a href="https://quotation.app/">
+      <Link to="/">
         <span>Q</span>
         <span className='uotation'>uotation</span>
         <span className='app-ext'>.app</span>
-      </a>
+      </Link>
     </div>
   )
 }
