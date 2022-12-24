@@ -8,15 +8,13 @@ import { Notifier } from '@features/notifier'
 import { Login } from '@features/credentials/Login'
 import { Register } from '@features/credentials/Register'
 import { Reset } from '@features/credentials/Reset'
-import { Test } from '@features/temp/Test'
 import { Unauthorized } from '../credentials/Unauthorized'
 import { LoadingFullPage } from './LoadingFullPage'
 import { useSelectorTyped } from '@src/store'
 import { PersistentAuth } from '@features/credentials/PersistentAuth'
 import { Main } from './Main'
 import { useRefreshTokens } from '@features/credentials/useRefreshTokens'
-import { templateOffer } from '@features/offer/templateOffer'
-import { globalObject } from '@src/globalObject'
+import { Profile } from '@features/profile/Profile'
 
 export const App = () => {
   useRefreshTokens({ withLoadingState: false })
@@ -36,7 +34,7 @@ export const App = () => {
           </Route>
           <Route element={<PersistentAuth />}>
             <Route element={<RequireAuth allowedRoles={['user']} />}>
-              <Route path="test" element={<Test />} />
+              <Route path="profile" element={<Profile />} />
             </Route>
           </Route>
           <Route path="unauthorized" element={<Unauthorized />} />
