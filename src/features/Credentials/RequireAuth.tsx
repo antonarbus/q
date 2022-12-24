@@ -7,8 +7,7 @@ type Props = {
 
 export function RequireAuth({ allowedRoles }: Props) {
   const location = useLocation()
-  const isLogged = useSelector(state => state.credentials.isLogged)
-  const roles = useSelector(state => state.credentials.roles)
+  const { isLogged, roles } = useSelector(state => state.credentials)
   const haveRequiredRole = allowedRoles.some(role => roles.includes(role))
 
   if (isLogged && haveRequiredRole) return <Outlet />

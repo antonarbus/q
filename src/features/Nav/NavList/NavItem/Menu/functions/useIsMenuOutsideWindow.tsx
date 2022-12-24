@@ -10,7 +10,7 @@ import { useSelectorTyped as useSelector } from '@src/store'
   * - if so, we can fix 'left' side of the menu, instead of 'right'
   */
 export function useIsMenuOutsideWindow() {
-  const navItemRightPos = useSelector(state => state.nav.navItemRightPos)
+  const { navItemRightPos } = useSelector(state => state.nav)
   const isMenuOutsideWindow = theme.menu.width > navItemRightPos
   return isMenuOutsideWindow
 }

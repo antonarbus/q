@@ -6,7 +6,7 @@ import { toggleBurger } from '@features/nav/navSlice'
 
 export function Burger() {
   const dispatch = useDispatchTyped()
-  const isOpen = useSelector(state => state.nav.burger.isOpen)
+  const { isOpen } = useSelector(state => state.nav.burger)
   const screenWidthWhenShowBurger = useSelector(state => state.nav.mediaQueryWidth.burger)
 
   return (

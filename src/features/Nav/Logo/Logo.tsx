@@ -1,5 +1,4 @@
 import { useSelectorTyped as useSelector } from '@src/store'
-import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
 
 type Prop = {
@@ -7,8 +6,7 @@ type Prop = {
 }
 
 export function Logo({ logoRef }: Prop) {
-  const mediaQueryWidth = useSelector(state => state.nav.mediaQueryWidth)
-  const mediaEnabled = useSelector(state => state.nav.mediaEnabled)
+  const { mediaQueryWidth, mediaEnabled } = useSelector(state => state.nav)
 
   return (
     <div

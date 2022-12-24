@@ -5,7 +5,7 @@ import { Burger } from './NavItem/Burger'
 import { useSelectorTyped as useSelector } from '@src/store'
 
 export function NavList() {
-  const navStructure = useSelector(state => state.nav.navStructure)
+  const { navStructure } = useSelector(state => state.nav)
 
   return (
     <Ul>

@@ -44,7 +44,7 @@ export function NavItem({ children, id }: NavItemType) {
   * needs to open only menu under clicked navItem, otherwise multiple menus are opened under all navItems
   */
   const shouldOpenThisMenu = useSelector(state => state.nav.idsToCurrentMenuItems.at(1) === id)
-  const navStructure = useSelector(state => state.nav.navStructure)
+  const { navStructure } = useSelector(state => state.nav)
   const navItem = navStructure[0].menuItems!.find(menuItem => menuItem.id === id)
   const isNestedMenu = !!navItem?.menuItems
   const icon = navItem?.icon
