@@ -1,3 +1,5 @@
+// It's a configuration file to assist your text editor
+// https://www.typescriptlang.org/tsconfig
 {
   "compilerOptions": {
     "target": "ESNext",
@@ -16,7 +18,10 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
-    "baseUrl": ".",
+    // Base directory to resolve non-relative module names.
+    "baseUrl": ".", 
+    // path mapping to be computed relative to baseUrl option
+    // may use import {func} from '@client/folder', instead of '../../../../folder'
     "paths": {
       "@utils/*": ["utils/*"],
       "@client/*": ["client/*"]
@@ -27,6 +32,7 @@
       "@emotion/react/types/css-prop"
     ]
   },
+  // folders and files for providing you with file search, code completion etc...
   "include": ["client", "server", "utils"],
   "exclude": ["node_modules", "**/node_modules", "build"],
   "references": [{ 
