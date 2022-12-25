@@ -16,12 +16,11 @@ export const Offer = () => {
             <DraggableItem
               key={item.id}
               index={index}
-              value={(
+            >
                 <ResizablePaper key={item.id} id={item.id} savedWidth={item.width}>
                   {parseHtml(item.innerHtml)}
                 </ResizablePaper>
-              )}
-            />
+            </DraggableItem>
           )
         }
         return null
