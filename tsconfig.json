@@ -19,7 +19,7 @@
     "baseUrl": ".",
     "paths": {
       "@utils/*": ["utils/*"],
-      "@src/*": ["src/*"]
+      "@client/*": ["client/*"]
     },
     "types": [
       "vite/client", 
@@ -27,7 +27,8 @@
       "@emotion/react/types/css-prop"
     ]
   },
-  "include": ["src"],
+  "include": ["client", "server", "utils"],
+  "exclude": ["node_modules", "**/node_modules", "build"],
   "references": [{ 
     "path": "./tsconfig.node.json"
   }]

@@ -56,10 +56,10 @@ export default defineConfig(({ command, mode }) => {
       globals: true,
       environment: 'jsdom',
       setupFiles: './test-setup.ts',
-      includeSource: ['src/**/*.{js,ts,jsx,tsx}'],
+      includeSource: ['client/**/*.{js,ts,jsx,tsx}'],
       coverage: {
         all: true,
-        src: ['src/']
+        src: ['client/']
       }
     },
     build: {
