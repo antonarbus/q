@@ -1,5 +1,5 @@
 export type ItemType = {
-  position: number
+  pos: number
   id: string
   type: string
   width: string
@@ -14,19 +14,40 @@ export type OfferType = {
 
 export const templateOffer: OfferType = {
   items: {
-    'random id 01': {
-      position: 1,
+    'id 00': {
+      pos: 0,
+      id: 'id 00',
+      type: 'text',
+      width: '800px',
+      innerHtml: '<div>0</div><div>0</div><div>0</div><div>0</div>'
+    },
+    'id 01': {
+      pos: 1,
       id: 'id 01',
       type: 'text',
       width: '800px',
-      innerHtml: '<div>hello</div><div>hello</div><div>hello</div><div>hello</div>'
+      innerHtml: '<div>1</div><div>1</div>'
     },
-    'random id 02': {
-      position: 2,
+    'id 02': {
+      pos: 2,
       id: 'id 02',
       type: 'text',
       width: '800px',
-      innerHtml: '<div>hello</div>'
+      innerHtml: '<div>2</div>'
+    },
+    'id 03': {
+      pos: 3,
+      id: 'id 03',
+      type: 'text',
+      width: '800px',
+      innerHtml: '<div>3</div>'
+    },
+    'id 04': {
+      pos: 4,
+      id: 'id 04',
+      type: 'text',
+      width: '800px',
+      innerHtml: '<div>4</div>'
     }
   }
 }
