@@ -1,23 +1,31 @@
 import { ResizablePaper } from './ResizablePaper'
 import { useSelectorTyped } from '@client/store'
 import parseHtml from 'html-react-parser'
+import { Draggable } from './draggable/Draggable'
+import { DraggableItem } from './draggable/DraggableItem'
 
 export const Offer = () => {
   const { items } = useSelectorTyped(state => state.offer)
   const itemsArr = Object.values(items)
 
   return (
-    <>
-      {itemsArr.map((item) => {
+    <Draggable useDragHandle>
+      {itemsArr.map((item, index) => {
         if (item.type === 'text') {
           return (
-            <ResizablePaper key={item.id} id={item.id} savedWidth={item.width}>
-              {parseHtml(item.innerHtml)}
-            </ResizablePaper>
+            <DraggableItem
+              key={item.id}
+              index={index}
+              value={(
+                <ResizablePaper key={item.id} id={item.id} savedWidth={item.width}>
+                  {parseHtml(item.innerHtml)}
+                </ResizablePaper>
+              )}
+            />
           )
         }
         return null
       })}
-    </>
+    </Draggable>
   )
 }
