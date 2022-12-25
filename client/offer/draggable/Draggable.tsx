@@ -1,7 +1,15 @@
-import { SortableContainer } from 'react-sortable-hoc'
+import { SortableContainer, SortableContainerProps } from 'react-sortable-hoc'
+
+// example with TypeScript
+// https://codesandbox.io/s/odfrontendeveloper-react-sortable-hoc-example-t96d8x?file=/src/examples/Items.tsx:518-635
 
 type Props = {
   children: React.ReactNode
 }
 
-export const Draggable = SortableContainer(({ children }: Props) => <div>{children}</div>)
+interface ISortableContainer extends SortableContainerProps {
+  children: React.ReactNode
+}
+
+export const Draggable: React.ComponentClass<ISortableContainer, any> =
+  SortableContainer(({ children }: Props) => <div>{children}</div>)
