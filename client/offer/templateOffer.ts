@@ -26,7 +26,7 @@ export const templateOffer: OfferType = {
       id: 'id 02',
       type: 'text',
       width: '800px',
-      innerHtml: '<div>hello</div><div>hello</div><div>hello</div>'
+      innerHtml: '<div>hello</div>'
     }
   }
 }
