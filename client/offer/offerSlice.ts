@@ -1,0 +1,14 @@
+import { createSlice } from '@reduxjs/toolkit'
+import { globalObject } from '@client/globalObject'
+import { OfferType } from './templateOffer'
+
+const offerSlice = createSlice({
+  name: 'offer',
+  initialState: window.structuredClone(globalObject.currentOffer) as OfferType,
+  reducers: {
+    someAction: (state, action) => {}
+  }
+})
+
+export default offerSlice.reducer
+export const { someAction } = offerSlice.actions
