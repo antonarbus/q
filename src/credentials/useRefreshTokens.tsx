@@ -25,6 +25,10 @@ type Props = {
 // if we put useRefreshTokens in <App /> instead of <Main /> then it will be fired twice almost at the same time and
 // toke refresh will invalidate existing token
 
+// we probably may poll periodically /api/refresh and in case user is deleted he will automatically logged out
+// but no need to do, because all protected apis calls will do the same
+// he may stay logged in forever without making any harm
+
 export const useRefreshTokens = ({ withLoadingState }: Props) => {
   const [isCheckingTokens, setIsCheckingTokens] = useState(true)
 
