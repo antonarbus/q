@@ -20,7 +20,6 @@ export const DraggableItem: React.ComponentClass<ISortableItem, any> = SortableE
         maxWidth: '100%'
       }}
     >
-      <DragHandle />
       {children}
     </div>
   )

@@ -5,6 +5,7 @@ import { Draggable } from './draggable/Draggable'
 import { DraggableItem } from './draggable/DraggableItem'
 import { updateOrderAfterDrag } from './offerSlice'
 import { useLocalStorage } from 'react-use'
+import { DragHandle } from './draggable/DragHandle'
 
 export const Offer = () => {
   const [, setCurrentOfferAtLocalStorage] = useLocalStorage('currentOffer')
@@ -24,11 +25,10 @@ export const Offer = () => {
     >
       {itemsArr.map((item, index) => (
         <DraggableItem key={item.id} index={item.pos} >
-          {item.type === 'text' && (
-            <ResizablePaper key={item.id} id={item.id} savedWidth={item.width}>
-              {parseHtml(item.innerHtml)}
-            </ResizablePaper>
-          )}
+          <DragHandle />
+          <ResizablePaper key={item.id} id={item.id} savedWidth={item.width}>
+            {item.type === 'text' && parseHtml(item.innerHtml)}
+          </ResizablePaper>
         </DraggableItem>
       ))}
     </Draggable>
