@@ -7,10 +7,11 @@ type Props = {
   children: React.ReactNode
   id: string
   key: string
-  savedWidth: string
+  width: string
+  index: number
 }
 
-export const ResizablePaper = ({ children, id, savedWidth }: Props) => {
+export const ResizablePaper = ({ children, id, width, index }: Props) => {
   const [, setCurrentOfferAtLocalStorage] = useLocalStorage('currentOffer')
   const dispatch = useDispatchTyped()
 
@@ -23,7 +24,7 @@ export const ResizablePaper = ({ children, id, savedWidth }: Props) => {
         padding: '20px'
       }}
       defaultSize={{
-        width: savedWidth,
+        width,
         height: 'auto'
       }}
       grid={[20, 0]}
@@ -43,7 +44,7 @@ export const ResizablePaper = ({ children, id, savedWidth }: Props) => {
       onResizeStart={() => {}}
       onResizeStop={(e, direction, refToElement) => {
         const width = refToElement.style.width
-        dispatch(updateWidth({ id, width }))
+        dispatch(updateWidth({ width, index }))
         setCurrentOfferAtLocalStorage(store.getState().offer)
       }}
     >
