@@ -6,27 +6,27 @@ import { DraggableItem } from './draggable/DraggableItem'
 import { updateOrderAfterDrag } from './offerSlice'
 import { useLocalStorage } from 'react-use'
 import { DragHandle } from './draggable/DragHandle'
+import { arrayMoveImmutable } from 'array-move'
 
 export const Offer = () => {
   const [, setCurrentOfferAtLocalStorage] = useLocalStorage('currentOffer')
   const dispatch = useDispatchTyped()
   const { items } = useSelectorTyped(state => state.offer)
-  const itemsArr = Object.values(items).sort((firstEl, secondEl) => firstEl.pos - secondEl.pos)
 
   return (
     <Draggable
       useDragHandle
       onSortEnd={({ oldIndex, newIndex }) => {
-        const oldItemId = itemsArr.find(item => item.pos === oldIndex)?.id
-        const newItemId = itemsArr.find(item => item.pos === newIndex)?.id
-        dispatch(updateOrderAfterDrag({ oldItemId, oldIndex, newItemId, newIndex }))
+        const sortedItems = arrayMoveImmutable(items, oldIndex, newIndex)
+        console.log({ sortedItems })
+        dispatch(updateOrderAfterDrag({ sortedItems }))
         setCurrentOfferAtLocalStorage(store.getState().offer)
       }}
     >
-      {itemsArr.map((item, index) => (
-        <DraggableItem key={item.id} index={item.pos} >
+      {items.map((item, index) => (
+        <DraggableItem key={item.id} index={index} >
           <DragHandle />
-          <ResizablePaper key={item.id} id={item.id} savedWidth={item.width}>
+          <ResizablePaper key={item.id} id={item.id} width={item.width} index={index}>
             {item.type === 'text' && parseHtml(item.innerHtml)}
           </ResizablePaper>
         </DraggableItem>
