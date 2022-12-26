@@ -4,8 +4,8 @@ import { MdDragIndicator } from 'react-icons/md'
 const Handle = () => (
   <span
     css={{
-      display: 'inlineFlex',
-      alignItems: 'center',
+      // display: 'inlineFlex',
+      // alignItems: 'center',
       cursor: 'move'
     }}
   >
