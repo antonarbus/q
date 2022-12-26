@@ -6,7 +6,11 @@ const Handle = () => (
     css={{
       // display: 'inlineFlex',
       // alignItems: 'center',
-      cursor: 'move'
+      cursor: 'move',
+      // position: 'absolute',
+      top: 0,
+      left: 0,
+      zIndex: 1
     }}
   >
     <MdDragIndicator />

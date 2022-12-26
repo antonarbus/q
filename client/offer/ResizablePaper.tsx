@@ -35,6 +35,9 @@ export const ResizablePaper = ({ children, id, savedWidth }: Props) => {
         left: true
       }}
       onResize={(e, direction, refToElement, delta) => {
+        // const width = refToElement.style.width
+        // dispatch(updateWidth({ id, width }))
+        // console.log(width)
         // setWidth(refToElement.style.width)
       }}
       onResizeStart={() => {}}
