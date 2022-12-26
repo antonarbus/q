@@ -5,7 +5,6 @@ import { Draggable } from './draggable/Draggable'
 import { DraggableItem } from './draggable/DraggableItem'
 import { updateOrderAfterDrag } from './offerSlice'
 import { useLocalStorage } from 'react-use'
-import { globalObject } from '@client/globalObject'
 
 export const Offer = () => {
   const [, setCurrentOfferAtLocalStorage] = useLocalStorage('currentOffer')
@@ -20,8 +19,7 @@ export const Offer = () => {
         const oldItemId = itemsArr.find(item => item.pos === oldIndex)?.id
         const newItemId = itemsArr.find(item => item.pos === newIndex)?.id
         dispatch(updateOrderAfterDrag({ oldItemId, oldIndex, newItemId, newIndex }))
-        globalObject.currentOffer = store.getState().offer
-        setCurrentOfferAtLocalStorage(globalObject.currentOffer)
+        setCurrentOfferAtLocalStorage(store.getState().offer)
       }}
     >
       {itemsArr.map((item, index) => (
