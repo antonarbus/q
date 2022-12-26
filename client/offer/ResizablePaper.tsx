@@ -1,7 +1,9 @@
 import { globalObject } from '@client/globalObject'
+import { store, useDispatchTyped, useSelectorTyped } from '@client/store'
 import { Resizable } from 're-resizable'
-import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useLocalStorage } from 'react-use'
+import { updateWidth } from './offerSlice'
 
 type Props = {
   children: React.ReactNode
@@ -11,8 +13,10 @@ type Props = {
 }
 
 export const ResizablePaper = ({ children, id, savedWidth }: Props) => {
-  const [width, setWidth] = useState('250px')
+  // const [width, setWidth] = useState('250px')
   const [, setCurrentOfferAtLocalStorage] = useLocalStorage('currentOffer')
+  const { width } = useSelectorTyped(state => state.offer.items[id])
+  const dispatch = useDispatchTyped()
 
   return (
     <Resizable
@@ -35,11 +39,13 @@ export const ResizablePaper = ({ children, id, savedWidth }: Props) => {
         left: true
       }}
       onResize={(e, direction, refToElement, delta) => {
-        setWidth(refToElement.style.width)
+        // setWidth(refToElement.style.width)
       }}
       onResizeStart={() => {}}
       onResizeStop={(e, direction, refToElement) => {
-        globalObject.currentOffer.items[id].width = width
+        const width = refToElement.style.width
+        dispatch(updateWidth({ id, width }))
+        globalObject.currentOffer = store.getState().offer
         setCurrentOfferAtLocalStorage(globalObject.currentOffer)
       }}
     >

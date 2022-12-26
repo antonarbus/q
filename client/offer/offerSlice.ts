@@ -6,6 +6,10 @@ const offerSlice = createSlice({
   name: 'offer',
   initialState: window.structuredClone(globalObject.currentOffer) as OfferType,
   reducers: {
+    updateWidth: (state, action) => {
+      const { id, width } = action.payload
+      state.items[id].width = width
+    },
     updateOrderAfterDrag: (state, action) => {
       const { oldItemId, oldIndex, newItemId, newIndex } = action.payload
       // console.log(current(state))
@@ -16,4 +20,4 @@ const offerSlice = createSlice({
 })
 
 export default offerSlice.reducer
-export const { updateOrderAfterDrag } = offerSlice.actions
+export const { updateWidth, updateOrderAfterDrag } = offerSlice.actions
