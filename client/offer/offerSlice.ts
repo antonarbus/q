@@ -1,10 +1,13 @@
 import { createSlice, current } from '@reduxjs/toolkit'
-import { globalObject } from '@client/globalObject'
-import { OfferType } from './templateOffer'
+import { OfferType, templateOffer } from './templateOffer'
+
+const isOfferInLocalStorage = !!localStorage.getItem('currentOffer')
+const offerFromLocalStorage = isOfferInLocalStorage && JSON.parse(localStorage.getItem('currentOffer') || '')
+const initialState: OfferType = offerFromLocalStorage || templateOffer
 
 const offerSlice = createSlice({
   name: 'offer',
-  initialState: window.structuredClone(globalObject.currentOffer) as OfferType,
+  initialState,
   reducers: {
     updateWidth: (state, action) => {
       const { id, width } = action.payload

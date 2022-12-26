@@ -73,7 +73,7 @@ export const useRefreshTokens = ({ withLoadingState }: Props) => {
 
         if (email) {
           globalObject.accessJwtToken = accessJwtToken
-          console.log(response)
+          // console.log(response)
           store.dispatch(rememberLoggedUser({ email, isLogged: true, roles }))
           navUpdate.login()
           return console.log(`tokens for ${email} are refreshed`)
