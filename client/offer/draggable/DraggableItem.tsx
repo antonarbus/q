@@ -1,5 +1,4 @@
 import { SortableElement, SortableElementProps } from 'react-sortable-hoc'
-import { DragHandle } from './DragHandle'
 
 type Props = {
   children: React.ReactNode
@@ -14,8 +13,9 @@ export const DraggableItem: React.ComponentClass<ISortableItem, any> = SortableE
     <div
       css={{
         display: 'flex',
-        position: 'relative',
         justifyContent: 'center',
+        gap: '2px',
+        position: 'relative',
         maxWidth: '100%'
       }}
     >
