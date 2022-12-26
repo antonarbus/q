@@ -1,11 +1,9 @@
 import { ResizablePaper } from './ResizablePaper'
 import { store, useDispatchTyped, useSelectorTyped } from '@client/store'
 import parseHtml from 'html-react-parser'
-import { Draggable } from './draggable/Draggable'
-import { DraggableItem } from './draggable/DraggableItem'
+import { Draggable, DraggableItem, DragHandle } from './draggable'
 import { updateOrderAfterDrag } from './offerSlice'
 import { useLocalStorage } from 'react-use'
-import { DragHandle } from './draggable/DragHandle'
 import { arrayMoveImmutable } from 'array-move'
 
 export const Offer = () => {
