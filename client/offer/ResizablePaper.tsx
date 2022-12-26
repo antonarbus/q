@@ -41,7 +41,6 @@ export const ResizablePaper = ({ children, id, savedWidth }: Props) => {
       onResizeStop={(e, direction, refToElement) => {
         globalObject.currentOffer.items[id].width = width
         setCurrentOfferAtLocalStorage(globalObject.currentOffer)
-        console.log(globalObject.currentOffer.items[id].width)
       }}
     >
       {children}
