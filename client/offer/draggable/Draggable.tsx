@@ -18,8 +18,8 @@ export const Draggable: React.ComponentClass<ISortableContainer, any> =
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
-        gap: '20px 0px'
+        alignItems: 'center'
+        // gap: '20px 0px'
       }}
     >
       {children}
