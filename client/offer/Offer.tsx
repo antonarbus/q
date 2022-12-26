@@ -5,6 +5,8 @@ import { Draggable, DraggableItem, DragHandle } from './draggable'
 import { updateOrderAfterDrag } from './offerSlice'
 import { useLocalStorage } from 'react-use'
 import { arrayMoveImmutable } from 'array-move'
+import { MdCopyAll } from 'react-icons/md'
+import { ActionsContainer } from './ActionsContainer'
 
 export const Offer = () => {
   const [, setCurrentOfferAtLocalStorage] = useLocalStorage('currentOffer')
@@ -16,14 +18,16 @@ export const Offer = () => {
       useDragHandle
       onSortEnd={({ oldIndex, newIndex }) => {
         const sortedItems = arrayMoveImmutable(items, oldIndex, newIndex)
-        console.log({ sortedItems })
         dispatch(updateOrderAfterDrag({ sortedItems }))
         setCurrentOfferAtLocalStorage(store.getState().offer)
       }}
     >
       {items.map((item, index) => (
         <DraggableItem key={item.id} index={index} >
-          <DragHandle />
+          <ActionsContainer>
+            <DragHandle />
+            <MdCopyAll />
+          </ActionsContainer>
           <ResizablePaper key={item.id} id={item.id} width={item.width} index={index}>
             {item.type === 'text' && parseHtml(item.innerHtml)}
           </ResizablePaper>
