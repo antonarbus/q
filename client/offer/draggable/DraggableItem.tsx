@@ -14,11 +14,11 @@ export const DraggableItem: React.ComponentClass<ISortableItem, any> = SortableE
     <div
       css={{
         display: 'flex',
+        position: 'relative',
         alignItems: 'center',
+        justifyContent: 'center',
         margin: '5px',
-        padding: '5px',
-        border: '1px dotted grey',
-        whiteSpace: 'nowrap'
+        border: '1px dotted grey'
       }}
     >
       <DragHandle />
