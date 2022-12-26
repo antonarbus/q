@@ -1,11 +1,14 @@
 import { ResizablePaper } from './ResizablePaper'
-import { useDispatchTyped, useSelectorTyped } from '@client/store'
+import { store, useDispatchTyped, useSelectorTyped } from '@client/store'
 import parseHtml from 'html-react-parser'
 import { Draggable } from './draggable/Draggable'
 import { DraggableItem } from './draggable/DraggableItem'
 import { updateOrderAfterDrag } from './offerSlice'
+import { useLocalStorage } from 'react-use'
+import { globalObject } from '@client/globalObject'
 
 export const Offer = () => {
+  const [, setCurrentOfferAtLocalStorage] = useLocalStorage('currentOffer')
   const dispatch = useDispatchTyped()
   const { items } = useSelectorTyped(state => state.offer)
   const itemsArr = Object.values(items).sort((firstEl, secondEl) => firstEl.pos - secondEl.pos)
@@ -17,6 +20,8 @@ export const Offer = () => {
         const oldItemId = itemsArr.find(item => item.pos === oldIndex)?.id
         const newItemId = itemsArr.find(item => item.pos === newIndex)?.id
         dispatch(updateOrderAfterDrag({ oldItemId, oldIndex, newItemId, newIndex }))
+        globalObject.currentOffer = store.getState().offer
+        setCurrentOfferAtLocalStorage(globalObject.currentOffer)
       }}
     >
       {itemsArr.map((item, index) => (
