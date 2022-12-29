@@ -17,9 +17,7 @@ export function Menu() {
   const nextMenuRef = useRef() as React.MutableRefObject<HTMLDivElement>
   const fakeMenuRef = useRef() as React.MutableRefObject<HTMLDivElement>
   const { idsToNextMenuItems, idsToCurrentMenuItems } = useSelector(state => state.nav)
-  const { goDownInMenu, goUpInMenu } = useMenuAnimation({ currentMenuRef, nextMenuRef, menuContainerRef, fakeMenuRef, idsToNextMenuItems })
-  globalObject.goDownInMenu = goDownInMenu
-  globalObject.goUpInMenu = goUpInMenu
+  useMenuAnimation({ currentMenuRef, nextMenuRef, menuContainerRef, fakeMenuRef, idsToNextMenuItems })
   useKeysForMenuNavigation()
   useCloseMenuOnClickOutside({ menuContainerRef })
   const isMenuOutsideWindow = useIsMenuOutsideWindow()

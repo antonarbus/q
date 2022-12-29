@@ -7,6 +7,7 @@ import { setMenuItemHoverIndex } from '@client/nav/navSlice'
 import { useDispatchTyped, useSelectorTyped as useSelector } from '@client/store'
 import { globalObject } from '@client/globalObject'
 import { EventType } from '@client/types'
+import { navigateInMenu } from '../functions/useMenuAnimation'
 
 export function BackMenuItem() {
   const dispatch = useDispatchTyped()
@@ -15,7 +16,7 @@ export function BackMenuItem() {
 
   const onClickHandler = (e: EventType) => {
     e.preventDefault()
-    globalObject.goUpInMenu && globalObject.goUpInMenu()
+    navigateInMenu.up && navigateInMenu.up()
   }
 
   return (

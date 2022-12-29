@@ -1,6 +1,5 @@
 import { MenuType, navStructure } from '@client/nav/navStructure'
 import { createSlice } from '@reduxjs/toolkit'
-import { globalObject } from '@client/globalObject'
 import { RootState } from '@client/store'
 
 const initialState = {
@@ -23,11 +22,12 @@ const navSlice = createSlice({
     disableMedia: (state) => { state.mediaEnabled = false },
     enableMedia: (state) => { state.mediaEnabled = true },
     setNavMediaQueryWidths: (state, action) => {
-      state.mediaQueryWidth.logoExtension = action.payload.logoExtension
-      state.mediaQueryWidth.logoPart = action.payload.logoPart
-      state.mediaQueryWidth.icon = action.payload.icon
-      state.mediaQueryWidth.name = action.payload.name
-      state.mediaQueryWidth.burger = action.payload.burger
+      const { logoExtension, logoPart, icon, name, burger } = action.payload
+      state.mediaQueryWidth.logoExtension = logoExtension
+      state.mediaQueryWidth.logoPart = logoPart
+      state.mediaQueryWidth.icon = icon
+      state.mediaQueryWidth.name = name
+      state.mediaQueryWidth.burger = burger
     },
     setNavItemRightPos: (state, action) => { state.navItemRightPos = action.payload },
     openMenuWithId: (state, action) => { state.idsToCurrentMenuItems = state.idsToNextMenuItems = ['top', action.payload] },
@@ -35,7 +35,6 @@ const navSlice = createSlice({
       state.idsToNextMenuItems = state.idsToCurrentMenuItems = ['top']
       state.burger.isOpen = false
       state.menuItemHoverIndex = 0
-      globalObject.goDownInMenu = globalObject.goUpInMenu = null
     },
     goDownInCurrentMenu: (state, action) => { state.idsToCurrentMenuItems = [...state.idsToCurrentMenuItems, action.payload] },
     goUpInCurrentMenu: (state) => { state.idsToCurrentMenuItems = state.idsToCurrentMenuItems.slice(0, -1) },

@@ -4,6 +4,7 @@ import { closeMenu, setMenuItemHoverIndex } from '@client/nav/navSlice'
 import { getMenuItemByIdsChain } from './getMenuItemByIdsChain'
 import { globalObject } from '@client/globalObject'
 import { useNavigate } from 'react-router-dom'
+import { navigateInMenu } from './useMenuAnimation'
 
 export function useKeysForMenuNavigation() {
   const dispatch = useDispatchTyped()
@@ -39,7 +40,7 @@ export function useKeysForMenuNavigation() {
     }
 
     if (isNestedMenu && e.key === 'Backspace') {
-      globalObject.goUpInMenu && globalObject.goUpInMenu()
+      navigateInMenu.up && navigateInMenu.up()
       return
     }
 
@@ -60,7 +61,7 @@ export function useKeysForMenuNavigation() {
 
       const isBackMenuItem = hoveredMenuItemIndex === 1 && isNestedMenu
       if (isBackMenuItem) {
-        globalObject.goUpInMenu && globalObject.goUpInMenu()
+        navigateInMenu.up && navigateInMenu.up()
         return
       }
 
@@ -86,7 +87,7 @@ export function useKeysForMenuNavigation() {
 
       const isNestedMenuAvailable = !!menuItem?.menuItems
       if (isNestedMenuAvailable) {
-        globalObject.goDownInMenu && globalObject.goDownInMenu(menuId)
+        navigateInMenu.down && navigateInMenu.down(menuId)
         return
       }
     }
