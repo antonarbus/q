@@ -3,6 +3,7 @@ import { store } from '@client/store'
 import { globalObject } from '@client/globalObject'
 import { EventType } from '@client/types'
 import { getMenuItemByIdsChain } from '../../functions/getMenuItemByIdsChain'
+import { navigateInMenu } from '../../functions/useMenuAnimation'
 
 export const clickOnMenuItem = (e: EventType, menuId: string) => {
   const chainToClickedItem = [...store.getState().nav.idsToCurrentMenuItems, menuId]
@@ -35,6 +36,6 @@ export const clickOnMenuItem = (e: EventType, menuId: string) => {
   }
 
   if (isNestedMenuAvailable) {
-    globalObject.goDownInMenu && globalObject.goDownInMenu(menuId)
+    navigateInMenu.down && navigateInMenu.down(menuId)
   }
 }

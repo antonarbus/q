@@ -7,6 +7,16 @@ import { useEffect } from 'react'
 import { getMenuItemByIdsChain } from './getMenuItemByIdsChain'
 import { useFirstMountState } from 'react-use'
 
+type Props = {
+  up: { () : void } | null
+  down: { (id: string): void } | null,
+}
+
+export const navigateInMenu: Props = {
+  up: () => console.log('put function here for going up the menu, otherwise need to pass it in many props'),
+  down: (id) => console.log('put function here for going into submenu, otherwise need to pass it in many props')
+}
+
 type PropsType = {
   currentMenuRef: React.MutableRefObject<HTMLDivElement>
   nextMenuRef: React.MutableRefObject<HTMLDivElement>
@@ -67,5 +77,6 @@ export function useMenuAnimation({ currentMenuRef, nextMenuRef, menuContainerRef
 
   useEffect(animateMenuHeight, [nextMenu])
 
-  return { goDownInMenu, goUpInMenu, animateMenuHeight }
+  navigateInMenu.up = goUpInMenu
+  navigateInMenu.down = goDownInMenu
 }
