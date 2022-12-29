@@ -1,8 +1,8 @@
 import { notify } from '@client/notifier/notify'
-import { globalObject } from '@client/globalObject'
 import { store } from '@client/store'
 import { forgetLoggedUser } from './credentialsSlice'
 import { navUpdate } from './navUpdate'
+import { token } from './token'
 
 export async function logoutUser() {
   const method = 'GET'
@@ -25,6 +25,6 @@ export async function logoutUser() {
     console.log(err)
     notify({ msg: 'Internal error', type: 'error', theme: 'light' })
   } finally {
-    globalObject.accessJwtToken = ''
+    token.access = ''
   }
 }

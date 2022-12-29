@@ -1,15 +1,14 @@
 // axios.ts
 import { forgetLoggedUser, rememberLoggedUser } from '@client/credentials/credentialsSlice'
-import { globalObject } from '@client/globalObject'
 import { store } from '@client/store'
 import axios from 'axios'
+import { token } from './token'
 
 export const axiosWithAuth = axios.create({ withCredentials: true })
 
 axiosWithAuth.interceptors.request.use((config) => {
-  const accessJwtToken = globalObject.accessJwtToken
-  if (config.headers && accessJwtToken) {
-    config.headers['access-jwt-token'] = accessJwtToken
+  if (config.headers && token.access) {
+    config.headers['access-jwt-token'] = token.access
   }
   return config
 })
@@ -26,11 +25,11 @@ axiosWithAuth.interceptors.response.use(
         const response = await axios.get('/api/refresh', { withCredentials: true })
         const { accessJwtToken, email } = response.data
         if (accessJwtToken) {
-          globalObject.accessJwtToken = accessJwtToken
+          token.access = accessJwtToken
           store.dispatch(rememberLoggedUser({ email, isLogged: true, roles: 'viewer' }))
         }
         if (!accessJwtToken) {
-          globalObject.accessJwtToken = ''
+          token.access = ''
           store.dispatch(forgetLoggedUser())
         }
         return axiosWithAuth.request(originalRequest)

@@ -7,8 +7,8 @@ import axios from 'axios'
 import { tokenExpirationMinutes } from './tokenExpirationMinutes'
 import { jwtAccessTokenType } from '@client/types'
 import { navUpdate } from './navUpdate'
-import { globalObject } from '@client/globalObject'
 import { forgetLoggedUser, rememberLoggedUser } from './credentialsSlice'
+import { token } from './token'
 
 type Props = {
   withLoadingState?: boolean
@@ -35,11 +35,10 @@ export const useRefreshTokens = ({ withLoadingState }: Props) => {
   useEffectOnce(() => {
     async function refreshTokens() {
       try {
-        const existingAccessJwtToken = globalObject.accessJwtToken
-        if (existingAccessJwtToken) {
-          const expirationInMin = tokenExpirationMinutes(existingAccessJwtToken)
+        if (token.access) {
+          const expirationInMin = tokenExpirationMinutes(token.access)
           if (expirationInMin > 5) {
-            const payloadFromExistingAccessToken: jwtAccessTokenType = jwt_decode(existingAccessJwtToken)
+            const payloadFromExistingAccessToken: jwtAccessTokenType = jwt_decode(token.access)
             const { email, roles } = payloadFromExistingAccessToken
             store.dispatch(rememberLoggedUser({ email, isLogged: true, roles }))
             navUpdate.login()
@@ -51,7 +50,7 @@ export const useRefreshTokens = ({ withLoadingState }: Props) => {
         const { status, accessJwtToken, roles } = response.data
 
         if (status === 'error') {
-          globalObject.accessJwtToken = ''
+          token.access = ''
           store.dispatch(forgetLoggedUser())
           navUpdate.logout()
           return console.log(response.data.message)
@@ -72,7 +71,7 @@ export const useRefreshTokens = ({ withLoadingState }: Props) => {
         }
 
         if (email) {
-          globalObject.accessJwtToken = accessJwtToken
+          token.access = accessJwtToken
           // console.log(response)
           store.dispatch(rememberLoggedUser({ email, isLogged: true, roles }))
           navUpdate.login()

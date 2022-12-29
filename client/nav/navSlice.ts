@@ -21,14 +21,7 @@ const navSlice = createSlice({
     toggleBurger: (state) => { state.burger.isOpen = !state.burger.isOpen },
     disableMedia: (state) => { state.mediaEnabled = false },
     enableMedia: (state) => { state.mediaEnabled = true },
-    setNavMediaQueryWidths: (state, action) => {
-      const { logoExtension, logoPart, icon, name, burger } = action.payload
-      state.mediaQueryWidth.logoExtension = logoExtension
-      state.mediaQueryWidth.logoPart = logoPart
-      state.mediaQueryWidth.icon = icon
-      state.mediaQueryWidth.name = name
-      state.mediaQueryWidth.burger = burger
-    },
+    setNavMediaQueryWidths: (state, action) => { state.mediaQueryWidth = action.payload },
     setNavItemRightPos: (state, action) => { state.navItemRightPos = action.payload },
     openMenuWithId: (state, action) => { state.idsToCurrentMenuItems = state.idsToNextMenuItems = ['top', action.payload] },
     closeMenu: (state) => {

@@ -1,12 +1,12 @@
 import { notify } from '@client/notifier/notify'
 import { slideElement } from '@utils/slideElement'
-import { globalObject } from '@client/globalObject'
 import { useDispatchTyped } from '@client/store'
 import { EventType, httpStatusType } from '@client/types'
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { credentialsSlice, rememberLoggedUser } from './credentialsSlice'
+import { rememberLoggedUser } from './credentialsSlice'
 import { navUpdate } from './navUpdate'
+import { token } from './token'
 
 export function useLogin() {
   const [httpStatus, setHttpStatus] = useState<httpStatusType>('')
@@ -36,7 +36,7 @@ export function useLogin() {
 
       if (status === 'error') {
         setHttpStatus('error')
-        globalObject.accessJwtToken = ''
+        token.access = ''
         if (message === 'invalid credentials') {
           notify({ msg: 'Invalid credentials', type: 'error', theme: 'light' })
         }
@@ -48,7 +48,7 @@ export function useLogin() {
 
       if (status === 'ok') {
         setHttpStatus('success')
-        globalObject.accessJwtToken = accessJwtToken
+        token.access = accessJwtToken
         dispatch(rememberLoggedUser({ email, isLogged: true, roles }))
         // notify({ msg: 'Logged in!', theme: 'light', closeAfterMs: 3000 })
         navUpdate.login()
