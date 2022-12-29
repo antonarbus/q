@@ -1,6 +1,5 @@
 import { closeMenu } from '@client/nav/navSlice'
 import { store } from '@client/store'
-import { globalObject } from '@client/globalObject'
 import { EventType } from '@client/types'
 import { getMenuItemByIdsChain } from '../../functions/getMenuItemByIdsChain'
 import { navigateInMenu } from '../../functions/useMenuAnimation'

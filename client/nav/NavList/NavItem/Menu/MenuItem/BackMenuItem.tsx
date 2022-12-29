@@ -5,7 +5,6 @@ import { MenuItemStyled } from './MenuItemStyled'
 import { theme } from '@client/theme'
 import { setMenuItemHoverIndex } from '@client/nav/navSlice'
 import { useDispatchTyped, useSelectorTyped as useSelector } from '@client/store'
-import { globalObject } from '@client/globalObject'
 import { EventType } from '@client/types'
 import { navigateInMenu } from '../functions/useMenuAnimation'
 

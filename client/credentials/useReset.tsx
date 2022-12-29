@@ -1,7 +1,7 @@
 import { notify } from '@client/notifier/notify'
-import { globalObject } from '@client/globalObject'
 import { EventType, httpStatusType } from '@client/types'
 import { useState } from 'react'
+import { token } from './token'
 
 type Props = {
   e: EventType
@@ -24,7 +24,7 @@ export function useReset() {
       const data = await res.json()
       if (data.status === 'error') {
         setHttpStatus('error')
-        globalObject.accessJwtToken = ''
+        token.access = ''
       }
 
       if (data.status === 'ok') {

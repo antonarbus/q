@@ -8,7 +8,6 @@ import { useIsMenuOutsideWindow } from './functions/useIsMenuOutsideWindow'
 import { SlidableMenuItemsContainer } from './SlidableMenuItemsContainer'
 import { TopMenuItemsContainer } from './TopMenuItemsContainer'
 import { setMenuItemHoverIndex } from '@client/nav/navSlice'
-import { globalObject } from '@client/globalObject'
 import { theme } from '@client/theme'
 
 export function Menu() {
