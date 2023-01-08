@@ -1,3 +1,7 @@
+
+
+
+
 {
   "name": "quotation.app",
   "private": true,
@@ -24,8 +28,6 @@
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.10.1",
     "@reduxjs/toolkit": "^1.8.3",
-    "@tanstack/react-query": "^4.21.0",
-    "@tanstack/react-query-devtools": "^4.21.0",
     "array-move": "^4.0.0",
     "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",

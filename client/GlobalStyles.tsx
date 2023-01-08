@@ -118,6 +118,11 @@ export const GlobalStyles = () => (
       input[data-autocompleted] {
           background-color: transparent !important;
       }
+
+      // react-query dev tools
+      .ReactQueryDevtools > button {
+        scale: 0.7;
+      }
     `}
   />
 )
