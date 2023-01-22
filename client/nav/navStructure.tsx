@@ -4,7 +4,7 @@ import { FiLogOut, FiLogIn } from 'react-icons/fi'
 import { IoDocumentOutline, IoDocumentsOutline, IoSaveOutline, IoShareOutline } from 'react-icons/io5'
 import { IoIosSwap } from 'react-icons/io'
 import logo from './img/logo.svg'
-import { logoutUser } from '@client/credentials/logout'
+import { logoutUser } from 'client/credentials/logout'
 import { Person as PersonIcon, Settings as SettingsIcon } from '@mui/icons-material'
 
 const reactIcon = React.createElement(IoShareOutline, {})

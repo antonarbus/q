@@ -1,5 +1,5 @@
-import { getMenuItemByIdsChainSelector } from '@client/nav/navSlice'
-import { useSelectorTyped as useSelector } from '@client/store'
+import { getMenuItemByIdsChainSelector } from 'client/nav/navSlice'
+import { useSelectorTyped as useSelector } from 'client/store'
 import { MenuItem } from './MenuItem'
 
 type Props = {

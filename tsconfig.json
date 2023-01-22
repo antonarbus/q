@@ -21,11 +21,7 @@
     // Base directory to resolve non-relative module names.
     "baseUrl": ".", 
     // path mapping to be computed relative to baseUrl option
-    // may use import {func} from '@client/folder', instead of '../../../../folder'
-    "paths": {
-      "@utils/*": ["utils/*"],
-      "@client/*": ["client/*"]
-    },
+    // may use import {func} from 'client/folder', instead of '../../../../folder'
     "types": [
       "vite/client", 
       "vitest/globals",

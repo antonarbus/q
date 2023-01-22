@@ -1,7 +1,7 @@
-import { MenuType } from '@client/nav/navStructure'
-import { closeMenu, openMenuWithId, setNavItemRightPos } from '@client/nav/navSlice'
-import { store } from '@client/store'
-import { EventType } from '@client/types'
+import { MenuType } from 'client/nav/navStructure'
+import { closeMenu, openMenuWithId, setNavItemRightPos } from 'client/nav/navSlice'
+import { store } from 'client/store'
+import { EventType } from 'client/types'
 
 type PropsType = {
   e: EventType

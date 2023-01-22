@@ -1,5 +1,5 @@
 import { useLayoutEffect } from 'react'
-import { useDispatchTyped, useSelectorTyped as useSelector } from '@client/store'
+import { useDispatchTyped, useSelectorTyped as useSelector } from 'client/store'
 import { disableMedia, enableMedia, setNavMediaQueryWidths } from '../navSlice'
 import { calcNavMediaQueryParams } from './calcNavMediaQueryParams'
 import { useFirstMountState } from 'react-use'

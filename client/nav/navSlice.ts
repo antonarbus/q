@@ -1,6 +1,6 @@
-import { MenuType, navStructure } from '@client/nav/navStructure'
+import { MenuType, navStructure } from 'client/nav/navStructure'
 import { createSlice } from '@reduxjs/toolkit'
-import { RootState } from '@client/store'
+import { RootState } from 'client/store'
 
 const initialState = {
   navStructure,

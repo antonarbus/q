@@ -1,4 +1,4 @@
-import { store, useDispatchTyped } from '@client/store'
+import { store, useDispatchTyped } from 'client/store'
 import { Resizable } from 're-resizable'
 import { useLocalStorage } from 'react-use'
 import { updateWidth } from './offerSlice'

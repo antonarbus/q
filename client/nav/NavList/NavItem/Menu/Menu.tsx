@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { useDispatchTyped, useSelectorTyped as useSelector } from '@client/store'
+import { useDispatchTyped, useSelectorTyped as useSelector } from 'client/store'
 import { useRef } from 'react'
 import { useMenuAnimation } from './functions/useMenuAnimation'
 import { useKeysForMenuNavigation } from './functions/useKeysForMenuNavigation'
@@ -7,8 +7,8 @@ import { useCloseMenuOnClickOutside } from './functions/useCloseMenuOnClickOutsi
 import { useIsMenuOutsideWindow } from './functions/useIsMenuOutsideWindow'
 import { SlidableMenuItemsContainer } from './SlidableMenuItemsContainer'
 import { TopMenuItemsContainer } from './TopMenuItemsContainer'
-import { setMenuItemHoverIndex } from '@client/nav/navSlice'
-import { theme } from '@client/theme'
+import { setMenuItemHoverIndex } from 'client/nav/navSlice'
+import { theme } from 'client/theme'
 
 export function Menu() {
   const menuContainerRef = useRef() as React.MutableRefObject<HTMLDivElement>

@@ -1,4 +1,4 @@
-import { SpinnerFullPage } from '@client/spinner/SpinnerFullPage'
+import { SpinnerFullPage } from 'client/spinner/SpinnerFullPage'
 import { Outlet } from 'react-router-dom'
 import { useRefreshTokens } from './useRefreshTokens'
 

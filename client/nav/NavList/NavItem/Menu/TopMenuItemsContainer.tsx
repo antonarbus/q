@@ -1,4 +1,4 @@
-import { useSelectorTyped as useSelector } from '@client/store'
+import { useSelectorTyped as useSelector } from 'client/store'
 import { BackMenuItem } from './MenuItem/BackMenuItem'
 import { CloseMenuItem } from './MenuItem/CloseMenuItem'
 

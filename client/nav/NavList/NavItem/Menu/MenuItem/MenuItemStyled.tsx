@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import styled from '@emotion/styled'
-import { theme } from '@client/theme'
+import { theme } from 'client/theme'
 
 type PropsForSC = {
   to: string

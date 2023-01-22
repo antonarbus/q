@@ -1,16 +1,16 @@
-import { EventType } from '@client/types'
+import { EventType } from 'client/types'
 import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Avatar } from '@mui/material'
-import { BackdropWithSlidableContent } from '@client/components/BackdropWithSlidableContent'
-import { CardCustom } from '@client/components/CardCustom'
-import { theme } from '@client/theme'
+import { BackdropWithSlidableContent } from 'client/components/BackdropWithSlidableContent'
+import { CardCustom } from 'client/components/CardCustom'
+import { theme } from 'client/theme'
 import { EmailInput } from './common/EmailInput'
 import { PasswordInput } from './common/PasswordInput'
-import { ButtonCustom } from '@client/components/ButtonCustom'
+import { ButtonCustom } from 'client/components/ButtonCustom'
 import { useLogin } from './useLogin'
 import { LoginRounded } from '@mui/icons-material'
-import { slideElement } from '@utils/slideElement'
+import { slideElement } from 'utils/slideElement'
 
 // todo: store user data in redux
 

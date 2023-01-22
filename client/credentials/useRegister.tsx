@@ -1,5 +1,5 @@
-import { notify } from '@client/notifier/notify'
-import { EventType, httpStatusType } from '@client/types'
+import { notify } from 'client/notifier/notify'
+import { EventType, httpStatusType } from 'client/types'
 import { useState } from 'react'
 
 type Props = {
