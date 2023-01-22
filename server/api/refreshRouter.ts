@@ -1,7 +1,6 @@
-// refreshRouter.ts
 import express, { Request as ReqType, Response as ResType, NextFunction as NextType } from 'express'
 import { UserModel } from '../db/models/user.model'
-import { generateAccessJwtToken, generateRefreshJwtToken, refreshJwtTokenExpirationSeconds, verifyRefreshJwtToken } from '../services/jwt/jwt'
+import { refreshJwtTokenExpirationSeconds, token } from '../services/jwt'
 
 export const refreshRouter = express.Router()
 refreshRouter.get('/', async (req: ReqType, res: ResType, next: NextType) => {
@@ -13,7 +12,7 @@ refreshRouter.get('/', async (req: ReqType, res: ResType, next: NextType) => {
     }
 
     // check if token is ok
-    const { email } = verifyRefreshJwtToken(refreshJwtToken)
+    const { email } = token.verify.refresh(refreshJwtToken)
     if (!email) {
       return res.json({ status: 'error', message: 'refresh token is not validated, probably not authorized' })
     }
@@ -25,13 +24,13 @@ refreshRouter.get('/', async (req: ReqType, res: ResType, next: NextType) => {
     }
 
     // generate refresh token and save in db
-    const updatedRefreshJwtToken = generateRefreshJwtToken({ email })
+    const updatedRefreshJwtToken = token.new.refresh({ email })
     res.cookie('refreshJwtToken', updatedRefreshJwtToken, { maxAge: refreshJwtTokenExpirationSeconds * 1000, httpOnly: true })
     await UserModel.findOneAndUpdate({ email }, { refreshJwtToken: updatedRefreshJwtToken })
 
     // generate access token and send to client
     const { roles } = user
-    const accessJwtToken = generateAccessJwtToken({ email, roles })
+    const accessJwtToken = token.new.access({ email, roles })
 
     // send response
     res.json({ status: 'ok', message: `refresh token for email: ${email} is refreshed`, accessJwtToken, roles })

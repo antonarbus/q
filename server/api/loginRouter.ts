@@ -2,7 +2,7 @@
 import express, { Request as ReqType, Response as ResType, NextFunction as NextType } from 'express'
 import { UserModel } from '../db/models/user.model'
 import bcrypt from 'bcryptjs'
-import { generateAccessJwtToken, generateRefreshJwtToken, refreshJwtTokenExpirationSeconds } from '../services/jwt/jwt'
+import { refreshJwtTokenExpirationSeconds, token } from '../services/jwt'
 
 export const loginRouter = express.Router()
 loginRouter.post('/', async (req: ReqType, res: ResType, next: NextType) => {
@@ -24,8 +24,8 @@ loginRouter.post('/', async (req: ReqType, res: ResType, next: NextType) => {
 
     // generate jwt tokens
     const { roles } = user
-    const accessJwtToken = generateAccessJwtToken({ email, roles })
-    const refreshJwtToken = generateRefreshJwtToken({ email, roles })
+    const accessJwtToken = token.new.access({ email, roles })
+    const refreshJwtToken = token.new.refresh({ email, roles })
 
     // put refresh token in cookie
     res.cookie('refreshJwtToken', refreshJwtToken, { maxAge: refreshJwtTokenExpirationSeconds * 1000, httpOnly: true })
