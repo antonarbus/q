@@ -1,17 +1,17 @@
-import { EventType } from '@client/types'
+import { EventType } from 'client/types'
 import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Avatar } from '@mui/material'
-import { theme } from '@client/theme'
+import { theme } from 'client/theme'
 import { LockOutlined } from '@mui/icons-material'
 import { EmailInput } from './common/EmailInput'
 import { PasswordInput } from './common/PasswordInput'
 import { ConfirmPasswordInput } from './common/ConfirmPasswordInput'
-import { ButtonCustom } from '@client/components/ButtonCustom'
+import { ButtonCustom } from 'client/components/ButtonCustom'
 import { useRegister } from './useRegister'
-import { BackdropWithSlidableContent } from '@client/components/BackdropWithSlidableContent'
-import { CardCustom } from '@client/components/CardCustom'
-import { slideElement } from '@utils/slideElement'
+import { BackdropWithSlidableContent } from 'client/components/BackdropWithSlidableContent'
+import { CardCustom } from 'client/components/CardCustom'
+import { slideElement } from 'utils/slideElement'
 
 export function Register() {
   const [email, setEmail] = useState('')

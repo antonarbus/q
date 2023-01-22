@@ -1,5 +1,5 @@
-import { setPropValueByIdInNavStructure } from '@client/nav/navSlice'
-import { store } from '@client/store'
+import { setPropValueByIdInNavStructure } from 'client/nav/navSlice'
+import { store } from 'client/store'
 
 export const navUpdate = {
   login: () => {

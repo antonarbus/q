@@ -1,4 +1,4 @@
-import { useSelectorTyped as useSelector } from '@client/store'
+import { useSelectorTyped as useSelector } from 'client/store'
 import { Link } from 'react-router-dom'
 
 type Prop = {

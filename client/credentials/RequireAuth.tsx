@@ -1,5 +1,5 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
-import { useSelectorTyped as useSelector } from '@client/store'
+import { useSelectorTyped as useSelector } from 'client/store'
 
 type Props = {
   allowedRoles: string[]

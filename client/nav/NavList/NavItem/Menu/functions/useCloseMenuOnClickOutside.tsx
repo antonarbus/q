@@ -1,8 +1,8 @@
-import { isClickInsideThisElement } from '@utils/isClickInsideThisElement'
-import { useDispatchTyped } from '@client/store'
+import { isClickInsideThisElement } from 'utils/isClickInsideThisElement'
+import { useDispatchTyped } from 'client/store'
 import { useEffect } from 'react'
-import { closeMenu } from '@client/nav/navSlice'
-import { EventType } from '@client/types'
+import { closeMenu } from 'client/nav/navSlice'
+import { EventType } from 'client/types'
 
 type Props = {
   menuContainerRef: React.MutableRefObject<HTMLDivElement>

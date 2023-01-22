@@ -1,5 +1,5 @@
 import { ResizablePaper } from './ResizablePaper'
-import { store, useDispatchTyped, useSelectorTyped } from '@client/store'
+import { store, useDispatchTyped, useSelectorTyped } from 'client/store'
 import parseHtml from 'html-react-parser'
 import { Draggable, DraggableItem, DragHandle } from './draggable'
 import { updateOrderAfterDrag } from './offerSlice'

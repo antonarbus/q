@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { decrement, increment, incrementByAmount, incrementAsync, incrementIfOdd, selectCount } from './counterSlice'
 import styles from './Counter.module.css'
-import { useDispatchTyped, useSelectorTyped } from '@client/store'
+import { useDispatchTyped, useSelectorTyped } from 'client/store'
 
 export function Counter() {
   const count = useSelectorTyped(selectCount)

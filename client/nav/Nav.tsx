@@ -1,6 +1,6 @@
 import { useRef } from 'react'
-import { useSelectorTyped as useSelector } from '@client/store'
-import { theme } from '@client/theme'
+import { useSelectorTyped as useSelector } from 'client/store'
+import { theme } from 'client/theme'
 import { Logo } from './Logo'
 import { NavList } from './NavList'
 import { useMenuItemActionShortcuts } from './functions/useMenuItemActionShortcuts'

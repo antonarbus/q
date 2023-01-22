@@ -1,5 +1,5 @@
-import { theme } from '@client/theme'
-import { useSelectorTyped as useSelector } from '@client/store'
+import { theme } from 'client/theme'
+import { useSelectorTyped as useSelector } from 'client/store'
 
 /**
   * check if menu width is more than distance to the left side of the window

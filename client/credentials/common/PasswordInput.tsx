@@ -1,7 +1,7 @@
 import { Lock, Visibility, VisibilityOff } from '@mui/icons-material'
 import { IconButton, InputAdornment, TextField } from '@mui/material'
-import { theme } from '@client/theme'
-import { EventType } from '@client/types'
+import { theme } from 'client/theme'
+import { EventType } from 'client/types'
 import { useState } from 'react'
 
 type Props = {

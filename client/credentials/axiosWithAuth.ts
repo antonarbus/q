@@ -1,6 +1,6 @@
 // axios.ts
-import { forgetLoggedUser, rememberLoggedUser } from '@client/credentials/credentialsSlice'
-import { store } from '@client/store'
+import { forgetLoggedUser, rememberLoggedUser } from 'client/credentials/credentialsSlice'
+import { store } from 'client/store'
 import axios from 'axios'
 import { token } from './token'
 

@@ -1,6 +1,6 @@
-import { CounterFromRedux } from '@client/counter'
-import { useRefreshTokens } from '@client/credentials/useRefreshTokens'
-import { Offer } from '@client/offer/Offer'
+import { CounterFromRedux } from 'client/counter'
+import { useRefreshTokens } from 'client/credentials/useRefreshTokens'
+import { Offer } from 'client/offer/Offer'
 import { Outlet, Route, Routes } from 'react-router-dom'
 
 export const Main = () => {

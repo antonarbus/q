@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { useSelectorTyped as useSelector, store } from '@client/store'
+import { useSelectorTyped as useSelector, store } from 'client/store'
 import { useRef } from 'react'
 import { Icon } from './Icon'
 import { Menu } from './Menu'
@@ -7,7 +7,7 @@ import { useWindowSize } from 'react-use'
 import { Link } from 'react-router-dom'
 import { clickOnNavItem } from './functions/clickOnNavItem'
 import { TiArrowSortedDown } from 'react-icons/ti'
-import { theme } from '@client/theme'
+import { theme } from 'client/theme'
 
 type NavItemType = {
   children?: React.ReactNode,

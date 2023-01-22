@@ -1,11 +1,11 @@
-import { store } from '@client/store'
+import { store } from 'client/store'
 import { useState } from 'react'
 import { useEffectOnce } from 'react-use'
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode'
 import axios from 'axios'
 import { tokenExpirationMinutes } from './tokenExpirationMinutes'
-import { jwtAccessTokenType } from '@client/types'
+import { jwtAccessTokenType } from 'client/types'
 import { navUpdate } from './navUpdate'
 import { forgetLoggedUser, rememberLoggedUser } from './credentialsSlice'
 import { token } from './token'

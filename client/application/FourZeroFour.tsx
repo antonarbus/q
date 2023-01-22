@@ -1,4 +1,4 @@
-import { theme } from '@client/theme'
+import { theme } from 'client/theme'
 
 const css = {
   height: '100vh',
