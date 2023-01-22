@@ -36,6 +36,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'space-before-function-paren': 'off',
     'react/no-unescaped-entities': 'off',
-    'react/no-children-prop': 'off'
+    'react/no-children-prop': 'off',
+    'react/no-unknown-property': ['error', { ignore: ['css'] }]
   }
 }
