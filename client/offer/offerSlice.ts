@@ -1,8 +1,8 @@
 import { createSlice, current } from '@reduxjs/toolkit'
 import { OfferType, templateOffer } from './templateOffer'
 
-const isOfferInLocalStorage = !!localStorage.getItem('currentOffer')
-const offerFromLocalStorage = isOfferInLocalStorage && JSON.parse(localStorage.getItem('currentOffer') || '')
+const offerInLocalStorage = localStorage.getItem('currentOffer')
+const offerFromLocalStorage = !!offerInLocalStorage && JSON.parse(offerInLocalStorage || '')
 const initialState: OfferType = offerFromLocalStorage || templateOffer
 
 const offerSlice = createSlice({
