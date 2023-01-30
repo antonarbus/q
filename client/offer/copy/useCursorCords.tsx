@@ -1,8 +1,11 @@
+import { useState } from 'react'
 import { useEffectOnce } from 'react-use'
 
-export function useFollowCursor() {
+export function useCursorCords() {
+  const [cursorCords, setCursorCords] = useState({ x: 0, y: 0 })
+
   function followCursor(e: MouseEvent) {
-    console.log(e.x, e.y)
+    setCursorCords({ x: e.x, y: e.y })
   }
 
   function listenForMousemove() {
@@ -11,4 +14,5 @@ export function useFollowCursor() {
   }
 
   useEffectOnce(listenForMousemove)
+  return cursorCords
 }
