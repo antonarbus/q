@@ -6,8 +6,8 @@ import { updateOrderAfterDrag } from './offerSlice'
 import { useLocalStorage } from 'react-use'
 import { arrayMoveImmutable } from 'array-move'
 import { ActionsContainer } from './ActionsContainer'
-import { CopyIcon } from './copy/CopyIcon'
-import { Paste } from './copy/Paste'
+import { CopyIcon } from '../copy/CopyIcon'
+import { Copy } from '../copy/Copy'
 
 export const Offer = () => {
   const [, setCurrentOfferAtLocalStorage] = useLocalStorage('currentOffer')
@@ -16,7 +16,7 @@ export const Offer = () => {
 
   return (
     <>
-      <Paste />
+      <Copy />
       <Draggable
         useDragHandle
         onSortEnd={({ oldIndex, newIndex }) => {

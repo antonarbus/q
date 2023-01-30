@@ -1,9 +1,10 @@
+import { useSelectorTyped } from 'client/store'
 import { useState } from 'react'
 import { useEffectOnce } from 'react-use'
 
 export function useCursorCords() {
-  const [cursorCords, setCursorCords] = useState({ x: 0, y: 0 })
-
+  const { initCords } = useSelectorTyped(state => state.copy)
+  const [cursorCords, setCursorCords] = useState(initCords)
   function followCursor(e: MouseEvent) {
     setCursorCords({ x: e.x, y: e.y })
   }

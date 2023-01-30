@@ -5,6 +5,7 @@ import credentials from 'client/credentials/credentialsSlice'
 import nav from 'client/nav/navSlice'
 import offer from 'client/offer/offerSlice'
 import spinner from 'client/spinner/spinnerSlice'
+import copy from 'client/copy/copySlice'
 
 export const store = configureStore({
   reducer: {
@@ -12,7 +13,8 @@ export const store = configureStore({
     credentials,
     nav,
     offer,
-    spinner
+    spinner,
+    copy
   },
   middleware: (defaultMiddleware) => defaultMiddleware({
     serializableCheck: false

@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { useCloseOnEsc } from './useCloseOnEsc'
 import { useCursorCords } from './useCursorCords'
 
-export const PasteContainer = () => {
+export const CopyContainer = () => {
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>
   useCloseOnEsc()
   const { x, y } = useCursorCords()
@@ -17,8 +17,8 @@ export const PasteContainer = () => {
         borderRadius: '6px',
         position: 'fixed',
         zIndex: 2,
-        top: y + 10,
-        left: x + 10
+        top: y + 15,
+        left: x + 15
       }}
     >
       I am copy container
