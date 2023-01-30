@@ -13,7 +13,7 @@ export function useCloseOnEsc() {
 
   function listenForEsc() {
     window.addEventListener('keydown', closeOnEsc)
-    return () => { window.removeEventListener('keydown', closeOnEsc) }
+    return () => window.removeEventListener('keydown', closeOnEsc)
   }
 
   useEffectOnce(listenForEsc)
