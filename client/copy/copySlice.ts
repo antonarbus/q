@@ -1,8 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { ItemType } from 'client/offer/templateOffer'
 
-const initialState = {
+type Props = {
+  isShown: boolean,
+  initCords: { x: number, y: number },
+  items: ItemType[]
+}
+
+const initialState: Props = {
   isShown: false,
-  initCords: { x: 0, y: 0 }
+  initCords: { x: 0, y: 0 },
+  items: []
 }
 
 export const copySlice = createSlice({
@@ -17,11 +25,14 @@ export const copySlice = createSlice({
     },
     saveInitCords: (state, action) => {
       state.initCords = action.payload
+    },
+    addItemIntoCopyContainer: (state, action) => {
+      state.items.push(action.payload)
     }
   }
 
 })
 
-export const { showCopyContainer, hideCopyContainer, saveInitCords } = copySlice.actions
+export const { showCopyContainer, hideCopyContainer, saveInitCords, addItemIntoCopyContainer } = copySlice.actions
 
 export default copySlice.reducer

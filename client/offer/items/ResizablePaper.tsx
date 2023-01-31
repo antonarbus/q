@@ -1,7 +1,7 @@
 import { store, useDispatchTyped } from 'client/store'
 import { Resizable } from 're-resizable'
 import { useLocalStorage } from 'react-use'
-import { updateWidth } from './offerSlice'
+import { updateWidth } from '../offerSlice'
 
 type Props = {
   children: React.ReactNode

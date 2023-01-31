@@ -2,11 +2,11 @@ import { ResizablePaper } from './ResizablePaper'
 import { store, useDispatchTyped, useSelectorTyped } from 'client/store'
 import parseHtml from 'html-react-parser'
 import { Draggable, DraggableItem, DragHandle } from './draggable'
-import { updateOrderAfterDrag } from './offerSlice'
+import { updateOrderAfterDrag } from '../offerSlice'
 import { useLocalStorage } from 'react-use'
 import { arrayMoveImmutable } from 'array-move'
 import { ActionsContainer } from './ActionsContainer'
-import { CopyIcon } from '../copy/CopyIcon'
+import { CopyIcon } from './CopyIcon'
 
 export const Items = () => {
   const [, setCurrentOfferAtLocalStorage] = useLocalStorage('currentOffer')
@@ -26,7 +26,7 @@ export const Items = () => {
         <DraggableItem key={item.id} index={index} >
           <ActionsContainer>
             <DragHandle />
-            <CopyIcon />
+            <CopyIcon itemToCopy={item}/>
           </ActionsContainer>
           <ResizablePaper key={item.id} id={item.id} width={item.width} index={index}>
             {item.type === 'text' && parseHtml(item.innerHtml)}
