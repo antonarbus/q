@@ -1,8 +1,13 @@
+import { ItemType } from 'client/offer/templateOffer'
 import { useDispatchTyped } from 'client/store'
 import { MdCopyAll } from 'react-icons/md'
-import { saveInitCords, showCopyContainer } from './copySlice'
+import { addItemIntoCopyContainer, saveInitCords, showCopyContainer } from '../../copy/copySlice'
 
-export const CopyIcon = () => {
+type Props = {
+  itemToCopy: ItemType
+}
+
+export const CopyIcon = ({ itemToCopy }: Props) => {
   const dispatch = useDispatchTyped()
 
   return (
@@ -11,6 +16,7 @@ export const CopyIcon = () => {
       onClick={(e: React.MouseEvent) => {
         dispatch(saveInitCords({ x: e.clientX, y: e.clientY }))
         dispatch(showCopyContainer())
+        dispatch(addItemIntoCopyContainer(itemToCopy))
       }}
     />
   )
