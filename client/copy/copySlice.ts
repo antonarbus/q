@@ -20,9 +20,7 @@ export const copySlice = createSlice({
     showCopyContainer: (state) => {
       state.isShown = true
     },
-    hideCopyContainer: (state) => {
-      state.isShown = false
-    },
+    hideCopyContainer: () => initialState,
     saveInitCords: (state, action) => {
       state.initCords = action.payload
     },
