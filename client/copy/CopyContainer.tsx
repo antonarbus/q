@@ -4,6 +4,10 @@ import { useCursorCords } from './useCursorCords'
 import parseHtml from 'html-react-parser'
 import { Key } from 'client/components/Key'
 
+// calc width and height of scaled el,
+// add a container with same dimensions
+// and then put scaled content there
+
 export const CopyContainer = () => {
   useCloseOnEsc()
   // const { x, y } = useCursorCords()
