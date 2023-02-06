@@ -6,22 +6,23 @@ import { Key } from 'client/components/Key'
 
 export const CopyContainer = () => {
   useCloseOnEsc()
-  const { x, y } = useCursorCords()
-  const items = useSelectorTyped(state => state.copy.items)
+  // const { x, y } = useCursorCords()
+  const { x, y } = { x: 0, y: 0 }
+  const { items } = useSelectorTyped(state => state.copy)
 
   return (
     <div
       css={{
-        width: '300px',
-        height: '600px',
-        borderRadius: '6px',
+        width: 300,
+        height: 600,
+        borderRadius: 6,
         position: 'fixed',
         zIndex: 2,
         top: y + 15,
         left: x + 15,
         background: 'white',
         boxShadow: '#00000033 0px 0px 10px 0px',
-        padding: '20px',
+        padding: 20,
         display: 'flex',
         flexDirection: 'column',
         overflow: 'hidden'
@@ -38,21 +39,26 @@ export const CopyContainer = () => {
       >
         Press <Key>Esc</Key> to exit
       </div>
-      {items.map((item, index) => item.type === 'text' && (
-        <div
-          key={`copy el ${index}`}
-          css={{
-            background: 'white',
-            borderRadius: '6px',
-            boxShadow: '#00000033 0px 0px 10px 0px',
-            padding: '20px',
-            marginBottom: '5px',
-            scale: '0.7'
-          }}
-        >
-          {parseHtml(item.innerHtml)}
-        </div>
-      ))}
+      {items.map((item, index) => {
+        console.log(260 / parseInt(item.width))
+        return item.type === 'text' && (
+          <div
+            key={`copy el ${index}`}
+            css={{
+              background: 'white',
+              borderRadius: '6px',
+              boxShadow: '#00000033 0px 0px 10px 0px',
+              padding: '20px',
+              marginBottom: '5px',
+              width: item.width,
+              transformOrigin: 'left top',
+              scale: `${260 / parseInt(item.width)}`
+            }}
+          >
+            {parseHtml(item.innerHtml)}
+          </div>
+        )
+      })}
     </div>
   )
 }
