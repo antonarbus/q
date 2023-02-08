@@ -3,6 +3,7 @@ import { useCloseOnEsc } from './useCloseOnEsc'
 import { useCursorCords } from './useCursorCords'
 import parseHtml from 'html-react-parser'
 import { Key } from 'client/components/Key'
+import { motion } from 'framer-motion'
 
 // calc width and height of scaled el,
 // add a container with same dimensions
@@ -31,8 +32,8 @@ export const CopyContainer = () => {
         padding: containerPadding,
         display: 'flex',
         flexDirection: 'column',
-        overflow: 'hidden'
-        // gap: '5px'
+        overflow: 'hidden',
+        gap: '10px'
       }}
     >
       <div
@@ -46,16 +47,19 @@ export const CopyContainer = () => {
         Press <Key>Esc</Key> to exit
       </div>
       {items.map((item, index) => {
-        // console.log(260 / parseInt(item.width))
         const scaleFactor = (containerWidth - 2 * containerPadding) / parseInt(item.width)
 
         return item.type === 'text' && (
-          <div
-            key={`copy el ${index}`}
+          <motion.div
+            key={`copy el ${items.length - index}`}
+            initial={{ y: '-120%' }}
+              animate={{ y: 0 }}
+              transition={{ delay: 0.2, duration: 1, type: 'spring' }}
             css={{
               height: item.height * scaleFactor,
               width: item.width * scaleFactor,
-              border: '1px solid red'
+              border: '1px solid red',
+              // overflow: 'hidden'
             }}
           >
             <div
@@ -72,7 +76,7 @@ export const CopyContainer = () => {
             >
               {parseHtml(item.innerHtml)}
             </div>
-          </div>
+          </motion.div>
 
         )
       })}
