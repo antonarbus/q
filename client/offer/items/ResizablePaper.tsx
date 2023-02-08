@@ -11,12 +11,13 @@ type Props = {
   index: number
 }
 
-export const ResizablePaper = ({ children, id, width, index }: Props) => {
+export const ResizablePaper = ({ children, id, width, index, itemRef }: Props) => {
   const [, setCurrentOfferAtLocalStorage] = useLocalStorage('currentOffer')
   const dispatch = useDispatchTyped()
 
   return (
     <Resizable
+      ref={itemRef}
       css={{
         background: 'white',
         borderRadius: '6px',

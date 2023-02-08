@@ -10,14 +10,16 @@ import { Key } from 'client/components/Key'
 
 export const CopyContainer = () => {
   useCloseOnEsc()
-  // const { x, y } = useCursorCords()
-  const { x, y } = { x: 0, y: 0 }
+  const { x, y } = useCursorCords()
+  // const { x, y } = { x: 600, y: 0 }
   const { items } = useSelectorTyped(state => state.copy)
+  const containerWidth = 300
+  const containerPadding = 20
 
   return (
     <div
       css={{
-        width: 300,
+        width: containerWidth,
         height: 600,
         borderRadius: 6,
         position: 'fixed',
@@ -26,7 +28,7 @@ export const CopyContainer = () => {
         left: x + 15,
         background: 'white',
         boxShadow: '#00000033 0px 0px 10px 0px',
-        padding: 20,
+        padding: containerPadding,
         display: 'flex',
         flexDirection: 'column',
         overflow: 'hidden'
@@ -44,23 +46,34 @@ export const CopyContainer = () => {
         Press <Key>Esc</Key> to exit
       </div>
       {items.map((item, index) => {
-        console.log(260 / parseInt(item.width))
+        // console.log(260 / parseInt(item.width))
+        const scaleFactor = (containerWidth - 2 * containerPadding) / parseInt(item.width)
+
         return item.type === 'text' && (
           <div
-            key={`copy el ${index}`}
             css={{
-              background: 'white',
-              borderRadius: '6px',
-              boxShadow: '#00000033 0px 0px 10px 0px',
-              padding: '20px',
-              marginBottom: '5px',
-              width: item.width,
-              transformOrigin: 'left top',
-              scale: `${260 / parseInt(item.width)}`
+              height: item.height * scaleFactor,
+              width: item.width * scaleFactor,
+              border: '1px solid red'
             }}
           >
-            {parseHtml(item.innerHtml)}
+            xxx
           </div>
+          // <div
+          //   key={`copy el ${index}`}
+          //   css={{
+          //     background: 'white',
+          //     borderRadius: '6px',
+          //     boxShadow: '#00000033 0px 0px 10px 0px',
+          //     padding: '20px',
+          //     marginBottom: '5px',
+          //     width: item.width,
+          //     transformOrigin: 'left top',
+          //     // scale: `${260 / parseInt(item.width)}`
+          //   }}
+          // >
+          //   {parseHtml(item.innerHtml)}
+          // </div>
         )
       })}
     </div>
