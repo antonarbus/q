@@ -55,7 +55,6 @@ export const CopyContainer = () => {
               css={{
                 height: item.height * scaleFactor,
                 width: item.width * scaleFactor,
-                border: '1px solid red',
                 // overflow: 'hidden'
               }}
             >
@@ -80,9 +79,9 @@ export const CopyContainer = () => {
       })}
 
       <motion.div
-        initial={{ y: -items[0].height * scaleFactorForFirstItem }}
+        initial={{ y: -items[0].height * scaleFactorForFirstItem - 10 }}
         animate={{ y: 0 }}
-        transition={{ delay: 0.2, duration: 1, type: 'spring' }}
+        transition={{ delay: 0, duration: 1, type: 'spring' }}
         key={hash(items)}
         css={{
           display: 'flex',
@@ -99,7 +98,6 @@ export const CopyContainer = () => {
               css={{
                 height: item.height * scaleFactor,
                 width: item.width * scaleFactor,
-                border: '1px solid red',
                 // overflow: 'hidden'
               }}
             >
