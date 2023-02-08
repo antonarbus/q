@@ -5,9 +5,11 @@ import parseHtml from 'html-react-parser'
 import { Key } from 'client/components/Key'
 import { motion } from 'framer-motion'
 
-// calc width and height of scaled el,
-// add a container with same dimensions
-// and then put scaled content there
+// it looks like in .map only new key is animated
+// we need to animate new coming from the top
+// but also animate existing ones down
+// some container for existing ones to be created and it should change its key when item is added
+// probably hash the array may help
 
 export const CopyContainer = () => {
   useCloseOnEsc()
