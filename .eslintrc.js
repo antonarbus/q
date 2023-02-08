@@ -37,6 +37,8 @@ module.exports = {
     'space-before-function-paren': 'off',
     'react/no-unescaped-entities': 'off',
     'react/no-children-prop': 'off',
-    'react/no-unknown-property': ['error', { ignore: ['css'] }]
+    'react/no-unknown-property': ['error', { ignore: ['css'] }],
+    'comma-dangle': 'off',
+    '@typescript-eslint/comma-dangle': 'off'
   }
 }
