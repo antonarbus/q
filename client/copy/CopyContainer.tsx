@@ -51,29 +51,29 @@ export const CopyContainer = () => {
 
         return item.type === 'text' && (
           <div
+            key={`copy el ${index}`}
             css={{
               height: item.height * scaleFactor,
               width: item.width * scaleFactor,
               border: '1px solid red'
             }}
           >
-            xxx
+            <div
+              css={{
+                background: 'white',
+                borderRadius: '6px',
+                boxShadow: '#00000033 0px 0px 10px 0px',
+                padding: '20px',
+                marginBottom: '5px',
+                width: item.width,
+                transformOrigin: 'left top',
+                scale: `${scaleFactor}`
+              }}
+            >
+              {parseHtml(item.innerHtml)}
+            </div>
           </div>
-          // <div
-          //   key={`copy el ${index}`}
-          //   css={{
-          //     background: 'white',
-          //     borderRadius: '6px',
-          //     boxShadow: '#00000033 0px 0px 10px 0px',
-          //     padding: '20px',
-          //     marginBottom: '5px',
-          //     width: item.width,
-          //     transformOrigin: 'left top',
-          //     // scale: `${260 / parseInt(item.width)}`
-          //   }}
-          // >
-          //   {parseHtml(item.innerHtml)}
-          // </div>
+
         )
       })}
     </div>
