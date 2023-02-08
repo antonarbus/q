@@ -43,18 +43,18 @@ export const CopyContainer = () => {
     >
       <PressEsc />
       {items.map((item, index) => {
-        const scaleFactor = (containerWidth - 2 * containerPadding) / parseInt(item.width)
-        scaleFactorForFirstItem = scaleFactor
+        scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / parseInt(item.width)
+
         if (index === 0) {
           return (
             <motion.div
               key={`copy el ${items.length - index}`}
               initial={{ y: '-400%' }}
                 animate={{ y: 0 }}
-                transition={{ delay: 0.2, duration: 1, type: 'spring' }}
+                transition={{ delay: 0.3, duration: 1, type: 'spring' }}
               css={{
-                height: item.height * scaleFactor,
-                width: item.width * scaleFactor,
+                height: item.height * scaleFactorForFirstItem,
+                width: item.width * scaleFactorForFirstItem,
                 // overflow: 'hidden'
               }}
             >
@@ -67,7 +67,7 @@ export const CopyContainer = () => {
                   marginBottom: '5px',
                   width: item.width,
                   transformOrigin: 'left top',
-                  scale: `${scaleFactor}`
+                  scale: `${scaleFactorForFirstItem}`
                 }}
               >
                 {parseHtml(item.innerHtml)}
@@ -79,7 +79,7 @@ export const CopyContainer = () => {
       })}
 
       <motion.div
-        initial={{ y: -items[0].height * scaleFactorForFirstItem - 10 }}
+        initial={{ y: -items[0].height * scaleFactorForFirstItem }}
         animate={{ y: 0 }}
         transition={{ delay: 0, duration: 1, type: 'spring' }}
         key={hash(items)}
