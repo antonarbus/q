@@ -37,95 +37,112 @@ export const CopyContainer = () => {
       }}
     >
       <div
-        // this container is needed for height animation
-        // need to get padding out of the parent container to animate the height
+        // this container is needed to have a gap at the bottom
         css={{
-          padding: containerPadding,
-          display: 'flex',
-          flexDirection: 'column',
           overflow: 'hidden',
-          gap: '10px',
           maxHeight: 300,
+          marginBottom: 10
         }}
       >
+        <div
+          // this container is needed for main container height animation
+          // need to get padding out of the parent container and put here to animate the height
+          css={{
+            padding: containerPadding,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '10px',
+            maxHeight: 300,
+          }}
+        >
+          <PressEsc />
+          {items.map((item, index) => {
+            scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / parseInt(item.width)
 
-      <PressEsc />
-      {items.map((item, index) => {
-        scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / parseInt(item.width)
+            if (index === 0) {
+              return (
+                <motion.div
+                  key={`copy el ${items.length - index}`}
+                  initial={{ y: '-100vh' }}
+                  animate={{ y: 0 }}
+                  transition={{ delay: 0.3, duration: 1, type: 'spring' }}
+                  css={{
+                    height: item.height * scaleFactorForFirstItem,
+                    width: item.width * scaleFactorForFirstItem,
+                  }}
+                >
+                  <div
+                    css={{
+                      background: 'white',
+                      borderRadius: '6px',
+                      boxShadow: '#00000033 0px 0px 12px 2px',
+                      padding: '20px',
+                      marginBottom: '5px',
+                      width: item.width,
+                      transformOrigin: 'left top',
+                      scale: `${scaleFactorForFirstItem}`,
+                      position: 'relative'
+                    }}
+                  >
+                    {parseHtml(item.innerHtml)}
+                  </div>
+                </motion.div>
+              )
+            }
+            return null
+          })}
 
-        if (index === 0) {
-          return (
-            <motion.div
-              key={`copy el ${items.length - index}`}
-              initial={{ y: '-100vh' }}
-              animate={{ y: 0 }}
-              transition={{ delay: 0.3, duration: 1, type: 'spring' }}
-              css={{
-                height: item.height * scaleFactorForFirstItem,
-                width: item.width * scaleFactorForFirstItem,
-                // overflow: 'hidden'
-              }}
-            >
-              <div
-                css={{
-                  background: 'white',
-                  borderRadius: '6px',
-                  boxShadow: '#00000033 0px 0px 10px 0px',
-                  padding: '20px',
-                  marginBottom: '5px',
-                  width: item.width,
-                  transformOrigin: 'left top',
-                  scale: `${scaleFactorForFirstItem}`
-                }}
-              >
-                {parseHtml(item.innerHtml)}
-              </div>
-            </motion.div>
-          )
-        }
-        return null
-      })}
+          <motion.div
+            initial={{ y: -items[0].height * scaleFactorForFirstItem }}
+            animate={{ y: 0 }}
+            transition={{ delay: 0, duration: 1, type: 'spring' }}
+            key={hash(items)}
+            css={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '10px',
+            }}
+          >
+            {items.map((item, index) => {
+              const scaleFactor = (containerWidth - 2 * containerPadding) / parseInt(item.width)
+              if (index === 0) return null
+              return (
+                <div
+                  key={`copy el ${items.length - index}`}
+                  css={{
+                    height: item.height * scaleFactor,
+                    width: item.width * scaleFactor,
+                    position: 'relative'
+                  }}
+                >
+                  <div
+                    css={{
+                      background: 'white',
+                      borderRadius: '6px',
+                      boxShadow: '#00000033 0px 0px 10px 0px',
+                      padding: '20px',
+                      marginBottom: '5px',
+                      width: item.width,
+                      transformOrigin: 'left top',
+                      scale: `${scaleFactor}`,
+                    }}
+                  >
+                    {parseHtml(item.innerHtml)}
+                  </div>
+                  <div css={{
+                    position: 'absolute',
+                    top: 0,
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    background: 'rgba(255, 255, 255, 0.8)',
+                  }}></div>
+                </div>
+              )
+            })}
 
-      <motion.div
-        initial={{ y: -items[0].height * scaleFactorForFirstItem }}
-        animate={{ y: 0 }}
-        transition={{ delay: 0, duration: 1, type: 'spring' }}
-        key={hash(items)}
-        css={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '10px'
-        }}
-      >
-        {items.map((item, index) => {
-          const scaleFactor = (containerWidth - 2 * containerPadding) / parseInt(item.width)
-          if (index === 0) return null
-          return (
-            <div
-              key={`copy el ${items.length - index}`}
-              css={{
-                height: item.height * scaleFactor,
-                width: item.width * scaleFactor,
-              }}
-            >
-              <div
-                css={{
-                  background: 'white',
-                  borderRadius: '6px',
-                  boxShadow: '#00000033 0px 0px 10px 0px',
-                  padding: '20px',
-                  marginBottom: '5px',
-                  width: item.width,
-                  transformOrigin: 'left top',
-                  scale: `${scaleFactor}`
-                }}
-              >
-                {parseHtml(item.innerHtml)}
-              </div>
-            </div>
-          )
-        })}
-      </motion.div>
+          </motion.div>
+        </div>
       </div>
     </motion.div>
   )
