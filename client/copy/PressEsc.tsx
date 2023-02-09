@@ -1,4 +1,6 @@
 import { Key } from 'client/components/Key'
+import { relative } from 'path'
+import { HiCursorClick } from 'react-icons/hi'
 
 export const PressEsc = () => {
   return (
@@ -10,7 +12,16 @@ export const PressEsc = () => {
           marginBottom: '10px'
         }}
       >
-        Press <Key>Esc</Key> to exit
+      <HiCursorClick
+        css={{
+          verticalAlign: 'middle',
+          width: '18px',
+          height: 'auto',
+          position: 'relative',
+          top: -1
+        }}
+      />
+      {' '} to paste, <Key>Esc</Key> to exit
       </div>
   )
 }
