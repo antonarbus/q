@@ -5,28 +5,28 @@ import parseHtml from 'html-react-parser'
 import { motion } from 'framer-motion'
 import { PressEsc } from './PressEsc'
 import hash from 'object-hash'
-
-// it looks like in .map only new key is animated
-// we need to animate new coming from the top
-// but also animate existing ones down
-// some container for existing ones to be created and it should change its key when item is added
-// probably hash the array may help
+import { useRef } from 'react'
 
 let scaleFactorForFirstItem: number
+const containerWidth = 200
+const containerPadding = 20
 
 export const CopyContainer = () => {
   useCloseOnEsc()
+  const ref = useRef()
   const { x, y } = useCursorCords()
   // const { x, y } = { x: 600, y: 0 }
   const { items } = useSelectorTyped(state => state.copy)
-  const containerWidth = 300
-  const containerPadding = 20
 
   return (
-    <div
+    <motion.div
+      ref={ref}
+      initial={{ height: ref?.current?.offsetHeight }}
+      animate={{ height: 'auto' }}
+      transition={{ delay: 0, duration: 1, type: 'spring' }}
+      key={hash(items)}
       css={{
         width: containerWidth,
-        height: 600,
         borderRadius: 6,
         position: 'fixed',
         zIndex: 2,
@@ -34,13 +34,21 @@ export const CopyContainer = () => {
         left: x + 15,
         background: 'white',
         boxShadow: '#00000033 0px 0px 10px 0px',
-        padding: containerPadding,
-        display: 'flex',
-        flexDirection: 'column',
-        overflow: 'hidden',
-        gap: '10px'
       }}
     >
+      <div
+        // this container is needed for height animation
+        // need to get padding out of the parent container to animate the height
+        css={{
+          padding: containerPadding,
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'hidden',
+          gap: '10px',
+          maxHeight: 300,
+        }}
+      >
+
       <PressEsc />
       {items.map((item, index) => {
         scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / parseInt(item.width)
@@ -49,9 +57,9 @@ export const CopyContainer = () => {
           return (
             <motion.div
               key={`copy el ${items.length - index}`}
-              initial={{ y: '-400%' }}
-                animate={{ y: 0 }}
-                transition={{ delay: 0.3, duration: 1, type: 'spring' }}
+              initial={{ y: '-100vh' }}
+              animate={{ y: 0 }}
+              transition={{ delay: 0.3, duration: 1, type: 'spring' }}
               css={{
                 height: item.height * scaleFactorForFirstItem,
                 width: item.width * scaleFactorForFirstItem,
@@ -98,7 +106,6 @@ export const CopyContainer = () => {
               css={{
                 height: item.height * scaleFactor,
                 width: item.width * scaleFactor,
-                // overflow: 'hidden'
               }}
             >
               <div
@@ -119,7 +126,7 @@ export const CopyContainer = () => {
           )
         })}
       </motion.div>
-
-    </div>
+      </div>
+    </motion.div>
   )
 }

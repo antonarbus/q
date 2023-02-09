@@ -14,10 +14,9 @@ export const CopyIcon = ({ itemToCopy, itemHeight }: Props) => {
     <MdCopyAll
       css={{ cursor: 'pointer' }}
       onClick={(e: React.MouseEvent) => {
-        console.log(itemHeight)
-        const item = { ...itemToCopy, height: itemHeight }
         dispatch(saveInitCords({ x: e.clientX, y: e.clientY }))
         dispatch(showCopyContainer())
+        const item = { ...itemToCopy, height: itemHeight }
         dispatch(addItemIntoCopyContainer(item))
       }}
     />
