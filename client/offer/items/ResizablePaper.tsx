@@ -1,5 +1,6 @@
 import { store, useDispatchTyped } from 'client/store'
 import { Resizable } from 're-resizable'
+import { LegacyRef } from 'react'
 import { useLocalStorage } from 'react-use'
 import { updateWidth } from '../offerSlice'
 
@@ -9,6 +10,7 @@ type Props = {
   key: string
   width: string
   index: number
+  itemRef: LegacyRef<Resizable>
 }
 
 export const ResizablePaper = ({ children, id, width, index, itemRef }: Props) => {

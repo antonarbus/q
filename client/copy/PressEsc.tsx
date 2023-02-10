@@ -1,5 +1,4 @@
 import { Key } from 'client/components/Key'
-import { relative } from 'path'
 import { HiCursorClick } from 'react-icons/hi'
 
 export const PressEsc = () => {
