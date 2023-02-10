@@ -5,6 +5,7 @@ import { ResizablePaper } from './ResizablePaper'
 import parseHtml from 'html-react-parser'
 import { ItemType } from '../templateOffer'
 import { useRef } from 'react'
+import { Resizable } from 're-resizable'
 
 type Props = {
   item: ItemType
@@ -12,8 +13,8 @@ type Props = {
 }
 
 export const Item = ({ item, index }: Props) => {
-  const itemRef = useRef()
-  const itemHeight = itemRef?.current?.resizable?.clientHeight
+  const itemRef = useRef()as React.MutableRefObject<Resizable>
+  const itemHeight = itemRef?.current?.resizable?.clientHeight || 0
 
   return (
     <DraggableItem index={index}>

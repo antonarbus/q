@@ -13,10 +13,13 @@ const containerPadding = 20
 
 export const CopyContainer = () => {
   useCloseOnEsc()
-  const ref = useRef()
+  const ref = useRef() as React.MutableRefObject<HTMLDivElement>
   const { x, y } = useCursorCords()
   // const { x, y } = { x: 600, y: 0 }
   const { items } = useSelectorTyped(state => state.copy)
+
+  //! here goes event listener which calculates where to paste copied item
+  //! we may add "paste here" text between items where we paste it
 
   return (
     <motion.div
@@ -68,7 +71,7 @@ export const CopyContainer = () => {
                   transition={{ delay: 0.3, duration: 1, type: 'spring' }}
                   css={{
                     height: item.height * scaleFactorForFirstItem,
-                    width: item.width * scaleFactorForFirstItem,
+                    width: parseInt(item.width) * scaleFactorForFirstItem,
                   }}
                 >
                   <div
@@ -111,7 +114,7 @@ export const CopyContainer = () => {
                   key={`copy el ${items.length - index}`}
                   css={{
                     height: item.height * scaleFactor,
-                    width: item.width * scaleFactor,
+                    width: parseInt(item.width) * scaleFactor,
                     position: 'relative',
                   }}
                 >

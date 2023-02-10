@@ -5,6 +5,7 @@ import { addItemIntoCopyContainer, saveInitCords, showCopyContainer } from '../.
 
 type Props = {
   itemToCopy: ItemType
+  itemHeight: number
 }
 
 export const CopyIcon = ({ itemToCopy, itemHeight }: Props) => {
