@@ -5,26 +5,25 @@ import { updateWidth } from '../offerSlice'
 
 type Props = {
   children: React.ReactNode
-  id: string
   key: string
   width: string
   index: number
   itemRef: React.MutableRefObject<Resizable>
 }
 
-export const ResizablePaper = ({ children, id, width, index, itemRef }: Props) => {
+export const ResizablePaper = ({ children, width, index, itemRef }: Props) => {
   const [, setCurrentOfferAtLocalStorage] = useLocalStorage('currentOffer')
   const dispatch = useDispatchTyped()
 
   return (
     <Resizable
+      className='item'
       ref={itemRef}
       css={{
         background: 'white',
         borderRadius: '6px',
         boxShadow: '#00000033 0px 0px 10px 0px',
         padding: '20px',
-        // marginBottom: '20px'
       }}
       defaultSize={{
         width,
