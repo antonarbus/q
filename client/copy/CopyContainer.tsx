@@ -7,7 +7,6 @@ import { PressEsc } from './PressEsc'
 import hash from 'object-hash'
 import { useRef } from 'react'
 
-let scaleFactorForFirstItem: number
 const containerWidth = 200
 const containerPadding = 20
 
@@ -17,6 +16,7 @@ export const CopyContainer = () => {
   const { x, y } = useCursorCords()
   // const { x, y } = { x: 600, y: 0 }
   const { items } = useSelectorTyped(state => state.copy)
+  const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / parseInt(items[0].width)
 
   //! here goes event listener which calculates where to paste copied item
   //! we may add "paste here" text between items where we paste it
@@ -40,7 +40,8 @@ export const CopyContainer = () => {
       }}
     >
       <div
-        // this container is needed to have a gap at the bottom
+        // div is needed to have a gap at the bottom
+        // otherwise overflow: hidden trims the content without a gap, looks terrible
         css={{
           overflow: 'hidden',
           maxHeight: 300,
@@ -48,8 +49,8 @@ export const CopyContainer = () => {
         }}
       >
         <div
-          // this container is needed for main container height animation
-          // need to get padding out of the parent container and put here to animate the height
+          // div is needed for main container height animation
+          // moved padding here from the main container, otherwise height is animated badly
           css={{
             padding: containerPadding,
             display: 'flex',
@@ -59,42 +60,36 @@ export const CopyContainer = () => {
           }}
         >
           <PressEsc />
-          {items.map((item, index) => {
-            scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / parseInt(item.width)
 
-            if (index === 0) {
-              return (
-                <motion.div
-                  key={`copy el ${items.length - index}`}
-                  initial={{ y: '-100vh' }}
-                  animate={{ y: 0 }}
-                  transition={{ delay: 0.3, duration: 1, type: 'spring' }}
-                  css={{
-                    height: item.height * scaleFactorForFirstItem,
-                    width: parseInt(item.width) * scaleFactorForFirstItem,
-                  }}
-                >
-                  <div
-                    css={{
-                      background: 'white',
-                      borderRadius: '6px',
-                      boxShadow: '#00000033 0px 0px 12px 2px',
-                      padding: '20px',
-                      marginBottom: '5px',
-                      width: item.width,
-                      transformOrigin: 'left top',
-                      scale: `${scaleFactorForFirstItem}`,
-                      position: 'relative'
-                    }}
-                  >
-                    {parseHtml(item.innerHtml)}
-                  </div>
-                </motion.div>
-              )
-            }
-            return null
-          })}
+          {/* first item slides down */}
+          <motion.div
+            key={`copy el ${items.length}`}
+            initial={{ y: '-100vh' }}
+            animate={{ y: 0 }}
+            transition={{ delay: 0.3, duration: 1, type: 'spring' }}
+            css={{
+              height: items[0].height * scaleFactorForFirstItem,
+              width: parseInt(items[0].width) * scaleFactorForFirstItem,
+            }}
+          >
+            <div
+              css={{
+                background: 'white',
+                borderRadius: '6px',
+                boxShadow: '#00000033 0px 0px 12px 2px',
+                padding: '20px',
+                marginBottom: '5px',
+                width: items[0].width,
+                transformOrigin: 'left top',
+                scale: `${scaleFactorForFirstItem}`,
+                position: 'relative'
+              }}
+            >
+              {parseHtml(items[0].innerHtml)}
+            </div>
+          </motion.div>
 
+          {/* rest of items slides down */}
           <motion.div
             initial={{ y: -items[0].height * scaleFactorForFirstItem }}
             animate={{ y: 0 }}
@@ -108,7 +103,9 @@ export const CopyContainer = () => {
           >
             {items.map((item, index) => {
               const scaleFactor = (containerWidth - 2 * containerPadding) / parseInt(item.width)
+
               if (index === 0) return null
+
               return (
                 <div
                   key={`copy el ${items.length - index}`}

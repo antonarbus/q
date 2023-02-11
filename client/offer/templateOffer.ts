@@ -20,6 +20,13 @@ export const templateOffer: OfferType = {
       innerHtml: '<div>0</div><div>0</div><div>0</div><div>0</div>'
     },
     {
+      id: 'paste id',
+      type: 'paste',
+      width: '',
+      height: 0,
+      innerHtml: ''
+    },
+    {
       id: 'id1',
       type: 'text',
       width: '800px',
