@@ -22,7 +22,7 @@ export const TextItem = ({ item, index }: Props) => {
         <DragHandle />
         <CopyIcon itemToCopy={item} itemHeight={itemHeight}/>
       </ActionsContainer>
-      <ResizablePaper key={item.id} id={item.id} width={item.width} index={index} itemRef={itemRef}>
+      <ResizablePaper key={item.id} width={item.width} index={index} itemRef={itemRef}>
         {parseHtml(item.innerHtml)}
       </ResizablePaper>
     </DraggableItem>
