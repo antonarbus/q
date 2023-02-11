@@ -3,7 +3,8 @@ import { Draggable } from './draggable'
 import { updateOrderAfterDrag } from '../offerSlice'
 import { useLocalStorage } from 'react-use'
 import { arrayMoveImmutable } from 'array-move'
-import { Item } from './Item'
+import { TextItem } from './TextItem'
+import { PasteItem } from './PasteItem'
 
 export const Items = () => {
   const [, setCurrentOfferAtLocalStorage] = useLocalStorage('currentOffer')
@@ -20,9 +21,9 @@ export const Items = () => {
       }}
     >
       {items.map((item, index) => {
-        return (
-          <Item key={item.id} item={item} index={index}/>
-        )
+        if (item.type === 'text') return <TextItem key={item.id} item={item} index={index} />
+        if (item.type === 'paste') return <PasteItem key={item.id} />
+        return null
       })}
     </Draggable>
   )
