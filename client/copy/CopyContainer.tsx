@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import { PressEsc } from './PressEsc'
 import hash from 'object-hash'
 import { useRef } from 'react'
+import { usePasteCords } from './usePasteCords'
 
 const containerWidth = 200
 const containerPadding = 20
@@ -20,6 +21,8 @@ export const CopyContainer = () => {
 
   //! here goes event listener which calculates where to paste copied item
   //! we may add "paste here" text between items where we paste it
+
+  usePasteCords()
 
   return (
     <motion.div
