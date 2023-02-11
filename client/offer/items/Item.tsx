@@ -1,8 +1,8 @@
+import parseHtml from 'html-react-parser'
 import { ActionsContainer } from './ActionsContainer'
 import { CopyIcon } from './CopyIcon'
 import { DraggableItem, DragHandle } from './draggable'
 import { ResizablePaper } from './ResizablePaper'
-import parseHtml from 'html-react-parser'
 import { ItemType } from '../templateOffer'
 import { useRef } from 'react'
 import { Resizable } from 're-resizable'
@@ -12,8 +12,9 @@ type Props = {
   index: number
 }
 
+//! make it a text item
 export const Item = ({ item, index }: Props) => {
-  const itemRef = useRef()as React.MutableRefObject<Resizable>
+  const itemRef = useRef() as React.MutableRefObject<Resizable>
   const itemHeight = itemRef?.current?.resizable?.clientHeight || 0
 
   return (
