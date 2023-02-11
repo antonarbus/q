@@ -1,5 +1,12 @@
 export const PasteItem = () => {
   return (
-    <span>'Paste here'</span>
+    <span
+      css={{
+        fontWeight: 600,
+        color: '#b4b4b4'
+      }}
+    >
+      Paste here
+    </span>
   )
 }

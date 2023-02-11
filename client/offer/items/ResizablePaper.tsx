@@ -24,7 +24,7 @@ export const ResizablePaper = ({ children, id, width, index, itemRef }: Props) =
         borderRadius: '6px',
         boxShadow: '#00000033 0px 0px 10px 0px',
         padding: '20px',
-        marginBottom: '20px'
+        // marginBottom: '20px'
       }}
       defaultSize={{
         width,
