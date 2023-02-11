@@ -12,8 +12,7 @@ type Props = {
   index: number
 }
 
-//! make it a text item
-export const Item = ({ item, index }: Props) => {
+export const TextItem = ({ item, index }: Props) => {
   const itemRef = useRef() as React.MutableRefObject<Resizable>
   const itemHeight = itemRef?.current?.resizable?.clientHeight || 0
 
@@ -24,7 +23,7 @@ export const Item = ({ item, index }: Props) => {
         <CopyIcon itemToCopy={item} itemHeight={itemHeight}/>
       </ActionsContainer>
       <ResizablePaper key={item.id} id={item.id} width={item.width} index={index} itemRef={itemRef}>
-        {item.type === 'text' && parseHtml(item.innerHtml)}
+        {parseHtml(item.innerHtml)}
       </ResizablePaper>
     </DraggableItem>
   )

@@ -1,6 +1,6 @@
 export type ItemType = {
   id: string
-  type: string
+  type: 'text' | 'paste'
   width: string
   innerHtml: string
   height: number
