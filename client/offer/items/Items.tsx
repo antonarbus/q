@@ -13,7 +13,6 @@ export const Items = () => {
 
   return (
     <Draggable
-      id='items'
       useDragHandle
       onSortEnd={({ oldIndex, newIndex }) => {
         const sortedItems = arrayMoveImmutable(items, oldIndex, newIndex)

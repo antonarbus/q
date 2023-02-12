@@ -29,7 +29,7 @@ export const CopyContainer = () => {
       ref={ref}
       initial={{ height: ref?.current?.offsetHeight }}
       animate={{ height: 'auto' }}
-      transition={{ delay: 0, duration: 1, type: 'spring' }}
+      transition={{ delay: 0, duration: 1.1, type: 'spring' }}
       key={hash(items)}
       css={{
         width: containerWidth,
@@ -40,6 +40,7 @@ export const CopyContainer = () => {
         left: x + 15,
         background: 'white',
         boxShadow: '#00000033 0px 0px 10px 0px',
+        // overflow: 'visible'
       }}
     >
       <div
@@ -56,6 +57,7 @@ export const CopyContainer = () => {
           // moved padding here from the main container, otherwise height is animated badly
           css={{
             padding: containerPadding,
+            paddingBottom: 5,
             display: 'flex',
             flexDirection: 'column',
             gap: '10px',
