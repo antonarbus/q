@@ -12,6 +12,7 @@
     "gsap",
     "Immer",
     "mailcheck",
+    "nocheck",
     "PAGEDOWN",
     "PAGEUP",
     "reduxjs",

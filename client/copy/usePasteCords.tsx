@@ -5,18 +5,23 @@ import { useDispatchTyped } from 'client/store'
 import { movePasteText } from 'client/offer/offerSlice'
 import hash from 'object-hash'
 
-let prevPastePlace = { pastePos: null, pasteId: null }
+let prevPastePlace = { pastePos: null, itemId: null }
 
-function getPastePlace({ e, el }) {
+export type PastePlace = {
+  pastePos: 'top' | 'middle' | 'bottom'
+  itemId: string
+}
+
+function getPastePlace({ e, el }): PastePlace {
   const upperBorder = +$(el).offset().top
   const lowerBorder = +$(el).offset().top + +$(el).outerHeight()
   const distToUpperBorder = e.pageY - upperBorder
   const distToLowerBorder = lowerBorder - e.pageY
   const elHeight = $(el).outerHeight()
 
-  if (distToUpperBorder / elHeight < 0.35) return { pastePos: 'top', pasteId: el.id }
-  if (distToLowerBorder / elHeight < 0.35) return { pastePos: 'bottom', pasteId: el.id }
-  return { pastePos: 'middle', pasteId: el.id }
+  if (distToUpperBorder / elHeight < 0.35) return { pastePos: 'top', itemId: el.id }
+  if (distToLowerBorder / elHeight < 0.35) return { pastePos: 'bottom', itemId: el.id }
+  return { pastePos: 'middle', itemId: el.id }
 }
 
 export const usePasteCords = () => {
