@@ -1,7 +1,11 @@
 import { Key } from 'client/components/Key'
+import { useCloseOnEsc } from './useCloseOnEsc'
 
-export const PressEsc = () => (
-  <div
+export const PressEsc = () => {
+  useCloseOnEsc()
+
+  return (
+    <div
       css={{
         textAlign: 'center',
         color: 'grey',
@@ -11,4 +15,5 @@ export const PressEsc = () => (
     >
       <Key>Esc</Key> to exit
     </div>
-)
+  )
+}
