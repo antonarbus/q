@@ -1,5 +1,4 @@
 import { useSelectorTyped } from 'client/store'
-import { useCloseOnEsc } from './useCloseOnEsc'
 import { useCursorCords } from './useCursorCords'
 import parseHtml from 'html-react-parser'
 import { motion } from 'framer-motion'
@@ -12,7 +11,6 @@ const containerWidth = 200
 const containerPadding = 20
 
 export const CopyContainer = () => {
-  useCloseOnEsc()
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>
   const { x, y } = useCursorCords()
   // const { x, y } = { x: 600, y: 0 }
