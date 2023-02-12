@@ -5,18 +5,15 @@ import { SortableContainer, SortableContainerProps } from 'react-sortable-hoc'
 
 type Props = {
   children: React.ReactNode
-  id: string
 }
 
 interface ISortableContainer extends SortableContainerProps {
   children: React.ReactNode
-  id: string
 }
 
 export const Draggable: React.ComponentClass<ISortableContainer, any> =
-  SortableContainer(({ children, id }: Props) => (
+  SortableContainer(({ children }: Props) => (
     <div
-      id={id}
       css={{
         display: 'flex',
         flexDirection: 'column',

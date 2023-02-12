@@ -26,7 +26,7 @@ export const copySlice = createSlice({
     },
     addItemIntoCopyContainer: (state, action) => {
       state.items.unshift(action.payload)
-    }
+    },
   }
 
 })

@@ -3,20 +3,23 @@ import { Resizable } from 're-resizable'
 import { useLocalStorage } from 'react-use'
 import { updateWidth } from '../offerSlice'
 
-type Props = {
+interface Props extends Resizable {
   children: React.ReactNode
   key: string
   width: string
   index: number
   itemRef: React.MutableRefObject<Resizable>
+  id: string
 }
 
-export const ResizablePaper = ({ children, width, index, itemRef }: Props) => {
+export const ResizablePaper = ({ children, width, index, itemRef, id }: Props) => {
   const [, setCurrentOfferAtLocalStorage] = useLocalStorage('currentOffer')
   const dispatch = useDispatchTyped()
 
   return (
     <Resizable
+      // @ts-ignore
+      id={id}
       className='item'
       ref={itemRef}
       css={{

@@ -15,9 +15,14 @@ const offerSlice = createSlice({
     },
     updateOrderAfterDrag: (state, action) => {
       state.items = action.payload.sortedItems
-    }
+    },
+    movePasteText: (state, action) => {
+      const { pastePos, pasteId } = action.payload
+      console.log({ pastePos, pasteId })
+      // state.items.unshift(action.payload)
+    },
   }
 })
 
 export default offerSlice.reducer
-export const { updateWidth, updateOrderAfterDrag } = offerSlice.actions
+export const { updateWidth, updateOrderAfterDrag, movePasteText } = offerSlice.actions
