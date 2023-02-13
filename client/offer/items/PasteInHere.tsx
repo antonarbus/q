@@ -26,7 +26,7 @@ export const PasteInHere = ({ id }: Props) => {
         placeItems: 'center',
         zIndex: 2,
         cursor: 'default',
-        userSelect: 'none'
+        userSelect: 'none',
       }}
     >
       Paste here

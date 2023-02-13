@@ -17,8 +17,6 @@ export const PasteInBetween = () => (
       color: '#b4b4b4',
       cursor: 'default',
       userSelect: 'none',
-      position: 'relative',
-      top: -10
     }}
   >
     Paste here

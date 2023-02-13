@@ -28,6 +28,8 @@ export const TextItem = ({ item, index }: Props) => {
         {parseHtml(item.innerHtml)}
         <PasteInHere id={item.id}/>
       </ResizablePaper>
+      {/* Right action container is used for symmetry, later probably add there some icons */}
+      <ActionsContainer/>
     </DraggableItem>
   )
 }
