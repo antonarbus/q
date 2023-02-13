@@ -1,7 +1,7 @@
-//! @ts-nocheck
+// @ts-nocheck
 import $ from 'jquery'
 import hash from 'object-hash'
-import { useEffectOnce } from 'react-use'
+import { useEffectOnce, useUnmount } from 'react-use'
 import { useDispatchTyped } from 'client/store'
 import { addPasteText } from 'client/offer/offerSlice'
 import { savePastePlace } from './copySlice'
@@ -36,11 +36,8 @@ export const usePasteCords = () => {
       dispatch(savePastePlace(pastePlace))
       prevPastePlace = structuredClone(pastePlace)
     })
-
-    return () => {
-      $(document).off('.items_namespace')
-    }
   }
 
   useEffectOnce(listenForMousemove)
+  useUnmount(() => { $(document).off('.items_namespace') })
 }
