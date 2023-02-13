@@ -24,7 +24,9 @@ export const PasteItemBetween = ({ id }: Props) => {
         left: 0,
         display: 'grid',
         placeItems: 'center',
-        zIndex: 2
+        zIndex: 2,
+        cursor: 'default',
+        userSelect: 'none'
       }}
     >
       Paste here
