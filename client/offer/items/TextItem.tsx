@@ -6,6 +6,7 @@ import { ResizablePaper } from './ResizablePaper'
 import { ItemType } from '../templateOffer'
 import { useRef } from 'react'
 import { Resizable } from 're-resizable'
+import { PasteItemBetween } from './PasteItemBetween'
 
 type Props = {
   item: ItemType
@@ -25,6 +26,7 @@ export const TextItem = ({ item, index }: Props) => {
       {/* @ts-ignore */}
       <ResizablePaper key={item.id} width={item.width} index={index} itemRef={itemRef} id={item.id}>
         {parseHtml(item.innerHtml)}
+        <PasteItemBetween id={item.id}/>
       </ResizablePaper>
     </DraggableItem>
   )

@@ -16,10 +16,6 @@ export const CopyContainer = () => {
   // const { x, y } = { x: 600, y: 0 }
   const { items } = useSelectorTyped(state => state.copy)
   const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / parseInt(items[0].width)
-
-  //! here goes event listener which calculates where to paste copied item
-  //! we may add "paste here" text between items where we paste it
-
   usePasteCords()
 
   return (
@@ -33,7 +29,7 @@ export const CopyContainer = () => {
         width: containerWidth,
         borderRadius: 6,
         position: 'fixed',
-        zIndex: 2,
+        zIndex: 3,
         top: y + 15,
         left: x + 15,
         background: 'white',
@@ -67,9 +63,9 @@ export const CopyContainer = () => {
           {/* first item slides down */}
           <motion.div
             key={`copy el ${items.length}`}
-            initial={{ y: '-100vh' }}
+            initial={{ y: '-500px' }}
             animate={{ y: 0 }}
-            transition={{ delay: 0.3, duration: 1, type: 'spring' }}
+            transition={{ delay: 0.3, duration: 0.5, type: 'spring' }}
             css={{
               height: items[0].height * scaleFactorForFirstItem,
               width: parseInt(items[0].width) * scaleFactorForFirstItem,
