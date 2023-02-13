@@ -5,12 +5,17 @@ type Props = {
   isShown: boolean,
   initCords: { x: number, y: number },
   items: ItemType[]
+  place: {
+    pastePos: 'top' | 'middle' | 'bottom'
+    itemId: string
+  }
 }
 
 const initialState: Props = {
   isShown: false,
   initCords: { x: 0, y: 0 },
-  items: []
+  items: [],
+  place: { pastePos: 'top', itemId: 'some id' }
 }
 
 export const copySlice = createSlice({
@@ -27,10 +32,13 @@ export const copySlice = createSlice({
     addItemIntoCopyContainer: (state, action) => {
       state.items.unshift(action.payload)
     },
+    savePastePlace: (state, action) => {
+      state.place = action.payload
+    },
   }
 
 })
 
-export const { showCopyContainer, hideCopyContainer, saveInitCords, addItemIntoCopyContainer } = copySlice.actions
+export const { showCopyContainer, hideCopyContainer, saveInitCords, addItemIntoCopyContainer, savePastePlace } = copySlice.actions
 
 export default copySlice.reducer

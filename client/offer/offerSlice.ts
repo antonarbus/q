@@ -18,9 +18,10 @@ const offerSlice = createSlice({
     updateOrderAfterDrag: (state, action) => {
       state.items = action.payload.sortedItems
     },
-    movePasteText: (state, action) => {
+    addPasteText: (state, action) => {
       const { pastePos, itemId }: PastePlace = action.payload
-      state.items = state.items.filter((item) => item.type !== 'paste')
+      state.items = state.items.filter(item => item.type !== 'paste')
+      if (pastePos === 'middle') return
       const insertAtIndex = state.items.findIndex(item => item.id === itemId) + (pastePos === 'bottom' ? 1 : 0)
       const pasteHereEl: ItemType = { id: 'paste id', type: 'paste', width: '', height: 0, innerHtml: '' }
       state.items.splice(insertAtIndex, 0, pasteHereEl)
@@ -32,4 +33,4 @@ const offerSlice = createSlice({
 })
 
 export default offerSlice.reducer
-export const { updateWidth, updateOrderAfterDrag, movePasteText, removePasteText } = offerSlice.actions
+export const { updateWidth, updateOrderAfterDrag, addPasteText, removePasteText } = offerSlice.actions

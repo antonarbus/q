@@ -22,7 +22,7 @@ export const Items = () => {
     >
       {items.map((item, index) => {
         if (item.type === 'text') return <TextItem key={item.id} item={item} index={index} />
-        if (item.type === 'paste') return <PasteItem key={item.id} />
+        if (item.type === 'paste') return <PasteItem key={item.id}/>
         return null
       })}
     </Draggable>

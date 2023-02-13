@@ -1,9 +1,10 @@
 // @ts-nocheck
 import $ from 'jquery'
+import hash from 'object-hash'
 import { useEffectOnce } from 'react-use'
 import { useDispatchTyped } from 'client/store'
-import { movePasteText } from 'client/offer/offerSlice'
-import hash from 'object-hash'
+import { addPasteText } from 'client/offer/offerSlice'
+import { savePastePlace } from './copySlice'
 
 let prevPastePlace = { pastePos: null, itemId: null }
 
@@ -19,8 +20,8 @@ function getPastePlace({ e, el }): PastePlace {
   const distToLowerBorder = lowerBorder - e.pageY
   const elHeight = $(el).outerHeight()
 
-  if (distToUpperBorder / elHeight < 0.35) return { pastePos: 'top', itemId: el.id }
-  if (distToLowerBorder / elHeight < 0.35) return { pastePos: 'bottom', itemId: el.id }
+  if (distToUpperBorder / elHeight < 0.1) return { pastePos: 'top', itemId: el.id }
+  if (distToLowerBorder / elHeight < 0.1) return { pastePos: 'bottom', itemId: el.id }
   return { pastePos: 'middle', itemId: el.id }
 }
 
@@ -31,7 +32,8 @@ export const usePasteCords = () => {
     $(document).on('mousemove.items_namespace', '.item', function (e) {
       const pastePlace = getPastePlace({ e, el: this })
       if (hash(prevPastePlace) === hash(pastePlace)) return
-      dispatch(movePasteText(pastePlace))
+      dispatch(addPasteText(pastePlace))
+      dispatch(savePastePlace(pastePlace))
       prevPastePlace = structuredClone(pastePlace)
     })
 
