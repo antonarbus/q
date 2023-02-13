@@ -4,7 +4,7 @@ type Props = {
   id: string
 }
 
-export const PasteItemBetween = ({ id }: Props) => {
+export const PasteInHere = ({ id }: Props) => {
   const isCopied = useSelectorTyped(state => state.copy.isShown)
   const { pastePos, itemId } = useSelectorTyped(state => state.copy.place)
 

@@ -4,7 +4,8 @@ import { updateOrderAfterDrag } from '../offerSlice'
 import { useLocalStorage } from 'react-use'
 import { arrayMoveImmutable } from 'array-move'
 import { TextItem } from './TextItem'
-import { PasteItem } from './PasteItem'
+import { PasteInBetween } from './PasteInBetween'
+import { AnimatePresence } from 'framer-motion'
 
 export const Items = () => {
   const [, setCurrentOfferAtLocalStorage] = useLocalStorage('currentOffer')
@@ -20,11 +21,13 @@ export const Items = () => {
         setCurrentOfferAtLocalStorage(store.getState().offer)
       }}
     >
-      {items.map((item, index) => {
-        if (item.type === 'text') return <TextItem key={item.id} item={item} index={index} />
-        if (item.type === 'paste') return <PasteItem key={item.id}/>
-        return null
-      })}
+      <AnimatePresence>
+        {items.map((item, index) => {
+          if (item.type === 'text') return <TextItem key={item.id} item={item} index={index} />
+          if (item.type === 'paste') return <PasteInBetween key={item.id}/>
+          return null
+        })}
+      </AnimatePresence>
     </Draggable>
   )
 }
