@@ -1,4 +1,4 @@
-// @ts-nocheck
+//! @ts-nocheck
 import $ from 'jquery'
 import hash from 'object-hash'
 import { useEffectOnce } from 'react-use'
@@ -6,7 +6,7 @@ import { useDispatchTyped } from 'client/store'
 import { addPasteText } from 'client/offer/offerSlice'
 import { savePastePlace } from './copySlice'
 
-let prevPastePlace = { pastePos: null, itemId: null }
+let prevPastePlace = { pastePos: 'top', itemId: 'some id' }
 
 export type PastePlace = {
   pastePos: 'top' | 'middle' | 'bottom'
