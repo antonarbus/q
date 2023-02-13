@@ -28,8 +28,8 @@ export const ResizablePaper = ({ children, width, index, itemRef, id }: Props) =
         boxShadow: '#00000033 0px 0px 10px 0px',
         padding: 20,
         position: 'relative',
-        marginBottom: 20
-
+        marginTop: 10,
+        marginBottom: 10,
       }}
       defaultSize={{
         width,

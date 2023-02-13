@@ -1,5 +1,5 @@
 type Props = {
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
 export const ActionsContainer = ({ children }: Props) => (
@@ -8,6 +8,7 @@ export const ActionsContainer = ({ children }: Props) => (
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+      width: 20,
       flexShrink: 1
     }}
   >
