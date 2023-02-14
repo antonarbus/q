@@ -25,7 +25,7 @@ function getPastePlace({ e, el }): PastePlace {
   return { pastePos: 'middle', itemId: el.id }
 }
 
-export const usePasteCords = () => {
+export const usePastePosition = () => {
   const dispatch = useDispatchTyped()
 
   function listenForMousemove() {
