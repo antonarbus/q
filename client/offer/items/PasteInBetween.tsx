@@ -6,9 +6,8 @@ export const PasteInBetween = () => (
     animate={{ height: 30, opacity: 1 }}
     exit={{ height: 0, opacity: 0 }}
     transition={{
-      ease: 'linear',
       height: { duration: 0.3 },
-      opacity: { duration: 0.1 },
+      opacity: { duration: 0 },
     }}
     css={{
       display: 'grid',
