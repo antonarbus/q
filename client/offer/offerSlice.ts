@@ -1,5 +1,5 @@
 import { createSlice, current } from '@reduxjs/toolkit'
-import { PastePlace } from 'client/copy/usePasteCords'
+import { PastePlace } from 'client/copy/usePastePosition'
 import { ItemType, OfferType, templateOffer } from './templateOffer'
 
 const offerInLocalStorage = localStorage.getItem('currentOffer')

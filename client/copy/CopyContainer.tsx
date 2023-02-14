@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import { PressEsc } from './PressEsc'
 import hash from 'object-hash'
 import { useRef } from 'react'
-import { usePasteCords } from './usePasteCords'
+import { usePastePosition } from './usePastePosition'
 
 const containerWidth = 200
 const containerPadding = 20
@@ -16,7 +16,7 @@ export const CopyContainer = () => {
   // const { x, y } = { x: 600, y: 0 }
   const { items } = useSelectorTyped(state => state.copy)
   const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / parseInt(items[0].width)
-  usePasteCords()
+  usePastePosition()
 
   return (
     <motion.div
