@@ -9,7 +9,7 @@ export const ActionsContainer = ({ children }: Props) => (
       flexDirection: 'column',
       alignItems: 'center',
       width: 20,
-      flexShrink: 1
+      flexShrink: 0
     }}
   >
     {children}
