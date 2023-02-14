@@ -1,43 +1,41 @@
-// @ts-nocheck
-import $ from 'jquery'
 import hash from 'object-hash'
 import { useEffectOnce, useUnmount } from 'react-use'
-import { useDispatchTyped } from 'client/store'
+import { store } from 'client/store'
 import { addPasteText } from 'client/offer/offerSlice'
 import { savePastePlace } from './copySlice'
 
 let prevPastePlace = { pastePos: 'top', itemId: 'some id' }
 
-export type PastePlace = {
-  pastePos: 'top' | 'middle' | 'bottom'
-  itemId: string
-}
+function movePasteTextAfterCursor(e: MouseEvent) {
+  const item = (e.target as Element).closest('.item')
+  if (!item) return
+  const { height, top } = item.getBoundingClientRect()
+  const yWithinElement = e.clientY - top
+  const distToTop = yWithinElement
+  const distToBottom = height - yWithinElement
+  let pastePlace
 
-function getPastePlace({ e, el }): PastePlace {
-  const upperBorder = +$(el).offset().top
-  const lowerBorder = +$(el).offset().top + +$(el).outerHeight()
-  const distToUpperBorder = e.pageY - upperBorder
-  const distToLowerBorder = lowerBorder - e.pageY
-  const elHeight = $(el).outerHeight()
+  if (distToTop / height < 0.1) {
+    pastePlace = { pastePos: 'top', itemId: item.id }
+  } else if (distToBottom / height < 0.1) {
+    pastePlace = { pastePos: 'bottom', itemId: item.id }
+  } else {
+    pastePlace = { pastePos: 'middle', itemId: item.id }
+  }
 
-  if (distToUpperBorder / elHeight < 0.1) return { pastePos: 'top', itemId: el.id }
-  if (distToLowerBorder / elHeight < 0.1) return { pastePos: 'bottom', itemId: el.id }
-  return { pastePos: 'middle', itemId: el.id }
+  if (hash(prevPastePlace) === hash(pastePlace)) return
+
+  store.dispatch(addPasteText(pastePlace))
+  store.dispatch(savePastePlace(pastePlace))
+  prevPastePlace = structuredClone(pastePlace)
 }
 
 export const usePastePosition = () => {
-  const dispatch = useDispatchTyped()
+  useEffectOnce(() => {
+    (document.querySelector('#items') as HTMLElement).addEventListener('mousemove', movePasteTextAfterCursor, { passive: true })
+  })
 
-  function listenForMousemove() {
-    $(document).on('mousemove.items_namespace', '.item', function (e) {
-      const pastePlace = getPastePlace({ e, el: this })
-      if (hash(prevPastePlace) === hash(pastePlace)) return
-      dispatch(addPasteText(pastePlace))
-      dispatch(savePastePlace(pastePlace))
-      prevPastePlace = structuredClone(pastePlace)
-    })
-  }
-
-  useEffectOnce(listenForMousemove)
-  useUnmount(() => { $(document).off('.items_namespace') })
+  useUnmount(() => {
+    (document.querySelector('#items') as HTMLElement).removeEventListener('mousemove', movePasteTextAfterCursor)
+  })
 }
