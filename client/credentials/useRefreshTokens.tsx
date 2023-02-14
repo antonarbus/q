@@ -42,7 +42,7 @@ export const useRefreshTokens = ({ withLoadingState }: Props) => {
             const { email, roles } = payloadFromExistingAccessToken
             store.dispatch(rememberLoggedUser({ email, isLogged: true, roles }))
             navUpdate.login()
-            return console.log(`access token expires in ${expirationInMin.toFixed(2)} min, which is more than 5 min, so let's skip the refresh for now`)
+            return console.log(`access token expires in ${expirationInMin.toFixed(2)} min, which is more than 5 min, skip the refresh for now`)
           }
         }
 
