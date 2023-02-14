@@ -14,12 +14,12 @@ interface ISortableContainer extends SortableContainerProps {
 export const Draggable: React.ComponentClass<ISortableContainer, any> =
   SortableContainer(({ children }: Props) => (
     <div
+      id='items'
       css={{
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        // gap: '20px'
       }}
     >
       {children}
