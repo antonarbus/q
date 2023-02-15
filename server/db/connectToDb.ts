@@ -6,7 +6,7 @@ export async function connectToDb() {
   try {
     mongoose.set('strictQuery', false)
     // await mongoose.connect(`${mongoDbUrl}/${db}` as string)
-    mongoose.connect(`${mongoDbUrl}/${db}` as string)
+    await mongoose.connect(`${mongoDbUrl}/${db}` as string)
     console.log('connected to db')
   } catch (error: any) {
     console.log('error on db connection')

@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "start": "concurrently \"npm run back\" \"npm run front\"",
+    "start": "concurrently \"npm run back\" \"npx wait-on http://localhost:3006 && npm run front\"",
     "stop": "npx kill-port 3005 3006",
     "front": "vite",
     "back": "nodemon -L server/server.ts",
@@ -61,7 +61,8 @@
     "react-use": "^17.4.0",
     "styled-components": "^5.3.6",
     "uuid": "^9.0.0",
-    "vite-plugin-babel-macros": "^1.0.6"
+    "vite-plugin-babel-macros": "^1.0.6",
+    "wait-on": "^7.0.1"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.10.5",
