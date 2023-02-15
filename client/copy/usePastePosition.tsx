@@ -1,12 +1,18 @@
 import hash from 'object-hash'
 import { useEffectOnce, useUnmount } from 'react-use'
 import { store } from 'client/store'
-import { addPasteText } from 'client/offer/offerSlice'
+import { addPasteText, removePasteText } from 'client/offer/offerSlice'
 import { savePastePlace } from './copySlice'
 
 let prevPastePlace = { pastePos: 'top', itemId: 'some id' }
 
 function movePasteTextAfterCursor(e: MouseEvent) {
+  const itemsContainer = (e.target as Element).closest('#items')
+  if (!itemsContainer) {
+    store.dispatch(removePasteText())
+    return
+  }
+
   const item = (e.target as Element).closest('.item')
   if (!item) return
 
@@ -33,12 +39,24 @@ function movePasteTextAfterCursor(e: MouseEvent) {
   prevPastePlace = structuredClone(pastePlace)
 }
 
+function pasteItemOnClick(e: MouseEvent) {
+  console.log(e.target)
+}
+
 export const usePastePosition = () => {
   useEffectOnce(() => {
-    (document.querySelector('#items') as HTMLElement).addEventListener('mousemove', movePasteTextAfterCursor, { passive: true })
+    document.addEventListener('mousemove', movePasteTextAfterCursor, { passive: true })
   })
 
   useUnmount(() => {
-    (document.querySelector('#items') as HTMLElement).removeEventListener('mousemove', movePasteTextAfterCursor)
+    document.removeEventListener('mousemove', movePasteTextAfterCursor)
+  })
+
+  useEffectOnce(() => {
+    document.addEventListener('click', pasteItemOnClick)
+  })
+
+  useUnmount(() => {
+    document.removeEventListener('click', pasteItemOnClick)
   })
 }
