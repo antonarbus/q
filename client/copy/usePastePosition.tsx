@@ -9,12 +9,14 @@ let prevPastePlace = { pastePos: 'top', itemId: 'some id' }
 function movePasteTextAfterCursor(e: MouseEvent) {
   const item = (e.target as Element).closest('.item')
   if (!item) return
+
   const { height, top } = item.getBoundingClientRect()
   const yWithinElement = e.clientY - top
+
   const distToTop = yWithinElement
   const distToBottom = height - yWithinElement
-  let pastePlace
 
+  let pastePlace
   if (distToTop / height < 0.1) {
     pastePlace = { pastePos: 'top', itemId: item.id }
   } else if (distToBottom / height < 0.1) {
@@ -27,6 +29,7 @@ function movePasteTextAfterCursor(e: MouseEvent) {
 
   store.dispatch(addPasteText(pastePlace))
   store.dispatch(savePastePlace(pastePlace))
+
   prevPastePlace = structuredClone(pastePlace)
 }
 
