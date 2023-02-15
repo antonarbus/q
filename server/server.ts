@@ -14,8 +14,9 @@ import { refreshRouter } from './api/refreshRouter'
 import { errorHandler } from './middleware/errorHandler'
 import { usersRouter } from './api/usersRouter'
 
-(async function () {
+(async () => {
   const app = express()
+  //! but do I really wait for db to start? let's leave it as it is for now
   await connectToDb()
   app.use(morgan('dev')) // http logs in terminal
   app.use(express.json()) // parses incoming requests with JSON because we use lots of json, let it be default
