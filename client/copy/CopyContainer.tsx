@@ -6,6 +6,7 @@ import { PressEsc } from './PressEsc'
 import hash from 'object-hash'
 import { useRef } from 'react'
 import { usePastePosition } from './usePastePosition'
+import { useFirstMountState } from 'react-use'
 
 const containerWidth = 200
 const containerPadding = 20
@@ -17,12 +18,19 @@ export const CopyContainer = () => {
   const items = useSelectorTyped(state => state.copy.items)
   const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / parseInt(items[0].width)
   usePastePosition()
+  const isFirstMount = useFirstMountState()
 
   return (
     <motion.div
       ref={ref}
-      initial={{ height: ref?.current?.offsetHeight || 0 }}
-      animate={{ height: 'auto' }}
+      initial={{
+        height: ref?.current?.offsetHeight || 0,
+        ...(isFirstMount && { width: 0 })
+      }}
+      animate={{
+        height: 'auto',
+        ...(isFirstMount && { width: 'auto' })
+      }}
       transition={{ delay: 0, duration: 1.1, type: 'spring' }}
       key={hash(items)}
       css={{

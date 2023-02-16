@@ -10,7 +10,8 @@ export const PressEsc = () => {
         textAlign: 'center',
         color: 'grey',
         fontSize: '12px',
-        marginBottom: '10px'
+        marginBottom: '10px',
+        whiteSpace: 'nowrap'
       }}
     >
       <Key>Esc</Key> to exit
