@@ -66,7 +66,8 @@ export const CopyContainer = () => {
             css={{
               height: items[0].height * scaleFactorForFirstItem,
               width: parseInt(items[0].width) * scaleFactorForFirstItem,
-              // marginBottom: 10
+              marginTop: 15,
+              marginBottom: 10
             }}
           >
             <div
@@ -89,7 +90,7 @@ export const CopyContainer = () => {
           {/* rest of items slides down */}
           <motion.div
             initial={{ y: -items[0].height * scaleFactorForFirstItem }}
-            animate={{ y: 0 }}
+            animate={{ y: 0 + 5 }}
             transition={{ delay: 0, duration: 1, type: 'spring' }}
             key={hash(items)}
             css={{
@@ -106,17 +107,15 @@ export const CopyContainer = () => {
                   css={{
                     height: item.height * scaleFactor,
                     width: parseInt(item.width) * scaleFactor,
-                    position: 'relative',
-                    // marginBottom: 10
+                    marginBottom: 5
                   }}
                 >
                   <div
                     css={{
                       background: 'white',
-                      borderRadius: '6px',
+                      borderRadius: 6,
                       boxShadow: '#00000033 0px 0px 10px 0px',
-                      padding: '20px',
-                      marginBottom: '5px',
+                      padding: 20,
                       width: item.width,
                       transformOrigin: 'left top',
                       scale: `${scaleFactor}`,
