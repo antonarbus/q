@@ -13,15 +13,15 @@ const containerPadding = 20
 export const CopyContainer = () => {
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>
   const { x, y } = useCursorCords()
-  // const { x, y } = { x: 600, y: 0 }
-  const { items } = useSelectorTyped(state => state.copy)
+  // const { x, y } = { x: 300, y: 0 }
+  const items = useSelectorTyped(state => state.copy.items)
   const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / parseInt(items[0].width)
   usePastePosition()
 
   return (
     <motion.div
       ref={ref}
-      initial={{ height: ref?.current?.offsetHeight }}
+      initial={{ height: ref?.current?.offsetHeight || 0 }}
       animate={{ height: 'auto' }}
       transition={{ delay: 0, duration: 1.1, type: 'spring' }}
       key={hash(items)}
@@ -47,14 +47,11 @@ export const CopyContainer = () => {
         }}
       >
         <div
-          // div is needed for main container height animation
+          // needed for main container height animation
           // moved padding here from the main container, otherwise height is animated badly
           css={{
             padding: containerPadding,
             paddingBottom: 5,
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '10px',
             maxHeight: 300,
           }}
         >
@@ -69,6 +66,7 @@ export const CopyContainer = () => {
             css={{
               height: items[0].height * scaleFactorForFirstItem,
               width: parseInt(items[0].width) * scaleFactorForFirstItem,
+              // marginBottom: 10
             }}
           >
             <div
@@ -95,9 +93,6 @@ export const CopyContainer = () => {
             transition={{ delay: 0, duration: 1, type: 'spring' }}
             key={hash(items)}
             css={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '10px',
             }}
           >
             {items.map((item, index) => {
@@ -112,6 +107,7 @@ export const CopyContainer = () => {
                     height: item.height * scaleFactor,
                     width: parseInt(item.width) * scaleFactor,
                     position: 'relative',
+                    // marginBottom: 10
                   }}
                 >
                   <div

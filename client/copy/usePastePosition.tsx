@@ -40,7 +40,7 @@ function movePasteTextAfterCursor(e: MouseEvent) {
 }
 
 function pasteItemOnClick(e: MouseEvent) {
-  console.log(e.target)
+  // console.log(e.target)
 }
 
 export const usePastePosition = () => {
