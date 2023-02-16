@@ -11,6 +11,7 @@ import { PasteInHere } from './PasteInHere'
 type Props = {
   item: ItemType
   index: number
+
 }
 
 export const TextItem = ({ item, index }: Props) => {
@@ -21,7 +22,7 @@ export const TextItem = ({ item, index }: Props) => {
     <DraggableItem index={index}>
       <ActionsContainer>
         <DragHandle />
-        <CopyIcon itemToCopy={item} itemHeight={itemHeight}/>
+        <CopyIcon itemToCopy={item} itemHeight={itemHeight} itemRef={itemRef}/>
       </ActionsContainer>
       {/* @ts-ignore */}
       <ResizablePaper key={item.id} width={item.width} index={index} itemRef={itemRef} id={item.id}>

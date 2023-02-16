@@ -1,6 +1,5 @@
 import { store, useDispatchTyped } from 'client/store'
 import { Resizable } from 're-resizable'
-import { useLocalStorage } from 'react-use'
 import { updateWidth } from '../offerSlice'
 
 interface Props extends Resizable {
@@ -13,7 +12,6 @@ interface Props extends Resizable {
 }
 
 export const ResizablePaper = ({ children, width, index, itemRef, id }: Props) => {
-  const [, setCurrentOfferAtLocalStorage] = useLocalStorage('currentOffer')
   const dispatch = useDispatchTyped()
 
   return (
@@ -51,7 +49,7 @@ export const ResizablePaper = ({ children, width, index, itemRef, id }: Props) =
       onResizeStop={(e, direction, refToElement) => {
         const width = refToElement.style.width
         dispatch(updateWidth({ width, index }))
-        setCurrentOfferAtLocalStorage(store.getState().offer)
+        localStorage.setItem('currentOffer', JSON.stringify(store.getState().offer))
       }}
     >
       {children}
