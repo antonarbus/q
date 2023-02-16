@@ -34,16 +34,16 @@ export const CopyContainer = () => {
         left: x + 15,
         background: 'white',
         boxShadow: '#00000033 0px 0px 10px 0px',
-        // overflow: 'visible'
       }}
     >
       <div
-        // div is needed to have a gap at the bottom
+        // needed to have padding at the bottom
         // otherwise overflow: hidden trims the content without a gap, looks terrible
         css={{
           overflow: 'hidden',
+          marginBottom: 10,
           maxHeight: 300,
-          marginBottom: 10
+
         }}
       >
         <div
@@ -52,7 +52,6 @@ export const CopyContainer = () => {
           css={{
             padding: containerPadding,
             paddingBottom: 5,
-            maxHeight: 300,
           }}
         >
           <PressEsc />
