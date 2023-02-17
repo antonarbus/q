@@ -2,7 +2,7 @@ import hash from 'object-hash'
 import { useEffectOnce, useUnmount } from 'react-use'
 import { store } from 'client/store'
 import { addPasteText, removePasteText } from 'client/offer/offerSlice'
-import { savePastePlace } from './copySlice'
+import { updatePastePos } from './copySlice'
 import { CopyPlaceType } from 'client/types'
 
 let prevPastePlace: CopyPlaceType = { pastePos: 'nowhere', itemId: 'some id' }
@@ -19,14 +19,12 @@ function movePasteTextAfterCursor(e: MouseEvent) {
 
   const { height, top } = item.getBoundingClientRect()
   const yWithinElement = e.clientY - top
-
   const distToTop = yWithinElement
-  const distToBottom = height - yWithinElement
 
   let pastePlace: CopyPlaceType
-  if (distToTop / height < 0.1) {
+  if (distToTop / height < 0.2) {
     pastePlace = { pastePos: 'top', itemId: item.id }
-  } else if (distToBottom / height < 0.1) {
+  } else if (distToTop / height > 0.8) {
     pastePlace = { pastePos: 'bottom', itemId: item.id }
   } else {
     pastePlace = { pastePos: 'middle', itemId: item.id }
@@ -35,7 +33,7 @@ function movePasteTextAfterCursor(e: MouseEvent) {
   if (hash(prevPastePlace) === hash(pastePlace)) return
 
   store.dispatch(addPasteText(pastePlace))
-  store.dispatch(savePastePlace(pastePlace))
+  store.dispatch(updatePastePos(pastePlace))
 
   prevPastePlace = structuredClone(pastePlace)
 }
