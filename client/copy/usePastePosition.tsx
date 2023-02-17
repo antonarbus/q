@@ -1,7 +1,6 @@
 import hash from 'object-hash'
 import { useEffectOnce, useUnmount } from 'react-use'
 import { store } from 'client/store'
-import { addPasteText, removePasteText } from 'client/offer/offerSlice'
 import { updatePastePos } from './copySlice'
 import { CopyPlaceType } from 'client/types'
 
@@ -10,7 +9,7 @@ let prevPastePlace: CopyPlaceType = { pastePos: 'nowhere', itemId: 'some id' }
 function movePasteTextAfterCursor(e: MouseEvent) {
   const itemsContainer = (e.target as Element).closest('#items')
   if (!itemsContainer) {
-    store.dispatch(removePasteText())
+    store.dispatch(updatePastePos({ pastePos: 'nowhere', itemId: 'some id' }))
     return
   }
 
@@ -32,7 +31,6 @@ function movePasteTextAfterCursor(e: MouseEvent) {
 
   if (hash(prevPastePlace) === hash(pastePlace)) return
 
-  store.dispatch(addPasteText(pastePlace))
   store.dispatch(updatePastePos(pastePlace))
 
   prevPastePlace = structuredClone(pastePlace)

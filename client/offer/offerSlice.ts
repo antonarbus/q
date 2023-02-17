@@ -1,4 +1,5 @@
 import { createSlice, current } from '@reduxjs/toolkit'
+import { updatePastePos } from 'client/copy/copySlice'
 import { CopyPlaceType } from 'client/types'
 import { ItemType, OfferType, templateOffer } from './templateOffer'
 
@@ -18,19 +19,21 @@ const offerSlice = createSlice({
     updateOrderAfterDrag: (state, action) => {
       state.items = action.payload.sortedItems
     },
-    addPasteText: (state, action) => {
+  },
+  extraReducers: (builder) => {
+    // add or remove paste text
+    builder.addCase(updatePastePos, (state, action) => {
+      // respond to updatePastePos() action of copySlice
+      // takes current state slice, but action.payload from copySlice
       const { pastePos, itemId }: CopyPlaceType = action.payload
       state.items = state.items.filter(item => item.type !== 'paste')
-      if (pastePos === 'middle') return
+      if (pastePos === 'nowhere' || pastePos === 'middle') return
       const insertAtIndex = state.items.findIndex(item => item.id === itemId) + (pastePos === 'bottom' ? 1 : 0)
       const pasteHereEl: ItemType = { id: 'paste id', type: 'paste', width: '', height: 0, innerHtml: '' }
       state.items.splice(insertAtIndex, 0, pasteHereEl)
-    },
-    removePasteText: (state) => {
-      state.items = state.items.filter((item) => item.type !== 'paste')
-    }
+    })
   }
 })
 
 export default offerSlice.reducer
-export const { updateWidth, updateOrderAfterDrag, addPasteText, removePasteText } = offerSlice.actions
+export const { updateWidth, updateOrderAfterDrag } = offerSlice.actions
