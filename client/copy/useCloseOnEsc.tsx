@@ -1,15 +1,14 @@
-import { removePasteText } from 'client/offer/offerSlice'
 import { useDispatchTyped } from 'client/store'
 import { useEffectOnce } from 'react-use'
-import { hideCopyContainer } from './copySlice'
+import { hideCopyContainer, updatePastePos } from './copySlice'
 
 export function useCloseOnEsc() {
   const dispatch = useDispatchTyped()
 
   function closeOnEsc(e: KeyboardEvent) {
     if (e.key === 'Escape') {
+      dispatch(updatePastePos({ pastePos: 'nowhere', itemId: 'some id' }))
       dispatch(hideCopyContainer())
-      dispatch(removePasteText())
     }
   }
 
