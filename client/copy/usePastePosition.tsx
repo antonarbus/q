@@ -4,8 +4,6 @@ import { store } from 'client/store'
 import { updatePastePos } from './copySlice'
 import { CopyPlaceType } from 'client/types'
 
-let prevPastePlace: CopyPlaceType = { pastePos: 'nowhere', itemId: 'some id' }
-
 function movePasteTextAfterCursor(e: MouseEvent) {
   const itemsContainer = (e.target as Element).closest('#items')
   if (!itemsContainer) {
@@ -29,15 +27,14 @@ function movePasteTextAfterCursor(e: MouseEvent) {
     pastePlace = { pastePos: 'middle', itemId: item.id }
   }
 
+  const prevPastePlace = store.getState().copy.place.pastePos
   if (hash(prevPastePlace) === hash(pastePlace)) return
 
   store.dispatch(updatePastePos(pastePlace))
-
-  prevPastePlace = structuredClone(pastePlace)
 }
 
 function pasteItemOnClick(e: MouseEvent) {
-  // console.log(e.target)
+  //! console.log(e.target)
 }
 
 export const usePastePosition = () => {
