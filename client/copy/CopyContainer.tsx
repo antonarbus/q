@@ -10,6 +10,7 @@ import { useFirstMountState } from 'react-use'
 
 const containerWidth = 200
 const containerPadding = 20
+const marginBottomForRestOfItems = 5
 
 export const CopyContainer = () => {
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>
@@ -97,7 +98,7 @@ export const CopyContainer = () => {
           {/* rest of items slides down */}
           <motion.div
             initial={{ y: -items[0].height * scaleFactorForFirstItem }}
-            animate={{ y: 0 + 5 }}
+            animate={{ y: marginBottomForRestOfItems }}
             transition={{ delay: 0, duration: 1, type: 'spring' }}
             key={hash(items)}
             css={{
@@ -114,7 +115,7 @@ export const CopyContainer = () => {
                   css={{
                     height: item.height * scaleFactor,
                     width: parseInt(item.width) * scaleFactor,
-                    marginBottom: 5
+                    marginBottom: marginBottomForRestOfItems
                   }}
                 >
                   <div
