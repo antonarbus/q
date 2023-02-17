@@ -1,5 +1,5 @@
 import { notify } from 'client/notifier/notify'
-import { EventType, httpStatusType } from 'client/types'
+import { EventType, HttpStatusType } from 'client/types'
 import { useState } from 'react'
 import { token } from './token'
 
@@ -9,7 +9,7 @@ type Props = {
 }
 
 export function useReset() {
-  const [httpStatus, setHttpStatus] = useState<httpStatusType>('')
+  const [httpStatus, setHttpStatus] = useState<HttpStatusType>('')
 
   async function resetPassword({ e, email }: Props) {
     e.preventDefault()

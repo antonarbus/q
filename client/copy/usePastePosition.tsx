@@ -3,8 +3,9 @@ import { useEffectOnce, useUnmount } from 'react-use'
 import { store } from 'client/store'
 import { addPasteText, removePasteText } from 'client/offer/offerSlice'
 import { savePastePlace } from './copySlice'
+import { CopyPlaceType } from 'client/types'
 
-let prevPastePlace = { pastePos: 'top', itemId: 'some id' }
+let prevPastePlace: CopyPlaceType = { pastePos: 'nowhere', itemId: 'some id' }
 
 function movePasteTextAfterCursor(e: MouseEvent) {
   const itemsContainer = (e.target as Element).closest('#items')
@@ -22,7 +23,7 @@ function movePasteTextAfterCursor(e: MouseEvent) {
   const distToTop = yWithinElement
   const distToBottom = height - yWithinElement
 
-  let pastePlace
+  let pastePlace: CopyPlaceType
   if (distToTop / height < 0.1) {
     pastePlace = { pastePos: 'top', itemId: item.id }
   } else if (distToBottom / height < 0.1) {

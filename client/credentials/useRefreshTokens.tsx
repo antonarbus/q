@@ -5,7 +5,7 @@ import { useEffectOnce } from 'react-use'
 import jwt_decode from 'jwt-decode'
 import axios from 'axios'
 import { tokenExpirationMinutes } from './tokenExpirationMinutes'
-import { jwtAccessTokenType } from 'client/types'
+import { JwtAccessTokenType } from 'client/types'
 import { navUpdate } from './navUpdate'
 import { forgetLoggedUser, rememberLoggedUser } from './credentialsSlice'
 import { token } from './token'
@@ -38,7 +38,7 @@ export const useRefreshTokens = ({ withLoadingState }: Props) => {
         if (token.access) {
           const expirationInMin = tokenExpirationMinutes(token.access)
           if (expirationInMin > 5) {
-            const payloadFromExistingAccessToken: jwtAccessTokenType = jwt_decode(token.access)
+            const payloadFromExistingAccessToken: JwtAccessTokenType = jwt_decode(token.access)
             const { email, roles } = payloadFromExistingAccessToken
             store.dispatch(rememberLoggedUser({ email, isLogged: true, roles }))
             navUpdate.login()
@@ -62,7 +62,7 @@ export const useRefreshTokens = ({ withLoadingState }: Props) => {
           return console.log('no access token in db')
         }
 
-        const payloadFromUpdatedAccessToken: jwtAccessTokenType = jwt_decode(accessJwtToken)
+        const payloadFromUpdatedAccessToken: JwtAccessTokenType = jwt_decode(accessJwtToken)
         const { email } = payloadFromUpdatedAccessToken
         if (!email) {
           store.dispatch(forgetLoggedUser())

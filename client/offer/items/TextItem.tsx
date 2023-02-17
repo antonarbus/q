@@ -16,13 +16,12 @@ type Props = {
 
 export const TextItem = ({ item, index }: Props) => {
   const itemRef = useRef() as React.MutableRefObject<Resizable>
-  const itemHeight = itemRef?.current?.resizable?.clientHeight || 0
 
   return (
     <DraggableItem index={index}>
       <ActionsContainer>
         <DragHandle />
-        <CopyIcon itemToCopy={item} itemHeight={itemHeight} itemRef={itemRef}/>
+        <CopyIcon itemToCopy={item} itemRef={itemRef}/>
       </ActionsContainer>
       {/* @ts-ignore */}
       <ResizablePaper key={item.id} width={item.width} index={index} itemRef={itemRef} id={item.id}>

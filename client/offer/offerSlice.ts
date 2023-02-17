@@ -1,10 +1,6 @@
 import { createSlice, current } from '@reduxjs/toolkit'
+import { CopyPlaceType } from 'client/types'
 import { ItemType, OfferType, templateOffer } from './templateOffer'
-
-type PastePlace = {
-  pastePos: 'top' | 'middle' | 'bottom'
-  itemId: string
-}
 
 const offerInLocalStorage = localStorage.getItem('currentOffer')
 const offerFromLocalStorage = !!offerInLocalStorage && JSON.parse(offerInLocalStorage || '')
@@ -23,7 +19,7 @@ const offerSlice = createSlice({
       state.items = action.payload.sortedItems
     },
     addPasteText: (state, action) => {
-      const { pastePos, itemId }: PastePlace = action.payload
+      const { pastePos, itemId }: CopyPlaceType = action.payload
       state.items = state.items.filter(item => item.type !== 'paste')
       if (pastePos === 'middle') return
       const insertAtIndex = state.items.findIndex(item => item.id === itemId) + (pastePos === 'bottom' ? 1 : 0)
