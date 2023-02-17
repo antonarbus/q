@@ -1,5 +1,5 @@
 import { notify } from 'client/notifier/notify'
-import { EventType, httpStatusType } from 'client/types'
+import { EventType, HttpStatusType } from 'client/types'
 import { useState } from 'react'
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 }
 
 export function useRegister() {
-  const [httpStatus, setHttpStatus] = useState<httpStatusType>('')
+  const [httpStatus, setHttpStatus] = useState<HttpStatusType>('')
 
   async function registerUser ({ e, email, password }: Props) {
     e.preventDefault()

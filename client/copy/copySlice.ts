@@ -1,21 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { ItemType } from 'client/offer/templateOffer'
+import { CopyPlaceType } from 'client/types'
 
 type Props = {
   isShown: boolean,
   initCords: { x: number, y: number },
   items: ItemType[]
-  place: {
-    pastePos: 'top' | 'middle' | 'bottom'
-    itemId: string
-  }
+  place: CopyPlaceType
 }
 
 const initialState: Props = {
   isShown: false,
   initCords: { x: 0, y: 0 },
   items: [],
-  place: { pastePos: 'top', itemId: 'some id' }
+  place: { pastePos: 'nowhere', itemId: 'some id' }
 }
 
 export const copySlice = createSlice({

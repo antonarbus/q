@@ -1,7 +1,7 @@
 import { notify } from 'client/notifier/notify'
 import { slideElement } from 'utils/slideElement'
 import { useDispatchTyped } from 'client/store'
-import { EventType, httpStatusType } from 'client/types'
+import { EventType, HttpStatusType } from 'client/types'
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { rememberLoggedUser } from './credentialsSlice'
@@ -9,7 +9,7 @@ import { navUpdate } from './navUpdate'
 import { token } from './token'
 
 export function useLogin() {
-  const [httpStatus, setHttpStatus] = useState<httpStatusType>('')
+  const [httpStatus, setHttpStatus] = useState<HttpStatusType>('')
   const navigate = useNavigate()
   const location = useLocation()
   const from = (location.state as any)?.from?.pathname || '/'
