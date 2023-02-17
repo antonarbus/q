@@ -67,7 +67,7 @@ export const CopyContainer = () => {
           {/* first item slides down */}
           <motion.div
             key={`copy el ${items.length}`}
-            initial={{ y: '-500px' }}
+            initial={{ y: -500 }}
             animate={{ y: 0 }}
             transition={{ delay: 0.3, duration: 0.5, type: 'spring' }}
             css={{
@@ -80,10 +80,10 @@ export const CopyContainer = () => {
             <div
               css={{
                 background: 'white',
-                borderRadius: '6px',
+                borderRadius: 6,
                 boxShadow: '#00000033 0px 0px 12px 2px',
-                padding: '20px',
-                marginBottom: '5px',
+                padding: 20,
+                marginBottom: 5,
                 width: items[0].width,
                 transformOrigin: 'left top',
                 scale: `${scaleFactorForFirstItem}`,
