@@ -43,8 +43,8 @@ export const CopyContainer = () => {
         background: 'white',
         boxShadow: '#00000033 0px 0px 10px 0px',
         overflow: 'hidden',
+        width: 'auto',
         // outline: '1px solid red',
-        width: 'auto'
 
       }}
     >
