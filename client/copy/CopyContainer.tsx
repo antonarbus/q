@@ -18,7 +18,7 @@ export const CopyContainer = () => {
   // const { x, y } = { x: 300, y: 0 }
   const items = useSelectorTyped(state => state.copy.items)
   //! save items.width as number
-  const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / parseInt(items[0].width)
+  const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / items[0].width
   usePastePosition()
   const isFirstMount = useFirstMountState()
 
@@ -74,7 +74,7 @@ export const CopyContainer = () => {
             transition={{ delay: 0.3, duration: 0.5, type: 'spring' }}
             css={{
               height: items[0].height * scaleFactorForFirstItem,
-              width: parseInt(items[0].width) * scaleFactorForFirstItem,
+              width: items[0].width * scaleFactorForFirstItem,
               marginTop: 15,
               marginBottom: 10
             }}
@@ -106,7 +106,7 @@ export const CopyContainer = () => {
             }}
           >
             {items.map((item, index) => {
-              const scaleFactor = (containerWidth - 2 * containerPadding) / parseInt(item.width)
+              const scaleFactor = (containerWidth - 2 * containerPadding) / item.width
 
               if (index === 0) return null
 
@@ -115,7 +115,7 @@ export const CopyContainer = () => {
                   key={`copy el ${items.length - index}`}
                   css={{
                     height: item.height * scaleFactor,
-                    width: parseInt(item.width) * scaleFactor,
+                    width: item.width * scaleFactor,
                     marginBottom: marginBottomForRestOfItems
                   }}
                 >
@@ -135,7 +135,6 @@ export const CopyContainer = () => {
                 </div>
               )
             })}
-
           </motion.div>
         </div>
       </div>

@@ -1,11 +1,11 @@
 import { store, useDispatchTyped } from 'client/store'
 import { Resizable } from 're-resizable'
-import { updateWidth } from '../offerSlice'
+import { updateItemOrder } from '../offerSlice'
 
 interface Props extends Resizable {
   children: React.ReactNode
   key: string
-  width: string
+  width: number
   index: number
   itemRef: React.MutableRefObject<Resizable>
   id: string
@@ -41,14 +41,14 @@ export const ResizablePaper = ({ children, width, index, itemRef, id }: Props) =
       }}
       onResize={(e, direction, refToElement, delta) => {
         // const width = refToElement.style.width
-        // dispatch(updateWidth({ id, width }))
+        // dispatch(updateItemOrder({ id, width }))
         // console.log(width)
         // setWidth(refToElement.style.width)
       }}
       onResizeStart={() => {}}
       onResizeStop={(e, direction, refToElement) => {
-        const width = refToElement.style.width
-        dispatch(updateWidth({ width, index }))
+        const width = parseInt(refToElement.style.width)
+        dispatch(updateItemOrder({ width, index }))
         localStorage.setItem('currentOffer', JSON.stringify(store.getState().offer))
       }}
     >

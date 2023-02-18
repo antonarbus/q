@@ -3,10 +3,10 @@ import { ActionsContainer } from './ActionsContainer'
 import { CopyIcon } from './CopyIcon'
 import { DraggableItem, DragHandle } from './draggable'
 import { ResizablePaper } from './ResizablePaper'
-import { ItemType } from '../templateOffer'
 import { useRef } from 'react'
 import { Resizable } from 're-resizable'
 import { PasteInHere } from './PasteInHere'
+import { ItemType } from 'client/types'
 
 type Props = {
   item: ItemType
