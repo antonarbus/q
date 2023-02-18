@@ -14,8 +14,6 @@ export const RestOfCopiedItems = () => {
       animate={{ y: marginBottomForRestOfItems }}
       transition={{ delay: 0, duration: 1, type: 'spring' }}
       key={hash(items)}
-      css={{
-      }}
     >
       {items.map((item, index) => {
         const scaleFactor = (containerWidth - 2 * containerPadding) / item.width
