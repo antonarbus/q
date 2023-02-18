@@ -1,6 +1,6 @@
 import { store, useDispatchTyped, useSelectorTyped } from 'client/store'
 import { Draggable } from './draggable'
-import { updateOrderAfterDrag } from '../offerSlice'
+import { updateItemsOrder } from '../offerSlice'
 // import { useLocalStorage } from 'react-use'
 import { arrayMoveImmutable } from 'array-move'
 import { TextItem } from './TextItem'
@@ -16,7 +16,7 @@ export const Items = () => {
       useDragHandle
       onSortEnd={({ oldIndex, newIndex }) => {
         const sortedItems = arrayMoveImmutable(items, oldIndex, newIndex)
-        dispatch(updateOrderAfterDrag({ sortedItems }))
+        dispatch(updateItemsOrder({ sortedItems }))
         localStorage.setItem('currentOffer', JSON.stringify(store.getState().offer))
       }}
     >

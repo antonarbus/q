@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { ItemType } from 'client/offer/templateOffer'
-import { CopyPlaceType } from 'client/types'
+import { CopyPlaceType, ItemType } from 'client/types'
 
 type Props = {
   isShown: boolean,
