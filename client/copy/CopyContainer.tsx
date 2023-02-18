@@ -17,7 +17,6 @@ export const CopyContainer = () => {
   const { x, y } = useCursorCords()
   // const { x, y } = { x: 300, y: 0 }
   const items = useSelectorTyped(state => state.copy.items)
-  //! save items.width as number
   const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / items[0].width
   usePastePosition()
   const isFirstMount = useFirstMountState()
