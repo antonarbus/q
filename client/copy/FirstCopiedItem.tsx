@@ -9,10 +9,10 @@ export const FirstCopiedItem = () => {
 
   return (
     <motion.div
-      key={`copy el ${items.length}`}
       initial={{ y: -500 }}
       animate={{ y: 0 }}
       transition={{ delay: 0.3, duration: 0.5, type: 'spring' }}
+      key={`copy el ${items.length}`}
       css={{
         height: items[0].height * scaleFactorForFirstItem,
         width: items[0].width * scaleFactorForFirstItem,
@@ -30,7 +30,6 @@ export const FirstCopiedItem = () => {
           width: items[0].width,
           transformOrigin: 'left top',
           scale: `${scaleFactorForFirstItem}`,
-          position: 'relative'
         }}
       >
         {parseHtml(items[0].innerHtml)}

@@ -35,7 +35,6 @@ export const CopyContainer = () => {
       transition={{ delay: 0, duration: 1.1, type: 'spring' }}
       key={hash(items)}
       css={{
-        width: containerWidth,
         borderRadius: 6,
         position: 'fixed',
         zIndex: 3,
@@ -43,29 +42,24 @@ export const CopyContainer = () => {
         left: x + 15,
         background: 'white',
         boxShadow: '#00000033 0px 0px 10px 0px',
+        overflow: 'hidden',
+        // outline: '1px solid red',
+        width: 'auto'
+
       }}
     >
       <div
         css={{
-          overflow: 'hidden',
-          marginBottom: 10, // needed to have it, otherwise overflow: hidden trims the content, without a gap looks terrible
-          maxHeight: 300,
+          // outline: '1px solid orange',
+          margin: 10, // needed to have a gap at the bottom specifically, otherwise overflow: hidden trims the content at the bottom edge
+          padding: 5, // needed to avoid shadow trimming by overflow: hidden
+          overflowY: 'hidden',
+          maxHeight: 240,
         }}
       >
-        <div
-          // needed for main container height animation
-          // moved padding here from the main container, otherwise height is animated badly
-          css={{
-            padding: containerPadding,
-            paddingBottom: 5,
-            // outline: '1px solid red',
-            // background: 'red'
-          }}
-        >
-          <PressEsc />
-          <FirstCopiedItem />
-          <RestOfCopiedItems />
-        </div>
+        <PressEsc />
+        <FirstCopiedItem />
+        <RestOfCopiedItems />
       </div>
     </motion.div>
   )
