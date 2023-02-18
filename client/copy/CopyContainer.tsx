@@ -1,4 +1,3 @@
-import parseHtml from 'html-react-parser'
 import hash from 'object-hash'
 import { useSelectorTyped } from 'client/store'
 import { useCursorCords } from './useCursorCords'
@@ -7,19 +6,20 @@ import { PressEsc } from './PressEsc'
 import { useRef } from 'react'
 import { usePastePosition } from './usePastePosition'
 import { useFirstMountState } from 'react-use'
+import { FirstCopiedItem } from './FirstCopiedItem'
+import { RestOfCopiedItems } from './RestOfCopiedItems'
 
-const containerWidth = 200
-const containerPadding = 20
-const marginBottomForRestOfItems = 5
+export const containerWidth = 200
+export const containerPadding = 20
+export const marginBottomForRestOfItems = 5
 
 export const CopyContainer = () => {
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>
+  usePastePosition()
+  const items = useSelectorTyped(state => state.copy.items)
+  const isFirstMount = useFirstMountState()
   const { x, y } = useCursorCords()
   // const { x, y } = { x: 300, y: 0 }
-  const items = useSelectorTyped(state => state.copy.items)
-  const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / items[0].width
-  usePastePosition()
-  const isFirstMount = useFirstMountState()
 
   return (
     <motion.div
@@ -39,20 +39,17 @@ export const CopyContainer = () => {
         borderRadius: 6,
         position: 'fixed',
         zIndex: 3,
-        top: y + 15,
+        top: y + 30,
         left: x + 15,
         background: 'white',
         boxShadow: '#00000033 0px 0px 10px 0px',
       }}
     >
       <div
-        // needed to have padding at the bottom
-        // otherwise overflow: hidden trims the content without a gap, looks terrible
         css={{
           overflow: 'hidden',
-          marginBottom: 10,
+          marginBottom: 10, // needed to have it, otherwise overflow: hidden trims the content, without a gap looks terrible
           maxHeight: 300,
-
         }}
       >
         <div
@@ -61,80 +58,13 @@ export const CopyContainer = () => {
           css={{
             padding: containerPadding,
             paddingBottom: 5,
+            // outline: '1px solid red',
+            // background: 'red'
           }}
         >
           <PressEsc />
-
-          {/* first item slides down */}
-          <motion.div
-            key={`copy el ${items.length}`}
-            initial={{ y: -500 }}
-            animate={{ y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5, type: 'spring' }}
-            css={{
-              height: items[0].height * scaleFactorForFirstItem,
-              width: items[0].width * scaleFactorForFirstItem,
-              marginTop: 15,
-              marginBottom: 10
-            }}
-          >
-            <div
-              css={{
-                background: 'white',
-                borderRadius: 6,
-                boxShadow: '#00000033 0px 0px 12px 2px',
-                padding: 20,
-                marginBottom: 5,
-                width: items[0].width,
-                transformOrigin: 'left top',
-                scale: `${scaleFactorForFirstItem}`,
-                position: 'relative'
-              }}
-            >
-              {parseHtml(items[0].innerHtml)}
-            </div>
-          </motion.div>
-
-          {/* rest of items slides down */}
-          <motion.div
-            initial={{ y: -items[0].height * scaleFactorForFirstItem }}
-            animate={{ y: marginBottomForRestOfItems }}
-            transition={{ delay: 0, duration: 1, type: 'spring' }}
-            key={hash(items)}
-            css={{
-            }}
-          >
-            {items.map((item, index) => {
-              const scaleFactor = (containerWidth - 2 * containerPadding) / item.width
-
-              if (index === 0) return null
-
-              return (
-                <div
-                  key={`copy el ${items.length - index}`}
-                  css={{
-                    height: item.height * scaleFactor,
-                    width: item.width * scaleFactor,
-                    marginBottom: marginBottomForRestOfItems
-                  }}
-                >
-                  <div
-                    css={{
-                      background: 'white',
-                      borderRadius: 6,
-                      boxShadow: '#00000033 0px 0px 10px 0px',
-                      padding: 20,
-                      width: item.width,
-                      transformOrigin: 'left top',
-                      scale: `${scaleFactor}`,
-                    }}
-                  >
-                    {parseHtml(item.innerHtml)}
-                  </div>
-                </div>
-              )
-            })}
-          </motion.div>
+          <FirstCopiedItem />
+          <RestOfCopiedItems />
         </div>
       </div>
     </motion.div>
