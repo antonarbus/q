@@ -4,6 +4,7 @@ type Props = {
 
 export const ActionsContainer = ({ children }: Props) => (
   <div
+    className='actions-container'
     css={{
       display: 'flex',
       flexDirection: 'column',

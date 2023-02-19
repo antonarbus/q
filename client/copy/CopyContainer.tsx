@@ -4,11 +4,12 @@ import { useCursorCords } from './useCursorCords'
 import { motion } from 'framer-motion'
 import { PressEsc } from './PressEsc'
 import { useRef } from 'react'
-import { usePastePosition } from './usePastePosition'
+import { usePasteMove } from './usePasteMove'
 import { useFirstMountState } from 'react-use'
 import { FirstCopiedItem } from './FirstCopiedItem'
 import { RestOfCopiedItems } from './RestOfCopiedItems'
 import { useDisableNavItems } from './useDisableNavItems'
+import { usePasteClick } from './usePasteClick'
 
 export const containerWidth = 200
 export const containerPadding = 20
@@ -16,7 +17,8 @@ export const marginBottomForRestOfItems = 5
 
 export const CopyContainer = () => {
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>
-  usePastePosition()
+  usePasteMove()
+  usePasteClick()
   useDisableNavItems()
   const items = useSelectorTyped(state => state.copy.items)
   const isFirstMount = useFirstMountState()
@@ -47,7 +49,6 @@ export const CopyContainer = () => {
         overflow: 'hidden',
         width: 'auto',
         // outline: '1px solid red',
-
       }}
     >
       <div

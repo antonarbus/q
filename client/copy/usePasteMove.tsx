@@ -11,6 +11,12 @@ function movePasteTextAfterCursor(e: MouseEvent) {
     return
   }
 
+  const actionsContainer = (e.target as Element).closest('.actions-container')
+  if (actionsContainer) {
+    store.dispatch(updatePastePos({ pastePos: 'nowhere', itemId: 'some id' }))
+    return
+  }
+
   const item = (e.target as Element).closest('.item')
   if (!item) return
 
@@ -33,24 +39,12 @@ function movePasteTextAfterCursor(e: MouseEvent) {
   store.dispatch(updatePastePos(pastePlace))
 }
 
-function pasteItemOnClick(e: MouseEvent) {
-  //! console.log(e.target)
-}
-
-export const usePastePosition = () => {
+export const usePasteMove = () => {
   useEffectOnce(() => {
     document.addEventListener('mousemove', movePasteTextAfterCursor, { passive: true })
   })
 
   useUnmount(() => {
     document.removeEventListener('mousemove', movePasteTextAfterCursor)
-  })
-
-  useEffectOnce(() => {
-    document.addEventListener('click', pasteItemOnClick)
-  })
-
-  useUnmount(() => {
-    document.removeEventListener('click', pasteItemOnClick)
   })
 }
