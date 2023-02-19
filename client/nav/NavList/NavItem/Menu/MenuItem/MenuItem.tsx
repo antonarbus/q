@@ -22,17 +22,18 @@ export function MenuItem({ menuItem, hoveredMenuItemIndex }: MenuItemType) {
   const menuId = menuItem.id
   const link = menuItem.link
   const shortcut = menuItem?.shortcut
+  const disabled = !!menuItem?.disabled
 
   return (
     <MenuItemStyled
       to={link || '/'}
-      onClick={(e) => clickOnMenuItem(e, menuId)}
+      onClick={(e) => clickOnMenuItem(e, menuId, disabled)}
       onMouseEnter={() => dispatch(setMenuItemHoverIndex(hoveredMenuItemIndex))}
       state={{ isHovered }}
     >
-      {isIcon && <Icon icon={menuItem.icon} />}
-      <TextInMenu reserveSpaceForIcon={isNextMenuAvailable} name={menuItem.name} />
-      {isNextMenuAvailable && (
+      {isIcon && <Icon icon={menuItem.icon} disabled={disabled}/>}
+      <TextInMenu reserveSpaceForIcon={isNextMenuAvailable} name={menuItem.name} disabled={disabled}/>
+      {isNextMenuAvailable && !disabled && (
         <RoundSpanForIcon
           css={{
             background: 'transparent',

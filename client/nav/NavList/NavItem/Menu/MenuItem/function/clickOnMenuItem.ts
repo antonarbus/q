@@ -4,7 +4,7 @@ import { EventType } from 'client/types'
 import { getMenuItemByIdsChain } from '../../functions/getMenuItemByIdsChain'
 import { navigateInMenu } from '../../functions/useMenuAnimation'
 
-export const clickOnMenuItem = (e: EventType, menuId: string) => {
+export const clickOnMenuItem = (e: EventType, menuId: string, disabled: boolean) => {
   const chainToClickedItem = [...store.getState().nav.idsToCurrentMenuItems, menuId]
   const nextMenu = getMenuItemByIdsChain(chainToClickedItem)
   const isNestedMenuAvailable = !!nextMenu.length
@@ -12,6 +12,8 @@ export const clickOnMenuItem = (e: EventType, menuId: string) => {
   const menuItem = menuItems!.find(menuItem => menuItem.id === menuId)
   const link = menuItem?.link
   const func = menuItem?.func
+
+  if (disabled) return
 
   if (link && func) {
     // follow the link natively and call the func
