@@ -7,6 +7,7 @@ import { useRef } from 'react'
 import { Resizable } from 're-resizable'
 import { PasteInHere } from './PasteInHere'
 import { ItemType } from 'client/types'
+import { useSelectorTyped } from 'client/store'
 
 type Props = {
   item: ItemType
@@ -16,9 +17,13 @@ type Props = {
 
 export const TextItem = ({ item, index }: Props) => {
   const itemRef = useRef() as React.MutableRefObject<Resizable>
+  const isPasteMode = useSelectorTyped(state => state.copy.isShown)
 
   return (
-    <DraggableItem index={index}>
+    <DraggableItem
+      disabled={!!isPasteMode}
+      index={index}
+    >
       <ActionsContainer>
         <DragHandle />
         <CopyIcon itemToCopy={item} itemRef={itemRef}/>

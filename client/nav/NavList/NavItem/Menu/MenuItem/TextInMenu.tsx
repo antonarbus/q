@@ -7,7 +7,7 @@ type Props = {
 /**
  * Component for name in menu item
  * @descriptions
- * - if we have nested menu some space should be left for 'go inside' icon
+ * - if we have nested menu some space should be reserved for 'go inside' icon
  * - if name is long it will be trimmed ellipsis (... dots)
  */
 export function TextInMenu({ reserveSpaceForIcon, name, disabled }: Props) {
