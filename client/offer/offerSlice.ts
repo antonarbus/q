@@ -27,6 +27,9 @@ const offerSlice = createSlice({
       if (pastePos === 'top') {
         const insertAtIndex = hoveredItemIndex - 1
         state.items.splice(insertAtIndex, 0, itemToPaste)
+      } else if (pastePos === 'bottom') {
+        const insertAtIndex = hoveredItemIndex + 1
+        state.items.splice(insertAtIndex, 0, itemToPaste)
       }
     },
   },
