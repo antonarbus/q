@@ -8,7 +8,6 @@ export const useDisableNavItems = () => {
 
   useEffectOnce(() => {
     navItemIds?.forEach((id) => {
-      // if (id === 'Offer') return
       if (id === 'Offers') return
       dispatch(setNavItemProp({ id, prop: 'disabled', value: true }))
     })

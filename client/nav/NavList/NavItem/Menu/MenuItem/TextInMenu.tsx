@@ -1,12 +1,7 @@
-import styled from '@emotion/styled'
-
-type PropsForComponent = {
-  reserveSpaceForIcon?: boolean
+type Props = {
+  reserveSpaceForIcon?: boolean,
   name: string | React.ReactNode
-}
-
-type PropsForSC = {
-  reserveSpaceForIcon?: boolean
+  disabled: boolean
 }
 
 /**
@@ -15,18 +10,19 @@ type PropsForSC = {
  * - if we have nested menu some space should be left for 'go inside' icon
  * - if name is long it will be trimmed ellipsis (... dots)
  */
-export function TextInMenu({ reserveSpaceForIcon, name }: PropsForComponent) {
+export function TextInMenu({ reserveSpaceForIcon, name, disabled }: Props) {
   return (
-    <Span reserveSpaceForIcon={reserveSpaceForIcon}>
+    <span
+      css={{
+        marginLeft: 10,
+        marginRight: reserveSpaceForIcon ? 30 : 0,
+        textOverflow: 'ellipsis',
+        overflow: 'hidden',
+        whiteSpace: 'nowrap',
+        color: disabled ? 'grey' : 'inherit'
+      }}
+    >
       {name}
-    </Span>
+    </span>
   )
 }
-
-const Span = styled.span<PropsForSC>`
-  margin-left: 10px;
-  margin-right: ${props => props.reserveSpaceForIcon ? '30px' : '0px'};
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-`
