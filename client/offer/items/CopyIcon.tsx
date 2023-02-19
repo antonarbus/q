@@ -1,5 +1,5 @@
-import { ItemType } from 'client/offer/templateOffer'
 import { useDispatchTyped } from 'client/store'
+import { ItemType } from 'client/types'
 import { Resizable } from 're-resizable'
 import { MdCopyAll } from 'react-icons/md'
 import { addItemIntoCopyContainer, saveInitCords, showCopyContainer } from '../../copy/copySlice'

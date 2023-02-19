@@ -8,13 +8,16 @@ type PropsType = {
   navItem: MenuType | undefined
   id: string
   navItemRef: React.MutableRefObject<HTMLLIElement>
+  disabled: boolean
 }
 
-export function clickOnNavItem({ e, navItem, id, navItemRef }: PropsType) {
+export function clickOnNavItem({ e, navItem, id, navItemRef, disabled }: PropsType) {
   (document.activeElement as HTMLElement).blur() // to prevent open an active navItem link on Enter key
 
   const link = navItem?.link
   const func = navItem?.func
+
+  if (disabled) return
 
   if (link && func) {
     // just follow the link natively and call the func
@@ -27,7 +30,8 @@ export function clickOnNavItem({ e, navItem, id, navItemRef }: PropsType) {
     return
   }
 
-  // all navItems are links and we do not to follow them if they are not really links
+  // all navItems are links, which were already opened above,
+  // but these ones we do not want to follow
   e.preventDefault()
 
   // handle burger close separately

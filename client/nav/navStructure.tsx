@@ -10,14 +10,15 @@ import { Person as PersonIcon, Settings as SettingsIcon } from '@mui/icons-mater
 const reactIcon = React.createElement(IoShareOutline, {})
 
 export type MenuType = {
-  id: string
-  icon?: React.ReactNode | string
-  name: string
-  link?: any
+  id: string,
+  name: string,
+  icon?: React.ReactNode | string,
+  link?: any,
   func?: () => void,
   shortcut?: string[],
   menuItems?: MenuType[],
-  isHidden?: boolean
+  isHidden?: boolean,
+  disabled?: boolean
 }
 
 export const navStructure: MenuType[] = [
