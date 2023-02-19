@@ -1,7 +1,8 @@
-import { RoundSpanForIconStyled } from './RoundSpanForIconStyled'
+import { RoundSpanForIcon } from './RoundSpanForIcon'
 
 type Props = {
-  icon: string | React.ReactNode
+  icon: string | React.ReactNode,
+  disabled?: boolean
 }
 
 /**
@@ -10,10 +11,10 @@ type Props = {
  * - we may pass icon prop as a component or a string
  * - if sting is passed it becomes bold
  */
-export function Icon({ icon }: Props) {
+export function Icon({ icon, disabled }: Props) {
   return (
-    <RoundSpanForIconStyled className='icon-round-wrapper'>
+    <RoundSpanForIcon className='icon-round-wrapper' disabled={disabled}>
       {typeof icon === 'string' ? <span style={{ fontWeight: 600 }}>{icon}</span> : icon}
-    </RoundSpanForIconStyled>
+    </RoundSpanForIcon>
   )
 }

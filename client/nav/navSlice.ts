@@ -1,5 +1,5 @@
 import { MenuType, navStructure } from 'client/nav/navStructure'
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from 'client/store'
 
 const initialState = {
@@ -34,21 +34,24 @@ const navSlice = createSlice({
     goDownInNextMenu: (state, action) => { state.idsToNextMenuItems = [...state.idsToNextMenuItems, action.payload] },
     goUpInNextMenu: (state) => { state.idsToNextMenuItems = state.idsToNextMenuItems.slice(0, -1) },
     setMenuItemHoverIndex: (state, action) => { state.menuItemHoverIndex = action.payload },
+
     /**
      * @summary can change any property in navStructure, for ex we can change icon or hide menuItem
      * @example <caption>Example usage of in redux dev tools</caption>
      * {
-          type: 'navSlice/setPropValueByIdInNavStructure',
+          type: 'navSlice/setNavItemProp',
           payload: { id: 'Offer', prop: 'isHidden', value: true }
         }
      */
-    setPropValueByIdInNavStructure: (state, action) => {
+    setNavItemProp: (state, action: PayloadAction<{
+      id: string, prop: 'isHidden' | 'icon' | 'name' | 'link' | 'func' | 'disabled', value: any
+    }>) => {
       const { id, prop, value } = action.payload
 
       type Props = {
         navStructure: MenuType[],
         id: string,
-        prop: 'isHidden' | 'icon' | 'name' | 'link' | 'func',
+        prop: 'isHidden' | 'icon' | 'name' | 'link' | 'func' | 'disabled',
         value: any
       }
 
@@ -82,7 +85,7 @@ export const {
   goDownInNextMenu,
   goUpInNextMenu,
   setMenuItemHoverIndex,
-  setPropValueByIdInNavStructure,
+  setNavItemProp,
   disableMedia,
   enableMedia
 } = navSlice.actions

@@ -1,13 +1,13 @@
-import styled from '@emotion/styled'
 import { useSelectorTyped as useSelector, store } from 'client/store'
 import { useRef } from 'react'
 import { Icon } from './Icon'
 import { Menu } from './Menu'
 import { useWindowSize } from 'react-use'
 import { Link } from 'react-router-dom'
-import { clickOnNavItem } from './functions/clickOnNavItem'
+import { clickOnNavItem } from './clickOnNavItem'
 import { TiArrowSortedDown } from 'react-icons/ti'
 import { theme } from 'client/theme'
+import { css } from '@emotion/react'
 
 type NavItemType = {
   children?: React.ReactNode,
@@ -50,74 +50,75 @@ export function NavItem({ children, id }: NavItemType) {
   const icon = navItem?.icon
   const name = navItem?.name
   const link = navItem?.link
+  const disabled = !!navItem?.disabled
 
   return (
-    <LiStyled
+    <li
       ref={navItemRef}
       className='nav-item'
+      css={css`
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        padding: 0px 5px;
+        margin-left: ${theme.menu.navItem.marginLeft}px;
+        margin-right: ${theme.menu.navItem.marginRight}px;
+        user-select: none;
+      
+        & > a {
+          display: flex;
+          align-items: center;
+          position: relative;
+          text-decoration: none;
+          -webkit-user-drag: none;
+          cursor: ${disabled ? 'default' : 'pointer'};
+      
+          &:hover,
+          &:focus,
+          &:active {
+            filter: brightness(${disabled ? 1 : 1.2});
+          }
+      
+          .nav-item-name {
+            margin-left: 5px;
+            margin-right: 5px;
+            color: ${disabled ? '#585858' : '#bcbcbc'} ;
+            white-space: nowrap;
+          }
+          
+          .arrow-for-nested-menu {
+            display: none;
+            position: absolute;
+            top: calc(50% + 2px);
+            transform: translateY(-50%);
+            right: -12px;
+            color: grey;
+            height: 14px;
+          }
+        
+          &:hover > .arrow-for-nested-menu,
+          &:focus > .arrow-for-nested-menu {
+            display: block;
+          }
+        }
+      
+        @media screen and (max-width: 480px) {
+          position: static;
+        }
+      `}
     >
       <Link
         to={link || '/'}
-        onClick={(e) => clickOnNavItem({ e, navItem, id, navItemRef })}
+        onClick={(e) => clickOnNavItem({ e, navItem, id, navItemRef, disabled })}
       >
-        {icon && <Icon icon={icon} />}
-        {!icon && shouldDisplayIcon && <Icon icon={name && name[0]} />}
+        {icon && <Icon icon={icon} disabled={disabled} />}
+        {!icon && shouldDisplayIcon && <Icon icon={name && name[0]} disabled={disabled}/>}
         {name && <span className='nav-item-name'>{name}</span>}
-        {isNestedMenu && <TiArrowSortedDown className='arrow-for-nested-menu'/> }
+        {isNestedMenu && !disabled && <TiArrowSortedDown className='arrow-for-nested-menu'/> }
         {children}
       </Link>
       {shouldOpenThisMenu && <Menu />}
-    </LiStyled>
+    </li>
   )
 }
-
-const LiStyled = styled.li`
-  display: flex;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  padding: 0px 5px;
-  margin-left: ${theme.menu.navItem.marginLeft}px;
-  margin-right: ${theme.menu.navItem.marginRight}px;
-  user-select: none;
-
-  & > a {
-    display: flex;
-    align-items: center;
-    position: relative;
-    text-decoration: none;
-    -webkit-user-drag: none;
-
-    &:hover,
-    &:focus,
-    &:active {
-      filter: brightness(1.2);
-    }
-
-    .nav-item-name {
-      margin-left: 5px;
-      margin-right: 5px;
-      color: #bcbcbc;
-      white-space: nowrap;
-    }
-    
-    .arrow-for-nested-menu {
-      display: none;
-      position: absolute;
-      top: calc(50% + 2px);
-      transform: translateY(-50%);
-      right: -12px;
-      color: grey;
-      height: 14px;
-    }
-  
-    &:hover > .arrow-for-nested-menu,
-    &:focus > .arrow-for-nested-menu {
-      display: block;
-    }
-  }
-
-  @media screen and (max-width: 480px) {
-    position: static;
-  }
-`

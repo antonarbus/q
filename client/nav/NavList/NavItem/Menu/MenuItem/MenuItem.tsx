@@ -1,9 +1,8 @@
-import styled from '@emotion/styled'
 import { FaChevronRight as ForwardIcon } from 'react-icons/fa'
 import { Icon } from '../../Icon'
 import { MenuItemStyled } from './MenuItemStyled'
 import { TextInMenu } from './TextInMenu'
-import { RoundSpanForIconStyled } from '../../RoundSpanForIconStyled'
+import { RoundSpanForIcon } from '../../RoundSpanForIcon'
 import { MenuType } from 'client/nav/navStructure'
 import { setMenuItemHoverIndex } from 'client/nav/navSlice'
 import { useDispatchTyped, useSelectorTyped as useSelector } from 'client/store'
@@ -33,15 +32,19 @@ export function MenuItem({ menuItem, hoveredMenuItemIndex }: MenuItemType) {
     >
       {isIcon && <Icon icon={menuItem.icon} />}
       <TextInMenu reserveSpaceForIcon={isNextMenuAvailable} name={menuItem.name} />
-      {isNextMenuAvailable && <MenuIconRight><ForwardIcon /></MenuIconRight>}
+      {isNextMenuAvailable && (
+        <RoundSpanForIcon
+          css={{
+            background: 'transparent',
+            marginRight: '-5px',
+            position: 'absolute',
+            right: '10px',
+          }}
+        >
+          <ForwardIcon />
+        </RoundSpanForIcon>
+      )}
       {shortcut && <Shortcut shortcut={shortcut} $isHovered={isHovered} />}
     </MenuItemStyled>
   )
 }
-
-const MenuIconRight = styled(RoundSpanForIconStyled)`
-  background-color: transparent;
-  margin-right: -5px;
-  position: absolute;
-  right: 10px;
-`
