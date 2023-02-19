@@ -24,13 +24,12 @@ const offerSlice = createSlice({
       const { itemId, pastePos, item } = action.payload
       const itemToPaste = { ...item, id: nanoid() }
       const hoveredItemIndex = state.items.findIndex(item => item.id === itemId)
-      if (pastePos === 'top') {
-        const insertAtIndex = hoveredItemIndex - 1
-        state.items.splice(insertAtIndex, 0, itemToPaste)
-      } else if (pastePos === 'bottom') {
-        const insertAtIndex = hoveredItemIndex + 1
-        state.items.splice(insertAtIndex, 0, itemToPaste)
-      }
+      const spliceSettings = { insertAtIndex: hoveredItemIndex, deleteCount: 0 }
+
+      if (pastePos === 'top') spliceSettings.insertAtIndex--
+      if (pastePos === 'bottom') spliceSettings.insertAtIndex++
+      if (pastePos === 'middle') spliceSettings.deleteCount++
+      state.items.splice(spliceSettings.insertAtIndex, spliceSettings.deleteCount, itemToPaste)
     },
   },
   extraReducers: (builder) => {
