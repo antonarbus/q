@@ -29,6 +29,7 @@ const offerSlice = createSlice({
       if (pastePos === 'top') spliceSettings.insertAtIndex--
       if (pastePos === 'bottom') spliceSettings.insertAtIndex++
       if (pastePos === 'middle') spliceSettings.deleteCount++
+
       state.items.splice(spliceSettings.insertAtIndex, spliceSettings.deleteCount, itemToPaste)
     },
   },
