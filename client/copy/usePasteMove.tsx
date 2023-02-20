@@ -1,19 +1,19 @@
 import hash from 'object-hash'
 import { useEffectOnce, useUnmount } from 'react-use'
 import { store } from 'client/store'
-import { updatePastePos } from './copySlice'
+import { removePasteText, updatePastePos } from './copySlice'
 import { CopyPlaceType } from 'client/types'
 
 function movePasteTextAfterCursor(e: MouseEvent) {
   const itemsContainer = (e.target as Element).closest('#items')
   if (!itemsContainer) {
-    store.dispatch(updatePastePos({ pastePos: 'nowhere', itemId: 'some id' }))
+    store.dispatch(removePasteText())
     return
   }
 
   const actionsContainer = (e.target as Element).closest('.actions-container')
   if (actionsContainer) {
-    store.dispatch(updatePastePos({ pastePos: 'nowhere', itemId: 'some id' }))
+    store.dispatch(removePasteText())
     return
   }
 
