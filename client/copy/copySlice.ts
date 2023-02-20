@@ -34,11 +34,26 @@ export const copySlice = createSlice({
     },
     removePasteText: (state) => {
       state.place = initialState.place
-    }
+    },
+    paste: (state, action) => {
+      const { itemId, pastePos, item } = action.payload
+      console.log({ itemId, pastePos, item })
+      // const itemToPaste = { ...item, id: nanoid() }
+      // const hoveredItemIndex = state.items.findIndex(item => item.id === itemId)
+      // const spliceSettings = { insertAtIndex: hoveredItemIndex, deleteCount: 0 }
+
+      // if (pastePos === 'top') spliceSettings.insertAtIndex--
+      // if (pastePos === 'bottom') spliceSettings.insertAtIndex++
+      // if (pastePos === 'middle') spliceSettings.deleteCount++
+
+      // state.items = state.items.filter(item => item.type !== 'paste')
+
+      // state.items.splice(spliceSettings.insertAtIndex, spliceSettings.deleteCount, itemToPaste)
+    },
   }
 
 })
 
-export const { showCopyContainer, hideCopyContainer, saveInitCords, addItemIntoCopyContainer, updatePastePos, removePasteText } = copySlice.actions
+export const { showCopyContainer, hideCopyContainer, saveInitCords, addItemIntoCopyContainer, updatePastePos, removePasteText, paste } = copySlice.actions
 
 export default copySlice.reducer
