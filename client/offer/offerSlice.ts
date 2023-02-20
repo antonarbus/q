@@ -36,6 +36,9 @@ const offerSlice = createSlice({
       .addCase(hideCopyContainer, (state) => {
         state.items = state.items.filter(item => item.type !== 'paste')
       })
+      .addCase(removePasteText, (state) => {
+        state.items = state.items.filter(item => item.type !== 'paste')
+      })
       .addCase(paste, (state, action) => {
         const { itemId, pastePos, item } = action.payload
         const itemToPaste = { ...item, id: nanoid() }
