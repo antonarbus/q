@@ -50,7 +50,6 @@ const offerSlice = createSlice({
         if (pastePos === 'middle') spliceSettings.deleteCount++
 
         state.items = state.items.filter(item => item.type !== 'paste')
-
         state.items.splice(spliceSettings.insertAtIndex, spliceSettings.deleteCount, itemToPaste)
       })
   }
