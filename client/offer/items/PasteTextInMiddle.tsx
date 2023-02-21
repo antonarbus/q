@@ -4,11 +4,9 @@ type Props = {
   id: string
 }
 
-export const PasteInHere = ({ id }: Props) => {
-  const isCopied = useSelectorTyped(state => state.copy.isShown)
+export const PasteTextInMiddle = ({ id }: Props) => {
   const { pastePos, itemId } = useSelectorTyped(state => state.copy.place)
 
-  if (!isCopied) return null
   if (pastePos !== 'middle') return null
   if (id !== itemId) return null
 
