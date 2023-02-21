@@ -36,9 +36,7 @@ export const copySlice = createSlice({
       state.place = initialState.place
     },
     paste: (state, action) => {
-      // this is handled in copySlice
-      // const { itemId, pastePos, item } = action.payload
-      // console.log({ itemId, pastePos, item })
+      state.place = initialState.place
     },
   }
 
