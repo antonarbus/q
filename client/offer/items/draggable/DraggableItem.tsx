@@ -29,8 +29,6 @@ export const DraggableItem: React.ComponentClass<ISortableItem, any> = SortableE
         gap: '2px',
         position: 'relative',
         maxWidth: '100%',
-        // marginTop: 10,
-        // marginBottom: 10,
       }}
     >
       {children}
