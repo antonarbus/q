@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion'
 
-export const PasteInBetween = () => (
+export const PasteTextOnTopOrBottom = () => (
   <motion.div
     initial={{ height: 0, opacity: 0 }}
-    animate={{ height: 30, opacity: 1 }}
+    animate={{ height: 'auto', opacity: 1 }}
     exit={{ height: 0, opacity: 0 }}
     transition={{
       height: { duration: 0.3 },

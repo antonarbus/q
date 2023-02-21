@@ -4,12 +4,12 @@ import { updateItemsOrder } from '../offerSlice'
 // import { useLocalStorage } from 'react-use'
 import { arrayMoveImmutable } from 'array-move'
 import { TextItem } from './TextItem'
-import { PasteInBetween } from './PasteInBetween'
+import { PasteTextOnTopOrBottom } from './PasteTextOnTopOrBottom'
 import { AnimatePresence } from 'framer-motion'
 
 export const Items = () => {
   const dispatch = useDispatchTyped()
-  const { items } = useSelectorTyped(state => state.offer)
+  const items = useSelectorTyped(state => state.offer.items)
 
   return (
     <Draggable
@@ -23,7 +23,7 @@ export const Items = () => {
       <AnimatePresence>
         {items.map((item, index) => {
           if (item.type === 'text') return <TextItem key={item.id} item={item} index={index} />
-          if (item.type === 'paste') return <PasteInBetween key={item.id} />
+          if (item.type === 'paste') return <PasteTextOnTopOrBottom key={item.id} />
           return null
         })}
       </AnimatePresence>

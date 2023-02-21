@@ -5,7 +5,7 @@ import { DraggableItem, DragHandle } from './draggable'
 import { ResizablePaper } from './ResizablePaper'
 import { useRef } from 'react'
 import { Resizable } from 're-resizable'
-import { PasteInHere } from './PasteInHere'
+import { PasteTextInMiddle } from './PasteTextInMiddle'
 import { ItemType } from 'client/types'
 import { useSelectorTyped } from 'client/store'
 
@@ -31,7 +31,7 @@ export const TextItem = ({ item, index }: Props) => {
       {/* @ts-ignore */}
       <ResizablePaper key={item.id} width={item.width} index={index} itemRef={itemRef} id={item.id}>
         {parseHtml(item.innerHtml)}
-        <PasteInHere id={item.id}/>
+        <PasteTextInMiddle id={item.id}/>
       </ResizablePaper>
       {/* Right action container is used for symmetry, later probably add there some icons */}
       <ActionsContainer/>
