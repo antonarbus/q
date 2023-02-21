@@ -20,7 +20,7 @@ export const Items = () => {
         localStorage.setItem('currentOffer', JSON.stringify(store.getState().offer))
       }}
     >
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {items.map((item, index) => {
           if (item.type === 'text') return <TextItem key={item.id} item={item} index={index} />
           if (item.type === 'paste') return <PasteTextOnTopOrBottom key={item.id} />
