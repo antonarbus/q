@@ -15,14 +15,7 @@ export const DraggableItem: React.ComponentClass<ISortableItem, any> = SortableE
       initial={{ height: 0, marginTop: 0, marginBottom: 0, opacity: 0, y: '100vh' }}
       animate={{ height: 'auto', marginTop: 10, marginBottom: 10, opacity: 1, y: 0 }}
       exit={{ height: 0, marginTop: 0, marginBottom: 0, opacity: 0, x: 'calc(100vw + 1000px)' }} // off the screen + a bit more, coz do not want to show height animation, but without height jump occurs
-      transition={{
-        height: { duration: 0.5 },
-        opacity: { duration: 0.5 },
-        y: { duration: 0.5 },
-        x: { duration: 0.5 },
-        marginTop: { duration: 0.5 },
-        marginBottom: { duration: 0.5 },
-      }}
+      transition={{ duration: 0.5 }}
       css={{
         display: 'flex',
         justifyContent: 'center',
