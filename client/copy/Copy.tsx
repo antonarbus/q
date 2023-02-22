@@ -3,5 +3,6 @@ import { CopyContainer } from './CopyContainer'
 
 export const Copy = () => {
   const isShown = useSelectorTyped(state => state.copy.isShown)
-  return isShown ? <CopyContainer /> : null
+  if (!isShown) return null
+  return <CopyContainer />
 }

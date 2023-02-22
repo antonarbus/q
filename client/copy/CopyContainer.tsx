@@ -25,8 +25,6 @@ export const CopyContainer = () => {
   const { x, y } = useCursorCords()
   // const { x, y } = { x: 300, y: 0 }
 
-  if (!items.length) return null
-
   return (
     <motion.div
       ref={ref}
