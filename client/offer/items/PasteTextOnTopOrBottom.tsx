@@ -19,8 +19,8 @@ export const PasteTextOnTopOrBottom = () => {
         placeItems: 'center',
         fontWeight: 600,
         color: '#b4b4b4',
-        cursor: 'default',
         userSelect: 'none',
+        cursor: 'pointer'
       }}
     >
       Paste here

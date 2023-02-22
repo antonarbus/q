@@ -23,8 +23,8 @@ export const PasteTextInMiddle = ({ id }: Props) => {
         display: 'grid',
         placeItems: 'center',
         zIndex: 2,
-        cursor: 'default',
         userSelect: 'none',
+        cursor: 'pointer'
       }}
     >
       Paste here

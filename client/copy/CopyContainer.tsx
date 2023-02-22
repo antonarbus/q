@@ -22,8 +22,8 @@ export const CopyContainer = () => {
   useDisableNavItems()
   const items = useSelectorTyped(state => state.copy.items)
   const isFirstMount = useFirstMountState()
-  const { x, y } = useCursorCords()
-  // const { x, y } = { x: 300, y: 0 }
+  // const { x, y } = useCursorCords()
+  const { x, y } = { x: 300, y: 0 }
 
   return (
     <motion.div
