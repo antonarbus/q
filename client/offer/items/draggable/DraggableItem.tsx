@@ -19,7 +19,6 @@ export const DraggableItem: React.ComponentClass<ISortableItem, any> = SortableE
       css={{
         display: 'flex',
         justifyContent: 'center',
-        gap: '2px',
         position: 'relative',
         maxWidth: '100%',
       }}

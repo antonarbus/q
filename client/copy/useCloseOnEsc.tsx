@@ -1,6 +1,6 @@
 import { useDispatchTyped } from 'client/store'
 import { useEffectOnce } from 'react-use'
-import { hideCopyContainer, removePasteText, updatePastePos } from './copySlice'
+import { hideCopyContainer } from './copySlice'
 
 export function useCloseOnEsc() {
   const dispatch = useDispatchTyped()
