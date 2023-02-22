@@ -25,6 +25,8 @@ export const CopyContainer = () => {
   const { x, y } = useCursorCords()
   // const { x, y } = { x: 300, y: 0 }
 
+  if (!items.length) return null
+
   return (
     <motion.div
       ref={ref}
@@ -48,12 +50,10 @@ export const CopyContainer = () => {
         boxShadow: '#00000033 0px 0px 10px 0px',
         overflow: 'hidden',
         width: 'auto',
-        // outline: '1px solid red',
       }}
     >
       <div
         css={{
-          // outline: '1px solid orange',
           margin: 10, // needed to have a gap at the bottom specifically, otherwise overflow: hidden trims the content at the bottom edge
           padding: 5, // needed to avoid shadow trimming by overflow: hidden
           overflowY: 'hidden',
