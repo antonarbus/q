@@ -5,6 +5,9 @@ import { containerPadding, containerWidth } from './CopyContainer'
 
 export const FirstCopiedItem = () => {
   const items = useSelectorTyped(state => state.copy.items)
+
+  if (!items.length) return null
+
   const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / items[0].width
 
   return (
