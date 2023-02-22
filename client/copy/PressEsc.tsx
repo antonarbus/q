@@ -7,11 +7,13 @@ export const PressEsc = () => {
   return (
     <div
       css={{
+        position: 'relative',
         textAlign: 'center',
         color: 'grey',
         fontSize: '12px',
         marginBottom: '10px',
-        whiteSpace: 'nowrap'
+        whiteSpace: 'nowrap',
+        zIndex: 1
       }}
     >
       <Key>Esc</Key> to exit
