@@ -6,6 +6,9 @@ import { containerPadding, containerWidth, marginBottomForRestOfItems } from './
 
 export const RestOfCopiedItems = () => {
   const items = useSelectorTyped(state => state.copy.items)
+
+  if (!items.length) return null
+
   const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / items[0].width
 
   return (
