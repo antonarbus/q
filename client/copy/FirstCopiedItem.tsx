@@ -1,7 +1,7 @@
 import parseHtml from 'html-react-parser'
 import { motion } from 'framer-motion'
 import { useSelectorTyped } from 'client/store'
-import { containerPadding, containerWidth } from './CopyContainer'
+import { containerPadding, containerWidth, itemMarginBottom } from './CopyContainer'
 
 export const FirstCopiedItem = () => {
   const items = useSelectorTyped(state => state.copy.items)
@@ -20,7 +20,7 @@ export const FirstCopiedItem = () => {
         height: items[0].height * scaleFactorForFirstItem,
         width: items[0].width * scaleFactorForFirstItem,
         marginTop: 15,
-        marginBottom: 10
+        marginBottom: itemMarginBottom
       }}
     >
       <div
