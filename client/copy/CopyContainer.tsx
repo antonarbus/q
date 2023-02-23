@@ -13,7 +13,7 @@ import { usePasteClick } from './usePasteClick'
 
 export const containerWidth = 200
 export const containerPadding = 20
-export const marginBottomForRestOfItems = 5
+export const itemMarginBottom = 5
 
 export const CopyContainer = () => {
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>

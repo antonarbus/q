@@ -2,7 +2,7 @@ import parseHtml from 'html-react-parser'
 import hash from 'object-hash'
 import { motion } from 'framer-motion'
 import { useSelectorTyped } from 'client/store'
-import { containerPadding, containerWidth, marginBottomForRestOfItems } from './CopyContainer'
+import { containerPadding, containerWidth, itemMarginBottom } from './CopyContainer'
 
 export const RestOfCopiedItems = () => {
   const items = useSelectorTyped(state => state.copy.items)
@@ -14,7 +14,7 @@ export const RestOfCopiedItems = () => {
   return (
     <motion.div
       initial={{ y: -items[0].height * scaleFactorForFirstItem }}
-      animate={{ y: marginBottomForRestOfItems }}
+      animate={{ y: itemMarginBottom }}
       transition={{ delay: 0, duration: 1, type: 'spring' }}
       key={hash(items)}
     >
@@ -29,7 +29,7 @@ export const RestOfCopiedItems = () => {
             css={{
               height: item.height * scaleFactor,
               width: item.width * scaleFactor,
-              marginBottom: marginBottomForRestOfItems
+              marginBottom: itemMarginBottom
             }}
           >
             <div
