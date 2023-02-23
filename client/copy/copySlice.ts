@@ -4,15 +4,17 @@ import { CopyPlaceType, ItemType } from 'client/types'
 type Props = {
   isShown: boolean,
   initCords: { x: number, y: number },
-  items: ItemType[]
-  place: CopyPlaceType
+  items: ItemType[],
+  place: CopyPlaceType,
+  isCopying: boolean
 }
 
 const initialState: Props = {
   isShown: false,
   initCords: { x: 0, y: 0 },
   items: [],
-  place: { pastePos: 'nowhere', itemId: 'some id' }
+  place: { pastePos: 'nowhere', itemId: 'some id' },
+  isCopying: true
 }
 
 export const copySlice = createSlice({
@@ -27,6 +29,7 @@ export const copySlice = createSlice({
       state.initCords = action.payload
     },
     addItemIntoCopyContainer: (state, action) => {
+      state.isCopying = true
       state.items.unshift(action.payload)
     },
     removeItemFromCopyContainer: (state) => {
@@ -39,6 +42,7 @@ export const copySlice = createSlice({
       state.place = initialState.place
     },
     paste: (state, action) => {
+      state.isCopying = false
       state.place = initialState.place
     },
   }
