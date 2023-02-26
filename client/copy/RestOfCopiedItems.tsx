@@ -46,7 +46,7 @@ export const RestOfCopiedItems = () => {
       custom={animationProps}
     >
       <motion.div
-        key={`unique key for rest of items is the array.length = ${items.length}`}
+        key={items.length}
         custom={animationProps}
         variants={variants}
         initial='initial'
@@ -67,7 +67,7 @@ export const RestOfCopiedItems = () => {
                 marginBottom: itemMarginBottom,
                 background: 'white',
                 borderRadius: 4,
-                boxShadow: '#00000033 0px 0px 12px 2px',
+                boxShadow: '#00000033 0px 0px 6px 2px',
               }}
             >
               <div
