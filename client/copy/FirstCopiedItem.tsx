@@ -52,17 +52,16 @@ export const FirstCopiedItem = () => {
           height: items[0].height * scaleFactorForFirstItem,
           width: items[0].width * scaleFactorForFirstItem,
           marginTop: 15,
-          marginBottom: itemMarginBottom
+          marginBottom: itemMarginBottom,
+          background: 'white',
+          borderRadius: 4,
+          boxShadow: '#00000033 0px 0px 12px 2px',
         }}
       >
         <div
           css={{
-            background: 'white',
-            borderRadius: 6,
-            // boxShadow: '#00000033 0px 0px 12px 2px',
-            boxShadow: '#00000033 0px 0px 10px 0px',
             padding: 20,
-            marginBottom: 5,
+            // marginBottom: 5,
             width: items[0].width,
             transformOrigin: 'left top',
             scale: `${scaleFactorForFirstItem}`,
