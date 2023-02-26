@@ -2,6 +2,7 @@ import parseHtml from 'html-react-parser'
 import { AnimatePresence, motion, Variants } from 'framer-motion'
 import { useSelectorTyped } from 'client/store'
 import { containerPadding, containerWidth, itemMarginBottom } from './CopyContainer'
+import { useFirstMountState } from 'react-use'
 
 const variants: Variants = {
   initial: (isCopying: boolean) => {
@@ -23,10 +24,13 @@ let isCopying = true
 
 export const FirstCopiedItem = () => {
   const items = useSelectorTyped(state => state.copy.items)
+  // ! make a delay for the first copy el
+  // const isFirstMount = useFirstMountState()
+
   isCopying = items.length > prevItemsLength
   prevItemsLength = items.length
 
-  if (!items.length) return null
+  if (items.length === 0) return null
 
   const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / items[0].width
 
@@ -37,11 +41,11 @@ export const FirstCopiedItem = () => {
     >
       <motion.div
         key={`unique key for first item is the array.length = ${items.length}`}
+        custom={isCopying}
         variants={variants}
         initial='initial'
         animate='animate'
         exit='exit'
-        custom={isCopying}
         css={{
           height: items[0].height * scaleFactorForFirstItem,
           width: items[0].width * scaleFactorForFirstItem,
@@ -53,7 +57,8 @@ export const FirstCopiedItem = () => {
           css={{
             background: 'white',
             borderRadius: 6,
-            boxShadow: '#00000033 0px 0px 12px 2px',
+            // boxShadow: '#00000033 0px 0px 12px 2px',
+            boxShadow: '#00000033 0px 0px 10px 0px',
             padding: 20,
             marginBottom: 5,
             width: items[0].width,
