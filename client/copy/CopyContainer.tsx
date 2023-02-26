@@ -55,7 +55,7 @@ export const CopyContainer = () => {
         }}
       >
         <PressEsc />
-        {/* <FirstCopiedItem /> */}
+        <FirstCopiedItem />
         <RestOfCopiedItems />
       </div>
     </motion.div>
