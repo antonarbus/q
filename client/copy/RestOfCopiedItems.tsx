@@ -1,53 +1,89 @@
 import parseHtml from 'html-react-parser'
-import hash from 'object-hash'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion, Variants } from 'framer-motion'
 import { useSelectorTyped } from 'client/store'
 import { containerPadding, containerWidth, itemMarginBottom } from './CopyContainer'
 
+type AnimationPropsType = {
+  isCopying: boolean,
+  fistItemHeight: number,
+}
+
+const variants: Variants = {
+  initial: ({ isCopying, fistItemHeight }: AnimationPropsType) => {
+    if (!isCopying) return {}
+    return { y: -fistItemHeight }
+  },
+  animate: ({ isCopying, fistItemHeight }: AnimationPropsType) => {
+    if (!isCopying) return {}
+    return { y: itemMarginBottom, transition: { delay: 0, duration: 0.5, type: 'spring' } }
+  },
+  exit: ({ isCopying, fistItemHeight }: AnimationPropsType) => {
+    if (isCopying) return {}
+    return { y: -fistItemHeight, transition: { delay: 0, duration: 0.5, type: 'spring' } }
+  },
+}
+
+let prevItemsLength = 0
+let isCopying = true
+
 export const RestOfCopiedItems = () => {
   const items = useSelectorTyped(state => state.copy.items)
+  isCopying = items.length > prevItemsLength
+  prevItemsLength = items.length
 
   if (!items.length) return null
 
   const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / items[0].width
 
+  const animationProps: AnimationPropsType = {
+    isCopying,
+    fistItemHeight: items[0].height * scaleFactorForFirstItem,
+  }
+
   return (
-    <motion.div
-      key={hash(items)}
-      initial={{ y: -items[0].height * scaleFactorForFirstItem }}
-      animate={{ y: itemMarginBottom }}
-      transition={{ delay: 0, duration: 1, type: 'spring' }}
+    <AnimatePresence
+      mode='wait'
+      custom={animationProps}
     >
-      {items.map((item, index) => {
-        const scaleFactor = (containerWidth - 2 * containerPadding) / item.width
+      <motion.div
+        key={`unique key for rest of items is the array.length = ${items.length}`}
+        custom={animationProps}
+        variants={variants}
+        initial='initial'
+        animate='animate'
+        exit='exit'
+      >
+        {items.map((item, index) => {
+          const scaleFactor = (containerWidth - 2 * containerPadding) / item.width
 
-        if (index === 0) return null
+          if (index === 0) return null
 
-        return (
-          <div
-            key={`copy el ${items.length - index}`}
-            css={{
-              height: item.height * scaleFactor,
-              width: item.width * scaleFactor,
-              marginBottom: itemMarginBottom
-            }}
-          >
+          return (
             <div
+              key={items.length - index}
               css={{
-                background: 'white',
-                borderRadius: 6,
-                boxShadow: '#00000033 0px 0px 10px 0px',
-                padding: 20,
-                width: item.width,
-                transformOrigin: 'left top',
-                scale: `${scaleFactor}`,
+                height: item.height * scaleFactor,
+                width: item.width * scaleFactor,
+                marginBottom: itemMarginBottom
               }}
             >
-              {parseHtml(item.innerHtml)}
+              <div
+                css={{
+                  background: 'white',
+                  borderRadius: 6,
+                  boxShadow: '#00000033 0px 0px 10px 0px',
+                  padding: 20,
+                  width: item.width,
+                  transformOrigin: 'left top',
+                  scale: `${scaleFactor}`,
+                }}
+              >
+                {parseHtml(item.innerHtml)}
+              </div>
             </div>
-          </div>
-        )
-      })}
-    </motion.div>
+          )
+        })}
+      </motion.div>
+    </AnimatePresence>
   )
 }
