@@ -1,7 +1,7 @@
 import { useCursorCords } from './useCursorCords'
-import { motion } from 'framer-motion'
+import { motion, useAnimationControls } from 'framer-motion'
 import { PressEsc } from './PressEsc'
-import { useRef } from 'react'
+import { useEffect } from 'react'
 import { useFirstMountState } from 'react-use'
 import { FirstCopiedItem } from './FirstCopiedItem'
 import { RestOfCopiedItems } from './RestOfCopiedItems'
@@ -15,28 +15,47 @@ export const containerPadding = 20
 export const itemMarginBottom = 5
 
 export const CopyContainer = () => {
-  const ref = useRef() as React.MutableRefObject<HTMLDivElement>
   usePasteTextPos()
   usePasteClick()
   useDisableNavItems()
   const isFirstMount = useFirstMountState()
-  // const { x, y } = useCursorCords()
-  const { x, y } = { x: 300, y: 0 }
-  const itemsLength = useSelectorTyped(state => state.copy.items.length)
+  const { x, y } = useCursorCords()
+  // const { x, y } = { x: 300, y: 0 }
+  const items = useSelectorTyped(state => state.copy.items)
+  const controls = useAnimationControls()
+
+  useEffect(() => {
+    const newHeight = items.reduce((accumulator, item) => {
+      const scaleFactor = (containerWidth - 2 * containerPadding) / item.width
+      return accumulator + scaleFactor * item.height + 5
+    }, 70)
+
+    isFirstMount && controls.start({
+      width: 'auto',
+      transition: { delay: 0, duration: 0.5, type: 'spring' }
+    })
+
+    controls.start({
+      height: newHeight,
+      transition: { delay: 0, duration: 0.5, type: 'spring' },
+    })
+  }, [items.length])
 
   return (
     <motion.div
-      ref={ref}
-      key={'container ' + itemsLength}
-      initial={{
-        height: ref?.current?.offsetHeight || 0,
-        ...(isFirstMount && { width: 0 })
-      }}
-      animate={{
-        height: 'auto',
-        ...(isFirstMount && { width: 'auto' })
-      }}
-      transition={{ delay: 0, duration: 1, type: 'spring' }}
+      // key={items.length}
+      // initial={{
+      //   height: ref?.current?.offsetHeight || 0,
+      //   ...(isFirstMount && { width: 0 })
+      // }}
+      // animate={{
+      //   height: 'auto',
+      //   ...(isFirstMount && { width: 'auto' })
+      // }}
+      // transition={{
+      //   delay: 0, duration: 0.5, type: 'spring'
+      // }}
+      animate={controls}
       css={{
         borderRadius: 6,
         position: 'fixed',
@@ -44,9 +63,11 @@ export const CopyContainer = () => {
         top: y + 30,
         left: x + 15,
         background: 'white',
-        boxShadow: '#00000033 0px 0px 10px 0px',
+        boxShadow: '#00000033 0px 0px 6px 2px',
         overflow: 'hidden',
-        width: 'auto',
+        height: 0,
+        width: 0,
+        maxHeight: 265
       }}
     >
       <div
