@@ -10,25 +10,11 @@ const variants: Variants = {
   },
   animate: (isCopying: boolean) => {
     if (!isCopying) return {}
-    return {
-      y: 0,
-      transition: {
-        delay: 0,
-        duration: 5.5,
-        type: 'spring'
-      }
-    }
+    return { y: 0, transition: { delay: 0, duration: 0.5, type: 'spring' } }
   },
   exit: (isCopying: boolean) => {
     if (isCopying) return {}
-    return {
-      y: -500,
-      transition: {
-        delay: 0,
-        duration: 5.5,
-        type: 'spring'
-      }
-    }
+    return { y: -500, transition: { delay: 0, duration: 0.5, type: 'spring' } }
   },
 }
 
@@ -50,7 +36,7 @@ export const FirstCopiedItem = () => {
       custom={isCopying}
     >
       <motion.div
-        key={`last item number ${items.length}`}
+        key={`unique key for first item is the array.length = ${items.length}`}
         variants={variants}
         initial='initial'
         animate='animate'
