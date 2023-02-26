@@ -24,13 +24,10 @@ const variants: Variants = {
 }
 
 let prevFirstItemHeight = 0
-let prevItemsLength = 0
-let isCopying = true
 
 export const RestOfCopiedItems = () => {
   const items = useSelectorTyped(state => state.copy.items)
-  isCopying = items.length > prevItemsLength
-  prevItemsLength = items.length
+  const isCopying = useSelectorTyped(state => state.copy.isCopying)
 
   if (items.length === 0) return null
 
