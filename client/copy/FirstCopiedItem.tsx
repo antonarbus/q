@@ -6,7 +6,7 @@ import { containerPadding, containerWidth, itemMarginBottom } from './CopyContai
 const variants: Variants = {
   initial: (isCopying: boolean) => {
     if (!isCopying) return {}
-    return { y: isCopying ? -500 : 0 }
+    return { y: -500 }
   },
   animate: (isCopying: boolean) => {
     if (!isCopying) return {}
