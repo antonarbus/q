@@ -5,6 +5,7 @@ import { containerPadding, containerWidth, itemMarginBottom } from './CopyContai
 
 const variants: Variants = {
   initial: (isCopying: boolean) => {
+    if (!isCopying) return {}
     return { y: isCopying ? -500 : 0 }
   },
   animate: (isCopying: boolean) => {
@@ -13,7 +14,7 @@ const variants: Variants = {
       y: 0,
       transition: {
         delay: 0,
-        duration: 1.5,
+        duration: 5.5,
         type: 'spring'
       }
     }
@@ -24,7 +25,7 @@ const variants: Variants = {
       y: -500,
       transition: {
         delay: 0,
-        duration: 1.5,
+        duration: 5.5,
         type: 'spring'
       }
     }
@@ -32,7 +33,7 @@ const variants: Variants = {
 }
 
 let prevItemsLength = 0
-let isCopying: boolean
+let isCopying = true
 
 export const FirstCopiedItem = () => {
   const items = useSelectorTyped(state => state.copy.items)
