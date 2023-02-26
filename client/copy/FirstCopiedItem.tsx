@@ -2,33 +2,35 @@ import parseHtml from 'html-react-parser'
 import { AnimatePresence, motion, Variants } from 'framer-motion'
 import { useSelectorTyped } from 'client/store'
 import { containerPadding, containerWidth, itemMarginBottom } from './CopyContainer'
-import { useFirstMountState } from 'react-use'
+
+type AnimationPropsType = {
+  isCopying: boolean,
+  isSoleItem: boolean,
+}
 
 const variants: Variants = {
-  initial: (isCopying: boolean) => {
+  initial: ({ isCopying }: AnimationPropsType) => {
     if (!isCopying) return {}
     return { y: -500 }
   },
-  animate: (isCopying: boolean) => {
+  animate: ({ isCopying, isSoleItem }: AnimationPropsType) => {
     if (!isCopying) return {}
-    return { y: 0, transition: { delay: 0, duration: 0.5, type: 'spring' } }
+    return { y: 0, transition: { delay: isSoleItem ? 0.5 : 0, duration: 0.5, type: 'spring' } }
   },
-  exit: (isCopying: boolean) => {
+  exit: ({ isCopying }: AnimationPropsType) => {
     if (isCopying) return {}
     return { y: -500, transition: { delay: 0, duration: 0.5, type: 'spring' } }
   },
 }
 
-let prevItemsLength = 0
-let isCopying = true
-
 export const FirstCopiedItem = () => {
   const items = useSelectorTyped(state => state.copy.items)
-  // ! make a delay for the first copy el
-  // const isFirstMount = useFirstMountState()
+  const isCopying = useSelectorTyped(state => state.copy.isCopying)
 
-  isCopying = items.length > prevItemsLength
-  prevItemsLength = items.length
+  const animationProps: AnimationPropsType = {
+    isCopying,
+    isSoleItem: items.length === 1
+  }
 
   if (items.length === 0) return null
 
@@ -37,11 +39,11 @@ export const FirstCopiedItem = () => {
   return (
     <AnimatePresence
       mode='wait'
-      custom={isCopying}
+      custom={animationProps}
     >
       <motion.div
         key={`unique key for first item is the array.length = ${items.length}`}
-        custom={isCopying}
+        custom={animationProps}
         variants={variants}
         initial='initial'
         animate='animate'
