@@ -1,15 +1,13 @@
-import hash from 'object-hash'
-import { useSelectorTyped } from 'client/store'
 import { useCursorCords } from './useCursorCords'
 import { motion } from 'framer-motion'
 import { PressEsc } from './PressEsc'
 import { useRef } from 'react'
-import { usePasteMove } from './usePasteMove'
 import { useFirstMountState } from 'react-use'
 import { FirstCopiedItem } from './FirstCopiedItem'
 import { RestOfCopiedItems } from './RestOfCopiedItems'
 import { useDisableNavItems } from './useDisableNavItems'
 import { usePasteClick } from './usePasteClick'
+import { usePasteTextPos } from './usePasteTextPos'
 
 export const containerWidth = 200
 export const containerPadding = 20
@@ -17,10 +15,9 @@ export const itemMarginBottom = 5
 
 export const CopyContainer = () => {
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>
-  usePasteMove()
+  usePasteTextPos()
   usePasteClick()
   useDisableNavItems()
-  const items = useSelectorTyped(state => state.copy.items)
   const isFirstMount = useFirstMountState()
   // const { x, y } = useCursorCords()
   const { x, y } = { x: 300, y: 0 }
@@ -37,7 +34,6 @@ export const CopyContainer = () => {
         ...(isFirstMount && { width: 'auto' })
       }}
       transition={{ delay: 0, duration: 1.1, type: 'spring' }}
-      key={hash(items)}
       css={{
         borderRadius: 6,
         position: 'fixed',
@@ -60,7 +56,7 @@ export const CopyContainer = () => {
       >
         <PressEsc />
         <FirstCopiedItem />
-        <RestOfCopiedItems />
+        {/* <RestOfCopiedItems /> */}
       </div>
     </motion.div>
   )
