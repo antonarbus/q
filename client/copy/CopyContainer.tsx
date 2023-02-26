@@ -8,6 +8,7 @@ import { RestOfCopiedItems } from './RestOfCopiedItems'
 import { useDisableNavItems } from './useDisableNavItems'
 import { usePasteClick } from './usePasteClick'
 import { usePasteTextPos } from './usePasteTextPos'
+import { useSelectorTyped } from 'client/store'
 
 export const containerWidth = 200
 export const containerPadding = 20
@@ -21,10 +22,12 @@ export const CopyContainer = () => {
   const isFirstMount = useFirstMountState()
   // const { x, y } = useCursorCords()
   const { x, y } = { x: 300, y: 0 }
+  const itemsLength = useSelectorTyped(state => state.copy.items.length)
 
   return (
     <motion.div
       ref={ref}
+      key={'container ' + itemsLength}
       initial={{
         height: ref?.current?.offsetHeight || 0,
         ...(isFirstMount && { width: 0 })
@@ -33,7 +36,7 @@ export const CopyContainer = () => {
         height: 'auto',
         ...(isFirstMount && { width: 'auto' })
       }}
-      transition={{ delay: 0, duration: 1.1, type: 'spring' }}
+      transition={{ delay: 0, duration: 1, type: 'spring' }}
       css={{
         borderRadius: 6,
         position: 'fixed',
