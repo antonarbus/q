@@ -5,24 +5,25 @@ import { containerPadding, containerWidth, itemMarginBottom } from './CopyContai
 
 type AnimationPropsType = {
   isCopying: boolean,
-  fistItemHeight: number,
+  prevFirstItemHeight: number,
 }
 
 const variants: Variants = {
-  initial: ({ isCopying, fistItemHeight }: AnimationPropsType) => {
+  initial: ({ isCopying, prevFirstItemHeight }: AnimationPropsType) => {
     if (!isCopying) return {}
-    return { y: -fistItemHeight }
+    return { y: -prevFirstItemHeight }
   },
-  animate: ({ isCopying, fistItemHeight }: AnimationPropsType) => {
+  animate: ({ isCopying }: AnimationPropsType) => {
     if (!isCopying) return {}
-    return { y: itemMarginBottom, transition: { delay: 0, duration: 0.5, type: 'spring' } }
+    return { y: 0, transition: { delay: 0, duration: 0.5, type: 'spring' } }
   },
-  exit: ({ isCopying, fistItemHeight }: AnimationPropsType) => {
+  exit: ({ isCopying, prevFirstItemHeight }: AnimationPropsType) => {
     if (isCopying) return {}
-    return { y: -fistItemHeight, transition: { delay: 0, duration: 0.5, type: 'spring' } }
+    return { y: -prevFirstItemHeight, transition: { delay: 0, duration: 0.5, type: 'spring' } }
   },
 }
 
+let prevFirstItemHeight = 0
 let prevItemsLength = 0
 let isCopying = true
 
@@ -31,14 +32,16 @@ export const RestOfCopiedItems = () => {
   isCopying = items.length > prevItemsLength
   prevItemsLength = items.length
 
-  if (!items.length) return null
+  if (items.length === 0) return null
 
   const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / items[0].width
 
   const animationProps: AnimationPropsType = {
     isCopying,
-    fistItemHeight: items[0].height * scaleFactorForFirstItem,
+    prevFirstItemHeight,
   }
+
+  prevFirstItemHeight = items[0].height * scaleFactorForFirstItem + itemMarginBottom
 
   return (
     <AnimatePresence
