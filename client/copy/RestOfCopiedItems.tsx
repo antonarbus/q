@@ -13,10 +13,10 @@ export const RestOfCopiedItems = () => {
 
   return (
     <motion.div
+      key={hash(items)}
       initial={{ y: -items[0].height * scaleFactorForFirstItem }}
       animate={{ y: itemMarginBottom }}
       transition={{ delay: 0, duration: 1, type: 'spring' }}
-      key={hash(items)}
     >
       {items.map((item, index) => {
         const scaleFactor = (containerWidth - 2 * containerPadding) / item.width
