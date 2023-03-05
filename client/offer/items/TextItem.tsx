@@ -9,6 +9,7 @@ import { PasteTextInMiddle } from './PasteTextInMiddle'
 import { ItemType } from 'client/types'
 import { useSelectorTyped } from 'client/store'
 import { DeleteIcon } from './DeleteIcon'
+import { CutIcon } from './CutIcon'
 
 type Props = {
   item: ItemType
@@ -27,6 +28,7 @@ export const TextItem = ({ item, index }: Props) => {
       <ActionsContainer>
         <DragHandle />
         <CopyIcon itemToCopy={item} itemRef={itemRef} />
+        <CutIcon itemToCut={item} itemRef={itemRef} />
         <DeleteIcon itemToDelete={item}/>
       </ActionsContainer>
       {/* @ts-ignore */}
