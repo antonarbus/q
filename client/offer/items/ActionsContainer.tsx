@@ -13,8 +13,9 @@ export const ActionsContainer = ({ children }: Props) => (
       width: 20,
       flexShrink: 0,
       '& > *:hover': {
-        scale: '1.1',
-        color: 'black'
+        scale: '1.3',
+        color: 'black',
+        transition: 'scale 200ms'
       }
     }}
   >
