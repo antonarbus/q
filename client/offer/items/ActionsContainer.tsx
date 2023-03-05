@@ -8,9 +8,14 @@ export const ActionsContainer = ({ children }: Props) => (
     css={{
       display: 'flex',
       flexDirection: 'column',
+      gap: 3,
       alignItems: 'center',
       width: 20,
-      flexShrink: 0
+      flexShrink: 0,
+      '& > *:hover': {
+        scale: '1.1',
+        color: 'black'
+      }
     }}
   >
     {children}

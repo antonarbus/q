@@ -6,18 +6,13 @@ const Handle = () => {
   const isPasteMode = useSelectorTyped(state => state.copy.isShown)
 
   return (
-    <span
+    <MdDragIndicator
       css={{
+        color: isPasteMode ? '#acacac' : 'inherit',
         cursor: isPasteMode ? 'default' : 'move'
       }}
-    >
-      <MdDragIndicator
-        css={{
-          color: isPasteMode ? '#acacac' : 'inherit'
-        }}
-      />
-    </span>
+    />
   )
 }
 
-export const DragHandle = SortableHandle(Handle)
+export const DragIcon = SortableHandle(Handle)
