@@ -14,7 +14,11 @@ export const CopyIcon = ({ itemToCopy, itemRef }: Props) => {
 
   return (
     <MdCopyAll
-      css={{ cursor: 'pointer' }}
+      css={{
+        cursor: 'pointer',
+        position: 'relative',
+        top: 1
+      }}
       onClick={(e: React.MouseEvent) => {
         dispatch(saveInitCords({ x: e.clientX, y: e.clientY }))
         dispatch(showCopyContainer())
