@@ -8,8 +8,15 @@ const Handle = () => {
   return (
     <MdDragIndicator
       css={{
-        color: isPasteMode ? '#acacac' : 'inherit',
-        cursor: isPasteMode ? 'default' : 'move'
+        color: !isPasteMode ? 'inherit' : '#acacac',
+        cursor: !isPasteMode ? 'pointer' : 'default',
+        ...(!isPasteMode && {
+          ':hover': {
+            scale: '1.3',
+            color: 'black',
+            transition: 'scale 200ms'
+          }
+        })
       }}
     />
   )

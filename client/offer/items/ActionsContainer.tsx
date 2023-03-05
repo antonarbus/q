@@ -12,11 +12,6 @@ export const ActionsContainer = ({ children }: Props) => (
       alignItems: 'center',
       width: 20,
       flexShrink: 0,
-      '& > *:hover': {
-        scale: '1.3',
-        color: 'black',
-        transition: 'scale 200ms'
-      }
     }}
   >
     {children}
