@@ -1,7 +1,9 @@
-import { useDispatchTyped, useSelectorTyped } from 'client/store'
+import { useDispatchTyped } from 'client/store'
 import { ItemType } from 'client/types'
 import { TbCut } from 'react-icons/tb'
 import { Resizable } from 're-resizable'
+import { addItemIntoCopyContainer, saveInitCords, showCopyContainer } from 'client/copy/copySlice'
+import { deleteItem } from '../offerSlice'
 
 type Props = {
   itemToCut: ItemType,
@@ -21,9 +23,12 @@ export const CutIcon = ({ itemToCut, itemRef }: Props) => {
           transition: 'scale 200ms'
         }
       }}
-      onClick={() => {
-        alert(666)
-        // dispatch(deleteItem(itemToDelete))
+      onClick={(e: React.MouseEvent) => {
+        dispatch(saveInitCords({ x: e.clientX, y: e.clientY }))
+        dispatch(showCopyContainer())
+        const item = { ...itemToCut, height: itemRef?.current?.resizable?.clientHeight || 0 }
+        dispatch(addItemIntoCopyContainer(item))
+        dispatch(deleteItem(itemToCut))
       }}
     />
   )
