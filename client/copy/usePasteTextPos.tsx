@@ -1,7 +1,7 @@
 import hash from 'object-hash'
 import { useEffectOnce, useUnmount } from 'react-use'
 import { store } from 'client/store'
-import { removePasteText, updatePastePos } from './copySlice'
+import { removePasteText, updatePasteTextPos } from './copySlice'
 import { CopyPlaceType } from 'client/types'
 
 function movePasteTextAfterCursor(e: MouseEvent) {
@@ -36,7 +36,7 @@ function movePasteTextAfterCursor(e: MouseEvent) {
   const prevPastePlace = store.getState().copy.place.pastePos
   if (hash(prevPastePlace) === hash(pastePlace)) return
 
-  store.dispatch(updatePastePos(pastePlace))
+  store.dispatch(updatePasteTextPos(pastePlace))
 }
 
 export const usePasteTextPos = () => {

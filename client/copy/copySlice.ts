@@ -35,13 +35,13 @@ export const copySlice = createSlice({
     removeItemFromCopyContainer: (state) => {
       state.items.shift()
     },
-    updatePastePos: (state, action) => {
+    updatePasteTextPos: (state, action) => {
       state.place = action.payload
     },
     removePasteText: (state) => {
       state.place = initialState.place
     },
-    paste: (state, action) => {
+    pasteItem: (state, action) => {
       state.isCopying = false
       state.place = initialState.place
     },
@@ -49,6 +49,6 @@ export const copySlice = createSlice({
 
 })
 
-export const { showCopyContainer, hideCopyContainer, saveInitCords, addItemIntoCopyContainer, removeItemFromCopyContainer, updatePastePos, removePasteText, paste } = copySlice.actions
+export const { showCopyContainer, hideCopyContainer, saveInitCords, addItemIntoCopyContainer, removeItemFromCopyContainer, updatePasteTextPos, removePasteText, pasteItem } = copySlice.actions
 
 export default copySlice.reducer

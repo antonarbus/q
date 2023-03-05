@@ -17,7 +17,12 @@ export const CopyIcon = ({ itemToCopy, itemRef }: Props) => {
       css={{
         cursor: 'pointer',
         position: 'relative',
-        top: 1
+        top: 1,
+        ':hover': {
+          scale: '1.3',
+          color: 'black',
+          transition: 'scale 200ms'
+        }
       }}
       onClick={(e: React.MouseEvent) => {
         dispatch(saveInitCords({ x: e.clientX, y: e.clientY }))

@@ -1,5 +1,5 @@
 import { createSlice, current } from '@reduxjs/toolkit'
-import { hideCopyContainer, paste, removePasteText, updatePastePos } from 'client/copy/copySlice'
+import { hideCopyContainer, pasteItem, removePasteText, updatePasteTextPos } from 'client/copy/copySlice'
 import { CopyPlaceType, ItemType, OfferType } from 'client/types'
 import { nanoid } from 'nanoid'
 import { templateOffer } from './templateOffer'
@@ -12,19 +12,22 @@ const offerSlice = createSlice({
   name: 'offer',
   initialState,
   reducers: {
-    updateItemOrder: (state, action) => {
+    saveItemWidth: (state, action) => {
       // console.log(current(state))
       const { width, index } = action.payload
       state.items[index].width = width
     },
-    updateItemsOrder: (state, action) => {
+    saveItemsOrder: (state, action) => {
       state.items = action.payload.sortedItems
+    },
+    deleteItem: (state, action) => {
+      state.items = state.items.filter(item => item.id !== action.payload.id)
     },
   },
   extraReducers: (builder) => {
     // add or remove paste text
     builder
-      .addCase(updatePastePos, (state, action) => {
+      .addCase(updatePasteTextPos, (state, action) => {
         // respond to updatePastePos() action of copySlice, takes current state slice, but action.payload comes from copySlice
         const { pastePos, itemId }: CopyPlaceType = action.payload
         state.items = state.items.filter(item => item.type !== 'paste')
@@ -39,7 +42,7 @@ const offerSlice = createSlice({
       .addCase(removePasteText, (state) => {
         state.items = state.items.filter(item => item.type !== 'paste')
       })
-      .addCase(paste, (state, action) => {
+      .addCase(pasteItem, (state, action) => {
         const { itemId, pastePos, item } = action.payload
         const itemToPaste = { ...item, id: nanoid() }
         const hoveredItemIndex = state.items.findIndex(item => item.id === itemId)
@@ -56,4 +59,4 @@ const offerSlice = createSlice({
 })
 
 export default offerSlice.reducer
-export const { updateItemOrder, updateItemsOrder } = offerSlice.actions
+export const { saveItemWidth, saveItemsOrder, deleteItem } = offerSlice.actions
