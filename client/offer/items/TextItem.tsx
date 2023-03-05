@@ -12,7 +12,6 @@ import { useSelectorTyped } from 'client/store'
 type Props = {
   item: ItemType
   index: number
-
 }
 
 export const TextItem = ({ item, index }: Props) => {
@@ -33,7 +32,7 @@ export const TextItem = ({ item, index }: Props) => {
         {parseHtml(item.innerHtml)}
         <PasteTextInMiddle id={item.id}/>
       </ResizablePaper>
-      {/* Right action container is used for symmetry, later probably add there some icons */}
+      {/* Right action container is used for symmetry, probably add there some icons later */}
       <ActionsContainer/>
     </DraggableItem>
   )
