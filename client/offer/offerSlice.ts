@@ -1,12 +1,11 @@
 import { createSlice, current } from '@reduxjs/toolkit'
 import { hideCopyContainer, pasteItem, removePasteText, updatePasteTextPos } from 'client/copy/copySlice'
+import { getOfferFromLocalStorage } from 'client/modules/localStorage'
 import { CopyPlaceType, ItemType, OfferType } from 'client/types'
 import { nanoid } from 'nanoid'
 import { templateOffer } from './templateOffer'
 
-const offerInLocalStorage = localStorage.getItem('currentOffer')
-const offerFromLocalStorage = !!offerInLocalStorage && JSON.parse(offerInLocalStorage || '')
-const initialState: OfferType = offerFromLocalStorage || templateOffer
+const initialState: OfferType = getOfferFromLocalStorage() || templateOffer
 
 const offerSlice = createSlice({
   name: 'offer',

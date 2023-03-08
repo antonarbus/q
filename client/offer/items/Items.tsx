@@ -1,10 +1,11 @@
-import { store, useDispatchTyped, useSelectorTyped } from 'client/store'
+import { useDispatchTyped, useSelectorTyped } from 'client/store'
 import { Draggable } from './draggable'
 import { saveItemsOrder } from '../offerSlice'
 import { arrayMoveImmutable } from 'array-move'
 import { TextItem } from './TextItem'
 import { PasteTextOnTopOrBottom } from './PasteTextOnTopOrBottom'
 import { AnimatePresence } from 'framer-motion'
+import { saveOfferIntoLocalStorage } from 'client/modules/localStorage'
 
 export const Items = () => {
   const dispatch = useDispatchTyped()
@@ -16,7 +17,7 @@ export const Items = () => {
       onSortEnd={({ oldIndex, newIndex }) => {
         const sortedItems = arrayMoveImmutable(items, oldIndex, newIndex)
         dispatch(saveItemsOrder({ sortedItems }))
-        localStorage.setItem('currentOffer', JSON.stringify(store.getState().offer))
+        saveOfferIntoLocalStorage()
       }}
     >
       <AnimatePresence initial={false}>
