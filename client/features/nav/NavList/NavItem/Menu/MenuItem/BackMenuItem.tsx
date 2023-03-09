@@ -1,0 +1,32 @@
+import { TextInMenu } from './TextInMenu'
+import { Icon } from '../../Icon'
+import { FaChevronLeft as LeftArrowIcon } from 'react-icons/fa'
+import { MenuItemStyled } from './MenuItemStyled'
+import { theme } from 'client/theme'
+import { setMenuItemHoverIndex } from 'client/features/nav/navSlice'
+import { useDispatchTyped, useSelectorTyped } from 'client/store'
+import { EventType } from 'client/types'
+import { navigateInMenu } from '../functions/useMenuAnimation'
+
+export function BackMenuItem() {
+  const dispatch = useDispatchTyped()
+  const isHovered = useSelectorTyped(state => state.nav.menuItemHoverIndex === 1)
+  const color = theme.colors.topMenuItem
+
+  const onClickHandler = (e: EventType) => {
+    e.preventDefault()
+    navigateInMenu.up && navigateInMenu.up()
+  }
+
+  return (
+    <MenuItemStyled
+      to={'/'}
+      onClick={onClickHandler}
+      onMouseEnter={() => dispatch(setMenuItemHoverIndex(1))}
+      state={{ isHovered }}
+    >
+      <Icon icon={<LeftArrowIcon />} />
+      <TextInMenu name={<span style={{ color }}>Back</span>} />
+    </MenuItemStyled>
+  )
+}
