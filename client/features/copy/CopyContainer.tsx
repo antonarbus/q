@@ -1,14 +1,12 @@
 import { useCursorCords } from './useCursorCords'
-import { motion, useAnimationControls } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { PressEsc } from './PressEsc'
-import { useEffect } from 'react'
-import { useFirstMountState } from 'react-use'
 import { FirstCopiedItem } from './FirstCopiedItem'
 import { RestOfCopiedItems } from './RestOfCopiedItems'
 import { useDisableNavItems } from './useDisableNavItems'
 import { usePasteClick } from './usePasteClick'
 import { usePasteTextPos } from './usePasteTextPos'
-import { useSelectorTyped } from 'client/store'
+import { useCopyContainerAnimation } from './useCopyContainerAnimation'
 
 export const containerWidth = 200
 export const containerPadding = 20
@@ -18,43 +16,12 @@ export const CopyContainer = () => {
   usePasteTextPos()
   usePasteClick()
   useDisableNavItems()
-  const isFirstMount = useFirstMountState()
+  const controls = useCopyContainerAnimation()
   const { x, y } = useCursorCords()
   // const { x, y } = { x: 300, y: 0 }
-  const items = useSelectorTyped(state => state.copy.items)
-  const controls = useAnimationControls()
-
-  useEffect(() => {
-    const newHeight = items.reduce((accumulator, item) => {
-      const scaleFactor = (containerWidth - 2 * containerPadding) / item.width
-      return accumulator + scaleFactor * item.height + 5
-    }, 70)
-
-    isFirstMount && controls.start({
-      width: 'auto',
-      transition: { delay: 0, duration: 0.5, type: 'spring' }
-    })
-
-    controls.start({
-      height: newHeight,
-      transition: { delay: 0, duration: 0.5, type: 'spring' },
-    })
-  }, [items.length])
 
   return (
     <motion.div
-      // key={items.length}
-      // initial={{
-      //   height: ref?.current?.offsetHeight || 0,
-      //   ...(isFirstMount && { width: 0 })
-      // }}
-      // animate={{
-      //   height: 'auto',
-      //   ...(isFirstMount && { width: 'auto' })
-      // }}
-      // transition={{
-      //   delay: 0, duration: 0.5, type: 'spring'
-      // }}
       animate={controls}
       css={{
         borderRadius: 6,

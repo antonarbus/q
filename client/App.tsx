@@ -43,5 +43,4 @@ export const App = () => (
       <ReactQueryDevtools />
     </ThemeProvider>
   </QueryClientProvider>
-
 )
