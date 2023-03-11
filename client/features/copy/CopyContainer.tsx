@@ -5,7 +5,7 @@ import { FirstCopiedItem } from './FirstCopiedItem'
 import { RestOfCopiedItems } from './RestOfCopiedItems'
 import { useDisableNavItems } from './useDisableNavItems'
 import { usePasteClick } from './usePasteClick'
-import { usePasteTextPos } from './usePasteTextPos'
+import { useMovePasteTextAfterCursor } from './usePasteTextPos'
 import { useCopyContainerAnimation } from './useCopyContainerAnimation'
 
 export const containerWidth = 200
@@ -13,7 +13,7 @@ export const containerPadding = 20
 export const itemMarginBottom = 5
 
 export const CopyContainer = () => {
-  usePasteTextPos()
+  useMovePasteTextAfterCursor()
   usePasteClick()
   useDisableNavItems()
   const controls = useCopyContainerAnimation()

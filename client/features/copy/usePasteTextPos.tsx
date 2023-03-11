@@ -39,7 +39,7 @@ function movePasteTextAfterCursor(e: MouseEvent) {
   store.dispatch(updatePasteTextPos(pastePlace))
 }
 
-export const usePasteTextPos = () => {
+export const useMovePasteTextAfterCursor = () => {
   useEffectOnce(() => {
     document.addEventListener('mousemove', movePasteTextAfterCursor, { passive: true })
   })
