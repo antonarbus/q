@@ -3,8 +3,8 @@ import { queryClient } from './queryClient'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { RequireAuth } from 'client/features/credentials/RequireAuth'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
-import { theme } from 'client/theme'
+import { ThemeProvider } from '@mui/material/styles'
+import { themeClient } from 'client/theme'
 import { GlobalStyles } from 'client/GlobalStyles'
 import { Nav } from 'client/features/nav'
 import { Notifier } from 'client/features/notifier'
@@ -19,7 +19,7 @@ import { SpinnerFullPage } from 'client/features/spinner/SpinnerFullPage'
 
 export const App = () => (
   <QueryClientProvider client={queryClient}>
-    <ThemeProvider theme={createTheme(theme as any)}>
+    <ThemeProvider theme={themeClient}>
       <GlobalStyles />
       <BrowserRouter>
         <SpinnerFullPage />
