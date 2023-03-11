@@ -14,10 +14,14 @@ export const Items = () => {
   return (
     <Draggable
       useDragHandle
+      onSortStart={() => {
+        document.body.style.cursor = 'move'
+      }}
       onSortEnd={({ oldIndex, newIndex }) => {
         const sortedItems = arrayMoveImmutable(items, oldIndex, newIndex)
         dispatch(saveItemsOrder({ sortedItems }))
         saveOfferIntoLocalStorage()
+        document.body.style.cursor = 'default'
       }}
     >
       <AnimatePresence initial={false}>
