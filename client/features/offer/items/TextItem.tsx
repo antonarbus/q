@@ -10,6 +10,7 @@ import { useSelectorTyped } from 'client/store'
 import { DeleteIcon } from './DeleteIcon'
 import { CutIcon } from './CutIcon'
 import { ItemType } from '../types'
+import { selectIsLastItem } from '../offerSlice'
 
 type Props = {
   item: ItemType
@@ -19,10 +20,12 @@ type Props = {
 export const TextItem = ({ item, index }: Props) => {
   const itemRef = useRef() as React.MutableRefObject<Resizable>
   const isPasteMode = useSelectorTyped(state => state.copy.isShown)
+  const isLastItem = useSelectorTyped(selectIsLastItem)
+  const isDisabled = isPasteMode || isLastItem
 
   return (
     <DraggableItem
-      disabled={!!isPasteMode}
+      disabled={isDisabled}
       index={index}
     >
       <ActionsContainer>

@@ -15,7 +15,6 @@ type Props = {
 export const CutIcon = ({ itemToCut, itemRef }: Props) => {
   const dispatch = useDispatchTyped()
   const isLastItem = useSelectorTyped(selectIsLastItem)
-  console.log('🚀 ~ isLastItem:', isLastItem)
 
   return (
     <motion.span
