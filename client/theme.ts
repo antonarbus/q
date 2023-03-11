@@ -1,3 +1,5 @@
+import { createTheme } from '@mui/material/styles'
+
 const muiTheme = {
   palette: {
     primary: {
@@ -41,3 +43,5 @@ const customTheme = {
 }
 
 export const theme = { ...muiTheme, ...customTheme }
+
+export const themeClient = createTheme(theme as any)
