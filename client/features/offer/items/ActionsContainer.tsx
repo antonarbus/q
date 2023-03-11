@@ -12,6 +12,7 @@ export const ActionsContainer = ({ children }: Props) => (
       alignItems: 'center',
       width: 20,
       flexShrink: 0,
+      '& svg': { display: 'block' },
     }}
   >
     {children}

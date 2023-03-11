@@ -5,6 +5,7 @@ import { addItemIntoCopyContainer, saveInitCords, showCopyContainer } from 'clie
 import { deleteItem, selectIsLastItem } from '../offerSlice'
 import { saveOfferIntoLocalStorage } from 'client/modules/localStorage'
 import { ItemType } from '../types'
+import { motion } from 'framer-motion'
 
 type Props = {
   itemToCut: ItemType,
@@ -14,19 +15,15 @@ type Props = {
 export const CutIcon = ({ itemToCut, itemRef }: Props) => {
   const dispatch = useDispatchTyped()
   const isLastItem = useSelectorTyped(selectIsLastItem)
+  console.log('🚀 ~ isLastItem:', isLastItem)
 
   return (
-    <TbCut
-      css={{
-        color: isLastItem ? '#acacac' : 'inherit',
+    <motion.span
+      whileHover={{ scale: isLastItem ? 1 : 1.3 }}
+      whileTap={{ scale: 1 }}
+      style={{
+        color: isLastItem ? '#acacac' : '#000',
         cursor: isLastItem ? 'default' : 'pointer',
-        ...(!isLastItem && {
-          ':hover': {
-            scale: '1.3',
-            color: 'black',
-            transition: 'scale 200ms'
-          }
-        })
       }}
       onClick={(e: React.MouseEvent) => {
         if (isLastItem) return
@@ -37,6 +34,8 @@ export const CutIcon = ({ itemToCut, itemRef }: Props) => {
         dispatch(deleteItem(itemToCut))
         saveOfferIntoLocalStorage()
       }}
-    />
+    >
+      <TbCut/>
+    </motion.span>
   )
 }
