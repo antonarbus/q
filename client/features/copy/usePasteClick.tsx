@@ -4,6 +4,8 @@ import { hideCopyContainer, pasteItem, removeItemFromCopyContainer } from './cop
 import { saveOfferIntoLocalStorage } from 'client/modules/localStorage'
 
 function pasteItemOnClick(e: MouseEvent) {
+  const isPasteTextShown = store.getState().copy.isPasteTextShown
+  if (!isPasteTextShown) return
   const { itemId, pastePos } = store.getState().copy.place
   const item = store.getState().copy.items[0]
   if (pastePos === 'nowhere') return
