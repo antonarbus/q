@@ -12,10 +12,6 @@ export const GlobalStyles = () => (
         line-height:1.5;
         letter-spacing:0.00938em;
       }
-
-      #root {
-        height: 100dvh;
-      }
     
       button {
         border: 1px solid grey;
