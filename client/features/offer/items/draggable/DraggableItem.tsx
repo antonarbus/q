@@ -7,7 +7,8 @@ type Props = {
 }
 
 interface ISortableItem extends SortableElementProps {
-  children: React.ReactNode
+  children: React.ReactNode,
+  id: string
 }
 
 export const DraggableItem: React.ComponentClass<ISortableItem, any> = SortableElement(({ children, id }: Props) => {
