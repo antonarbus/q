@@ -29,7 +29,8 @@ export const Items = () => {
           if (item.type === 'text') return <TextItem key={item.id} item={item} index={index} />
           if (item.type === 'paste') return <PasteTextOnTopOrBottom key={item.id} />
           return null
-        })}
+        }
+        )}
       </AnimatePresence>
     </DraggableItems>
   )

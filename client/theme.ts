@@ -23,7 +23,7 @@ const customTheme = {
   nav: {
     height: 60,
     marginTop: 10,
-    marginBottom: 10,
+    marginBottom: 0,
     get fullHeight() {
       return this.height + this.marginTop + this.marginBottom
     }

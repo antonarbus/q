@@ -11,7 +11,7 @@ const Handle = () => {
 
   return (
     <motion.span
-      whileHover={{ scale: isDisabled ? 1.3 : 1 }}
+      whileHover={{ scale: isDisabled ? 1 : 1.3 }}
       style={{
         color: isDisabled ? '#acacac' : '#000',
         cursor: isDisabled ? 'default' : 'move',

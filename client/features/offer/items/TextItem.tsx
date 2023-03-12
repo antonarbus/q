@@ -27,6 +27,7 @@ export const TextItem = ({ item, index }: Props) => {
     <DraggableItem
       disabled={isDisabled}
       index={index}
+      id={item.id}
     >
       <ActionsContainer>
         <DragHandle />

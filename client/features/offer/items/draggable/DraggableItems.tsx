@@ -20,7 +20,8 @@ export const DraggableItems: React.ComponentClass<ISortableContainer, any> =
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        outline: '1px solid yellow'
+        padding: '20px 5px',
+        // outline: '1px solid yellow',
       }}
     >
       {children}
