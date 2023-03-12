@@ -8,17 +8,13 @@ interface Props extends Resizable {
   width: number
   index: number
   itemRef: React.MutableRefObject<Resizable>
-  id: string
 }
 
-export const ResizablePaper = ({ children, width, index, itemRef, id }: Props) => {
+export const ResizablePaper = ({ children, width, index, itemRef }: Props) => {
   const dispatch = useDispatchTyped()
 
   return (
     <Resizable
-      // @ts-ignore
-      id={id}
-      className='item'
       ref={itemRef}
       css={{
         background: 'white',

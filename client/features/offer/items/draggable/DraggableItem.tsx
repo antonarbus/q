@@ -2,16 +2,19 @@ import { SortableElement, SortableElementProps } from 'react-sortable-hoc'
 import { motion } from 'framer-motion'
 
 type Props = {
-  children: React.ReactNode
+  children: React.ReactNode,
+  id: string
 }
 
 interface ISortableItem extends SortableElementProps {
   children: React.ReactNode
 }
 
-export const DraggableItem: React.ComponentClass<ISortableItem, any> = SortableElement(({ children }: Props) => {
+export const DraggableItem: React.ComponentClass<ISortableItem, any> = SortableElement(({ children, id }: Props) => {
   return (
     <motion.div
+      id={id}
+      className='item'
       initial={{
         height: 0,
         marginBottom: 0,
@@ -38,6 +41,8 @@ export const DraggableItem: React.ComponentClass<ISortableItem, any> = SortableE
         justifyContent: 'center',
         position: 'relative',
         maxWidth: '100%',
+        width: '100%',
+        // outline: '1px solid green'
       }}
     >
       {children}
