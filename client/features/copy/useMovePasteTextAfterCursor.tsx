@@ -39,6 +39,8 @@ function movePasteTextAfterCursor(e: MouseEvent) {
     return
   }
 
+  if (e.clientY < 10) return
+
   const item = (e.target as Element).closest('.item')
   // if (!item) return
 
