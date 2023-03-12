@@ -35,8 +35,7 @@ export const TextItem = ({ item, index }: Props) => {
         <CutIcon itemToCut={item} itemRef={itemRef} />
         <DeleteIcon itemToDelete={item}/>
       </ActionsContainer>
-      {/* @ts-ignore */}
-      <ResizablePaper key={item.id} width={item.width} index={index} itemRef={itemRef} id={item.id}>
+      <ResizablePaper key={item.id} width={item.width} index={index} itemRef={itemRef}>
         {parseHtml(item.innerHtml)}
         <PasteTextInMiddle id={item.id}/>
       </ResizablePaper>
