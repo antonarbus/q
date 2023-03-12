@@ -68,6 +68,7 @@ export const GlobalStyles = () => (
     
       /* Safari - solving issue when using user-select:none on the <body> text input doesn't working */
       input, textarea {
+        user-select: auto;
         -webkit-user-select: auto;
       }
     
@@ -100,7 +101,9 @@ export const GlobalStyles = () => (
         -moz-user-modify: read-write;
         -webkit-user-modify: read-write;
         overflow-wrap: break-word;
+        line-break: after-white-space;
         -webkit-line-break: after-white-space;
+        user-select: auto;
         -webkit-user-select: auto;
       }
     
