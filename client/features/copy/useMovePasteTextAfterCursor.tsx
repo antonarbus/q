@@ -6,6 +6,7 @@ import { CopyPlaceType } from './types'
 
 function movePasteTextAfterCursor(e: MouseEvent) {
   const itemsContainer = (e.target as Element).closest('#items')
+
   if (!itemsContainer) {
     store.dispatch(removePasteText())
     return
