@@ -24,7 +24,7 @@ export function Nav() {
         alignItems: 'stretch',
         position: 'sticky',
         top: '5px',
-        marginTop: theme.nav.marginTop + 'px',
+        // marginTop: theme.nav.marginTop + 'px',
         marginBottom: theme.nav.marginBottom + 'px',
         marginLeft: '10px',
         marginRight: '10px',

@@ -19,7 +19,8 @@ function getPastePlace({ item, e }: Props): CopyPlaceType {
 }
 
 function movePasteTextAfterCursor(e: MouseEvent) {
-  const prevPastePos = store.getState().copy.place.pastePos
+  const prevPlace = store.getState().copy.place
+  const prevPastePos = prevPlace.pastePos
 
   const nav = (e.target as Element).closest('nav')
 
@@ -39,7 +40,7 @@ function movePasteTextAfterCursor(e: MouseEvent) {
   const item = (e.target as Element).closest('.item')
   // if (!item) return
 
-  const pastePlace = item ? getPastePlace({ item, e }) : store.getState().copy.place
+  const pastePlace = item ? getPastePlace({ item, e }) : prevPlace
   if (prevPastePos === pastePlace.pastePos) return
   store.dispatch(updatePasteTextPos(pastePlace))
 }
