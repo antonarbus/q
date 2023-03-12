@@ -11,7 +11,7 @@ interface ISortableContainer extends SortableContainerProps {
   children: React.ReactNode
 }
 
-export const Draggable: React.ComponentClass<ISortableContainer, any> =
+export const DraggableItems: React.ComponentClass<ISortableContainer, any> =
   SortableContainer(({ children }: Props) => (
     <div
       id='items'
@@ -20,6 +20,7 @@ export const Draggable: React.ComponentClass<ISortableContainer, any> =
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+        outline: '1px solid yellow'
       }}
     >
       {children}
