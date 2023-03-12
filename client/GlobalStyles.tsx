@@ -11,6 +11,7 @@ export const GlobalStyles = () => (
         font-size:1rem;
         line-height:1.5;
         letter-spacing:0.00938em;
+        height: 100dvh;
       }
     
       button {
