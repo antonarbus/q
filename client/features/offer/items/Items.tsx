@@ -1,5 +1,5 @@
 import { useDispatchTyped, useSelectorTyped } from 'client/store'
-import { Draggable } from './draggable'
+import { DraggableItems } from './draggable'
 import { saveItemsOrder } from '../offerSlice'
 import { arrayMoveImmutable } from 'array-move'
 import { TextItem } from './TextItem'
@@ -12,7 +12,7 @@ export const Items = () => {
   const items = useSelectorTyped(state => state.offer.items)
 
   return (
-    <Draggable
+    <DraggableItems
       useDragHandle
       onSortStart={() => {
         document.body.style.cursor = 'move'
@@ -31,6 +31,6 @@ export const Items = () => {
           return null
         })}
       </AnimatePresence>
-    </Draggable>
+    </DraggableItems>
   )
 }
