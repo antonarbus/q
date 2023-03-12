@@ -8,7 +8,7 @@ type Props = {
   e: MouseEvent
 }
 
-export const getPastePlace = ({ item, e }: Props) : CopyPlaceType => {
+function getPastePlace({ item, e }: Props): CopyPlaceType {
   const { height, top } = item.getBoundingClientRect()
   const yWithinElement = e.clientY - top
   const distToTop = yWithinElement
@@ -19,26 +19,27 @@ export const getPastePlace = ({ item, e }: Props) : CopyPlaceType => {
 }
 
 function movePasteTextAfterCursor(e: MouseEvent) {
-  const itemsContainer = (e.target as Element).closest('#items')
   const prevPastePos = store.getState().copy.place.pastePos
 
-  if (!itemsContainer) {
+  const nav = (e.target as Element).closest('nav')
+
+  if (nav) {
     if (prevPastePos === 'nowhere') return
     store.dispatch(removePasteText())
     return
   }
 
-  const actionsContainer = (e.target as Element).closest('.actions-container')
-  if (actionsContainer) {
+  const actions = (e.target as Element).closest('.actions-container')
+  if (actions) {
     if (prevPastePos === 'nowhere') return
     store.dispatch(removePasteText())
     return
   }
 
   const item = (e.target as Element).closest('.item')
-  if (!item) return
+  // if (!item) return
 
-  const pastePlace = getPastePlace({ item, e })
+  const pastePlace = item ? getPastePlace({ item, e }) : store.getState().copy.place
   if (prevPastePos === pastePlace.pastePos) return
   store.dispatch(updatePasteTextPos(pastePlace))
 }
