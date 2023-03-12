@@ -1,6 +1,11 @@
+import { useSelectorTyped } from 'client/store'
 import { motion } from 'framer-motion'
 
 export const PasteTextOnTopOrBottom = () => {
+  const isPasteTextShown = useSelectorTyped(state => state.copy.isPasteTextShown)
+
+  if (!isPasteTextShown) return null
+
   return (
     <motion.div
       initial={{

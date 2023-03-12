@@ -7,7 +7,8 @@ type Props = {
   initCords: { x: number, y: number },
   items: ItemType[],
   place: CopyPlaceType,
-  isCopying: boolean
+  isCopying: boolean,
+  isPasteTextShown: boolean
 }
 
 const initialState: Props = {
@@ -15,7 +16,8 @@ const initialState: Props = {
   initCords: { x: 0, y: 0 },
   items: [],
   place: { pastePos: 'nowhere', itemId: 'some id' },
-  isCopying: true // flag to understand if we click to copy or paste
+  isCopying: true, // flag to understand if we click to copy or paste
+  isPasteTextShown: false
 }
 
 export const copySlice = createSlice({
@@ -42,6 +44,12 @@ export const copySlice = createSlice({
     removePasteText: (state) => {
       state.place = initialState.place
     },
+    showPasteText: (state) => {
+      state.isPasteTextShown = true
+    },
+    hidePasteText: (state) => {
+      state.isPasteTextShown = false
+    },
     pasteItem: (state, action) => {
       state.isCopying = false
       state.place = initialState.place
@@ -49,5 +57,5 @@ export const copySlice = createSlice({
   }
 })
 
-export const { showCopyContainer, hideCopyContainer, saveInitCords, addItemIntoCopyContainer, removeItemFromCopyContainer, updatePasteTextPos, removePasteText, pasteItem } = copySlice.actions
+export const { showCopyContainer, hideCopyContainer, saveInitCords, addItemIntoCopyContainer, removeItemFromCopyContainer, updatePasteTextPos, removePasteText, pasteItem, showPasteText, hidePasteText } = copySlice.actions
 export default copySlice.reducer
