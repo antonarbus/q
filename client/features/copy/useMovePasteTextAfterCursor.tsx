@@ -1,6 +1,6 @@
 import { useEffectOnce, useUnmount } from 'react-use'
 import { store } from 'client/store'
-import { hidePasteText, removePasteText, showPasteText, updatePasteTextPos } from './copySlice'
+import { hidePasteText, showPasteText, updatePasteTextPos } from './copySlice'
 import { CopyPlaceType } from './types'
 
 type Props = {
@@ -26,7 +26,6 @@ function movePasteTextAfterCursor(e: MouseEvent) {
 
   if (nav) {
     if (prevPastePos === 'nowhere') return
-    // store.dispatch(removePasteText())
     store.dispatch(hidePasteText())
     return
   }
@@ -35,11 +34,11 @@ function movePasteTextAfterCursor(e: MouseEvent) {
   if (actions) {
     if (prevPastePos === 'nowhere') return
     store.dispatch(hidePasteText())
-    // store.dispatch(removePasteText())
     return
   }
 
-  if (e.clientY < 10) return
+  const isNarrowGapAboveNav = e.clientY < 10
+  if (isNarrowGapAboveNav) return
 
   const item = (e.target as Element).closest('.item')
   // if (!item) return
