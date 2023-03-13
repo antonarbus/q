@@ -1,5 +1,5 @@
 import { createSlice, current } from '@reduxjs/toolkit'
-import { hideCopyContainer, pasteItem, removePasteText, updatePasteTextPos } from 'client/features/copy/copySlice'
+import { hideCopyContainer, pasteItem, updatePasteTextPos } from 'client/features/copy/copySlice'
 import { getOfferFromLocalStorage } from 'client/modules/localStorage'
 import { RootState } from 'client/store'
 import { nanoid } from 'nanoid'
@@ -14,7 +14,6 @@ const offerSlice = createSlice({
   initialState,
   reducers: {
     saveItemWidth: (state, action) => {
-      // console.log(current(state))
       const { width, index } = action.payload
       state.items[index].width = width
     },
@@ -26,7 +25,6 @@ const offerSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // add or remove paste text
     builder
       .addCase(updatePasteTextPos, (state, action) => {
         // respond to updatePastePos() action of copySlice, takes current state slice, but action.payload comes from copySlice
@@ -38,9 +36,7 @@ const offerSlice = createSlice({
         state.items.splice(insertAtIndex, 0, elToPaste)
       })
       .addCase(hideCopyContainer, (state) => {
-        state.items = state.items.filter(item => item.type !== 'paste')
-      })
-      .addCase(removePasteText, (state) => {
+        console.log(current(state))
         state.items = state.items.filter(item => item.type !== 'paste')
       })
       .addCase(pasteItem, (state, action) => {

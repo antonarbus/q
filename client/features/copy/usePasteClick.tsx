@@ -3,7 +3,7 @@ import { store } from 'client/store'
 import { hideCopyContainer, pasteItem, removeItemFromCopyContainer } from './copySlice'
 import { saveOfferIntoLocalStorage } from 'client/modules/localStorage'
 
-function pasteItemOnClick(e: MouseEvent) {
+function pasteItemOnClick() {
   const isPasteTextShown = store.getState().copy.isPasteTextShown
   if (!isPasteTextShown) return
   const { itemId, pastePos } = store.getState().copy.place
