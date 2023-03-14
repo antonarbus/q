@@ -15,7 +15,7 @@ const initialState: Props = {
   isShown: false,
   initCords: { x: 0, y: 0 },
   items: [],
-  place: { pastePos: 'nowhere', itemId: 'some id' },
+  place: { pastePos: 'middle', itemId: 'some id' },
   isCopying: true, // flag to understand if we click to copy or paste
   isPasteTextShown: false
 }

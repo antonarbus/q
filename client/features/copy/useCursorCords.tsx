@@ -5,6 +5,7 @@ import { useEffectOnce } from 'react-use'
 export function useCursorCords() {
   const initCords = useSelectorTyped(state => state.copy.initCords)
   const [cursorCords, setCursorCords] = useState(initCords)
+
   function followCursor(e: MouseEvent) {
     setCursorCords({ x: e.x, y: e.y })
   }
