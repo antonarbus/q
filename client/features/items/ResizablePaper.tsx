@@ -3,7 +3,7 @@ import { useDispatchTyped } from 'client/store'
 import { Resizable } from 're-resizable'
 import { saveItemWidth } from './itemsSlice'
 
-interface Props extends Resizable {
+interface Props {
   children: React.ReactNode
   key: string
   width: number
