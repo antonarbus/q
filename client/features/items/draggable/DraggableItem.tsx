@@ -35,7 +35,7 @@ export const DraggableItem: React.ComponentClass<ISortableItem, any> = SortableE
         x: '200vw'
       }}
       transition={{
-        duration: 0.5
+        duration: 0.3
       }}
       css={{
         display: 'flex',

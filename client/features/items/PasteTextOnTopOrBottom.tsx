@@ -4,21 +4,22 @@ export const PasteTextOnTopOrBottom = () => (
   <motion.div
     initial={{
       height: 0,
+      marginBottom: 0,
       opacity: 0,
-      marginBottom: 0
     }}
     animate={{
       height: 20,
+      marginBottom: 20,
       opacity: 1,
-      marginBottom: 20
     }}
     exit={{
       height: 0,
+      marginBottom: 0,
       opacity: 0,
-      marginBottom: 0
     }}
     transition={{
       height: { duration: 0.3 },
+      marginBottom: { duration: 0.3 },
       opacity: { duration: 0 },
     }}
     css={{
