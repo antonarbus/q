@@ -1,7 +1,7 @@
 import { saveOfferIntoLocalStorage } from 'client/modules/localStorage'
 import { useDispatchTyped, useSelectorTyped } from 'client/store'
 import { RxCross2 } from 'react-icons/rx'
-import { deleteItem, selectIsLastItem } from '../offerSlice'
+import { deleteItem, selectIsLastItem } from '../itemsSlice'
 import { ItemType } from '../types'
 import { motion } from 'framer-motion'
 

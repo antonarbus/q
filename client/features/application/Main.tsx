@@ -7,10 +7,7 @@ export const Main = () => {
   useRefreshTokens({ withLoadingState: false })
 
   return (
-    <main css={{
-      padding: '1px 20px',
-      // outline: '1px solid red'
-    }} >
+    <main css={{ padding: '1px 20px' }}>
       <Outlet />
       <Routes>
         <Route path="/*" element={<Offer />} />

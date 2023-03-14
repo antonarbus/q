@@ -1,6 +1,6 @@
 import { useDispatchTyped, useSelectorTyped } from 'client/store'
 import { DraggableItems } from './draggable'
-import { saveItemsOrder } from '../offerSlice'
+import { saveItemsOrder } from '../itemsSlice'
 import { arrayMoveImmutable } from 'array-move'
 import { TextItem } from './TextItem'
 import { PasteTextOnTopOrBottom } from './PasteTextOnTopOrBottom'
@@ -9,7 +9,7 @@ import { saveOfferIntoLocalStorage } from 'client/modules/localStorage'
 
 export const Items = () => {
   const dispatch = useDispatchTyped()
-  const items = useSelectorTyped(state => state.offer.items)
+  const items = useSelectorTyped(state => state.items.items)
 
   return (
     <DraggableItems

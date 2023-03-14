@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ItemType } from '../offer/types'
+import { ItemType } from '../items/types'
 import { CopyPlaceType, PasteItemType } from './types'
 
 type Props = {

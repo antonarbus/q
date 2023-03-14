@@ -10,7 +10,7 @@ import { useSelectorTyped } from 'client/store'
 import { DeleteIcon } from './DeleteIcon'
 import { CutIcon } from './CutIcon'
 import { ItemType } from '../types'
-import { selectIsLastItem } from '../offerSlice'
+import { selectIsLastItem } from '../itemsSlice'
 
 type Props = {
   item: ItemType
