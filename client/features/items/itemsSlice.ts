@@ -30,7 +30,7 @@ const itemsSlice = createSlice({
         // respond to updatePastePos() action of copySlice, takes current state slice, but action.payload comes from copySlice
         const { pastePos, itemId }: CopyPlaceType = action.payload
         state.items = state.items.filter(item => item.type !== 'paste')
-        if (pastePos === 'nowhere' || pastePos === 'middle') return
+        if (pastePos === 'middle') return
         const insertAtIndex = state.items.findIndex(item => item.id === itemId) + (pastePos === 'bottom' ? 1 : 0)
         const elToPaste: ItemType = { id: 'paste id', type: 'paste', width: 0, height: 0, innerHtml: '' }
         state.items.splice(insertAtIndex, 0, elToPaste)

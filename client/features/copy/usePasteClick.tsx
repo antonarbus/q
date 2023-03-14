@@ -8,7 +8,6 @@ function pasteItemOnClick() {
   if (!isPasteTextShown) return
   const { itemId, pastePos } = store.getState().copy.place
   const item = store.getState().copy.items[0]
-  if (pastePos === 'nowhere') return
   store.dispatch(pasteItem({ itemId, pastePos, item }))
   saveOfferIntoLocalStorage()
   store.dispatch(removeItemFromCopyContainer())
