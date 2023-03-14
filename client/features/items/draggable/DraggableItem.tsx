@@ -43,7 +43,6 @@ export const DraggableItem: React.ComponentClass<ISortableItem, any> = SortableE
         position: 'relative',
         maxWidth: '100%',
         width: '100%',
-        // outline: '1px solid green'
       }}
     >
       {children}
