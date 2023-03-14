@@ -1,5 +1,5 @@
 import { createSlice, current } from '@reduxjs/toolkit'
-import { hideCopyContainer, pasteItem, updatePasteTextPos } from 'client/features/copy/copySlice'
+import { pasteItem, updatePasteTextPos } from 'client/features/copy/copySlice'
 import { getOfferFromLocalStorage } from 'client/modules/localStorage'
 import { RootState } from 'client/store'
 import { nanoid } from 'nanoid'
@@ -16,6 +16,7 @@ const itemsSlice = createSlice({
     saveItemWidth: (state, action) => {
       const { width, index } = action.payload
       state.items[index].width = width
+      // console.log(current(state))
     },
     saveItemsOrder: (state, action) => {
       state.items = action.payload.sortedItems
@@ -34,10 +35,6 @@ const itemsSlice = createSlice({
         const insertAtIndex = state.items.findIndex(item => item.id === itemId) + (pastePos === 'bottom' ? 1 : 0)
         const elToPaste: ItemType = { id: 'paste id', type: 'paste', width: 0, height: 0, innerHtml: '' }
         state.items.splice(insertAtIndex, 0, elToPaste)
-      })
-      .addCase(hideCopyContainer, (state) => {
-        console.log(current(state))
-        state.items = state.items.filter(item => item.type !== 'paste')
       })
       .addCase(pasteItem, (state, action) => {
         const { itemId, pastePos, item } = action.payload
