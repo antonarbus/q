@@ -9,8 +9,8 @@ import { PasteTextInMiddle } from './PasteTextInMiddle'
 import { useSelectorTyped } from 'client/store'
 import { DeleteIcon } from './DeleteIcon'
 import { CutIcon } from './CutIcon'
-import { ItemType } from '../types'
-import { selectIsLastItem } from '../itemsSlice'
+import { ItemType } from './types'
+import { selectIsLastItem } from './itemsSlice'
 
 type Props = {
   item: ItemType
