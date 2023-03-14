@@ -11,6 +11,9 @@ interface ISortableItem extends SortableElementProps {
   id: string
 }
 
+// todo: put draggable and resizablePaper in common components
+// todo: separate animation from them
+
 export const DraggableItem: React.ComponentClass<ISortableItem, any> = SortableElement(({ children, id }: Props) => {
   return (
     <motion.div
