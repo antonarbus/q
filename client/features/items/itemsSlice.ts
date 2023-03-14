@@ -4,13 +4,13 @@ import { getOfferFromLocalStorage } from 'client/modules/localStorage'
 import { RootState } from 'client/store'
 import { nanoid } from 'nanoid'
 import { CopyPlaceType } from '../copy/types'
-import { templateOffer } from './templateOffer'
-import { ItemType, OfferType } from './types'
+import { templateOffer } from '../offer/templateOffer'
+import { ItemType, ItemsType } from './types'
 
-const initialState: OfferType = getOfferFromLocalStorage() || templateOffer
+const initialState: ItemsType = getOfferFromLocalStorage() || templateOffer
 
-const offerSlice = createSlice({
-  name: 'offer',
+const itemsSlice = createSlice({
+  name: 'items',
   initialState,
   reducers: {
     saveItemWidth: (state, action) => {
@@ -55,8 +55,8 @@ const offerSlice = createSlice({
   }
 })
 
-export const { saveItemWidth, saveItemsOrder, deleteItem } = offerSlice.actions
+export const { saveItemWidth, saveItemsOrder, deleteItem } = itemsSlice.actions
 
-export const selectIsLastItem = (state: RootState) => state.offer.items.filter((item) => item.type !== 'paste').length === 1
+export const selectIsLastItem = (state: RootState) => state.items.items.filter((item) => item.type !== 'paste').length === 1
 
-export default offerSlice.reducer
+export default itemsSlice.reducer

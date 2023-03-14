@@ -1,7 +1,7 @@
 import { SortableHandle } from 'react-sortable-hoc'
 import { MdDragIndicator } from 'react-icons/md'
 import { useSelectorTyped } from 'client/store'
-import { selectIsLastItem } from '../../offerSlice'
+import { selectIsLastItem } from '../../itemsSlice'
 import { motion } from 'framer-motion'
 
 const Handle = () => {
