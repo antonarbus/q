@@ -2,10 +2,10 @@ import { useDispatchTyped, useSelectorTyped } from 'client/store'
 import { TbCut } from 'react-icons/tb'
 import { Resizable } from 're-resizable'
 import { addItemIntoCopyContainer, saveInitCords, showCopyContainer } from 'client/features/copy/copySlice'
-import { deleteItem, selectIsLastItem } from '../itemsSlice'
 import { saveOfferIntoLocalStorage } from 'client/modules/localStorage'
-import { ItemType } from '../types'
 import { motion } from 'framer-motion'
+import { ItemType } from './types'
+import { deleteItem, selectIsLastItem } from './itemsSlice'
 
 type Props = {
   itemToCut: ItemType,
