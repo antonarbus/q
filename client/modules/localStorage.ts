@@ -6,6 +6,6 @@ export const getOfferFromLocalStorage = () => {
 }
 
 export const saveOfferIntoLocalStorage = () => {
-  const offer = store.getState().items
+  const { offer } = store.getState()
   localStorage.setItem('currentOffer', JSON.stringify(offer))
 }

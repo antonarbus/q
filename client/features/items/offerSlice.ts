@@ -9,8 +9,8 @@ import { ItemType, ItemsType } from './types'
 
 const initialState: ItemsType = getOfferFromLocalStorage() || templateOffer
 
-const itemsSlice = createSlice({
-  name: 'items',
+const offerSlice = createSlice({
+  name: 'offer',
   initialState,
   reducers: {
     saveItemWidth: (state, action) => {
@@ -55,8 +55,8 @@ const itemsSlice = createSlice({
   }
 })
 
-export const { saveItemWidth, saveItemsOrder, deleteItem } = itemsSlice.actions
+export const { saveItemWidth, saveItemsOrder, deleteItem } = offerSlice.actions
 
-export const selectIsLastItem = (state: RootState) => state.items.items.filter((item) => item.type !== 'paste').length === 1
+export const selectIsLastItem = (state: RootState) => state.offer.items.filter((item) => item.type !== 'paste').length === 1
 
-export default itemsSlice.reducer
+export default offerSlice.reducer

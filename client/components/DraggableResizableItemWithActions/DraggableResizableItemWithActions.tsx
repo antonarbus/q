@@ -3,7 +3,7 @@ import { CopyIcon } from 'client/components/DraggableResizableItemWithActions/Co
 import { CutIcon } from 'client/components/DraggableResizableItemWithActions/CutIcon'
 import { DeleteIcon } from 'client/components/DraggableResizableItemWithActions/DeleteIcon'
 import { DraggableItem, DragHandle } from 'client/features/items/draggable'
-import { selectIsLastItem } from 'client/features/items/itemsSlice'
+import { selectIsLastItem } from 'client/features/items/offerSlice'
 import { PasteTextInMiddle } from 'client/components/DraggableResizableItemWithActions/PasteTextInMiddle'
 import { ResizablePaper } from 'client/components/DraggableResizableItemWithActions/ResizablePaper'
 import { ItemType } from 'client/features/items/types'
