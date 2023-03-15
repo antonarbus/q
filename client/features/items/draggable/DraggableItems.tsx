@@ -21,7 +21,6 @@ export const DraggableItems: React.ComponentClass<ISortableContainer, any> =
         justifyContent: 'center',
         alignItems: 'center',
         padding: '20px 5px',
-        // outline: '1px solid yellow',
       }}
     >
       {children}

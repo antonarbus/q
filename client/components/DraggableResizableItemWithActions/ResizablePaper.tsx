@@ -1,7 +1,7 @@
 import { saveOfferIntoLocalStorage } from 'client/modules/localStorage'
 import { useDispatchTyped } from 'client/store'
 import { Resizable } from 're-resizable'
-import { saveItemWidth } from './itemsSlice'
+import { saveItemWidth } from '../../features/items/itemsSlice'
 
 interface Props {
   children: React.ReactNode
