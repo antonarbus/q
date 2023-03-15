@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 
-export const PasteTextOnTopOrBottom = () => (
+export const PasteText = () => (
   <motion.div
     initial={{
       height: 0,

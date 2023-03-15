@@ -7,6 +7,8 @@ import { CopyPlaceType } from '../copy/types'
 import { templateOffer } from '../offer/templateOffer'
 import { ItemType, ItemsType } from './types'
 
+//! think about splitting offer slice into items slice + offer slice + others
+//! save whole store in localStorage
 const initialState: ItemsType = getOfferFromLocalStorage() || templateOffer
 
 const offerSlice = createSlice({
