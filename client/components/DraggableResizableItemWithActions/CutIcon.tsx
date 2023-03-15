@@ -4,8 +4,8 @@ import { Resizable } from 're-resizable'
 import { addItemIntoCopyContainer, saveInitCords, showCopyContainer } from 'client/features/copy/copySlice'
 import { saveOfferIntoLocalStorage } from 'client/modules/localStorage'
 import { motion } from 'framer-motion'
-import { ItemType } from './types'
-import { deleteItem, selectIsLastItem } from './itemsSlice'
+import { ItemType } from '../../features/items/types'
+import { deleteItem, selectIsLastItem } from '../../features/items/itemsSlice'
 
 type Props = {
   itemToCut: ItemType,

@@ -1,9 +1,9 @@
 import { useDispatchTyped } from 'client/store'
 import { Resizable } from 're-resizable'
 import { MdCopyAll } from 'react-icons/md'
-import { addItemIntoCopyContainer, saveInitCords, showCopyContainer } from '../copy/copySlice'
+import { addItemIntoCopyContainer, saveInitCords, showCopyContainer } from '../../features/copy/copySlice'
 import { motion } from 'framer-motion'
-import { ItemType } from './types'
+import { ItemType } from '../../features/items/types'
 
 type Props = {
   itemToCopy: ItemType

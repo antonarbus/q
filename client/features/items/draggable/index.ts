@@ -1,3 +1,3 @@
 export { DraggableItems } from './DraggableItems'
-export { DraggableItem } from './DraggableItem'
+export { DraggableItem } from '../../../components/DraggableResizableItemWithActions/DraggableItem'
 export { DragIcon as DragHandle } from '../../../components/DraggableResizableItemWithActions/DragIcon'
