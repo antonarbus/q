@@ -5,11 +5,11 @@ import { TextItem } from './TextItem'
 import { PasteTextOnTopOrBottom } from './PasteTextOnTopOrBottom'
 import { AnimatePresence } from 'framer-motion'
 import { saveOfferIntoLocalStorage } from 'client/modules/localStorage'
-import { saveItemsOrder } from './itemsSlice'
+import { saveItemsOrder } from './offerSlice'
 
 export const Items = () => {
   const dispatch = useDispatchTyped()
-  const items = useSelectorTyped(state => state.items.items)
+  const items = useSelectorTyped(state => state.offer.items)
 
   return (
     <DraggableItems

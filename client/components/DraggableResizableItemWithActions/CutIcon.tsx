@@ -5,7 +5,7 @@ import { addItemIntoCopyContainer, saveInitCords, showCopyContainer } from 'clie
 import { saveOfferIntoLocalStorage } from 'client/modules/localStorage'
 import { motion } from 'framer-motion'
 import { ItemType } from '../../features/items/types'
-import { deleteItem, selectIsLastItem } from '../../features/items/itemsSlice'
+import { deleteItem, selectIsLastItem } from '../../features/items/offerSlice'
 
 type Props = {
   itemToCut: ItemType,
