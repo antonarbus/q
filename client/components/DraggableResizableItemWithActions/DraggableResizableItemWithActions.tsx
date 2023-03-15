@@ -5,7 +5,7 @@ import { DeleteIcon } from 'client/components/DraggableResizableItemWithActions/
 import { DraggableItem, DragHandle } from 'client/features/items/draggable'
 import { selectIsLastItem } from 'client/features/items/itemsSlice'
 import { PasteTextInMiddle } from 'client/components/DraggableResizableItemWithActions/PasteTextInMiddle'
-import { ResizablePaper } from 'client/features/items/ResizablePaper'
+import { ResizablePaper } from 'client/components/DraggableResizableItemWithActions/ResizablePaper'
 import { ItemType } from 'client/features/items/types'
 import { useSelectorTyped } from 'client/store'
 import { Resizable } from 're-resizable'
