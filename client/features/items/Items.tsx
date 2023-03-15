@@ -1,6 +1,6 @@
 import { useSelectorTyped } from 'client/store'
 import { ItemsContainer } from './ItemsContainer'
-import { PasteTextOnTopOrBottom } from './PasteTextOnTopOrBottom'
+import { PasteText } from '../copy/PasteText'
 import { TextItem } from './TextItem'
 
 export const Items = () => {
@@ -10,7 +10,7 @@ export const Items = () => {
     <ItemsContainer>
       {items.map((item, index) => {
         if (item.type === 'text') return <TextItem key={item.id} item={item} index={index} />
-        if (item.type === 'paste') return <PasteTextOnTopOrBottom key={item.id} />
+        if (item.type === 'paste') return <PasteText key={item.id} />
         return null
       })}
     </ItemsContainer>
