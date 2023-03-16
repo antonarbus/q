@@ -1,11 +1,13 @@
+import { templateOffer } from 'client/features/offer/templateOffer'
 import { store } from 'client/store'
 import { jsonSafeParse } from 'utils/jsonSafeParse'
 
-export const getOfferFromLocalStorage = () => {
-  return jsonSafeParse(localStorage.getItem('currentOffer'))
+export const getItemsFromLocalStorage = () => {
+  const items = jsonSafeParse(localStorage.getItem('items')) || saveItemsIntoLocalStorage(templateOffer)
+  return items
 }
 
-export const saveOfferIntoLocalStorage = () => {
-  const { offer } = store.getState()
-  localStorage.setItem('currentOffer', JSON.stringify(offer))
+export const saveItemsIntoLocalStorage = (items = store.getState().items) => {
+  localStorage.setItem('items', JSON.stringify(items))
+  return items
 }
