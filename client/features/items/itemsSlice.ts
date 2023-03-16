@@ -28,27 +28,39 @@ const itemsSlice = createSlice({
       .addCase(updatePasteTextPos, (state, action) => {
         // respond to updatePastePos() action of copySlice, takes current state slice, but action.payload comes from copySlice
         const { pastePos, itemId }: CopyPlaceType = action.payload
-        state = state.filter(item => item.type !== 'paste')
-        if (pastePos === 'middle') return
-        const insertAtIndex = state.findIndex(item => item.id === itemId) + (pastePos === 'bottom' ? 1 : 0)
-        const elToPaste: ItemType = { id: 'paste id', type: 'paste', width: 0, height: 0, innerHtml: '' }
-        state.splice(insertAtIndex, 0, elToPaste)
+        const itemsWithoutPasteText = state.filter(item => item.type !== 'paste')
+        if (pastePos === 'middle') return itemsWithoutPasteText
+        // debugger
+        const insertAtIndex = itemsWithoutPasteText.findIndex(item => item.id === itemId) + (pastePos === 'bottom' ? 1 : 0)
+        const pasteTextEl: ItemType = { id: 'paste id', type: 'paste', width: 0, height: 0, innerHtml: '' }
+        itemsWithoutPasteText.splice(insertAtIndex, 0, pasteTextEl)
+        return itemsWithoutPasteText
       })
-      .addCase(hideCopyContainer, (state) => {
-        state = state.filter(item => item.type !== 'paste')
-      })
+      .addCase(hideCopyContainer, (state) => state.filter(item => item.type !== 'paste'))
       .addCase(pasteItem, (state, action) => {
         const { itemId, pastePos, item } = action.payload
         const itemToPaste = { ...item, id: nanoid() }
         const hoveredItemIndex = state.findIndex(item => item.id === itemId)
-        const spliceSettings = { insertAtIndex: hoveredItemIndex, deleteCount: 0 }
 
-        if (pastePos === 'top') spliceSettings.insertAtIndex--
-        if (pastePos === 'bottom') spliceSettings.insertAtIndex++
-        if (pastePos === 'middle') spliceSettings.deleteCount++
+        const getSpliceSettings = () => {
+          const spliceSettings = { insertAtIndex: hoveredItemIndex, deleteCount: 0 }
+          if (pastePos === 'top') {
+            spliceSettings.insertAtIndex--
+            return spliceSettings
+          }
+          if (pastePos === 'bottom') {
+            spliceSettings.insertAtIndex++
+            return spliceSettings
+          }
+          // pastePos === 'middle'
+          spliceSettings.deleteCount++
+          return spliceSettings
+        }
 
-        state = state.filter(item => item.type !== 'paste')
-        state.splice(spliceSettings.insertAtIndex, spliceSettings.deleteCount, itemToPaste)
+        const spliceSettings = getSpliceSettings()
+        const itemsWithoutPasteText = state.filter(item => item.type !== 'paste')
+        itemsWithoutPasteText.splice(spliceSettings.insertAtIndex, spliceSettings.deleteCount, itemToPaste)
+        return itemsWithoutPasteText
       })
   }
 })
