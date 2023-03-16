@@ -1,8 +1,8 @@
 import { store } from 'client/store'
 import { arrayMoveImmutable } from 'array-move'
 import { AnimatePresence } from 'framer-motion'
-import { saveOfferIntoLocalStorage } from 'client/modules/localStorage'
-import { saveItemsOrder } from './offerSlice'
+import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
+import { saveItemsOrder } from './itemsSlice'
 import { SortableContainer, SortableContainerProps } from 'react-sortable-hoc'
 
 // example with TypeScript
@@ -39,10 +39,10 @@ export const ItemsContainer = ({ children }: Props) => (
       document.body.style.cursor = 'move'
     }}
     onSortEnd={({ oldIndex, newIndex }) => {
-      const { items } = store.getState().offer
+      const { items } = store.getState()
       const sortedItems = arrayMoveImmutable(items, oldIndex, newIndex)
       store.dispatch(saveItemsOrder({ sortedItems }))
-      saveOfferIntoLocalStorage()
+      saveItemsIntoLocalStorage()
       document.body.style.cursor = 'default'
     }}
   >

@@ -1,7 +1,7 @@
-import { saveOfferIntoLocalStorage } from 'client/modules/localStorage'
+import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { useDispatchTyped } from 'client/store'
 import { Resizable } from 're-resizable'
-import { saveItemWidth } from '../../features/items/offerSlice'
+import { saveItemWidth } from '../../features/items/itemsSlice'
 
 interface Props {
   children: React.ReactNode
@@ -42,7 +42,7 @@ export const ResizablePaper = ({ children, width, index, itemRef }: Props) => {
       onResizeStop={(e, direction, refToElement) => {
         const width = parseInt(refToElement.style.width)
         dispatch(saveItemWidth({ width, index }))
-        saveOfferIntoLocalStorage()
+        saveItemsIntoLocalStorage()
       }}
     >
       {children}

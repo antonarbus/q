@@ -1,7 +1,7 @@
 import { useEffectOnce, useUnmount } from 'react-use'
 import { store } from 'client/store'
 import { hideCopyContainer, pasteItem, removeItemFromCopyContainer } from './copySlice'
-import { saveOfferIntoLocalStorage } from 'client/modules/localStorage'
+import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 
 function pasteItemOnClick() {
   const isPasteTextShown = store.getState().copy.isPasteTextShown
@@ -9,7 +9,7 @@ function pasteItemOnClick() {
   const { itemId, pastePos } = store.getState().copy.place
   const item = store.getState().copy.items[0]
   store.dispatch(pasteItem({ itemId, pastePos, item }))
-  saveOfferIntoLocalStorage()
+  saveItemsIntoLocalStorage()
   store.dispatch(removeItemFromCopyContainer())
   const items = store.getState().copy.items
   if (items.length === 0) store.dispatch(hideCopyContainer())

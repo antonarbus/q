@@ -4,7 +4,7 @@ import { PasteText } from '../copy/PasteText'
 import { TextItem } from './TextItem'
 
 export const Items = () => {
-  const items = useSelectorTyped(state => state.offer.items)
+  const items = useSelectorTyped(state => state.items)
 
   return (
     <ItemsContainer>
