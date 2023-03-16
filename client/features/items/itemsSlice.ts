@@ -4,7 +4,7 @@ import { getItemsFromLocalStorage } from 'client/modules/localStorage'
 import { RootState } from 'client/store'
 import { nanoid } from 'nanoid'
 import { CopyPlaceType } from '../copy/types'
-import { templateOffer } from '../offer/templateOffer'
+import { templateItems } from './templateItems'
 import { ItemType, ItemsType } from './types'
 
 //! think about splitting offer slice into items slice + offer slice + others
