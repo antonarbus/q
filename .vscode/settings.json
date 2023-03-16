@@ -8,6 +8,7 @@
     "camelcase",
     "copyfiles",
     "esbuild",
+    "Froala",
     "fvilers",
     "gsap",
     "Immer",
