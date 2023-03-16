@@ -1,6 +1,6 @@
-import { ItemsType } from '../items/types'
+import { ItemsType } from './types'
 
-export const templateOffer: ItemsType = [
+export const templateItems: ItemsType = [
   {
     id: 'id0',
     type: 'text',
