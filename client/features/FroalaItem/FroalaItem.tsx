@@ -1,14 +1,14 @@
 import parseHtml from 'html-react-parser'
 import { DraggableResizableItemWithActions } from 'client/components/DraggableResizableItemWithActions'
 import { ItemType } from '../items/types'
-// import FroalaEditor from 'react-froala-wysiwyg'
-import 'froala-editor/js/froala_editor.pkgd.min.js'
-import 'froala-editor/js/plugins.pkgd.min.js'
-import 'froala-editor/css/froala_style.min.css'
-import 'froala-editor/css/froala_editor.pkgd.min.css'
-import 'froala-editor/css/plugins.pkgd.min.css'
 import { useEffectOnce } from 'react-use'
+// import 'froala-editor/js/froala_editor.pkgd.min.js'
+// import 'froala-editor/js/plugins.pkgd.min.js'
+// import 'froala-editor/css/froala_style.min.css'
+// import 'froala-editor/css/froala_editor.pkgd.min.css'
+// import 'froala-editor/css/plugins.pkgd.min.css'
 // import 'font-awesome/css/font-awesome.css'
+// import FroalaEditor from 'froala-editor'
 
 type Props = {
   item: ItemType
