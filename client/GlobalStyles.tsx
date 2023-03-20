@@ -23,10 +23,10 @@ export const GlobalStyles = () => (
       /* css reset in 2022 */
       /* https://elad2412.github.io/the-new-css-reset/ */
     
-      *:where(:not(html, iframe, canvas, img, svg, video):not(svg *, symbol *)) {
+      /* *:where(:not(html, iframe, canvas, img, svg, video):not(svg *, symbol *)) {
         all: unset;
         display: revert;
-      }
+      } */
     
       /* Preferred box-sizing value */
       *, *::before, *::after {

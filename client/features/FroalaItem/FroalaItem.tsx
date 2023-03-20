@@ -1,22 +1,29 @@
+// // @ts-nocheck
 import parseHtml from 'html-react-parser'
 import { DraggableResizableItemWithActions } from 'client/components/DraggableResizableItemWithActions'
 import { ItemType } from '../items/types'
+import { Fragment } from 'react'
+import { useFroala } from './useFroala'
 import { useEffectOnce } from 'react-use'
-import { froalaOptions } from './froalaOptions'
-import { useRef } from 'react'
+import { useDispatchTyped } from 'client/store'
+import { updateItemText } from '../items/itemsSlice'
+import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 
 type Props = {
   item: ItemType
   index: number
 }
 
-// todo: init on click and destroy it on click away
-
 export const FroalaItem = ({ item, index }: Props) => {
-  const froalaElement = useRef() as React.MutableRefObject<HTMLDivElement>
+  const dispatch = useDispatchTyped()
+  const { froalaRef, editorRef } = useFroala({ initHtml: item.innerHtml })
+
   useEffectOnce(() => {
-    // @ts-ignore
-    const editor = new FroalaEditor(froalaElement.current, froalaOptions)
+    froalaRef.current.addEventListener('focusout', function saveText() {
+      const innerHTML = editorRef.current.html.get()
+      dispatch(updateItemText({ index, innerHTML }))
+      saveItemsIntoLocalStorage()
+    })
   })
 
   return (
@@ -25,8 +32,9 @@ export const FroalaItem = ({ item, index }: Props) => {
       item={item}
     >
       <div
-        ref={froalaElement}
+        ref={froalaRef}
         css={{
+          cursor: 'text',
           // html code
           '& .CodeMirror': {
             fontSize: '12px !important'
@@ -52,7 +60,9 @@ export const FroalaItem = ({ item, index }: Props) => {
           },
         }}
       >
-        {parseHtml(item.innerHtml)}
+        <Fragment>
+          {item.innerHtml}
+        </Fragment>
       </div>
     </DraggableResizableItemWithActions>
   )

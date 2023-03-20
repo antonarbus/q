@@ -7,8 +7,6 @@ import { CopyPlaceType } from '../copy/types'
 import { templateItems } from './templateItems'
 import { ItemType, ItemsType } from './types'
 
-//! think about splitting offer slice into items slice + offer slice + others
-//! save whole store in localStorage
 const initialState: ItemsType = getItemsFromLocalStorage()
 
 const itemsSlice = createSlice({
@@ -22,6 +20,10 @@ const itemsSlice = createSlice({
     },
     saveItemsOrder: (state, action) => action.payload.sortedItems,
     deleteItem: (state, action) => state.filter(item => item.id !== action.payload.id),
+    updateItemText: (state, action) => {
+      const { index, innerHTML } = action.payload
+      state[index].innerHtml = innerHTML
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -52,7 +54,6 @@ const itemsSlice = createSlice({
             spliceSettings.insertAtIndex++
             return spliceSettings
           }
-          // pastePos === 'middle'
           spliceSettings.deleteCount++
           return spliceSettings
         }
@@ -65,7 +66,7 @@ const itemsSlice = createSlice({
   }
 })
 
-export const { saveItemWidth, saveItemsOrder, deleteItem } = itemsSlice.actions
+export const { saveItemWidth, saveItemsOrder, deleteItem, updateItemText } = itemsSlice.actions
 
 export const selectIsLastItem = (state: RootState) => state.items.filter((item) => item.type !== 'paste').length === 1
 
