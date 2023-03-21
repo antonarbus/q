@@ -80,6 +80,7 @@ export const useFroala = ({ initHtml }) => {
       },
       function () {
         this.html.set(initHtml)
+        froalaRef.current.style.height = 'auto'
       }
     )
 
