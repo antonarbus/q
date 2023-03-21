@@ -59,10 +59,9 @@ export const FroalaItem = ({ item, index }: Props) => {
             }
           },
         }}
+        style={{ height: (item.height && item.height - 40) || 'auto' }}
       >
-        <Fragment>
-          {item.innerHtml}
-        </Fragment>
+        {/* {parseHtml(item.innerHtml)} */}
       </div>
     </DraggableResizableItemWithActions>
   )

@@ -35,6 +35,7 @@ const DraggableItems: React.ComponentClass<ISortableContainer, any> =
 export const ItemsContainer = ({ children }: Props) => (
   <DraggableItems
     useDragHandle
+    useWindowAsScrollContainer
     onSortStart={() => {
       document.body.style.cursor = 'move'
     }}
