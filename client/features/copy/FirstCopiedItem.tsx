@@ -61,7 +61,6 @@ export const FirstCopiedItem = () => {
         <div
           css={{
             padding: 20,
-            // marginBottom: 5,
             width: items[0].width,
             transformOrigin: 'left top',
             scale: `${scaleFactorForFirstItem}`,
