@@ -1,5 +1,6 @@
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { useDispatchTyped } from 'client/store'
+import { theme } from 'client/theme'
 import { Resizable } from 're-resizable'
 import { saveItemWidth } from '../../features/items/itemsSlice'
 
@@ -21,7 +22,7 @@ export const ResizablePaper = ({ children, width, index, itemRef }: Props) => {
         background: 'white',
         borderRadius: 6,
         boxShadow: '#00000033 0px 0px 10px 0px',
-        padding: 20,
+        padding: theme.item.padding,
         position: 'relative',
       }}
       defaultSize={{

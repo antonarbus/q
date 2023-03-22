@@ -39,6 +39,9 @@ const customTheme = {
       marginLeft: 10,
       marginRight: 10
     }
+  },
+  item: {
+    padding: 20
   }
 }
 

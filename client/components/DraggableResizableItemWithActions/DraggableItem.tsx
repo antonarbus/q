@@ -23,10 +23,6 @@ export const DraggableItem: React.ComponentClass<ISortableItem, any> = SortableE
         y: '100vh'
       }}
       animate={{
-        // todo: need to animate to the height to the copy item height
-        // todo: because froala initialization changes the height when converts html into text
-        // todo: and we see jump
-        // todo: so we need to make animate height static and when animation ends put it back to auto to let it auto-resize
         height: 'auto',
         marginBottom: 20,
         opacity: 1,
