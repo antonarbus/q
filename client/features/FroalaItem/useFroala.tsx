@@ -13,8 +13,11 @@ export const useFroala = ({ initHtml }) => {
       froalaRef.current,
       {
         toolbarInline: true,
-        fontSizeSelection: true,
+        // toolbarVisibleWithoutSelection: true,
         charCounterCount: false,
+        quickInsertEnabled: false,
+        fontSizeSelection: true,
+        fontSize: ['6', '8', '9', '10', '11', '12', '13', '14', '15', '16', '18', '20', '24', '30', '36', '48', '60', '72', '96'],
         tabSpaces: 4,
         toolbarButtons: {
           moreText: {
@@ -30,10 +33,35 @@ export const useFroala = ({ initHtml }) => {
             buttonsVisible: 4,
           }
         },
-        fontFamily: { Roboto: 'Roboto', Arial: 'Arial', Georgia: 'Georgia', Tahoma: 'Tahoma', Verdana: 'Verdana', Helvetica: 'Helvetica', 'Trebuchet MS': 'Trebuchet MS', 'Times New Roman': 'Times New Roman', Garamond: 'Garamond', 'Courier New': 'Courier New', 'Brush Script MT': 'Brush Script MT' },
+        fontFamily: {
+          '"Roboto","Helvetica","Arial",sans-serif': 'Roboto',
+          'Arial,Helvetica,sans-serif': 'Arial',
+          'Georgia,serif': 'Georgia',
+          'Impact,Charcoal,sans-serif': 'Impact',
+          'Tahoma,Geneva,sans-serif': 'Tahoma',
+          'Verdana,Geneva,sans-serif': 'Verdana',
+          Helvetica: 'Helvetica',
+          'Trebuchet MS': 'Trebuchet MS',
+          "'Times New Roman',Times,serif": 'Times New Roman',
+          Garamond: 'Garamond',
+          'Courier New': 'Courier New',
+          'Brush Script MT': 'Brush Script MT'
+        },
         placeholderText: 'Your text, links, files & images go here...',
         tableInsertHelper: false,
         tableInsertMaxSize: 12,
+        inlineStyles: {
+          'Big red': 'font-size: 20px; color: red;',
+          'Small blue': 'font-size: 14px; color: blue;',
+          'Bit bold': 'font-weight: 400;',
+          'More bold': 'font-weight: 600;',
+        },
+        inlineClasses: {
+          'fr-class-code': 'Code',
+          'fr-class-highlighted': 'Highlighted',
+          'fr-class-transparency': 'Transparent',
+          'custom-class': 'Custom',
+        },
         // https://froala.com/wysiwyg-editor/docs/concepts/image/upload/
         // imageUploadURL: './../phps/upload_image.php',
         // fileUploadURL: './../phps/upload_file.php',

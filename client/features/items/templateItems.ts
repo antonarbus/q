@@ -24,14 +24,14 @@ export const templateItems: ItemsType = [
   },
   {
     id: 'id3',
-    type: 'text',
+    type: 'text editable',
     width: 500,
     height: 73,
     innerHtml: '<div>3</div>'
   },
   {
     id: 'id4',
-    type: 'text',
+    type: 'text editable',
     width: 400,
     height: 73,
     innerHtml: '<div>4</div>'

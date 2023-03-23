@@ -1,5 +1,6 @@
 import { SortableElement, SortableElementProps } from 'react-sortable-hoc'
 import { motion } from 'framer-motion'
+import { theme } from 'client/theme'
 
 type Props = {
   children: React.ReactNode,
@@ -35,7 +36,7 @@ export const DraggableItem: React.ComponentClass<ISortableItem, any> = SortableE
         x: '200vw'
       }}
       transition={{
-        duration: 0.3
+        duration: theme.item.animationDuration
       }}
       css={{
         display: 'flex',

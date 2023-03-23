@@ -1,3 +1,4 @@
+import { theme } from 'client/theme'
 import { motion } from 'framer-motion'
 
 export const PasteText = () => (
@@ -18,8 +19,8 @@ export const PasteText = () => (
       opacity: 0,
     }}
     transition={{
-      height: { duration: 0.3 },
-      marginBottom: { duration: 0.3 },
+      height: { duration: theme.item.animationDuration },
+      marginBottom: { duration: theme.item.animationDuration },
       opacity: { duration: 0 },
     }}
     css={{

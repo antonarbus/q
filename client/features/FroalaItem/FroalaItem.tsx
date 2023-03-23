@@ -34,6 +34,8 @@ export const FroalaItem = ({ item, index }: Props) => {
         ref={froalaRef}
         css={{
           cursor: 'text',
+          fontWeight: 300,
+          fontSize: 16,
           // html code
           '& .CodeMirror': {
             fontSize: '12px !important'
