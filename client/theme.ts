@@ -41,7 +41,8 @@ const customTheme = {
     }
   },
   item: {
-    padding: 20
+    padding: 20,
+    animationDuration: 0.4
   }
 }
 
