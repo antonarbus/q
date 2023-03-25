@@ -41,7 +41,7 @@ const itemsSlice = createSlice({
       .addCase(hideCopyContainer, (state) => state.filter(item => item.type !== 'paste'))
       .addCase(pasteItem, (state, action) => {
         const { itemId, pastePos, item } = action.payload
-        const itemToPaste = { ...item, id: nanoid() }
+        const itemToPaste = { ...item, id: nanoid(5) }
         const hoveredItemIndex = state.findIndex(item => item.id === itemId)
 
         const getSpliceSettings = () => {
