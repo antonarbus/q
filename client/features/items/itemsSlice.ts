@@ -1,11 +1,11 @@
-import { createSlice, current } from '@reduxjs/toolkit'
+import { createSelector, createSlice, current } from '@reduxjs/toolkit'
 import { hideCopyContainer, pasteItem, updatePasteTextPos } from 'client/features/copy/copySlice'
 import { getItemsFromLocalStorage } from 'client/modules/localStorage'
 import { RootState } from 'client/store'
 import { nanoid } from 'nanoid'
 import { CopyPlaceType } from '../copy/types'
-import { templateItems } from './templateItems'
 import { ItemType, ItemsType } from './types'
+// import isEqual from 'lodash.isequal'
 
 const initialState: ItemsType = getItemsFromLocalStorage()
 
@@ -69,5 +69,22 @@ const itemsSlice = createSlice({
 export const { saveItemWidth, saveItemsOrder, deleteItem, updateItemText } = itemsSlice.actions
 
 export const selectIsLastItem = (state: RootState) => state.items.filter((item) => item.type !== 'paste').length === 1
+
+export const selectItemsShape = createSelector(
+  [(state: RootState) => state.items],
+  (items) => items,
+  {
+    memoizeOptions: {
+      // resultEqualityCheck: isEqual
+      resultEqualityCheck: (prevItems:ItemsType, currentItems:ItemsType) => {
+        const addedOrDeletedItem = prevItems.length !== currentItems.length
+        if (addedOrDeletedItem) return false
+        const itemsIdsDoNotMatch = prevItems.some((item, index) => item.id !== currentItems[index]?.id)
+        if (itemsIdsDoNotMatch) return false
+        return true
+      }
+    }
+  }
+)
 
 export default itemsSlice.reducer
