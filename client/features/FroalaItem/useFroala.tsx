@@ -1,9 +1,11 @@
 // // @ts-nocheck
+import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { useDispatchTyped } from 'client/store'
 import { useRef } from 'react'
 import { useEffectOnce } from 'react-use'
+import { updateItemText } from '../items/itemsSlice'
 
-export const useFroala = ({ initHtml }) => {
+export const useFroala = ({ initHtml, index }) => {
   const froalaRef = useRef() as React.MutableRefObject<HTMLDivElement>
   const dispatch = useDispatchTyped()
   const editorRef = useRef()
@@ -115,6 +117,14 @@ export const useFroala = ({ initHtml }) => {
     return () => {
       editorRef.current.destroy()
     }
+  })
+
+  useEffectOnce(() => {
+    froalaRef.current.addEventListener('focusout', function saveText() {
+      const innerHTML = editorRef.current.html.get()
+      dispatch(updateItemText({ index, innerHTML }))
+      saveItemsIntoLocalStorage()
+    })
   })
 
   return { froalaRef, editorRef }

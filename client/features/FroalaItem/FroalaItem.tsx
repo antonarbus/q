@@ -2,10 +2,6 @@
 import { DraggableResizableItemWithActions } from 'client/components/DraggableResizableItemWithActions'
 import { ItemType } from '../items/types'
 import { useFroala } from './useFroala'
-import { useEffectOnce } from 'react-use'
-import { useDispatchTyped } from 'client/store'
-import { updateItemText } from '../items/itemsSlice'
-import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { theme } from 'client/theme'
 
 type Props = {
@@ -14,16 +10,7 @@ type Props = {
 }
 
 export const FroalaItem = ({ item, index }: Props) => {
-  const dispatch = useDispatchTyped()
-  const { froalaRef, editorRef } = useFroala({ initHtml: item.innerHtml })
-
-  useEffectOnce(() => {
-    froalaRef.current.addEventListener('focusout', function saveText() {
-      const innerHTML = editorRef.current.html.get()
-      dispatch(updateItemText({ index, innerHTML }))
-      saveItemsIntoLocalStorage()
-    })
-  })
+  const { froalaRef } = useFroala({ initHtml: item.innerHtml, index })
 
   return (
     <DraggableResizableItemWithActions
