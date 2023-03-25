@@ -27,7 +27,7 @@ export const PasteText = () => (
       display: 'grid',
       placeItems: 'center',
       fontWeight: 600,
-      color: '#b4b4b4',
+      color: theme.copy.pasteTextColor,
       userSelect: 'none',
     }}
   >

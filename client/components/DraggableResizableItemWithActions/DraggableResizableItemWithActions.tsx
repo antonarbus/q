@@ -24,6 +24,11 @@ export const DraggableResizableItemWithActions = ({ item, index, children }: Pro
   const isLastItem = useSelectorTyped(selectIsLastItem)
   const isDisabled = isPasteMode || isLastItem
 
+  const pastePos = useSelectorTyped(state => state.copy.place.pastePos)
+  const pasteItemId = useSelectorTyped(state => state.copy.place.itemId)
+  const isPasteTextShown = useSelectorTyped(state => state.copy.isPasteTextShown)
+  const isPasteHereShown = isPasteTextShown && item.id === pasteItemId && pastePos === 'middle'
+
   return (
     <DraggableItem
       disabled={isDisabled}
@@ -37,8 +42,10 @@ export const DraggableResizableItemWithActions = ({ item, index, children }: Pro
         <DeleteIcon itemToDelete={item}/>
       </ActionsContainer>
       <ResizablePaper key={item.id} width={item.width} index={index} itemRef={itemRef}>
-        {children}
-        <PasteTextInMiddle id={item.id}/>
+        <div style={{ opacity: isPasteHereShown ? 0.2 : 1 }}>
+          {children}
+        </div>
+        <PasteTextInMiddle isPasteHereShown={isPasteHereShown}/>
       </ResizablePaper>
       <ActionsContainer/> {/* Right action container is used for symmetry, probably add there some icons later */}
     </DraggableItem>

@@ -1,23 +1,17 @@
-import { useSelectorTyped } from 'client/store'
+import { theme } from 'client/theme'
 
 type Props = {
-  id: string
+  isPasteHereShown: boolean
 }
 
-export const PasteTextInMiddle = ({ id }: Props) => {
-  const pastePos = useSelectorTyped(state => state.copy.place.pastePos)
-  const itemId = useSelectorTyped(state => state.copy.place.itemId)
-  const isPasteTextShown = useSelectorTyped(state => state.copy.isPasteTextShown)
-
-  if (!isPasteTextShown) return null
-  if (pastePos !== 'middle') return null
-  if (id !== itemId) return null
+export const PasteTextInMiddle = ({ isPasteHereShown }: Props) => {
+  if (!isPasteHereShown) return null
 
   return (
     <div
       css={{
         fontWeight: 600,
-        color: '#b4b4b4',
+        color: theme.copy.pasteTextColor,
         height: '100%',
         width: '100%',
         position: 'absolute',
