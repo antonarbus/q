@@ -2,16 +2,14 @@ import { ActionsContainer } from 'client/components/DraggableResizableItemWithAc
 import { CopyIcon } from 'client/components/DraggableResizableItemWithActions/CopyIcon'
 import { CutIcon } from 'client/components/DraggableResizableItemWithActions/CutIcon'
 import { DeleteIcon } from 'client/components/DraggableResizableItemWithActions/DeleteIcon'
-import { selectIsLastItem } from 'client/features/items/itemsSlice'
 import { PasteTextInMiddle } from 'client/features/copy/PasteTextInMiddle'
 import { ResizablePaper } from 'client/components/DraggableResizableItemWithActions/ResizablePaper'
 import { ItemType } from 'client/features/items/types'
-import { useSelectorTyped } from 'client/store'
 import { Resizable } from 're-resizable'
 import { useRef } from 'react'
 import { DraggableItem } from './DraggableItem'
 import { DragIcon } from './DragIcon'
-import { useIsDisabledItem } from './useIsDisableduseIsDisabledItem'
+import { useIsDisabledItem } from './useIsDisabledItem'
 import { useIsPasteHere } from './useIsPasteHere'
 
 type Props = {

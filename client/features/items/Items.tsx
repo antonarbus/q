@@ -3,10 +3,11 @@ import { ItemsContainer } from './ItemsContainer'
 import { PasteText } from '../copy/PasteText'
 import { FroalaItem } from '../FroalaItem'
 import { TextItem } from './TextItem'
-import { selectItemsShape } from './itemsSlice'
+// import { selectItemsShape } from './itemsSlice'
 
 export const Items = () => {
-  const itemsShape = useSelectorTyped(selectItemsShape)
+  // const itemsShape = useSelectorTyped(selectItemsShape)
+  const itemsShape = useSelectorTyped(state => state.items)
 
   return (
     <ItemsContainer>

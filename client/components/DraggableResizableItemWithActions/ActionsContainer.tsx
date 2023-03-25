@@ -14,6 +14,11 @@ export const ActionsContainer = ({ children }: Props) => (
       flexShrink: 0,
       userSelect: 'none',
       '& svg': { display: 'block' },
+      '& span': {
+        '&:focus': {
+          outline: 0
+        },
+      }
     }}
   >
     {children}
