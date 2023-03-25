@@ -8,8 +8,6 @@ import { selectItemsShape } from './itemsSlice'
 export const Items = () => {
   const itemsShape = useSelectorTyped(selectItemsShape)
 
-  console.log('items')
-
   return (
     <ItemsContainer>
       {itemsShape.map((item, index) => {
