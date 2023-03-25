@@ -11,6 +11,8 @@ import { Resizable } from 're-resizable'
 import { useRef } from 'react'
 import { DraggableItem } from './DraggableItem'
 import { DragIcon } from './DragIcon'
+import { useIsDisabledItem } from './useIsDisableduseIsDisabledItem'
+import { useIsPasteHere } from './useIsPasteHere'
 
 type Props = {
   item: ItemType,
@@ -20,14 +22,8 @@ type Props = {
 
 export const DraggableResizableItemWithActions = ({ item, index, children }: Props) => {
   const itemRef = useRef() as React.MutableRefObject<Resizable>
-  const isPasteMode = useSelectorTyped(state => state.copy.isShown)
-  const isLastItem = useSelectorTyped(selectIsLastItem)
-  const isDisabled = isPasteMode || isLastItem
-
-  const pastePos = useSelectorTyped(state => state.copy.place.pastePos)
-  const pasteItemId = useSelectorTyped(state => state.copy.place.itemId)
-  const isPasteTextShown = useSelectorTyped(state => state.copy.isPasteTextShown)
-  const isPasteHereShown = isPasteTextShown && item.id === pasteItemId && pastePos === 'middle'
+  const isDisabled = useIsDisabledItem()
+  const isPasteHere = useIsPasteHere({ itemId: item.id })
 
   return (
     <DraggableItem
@@ -42,10 +38,10 @@ export const DraggableResizableItemWithActions = ({ item, index, children }: Pro
         <DeleteIcon itemToDelete={item}/>
       </ActionsContainer>
       <ResizablePaper key={item.id} width={item.width} index={index} itemRef={itemRef}>
-        <div style={{ opacity: isPasteHereShown ? 0.2 : 1 }}>
+        <div style={{ opacity: isPasteHere ? 0.2 : 1 }}>
           {children}
         </div>
-        <PasteTextInMiddle isPasteHereShown={isPasteHereShown}/>
+        <PasteTextInMiddle isPasteHereShown={isPasteHere}/>
       </ResizablePaper>
       <ActionsContainer/> {/* Right action container is used for symmetry, probably add there some icons later */}
     </DraggableItem>
