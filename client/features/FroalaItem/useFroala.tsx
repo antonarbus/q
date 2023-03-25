@@ -5,10 +5,15 @@ import { useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 import { updateItemText } from '../items/itemsSlice'
 
-export const useFroala = ({ initHtml, index }) => {
+type Props = {
+  initHtml: string
+  index: number
+}
+
+export const useFroala = ({ initHtml, index }: Props) => {
   const froalaRef = useRef() as React.MutableRefObject<HTMLDivElement>
   const dispatch = useDispatchTyped()
-  const editorRef = useRef()
+  const editorRef = useRef() as React.MutableRefObject<any>
 
   useEffectOnce(() => {
     editorRef.current = new FroalaEditor(
