@@ -3,13 +3,16 @@ import { ItemsContainer } from './ItemsContainer'
 import { PasteText } from '../copy/PasteText'
 import { FroalaItem } from '../FroalaItem'
 import { TextItem } from './TextItem'
+import { selectItemsShape } from './itemsSlice'
 
 export const Items = () => {
-  const items = useSelectorTyped(state => state.items)
+  const itemsShape = useSelectorTyped(selectItemsShape)
+
+  console.log('items')
 
   return (
     <ItemsContainer>
-      {items.map((item, index) => {
+      {itemsShape.map((item, index) => {
         if (item.type === 'text') return <TextItem key={item.id} item={item} index={index} />
         if (item.type === 'text editable') return <FroalaItem key={item.id} item={item} index={index} />
         if (item.type === 'paste') return <PasteText key={item.id} />
