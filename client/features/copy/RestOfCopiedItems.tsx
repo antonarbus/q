@@ -71,6 +71,7 @@ export const RestOfCopiedItems = () => {
               }}
             >
               <div
+                className='fr-wrapper fr-element fr-view fr-box'
                 css={{
                   padding: 20,
                   width: item.width,

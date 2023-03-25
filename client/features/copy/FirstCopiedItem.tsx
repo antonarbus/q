@@ -59,6 +59,7 @@ export const FirstCopiedItem = () => {
         }}
       >
         <div
+          className='fr-wrapper fr-element fr-view fr-box'
           css={{
             padding: 20,
             width: items[0].width,

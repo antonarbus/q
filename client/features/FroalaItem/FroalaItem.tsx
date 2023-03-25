@@ -10,6 +10,7 @@ type Props = {
 }
 
 export const FroalaItem = ({ item, index }: Props) => {
+  console.log('🚀 ~  FroalaItem: ' + index)
   const { froalaRef } = useFroala({ initHtml: item.innerHtml, index })
 
   return (
