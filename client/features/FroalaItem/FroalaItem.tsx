@@ -3,15 +3,29 @@ import { DraggableResizableItemWithActions } from 'client/components/DraggableRe
 import { ItemType } from '../items/types'
 import { useFroala } from './useFroala'
 import { theme } from 'client/theme'
+import { useSelectorTyped } from 'client/store'
 
 type Props = {
   item: ItemType
   index: number
 }
 
+// for unknown to me reason (most likely due to delayed exit animation)
+// useSelector is triggered on already deleted item, which returns in fatal error
+// in case item is not found (undefined) we tell that states values are equal
+// and there is no re-render
+const equalityFn = (prevItem:any, currentItem:any) => {
+  const isItemDeleted = currentItem === undefined
+  if (isItemDeleted) return true
+  return false
+}
+
 export const FroalaItem = ({ item, index }: Props) => {
-  console.log('🚀 ~  FroalaItem: ' + index)
   const { froalaRef } = useFroala({ initHtml: item.innerHtml, index })
+
+  // for the experiment sake
+  console.log('🚀 ~  FroalaItem: ' + index)
+  useSelectorTyped(state => state.items?.[index]?.width, equalityFn)
 
   return (
     <DraggableResizableItemWithActions
