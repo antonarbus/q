@@ -119,6 +119,7 @@ export const useFroala = ({ initHtml, index }: Props) => {
   useEffectOnce(() => {
     froalaRef.current.addEventListener('focusout', function saveText() {
       const innerHTML = editorRef.current.html.get()
+      //! need also save item height
       dispatch(updateItemText({ index, innerHTML }))
       saveItemsIntoLocalStorage()
     })
