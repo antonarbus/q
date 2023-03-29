@@ -6,7 +6,6 @@ import { PasteTextInMiddle } from 'client/features/copy/PasteTextInMiddle'
 import { ResizablePaper } from 'client/components/DraggableResizableItemWithActions/ResizablePaper'
 import { ItemType } from 'client/features/items/types'
 import { Resizable } from 're-resizable'
-import { useRef } from 'react'
 import { DraggableItem } from './DraggableItem'
 import { DragIcon } from './DragIcon'
 import { useIsDisabledItem } from './useIsDisabledItem'
@@ -16,10 +15,10 @@ type Props = {
   item: ItemType,
   index: number,
   children: React.ReactNode
+  itemRef: React.MutableRefObject<Resizable>
 }
 
-export const DraggableResizableItemWithActions = ({ item, index, children }: Props) => {
-  const itemRef = useRef() as React.MutableRefObject<Resizable>
+export const DraggableResizableItemWithActions = ({ item, index, children, itemRef }: Props) => {
   const isDisabled = useIsDisabledItem()
   const isPasteHere = useIsPasteHere({ itemId: item.id })
 

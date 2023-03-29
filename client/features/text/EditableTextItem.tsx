@@ -4,6 +4,8 @@ import { ItemType } from '../items/types'
 import { useFroala } from './useFroala'
 import { theme } from 'client/theme'
 import { useSelectorTyped } from 'client/store'
+import { useRef } from 'react'
+import { Resizable } from 're-resizable'
 
 type Props = {
   item: ItemType
@@ -22,13 +24,15 @@ const equalityFn = (prevItem:any, currentItem:any) => {
 
 export const EditableTextItem = ({ index }: Props) => {
   const item = useSelectorTyped(state => state.items?.[index], equalityFn)
-  const { froalaRef } = useFroala({ initHtml: item.innerHtml, index })
+  const itemRef = useRef() as React.MutableRefObject<Resizable>
+  const { froalaRef } = useFroala({ initHtml: item.innerHtml, index, itemRef })
   console.log('🚀 ~  EditableTextItem: ' + index)
 
   return (
     <DraggableResizableItemWithActions
       index={index}
       item={item}
+      itemRef={itemRef}
     >
       <div
         ref={froalaRef}
