@@ -20,12 +20,10 @@ const equalityFn = (prevItem:any, currentItem:any) => {
   return false
 }
 
-export const FroalaItem = ({ item, index }: Props) => {
+export const EditableTextItem = ({ index }: Props) => {
+  const item = useSelectorTyped(state => state.items?.[index], equalityFn)
   const { froalaRef } = useFroala({ initHtml: item.innerHtml, index })
-
-  // for the experiment sake
-  console.log('🚀 ~  FroalaItem: ' + index)
-  useSelectorTyped(state => state.items?.[index]?.width, equalityFn)
+  console.log('🚀 ~  EditableTextItem: ' + index)
 
   return (
     <DraggableResizableItemWithActions
@@ -36,7 +34,6 @@ export const FroalaItem = ({ item, index }: Props) => {
         ref={froalaRef}
         css={{
           cursor: 'text',
-          fontWeight: 300,
           fontSize: 16,
           // html code
           '& .CodeMirror': {

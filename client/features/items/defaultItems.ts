@@ -1,39 +1,39 @@
 import { ItemsType } from './types'
 
-export const templateItems: ItemsType = [
+export const defaultItems: ItemsType = [
   {
     id: 'id0',
     type: 'text editable',
     width: 800,
-    height: 136,
-    innerHtml: '<div>0</div><div>0</div><div>0</div><div>0</div>'
+    height: 73,
+    innerHtml: '<div>editable text</div>'
   },
   {
     id: 'id1',
-    type: 'text editable',
+    type: 'boq',
     width: 700,
-    height: 88,
-    innerHtml: '<div>1</div><div>1</div>'
+    height: 73,
+    innerHtml: '<div>boq</div>'
   },
   {
     id: 'id2',
     type: 'text editable',
     width: 600,
     height: 73,
-    innerHtml: '<div>2</div>'
+    innerHtml: '<div>editable text</div>'
   },
   {
     id: 'id3',
     type: 'text editable',
     width: 500,
     height: 73,
-    innerHtml: '<div>3</div>'
+    innerHtml: '<div>editable text</div>'
   },
   {
     id: 'id4',
-    type: 'text editable',
+    type: 'text',
     width: 400,
     height: 73,
-    innerHtml: '<div>4</div>'
+    innerHtml: '<div>not editable text</div>'
   }
 ]

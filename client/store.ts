@@ -6,12 +6,14 @@ import nav from 'client/features/nav/navSlice'
 import items from 'client/features/items/itemsSlice'
 import spinner from 'client/features/spinner/spinnerSlice'
 import copy from 'client/features/copy/copySlice'
+import offer from 'client/features/offer/offerSlice'
 
 export const store = configureStore({
   reducer: {
     counter,
     credentials,
     nav,
+    offer,
     items,
     spinner,
     copy

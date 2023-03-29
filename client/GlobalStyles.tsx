@@ -4,19 +4,19 @@ export const GlobalStyles = () => (
   <Global
     styles={css`
       body{
-        background-color:#e9e9e9;
-        color:rgba(0, 0, 0, 0.87);
-        font-family:"Roboto","Helvetica","Arial",sans-serif;
-        font-weight:400;
-        font-size:1rem;
-        line-height:1.5;
-        letter-spacing:0.00938em;
+        background-color: #e9e9e9;
+        color: rgba(0, 0, 0, 0.87);
+        font-family: "Roboto","Helvetica","Arial",sans-serif;
+        font-weight: 300;
+        font-size: 1rem;
+        line-height: 1.5;
+        letter-spacing: 0.00938em;
         height: 100dvh;
       }
     
       button {
         border: 1px solid grey;
-        border-radius: px;
+        border-radius: 4px;
         padding: 5px;
       }
     
