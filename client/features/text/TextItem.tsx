@@ -1,5 +1,5 @@
 import parseHtml from 'html-react-parser'
-import { ItemType } from './types'
+import { ItemType } from '../items/types'
 import { DraggableResizableItemWithActions } from 'client/components/DraggableResizableItemWithActions'
 
 type Props = {

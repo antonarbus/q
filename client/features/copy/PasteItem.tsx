@@ -1,7 +1,7 @@
 import { theme } from 'client/theme'
 import { motion } from 'framer-motion'
 
-export const PasteText = () => (
+export const PasteItem = () => (
   <motion.div
     initial={{
       height: 0,

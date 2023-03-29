@@ -1,7 +1,7 @@
 // // @ts-nocheck
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
-import { useDispatchTyped } from 'client/store'
-import { useRef } from 'react'
+import { useDispatchTyped, useSelectorTyped } from 'client/store'
+import { useEffect, useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 import { updateItemText } from '../items/itemsSlice'
 
@@ -14,8 +14,9 @@ export const useFroala = ({ initHtml, index }: Props) => {
   const froalaRef = useRef() as React.MutableRefObject<HTMLDivElement>
   const dispatch = useDispatchTyped()
   const editorRef = useRef() as React.MutableRefObject<any>
+  const resetItemsToDefaults = useSelectorTyped(state => state.offer.toggleOffer)
 
-  useEffectOnce(() => {
+  useEffect(() => {
     editorRef.current = new FroalaEditor(
       froalaRef.current,
       {
@@ -67,7 +68,6 @@ export const useFroala = ({ initHtml, index }: Props) => {
           'fr-class-code': 'Code',
           'fr-class-highlighted': 'Highlighted',
           'fr-class-transparency': 'Transparent',
-          'custom-class': 'Custom',
         },
         // https://froala.com/wysiwyg-editor/docs/concepts/image/upload/
         // imageUploadURL: './../phps/upload_image.php',
@@ -101,14 +101,6 @@ export const useFroala = ({ initHtml, index }: Props) => {
           'toolbar.hide': function () {
           // console.log('toolbar off')
           },
-        // 'html.get': function (xxx) {
-        //   // https://froala.com/wysiwyg-editor/docs/events/#html.get
-        //   console.log(this)
-        //   const innerHTML = editor.current.html.get()
-        //   // console.log('🚀 ~ file: FroalaItem.tsx:36 ~ saveText ~ innerHTML:', innerHTML)
-        //   // dispatch(updateItemText({ index, innerHTML }))
-        //   // saveItemsIntoLocalStorage()
-        // }
         },
         key:
         'AVB8B-21D4B3B2E1F1G1uB-33B-21cyoF-10yB-7G-7gB-22zzE2wkA-7gC7B7D6B4E4F3D2I3H2C5==',
@@ -122,7 +114,7 @@ export const useFroala = ({ initHtml, index }: Props) => {
     return () => {
       editorRef.current.destroy()
     }
-  })
+  }, [resetItemsToDefaults])
 
   useEffectOnce(() => {
     froalaRef.current.addEventListener('focusout', function saveText() {

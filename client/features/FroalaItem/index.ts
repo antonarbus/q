@@ -1,1 +1,0 @@
-export { FroalaItem } from './FroalaItem'

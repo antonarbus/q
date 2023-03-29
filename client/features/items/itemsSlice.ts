@@ -4,6 +4,7 @@ import { getItemsFromLocalStorage } from 'client/modules/localStorage'
 import { RootState } from 'client/store'
 import { nanoid } from 'nanoid'
 import { CopyPlaceType } from '../copy/types'
+import { defaultItems } from './defaultItems'
 import { ItemType, ItemsType } from './types'
 // import isEqual from 'lodash.isequal'
 
@@ -24,6 +25,7 @@ const itemsSlice = createSlice({
       const { index, innerHTML } = action.payload
       state[index].innerHtml = innerHTML
     },
+    resetItemsToDefault: () => defaultItems
   },
   extraReducers: (builder) => {
     builder
@@ -66,7 +68,7 @@ const itemsSlice = createSlice({
   }
 })
 
-export const { saveItemWidth, saveItemsOrder, deleteItem, updateItemText } = itemsSlice.actions
+export const { saveItemWidth, saveItemsOrder, deleteItem, updateItemText, resetItemsToDefault } = itemsSlice.actions
 
 export const selectIsLastItem = (state: RootState) => state.items.filter((item) => item.type !== 'paste').length === 1
 
