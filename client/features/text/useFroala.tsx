@@ -1,6 +1,7 @@
 // // @ts-nocheck
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { useDispatchTyped, useSelectorTyped } from 'client/store'
+import { Resizable } from 're-resizable'
 import { useEffect, useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 import { updateItemText } from '../items/itemsSlice'
@@ -8,15 +9,17 @@ import { updateItemText } from '../items/itemsSlice'
 type Props = {
   initHtml: string
   index: number
+  itemRef: React.MutableRefObject<Resizable>
 }
 
-export const useFroala = ({ initHtml, index }: Props) => {
+export const useFroala = ({ initHtml, index, itemRef }: Props) => {
   const froalaRef = useRef() as React.MutableRefObject<HTMLDivElement>
   const dispatch = useDispatchTyped()
   const editorRef = useRef() as React.MutableRefObject<any>
   const resetItemsToDefaults = useSelectorTyped(state => state.offer.toggleOffer)
 
   useEffect(() => {
+    // @ts-ignore
     editorRef.current = new FroalaEditor(
       froalaRef.current,
       {
@@ -77,6 +80,7 @@ export const useFroala = ({ initHtml, index }: Props) => {
         // https://froala.com/wysiwyg-editor/docs/events/
         events: {
         // https://froala.com/wysiwyg-editor/docs/events/#image.removed
+          // @ts-ignore
           'image.removed': function ($img) {
           // Do something here.
             console.log(this)
@@ -106,6 +110,7 @@ export const useFroala = ({ initHtml, index }: Props) => {
         'AVB8B-21D4B3B2E1F1G1uB-33B-21cyoF-10yB-7G-7gB-22zzE2wkA-7gC7B7D6B4E4F3D2I3H2C5==',
       },
       function () {
+        // @ts-ignore
         this.html.set(initHtml)
         froalaRef.current.style.height = 'auto'
       }
@@ -119,8 +124,10 @@ export const useFroala = ({ initHtml, index }: Props) => {
   useEffectOnce(() => {
     froalaRef.current.addEventListener('focusout', function saveText() {
       const innerHTML = editorRef.current.html.get()
-      //! need also save item height
       dispatch(updateItemText({ index, innerHTML }))
+
+      //! need also save item height
+      const itemHeight = itemRef.current.resizable?.offsetHeight
       saveItemsIntoLocalStorage()
     })
   })
