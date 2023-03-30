@@ -18,7 +18,7 @@ export const ResizablePaper = ({ children, width, index, itemRef }: Props) => {
   return (
     <Resizable
       ref={itemRef}
-      size={{ width, height: 'auto' }}
+      // size={{ width, height: 'auto' }}
       css={{
         background: 'white',
         borderRadius: 6,
