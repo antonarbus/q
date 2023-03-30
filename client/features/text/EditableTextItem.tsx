@@ -22,8 +22,8 @@ const equalityFn = (prevItem:any, currentItem:any) => {
   return false
 }
 
-export const EditableTextItem = ({ index }: Props) => {
-  const item = useSelectorTyped(state => state.items?.[index], equalityFn)
+export const EditableTextItem = ({ index, item }: Props) => {
+  // const item = useSelectorTyped(state => state.items?.[index], equalityFn)
   const itemRef = useRef() as React.MutableRefObject<Resizable>
   const { froalaRef } = useFroala({ initHtml: item.innerHtml, index, itemRef })
   console.log('🚀 ~  EditableTextItem: ' + index)
