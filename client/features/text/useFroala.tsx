@@ -3,7 +3,7 @@ import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { useDispatchTyped, useSelectorTyped } from 'client/store'
 import { Resizable } from 're-resizable'
 import { useEffect, useRef } from 'react'
-import { useEffectOnce } from 'react-use'
+import { useUpdateEffect } from 'react-use'
 import { updateItemText } from '../items/itemsSlice'
 
 type Props = {
@@ -121,16 +121,22 @@ export const useFroala = ({ initHtml, index, itemRef }: Props) => {
     }
   }, [resetItemsToDefaults])
 
-  useEffectOnce(() => {
-    froalaRef.current.addEventListener('focusout', function saveText() {
+  useEffect(() => {
+    function saveText() {
       const innerHTML = editorRef.current.html.get()
       dispatch(updateItemText({ index, innerHTML }))
-
       //! need also save item height
       const itemHeight = itemRef.current.resizable?.offsetHeight
       saveItemsIntoLocalStorage()
-    })
-  })
+    }
+
+    froalaRef.current.addEventListener('focusout', saveText)
+
+    return () => {
+      if (!froalaRef?.current) return
+      froalaRef.current.removeEventListener('focusout', saveText)
+    }
+  }, [index])
 
   return { froalaRef, editorRef }
 }
