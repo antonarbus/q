@@ -67,7 +67,7 @@ export const FirstCopiedItem = () => {
             scale: `${scaleFactorForFirstItem}`,
           }}
         >
-          {parseHtml(items[0].innerHtml)}
+          {parseHtml(items[0].html)}
         </div>
       </motion.div>
     </AnimatePresence>
