@@ -1,4 +1,4 @@
-import { createSelector, createSlice, current } from '@reduxjs/toolkit'
+import { PayloadAction, createSelector, createSlice, current } from '@reduxjs/toolkit'
 import { hideCopyContainer, pasteItem, updatePasteTextPos } from 'client/features/copy/copySlice'
 import { getItemsFromLocalStorage } from 'client/modules/localStorage'
 import { RootState } from 'client/store'
@@ -8,26 +8,23 @@ import { defaultItems } from './defaultItems'
 import { ItemType, ItemsType } from './types'
 // import isEqual from 'lodash.isequal'
 
+type ItemUpdatePayloadType = {
+  index: number,
+  props: Partial<ItemType>
+}
+
 const initialState: ItemsType = getItemsFromLocalStorage()
 
 const itemsSlice = createSlice({
   name: 'items',
   initialState,
   reducers: {
-    saveItemWidth: (state, action) => {
-      const { width, index } = action.payload
-      state[index].width = width
-      // console.log(current(state))
-    },
-    saveItemHeight: (state, action) => {
-      const { index, height } = action.payload
-      state[index].height = height
-    },
     saveItemsOrder: (state, action) => action.payload.sortedItems,
     deleteItem: (state, action) => state.filter(item => item.id !== action.payload.id),
-    updateItemText: (state, action) => {
-      const { index, innerHTML } = action.payload
-      state[index].innerHtml = innerHTML
+    updateItem: (state, action: PayloadAction<ItemUpdatePayloadType>) => {
+      // console.log(current(state))
+      const { index, props } = action.payload
+      state[index] = { ...state[index], ...props }
     },
     resetItemsToDefault: () => defaultItems
   },
@@ -72,7 +69,7 @@ const itemsSlice = createSlice({
   }
 })
 
-export const { saveItemWidth, saveItemHeight, saveItemsOrder, deleteItem, updateItemText, resetItemsToDefault } = itemsSlice.actions
+export const { saveItemsOrder, deleteItem, resetItemsToDefault, updateItem } = itemsSlice.actions
 
 export const selectIsLastItem = (state: RootState) => state.items.filter((item) => item.type !== 'paste').length === 1
 
