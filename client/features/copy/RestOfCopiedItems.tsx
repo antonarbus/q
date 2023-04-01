@@ -79,7 +79,7 @@ export const RestOfCopiedItems = () => {
                   scale: `${scaleFactor}`,
                 }}
               >
-                {parseHtml(item.innerHtml)}
+                {parseHtml(item.html)}
               </div>
             </div>
           )

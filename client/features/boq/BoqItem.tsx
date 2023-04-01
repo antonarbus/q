@@ -1,6 +1,8 @@
 import parseHtml from 'html-react-parser'
 import { ItemType } from '../items/types'
 import { DraggableResizableItemWithActions } from 'client/components/DraggableResizableItemWithActions'
+import { useRef } from 'react'
+import { Resizable } from 're-resizable'
 
 type Props = {
   item: ItemType
@@ -8,12 +10,15 @@ type Props = {
 }
 
 export const BoqItem = ({ item, index }: Props) => {
+  const itemRef = useRef() as React.MutableRefObject<Resizable>
+
   return (
     <DraggableResizableItemWithActions
       index={index}
       item={item}
+      itemRef={itemRef}
     >
-      {parseHtml(item.innerHtml)}
+      {parseHtml(item.html)}
     </DraggableResizableItemWithActions>
   )
 }

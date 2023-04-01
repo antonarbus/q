@@ -12,8 +12,8 @@ import { useIsDisabledItem } from './useIsDisabledItem'
 import { useIsPasteHere } from './useIsPasteHere'
 
 type Props = {
-  item: ItemType,
-  index: number,
+  item: ItemType
+  index: number
   children: React.ReactNode
   itemRef: React.MutableRefObject<Resizable>
 }

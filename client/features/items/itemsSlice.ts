@@ -37,7 +37,7 @@ const itemsSlice = createSlice({
         if (pastePos === 'middle') return itemsWithoutPasteText
         // debugger
         const insertAtIndex = itemsWithoutPasteText.findIndex(item => item.id === itemId) + (pastePos === 'bottom' ? 1 : 0)
-        const pasteTextEl: ItemType = { id: 'paste id', type: 'paste', width: 0, height: 0, innerHtml: '' }
+        const pasteTextEl: ItemType = { id: 'paste id', type: 'paste', width: 0, height: 0, html: '' }
         itemsWithoutPasteText.splice(insertAtIndex, 0, pasteTextEl)
         return itemsWithoutPasteText
       })
