@@ -3,6 +3,6 @@ export type ItemType = {
   type: 'text' | 'text editable' | 'boq' | 'paste',
   width: number,
   height: number,
-  innerHtml: string
+  html: string
 }
 export type ItemsType = ItemType[]

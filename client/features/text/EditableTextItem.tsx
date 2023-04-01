@@ -24,9 +24,9 @@ const equalityFn = (prevItem:any, currentItem:any) => {
 
 export const EditableTextItem = ({ index, item }: Props) => {
   //! looks like we can't properly exit animate if take item from the store and not via props, not sure
-  const innerHtml = useSelectorTyped(state => state.items?.[index]?.innerHtml)
+  // const innerHtml = useSelectorTyped(state => state.items?.[index]?.html)
   const itemRef = useRef() as React.MutableRefObject<Resizable>
-  const { froalaRef } = useFroala({ initHtml: item.innerHtml, index, itemRef })
+  const { froalaRef } = useFroala({ initHtml: item.html, index, itemRef })
   console.log('🚀 ~  EditableTextItem: ' + index)
 
   return (

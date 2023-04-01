@@ -7,7 +7,7 @@ import { ItemType } from '../../features/items/types'
 
 type Props = {
   itemToCopy: ItemType
-  itemRef: React.MutableRefObject<Resizable>
+  itemRef?: React.MutableRefObject<Resizable>
 }
 
 export const CopyIcon = ({ itemToCopy, itemRef }: Props) => {
