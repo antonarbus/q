@@ -19,6 +19,10 @@ const itemsSlice = createSlice({
       state[index].width = width
       // console.log(current(state))
     },
+    saveItemHeight: (state, action) => {
+      const { index, height } = action.payload
+      state[index].height = height
+    },
     saveItemsOrder: (state, action) => action.payload.sortedItems,
     deleteItem: (state, action) => state.filter(item => item.id !== action.payload.id),
     updateItemText: (state, action) => {
@@ -68,7 +72,7 @@ const itemsSlice = createSlice({
   }
 })
 
-export const { saveItemWidth, saveItemsOrder, deleteItem, updateItemText, resetItemsToDefault } = itemsSlice.actions
+export const { saveItemWidth, saveItemHeight, saveItemsOrder, deleteItem, updateItemText, resetItemsToDefault } = itemsSlice.actions
 
 export const selectIsLastItem = (state: RootState) => state.items.filter((item) => item.type !== 'paste').length === 1
 

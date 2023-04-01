@@ -3,8 +3,7 @@ import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { useDispatchTyped, useSelectorTyped } from 'client/store'
 import { Resizable } from 're-resizable'
 import { useEffect, useRef } from 'react'
-import { useUpdateEffect } from 'react-use'
-import { updateItemText } from '../items/itemsSlice'
+import { saveItemHeight, updateItemText } from '../items/itemsSlice'
 
 type Props = {
   initHtml: string
@@ -125,8 +124,8 @@ export const useFroala = ({ initHtml, index, itemRef }: Props) => {
     function saveText() {
       const innerHTML = editorRef.current.html.get()
       dispatch(updateItemText({ index, innerHTML }))
-      //! need also save item height
       const itemHeight = itemRef.current.resizable?.offsetHeight
+      dispatch(saveItemHeight({ index, height: itemHeight }))
       saveItemsIntoLocalStorage()
     }
 
