@@ -19,10 +19,10 @@ export default defineConfig(({ command, mode }) => {
         // '/api': `${process.env.DOMAIN}:${process.env.PORT_BACK_END}/`
         '/api': `${env.DOMAIN}:${env.PORT_BACK_END}`
       },
-      hmr: {
-        host: 'localhost',
-        port: Number(env.PORT_BACK_END),
-      }
+      // hmr: {
+      //   host: 'localhost',
+      //   port: Number(env.PORT_BACK_END),
+      // }
     },
     esbuild: {
       define: {
