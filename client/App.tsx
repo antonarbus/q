@@ -16,6 +16,7 @@ import { PersistentAuth } from 'client/features/credentials/PersistentAuth'
 import { Main } from 'client/features/application/Main'
 import { Profile } from 'client/features/profile/Profile'
 import { SpinnerFullPage } from 'client/features/spinner/SpinnerFullPage'
+import { Updater } from './features/updater/Updater'
 
 export const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -39,6 +40,7 @@ export const App = () => (
           <Route path="unauthorized" element={<Unauthorized />} />
         </Routes>
         <Notifier />
+        <Updater />
       </BrowserRouter>
       <ReactQueryDevtools />
     </ThemeProvider>
