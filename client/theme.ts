@@ -45,7 +45,7 @@ const customTheme = {
     animationDuration: 0.4
   },
   copy: {
-    pasteTextColor: '#d05858'
+    pasteTextColor: '#6c6c6c'
   }
 }
 
