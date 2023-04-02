@@ -6,6 +6,7 @@ import { theme } from 'client/theme'
 import { useSelectorTyped } from 'client/store'
 import { useRef } from 'react'
 import { Resizable } from 're-resizable'
+import { BiEditAlt } from 'react-icons/bi'
 
 type Props = {
   item: ItemType
@@ -35,6 +36,15 @@ export const EditableTextItem = ({ index, item }: Props) => {
       item={item}
       itemRef={itemRef}
     >
+      <BiEditAlt
+        css={{
+          position: 'absolute',
+          bottom: 5,
+          right: 5,
+          color: '#b3b3b3',
+          height: 14
+        }}
+      />
       <div
         ref={froalaRef}
         css={{
