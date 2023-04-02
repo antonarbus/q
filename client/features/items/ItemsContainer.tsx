@@ -1,9 +1,10 @@
-import { store } from 'client/store'
+import { store, useDispatchTyped } from 'client/store'
 import { arrayMoveImmutable } from 'array-move'
 import { AnimatePresence } from 'framer-motion'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { saveItemsOrder } from './itemsSlice'
 import { SortableContainer, SortableContainerProps } from 'react-sortable-hoc'
+import { resetMsgOnBottoms, showMsgOnBottom } from '../updater/updaterSlice'
 
 // example with TypeScript
 // https://codesandbox.io/s/odfrontendeveloper-react-sortable-hoc-example-t96d8x?file=/src/examples/Items.tsx:518-635
@@ -32,23 +33,31 @@ const DraggableItems: React.ComponentClass<ISortableContainer, any> =
     </div>
   ))
 
-export const ItemsContainer = ({ children }: Props) => (
-  <DraggableItems
-    useDragHandle
-    useWindowAsScrollContainer
-    onSortStart={() => {
-      document.body.style.cursor = 'move'
-    }}
-    onSortEnd={({ oldIndex, newIndex }) => {
-      const { items } = store.getState()
-      const sortedItems = arrayMoveImmutable(items, oldIndex, newIndex)
-      store.dispatch(saveItemsOrder({ sortedItems }))
-      saveItemsIntoLocalStorage()
-      document.body.style.cursor = 'default'
-    }}
-  >
-    <AnimatePresence initial={false}>
-      {children}
-    </AnimatePresence>
-  </DraggableItems>
-)
+export const ItemsContainer = ({ children }: Props) => {
+  const dispatch = useDispatchTyped()
+
+  return (
+    <DraggableItems
+      useDragHandle
+      useWindowAsScrollContainer
+      onSortStart={() => {
+        document.body.style.cursor = 'move'
+      }}
+      onSortEnd={({ oldIndex, newIndex }) => {
+        const { items } = store.getState()
+        const sortedItems = arrayMoveImmutable(items, oldIndex, newIndex)
+        dispatch(saveItemsOrder({ sortedItems }))
+        saveItemsIntoLocalStorage()
+        dispatch(showMsgOnBottom('saved locally'))
+        setTimeout(() => {
+          dispatch(resetMsgOnBottoms())
+        }, 1500)
+        document.body.style.cursor = 'default'
+      }}
+    >
+      <AnimatePresence initial={false}>
+        {children}
+      </AnimatePresence>
+    </DraggableItems>
+  )
+}

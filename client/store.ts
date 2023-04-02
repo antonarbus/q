@@ -7,6 +7,7 @@ import items from 'client/features/items/itemsSlice'
 import spinner from 'client/features/spinner/spinnerSlice'
 import copy from 'client/features/copy/copySlice'
 import offer from 'client/features/offer/offerSlice'
+import updater from 'client/features/updater/updaterSlice'
 
 export const store = configureStore({
   reducer: {
@@ -16,7 +17,8 @@ export const store = configureStore({
     offer,
     items,
     spinner,
-    copy
+    copy,
+    updater
   },
   middleware: (defaultMiddleware) => defaultMiddleware({
     serializableCheck: false
