@@ -6,12 +6,12 @@ import { useEffect, useRef } from 'react'
 import { updateItem } from '../items/itemsSlice'
 
 type Props = {
-  initHtml: string
+  html: string
   index: number
   itemRef: React.MutableRefObject<Resizable>
 }
 
-export const useFroala = ({ initHtml, index, itemRef }: Props) => {
+export const useFroala = ({ html, index, itemRef }: Props) => {
   const froalaRef = useRef() as React.MutableRefObject<HTMLDivElement>
   const dispatch = useDispatchTyped()
   const editorRef = useRef() as React.MutableRefObject<any>
@@ -111,7 +111,7 @@ export const useFroala = ({ initHtml, index, itemRef }: Props) => {
       },
       function () {
         // @ts-ignore
-        this.html.set(initHtml)
+        this.html.set(html)
         froalaRef.current.style.height = 'auto'
       }
     )
