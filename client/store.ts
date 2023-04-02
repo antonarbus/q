@@ -7,7 +7,7 @@ import items from 'client/features/items/itemsSlice'
 import spinner from 'client/features/spinner/spinnerSlice'
 import copy from 'client/features/copy/copySlice'
 import offer from 'client/features/offer/offerSlice'
-import updater from 'client/features/updater/updaterSlice'
+import updater from 'client/features/bottom msg/bottomMsgSlice'
 
 export const store = configureStore({
   reducer: {

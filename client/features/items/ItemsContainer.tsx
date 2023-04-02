@@ -4,7 +4,7 @@ import { AnimatePresence } from 'framer-motion'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { saveItemsOrder } from './itemsSlice'
 import { SortableContainer, SortableContainerProps } from 'react-sortable-hoc'
-import { resetMsgOnBottoms, showMsgOnBottom } from '../updater/updaterSlice'
+import { resetMsgOnBottom, showMsgOnBottom } from '../bottom msg/bottomMsgSlice'
 
 // example with TypeScript
 // https://codesandbox.io/s/odfrontendeveloper-react-sortable-hoc-example-t96d8x?file=/src/examples/Items.tsx:518-635
@@ -50,7 +50,7 @@ export const ItemsContainer = ({ children }: Props) => {
         saveItemsIntoLocalStorage()
         dispatch(showMsgOnBottom('saved locally'))
         setTimeout(() => {
-          dispatch(resetMsgOnBottoms())
+          dispatch(resetMsgOnBottom())
         }, 1500)
         document.body.style.cursor = 'default'
       }}
