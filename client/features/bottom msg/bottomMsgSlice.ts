@@ -4,16 +4,16 @@ const initialState = {
   msg: '',
 }
 
-const updaterSlice = createSlice({
+const bottomMsgSlice = createSlice({
   name: 'updater',
   initialState,
   reducers: {
     showMsgOnBottom: (state, action: PayloadAction<string>) => {
       state.msg = action.payload
     },
-    resetMsgOnBottoms: () => initialState
+    resetMsgOnBottom: () => initialState
   }
 })
 
-export default updaterSlice.reducer
-export const { showMsgOnBottom, resetMsgOnBottoms } = updaterSlice.actions
+export default bottomMsgSlice.reducer
+export const { showMsgOnBottom, resetMsgOnBottom } = bottomMsgSlice.actions
