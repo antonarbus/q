@@ -45,6 +45,10 @@ export const ResizablePaper = ({ children, width, index, itemRef }: Props) => {
         const width = parseInt(refToElement.style.width)
         dispatch(updateItem({ index, props: { width } }))
         saveItemsIntoLocalStorage()
+        dispatch(updateItem({ index, props: { msg: 'saved locally' } }))
+        setTimeout(() => {
+          dispatch(updateItem({ index, props: { msg: '' } }))
+        }, 1500)
       }}
     >
       {children}
