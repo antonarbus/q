@@ -10,6 +10,7 @@ import { DraggableItem } from './DraggableItem'
 import { DragIcon } from './DragIcon'
 import { useIsDisabledItem } from './useIsDisabledItem'
 import { useIsPasteHere } from './useIsPasteHere'
+import { Msg } from './Msg'
 
 type Props = {
   item: ItemType
@@ -35,12 +36,13 @@ export const DraggableResizableItemWithActions = ({ item, index, children, itemR
         <DeleteIcon itemToDelete={item}/>
       </ActionsContainer>
       <ResizablePaper key={item.id} width={item.width} index={index} itemRef={itemRef}>
+        <Msg index={index}/>
         <div style={{ opacity: isPasteHere ? 0.2 : 1 }}>
           {children}
         </div>
         <PasteTextInMiddle isPasteHereShown={isPasteHere}/>
       </ResizablePaper>
-      <ActionsContainer/> {/* Right action container is used for symmetry, probably add there some icons later */}
+      <ActionsContainer/> {/* Right action container is used for symmetry, now it is empty, probably add there some icons later */}
     </DraggableItem>
   )
 }
