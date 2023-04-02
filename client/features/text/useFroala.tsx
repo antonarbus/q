@@ -1,6 +1,6 @@
 // // @ts-nocheck
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
-import { useDispatchTyped, useSelectorTyped } from 'client/store'
+import { store, useDispatchTyped, useSelectorTyped } from 'client/store'
 import { Resizable } from 're-resizable'
 import { useEffect, useRef } from 'react'
 import { updateItem } from '../items/itemsSlice'
@@ -24,6 +24,7 @@ export const useFroala = ({ initHtml, index, itemRef }: Props) => {
       {
         toolbarInline: true,
         // toolbarVisibleWithoutSelection: true,
+        pastePlain: true,
         charCounterCount: false,
         quickInsertEnabled: false,
         fontSizeSelection: true,
@@ -122,10 +123,16 @@ export const useFroala = ({ initHtml, index, itemRef }: Props) => {
 
   useEffect(() => {
     function onFocusOutHandler() {
+      const prevHtml = store.getState().items[index].html
       const html = editorRef.current.html.get()
+      if (prevHtml === html) return
       const height = itemRef.current.resizable?.offsetHeight || 0
       dispatch(updateItem({ index, props: { height, html } }))
       saveItemsIntoLocalStorage()
+      dispatch(updateItem({ index, props: { msg: 'saved locally' } }))
+      setTimeout(() => {
+        dispatch(updateItem({ index, props: { msg: '' } }))
+      }, 1000)
     }
 
     froalaRef.current.addEventListener('focusout', onFocusOutHandler)
