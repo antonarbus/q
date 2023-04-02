@@ -132,7 +132,7 @@ export const useFroala = ({ initHtml, index, itemRef }: Props) => {
       dispatch(updateItem({ index, props: { msg: 'saved locally' } }))
       setTimeout(() => {
         dispatch(updateItem({ index, props: { msg: '' } }))
-      }, 1000)
+      }, 1500)
     }
 
     froalaRef.current.addEventListener('focusout', onFocusOutHandler)
