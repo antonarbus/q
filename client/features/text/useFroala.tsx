@@ -12,7 +12,7 @@ type Props = {
 }
 
 export const useFroala = ({ html, index, itemRef }: Props) => {
-  const froalaRef = useRef() as React.MutableRefObject<HTMLDivElement>
+  const froalaElementRef = useRef() as React.MutableRefObject<HTMLDivElement>
   const dispatch = useDispatchTyped()
   const editorRef = useRef() as React.MutableRefObject<any>
   const resetItemsToDefaults = useSelectorTyped(state => state.offer.toggleOffer)
@@ -20,7 +20,7 @@ export const useFroala = ({ html, index, itemRef }: Props) => {
   useEffect(() => {
     // @ts-ignore
     editorRef.current = new FroalaEditor(
-      froalaRef.current,
+      froalaElementRef.current,
       {
         toolbarInline: true,
         // toolbarVisibleWithoutSelection: true,
@@ -112,7 +112,7 @@ export const useFroala = ({ html, index, itemRef }: Props) => {
       function () {
         // @ts-ignore
         this.html.set(html)
-        froalaRef.current.style.height = 'auto'
+        froalaElementRef.current.style.height = 'auto'
       }
     )
 
@@ -135,13 +135,22 @@ export const useFroala = ({ html, index, itemRef }: Props) => {
       }, 1500)
     }
 
-    froalaRef.current.addEventListener('focusout', onFocusOutHandler)
+    froalaElementRef.current.addEventListener('focusout', onFocusOutHandler)
 
     return () => {
-      if (!froalaRef?.current) return
-      froalaRef.current.removeEventListener('focusout', onFocusOutHandler)
+      if (!froalaElementRef?.current) return
+      froalaElementRef.current.removeEventListener('focusout', onFocusOutHandler)
     }
   }, [index])
 
-  return { froalaRef, editorRef }
+  function focusOnTextIfClickedOnPadding(e: MouseEvent) {
+    const clickedElement = e.target as HTMLElement
+    const isClickInsideFroala = froalaElementRef.current.contains(clickedElement)
+    if (isClickInsideFroala) return
+    // https://stackoverflow.com/a/35191761/7239778
+    editorRef.current.selection.setAtEnd(editorRef.current.$el.get(0))
+    editorRef.current.selection.restore()
+  }
+
+  return { froalaElementRef, editorRef, focusOnTextIfClickedOnPadding }
 }
