@@ -10,15 +10,18 @@ interface Props {
   width: number
   index: number
   itemRef: React.MutableRefObject<Resizable>
+  onClick?: (e: MouseEvent) => void
 }
 
-export const ResizablePaper = ({ children, width, index, itemRef }: Props) => {
+export const ResizablePaper = ({ children, width, index, itemRef, onClick }: Props) => {
   const dispatch = useDispatchTyped()
 
   return (
     <Resizable
       ref={itemRef}
       // size={{ width, height: 'auto' }}
+      // @ts-ignore:next-line
+      onClick={onClick}
       css={{
         background: 'white',
         borderRadius: 6,

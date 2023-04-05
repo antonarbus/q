@@ -27,17 +27,15 @@ export const EditableTextItem = ({ index, item }: Props) => {
   //! looks like we can't properly exit animate if take item from the store and not via props, not sure
   // const innerHtml = useSelectorTyped(state => state.items?.[index]?.html)
   const itemRef = useRef() as React.MutableRefObject<Resizable>
-  const { froalaRef } = useFroala({ html: item.html, index, itemRef })
+  const { froalaElementRef, focusOnTextIfClickedOnPadding } = useFroala({ html: item.html, index, itemRef })
   console.log('🚀 ~  EditableTextItem: ' + index)
-
-  // todo: we need to focus on text if click on padding
-  // todo: add onClick event handler which checks if click was made outside froala element and if so, then put a focus on froala element
 
   return (
     <DraggableResizableItemWithActions
       index={index}
       item={item}
       itemRef={itemRef}
+      onClick={focusOnTextIfClickedOnPadding}
     >
       <BiEditAlt
         css={{
@@ -49,7 +47,7 @@ export const EditableTextItem = ({ index, item }: Props) => {
         }}
       />
       <div
-        ref={froalaRef}
+        ref={froalaElementRef}
         css={{
           cursor: 'text',
           fontSize: 16,
@@ -79,7 +77,9 @@ export const EditableTextItem = ({ index, item }: Props) => {
         }}
         // at first we have fixed height to avoid height change when froala converts html into text on initialization
         // when froala is initialized we make height: 'auto' to let it adjust when new text is added from the keyboard
-        style={{ height: item.height - 2 * theme.item.padding }}
+        style={{
+          height: item.height - 2 * theme.item.padding,
+        }}
       >
         {/* text is managed by froala */}
       </div>
