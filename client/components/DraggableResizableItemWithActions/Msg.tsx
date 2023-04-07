@@ -17,7 +17,7 @@ export const Msg = ({ index }: Props) => {
           exit={{ opacity: 0 }}
           css={{
             position: 'absolute',
-            top: -17,
+            top: -15,
             right: 10,
             fontSize: 10,
             color: '#929292',

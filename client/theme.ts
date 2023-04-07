@@ -18,7 +18,8 @@ const customTheme = {
     grey: '#5a5a5a',
     red: '#ee6666',
     topMenuItem: '#858383',
-    darkBackground: 'rgb(52 52 52 / 95%)'
+    darkBackground: 'rgb(52 52 52 / 95%)',
+    greyFont: '#bcbcbc'
   },
   nav: {
     height: 60,
@@ -41,7 +42,7 @@ const customTheme = {
     }
   },
   item: {
-    padding: 20,
+    childMargin: 20,
     animationDuration: 0.4
   },
   copy: {

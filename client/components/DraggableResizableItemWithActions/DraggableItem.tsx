@@ -33,7 +33,7 @@ export const DraggableItem: React.ComponentClass<ISortableItem, any> = SortableE
         height: 0,
         marginBottom: 0,
         opacity: 0,
-        x: '200vw'
+        x: '150vw'
       }}
       transition={{
         duration: theme.item.animationDuration

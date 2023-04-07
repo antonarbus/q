@@ -82,7 +82,7 @@ export function NavItem({ children, id }: NavItemType) {
           .nav-item-name {
             margin-left: 5px;
             margin-right: 5px;
-            color: ${disabled ? '#585858' : '#bcbcbc'} ;
+            color: ${disabled ? '#585858' : theme.colors.greyFont} ;
             white-space: nowrap;
           }
           
