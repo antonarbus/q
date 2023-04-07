@@ -10,7 +10,7 @@ export const Msg = ({ index }: Props) => {
 
   return (
     <AnimatePresence>
-      {msg && (
+      {msg !== '' && (
         <motion.span
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -23,7 +23,7 @@ export const Msg = ({ index }: Props) => {
             color: '#929292',
             fontWeight: 500,
             userSelect: 'none',
-            zIndex: -1
+            zIndex: 1
           }}
         >
           {msg}
