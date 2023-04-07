@@ -1,7 +1,7 @@
 import { PayloadAction, createSelector, createSlice, current } from '@reduxjs/toolkit'
 import { hideCopyContainer, pasteItem, updatePasteTextPos } from 'client/features/copy/copySlice'
 import { getItemsFromLocalStorage } from 'client/modules/localStorage'
-import { RootState } from 'client/store'
+import { AppThunk, RootState } from 'client/store'
 import { nanoid } from 'nanoid'
 import { CopyPlaceType } from '../copy/types'
 import { defaultItems } from './defaultItems'
@@ -37,7 +37,7 @@ const itemsSlice = createSlice({
         if (pastePos === 'middle') return itemsWithoutPasteText
         // debugger
         const insertAtIndex = itemsWithoutPasteText.findIndex(item => item.id === itemId) + (pastePos === 'bottom' ? 1 : 0)
-        const pasteTextEl: ItemType = { id: 'paste id', type: 'paste', width: 0, height: 0, html: '' }
+        const pasteTextEl: ItemType = { id: 'paste id', type: 'paste', width: 0, height: 0, html: '', msg: '' }
         itemsWithoutPasteText.splice(insertAtIndex, 0, pasteTextEl)
         return itemsWithoutPasteText
       })
@@ -69,8 +69,11 @@ const itemsSlice = createSlice({
   }
 })
 
+// exports
 export const { saveItemsOrder, deleteItem, resetItemsToDefault, updateItem } = itemsSlice.actions
+export default itemsSlice.reducer
 
+// selectors
 export const selectIsLastItem = (state: RootState) => state.items.filter((item) => item.type !== 'paste').length === 1
 
 export const selectItemsShape = createSelector(
@@ -90,4 +93,10 @@ export const selectItemsShape = createSelector(
   }
 )
 
-export default itemsSlice.reducer
+// thunks
+export const tellItemSavedLocally = (index: number): AppThunk => (dispatch, getState) => {
+  dispatch(updateItem({ index, props: { msg: 'saved locally' } }))
+  setTimeout(() => {
+    dispatch(updateItem({ index, props: { msg: '' } }))
+  }, 2000)
+}
