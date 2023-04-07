@@ -151,6 +151,11 @@ export const GlobalStyles = () => (
           }
         }
       }
+
+      .fr-wrapper {
+        caret-color: red;
+      }
+
     `}
   />
 )
