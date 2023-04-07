@@ -48,15 +48,13 @@ export const EditableTextItem = ({ index, item }: Props) => {
       />
       <div
         ref={froalaElementRef}
-        // at first we have fixed height to avoid height change when froala converts html into text on initialization
-        // when froala is initialized we make height: 'auto' to let it adjust when new text is added from the keyboard
         style={{
+          // at first we have fixed height to avoid height change when froala converts html into text on initialization
+          // when froala is initialized we make height: 'auto' to let it adjust when new text is added from the keyboard
           height: item.height - 2 * theme.item.childMargin,
         }}
         css={{
-          cursor: 'text',
-          fontSize: 16,
-          //! need to separate container from froala logic
+          //! separate container from froala logic
           margin: theme.item.childMargin,
         }}
       >

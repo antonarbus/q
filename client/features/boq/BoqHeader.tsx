@@ -20,8 +20,6 @@ export const BoqHeader = ({ children }: Props) => {
       <div
         // ref={froalaElementRef}
         css={{
-          cursor: 'text',
-          fontSize: 16,
           // margin: theme.item.childMargin,
         }}
       >
