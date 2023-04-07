@@ -2,6 +2,7 @@ import styled from '@emotion/styled'
 import { Fade as BurgerIcon } from 'hamburger-react'
 import { useDispatchTyped, useSelectorTyped } from 'client/store'
 import { toggleBurger } from 'client/features/nav/navSlice'
+import { theme } from 'client/theme'
 // https://hamburger-react.netlify.app/
 
 export function Burger() {
@@ -15,7 +16,7 @@ export function Burger() {
         toggled={isOpen}
         toggle={() => dispatch(toggleBurger())}
         size={20}
-        color='#bcbcbc'
+        color={theme.colors.greyFont}
         rounded
         label='Show menu'
         onToggle={toggled => {
