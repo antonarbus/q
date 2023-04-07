@@ -3,6 +3,7 @@ import { ItemType } from '../items/types'
 import { DraggableResizableItemWithActions } from 'client/components/DraggableResizableItemWithActions'
 import { useRef } from 'react'
 import { Resizable } from 're-resizable'
+import { BoqHeader } from './BoqHeader'
 
 type Props = {
   item: ItemType
@@ -18,6 +19,7 @@ export const BoqItem = ({ item, index }: Props) => {
       item={item}
       itemRef={itemRef}
     >
+      <BoqHeader>boq header</BoqHeader>
       {parseHtml(item.html)}
     </DraggableResizableItemWithActions>
   )

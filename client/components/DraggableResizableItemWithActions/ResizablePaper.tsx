@@ -2,7 +2,7 @@ import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { useDispatchTyped } from 'client/store'
 import { theme } from 'client/theme'
 import { Resizable } from 're-resizable'
-import { updateItem } from '../../features/items/itemsSlice'
+import { tellItemSavedLocally, updateItem } from '../../features/items/itemsSlice'
 
 interface Props {
   children: React.ReactNode
@@ -48,10 +48,7 @@ export const ResizablePaper = ({ children, width, index, itemRef, onClick }: Pro
         const width = parseInt(refToElement.style.width)
         dispatch(updateItem({ index, props: { width } }))
         saveItemsIntoLocalStorage()
-        dispatch(updateItem({ index, props: { msg: 'saved locally' } }))
-        setTimeout(() => {
-          dispatch(updateItem({ index, props: { msg: '' } }))
-        }, 1500)
+        dispatch(tellItemSavedLocally(index))
       }}
     >
       {children}

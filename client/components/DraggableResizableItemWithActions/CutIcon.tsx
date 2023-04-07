@@ -6,7 +6,7 @@ import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { motion } from 'framer-motion'
 import { ItemType } from '../../features/items/types'
 import { deleteItem, selectIsLastItem } from '../../features/items/itemsSlice'
-import { resetMsgOnBottom, showMsgOnBottom } from 'client/features/bottom msg/bottomMsgSlice'
+import { tellItemsSavedLocally } from 'client/features/bottom msg/bottomMsgSlice'
 
 type Props = {
   itemToCut: ItemType,
@@ -33,10 +33,7 @@ export const CutIcon = ({ itemToCut, itemRef }: Props) => {
         dispatch(addItemIntoCopyContainer(item))
         dispatch(deleteItem(itemToCut))
         saveItemsIntoLocalStorage()
-        dispatch(showMsgOnBottom('saved locally'))
-        setTimeout(() => {
-          dispatch(resetMsgOnBottom())
-        }, 1500)
+        dispatch(tellItemsSavedLocally())
       }}
     >
       <TbCut/>

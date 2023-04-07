@@ -17,12 +17,13 @@ export const Msg = ({ index }: Props) => {
           exit={{ opacity: 0 }}
           css={{
             position: 'absolute',
-            top: 5,
+            top: -17,
             right: 10,
             fontSize: 10,
-            color: '#b7b7b7',
+            color: '#929292',
             fontWeight: 500,
-            userSelect: 'none'
+            userSelect: 'none',
+            zIndex: -1
           }}
         >
           {msg}

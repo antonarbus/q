@@ -4,7 +4,7 @@ import { RxCross2 } from 'react-icons/rx'
 import { motion } from 'framer-motion'
 import { ItemType } from '../../features/items/types'
 import { deleteItem, selectIsLastItem } from '../../features/items/itemsSlice'
-import { resetMsgOnBottom, showMsgOnBottom } from 'client/features/bottom msg/bottomMsgSlice'
+import { tellItemsSavedLocally } from 'client/features/bottom msg/bottomMsgSlice'
 
 type Props = {
   itemToDelete: ItemType
@@ -26,10 +26,7 @@ export const DeleteIcon = ({ itemToDelete }: Props) => {
         if (isLastItem) return
         dispatch(deleteItem(itemToDelete))
         saveItemsIntoLocalStorage()
-        dispatch(showMsgOnBottom('saved locally'))
-        setTimeout(() => {
-          dispatch(resetMsgOnBottom())
-        }, 1500)
+        dispatch(tellItemsSavedLocally())
       }}
     >
       <RxCross2 />
