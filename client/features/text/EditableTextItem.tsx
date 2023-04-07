@@ -6,7 +6,7 @@ import { theme } from 'client/theme'
 import { useSelectorTyped } from 'client/store'
 import { useRef } from 'react'
 import { Resizable } from 're-resizable'
-import { BiEditAlt } from 'react-icons/bi'
+import { BiEditAlt as PencilIcon } from 'react-icons/bi'
 
 type Props = {
   item: ItemType
@@ -37,7 +37,7 @@ export const EditableTextItem = ({ index, item }: Props) => {
       itemRef={itemRef}
       onClick={focusOnTextIfClickedOnPadding}
     >
-      <BiEditAlt
+      <PencilIcon
         css={{
           position: 'absolute',
           bottom: 5,
@@ -56,30 +56,8 @@ export const EditableTextItem = ({ index, item }: Props) => {
         css={{
           cursor: 'text',
           fontSize: 16,
+          //! need to separate container from froala logic
           margin: theme.item.childMargin,
-          // html code
-          '& .CodeMirror': {
-            fontSize: '12px !important'
-          },
-          // icon to close html code
-          '& .html-switch': {
-            color: '#ff4848 !important',
-            '&:hover': {
-              background: 'transparent !important',
-            },
-            '& .fa-code': {
-              position: 'absolute',
-              top: 0,
-              right: 0,
-              fontSize: '16px !important',
-              '&:hover': {
-                scale: '1.2',
-              },
-              ':before': {
-                content: '"\\f00d"'
-              }
-            }
-          },
         }}
       >
         {/* text is managed by froala */}

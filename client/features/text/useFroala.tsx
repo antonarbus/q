@@ -122,7 +122,7 @@ export const useFroala = ({ html, index, itemRef }: Props) => {
   }, [resetItemsToDefaults])
 
   useEffect(() => {
-    function onFocusOutHandler() {
+    function saveEditedText() {
       const prevHtml = store.getState().items[index].html
       const html = editorRef.current.html.get()
       if (prevHtml === html) return
@@ -132,11 +132,11 @@ export const useFroala = ({ html, index, itemRef }: Props) => {
       dispatch(tellItemSavedLocally(index))
     }
 
-    froalaElementRef.current.addEventListener('focusout', onFocusOutHandler)
+    froalaElementRef.current.addEventListener('focusout', saveEditedText)
 
     return () => {
       if (!froalaElementRef?.current) return
-      froalaElementRef.current.removeEventListener('focusout', onFocusOutHandler)
+      froalaElementRef.current.removeEventListener('focusout', saveEditedText)
     }
   }, [index])
 

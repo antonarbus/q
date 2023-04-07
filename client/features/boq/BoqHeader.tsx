@@ -9,13 +9,25 @@ export const BoqHeader = ({ children }: Props) => {
     <div
       css={{
         background: '#343434e6',
-        padding: 20,
-        paddingBottom: 10,
-        fontWeight: 500,
-        color: theme.colors.greyFont
+        padding: 15,
+        // paddingBottom: 10,
+        fontWeight: 600,
+        color: theme.colors.greyFont,
+        borderTopLeftRadius: 6,
+        borderTopRightRadius: 6
       }}
     >
-      {children}
+      <div
+        // ref={froalaElementRef}
+        css={{
+          cursor: 'text',
+          fontSize: 16,
+          // margin: theme.item.childMargin,
+        }}
+      >
+        {children}
+        {/* text is managed by froala */}
+      </div>
     </div>
   )
 }

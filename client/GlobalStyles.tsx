@@ -127,6 +127,30 @@ export const GlobalStyles = () => (
       .ReactQueryDevtools > button {
         scale: 0.7;
       }
+
+      // froala: html code
+      .CodeMirror {
+        font-size: 12px;
+      }
+
+      // froala: icon to close html code
+      .html-switch {
+        color: #ff4848 !important;
+        background: transparent !important;
+        & .fa-code {
+          position: absolute;
+          top: -10px;
+          right: -10px;
+          font-size: 20px !important;
+          transition: scale 200ms;
+          :before {
+            content: '×'
+          }
+          &:hover {
+            scale: 1.5;
+          }
+        }
+      }
     `}
   />
 )
