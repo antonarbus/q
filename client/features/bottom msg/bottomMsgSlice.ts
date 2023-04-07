@@ -21,9 +21,9 @@ export default bottomMsgSlice.reducer
 export const { showMsgOnBottom, resetMsgOnBottom } = bottomMsgSlice.actions
 
 // thunks
-export const tellItemsSavedLocally = (): AppThunk => (dispatch, getState) => {
+export const tellItemsSavedLocally = (ms = 2000): AppThunk => (dispatch, getState) => {
   dispatch(showMsgOnBottom('saved locally'))
   setTimeout(() => {
     dispatch(resetMsgOnBottom())
-  }, 2000)
+  }, ms)
 }
