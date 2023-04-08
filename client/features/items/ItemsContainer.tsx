@@ -2,9 +2,8 @@ import { store, useDispatchTyped } from 'client/store'
 import { arrayMoveImmutable } from 'array-move'
 import { AnimatePresence } from 'framer-motion'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
-import { saveItemsOrder } from './itemsSlice'
+import { saveItemsOrder, tellItemSavedLocally } from './itemsSlice'
 import { SortableContainer, SortableContainerProps } from 'react-sortable-hoc'
-import { tellItemsSavedLocally } from '../bottom msg/bottomMsgSlice'
 
 // example with TypeScript
 // https://codesandbox.io/s/odfrontendeveloper-react-sortable-hoc-example-t96d8x?file=/src/examples/Items.tsx:518-635
@@ -48,7 +47,7 @@ export const ItemsContainer = ({ children }: Props) => {
         const sortedItems = arrayMoveImmutable(items, oldIndex, newIndex)
         dispatch(saveItemsOrder({ sortedItems }))
         saveItemsIntoLocalStorage()
-        dispatch(tellItemsSavedLocally())
+        dispatch(tellItemSavedLocally(newIndex))
         document.body.style.cursor = 'default'
       }}
     >
