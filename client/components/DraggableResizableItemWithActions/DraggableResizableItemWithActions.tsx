@@ -4,31 +4,31 @@ import { CutIcon } from 'client/components/DraggableResizableItemWithActions/Cut
 import { DeleteIcon } from 'client/components/DraggableResizableItemWithActions/DeleteIcon'
 import { PasteTextInMiddle } from 'client/features/copy/PasteTextInMiddle'
 import { ResizablePaper } from 'client/components/DraggableResizableItemWithActions/ResizablePaper'
-import { ItemType } from 'client/features/items/types'
 import { Resizable } from 're-resizable'
 import { DraggableItem } from './DraggableItem'
 import { DragIcon } from './DragIcon'
 import { useIsDisabledItem } from './useIsDisabledItem'
 import { useIsPasteHere } from './useIsPasteHere'
 import { Msg } from './Msg'
+import { store } from 'client/store'
 
 type Props = {
-  item: ItemType
   index: number
   children: React.ReactNode
   itemRef: React.MutableRefObject<Resizable>
   onClick?: (e: MouseEvent) => void
 }
 
-export const DraggableResizableItemWithActions = ({ item, index, children, itemRef, onClick }: Props) => {
+export const DraggableResizableItemWithActions = ({ index, children, itemRef, onClick }: Props) => {
   const isDisabled = useIsDisabledItem()
   const isPasteHere = useIsPasteHere({ index })
+  const item = store.getState().items?.[index]
 
   return (
     <DraggableItem
       disabled={isDisabled}
       index={index}
-      id={item.id}
+      id={item?.id}
     >
       <ActionsContainer>
         <DragIcon />
@@ -36,7 +36,7 @@ export const DraggableResizableItemWithActions = ({ item, index, children, itemR
         <CutIcon itemRef={itemRef} index={index} />
         <DeleteIcon index={index} />
       </ActionsContainer>
-      <ResizablePaper key={item.id} width={item.width} index={index} itemRef={itemRef} onClick={onClick}>
+      <ResizablePaper key={item?.id} width={item?.width} index={index} itemRef={itemRef} onClick={onClick}>
         <Msg index={index}/>
         <div style={{ opacity: isPasteHere ? 0.2 : 1 }}>
           {children}

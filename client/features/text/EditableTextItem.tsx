@@ -28,12 +28,11 @@ export const EditableTextItem = ({ index, item }: Props) => {
   // const innerHtml = useSelectorTyped(state => state.items?.[index]?.html)
   const itemRef = useRef() as React.MutableRefObject<Resizable>
   const { froalaElementRef, focusOnTextIfClickedOnPadding } = useFroala({ index, itemRef })
-  console.log('🚀 ~  EditableTextItem: ' + index)
+  // console.log('🚀 ~  EditableTextItem: ' + index)
 
   return (
     <DraggableResizableItemWithActions
       index={index}
-      item={item}
       itemRef={itemRef}
       onClick={focusOnTextIfClickedOnPadding}
     >
