@@ -16,7 +16,6 @@ export const BoqItem = ({ item, index }: Props) => {
   return (
     <DraggableResizableItemWithActions
       index={index}
-      item={item}
       itemRef={itemRef}
     >
       <BoqHeader>boq header</BoqHeader>
