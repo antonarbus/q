@@ -27,7 +27,7 @@ export const EditableTextItem = ({ index, item }: Props) => {
   //! looks like we can't properly exit animate if take item from the store and not via props, not sure
   // const innerHtml = useSelectorTyped(state => state.items?.[index]?.html)
   const itemRef = useRef() as React.MutableRefObject<Resizable>
-  const { froalaElementRef, focusOnTextIfClickedOnPadding } = useFroala({ html: item.html, index, itemRef })
+  const { froalaElementRef, focusOnTextIfClickedOnPadding } = useFroala({ index, itemRef })
   console.log('🚀 ~  EditableTextItem: ' + index)
 
   return (
