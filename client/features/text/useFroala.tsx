@@ -4,6 +4,7 @@ import { store, useDispatchTyped, useSelectorTyped } from 'client/store'
 import { Resizable } from 're-resizable'
 import { useEffect, useRef } from 'react'
 import { tellItemSavedLocally, updateItem } from '../items/itemsSlice'
+import { r } from 'vitest/dist/types-94cfe4b4'
 
 type Props = {
   index: number
@@ -11,13 +12,16 @@ type Props = {
 }
 
 export const useFroala = ({ index, itemRef }: Props) => {
+  console.log('🚀 ~ file: useFroala.tsx:14 ~ useFroala ~ index:', index)
   const froalaElementRef = useRef() as React.MutableRefObject<HTMLDivElement>
   const dispatch = useDispatchTyped()
   const editorRef = useRef() as React.MutableRefObject<any>
   const resetItemsToDefaults = useSelectorTyped(state => state.offer.toggleOffer)
-  const { html } = store.getState().items[index]
+  const item = store.getState().items?.[index]
+  const html = item?.html
 
   function saveEditedText() {
+    if (!item) return
     if (!froalaElementRef?.current) return
     if (!itemRef?.current) return
     const updatedHtml = editorRef.current.html.get()
@@ -110,11 +114,13 @@ export const useFroala = ({ index, itemRef }: Props) => {
   }, [resetItemsToDefaults])
 
   useEffect(() => {
+    if (!item) return
     if (!froalaElementRef?.current) return
     if (!itemRef?.current) return
     froalaElementRef.current.addEventListener('focusout', saveEditedText)
 
     return () => {
+      if (!item) return
       if (!froalaElementRef?.current) return
       if (!itemRef?.current) return
       froalaElementRef.current.removeEventListener('focusout', saveEditedText)
