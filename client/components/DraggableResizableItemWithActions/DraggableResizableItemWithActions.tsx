@@ -36,7 +36,7 @@ export const DraggableResizableItemWithActions = ({ index, children, itemRef, on
         <CutIcon itemRef={itemRef} index={index} />
         <DeleteIcon index={index} />
       </ActionsContainer>
-      <ResizablePaper key={item?.id} width={item?.width} index={index} itemRef={itemRef} onClick={onClick}>
+      <ResizablePaper index={index} itemRef={itemRef} onClick={onClick}>
         <Msg index={index}/>
         <div style={{ opacity: isPasteHere ? 0.2 : 1 }}>
           {children}

@@ -1,25 +1,23 @@
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
-import { useDispatchTyped } from 'client/store'
-import { theme } from 'client/theme'
+import { useDispatchTyped, useSelectorTyped } from 'client/store'
 import { Resizable } from 're-resizable'
 import { tellItemSavedLocally, updateItem } from '../../features/items/itemsSlice'
 
 interface Props {
   children: React.ReactNode
-  key: string
-  width: number
   index: number
   itemRef: React.MutableRefObject<Resizable>
   onClick?: (e: MouseEvent) => void
 }
 
-export const ResizablePaper = ({ children, width, index, itemRef, onClick }: Props) => {
+export const ResizablePaper = ({ children, index, itemRef, onClick }: Props) => {
   const dispatch = useDispatchTyped()
+  const width = useSelectorTyped(state => state.items?.[index]?.width)
 
   return (
     <Resizable
       ref={itemRef}
-      // size={{ width, height: 'auto' }}
+      size={{ width, height: 'auto' }}
       // @ts-ignore:next-line
       onClick={onClick}
       css={{
@@ -28,20 +26,13 @@ export const ResizablePaper = ({ children, width, index, itemRef, onClick }: Pro
         boxShadow: '#00000033 0px 0px 10px 0px',
         position: 'relative',
       }}
-      defaultSize={{
-        width,
-        height: 'auto'
-      }}
+      // defaultSize={{ width, height: 'auto' }}
       grid={[20, 0]}
       minWidth='200px'
       maxWidth='100%'
       bounds={'window' || 'parent'}
-      enable={{
-        right: true,
-        left: true
-      }}
-      onResize={(e, direction, refToElement, delta) => {
-      }}
+      enable={{ right: true, left: true }}
+      onResize={(e, direction, refToElement, delta) => { }}
       onResizeStart={() => {}}
       onResizeStop={(e, direction, refToElement) => {
         const width = parseInt(refToElement.style.width)
