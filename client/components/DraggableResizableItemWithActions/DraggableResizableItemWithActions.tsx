@@ -32,9 +32,9 @@ export const DraggableResizableItemWithActions = ({ item, index, children, itemR
     >
       <ActionsContainer>
         <DragIcon />
-        <CopyIcon itemToCopy={item} itemRef={itemRef} />
-        <CutIcon itemToCut={item} itemRef={itemRef} />
-        <DeleteIcon itemToDelete={item}/>
+        <CopyIcon itemRef={itemRef} index={index} />
+        <CutIcon itemRef={itemRef} index={index} />
+        <DeleteIcon index={index} />
       </ActionsContainer>
       <ResizablePaper key={item.id} width={item.width} index={index} itemRef={itemRef} onClick={onClick}>
         <Msg index={index}/>

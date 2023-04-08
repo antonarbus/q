@@ -17,6 +17,18 @@ export const useFroala = ({ html, index, itemRef }: Props) => {
   const editorRef = useRef() as React.MutableRefObject<any>
   const resetItemsToDefaults = useSelectorTyped(state => state.offer.toggleOffer)
 
+  function saveEditedText() {
+    if (!froalaElementRef?.current) return
+    if (!itemRef?.current) return
+    const prevHtml = store.getState().items[index].html
+    const html = editorRef.current.html.get()
+    if (prevHtml === html) return
+    const height = itemRef.current.resizable?.offsetHeight || 0
+    dispatch(updateItem({ index, props: { height, html } }))
+    saveItemsIntoLocalStorage()
+    dispatch(tellItemSavedLocally(index))
+  }
+
   useEffect(() => {
     // @ts-ignore
     editorRef.current = new FroalaEditor(
@@ -79,35 +91,12 @@ export const useFroala = ({ html, index, itemRef }: Props) => {
         fileMaxSize: 1024 * 1024 * 30,
         // https://froala.com/wysiwyg-editor/docs/events/
         events: {
-        // https://froala.com/wysiwyg-editor/docs/events/#image.removed
-          // @ts-ignore
-          'image.removed': function ($img) {
-          // Do something here.
-            console.log(this)
-            console.log($img.attr('src'))
-          },
-          'paste.before': function () {
-            console.log('paste before - froala')
-          // addToUndoArr()
-          },
-          // https://froala.com/wysiwyg-editor/docs/events/#paste.after
-          'paste.after': function () {
-            console.log('paste after - froala')
-          // addToUndoArr()
-          },
           initialized: function () {
           // $('a[href*="froala"]').parent().remove()
           },
-          'toolbar.show': function () {
-          // console.log('toolbar on')
-
-          },
-          'toolbar.hide': function () {
-          // console.log('toolbar off')
-          },
+          'codeView.update': saveEditedText
         },
-        key:
-        'AVB8B-21D4B3B2E1F1G1uB-33B-21cyoF-10yB-7G-7gB-22zzE2wkA-7gC7B7D6B4E4F3D2I3H2C5==',
+        key: 'AVB8B-21D4B3B2E1F1G1uB-33B-21cyoF-10yB-7G-7gB-22zzE2wkA-7gC7B7D6B4E4F3D2I3H2C5==',
       },
       function () {
         // @ts-ignore
@@ -122,20 +111,13 @@ export const useFroala = ({ html, index, itemRef }: Props) => {
   }, [resetItemsToDefaults])
 
   useEffect(() => {
-    function saveEditedText() {
-      const prevHtml = store.getState().items[index].html
-      const html = editorRef.current.html.get()
-      if (prevHtml === html) return
-      const height = itemRef.current.resizable?.offsetHeight || 0
-      dispatch(updateItem({ index, props: { height, html } }))
-      saveItemsIntoLocalStorage()
-      dispatch(tellItemSavedLocally(index))
-    }
-
+    if (!froalaElementRef?.current) return
+    if (!itemRef?.current) return
     froalaElementRef.current.addEventListener('focusout', saveEditedText)
 
     return () => {
       if (!froalaElementRef?.current) return
+      if (!itemRef?.current) return
       froalaElementRef.current.removeEventListener('focusout', saveEditedText)
     }
   }, [index])

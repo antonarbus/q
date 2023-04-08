@@ -6,7 +6,8 @@ import { TextItem } from '../text/TextItem'
 import { EditableTextItem } from '../text/EditableTextItem'
 import { BoqItem } from '../boq/BoqItem'
 
-const equalityFn = (prevItems:any, currentItems:any) => {
+const equalityFn = (prevItems: any, currentItems: any) => {
+  // re-render the list only if item is replaced or new item is added
   const isDifferentLength = prevItems.length !== currentItems.length
   if (isDifferentLength) return false
   const idsDoNotMatch = prevItems.some((item: ItemType, index: number) => prevItems[index]?.id !== currentItems[index]?.id)

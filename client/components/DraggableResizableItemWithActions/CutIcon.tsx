@@ -1,19 +1,18 @@
-import { useDispatchTyped, useSelectorTyped } from 'client/store'
+import { store, useDispatchTyped, useSelectorTyped } from 'client/store'
 import { TbCut } from 'react-icons/tb'
 import { Resizable } from 're-resizable'
 import { addItemIntoCopyContainer, saveInitCords, showCopyContainer } from 'client/features/copy/copySlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { motion } from 'framer-motion'
-import { ItemType } from '../../features/items/types'
 import { deleteItem, selectIsLastItem } from '../../features/items/itemsSlice'
 import { tellItemsSavedLocally } from 'client/features/bottom msg/bottomMsgSlice'
 
 type Props = {
-  itemToCut: ItemType,
   itemRef: React.MutableRefObject<Resizable>
+  index: number
 }
 
-export const CutIcon = ({ itemToCut, itemRef }: Props) => {
+export const CutIcon = ({ index, itemRef }: Props) => {
   const dispatch = useDispatchTyped()
   const isLastItem = useSelectorTyped(selectIsLastItem)
 
@@ -29,6 +28,7 @@ export const CutIcon = ({ itemToCut, itemRef }: Props) => {
         if (isLastItem) return
         dispatch(saveInitCords({ x: e.clientX, y: e.clientY }))
         dispatch(showCopyContainer())
+        const itemToCut = store.getState().items[index]
         const item = { ...itemToCut, height: itemRef?.current?.resizable?.clientHeight || 0 }
         dispatch(addItemIntoCopyContainer(item))
         dispatch(deleteItem(itemToCut))

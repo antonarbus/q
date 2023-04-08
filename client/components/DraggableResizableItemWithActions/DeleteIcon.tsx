@@ -1,16 +1,15 @@
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
-import { useDispatchTyped, useSelectorTyped } from 'client/store'
+import { store, useDispatchTyped, useSelectorTyped } from 'client/store'
 import { RxCross2 } from 'react-icons/rx'
 import { motion } from 'framer-motion'
-import { ItemType } from '../../features/items/types'
 import { deleteItem, selectIsLastItem } from '../../features/items/itemsSlice'
 import { tellItemsSavedLocally } from 'client/features/bottom msg/bottomMsgSlice'
 
 type Props = {
-  itemToDelete: ItemType
+  index: number
 }
 
-export const DeleteIcon = ({ itemToDelete }: Props) => {
+export const DeleteIcon = ({ index }: Props) => {
   const dispatch = useDispatchTyped()
   const isLastItem = useSelectorTyped(selectIsLastItem)
 
@@ -24,6 +23,7 @@ export const DeleteIcon = ({ itemToDelete }: Props) => {
       }}
       onClick={() => {
         if (isLastItem) return
+        const itemToDelete = store.getState().items[index]
         dispatch(deleteItem(itemToDelete))
         saveItemsIntoLocalStorage()
         dispatch(tellItemsSavedLocally())
