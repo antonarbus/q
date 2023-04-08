@@ -22,7 +22,7 @@ type Props = {
 
 export const DraggableResizableItemWithActions = ({ item, index, children, itemRef, onClick }: Props) => {
   const isDisabled = useIsDisabledItem()
-  const isPasteHere = useIsPasteHere({ itemId: item.id })
+  const isPasteHere = useIsPasteHere({ index })
 
   return (
     <DraggableItem
