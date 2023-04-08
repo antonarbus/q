@@ -6,25 +6,24 @@ import { useEffect, useRef } from 'react'
 import { tellItemSavedLocally, updateItem } from '../items/itemsSlice'
 
 type Props = {
-  html: string
   index: number
   itemRef: React.MutableRefObject<Resizable>
 }
 
-export const useFroala = ({ html, index, itemRef }: Props) => {
+export const useFroala = ({ index, itemRef }: Props) => {
   const froalaElementRef = useRef() as React.MutableRefObject<HTMLDivElement>
   const dispatch = useDispatchTyped()
   const editorRef = useRef() as React.MutableRefObject<any>
   const resetItemsToDefaults = useSelectorTyped(state => state.offer.toggleOffer)
+  const { html } = store.getState().items[index]
 
   function saveEditedText() {
     if (!froalaElementRef?.current) return
     if (!itemRef?.current) return
-    const prevHtml = store.getState().items[index].html
-    const html = editorRef.current.html.get()
-    if (prevHtml === html) return
+    const updatedHtml = editorRef.current.html.get()
+    if (html === updatedHtml) return
     const height = itemRef.current.resizable?.offsetHeight || 0
-    dispatch(updateItem({ index, props: { height, html } }))
+    dispatch(updateItem({ index, props: { height, html: updatedHtml } }))
     saveItemsIntoLocalStorage()
     dispatch(tellItemSavedLocally(index))
   }
@@ -123,10 +122,10 @@ export const useFroala = ({ html, index, itemRef }: Props) => {
   }, [index])
 
   function focusOnTextIfClickedOnPadding(e: MouseEvent) {
+    // https://stackoverflow.com/a/35191761/7239778
     const clickedElement = e.target as HTMLElement
     const isClickInsideFroala = froalaElementRef.current.contains(clickedElement)
     if (isClickInsideFroala) return
-    // https://stackoverflow.com/a/35191761/7239778
     editorRef.current.selection.setAtEnd(editorRef.current.$el.get(0))
     editorRef.current.selection.restore()
   }
