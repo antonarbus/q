@@ -13,7 +13,7 @@ type Props = {
 
 export const EditableTextItem = ({ index }: Props) => {
   const itemRef = useRef() as React.MutableRefObject<Resizable>
-  const { froalaElementRef, focusOnTextIfClickedOnPadding } = useFroala({ index, itemRef })
+  const { froalaElementRef, focusOnTextIfClickedOnPadding, initFroalaHeight } = useFroala({ index, itemRef })
   // console.log('🚀 ~  EditableTextItem: ' + index)
 
   return (
@@ -34,12 +34,7 @@ export const EditableTextItem = ({ index }: Props) => {
       <div
         ref={froalaElementRef}
         style={{
-          // at first we have fixed height to avoid height change when froala converts html into text on initialization
-          // when froala is initialized we make height: 'auto' to let it adjust when new text is added from the keyboard
-          height: store.getState().items?.[index]?.height - 2 * theme.item.childMargin,
-        }}
-        css={{
-          //! separate container from froala logic to let it be applicable for any element
+          height: initFroalaHeight,
           margin: theme.item.childMargin,
         }}
       >
