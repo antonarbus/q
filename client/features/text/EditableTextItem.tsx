@@ -39,7 +39,7 @@ export const EditableTextItem = ({ index }: Props) => {
           height: store.getState().items?.[index]?.height - 2 * theme.item.childMargin,
         }}
         css={{
-          //! separate container from froala logic
+          //! separate container from froala logic to let it be applicable for any element
           margin: theme.item.childMargin,
         }}
       >
