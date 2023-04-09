@@ -37,7 +37,7 @@ export const useFroala = ({ index, itemRef }: Props) => {
       {
         toolbarInline: true,
         // toolbarVisibleWithoutSelection: true,
-        pastePlain: true,
+        // pastePlain: true,
         charCounterCount: false,
         quickInsertEnabled: false,
         fontSizeSelection: true,
@@ -95,7 +95,12 @@ export const useFroala = ({ index, itemRef }: Props) => {
           initialized: function () {
           // $('a[href*="froala"]').parent().remove()
           },
-          'codeView.update': saveEditedText
+          'codeView.update': saveEditedText,
+          'paste.afterCleanup': function (clipboardHtml: string) {
+            console.log(this)
+            console.log(clipboardHtml)
+            // return clipboardHtml + 'additional text'
+          }
         },
         key: 'AVB8B-21D4B3B2E1F1G1uB-33B-21cyoF-10yB-7G-7gB-22zzE2wkA-7gC7B7D6B4E4F3D2I3H2C5==',
       },
