@@ -4,6 +4,7 @@ import { store, useDispatchTyped, useSelectorTyped } from 'client/store'
 import { Resizable } from 're-resizable'
 import { useEffect, useRef } from 'react'
 import { tellItemSavedLocally, updateItem } from '../items/itemsSlice'
+import { theme } from 'client/theme'
 
 type Props = {
   index: number
@@ -29,6 +30,10 @@ export const useFroala = ({ index, itemRef }: Props) => {
     saveItemsIntoLocalStorage()
     dispatch(tellItemSavedLocally(index))
   }
+
+  // at first we have fixed height to avoid height change when froala converts html into text on initialization
+  // when froala is initialized we make height: 'auto' to let it adjust when new text is added from the keyboard
+  const initFroalaHeight = store.getState().items?.[index]?.height - 2 * theme.item.childMargin
 
   useEffect(() => {
     // @ts-ignore
@@ -97,8 +102,8 @@ export const useFroala = ({ index, itemRef }: Props) => {
           },
           'codeView.update': saveEditedText,
           'paste.afterCleanup': function (clipboardHtml: string) {
-            console.log(this)
-            console.log(clipboardHtml)
+            // console.log(this)
+            // console.log(clipboardHtml)
             // return clipboardHtml + 'additional text'
           }
         },
@@ -139,5 +144,5 @@ export const useFroala = ({ index, itemRef }: Props) => {
     editorRef.current.selection.restore()
   }
 
-  return { froalaElementRef, editorRef, focusOnTextIfClickedOnPadding }
+  return { froalaElementRef, editorRef, focusOnTextIfClickedOnPadding, initFroalaHeight }
 }
