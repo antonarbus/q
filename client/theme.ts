@@ -42,7 +42,7 @@ const customTheme = {
     }
   },
   item: {
-    childMargin: 20,
+    padding: 20,
     animationDuration: 0.4
   },
   copy: {
