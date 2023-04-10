@@ -154,6 +154,7 @@ export const GlobalStyles = () => (
 
       // caret at Froala
       .fr-wrapper {
+        cursor: 'text';
         caret-color: red;
       }
 
