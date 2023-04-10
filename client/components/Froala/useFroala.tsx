@@ -22,6 +22,7 @@ export const useFroala = ({ initHtml, onClickAwayIfHtmChanged, froalaElementRef,
   }
 
   useEffect(function initFroalaInstance() {
+    // console.log(froalaElementRef.current)
     // @ts-ignore
     editorRef.current = new FroalaEditor(
       froalaElementRef.current,
