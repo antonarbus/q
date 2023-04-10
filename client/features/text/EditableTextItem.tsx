@@ -1,46 +1,46 @@
 // // @ts-nocheck
 import { DraggableResizableItemWithActions } from 'client/components/DraggableResizableItemWithActions'
-import { useFroala } from './useFroala'
 import { theme } from 'client/theme'
-import { store } from 'client/store'
+import { store, useDispatchTyped } from 'client/store'
 import { useRef } from 'react'
 import { Resizable } from 're-resizable'
-import { BiEditAlt as PencilIcon } from 'react-icons/bi'
+import { PencilAtBottomRight } from 'client/components/PencilAtBottomRight'
+import { Froala } from 'client/components/Froala'
+import { tellItemSavedLocally, updateItem } from '../items/itemsSlice'
+import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 
 type Props = {
   index: number
 }
 
 export const EditableTextItem = ({ index }: Props) => {
+  const dispatch = useDispatchTyped()
   const itemRef = useRef() as React.MutableRefObject<Resizable>
+  const item = store.getState().items?.[index]
+  const froalaElementRef = useRef() as React.MutableRefObject<HTMLDivElement>
+  const editorRef = useRef() as React.MutableRefObject<any>
 
-  // at first we have fixed height to avoid height change when froala converts html into text on initialization
-  // when froala is initialized we make height: 'auto' to let it adjust when new text is added from the keyboard
-  const initFroalaHeight = store.getState().items?.[index]?.height
-  const { froalaElementRef } = useFroala({ index, itemRef, initFroalaHeight })
-  // console.log('🚀 ~  EditableTextItem: ' + index)
+  function saveHtmlAndHeight() {
+    const height = itemRef.current.resizable?.offsetHeight || 0
+    dispatch(updateItem({ index, props: { height, html: editorRef.current.html.get() } }))
+    saveItemsIntoLocalStorage()
+    dispatch(tellItemSavedLocally(index))
+  }
 
   return (
     <DraggableResizableItemWithActions
       index={index}
       itemRef={itemRef}
     >
-      <PencilIcon
-        css={{
-          position: 'absolute',
-          bottom: 5,
-          right: 5,
-          color: '#b3b3b3',
-          height: 14
-        }}
+      <Froala
+        editorRef={editorRef}
+        froalaElementRef={froalaElementRef}
+        initHtml={item?.html}
+        initHeight={item?.height}
+        padding={theme.item.padding}
+        onClickAwayIfHtmChanged={saveHtmlAndHeight}
       />
-      <div
-        ref={froalaElementRef}
-        style={{
-          height: initFroalaHeight || 'auto',
-          padding: theme.item.padding,
-        }}
-      />
+      <PencilAtBottomRight />
     </DraggableResizableItemWithActions>
   )
 }
