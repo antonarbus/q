@@ -55,7 +55,7 @@ export const useMovePasteTextAfterCursor = () => {
   })
 
   useUnmount(() => {
-    document.body.style.cursor = 'default'
+    document.body.style.removeProperty('cursor')
     document.removeEventListener('mousemove', movePasteTextAfterCursor)
   })
 }
