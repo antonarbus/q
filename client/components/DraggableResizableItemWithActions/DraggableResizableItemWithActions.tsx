@@ -16,10 +16,9 @@ type Props = {
   index: number
   children: React.ReactNode
   itemRef: React.MutableRefObject<Resizable>
-  onClick?: (e: MouseEvent) => void
 }
 
-export const DraggableResizableItemWithActions = ({ index, children, itemRef, onClick }: Props) => {
+export const DraggableResizableItemWithActions = ({ index, children, itemRef }: Props) => {
   const isDisabled = useIsDisabledItem()
   const isPasteHere = useIsPasteHere({ index })
 
@@ -35,7 +34,7 @@ export const DraggableResizableItemWithActions = ({ index, children, itemRef, on
         <CutIcon itemRef={itemRef} index={index} />
         <DeleteIcon index={index} />
       </ActionsContainer>
-      <ResizablePaper index={index} itemRef={itemRef} onClick={onClick}>
+      <ResizablePaper index={index} itemRef={itemRef}>
         <Msg index={index}/>
         <div style={{ opacity: isPasteHere ? 0.2 : 1 }}>
           {children}

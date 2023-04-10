@@ -13,14 +13,13 @@ type Props = {
 
 export const EditableTextItem = ({ index }: Props) => {
   const itemRef = useRef() as React.MutableRefObject<Resizable>
-  const { froalaElementRef, focusOnTextIfClickedOnPadding, initFroalaHeight } = useFroala({ index, itemRef })
+  const { froalaElementRef, initFroalaHeight } = useFroala({ index, itemRef })
   // console.log('🚀 ~  EditableTextItem: ' + index)
 
   return (
     <DraggableResizableItemWithActions
       index={index}
       itemRef={itemRef}
-      onClick={focusOnTextIfClickedOnPadding}
     >
       <PencilIcon
         css={{
@@ -35,7 +34,7 @@ export const EditableTextItem = ({ index }: Props) => {
         ref={froalaElementRef}
         style={{
           height: initFroalaHeight,
-          margin: theme.item.childMargin,
+          padding: theme.item.childMargin,
         }}
       >
         {/* text is managed by froala */}
