@@ -16,9 +16,9 @@ type Props = {
 export const EditableTextItem = ({ index }: Props) => {
   const dispatch = useDispatchTyped()
   const itemRef = useRef() as React.MutableRefObject<Resizable>
-  const item = store.getState().items?.[index]
   const froalaElementRef = useRef() as React.MutableRefObject<HTMLDivElement>
   const editorRef = useRef() as React.MutableRefObject<any>
+  const item = store.getState().items?.[index]
 
   function saveHtmlAndHeight() {
     const height = itemRef.current.resizable?.offsetHeight || 0
