@@ -7,10 +7,9 @@ interface Props {
   children: React.ReactNode
   index: number
   itemRef: React.MutableRefObject<Resizable>
-  onClick?: (e: MouseEvent) => void
 }
 
-export const ResizablePaper = ({ children, index, itemRef, onClick }: Props) => {
+export const ResizablePaper = ({ children, index, itemRef }: Props) => {
   const dispatch = useDispatchTyped()
   const width = useSelectorTyped(state => state.items?.[index]?.width)
 
@@ -19,7 +18,6 @@ export const ResizablePaper = ({ children, index, itemRef, onClick }: Props) => 
       ref={itemRef}
       size={{ width, height: 'auto' }}
       // @ts-ignore:next-line
-      onClick={onClick}
       css={{
         background: 'white',
         borderRadius: 6,

@@ -31,11 +31,13 @@ export const useFroala = ({ index, itemRef }: Props) => {
     dispatch(tellItemSavedLocally(index))
   }
 
+  //! to avoid workaround with height maybe possible to initially render with parseHtml
+  //! and replace it with froala when it is instantiated
   // at first we have fixed height to avoid height change when froala converts html into text on initialization
   // when froala is initialized we make height: 'auto' to let it adjust when new text is added from the keyboard
-  const initFroalaHeight = store.getState().items?.[index]?.height - 2 * theme.item.childMargin
+  const initFroalaHeight = store.getState().items?.[index]?.height // - 2 * theme.item.childMargin
 
-  useEffect(() => {
+  useEffect(function initFroalaInstance() {
     // @ts-ignore
     editorRef.current = new FroalaEditor(
       froalaElementRef.current,
@@ -121,28 +123,28 @@ export const useFroala = ({ index, itemRef }: Props) => {
     }
   }, [resetItemsToDefaults])
 
-  useEffect(() => {
-    if (!item) return
-    if (!froalaElementRef?.current) return
-    if (!itemRef?.current) return
-    froalaElementRef.current.addEventListener('focusout', saveEditedText)
+  useEffect(function saveTextInReduxOnClickAway() {
+    froalaElementRef?.current?.addEventListener('focusout', saveEditedText)
 
     return () => {
-      if (!item) return
-      if (!froalaElementRef?.current) return
-      if (!itemRef?.current) return
-      froalaElementRef.current.removeEventListener('focusout', saveEditedText)
+      froalaElementRef?.current?.removeEventListener('focusout', saveEditedText)
     }
   }, [index])
 
-  function focusOnTextIfClickedOnPadding(e: MouseEvent) {
-    // https://stackoverflow.com/a/35191761/7239778
-    const clickedElement = e.target as HTMLElement
-    const isClickInsideFroala = froalaElementRef.current.contains(clickedElement)
-    if (isClickInsideFroala) return
-    editorRef.current.selection.setAtEnd(editorRef.current.$el.get(0))
-    editorRef.current.selection.restore()
-  }
+  useEffect(function putCaretAtTheEndOfTextOnPaddingClick() {
+    function focusOnTextIfClickedOnPadding(e: MouseEvent) {
+      // https://stackoverflow.com/a/35191761/7239778
+      const clickedElement = e.target as HTMLElement
+      if (!clickedElement.matches('.fr-box')) return
+      editorRef.current.selection.setAtEnd(editorRef.current.$el.get(0))
+      editorRef.current.selection.restore()
+    }
 
-  return { froalaElementRef, editorRef, focusOnTextIfClickedOnPadding, initFroalaHeight }
+    froalaElementRef?.current?.addEventListener('click', focusOnTextIfClickedOnPadding)
+    return () => {
+      froalaElementRef?.current?.removeEventListener('click', focusOnTextIfClickedOnPadding)
+    }
+  }, [index])
+
+  return { froalaElementRef, editorRef, initFroalaHeight }
 }

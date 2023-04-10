@@ -139,8 +139,8 @@ export const GlobalStyles = () => (
         background: transparent !important;
         & .fa-code {
           position: absolute;
-          top: -10px;
-          right: -10px;
+          top: 0px;
+          right: 0px;
           font-size: 20px !important;
           transition: scale 200ms;
           :before {
@@ -152,6 +152,7 @@ export const GlobalStyles = () => (
         }
       }
 
+      // caret at Froala
       .fr-wrapper {
         caret-color: red;
       }
