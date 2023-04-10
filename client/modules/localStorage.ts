@@ -1,4 +1,5 @@
 import { defaultItems } from 'client/features/items/defaultItems'
+import { ItemsType } from 'client/features/items/types'
 import { reloadOffer } from 'client/features/offer/offerSlice'
 import { store } from 'client/store'
 import { jsonSafeParse } from 'utils/jsonSafeParse'
@@ -9,8 +10,13 @@ export const getItemsFromLocalStorage = () => {
 }
 
 export const saveItemsIntoLocalStorage = (items = store.getState().items) => {
-  localStorage.setItem('items', JSON.stringify(items))
-  return items
+  const modifiableItems = structuredClone(items)
+  const itemsWithoutMsg = modifiableItems.map(item => {
+    item.msg = ''
+    return item
+  })
+  localStorage.setItem('items', JSON.stringify(itemsWithoutMsg))
+  return itemsWithoutMsg
 }
 
 export const resetItems = () => {
