@@ -6,7 +6,6 @@ import { store } from 'client/store'
 import { useRef } from 'react'
 import { Resizable } from 're-resizable'
 import { BiEditAlt as PencilIcon } from 'react-icons/bi'
-import parseHtml from 'html-react-parser'
 
 type Props = {
   index: number
@@ -14,7 +13,11 @@ type Props = {
 
 export const EditableTextItem = ({ index }: Props) => {
   const itemRef = useRef() as React.MutableRefObject<Resizable>
-  const { froalaElementRef, initFroalaHeight } = useFroala({ index, itemRef })
+
+  // at first we have fixed height to avoid height change when froala converts html into text on initialization
+  // when froala is initialized we make height: 'auto' to let it adjust when new text is added from the keyboard
+  const initFroalaHeight = store.getState().items?.[index]?.height
+  const { froalaElementRef } = useFroala({ index, itemRef, initFroalaHeight })
   // console.log('🚀 ~  EditableTextItem: ' + index)
 
   return (
@@ -34,8 +37,8 @@ export const EditableTextItem = ({ index }: Props) => {
       <div
         ref={froalaElementRef}
         style={{
-          height: initFroalaHeight,
-          padding: theme.item.childMargin,
+          height: initFroalaHeight || 'auto',
+          padding: theme.item.padding,
         }}
       />
     </DraggableResizableItemWithActions>
