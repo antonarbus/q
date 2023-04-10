@@ -44,7 +44,9 @@ const itemsSlice = createSlice({
       .addCase(hideCopyContainer, (state) => state.filter(item => item.type !== 'paste'))
       .addCase(pasteItem, (state, action) => {
         const { itemId, pastePos, item } = action.payload
-        const itemToPaste = { ...item, id: nanoid(5) }
+        const modifiableItem = structuredClone(item)
+        modifiableItem.msg = ''
+        const itemToPaste = { ...modifiableItem, id: nanoid(5) }
         const hoveredItemIndex = state.findIndex(item => item.id === itemId)
 
         const getSpliceSettings = () => {
@@ -94,7 +96,7 @@ export const selectItemsShape = createSelector(
 )
 
 // thunks
-export const tellItemSavedLocally = (index: number, ms = 2000): AppThunk => (dispatch, getState) => {
+export const tellItemSavedLocally = (index: number, ms = 1700): AppThunk => (dispatch, getState) => {
   dispatch(updateItem({ index, props: { msg: 'saved locally' } }))
   setTimeout(() => {
     dispatch(updateItem({ index, props: { msg: '' } }))

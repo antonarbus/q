@@ -22,7 +22,7 @@ export const Items = () => {
     <ItemsContainer>
       {items.map((item, index) => {
         if (item.type === 'text') return <TextItem key={item.id} item={item} index={index} />
-        if (item.type === 'text editable') return <EditableTextItem key={item.id} item={item} index={index} />
+        if (item.type === 'text editable') return <EditableTextItem key={item.id} index={index} />
         if (item.type === 'boq') return <BoqItem key={item.id} item={item} index={index} />
         if (item.type === 'paste') return <PasteItem key={item.id} />
         return null
