@@ -6,6 +6,7 @@ import { store } from 'client/store'
 import { useRef } from 'react'
 import { Resizable } from 're-resizable'
 import { BiEditAlt as PencilIcon } from 'react-icons/bi'
+import parseHtml from 'html-react-parser'
 
 type Props = {
   index: number
@@ -36,9 +37,7 @@ export const EditableTextItem = ({ index }: Props) => {
           height: initFroalaHeight,
           padding: theme.item.childMargin,
         }}
-      >
-        {/* text is managed by froala */}
-      </div>
+      />
     </DraggableResizableItemWithActions>
   )
 }

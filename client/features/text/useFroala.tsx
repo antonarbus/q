@@ -31,8 +31,6 @@ export const useFroala = ({ index, itemRef }: Props) => {
     dispatch(tellItemSavedLocally(index))
   }
 
-  //! to avoid workaround with height maybe possible to initially render with parseHtml
-  //! and replace it with froala when it is instantiated
   // at first we have fixed height to avoid height change when froala converts html into text on initialization
   // when froala is initialized we make height: 'auto' to let it adjust when new text is added from the keyboard
   const initFroalaHeight = store.getState().items?.[index]?.height // - 2 * theme.item.childMargin
