@@ -22,7 +22,6 @@ export const useFroala = ({ initHtml, onClickAwayIfHtmChanged, froalaElementRef,
   }
 
   useEffect(function initFroalaInstance() {
-    // console.log(froalaElementRef.current)
     // @ts-ignore
     editorRef.current = new FroalaEditor(
       froalaElementRef.current,
@@ -114,7 +113,7 @@ export const useFroala = ({ initHtml, onClickAwayIfHtmChanged, froalaElementRef,
     return () => {
       froalaElementRef?.current?.removeEventListener('focusout', clickAwayHandlerIfHtmlChanged)
     }
-  }, [])
+  })
 
   useEffect(function putCaretAtTheEndOfTextOnPaddingClick() {
     function focusOnTextIfClickedOnPadding(e: MouseEvent) {
