@@ -40,7 +40,9 @@ export const EditableTextItem = ({ index }: Props) => {
         padding={theme.item.padding}
         onClickAwayIfHtmChanged={saveHtmlAndHeight}
       />
-      <PencilAtBottomRight />
+      <PencilAtBottomRight
+        editorRef={editorRef}
+      />
     </DraggableResizableItemWithActions>
   )
 }

@@ -5,6 +5,7 @@ import { ItemType } from './types'
 import { TextItem } from '../text/TextItem'
 import { EditableTextItem } from '../text/EditableTextItem'
 import { BoqItem } from '../boq/BoqItem'
+import { cleanItem } from 'utils/itemsUtils'
 
 const equalityFn = (prevItems: any, currentItems: any) => {
   // re-render the list only if item is replaced or new item is added

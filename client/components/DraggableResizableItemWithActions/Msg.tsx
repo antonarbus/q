@@ -1,16 +1,26 @@
-import { useSelectorTyped } from 'client/store'
+import { updateItem } from 'client/features/items/itemsSlice'
+import { useDispatchTyped, useSelectorTyped } from 'client/store'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useUpdateEffect } from 'react-use'
 
 type Props = {
   index: number
 }
 
 export const Msg = ({ index }: Props) => {
+  const dispatch = useDispatchTyped()
   const msg = useSelectorTyped(state => state.items[index]?.msg)
+
+  useUpdateEffect(function hideMsg() {
+    setTimeout(() => {
+      if (!msg) return
+      dispatch(updateItem({ index, props: { msg: '' } }))
+    }, 1700)
+  })
 
   return (
     <AnimatePresence>
-      {msg !== '' && (
+      {msg && (
         <motion.span
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
