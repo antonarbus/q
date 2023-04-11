@@ -12,7 +12,9 @@ export function useCursorCords() {
 
   function listenForMousemove() {
     window.addEventListener('mousemove', followCursor)
-    return () => { window.removeEventListener('mousemove', followCursor) }
+    return () => {
+      window.removeEventListener('mousemove', followCursor)
+    }
   }
 
   useEffectOnce(listenForMousemove)

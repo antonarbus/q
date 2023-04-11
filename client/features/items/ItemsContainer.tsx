@@ -48,7 +48,7 @@ export const ItemsContainer = ({ children }: Props) => {
         dispatch(saveItemsOrder({ sortedItems }))
         saveItemsIntoLocalStorage()
         dispatch(tellItemSavedLocally(newIndex))
-        document.body.style.cursor = 'default'
+        document.body.style.removeProperty('cursor')
       }}
     >
       <AnimatePresence initial={false}>
