@@ -6,6 +6,7 @@ import { nanoid } from 'nanoid'
 import { CopyPlaceType } from '../copy/types'
 import { defaultItems } from './defaultItems'
 import { ItemType, ItemsType } from './types'
+import { cleanItem } from 'utils/itemsUtils'
 // import isEqual from 'lodash.isequal'
 
 type ItemUpdatePayloadType = {
@@ -26,7 +27,8 @@ const itemsSlice = createSlice({
       const { index, props } = action.payload
       state[index] = { ...state[index], ...props }
     },
-    resetItemsToDefault: () => defaultItems
+    resetItemsToDefault: () => defaultItems,
+
   },
   extraReducers: (builder) => {
     builder
@@ -44,9 +46,8 @@ const itemsSlice = createSlice({
       .addCase(hideCopyContainer, (state) => state.filter(item => item.type !== 'paste'))
       .addCase(pasteItem, (state, action) => {
         const { itemId, pastePos, item } = action.payload
-        const modifiableItem = structuredClone(item)
-        modifiableItem.msg = ''
-        const itemToPaste = { ...modifiableItem, id: nanoid(5) }
+        const cleanedItem = cleanItem(item)
+        const itemToPaste = { ...cleanedItem, id: nanoid(5) }
         const hoveredItemIndex = state.findIndex(item => item.id === itemId)
 
         const getSpliceSettings = () => {
@@ -97,8 +98,12 @@ export const selectItemsShape = createSelector(
 
 // thunks
 export const tellItemSavedLocally = (index: number, ms = 1700): AppThunk => (dispatch, getState) => {
+  console.log(555)
+  console.log(index)
   dispatch(updateItem({ index, props: { msg: 'saved locally' } }))
-  setTimeout(() => {
-    dispatch(updateItem({ index, props: { msg: '' } }))
-  }, ms)
+  // setTimeout(() => {
+  //   console.log(666)
+  //   console.log(index)
+  //   dispatch(updateItem({ index, props: { msg: '' } }))
+  // }, ms)
 }
