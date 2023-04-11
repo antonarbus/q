@@ -15,7 +15,10 @@ export const DeleteIcon = ({ index }: Props) => {
 
   return (
     <motion.span
-      whileHover={{ scale: isLastItem ? 1 : 1.3 }}
+      whileHover={{
+        scale: isLastItem ? 1 : 1.3,
+        color: '#d25959'
+      }}
       whileTap={{ scale: 1 }}
       style={{
         color: isLastItem ? '#acacac' : '#000',
