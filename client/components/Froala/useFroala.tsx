@@ -27,13 +27,6 @@ export const useFroala = ({ initHtml, onClickAwayIfHtmChanged, froalaElementRef,
       froalaElementRef.current,
       {
         toolbarInline: true,
-        // toolbarVisibleWithoutSelection: true,
-        // pastePlain: true,
-        charCounterCount: false,
-        quickInsertEnabled: false,
-        fontSizeSelection: true,
-        fontSize: ['6', '8', '9', '10', '11', '12', '13', '14', '15', '16', '18', '20', '24', '30', '36', '48', '60', '72', '96'],
-        tabSpaces: 4,
         toolbarButtons: {
           moreText: {
             buttons: ['fontSize', 'textColor', 'backgroundColor', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'inlineClass', 'inlineStyle', 'clearFormatting'],
@@ -48,6 +41,13 @@ export const useFroala = ({ initHtml, onClickAwayIfHtmChanged, froalaElementRef,
             buttonsVisible: 4,
           }
         },
+        // toolbarVisibleWithoutSelection: true,
+        // pastePlain: true,
+        charCounterCount: false,
+        // quickInsertEnabled: false,
+        fontSizeSelection: true,
+        fontSize: ['6', '8', '9', '10', '11', '12', '13', '14', '15', '16', '18', '20', '24', '30', '36', '48', '60', '72', '96'],
+        tabSpaces: 4,
         fontFamily: {
           '"Roboto","Helvetica","Arial",sans-serif': 'Roboto',
           'Arial,Helvetica,sans-serif': 'Arial',

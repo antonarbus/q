@@ -158,6 +158,9 @@ export const GlobalStyles = () => (
         caret-color: red;
       }
 
+      // Froala insert button
+      .fr-quick-insert {}
+
     `}
   />
 )
