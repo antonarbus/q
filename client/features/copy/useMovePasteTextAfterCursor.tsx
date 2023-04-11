@@ -2,6 +2,7 @@ import { useEffectOnce, useUnmount } from 'react-use'
 import { store } from 'client/store'
 import { hidePasteText, showPasteText, updatePasteTextPos } from './copySlice'
 import { CopyPlaceType } from './types'
+import isEqual from 'lodash.isequal'
 
 type Props = {
   item: Element,
@@ -12,9 +13,10 @@ function getPastePlace({ item, e }: Props): CopyPlaceType {
   const { height, top } = item.getBoundingClientRect()
   const yWithinElement = e.clientY - top
   const distToTop = yWithinElement
+  const distToBottom = height - yWithinElement
 
-  if (distToTop / height < 0.2) return { pastePos: 'top', itemId: item.id }
-  if (distToTop / height > 0.8) return { pastePos: 'bottom', itemId: item.id }
+  if (distToTop < 20) return { pastePos: 'top', itemId: item.id }
+  if (distToBottom < 20) return { pastePos: 'bottom', itemId: item.id }
   return { pastePos: 'middle', itemId: item.id }
 }
 
@@ -30,10 +32,15 @@ function movePasteTextAfterCursor(e: MouseEvent) {
     return
   }
 
-  const actions = (e.target as Element).closest('.actions-container')
-  if (actions) {
-    if (!isPasteTextShown) return
+  const actionsButton = (e.target as Element).closest('.actions-container > *')
+
+  if (actionsButton && isPasteTextShown) {
     store.dispatch(hidePasteText())
+    return
+  }
+
+  if (!actionsButton && !isPasteTextShown) {
+    store.dispatch(showPasteText())
     return
   }
 
@@ -43,6 +50,8 @@ function movePasteTextAfterCursor(e: MouseEvent) {
   const item = (e.target as Element).closest('.item')
 
   const pastePlace = item ? getPastePlace({ item, e }) : prevPlace
+
+  if (isEqual(pastePlace, prevPlace)) return
 
   store.dispatch(showPasteText())
   store.dispatch(updatePasteTextPos(pastePlace))

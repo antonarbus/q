@@ -98,12 +98,5 @@ export const selectItemsShape = createSelector(
 
 // thunks
 export const tellItemSavedLocally = (index: number, ms = 1700): AppThunk => (dispatch, getState) => {
-  console.log(555)
-  console.log(index)
   dispatch(updateItem({ index, props: { msg: 'saved locally' } }))
-  // setTimeout(() => {
-  //   console.log(666)
-  //   console.log(index)
-  //   dispatch(updateItem({ index, props: { msg: '' } }))
-  // }, ms)
 }
