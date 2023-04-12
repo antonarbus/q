@@ -1,7 +1,6 @@
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { store, useDispatchTyped, useSelectorTyped } from 'client/store'
 import { RxCross2 } from 'react-icons/rx'
-import { motion } from 'framer-motion'
 import { deleteItem, selectIsLastItem } from '../../features/items/itemsSlice'
 import { tellItemsSavedLocally } from 'client/features/bottom msg/bottomMsgSlice'
 
@@ -14,15 +13,15 @@ export const DeleteIcon = ({ index }: Props) => {
   const isLastItem = useSelectorTyped(selectIsLastItem)
 
   return (
-    <motion.span
-      whileHover={{
-        scale: isLastItem ? 1 : 1.3,
-        color: '#d25959'
-      }}
-      whileTap={{ scale: 1 }}
-      style={{
+    <span
+      css={{
         color: isLastItem ? '#acacac' : '#000',
         cursor: isLastItem ? 'default' : 'pointer',
+        '&:hover': {
+          scale: isLastItem ? '1' : '1.3',
+          color: isLastItem ? '#acacac' : '#d25959',
+          transition: 'scale 200ms, color 200ms'
+        }
       }}
       onClick={() => {
         if (isLastItem) return
@@ -33,6 +32,6 @@ export const DeleteIcon = ({ index }: Props) => {
       }}
     >
       <RxCross2 />
-    </motion.span>
+    </span>
   )
 }
