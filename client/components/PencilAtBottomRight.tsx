@@ -17,9 +17,7 @@ export const PencilAtBottomRight = ({ editorRef }: Props) => {
         cursor: 'pointer'
       }}
       onClick={(e) => {
-        console.log(editorRef.current)
         editorRef.current.commands.selectAll()
-        // editorRef.current.toolbar.showInline(e, true)
       }}
     />
   )
