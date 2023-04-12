@@ -12,10 +12,14 @@ export const Msg = ({ index }: Props) => {
   const msg = useSelectorTyped(state => state.items[index]?.msg)
 
   useUpdateEffect(function hideMsg() {
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       if (!msg) return
       dispatch(updateItem({ index, props: { msg: '' } }))
     }, 1700)
+
+    return () => {
+      clearTimeout(timeout)
+    }
   })
 
   return (
