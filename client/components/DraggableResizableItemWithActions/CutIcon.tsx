@@ -1,7 +1,7 @@
 import { store, useDispatchTyped, useSelectorTyped } from 'client/store'
 import { TbCut } from 'react-icons/tb'
 import { Resizable } from 're-resizable'
-import { addItemIntoCopyContainer, saveInitCords, showCopyContainer } from 'client/features/copy/copySlice'
+import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/features/copy/copySlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { motion } from 'framer-motion'
 import { deleteItem, selectIsLastItem } from '../../features/items/itemsSlice'
@@ -26,7 +26,7 @@ export const CutIcon = ({ index, itemRef }: Props) => {
       }}
       onClick={(e: React.MouseEvent) => {
         if (isLastItem) return
-        dispatch(saveInitCords({ x: e.clientX, y: e.clientY }))
+        dispatch(saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
         dispatch(showCopyContainer())
         const itemToCut = store.getState().items[index]
         const item = { ...itemToCut, height: itemRef?.current?.resizable?.clientHeight || 0 }

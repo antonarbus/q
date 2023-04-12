@@ -1,7 +1,7 @@
 import { store, useDispatchTyped } from 'client/store'
 import { Resizable } from 're-resizable'
 import { MdCopyAll } from 'react-icons/md'
-import { addItemIntoCopyContainer, saveInitCords, showCopyContainer } from '../../features/copy/copySlice'
+import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from '../../features/copy/copySlice'
 import { motion } from 'framer-motion'
 
 type Props = {
@@ -22,7 +22,7 @@ export const CopyIcon = ({ itemRef, index }: Props) => {
         top: 1,
       }}
       onClick={(e: React.MouseEvent) => {
-        dispatch(saveInitCords({ x: e.clientX, y: e.clientY }))
+        dispatch(saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
         dispatch(showCopyContainer())
         const itemToCopy = store.getState().items[index]
         const item = { ...itemToCopy, height: itemRef?.current?.resizable?.clientHeight || 0 }
