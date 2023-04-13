@@ -1,7 +1,7 @@
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { useDispatchTyped, useSelectorTyped } from 'client/store'
 import { Resizable } from 're-resizable'
-import { tellItemSavedLocally, updateItem } from '../../features/items/itemsSlice'
+import { saveItemWidth, tellItemSavedLocally } from '../../features/items/itemsSlice'
 
 interface Props {
   children: React.ReactNode
@@ -34,9 +34,9 @@ export const ResizablePaper = ({ children, index, itemRef }: Props) => {
       onResizeStart={() => {}}
       onResizeStop={(e, direction, refToElement) => {
         const width = parseInt(refToElement.style.width)
-        dispatch(updateItem({ index, props: { width } }))
+        dispatch(saveItemWidth({ index, width }))
         saveItemsIntoLocalStorage()
-        dispatch(tellItemSavedLocally(index))
+        dispatch(tellItemSavedLocally({ index }))
       }}
     >
       {children}

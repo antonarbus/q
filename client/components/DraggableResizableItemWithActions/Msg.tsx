@@ -1,4 +1,4 @@
-import { updateItem } from 'client/features/items/itemsSlice'
+import { removeItemMsg } from 'client/features/items/itemsSlice'
 import { useDispatchTyped, useSelectorTyped } from 'client/store'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useUpdateEffect } from 'react-use'
@@ -14,7 +14,7 @@ export const Msg = ({ index }: Props) => {
   useUpdateEffect(function hideMsg() {
     const timeout = setTimeout(() => {
       if (!msg) return
-      dispatch(updateItem({ index, props: { msg: '' } }))
+      dispatch(removeItemMsg({ index }))
     }, 1700)
 
     return () => {

@@ -1,6 +1,7 @@
 import { MenuType, navStructure } from 'client/features/nav/navStructure'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from 'client/store'
+import { setMenuItemPropValue } from './functions/setMenuItemPropValue'
 
 const initialState = {
   navStructure,
@@ -34,37 +35,31 @@ const navSlice = createSlice({
     goDownInNextMenu: (state, action) => { state.idsToNextMenuItems = [...state.idsToNextMenuItems, action.payload] },
     goUpInNextMenu: (state) => { state.idsToNextMenuItems = state.idsToNextMenuItems.slice(0, -1) },
     setMenuItemHoverIndex: (state, action) => { state.menuItemHoverIndex = action.payload },
-
-    /**
-     * @summary can change any property in navStructure, for ex we can change icon or hide menuItem
-     * @example <caption>Example usage of in redux dev tools</caption>
-     * {
-          type: 'navSlice/setNavItemProp',
-          payload: { id: 'Offer', prop: 'isHidden', value: true }
-        }
-     */
-    setNavItemProp: (state, action: PayloadAction<{
-      id: string, prop: 'isHidden' | 'icon' | 'name' | 'link' | 'func' | 'disabled', value: any
-    }>) => {
-      const { id, prop, value } = action.payload
-
-      type Props = {
-        navStructure: MenuType[],
-        id: string,
-        prop: 'isHidden' | 'icon' | 'name' | 'link' | 'func' | 'disabled',
-        value: any
-      }
-
-      function searchItemByIdAndSetValueToProp ({ navStructure, id, prop, value }: Props) {
-        navStructure.forEach((el: MenuType) => {
-          if (el.id === id) {
-            el[prop] = value
-            return
-          }
-          if (el.menuItems) searchItemByIdAndSetValueToProp({ navStructure: el.menuItems, id, prop, value })
-        })
-      }
-      searchItemByIdAndSetValueToProp({ navStructure: state.navStructure, id, prop, value })
+    disableTopMenuItemsExceptItemId: (state, action: PayloadAction<{ exceptItemId?: string }>) => {
+      const { exceptItemId } = action.payload
+      const topNavItemsIds = state.navStructure[0].menuItems?.map(item => item.id)
+      topNavItemsIds?.forEach((id) => {
+        if (id === exceptItemId) return
+        setMenuItemPropValue({ menu: state.navStructure, id, prop: 'disabled', value: true })
+      })
+    },
+    enableTopMenuItems: (state) => {
+      const topNavItemsIds = state.navStructure[0].menuItems?.map(item => item.id)
+      topNavItemsIds?.forEach((id) => {
+        setMenuItemPropValue({ menu: state.navStructure, id, prop: 'disabled', value: false })
+      })
+    },
+    hideLogInMenuItem: (state) => {
+      setMenuItemPropValue({ menu: state.navStructure, id: 'logIn', prop: 'isHidden', value: true })
+    },
+    showLogInMenuItem: (state) => {
+      setMenuItemPropValue({ menu: state.navStructure, id: 'logIn', prop: 'isHidden', value: false })
+    },
+    showAccountMenuItem: (state) => {
+      setMenuItemPropValue({ menu: state.navStructure, id: 'account', prop: 'isHidden', value: false })
+    },
+    hideAccountMenuItem: (state) => {
+      setMenuItemPropValue({ menu: state.navStructure, id: 'account', prop: 'isHidden', value: true })
     }
   }
 })
@@ -84,7 +79,12 @@ export const {
   goDownInNextMenu,
   goUpInNextMenu,
   setMenuItemHoverIndex,
-  setNavItemProp,
+  showLogInMenuItem,
+  hideLogInMenuItem,
+  showAccountMenuItem,
+  hideAccountMenuItem,
+  disableTopMenuItemsExceptItemId,
+  enableTopMenuItems,
   disableMedia,
   enableMedia
 } = navSlice.actions

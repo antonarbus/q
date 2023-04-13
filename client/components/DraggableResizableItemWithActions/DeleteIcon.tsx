@@ -13,15 +13,15 @@ export const DeleteIcon = ({ index }: Props) => {
   const isLastItem = useSelectorTyped(selectIsLastItem)
 
   return (
-    <span
+    <motion.span
+      whileHover={{
+        scale: isLastItem ? 1 : 1.3,
+        color: '#d25959'
+      }}
+      whileTap={{ scale: 1 }}
       css={{
-        color: isLastItem ? '#acacac' : '#000',
+        color: isLastItem ? '#acacac !important' : '#000',
         cursor: isLastItem ? 'default' : 'pointer',
-        '&:hover': {
-          scale: isLastItem ? '1' : '1.3',
-          color: isLastItem ? '#acacac' : '#d25959',
-          transition: 'scale 200ms, color 200ms'
-        }
       }}
       onClick={() => {
         if (isLastItem) return
