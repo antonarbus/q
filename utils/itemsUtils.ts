@@ -14,3 +14,13 @@ export function cleanItems(items: ItemsType) {
   })
   return itemsWithoutMsg
 }
+
+type Props = {
+  item: ItemType,
+  props: Partial<ItemType>
+}
+
+//! delete
+export function updateItemProps({ item, props }: Props) {
+  return { ...item, ...props }
+}
