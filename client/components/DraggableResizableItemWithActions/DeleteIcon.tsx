@@ -44,6 +44,12 @@ export const DeleteIcon = ({ index }: Props) => {
           color: isLastItem ? '#acacac' : '#000'
         })
       }}
+      onMouseDown={() => {
+        gsap.to(ref.current, {
+          duration: 0.2,
+          scale: isLastItem ? 1 : 0.9,
+        })
+      }}
     >
       <RxCross2 />
     </span>
