@@ -3,6 +3,7 @@ import { store, useDispatchTyped, useSelectorTyped } from 'client/store'
 import { RxCross2 } from 'react-icons/rx'
 import { deleteItem, selectIsLastItem } from '../../features/items/itemsSlice'
 import { tellItemsSavedLocally } from 'client/features/bottom msg/bottomMsgSlice'
+import { motion } from 'framer-motion'
 
 type Props = {
   index: number
@@ -32,6 +33,6 @@ export const DeleteIcon = ({ index }: Props) => {
       }}
     >
       <RxCross2 />
-    </span>
+    </motion.span>
   )
 }
