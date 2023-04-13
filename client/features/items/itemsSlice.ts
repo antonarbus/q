@@ -1,18 +1,13 @@
 import { PayloadAction, createSelector, createSlice, current } from '@reduxjs/toolkit'
 import { hideCopyContainer, pasteItem, updatePasteTextPos } from 'client/features/copy/copySlice'
 import { getItemsFromLocalStorage } from 'client/modules/localStorage'
-import { AppThunk, RootState } from 'client/store'
+import { RootState } from 'client/store'
 import { nanoid } from 'nanoid'
 import { CopyPlaceType } from '../copy/types'
 import { defaultItems } from './defaultItems'
 import { ItemType, ItemsType } from './types'
-import { cleanItem, updateItemProps } from 'utils/itemsUtils'
+import { cleanItem } from 'utils/itemsUtils'
 // import isEqual from 'lodash.isequal'
-
-type ItemUpdatePayloadType = {
-  index: number,
-  props: Partial<ItemType>
-}
 
 const initialState: ItemsType = getItemsFromLocalStorage()
 
@@ -22,11 +17,6 @@ const itemsSlice = createSlice({
   reducers: {
     saveItemsOrder: (state, action) => action.payload.sortedItems,
     deleteItem: (state, action) => state.filter(item => item.id !== action.payload.id),
-    updateItem: (state, action: PayloadAction<ItemUpdatePayloadType>) => {
-      // console.log(current(state))
-      const { index, props } = action.payload
-      state[index] = { ...state[index], ...props }
-    },
     resetItemsToDefault: () => defaultItems,
     tellItemSavedLocally: (state, action: PayloadAction<{index: number}>) => {
       const { index } = action.payload
@@ -35,6 +25,18 @@ const itemsSlice = createSlice({
     removeItemMsg: (state, action: PayloadAction<{index: number}>) => {
       const { index } = action.payload
       state[index].msg = ''
+    },
+    saveItemWidth: (state, action: PayloadAction<{index: number, width: number}>) => {
+      const { index, width } = action.payload
+      state[index].width = width
+    },
+    saveItemHeight: (state, action: PayloadAction<{index: number, height: number}>) => {
+      const { index, height } = action.payload
+      state[index].height = height
+    },
+    saveItemHtml: (state, action: PayloadAction<{index: number, html: string}>) => {
+      const { index, html } = action.payload
+      state[index].html = html
     },
   },
   extraReducers: (builder) => {
@@ -80,7 +82,16 @@ const itemsSlice = createSlice({
 })
 
 // exports
-export const { saveItemsOrder, deleteItem, resetItemsToDefault, updateItem, tellItemSavedLocally, removeItemMsg } = itemsSlice.actions
+export const {
+  saveItemsOrder,
+  deleteItem,
+  resetItemsToDefault,
+  tellItemSavedLocally,
+  removeItemMsg,
+  saveItemWidth,
+  saveItemHeight,
+  saveItemHtml
+} = itemsSlice.actions
 export default itemsSlice.reducer
 
 // selectors
