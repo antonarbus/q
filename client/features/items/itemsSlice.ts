@@ -6,7 +6,7 @@ import { nanoid } from 'nanoid'
 import { CopyPlaceType } from '../copy/types'
 import { defaultItems } from './defaultItems'
 import { ItemType, ItemsType } from './types'
-import { cleanItem } from 'utils/itemsUtils'
+import { cleanItem, updateItemProps } from 'utils/itemsUtils'
 // import isEqual from 'lodash.isequal'
 
 type ItemUpdatePayloadType = {
@@ -28,13 +28,20 @@ const itemsSlice = createSlice({
       state[index] = { ...state[index], ...props }
     },
     resetItemsToDefault: () => defaultItems,
-
+    tellItemSavedLocally: (state, action: PayloadAction<{index: number}>) => {
+      const { index } = action.payload
+      state[index].msg = 'saved locally'
+    },
+    removeItemMsg: (state, action: PayloadAction<{index: number}>) => {
+      const { index } = action.payload
+      state[index].msg = ''
+    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(updatePasteTextPos, (state, action) => {
+      .addCase(updatePasteTextPos, (state, action: PayloadAction<CopyPlaceType>) => {
         // respond to updatePastePos() action of copySlice, takes current state slice, but action.payload comes from copySlice
-        const { pastePos, itemId }: CopyPlaceType = action.payload
+        const { pastePos, itemId } = action.payload
         const itemsWithoutPasteText = state.filter(item => item.type !== 'paste')
         if (pastePos === 'middle') return itemsWithoutPasteText
         // debugger
@@ -73,7 +80,7 @@ const itemsSlice = createSlice({
 })
 
 // exports
-export const { saveItemsOrder, deleteItem, resetItemsToDefault, updateItem } = itemsSlice.actions
+export const { saveItemsOrder, deleteItem, resetItemsToDefault, updateItem, tellItemSavedLocally, removeItemMsg } = itemsSlice.actions
 export default itemsSlice.reducer
 
 // selectors
@@ -95,8 +102,3 @@ export const selectItemsShape = createSelector(
     }
   }
 )
-
-// thunks
-export const tellItemSavedLocally = (index: number, ms = 1700): AppThunk => (dispatch, getState) => {
-  dispatch(updateItem({ index, props: { msg: 'saved locally' } }))
-}

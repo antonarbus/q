@@ -36,7 +36,7 @@ export const ResizablePaper = ({ children, index, itemRef }: Props) => {
         const width = parseInt(refToElement.style.width)
         dispatch(updateItem({ index, props: { width } }))
         saveItemsIntoLocalStorage()
-        dispatch(tellItemSavedLocally(index))
+        dispatch(tellItemSavedLocally({ index }))
       }}
     >
       {children}

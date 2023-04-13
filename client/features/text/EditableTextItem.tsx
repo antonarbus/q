@@ -24,7 +24,7 @@ export const EditableTextItem = ({ index }: Props) => {
     const height = itemRef.current.resizable?.offsetHeight || 0
     dispatch(updateItem({ index, props: { height, html: editorRef.current.html.get() } }))
     saveItemsIntoLocalStorage()
-    dispatch(tellItemSavedLocally(index))
+    dispatch(tellItemSavedLocally({ index }))
   }
 
   return (
