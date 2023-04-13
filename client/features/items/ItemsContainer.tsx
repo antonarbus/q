@@ -47,7 +47,7 @@ export const ItemsContainer = ({ children }: Props) => {
         const sortedItems = arrayMoveImmutable(items, oldIndex, newIndex)
         dispatch(saveItemsOrder({ sortedItems }))
         saveItemsIntoLocalStorage()
-        dispatch(tellItemSavedLocally(newIndex))
+        dispatch(tellItemSavedLocally({ index: newIndex }))
         document.body.style.removeProperty('cursor')
       }}
     >

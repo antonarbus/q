@@ -1,18 +1,13 @@
 import { PayloadAction, createSelector, createSlice, current } from '@reduxjs/toolkit'
 import { hideCopyContainer, pasteItem, updatePasteTextPos } from 'client/features/copy/copySlice'
 import { getItemsFromLocalStorage } from 'client/modules/localStorage'
-import { AppThunk, RootState } from 'client/store'
+import { RootState } from 'client/store'
 import { nanoid } from 'nanoid'
 import { CopyPlaceType } from '../copy/types'
 import { defaultItems } from './defaultItems'
 import { ItemType, ItemsType } from './types'
 import { cleanItem } from 'utils/itemsUtils'
 // import isEqual from 'lodash.isequal'
-
-type ItemUpdatePayloadType = {
-  index: number,
-  props: Partial<ItemType>
-}
 
 const initialState: ItemsType = getItemsFromLocalStorage()
 
@@ -22,19 +17,33 @@ const itemsSlice = createSlice({
   reducers: {
     saveItemsOrder: (state, action) => action.payload.sortedItems,
     deleteItem: (state, action) => state.filter(item => item.id !== action.payload.id),
-    updateItem: (state, action: PayloadAction<ItemUpdatePayloadType>) => {
-      // console.log(current(state))
-      const { index, props } = action.payload
-      state[index] = { ...state[index], ...props }
-    },
     resetItemsToDefault: () => defaultItems,
-
+    tellItemSavedLocally: (state, action: PayloadAction<{index: number}>) => {
+      const { index } = action.payload
+      state[index].msg = 'saved locally'
+    },
+    removeItemMsg: (state, action: PayloadAction<{index: number}>) => {
+      const { index } = action.payload
+      state[index].msg = ''
+    },
+    saveItemWidth: (state, action: PayloadAction<{index: number, width: number}>) => {
+      const { index, width } = action.payload
+      state[index].width = width
+    },
+    saveItemHeight: (state, action: PayloadAction<{index: number, height: number}>) => {
+      const { index, height } = action.payload
+      state[index].height = height
+    },
+    saveItemHtml: (state, action: PayloadAction<{index: number, html: string}>) => {
+      const { index, html } = action.payload
+      state[index].html = html
+    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(updatePasteTextPos, (state, action) => {
+      .addCase(updatePasteTextPos, (state, action: PayloadAction<CopyPlaceType>) => {
         // respond to updatePastePos() action of copySlice, takes current state slice, but action.payload comes from copySlice
-        const { pastePos, itemId }: CopyPlaceType = action.payload
+        const { pastePos, itemId } = action.payload
         const itemsWithoutPasteText = state.filter(item => item.type !== 'paste')
         if (pastePos === 'middle') return itemsWithoutPasteText
         // debugger
@@ -73,7 +82,16 @@ const itemsSlice = createSlice({
 })
 
 // exports
-export const { saveItemsOrder, deleteItem, resetItemsToDefault, updateItem } = itemsSlice.actions
+export const {
+  saveItemsOrder,
+  deleteItem,
+  resetItemsToDefault,
+  tellItemSavedLocally,
+  removeItemMsg,
+  saveItemWidth,
+  saveItemHeight,
+  saveItemHtml
+} = itemsSlice.actions
 export default itemsSlice.reducer
 
 // selectors
@@ -95,8 +113,3 @@ export const selectItemsShape = createSelector(
     }
   }
 )
-
-// thunks
-export const tellItemSavedLocally = (index: number, ms = 1700): AppThunk => (dispatch, getState) => {
-  dispatch(updateItem({ index, props: { msg: 'saved locally' } }))
-}
