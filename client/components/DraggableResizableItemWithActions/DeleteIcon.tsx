@@ -3,7 +3,8 @@ import { store, useDispatchTyped, useSelectorTyped } from 'client/store'
 import { RxCross2 } from 'react-icons/rx'
 import { deleteItem, selectIsLastItem } from '../../features/items/itemsSlice'
 import { tellItemsSavedLocally } from 'client/features/bottom msg/bottomMsgSlice'
-import { motion } from 'framer-motion'
+import { gsap } from 'gsap'
+import { useRef } from 'react'
 
 type Props = {
   index: number
@@ -11,28 +12,40 @@ type Props = {
 
 export const DeleteIcon = ({ index }: Props) => {
   const dispatch = useDispatchTyped()
+  const ref = useRef() as React.MutableRefObject<HTMLSpanElement>
   const isLastItem = useSelectorTyped(selectIsLastItem)
 
   return (
-    <motion.span
-      whileHover={{
-        scale: isLastItem ? 1 : 1.3,
-        color: '#d25959'
-      }}
-      whileTap={{ scale: 1 }}
-      css={{
-        color: isLastItem ? '#acacac !important' : '#000',
+    <span
+      ref={ref}
+      style={{
+        color: isLastItem ? '#acacac' : '#000',
         cursor: isLastItem ? 'default' : 'pointer',
       }}
       onClick={() => {
+        gsap.to(ref.current, { duration: 0.2, scale: 0.9 })
         if (isLastItem) return
         const itemToDelete = store.getState().items[index]
         dispatch(deleteItem(itemToDelete))
         saveItemsIntoLocalStorage()
         dispatch(tellItemsSavedLocally())
       }}
+      onMouseOver={() => {
+        gsap.to(ref.current, {
+          duration: 0.2,
+          scale: isLastItem ? 1 : 1.3,
+          color: isLastItem ? '#acacac' : '#d25959'
+        })
+      }}
+      onMouseOut={() => {
+        gsap.to(ref.current, {
+          duration: 0.2,
+          scale: 1,
+          color: isLastItem ? '#acacac' : '#000'
+        })
+      }}
     >
       <RxCross2 />
-    </motion.span>
+    </span>
   )
 }
