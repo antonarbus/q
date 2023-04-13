@@ -1,13 +1,13 @@
 import { MenuType } from '../navStructure'
 
-type Props = {
+// https://www.typescriptlang.org/docs/handbook/2/generics.html
+// https://stackoverflow.com/a/49286056/7239778
+export function setMenuItemPropValue<K extends keyof MenuType> ({ menu, id, prop, value }: {
   menu: MenuType[]
   id: string
-  prop: keyof MenuType
-  value: any
-}
-
-export function setMenuItemPropValue ({ menu, id, prop, value }: Props) {
+  prop: K
+  value: MenuType[K]
+}) {
   menu.forEach((el) => {
     if (el.id === id) {
       el[prop] = value
