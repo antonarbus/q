@@ -20,8 +20,8 @@ export const DeleteIcon = ({ index }: Props) => {
         color: '#d25959'
       }}
       whileTap={{ scale: 1 }}
-      style={{
-        color: isLastItem ? '#acacac' : '#000',
+      css={{
+        color: isLastItem ? '#acacac !important' : '#000',
         cursor: isLastItem ? 'default' : 'pointer',
       }}
       onClick={() => {
