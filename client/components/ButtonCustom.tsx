@@ -1,8 +1,7 @@
 import { Button, CircularProgress } from '@mui/material'
 import { useRef } from 'react'
-import { CloseRounded, DoneRounded } from '@mui/icons-material'
 import { useUpdateEffect } from 'react-use'
-import { gsap } from 'gsap'
+import './successErrorIcons.css'
 
 type Props = {
   children?: React.ReactNode
@@ -37,25 +36,26 @@ export function ButtonCustom({ children, content, circleProgressSize, disabled, 
     borderRadius: '50%'
   }
 
-  useUpdateEffect(() => {
-    successIconRef.current && gsap.fromTo(successIconRef.current, { transformOrigin: '50% 50%', scale: 0 }, { duration: 0.5, scale: 1 })
-    errorIconRef.current && gsap.fromTo(errorIconRef.current, { transformOrigin: '50% 50%', scale: 0 }, { duration: 0.5, scale: 1 })
-  }, [httpStatus])
-
   return (
     <Button
       variant="contained"
       disabled={(httpStatus && ['loading', 'error', 'success'].includes(httpStatus)) || disabled}
       type='submit'
       fullWidth
-      sx={{ alignSelf: 'center', padding: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+      sx={{
+        alignSelf: 'center',
+        padding: '10px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}
       {...restProps}
     >
       {children}
       {content}
       {httpStatus === 'loading' && (
           <CircularProgress
-            size={circleProgressSize || 24}
+            size={circleProgressSize || 30}
             sx={{
               color: 'black',
               position: 'absolute'
@@ -67,12 +67,11 @@ export function ButtonCustom({ children, content, circleProgressSize, disabled, 
           ref={successIconRef}
           css={{
             ...iconBackgroundStyle,
-            height: circleProgressSize || '30px',
-            width: circleProgressSize || '30px',
-            background: '#4caf50'
+            height: circleProgressSize || 30,
+            width: circleProgressSize || 30,
           }}
         >
-          {<DoneRounded htmlColor='#fff' />}
+          {<svg className="checkmark" viewBox="0 0 52 52"><circle className="checkmark__circle" cx="26" cy="26" r="25" fill="none"/><path className="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>}
         </div>
       )}
       {httpStatus === 'error' && (
@@ -80,12 +79,11 @@ export function ButtonCustom({ children, content, circleProgressSize, disabled, 
           ref={errorIconRef}
           css={{
             ...iconBackgroundStyle,
-            height: circleProgressSize || '30px',
-            width: circleProgressSize || '30px',
-            background: '#f77d7d'
+            height: circleProgressSize || 30,
+            width: circleProgressSize || 30,
           }}
         >
-          {<CloseRounded htmlColor='#fff' />}
+          {<svg viewBox="0 0 52 52" className="checkmark"><circle cx="26" cy="26" r="25" fill="none" className="checkmark__circle checkmark__cross"></circle><path fill="none" d="M 12,12 L 40,40 M 40,12 L 12,40" className="checkmark__check"></path></svg>}
         </div>
       )}
     </Button>
