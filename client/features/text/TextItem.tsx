@@ -15,7 +15,6 @@ export const TextItem = ({ item, index }: Props) => {
   return (
     <DraggableResizableItemWithActions
       index={index}
-      item={item}
       itemRef={itemRef}
     >
       {parseHtml(item.html)}
