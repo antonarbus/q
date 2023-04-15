@@ -1,7 +1,7 @@
 type Props = {
   reserveSpaceForIcon?: boolean,
   name: string | React.ReactNode
-  disabled: boolean
+  disabled?: boolean
 }
 
 /**
