@@ -15,7 +15,15 @@ export const defaultItems: ItemsType = [
     width: 700,
     height: 73,
     html: '<div>boq</div>',
-    msg: ''
+    msg: '',
+    boq: {
+      header: {
+        title: {
+          html: '<div style="font-weight: 600">Title</div>',
+          height: 24
+        }
+      }
+    }
   },
   {
     id: 'id2',
