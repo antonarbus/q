@@ -6,6 +6,7 @@ export const defaultItems: ItemsType = [
     type: 'text editable',
     width: 800,
     height: 73,
+    //! do not save html here, but add html and height into text prop to make it consistent with boq
     html: '<div>editable text</div>',
     msg: ''
   },
@@ -14,6 +15,9 @@ export const defaultItems: ItemsType = [
     type: 'boq',
     width: 700,
     height: 73,
+    //! do not save html here
+    //! just get html at copy click and add it into copy container item
+    //! pass itemRef into copy
     html: '<div>boq</div>',
     msg: '',
     boq: {

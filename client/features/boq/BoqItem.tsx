@@ -6,11 +6,10 @@ import { Resizable } from 're-resizable'
 import { BoqHeader } from './boqHeader'
 
 type Props = {
-  item: ItemType
   index: number
 }
 
-export const BoqItem = ({ item, index }: Props) => {
+export const BoqItem = ({ index }: Props) => {
   const itemRef = useRef() as React.MutableRefObject<Resizable>
 
   return (
