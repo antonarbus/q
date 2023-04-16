@@ -6,7 +6,7 @@ import { useRef } from 'react'
 import { Resizable } from 're-resizable'
 import { PencilAtBottomRight } from 'client/components/PencilAtBottomRight'
 import { Froala } from 'client/components/Froala'
-import { saveItemHeight, saveItemHtml, tellItemSavedLocally } from '../items/itemsSlice'
+import { saveItem, tellItemSavedLocally } from '../items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 
 type Props = {
@@ -21,10 +21,9 @@ export const EditableTextItem = ({ index }: Props) => {
   const item = store.getState().items?.[index]
 
   function saveHtmlAndHeight() {
-    const height = itemRef.current.resizable?.offsetHeight || 0
-    const html = editorRef.current.html.get()
-    dispatch(saveItemHeight({ index, height }))
-    dispatch(saveItemHtml({ index, html }))
+    const itemHeight = itemRef.current.resizable?.offsetHeight || 0
+    const itemHtml = editorRef.current.html.get()
+    dispatch(saveItem({ index, html: itemHtml, height: itemHeight }))
     saveItemsIntoLocalStorage()
     dispatch(tellItemSavedLocally({ index }))
   }
