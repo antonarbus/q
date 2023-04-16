@@ -5,7 +5,7 @@ import { RootState } from 'client/store'
 import { nanoid } from 'nanoid'
 import { CopyPlaceType } from '../copy/types'
 import { defaultItems } from './defaultItems'
-import { ItemType, ItemsType } from './types'
+import { ItemBoqType, ItemType, ItemsType } from './types'
 import { cleanItem } from 'utils/itemsUtils'
 // import isEqual from 'lodash.isequal'
 
@@ -33,6 +33,12 @@ const itemsSlice = createSlice({
     saveItemHeight: (state, action: PayloadAction<{index: number, height: number}>) => {
       const { index, height } = action.payload
       state[index].height = height
+    },
+    saveBoqHeaderTitle: (state, action: PayloadAction<{index: number, height: number, html: string}>) => {
+      const { index, height, html } = action.payload
+      const boqItem = state[index] as ItemBoqType
+      boqItem.boq.header.title.height = height
+      boqItem.boq.header.title.html = html
     },
     saveItemHtml: (state, action: PayloadAction<{index: number, html: string}>) => {
       const { index, html } = action.payload
@@ -90,7 +96,8 @@ export const {
   removeItemMsg,
   saveItemWidth,
   saveItemHeight,
-  saveItemHtml
+  saveItemHtml,
+  saveBoqHeaderTitle
 } = itemsSlice.actions
 export default itemsSlice.reducer
 

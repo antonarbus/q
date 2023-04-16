@@ -18,7 +18,7 @@ export const BoqItem = ({ item, index }: Props) => {
       index={index}
       itemRef={itemRef}
     >
-      <BoqHeader index={index} />
+      <BoqHeader index={index} itemRef={itemRef} />
       666
     </DraggableResizableItemWithActions>
   )
