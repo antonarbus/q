@@ -30,19 +30,16 @@ const itemsSlice = createSlice({
       const { index, width } = action.payload
       state[index].width = width
     },
-    saveItemHeight: (state, action: PayloadAction<{index: number, height: number}>) => {
-      const { index, height } = action.payload
+    saveItem: (state, action: PayloadAction<{index: number, height: number, html: string}>) => {
+      const { index, height, html } = action.payload
       state[index].height = height
+      state[index].html = html
     },
     saveBoqHeaderTitle: (state, action: PayloadAction<{index: number, height: number, html: string}>) => {
       const { index, height, html } = action.payload
       const boqItem = state[index] as ItemBoqType
       boqItem.boq.header.title.height = height
       boqItem.boq.header.title.html = html
-    },
-    saveItemHtml: (state, action: PayloadAction<{index: number, html: string}>) => {
-      const { index, html } = action.payload
-      state[index].html = html
     },
   },
   extraReducers: (builder) => {
@@ -95,8 +92,7 @@ export const {
   tellItemSavedLocally,
   removeItemMsg,
   saveItemWidth,
-  saveItemHeight,
-  saveItemHtml,
+  saveItem,
   saveBoqHeaderTitle
 } = itemsSlice.actions
 export default itemsSlice.reducer
