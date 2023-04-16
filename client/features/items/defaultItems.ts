@@ -17,6 +17,7 @@ export const defaultItems: ItemsType = [
     height: 73,
     //! do not save html here
     //! just get html at copy click and add it into copy container item
+    //! in this case we do not need to keep huge html prop in items just for the copying purpose
     //! pass itemRef into copy
     html: '<div>boq</div>',
     msg: '',
