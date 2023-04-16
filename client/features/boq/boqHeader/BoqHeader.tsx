@@ -1,12 +1,14 @@
 import { theme } from 'client/theme'
 import { BoqHeaderTitle } from './BoqHeaderTitle'
+import { Resizable } from 're-resizable'
 
 type Props = {
   index: number
+  itemRef: React.MutableRefObject<Resizable>
 
 }
 
-export const BoqHeader = ({ index }: Props) => {
+export const BoqHeader = ({ index, itemRef }: Props) => {
   return (
     <div
       css={{
@@ -17,7 +19,7 @@ export const BoqHeader = ({ index }: Props) => {
         borderTopRightRadius: 6
       }}
     >
-      <BoqHeaderTitle index={index} />
+      <BoqHeaderTitle index={index} itemRef={itemRef} />
     </div>
   )
 }
