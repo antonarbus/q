@@ -56,18 +56,19 @@ export const FirstCopiedItem = () => {
           background: 'white',
           borderRadius: 4,
           boxShadow: '#00000033 0px 0px 6px 2px',
+          overflow: 'hidden'
         }}
       >
         <div
-          className='fr-wrapper fr-element fr-view fr-box'
+          // className='fr-wrapper fr-element fr-view fr-box'
           css={{
-            padding: 20,
+            // padding: 20,
             width: items[0].width,
             transformOrigin: 'left top',
             scale: `${scaleFactorForFirstItem}`,
           }}
         >
-          {parseHtml(items[0].html)}
+          {parseHtml(items[0].previewHtml)}
         </div>
       </motion.div>
     </AnimatePresence>

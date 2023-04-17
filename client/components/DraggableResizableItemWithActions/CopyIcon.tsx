@@ -5,7 +5,7 @@ import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContain
 import { motion } from 'framer-motion'
 
 type Props = {
-  itemRef?: React.MutableRefObject<Resizable>
+  itemRef: React.MutableRefObject<Resizable>
   index: number
 }
 
@@ -25,7 +25,10 @@ export const CopyIcon = ({ itemRef, index }: Props) => {
         dispatch(saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
         dispatch(showCopyContainer())
         const itemToCopy = store.getState().items[index]
-        const item = { ...itemToCopy, height: itemRef?.current?.resizable?.clientHeight || 0 }
+        // const itemHeight = itemRef?.current?.resizable?.clientHeight || 0
+        // const item = { ...itemToCopy, height: itemHeight }
+        const itemHtml = itemRef.current.resizable?.innerHTML || ''
+        const item = { ...itemToCopy, previewHtml: itemHtml }
         dispatch(addItemIntoCopyContainer(item))
       }}
     >

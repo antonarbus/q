@@ -1,13 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ItemType } from '../items/types'
-import { CopyPlaceType, PasteItemType } from './types'
+import { CopyPlaceType, CopyItemType } from './types'
 
 type Props = {
-  isShown: boolean,
-  initCords: { x: number, y: number },
-  items: ItemType[],
-  place: CopyPlaceType,
-  isCopying: boolean,
+  isShown: boolean
+  initCords: { x: number, y: number }
+  items: CopyItemType[]
+  place: CopyPlaceType
+  isCopying: boolean
   isPasteTextShown: boolean
 }
 
@@ -47,7 +46,7 @@ export const copySlice = createSlice({
     hidePasteText: (state) => {
       state.isPasteTextShown = false
     },
-    pasteItem: (state, action: PayloadAction<PasteItemType>) => {
+    pasteItem: (state, action: PayloadAction<CopyItemType>) => {
       state.isCopying = false
       state.place = initialState.place
     },

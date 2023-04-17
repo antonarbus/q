@@ -68,18 +68,19 @@ export const RestOfCopiedItems = () => {
                 background: 'white',
                 borderRadius: 4,
                 boxShadow: '#00000033 0px 0px 6px 2px',
+                overflow: 'hidden'
               }}
             >
               <div
                 className='fr-wrapper fr-element fr-view fr-box'
                 css={{
-                  padding: 20,
+                  // padding: 20,
                   width: item.width,
                   transformOrigin: 'left top',
                   scale: `${scaleFactor}`,
                 }}
               >
-                {parseHtml(item.html)}
+                {parseHtml(item.previewHtml)}
               </div>
             </div>
           )
