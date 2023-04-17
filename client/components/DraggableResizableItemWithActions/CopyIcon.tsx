@@ -25,8 +25,6 @@ export const CopyIcon = ({ itemRef, index }: Props) => {
         dispatch(saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
         dispatch(showCopyContainer())
         const itemToCopy = store.getState().items[index]
-        // const itemHeight = itemRef?.current?.resizable?.clientHeight || 0
-        // const item = { ...itemToCopy, height: itemHeight }
         const itemHtml = itemRef.current.resizable?.innerHTML || ''
         const itemHtmlCleaned = itemHtml.replaceAll('contenteditable="true"', '')
         const item = { ...itemToCopy, previewHtml: itemHtmlCleaned }

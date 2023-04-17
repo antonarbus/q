@@ -16,11 +16,25 @@ const variants: Variants = {
   },
   animate: ({ isCopying, isSoleItem }: AnimationPropsType) => {
     if (!isCopying) return {}
-    return { y: 0, transition: { delay: isSoleItem ? theme.copy.animationDuration : 0, duration: theme.copy.animationDuration, type: 'spring' } }
+    return {
+      y: 0,
+      transition: {
+        delay: isSoleItem ? theme.copy.animationDuration : 0,
+        duration: theme.copy.animationDuration,
+        type: 'spring'
+      }
+    }
   },
   exit: ({ isCopying }: AnimationPropsType) => {
     if (isCopying) return {}
-    return { y: -500, transition: { delay: 0, duration: theme.copy.animationDuration, type: 'tween' } }
+    return {
+      y: -500,
+      transition: {
+        delay: 0,
+        duration: theme.copy.animationDuration,
+        type: 'tween'
+      }
+    }
   },
 }
 

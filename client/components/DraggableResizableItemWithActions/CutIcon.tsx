@@ -29,7 +29,9 @@ export const CutIcon = ({ index, itemRef }: Props) => {
         dispatch(saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
         dispatch(showCopyContainer())
         const itemToCut = store.getState().items[index]
-        const item = { ...itemToCut, height: itemRef?.current?.resizable?.clientHeight || 0 }
+        const itemHtml = itemRef.current.resizable?.innerHTML || ''
+        const itemHtmlCleaned = itemHtml.replaceAll('contenteditable="true"', '')
+        const item = { ...itemToCut, previewHtml: itemHtmlCleaned }
         dispatch(addItemIntoCopyContainer(item))
         dispatch(deleteItem(itemToCut))
         saveItemsIntoLocalStorage()
