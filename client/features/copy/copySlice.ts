@@ -52,8 +52,6 @@ export const copySlice = createSlice({
       itemId: string
       pastePos: PastePosType
     }>) => {
-      console.log(666)
-      console.log(action.payload)
       state.isCopying = false
       state.place = initialState.place
     },
