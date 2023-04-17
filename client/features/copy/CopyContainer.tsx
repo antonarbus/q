@@ -16,13 +16,13 @@ export const CopyContainer = () => {
   useMovePasteTextAfterCursor()
   usePasteClick()
   useDisableNavItems()
-  const controls = useCopyContainerAnimation()
+  const copyContainerAnimationControls = useCopyContainerAnimation()
   const { x, y } = useCursorCords()
   // const { x, y } = { x: 300, y: 0 }
 
   return (
     <motion.div
-      animate={controls}
+      animate={copyContainerAnimationControls}
       css={{
         borderRadius: 6,
         position: 'fixed',
