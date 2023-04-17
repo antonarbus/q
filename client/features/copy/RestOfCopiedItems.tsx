@@ -6,22 +6,49 @@ import { theme } from 'client/theme'
 
 type AnimationPropsType = {
   isCopying: boolean,
+  firstItemHeight: number,
   prevFirstItemHeight: number,
 }
 
 const variants: Variants = {
-  initial: ({ isCopying, prevFirstItemHeight }: AnimationPropsType) => {
-    if (!isCopying) return {}
-    return { y: -prevFirstItemHeight }
+  initial: ({ isCopying, firstItemHeight, prevFirstItemHeight }: AnimationPropsType) => {
+    if (isCopying) {
+      return {
+        y: -firstItemHeight
+      }
+    }
+    if (!isCopying) {
+      console.log('🚀 initial ', { isCopying, firstItemHeight, prevFirstItemHeight })
+      return {}
+    }
+    return {}
   },
-  animate: ({ isCopying }: AnimationPropsType) => {
-    if (!isCopying) return {}
-    return { y: 0, transition: { delay: 0, duration: theme.copy.animationDuration, type: 'spring' } }
+  animate: ({ isCopying, firstItemHeight, prevFirstItemHeight }: AnimationPropsType) => {
+    if (isCopying) {
+      return {
+        y: 0,
+        transition: { delay: 0, duration: theme.copy.animationDuration, type: 'spring' }
+      }
+    }
+    if (!isCopying) {
+      console.log('🚀 animate ', { isCopying, firstItemHeight, prevFirstItemHeight })
+      return {}
+    }
+    return {}
   },
-  exit: ({ isCopying, prevFirstItemHeight }: AnimationPropsType) => {
-    if (isCopying) return {}
-    return { y: -prevFirstItemHeight, transition: { delay: 0, duration: theme.copy.animationDuration, type: 'spring' } }
-  },
+  exit: ({ isCopying, firstItemHeight, prevFirstItemHeight }: AnimationPropsType) => {
+    if (isCopying) {
+      return {}
+    }
+    if (!isCopying) {
+      console.log('🚀 exit ', { isCopying, firstItemHeight, prevFirstItemHeight })
+      return {
+        y: -prevFirstItemHeight,
+        transition: { delay: 0, duration: theme.copy.animationDuration, type: 'spring' }
+      }
+    }
+    return {}
+  }
 }
 
 let prevFirstItemHeight = 0
@@ -33,13 +60,19 @@ export const RestOfCopiedItems = () => {
   if (items.length === 0) return null
 
   const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / items[0].width
+  const firstItemHeight = items[0].height * scaleFactorForFirstItem + itemMarginBottom
+
+  const scaleFactorForSecondItem = items.length > 1 ? (containerWidth - 2 * containerPadding) / items[1].width : 0
+  const secondItemHeight = items.length > 1 ? items[1].height * scaleFactorForSecondItem + itemMarginBottom : 0
 
   const animationProps: AnimationPropsType = {
     isCopying,
-    prevFirstItemHeight,
+    firstItemHeight,
+    prevFirstItemHeight
   }
 
   prevFirstItemHeight = items[0].height * scaleFactorForFirstItem + itemMarginBottom
+  // console.log('🚀 ~ file: RestOfCopiedItems.tsx:49 ~ RestOfCopiedItems ~ prevFirstItemHeight:', prevFirstItemHeight)
 
   return (
     <AnimatePresence
