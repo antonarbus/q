@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { CopyPlaceType, CopyItemType } from './types'
+import { CopyPlaceType, CopyItemType, PastePosType } from './types'
+import { ItemType } from '../items/types'
 
 type Props = {
   isShown: boolean
@@ -46,7 +47,13 @@ export const copySlice = createSlice({
     hidePasteText: (state) => {
       state.isPasteTextShown = false
     },
-    pasteItem: (state, action: PayloadAction<CopyItemType>) => {
+    pasteItem: (state, action: PayloadAction<{
+      item: ItemType
+      itemId: string
+      pastePos: PastePosType
+    }>) => {
+      console.log(666)
+      console.log(action.payload)
       state.isCopying = false
       state.place = initialState.place
     },
