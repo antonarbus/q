@@ -11,30 +11,34 @@ type AnimationPropsType = {
 
 const variants: Variants = {
   initial: ({ isCopying }: AnimationPropsType) => {
-    if (!isCopying) return {}
-    return { y: -500 }
+    if (isCopying) return { y: -500 }
+    return {}
   },
   animate: ({ isCopying, isSoleItem }: AnimationPropsType) => {
-    if (!isCopying) return {}
-    return {
-      y: 0,
-      transition: {
-        delay: isSoleItem ? theme.copy.animationDuration : 0,
-        duration: theme.copy.animationDuration,
-        type: 'spring'
+    if (isCopying) {
+      return {
+        y: 0,
+        transition: {
+          delay: isSoleItem ? theme.copy.animationDuration : 0,
+          duration: theme.copy.animationDuration,
+          type: 'spring'
+        }
       }
     }
+    return {}
   },
   exit: ({ isCopying }: AnimationPropsType) => {
-    if (isCopying) return {}
-    return {
-      y: -500,
-      transition: {
-        delay: 0,
-        duration: theme.copy.animationDuration,
-        type: 'tween'
+    if (!isCopying) {
+      return {
+        y: -500,
+        transition: {
+          delay: 0,
+          duration: theme.copy.animationDuration,
+          type: 'tween'
+        }
       }
     }
+    return {}
   },
 }
 
