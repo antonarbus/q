@@ -1,4 +1,4 @@
-export type ItemBoqType = {
+export interface ItemBoqType {
   id: string
   type: 'boq'
   width: number
@@ -15,7 +15,7 @@ export type ItemBoqType = {
   }
 }
 
-export type ItemTextEditableType = {
+export interface ItemTextEditableType {
   id: string
   type: 'text editable'
   width: number
@@ -24,7 +24,7 @@ export type ItemTextEditableType = {
   msg: string | React.ReactNode
 }
 
-export type ItemTextType = {
+export interface ItemTextType {
   id: string
   type: 'text'
   width: number
@@ -33,7 +33,7 @@ export type ItemTextType = {
   msg: string | React.ReactNode
 }
 
-export type ItemPasteType = {
+export interface ItemPasteType {
   id: string
   type: 'paste'
   width: number
