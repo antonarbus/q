@@ -2,6 +2,7 @@ import parseHtml from 'html-react-parser'
 import { AnimatePresence, motion, Variants } from 'framer-motion'
 import { useSelectorTyped } from 'client/store'
 import { containerPadding, containerWidth, itemMarginBottom } from './CopyContainer'
+import { theme } from 'client/theme'
 
 type AnimationPropsType = {
   isCopying: boolean,
@@ -15,11 +16,11 @@ const variants: Variants = {
   },
   animate: ({ isCopying, isSoleItem }: AnimationPropsType) => {
     if (!isCopying) return {}
-    return { y: 0, transition: { delay: isSoleItem ? 0.5 : 0, duration: 0.5, type: 'spring' } }
+    return { y: 0, transition: { delay: isSoleItem ? theme.copy.animationDuration : 0, duration: theme.copy.animationDuration, type: 'spring' } }
   },
   exit: ({ isCopying }: AnimationPropsType) => {
     if (isCopying) return {}
-    return { y: -500, transition: { delay: 0, duration: 0.5, type: 'tween' } }
+    return { y: -500, transition: { delay: 0, duration: theme.copy.animationDuration, type: 'tween' } }
   },
 }
 
@@ -60,9 +61,7 @@ export const FirstCopiedItem = () => {
         }}
       >
         <div
-          // className='fr-wrapper fr-element fr-view fr-box'
           css={{
-            // padding: 20,
             width: items[0].width,
             transformOrigin: 'left top',
             scale: `${scaleFactorForFirstItem}`,

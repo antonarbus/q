@@ -28,7 +28,8 @@ export const CopyIcon = ({ itemRef, index }: Props) => {
         // const itemHeight = itemRef?.current?.resizable?.clientHeight || 0
         // const item = { ...itemToCopy, height: itemHeight }
         const itemHtml = itemRef.current.resizable?.innerHTML || ''
-        const item = { ...itemToCopy, previewHtml: itemHtml }
+        const itemHtmlCleaned = itemHtml.replaceAll('contenteditable="true"', '')
+        const item = { ...itemToCopy, previewHtml: itemHtmlCleaned }
         dispatch(addItemIntoCopyContainer(item))
       }}
     >
