@@ -11,37 +11,25 @@ type AnimationPropsType = {
 }
 
 const variants: Variants = {
-  initial: ({ isCopying, firstItemHeight, prevFirstItemHeight }: AnimationPropsType) => {
+  initial: ({ isCopying, firstItemHeight }: AnimationPropsType) => {
     if (isCopying) {
       return {
         y: -firstItemHeight
       }
     }
-    if (!isCopying) {
-      console.log('🚀 initial ', { isCopying, firstItemHeight, prevFirstItemHeight })
-      return {}
-    }
     return {}
   },
-  animate: ({ isCopying, firstItemHeight, prevFirstItemHeight }: AnimationPropsType) => {
+  animate: ({ isCopying }: AnimationPropsType) => {
     if (isCopying) {
       return {
         y: 0,
         transition: { delay: 0, duration: theme.copy.animationDuration, type: 'spring' }
       }
     }
-    if (!isCopying) {
-      console.log('🚀 animate ', { isCopying, firstItemHeight, prevFirstItemHeight })
-      return {}
-    }
     return {}
   },
-  exit: ({ isCopying, firstItemHeight, prevFirstItemHeight }: AnimationPropsType) => {
-    if (isCopying) {
-      return {}
-    }
+  exit: ({ isCopying, prevFirstItemHeight }: AnimationPropsType) => {
     if (!isCopying) {
-      console.log('🚀 exit ', { isCopying, firstItemHeight, prevFirstItemHeight })
       return {
         y: -prevFirstItemHeight,
         transition: { delay: 0, duration: theme.copy.animationDuration, type: 'spring' }
@@ -62,17 +50,13 @@ export const RestOfCopiedItems = () => {
   const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / items[0].width
   const firstItemHeight = items[0].height * scaleFactorForFirstItem + itemMarginBottom
 
-  const scaleFactorForSecondItem = items.length > 1 ? (containerWidth - 2 * containerPadding) / items[1].width : 0
-  const secondItemHeight = items.length > 1 ? items[1].height * scaleFactorForSecondItem + itemMarginBottom : 0
-
   const animationProps: AnimationPropsType = {
     isCopying,
     firstItemHeight,
     prevFirstItemHeight
   }
 
-  prevFirstItemHeight = items[0].height * scaleFactorForFirstItem + itemMarginBottom
-  // console.log('🚀 ~ file: RestOfCopiedItems.tsx:49 ~ RestOfCopiedItems ~ prevFirstItemHeight:', prevFirstItemHeight)
+  prevFirstItemHeight = firstItemHeight
 
   return (
     <AnimatePresence
