@@ -10,7 +10,6 @@ type Props = {
 export const Msg = ({ index }: Props) => {
   const dispatch = useDispatchTyped()
   const item = useSelectorTyped(state => state.items[index])
-  if (item.type === 'paste') return null
   const { msg } = item
 
   useUpdateEffect(function hideMsg() {

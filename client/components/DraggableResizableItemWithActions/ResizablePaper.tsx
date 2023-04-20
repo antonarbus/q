@@ -11,9 +11,7 @@ interface Props {
 
 export const ResizablePaper = ({ children, index, itemRef }: Props) => {
   const dispatch = useDispatchTyped()
-  const item = useSelectorTyped(state => state.items[index])
-  if (item.type === 'paste') return null
-  const width = item.width
+  const width = useSelectorTyped(state => state.items[index].width)
 
   return (
     <Resizable

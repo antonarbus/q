@@ -46,10 +46,7 @@ export const RestOfCopiedItems = () => {
   const isCopying = useSelectorTyped(state => state.copy.isCopying)
 
   if (items.length === 0) return null
-
   const firstItem = items[0]
-  if (firstItem.type === 'paste') return null
-
   const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / firstItem.width
   const firstItemHeight = firstItem.height * scaleFactorForFirstItem + itemMarginBottom
 
@@ -75,7 +72,6 @@ export const RestOfCopiedItems = () => {
         exit='exit'
       >
         {items.map((item, index) => {
-          if (item.type === 'paste') return null
           const scaleFactor = (containerWidth - 2 * containerPadding) / item.width
 
           if (index === 0) return null

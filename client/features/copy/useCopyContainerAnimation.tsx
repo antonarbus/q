@@ -12,7 +12,6 @@ export const useCopyContainerAnimation = () => {
 
   useEffect(() => {
     const newHeight = items.reduce((accumulator, item) => {
-      if (item.type === 'paste') return accumulator
       const scaleFactor = (containerWidth - 2 * containerPadding) / item.width
       return accumulator + scaleFactor * item.height + 5
     }, 70)
