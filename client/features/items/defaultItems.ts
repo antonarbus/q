@@ -6,20 +6,17 @@ export const defaultItems: ItemsType = [
     type: 'text editable',
     width: 800,
     height: 73,
-    //! do not save html here, but add html and height into text prop to make it consistent with boq
-    html: '<div>editable text</div>',
-    msg: ''
+    msg: '',
+    text: {
+      html: '<div>editable text</div>',
+      height: 73,
+    },
   },
   {
     id: 'id1',
     type: 'boq',
     width: 700,
     height: 73,
-    //! remove html from the top level
-    //! just get item's html at copy click and add it into copy container item
-    //! in this case we do not need to keep huge html prop in items just for the copying purpose
-    //! pass itemRef into copy
-    html: '<div>boq</div>',
     msg: '',
     boq: {
       header: {
@@ -35,23 +32,31 @@ export const defaultItems: ItemsType = [
     type: 'text editable',
     width: 600,
     height: 73,
-    html: '<div>editable text</div>',
-    msg: ''
+    msg: '',
+    text: {
+      html: '<div>editable text</div>',
+      height: 73,
+    },
   },
   {
     id: 'id3',
     type: 'text editable',
     width: 500,
     height: 73,
-    html: '<div>editable text</div>',
-    msg: ''
+    msg: '',
+    text: {
+      html: '<div>editable text</div>',
+      height: 73,
+    },
   },
   {
     id: 'id4',
     type: 'text',
     width: 400,
     height: 73,
-    html: '<div>not editable text</div>',
-    msg: ''
+    msg: '',
+    text: {
+      html: '<div>editable text</div>'
+    },
   }
 ]

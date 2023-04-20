@@ -3,7 +3,6 @@ export interface ItemBoqType {
   type: 'boq'
   width: number
   height: number
-  html: string
   msg: string | React.ReactNode
   boq: {
     header: {
@@ -20,8 +19,11 @@ export interface ItemTextEditableType {
   type: 'text editable'
   width: number
   height: number
-  html: string
   msg: string | React.ReactNode
+  text: {
+    html: string
+    height: number
+  }
 }
 
 export interface ItemTextType {
@@ -29,17 +31,17 @@ export interface ItemTextType {
   type: 'text'
   width: number
   height: number
-  html: string
   msg: string | React.ReactNode
+  text: {
+    html: string
+  }
 }
 
+// todo: think to make have common props for all items, even paste items does not need it
+// todo: it will simplify the code
 export interface ItemPasteType {
   id: string
   type: 'paste'
-  width: number
-  height: number
-  html: string
-  msg: string | React.ReactNode
 }
 
 export type ItemType = ItemBoqType | ItemTextEditableType | ItemTextType | ItemPasteType

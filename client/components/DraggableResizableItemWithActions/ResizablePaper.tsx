@@ -11,13 +11,14 @@ interface Props {
 
 export const ResizablePaper = ({ children, index, itemRef }: Props) => {
   const dispatch = useDispatchTyped()
-  const width = useSelectorTyped(state => state.items?.[index]?.width)
+  const item = useSelectorTyped(state => state.items[index])
+  if (item.type === 'paste') return null
+  const width = item.width
 
   return (
     <Resizable
       ref={itemRef}
       size={{ width, height: 'auto' }}
-      // @ts-ignore:next-line
       css={{
         background: 'white',
         borderRadius: 6,

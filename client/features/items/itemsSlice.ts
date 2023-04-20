@@ -5,7 +5,7 @@ import { RootState } from 'client/store'
 import { nanoid } from 'nanoid'
 import { CopyPlaceType } from '../copy/types'
 import { defaultItems } from './defaultItems'
-import { ItemBoqType, ItemType, ItemsType } from './types'
+import { ItemBoqType, ItemPasteType, ItemsType } from './types'
 import { cleanItem } from 'utils/itemsUtils'
 // import isEqual from 'lodash.isequal'
 
@@ -20,20 +20,34 @@ const itemsSlice = createSlice({
     resetItemsToDefault: () => defaultItems,
     tellItemSavedLocally: (state, action: PayloadAction<{index: number}>) => {
       const { index } = action.payload
-      state[index].msg = 'saved locally'
+      const item = state[index]
+      if (item.type === 'paste') return
+      item.msg = 'saved locally'
     },
     removeItemMsg: (state, action: PayloadAction<{index: number}>) => {
       const { index } = action.payload
-      state[index].msg = ''
+      const item = state[index]
+      if (item.type === 'paste') return
+      item.msg = ''
     },
     saveItemWidth: (state, action: PayloadAction<{index: number, width: number}>) => {
       const { index, width } = action.payload
-      state[index].width = width
+      const item = state[index]
+      if (item.type === 'paste') return
+      item.width = width
     },
-    saveItem: (state, action: PayloadAction<{index: number, height: number, html: string}>) => {
+    saveItemHeight: (state, action: PayloadAction<{index: number, height: number}>) => {
+      const { index, height } = action.payload
+      const item = state[index]
+      if (item.type === 'paste') return
+      item.height = height
+    },
+    saveEditableText: (state, action: PayloadAction<{index: number, height: number, html: string}>) => {
       const { index, height, html } = action.payload
-      state[index].height = height
-      state[index].html = html
+      const item = state[index]
+      if (item.type !== 'text editable') return
+      item.text.height = height
+      item.text.html = html
     },
     saveBoqHeaderTitle: (state, action: PayloadAction<{index: number, height: number, html: string}>) => {
       const { index, height, html } = action.payload
@@ -49,9 +63,8 @@ const itemsSlice = createSlice({
         const { pastePos, itemId } = action.payload
         const itemsWithoutPasteText = state.filter(item => item.type !== 'paste')
         if (pastePos === 'middle') return itemsWithoutPasteText
-        // debugger
         const insertAtIndex = itemsWithoutPasteText.findIndex(item => item.id === itemId) + (pastePos === 'bottom' ? 1 : 0)
-        const pasteTextEl: ItemType = { id: 'paste id', type: 'paste', width: 0, height: 0, html: '', msg: '' }
+        const pasteTextEl: ItemPasteType = { id: 'paste id', type: 'paste' }
         itemsWithoutPasteText.splice(insertAtIndex, 0, pasteTextEl)
         return itemsWithoutPasteText
       })
@@ -92,7 +105,8 @@ export const {
   tellItemSavedLocally,
   removeItemMsg,
   saveItemWidth,
-  saveItem,
+  saveItemHeight,
+  saveEditableText,
   saveBoqHeaderTitle
 } = itemsSlice.actions
 export default itemsSlice.reducer
