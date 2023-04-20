@@ -53,7 +53,10 @@ export const FirstCopiedItem = () => {
 
   if (items.length === 0) return null
 
-  const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / items[0].width
+  const firstItem = items[0]
+  if (firstItem.type === 'paste') return null
+
+  const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / firstItem.width
 
   return (
     <AnimatePresence
@@ -68,8 +71,8 @@ export const FirstCopiedItem = () => {
         animate='animate'
         exit='exit'
         css={{
-          height: items[0].height * scaleFactorForFirstItem,
-          width: items[0].width * scaleFactorForFirstItem,
+          height: firstItem.height * scaleFactorForFirstItem,
+          width: firstItem.width * scaleFactorForFirstItem,
           marginTop: 15,
           marginBottom: itemMarginBottom,
           background: 'white',
@@ -80,12 +83,12 @@ export const FirstCopiedItem = () => {
       >
         <div
           css={{
-            width: items[0].width,
+            width: firstItem.width,
             transformOrigin: 'left top',
             scale: `${scaleFactorForFirstItem}`,
           }}
         >
-          {parseHtml(items[0].previewHtml)}
+          {parseHtml(firstItem.previewHtml)}
         </div>
       </motion.div>
     </AnimatePresence>

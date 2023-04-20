@@ -47,8 +47,11 @@ export const RestOfCopiedItems = () => {
 
   if (items.length === 0) return null
 
-  const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / items[0].width
-  const firstItemHeight = items[0].height * scaleFactorForFirstItem + itemMarginBottom
+  const firstItem = items[0]
+  if (firstItem.type === 'paste') return null
+
+  const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / firstItem.width
+  const firstItemHeight = firstItem.height * scaleFactorForFirstItem + itemMarginBottom
 
   const animationProps: AnimationPropsType = {
     isCopying,
@@ -72,6 +75,7 @@ export const RestOfCopiedItems = () => {
         exit='exit'
       >
         {items.map((item, index) => {
+          if (item.type === 'paste') return null
           const scaleFactor = (containerWidth - 2 * containerPadding) / item.width
 
           if (index === 0) return null

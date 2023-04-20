@@ -5,7 +5,6 @@ import { ItemType } from './types'
 import { TextItem } from '../text/TextItem'
 import { EditableTextItem } from '../text/EditableTextItem'
 import { BoqItem } from '../boq/BoqItem'
-import { cleanItem } from 'utils/itemsUtils'
 
 const equalityFn = (prevItems: any, currentItems: any) => {
   // re-render the list only if item is replaced or new item is added
@@ -22,7 +21,7 @@ export const Items = () => {
   return (
     <ItemsContainer>
       {items.map((item, index) => {
-        if (item.type === 'text') return <TextItem key={item.id} item={item} index={index} />
+        if (item.type === 'text') return <TextItem key={item.id} index={index} />
         if (item.type === 'text editable') return <EditableTextItem key={item.id} index={index} />
         if (item.type === 'boq') return <BoqItem key={item.id} index={index} />
         if (item.type === 'paste') return <PasteItem key={item.id} />

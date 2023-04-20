@@ -9,7 +9,9 @@ type Props = {
 
 export const Msg = ({ index }: Props) => {
   const dispatch = useDispatchTyped()
-  const msg = useSelectorTyped(state => state.items[index]?.msg)
+  const item = useSelectorTyped(state => state.items[index])
+  if (item.type === 'paste') return null
+  const { msg } = item
 
   useUpdateEffect(function hideMsg() {
     const timeout = setTimeout(() => {

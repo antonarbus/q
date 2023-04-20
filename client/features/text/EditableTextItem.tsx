@@ -6,7 +6,7 @@ import { useRef } from 'react'
 import { Resizable } from 're-resizable'
 import { PencilAtBottomRight } from 'client/components/PencilAtBottomRight'
 import { Froala } from 'client/components/Froala'
-import { saveItem, tellItemSavedLocally } from '../items/itemsSlice'
+import { tellItemSavedLocally, saveEditableText, saveItemHeight } from '../items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 
 type Props = {
@@ -20,10 +20,13 @@ export const EditableTextItem = ({ index }: Props) => {
   const editorRef = useRef() as React.MutableRefObject<any>
   const item = store.getState().items?.[index]
 
+  if (item.type !== 'text editable') return null
+
   function saveHtmlAndHeight() {
     const itemHeight = itemRef.current.resizable?.offsetHeight || 0
     const itemHtml = editorRef.current.html.get()
-    dispatch(saveItem({ index, html: itemHtml, height: itemHeight }))
+    dispatch(saveEditableText({ index, html: itemHtml, height: itemHeight }))
+    dispatch(saveItemHeight({ index, height: itemHeight }))
     saveItemsIntoLocalStorage()
     dispatch(tellItemSavedLocally({ index }))
   }
@@ -36,8 +39,8 @@ export const EditableTextItem = ({ index }: Props) => {
       <Froala
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
-        initHtml={item?.html}
-        initHeight={item?.height}
+        initHtml={item.text.html}
+        initHeight={item.text.height}
         padding={theme.item.padding}
         onClickAwayIfHtmChanged={saveHtmlAndHeight}
       />
