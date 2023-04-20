@@ -52,10 +52,7 @@ export const FirstCopiedItem = () => {
   }
 
   if (items.length === 0) return null
-
   const firstItem = items[0]
-  if (firstItem.type === 'paste') return null
-
   const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / firstItem.width
 
   return (

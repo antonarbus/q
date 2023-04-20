@@ -21,25 +21,21 @@ const itemsSlice = createSlice({
     tellItemSavedLocally: (state, action: PayloadAction<{index: number}>) => {
       const { index } = action.payload
       const item = state[index]
-      if (item.type === 'paste') return
       item.msg = 'saved locally'
     },
     removeItemMsg: (state, action: PayloadAction<{index: number}>) => {
       const { index } = action.payload
       const item = state[index]
-      if (item.type === 'paste') return
       item.msg = ''
     },
     saveItemWidth: (state, action: PayloadAction<{index: number, width: number}>) => {
       const { index, width } = action.payload
       const item = state[index]
-      if (item.type === 'paste') return
       item.width = width
     },
     saveItemHeight: (state, action: PayloadAction<{index: number, height: number}>) => {
       const { index, height } = action.payload
       const item = state[index]
-      if (item.type === 'paste') return
       item.height = height
     },
     saveEditableText: (state, action: PayloadAction<{index: number, height: number, html: string}>) => {
@@ -64,7 +60,7 @@ const itemsSlice = createSlice({
         const itemsWithoutPasteText = state.filter(item => item.type !== 'paste')
         if (pastePos === 'middle') return itemsWithoutPasteText
         const insertAtIndex = itemsWithoutPasteText.findIndex(item => item.id === itemId) + (pastePos === 'bottom' ? 1 : 0)
-        const pasteTextEl: ItemPasteType = { id: 'paste id', type: 'paste' }
+        const pasteTextEl: ItemPasteType = { id: 'paste id', type: 'paste', height: 0, width: 0, msg: '' }
         itemsWithoutPasteText.splice(insertAtIndex, 0, pasteTextEl)
         return itemsWithoutPasteText
       })
