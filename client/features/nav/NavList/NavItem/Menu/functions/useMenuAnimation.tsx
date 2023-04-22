@@ -6,6 +6,7 @@ import { gsap } from 'gsap'
 import { useEffect } from 'react'
 import { getMenuItemByIdsChain } from './getMenuItemByIdsChain'
 import { useFirstMountState } from 'react-use'
+import { RefDivType } from 'client/types'
 
 type Props = {
   up: { () : void } | null

@@ -1,4 +1,4 @@
-import { EventType } from 'client/types'
+import { EventType, RefDivType } from 'client/types'
 import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Avatar } from '@mui/material'

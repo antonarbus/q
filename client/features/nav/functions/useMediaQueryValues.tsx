@@ -3,6 +3,7 @@ import { useDispatchTyped, useSelectorTyped } from 'client/store'
 import { disableMedia, enableMedia, setNavMediaQueryWidths } from '../navSlice'
 import { calcNavMediaQueryParams } from './calcNavMediaQueryParams'
 import { useFirstMountState } from 'react-use'
+import { RefDivType } from 'client/types'
 
 type Props = {
   navRef: RefDivType

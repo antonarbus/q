@@ -5,6 +5,7 @@ import { deleteItem, selectIsLastItem } from '../../features/items/itemsSlice'
 import { tellItemsSavedLocally } from 'client/features/bottom msg/bottomMsgSlice'
 import { gsap } from 'gsap'
 import { useRef } from 'react'
+import { RefSpanType } from 'client/types'
 
 type Props = {
   index: number

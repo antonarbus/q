@@ -1,3 +1,4 @@
+import { RefAnyType } from 'client/types'
 import { BiEditAlt as PencilIcon } from 'react-icons/bi'
 
 type Props = {

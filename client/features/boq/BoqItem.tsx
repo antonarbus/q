@@ -1,9 +1,7 @@
-import parseHtml from 'html-react-parser'
-import { ItemType } from '../items/types'
 import { DraggableResizableItemWithActions } from 'client/components/DraggableResizableItemWithActions'
 import { useRef } from 'react'
-import { Resizable } from 're-resizable'
 import { BoqHeader } from './boqHeader'
+import { RefResizableType } from 'client/types'
 
 type Props = {
   index: number
