@@ -9,6 +9,7 @@ import { SlidableMenuItemsContainer } from './SlidableMenuItemsContainer'
 import { TopMenuItemsContainer } from './TopMenuItemsContainer'
 import { setMenuItemHoverIndex } from 'client/features/nav/navSlice'
 import { theme } from 'client/theme'
+import { RefDivType } from 'client/types'
 
 export function Menu() {
   const menuContainerRef = useRef() as RefDivType

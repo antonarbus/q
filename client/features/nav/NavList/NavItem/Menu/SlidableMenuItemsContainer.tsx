@@ -1,6 +1,7 @@
 import { selectMenuItemByIdsChainSelector } from 'client/features/nav/navSlice'
 import { useSelectorTyped } from 'client/store'
 import { MenuItem } from './MenuItem'
+import { RefDivType } from 'client/types'
 
 type Props = {
   reference: RefDivType

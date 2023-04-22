@@ -3,11 +3,11 @@ import { DraggableResizableItemWithActions } from 'client/components/DraggableRe
 import { theme } from 'client/theme'
 import { store, useDispatchTyped } from 'client/store'
 import { useRef } from 'react'
-import { Resizable } from 're-resizable'
 import { PencilAtBottomRight } from 'client/components/PencilAtBottomRight'
 import { Froala } from 'client/components/Froala'
 import { tellItemSavedLocally, saveEditableText, saveItemHeight } from '../items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
+import { RefAnyType, RefDivType, RefResizableType } from 'client/types'
 
 type Props = {
   index: number

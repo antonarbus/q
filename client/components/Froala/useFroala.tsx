@@ -1,4 +1,5 @@
 import { useSelectorTyped } from 'client/store'
+import { RefAnyType, RefDivType, RefStringType } from 'client/types'
 import { useEffect, useRef } from 'react'
 
 type Props = {

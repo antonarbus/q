@@ -1,4 +1,5 @@
 import { useSelectorTyped } from 'client/store'
+import { RefDivType } from 'client/types'
 import { Link } from 'react-router-dom'
 
 type Prop = {

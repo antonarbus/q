@@ -2,7 +2,7 @@ import { isClickInsideThisElement } from 'utils/isClickInsideThisElement'
 import { useDispatchTyped } from 'client/store'
 import { useEffect } from 'react'
 import { closeMenu } from 'client/features/nav/navSlice'
-import { EventType } from 'client/types'
+import { EventType, RefDivType } from 'client/types'
 
 type Props = {
   menuContainerRef: RefDivType
