@@ -5,7 +5,7 @@ import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContain
 import { motion } from 'framer-motion'
 
 type Props = {
-  itemRef: React.MutableRefObject<Resizable>
+  itemRef: RefResizableType
   index: number
 }
 

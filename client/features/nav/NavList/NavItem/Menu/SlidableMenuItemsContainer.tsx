@@ -3,7 +3,7 @@ import { useSelectorTyped } from 'client/store'
 import { MenuItem } from './MenuItem'
 
 type Props = {
-  reference: React.MutableRefObject<HTMLDivElement>
+  reference: RefDivType
   idsToMenu: string[]
   className: string
 }

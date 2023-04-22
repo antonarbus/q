@@ -8,7 +8,7 @@ import { deleteItem, selectIsLastItem } from '../../features/items/itemsSlice'
 import { tellItemsSavedLocally } from 'client/features/bottom msg/bottomMsgSlice'
 
 type Props = {
-  itemRef: React.MutableRefObject<Resizable>
+  itemRef: RefResizableType
   index: number
 }
 

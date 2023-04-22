@@ -5,7 +5,7 @@ import { closeMenu } from 'client/features/nav/navSlice'
 import { EventType } from 'client/types'
 
 type Props = {
-  menuContainerRef: React.MutableRefObject<HTMLDivElement>
+  menuContainerRef: RefDivType
 }
 
 export function useCloseMenuOnClickOutside({ menuContainerRef }: Props) {

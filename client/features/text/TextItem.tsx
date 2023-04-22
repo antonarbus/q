@@ -9,7 +9,7 @@ type Props = {
 }
 
 export const TextItem = ({ index }: Props) => {
-  const itemRef = useRef() as React.MutableRefObject<Resizable>
+  const itemRef = useRef() as RefResizableType
   const item = store.getState().items?.[index]
   if (item.type !== 'text') return null
 

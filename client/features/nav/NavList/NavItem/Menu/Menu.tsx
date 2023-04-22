@@ -11,10 +11,10 @@ import { setMenuItemHoverIndex } from 'client/features/nav/navSlice'
 import { theme } from 'client/theme'
 
 export function Menu() {
-  const menuContainerRef = useRef() as React.MutableRefObject<HTMLDivElement>
-  const currentMenuRef = useRef() as React.MutableRefObject<HTMLDivElement>
-  const nextMenuRef = useRef() as React.MutableRefObject<HTMLDivElement>
-  const fakeMenuRef = useRef() as React.MutableRefObject<HTMLDivElement>
+  const menuContainerRef = useRef() as RefDivType
+  const currentMenuRef = useRef() as RefDivType
+  const nextMenuRef = useRef() as RefDivType
+  const fakeMenuRef = useRef() as RefDivType
   const idsToNextMenuItems = useSelectorTyped(state => state.nav.idsToNextMenuItems)
   const idsToCurrentMenuItems = useSelectorTyped(state => state.nav.idsToCurrentMenuItems)
   useMenuAnimation({ currentMenuRef, nextMenuRef, menuContainerRef, fakeMenuRef, idsToNextMenuItems })

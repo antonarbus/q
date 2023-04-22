@@ -5,8 +5,8 @@ import { calcNavMediaQueryParams } from './calcNavMediaQueryParams'
 import { useFirstMountState } from 'react-use'
 
 type Props = {
-  navRef: React.MutableRefObject<HTMLDivElement>
-  logoRef: React.MutableRefObject<HTMLDivElement>
+  navRef: RefDivType
+  logoRef: RefDivType
 }
 
 export function useMediaQueryValues({ navRef, logoRef }: Props) {

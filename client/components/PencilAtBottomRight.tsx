@@ -1,7 +1,7 @@
 import { BiEditAlt as PencilIcon } from 'react-icons/bi'
 
 type Props = {
-  editorRef: React.MutableRefObject<any>
+  editorRef: RefAnyType
 }
 
 export const PencilAtBottomRight = ({ editorRef }: Props) => {

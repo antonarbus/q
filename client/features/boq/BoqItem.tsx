@@ -10,7 +10,7 @@ type Props = {
 }
 
 export const BoqItem = ({ index }: Props) => {
-  const itemRef = useRef() as React.MutableRefObject<Resizable>
+  const itemRef = useRef() as RefResizableType
 
   return (
     <DraggableResizableItemWithActions

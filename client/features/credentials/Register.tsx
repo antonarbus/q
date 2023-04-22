@@ -15,8 +15,8 @@ import { slideElement } from 'utils/slideElement'
 
 export function Register() {
   const [email, setEmail] = useState('')
-  const inputRef = useRef() as React.MutableRefObject<HTMLDivElement>
-  const cardRef = useRef() as React.MutableRefObject<HTMLDivElement>
+  const inputRef = useRef() as RefDivType
+  const cardRef = useRef() as RefDivType
   const [isEmailOk, setIsEmailOk] = useState(false)
   const [password, setPassword] = useState('')
   const [isConfirmPasswordOk, setIsConfirmPasswordOk] = useState(false)

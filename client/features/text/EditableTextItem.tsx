@@ -15,9 +15,9 @@ type Props = {
 
 export const EditableTextItem = ({ index }: Props) => {
   const dispatch = useDispatchTyped()
-  const itemRef = useRef() as React.MutableRefObject<Resizable>
-  const froalaElementRef = useRef() as React.MutableRefObject<HTMLDivElement>
-  const editorRef = useRef() as React.MutableRefObject<any>
+  const itemRef = useRef() as RefResizableType
+  const froalaElementRef = useRef() as RefDivType
+  const editorRef = useRef() as RefAnyType
   const item = store.getState().items?.[index]
 
   if (item.type !== 'text editable') return null

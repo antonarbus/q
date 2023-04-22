@@ -1,6 +1,7 @@
 import { slideElement } from 'utils/slideElement'
 import { useLayoutEffect, useRef } from 'react'
 import { useEffectOnce } from 'react-use'
+import { RefDivType } from 'client/types'
 
 type Props = {
   children?: React.ReactNode
@@ -20,7 +21,7 @@ type Props = {
 */
 
 export const BackdropWithSlidableContent = ({ children, content, onSlideIn, onSlideOut }: Props) => {
-  const contentRef = useRef() as React.MutableRefObject<HTMLDivElement>
+  const contentRef = useRef() as RefDivType
   // useEffectOnce(() => slideElement({ intoView: true, element: contentRef.current, cb: () => onSlideIn && onSlideIn() }))
   useLayoutEffect(() => slideElement({ intoView: true, element: contentRef.current, cb: () => onSlideIn && onSlideIn() }), [])
 

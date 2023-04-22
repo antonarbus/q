@@ -2,7 +2,7 @@ import { useSelectorTyped } from 'client/store'
 import { Link } from 'react-router-dom'
 
 type Prop = {
-  logoRef: React.MutableRefObject<HTMLDivElement>
+  logoRef: RefDivType
 }
 
 export function Logo({ logoRef }: Prop) {

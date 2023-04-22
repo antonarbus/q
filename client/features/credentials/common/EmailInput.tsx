@@ -13,7 +13,7 @@ type Props = {
   setEmail: (value: string) => void
   isEmailOk: boolean
   setIsEmailOk: (value: boolean) => void
-  inputRef?: React.MutableRefObject<HTMLDivElement>
+  inputRef?: RefDivType
 }
 
 /**

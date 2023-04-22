@@ -7,8 +7,8 @@ import { useMenuItemActionShortcuts } from './functions/useMenuItemActionShortcu
 import { useMediaQueryValues } from './functions/useMediaQueryValues'
 
 export function Nav() {
-  const navRef = useRef() as React.MutableRefObject<HTMLDivElement>
-  const logoRef = useRef() as React.MutableRefObject<HTMLDivElement>
+  const navRef = useRef() as RefDivType
+  const logoRef = useRef() as RefDivType
   const mediaQueryWidth = useSelectorTyped(state => state.nav.mediaQueryWidth)
   const mediaEnabled = useSelectorTyped(state => state.nav.mediaEnabled)
   useMenuItemActionShortcuts()

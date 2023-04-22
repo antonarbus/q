@@ -12,7 +12,7 @@ type Props = {
 
 export const DeleteIcon = ({ index }: Props) => {
   const dispatch = useDispatchTyped()
-  const ref = useRef() as React.MutableRefObject<HTMLSpanElement>
+  const ref = useRef() as RefSpanType
   const isLastItem = useSelectorTyped(selectIsLastItem)
 
   return (

@@ -4,13 +4,13 @@ import { useEffect, useRef } from 'react'
 type Props = {
   initHtml?: string
   onClickAwayIfHtmChanged?: () => void
-  froalaElementRef: React.MutableRefObject<HTMLDivElement>
-  editorRef: React.MutableRefObject<any>
+  froalaElementRef: RefDivType
+  editorRef: RefAnyType
 }
 
 export const useFroala = ({ initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef }: Props) => {
   const resetItemsToDefaults = useSelectorTyped(state => state.offer.toggleOffer)
-  const prevHtmlRef = useRef(initHtml) as React.MutableRefObject<string>
+  const prevHtmlRef = useRef(initHtml) as RefStringType
 
   function clickAwayHandlerIfHtmlChanged() {
     if (!onClickAwayIfHtmChanged) return

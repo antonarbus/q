@@ -18,10 +18,10 @@ export const navigateInMenu: Props = {
 }
 
 type PropsType = {
-  currentMenuRef: React.MutableRefObject<HTMLDivElement>
-  nextMenuRef: React.MutableRefObject<HTMLDivElement>
-  menuContainerRef: React.MutableRefObject<HTMLDivElement>
-  fakeMenuRef: React.MutableRefObject<HTMLDivElement>
+  currentMenuRef: RefDivType
+  nextMenuRef: RefDivType
+  menuContainerRef: RefDivType
+  fakeMenuRef: RefDivType
   idsToNextMenuItems: string[]
 }
 
