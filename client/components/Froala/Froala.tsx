@@ -1,3 +1,4 @@
+import { RefAnyType, RefDivType } from 'client/types'
 import { useFroala } from './useFroala'
 
 type Props = {
@@ -5,8 +6,8 @@ type Props = {
   initHeight?: number | string
   initHtml?: string
   onClickAwayIfHtmChanged?: () => void
-  froalaElementRef: React.MutableRefObject<HTMLDivElement>
-  editorRef: React.MutableRefObject<any>
+  froalaElementRef: RefDivType
+  editorRef: RefAnyType
 }
 
 /**

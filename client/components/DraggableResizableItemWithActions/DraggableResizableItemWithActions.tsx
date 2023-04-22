@@ -4,18 +4,18 @@ import { CutIcon } from 'client/components/DraggableResizableItemWithActions/Cut
 import { DeleteIcon } from 'client/components/DraggableResizableItemWithActions/DeleteIcon'
 import { PasteTextInMiddle } from 'client/features/copy/PasteTextInMiddle'
 import { ResizablePaper } from 'client/components/DraggableResizableItemWithActions/ResizablePaper'
-import { Resizable } from 're-resizable'
 import { DraggableItem } from './DraggableItem'
 import { DragIcon } from './DragIcon'
 import { useIsDisabledItem } from './useIsDisabledItem'
 import { useIsPasteHere } from './useIsPasteHere'
 import { Msg } from './Msg'
 import { store } from 'client/store'
+import { ChildrenType, RefResizableType } from 'client/types'
 
 type Props = {
   index: number
-  children: React.ReactNode
-  itemRef: React.MutableRefObject<Resizable>
+  children: ChildrenType
+  itemRef: RefResizableType
 }
 
 export const DraggableResizableItemWithActions = ({ index, children, itemRef }: Props) => {

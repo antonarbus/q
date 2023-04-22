@@ -13,7 +13,7 @@ import PasswordRoundedIcon from '@mui/icons-material/PasswordRounded'
 export function Reset() {
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
-  const inputRef = useRef() as React.MutableRefObject<HTMLDivElement>
+  const inputRef = useRef() as RefDivType
   const { resetPassword, httpStatus, setHttpStatus } = useReset()
   const [isEmailOk, setIsEmailOk] = useState(false)
 

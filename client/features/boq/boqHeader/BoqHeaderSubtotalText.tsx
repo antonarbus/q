@@ -2,7 +2,7 @@ import { Froala } from 'client/components/Froala'
 import { saveBoqHeaderTitle, saveItemHeight, tellItemSavedLocally } from 'client/features/items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { store, useDispatchTyped } from 'client/store'
-import { RefResizableType, RefDivType, RefAnyType } from 'client/types'
+import { RefAnyType, RefDivType, RefResizableType } from 'client/types'
 import { useRef } from 'react'
 
 type Props = {

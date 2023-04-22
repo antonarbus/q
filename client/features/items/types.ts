@@ -32,8 +32,6 @@ export type ItemTextType = CommonItemProps & {
   }
 }
 
-// todo: think to make have common props for all items, even paste items does not need it
-// todo: it will simplify the code
 export type ItemPasteType = CommonItemProps & {
   type: 'paste'
 }

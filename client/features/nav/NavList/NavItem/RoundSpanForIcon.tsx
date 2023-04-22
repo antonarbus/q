@@ -1,7 +1,9 @@
+import { ChildrenType } from 'client/types'
+
 type Props = {
-  children: React.ReactNode,
-  css?: React.CSSProperties,
-  className?: string,
+  children: ChildrenType
+  css?: React.CSSProperties
+  className?: string
   disabled?: boolean
 }
 

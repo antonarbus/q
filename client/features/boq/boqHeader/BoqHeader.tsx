@@ -1,10 +1,10 @@
 import { theme } from 'client/theme'
 import { BoqHeaderTitle } from './BoqHeaderTitle'
-import { Resizable } from 're-resizable'
+import { RefResizableType } from 'client/types'
 
 type Props = {
   index: number
-  itemRef: React.MutableRefObject<Resizable>
+  itemRef: RefResizableType
 
 }
 
