@@ -7,9 +7,10 @@ type Props = {
   onClickAwayIfHtmChanged?: () => void
   froalaElementRef: RefDivType
   editorRef: RefAnyType
+  placeholder?: string
 }
 
-export const useFroala = ({ initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef }: Props) => {
+export const useFroala = ({ initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder }: Props) => {
   const resetItemsToDefaults = useSelectorTyped(state => state.offer.toggleOffer)
   const prevHtmlRef = useRef(initHtml) as RefStringType
 
@@ -63,7 +64,7 @@ export const useFroala = ({ initHtml, onClickAwayIfHtmChanged, froalaElementRef,
           'Courier New': 'Courier New',
           'Brush Script MT': 'Brush Script MT'
         },
-        placeholderText: 'Your text, links, files & images go here...',
+        placeholderText: placeholder || 'Text...',
         tableInsertHelper: false,
         tableInsertMaxSize: 12,
         inlineStyles: {
@@ -92,6 +93,11 @@ export const useFroala = ({ initHtml, onClickAwayIfHtmChanged, froalaElementRef,
             // console.log(this)
             // console.log(clipboardHtml)
             // return clipboardHtml + 'additional text'
+          },
+          contentChanged: function () {
+            // Do something here.
+            // this is the editor instance.
+            // console.log(this)
           }
         },
         key: 'AVB8B-21D4B3B2E1F1G1uB-33B-21cyoF-10yB-7G-7gB-22zzE2wkA-7gC7B7D6B4E4F3D2I3H2C5==',

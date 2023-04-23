@@ -21,8 +21,23 @@ export const defaultItems: ItemsType = [
     boq: {
       header: {
         title: {
-          html: '<div style="font-weight: 600">Title</div>',
+          html: '<b>Title</b>',
           height: 24
+        },
+        subtotal: {
+          text: {
+            html: '<div>Subtotal</div>',
+            height: 24,
+          },
+          price: {
+            value: 666,
+            html: '<b>666</b>',
+            height: 24,
+          },
+          currency: {
+            html: '<div>EUR</div>',
+            height: 24,
+          }
         }
       }
     }

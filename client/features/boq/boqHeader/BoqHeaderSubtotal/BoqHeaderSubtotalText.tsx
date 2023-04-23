@@ -2,7 +2,7 @@ import { Froala } from 'client/components/Froala'
 import { saveBoqHeaderTitle, saveItemHeight, tellItemSavedLocally } from 'client/features/items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { store, useDispatchTyped } from 'client/store'
-import { RefResizableType, RefDivType, RefAnyType } from 'client/types'
+import { RefAnyType, RefDivType, RefResizableType } from 'client/types'
 import { useRef } from 'react'
 
 type Props = {
@@ -10,14 +10,13 @@ type Props = {
   itemRef: RefResizableType
 }
 
-export const BoqHeaderTitle = ({ index, itemRef }: Props) => {
+export const BoqHeaderSubtotalText = ({ index, itemRef }: Props) => {
   const dispatch = useDispatchTyped()
   const froalaElementRef = useRef() as RefDivType
   const editorRef = useRef() as RefAnyType
   const item = store.getState().items?.[index]
-
   if (item.type !== 'boq') return null
-  const { html = 'Title', height = 24 } = item.boq.header.title
+  const { html = 'Subtotal', height = 24 } = item.boq.header.subtotal.text
 
   function saveHtmlAndHeight() {
     const titleHeight = froalaElementRef.current.offsetHeight || 0
@@ -27,6 +26,7 @@ export const BoqHeaderTitle = ({ index, itemRef }: Props) => {
     dispatch(saveItemHeight({ index, height: itemHeight }))
     saveItemsIntoLocalStorage()
     dispatch(tellItemSavedLocally({ index }))
+    // editorRef.current.placeholder.show()
   }
 
   return (
@@ -36,10 +36,10 @@ export const BoqHeaderTitle = ({ index, itemRef }: Props) => {
       initHtml={html}
       initHeight={height}
       onClickAwayIfHtmChanged={saveHtmlAndHeight}
-      placeholder='Title...'
       sx={{
-        flexGrow: 1,
-        // background: 'red'
+        width: '100%',
+        whiteSpace: 'nowrap',
+        textAlign: 'right'
       }}
     />
   )

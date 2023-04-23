@@ -10,13 +10,13 @@ type Props = {
   itemRef: RefResizableType
 }
 
-export const BoqHeaderTitle = ({ index, itemRef }: Props) => {
+export const BoqHeaderSubtotalCurrency = ({ index, itemRef }: Props) => {
   const dispatch = useDispatchTyped()
   const froalaElementRef = useRef() as RefDivType
   const editorRef = useRef() as RefAnyType
   const item = store.getState().items?.[index]
   if (item.type !== 'boq') return null
-  const { html = 'Title', height = 24 } = item.boq.header.title
+  const { html = 'EUR', height = 24 } = item.boq.header.subtotal.currency
 
   function saveHtmlAndHeight() {
     const titleHeight = froalaElementRef.current.offsetHeight || 0
@@ -35,6 +35,13 @@ export const BoqHeaderTitle = ({ index, itemRef }: Props) => {
       initHtml={html}
       initHeight={height}
       onClickAwayIfHtmChanged={saveHtmlAndHeight}
+      placeholder='$'
+      sx={{
+        textAlign: 'right',
+        whiteSpace: 'nowrap',
+        flexShrink: 0,
+        minWidth: 10
+      }}
     />
   )
 }
