@@ -8,19 +8,31 @@ type Props = {
   onClickAwayIfHtmChanged?: () => void
   froalaElementRef: RefDivType
   editorRef: RefAnyType
+  placeholder?: string
+  sx?: React.CSSProperties
 }
 
 /**
-* @param padding 0 if not provided
-* @param initHeight may need to preserve height until froala is not instantiated
-* @param initHtml initHtml for initial Froala render
-* @param onClickAwayIfHtmChanged can be used to save current html in redux or sent it somewhere
-* @param froalaElementRef can be used to get an access to the Froala element
-* @param editorRef can be used to get an access to the Froala methods
-*/
+ * @param padding 0 if not provided
+ * @param initHeight may need to preserve height until froala is not instantiated
+ * @param initHtml initHtml for initial Froala render
+ * @param onClickAwayIfHtmChanged can be used to save current html in redux or sent it somewhere
+ * @param froalaElementRef can be used to get an access to the Froala element
+ * @param editorRef can be used to get an access to the Froala methods
+ * @param sx just styles
+ */
 
-export const Froala = ({ padding, initHeight, initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef }: Props) => {
-  useFroala({ initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef })
+export const Froala = ({
+  padding,
+  initHeight,
+  initHtml,
+  onClickAwayIfHtmChanged,
+  froalaElementRef,
+  editorRef,
+  placeholder,
+  sx
+}: Props) => {
+  useFroala({ initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder })
 
   return (
     <div
@@ -28,6 +40,8 @@ export const Froala = ({ padding, initHeight, initHtml, onClickAwayIfHtmChanged,
       css={{
         height: initHeight || 'auto',
         padding: padding || 0,
+        wordBreak: 'break-word',
+        ...sx
       }}
     />
   )
