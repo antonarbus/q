@@ -41,6 +41,7 @@ export const BoqHeaderSubtotalText = ({ index, itemRef }: Props) => {
         whiteSpace: 'nowrap',
         textAlign: 'right'
       }}
+      // todo: make this deletable on complete text removal, show a question in modal
     />
   )
 }
