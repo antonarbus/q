@@ -17,6 +17,7 @@ import { Main } from 'client/features/application/Main'
 import { Profile } from 'client/features/profile/Profile'
 import { SpinnerFullPage } from 'client/features/spinner/SpinnerFullPage'
 import { Updater } from './features/bottom msg/BottomMsg'
+import { ReactQueryDevtoolsProductionHidden } from './ReactQueryDevtoolsProductionHidden'
 
 export const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -42,7 +43,8 @@ export const App = () => (
         <Notifier />
         <Updater />
       </BrowserRouter>
-      <ReactQueryDevtools />
+      {/* <ReactQueryDevtools /> */}
+      <ReactQueryDevtoolsProductionHidden />
     </ThemeProvider>
   </QueryClientProvider>
 )
