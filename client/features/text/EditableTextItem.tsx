@@ -23,9 +23,10 @@ export const EditableTextItem = ({ index }: Props) => {
   if (item.type !== 'text editable') return null
 
   function saveHtmlAndHeight() {
+    const height = itemRef.current.resizable?.offsetHeight || 0
+    const html = editorRef.current.html.get()
     const itemHeight = itemRef.current.resizable?.offsetHeight || 0
-    const itemHtml = editorRef.current.html.get()
-    dispatch(saveEditableText({ index, html: itemHtml, height: itemHeight }))
+    dispatch(saveEditableText({ index, html, height }))
     dispatch(saveItemHeight({ index, height: itemHeight }))
     saveItemsIntoLocalStorage()
     dispatch(tellItemSavedLocally({ index }))

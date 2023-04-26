@@ -15,14 +15,15 @@ export const BoqHeaderSubtotalCurrency = ({ index, itemRef }: Props) => {
   const froalaElementRef = useRef() as RefDivType
   const editorRef = useRef() as RefAnyType
   const item = store.getState().items?.[index]
+
   if (item.type !== 'boq') return null
   const { html = 'EUR', height = 24 } = item.boq.header.subtotal.currency
 
   function saveHtmlAndHeight() {
-    const titleHeight = froalaElementRef.current.offsetHeight || 0
-    const titleHtml = editorRef.current.html.get()
+    const height = froalaElementRef.current.offsetHeight || 0
+    const html = editorRef.current.html.get()
     const itemHeight = itemRef.current.resizable?.offsetHeight || 0
-    dispatch(saveBoqHeaderTitle({ index, height: titleHeight, html: titleHtml }))
+    // dispatch(saveBoqHeaderSubtotalCurrency({ index, height, html }))
     dispatch(saveItemHeight({ index, height: itemHeight }))
     saveItemsIntoLocalStorage()
     dispatch(tellItemSavedLocally({ index }))

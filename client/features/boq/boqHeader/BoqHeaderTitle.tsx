@@ -20,10 +20,10 @@ export const BoqHeaderTitle = ({ index, itemRef }: Props) => {
   const { html = 'Title', height = 24 } = item.boq.header.title
 
   function saveHtmlAndHeight() {
-    const titleHeight = froalaElementRef.current.offsetHeight || 0
-    const titleHtml = editorRef.current.html.get()
+    const height = froalaElementRef.current.offsetHeight || 0
+    const html = editorRef.current.html.get()
     const itemHeight = itemRef.current.resizable?.offsetHeight || 0
-    dispatch(saveBoqHeaderTitle({ index, height: titleHeight, html: titleHtml }))
+    dispatch(saveBoqHeaderTitle({ index, height, html }))
     dispatch(saveItemHeight({ index, height: itemHeight }))
     saveItemsIntoLocalStorage()
     dispatch(tellItemSavedLocally({ index }))
@@ -38,8 +38,7 @@ export const BoqHeaderTitle = ({ index, itemRef }: Props) => {
       onClickAwayIfHtmChanged={saveHtmlAndHeight}
       placeholder='Title...'
       sx={{
-        flexGrow: 1,
-        // background: 'red'
+        flexGrow: 1
       }}
     />
   )

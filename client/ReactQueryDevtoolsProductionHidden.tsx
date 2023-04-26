@@ -15,7 +15,6 @@ export const ReactQueryDevtoolsProductionHidden = () => {
   let keysPressed: string[] = []
 
   const activateReactQueryDevTools = (e: KeyboardEvent) => {
-    console.log(666)
     if (!e.key) return
     keysPressed.push(e.key)
     if (!keysPressed.includes('r')) return
@@ -29,7 +28,6 @@ export const ReactQueryDevtoolsProductionHidden = () => {
   }
 
   const emptyKeysPressedArray = () => {
-    console.log(555)
     keysPressed = []
   }
 

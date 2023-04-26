@@ -19,10 +19,10 @@ export const BoqHeaderSubtotalText = ({ index, itemRef }: Props) => {
   const { html = 'Subtotal', height = 24 } = item.boq.header.subtotal.text
 
   function saveHtmlAndHeight() {
-    const titleHeight = froalaElementRef.current.offsetHeight || 0
-    const titleHtml = editorRef.current.html.get()
+    const height = froalaElementRef.current.offsetHeight || 0
+    const html = editorRef.current.html.get()
     const itemHeight = itemRef.current.resizable?.offsetHeight || 0
-    dispatch(saveBoqHeaderTitle({ index, height: titleHeight, html: titleHtml }))
+    // dispatch(saveBoqHeaderSubtotalText({ index, height, html }))
     dispatch(saveItemHeight({ index, height: itemHeight }))
     saveItemsIntoLocalStorage()
     dispatch(tellItemSavedLocally({ index }))
@@ -41,6 +41,7 @@ export const BoqHeaderSubtotalText = ({ index, itemRef }: Props) => {
         textAlign: 'right'
       }}
       // todo: make this deletable on complete text removal, show a question in modal
+      // todo: need to bring boolean flag into redux to make it work
     />
   )
 }
