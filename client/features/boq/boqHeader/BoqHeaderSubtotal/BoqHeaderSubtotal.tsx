@@ -17,10 +17,7 @@ export const BoqHeaderSubtotal = ({ index, itemRef }: Props) => {
         flexDirection: 'column',
         alignItems: 'flex-end',
         flexShrink: 0,
-        // flexGrow: 1,
-        minWidth: 100,
-        // background: 'yellow'
-
+        minWidth: 100
       }}
     >
       <BoqHeaderSubtotalText index={index} itemRef={itemRef} />

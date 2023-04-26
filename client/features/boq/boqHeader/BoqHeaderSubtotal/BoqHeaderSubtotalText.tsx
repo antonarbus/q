@@ -26,7 +26,6 @@ export const BoqHeaderSubtotalText = ({ index, itemRef }: Props) => {
     dispatch(saveItemHeight({ index, height: itemHeight }))
     saveItemsIntoLocalStorage()
     dispatch(tellItemSavedLocally({ index }))
-    // editorRef.current.placeholder.show()
   }
 
   return (

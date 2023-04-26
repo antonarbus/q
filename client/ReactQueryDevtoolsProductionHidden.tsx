@@ -1,6 +1,6 @@
 import { Suspense, lazy, useState } from 'react'
-
 import { useEffectOnce } from 'react-use'
+
 const ReactQueryDevtoolsProduction = lazy(() =>
   import('@tanstack/react-query-devtools/build/lib/index.prod.js').then(
     (d) => ({ default: d.ReactQueryDevtools })
@@ -15,19 +15,21 @@ export const ReactQueryDevtoolsProductionHidden = () => {
   let keysPressed: string[] = []
 
   const activateReactQueryDevTools = (e: KeyboardEvent) => {
+    console.log(666)
     if (!e.key) return
     keysPressed.push(e.key)
     if (!keysPressed.includes('r')) return
     if (!keysPressed.includes('q')) return
-    const rqPressedLongEnough = keysPressed.length > 10
-    if (!rqPressedLongEnough) return
+    const pressedLongEnough = keysPressed.length > 10
+    if (!pressedLongEnough) return
     setShowDevtools(true)
     keysPressed = []
     window.removeEventListener('keydown', activateReactQueryDevTools)
-    window.removeEventListener('keydown', emptyKeysPressedArray)
+    window.removeEventListener('keyup', emptyKeysPressedArray)
   }
 
   const emptyKeysPressedArray = () => {
+    console.log(555)
     keysPressed = []
   }
 
