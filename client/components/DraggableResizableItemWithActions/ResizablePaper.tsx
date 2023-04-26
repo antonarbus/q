@@ -1,5 +1,5 @@
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
-import { store, useDispatchTyped, useSelectorTyped } from 'client/store'
+import { store, useDispatchTyped } from 'client/store'
 import { Resizable } from 're-resizable'
 import { saveItemWidth, tellItemSavedLocally } from '../../features/items/itemsSlice'
 import { ChildrenType, RefResizableType } from 'client/types'
@@ -12,8 +12,6 @@ interface Props {
 
 export const ResizablePaper = ({ children, index, itemRef }: Props) => {
   const dispatch = useDispatchTyped()
-  // console.log(666)
-  // const width = useSelectorTyped(state => state.items[index].width)
   const width = store.getState().items[index]?.width
 
   return (
