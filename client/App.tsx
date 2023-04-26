@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { queryClient } from './queryClient'
 import { QueryClientProvider } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+// import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { RequireAuth } from 'client/features/credentials/RequireAuth'
 import { ThemeProvider } from '@mui/material/styles'
 import { themeClient } from 'client/theme'

@@ -1,16 +1,14 @@
-import { ItemType, ItemsType } from 'client/features/items/types'
-
-export function cleanItem(item: ItemType) {
+export function cleanItem(item: any) {
   const modifiableItem = structuredClone(item)
   modifiableItem.msg = ''
+  delete modifiableItem.previewHtml
   return modifiableItem
 }
 
-export function cleanItems(items: ItemsType) {
+export function cleanItems(items: any[]) {
   const modifiableItems = structuredClone(items)
   const itemsWithoutMsg = modifiableItems.map(item => {
-    item.msg = ''
-    return item
+    return cleanItem(item)
   })
   return itemsWithoutMsg
 }
