@@ -22,7 +22,6 @@ type Props = {
 
 export const BackdropWithSlidableContent = ({ children, content, onSlideIn, onSlideOut }: Props) => {
   const contentRef = useRef() as RefDivType
-  // useEffectOnce(() => slideElement({ intoView: true, element: contentRef.current, cb: () => onSlideIn && onSlideIn() }))
   useLayoutEffect(() => slideElement({ intoView: true, element: contentRef.current, cb: () => onSlideIn && onSlideIn() }), [])
 
   useEffectOnce(function slideOutOnEscBtn() {
