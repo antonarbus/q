@@ -35,6 +35,7 @@ export const ReactQueryDevtoolsProductionHidden = () => {
     window.addEventListener('keydown', activateReactQueryDevTools)
     window.addEventListener('keyup', emptyKeysPressedArray)
 
+    // ? probably this part is not needed as it is not that good idea
     const oneMin = 60 * 1000
     setTimeout(() => {
       window.removeEventListener('keydown', activateReactQueryDevTools)
