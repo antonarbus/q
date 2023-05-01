@@ -2,6 +2,7 @@ import { DraggableResizableItemWithActions } from 'client/components/DraggableRe
 import { useRef } from 'react'
 import { BoqHeader } from './boqHeader'
 import { RefResizableType } from 'client/types'
+import { BoqTable } from './boqHeader/boqTable'
 
 type Props = {
   index: number
@@ -16,7 +17,7 @@ export const BoqItem = ({ index }: Props) => {
       itemRef={itemRef}
     >
       <BoqHeader index={index} itemRef={itemRef} />
-      666
+      <BoqTable index={index} itemRef={itemRef} />
     </DraggableResizableItemWithActions>
   )
 }

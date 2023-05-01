@@ -71,7 +71,7 @@ export const defaultItems: ItemsType = [
     height: 73,
     msg: '',
     text: {
-      html: '<div>editable text</div>'
+      html: '<div>not editable text</div>'
     },
   }
 ]
