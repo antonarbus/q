@@ -3,7 +3,6 @@ import 'ag-grid-community/styles/ag-grid.css'
 import 'ag-grid-community/styles/ag-theme-alpine.css'
 import './agGridCustom.css'
 import { AgGridReact } from 'ag-grid-react'
-import { Box } from '@mui/system'
 import { useRef } from 'react'
 
 type Props = {
@@ -98,7 +97,7 @@ export const BoqTable = ({ index, itemRef }: Props) => {
 
   return (
     <AgGridReact
-      ref={gridRef}
+      // ref={gridRef}
       className='ag-theme-alpine'
       domLayout='autoHeight'
       columnDefs={columnDefs}
@@ -111,6 +110,9 @@ export const BoqTable = ({ index, itemRef }: Props) => {
       suppressCellFocus
       stopEditingWhenCellsLoseFocus
       suppressContextMenu
+      css={{
+        marginBottom: 10
+      }}
       // loadingOverlayComponent={LoadingOverlay}
       // onFirstDataRendered={showReceiversAmount}
       // onModelUpdated={showReceiversAmount}
