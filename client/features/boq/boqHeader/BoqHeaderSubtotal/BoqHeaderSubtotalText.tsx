@@ -1,5 +1,5 @@
 import { Froala } from 'client/components/Froala'
-import { saveBoqHeaderTitle, saveItemHeight, tellItemSavedLocally } from 'client/features/items/itemsSlice'
+import { saveBoqHeaderSubtotalText, saveBoqHeaderTitle, saveItemHeight, tellItemSavedLocally } from 'client/features/items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { store, useDispatchTyped } from 'client/store'
 import { RefAnyType, RefDivType, RefResizableType } from 'client/types'
@@ -22,7 +22,7 @@ export const BoqHeaderSubtotalText = ({ index, itemRef }: Props) => {
     const height = froalaElementRef.current.offsetHeight || 0
     const html = editorRef.current.html.get()
     const itemHeight = itemRef.current.resizable?.offsetHeight || 0
-    // dispatch(saveBoqHeaderSubtotalText({ index, height, html }))
+    dispatch(saveBoqHeaderSubtotalText({ index, height, html }))
     dispatch(saveItemHeight({ index, height: itemHeight }))
     saveItemsIntoLocalStorage()
     dispatch(tellItemSavedLocally({ index }))
