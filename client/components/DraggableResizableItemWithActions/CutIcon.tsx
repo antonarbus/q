@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import { deleteItem, selectIsLastItem } from '../../features/items/itemsSlice'
 import { tellItemsSavedLocally } from 'client/features/bottom msg/bottomMsgSlice'
 import { RefResizableType } from 'client/types'
+import { cleanHtml } from 'utils/itemsUtils'
 
 type Props = {
   itemRef: RefResizableType
@@ -30,8 +31,7 @@ export const CutIcon = ({ index, itemRef }: Props) => {
         dispatch(showCopyContainer())
         const itemToCut = store.getState().items[index]
         const itemHtml = itemRef.current.resizable?.innerHTML || ''
-        const itemHtmlCleaned = itemHtml.replaceAll('contenteditable="true"', '')
-        const item = { ...itemToCut, previewHtml: itemHtmlCleaned }
+        const item = { ...itemToCut, previewHtml: cleanHtml(itemHtml) }
         dispatch(addItemIntoCopyContainer(item))
         dispatch(deleteItem(itemToCut))
         saveItemsIntoLocalStorage()

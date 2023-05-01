@@ -3,6 +3,7 @@ import { MdCopyAll } from 'react-icons/md'
 import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from '../../features/copy/copySlice'
 import { motion } from 'framer-motion'
 import { RefResizableType } from 'client/types'
+import { cleanHtml } from 'utils/itemsUtils'
 
 type Props = {
   itemRef: RefResizableType
@@ -26,8 +27,7 @@ export const CopyIcon = ({ itemRef, index }: Props) => {
         dispatch(showCopyContainer())
         const itemToCopy = store.getState().items[index]
         const itemHtml = itemRef.current.resizable?.innerHTML || ''
-        const itemHtmlCleaned = itemHtml.replaceAll('contenteditable="true"', '')
-        const item = { ...itemToCopy, previewHtml: itemHtmlCleaned }
+        const item = { ...itemToCopy, previewHtml: cleanHtml(itemHtml) }
         dispatch(addItemIntoCopyContainer(item))
       }}
     >

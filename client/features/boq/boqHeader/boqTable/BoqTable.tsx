@@ -111,7 +111,7 @@ export const BoqTable = ({ index, itemRef }: Props) => {
       stopEditingWhenCellsLoseFocus
       suppressContextMenu
       css={{
-        marginBottom: 10
+        margin: 6
       }}
       // loadingOverlayComponent={LoadingOverlay}
       // onFirstDataRendered={showReceiversAmount}
