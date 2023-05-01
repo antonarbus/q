@@ -42,14 +42,38 @@ const itemsSlice = createSlice({
       const { index, height, html } = action.payload
       const item = state[index]
       if (item.type !== 'text editable') return
-      item.text.height = height
-      item.text.html = html
+      const text = item.text
+      text.height = height
+      text.html = html
     },
     saveBoqHeaderTitle: (state, action: PayloadAction<{index: number, height: number, html: string}>) => {
       const { index, height, html } = action.payload
       const boqItem = state[index] as ItemBoqType
-      boqItem.boq.header.title.height = height
-      boqItem.boq.header.title.html = html
+      const title = boqItem.boq.header.title
+      title.height = height
+      title.html = html
+    },
+    saveBoqHeaderSubtotalText: (state, action: PayloadAction<{index: number, height: number, html: string}>) => {
+      const { index, height, html } = action.payload
+      const boqItem = state[index] as ItemBoqType
+      const text = boqItem.boq.header.subtotal.text
+      text.height = height
+      text.html = html
+    },
+    saveBoqHeaderSubtotalPrice: (state, action: PayloadAction<{index: number, height: number, html: string, value: number}>) => {
+      const { index, height, html, value } = action.payload
+      const boqItem = state[index] as ItemBoqType
+      const price = boqItem.boq.header.subtotal.price
+      price.height = height
+      price.html = html
+      price.value = value
+    },
+    saveBoqHeaderSubtotalCurrency: (state, action: PayloadAction<{index: number, height: number, html: string}>) => {
+      const { index, height, html } = action.payload
+      const boqItem = state[index] as ItemBoqType
+      const currency = boqItem.boq.header.subtotal.currency
+      currency.height = height
+      currency.html = html
     },
   },
   extraReducers: (builder) => {
@@ -103,7 +127,10 @@ export const {
   saveItemWidth,
   saveItemHeight,
   saveEditableText,
-  saveBoqHeaderTitle
+  saveBoqHeaderTitle,
+  saveBoqHeaderSubtotalText,
+  saveBoqHeaderSubtotalPrice,
+  saveBoqHeaderSubtotalCurrency
 } = itemsSlice.actions
 export default itemsSlice.reducer
 
