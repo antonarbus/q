@@ -5,11 +5,11 @@ type Props = {
   padding?: number | string
   initHeight?: number | string
   initHtml?: string
-  onClickAwayIfHtmChanged?: () => void
   froalaElementRef: RefDivType
   editorRef: RefAnyType
   placeholder?: string
   sx?: React.CSSProperties
+  onClickAwayIfHtmChanged?: () => void
 }
 
 /**
