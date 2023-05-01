@@ -97,29 +97,25 @@ export const BoqTable = ({ index, itemRef }: Props) => {
   const gridRef = useRef(null)
 
   return (
-    <div
+    <AgGridReact
+      ref={gridRef}
       className='ag-theme-alpine'
-      css={{ position: 'relative', overflow: 'visible' }}
-    >
-      <AgGridReact
-        domLayout='autoHeight'
-        ref={gridRef}
-        columnDefs={columnDefs}
-        defaultColDef={defaultColDef}
-        rowData={rowData}
-        rowHeight={70}
-        animateRows
-        enableCellTextSelection
-        ensureDomOrder
-        suppressCellFocus
-        stopEditingWhenCellsLoseFocus
-        suppressContextMenu
-        // loadingOverlayComponent={LoadingOverlay}
-        // onFirstDataRendered={showReceiversAmount}
-        // onModelUpdated={showReceiversAmount}
-        // onFilterChanged={showReceiversAmount}
-        // onGridReady={() => setIsTableReady(true)}
-      />
-    </div>
+      domLayout='autoHeight'
+      columnDefs={columnDefs}
+      defaultColDef={defaultColDef}
+      rowData={rowData}
+      rowHeight={70}
+      animateRows
+      enableCellTextSelection
+      ensureDomOrder
+      suppressCellFocus
+      stopEditingWhenCellsLoseFocus
+      suppressContextMenu
+      // loadingOverlayComponent={LoadingOverlay}
+      // onFirstDataRendered={showReceiversAmount}
+      // onModelUpdated={showReceiversAmount}
+      // onFilterChanged={showReceiversAmount}
+      // onGridReady={() => setIsTableReady(true)}
+    />
   )
 }
