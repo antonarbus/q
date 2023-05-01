@@ -23,7 +23,7 @@ export const ResizablePaper = ({ children, index, itemRef }: Props) => {
         borderRadius: 6,
         boxShadow: '#00000033 0px 0px 10px 0px',
         position: 'relative',
-        overflow: 'hidden'
+        // overflow: 'hidden'
       }}
       defaultSize={{ width, height: 'auto' }}
       grid={[20, 0]}
