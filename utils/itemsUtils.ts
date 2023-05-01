@@ -12,3 +12,10 @@ export function cleanItems(items: any[]) {
   })
   return itemsWithoutMsg
 }
+
+export function cleanHtml(html: string) {
+  const htmlWithoutContentEditableTag = html.replaceAll('contenteditable="true"', '')
+  const refRegExp = /ref=".*?"/g // ag-grid uses string refs and react does not like it
+  const itemHtmlCleaned = htmlWithoutContentEditableTag.replace(refRegExp, '')
+  return itemHtmlCleaned
+}
