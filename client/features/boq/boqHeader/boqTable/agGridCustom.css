@@ -1,0 +1,44 @@
+
+.ag-root-wrapper {
+  border: none;
+  font-family: Circular, sans-serif;
+}
+
+.ag-header-cell.ag-floating-filter {
+  border-top: none !important;
+}
+
+.ag-header {
+  background: transparent;
+}
+
+.ag-header-cell-label {
+  justify-content: center;
+}
+
+.ag-cell {
+  display: flex;
+  align-items: center;
+  line-height: 20px;
+}
+
+.ag-cell-value {
+  padding: 15px 0px;
+}
+
+.ag-pinned-left-header {
+  border-right: 1px dotted #dadada;
+}
+
+.ag-cell-last-left-pinned:not(.ag-cell-focus) {
+  border-right: 1px dotted #dadada !important;
+}
+
+.ag-root input:disabled {
+  background: transparent !important;
+  border: 1px solid #babfc7 !important;
+}
+
+.ag-cell-inline-editing, .ag-cell-inline-editing * {
+  height: 100% !important;
+}
