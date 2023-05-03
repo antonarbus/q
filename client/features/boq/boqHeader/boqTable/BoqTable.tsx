@@ -34,16 +34,17 @@ const defaultColDef = {
   sortable: true,
   unSortIcon: true,
   suppressMenu: true,
-  // flex: 1
+  cellStyle: { alignItems: 'flex-end', lineHeight: 0 },
+  flex: 1
 }
 
 const columnDefs = [
   {
-    // headerName: '#',
     width: 5,
     sortable: false,
     resizable: false,
-    cellStyle: { justifyContent: 'center', textAlign: 'center', padding: 1, width: 20, fontSize: 10, color: 'grey' },
+    flex: 0,
+    cellStyle: { justifyContent: 'center', textAlign: 'center', padding: 0, fontSize: 10, color: 'grey' },
     valueGetter: (params) => params.node ? params.node.rowIndex + 1 : null,
     // cellRenderer: RowNumRenderer
   },
