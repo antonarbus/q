@@ -10,34 +10,46 @@ type Props = {
   itemRef: RefResizableType
 }
 
+export const RowNumRenderer = ({ value }) => {
+  return (
+    <span
+      css={{
+        fontSize: 10,
+        color: 'grey'
+      }}
+    >
+      { value }
+    </span>
+  )
+}
+
 const defaultColDef = {
   width: 150,
-  minWidth: 150,
+  // minWidth: 150,
   editable: false,
   filter: 'agTextColumnFilter',
-  floatingFilter: true,
+  floatingFilter: false,
   floatingFilterComponentParams: { suppressFilterButton: false },
   resizable: true,
   sortable: true,
   unSortIcon: true,
   suppressMenu: true,
-  flex: 1
+  // flex: 1
 }
 
 const columnDefs = [
   {
-    field: 'email',
-    headerName: 'Email',
-    width: 250,
-    minWidth: 250,
-    wrapText: true,
-    autoHeight: true,
-    flex: 2,
-    cellStyle: { justifyContent: 'center', textAlign: 'center' }
+    // headerName: '#',
+    width: 5,
+    sortable: false,
+    resizable: false,
+    cellStyle: { justifyContent: 'center', textAlign: 'center', padding: 1, width: 20, fontSize: 10, color: 'grey' },
+    valueGetter: (params) => params.node ? params.node.rowIndex + 1 : null,
+    // cellRenderer: RowNumRenderer
   },
   {
     field: 'value.name',
-    headerName: 'Name',
+    headerName: 'Description',
     width: 250,
     minWidth: 250,
     wrapText: true,
@@ -47,7 +59,7 @@ const columnDefs = [
   },
   {
     field: 'value.businessId',
-    headerName: 'Business ID',
+    headerName: 'Item',
     width: 200,
     minWidth: 200,
     wrapText: true,
@@ -56,24 +68,12 @@ const columnDefs = [
   },
   {
     field: 'value.tt',
-    headerName: 'TT',
+    headerName: 'Qty',
     cellStyle: { justifyContent: 'center' }
   },
   {
     field: 'value.la',
-    headerName: 'LA',
-    cellStyle: { justifyContent: 'center' }
-  },
-  {
-    field: 'value.mode',
-    headerName: 'Mode',
-    cellStyle: { justifyContent: 'center' }
-  },
-  {
-    field: 'database',
-    headerName: 'Database',
-    filter: false,
-    floatingFilter: false,
+    headerName: 'Price',
     cellStyle: { justifyContent: 'center' }
   }
 ]
