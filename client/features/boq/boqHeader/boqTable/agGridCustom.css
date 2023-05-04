@@ -1,7 +1,13 @@
+/* https://www.ag-grid.com/react-data-grid/global-style-customisation-variables/ */
+.ag-theme-alpine {
+  --ag-row-hover-color: #8080800a;
+  --ag-odd-row-background-color: transparent;
+  --ag-font-family: inherit;
+}
 
 .ag-root-wrapper {
   border: none;
-  /* font-family: Circular, sans-serif; */
+  cursor: inherit;
 }
 
 .ag-header-cell.ag-floating-filter {
@@ -46,10 +52,4 @@
 
 .ag-cell-inline-editing, .ag-cell-inline-editing * {
   height: 100% !important;
-}
-
-/* https://www.ag-grid.com/react-data-grid/global-style-customisation-variables/ */
-.ag-theme-alpine {
-  --ag-row-hover-color: #8080800a;
-  --ag-odd-row-background-color: transparent;
 }
