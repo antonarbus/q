@@ -4,11 +4,20 @@ import 'ag-grid-community/styles/ag-theme-alpine.css'
 import './agGridCustom.css'
 import { AgGridReact } from 'ag-grid-react'
 import { useRef } from 'react'
+import { DescriptionHeader } from './DescriptionHeader'
 
 type Props = {
   index: number
   itemRef: RefResizableType
 }
+
+// export const DescriptionHeader = () => {
+//   return (
+//     <span>
+//       Description
+//     </span>
+//   )
+// }
 
 export const RowNumRenderer = ({ value }) => {
   return (
@@ -31,70 +40,66 @@ const defaultColDef = {
   floatingFilter: false,
   floatingFilterComponentParams: { suppressFilterButton: false },
   resizable: true,
-  sortable: true,
+  sortable: false,
   unSortIcon: true,
   suppressMenu: true,
   cellStyle: { alignItems: 'flex-end', lineHeight: 0 },
   flex: 1
 }
 
-const columnDefs = [
-  {
-    width: 5,
-    sortable: false,
-    resizable: false,
-    flex: 0,
-    cellStyle: { justifyContent: 'center', textAlign: 'center', padding: 0, fontSize: 10, color: 'grey' },
-    valueGetter: (params) => params.node ? params.node.rowIndex + 1 : null,
-    // cellRenderer: RowNumRenderer
-  },
-  {
-    field: 'value.name',
-    headerName: 'Description',
-    width: 250,
-    minWidth: 250,
-    wrapText: true,
-    autoHeight: true,
-    flex: 2,
-    cellStyle: { justifyContent: 'center', textAlign: 'center' }
-  },
-  {
-    field: 'value.businessId',
-    headerName: 'Item',
-    width: 200,
-    minWidth: 200,
-    wrapText: true,
-    autoHeight: true,
-    cellStyle: { justifyContent: 'center', textAlign: 'center' }
-  },
-  {
-    field: 'value.tt',
-    headerName: 'Qty',
-    cellStyle: { justifyContent: 'center' }
-  },
-  {
-    field: 'value.la',
-    headerName: 'Price',
-    cellStyle: { justifyContent: 'center' }
-  }
-]
-
 const rowData = [
-  { database: 'NL', value: { tt: '29010', businessId: 'NLRUTABAGA', name: 'Ruta Baga', mode: 'EXPRESS', la: '00059' }, email: '29010.00059@heeros-cloudreader-dev.com' },
-  { database: 'NL', value: { tt: '29010', businessId: 'NLCONFLICTRUTABAGA', name: 'Conflicting Ruta Baga', mode: 'EXPRESS', la: '00060' }, email: '29010.00060@heeros-cloudreader-dev.com' },
-  { database: 'NL', value: { tt: '80001', businessId: null, name: 'Heeros Nederland B.V.', mode: 'EXPRESS', la: '00230' }, email: '8000100230@heeros-cloudreader-dev.com' },
-  { database: 'NL', value: { tt: '80001', businessId: null, name: 'Heeros Nederland B.V.', mode: 'EXPRESS', la: '00235' }, email: '8000100235@heeros-cloudreader-dev.com' },
-  { database: 'NL', value: { tt: '80015', businessId: 'NL821208317B01', name: 'Fab B.V.', mode: 'EXPRESS', la: '00024' }, email: '80015.00024@heeros-cloudreader-dev.com' },
-  { database: 'NL', value: { mode: 'EXPRESS', tt: '88001', businessId: '12345', name: 'Dev unit 4', la: '00397' }, email: '88001.00397@heeros-cloudreader-dev.com' },
-  { database: 'NL', value: { tt: '88014', businessId: null, name: 'Heeros Nederland B.V.', mode: 'EXPRESS', la: '00029' }, email: '88014.00029@heeros-cloudreader-dev.com' },
-  { database: 'NL', value: { tt: '00000', businessId: '0427225-7', name: 'JUST A TEST', la: '00000' }, email: 'chinchinclub@heeros-invoices-nl.com' },
-  { database: 'NL', value: { mode: 'EXPRESS', tt: '29010', businessId: '999999', name: 'Douwe Egberts', la: '00002' }, email: 'de@heeros-cloudreader-dev.com' },
-  { database: 'NL', value: { tt: '88014', businessId: 'NL821208317B01', name: 'Dev Test 2', mode: 'EXPRESS', la: '00007' }, email: 'devtest2@heeros.com' },
-  { database: 'NL', value: { mode: 'SERVICE', tt: '88014', businessId: '0427225-7', name: 'No way!', la: '00004' }, email: 'kake@heeros-cloudreader-dev.com' }
+  { description: 'description 1', item: 50, qty: 10, price: 500 },
+  { description: 'description 2', item: 50, qty: 10, price: 500 },
+  { description: 'description 3', item: 50, qty: 10, price: 500 },
 ]
 
 export const BoqTable = ({ index, itemRef }: Props) => {
   const gridRef = useRef(null)
+
+  const columnDefs = [
+    {
+      width: 5,
+      sortable: false,
+      resizable: false,
+      flex: 0,
+      cellStyle: { justifyContent: 'center', textAlign: 'center', padding: 0, fontSize: 10, color: 'grey' },
+      valueGetter: (params) => params.node ? params.node.rowIndex + 1 : null,
+      // cellRenderer: RowNumRenderer
+    },
+    {
+      field: 'description',
+      headerName: 'Description',
+      headerComponent: DescriptionHeader,
+      headerComponentParams: { index, itemRef },
+      wrapHeaderText: true,
+      autoHeaderHeight: true,
+      width: 250,
+      minWidth: 250,
+      wrapText: true,
+      autoHeight: true,
+      flex: 2,
+      cellStyle: { justifyContent: 'center', textAlign: 'center' }
+    },
+    {
+      field: 'item',
+      headerName: 'Item',
+      width: 200,
+      minWidth: 200,
+      wrapText: true,
+      autoHeight: true,
+      cellStyle: { justifyContent: 'center', textAlign: 'center' }
+    },
+    {
+      field: 'qty',
+      headerName: 'Qty',
+      cellStyle: { justifyContent: 'center' }
+    },
+    {
+      field: 'price',
+      headerName: 'Price',
+      cellStyle: { justifyContent: 'center' }
+    }
+  ]
 
   return (
     <AgGridReact
@@ -112,7 +117,8 @@ export const BoqTable = ({ index, itemRef }: Props) => {
       stopEditingWhenCellsLoseFocus
       suppressContextMenu
       css={{
-        margin: 6
+        margin: 5,
+        marginBottom: 15
       }}
       // loadingOverlayComponent={LoadingOverlay}
       // onFirstDataRendered={showReceiversAmount}
