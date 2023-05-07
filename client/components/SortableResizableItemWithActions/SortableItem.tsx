@@ -6,7 +6,7 @@ import { store } from 'client/store'
 
 type TProps = {
   children: TChildren
-  i: number
+  i: number // "index" is occupied internally by SortableElement
 }
 
 interface ISortableItem extends SortableElementProps {
@@ -14,8 +14,8 @@ interface ISortableItem extends SortableElementProps {
   i: number
 }
 
-export const SortableItem: React.ComponentClass<ISortableItem, any> = SortableElement(({ children, i: index }: TProps) => {
-  const id = store.getState().items?.[index].id
+export const SortableItem: React.ComponentClass<ISortableItem, any> = SortableElement(({ children, i }: TProps) => {
+  const id = store.getState().items?.[i].id
 
   return (
     <motion.div
