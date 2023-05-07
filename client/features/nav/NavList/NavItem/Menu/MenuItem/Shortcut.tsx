@@ -1,12 +1,12 @@
 import styled from '@emotion/styled'
 import { capitalizeKey } from './function/capitalizeKey'
 
-type TShortcut = {
+type TProps = {
   shortcut: string[]
   $isHovered: boolean
 }
 
-export function Shortcut({ shortcut, $isHovered }: TShortcut) {
+export function Shortcut({ shortcut, $isHovered }: TProps) {
   const keys = shortcut.join('+')
 
   return (

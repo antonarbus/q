@@ -3,14 +3,14 @@ import { useNavigate } from 'react-router-dom'
 import { useEffectOnce } from 'react-use'
 import { navStructure } from '../navStructure'
 
-type ShortcutsType = {
+type TShortcuts = {
   name: string
   shortcut: string[]
   function: (() => void) | null
   link: string | null
 }
 
-const shortcuts: ShortcutsType[] = []
+const shortcuts: TShortcuts[] = []
 let arr = navStructure
 
 function searchForShortcutsInNavStructure() {

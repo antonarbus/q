@@ -2,14 +2,14 @@ import { Link } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { theme } from 'client/theme'
 
-type TPropsForSC = {
+type TProps = {
   to: string
   state: {
     isHovered: boolean
   }
 }
 
-export const MenuItemStyled = styled(Link)<TPropsForSC>`
+export const MenuItemStyled = styled(Link)<TProps>`
   position: relative;
   height: ${theme.menu.menuItem.height}px;
   display: flex;

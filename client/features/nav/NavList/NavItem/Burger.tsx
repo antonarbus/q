@@ -27,11 +27,11 @@ export function Burger() {
     </BurgerContainer>
   )
 }
-type TPropsForSC = {
+type TProps = {
   screenWidthWhenShowBurger: number
 }
 
-const BurgerContainer = styled.div<TPropsForSC>`
+const BurgerContainer = styled.div<TProps>`
   display: none;
 
   @media (max-width: ${props => props.screenWidthWhenShowBurger}px) {

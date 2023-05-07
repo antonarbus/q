@@ -20,6 +20,9 @@ type TProps = {
 //* do not like 'setTimeout', but let it be for now
 //* we maybe can use onAnimationComplete callback, but need to find a way to pass it, fuck that
 
+// todo: check if same will work for EditableText and small Forala elements
+// todo: make overflow: hidden on animation, and then remove it, probably right here!
+// todo: itemRef is not actually an item, it is somewhere inside, check that
 export const FixHeightForElementAnimation = ({ height, children }: TProps) => {
   const ref = useRef() as TRefDiv
 

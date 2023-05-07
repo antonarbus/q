@@ -1,17 +1,17 @@
-import { MenuType } from 'client/features/nav/navStructure'
+import { TMenu } from 'client/features/nav/navStructure'
 import { closeMenu, openMenuWithId, setNavItemRightPos } from 'client/features/nav/navSlice'
 import { store } from 'client/store'
 import { TEvent } from 'client/types'
 
-type TPropsType = {
+type TProps = {
   e: TEvent
-  navItem: MenuType | undefined
+  navItem: TMenu | undefined
   id: string
   navItemRef: React.MutableRefObject<HTMLLIElement>
   disabled: boolean
 }
 
-export function clickOnNavItem({ e, navItem, id, navItemRef, disabled }: TPropsType) {
+export function clickOnNavItem({ e, navItem, id, navItemRef, disabled }: TProps) {
   (document.activeElement as HTMLElement).blur() // to prevent open an active navItem link on Enter key
 
   const link = navItem?.link

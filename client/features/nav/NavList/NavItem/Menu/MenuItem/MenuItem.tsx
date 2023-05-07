@@ -3,18 +3,18 @@ import { Icon } from '../../Icon'
 import { MenuItemStyled } from './MenuItemStyled'
 import { TextInMenu } from './TextInMenu'
 import { RoundSpanForIcon } from '../../RoundSpanForIcon'
-import { MenuType } from 'client/features/nav/navStructure'
+import { TMenu } from 'client/features/nav/navStructure'
 import { setMenuItemHoverIndex } from 'client/features/nav/navSlice'
 import { useDispatchTyped, useSelectorTyped } from 'client/store'
 import { Shortcut } from './Shortcut'
 import { clickOnMenuItem } from './function/clickOnMenuItem'
 
-type MenuItemType = {
-  menuItem: MenuType
+type TProps = {
+  menuItem: TMenu
   hoveredMenuItemIndex: number
 }
 
-export function MenuItem({ menuItem, hoveredMenuItemIndex }: MenuItemType) {
+export function MenuItem({ menuItem, hoveredMenuItemIndex }: TProps) {
   const dispatch = useDispatchTyped()
   const isHovered = useSelectorTyped(state => state.nav.menuItemHoverIndex === hoveredMenuItemIndex)
   const isNextMenuAvailable = !!menuItem.menuItems
