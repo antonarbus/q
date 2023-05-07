@@ -20,8 +20,9 @@ type TProps = {
 //* we maybe can use onAnimationComplete callback from framer-motion, but need to find a way to pass it, not sure
 
 // todo: check if same will work for EditableText and small Forala elements
-// todo: make overflow: hidden on animation, and then remove it, probably right here!
 // todo: itemRef is not actually an item, it is somewhere inside, check that
+// todo: instead of set item heights in default object, let's put them on init load and then they will be saved in local storage
+
 export const FixHeightForElementAnimation = ({ height, children }: TProps) => {
   const ref = useRef() as TRefDiv
   const delayMs = 1000 * theme.item.animationDuration
@@ -35,7 +36,9 @@ export const FixHeightForElementAnimation = ({ height, children }: TProps) => {
   return (
     <div
       ref={ref}
-      style={{ height }}
+      style={{
+        height,
+      }}
       className='fixed-height-for-element-animation'
     >
       {children}
