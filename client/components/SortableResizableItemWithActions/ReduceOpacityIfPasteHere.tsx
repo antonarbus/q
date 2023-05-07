@@ -1,9 +1,9 @@
-import { ChildrenType } from 'client/types'
+import { TChildren } from 'client/types'
 import { useIsPasteHere } from './useIsPasteHere'
 
 type Props = {
   index: number
-  children: ChildrenType
+  children: TChildren
 }
 
 export const ReduceOpacityIfPasteHere = ({ children, index }: Props) => {

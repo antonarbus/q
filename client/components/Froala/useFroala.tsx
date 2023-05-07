@@ -1,18 +1,18 @@
 import { useSelectorTyped } from 'client/store'
-import { RefAnyType, RefDivType, RefStringType } from 'client/types'
+import { TRefAny, TRefDiv, TRefString } from 'client/types'
 import { useEffect, useRef } from 'react'
 
 type Props = {
   initHtml?: string
   onClickAwayIfHtmChanged?: () => void
-  froalaElementRef: RefDivType
-  editorRef: RefAnyType
+  froalaElementRef: TRefDiv
+  editorRef: TRefAny
   placeholder?: string
 }
 
 export const useFroala = ({ initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder }: Props) => {
   const resetItemsToDefaults = useSelectorTyped(state => state.offer.toggleOffer)
-  const prevHtmlRef = useRef(initHtml) as RefStringType
+  const prevHtmlRef = useRef(initHtml) as TRefString
 
   function clickAwayHandlerIfHtmlChanged() {
     if (!onClickAwayIfHtmChanged) return

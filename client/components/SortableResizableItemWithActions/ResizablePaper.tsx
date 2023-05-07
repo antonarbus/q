@@ -2,12 +2,12 @@ import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { store, useDispatchTyped } from 'client/store'
 import { Resizable } from 're-resizable'
 import { saveItemWidth, tellItemSavedLocally } from '../../features/items/itemsSlice'
-import { ChildrenType, RefResizableType } from 'client/types'
+import { TChildren, TRefResizable } from 'client/types'
 
 interface Props {
-  children: ChildrenType
+  children: TChildren
   index: number
-  itemRef: RefResizableType
+  itemRef: TRefResizable
 }
 
 export const ResizablePaper = ({ children, index, itemRef }: Props) => {

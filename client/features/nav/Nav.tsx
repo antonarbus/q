@@ -5,11 +5,11 @@ import { Logo } from './Logo'
 import { NavList } from './NavList'
 import { useMenuItemActionShortcuts } from './functions/useMenuItemActionShortcuts'
 import { useMediaQueryValues } from './functions/useMediaQueryValues'
-import { RefDivType } from 'client/types'
+import { TRefDiv } from 'client/types'
 
 export function Nav() {
-  const navRef = useRef() as RefDivType
-  const logoRef = useRef() as RefDivType
+  const navRef = useRef() as TRefDiv
+  const logoRef = useRef() as TRefDiv
   const mediaQueryWidth = useSelectorTyped(state => state.nav.mediaQueryWidth)
   const mediaEnabled = useSelectorTyped(state => state.nav.mediaEnabled)
   useMenuItemActionShortcuts()

@@ -2,11 +2,11 @@ import { store, useDispatchTyped } from 'client/store'
 import { MdCopyAll } from 'react-icons/md'
 import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from '../../features/copy/copySlice'
 import { motion } from 'framer-motion'
-import { RefResizableType } from 'client/types'
+import { TRefResizable } from 'client/types'
 import { cleanHtml } from 'utils/itemsUtils'
 
 type Props = {
-  itemRef: RefResizableType
+  itemRef: TRefResizable
   index: number
 }
 

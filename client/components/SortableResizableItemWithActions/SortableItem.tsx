@@ -1,16 +1,16 @@
 import { SortableElement, SortableElementProps } from 'react-sortable-hoc'
 import { motion } from 'framer-motion'
 import { theme } from 'client/theme'
-import { ChildrenType } from 'client/types'
+import { TChildren } from 'client/types'
 import { store } from 'client/store'
 
 type Props = {
-  children: ChildrenType
+  children: TChildren
   i: number
 }
 
 interface ISortableItem extends SortableElementProps {
-  children: ChildrenType
+  children: TChildren
   i: number
 }
 

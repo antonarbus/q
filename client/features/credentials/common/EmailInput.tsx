@@ -4,7 +4,7 @@ import mailcheck from 'mailcheck'
 import { InputAdornment, TextField } from '@mui/material'
 import { Person } from '@mui/icons-material'
 import { theme } from 'client/theme'
-import { EventType, RefDivType } from 'client/types'
+import { TEvent, TRefDiv } from 'client/types'
 
 const isEmailPatternOk = (email: string) => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
 
@@ -13,7 +13,7 @@ type Props = {
   setEmail: (value: string) => void
   isEmailOk: boolean
   setIsEmailOk: (value: boolean) => void
-  inputRef?: RefDivType
+  inputRef?: TRefDiv
 }
 
 /**
@@ -64,7 +64,7 @@ export function EmailInput({ email, setEmail, isEmailOk, setIsEmailOk, inputRef 
         autoComplete="email"
         placeholder='Email'
         value={email}
-        onChange={(e: EventType) => setEmail((e.target as HTMLInputElement).value)}
+        onChange={(e: TEvent) => setEmail((e.target as HTMLInputElement).value)}
         onBlur={() => {
           setInputFocusedOutOnes(true)
           suggestEmail()

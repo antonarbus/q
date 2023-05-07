@@ -4,7 +4,7 @@ import { Avatar } from '@mui/material'
 import { CardCustom } from 'client/components/CardCustom'
 import { ButtonCustom } from 'client/components/ButtonCustom'
 import { useReset } from './useReset'
-import { EventType, RefDivType } from 'client/types'
+import { TEvent, TRefDiv } from 'client/types'
 import { EmailInput } from './common/EmailInput'
 import { theme } from 'client/theme'
 import { BackdropWithSlidableContent } from 'client/components/BackdropWithSlidableContent'
@@ -13,7 +13,7 @@ import PasswordRoundedIcon from '@mui/icons-material/PasswordRounded'
 export function Reset() {
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
-  const inputRef = useRef() as RefDivType
+  const inputRef = useRef() as TRefDiv
   const { resetPassword, httpStatus, setHttpStatus } = useReset()
   const [isEmailOk, setIsEmailOk] = useState(false)
 
@@ -30,7 +30,7 @@ export function Reset() {
           </Avatar>
         }
       >
-        <form onSubmit={(e: EventType) => resetPassword({ e, email })}>
+        <form onSubmit={(e: TEvent) => resetPassword({ e, email })}>
           <EmailInput
             email={email}
             setEmail={setEmail}

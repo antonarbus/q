@@ -2,18 +2,18 @@ import { Froala } from 'client/components/Froala'
 import { saveBoqHeaderSubtotalCurrency, saveBoqHeaderTitle, saveItemHeight, tellItemSavedLocally } from 'client/features/items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { store, useDispatchTyped } from 'client/store'
-import { RefAnyType, RefDivType, RefResizableType } from 'client/types'
+import { TRefAny, TRefDiv, TRefResizable } from 'client/types'
 import { useRef } from 'react'
 
 type Props = {
   index: number
-  itemRef: RefResizableType
+  itemRef: TRefResizable
 }
 
 export const BoqHeaderSubtotalCurrency = ({ index, itemRef }: Props) => {
   const dispatch = useDispatchTyped()
-  const froalaElementRef = useRef() as RefDivType
-  const editorRef = useRef() as RefAnyType
+  const froalaElementRef = useRef() as TRefDiv
+  const editorRef = useRef() as TRefAny
   const item = store.getState().items?.[index]
 
   if (item.type !== 'boq') return null

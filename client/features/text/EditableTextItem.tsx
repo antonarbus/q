@@ -7,7 +7,7 @@ import { PencilAtBottomRight } from 'client/components/PencilAtBottomRight'
 import { Froala } from 'client/components/Froala'
 import { tellItemSavedLocally, saveEditableText, saveItemHeight } from '../items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
-import { RefAnyType, RefDivType, RefResizableType } from 'client/types'
+import { TRefAny, TRefDiv, TRefResizable } from 'client/types'
 
 type Props = {
   index: number
@@ -15,9 +15,9 @@ type Props = {
 
 export const EditableTextItem = ({ index }: Props) => {
   const dispatch = useDispatchTyped()
-  const itemRef = useRef() as RefResizableType
-  const froalaElementRef = useRef() as RefDivType
-  const editorRef = useRef() as RefAnyType
+  const itemRef = useRef() as TRefResizable
+  const froalaElementRef = useRef() as TRefDiv
+  const editorRef = useRef() as TRefAny
   const item = store.getState().items?.[index]
 
   if (item.type !== 'text editable') return null

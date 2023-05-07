@@ -5,7 +5,7 @@ import { MenuItemStyled } from './MenuItemStyled'
 import { theme } from 'client/theme'
 import { setMenuItemHoverIndex } from 'client/features/nav/navSlice'
 import { useDispatchTyped, useSelectorTyped } from 'client/store'
-import { EventType } from 'client/types'
+import { TEvent } from 'client/types'
 import { navigateInMenu } from '../functions/useMenuAnimation'
 
 export function BackMenuItem() {
@@ -13,7 +13,7 @@ export function BackMenuItem() {
   const isHovered = useSelectorTyped(state => state.nav.menuItemHoverIndex === 1)
   const color = theme.colors.topMenuItem
 
-  const onClickHandler = (e: EventType) => {
+  const onClickHandler = (e: TEvent) => {
     e.preventDefault()
     navigateInMenu.up && navigateInMenu.up()
   }

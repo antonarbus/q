@@ -2,7 +2,7 @@ import { Button, CircularProgress } from '@mui/material'
 import { useRef } from 'react'
 import { useUpdateEffect } from 'react-use'
 import './successErrorIcons.css'
-import { RefDivType } from 'client/types'
+import { TRefDiv } from 'client/types'
 
 type Props = {
   children?: React.ReactNode
@@ -21,8 +21,8 @@ type Props = {
 }
 
 export function ButtonCustom({ children, content, circleProgressSize, disabled, httpStatus, setHttpStatus, ...restProps }: Props) {
-  const successIconRef = useRef() as RefDivType
-  const errorIconRef = useRef() as RefDivType
+  const successIconRef = useRef() as TRefDiv
+  const errorIconRef = useRef() as TRefDiv
 
   useUpdateEffect(() => {
     const timer = window.setTimeout(() => setHttpStatus(''), 3000)

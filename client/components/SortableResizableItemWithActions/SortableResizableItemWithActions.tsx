@@ -9,14 +9,14 @@ import { DragIcon } from './DragIcon'
 import { useIsDisabledItem } from './useIsDisabledItem'
 import { Msg } from './Msg'
 import { store } from 'client/store'
-import { ChildrenType, RefResizableType } from 'client/types'
+import { TChildren, TRefResizable } from 'client/types'
 import { FixHeightForElementAnimation } from 'client/features/items/FixHeightForElementAnimation'
 import { ReduceOpacityIfPasteHere } from './ReduceOpacityIfPasteHere'
 
 type Props = {
   index: number
-  children: ChildrenType
-  itemRef: RefResizableType
+  children: TChildren
+  itemRef: TRefResizable
 }
 
 export const SortableResizableItemWithActions = ({ index, children, itemRef }: Props) => {

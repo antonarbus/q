@@ -6,7 +6,7 @@ import { MenuItemStyled } from './MenuItemStyled'
 import { closeMenu, setMenuItemHoverIndex } from 'client/features/nav/navSlice'
 import { theme } from 'client/theme'
 import { useDispatchTyped, useSelectorTyped } from 'client/store'
-import { EventType } from 'client/types'
+import { TEvent } from 'client/types'
 
 const closeIcon = createElement(CloseIcon, {})
 
@@ -15,7 +15,7 @@ export function CloseMenuItem() {
   const dispatch = useDispatchTyped()
   const isHovered = useSelectorTyped(state => state.nav.menuItemHoverIndex === 1)
 
-  const onClickHandler = (e: EventType) => {
+  const onClickHandler = (e: TEvent) => {
     e.preventDefault()
     dispatch(closeMenu())
   }

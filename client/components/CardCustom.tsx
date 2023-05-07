@@ -1,11 +1,11 @@
 import { Typography } from '@mui/material'
-import { ChildrenType, RefDivType } from 'client/types'
+import { TChildren, TRefDiv } from 'client/types'
 
 type Props = {
-  children?: ChildrenType
+  children?: TChildren
   content?: React.ReactNode
   cssProps?: React.CSSProperties
-  reference?: RefDivType
+  reference?: TRefDiv
   title?: React.ReactNode
   logo?: React.ReactNode
 }

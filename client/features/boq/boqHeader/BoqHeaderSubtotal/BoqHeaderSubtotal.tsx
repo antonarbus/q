@@ -1,12 +1,12 @@
 
-import { RefResizableType } from 'client/types'
+import { TRefResizable } from 'client/types'
 import { BoqHeaderSubtotalText } from './BoqHeaderSubtotalText'
 import { BoqHeaderSubtotalPrice } from './BoqHeaderSubtotalPrice'
 import { BoqHeaderSubtotalCurrency } from './BoqHeaderSubtotalCurrency'
 
 type Props = {
   index: number
-  itemRef: RefResizableType
+  itemRef: TRefResizable
 }
 
 export const BoqHeaderSubtotal = ({ index, itemRef }: Props) => {

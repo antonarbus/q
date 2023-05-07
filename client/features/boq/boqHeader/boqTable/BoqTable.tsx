@@ -1,4 +1,4 @@
-import { RefResizableType } from 'client/types'
+import { TRefResizable } from 'client/types'
 import 'ag-grid-community/styles/ag-grid.css'
 import 'ag-grid-community/styles/ag-theme-alpine.css'
 import './agGridCustom.css'
@@ -8,7 +8,7 @@ import { DescriptionHeader } from './DescriptionHeader'
 
 type Props = {
   index: number
-  itemRef: RefResizableType
+  itemRef: TRefResizable
 }
 
 // export const DescriptionHeader = () => {
