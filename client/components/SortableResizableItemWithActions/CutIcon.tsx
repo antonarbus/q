@@ -5,11 +5,11 @@ import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { motion } from 'framer-motion'
 import { deleteItem, selectIsLastItem } from '../../features/items/itemsSlice'
 import { tellItemsSavedLocally } from 'client/features/bottom msg/bottomMsgSlice'
-import { RefResizableType } from 'client/types'
+import { TRefResizable } from 'client/types'
 import { cleanHtml } from 'utils/itemsUtils'
 
 type Props = {
-  itemRef: RefResizableType
+  itemRef: TRefResizable
   index: number
 }
 

@@ -1,10 +1,10 @@
 import { MenuType } from 'client/features/nav/navStructure'
 import { closeMenu, openMenuWithId, setNavItemRightPos } from 'client/features/nav/navSlice'
 import { store } from 'client/store'
-import { EventType } from 'client/types'
+import { TEvent } from 'client/types'
 
 type PropsType = {
-  e: EventType
+  e: TEvent
   navItem: MenuType | undefined
   id: string
   navItemRef: React.MutableRefObject<HTMLLIElement>

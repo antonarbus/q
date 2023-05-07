@@ -9,13 +9,13 @@ import { SlidableMenuItemsContainer } from './SlidableMenuItemsContainer'
 import { TopMenuItemsContainer } from './TopMenuItemsContainer'
 import { setMenuItemHoverIndex } from 'client/features/nav/navSlice'
 import { theme } from 'client/theme'
-import { RefDivType } from 'client/types'
+import { TRefDiv } from 'client/types'
 
 export function Menu() {
-  const menuContainerRef = useRef() as RefDivType
-  const currentMenuRef = useRef() as RefDivType
-  const nextMenuRef = useRef() as RefDivType
-  const fakeMenuRef = useRef() as RefDivType
+  const menuContainerRef = useRef() as TRefDiv
+  const currentMenuRef = useRef() as TRefDiv
+  const nextMenuRef = useRef() as TRefDiv
+  const fakeMenuRef = useRef() as TRefDiv
   const idsToNextMenuItems = useSelectorTyped(state => state.nav.idsToNextMenuItems)
   const idsToCurrentMenuItems = useSelectorTyped(state => state.nav.idsToCurrentMenuItems)
   useMenuAnimation({ currentMenuRef, nextMenuRef, menuContainerRef, fakeMenuRef, idsToNextMenuItems })

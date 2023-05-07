@@ -1,8 +1,8 @@
 import { css } from '@emotion/react'
-import { ChildrenType } from 'client/types'
+import { TChildren } from 'client/types'
 
 type Props = {
-  children: ChildrenType
+  children: TChildren
 }
 
 export const Key = ({ children }: Props) => {

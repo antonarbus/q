@@ -1,10 +1,10 @@
 import { notify } from 'client/features/notifier/notify'
-import { EventType } from 'client/types'
+import { TEvent } from 'client/types'
 import { useState } from 'react'
 import { HttpStatusType } from './types'
 
 type Props = {
-  e: EventType
+  e: TEvent
   email: string
   password: string
 }

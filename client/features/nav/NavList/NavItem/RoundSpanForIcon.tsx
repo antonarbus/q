@@ -1,7 +1,7 @@
-import { ChildrenType } from 'client/types'
+import { TChildren } from 'client/types'
 
 type Props = {
-  children: ChildrenType
+  children: TChildren
   css?: React.CSSProperties
   className?: string
   disabled?: boolean

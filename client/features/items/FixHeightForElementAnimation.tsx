@@ -1,11 +1,11 @@
 import { theme } from 'client/theme'
-import { ChildrenType, RefDivType } from 'client/types'
+import { TChildren, TRefDiv } from 'client/types'
 import { useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 
 type Props = {
   height: number
-  children: ChildrenType
+  children: TChildren
 }
 
 //* we have slide in item animation after pasting
@@ -21,7 +21,7 @@ type Props = {
 //* we maybe can use onAnimationComplete callback, but need to find a way to pass it, fuck that
 
 export const FixHeightForElementAnimation = ({ height, children }: Props) => {
-  const ref = useRef() as RefDivType
+  const ref = useRef() as TRefDiv
 
   useEffectOnce(() => {
     setTimeout(() => {

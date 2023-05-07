@@ -1,11 +1,11 @@
 import { theme } from 'client/theme'
 import { BoqHeaderTitle } from './BoqHeaderTitle'
-import { RefResizableType } from 'client/types'
+import { TRefResizable } from 'client/types'
 import { BoqHeaderSubtotal } from './BoqHeaderSubtotal'
 
 type Props = {
   index: number
-  itemRef: RefResizableType
+  itemRef: TRefResizable
 }
 
 export const BoqHeader = ({ index, itemRef }: Props) => {

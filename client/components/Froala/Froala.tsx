@@ -1,12 +1,12 @@
-import { RefAnyType, RefDivType } from 'client/types'
+import { TRefAny, TRefDiv } from 'client/types'
 import { useFroala } from './useFroala'
 
 type Props = {
   padding?: number | string
   initHeight?: number | string
   initHtml?: string
-  froalaElementRef: RefDivType
-  editorRef: RefAnyType
+  froalaElementRef: TRefDiv
+  editorRef: TRefAny
   placeholder?: string
   sx?: React.CSSProperties
   onClickAwayIfHtmChanged?: () => void

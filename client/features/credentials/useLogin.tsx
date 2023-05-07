@@ -1,7 +1,7 @@
 import { notify } from 'client/features/notifier/notify'
 import { slideElement } from 'utils/slideElement'
 import { useDispatchTyped } from 'client/store'
-import { EventType } from 'client/types'
+import { TEvent } from 'client/types'
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { rememberLoggedUser } from './credentialsSlice'
@@ -17,7 +17,7 @@ export function useLogin() {
   const dispatch = useDispatchTyped()
 
   type Props = {
-    e: EventType
+    e: TEvent
     email: string
     password: string
     cardElement: HTMLElement

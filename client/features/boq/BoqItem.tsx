@@ -1,7 +1,7 @@
 import { SortableResizableItemWithActions } from 'client/components/SortableResizableItemWithActions'
 import { useRef } from 'react'
 import { BoqHeader } from './boqHeader'
-import { RefResizableType } from 'client/types'
+import { TRefResizable } from 'client/types'
 import { BoqTable } from './boqHeader/boqTable'
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 }
 
 export const BoqItem = ({ index }: Props) => {
-  const itemRef = useRef() as RefResizableType
+  const itemRef = useRef() as TRefResizable
 
   return (
     <SortableResizableItemWithActions
