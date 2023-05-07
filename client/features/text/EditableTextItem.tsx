@@ -1,5 +1,5 @@
 // // @ts-nocheck
-import { DraggableResizableItemWithActions } from 'client/components/DraggableResizableItemWithActions'
+import { SortableResizableItemWithActions } from 'client/components/SortableResizableItemWithActions'
 import { theme } from 'client/theme'
 import { store, useDispatchTyped } from 'client/store'
 import { useRef } from 'react'
@@ -33,7 +33,7 @@ export const EditableTextItem = ({ index }: Props) => {
   }
 
   return (
-    <DraggableResizableItemWithActions
+    <SortableResizableItemWithActions
       index={index}
       itemRef={itemRef}
     >
@@ -48,6 +48,6 @@ export const EditableTextItem = ({ index }: Props) => {
       <PencilAtBottomRight
         editorRef={editorRef}
       />
-    </DraggableResizableItemWithActions>
+    </SortableResizableItemWithActions>
   )
 }

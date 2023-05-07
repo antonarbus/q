@@ -1,4 +1,4 @@
-import { DraggableResizableItemWithActions } from 'client/components/DraggableResizableItemWithActions'
+import { SortableResizableItemWithActions } from 'client/components/SortableResizableItemWithActions'
 import { useRef } from 'react'
 import { BoqHeader } from './boqHeader'
 import { RefResizableType } from 'client/types'
@@ -12,12 +12,12 @@ export const BoqItem = ({ index }: Props) => {
   const itemRef = useRef() as RefResizableType
 
   return (
-    <DraggableResizableItemWithActions
+    <SortableResizableItemWithActions
       index={index}
       itemRef={itemRef}
     >
       <BoqHeader index={index} itemRef={itemRef} />
       <BoqTable index={index} itemRef={itemRef} />
-    </DraggableResizableItemWithActions>
+    </SortableResizableItemWithActions>
   )
 }
