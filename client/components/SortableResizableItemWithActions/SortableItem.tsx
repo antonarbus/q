@@ -14,7 +14,7 @@ interface ISortableItem extends SortableElementProps {
   i: number
 }
 
-export const DraggableItem: React.ComponentClass<ISortableItem, any> = SortableElement(({ children, i: index }: Props) => {
+export const SortableItem: React.ComponentClass<ISortableItem, any> = SortableElement(({ children, i: index }: Props) => {
   const id = store.getState().items?.[index].id
 
   return (

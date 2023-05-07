@@ -1,10 +1,10 @@
-import { ActionsContainer } from 'client/components/DraggableResizableItemWithActions/ActionsContainer'
-import { CopyIcon } from 'client/components/DraggableResizableItemWithActions/CopyIcon'
-import { CutIcon } from 'client/components/DraggableResizableItemWithActions/CutIcon'
-import { DeleteIcon } from 'client/components/DraggableResizableItemWithActions/DeleteIcon'
-import { PasteTextInMiddle } from 'client/components/DraggableResizableItemWithActions/PasteTextInMiddle'
-import { ResizablePaper } from 'client/components/DraggableResizableItemWithActions/ResizablePaper'
-import { DraggableItem } from './DraggableItem'
+import { ActionsContainer } from 'client/components/SortableResizableItemWithActions/ActionsContainer'
+import { CopyIcon } from 'client/components/SortableResizableItemWithActions/CopyIcon'
+import { CutIcon } from 'client/components/SortableResizableItemWithActions/CutIcon'
+import { DeleteIcon } from 'client/components/SortableResizableItemWithActions/DeleteIcon'
+import { PasteTextInMiddle } from 'client/components/SortableResizableItemWithActions/PasteTextInMiddle'
+import { ResizablePaper } from 'client/components/SortableResizableItemWithActions/ResizablePaper'
+import { SortableItem } from './SortableItem'
 import { DragIcon } from './DragIcon'
 import { useIsDisabledItem } from './useIsDisabledItem'
 import { Msg } from './Msg'
@@ -19,16 +19,16 @@ type Props = {
   itemRef: RefResizableType
 }
 
-export const DraggableResizableItemWithActions = ({ index, children, itemRef }: Props) => {
+export const SortableResizableItemWithActions = ({ index, children, itemRef }: Props) => {
   const isDisabled = useIsDisabledItem()
   const item = store.getState().items?.[index]
   const height = item.height
 
   return (
-    <DraggableItem
+    <SortableItem
       disabled={isDisabled}
       index={index}
-      i={index}
+      i={index} // "i", because "index" is internally reserved by SortableElement
     >
         <ActionsContainer>
           <DragIcon />
@@ -46,6 +46,6 @@ export const DraggableResizableItemWithActions = ({ index, children, itemRef }: 
           <PasteTextInMiddle index={index}/>
         </ResizablePaper>
         <ActionsContainer/> {/* Right action container is used for symmetry, now it is empty, probably add there some icons later */}
-    </DraggableItem>
+    </SortableItem>
   )
 }

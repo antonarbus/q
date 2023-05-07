@@ -1,5 +1,5 @@
 import parseHtml from 'html-react-parser'
-import { DraggableResizableItemWithActions } from 'client/components/DraggableResizableItemWithActions'
+import { SortableResizableItemWithActions } from 'client/components/SortableResizableItemWithActions'
 import { useRef } from 'react'
 import { store } from 'client/store'
 import { RefResizableType } from 'client/types'
@@ -14,11 +14,11 @@ export const TextItem = ({ index }: Props) => {
   if (item.type !== 'text') return null
 
   return (
-    <DraggableResizableItemWithActions
+    <SortableResizableItemWithActions
       index={index}
       itemRef={itemRef}
     >
       {parseHtml(item.text.html)}
-    </DraggableResizableItemWithActions>
+    </SortableResizableItemWithActions>
   )
 }
