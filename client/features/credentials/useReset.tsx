@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { token } from './token'
 import { HttpStatusType } from './types'
 
-type Props = {
+type TProps = {
   e: TEvent
   email: string
 }
@@ -12,7 +12,7 @@ type Props = {
 export function useReset() {
   const [httpStatus, setHttpStatus] = useState<HttpStatusType>('')
 
-  async function resetPassword({ e, email }: Props) {
+  async function resetPassword({ e, email }: TProps) {
     e.preventDefault()
     setHttpStatus('loading')
     const method = 'POST'

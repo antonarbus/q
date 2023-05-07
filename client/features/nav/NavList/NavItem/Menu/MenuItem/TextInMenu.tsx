@@ -1,4 +1,4 @@
-type Props = {
+type TProps = {
   reserveSpaceForIcon?: boolean,
   name: string | React.ReactNode
   disabled?: boolean
@@ -10,7 +10,7 @@ type Props = {
  * - if we have nested menu some space should be reserved for 'go inside' icon
  * - if name is long it will be trimmed ellipsis (... dots)
  */
-export function TextInMenu({ reserveSpaceForIcon, name, disabled }: Props) {
+export function TextInMenu({ reserveSpaceForIcon, name, disabled }: TProps) {
   return (
     <span
       css={{

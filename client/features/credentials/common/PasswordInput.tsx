@@ -4,7 +4,7 @@ import { theme } from 'client/theme'
 import { TEvent } from 'client/types'
 import { useState } from 'react'
 
-type Props = {
+type TProps = {
   password: string
   setPassword: (value: string) => void
   onBlur?: () => void
@@ -21,7 +21,7 @@ type Props = {
  * @param props.label label
  */
 
-export function PasswordInput({ password, setPassword, onBlur, label, isLabelRed }: Props) {
+export function PasswordInput({ password, setPassword, onBlur, label, isLabelRed }: TProps) {
   const [showPassword, setShowPassword] = useState(false)
 
   return (

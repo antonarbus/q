@@ -4,12 +4,12 @@ import { hidePasteText, showPasteText, updatePasteTextPos } from './copySlice'
 import { CopyPlaceType } from './types'
 import isEqual from 'lodash.isequal'
 
-type Props = {
+type TProps = {
   item: Element,
   e: MouseEvent
 }
 
-function getPastePlace({ item, e }: Props): CopyPlaceType {
+function getPastePlace({ item, e }: TProps): CopyPlaceType {
   const { height, top } = item.getBoundingClientRect()
   const yWithinElement = e.clientY - top
   const distToTop = yWithinElement

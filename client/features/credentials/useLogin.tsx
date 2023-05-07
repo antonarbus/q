@@ -16,14 +16,14 @@ export function useLogin() {
   const from = (location.state as any)?.from?.pathname || '/'
   const dispatch = useDispatchTyped()
 
-  type Props = {
+  type TProps = {
     e: TEvent
     email: string
     password: string
     cardElement: HTMLElement
   }
 
-  async function loginUser ({ e, email, password, cardElement }: Props) {
+  async function loginUser ({ e, email, password, cardElement }: TProps) {
     e.preventDefault()
     const method = 'POST'
     const headers = { 'Content-Type': 'application/json' }

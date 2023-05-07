@@ -4,11 +4,11 @@ import { useRef } from 'react'
 import { store } from 'client/store'
 import { TRefResizable } from 'client/types'
 
-type Props = {
+type TProps = {
   index: number
 }
 
-export const TextItem = ({ index }: Props) => {
+export const TextItem = ({ index }: TProps) => {
   const itemRef = useRef() as TRefResizable
   const item = store.getState().items?.[index]
   if (item.type !== 'text') return null

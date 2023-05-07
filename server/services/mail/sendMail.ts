@@ -1,12 +1,12 @@
 import nodemailer from 'nodemailer'
 
-type Props = {
+type TProps = {
   to: string
   subject: string
   html: string
 }
 
-export async function sendMail({ to, subject, html }: Props) {
+export async function sendMail({ to, subject, html }: TProps) {
   // Generate test SMTP service account from ethereal.email
   // Only needed if you don't have a real mail account for testing
   // const testAccount = await nodemailer.createTestAccount()

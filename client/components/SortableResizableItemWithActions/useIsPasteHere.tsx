@@ -1,10 +1,10 @@
 import { store, useSelectorTyped } from 'client/store'
 
-type Props = {
+type TProps = {
   index: number
 }
 
-export const useIsPasteHere = ({ index }: Props) => {
+export const useIsPasteHere = ({ index }: TProps) => {
   const itemId = store.getState().items?.[index]?.id
   const pastePos = useSelectorTyped(state => state.copy.place.pastePos)
   const pasteItemId = useSelectorTyped(state => state.copy.place.itemId)

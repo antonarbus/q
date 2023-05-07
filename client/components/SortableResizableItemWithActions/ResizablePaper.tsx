@@ -4,13 +4,13 @@ import { Resizable } from 're-resizable'
 import { saveItemWidth, tellItemSavedLocally } from '../../features/items/itemsSlice'
 import { TChildren, TRefResizable } from 'client/types'
 
-interface Props {
+interface TProps {
   children: TChildren
   index: number
   itemRef: TRefResizable
 }
 
-export const ResizablePaper = ({ children, index, itemRef }: Props) => {
+export const ResizablePaper = ({ children, index, itemRef }: TProps) => {
   const dispatch = useDispatchTyped()
   const width = store.getState().items[index]?.width
 

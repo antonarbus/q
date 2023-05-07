@@ -4,11 +4,11 @@ import { useEffect } from 'react'
 import { closeMenu } from 'client/features/nav/navSlice'
 import { TEvent, TRefDiv } from 'client/types'
 
-type Props = {
+type TProps = {
   menuContainerRef: TRefDiv
 }
 
-export function useCloseMenuOnClickOutside({ menuContainerRef }: Props) {
+export function useCloseMenuOnClickOutside({ menuContainerRef }: TProps) {
   const dispatch = useDispatchTyped()
 
   /**

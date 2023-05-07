@@ -3,12 +3,12 @@ import { BoqHeaderTitle } from './BoqHeaderTitle'
 import { TRefResizable } from 'client/types'
 import { BoqHeaderSubtotal } from './BoqHeaderSubtotal'
 
-type Props = {
+type TProps = {
   index: number
   itemRef: TRefResizable
 }
 
-export const BoqHeader = ({ index, itemRef }: Props) => {
+export const BoqHeader = ({ index, itemRef }: TProps) => {
   return (
     <div
       css={{

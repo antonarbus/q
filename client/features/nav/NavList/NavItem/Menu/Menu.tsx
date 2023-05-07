@@ -52,11 +52,11 @@ export function Menu() {
   )
 }
 
-type PropsForSC = {
+type TPropsForSC = {
   isMenuOutsideWindow: boolean
 }
 
-export const MenuStyled = styled.div<PropsForSC>`
+export const MenuStyled = styled.div<TPropsForSC>`
   position: absolute;
   top: calc(100% + 5px);
   right: -${theme.menu.navItem.marginRight}px;

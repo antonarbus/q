@@ -4,7 +4,7 @@ import { theme } from 'client/theme'
 import { TChildren } from 'client/types'
 import { store } from 'client/store'
 
-type Props = {
+type TProps = {
   children: TChildren
   i: number
 }
@@ -14,7 +14,7 @@ interface ISortableItem extends SortableElementProps {
   i: number
 }
 
-export const SortableItem: React.ComponentClass<ISortableItem, any> = SortableElement(({ children, i: index }: Props) => {
+export const SortableItem: React.ComponentClass<ISortableItem, any> = SortableElement(({ children, i: index }: TProps) => {
   const id = store.getState().items?.[index].id
 
   return (

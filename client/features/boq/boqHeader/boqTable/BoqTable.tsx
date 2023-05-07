@@ -6,7 +6,7 @@ import { AgGridReact } from 'ag-grid-react'
 import { useRef } from 'react'
 import { DescriptionHeader } from './DescriptionHeader'
 
-type Props = {
+type TProps = {
   index: number
   itemRef: TRefResizable
 }
@@ -53,7 +53,7 @@ const rowData = [
   { description: 'description 3', item: 50, qty: 10, price: 500 },
 ]
 
-export const BoqTable = ({ index, itemRef }: Props) => {
+export const BoqTable = ({ index, itemRef }: TProps) => {
   const gridRef = useRef(null)
 
   const columnDefs = [

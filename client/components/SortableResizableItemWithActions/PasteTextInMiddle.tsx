@@ -1,11 +1,11 @@
 import { useIsPasteHere } from 'client/components/SortableResizableItemWithActions/useIsPasteHere'
 import { theme } from 'client/theme'
 
-type Props = {
+type TProps = {
   index: number
 }
 
-export const PasteTextInMiddle = ({ index }: Props) => {
+export const PasteTextInMiddle = ({ index }: TProps) => {
   const isPasteHere = useIsPasteHere({ index })
   if (!isPasteHere) return null
 

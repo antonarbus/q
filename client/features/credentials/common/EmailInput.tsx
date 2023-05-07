@@ -8,7 +8,7 @@ import { TEvent, TRefDiv } from 'client/types'
 
 const isEmailPatternOk = (email: string) => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
 
-type Props = {
+type TProps = {
   email: string
   setEmail: (value: string) => void
   isEmailOk: boolean
@@ -26,7 +26,7 @@ type Props = {
  * @param props.inputRef reference to the input element, for ex. to put a focus on
  */
 
-export function EmailInput({ email, setEmail, isEmailOk, setIsEmailOk, inputRef }: Props) {
+export function EmailInput({ email, setEmail, isEmailOk, setIsEmailOk, inputRef }: TProps) {
   // input focused out ones (show validation msg only after first focus out)
   const [inputFocusedOutOnes, setInputFocusedOutOnes] = useState(false)
 

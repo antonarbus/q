@@ -1,7 +1,7 @@
 import { TRefAny, TRefDiv } from 'client/types'
 import { useFroala } from './useFroala'
 
-type Props = {
+type TProps = {
   padding?: number | string
   initHeight?: number | string
   initHtml?: string
@@ -31,7 +31,7 @@ export const Froala = ({
   editorRef,
   placeholder,
   sx
-}: Props) => {
+}: TProps) => {
   useFroala({ initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder })
 
   return (

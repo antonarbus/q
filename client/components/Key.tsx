@@ -1,11 +1,11 @@
 import { css } from '@emotion/react'
 import { TChildren } from 'client/types'
 
-type Props = {
+type TProps = {
   children: TChildren
 }
 
-export const Key = ({ children }: Props) => {
+export const Key = ({ children }: TProps) => {
   return (
     <div
       css={css`
