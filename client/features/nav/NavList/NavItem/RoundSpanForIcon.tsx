@@ -1,13 +1,13 @@
 import { TChildren } from 'client/types'
 
-type Props = {
+type TProps = {
   children: TChildren
   css?: React.CSSProperties
   className?: string
   disabled?: boolean
 }
 
-export const RoundSpanForIcon = ({ children, css, className, disabled }: Props) => {
+export const RoundSpanForIcon = ({ children, css, className, disabled }: TProps) => {
   return (
     <span
       className={className}

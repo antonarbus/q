@@ -2,7 +2,7 @@ import { useSelectorTyped } from 'client/store'
 import { TRefAny, TRefDiv, TRefString } from 'client/types'
 import { useEffect, useRef } from 'react'
 
-type Props = {
+type TProps = {
   initHtml?: string
   onClickAwayIfHtmChanged?: () => void
   froalaElementRef: TRefDiv
@@ -10,7 +10,7 @@ type Props = {
   placeholder?: string
 }
 
-export const useFroala = ({ initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder }: Props) => {
+export const useFroala = ({ initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder }: TProps) => {
   const resetItemsToDefaults = useSelectorTyped(state => state.offer.toggleOffer)
   const prevHtmlRef = useRef(initHtml) as TRefString
 

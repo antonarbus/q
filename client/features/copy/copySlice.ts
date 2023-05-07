@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { CopyPlaceType, CopyItemType, PastePosType } from './types'
 import { ItemType } from '../items/types'
 
-type Props = {
+type TProps = {
   isShown: boolean
   initCords: { x: number, y: number }
   items: CopyItemType[]
@@ -11,7 +11,7 @@ type Props = {
   isPasteTextShown: boolean
 }
 
-const initialState: Props = {
+const initialState: TProps = {
   isShown: false,
   initCords: { x: 0, y: 0 },
   items: [],

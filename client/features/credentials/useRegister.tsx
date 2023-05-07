@@ -3,7 +3,7 @@ import { TEvent } from 'client/types'
 import { useState } from 'react'
 import { HttpStatusType } from './types'
 
-type Props = {
+type TProps = {
   e: TEvent
   email: string
   password: string
@@ -12,7 +12,7 @@ type Props = {
 export function useRegister() {
   const [httpStatus, setHttpStatus] = useState<HttpStatusType>('')
 
-  async function registerUser ({ e, email, password }: Props) {
+  async function registerUser ({ e, email, password }: TProps) {
     e.preventDefault()
     const method = 'POST'
     const headers = { 'Content-Type': 'application/json' }

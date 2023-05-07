@@ -11,7 +11,7 @@ import { token } from './token'
 
 type JwtAccessTokenType = { email: string, roles: string[] }
 
-type Props = {
+type TProps = {
   withLoadingState?: boolean
 }
 
@@ -30,7 +30,7 @@ type Props = {
 // but no need to do, because all protected apis calls will do the same
 // he may stay logged in forever without making any harm
 
-export const useRefreshTokens = ({ withLoadingState }: Props) => {
+export const useRefreshTokens = ({ withLoadingState }: TProps) => {
   const [isCheckingTokens, setIsCheckingTokens] = useState(true)
 
   useEffectOnce(() => {

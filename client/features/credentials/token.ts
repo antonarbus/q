@@ -1,7 +1,7 @@
-type Props = {
+type TProps = {
   access: string | null
 }
 
-export const token: Props = {
+export const token: TProps = {
   access: ''
 }

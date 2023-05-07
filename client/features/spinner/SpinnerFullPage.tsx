@@ -1,12 +1,12 @@
 import { LoadingDots } from 'client/components/LoadingDots'
 import { useSelectorTyped } from 'client/store'
 
-type Props = {
+type TProps = {
   isShowing?: boolean
   title?: string
 }
 
-export const SpinnerFullPage = ({ isShowing, title }: Props) => {
+export const SpinnerFullPage = ({ isShowing, title }: TProps) => {
   const isLoading = useSelectorTyped(state => state.spinner.isLoading)
   const text = useSelectorTyped(state => state.spinner.text)
   if (!isLoading && !isShowing) return null

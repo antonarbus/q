@@ -3,7 +3,7 @@ import { TChildren, TRefDiv } from 'client/types'
 import { useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 
-type Props = {
+type TProps = {
   height: number
   children: TChildren
 }
@@ -20,7 +20,7 @@ type Props = {
 //* do not like 'setTimeout', but let it be for now
 //* we maybe can use onAnimationComplete callback, but need to find a way to pass it, fuck that
 
-export const FixHeightForElementAnimation = ({ height, children }: Props) => {
+export const FixHeightForElementAnimation = ({ height, children }: TProps) => {
   const ref = useRef() as TRefDiv
 
   useEffectOnce(() => {

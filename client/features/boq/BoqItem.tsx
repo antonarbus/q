@@ -4,11 +4,11 @@ import { BoqHeader } from './boqHeader'
 import { TRefResizable } from 'client/types'
 import { BoqTable } from './boqHeader/boqTable'
 
-type Props = {
+type TProps = {
   index: number
 }
 
-export const BoqItem = ({ index }: Props) => {
+export const BoqItem = ({ index }: TProps) => {
   const itemRef = useRef() as TRefResizable
 
   return (

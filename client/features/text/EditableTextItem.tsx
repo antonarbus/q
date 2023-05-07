@@ -9,11 +9,11 @@ import { tellItemSavedLocally, saveEditableText, saveItemHeight } from '../items
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { TRefAny, TRefDiv, TRefResizable } from 'client/types'
 
-type Props = {
+type TProps = {
   index: number
 }
 
-export const EditableTextItem = ({ index }: Props) => {
+export const EditableTextItem = ({ index }: TProps) => {
   const dispatch = useDispatchTyped()
   const itemRef = useRef() as TRefResizable
   const froalaElementRef = useRef() as TRefDiv

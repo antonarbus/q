@@ -5,12 +5,12 @@ import { store, useDispatchTyped } from 'client/store'
 import { TRefAny, TRefDiv, TRefResizable } from 'client/types'
 import { useRef } from 'react'
 
-type Props = {
+type TProps = {
   index: number
   itemRef: TRefResizable
 }
 
-export const BoqHeaderSubtotalPrice = ({ index, itemRef }: Props) => {
+export const BoqHeaderSubtotalPrice = ({ index, itemRef }: TProps) => {
   const dispatch = useDispatchTyped()
   const froalaElementRef = useRef() as TRefDiv
   const editorRef = useRef() as TRefAny

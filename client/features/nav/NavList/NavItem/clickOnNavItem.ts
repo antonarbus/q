@@ -3,7 +3,7 @@ import { closeMenu, openMenuWithId, setNavItemRightPos } from 'client/features/n
 import { store } from 'client/store'
 import { TEvent } from 'client/types'
 
-type PropsType = {
+type TPropsType = {
   e: TEvent
   navItem: MenuType | undefined
   id: string
@@ -11,7 +11,7 @@ type PropsType = {
   disabled: boolean
 }
 
-export function clickOnNavItem({ e, navItem, id, navItemRef, disabled }: PropsType) {
+export function clickOnNavItem({ e, navItem, id, navItemRef, disabled }: TPropsType) {
   (document.activeElement as HTMLElement).blur() // to prevent open an active navItem link on Enter key
 
   const link = navItem?.link

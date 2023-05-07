@@ -9,7 +9,7 @@ import { TChildren } from 'client/types'
 // example with TypeScript
 // https://codesandbox.io/s/odfrontendeveloper-react-sortable-hoc-example-t96d8x?file=/src/examples/Items.tsx:518-635
 
-type Props = {
+type TProps = {
   children: TChildren
 }
 
@@ -18,7 +18,7 @@ interface ISortableContainer extends SortableContainerProps {
 }
 
 const DraggableItems: React.ComponentClass<ISortableContainer, any> =
-  SortableContainer(({ children }: Props) => (
+  SortableContainer(({ children }: TProps) => (
     <div
       id='items'
       css={{
@@ -33,7 +33,7 @@ const DraggableItems: React.ComponentClass<ISortableContainer, any> =
     </div>
   ))
 
-export const ItemsContainer = ({ children }: Props) => {
+export const ItemsContainer = ({ children }: TProps) => {
   const dispatch = useDispatchTyped()
 
   return (

@@ -8,12 +8,12 @@ import { tellItemsSavedLocally } from 'client/features/bottom msg/bottomMsgSlice
 import { TRefResizable } from 'client/types'
 import { cleanHtml } from 'utils/itemsUtils'
 
-type Props = {
+type TProps = {
   itemRef: TRefResizable
   index: number
 }
 
-export const CutIcon = ({ index, itemRef }: Props) => {
+export const CutIcon = ({ index, itemRef }: TProps) => {
   const dispatch = useDispatchTyped()
   const isLastItem = useSelectorTyped(selectIsLastItem)
 

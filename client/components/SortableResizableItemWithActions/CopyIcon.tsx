@@ -5,12 +5,12 @@ import { motion } from 'framer-motion'
 import { TRefResizable } from 'client/types'
 import { cleanHtml } from 'utils/itemsUtils'
 
-type Props = {
+type TProps = {
   itemRef: TRefResizable
   index: number
 }
 
-export const CopyIcon = ({ itemRef, index }: Props) => {
+export const CopyIcon = ({ itemRef, index }: TProps) => {
   const dispatch = useDispatchTyped()
 
   return (

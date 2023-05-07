@@ -13,13 +13,13 @@ import { TChildren, TRefResizable } from 'client/types'
 import { FixHeightForElementAnimation } from 'client/features/items/FixHeightForElementAnimation'
 import { ReduceOpacityIfPasteHere } from './ReduceOpacityIfPasteHere'
 
-type Props = {
+type TProps = {
   index: number
   children: TChildren
   itemRef: TRefResizable
 }
 
-export const SortableResizableItemWithActions = ({ index, children, itemRef }: Props) => {
+export const SortableResizableItemWithActions = ({ index, children, itemRef }: TProps) => {
   const isDisabled = useIsDisabledItem()
   const item = store.getState().items?.[index]
   const height = item.height
