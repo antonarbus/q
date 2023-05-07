@@ -1,11 +1,13 @@
+import { useIsPasteHere } from 'client/components/DraggableResizableItemWithActions/useIsPasteHere'
 import { theme } from 'client/theme'
 
 type Props = {
-  isPasteHereShown: boolean
+  index: number
 }
 
-export const PasteTextInMiddle = ({ isPasteHereShown }: Props) => {
-  if (!isPasteHereShown) return null
+export const PasteTextInMiddle = ({ index }: Props) => {
+  const isPasteHere = useIsPasteHere({ index })
+  if (!isPasteHere) return null
 
   return (
     <div
