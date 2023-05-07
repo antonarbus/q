@@ -8,17 +8,17 @@ import { getMenuItemByIdsChain } from './getMenuItemByIdsChain'
 import { useFirstMountState } from 'react-use'
 import { TRefDiv } from 'client/types'
 
-type TProps = {
+type TPropsForNavigateInMenu = {
   up: { () : void } | null
   down: { (id: string): void } | null,
 }
 
-export const navigateInMenu: TProps = {
+export const navigateInMenu: TPropsForNavigateInMenu = {
   up: () => console.log('put function here for going up the menu, otherwise need to pass it in many props'),
   down: (id) => console.log('put function here for going into submenu, otherwise need to pass it in many props')
 }
 
-type TPropsType = {
+type TProps = {
   currentMenuRef: TRefDiv
   nextMenuRef: TRefDiv
   menuContainerRef: TRefDiv
@@ -26,7 +26,7 @@ type TPropsType = {
   idsToNextMenuItems: string[]
 }
 
-export function useMenuAnimation({ currentMenuRef, nextMenuRef, menuContainerRef, fakeMenuRef, idsToNextMenuItems }: TPropsType) {
+export function useMenuAnimation({ currentMenuRef, nextMenuRef, menuContainerRef, fakeMenuRef, idsToNextMenuItems }: TProps) {
   const dispatch = useDispatchTyped()
   const isFirstMount = useFirstMountState()
   const duration = 0.5

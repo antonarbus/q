@@ -1,4 +1,4 @@
-import { MenuType, navStructure } from 'client/features/nav/navStructure'
+import { TMenu, navStructure } from 'client/features/nav/navStructure'
 
 /**
  * returns clicked menu object from navStructure
@@ -11,8 +11,8 @@ import { MenuType, navStructure } from 'client/features/nav/navStructure'
  */
 
 export function getMenuItemByIdsChain(idsToCurrentMenuItems: string[]) {
-  let clicked: MenuType[] = navStructure
-  let tempMenu: MenuType[] = navStructure
+  let clicked: TMenu[] = navStructure
+  let tempMenu: TMenu[] = navStructure
   idsToCurrentMenuItems.forEach((id: string) => {
     if (id === 'burger') {
       clicked = navStructure[0].menuItems!
