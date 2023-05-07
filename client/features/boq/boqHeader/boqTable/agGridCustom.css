@@ -19,6 +19,9 @@
   border-bottom: transparent;
 }
 
+.ag-header-cell-resize {
+  z-index: inherit;
+}
 .ag-header-cell-resize::after {
   background-color: #e8e8e8;
 }
