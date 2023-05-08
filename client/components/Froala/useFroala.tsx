@@ -105,7 +105,6 @@ export const useFroala = ({ initHtml, onClickAwayIfHtmChanged, froalaElementRef,
       function () {
         // @ts-ignore
         this.html.set(initHtml || '')
-        froalaElementRef.current.style.height = 'auto'
       }
     )
 
@@ -114,7 +113,7 @@ export const useFroala = ({ initHtml, onClickAwayIfHtmChanged, froalaElementRef,
     }
   }, [resetItemsToDefaults])
 
-  useEffect(function saveTextInReduxOnClickAway() {
+  useEffect(function clickAwayHandler() {
     froalaElementRef?.current?.addEventListener('focusout', clickAwayHandlerIfHtmlChanged)
 
     return () => {

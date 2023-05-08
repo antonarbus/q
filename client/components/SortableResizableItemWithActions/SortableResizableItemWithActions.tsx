@@ -10,7 +10,7 @@ import { useIsDisabledItem } from './useIsDisabledItem'
 import { Msg } from './Msg'
 import { store } from 'client/store'
 import { TChildren, TRefResizable } from 'client/types'
-import { FixHeightForElementAnimation } from 'client/features/items/FixHeightForElementAnimation'
+import { FixHeightBeforePasteAnimation } from 'client/features/items/FixHeightBeforePasteAnimation'
 import { ReduceOpacityIfPasteHere } from './ReduceOpacityIfPasteHere'
 
 type TProps = {
@@ -39,9 +39,9 @@ export const SortableResizableItemWithActions = ({ index, children, itemRef }: T
         <ResizablePaper index={index} itemRef={itemRef}>
           <Msg index={index}/>
           <ReduceOpacityIfPasteHere index={index}>
-            <FixHeightForElementAnimation height={height}>
+            <FixHeightBeforePasteAnimation height={height}>
               {children}
-            </FixHeightForElementAnimation>
+            </FixHeightBeforePasteAnimation>
           </ReduceOpacityIfPasteHere>
           <PasteTextInMiddle index={index}/>
         </ResizablePaper>
