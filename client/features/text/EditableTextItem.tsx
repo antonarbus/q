@@ -41,7 +41,6 @@ export const EditableTextItem = ({ index }: TProps) => {
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
         initHtml={item.text.html}
-        initHeight={item.text.height}
         padding={theme.item.padding}
         onClickAwayIfHtmChanged={saveHtmlAndHeight}
       />

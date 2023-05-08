@@ -1,5 +1,6 @@
 import { TRefAny, TRefDiv } from 'client/types'
 import { useFroala } from './useFroala'
+import { FixHeightBeforePasteAnimation } from 'client/features/items/FixHeightBeforePasteAnimation'
 
 type TProps = {
   padding?: number | string
@@ -35,14 +36,15 @@ export const Froala = ({
   useFroala({ initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder })
 
   return (
-    <div
-      ref={froalaElementRef}
-      css={{
-        height: initHeight || 'auto',
-        padding: padding || 0,
-        wordBreak: 'break-word',
-        ...sx
-      }}
-    />
+    <FixHeightBeforePasteAnimation height={initHeight}>
+      <div
+        ref={froalaElementRef}
+        css={{
+          padding: padding || 0,
+          wordBreak: 'break-word',
+          ...sx
+        }}
+      />
+    </FixHeightBeforePasteAnimation>
   )
 }

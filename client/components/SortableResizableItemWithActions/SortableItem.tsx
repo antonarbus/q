@@ -15,6 +15,13 @@ interface ISortableItem extends SortableElementProps {
   i: number
 }
 
+type TAnimatedProps = {
+  height: number | string
+  marginBottom: number | string
+  opacity: number | string
+  y: number | string
+}
+
 export const SortableItem: React.ComponentClass<ISortableItem, any> = SortableElement(({ children, i }: TProps) => {
   const ref = useRef() as TRefDiv
   const id = store.getState().items?.[i].id
@@ -52,7 +59,8 @@ export const SortableItem: React.ComponentClass<ISortableItem, any> = SortableEl
         maxWidth: '100%',
         width: '100%',
       }}
-      onAnimationStart={() => {
+      onAnimationStart={(animatedProps: TAnimatedProps) => {
+        if (animatedProps.height !== 0) return // otherwise shadows are trimmed on initial load
         ref.current.style.overflow = 'hidden'
       }}
       onAnimationComplete={() => {

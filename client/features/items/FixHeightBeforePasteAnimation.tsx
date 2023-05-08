@@ -4,7 +4,7 @@ import { useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 
 type TProps = {
-  height: number
+  height: number | string | undefined
   children: TChildren
 }
 
@@ -19,15 +19,16 @@ type TProps = {
 //* do not 'setTimeout' approach, but let it be for now
 //* we maybe can use onAnimationComplete callback from framer-motion, but need to find a way to pass it, not sure
 
-// todo: check if same will work for EditableText and small Forala elements
-// todo: itemRef is not actually an item, it is somewhere inside, check that
+// todo: move FixHeightBeforePasteAnimation in common folder to the
+// todo: itemRef is not actually an .item, it is somewhere inside, check that
 // todo: instead of set item heights in default object, let's put them on init load and then they will be saved in local storage
 
-export const FixHeightForElementAnimation = ({ height, children }: TProps) => {
+export const FixHeightBeforePasteAnimation = ({ height, children }: TProps) => {
   const ref = useRef() as TRefDiv
   const delayMs = 1000 * theme.item.animationDuration
 
   useEffectOnce(() => {
+    if (!height) return
     setTimeout(() => {
       ref.current.style.removeProperty('height')
     }, delayMs)
@@ -36,10 +37,8 @@ export const FixHeightForElementAnimation = ({ height, children }: TProps) => {
   return (
     <div
       ref={ref}
-      style={{
-        height,
-      }}
-      className='fixed-height-for-element-animation'
+      style={{ height, width: '100%' }}
+      className='fix-height-for-element-animation'
     >
       {children}
     </div>
