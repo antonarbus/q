@@ -2,15 +2,13 @@ import { store, useDispatchTyped } from 'client/store'
 import { MdCopyAll } from 'react-icons/md'
 import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from '../../features/copy/copySlice'
 import { motion } from 'framer-motion'
-import { TRefResizable } from 'client/types'
 import { cleanHtml } from 'utils/itemsUtils'
 
 type TProps = {
-  itemRef: TRefResizable
   index: number
 }
 
-export const CopyIcon = ({ itemRef, index }: TProps) => {
+export const CopyIcon = ({ index }: TProps) => {
   const dispatch = useDispatchTyped()
 
   return (
@@ -26,8 +24,9 @@ export const CopyIcon = ({ itemRef, index }: TProps) => {
         dispatch(saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
         dispatch(showCopyContainer())
         const itemToCopy = store.getState().items[index]
-        const itemHtml = itemRef.current.resizable?.innerHTML || ''
-        const item = { ...itemToCopy, previewHtml: cleanHtml(itemHtml) }
+        const html = (e.target as HTMLElement)!.closest('.item')!.querySelector('.item-paper')!.innerHTML
+        const cleanedHtml = cleanHtml(html)
+        const item = { ...itemToCopy, previewHtml: cleanedHtml }
         dispatch(addItemIntoCopyContainer(item))
       }}
     >

@@ -1,4 +1,3 @@
-import { TRefResizable } from 'client/types'
 import 'ag-grid-community/styles/ag-grid.css'
 import 'ag-grid-community/styles/ag-theme-alpine.css'
 import './agGridCustom.css'
@@ -8,7 +7,6 @@ import { DescriptionHeader } from './DescriptionHeader'
 
 type TProps = {
   index: number
-  itemRef: TRefResizable
 }
 
 // export const DescriptionHeader = () => {
@@ -53,7 +51,7 @@ const rowData = [
   { description: 'description 3', item: 50, qty: 10, price: 500 },
 ]
 
-export const BoqTable = ({ index, itemRef }: TProps) => {
+export const BoqTable = ({ index }: TProps) => {
   const gridRef = useRef(null)
 
   const columnDefs = [
@@ -70,7 +68,7 @@ export const BoqTable = ({ index, itemRef }: TProps) => {
       field: 'description',
       headerName: 'Description',
       headerComponent: DescriptionHeader,
-      headerComponentParams: { index, itemRef },
+      headerComponentParams: { index },
       wrapHeaderText: true,
       autoHeaderHeight: true,
       width: 250,

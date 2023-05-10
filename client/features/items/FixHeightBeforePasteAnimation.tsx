@@ -20,7 +20,6 @@ type TProps = {
 //* we maybe can use onAnimationComplete callback from framer-motion, but need to find a way to pass it, not sure
 
 // todo: move FixHeightBeforePasteAnimation in common folder to the
-// todo: itemRef is not actually an .item, it is somewhere inside, check that
 // todo: instead of set item heights in default object, let's put them on init load and then they will be saved in local storage
 
 export const FixHeightBeforePasteAnimation = ({ height, children }: TProps) => {

@@ -5,15 +5,13 @@ import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { motion } from 'framer-motion'
 import { deleteItem, selectIsLastItem } from '../../features/items/itemsSlice'
 import { tellItemsSavedLocally } from 'client/features/bottom msg/bottomMsgSlice'
-import { TRefResizable } from 'client/types'
 import { cleanHtml } from 'utils/itemsUtils'
 
 type TProps = {
-  itemRef: TRefResizable
   index: number
 }
 
-export const CutIcon = ({ index, itemRef }: TProps) => {
+export const CutIcon = ({ index }: TProps) => {
   const dispatch = useDispatchTyped()
   const isLastItem = useSelectorTyped(selectIsLastItem)
 
@@ -30,8 +28,9 @@ export const CutIcon = ({ index, itemRef }: TProps) => {
         dispatch(saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
         dispatch(showCopyContainer())
         const itemToCut = store.getState().items[index]
-        const itemHtml = itemRef.current.resizable?.innerHTML || ''
-        const item = { ...itemToCut, previewHtml: cleanHtml(itemHtml) }
+        const html = (e.target as HTMLElement)!.closest('.item')!.querySelector('.item-paper')!.innerHTML
+        const cleanedHtml = cleanHtml(html)
+        const item = { ...itemToCut, previewHtml: cleanedHtml }
         dispatch(addItemIntoCopyContainer(item))
         dispatch(deleteItem(itemToCut))
         saveItemsIntoLocalStorage()
