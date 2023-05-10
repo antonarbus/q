@@ -1,15 +1,13 @@
 
-import { TRefResizable } from 'client/types'
 import { BoqHeaderSubtotalText } from './BoqHeaderSubtotalText'
 import { BoqHeaderSubtotalPrice } from './BoqHeaderSubtotalPrice'
 import { BoqHeaderSubtotalCurrency } from './BoqHeaderSubtotalCurrency'
 
 type TProps = {
   index: number
-  itemRef: TRefResizable
 }
 
-export const BoqHeaderSubtotal = ({ index, itemRef }: TProps) => {
+export const BoqHeaderSubtotal = ({ index }: TProps) => {
   return (
     <div
       css={{
@@ -20,7 +18,7 @@ export const BoqHeaderSubtotal = ({ index, itemRef }: TProps) => {
         minWidth: 100
       }}
     >
-      <BoqHeaderSubtotalText index={index} itemRef={itemRef} />
+      <BoqHeaderSubtotalText index={index} />
       <div
         css={{
           display: 'flex',
@@ -30,8 +28,8 @@ export const BoqHeaderSubtotal = ({ index, itemRef }: TProps) => {
           width: '100%'
         }}
       >
-        <BoqHeaderSubtotalPrice index={index} itemRef={itemRef} />
-        <BoqHeaderSubtotalCurrency index={index} itemRef={itemRef} />
+        <BoqHeaderSubtotalPrice index={index} />
+        <BoqHeaderSubtotalCurrency index={index} />
       </div>
     </div>
   )

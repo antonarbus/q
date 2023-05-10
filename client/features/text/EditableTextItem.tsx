@@ -15,7 +15,6 @@ type TProps = {
 
 export const EditableTextItem = ({ index }: TProps) => {
   const dispatch = useDispatchTyped()
-  const itemRef = useRef() as TRefResizable
   const froalaElementRef = useRef() as TRefDiv
   const editorRef = useRef() as TRefAny
   const item = store.getState().items?.[index]
@@ -23,20 +22,16 @@ export const EditableTextItem = ({ index }: TProps) => {
   if (item.type !== 'text editable') return null
 
   function saveHtmlAndHeight() {
-    const height = itemRef.current.resizable?.offsetHeight || 0
+    const height = (froalaElementRef.current as HTMLElement)!.closest('.item-paper')!.clientHeight || 0
     const html = editorRef.current.html.get()
-    const itemHeight = itemRef.current.resizable?.offsetHeight || 0
     dispatch(saveEditableText({ index, html, height }))
-    dispatch(saveItemHeight({ index, height: itemHeight }))
+    dispatch(saveItemHeight({ index, height }))
     saveItemsIntoLocalStorage()
     dispatch(tellItemSavedLocally({ index }))
   }
 
   return (
-    <SortableResizableItemWithActions
-      index={index}
-      itemRef={itemRef}
-    >
+    <SortableResizableItemWithActions index={index} >
       <Froala
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}

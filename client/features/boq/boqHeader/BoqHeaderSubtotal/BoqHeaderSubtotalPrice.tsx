@@ -7,10 +7,9 @@ import { useRef } from 'react'
 
 type TProps = {
   index: number
-  itemRef: TRefResizable
 }
 
-export const BoqHeaderSubtotalPrice = ({ index, itemRef }: TProps) => {
+export const BoqHeaderSubtotalPrice = ({ index }: TProps) => {
   const dispatch = useDispatchTyped()
   const froalaElementRef = useRef() as TRefDiv
   const editorRef = useRef() as TRefAny
@@ -22,7 +21,7 @@ export const BoqHeaderSubtotalPrice = ({ index, itemRef }: TProps) => {
     const height = froalaElementRef.current.offsetHeight || 0
     const html = editorRef.current.html.get()
     const value = parseInt(editorRef.current.$el.text())
-    const itemHeight = itemRef.current.resizable?.offsetHeight || 0
+    const itemHeight = (froalaElementRef.current as HTMLElement)!.closest('.item-paper')!.clientHeight || 0
     dispatch(saveBoqHeaderSubtotalPrice({ index, height, html, value }))
     dispatch(saveItemHeight({ index, height: itemHeight }))
     saveItemsIntoLocalStorage()

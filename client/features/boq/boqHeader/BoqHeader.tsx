@@ -1,14 +1,12 @@
 import { theme } from 'client/theme'
 import { BoqHeaderTitle } from './BoqHeaderTitle'
-import { TRefResizable } from 'client/types'
 import { BoqHeaderSubtotal } from './BoqHeaderSubtotal'
 
 type TProps = {
   index: number
-  itemRef: TRefResizable
 }
 
-export const BoqHeader = ({ index, itemRef }: TProps) => {
+export const BoqHeader = ({ index }: TProps) => {
   return (
     <div
       css={{
@@ -23,8 +21,8 @@ export const BoqHeader = ({ index, itemRef }: TProps) => {
         borderTopRightRadius: 6
       }}
     >
-      <BoqHeaderTitle index={index} itemRef={itemRef} />
-      <BoqHeaderSubtotal index={index} itemRef={itemRef} />
+      <BoqHeaderTitle index={index} />
+      <BoqHeaderSubtotal index={index} />
     </div>
   )
 }

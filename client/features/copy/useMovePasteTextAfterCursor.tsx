@@ -32,7 +32,7 @@ function movePasteTextAfterCursor(e: MouseEvent) {
     return
   }
 
-  const actionsButton = (e.target as Element).closest('.actions-container > *')
+  const actionsButton = (e.target as Element).closest('.actions > *')
 
   if (actionsButton && isPasteTextShown) {
     store.dispatch(hidePasteText())

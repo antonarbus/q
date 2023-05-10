@@ -2,15 +2,14 @@ import { Froala } from 'client/components/Froala'
 import { saveBoqHeaderSubtotalText, saveBoqHeaderTitle, saveItemHeight, tellItemSavedLocally } from 'client/features/items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { store, useDispatchTyped } from 'client/store'
-import { TRefAny, TRefDiv, TRefResizable } from 'client/types'
+import { TRefAny, TRefDiv } from 'client/types'
 import { useRef } from 'react'
 
 type TProps = {
   index: number
-  itemRef: TRefResizable
 }
 
-export const BoqHeaderSubtotalText = ({ index, itemRef }: TProps) => {
+export const BoqHeaderSubtotalText = ({ index }: TProps) => {
   const dispatch = useDispatchTyped()
   const froalaElementRef = useRef() as TRefDiv
   const editorRef = useRef() as TRefAny
@@ -21,7 +20,7 @@ export const BoqHeaderSubtotalText = ({ index, itemRef }: TProps) => {
   function saveHtmlAndHeight() {
     const height = froalaElementRef.current.offsetHeight || 0
     const html = editorRef.current.html.get()
-    const itemHeight = itemRef.current.resizable?.offsetHeight || 0
+    const itemHeight = (froalaElementRef.current as HTMLElement)!.closest('.item-paper')!.clientHeight || 0
     dispatch(saveBoqHeaderSubtotalText({ index, height, html }))
     dispatch(saveItemHeight({ index, height: itemHeight }))
     saveItemsIntoLocalStorage()

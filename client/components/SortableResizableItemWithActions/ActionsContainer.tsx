@@ -4,7 +4,7 @@ type TProps = {
 
 export const ActionsContainer = ({ children }: TProps) => (
   <div
-    className='actions-container'
+    className='actions'
     css={{
       display: 'flex',
       flexDirection: 'column',

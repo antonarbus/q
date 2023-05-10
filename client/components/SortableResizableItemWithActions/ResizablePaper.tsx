@@ -2,21 +2,20 @@ import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { store, useDispatchTyped } from 'client/store'
 import { Resizable } from 're-resizable'
 import { saveItemWidth, tellItemSavedLocally } from '../../features/items/itemsSlice'
-import { TChildren, TRefResizable } from 'client/types'
+import { TChildren } from 'client/types'
 
 interface TProps {
   children: TChildren
   index: number
-  itemRef: TRefResizable
 }
 
-export const ResizablePaper = ({ children, index, itemRef }: TProps) => {
+export const ResizablePaper = ({ children, index }: TProps) => {
   const dispatch = useDispatchTyped()
   const width = store.getState().items[index]?.width
 
   return (
     <Resizable
-      ref={itemRef}
+      className='item-paper'
       // size={{ width, height: 'auto' }}
       css={{
         background: 'white',

@@ -9,17 +9,16 @@ import { DragIcon } from './DragIcon'
 import { useIsDisabledItem } from './useIsDisabledItem'
 import { Msg } from './Msg'
 import { store } from 'client/store'
-import { TChildren, TRefResizable } from 'client/types'
+import { TChildren } from 'client/types'
 import { FixHeightBeforePasteAnimation } from 'client/features/items/FixHeightBeforePasteAnimation'
 import { ReduceOpacityIfPasteHere } from './ReduceOpacityIfPasteHere'
 
 type TProps = {
   index: number
   children: TChildren
-  itemRef: TRefResizable
 }
 
-export const SortableResizableItemWithActions = ({ index, children, itemRef }: TProps) => {
+export const SortableResizableItemWithActions = ({ index, children }: TProps) => {
   const isDisabled = useIsDisabledItem()
   const item = store.getState().items?.[index]
   const height = item.height
@@ -32,11 +31,11 @@ export const SortableResizableItemWithActions = ({ index, children, itemRef }: T
     >
         <ActionsContainer>
           <DragIcon />
-          <CopyIcon itemRef={itemRef} index={index} />
-          <CutIcon itemRef={itemRef} index={index} />
+          <CopyIcon index={index} />
+          <CutIcon index={index} />
           <DeleteIcon index={index} />
         </ActionsContainer>
-        <ResizablePaper index={index} itemRef={itemRef}>
+        <ResizablePaper index={index}>
           <Msg index={index}/>
           <ReduceOpacityIfPasteHere index={index}>
             <FixHeightBeforePasteAnimation height={height}>
