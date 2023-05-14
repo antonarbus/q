@@ -3,11 +3,6 @@ import { TChildren, TRefDiv } from 'client/types'
 import { useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 
-type TProps = {
-  height: number | string | undefined
-  children: TChildren
-}
-
 //* we have slide-in item animation after paste
 //* item height is animated from 0 to 'auto'
 //* if item's children not initiated by Froala or AG-grid yet or not available immediately or smth
@@ -19,10 +14,14 @@ type TProps = {
 //* do not like 'setTimeout' approach, but let it be for now
 //* we probably can use onAnimationComplete callback from 'framer-motion', but need to find a way to pass it, not sure
 
-// todo: move FixHeightBeforePasteAnimation in common folder to the
+type TProps = {
+  height: number | string | undefined
+  children: TChildren
+  updateHeightInStoreCb?: () => void
+}
 // todo: instead of set item heights in default object, let's put them on init load and then they will be saved in local storage
 
-export const FixHeightBeforePasteAnimation = ({ height, children }: TProps) => {
+export const FixHeightDuringAnimation = ({ height, children, updateHeightInStoreCb }: TProps) => {
   const ref = useRef() as TRefDiv
   const delayMs = 1000 * theme.item.animationDuration
 
@@ -30,13 +29,14 @@ export const FixHeightBeforePasteAnimation = ({ height, children }: TProps) => {
     if (!height) return
     setTimeout(() => {
       ref.current.style.removeProperty('height')
+      updateHeightInStoreCb && updateHeightInStoreCb()
     }, delayMs)
   })
 
   return (
     <div
       ref={ref}
-      style={{ height, width: '100%' }}
+      style={{ height: height || 'auto', width: '100%' }}
       className='fix-height-for-element-animation'
     >
       {children}
