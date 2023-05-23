@@ -10,7 +10,7 @@ type TProps = {
   editorRef: TRefAny
   placeholder?: string
   sx?: React.CSSProperties
-  onClickAwayIfHtmChanged?: () => void
+  onClickAwayIfHtmChanged?: ({ showMsg }: {showMsg: boolean}) => void
 }
 
 /**
