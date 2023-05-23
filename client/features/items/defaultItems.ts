@@ -5,7 +5,7 @@ export const defaultItems: ItemsType = [
     id: 'id0',
     type: 'text editable',
     width: 800,
-    height: 73,
+    height: 500,
     msg: '',
     text: {
       html: '<div>editable text</div>',
@@ -68,7 +68,7 @@ export const defaultItems: ItemsType = [
     id: 'id4',
     type: 'text',
     width: 400,
-    height: 73,
+    height: 0,
     msg: '',
     text: {
       html: '<div>not editable text</div>'

@@ -21,7 +21,6 @@ type TProps = {
 export const SortableResizableItemWithActions = ({ index, children }: TProps) => {
   const isDisabled = useIsDisabledItem()
   const item = store.getState().items?.[index]
-  const height = item.height
 
   return (
     <SortableItem
@@ -38,7 +37,7 @@ export const SortableResizableItemWithActions = ({ index, children }: TProps) =>
         <ResizablePaper index={index}>
           <Msg index={index}/>
           <ReduceOpacityIfPasteHere index={index}>
-            <FixHeightDuringAnimation height={height}>
+            <FixHeightDuringAnimation height={item.height}>
               {children}
             </FixHeightDuringAnimation>
           </ReduceOpacityIfPasteHere>
