@@ -10,18 +10,8 @@ type TProps = {
   editorRef: TRefAny
   placeholder?: string
   sx?: React.CSSProperties
-  onClickAwayIfHtmChanged?: ({ showMsg }: {showMsg: boolean}) => void
+  onClickAwayIfHtmChanged?: Function
 }
-
-/**
- * @param padding 0 if not provided
- * @param initHeight may need to preserve height until froala is not instantiated
- * @param initHtml initHtml for initial Froala render
- * @param onClickAwayIfHtmChanged can be used to save current html in redux or sent it somewhere
- * @param froalaElementRef can be used to get an access to the Froala element
- * @param editorRef can be used to get an access to the Froala methods
- * @param sx just styles
- */
 
 export const Froala = ({
   padding,
