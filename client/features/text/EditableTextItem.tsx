@@ -22,7 +22,7 @@ export const EditableTextItem = ({ index }: TProps) => {
   if (item.type !== 'text editable') return null
 
   //! do the same for every item and froala element
-  function saveHtmlAndHeight({ showMsg = true }) {
+  function saveHtmlAndHeight({ showMsg = true } = {}) {
     const height = (froalaElementRef.current as HTMLElement)!.closest('.item-paper')!.clientHeight || 0
     const html = editorRef.current.html.get()
     dispatch(saveEditableText({ index, html, height }))
