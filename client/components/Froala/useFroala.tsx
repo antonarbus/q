@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react'
 
 type TProps = {
   initHtml?: string
-  onClickAwayIfHtmChanged?: () => void
+  onClickAwayIfHtmChanged?: Function
   froalaElementRef: TRefDiv
   editorRef: TRefAny
   placeholder?: string

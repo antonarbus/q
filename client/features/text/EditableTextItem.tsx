@@ -31,13 +31,11 @@ export const EditableTextItem = ({ index }: TProps) => {
     showMsg && dispatch(tellItemSavedLocally({ index }))
   }
 
-  function saveHeightOnInitLoad() {
+  useEffectOnce(() => {
     setTimeout(() => {
       saveHtmlAndHeight({ showMsg: false })
     }, 1000)
-  }
-
-  useEffectOnce(saveHeightOnInitLoad)
+  })
 
   return (
     <SortableResizableItemWithActions index={index} >
