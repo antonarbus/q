@@ -1,7 +1,7 @@
 import { useSelectorTyped } from 'client/store'
 import { ItemsContainer } from './ItemsContainer'
 import { PasteItem } from '../copy/PasteItem'
-import { ItemType } from './types'
+import { TItem } from './types'
 import { EditableTextItem } from '../text/EditableTextItem'
 import { BoqItem } from '../boq/BoqItem'
 
@@ -9,7 +9,7 @@ const equalityFn = (prevItems: any, currentItems: any) => {
   // re-render the list only if item is replaced or new item is added
   const isDifferentLength = prevItems.length !== currentItems.length
   if (isDifferentLength) return false
-  const idsDoNotMatch = prevItems.some((item: ItemType, index: number) => prevItems[index]?.id !== currentItems[index]?.id)
+  const idsDoNotMatch = prevItems.some((item: TItem, index: number) => prevItems[index]?.id !== currentItems[index]?.id)
   if (idsDoNotMatch) return false
   return true
 }
