@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { CopyPlaceType, CopyItemType, PastePosType } from './types'
-import { ItemType } from '../items/types'
+import { TItem } from '../items/types'
 
 type TProps = {
   isShown: boolean
@@ -48,7 +48,7 @@ export const copySlice = createSlice({
       state.isPasteTextShown = false
     },
     pasteItem: (state, action: PayloadAction<{
-      item: ItemType
+      item: TItem
       itemId: string
       pastePos: PastePosType
     }>) => {

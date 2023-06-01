@@ -5,11 +5,11 @@ import { RootState } from 'client/store'
 import { nanoid } from 'nanoid'
 import { CopyPlaceType } from '../copy/types'
 import { defaultItems } from './defaultItems'
-import { ItemBoqType, ItemPasteType, ItemsType } from './types'
+import { TBoqItem, IPasteItem, TItems } from './types'
 import { cleanItem } from 'utils/itemsUtils'
 // import isEqual from 'lodash.isequal'
 
-const initialState: ItemsType = getItemsFromLocalStorage()
+const initialState: TItems = getItemsFromLocalStorage()
 
 const itemsSlice = createSlice({
   name: 'items',
@@ -48,21 +48,21 @@ const itemsSlice = createSlice({
     },
     saveBoqHeaderTitle: (state, action: PayloadAction<{index: number, height: number, html: string}>) => {
       const { index, height, html } = action.payload
-      const boqItem = state[index] as ItemBoqType
+      const boqItem = state[index] as TBoqItem
       const title = boqItem.boq.header.title
       title.height = height
       title.html = html
     },
     saveBoqHeaderSubtotalText: (state, action: PayloadAction<{index: number, height: number, html: string}>) => {
       const { index, height, html } = action.payload
-      const boqItem = state[index] as ItemBoqType
+      const boqItem = state[index] as TBoqItem
       const text = boqItem.boq.header.subtotal.text
       text.height = height
       text.html = html
     },
     saveBoqHeaderSubtotalPrice: (state, action: PayloadAction<{index: number, height: number, html: string, value: number}>) => {
       const { index, height, html, value } = action.payload
-      const boqItem = state[index] as ItemBoqType
+      const boqItem = state[index] as TBoqItem
       const price = boqItem.boq.header.subtotal.price
       price.height = height
       price.html = html
@@ -70,7 +70,7 @@ const itemsSlice = createSlice({
     },
     saveBoqHeaderSubtotalCurrency: (state, action: PayloadAction<{index: number, height: number, html: string}>) => {
       const { index, height, html } = action.payload
-      const boqItem = state[index] as ItemBoqType
+      const boqItem = state[index] as TBoqItem
       const currency = boqItem.boq.header.subtotal.currency
       currency.height = height
       currency.html = html
@@ -84,7 +84,7 @@ const itemsSlice = createSlice({
         const itemsWithoutPasteText = state.filter(item => item.type !== 'paste')
         if (pastePos === 'middle') return itemsWithoutPasteText
         const insertAtIndex = itemsWithoutPasteText.findIndex(item => item.id === itemId) + (pastePos === 'bottom' ? 1 : 0)
-        const pasteTextEl: ItemPasteType = { id: 'paste id', type: 'paste', height: 0, width: 0, msg: '' }
+        const pasteTextEl: IPasteItem = { id: 'paste id', type: 'paste', height: 0, width: 0, msg: '' }
         itemsWithoutPasteText.splice(insertAtIndex, 0, pasteTextEl)
         return itemsWithoutPasteText
       })
@@ -143,7 +143,7 @@ export const selectItemsShape = createSelector(
   {
     memoizeOptions: {
       // resultEqualityCheck: isEqual
-      resultEqualityCheck: (prevItems:ItemsType, currentItems:ItemsType) => {
+      resultEqualityCheck: (prevItems:TItems, currentItems:TItems) => {
         const addedOrDeletedItem = prevItems.length !== currentItems.length
         if (addedOrDeletedItem) return false
         const itemsIdsDoNotMatch = prevItems.some((item, index) => item.id !== currentItems[index]?.id)

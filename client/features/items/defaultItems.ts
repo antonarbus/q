@@ -1,6 +1,6 @@
-import { ItemsType } from './types'
+import { TItems } from './types'
 
-export const defaultItems: ItemsType = [
+export const defaultItems: TItems = [
   {
     id: 'id0',
     type: 'text editable',

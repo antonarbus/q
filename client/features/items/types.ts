@@ -1,11 +1,11 @@
-type CommonItemProps = {
+type TCommonItem = {
   id: string
   width: number
   height: number
   msg: string | React.ReactNode
 }
 
-export type ItemBoqType = CommonItemProps & {
+export type TBoqItem = TCommonItem & {
   type: 'boq'
   boq: {
     header: {
@@ -32,7 +32,7 @@ export type ItemBoqType = CommonItemProps & {
   }
 }
 
-export type ItemTextEditableType = CommonItemProps & {
+export type TTextEditableItem = TCommonItem & {
   type: 'text editable'
   text: {
     html: string
@@ -40,9 +40,9 @@ export type ItemTextEditableType = CommonItemProps & {
   }
 }
 
-export type ItemPasteType = CommonItemProps & {
+export type IPasteItem = TCommonItem & {
   type: 'paste'
 }
 
-export type ItemType = ItemBoqType | ItemTextEditableType | ItemPasteType
-export type ItemsType = ItemType[]
+export type TItem = TBoqItem | TTextEditableItem | IPasteItem
+export type TItems = TItem[]
