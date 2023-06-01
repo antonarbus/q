@@ -40,16 +40,9 @@ export type ItemTextEditableType = CommonItemProps & {
   }
 }
 
-export type ItemTextType = CommonItemProps & {
-  type: 'text'
-  text: {
-    html: string
-  }
-}
-
 export type ItemPasteType = CommonItemProps & {
   type: 'paste'
 }
 
-export type ItemType = ItemBoqType | ItemTextEditableType | ItemTextType | ItemPasteType
+export type ItemType = ItemBoqType | ItemTextEditableType | ItemPasteType
 export type ItemsType = ItemType[]

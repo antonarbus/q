@@ -7,7 +7,7 @@ import { Froala } from 'client/components/Froala'
 import { tellItemSavedLocally, saveEditableText, saveItemHeight } from '../items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { TRefAny, TRefDiv } from 'client/types'
-import { useEffectOnce } from 'react-use'
+import { useSaveItemHeightOnInitLoad } from '../items/useSaveItemHeightOnInitLoad'
 
 type TProps = {
   index: number
@@ -21,21 +21,17 @@ export const EditableTextItem = ({ index }: TProps) => {
 
   if (item.type !== 'text editable') return null
 
-  //! do the same for every item and froala element
-  function saveHtmlAndHeight({ showMsg = true } = {}) {
+  //! do the same for every froala element
+  function saveHtmlAndHeight() {
     const height = (froalaElementRef.current as HTMLElement)!.closest('.item-paper')!.clientHeight || 0
     const html = editorRef.current.html.get()
     dispatch(saveEditableText({ index, html, height }))
     dispatch(saveItemHeight({ index, height }))
     saveItemsIntoLocalStorage()
-    showMsg && dispatch(tellItemSavedLocally({ index }))
+    dispatch(tellItemSavedLocally({ index }))
   }
 
-  useEffectOnce(() => {
-    setTimeout(() => {
-      saveHtmlAndHeight({ showMsg: false })
-    }, 1000)
-  })
+  useSaveItemHeightOnInitLoad({ ref: froalaElementRef, index })
 
   return (
     <SortableResizableItemWithActions index={index} >
