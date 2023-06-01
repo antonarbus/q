@@ -16,19 +16,16 @@ import { useEffect, useRef } from 'react'
 type TProps = {
   height: number | string | undefined
   children: TChildren
-  updateHeightInStoreCb?: () => void
 }
-// todo: instead of set item heights in default object, let's put them on init load and then they will be saved in local storage
 
-export const FixHeightDuringAnimation = ({ height, children, updateHeightInStoreCb }: TProps) => {
+export const FixHeightDuringAnimation = ({ height, children }: TProps) => {
   const ref = useRef() as TRefDiv
   const delayMs = 1000 * theme.item.animationDuration
 
-  useEffect(() => {
+  useEffect(function removeFixedHeightAfterAnimation() {
     if (!height) return
     setTimeout(() => {
       ref.current.style.removeProperty('height')
-      updateHeightInStoreCb?.()
     }, delayMs)
   })
 

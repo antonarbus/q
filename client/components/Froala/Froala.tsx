@@ -26,15 +26,16 @@ export const Froala = ({
   useFroala({ initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder })
 
   return (
-    <FixHeightDuringAnimation height={initHeight}>
-      <div
-        ref={froalaElementRef}
-        css={{
-          padding: padding || 0,
-          wordBreak: 'break-word',
-          ...sx
-        }}
-      />
-    </FixHeightDuringAnimation>
+    <div
+      ref={froalaElementRef}
+      style={{
+        height: initHeight // for animation, will be removed after froala is initialized
+      }}
+      css={{
+        padding: padding || 0,
+        wordBreak: 'break-word',
+        ...sx
+      }}
+    />
   )
 }

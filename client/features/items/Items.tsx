@@ -2,7 +2,6 @@ import { useSelectorTyped } from 'client/store'
 import { ItemsContainer } from './ItemsContainer'
 import { PasteItem } from '../copy/PasteItem'
 import { ItemType } from './types'
-import { TextItem } from '../text/TextItem'
 import { EditableTextItem } from '../text/EditableTextItem'
 import { BoqItem } from '../boq/BoqItem'
 
@@ -21,7 +20,6 @@ export const Items = () => {
   return (
     <ItemsContainer>
       {items.map((item, index) => {
-        if (item.type === 'text') return <TextItem key={item.id} index={index} />
         if (item.type === 'text editable') return <EditableTextItem key={item.id} index={index} />
         if (item.type === 'boq') return <BoqItem key={item.id} index={index} />
         if (item.type === 'paste') return <PasteItem key={item.id} />
