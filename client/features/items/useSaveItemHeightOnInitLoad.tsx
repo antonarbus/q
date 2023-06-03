@@ -20,7 +20,6 @@ export const useSaveItemHeightOnInitLoad = ({ itemRef, index }: TProps) => {
       const height = (itemRef.current as HTMLElement)!.closest('.item-paper')!.clientHeight || 0
       dispatch(saveItemHeight({ index, height }))
       saveItemsIntoLocalStorage()
-      console.log('saved item height on init load')
     }, 1000)
   })
 }
