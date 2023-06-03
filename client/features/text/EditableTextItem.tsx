@@ -4,10 +4,9 @@ import { store, useDispatchTyped } from 'client/store'
 import { useRef } from 'react'
 import { PencilAtBottomRight } from 'client/components/PencilAtBottomRight'
 import { Froala } from 'client/components/Froala'
-import { tellItemSavedLocally, saveEditableText, saveItemHeight } from '../items/itemsSlice'
+import { tellItemSavedLocally, saveEditableText, saveItemHeight, saveTextHeight } from '../items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { TRefAny, TRefDiv } from 'client/types'
-import { useSaveItemHeightOnInitLoad } from '../items/useSaveItemHeightOnInitLoad'
 
 type TProps = {
   index: number
@@ -22,7 +21,7 @@ export const EditableTextItem = ({ index }: TProps) => {
   if (item.type !== 'text editable') return null
 
   //! do the same for every froala element
-  function saveHtmlAndHeight() {
+  function onClickAwayIfHtmChanged() {
     const height = (froalaElementRef.current as HTMLElement)!.closest('.item-paper')!.clientHeight || 0
     const html = editorRef.current.html.get()
     dispatch(saveEditableText({ index, html, height }))
@@ -31,16 +30,18 @@ export const EditableTextItem = ({ index }: TProps) => {
     dispatch(tellItemSavedLocally({ index }))
   }
 
-  useSaveItemHeightOnInitLoad({ ref: froalaElementRef, index })
-
   return (
     <SortableResizableItemWithActions index={index} >
       <Froala
+        index={index}
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
+        initHeight={item.text.height}
         initHtml={item.text.html}
+        onClickAwayIfHtmChanged={onClickAwayIfHtmChanged}
+        placeholder='Type text or drop images, files, links...'
         padding={theme.item.padding}
-        onClickAwayIfHtmChanged={saveHtmlAndHeight}
+        saveHeightReducer={saveTextHeight}
       />
       <PencilAtBottomRight editorRef={editorRef} />
     </SortableResizableItemWithActions>

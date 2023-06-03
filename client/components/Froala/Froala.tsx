@@ -1,8 +1,9 @@
 import { TRefAny, TRefDiv } from 'client/types'
 import { useFroala } from './useFroala'
-import { FixHeightDuringAnimation } from 'client/components/FixHeightDuringAnimation'
+import { AnyAction } from '@reduxjs/toolkit'
 
 type TProps = {
+  index: number
   padding?: number | string
   initHeight?: number | string
   initHtml?: string
@@ -11,19 +12,30 @@ type TProps = {
   placeholder?: string
   sx?: React.CSSProperties
   onClickAwayIfHtmChanged?: Function
+  saveHeightReducer: ({ index, height }: {index: number, height: number}) => AnyAction
 }
 
 export const Froala = ({
-  padding,
+  index,
+  editorRef,
+  froalaElementRef,
   initHeight,
   initHtml,
   onClickAwayIfHtmChanged,
-  froalaElementRef,
-  editorRef,
+  padding,
   placeholder,
+  saveHeightReducer,
   sx
 }: TProps) => {
-  useFroala({ initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder })
+  useFroala({
+    index,
+    initHtml,
+    onClickAwayIfHtmChanged,
+    froalaElementRef,
+    editorRef,
+    placeholder,
+    saveHeightReducer
+  })
 
   return (
     <div

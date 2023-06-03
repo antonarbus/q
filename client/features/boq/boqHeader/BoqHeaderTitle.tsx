@@ -1,5 +1,5 @@
 import { Froala } from 'client/components/Froala'
-import { saveBoqHeaderTitle, saveItemHeight, tellItemSavedLocally } from 'client/features/items/itemsSlice'
+import { saveBoqHeaderTitle, saveBoqHeaderTitleHeight, saveItemHeight, tellItemSavedLocally } from 'client/features/items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { store, useDispatchTyped } from 'client/store'
 import { TRefDiv, TRefAny } from 'client/types'
@@ -18,8 +18,8 @@ export const BoqHeaderTitle = ({ index }: TProps) => {
   if (item.type !== 'boq') return null
   const { html = 'Title', height = 24 } = item.boq.header.title
 
-  function saveHtmlAndHeight() {
-    const height = froalaElementRef.current.offsetHeight || 0
+  function onClickAwayIfHtmChanged() {
+    const height = froalaElementRef.current.clientHeight || 0
     const html = editorRef.current.html.get()
     const itemHeight = (froalaElementRef.current as HTMLElement)!.closest('.item-paper')!.clientHeight || 0
     dispatch(saveBoqHeaderTitle({ index, height, html }))
@@ -30,15 +30,15 @@ export const BoqHeaderTitle = ({ index }: TProps) => {
 
   return (
     <Froala
+      index={index}
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
-      initHtml={html}
       initHeight={height}
-      onClickAwayIfHtmChanged={saveHtmlAndHeight}
+      initHtml={html}
+      onClickAwayIfHtmChanged={onClickAwayIfHtmChanged}
+      saveHeightReducer={saveBoqHeaderTitleHeight}
       placeholder='Title...'
-      sx={{
-        flexGrow: 1
-      }}
+      sx={{ flexGrow: 1 }}
     />
   )
 }

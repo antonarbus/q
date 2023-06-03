@@ -38,6 +38,8 @@ const itemsSlice = createSlice({
       const item = state[index]
       item.height = height
     },
+    //! just name it as text without editable
+    //! maybe split such reducers on more specific (maybe not, checkit)
     saveEditableText: (state, action: PayloadAction<{index: number, height: number, html: string}>) => {
       const { index, height, html } = action.payload
       const item = state[index]
@@ -46,6 +48,13 @@ const itemsSlice = createSlice({
       text.height = height
       text.html = html
     },
+    saveTextHeight: (state, action: PayloadAction<{index: number, height: number}>) => {
+      const { index, height } = action.payload
+      const item = state[index]
+      if (item.type !== 'text editable') return
+      const text = item.text
+      text.height = height
+    },
     saveBoqHeaderTitle: (state, action: PayloadAction<{index: number, height: number, html: string}>) => {
       const { index, height, html } = action.payload
       const boqItem = state[index] as TBoqItem
@@ -53,12 +62,24 @@ const itemsSlice = createSlice({
       title.height = height
       title.html = html
     },
+    saveBoqHeaderTitleHeight: (state, action: PayloadAction<{index: number, height: number}>) => {
+      const { index, height } = action.payload
+      const boqItem = state[index] as TBoqItem
+      const title = boqItem.boq.header.title
+      title.height = height
+    },
     saveBoqHeaderSubtotalText: (state, action: PayloadAction<{index: number, height: number, html: string}>) => {
       const { index, height, html } = action.payload
       const boqItem = state[index] as TBoqItem
       const text = boqItem.boq.header.subtotal.text
       text.height = height
       text.html = html
+    },
+    saveBoqHeaderSubtotalTextHeight: (state, action: PayloadAction<{index: number, height: number}>) => {
+      const { index, height } = action.payload
+      const boqItem = state[index] as TBoqItem
+      const text = boqItem.boq.header.subtotal.text
+      text.height = height
     },
     saveBoqHeaderSubtotalPrice: (state, action: PayloadAction<{index: number, height: number, html: string, value: number}>) => {
       const { index, height, html, value } = action.payload
@@ -68,12 +89,24 @@ const itemsSlice = createSlice({
       price.html = html
       price.value = value
     },
+    saveBoqHeaderSubtotalPriceHeight: (state, action: PayloadAction<{index: number, height: number}>) => {
+      const { index, height } = action.payload
+      const boqItem = state[index] as TBoqItem
+      const price = boqItem.boq.header.subtotal.price
+      price.height = height
+    },
     saveBoqHeaderSubtotalCurrency: (state, action: PayloadAction<{index: number, height: number, html: string}>) => {
       const { index, height, html } = action.payload
       const boqItem = state[index] as TBoqItem
       const currency = boqItem.boq.header.subtotal.currency
       currency.height = height
       currency.html = html
+    },
+    saveBoqHeaderSubtotalCurrencyHeight: (state, action: PayloadAction<{index: number, height: number}>) => {
+      const { index, height } = action.payload
+      const boqItem = state[index] as TBoqItem
+      const currency = boqItem.boq.header.subtotal.currency
+      currency.height = height
     },
   },
   extraReducers: (builder) => {
@@ -127,10 +160,15 @@ export const {
   saveItemWidth,
   saveItemHeight,
   saveEditableText,
+  saveTextHeight,
   saveBoqHeaderTitle,
+  saveBoqHeaderTitleHeight,
   saveBoqHeaderSubtotalText,
+  saveBoqHeaderSubtotalTextHeight,
   saveBoqHeaderSubtotalPrice,
-  saveBoqHeaderSubtotalCurrency
+  saveBoqHeaderSubtotalPriceHeight,
+  saveBoqHeaderSubtotalCurrency,
+  saveBoqHeaderSubtotalCurrencyHeight,
 } = itemsSlice.actions
 export default itemsSlice.reducer
 
