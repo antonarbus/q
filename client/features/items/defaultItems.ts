@@ -3,7 +3,7 @@ import { TItems } from './types'
 export const defaultItems: TItems = [
   {
     id: 'id0',
-    type: 'text editable',
+    type: 'text',
     width: 800,
     height: 0,
     msg: '',
@@ -44,7 +44,7 @@ export const defaultItems: TItems = [
   },
   {
     id: 'id2',
-    type: 'text editable',
+    type: 'text',
     width: 600,
     height: 0,
     msg: '',
@@ -55,7 +55,7 @@ export const defaultItems: TItems = [
   },
   {
     id: 'id3',
-    type: 'text editable',
+    type: 'text',
     width: 500,
     height: 0,
     msg: '',
