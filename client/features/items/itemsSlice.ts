@@ -5,7 +5,7 @@ import { RootState } from 'client/store'
 import { nanoid } from 'nanoid'
 import { CopyPlaceType } from '../copy/types'
 import { defaultItems } from './defaultItems'
-import { TBoqItem, IPasteItem, TItems } from './types'
+import { TBoqItem, TPasteItem, TItems } from './types'
 import { cleanItem } from 'utils/itemsUtils'
 // import isEqual from 'lodash.isequal'
 
@@ -38,12 +38,11 @@ const itemsSlice = createSlice({
       const item = state[index]
       item.height = height
     },
-    //! just name it as text without editable
     //! maybe split such reducers on more specific (maybe not, checkit)
-    saveEditableText: (state, action: PayloadAction<{index: number, height: number, html: string}>) => {
+    saveText: (state, action: PayloadAction<{index: number, height: number, html: string}>) => {
       const { index, height, html } = action.payload
       const item = state[index]
-      if (item.type !== 'text editable') return
+      if (item.type !== 'text') return
       const text = item.text
       text.height = height
       text.html = html
@@ -51,7 +50,7 @@ const itemsSlice = createSlice({
     saveTextHeight: (state, action: PayloadAction<{index: number, height: number}>) => {
       const { index, height } = action.payload
       const item = state[index]
-      if (item.type !== 'text editable') return
+      if (item.type !== 'text') return
       const text = item.text
       text.height = height
     },
@@ -117,7 +116,7 @@ const itemsSlice = createSlice({
         const itemsWithoutPasteText = state.filter(item => item.type !== 'paste')
         if (pastePos === 'middle') return itemsWithoutPasteText
         const insertAtIndex = itemsWithoutPasteText.findIndex(item => item.id === itemId) + (pastePos === 'bottom' ? 1 : 0)
-        const pasteTextEl: IPasteItem = { id: 'paste id', type: 'paste', height: 0, width: 0, msg: '' }
+        const pasteTextEl: TPasteItem = { id: 'paste id', type: 'paste', height: 0, width: 0, msg: '' }
         itemsWithoutPasteText.splice(insertAtIndex, 0, pasteTextEl)
         return itemsWithoutPasteText
       })
@@ -159,7 +158,7 @@ export const {
   removeItemMsg,
   saveItemWidth,
   saveItemHeight,
-  saveEditableText,
+  saveText,
   saveTextHeight,
   saveBoqHeaderTitle,
   saveBoqHeaderTitleHeight,

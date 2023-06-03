@@ -32,17 +32,17 @@ export type TBoqItem = TCommonItem & {
   }
 }
 
-export type TTextEditableItem = TCommonItem & {
-  type: 'text editable'
+export type TTextItem = TCommonItem & {
+  type: 'text'
   text: {
     html: string
     height: number
   }
 }
 
-export type IPasteItem = TCommonItem & {
+export type TPasteItem = TCommonItem & {
   type: 'paste'
 }
 
-export type TItem = TBoqItem | TTextEditableItem | IPasteItem
+export type TItem = TBoqItem | TTextItem | TPasteItem
 export type TItems = TItem[]
