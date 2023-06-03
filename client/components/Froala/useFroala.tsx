@@ -7,6 +7,7 @@ import { useEffect, useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 
 type TProps = {
+  initOnClick?: boolean
   index: number
   initHtml?: string
   onClickAwayIfHtmChanged?: Function
@@ -18,6 +19,7 @@ type TProps = {
 }
 
 export const useFroala = ({
+  initOnClick,
   index,
   initHtml,
   onClickAwayIfHtmChanged,
@@ -31,11 +33,12 @@ export const useFroala = ({
   const resetItemsToDefaults = useSelectorTyped(state => state.offer.toggleOffer)
   const prevHtmlRef = useRef(initHtml) as TRefString
 
-  useEffect(function initFroalaInstance() {
+  function initFroalaInstance() {
     // @ts-ignore
     editorRef.current = new FroalaEditor(
       froalaElementRef.current,
       {
+        initOnClick: initOnClick || false,
         toolbarInline: true,
         // toolbarVisibleWithoutSelection: true,
         toolbarButtons: {
@@ -125,21 +128,19 @@ export const useFroala = ({
         // @ts-ignore
         this.html.set(initHtml || '')
         froalaElementRef.current.style.removeProperty('height') // was needed for animation, now can be removed
+        console.log('froala initiated')
       }
     )
+  }
+
+  useEffect(function startFroala() {
+    initFroalaInstance()
 
     return () => {
       editorRef.current.destroy()
+      console.log('froala destroyed')
     }
   }, [resetItemsToDefaults])
-
-  // useEffect(function clickAwayHandler() {
-  //   froalaElementRef?.current?.addEventListener('focusout', clickAwayHandlerIfHtmlChanged)
-
-  //   return () => {
-  //     froalaElementRef?.current?.removeEventListener('focusout', clickAwayHandlerIfHtmlChanged)
-  //   }
-  // })
 
   useEffect(function putCaretAtTheEndOfTextOnPaddingClick() {
     function focusOnTextIfClickedOnPadding(e: MouseEvent) {
@@ -156,15 +157,14 @@ export const useFroala = ({
     }
   }, [])
 
-  //* in case we did not provide correct height to defaultItems we can correct it by this
   useEffectOnce(function saveHeightToReduxOnInitLoad() {
+    //* in case we did not provide correct height to defaultItems we can correct it by this
     setTimeout(() => {
       const height = froalaElementRef.current.clientHeight || 0
       const itemHeight = (froalaElementRef.current as HTMLElement)!.closest('.item-paper')!.clientHeight || 0
       dispatch(saveHeightReducer({ index, height }))
       dispatch(saveItemHeight({ index, height: itemHeight }))
       saveItemsIntoLocalStorage()
-      console.log('height saved on init load')
     }, 1000)
   })
 

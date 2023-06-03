@@ -1,8 +1,10 @@
 import { TRefAny, TRefDiv } from 'client/types'
 import { useFroala } from './useFroala'
 import { AnyAction } from '@reduxjs/toolkit'
+import parseHtml from 'html-react-parser'
 
 type TProps = {
+  initOnClick?: boolean
   index: number
   padding?: number | string
   initHeight?: number | string
@@ -17,6 +19,7 @@ type TProps = {
 }
 
 export const Froala = ({
+  initOnClick,
   index,
   editorRef,
   froalaElementRef,
@@ -30,6 +33,7 @@ export const Froala = ({
   sx
 }: TProps) => {
   useFroala({
+    initOnClick,
     index,
     initHtml,
     onClickAwayIfHtmChanged,
@@ -51,6 +55,8 @@ export const Froala = ({
         wordBreak: 'break-word',
         ...sx
       }}
-    />
+    >
+      {parseHtml(initHtml || '')}
+    </div>
   )
 }

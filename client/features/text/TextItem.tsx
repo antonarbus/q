@@ -24,6 +24,7 @@ export const TextItem = ({ index }: TProps) => {
   return (
     <SortableResizableItemWithActions index={index} >
       <Froala
+        initOnClick
         index={index}
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
