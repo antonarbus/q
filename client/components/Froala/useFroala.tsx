@@ -1,4 +1,5 @@
 import { AnyAction } from '@reduxjs/toolkit'
+import { saveItemHeight, tellItemSavedLocally } from 'client/features/items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { useDispatchTyped, useSelectorTyped } from 'client/store'
 import { TRefAny, TRefDiv, TRefString } from 'client/types'
@@ -12,7 +13,8 @@ type TProps = {
   froalaElementRef: TRefDiv
   editorRef: TRefAny
   placeholder?: string
-  saveHeightReducer: ({ index, height }: {index: number, height: number}) => AnyAction
+  saveHeightReducer: ({ index, height }: { index: number, height: number }) => AnyAction
+  saveHtmlReducer: ({ index, html }: {index: number, html: string}) => AnyAction
 }
 
 export const useFroala = ({
@@ -22,20 +24,12 @@ export const useFroala = ({
   froalaElementRef,
   editorRef,
   placeholder,
-  saveHeightReducer
+  saveHeightReducer,
+  saveHtmlReducer
 }: TProps) => {
   const dispatch = useDispatchTyped()
   const resetItemsToDefaults = useSelectorTyped(state => state.offer.toggleOffer)
   const prevHtmlRef = useRef(initHtml) as TRefString
-
-  function clickAwayHandlerIfHtmlChanged() {
-    if (!onClickAwayIfHtmChanged) return
-    if (!froalaElementRef?.current) return
-    const updatedHtml = editorRef.current.html.get()
-    if (prevHtmlRef.current === updatedHtml) return
-    onClickAwayIfHtmChanged()
-    prevHtmlRef.current = updatedHtml
-  }
 
   useEffect(function initFroalaInstance() {
     // @ts-ignore
@@ -102,16 +96,27 @@ export const useFroala = ({
           initialized: function () {
           // $('a[href*="froala"]').parent().remove()
           },
-          'codeView.update': clickAwayHandlerIfHtmlChanged,
+          // 'codeView.update': () => onClickAwayIfHtmChanged?.(),
           'paste.afterCleanup': function (clipboardHtml: string) {
             // console.log(this)
             // console.log(clipboardHtml)
             // return clipboardHtml + 'additional text'
           },
-          contentChanged: function () {
-            // Do something here.
-            // this is the editor instance.
-            // console.log(this)
+          contentChanged: () => {
+            if (!froalaElementRef?.current) return
+            const updatedHtml = editorRef.current.html.get()
+            const contentHasChanged = prevHtmlRef.current !== updatedHtml
+            if (!contentHasChanged) return
+            const height = froalaElementRef.current.clientHeight || 0
+            const html = editorRef.current.html.get()
+            const itemHeight = (froalaElementRef.current as HTMLElement)!.closest('.item-paper')!.clientHeight || 0
+            dispatch(saveHtmlReducer({ index, html }))
+            dispatch(saveHeightReducer({ index, height }))
+            dispatch(saveItemHeight({ index, height: itemHeight }))
+            dispatch(tellItemSavedLocally({ index }))
+            onClickAwayIfHtmChanged?.()
+            saveItemsIntoLocalStorage()
+            prevHtmlRef.current = updatedHtml
           }
         },
         key: 'AVB8B-21D4B3B2E1F1G1uB-33B-21cyoF-10yB-7G-7gB-22zzE2wkA-7gC7B7D6B4E4F3D2I3H2C5==',
@@ -128,13 +133,13 @@ export const useFroala = ({
     }
   }, [resetItemsToDefaults])
 
-  useEffect(function clickAwayHandler() {
-    froalaElementRef?.current?.addEventListener('focusout', clickAwayHandlerIfHtmlChanged)
+  // useEffect(function clickAwayHandler() {
+  //   froalaElementRef?.current?.addEventListener('focusout', clickAwayHandlerIfHtmlChanged)
 
-    return () => {
-      froalaElementRef?.current?.removeEventListener('focusout', clickAwayHandlerIfHtmlChanged)
-    }
-  })
+  //   return () => {
+  //     froalaElementRef?.current?.removeEventListener('focusout', clickAwayHandlerIfHtmlChanged)
+  //   }
+  // })
 
   useEffect(function putCaretAtTheEndOfTextOnPaddingClick() {
     function focusOnTextIfClickedOnPadding(e: MouseEvent) {

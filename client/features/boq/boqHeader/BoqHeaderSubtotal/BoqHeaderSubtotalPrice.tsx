@@ -1,8 +1,7 @@
 import { Froala } from 'client/components/Froala'
-import { saveBoqHeaderSubtotalPrice, saveBoqHeaderSubtotalPriceHeight, saveBoqHeaderTitle, saveItemHeight, tellItemSavedLocally } from 'client/features/items/itemsSlice'
-import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
-import { store, useDispatchTyped } from 'client/store'
-import { TRefAny, TRefDiv, TRefResizable } from 'client/types'
+import { saveBoqHeaderSubtotalPriceHeight, saveBoqHeaderSubtotalPriceHtml } from 'client/features/items/itemsSlice'
+import { store } from 'client/store'
+import { TRefAny, TRefDiv } from 'client/types'
 import { useRef } from 'react'
 
 type TProps = {
@@ -10,23 +9,11 @@ type TProps = {
 }
 
 export const BoqHeaderSubtotalPrice = ({ index }: TProps) => {
-  const dispatch = useDispatchTyped()
   const froalaElementRef = useRef() as TRefDiv
   const editorRef = useRef() as TRefAny
   const item = store.getState().items?.[index]
   if (item.type !== 'boq') return null
   const { html = 'Title', height = 24 } = item.boq.header.subtotal.price
-
-  function saveHtmlAndHeight() {
-    const height = froalaElementRef.current.offsetHeight || 0
-    const html = editorRef.current.html.get()
-    const value = parseInt(editorRef.current.$el.text())
-    const itemHeight = (froalaElementRef.current as HTMLElement)!.closest('.item-paper')!.clientHeight || 0
-    dispatch(saveBoqHeaderSubtotalPrice({ index, height, html, value }))
-    dispatch(saveItemHeight({ index, height: itemHeight }))
-    saveItemsIntoLocalStorage()
-    dispatch(tellItemSavedLocally({ index }))
-  }
 
   return (
     <Froala
@@ -35,9 +22,10 @@ export const BoqHeaderSubtotalPrice = ({ index }: TProps) => {
       froalaElementRef={froalaElementRef}
       initHtml={html}
       initHeight={height}
-      onClickAwayIfHtmChanged={saveHtmlAndHeight}
+      onClickAwayIfHtmChanged={() => console.log('logic to save value')}
       placeholder='Price...'
       saveHeightReducer={saveBoqHeaderSubtotalPriceHeight}
+      saveHtmlReducer={saveBoqHeaderSubtotalPriceHtml}
       sx={{
         width: '100%',
         whiteSpace: 'nowrap',
