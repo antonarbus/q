@@ -1,5 +1,5 @@
 import { Froala } from 'client/components/Froala'
-import { saveBoqHeaderSubtotalCurrency, saveBoqHeaderTitle, saveItemHeight, tellItemSavedLocally } from 'client/features/items/itemsSlice'
+import { saveBoqHeaderSubtotalCurrency, saveBoqHeaderSubtotalCurrencyHeight, saveBoqHeaderTitle, saveItemHeight, tellItemSavedLocally } from 'client/features/items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { store, useDispatchTyped } from 'client/store'
 import { TRefAny, TRefDiv, TRefResizable } from 'client/types'
@@ -30,12 +30,14 @@ export const BoqHeaderSubtotalCurrency = ({ index }: TProps) => {
 
   return (
     <Froala
+      index={index}
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
       initHtml={html}
       initHeight={height}
       onClickAwayIfHtmChanged={saveHtmlAndHeight}
       placeholder='$'
+      saveHeightReducer={saveBoqHeaderSubtotalCurrencyHeight}
       sx={{
         textAlign: 'right',
         whiteSpace: 'nowrap',

@@ -30,12 +30,14 @@ export const DescriptionHeader = ({ index }: TProps) => {
 
   return (
     <Froala
+      index={index}
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
       initHtml={html}
       initHeight={height}
       // onClickAwayIfHtmChanged={saveHtmlAndHeight}
       placeholder='Description...'
+      // saveHeightReducer={xxx}
       sx={{
         flexGrow: 1
       }}

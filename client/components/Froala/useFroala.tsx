@@ -1,16 +1,30 @@
-import { useSelectorTyped } from 'client/store'
+import { AnyAction } from '@reduxjs/toolkit'
+import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
+import { useDispatchTyped, useSelectorTyped } from 'client/store'
 import { TRefAny, TRefDiv, TRefString } from 'client/types'
 import { useEffect, useRef } from 'react'
+import { useEffectOnce } from 'react-use'
 
 type TProps = {
+  index: number
   initHtml?: string
   onClickAwayIfHtmChanged?: Function
   froalaElementRef: TRefDiv
   editorRef: TRefAny
   placeholder?: string
+  saveHeightReducer: ({ index, height }: {index: number, height: number}) => AnyAction
 }
 
-export const useFroala = ({ initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder }: TProps) => {
+export const useFroala = ({
+  index,
+  initHtml,
+  onClickAwayIfHtmChanged,
+  froalaElementRef,
+  editorRef,
+  placeholder,
+  saveHeightReducer
+}: TProps) => {
+  const dispatch = useDispatchTyped()
   const resetItemsToDefaults = useSelectorTyped(state => state.offer.toggleOffer)
   const prevHtmlRef = useRef(initHtml) as TRefString
 
@@ -136,6 +150,16 @@ export const useFroala = ({ initHtml, onClickAwayIfHtmChanged, froalaElementRef,
       froalaElementRef?.current?.removeEventListener('click', focusOnTextIfClickedOnPadding)
     }
   }, [])
+
+  //* in case we did not provide correct height to out defaultItems we can correct it by this
+  useEffectOnce(function saveHeightToReduxOnInitLoad() {
+    setTimeout(() => {
+      const height = froalaElementRef.current.clientHeight || 0
+      dispatch(saveHeightReducer({ index, height }))
+      saveItemsIntoLocalStorage()
+      console.log('height saved on init load')
+    }, 1000)
+  })
 
   return { froalaElementRef, editorRef }
 }
