@@ -156,11 +156,13 @@ export const useFroala = ({
     }
   }, [])
 
-  //* in case we did not provide correct height to out defaultItems we can correct it by this
+  //* in case we did not provide correct height to defaultItems we can correct it by this
   useEffectOnce(function saveHeightToReduxOnInitLoad() {
     setTimeout(() => {
       const height = froalaElementRef.current.clientHeight || 0
+      const itemHeight = (froalaElementRef.current as HTMLElement)!.closest('.item-paper')!.clientHeight || 0
       dispatch(saveHeightReducer({ index, height }))
+      dispatch(saveItemHeight({ index, height: itemHeight }))
       saveItemsIntoLocalStorage()
       console.log('height saved on init load')
     }, 1000)
