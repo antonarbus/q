@@ -124,7 +124,7 @@ export const useFroala = ({
       function () {
         // @ts-ignore
         this.html.set(initHtml || '')
-        froalaElementRef.current.style.removeProperty('height') // was needed for animation, now can be removed
+        // froalaElementRef.current.style.removeProperty('height') // was needed for animation, now can be removed
         console.log('froala initiated')
       }
     )

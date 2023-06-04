@@ -3,6 +3,18 @@ import { Global, css } from '@emotion/react'
 export const GlobalStyles = () => (
   <Global
     styles={css`
+      html:after { 
+        content: "Q";
+        font-family: "Roboto","Helvetica","Arial",sans-serif;
+        position: fixed;
+        color: #ddd;
+        top: 50%;                     
+        left: 50%; 
+        translate: -50% -50%;  
+        font-size: 30vh;                  
+        z-index: -1; 
+      }
+
       body{
         background-color: #e9e9e9;
         color: rgba(0, 0, 0, 0.87);

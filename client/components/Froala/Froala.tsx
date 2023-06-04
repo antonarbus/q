@@ -45,7 +45,11 @@ export const Froala = ({
     <div
       ref={froalaElementRef}
       style={{
-        height: initHeight // for animation, will be removed after froala is initialized
+        //! maybe stop playing with height inside froala,
+        //! too much job to save it and recalc every change
+        //! let's think how to gradually animate opacity of whole item
+        //! it only affects initial load
+        // height: initHeight // for animation, will be removed after froala is initialized
       }}
       css={{
         padding: padding || 0,
