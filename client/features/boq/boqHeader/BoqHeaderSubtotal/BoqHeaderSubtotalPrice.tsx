@@ -1,5 +1,5 @@
 import { Froala } from 'client/components/Froala'
-import { saveBoqHeaderSubtotalPriceHeight, saveBoqHeaderSubtotalPriceHtml } from 'client/features/items/itemsSlice'
+import { saveBoqHeaderSubtotalPriceHtml } from 'client/features/items/itemsSlice'
 import { store } from 'client/store'
 import { TRefAny, TRefDiv } from 'client/types'
 import { useRef } from 'react'
@@ -13,7 +13,7 @@ export const BoqHeaderSubtotalPrice = ({ index }: TProps) => {
   const editorRef = useRef() as TRefAny
   const item = store.getState().items?.[index]
   if (item.type !== 'boq') return null
-  const { html = 'Title', height = 24 } = item.boq.header.subtotal.price
+  const { html = 'Title' } = item.boq.header.subtotal.price
 
   return (
     <Froala
@@ -21,10 +21,8 @@ export const BoqHeaderSubtotalPrice = ({ index }: TProps) => {
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
       initHtml={html}
-      initHeight={height}
       onClickAwayIfHtmChanged={() => console.log('logic to save value')}
       placeholder='Price...'
-      saveHeightReducer={saveBoqHeaderSubtotalPriceHeight}
       saveHtmlReducer={saveBoqHeaderSubtotalPriceHtml}
       sx={{
         width: '100%',

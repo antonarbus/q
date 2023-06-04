@@ -1,5 +1,5 @@
 import { Froala } from 'client/components/Froala'
-import { saveBoqHeaderSubtotalTextHeight, saveBoqHeaderSubtotalTextHtml } from 'client/features/items/itemsSlice'
+import { saveBoqHeaderSubtotalTextHtml } from 'client/features/items/itemsSlice'
 import { store } from 'client/store'
 import { TRefAny, TRefDiv } from 'client/types'
 import { useRef } from 'react'
@@ -14,7 +14,10 @@ export const BoqHeaderSubtotalText = ({ index }: TProps) => {
   const item = store.getState().items?.[index]
 
   if (item.type !== 'boq') return null
-  const { html = 'Subtotal', height = 24 } = item.boq.header.subtotal.text
+  const { html = 'Subtotal' } = item.boq.header.subtotal.text
+
+  // todo: make this deletable on complete text removal, show a question in modal
+  // todo: need to bring boolean flag into redux to make it work
 
   return (
     <Froala
@@ -22,8 +25,6 @@ export const BoqHeaderSubtotalText = ({ index }: TProps) => {
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
       initHtml={html}
-      initHeight={height}
-      saveHeightReducer={saveBoqHeaderSubtotalTextHeight}
       saveHtmlReducer={saveBoqHeaderSubtotalTextHtml}
       sx={{
         height: '100%',
@@ -31,8 +32,6 @@ export const BoqHeaderSubtotalText = ({ index }: TProps) => {
         whiteSpace: 'nowrap',
         textAlign: 'right'
       }}
-      // todo: make this deletable on complete text removal, show a question in modal
-      // todo: need to bring boolean flag into redux to make it work
     />
   )
 }

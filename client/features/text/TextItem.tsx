@@ -4,7 +4,7 @@ import { store } from 'client/store'
 import { useRef } from 'react'
 import { PencilAtBottomRight } from 'client/components/PencilAtBottomRight'
 import { Froala } from 'client/components/Froala'
-import { saveTextHeight, saveTextHtml } from '../items/itemsSlice'
+import { saveTextHtml } from '../items/itemsSlice'
 import { TRefAny, TRefDiv } from 'client/types'
 import { useSaveItemHeightOnInitLoad } from '../items/useSaveItemHeightOnInitLoad'
 
@@ -27,11 +27,9 @@ export const TextItem = ({ index }: TProps) => {
         index={index}
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
-        initHeight={item.text.height}
         initHtml={item.text.html}
         placeholder='Type text or drop images, files, links...'
         padding={theme.item.padding}
-        saveHeightReducer={saveTextHeight}
         saveHtmlReducer={saveTextHtml}
       />
       <PencilAtBottomRight editorRef={editorRef} />
