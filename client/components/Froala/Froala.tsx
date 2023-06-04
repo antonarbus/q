@@ -26,8 +26,6 @@ export const Froala = ({ index, editorRef, froalaElementRef, initHtml, onClickAw
         wordBreak: 'break-word',
         ...sx
       }}
-    >
-      {parseHtml(initHtml || '')}
-    </div>
+    />
   )
 }

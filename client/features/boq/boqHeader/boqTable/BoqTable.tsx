@@ -12,14 +12,6 @@ type TProps = {
   index: number
 }
 
-// export const DescriptionHeader = () => {
-//   return (
-//     <span>
-//       Description
-//     </span>
-//   )
-// }
-
 export const RowNumRenderer = ({ value }) => {
   return (
     <span
@@ -70,7 +62,7 @@ export const BoqTable = ({ index }: TProps) => {
     {
       field: 'description',
       headerName: 'Description',
-      // headerComponent: BoqColumnNameDescription,
+      headerComponent: BoqColumnNameDescription,
       headerComponentParams: { index },
       wrapHeaderText: true,
       autoHeaderHeight: true,
@@ -84,7 +76,7 @@ export const BoqTable = ({ index }: TProps) => {
     {
       field: 'item',
       headerName: 'Item',
-      // headerComponent: BoqColumnNameItem,
+      headerComponent: BoqColumnNameItem,
       headerComponentParams: { index },
       wrapHeaderText: true,
       autoHeaderHeight: true,
@@ -97,7 +89,7 @@ export const BoqTable = ({ index }: TProps) => {
     {
       field: 'qty',
       headerName: 'Qty',
-      // headerComponent: BoqColumnNameQty,
+      headerComponent: BoqColumnNameQty,
       headerComponentParams: { index },
       wrapHeaderText: true,
       autoHeaderHeight: true,
@@ -106,7 +98,7 @@ export const BoqTable = ({ index }: TProps) => {
     {
       field: 'price',
       headerName: 'Price',
-      // headerComponent: BoqColumnNamePrice,
+      headerComponent: BoqColumnNamePrice,
       headerComponentParams: { index },
       wrapHeaderText: true,
       autoHeaderHeight: true,
