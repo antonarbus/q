@@ -11,40 +11,32 @@ export type TBoqItem = TCommonItem & {
     header: {
       title: {
         html: string
-        height: number
       }
       subtotal: {
         text: {
           html: string
-          height: number
         }
         price: {
           value: number
           html: string
-          height: number
         },
         currency: {
           html: string
-          height: number
         }
       }
     },
     column: {
       description: {
         html: string
-        height: number
       },
       item: {
         html: string
-        height: number
       },
       qty: {
         html: string
-        height: number
       },
       price: {
         html: string
-        height: number
       }
     }
   }
@@ -54,7 +46,6 @@ export type TTextItem = TCommonItem & {
   type: 'text'
   text: {
     html: string
-    height: number
   }
 }
 

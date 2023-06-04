@@ -1,5 +1,5 @@
 import { Froala } from 'client/components/Froala'
-import { saveBoqColumnNamePriceHeight, saveBoqColumnNamePriceHtml } from 'client/features/items/itemsSlice'
+import { saveBoqColumnNamePriceHtml } from 'client/features/items/itemsSlice'
 import { store } from 'client/store'
 import { TRefDiv, TRefAny } from 'client/types'
 import { useRef } from 'react'
@@ -14,7 +14,7 @@ export const BoqColumnNamePrice = ({ index }: TProps) => {
   const item = store.getState().items?.[index]
 
   if (item.type !== 'boq') return null
-  const { html = 'Price', height = 15 } = item.boq.column.price
+  const { html = 'Price' } = item.boq.column.price
 
   return (
     <Froala
@@ -22,9 +22,7 @@ export const BoqColumnNamePrice = ({ index }: TProps) => {
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
       initHtml={html}
-      initHeight={height}
       placeholder='Price...'
-      saveHeightReducer={saveBoqColumnNamePriceHeight}
       saveHtmlReducer={saveBoqColumnNamePriceHtml}
 
       sx={{

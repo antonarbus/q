@@ -4,7 +4,6 @@ import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { useDispatchTyped, useSelectorTyped } from 'client/store'
 import { TRefAny, TRefDiv, TRefString } from 'client/types'
 import { useEffect, useRef } from 'react'
-import { useEffectOnce } from 'react-use'
 
 type TProps = {
   index: number
@@ -13,7 +12,6 @@ type TProps = {
   froalaElementRef: TRefDiv
   editorRef: TRefAny
   placeholder?: string
-  saveHeightReducer: ({ index, height }: { index: number, height: number }) => AnyAction
   saveHtmlReducer: ({ index, html }: {index: number, html: string}) => AnyAction
 }
 
@@ -24,7 +22,6 @@ export const useFroala = ({
   froalaElementRef,
   editorRef,
   placeholder,
-  saveHeightReducer,
   saveHtmlReducer
 }: TProps) => {
   const dispatch = useDispatchTyped()
@@ -107,11 +104,9 @@ export const useFroala = ({
             const updatedHtml = editorRef.current.html.get()
             const contentHasChanged = prevHtmlRef.current !== updatedHtml
             if (!contentHasChanged) return
-            const height = froalaElementRef.current.clientHeight || 0
             const html = editorRef.current.html.get()
             const itemHeight = (froalaElementRef.current as HTMLElement)!.closest('.item-paper')!.clientHeight || 0
             dispatch(saveHtmlReducer({ index, html }))
-            dispatch(saveHeightReducer({ index, height }))
             dispatch(saveItemHeight({ index, height: itemHeight }))
             dispatch(tellItemSavedLocally({ index }))
             onClickAwayIfHtmChanged?.()
@@ -124,7 +119,6 @@ export const useFroala = ({
       function () {
         // @ts-ignore
         this.html.set(initHtml || '')
-        // froalaElementRef.current.style.removeProperty('height') // was needed for animation, now can be removed
         console.log('froala initiated')
       }
     )
@@ -153,17 +147,6 @@ export const useFroala = ({
       froalaElementRef?.current?.removeEventListener('click', focusOnTextIfClickedOnPadding)
     }
   }, [])
-
-  useEffectOnce(function saveHeightToReduxOnInitLoad() {
-    //* in case we did not provide correct height to defaultItems we can correct it by this
-    setTimeout(() => {
-      const height = froalaElementRef.current.clientHeight || 0
-      // const itemHeight = (froalaElementRef.current as HTMLElement)!.closest('.item-paper')!.clientHeight || 0
-      dispatch(saveHeightReducer({ index, height }))
-      // dispatch(saveItemHeight({ index, height: itemHeight }))
-      saveItemsIntoLocalStorage()
-    }, 1000)
-  })
 
   return { froalaElementRef, editorRef }
 }

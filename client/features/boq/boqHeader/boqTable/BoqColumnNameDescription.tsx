@@ -1,5 +1,5 @@
 import { Froala } from 'client/components/Froala'
-import { saveBoqColumnNameDescriptionHeight, saveBoqColumnNameDescriptionHtml } from 'client/features/items/itemsSlice'
+import { saveBoqColumnNameDescriptionHtml } from 'client/features/items/itemsSlice'
 import { store } from 'client/store'
 import { TRefDiv, TRefAny } from 'client/types'
 import { useRef } from 'react'
@@ -14,7 +14,7 @@ export const BoqColumnNameDescription = ({ index }: TProps) => {
   const item = store.getState().items?.[index]
 
   if (item.type !== 'boq') return null
-  const { html = 'Description', height = 15 } = item.boq.column.description
+  const { html = 'Description' } = item.boq.column.description
 
   return (
     <Froala
@@ -22,9 +22,7 @@ export const BoqColumnNameDescription = ({ index }: TProps) => {
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
       initHtml={html}
-      initHeight={height}
       placeholder='Description...'
-      saveHeightReducer={saveBoqColumnNameDescriptionHeight}
       saveHtmlReducer={saveBoqColumnNameDescriptionHtml}
 
       sx={{
