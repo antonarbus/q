@@ -24,6 +24,9 @@ export const Froala = ({ index, editorRef, froalaElementRef, initHtml, onClickAw
       css={{
         padding: padding || 0,
         wordBreak: 'break-word',
+        '& .fr-element:hover:not(:focus)': {
+          textShadow: '0px 0px 0.8px'
+        },
         ...sx
       }}
     />
