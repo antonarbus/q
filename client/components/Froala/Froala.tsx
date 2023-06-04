@@ -15,26 +15,8 @@ type TProps = {
   saveHtmlReducer: ({ index, html }: {index: number, html: string}) => AnyAction
 }
 
-export const Froala = ({
-  index,
-  editorRef,
-  froalaElementRef,
-  initHtml,
-  onClickAwayIfHtmChanged,
-  padding,
-  placeholder,
-  saveHtmlReducer,
-  sx
-}: TProps) => {
-  useFroala({
-    index,
-    initHtml,
-    onClickAwayIfHtmChanged,
-    froalaElementRef,
-    editorRef,
-    placeholder,
-    saveHtmlReducer
-  })
+export const Froala = ({ index, editorRef, froalaElementRef, initHtml, onClickAwayIfHtmChanged, padding, placeholder, saveHtmlReducer, sx }: TProps) => {
+  useFroala({ index, initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder, saveHtmlReducer })
 
   return (
     <div

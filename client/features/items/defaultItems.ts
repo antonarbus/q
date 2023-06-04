@@ -5,7 +5,7 @@ export const defaultItems: TItems = [
     id: 'id0',
     type: 'text',
     width: 800,
-    height: 0,
+    height: 73,
     msg: '',
     text: {
       html: '<div>editable text</div>',
@@ -15,7 +15,7 @@ export const defaultItems: TItems = [
     id: 'id1',
     type: 'boq',
     width: 700,
-    height: 0,
+    height: 347,
     msg: '',
     boq: {
       header: {
@@ -55,7 +55,7 @@ export const defaultItems: TItems = [
     id: 'id2',
     type: 'text',
     width: 600,
-    height: 0,
+    height: 73,
     msg: '',
     text: {
       html: '<div>editable text</div>',
@@ -65,7 +65,7 @@ export const defaultItems: TItems = [
     id: 'id3',
     type: 'text',
     width: 500,
-    height: 0,
+    height: 73,
     msg: '',
     text: {
       html: '<div>editable text</div>',
