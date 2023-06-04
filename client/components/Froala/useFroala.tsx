@@ -33,6 +33,7 @@ export const useFroala = ({
     editorRef.current = new FroalaEditor(
       froalaElementRef.current,
       {
+        initOnClick: true,
         toolbarInline: true,
         // toolbarVisibleWithoutSelection: true,
         toolbarButtons: {
