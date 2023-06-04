@@ -7,7 +7,7 @@ import { IoIosSwap } from 'react-icons/io'
 import logo from './img/logo.svg'
 import { logoutUser } from 'client/features/credentials/logout'
 import { Person as PersonIcon, Settings as SettingsIcon } from '@mui/icons-material'
-import { resetItems } from 'client/modules/localStorage'
+import { resetToDefaultItems } from 'client/modules/localStorage'
 
 const reactIcon = createElement(IoShareOutline, {})
 
@@ -101,7 +101,7 @@ export const navStructure: TMenu[] = [
             id: id(5),
             name: 'Reset to default offer',
             icon: <BiReset />,
-            func: resetItems
+            func: resetToDefaultItems
           },
           {
             id: id(5),
