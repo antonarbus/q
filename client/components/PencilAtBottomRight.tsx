@@ -11,7 +11,7 @@ export const PencilAtBottomRight = ({ editorRef }: TProps) => {
     <PencilIcon
       css={{
         position: 'absolute',
-        top: 5,
+        bottom: 5,
         right: 5,
         color: '#b3b3b3',
         height: 14,

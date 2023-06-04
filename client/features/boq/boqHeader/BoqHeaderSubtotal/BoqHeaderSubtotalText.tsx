@@ -12,12 +12,12 @@ export const BoqHeaderSubtotalText = ({ index }: TProps) => {
   const froalaElementRef = useRef() as TRefDiv
   const editorRef = useRef() as TRefAny
   const item = store.getState().items?.[index]
+
   if (item.type !== 'boq') return null
   const { html = 'Subtotal', height = 24 } = item.boq.header.subtotal.text
 
   return (
     <Froala
-      initOnClick
       index={index}
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
@@ -26,6 +26,7 @@ export const BoqHeaderSubtotalText = ({ index }: TProps) => {
       saveHeightReducer={saveBoqHeaderSubtotalTextHeight}
       saveHtmlReducer={saveBoqHeaderSubtotalTextHtml}
       sx={{
+        height: '100%',
         width: '100%',
         whiteSpace: 'nowrap',
         textAlign: 'right'
