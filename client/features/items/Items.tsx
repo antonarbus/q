@@ -16,16 +16,14 @@ const equalityFn = (prevItems: any, currentItems: any) => {
 
 export const Items = () => {
   const items = useSelectorTyped(state => state.items, equalityFn)
-  //* just to refresh the offer on reset to default items
-  const isOfferToBeReRendered = useSelectorTyped(state => state.offer.toggleOffer)
-  console.log(666)
+  const shouldReRender = useSelectorTyped(state => state.offer.toggleOffer)
 
   return (
     <ItemsContainer>
       {items.map((item, index) => {
-        if (item.type === 'text') return <TextItem key={item.id + isOfferToBeReRendered} index={index} />
-        if (item.type === 'boq') return <BoqItem key={item.id + isOfferToBeReRendered} index={index} />
-        if (item.type === 'paste') return <PasteItem key={item.id + isOfferToBeReRendered} />
+        if (item.type === 'text') return <TextItem key={item.id + shouldReRender} index={index} />
+        if (item.type === 'boq') return <BoqItem key={item.id + shouldReRender} index={index} />
+        if (item.type === 'paste') return <PasteItem key={item.id} />
         return null
       })}
     </ItemsContainer>
