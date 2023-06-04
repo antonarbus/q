@@ -21,9 +21,10 @@ export const Items = () => {
   return (
     <ItemsContainer>
       {items.map((item, index) => {
-        if (item.type === 'text') return <TextItem key={item.id + shouldReRender} index={index} />
-        if (item.type === 'boq') return <BoqItem key={item.id + shouldReRender} index={index} />
-        if (item.type === 'paste') return <PasteItem key={item.id} />
+        const key = item.id + shouldReRender.toString()
+        if (item.type === 'text') return <TextItem key={key} index={index} />
+        if (item.type === 'boq') return <BoqItem key={key} index={index} />
+        if (item.type === 'paste') return <PasteItem key={key} />
         return null
       })}
     </ItemsContainer>

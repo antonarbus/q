@@ -25,7 +25,7 @@ export const useFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froalaElem
     editorRef.current = new FroalaEditor(
       froalaElementRef.current,
       {
-        initOnClick: true,
+        // initOnClick: true,
         toolbarInline: true,
         // toolbarVisibleWithoutSelection: true,
         toolbarButtons: {
@@ -140,6 +140,4 @@ export const useFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froalaElem
       froalaElementRef?.current?.removeEventListener('click', focusOnTextIfClickedOnPadding)
     }
   }, [])
-
-  return { froalaElementRef, editorRef }
 }
