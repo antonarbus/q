@@ -1,6 +1,6 @@
 import { store, useDispatchTyped } from 'client/store'
 import { arrayMoveImmutable } from 'array-move'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { saveItemsOrder, tellItemSavedLocally } from './itemsSlice'
 import { SortableContainer, SortableContainerProps } from 'react-sortable-hoc'
@@ -19,8 +19,17 @@ interface ISortableContainer extends SortableContainerProps {
 
 const DraggableItems: React.ComponentClass<ISortableContainer, any> =
   SortableContainer(({ children }: TProps) => (
-    <div
+    <motion.div
       id='items'
+      initial={{
+        opacity: 0,
+      }}
+      animate={{
+        opacity: 1,
+      }}
+      transition={{
+        delay: 0.5,
+      }}
       css={{
         display: 'flex',
         flexDirection: 'column',
@@ -30,7 +39,7 @@ const DraggableItems: React.ComponentClass<ISortableContainer, any> =
       }}
     >
       {children}
-    </div>
+    </motion.div>
   ))
 
 export const ItemsContainer = ({ children }: TProps) => {
