@@ -15,7 +15,7 @@ export const saveItemsIntoLocalStorage = (items = store.getState().items) => {
   return cleanedItems
 }
 
-export const resetItems = () => {
+export const resetToDefaultItems = () => {
   saveItemsIntoLocalStorage(defaultItems)
   store.dispatch({ type: 'items/resetItemsToDefault' }) // send action as an object, coz if use an action creator function reference a circular reference happens
   store.dispatch(reloadOffer())

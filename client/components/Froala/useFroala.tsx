@@ -1,9 +1,10 @@
 import { AnyAction } from '@reduxjs/toolkit'
 import { saveItemHeight, tellItemSavedLocally } from 'client/features/items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
-import { useDispatchTyped, useSelectorTyped } from 'client/store'
+import { useDispatchTyped } from 'client/store'
 import { TRefAny, TRefDiv, TRefString } from 'client/types'
 import { useEffect, useRef } from 'react'
+import { useEffectOnce } from 'react-use'
 
 type TProps = {
   index: number
@@ -15,17 +16,8 @@ type TProps = {
   saveHtmlReducer: ({ index, html }: {index: number, html: string}) => AnyAction
 }
 
-export const useFroala = ({
-  index,
-  initHtml,
-  onClickAwayIfHtmChanged,
-  froalaElementRef,
-  editorRef,
-  placeholder,
-  saveHtmlReducer
-}: TProps) => {
+export const useFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder, saveHtmlReducer }: TProps) => {
   const dispatch = useDispatchTyped()
-  const resetItemsToDefaults = useSelectorTyped(state => state.offer.toggleOffer)
   const prevHtmlRef = useRef(initHtml) as TRefString
 
   function initFroalaInstance() {
@@ -125,14 +117,14 @@ export const useFroala = ({
     )
   }
 
-  useEffect(function startFroala() {
+  useEffectOnce(function startFroala() {
     initFroalaInstance()
 
     return () => {
       editorRef.current.destroy()
       console.log('froala destroyed')
     }
-  }, [resetItemsToDefaults])
+  })
 
   useEffect(function putCaretAtTheEndOfTextOnPaddingClick() {
     function focusOnTextIfClickedOnPadding(e: MouseEvent) {
