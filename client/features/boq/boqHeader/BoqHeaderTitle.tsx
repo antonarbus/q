@@ -14,7 +14,7 @@ export const BoqHeaderTitle = ({ index }: TProps) => {
   const item = store.getState().items?.[index]
 
   if (item.type !== 'boq') return null
-  const { html = 'Title' } = item.boq.header.title
+  const html = item.boq.header.title.html
 
   return (
     <Froala
