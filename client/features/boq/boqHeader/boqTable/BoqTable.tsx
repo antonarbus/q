@@ -3,7 +3,10 @@ import 'ag-grid-community/styles/ag-theme-alpine.css'
 import './agGridCustom.css'
 import { AgGridReact } from 'ag-grid-react'
 import { useRef } from 'react'
-import { DescriptionHeader } from './DescriptionHeader'
+import { BoqColumnNameDescription } from './BoqColumnNameDescription'
+import { BoqColumnNameQty } from './BoqColumnNameQty'
+import { BoqColumnNamePrice } from './BoqColumnNamePrice'
+import { BoqColumnNameItem } from './BoqColumnNameItem'
 
 type TProps = {
   index: number
@@ -67,7 +70,7 @@ export const BoqTable = ({ index }: TProps) => {
     {
       field: 'description',
       headerName: 'Description',
-      headerComponent: DescriptionHeader,
+      headerComponent: BoqColumnNameDescription,
       headerComponentParams: { index },
       wrapHeaderText: true,
       autoHeaderHeight: true,
@@ -81,6 +84,10 @@ export const BoqTable = ({ index }: TProps) => {
     {
       field: 'item',
       headerName: 'Item',
+      headerComponent: BoqColumnNameItem,
+      headerComponentParams: { index },
+      wrapHeaderText: true,
+      autoHeaderHeight: true,
       width: 200,
       minWidth: 200,
       wrapText: true,
@@ -90,11 +97,19 @@ export const BoqTable = ({ index }: TProps) => {
     {
       field: 'qty',
       headerName: 'Qty',
+      headerComponent: BoqColumnNameQty,
+      headerComponentParams: { index },
+      wrapHeaderText: true,
+      autoHeaderHeight: true,
       cellStyle: { justifyContent: 'center' }
     },
     {
       field: 'price',
       headerName: 'Price',
+      headerComponent: BoqColumnNamePrice,
+      headerComponentParams: { index },
+      wrapHeaderText: true,
+      autoHeaderHeight: true,
       cellStyle: { justifyContent: 'center' }
     }
   ]

@@ -39,6 +39,24 @@ export const defaultItems: TItems = [
             height: 24,
           }
         }
+      },
+      column: {
+        description: {
+          html: '<b>Description</b>',
+          height: 15
+        },
+        item: {
+          html: '<b>Item</b>',
+          height: 15
+        },
+        qty: {
+          html: '<b>Qty</b>',
+          height: 15
+        },
+        price: {
+          html: '<b>Price</b>',
+          height: 15
+        }
       }
     }
   },

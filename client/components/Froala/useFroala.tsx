@@ -7,7 +7,6 @@ import { useEffect, useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 
 type TProps = {
-  initOnClick?: boolean
   index: number
   initHtml?: string
   onClickAwayIfHtmChanged?: Function
@@ -19,7 +18,6 @@ type TProps = {
 }
 
 export const useFroala = ({
-  initOnClick,
   index,
   initHtml,
   onClickAwayIfHtmChanged,
@@ -38,7 +36,6 @@ export const useFroala = ({
     editorRef.current = new FroalaEditor(
       froalaElementRef.current,
       {
-        initOnClick: initOnClick || false,
         toolbarInline: true,
         // toolbarVisibleWithoutSelection: true,
         toolbarButtons: {

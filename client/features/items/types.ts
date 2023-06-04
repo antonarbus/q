@@ -28,6 +28,24 @@ export type TBoqItem = TCommonItem & {
           height: number
         }
       }
+    },
+    column: {
+      description: {
+        html: string
+        height: number
+      },
+      item: {
+        html: string
+        height: number
+      },
+      qty: {
+        html: string
+        height: number
+      },
+      price: {
+        html: string
+        height: number
+      }
     }
   }
 }

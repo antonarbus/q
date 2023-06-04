@@ -17,7 +17,6 @@ export const BoqHeaderSubtotalPrice = ({ index }: TProps) => {
 
   return (
     <Froala
-      initOnClick
       index={index}
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
