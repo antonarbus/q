@@ -48,7 +48,60 @@ export const defaultItems: TItems = [
         price: {
           html: '<b>Price</b>',
         }
-      }
+      },
+      rows: [
+        {
+          description: {
+            html: 'description 1'
+          },
+          item: {
+            html: '500',
+            value: 500
+          },
+          qty: {
+            html: '1',
+            value: 1
+          },
+          price: {
+            html: '500',
+            value: 500
+          },
+        },
+        {
+          description: {
+            html: 'description 2'
+          },
+          item: {
+            html: '500',
+            value: 500
+          },
+          qty: {
+            html: '2',
+            value: 2
+          },
+          price: {
+            html: '1000',
+            value: 1000
+          },
+        },
+        {
+          description: {
+            html: 'description 3'
+          },
+          item: {
+            html: '500',
+            value: 500
+          },
+          qty: {
+            html: '3',
+            value: 3
+          },
+          price: {
+            html: '1500',
+            value: 1500
+          },
+        },
+      ]
     }
   },
   {

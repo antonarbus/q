@@ -6,6 +6,12 @@ import { TRefAny, TRefDiv, TRefString } from 'client/types'
 import { useEffect, useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 
+type TSaveHtmlReducer = {
+  index: number
+  html: string
+  rowIndex?: number
+}
+
 type TProps = {
   index: number
   initHtml?: string
@@ -13,10 +19,11 @@ type TProps = {
   froalaElementRef: TRefDiv
   editorRef: TRefAny
   placeholder?: string
-  saveHtmlReducer: ({ index, html }: {index: number, html: string}) => AnyAction
+  saveHtmlReducer: ({ index, html, rowIndex }: TSaveHtmlReducer) => AnyAction
+  rowIndex?: number // needed for saveHtmlReducer if froala inside a table row
 }
 
-export const useFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder, saveHtmlReducer }: TProps) => {
+export const useFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder, saveHtmlReducer, rowIndex }: TProps) => {
   const dispatch = useDispatchTyped()
   const prevHtmlRef = useRef(initHtml) as TRefString
 
@@ -99,7 +106,7 @@ export const useFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froalaElem
             if (!contentHasChanged) return
             const html = editorRef.current.html.get()
             const itemHeight = (froalaElementRef.current as HTMLElement)!.closest('.item-paper')!.clientHeight || 0
-            dispatch(saveHtmlReducer({ index, html }))
+            dispatch(saveHtmlReducer({ index, html, rowIndex }))
             dispatch(saveItemHeight({ index, height: itemHeight }))
             dispatch(tellItemSavedLocally({ index }))
             onClickAwayIfHtmChanged?.()

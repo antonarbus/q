@@ -8,6 +8,7 @@ import { BoqColumnNameQty } from './columnNameComponents/BoqColumnNameQty'
 import { BoqColumnNamePrice } from './columnNameComponents/BoqColumnNamePrice'
 import { BoqColumnNameItem } from './columnNameComponents/BoqColumnNameItem'
 import { DescriptionCellRenderer } from './cellRenderers/DescriptionCellRenderer'
+import { store, useSelectorTyped } from 'client/store'
 
 type TProps = {
   index: number
@@ -28,14 +29,18 @@ const defaultColDef = {
   flex: 1
 }
 
-const rowData = [
-  { description: 'description 1', item: 50, qty: 10, price: 500 },
-  { description: 'description 2', item: 50, qty: 10, price: 500 },
-  { description: 'description 3', item: 50, qty: 10, price: 500 },
-]
+// const rowData = [
+//   { description: 'description 1', item: 50, qty: 10, price: 500 },
+//   { description: 'description 2', item: 50, qty: 10, price: 500 },
+//   { description: 'description 3', item: 50, qty: 10, price: 500 },
+// ]
 
 export const BoqTable = ({ index }: TProps) => {
   const gridRef = useRef(null)
+
+  const item = store.getState().items?.[index]
+  if (item.type !== 'boq') return null
+  const rowData = item.boq.rows
 
   const columnDefs = [
     {
