@@ -1,6 +1,6 @@
 import { SortableResizableItemWithActions } from 'client/components/SortableResizableItemWithActions'
 import { BoqHeader } from './boqHeader'
-import { BoqTable } from './boqHeader/boqTable'
+import { BoqTable } from './boqTable'
 import { useRef } from 'react'
 import { TRefDiv } from 'client/types'
 import { useSaveItemHeightOnInitLoad } from '../items/useSaveItemHeightOnInitLoad'

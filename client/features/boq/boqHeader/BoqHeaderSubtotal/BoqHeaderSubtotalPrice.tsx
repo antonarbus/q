@@ -21,7 +21,7 @@ export const BoqHeaderSubtotalPrice = ({ index }: TProps) => {
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
       initHtml={html}
-      onClickAwayIfHtmChanged={() => console.log('logic to save value')}
+      onClickAwayIfHtmChanged={() => console.log('logic to save value should go here')}
       placeholder='Price...'
       saveHtmlReducer={saveBoqHeaderSubtotalPriceHtml}
       sx={{

@@ -3,26 +3,14 @@ import 'ag-grid-community/styles/ag-theme-alpine.css'
 import './agGridCustom.css'
 import { AgGridReact } from 'ag-grid-react'
 import { useRef } from 'react'
-import { BoqColumnNameDescription } from './BoqColumnNameDescription'
-import { BoqColumnNameQty } from './BoqColumnNameQty'
-import { BoqColumnNamePrice } from './BoqColumnNamePrice'
-import { BoqColumnNameItem } from './BoqColumnNameItem'
+import { BoqColumnNameDescription } from './columnNameComponents/BoqColumnNameDescription'
+import { BoqColumnNameQty } from './columnNameComponents/BoqColumnNameQty'
+import { BoqColumnNamePrice } from './columnNameComponents/BoqColumnNamePrice'
+import { BoqColumnNameItem } from './columnNameComponents/BoqColumnNameItem'
+import { DescriptionCellRenderer } from './cellRenderers/DescriptionCellRenderer'
 
 type TProps = {
   index: number
-}
-
-export const RowNumRenderer = ({ value }) => {
-  return (
-    <span
-      css={{
-        fontSize: 10,
-        color: 'grey'
-      }}
-    >
-      { value }
-    </span>
-  )
 }
 
 const defaultColDef = {
@@ -57,7 +45,6 @@ export const BoqTable = ({ index }: TProps) => {
       flex: 0,
       cellStyle: { justifyContent: 'center', textAlign: 'center', padding: 0, fontSize: 10, color: 'grey' },
       valueGetter: (params) => params.node ? params.node.rowIndex + 1 : null,
-      // cellRenderer: RowNumRenderer
     },
     {
       field: 'description',
@@ -71,6 +58,8 @@ export const BoqTable = ({ index }: TProps) => {
       wrapText: true,
       autoHeight: true,
       flex: 2,
+      cellRenderer: DescriptionCellRenderer,
+      cellRendererParams: { index },
       cellStyle: { justifyContent: 'center', textAlign: 'center' }
     },
     {
