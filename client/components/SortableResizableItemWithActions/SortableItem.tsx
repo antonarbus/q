@@ -24,7 +24,7 @@ type TAnimatedProps = {
 
 export const SortableItem: React.ComponentClass<ISortableItem, any> = SortableElement(({ children, i }: TProps) => {
   const ref = useRef() as TRefDiv
-  const id = store.getState().items?.[i].id
+  const id = store.getState().items?.[i]?.id
 
   return (
     <motion.div

@@ -37,7 +37,7 @@ export const SortableResizableItemWithActions = ({ index, children }: TProps) =>
         <ResizablePaper index={index}>
           <Msg index={index}/>
           <ReduceOpacityIfPasteHere index={index}>
-            <FixHeightDuringAnimation height={item.height}>
+            <FixHeightDuringAnimation height={item?.height}>
               {children}
             </FixHeightDuringAnimation>
           </ReduceOpacityIfPasteHere>
