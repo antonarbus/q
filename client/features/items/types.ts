@@ -5,6 +5,24 @@ type TCommonItem = {
   msg: string | React.ReactNode
 }
 
+type TBoqRow = {
+  description: {
+    html: string
+  },
+  item: {
+    html: string
+    value: number
+  },
+  qty: {
+    html: string
+    value: number
+  },
+  price: {
+    html: string
+    value: number
+  },
+}
+
 export type TBoqItem = TCommonItem & {
   type: 'boq'
   boq: {
@@ -38,7 +56,8 @@ export type TBoqItem = TCommonItem & {
       price: {
         html: string
       }
-    }
+    },
+    rows: TBoqRow[]
   }
 }
 

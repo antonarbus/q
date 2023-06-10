@@ -1,7 +1,7 @@
 import { TRefAny, TRefDiv } from 'client/types'
 import { useFroala } from './useFroala'
 import { AnyAction } from '@reduxjs/toolkit'
-import parseHtml from 'html-react-parser'
+// import parseHtml from 'html-react-parser'
 
 type TProps = {
   index: number
@@ -12,11 +12,12 @@ type TProps = {
   placeholder?: string
   sx?: React.CSSProperties
   onClickAwayIfHtmChanged?: Function
+  rowIndex?: number
   saveHtmlReducer: ({ index, html }: {index: number, html: string}) => AnyAction
 }
 
-export const Froala = ({ index, editorRef, froalaElementRef, initHtml, onClickAwayIfHtmChanged, padding, placeholder, saveHtmlReducer, sx }: TProps) => {
-  useFroala({ index, initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder, saveHtmlReducer })
+export const Froala = ({ index, editorRef, froalaElementRef, initHtml, onClickAwayIfHtmChanged, padding, placeholder, saveHtmlReducer, rowIndex, sx }: TProps) => {
+  useFroala({ index, initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder, saveHtmlReducer, rowIndex })
 
   return (
     <div
