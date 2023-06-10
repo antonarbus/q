@@ -9,7 +9,8 @@ type TProps = {
 }
 
 export const DescriptionCellRenderer = ({ index, node, ...rest }: TProps) => {
-  console.log({ index, rest })
+  // console.log({ index, rest })
+  // console.log('DescriptionCellRenderer index', index)
   const froalaElementRef = useRef() as TRefDiv
   const editorRef = useRef() as TRefAny
   const item = store.getState().items?.[index]

@@ -29,13 +29,8 @@ const defaultColDef = {
   flex: 1
 }
 
-// const rowData = [
-//   { description: 'description 1', item: 50, qty: 10, price: 500 },
-//   { description: 'description 2', item: 50, qty: 10, price: 500 },
-//   { description: 'description 3', item: 50, qty: 10, price: 500 },
-// ]
-
 export const BoqTable = ({ index }: TProps) => {
+  // console.log('boqTableIndex', index)
   const gridRef = useRef(null)
 
   const item = store.getState().items?.[index]
