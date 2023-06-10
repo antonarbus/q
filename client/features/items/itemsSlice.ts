@@ -90,8 +90,8 @@ const itemsSlice = createSlice({
       boqItem.boq.column.price.html = html
     },
     saveBoqDescriptionHtml: (state, action: PayloadAction<{index: number, html: string, rowIndex: number}>) => {
-      console.log(666)
       const { index, html, rowIndex } = action.payload
+      console.log({ index, html, rowIndex })
       const boqItem = state[index] as TBoqItem
       boqItem.boq.rows[rowIndex].description.html = html
     },
