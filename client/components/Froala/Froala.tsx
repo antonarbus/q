@@ -13,7 +13,7 @@ type TProps = {
   sx?: React.CSSProperties
   onClickAwayIfHtmChanged?: Function
   rowIndex?: number
-  saveHtmlReducer: ({ index, html }: {index: number, html: string}) => AnyAction
+  saveHtmlReducer: ({ index, html, rowIndex }: {index: number, html: string, rowIndex?: number}) => AnyAction
 }
 
 export const Froala = ({ index, editorRef, froalaElementRef, initHtml, onClickAwayIfHtmChanged, padding, placeholder, saveHtmlReducer, rowIndex, sx }: TProps) => {

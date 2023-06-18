@@ -89,11 +89,13 @@ const itemsSlice = createSlice({
       const boqItem = state[index] as TBoqItem
       boqItem.boq.column.price.html = html
     },
-    saveBoqDescriptionHtml: (state, action: PayloadAction<{index: number, html: string, rowIndex: number}>) => {
+    saveBoqDescriptionHtml: (state, action: PayloadAction<{index: number, html: string, rowIndex?: number}>) => {
       const { index, html, rowIndex } = action.payload
       console.log({ index, html, rowIndex })
       const boqItem = state[index] as TBoqItem
-      boqItem.boq.rows[rowIndex].description.html = html
+      if (rowIndex !== undefined) {
+        boqItem.boq.rows[rowIndex].description.html = html
+      }
     },
   },
   extraReducers: (builder) => {

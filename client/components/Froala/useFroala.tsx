@@ -4,7 +4,6 @@ import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { useDispatchTyped } from 'client/store'
 import { TRefAny, TRefDiv, TRefString } from 'client/types'
 import { useEffect, useRef } from 'react'
-import { useEffectOnce } from 'react-use'
 
 type TSaveHtmlReducer = {
   index: number
@@ -20,12 +19,10 @@ type TProps = {
   editorRef: TRefAny
   placeholder?: string
   saveHtmlReducer: ({ index, html, rowIndex }: TSaveHtmlReducer) => AnyAction
-  rowIndex?: number // needed for saveHtmlReducer if froala inside a table row
+  rowIndex?: number
 }
 
 export const useFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder, saveHtmlReducer, rowIndex }: TProps) => {
-  console.log('useFroala index', index)
-
   const dispatch = useDispatchTyped()
   const prevHtmlRef = useRef(initHtml) as TRefString
 
@@ -132,9 +129,8 @@ export const useFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froalaElem
 
     return () => {
       editorRef.current.destroy()
-      // console.log('froala destroyed')
     }
-  }, [index]) //* haha, without index, index is frozen and if we move item it is not re-initiated and we update wrong item
+  }, [index]) //* without index, index is remembered at first initiation and if we move item it tries to update wrong one
 
   useEffect(function putCaretAtTheEndOfTextOnPaddingClick() {
     function focusOnTextIfClickedOnPadding(e: MouseEvent) {
