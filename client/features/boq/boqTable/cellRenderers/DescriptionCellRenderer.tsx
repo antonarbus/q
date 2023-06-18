@@ -6,17 +6,19 @@ import { useRef } from 'react'
 
 type TProps = {
   index: number
+  node: {
+    rowIndex?: number
+  }
 }
 
 export const DescriptionCellRenderer = ({ index, node, ...rest }: TProps) => {
-  // console.log({ index, rest })
-  // console.log('DescriptionCellRenderer index', index)
   const froalaElementRef = useRef() as TRefDiv
   const editorRef = useRef() as TRefAny
   const item = store.getState().items?.[index]
   const rowIndex = node.rowIndex
 
   if (item.type !== 'boq') return null
+  if (rowIndex === undefined) return null
   const html = item.boq.rows[rowIndex].description.html
 
   return (
