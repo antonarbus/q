@@ -9,6 +9,9 @@ import { BoqColumnNamePrice } from './columnNameComponents/BoqColumnNamePrice'
 import { BoqColumnNameItem } from './columnNameComponents/BoqColumnNameItem'
 import { DescriptionCellRenderer } from './cellRenderers/DescriptionCellRenderer'
 import { store, useSelectorTyped } from 'client/store'
+import { ItemCellRenderer } from './cellRenderers/ItemCellRenderer'
+import { QtyCellRenderer } from './cellRenderers/QtyCellRenderer'
+import { PriceCellRenderer } from './cellRenderers/PriceCellRenderer'
 
 type TProps = {
   index: number
@@ -73,6 +76,8 @@ export const BoqTable = ({ index }: TProps) => {
       minWidth: 200,
       wrapText: true,
       autoHeight: true,
+      cellRenderer: ItemCellRenderer,
+      cellRendererParams: { index },
       cellStyle: { justifyContent: 'center', textAlign: 'center' }
     },
     {
@@ -82,6 +87,8 @@ export const BoqTable = ({ index }: TProps) => {
       headerComponentParams: { index },
       wrapHeaderText: true,
       autoHeaderHeight: true,
+      cellRenderer: QtyCellRenderer,
+      cellRendererParams: { index },
       cellStyle: { justifyContent: 'center' }
     },
     {
@@ -91,6 +98,8 @@ export const BoqTable = ({ index }: TProps) => {
       headerComponentParams: { index },
       wrapHeaderText: true,
       autoHeaderHeight: true,
+      cellRenderer: PriceCellRenderer,
+      cellRendererParams: { index },
       cellStyle: { justifyContent: 'center' }
     }
   ]
