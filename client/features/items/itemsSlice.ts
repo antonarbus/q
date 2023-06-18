@@ -97,6 +97,30 @@ const itemsSlice = createSlice({
         boqItem.boq.rows[rowIndex].description.html = html
       }
     },
+    saveBoqItemHtml: (state, action: PayloadAction<{index: number, html: string, rowIndex?: number}>) => {
+      const { index, html, rowIndex } = action.payload
+      console.log({ index, html, rowIndex })
+      const boqItem = state[index] as TBoqItem
+      if (rowIndex !== undefined) {
+        boqItem.boq.rows[rowIndex].item.html = html
+      }
+    },
+    saveBoqQtyHtml: (state, action: PayloadAction<{index: number, html: string, rowIndex?: number}>) => {
+      const { index, html, rowIndex } = action.payload
+      console.log({ index, html, rowIndex })
+      const boqItem = state[index] as TBoqItem
+      if (rowIndex !== undefined) {
+        boqItem.boq.rows[rowIndex].qty.html = html
+      }
+    },
+    saveBoqPriceHtml: (state, action: PayloadAction<{index: number, html: string, rowIndex?: number}>) => {
+      const { index, html, rowIndex } = action.payload
+      console.log({ index, html, rowIndex })
+      const boqItem = state[index] as TBoqItem
+      if (rowIndex !== undefined) {
+        boqItem.boq.rows[rowIndex].price.html = html
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -158,7 +182,10 @@ export const {
   saveBoqColumnNameItemHtml,
   saveBoqColumnNameQtyHtml,
   saveBoqColumnNamePriceHtml,
-  saveBoqDescriptionHtml
+  saveBoqDescriptionHtml,
+  saveBoqItemHtml,
+  saveBoqQtyHtml,
+  saveBoqPriceHtml,
 } = itemsSlice.actions
 export default itemsSlice.reducer
 
