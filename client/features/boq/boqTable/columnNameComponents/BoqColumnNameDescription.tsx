@@ -24,7 +24,6 @@ export const BoqColumnNameDescription = ({ index }: TProps) => {
       initHtml={html}
       placeholder='Description...'
       saveHtmlReducer={saveBoqColumnNameDescriptionHtml}
-
       sx={{
         flexGrow: 1
       }}

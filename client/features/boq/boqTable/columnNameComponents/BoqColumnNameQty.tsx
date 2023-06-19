@@ -26,7 +26,8 @@ export const BoqColumnNameQty = ({ index }: TProps) => {
       saveHtmlReducer={saveBoqColumnNameQtyHtml}
 
       sx={{
-        flexGrow: 1
+        flexGrow: 1,
+        textAlign: 'center'
       }}
     />
   )

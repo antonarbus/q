@@ -63,7 +63,7 @@ export const BoqTable = ({ index }: TProps) => {
       flex: 2,
       cellRenderer: DescriptionCellRenderer,
       cellRendererParams: { index },
-      cellStyle: { justifyContent: 'center', textAlign: 'center' }
+      cellStyle: { justifyContent: 'left', textAlign: 'center' }
     },
     {
       field: 'item',
