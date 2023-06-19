@@ -10,7 +10,7 @@ type TProps = {
   froalaElementRef: TRefDiv
   editorRef: TRefAny
   placeholder?: string
-  sx?: React.CSSProperties
+  sx?: React.CSSProperties //! put additional styles instead of äsx'
   onClickAwayIfHtmChanged?: Function
   rowIndex?: number
   saveHtmlReducer: ({ index, html, rowIndex }: {index: number, html: string, rowIndex?: number}) => AnyAction
