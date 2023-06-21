@@ -1,9 +1,10 @@
 import { AnyAction } from '@reduxjs/toolkit'
 import { saveItemHeight, tellItemSavedLocally } from 'client/features/items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
-import { useDispatchTyped } from 'client/store'
+import { store, useDispatchTyped } from 'client/store'
 import { TRefAny, TRefDiv, TRefString } from 'client/types'
 import { useEffect, useRef } from 'react'
+import { saveFroalaHeight } from './froalaHeights'
 
 type TSaveHtmlReducer = {
   index: number
@@ -119,6 +120,11 @@ export const useFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froalaElem
         // @ts-ignore
         this.html.set(initHtml || '')
         // console.log('froala initiated')
+
+        // save height of froala element in memory to use it during animation to avoid element height jump
+        setTimeout(() => {
+          saveFroalaHeight({ froalaElementRef })
+        }, 1000)
       }
     )
   }
