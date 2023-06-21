@@ -28,7 +28,10 @@ const defaultColDef = {
   sortable: false,
   unSortIcon: true,
   suppressMenu: true,
-  cellStyle: { alignItems: 'flex-end', lineHeight: 0 },
+  cellStyle: {
+    alignItems: 'flex-end',
+    // lineHeight: 0
+  },
   flex: 1
 }
 
@@ -63,7 +66,12 @@ export const BoqTable = ({ index }: TProps) => {
       flex: 2,
       cellRenderer: DescriptionCellRenderer,
       cellRendererParams: { index },
-      cellStyle: { justifyContent: 'left', textAlign: 'center' }
+      cellStyle: {
+        // justifyContent: 'left',
+        // textAlign: 'center',
+        // flexGrow: 1,
+
+      }
     },
     {
       field: 'item',
@@ -117,7 +125,7 @@ export const BoqTable = ({ index }: TProps) => {
       enableCellTextSelection
       ensureDomOrder
       suppressCellFocus
-      stopEditingWhenCellsLoseFocus
+      // stopEditingWhenCellsLoseFocus
       suppressContextMenu
       css={{
         margin: 5,

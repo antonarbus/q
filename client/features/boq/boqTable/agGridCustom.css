@@ -36,8 +36,12 @@
   line-height: 20px;
 }
 
+.ag-cell-wrapper {
+  width: 100%;
+}
+
 .ag-cell-value {
-  padding: 15px 0px;
+  padding: 0px 0px;
 }
 
 .ag-pinned-left-header {

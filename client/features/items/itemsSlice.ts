@@ -91,7 +91,6 @@ const itemsSlice = createSlice({
     },
     saveBoqDescriptionHtml: (state, action: PayloadAction<{index: number, html: string, rowIndex?: number}>) => {
       const { index, html, rowIndex } = action.payload
-      console.log({ index, html, rowIndex })
       const boqItem = state[index] as TBoqItem
       if (rowIndex !== undefined) {
         boqItem.boq.rows[rowIndex].description.html = html
@@ -99,7 +98,6 @@ const itemsSlice = createSlice({
     },
     saveBoqItemHtml: (state, action: PayloadAction<{index: number, html: string, rowIndex?: number}>) => {
       const { index, html, rowIndex } = action.payload
-      console.log({ index, html, rowIndex })
       const boqItem = state[index] as TBoqItem
       if (rowIndex !== undefined) {
         boqItem.boq.rows[rowIndex].item.html = html
@@ -107,7 +105,6 @@ const itemsSlice = createSlice({
     },
     saveBoqQtyHtml: (state, action: PayloadAction<{index: number, html: string, rowIndex?: number}>) => {
       const { index, html, rowIndex } = action.payload
-      console.log({ index, html, rowIndex })
       const boqItem = state[index] as TBoqItem
       if (rowIndex !== undefined) {
         boqItem.boq.rows[rowIndex].qty.html = html
@@ -115,7 +112,6 @@ const itemsSlice = createSlice({
     },
     saveBoqPriceHtml: (state, action: PayloadAction<{index: number, html: string, rowIndex?: number}>) => {
       const { index, html, rowIndex } = action.payload
-      console.log({ index, html, rowIndex })
       const boqItem = state[index] as TBoqItem
       if (rowIndex !== undefined) {
         boqItem.boq.rows[rowIndex].price.html = html
