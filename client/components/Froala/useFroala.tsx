@@ -105,7 +105,6 @@ export const useFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froalaElem
             if (!contentHasChanged) return
             const html = editorRef.current.html.get()
             const itemHeight = (froalaElementRef.current as HTMLElement)!.closest('.item-paper')!.clientHeight || 0
-            console.log({ index })
             dispatch(saveHtmlReducer({ index, html, rowIndex }))
             dispatch(saveItemHeight({ index, height: itemHeight }))
             dispatch(tellItemSavedLocally({ index }))
@@ -130,7 +129,7 @@ export const useFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froalaElem
     return () => {
       editorRef.current.destroy()
     }
-  }, [index]) //* without index, index is remembered at first initiation and if we move item it tries to update wrong one
+  }, [index]) //* without index, index is remembered at first initiation and if we move item it tries to update wrong item
 
   useEffect(function putCaretAtTheEndOfTextOnPaddingClick() {
     function focusOnTextIfClickedOnPadding(e: MouseEvent) {
