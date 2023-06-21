@@ -24,7 +24,7 @@ export const BoqHeaderTitle = ({ index }: TProps) => {
       initHtml={html}
       saveHtmlReducer={saveBoqHeaderTitleHtml}
       placeholder='Title...'
-      sx={{ flexGrow: 1 }}
+      additionalStyle={{ flexGrow: 1 }}
     />
   )
 }

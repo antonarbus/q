@@ -30,7 +30,7 @@ export const QtyCellRenderer = ({ index, node, ...rest }: TProps) => {
       saveHtmlReducer={saveBoqQtyHtml}
       rowIndex={rowIndex}
       placeholder='Qty...'
-      sx={{ flexGrow: 1 }}
+      additionalStyle={{ flexGrow: 1 }}
     />
   )
 }

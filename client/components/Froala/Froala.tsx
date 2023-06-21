@@ -1,6 +1,7 @@
 import { TRefAny, TRefDiv } from 'client/types'
 import { useFroala } from './useFroala'
 import { AnyAction } from '@reduxjs/toolkit'
+import { Box, SxProps } from '@mui/material'
 // import parseHtml from 'html-react-parser'
 
 type TProps = {
@@ -10,25 +11,49 @@ type TProps = {
   froalaElementRef: TRefDiv
   editorRef: TRefAny
   placeholder?: string
-  sx?: React.CSSProperties //! put additional styles instead of äsx'
+  additionalStyle?: SxProps
   onClickAwayIfHtmChanged?: Function
   rowIndex?: number
-  saveHtmlReducer: ({ index, html, rowIndex }: {index: number, html: string, rowIndex?: number}) => AnyAction
+  saveHtmlReducer: (
+    { index, html, rowIndex }: { index: number, html: string, rowIndex?: number }
+  ) => AnyAction
 }
 
-export const Froala = ({ index, editorRef, froalaElementRef, initHtml, onClickAwayIfHtmChanged, padding, placeholder, saveHtmlReducer, rowIndex, sx }: TProps) => {
-  useFroala({ index, initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder, saveHtmlReducer, rowIndex })
+export const Froala = ({
+  index,
+  editorRef,
+  froalaElementRef,
+  initHtml,
+  onClickAwayIfHtmChanged,
+  padding,
+  placeholder,
+  saveHtmlReducer,
+  rowIndex,
+  additionalStyle
+}: TProps) => {
+  useFroala({
+    index,
+    initHtml,
+    onClickAwayIfHtmChanged,
+    froalaElementRef,
+    editorRef,
+    placeholder,
+    saveHtmlReducer,
+    rowIndex
+  })
 
   return (
-    <div
+    <Box
       ref={froalaElementRef}
-      css={{
+      style={{
         padding: padding || 0,
         wordBreak: 'break-word',
+      }}
+      sx={{
         '& .fr-element:hover:not(:focus)': {
-          textShadow: '0px 0px 0.8px',
+          textShadow: '0px 0px 0.8px'
         },
-        ...sx
+        ...additionalStyle
       }}
     />
   )
