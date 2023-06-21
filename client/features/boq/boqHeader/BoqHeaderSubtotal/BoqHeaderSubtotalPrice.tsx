@@ -24,7 +24,7 @@ export const BoqHeaderSubtotalPrice = ({ index }: TProps) => {
       onClickAwayIfHtmChanged={() => console.log('logic to save value should go here')}
       placeholder='Price...'
       saveHtmlReducer={saveBoqHeaderSubtotalPriceHtml}
-      sx={{
+      additionalStyle={{
         width: '100%',
         whiteSpace: 'nowrap',
         textAlign: 'right'

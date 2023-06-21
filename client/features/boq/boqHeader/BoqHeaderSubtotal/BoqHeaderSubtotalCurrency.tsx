@@ -24,7 +24,7 @@ export const BoqHeaderSubtotalCurrency = ({ index }: TProps) => {
       initHtml={html}
       placeholder='$'
       saveHtmlReducer={saveBoqHeaderSubtotalCurrencyHtml}
-      sx={{
+      additionalStyle={{
         textAlign: 'right',
         whiteSpace: 'nowrap',
         flexShrink: 0,

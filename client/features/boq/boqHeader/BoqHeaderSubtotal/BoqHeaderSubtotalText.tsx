@@ -26,7 +26,7 @@ export const BoqHeaderSubtotalText = ({ index }: TProps) => {
       froalaElementRef={froalaElementRef}
       initHtml={html}
       saveHtmlReducer={saveBoqHeaderSubtotalTextHtml}
-      sx={{
+      additionalStyle={{
         height: '100%',
         width: '100%',
         whiteSpace: 'nowrap',

@@ -30,7 +30,7 @@ export const ItemCellRenderer = ({ index, node, ...rest }: TProps) => {
       saveHtmlReducer={saveBoqItemHtml}
       rowIndex={rowIndex}
       placeholder='Item price...'
-      sx={{ flexGrow: 1 }}
+      additionalStyle={{ flexGrow: 1 }}
     />
   )
 }

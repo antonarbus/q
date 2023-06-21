@@ -30,7 +30,7 @@ export const DescriptionCellRenderer = ({ index, node, ...rest }: TProps) => {
       saveHtmlReducer={saveBoqDescriptionHtml}
       rowIndex={rowIndex}
       placeholder='Description, text, links, files, images...'
-      sx={{ flexGrow: 1 }}
+      additionalStyle={{ flexGrow: 1 }}
     />
   )
 }
