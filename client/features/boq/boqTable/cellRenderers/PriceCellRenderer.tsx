@@ -30,7 +30,9 @@ export const PriceCellRenderer = ({ index, node, ...rest }: TProps) => {
       saveHtmlReducer={saveBoqPriceHtml}
       rowIndex={rowIndex}
       placeholder='Total price...'
-      additionalStyle={{ flexGrow: 1 }}
+      additionalStyle={{
+        textAlign: 'center'
+      }}
     />
   )
 }

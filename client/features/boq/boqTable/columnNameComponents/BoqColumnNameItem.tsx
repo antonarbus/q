@@ -24,9 +24,7 @@ export const BoqColumnNameItem = ({ index }: TProps) => {
       initHtml={html}
       placeholder='Item...'
       saveHtmlReducer={saveBoqColumnNameItemHtml}
-
       additionalStyle={{
-        flexGrow: 1,
         textAlign: 'center'
       }}
     />
