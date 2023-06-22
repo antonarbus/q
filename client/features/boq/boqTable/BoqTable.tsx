@@ -12,12 +12,14 @@ import { store } from 'client/store'
 import { ItemCellRenderer } from './cellRenderers/ItemCellRenderer'
 import { QtyCellRenderer } from './cellRenderers/QtyCellRenderer'
 import { PriceCellRenderer } from './cellRenderers/PriceCellRenderer'
+import { useEffectOnce } from 'react-use'
 
 type TProps = {
   index: number
 }
 
 export const BoqTable = ({ index }: TProps) => {
+  const gridRef = useRef(null)
   const item = store.getState().items?.[index]
   if (item.type !== 'boq') return null
   const rowData = item.boq.rows
@@ -53,7 +55,7 @@ export const BoqTable = ({ index }: TProps) => {
       width: 5,
       resizable: false,
       flex: 0,
-      cellStyle: { justifyContent: 'center', textAlign: 'center', padding: 0, fontSize: 10, color: 'grey' },
+      cellStyle: { justifyContent: 'center', textAlign: 'center', padding: 0, fontSize: 10, color: 'grey', bottom: '-3px' },
       valueGetter: (params) => params.node ? params.node.rowIndex + 1 : null,
     },
     {
@@ -99,7 +101,7 @@ export const BoqTable = ({ index }: TProps) => {
 
   return (
     <AgGridReact
-      // ref={gridRef}
+      ref={gridRef}
       className='ag-theme-alpine'
       domLayout='autoHeight'
       columnDefs={columnDefs}
