@@ -1,7 +1,7 @@
 import { AnyAction } from '@reduxjs/toolkit'
 import { saveItemHeight, tellItemSavedLocally } from 'client/features/items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
-import { store, useDispatchTyped } from 'client/store'
+import { useDispatchTyped } from 'client/store'
 import { TRefAny, TRefDiv, TRefString } from 'client/types'
 import { useEffect, useRef } from 'react'
 import { saveFroalaHeight } from './froalaHeights'
@@ -141,14 +141,27 @@ export const useFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froalaElem
     function focusOnTextIfClickedOnPadding(e: MouseEvent) {
       // https://stackoverflow.com/a/35191761/7239778
       const clickedElement = e.target as HTMLElement
-      if (!clickedElement.matches('.fr-box')) return
-      editorRef.current.selection.setAtEnd(editorRef.current.$el.get(0))
+
+      if (clickedElement.matches('.fr-box')) {
+        editorRef.current.selection.setAtEnd(editorRef.current.$el.get(0))
+      }
+
+      if (clickedElement.matches('.ag-cell')) {
+        // todo: also need to add hover effect on parent froala element
+        editorRef.current.selection.setAtStart(editorRef.current.$el.get(0))
+      }
+
       editorRef.current.selection.restore()
     }
 
     froalaElementRef?.current?.addEventListener('click', focusOnTextIfClickedOnPadding)
+
+    const tableCell = froalaElementRef?.current.closest('.ag-cell') as HTMLElement
+    tableCell?.addEventListener('click', focusOnTextIfClickedOnPadding)
+
     return () => {
       froalaElementRef?.current?.removeEventListener('click', focusOnTextIfClickedOnPadding)
+      tableCell?.removeEventListener('click', focusOnTextIfClickedOnPadding)
     }
   }, [])
 }
