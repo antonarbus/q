@@ -48,7 +48,7 @@ export const Froala = ({
       ref={froalaElementRef}
       style={{
         padding: padding || 0,
-        wordBreak: 'break-word',
+        wordBreak: 'break-word'
       }}
       sx={{
         '& .fr-element:hover:not(:focus)': {

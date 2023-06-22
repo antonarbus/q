@@ -11,3 +11,5 @@ export const saveFroalaHeight = (
   froalaHeights.set(htmlAsKey, froalaHeight)
   console.log(froalaHeight)
 }
+
+//! need to add id for all  froala items and pass it
