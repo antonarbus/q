@@ -17,36 +17,40 @@ type TProps = {
   index: number
 }
 
-const defaultColDef = {
-  width: 150,
-  // minWidth: 150,
-  editable: false,
-  filter: 'agTextColumnFilter',
-  floatingFilter: false,
-  floatingFilterComponentParams: { suppressFilterButton: false },
-  resizable: true,
-  sortable: false,
-  unSortIcon: true,
-  suppressMenu: true,
-  cellStyle: {
-    alignItems: 'flex-end',
-    // lineHeight: 0
-  },
-  flex: 1
-}
-
 export const BoqTable = ({ index }: TProps) => {
-  // console.log('boqTableIndex', index)
-  const gridRef = useRef(null)
-
   const item = store.getState().items?.[index]
   if (item.type !== 'boq') return null
   const rowData = item.boq.rows
 
+  const defaultColDef = {
+    width: 150,
+    // minWidth: 150,
+    editable: false,
+    filter: 'agTextColumnFilter',
+    floatingFilter: false,
+    floatingFilterComponentParams: { suppressFilterButton: false },
+    resizable: true,
+    sortable: false,
+    wrapHeaderText: true,
+    autoHeaderHeight: true,
+    wrapText: true,
+    autoHeight: true,
+    unSortIcon: true,
+    suppressMenu: true,
+    cellStyle: {
+      alignItems: 'flex-end',
+      // lineHeight: 0,
+      // height: '100%',
+      background: 'yellow'
+    },
+    flex: 1,
+    headerComponentParams: { index },
+    cellRendererParams: { index },
+  }
+
   const columnDefs = [
     {
       width: 5,
-      sortable: false,
       resizable: false,
       flex: 0,
       cellStyle: { justifyContent: 'center', textAlign: 'center', padding: 0, fontSize: 10, color: 'grey' },
@@ -56,58 +60,39 @@ export const BoqTable = ({ index }: TProps) => {
       field: 'description',
       headerName: 'Description',
       headerComponent: BoqColumnNameDescription,
-      headerComponentParams: { index },
-      wrapHeaderText: true,
-      autoHeaderHeight: true,
       width: 250,
       minWidth: 250,
-      wrapText: true,
-      autoHeight: true,
       flex: 2,
       cellRenderer: DescriptionCellRenderer,
-      cellRendererParams: { index },
       cellStyle: {
         // justifyContent: 'left',
         // textAlign: 'center',
         // flexGrow: 1,
-
       }
     },
     {
       field: 'item',
       headerName: 'Item',
       headerComponent: BoqColumnNameItem,
-      headerComponentParams: { index },
-      wrapHeaderText: true,
-      autoHeaderHeight: true,
       width: 200,
       minWidth: 200,
       wrapText: true,
       autoHeight: true,
       cellRenderer: ItemCellRenderer,
-      cellRendererParams: { index },
       cellStyle: { justifyContent: 'center', textAlign: 'center' }
     },
     {
       field: 'qty',
       headerName: 'Qty',
       headerComponent: BoqColumnNameQty,
-      headerComponentParams: { index },
-      wrapHeaderText: true,
-      autoHeaderHeight: true,
       cellRenderer: QtyCellRenderer,
-      cellRendererParams: { index },
       cellStyle: { justifyContent: 'center' }
     },
     {
       field: 'price',
       headerName: 'Price',
       headerComponent: BoqColumnNamePrice,
-      headerComponentParams: { index },
-      wrapHeaderText: true,
-      autoHeaderHeight: true,
       cellRenderer: PriceCellRenderer,
-      cellRendererParams: { index },
       cellStyle: { justifyContent: 'center' }
     }
   ]
