@@ -44,6 +44,7 @@ export const Froala = ({
 
   return (
     <Box
+      className='q-froala-element'
       ref={froalaElementRef}
       style={{
         padding: padding || 0,
