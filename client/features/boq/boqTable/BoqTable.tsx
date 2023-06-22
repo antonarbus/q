@@ -41,7 +41,7 @@ export const BoqTable = ({ index }: TProps) => {
       alignItems: 'flex-end',
       // lineHeight: 0,
       // height: '100%',
-      background: 'yellow'
+      // background: 'yellow'
     },
     flex: 1,
     headerComponentParams: { index },
