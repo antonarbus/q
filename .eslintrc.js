@@ -38,7 +38,10 @@ module.exports = {
     'react/no-unescaped-entities': 'off',
     'react/no-children-prop': 'off',
     'react/no-unknown-property': ['error', { ignore: ['css'] }],
-    'comma-dangle': 'off',
+    'comma-dangle': ['error', {
+      arrays: 'only-multiline', // todo: force it, now it is optional
+      objects: 'only-multiline',
+    }],
     '@typescript-eslint/comma-dangle': 'off'
   }
 }

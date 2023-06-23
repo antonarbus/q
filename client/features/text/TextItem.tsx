@@ -4,7 +4,7 @@ import { store } from 'client/store'
 import { useRef } from 'react'
 import { PencilAtBottomRight } from 'client/components/PencilAtBottomRight'
 import { Froala } from 'client/components/Froala'
-import { saveTextHtml } from '../items/itemsSlice'
+import { saveText } from '../items/itemsSlice'
 import { TRefAny, TRefDiv } from 'client/types'
 import { useSaveItemHeightOnInitLoad } from '../items/useSaveItemHeightOnInitLoad'
 
@@ -18,7 +18,6 @@ export const TextItem = ({ index }: TProps) => {
   const item = store.getState().items?.[index]
 
   if (item.type !== 'text') return null
-
   useSaveItemHeightOnInitLoad({ itemRef: froalaElementRef, index })
 
   return (
@@ -30,7 +29,7 @@ export const TextItem = ({ index }: TProps) => {
         initHtml={item.text.html}
         placeholder='Type text or drop images, files, links...'
         padding={theme.item.padding}
-        saveHtmlReducer={saveTextHtml}
+        saveFroalaReducer={saveText}
       />
       <PencilAtBottomRight editorRef={editorRef} />
     </SortableResizableItemWithActions>

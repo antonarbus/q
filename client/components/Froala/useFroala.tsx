@@ -1,16 +1,9 @@
-import { AnyAction } from '@reduxjs/toolkit'
 import { saveItemHeight, tellItemSavedLocally } from 'client/features/items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { useDispatchTyped } from 'client/store'
 import { TRefAny, TRefDiv, TRefString } from 'client/types'
 import { useEffect, useRef } from 'react'
-import { saveFroalaHeight } from './froalaHeights'
-
-type TSaveHtmlReducer = {
-  index: number
-  html: string
-  rowIndex?: number
-}
+import { TSaveFroalaReducer } from './Froala'
 
 type TProps = {
   index: number
@@ -19,11 +12,20 @@ type TProps = {
   froalaElementRef: TRefDiv
   editorRef: TRefAny
   placeholder?: string
-  saveHtmlReducer: ({ index, html, rowIndex }: TSaveHtmlReducer) => AnyAction
+  saveFroalaReducer: TSaveFroalaReducer
   rowIndex?: number
 }
 
-export const useFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder, saveHtmlReducer, rowIndex }: TProps) => {
+export const useFroala = ({
+  index,
+  initHtml,
+  onClickAwayIfHtmChanged,
+  froalaElementRef,
+  editorRef,
+  placeholder,
+  saveFroalaReducer,
+  rowIndex
+}: TProps) => {
   const dispatch = useDispatchTyped()
   const prevHtmlRef = useRef(initHtml) as TRefString
 
@@ -105,8 +107,9 @@ export const useFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froalaElem
             const contentHasChanged = prevHtmlRef.current !== updatedHtml
             if (!contentHasChanged) return
             const html = editorRef.current.html.get()
+            const froalaHeight = froalaElementRef.current?.clientHeight || 0 // save height of froala element in memory to use it during animation to avoid element height jump
+            dispatch(saveFroalaReducer({ index, html, froalaHeight, rowIndex }))
             const itemHeight = (froalaElementRef.current as HTMLElement)!.closest('.item-paper')!.clientHeight || 0
-            dispatch(saveHtmlReducer({ index, html, rowIndex }))
             dispatch(saveItemHeight({ index, height: itemHeight }))
             dispatch(tellItemSavedLocally({ index }))
             onClickAwayIfHtmChanged?.()
@@ -121,10 +124,8 @@ export const useFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froalaElem
         this.html.set(initHtml || '')
         // console.log('froala initiated')
 
-        // save height of froala element in memory to use it during animation to avoid element height jump
-        setTimeout(() => {
-          saveFroalaHeight({ froalaElementRef })
-        }, 1000)
+        // const froalaHeight = froalaElementRef.current?.clientHeight || 0
+        // dispatch(saveFroalaReducer({ index, froalaHeight, rowIndex }))
       }
     )
   }
@@ -147,7 +148,7 @@ export const useFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froalaElem
       }
 
       if (clickedElement.matches('.ag-cell')) {
-        // todo: also need to add hover effect on parent froala element
+        // todo: also need to add hover effect on parent froala element to make font bolder
         editorRef.current.selection.setAtStart(editorRef.current.$el.get(0))
       }
 

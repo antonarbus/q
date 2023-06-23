@@ -4,6 +4,15 @@ import { AnyAction } from '@reduxjs/toolkit'
 import { Box, SxProps } from '@mui/material'
 // import parseHtml from 'html-react-parser'
 
+type TReducerProps = {
+  index: number
+  html: string
+  froalaHeight: number
+  rowIndex?: number
+}
+
+export type TSaveFroalaReducer = ({ index, html, froalaHeight, rowIndex }: TReducerProps) => AnyAction
+
 type TProps = {
   index: number
   padding?: number | string
@@ -14,9 +23,7 @@ type TProps = {
   additionalStyle?: SxProps
   onClickAwayIfHtmChanged?: Function
   rowIndex?: number
-  saveHtmlReducer: (
-    { index, html, rowIndex }: { index: number, html: string, rowIndex?: number }
-  ) => AnyAction
+  saveFroalaReducer: TSaveFroalaReducer
 }
 
 export const Froala = ({
@@ -27,9 +34,9 @@ export const Froala = ({
   onClickAwayIfHtmChanged,
   padding,
   placeholder,
-  saveHtmlReducer,
+  saveFroalaReducer,
   rowIndex,
-  additionalStyle
+  additionalStyle,
 }: TProps) => {
   useFroala({
     index,
@@ -38,8 +45,8 @@ export const Froala = ({
     froalaElementRef,
     editorRef,
     placeholder,
-    saveHtmlReducer,
-    rowIndex
+    saveFroalaReducer,
+    rowIndex,
   })
 
   return (

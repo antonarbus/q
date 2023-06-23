@@ -1,5 +1,5 @@
 import { Froala } from 'client/components/Froala'
-import { saveBoqHeaderSubtotalTextHtml } from 'client/features/items/itemsSlice'
+import { saveBoqHeaderSubtotalText } from 'client/features/items/itemsSlice'
 import { store } from 'client/store'
 import { TRefAny, TRefDiv } from 'client/types'
 import { useRef } from 'react'
@@ -25,7 +25,7 @@ export const BoqHeaderSubtotalText = ({ index }: TProps) => {
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
       initHtml={html}
-      saveHtmlReducer={saveBoqHeaderSubtotalTextHtml}
+      saveFroalaReducer={saveBoqHeaderSubtotalText}
       additionalStyle={{
         height: '100%',
         width: '100%',

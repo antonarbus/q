@@ -1,5 +1,5 @@
 import { Froala } from 'client/components/Froala'
-import { saveBoqHeaderTitleHtml } from 'client/features/items/itemsSlice'
+import { saveBoqHeaderTitle } from 'client/features/items/itemsSlice'
 import { store } from 'client/store'
 import { TRefDiv, TRefAny } from 'client/types'
 import { useRef } from 'react'
@@ -22,7 +22,7 @@ export const BoqHeaderTitle = ({ index }: TProps) => {
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
       initHtml={html}
-      saveHtmlReducer={saveBoqHeaderTitleHtml}
+      saveFroalaReducer={saveBoqHeaderTitle}
       placeholder='Title...'
       additionalStyle={{ flexGrow: 1 }}
     />

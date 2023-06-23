@@ -1,5 +1,5 @@
 import { Froala } from 'client/components/Froala'
-import { saveBoqColumnNameItemHtml } from 'client/features/items/itemsSlice'
+import { saveBoqColumnNameItem } from 'client/features/items/itemsSlice'
 import { store } from 'client/store'
 import { TRefDiv, TRefAny } from 'client/types'
 import { useRef } from 'react'
@@ -23,7 +23,7 @@ export const BoqColumnNameItem = ({ index }: TProps) => {
       froalaElementRef={froalaElementRef}
       initHtml={html}
       placeholder='Item...'
-      saveHtmlReducer={saveBoqColumnNameItemHtml}
+      saveFroalaReducer={saveBoqColumnNameItem}
       additionalStyle={{
         textAlign: 'center'
       }}

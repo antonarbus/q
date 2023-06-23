@@ -1,5 +1,5 @@
 import { Froala } from 'client/components/Froala'
-import { saveBoqHeaderSubtotalCurrencyHtml } from 'client/features/items/itemsSlice'
+import { saveBoqHeaderSubtotalCurrency } from 'client/features/items/itemsSlice'
 import { store } from 'client/store'
 import { TRefAny, TRefDiv } from 'client/types'
 import { useRef } from 'react'
@@ -23,7 +23,7 @@ export const BoqHeaderSubtotalCurrency = ({ index }: TProps) => {
       froalaElementRef={froalaElementRef}
       initHtml={html}
       placeholder='$'
-      saveHtmlReducer={saveBoqHeaderSubtotalCurrencyHtml}
+      saveFroalaReducer={saveBoqHeaderSubtotalCurrency}
       additionalStyle={{
         textAlign: 'right',
         whiteSpace: 'nowrap',
