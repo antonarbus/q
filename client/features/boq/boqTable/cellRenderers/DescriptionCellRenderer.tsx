@@ -1,5 +1,5 @@
 import { Froala } from 'client/components/Froala'
-import { saveBoqDescriptionHtml } from 'client/features/items/itemsSlice'
+import { saveBoqDescription } from 'client/features/items/itemsSlice'
 import { store } from 'client/store'
 import { TRefDiv, TRefAny } from 'client/types'
 import { useRef } from 'react'
@@ -19,7 +19,7 @@ export const DescriptionCellRenderer = ({ index, node, ...rest }: TProps) => {
 
   if (item.type !== 'boq') return null
   if (rowIndex === undefined) return null
-  const html = item.boq.rows[rowIndex].description.html
+  const { html } = item.boq.rows[rowIndex].description
 
   return (
     <Froala
@@ -27,7 +27,7 @@ export const DescriptionCellRenderer = ({ index, node, ...rest }: TProps) => {
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
       initHtml={html}
-      saveHtmlReducer={saveBoqDescriptionHtml}
+      saveFroalaReducer={saveBoqDescription}
       rowIndex={rowIndex}
       placeholder='Description, text, links, files, images...'
       additionalStyle={{

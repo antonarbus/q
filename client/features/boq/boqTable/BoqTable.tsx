@@ -12,7 +12,6 @@ import { store } from 'client/store'
 import { ItemCellRenderer } from './cellRenderers/ItemCellRenderer'
 import { QtyCellRenderer } from './cellRenderers/QtyCellRenderer'
 import { PriceCellRenderer } from './cellRenderers/PriceCellRenderer'
-import { useEffectOnce } from 'react-use'
 
 type TProps = {
   index: number

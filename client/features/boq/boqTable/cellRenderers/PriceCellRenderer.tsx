@@ -1,5 +1,5 @@
 import { Froala } from 'client/components/Froala'
-import { saveBoqPriceHtml } from 'client/features/items/itemsSlice'
+import { saveBoqPrice } from 'client/features/items/itemsSlice'
 import { store } from 'client/store'
 import { TRefDiv, TRefAny } from 'client/types'
 import { useRef } from 'react'
@@ -19,7 +19,7 @@ export const PriceCellRenderer = ({ index, node, ...rest }: TProps) => {
 
   if (item.type !== 'boq') return null
   if (rowIndex === undefined) return null
-  const html = item.boq.rows[rowIndex].price.html
+  const { html } = item.boq.rows[rowIndex].price
 
   return (
     <Froala
@@ -27,7 +27,7 @@ export const PriceCellRenderer = ({ index, node, ...rest }: TProps) => {
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
       initHtml={html}
-      saveHtmlReducer={saveBoqPriceHtml}
+      saveFroalaReducer={saveBoqPrice}
       rowIndex={rowIndex}
       placeholder='Total price...'
       additionalStyle={{

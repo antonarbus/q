@@ -9,6 +9,10 @@ import { TBoqItem, TPasteItem, TItems } from './types'
 import { cleanItem } from 'utils/itemsUtils'
 // import isEqual from 'lodash.isequal'
 
+type TPayloadFroalaUpdate = PayloadAction<{
+  index: number, html: string, froalaHeight: number, rowIndex?: number
+}>
+
 const initialState: TItems = getItemsFromLocalStorage()
 
 const itemsSlice = createSlice({
@@ -38,83 +42,92 @@ const itemsSlice = createSlice({
       const item = state[index]
       item.height = height
     },
-    saveTextHtml: (state, action: PayloadAction<{index: number, html: string}>) => {
-      const { index, html } = action.payload
+    saveText: (state, action: TPayloadFroalaUpdate) => {
+      const { index, html, froalaHeight } = action.payload
       const item = state[index]
       if (item.type !== 'text') return
       item.text.html = html
+      item.text.froalaHeight = froalaHeight
     },
-    saveBoqHeaderTitleHtml: (state, action: PayloadAction<{index: number, html: string}>) => {
-      const { index, html } = action.payload
+    saveBoqHeaderTitle: (state, action: TPayloadFroalaUpdate) => {
+      const { index, html, froalaHeight } = action.payload
       const boqItem = state[index] as TBoqItem
       boqItem.boq.header.title.html = html
+      boqItem.boq.header.title.froalaHeight = froalaHeight
     },
-    saveBoqHeaderSubtotalTextHtml: (state, action: PayloadAction<{index: number, html: string}>) => {
-      const { index, html } = action.payload
+    saveBoqHeaderSubtotalText: (state, action: TPayloadFroalaUpdate) => {
+      const { index, html, froalaHeight } = action.payload
       const boqItem = state[index] as TBoqItem
       boqItem.boq.header.subtotal.text.html = html
+      boqItem.boq.header.subtotal.text.froalaHeight = froalaHeight
     },
-    saveBoqHeaderSubtotalPriceHtml: (state, action: PayloadAction<{index: number, html: string}>) => {
-      const { index, html } = action.payload
+    saveBoqHeaderSubtotalPrice: (state, action: TPayloadFroalaUpdate) => {
+      const { index, html, froalaHeight } = action.payload
       const boqItem = state[index] as TBoqItem
       boqItem.boq.header.subtotal.price.html = html
+      boqItem.boq.header.subtotal.price.froalaHeight = froalaHeight
+      // todo: add logic for value
     },
-    saveBoqHeaderSubtotalPriceValue: (state, action: PayloadAction<{index: number, value: number}>) => {
-      const { index, value } = action.payload
-      const boqItem = state[index] as TBoqItem
-      boqItem.boq.header.subtotal.price.value = value
-    },
-    saveBoqHeaderSubtotalCurrencyHtml: (state, action: PayloadAction<{index: number, html: string}>) => {
-      const { index, html } = action.payload
+    saveBoqHeaderSubtotalCurrency: (state, action: TPayloadFroalaUpdate) => {
+      const { index, html, froalaHeight } = action.payload
       const boqItem = state[index] as TBoqItem
       boqItem.boq.header.subtotal.currency.html = html
+      boqItem.boq.header.subtotal.currency.froalaHeight = froalaHeight
     },
-    saveBoqColumnNameDescriptionHtml: (state, action: PayloadAction<{index: number, html: string}>) => {
-      const { index, html } = action.payload
+    saveBoqColumnNameDescription: (state, action: TPayloadFroalaUpdate) => {
+      const { index, html, froalaHeight } = action.payload
       const boqItem = state[index] as TBoqItem
       boqItem.boq.column.description.html = html
+      boqItem.boq.column.description.froalaHeight = froalaHeight
     },
-    saveBoqColumnNameItemHtml: (state, action: PayloadAction<{index: number, html: string}>) => {
-      const { index, html } = action.payload
+    saveBoqColumnNameItem: (state, action: TPayloadFroalaUpdate) => {
+      const { index, html, froalaHeight } = action.payload
       const boqItem = state[index] as TBoqItem
       boqItem.boq.column.item.html = html
+      boqItem.boq.column.item.froalaHeight = froalaHeight
     },
-    saveBoqColumnNameQtyHtml: (state, action: PayloadAction<{index: number, html: string}>) => {
-      const { index, html } = action.payload
+    saveBoqColumnNameQty: (state, action: TPayloadFroalaUpdate) => {
+      const { index, html, froalaHeight } = action.payload
       const boqItem = state[index] as TBoqItem
       boqItem.boq.column.qty.html = html
+      boqItem.boq.column.qty.froalaHeight = froalaHeight
     },
-    saveBoqColumnNamePriceHtml: (state, action: PayloadAction<{index: number, html: string}>) => {
-      const { index, html } = action.payload
+    saveBoqColumnNamePrice: (state, action: TPayloadFroalaUpdate) => {
+      const { index, html, froalaHeight } = action.payload
       const boqItem = state[index] as TBoqItem
       boqItem.boq.column.price.html = html
+      boqItem.boq.column.price.froalaHeight = froalaHeight
     },
-    saveBoqDescriptionHtml: (state, action: PayloadAction<{index: number, html: string, rowIndex?: number}>) => {
-      const { index, html, rowIndex } = action.payload
+    saveBoqDescription: (state, action: TPayloadFroalaUpdate) => {
+      const { index, html, froalaHeight, rowIndex } = action.payload
       const boqItem = state[index] as TBoqItem
       if (rowIndex !== undefined) {
         boqItem.boq.rows[rowIndex].description.html = html
+        boqItem.boq.rows[rowIndex].description.froalaHeight = froalaHeight
       }
     },
-    saveBoqItemHtml: (state, action: PayloadAction<{index: number, html: string, rowIndex?: number}>) => {
-      const { index, html, rowIndex } = action.payload
+    saveBoqItem: (state, action: TPayloadFroalaUpdate) => {
+      const { index, html, froalaHeight, rowIndex } = action.payload
       const boqItem = state[index] as TBoqItem
       if (rowIndex !== undefined) {
         boqItem.boq.rows[rowIndex].item.html = html
+        boqItem.boq.rows[rowIndex].item.froalaHeight = froalaHeight
       }
     },
-    saveBoqQtyHtml: (state, action: PayloadAction<{index: number, html: string, rowIndex?: number}>) => {
-      const { index, html, rowIndex } = action.payload
+    saveBoqQty: (state, action: TPayloadFroalaUpdate) => {
+      const { index, html, froalaHeight, rowIndex } = action.payload
       const boqItem = state[index] as TBoqItem
       if (rowIndex !== undefined) {
         boqItem.boq.rows[rowIndex].qty.html = html
+        boqItem.boq.rows[rowIndex].qty.froalaHeight = froalaHeight
       }
     },
-    saveBoqPriceHtml: (state, action: PayloadAction<{index: number, html: string, rowIndex?: number}>) => {
-      const { index, html, rowIndex } = action.payload
+    saveBoqPrice: (state, action: TPayloadFroalaUpdate) => {
+      const { index, html, froalaHeight, rowIndex } = action.payload
       const boqItem = state[index] as TBoqItem
       if (rowIndex !== undefined) {
         boqItem.boq.rows[rowIndex].price.html = html
+        boqItem.boq.rows[rowIndex].price.froalaHeight = froalaHeight
       }
     },
   },
@@ -168,25 +181,25 @@ export const {
   removeItemMsg,
   saveItemWidth,
   saveItemHeight,
-  saveTextHtml,
-  saveBoqHeaderTitleHtml,
-  saveBoqHeaderSubtotalTextHtml,
-  saveBoqHeaderSubtotalPriceHtml,
-  saveBoqHeaderSubtotalPriceValue,
-  saveBoqHeaderSubtotalCurrencyHtml,
-  saveBoqColumnNameDescriptionHtml,
-  saveBoqColumnNameItemHtml,
-  saveBoqColumnNameQtyHtml,
-  saveBoqColumnNamePriceHtml,
-  saveBoqDescriptionHtml,
-  saveBoqItemHtml,
-  saveBoqQtyHtml,
-  saveBoqPriceHtml,
+  saveText,
+  saveBoqHeaderTitle,
+  saveBoqHeaderSubtotalText,
+  saveBoqHeaderSubtotalPrice,
+  saveBoqHeaderSubtotalCurrency,
+  saveBoqColumnNameDescription,
+  saveBoqColumnNameItem,
+  saveBoqColumnNameQty,
+  saveBoqColumnNamePrice,
+  saveBoqDescription,
+  saveBoqItem,
+  saveBoqQty,
+  saveBoqPrice,
 } = itemsSlice.actions
 export default itemsSlice.reducer
 
 // selectors
-export const selectIsLastItem = (state: RootState) => state.items.filter((item) => item.type !== 'paste').length === 1
+export const selectIsLastItem = (state: RootState) =>
+  state.items.filter((item) => item.type !== 'paste').length === 1
 
 export const selectItemsShape = createSelector(
   [(state: RootState) => state.items],
@@ -197,7 +210,8 @@ export const selectItemsShape = createSelector(
       resultEqualityCheck: (prevItems:TItems, currentItems:TItems) => {
         const addedOrDeletedItem = prevItems.length !== currentItems.length
         if (addedOrDeletedItem) return false
-        const itemsIdsDoNotMatch = prevItems.some((item, index) => item.id !== currentItems[index]?.id)
+        const itemsIdsDoNotMatch = prevItems.some((item, index) =>
+          item.id !== currentItems[index]?.id)
         if (itemsIdsDoNotMatch) return false
         return true
       }
