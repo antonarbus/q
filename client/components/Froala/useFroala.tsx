@@ -24,7 +24,7 @@ export const useFroala = ({
   editorRef,
   placeholder,
   saveFroalaReducer,
-  rowIndex
+  rowIndex,
 }: TProps) => {
   const dispatch = useDispatchTyped()
   const prevHtmlRef = useRef(initHtml) as TRefString
@@ -49,7 +49,7 @@ export const useFroala = ({
           moreRich: {
             buttons: ['insertLink', 'insertTable', 'insertImage', 'insertVideo', 'emoticons', 'embedly', 'fontAwesome', 'specialCharacters', 'insertFile', 'insertHR', 'html'],
             buttonsVisible: 4,
-          }
+          },
         },
         // pastePlain: true,
         charCounterCount: false,
@@ -69,7 +69,7 @@ export const useFroala = ({
           "'Times New Roman',Times,serif": 'Times New Roman',
           Garamond: 'Garamond',
           'Courier New': 'Courier New',
-          'Brush Script MT': 'Brush Script MT'
+          'Brush Script MT': 'Brush Script MT',
         },
         placeholderText: placeholder || 'Text...',
         tableInsertHelper: false,
@@ -115,7 +115,7 @@ export const useFroala = ({
             onClickAwayIfHtmChanged?.()
             saveItemsIntoLocalStorage()
             prevHtmlRef.current = updatedHtml
-          }
+          },
         },
         key: 'AVB8B-21D4B3B2E1F1G1uB-33B-21cyoF-10yB-7G-7gB-22zzE2wkA-7gC7B7D6B4E4F3D2I3H2C5==',
       },
@@ -145,7 +145,6 @@ export const useFroala = ({
       }
 
       if (clickedElement.matches('.ag-cell')) {
-        // todo: also need to add hover effect on parent froala element to make font bolder
         // editorRef.current.selection.setAtStart(editorRef.current.$el.get(0))
         editorRef.current.selection.setAtEnd(editorRef.current.$el.get(0))
       }

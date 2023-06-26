@@ -15,7 +15,7 @@ export const PencilAtBottomRight = ({ editorRef }: TProps) => {
         right: 5,
         color: '#b3b3b3',
         height: 14,
-        cursor: 'pointer'
+        cursor: 'pointer',
       }}
       onClick={(e) => {
         editorRef.current.commands.selectAll()
