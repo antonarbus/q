@@ -10,7 +10,6 @@ type TProps = {
 }
 
 export const BoqItem = ({ index }: TProps) => {
-  // console.log('BoqItem rendered', index)
   const itemRef = useRef() as TRefDiv
   useSaveItemHeightOnInitLoad({ itemRef, index })
 

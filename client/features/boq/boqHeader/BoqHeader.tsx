@@ -18,7 +18,8 @@ export const BoqHeader = ({ index }: TProps) => {
         padding: '10px 15px',
         color: theme.colors.greyFont,
         borderTopLeftRadius: 6,
-        borderTopRightRadius: 6
+        borderTopRightRadius: 6,
+        // minHeight: 68, // todo: need to save, update, fix and release it via useEffect, otherwise jumps
       }}
     >
       <BoqHeaderTitle index={index} />
