@@ -107,8 +107,8 @@ export const useFroala = ({
             const contentHasChanged = prevHtmlRef.current !== updatedHtml
             if (!contentHasChanged) return
             const html = editorRef.current.html.get()
-            const froalaHeight = froalaElementRef.current?.clientHeight || 0 // save height of froala element in memory to use it during animation to avoid element height jump
-            dispatch(saveFroalaReducer({ index, html, froalaHeight, rowIndex }))
+            const height = froalaElementRef.current?.clientHeight || 0 // save height of froala element in memory to use it during animation to avoid element height jump
+            dispatch(saveFroalaReducer({ index, html, height, rowIndex }))
             const itemHeight = (froalaElementRef.current as HTMLElement)!.closest('.item-paper')!.clientHeight || 0
             dispatch(saveItemHeight({ index, height: itemHeight }))
             dispatch(tellItemSavedLocally({ index }))

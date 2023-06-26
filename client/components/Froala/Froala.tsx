@@ -7,16 +7,17 @@ import { Box, SxProps } from '@mui/material'
 type TReducerProps = {
   index: number
   html: string
-  froalaHeight: number
+  height: number
   rowIndex?: number
 }
 
-export type TSaveFroalaReducer = ({ index, html, froalaHeight, rowIndex }: TReducerProps) => AnyAction
+export type TSaveFroalaReducer = ({ index, html, height, rowIndex }: TReducerProps) => AnyAction
 
 type TProps = {
   index: number
   padding?: number | string
   initHtml?: string
+  height: number
   froalaElementRef: TRefDiv
   editorRef: TRefAny
   placeholder?: string
@@ -31,6 +32,7 @@ export const Froala = ({
   editorRef,
   froalaElementRef,
   initHtml,
+  height,
   onClickAwayIfHtmChanged,
   padding,
   placeholder,
@@ -56,7 +58,7 @@ export const Froala = ({
       style={{
         padding: padding || 0,
         wordBreak: 'break-word',
-        height: initHeight // for animation, will be removed after froala is initialized
+        height // for animation, will be removed after froala is initialized
       }}
       sx={{
         '& .fr-element:hover:not(:focus)': {

@@ -14,7 +14,7 @@ export const BoqHeaderSubtotalText = ({ index }: TProps) => {
   const item = store.getState().items?.[index]
 
   if (item.type !== 'boq') return null
-  const { html = 'Subtotal' } = item.boq.header.subtotal.text
+  const { html = 'Subtotal', height } = item.boq.header.subtotal.text
 
   // todo: make this deletable on complete text removal, show a question in modal
   // todo: need to bring boolean flag into redux to make it work
@@ -25,6 +25,7 @@ export const BoqHeaderSubtotalText = ({ index }: TProps) => {
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
       initHtml={html}
+      height={height}
       saveFroalaReducer={saveBoqHeaderSubtotalText}
       additionalStyle={{
         height: '100%',
