@@ -12,6 +12,8 @@ import { store } from 'client/store'
 import { ItemCellRenderer } from './cellRenderers/ItemCellRenderer'
 import { QtyCellRenderer } from './cellRenderers/QtyCellRenderer'
 import { PriceCellRenderer } from './cellRenderers/PriceCellRenderer'
+import { TBoqRow } from 'client/features/items/types'
+import { ColDef, ValueGetterParams } from 'ag-grid-community'
 
 type TProps = {
   index: number
@@ -49,13 +51,13 @@ export const BoqTable = ({ index }: TProps) => {
     cellRendererParams: { index },
   }
 
-  const columnDefs = [
+  const columnDefs: ColDef<TBoqRow>[] = [
     {
       width: 5,
       resizable: false,
       flex: 0,
       cellStyle: { justifyContent: 'center', textAlign: 'center', padding: 0, fontSize: 10, color: 'grey', bottom: '-3px' },
-      valueGetter: (params) => params.node ? params.node.rowIndex + 1 : null,
+      valueGetter: (params: ValueGetterParams<TBoqRow>) => params.node ? ((params.node.rowIndex || 0) + 1) : null,
     },
     {
       field: 'description',
@@ -107,7 +109,7 @@ export const BoqTable = ({ index }: TProps) => {
   ]
 
   return (
-    <AgGridReact
+    <AgGridReact<TBoqRow>
       ref={gridRef}
       className='ag-theme-alpine'
       domLayout='autoHeight'
