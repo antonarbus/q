@@ -55,7 +55,8 @@ export const Froala = ({
       ref={froalaElementRef}
       style={{
         padding: padding || 0,
-        wordBreak: 'break-word'
+        wordBreak: 'break-word',
+        height: initHeight // for animation, will be removed after froala is initialized
       }}
       sx={{
         '& .fr-element:hover:not(:focus)': {
