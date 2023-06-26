@@ -1,36 +1,36 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true
+    es2021: true,
   },
   extends: [
     'plugin:react/recommended',
-    'standard'
+    'standard',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
-      jsx: true
+      jsx: true,
     },
     ecmaVersion: 'latest',
-    sourceType: 'module'
+    sourceType: 'module',
   },
   plugins: [
     'react',
-    '@typescript-eslint'
+    '@typescript-eslint',
   ],
   settings: {
     react: {
-      version: 'detect'
-    }
+      version: 'detect',
+    },
   },
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
       rules: {
-        'no-undef': 'off'
-      }
-    }
+        'no-undef': 'off',
+      },
+    },
   ],
   rules: {
     'react/react-in-jsx-scope': 'off',
@@ -39,9 +39,9 @@ module.exports = {
     'react/no-children-prop': 'off',
     'react/no-unknown-property': ['error', { ignore: ['css'] }],
     'comma-dangle': ['error', {
-      arrays: 'only-multiline', // todo: force it, now it is optional
-      objects: 'only-multiline',
+      arrays: 'always-multiline',
+      objects: 'always-multiline',
     }],
-    '@typescript-eslint/comma-dangle': 'off'
-  }
+    '@typescript-eslint/comma-dangle': 'off',
+  },
 }
