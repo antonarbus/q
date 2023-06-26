@@ -149,7 +149,8 @@ export const useFroala = ({
 
       if (clickedElement.matches('.ag-cell')) {
         // todo: also need to add hover effect on parent froala element to make font bolder
-        editorRef.current.selection.setAtStart(editorRef.current.$el.get(0))
+        // editorRef.current.selection.setAtStart(editorRef.current.$el.get(0))
+        editorRef.current.selection.setAtEnd(editorRef.current.$el.get(0))
       }
 
       editorRef.current.selection.restore()
