@@ -62,7 +62,7 @@ export const BoqTable = ({ index }: TProps) => {
     {
       field: 'description',
       headerName: 'Description',
-      // todo: keep col width in redux
+      // todo: keep col width in redux and set it dynamically here
       width: 200,
       minWidth: 200,
       flex: 2,
