@@ -5,7 +5,7 @@ type TCommonItem = {
   msg: string | React.ReactNode
 }
 
-type TBoqRow = {
+export type TBoqRow = {
   description: {
     html: string
     height: number

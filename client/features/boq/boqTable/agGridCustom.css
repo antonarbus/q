@@ -65,6 +65,6 @@
   cursor: text;
 }
 
-.ag-cell:hover .fr-element:not(:focus, :active) {
+/* .ag-cell:hover .fr-element:not(:focus, :active) {
   text-shadow: 0px 0px 0.8px;
-}
+} */
