@@ -58,13 +58,13 @@ export const Froala = ({
       style={{
         padding: padding || 0,
         wordBreak: 'break-word',
-        height // for animation, will be removed after froala is initialized
+        height, // for animation, will be removed after froala is initialized
       }}
       sx={{
         '& .fr-element:hover:not(:focus)': {
-          textShadow: '0px 0px 0.8px'
+          textShadow: '0px 0px 0.8px',
         },
-        ...additionalStyle
+        ...additionalStyle,
       }}
     />
   )
