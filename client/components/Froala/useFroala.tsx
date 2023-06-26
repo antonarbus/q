@@ -136,8 +136,8 @@ export const useFroala = ({
     }
   }, [index]) //* without index, index is remembered at first initiation and if we move item it tries to update wrong item
 
-  useEffectOnce(function putCaretAtTheEndOfTextOnPaddingClick() {
-    function focusOnTextIfClickedOnPadding(e: MouseEvent) {
+  useEffectOnce(function putCaretAtTheEndOfText() {
+    function focusOnTextIfCellOrPaddingAreClicked(e: MouseEvent) {
       // https://stackoverflow.com/a/35191761/7239778
       const clickedElement = e.target as HTMLElement
 
@@ -153,13 +153,13 @@ export const useFroala = ({
       editorRef.current.selection.restore()
     }
 
-    froalaElementRef?.current?.addEventListener('click', focusOnTextIfClickedOnPadding)
+    froalaElementRef?.current?.addEventListener('click', focusOnTextIfCellOrPaddingAreClicked)
     const tableCell = froalaElementRef?.current.closest('.ag-cell') as HTMLElement
-    tableCell?.addEventListener('click', focusOnTextIfClickedOnPadding)
+    tableCell?.addEventListener('click', focusOnTextIfCellOrPaddingAreClicked)
 
     return () => {
-      froalaElementRef?.current?.removeEventListener('click', focusOnTextIfClickedOnPadding)
-      tableCell?.removeEventListener('click', focusOnTextIfClickedOnPadding)
+      froalaElementRef?.current?.removeEventListener('click', focusOnTextIfCellOrPaddingAreClicked)
+      tableCell?.removeEventListener('click', focusOnTextIfCellOrPaddingAreClicked)
     }
   })
 

@@ -39,9 +39,9 @@ export const CardCustom = ({ children, content, cssProps, reference, title, logo
       boxShadow: '0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%)',
       overflowY: 'auto',
       '&:hover, &:focus-within': {
-        boxShadow: '0px 11px 15px -7px rgb(0 0 0 / 40%), 0px 24px 38px 3px rgb(0 0 0 / 28%), 0px 9px 46px 8px rgb(0 0 0 / 24%)'
+        boxShadow: '0px 11px 15px -7px rgb(0 0 0 / 40%), 0px 24px 38px 3px rgb(0 0 0 / 28%), 0px 9px 46px 8px rgb(0 0 0 / 24%)',
       },
-      ...cssProps
+      ...cssProps,
     }}
     onMouseDown={(e) => e.stopPropagation()}
     ref={reference}

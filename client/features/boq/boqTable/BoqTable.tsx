@@ -60,42 +60,50 @@ export const BoqTable = ({ index }: TProps) => {
     {
       field: 'description',
       headerName: 'Description',
-      headerComponent: BoqColumnNameDescription,
-      width: 250,
-      minWidth: 250,
+      // todo: keep col width in redux
+      width: 200,
+      minWidth: 200,
       flex: 2,
+      headerComponent: BoqColumnNameDescription,
       cellRenderer: DescriptionCellRenderer,
       cellStyle: {
         // justifyContent: 'left',
         // textAlign: 'center',
         // flexGrow: 1,
-      }
+      },
     },
     {
       field: 'item',
       headerName: 'Item',
-      headerComponent: BoqColumnNameItem,
-      width: 200,
-      minWidth: 200,
+      width: 100,
+      minWidth: 100,
+      flex: 1,
       wrapText: true,
       autoHeight: true,
+      headerComponent: BoqColumnNameItem,
       cellRenderer: ItemCellRenderer,
-      cellStyle: { justifyContent: 'center', textAlign: 'center' }
+      cellStyle: { justifyContent: 'center', textAlign: 'center' },
     },
     {
       field: 'qty',
       headerName: 'Qty',
+      width: 100,
+      minWidth: 100,
+      flex: 1,
       headerComponent: BoqColumnNameQty,
       cellRenderer: QtyCellRenderer,
-      cellStyle: { justifyContent: 'center' }
+      cellStyle: { justifyContent: 'center' },
     },
     {
       field: 'price',
       headerName: 'Price',
+      width: 100,
+      minWidth: 100,
+      flex: 1,
       headerComponent: BoqColumnNamePrice,
       cellRenderer: PriceCellRenderer,
-      cellStyle: { justifyContent: 'center' }
-    }
+      cellStyle: { justifyContent: 'center' },
+    },
   ]
 
   return (
@@ -115,7 +123,7 @@ export const BoqTable = ({ index }: TProps) => {
       suppressContextMenu
       css={{
         margin: 5,
-        marginBottom: 15
+        marginBottom: 15,
       }}
       // loadingOverlayComponent={LoadingOverlay}
       // onFirstDataRendered={showReceiversAmount}
