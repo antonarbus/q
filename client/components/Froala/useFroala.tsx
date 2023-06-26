@@ -4,6 +4,7 @@ import { useDispatchTyped } from 'client/store'
 import { TRefAny, TRefDiv, TRefString } from 'client/types'
 import { useEffect, useRef } from 'react'
 import { TSaveFroalaReducer } from './Froala'
+import { useEffectOnce } from 'react-use'
 
 type TProps = {
   index: number
@@ -92,14 +93,14 @@ export const useFroala = ({
         fileMaxSize: 1024 * 1024 * 30,
         // https://froala.com/wysiwyg-editor/docs/events/
         events: {
-          initialized: function () {
-          // $('a[href*="froala"]').parent().remove()
-          },
-          // 'codeView.update': () => onClickAwayIfHtmChanged?.(),
           'paste.afterCleanup': function (clipboardHtml: string) {
             // console.log(this)
             // console.log(clipboardHtml)
             // return clipboardHtml + 'additional text'
+          },
+          click: (event: MouseEvent) => {
+            const isDoubleClick = event.detail === 2
+            if (isDoubleClick) editorRef.current.commands.selectAll()
           },
           contentChanged: () => {
             if (!froalaElementRef?.current) return
@@ -135,7 +136,7 @@ export const useFroala = ({
     }
   }, [index]) //* without index, index is remembered at first initiation and if we move item it tries to update wrong item
 
-  useEffect(function putCaretAtTheEndOfTextOnPaddingClick() {
+  useEffectOnce(function putCaretAtTheEndOfTextOnPaddingClick() {
     function focusOnTextIfClickedOnPadding(e: MouseEvent) {
       // https://stackoverflow.com/a/35191761/7239778
       const clickedElement = e.target as HTMLElement
@@ -153,7 +154,6 @@ export const useFroala = ({
     }
 
     froalaElementRef?.current?.addEventListener('click', focusOnTextIfClickedOnPadding)
-
     const tableCell = froalaElementRef?.current.closest('.ag-cell') as HTMLElement
     tableCell?.addEventListener('click', focusOnTextIfClickedOnPadding)
 
@@ -161,5 +161,23 @@ export const useFroala = ({
       froalaElementRef?.current?.removeEventListener('click', focusOnTextIfClickedOnPadding)
       tableCell?.removeEventListener('click', focusOnTextIfClickedOnPadding)
     }
-  }, [])
+  })
+
+  useEffectOnce(function selectTextOnDoubleClick() {
+    function selectTextAndShowEditor(e: MouseEvent) {
+      const isDoubleClick = e.detail === 2
+      if (!isDoubleClick) return
+      const clickedElement = e.target as HTMLElement
+      if (clickedElement.matches('.ag-cell')) {
+        editorRef.current.commands.selectAll()
+      }
+    }
+
+    const tableCell = froalaElementRef?.current.closest('.ag-cell') as HTMLElement
+    tableCell?.addEventListener('click', selectTextAndShowEditor)
+
+    return () => {
+      tableCell?.removeEventListener('click', selectTextAndShowEditor)
+    }
+  })
 }
