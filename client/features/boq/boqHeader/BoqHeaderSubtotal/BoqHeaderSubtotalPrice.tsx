@@ -13,7 +13,7 @@ export const BoqHeaderSubtotalPrice = ({ index }: TProps) => {
   const editorRef = useRef() as TRefAny
   const item = store.getState().items?.[index]
   if (item.type !== 'boq') return null
-  const { html = 'Title' } = item.boq.header.subtotal.price
+  const { html = 'Title', height } = item.boq.header.subtotal.price
 
   return (
     <Froala
@@ -21,6 +21,7 @@ export const BoqHeaderSubtotalPrice = ({ index }: TProps) => {
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
       initHtml={html}
+      height={height}
       onClickAwayIfHtmChanged={() => console.log('logic to save value should go here')}
       placeholder='Price...'
       saveFroalaReducer={saveBoqHeaderSubtotalPrice}

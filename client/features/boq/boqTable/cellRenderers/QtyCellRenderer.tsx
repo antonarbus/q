@@ -19,7 +19,7 @@ export const QtyCellRenderer = ({ index, node, ...rest }: TProps) => {
 
   if (item.type !== 'boq') return null
   if (rowIndex === undefined) return null
-  const { html } = item.boq.rows[rowIndex].qty
+  const { html, height } = item.boq.rows[rowIndex].qty
 
   return (
     <Froala
@@ -27,6 +27,7 @@ export const QtyCellRenderer = ({ index, node, ...rest }: TProps) => {
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
       initHtml={html}
+      height={height}
       saveFroalaReducer={saveBoqQty}
       rowIndex={rowIndex}
       placeholder='Qty...'

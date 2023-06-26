@@ -18,6 +18,7 @@ export const TextItem = ({ index }: TProps) => {
   const item = store.getState().items?.[index]
 
   if (item.type !== 'text') return null
+  const { html, height } = item.text
   useSaveItemHeightOnInitLoad({ itemRef: froalaElementRef, index })
 
   return (
@@ -26,7 +27,8 @@ export const TextItem = ({ index }: TProps) => {
         index={index}
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
-        initHtml={item.text.html}
+        initHtml={html}
+        height={height}
         placeholder='Type text or drop images, files, links...'
         padding={theme.item.padding}
         saveFroalaReducer={saveText}

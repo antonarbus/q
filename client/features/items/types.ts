@@ -8,21 +8,21 @@ type TCommonItem = {
 type TBoqRow = {
   description: {
     html: string
-    froalaHeight: number
+    height: number
   },
   item: {
     html: string
-    froalaHeight: number
+    height: number
     value: number
   },
   qty: {
     html: string
-    froalaHeight: number
+    height: number
     value: number
   },
   price: {
     html: string
-    froalaHeight: number
+    height: number
     value: number
   },
 }
@@ -33,40 +33,40 @@ export type TBoqItem = TCommonItem & {
     header: {
       title: {
         html: string
-        froalaHeight: number
+        height: number
       }
       subtotal: {
         text: {
           html: string
-          froalaHeight: number
+          height: number
         }
         price: {
           value: number
           html: string
-          froalaHeight: number
+          height: number
         },
         currency: {
           html: string
-          froalaHeight: number
+          height: number
         }
       }
     },
     column: {
       description: {
         html: string
-        froalaHeight: number
+        height: number
       },
       item: {
         html: string
-        froalaHeight: number
+        height: number
       },
       qty: {
         html: string
-        froalaHeight: number
+        height: number
       },
       price: {
         html: string
-        froalaHeight: number
+        height: number
       }
     },
     rows: TBoqRow[]
@@ -77,7 +77,7 @@ export type TTextItem = TCommonItem & {
   type: 'text'
   text: {
     html: string
-    froalaHeight: number
+    height: number
   }
 }
 
