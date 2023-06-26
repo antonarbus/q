@@ -121,8 +121,7 @@ export const useFroala = ({
         key: 'AVB8B-21D4B3B2E1F1G1uB-33B-21cyoF-10yB-7G-7gB-22zzE2wkA-7gC7B7D6B4E4F3D2I3H2C5==',
       },
       function () {
-        // @ts-ignore
-        this.html.set(initHtml || '')
+        editorRef.current.html.set(initHtml || '')
         froalaElementRef.current.style.removeProperty('height') // was needed for animation, now can be removed
       }
     )
