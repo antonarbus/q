@@ -122,10 +122,7 @@ export const useFroala = ({
       function () {
         // @ts-ignore
         this.html.set(initHtml || '')
-        // console.log('froala initiated')
-
-        // const froalaHeight = froalaElementRef.current?.clientHeight || 0
-        // dispatch(saveFroalaReducer({ index, froalaHeight, rowIndex }))
+        froalaElementRef.current.style.removeProperty('height') // was needed for animation, now can be removed
       }
     )
   }
