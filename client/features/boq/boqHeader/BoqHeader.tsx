@@ -34,7 +34,8 @@ export const BoqHeader = ({ index }: TProps) => {
         borderTopRightRadius: 6,
       }}
       onFocus={() => {
-        (ref.current as HTMLDivElement).style.removeProperty('height')
+        if (!ref.current) return
+        ref.current.style.removeProperty('height')
       }}
     >
       <BoqHeaderTitle index={index} />
