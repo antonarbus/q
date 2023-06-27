@@ -124,7 +124,6 @@ export const useFroala = ({
       },
       function () {
         editorRef.current.html.set(initHtml || '')
-        froalaElementRef.current.style.removeProperty('height') // was needed for animation, now can be removed
       }
     )
   }

@@ -53,18 +53,22 @@ export const Froala = ({
 
   return (
     <Box
-      className='q-froala-element'
       ref={froalaElementRef}
+      className='q-froala-element'
       style={{
         padding: padding || 0,
-        wordBreak: 'break-word',
-        height, // for animation, will be removed after froala is initialized
+        height: height || 'auto', // for animation, will be removed after froala is initialized
       }}
       sx={{
+        wordBreak: 'break-word',
         '& .fr-element:hover:not(:focus)': {
           textShadow: '0px 0px 0.8px',
         },
         ...additionalStyle,
+      }}
+      onFocus={() => {
+        console.log(666)
+        froalaElementRef.current.style.removeProperty('height')
       }}
     />
   )
