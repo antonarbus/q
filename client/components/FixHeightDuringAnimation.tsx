@@ -20,20 +20,23 @@ type TProps = {
 
 export const FixHeightDuringAnimation = ({ height, children }: TProps) => {
   const ref = useRef() as TRefDiv
-  const delayMs = 1000 * theme.item.animationDuration
+  // const delayMs = 1000 * theme.item.animationDuration
 
-  useEffect(function removeFixedHeightAfterAnimation() {
-    if (!height) return
-    setTimeout(() => {
-      ref.current.style.removeProperty('height')
-    }, delayMs)
-  })
+  // useEffect(function removeFixedHeightAfterAnimation() {
+  //   if (!height) return
+  //   setTimeout(() => {
+  //     ref.current.style.removeProperty('height')
+  //   }, delayMs)
+  // })
 
   return (
     <div
       ref={ref}
       style={{ height: height || 'auto' }}
       className='fix-height-for-element-animation'
+      onFocus={() => {
+        ref.current.style.removeProperty('height')
+      }}
     >
       {children}
     </div>

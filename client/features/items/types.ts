@@ -31,6 +31,7 @@ export type TBoqItem = TCommonItem & {
   type: 'boq'
   boq: {
     header: {
+      height: number,
       title: {
         html: string
         height: number
