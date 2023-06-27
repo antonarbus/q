@@ -1,7 +1,7 @@
 type TCommonItem = {
   id: string
   width: number
-  height: number // todo: change to itemHeight
+  height: number
   msg: string | React.ReactNode
 }
 
