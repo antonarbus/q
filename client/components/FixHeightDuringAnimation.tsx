@@ -8,9 +8,7 @@ import { useRef } from 'react'
 //* we will see height jump when height is calculated
 //* to avoid it we save an item height value in redux
 //* we wrap our item content into this wrapper which at the beginning has fixed height from redux
-//* and we remove fixed height when animation is supposed to finnish, in 0.5s
-//* do not like 'setTimeout' approach, but let it be for now
-//* we probably can use onAnimationComplete callback from 'framer-motion', but need to find a way to pass it, not sure
+//* and we remove fixed height when we focus on an element
 
 type TProps = {
   height: number | string | undefined
