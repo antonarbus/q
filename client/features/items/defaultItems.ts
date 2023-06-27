@@ -21,6 +21,7 @@ export const defaultItems: TItems = [
     msg: '',
     boq: {
       header: {
+        height: 0,
         title: {
           html: '<b>Title</b>',
           height: 0,
@@ -38,8 +39,8 @@ export const defaultItems: TItems = [
           currency: {
             html: '<div>EUR</div>',
             height: 0,
-          }
-        }
+          },
+        },
       },
       column: {
         description: {
@@ -57,7 +58,7 @@ export const defaultItems: TItems = [
         price: {
           html: '<b>Price</b>',
           height: 0,
-        }
+        },
       },
       rows: [
         {
@@ -123,8 +124,8 @@ export const defaultItems: TItems = [
             value: 1500,
           },
         },
-      ]
-    }
+      ],
+    },
   },
   {
     id: nanoid(3),
@@ -147,5 +148,5 @@ export const defaultItems: TItems = [
       html: '<div>editable text</div>',
       height: 0,
     },
-  }
+  },
 ]

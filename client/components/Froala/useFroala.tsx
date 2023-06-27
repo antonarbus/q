@@ -1,4 +1,4 @@
-import { saveItemHeight, tellItemSavedLocally } from 'client/features/items/itemsSlice'
+import { saveHeaderHeight, saveItemHeight, tellItemSavedLocally } from 'client/features/items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { useDispatchTyped } from 'client/store'
 import { TRefAny, TRefDiv, TRefString } from 'client/types'
@@ -110,8 +110,10 @@ export const useFroala = ({
             const html = editorRef.current.html.get()
             const height = froalaElementRef.current?.clientHeight || 0 // save height of froala element in memory to use it during animation to avoid element height jump
             dispatch(saveFroalaReducer({ index, html, height, rowIndex }))
-            const itemHeight = (froalaElementRef.current as HTMLElement)!.closest('.item-paper')!.clientHeight || 0
+            const itemHeight = (froalaElementRef.current as HTMLElement).closest('.item-paper')?.clientHeight || 0
             dispatch(saveItemHeight({ index, height: itemHeight }))
+            const headerHeight = (froalaElementRef.current as HTMLElement).closest('.boq-header')?.clientHeight
+            if (headerHeight) dispatch(saveHeaderHeight({ index, height: headerHeight }))
             dispatch(tellItemSavedLocally({ index }))
             onClickAwayIfHtmChanged?.()
             saveItemsIntoLocalStorage()

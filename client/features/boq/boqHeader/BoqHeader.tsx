@@ -1,14 +1,27 @@
 import { theme } from 'client/theme'
 import { BoqHeaderTitle } from './BoqHeaderTitle'
 import { BoqHeaderSubtotal } from './BoqHeaderSubtotal'
+import { store } from 'client/store'
+import { useRef } from 'react'
 
 type TProps = {
   index: number
 }
 
 export const BoqHeader = ({ index }: TProps) => {
+  const ref = useRef<HTMLDivElement>(null)
+  const item = store.getState().items?.[index]
+
+  if (item.type !== 'boq') return null
+  const { height } = item.boq.header
+
   return (
     <div
+      ref={ref}
+      className='boq-header'
+      style={{
+        height: height || 'auto',
+      }}
       css={{
         display: 'flex',
         justifyContent: 'space-between',
@@ -19,7 +32,9 @@ export const BoqHeader = ({ index }: TProps) => {
         color: theme.colors.greyFont,
         borderTopLeftRadius: 6,
         borderTopRightRadius: 6,
-        // minHeight: 68, // todo: need to save, update, fix and release it via useEffect, otherwise jumps
+      }}
+      onFocus={() => {
+        (ref.current as HTMLDivElement).style.removeProperty('height')
       }}
     >
       <BoqHeaderTitle index={index} />
