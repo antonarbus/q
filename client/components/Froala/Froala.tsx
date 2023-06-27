@@ -67,7 +67,6 @@ export const Froala = ({
         ...additionalStyle,
       }}
       onFocus={() => {
-        console.log(666)
         froalaElementRef.current.style.removeProperty('height')
       }}
     />
