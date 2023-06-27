@@ -1,6 +1,5 @@
-import { theme } from 'client/theme'
-import { TChildren, TRefDiv } from 'client/types'
-import { useEffect, useRef } from 'react'
+import { TChildren } from 'client/types'
+import { useRef } from 'react'
 
 //* we have slide-in item animation after paste
 //* item height is animated from 0 to 'auto'
@@ -19,15 +18,7 @@ type TProps = {
 }
 
 export const FixHeightDuringAnimation = ({ height, children }: TProps) => {
-  const ref = useRef() as TRefDiv
-  // const delayMs = 1000 * theme.item.animationDuration
-
-  // useEffect(function removeFixedHeightAfterAnimation() {
-  //   if (!height) return
-  //   setTimeout(() => {
-  //     ref.current.style.removeProperty('height')
-  //   }, delayMs)
-  // })
+  const ref = useRef<HTMLDivElement>(null)
 
   return (
     <div
@@ -35,6 +26,7 @@ export const FixHeightDuringAnimation = ({ height, children }: TProps) => {
       style={{ height: height || 'auto' }}
       className='fix-height-for-element-animation'
       onFocus={() => {
+        if (!ref.current) return null
         ref.current.style.removeProperty('height')
       }}
     >
