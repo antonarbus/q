@@ -31,22 +31,22 @@ export type TBoqColumns = {
   description: {
     html: string
     height: number
-    width: number
+    width: undefined | number
   },
   item: {
     html: string
     height: number
-    width: number
+    width: undefined | number
   },
   qty: {
     html: string
     height: number
-    width: number
+    width: undefined | number
   },
   price: {
     html: string
     height: number
-    width: number
+    width: undefined | number
   }
 }
 

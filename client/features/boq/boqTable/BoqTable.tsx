@@ -14,7 +14,8 @@ import { QtyCellRenderer } from './cellRenderers/QtyCellRenderer'
 import { PriceCellRenderer } from './cellRenderers/PriceCellRenderer'
 import { TBoqRow } from 'client/features/items/types'
 import { ColDef, ValueGetterParams } from 'ag-grid-community'
-import { saveColumnWidth } from 'client/features/items/itemsSlice'
+import { saveColumnWidth, tellItemSavedLocally } from 'client/features/items/itemsSlice'
+import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 
 type TProps = {
   index: number
@@ -25,17 +26,14 @@ export const BoqTable = ({ index }: TProps) => {
   const gridRef = useRef(null)
   const item = store.getState().items?.[index]
   if (item.type !== 'boq') return null
-  const rowData = item.boq.rows
 
   const defaultColDef = {
-    width: 150,
-    // minWidth: 150,
     editable: false,
+    resizable: true,
+    sortable: false,
     filter: 'agTextColumnFilter',
     floatingFilter: false,
     floatingFilterComponentParams: { suppressFilterButton: false },
-    resizable: true,
-    sortable: false,
     wrapHeaderText: true,
     autoHeaderHeight: true,
     wrapText: true,
@@ -44,17 +42,12 @@ export const BoqTable = ({ index }: TProps) => {
     suppressMenu: true,
     cellStyle: {
       alignItems: 'flex-end',
-      // lineHeight: 0,
-      // height: '100%',
-      // background: 'yellow'
     },
-    flex: 1,
+    flex: undefined,
     headerComponentParams: { index },
     cellRendererParams: { index },
   }
 
-  // todo: get column width from redux and use instead of hardcoded values
-  // we save values in redux on col width change,
   const columnDefs: ColDef<TBoqRow>[] = [
     {
       width: 5,
@@ -66,24 +59,16 @@ export const BoqTable = ({ index }: TProps) => {
     {
       field: 'description',
       headerName: 'Description',
-      // todo: keep col width in redux and set it dynamically here
-      width: 200,
-      minWidth: 200,
-      flex: 2,
+      width: item.boq.column.description.width, // default width is undefined, then flex is 2
+      flex: item.boq.column.description.width === undefined ? 2 : undefined, // if we manually set width by resize drag, then flex is undefined
       headerComponent: BoqColumnNameDescription,
       cellRenderer: DescriptionCellRenderer,
-      cellStyle: {
-        // justifyContent: 'left',
-        // textAlign: 'center',
-        // flexGrow: 1,
-      },
     },
     {
       field: 'item',
       headerName: 'Item',
-      width: 100,
-      minWidth: 100,
-      flex: 1,
+      width: item.boq.column.item.width,
+      flex: item.boq.column.item.width === undefined ? 1 : undefined,
       wrapText: true,
       autoHeight: true,
       headerComponent: BoqColumnNameItem,
@@ -93,18 +78,16 @@ export const BoqTable = ({ index }: TProps) => {
     {
       field: 'qty',
       headerName: 'Qty',
-      width: 100,
-      minWidth: 100,
-      flex: 1,
+      width: item.boq.column.qty.width,
+      flex: item.boq.column.qty.width === undefined ? 1 : undefined,
       headerComponent: BoqColumnNameQty,
       cellRenderer: QtyCellRenderer,
       cellStyle: { justifyContent: 'center' },
     },
     {
       field: 'price',
+      resizable: false,
       headerName: 'Price',
-      width: 100,
-      minWidth: 100,
       flex: 1,
       headerComponent: BoqColumnNamePrice,
       cellRenderer: PriceCellRenderer,
@@ -119,34 +102,26 @@ export const BoqTable = ({ index }: TProps) => {
       domLayout='autoHeight'
       columnDefs={columnDefs}
       defaultColDef={defaultColDef}
-      rowData={rowData}
+      rowData={item.boq.rows}
       rowHeight={70}
       animateRows
       enableCellTextSelection
       ensureDomOrder
       suppressCellFocus
-      // stopEditingWhenCellsLoseFocus
       suppressContextMenu
       css={{
         margin: 5,
         marginBottom: 15,
       }}
-      // loadingOverlayComponent={LoadingOverlay}
-      // onFirstDataRendered={showReceiversAmount}
-      // onModelUpdated={showReceiversAmount}
-      // onFilterChanged={showReceiversAmount}
-      // onGridReady={() => setIsTableReady(true)}
       onColumnResized={(event) => {
         if (!event.finished) return
         // @ts-ignore
         const colId = event?.column?.colId
         // @ts-ignore
         const width = event?.column?.actualWidth
-        // console.log(event)
-        // console.log(event?.column?.colId)
-        // console.log(event?.column?.actualWidth)
         dispatch(saveColumnWidth({ index, colId, width }))
-        // todo: save in local storage
+        dispatch(tellItemSavedLocally({ index }))
+        saveItemsIntoLocalStorage()
       }}
     />
   )
