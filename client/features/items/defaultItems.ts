@@ -46,22 +46,22 @@ export const defaultItems: TItems = [
         description: {
           html: '<b>Description</b>',
           height: 0,
-          width: 200,
+          width: undefined,
         },
         item: {
           html: '<b>Item</b>',
           height: 0,
-          width: 100,
+          width: undefined,
         },
         qty: {
           html: '<b>Qty</b>',
           height: 0,
-          width: 100,
+          width: undefined,
         },
         price: {
           html: '<b>Price</b>',
           height: 0,
-          width: 100,
+          width: undefined,
         },
       },
       rows: [
