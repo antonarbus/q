@@ -42,6 +42,9 @@ module.exports = {
       arrays: 'always-multiline',
       objects: 'always-multiline',
     }],
+    'no-console': ['warn', {
+      allow: ['error'],
+    }],
     '@typescript-eslint/comma-dangle': 'off',
   },
 }
