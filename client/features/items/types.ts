@@ -27,6 +27,29 @@ export type TBoqRow = {
   },
 }
 
+export type TBoqColumns = {
+  description: {
+    html: string
+    height: number
+    width: number
+  },
+  item: {
+    html: string
+    height: number
+    width: number
+  },
+  qty: {
+    html: string
+    height: number
+    width: number
+  },
+  price: {
+    html: string
+    height: number
+    width: number
+  }
+}
+
 export type TBoqItem = TCommonItem & {
   type: 'boq'
   boq: {
@@ -52,24 +75,7 @@ export type TBoqItem = TCommonItem & {
         }
       }
     },
-    column: {
-      description: {
-        html: string
-        height: number
-      },
-      item: {
-        html: string
-        height: number
-      },
-      qty: {
-        html: string
-        height: number
-      },
-      price: {
-        html: string
-        height: number
-      }
-    },
+    column: TBoqColumns,
     rows: TBoqRow[]
   }
 }

@@ -8,18 +8,20 @@ import { BoqColumnNameQty } from './columnNameComponents/BoqColumnNameQty'
 import { BoqColumnNamePrice } from './columnNameComponents/BoqColumnNamePrice'
 import { BoqColumnNameItem } from './columnNameComponents/BoqColumnNameItem'
 import { DescriptionCellRenderer } from './cellRenderers/DescriptionCellRenderer'
-import { store } from 'client/store'
+import { store, useDispatchTyped } from 'client/store'
 import { ItemCellRenderer } from './cellRenderers/ItemCellRenderer'
 import { QtyCellRenderer } from './cellRenderers/QtyCellRenderer'
 import { PriceCellRenderer } from './cellRenderers/PriceCellRenderer'
 import { TBoqRow } from 'client/features/items/types'
 import { ColDef, ValueGetterParams } from 'ag-grid-community'
+import { saveColumnWidth } from 'client/features/items/itemsSlice'
 
 type TProps = {
   index: number
 }
 
 export const BoqTable = ({ index }: TProps) => {
+  const dispatch = useDispatchTyped()
   const gridRef = useRef(null)
   const item = store.getState().items?.[index]
   if (item.type !== 'boq') return null
@@ -51,6 +53,8 @@ export const BoqTable = ({ index }: TProps) => {
     cellRendererParams: { index },
   }
 
+  // todo: get column width from redux and use instead of hardcoded values
+  // we save values in redux on col width change,
   const columnDefs: ColDef<TBoqRow>[] = [
     {
       width: 5,
@@ -132,6 +136,18 @@ export const BoqTable = ({ index }: TProps) => {
       // onModelUpdated={showReceiversAmount}
       // onFilterChanged={showReceiversAmount}
       // onGridReady={() => setIsTableReady(true)}
+      onColumnResized={(event) => {
+        if (!event.finished) return
+        // @ts-ignore
+        const colId = event?.column?.colId
+        // @ts-ignore
+        const width = event?.column?.actualWidth
+        // console.log(event)
+        // console.log(event?.column?.colId)
+        // console.log(event?.column?.actualWidth)
+        dispatch(saveColumnWidth({ index, colId, width }))
+        // todo: save in local storage
+      }}
     />
   )
 }

@@ -5,7 +5,7 @@ import { RootState } from 'client/store'
 import { nanoid } from 'nanoid'
 import { CopyPlaceType } from '../copy/types'
 import { defaultItems } from './defaultItems'
-import { TBoqItem, TPasteItem, TItems } from './types'
+import { TBoqItem, TPasteItem, TItems, TBoqColumns } from './types'
 import { cleanItem } from 'utils/itemsUtils'
 // import isEqual from 'lodash.isequal'
 
@@ -148,6 +148,12 @@ const itemsSlice = createSlice({
         item.boq.rows[rowIndex].price.height = height
       }
     },
+    saveColumnWidth: (state, action: PayloadAction<{index: number, colId: keyof TBoqColumns, width: number}>) => {
+      const { index, colId, width } = action.payload
+      const item = state[index]
+      if (item.type !== 'boq') return
+      item.boq.column[colId].width = width
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -213,6 +219,7 @@ export const {
   saveBoqItem,
   saveBoqQty,
   saveBoqPrice,
+  saveColumnWidth,
 } = itemsSlice.actions
 export default itemsSlice.reducer
 
