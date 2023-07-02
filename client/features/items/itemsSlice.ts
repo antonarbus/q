@@ -5,7 +5,7 @@ import { RootState } from 'client/store'
 import { nanoid } from 'nanoid'
 import { CopyPlaceType } from '../copy/types'
 import { defaultItems } from './defaultItems'
-import { TBoqItem, TPasteItem, TItems, TBoqColumns } from './types'
+import { TBoqItem, TPasteItem, TItems, TBoqColumns, TBoqRow } from './types'
 import { cleanItem } from 'utils/itemsUtils'
 // import isEqual from 'lodash.isequal'
 
@@ -154,6 +154,20 @@ const itemsSlice = createSlice({
       if (item.type !== 'boq') return
       item.boq.column[colId].width = width
     },
+    updateBoqRowsOrder: (state, action: PayloadAction<{index: number, rowIdsOrdered: string[]}>) => {
+      const { index, rowIdsOrdered } = action.payload
+      const item = state[index]
+      if (item.type !== 'boq') return
+      const boq = item.boq
+      // console.log(current(rows))
+      const updatedRows:TBoqRow[] = []
+      rowIdsOrdered.forEach((id) => {
+        const rowWithSameId = boq.rows.find((row) => row.id === id)
+        if (!rowWithSameId) return
+        updatedRows.push(rowWithSameId)
+      })
+      boq.rows = updatedRows
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -220,6 +234,7 @@ export const {
   saveBoqQty,
   saveBoqPrice,
   saveColumnWidth,
+  updateBoqRowsOrder,
 } = itemsSlice.actions
 export default itemsSlice.reducer
 

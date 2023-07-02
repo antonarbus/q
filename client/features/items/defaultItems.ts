@@ -66,6 +66,7 @@ export const defaultItems: TItems = [
       },
       rows: [
         {
+          id: nanoid(3),
           description: {
             html: 'description 1',
             height: 0,
@@ -87,6 +88,7 @@ export const defaultItems: TItems = [
           },
         },
         {
+          id: nanoid(3),
           description: {
             html: 'description 2',
             height: 0,
@@ -108,6 +110,7 @@ export const defaultItems: TItems = [
           },
         },
         {
+          id: nanoid(3),
           description: {
             html: 'description 3',
             height: 0,

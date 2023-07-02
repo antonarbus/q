@@ -13,8 +13,8 @@ import { ItemCellRenderer } from './cellRenderers/ItemCellRenderer'
 import { QtyCellRenderer } from './cellRenderers/QtyCellRenderer'
 import { PriceCellRenderer } from './cellRenderers/PriceCellRenderer'
 import { TBoqRow } from 'client/features/items/types'
-import { ColDef, ValueGetterParams } from 'ag-grid-community'
-import { saveColumnWidth, saveItemHeight, tellItemSavedLocally } from 'client/features/items/itemsSlice'
+import { ValueGetterParams } from 'ag-grid-community'
+import { saveColumnWidth, saveItemHeight, tellItemSavedLocally, updateBoqRowsOrder } from 'client/features/items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 
 type TProps = {
@@ -27,83 +27,90 @@ export const BoqTable = ({ index }: TProps) => {
   const item = store.getState().items?.[index]
   if (item.type !== 'boq') return null
 
-  const defaultColDef = {
-    editable: false,
-    resizable: true,
-    sortable: false,
-    filter: 'agTextColumnFilter',
-    floatingFilter: false,
-    floatingFilterComponentParams: { suppressFilterButton: false },
-    wrapHeaderText: true,
-    autoHeaderHeight: true,
-    wrapText: true,
-    autoHeight: true,
-    unSortIcon: true,
-    suppressMenu: true,
-    cellStyle: {
-      alignItems: 'flex-end',
-    },
-    flex: undefined,
-    headerComponentParams: { index },
-    cellRendererParams: { index },
-  }
-
-  const columnDefs: ColDef<TBoqRow>[] = [
-    {
-      width: 5,
-      resizable: false,
-      flex: 0,
-      cellStyle: { justifyContent: 'center', textAlign: 'center', padding: 0, fontSize: 10, color: 'grey', bottom: '-3px' },
-      valueGetter: (params: ValueGetterParams<TBoqRow>) => params.node ? ((params.node.rowIndex || 0) + 1) : null,
-    },
-    {
-      field: 'description',
-      headerName: 'Description',
-      width: item.boq.column.description.width, // default width is undefined, then flex is 2
-      flex: item.boq.column.description.width === undefined ? 2 : undefined, // if we manually set width by resize drag, then flex is undefined
-      headerComponent: BoqColumnNameDescription,
-      cellRenderer: DescriptionCellRenderer,
-    },
-    {
-      field: 'item',
-      headerName: 'Item',
-      width: item.boq.column.item.width,
-      flex: item.boq.column.item.width === undefined ? 1 : undefined,
-      wrapText: true,
-      autoHeight: true,
-      headerComponent: BoqColumnNameItem,
-      cellRenderer: ItemCellRenderer,
-      cellStyle: { justifyContent: 'center', textAlign: 'center' },
-    },
-    {
-      field: 'qty',
-      headerName: 'Qty',
-      width: item.boq.column.qty.width,
-      flex: item.boq.column.qty.width === undefined ? 1 : undefined,
-      headerComponent: BoqColumnNameQty,
-      cellRenderer: QtyCellRenderer,
-      cellStyle: { justifyContent: 'center' },
-    },
-    {
-      field: 'price',
-      resizable: false,
-      headerName: 'Price',
-      flex: 1,
-      headerComponent: BoqColumnNamePrice,
-      cellRenderer: PriceCellRenderer,
-      cellStyle: { justifyContent: 'center' },
-    },
-  ]
-
   return (
     <AgGridReact<TBoqRow>
       ref={gridRef}
       className='ag-theme-alpine'
       domLayout='autoHeight'
-      columnDefs={columnDefs}
-      defaultColDef={defaultColDef}
+      defaultColDef={{
+        editable: false,
+        resizable: true,
+        sortable: false,
+        filter: 'agTextColumnFilter',
+        floatingFilter: false,
+        floatingFilterComponentParams: { suppressFilterButton: false },
+        wrapHeaderText: true,
+        autoHeaderHeight: true,
+        wrapText: true,
+        autoHeight: true,
+        unSortIcon: true,
+        suppressMenu: true,
+        flex: undefined,
+        headerComponentParams: { index },
+        cellRendererParams: { index },
+        cellStyle: {
+          alignItems: 'flex-end',
+        },
+      }}
+      columnDefs={[
+        {
+          width: 5,
+          resizable: false,
+          flex: 0,
+          cellStyle: { justifyContent: 'center', textAlign: 'center', padding: 0, fontSize: 10, color: 'grey', bottom: '-3px' },
+          valueGetter: (params: ValueGetterParams<TBoqRow>) => params.node ? ((params.node.rowIndex || 0) + 1) : null,
+        },
+        {
+          rowDrag: true,
+          field: 'description',
+          headerName: 'Description',
+          width: item.boq.column.description.width, // default width is undefined, then flex is 2
+          flex: item.boq.column.description.width === undefined ? 2 : undefined, // if we manually set width by resize drag, then flex is undefined
+          headerComponent: BoqColumnNameDescription,
+          cellRenderer: DescriptionCellRenderer,
+        },
+        {
+          field: 'item',
+          headerName: 'Item',
+          width: item.boq.column.item.width,
+          flex: item.boq.column.item.width === undefined ? 1 : undefined,
+          wrapText: true,
+          autoHeight: true,
+          headerComponent: BoqColumnNameItem,
+          cellRenderer: ItemCellRenderer,
+          cellStyle: { justifyContent: 'center', textAlign: 'center' },
+        },
+        {
+          field: 'qty',
+          headerName: 'Qty',
+          width: item.boq.column.qty.width,
+          flex: item.boq.column.qty.width === undefined ? 1 : undefined,
+          headerComponent: BoqColumnNameQty,
+          cellRenderer: QtyCellRenderer,
+          cellStyle: { justifyContent: 'center' },
+        },
+        {
+          field: 'price',
+          resizable: false,
+          headerName: 'Price',
+          flex: 1,
+          headerComponent: BoqColumnNamePrice,
+          cellRenderer: PriceCellRenderer,
+          cellStyle: { justifyContent: 'center' },
+        },
+      ]}
       rowData={item.boq.rows}
       rowHeight={70}
+      rowDragManaged
+      suppressMoveWhenRowDragging
+      rowDragText={(params, dragItemCount) => {
+        return 'being dragged...'
+      }}
+      onRowDragEnd={(params) => {
+        const rows = params.api.getRenderedNodes()
+        const rowIdsOrdered = rows.map((row) => row.data!.id)
+        dispatch(updateBoqRowsOrder({ rowIdsOrdered, index }))
+      }}
       animateRows
       enableCellTextSelection
       ensureDomOrder
@@ -117,6 +124,7 @@ export const BoqTable = ({ index }: TProps) => {
         if (!event.finished) return
         // @ts-ignore
         const colId = event?.column?.colId
+        if (!colId) return
         // @ts-ignore
         const width = event?.column?.actualWidth
         dispatch(saveColumnWidth({ index, colId, width }))

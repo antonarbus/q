@@ -6,6 +6,7 @@ type TCommonItem = {
 }
 
 export type TBoqRow = {
+  id: string
   description: {
     html: string
     height: number
