@@ -5,6 +5,7 @@ import { TRefAny, TRefDiv, TRefString } from 'client/types'
 import { useEffect, useRef } from 'react'
 import { TSaveFroalaReducer } from './Froala'
 import { useEffectOnce } from 'react-use'
+import { theme } from 'client/theme'
 
 type TProps = {
   index: number
@@ -132,7 +133,9 @@ export const useFroala = ({
 
   useEffect(function startFroala() {
     if (isCopyMode) return
-    initFroalaInstance()
+    setTimeout(() => {
+      initFroalaInstance()
+    }, theme.item.animationDuration + 50)
 
     return () => {
       console.log('destroyed')
