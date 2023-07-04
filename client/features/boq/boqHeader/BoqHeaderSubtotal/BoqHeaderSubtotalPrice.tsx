@@ -22,13 +22,16 @@ export const BoqHeaderSubtotalPrice = ({ index }: TProps) => {
       froalaElementRef={froalaElementRef}
       initHtml={html}
       height={height}
-      onClickAwayIfHtmChanged={() => console.log('logic to save value should go here')}
+      onClickAwayIfHtmChanged={() => {
+        // todo: logic to save value should go here
+        console.log('logic to save value should go here')
+      }}
       placeholder='Price...'
       saveFroalaReducer={saveBoqHeaderSubtotalPrice}
       additionalStyle={{
         width: '100%',
         whiteSpace: 'nowrap',
-        textAlign: 'right'
+        textAlign: 'right',
       }}
     />
   )

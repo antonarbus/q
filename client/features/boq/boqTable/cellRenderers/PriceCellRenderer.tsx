@@ -32,7 +32,7 @@ export const PriceCellRenderer = ({ index, node, ...rest }: TProps) => {
       rowIndex={rowIndex}
       placeholder='Total price...'
       additionalStyle={{
-        textAlign: 'center'
+        textAlign: 'center',
       }}
     />
   )

@@ -32,7 +32,7 @@ export const QtyCellRenderer = ({ index, node, ...rest }: TProps) => {
       rowIndex={rowIndex}
       placeholder='Qty...'
       additionalStyle={{
-        textAlign: 'center'
+        textAlign: 'center',
       }}
     />
   )

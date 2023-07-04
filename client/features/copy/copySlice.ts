@@ -3,7 +3,7 @@ import { CopyPlaceType, CopyItemType, PastePosType } from './types'
 import { TItem } from '../items/types'
 
 type TProps = {
-  isShown: boolean
+  isCopyMode: boolean
   initCords: { x: number, y: number }
   items: CopyItemType[]
   place: CopyPlaceType
@@ -12,7 +12,7 @@ type TProps = {
 }
 
 const initialState: TProps = {
-  isShown: false,
+  isCopyMode: false,
   initCords: { x: 0, y: 0 },
   items: [],
   place: { pastePos: 'middle', itemId: 'some id' },
@@ -25,7 +25,7 @@ export const copySlice = createSlice({
   initialState,
   reducers: {
     showCopyContainer: (state) => {
-      state.isShown = true
+      state.isCopyMode = true
     },
     hideCopyContainer: () => initialState,
     saveInitCordsOfCopyContainer: (state, action) => {

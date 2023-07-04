@@ -2,7 +2,7 @@ import { useSelectorTyped } from 'client/store'
 import { CopyContainer } from './CopyContainer'
 
 export const Copy = () => {
-  const isShown = useSelectorTyped(state => state.copy.isShown)
-  if (!isShown) return null
+  const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
+  if (!isCopyMode) return null
   return <CopyContainer />
 }

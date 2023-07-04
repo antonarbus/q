@@ -31,7 +31,7 @@ export const BoqHeaderSubtotalText = ({ index }: TProps) => {
         height: '100%',
         width: '100%',
         whiteSpace: 'nowrap',
-        textAlign: 'right'
+        textAlign: 'right',
       }}
     />
   )
