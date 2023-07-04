@@ -3,8 +3,7 @@ import { useFroala } from './useFroala'
 import { AnyAction } from '@reduxjs/toolkit'
 import { Box, SxProps } from '@mui/material'
 import { useSelectorTyped } from 'client/store'
-import { useRef } from 'react'
-import { useEffectOnce } from 'react-use'
+import { FroalaForCopyMode } from './FroalaForCopyMode'
 
 type TReducerProps = {
   index: number
@@ -30,56 +29,38 @@ type TProps = {
 }
 
 export const Froala = ({
-  index,
+  additionalStyle,
   editorRef,
   froalaElementRef,
-  initHtml,
   height,
+  index,
+  initHtml,
   onClickAwayIfHtmChanged,
   padding,
   placeholder,
-  saveFroalaReducer,
   rowIndex,
-  additionalStyle,
+  saveFroalaReducer,
 }: TProps) => {
   const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
-  const ref = useRef<HTMLDivElement>()
-
-  useEffectOnce(() => {
-    if (ref.current) {
-      ref.current.innerHTML = initHtml
-    }
-  })
 
   useFroala({
+    editorRef,
+    froalaElementRef,
     index,
     initHtml,
     onClickAwayIfHtmChanged,
-    froalaElementRef,
-    editorRef,
     placeholder,
-    saveFroalaReducer,
     rowIndex,
+    saveFroalaReducer,
   })
 
   if (isCopyMode) {
     return (
-      <Box
-        ref={ref}
-        className='not-editable-froala'
-        style={{
-          padding: padding || 0,
-          height: height || 'auto', // for animation, will be removed after froala is initialized
-        }}
-        sx={{
-          wordBreak: 'break-word',
-          '& .fr-element:hover:not(:focus)': {
-            textShadow: '0px 0px 0.8px',
-          },
-          ...additionalStyle,
-        }}
-      >
-      </Box>
+      <FroalaForCopyMode
+        html={initHtml}
+        padding={padding}
+        additionalStyle={additionalStyle}
+      />
     )
   }
 
