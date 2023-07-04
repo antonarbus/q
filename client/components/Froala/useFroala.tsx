@@ -32,6 +32,16 @@ export const useFroala = ({
   const prevHtmlRef = useRef(initHtml) as TRefString
   const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
 
+  function saveHtmlAndHeights() {
+    const html = editorRef.current.html.get()
+    const height = froalaElementRef.current?.clientHeight || 0 // save height of froala element in memory to use it during animation to avoid element height jump
+    dispatch(saveFroalaReducer({ index, html, height, rowIndex }))
+    const itemHeight = (froalaElementRef.current as HTMLElement).closest('.item-paper')?.clientHeight || 0
+    dispatch(saveItemHeight({ index, height: itemHeight }))
+    const headerHeight = (froalaElementRef.current as HTMLElement).closest('.boq-header')?.clientHeight
+    if (headerHeight) dispatch(saveHeaderHeight({ index, height: headerHeight }))
+  }
+
   function initFroalaInstance() {
     // @ts-ignore
     editorRef.current = new FroalaEditor(
@@ -109,13 +119,7 @@ export const useFroala = ({
             const updatedHtml = editorRef.current.html.get()
             const contentHasChanged = prevHtmlRef.current !== updatedHtml
             if (!contentHasChanged) return
-            const html = editorRef.current.html.get()
-            const height = froalaElementRef.current?.clientHeight || 0 // save height of froala element in memory to use it during animation to avoid element height jump
-            dispatch(saveFroalaReducer({ index, html, height, rowIndex }))
-            const itemHeight = (froalaElementRef.current as HTMLElement).closest('.item-paper')?.clientHeight || 0
-            dispatch(saveItemHeight({ index, height: itemHeight }))
-            const headerHeight = (froalaElementRef.current as HTMLElement).closest('.boq-header')?.clientHeight
-            if (headerHeight) dispatch(saveHeaderHeight({ index, height: headerHeight }))
+            saveHtmlAndHeights()
             dispatch(tellItemSavedLocally({ index }))
             onClickAwayIfHtmChanged?.()
             saveItemsIntoLocalStorage()
@@ -127,12 +131,14 @@ export const useFroala = ({
       function () {
         console.log('froala initiated')
         editorRef.current.html.set(initHtml)
+        saveHtmlAndHeights() // initial correction of height values in redux
       }
     )
   }
 
   useEffect(function startFroala() {
     if (isCopyMode) return
+    // init froala with delay after animation is finished, otherwise animation staggers
     setTimeout(() => {
       initFroalaInstance()
     }, 1000 * theme.item.animationDuration)
