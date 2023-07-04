@@ -38,28 +38,28 @@ export function Nav() {
         fontWeight: 300,
         '& > ul > li > a > .icon-round-wrapper': mediaEnabled && {
           [`@media (max-width: ${mediaQueryWidth.icon}px) and (min-width: ${mediaQueryWidth.name}px)`]: {
-            display: 'none'
+            display: 'none',
           },
           [`@media (max-width: ${mediaQueryWidth.burger}px)`]: {
-            display: 'none'
-          }
+            display: 'none',
+          },
         },
         '& .nav-item-name': mediaEnabled && {
           [`@media (max-width: ${mediaQueryWidth.name}px)`]: {
-            display: 'none'
-          }
+            display: 'none',
+          },
         },
         '& li:not(:last-child)': mediaEnabled && {
           [`@media (max-width: ${mediaQueryWidth.burger}px)`]: {
-            display: 'none'
-          }
+            display: 'none',
+          },
         },
         '& li:last-child': {
           display: 'none',
           [`@media (max-width: ${mediaQueryWidth.burger}px)`]: mediaEnabled && {
-            display: 'flex'
-          }
-        }
+            display: 'flex',
+          },
+        },
       }}
     >
       <Logo logoRef={logoRef}/>

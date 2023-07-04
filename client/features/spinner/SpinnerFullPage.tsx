@@ -28,7 +28,7 @@ export const SpinnerFullPage = ({ isShowing, title }: TProps) => {
         zIndex: 1000,
         background: 'rgba(0, 0, 0, 0.5)',
         WebkitTapHighlightColor: 'transparent',
-        backdropFilter: 'blur(2px)'
+        backdropFilter: 'blur(2px)',
       }}
     >
       <div
@@ -37,7 +37,7 @@ export const SpinnerFullPage = ({ isShowing, title }: TProps) => {
           fontSize: '2rem',
           fontWeight: 300,
           position: 'relative',
-          top: '-60px'
+          top: '-60px',
         }}
       >
         {text || title}

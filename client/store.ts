@@ -18,12 +18,12 @@ export const store = configureStore({
     items,
     spinner,
     copy,
-    updater
+    updater,
   },
   middleware: (defaultMiddleware) => defaultMiddleware({
-    serializableCheck: false
+    serializableCheck: false,
   }),
-  devTools: process.env.NODE_ENV !== 'production'
+  devTools: process.env.NODE_ENV !== 'production',
 })
 
 export type RootState = ReturnType<typeof store.getState>

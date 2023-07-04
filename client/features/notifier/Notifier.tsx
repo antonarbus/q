@@ -14,8 +14,8 @@ const CloseIcon = ({ closeToast }: Prop) => (
     '& :hover': {
       transform: 'scale(1.2)',
       transformOrigin: 'center',
-      transition: 'transform 0.2s'
-    }
+      transition: 'transform 0.2s',
+    },
   }}>
 
     <Close

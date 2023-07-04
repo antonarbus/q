@@ -50,7 +50,7 @@ export const SortableItem: React.ComponentClass<ISortableItem, any> = SortableEl
         x: '150vw',
       }}
       transition={{
-        duration: theme.item.animationDuration
+        duration: theme.item.animationDuration,
       }}
       css={{
         display: 'flex',

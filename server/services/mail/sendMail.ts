@@ -19,8 +19,8 @@ export async function sendMail({ to, subject, html }: TProps) {
     auth: {
       user: process.env.SMTP_USER,
       // https://stackoverflow.com/questions/72626410/how-do-i-send-email-from-nodemailer-in-nodejs-using-gmail
-      pass: process.env.SMTP_PASSWORD
-    }
+      pass: process.env.SMTP_PASSWORD,
+    },
   })
 
   // send mail with defined transport object
@@ -29,7 +29,7 @@ export async function sendMail({ to, subject, html }: TProps) {
     to, // list of receivers, like 'anton.arbus@gmail.com, 3007887@gmail.com'
     subject, // Subject line
     text: '', // plain text body
-    html // html body
+    html, // html body
   })
 
   console.log('Message sent: %s', info.messageId)

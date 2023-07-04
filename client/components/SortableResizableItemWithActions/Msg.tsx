@@ -38,7 +38,7 @@ export const Msg = ({ index }: TProps) => {
             color: '#929292',
             fontWeight: 500,
             userSelect: 'none',
-            zIndex: 1
+            zIndex: 1,
           }}
         >
           {msg}

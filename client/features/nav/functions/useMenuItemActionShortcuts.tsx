@@ -20,7 +20,7 @@ function searchForShortcutsInNavStructure() {
         name: menuItem.name,
         shortcut: menuItem.shortcut,
         function: menuItem.func || null,
-        link: menuItem.link || null
+        link: menuItem.link || null,
       })
     }
   })

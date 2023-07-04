@@ -12,8 +12,8 @@ const bottomMsgSlice = createSlice({
     showMsgOnBottom: (state, action: PayloadAction<string>) => {
       state.msg = action.payload
     },
-    resetMsgOnBottom: () => initialState
-  }
+    resetMsgOnBottom: () => initialState,
+  },
 })
 
 // exports

@@ -34,7 +34,7 @@ export function ButtonCustom({ children, content, circleProgressSize, disabled, 
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    borderRadius: '50%'
+    borderRadius: '50%',
   }
 
   return (
@@ -48,7 +48,7 @@ export function ButtonCustom({ children, content, circleProgressSize, disabled, 
         padding: '10px',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
       }}
       {...restProps}
     >
@@ -59,7 +59,7 @@ export function ButtonCustom({ children, content, circleProgressSize, disabled, 
             size={circleProgressSize || 30}
             sx={{
               color: 'black',
-              position: 'absolute'
+              position: 'absolute',
             }}
           />
       )}

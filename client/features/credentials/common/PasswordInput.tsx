@@ -38,8 +38,8 @@ export function PasswordInput({ password, setPassword, onBlur, label, isLabelRed
       sx={{
         mb: 2,
         '& .MuiInputLabel-shrink': {
-          color: isLabelRed ? theme.colors.red : ''
-        }
+          color: isLabelRed ? theme.colors.red : '',
+        },
       }}
       InputProps={{
         startAdornment: (
@@ -56,7 +56,7 @@ export function PasswordInput({ password, setPassword, onBlur, label, isLabelRed
               {showPassword ? <VisibilityOff /> : <Visibility />}
             </IconButton>
           </InputAdornment>
-        )
+        ),
       }}
     />
   )

@@ -7,7 +7,7 @@ const css = {
   justifyContent: 'center',
   alignItems: 'center',
   fontSize: '20vw',
-  color: 'grey'
+  color: 'grey',
 }
 
 export const FourZeroFour = () => <div css={css}>404</div>

@@ -15,7 +15,7 @@ export const BoqHeaderSubtotal = ({ index }: TProps) => {
         flexDirection: 'column',
         alignItems: 'flex-end',
         flexShrink: 0,
-        minWidth: 100
+        minWidth: 100,
       }}
     >
       <BoqHeaderSubtotalText index={index} />
@@ -25,7 +25,7 @@ export const BoqHeaderSubtotal = ({ index }: TProps) => {
           justifyContent: 'flex-end',
           alignItems: 'baseline',
           gap: 10,
-          width: '100%'
+          width: '100%',
         }}
       >
         <BoqHeaderSubtotalPrice index={index} />

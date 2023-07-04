@@ -19,7 +19,7 @@ export function TextInMenu({ reserveSpaceForIcon, name, disabled }: TProps) {
         textOverflow: 'ellipsis',
         overflow: 'hidden',
         whiteSpace: 'nowrap',
-        color: disabled ? 'grey' : 'inherit'
+        color: disabled ? 'grey' : 'inherit',
       }}
     >
       {name}

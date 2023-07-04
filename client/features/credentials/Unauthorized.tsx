@@ -15,7 +15,7 @@ export const Unauthorized = () => {
       justifyContent: 'center',
       alignItems: 'center',
       fontSize: '3vw',
-      color: 'grey'
+      color: 'grey',
     }}>
       <span>Unauthorized</span>
       <Button

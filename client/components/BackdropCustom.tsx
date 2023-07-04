@@ -29,7 +29,7 @@ export const BackdropCustom = ({ onMouseDown, children, content, color }: TProps
       alignItems: 'center',
       background: 'rgba(0, 0, 0, 0.5)',
       WebkitTapHighlightColor: 'transparent',
-      zIndex: 1000
+      zIndex: 1000,
     }}
   >
     {children}

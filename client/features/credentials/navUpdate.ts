@@ -9,5 +9,5 @@ export const navUpdate = {
   logout: () => {
     store.dispatch(showLogInMenuItem())
     store.dispatch(hideAccountMenuItem())
-  }
+  },
 }

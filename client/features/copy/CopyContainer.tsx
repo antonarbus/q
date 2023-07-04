@@ -34,7 +34,7 @@ export const CopyContainer = () => {
         overflow: 'hidden',
         height: 0,
         width: 0,
-        maxHeight: 265
+        maxHeight: 265,
       }}
     >
       <div

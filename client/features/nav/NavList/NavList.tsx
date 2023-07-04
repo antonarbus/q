@@ -11,7 +11,7 @@ export function NavList() {
       css={{
         display: 'flex',
         flexGrow: 1,
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-end',
       }}
     >
       {

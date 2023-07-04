@@ -18,7 +18,7 @@ export const Updater = () => {
             fontSize: 14,
             color: '#828282',
             fontWeight: 500,
-            userSelect: 'none'
+            userSelect: 'none',
           }}
         >
           {msg}
