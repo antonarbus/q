@@ -26,7 +26,7 @@ export const BoqColumnNamePrice = ({ index }: TProps) => {
       placeholder='Price...'
       saveFroalaReducer={saveBoqColumnNamePrice}
       additionalStyle={{
-        textAlign: 'center'
+        textAlign: 'center',
       }}
     />
   )

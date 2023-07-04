@@ -1,6 +1,6 @@
 import { saveHeaderHeight, saveItemHeight, tellItemSavedLocally } from 'client/features/items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
-import { useDispatchTyped } from 'client/store'
+import { useDispatchTyped, useSelectorTyped } from 'client/store'
 import { TRefAny, TRefDiv, TRefString } from 'client/types'
 import { useEffect, useRef } from 'react'
 import { TSaveFroalaReducer } from './Froala'
@@ -8,7 +8,7 @@ import { useEffectOnce } from 'react-use'
 
 type TProps = {
   index: number
-  initHtml?: string
+  initHtml: string
   onClickAwayIfHtmChanged?: Function
   froalaElementRef: TRefDiv
   editorRef: TRefAny
@@ -29,6 +29,7 @@ export const useFroala = ({
 }: TProps) => {
   const dispatch = useDispatchTyped()
   const prevHtmlRef = useRef(initHtml) as TRefString
+  const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
 
   function initFroalaInstance() {
     // @ts-ignore
@@ -123,20 +124,24 @@ export const useFroala = ({
         key: 'AVB8B-21D4B3B2E1F1G1uB-33B-21cyoF-10yB-7G-7gB-22zzE2wkA-7gC7B7D6B4E4F3D2I3H2C5==',
       },
       function () {
-        editorRef.current.html.set(initHtml || '')
+        console.log('froala initiated')
+        editorRef.current.html.set(initHtml)
       }
     )
   }
 
   useEffect(function startFroala() {
+    if (isCopyMode) return
     initFroalaInstance()
 
     return () => {
+      console.log('destroyed')
       editorRef.current.destroy()
     }
-  }, [index]) //* without index, index is remembered at first initiation and if we move item it tries to update wrong item
+  }, [index, isCopyMode]) //* without index, index is remembered at first initiation and if we move item it tries to update wrong item
 
   useEffectOnce(function putCaretAtTheEndOfText() {
+    if (isCopyMode) return
     function focusOnTextIfCellOrPaddingAreClicked(e: MouseEvent) {
       // https://stackoverflow.com/a/35191761/7239778
       const clickedElement = e.target as HTMLElement
@@ -164,6 +169,7 @@ export const useFroala = ({
   })
 
   useEffectOnce(function selectTextOnDoubleClick() {
+    if (isCopyMode) return
     function selectTextAndShowEditor(e: MouseEvent) {
       const isDoubleClick = e.detail === 2
       if (!isDoubleClick) return

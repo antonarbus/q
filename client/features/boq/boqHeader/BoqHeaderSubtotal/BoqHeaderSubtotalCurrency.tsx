@@ -29,7 +29,7 @@ export const BoqHeaderSubtotalCurrency = ({ index }: TProps) => {
         textAlign: 'right',
         whiteSpace: 'nowrap',
         flexShrink: 0,
-        minWidth: 10
+        minWidth: 10,
       }}
     />
   )

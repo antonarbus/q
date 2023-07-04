@@ -32,7 +32,7 @@ export const ItemCellRenderer = ({ index, node, ...rest }: TProps) => {
       rowIndex={rowIndex}
       placeholder='Item price...'
       additionalStyle={{
-        textAlign: 'center'
+        textAlign: 'center',
       }}
     />
   )
