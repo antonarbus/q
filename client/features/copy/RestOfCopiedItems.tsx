@@ -14,7 +14,7 @@ const variants: Variants = {
   initial: ({ isCopying, firstItemHeight }: AnimationPropsType) => {
     if (isCopying) {
       return {
-        y: -firstItemHeight
+        y: -firstItemHeight,
       }
     }
     return {}
@@ -23,7 +23,7 @@ const variants: Variants = {
     if (isCopying) {
       return {
         y: 0,
-        transition: { delay: 0, duration: theme.copy.animationDuration, type: 'spring' }
+        transition: { delay: 0, duration: theme.copy.animationDuration, type: 'spring' },
       }
     }
     return {}
@@ -32,11 +32,11 @@ const variants: Variants = {
     if (!isCopying) {
       return {
         y: -prevFirstItemHeight,
-        transition: { delay: 0, duration: theme.copy.animationDuration, type: 'spring' }
+        transition: { delay: 0, duration: theme.copy.animationDuration, type: 'spring' },
       }
     }
     return {}
-  }
+  },
 }
 
 let prevFirstItemHeight = 0
@@ -53,7 +53,7 @@ export const RestOfCopiedItems = () => {
   const animationProps: AnimationPropsType = {
     isCopying,
     firstItemHeight,
-    prevFirstItemHeight
+    prevFirstItemHeight,
   }
 
   prevFirstItemHeight = firstItemHeight
@@ -86,7 +86,7 @@ export const RestOfCopiedItems = () => {
                 background: 'white',
                 borderRadius: 4,
                 boxShadow: '#00000033 0px 0px 6px 2px',
-                overflow: 'hidden'
+                overflow: 'hidden',
               }}
             >
               <div

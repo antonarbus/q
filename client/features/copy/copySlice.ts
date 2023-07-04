@@ -16,8 +16,8 @@ const initialState: TProps = {
   initCords: { x: 0, y: 0 },
   items: [],
   place: { pastePos: 'middle', itemId: 'some id' },
-  isCopying: true, // flag to understand if we click to copy or paste
-  isPasteTextShown: false
+  isCopying: false,
+  isPasteTextShown: false,
 }
 
 export const copySlice = createSlice({
@@ -55,7 +55,7 @@ export const copySlice = createSlice({
       state.isCopying = false
       state.place = initialState.place
     },
-  }
+  },
 })
 
 export const { showCopyContainer, hideCopyContainer, saveInitCordsOfCopyContainer, addItemIntoCopyContainer, removeItemFromCopyContainer, updatePasteTextPos, pasteItem, showPasteText, hidePasteText } = copySlice.actions
