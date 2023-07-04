@@ -26,28 +26,28 @@ export function Logo({ logoRef }: Prop) {
           cursor: 'pointer',
           fontSize: '16px',
           [`@media (max-width: ${mediaQueryWidth.logoPart}px) and (min-width: ${mediaQueryWidth.burger}px)`]: mediaEnabled && {
-            fontSize: '30px'
+            fontSize: '30px',
           },
           '& span:first-of-type': {
-            color: 'white'
+            color: 'white',
           },
           '& span:nth-of-type(2)': {
             color: '#e7e7e7bf',
             '&:hover': {
               color: 'white !important',
-              transition: '0.3s ease'
+              transition: '0.3s ease',
             },
             [`@media (max-width: ${mediaQueryWidth.logoPart}px) and (min-width: ${mediaQueryWidth.burger}px)`]: mediaEnabled && {
-              display: 'none'
-            }
+              display: 'none',
+            },
           },
           '& span:last-child': {
             color: '#e7e7e7bf',
             [`@media (max-width: ${mediaQueryWidth.logoExtension}px) and (min-width: ${mediaQueryWidth.burger}px)`]: mediaEnabled && {
-              display: 'none'
-            }
-          }
-        }
+              display: 'none',
+            },
+          },
+        },
       }}
     >
       <Link to="/">

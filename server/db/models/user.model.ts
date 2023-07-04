@@ -6,35 +6,35 @@ const User = new mongoose.Schema(
       type: String,
       required: [true, 'email is required'],
       unique: true,
-      trim: true
+      trim: true,
     },
     password: {
       type: String,
       required: [true, 'email is required'],
-      trim: true
+      trim: true,
     },
     registeredAt: {
       type: Date,
-      default: Date.now
+      default: Date.now,
     },
     roles: {
       type: [String],
-      default: ['user']
+      default: ['user'],
     },
     loggedAt: {
       type: Date,
-      default: Date.now
+      default: Date.now,
     },
     isActivated: {
       type: Boolean,
-      default: false
+      default: false,
     },
     activationLink: {
-      type: String
+      type: String,
     },
     refreshJwtToken: {
-      type: String
-    }
+      type: String,
+    },
   }
 )
 

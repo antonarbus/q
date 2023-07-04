@@ -21,8 +21,8 @@ export const useCopyContainerAnimation = () => {
       transition: {
         delay: 0,
         duration: theme.copy.animationDuration,
-        type: 'spring'
-      }
+        type: 'spring',
+      },
     })
 
     copyContainerAnimationControls.start({
@@ -30,7 +30,7 @@ export const useCopyContainerAnimation = () => {
       transition: {
         delay: 0,
         duration: theme.copy.animationDuration,
-        type: 'spring'
+        type: 'spring',
       },
     })
   }, [items.length])

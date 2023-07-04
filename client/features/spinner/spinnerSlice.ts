@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   isLoading: false,
-  text: ''
+  text: '',
 }
 
 const spinnerSlice = createSlice({
@@ -13,8 +13,8 @@ const spinnerSlice = createSlice({
       state.isLoading = true
       state.text = action.payload?.text
     },
-    stopSpinner: () => initialState
-  }
+    stopSpinner: () => initialState,
+  },
 })
 
 export default spinnerSlice.reducer

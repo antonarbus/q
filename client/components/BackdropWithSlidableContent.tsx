@@ -45,7 +45,7 @@ export const BackdropWithSlidableContent = ({ children, content, onSlideIn, onSl
         alignItems: 'center',
         background: 'rgba(0, 0, 0, 0.5)',
         WebkitTapHighlightColor: 'transparent',
-        zIndex: 1000
+        zIndex: 1000,
       }}
     >
       {children && <div ref={contentRef}>{children}</div>}

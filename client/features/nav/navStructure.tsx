@@ -36,7 +36,7 @@ export const navStructure: TMenu[] = [
           {
             id: 'Previous offer',
             name: 'Previous offer',
-            icon: <IoIosSwap />
+            icon: <IoIosSwap />,
           },
           {
             id: 'Nested menu',
@@ -51,77 +51,77 @@ export const navStructure: TMenu[] = [
                   {
                     id: id(5),
                     name: 'long long long long long long long long name',
-                    icon: reactIcon
+                    icon: reactIcon,
                   },
                   {
                     id: id(5),
                     name: 'item in menu 1',
-                    icon: null
+                    icon: null,
                   },
                   {
                     id: id(5),
                     name: 'item in menu 1',
-                    icon: <img src={logo} />
+                    icon: <img src={logo} />,
                   },
                   {
                     id: id(5),
                     name: 'item in menu 1',
-                    icon: reactIcon
+                    icon: reactIcon,
                   },
                   {
                     id: id(5),
                     name: 'item in menu 1',
-                    icon: reactIcon
+                    icon: reactIcon,
                   },
                   {
                     id: id(5),
                     name: 'item in menu 1',
-                    icon: reactIcon
+                    icon: reactIcon,
                   },
                   {
                     id: id(5),
                     name: 'item in menu 1',
-                    icon: reactIcon
-                  }
-                ]
+                    icon: reactIcon,
+                  },
+                ],
               },
               {
                 id: id(5),
                 name: 'item in menu 1',
-                icon: '😎'
+                icon: '😎',
               },
               {
                 id: id(5),
                 name: 'item in menu 1',
-                icon: '😎'
-              }
-            ]
+                icon: '😎',
+              },
+            ],
           },
           {
             id: id(5),
             name: 'Reset to default offer',
             icon: <BiReset />,
-            func: resetToDefaultItems
+            func: resetToDefaultItems,
           },
           {
             id: id(5),
             name: 'hidden menu',
             icon: '',
-            isHidden: true
+            isHidden: true,
           },
           {
             id: id(5),
             name: 'not hidden menu',
-            icon: '😇'
-          }
-        ]
+            icon: '😇',
+          },
+        ],
       },
       {
         id: 'Save',
         icon: <IoSaveOutline />,
         name: 'Save',
         link: '/linkA',
-        shortcut: ['control', 'z']
+        shortcut: ['control', 'z'],
       },
       {
         id: 'Share',
@@ -141,88 +141,88 @@ export const navStructure: TMenu[] = [
                   {
                     id: id(5),
                     name: 'long long long long long long long long name',
-                    icon: reactIcon
+                    icon: reactIcon,
                   },
                   {
                     id: id(5),
                     name: 'item in menu 1',
-                    icon: null
+                    icon: null,
                   },
                   {
                     id: id(5),
                     name: 'item in menu 1',
-                    icon: <img src={logo} />
+                    icon: <img src={logo} />,
                   },
                   {
                     id: id(5),
                     name: 'item in menu 1',
-                    icon: reactIcon
+                    icon: reactIcon,
                   },
                   {
                     id: id(5),
                     name: 'item in menu 1',
-                    icon: reactIcon
+                    icon: reactIcon,
                   },
                   {
                     id: id(5),
                     name: 'item in menu 1',
-                    icon: reactIcon
+                    icon: reactIcon,
                   },
                   {
                     id: id(5),
                     name: 'item in menu 1',
-                    icon: reactIcon
-                  }
-                ]
+                    icon: reactIcon,
+                  },
+                ],
               },
               {
                 id: id(5),
                 name: 'item in menu 1',
-                icon: '😎'
+                icon: '😎',
               },
               {
                 id: id(5),
                 name: 'item in menu 1',
-                icon: '😎'
-              }
-            ]
+                icon: '😎',
+              },
+            ],
           },
           {
             id: id(5),
             name: 'item in menu 1',
-            icon: 'IC'
+            icon: 'IC',
           },
           {
             id: id(5),
             name: 'link',
             link: '/',
             icon: '😇',
-            shortcut: ['control', 'x']
+            shortcut: ['control', 'x'],
           },
           {
             id: id(5),
             name: 'item in menu 1',
-            icon: ''
+            icon: '',
           },
           {
             id: id(5),
             name: 'func',
             func: () => alert('i am the function'),
-            shortcut: ['control', 'c']
-          }
-        ]
+            shortcut: ['control', 'c'],
+          },
+        ],
       },
       {
         id: 'Offers',
         icon: <IoDocumentsOutline />,
         name: 'Offers',
-        link: '/linkB'
+        link: '/linkB',
       },
       {
         id: 'logIn',
         icon: <FiLogIn />,
         name: 'Log in',
-        link: '/login'
+        link: '/login',
       },
       {
         id: 'account',
@@ -234,23 +234,23 @@ export const navStructure: TMenu[] = [
             id: 'settings',
             icon: <SettingsIcon />,
             name: 'Settings',
-            link: '/settings'
+            link: '/settings',
           },
           {
             id: 'profile',
             icon: <PersonIcon />,
             name: 'Profile',
-            link: '/profile'
+            link: '/profile',
           },
           {
             id: 'logOut',
             icon: <FiLogOut />,
             name: 'Log out',
             link: '/',
-            func: logoutUser
-          }
-        ]
-      }
-    ]
-  }
+            func: logoutUser,
+          },
+        ],
+      },
+    ],
+  },
 ]

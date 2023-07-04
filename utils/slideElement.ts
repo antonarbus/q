@@ -25,7 +25,7 @@ export function slideElement({ intoView, element, cb }: TProps) {
     element,
     {
       y: intoView ? offsetPosition : 0,
-      opacity: intoView ? 0 : 1 // to avoid element be shown for a fraction on component load and then sliding in from the bottom
+      opacity: intoView ? 0 : 1, // to avoid element be shown for a fraction on component load and then sliding in from the bottom
     },
     {
       duration: 0.3,
@@ -34,7 +34,7 @@ export function slideElement({ intoView, element, cb }: TProps) {
       onComplete: () => {
         isAnimationPrevented = false
         cb?.()
-      }
+      },
     }
   )
 }

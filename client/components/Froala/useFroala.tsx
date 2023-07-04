@@ -135,7 +135,7 @@ export const useFroala = ({
     if (isCopyMode) return
     setTimeout(() => {
       initFroalaInstance()
-    }, theme.item.animationDuration + 50)
+    }, 1000 * theme.item.animationDuration)
 
     return () => {
       console.log('destroyed')

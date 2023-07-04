@@ -3,14 +3,14 @@ import { createTheme } from '@mui/material/styles'
 const muiTheme = {
   palette: {
     primary: {
-      main: '#757575'
-    }
+      main: '#757575',
+    },
   },
   typography: {
     button: {
-      textTransform: 'none'
-    }
-  }
+      textTransform: 'none',
+    },
+  },
 }
 
 const customTheme = {
@@ -19,7 +19,7 @@ const customTheme = {
     red: '#ee6666',
     topMenuItem: '#858383',
     darkBackground: 'rgb(52 52 52 / 95%)',
-    greyFont: '#bcbcbc'
+    greyFont: '#bcbcbc',
   },
   nav: {
     height: 60,
@@ -27,28 +27,28 @@ const customTheme = {
     marginBottom: 0,
     get fullHeight() {
       return this.height + this.marginTop + this.marginBottom
-    }
+    },
   },
   menu: {
     width: 300,
     paddingTop: 16,
     paddingBottom: 16,
     menuItem: {
-      height: 50
+      height: 50,
     },
     navItem: {
       marginLeft: 10,
-      marginRight: 10
-    }
+      marginRight: 10,
+    },
   },
   item: {
     padding: 20,
-    animationDuration: 0.5
+    animationDuration: 0.5,
   },
   copy: {
     pasteTextColor: '#6c6c6c',
-    animationDuration: 0.5
-  }
+    animationDuration: 0.5,
+  },
 }
 
 export const theme = { ...muiTheme, ...customTheme }

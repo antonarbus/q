@@ -35,14 +35,14 @@ export const DeleteIcon = ({ index }: TProps) => {
         gsap.to(ref.current, {
           duration: 0.2,
           scale: isLastItem ? 1 : 1.3,
-          color: isLastItem ? '#acacac' : '#d25959'
+          color: isLastItem ? '#acacac' : '#d25959',
         })
       }}
       onMouseOut={() => {
         gsap.to(ref.current, {
           duration: 0.2,
           scale: 1,
-          color: isLastItem ? '#acacac' : '#000'
+          color: isLastItem ? '#acacac' : '#000',
         })
       }}
       onMouseDown={() => {

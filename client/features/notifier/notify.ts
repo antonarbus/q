@@ -37,7 +37,7 @@ export function notify({ msg, position, hideProgressBar, shouldStay, closeAfterM
             ? Flip
             : transition === 'zoom'
               ? Zoom
-              : Bounce
+              : Bounce,
   }
 
   if (type === undefined || type === 'success') {

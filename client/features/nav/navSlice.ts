@@ -11,7 +11,7 @@ const initialState = {
   idsToCurrentMenuItems: ['top'],
   idsToNextMenuItems: ['top'],
   navItemRightPos: 0,
-  menuItemHoverIndex: 0
+  menuItemHoverIndex: 0,
 }
 
 const navSlice = createSlice({
@@ -60,8 +60,8 @@ const navSlice = createSlice({
     },
     hideAccountMenuItem: (state) => {
       setMenuItemPropValue({ menu: state.navStructure, id: 'account', prop: 'isHidden', value: true })
-    }
-  }
+    },
+  },
 })
 
 export const {
@@ -86,7 +86,7 @@ export const {
   disableTopMenuItemsExceptItemId,
   enableTopMenuItems,
   disableMedia,
-  enableMedia
+  enableMedia,
 } = navSlice.actions
 
 export const selectMenuItemByIdsChainSelector = (idsToCurrentMenuItems: string[]) => (state: RootState) => {

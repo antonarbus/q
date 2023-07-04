@@ -18,7 +18,7 @@ export const LoadingDots = ({ size, margin, background, duration, dots }: TProps
   <div
     css={{
       display: 'inline-flex',
-      justifyContent: 'center'
+      justifyContent: 'center',
     }}
   >
     {
@@ -33,7 +33,7 @@ export const LoadingDots = ({ size, margin, background, duration, dots }: TProps
             borderRadius: '50%',
             animation: `${duration || '0.8s'} ${bounceLoading} infinite alternate`,
             '&:nth-of-type(2n + 0)': { animationDelay: '0.3s' },
-            '&:nth-of-type(3n + 0)': { animationDelay: '0.6s' }
+            '&:nth-of-type(3n + 0)': { animationDelay: '0.6s' },
           }}
         />
       ))

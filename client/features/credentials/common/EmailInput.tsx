@@ -49,7 +49,7 @@ export function EmailInput({ email, setEmail, isEmailOk, setIsEmailOk, inputRef 
     mailcheck.run({
       email: emailVal || email,
       suggested: (suggestion: any) => setEmailSuggestion(suggestion.full),
-      empty: () => setEmailSuggestion('')
+      empty: () => setEmailSuggestion(''),
     })
   }
 
@@ -70,13 +70,13 @@ export function EmailInput({ email, setEmail, isEmailOk, setIsEmailOk, inputRef 
           suggestEmail()
         }}
         InputProps={{
-          startAdornment: <InputAdornment position="start"><Person /></InputAdornment>
+          startAdornment: <InputAdornment position="start"><Person /></InputAdornment>,
         }}
         sx={{
           '& .MuiInputLabel-shrink': {
-            color: (emailLabel !== initEmailLabel) ? theme.colors.red : ''
+            color: (emailLabel !== initEmailLabel) ? theme.colors.red : '',
           },
-          mb: 2
+          mb: 2,
         }}
         inputRef={inputRef}
       />

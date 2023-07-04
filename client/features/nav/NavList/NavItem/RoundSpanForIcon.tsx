@@ -24,9 +24,9 @@ export const RoundSpanForIcon = ({ children, css, className, disabled }: TProps)
         color: '#dadce1',
         flexShrink: 0, // to avoid logo shrink when menu item text is long
         '& svg': {
-          color: disabled ? 'grey' : ''
+          color: disabled ? 'grey' : '',
         },
-        ...css
+        ...css,
       }}
     >
       {children}

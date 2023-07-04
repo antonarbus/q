@@ -15,7 +15,7 @@ type TPropsForNavigateInMenu = {
 
 export const navigateInMenu: TPropsForNavigateInMenu = {
   up: () => console.log('put function here for going up the menu, otherwise need to pass it in many props'),
-  down: (id) => console.log('put function here for going into submenu, otherwise need to pass it in many props')
+  down: (id) => console.log('put function here for going into submenu, otherwise need to pass it in many props'),
 }
 
 type TProps = {
@@ -72,7 +72,7 @@ export function useMenuAnimation({ currentMenuRef, nextMenuRef, menuContainerRef
   function animateMenuHeight() {
     gsap.to(menuContainerRef.current, {
       duration: isFirstMount ? 0 : duration,
-      height: elementHeight(fakeMenuRef.current) + theme.menu.paddingTop + theme.menu.paddingBottom + theme.menu.menuItem.height
+      height: elementHeight(fakeMenuRef.current) + theme.menu.paddingTop + theme.menu.paddingBottom + theme.menu.menuItem.height,
     })
   }
 

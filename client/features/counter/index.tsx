@@ -23,7 +23,7 @@ export const CounterFromRedux = () => (
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        fontSize: 'calc(10px + 2vmin)'
+        fontSize: 'calc(10px + 2vmin)',
       }}
     >
       <img
@@ -32,7 +32,7 @@ export const CounterFromRedux = () => (
         css={{
           height: '40vmin',
           pointerEvents: 'none',
-          animation: `${animation} infinite 3s ease-in-out`
+          animation: `${animation} infinite 3s ease-in-out`,
         }}
       />
       <Counter />

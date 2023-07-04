@@ -3,5 +3,5 @@ type TProps = {
 }
 
 export const token: TProps = {
-  access: ''
+  access: '',
 }

@@ -16,9 +16,9 @@ export const ActionsContainer = ({ children }: TProps) => (
       '& svg': { display: 'block' },
       '& span': {
         '&:focus': {
-          outline: 0
+          outline: 0,
         },
-      }
+      },
     }}
   >
     {children}

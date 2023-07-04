@@ -17,7 +17,7 @@ export default defineConfig(({ command, mode }) => {
       port: Number(env.PORT_FRONT_END),
       proxy: {
         // '/api': `${process.env.DOMAIN}:${process.env.PORT_BACK_END}/`
-        '/api': `${env.DOMAIN}:${env.PORT_BACK_END}`
+        '/api': `${env.DOMAIN}:${env.PORT_BACK_END}`,
       },
       // hmr: {
       //   host: 'localhost',
@@ -27,8 +27,8 @@ export default defineConfig(({ command, mode }) => {
     esbuild: {
       define: {
         // to suppress warning in terminal: [vite] warning: Top-level "this" will be replaced with undefined since this file is an ECMAScript module
-        this: 'window'
-      }
+        this: 'window',
+      },
     },
     plugins: [
       react({
@@ -42,18 +42,18 @@ export default defineConfig(({ command, mode }) => {
               '@emotion/babel-plugin',
               {
                 displayName: true,
-                fileName: true
-              }
-            ]
-          ]
-        }
+                fileName: true,
+              },
+            ],
+          ],
+        },
       }),
       // https://github.com/aleclarson/vite-tsconfig-paths
-      tsconfigPaths()
+      tsconfigPaths(),
     ],
     // https://vitest.dev/guide/in-source.html
     define: {
-      'import.meta.vitest': 'undefined'
+      'import.meta.vitest': 'undefined',
     },
     // https://www.youtube.com/watch?v=oWJpxtAl62w
     test: {
@@ -63,11 +63,11 @@ export default defineConfig(({ command, mode }) => {
       includeSource: ['client/**/*.{js,ts,jsx,tsx}'],
       coverage: {
         all: true,
-        src: ['client/']
-      }
+        src: ['client/'],
+      },
     },
     build: {
-      outDir: 'build'
-    }
+      outDir: 'build',
+    },
   }
 })
