@@ -23,7 +23,11 @@ const variants: Variants = {
     if (isCopying) {
       return {
         y: 0,
-        transition: { delay: 0, duration: theme.copy.animationDuration, type: 'spring' },
+        transition: {
+          delay: 0,
+          duration: theme.copy.animationDuration,
+          type: 'spring',
+        },
       }
     }
     return {}
@@ -32,7 +36,11 @@ const variants: Variants = {
     if (!isCopying) {
       return {
         y: -prevFirstItemHeight,
-        transition: { delay: 0, duration: theme.copy.animationDuration, type: 'spring' },
+        transition: {
+          delay: 0,
+          duration: theme.copy.animationDuration,
+          type: 'spring',
+        },
       }
     }
     return {}

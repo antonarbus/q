@@ -42,103 +42,105 @@ export const useFroala = ({
     if (headerHeight) dispatch(saveHeaderHeight({ index, height: headerHeight }))
   }
 
-  function initFroalaInstance() {
-    // @ts-ignore
-    editorRef.current = new FroalaEditor(
-      froalaElementRef.current,
-      {
-        // initOnClick: true,
-        toolbarInline: true,
-        // toolbarVisibleWithoutSelection: true,
-        toolbarButtons: {
-          moreText: {
-            buttons: ['fontSize', 'textColor', 'backgroundColor', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'inlineClass', 'inlineStyle', 'clearFormatting'],
-            buttonsVisible: 3,
-          },
-          moreParagraph: {
-            buttons: ['alignLeft', 'alignCenter', 'formatOLSimple', 'alignRight', 'alignJustify', 'formatOL', 'formatUL', 'paragraphFormat', 'paragraphStyle', 'lineHeight', 'outdent', 'indent', 'quote'],
-            buttonsVisible: 3,
-          },
-          moreRich: {
-            buttons: ['insertLink', 'insertTable', 'insertImage', 'insertVideo', 'emoticons', 'embedly', 'fontAwesome', 'specialCharacters', 'insertFile', 'insertHR', 'html'],
-            buttonsVisible: 4,
-          },
-        },
-        // pastePlain: true,
-        charCounterCount: false,
-        quickInsertEnabled: false,
-        fontSizeSelection: true,
-        fontSize: ['6', '8', '9', '10', '11', '12', '13', '14', '15', '16', '18', '20', '24', '30', '36', '48', '60', '72', '96'],
-        tabSpaces: 4,
-        fontFamily: {
-          '"Roboto","Helvetica","Arial",sans-serif': 'Roboto',
-          'Arial,Helvetica,sans-serif': 'Arial',
-          'Georgia,serif': 'Georgia',
-          'Impact,Charcoal,sans-serif': 'Impact',
-          'Tahoma,Geneva,sans-serif': 'Tahoma',
-          'Verdana,Geneva,sans-serif': 'Verdana',
-          Helvetica: 'Helvetica',
-          'Trebuchet MS': 'Trebuchet MS',
-          "'Times New Roman',Times,serif": 'Times New Roman',
-          Garamond: 'Garamond',
-          'Courier New': 'Courier New',
-          'Brush Script MT': 'Brush Script MT',
-        },
-        placeholderText: placeholder || 'Text...',
-        tableInsertHelper: false,
-        tableInsertMaxSize: 12,
-        inlineStyles: {
-          'Big red': 'font-size: 20px; color: red;',
-          'Small blue': 'font-size: 14px; color: blue;',
-          'Bit bold': 'font-weight: 400;',
-          'More bold': 'font-weight: 600;',
-        },
-        inlineClasses: {
-          'fr-class-code': 'Code',
-          'fr-class-highlighted': 'Highlighted',
-          'fr-class-transparency': 'Transparent',
-        },
-        // https://froala.com/wysiwyg-editor/docs/concepts/image/upload/
-        // imageUploadURL: './../phps/upload_image.php',
-        // fileUploadURL: './../phps/upload_file.php',
-        // videoUploadURL: './../phps/upload_video.php',
-        fileMaxSize: 1024 * 1024 * 30,
-        // https://froala.com/wysiwyg-editor/docs/events/
-        events: {
-          'paste.afterCleanup': function (clipboardHtml: string) {
-            // console.log(this)
-            // console.log(clipboardHtml)
-            // return clipboardHtml + 'additional text'
-          },
-          click: (event: MouseEvent) => {
-            const isDoubleClick = event.detail === 2
-            if (isDoubleClick) editorRef.current.commands.selectAll()
-          },
-          contentChanged: () => {
-            if (!froalaElementRef?.current) return
-            const updatedHtml = editorRef.current.html.get()
-            const contentHasChanged = prevHtmlRef.current !== updatedHtml
-            if (!contentHasChanged) return
-            saveHtmlAndHeights()
-            dispatch(tellItemSavedLocally({ index }))
-            onClickAwayIfHtmChanged?.()
-            saveItemsIntoLocalStorage()
-            prevHtmlRef.current = updatedHtml
-          },
-        },
-        key: 'AVB8B-21D4B3B2E1F1G1uB-33B-21cyoF-10yB-7G-7gB-22zzE2wkA-7gC7B7D6B4E4F3D2I3H2C5==',
-      },
-      function () {
-        console.log('froala initiated')
-        editorRef.current.html.set(initHtml)
-        saveHtmlAndHeights() // initial correction of height values in redux
-      }
-    )
-  }
-
   useEffect(function startFroala() {
     if (isCopyMode) return
+
+    function initFroalaInstance() {
+      // @ts-ignore
+      editorRef.current = new FroalaEditor(
+        froalaElementRef.current,
+        {
+          // initOnClick: true,
+          toolbarInline: true,
+          // toolbarVisibleWithoutSelection: true,
+          toolbarButtons: {
+            moreText: {
+              buttons: ['fontSize', 'textColor', 'backgroundColor', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'inlineClass', 'inlineStyle', 'clearFormatting'],
+              buttonsVisible: 3,
+            },
+            moreParagraph: {
+              buttons: ['alignLeft', 'alignCenter', 'formatOLSimple', 'alignRight', 'alignJustify', 'formatOL', 'formatUL', 'paragraphFormat', 'paragraphStyle', 'lineHeight', 'outdent', 'indent', 'quote'],
+              buttonsVisible: 3,
+            },
+            moreRich: {
+              buttons: ['insertLink', 'insertTable', 'insertImage', 'insertVideo', 'emoticons', 'embedly', 'fontAwesome', 'specialCharacters', 'insertFile', 'insertHR', 'html'],
+              buttonsVisible: 4,
+            },
+          },
+          // pastePlain: true,
+          charCounterCount: false,
+          quickInsertEnabled: false,
+          fontSizeSelection: true,
+          fontSize: ['6', '8', '9', '10', '11', '12', '13', '14', '15', '16', '18', '20', '24', '30', '36', '48', '60', '72', '96'],
+          tabSpaces: 4,
+          fontFamily: {
+            '"Roboto","Helvetica","Arial",sans-serif': 'Roboto',
+            'Arial,Helvetica,sans-serif': 'Arial',
+            'Georgia,serif': 'Georgia',
+            'Impact,Charcoal,sans-serif': 'Impact',
+            'Tahoma,Geneva,sans-serif': 'Tahoma',
+            'Verdana,Geneva,sans-serif': 'Verdana',
+            Helvetica: 'Helvetica',
+            'Trebuchet MS': 'Trebuchet MS',
+            "'Times New Roman',Times,serif": 'Times New Roman',
+            Garamond: 'Garamond',
+            'Courier New': 'Courier New',
+            'Brush Script MT': 'Brush Script MT',
+          },
+          placeholderText: placeholder || 'Text...',
+          tableInsertHelper: false,
+          tableInsertMaxSize: 12,
+          inlineStyles: {
+            'Big red': 'font-size: 20px; color: red;',
+            'Small blue': 'font-size: 14px; color: blue;',
+            'Bit bold': 'font-weight: 400;',
+            'More bold': 'font-weight: 600;',
+          },
+          inlineClasses: {
+            'fr-class-code': 'Code',
+            'fr-class-highlighted': 'Highlighted',
+            'fr-class-transparency': 'Transparent',
+          },
+          // https://froala.com/wysiwyg-editor/docs/concepts/image/upload/
+          // imageUploadURL: './../phps/upload_image.php',
+          // fileUploadURL: './../phps/upload_file.php',
+          // videoUploadURL: './../phps/upload_video.php',
+          fileMaxSize: 1024 * 1024 * 30,
+          // https://froala.com/wysiwyg-editor/docs/events/
+          events: {
+            'paste.afterCleanup': function (clipboardHtml: string) {
+              // console.log(this)
+              // console.log(clipboardHtml)
+              // return clipboardHtml + 'additional text'
+            },
+            click: (event: MouseEvent) => {
+              const isDoubleClick = event.detail === 2
+              if (isDoubleClick) editorRef.current.commands.selectAll()
+            },
+            contentChanged: () => {
+              if (!froalaElementRef?.current) return
+              const updatedHtml = editorRef.current.html.get()
+              const contentHasChanged = prevHtmlRef.current !== updatedHtml
+              if (!contentHasChanged) return
+              saveHtmlAndHeights()
+              dispatch(tellItemSavedLocally({ index }))
+              onClickAwayIfHtmChanged?.()
+              saveItemsIntoLocalStorage()
+              prevHtmlRef.current = updatedHtml
+            },
+          },
+          key: 'AVB8B-21D4B3B2E1F1G1uB-33B-21cyoF-10yB-7G-7gB-22zzE2wkA-7gC7B7D6B4E4F3D2I3H2C5==',
+        },
+        function () {
+          console.log('froala initiated')
+          if (!editorRef?.current?.html) return
+          editorRef.current.html.set(initHtml)
+          saveHtmlAndHeights() // initial correction of height values in redux
+        }
+      )
+    }
     // init froala with delay after animation is finished, otherwise animation staggers
+    // initFroalaInstance()
     setTimeout(() => {
       initFroalaInstance()
     }, 1000 * theme.item.animationDuration)
