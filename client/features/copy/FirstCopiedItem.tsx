@@ -21,8 +21,8 @@ const variants: Variants = {
         transition: {
           delay: isSoleItem ? theme.copy.animationDuration : 0,
           duration: theme.copy.animationDuration,
-          type: 'spring'
-        }
+          type: 'spring',
+        },
       }
     }
     return {}
@@ -34,8 +34,8 @@ const variants: Variants = {
         transition: {
           delay: 0,
           duration: theme.copy.animationDuration,
-          type: 'tween'
-        }
+          type: 'tween',
+        },
       }
     }
     return {}
@@ -48,7 +48,7 @@ export const FirstCopiedItem = () => {
 
   const animationProps: AnimationPropsType = {
     isCopying,
-    isSoleItem: items.length === 1
+    isSoleItem: items.length === 1,
   }
 
   if (items.length === 0) return null
@@ -75,7 +75,7 @@ export const FirstCopiedItem = () => {
           background: 'white',
           borderRadius: 4,
           boxShadow: '#00000033 0px 0px 6px 2px',
-          overflow: 'hidden'
+          overflow: 'hidden',
         }}
       >
         <div
