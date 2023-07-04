@@ -13,7 +13,7 @@ type TProps = {
 
 export const PriceCellRenderer = ({ index, node, ...rest }: TProps) => {
   const froalaElementRef = useRef() as TRefDiv
-  const editorRef = useRef() as TRefAny
+  const editorRef = useRef(null) as TRefAny
   const item = store.getState().items?.[index]
   const rowIndex = node.rowIndex
 
