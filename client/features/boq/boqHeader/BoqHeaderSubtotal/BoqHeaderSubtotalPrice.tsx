@@ -10,7 +10,7 @@ type TProps = {
 
 export const BoqHeaderSubtotalPrice = ({ index }: TProps) => {
   const froalaElementRef = useRef() as TRefDiv
-  const editorRef = useRef() as TRefAny
+  const editorRef = useRef(null) as TRefAny
   const item = store.getState().items?.[index]
   if (item.type !== 'boq') return null
   const { html = 'Title', height } = item.boq.header.subtotal.price

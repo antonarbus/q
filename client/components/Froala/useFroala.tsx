@@ -18,6 +18,13 @@ type TProps = {
   rowIndex?: number
 }
 
+declare const window: Window &
+  typeof globalThis & {
+    froalas: any[]
+  }
+
+window.froalas = []
+
 export const useFroala = ({
   index,
   initHtml,
@@ -132,6 +139,7 @@ export const useFroala = ({
           key: 'AVB8B-21D4B3B2E1F1G1uB-33B-21cyoF-10yB-7G-7gB-22zzE2wkA-7gC7B7D6B4E4F3D2I3H2C5==',
         },
         function () {
+          window.froalas.push(editorRef)
           console.log('froala initiated')
           if (!editorRef?.current?.html) return
           editorRef.current.html.set(initHtml)
@@ -143,11 +151,15 @@ export const useFroala = ({
     // initFroalaInstance()
     setTimeout(() => {
       initFroalaInstance()
+      // todo: need to create an Intersection Observer and init and destroy froala when it is visible
+      // todo: they are really heavy and slows app very much
     }, 1000 * theme.item.animationDuration)
 
     return () => {
       console.log('destroyed')
-      editorRef.current.destroy()
+      editorRef?.current?.destroy?.()
+      editorRef.current = null
+      window.froalas = window.froalas.filter(({ current }) => current !== null)
     }
   }, [index, isCopyMode]) //* without index, index is remembered at first initiation and if we move item it tries to update wrong item
 
