@@ -21,7 +21,7 @@ export const FroalaForCopyMode = ({ html: initHtml, padding, additionalStyle }: 
   return (
     <Box
       ref={ref}
-      className='not-editable-froala'
+      className='q-froala-element not-editable'
       style={{
         padding: padding || 0,
       }}
