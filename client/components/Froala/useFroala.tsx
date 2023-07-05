@@ -4,7 +4,6 @@ import { useDispatchTyped, useSelectorTyped } from 'client/store'
 import { TRefAny, TRefDiv, TRefString } from 'client/types'
 import { useEffect, useRef } from 'react'
 import { TSaveFroalaReducer } from './Froala'
-import { useEffectOnce } from 'react-use'
 import { theme } from 'client/theme'
 
 type TProps = {
@@ -57,9 +56,14 @@ export const useFroala = ({
       editorRef.current = new FroalaEditor(
         froalaElementRef.current,
         {
-          // initOnClick: true,
+          initOnClick: false,
           toolbarInline: true,
-          // toolbarVisibleWithoutSelection: true,
+          toolbarVisibleWithoutSelection: false,
+          quickInsertEnabled: true,
+          pastePlain: false,
+          charCounterCount: false,
+          fontSizeSelection: true,
+          tabSpaces: 4,
           toolbarButtons: {
             moreText: {
               buttons: ['fontSize', 'textColor', 'backgroundColor', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'inlineClass', 'inlineStyle', 'clearFormatting'],
@@ -74,12 +78,7 @@ export const useFroala = ({
               buttonsVisible: 4,
             },
           },
-          // pastePlain: true,
-          charCounterCount: false,
-          quickInsertEnabled: false,
-          fontSizeSelection: true,
           fontSize: ['6', '8', '9', '10', '11', '12', '13', '14', '15', '16', '18', '20', '24', '30', '36', '48', '60', '72', '96'],
-          tabSpaces: 4,
           fontFamily: {
             '"Roboto","Helvetica","Arial",sans-serif': 'Roboto',
             'Arial,Helvetica,sans-serif': 'Arial',
@@ -120,10 +119,7 @@ export const useFroala = ({
               // console.log(clipboardHtml)
               // return clipboardHtml + 'additional text'
             },
-            click: (event: MouseEvent) => {
-              const isDoubleClick = event.detail === 2
-              if (isDoubleClick) editorRef.current.commands.selectAll()
-            },
+            // click: (event: MouseEvent) => {},
             contentChanged: () => {
               if (!froalaElementRef?.current) return
               const updatedHtml = editorRef.current.html.get()
@@ -148,7 +144,6 @@ export const useFroala = ({
       )
     }
     // init froala with delay after animation is finished, otherwise animation staggers
-    // initFroalaInstance()
     setTimeout(() => {
       initFroalaInstance()
       // todo: need to create an Intersection Observer and init and destroy froala when it is visible
@@ -163,7 +158,7 @@ export const useFroala = ({
     }
   }, [index, isCopyMode]) //* without index, index is remembered at first initiation and if we move item it tries to update wrong item
 
-  useEffectOnce(function putCaretAtTheEndOfText() {
+  useEffect(function putCaretAtTheEndOfText() {
     if (isCopyMode) return
     function focusOnTextIfCellOrPaddingAreClicked(e: MouseEvent) {
       // https://stackoverflow.com/a/35191761/7239778
@@ -189,24 +184,5 @@ export const useFroala = ({
       froalaElementRef?.current?.removeEventListener('click', focusOnTextIfCellOrPaddingAreClicked)
       tableCell?.removeEventListener('click', focusOnTextIfCellOrPaddingAreClicked)
     }
-  })
-
-  useEffectOnce(function selectTextOnDoubleClick() {
-    if (isCopyMode) return
-    function selectTextAndShowEditor(e: MouseEvent) {
-      const isDoubleClick = e.detail === 2
-      if (!isDoubleClick) return
-      const clickedElement = e.target as HTMLElement
-      if (clickedElement.matches('.ag-cell')) {
-        editorRef.current.commands.selectAll()
-      }
-    }
-
-    const tableCell = froalaElementRef?.current.closest('.ag-cell') as HTMLElement
-    tableCell?.addEventListener('click', selectTextAndShowEditor)
-
-    return () => {
-      tableCell?.removeEventListener('click', selectTextAndShowEditor)
-    }
-  })
+  }, [index, isCopyMode])
 }
