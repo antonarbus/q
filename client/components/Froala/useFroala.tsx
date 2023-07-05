@@ -107,19 +107,9 @@ export const useFroala = ({
             'fr-class-highlighted': 'Highlighted',
             'fr-class-transparency': 'Transparent',
           },
-          // https://froala.com/wysiwyg-editor/docs/concepts/image/upload/
-          // imageUploadURL: './../phps/upload_image.php',
-          // fileUploadURL: './../phps/upload_file.php',
-          // videoUploadURL: './../phps/upload_video.php',
-          fileMaxSize: 1024 * 1024 * 30,
-          // https://froala.com/wysiwyg-editor/docs/events/
           events: {
-            'paste.afterCleanup': function (clipboardHtml: string) {
-              // console.log(this)
-              // console.log(clipboardHtml)
-              // return clipboardHtml + 'additional text'
-            },
-            // click: (event: MouseEvent) => {},
+            'paste.afterCleanup': function (clipboardHtml: string) {},
+            click: (event: MouseEvent) => {},
             contentChanged: () => {
               if (!froalaElementRef?.current) return
               const updatedHtml = editorRef.current.html.get()
