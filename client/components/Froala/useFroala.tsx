@@ -5,6 +5,7 @@ import { TRefAny, TRefDiv, TRefString } from 'client/types'
 import { useEffect, useRef } from 'react'
 import { TSaveFroalaReducer } from './Froala'
 import { theme } from 'client/theme'
+import { usePutCaretAtTheEndOfText } from './usePutCaretAtTheEndOfText'
 
 type TProps = {
   index: number
@@ -37,6 +38,7 @@ export const useFroala = ({
   const dispatch = useDispatchTyped()
   const prevHtmlRef = useRef(initHtml) as TRefString
   const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
+  usePutCaretAtTheEndOfText({ index, isCopyMode, editorRef, froalaElementRef })
 
   function saveHtmlAndHeights() {
     const html = editorRef.current.html.get()
@@ -147,32 +149,4 @@ export const useFroala = ({
       window.froalas = window.froalas.filter(({ current }) => current !== null)
     }
   }, [index, isCopyMode]) //* without index, index is remembered at first initiation and if we move item it tries to update wrong item
-
-  useEffect(function putCaretAtTheEndOfText() {
-    if (isCopyMode) return
-    function focusOnTextIfCellOrPaddingAreClicked(e: MouseEvent) {
-      // https://stackoverflow.com/a/35191761/7239778
-      const clickedElement = e.target as HTMLElement
-
-      if (clickedElement.matches('.fr-box')) {
-        editorRef.current.selection.setAtEnd(editorRef.current.$el.get(0))
-      }
-
-      if (clickedElement.matches('.ag-cell')) {
-        // editorRef.current.selection.setAtStart(editorRef.current.$el.get(0))
-        editorRef.current.selection.setAtEnd(editorRef.current.$el.get(0))
-      }
-
-      editorRef.current.selection.restore()
-    }
-
-    froalaElementRef?.current?.addEventListener('click', focusOnTextIfCellOrPaddingAreClicked)
-    const tableCell = froalaElementRef?.current.closest('.ag-cell') as HTMLElement
-    tableCell?.addEventListener('click', focusOnTextIfCellOrPaddingAreClicked)
-
-    return () => {
-      froalaElementRef?.current?.removeEventListener('click', focusOnTextIfCellOrPaddingAreClicked)
-      tableCell?.removeEventListener('click', focusOnTextIfCellOrPaddingAreClicked)
-    }
-  }, [index, isCopyMode])
 }
