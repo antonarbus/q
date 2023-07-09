@@ -43,7 +43,7 @@ export const Froala = ({
   saveFroalaReducer,
 }: TProps) => {
   const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
-  useStartFroala({ editorRef, froalaElementRef, index, initHtml, onClickAwayIfHtmChanged, placeholder, rowIndex, saveFroalaReducer })
+  useStartFroala({ editorRef, froalaElementRef, index, initHtml, onClickAwayIfHtmChanged, placeholder, rowIndex, saveFroalaReducer, isCopyMode })
   usePutCaretAtTheEndOfText({ index, isCopyMode, editorRef, froalaElementRef })
 
   if (isCopyMode) {

@@ -1,6 +1,6 @@
 import { saveHeaderHeight, saveItemHeight, tellItemSavedLocally } from 'client/features/items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
-import { useDispatchTyped, useSelectorTyped } from 'client/store'
+import { useDispatchTyped } from 'client/store'
 import { TRefAny, TRefDiv, TRefString } from 'client/types'
 import { useEffect, useRef } from 'react'
 import { TSaveFroalaReducer } from './Froala'
@@ -15,6 +15,7 @@ type TProps = {
   placeholder?: string
   saveFroalaReducer: TSaveFroalaReducer
   rowIndex?: number
+  isCopyMode: boolean
 }
 
 declare const window: Window &
@@ -33,10 +34,10 @@ export const useStartFroala = ({
   placeholder,
   saveFroalaReducer,
   rowIndex,
+  isCopyMode,
 }: TProps) => {
   const dispatch = useDispatchTyped()
   const prevHtmlRef = useRef(initHtml) as TRefString
-  const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
 
   function saveHtmlAndHeights() {
     const html = editorRef.current.html.get()
@@ -48,7 +49,7 @@ export const useStartFroala = ({
     if (headerHeight) dispatch(saveHeaderHeight({ index, height: headerHeight }))
   }
 
-  useEffect(function startFroala() {
+  useEffect(() => {
     if (isCopyMode) return
 
     function initFroalaInstance() {
@@ -108,8 +109,8 @@ export const useStartFroala = ({
             'fr-class-transparency': 'Transparent',
           },
           events: {
-            'paste.afterCleanup': function (clipboardHtml: string) {},
-            click: (event: MouseEvent) => {},
+            'paste.afterCleanup': function (clipboardHtml: string) { },
+            click: (event: MouseEvent) => { },
             contentChanged: () => {
               if (!froalaElementRef?.current) return
               const updatedHtml = editorRef.current.html.get()
