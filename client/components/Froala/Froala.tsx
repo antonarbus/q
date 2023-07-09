@@ -4,6 +4,7 @@ import { AnyAction } from '@reduxjs/toolkit'
 import { Box, SxProps } from '@mui/material'
 import { useSelectorTyped } from 'client/store'
 import { FroalaForCopyMode } from './FroalaForCopyMode'
+import { usePutCaretAtTheEndOfText } from './usePutCaretAtTheEndOfText'
 
 type TReducerProps = {
   index: number
@@ -42,17 +43,8 @@ export const Froala = ({
   saveFroalaReducer,
 }: TProps) => {
   const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
-
-  useFroala({
-    editorRef,
-    froalaElementRef,
-    index,
-    initHtml,
-    onClickAwayIfHtmChanged,
-    placeholder,
-    rowIndex,
-    saveFroalaReducer,
-  })
+  usePutCaretAtTheEndOfText({ index, isCopyMode, editorRef, froalaElementRef })
+  useFroala({ editorRef, froalaElementRef, index, initHtml, onClickAwayIfHtmChanged, placeholder, rowIndex, saveFroalaReducer })
 
   if (isCopyMode) {
     return (
