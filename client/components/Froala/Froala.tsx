@@ -1,5 +1,5 @@
 import { TRefAny, TRefDiv } from 'client/types'
-import { useFroala } from './useFroala'
+import { useStartFroala } from './useStartFroala'
 import { AnyAction } from '@reduxjs/toolkit'
 import { Box, SxProps } from '@mui/material'
 import { useSelectorTyped } from 'client/store'
@@ -43,8 +43,8 @@ export const Froala = ({
   saveFroalaReducer,
 }: TProps) => {
   const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
+  useStartFroala({ editorRef, froalaElementRef, index, initHtml, onClickAwayIfHtmChanged, placeholder, rowIndex, saveFroalaReducer })
   usePutCaretAtTheEndOfText({ index, isCopyMode, editorRef, froalaElementRef })
-  useFroala({ editorRef, froalaElementRef, index, initHtml, onClickAwayIfHtmChanged, placeholder, rowIndex, saveFroalaReducer })
 
   if (isCopyMode) {
     return (
