@@ -110,6 +110,8 @@ export const BoqTable = ({ index }: TProps) => {
         const rows = params.api.getRenderedNodes()
         const rowIdsOrdered = rows.map((row) => row.data!.id)
         dispatch(updateBoqRowsOrder({ rowIdsOrdered, index }))
+        saveItemsIntoLocalStorage()
+        dispatch(tellItemSavedLocally({ index }))
       }}
       animateRows
       enableCellTextSelection

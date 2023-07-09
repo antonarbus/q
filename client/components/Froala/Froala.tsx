@@ -72,6 +72,7 @@ export const Froala = ({
         ...additionalStyle,
       }}
       onFocus={() => {
+        // todo: not good, need to do it automatically, coz, prevents height adjustment on width shrink
         froalaElementRef.current.style.removeProperty('height')
       }}
     />
