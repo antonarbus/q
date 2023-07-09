@@ -5,7 +5,6 @@ import { TRefAny, TRefDiv, TRefString } from 'client/types'
 import { useEffect, useRef } from 'react'
 import { TSaveFroalaReducer } from './Froala'
 import { theme } from 'client/theme'
-import { usePutCaretAtTheEndOfText } from './usePutCaretAtTheEndOfText'
 
 type TProps = {
   index: number
@@ -38,7 +37,6 @@ export const useFroala = ({
   const dispatch = useDispatchTyped()
   const prevHtmlRef = useRef(initHtml) as TRefString
   const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
-  usePutCaretAtTheEndOfText({ index, isCopyMode, editorRef, froalaElementRef })
 
   function saveHtmlAndHeights() {
     const html = editorRef.current.html.get()
