@@ -1,4 +1,3 @@
-
 import { Box, SxProps } from '@mui/material'
 import { useRef } from 'react'
 import { useEffectOnce } from 'react-use'
