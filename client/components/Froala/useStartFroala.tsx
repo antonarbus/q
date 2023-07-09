@@ -24,7 +24,7 @@ declare const window: Window &
 
 window.froalas = []
 
-export const useFroala = ({
+export const useStartFroala = ({
   index,
   initHtml,
   onClickAwayIfHtmChanged,
