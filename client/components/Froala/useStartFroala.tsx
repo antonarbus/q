@@ -25,17 +25,7 @@ declare const window: Window &
 
 window.froalas = []
 
-export const useStartFroala = ({
-  index,
-  initHtml,
-  onClickAwayIfHtmChanged,
-  froalaElementRef,
-  editorRef,
-  placeholder,
-  saveFroalaReducer,
-  rowIndex,
-  isCopyMode,
-}: TProps) => {
+export const useStartFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder, saveFroalaReducer, rowIndex, isCopyMode }: TProps) => {
   const dispatch = useDispatchTyped()
   const prevHtmlRef = useRef(initHtml) as TRefString
 
@@ -127,10 +117,10 @@ export const useStartFroala = ({
         },
         function () {
           window.froalas.push(editorRef)
-          console.log('froala initiated')
           if (!editorRef?.current?.html) return
           editorRef.current.html.set(initHtml)
           saveHtmlAndHeights() // initial correction of height values in redux
+          console.log('froalas are initiated')
         }
       )
     }
@@ -142,10 +132,10 @@ export const useStartFroala = ({
     }, 1000 * theme.item.animationDuration)
 
     return () => {
-      console.log('destroyed')
       editorRef?.current?.destroy?.()
       editorRef.current = null
       window.froalas = window.froalas.filter(({ current }) => current !== null)
+      console.log('froala destroyed')
     }
   }, [index, isCopyMode]) //* without index, index is remembered at first initiation and if we move item it tries to update wrong item
 }
