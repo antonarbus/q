@@ -5,11 +5,12 @@ import { TItem } from './types'
 import { TextItem } from '../text/TextItem'
 import { BoqItem } from '../boq/BoqItem'
 
+// re-render the list only if item is replaced or new item is added
 const equalityFn = (prevItems: any, currentItems: any) => {
-  // re-render the list only if item is replaced or new item is added
   const isDifferentLength = prevItems.length !== currentItems.length
   if (isDifferentLength) return false
-  const idsDoNotMatch = prevItems.some((item: TItem, index: number) => prevItems[index]?.id !== currentItems[index]?.id)
+  const idsDoNotMatch = prevItems.some((item: TItem, index: number) =>
+    prevItems[index]?.id !== currentItems[index]?.id)
   if (idsDoNotMatch) return false
   return true
 }

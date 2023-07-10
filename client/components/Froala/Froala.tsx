@@ -5,6 +5,7 @@ import { Box, SxProps } from '@mui/material'
 import { useSelectorTyped } from 'client/store'
 import { FroalaForCopyMode } from './FroalaForCopyMode'
 import { usePutCaretAtTheEndOfText } from './usePutCaretAtTheEndOfText'
+import { useSetHeightBackToAuto } from './useSetHeightBackToAuto'
 
 type TReducerProps = {
   index: number
@@ -29,22 +30,11 @@ type TProps = {
   saveFroalaReducer: TSaveFroalaReducer
 }
 
-export const Froala = ({
-  additionalStyle,
-  editorRef,
-  froalaElementRef,
-  height,
-  index,
-  initHtml,
-  onClickAwayIfHtmChanged,
-  padding,
-  placeholder,
-  rowIndex,
-  saveFroalaReducer,
-}: TProps) => {
+export const Froala = ({ additionalStyle, editorRef, froalaElementRef, height, index, initHtml, onClickAwayIfHtmChanged, padding, placeholder, rowIndex, saveFroalaReducer }: TProps) => {
   const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
   useStartFroala({ editorRef, froalaElementRef, index, initHtml, onClickAwayIfHtmChanged, placeholder, rowIndex, saveFroalaReducer, isCopyMode })
   usePutCaretAtTheEndOfText({ index, isCopyMode, editorRef, froalaElementRef })
+  useSetHeightBackToAuto({ froalaElementRef })
 
   if (isCopyMode) {
     return (
@@ -52,6 +42,7 @@ export const Froala = ({
         html={initHtml}
         padding={padding}
         additionalStyle={additionalStyle}
+        editorRef={editorRef}
       />
     )
   }
@@ -72,7 +63,6 @@ export const Froala = ({
         ...additionalStyle,
       }}
       onFocus={() => {
-        // todo: not good, need to do it automatically, coz, prevents height adjustment on width shrink
         froalaElementRef.current.style.removeProperty('height')
       }}
     />
