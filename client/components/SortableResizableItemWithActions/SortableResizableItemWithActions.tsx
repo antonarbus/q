@@ -8,9 +8,7 @@ import { SortableItem } from './SortableItem'
 import { DragIcon } from './DragIcon'
 import { useIsDisabledItem } from './useIsDisabledItem'
 import { Msg } from './Msg'
-import { store } from 'client/store'
 import { TChildren } from 'client/types'
-import { FixHeightDuringAnimation } from 'client/components/FixHeightDuringAnimation'
 import { ReduceOpacityIfPasteHere } from './ReduceOpacityIfPasteHere'
 
 type TProps = {
@@ -20,7 +18,6 @@ type TProps = {
 
 export const SortableResizableItemWithActions = ({ index, children }: TProps) => {
   const isDisabled = useIsDisabledItem()
-  const item = store.getState().items?.[index]
 
   return (
     <SortableItem
@@ -37,9 +34,7 @@ export const SortableResizableItemWithActions = ({ index, children }: TProps) =>
         <ResizablePaper index={index}>
           <Msg index={index}/>
           <ReduceOpacityIfPasteHere index={index}>
-            <FixHeightDuringAnimation height={item?.height}>
-              {children}
-            </FixHeightDuringAnimation>
+            {children}
           </ReduceOpacityIfPasteHere>
           <PasteTextInMiddle index={index}/>
         </ResizablePaper>

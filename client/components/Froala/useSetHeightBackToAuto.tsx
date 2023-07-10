@@ -10,6 +10,6 @@ export function useSetHeightBackToAuto({ froalaElementRef }: TProps) {
   useEffectOnce(() => {
     setTimeout(() => {
       froalaElementRef.current.style.removeProperty('height')
-    }, 1000 * theme.item.animationDuration)
+    }, 1000 * theme.item.animationDuration + 500)
   })
 }
