@@ -15,16 +15,11 @@ interface ISortableItem extends SortableElementProps {
   i: number
 }
 
-type TAnimatedProps = {
-  height: number | string
-  marginBottom: number | string
-  opacity: number | string
-  y: number | string
-}
-
 export const SortableItem: React.ComponentClass<ISortableItem, any> = SortableElement(({ children, i }: TProps) => {
   const ref = useRef() as TRefDiv
-  const id = store.getState().items?.[i]?.id
+  const item = store.getState().items?.[i]
+  const id = item?.id
+  const height = item?.height
 
   return (
     <motion.div
@@ -36,18 +31,24 @@ export const SortableItem: React.ComponentClass<ISortableItem, any> = SortableEl
         marginBottom: 0,
         opacity: 0,
         y: '100vh',
+        overflow: 'hidden',
       }}
       animate={{
-        height: 'auto',
+        height,
         marginBottom: 20,
         opacity: 1,
         y: 0,
+        transitionEnd: {
+          height: 'auto',
+          overflow: 'visible',
+        },
       }}
       exit={{
         height: 0,
         marginBottom: 0,
         opacity: 0,
         x: '150vw',
+        overflow: 'hidden',
       }}
       transition={{
         duration: theme.item.animationDuration,
@@ -58,13 +59,6 @@ export const SortableItem: React.ComponentClass<ISortableItem, any> = SortableEl
         position: 'relative',
         maxWidth: '100%',
         width: '100%',
-      }}
-      onAnimationStart={(animatedProps: TAnimatedProps) => {
-        if (animatedProps.height !== 0) return // otherwise shadows are trimmed on initial load
-        ref.current.style.overflow = 'hidden'
-      }}
-      onAnimationComplete={() => {
-        ref.current.style.removeProperty('overflow')
       }}
     >
       {children}
