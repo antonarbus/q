@@ -6,6 +6,8 @@ import { useSelectorTyped } from 'client/store'
 import { FroalaForCopyMode } from './FroalaForCopyMode'
 import { usePutCaretAtTheEndOfText } from './usePutCaretAtTheEndOfText'
 import { useSetHeightBackToAuto } from './useSetHeightBackToAuto'
+import { useEffectOnce } from 'react-use'
+import parseHtml from 'html-react-parser'
 
 type TReducerProps = {
   index: number
@@ -36,6 +38,13 @@ export const Froala = ({ additionalStyle, editorRef, froalaElementRef, height, i
   usePutCaretAtTheEndOfText({ index, isCopyMode, editorRef, froalaElementRef })
   useSetHeightBackToAuto({ froalaElementRef })
 
+  // useEffectOnce(() => {
+  //   if (froalaElementRef.current) {
+  //     console.log(666)
+  //     froalaElementRef.current.innerHTML = initHtml
+  //   }
+  // })
+
   if (isCopyMode) {
     return (
       <FroalaForCopyMode
@@ -65,6 +74,8 @@ export const Froala = ({ additionalStyle, editorRef, froalaElementRef, height, i
       onFocus={() => {
         froalaElementRef.current.style.removeProperty('height')
       }}
-    />
+    >
+      {parseHtml(initHtml)}
+    </Box>
   )
 }

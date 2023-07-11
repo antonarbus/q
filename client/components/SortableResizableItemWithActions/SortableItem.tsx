@@ -18,13 +18,11 @@ interface ISortableItem extends SortableElementProps {
 export const SortableItem: React.ComponentClass<ISortableItem, any> = SortableElement(({ children, i }: TProps) => {
   const ref = useRef() as TRefDiv
   const item = store.getState().items?.[i]
-  const id = item?.id
-  const height = item?.height
 
   return (
     <motion.div
       ref={ref}
-      id={id}
+      id={item?.id}
       className='item'
       initial={{
         height: 0,
@@ -34,7 +32,7 @@ export const SortableItem: React.ComponentClass<ISortableItem, any> = SortableEl
         overflow: 'hidden',
       }}
       animate={{
-        height,
+        height: item?.height,
         marginBottom: 20,
         opacity: 1,
         y: 0,
