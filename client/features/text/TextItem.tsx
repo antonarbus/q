@@ -12,6 +12,7 @@ type TProps = {
   index: number
 }
 
+// todo: not in use
 export const TextItem = ({ index }: TProps) => {
   const froalaElementRef = useRef() as TRefDiv
   const editorRef = useRef(null) as TRefAny
