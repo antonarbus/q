@@ -38,12 +38,8 @@ export const Froala = ({ additionalStyle, editorRef, froalaElementRef, height, i
   usePutCaretAtTheEndOfText({ index, isCopyMode, editorRef, froalaElementRef })
   useSetHeightBackToAuto({ froalaElementRef })
 
-  // useEffectOnce(() => {
-  //   if (froalaElementRef.current) {
-  //     console.log(666)
-  //     froalaElementRef.current.innerHTML = initHtml
-  //   }
-  // })
+  // todo: make cellRenderer for headers, items, cost, price cols
+  // todo: they will be rendered only on click, which is more performant
 
   if (isCopyMode) {
     return (

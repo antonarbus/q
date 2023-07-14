@@ -1,4 +1,4 @@
-import { saveHeaderHeight, saveItemHeight, tellItemSavedLocally } from 'client/features/items/itemsSlice'
+import { saveBoqHeaderHeight, saveItemHeight, tellItemSavedLocally } from 'client/features/items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { useDispatchTyped } from 'client/store'
 import { TRefAny, TRefDiv, TRefString } from 'client/types'
@@ -36,7 +36,7 @@ export const useStartFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froal
     const itemHeight = (froalaElementRef.current as HTMLElement).closest('.item-paper')?.clientHeight || 0
     dispatch(saveItemHeight({ index, height: itemHeight }))
     const headerHeight = (froalaElementRef.current as HTMLElement).closest('.boq-header')?.clientHeight
-    if (headerHeight) dispatch(saveHeaderHeight({ index, height: headerHeight }))
+    if (headerHeight) dispatch(saveBoqHeaderHeight({ index, height: headerHeight }))
   }
 
   useEffect(() => {

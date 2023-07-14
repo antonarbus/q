@@ -5,12 +5,12 @@ import { RootState } from 'client/store'
 import { nanoid } from 'nanoid'
 import { CopyPlaceType } from '../copy/types'
 import { defaultItems } from './defaultItems'
-import { TBoqItem, TPasteItem, TItems, TBoqColumns, TBoqRow } from './types'
+import { TPasteItem, TItems, TBoqColumns, TBoqRow } from './types'
 import { cleanItem } from 'utils/itemsUtils'
 // import isEqual from 'lodash.isequal'
 
 type TPayloadFroalaUpdate = PayloadAction<{
-  index: number, html: string, height: number, rowIndex?: number
+  index: number, html?: string, height?: number, rowIndex?: number
 }>
 
 const initialState: TItems = getItemsFromLocalStorage()
@@ -46,39 +46,39 @@ const itemsSlice = createSlice({
       const { index, html, height } = action.payload
       const item = state[index]
       if (item.type !== 'text') return
-      item.text.html = html
-      item.text.height = height
+      if (html) item.text.html = html
+      if (height) item.text.height = height
     },
     saveBoqHeaderTitle: (state, action: TPayloadFroalaUpdate) => {
       const { index, html, height } = action.payload
       const item = state[index]
       if (item.type !== 'boq') return
-      item.boq.header.title.html = html
-      item.boq.header.title.height = height
+      if (html) item.boq.header.title.html = html
+      if (height) item.boq.header.title.height = height
     },
     saveBoqHeaderSubtotalText: (state, action: TPayloadFroalaUpdate) => {
       const { index, html, height } = action.payload
       const item = state[index]
       if (item.type !== 'boq') return
-      item.boq.header.subtotal.text.html = html
-      item.boq.header.subtotal.text.height = height
+      if (html) item.boq.header.subtotal.text.html = html
+      if (height) item.boq.header.subtotal.text.height = height
     },
     saveBoqHeaderSubtotalPrice: (state, action: TPayloadFroalaUpdate) => {
       const { index, html, height } = action.payload
       const item = state[index]
       if (item.type !== 'boq') return
-      item.boq.header.subtotal.price.html = html
-      item.boq.header.subtotal.price.height = height
+      if (html) item.boq.header.subtotal.price.html = html
+      if (height) item.boq.header.subtotal.price.height = height
       // todo: add logic for value
     },
     saveBoqHeaderSubtotalCurrency: (state, action: TPayloadFroalaUpdate) => {
       const { index, html, height } = action.payload
       const item = state[index]
       if (item.type !== 'boq') return
-      item.boq.header.subtotal.currency.html = html
-      item.boq.header.subtotal.currency.height = height
+      if (html) item.boq.header.subtotal.currency.html = html
+      if (height) item.boq.header.subtotal.currency.height = height
     },
-    saveHeaderHeight: (state, action: PayloadAction<{index: number, height: number}>) => {
+    saveBoqHeaderHeight: (state, action: PayloadAction<{index: number, height: number}>) => {
       const { index, height } = action.payload
       const item = state[index]
       if (item.type !== 'boq') return
@@ -88,37 +88,37 @@ const itemsSlice = createSlice({
       const { index, html, height } = action.payload
       const item = state[index]
       if (item.type !== 'boq') return
-      item.boq.column.description.html = html
-      item.boq.column.description.height = height
+      if (html) item.boq.column.description.html = html
+      if (height) item.boq.column.description.height = height
     },
     saveBoqColumnNameItem: (state, action: TPayloadFroalaUpdate) => {
       const { index, html, height } = action.payload
       const item = state[index]
       if (item.type !== 'boq') return
-      item.boq.column.item.html = html
-      item.boq.column.item.height = height
+      if (html) item.boq.column.item.html = html
+      if (height) item.boq.column.item.height = height
     },
     saveBoqColumnNameQty: (state, action: TPayloadFroalaUpdate) => {
       const { index, html, height } = action.payload
       const item = state[index]
       if (item.type !== 'boq') return
-      item.boq.column.qty.html = html
-      item.boq.column.qty.height = height
+      if (html) item.boq.column.qty.html = html
+      if (height) item.boq.column.qty.height = height
     },
     saveBoqColumnNamePrice: (state, action: TPayloadFroalaUpdate) => {
       const { index, html, height } = action.payload
       const item = state[index]
       if (item.type !== 'boq') return
-      item.boq.column.price.html = html
-      item.boq.column.price.height = height
+      if (html) item.boq.column.price.html = html
+      if (height) item.boq.column.price.height = height
     },
     saveBoqDescription: (state, action: TPayloadFroalaUpdate) => {
       const { index, html, height, rowIndex } = action.payload
       const item = state[index]
       if (item.type !== 'boq') return
       if (rowIndex !== undefined) {
-        item.boq.rows[rowIndex].description.html = html
-        item.boq.rows[rowIndex].description.height = height
+        if (html) item.boq.rows[rowIndex].description.html = html
+        if (height) item.boq.rows[rowIndex].description.height = height
       }
     },
     saveBoqItem: (state, action: TPayloadFroalaUpdate) => {
@@ -126,8 +126,8 @@ const itemsSlice = createSlice({
       const item = state[index]
       if (item.type !== 'boq') return
       if (rowIndex !== undefined) {
-        item.boq.rows[rowIndex].item.html = html
-        item.boq.rows[rowIndex].item.height = height
+        if (html) item.boq.rows[rowIndex].item.html = html
+        if (height) item.boq.rows[rowIndex].item.height = height
       }
     },
     saveBoqQty: (state, action: TPayloadFroalaUpdate) => {
@@ -135,8 +135,8 @@ const itemsSlice = createSlice({
       const item = state[index]
       if (item.type !== 'boq') return
       if (rowIndex !== undefined) {
-        item.boq.rows[rowIndex].qty.html = html
-        item.boq.rows[rowIndex].qty.height = height
+        if (html) item.boq.rows[rowIndex].qty.html = html
+        if (height) item.boq.rows[rowIndex].qty.height = height
       }
     },
     saveBoqPrice: (state, action: TPayloadFroalaUpdate) => {
@@ -144,11 +144,11 @@ const itemsSlice = createSlice({
       const item = state[index]
       if (item.type !== 'boq') return
       if (rowIndex !== undefined) {
-        item.boq.rows[rowIndex].price.html = html
-        item.boq.rows[rowIndex].price.height = height
+        if (html) item.boq.rows[rowIndex].price.html = html
+        if (height) item.boq.rows[rowIndex].price.height = height
       }
     },
-    saveColumnWidth: (state, action: PayloadAction<{index: number, colId: keyof TBoqColumns, width: number}>) => {
+    saveBoqColumnWidth: (state, action: PayloadAction<{index: number, colId: keyof TBoqColumns, width: number}>) => {
       const { index, colId, width } = action.payload
       const item = state[index]
       if (item.type !== 'boq') return
@@ -224,7 +224,7 @@ export const {
   saveBoqHeaderSubtotalText,
   saveBoqHeaderSubtotalPrice,
   saveBoqHeaderSubtotalCurrency,
-  saveHeaderHeight,
+  saveBoqHeaderHeight,
   saveBoqColumnNameDescription,
   saveBoqColumnNameItem,
   saveBoqColumnNameQty,
@@ -233,7 +233,7 @@ export const {
   saveBoqItem,
   saveBoqQty,
   saveBoqPrice,
-  saveColumnWidth,
+  saveBoqColumnWidth,
   updateBoqRowsOrder,
 } = itemsSlice.actions
 export default itemsSlice.reducer
