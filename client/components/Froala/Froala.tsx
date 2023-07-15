@@ -5,8 +5,7 @@ import { Box, SxProps } from '@mui/material'
 import { useSelectorTyped } from 'client/store'
 import { FroalaForCopyMode } from './FroalaForCopyMode'
 import { usePutCaretAtTheEndOfText } from './usePutCaretAtTheEndOfText'
-import { useSetHeightBackToAuto } from './useSetHeightBackToAuto'
-import { useEffectOnce } from 'react-use'
+import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
 import parseHtml from 'html-react-parser'
 
 type TReducerProps = {
@@ -36,7 +35,7 @@ export const Froala = ({ additionalStyle, editorRef, froalaElementRef, height, i
   const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
   useStartFroala({ editorRef, froalaElementRef, index, initHtml, onClickAwayIfHtmChanged, placeholder, rowIndex, saveFroalaReducer, isCopyMode })
   usePutCaretAtTheEndOfText({ index, isCopyMode, editorRef, froalaElementRef })
-  useSetHeightBackToAuto({ froalaElementRef })
+  const { heightDuringAnimationRef } = useFixedHeightForAnimation({ froalaElementRef, isCopyMode })
 
   // todo: make cellRenderer for headers, items, cost, price cols
   // todo: they will be rendered only on click, which is more performant
@@ -48,6 +47,7 @@ export const Froala = ({ additionalStyle, editorRef, froalaElementRef, height, i
         padding={padding}
         additionalStyle={additionalStyle}
         editorRef={editorRef}
+        heightDuringAnimationRef={heightDuringAnimationRef}
       />
     )
   }
@@ -58,7 +58,7 @@ export const Froala = ({ additionalStyle, editorRef, froalaElementRef, height, i
       className='q-froala-element'
       style={{
         padding: padding || 0,
-        height: height || 'auto', // for animation, will be removed after froala is initialized
+        height: heightDuringAnimationRef.current || 'auto', // for animation, will be removed after froala is initialized
       }}
       sx={{
         wordBreak: 'break-word',
@@ -66,9 +66,6 @@ export const Froala = ({ additionalStyle, editorRef, froalaElementRef, height, i
           textShadow: '0px 0px 0.8px',
         },
         ...additionalStyle,
-      }}
-      onFocus={() => {
-        froalaElementRef.current.style.removeProperty('height')
       }}
     >
       {parseHtml(initHtml)}

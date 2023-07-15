@@ -1,6 +1,6 @@
 import { Box, SxProps } from '@mui/material'
 import { TRefAny } from 'client/types'
-import { useRef } from 'react'
+import { MutableRefObject, useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 
 type TProps = {
@@ -8,20 +8,26 @@ type TProps = {
   html: string
   additionalStyle?: SxProps
   editorRef: TRefAny
+  heightDuringAnimationRef: MutableRefObject<number | undefined>
 }
 
-export const FroalaForCopyMode = ({ html: initHtml, padding, additionalStyle, editorRef }: TProps) => {
+export const FroalaForCopyMode = ({ html: initHtml, padding, additionalStyle, editorRef, heightDuringAnimationRef }: TProps) => {
   const ref = useRef<HTMLDivElement>()
 
   const html = useRef(initHtml)
+
   if (editorRef.current?.html) {
     html.current = editorRef.current?.html.get()
   }
 
   useEffectOnce(function insertHtmlIntoElement() {
-    if (ref.current) {
-      ref.current.innerHTML = html.current || initHtml
-    }
+    if (!ref.current) return
+    ref.current.innerHTML = html.current || initHtml
+  })
+
+  useEffectOnce(function saveHeightAfterLoadingContent() {
+    if (!ref?.current?.clientHeight) return
+    heightDuringAnimationRef.current = ref.current.clientHeight
   })
 
   return (
