@@ -53,11 +53,7 @@ export const copySlice = createSlice({
     hidePasteText: (state) => {
       state.isPasteTextShown = false
     },
-    pasteItem: (state, action: PayloadAction<{
-      item: TItem
-      itemId: string
-      pastePos: PastePosType
-    }>) => {
+    pasteItem: (state, action: PayloadAction<{ item: TItem, itemId: string, pastePos: PastePosType }>) => {
       state.isCopying = false
       state.place = initialState.place
     },
