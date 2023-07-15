@@ -18,8 +18,10 @@ type TProps = {
 
 // todo: idea!!! inside we render static html when isCopyMode = true
 // todo: a bit later isCopyMode = false, it is swapped to {children}
-// todo: in this case we do not have to do about heights at all
-// todo: but we need to save html strings in items object
+// todo: in this case we do not have to do anything about heights
+// todo: just animate height to auto
+
+// todo: but we need to save html strings in items object on copy
 // todo: FroalaForCopyMode will be no needed anymore
 // todo: will be super elegant
 
