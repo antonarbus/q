@@ -19,7 +19,7 @@ export const DescriptionCellRenderer = ({ index, node, ...rest }: TProps) => {
 
   if (item.type !== 'boq') return null
   if (rowIndex === undefined) return null
-  const { html, height } = item.boq.rows[rowIndex].description
+  const { html } = item.boq.rows[rowIndex].description
 
   return (
     <Froala
@@ -27,7 +27,6 @@ export const DescriptionCellRenderer = ({ index, node, ...rest }: TProps) => {
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
       initHtml={html}
-      height={height}
       saveFroalaReducer={saveBoqDescription}
       rowIndex={rowIndex}
       placeholder='Description, text, links, files, images...'

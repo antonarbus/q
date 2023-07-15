@@ -14,7 +14,7 @@ export const BoqHeaderSubtotalCurrency = ({ index }: TProps) => {
   const item = store.getState().items?.[index]
 
   if (item.type !== 'boq') return null
-  const { html = 'EUR', height } = item.boq.header.subtotal.currency
+  const { html = 'EUR' } = item.boq.header.subtotal.currency
 
   return (
     <Froala
@@ -22,7 +22,6 @@ export const BoqHeaderSubtotalCurrency = ({ index }: TProps) => {
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
       initHtml={html}
-      height={height}
       placeholder='$'
       saveFroalaReducer={saveBoqHeaderSubtotalCurrency}
       additionalStyle={{

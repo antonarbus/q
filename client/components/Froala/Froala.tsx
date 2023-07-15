@@ -11,17 +11,15 @@ import parseHtml from 'html-react-parser'
 type TReducerProps = {
   index: number
   html: string
-  height: number
   rowIndex?: number
 }
 
-export type TSaveFroalaReducer = ({ index, html, height, rowIndex }: TReducerProps) => AnyAction
+export type TSaveFroalaReducer = ({ index, html, rowIndex }: TReducerProps) => AnyAction
 
 type TProps = {
   index: number
   padding?: number | string
   initHtml: string
-  height: number
   froalaElementRef: TRefDiv
   editorRef: TRefAny
   placeholder?: string
@@ -31,7 +29,7 @@ type TProps = {
   saveFroalaReducer: TSaveFroalaReducer
 }
 
-export const Froala = ({ additionalStyle, editorRef, froalaElementRef, height, index, initHtml, onClickAwayIfHtmChanged, padding, placeholder, rowIndex, saveFroalaReducer }: TProps) => {
+export const Froala = ({ additionalStyle, editorRef, froalaElementRef, index, initHtml, onClickAwayIfHtmChanged, padding, placeholder, rowIndex, saveFroalaReducer }: TProps) => {
   const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
   useStartFroala({ editorRef, froalaElementRef, index, initHtml, onClickAwayIfHtmChanged, placeholder, rowIndex, saveFroalaReducer, isCopyMode })
   usePutCaretAtTheEndOfText({ index, isCopyMode, editorRef, froalaElementRef })
