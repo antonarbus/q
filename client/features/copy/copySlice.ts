@@ -4,6 +4,7 @@ import { TItem } from '../items/types'
 
 type TProps = {
   isCopyMode: boolean
+  isCopyContainer: boolean
   initCords: { x: number, y: number }
   items: CopyItemType[]
   place: CopyPlaceType
@@ -12,7 +13,8 @@ type TProps = {
 }
 
 const initialState: TProps = {
-  isCopyMode: false,
+  isCopyMode: false, // should tell froala & ag-grid to initialize with some delay after animation end, otherwise elements height jumps
+  isCopyContainer: false,
   initCords: { x: 0, y: 0 },
   items: [],
   place: { pastePos: 'middle', itemId: 'some id' },
@@ -25,9 +27,13 @@ export const copySlice = createSlice({
   initialState,
   reducers: {
     showCopyContainer: (state) => {
+      state.isCopyContainer = true
       state.isCopyMode = true
     },
-    hideCopyContainer: () => initialState,
+    hideCopyContainer: (state) => {
+      state.isCopyContainer = false
+    },
+    exitFromCopyMode: () => initialState,
     saveInitCordsOfCopyContainer: (state, action) => {
       state.initCords = action.payload
     },
@@ -58,5 +64,5 @@ export const copySlice = createSlice({
   },
 })
 
-export const { showCopyContainer, hideCopyContainer, saveInitCordsOfCopyContainer, addItemIntoCopyContainer, removeItemFromCopyContainer, updatePasteTextPos, pasteItem, showPasteText, hidePasteText } = copySlice.actions
+export const { showCopyContainer, hideCopyContainer, saveInitCordsOfCopyContainer, addItemIntoCopyContainer, removeItemFromCopyContainer, updatePasteTextPos, pasteItem, showPasteText, hidePasteText, exitFromCopyMode } = copySlice.actions
 export default copySlice.reducer

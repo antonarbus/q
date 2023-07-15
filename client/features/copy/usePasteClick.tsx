@@ -1,6 +1,6 @@
 import { useEffectOnce, useUnmount } from 'react-use'
 import { store } from 'client/store'
-import { hideCopyContainer, pasteItem, removeItemFromCopyContainer } from './copySlice'
+import { exitFromCopyMode, hideCopyContainer, pasteItem, removeItemFromCopyContainer } from './copySlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { tellItemsSavedLocally } from '../bottom msg/bottomMsgSlice'
 import { cleanItem } from 'utils/itemsUtils'
@@ -18,10 +18,11 @@ function pasteItemOnClick() {
   store.dispatch(removeItemFromCopyContainer())
   const itemsInCopyContainer = store.getState().copy.items
   if (itemsInCopyContainer.length === 0) {
-    // todo: close copy container immediately
-    // todo: but copyMode to be false with delay
+    store.dispatch(hideCopyContainer())
     setTimeout(() => {
-      store.dispatch(hideCopyContainer())
+      // timeout to let animation end and completely go out from the copy-mode
+      // to let froala initialize after animation to avoid motion staggering
+      store.dispatch(exitFromCopyMode())
     }, 1000 * theme.item.animationDuration)
   }
 }
