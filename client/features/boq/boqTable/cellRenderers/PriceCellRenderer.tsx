@@ -19,7 +19,7 @@ export const PriceCellRenderer = ({ index, node, ...rest }: TProps) => {
 
   if (item.type !== 'boq') return null
   if (rowIndex === undefined) return null
-  const { html, height } = item.boq.rows[rowIndex].price
+  const { html } = item.boq.rows[rowIndex].price
 
   return (
     <Froala
@@ -27,7 +27,6 @@ export const PriceCellRenderer = ({ index, node, ...rest }: TProps) => {
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
       initHtml={html}
-      height={height}
       saveFroalaReducer={saveBoqPrice}
       rowIndex={rowIndex}
       placeholder='Total price...'

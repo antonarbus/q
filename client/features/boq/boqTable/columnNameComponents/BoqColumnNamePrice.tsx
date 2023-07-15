@@ -14,7 +14,7 @@ export const BoqColumnNamePrice = ({ index }: TProps) => {
   const item = store.getState().items?.[index]
 
   if (item.type !== 'boq') return null
-  const { html = 'Price', height } = item.boq.column.price
+  const { html = 'Price' } = item.boq.column.price
 
   return (
     <Froala
@@ -22,7 +22,6 @@ export const BoqColumnNamePrice = ({ index }: TProps) => {
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
       initHtml={html}
-      height={height}
       placeholder='Price...'
       saveFroalaReducer={saveBoqColumnNamePrice}
       additionalStyle={{

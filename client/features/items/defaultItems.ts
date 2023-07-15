@@ -10,7 +10,6 @@ export const defaultItems: TItems = [
     msg: '',
     text: {
       html: '<div>editable text</div>',
-      height: 0,
     },
   },
   {
@@ -24,43 +23,35 @@ export const defaultItems: TItems = [
         height: 0,
         title: {
           html: '<b>Title</b>',
-          height: 0,
         },
         subtotal: {
           text: {
             html: '<div>Subtotal</div>',
-            height: 0,
           },
           price: {
             value: 666,
             html: '<b>666</b>',
-            height: 0,
           },
           currency: {
             html: '<div>EUR</div>',
-            height: 0,
           },
         },
       },
       column: {
         description: {
           html: '<b>Description</b>',
-          height: 0,
           width: undefined,
         },
         item: {
           html: '<b>Item</b>',
-          height: 0,
           width: undefined,
         },
         qty: {
           html: '<b>Qty</b>',
-          height: 0,
           width: undefined,
         },
         price: {
           html: '<b>Price</b>',
-          height: 0,
           width: undefined,
         },
       },
@@ -69,21 +60,17 @@ export const defaultItems: TItems = [
           id: nanoid(3),
           description: {
             html: 'description 1',
-            height: 0,
           },
           item: {
             html: '500',
-            height: 0,
             value: 500,
           },
           qty: {
             html: '1',
-            height: 0,
             value: 1,
           },
           price: {
             html: '500',
-            height: 0,
             value: 500,
           },
         },
@@ -91,21 +78,17 @@ export const defaultItems: TItems = [
           id: nanoid(3),
           description: {
             html: 'description 2',
-            height: 0,
           },
           item: {
             html: '500',
-            height: 0,
             value: 500,
           },
           qty: {
             html: '2',
-            height: 0,
             value: 2,
           },
           price: {
             html: '1000',
-            height: 0,
             value: 1000,
           },
         },
@@ -113,21 +96,17 @@ export const defaultItems: TItems = [
           id: nanoid(3),
           description: {
             html: 'description 3',
-            height: 0,
           },
           item: {
             html: '500',
-            height: 0,
             value: 500,
           },
           qty: {
             html: '3',
-            height: 0,
             value: 3,
           },
           price: {
             html: '1500',
-            height: 0,
             value: 1500,
           },
         },
@@ -142,7 +121,6 @@ export const defaultItems: TItems = [
     msg: '',
     text: {
       html: '<div>editable text</div>',
-      height: 0,
     },
   },
   {
@@ -153,7 +131,6 @@ export const defaultItems: TItems = [
     msg: '',
     text: {
       html: '<div>editable text</div>',
-      height: 0,
     },
   },
 ]
