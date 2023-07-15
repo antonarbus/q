@@ -4,6 +4,7 @@ import { hideCopyContainer, pasteItem, removeItemFromCopyContainer } from './cop
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { tellItemsSavedLocally } from '../bottom msg/bottomMsgSlice'
 import { cleanItem } from 'utils/itemsUtils'
+import { theme } from 'client/theme'
 
 function pasteItemOnClick() {
   const isPasteTextShown = store.getState().copy.isPasteTextShown
@@ -16,7 +17,13 @@ function pasteItemOnClick() {
   store.dispatch(tellItemsSavedLocally())
   store.dispatch(removeItemFromCopyContainer())
   const itemsInCopyContainer = store.getState().copy.items
-  if (itemsInCopyContainer.length === 0) store.dispatch(hideCopyContainer())
+  if (itemsInCopyContainer.length === 0) {
+    // todo: close copy container immediately
+    // todo: but copyMode to be false with delay
+    setTimeout(() => {
+      store.dispatch(hideCopyContainer())
+    }, 1000 * theme.item.animationDuration)
+  }
 }
 
 export const usePasteClick = () => {

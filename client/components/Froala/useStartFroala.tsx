@@ -4,7 +4,6 @@ import { useDispatchTyped } from 'client/store'
 import { TRefAny, TRefDiv, TRefString } from 'client/types'
 import { useEffect, useRef } from 'react'
 import { TSaveFroalaReducer } from './Froala'
-import { theme } from 'client/theme'
 
 type TProps = {
   index: number
@@ -120,22 +119,18 @@ export const useStartFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froal
           if (!editorRef?.current?.html) return
           editorRef.current.html.set(initHtml)
           saveHtmlAndHeights() // initial correction of height values in redux
-          console.log('froalas are initiated')
+          // console.log('froalas are initiated')
         }
       )
     }
-    // init froala with delay after animation is finished, otherwise animation staggers
-    setTimeout(() => {
-      initFroalaInstance()
-      // todo: need to create an Intersection Observer and init and destroy froala when it is visible
-      // todo: they are really heavy and slows app very much
-    }, 1000 * theme.item.animationDuration)
+
+    initFroalaInstance()
 
     return () => {
       editorRef?.current?.destroy?.()
       editorRef.current = null
       window.froalas = window.froalas.filter(({ current }) => current !== null)
-      console.log('froala destroyed')
+      // console.log('froala destroyed')
     }
   }, [index, isCopyMode]) //* without index, index is remembered at first initiation and if we move item it tries to update wrong item
 }

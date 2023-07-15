@@ -25,6 +25,7 @@ export const BoqTable = ({ index }: TProps) => {
   const dispatch = useDispatchTyped()
   const gridRef = useRef(null)
   const item = store.getState().items?.[index]
+
   if (item.type !== 'boq') return null
 
   return (
