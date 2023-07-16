@@ -20,7 +20,6 @@ export const defaultItems: TItems = [
     msg: '',
     boq: {
       header: {
-        height: 0,
         title: {
           html: '<b>Title</b>',
         },

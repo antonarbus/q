@@ -73,12 +73,6 @@ const itemsSlice = createSlice({
       if (item.type !== 'boq') return
       if (html) item.boq.header.subtotal.currency.html = html
     },
-    saveBoqHeaderHeight: (state, action: PayloadAction<{index: number, height: number}>) => {
-      const { index, height } = action.payload
-      const item = state[index]
-      if (item.type !== 'boq') return
-      item.boq.header.height = height
-    },
     saveBoqColumnNameDescription: (state, action: TPayloadFroalaUpdate) => {
       const { index, html } = action.payload
       const item = state[index]
@@ -211,7 +205,6 @@ export const {
   saveBoqHeaderSubtotalText,
   saveBoqHeaderSubtotalPrice,
   saveBoqHeaderSubtotalCurrency,
-  saveBoqHeaderHeight,
   saveBoqColumnNameDescription,
   saveBoqColumnNameItem,
   saveBoqColumnNameQty,

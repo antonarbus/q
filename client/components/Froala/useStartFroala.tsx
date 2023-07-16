@@ -1,4 +1,4 @@
-import { saveBoqHeaderHeight, saveItemHeight, tellItemSavedLocally } from 'client/features/items/itemsSlice'
+import { tellItemSavedLocally } from 'client/features/items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { useDispatchTyped } from 'client/store'
 import { TRefAny, TRefDiv, TRefString } from 'client/types'
@@ -27,14 +27,6 @@ window.froalas = []
 export const useStartFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder, saveFroalaReducer, rowIndex, isCopyMode }: TProps) => {
   const dispatch = useDispatchTyped()
   const prevHtmlRef = useRef(initHtml) as TRefString
-
-  function saveHtmlAndHeights() {
-    const html = editorRef.current.html.get()
-    dispatch(saveFroalaReducer({ index, html, rowIndex }))
-    // todo: probably we can avoid this mess with height, take a look
-    const headerHeight = (froalaElementRef.current as HTMLElement).closest('.boq-header')?.clientHeight
-    if (headerHeight) dispatch(saveBoqHeaderHeight({ index, height: headerHeight }))
-  }
 
   useEffect(() => {
     if (isCopyMode) return
@@ -103,7 +95,8 @@ export const useStartFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froal
               const updatedHtml = editorRef.current.html.get()
               const contentHasChanged = prevHtmlRef.current !== updatedHtml
               if (!contentHasChanged) return
-              saveHtmlAndHeights()
+              const html = editorRef.current.html.get()
+              dispatch(saveFroalaReducer({ index, html, rowIndex }))
               dispatch(tellItemSavedLocally({ index }))
               onClickAwayIfHtmChanged?.()
               saveItemsIntoLocalStorage()
@@ -116,7 +109,6 @@ export const useStartFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froal
           window.froalas.push(editorRef)
           if (!editorRef?.current?.html) return
           editorRef.current.html.set(initHtml)
-          saveHtmlAndHeights() // initial correction of height values in redux
           // console.log('froalas are initiated')
         }
       )
@@ -130,5 +122,5 @@ export const useStartFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froal
       window.froalas = window.froalas.filter(({ current }) => current !== null)
       // console.log('froala destroyed')
     }
-  }, [index, isCopyMode]) //* without index, index is remembered at first initiation and if we move item it tries to update wrong item
+  }, [index, isCopyMode])
 }
