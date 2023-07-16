@@ -1,5 +1,5 @@
 import { PayloadAction, createSelector, createSlice, current } from '@reduxjs/toolkit'
-import { hideCopyContainer, pasteItem, updatePasteTextPos } from 'client/features/copy/copySlice'
+import { exitFromCopyMode, hideCopyContainer, pasteItem, updatePasteTextPos } from 'client/features/copy/copySlice'
 import { getItemsFromLocalStorage } from 'client/modules/localStorage'
 import { RootState } from 'client/store'
 import { nanoid } from 'nanoid'
@@ -163,6 +163,7 @@ const itemsSlice = createSlice({
         return itemsWithoutPasteText
       })
       .addCase(hideCopyContainer, (state) => state.filter(item => item.type !== 'paste'))
+      // .addCase(exitFromCopyMode, (state) => state.filter(item => item.type !== 'paste'))
       .addCase(pasteItem, (state, action) => {
         const { itemId, pastePos, item } = action.payload
         const cleanedItem = cleanItem(item)

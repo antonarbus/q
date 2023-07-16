@@ -1,13 +1,16 @@
 import { useDispatchTyped } from 'client/store'
 import { useEffectOnce } from 'react-use'
-import { exitFromCopyMode } from './copySlice'
+import { exitFromCopyMode, hideCopyContainer } from './copySlice'
 
 export function useCloseOnEsc() {
   const dispatch = useDispatchTyped()
 
   function closeOnEsc(e: KeyboardEvent) {
     if (e.key !== 'Escape') return
-    dispatch(exitFromCopyMode())
+    dispatch(hideCopyContainer())
+    setTimeout(() => {
+      dispatch(exitFromCopyMode())
+    }, 500)
   }
 
   function listenForEsc() {
