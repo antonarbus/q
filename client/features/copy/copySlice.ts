@@ -33,6 +33,9 @@ export const copySlice = createSlice({
     hideCopyContainer: (state) => {
       state.isCopyContainer = false
     },
+    enterIntoCopyMode: (state) => {
+      state.isCopyMode = true
+    },
     exitFromCopyMode: () => initialState,
     saveInitCordsOfCopyContainer: (state, action) => {
       state.initCords = action.payload
@@ -60,5 +63,5 @@ export const copySlice = createSlice({
   },
 })
 
-export const { showCopyContainer, hideCopyContainer, saveInitCordsOfCopyContainer, addItemIntoCopyContainer, removeItemFromCopyContainer, updatePasteTextPos, pasteItem, showPasteText, hidePasteText, exitFromCopyMode } = copySlice.actions
+export const { showCopyContainer, hideCopyContainer, saveInitCordsOfCopyContainer, addItemIntoCopyContainer, removeItemFromCopyContainer, updatePasteTextPos, pasteItem, showPasteText, hidePasteText, enterIntoCopyMode, exitFromCopyMode } = copySlice.actions
 export default copySlice.reducer

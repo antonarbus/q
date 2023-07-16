@@ -5,6 +5,7 @@ import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { saveItemsOrder, tellItemSavedLocally } from './itemsSlice'
 import { SortableContainer, SortableContainerProps } from 'react-sortable-hoc'
 import { TChildren } from 'client/types'
+import { enterIntoCopyMode, exitFromCopyMode } from '../copy/copySlice'
 
 // example with TypeScript
 // https://codesandbox.io/s/odfrontendeveloper-react-sortable-hoc-example-t96d8x?file=/src/examples/Items.tsx:518-635
@@ -51,6 +52,7 @@ export const ItemsContainer = ({ children }: TProps) => {
       useWindowAsScrollContainer
       onSortStart={() => {
         document.body.style.cursor = 'move'
+        dispatch(enterIntoCopyMode())
       }}
       onSortEnd={({ oldIndex, newIndex }) => {
         const { items } = store.getState()
@@ -58,6 +60,7 @@ export const ItemsContainer = ({ children }: TProps) => {
         dispatch(saveItemsOrder({ sortedItems }))
         saveItemsIntoLocalStorage()
         dispatch(tellItemSavedLocally({ index: newIndex }))
+        dispatch(exitFromCopyMode())
         document.body.style.removeProperty('cursor')
       }}
     >
