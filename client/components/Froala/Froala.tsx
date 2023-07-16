@@ -35,8 +35,9 @@ export const Froala = ({ additionalStyle, editorRef, froalaElementRef, index, in
   usePutCaretAtTheEndOfText({ index, isCopyMode, editorRef, froalaElementRef })
   const { heightDuringAnimationRef } = useFixedHeightForAnimation({ froalaElementRef, isCopyMode })
 
-  // todo: make cellRenderer for headers, items, cost, price cols
-  // todo: they will be rendered only on click, which is more performant
+  // todo: init froala on click for headers
+  // todo: make cellRenderer for item, cost, price cols
+  // todo: it will be more performant
 
   if (isCopyMode) {
     return (
