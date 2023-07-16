@@ -32,7 +32,7 @@ export const SortableItem: React.ComponentClass<ISortableItem, any> = SortableEl
         overflow: 'hidden',
       }}
       animate={{
-        height: item?.height, // todo: 'auto' if idea will work
+        height: item?.height,
         marginBottom: 20,
         opacity: 1,
         y: 0,
