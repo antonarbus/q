@@ -31,8 +31,7 @@ export const useStartFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froal
   function saveHtmlAndHeights() {
     const html = editorRef.current.html.get()
     dispatch(saveFroalaReducer({ index, html, rowIndex }))
-    const itemHeight = (froalaElementRef.current as HTMLElement).closest('.item-paper')?.clientHeight || 0
-    dispatch(saveItemHeight({ index, height: itemHeight }))
+    // todo: probably we can avoid this mess with height, take a look
     const headerHeight = (froalaElementRef.current as HTMLElement).closest('.boq-header')?.clientHeight
     if (headerHeight) dispatch(saveBoqHeaderHeight({ index, height: headerHeight }))
   }

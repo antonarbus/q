@@ -3,6 +3,7 @@ import { MdCopyAll } from 'react-icons/md'
 import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from '../../features/copy/copySlice'
 import { motion } from 'framer-motion'
 import { cleanHtml } from 'utils/itemsUtils'
+import { saveItemHeight } from 'client/features/items/itemsSlice'
 
 type TProps = {
   index: number
@@ -21,6 +22,12 @@ export const CopyIcon = ({ index }: TProps) => {
         top: 1,
       }}
       onClick={(e: React.MouseEvent) => {
+        const items = document.querySelectorAll('.item-paper')
+        items.forEach((item, index) => {
+          const height = item.clientHeight
+          dispatch(saveItemHeight({ index, height }))
+        })
+
         dispatch(saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
         dispatch(showCopyContainer())
         const itemToCopy = store.getState().items[index]

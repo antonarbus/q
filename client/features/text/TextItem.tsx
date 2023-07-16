@@ -6,7 +6,6 @@ import { PencilAtBottomRight } from 'client/components/PencilAtBottomRight'
 import { Froala } from 'client/components/Froala'
 import { saveText } from '../items/itemsSlice'
 import { TRefAny, TRefDiv } from 'client/types'
-import { useSaveItemHeightOnInitLoad } from '../items/useSaveItemHeightOnInitLoad'
 
 type TProps = {
   index: number
@@ -19,7 +18,6 @@ export const TextItem = ({ index }: TProps) => {
 
   if (item.type !== 'text') return null
   const { html } = item.text
-  useSaveItemHeightOnInitLoad({ itemRef: froalaElementRef, index })
 
   return (
     <SortableResizableItemWithActions index={index} >

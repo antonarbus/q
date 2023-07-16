@@ -14,7 +14,7 @@ import { QtyCellRenderer } from './cellRenderers/QtyCellRenderer'
 import { PriceCellRenderer } from './cellRenderers/PriceCellRenderer'
 import { TBoqRow } from 'client/features/items/types'
 import { ValueGetterParams } from 'ag-grid-community'
-import { saveBoqColumnWidth, saveItemHeight, tellItemSavedLocally, updateBoqRowsOrder } from 'client/features/items/itemsSlice'
+import { saveBoqColumnWidth, tellItemSavedLocally, updateBoqRowsOrder } from 'client/features/items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 
 type TProps = {
@@ -132,11 +132,6 @@ export const BoqTable = ({ index }: TProps) => {
         const width = event?.column?.actualWidth
         dispatch(saveBoqColumnWidth({ index, colId, width }))
         // @ts-ignore
-        const gridElement = event.api.gridBodyCtrl.eGridBody
-        const itemHeight = gridElement.closest('.item-paper')?.clientHeight || 0
-        // todo: check it, does not really work
-        // if we squeeze col text may not fit and rows may resize which changes item block height
-        dispatch(saveItemHeight({ index, height: itemHeight }))
         dispatch(tellItemSavedLocally({ index }))
         saveItemsIntoLocalStorage()
       }}

@@ -1,7 +1,7 @@
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { store, useDispatchTyped } from 'client/store'
 import { Resizable } from 're-resizable'
-import { saveItemHeight, saveItemWidth, tellItemSavedLocally } from '../../features/items/itemsSlice'
+import { saveItemWidth, tellItemSavedLocally } from '../../features/items/itemsSlice'
 import { TChildren } from 'client/types'
 
 interface TProps {
@@ -34,13 +34,6 @@ export const ResizablePaper = ({ children, index }: TProps) => {
       onResizeStop={(e, direction, refToElement) => {
         const width = parseInt(refToElement.style.width)
         dispatch(saveItemWidth({ index, width }))
-        const height = refToElement.clientHeight
-        // todo: this works for item now, but when we resize an item, also
-        // todo: a child Froala is resized and we need to update it's width
-        // todo: it becomes difficult
-        // todo: think about adding a resizer observer and update width there
-        // todo: also it maybe good for the height updates, check it
-        dispatch(saveItemHeight({ index, height }))
         saveItemsIntoLocalStorage()
         dispatch(tellItemSavedLocally({ index }))
       }}

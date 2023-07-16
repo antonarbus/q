@@ -3,7 +3,7 @@ import { TbCut } from 'react-icons/tb'
 import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/features/copy/copySlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { motion } from 'framer-motion'
-import { deleteItem, selectIsLastItem } from '../../features/items/itemsSlice'
+import { deleteItem, saveItemHeight, selectIsLastItem } from '../../features/items/itemsSlice'
 import { tellItemsSavedLocally } from 'client/features/bottom msg/bottomMsgSlice'
 import { cleanHtml } from 'utils/itemsUtils'
 
@@ -25,6 +25,13 @@ export const CutIcon = ({ index }: TProps) => {
       }}
       onClick={(e: React.MouseEvent) => {
         if (isLastItem) return
+
+        const items = document.querySelectorAll('.item-paper')
+        items.forEach((item, index) => {
+          const height = item.clientHeight
+          dispatch(saveItemHeight({ index, height }))
+        })
+
         dispatch(saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
         dispatch(showCopyContainer())
         const itemToCut = store.getState().items[index]
