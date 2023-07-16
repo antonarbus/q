@@ -60,7 +60,9 @@ export const ItemsContainer = ({ children }: TProps) => {
         dispatch(saveItemsOrder({ sortedItems }))
         saveItemsIntoLocalStorage()
         dispatch(tellItemSavedLocally({ index: newIndex }))
-        dispatch(exitFromCopyMode())
+        setTimeout(() => {
+          dispatch(exitFromCopyMode())
+        }, 500)
         document.body.style.removeProperty('cursor')
       }}
     >
