@@ -32,7 +32,7 @@ export const SortableItem: React.ComponentClass<ISortableItem, any> = SortableEl
         overflow: 'hidden',
       }}
       animate={{
-        height: item?.height,
+        height: item?.height, // height is stored on copy/cut icon click
         marginBottom: 20,
         opacity: 1,
         y: 0,
