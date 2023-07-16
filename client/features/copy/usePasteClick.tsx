@@ -23,7 +23,7 @@ function pasteItemOnClick() {
       // timeout to let animation end and completely go out from the copy-mode
       // to let froala initialize after animation to avoid motion staggering
       store.dispatch(exitFromCopyMode())
-    }, 1000 * theme.item.animationDuration)
+    }, 3000 * theme.item.animationDuration)
   }
 }
 
