@@ -6,7 +6,7 @@ export const defaultItems: TItems = [
     id: nanoid(3),
     type: 'text',
     width: 800,
-    height: 73,
+    height: 0,
     msg: '',
     text: {
       html: '<div>editable text</div>',
@@ -16,7 +16,7 @@ export const defaultItems: TItems = [
     id: nanoid(3),
     type: 'boq',
     width: 700,
-    height: 347,
+    height: 0,
     msg: '',
     boq: {
       header: {
@@ -116,7 +116,7 @@ export const defaultItems: TItems = [
     id: nanoid(3),
     type: 'text',
     width: 600,
-    height: 73,
+    height: 0,
     msg: '',
     text: {
       html: '<div>editable text</div>',
@@ -126,7 +126,7 @@ export const defaultItems: TItems = [
     id: nanoid(3),
     type: 'text',
     width: 500,
-    height: 73,
+    height: 0,
     msg: '',
     text: {
       html: '<div>editable text</div>',
