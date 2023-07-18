@@ -1,10 +1,7 @@
 # Feature-Sliced Design (FSD) for front-end applications
 https://feature-sliced.design/docs/get-started/overview
 
-In FSD, a project consists of 
-  1. *layers*, each *layer* is made up of 
-  2. *slices* and each *slice* is made up of 
-  3. *segments*
+In FSD, a project consists of *layers*, *slices* and *segments*.
 
 App consists from vertically arranged *layers*. ❗️Code on one *layer* can only interact with code from the *layers* strictly below.
 
