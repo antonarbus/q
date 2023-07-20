@@ -50,7 +50,7 @@ export function Logo({ logoRef }: Prop) {
         },
       }}
     >
-      <Link to="/">
+      <Link to='/'>
         <span>Q</span>
         <span className='uotation'>uotation</span>
         <span className='app-ext'>.app</span>

@@ -34,6 +34,7 @@ module.exports = {
   ],
   ignorePatterns: ['build/'],
   rules: {
+    'jsx-quotes': ['warn', 'prefer-single'],
     'react/react-in-jsx-scope': 'off',
     'space-before-function-paren': 'off',
     'react/no-unescaped-entities': 'off',

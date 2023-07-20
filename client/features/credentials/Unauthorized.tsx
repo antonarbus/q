@@ -19,7 +19,7 @@ export const Unauthorized = () => {
     }}>
       <span>Unauthorized</span>
       <Button
-        variant="contained"
+        variant='contained'
         startIcon={<ArrowBackIcon />}
         sx={{ mt: 2 }}
         onClick={() => navigate(-1)}

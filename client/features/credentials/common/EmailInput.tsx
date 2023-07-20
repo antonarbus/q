@@ -61,7 +61,7 @@ export function EmailInput({ email, setEmail, isEmailOk, setIsEmailOk, inputRef 
         label={emailLabel}
         // name="email"
         autoFocus
-        autoComplete="email"
+        autoComplete='email'
         placeholder='Email'
         value={email}
         onChange={(e: TEvent) => setEmail((e.target as HTMLInputElement).value)}
@@ -70,7 +70,7 @@ export function EmailInput({ email, setEmail, isEmailOk, setIsEmailOk, inputRef 
           suggestEmail()
         }}
         InputProps={{
-          startAdornment: <InputAdornment position="start"><Person /></InputAdornment>,
+          startAdornment: <InputAdornment position='start'><Person /></InputAdornment>,
         }}
         sx={{
           '& .MuiInputLabel-shrink': {

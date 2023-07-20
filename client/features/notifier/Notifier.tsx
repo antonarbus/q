@@ -29,7 +29,7 @@ export function Notifier() {
   return (
     <ToastStyled>
       <ToastContainer
-        position="bottom-center"
+        position='bottom-center'
         autoClose={3000}
         hideProgressBar={false}
         newestOnTop

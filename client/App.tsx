@@ -27,18 +27,18 @@ export const App = () => (
         <SpinnerFullPage />
         <Nav />
         <Routes>
-          <Route path="/*" element={<Main />}>
-            <Route path="register" element={<Register />} />
-            <Route path="login" element={<Login />} />
-            <Route path="reset" element={<Reset />} />
+          <Route path='/*' element={<Main />}>
+            <Route path='register' element={<Register />} />
+            <Route path='login' element={<Login />} />
+            <Route path='reset' element={<Reset />} />
           </Route>
           <Route element={<PersistentAuth />}>
             <Route element={<RequireAuth allowedRoles={['user']} />}>
-              <Route path="profile" element={<Profile />} />
-              <Route path="settings" element={<div>Settings</div>} />
+              <Route path='profile' element={<Profile />} />
+              <Route path='settings' element={<div>Settings</div>} />
             </Route>
           </Route>
-          <Route path="unauthorized" element={<Unauthorized />} />
+          <Route path='unauthorized' element={<Unauthorized />} />
         </Routes>
         <Notifier />
         <Updater />
