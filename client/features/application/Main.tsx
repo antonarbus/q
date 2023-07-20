@@ -10,8 +10,8 @@ export const Main = () => {
     <main css={{ padding: '1px 20px' }}>
       <Outlet />
       <Routes>
-        <Route path="/*" element={<Offer />} />
-        <Route path="counter" element={<CounterFromRedux />} />
+        <Route path='/*' element={<Offer />} />
+        <Route path='counter' element={<CounterFromRedux />} />
       </Routes>
     </main>
   )

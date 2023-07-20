@@ -1,4 +1,3 @@
-
 import { BoqHeaderSubtotalText } from './BoqHeaderSubtotalText'
 import { BoqHeaderSubtotalPrice } from './BoqHeaderSubtotalPrice'
 import { BoqHeaderSubtotalCurrency } from './BoqHeaderSubtotalCurrency'

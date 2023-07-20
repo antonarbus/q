@@ -31,7 +31,7 @@ export function Register() {
       onSlideOut={() => navigate('/')}
     >
       <CardCustom
-        title="Register"
+        title='Register'
         logo={
           <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }}>
             <LockOutlined />
@@ -57,14 +57,14 @@ export function Register() {
             setIsConfirmPasswordOk={setIsConfirmPasswordOk}
           />
           <ButtonCustom
-            content="REGISTER"
+            content='REGISTER'
             disabled={isButtonDisabled}
             httpStatus={httpStatus}
             setHttpStatus={setHttpStatus}
           />
           <div css={{ textAlign: 'right', marginTop: '20px' }}>
             <Link
-              to="/login"
+              to='/login'
               children='Log in?'
               onClick={(e: TEvent) => {
                 e.preventDefault()

@@ -31,7 +31,7 @@ export function Login() {
       onSlideOut={() => navigate('/')}
     >
       <CardCustom
-        title="Log in"
+        title='Log in'
         logo={
           <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }}>
             <LoginRounded />
@@ -52,14 +52,14 @@ export function Login() {
             setPassword={setPassword}
           />
           <ButtonCustom
-            content="LOG IN"
+            content='LOG IN'
             disabled={isButtonDisabled}
             httpStatus={httpStatus}
             setHttpStatus={setHttpStatus}
           />
           <div css={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
             <Link
-              to="/reset"
+              to='/reset'
               children='Reset?'
               onClick={(e: TEvent) => {
                 e.preventDefault()
@@ -67,7 +67,7 @@ export function Login() {
               }}
             />
             <Link
-              to="/register"
+              to='/register'
               children='Register?'
               onClick={(e: TEvent) => {
                 e.preventDefault()
