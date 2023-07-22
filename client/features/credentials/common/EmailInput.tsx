@@ -4,11 +4,11 @@ import mailcheck from 'mailcheck'
 import { InputAdornment, TextField } from '@mui/material'
 import { Person } from '@mui/icons-material'
 import { theme } from 'client/theme'
-import { TEvent, TRefDiv } from 'client/types'
+import { Event, TRefDiv } from 'client/types'
 
 const isEmailPatternOk = (email: string) => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
 
-type TProps = {
+type Props = {
   email: string
   setEmail: (value: string) => void
   isEmailOk: boolean
@@ -26,7 +26,7 @@ type TProps = {
  * @param props.inputRef reference to the input element, for ex. to put a focus on
  */
 
-export function EmailInput({ email, setEmail, isEmailOk, setIsEmailOk, inputRef }: TProps) {
+export function EmailInput({ email, setEmail, isEmailOk, setIsEmailOk, inputRef }: Props) {
   // input focused out ones (show validation msg only after first focus out)
   const [inputFocusedOutOnes, setInputFocusedOutOnes] = useState(false)
 
@@ -64,7 +64,7 @@ export function EmailInput({ email, setEmail, isEmailOk, setIsEmailOk, inputRef 
         autoComplete='email'
         placeholder='Email'
         value={email}
-        onChange={(e: TEvent) => setEmail((e.target as HTMLInputElement).value)}
+        onChange={(e: Event) => setEmail((e.target as HTMLInputElement).value)}
         onBlur={() => {
           setInputFocusedOutOnes(true)
           suggestEmail()

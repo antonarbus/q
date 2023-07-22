@@ -1,8 +1,8 @@
 import { Typography } from '@mui/material'
-import { TChildren, TRefDiv } from 'client/types'
+import { Children, TRefDiv } from 'client/types'
 
-type TProps = {
-  children?: TChildren
+type Props = {
+  children?: Children
   content?: React.ReactNode
   cssProps?: React.CSSProperties
   reference?: TRefDiv
@@ -20,7 +20,7 @@ type TProps = {
  * @param props.logo logo component
 */
 
-export const CardCustom = ({ children, content, cssProps, reference, title, logo }: TProps) => (
+export const CardCustom = ({ children, content, cssProps, reference, title, logo }: Props) => (
   <div
     css={{
       display: 'flex',

@@ -4,7 +4,7 @@ import { Avatar } from '@mui/material'
 import { CardCustom } from 'client/components/CardCustom'
 import { ButtonCustom } from 'client/components/ButtonCustom'
 import { useReset } from './useReset'
-import { TEvent, TRefDiv } from 'client/types'
+import { Event, TRefDiv } from 'client/types'
 import { EmailInput } from './common/EmailInput'
 import { theme } from 'client/theme'
 import { BackdropWithSlidableContent } from 'client/components/BackdropWithSlidableContent'
@@ -30,7 +30,7 @@ export function Reset() {
           </Avatar>
         }
       >
-        <form onSubmit={(e: TEvent) => resetPassword({ e, email })}>
+        <form onSubmit={(e: Event) => resetPassword({ e, email })}>
           <EmailInput
             email={email}
             setEmail={setEmail}

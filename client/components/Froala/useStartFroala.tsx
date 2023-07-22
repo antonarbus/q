@@ -1,18 +1,18 @@
 import { tellItemSavedLocally } from 'client/features/items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { useDispatchTyped } from 'client/store'
-import { TRefAny, TRefDiv, TRefString } from 'client/types'
+import { RefAny, TRefDiv, RefString } from 'client/types'
 import { useEffect, useRef } from 'react'
-import { TSaveFroalaReducer } from './Froala'
+import { SaveFroalaReducer } from './Froala'
 
-type TProps = {
+type Props = {
   index: number
   initHtml: string
   onClickAwayIfHtmChanged?: Function
   froalaElementRef: TRefDiv
-  editorRef: TRefAny
+  editorRef: RefAny
   placeholder?: string
-  saveFroalaReducer: TSaveFroalaReducer
+  saveFroalaReducer: SaveFroalaReducer
   rowIndex?: number
   isCopyMode: boolean
 }
@@ -24,9 +24,9 @@ declare const window: Window &
 
 window.froalas = []
 
-export const useStartFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder, saveFroalaReducer, rowIndex, isCopyMode }: TProps) => {
+export const useStartFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder, saveFroalaReducer, rowIndex, isCopyMode }: Props) => {
   const dispatch = useDispatchTyped()
-  const prevHtmlRef = useRef(initHtml) as TRefString
+  const prevHtmlRef = useRef(initHtml) as RefString
 
   useEffect(() => {
     if (isCopyMode) return

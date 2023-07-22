@@ -7,11 +7,11 @@ import { deleteItem, saveItemHeight, selectIsLastItem } from '../../features/ite
 import { tellItemsSavedLocally } from 'client/features/bottom msg/bottomMsgSlice'
 import { cleanHtml } from 'utils/itemsUtils'
 
-type TProps = {
+type Props = {
   index: number
 }
 
-export const CutIcon = ({ index }: TProps) => {
+export const CutIcon = ({ index }: Props) => {
   const dispatch = useDispatchTyped()
   const isLastItem = useSelectorTyped(selectIsLastItem)
 

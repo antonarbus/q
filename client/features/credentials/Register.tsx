@@ -1,4 +1,4 @@
-import { TEvent, TRefDiv } from 'client/types'
+import { Event, TRefDiv } from 'client/types'
 import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Avatar } from '@mui/material'
@@ -39,7 +39,7 @@ export function Register() {
         }
         reference={cardRef}
       >
-        <form onSubmit={(e: TEvent) => registerUser({ e, email, password })} >
+        <form onSubmit={(e: Event) => registerUser({ e, email, password })} >
           <EmailInput
             email={email}
             setEmail={setEmail}
@@ -66,7 +66,7 @@ export function Register() {
             <Link
               to='/login'
               children='Log in?'
-              onClick={(e: TEvent) => {
+              onClick={(e: Event) => {
                 e.preventDefault()
                 slideElement({ element: cardRef.current, cb: () => navigate('/login') })
               }}

@@ -1,18 +1,18 @@
 import { notify } from 'client/features/notifier/notify'
-import { TEvent } from 'client/types'
+import { Event } from 'client/types'
 import { useState } from 'react'
 import { token } from './token'
 import { HttpStatusType } from './types'
 
-type TProps = {
-  e: TEvent
+type Props = {
+  e: Event
   email: string
 }
 
 export function useReset() {
   const [httpStatus, setHttpStatus] = useState<HttpStatusType>('')
 
-  async function resetPassword({ e, email }: TProps) {
+  async function resetPassword({ e, email }: Props) {
     e.preventDefault()
     setHttpStatus('loading')
     const method = 'POST'

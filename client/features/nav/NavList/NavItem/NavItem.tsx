@@ -9,7 +9,7 @@ import { TiArrowSortedDown } from 'react-icons/ti'
 import { theme } from 'client/theme'
 import { css } from '@emotion/react'
 
-type TProps = {
+type Props = {
   children?: React.ReactNode,
   id: string
 }
@@ -25,7 +25,7 @@ type TProps = {
 * - required to avoid Menu to go over the narrow window
 */
 
-export function NavItem({ children, id }: TProps) {
+export function NavItem({ children, id }: Props) {
   /**
   * required to avoid Menu to go over the narrow window
   */

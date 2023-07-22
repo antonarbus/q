@@ -8,15 +8,15 @@ import { SortableItem } from './SortableItem'
 import { DragIcon } from './DragIcon'
 import { useIsDisabledItem } from './useIsDisabledItem'
 import { Msg } from './Msg'
-import { TChildren } from 'client/types'
+import { Children } from 'client/types'
 import { ReduceOpacityIfPasteHere } from './ReduceOpacityIfPasteHere'
 
-type TProps = {
+type Props = {
   index: number
-  children: TChildren
+  children: Children
 }
 
-export const SortableResizableItemWithActions = ({ index, children }: TProps) => {
+export const SortableResizableItemWithActions = ({ index, children }: Props) => {
   const isDisabled = useIsDisabledItem()
 
   return (

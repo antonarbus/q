@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { PasswordInput } from './PasswordInput'
 
-type TProps = {
+type Props = {
   originalPassword: string,
   isConfirmPasswordOk: boolean
   setIsConfirmPasswordOk: (value: boolean) => void
@@ -16,7 +16,7 @@ type TProps = {
  * @param props.setIsConfirmPasswordOk isConfirmPasswordOk state setter
  */
 
-export function ConfirmPasswordInput({ originalPassword, isConfirmPasswordOk, setIsConfirmPasswordOk }: TProps) {
+export function ConfirmPasswordInput({ originalPassword, isConfirmPasswordOk, setIsConfirmPasswordOk }: Props) {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [didBlur, setDidBlur] = useState(false)
   const initLabel = 'Confirm password'

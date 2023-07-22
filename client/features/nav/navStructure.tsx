@@ -11,19 +11,19 @@ import { resetToDefaultItems } from 'client/modules/localStorage'
 
 const reactIcon = createElement(IoShareOutline, {})
 
-export type TMenu = {
+export type Menu = {
   id: string,
   name: string,
   icon?: React.ReactNode | string,
   link?: any,
   func?: () => void,
   shortcut?: string[],
-  menuItems?: TMenu[],
+  menuItems?: Menu[],
   isHidden?: boolean,
   disabled?: boolean
 }
 
-export const navStructure: TMenu[] = [
+export const navStructure: Menu[] = [
   {
     id: 'top',
     name: 'top',

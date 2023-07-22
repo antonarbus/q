@@ -3,12 +3,12 @@ import { isOverflown } from 'utils/isOverflown'
 const shrinkElementSlightly = (el: HTMLElement) => { el.style.width = el.offsetWidth - 10 + 'px' }
 
 export function calcNavMediaQueryParams(nav: HTMLElement, logo: HTMLElement) {
-  type TProps = {
+  type Props = {
     elsToHideClass?: string
     elsToShowClass?: string
   }
 
-  function calcNavWidthWhenLogoIsOverlay({ elsToHideClass, elsToShowClass }: TProps = {}) {
+  function calcNavWidthWhenLogoIsOverlay({ elsToHideClass, elsToShowClass }: Props = {}) {
     if (elsToHideClass) {
       const elsToHideArr = Array.from(nav.querySelectorAll(elsToHideClass))
       elsToHideArr.forEach(el => { (el as HTMLElement).style.display = 'none' })

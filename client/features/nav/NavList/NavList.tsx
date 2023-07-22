@@ -1,4 +1,4 @@
-import { TMenu } from '../navStructure'
+import { Menu } from '../navStructure'
 import { NavItem } from './NavItem'
 import { Burger } from './NavItem/Burger'
 import { useSelectorTyped } from 'client/store'
@@ -17,7 +17,7 @@ export function NavList() {
       {
         navStructure[0].menuItems!
           .filter((navItem) => !navItem.isHidden)
-          .map((navItem: TMenu) => <NavItem id={navItem.id} key={navItem.id} />)
+          .map((navItem: Menu) => <NavItem id={navItem.id} key={navItem.id} />)
       }
       <NavItem id={'burger'} key={'burger'}><Burger /></NavItem>
     </ul>

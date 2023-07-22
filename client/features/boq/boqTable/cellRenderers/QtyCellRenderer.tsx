@@ -1,19 +1,19 @@
 import { Froala } from 'client/components/Froala'
 import { saveBoqQty } from 'client/features/items/itemsSlice'
 import { store } from 'client/store'
-import { TRefDiv, TRefAny } from 'client/types'
+import { TRefDiv, RefAny } from 'client/types'
 import { useRef } from 'react'
 
-type TProps = {
+type Props = {
   index: number
   node: {
     rowIndex?: number
   }
 }
 
-export const QtyCellRenderer = ({ index, node, ...rest }: TProps) => {
+export const QtyCellRenderer = ({ index, node, ...rest }: Props) => {
   const froalaElementRef = useRef() as TRefDiv
-  const editorRef = useRef(null) as TRefAny
+  const editorRef = useRef(null) as RefAny
   const item = store.getState().items?.[index]
   const rowIndex = node.rowIndex
 

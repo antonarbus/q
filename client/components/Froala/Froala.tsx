@@ -1,4 +1,4 @@
-import { TRefAny, TRefDiv } from 'client/types'
+import { RefAny, TRefDiv } from 'client/types'
 import { useStartFroala } from './useStartFroala'
 import { AnyAction } from '@reduxjs/toolkit'
 import { Box, SxProps } from '@mui/material'
@@ -8,28 +8,28 @@ import { usePutCaretAtTheEndOfText } from './usePutCaretAtTheEndOfText'
 import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
 import parseHtml from 'html-react-parser'
 
-type TReducerProps = {
+type ReducerProps = {
   index: number
   html: string
   rowIndex?: number
 }
 
-export type TSaveFroalaReducer = ({ index, html, rowIndex }: TReducerProps) => AnyAction
+export type SaveFroalaReducer = ({ index, html, rowIndex }: ReducerProps) => AnyAction
 
-type TProps = {
+type Props = {
   index: number
   padding?: number | string
   initHtml: string
   froalaElementRef: TRefDiv
-  editorRef: TRefAny
+  editorRef: RefAny
   placeholder?: string
   additionalStyle?: SxProps
   onClickAwayIfHtmChanged?: Function
   rowIndex?: number
-  saveFroalaReducer: TSaveFroalaReducer
+  saveFroalaReducer: SaveFroalaReducer
 }
 
-export const Froala = ({ additionalStyle, editorRef, froalaElementRef, index, initHtml, onClickAwayIfHtmChanged, padding, placeholder, rowIndex, saveFroalaReducer }: TProps) => {
+export const Froala = ({ additionalStyle, editorRef, froalaElementRef, index, initHtml, onClickAwayIfHtmChanged, padding, placeholder, rowIndex, saveFroalaReducer }: Props) => {
   const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
   useStartFroala({ editorRef, froalaElementRef, index, initHtml, onClickAwayIfHtmChanged, placeholder, rowIndex, saveFroalaReducer, isCopyMode })
   usePutCaretAtTheEndOfText({ index, isCopyMode, editorRef, froalaElementRef })

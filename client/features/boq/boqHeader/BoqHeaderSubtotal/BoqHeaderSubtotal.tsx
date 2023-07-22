@@ -2,11 +2,11 @@ import { BoqHeaderSubtotalText } from './BoqHeaderSubtotalText'
 import { BoqHeaderSubtotalPrice } from './BoqHeaderSubtotalPrice'
 import { BoqHeaderSubtotalCurrency } from './BoqHeaderSubtotalCurrency'
 
-type TProps = {
+type Props = {
   index: number
 }
 
-export const BoqHeaderSubtotal = ({ index }: TProps) => {
+export const BoqHeaderSubtotal = ({ index }: Props) => {
   return (
     <div
       css={{

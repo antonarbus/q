@@ -1,10 +1,10 @@
 import { Lock, Visibility, VisibilityOff } from '@mui/icons-material'
 import { IconButton, InputAdornment, TextField } from '@mui/material'
 import { theme } from 'client/theme'
-import { TEvent } from 'client/types'
+import { Event } from 'client/types'
 import { useState } from 'react'
 
-type TProps = {
+type Props = {
   password: string
   setPassword: (value: string) => void
   onBlur?: () => void
@@ -21,7 +21,7 @@ type TProps = {
  * @param props.label label
  */
 
-export function PasswordInput({ password, setPassword, onBlur, label, isLabelRed }: TProps) {
+export function PasswordInput({ password, setPassword, onBlur, label, isLabelRed }: Props) {
   const [showPassword, setShowPassword] = useState(false)
 
   return (
@@ -33,7 +33,7 @@ export function PasswordInput({ password, setPassword, onBlur, label, isLabelRed
       autoComplete='new-password'
       placeholder='Password'
       value={password}
-      onChange={(e: TEvent) => setPassword((e.target as HTMLInputElement).value)}
+      onChange={(e: Event) => setPassword((e.target as HTMLInputElement).value)}
       onBlur={onBlur}
       sx={{
         mb: 2,

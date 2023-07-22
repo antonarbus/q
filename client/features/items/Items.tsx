@@ -1,7 +1,7 @@
 import { useSelectorTyped } from 'client/store'
 import { ItemsContainer } from './ItemsContainer'
 import { PasteItem } from '../copy/PasteItem'
-import { TItem } from './types'
+import { Item } from './types'
 import { TextItem } from '../text/TextItem'
 import { BoqItem } from '../boq/BoqItem'
 
@@ -9,7 +9,7 @@ import { BoqItem } from '../boq/BoqItem'
 const equalityFn = (prevItems: any, currentItems: any) => {
   const isDifferentLength = prevItems.length !== currentItems.length
   if (isDifferentLength) return false
-  const idsDoNotMatch = prevItems.some((item: TItem, index: number) =>
+  const idsDoNotMatch = prevItems.some((item: Item, index: number) =>
     prevItems[index]?.id !== currentItems[index]?.id)
   if (idsDoNotMatch) return false
   return true

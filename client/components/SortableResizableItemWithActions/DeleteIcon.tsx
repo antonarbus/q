@@ -7,11 +7,11 @@ import { gsap } from 'gsap'
 import { useRef } from 'react'
 import { TRefSpan } from 'client/types'
 
-type TProps = {
+type Props = {
   index: number
 }
 
-export const DeleteIcon = ({ index }: TProps) => {
+export const DeleteIcon = ({ index }: Props) => {
   const dispatch = useDispatchTyped()
   const ref = useRef() as TRefSpan
   const isLastItem = useSelectorTyped(selectIsLastItem)

@@ -4,22 +4,22 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { saveItemsOrder, tellItemSavedLocally } from './itemsSlice'
 import { SortableContainer, SortableContainerProps } from 'react-sortable-hoc'
-import { TChildren } from 'client/types'
+import { Children } from 'client/types'
 import { enterIntoCopyMode, exitFromCopyMode } from '../copy/copySlice'
 
 // example with TypeScript
 // https://codesandbox.io/s/odfrontendeveloper-react-sortable-hoc-example-t96d8x?file=/src/examples/Items.tsx:518-635
 
-type TProps = {
-  children: TChildren
+type Props = {
+  children: Children
 }
 
 interface ISortableContainer extends SortableContainerProps {
-  children: TChildren
+  children: Children
 }
 
 const DraggableItems: React.ComponentClass<ISortableContainer, any> =
-  SortableContainer(({ children }: TProps) => (
+  SortableContainer(({ children }: Props) => (
     <motion.div
       id='items'
       initial={{
@@ -43,7 +43,7 @@ const DraggableItems: React.ComponentClass<ISortableContainer, any> =
     </motion.div>
   ))
 
-export const ItemsContainer = ({ children }: TProps) => {
+export const ItemsContainer = ({ children }: Props) => {
   const dispatch = useDispatchTyped()
 
   return (
