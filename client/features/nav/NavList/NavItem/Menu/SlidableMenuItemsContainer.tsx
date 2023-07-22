@@ -1,10 +1,10 @@
 import { selectMenuItemByIdsChainSelector } from 'client/features/nav/navSlice'
 import { useSelectorTyped } from 'client/store'
 import { MenuItem } from './MenuItem'
-import { TRefDiv } from 'client/types'
+import { RefDiv } from 'client/types'
 
 type Props = {
-  reference: TRefDiv
+  reference: RefDiv
   idsToMenu: string[]
   className: string
 }

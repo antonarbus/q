@@ -1,4 +1,4 @@
-import { RefAny, TRefDiv } from 'client/types'
+import { RefAny, RefDiv } from 'client/types'
 import { useStartFroala } from './useStartFroala'
 import { AnyAction } from '@reduxjs/toolkit'
 import { Box, SxProps } from '@mui/material'
@@ -20,7 +20,7 @@ type Props = {
   index: number
   padding?: number | string
   initHtml: string
-  froalaElementRef: TRefDiv
+  froalaElementRef: RefDiv
   editorRef: RefAny
   placeholder?: string
   additionalStyle?: SxProps

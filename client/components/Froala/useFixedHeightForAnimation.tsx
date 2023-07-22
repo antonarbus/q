@@ -1,8 +1,8 @@
-import { TRefDiv } from 'client/types'
+import { RefDiv } from 'client/types'
 import { useEffect, useRef } from 'react'
 
 type Props = {
-  froalaElementRef: TRefDiv
+  froalaElementRef: RefDiv
   isCopyMode: boolean
 }
 

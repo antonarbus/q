@@ -4,7 +4,7 @@ import { Avatar } from '@mui/material'
 import { CardCustom } from 'client/components/CardCustom'
 import { ButtonCustom } from 'client/components/ButtonCustom'
 import { useReset } from './useReset'
-import { Event, TRefDiv } from 'client/types'
+import { Event, RefDiv } from 'client/types'
 import { EmailInput } from './common/EmailInput'
 import { theme } from 'client/theme'
 import { BackdropWithSlidableContent } from 'client/components/BackdropWithSlidableContent'
@@ -13,7 +13,7 @@ import PasswordRoundedIcon from '@mui/icons-material/PasswordRounded'
 export function Reset() {
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
-  const inputRef = useRef() as TRefDiv
+  const inputRef = useRef() as RefDiv
   const { resetPassword, httpStatus, setHttpStatus } = useReset()
   const [isEmailOk, setIsEmailOk] = useState(false)
 

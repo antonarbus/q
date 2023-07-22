@@ -1,9 +1,9 @@
 import { useSelectorTyped } from 'client/store'
-import { TRefDiv } from 'client/types'
+import { RefDiv } from 'client/types'
 import { Link } from 'react-router-dom'
 
 type Prop = {
-  logoRef: TRefDiv
+  logoRef: RefDiv
 }
 
 export function Logo({ logoRef }: Prop) {

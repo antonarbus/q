@@ -5,7 +5,7 @@ import { deleteItem, selectIsLastItem } from '../../features/items/itemsSlice'
 import { tellItemsSavedLocally } from 'client/features/bottom msg/bottomMsgSlice'
 import { gsap } from 'gsap'
 import { useRef } from 'react'
-import { TRefSpan } from 'client/types'
+import { RefSpan } from 'client/types'
 
 type Props = {
   index: number
@@ -13,7 +13,7 @@ type Props = {
 
 export const DeleteIcon = ({ index }: Props) => {
   const dispatch = useDispatchTyped()
-  const ref = useRef() as TRefSpan
+  const ref = useRef() as RefSpan
   const isLastItem = useSelectorTyped(selectIsLastItem)
 
   return (

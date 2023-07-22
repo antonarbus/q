@@ -1,7 +1,7 @@
 import { tellItemSavedLocally } from 'client/features/items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { useDispatchTyped } from 'client/store'
-import { RefAny, TRefDiv, RefString } from 'client/types'
+import { RefAny, RefDiv, RefString } from 'client/types'
 import { useEffect, useRef } from 'react'
 import { SaveFroalaReducer } from './Froala'
 
@@ -9,7 +9,7 @@ type Props = {
   index: number
   initHtml: string
   onClickAwayIfHtmChanged?: Function
-  froalaElementRef: TRefDiv
+  froalaElementRef: RefDiv
   editorRef: RefAny
   placeholder?: string
   saveFroalaReducer: SaveFroalaReducer

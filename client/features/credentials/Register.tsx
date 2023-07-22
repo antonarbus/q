@@ -1,4 +1,4 @@
-import { Event, TRefDiv } from 'client/types'
+import { Event, RefDiv } from 'client/types'
 import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Avatar } from '@mui/material'
@@ -15,8 +15,8 @@ import { slideElement } from 'utils/slideElement'
 
 export function Register() {
   const [email, setEmail] = useState('')
-  const inputRef = useRef() as TRefDiv
-  const cardRef = useRef() as TRefDiv
+  const inputRef = useRef() as RefDiv
+  const cardRef = useRef() as RefDiv
   const [isEmailOk, setIsEmailOk] = useState(false)
   const [password, setPassword] = useState('')
   const [isConfirmPasswordOk, setIsConfirmPasswordOk] = useState(false)
