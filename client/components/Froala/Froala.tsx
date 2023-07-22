@@ -3,7 +3,7 @@ import { useStartFroala } from './useStartFroala'
 import { AnyAction } from '@reduxjs/toolkit'
 import { Box, SxProps } from '@mui/material'
 import { useSelectorTyped } from 'client/store'
-import { FroalaForCopyMode } from './FroalaForCopyMode'
+import { RenderedHtml } from './RenderedHtml'
 import { usePutCaretAtTheEndOfText } from './usePutCaretAtTheEndOfText'
 import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
 import parseHtml from 'html-react-parser'
@@ -35,13 +35,12 @@ export const Froala = ({ additionalStyle, editorRef, froalaElementRef, index, in
   usePutCaretAtTheEndOfText({ index, isCopyMode, editorRef, froalaElementRef })
   const { heightDuringAnimationRef } = useFixedHeightForAnimation({ froalaElementRef, isCopyMode })
 
-  // todo: init froala on click for headers
-  // todo: make cellRenderer for item, cost, price cols
+  // todo: add a state which will init froala on click, for froalas at header, item, cost, price
   // todo: it will be more performant
 
   if (isCopyMode) {
     return (
-      <FroalaForCopyMode
+      <RenderedHtml
         html={initHtml}
         padding={padding}
         additionalStyle={additionalStyle}
