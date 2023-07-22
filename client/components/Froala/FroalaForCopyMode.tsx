@@ -1,17 +1,17 @@
 import { Box, SxProps } from '@mui/material'
-import { TRefAny } from 'client/types'
+import { RefAny } from 'client/types'
 import { MutableRefObject, useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 
-type TProps = {
+type Props = {
   padding?: number | string
   html: string
   additionalStyle?: SxProps
-  editorRef: TRefAny
+  editorRef: RefAny
   heightDuringAnimationRef: MutableRefObject<number | undefined>
 }
 
-export const FroalaForCopyMode = ({ html: initHtml, padding, additionalStyle, editorRef, heightDuringAnimationRef }: TProps) => {
+export const FroalaForCopyMode = ({ html: initHtml, padding, additionalStyle, editorRef, heightDuringAnimationRef }: Props) => {
   const ref = useRef<HTMLDivElement>()
 
   const html = useRef(initHtml)

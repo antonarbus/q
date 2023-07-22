@@ -1,11 +1,11 @@
-import { TRefAny } from 'client/types'
+import { RefAny } from 'client/types'
 import { BiEditAlt as PencilIcon } from 'react-icons/bi'
 
-type TProps = {
-  editorRef: TRefAny
+type Props = {
+  editorRef: RefAny
 }
 
-export const PencilAtBottomRight = ({ editorRef }: TProps) => {
+export const PencilAtBottomRight = ({ editorRef }: Props) => {
   return (
 
     <PencilIcon

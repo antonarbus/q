@@ -5,15 +5,15 @@ import { RootState } from 'client/store'
 import { nanoid } from 'nanoid'
 import { CopyPlaceType } from '../copy/types'
 import { defaultItems } from './defaultItems'
-import { TPasteItem, TItems, TBoqColumns, TBoqRow } from './types'
+import { PasteItem, Items, BoqColumns, BoqRow } from './types'
 import { cleanItem } from 'utils/itemsUtils'
 // import isEqual from 'lodash.isequal'
 
-type TPayloadFroalaUpdate = PayloadAction<{
+type PayloadFroalaUpdate = PayloadAction<{
   index: number, html?: string, height?: number, rowIndex?: number
 }>
 
-const initialState: TItems = getItemsFromLocalStorage()
+const initialState: Items = getItemsFromLocalStorage()
 
 const itemsSlice = createSlice({
   name: 'items',
@@ -42,62 +42,62 @@ const itemsSlice = createSlice({
       const item = state[index]
       item.height = height
     },
-    saveText: (state, action: TPayloadFroalaUpdate) => {
+    saveText: (state, action: PayloadFroalaUpdate) => {
       const { index, html } = action.payload
       const item = state[index]
       if (item.type !== 'text') return
       if (html) item.text.html = html
     },
-    saveBoqHeaderTitle: (state, action: TPayloadFroalaUpdate) => {
+    saveBoqHeaderTitle: (state, action: PayloadFroalaUpdate) => {
       const { index, html } = action.payload
       const item = state[index]
       if (item.type !== 'boq') return
       if (html) item.boq.header.title.html = html
     },
-    saveBoqHeaderSubtotalText: (state, action: TPayloadFroalaUpdate) => {
+    saveBoqHeaderSubtotalText: (state, action: PayloadFroalaUpdate) => {
       const { index, html } = action.payload
       const item = state[index]
       if (item.type !== 'boq') return
       if (html) item.boq.header.subtotal.text.html = html
     },
-    saveBoqHeaderSubtotalPrice: (state, action: TPayloadFroalaUpdate) => {
+    saveBoqHeaderSubtotalPrice: (state, action: PayloadFroalaUpdate) => {
       const { index, html } = action.payload
       const item = state[index]
       if (item.type !== 'boq') return
       if (html) item.boq.header.subtotal.price.html = html
       // todo: add logic for value
     },
-    saveBoqHeaderSubtotalCurrency: (state, action: TPayloadFroalaUpdate) => {
+    saveBoqHeaderSubtotalCurrency: (state, action: PayloadFroalaUpdate) => {
       const { index, html } = action.payload
       const item = state[index]
       if (item.type !== 'boq') return
       if (html) item.boq.header.subtotal.currency.html = html
     },
-    saveBoqColumnNameDescription: (state, action: TPayloadFroalaUpdate) => {
+    saveBoqColumnNameDescription: (state, action: PayloadFroalaUpdate) => {
       const { index, html } = action.payload
       const item = state[index]
       if (item.type !== 'boq') return
       if (html) item.boq.column.description.html = html
     },
-    saveBoqColumnNameItem: (state, action: TPayloadFroalaUpdate) => {
+    saveBoqColumnNameItem: (state, action: PayloadFroalaUpdate) => {
       const { index, html } = action.payload
       const item = state[index]
       if (item.type !== 'boq') return
       if (html) item.boq.column.item.html = html
     },
-    saveBoqColumnNameQty: (state, action: TPayloadFroalaUpdate) => {
+    saveBoqColumnNameQty: (state, action: PayloadFroalaUpdate) => {
       const { index, html } = action.payload
       const item = state[index]
       if (item.type !== 'boq') return
       if (html) item.boq.column.qty.html = html
     },
-    saveBoqColumnNamePrice: (state, action: TPayloadFroalaUpdate) => {
+    saveBoqColumnNamePrice: (state, action: PayloadFroalaUpdate) => {
       const { index, html } = action.payload
       const item = state[index]
       if (item.type !== 'boq') return
       if (html) item.boq.column.price.html = html
     },
-    saveBoqDescription: (state, action: TPayloadFroalaUpdate) => {
+    saveBoqDescription: (state, action: PayloadFroalaUpdate) => {
       const { index, html, rowIndex } = action.payload
       const item = state[index]
       if (item.type !== 'boq') return
@@ -105,7 +105,7 @@ const itemsSlice = createSlice({
         if (html) item.boq.rows[rowIndex].description.html = html
       }
     },
-    saveBoqItem: (state, action: TPayloadFroalaUpdate) => {
+    saveBoqItem: (state, action: PayloadFroalaUpdate) => {
       const { index, html, rowIndex } = action.payload
       const item = state[index]
       if (item.type !== 'boq') return
@@ -113,7 +113,7 @@ const itemsSlice = createSlice({
         if (html) item.boq.rows[rowIndex].item.html = html
       }
     },
-    saveBoqQty: (state, action: TPayloadFroalaUpdate) => {
+    saveBoqQty: (state, action: PayloadFroalaUpdate) => {
       const { index, html, rowIndex } = action.payload
       const item = state[index]
       if (item.type !== 'boq') return
@@ -121,7 +121,7 @@ const itemsSlice = createSlice({
         if (html) item.boq.rows[rowIndex].qty.html = html
       }
     },
-    saveBoqPrice: (state, action: TPayloadFroalaUpdate) => {
+    saveBoqPrice: (state, action: PayloadFroalaUpdate) => {
       const { index, html, rowIndex } = action.payload
       const item = state[index]
       if (item.type !== 'boq') return
@@ -129,7 +129,7 @@ const itemsSlice = createSlice({
         if (html) item.boq.rows[rowIndex].price.html = html
       }
     },
-    saveBoqColumnWidth: (state, action: PayloadAction<{index: number, colId: keyof TBoqColumns, width: number}>) => {
+    saveBoqColumnWidth: (state, action: PayloadAction<{index: number, colId: keyof BoqColumns, width: number}>) => {
       const { index, colId, width } = action.payload
       const item = state[index]
       if (item.type !== 'boq') return
@@ -141,7 +141,7 @@ const itemsSlice = createSlice({
       if (item.type !== 'boq') return
       const boq = item.boq
       // console.log(current(rows))
-      const updatedRows:TBoqRow[] = []
+      const updatedRows:BoqRow[] = []
       rowIdsOrdered.forEach((id) => {
         const rowWithSameId = boq.rows.find((row) => row.id === id)
         if (!rowWithSameId) return
@@ -158,7 +158,7 @@ const itemsSlice = createSlice({
         const itemsWithoutPasteText = state.filter(item => item.type !== 'paste')
         if (pastePos === 'middle') return itemsWithoutPasteText
         const insertAtIndex = itemsWithoutPasteText.findIndex(item => item.id === itemId) + (pastePos === 'bottom' ? 1 : 0)
-        const pasteTextEl: TPasteItem = { id: 'paste id', type: 'paste', height: 0, width: 0, msg: '' }
+        const pasteTextEl: PasteItem = { id: 'paste id', type: 'paste', height: 0, width: 0, msg: '' }
         itemsWithoutPasteText.splice(insertAtIndex, 0, pasteTextEl)
         return itemsWithoutPasteText
       })
@@ -229,7 +229,7 @@ export const selectItemsShape = createSelector(
   {
     memoizeOptions: {
       // resultEqualityCheck: isEqual
-      resultEqualityCheck: (prevItems:TItems, currentItems:TItems) => {
+      resultEqualityCheck: (prevItems:Items, currentItems:Items) => {
         const addedOrDeletedItem = prevItems.length !== currentItems.length
         if (addedOrDeletedItem) return false
         const itemsIdsDoNotMatch = prevItems.some((item, index) =>

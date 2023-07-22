@@ -1,8 +1,8 @@
-type TProps = {
+type Props = {
   children?: React.ReactNode
 }
 
-export const ActionsContainer = ({ children }: TProps) => (
+export const ActionsContainer = ({ children }: Props) => (
   <div
     className='actions'
     css={{

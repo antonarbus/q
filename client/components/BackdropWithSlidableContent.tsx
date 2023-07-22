@@ -3,7 +3,7 @@ import { useLayoutEffect, useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 import { TRefDiv } from 'client/types'
 
-type TProps = {
+type Props = {
   children?: React.ReactNode
   content?: React.ReactNode
   color?: string
@@ -20,7 +20,7 @@ type TProps = {
  * @param props.onSlideOut func called after slide out animation end
 */
 
-export const BackdropWithSlidableContent = ({ children, content, onSlideIn, onSlideOut }: TProps) => {
+export const BackdropWithSlidableContent = ({ children, content, onSlideIn, onSlideOut }: Props) => {
   const contentRef = useRef() as TRefDiv
   useLayoutEffect(() => slideElement({ intoView: true, element: contentRef.current, cb: () => onSlideIn && onSlideIn() }), [])
 

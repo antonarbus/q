@@ -2,13 +2,13 @@ import { isClickInsideThisElement } from 'utils/isClickInsideThisElement'
 import { useDispatchTyped } from 'client/store'
 import { useEffect } from 'react'
 import { closeMenu } from 'client/features/nav/navSlice'
-import { TEvent, TRefDiv } from 'client/types'
+import { Event, TRefDiv } from 'client/types'
 
-type TProps = {
+type Props = {
   menuContainerRef: TRefDiv
 }
 
-export function useCloseMenuOnClickOutside({ menuContainerRef }: TProps) {
+export function useCloseMenuOnClickOutside({ menuContainerRef }: Props) {
   const dispatch = useDispatchTyped()
 
   /**
@@ -18,7 +18,7 @@ export function useCloseMenuOnClickOutside({ menuContainerRef }: TProps) {
    * - if click on navItem do not close, but close it in NavItem onClick handler, otherwise it closes and opens immediately
    */
 
-  function mouseDownHandler(e: TEvent) {
+  function mouseDownHandler(e: Event) {
     const menuContainer = menuContainerRef.current
     if (!menuContainer) return
     const navItem = menuContainerRef.current.parentElement

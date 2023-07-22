@@ -1,12 +1,12 @@
 import styled from '@emotion/styled'
 import { capitalizeKey } from './function/capitalizeKey'
 
-type TProps = {
+type Props = {
   shortcut: string[]
   $isHovered: boolean
 }
 
-export function Shortcut({ shortcut, $isHovered }: TProps) {
+export function Shortcut({ shortcut, $isHovered }: Props) {
   const keys = shortcut.join('+')
 
   return (
@@ -16,11 +16,11 @@ export function Shortcut({ shortcut, $isHovered }: TProps) {
   )
 }
 
-type TPropsForSC = {
+type PropsForSC = {
   $isHovered: boolean
 }
 
-const Span = styled.span<TPropsForSC>`
+const Span = styled.span<PropsForSC>`
   display: ${props => props.$isHovered ? 'block' : 'none'};
   position: absolute;
   right: 10px;

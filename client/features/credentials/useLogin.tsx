@@ -1,7 +1,7 @@
 import { notify } from 'client/features/notifier/notify'
 import { slideElement } from 'utils/slideElement'
 import { useDispatchTyped } from 'client/store'
-import { TEvent } from 'client/types'
+import { Event } from 'client/types'
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { rememberLoggedUser } from './credentialsSlice'
@@ -16,14 +16,14 @@ export function useLogin() {
   const from = (location.state as any)?.from?.pathname || '/'
   const dispatch = useDispatchTyped()
 
-  type TProps = {
-    e: TEvent
+  type Props = {
+    e: Event
     email: string
     password: string
     cardElement: HTMLElement
   }
 
-  async function loginUser ({ e, email, password, cardElement }: TProps) {
+  async function loginUser ({ e, email, password, cardElement }: Props) {
     e.preventDefault()
     const method = 'POST'
     const headers = { 'Content-Type': 'application/json' }

@@ -5,11 +5,11 @@ import { motion } from 'framer-motion'
 import { cleanHtml } from 'utils/itemsUtils'
 import { saveItemHeight } from 'client/features/items/itemsSlice'
 
-type TProps = {
+type Props = {
   index: number
 }
 
-export const CopyIcon = ({ index }: TProps) => {
+export const CopyIcon = ({ index }: Props) => {
   const dispatch = useDispatchTyped()
 
   return (

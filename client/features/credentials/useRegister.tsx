@@ -1,10 +1,10 @@
 import { notify } from 'client/features/notifier/notify'
-import { TEvent } from 'client/types'
+import { Event } from 'client/types'
 import { useState } from 'react'
 import { HttpStatusType } from './types'
 
-type TProps = {
-  e: TEvent
+type Props = {
+  e: Event
   email: string
   password: string
 }
@@ -12,7 +12,7 @@ type TProps = {
 export function useRegister() {
   const [httpStatus, setHttpStatus] = useState<HttpStatusType>('')
 
-  async function registerUser ({ e, email, password }: TProps) {
+  async function registerUser ({ e, email, password }: Props) {
     e.preventDefault()
     const method = 'POST'
     const headers = { 'Content-Type': 'application/json' }

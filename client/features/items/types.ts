@@ -1,11 +1,11 @@
-type TCommonItem = {
+type CommonItem = {
   id: string
   width: number
   height: number
   msg: string | React.ReactNode
 }
 
-export type TBoqRow = {
+export type BoqRow = {
   id: string
   description: {
     html: string
@@ -24,7 +24,7 @@ export type TBoqRow = {
   },
 }
 
-export type TBoqColumns = {
+export type BoqColumns = {
   description: {
     html: string
     width: undefined | number
@@ -43,7 +43,7 @@ export type TBoqColumns = {
   }
 }
 
-export type TBoqItem = TCommonItem & {
+export type BoqItem = CommonItem & {
   type: 'boq'
   boq: {
     header: {
@@ -63,21 +63,21 @@ export type TBoqItem = TCommonItem & {
         }
       }
     },
-    column: TBoqColumns,
-    rows: TBoqRow[]
+    column: BoqColumns,
+    rows: BoqRow[]
   }
 }
 
-export type TTextItem = TCommonItem & {
+export type TextItem = CommonItem & {
   type: 'text'
   text: {
     html: string
   }
 }
 
-export type TPasteItem = TCommonItem & {
+export type PasteItem = CommonItem & {
   type: 'paste'
 }
 
-export type TItem = TBoqItem | TTextItem | TPasteItem
-export type TItems = TItem[]
+export type Item = BoqItem | TextItem | PasteItem
+export type Items = Item[]

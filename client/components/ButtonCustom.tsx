@@ -4,7 +4,7 @@ import { useUpdateEffect } from 'react-use'
 import './successErrorIcons.css'
 import { TRefDiv } from 'client/types'
 
-type TProps = {
+type Props = {
   children?: React.ReactNode
   content?: React.ReactNode,
   circleProgressSize?: number | string
@@ -20,7 +20,7 @@ type TProps = {
   [x:string]: any // all other ...restProps props
 }
 
-export function ButtonCustom({ children, content, circleProgressSize, disabled, httpStatus, setHttpStatus, ...restProps }: TProps) {
+export function ButtonCustom({ children, content, circleProgressSize, disabled, httpStatus, setHttpStatus, ...restProps }: Props) {
   const successIconRef = useRef() as TRefDiv
   const errorIconRef = useRef() as TRefDiv
 

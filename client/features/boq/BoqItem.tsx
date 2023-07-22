@@ -2,11 +2,11 @@ import { SortableResizableItemWithActions } from 'client/components/SortableResi
 import { BoqHeader } from './boqHeader'
 import { BoqTable } from './boqTable'
 
-type TProps = {
+type Props = {
   index: number
 }
 
-export const BoqItem = ({ index }: TProps) => {
+export const BoqItem = ({ index }: Props) => {
   return (
     <SortableResizableItemWithActions index={index} >
       <BoqHeader index={index} />

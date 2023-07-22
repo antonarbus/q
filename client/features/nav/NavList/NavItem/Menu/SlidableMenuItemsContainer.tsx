@@ -3,13 +3,13 @@ import { useSelectorTyped } from 'client/store'
 import { MenuItem } from './MenuItem'
 import { TRefDiv } from 'client/types'
 
-type TProps = {
+type Props = {
   reference: TRefDiv
   idsToMenu: string[]
   className: string
 }
 
-export function SlidableMenuItemsContainer({ reference, idsToMenu, className }: TProps) {
+export function SlidableMenuItemsContainer({ reference, idsToMenu, className }: Props) {
   const menuItems = useSelectorTyped(selectMenuItemByIdsChainSelector(idsToMenu))
 
   return (

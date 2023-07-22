@@ -6,7 +6,7 @@ const bounceLoading = keyframes`
     transform: translate3d(0, -1.5rem, 0);
   }
 `
-type TProps = {
+type Props = {
   size?: string
   margin?: string
   background?: string
@@ -14,7 +14,7 @@ type TProps = {
   dots?: number
 }
 
-export const LoadingDots = ({ size, margin, background, duration, dots }: TProps) => (
+export const LoadingDots = ({ size, margin, background, duration, dots }: Props) => (
   <div
     css={{
       display: 'inline-flex',

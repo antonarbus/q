@@ -1,14 +1,14 @@
-import { TRefAny, TRefDiv } from 'client/types'
+import { RefAny, TRefDiv } from 'client/types'
 import { useEffect } from 'react'
 
-type TProps = {
+type Props = {
   index: number
   froalaElementRef: TRefDiv
-  editorRef: TRefAny
+  editorRef: RefAny
   isCopyMode: boolean
 }
 
-export const usePutCaretAtTheEndOfText = ({ index, isCopyMode, editorRef, froalaElementRef }: TProps) => {
+export const usePutCaretAtTheEndOfText = ({ index, isCopyMode, editorRef, froalaElementRef }: Props) => {
   useEffect(() => {
     if (isCopyMode) return
     function focusOnTextIfCellOrPaddingAreClicked(e: MouseEvent) {

@@ -1,12 +1,12 @@
 import { TRefDiv } from 'client/types'
 import { useEffect, useRef } from 'react'
 
-type TProps = {
+type Props = {
   froalaElementRef: TRefDiv
   isCopyMode: boolean
 }
 
-export function useFixedHeightForAnimation({ froalaElementRef, isCopyMode }: TProps) {
+export function useFixedHeightForAnimation({ froalaElementRef, isCopyMode }: Props) {
   const heightDuringAnimationRef = useRef<number>()
 
   useEffect(function setHeightBackToAuto() {

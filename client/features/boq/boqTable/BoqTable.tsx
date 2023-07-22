@@ -12,16 +12,16 @@ import { store, useDispatchTyped } from 'client/store'
 import { ItemCellRenderer } from './cellRenderers/ItemCellRenderer'
 import { QtyCellRenderer } from './cellRenderers/QtyCellRenderer'
 import { PriceCellRenderer } from './cellRenderers/PriceCellRenderer'
-import { TBoqRow } from 'client/features/items/types'
+import { BoqRow } from 'client/features/items/types'
 import { ValueGetterParams } from 'ag-grid-community'
 import { saveBoqColumnWidth, tellItemSavedLocally, updateBoqRowsOrder } from 'client/features/items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 
-type TProps = {
+type Props = {
   index: number
 }
 
-export const BoqTable = ({ index }: TProps) => {
+export const BoqTable = ({ index }: Props) => {
   const dispatch = useDispatchTyped()
   const gridRef = useRef(null)
   const item = store.getState().items?.[index]
@@ -29,7 +29,7 @@ export const BoqTable = ({ index }: TProps) => {
   if (item.type !== 'boq') return null
 
   return (
-    <AgGridReact<TBoqRow>
+    <AgGridReact<BoqRow>
       ref={gridRef}
       className='ag-theme-alpine'
       domLayout='autoHeight'
@@ -59,7 +59,7 @@ export const BoqTable = ({ index }: TProps) => {
           resizable: false,
           flex: 0,
           cellStyle: { justifyContent: 'center', textAlign: 'center', padding: 0, fontSize: 10, color: 'grey', bottom: '-3px' },
-          valueGetter: (params: ValueGetterParams<TBoqRow>) => params.node ? ((params.node.rowIndex || 0) + 1) : null,
+          valueGetter: (params: ValueGetterParams<BoqRow>) => params.node ? ((params.node.rowIndex || 0) + 1) : null,
         },
         {
           rowDrag: true,

@@ -1,12 +1,12 @@
-import { TMenu } from '../navStructure'
+import { Menu } from '../navStructure'
 
 // https://www.typescriptlang.org/docs/handbook/2/generics.html
 // https://stackoverflow.com/a/49286056/7239778
-export function setMenuItemPropValue<K extends keyof TMenu> ({ menu, id, prop, value }: {
-  menu: TMenu[]
+export function setMenuItemPropValue<K extends keyof Menu> ({ menu, id, prop, value }: {
+  menu: Menu[]
   id: string
   prop: K
-  value: TMenu[K]
+  value: Menu[K]
 }) {
   menu.forEach((el) => {
     if (el.id === id) {

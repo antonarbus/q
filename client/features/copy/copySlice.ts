@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { CopyPlaceType, CopyItemType, PastePosType } from './types'
-import { TItem } from '../items/types'
+import { Item } from '../items/types'
 
-type TProps = {
+type Props = {
   isCopyMode: boolean
   isCopyContainer: boolean
   initCords: { x: number, y: number }
@@ -12,7 +12,7 @@ type TProps = {
   isPasteTextShown: boolean
 }
 
-const initialState: TProps = {
+const initialState: Props = {
   isCopyMode: false, // should tell froala & ag-grid to initialize with some delay after animation end, otherwise elements height jumps
   isCopyContainer: false,
   initCords: { x: 0, y: 0 },
@@ -56,7 +56,7 @@ export const copySlice = createSlice({
     hidePasteText: (state) => {
       state.isPasteTextShown = false
     },
-    pasteItem: (state, action: PayloadAction<{ item: TItem, itemId: string, pastePos: PastePosType }>) => {
+    pasteItem: (state, action: PayloadAction<{ item: Item, itemId: string, pastePos: PastePosType }>) => {
       state.isCopying = false
       state.place = initialState.place
     },
