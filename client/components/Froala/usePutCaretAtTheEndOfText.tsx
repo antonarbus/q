@@ -1,9 +1,9 @@
-import { RefAny, TRefDiv } from 'client/types'
+import { RefAny, RefDiv } from 'client/types'
 import { useEffect } from 'react'
 
 type Props = {
   index: number
-  froalaElementRef: TRefDiv
+  froalaElementRef: RefDiv
   editorRef: RefAny
   isCopyMode: boolean
 }

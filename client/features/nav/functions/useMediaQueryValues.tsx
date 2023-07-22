@@ -3,11 +3,11 @@ import { useDispatchTyped, useSelectorTyped } from 'client/store'
 import { disableMedia, enableMedia, setNavMediaQueryWidths } from '../navSlice'
 import { calcNavMediaQueryParams } from './calcNavMediaQueryParams'
 import { useFirstMountState } from 'react-use'
-import { TRefDiv } from 'client/types'
+import { RefDiv } from 'client/types'
 
 type Props = {
-  navRef: TRefDiv
-  logoRef: TRefDiv
+  navRef: RefDiv
+  logoRef: RefDiv
 }
 
 export function useMediaQueryValues({ navRef, logoRef }: Props) {

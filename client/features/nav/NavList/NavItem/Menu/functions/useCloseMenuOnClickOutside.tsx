@@ -2,10 +2,10 @@ import { isClickInsideThisElement } from 'utils/isClickInsideThisElement'
 import { useDispatchTyped } from 'client/store'
 import { useEffect } from 'react'
 import { closeMenu } from 'client/features/nav/navSlice'
-import { Event, TRefDiv } from 'client/types'
+import { Event, RefDiv } from 'client/types'
 
 type Props = {
-  menuContainerRef: TRefDiv
+  menuContainerRef: RefDiv
 }
 
 export function useCloseMenuOnClickOutside({ menuContainerRef }: Props) {

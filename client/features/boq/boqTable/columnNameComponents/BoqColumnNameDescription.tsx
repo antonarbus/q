@@ -1,7 +1,7 @@
 import { Froala } from 'client/components/Froala'
 import { saveBoqColumnNameDescription } from 'client/features/items/itemsSlice'
 import { store } from 'client/store'
-import { TRefDiv, RefAny } from 'client/types'
+import { RefDiv, RefAny } from 'client/types'
 import { useRef } from 'react'
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 }
 
 export const BoqColumnNameDescription = ({ index }: Props) => {
-  const froalaElementRef = useRef() as TRefDiv
+  const froalaElementRef = useRef() as RefDiv
   const editorRef = useRef(null) as RefAny
   const item = store.getState().items?.[index]
 

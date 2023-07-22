@@ -5,14 +5,14 @@ import { useRef } from 'react'
 import { PencilAtBottomRight } from 'client/components/PencilAtBottomRight'
 import { Froala } from 'client/components/Froala'
 import { saveText } from '../items/itemsSlice'
-import { RefAny, TRefDiv } from 'client/types'
+import { RefAny, RefDiv } from 'client/types'
 
 type Props = {
   index: number
 }
 
 export const TextItem = ({ index }: Props) => {
-  const froalaElementRef = useRef() as TRefDiv
+  const froalaElementRef = useRef() as RefDiv
   const editorRef = useRef(null) as RefAny
   const item = store.getState().items?.[index]
 

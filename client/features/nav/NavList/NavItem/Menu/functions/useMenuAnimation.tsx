@@ -6,7 +6,7 @@ import { gsap } from 'gsap'
 import { useEffect } from 'react'
 import { getMenuItemByIdsChain } from './getMenuItemByIdsChain'
 import { useFirstMountState } from 'react-use'
-import { TRefDiv } from 'client/types'
+import { RefDiv } from 'client/types'
 
 type PropsForNavigateInMenu = {
   up: { () : void } | null
@@ -19,10 +19,10 @@ export const navigateInMenu: PropsForNavigateInMenu = {
 }
 
 type Props = {
-  currentMenuRef: TRefDiv
-  nextMenuRef: TRefDiv
-  menuContainerRef: TRefDiv
-  fakeMenuRef: TRefDiv
+  currentMenuRef: RefDiv
+  nextMenuRef: RefDiv
+  menuContainerRef: RefDiv
+  fakeMenuRef: RefDiv
   idsToNextMenuItems: string[]
 }
 
