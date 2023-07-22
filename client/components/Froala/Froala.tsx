@@ -35,8 +35,11 @@ export const Froala = ({ additionalStyle, editorRef, froalaElementRef, index, in
   usePutCaretAtTheEndOfText({ index, isCopyMode, editorRef, froalaElementRef })
   const { heightDuringAnimationRef } = useFixedHeightForAnimation({ froalaElementRef, isCopyMode })
 
-  // todo: add a state which will init froala on click, for froalas at header, item, cost, price
+  // todo: add an option and state which will show RenderedHtml and init froala on click, for froalas at header, item, cost, price
   // todo: it will be more performant
+
+  // todo: thing about adding an option to render Froala when it is at the viewport, otherwise render RenderedHtml
+  // todo: for that Intersection Observer is needed
 
   if (isCopyMode) {
     return (
