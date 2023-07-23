@@ -46,9 +46,12 @@ export const Froala = ({
   // todo: add an option and state which will show RenderedHtml and init froala on mousedown, for froalas at header, item, cost, price
   // todo: it will be more performant
 
+  const showStaticHtml = isCopyMode || !isInsideViewPort
+  const showEditableHtml = !isCopyMode && isInsideViewPort
+
   return (
     <div ref={observerRef} >
-      {!isCopyMode && !isInsideViewPort && (
+      {showStaticHtml && (
         <StaticHtml
           html={initHtml}
           padding={padding}
@@ -57,7 +60,7 @@ export const Froala = ({
           heightDuringAnimationRef={heightDuringAnimationRef}
         />
       )}
-      {!isCopyMode && isInsideViewPort && (
+      {showEditableHtml && (
         <EditableHtml
           additionalStyle={additionalStyle}
           editorRef={editorRef}
@@ -72,30 +75,6 @@ export const Froala = ({
           heightDuringAnimationRef={heightDuringAnimationRef}
         />
       )}
-      {isCopyMode && (
-        <StaticHtml
-          html={initHtml}
-          padding={padding}
-          additionalStyle={additionalStyle}
-          editorRef={editorRef}
-          heightDuringAnimationRef={heightDuringAnimationRef}
-        />
-      )}
-      {/* {!isCopyMode && (
-        <EditableHtml
-          additionalStyle={additionalStyle}
-          editorRef={editorRef}
-          froalaElementRef={froalaElementRef}
-          index={index}
-          initHtml={initHtml}
-          onClickAwayIfHtmChanged={onClickAwayIfHtmChanged}
-          padding={padding}
-          placeholder={placeholder}
-          rowIndex={rowIndex}
-          saveFroalaReducer={saveFroalaReducer}
-          heightDuringAnimationRef={heightDuringAnimationRef}
-        />
-      )} */}
     </div>
   )
 }
