@@ -5,8 +5,7 @@ import { useSelectorTyped } from 'client/store'
 import { StaticHtml } from './StaticHtml'
 import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
 import { EditableHtml } from './EditableHtml'
-import { useEffect, useRef, useState } from 'react'
-import { useEffectOnce } from 'react-use'
+import { useViewPortObserver } from './useViewPortObserver'
 
 type ReducerProps = {
   index: number
@@ -41,33 +40,15 @@ export const Froala = ({
   rowIndex,
   saveFroalaReducer,
 }: Props) => {
-  const ref = useRef(null)
-  const [isIntersecting, setIsIntersecting] = useState(false)
   const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
   const { heightDuringAnimationRef } = useFixedHeightForAnimation({ froalaElementRef, isCopyMode })
-
-  useEffectOnce(() => {
-    const options = { root: null, rootMargin: '0px', threshold: 0 }
-
-    const callback: IntersectionObserverCallback = ([entry], observer) => {
-      setIsIntersecting(entry.isIntersecting)
-    }
-
-    const observer = new IntersectionObserver(callback, options)
-
-    if (ref.current) observer.observe(ref.current)
-
-    return () => {
-      observer.disconnect()
-    }
-  })
-
+  const { observerRef, isInsideViewPort } = useViewPortObserver()
   // todo: add an option and state which will show RenderedHtml and init froala on mousedown, for froalas at header, item, cost, price
   // todo: it will be more performant
 
   return (
-    <div ref={ref} >
-      {!isCopyMode && !isIntersecting && (
+    <div ref={observerRef} >
+      {!isCopyMode && !isInsideViewPort && (
         <StaticHtml
           html={initHtml}
           padding={padding}
@@ -76,7 +57,7 @@ export const Froala = ({
           heightDuringAnimationRef={heightDuringAnimationRef}
         />
       )}
-      {!isCopyMode && isIntersecting && (
+      {!isCopyMode && isInsideViewPort && (
         <EditableHtml
           additionalStyle={additionalStyle}
           editorRef={editorRef}
