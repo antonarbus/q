@@ -11,7 +11,13 @@ type Props = {
   heightDuringAnimationRef: MutableRefObject<number | undefined>
 }
 
-export const StaticHtml = ({ html: initHtml, padding, additionalStyle, editorRef, heightDuringAnimationRef }: Props) => {
+export const StaticHtml = ({
+  html: initHtml,
+  padding,
+  additionalStyle,
+  editorRef,
+  heightDuringAnimationRef,
+}: Props) => {
   const ref = useRef<HTMLDivElement>()
   const html = useRef(initHtml)
 
@@ -27,6 +33,7 @@ export const StaticHtml = ({ html: initHtml, padding, additionalStyle, editorRef
   useEffectOnce(function saveHeightAfterLoadingContent() {
     if (!ref?.current?.clientHeight) return
     heightDuringAnimationRef.current = ref.current.clientHeight
+    console.log('🚀  ref.current.clientHeight:', ref.current.clientHeight)
   })
 
   return (
