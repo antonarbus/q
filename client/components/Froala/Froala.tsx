@@ -1,12 +1,10 @@
 import { RefAny, RefDiv } from 'client/types'
-import { useStartFroala } from './useStartFroala'
 import { AnyAction } from '@reduxjs/toolkit'
-import { Box, SxProps } from '@mui/material'
+import { SxProps } from '@mui/material'
 import { useSelectorTyped } from 'client/store'
-import { RenderedHtml } from './RenderedHtml'
-import { usePutCaretAtTheEndOfText } from './usePutCaretAtTheEndOfText'
+import { StaticHtml } from './StaticHtml'
 import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
-import parseHtml from 'html-react-parser'
+import { EditableHtml } from './EditableHtml'
 
 type ReducerProps = {
   index: number
@@ -31,19 +29,17 @@ type Props = {
 
 export const Froala = ({ additionalStyle, editorRef, froalaElementRef, index, initHtml, onClickAwayIfHtmChanged, padding, placeholder, rowIndex, saveFroalaReducer }: Props) => {
   const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
-  useStartFroala({ editorRef, froalaElementRef, index, initHtml, onClickAwayIfHtmChanged, placeholder, rowIndex, saveFroalaReducer, isCopyMode })
-  usePutCaretAtTheEndOfText({ index, isCopyMode, editorRef, froalaElementRef })
   const { heightDuringAnimationRef } = useFixedHeightForAnimation({ froalaElementRef, isCopyMode })
 
   // todo: add an option and state which will show RenderedHtml and init froala on click, for froalas at header, item, cost, price
   // todo: it will be more performant
 
-  // todo: thing about adding an option to render Froala when it is at the viewport, otherwise render RenderedHtml
+  // todo: think about adding an option to render Froala when it is at the viewport, otherwise render RenderedHtml
   // todo: for that Intersection Observer is needed
 
   if (isCopyMode) {
     return (
-      <RenderedHtml
+      <StaticHtml
         html={initHtml}
         padding={padding}
         additionalStyle={additionalStyle}
@@ -54,22 +50,18 @@ export const Froala = ({ additionalStyle, editorRef, froalaElementRef, index, in
   }
 
   return (
-    <Box
-      ref={froalaElementRef}
-      className='q-froala-element'
-      style={{
-        padding: padding || 0,
-        height: heightDuringAnimationRef.current || 'auto', // for animation, will be removed after froala is initialized
-      }}
-      sx={{
-        wordBreak: 'break-word',
-        '& .fr-element:hover:not(:focus)': {
-          textShadow: '0px 0px 0.8px',
-        },
-        ...additionalStyle,
-      }}
-    >
-      {parseHtml(initHtml)}
-    </Box>
+    <EditableHtml
+      additionalStyle={additionalStyle}
+      editorRef={editorRef}
+      froalaElementRef={froalaElementRef}
+      index={index}
+      initHtml={initHtml}
+      onClickAwayIfHtmChanged={onClickAwayIfHtmChanged}
+      padding={padding}
+      placeholder={placeholder}
+      rowIndex={rowIndex}
+      saveFroalaReducer={saveFroalaReducer}
+      heightDuringAnimationRef={heightDuringAnimationRef}
+    />
   )
 }
