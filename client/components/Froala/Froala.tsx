@@ -42,9 +42,9 @@ export const Froala = ({
   saveFroalaReducer,
 }: Props) => {
   const ref = useRef(null)
+  const [isIntersecting, setIsIntersecting] = useState(false)
   const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
   const { heightDuringAnimationRef } = useFixedHeightForAnimation({ froalaElementRef, isCopyMode })
-  const [isIntersecting, setIsIntersecting] = useState(false)
 
   useEffectOnce(() => {
     const options = { root: null, rootMargin: '0px', threshold: 0 }
@@ -62,7 +62,7 @@ export const Froala = ({
     }
   })
 
-  // todo: add an option and state which will show RenderedHtml and init froala on click, for froalas at header, item, cost, price
+  // todo: add an option and state which will show RenderedHtml and init froala on mousedown, for froalas at header, item, cost, price
   // todo: it will be more performant
 
   return (
