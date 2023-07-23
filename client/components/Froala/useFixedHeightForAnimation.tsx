@@ -3,10 +3,9 @@ import { useEffect, useRef } from 'react'
 
 type Props = {
   froalaElementRef: RefDiv
-  isCopyMode: boolean
 }
 
-export function useFixedHeightForAnimation({ froalaElementRef, isCopyMode }: Props) {
+export function useFixedHeightForAnimation({ froalaElementRef }: Props) {
   const heightDuringAnimationRef = useRef<number>()
 
   useEffect(function setHeightBackToAuto() {
