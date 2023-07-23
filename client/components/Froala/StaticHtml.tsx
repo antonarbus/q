@@ -13,7 +13,6 @@ type Props = {
 
 export const StaticHtml = ({ html: initHtml, padding, additionalStyle, editorRef, heightDuringAnimationRef }: Props) => {
   const ref = useRef<HTMLDivElement>()
-
   const html = useRef(initHtml)
 
   if (editorRef.current?.html) {

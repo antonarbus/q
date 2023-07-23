@@ -115,7 +115,9 @@ export const useStartFroala = ({
           window.froalas.push(editorRef)
           if (!editorRef?.current?.html) return
           editorRef.current.html.set(initHtml)
+          window.froalas = window.froalas.filter(({ current }) => current !== null)
           // console.log('froalas are initiated')
+          console.log('froalas number', window.froalas.length)
         }
       )
     }
@@ -127,6 +129,7 @@ export const useStartFroala = ({
       editorRef.current = null
       window.froalas = window.froalas.filter(({ current }) => current !== null)
       // console.log('froala destroyed')
+      console.log('froalas number', window.froalas.length)
     }
   }, [index])
 }
