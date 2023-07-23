@@ -27,7 +27,18 @@ type Props = {
   saveFroalaReducer: SaveFroalaReducer
 }
 
-export const Froala = ({ additionalStyle, editorRef, froalaElementRef, index, initHtml, onClickAwayIfHtmChanged, padding, placeholder, rowIndex, saveFroalaReducer }: Props) => {
+export const Froala = ({
+  additionalStyle,
+  editorRef,
+  froalaElementRef,
+  index,
+  initHtml,
+  onClickAwayIfHtmChanged,
+  padding,
+  placeholder,
+  rowIndex,
+  saveFroalaReducer,
+}: Props) => {
   const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
   const { heightDuringAnimationRef } = useFixedHeightForAnimation({ froalaElementRef, isCopyMode })
 
