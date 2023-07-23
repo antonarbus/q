@@ -15,7 +15,7 @@ export function useFixedHeightForAnimation({ froalaElementRef, isCopyMode }: Pro
     setTimeout(() => {
       froalaElementRef.current?.style?.removeProperty('height')
     }, 500)
-  }, [isCopyMode])
+  })
 
   return { heightDuringAnimationRef }
 }
