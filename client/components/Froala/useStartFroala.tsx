@@ -14,7 +14,6 @@ type Props = {
   placeholder?: string
   saveFroalaReducer: SaveFroalaReducer
   rowIndex?: number
-  isCopyMode: boolean
 }
 
 declare const window: Window &
@@ -24,13 +23,20 @@ declare const window: Window &
 
 window.froalas = []
 
-export const useStartFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder, saveFroalaReducer, rowIndex, isCopyMode }: Props) => {
+export const useStartFroala = ({
+  index,
+  initHtml,
+  onClickAwayIfHtmChanged,
+  froalaElementRef,
+  editorRef,
+  placeholder,
+  saveFroalaReducer,
+  rowIndex,
+}: Props) => {
   const dispatch = useDispatchTyped()
   const prevHtmlRef = useRef(initHtml) as RefString
 
   useEffect(() => {
-    if (isCopyMode) return
-
     function initFroalaInstance() {
       // @ts-ignore
       editorRef.current = new FroalaEditor(
@@ -122,5 +128,5 @@ export const useStartFroala = ({ index, initHtml, onClickAwayIfHtmChanged, froal
       window.froalas = window.froalas.filter(({ current }) => current !== null)
       // console.log('froala destroyed')
     }
-  }, [index, isCopyMode])
+  }, [index])
 }

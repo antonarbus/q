@@ -5,12 +5,10 @@ type Props = {
   index: number
   froalaElementRef: RefDiv
   editorRef: RefAny
-  isCopyMode: boolean
 }
 
-export const usePutCaretAtTheEndOfText = ({ index, isCopyMode, editorRef, froalaElementRef }: Props) => {
+export const usePutCaretAtTheEndOfText = ({ index, editorRef, froalaElementRef }: Props) => {
   useEffect(() => {
-    if (isCopyMode) return
     function focusOnTextIfCellOrPaddingAreClicked(e: MouseEvent) {
       // https://stackoverflow.com/a/35191761/7239778
       const clickedElement = e.target as HTMLElement
@@ -35,5 +33,5 @@ export const usePutCaretAtTheEndOfText = ({ index, isCopyMode, editorRef, froala
       froalaElementRef?.current?.removeEventListener('click', focusOnTextIfCellOrPaddingAreClicked)
       tableCell?.removeEventListener('click', focusOnTextIfCellOrPaddingAreClicked)
     }
-  }, [index, isCopyMode])
+  }, [index])
 }

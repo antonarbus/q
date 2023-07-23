@@ -11,7 +11,7 @@ type Props = {
   heightDuringAnimationRef: MutableRefObject<number | undefined>
 }
 
-export const RenderedHtml = ({ html: initHtml, padding, additionalStyle, editorRef, heightDuringAnimationRef }: Props) => {
+export const StaticHtml = ({ html: initHtml, padding, additionalStyle, editorRef, heightDuringAnimationRef }: Props) => {
   const ref = useRef<HTMLDivElement>()
 
   const html = useRef(initHtml)
