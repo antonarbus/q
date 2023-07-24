@@ -30,6 +30,9 @@ type Props = {
   saveFroalaReducer: SaveFroalaReducer
 }
 
+// todo: instead of passing 'initHtml', we need to pass a getHtml() function
+// todo: now when we switch from StaticHtml to EditableHtml we do not get updated text
+
 export const Froala = ({
   additionalStyle,
   editorRef,
