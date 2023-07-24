@@ -33,7 +33,6 @@ export const StaticHtml = ({
   useEffectOnce(function saveHeightAfterLoadingContent() {
     if (!ref?.current?.clientHeight) return
     heightDuringAnimationRef.current = ref.current.clientHeight
-    console.log('🚀  ref.current.clientHeight:', ref.current.clientHeight)
   })
 
   return (
