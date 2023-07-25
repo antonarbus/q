@@ -1,5 +1,6 @@
 import { Froala } from 'client/components/Froala'
 import { saveBoqHeaderSubtotalPrice } from 'client/features/items/itemsSlice'
+import { BoqItem } from 'client/features/items/types'
 import { store } from 'client/store'
 import { RefAny, RefDiv } from 'client/types'
 import { useRef } from 'react'
@@ -13,14 +14,13 @@ export const BoqHeaderSubtotalPrice = ({ index }: Props) => {
   const editorRef = useRef(null) as RefAny
   const item = store.getState().items?.[index]
   if (item.type !== 'boq') return null
-  const { html = 'Title' } = item.boq.header.subtotal.price
 
   return (
     <Froala
       index={index}
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
-      initHtml={html}
+      getHtml={() => (store.getState().items?.[index] as BoqItem).boq.header.subtotal.price.html }
       onClickAwayIfHtmChanged={() => {
         // todo: logic to save value should go here
         console.log('logic to save value should go here')

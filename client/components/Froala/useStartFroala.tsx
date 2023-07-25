@@ -7,7 +7,7 @@ import { SaveFroalaReducer } from './Froala'
 
 type Props = {
   index: number
-  initHtml: string
+  getHtml: () => string
   onClickAwayIfHtmChanged?: Function
   froalaElementRef: RefDiv
   editorRef: RefAny
@@ -25,7 +25,7 @@ window.froalas = []
 
 export const useStartFroala = ({
   index,
-  initHtml,
+  getHtml,
   onClickAwayIfHtmChanged,
   froalaElementRef,
   editorRef,
@@ -34,7 +34,7 @@ export const useStartFroala = ({
   rowIndex,
 }: Props) => {
   const dispatch = useDispatchTyped()
-  const prevHtmlRef = useRef(initHtml) as RefString
+  const prevHtmlRef = useRef(getHtml()) as RefString
 
   useEffect(() => {
     function initFroalaInstance() {
@@ -114,7 +114,7 @@ export const useStartFroala = ({
         function () {
           window.froalas.push(editorRef)
           if (!editorRef?.current?.html) return
-          editorRef.current.html.set(initHtml)
+          editorRef.current.html.set(getHtml())
           window.froalas = window.froalas.filter(({ current }) => current !== null)
           // console.log('froalas are initiated')
           console.log('froalas number', window.froalas.length)

@@ -20,7 +20,7 @@ export type SaveFroalaReducer = ({ index, html, rowIndex }: ReducerProps) => Any
 type Props = {
   index: number
   padding?: number | string
-  initHtml: string
+  getHtml: () => string
   froalaElementRef: RefDiv
   editorRef: RefAny
   placeholder?: string
@@ -30,15 +30,12 @@ type Props = {
   saveFroalaReducer: SaveFroalaReducer
 }
 
-// todo: instead of passing 'initHtml', we need to pass a getHtml() function
-// todo: now when we switch from StaticHtml to EditableHtml we do not get updated text
-
 export const Froala = ({
   additionalStyle,
   editorRef,
   froalaElementRef,
   index,
-  initHtml,
+  getHtml,
   onClickAwayIfHtmChanged,
   padding,
   placeholder,
@@ -58,7 +55,7 @@ export const Froala = ({
     <div ref={observerRef}>
       {showStaticHtml && (
         <StaticHtml
-          html={initHtml}
+          getHtml={getHtml}
           padding={padding}
           additionalStyle={additionalStyle}
           editorRef={editorRef}
@@ -71,7 +68,7 @@ export const Froala = ({
           editorRef={editorRef}
           froalaElementRef={froalaElementRef}
           index={index}
-          initHtml={initHtml}
+          getHtml={getHtml}
           onClickAwayIfHtmChanged={onClickAwayIfHtmChanged}
           padding={padding}
           placeholder={placeholder}

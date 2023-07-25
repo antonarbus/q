@@ -5,21 +5,21 @@ import { useEffectOnce } from 'react-use'
 
 type Props = {
   padding?: number | string
-  html: string
+  getHtml: () => string
   additionalStyle?: SxProps
   editorRef: RefAny
   heightDuringAnimationRef: MutableRefObject<number | undefined>
 }
 
 export const StaticHtml = ({
-  html: initHtml,
+  getHtml,
   padding,
   additionalStyle,
   editorRef,
   heightDuringAnimationRef,
 }: Props) => {
   const ref = useRef<HTMLDivElement>()
-  const html = useRef(initHtml)
+  const html = useRef(getHtml())
 
   if (editorRef.current?.html) {
     html.current = editorRef.current?.html.get()
@@ -27,7 +27,7 @@ export const StaticHtml = ({
 
   useEffectOnce(function insertHtmlIntoElement() {
     if (!ref.current) return
-    ref.current.innerHTML = html.current || initHtml
+    ref.current.innerHTML = html.current || getHtml()
   })
 
   useEffectOnce(function saveHeightAfterLoadingContent() {
