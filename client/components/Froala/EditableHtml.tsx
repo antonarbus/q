@@ -9,7 +9,7 @@ import { RefAny, RefDiv } from 'client/types'
 type Props = {
   index: number
   padding?: number | string
-  initHtml: string
+  getHtml: () => string
   froalaElementRef: RefDiv
   editorRef: RefAny
   placeholder?: string
@@ -25,7 +25,7 @@ export const EditableHtml = ({
   editorRef,
   froalaElementRef,
   index,
-  initHtml,
+  getHtml,
   onClickAwayIfHtmChanged,
   padding,
   placeholder,
@@ -37,7 +37,7 @@ export const EditableHtml = ({
     editorRef,
     froalaElementRef,
     index,
-    initHtml,
+    getHtml,
     onClickAwayIfHtmChanged,
     placeholder,
     rowIndex,
@@ -65,7 +65,7 @@ export const EditableHtml = ({
         ...additionalStyle,
       }}
     >
-      {parseHtml(initHtml)}
+      {parseHtml(getHtml())}
     </Box>
   )
 }
