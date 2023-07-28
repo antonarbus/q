@@ -5,6 +5,8 @@ import { useSelectorTyped } from 'client/store'
 import { StaticHtml } from './StaticHtml'
 import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
 import { EditableHtml } from './EditableHtml'
+import './froala_editor.pkgd.min.css'
+// import './plugins.pkgd.min.css'
 
 type ReducerProps = {
   index: number

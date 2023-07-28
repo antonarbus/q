@@ -33,8 +33,21 @@ export const EditableHtml = ({
   saveFroalaReducer,
   heightDuringAnimationRef,
 }: Props) => {
-  useStartFroala({ editorRef, froalaElementRef, index, initHtml, onClickAwayIfHtmChanged, placeholder, rowIndex, saveFroalaReducer })
-  usePutCaretAtTheEndOfText({ index, editorRef, froalaElementRef })
+  useStartFroala({
+    editorRef,
+    froalaElementRef,
+    index,
+    initHtml,
+    onClickAwayIfHtmChanged,
+    placeholder,
+    rowIndex,
+    saveFroalaReducer,
+  })
+  usePutCaretAtTheEndOfText({
+    index,
+    editorRef,
+    froalaElementRef,
+  })
 
   return (
     <Box
