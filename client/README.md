@@ -14,7 +14,7 @@ In FSD, a project consists of *layers*, *slices* and *segments*.
 ### 2. `entities/`
   Elements which have a business value (e.g. BlogPost, User, Order, Product). Can be a components with slots for content/interactive elements.
 
-  Should contain the logic to describe how *entity* looks and behaves (e.g. static UI elements, data stores, CRUD operations, states, reducers, selectors, mappers). 
+  Should contain the logic to describe how *entity* looks and behaves (e.g. static UI elements, data stores, CRUD operations, reducers, selectors, mappers). 
 ### 3. `features/` 
   *Entity* can act differently depending on *features* we apply on top of it (e.g. the User *entity* with different *features* can show a contact card or get a personal ad or be granted access etc...).  
    
@@ -37,7 +37,7 @@ In FSD, a project consists of *layers*, *slices* and *segments*.
 https://feature-sliced.design/docs/reference/layers
 
 ## Slices
-  A *layer* can be divided into business oriented *slices* to keep related code together (e.g. post,add-user-to-friends, news-feed...)  
+  A *layer* can be divided into business oriented *slices* to keep related code together (e.g. post, add-user-to-friends, news-feed...)  
 
   1. `Shared` and `App` *layers* never have *slices* (they do not have business logic inside).
   2. ❗️*Slices* cannot use other *slices* on the same *layer*.

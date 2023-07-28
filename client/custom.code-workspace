@@ -1,0 +1,32 @@
+{
+  "folders": [
+    {
+      "path": ".."
+    },
+    {
+      "name": "app ↗",
+      "path": "app"
+    },
+    {
+      "name": "pages ↗",
+      "path": "pages"
+    },
+    {
+      "name": "widgets ↗",
+      "path": "widgets"
+    },
+    {
+      "name": "features ↗",
+      "path": "features"
+    },
+    {
+      "name": "entities ↗",
+      "path": "entities"
+    },
+    {
+      "name": "shared ↗",
+      "path": "shared"
+    },
+  ],
+  "settings": {}
+}
