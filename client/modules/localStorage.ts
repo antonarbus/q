@@ -1,8 +1,8 @@
 import { defaultItems } from 'client/features/items/defaultItems'
-import { reloadOffer } from 'client/features/offer/offerSlice'
 import { store } from 'client/app/store'
 import { cleanItems } from 'utils/itemsUtils'
 import { jsonSafeParse } from 'utils/jsonSafeParse'
+import { reloadOffer } from 'client/entities/offer'
 
 export const getItemsFromLocalStorage = () => {
   const items = jsonSafeParse(localStorage.getItem('items')) || saveItemsIntoLocalStorage(defaultItems)

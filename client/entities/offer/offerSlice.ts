@@ -14,4 +14,4 @@ const offerSlice = createSlice({
 
 export const { reloadOffer } = offerSlice.actions
 
-export default offerSlice.reducer
+export const offerReducer = offerSlice.reducer
