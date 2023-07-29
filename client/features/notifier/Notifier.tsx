@@ -2,7 +2,7 @@
 
 import { ToastContainer } from 'react-toastify'
 import styled from '@emotion/styled'
-import { theme } from 'client/theme'
+import { theme } from 'client/shared/clients'
 import { Close } from '@mui/icons-material'
 
 type Prop = {

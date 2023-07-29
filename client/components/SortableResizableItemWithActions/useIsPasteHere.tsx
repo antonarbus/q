@@ -1,4 +1,5 @@
-import { store, useSelectorTyped } from 'client/store'
+import { useSelectorTyped } from 'client/shared/hooks'
+import { store } from 'client/shared/clients'
 
 type Props = {
   index: number

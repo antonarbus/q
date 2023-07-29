@@ -1,4 +1,4 @@
-import { useSelectorTyped } from 'client/store'
+import { useSelectorTyped } from 'client/shared/hooks'
 import { CopyContainer } from './CopyContainer'
 
 export const Copy = () => {

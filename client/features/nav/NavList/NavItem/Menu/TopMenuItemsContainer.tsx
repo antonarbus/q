@@ -1,4 +1,4 @@
-import { useSelectorTyped } from 'client/store'
+import { useSelectorTyped } from 'client/shared/hooks'
 import { BackMenuItem } from './MenuItem/BackMenuItem'
 import { CloseMenuItem } from './MenuItem/CloseMenuItem'
 

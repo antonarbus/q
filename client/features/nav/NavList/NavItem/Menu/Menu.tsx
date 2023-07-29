@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { useDispatchTyped, useSelectorTyped } from 'client/store'
+import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
 import { useRef } from 'react'
 import { useMenuAnimation } from './functions/useMenuAnimation'
 import { useKeysForMenuNavigation } from './functions/useKeysForMenuNavigation'
@@ -8,7 +8,7 @@ import { useIsMenuOutsideWindow } from './functions/useIsMenuOutsideWindow'
 import { SlidableMenuItemsContainer } from './SlidableMenuItemsContainer'
 import { TopMenuItemsContainer } from './TopMenuItemsContainer'
 import { setMenuItemHoverIndex } from 'client/features/nav/navSlice'
-import { theme } from 'client/theme'
+import { theme } from 'client/shared/clients'
 import { RefDiv } from 'client/types'
 
 export function Menu() {

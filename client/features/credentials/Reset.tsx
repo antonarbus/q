@@ -6,7 +6,7 @@ import { ButtonCustom } from 'client/components/ButtonCustom'
 import { useReset } from './useReset'
 import { Event, RefDiv } from 'client/types'
 import { EmailInput } from './common/EmailInput'
-import { theme } from 'client/theme'
+import { theme } from 'client/shared/clients'
 import { BackdropWithSlidableContent } from 'client/components/BackdropWithSlidableContent'
 import PasswordRoundedIcon from '@mui/icons-material/PasswordRounded'
 
@@ -23,7 +23,7 @@ export function Reset() {
       onSlideOut={() => navigate('/')}
     >
       <CardCustom
-        title="Reset password"
+        title='Reset password'
         logo={
           <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }}>
             <PasswordRoundedIcon />
@@ -39,7 +39,7 @@ export function Reset() {
             inputRef={inputRef}
           />
           <ButtonCustom
-            content="RESET"
+            content='RESET'
             disabled={!isEmailOk}
             httpStatus={httpStatus}
             setHttpStatus={setHttpStatus}

@@ -1,5 +1,5 @@
 import { LoadingDots } from 'client/components/LoadingDots'
-import { useSelectorTyped } from 'client/store'
+import { useSelectorTyped } from 'client/shared/hooks'
 
 type Props = {
   isShowing?: boolean

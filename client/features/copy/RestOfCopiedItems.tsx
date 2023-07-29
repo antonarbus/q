@@ -1,8 +1,8 @@
 import parseHtml from 'html-react-parser'
 import { AnimatePresence, motion, Variants } from 'framer-motion'
-import { useSelectorTyped } from 'client/store'
+import { useSelectorTyped } from 'client/shared/hooks'
 import { containerPadding, containerWidth, itemMarginBottom } from './CopyContainer'
-import { theme } from 'client/theme'
+import { theme } from 'client/shared/clients'
 
 type AnimationPropsType = {
   isCopying: boolean,

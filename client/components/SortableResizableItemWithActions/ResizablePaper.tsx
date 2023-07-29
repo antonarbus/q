@@ -1,5 +1,6 @@
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
-import { store, useDispatchTyped } from 'client/store'
+import { useDispatchTyped } from 'client/shared/hooks'
+import { store } from 'client/shared/clients'
 import { Resizable } from 're-resizable'
 import { saveItemWidth, tellItemSavedLocally } from '../../features/items/itemsSlice'
 import { Children } from 'client/types'

@@ -1,5 +1,5 @@
 import { closeMenu } from 'client/features/nav/navSlice'
-import { store } from 'client/store'
+import { store } from 'client/app/store'
 import { Event } from 'client/types'
 import { getMenuItemByIdsChain } from '../../functions/getMenuItemByIdsChain'
 import { navigateInMenu } from '../../functions/useMenuAnimation'

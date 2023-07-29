@@ -1,4 +1,4 @@
-import { store } from 'client/store'
+import { store } from 'client/app/store'
 import { useState } from 'react'
 import { useEffectOnce } from 'react-use'
 // eslint-disable-next-line camelcase

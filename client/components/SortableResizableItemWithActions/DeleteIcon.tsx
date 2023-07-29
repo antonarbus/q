@@ -1,5 +1,6 @@
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
-import { store, useDispatchTyped, useSelectorTyped } from 'client/store'
+import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
+import { store } from 'client/shared/clients'
 import { RxCross2 } from 'react-icons/rx'
 import { deleteItem, selectIsLastItem } from '../../features/items/itemsSlice'
 import { tellItemsSavedLocally } from 'client/features/bottom msg/bottomMsgSlice'

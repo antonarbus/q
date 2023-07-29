@@ -1,4 +1,5 @@
-import { useSelectorTyped, store } from 'client/store'
+import { useSelectorTyped } from 'client/shared/hooks'
+import { store } from 'client/shared/clients'
 import { useRef } from 'react'
 import { Icon } from './Icon'
 import { Menu } from './Menu'
@@ -6,7 +7,7 @@ import { useWindowSize } from 'react-use'
 import { Link } from 'react-router-dom'
 import { clickOnNavItem } from './clickOnNavItem'
 import { TiArrowSortedDown } from 'react-icons/ti'
-import { theme } from 'client/theme'
+import { theme } from 'client/shared/clients'
 import { css } from '@emotion/react'
 
 type Props = {

@@ -1,6 +1,6 @@
 import { SortableResizableItemWithActions } from 'client/components/SortableResizableItemWithActions'
-import { theme } from 'client/theme'
-import { store } from 'client/store'
+import { theme } from 'client/shared/clients'
+import { store } from 'client/app/store'
 import { useRef } from 'react'
 import { PencilAtBottomRight } from 'client/components/PencilAtBottomRight'
 import { Froala } from 'client/components/Froala'

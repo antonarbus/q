@@ -1,8 +1,8 @@
 import { SortableElement, SortableElementProps } from 'react-sortable-hoc'
 import { motion } from 'framer-motion'
-import { theme } from 'client/theme'
+import { theme } from 'client/shared/clients'
 import { Children, RefDiv } from 'client/types'
-import { store } from 'client/store'
+import { store } from 'client/app/store'
 import { useRef } from 'react'
 
 type Props = {

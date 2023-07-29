@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 import { useAnimationControls } from 'framer-motion'
 import { useFirstMountState } from 'react-use'
-import { useSelectorTyped } from 'client/store'
+import { useSelectorTyped } from 'client/shared/hooks'
 import { containerPadding, containerWidth } from './CopyContainer'
-import { theme } from 'client/theme'
+import { theme } from 'client/shared/clients'
 
 export const useCopyContainerAnimation = () => {
   const copyContainerAnimationControls = useAnimationControls()

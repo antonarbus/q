@@ -1,4 +1,4 @@
-import { theme } from 'client/theme'
+import { theme } from 'client/shared/clients'
 import { motion } from 'framer-motion'
 
 export const PasteItem = () => (

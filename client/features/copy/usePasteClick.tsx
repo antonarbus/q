@@ -1,10 +1,10 @@
 import { useEffectOnce, useUnmount } from 'react-use'
-import { store } from 'client/store'
+import { store } from 'client/app/store'
 import { exitFromCopyMode, hideCopyContainer, pasteItem, removeItemFromCopyContainer } from './copySlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { tellItemsSavedLocally } from '../bottom msg/bottomMsgSlice'
 import { cleanItem } from 'utils/itemsUtils'
-import { theme } from 'client/theme'
+import { theme } from 'client/shared/clients'
 
 function pasteItemOnClick() {
   const isPasteTextShown = store.getState().copy.isPasteTextShown

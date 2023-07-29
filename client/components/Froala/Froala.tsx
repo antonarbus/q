@@ -1,7 +1,7 @@
 import { RefAny, RefDiv } from 'client/types'
 import { AnyAction } from '@reduxjs/toolkit'
 import { SxProps } from '@mui/material'
-import { useSelectorTyped } from 'client/store'
+import { useSelectorTyped } from 'client/shared/hooks'
 import { StaticHtml } from './StaticHtml'
 import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
 import { EditableHtml } from './EditableHtml'

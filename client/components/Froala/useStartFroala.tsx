@@ -1,6 +1,6 @@
 import { tellItemSavedLocally } from 'client/features/items/itemsSlice'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
-import { useDispatchTyped } from 'client/store'
+import { useDispatchTyped } from 'client/shared/hooks'
 import { RefAny, RefDiv, RefString } from 'client/types'
 import { useEffect, useRef } from 'react'
 import { SaveFroalaReducer } from './Froala'

@@ -1,5 +1,5 @@
 import { useEffectOnce, useUnmount } from 'react-use'
-import { store } from 'client/store'
+import { store } from 'client/app/store'
 import { hidePasteText, showPasteText, updatePasteTextPos } from './copySlice'
 import { CopyPlaceType } from './types'
 import isEqual from 'lodash.isequal'

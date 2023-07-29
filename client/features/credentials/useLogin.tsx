@@ -1,6 +1,6 @@
 import { notify } from 'client/features/notifier/notify'
 import { slideElement } from 'utils/slideElement'
-import { useDispatchTyped } from 'client/store'
+import { useDispatchTyped } from 'client/shared/hooks'
 import { Event } from 'client/types'
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'

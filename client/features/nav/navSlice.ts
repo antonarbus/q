@@ -1,6 +1,6 @@
 import { Menu, navStructure } from 'client/features/nav/navStructure'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { RootState } from 'client/store'
+import { RootState } from 'client/app/store'
 import { setMenuItemPropValue } from './functions/setMenuItemPropValue'
 
 const initialState = {
