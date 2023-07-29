@@ -6,6 +6,7 @@ import { PencilAtBottomRight } from 'client/components/PencilAtBottomRight'
 import { Froala } from 'client/components/Froala'
 import { saveText } from '../items/itemsSlice'
 import { RefAny, RefDiv } from 'client/types'
+import type { TextItem as TextItemType } from '../items/types'
 
 type Props = {
   index: number
@@ -15,9 +16,7 @@ export const TextItem = ({ index }: Props) => {
   const froalaElementRef = useRef() as RefDiv
   const editorRef = useRef(null) as RefAny
   const item = store.getState().items?.[index]
-
   if (item.type !== 'text') return null
-  const { html } = item.text
 
   return (
     <SortableResizableItemWithActions index={index} >
@@ -25,7 +24,7 @@ export const TextItem = ({ index }: Props) => {
         index={index}
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
-        initHtml={html}
+        getHtml={() => (store.getState().items?.[index] as TextItemType).text.html}
         placeholder='Type text or drop images, files, links...'
         padding={theme.item.padding}
         saveFroalaReducer={saveText}
