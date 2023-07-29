@@ -3,11 +3,11 @@ import { Icon } from '../../Icon'
 import { MenuItemStyled } from './MenuItemStyled'
 import { TextInMenu } from './TextInMenu'
 import { RoundSpanForIcon } from '../../RoundSpanForIcon'
-import { Menu } from 'client/features/nav/navStructure'
-import { setMenuItemHoverIndex } from 'client/features/nav/navSlice'
+import { Menu } from '../../../../navStructure'
 import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
 import { Shortcut } from './Shortcut'
 import { clickOnMenuItem } from './function/clickOnMenuItem'
+import { setMenuItemHoverIndex } from 'client/entities/nav'
 
 type Props = {
   menuItem: Menu

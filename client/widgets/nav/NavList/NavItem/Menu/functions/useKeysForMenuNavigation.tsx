@@ -1,7 +1,7 @@
 import { store } from 'client/shared/clients'
 import { useDispatchTyped } from 'client/shared/hooks'
 import { useEffect } from 'react'
-import { closeMenu, setMenuItemHoverIndex } from 'client/features/nav/navSlice'
+import { closeMenu, setMenuItemHoverIndex } from 'client/entities/nav'
 import { getMenuItemByIdsChain } from './getMenuItemByIdsChain'
 import { useNavigate } from 'react-router-dom'
 import { navigateInMenu } from './useMenuAnimation'

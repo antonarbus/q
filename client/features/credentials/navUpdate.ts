@@ -1,4 +1,4 @@
-import { hideAccountMenuItem, hideLogInMenuItem, showAccountMenuItem, showLogInMenuItem } from 'client/features/nav/navSlice'
+import { hideAccountMenuItem, hideLogInMenuItem, showAccountMenuItem, showLogInMenuItem } from 'client/entities/nav'
 import { store } from 'client/app/store'
 
 export const navUpdate = {

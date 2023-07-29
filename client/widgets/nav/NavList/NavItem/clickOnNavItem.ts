@@ -1,5 +1,5 @@
-import { Menu } from 'client/features/nav/navStructure'
-import { closeMenu, openMenuWithId, setNavItemRightPos } from 'client/features/nav/navSlice'
+import { Menu } from '../../navStructure'
+import { closeMenu, openMenuWithId, setNavItemRightPos } from 'client/entities/nav'
 import { store } from 'client/app/store'
 import { Event } from 'client/types'
 

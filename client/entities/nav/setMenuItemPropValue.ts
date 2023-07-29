@@ -1,4 +1,4 @@
-import { Menu } from '../navStructure'
+import { Menu } from '../../widgets/nav/navStructure'
 
 // https://www.typescriptlang.org/docs/handbook/2/generics.html
 // https://stackoverflow.com/a/49286056/7239778

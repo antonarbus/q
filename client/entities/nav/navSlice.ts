@@ -1,7 +1,7 @@
-import { Menu, navStructure } from 'client/features/nav/navStructure'
+import { Menu, navStructure } from '../../widgets/nav/navStructure'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from 'client/app/store'
-import { setMenuItemPropValue } from './functions/setMenuItemPropValue'
+import { setMenuItemPropValue } from './setMenuItemPropValue'
 
 const initialState = {
   navStructure,
@@ -18,23 +18,47 @@ const navSlice = createSlice({
   name: 'nav',
   initialState,
   reducers: {
-    closeBurger: (state) => { state.burger.isOpen = false },
-    toggleBurger: (state) => { state.burger.isOpen = !state.burger.isOpen },
-    disableMedia: (state) => { state.mediaEnabled = false },
-    enableMedia: (state) => { state.mediaEnabled = true },
-    setNavMediaQueryWidths: (state, action) => { state.mediaQueryWidth = action.payload },
-    setNavItemRightPos: (state, action) => { state.navItemRightPos = action.payload },
-    openMenuWithId: (state, action) => { state.idsToCurrentMenuItems = state.idsToNextMenuItems = ['top', action.payload] },
+    closeBurger: (state) => {
+      state.burger.isOpen = false
+    },
+    toggleBurger: (state) => {
+      state.burger.isOpen = !state.burger.isOpen
+    },
+    disableMedia: (state) => {
+      state.mediaEnabled = false
+    },
+    enableMedia: (state) => {
+      state.mediaEnabled = true
+    },
+    setNavMediaQueryWidths: (state, action) => {
+      state.mediaQueryWidth = action.payload
+    },
+    setNavItemRightPos: (state, action) => {
+      state.navItemRightPos = action.payload
+    },
+    openMenuWithId: (state, action) => {
+      state.idsToCurrentMenuItems = state.idsToNextMenuItems = ['top', action.payload]
+    },
     closeMenu: (state) => {
       state.idsToNextMenuItems = state.idsToCurrentMenuItems = ['top']
       state.burger.isOpen = false
       state.menuItemHoverIndex = 0
     },
-    goDownInCurrentMenu: (state, action) => { state.idsToCurrentMenuItems = [...state.idsToCurrentMenuItems, action.payload] },
-    goUpInCurrentMenu: (state) => { state.idsToCurrentMenuItems = state.idsToCurrentMenuItems.slice(0, -1) },
-    goDownInNextMenu: (state, action) => { state.idsToNextMenuItems = [...state.idsToNextMenuItems, action.payload] },
-    goUpInNextMenu: (state) => { state.idsToNextMenuItems = state.idsToNextMenuItems.slice(0, -1) },
-    setMenuItemHoverIndex: (state, action) => { state.menuItemHoverIndex = action.payload },
+    goDownInCurrentMenu: (state, action) => {
+      state.idsToCurrentMenuItems = [...state.idsToCurrentMenuItems, action.payload]
+    },
+    goUpInCurrentMenu: (state) => {
+      state.idsToCurrentMenuItems = state.idsToCurrentMenuItems.slice(0, -1)
+    },
+    goDownInNextMenu: (state, action) => {
+      state.idsToNextMenuItems = [...state.idsToNextMenuItems, action.payload]
+    },
+    goUpInNextMenu: (state) => {
+      state.idsToNextMenuItems = state.idsToNextMenuItems.slice(0, -1)
+    },
+    setMenuItemHoverIndex: (state, action) => {
+      state.menuItemHoverIndex = action.payload
+    },
     disableTopMenuItemsExceptItemId: (state, action: PayloadAction<{ exceptItemId?: string }>) => {
       const { exceptItemId } = action.payload
       const topNavItemsIds = state.navStructure[0].menuItems?.map(item => item.id)
@@ -107,4 +131,4 @@ export const selectMenuItemByIdsChainSelector = (idsToCurrentMenuItems: string[]
   return clicked
 }
 
-export default navSlice.reducer
+export const navReducer = navSlice.reducer

@@ -1,6 +1,6 @@
 import { useDispatchTyped } from 'client/shared/hooks'
 import { useEffectOnce, useUnmount } from 'react-use'
-import { disableTopMenuItemsExceptItemId, enableTopMenuItems } from 'client/features/nav/navSlice'
+import { disableTopMenuItemsExceptItemId, enableTopMenuItems } from 'client/entities/nav'
 
 export const useDisableNavItems = () => {
   const dispatch = useDispatchTyped()
