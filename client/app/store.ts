@@ -1,5 +1,4 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
-import counter from 'client/features/counter/counterSlice'
 import credentials from 'client/features/credentials/credentialsSlice'
 import items from 'client/features/items/itemsSlice'
 import spinner from 'client/features/spinner/spinnerSlice'
@@ -10,7 +9,6 @@ import { navReducer } from 'client/entities/nav'
 
 export const store = configureStore({
   reducer: {
-    counter,
     credentials,
     nav: navReducer,
     offer,
