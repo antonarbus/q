@@ -3,15 +3,15 @@ import credentials from 'client/features/credentials/credentialsSlice'
 import items from 'client/features/items/itemsSlice'
 import spinner from 'client/features/spinner/spinnerSlice'
 import copy from 'client/features/copy/copySlice'
-import offer from 'client/features/offer/offerSlice'
 import updater from 'client/features/bottom msg/bottomMsgSlice'
 import { navReducer } from 'client/entities/nav'
+import { offerReducer } from 'client/entities/offer'
 
 export const store = configureStore({
   reducer: {
     credentials,
     nav: navReducer,
-    offer,
+    offer: offerReducer,
     items,
     spinner,
     copy,
