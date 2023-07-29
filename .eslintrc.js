@@ -5,7 +5,8 @@ module.exports = {
   },
   extends: [
     'plugin:react/recommended',
-    'standard',
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -36,17 +37,17 @@ module.exports = {
   rules: {
     'jsx-quotes': ['warn', 'prefer-single'],
     'react/react-in-jsx-scope': 'off',
-    'space-before-function-paren': 'off',
-    'react/no-unescaped-entities': 'off',
-    'react/no-children-prop': 'off',
+    // 'space-before-function-paren': 'off',
+    // 'react/no-unescaped-entities': 'off',
+    // 'react/no-children-prop': 'off',
     'react/no-unknown-property': ['error', { ignore: ['css'] }],
     'comma-dangle': ['error', {
       arrays: 'always-multiline',
       objects: 'always-multiline',
     }],
+    '@typescript-eslint/comma-dangle': 'off',
     'no-console': ['warn', {
       allow: ['error'],
     }],
-    '@typescript-eslint/comma-dangle': 'off',
   },
 }

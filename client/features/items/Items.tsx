@@ -3,7 +3,6 @@ import { ItemsContainer } from './ItemsContainer'
 import { PasteItem } from '../copy/PasteItem'
 import { Item } from './types'
 import { TextItem } from '../text/TextItem'
-import { BoqItem } from '../boq/BoqItem'
 
 // re-render the list only if item is replaced or new item is added
 const equalityFn = (prevItems: any, currentItems: any) => {
@@ -26,7 +25,7 @@ export const Items = () => {
         const key = item.id + shouldReRender.toString()
 
         if (item.type === 'text') return <TextItem key={key} index={index} />
-        if (item.type === 'boq') return <BoqItem key={key} index={index} />
+        if (item.type === 'boq') return <div key={key}>boq</div>
         if (item.type === 'paste') return <PasteItem key={key} />
         return null
       })}
