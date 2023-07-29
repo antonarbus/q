@@ -1,4 +1,4 @@
-import { notify } from 'client/features/notifier/notify'
+import { notify } from 'client/shared/ui/topMsg/notify'
 import { useNavigate } from 'react-router-dom'
 import { useEffectOnce } from 'react-use'
 import { navStructure } from '../navStructure'

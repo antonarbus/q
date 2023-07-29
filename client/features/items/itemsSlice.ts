@@ -1,19 +1,22 @@
 import { PayloadAction, createSelector, createSlice, current } from '@reduxjs/toolkit'
 import { hideCopyContainer, pasteItem, updatePasteTextPos } from 'client/features/copy/copySlice'
-import { getItemsFromLocalStorage } from 'client/modules/localStorage'
 import { RootState } from 'client/app/store'
 import { nanoid } from 'nanoid'
 import { CopyPlaceType } from '../copy/types'
 import { defaultItems } from './defaultItems'
 import { PasteItem, Items, BoqColumns, BoqRow } from './types'
 import { cleanItem } from 'utils/itemsUtils'
+import { returnDefaultOrLocalItems } from './returnDefaultOrLocalItems'
 // import isEqual from 'lodash.isequal'
 
 type PayloadFroalaUpdate = PayloadAction<{
-  index: number, html?: string, height?: number, rowIndex?: number
+  index: number
+  html?: string
+  height?: number
+  rowIndex?: number
 }>
 
-const initialState: Items = getItemsFromLocalStorage()
+const initialState: Items = returnDefaultOrLocalItems()
 
 const itemsSlice = createSlice({
   name: 'items',

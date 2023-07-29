@@ -25,7 +25,7 @@ const CloseIcon = ({ closeToast }: Prop) => (
   </span>
 )
 
-export function Notifier() {
+export function TopMsg() {
   return (
     <ToastStyled>
       <ToastContainer

@@ -1,4 +1,4 @@
-import { notify } from 'client/features/notifier/notify'
+import { notify } from 'client/shared/ui/topMsg/notify'
 import { store } from 'client/app/store'
 import { forgetLoggedUser } from './credentialsSlice'
 import { navUpdate } from './navUpdate'

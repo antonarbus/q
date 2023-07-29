@@ -2,11 +2,11 @@ import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
 import { store } from 'client/shared/clients'
 import { TbCut } from 'react-icons/tb'
 import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/features/copy/copySlice'
-import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { motion } from 'framer-motion'
 import { deleteItem, saveItemHeight, selectIsLastItem } from '../../features/items/itemsSlice'
-import { tellItemsSavedLocally } from 'client/features/bottom msg/bottomMsgSlice'
 import { cleanHtml } from 'utils/itemsUtils'
+import { saveItemsIntoLocalStorage } from 'client/features/items'
+import { tellItemsSavedLocally } from 'client/features/items'
 
 type Props = {
   index: number

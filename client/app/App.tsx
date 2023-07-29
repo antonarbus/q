@@ -7,19 +7,19 @@ import { ThemeProvider } from '@mui/material/styles'
 import { themeClient } from './theme'
 import { GlobalStyles } from './GlobalStyles'
 import { Nav } from 'client/widgets/nav'
-import { Notifier } from 'client/features/notifier'
+import { TopMsg } from 'client/shared/ui/topMsg'
 import { Login } from 'client/features/credentials/Login'
 import { Register } from 'client/features/credentials/Register'
 import { Reset } from 'client/features/credentials/Reset'
 import { Unauthorized } from 'client/features/credentials/Unauthorized'
 import { PersistentAuth } from 'client/features/credentials/PersistentAuth'
 import { Main } from 'client/app/Main'
-import { Profile } from 'client/features/profile/Profile'
-import { SpinnerFullPage } from 'client/features/spinner/SpinnerFullPage'
+import { Profile } from 'client/pages/profile'
 import { ReactQueryDevtoolsProductionHidden } from './ReactQueryDevtoolsProductionHidden'
-import { Updater } from 'client/features/bottom msg/BottomMsg'
 import { store } from './store'
 import { Provider } from 'react-redux'
+import { BottomMsg } from 'client/widgets/bottomMsg'
+import { Spinner } from 'client/widgets/spinner'
 
 export const App = () => (
   <Provider store={store}>
@@ -27,7 +27,7 @@ export const App = () => (
       <ThemeProvider theme={themeClient}>
         <GlobalStyles />
         <BrowserRouter>
-          <SpinnerFullPage />
+          <Spinner />
           <Nav />
           <Routes>
             <Route path='/*' element={<Main />}>
@@ -43,8 +43,8 @@ export const App = () => (
             </Route>
             <Route path='unauthorized' element={<Unauthorized />} />
           </Routes>
-          <Notifier />
-          <Updater />
+          <TopMsg />
+          <BottomMsg />
         </BrowserRouter>
         {/* <ReactQueryDevtools /> */}
         <ReactQueryDevtoolsProductionHidden />

@@ -17,5 +17,5 @@ const spinnerSlice = createSlice({
   },
 })
 
-export default spinnerSlice.reducer
+export const spinnerReducer = spinnerSlice.reducer
 export const { startSpinner, stopSpinner } = spinnerSlice.actions

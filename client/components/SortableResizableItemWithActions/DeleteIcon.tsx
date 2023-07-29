@@ -1,12 +1,12 @@
-import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'
 import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
 import { store } from 'client/shared/clients'
 import { RxCross2 } from 'react-icons/rx'
 import { deleteItem, selectIsLastItem } from '../../features/items/itemsSlice'
-import { tellItemsSavedLocally } from 'client/features/bottom msg/bottomMsgSlice'
 import { gsap } from 'gsap'
 import { useRef } from 'react'
 import { RefSpan } from 'client/types'
+import { tellItemsSavedLocally } from 'client/features/items'
+import { saveItemsIntoLocalStorage } from 'client/features/items'
 
 type Props = {
   index: number

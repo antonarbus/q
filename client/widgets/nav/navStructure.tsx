@@ -7,8 +7,8 @@ import { IoIosSwap } from 'react-icons/io'
 import logo from './img/logo.svg'
 import { logoutUser } from 'client/features/credentials/logout'
 import { Person as PersonIcon, Settings as SettingsIcon } from '@mui/icons-material'
-import { resetToDefaultItems } from 'client/modules/localStorage'
 import type { MenuLevel } from 'client/entities/nav'
+import { resetToDefaultItems } from 'client/features/items'
 
 const reactIcon = createElement(IoShareOutline, {})
 

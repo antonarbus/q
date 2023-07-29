@@ -1,4 +1,4 @@
-import { notify } from 'client/features/notifier/notify'
+import { notify } from 'client/shared/ui/topMsg/notify'
 import { slideElement } from 'utils/slideElement'
 import { useDispatchTyped } from 'client/shared/hooks'
 import { Event } from 'client/types'
