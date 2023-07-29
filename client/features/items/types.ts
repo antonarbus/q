@@ -79,5 +79,5 @@ export type PasteItem = CommonItem & {
   type: 'paste'
 }
 
-export type Item = BoqItem | TextItem | PasteItem
+export type Item = BoqItem | TextItem | PasteItem | undefined
 export type Items = Item[]

@@ -16,7 +16,8 @@ export const TextItem = ({ index }: Props) => {
   const froalaElementRef = useRef() as RefDiv
   const editorRef = useRef(null) as RefAny
   const item = store.getState().items?.[index]
-  if (item.type !== 'text') return null
+  if (!item) return null
+  if (item?.type !== 'text') return null
 
   return (
     <SortableResizableItemWithActions index={index} >
@@ -24,7 +25,7 @@ export const TextItem = ({ index }: Props) => {
         index={index}
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
-        getHtml={() => (store.getState().items?.[index] as TextItemType).text.html}
+        getHtml={() => (store.getState().items[index] as TextItemType)?.text?.html}
         placeholder='Type text or drop images, files, links...'
         padding={theme.item.padding}
         saveFroalaReducer={saveText}
