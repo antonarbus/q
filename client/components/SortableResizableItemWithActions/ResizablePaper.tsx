@@ -11,7 +11,8 @@ interface Props {
 
 export const ResizablePaper = ({ children, index }: Props) => {
   const dispatch = useDispatchTyped()
-  const width = store.getState().items[index]?.width
+  const item = store.getState().items[index]
+  if (!item) return null
 
   return (
     <Resizable
@@ -23,7 +24,7 @@ export const ResizablePaper = ({ children, index }: Props) => {
         boxShadow: '#00000033 0px 0px 10px 0px',
         position: 'relative',
       }}
-      defaultSize={{ width, height: 'auto' }}
+      defaultSize={{ width: item.width, height: 'auto' }}
       grid={[20, 0]}
       minWidth='200px'
       maxWidth='100%'

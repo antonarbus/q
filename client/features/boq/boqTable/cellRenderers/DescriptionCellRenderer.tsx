@@ -17,7 +17,7 @@ export const DescriptionCellRenderer = ({ index, node, ...rest }: Props) => {
   const editorRef = useRef(null) as RefAny
   const item = store.getState().items?.[index]
   const rowIndex = node.rowIndex
-  if (item.type !== 'boq') return null
+  if (item?.type !== 'boq') return null
   if (rowIndex === undefined) return null
 
   return (
@@ -25,7 +25,7 @@ export const DescriptionCellRenderer = ({ index, node, ...rest }: Props) => {
       index={index}
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
-      getHtml={() => (store.getState().items?.[index] as BoqItem).boq.rows[rowIndex].description.html}
+      getHtml={() => (store.getState().items?.[index] as BoqItem)?.boq?.rows[rowIndex]?.description?.html}
       saveFroalaReducer={saveBoqDescription}
       rowIndex={rowIndex}
       placeholder='Description, text, links, files, images...'

@@ -17,7 +17,7 @@ export const PriceCellRenderer = ({ index, node, ...rest }: Props) => {
   const editorRef = useRef(null) as RefAny
   const item = store.getState().items?.[index]
   const rowIndex = node.rowIndex
-  if (item.type !== 'boq') return null
+  if (item?.type !== 'boq') return null
   if (rowIndex === undefined) return null
 
   return (
@@ -25,7 +25,7 @@ export const PriceCellRenderer = ({ index, node, ...rest }: Props) => {
       index={index}
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
-      getHtml={() => (store.getState().items?.[index] as BoqItem).boq.rows[rowIndex].price.html}
+      getHtml={() => (store.getState().items?.[index] as BoqItem)?.boq?.rows[rowIndex]?.price?.html}
       saveFroalaReducer={saveBoqPrice}
       rowIndex={rowIndex}
       placeholder='Total price...'

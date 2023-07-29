@@ -13,14 +13,14 @@ export const BoqHeaderTitle = ({ index }: Props) => {
   const froalaElementRef = useRef() as RefDiv
   const editorRef = useRef(null) as RefAny
   const item = store.getState().items?.[index]
-  if (item.type !== 'boq') return null
+  if (item?.type !== 'boq') return null
 
   return (
     <Froala
       index={index}
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
-      getHtml={() => (store.getState().items?.[index] as BoqItem).boq.header.title.html}
+      getHtml={() => (store.getState().items?.[index] as BoqItem)?.boq?.header?.title?.html}
       saveFroalaReducer={saveBoqHeaderTitle}
       placeholder='Title...'
       additionalStyle={{ flexGrow: 1 }}

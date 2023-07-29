@@ -26,7 +26,7 @@ export const BoqTable = ({ index }: Props) => {
   const gridRef = useRef(null)
   const item = store.getState().items?.[index]
 
-  if (item.type !== 'boq') return null
+  if (item?.type !== 'boq') return null
 
   return (
     <AgGridReact<BoqRow>
