@@ -1,5 +1,5 @@
-import { theme } from 'client/theme'
-import { useSelectorTyped } from 'client/store'
+import { theme } from 'client/shared/clients'
+import { useSelectorTyped } from 'client/shared/hooks'
 
 /**
   * check if menu width is more than distance to the left side of the window

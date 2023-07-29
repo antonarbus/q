@@ -1,7 +1,7 @@
 import { PayloadAction, createSelector, createSlice, current } from '@reduxjs/toolkit'
 import { hideCopyContainer, pasteItem, updatePasteTextPos } from 'client/features/copy/copySlice'
 import { getItemsFromLocalStorage } from 'client/modules/localStorage'
-import { RootState } from 'client/store'
+import { RootState } from 'client/app/store'
 import { nanoid } from 'nanoid'
 import { CopyPlaceType } from '../copy/types'
 import { defaultItems } from './defaultItems'

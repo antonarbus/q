@@ -1,5 +1,5 @@
 import { removeItemMsg } from 'client/features/items/itemsSlice'
-import { useDispatchTyped, useSelectorTyped } from 'client/store'
+import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useUpdateEffect } from 'react-use'
 

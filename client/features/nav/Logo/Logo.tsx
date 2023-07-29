@@ -1,4 +1,4 @@
-import { useSelectorTyped } from 'client/store'
+import { useSelectorTyped } from 'client/shared/hooks'
 import { RefDiv } from 'client/types'
 import { Link } from 'react-router-dom'
 

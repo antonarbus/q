@@ -1,5 +1,5 @@
 import { useIsPasteHere } from 'client/components/SortableResizableItemWithActions/useIsPasteHere'
-import { theme } from 'client/theme'
+import { theme } from 'client/shared/clients'
 
 type Props = {
   index: number

@@ -1,4 +1,5 @@
-import { store, useDispatchTyped } from 'client/store'
+import { useDispatchTyped } from 'client/shared/hooks'
+import { store } from 'client/shared/clients'
 import { arrayMoveImmutable } from 'array-move'
 import { AnimatePresence, motion } from 'framer-motion'
 import { saveItemsIntoLocalStorage } from 'client/modules/localStorage'

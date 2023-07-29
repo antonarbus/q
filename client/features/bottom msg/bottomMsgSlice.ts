@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { AppThunk } from 'client/store'
+import { AppThunk } from 'client/app/store'
 
 const initialState = {
   msg: '',

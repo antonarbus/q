@@ -1,6 +1,6 @@
 import { Lock, Visibility, VisibilityOff } from '@mui/icons-material'
 import { IconButton, InputAdornment, TextField } from '@mui/material'
-import { theme } from 'client/theme'
+import { theme } from 'client/shared/clients'
 import { Event } from 'client/types'
 import { useState } from 'react'
 

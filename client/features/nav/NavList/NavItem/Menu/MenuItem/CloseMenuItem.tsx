@@ -4,8 +4,8 @@ import { Icon } from '../../Icon'
 import { CgClose as CloseIcon } from 'react-icons/cg'
 import { MenuItemStyled } from './MenuItemStyled'
 import { closeMenu, setMenuItemHoverIndex } from 'client/features/nav/navSlice'
-import { theme } from 'client/theme'
-import { useDispatchTyped, useSelectorTyped } from 'client/store'
+import { theme } from 'client/shared/clients'
+import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
 import { Event } from 'client/types'
 
 const closeIcon = createElement(CloseIcon, {})

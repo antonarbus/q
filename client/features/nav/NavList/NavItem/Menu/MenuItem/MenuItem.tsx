@@ -5,7 +5,7 @@ import { TextInMenu } from './TextInMenu'
 import { RoundSpanForIcon } from '../../RoundSpanForIcon'
 import { Menu } from 'client/features/nav/navStructure'
 import { setMenuItemHoverIndex } from 'client/features/nav/navSlice'
-import { useDispatchTyped, useSelectorTyped } from 'client/store'
+import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
 import { Shortcut } from './Shortcut'
 import { clickOnMenuItem } from './function/clickOnMenuItem'
 

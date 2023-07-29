@@ -1,5 +1,5 @@
 import { selectMenuItemByIdsChainSelector } from 'client/features/nav/navSlice'
-import { useSelectorTyped } from 'client/store'
+import { useSelectorTyped } from 'client/shared/hooks'
 import { MenuItem } from './MenuItem'
 import { RefDiv } from 'client/types'
 

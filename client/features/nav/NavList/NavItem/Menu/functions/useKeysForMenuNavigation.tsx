@@ -1,4 +1,5 @@
-import { store, useDispatchTyped } from 'client/store'
+import { store } from 'client/shared/clients'
+import { useDispatchTyped } from 'client/shared/hooks'
 import { useEffect } from 'react'
 import { closeMenu, setMenuItemHoverIndex } from 'client/features/nav/navSlice'
 import { getMenuItemByIdsChain } from './getMenuItemByIdsChain'

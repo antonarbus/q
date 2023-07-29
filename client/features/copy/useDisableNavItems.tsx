@@ -1,4 +1,4 @@
-import { useDispatchTyped } from 'client/store'
+import { useDispatchTyped } from 'client/shared/hooks'
 import { useEffectOnce, useUnmount } from 'react-use'
 import { disableTopMenuItemsExceptItemId, enableTopMenuItems } from 'client/features/nav/navSlice'
 

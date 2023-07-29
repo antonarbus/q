@@ -1,5 +1,5 @@
 import { notify } from 'client/features/notifier/notify'
-import { store } from 'client/store'
+import { store } from 'client/app/store'
 import { forgetLoggedUser } from './credentialsSlice'
 import { navUpdate } from './navUpdate'
 import { token } from './token'

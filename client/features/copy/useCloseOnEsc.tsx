@@ -1,4 +1,4 @@
-import { useDispatchTyped } from 'client/store'
+import { useDispatchTyped } from 'client/shared/hooks'
 import { useEffectOnce } from 'react-use'
 import { exitFromCopyMode, hideCopyContainer } from './copySlice'
 

@@ -1,7 +1,7 @@
 import { Menu } from '../navStructure'
 import { NavItem } from './NavItem'
 import { Burger } from './NavItem/Burger'
-import { useSelectorTyped } from 'client/store'
+import { useSelectorTyped } from 'client/shared/hooks'
 
 export function NavList() {
   const navStructure = useSelectorTyped(state => state.nav.navStructure)

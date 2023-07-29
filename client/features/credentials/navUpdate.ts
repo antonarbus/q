@@ -1,5 +1,5 @@
 import { hideAccountMenuItem, hideLogInMenuItem, showAccountMenuItem, showLogInMenuItem } from 'client/features/nav/navSlice'
-import { store } from 'client/store'
+import { store } from 'client/app/store'
 
 export const navUpdate = {
   login: () => {

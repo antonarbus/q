@@ -1,4 +1,4 @@
-import { useSelectorTyped } from 'client/store'
+import { useSelectorTyped } from 'client/shared/hooks'
 import { AnimatePresence, motion } from 'framer-motion'
 
 export const Updater = () => {

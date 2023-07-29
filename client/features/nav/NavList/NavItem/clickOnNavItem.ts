@@ -1,6 +1,6 @@
 import { Menu } from 'client/features/nav/navStructure'
 import { closeMenu, openMenuWithId, setNavItemRightPos } from 'client/features/nav/navSlice'
-import { store } from 'client/store'
+import { store } from 'client/app/store'
 import { Event } from 'client/types'
 
 type Props = {
