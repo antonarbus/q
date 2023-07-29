@@ -3,6 +3,31 @@ import { Global, css } from '@emotion/react'
 export const GlobalStyles = () => (
   <Global
     styles={css`
+      /* scrollbar */
+      html {
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+
+      html::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+      }
+
+      html::-webkit-scrollbar-thumb {
+        background: rgb(0 0 0 / 12%);
+        border-radius: 5px;
+        box-shadow: inset 0 0 6px rgb(0 0 0 / 10%);
+      }
+
+      html::-webkit-scrollbar-thumb:hover {
+        background: rgb(0 0 0 / 20%);
+      }
+  
+      html::-webkit-scrollbar-track {
+        background: rgb(0 0 0 / 5%);
+      }
+
       html:after { 
         content: "Q";
         font-family: "Roboto","Helvetica","Arial",sans-serif;
