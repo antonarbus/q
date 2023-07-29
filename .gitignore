@@ -13,3 +13,4 @@ build
 dist-ssr
 *.local
 .env
+.DS_Store

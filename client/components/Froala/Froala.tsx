@@ -5,6 +5,7 @@ import { useSelectorTyped } from 'client/store'
 import { StaticHtml } from './StaticHtml'
 import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
 import { EditableHtml } from './EditableHtml'
+import { useViewPortObserver } from './useViewPortObserver'
 import './froala_editor.pkgd.min.css'
 // import './plugins.pkgd.min.css'
 
@@ -19,7 +20,7 @@ export type SaveFroalaReducer = ({ index, html, rowIndex }: ReducerProps) => Any
 type Props = {
   index: number
   padding?: number | string
-  initHtml: string
+  getHtml: () => string
   froalaElementRef: RefDiv
   editorRef: RefAny
   placeholder?: string
@@ -34,7 +35,7 @@ export const Froala = ({
   editorRef,
   froalaElementRef,
   index,
-  initHtml,
+  getHtml,
   onClickAwayIfHtmChanged,
   padding,
   placeholder,
@@ -42,39 +43,40 @@ export const Froala = ({
   saveFroalaReducer,
 }: Props) => {
   const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
-  const { heightDuringAnimationRef } = useFixedHeightForAnimation({ froalaElementRef, isCopyMode })
+  const { heightDuringAnimationRef } = useFixedHeightForAnimation({ froalaElementRef })
+  const { observerRef, isInsideViewPort } = useViewPortObserver()
 
-  // todo: add an option and state which will show RenderedHtml and init froala on click, for froalas at header, item, cost, price
-  // todo: it will be more performant
+  // todo: add an option and state which will show RenderedHtml and init froala on mousedown, for froalas at header, item, cost, price
 
-  // todo: think about adding an option to render Froala when it is at the viewport, otherwise render RenderedHtml
-  // todo: for that Intersection Observer is needed
-
-  if (isCopyMode) {
-    return (
-      <StaticHtml
-        html={initHtml}
-        padding={padding}
-        additionalStyle={additionalStyle}
-        editorRef={editorRef}
-        heightDuringAnimationRef={heightDuringAnimationRef}
-      />
-    )
-  }
+  const showStaticHtml = isCopyMode || !isInsideViewPort
+  const showEditableHtml = !isCopyMode && isInsideViewPort
 
   return (
-    <EditableHtml
-      additionalStyle={additionalStyle}
-      editorRef={editorRef}
-      froalaElementRef={froalaElementRef}
-      index={index}
-      initHtml={initHtml}
-      onClickAwayIfHtmChanged={onClickAwayIfHtmChanged}
-      padding={padding}
-      placeholder={placeholder}
-      rowIndex={rowIndex}
-      saveFroalaReducer={saveFroalaReducer}
-      heightDuringAnimationRef={heightDuringAnimationRef}
-    />
+    <div ref={observerRef}>
+      {showStaticHtml && (
+        <StaticHtml
+          getHtml={getHtml}
+          padding={padding}
+          additionalStyle={additionalStyle}
+          editorRef={editorRef}
+          heightDuringAnimationRef={heightDuringAnimationRef}
+        />
+      )}
+      {showEditableHtml && (
+        <EditableHtml
+          additionalStyle={additionalStyle}
+          editorRef={editorRef}
+          froalaElementRef={froalaElementRef}
+          index={index}
+          getHtml={getHtml}
+          onClickAwayIfHtmChanged={onClickAwayIfHtmChanged}
+          padding={padding}
+          placeholder={placeholder}
+          rowIndex={rowIndex}
+          saveFroalaReducer={saveFroalaReducer}
+          heightDuringAnimationRef={heightDuringAnimationRef}
+        />
+      )}
+    </div>
   )
 }
