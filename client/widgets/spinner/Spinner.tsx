@@ -6,7 +6,7 @@ type Props = {
   title?: string
 }
 
-export const SpinnerFullPage = ({ isShowing, title }: Props) => {
+export const Spinner = ({ isShowing, title }: Props) => {
   const isLoading = useSelectorTyped(state => state.spinner.isLoading)
   const text = useSelectorTyped(state => state.spinner.text)
   if (!isLoading && !isShowing) return null

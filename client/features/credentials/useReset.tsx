@@ -1,4 +1,4 @@
-import { notify } from 'client/features/notifier/notify'
+import { notify } from 'client/shared/ui/topMsg/notify'
 import { Event } from 'client/types'
 import { useState } from 'react'
 import { token } from './token'

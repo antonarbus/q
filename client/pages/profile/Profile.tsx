@@ -1,4 +1,4 @@
-import { notify } from 'client/features/notifier/notify'
+import { notify } from 'client/shared/ui/topMsg/notify'
 // eslint-disable-next-line camelcase
 import { axiosWithAuth } from 'client/features/credentials/axiosWithAuth'
 

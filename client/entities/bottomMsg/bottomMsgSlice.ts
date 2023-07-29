@@ -6,7 +6,7 @@ const initialState = {
 }
 
 const bottomMsgSlice = createSlice({
-  name: 'updater',
+  name: 'bottomMsg',
   initialState,
   reducers: {
     showMsgOnBottom: (state, action: PayloadAction<string>) => {
@@ -16,14 +16,6 @@ const bottomMsgSlice = createSlice({
   },
 })
 
-// exports
-export default bottomMsgSlice.reducer
+export const bottomMsgReducer = bottomMsgSlice.reducer
 export const { showMsgOnBottom, resetMsgOnBottom } = bottomMsgSlice.actions
 
-// thunks
-export const tellItemsSavedLocally = (ms = 2000): AppThunk => (dispatch, getState) => {
-  dispatch(showMsgOnBottom('saved locally'))
-  setTimeout(() => {
-    dispatch(resetMsgOnBottom())
-  }, ms)
-}

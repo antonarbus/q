@@ -1,11 +1,11 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
 import credentials from 'client/features/credentials/credentialsSlice'
 import items from 'client/features/items/itemsSlice'
-import spinner from 'client/features/spinner/spinnerSlice'
 import copy from 'client/features/copy/copySlice'
-import updater from 'client/features/bottom msg/bottomMsgSlice'
 import { navReducer } from 'client/entities/nav'
 import { offerReducer } from 'client/entities/offer'
+import { spinnerReducer } from 'client/entities/spinner'
+import { bottomMsgReducer } from 'client/entities/bottomMsg'
 
 export const store = configureStore({
   reducer: {
@@ -13,9 +13,9 @@ export const store = configureStore({
     nav: navReducer,
     offer: offerReducer,
     items,
-    spinner,
+    spinner: spinnerReducer,
     copy,
-    updater,
+    bottomMsg: bottomMsgReducer,
   },
   middleware: (defaultMiddleware) => defaultMiddleware({
     serializableCheck: false,
