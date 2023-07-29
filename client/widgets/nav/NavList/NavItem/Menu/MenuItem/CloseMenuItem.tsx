@@ -1,21 +1,23 @@
+import { createElement } from 'react'
 import { TextInMenu } from './TextInMenu'
 import { Icon } from '../../Icon'
-import { FaChevronLeft as LeftArrowIcon } from 'react-icons/fa'
+import { CgClose as CloseIcon } from 'react-icons/cg'
 import { MenuItemStyled } from './MenuItemStyled'
+import { closeMenu, setMenuItemHoverIndex } from 'client/entities/nav'
 import { theme } from 'client/shared/clients'
-import { setMenuItemHoverIndex } from 'client/features/nav/navSlice'
 import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
 import { Event } from 'client/types'
-import { navigateInMenu } from '../functions/useMenuAnimation'
 
-export function BackMenuItem() {
+const closeIcon = createElement(CloseIcon, {})
+
+export function CloseMenuItem() {
+  const color = theme.colors.topMenuItem
   const dispatch = useDispatchTyped()
   const isHovered = useSelectorTyped(state => state.nav.menuItemHoverIndex === 1)
-  const color = theme.colors.topMenuItem
 
   const onClickHandler = (e: Event) => {
     e.preventDefault()
-    navigateInMenu.up && navigateInMenu.up()
+    dispatch(closeMenu())
   }
 
   return (
@@ -25,8 +27,8 @@ export function BackMenuItem() {
       onMouseEnter={() => dispatch(setMenuItemHoverIndex(1))}
       state={{ isHovered }}
     >
-      <Icon icon={<LeftArrowIcon />} />
-      <TextInMenu name={<span style={{ color }}>Back</span>} />
+      <Icon icon={closeIcon} />
+      <TextInMenu name={<span style={{ color }}>Close</span>} />
     </MenuItemStyled>
   )
 }

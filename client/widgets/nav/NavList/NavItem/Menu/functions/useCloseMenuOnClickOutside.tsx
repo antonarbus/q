@@ -1,7 +1,7 @@
 import { isClickInsideThisElement } from 'utils/isClickInsideThisElement'
 import { useDispatchTyped } from 'client/shared/hooks'
 import { useEffect } from 'react'
-import { closeMenu } from 'client/features/nav/navSlice'
+import { closeMenu } from 'client/entities/nav'
 import { Event, RefDiv } from 'client/types'
 
 type Props = {

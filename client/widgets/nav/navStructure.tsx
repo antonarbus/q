@@ -8,22 +8,11 @@ import logo from './img/logo.svg'
 import { logoutUser } from 'client/features/credentials/logout'
 import { Person as PersonIcon, Settings as SettingsIcon } from '@mui/icons-material'
 import { resetToDefaultItems } from 'client/modules/localStorage'
+import type { MenuLevel } from 'client/entities/nav'
 
 const reactIcon = createElement(IoShareOutline, {})
 
-export type Menu = {
-  id: string,
-  name: string,
-  icon?: React.ReactNode | string,
-  link?: any,
-  func?: () => void,
-  shortcut?: string[],
-  menuItems?: Menu[],
-  isHidden?: boolean,
-  disabled?: boolean
-}
-
-export const navStructure: Menu[] = [
+export const navStructure: MenuLevel[] = [
   {
     id: 'top',
     name: 'top',

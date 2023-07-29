@@ -1,6 +1,6 @@
 import { useLayoutEffect } from 'react'
 import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
-import { disableMedia, enableMedia, setNavMediaQueryWidths } from '../navSlice'
+import { disableMedia, enableMedia, setNavMediaQueryWidths } from 'client/entities/nav'
 import { calcNavMediaQueryParams } from './calcNavMediaQueryParams'
 import { useFirstMountState } from 'react-use'
 import { RefDiv } from 'client/types'

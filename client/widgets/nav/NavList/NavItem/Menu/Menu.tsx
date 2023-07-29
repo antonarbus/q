@@ -7,7 +7,7 @@ import { useCloseMenuOnClickOutside } from './functions/useCloseMenuOnClickOutsi
 import { useIsMenuOutsideWindow } from './functions/useIsMenuOutsideWindow'
 import { SlidableMenuItemsContainer } from './SlidableMenuItemsContainer'
 import { TopMenuItemsContainer } from './TopMenuItemsContainer'
-import { setMenuItemHoverIndex } from 'client/features/nav/navSlice'
+import { setMenuItemHoverIndex } from 'client/entities/nav'
 import { theme } from 'client/shared/clients'
 import { RefDiv } from 'client/types'
 

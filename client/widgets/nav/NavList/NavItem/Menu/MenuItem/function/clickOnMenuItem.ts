@@ -1,4 +1,4 @@
-import { closeMenu } from 'client/features/nav/navSlice'
+import { closeMenu } from 'client/entities/nav'
 import { store } from 'client/app/store'
 import { Event } from 'client/types'
 import { getMenuItemByIdsChain } from '../../functions/getMenuItemByIdsChain'
