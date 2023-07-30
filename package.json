@@ -12,7 +12,7 @@
     "build_all": "npm run build_front && npm run build_back",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "fix": "npx eslint . --ext .js,.ts,.tsx,.jsx --fix",
+    "fix": "eslint . --ext .js,.ts,.tsx,.jsx --fix",
     "test": "vitest",
     "test-ui": "vitest --ui",
     "coverage": "vitest run --coverage"
@@ -88,20 +88,20 @@
     "@types/react-transition-group": "^4.4.6",
     "@types/styled-components": "^5.1.26",
     "@types/uuid": "^9.0.2",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",
     "@vitest/ui": "^0.33.0",
     "c8": "^8.0.1",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
     "jsdom": "^22.1.0",
     "nodemon": "^3.0.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6",
     "vite": "^4.4.7",
     "vite-tsconfig-paths": "*",
-    "vitest": "^0.33.0",
-    "eslint": "^8.45.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.3",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0"
+    "vitest": "^0.33.0"
   }
 }
