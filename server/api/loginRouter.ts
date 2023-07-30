@@ -13,7 +13,7 @@ loginRouter.post('/', async (req: ReqType, res: ResType, next: NextType) => {
 
     // check email & password
     const user = await UserModel.findOne({ email })
-    const isPasswordValid = user && await bcrypt.compare(password, user.password)
+    const isPasswordValid = user && await bcrypt.compare(password, user.password as string)
     if (!user || !isPasswordValid) return res.json({ status: 'error', message: 'invalid credentials' })
 
     // check if account is activated
