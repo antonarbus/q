@@ -4,7 +4,7 @@ import { Items } from './types'
 export const defaultItems: Items = [
   {
     id: nanoid(3),
-    type: 'text',
+    type: "text",
     width: 800,
     height: 0,
     msg: '',
