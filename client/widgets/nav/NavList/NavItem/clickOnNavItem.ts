@@ -1,11 +1,10 @@
-import { Menu } from '../../navStructure'
-import { closeMenu, openMenuWithId, setNavItemRightPos } from 'client/entities/nav'
+import { MenuLevel, closeMenu, openMenuWithId, setNavItemRightPos } from 'client/entities/nav'
 import { store } from 'client/app/store'
 import { Event } from 'client/types'
 
 type Props = {
   e: Event
-  navItem: Menu | undefined
+  navItem: MenuLevel | undefined
   id: string
   navItemRef: React.MutableRefObject<HTMLLIElement>
   disabled: boolean

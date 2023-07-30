@@ -1,7 +1,8 @@
-import { Menu, navStructure } from '../../widgets/nav/navStructure'
+import { navStructure } from '../../widgets/nav/navStructure'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from 'client/app/store'
 import { setMenuItemPropValue } from './setMenuItemPropValue'
+import { MenuLevel } from './menuType'
 
 const initialState = {
   navStructure,
@@ -116,8 +117,8 @@ export const {
 export const selectMenuItemByIdsChainSelector = (idsToCurrentMenuItems: string[]) => (state: RootState) => {
   const navStructure = state.nav.navStructure
 
-  let clicked: Menu[] = navStructure
-  let tempMenu: Menu[] = navStructure
+  let clicked: MenuLevel[] = navStructure
+  let tempMenu: MenuLevel[] = navStructure
   idsToCurrentMenuItems.forEach((id: string) => {
     if (id === 'burger') {
       clicked = navStructure[0].menuItems!

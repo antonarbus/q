@@ -1,5 +1,5 @@
-import { Copy } from 'client/features/copy/Copy'
 import { Items } from 'client/features/items/Items'
+import { Copy } from 'client/widgets/copy'
 
 export const Offer = () => {
   return (

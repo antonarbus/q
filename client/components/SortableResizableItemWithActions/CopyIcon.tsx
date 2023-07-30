@@ -1,10 +1,10 @@
 import { useDispatchTyped } from 'client/shared/hooks'
 import { store } from 'client/shared/clients'
 import { MdCopyAll } from 'react-icons/md'
-import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from '../../features/copy/copySlice'
 import { motion } from 'framer-motion'
 import { cleanHtml } from 'utils/itemsUtils'
 import { saveItemHeight } from 'client/features/items/itemsSlice'
+import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/entities/copy'
 
 type Props = {
   index: number

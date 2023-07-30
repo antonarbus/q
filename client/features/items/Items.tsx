@@ -1,8 +1,7 @@
 import { useSelectorTyped } from 'client/shared/hooks'
 import { ItemsContainer } from './ItemsContainer'
-import { PasteItem } from '../copy/PasteItem'
 import { Item } from './types'
-import { TextItem } from '../text/TextItem'
+import { PasteItem, TextItem } from 'client/entities/items'
 
 // re-render the list only if item is replaced or new item is added
 const equalityFn = (prevItems: any, currentItems: any) => {

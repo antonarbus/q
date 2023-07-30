@@ -15,6 +15,7 @@ module.exports = {
     },
     ecmaVersion: 'latest',
     sourceType: 'module',
+    // project: "./tsconfig.json"
   },
   plugins: [
     'react',
@@ -49,5 +50,7 @@ module.exports = {
     'no-console': ['warn', {
       allow: ['error'],
     }],
+    "@typescript-eslint/consistent-type-exports": "error",
+    "@typescript-eslint/consistent-type-imports": "error",
   },
 }
