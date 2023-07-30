@@ -4,7 +4,7 @@ import { CopyPlaceType, CopyItemType } from './types'
 type Props = {
   isCopyMode: boolean
   isCopyContainer: boolean
-  initCords: { x: number, y: number }
+  initCords: { x: number; y: number }
   items: CopyItemType[]
   place: CopyPlaceType
   isCopying: boolean

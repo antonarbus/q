@@ -1,5 +1,1 @@
-export {
-  spinnerReducer,
-  startSpinner,
-  stopSpinner
-} from './spinnerSlice'
+export { spinnerReducer, startSpinner, stopSpinner } from './spinnerSlice'

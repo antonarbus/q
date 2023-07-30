@@ -16,7 +16,10 @@ type Props = {
   children: Children
 }
 
-export const SortableResizableItemWithActions = ({ index, children }: Props) => {
+export const SortableResizableItemWithActions = ({
+  index,
+  children,
+}: Props) => {
   const isDisabled = useIsDisabledItem()
 
   return (
@@ -25,20 +28,21 @@ export const SortableResizableItemWithActions = ({ index, children }: Props) => 
       index={index}
       i={index} // "i", because "index" is internally reserved by SortableElement
     >
-        <ActionsContainer>
-          <DragIcon />
-          <CopyIcon index={index} />
-          <CutIcon index={index} />
-          <DeleteIcon index={index} />
-        </ActionsContainer>
-        <ResizablePaper index={index}>
-          <Msg index={index}/>
-          <ReduceOpacityIfPasteHere index={index}>
-            {children}
-          </ReduceOpacityIfPasteHere>
-          <PasteTextInMiddle index={index}/>
-        </ResizablePaper>
-        <ActionsContainer/> {/* Right action container is used for symmetry, now it is empty, probably add there some icons later */}
+      <ActionsContainer>
+        <DragIcon />
+        <CopyIcon index={index} />
+        <CutIcon index={index} />
+        <DeleteIcon index={index} />
+      </ActionsContainer>
+      <ResizablePaper index={index}>
+        <Msg index={index} />
+        <ReduceOpacityIfPasteHere index={index}>
+          {children}
+        </ReduceOpacityIfPasteHere>
+        <PasteTextInMiddle index={index} />
+      </ResizablePaper>
+      <ActionsContainer />{' '}
+      {/* Right action container is used for symmetry, now it is empty, probably add there some icons later */}
     </SortableItem>
   )
 }

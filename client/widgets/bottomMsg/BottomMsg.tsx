@@ -2,7 +2,7 @@ import { useSelectorTyped } from 'client/shared/hooks'
 import { AnimatePresence, motion } from 'framer-motion'
 
 export const BottomMsg = () => {
-  const msg = useSelectorTyped(state => state.bottomMsg.msg)
+  const msg = useSelectorTyped((state) => state.bottomMsg.msg)
 
   return (
     <AnimatePresence>

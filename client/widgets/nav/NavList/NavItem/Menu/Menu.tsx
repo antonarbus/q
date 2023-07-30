@@ -16,9 +16,19 @@ export function Menu() {
   const currentMenuRef = useRef() as RefDiv
   const nextMenuRef = useRef() as RefDiv
   const fakeMenuRef = useRef() as RefDiv
-  const idsToNextMenuItems = useSelectorTyped(state => state.nav.idsToNextMenuItems)
-  const idsToCurrentMenuItems = useSelectorTyped(state => state.nav.idsToCurrentMenuItems)
-  useMenuAnimation({ currentMenuRef, nextMenuRef, menuContainerRef, fakeMenuRef, idsToNextMenuItems })
+  const idsToNextMenuItems = useSelectorTyped(
+    (state) => state.nav.idsToNextMenuItems
+  )
+  const idsToCurrentMenuItems = useSelectorTyped(
+    (state) => state.nav.idsToCurrentMenuItems
+  )
+  useMenuAnimation({
+    currentMenuRef,
+    nextMenuRef,
+    menuContainerRef,
+    fakeMenuRef,
+    idsToNextMenuItems,
+  })
   useKeysForMenuNavigation()
   useCloseMenuOnClickOutside({ menuContainerRef })
   const isMenuOutsideWindow = useIsMenuOutsideWindow()
@@ -61,7 +71,7 @@ export const MenuStyled = styled.div<Props>`
   top: calc(100% + 5px);
   right: -${theme.menu.navItem.marginRight}px;
   /* if right corner goes over the screen fix the left instead of right */
-  left: ${props => props.isMenuOutsideWindow ? '0' : 'not set'};
+  left: ${(props) => (props.isMenuOutsideWindow ? '0' : 'not set')};
   width: ${theme.menu.width}px;
   padding-top: ${theme.menu.paddingTop}px;
   padding-bottom: ${theme.menu.paddingBottom}px;

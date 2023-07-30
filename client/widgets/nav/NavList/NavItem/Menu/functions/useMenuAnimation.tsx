@@ -1,5 +1,10 @@
 import { elementHeight } from 'utils/elementHeight'
-import { goDownInCurrentMenu, goDownInNextMenu, goUpInCurrentMenu, goUpInNextMenu } from 'client/entities/nav'
+import {
+  goDownInCurrentMenu,
+  goDownInNextMenu,
+  goUpInCurrentMenu,
+  goUpInNextMenu,
+} from 'client/entities/nav'
 import { useDispatchTyped } from 'client/shared/hooks'
 import { theme } from 'client/shared/clients'
 import { gsap } from 'gsap'
@@ -9,13 +14,19 @@ import { useFirstMountState } from 'react-use'
 import { RefDiv } from 'client/types'
 
 type PropsForNavigateInMenu = {
-  up: { () : void } | null
-  down: { (id: string): void } | null,
+  up: { (): void } | null
+  down: { (id: string): void } | null
 }
 
 export const navigateInMenu: PropsForNavigateInMenu = {
-  up: () => console.log('put function here for going up the menu, otherwise need to pass it in many props'),
-  down: (id) => console.log('put function here for going into submenu, otherwise need to pass it in many props'),
+  up: () =>
+    console.log(
+      'put function here for going up the menu, otherwise need to pass it in many props'
+    ),
+  down: (id) =>
+    console.log(
+      'put function here for going into submenu, otherwise need to pass it in many props'
+    ),
 }
 
 type Props = {
@@ -26,35 +37,57 @@ type Props = {
   idsToNextMenuItems: string[]
 }
 
-export function useMenuAnimation({ currentMenuRef, nextMenuRef, menuContainerRef, fakeMenuRef, idsToNextMenuItems }: Props) {
+export function useMenuAnimation({
+  currentMenuRef,
+  nextMenuRef,
+  menuContainerRef,
+  fakeMenuRef,
+  idsToNextMenuItems,
+}: Props) {
   const dispatch = useDispatchTyped()
   const isFirstMount = useFirstMountState()
   const duration = 0.5
   const nextMenu = getMenuItemByIdsChain(idsToNextMenuItems)
 
   /**
-  * @descriptions
-  * - we have 2 menus for animation of nested menus change
-  * - when we click on menu we update content in 'nextMenuRef' with 'nextMenu' state update
-  * - then we make animation moving 'nextMenuRef' into the view
-  * - at the same time 'currentMenuRef' is moved away from the view
-  * - when animation is finished we change moved away 'currentMenuRef' content with 'currentMenuItems' state update
-  */
+   * @descriptions
+   * - we have 2 menus for animation of nested menus change
+   * - when we click on menu we update content in 'nextMenuRef' with 'nextMenu' state update
+   * - then we make animation moving 'nextMenuRef' into the view
+   * - at the same time 'currentMenuRef' is moved away from the view
+   * - when animation is finished we change moved away 'currentMenuRef' content with 'currentMenuItems' state update
+   */
 
   function goDownInMenu(id: string) {
     type Function = () => void
     const cb: Function = () => dispatch(goDownInCurrentMenu(id))
     dispatch(goDownInNextMenu(id))
-    gsap.fromTo(currentMenuRef.current, { xPercent: 0 }, { duration, xPercent: -100 })
-    gsap.fromTo(nextMenuRef.current, { xPercent: 0 }, { duration, xPercent: -100, onComplete: cb })
+    gsap.fromTo(
+      currentMenuRef.current,
+      { xPercent: 0 },
+      { duration, xPercent: -100 }
+    )
+    gsap.fromTo(
+      nextMenuRef.current,
+      { xPercent: 0 },
+      { duration, xPercent: -100, onComplete: cb }
+    )
   }
 
   function goUpInMenu() {
     type Function = () => void
     const cb: Function = () => dispatch(goUpInCurrentMenu())
     dispatch(goUpInNextMenu())
-    gsap.fromTo(currentMenuRef.current, { xPercent: 0 }, { duration, xPercent: 100 })
-    gsap.fromTo(nextMenuRef.current, { xPercent: -200 }, { duration, xPercent: -100, onComplete: cb })
+    gsap.fromTo(
+      currentMenuRef.current,
+      { xPercent: 0 },
+      { duration, xPercent: 100 }
+    )
+    gsap.fromTo(
+      nextMenuRef.current,
+      { xPercent: -200 },
+      { duration, xPercent: -100, onComplete: cb }
+    )
   }
 
   /**
@@ -72,7 +105,11 @@ export function useMenuAnimation({ currentMenuRef, nextMenuRef, menuContainerRef
   function animateMenuHeight() {
     gsap.to(menuContainerRef.current, {
       duration: isFirstMount ? 0 : duration,
-      height: elementHeight(fakeMenuRef.current) + theme.menu.paddingTop + theme.menu.paddingBottom + theme.menu.menuItem.height,
+      height:
+        elementHeight(fakeMenuRef.current) +
+        theme.menu.paddingTop +
+        theme.menu.paddingBottom +
+        theme.menu.menuItem.height,
     })
   }
 

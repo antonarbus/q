@@ -20,12 +20,14 @@ export const TextItem = ({ index }: Props) => {
   if (item?.type !== 'text') return null
 
   return (
-    <SortableResizableItemWithActions index={index} >
+    <SortableResizableItemWithActions index={index}>
       <Froala
         index={index}
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
-        getHtml={() => (store.getState().items[index] as TextItemType)?.text?.html}
+        getHtml={() =>
+          (store.getState().items[index] as TextItemType)?.text?.html
+        }
         placeholder='Type text or drop images, files, links...'
         padding={theme.item.padding}
         saveFroalaReducer={saveText}

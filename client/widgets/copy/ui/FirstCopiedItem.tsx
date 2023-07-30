@@ -1,12 +1,16 @@
 import parseHtml from 'html-react-parser'
 import { AnimatePresence, motion, Variants } from 'framer-motion'
 import { useSelectorTyped } from 'client/shared/hooks'
-import { containerPadding, containerWidth, itemMarginBottom } from './CopyContainer'
+import {
+  containerPadding,
+  containerWidth,
+  itemMarginBottom,
+} from './CopyContainer'
 import { theme } from 'client/shared/clients'
 
 type AnimationPropsType = {
-  isCopying: boolean,
-  isSoleItem: boolean,
+  isCopying: boolean
+  isSoleItem: boolean
 }
 
 const variants: Variants = {
@@ -43,8 +47,8 @@ const variants: Variants = {
 }
 
 export const FirstCopiedItem = () => {
-  const items = useSelectorTyped(state => state.copy.items)
-  const isCopying = useSelectorTyped(state => state.copy.isCopying)
+  const items = useSelectorTyped((state) => state.copy.items)
+  const isCopying = useSelectorTyped((state) => state.copy.isCopying)
 
   const animationProps: AnimationPropsType = {
     isCopying,
@@ -53,13 +57,11 @@ export const FirstCopiedItem = () => {
 
   if (items.length === 0) return null
   const firstItem = items[0]
-  const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / firstItem.width
+  const scaleFactorForFirstItem =
+    (containerWidth - 2 * containerPadding) / firstItem.width
 
   return (
-    <AnimatePresence
-      mode='wait'
-      custom={animationProps}
-    >
+    <AnimatePresence mode='wait' custom={animationProps}>
       <motion.div
         key={items.length}
         custom={animationProps}

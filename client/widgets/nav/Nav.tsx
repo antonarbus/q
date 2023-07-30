@@ -10,8 +10,8 @@ import { RefDiv } from 'client/types'
 export function Nav() {
   const navRef = useRef() as RefDiv
   const logoRef = useRef() as RefDiv
-  const mediaQueryWidth = useSelectorTyped(state => state.nav.mediaQueryWidth)
-  const mediaEnabled = useSelectorTyped(state => state.nav.mediaEnabled)
+  const mediaQueryWidth = useSelectorTyped((state) => state.nav.mediaQueryWidth)
+  const mediaEnabled = useSelectorTyped((state) => state.nav.mediaEnabled)
   useMenuItemActionShortcuts()
   useMediaQueryValues({ navRef, logoRef })
 
@@ -37,9 +37,10 @@ export function Nav() {
         contain: 'layout inline-size',
         fontWeight: 300,
         '& > ul > li > a > .icon-round-wrapper': mediaEnabled && {
-          [`@media (max-width: ${mediaQueryWidth.icon}px) and (min-width: ${mediaQueryWidth.name}px)`]: {
-            display: 'none',
-          },
+          [`@media (max-width: ${mediaQueryWidth.icon}px) and (min-width: ${mediaQueryWidth.name}px)`]:
+            {
+              display: 'none',
+            },
           [`@media (max-width: ${mediaQueryWidth.burger}px)`]: {
             display: 'none',
           },
@@ -62,7 +63,7 @@ export function Nav() {
         },
       }}
     >
-      <Logo logoRef={logoRef}/>
+      <Logo logoRef={logoRef} />
       <NavList />
     </nav>
   )

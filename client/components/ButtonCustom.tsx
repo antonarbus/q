@@ -6,7 +6,7 @@ import { RefDiv } from 'client/types'
 
 type Props = {
   children?: React.ReactNode
-  content?: React.ReactNode,
+  content?: React.ReactNode
   circleProgressSize?: number | string
   disabled?: boolean
   loading?: any
@@ -17,10 +17,18 @@ type Props = {
   setError?: any
   httpStatus?: 'loading' | 'error' | 'success' | ''
   setHttpStatus?: any
-  [x:string]: any // all other ...restProps props
+  [x: string]: any // all other ...restProps props
 }
 
-export function ButtonCustom({ children, content, circleProgressSize, disabled, httpStatus, setHttpStatus, ...restProps }: Props) {
+export function ButtonCustom({
+  children,
+  content,
+  circleProgressSize,
+  disabled,
+  httpStatus,
+  setHttpStatus,
+  ...restProps
+}: Props) {
   const successIconRef = useRef() as RefDiv
   const errorIconRef = useRef() as RefDiv
 
@@ -40,7 +48,10 @@ export function ButtonCustom({ children, content, circleProgressSize, disabled, 
   return (
     <Button
       variant='contained'
-      disabled={(httpStatus && ['loading', 'error', 'success'].includes(httpStatus)) || disabled}
+      disabled={
+        (httpStatus && ['loading', 'error', 'success'].includes(httpStatus)) ||
+        disabled
+      }
       type='submit'
       fullWidth
       sx={{
@@ -55,13 +66,13 @@ export function ButtonCustom({ children, content, circleProgressSize, disabled, 
       {children}
       {content}
       {httpStatus === 'loading' && (
-          <CircularProgress
-            size={circleProgressSize || 30}
-            sx={{
-              color: 'black',
-              position: 'absolute',
-            }}
-          />
+        <CircularProgress
+          size={circleProgressSize || 30}
+          sx={{
+            color: 'black',
+            position: 'absolute',
+          }}
+        />
       )}
       {httpStatus === 'success' && (
         <div
@@ -72,7 +83,22 @@ export function ButtonCustom({ children, content, circleProgressSize, disabled, 
             width: circleProgressSize || 30,
           }}
         >
-          {<svg className='checkmark' viewBox='0 0 52 52'><circle className='checkmark__circle' cx='26' cy='26' r='25' fill='none'/><path className='checkmark__check' fill='none' d='M14.1 27.2l7.1 7.2 16.7-16.8'/></svg>}
+          {
+            <svg className='checkmark' viewBox='0 0 52 52'>
+              <circle
+                className='checkmark__circle'
+                cx='26'
+                cy='26'
+                r='25'
+                fill='none'
+              />
+              <path
+                className='checkmark__check'
+                fill='none'
+                d='M14.1 27.2l7.1 7.2 16.7-16.8'
+              />
+            </svg>
+          }
         </div>
       )}
       {httpStatus === 'error' && (
@@ -84,7 +110,22 @@ export function ButtonCustom({ children, content, circleProgressSize, disabled, 
             width: circleProgressSize || 30,
           }}
         >
-          {<svg viewBox='0 0 52 52' className='checkmark'><circle cx='26' cy='26' r='25' fill='none' className='checkmark__circle checkmark__cross'></circle><path fill='none' d='M 12,12 L 40,40 M 40,12 L 12,40' className='checkmark__check'></path></svg>}
+          {
+            <svg viewBox='0 0 52 52' className='checkmark'>
+              <circle
+                cx='26'
+                cy='26'
+                r='25'
+                fill='none'
+                className='checkmark__circle checkmark__cross'
+              ></circle>
+              <path
+                fill='none'
+                d='M 12,12 L 40,40 M 40,12 L 12,40'
+                className='checkmark__check'
+              ></path>
+            </svg>
+          }
         </div>
       )}
     </Button>

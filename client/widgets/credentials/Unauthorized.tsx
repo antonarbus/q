@@ -7,16 +7,18 @@ export const Unauthorized = () => {
   const navigate = useNavigate()
 
   return (
-    <div css={{
-      height: '100vh',
-      marginTop: `-${theme.nav.fullHeight}px`,
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      fontSize: '3vw',
-      color: 'grey',
-    }}>
+    <div
+      css={{
+        height: '100vh',
+        marginTop: `-${theme.nav.fullHeight}px`,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontSize: '3vw',
+        color: 'grey',
+      }}
+    >
       <span>Unauthorized</span>
       <Button
         variant='contained'

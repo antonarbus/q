@@ -15,7 +15,9 @@ type Props = {
 
 export function MenuItem({ menuItem, hoveredMenuItemIndex }: Props) {
   const dispatch = useDispatchTyped()
-  const isHovered = useSelectorTyped(state => state.nav.menuItemHoverIndex === hoveredMenuItemIndex)
+  const isHovered = useSelectorTyped(
+    (state) => state.nav.menuItemHoverIndex === hoveredMenuItemIndex
+  )
   const isNextMenuAvailable = !!menuItem.menuItems
   const isIcon = !!menuItem.icon
   const menuId = menuItem.id
@@ -30,8 +32,12 @@ export function MenuItem({ menuItem, hoveredMenuItemIndex }: Props) {
       onMouseEnter={() => dispatch(setMenuItemHoverIndex(hoveredMenuItemIndex))}
       state={{ isHovered }}
     >
-      {isIcon && <Icon icon={menuItem.icon} disabled={disabled}/>}
-      <TextInMenu reserveSpaceForIcon={isNextMenuAvailable} name={menuItem.name} disabled={disabled}/>
+      {isIcon && <Icon icon={menuItem.icon} disabled={disabled} />}
+      <TextInMenu
+        reserveSpaceForIcon={isNextMenuAvailable}
+        name={menuItem.name}
+        disabled={disabled}
+      />
       {isNextMenuAvailable && !disabled && (
         <RoundSpanForIcon
           css={{

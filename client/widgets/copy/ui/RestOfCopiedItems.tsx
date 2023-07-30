@@ -1,13 +1,17 @@
 import parseHtml from 'html-react-parser'
 import { AnimatePresence, motion, Variants } from 'framer-motion'
 import { useSelectorTyped } from 'client/shared/hooks'
-import { containerPadding, containerWidth, itemMarginBottom } from './CopyContainer'
+import {
+  containerPadding,
+  containerWidth,
+  itemMarginBottom,
+} from './CopyContainer'
 import { theme } from 'client/shared/clients'
 
 type AnimationPropsType = {
-  isCopying: boolean,
-  firstItemHeight: number,
-  prevFirstItemHeight: number,
+  isCopying: boolean
+  firstItemHeight: number
+  prevFirstItemHeight: number
 }
 
 const variants: Variants = {
@@ -50,13 +54,15 @@ const variants: Variants = {
 let prevFirstItemHeight = 0
 
 export const RestOfCopiedItems = () => {
-  const items = useSelectorTyped(state => state.copy.items)
-  const isCopying = useSelectorTyped(state => state.copy.isCopying)
+  const items = useSelectorTyped((state) => state.copy.items)
+  const isCopying = useSelectorTyped((state) => state.copy.isCopying)
 
   if (items.length === 0) return null
   const firstItem = items[0]
-  const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / firstItem.width
-  const firstItemHeight = firstItem.height * scaleFactorForFirstItem + itemMarginBottom
+  const scaleFactorForFirstItem =
+    (containerWidth - 2 * containerPadding) / firstItem.width
+  const firstItemHeight =
+    firstItem.height * scaleFactorForFirstItem + itemMarginBottom
 
   const animationProps: AnimationPropsType = {
     isCopying,
@@ -67,10 +73,7 @@ export const RestOfCopiedItems = () => {
   prevFirstItemHeight = firstItemHeight
 
   return (
-    <AnimatePresence
-      mode='wait'
-      custom={animationProps}
-    >
+    <AnimatePresence mode='wait' custom={animationProps}>
       <motion.div
         key={items.length}
         custom={animationProps}
@@ -80,7 +83,8 @@ export const RestOfCopiedItems = () => {
         exit='exit'
       >
         {items.map((item, index) => {
-          const scaleFactor = (containerWidth - 2 * containerPadding) / item.width
+          const scaleFactor =
+            (containerWidth - 2 * containerPadding) / item.width
 
           if (index === 0) return null
 

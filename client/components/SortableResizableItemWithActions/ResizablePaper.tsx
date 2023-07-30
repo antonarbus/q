@@ -1,7 +1,10 @@
 import { useDispatchTyped } from 'client/shared/hooks'
 import { store } from 'client/shared/clients'
 import { Resizable } from 're-resizable'
-import { saveItemWidth, tellItemSavedLocally } from '../../features/items/itemsSlice'
+import {
+  saveItemWidth,
+  tellItemSavedLocally,
+} from '../../features/items/itemsSlice'
 import { Children } from 'client/types'
 import { saveItemsIntoLocalStorage } from 'client/features/items'
 
@@ -31,7 +34,7 @@ export const ResizablePaper = ({ children, index }: Props) => {
       maxWidth='100%'
       bounds={'window' || 'parent'}
       enable={{ right: true, left: true }}
-      onResize={(e, direction, refToElement, delta) => { }}
+      onResize={(e, direction, refToElement, delta) => {}}
       onResizeStart={() => {}}
       onResizeStop={(e, direction, refToElement) => {
         const width = parseInt(refToElement.style.width)

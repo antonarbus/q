@@ -14,15 +14,22 @@ type Props = {
   dots?: number
 }
 
-export const LoadingDots = ({ size, margin, background, duration, dots }: Props) => (
+export const LoadingDots = ({
+  size,
+  margin,
+  background,
+  duration,
+  dots,
+}: Props) => (
   <div
     css={{
       display: 'inline-flex',
       justifyContent: 'center',
     }}
   >
-    {
-      Array(dots || 3).fill('').map((dot, index) => (
+    {Array(dots || 3)
+      .fill('')
+      .map((dot, index) => (
         <span
           key={`dot-${index}`}
           css={{
@@ -31,12 +38,13 @@ export const LoadingDots = ({ size, margin, background, duration, dots }: Props)
             margin: `0 ${margin || '1rem'}`,
             background: background || '#fff',
             borderRadius: '50%',
-            animation: `${duration || '0.8s'} ${bounceLoading} infinite alternate`,
+            animation: `${
+              duration || '0.8s'
+            } ${bounceLoading} infinite alternate`,
             '&:nth-of-type(2n + 0)': { animationDelay: '0.3s' },
             '&:nth-of-type(3n + 0)': { animationDelay: '0.6s' },
           }}
         />
-      ))
-    }
+      ))}
   </div>
 )

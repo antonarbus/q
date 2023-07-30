@@ -21,7 +21,13 @@ type Props = {
  * @param props.label label
  */
 
-export function PasswordInput({ password, setPassword, onBlur, label, isLabelRed }: Props) {
+export function PasswordInput({
+  password,
+  setPassword,
+  onBlur,
+  label,
+  isLabelRed,
+}: Props) {
   const [showPassword, setShowPassword] = useState(false)
 
   return (

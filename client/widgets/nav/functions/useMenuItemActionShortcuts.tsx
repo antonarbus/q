@@ -49,13 +49,15 @@ export function useMenuItemActionShortcuts() {
       if (!e.key) return
       keysPressed.push(e.key.toLowerCase())
       keysPressed = [...new Set(keysPressed)]
-      const shortcutItem = shortcuts.find(o => {
+      const shortcutItem = shortcuts.find((o) => {
         const shortcutSorted = [...o.shortcut].sort() // do not sort original array, but a copy
         const shortcutStr = shortcutSorted.join('')
         const pressedKeysStr = keysPressed.sort().join('')
         return shortcutStr === pressedKeysStr
       })
-      keysPressed = keysPressed.filter(key => key !== e.key.toLocaleLowerCase())
+      keysPressed = keysPressed.filter(
+        (key) => key !== e.key.toLocaleLowerCase()
+      )
       if (shortcutItem === undefined) return
       e.preventDefault()
       if (shortcutItem.function) {
@@ -64,7 +66,14 @@ export function useMenuItemActionShortcuts() {
       if (shortcutItem.link) {
         navigate(shortcutItem.link)
       }
-      notify({ msg: <><span style={{ color: 'orange' }}>{shortcutItem.name}</span> triggered with keyboard</> })
+      notify({
+        msg: (
+          <>
+            <span style={{ color: 'orange' }}>{shortcutItem.name}</span>{' '}
+            triggered with keyboard
+          </>
+        ),
+      })
     })
   })
 }

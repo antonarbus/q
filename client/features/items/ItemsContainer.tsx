@@ -67,9 +67,7 @@ export const ItemsContainer = ({ children }: Props) => {
         document.body.style.removeProperty('cursor')
       }}
     >
-      <AnimatePresence initial={false}>
-        {children}
-      </AnimatePresence>
+      <AnimatePresence initial={false}>{children}</AnimatePresence>
     </DraggableItems>
   )
 }

@@ -6,7 +6,10 @@ import { Person } from '@mui/icons-material'
 import { theme } from 'client/shared/clients'
 import { Event, RefDiv } from 'client/types'
 
-const isEmailPatternOk = (email: string) => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
+const isEmailPatternOk = (email: string) =>
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+    email
+  )
 
 type Props = {
   email: string
@@ -26,21 +29,35 @@ type Props = {
  * @param props.inputRef reference to the input element, for ex. to put a focus on
  */
 
-export function EmailInput({ email, setEmail, isEmailOk, setIsEmailOk, inputRef }: Props) {
+export function EmailInput({
+  email,
+  setEmail,
+  isEmailOk,
+  setIsEmailOk,
+  inputRef,
+}: Props) {
   // input focused out ones (show validation msg only after first focus out)
   const [inputFocusedOutOnes, setInputFocusedOutOnes] = useState(false)
 
   // is email pattern ok
-  useUpdateEffect(function checkIfEmailPatternIsOk() {
-    isEmailPatternOk(email) ? setIsEmailOk(true) : setIsEmailOk(false)
-  }, [email])
+  useUpdateEffect(
+    function checkIfEmailPatternIsOk() {
+      isEmailPatternOk(email) ? setIsEmailOk(true) : setIsEmailOk(false)
+    },
+    [email]
+  )
 
   // label msg
   const initEmailLabel = 'Email'
   const [emailLabel, setEmailLabel] = useState(initEmailLabel)
-  useUpdateEffect(function setLabelMsgBasedOnValidation() {
-    (inputFocusedOutOnes && email !== '' && !isEmailOk) ? setEmailLabel('Check email pattern') : setEmailLabel(initEmailLabel)
-  }, [email, inputFocusedOutOnes, isEmailOk])
+  useUpdateEffect(
+    function setLabelMsgBasedOnValidation() {
+      inputFocusedOutOnes && email !== '' && !isEmailOk
+        ? setEmailLabel('Check email pattern')
+        : setEmailLabel(initEmailLabel)
+    },
+    [email, inputFocusedOutOnes, isEmailOk]
+  )
 
   // email suggestion
   const [emailSuggestion, setEmailSuggestion] = useState('')
@@ -70,19 +87,31 @@ export function EmailInput({ email, setEmail, isEmailOk, setIsEmailOk, inputRef 
           suggestEmail()
         }}
         InputProps={{
-          startAdornment: <InputAdornment position='start'><Person /></InputAdornment>,
+          startAdornment: (
+            <InputAdornment position='start'>
+              <Person />
+            </InputAdornment>
+          ),
         }}
         sx={{
           '& .MuiInputLabel-shrink': {
-            color: (emailLabel !== initEmailLabel) ? theme.colors.red : '',
+            color: emailLabel !== initEmailLabel ? theme.colors.red : '',
           },
           mb: 2,
         }}
         inputRef={inputRef}
       />
       {!!emailSuggestion && (
-        <div css={{ position: 'absolute', bottom: '18px', right: '5px', fontSize: '12px', color: theme.colors.red }} >
-          Did you mean? {' '}
+        <div
+          css={{
+            position: 'absolute',
+            bottom: '18px',
+            right: '5px',
+            fontSize: '12px',
+            color: theme.colors.red,
+          }}
+        >
+          Did you mean?{' '}
           <a
             style={{ textDecoration: 'underline' }}
             onClick={(e) => {

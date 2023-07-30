@@ -30,7 +30,11 @@ export function useReset() {
 
       if (data.status === 'ok') {
         setHttpStatus('success')
-        notify({ msg: 'Check your email box', theme: 'light', closeAfterMs: 5000 })
+        notify({
+          msg: 'Check your email box',
+          theme: 'light',
+          closeAfterMs: 5000,
+        })
       }
       console.log(data)
     } catch (err) {

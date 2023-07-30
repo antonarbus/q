@@ -23,11 +23,16 @@ export function Register() {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
   const { registerUser, httpStatus, setHttpStatus } = useRegister()
   const navigate = useNavigate()
-  useEffect(() => setIsButtonDisabled(!(isEmailOk && isConfirmPasswordOk)), [isEmailOk, isConfirmPasswordOk])
+  useEffect(
+    () => setIsButtonDisabled(!(isEmailOk && isConfirmPasswordOk)),
+    [isEmailOk, isConfirmPasswordOk]
+  )
 
   return (
     <BackdropWithSlidableContent
-      onSlideIn={() => { /* inputRef.current.focus() */ }}
+      onSlideIn={() => {
+        /* inputRef.current.focus() */
+      }}
       onSlideOut={() => navigate('/')}
     >
       <CardCustom
@@ -39,7 +44,7 @@ export function Register() {
         }
         reference={cardRef}
       >
-        <form onSubmit={(e: Event) => registerUser({ e, email, password })} >
+        <form onSubmit={(e: Event) => registerUser({ e, email, password })}>
           <EmailInput
             email={email}
             setEmail={setEmail}
@@ -47,10 +52,7 @@ export function Register() {
             setIsEmailOk={setIsEmailOk}
             inputRef={inputRef}
           />
-          <PasswordInput
-            password={password}
-            setPassword={setPassword}
-          />
+          <PasswordInput password={password} setPassword={setPassword} />
           <ConfirmPasswordInput
             originalPassword={password}
             isConfirmPasswordOk={isConfirmPasswordOk}
@@ -68,7 +70,10 @@ export function Register() {
               children='Log in?'
               onClick={(e: Event) => {
                 e.preventDefault()
-                slideElement({ element: cardRef.current, cb: () => navigate('/login') })
+                slideElement({
+                  element: cardRef.current,
+                  cb: () => navigate('/login'),
+                })
               }}
             />
           </div>

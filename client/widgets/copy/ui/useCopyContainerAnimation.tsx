@@ -8,7 +8,7 @@ import { theme } from 'client/shared/clients'
 export const useCopyContainerAnimation = () => {
   const copyContainerAnimationControls = useAnimationControls()
   const isFirstMount = useFirstMountState()
-  const items = useSelectorTyped(state => state.copy.items)
+  const items = useSelectorTyped((state) => state.copy.items)
 
   useEffect(() => {
     const newHeight = items.reduce((accumulator, item) => {
@@ -16,14 +16,15 @@ export const useCopyContainerAnimation = () => {
       return accumulator + scaleFactor * item.height + 5
     }, 70)
 
-    isFirstMount && copyContainerAnimationControls.start({
-      width: 'auto',
-      transition: {
-        delay: 0,
-        duration: theme.copy.animationDuration,
-        type: 'spring',
-      },
-    })
+    isFirstMount &&
+      copyContainerAnimationControls.start({
+        width: 'auto',
+        transition: {
+          delay: 0,
+          duration: theme.copy.animationDuration,
+          type: 'spring',
+        },
+      })
 
     copyContainerAnimationControls.start({
       height: newHeight,

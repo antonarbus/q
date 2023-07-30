@@ -21,7 +21,7 @@ type PropsForSC = {
 }
 
 const Span = styled.span<PropsForSC>`
-  display: ${props => props.$isHovered ? 'block' : 'none'};
+  display: ${(props) => (props.$isHovered ? 'block' : 'none')};
   position: absolute;
   right: 10px;
   top: 5px;

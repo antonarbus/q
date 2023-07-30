@@ -7,7 +7,6 @@ type Props = {
 
 export const PencilAtBottomRight = ({ editorRef }: Props) => {
   return (
-
     <PencilIcon
       css={{
         position: 'absolute',

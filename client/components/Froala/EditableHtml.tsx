@@ -31,7 +31,7 @@ export const EditableHtml = ({
   placeholder,
   rowIndex,
   saveFroalaReducer,
-  heightDuringAnimationRef
+  heightDuringAnimationRef,
 }: Props) => {
   useStartFroala({
     editorRef,
@@ -41,7 +41,7 @@ export const EditableHtml = ({
     onClickAwayIfHtmChanged,
     placeholder,
     rowIndex,
-    saveFroalaReducer
+    saveFroalaReducer,
   })
   usePutCaretAtTheEndOfText({
     index,

@@ -19,19 +19,17 @@
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
     // Base directory to resolve non-relative module names.
-    "baseUrl": ".", 
+    "baseUrl": ".",
     // path mapping to be computed relative to baseUrl option
     // may use import {func} from 'client/folder', instead of '../../../../folder'
-    "types": [
-      "vite/client", 
-      "vitest/globals",
-      "@emotion/react/types/css-prop"
-    ]
+    "types": ["vite/client", "vitest/globals", "@emotion/react/types/css-prop"]
   },
   // folders and files for providing you with file search, code completion etc...
   "include": ["client", "server", "utils"],
   "exclude": ["node_modules", "**/node_modules", "build"],
-  "references": [{ 
-    "path": "./tsconfig.node.json"
-  }]
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }

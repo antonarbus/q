@@ -52,19 +52,79 @@ export const useStartFroala = ({
           tabSpaces: 4,
           toolbarButtons: {
             moreText: {
-              buttons: ['fontSize', 'textColor', 'backgroundColor', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'inlineClass', 'inlineStyle', 'clearFormatting'],
+              buttons: [
+                'fontSize',
+                'textColor',
+                'backgroundColor',
+                'bold',
+                'italic',
+                'underline',
+                'strikeThrough',
+                'subscript',
+                'superscript',
+                'fontFamily',
+                'inlineClass',
+                'inlineStyle',
+                'clearFormatting',
+              ],
               buttonsVisible: 3,
             },
             moreParagraph: {
-              buttons: ['alignLeft', 'alignCenter', 'formatOLSimple', 'alignRight', 'alignJustify', 'formatOL', 'formatUL', 'paragraphFormat', 'paragraphStyle', 'lineHeight', 'outdent', 'indent', 'quote'],
+              buttons: [
+                'alignLeft',
+                'alignCenter',
+                'formatOLSimple',
+                'alignRight',
+                'alignJustify',
+                'formatOL',
+                'formatUL',
+                'paragraphFormat',
+                'paragraphStyle',
+                'lineHeight',
+                'outdent',
+                'indent',
+                'quote',
+              ],
               buttonsVisible: 3,
             },
             moreRich: {
-              buttons: ['insertLink', 'insertTable', 'insertImage', 'insertVideo', 'emoticons', 'embedly', 'fontAwesome', 'specialCharacters', 'insertFile', 'insertHR', 'html'],
+              buttons: [
+                'insertLink',
+                'insertTable',
+                'insertImage',
+                'insertVideo',
+                'emoticons',
+                'embedly',
+                'fontAwesome',
+                'specialCharacters',
+                'insertFile',
+                'insertHR',
+                'html',
+              ],
               buttonsVisible: 4,
             },
           },
-          fontSize: ['6', '8', '9', '10', '11', '12', '13', '14', '15', '16', '18', '20', '24', '30', '36', '48', '60', '72', '96'],
+          fontSize: [
+            '6',
+            '8',
+            '9',
+            '10',
+            '11',
+            '12',
+            '13',
+            '14',
+            '15',
+            '16',
+            '18',
+            '20',
+            '24',
+            '30',
+            '36',
+            '48',
+            '60',
+            '72',
+            '96',
+          ],
           fontFamily: {
             '"Roboto","Helvetica","Arial",sans-serif': 'Roboto',
             'Arial,Helvetica,sans-serif': 'Arial',
@@ -94,8 +154,8 @@ export const useStartFroala = ({
             'fr-class-transparency': 'Transparent',
           },
           events: {
-            'paste.afterCleanup': function (clipboardHtml: string) { },
-            click: (event: MouseEvent) => { },
+            'paste.afterCleanup': function (clipboardHtml: string) {},
+            click: (event: MouseEvent) => {},
             contentChanged: () => {
               if (!froalaElementRef?.current) return
               const updatedHtml = editorRef.current.html.get()
@@ -115,7 +175,9 @@ export const useStartFroala = ({
           window.froalas.push(editorRef)
           if (!editorRef?.current?.html) return
           editorRef.current.html.set(getHtml())
-          window.froalas = window.froalas.filter(({ current }) => current !== null)
+          window.froalas = window.froalas.filter(
+            ({ current }) => current !== null
+          )
           // console.log('froalas are initiated')
           console.log('froalas number', window.froalas.length)
         }

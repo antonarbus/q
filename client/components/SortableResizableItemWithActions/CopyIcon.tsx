@@ -4,7 +4,11 @@ import { MdCopyAll } from 'react-icons/md'
 import { motion } from 'framer-motion'
 import { cleanHtml } from 'utils/itemsUtils'
 import { saveItemHeight } from 'client/features/items/itemsSlice'
-import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/entities/copy'
+import {
+  addItemIntoCopyContainer,
+  saveInitCordsOfCopyContainer,
+  showCopyContainer,
+} from 'client/entities/copy'
 
 type Props = {
   index: number
@@ -32,13 +36,15 @@ export const CopyIcon = ({ index }: Props) => {
         dispatch(saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
         dispatch(showCopyContainer())
         const itemToCopy = store.getState().items[index]
-        const html = (e.target as HTMLElement)!.closest('.item')!.querySelector('.item-paper')!.innerHTML
+        const html = (e.target as HTMLElement)!
+          .closest('.item')!
+          .querySelector('.item-paper')!.innerHTML
         const cleanedHtml = cleanHtml(html)
         const item = { ...itemToCopy, previewHtml: cleanedHtml }
         dispatch(addItemIntoCopyContainer(item))
       }}
     >
-      <MdCopyAll/>
+      <MdCopyAll />
     </motion.span>
   )
 }

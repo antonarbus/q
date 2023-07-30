@@ -9,17 +9,17 @@ import { navUpdate } from './navUpdate'
 import { token } from '../../shared/auth/token'
 import { forgetLoggedUser, rememberLoggedUser } from 'client/entities/user'
 
-type JwtAccessTokenType = { email: string, roles: string[] }
+type JwtAccessTokenType = { email: string; roles: string[] }
 
 type Props = {
   withLoadingState?: boolean
 }
 
 /**
-* refresh tokens hook
-* @param {boolean} withLoadingState at the app loading we want to refresh tokens,
-* but do not want to track it and re-render app, but at the pages with authentication we show spinner during credentials check
-*/
+ * refresh tokens hook
+ * @param {boolean} withLoadingState at the app loading we want to refresh tokens,
+ * but do not want to track it and re-render app, but at the pages with authentication we show spinner during credentials check
+ */
 
 // useRefreshTokens is used in <PersistentAuth /> and in <Main />
 // there is no race condition coz components are parallel and useRefreshTokens is fired only ones
@@ -39,15 +39,22 @@ export const useRefreshTokens = ({ withLoadingState }: Props) => {
         if (token.access) {
           const expirationInMin = tokenExpirationMinutes(token.access)
           if (expirationInMin > 5) {
-            const payloadFromExistingAccessToken: JwtAccessTokenType = jwt_decode(token.access)
+            const payloadFromExistingAccessToken: JwtAccessTokenType =
+              jwt_decode(token.access)
             const { email, roles } = payloadFromExistingAccessToken
             store.dispatch(rememberLoggedUser({ email, isLogged: true, roles }))
             navUpdate.login()
-            return console.log(`access token expires in ${expirationInMin.toFixed(2)} min, which is more than 5 min, skip the refresh for now`)
+            return console.log(
+              `access token expires in ${expirationInMin.toFixed(
+                2
+              )} min, which is more than 5 min, skip the refresh for now`
+            )
           }
         }
 
-        const response = await axios.get('/api/refresh', { withCredentials: true })
+        const response = await axios.get('/api/refresh', {
+          withCredentials: true,
+        })
         const { status, accessJwtToken, roles } = response.data
 
         if (status === 'error') {
@@ -63,7 +70,8 @@ export const useRefreshTokens = ({ withLoadingState }: Props) => {
           return console.log('no access token in db')
         }
 
-        const payloadFromUpdatedAccessToken: JwtAccessTokenType = jwt_decode(accessJwtToken)
+        const payloadFromUpdatedAccessToken: JwtAccessTokenType =
+          jwt_decode(accessJwtToken)
         const { email } = payloadFromUpdatedAccessToken
         if (!email) {
           store.dispatch(forgetLoggedUser())

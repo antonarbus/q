@@ -1,6 +1,10 @@
 // server.ts
 import 'dotenv/config'
-import express, { Request as ReqType, Response as ResType, NextFunction as NextType } from 'express'
+import express, {
+  Request as ReqType,
+  Response as ResType,
+  NextFunction as NextType,
+} from 'express'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
@@ -13,8 +17,7 @@ import { activateRouter } from './api/activateRouter'
 import { refreshRouter } from './api/refreshRouter'
 import { errorHandler } from './middleware/errorHandler'
 import { usersRouter } from './api/usersRouter'
-
-(async () => {
+;(async () => {
   const app = express()
   // todo: but do I really have to wait for db to start? let's leave it as it is for now
   await connectToDb()
@@ -22,8 +25,10 @@ import { usersRouter } from './api/usersRouter'
   app.use(express.json()) // parses incoming requests with JSON because we use lots of json, let it be default
   app.use(cookieParser())
   app.use(cors())
-  app.get('/', (req: ReqType, res:ResType) => res.send('This is from express.js'))
-  app.get('/api', (req: ReqType, res:ResType) => res.json({ message: '/api' }))
+  app.get('/', (req: ReqType, res: ResType) =>
+    res.send('This is from express.js')
+  )
+  app.get('/api', (req: ReqType, res: ResType) => res.json({ message: '/api' }))
 
   // use router from separate file
   const hi = require('./api/hi')

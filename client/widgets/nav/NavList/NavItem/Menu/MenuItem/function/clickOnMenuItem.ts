@@ -4,12 +4,21 @@ import { Event } from 'client/types'
 import { getMenuItemByIdsChain } from '../../functions/getMenuItemByIdsChain'
 import { navigateInMenu } from '../../functions/useMenuAnimation'
 
-export const clickOnMenuItem = (e: Event, menuId: string, disabled: boolean) => {
-  const chainToClickedItem = [...store.getState().nav.idsToCurrentMenuItems, menuId]
+export const clickOnMenuItem = (
+  e: Event,
+  menuId: string,
+  disabled: boolean
+) => {
+  const chainToClickedItem = [
+    ...store.getState().nav.idsToCurrentMenuItems,
+    menuId,
+  ]
   const nextMenu = getMenuItemByIdsChain(chainToClickedItem)
   const isNestedMenuAvailable = !!nextMenu.length
-  const menuItems = getMenuItemByIdsChain(store.getState().nav.idsToCurrentMenuItems)
-  const menuItem = menuItems!.find(menuItem => menuItem.id === menuId)
+  const menuItems = getMenuItemByIdsChain(
+    store.getState().nav.idsToCurrentMenuItems
+  )
+  const menuItem = menuItems!.find((menuItem) => menuItem.id === menuId)
   const link = menuItem?.link
   const func = menuItem?.func
 

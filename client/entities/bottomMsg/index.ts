@@ -1,5 +1,5 @@
 export {
   bottomMsgReducer,
   showMsgOnBottom,
-  resetMsgOnBottom
+  resetMsgOnBottom,
 } from './bottomMsgSlice'

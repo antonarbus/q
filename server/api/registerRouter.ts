@@ -1,5 +1,9 @@
 // registerRouter.ts
-import express, { Request as ReqType, Response as ResType, NextFunction as NextType } from 'express'
+import express, {
+  Request as ReqType,
+  Response as ResType,
+  NextFunction as NextType,
+} from 'express'
 // import { connectToDb } from '../db/connectToDb'
 import { UserModel } from '../db/models/user.model'
 import bcrypt from 'bcryptjs'
@@ -18,14 +22,22 @@ registerRouter.post(
     try {
       // validation
       const validationErrors = validationResult(req)
-      if (!validationErrors.isEmpty()) return res.json({ status: 'error', message: 'validation error', validationErrors })
+      if (!validationErrors.isEmpty())
+        return res.json({
+          status: 'error',
+          message: 'validation error',
+          validationErrors,
+        })
 
       // check if user already exists
       // await connectToDb()
       const email = req.body.email.toLowerCase()
       const user = await UserModel.findOne({ email })
       if (user) {
-        return res.json({ status: 'error', message: 'user with such email already exists' })
+        return res.json({
+          status: 'error',
+          message: 'user with such email already exists',
+        })
       }
 
       // save user to db
@@ -43,4 +55,5 @@ registerRouter.post(
     } catch (error: any) {
       next(error)
     }
-  })
+  }
+)

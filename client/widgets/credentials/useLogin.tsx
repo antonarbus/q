@@ -23,7 +23,7 @@ export function useLogin() {
     cardElement: HTMLElement
   }
 
-  async function loginUser ({ e, email, password, cardElement }: Props) {
+  async function loginUser({ e, email, password, cardElement }: Props) {
     e.preventDefault()
     const method = 'POST'
     const headers = { 'Content-Type': 'application/json' }
@@ -42,7 +42,11 @@ export function useLogin() {
           notify({ msg: 'Invalid credentials', type: 'error', theme: 'light' })
         }
         if (message === 'account is not activated') {
-          notify({ msg: 'Account is not activated. Check mailbox.', type: 'error', theme: 'light' })
+          notify({
+            msg: 'Account is not activated. Check mailbox.',
+            type: 'error',
+            theme: 'light',
+          })
         }
         return
       }
@@ -53,14 +57,28 @@ export function useLogin() {
         dispatch(rememberLoggedUser({ email, isLogged: true, roles }))
         // notify({ msg: 'Logged in!', theme: 'light', closeAfterMs: 3000 })
         navUpdate.login()
-        setTimeout(() => slideElement({ element: cardElement, cb: () => navigate(from, { replace: true }) }), 2000)
+        setTimeout(
+          () =>
+            slideElement({
+              element: cardElement,
+              cb: () => navigate(from, { replace: true }),
+            }),
+          2000
+        )
       }
       console.log(data)
     } catch (err) {
       setHttpStatus('error')
       console.log(err)
       notify({ msg: 'Internal error', type: 'error', theme: 'light' })
-      setTimeout(() => slideElement({ element: cardElement, cb: () => navigate(from, { replace: true }) }), 2000)
+      setTimeout(
+        () =>
+          slideElement({
+            element: cardElement,
+            cb: () => navigate(from, { replace: true }),
+          }),
+        2000
+      )
     }
   }
 

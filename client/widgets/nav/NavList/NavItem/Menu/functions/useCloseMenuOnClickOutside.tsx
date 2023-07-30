@@ -24,7 +24,9 @@ export function useCloseMenuOnClickOutside({ menuContainerRef }: Props) {
     const navItem = menuContainerRef.current.parentElement
     if (!navItem) return
     const clickedEl = e.target as HTMLElement
-    const isClickOnOpenedNavItem = isClickInsideThisElement(clickedEl, navItem) && !isClickInsideThisElement(clickedEl, menuContainer)
+    const isClickOnOpenedNavItem =
+      isClickInsideThisElement(clickedEl, navItem) &&
+      !isClickInsideThisElement(clickedEl, menuContainer)
     if (isClickOnOpenedNavItem) return
     if (!isClickInsideThisElement(clickedEl, menuContainer)) {
       dispatch(closeMenu())
@@ -33,7 +35,9 @@ export function useCloseMenuOnClickOutside({ menuContainerRef }: Props) {
 
   function hideMenuOnClickOutside() {
     document.addEventListener('mousedown', mouseDownHandler)
-    return () => { document.removeEventListener('mousedown', mouseDownHandler) }
+    return () => {
+      document.removeEventListener('mousedown', mouseDownHandler)
+    }
   }
 
   useEffect(hideMenuOnClickOutside, [])

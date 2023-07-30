@@ -14,7 +14,14 @@ import { store } from './store'
 import { Provider } from 'react-redux'
 import { BottomMsg } from 'client/widgets/bottomMsg'
 import { Spinner } from 'client/widgets/spinner'
-import { Login, PersistentAuth, Register, RequireAuth, Reset, Unauthorized } from 'client/widgets/credentials'
+import {
+  Login,
+  PersistentAuth,
+  Register,
+  RequireAuth,
+  Reset,
+  Unauthorized,
+} from 'client/widgets/credentials'
 
 export const App = () => (
   <Provider store={store}>
