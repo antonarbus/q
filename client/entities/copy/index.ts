@@ -9,7 +9,7 @@ export {
   showPasteText,
   hidePasteText,
   enterIntoCopyMode,
-  exitFromCopyMode
+  exitFromCopyMode,
 } from './model/copySlice'
 
-export type { PastePosType, CopyPlaceType, CopyItemType }  from './model/types'
+export type { PastePosType, CopyPlaceType, CopyItemType } from './model/types'

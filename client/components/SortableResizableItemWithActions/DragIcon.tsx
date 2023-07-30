@@ -5,7 +5,7 @@ import { selectIsLastItem } from '../../features/items/itemsSlice'
 import { motion } from 'framer-motion'
 
 const Handle = () => {
-  const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
+  const isCopyMode = useSelectorTyped((state) => state.copy.isCopyMode)
   const isLastItem = useSelectorTyped(selectIsLastItem)
   const isDisabled = isCopyMode || isLastItem
 

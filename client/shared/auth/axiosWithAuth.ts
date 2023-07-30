@@ -19,14 +19,22 @@ axiosWithAuth.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config
-    if (error.response.status === 401 && error.config && !error.config._isRetry) {
+    if (
+      error.response.status === 401 &&
+      error.config &&
+      !error.config._isRetry
+    ) {
       try {
         originalRequest._isRetry = true
-        const response = await axios.get('/api/refresh', { withCredentials: true })
+        const response = await axios.get('/api/refresh', {
+          withCredentials: true,
+        })
         const { accessJwtToken, email } = response.data
         if (accessJwtToken) {
           token.access = accessJwtToken
-          store.dispatch(rememberLoggedUser({ email, isLogged: true, roles: 'viewer' }))
+          store.dispatch(
+            rememberLoggedUser({ email, isLogged: true, roles: 'viewer' })
+          )
         }
         if (!accessJwtToken) {
           token.access = ''

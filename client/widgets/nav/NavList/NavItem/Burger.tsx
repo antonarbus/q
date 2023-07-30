@@ -7,8 +7,10 @@ import { theme } from 'client/shared/clients'
 
 export function Burger() {
   const dispatch = useDispatchTyped()
-  const isOpen = useSelectorTyped(state => state.nav.burger.isOpen)
-  const screenWidthWhenShowBurger = useSelectorTyped(state => state.nav.mediaQueryWidth.burger)
+  const isOpen = useSelectorTyped((state) => state.nav.burger.isOpen)
+  const screenWidthWhenShowBurger = useSelectorTyped(
+    (state) => state.nav.mediaQueryWidth.burger
+  )
 
   return (
     <BurgerContainer screenWidthWhenShowBurger={screenWidthWhenShowBurger}>
@@ -19,7 +21,7 @@ export function Burger() {
         color={theme.colors.greyFont}
         rounded
         label='Show menu'
-        onToggle={toggled => {
+        onToggle={(toggled) => {
           // if (toggled) console.log('menu opened')
           // if (!toggled) dispatch(closeMenu())
         }}
@@ -34,7 +36,7 @@ type Props = {
 const BurgerContainer = styled.div<Props>`
   display: none;
 
-  @media (max-width: ${props => props.screenWidthWhenShowBurger}px) {
+  @media (max-width: ${(props) => props.screenWidthWhenShowBurger}px) {
     display: block;
   }
 `

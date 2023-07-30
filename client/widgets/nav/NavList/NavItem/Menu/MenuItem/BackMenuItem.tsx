@@ -10,7 +10,9 @@ import { navigateInMenu } from '../functions/useMenuAnimation'
 
 export function BackMenuItem() {
   const dispatch = useDispatchTyped()
-  const isHovered = useSelectorTyped(state => state.nav.menuItemHoverIndex === 1)
+  const isHovered = useSelectorTyped(
+    (state) => state.nav.menuItemHoverIndex === 1
+  )
   const color = theme.colors.topMenuItem
 
   const onClickHandler = (e: Event) => {

@@ -1,1 +1,1 @@
-export { reloadOffer,  offerReducer } from './offerSlice'
+export { reloadOffer, offerReducer } from './offerSlice'

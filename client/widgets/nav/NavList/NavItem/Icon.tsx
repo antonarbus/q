@@ -1,7 +1,7 @@
 import { RoundSpanForIcon } from './RoundSpanForIcon'
 
 type Props = {
-  icon: string | React.ReactNode,
+  icon: string | React.ReactNode
   disabled?: boolean
 }
 
@@ -14,7 +14,11 @@ type Props = {
 export function Icon({ icon, disabled }: Props) {
   return (
     <RoundSpanForIcon className='icon-round-wrapper' disabled={disabled}>
-      {typeof icon === 'string' ? <span style={{ fontWeight: 600 }}>{icon}</span> : icon}
+      {typeof icon === 'string' ? (
+        <span style={{ fontWeight: 600 }}>{icon}</span>
+      ) : (
+        icon
+      )}
     </RoundSpanForIcon>
   )
 }

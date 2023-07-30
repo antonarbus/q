@@ -9,7 +9,7 @@ type Props = {
 
 export const Msg = ({ index }: Props) => {
   const dispatch = useDispatchTyped()
-  const msg = useSelectorTyped(state => state.items[index]?.msg)
+  const msg = useSelectorTyped((state) => state.items[index]?.msg)
   // const { msg } = item
 
   useUpdateEffect(function hideMsg() {

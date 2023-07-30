@@ -18,4 +18,3 @@ const bottomMsgSlice = createSlice({
 
 export const bottomMsgReducer = bottomMsgSlice.reducer
 export const { showMsgOnBottom, resetMsgOnBottom } = bottomMsgSlice.actions
-

@@ -7,5 +7,5 @@
  * @returns {boolean} true or false
  */
 export function isOverflown(el: HTMLElement) {
-  return (el.scrollHeight > el.clientHeight) || (el.scrollWidth > el.clientWidth)
+  return el.scrollHeight > el.clientHeight || el.scrollWidth > el.clientWidth
 }

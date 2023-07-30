@@ -18,21 +18,44 @@ type Props = {
  * @param props.content anything, same, but goes as a prop
  * @param props.onSlideIn func called after slide in animation end
  * @param props.onSlideOut func called after slide out animation end
-*/
+ */
 
-export const BackdropWithSlidableContent = ({ children, content, onSlideIn, onSlideOut }: Props) => {
+export const BackdropWithSlidableContent = ({
+  children,
+  content,
+  onSlideIn,
+  onSlideOut,
+}: Props) => {
   const contentRef = useRef() as RefDiv
-  useLayoutEffect(() => slideElement({ intoView: true, element: contentRef.current, cb: () => onSlideIn && onSlideIn() }), [])
+  useLayoutEffect(
+    () =>
+      slideElement({
+        intoView: true,
+        element: contentRef.current,
+        cb: () => onSlideIn && onSlideIn(),
+      }),
+    []
+  )
 
   useEffectOnce(function slideOutOnEscBtn() {
-    const slideAway = (e: KeyboardEvent) => e.key === 'Escape' && slideElement({ element: contentRef.current, cb: () => onSlideOut && onSlideOut() })
+    const slideAway = (e: KeyboardEvent) =>
+      e.key === 'Escape' &&
+      slideElement({
+        element: contentRef.current,
+        cb: () => onSlideOut && onSlideOut(),
+      })
     document.addEventListener('keydown', slideAway)
     return () => document.removeEventListener('keydown', slideAway)
   })
 
   return (
     <div
-      onMouseDown={() => slideElement({ element: contentRef.current, cb: () => onSlideOut && onSlideOut() })}
+      onMouseDown={() =>
+        slideElement({
+          element: contentRef.current,
+          cb: () => onSlideOut && onSlideOut(),
+        })
+      }
       css={{
         position: 'fixed',
         top: 0,

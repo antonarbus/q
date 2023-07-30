@@ -7,8 +7,8 @@ type Prop = {
 }
 
 export function Logo({ logoRef }: Prop) {
-  const mediaQueryWidth = useSelectorTyped(state => state.nav.mediaQueryWidth)
-  const mediaEnabled = useSelectorTyped(state => state.nav.mediaEnabled)
+  const mediaQueryWidth = useSelectorTyped((state) => state.nav.mediaQueryWidth)
+  const mediaEnabled = useSelectorTyped((state) => state.nav.mediaEnabled)
 
   return (
     <div
@@ -25,9 +25,10 @@ export function Logo({ logoRef }: Prop) {
         '& a': {
           cursor: 'pointer',
           fontSize: '16px',
-          [`@media (max-width: ${mediaQueryWidth.logoPart}px) and (min-width: ${mediaQueryWidth.burger}px)`]: mediaEnabled && {
-            fontSize: '30px',
-          },
+          [`@media (max-width: ${mediaQueryWidth.logoPart}px) and (min-width: ${mediaQueryWidth.burger}px)`]:
+            mediaEnabled && {
+              fontSize: '30px',
+            },
           '& span:first-of-type': {
             color: 'white',
           },
@@ -37,15 +38,17 @@ export function Logo({ logoRef }: Prop) {
               color: 'white !important',
               transition: '0.3s ease',
             },
-            [`@media (max-width: ${mediaQueryWidth.logoPart}px) and (min-width: ${mediaQueryWidth.burger}px)`]: mediaEnabled && {
-              display: 'none',
-            },
+            [`@media (max-width: ${mediaQueryWidth.logoPart}px) and (min-width: ${mediaQueryWidth.burger}px)`]:
+              mediaEnabled && {
+                display: 'none',
+              },
           },
           '& span:last-child': {
             color: '#e7e7e7bf',
-            [`@media (max-width: ${mediaQueryWidth.logoExtension}px) and (min-width: ${mediaQueryWidth.burger}px)`]: mediaEnabled && {
-              display: 'none',
-            },
+            [`@media (max-width: ${mediaQueryWidth.logoExtension}px) and (min-width: ${mediaQueryWidth.burger}px)`]:
+              mediaEnabled && {
+                display: 'none',
+              },
           },
         },
       }}

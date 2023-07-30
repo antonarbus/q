@@ -1,21 +1,14 @@
 import { gsap } from 'gsap'
 
-type Props = {
+interface Props {
   element: HTMLElement
   cb?: () => void
-  intoView?: boolean
+  intoView: boolean
 }
 
 let isAnimationPrevented = false // needed to avoid second click on backdrop which launches unwanted second animation
 
-/**
- * @param props object with parameters
- * @param props.element reference to an element
- * @param props.cb callback triggered after animation is ended, for ex. link navigation or component render state change
- * @param props.intoView when true, element slides from the bottom into the view, if false, it slides up out of the view
- */
-
-export function slideElement({ intoView, element, cb }: Props) {
+export function slideElement({ intoView, element, cb }: Props): void {
   if (isAnimationPrevented) return
   isAnimationPrevented = true
   const screenHeight = window.window.innerHeight

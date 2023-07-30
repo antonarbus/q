@@ -7,11 +7,12 @@ type Props = {
 
 export function RequireAuth({ allowedRoles }: Props) {
   const location = useLocation()
-  const isLogged = useSelectorTyped(state => state.user.isLogged)
-  const roles = useSelectorTyped(state => state.user.roles)
-  const haveRequiredRole = allowedRoles.some(role => roles.includes(role))
+  const isLogged = useSelectorTyped((state) => state.user.isLogged)
+  const roles = useSelectorTyped((state) => state.user.roles)
+  const haveRequiredRole = allowedRoles.some((role) => roles.includes(role))
 
   if (isLogged && haveRequiredRole) return <Outlet />
-  if (isLogged && !haveRequiredRole) return <Navigate to='/unauthorized' state={{ from: location }} replace />
+  if (isLogged && !haveRequiredRole)
+    return <Navigate to='/unauthorized' state={{ from: location }} replace />
   return <Navigate to='/login' state={{ from: location }} replace />
 }

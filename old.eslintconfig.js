@@ -17,10 +17,7 @@ module.exports = {
     sourceType: 'module',
     // project: "./tsconfig.json"
   },
-  plugins: [
-    'react',
-    '@typescript-eslint',
-  ],
+  plugins: ['react', '@typescript-eslint'],
   settings: {
     react: {
       version: 'detect',
@@ -42,15 +39,21 @@ module.exports = {
     // 'react/no-unescaped-entities': 'off',
     // 'react/no-children-prop': 'off',
     'react/no-unknown-property': ['error', { ignore: ['css'] }],
-    'comma-dangle': ['error', {
-      arrays: 'always-multiline',
-      objects: 'always-multiline',
-    }],
+    'comma-dangle': [
+      'error',
+      {
+        arrays: 'always-multiline',
+        objects: 'always-multiline',
+      },
+    ],
     '@typescript-eslint/comma-dangle': 'off',
-    'no-console': ['warn', {
-      allow: ['error'],
-    }],
-    "@typescript-eslint/consistent-type-exports": "error",
-    "@typescript-eslint/consistent-type-imports": "error",
+    'no-console': [
+      'warn',
+      {
+        allow: ['error'],
+      },
+    ],
+    '@typescript-eslint/consistent-type-exports': 'error',
+    '@typescript-eslint/consistent-type-imports': 'error',
   },
 }

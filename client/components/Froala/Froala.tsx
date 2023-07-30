@@ -15,7 +15,11 @@ type ReducerProps = {
   rowIndex?: number
 }
 
-export type SaveFroalaReducer = ({ index, html, rowIndex }: ReducerProps) => AnyAction
+export type SaveFroalaReducer = ({
+  index,
+  html,
+  rowIndex,
+}: ReducerProps) => AnyAction
 
 type Props = {
   index: number
@@ -42,8 +46,10 @@ export const Froala = ({
   rowIndex,
   saveFroalaReducer,
 }: Props) => {
-  const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
-  const { heightDuringAnimationRef } = useFixedHeightForAnimation({ froalaElementRef })
+  const isCopyMode = useSelectorTyped((state) => state.copy.isCopyMode)
+  const { heightDuringAnimationRef } = useFixedHeightForAnimation({
+    froalaElementRef,
+  })
   const { observerRef, isInsideViewPort } = useViewPortObserver()
 
   // todo: add an option and state which will show RenderedHtml and init froala on mousedown, for froalas at header, item, cost, price

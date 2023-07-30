@@ -23,11 +23,16 @@ export function Login() {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
   const { loginUser, httpStatus, setHttpStatus } = useLogin()
   const navigate = useNavigate()
-  useEffect(() => setIsButtonDisabled(!(isEmailOk && !!password)), [isEmailOk, password])
+  useEffect(
+    () => setIsButtonDisabled(!(isEmailOk && !!password)),
+    [isEmailOk, password]
+  )
 
   return (
     <BackdropWithSlidableContent
-      onSlideIn={() => { /* inputRef.current.focus() */ }}
+      onSlideIn={() => {
+        /* inputRef.current.focus() */
+      }}
       onSlideOut={() => navigate('/')}
     >
       <CardCustom
@@ -39,7 +44,11 @@ export function Login() {
         }
         reference={cardRef}
       >
-        <form onSubmit={(e: Event) => loginUser({ e, email, password, cardElement: cardRef.current })} >
+        <form
+          onSubmit={(e: Event) =>
+            loginUser({ e, email, password, cardElement: cardRef.current })
+          }
+        >
           <EmailInput
             email={email}
             setEmail={setEmail}
@@ -47,23 +56,29 @@ export function Login() {
             setIsEmailOk={setIsEmailOk}
             inputRef={inputRef}
           />
-          <PasswordInput
-            password={password}
-            setPassword={setPassword}
-          />
+          <PasswordInput password={password} setPassword={setPassword} />
           <ButtonCustom
             content='LOG IN'
             disabled={isButtonDisabled}
             httpStatus={httpStatus}
             setHttpStatus={setHttpStatus}
           />
-          <div css={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+          <div
+            css={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              marginTop: '20px',
+            }}
+          >
             <Link
               to='/reset'
               children='Reset?'
               onClick={(e: Event) => {
                 e.preventDefault()
-                slideElement({ element: cardRef.current, cb: () => navigate('/reset') })
+                slideElement({
+                  element: cardRef.current,
+                  cb: () => navigate('/reset'),
+                })
               }}
             />
             <Link
@@ -71,7 +86,10 @@ export function Login() {
               children='Register?'
               onClick={(e: Event) => {
                 e.preventDefault()
-                slideElement({ element: cardRef.current, cb: () => navigate('/register') })
+                slideElement({
+                  element: cardRef.current,
+                  cb: () => navigate('/register'),
+                })
               }}
               css={{ textAlign: 'right' }}
             />

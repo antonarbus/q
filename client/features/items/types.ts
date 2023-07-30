@@ -9,34 +9,34 @@ export type BoqRow = {
   id: string
   description: {
     html: string
-  },
+  }
   item: {
     html: string
     value: number
-  },
+  }
   qty: {
     html: string
     value: number
-  },
+  }
   price: {
     html: string
     value: number
-  },
+  }
 }
 
 export type BoqColumns = {
   description: {
     html: string
     width: undefined | number
-  },
+  }
   item: {
     html: string
     width: undefined | number
-  },
+  }
   qty: {
     html: string
     width: undefined | number
-  },
+  }
   price: {
     html: string
     width: undefined | number
@@ -57,13 +57,13 @@ export type BoqItem = CommonItem & {
         price: {
           value: number
           html: string
-        },
+        }
         currency: {
           html: string
         }
       }
-    },
-    column: BoqColumns,
+    }
+    column: BoqColumns
     rows: BoqRow[]
   }
 }

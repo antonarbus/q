@@ -59,49 +59,48 @@ declare module '@mui/material/styles' {
     // from mui
     palette: {
       primary: {
-        main: '#757575',
-      },
-    },
+        main: '#757575'
+      }
+    }
     typography: {
       button: {
-        textTransform: 'none',
-      },
-    },
+        textTransform: 'none'
+      }
+    }
     // from customTheme
     colors: {
-      grey: '#5a5a5a',
-      red: '#ee6666',
-      topMenuItem: '#858383',
-      darkBackground: 'rgb(52 52 52 / 95%)',
-      greyFont: '#bcbcbc',
-    },
+      grey: '#5a5a5a'
+      red: '#ee6666'
+      topMenuItem: '#858383'
+      darkBackground: 'rgb(52 52 52 / 95%)'
+      greyFont: '#bcbcbc'
+    }
     nav: {
-      height: 60,
-      marginTop: 10,
-      marginBottom: 0,
-      fullHeight: number,
-    },
+      height: 60
+      marginTop: 10
+      marginBottom: 0
+      fullHeight: number
+    }
     menu: {
-      width: 300,
-      paddingTop: 16,
-      paddingBottom: 16,
+      width: 300
+      paddingTop: 16
+      paddingBottom: 16
       menuItem: {
-        height: 50,
-      },
+        height: 50
+      }
       navItem: {
-        marginLeft: 10,
-        marginRight: 10,
-      },
-    },
+        marginLeft: 10
+        marginRight: 10
+      }
+    }
     item: {
-      padding: 20,
-      animationDuration: 0.5,
-    },
+      padding: 20
+      animationDuration: 0.5
+    }
     copy: {
-      pasteTextColor: '#6c6c6c',
-      animationDuration: 0.5,
-    },
-
+      pasteTextColor: '#6c6c6c'
+      animationDuration: 0.5
+    }
   }
 }
 

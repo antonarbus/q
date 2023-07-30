@@ -16,11 +16,13 @@ export const Key = ({ children }: Props) => {
         color: rgb(51, 51, 51);
         line-height: 1.4;
         display: inline-block;
-        box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2), inset 0px 0px 0px 2px #ffffff;
+        box-shadow:
+          0px 1px 0px rgba(0, 0, 0, 0.2),
+          inset 0px 0px 0px 2px #ffffff;
         text-shadow: 0 1px 0 #fff;
         font-size: 11px;
-      `
-    }>
+      `}
+    >
       {children}
     </div>
   )

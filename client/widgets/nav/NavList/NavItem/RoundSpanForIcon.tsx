@@ -7,7 +7,12 @@ type Props = {
   disabled?: boolean
 }
 
-export const RoundSpanForIcon = ({ children, css, className, disabled }: Props) => {
+export const RoundSpanForIcon = ({
+  children,
+  css,
+  className,
+  disabled,
+}: Props) => {
   return (
     <span
       className={className}

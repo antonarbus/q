@@ -3,7 +3,7 @@ import { useUpdateEffect } from 'react-use'
 import { PasswordInput } from './PasswordInput'
 
 type Props = {
-  originalPassword: string,
+  originalPassword: string
   isConfirmPasswordOk: boolean
   setIsConfirmPasswordOk: (value: boolean) => void
 }
@@ -16,16 +16,39 @@ type Props = {
  * @param props.setIsConfirmPasswordOk isConfirmPasswordOk state setter
  */
 
-export function ConfirmPasswordInput({ originalPassword, isConfirmPasswordOk, setIsConfirmPasswordOk }: Props) {
+export function ConfirmPasswordInput({
+  originalPassword,
+  isConfirmPasswordOk,
+  setIsConfirmPasswordOk,
+}: Props) {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [didBlur, setDidBlur] = useState(false)
   const initLabel = 'Confirm password'
   const [label, setLabel] = useState(initLabel)
   const [isLabelRed, setIsLabelRed] = useState(false)
 
-  useUpdateEffect(() => setIsConfirmPasswordOk(!!originalPassword && originalPassword === confirmPassword), [originalPassword, confirmPassword])
-  useUpdateEffect(() => setIsLabelRed(didBlur && !!originalPassword && !!confirmPassword && !isConfirmPasswordOk), [didBlur, originalPassword, confirmPassword, isConfirmPasswordOk])
-  useUpdateEffect(() => isLabelRed ? setLabel('Passwords do not match') : setLabel(initLabel), [isLabelRed])
+  useUpdateEffect(
+    () =>
+      setIsConfirmPasswordOk(
+        !!originalPassword && originalPassword === confirmPassword
+      ),
+    [originalPassword, confirmPassword]
+  )
+  useUpdateEffect(
+    () =>
+      setIsLabelRed(
+        didBlur &&
+          !!originalPassword &&
+          !!confirmPassword &&
+          !isConfirmPasswordOk
+      ),
+    [didBlur, originalPassword, confirmPassword, isConfirmPasswordOk]
+  )
+  useUpdateEffect(
+    () =>
+      isLabelRed ? setLabel('Passwords do not match') : setLabel(initLabel),
+    [isLabelRed]
+  )
 
   return (
     <PasswordInput

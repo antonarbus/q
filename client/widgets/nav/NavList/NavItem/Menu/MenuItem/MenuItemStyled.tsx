@@ -21,6 +21,7 @@ export const MenuItemStyled = styled(Link)<Props>`
   color: #dadce1;
   white-space: nowrap;
   text-decoration: none;
-  background-color: ${props => props.state.isHovered ? '#525357' : 'initial'};
-  filter: ${props => props.state.isHovered ? 'brightness(1.2)' : 'none'};
+  background-color: ${(props) =>
+    props.state.isHovered ? '#525357' : 'initial'};
+  filter: ${(props) => (props.state.isHovered ? 'brightness(1.2)' : 'none')};
 `

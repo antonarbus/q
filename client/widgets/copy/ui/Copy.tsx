@@ -2,7 +2,9 @@ import { useSelectorTyped } from 'client/shared/hooks'
 import { CopyContainer } from './CopyContainer'
 
 export const Copy = () => {
-  const isCopyContainer = useSelectorTyped(state => state.copy.isCopyContainer)
+  const isCopyContainer = useSelectorTyped(
+    (state) => state.copy.isCopyContainer
+  )
 
   if (!isCopyContainer) return null
 

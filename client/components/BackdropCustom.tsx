@@ -12,9 +12,14 @@ type Props = {
  * @param props.children anything, goes inside tags
  * @param props.content anything, same, but goes as a prop
  * @param props.color color for background
-*/
+ */
 
-export const BackdropCustom = ({ onMouseDown, children, content, color }: Props) => (
+export const BackdropCustom = ({
+  onMouseDown,
+  children,
+  content,
+  color,
+}: Props) => (
   <div
     onMouseDown={onMouseDown}
     css={{

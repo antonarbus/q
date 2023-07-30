@@ -20,7 +20,7 @@ export function getMenuItemByIdsChain(idsToCurrentMenuItems: string[]) {
       return clicked
     }
     if (id !== 'burger') {
-      clicked = tempMenu.find(menuItem => menuItem.id === id)?.menuItems || []
+      clicked = tempMenu.find((menuItem) => menuItem.id === id)?.menuItems || []
     }
     tempMenu = clicked
   })

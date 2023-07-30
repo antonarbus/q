@@ -1,5 +1,9 @@
 // loginRouter.ts
-import express, { Request as ReqType, Response as ResType, NextFunction as NextType } from 'express'
+import express, {
+  Request as ReqType,
+  Response as ResType,
+  NextFunction as NextType,
+} from 'express'
 import { UserModel } from '../db/models/user.model'
 import bcrypt from 'bcryptjs'
 import { refreshJwtTokenExpirationSeconds, token } from '../services/jwt'
@@ -13,8 +17,10 @@ loginRouter.post('/', async (req: ReqType, res: ResType, next: NextType) => {
 
     // check email & password
     const user = await UserModel.findOne({ email })
-    const isPasswordValid = user && await bcrypt.compare(password, user.password as string)
-    if (!user || !isPasswordValid) return res.json({ status: 'error', message: 'invalid credentials' })
+    const isPasswordValid =
+      user && (await bcrypt.compare(password, user.password as string))
+    if (!user || !isPasswordValid)
+      return res.json({ status: 'error', message: 'invalid credentials' })
 
     // check if account is activated
     if (!user.isActivated) {
@@ -28,7 +34,10 @@ loginRouter.post('/', async (req: ReqType, res: ResType, next: NextType) => {
     const refreshJwtToken = token.new.refresh({ email, roles })
 
     // put refresh token in cookie
-    res.cookie('refreshJwtToken', refreshJwtToken, { maxAge: refreshJwtTokenExpirationSeconds * 1000, httpOnly: true })
+    res.cookie('refreshJwtToken', refreshJwtToken, {
+      maxAge: refreshJwtTokenExpirationSeconds * 1000,
+      httpOnly: true,
+    })
 
     // put refresh token in db & update login date
     const filter = { email }
@@ -36,7 +45,13 @@ loginRouter.post('/', async (req: ReqType, res: ResType, next: NextType) => {
     await UserModel.findOneAndUpdate(filter, update)
 
     // return data to the client
-    res.json({ status: 'ok', message: `user with email: ${email} logged in and tokens are refreshed`, accessJwtToken, email, roles })
+    res.json({
+      status: 'ok',
+      message: `user with email: ${email} logged in and tokens are refreshed`,
+      accessJwtToken,
+      email,
+      roles,
+    })
   } catch (error: any) {
     next(error)
   }

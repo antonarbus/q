@@ -23,5 +23,5 @@ export {
   disableMedia,
   enableMedia,
   selectMenuItemByIdsChainSelector,
-  navReducer
+  navReducer,
 } from './navSlice'

@@ -7,7 +7,11 @@ type Props = {
   editorRef: RefAny
 }
 
-export const usePutCaretAtTheEndOfText = ({ index, editorRef, froalaElementRef }: Props) => {
+export const usePutCaretAtTheEndOfText = ({
+  index,
+  editorRef,
+  froalaElementRef,
+}: Props) => {
   useEffect(() => {
     function focusOnTextIfCellOrPaddingAreClicked(e: MouseEvent) {
       // https://stackoverflow.com/a/35191761/7239778
@@ -25,13 +29,24 @@ export const usePutCaretAtTheEndOfText = ({ index, editorRef, froalaElementRef }
       editorRef.current.selection.restore()
     }
 
-    froalaElementRef?.current?.addEventListener('click', focusOnTextIfCellOrPaddingAreClicked)
-    const tableCell = froalaElementRef?.current.closest('.ag-cell') as HTMLElement
+    froalaElementRef?.current?.addEventListener(
+      'click',
+      focusOnTextIfCellOrPaddingAreClicked
+    )
+    const tableCell = froalaElementRef?.current.closest(
+      '.ag-cell'
+    ) as HTMLElement
     tableCell?.addEventListener('click', focusOnTextIfCellOrPaddingAreClicked)
 
     return () => {
-      froalaElementRef?.current?.removeEventListener('click', focusOnTextIfCellOrPaddingAreClicked)
-      tableCell?.removeEventListener('click', focusOnTextIfCellOrPaddingAreClicked)
+      froalaElementRef?.current?.removeEventListener(
+        'click',
+        focusOnTextIfCellOrPaddingAreClicked
+      )
+      tableCell?.removeEventListener(
+        'click',
+        focusOnTextIfCellOrPaddingAreClicked
+      )
     }
   }, [index])
 }

@@ -12,7 +12,7 @@ type Props = {
 export function useRegister() {
   const [httpStatus, setHttpStatus] = useState<HttpStatusType>('')
 
-  async function registerUser ({ e, email, password }: Props) {
+  async function registerUser({ e, email, password }: Props) {
     e.preventDefault()
     const method = 'POST'
     const headers = { 'Content-Type': 'application/json' }
@@ -24,9 +24,12 @@ export function useRegister() {
       const data = await res.json()
       const { status, message } = data
       status === 'error' && setHttpStatus('error')
-      status === 'error' && message === 'user with such email already exists' && notify({ msg: 'Already registered', type: 'info', theme: 'light' })
+      status === 'error' &&
+        message === 'user with such email already exists' &&
+        notify({ msg: 'Already registered', type: 'info', theme: 'light' })
       status === 'ok' && setHttpStatus('success')
-      status === 'ok' && notify({ msg: 'Done! Check your mailbox.', theme: 'light' })
+      status === 'ok' &&
+        notify({ msg: 'Done! Check your mailbox.', theme: 'light' })
       console.log(data)
     } catch (err) {
       setHttpStatus('error')
