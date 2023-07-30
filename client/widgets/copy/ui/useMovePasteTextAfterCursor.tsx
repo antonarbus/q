@@ -1,8 +1,8 @@
 import { useEffectOnce, useUnmount } from 'react-use'
 import { store } from 'client/app/store'
-import { hidePasteText, showPasteText, updatePasteTextPos } from './copySlice'
-import { CopyPlaceType } from './types'
 import isEqual from 'lodash.isequal'
+import { CopyPlaceType, hidePasteText, showPasteText, updatePastePos } from 'client/entities/copy'
+import { insertPasteItem } from 'client/features/items/itemsSlice'
 
 type Props = {
   item: Element,
@@ -54,7 +54,8 @@ function movePasteTextAfterCursor(e: MouseEvent) {
   if (isEqual(pastePlace, prevPlace)) return
 
   store.dispatch(showPasteText())
-  store.dispatch(updatePasteTextPos(pastePlace))
+  store.dispatch(updatePastePos(pastePlace))
+  store.dispatch(insertPasteItem(pastePlace))
 }
 
 export const useMovePasteTextAfterCursor = () => {

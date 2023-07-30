@@ -1,12 +1,12 @@
 import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
 import { store } from 'client/shared/clients'
 import { TbCut } from 'react-icons/tb'
-import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/features/copy/copySlice'
 import { motion } from 'framer-motion'
 import { deleteItem, saveItemHeight, selectIsLastItem } from '../../features/items/itemsSlice'
 import { cleanHtml } from 'utils/itemsUtils'
 import { saveItemsIntoLocalStorage } from 'client/features/items'
 import { tellItemsSavedLocally } from 'client/features/items'
+import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/entities/copy'
 
 type Props = {
   index: number

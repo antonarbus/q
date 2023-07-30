@@ -5,8 +5,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { saveItemsOrder, tellItemSavedLocally } from './itemsSlice'
 import { SortableContainer, SortableContainerProps } from 'react-sortable-hoc'
 import { Children } from 'client/types'
-import { enterIntoCopyMode, exitFromCopyMode } from '../copy/copySlice'
 import { saveItemsIntoLocalStorage } from 'client/features/items'
+import { enterIntoCopyMode, exitFromCopyMode } from 'client/entities/copy'
 
 // example with TypeScript
 // https://codesandbox.io/s/odfrontendeveloper-react-sortable-hoc-example-t96d8x?file=/src/examples/Items.tsx:518-635

@@ -1,4 +1,4 @@
-import { Menu } from '../navStructure'
+import type { MenuLevel } from 'client/entities/nav'
 import { NavItem } from './NavItem'
 import { Burger } from './NavItem/Burger'
 import { useSelectorTyped } from 'client/shared/hooks'
@@ -17,7 +17,7 @@ export function NavList() {
       {
         navStructure[0].menuItems!
           .filter((navItem) => !navItem.isHidden)
-          .map((navItem: Menu) => <NavItem id={navItem.id} key={navItem.id} />)
+          .map((navItem: MenuLevel) => <NavItem id={navItem.id} key={navItem.id} />)
       }
       <NavItem id={'burger'} key={'burger'}><Burger /></NavItem>
     </ul>

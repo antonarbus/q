@@ -3,14 +3,13 @@ import { Icon } from '../../Icon'
 import { MenuItemStyled } from './MenuItemStyled'
 import { TextInMenu } from './TextInMenu'
 import { RoundSpanForIcon } from '../../RoundSpanForIcon'
-import { Menu } from '../../../../navStructure'
 import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
 import { Shortcut } from './Shortcut'
 import { clickOnMenuItem } from './function/clickOnMenuItem'
-import { setMenuItemHoverIndex } from 'client/entities/nav'
+import { MenuLevel, setMenuItemHoverIndex } from 'client/entities/nav'
 
 type Props = {
-  menuItem: Menu
+  menuItem: MenuLevel
   hoveredMenuItemIndex: number
 }
 

@@ -4,9 +4,9 @@ import { store } from 'client/app/store'
 import { useRef } from 'react'
 import { PencilAtBottomRight } from 'client/components/PencilAtBottomRight'
 import { Froala } from 'client/components/Froala'
-import { saveText } from '../items/itemsSlice'
 import { RefAny, RefDiv } from 'client/types'
-import type { TextItem as TextItemType } from '../items/types'
+import { saveText } from 'client/features/items/itemsSlice'
+import type { TextItem as TextItemType } from 'client/features/items/types'
 
 type Props = {
   index: number

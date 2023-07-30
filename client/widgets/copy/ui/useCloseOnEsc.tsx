@@ -1,6 +1,7 @@
+import { exitFromCopyMode, hideCopyContainer } from 'client/entities/copy'
+import { removePasteItem } from 'client/features/items/itemsSlice'
 import { useDispatchTyped } from 'client/shared/hooks'
 import { useEffectOnce } from 'react-use'
-import { exitFromCopyMode, hideCopyContainer } from './copySlice'
 
 export function useCloseOnEsc() {
   const dispatch = useDispatchTyped()
@@ -8,6 +9,7 @@ export function useCloseOnEsc() {
   function closeOnEsc(e: KeyboardEvent) {
     if (e.key !== 'Escape') return
     dispatch(hideCopyContainer())
+    dispatch(removePasteItem())
     setTimeout(() => {
       dispatch(exitFromCopyMode())
     }, 500)

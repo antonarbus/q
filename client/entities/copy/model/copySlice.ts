@@ -1,6 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { CopyPlaceType, CopyItemType, PastePosType } from './types'
-import { Item } from '../items/types'
+import { createSlice } from '@reduxjs/toolkit'
+import { CopyPlaceType, CopyItemType } from './types'
 
 type Props = {
   isCopyMode: boolean
@@ -46,8 +45,10 @@ export const copySlice = createSlice({
     },
     removeItemFromCopyContainer: (state) => {
       state.items.shift()
+      state.isCopying = false
+      state.place = initialState.place
     },
-    updatePasteTextPos: (state, action) => {
+    updatePastePos: (state, action) => {
       state.place = action.payload
     },
     showPasteText: (state) => {
@@ -56,12 +57,19 @@ export const copySlice = createSlice({
     hidePasteText: (state) => {
       state.isPasteTextShown = false
     },
-    pasteItem: (state, action: PayloadAction<{ item: Item, itemId: string, pastePos: PastePosType }>) => {
-      state.isCopying = false
-      state.place = initialState.place
-    },
   },
 })
 
-export const { showCopyContainer, hideCopyContainer, saveInitCordsOfCopyContainer, addItemIntoCopyContainer, removeItemFromCopyContainer, updatePasteTextPos, pasteItem, showPasteText, hidePasteText, enterIntoCopyMode, exitFromCopyMode } = copySlice.actions
-export default copySlice.reducer
+export const {
+  showCopyContainer,
+  hideCopyContainer,
+  saveInitCordsOfCopyContainer,
+  addItemIntoCopyContainer,
+  removeItemFromCopyContainer,
+  updatePastePos,
+  showPasteText,
+  hidePasteText,
+  enterIntoCopyMode,
+  exitFromCopyMode,
+} = copySlice.actions
+export const copyReducer = copySlice.reducer

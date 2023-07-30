@@ -1,4 +1,4 @@
-import { Item } from '../items/types'
+import { Item } from 'client/features/items/types'
 
 export type PastePosType = 'top' | 'middle' | 'bottom'
 export type CopyPlaceType = { itemId: string, pastePos: PastePosType }
