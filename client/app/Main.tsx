@@ -1,5 +1,5 @@
-import { useRefreshTokens } from 'client/features/credentials/useRefreshTokens'
 import { Offer } from 'client/pages/offer'
+import { useRefreshTokens } from 'client/widgets/credentials'
 import { Outlet, Route, Routes } from 'react-router-dom'
 
 export const Main = () => {

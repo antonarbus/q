@@ -6,8 +6,8 @@ const initialState = {
   roles: ['no role'],
 }
 
-const credentialsSlice = createSlice({
-  name: 'credentials',
+const userSlice = createSlice({
+  name: 'user',
   initialState,
   reducers: {
     rememberLoggedUser: (state, action) => {
@@ -18,5 +18,5 @@ const credentialsSlice = createSlice({
   },
 })
 
-export default credentialsSlice.reducer
-export const { rememberLoggedUser, forgetLoggedUser } = credentialsSlice.actions
+export const userReducer = userSlice.reducer
+export const { rememberLoggedUser, forgetLoggedUser } = userSlice.actions

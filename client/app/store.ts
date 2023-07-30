@@ -1,15 +1,15 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
-import credentials from 'client/features/credentials/credentialsSlice'
 import items from 'client/features/items/itemsSlice'
 import copy from 'client/features/copy/copySlice'
 import { navReducer } from 'client/entities/nav'
 import { offerReducer } from 'client/entities/offer'
 import { spinnerReducer } from 'client/entities/spinner'
 import { bottomMsgReducer } from 'client/entities/bottomMsg'
+import { userReducer } from 'client/entities/user'
 
 export const store = configureStore({
   reducer: {
-    credentials,
+    user: userReducer,
     nav: navReducer,
     offer: offerReducer,
     items,

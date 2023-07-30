@@ -4,10 +4,10 @@ import { useDispatchTyped } from 'client/shared/hooks'
 import { Event } from 'client/types'
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { rememberLoggedUser } from './credentialsSlice'
 import { navUpdate } from './navUpdate'
-import { token } from './token'
+import { token } from '../../shared/auth/token'
 import { HttpStatusType } from './types'
+import { rememberLoggedUser } from 'client/entities/user'
 
 export function useLogin() {
   const [httpStatus, setHttpStatus] = useState<HttpStatusType>('')
