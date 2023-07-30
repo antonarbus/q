@@ -1,7 +1,7 @@
 import { notify } from 'client/shared/ui/topMsg/notify'
 import { Event } from 'client/types'
 import { useState } from 'react'
-import { token } from './token'
+import { token } from '../../shared/auth/token'
 import { HttpStatusType } from './types'
 
 type Props = {

@@ -6,8 +6,8 @@ import jwt_decode from 'jwt-decode'
 import axios from 'axios'
 import { tokenExpirationMinutes } from './tokenExpirationMinutes'
 import { navUpdate } from './navUpdate'
-import { forgetLoggedUser, rememberLoggedUser } from './credentialsSlice'
-import { token } from './token'
+import { token } from '../../shared/auth/token'
+import { forgetLoggedUser, rememberLoggedUser } from 'client/entities/user'
 
 type JwtAccessTokenType = { email: string, roles: string[] }
 

@@ -1,8 +1,8 @@
 import { notify } from 'client/shared/ui/topMsg/notify'
 import { store } from 'client/app/store'
-import { forgetLoggedUser } from './credentialsSlice'
 import { navUpdate } from './navUpdate'
-import { token } from './token'
+import { token } from '../../shared/auth/token'
+import { forgetLoggedUser } from 'client/entities/user'
 
 export async function logoutUser() {
   const method = 'GET'
