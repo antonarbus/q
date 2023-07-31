@@ -1,4 +1,4 @@
-import { notify } from 'client/shared/ui/topMsg/notify'
+import { notify } from 'client/shared/ui/top_msg/notify'
 import { Event } from 'client/types'
 import { useState } from 'react'
 import { token } from '../../shared/auth/token'
