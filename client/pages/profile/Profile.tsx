@@ -1,5 +1,5 @@
 import { axiosWithAuth } from 'client/shared/auth'
-import { notify } from 'client/shared/ui/topMsg/notify'
+import { notify } from 'client/shared/ui/top_msg/notify'
 // eslint-disable-next-line camelcase
 
 async function getEmailFromDb() {

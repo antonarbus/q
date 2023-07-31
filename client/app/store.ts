@@ -1,9 +1,10 @@
-import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
+import type { Action, ThunkAction } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
 import items from 'client/features/items/itemsSlice'
 import { navReducer } from 'client/entities/nav'
 import { offerReducer } from 'client/entities/offer'
-import { spinnerReducer } from 'client/entities/spinner'
-import { bottomMsgReducer } from 'client/entities/bottomMsg'
+import { spinnerReducer } from 'client/shared/ui/spinner'
+import { bottomMsgReducer } from 'client/shared/ui/bottom_msg'
 import { userReducer } from 'client/entities/user'
 import { copyReducer } from 'client/entities/copy'
 

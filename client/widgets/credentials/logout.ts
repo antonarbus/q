@@ -1,4 +1,4 @@
-import { notify } from 'client/shared/ui/topMsg/notify'
+import { notify } from 'client/shared/ui/top_msg/notify'
 import { store } from 'client/app/store'
 import { navUpdate } from './navUpdate'
 import { token } from '../../shared/auth/token'
