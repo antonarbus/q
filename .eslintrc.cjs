@@ -48,6 +48,7 @@ module.exports = {
     '@typescript-eslint/space-before-function-paren': 'off',
     'no-console': ['warn', { allow: ['error'] }],
     quotes: [2, 'single', { avoidEscape: true }],
+    '@typescript-eslint/naming-convention': 'off',
     // 'no-multi-spaces': 'error',
     // '@typescript-eslint/object-curly-spacing': 'off',
   },

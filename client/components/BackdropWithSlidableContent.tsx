@@ -1,9 +1,9 @@
 import { slideElement } from 'utils/slideElement'
 import { useLayoutEffect, useRef } from 'react'
 import { useEffectOnce } from 'react-use'
-import { RefDiv } from 'client/types'
+import type { RefDiv } from 'client/types'
 
-type Props = {
+interface Props {
   children?: React.ReactNode
   content?: React.ReactNode
   color?: string
@@ -25,37 +25,47 @@ export const BackdropWithSlidableContent = ({
   content,
   onSlideIn,
   onSlideOut,
-}: Props) => {
+}: Props): JSX.Element => {
   const contentRef = useRef() as RefDiv
-  useLayoutEffect(
-    () =>
-      slideElement({
-        intoView: true,
-        element: contentRef.current,
-        cb: () => onSlideIn && onSlideIn(),
-      }),
-    []
-  )
+  useLayoutEffect(() => {
+    slideElement({
+      intoView: true,
+      element: contentRef.current,
+      cb: () => {
+        onSlideIn?.()
+      },
+    })
+  }, [])
 
   useEffectOnce(function slideOutOnEscBtn() {
-    const slideAway = (e: KeyboardEvent) =>
-      e.key === 'Escape' &&
-      slideElement({
-        element: contentRef.current,
-        cb: () => onSlideOut && onSlideOut(),
-      })
+    const slideAway = (e: KeyboardEvent): void => {
+      if (e.key === 'Escape') {
+        slideElement({
+          element: contentRef.current,
+          cb: () => {
+            onSlideOut?.()
+          },
+        })
+      }
+    }
+
     document.addEventListener('keydown', slideAway)
-    return () => document.removeEventListener('keydown', slideAway)
+
+    return () => {
+      document.removeEventListener('keydown', slideAway)
+    }
   })
 
   return (
     <div
-      onMouseDown={() =>
+      onMouseDown={(): void => {
         slideElement({
           element: contentRef.current,
-          cb: () => onSlideOut && onSlideOut(),
+          cb: () => {
+            onSlideOut?.()
+          },
         })
-      }
+      }}
       css={{
         position: 'fixed',
         top: 0,
@@ -71,8 +81,8 @@ export const BackdropWithSlidableContent = ({
         zIndex: 1000,
       }}
     >
-      {children && <div ref={contentRef}>{children}</div>}
-      {content && <div ref={contentRef}>{content}</div>}
+      {Boolean(children) && <div ref={contentRef}>{children}</div>}
+      {Boolean(content) && <div ref={contentRef}>{content}</div>}
     </div>
   )
 }
