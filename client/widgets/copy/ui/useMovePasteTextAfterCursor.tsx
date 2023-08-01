@@ -1,15 +1,15 @@
 import { useEffectOnce, useUnmount } from 'react-use'
 import { store } from 'client/app/store'
 import isEqual from 'lodash.isequal'
+import type { CopyPlaceType } from 'client/entities/copy'
 import {
-  CopyPlaceType,
   hidePasteText,
   showPasteText,
   updatePastePos,
 } from 'client/entities/copy'
-import { insertPasteItem } from 'client/features/items/itemsSlice'
+import { insertPasteItem } from 'client/entities/items'
 
-type Props = {
+interface Props {
   item: Element
   e: MouseEvent
 }

@@ -1,6 +1,6 @@
 import { useSelectorTyped } from 'client/shared/hooks'
 import { ItemsContainer } from './ItemsContainer'
-import { Item } from './types'
+import { Item } from '../../entities/items/model/types'
 import { PasteItem, TextItem } from 'client/entities/items'
 
 // re-render the list only if item is replaced or new item is added

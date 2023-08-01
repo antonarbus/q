@@ -1,4 +1,4 @@
-import { selectIsLastItem } from 'client/features/items/itemsSlice'
+import { selectIsLastItem } from 'client/entities/items'
 import { useSelectorTyped } from 'client/shared/hooks'
 
 export const useIsDisabledItem = () => {

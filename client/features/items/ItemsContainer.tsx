@@ -2,16 +2,17 @@ import { useDispatchTyped } from 'client/shared/hooks'
 import { store } from 'client/shared/clients'
 import { arrayMoveImmutable } from 'array-move'
 import { AnimatePresence, motion } from 'framer-motion'
-import { saveItemsOrder, tellItemSavedLocally } from './itemsSlice'
-import { SortableContainer, SortableContainerProps } from 'react-sortable-hoc'
-import { Children } from 'client/types'
+import { saveItemsOrder, tellItemSavedLocally } from 'client/entities/items'
+import type { SortableContainerProps } from 'react-sortable-hoc'
+import { SortableContainer } from 'react-sortable-hoc'
+import type { Children } from 'client/types'
 import { saveItemsIntoLocalStorage } from 'client/features/items'
 import { enterIntoCopyMode, exitFromCopyMode } from 'client/entities/copy'
 
 // example with TypeScript
 // https://codesandbox.io/s/odfrontendeveloper-react-sortable-hoc-example-t96d8x?file=/src/examples/Items.tsx:518-635
 
-type Props = {
+interface Props {
   children: Children
 }
 
@@ -19,7 +20,7 @@ interface ISortableContainer extends SortableContainerProps {
   children: Children
 }
 
-const DraggableItems: React.ComponentClass<ISortableContainer, any> =
+const DraggableItems: React.ComponentClass<ISortableContainer> =
   SortableContainer(({ children }: Props) => (
     <motion.div
       id='items'

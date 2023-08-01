@@ -1,19 +1,19 @@
 import type { Action, ThunkAction } from '@reduxjs/toolkit'
 import { configureStore } from '@reduxjs/toolkit'
-import items from 'client/features/items/itemsSlice'
 import { navReducer } from 'client/entities/nav'
 import { offerReducer } from 'client/entities/offer'
 import { spinnerReducer } from 'client/shared/ui/spinner'
 import { bottomMsgReducer } from 'client/shared/ui/bottom_msg'
 import { userReducer } from 'client/entities/user'
 import { copyReducer } from 'client/entities/copy'
+import { itemsReducer } from 'client/entities/items'
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
     nav: navReducer,
     offer: offerReducer,
-    items,
+    items: itemsReducer,
     spinner: spinnerReducer,
     copy: copyReducer,
     bottomMsg: bottomMsgReducer,

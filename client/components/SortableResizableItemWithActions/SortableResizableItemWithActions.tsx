@@ -8,12 +8,11 @@ import { SortableItem } from './SortableItem'
 import { DragIcon } from './DragIcon'
 import { useIsDisabledItem } from './useIsDisabledItem'
 import { Msg } from './Msg'
-import { Children } from 'client/types'
 import { ReduceOpacityIfPasteHere } from './ReduceOpacityIfPasteHere'
 
-type Props = {
+interface Props {
   index: number
-  children: Children
+  children: React.ReactNode
 }
 
 export const SortableResizableItemWithActions = ({

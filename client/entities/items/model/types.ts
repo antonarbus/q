@@ -1,11 +1,11 @@
-type CommonItem = {
+interface CommonItem {
   id: string
   width: number
   height: number
-  msg: string | React.ReactNode
+  msg: React.ReactNode | string
 }
 
-export type BoqRow = {
+export interface BoqRow {
   id: string
   description: {
     html: string
@@ -24,22 +24,22 @@ export type BoqRow = {
   }
 }
 
-export type BoqColumns = {
+export interface BoqColumns {
   description: {
     html: string
-    width: undefined | number
+    width: number | undefined
   }
   item: {
     html: string
-    width: undefined | number
+    width: number | undefined
   }
   qty: {
     html: string
-    width: undefined | number
+    width: number | undefined
   }
   price: {
     html: string
-    width: undefined | number
+    width: number | undefined
   }
 }
 
@@ -79,5 +79,5 @@ export type PasteItem = CommonItem & {
   type: 'paste'
 }
 
-export type Item = BoqItem | TextItem | PasteItem | undefined
+export type Item = BoqItem | PasteItem | TextItem | undefined
 export type Items = Item[]

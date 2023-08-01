@@ -1,5 +1,5 @@
 import { exitFromCopyMode, hideCopyContainer } from 'client/entities/copy'
-import { removePasteItem } from 'client/features/items/itemsSlice'
+import { removePasteItem } from 'client/entities/items'
 import { useDispatchTyped } from 'client/shared/hooks'
 import { useEffectOnce } from 'react-use'
 
@@ -17,7 +17,9 @@ export function useCloseOnEsc() {
 
   function listenForEsc() {
     window.addEventListener('keydown', closeOnEsc)
-    return () => window.removeEventListener('keydown', closeOnEsc)
+    return () => {
+      window.removeEventListener('keydown', closeOnEsc)
+    }
   }
 
   useEffectOnce(listenForEsc)
