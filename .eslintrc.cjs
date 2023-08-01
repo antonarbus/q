@@ -30,13 +30,12 @@ module.exports = {
   rules: {
     'react-refresh/only-export-components': [
       'warn',
-      { allowConstantExport: true },
+      {
+        allowConstantExport: true,
+      },
     ],
     'jsx-quotes': ['warn', 'prefer-single'],
-    'comma-dangle': [
-      'error',
-      { arrays: 'always-multiline', objects: 'always-multiline' },
-    ],
+    'comma-dangle': ['error', 'always-multiline'],
     '@typescript-eslint/comma-dangle': 'off',
     '@typescript-eslint/indent': 'off',
     '@typescript-eslint/quotes': 'off',

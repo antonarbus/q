@@ -1,11 +1,8 @@
 import { useDispatchTyped } from 'client/shared/hooks'
 import { store } from 'client/shared/clients'
 import { Resizable } from 're-resizable'
-import {
-  saveItemWidth,
-  tellItemSavedLocally,
-} from '../../features/items/itemsSlice'
-import { Children } from 'client/types'
+import { saveItemWidth, tellItemSavedLocally } from 'client/entities/items'
+import type { Children } from 'client/types'
 import { saveItemsIntoLocalStorage } from 'client/features/items'
 
 interface Props {

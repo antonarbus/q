@@ -1,11 +1,11 @@
-import { tellItemSavedLocally } from 'client/features/items/itemsSlice'
 import { useDispatchTyped } from 'client/shared/hooks'
-import { RefAny, RefDiv, RefString } from 'client/types'
+import type { RefAny, RefDiv, RefString } from 'client/types'
 import { useEffect, useRef } from 'react'
-import { SaveFroalaReducer } from './Froala'
+import type { SaveFroalaReducer } from './Froala'
 import { saveItemsIntoLocalStorage } from 'client/features/items'
+import { tellItemSavedLocally } from 'client/entities/items'
 
-type Props = {
+interface Props {
   index: number
   getHtml: () => string
   onClickAwayIfHtmChanged?: Function
@@ -38,7 +38,7 @@ export const useStartFroala = ({
 
   useEffect(() => {
     function initFroalaInstance() {
-      // @ts-ignore
+      // @ts-expect-error
       editorRef.current = new FroalaEditor(
         froalaElementRef.current,
         {
@@ -157,7 +157,7 @@ export const useStartFroala = ({
             'paste.afterCleanup': function (clipboardHtml: string) {},
             click: (event: MouseEvent) => {},
             contentChanged: () => {
-              if (!froalaElementRef?.current) return
+              if (!froalaElementRef.current) return
               const updatedHtml = editorRef.current.html.get()
               const contentHasChanged = prevHtmlRef.current !== updatedHtml
               if (!contentHasChanged) return
@@ -173,7 +173,7 @@ export const useStartFroala = ({
         },
         function () {
           window.froalas.push(editorRef)
-          if (!editorRef?.current?.html) return
+          if (!editorRef.current?.html) return
           editorRef.current.html.set(getHtml())
           window.froalas = window.froalas.filter(
             ({ current }) => current !== null
@@ -187,7 +187,7 @@ export const useStartFroala = ({
     initFroalaInstance()
 
     return () => {
-      editorRef?.current?.destroy?.()
+      editorRef.current?.destroy?.()
       editorRef.current = null
       window.froalas = window.froalas.filter(({ current }) => current !== null)
       // console.log('froala destroyed')

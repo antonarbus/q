@@ -1,9 +1,9 @@
-import { removeItemMsg } from 'client/features/items/itemsSlice'
+import { removeItemMsg } from 'client/entities/items'
 import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useUpdateEffect } from 'react-use'
 
-type Props = {
+interface Props {
   index: number
 }
 

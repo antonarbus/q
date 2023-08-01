@@ -6,7 +6,7 @@ import {
   deleteItem,
   saveItemHeight,
   selectIsLastItem,
-} from '../../features/items/itemsSlice'
+} from 'client/entities/items'
 import { cleanHtml } from 'utils/itemsUtils'
 import { saveItemsIntoLocalStorage } from 'client/features/items'
 import { tellItemsSavedLocally } from 'client/features/items'
@@ -16,7 +16,7 @@ import {
   showCopyContainer,
 } from 'client/entities/copy'
 
-type Props = {
+interface Props {
   index: number
 }
 

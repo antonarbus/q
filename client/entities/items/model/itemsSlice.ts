@@ -3,10 +3,10 @@ import { createSelector, createSlice, current } from '@reduxjs/toolkit'
 import type { RootState } from 'client/app/store'
 import { nanoid } from 'nanoid'
 import { defaultItems } from './defaultItems'
-import type { PasteItem, Items } from './types'
 import { cleanItem } from 'utils/itemsUtils'
-import { returnDefaultOrLocalItems } from './returnDefaultOrLocalItems'
 import type { CopyPlaceType } from 'client/entities/copy'
+import type { Items, PasteItem } from './types'
+import { jsonSafeParse } from 'utils/jsonSafeParse'
 
 type PayloadFroalaUpdate = PayloadAction<{
   index: number
@@ -14,6 +14,11 @@ type PayloadFroalaUpdate = PayloadAction<{
   height?: number
   rowIndex?: number
 }>
+
+const returnDefaultOrLocalItems = () => {
+  const items = jsonSafeParse(localStorage.getItem('items')) || defaultItems
+  return items
+}
 
 const initialState: Items = returnDefaultOrLocalItems()
 
@@ -139,14 +144,14 @@ export const {
   removePasteItem,
   insertPasteItem,
 } = itemsSlice.actions
-export default itemsSlice.reducer
+export const itemsReducer = itemsSlice.reducer
 
 // selectors
 export const selectIsLastItem = (state: RootState) =>
   state.items.filter((item) => item?.type !== 'paste').length === 1
 
 export const selectItemsShape = createSelector(
-  [(state: RootState) => state.items],
+  [(state: RootState): Items => state.items],
   (items) => items,
   {
     memoizeOptions: {

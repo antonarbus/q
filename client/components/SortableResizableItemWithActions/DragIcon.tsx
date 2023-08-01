@@ -1,8 +1,8 @@
 import { SortableHandle } from 'react-sortable-hoc'
 import { MdDragIndicator } from 'react-icons/md'
 import { useSelectorTyped } from 'client/shared/hooks'
-import { selectIsLastItem } from '../../features/items/itemsSlice'
 import { motion } from 'framer-motion'
+import { selectIsLastItem } from 'client/entities/items'
 
 const Handle = () => {
   const isCopyMode = useSelectorTyped((state) => state.copy.isCopyMode)

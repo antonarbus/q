@@ -1,5 +1,5 @@
 import { store } from 'client/shared/clients'
-import { defaultItems } from './defaultItems'
+import { defaultItems } from 'client/entities/items'
 import { saveItemsIntoLocalStorage } from './saveItemsIntoLocalStorage'
 import { reloadOffer } from 'client/entities/offer'
 

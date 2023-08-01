@@ -11,7 +11,7 @@ import {
   hideCopyContainer,
   removeItemFromCopyContainer,
 } from 'client/entities/copy'
-import { pasteItem, removePasteItem } from 'client/features/items/itemsSlice'
+import { pasteItem, removePasteItem } from 'client/entities/items'
 
 function pasteItemOnClick() {
   const isPasteTextShown = store.getState().copy.isPasteTextShown

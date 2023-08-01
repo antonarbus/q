@@ -3,14 +3,14 @@ import { store } from 'client/shared/clients'
 import { MdCopyAll } from 'react-icons/md'
 import { motion } from 'framer-motion'
 import { cleanHtml } from 'utils/itemsUtils'
-import { saveItemHeight } from 'client/features/items/itemsSlice'
 import {
   addItemIntoCopyContainer,
   saveInitCordsOfCopyContainer,
   showCopyContainer,
 } from 'client/entities/copy'
+import { saveItemHeight } from 'client/entities/items'
 
-type Props = {
+interface Props {
   index: number
 }
 
