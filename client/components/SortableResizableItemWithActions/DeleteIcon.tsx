@@ -5,8 +5,7 @@ import { deleteItem, selectIsLastItem } from 'client/entities/items'
 import { gsap } from 'gsap'
 import { useRef } from 'react'
 import type { RefSpan } from 'client/types'
-import { tellItemsSavedLocally } from 'client/features/items'
-import { saveItemsIntoLocalStorage } from 'client/features/items'
+import { saveItemsLocally } from 'client/features/items'
 
 interface Props {
   index: number
@@ -29,8 +28,7 @@ export const DeleteIcon = ({ index }: Props) => {
         if (isLastItem) return
         const itemToDelete = store.getState().items[index]
         dispatch(deleteItem(itemToDelete))
-        saveItemsIntoLocalStorage()
-        dispatch(tellItemsSavedLocally())
+        saveItemsLocally()
       }}
       onMouseOver={() => {
         gsap.to(ref.current, {

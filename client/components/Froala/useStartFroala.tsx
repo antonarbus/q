@@ -2,8 +2,7 @@ import { useDispatchTyped } from 'client/shared/hooks'
 import type { RefAny, RefDiv, RefString } from 'client/types'
 import { useEffect, useRef } from 'react'
 import type { SaveFroalaReducer } from './Froala'
-import { saveItemsIntoLocalStorage } from 'client/features/items'
-import { tellItemSavedLocally } from 'client/entities/items'
+import { saveItemsLocally } from 'client/features/items'
 
 interface Props {
   index: number
@@ -23,16 +22,7 @@ declare const window: Window &
 
 window.froalas = []
 
-export const useStartFroala = ({
-  index,
-  getHtml,
-  onClickAwayIfHtmChanged,
-  froalaElementRef,
-  editorRef,
-  placeholder,
-  saveFroalaReducer,
-  rowIndex,
-}: Props) => {
+export const useStartFroala = ({ index, getHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder, saveFroalaReducer, rowIndex }: Props) => {
   const dispatch = useDispatchTyped()
   const prevHtmlRef = useRef(getHtml()) as RefString
 
@@ -88,43 +78,11 @@ export const useStartFroala = ({
               buttonsVisible: 3,
             },
             moreRich: {
-              buttons: [
-                'insertLink',
-                'insertTable',
-                'insertImage',
-                'insertVideo',
-                'emoticons',
-                'embedly',
-                'fontAwesome',
-                'specialCharacters',
-                'insertFile',
-                'insertHR',
-                'html',
-              ],
+              buttons: ['insertLink', 'insertTable', 'insertImage', 'insertVideo', 'emoticons', 'embedly', 'fontAwesome', 'specialCharacters', 'insertFile', 'insertHR', 'html'],
               buttonsVisible: 4,
             },
           },
-          fontSize: [
-            '6',
-            '8',
-            '9',
-            '10',
-            '11',
-            '12',
-            '13',
-            '14',
-            '15',
-            '16',
-            '18',
-            '20',
-            '24',
-            '30',
-            '36',
-            '48',
-            '60',
-            '72',
-            '96',
-          ],
+          fontSize: ['6', '8', '9', '10', '11', '12', '13', '14', '15', '16', '18', '20', '24', '30', '36', '48', '60', '72', '96'],
           fontFamily: {
             '"Roboto","Helvetica","Arial",sans-serif': 'Roboto',
             'Arial,Helvetica,sans-serif': 'Arial',
@@ -163,9 +121,8 @@ export const useStartFroala = ({
               if (!contentHasChanged) return
               const html = editorRef.current.html.get()
               dispatch(saveFroalaReducer({ index, html, rowIndex }))
-              dispatch(tellItemSavedLocally({ index }))
               onClickAwayIfHtmChanged?.()
-              saveItemsIntoLocalStorage()
+              saveItemsLocally({ msgAboveItemWithIndex: index })
               prevHtmlRef.current = updatedHtml
             },
           },
@@ -175,9 +132,7 @@ export const useStartFroala = ({
           window.froalas.push(editorRef)
           if (!editorRef.current?.html) return
           editorRef.current.html.set(getHtml())
-          window.froalas = window.froalas.filter(
-            ({ current }) => current !== null
-          )
+          window.froalas = window.froalas.filter(({ current }) => current !== null)
           // console.log('froalas are initiated')
           console.log('froalas number', window.froalas.length)
         }

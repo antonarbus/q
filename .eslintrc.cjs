@@ -9,13 +9,7 @@ module.exports = {
     // 'plugin:@typescript-eslint/stylistic-type-checked',
     'prettier',
   ],
-  ignorePatterns: [
-    'dist',
-    'build',
-    '.eslintrc.cjs',
-    'vite.config.ts',
-    'node_modules',
-  ],
+  ignorePatterns: ['dist', 'build', '.eslintrc.cjs', 'vite.config.ts', 'node_modules'],
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh', '@typescript-eslint'],
   parserOptions: {
@@ -49,7 +43,5 @@ module.exports = {
     'no-console': ['warn', { allow: ['error'] }],
     quotes: [2, 'single', { avoidEscape: true }],
     '@typescript-eslint/naming-convention': 'off',
-    // 'no-multi-spaces': 'error',
-    // '@typescript-eslint/object-curly-spacing': 'off',
   },
 }
