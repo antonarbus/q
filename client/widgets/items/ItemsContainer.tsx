@@ -2,12 +2,12 @@ import { useDispatchTyped } from 'client/shared/hooks'
 import { store } from 'client/shared/clients'
 import { arrayMoveImmutable } from 'array-move'
 import { AnimatePresence, motion } from 'framer-motion'
-import { saveItemsOrder } from 'client/entities/items'
 import type { SortableContainerProps } from 'react-sortable-hoc'
 import { SortableContainer } from 'react-sortable-hoc'
 import type { Children } from 'client/types'
 import { saveItemsLocally } from 'client/features/save_items_locally'
 import { enterIntoCopyMode, exitFromCopyMode } from 'client/entities/copy'
+import { reOrderItems } from 'client/entities/items'
 
 // example with TypeScript
 // https://codesandbox.io/s/odfrontendeveloper-react-sortable-hoc-example-t96d8x?file=/src/examples/Items.tsx:518-635
@@ -57,8 +57,8 @@ export const ItemsContainer = ({ children }: Props) => {
       }}
       onSortEnd={({ oldIndex, newIndex }): void => {
         const { items } = store.getState()
-        const sortedItems = arrayMoveImmutable(items, oldIndex, newIndex)
-        dispatch(saveItemsOrder({ sortedItems }))
+        const reOrderedItems = arrayMoveImmutable(items, oldIndex, newIndex)
+        dispatch(reOrderItems({ reOrderedItems }))
         saveItemsLocally({ msgAboveItemWithIndex: newIndex })
         setTimeout(() => {
           dispatch(exitFromCopyMode())

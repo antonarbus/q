@@ -4,7 +4,7 @@ export { defaultItems } from './model/defaultItems'
 export type { Item } from './model/types'
 export {
   itemsReducer,
-  saveItemsOrder,
+  reOrderItems,
   deleteItem,
   pasteItem,
   resetItemsToDefault,

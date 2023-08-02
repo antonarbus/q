@@ -29,7 +29,10 @@ const itemsSlice = createSlice({
   name: 'items',
   initialState,
   reducers: {
-    saveItemsOrder: (state, action) => action.payload.sortedItems,
+    reOrderItems: (state, action: PayloadAction<{ reOrderedItems: Items }>) => {
+      const { reOrderedItems } = action.payload
+      return reOrderedItems
+    },
     deleteItem: (state, action) =>
       state.filter((item) => item?.id !== action.payload.id),
     pasteItem: (state, action) => {
@@ -133,7 +136,7 @@ const itemsSlice = createSlice({
 
 // exports
 export const {
-  saveItemsOrder,
+  reOrderItems,
   deleteItem,
   pasteItem,
   resetItemsToDefault,
