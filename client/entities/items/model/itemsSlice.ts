@@ -5,8 +5,8 @@ import { nanoid } from 'nanoid'
 import { defaultItems } from './defaultItems'
 import { cleanItem } from 'utils/itemsUtils'
 import type { CopyPlaceType } from 'client/entities/copy'
-import type { Items, PasteItem } from './types'
-import { jsonSafeParse } from 'utils/jsonSafeParse'
+import type { Item, Items, PasteItem } from './types'
+import { jsonParseSafe } from 'utils/jsonParseSafe'
 
 type PayloadFroalaUpdate = PayloadAction<{
   index: number
@@ -15,8 +15,11 @@ type PayloadFroalaUpdate = PayloadAction<{
   rowIndex?: number
 }>
 
-const returnDefaultOrLocalItems = () => {
-  const items = jsonSafeParse(localStorage.getItem('items')) || defaultItems
+const returnDefaultOrLocalItems = (): Item[] => {
+  const itemsFromLocalStorage = localStorage.getItem('items')
+  if (itemsFromLocalStorage === null) return defaultItems
+  const items = jsonParseSafe<Item[]>(itemsFromLocalStorage)
+  if (items === undefined) return defaultItems
   return items
 }
 
@@ -60,12 +63,12 @@ const itemsSlice = createSlice({
 
       const spliceSettings = getSpliceSettings()
       const itemsWithoutPasteText = state.filter(
-        (item) => item?.type !== 'paste'
+        (item) => item?.type !== 'paste',
       )
       itemsWithoutPasteText.splice(
         spliceSettings.insertAtIndex,
         spliceSettings.deleteCount,
-        itemToPaste
+        itemToPaste,
       )
       return itemsWithoutPasteText
     },
@@ -84,7 +87,7 @@ const itemsSlice = createSlice({
     },
     saveItemWidth: (
       state,
-      action: PayloadAction<{ index: number; width: number }>
+      action: PayloadAction<{ index: number; width: number }>,
     ) => {
       const { index, width } = action.payload
       const item = state[index]
@@ -93,7 +96,7 @@ const itemsSlice = createSlice({
     },
     saveItemHeight: (
       state,
-      action: PayloadAction<{ index: number; height: number }>
+      action: PayloadAction<{ index: number; height: number }>,
     ) => {
       const { index, height } = action.payload
       const item = state[index]
@@ -111,7 +114,7 @@ const itemsSlice = createSlice({
     insertPasteItem: (state, action: PayloadAction<CopyPlaceType>) => {
       const { pastePos, itemId } = action.payload
       const itemsWithoutPasteText = state.filter(
-        (item) => item?.type !== 'paste'
+        (item) => item?.type !== 'paste',
       )
       if (pastePos === 'middle') return itemsWithoutPasteText
       const insertAtIndex =
@@ -160,11 +163,11 @@ export const selectItemsShape = createSelector(
         const addedOrDeletedItem = prevItems.length !== currentItems.length
         if (addedOrDeletedItem) return false
         const itemsIdsDoNotMatch = prevItems.some(
-          (item, index) => item?.id !== currentItems[index]?.id
+          (item, index) => item?.id !== currentItems[index]?.id,
         )
         if (itemsIdsDoNotMatch) return false
         return true
       },
     },
-  }
+  },
 )
