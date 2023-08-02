@@ -2,16 +2,9 @@ import { useEffectOnce, useUnmount } from 'react-use'
 import { store } from 'client/app/store'
 import { cleanItem } from 'utils/itemsUtils'
 import { theme } from 'client/shared/clients'
-import {
-  saveItemsIntoLocalStorage,
-  tellItemsSavedLocally,
-} from 'client/features/items'
-import {
-  exitFromCopyMode,
-  hideCopyContainer,
-  removeItemFromCopyContainer,
-} from 'client/entities/copy'
+import { exitFromCopyMode, hideCopyContainer, removeItemFromCopyContainer } from 'client/entities/copy'
 import { pasteItem, removePasteItem } from 'client/entities/items'
+import { saveItemsLocally } from 'client/features/items'
 
 function pasteItemOnClick() {
   const isPasteTextShown = store.getState().copy.isPasteTextShown
@@ -19,10 +12,9 @@ function pasteItemOnClick() {
   const { itemId, pastePos } = store.getState().copy.place
   const topItemFromCopyContainer = store.getState().copy.items[0]
   const cleanedItem = cleanItem(topItemFromCopyContainer)
-  store.dispatch(tellItemsSavedLocally())
   store.dispatch(removeItemFromCopyContainer())
   store.dispatch(pasteItem({ itemId, pastePos, item: cleanedItem }))
-  saveItemsIntoLocalStorage()
+  saveItemsLocally()
   const itemsInCopyContainer = store.getState().copy.items
   if (itemsInCopyContainer.length === 0) {
     store.dispatch(hideCopyContainer())

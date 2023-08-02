@@ -1,9 +1,9 @@
 import { useDispatchTyped } from 'client/shared/hooks'
 import { store } from 'client/shared/clients'
 import { Resizable } from 're-resizable'
-import { saveItemWidth, tellItemSavedLocally } from 'client/entities/items'
+import { saveItemWidth } from 'client/entities/items'
 import type { Children } from 'client/types'
-import { saveItemsIntoLocalStorage } from 'client/features/items'
+import { saveItemsLocally } from 'client/features/items'
 
 interface Props {
   children: Children
@@ -36,8 +36,7 @@ export const ResizablePaper = ({ children, index }: Props) => {
       onResizeStop={(e, direction, refToElement) => {
         const width = parseInt(refToElement.style.width)
         dispatch(saveItemWidth({ index, width }))
-        saveItemsIntoLocalStorage()
-        dispatch(tellItemSavedLocally({ index }))
+        saveItemsLocally({ msgAboveItemWithIndex: index })
       }}
     >
       {children}

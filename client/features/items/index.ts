@@ -1,3 +1,3 @@
-export { saveItemsIntoLocalStorage } from './saveItemsIntoLocalStorage'
+export { saveItemsLocally } from './saveItemsLocally'
 export { resetToDefaultItems } from './resetToDefaultItems'
-export { tellItemsSavedLocally } from './tellItemsSavedLocally'
+
