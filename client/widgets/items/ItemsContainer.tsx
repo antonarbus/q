@@ -8,6 +8,7 @@ import type { Children } from 'client/types'
 import { saveItemsLocally } from 'client/features/save_items_locally'
 import { enterIntoCopyMode, exitFromCopyMode } from 'client/entities/copy'
 import { reOrderItems } from 'client/entities/items'
+import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 
 // example with TypeScript
 // https://codesandbox.io/s/odfrontendeveloper-react-sortable-hoc-example-t96d8x?file=/src/examples/Items.tsx:518-635
@@ -30,7 +31,8 @@ const DraggableItems: React.ComponentClass<ISortableContainer> = SortableContain
       opacity: 1,
     }}
     transition={{
-      delay: 0.5,
+      // show Q logo for short time to avoid some jumps on init load
+      delay: 0.7,
     }}
     css={{
       display: 'flex',
@@ -44,7 +46,7 @@ const DraggableItems: React.ComponentClass<ISortableContainer> = SortableContain
   </motion.div>
 ))
 
-export const ItemsContainer = ({ children }: Props) => {
+export const ItemsContainer = ({ children }: Props): EmotionJSX.Element => {
   const dispatch = useDispatchTyped()
 
   return (
