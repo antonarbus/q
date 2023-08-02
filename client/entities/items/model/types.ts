@@ -2,7 +2,8 @@ interface CommonItem {
   id: string
   width: number
   height: number
-  msg: React.ReactNode | string
+  msg: string
+  previewHtml: string
 }
 
 export interface BoqRow {
