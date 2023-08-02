@@ -62,9 +62,7 @@ const itemsSlice = createSlice({
       }
 
       const spliceSettings = getSpliceSettings()
-      const itemsWithoutPasteText = state.filter(
-        (item) => item?.type !== 'paste',
-      )
+      const itemsWithoutPasteText = state.filter((itemmm) => itemmm?.type !== 'paste')
       itemsWithoutPasteText.splice(
         spliceSettings.insertAtIndex,
         spliceSettings.deleteCount,
@@ -108,7 +106,7 @@ const itemsSlice = createSlice({
       const item = state[index]
       if (!item) return
       if (item.type !== 'text') return
-      if (html) item.text.html = html
+      if (html !== undefined) item.text.html = html
     },
     removePasteItem: (state) => state.filter((item) => item?.type !== 'paste'),
     insertPasteItem: (state, action: PayloadAction<CopyPlaceType>) => {
@@ -150,7 +148,7 @@ export const {
 export const itemsReducer = itemsSlice.reducer
 
 // selectors
-export const selectIsLastItem = (state: RootState) =>
+export const selectIsLastItem = (state: RootState): boolean =>
   state.items.filter((item) => item?.type !== 'paste').length === 1
 
 export const selectItemsShape = createSelector(
