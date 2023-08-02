@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid'
-import { Items } from './types'
+import type { Items } from './types'
 
 export const defaultItems: Items = [
   {
@@ -8,6 +8,7 @@ export const defaultItems: Items = [
     width: 800,
     height: 0,
     msg: '',
+    previewHtml: '',
     text: {
       html: '<div>editable text</div>',
     },
@@ -18,6 +19,7 @@ export const defaultItems: Items = [
   //   width: 700,
   //   height: 0,
   //   msg: '',
+  //   previewHtml: '',
   //   boq: {
   //     header: {
   //       title: {
@@ -118,6 +120,7 @@ export const defaultItems: Items = [
     width: 600,
     height: 0,
     msg: '',
+    previewHtml: '',
     text: {
       html: '<div>editable text</div>',
     },
@@ -128,6 +131,7 @@ export const defaultItems: Items = [
     width: 500,
     height: 0,
     msg: '',
+    previewHtml: '',
     text: {
       html: '<div>editable text</div>',
     },

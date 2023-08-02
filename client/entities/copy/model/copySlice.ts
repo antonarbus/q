@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { CopyPlaceType, CopyItemType } from './types'
+import type { CopyPlaceType, CopyItemType } from './types'
 
-type Props = {
+interface Props {
   isCopyMode: boolean
   isCopyContainer: boolean
   initCords: { x: number; y: number }
