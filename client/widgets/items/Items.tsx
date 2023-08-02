@@ -1,21 +1,18 @@
 import { useSelectorTyped } from 'client/shared/hooks'
 import { ItemsContainer } from './ItemsContainer'
-import { Item } from '../../entities/items/model/types'
+import type { Item } from '../../entities/items/model/types'
 import { PasteItem, TextItem } from 'client/entities/items'
 
 // re-render the list only if item is replaced or new item is added
 const equalityFn = (prevItems: any, currentItems: any) => {
   const isDifferentLength = prevItems.length !== currentItems.length
   if (isDifferentLength) return false
-  const idsDoNotMatch = prevItems.some(
-    (item: Item, index: number) =>
-      prevItems[index]?.id !== currentItems[index]?.id
-  )
+  const idsDoNotMatch = prevItems.some((item: Item, index: number) => prevItems[index]?.id !== currentItems[index]?.id)
   if (idsDoNotMatch) return false
   return true
 }
 
-export const Items = () => {
+export const Items = (): JSX.Element => {
   const items = useSelectorTyped((state) => state.items, equalityFn)
   const shouldReRender = useSelectorTyped((state) => state.offer.toggleOffer)
 
@@ -27,9 +24,9 @@ export const Items = () => {
 
         if (item.type === 'text') return <TextItem key={key} index={index} />
         if (item.type === 'boq') return <div key={key}>boq</div>
-        if (item.type === 'paste') return <PasteItem key={key} />
-        return null
+        return <PasteItem key={key} />
       })}
     </ItemsContainer>
   )
 }
+

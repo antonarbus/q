@@ -3,7 +3,7 @@ import { store } from 'client/shared/clients'
 import { Resizable } from 're-resizable'
 import { saveItemWidth } from 'client/entities/items'
 import type { Children } from 'client/types'
-import { saveItemsLocally } from 'client/features/items'
+import { saveItemsLocally } from 'client/features/save_items_locally'
 
 interface Props {
   children: Children

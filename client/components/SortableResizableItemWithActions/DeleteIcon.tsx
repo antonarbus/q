@@ -5,7 +5,7 @@ import { deleteItem, selectIsLastItem } from 'client/entities/items'
 import { gsap } from 'gsap'
 import { useRef } from 'react'
 import type { RefSpan } from 'client/types'
-import { saveItemsLocally } from 'client/features/items'
+import { saveItemsLocally } from 'client/features/save_items_locally'
 
 interface Props {
   index: number

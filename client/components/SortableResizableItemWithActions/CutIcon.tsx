@@ -4,7 +4,7 @@ import { TbCut } from 'react-icons/tb'
 import { motion } from 'framer-motion'
 import { deleteItem, saveItemHeight, selectIsLastItem } from 'client/entities/items'
 import { cleanHtml } from 'utils/itemsUtils'
-import { saveItemsLocally } from 'client/features/items'
+import { saveItemsLocally } from 'client/features/save_items_locally'
 import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/entities/copy'
 
 interface Props {
