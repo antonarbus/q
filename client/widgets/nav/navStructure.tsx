@@ -2,21 +2,13 @@ import { createElement } from 'react'
 import { nanoid as id } from 'nanoid'
 import { FiLogOut, FiLogIn } from 'react-icons/fi'
 import { BiReset } from 'react-icons/bi'
-import {
-  IoDocumentOutline,
-  IoDocumentsOutline,
-  IoSaveOutline,
-  IoShareOutline,
-} from 'react-icons/io5'
+import { IoDocumentOutline, IoDocumentsOutline, IoSaveOutline, IoShareOutline } from 'react-icons/io5'
 import { IoIosSwap } from 'react-icons/io'
 import logo from './img/logo.svg'
-import {
-  Person as PersonIcon,
-  Settings as SettingsIcon,
-} from '@mui/icons-material'
+import { Person as PersonIcon, Settings as SettingsIcon } from '@mui/icons-material'
 import type { MenuLevel } from 'client/entities/nav'
-import { resetToDefaultItems } from 'client/features/items'
 import { logoutUser } from '../credentials/logout'
+import { resetItemsToDefault } from 'client/features/reset_items'
 
 const reactIcon = createElement(IoShareOutline, {})
 
@@ -98,7 +90,7 @@ export const navStructure: MenuLevel[] = [
             id: id(5),
             name: 'Reset to default offer',
             icon: <BiReset />,
-            func: resetToDefaultItems,
+            func: resetItemsToDefault,
           },
           {
             id: id(5),
@@ -204,7 +196,9 @@ export const navStructure: MenuLevel[] = [
           {
             id: id(5),
             name: 'func',
-            func: () => alert('i am the function'),
+            func: () => {
+              alert('i am the function')
+            },
             shortcut: ['control', 'c'],
           },
         ],

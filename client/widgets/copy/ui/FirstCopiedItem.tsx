@@ -1,14 +1,11 @@
 import parseHtml from 'html-react-parser'
-import { AnimatePresence, motion, Variants } from 'framer-motion'
+import type { Variants } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { useSelectorTyped } from 'client/shared/hooks'
-import {
-  containerPadding,
-  containerWidth,
-  itemMarginBottom,
-} from './CopyContainer'
+import { containerPadding, containerWidth, itemMarginBottom } from './CopyContainer'
 import { theme } from 'client/shared/clients'
 
-type AnimationPropsType = {
+interface AnimationPropsType {
   isCopying: boolean
   isSoleItem: boolean
 }
@@ -57,11 +54,13 @@ export const FirstCopiedItem = () => {
 
   if (items.length === 0) return null
   const firstItem = items[0]
-  const scaleFactorForFirstItem =
-    (containerWidth - 2 * containerPadding) / firstItem.width
+  const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / firstItem.width
 
   return (
-    <AnimatePresence mode='wait' custom={animationProps}>
+    <AnimatePresence
+      mode='wait'
+      custom={animationProps}
+    >
       <motion.div
         key={items.length}
         custom={animationProps}

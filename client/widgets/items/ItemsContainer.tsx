@@ -6,7 +6,7 @@ import { saveItemsOrder } from 'client/entities/items'
 import type { SortableContainerProps } from 'react-sortable-hoc'
 import { SortableContainer } from 'react-sortable-hoc'
 import type { Children } from 'client/types'
-import { saveItemsLocally } from 'client/features/items'
+import { saveItemsLocally } from 'client/features/save_items_locally'
 import { enterIntoCopyMode, exitFromCopyMode } from 'client/entities/copy'
 
 // example with TypeScript
@@ -51,11 +51,11 @@ export const ItemsContainer = ({ children }: Props) => {
     <DraggableItems
       useDragHandle
       useWindowAsScrollContainer
-      onSortStart={() => {
+      onSortStart={(): void => {
         document.body.style.cursor = 'move'
         dispatch(enterIntoCopyMode())
       }}
-      onSortEnd={({ oldIndex, newIndex }) => {
+      onSortEnd={({ oldIndex, newIndex }): void => {
         const { items } = store.getState()
         const sortedItems = arrayMoveImmutable(items, oldIndex, newIndex)
         dispatch(saveItemsOrder({ sortedItems }))
@@ -66,7 +66,9 @@ export const ItemsContainer = ({ children }: Props) => {
         document.body.style.removeProperty('cursor')
       }}
     >
-      <AnimatePresence initial={false}>{children}</AnimatePresence>
+      <AnimatePresence initial={false}>
+        {children}
+      </AnimatePresence>
     </DraggableItems>
   )
 }

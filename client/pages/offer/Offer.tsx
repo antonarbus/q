@@ -1,7 +1,7 @@
-import { Items } from 'client/features/items/Items'
+import { Items } from 'client/widgets/items'
 import { Copy } from 'client/widgets/copy'
 
-export const Offer = () => {
+export const Offer = (): JSX.Element => {
   return (
     <>
       <Copy />
