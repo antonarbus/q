@@ -1,16 +1,16 @@
 import { useSelectorTyped } from 'client/shared/hooks'
 import { ItemsContainer } from './ItemsContainer'
-import type { Item } from '../../entities/items/model/types'
+import type { TItem } from '../../entities/items/model/types'
 import { PasteItem, TextItem } from 'client/entities/items'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type EqualityFn = (a: any, b: any) => boolean
 
 // re-render the list only if item is replaced or new item is added
-const equalityFn: EqualityFn = (prevItems: Item[], currentItems: Item[]): boolean => {
+const equalityFn: EqualityFn = (prevItems: TItem[], currentItems: TItem[]): boolean => {
   const isDifferentLength = prevItems.length !== currentItems.length
   if (isDifferentLength) return false
-  const idsDoNotMatch = prevItems.some((item: Item, index: number) => prevItems[index]?.id !== currentItems[index]?.id)
+  const idsDoNotMatch = prevItems.some((item: TItem, index: number) => prevItems[index]?.id !== currentItems[index]?.id)
   if (idsDoNotMatch) return false
   return true
 }

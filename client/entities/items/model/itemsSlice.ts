@@ -5,24 +5,24 @@ import { nanoid } from 'nanoid'
 import { defaultItems } from './defaultItems'
 import { cleanItem } from 'utils/itemsUtils'
 import type { CopyPlaceType, PastePosType } from 'client/entities/copy'
-import type { Item, Items, PasteItem } from './types'
+import type { TItem, TItems, PasteItem } from './types'
 import { jsonParseSafe } from 'utils/jsonParseSafe'
 
-const returnDefaultOrLocalItems = (): Item[] => {
+const returnDefaultOrLocalItems = (): TItems => {
   const itemsFromLocalStorage = localStorage.getItem('items')
   if (itemsFromLocalStorage === null) return defaultItems
-  const items = jsonParseSafe<Item[]>(itemsFromLocalStorage)
+  const items = jsonParseSafe<TItems>(itemsFromLocalStorage)
   if (items === undefined) return defaultItems
   return items
 }
 
-const initialState: Items = returnDefaultOrLocalItems()
+const initialState: TItems = returnDefaultOrLocalItems()
 
 const itemsSlice = createSlice({
   name: 'items',
   initialState,
   reducers: {
-    reOrderItems: (state, action: PayloadAction<{ reOrderedItems: Items }>) => {
+    reOrderItems: (state, action: PayloadAction<{ reOrderedItems: TItems }>) => {
       const { reOrderedItems } = action.payload
       return reOrderedItems
     },
@@ -34,7 +34,7 @@ const itemsSlice = createSlice({
     pasteItem: (state, action: PayloadAction<{
       itemId: string
       pastePos: PastePosType
-      item: Item
+      item: TItem
     }>) => {
       const { itemId, pastePos, item } = action.payload
       const cleanedItem = cleanItem(item)
@@ -150,12 +150,12 @@ export const selectIsLastItem = (state: RootState): boolean =>
   state.items.filter((item) => item.type !== 'paste').length === 1
 
 export const selectItemsShape = createSelector(
-  [(state: RootState): Items => state.items],
+  [(state: RootState): TItems => state.items],
   (items) => items,
   {
     memoizeOptions: {
       // resultEqualityCheck: isEqual
-      resultEqualityCheck: (prevItems: Items, currentItems: Items) => {
+      resultEqualityCheck: (prevItems: TItems, currentItems: TItems) => {
         const addedOrDeletedItem = prevItems.length !== currentItems.length
         if (addedOrDeletedItem) return false
         const itemsIdsDoNotMatch = prevItems.some((item, index) => item.id !== currentItems[index]?.id)
