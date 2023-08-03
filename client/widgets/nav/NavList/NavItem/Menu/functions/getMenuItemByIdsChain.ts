@@ -11,16 +11,18 @@ import { navStructure } from '../../../../navStructure'
  * @param idsToCurrentMenuItems array of menu ids from the top to the clicked one
  */
 
-export function getMenuItemByIdsChain(idsToCurrentMenuItems: string[]) {
+export function getMenuItemByIdsChain(idsToCurrentMenuItems: string[]): TMenuItem[] {
   let clicked: TMenuItem[] = navStructure
   let tempMenu: TMenuItem[] = navStructure
   idsToCurrentMenuItems.forEach((id: string) => {
     if (id === 'burger') {
-      clicked = navStructure[0].menuItems!
+      if (!navStructure[0]) return clicked
+      if (!navStructure[0].menuItems) return clicked
+      clicked = navStructure[0].menuItems
       return clicked
     }
     if (id !== 'burger') {
-      clicked = tempMenu.find((menuItem) => menuItem.id === id)?.menuItems || []
+      clicked = tempMenu.find((menuItem) => menuItem.id === id)?.menuItems ?? []
     }
     tempMenu = clicked
   })
