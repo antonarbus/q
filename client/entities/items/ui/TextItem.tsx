@@ -6,18 +6,15 @@ import { PencilAtBottomRight } from 'client/components/PencilAtBottomRight'
 import { Froala } from 'client/components/Froala'
 import type { RefAny, RefDiv } from 'client/types'
 import { saveText } from 'client/entities/items'
-import type { TextItem as TextItemType } from 'client/entities/items/model/types'
+import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 
 interface Props {
   index: number
 }
 
-export const TextItem = ({ index }: Props) => {
+export const TextItem = ({ index }: Props): EmotionJSX.Element => {
   const froalaElementRef = useRef() as RefDiv
   const editorRef = useRef(null) as RefAny
-  const item = store.getState().items[index]
-  if (!item) return null
-  if (item.type !== 'text') return null
 
   return (
     <SortableResizableItemWithActions index={index}>
@@ -25,9 +22,12 @@ export const TextItem = ({ index }: Props) => {
         index={index}
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
-        getHtml={() =>
-          (store.getState().items[index] as TextItemType).text.html
-        }
+        getHtml={(): string => {
+          const item = store.getState().items[index]
+          if (item === undefined) return ''
+          if (item.type !== 'text') return ''
+          return item.text.html
+        }}
         placeholder='Type text or drop images, files, links...'
         padding={theme.item.padding}
         saveFroalaReducer={saveText}

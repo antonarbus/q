@@ -4,7 +4,11 @@
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": false,
@@ -22,11 +26,25 @@
     "baseUrl": ".",
     // path mapping to be computed relative to baseUrl option
     // may use import {func} from 'client/folder', instead of '../../../../folder'
-    "types": ["vite/client", "vitest/globals", "@emotion/react/types/css-prop"]
+    "types": [
+      "vite/client",
+      "vitest/globals",
+      "@emotion/react/types/css-prop"
+    ],
+    "noUncheckedIndexedAccess": true,
+    // "strictNullChecks": true
   },
   // folders and files for providing you with file search, code completion etc...
-  "include": ["client", "server", "utils"],
-  "exclude": ["node_modules", "**/node_modules", "build"],
+  "include": [
+    "client",
+    "server",
+    "utils"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/node_modules",
+    "build"
+  ],
   "references": [
     {
       "path": "./tsconfig.node.json"
