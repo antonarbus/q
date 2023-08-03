@@ -4,16 +4,9 @@ import type { RootState } from 'client/app/store'
 import { nanoid } from 'nanoid'
 import { defaultItems } from './defaultItems'
 import { cleanItem } from 'utils/itemsUtils'
-import type { CopyPlaceType } from 'client/entities/copy'
+import type { CopyPlaceType, PastePosType } from 'client/entities/copy'
 import type { Item, Items, PasteItem } from './types'
 import { jsonParseSafe } from 'utils/jsonParseSafe'
-
-type PayloadFroalaUpdate = PayloadAction<{
-  index: number
-  html?: string
-  height?: number
-  rowIndex?: number
-}>
 
 const returnDefaultOrLocalItems = (): Item[] => {
   const itemsFromLocalStorage = localStorage.getItem('items')
@@ -38,12 +31,15 @@ const itemsSlice = createSlice({
       const itemsWithoutDeletedOne = state.filter((item) => item.id !== itemId)
       return itemsWithoutDeletedOne
     },
-    pasteItem: (state, action) => {
-      // { itemId: string; pastePos: PastePosType; item: any; }
+    pasteItem: (state, action: PayloadAction<{
+      itemId: string
+      pastePos: PastePosType
+      item: Item
+    }>) => {
       const { itemId, pastePos, item } = action.payload
       const cleanedItem = cleanItem(item)
       const itemToPaste = { ...cleanedItem, id: nanoid(5) }
-      const hoveredItemIndex = state.findIndex((item) => item.id === itemId)
+      const hoveredItemIndex = state.findIndex(({ id }) => id === itemId)
 
       interface SplicingSettings {
         insertAtIndex: number
@@ -80,22 +76,16 @@ const itemsSlice = createSlice({
     tellItemSavedLocally: (state, action: PayloadAction<{ index: number }>) => {
       const { index } = action.payload
       const item = state[index]
-      if (!item) return
       item.msg = 'saved locally'
     },
     removeItemMsg: (state, action: PayloadAction<{ index: number }>) => {
       const { index } = action.payload
       const item = state[index]
-      if (!item) return
       item.msg = ''
     },
-    saveItemWidth: (
-      state,
-      action: PayloadAction<{ index: number; width: number }>,
-    ) => {
+    saveItemWidth: (state, action: PayloadAction<{ index: number; width: number }>) => {
       const { index, width } = action.payload
       const item = state[index]
-      if (!item) return
       item.width = width
     },
     saveItemHeight: (
@@ -104,33 +94,35 @@ const itemsSlice = createSlice({
     ) => {
       const { index, height } = action.payload
       const item = state[index]
-      if (!item) return
       item.height = height
     },
-    saveText: (state, action: PayloadFroalaUpdate) => {
+    saveText: (state, action: PayloadAction<{
+      index: number
+      html?: string
+      height?: number
+      rowIndex?: number
+    }>) => {
       const { index, html } = action.payload
       const item = state[index]
-      if (!item) return
       if (item.type !== 'text') return
       if (html !== undefined) item.text.html = html
     },
     removePasteItem: (state) => state.filter((item) => item.type !== 'paste'),
     insertPasteItem: (state, action: PayloadAction<CopyPlaceType>) => {
       const { pastePos, itemId } = action.payload
-      const itemsWithoutPasteText = state.filter(
-        (item) => item.type !== 'paste',
-      )
+      const itemsWithoutPasteText = state.filter((item) => item.type !== 'paste')
       if (pastePos === 'middle') return itemsWithoutPasteText
-      const insertAtIndex =
-        itemsWithoutPasteText.findIndex((item) => item.id === itemId) +
-        (pastePos === 'bottom' ? 1 : 0)
+      const insertAtIndex = itemsWithoutPasteText.findIndex((item) => item.id === itemId) + (pastePos === 'bottom' ? 1 : 0)
+
       const pasteTextEl: PasteItem = {
         id: 'paste id',
         type: 'paste',
         height: 0,
         width: 0,
         msg: '',
+        previewHtml: '',
       }
+
       itemsWithoutPasteText.splice(insertAtIndex, 0, pasteTextEl)
       return itemsWithoutPasteText
     },
@@ -166,9 +158,7 @@ export const selectItemsShape = createSelector(
       resultEqualityCheck: (prevItems: Items, currentItems: Items) => {
         const addedOrDeletedItem = prevItems.length !== currentItems.length
         if (addedOrDeletedItem) return false
-        const itemsIdsDoNotMatch = prevItems.some(
-          (item, index) => item.id !== currentItems[index]?.id,
-        )
+        const itemsIdsDoNotMatch = prevItems.some((item, index) => item.id !== currentItems[index]?.id)
         if (itemsIdsDoNotMatch) return false
         return true
       },

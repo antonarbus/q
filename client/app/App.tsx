@@ -23,7 +23,7 @@ import {
   Unauthorized,
 } from 'client/widgets/credentials'
 
-export const App = () => (
+export const App = (): JSX.Element => (
   <Provider store={store}>
     <QueryClientProvider client={reactQuery}>
       <ThemeProvider theme={themeClient}>

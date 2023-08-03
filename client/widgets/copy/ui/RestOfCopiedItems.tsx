@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useSelectorTyped } from 'client/shared/hooks'
 import { containerPadding, containerWidth, itemMarginBottom } from './CopyContainer'
 import { theme } from 'client/shared/clients'
+import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 
 interface AnimationPropsType {
   isCopying: boolean
@@ -50,11 +51,10 @@ const variants: Variants = {
 
 let prevFirstItemHeight = 0
 
-export const RestOfCopiedItems = () => {
+export const RestOfCopiedItems = (): EmotionJSX.Element => {
   const items = useSelectorTyped((state) => state.copy.items)
   const isCopying = useSelectorTyped((state) => state.copy.isCopying)
 
-  if (items.length === 0) return null
   const firstItem = items[0]
   const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / firstItem.width
   const firstItemHeight = firstItem.height * scaleFactorForFirstItem + itemMarginBottom

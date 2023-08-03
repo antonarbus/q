@@ -22,7 +22,6 @@ export const Items = (): JSX.Element => {
   return (
     <ItemsContainer>
       {items.map((item, index) => {
-        if (!item) return null
         const key = item.id + shouldReRender.toString()
 
         if (item.type === 'text') return <TextItem key={key} index={index} />
