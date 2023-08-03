@@ -1,15 +1,17 @@
+import type {
+  NavLevel
+} from 'client/entities/nav';
 import {
-  MenuLevel,
   closeMenu,
   openMenuWithId,
   setNavItemRightPos,
 } from 'client/entities/nav'
 import { store } from 'client/app/store'
-import { Event } from 'client/types'
+import type { Event } from 'client/types'
 
-type Props = {
+interface Props {
   e: Event
-  navItem: MenuLevel | undefined
+  navItem: NavLevel | undefined
   id: string
   navItemRef: React.MutableRefObject<HTMLLIElement>
   disabled: boolean
@@ -22,7 +24,7 @@ export function clickOnNavItem({
   navItemRef,
   disabled,
 }: Props) {
-  ;(document.activeElement as HTMLElement).blur() // to prevent open an active navItem link on Enter key
+  ; (document.activeElement as HTMLElement).blur() // to prevent open an active navItem link on Enter key
 
   const link = navItem?.link
   const func = navItem?.func

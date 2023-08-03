@@ -68,7 +68,7 @@ const itemsSlice = createSlice({
       }
 
       const spliceSettings = getSpliceSettings()
-      const itemsWithoutPasteText = state.filter((itemmm) => itemmm.type !== 'paste')
+      const itemsWithoutPasteText = state.filter(({ type }) => type !== 'paste')
       itemsWithoutPasteText.splice(
         spliceSettings.insertAtIndex,
         spliceSettings.deleteCount,

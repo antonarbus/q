@@ -1,4 +1,4 @@
-export type { MenuLevel } from './menuType'
+export type { NavLevel } from './navType'
 export {
   closeBurger,
   toggleBurger,

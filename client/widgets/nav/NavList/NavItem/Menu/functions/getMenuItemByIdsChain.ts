@@ -1,4 +1,4 @@
-import { MenuLevel } from 'client/entities/nav'
+import type { NavLevel } from 'client/entities/nav'
 import { navStructure } from '../../../../navStructure'
 
 /**
@@ -12,8 +12,8 @@ import { navStructure } from '../../../../navStructure'
  */
 
 export function getMenuItemByIdsChain(idsToCurrentMenuItems: string[]) {
-  let clicked: MenuLevel[] = navStructure
-  let tempMenu: MenuLevel[] = navStructure
+  let clicked: NavLevel[] = navStructure
+  let tempMenu: NavLevel[] = navStructure
   idsToCurrentMenuItems.forEach((id: string) => {
     if (id === 'burger') {
       clicked = navStructure[0].menuItems!

@@ -1,1 +1,1 @@
-export { resetItems as resetItemsToDefault } from './resetItems'
+export { resetItems } from './resetItems'

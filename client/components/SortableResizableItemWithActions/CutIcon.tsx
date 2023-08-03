@@ -28,9 +28,9 @@ export const CutIcon = ({ index }: Props): EmotionJSX.Element => {
         if (isLastItem) return
 
         const items = document.querySelectorAll('.item-paper')
-        items.forEach((item, index) => {
+        items.forEach((item, i) => {
           const height = item.clientHeight
-          dispatch(saveItemHeight({ index, height }))
+          dispatch(saveItemHeight({ index: i, height }))
         })
 
         dispatch(saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
