@@ -33,14 +33,17 @@ const itemsSlice = createSlice({
       const { reOrderedItems } = action.payload
       return reOrderedItems
     },
-    deleteItem: (state, action) =>
-      state.filter((item) => item?.id !== action.payload.id),
+    deleteItem: (state, action: PayloadAction<{ itemId: string }>) => {
+      const { itemId } = action.payload
+      const itemsWithoutDeletedOne = state.filter((item) => item.id !== itemId)
+      return itemsWithoutDeletedOne
+    },
     pasteItem: (state, action) => {
       // { itemId: string; pastePos: PastePosType; item: any; }
       const { itemId, pastePos, item } = action.payload
       const cleanedItem = cleanItem(item)
       const itemToPaste = { ...cleanedItem, id: nanoid(5) }
-      const hoveredItemIndex = state.findIndex((item) => item?.id === itemId)
+      const hoveredItemIndex = state.findIndex((item) => item.id === itemId)
 
       interface SplicingSettings {
         insertAtIndex: number
@@ -65,7 +68,7 @@ const itemsSlice = createSlice({
       }
 
       const spliceSettings = getSpliceSettings()
-      const itemsWithoutPasteText = state.filter((itemmm) => itemmm?.type !== 'paste')
+      const itemsWithoutPasteText = state.filter((itemmm) => itemmm.type !== 'paste')
       itemsWithoutPasteText.splice(
         spliceSettings.insertAtIndex,
         spliceSettings.deleteCount,
@@ -111,15 +114,15 @@ const itemsSlice = createSlice({
       if (item.type !== 'text') return
       if (html !== undefined) item.text.html = html
     },
-    removePasteItem: (state) => state.filter((item) => item?.type !== 'paste'),
+    removePasteItem: (state) => state.filter((item) => item.type !== 'paste'),
     insertPasteItem: (state, action: PayloadAction<CopyPlaceType>) => {
       const { pastePos, itemId } = action.payload
       const itemsWithoutPasteText = state.filter(
-        (item) => item?.type !== 'paste',
+        (item) => item.type !== 'paste',
       )
       if (pastePos === 'middle') return itemsWithoutPasteText
       const insertAtIndex =
-        itemsWithoutPasteText.findIndex((item) => item?.id === itemId) +
+        itemsWithoutPasteText.findIndex((item) => item.id === itemId) +
         (pastePos === 'bottom' ? 1 : 0)
       const pasteTextEl: PasteItem = {
         id: 'paste id',
@@ -152,7 +155,7 @@ export const itemsReducer = itemsSlice.reducer
 
 // selectors
 export const selectIsLastItem = (state: RootState): boolean =>
-  state.items.filter((item) => item?.type !== 'paste').length === 1
+  state.items.filter((item) => item.type !== 'paste').length === 1
 
 export const selectItemsShape = createSelector(
   [(state: RootState): Items => state.items],
@@ -164,7 +167,7 @@ export const selectItemsShape = createSelector(
         const addedOrDeletedItem = prevItems.length !== currentItems.length
         if (addedOrDeletedItem) return false
         const itemsIdsDoNotMatch = prevItems.some(
-          (item, index) => item?.id !== currentItems[index]?.id,
+          (item, index) => item.id !== currentItems[index]?.id,
         )
         if (itemsIdsDoNotMatch) return false
         return true

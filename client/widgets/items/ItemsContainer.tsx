@@ -46,6 +46,8 @@ const DraggableItems: React.ComponentClass<ISortableContainer> = SortableContain
   </motion.div>
 ))
 
+// todo: break it into itemsFeedLayout and itemsReOrder feature
+
 export const ItemsContainer = ({ children }: Props): EmotionJSX.Element => {
   const dispatch = useDispatchTyped()
 
