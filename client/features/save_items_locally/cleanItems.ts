@@ -1,7 +1,7 @@
-import type { Item } from 'client/entities/items'
+import type { TItem } from 'client/entities/items'
 import { cleanItem } from 'utils/itemsUtils'
 
-export function cleanItems(items: Item[]): Item[] {
+export function cleanItems(items: TItem[]): TItem[] {
   const modifiableItems = structuredClone(items)
   const itemsWithoutMsg = modifiableItems.map((item) => {
     return cleanItem(item)

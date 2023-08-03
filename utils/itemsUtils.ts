@@ -1,6 +1,6 @@
-import type { Item } from 'client/entities/items'
+import type { TItem } from 'client/entities/items'
 
-export function cleanItem(item: Item): Item {
+export function cleanItem(item: TItem): TItem {
   const modifiableItem = structuredClone(item)
   if (modifiableItem === undefined) return item
   modifiableItem.msg = ''
