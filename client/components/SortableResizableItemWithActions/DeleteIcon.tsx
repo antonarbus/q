@@ -6,12 +6,13 @@ import { gsap } from 'gsap'
 import { useRef } from 'react'
 import type { RefSpan } from 'client/types'
 import { saveItemsLocally } from 'client/features/save_items_locally'
+import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 
 interface Props {
   index: number
 }
 
-export const DeleteIcon = ({ index }: Props) => {
+export const DeleteIcon = ({ index }: Props): EmotionJSX.Element => {
   const dispatch = useDispatchTyped()
   const ref = useRef() as RefSpan
   const isLastItem = useSelectorTyped(selectIsLastItem)
@@ -23,28 +24,28 @@ export const DeleteIcon = ({ index }: Props) => {
         color: isLastItem ? '#acacac' : '#000',
         cursor: isLastItem ? 'default' : 'pointer',
       }}
-      onClick={() => {
+      onClick={(): void => {
         gsap.to(ref.current, { duration: 0.2, scale: 0.9 })
         if (isLastItem) return
-        const itemToDelete = store.getState().items[index]
-        dispatch(deleteItem(itemToDelete))
+        const item = store.getState().items[index]
+        dispatch(deleteItem({ itemId: item.id }))
         saveItemsLocally()
       }}
-      onMouseOver={() => {
+      onMouseOver={(): void => {
         gsap.to(ref.current, {
           duration: 0.2,
           scale: isLastItem ? 1 : 1.3,
           color: isLastItem ? '#acacac' : '#d25959',
         })
       }}
-      onMouseOut={() => {
+      onMouseOut={(): void => {
         gsap.to(ref.current, {
           duration: 0.2,
           scale: 1,
           color: isLastItem ? '#acacac' : '#000',
         })
       }}
-      onMouseDown={() => {
+      onMouseDown={(): void => {
         gsap.to(ref.current, {
           duration: 0.2,
           scale: isLastItem ? 1 : 0.9,
