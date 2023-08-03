@@ -44,5 +44,6 @@ module.exports = {
     quotes: [2, 'single', { avoidEscape: true }],
     '@typescript-eslint/naming-convention': 'off',
     '@typescript-eslint/strict-boolean-expressions': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
   },
 }
