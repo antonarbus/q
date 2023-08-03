@@ -1,4 +1,4 @@
-export type { NavLevel } from './navType'
+export type { TNavItem } from './TNavItem'
 export {
   closeBurger,
   toggleBurger,
