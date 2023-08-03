@@ -5,7 +5,7 @@ import { nanoid } from 'nanoid'
 import { defaultItems } from './defaultItems'
 import { cleanItem } from 'utils/itemsUtils'
 import type { CopyPlaceType, PastePosType } from 'client/entities/copy'
-import type { TItem, TItems, PasteItem } from './types'
+import type { TItem, TItems, TPasteItem } from './types'
 import { jsonParseSafe } from 'utils/jsonParseSafe'
 
 const returnDefaultOrLocalItems = (): TItems => {
@@ -114,7 +114,7 @@ const itemsSlice = createSlice({
       if (pastePos === 'middle') return itemsWithoutPasteText
       const insertAtIndex = itemsWithoutPasteText.findIndex((item) => item.id === itemId) + (pastePos === 'bottom' ? 1 : 0)
 
-      const pasteTextEl: PasteItem = {
+      const pasteTextEl: TPasteItem = {
         id: 'paste id',
         type: 'paste',
         height: 0,
