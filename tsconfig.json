@@ -32,7 +32,7 @@
       "@emotion/react/types/css-prop"
     ],
     "noUncheckedIndexedAccess": true,
-    // "strictNullChecks": true
+    "strictNullChecks": true
   },
   // folders and files for providing you with file search, code completion etc...
   "include": [
