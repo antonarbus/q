@@ -6,12 +6,13 @@ import { deleteItem, saveItemHeight, selectIsLastItem } from 'client/entities/it
 import { cleanHtml } from 'utils/itemsUtils'
 import { saveItemsLocally } from 'client/features/save_items_locally'
 import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/entities/copy'
+import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 
 interface Props {
   index: number
 }
 
-export const CutIcon = ({ index }: Props) => {
+export const CutIcon = ({ index }: Props): EmotionJSX.Element => {
   const dispatch = useDispatchTyped()
   const isLastItem = useSelectorTyped(selectIsLastItem)
 
@@ -23,7 +24,7 @@ export const CutIcon = ({ index }: Props) => {
         color: isLastItem ? '#acacac' : '#000',
         cursor: isLastItem ? 'default' : 'pointer',
       }}
-      onClick={(e: React.MouseEvent) => {
+      onClick={(e: React.MouseEvent): void => {
         if (isLastItem) return
 
         const items = document.querySelectorAll('.item-paper')
@@ -35,11 +36,15 @@ export const CutIcon = ({ index }: Props) => {
         dispatch(saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
         dispatch(showCopyContainer())
         const itemToCut = store.getState().items[index]
-        const html = (e.target as HTMLElement)!.closest('.item')!.querySelector('.item-paper')!.innerHTML
+        const itemElement = (e.target as HTMLElement).closest('.item')
+        if (itemElement === null) return
+        const itemPaperElement = itemElement.querySelector('.item-paper')
+        if (itemPaperElement === null) return
+        const html = itemPaperElement.innerHTML
         const cleanedHtml = cleanHtml(html)
         const item = { ...itemToCut, previewHtml: cleanedHtml }
         dispatch(addItemIntoCopyContainer(item))
-        dispatch(deleteItem(itemToCut))
+        dispatch(deleteItem({ itemId: item.id }))
         saveItemsLocally()
       }}
     >
