@@ -5,9 +5,9 @@ import { Logo } from './Logo'
 import { NavList } from './NavList'
 import { useMenuItemActionShortcuts } from './functions/useMenuItemActionShortcuts'
 import { useMediaQueryValues } from './functions/useMediaQueryValues'
-import { RefDiv } from 'client/types'
+import type { RefDiv } from 'client/types'
 
-export function Nav() {
+export const Nav = (): JSX.Element => {
   const navRef = useRef() as RefDiv
   const logoRef = useRef() as RefDiv
   const mediaQueryWidth = useSelectorTyped((state) => state.nav.mediaQueryWidth)
@@ -38,9 +38,9 @@ export function Nav() {
         fontWeight: 300,
         '& > ul > li > a > .icon-round-wrapper': mediaEnabled && {
           [`@media (max-width: ${mediaQueryWidth.icon}px) and (min-width: ${mediaQueryWidth.name}px)`]:
-            {
-              display: 'none',
-            },
+          {
+            display: 'none',
+          },
           [`@media (max-width: ${mediaQueryWidth.burger}px)`]: {
             display: 'none',
           },
