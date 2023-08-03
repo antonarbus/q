@@ -1,11 +1,11 @@
-export interface TNavItem {
+export interface TMenuItem {
   id: string
   name: string
   icon?: React.ReactNode | string
   link?: string
   func?: () => Promise<void> | void
   shortcut?: string[]
-  menuItems?: TNavItem[]
+  menuItems?: TMenuItem[]
   isHidden: boolean
   disabled?: boolean
 }

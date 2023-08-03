@@ -6,11 +6,11 @@ import { RoundSpanForIcon } from '../../RoundSpanForIcon'
 import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
 import { Shortcut } from './Shortcut'
 import { clickOnMenuItem } from './function/clickOnMenuItem'
-import type { TNavItem } from 'client/entities/nav';
+import type { TMenuItem } from 'client/entities/nav';
 import { setMenuItemHoverIndex } from 'client/entities/nav'
 
 interface Props {
-  menuItem: TNavItem
+  menuItem: TMenuItem
   hoveredMenuItemIndex: number
 }
 
