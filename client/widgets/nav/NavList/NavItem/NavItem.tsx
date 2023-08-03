@@ -26,36 +26,35 @@ interface Props {
  * - required to avoid Menu to go over the narrow window
  */
 
-export function NavItem({ children, id }: Props) {
-  /**
-   * required to avoid Menu to go over the narrow window
-   */
+export function NavItem({ children, id }: Props): JSX.Element {
+  // required to avoid Menu to go over the narrow window
   const navItemRef = useRef() as React.MutableRefObject<HTMLLIElement>
+
   /**
-   * @descriptions
    * - with media query at some width we hide names and show icons
    * - if icon is not provided in navStructure we may generate it dynamically
    * - do it only for such width when only icons are show
    * - for that reason we track window's width with 'useWindowSize' hook
-   */
+  */
   const windowWidth = useWindowSize().width
   const widthWhenIconsAreShown = store.getState().nav.mediaQueryWidth.icon
   const shouldDisplayIcon = windowWidth < widthWhenIconsAreShown
-  /**
-   * needs to open only menu under clicked navItem, otherwise multiple menus are opened under all navItems
-   */
+
+  // needs to open only menu under clicked navItem, otherwise multiple menus are opened under all navItems
   const shouldOpenThisMenu = useSelectorTyped((state) => state.nav.idsToCurrentMenuItems.at(1) === id)
+
   const navItem = useSelectorTyped((state) => {
     const topNavLevel = state.nav.navStructure[0]
     if (topNavLevel === undefined) return undefined
     if (topNavLevel.menuItems === undefined) return undefined
     return topNavLevel.menuItems.find((menuItem) => menuItem.id === id)
   })
+
   const isNestedMenu = !!navItem?.menuItems
   const icon = navItem?.icon
   const name = navItem?.name
   const link = navItem?.link
-  const disabled = !!navItem?.disabled
+  const disabled = Boolean(navItem?.disabled)
 
   return (
     <li
@@ -114,9 +113,10 @@ export function NavItem({ children, id }: Props) {
       `}
     >
       <Link
-        to={link || '/'}
-        onClick={(e) => { clickOnNavItem({ e, navItem, id, navItemRef, disabled }); }
-        }
+        to={link ?? '/'}
+        onClick={(e): void => {
+          clickOnNavItem({ e, navItem, id, navItemRef, disabled });
+        }}
       >
         {icon && <Icon icon={icon} disabled={disabled} />}
         {!icon && shouldDisplayIcon && (
