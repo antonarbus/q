@@ -4,7 +4,7 @@ import { navUpdate } from './navUpdate'
 import { token } from '../../shared/auth/token'
 import { forgetLoggedUser } from 'client/entities/user'
 
-export async function logoutUser() {
+export async function logoutUser(): Promise<void> {
   const method = 'GET'
   const options = { method }
   try {

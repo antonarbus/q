@@ -1,11 +1,11 @@
-export type MenuLevel = {
+export interface NavLevel {
   id: string
   name: string
   icon?: React.ReactNode | string
-  link?: any
-  func?: () => void
+  link?: string
+  func?: () => Promise<void> | void
   shortcut?: string[]
-  menuItems?: MenuLevel[]
+  menuItems?: NavLevel[]
   isHidden?: boolean
   disabled?: boolean
 }

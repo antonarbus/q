@@ -6,13 +6,13 @@ import { IoDocumentOutline, IoDocumentsOutline, IoSaveOutline, IoShareOutline } 
 import { IoIosSwap } from 'react-icons/io'
 import logo from './img/logo.svg'
 import { Person as PersonIcon, Settings as SettingsIcon } from '@mui/icons-material'
-import type { MenuLevel } from 'client/entities/nav'
+import type { NavLevel } from 'client/entities/nav'
 import { logoutUser } from '../credentials/logout'
-import { resetItemsToDefault } from 'client/features/reset_items'
+import { resetItems } from 'client/features/reset_items'
 
 const reactIcon = createElement(IoShareOutline, {})
 
-export const navStructure: MenuLevel[] = [
+export const navStructure: NavLevel[] = [
   {
     id: 'top',
     name: 'top',
@@ -90,7 +90,7 @@ export const navStructure: MenuLevel[] = [
             id: id(5),
             name: 'Reset to default offer',
             icon: <BiReset />,
-            func: resetItemsToDefault,
+            func: resetItems,
           },
           {
             id: id(5),
@@ -196,7 +196,7 @@ export const navStructure: MenuLevel[] = [
           {
             id: id(5),
             name: 'func',
-            func: () => {
+            func: (): void => {
               alert('i am the function')
             },
             shortcut: ['control', 'c'],
