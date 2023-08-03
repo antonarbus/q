@@ -1,17 +1,17 @@
-import { NavLevel } from './navType'
+import type { TNavItem } from './TNavItem'
 
 // https://www.typescriptlang.org/docs/handbook/2/generics.html
 // https://stackoverflow.com/a/49286056/7239778
-export function setMenuItemPropValue<K extends keyof NavLevel>({
+export function setMenuItemPropValue<K extends keyof TNavItem>({
   menu,
   id,
   prop,
   value,
 }: {
-  menu: NavLevel[]
+  menu: TNavItem[]
   id: string
   prop: K
-  value: NavLevel[K]
+  value: TNavItem[K]
 }) {
   menu.forEach((el) => {
     if (el.id === id) {

@@ -1,17 +1,11 @@
-import type {
-  NavLevel
-} from 'client/entities/nav';
-import {
-  closeMenu,
-  openMenuWithId,
-  setNavItemRightPos,
-} from 'client/entities/nav'
+import type { TNavItem } from 'client/entities/nav';
+import { closeMenu, openMenuWithId, setNavItemRightPos } from 'client/entities/nav'
 import { store } from 'client/app/store'
 import type { Event } from 'client/types'
 
 interface Props {
   e: Event
-  navItem: NavLevel | undefined
+  navItem: TNavItem | undefined
   id: string
   navItemRef: React.MutableRefObject<HTMLLIElement>
   disabled: boolean

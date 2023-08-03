@@ -1,4 +1,4 @@
-import type { NavLevel } from 'client/entities/nav'
+import type { TNavItem } from 'client/entities/nav'
 import { NavItem } from './NavItem'
 import { Burger } from './NavItem/Burger'
 import { useSelectorTyped } from 'client/shared/hooks'
@@ -18,7 +18,7 @@ export function NavList(): React.ReactNode {
     >
       {navStructure[0]
         .menuItems?.filter((navItem) => !navItem.isHidden)
-        .map((navItem: NavLevel) => (
+        .map((navItem: TNavItem) => (
           <NavItem id={navItem.id} key={navItem.id} />
         ))}
       <NavItem id={'burger'} key={'burger'}>

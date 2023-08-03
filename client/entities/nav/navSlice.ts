@@ -1,8 +1,9 @@
 import { navStructure } from '../../widgets/nav/navStructure'
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { RootState } from 'client/app/store'
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit'
+import type { RootState } from 'client/app/store'
 import { setMenuItemPropValue } from './setMenuItemPropValue'
-import { NavLevel } from './navType'
+import type { TNavItem } from './TNavItem'
 
 const initialState = {
   navStructure,
@@ -74,11 +75,11 @@ const navSlice = createSlice({
     },
     disableTopMenuItemsExceptItemId: (
       state,
-      action: PayloadAction<{ exceptItemId?: string }>
+      action: PayloadAction<{ exceptItemId?: string }>,
     ) => {
       const { exceptItemId } = action.payload
       const topNavItemsIds = state.navStructure[0].menuItems?.map(
-        (item) => item.id
+        (item) => item.id,
       )
       topNavItemsIds?.forEach((id) => {
         if (id === exceptItemId) return
@@ -92,7 +93,7 @@ const navSlice = createSlice({
     },
     enableTopMenuItems: (state) => {
       const topNavItemsIds = state.navStructure[0].menuItems?.map(
-        (item) => item.id
+        (item) => item.id,
       )
       topNavItemsIds?.forEach((id) => {
         setMenuItemPropValue({
@@ -167,8 +168,8 @@ export const selectMenuItemByIdsChainSelector =
   (idsToCurrentMenuItems: string[]) => (state: RootState) => {
     const navStructure = state.nav.navStructure
 
-    let clicked: NavLevel[] = navStructure
-    let tempMenu: NavLevel[] = navStructure
+    let clicked: TNavItem[] = navStructure
+    let tempMenu: TNavItem[] = navStructure
     idsToCurrentMenuItems.forEach((id: string) => {
       if (id === 'burger') {
         clicked = navStructure[0].menuItems!
