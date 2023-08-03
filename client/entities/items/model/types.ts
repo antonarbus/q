@@ -1,4 +1,4 @@
-interface CommonItem {
+interface TCommonItem {
   id: string
   width: number
   height: number
@@ -6,7 +6,7 @@ interface CommonItem {
   previewHtml: string
 }
 
-export interface BoqRow {
+interface TBoqRow {
   id: string
   description: {
     html: string
@@ -25,7 +25,7 @@ export interface BoqRow {
   }
 }
 
-export interface BoqColumns {
+interface TBoqCols {
   description: {
     html: string
     width: number | undefined
@@ -44,7 +44,7 @@ export interface BoqColumns {
   }
 }
 
-export type BoqItem = CommonItem & {
+type TBoqItem = TCommonItem & {
   type: 'boq'
   boq: {
     header: {
@@ -64,21 +64,21 @@ export type BoqItem = CommonItem & {
         }
       }
     }
-    column: BoqColumns
-    rows: BoqRow[]
+    column: TBoqCols
+    rows: TBoqRow[]
   }
 }
 
-export type TextItem = CommonItem & {
+type TTextItem = TCommonItem & {
   type: 'text'
   text: {
     html: string
   }
 }
 
-export type PasteItem = CommonItem & {
+export type TPasteItem = TCommonItem & {
   type: 'paste'
 }
 
-export type TItem = BoqItem | PasteItem | TextItem
+export type TItem = TBoqItem | TPasteItem | TTextItem
 export type TItems = TItem[]
