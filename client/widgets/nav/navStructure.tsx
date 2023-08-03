@@ -16,61 +16,73 @@ export const navStructure: NavLevel[] = [
   {
     id: 'top',
     name: 'top',
+    isHidden: false,
     menuItems: [
       {
         id: 'Offer',
         icon: <IoDocumentOutline />,
+        isHidden: false,
         name: 'Offer',
         menuItems: [
           {
             id: 'Previous offer',
             name: 'Previous offer',
             icon: <IoIosSwap />,
+            isHidden: false,
           },
           {
             id: 'Nested menu',
             name: 'Nested menu',
             icon: <IoIosSwap />,
+            isHidden: false,
             menuItems: [
               {
                 id: 'item in menu 1',
                 name: 'item in menu 1',
                 icon: '😎',
+                isHidden: false,
                 menuItems: [
                   {
                     id: id(5),
                     name: 'long long long long long long long long name',
                     icon: reactIcon,
+                    isHidden: false,
                   },
                   {
                     id: id(5),
                     name: 'item in menu 1',
                     icon: null,
+                    isHidden: false,
                   },
                   {
                     id: id(5),
                     name: 'item in menu 1',
                     icon: <img src={logo} />,
+                    isHidden: false,
                   },
                   {
                     id: id(5),
                     name: 'item in menu 1',
                     icon: reactIcon,
+                    isHidden: false,
                   },
                   {
                     id: id(5),
                     name: 'item in menu 1',
                     icon: reactIcon,
+                    isHidden: false,
                   },
                   {
                     id: id(5),
                     name: 'item in menu 1',
                     icon: reactIcon,
+                    isHidden: false,
                   },
                   {
                     id: id(5),
                     name: 'item in menu 1',
                     icon: reactIcon,
+                    isHidden: false,
                   },
                 ],
               },
@@ -78,11 +90,13 @@ export const navStructure: NavLevel[] = [
                 id: id(5),
                 name: 'item in menu 1',
                 icon: '😎',
+                isHidden: false,
               },
               {
                 id: id(5),
                 name: 'item in menu 1',
                 icon: '😎',
+                isHidden: false,
               },
             ],
           },
@@ -90,6 +104,7 @@ export const navStructure: NavLevel[] = [
             id: id(5),
             name: 'Reset to default offer',
             icon: <BiReset />,
+            isHidden: false,
             func: resetItems,
           },
           {
@@ -102,12 +117,14 @@ export const navStructure: NavLevel[] = [
             id: id(5),
             name: 'not hidden menu',
             icon: '😇',
+            isHidden: false,
           },
         ],
       },
       {
         id: 'Save',
         icon: <IoSaveOutline />,
+        isHidden: false,
         name: 'Save',
         link: '/linkA',
         shortcut: ['control', 'z'],
@@ -115,52 +132,62 @@ export const navStructure: NavLevel[] = [
       {
         id: 'Share',
         icon: <IoShareOutline />,
+        isHidden: false,
         name: 'Share',
         menuItems: [
           {
             id: id(5),
             name: 'item in menu 1',
             icon: '😇',
+            isHidden: false,
             menuItems: [
               {
                 id: id(5),
                 name: 'item in menu 1',
                 icon: '😎',
+                isHidden: false,
                 menuItems: [
                   {
                     id: id(5),
                     name: 'long long long long long long long long name',
                     icon: reactIcon,
+                    isHidden: false,
                   },
                   {
                     id: id(5),
                     name: 'item in menu 1',
                     icon: null,
+                    isHidden: false,
                   },
                   {
                     id: id(5),
                     name: 'item in menu 1',
                     icon: <img src={logo} />,
+                    isHidden: false,
                   },
                   {
                     id: id(5),
                     name: 'item in menu 1',
                     icon: reactIcon,
+                    isHidden: false,
                   },
                   {
                     id: id(5),
                     name: 'item in menu 1',
                     icon: reactIcon,
+                    isHidden: false,
                   },
                   {
                     id: id(5),
                     name: 'item in menu 1',
                     icon: reactIcon,
+                    isHidden: false,
                   },
                   {
                     id: id(5),
                     name: 'item in menu 1',
                     icon: reactIcon,
+                    isHidden: false,
                   },
                 ],
               },
@@ -168,11 +195,13 @@ export const navStructure: NavLevel[] = [
                 id: id(5),
                 name: 'item in menu 1',
                 icon: '😎',
+                isHidden: false,
               },
               {
                 id: id(5),
                 name: 'item in menu 1',
                 icon: '😎',
+                isHidden: false,
               },
             ],
           },
@@ -180,18 +209,21 @@ export const navStructure: NavLevel[] = [
             id: id(5),
             name: 'item in menu 1',
             icon: 'IC',
+            isHidden: false,
           },
           {
             id: id(5),
             name: 'link',
             link: '/',
             icon: '😇',
+            isHidden: false,
             shortcut: ['control', 'x'],
           },
           {
             id: id(5),
             name: 'item in menu 1',
             icon: '',
+            isHidden: false,
           },
           {
             id: id(5),
@@ -200,18 +232,21 @@ export const navStructure: NavLevel[] = [
               alert('i am the function')
             },
             shortcut: ['control', 'c'],
+            isHidden: false,
           },
         ],
       },
       {
         id: 'Offers',
         icon: <IoDocumentsOutline />,
+        isHidden: false,
         name: 'Offers',
         link: '/linkB',
       },
       {
         id: 'logIn',
         icon: <FiLogIn />,
+        isHidden: false,
         name: 'Log in',
         link: '/login',
       },
@@ -224,18 +259,21 @@ export const navStructure: NavLevel[] = [
           {
             id: 'settings',
             icon: <SettingsIcon />,
+            isHidden: false,
             name: 'Settings',
             link: '/settings',
           },
           {
             id: 'profile',
             icon: <PersonIcon />,
+            isHidden: false,
             name: 'Profile',
             link: '/profile',
           },
           {
             id: 'logOut',
             icon: <FiLogOut />,
+            isHidden: false,
             name: 'Log out',
             link: '/',
             func: logoutUser,

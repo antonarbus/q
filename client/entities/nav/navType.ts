@@ -6,6 +6,6 @@ export interface NavLevel {
   func?: () => Promise<void> | void
   shortcut?: string[]
   menuItems?: NavLevel[]
-  isHidden?: boolean
+  isHidden: boolean
   disabled?: boolean
 }

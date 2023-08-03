@@ -3,8 +3,10 @@ import { NavItem } from './NavItem'
 import { Burger } from './NavItem/Burger'
 import { useSelectorTyped } from 'client/shared/hooks'
 
-export function NavList() {
+export function NavList(): React.ReactNode {
   const navStructure = useSelectorTyped((state) => state.nav.navStructure)
+
+  if (navStructure[0] === undefined) return null
 
   return (
     <ul
@@ -15,7 +17,7 @@ export function NavList() {
       }}
     >
       {navStructure[0]
-        .menuItems!.filter((navItem) => !navItem.isHidden)
+        .menuItems?.filter((navItem) => !navItem.isHidden)
         .map((navItem: NavLevel) => (
           <NavItem id={navItem.id} key={navItem.id} />
         ))}
