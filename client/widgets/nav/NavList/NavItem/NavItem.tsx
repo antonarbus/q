@@ -10,7 +10,7 @@ import { TiArrowSortedDown } from 'react-icons/ti'
 import { theme } from 'client/shared/clients'
 import { css } from '@emotion/react'
 
-type Props = {
+interface Props {
   children?: React.ReactNode
   id: string
 }
@@ -44,12 +44,13 @@ export function NavItem({ children, id }: Props) {
   /**
    * needs to open only menu under clicked navItem, otherwise multiple menus are opened under all navItems
    */
-  const shouldOpenThisMenu = useSelectorTyped(
-    (state) => state.nav.idsToCurrentMenuItems.at(1) === id
-  )
-  const navItem = useSelectorTyped((state) =>
-    state.nav.navStructure[0].menuItems!.find((menuItem) => menuItem.id === id)
-  )
+  const shouldOpenThisMenu = useSelectorTyped((state) => state.nav.idsToCurrentMenuItems.at(1) === id)
+  const navItem = useSelectorTyped((state) => {
+    const topNavLevel = state.nav.navStructure[0]
+    if (topNavLevel === undefined) return undefined
+    if (topNavLevel.menuItems === undefined) return undefined
+    return topNavLevel.menuItems.find((menuItem) => menuItem.id === id)
+  })
   const isNestedMenu = !!navItem?.menuItems
   const icon = navItem?.icon
   const name = navItem?.name
@@ -114,13 +115,12 @@ export function NavItem({ children, id }: Props) {
     >
       <Link
         to={link || '/'}
-        onClick={(e) =>
-          clickOnNavItem({ e, navItem, id, navItemRef, disabled })
+        onClick={(e) => { clickOnNavItem({ e, navItem, id, navItemRef, disabled }); }
         }
       >
         {icon && <Icon icon={icon} disabled={disabled} />}
         {!icon && shouldDisplayIcon && (
-          <Icon icon={name && name[0]} disabled={disabled} />
+          <Icon icon={name?.[0]} disabled={disabled} />
         )}
         {name && <span className='nav-item-name'>{name}</span>}
         {isNestedMenu && !disabled && (
