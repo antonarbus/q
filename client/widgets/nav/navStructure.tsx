@@ -6,13 +6,13 @@ import { IoDocumentOutline, IoDocumentsOutline, IoSaveOutline, IoShareOutline } 
 import { IoIosSwap } from 'react-icons/io'
 import logo from './img/logo.svg'
 import { Person as PersonIcon, Settings as SettingsIcon } from '@mui/icons-material'
-import type { TNavItem } from 'client/entities/nav'
+import type { TMenuItem } from 'client/entities/nav'
 import { logoutUser } from '../credentials/logout'
 import { resetItems } from 'client/features/reset_items'
 
 const reactIcon = createElement(IoShareOutline, {})
 
-export const navStructure: TNavItem[] = [
+export const navStructure: TMenuItem[] = [
   {
     id: 'top',
     name: 'top',
