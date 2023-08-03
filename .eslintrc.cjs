@@ -43,5 +43,6 @@ module.exports = {
     'no-console': ['warn', { allow: ['error'] }],
     quotes: [2, 'single', { avoidEscape: true }],
     '@typescript-eslint/naming-convention': 'off',
+    '@typescript-eslint/strict-boolean-expressions': 'off',
   },
 }
