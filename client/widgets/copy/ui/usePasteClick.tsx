@@ -6,7 +6,7 @@ import { exitFromCopyMode, hideCopyContainer, removeItemFromCopyContainer } from
 import { pasteItem, removePasteItem } from 'client/entities/items'
 import { saveItemsLocally } from 'client/features/save_items_locally'
 
-function pasteItemOnClick() {
+function pasteItemOnClick(): void {
   const isPasteTextShown = store.getState().copy.isPasteTextShown
   if (!isPasteTextShown) return
   const { itemId, pastePos } = store.getState().copy.place
@@ -25,17 +25,17 @@ function pasteItemOnClick() {
         // to let froala initialize after animation to avoid motion staggering
         store.dispatch(exitFromCopyMode())
       },
-      1000 * theme.item.animationDuration + 500
+      1000 * theme.item.animationDuration + 500,
     )
   }
 }
 
-export const usePasteClick = () => {
+export const usePasteClick = (): void => {
   useEffectOnce(() => {
     document.addEventListener('click', pasteItemOnClick)
   })
 
-  useUnmount(() => {
+  useUnmount((): void => {
     document.removeEventListener('click', pasteItemOnClick)
   })
 }

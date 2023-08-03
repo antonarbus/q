@@ -1,14 +1,21 @@
+import type { MutableRefObject } from 'react';
 import { useRef, useState } from 'react'
 import { useEffectOnce } from 'react-use'
 
-export const useViewPortObserver = () => {
-  const observerRef = useRef(null)
+interface TReturn {
+  observerRef: MutableRefObject<HTMLDivElement | null>
+  isInsideViewPort: boolean
+}
+
+export const useViewPortObserver = (): TReturn => {
+  const observerRef = useRef<HTMLDivElement | null>(null)
   const [isInsideViewPort, setIsInsideViewPort] = useState(false)
 
   useEffectOnce(() => {
     const options = { root: null, rootMargin: '0px', threshold: 0 }
 
     const callback: IntersectionObserverCallback = ([entry], observer) => {
+      if (!entry) return
       setIsInsideViewPort(entry.isIntersecting)
     }
 
