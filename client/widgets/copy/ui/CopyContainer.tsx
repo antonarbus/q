@@ -12,7 +12,7 @@ export const containerWidth = 200
 export const containerPadding = 20
 export const itemMarginBottom = 5
 
-export const CopyContainer = () => {
+export const CopyContainer = (): JSX.Element => {
   useMovePasteTextAfterCursor()
   usePasteClick()
   useDisableNavItems()

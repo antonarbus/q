@@ -11,6 +11,7 @@ function pasteItemOnClick(): void {
   if (!isPasteTextShown) return
   const { itemId, pastePos } = store.getState().copy.place
   const topItemFromCopyContainer = store.getState().copy.items[0]
+  if (!topItemFromCopyContainer) return
   const cleanedItem = cleanItem(topItemFromCopyContainer)
   store.dispatch(removeItemFromCopyContainer())
   store.dispatch(pasteItem({ itemId, pastePos, item: cleanedItem }))

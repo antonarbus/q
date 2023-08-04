@@ -51,11 +51,13 @@ const variants: Variants = {
 
 let prevFirstItemHeight = 0
 
-export const RestOfCopiedItems = (): EmotionJSX.Element => {
+export const RestOfCopiedItems = (): JSX.Element | null => {
   const items = useSelectorTyped((state) => state.copy.items)
   const isCopying = useSelectorTyped((state) => state.copy.isCopying)
 
   const firstItem = items[0]
+  if (!firstItem) return null
+
   const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / firstItem.width
   const firstItemHeight = firstItem.height * scaleFactorForFirstItem + itemMarginBottom
 
