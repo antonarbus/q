@@ -21,7 +21,7 @@ export function calcNavMediaQueryParams(nav: HTMLElement, logo: HTMLElement): TM
   function calcNavWidthWhenLogoIsOverlay({
     elsToHideClass,
     elsToShowClass,
-  }: Props = {}) {
+  }: Props = {}): number {
     if (elsToHideClass) {
       const elsToHideArr = Array.from(nav.querySelectorAll(elsToHideClass))
       elsToHideArr.forEach((el) => {
@@ -52,10 +52,10 @@ export function calcNavMediaQueryParams(nav: HTMLElement, logo: HTMLElement): TM
 
   // calc init min nav width to accumulate all elements
   const navItemsQty = nav.querySelectorAll('.nav-item').length
-  const navItemWidth = (nav.querySelector('.nav-item')!)
-    .offsetWidth
-  const logoWidth = (nav.querySelector('.logo-container')!)
-    .offsetWidth
+  const navItem = nav.querySelector<HTMLElement>('.nav-item')
+  const navItemWidth = navItem ? navItem.offsetWidth : 0
+  const logoContainer = nav.querySelector<HTMLElement>('.logo-container')
+  const logoWidth = logoContainer ? logoContainer.offsetWidth : 0
   const minNavWidthToIncludeAllItems = navItemWidth * navItemsQty + logoWidth
   nav.style.width = minNavWidthToIncludeAllItems + 200 + 'px'
 
