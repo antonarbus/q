@@ -1,11 +1,19 @@
 import { isOverflown } from 'utils/isOverflown'
 
-const shrinkElementSlightly = (el: HTMLElement) => {
+const shrinkElementSlightly = (el: HTMLElement): void => {
   el.style.width = el.offsetWidth - 10 + 'px'
 }
 
-export function calcNavMediaQueryParams(nav: HTMLElement, logo: HTMLElement) {
-  type Props = {
+export interface TMediaQueryParams {
+  logoExtension: number
+  logoPart: number
+  icon: number
+  name: number
+  burger: number
+}
+
+export function calcNavMediaQueryParams(nav: HTMLElement, logo: HTMLElement): TMediaQueryParams {
+  interface Props {
     elsToHideClass?: string
     elsToShowClass?: string
   }
@@ -17,15 +25,15 @@ export function calcNavMediaQueryParams(nav: HTMLElement, logo: HTMLElement) {
     if (elsToHideClass) {
       const elsToHideArr = Array.from(nav.querySelectorAll(elsToHideClass))
       elsToHideArr.forEach((el) => {
-        ;(el as HTMLElement).style.display = 'none'
+        ; (el as HTMLElement).style.display = 'none'
       })
       const elsToShowArr = Array.from(
         nav.querySelectorAll(
-          elsToShowClass || 'non-existing-class-where-nothing-will-be-found'
-        )
+          elsToShowClass || 'non-existing-class-where-nothing-will-be-found',
+        ),
       )
       elsToShowArr.forEach((el) => {
-        ;(el as HTMLElement).style.display = ''
+        ; (el as HTMLElement).style.display = ''
       })
     }
     let i = 0
@@ -34,7 +42,7 @@ export function calcNavMediaQueryParams(nav: HTMLElement, logo: HTMLElement) {
       i++
       if (i > 1000) {
         console.log(
-          'Problem! Over 1000 iterations in calcNavWidthWhenLogoIsOverlay() function'
+          'Problem! Over 1000 iterations in calcNavWidthWhenLogoIsOverlay() function',
         )
         break
       }
@@ -44,9 +52,9 @@ export function calcNavMediaQueryParams(nav: HTMLElement, logo: HTMLElement) {
 
   // calc init min nav width to accumulate all elements
   const navItemsQty = nav.querySelectorAll('.nav-item').length
-  const navItemWidth = (nav.querySelector('.nav-item') as HTMLElement)
+  const navItemWidth = (nav.querySelector('.nav-item')!)
     .offsetWidth
-  const logoWidth = (nav.querySelector('.logo-container') as HTMLElement)
+  const logoWidth = (nav.querySelector('.logo-container')!)
     .offsetWidth
   const minNavWidthToIncludeAllItems = navItemWidth * navItemsQty + logoWidth
   nav.style.width = minNavWidthToIncludeAllItems + 200 + 'px'
@@ -65,9 +73,9 @@ export function calcNavMediaQueryParams(nav: HTMLElement, logo: HTMLElement) {
   })
   nav
     .querySelectorAll(
-      '.app-ext, .uotation, .icon-round-wrapper, .nav-item-name'
+      '.app-ext, .uotation, .icon-round-wrapper, .nav-item-name',
     )
-    .forEach((el) => el.setAttribute('style', ''))
+    .forEach((el) => { el.setAttribute('style', ''); })
   nav.setAttribute('style', '')
 
   return { logoExtension, logoPart, icon, name, burger }

@@ -7,9 +7,9 @@ import {
 } from 'client/entities/nav'
 import { calcNavMediaQueryParams } from './calcNavMediaQueryParams'
 import { useFirstMountState } from 'react-use'
-import { RefDiv } from 'client/types'
+import type { RefDiv } from 'client/types'
 
-type Props = {
+interface Props {
   navRef: RefDiv
   logoRef: RefDiv
 }
@@ -25,7 +25,7 @@ export function useMediaQueryValues({ navRef, logoRef }: Props) {
     const { logoExtension, logoPart, icon, name, burger } =
       calcNavMediaQueryParams(navRef.current, logoRef.current)
     dispatch(
-      setNavMediaQueryWidths({ logoExtension, logoPart, icon, name, burger })
+      setNavMediaQueryWidths({ logoExtension, logoPart, icon, name, burger }),
     )
   }, [])
 
@@ -42,7 +42,7 @@ export function useMediaQueryValues({ navRef, logoRef }: Props) {
     const { logoExtension, logoPart, icon, name, burger } =
       calcNavMediaQueryParams(navRef.current, logoRef.current)
     dispatch(
-      setNavMediaQueryWidths({ logoExtension, logoPart, icon, name, burger })
+      setNavMediaQueryWidths({ logoExtension, logoPart, icon, name, burger }),
     )
     dispatch(enableMedia())
   }, [mediaEnabled])

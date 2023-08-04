@@ -28,6 +28,7 @@ export const DeleteIcon = ({ index }: Props): EmotionJSX.Element => {
         gsap.to(ref.current, { duration: 0.2, scale: 0.9 })
         if (isLastItem) return
         const item = store.getState().items[index]
+        if (!item) return
         dispatch(deleteItem({ itemId: item.id }))
         saveItemsLocally()
       }}

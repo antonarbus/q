@@ -76,16 +76,19 @@ const itemsSlice = createSlice({
     tellItemSavedLocally: (state, action: PayloadAction<{ index: number }>) => {
       const { index } = action.payload
       const item = state[index]
+      if (!item) return
       item.msg = 'saved locally'
     },
     removeItemMsg: (state, action: PayloadAction<{ index: number }>) => {
       const { index } = action.payload
       const item = state[index]
+      if (!item) return
       item.msg = ''
     },
     saveItemWidth: (state, action: PayloadAction<{ index: number; width: number }>) => {
       const { index, width } = action.payload
       const item = state[index]
+      if (!item) return
       item.width = width
     },
     saveItemHeight: (
@@ -94,6 +97,7 @@ const itemsSlice = createSlice({
     ) => {
       const { index, height } = action.payload
       const item = state[index]
+      if (!item) return
       item.height = height
     },
     saveText: (state, action: PayloadAction<{
@@ -104,6 +108,7 @@ const itemsSlice = createSlice({
     }>) => {
       const { index, html } = action.payload
       const item = state[index]
+      if (!item) return
       if (item.type !== 'text') return
       if (html !== undefined) item.text.html = html
     },
