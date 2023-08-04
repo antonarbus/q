@@ -75,7 +75,9 @@ const navSlice = createSlice({
     },
     disableTopMenuItemsExceptItemId: (state, action: PayloadAction<{ exceptItemId?: string }>) => {
       const { exceptItemId } = action.payload
-      const topNavItemsIds = state.navStructure[0].menuItems?.map((item) => item.id)
+      const topLevelNavMenu = state.navStructure[0]
+      if (!topLevelNavMenu) return
+      const topNavItemsIds = topLevelNavMenu.menuItems?.map((item) => item.id)
       topNavItemsIds?.forEach((id) => {
         if (id === exceptItemId) return
         setMenuItemPropValue({
@@ -87,7 +89,9 @@ const navSlice = createSlice({
       })
     },
     enableTopMenuItems: (state) => {
-      const topNavItemsIds = state.navStructure[0].menuItems?.map((item) => item.id)
+      const topLevelNavMenu = state.navStructure[0]
+      if (!topLevelNavMenu) return
+      const topNavItemsIds = topLevelNavMenu.menuItems?.map((item) => item.id)
       topNavItemsIds?.forEach((id) => {
         setMenuItemPropValue({
           menu: state.navStructure,
@@ -158,18 +162,20 @@ export const {
 } = navSlice.actions
 
 export const selectMenuItemByIdsChainSelector =
-  (idsToCurrentMenuItems: string[]) => (state: RootState) => {
-    const navStructure = state.nav.navStructure
+  (idsToCurrentMenuItems: string[]) => (state: RootState): TMenuItem[] => {
+    const topLevelNavMenu = state.nav.navStructure[0]
+    if (!topLevelNavMenu) return navStructure
 
     let clicked: TMenuItem[] = navStructure
     let tempMenu: TMenuItem[] = navStructure
+
     idsToCurrentMenuItems.forEach((id: string) => {
       if (id === 'burger') {
-        clicked = navStructure[0].menuItems!
+        clicked = topLevelNavMenu.menuItems ?? navStructure
         return clicked
       }
       if (id !== 'burger') {
-        clicked = tempMenu.find((menuItem) => menuItem.id === id)?.menuItems || []
+        clicked = tempMenu.find((menuItem) => menuItem.id === id)?.menuItems ?? []
       }
       tempMenu = clicked
     })
