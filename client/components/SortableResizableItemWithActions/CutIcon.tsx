@@ -6,13 +6,12 @@ import { deleteItem, saveItemHeight, selectIsLastItem } from 'client/entities/it
 import { cleanHtml } from 'utils/itemsUtils'
 import { saveItemsLocally } from 'client/features/save_items_locally'
 import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/entities/copy'
-import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 
 interface Props {
   index: number
 }
 
-export const CutIcon = ({ index }: Props): EmotionJSX.Element => {
+export const CutIcon = ({ index }: Props): JSX.Element => {
   const dispatch = useDispatchTyped()
   const isLastItem = useSelectorTyped(selectIsLastItem)
 
@@ -36,6 +35,7 @@ export const CutIcon = ({ index }: Props): EmotionJSX.Element => {
         dispatch(saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
         dispatch(showCopyContainer())
         const itemToCut = store.getState().items[index]
+        if (!itemToCut) return
         const itemElement = (e.target as HTMLElement).closest('.item')
         if (itemElement === null) return
         const itemPaperElement = itemElement.querySelector('.item-paper')

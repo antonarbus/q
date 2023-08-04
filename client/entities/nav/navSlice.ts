@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from 'client/app/store'
 import { setMenuItemPropValue } from './setMenuItemPropValue'
 import type { TMenuItem } from './TMenuItem'
+import type { TMediaQueryParams } from 'client/widgets/nav';
 
 const initialState = {
   navStructure,
@@ -38,24 +39,23 @@ const navSlice = createSlice({
     enableMedia: (state) => {
       state.mediaEnabled = true
     },
-    setNavMediaQueryWidths: (state, action) => {
-      state.mediaQueryWidth = action.payload
+    setNavMediaQueryWidths: (state, action: PayloadAction<TMediaQueryParams>) => {
+      const elementMediaQueryWidths = action.payload
+      state.mediaQueryWidth = elementMediaQueryWidths
     },
-    setNavItemRightPos: (state, action) => {
-      state.navItemRightPos = action.payload
+    setNavItemRightPos: (state, action: PayloadAction<number>) => {
+      const rightPos = action.payload
+      state.navItemRightPos = rightPos
     },
-    openMenuWithId: (state, action) => {
-      state.idsToCurrentMenuItems = state.idsToNextMenuItems = [
-        'top',
-        action.payload,
-      ]
+    openMenuWithId: (state, action: PayloadAction<string>) => {
+      state.idsToCurrentMenuItems = state.idsToNextMenuItems = ['top', action.payload]
     },
     closeMenu: (state) => {
       state.idsToNextMenuItems = state.idsToCurrentMenuItems = ['top']
       state.burger.isOpen = false
       state.menuItemHoverIndex = 0
     },
-    goDownInCurrentMenu: (state, action) => {
+    goDownInCurrentMenu: (state, action: PayloadAction<string>) => {
       state.idsToCurrentMenuItems = [
         ...state.idsToCurrentMenuItems,
         action.payload,
@@ -64,23 +64,18 @@ const navSlice = createSlice({
     goUpInCurrentMenu: (state) => {
       state.idsToCurrentMenuItems = state.idsToCurrentMenuItems.slice(0, -1)
     },
-    goDownInNextMenu: (state, action) => {
+    goDownInNextMenu: (state, action: PayloadAction<string>) => {
       state.idsToNextMenuItems = [...state.idsToNextMenuItems, action.payload]
     },
     goUpInNextMenu: (state) => {
       state.idsToNextMenuItems = state.idsToNextMenuItems.slice(0, -1)
     },
-    setMenuItemHoverIndex: (state, action) => {
+    setMenuItemHoverIndex: (state, action: PayloadAction<number>) => {
       state.menuItemHoverIndex = action.payload
     },
-    disableTopMenuItemsExceptItemId: (
-      state,
-      action: PayloadAction<{ exceptItemId?: string }>,
-    ) => {
+    disableTopMenuItemsExceptItemId: (state, action: PayloadAction<{ exceptItemId?: string }>) => {
       const { exceptItemId } = action.payload
-      const topNavItemsIds = state.navStructure[0].menuItems?.map(
-        (item) => item.id,
-      )
+      const topNavItemsIds = state.navStructure[0].menuItems?.map((item) => item.id)
       topNavItemsIds?.forEach((id) => {
         if (id === exceptItemId) return
         setMenuItemPropValue({
@@ -92,9 +87,7 @@ const navSlice = createSlice({
       })
     },
     enableTopMenuItems: (state) => {
-      const topNavItemsIds = state.navStructure[0].menuItems?.map(
-        (item) => item.id,
-      )
+      const topNavItemsIds = state.navStructure[0].menuItems?.map((item) => item.id)
       topNavItemsIds?.forEach((id) => {
         setMenuItemPropValue({
           menu: state.navStructure,
@@ -176,8 +169,7 @@ export const selectMenuItemByIdsChainSelector =
         return clicked
       }
       if (id !== 'burger') {
-        clicked =
-          tempMenu.find((menuItem) => menuItem.id === id)?.menuItems || []
+        clicked = tempMenu.find((menuItem) => menuItem.id === id)?.menuItems || []
       }
       tempMenu = clicked
     })
