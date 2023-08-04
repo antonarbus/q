@@ -44,7 +44,7 @@ interface TBoqCols {
   }
 }
 
-type TBoqItem = TCommonItem & {
+interface TBoqItem extends TCommonItem {
   type: 'boq'
   boq: {
     header: {
@@ -69,14 +69,14 @@ type TBoqItem = TCommonItem & {
   }
 }
 
-type TTextItem = TCommonItem & {
+interface TTextItem extends TCommonItem {
   type: 'text'
   text: {
     html: string
   }
 }
 
-export type TPasteItem = TCommonItem & {
+export interface TPasteItem extends TCommonItem {
   type: 'paste'
 }
 
