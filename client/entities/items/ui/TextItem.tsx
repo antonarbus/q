@@ -24,7 +24,7 @@ export const TextItem = ({ index }: IProps): EmotionJSX.Element => {
         froalaElementRef={froalaElementRef}
         getHtml={(): string => {
           const item = store.getState().items[index]
-          if (item === undefined) return ''
+          if (!item) return ''
           if (item.type !== 'text') return ''
           return item.text.html
         }}

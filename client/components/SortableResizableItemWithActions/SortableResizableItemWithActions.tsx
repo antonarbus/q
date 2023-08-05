@@ -18,7 +18,7 @@ interface IProps {
 export const SortableResizableItemWithActions = ({
   index,
   children,
-}: IProps) => {
+}: IProps): JSX.Element => {
   const isDisabled = useIsDisabledItem()
 
   return (
@@ -40,8 +40,7 @@ export const SortableResizableItemWithActions = ({
         </ReduceOpacityIfPasteHere>
         <PasteTextInMiddle index={index} />
       </ResizablePaper>
-      <ActionsContainer />{' '}
-      {/* Right action container is used for symmetry, now it is empty, probably add there some icons later */}
+      <ActionsContainer /> {/* Right action container is used for symmetry, now it is empty, probably add there some icons later */}
     </SortableItem>
   )
 }
