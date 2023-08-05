@@ -3,7 +3,7 @@ import { useLayoutEffect, useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 import type { RefDiv } from 'client/types'
 
-interface Props {
+interface IProps {
   children?: React.ReactNode
   content?: React.ReactNode
   color?: string
@@ -25,7 +25,7 @@ export const BackdropWithSlidableContent = ({
   content,
   onSlideIn,
   onSlideOut,
-}: Props): JSX.Element => {
+}: IProps): JSX.Element => {
   const contentRef = useRef() as RefDiv
   useLayoutEffect(() => {
     slideElement({

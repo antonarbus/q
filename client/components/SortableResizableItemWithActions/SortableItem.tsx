@@ -1,11 +1,12 @@
-import { SortableElement, SortableElementProps } from 'react-sortable-hoc'
+import type { SortableElementProps } from 'react-sortable-hoc';
+import { SortableElement } from 'react-sortable-hoc'
 import { motion } from 'framer-motion'
 import { theme } from 'client/shared/clients'
-import { Children, RefDiv } from 'client/types'
+import type { Children, RefDiv } from 'client/types'
 import { store } from 'client/app/store'
 import { useRef } from 'react'
 
-type Props = {
+interface IProps {
   children: Children
   i: number // "index" is occupied internally by SortableElement
 }
@@ -15,10 +16,10 @@ interface ISortableItem extends SortableElementProps {
   i: number
 }
 
-export const SortableItem: React.ComponentClass<ISortableItem, any> =
-  SortableElement(({ children, i }: Props) => {
+export const SortableItem: React.ComponentClass<ISortableItem> =
+  SortableElement(({ children, i }: IProps) => {
     const ref = useRef() as RefDiv
-    const item = store.getState().items?.[i]
+    const item = store.getState().items[i]
 
     return (
       <motion.div

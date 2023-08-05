@@ -7,11 +7,11 @@ import { cleanHtml } from 'utils/itemsUtils'
 import { saveItemsLocally } from 'client/features/save_items_locally'
 import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/entities/copy'
 
-interface Props {
+interface IProps {
   index: number
 }
 
-export const CutIcon = ({ index }: Props): JSX.Element => {
+export const CutIcon = ({ index }: IProps): JSX.Element => {
   const dispatch = useDispatchTyped()
   const isLastItem = useSelectorTyped(selectIsLastItem)
 

@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
-import type { TItems } from './types'
+import type { TItem } from './types'
 
-export const defaultItems: TItems = [
+export const defaultItems: TItem[] = [
   {
     id: nanoid(3),
     type: 'text',

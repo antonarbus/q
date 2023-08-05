@@ -6,14 +6,14 @@ import { containerPadding, containerWidth, itemMarginBottom } from './CopyContai
 import { theme } from 'client/shared/clients'
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 
-interface AnimationPropsType {
+interface IProps {
   isCopying: boolean
   firstItemHeight: number
   prevFirstItemHeight: number
 }
 
 const variants: Variants = {
-  initial: ({ isCopying, firstItemHeight }: AnimationPropsType) => {
+  initial: ({ isCopying, firstItemHeight }: IProps) => {
     if (isCopying) {
       return {
         y: -firstItemHeight,
@@ -21,7 +21,7 @@ const variants: Variants = {
     }
     return {}
   },
-  animate: ({ isCopying }: AnimationPropsType) => {
+  animate: ({ isCopying }: IProps) => {
     if (isCopying) {
       return {
         y: 0,
@@ -34,7 +34,7 @@ const variants: Variants = {
     }
     return {}
   },
-  exit: ({ isCopying, prevFirstItemHeight }: AnimationPropsType) => {
+  exit: ({ isCopying, prevFirstItemHeight }: IProps) => {
     if (!isCopying) {
       return {
         y: -prevFirstItemHeight,
@@ -61,7 +61,7 @@ export const RestOfCopiedItems = (): JSX.Element | null => {
   const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / firstItem.width
   const firstItemHeight = firstItem.height * scaleFactorForFirstItem + itemMarginBottom
 
-  const animationProps: AnimationPropsType = {
+  const animationProps: IProps = {
     isCopying,
     firstItemHeight,
     prevFirstItemHeight,

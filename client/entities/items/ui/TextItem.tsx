@@ -8,11 +8,11 @@ import type { RefAny, RefDiv } from 'client/types'
 import { saveText } from 'client/entities/items'
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 
-interface Props {
+interface IProps {
   index: number
 }
 
-export const TextItem = ({ index }: Props): EmotionJSX.Element => {
+export const TextItem = ({ index }: IProps): EmotionJSX.Element => {
   const froalaElementRef = useRef() as RefDiv
   const editorRef = useRef(null) as RefAny
 

@@ -3,7 +3,7 @@ import { closeMenu, openMenuWithId, setNavItemRightPos } from 'client/entities/n
 import { store } from 'client/app/store'
 import type { Event } from 'client/types'
 
-interface Props {
+interface IProps {
   e: Event
   navItem: TMenuItem | undefined
   id: string
@@ -17,7 +17,7 @@ export function clickOnNavItem({
   id,
   navItemRef,
   disabled,
-}: Props) {
+}: IProps) {
   ; (document.activeElement as HTMLElement).blur() // to prevent open an active navItem link on Enter key
 
   const link = navItem?.link

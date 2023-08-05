@@ -16,14 +16,14 @@ export function useLogin() {
   const from = location.state?.from?.pathname || '/'
   const dispatch = useDispatchTyped()
 
-  interface Props {
+  interface IProps {
     e: Event
     email: string
     password: string
     cardElement: HTMLElement
   }
 
-  async function loginUser({ e, email, password, cardElement }: Props) {
+  async function loginUser({ e, email, password, cardElement }: IProps) {
     e.preventDefault()
     const method = 'POST'
     const headers = { 'Content-Type': 'application/json' }

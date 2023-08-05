@@ -6,17 +6,17 @@ import { containerPadding, containerWidth, itemMarginBottom } from './CopyContai
 import { theme } from 'client/shared/clients'
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 
-interface AnimationPropsType {
+interface IProps {
   isCopying: boolean
   isSoleItem: boolean
 }
 
 const variants: Variants = {
-  initial: ({ isCopying }: AnimationPropsType) => {
+  initial: ({ isCopying }: IProps) => {
     if (isCopying) return { y: -500 }
     return {}
   },
-  animate: ({ isCopying, isSoleItem }: AnimationPropsType) => {
+  animate: ({ isCopying, isSoleItem }: IProps) => {
     if (isCopying) {
       return {
         y: 0,
@@ -29,7 +29,7 @@ const variants: Variants = {
     }
     return {}
   },
-  exit: ({ isCopying }: AnimationPropsType) => {
+  exit: ({ isCopying }: IProps) => {
     if (!isCopying) {
       return {
         y: -500,
@@ -48,7 +48,7 @@ export const FirstCopiedItem = (): JSX.Element | null => {
   const items = useSelectorTyped((state) => state.copy.items)
   const isCopying = useSelectorTyped((state) => state.copy.isCopying)
 
-  const animationProps: AnimationPropsType = {
+  const animationProps: IProps = {
     isCopying,
     isSoleItem: items.length === 1,
   }

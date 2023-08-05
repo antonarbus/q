@@ -5,24 +5,24 @@ import { nanoid } from 'nanoid'
 import { defaultItems } from './defaultItems'
 import { cleanItem } from 'utils/itemsUtils'
 import type { CopyPlaceType, PastePosType } from 'client/entities/copy'
-import type { TItem, TItems, TPasteItem } from './types'
+import type { TItem, IPasteItem } from './types'
 import { jsonParseSafe } from 'utils/jsonParseSafe'
 
-const returnDefaultOrLocalItems = (): TItems => {
+const returnDefaultOrLocalItems = (): TItem[] => {
   const itemsFromLocalStorage = localStorage.getItem('items')
   if (itemsFromLocalStorage === null) return defaultItems
-  const items = jsonParseSafe<TItems>(itemsFromLocalStorage)
+  const items = jsonParseSafe<TItem[]>(itemsFromLocalStorage)
   if (items === undefined) return defaultItems
   return items
 }
 
-const initialState: TItems = returnDefaultOrLocalItems()
+const initialState: TItem[] = returnDefaultOrLocalItems()
 
 const itemsSlice = createSlice({
   name: 'items',
   initialState,
   reducers: {
-    reOrderItems: (state, action: PayloadAction<{ reOrderedItems: TItems }>) => {
+    reOrderItems: (state, action: PayloadAction<{ reOrderedItems: TItem[] }>) => {
       const { reOrderedItems } = action.payload
       return reOrderedItems
     },
@@ -41,12 +41,12 @@ const itemsSlice = createSlice({
       const itemToPaste = { ...cleanedItem, id: nanoid(5) }
       const hoveredItemIndex = state.findIndex(({ id }) => id === itemId)
 
-      interface SplicingSettings {
+      interface ISplicingSettings {
         insertAtIndex: number
         deleteCount: number
       }
 
-      const getSpliceSettings = (): SplicingSettings => {
+      const getSpliceSettings = (): ISplicingSettings => {
         const spliceSettings = {
           insertAtIndex: hoveredItemIndex,
           deleteCount: 0,
@@ -119,7 +119,7 @@ const itemsSlice = createSlice({
       if (pastePos === 'middle') return itemsWithoutPasteText
       const insertAtIndex = itemsWithoutPasteText.findIndex((item) => item.id === itemId) + (pastePos === 'bottom' ? 1 : 0)
 
-      const pasteTextEl: TPasteItem = {
+      const pasteTextEl: IPasteItem = {
         id: 'paste id',
         type: 'paste',
         height: 0,
@@ -155,12 +155,12 @@ export const selectIsLastItem = (state: RootState): boolean =>
   state.items.filter((item) => item.type !== 'paste').length === 1
 
 export const selectItemsShape = createSelector(
-  [(state: RootState): TItems => state.items],
+  [(state: RootState): TItem[] => state.items],
   (items) => items,
   {
     memoizeOptions: {
       // resultEqualityCheck: isEqual
-      resultEqualityCheck: (prevItems: TItems, currentItems: TItems) => {
+      resultEqualityCheck: (prevItems: TItem[], currentItems: TItem[]) => {
         const addedOrDeletedItem = prevItems.length !== currentItems.length
         if (addedOrDeletedItem) return false
         const itemsIdsDoNotMatch = prevItems.some((item, index) => item.id !== currentItems[index]?.id)

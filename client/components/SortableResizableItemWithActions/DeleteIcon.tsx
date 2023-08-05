@@ -8,11 +8,11 @@ import type { RefSpan } from 'client/types'
 import { saveItemsLocally } from 'client/features/save_items_locally'
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 
-interface Props {
+interface IProps {
   index: number
 }
 
-export const DeleteIcon = ({ index }: Props): EmotionJSX.Element => {
+export const DeleteIcon = ({ index }: IProps): EmotionJSX.Element => {
   const dispatch = useDispatchTyped()
   const ref = useRef() as RefSpan
   const isLastItem = useSelectorTyped(selectIsLastItem)

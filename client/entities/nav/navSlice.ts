@@ -3,7 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from 'client/app/store'
 import { setMenuItemPropValue } from './setMenuItemPropValue'
-import type { TMenuItem } from './TMenuItem'
+import type { IMenuItem } from './TMenuItem'
 import type { TMediaQueryParams } from 'client/widgets/nav';
 
 const initialState = {
@@ -162,12 +162,12 @@ export const {
 } = navSlice.actions
 
 export const selectMenuItemByIdsChainSelector =
-  (idsToCurrentMenuItems: string[]) => (state: RootState): TMenuItem[] => {
+  (idsToCurrentMenuItems: string[]) => (state: RootState): IMenuItem[] => {
     const topLevelNavMenu = state.nav.navStructure[0]
     if (!topLevelNavMenu) return navStructure
 
-    let clicked: TMenuItem[] = navStructure
-    let tempMenu: TMenuItem[] = navStructure
+    let clicked: IMenuItem[] = navStructure
+    let tempMenu: IMenuItem[] = navStructure
 
     idsToCurrentMenuItems.forEach((id: string) => {
       if (id === 'burger') {

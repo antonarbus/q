@@ -2,12 +2,12 @@ import type { MutableRefObject } from 'react';
 import { useRef, useState } from 'react'
 import { useEffectOnce } from 'react-use'
 
-interface TReturn {
+interface IReturn {
   observerRef: MutableRefObject<HTMLDivElement | null>
   isInsideViewPort: boolean
 }
 
-export const useViewPortObserver = (): TReturn => {
+export const useViewPortObserver = (): IReturn => {
   const observerRef = useRef<HTMLDivElement | null>(null)
   const [isInsideViewPort, setIsInsideViewPort] = useState(false)
 
