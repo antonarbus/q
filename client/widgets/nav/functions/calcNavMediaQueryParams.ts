@@ -4,7 +4,7 @@ const shrinkElementSlightly = (el: HTMLElement): void => {
   el.style.width = el.offsetWidth - 10 + 'px'
 }
 
-export interface TMediaQueryParams {
+export interface IItemsMediaQueryWidths {
   logoExtension: number
   logoPart: number
   icon: number
@@ -12,8 +12,8 @@ export interface TMediaQueryParams {
   burger: number
 }
 
-export function calcNavMediaQueryParams(nav: HTMLElement, logo: HTMLElement): TMediaQueryParams {
-  interface Props {
+export function calcNavMediaQueryParams(nav: HTMLElement, logo: HTMLElement): IItemsMediaQueryWidths {
+  interface IProps {
     elsToHideClass?: string
     elsToShowClass?: string
   }
@@ -21,7 +21,7 @@ export function calcNavMediaQueryParams(nav: HTMLElement, logo: HTMLElement): TM
   function calcNavWidthWhenLogoIsOverlay({
     elsToHideClass,
     elsToShowClass,
-  }: Props = {}): number {
+  }: IProps = {}): number {
     if (elsToHideClass) {
       const elsToHideArr = Array.from(nav.querySelectorAll(elsToHideClass))
       elsToHideArr.forEach((el) => {

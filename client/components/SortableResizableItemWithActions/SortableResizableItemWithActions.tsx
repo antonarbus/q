@@ -10,7 +10,7 @@ import { useIsDisabledItem } from './useIsDisabledItem'
 import { Msg } from './Msg'
 import { ReduceOpacityIfPasteHere } from './ReduceOpacityIfPasteHere'
 
-interface Props {
+interface IProps {
   index: number
   children: React.ReactNode
 }
@@ -18,7 +18,7 @@ interface Props {
 export const SortableResizableItemWithActions = ({
   index,
   children,
-}: Props) => {
+}: IProps) => {
   const isDisabled = useIsDisabledItem()
 
   return (

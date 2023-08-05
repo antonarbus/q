@@ -5,12 +5,12 @@ import { saveItemWidth } from 'client/entities/items'
 import type { Children } from 'client/types'
 import { saveItemsLocally } from 'client/features/save_items_locally'
 
-interface Props {
+interface IProps {
   children: Children
   index: number
 }
 
-export const ResizablePaper = ({ children, index }: Props) => {
+export const ResizablePaper = ({ children, index }: IProps) => {
   const dispatch = useDispatchTyped()
   const item = store.getState().items[index]
   if (!item) return null
@@ -31,8 +31,8 @@ export const ResizablePaper = ({ children, index }: Props) => {
       maxWidth='100%'
       bounds={'window' || 'parent'}
       enable={{ right: true, left: true }}
-      onResize={(e, direction, refToElement, delta) => {}}
-      onResizeStart={() => {}}
+      onResize={(e, direction, refToElement, delta) => { }}
+      onResizeStart={() => { }}
       onResizeStop={(e, direction, refToElement) => {
         const width = parseInt(refToElement.style.width)
         dispatch(saveItemWidth({ index, width }))

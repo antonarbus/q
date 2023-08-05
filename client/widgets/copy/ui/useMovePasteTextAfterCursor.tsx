@@ -9,12 +9,12 @@ import {
 } from 'client/entities/copy'
 import { insertPasteItem } from 'client/entities/items'
 
-interface Props {
+interface IProps {
   item: Element
   e: MouseEvent
 }
 
-function getPastePlace({ item, e }: Props): CopyPlaceType {
+function getPastePlace({ item, e }: IProps): CopyPlaceType {
   const { height, top } = item.getBoundingClientRect()
   const yWithinElement = e.clientY - top
   const distToTop = yWithinElement

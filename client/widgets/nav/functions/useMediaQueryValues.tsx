@@ -9,12 +9,12 @@ import { calcNavMediaQueryParams } from './calcNavMediaQueryParams'
 import { useFirstMountState } from 'react-use'
 import type { RefDiv } from 'client/types'
 
-interface Props {
+interface IProps {
   navRef: RefDiv
   logoRef: RefDiv
 }
 
-export function useMediaQueryValues({ navRef, logoRef }: Props) {
+export function useMediaQueryValues({ navRef, logoRef }: IProps) {
   const dispatch = useDispatchTyped()
   const isFirstMount = useFirstMountState()
   const navStructure = useSelectorTyped((state) => state.nav.navStructure)

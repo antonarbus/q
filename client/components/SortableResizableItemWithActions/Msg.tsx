@@ -3,11 +3,11 @@ import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useUpdateEffect } from 'react-use'
 
-interface Props {
+interface IProps {
   index: number
 }
 
-export const Msg = ({ index }: Props) => {
+export const Msg = ({ index }: IProps) => {
   const dispatch = useDispatchTyped()
   const msg = useSelectorTyped((state) => state.items[index]?.msg)
   // const { msg } = item

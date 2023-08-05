@@ -10,7 +10,7 @@ import { TiArrowSortedDown } from 'react-icons/ti'
 import { theme } from 'client/shared/clients'
 import { css } from '@emotion/react'
 
-interface Props {
+interface IProps {
   children?: React.ReactNode
   id: string
 }
@@ -26,7 +26,7 @@ interface Props {
  * - required to avoid Menu to go over the narrow window
  */
 
-export function NavItem({ children, id }: Props): JSX.Element {
+export function NavItem({ children, id }: IProps): JSX.Element {
   // required to avoid Menu to go over the narrow window
   const navItemRef = useRef() as React.MutableRefObject<HTMLLIElement>
 

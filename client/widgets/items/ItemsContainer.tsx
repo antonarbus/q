@@ -13,7 +13,7 @@ import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 // example with TypeScript
 // https://codesandbox.io/s/odfrontendeveloper-react-sortable-hoc-example-t96d8x?file=/src/examples/Items.tsx:518-635
 
-interface Props {
+interface IProps {
   children: Children
 }
 
@@ -21,7 +21,7 @@ interface ISortableContainer extends SortableContainerProps {
   children: Children
 }
 
-const DraggableItems: React.ComponentClass<ISortableContainer> = SortableContainer(({ children }: Props) => (
+const DraggableItems: React.ComponentClass<ISortableContainer> = SortableContainer(({ children }: IProps) => (
   <motion.div
     id='items'
     initial={{
@@ -48,7 +48,7 @@ const DraggableItems: React.ComponentClass<ISortableContainer> = SortableContain
 
 // todo: break it into itemsFeedLayout and itemsReOrder feature
 
-export const ItemsContainer = ({ children }: Props): EmotionJSX.Element => {
+export const ItemsContainer = ({ children }: IProps): EmotionJSX.Element => {
   const dispatch = useDispatchTyped()
 
   return (

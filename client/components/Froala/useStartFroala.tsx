@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react'
 import type { SaveFroalaReducer } from './Froala'
 import { saveItemsLocally } from 'client/features/save_items_locally'
 
-interface Props {
+interface IProps {
   index: number
   getHtml: () => string
   onClickAwayIfHtmChanged?: Function
@@ -22,7 +22,7 @@ declare const window: Window &
 
 window.froalas = []
 
-export const useStartFroala = ({ index, getHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder, saveFroalaReducer, rowIndex }: Props) => {
+export const useStartFroala = ({ index, getHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder, saveFroalaReducer, rowIndex }: IProps) => {
   const dispatch = useDispatchTyped()
   const prevHtmlRef = useRef(getHtml()) as RefString
 
@@ -112,8 +112,8 @@ export const useStartFroala = ({ index, getHtml, onClickAwayIfHtmChanged, froala
             'fr-class-transparency': 'Transparent',
           },
           events: {
-            'paste.afterCleanup': function (clipboardHtml: string) {},
-            click: (event: MouseEvent) => {},
+            'paste.afterCleanup': function (clipboardHtml: string) { },
+            click: (event: MouseEvent) => { },
             contentChanged: () => {
               if (!froalaElementRef.current) return
               const updatedHtml = editorRef.current.html.get()
@@ -135,7 +135,7 @@ export const useStartFroala = ({ index, getHtml, onClickAwayIfHtmChanged, froala
           window.froalas = window.froalas.filter(({ current }) => current !== null)
           // console.log('froalas are initiated')
           console.log('froalas number', window.froalas.length)
-        }
+        },
       )
     }
 

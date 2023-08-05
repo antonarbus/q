@@ -4,7 +4,7 @@ import { tellItemsSavedLocally } from './tellItemsSavedLocally'
 import type { TItem } from 'client/entities/items';
 import { tellItemSavedLocally } from 'client/entities/items'
 
-interface Props {
+interface IProps {
   items?: TItem[]
   msgAboveItemWithIndex?: number
 }
@@ -12,7 +12,7 @@ interface Props {
 export const saveItemsLocally = ({
   items = store.getState().items,
   msgAboveItemWithIndex,
-}: Props = {}): void => {
+}: IProps = {}): void => {
   saveItemsIntoLocalStorage({ items })
   tellItemsSavedLocally()
   if (msgAboveItemWithIndex !== undefined) {

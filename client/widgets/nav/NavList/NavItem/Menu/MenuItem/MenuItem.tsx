@@ -9,12 +9,12 @@ import { clickOnMenuItem } from './function/clickOnMenuItem'
 import type { TMenuItem } from 'client/entities/nav';
 import { setMenuItemHoverIndex } from 'client/entities/nav'
 
-interface Props {
+interface IProps {
   menuItem: TMenuItem
   hoveredMenuItemIndex: number
 }
 
-export function MenuItem({ menuItem, hoveredMenuItemIndex }: Props) {
+export function MenuItem({ menuItem, hoveredMenuItemIndex }: IProps) {
   const dispatch = useDispatchTyped()
   const isHovered = useSelectorTyped(
     (state) => state.nav.menuItemHoverIndex === hoveredMenuItemIndex,

@@ -12,4 +12,4 @@ export {
   exitFromCopyMode,
 } from './model/copySlice'
 
-export type { PastePosType, CopyPlaceType, CopyItemType } from './model/types'
+export type { TPastePos as PastePosType, ICopyPlace as CopyPlaceType, TCopyItem as CopyItemType } from './model/types'
