@@ -11,11 +11,12 @@ export const usePutCaretAtTheEndOfText = ({
   index,
   editorRef,
   froalaElementRef,
-}: Props) => {
+}: Props): void => {
   useEffect(() => {
-    const focusOnTextIfCellOrPaddingAreClicked = (e: MouseEvent) => {
+    const focusOnTextIfCellOrPaddingAreClicked = (e: MouseEvent): void => {
       // https://stackoverflow.com/a/35191761/7239778
-      const clickedElement = e.target as HTMLElement
+      const clickedElement = e.target
+      if (!(clickedElement instanceof HTMLElement)) return
 
       if (clickedElement.matches('.fr-box')) {
         editorRef.current.selection.setAtEnd(editorRef.current.$el.get(0))
