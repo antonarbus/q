@@ -2,7 +2,7 @@ import { useDispatchTyped } from 'client/shared/hooks'
 import { store } from 'client/shared/clients'
 import { Resizable } from 're-resizable'
 import { saveItemWidth } from 'client/entities/items'
-import { saveItemsLocally } from 'client/features/save_items_locally'
+import { saveItemsLocally } from 'client/shared/lib'
 import type { ReactNode } from 'react'
 
 interface IProps {

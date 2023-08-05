@@ -5,7 +5,7 @@ import { deleteItem, selectIsLastItem } from 'client/entities/items'
 import { gsap } from 'gsap'
 import { useRef } from 'react'
 import type { RefSpan } from 'client/types'
-import { saveItemsLocally } from 'client/features/save_items_locally'
+import { saveItemsLocally } from 'client/shared/lib'
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 
 interface IProps {
