@@ -6,6 +6,14 @@
  * - .scrollHeight & .scrollWidth returns full inner width/height of the content area including the scrolled out parts
  * @returns {boolean} true or false
  */
-export function isOverflown(el: HTMLElement) {
-  return el.scrollHeight > el.clientHeight || el.scrollWidth > el.clientWidth
+
+interface IProps {
+  element: HTMLElement
 }
+
+export const isOverflown = ({ element }: IProps): boolean => {
+  const overflown =
+    (element.scrollHeight > element.clientHeight) ||
+    (element.scrollWidth > element.clientWidth)
+  return overflown
+};

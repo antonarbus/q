@@ -9,7 +9,7 @@ import { SlidableMenuItemsContainer } from './SlidableMenuItemsContainer'
 import { TopMenuItemsContainer } from './TopMenuItemsContainer'
 import { setMenuItemHoverIndex } from 'client/entities/nav'
 import { theme } from 'client/shared/clients'
-import { RefDiv } from 'client/types'
+import type { RefDiv } from 'client/shared/types'
 
 export function Menu() {
   const menuContainerRef = useRef() as RefDiv
@@ -17,10 +17,10 @@ export function Menu() {
   const nextMenuRef = useRef() as RefDiv
   const fakeMenuRef = useRef() as RefDiv
   const idsToNextMenuItems = useSelectorTyped(
-    (state) => state.nav.idsToNextMenuItems
+    (state) => state.nav.idsToNextMenuItems,
   )
   const idsToCurrentMenuItems = useSelectorTyped(
-    (state) => state.nav.idsToCurrentMenuItems
+    (state) => state.nav.idsToCurrentMenuItems,
   )
   useMenuAnimation({
     currentMenuRef,
@@ -62,7 +62,7 @@ export function Menu() {
   )
 }
 
-type Props = {
+interface Props {
   isMenuOutsideWindow: boolean
 }
 

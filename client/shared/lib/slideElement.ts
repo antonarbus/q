@@ -8,7 +8,11 @@ interface IProps {
 
 let isAnimationPrevented = false // needed to avoid second click on backdrop which launches unwanted second animation
 
-export function slideElement({ intoView, element, cb }: IProps): void {
+export const slideElement = ({
+  intoView,
+  element,
+  cb,
+}: IProps): void => {
   if (isAnimationPrevented) return
   isAnimationPrevented = true
   const screenHeight = window.window.innerHeight
@@ -30,4 +34,4 @@ export function slideElement({ intoView, element, cb }: IProps): void {
       },
     },
   )
-}
+};

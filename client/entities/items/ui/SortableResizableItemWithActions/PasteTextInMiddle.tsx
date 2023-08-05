@@ -1,4 +1,4 @@
-import { useIsPasteHere } from 'client/components/SortableResizableItemWithActions/useIsPasteHere'
+import { useIsPasteHere } from 'client/entities/items/ui/SortableResizableItemWithActions/useIsPasteHere'
 import { theme } from 'client/shared/clients'
 
 type Props = {

@@ -1,7 +1,7 @@
-import { RefAny, RefDiv } from 'client/types'
+import type { RefAny, RefDiv } from 'client/shared/types'
 import { useEffect } from 'react'
 
-type Props = {
+interface Props {
   index: number
   froalaElementRef: RefDiv
   editorRef: RefAny
@@ -13,7 +13,7 @@ export const usePutCaretAtTheEndOfText = ({
   froalaElementRef,
 }: Props) => {
   useEffect(() => {
-    function focusOnTextIfCellOrPaddingAreClicked(e: MouseEvent) {
+    const focusOnTextIfCellOrPaddingAreClicked = (e: MouseEvent) => {
       // https://stackoverflow.com/a/35191761/7239778
       const clickedElement = e.target as HTMLElement
 
@@ -27,26 +27,9 @@ export const usePutCaretAtTheEndOfText = ({
       }
 
       editorRef.current.selection.restore()
-    }
+    };
 
-    froalaElementRef?.current?.addEventListener(
-      'click',
-      focusOnTextIfCellOrPaddingAreClicked
-    )
-    const tableCell = froalaElementRef?.current.closest(
-      '.ag-cell'
-    ) as HTMLElement
-    tableCell?.addEventListener('click', focusOnTextIfCellOrPaddingAreClicked)
+    froalaElementRef.current.addEventListener('click', focusOnTextIfCellOrPaddingAreClicked)
 
-    return () => {
-      froalaElementRef?.current?.removeEventListener(
-        'click',
-        focusOnTextIfCellOrPaddingAreClicked
-      )
-      tableCell?.removeEventListener(
-        'click',
-        focusOnTextIfCellOrPaddingAreClicked
-      )
-    }
   }, [index])
 }

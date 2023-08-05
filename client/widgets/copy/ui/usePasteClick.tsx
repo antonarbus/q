@@ -1,6 +1,6 @@
 import { useEffectOnce, useUnmount } from 'react-use'
 import { store } from 'client/app/store'
-import { cleanItem } from 'utils/itemsUtils'
+import { cleanItem } from 'client/shared/lib/itemsUtils'
 import { theme } from 'client/shared/clients'
 import { exitFromCopyMode, hideCopyContainer, removeItemFromCopyContainer } from 'client/entities/copy'
 import { pasteItem, removePasteItem } from 'client/entities/items'

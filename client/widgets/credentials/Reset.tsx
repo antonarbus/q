@@ -1,16 +1,16 @@
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Avatar } from '@mui/material'
-import { CardCustom } from 'client/components/CardCustom'
-import { ButtonCustom } from 'client/components/ButtonCustom'
 import { useReset } from './useReset'
-import { Event, RefDiv } from 'client/types'
+import type { Event, RefDiv } from 'client/shared/types'
 import { EmailInput } from './common/EmailInput'
 import { theme } from 'client/shared/clients'
-import { BackdropWithSlidableContent } from 'client/components/BackdropWithSlidableContent'
 import PasswordRoundedIcon from '@mui/icons-material/PasswordRounded'
+import { BackdropWithSlidableContent } from 'client/shared/components/BackdropWithSlidableContent'
+import { CardCustom } from 'client/shared/components/CardCustom'
+import { ButtonCustom } from 'client/shared/components/ButtonCustom'
 
-export function Reset() {
+export const Reset = () => {
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const inputRef = useRef() as RefDiv
@@ -20,9 +20,12 @@ export function Reset() {
   return (
     <BackdropWithSlidableContent
       onSlideIn={() => {
+
         /* inputRef.current.focus() */
       }}
-      onSlideOut={() => navigate('/')}
+      onSlideOut={() => {
+        navigate('/');
+      }}
     >
       <CardCustom
         title='Reset password'
@@ -32,7 +35,7 @@ export function Reset() {
           </Avatar>
         }
       >
-        <form onSubmit={(e: Event) => resetPassword({ e, email })}>
+        <form onSubmit={async (e: Event) => resetPassword({ e, email })}>
           <EmailInput
             email={email}
             setEmail={setEmail}
@@ -50,4 +53,4 @@ export function Reset() {
       </CardCustom>
     </BackdropWithSlidableContent>
   )
-}
+};

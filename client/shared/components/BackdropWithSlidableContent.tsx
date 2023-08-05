@@ -1,7 +1,7 @@
-import { slideElement } from 'utils/slideElement'
+import { slideElement } from 'client/shared/lib/slideElement'
 import { useLayoutEffect, useRef } from 'react'
 import { useEffectOnce } from 'react-use'
-import type { RefDiv } from 'client/types'
+import type { RefDiv } from 'client/shared/types'
 
 interface IProps {
   children?: React.ReactNode

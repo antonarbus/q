@@ -7,7 +7,7 @@ import {
 } from 'client/entities/nav'
 import { calcNavMediaQueryParams } from './calcNavMediaQueryParams'
 import { useFirstMountState } from 'react-use'
-import type { RefDiv } from 'client/types'
+import type { RefDiv } from 'client/shared/types'
 
 interface IProps {
   navRef: RefDiv

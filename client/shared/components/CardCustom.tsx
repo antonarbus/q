@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material'
-import type { RefDiv } from 'client/types';
+import type { RefDiv } from 'client/shared/types';
 import type { ReactNode } from 'react'
 
 interface Props {

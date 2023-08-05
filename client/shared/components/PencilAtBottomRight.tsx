@@ -1,4 +1,4 @@
-import { RefAny } from 'client/types'
+import { RefAny } from 'client/shared/types'
 import { BiEditAlt as PencilIcon } from 'react-icons/bi'
 
 type Props = {

@@ -1,12 +1,12 @@
-import { SortableResizableItemWithActions } from 'client/components/SortableResizableItemWithActions'
+import { SortableResizableItemWithActions } from 'client/entities/items/ui/SortableResizableItemWithActions'
 import { theme } from 'client/shared/clients'
 import { store } from 'client/app/store'
 import { useRef } from 'react'
-import { PencilAtBottomRight } from 'client/components/PencilAtBottomRight'
-import { Froala } from 'client/components/Froala'
-import type { RefAny, RefDiv } from 'client/types'
+import { Froala } from 'client/shared/ui/froala'
+import type { RefAny, RefDiv } from 'client/shared/types'
 import { saveText } from 'client/entities/items'
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
+import { PencilAtBottomRight } from 'client/shared/components/PencilAtBottomRight'
 
 interface IProps {
   index: number

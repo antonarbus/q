@@ -2,7 +2,7 @@ import { Button, CircularProgress } from '@mui/material'
 import { useRef } from 'react'
 import { useUpdateEffect } from 'react-use'
 import './successErrorIcons.css'
-import type { RefDiv } from 'client/types'
+import type { RefDiv } from 'client/shared/types'
 
 interface Props {
   children?: React.ReactNode

@@ -1,9 +1,11 @@
-import { Box, SxProps } from '@mui/material'
-import { RefAny } from 'client/types'
-import { MutableRefObject, useRef } from 'react'
+import type { SxProps } from '@mui/material';
+import { Box } from '@mui/material'
+import type { RefAny } from 'client/shared/types'
+import type { MutableRefObject } from 'react';
+import { useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 
-type Props = {
+interface Props {
   padding?: number | string
   getHtml: () => string
   additionalStyle?: SxProps
@@ -31,7 +33,7 @@ export const StaticHtml = ({
   })
 
   useEffectOnce(function saveHeightAfterLoadingContent() {
-    if (!ref?.current?.clientHeight) return
+    if (!ref.current?.clientHeight) return
     heightDuringAnimationRef.current = ref.current.clientHeight
   })
 

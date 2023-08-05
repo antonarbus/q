@@ -1,15 +1,16 @@
 import { notify } from 'client/shared/ui/top_msg/notify'
-import { slideElement } from 'utils/slideElement'
+// import { slideElement } from 'client/shared/lib/slideElement'
 import { useDispatchTyped } from 'client/shared/hooks'
-import type { Event } from 'client/types'
+import type { Event } from 'client/shared/types'
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { navUpdate } from './navUpdate'
 import { token } from '../../shared/auth/token'
 import type { HttpStatusType } from './types'
 import { rememberLoggedUser } from 'client/entities/user'
+import { slideElement } from 'client/shared/lib/slideElement'
 
-export function useLogin() {
+export const useLogin = () => {
   const [httpStatus, setHttpStatus] = useState<HttpStatusType>('')
   const navigate = useNavigate()
   const location = useLocation()
@@ -23,7 +24,7 @@ export function useLogin() {
     cardElement: HTMLElement
   }
 
-  async function loginUser({ e, email, password, cardElement }: IProps) {
+  const loginUser = async ({ e, email, password, cardElement }: IProps) => {
     e.preventDefault()
     const method = 'POST'
     const headers = { 'Content-Type': 'application/json' }
@@ -80,7 +81,7 @@ export function useLogin() {
         })
       }, 2000)
     }
-  }
+  };
 
   return { loginUser, httpStatus, setHttpStatus }
-}
+};

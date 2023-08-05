@@ -1,4 +1,4 @@
-import { isOverflown } from 'utils/isOverflown'
+import { isOverflown } from 'client/shared/lib/isOverflown'
 
 const shrinkElementSlightly = (el: HTMLElement): void => {
   el.style.width = el.offsetWidth - 10 + 'px'
@@ -12,20 +12,22 @@ export interface IItemsMediaQueryWidths {
   burger: number
 }
 
-export function calcNavMediaQueryParams(nav: HTMLElement, logo: HTMLElement): IItemsMediaQueryWidths {
+export const calcNavMediaQueryParams = (nav: HTMLElement, logo: HTMLElement): IItemsMediaQueryWidths => {
   interface IProps {
     elsToHideClass?: string
     elsToShowClass?: string
   }
 
-  function calcNavWidthWhenLogoIsOverlay({
-    elsToHideClass,
-    elsToShowClass,
-  }: IProps = {}): number {
+  const calcNavWidthWhenLogoIsOverlay = (
+    {
+      elsToHideClass,
+      elsToShowClass,
+    }: IProps = {},
+  ): number => {
     if (elsToHideClass) {
       const elsToHideArr = Array.from(nav.querySelectorAll(elsToHideClass))
       elsToHideArr.forEach((el) => {
-        ; (el as HTMLElement).style.display = 'none'
+        (el as HTMLElement).style.display = 'none'
       })
       const elsToShowArr = Array.from(
         nav.querySelectorAll(
@@ -33,22 +35,20 @@ export function calcNavMediaQueryParams(nav: HTMLElement, logo: HTMLElement): II
         ),
       )
       elsToShowArr.forEach((el) => {
-        ; (el as HTMLElement).style.display = ''
+        (el as HTMLElement).style.display = ''
       })
     }
     let i = 0
-    while (!isOverflown(logo)) {
+    while (!isOverflown({ element: logo })) {
       shrinkElementSlightly(nav)
       i++
       if (i > 1000) {
-        console.log(
-          'Problem! Over 1000 iterations in calcNavWidthWhenLogoIsOverlay() function',
-        )
+        console.error('Problem! Over 1000 iterations in calcNavWidthWhenLogoIsOverlay() function')
         break
       }
     }
     return nav.offsetWidth + 50
-  }
+  };
 
   // calc init min nav width to accumulate all elements
   const navItemsQty = nav.querySelectorAll('.nav-item').length
@@ -72,11 +72,11 @@ export function calcNavMediaQueryParams(nav: HTMLElement, logo: HTMLElement): II
     elsToShowClass: '.icon-round-wrapper',
   })
   nav
-    .querySelectorAll(
-      '.app-ext, .uotation, .icon-round-wrapper, .nav-item-name',
-    )
-    .forEach((el) => { el.setAttribute('style', ''); })
+    .querySelectorAll('.app-ext, .uotation, .icon-round-wrapper, .nav-item-name')
+    .forEach((el) => {
+      el.setAttribute('style', '');
+    })
   nav.setAttribute('style', '')
 
   return { logoExtension, logoPart, icon, name, burger }
-}
+};
