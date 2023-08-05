@@ -135,7 +135,7 @@ export const useStartFroala = ({ index, getHtml, onClickAwayIfHtmChanged, froala
           editorRef.current.html.set(getHtml())
           window.froalas = window.froalas.filter(({ current }) => current !== null)
           // console.log('froalas are initiated')
-          console.log('froalas number', window.froalas.length)
+          console.log('froalas qty after init: ', window.froalas.length)
         },
       )
 
@@ -149,7 +149,7 @@ export const useStartFroala = ({ index, getHtml, onClickAwayIfHtmChanged, froala
       editorRef.current = null
       window.froalas = window.froalas.filter(({ current }) => current !== null)
       // console.log('froala destroyed')
-      console.log('froalas number', window.froalas.length)
+      console.log('froalas qty after destroy: ', window.froalas.length)
     }
   })
 }
