@@ -7,7 +7,7 @@ import { saveItemsLocally } from 'client/shared/lib'
 interface IProps {
   index: number
   getHtml: () => string
-  onClickAwayIfHtmChanged?: Function
+  onClickAwayIfHtmChanged?: () => void
   froalaElementRef: RefDiv
   editorRef: RefAny
   placeholder?: string
@@ -17,19 +17,19 @@ interface IProps {
 
 declare const window: Window &
   typeof globalThis & {
-    froalas: any[]
+    froalas: unknown[]
   }
 
 window.froalas = []
 
-export const useStartFroala = ({ index, getHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder, saveFroalaReducer, rowIndex }: IProps) => {
+export const useStartFroala = ({ index, getHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder, saveFroalaReducer, rowIndex }: IProps): void => {
   const dispatch = useDispatchTyped()
   const prevHtmlRef = useRef(getHtml()) as RefString
 
   useEffect(() => {
-    function initFroalaInstance() {
+    function initFroalaInstance(): void {
       // @ts-expect-error
-      editorRef.current = new FroalaEditor(
+      const froalaInstance = new FroalaEditor(
         froalaElementRef.current,
         {
           initOnClick: false,
@@ -114,7 +114,7 @@ export const useStartFroala = ({ index, getHtml, onClickAwayIfHtmChanged, froala
           events: {
             'paste.afterCleanup': function (clipboardHtml: string) { },
             click: (event: MouseEvent) => { },
-            contentChanged: () => {
+            contentChanged: (): void => {
               if (!froalaElementRef.current) return
               const updatedHtml = editorRef.current.html.get()
               const contentHasChanged = prevHtmlRef.current !== updatedHtml
@@ -123,6 +123,7 @@ export const useStartFroala = ({ index, getHtml, onClickAwayIfHtmChanged, froala
               dispatch(saveFroalaReducer({ index, html, rowIndex }))
               onClickAwayIfHtmChanged?.()
               saveItemsLocally({ msgAboveItemWithIndex: index })
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               prevHtmlRef.current = updatedHtml
             },
           },
@@ -130,23 +131,25 @@ export const useStartFroala = ({ index, getHtml, onClickAwayIfHtmChanged, froala
         },
         function () {
           window.froalas.push(editorRef)
-          if (!editorRef.current?.html) return
+          if (editorRef.current?.html === undefined) return
           editorRef.current.html.set(getHtml())
           window.froalas = window.froalas.filter(({ current }) => current !== null)
           // console.log('froalas are initiated')
           console.log('froalas number', window.froalas.length)
         },
       )
+
+      editorRef.current = froalaInstance
     }
 
     initFroalaInstance()
 
-    return () => {
+    return (): void => {
       editorRef.current?.destroy?.()
       editorRef.current = null
       window.froalas = window.froalas.filter(({ current }) => current !== null)
       // console.log('froala destroyed')
       console.log('froalas number', window.froalas.length)
     }
-  }, [index])
+  })
 }

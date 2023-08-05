@@ -1,13 +1,7 @@
-import { useDispatchTyped } from 'client/shared/hooks'
-import { store } from 'client/shared/clients'
-import { arrayMoveImmutable } from 'array-move'
-import { AnimatePresence, motion } from 'framer-motion'
-import { saveItemsLocally } from 'client/shared/lib'
-import { enterIntoCopyMode, exitFromCopyMode } from 'client/entities/copy'
-import { reOrderItems } from 'client/entities/items'
+import { AnimatePresence } from 'framer-motion'
+import { DraggableItemsContainer } from './DraggableItemsContainer'
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 import type { IProps } from './IProps'
-import { DraggableItemsContainer } from './DraggableItemsContainer'
 
 export const ItemsFeedLayout = ({
   children,

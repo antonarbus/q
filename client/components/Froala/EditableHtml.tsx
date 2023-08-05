@@ -1,12 +1,13 @@
 import parseHtml from 'html-react-parser'
-import { Box, SxProps } from '@mui/material'
+import type { SxProps } from '@mui/material';
+import { Box } from '@mui/material'
 import { useStartFroala } from './useStartFroala'
 import { usePutCaretAtTheEndOfText } from './usePutCaretAtTheEndOfText'
-import { MutableRefObject } from 'react'
-import { SaveFroalaReducer } from './Froala'
-import { RefAny, RefDiv } from 'client/types'
+import type { MutableRefObject } from 'react'
+import type { SaveFroalaReducer } from './Froala'
+import type { RefAny, RefDiv } from 'client/types'
 
-type Props = {
+interface IProps {
   index: number
   padding?: number | string
   getHtml: () => string
@@ -14,7 +15,7 @@ type Props = {
   editorRef: RefAny
   placeholder?: string
   additionalStyle?: SxProps
-  onClickAwayIfHtmChanged?: Function
+  onClickAwayIfHtmChanged?: () => void
   rowIndex?: number
   saveFroalaReducer: SaveFroalaReducer
   heightDuringAnimationRef: MutableRefObject<number | undefined>
@@ -32,7 +33,7 @@ export const EditableHtml = ({
   rowIndex,
   saveFroalaReducer,
   heightDuringAnimationRef,
-}: Props) => {
+}: IProps): JSX.Element => {
   useStartFroala({
     editorRef,
     froalaElementRef,
@@ -54,8 +55,8 @@ export const EditableHtml = ({
       ref={froalaElementRef}
       className='q-froala-element'
       style={{
-        padding: padding || 0,
-        height: heightDuringAnimationRef.current || 'auto', // for animation, will be removed after froala is initialized
+        padding: padding ?? 0,
+        height: heightDuringAnimationRef.current ?? 'auto', // for animation, will be removed after froala is initialized
       }}
       sx={{
         wordBreak: 'break-word',
