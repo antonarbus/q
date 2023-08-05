@@ -4,7 +4,7 @@ import { cleanItem } from 'utils/itemsUtils'
 import { theme } from 'client/shared/clients'
 import { exitFromCopyMode, hideCopyContainer, removeItemFromCopyContainer } from 'client/entities/copy'
 import { pasteItem, removePasteItem } from 'client/entities/items'
-import { saveItemsLocally } from 'client/features/save_items_locally'
+import { saveItemsLocally } from 'client/shared/lib'
 
 function pasteItemOnClick(): void {
   const isPasteTextShown = store.getState().copy.isPasteTextShown

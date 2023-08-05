@@ -2,7 +2,7 @@ import { useDispatchTyped } from 'client/shared/hooks'
 import type { RefAny, RefDiv, RefString } from 'client/types'
 import { useEffect, useRef } from 'react'
 import type { SaveFroalaReducer } from './Froala'
-import { saveItemsLocally } from 'client/features/save_items_locally'
+import { saveItemsLocally } from 'client/shared/lib'
 
 interface IProps {
   index: number

@@ -1,7 +1,8 @@
 import { useSelectorTyped } from 'client/shared/hooks'
-import { ItemsContainer } from './ItemsContainer'
 import type { TItem } from '../../entities/items/model/types'
 import { PasteItem, TextItem } from 'client/entities/items'
+import { ItemsFeedLayout } from 'client/shared/layouts'
+import { onItemDrag } from 'client/features/drag_item'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type EqualityFn = (a: any, b: any) => boolean
@@ -20,7 +21,14 @@ export const Items = (): JSX.Element => {
   const shouldReRender = useSelectorTyped((state) => state.offer.toggleOffer)
 
   return (
-    <ItemsContainer>
+    <ItemsFeedLayout
+      onItemDragStart={(): void => {
+        onItemDrag.start()
+      }}
+      onItemDragEnd={({ oldIndex, newIndex }): void => {
+        onItemDrag.end({ oldIndex, newIndex })
+      }}
+    >
       {items.map((item, index) => {
         const key = item.id + shouldReRender.toString()
 
@@ -28,7 +36,6 @@ export const Items = (): JSX.Element => {
         if (item.type === 'boq') return <div key={key}>boq</div>
         return <PasteItem key={key} />
       })}
-    </ItemsContainer>
+    </ItemsFeedLayout>
   )
 }
-
