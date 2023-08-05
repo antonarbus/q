@@ -1,12 +1,7 @@
-import { Resizable } from 're-resizable'
+import type { Resizable } from 're-resizable'
 
 export type Event =
-  | KeyboardEvent
-  | MouseEvent
-  | React.MouseEvent
-  | React.KeyboardEvent
-  | React.FormEvent
-export type Children = React.ReactNode
+  KeyboardEvent | MouseEvent | React.FormEvent | React.KeyboardEvent | React.MouseEvent
 export type RefDiv = React.MutableRefObject<HTMLDivElement>
 export type RefSpan = React.MutableRefObject<HTMLSpanElement>
 export type RefString = React.MutableRefObject<string>
