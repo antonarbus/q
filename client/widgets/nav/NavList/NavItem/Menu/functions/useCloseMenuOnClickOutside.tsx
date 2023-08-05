@@ -1,44 +1,45 @@
-import { isClickInsideThisElement } from 'utils/isClickInsideThisElement'
+import { didClickInsideThisElement } from 'client/shared/lib/isClickInsideThisElement'
 import { useDispatchTyped } from 'client/shared/hooks'
+import type { MutableRefObject } from 'react';
 import { useEffect } from 'react'
 import { closeMenu } from 'client/entities/nav'
-import { Event, RefDiv } from 'client/types'
+import type { Event, RefDiv } from 'client/shared/types'
 
-type Props = {
-  menuContainerRef: RefDiv
+interface Props {
+  menuContainerRef: MutableRefObject<HTMLDivElement | null>
 }
 
-export function useCloseMenuOnClickOutside({ menuContainerRef }: Props) {
+export const useCloseMenuOnClickOutside = ({ menuContainerRef }: Props): void => {
   const dispatch = useDispatchTyped()
 
   /**
-   * @descriptions
    * - menu is absolutely positioned inside NavItem li element
    * - if click outside menu - close
    * - if click on navItem do not close, but close it in NavItem onClick handler, otherwise it closes and opens immediately
    */
 
-  function mouseDownHandler(e: Event) {
+  const mouseDownHandler = (e: Event): void => {
     const menuContainer = menuContainerRef.current
     if (!menuContainer) return
-    const navItem = menuContainerRef.current.parentElement
+    const navItem = menuContainerRef.current?.parentElement
     if (!navItem) return
-    const clickedEl = e.target as HTMLElement
+    const clickedElement = e.target as HTMLElement
     const isClickOnOpenedNavItem =
-      isClickInsideThisElement(clickedEl, navItem) &&
-      !isClickInsideThisElement(clickedEl, menuContainer)
+      didClickInsideThisElement({ clickedElement, thisElement: navItem }) &&
+      !didClickInsideThisElement({ clickedElement, thisElement: menuContainer })
     if (isClickOnOpenedNavItem) return
-    if (!isClickInsideThisElement(clickedEl, menuContainer)) {
+    if (!didClickInsideThisElement({ clickedElement, thisElement: menuContainer })) {
       dispatch(closeMenu())
     }
-  }
+  };
 
-  function hideMenuOnClickOutside() {
+  type TReturn = () => void
+  const hideMenuOnClickOutside = (): TReturn => {
     document.addEventListener('mousedown', mouseDownHandler)
     return () => {
       document.removeEventListener('mousedown', mouseDownHandler)
     }
-  }
+  };
 
   useEffect(hideMenuOnClickOutside, [])
-}
+};

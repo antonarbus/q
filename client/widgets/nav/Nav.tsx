@@ -5,7 +5,7 @@ import { Logo } from './Logo'
 import { NavList } from './NavList'
 import { useMenuItemActionShortcuts } from './functions/useMenuItemActionShortcuts'
 import { useMediaQueryValues } from './functions/useMediaQueryValues'
-import type { RefDiv } from 'client/types'
+import type { RefDiv } from 'client/shared/types'
 
 export const Nav = (): JSX.Element => {
   const navRef = useRef() as RefDiv

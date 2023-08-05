@@ -5,7 +5,7 @@ import { useStartFroala } from './useStartFroala'
 import { usePutCaretAtTheEndOfText } from './usePutCaretAtTheEndOfText'
 import type { MutableRefObject } from 'react'
 import type { SaveFroalaReducer } from './Froala'
-import type { RefAny, RefDiv } from 'client/types'
+import type { RefAny, RefDiv } from 'client/shared/types'
 
 interface IProps {
   index: number

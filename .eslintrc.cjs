@@ -45,6 +45,7 @@ module.exports = {
     '@typescript-eslint/strict-boolean-expressions': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
     "object-curly-spacing": "off",
-    "@typescript-eslint/object-curly-spacing": "off"
+    "@typescript-eslint/object-curly-spacing": "off",
+    'no-restricted-syntax': ['error', 'FunctionExpression', 'FunctionDeclaration']
   },
 }

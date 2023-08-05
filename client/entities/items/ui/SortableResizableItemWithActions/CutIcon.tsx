@@ -3,7 +3,7 @@ import { store } from 'client/shared/clients'
 import { TbCut } from 'react-icons/tb'
 import { motion } from 'framer-motion'
 import { deleteItem, saveItemHeight, selectIsLastItem } from 'client/entities/items'
-import { cleanHtml } from 'utils/itemsUtils'
+import { cleanHtml } from 'client/shared/lib/itemsUtils'
 import { saveItemsLocally } from 'client/shared/lib'
 import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/entities/copy'
 

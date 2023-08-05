@@ -6,7 +6,7 @@ import { MenuItemStyled } from './MenuItemStyled'
 import { closeMenu, setMenuItemHoverIndex } from 'client/entities/nav'
 import { theme } from 'client/shared/clients'
 import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
-import { Event } from 'client/types'
+import type { Event } from 'client/shared/types'
 
 const closeIcon = createElement(CloseIcon, {})
 
@@ -14,7 +14,7 @@ export function CloseMenuItem() {
   const color = theme.colors.topMenuItem
   const dispatch = useDispatchTyped()
   const isHovered = useSelectorTyped(
-    (state) => state.nav.menuItemHoverIndex === 1
+    (state) => state.nav.menuItemHoverIndex === 1,
   )
 
   const onClickHandler = (e: Event) => {

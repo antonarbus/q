@@ -1,7 +1,7 @@
 import type { TMenuItem } from 'client/entities/nav';
 import { closeMenu, openMenuWithId, setNavItemRightPos } from 'client/entities/nav'
 import { store } from 'client/app/store'
-import type { Event } from 'client/types'
+import type { Event } from 'client/shared/types'
 
 interface IProps {
   e: Event
@@ -18,7 +18,7 @@ export function clickOnNavItem({
   navItemRef,
   disabled,
 }: IProps) {
-  ; (document.activeElement as HTMLElement).blur() // to prevent open an active navItem link on Enter key
+  (document.activeElement as HTMLElement).blur() // to prevent open an active navItem link on Enter key
 
   const link = navItem?.link
   const func = navItem?.func

@@ -5,13 +5,13 @@ import { MenuItemStyled } from './MenuItemStyled'
 import { theme } from 'client/shared/clients'
 import { setMenuItemHoverIndex } from 'client/entities/nav'
 import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
-import { Event } from 'client/types'
+import type { Event } from 'client/shared/types'
 import { navigateInMenu } from '../functions/useMenuAnimation'
 
 export function BackMenuItem() {
   const dispatch = useDispatchTyped()
   const isHovered = useSelectorTyped(
-    (state) => state.nav.menuItemHoverIndex === 1
+    (state) => state.nav.menuItemHoverIndex === 1,
   )
   const color = theme.colors.topMenuItem
 

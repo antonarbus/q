@@ -4,7 +4,7 @@ import { RxCross2 } from 'react-icons/rx'
 import { deleteItem, selectIsLastItem } from 'client/entities/items'
 import { gsap } from 'gsap'
 import { useRef } from 'react'
-import type { RefSpan } from 'client/types'
+import type { RefSpan } from 'client/shared/types'
 import { saveItemsLocally } from 'client/shared/lib'
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 

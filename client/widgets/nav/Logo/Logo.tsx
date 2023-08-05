@@ -1,8 +1,8 @@
 import { useSelectorTyped } from 'client/shared/hooks'
-import { RefDiv } from 'client/types'
+import type { RefDiv } from 'client/shared/types'
 import { Link } from 'react-router-dom'
 
-type Prop = {
+interface Prop {
   logoRef: RefDiv
 }
 

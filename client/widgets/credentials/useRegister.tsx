@@ -1,5 +1,5 @@
 import { notify } from 'client/shared/ui/top_msg/notify'
-import { Event } from 'client/types'
+import { Event } from 'client/shared/types'
 import { useState } from 'react'
 import { HttpStatusType } from './types'
 

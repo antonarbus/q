@@ -1,7 +1,7 @@
-import { LoadingDots } from 'client/components/LoadingDots'
+import { LoadingDots } from 'client/shared/components/LoadingDots'
 import { useSelectorTyped } from 'client/shared/hooks'
 
-type Props = {
+interface Props {
   isShowing?: boolean
   title?: string
 }

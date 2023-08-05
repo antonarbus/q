@@ -2,7 +2,7 @@ import type { SortableElementProps } from 'react-sortable-hoc';
 import { SortableElement } from 'react-sortable-hoc'
 import { motion } from 'framer-motion'
 import { theme } from 'client/shared/clients'
-import type { RefDiv } from 'client/types'
+import type { RefDiv } from 'client/shared/types'
 import { store } from 'client/app/store'
 import type { ReactNode } from 'react';
 import { useRef } from 'react'

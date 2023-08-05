@@ -1,20 +1,20 @@
-import { Event, RefDiv } from 'client/types'
+import type { Event, RefDiv } from 'client/shared/types'
 import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Avatar } from '@mui/material'
-import { BackdropWithSlidableContent } from 'client/components/BackdropWithSlidableContent'
-import { CardCustom } from 'client/components/CardCustom'
 import { theme } from 'client/shared/clients'
 import { EmailInput } from './common/EmailInput'
 import { PasswordInput } from './common/PasswordInput'
-import { ButtonCustom } from 'client/components/ButtonCustom'
 import { useLogin } from './useLogin'
 import { LoginRounded } from '@mui/icons-material'
-import { slideElement } from 'utils/slideElement'
+import { slideElement } from 'client/shared/lib/slideElement'
+import { BackdropWithSlidableContent } from 'client/shared/components/BackdropWithSlidableContent'
+import { CardCustom } from 'client/shared/components/CardCustom'
+import { ButtonCustom } from 'client/shared/components/ButtonCustom'
 
 // todo: store user data in redux
 
-export function Login() {
+export const Login = () => {
   const [email, setEmail] = useState('')
   const inputRef = useRef() as RefDiv
   const cardRef = useRef() as RefDiv
@@ -24,16 +24,21 @@ export function Login() {
   const { loginUser, httpStatus, setHttpStatus } = useLogin()
   const navigate = useNavigate()
   useEffect(
-    () => setIsButtonDisabled(!(isEmailOk && !!password)),
-    [isEmailOk, password]
+    () => {
+      setIsButtonDisabled(!(isEmailOk && !!password));
+    },
+    [isEmailOk, password],
   )
 
   return (
     <BackdropWithSlidableContent
       onSlideIn={() => {
+
         /* inputRef.current.focus() */
       }}
-      onSlideOut={() => navigate('/')}
+      onSlideOut={() => {
+        navigate('/');
+      }}
     >
       <CardCustom
         title='Log in'
@@ -45,7 +50,7 @@ export function Login() {
         reference={cardRef}
       >
         <form
-          onSubmit={(e: Event) =>
+          onSubmit={async (e: Event) =>
             loginUser({ e, email, password, cardElement: cardRef.current })
           }
         >
@@ -77,7 +82,9 @@ export function Login() {
                 e.preventDefault()
                 slideElement({
                   element: cardRef.current,
-                  cb: () => navigate('/reset'),
+                  cb: () => {
+                    navigate('/reset');
+                  },
                 })
               }}
             />
@@ -88,7 +95,9 @@ export function Login() {
                 e.preventDefault()
                 slideElement({
                   element: cardRef.current,
-                  cb: () => navigate('/register'),
+                  cb: () => {
+                    navigate('/register');
+                  },
                 })
               }}
               css={{ textAlign: 'right' }}
@@ -98,4 +107,4 @@ export function Login() {
       </CardCustom>
     </BackdropWithSlidableContent>
   )
-}
+};

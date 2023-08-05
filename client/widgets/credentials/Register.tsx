@@ -1,4 +1,4 @@
-import { Event, RefDiv } from 'client/types'
+import type { Event, RefDiv } from 'client/shared/types'
 import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Avatar } from '@mui/material'
@@ -7,13 +7,13 @@ import { LockOutlined } from '@mui/icons-material'
 import { EmailInput } from './common/EmailInput'
 import { PasswordInput } from './common/PasswordInput'
 import { ConfirmPasswordInput } from './common/ConfirmPasswordInput'
-import { ButtonCustom } from 'client/components/ButtonCustom'
 import { useRegister } from './useRegister'
-import { BackdropWithSlidableContent } from 'client/components/BackdropWithSlidableContent'
-import { CardCustom } from 'client/components/CardCustom'
-import { slideElement } from 'utils/slideElement'
+import { slideElement } from 'client/shared/lib/slideElement'
+import { BackdropWithSlidableContent } from 'client/shared/components/BackdropWithSlidableContent'
+import { CardCustom } from 'client/shared/components/CardCustom'
+import { ButtonCustom } from 'client/shared/components/ButtonCustom'
 
-export function Register() {
+export const Register = () => {
   const [email, setEmail] = useState('')
   const inputRef = useRef() as RefDiv
   const cardRef = useRef() as RefDiv
@@ -24,16 +24,21 @@ export function Register() {
   const { registerUser, httpStatus, setHttpStatus } = useRegister()
   const navigate = useNavigate()
   useEffect(
-    () => setIsButtonDisabled(!(isEmailOk && isConfirmPasswordOk)),
-    [isEmailOk, isConfirmPasswordOk]
+    () => {
+      setIsButtonDisabled(!(isEmailOk && isConfirmPasswordOk));
+    },
+    [isEmailOk, isConfirmPasswordOk],
   )
 
   return (
     <BackdropWithSlidableContent
       onSlideIn={() => {
+
         /* inputRef.current.focus() */
       }}
-      onSlideOut={() => navigate('/')}
+      onSlideOut={() => {
+        navigate('/');
+      }}
     >
       <CardCustom
         title='Register'
@@ -44,7 +49,7 @@ export function Register() {
         }
         reference={cardRef}
       >
-        <form onSubmit={(e: Event) => registerUser({ e, email, password })}>
+        <form onSubmit={async (e: Event) => registerUser({ e, email, password })}>
           <EmailInput
             email={email}
             setEmail={setEmail}
@@ -72,7 +77,9 @@ export function Register() {
                 e.preventDefault()
                 slideElement({
                   element: cardRef.current,
-                  cb: () => navigate('/login'),
+                  cb: () => {
+                    navigate('/login');
+                  },
                 })
               }}
             />
@@ -81,4 +88,4 @@ export function Register() {
       </CardCustom>
     </BackdropWithSlidableContent>
   )
-}
+};

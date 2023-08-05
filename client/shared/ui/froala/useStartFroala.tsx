@@ -1,5 +1,5 @@
 import { useDispatchTyped } from 'client/shared/hooks'
-import type { RefAny, RefDiv, RefString } from 'client/types'
+import type { RefAny, RefDiv, RefString } from 'client/shared/types'
 import { useEffect, useRef } from 'react'
 import type { SaveFroalaReducer } from './Froala'
 import { saveItemsLocally } from 'client/shared/lib'

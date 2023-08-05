@@ -3,10 +3,10 @@ import { createSelector, createSlice, current } from '@reduxjs/toolkit'
 import type { RootState } from 'client/app/store'
 import { nanoid } from 'nanoid'
 import { defaultItems } from './defaultItems'
-import { cleanItem } from 'utils/itemsUtils'
+import { cleanItem } from 'client/shared/lib/itemsUtils'
 import type { CopyPlaceType, PastePosType } from 'client/entities/copy'
 import type { TItem, IPasteItem } from './types'
-import { jsonParseSafe } from 'utils/jsonParseSafe'
+import { jsonParseSafe } from 'client/shared/lib/jsonParseSafe'
 
 const returnDefaultOrLocalItems = (): TItem[] => {
   const itemsFromLocalStorage = localStorage.getItem('items')

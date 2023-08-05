@@ -1,4 +1,4 @@
-import { elementHeight } from 'utils/elementHeight'
+import { elementHeight } from 'client/shared/lib/elementHeight'
 import {
   goDownInCurrentMenu,
   goDownInNextMenu,
@@ -11,25 +11,27 @@ import { gsap } from 'gsap'
 import { useEffect } from 'react'
 import { getMenuItemByIdsChain } from './getMenuItemByIdsChain'
 import { useFirstMountState } from 'react-use'
-import { RefDiv } from 'client/types'
+import type { RefDiv } from 'client/shared/types'
 
-type PropsForNavigateInMenu = {
-  up: { (): void } | null
-  down: { (id: string): void } | null
+interface PropsForNavigateInMenu {
+  up: (() => void) | null
+  down: ((id: string) => void) | null
 }
 
 export const navigateInMenu: PropsForNavigateInMenu = {
-  up: () =>
+  up: () => {
     console.log(
-      'put function here for going up the menu, otherwise need to pass it in many props'
-    ),
-  down: (id) =>
+      'put function here for going up the menu, otherwise need to pass it in many props',
+    );
+  },
+  down: (id) => {
     console.log(
-      'put function here for going into submenu, otherwise need to pass it in many props'
-    ),
+      'put function here for going into submenu, otherwise need to pass it in many props',
+    );
+  },
 }
 
-type Props = {
+interface Props {
   currentMenuRef: RefDiv
   nextMenuRef: RefDiv
   menuContainerRef: RefDiv
@@ -65,12 +67,12 @@ export function useMenuAnimation({
     gsap.fromTo(
       currentMenuRef.current,
       { xPercent: 0 },
-      { duration, xPercent: -100 }
+      { duration, xPercent: -100 },
     )
     gsap.fromTo(
       nextMenuRef.current,
       { xPercent: 0 },
-      { duration, xPercent: -100, onComplete: cb }
+      { duration, xPercent: -100, onComplete: cb },
     )
   }
 
@@ -81,12 +83,12 @@ export function useMenuAnimation({
     gsap.fromTo(
       currentMenuRef.current,
       { xPercent: 0 },
-      { duration, xPercent: 100 }
+      { duration, xPercent: 100 },
     )
     gsap.fromTo(
       nextMenuRef.current,
       { xPercent: -200 },
-      { duration, xPercent: -100, onComplete: cb }
+      { duration, xPercent: -100, onComplete: cb },
     )
   }
 
