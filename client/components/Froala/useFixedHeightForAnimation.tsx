@@ -1,9 +1,8 @@
-import type { RefDiv } from 'client/types'
 import type { MutableRefObject } from 'react';
 import { useEffect, useRef } from 'react'
 
 interface IProps {
-  froalaElementRef: RefDiv
+  froalaElementRef: MutableRefObject<HTMLElement | null>
 }
 
 interface IReturn {
@@ -17,7 +16,7 @@ export const useFixedHeightForAnimation = ({ froalaElementRef }: IProps): IRetur
     // timeout is needed, coz froala takes some time to initiate and
     // we need to preserve fixed height during that time, otherwise element jumps
     setTimeout(() => {
-      froalaElementRef.current.style.removeProperty('height')
+      froalaElementRef.current?.style.removeProperty('height')
     }, 500)
   })
 

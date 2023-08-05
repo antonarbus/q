@@ -12,7 +12,7 @@ import { Profile } from 'client/pages/profile'
 import { ReactQueryDevtoolsProductionHidden } from './ReactQueryDevtoolsProductionHidden'
 import { store } from './store'
 import { Provider } from 'react-redux'
-import { BottomMsg } from 'client/widgets/bottomMsg'
+import { BottomMsg } from 'client/widgets/bottom_msg'
 import { Spinner } from 'client/widgets/spinner'
 import {
   Login,
