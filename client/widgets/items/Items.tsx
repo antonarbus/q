@@ -17,8 +17,8 @@ const equalityFn: EqualityFn = (prevItems: TItem[], currentItems: TItem[]): bool
 }
 
 export const Items = (): JSX.Element => {
-  const items = useSelectorTyped((state) => state.items, equalityFn)
-  const shouldReRender = useSelectorTyped((state) => state.offer.toggleOffer)
+  const items = useSelectorTyped(state => state.items, equalityFn)
+  const shouldReRender = useSelectorTyped(state => state.offer.toggleOffer)
 
   return (
     <ItemsFeedLayout
