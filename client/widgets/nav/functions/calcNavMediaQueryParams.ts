@@ -18,24 +18,25 @@ export const calcNavMediaQueryParams = (nav: HTMLElement, logo: HTMLElement): II
     elsToShowClass?: string
   }
 
-  const calcNavWidthWhenLogoIsOverlay = (
-    {
-      elsToHideClass,
-      elsToShowClass,
-    }: IProps = {},
+  const calcNavWidthWhenLogoIsOverlay = ({
+    elsToHideClass,
+    elsToShowClass,
+  }: IProps = {},
   ): number => {
     if (elsToHideClass) {
       const elsToHideArr = Array.from(nav.querySelectorAll(elsToHideClass))
       elsToHideArr.forEach((el) => {
-        (el as HTMLElement).style.display = 'none'
+        if (!(el instanceof HTMLElement)) return
+        el.style.display = 'none'
       })
       const elsToShowArr = Array.from(
         nav.querySelectorAll(
-          elsToShowClass || 'non-existing-class-where-nothing-will-be-found',
+          elsToShowClass ?? 'non-existing-class-where-nothing-will-be-found',
         ),
       )
       elsToShowArr.forEach((el) => {
-        (el as HTMLElement).style.display = ''
+        if (!(el instanceof HTMLElement)) return
+        el.style.display = ''
       })
     }
     let i = 0
