@@ -1,7 +1,7 @@
-import { Children } from 'client/types'
+import type { ReactNode } from 'react'
 
-type Props = {
-  children: Children
+interface Props {
+  children: ReactNode
   css?: React.CSSProperties
   className?: string
   disabled?: boolean

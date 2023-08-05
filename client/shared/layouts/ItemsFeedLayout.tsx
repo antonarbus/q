@@ -17,9 +17,7 @@ interface IProps {
   children: ReactNode
 }
 
-interface ISortableContainer extends SortableContainerProps {
-  children: ReactNode
-}
+interface ISortableContainer extends SortableContainerProps, IProps { }
 
 const DraggableItems: React.ComponentClass<ISortableContainer> = SortableContainer(({ children }: IProps) => (
   <motion.div
@@ -48,7 +46,7 @@ const DraggableItems: React.ComponentClass<ISortableContainer> = SortableContain
 
 // todo: break it into itemsFeedLayout and itemsReOrder feature
 
-export const ItemsContainer = ({ children }: IProps): EmotionJSX.Element => {
+export const ItemsFeedLayout = ({ children }: IProps): EmotionJSX.Element => {
   const dispatch = useDispatchTyped()
 
   return (

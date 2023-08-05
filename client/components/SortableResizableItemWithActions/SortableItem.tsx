@@ -2,17 +2,18 @@ import type { SortableElementProps } from 'react-sortable-hoc';
 import { SortableElement } from 'react-sortable-hoc'
 import { motion } from 'framer-motion'
 import { theme } from 'client/shared/clients'
-import type { Children, RefDiv } from 'client/types'
+import type { RefDiv } from 'client/types'
 import { store } from 'client/app/store'
+import type { ReactNode } from 'react';
 import { useRef } from 'react'
 
 interface IProps {
-  children: Children
+  children: ReactNode
   i: number // "index" is occupied internally by SortableElement
 }
 
 interface ISortableItem extends SortableElementProps {
-  children: Children
+  children: ReactNode
   i: number
 }
 

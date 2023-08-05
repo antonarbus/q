@@ -1,8 +1,9 @@
 import { Typography } from '@mui/material'
-import { Children, RefDiv } from 'client/types'
+import type { RefDiv } from 'client/types';
+import type { ReactNode } from 'react'
 
-type Props = {
-  children?: Children
+interface Props {
+  children?: ReactNode
   content?: React.ReactNode
   cssProps?: React.CSSProperties
   reference?: RefDiv
@@ -52,7 +53,7 @@ export const CardCustom = ({
       },
       ...cssProps,
     }}
-    onMouseDown={(e) => e.stopPropagation()}
+    onMouseDown={(e) => { e.stopPropagation(); }}
     ref={reference}
   >
     {logo && <div css={{ alignSelf: 'center' }}>{logo}</div>}

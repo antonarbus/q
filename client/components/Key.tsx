@@ -1,8 +1,8 @@
 import { css } from '@emotion/react'
-import { Children } from 'client/types'
+import type { ReactNode } from 'react'
 
-type Props = {
-  children: Children
+interface Props {
+  children: ReactNode
 }
 
 export const Key = ({ children }: Props) => {

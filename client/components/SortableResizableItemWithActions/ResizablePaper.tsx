@@ -2,11 +2,11 @@ import { useDispatchTyped } from 'client/shared/hooks'
 import { store } from 'client/shared/clients'
 import { Resizable } from 're-resizable'
 import { saveItemWidth } from 'client/entities/items'
-import type { Children } from 'client/types'
 import { saveItemsLocally } from 'client/features/save_items_locally'
+import type { ReactNode } from 'react'
 
 interface IProps {
-  children: Children
+  children: ReactNode
   index: number
 }
 
