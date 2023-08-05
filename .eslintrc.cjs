@@ -7,7 +7,6 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/all', // very strict, but cool
     // 'plugin:@typescript-eslint/stylistic-type-checked',
-    'prettier',
   ],
   ignorePatterns: ['dist', 'build', '.eslintrc.cjs', 'vite.config.ts', 'node_modules'],
   parser: '@typescript-eslint/parser',
@@ -45,5 +44,7 @@ module.exports = {
     '@typescript-eslint/naming-convention': 'off',
     '@typescript-eslint/strict-boolean-expressions': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
+    "object-curly-spacing": "off",
+    "@typescript-eslint/object-curly-spacing": "off"
   },
 }

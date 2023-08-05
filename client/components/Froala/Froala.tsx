@@ -1,6 +1,6 @@
-import { RefAny, RefDiv } from 'client/types'
-import { AnyAction } from '@reduxjs/toolkit'
-import { SxProps } from '@mui/material'
+import type { RefAny, RefDiv } from 'client/types'
+import type { AnyAction } from '@reduxjs/toolkit'
+import type { SxProps } from '@mui/material'
 import { useSelectorTyped } from 'client/shared/hooks'
 import { StaticHtml } from './StaticHtml'
 import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
@@ -9,7 +9,7 @@ import { useViewPortObserver } from './useViewPortObserver'
 import './froala_editor.pkgd.min.css'
 // import './plugins.pkgd.min.css'
 
-type ReducerProps = {
+interface ReducerProps {
   index: number
   html: string
   rowIndex?: number
@@ -21,7 +21,7 @@ export type SaveFroalaReducer = ({
   rowIndex,
 }: ReducerProps) => AnyAction
 
-type Props = {
+interface Props {
   index: number
   padding?: number | string
   getHtml: () => string
@@ -29,7 +29,7 @@ type Props = {
   editorRef: RefAny
   placeholder?: string
   additionalStyle?: SxProps
-  onClickAwayIfHtmChanged?: Function
+  onClickAwayIfHtmChanged?: () => void
   rowIndex?: number
   saveFroalaReducer: SaveFroalaReducer
 }
@@ -45,14 +45,10 @@ export const Froala = ({
   placeholder,
   rowIndex,
   saveFroalaReducer,
-}: Props) => {
-  const isCopyMode = useSelectorTyped((state) => state.copy.isCopyMode)
-  const { heightDuringAnimationRef } = useFixedHeightForAnimation({
-    froalaElementRef,
-  })
-  const { observerRef, isInsideViewPort } = useViewPortObserver()
-
-  // todo: add an option and state which will show RenderedHtml and init froala on mousedown, for froalas at header, item, cost, price
+}: Props): JSX.Element => {
+  const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
+  const { heightDuringAnimationRef } = useFixedHeightForAnimation({ froalaElementRef })
+  const { observerRef, isInsideViewPort } = useViewPortObserver({ index })
 
   const showStaticHtml = isCopyMode || !isInsideViewPort
   const showEditableHtml = !isCopyMode && isInsideViewPort

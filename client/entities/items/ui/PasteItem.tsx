@@ -1,7 +1,8 @@
+import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 import { theme } from 'client/shared/clients'
 import { motion } from 'framer-motion'
 
-export const PasteItem = () => (
+export const PasteItem = (): EmotionJSX.Element => (
   <motion.div
     initial={{
       height: 0,
