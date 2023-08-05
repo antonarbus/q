@@ -13,11 +13,6 @@ interface IProps {
 
 /**
  * Dark transparent div with slidable into view content on mount and slidable out view on mouse click or esc button
- * @param props object with parameters
- * @param props.children anything, goes inside tags
- * @param props.content anything, same, but goes as a prop
- * @param props.onSlideIn func called after slide in animation end
- * @param props.onSlideOut func called after slide out animation end
  */
 
 export const BackdropWithSlidableContent = ({

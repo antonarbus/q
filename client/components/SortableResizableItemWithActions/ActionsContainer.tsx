@@ -1,8 +1,10 @@
-type Props = {
-  children?: React.ReactNode
+import type { ReactNode } from 'react'
+
+interface IProps {
+  children?: ReactNode
 }
 
-export const ActionsContainer = ({ children }: Props) => (
+export const ActionsContainer = ({ children }: IProps): JSX.Element => (
   <div
     className='actions'
     css={{

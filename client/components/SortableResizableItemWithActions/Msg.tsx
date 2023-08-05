@@ -7,10 +7,9 @@ interface IProps {
   index: number
 }
 
-export const Msg = ({ index }: IProps) => {
+export const Msg = ({ index }: IProps): JSX.Element => {
   const dispatch = useDispatchTyped()
-  const msg = useSelectorTyped((state) => state.items[index]?.msg)
-  // const { msg } = item
+  const msg = useSelectorTyped(state => state.items[index]?.msg)
 
   useUpdateEffect(function hideMsg() {
     const timeout = setTimeout(() => {
