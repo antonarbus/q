@@ -1,7 +1,7 @@
-import { Key } from 'client/components/Key'
+import { KbdKey } from 'client/shared/components'
 import { useCloseOnEsc } from './useCloseOnEsc'
 
-export const PressEsc = () => {
+export const PressEsc = (): JSX.Element => {
   useCloseOnEsc()
 
   return (
@@ -16,7 +16,7 @@ export const PressEsc = () => {
         zIndex: 1,
       }}
     >
-      <Key>Esc</Key> to exit
+      <KbdKey>Esc</KbdKey> to exit
     </div>
   )
 }
