@@ -2,9 +2,9 @@ import { Button, CircularProgress } from '@mui/material'
 import { useRef } from 'react'
 import { useUpdateEffect } from 'react-use'
 import './successErrorIcons.css'
-import { RefDiv } from 'client/types'
+import type { RefDiv } from 'client/types'
 
-type Props = {
+interface Props {
   children?: React.ReactNode
   content?: React.ReactNode
   circleProgressSize?: number | string
@@ -15,7 +15,7 @@ type Props = {
   setSuccess?: any
   error?: any
   setError?: any
-  httpStatus?: 'loading' | 'error' | 'success' | ''
+  httpStatus?: '' | 'error' | 'loading' | 'success'
   setHttpStatus?: any
   [x: string]: any // all other ...restProps props
 }
@@ -34,7 +34,9 @@ export function ButtonCustom({
 
   useUpdateEffect(() => {
     const timer = window.setTimeout(() => setHttpStatus(''), 3000)
-    return () => clearTimeout(timer)
+    return () => {
+      clearTimeout(timer);
+    }
   }, [httpStatus])
 
   const iconBackgroundStyle: React.CSSProperties = {
