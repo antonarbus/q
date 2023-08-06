@@ -1,11 +1,12 @@
 import { useEffect } from 'react'
+import type { AnimationControls } from 'framer-motion';
 import { useAnimationControls } from 'framer-motion'
 import { useFirstMountState } from 'react-use'
 import { useSelectorTyped } from 'client/shared/hooks'
 import { containerPadding, containerWidth } from './CopyContainer'
 import { theme } from 'client/shared/clients'
 
-export const useCopyContainerAnimation = () => {
+export const useCopyContainerAnimation = (): AnimationControls => {
   const copyContainerAnimationControls = useAnimationControls()
   const isFirstMount = useFirstMountState()
   const items = useSelectorTyped((state) => state.copy.items)
@@ -16,8 +17,8 @@ export const useCopyContainerAnimation = () => {
       return accumulator + scaleFactor * item.height + 5
     }, 70)
 
-    isFirstMount &&
-      copyContainerAnimationControls.start({
+    if (isFirstMount) {
+      void copyContainerAnimationControls.start({
         width: 'auto',
         transition: {
           delay: 0,
@@ -25,8 +26,9 @@ export const useCopyContainerAnimation = () => {
           type: 'spring',
         },
       })
+    }
 
-    copyContainerAnimationControls.start({
+    void copyContainerAnimationControls.start({
       height: newHeight,
       transition: {
         delay: 0,
@@ -34,6 +36,7 @@ export const useCopyContainerAnimation = () => {
         type: 'spring',
       },
     })
+
   }, [items.length])
 
   return copyContainerAnimationControls

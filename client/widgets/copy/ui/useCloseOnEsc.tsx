@@ -3,24 +3,26 @@ import { removePasteItem } from 'client/entities/items'
 import { useDispatchTyped } from 'client/shared/hooks'
 import { useEffectOnce } from 'react-use'
 
-export function useCloseOnEsc() {
+export const useCloseOnEsc = (): void => {
   const dispatch = useDispatchTyped()
 
-  function closeOnEsc(e: KeyboardEvent) {
+  const closeOnEsc = (e: KeyboardEvent): void => {
     if (e.key !== 'Escape') return
     dispatch(hideCopyContainer())
     dispatch(removePasteItem())
     setTimeout(() => {
       dispatch(exitFromCopyMode())
     }, 500)
-  }
+  };
 
-  function listenForEsc() {
+  type TReturn = () => void
+
+  const listenForEsc = (): TReturn => {
     window.addEventListener('keydown', closeOnEsc)
-    return () => {
+    return (): void => {
       window.removeEventListener('keydown', closeOnEsc)
     }
-  }
+  };
 
   useEffectOnce(listenForEsc)
-}
+};

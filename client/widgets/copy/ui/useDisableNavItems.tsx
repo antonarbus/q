@@ -5,7 +5,7 @@ import {
   enableTopMenuItems,
 } from 'client/entities/nav'
 
-export const useDisableNavItems = () => {
+export const useDisableNavItems = (): void => {
   const dispatch = useDispatchTyped()
 
   useEffectOnce(() => {

@@ -14,7 +14,7 @@ interface IProps {
   e: MouseEvent
 }
 
-function getPastePlace({ item, e }: IProps): CopyPlaceType {
+const getPastePlace = ({ item, e }: IProps): CopyPlaceType => {
   const { height, top } = item.getBoundingClientRect()
   const yWithinElement = e.clientY - top
   const distToTop = yWithinElement
@@ -23,9 +23,9 @@ function getPastePlace({ item, e }: IProps): CopyPlaceType {
   if (distToTop < 20) return { pastePos: 'top', itemId: item.id }
   if (distToBottom < 20) return { pastePos: 'bottom', itemId: item.id }
   return { pastePos: 'middle', itemId: item.id }
-}
+};
 
-function movePasteTextAfterCursor(e: MouseEvent) {
+const movePasteTextAfterCursor = (e: MouseEvent): void => {
   const prevPlace = store.getState().copy.place
   const isPasteTextShown = store.getState().copy.isPasteTextShown
 
@@ -61,9 +61,9 @@ function movePasteTextAfterCursor(e: MouseEvent) {
   store.dispatch(showPasteText())
   store.dispatch(updatePastePos(pastePlace))
   store.dispatch(insertPasteItem(pastePlace))
-}
+};
 
-export const useMovePasteTextAfterCursor = () => {
+export const useMovePasteTextAfterCursor = (): void => {
   useEffectOnce(() => {
     document.body.style.cursor = 'pointer'
     document.addEventListener('mousemove', movePasteTextAfterCursor, {
