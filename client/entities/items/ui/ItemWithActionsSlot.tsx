@@ -8,8 +8,7 @@ import { CopyIcon } from '../../../features/copy_item/CopyIcon'
 import { CutIcon } from '../../../features/cut_item/CutIcon'
 import { DeleteIcon } from '../../../features/delete_item/DeleteIcon'
 import { Msg } from './Msg'
-import { ReduceOpacityIfPasteHere } from './ReduceOpacityIfPasteHere'
-import { PasteTextInMiddle } from './PasteTextInMiddle'
+import { PasteHere } from './PasteHere'
 
 interface IProps {
   index: number
@@ -38,10 +37,9 @@ export const ItemWithActionsSlot = ({ index, children }: IProps): JSX.Element =>
       )}
     >
       <Msg index={index} />
-      <ReduceOpacityIfPasteHere index={index}>
+      <PasteHere index={index}>
         {children}
-      </ReduceOpacityIfPasteHere>
-      <PasteTextInMiddle index={index} />
+      </PasteHere>
     </ItemLayout>
   )
 }
