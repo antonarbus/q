@@ -1,7 +1,6 @@
 
 import type { ReactNode } from 'react'
 import { useIsItemDisabled } from './useIsItemDisabled'
-import { ItemLayout } from 'client/shared/layouts'
 import { store } from 'client/shared/clients'
 import { DragIcon } from 'client/features/drag_item'
 import { CopyIcon } from 'client/features/copy_item/CopyIcon'
@@ -9,6 +8,7 @@ import { CutIcon } from 'client/features/cut_item/CutIcon'
 import { DeleteIcon } from 'client/features/delete_item/DeleteIcon'
 import { ItemMsg } from './ItemMsg'
 import { PasteHere } from './PasteHere'
+import { ItemLayout } from './item_layout'
 
 interface IProps {
   index: number
