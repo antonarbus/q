@@ -11,11 +11,7 @@ interface IProps {
   itemId: string
 }
 
-interface ISortableItem extends SortableElementProps {
-  children: ReactNode
-  itemHeight: number
-  itemId: string
-}
+interface ISortableItem extends SortableElementProps, IProps { }
 
 export const ItemLayout: ComponentClass<ISortableItem> =
   SortableElement(({ children, itemHeight, itemId }: IProps) => {
