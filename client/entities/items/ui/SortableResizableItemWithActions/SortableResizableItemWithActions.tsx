@@ -1,49 +1,47 @@
-import { ActionsContainer } from 'client/entities/items/ui/SortableResizableItemWithActions/ActionsContainer'
-import { CopyIcon } from 'client/entities/items/ui/SortableResizableItemWithActions/CopyIcon'
-import { CutIcon } from 'client/entities/items/ui/SortableResizableItemWithActions/CutIcon'
-import { DeleteIcon } from 'client/entities/items/ui/SortableResizableItemWithActions/DeleteIcon'
-import { PasteTextInMiddle } from 'client/entities/items/ui/SortableResizableItemWithActions/PasteTextInMiddle'
-import { ResizablePaper } from 'client/entities/items/ui/SortableResizableItemWithActions/ResizablePaper'
-import { DragIcon } from './DragIcon'
+
 import { useIsDisabledItem } from './useIsDisabledItem'
-import { Msg } from './Msg'
-import { ReduceOpacityIfPasteHere } from './ReduceOpacityIfPasteHere'
 import { ItemLayout } from 'client/shared/layouts'
 import { store } from 'client/shared/clients'
+import type { ReactNode } from 'react'
+import { DragIcon } from '../../../../features/drag_item/DragIcon'
+import { CopyIcon } from '../../../../features/copy_item/CopyIcon'
+import { CutIcon } from '../../../../features/cut_item/CutIcon'
+import { DeleteIcon } from '../../../../features/delete_item/DeleteIcon'
+import { Msg } from './Msg'
+import { ReduceOpacityIfPasteHere } from './ReduceOpacityIfPasteHere'
+import { PasteTextInMiddle } from './PasteTextInMiddle'
 
 interface IProps {
   index: number
-  children: React.ReactNode
+  children: ReactNode
 }
 
-export const SortableResizableItemWithActions = ({
-  index,
-  children,
-}: IProps): JSX.Element => {
+export const SortableResizableItemWithActions = ({ index, children }: IProps): JSX.Element => {
   const disabled = useIsDisabledItem()
   const item = store.getState().items[index]
 
   return (
     <ItemLayout
       index={index}
+      i={index}
       disabled={disabled}
       itemHeight={item?.height ?? 0}
+      itemWidth={item?.width ?? 0}
       itemId={item?.id ?? 'no id'}
+      itemActionElements={(
+        <>
+          <DragIcon />
+          <CopyIcon index={index} />
+          <CutIcon index={index} />
+          <DeleteIcon index={index} />
+        </>
+      )}
     >
-      <ActionsContainer>
-        <DragIcon />
-        <CopyIcon index={index} />
-        <CutIcon index={index} />
-        <DeleteIcon index={index} />
-      </ActionsContainer>
-      <ResizablePaper index={index}>
-        <Msg index={index} />
-        <ReduceOpacityIfPasteHere index={index}>
-          {children}
-        </ReduceOpacityIfPasteHere>
-        <PasteTextInMiddle index={index} />
-      </ResizablePaper>
-      <ActionsContainer /> {/* Right action container is used for symmetry, now it is empty, probably add there some icons later */}
+      <Msg index={index} />
+      <ReduceOpacityIfPasteHere index={index}>
+        {children}
+      </ReduceOpacityIfPasteHere>
+      <PasteTextInMiddle index={index} />
     </ItemLayout>
   )
 }

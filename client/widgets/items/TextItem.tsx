@@ -5,14 +5,13 @@ import { useRef } from 'react'
 import { Froala } from 'client/shared/ui/froala'
 import type { RefAny, RefDiv } from 'client/shared/types'
 import { saveText } from 'client/entities/items'
-import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 import { PencilAtBottomRight } from 'client/shared/components/PencilAtBottomRight'
 
 interface IProps {
   index: number
 }
 
-export const TextItem = ({ index }: IProps): EmotionJSX.Element => {
+export const TextItem = ({ index }: IProps): JSX.Element => {
   const froalaElementRef = useRef() as RefDiv
   const editorRef = useRef(null) as RefAny
 
