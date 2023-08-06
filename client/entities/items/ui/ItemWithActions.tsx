@@ -1,5 +1,5 @@
 
-import { useIsDisabledItem } from './useIsDisabledItem'
+import { useIsItemDisabled } from './useIsItemDisabled'
 import { ItemLayout } from 'client/shared/layouts'
 import { store } from 'client/shared/clients'
 import type { ReactNode } from 'react'
@@ -16,14 +16,14 @@ interface IProps {
 }
 
 export const ItemWithActions = ({ index, children }: IProps): JSX.Element => {
-  const disabled = useIsDisabledItem()
+  const isItemDisabled = useIsItemDisabled()
   const item = store.getState().items[index]
 
   return (
     <ItemLayout
-      index={index}
+      index={index} // internal prop consumed by SortableElement HOC
+      disabled={isItemDisabled} // internal prop consumed by SortableElement HOC
       i={index}
-      disabled={disabled}
       itemHeight={item?.height ?? 0}
       itemWidth={item?.width ?? 0}
       itemId={item?.id ?? 'no id'}
