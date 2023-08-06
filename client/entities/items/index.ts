@@ -1,4 +1,5 @@
 export { defaultItems } from './model/defaultItems'
+export { ItemWithActionsSlot } from './ui/ItemWithActionsSlot'
 export type { TItem } from './model/types'
 export {
   itemsReducer,
@@ -15,3 +16,4 @@ export {
   insertPasteItem,
   selectIsLastItem,
 } from './model/itemsSlice'
+

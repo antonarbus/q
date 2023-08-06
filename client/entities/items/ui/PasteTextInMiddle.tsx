@@ -1,5 +1,5 @@
 import { useTheme } from '@mui/material'
-import { useIsPasteHere } from 'client/entities/items/ui/SortableResizableItemWithActions/useIsPasteHere'
+import { useIsPasteHere } from './useIsPasteHere'
 
 interface IProps {
   index: number
