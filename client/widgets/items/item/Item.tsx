@@ -1,12 +1,12 @@
 
+import type { ReactNode } from 'react'
 import { useIsItemDisabled } from './useIsItemDisabled'
 import { ItemLayout } from 'client/shared/layouts'
 import { store } from 'client/shared/clients'
-import type { ReactNode } from 'react'
-import { DragIcon } from '../../../features/drag_item/DragIcon'
-import { CopyIcon } from '../../../features/copy_item/CopyIcon'
-import { CutIcon } from '../../../features/cut_item/CutIcon'
-import { DeleteIcon } from '../../../features/delete_item/DeleteIcon'
+import { DragIcon } from 'client/features/drag_item'
+import { CopyIcon } from 'client/features/copy_item/CopyIcon'
+import { CutIcon } from 'client/features/cut_item/CutIcon'
+import { DeleteIcon } from 'client/features/delete_item/DeleteIcon'
 import { ItemMsg } from './ItemMsg'
 import { PasteHere } from './PasteHere'
 
@@ -15,7 +15,7 @@ interface IProps {
   children: ReactNode
 }
 
-export const ItemWithActions = ({ index, children }: IProps): JSX.Element => {
+export const Item = ({ index, children }: IProps): JSX.Element => {
   const isItemDisabled = useIsItemDisabled()
   const item = store.getState().items[index]
 

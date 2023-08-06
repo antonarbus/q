@@ -1,6 +1,5 @@
-export { defaultItems } from './model/defaultItems'
-export { ItemWithActions } from './ui/ItemWithActions'
 export type { TItem } from './model/types'
+export { defaultItems } from './model/defaultItems'
 export {
   itemsReducer,
   reOrderItems,

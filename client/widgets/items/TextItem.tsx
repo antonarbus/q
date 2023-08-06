@@ -3,8 +3,9 @@ import { store } from 'client/app/store'
 import { useRef } from 'react'
 import { Froala } from 'client/shared/ui/froala'
 import type { RefAny, RefDiv } from 'client/shared/types'
-import { ItemWithActions, saveText } from 'client/entities/items'
+import { saveText } from 'client/entities/items'
 import { PencilAtBottomRight } from 'client/shared/components/PencilAtBottomRight'
+import { Item } from './item'
 
 interface IProps {
   index: number
@@ -15,7 +16,7 @@ export const TextItem = ({ index }: IProps): JSX.Element => {
   const editorRef = useRef(null) as RefAny
 
   return (
-    <ItemWithActions index={index}>
+    <Item index={index}>
       <Froala
         index={index}
         editorRef={editorRef}
@@ -31,6 +32,6 @@ export const TextItem = ({ index }: IProps): JSX.Element => {
         saveFroalaReducer={saveText}
       />
       <PencilAtBottomRight editorRef={editorRef} />
-    </ItemWithActions>
+    </Item>
   )
 }
