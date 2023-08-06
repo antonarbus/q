@@ -1,0 +1,1 @@
+export { CutIcon } from './CutIcon'
