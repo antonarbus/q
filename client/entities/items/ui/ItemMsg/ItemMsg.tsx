@@ -1,27 +1,14 @@
-import { removeItemMsg } from 'client/entities/items'
-import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
+import { useSelectorTyped } from 'client/shared/hooks'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useUpdateEffect } from 'react-use'
+import { useRemoveItemMsgAfterSomeTime } from './useRemoveItemMsg'
 
 interface IProps {
   index: number
 }
 
-export const Msg = ({ index }: IProps): JSX.Element => {
-  const dispatch = useDispatchTyped()
+export const ItemMsg = ({ index }: IProps): JSX.Element => {
   const msg = useSelectorTyped(state => state.items[index]?.msg)
-
-  useUpdateEffect(() => {
-    // hide msg after 1.7s
-    const timeout = setTimeout(() => {
-      if (!msg) return
-      dispatch(removeItemMsg({ index }))
-    }, 1700)
-
-    return () => {
-      clearTimeout(timeout)
-    }
-  })
+  useRemoveItemMsgAfterSomeTime({ index })
 
   return (
     <AnimatePresence>

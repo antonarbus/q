@@ -7,7 +7,7 @@ import { DragIcon } from '../../../features/drag_item/DragIcon'
 import { CopyIcon } from '../../../features/copy_item/CopyIcon'
 import { CutIcon } from '../../../features/cut_item/CutIcon'
 import { DeleteIcon } from '../../../features/delete_item/DeleteIcon'
-import { Msg } from './Msg'
+import { ItemMsg } from './ItemMsg'
 import { PasteHere } from './PasteHere'
 
 interface IProps {
@@ -15,7 +15,7 @@ interface IProps {
   children: ReactNode
 }
 
-export const ItemWithActionsSlot = ({ index, children }: IProps): JSX.Element => {
+export const ItemWithActions = ({ index, children }: IProps): JSX.Element => {
   const disabled = useIsDisabledItem()
   const item = store.getState().items[index]
 
@@ -36,7 +36,7 @@ export const ItemWithActionsSlot = ({ index, children }: IProps): JSX.Element =>
         </>
       )}
     >
-      <Msg index={index} />
+      <ItemMsg index={index} />
       <PasteHere index={index}>
         {children}
       </PasteHere>

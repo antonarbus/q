@@ -1,5 +1,5 @@
 export { defaultItems } from './model/defaultItems'
-export { ItemWithActionsSlot } from './ui/ItemWithActionsSlot'
+export { ItemWithActions } from './ui/ItemWithActions'
 export type { TItem } from './model/types'
 export {
   itemsReducer,
