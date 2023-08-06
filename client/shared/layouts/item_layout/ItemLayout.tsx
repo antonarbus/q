@@ -69,12 +69,8 @@ export const ItemLayout: ComponentClass<ISortableItem> =
           width: '100%',
         }}
       >
-        <ActionsContainer
-          itemActionElements={itemActionElements} />
-        <ResizablePaper
-          itemWidth={itemWidth}
-          index={i}
-        >
+        <ActionsContainer itemActionElements={itemActionElements} />
+        <ResizablePaper itemWidth={itemWidth} index={i} >
           {children}
         </ResizablePaper>
         <ActionsContainer /> {/* Right action container is used for symmetry, no icons inside */}
