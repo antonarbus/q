@@ -1,7 +1,9 @@
 import ReactDOM from 'react-dom/client'
-import { App } from 'client/app/App'
 import { disableReactDevTools } from '@fvilers/disable-react-devtools'
+import { App } from './App'
 
 if (process.env.NODE_ENV === 'production') disableReactDevTools()
-
-ReactDOM.createRoot(document.getElementById('root')!).render(<App />)
+const rootElement = document.getElementById('root')
+if (rootElement instanceof Element) {
+  ReactDOM.createRoot(rootElement).render(<App />)
+}
