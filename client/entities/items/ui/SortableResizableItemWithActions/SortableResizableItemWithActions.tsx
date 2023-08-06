@@ -4,11 +4,12 @@ import { CutIcon } from 'client/entities/items/ui/SortableResizableItemWithActio
 import { DeleteIcon } from 'client/entities/items/ui/SortableResizableItemWithActions/DeleteIcon'
 import { PasteTextInMiddle } from 'client/entities/items/ui/SortableResizableItemWithActions/PasteTextInMiddle'
 import { ResizablePaper } from 'client/entities/items/ui/SortableResizableItemWithActions/ResizablePaper'
-import { SortableItem } from './SortableItem'
 import { DragIcon } from './DragIcon'
 import { useIsDisabledItem } from './useIsDisabledItem'
 import { Msg } from './Msg'
 import { ReduceOpacityIfPasteHere } from './ReduceOpacityIfPasteHere'
+import { ItemLayout } from 'client/shared/layouts'
+import { store } from 'client/shared/clients'
 
 interface IProps {
   index: number
@@ -19,13 +20,15 @@ export const SortableResizableItemWithActions = ({
   index,
   children,
 }: IProps): JSX.Element => {
-  const isDisabled = useIsDisabledItem()
+  const disabled = useIsDisabledItem()
+  const item = store.getState().items[index]
 
   return (
-    <SortableItem
-      disabled={isDisabled}
+    <ItemLayout
       index={index}
-      i={index} // "i", because "index" is internally reserved by SortableElement
+      disabled={disabled}
+      itemHeight={item?.height ?? 0}
+      itemId={item?.id ?? 'no id'}
     >
       <ActionsContainer>
         <DragIcon />
@@ -41,6 +44,6 @@ export const SortableResizableItemWithActions = ({
         <PasteTextInMiddle index={index} />
       </ResizablePaper>
       <ActionsContainer /> {/* Right action container is used for symmetry, now it is empty, probably add there some icons later */}
-    </SortableItem>
+    </ItemLayout>
   )
 }
