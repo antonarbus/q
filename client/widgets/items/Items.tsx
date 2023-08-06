@@ -1,9 +1,10 @@
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { TItem } from '../../entities/items/model/types'
-import { ItemsFeedLayout } from 'client/shared/layouts'
 import { onItemDrag } from 'client/features/drag_item'
 import { TextItem } from './TextItem'
 import { PasteItem } from './PasteItem'
+import { AnimatePresence } from 'framer-motion'
+import { DraggableItemsContainer } from './DraggableItemsContainer'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type EqualityFn = (a: any, b: any) => boolean
@@ -22,21 +23,23 @@ export const Items = (): JSX.Element => {
   const shouldReRender = useSelectorTyped(state => state.offer.toggleOffer)
 
   return (
-    <ItemsFeedLayout
-      onItemDragStart={(): void => {
-        onItemDrag.start()
-      }}
-      onItemDragEnd={({ oldIndex, newIndex }): void => {
+    <DraggableItemsContainer
+      useDragHandle
+      useWindowAsScrollContainer
+      onSortStart={onItemDrag.start}
+      onSortEnd={({ oldIndex, newIndex }): void => {
         onItemDrag.end({ oldIndex, newIndex })
       }}
     >
-      {items.map((item, index) => {
-        const key = item.id + shouldReRender.toString()
+      <AnimatePresence initial={false}>
+        {items.map((item, index) => {
+          const key = item.id + shouldReRender.toString()
 
-        if (item.type === 'text') return <TextItem key={key} index={index} />
-        if (item.type === 'boq') return <div key={key}>boq</div>
-        return <PasteItem key={key} />
-      })}
-    </ItemsFeedLayout>
+          if (item.type === 'text') return <TextItem key={key} index={index} />
+          if (item.type === 'boq') return <div key={key}>boq</div>
+          return <PasteItem key={key} />
+        })}
+      </AnimatePresence>
+    </DraggableItemsContainer >
   )
 }
