@@ -8,12 +8,11 @@ import type { ReactNode } from 'react'
 interface IProps {
   children: ReactNode
   index: number
+  itemWidth: number
 }
 
-export const ResizablePaper = ({ children, index }: IProps) => {
+export const ResizablePaper = ({ children, index, itemWidth }: IProps): JSX.Element | null => {
   const dispatch = useDispatchTyped()
-  const item = store.getState().items[index]
-  if (!item) return null
 
   return (
     <Resizable
@@ -25,15 +24,15 @@ export const ResizablePaper = ({ children, index }: IProps) => {
         boxShadow: '#00000033 0px 0px 10px 0px',
         position: 'relative',
       }}
-      defaultSize={{ width: item.width, height: 'auto' }}
+      defaultSize={{ width: itemWidth, height: 'auto' }}
       grid={[20, 0]}
       minWidth='200px'
       maxWidth='100%'
-      bounds={'window' || 'parent'}
+      bounds={'window'}
       enable={{ right: true, left: true }}
-      onResize={(e, direction, refToElement, delta) => { }}
-      onResizeStart={() => { }}
-      onResizeStop={(e, direction, refToElement) => {
+      // onResize={(e, direction, refToElement, delta) => { }}
+      // onResizeStart={() => { }}
+      onResizeStop={(e, direction, refToElement): void => {
         const width = parseInt(refToElement.style.width)
         dispatch(saveItemWidth({ index, width }))
         saveItemsLocally({ msgAboveItemWithIndex: index })

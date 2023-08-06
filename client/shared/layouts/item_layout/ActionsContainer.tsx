@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react'
 
 interface IProps {
-  children?: ReactNode
+  itemActionElements?: ReactNode
 }
 
-export const ActionsContainer = ({ children }: IProps): JSX.Element => (
+export const ActionsContainer = ({ itemActionElements }: IProps): JSX.Element => (
   <div
     className='actions'
     css={{
@@ -23,6 +23,6 @@ export const ActionsContainer = ({ children }: IProps): JSX.Element => (
       },
     }}
   >
-    {children}
+    {itemActionElements}
   </div>
 )

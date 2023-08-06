@@ -1,8 +1,9 @@
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { TItem } from '../../entities/items/model/types'
-import { PasteItem, TextItem } from 'client/entities/items'
 import { ItemsFeedLayout } from 'client/shared/layouts'
 import { onItemDrag } from 'client/features/drag_item'
+import { TextItem } from './TextItem'
+import { PasteItem } from './PasteItem'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type EqualityFn = (a: any, b: any) => boolean

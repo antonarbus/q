@@ -7,12 +7,12 @@ interface IProps {
   index: number
 }
 
-export const Msg = ({ index }: IProps): JSX.Element => {
+export const ItemMsg = ({ index }: IProps): JSX.Element => {
   const dispatch = useDispatchTyped()
   const msg = useSelectorTyped(state => state.items[index]?.msg)
 
   useUpdateEffect(() => {
-    // hide msg after 1.7s
+    // hide msg
     const timeout = setTimeout(() => {
       if (!msg) return
       dispatch(removeItemMsg({ index }))

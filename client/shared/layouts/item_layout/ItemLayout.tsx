@@ -4,17 +4,29 @@ import { motion } from 'framer-motion'
 import { theme } from 'client/shared/clients'
 import type { ComponentClass, ReactNode } from 'react'
 import { useRef } from 'react'
+import { ActionsContainer } from './ActionsContainer'
+import { ResizablePaper } from './ResizablePaper'
 
 interface IProps {
   children: ReactNode
   itemHeight: number
-  itemId: string
+  itemId: string,
+  itemActionElements?: ReactNode
+  i: number,
+  itemWidth: number
 }
 
 interface ISortableItem extends SortableElementProps, IProps { }
 
 export const ItemLayout: ComponentClass<ISortableItem> =
-  SortableElement(({ children, itemHeight, itemId }: IProps) => {
+  SortableElement(({
+    i,
+    children,
+    itemHeight,
+    itemId,
+    itemActionElements,
+    itemWidth,
+  }: IProps) => {
     const itemRef = useRef<HTMLDivElement>(null);
 
     return (
@@ -30,7 +42,7 @@ export const ItemLayout: ComponentClass<ISortableItem> =
           overflow: 'hidden',
         }}
         animate={{
-          height: itemHeight, // height is stored on copy/cut icon click
+          height: itemHeight, // height is being stored on copy/cut icon click
           marginBottom: 20,
           opacity: 1,
           y: 0,
@@ -57,7 +69,15 @@ export const ItemLayout: ComponentClass<ISortableItem> =
           width: '100%',
         }}
       >
-        {children}
+        <ActionsContainer
+          itemActionElements={itemActionElements} />
+        <ResizablePaper
+          itemWidth={itemWidth}
+          index={i}
+        >
+          {children}
+        </ResizablePaper>
+        <ActionsContainer /> {/* Right action container is used for symmetry, no icons inside */}
       </motion.div>
     )
   })
