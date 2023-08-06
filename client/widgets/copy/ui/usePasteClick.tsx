@@ -6,7 +6,9 @@ import { exitFromCopyMode, hideCopyContainer, removeItemFromCopyContainer } from
 import { pasteItem, removePasteItem } from 'client/entities/items'
 import { saveItemsLocally } from 'client/shared/lib'
 
-function pasteItemOnClick(): void {
+// todo: move to features
+
+const pasteItemOnClick = (): void => {
   const isPasteTextShown = store.getState().copy.isPasteTextShown
   if (!isPasteTextShown) return
   const { itemId, pastePos } = store.getState().copy.place
@@ -29,7 +31,7 @@ function pasteItemOnClick(): void {
       1000 * theme.item.animationDuration + 500,
     )
   }
-}
+};
 
 export const usePasteClick = (): void => {
   useEffectOnce(() => {
