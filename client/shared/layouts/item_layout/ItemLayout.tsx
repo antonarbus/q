@@ -1,31 +1,30 @@
-import type { SortableElementProps } from 'react-sortable-hoc';
+import type { SortableElementProps } from 'react-sortable-hoc'
 import { SortableElement } from 'react-sortable-hoc'
 import { motion } from 'framer-motion'
 import { theme } from 'client/shared/clients'
-import type { RefDiv } from 'client/shared/types'
-import { store } from 'client/app/store'
-import type { ReactNode } from 'react';
+import type { ComponentClass, ReactNode } from 'react'
 import { useRef } from 'react'
 
 interface IProps {
   children: ReactNode
-  i: number // "index" is occupied internally by SortableElement
+  itemHeight: number
+  itemId: string
 }
 
 interface ISortableItem extends SortableElementProps {
   children: ReactNode
-  i: number
+  itemHeight: number
+  itemId: string
 }
 
-export const SortableItem: React.ComponentClass<ISortableItem> =
-  SortableElement(({ children, i }: IProps) => {
-    const ref = useRef() as RefDiv
-    const item = store.getState().items[i]
+export const ItemLayout: ComponentClass<ISortableItem> =
+  SortableElement(({ children, itemHeight, itemId }: IProps) => {
+    const itemRef = useRef<HTMLDivElement>(null);
 
     return (
       <motion.div
-        ref={ref}
-        id={item?.id}
+        ref={itemRef}
+        id={itemId}
         className='item'
         initial={{
           height: 0,
@@ -35,7 +34,7 @@ export const SortableItem: React.ComponentClass<ISortableItem> =
           overflow: 'hidden',
         }}
         animate={{
-          height: item?.height, // height is stored on copy/cut icon click
+          height: itemHeight, // height is stored on copy/cut icon click
           marginBottom: 20,
           opacity: 1,
           y: 0,
