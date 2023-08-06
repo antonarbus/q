@@ -151,7 +151,7 @@ export const {
 export const itemsReducer = itemsSlice.reducer
 
 // selectors
-export const selectIsLastItem = (state: RootState): boolean =>
+export const selectIsItemAlone = (state: RootState): boolean =>
   state.items.filter((item) => item.type !== 'paste').length === 1
 
 export const selectItemsShape = createSelector(

@@ -10,7 +10,7 @@ interface IProps {
   index: number
 }
 
-export const CopyIcon = ({ index }: IProps) => {
+export const CopyIcon = ({ index }: IProps): JSX.Element => {
   const dispatch = useDispatchTyped()
 
   return (
@@ -22,22 +22,29 @@ export const CopyIcon = ({ index }: IProps) => {
         position: 'relative',
         top: 1,
       }}
-      onClick={(e: React.MouseEvent) => {
-        const items = document.querySelectorAll('.item-paper')
-        items.forEach((item, index) => {
-          const height = item.clientHeight
-          dispatch(saveItemHeight({ index, height }))
-        })
+      onClick={(e: React.MouseEvent): void => {
+        const clickedIconElement = e.target
+        if (!(clickedIconElement instanceof Element)) return
+        const itemElement = clickedIconElement.closest('.item')
+        if (!(itemElement instanceof Element)) return
+        const paperElement = itemElement.querySelector('.item-paper')
+        if (!(paperElement instanceof Element)) return
 
-        dispatch(saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
-        dispatch(showCopyContainer())
-        const itemToCopy = store.getState().items[index]
-        const html = (e.target as HTMLElement)!
-          .closest('.item')!
-          .querySelector('.item-paper')!.innerHTML
+        const html = paperElement.innerHTML
         const cleanedHtml = cleanHtml(html)
+        const itemToCopy = store.getState().items[index]
         const item = { ...itemToCopy, previewHtml: cleanedHtml }
         dispatch(addItemIntoCopyContainer(item))
+        dispatch(saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
+        dispatch(showCopyContainer())
+
+        const items = document.querySelectorAll('.item-paper')
+        items.forEach((itemEl, i) => {
+          dispatch(saveItemHeight({
+            index: i,
+            height: itemEl.clientHeight,
+          }))
+        })
       }}
     >
       <MdCopyAll />

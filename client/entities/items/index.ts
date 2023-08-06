@@ -13,6 +13,6 @@ export {
   saveText,
   removePasteItem,
   insertPasteItem,
-  selectIsLastItem,
+  selectIsItemAlone,
 } from './model/itemsSlice'
 
