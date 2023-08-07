@@ -1,3 +1,4 @@
+import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
@@ -9,9 +10,9 @@ const spinnerSlice = createSlice({
   name: 'spinner',
   initialState,
   reducers: {
-    startSpinner: (state, action) => {
+    startSpinner: (state, action: PayloadAction<{ text: string | undefined }>) => {
       state.isLoading = true
-      state.text = action.payload?.text
+      state.text = action.payload.text ?? ''
     },
     stopSpinner: () => initialState,
   },

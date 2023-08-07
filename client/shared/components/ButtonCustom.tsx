@@ -20,7 +20,7 @@ interface Props {
   [x: string]: any // all other ...restProps props
 }
 
-export function ButtonCustom({
+export const ButtonCustom = ({
   children,
   content,
   circleProgressSize,
@@ -28,14 +28,14 @@ export function ButtonCustom({
   httpStatus,
   setHttpStatus,
   ...restProps
-}: Props) {
+}: Props): JSX.Element => {
   const successIconRef = useRef() as RefDiv
   const errorIconRef = useRef() as RefDiv
 
   useUpdateEffect(() => {
     const timer = window.setTimeout(() => setHttpStatus(''), 3000)
     return () => {
-      clearTimeout(timer);
+      clearTimeout(timer)
     }
   }, [httpStatus])
 

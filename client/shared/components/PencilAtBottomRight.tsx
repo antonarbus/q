@@ -1,7 +1,7 @@
-import { RefAny } from 'client/shared/types'
+import type { RefAny } from 'client/shared/types'
 import { BiEditAlt as PencilIcon } from 'react-icons/bi'
 
-type Props = {
+interface Props {
   editorRef: RefAny
 }
 
@@ -16,7 +16,7 @@ export const PencilAtBottomRight = ({ editorRef }: Props) => {
         height: 14,
         cursor: 'pointer',
       }}
-      onClick={(e) => {
+      onClick={(): void => {
         editorRef.current.commands.selectAll()
       }}
     />

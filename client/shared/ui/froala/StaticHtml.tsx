@@ -1,7 +1,7 @@
-import type { SxProps } from '@mui/material';
+import type { SxProps } from '@mui/material'
 import { Box } from '@mui/material'
 import type { RefAny } from 'client/shared/types'
-import type { MutableRefObject } from 'react';
+import type { MutableRefObject } from 'react'
 import { useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 
@@ -19,7 +19,7 @@ export const StaticHtml = ({
   additionalStyle,
   editorRef,
   heightDuringAnimationRef,
-}: Props) => {
+}: Props): JSX.Element => {
   const ref = useRef<HTMLDivElement>()
   const html = useRef(getHtml())
 
@@ -27,12 +27,14 @@ export const StaticHtml = ({
     html.current = editorRef.current?.html.get()
   }
 
-  useEffectOnce(function insertHtmlIntoElement() {
+  useEffectOnce(() => {
+    // insert Html Into Element
     if (!ref.current) return
     ref.current.innerHTML = html.current || getHtml()
   })
 
-  useEffectOnce(function saveHeightAfterLoadingContent() {
+  useEffectOnce(() => {
+    // save Height After Loading Content
     if (!ref.current?.clientHeight) return
     heightDuringAnimationRef.current = ref.current.clientHeight
   })
@@ -42,7 +44,7 @@ export const StaticHtml = ({
       ref={ref}
       className='q-froala-element not-editable'
       style={{
-        padding: padding || 0,
+        padding: padding ?? 0,
       }}
       sx={{
         wordBreak: 'break-word',

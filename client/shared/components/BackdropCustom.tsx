@@ -1,5 +1,5 @@
-type Props = {
-  onMouseDown: any
+interface Props {
+  onMouseDown: () => void
   children?: React.ReactNode
   content?: React.ReactNode
   color?: string
@@ -19,7 +19,7 @@ export const BackdropCustom = ({
   children,
   content,
   color,
-}: Props) => (
+}: Props): JSX.Element => (
   <div
     onMouseDown={onMouseDown}
     css={{

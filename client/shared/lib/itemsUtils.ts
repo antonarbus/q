@@ -5,7 +5,7 @@ export const cleanItem = (item: TItem): TItem => {
   modifiableItem.msg = ''
   modifiableItem.previewHtml = ''
   return modifiableItem
-};
+}
 
 export const cleanHtml = (html: string): string => {
   const htmlWithoutContentEditableTag = html.replaceAll('contenteditable="true"', '')

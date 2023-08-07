@@ -33,17 +33,17 @@ axiosWithAuth.interceptors.response.use(
         if (accessJwtToken) {
           token.access = accessJwtToken
           store.dispatch(
-            rememberLoggedUser({ email, isLogged: true, roles: 'viewer' })
+            rememberLoggedUser({ email, isLogged: true, roles: 'viewer' }),
           )
         }
         if (!accessJwtToken) {
           token.access = ''
           store.dispatch(forgetLoggedUser())
         }
-        return axiosWithAuth.request(originalRequest)
-      } catch (error) {
+        return await axiosWithAuth.request(originalRequest)
+      } catch (err) {
         console.log('not authorized')
-        console.log(error)
+        console.log(err)
       }
     }
 
@@ -52,5 +52,5 @@ axiosWithAuth.interceptors.response.use(
     }
 
     throw error
-  }
+  },
 )
