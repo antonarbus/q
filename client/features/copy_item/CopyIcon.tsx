@@ -3,7 +3,7 @@ import { store } from 'client/shared/clients'
 import { MdCopyAll } from 'react-icons/md'
 import { motion } from 'framer-motion'
 import { cleanHtml } from 'client/shared/lib/itemsUtils'
-import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/entities/copy'
+import { TCopyItem, addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/entities/copy'
 import { saveItemHeight } from 'client/entities/items'
 
 interface IProps {
@@ -33,6 +33,8 @@ export const CopyIcon = ({ index }: IProps): JSX.Element => {
         const html = paperElement.innerHTML
         const cleanedHtml = cleanHtml(html)
         const itemToCopy = store.getState().items[index]
+        if (!itemToCopy) return
+
         const item = { ...itemToCopy, previewHtml: cleanedHtml }
         dispatch(addItemIntoCopyContainer(item))
         dispatch(saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
