@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useEffectOnce } from 'react-use'
 import { navStructure } from '../navStructure'
 
-type Shortcuts = {
+interface Shortcuts {
   name: string
   shortcut: string[]
   function: (() => void) | null
@@ -13,14 +13,14 @@ type Shortcuts = {
 const shortcuts: Shortcuts[] = []
 let arr = navStructure
 
-function searchForShortcutsInNavStructure() {
+const searchForShortcutsInNavStructure = (): void => {
   arr.forEach((menuItem) => {
     if (menuItem.shortcut) {
       shortcuts.push({
         name: menuItem.name,
         shortcut: menuItem.shortcut,
-        function: menuItem.func || null,
-        link: menuItem.link || null,
+        function: menuItem.func ?? null,
+        link: menuItem.link ?? null,
       })
     }
   })
@@ -32,7 +32,7 @@ function searchForShortcutsInNavStructure() {
   })
 }
 
-export function useMenuItemActionShortcuts() {
+export const useMenuItemActionShortcuts = (): void => {
   const navigate = useNavigate()
 
   useEffectOnce(() => {
@@ -56,7 +56,7 @@ export function useMenuItemActionShortcuts() {
         return shortcutStr === pressedKeysStr
       })
       keysPressed = keysPressed.filter(
-        (key) => key !== e.key.toLocaleLowerCase()
+        (key) => key !== e.key.toLocaleLowerCase(),
       )
       if (shortcutItem === undefined) return
       e.preventDefault()
