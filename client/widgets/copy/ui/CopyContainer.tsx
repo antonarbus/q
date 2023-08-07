@@ -1,12 +1,11 @@
 import { useCursorCords } from './useCursorCords'
 import { motion } from 'framer-motion'
-import { PressEsc } from './PressEsc'
 import { FirstCopiedItem } from './FirstCopiedItem'
 import { RestOfCopiedItems } from './RestOfCopiedItems'
-import { useDisableNavItems } from './useDisableNavItems'
-import { usePasteClick } from './usePasteClick'
-import { useMovePasteTextAfterCursor } from './useMovePasteTextAfterCursor'
 import { useCopyContainerAnimation } from './useCopyContainerAnimation'
+import { useMovePasteTextAfterCursor, usePasteClick } from 'client/features/paste_item'
+import { useDisableNavItems } from 'client/features/disable_nav_items'
+import { PressEsc } from 'client/features/exit_copy_on_esc'
 
 export const containerWidth = 200
 export const containerPadding = 20

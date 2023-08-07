@@ -13,7 +13,7 @@ export const useCursorCords = (): IProps => {
 
   const followCursor = (e: MouseEvent): void => {
     setCursorCords({ x: e.x, y: e.y })
-  };
+  }
 
   type TReturn = () => void
 
@@ -22,9 +22,9 @@ export const useCursorCords = (): IProps => {
     return () => {
       window.removeEventListener('mousemove', followCursor)
     }
-  };
+  }
 
   useEffectOnce(listenForMousemove)
 
   return cursorCords
-};
+}

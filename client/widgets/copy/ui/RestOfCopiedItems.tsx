@@ -4,7 +4,9 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useSelectorTyped } from 'client/shared/hooks'
 import { containerPadding, containerWidth, itemMarginBottom } from './CopyContainer'
 import { theme } from 'client/shared/clients'
-import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
+
+// todo: check if we can use a hook to add rendered html instead of parseHtml
+// todo: do not trust it much, browser should do it better
 
 interface IProps {
   isCopying: boolean
