@@ -1,9 +1,7 @@
 import { useDispatchTyped } from 'client/shared/hooks'
-import { store } from 'client/shared/clients'
 import { Resizable } from 're-resizable'
-import { saveItemWidth } from 'client/entities/items'
-import { saveItemsLocally } from 'client/shared/lib'
 import type { ReactNode } from 'react'
+import { onItemResizeStop } from 'client/features/resize_item'
 
 interface IProps {
   children: ReactNode
@@ -32,11 +30,7 @@ export const ResizablePaper = ({ children, index, itemWidth }: IProps): JSX.Elem
       enable={{ right: true, left: true }}
       // onResize={(e, direction, refToElement, delta) => { }}
       // onResizeStart={() => { }}
-      onResizeStop={(e, direction, refToElement): void => {
-        const width = parseInt(refToElement.style.width)
-        dispatch(saveItemWidth({ index, width }))
-        saveItemsLocally({ msgAboveItemWithIndex: index })
-      }}
+      onResizeStop={onItemResizeStop({ index })}
     >
       {children}
     </Resizable>
