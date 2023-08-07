@@ -4,7 +4,7 @@ import type { RootState } from 'client/app/store'
 import { nanoid } from 'nanoid'
 import { defaultItems } from './defaultItems'
 import { cleanItem } from 'client/shared/lib/itemsUtils'
-import type { CopyPlaceType, PastePosType } from 'client/entities/copy'
+import type { ICopyPlace, TPastePos } from 'client/entities/copy'
 import type { TItem, IPasteItem } from './types'
 import { jsonParseSafe } from 'client/shared/lib/jsonParseSafe'
 
@@ -33,7 +33,7 @@ const itemsSlice = createSlice({
     },
     pasteItem: (state, action: PayloadAction<{
       itemId: string
-      pastePos: PastePosType
+      pastePos: TPastePos
       item: TItem
     }>) => {
       const { itemId, pastePos, item } = action.payload
@@ -113,7 +113,7 @@ const itemsSlice = createSlice({
       if (html !== undefined) item.text.html = html
     },
     removePasteItem: (state) => state.filter((item) => item.type !== 'paste'),
-    insertPasteItem: (state, action: PayloadAction<CopyPlaceType>) => {
+    insertPasteItem: (state, action: PayloadAction<ICopyPlace>) => {
       const { pastePos, itemId } = action.payload
       const itemsWithoutPasteText = state.filter((item) => item.type !== 'paste')
       if (pastePos === 'middle') return itemsWithoutPasteText

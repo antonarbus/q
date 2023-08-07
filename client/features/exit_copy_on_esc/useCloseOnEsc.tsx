@@ -1,4 +1,4 @@
-import { exitFromCopyMode, hideCopyContainer } from 'client/entities/copy'
+import { exitCopyMode, hideCopyContainer } from 'client/entities/copy'
 import { removePasteItem } from 'client/entities/items'
 import { useDispatchTyped } from 'client/shared/hooks'
 import { useEffectOnce } from 'react-use'
@@ -10,9 +10,7 @@ export const useCloseOnEsc = (): void => {
     if (e.key !== 'Escape') return
     dispatch(hideCopyContainer())
     dispatch(removePasteItem())
-    setTimeout(() => {
-      dispatch(exitFromCopyMode())
-    }, 500)
+    exitCopyMode()
   }
 
   type TReturn = () => void

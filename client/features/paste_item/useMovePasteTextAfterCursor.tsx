@@ -1,7 +1,7 @@
 import { useEffectOnce, useUnmount } from 'react-use'
 import { store } from 'client/app/store'
 import isEqual from 'lodash.isequal'
-import type { CopyPlaceType } from 'client/entities/copy'
+import type { ICopyPlace } from 'client/entities/copy'
 import {
   hidePasteText,
   showPasteText,
@@ -14,7 +14,7 @@ interface IProps {
   e: MouseEvent
 }
 
-const getPastePlace = ({ item, e }: IProps): CopyPlaceType => {
+const getPastePlace = ({ item, e }: IProps): ICopyPlace => {
   const { height, top } = item.getBoundingClientRect()
   const yWithinElement = e.clientY - top
   const distToTop = yWithinElement
