@@ -4,4 +4,4 @@
 export const elementHeight = (el: HTMLElement): number => {
   const height = el.offsetHeight
   return height
-};
+}

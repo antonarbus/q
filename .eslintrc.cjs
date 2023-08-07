@@ -38,7 +38,7 @@ module.exports = {
     '@typescript-eslint/prefer-readonly-parameter-types': 'off',
     '@typescript-eslint/no-magic-numbers': 'off',
     '@typescript-eslint/no-extra-parens': 'off',
-    'space-before-function-paren': ['error', 'never'],
+    // 'space-before-function-paren': ['error', 'never'],
     '@typescript-eslint/space-before-function-paren': 'off',
     'no-console': ['warn', { allow: ['error'] }],
     quotes: [2, 'single', { avoidEscape: true }],
@@ -47,6 +47,7 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 'off',
     "object-curly-spacing": "off",
     "@typescript-eslint/object-curly-spacing": "off",
-    'no-restricted-syntax': ['error', 'FunctionExpression', 'FunctionDeclaration']
+    'no-restricted-syntax': ['error', 'FunctionExpression', 'FunctionDeclaration'],
+    'space-before-function-paren': 'off'
   },
 }

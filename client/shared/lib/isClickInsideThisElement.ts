@@ -3,10 +3,7 @@ interface IProps {
   thisElement: HTMLElement
 }
 
-export const didClickInsideThisElement = ({
-  clickedElement,
-  thisElement,
-}: IProps): boolean => {
+export const didClickInsideThisElement = ({ clickedElement, thisElement }: IProps): boolean => {
   return thisElement.contains(clickedElement)
 }
 

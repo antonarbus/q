@@ -1,7 +1,7 @@
-type Props = {
+interface IToken {
   access: string | null
 }
 
-export const token: Props = {
+export const token: IToken = {
   access: '',
 }

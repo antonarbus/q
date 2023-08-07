@@ -16,4 +16,4 @@ export const isOverflown = ({ element }: IProps): boolean => {
     (element.scrollHeight > element.clientHeight) ||
     (element.scrollWidth > element.clientWidth)
   return overflown
-};
+}

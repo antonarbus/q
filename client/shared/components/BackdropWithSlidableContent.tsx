@@ -32,7 +32,7 @@ export const BackdropWithSlidableContent = ({
     })
   }, [])
 
-  useEffectOnce(function slideOutOnEscBtn() {
+  useEffectOnce(() => {
     const slideAway = (e: KeyboardEvent): void => {
       if (e.key === 'Escape') {
         slideElement({

@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material'
-import type { RefDiv } from 'client/shared/types';
-import type { ReactNode } from 'react'
+import type { RefDiv } from 'client/shared/types'
+import type { MouseEvent, ReactNode } from 'react'
 
 interface Props {
   children?: ReactNode
@@ -53,7 +53,9 @@ export const CardCustom = ({
       },
       ...cssProps,
     }}
-    onMouseDown={(e) => { e.stopPropagation(); }}
+    onMouseDown={(e: MouseEvent): void => {
+      e.stopPropagation()
+    }}
     ref={reference}
   >
     {logo && <div css={{ alignSelf: 'center' }}>{logo}</div>}
