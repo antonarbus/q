@@ -6,6 +6,7 @@ import { deleteItem, saveItemHeight, selectIsItemAlone } from 'client/entities/i
 import { cleanHtml } from 'client/shared/lib/itemsUtils'
 import { saveItemsLocally } from 'client/shared/lib'
 import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/entities/copy'
+import type { MouseEvent } from 'react'
 
 interface IProps {
   index: number
@@ -25,9 +26,12 @@ export const CutIcon = ({ index }: IProps): JSX.Element => {
         color: isItemAlone ? '#acacac' : '#000',
         cursor: isItemAlone ? 'default' : 'pointer',
       }}
-      onClick={(e: React.MouseEvent): void => {
+      onClick={(e: MouseEvent): void => {
         if (isItemAlone) return
 
+        // save items heights
+        // todo: why we save all heights, one should be enough
+        // todo: maybe make a separate func for height save
         const items = document.querySelectorAll('.item-paper')
         items.forEach((itemEl, i) => {
           dispatch(saveItemHeight({
@@ -45,9 +49,19 @@ export const CutIcon = ({ index }: IProps): JSX.Element => {
         if (!(itemElement instanceof Element)) return
         const paperElement = itemElement.querySelector('.item-paper')
         if (!(paperElement instanceof Element)) return
+
+
+
+
+
+
+
+
         const html = paperElement.innerHTML
         const cleanedHtml = cleanHtml(html)
         const item = { ...itemToCut, previewHtml: cleanedHtml }
+
+
         dispatch(addItemIntoCopyContainer(item))
         dispatch(deleteItem({ itemId: item.id }))
         dispatch(saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
