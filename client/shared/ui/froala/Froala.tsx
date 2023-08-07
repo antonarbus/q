@@ -6,8 +6,8 @@ import { StaticHtml } from './StaticHtml'
 import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
 import { EditableHtml } from './EditableHtml'
 import { useViewPortObserver } from './useViewPortObserver'
-import './froala_editor.pkgd.min.css'
-// import './plugins.pkgd.min.css'
+import type { MutableRefObject } from 'react'
+import type FroalaEditor from 'froala-editor'
 
 interface ReducerProps {
   index: number
@@ -26,7 +26,7 @@ interface Props {
   padding?: number | string
   getHtml: () => string
   froalaElementRef: RefDiv
-  editorRef: RefAny
+  editorRef: MutableRefObject<FroalaEditor | null>
   placeholder?: string
   additionalStyle?: SxProps
   onClickAwayIfHtmChanged?: () => void
