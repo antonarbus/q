@@ -1,25 +1,20 @@
 // https://fkhadra.github.io/react-toastify/positioning-toast
 import { toast, Slide, Bounce, Flip, Zoom } from 'react-toastify'
 
-type Params = {
-  msg: string | React.ReactNode
+interface IProps {
+  msg: React.ReactNode | string
   position?:
-    | 'top-left'
-    | 'top-right'
-    | 'top-center'
-    | 'bottom-left'
-    | 'bottom-right'
-    | 'bottom-center'
+  'bottom-center' | 'bottom-left' | 'bottom-right' | 'top-center' | 'top-left' | 'top-right'
   hideProgressBar?: boolean
   closeAfterMs?: number
   shouldStay?: true
-  type?: 'success' | 'error' | 'warn' | 'info'
-  theme?: 'light' | 'dark' | 'colored'
-  transition?: 'slide' | 'bounce' | 'flip' | 'zoom'
+  type?: 'error' | 'info' | 'success' | 'warn'
+  theme?: 'colored' | 'dark' | 'light'
+  transition?: 'bounce' | 'flip' | 'slide' | 'zoom'
   onClose?: () => void
 }
 
-export function notify({
+export const notify = ({
   msg,
   position,
   hideProgressBar,
@@ -29,7 +24,7 @@ export function notify({
   theme,
   transition,
   onClose,
-}: Params) {
+}: IProps): void => {
   const options = {
     position: position || 'top-right',
     autoClose: shouldStay ? false : ((closeAfterMs || 5000) as any),
@@ -48,12 +43,12 @@ export function notify({
       transition === 'slide'
         ? Slide
         : transition === 'bounce'
-        ? Bounce
-        : transition === 'flip'
-        ? Flip
-        : transition === 'zoom'
-        ? Zoom
-        : Bounce,
+          ? Bounce
+          : transition === 'flip'
+            ? Flip
+            : transition === 'zoom'
+              ? Zoom
+              : Bounce,
   }
 
   if (type === undefined || type === 'success') {
@@ -71,7 +66,6 @@ export function notify({
     return
   }
 
-  if (type === 'info') {
-    toast.info(msg, options)
-  }
+  // type === 'info'
+  toast.info(msg, options)
 }

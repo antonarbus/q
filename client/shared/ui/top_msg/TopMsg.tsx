@@ -1,15 +1,14 @@
 // https://fkhadra.github.io/react-toastify/introduction/
-
 import { ToastContainer } from 'react-toastify'
 import styled from '@emotion/styled'
 import { theme } from 'client/shared/clients'
 import { Close } from '@mui/icons-material'
 
-type Prop = {
+interface IProps {
   closeToast: any
 }
 
-const CloseIcon = ({ closeToast }: Prop) => (
+const CloseIcon = ({ closeToast }: IProps): JSX.Element => (
   <span
     css={{
       '& :hover': {
@@ -23,7 +22,7 @@ const CloseIcon = ({ closeToast }: Prop) => (
   </span>
 )
 
-export function TopMsg() {
+export const TopMsg = (): JSX.Element => {
   return (
     <ToastStyled>
       <ToastContainer
