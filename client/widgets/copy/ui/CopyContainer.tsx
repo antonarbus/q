@@ -5,7 +5,7 @@ import { RestOfCopiedItems } from './RestOfCopiedItems'
 import { useCopyContainerAnimation } from './useCopyContainerAnimation'
 import { useMovePasteTextAfterCursor, usePasteClick } from 'client/features/paste_item'
 import { useDisableNavItems } from 'client/features/disable_nav_items'
-import { PressEsc } from 'client/features/exit_copy_on_esc'
+import { PressEsc } from 'client/features/exit_copy'
 
 export const containerWidth = 200
 export const containerPadding = 20
