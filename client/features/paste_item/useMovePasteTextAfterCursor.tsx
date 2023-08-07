@@ -23,7 +23,7 @@ const getPastePlace = ({ item, e }: IProps): CopyPlaceType => {
   if (distToTop < 20) return { pastePos: 'top', itemId: item.id }
   if (distToBottom < 20) return { pastePos: 'bottom', itemId: item.id }
   return { pastePos: 'middle', itemId: item.id }
-};
+}
 
 const movePasteTextAfterCursor = (e: MouseEvent): void => {
   const prevPlace = store.getState().copy.place
@@ -61,7 +61,7 @@ const movePasteTextAfterCursor = (e: MouseEvent): void => {
   store.dispatch(showPasteText())
   store.dispatch(updatePastePos(pastePlace))
   store.dispatch(insertPasteItem(pastePlace))
-};
+}
 
 export const useMovePasteTextAfterCursor = (): void => {
   useEffectOnce(() => {

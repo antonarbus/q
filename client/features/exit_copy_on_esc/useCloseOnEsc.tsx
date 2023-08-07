@@ -13,7 +13,7 @@ export const useCloseOnEsc = (): void => {
     setTimeout(() => {
       dispatch(exitFromCopyMode())
     }, 500)
-  };
+  }
 
   type TReturn = () => void
 
@@ -22,7 +22,7 @@ export const useCloseOnEsc = (): void => {
     return (): void => {
       window.removeEventListener('keydown', closeOnEsc)
     }
-  };
+  }
 
   useEffectOnce(listenForEsc)
-};
+}

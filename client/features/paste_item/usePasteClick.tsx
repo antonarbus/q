@@ -6,8 +6,6 @@ import { exitFromCopyMode, hideCopyContainer, removeItemFromCopyContainer } from
 import { pasteItem, removePasteItem } from 'client/entities/items'
 import { saveItemsLocally } from 'client/shared/lib'
 
-// todo: move to features
-
 const pasteItemOnClick = (): void => {
   const isPasteTextShown = store.getState().copy.isPasteTextShown
   if (!isPasteTextShown) return
@@ -22,16 +20,13 @@ const pasteItemOnClick = (): void => {
   if (itemsInCopyContainer.length === 0) {
     store.dispatch(hideCopyContainer())
     store.dispatch(removePasteItem())
-    setTimeout(
-      () => {
-        // timeout to let animation end and completely go out from the copy-mode
-        // to let froala initialize after animation to avoid motion staggering
-        store.dispatch(exitFromCopyMode())
-      },
-      1000 * theme.item.animationDuration + 500,
-    )
+    setTimeout(() => {
+      // timeout to let animation end and completely go out from the copy-mode
+      // to let froala initialize after animation to avoid motion staggering
+      store.dispatch(exitFromCopyMode())
+    }, 1000 * theme.item.animationDuration + 500)
   }
-};
+}
 
 export const usePasteClick = (): void => {
   useEffectOnce(() => {

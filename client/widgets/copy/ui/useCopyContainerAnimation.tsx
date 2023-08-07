@@ -1,5 +1,5 @@
+import type { AnimationControls } from 'framer-motion'
 import { useEffect } from 'react'
-import type { AnimationControls } from 'framer-motion';
 import { useAnimationControls } from 'framer-motion'
 import { useFirstMountState } from 'react-use'
 import { useSelectorTyped } from 'client/shared/hooks'
