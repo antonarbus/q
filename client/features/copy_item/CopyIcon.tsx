@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { cleanHtml } from 'client/shared/lib/itemsUtils'
 import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/entities/copy'
 import { saveItemHeight } from 'client/entities/items'
+import type { MouseEvent } from 'react'
 
 interface IProps {
   index: number
@@ -22,21 +23,10 @@ export const CopyIcon = ({ index }: IProps): JSX.Element => {
         position: 'relative',
         top: 1,
       }}
-      onClick={(e: React.MouseEvent): void => {
-        const clickedIconElement = e.target
-        if (!(clickedIconElement instanceof Element)) return
-        const itemElement = clickedIconElement.closest('.item')
-        if (!(itemElement instanceof Element)) return
-        const paperElement = itemElement.querySelector('.item-paper')
-        if (!(paperElement instanceof Element)) return
-
-        const html = paperElement.innerHTML
-        const cleanedHtml = cleanHtml(html)
-        const itemToCopy = store.getState().items[index]
-        if (!itemToCopy) return
-
+      onClick={(e: MouseEvent): void => {
         // save items heights
         // todo: why we save all heights, one should be enough
+        // todo: maybe make a separate func for height save
         const items = document.querySelectorAll('.item-paper')
         items.forEach((itemEl, i) => {
           dispatch(saveItemHeight({
@@ -45,11 +35,33 @@ export const CopyIcon = ({ index }: IProps): JSX.Element => {
           }))
         })
 
+
+
+        const itemToCopy = store.getState().items[index]
+        if (!itemToCopy) return
+
+        const clickedIconElement = e.target
+        if (!(clickedIconElement instanceof Element)) return
+        const itemElement = clickedIconElement.closest('.item')
+        if (!(itemElement instanceof Element)) return
+        const paperElement = itemElement.querySelector('.item-paper')
+        if (!(paperElement instanceof Element)) return
+
+
+
+
+
+
+
+
+
+        const html = paperElement.innerHTML
+        const cleanedHtml = cleanHtml(html)
         const item = { ...itemToCopy, previewHtml: cleanedHtml }
+
         dispatch(addItemIntoCopyContainer(item))
         dispatch(saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
         dispatch(showCopyContainer())
-
       }}
     >
       <MdCopyAll />
