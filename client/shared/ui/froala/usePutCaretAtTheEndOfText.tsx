@@ -19,13 +19,19 @@ export const usePutCaretAtTheEndOfText = ({
       // https://stackoverflow.com/a/35191761/7239778
       const clickedElement = e.target
       if (!(clickedElement instanceof HTMLElement)) return
+      if (!editorRef.current) return
 
       if (clickedElement.matches('.fr-box')) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
         editorRef.current.selection.setAtEnd(editorRef.current.$el.get(0))
       }
 
       if (clickedElement.matches('.ag-cell')) {
-        // editorRef.current.selection.setAtStart(editorRef.current.$el.get(0))
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
         editorRef.current.selection.setAtEnd(editorRef.current.$el.get(0))
       }
 
