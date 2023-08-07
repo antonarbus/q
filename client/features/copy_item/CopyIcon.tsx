@@ -35,11 +35,8 @@ export const CopyIcon = ({ index }: IProps): JSX.Element => {
         const itemToCopy = store.getState().items[index]
         if (!itemToCopy) return
 
-        const item = { ...itemToCopy, previewHtml: cleanedHtml }
-        dispatch(addItemIntoCopyContainer(item))
-        dispatch(saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
-        dispatch(showCopyContainer())
-
+        // save items heights
+        // todo: why we save all heights, one should be enough
         const items = document.querySelectorAll('.item-paper')
         items.forEach((itemEl, i) => {
           dispatch(saveItemHeight({
@@ -47,6 +44,12 @@ export const CopyIcon = ({ index }: IProps): JSX.Element => {
             height: itemEl.clientHeight,
           }))
         })
+
+        const item = { ...itemToCopy, previewHtml: cleanedHtml }
+        dispatch(addItemIntoCopyContainer(item))
+        dispatch(saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
+        dispatch(showCopyContainer())
+
       }}
     >
       <MdCopyAll />
