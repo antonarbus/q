@@ -48,13 +48,13 @@ export const FirstCopiedItem = (): JSX.Element | null => {
   const items = useSelectorTyped((state) => state.copy.items)
   const isCopying = useSelectorTyped((state) => state.copy.isCopying)
 
+  const firstItem = items[0]
+  if (!firstItem) return null
+
   const animationProps: IProps = {
     isCopying,
     isSoleItem: items.length === 1,
   }
-
-  const firstItem = items[0]
-  if (!firstItem) return null
 
   const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / firstItem.width
 
