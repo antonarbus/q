@@ -1,4 +1,4 @@
-import type { RefAny, RefDiv } from 'client/shared/types'
+import type { RefDiv } from 'client/shared/types'
 import type { AnyAction } from '@reduxjs/toolkit'
 import type { SxProps } from '@mui/material'
 import { useSelectorTyped } from 'client/shared/hooks'
