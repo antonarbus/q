@@ -3,7 +3,7 @@ import { removePasteItem } from 'client/entities/items'
 import { useDispatchTyped } from 'client/shared/hooks'
 import { useEffectOnce } from 'react-use'
 
-export const useCloseOnEsc = (): void => {
+export const useExitCopyOnEsc = (): void => {
   const dispatch = useDispatchTyped()
 
   const closeOnEsc = (e: KeyboardEvent): void => {

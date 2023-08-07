@@ -1,8 +1,8 @@
 import { KbdKey } from 'client/shared/components'
-import { useCloseOnEsc } from './useCloseOnEsc'
+import { useExitCopyOnEsc } from './useCloseOnEsc'
 
 export const PressEsc = (): JSX.Element => {
-  useCloseOnEsc()
+  useExitCopyOnEsc()
 
   return (
     <div
