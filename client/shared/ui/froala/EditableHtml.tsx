@@ -5,7 +5,8 @@ import { useStartFroala } from './useStartFroala'
 import { usePutCaretAtTheEndOfText } from './usePutCaretAtTheEndOfText'
 import type { MutableRefObject } from 'react'
 import type { SaveFroalaReducer } from './Froala'
-import type { RefAny, RefDiv } from 'client/shared/types'
+import type { RefDiv } from 'client/shared/types'
+import type FroalaEditor from 'froala-editor'
 
 // todo: try to avoid "parseHtml"
 
@@ -14,7 +15,7 @@ interface IProps {
   padding?: number | string
   getHtml: () => string
   froalaElementRef: RefDiv
-  editorRef: RefAny
+  editorRef: MutableRefObject<FroalaEditor | null>
   placeholder?: string
   additionalStyle?: SxProps
   onClickAwayIfHtmChanged?: () => void

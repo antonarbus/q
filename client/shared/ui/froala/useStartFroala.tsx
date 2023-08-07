@@ -1,27 +1,28 @@
-/* eslint-disable */
-// @ts-nocheck
-
-import { useDispatchTyped } from 'client/shared/hooks'
-import type { RefAny, RefDiv, RefString } from 'client/shared/types'
-import { useEffect, useRef } from 'react'
+import type { RefDiv, RefString } from 'client/shared/types'
+import type { MutableRefObject } from 'react'
 import type { SaveFroalaReducer } from './Froala'
+import { useDispatchTyped } from 'client/shared/hooks'
+import { useEffect, useRef } from 'react'
 import { saveItemsLocally } from 'client/shared/lib'
+import FroalaEditor from 'froala-editor'
+import 'froala-editor/js/froala_editor.pkgd.min.js'
+import 'froala-editor/js/plugins.pkgd.min.js'
+import 'froala-editor/js/third_party/font_awesome.min.js'
+import './froala_editor.pkgd.min.css'
+import { froalaStaticOptions } from './froalaStaticOptions'
 
 interface IProps {
   index: number
   getHtml: () => string
   onClickAwayIfHtmChanged?: () => void
   froalaElementRef: RefDiv
-  editorRef: RefAny
+  editorRef: MutableRefObject<FroalaEditor | null>
   placeholder?: string
   saveFroalaReducer: SaveFroalaReducer
   rowIndex?: number
 }
 
-declare const window: Window &
-  typeof globalThis & {
-    froalas: unknown[]
-  }
+declare const window: Window & typeof globalThis & { froalas: MutableRefObject<FroalaEditor | null>[] }
 
 window.froalas = []
 
@@ -31,110 +32,35 @@ export const useStartFroala = ({ index, getHtml, onClickAwayIfHtmChanged, froala
 
   useEffect(() => {
     const initFroalaInstance = (): void => {
-      const froalaInstance = new FroalaEditor(froalaElementRef.current, {
-        initOnClick: false,
-        toolbarInline: true,
-        toolbarVisibleWithoutSelection: false,
-        quickInsertEnabled: true,
-        pastePlain: false,
-        charCounterCount: false,
-        fontSizeSelection: true,
-        tabSpaces: 4,
-        toolbarButtons: {
-          moreText: {
-            buttons: [
-              'fontSize',
-              'textColor',
-              'backgroundColor',
-              'bold',
-              'italic',
-              'underline',
-              'strikeThrough',
-              'subscript',
-              'superscript',
-              'fontFamily',
-              'inlineClass',
-              'inlineStyle',
-              'clearFormatting',
-            ],
-            buttonsVisible: 3,
+      const froalaInstance = new FroalaEditor(
+        froalaElementRef.current,
+        {
+          ...froalaStaticOptions,
+          placeholderText: placeholder ?? 'Text...',
+          events: {
+            // 'paste.afterCleanup': function (clipboardHtml: string) { },
+            // click: (event: MouseEvent) => {},
+            initialized: (): void => {
+              window.froalas.push(editorRef)
+              if (!editorRef.current?.html) return
+              editorRef.current.html.set(getHtml())
+              window.froalas = window.froalas.filter(({ current }) => Boolean(current))
+              console.log('froalas qty after init: ', window.froalas.length)
+            },
+            contentChanged: (): void => {
+              // if (!froalaElementRef.current) return
+              if (!editorRef.current) return
+              const updatedHtml = editorRef.current.html.get()
+              const contentHasChanged = prevHtmlRef.current !== updatedHtml
+              if (!contentHasChanged) return
+              const html = editorRef.current.html.get()
+              dispatch(saveFroalaReducer({ index, html, rowIndex }))
+              onClickAwayIfHtmChanged?.()
+              saveItemsLocally({ msgAboveItemWithIndex: index })
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              prevHtmlRef.current = updatedHtml
+            },
           },
-          moreParagraph: {
-            buttons: [
-              'alignLeft',
-              'alignCenter',
-              'formatOLSimple',
-              'alignRight',
-              'alignJustify',
-              'formatOL',
-              'formatUL',
-              'paragraphFormat',
-              'paragraphStyle',
-              'lineHeight',
-              'outdent',
-              'indent',
-              'quote',
-            ],
-            buttonsVisible: 3,
-          },
-          moreRich: {
-            buttons: ['insertLink', 'insertTable', 'insertImage', 'insertVideo', 'emoticons', 'embedly', 'fontAwesome', 'specialCharacters', 'insertFile', 'insertHR', 'html'],
-            buttonsVisible: 4,
-          },
-        },
-        fontSize: ['6', '8', '9', '10', '11', '12', '13', '14', '15', '16', '18', '20', '24', '30', '36', '48', '60', '72', '96'],
-        fontFamily: {
-          '"Roboto","Helvetica","Arial",sans-serif': 'Roboto',
-          'Arial,Helvetica,sans-serif': 'Arial',
-          'Georgia,serif': 'Georgia',
-          'Impact,Charcoal,sans-serif': 'Impact',
-          'Tahoma,Geneva,sans-serif': 'Tahoma',
-          'Verdana,Geneva,sans-serif': 'Verdana',
-          Helvetica: 'Helvetica',
-          'Trebuchet MS': 'Trebuchet MS',
-          "'Times New Roman',Times,serif": 'Times New Roman',
-          Garamond: 'Garamond',
-          'Courier New': 'Courier New',
-          'Brush Script MT': 'Brush Script MT',
-        },
-        placeholderText: placeholder || 'Text...',
-        tableInsertHelper: false,
-        tableInsertMaxSize: 12,
-        inlineStyles: {
-          'Big red': 'font-size: 20px; color: red;',
-          'Small blue': 'font-size: 14px; color: blue;',
-          'Bit bold': 'font-weight: 400;',
-          'More bold': 'font-weight: 600;',
-        },
-        inlineClasses: {
-          'fr-class-code': 'Code',
-          'fr-class-highlighted': 'Highlighted',
-          'fr-class-transparency': 'Transparent',
-        },
-        events: {
-          'paste.afterCleanup': function (clipboardHtml: string) { },
-          click: (event: MouseEvent) => { },
-          contentChanged: (): void => {
-            if (!froalaElementRef.current) return
-            const updatedHtml = editorRef.current.html.get()
-            const contentHasChanged = prevHtmlRef.current !== updatedHtml
-            if (!contentHasChanged) return
-            const html = editorRef.current.html.get()
-            dispatch(saveFroalaReducer({ index, html, rowIndex }))
-            onClickAwayIfHtmChanged?.()
-            saveItemsLocally({ msgAboveItemWithIndex: index })
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            prevHtmlRef.current = updatedHtml
-          },
-        },
-        key: 'AVB8B-21D4B3B2E1F1G1uB-33B-21cyoF-10yB-7G-7gB-22zzE2wkA-7gC7B7D6B4E4F3D2I3H2C5==',
-      },
-        function () {
-          window.froalas.push(editorRef)
-          if (!editorRef.current?.html) return
-          editorRef.current.html.set(getHtml())
-          window.froalas = window.froalas.filter(({ current }) => current !== null)
-          console.log('froalas qty after init: ', window.froalas.length)
         },
       )
 
@@ -144,9 +70,9 @@ export const useStartFroala = ({ index, getHtml, onClickAwayIfHtmChanged, froala
     initFroalaInstance()
 
     return (): void => {
-      editorRef.current?.destroy?.()
+      editorRef.current?.destroy()
       editorRef.current = null
-      window.froalas = window.froalas.filter(({ current }) => current !== null)
+      window.froalas = window.froalas.filter(({ current }) => Boolean(current))
       console.log('froalas qty after destroy: ', window.froalas.length)
     }
   })

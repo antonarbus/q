@@ -6,6 +6,8 @@ import type { RefAny, RefDiv } from 'client/shared/types'
 import { saveText } from 'client/entities/items'
 import { PencilAtBottomRight } from 'client/shared/components/PencilAtBottomRight'
 import { Item } from './item'
+import type FroalaEditor from 'froala-editor'
+
 
 interface IProps {
   index: number
@@ -13,7 +15,7 @@ interface IProps {
 
 export const TextItem = ({ index }: IProps): JSX.Element => {
   const froalaElementRef = useRef() as RefDiv
-  const editorRef = useRef(null) as RefAny
+  const editorRef = useRef<FroalaEditor | null>(null)
 
   return (
     <Item index={index}>

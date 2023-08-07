@@ -1,8 +1,9 @@
-import type { RefAny } from 'client/shared/types'
+import type FroalaEditor from 'froala-editor'
+import type { MutableRefObject } from 'react'
 import { BiEditAlt as PencilIcon } from 'react-icons/bi'
 
 interface Props {
-  editorRef: RefAny
+  editorRef: MutableRefObject<FroalaEditor | null>
 }
 
 export const PencilAtBottomRight = ({ editorRef }: Props) => {
