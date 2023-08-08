@@ -26,7 +26,8 @@ export const CopyIcon = ({ index }: IProps): JSX.Element => {
       onClick={(e: MouseEvent): void => {
         // save items heights
         // todo: why we save all heights, one should be enough
-        // todo: maybe make a separate func for height save
+        // todo: maybe make a separate func for height and heights save in redux
+        // todo: also instead of recursive looping just send array of heights to the reducer
         const items = document.querySelectorAll('.item-paper')
         items.forEach((itemEl, i) => {
           dispatch(saveItemHeight({
