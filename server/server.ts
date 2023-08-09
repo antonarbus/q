@@ -1,10 +1,7 @@
 // server.ts
 import 'dotenv/config'
-import express, {
-  Request as ReqType,
-  Response as ResType,
-  NextFunction as NextType,
-} from 'express'
+import type { Request as ReqType, Response as ResType } from 'express'
+import express, { NextFunction as NextType } from 'express'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
@@ -17,35 +14,38 @@ import { activateRouter } from './api/activateRouter'
 import { refreshRouter } from './api/refreshRouter'
 import { errorHandler } from './middleware/errorHandler'
 import { usersRouter } from './api/usersRouter'
-;(async () => {
-  const app = express()
-  // todo: but do I really have to wait for db to start? let's leave it as it is for now
-  await connectToDb()
-  app.use(morgan('dev')) // http logs in terminal
-  app.use(express.json()) // parses incoming requests with JSON because we use lots of json, let it be default
-  app.use(cookieParser())
-  app.use(cors())
-  app.get('/', (req: ReqType, res: ResType) =>
-    res.send('This is from express.js')
-  )
-  app.get('/api', (req: ReqType, res: ResType) => res.json({ message: '/api' }))
 
-  // use router from separate file
-  const hi = require('./api/hi')
-  app.use('/api/hi', hi)
+  ; (async () => {
+    const app = express()
+    // todo: but do I really have to wait for db to start? let's leave it as it is for now
+    await connectToDb()
+    app.use(morgan('dev')) // http logs in terminal
+    app.use(express.json()) // parses incoming requests with JSON because we use lots of json, let it be default
+    app.use(cookieParser())
+    app.use(cors())
+    app.get('/', (req: ReqType, res: ResType) =>
+      res.send('This is from express.js'),
+    )
+    app.get('/api', (req: ReqType, res: ResType) => res.json({ message: '/api' }))
 
-  app.use('/api/register', registerRouter)
-  app.use('/api/login', loginRouter)
-  app.use('/api/logout', logoutRouter)
-  app.use('/api/activate', activateRouter)
-  app.use('/api/refresh', refreshRouter)
-  app.use('/api/users', usersRouter)
-  app.use('/api/user', userDetailsRouter)
+    // use router from separate file
+    const hi = require('./api/hi')
+    app.use('/api/hi', hi)
 
-  app.use(errorHandler)
+    app.use('/api/register', registerRouter)
+    app.use('/api/login', loginRouter)
+    app.use('/api/logout', logoutRouter)
+    app.use('/api/activate', activateRouter)
+    app.use('/api/refresh', refreshRouter)
+    app.use('/api/users', usersRouter)
+    app.use('/api/user', userDetailsRouter)
 
-  const port = process.env.PORT_BACK_END
-  const domain = process.env.DOMAIN
+    app.use(errorHandler)
 
-  app.listen(port, () => console.log(`server started at ${domain}:${port}`))
-})()
+    const port = process.env.PORT_BACK_END
+    const domain = process.env.DOMAIN
+
+    app.listen(port, () => {
+      console.log(`server started at ${domain}:${port}`)
+    })
+  })()

@@ -2,7 +2,7 @@ import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
 import { store } from 'client/shared/clients'
 import { TbCut } from 'react-icons/tb'
 import { motion } from 'framer-motion'
-import { deleteItem, saveItemHeight, selectIsItemAlone } from 'client/entities/items'
+import { deleteItem, saveItemHeight, saveItemHeightByIndex, selectIsItemAlone } from 'client/entities/items'
 import { cleanHtml } from 'client/shared/lib/itemsUtils'
 import { saveItemsLocally } from 'client/shared/lib'
 import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/entities/copy'
@@ -29,16 +29,7 @@ export const CutIcon = ({ index }: IProps): JSX.Element => {
       onClick={(e: MouseEvent): void => {
         if (isItemAlone) return
 
-        // save items heights
-        // todo: why we save all heights, one should be enough
-        // todo: maybe make a separate func for height save
-        const items = document.querySelectorAll('.item-paper')
-        items.forEach((itemEl, i) => {
-          dispatch(saveItemHeight({
-            index: i,
-            height: itemEl.clientHeight,
-          }))
-        })
+        saveItemHeightByIndex({ index })
 
         const itemToCut = store.getState().items[index]
         if (!itemToCut) return

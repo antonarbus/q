@@ -1,7 +1,9 @@
+import type {
+  Response as ResType,
+  NextFunction as NextType
+} from 'express'
 import express, {
   Request as ReqType,
-  Response as ResType,
-  NextFunction as NextType,
 } from 'express'
 import { UserModel } from '../db/models/user.model'
 import { verifyToken } from '../middleware/verifyToken'
@@ -24,5 +26,5 @@ userDetailsRouter.get(
     } catch (error: any) {
       next(error)
     }
-  }
+  },
 )

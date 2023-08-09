@@ -4,7 +4,7 @@ import { MdCopyAll } from 'react-icons/md'
 import { motion } from 'framer-motion'
 import { cleanHtml } from 'client/shared/lib/itemsUtils'
 import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/entities/copy'
-import { saveItemHeight } from 'client/entities/items'
+import { saveItemHeight, saveItemHeightByIndex } from 'client/entities/items'
 import type { MouseEvent } from 'react'
 
 interface IProps {
@@ -24,19 +24,7 @@ export const CopyIcon = ({ index }: IProps): JSX.Element => {
         top: 1,
       }}
       onClick={(e: MouseEvent): void => {
-        // save items heights
-        // todo: why we save all heights, one should be enough
-        // todo: maybe make a separate func for height and heights save in redux
-        // todo: also instead of recursive looping just send array of heights to the reducer
-        const items = document.querySelectorAll('.item-paper')
-        items.forEach((itemEl, i) => {
-          dispatch(saveItemHeight({
-            index: i,
-            height: itemEl.clientHeight,
-          }))
-        })
-
-
+        saveItemHeightByIndex({ index })
 
         const itemToCopy = store.getState().items[index]
         if (!itemToCopy) return
@@ -48,16 +36,9 @@ export const CopyIcon = ({ index }: IProps): JSX.Element => {
         const paperElement = itemElement.querySelector('.item-paper')
         if (!(paperElement instanceof Element)) return
 
-
-
-
-
-
-
-
-
         const html = paperElement.innerHTML
         const cleanedHtml = cleanHtml(html)
+        // todo: take a look here, a bit strange logic
         const item = { ...itemToCopy, previewHtml: cleanedHtml }
 
         dispatch(addItemIntoCopyContainer(item))

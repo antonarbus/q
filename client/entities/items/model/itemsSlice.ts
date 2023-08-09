@@ -91,14 +91,19 @@ const itemsSlice = createSlice({
       if (!item) return
       item.width = width
     },
-    saveItemHeight: (
-      state,
-      action: PayloadAction<{ index: number; height: number }>,
-    ) => {
+    saveItemHeight: (state, action: PayloadAction<{ index: number; height: number }>) => {
       const { index, height } = action.payload
       const item = state[index]
       if (!item) return
       item.height = height
+    },
+    saveItemHeights: (state, action: PayloadAction<{ index: number; height: number }[]>) => {
+      const indexesAndHeights = action.payload
+      indexesAndHeights.forEach(({ index, height }) => {
+        const item = state[index]
+        if (!item) return
+        item.height = height
+      })
     },
     saveText: (state, action: PayloadAction<{
       index: number
@@ -144,6 +149,7 @@ export const {
   removeItemMsg,
   saveItemWidth,
   saveItemHeight,
+  saveItemHeights,
   saveText,
   removePasteItem,
   insertPasteItem,
