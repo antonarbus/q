@@ -39,6 +39,7 @@ export const CopyIcon = ({ index }: IProps): JSX.Element => {
         const html = paperElement.innerHTML
         const cleanedHtml = cleanHtml(html)
         // todo: take a look here, a bit strange logic
+        // todo: maybe it is logical to remove previewHtml from the TItem and use it only in TItemCopy
         const item = { ...itemToCopy, previewHtml: cleanedHtml }
 
         dispatch(addItemIntoCopyContainer(item))
