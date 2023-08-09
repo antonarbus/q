@@ -41,17 +41,9 @@ export const CutIcon = ({ index }: IProps): JSX.Element => {
         const paperElement = itemElement.querySelector('.item-paper')
         if (!(paperElement instanceof Element)) return
 
-
-
-
-
-
-
-
         const html = paperElement.innerHTML
         const cleanedHtml = cleanHtml(html)
         const item = { ...itemToCut, previewHtml: cleanedHtml }
-
 
         dispatch(addItemIntoCopyContainer(item))
         dispatch(deleteItem({ itemId: item.id }))

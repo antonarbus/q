@@ -149,7 +149,7 @@ export const {
   removeItemMsg,
   saveItemWidth,
   saveItemHeight,
-  saveItemHeights,
+  saveItemHeights, // todo: not used anywhere
   saveText,
   removePasteItem,
   insertPasteItem,
