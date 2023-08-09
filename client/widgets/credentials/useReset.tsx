@@ -1,18 +1,25 @@
 import { notify } from 'client/shared/ui/top_msg/notify'
-import { Event } from 'client/shared/types'
+import type { Event } from 'client/shared/types'
+import type { Dispatch, SetStateAction } from 'react'
 import { useState } from 'react'
 import { token } from '../../shared/auth/token'
-import { HttpStatusType } from './types'
+import type { HttpStatusType } from './types'
 
-type Props = {
+interface Props {
   e: Event
   email: string
 }
 
-export function useReset() {
+interface IReturn {
+  resetPassword: ({ e, email }: Props) => Promise<void>;
+  httpStatus: HttpStatusType;
+  setHttpStatus: Dispatch<SetStateAction<HttpStatusType>>;
+}
+
+export const useReset = (): IReturn => {
   const [httpStatus, setHttpStatus] = useState<HttpStatusType>('')
 
-  async function resetPassword({ e, email }: Props) {
+  const resetPassword = async ({ e, email }: Props): Promise<void> => {
     e.preventDefault()
     setHttpStatus('loading')
     const method = 'POST'

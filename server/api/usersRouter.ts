@@ -1,8 +1,5 @@
-import express, {
-  Request as ReqType,
-  Response as ResType,
-  NextFunction as NextType,
-} from 'express'
+import type { Response as ResType, NextFunction as NextType } from 'express'
+import express, { Request as ReqType } from 'express'
 // import { connectToDb } from '../db/connectToDb'
 import { UserModel } from '../db/models/user.model'
 import jwt from 'jsonwebtoken'
@@ -21,5 +18,5 @@ usersRouter.get(
     } catch (error: any) {
       next(error)
     }
-  }
+  },
 )

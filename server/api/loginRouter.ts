@@ -1,9 +1,10 @@
 // loginRouter.ts
-import express, {
+import type {
   Request as ReqType,
   Response as ResType,
   NextFunction as NextType,
 } from 'express'
+import express from 'express'
 import { UserModel } from '../db/models/user.model'
 import bcrypt from 'bcryptjs'
 import { refreshJwtTokenExpirationSeconds, token } from '../services/jwt'
@@ -18,7 +19,7 @@ loginRouter.post('/', async (req: ReqType, res: ResType, next: NextType) => {
     // check email & password
     const user = await UserModel.findOne({ email })
     const isPasswordValid =
-      user && (await bcrypt.compare(password, user.password as string))
+      user && (await bcrypt.compare(password, user.password!))
     if (!user || !isPasswordValid)
       return res.json({ status: 'error', message: 'invalid credentials' })
 

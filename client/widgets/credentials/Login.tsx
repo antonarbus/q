@@ -14,7 +14,7 @@ import { ButtonCustom } from 'client/shared/components/ButtonCustom'
 
 // todo: store user data in redux
 
-export const Login = () => {
+export const Login = (): JSX.Element => {
   const [email, setEmail] = useState('')
   const inputRef = useRef() as RefDiv
   const cardRef = useRef() as RefDiv
@@ -25,19 +25,19 @@ export const Login = () => {
   const navigate = useNavigate()
   useEffect(
     () => {
-      setIsButtonDisabled(!(isEmailOk && !!password));
+      setIsButtonDisabled(!(isEmailOk && !!password))
     },
     [isEmailOk, password],
   )
 
   return (
     <BackdropWithSlidableContent
-      onSlideIn={() => {
+      onSlideIn={(): void => {
 
         /* inputRef.current.focus() */
       }}
-      onSlideOut={() => {
-        navigate('/');
+      onSlideOut={(): void => {
+        navigate('/')
       }}
     >
       <CardCustom
@@ -78,12 +78,12 @@ export const Login = () => {
             <Link
               to='/reset'
               children='Reset?'
-              onClick={(e: Event) => {
+              onClick={(e: Event): void => {
                 e.preventDefault()
                 slideElement({
                   element: cardRef.current,
                   cb: () => {
-                    navigate('/reset');
+                    navigate('/reset')
                   },
                 })
               }}
@@ -91,12 +91,12 @@ export const Login = () => {
             <Link
               to='/register'
               children='Register?'
-              onClick={(e: Event) => {
+              onClick={(e: Event): void => {
                 e.preventDefault()
                 slideElement({
                   element: cardRef.current,
                   cb: () => {
-                    navigate('/register');
+                    navigate('/register')
                   },
                 })
               }}
@@ -107,4 +107,4 @@ export const Login = () => {
       </CardCustom>
     </BackdropWithSlidableContent>
   )
-};
+}
