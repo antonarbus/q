@@ -1,9 +1,8 @@
-import type { TItem } from 'client/entities/items'
+import type { TItem } from '../types'
 
 export const cleanItem = (item: TItem): TItem => {
   const modifiableItem = structuredClone(item)
   modifiableItem.msg = ''
-  modifiableItem.previewHtml = ''
   return modifiableItem
 }
 

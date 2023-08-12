@@ -4,9 +4,8 @@ import type { RootState } from 'client/app/store'
 import { nanoid } from 'nanoid'
 import { defaultItems } from './defaultItems'
 import { cleanItem } from 'client/shared/lib/itemsUtils'
-import type { ICopyPlace, TPastePos } from 'client/entities/copy'
-import type { TItem, IPasteItem } from './types'
 import { jsonParseSafe } from 'client/shared/lib/jsonParseSafe'
+import type { ICopyPlace, IPasteItem, TItem, TPastePos } from 'client/shared/types'
 
 const returnDefaultOrLocalItems = (): TItem[] => {
   const itemsFromLocalStorage = localStorage.getItem('items')
@@ -130,7 +129,6 @@ const itemsSlice = createSlice({
         height: 0,
         width: 0,
         msg: '',
-        previewHtml: '',
       }
 
       itemsWithoutPasteText.splice(insertAtIndex, 0, pasteTextEl)

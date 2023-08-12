@@ -1,5 +1,5 @@
+import type { TItem } from 'client/shared/types'
 import { nanoid } from 'nanoid'
-import type { TItem } from './types'
 
 export const defaultItems: TItem[] = [
   {
@@ -8,7 +8,6 @@ export const defaultItems: TItem[] = [
     width: 800,
     height: 0,
     msg: '',
-    previewHtml: '',
     text: {
       html: '<div>editable text</div>',
     },
@@ -120,7 +119,6 @@ export const defaultItems: TItem[] = [
     width: 600,
     height: 0,
     msg: '',
-    previewHtml: '',
     text: {
       html: '<div>editable text</div>',
     },
@@ -131,7 +129,6 @@ export const defaultItems: TItem[] = [
     width: 500,
     height: 0,
     msg: '',
-    previewHtml: '',
     text: {
       html: '<div>editable text</div>',
     },

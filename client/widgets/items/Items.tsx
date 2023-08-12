@@ -1,10 +1,10 @@
 import { useSelectorTyped } from 'client/shared/hooks'
-import type { TItem } from '../../entities/items/model/types'
 import { onItemDrag } from 'client/features/drag_item'
 import { TextItem } from './TextItem'
 import { PasteItem } from './PasteItem'
 import { AnimatePresence } from 'framer-motion'
 import { DraggableItemsContainer } from './DraggableItemsContainer'
+import type { TItem } from 'client/shared/types'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type EqualityFn = (a: any, b: any) => boolean

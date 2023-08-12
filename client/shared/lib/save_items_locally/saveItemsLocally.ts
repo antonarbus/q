@@ -1,8 +1,8 @@
 import { store } from 'client/shared/clients'
 import { saveItemsIntoLocalStorage } from './saveItemsIntoLocalStorage'
 import { tellItemsSavedLocally } from './tellItemsSavedLocally'
-import type { TItem } from 'client/entities/items';
 import { tellItemSavedLocally } from 'client/entities/items'
+import type { TItem } from 'client/shared/types'
 
 interface IProps {
   items?: TItem[]

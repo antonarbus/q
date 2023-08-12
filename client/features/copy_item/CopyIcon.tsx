@@ -4,7 +4,7 @@ import { MdCopyAll } from 'react-icons/md'
 import { motion } from 'framer-motion'
 import { cleanHtml } from 'client/shared/lib/itemsUtils'
 import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/entities/copy'
-import { saveItemHeight, saveItemHeightByIndex } from 'client/entities/items'
+import { saveItemHeightByIndex } from 'client/entities/items'
 import type { MouseEvent } from 'react'
 
 interface IProps {
@@ -38,8 +38,7 @@ export const CopyIcon = ({ index }: IProps): JSX.Element => {
 
         const html = paperElement.innerHTML
         const cleanedHtml = cleanHtml(html)
-        // todo: take a look here, a bit strange logic
-        // todo: maybe it is logical to remove previewHtml from the TItem and use it only in TItemCopy
+
         const item = { ...itemToCopy, previewHtml: cleanedHtml }
 
         dispatch(addItemIntoCopyContainer(item))

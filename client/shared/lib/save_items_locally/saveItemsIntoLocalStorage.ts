@@ -1,4 +1,4 @@
-import type { TItem } from 'client/entities/items'
+import type { TItem } from 'client/shared/types'
 import { cleanItems } from './cleanItems'
 
 interface IProps {

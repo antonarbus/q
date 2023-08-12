@@ -1,13 +1,9 @@
 import { useEffectOnce, useUnmount } from 'react-use'
 import { store } from 'client/app/store'
 import isEqual from 'lodash.isequal'
-import type { ICopyPlace } from 'client/entities/copy'
-import {
-  hidePasteText,
-  showPasteText,
-  updatePastePos,
-} from 'client/entities/copy'
+import { hidePasteText, showPasteText, updatePastePos } from 'client/entities/copy'
 import { insertPasteItem } from 'client/entities/items'
+import type { ICopyPlace } from 'client/shared/types'
 
 interface IProps {
   item: Element
