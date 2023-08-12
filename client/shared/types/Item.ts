@@ -3,7 +3,7 @@ interface ICommon {
   width: number
   height: number
   msg: string
-  previewHtml: string
+  // previewHtml: string
 }
 
 interface IBoqRow {

@@ -1,13 +1,12 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
-import type { ICopyPlace } from './types'
-import type { TItem } from 'client/entities/items'
+import type { ICopyPlace, TCopyItem } from 'client/shared/types'
 
 interface IProps {
   isCopyMode: boolean
   isCopyContainer: boolean
   initCords: { x: number; y: number }
-  items: TItem[]
+  items: TCopyItem[]
   place: ICopyPlace
   isCopying: boolean
   isPasteTextShown: boolean
@@ -42,7 +41,7 @@ export const copySlice = createSlice({
       const coords = action.payload
       state.initCords = coords
     },
-    addItemIntoCopyContainer: (state, action: PayloadAction<TItem>) => {
+    addItemIntoCopyContainer: (state, action: PayloadAction<TCopyItem>) => {
       state.isCopying = true
       const item = action.payload
       state.items.unshift(item)

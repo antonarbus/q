@@ -1,5 +1,5 @@
-import type { TItem } from 'client/entities/items'
 import { cleanItem } from 'client/shared/lib/itemsUtils'
+import type { TItem } from 'client/shared/types'
 
 export const cleanItems = (items: TItem[]): TItem[] => {
   const modifiableItems = structuredClone(items)

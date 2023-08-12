@@ -6,7 +6,7 @@ interface Props {
   editorRef: MutableRefObject<FroalaEditor | null>
 }
 
-export const PencilAtBottomRight = ({ editorRef }: Props) => {
+export const PencilAtBottomRight = ({ editorRef }: Props): JSX.Element => {
   return (
     <PencilIcon
       css={{
@@ -18,7 +18,7 @@ export const PencilAtBottomRight = ({ editorRef }: Props) => {
         cursor: 'pointer',
       }}
       onClick={(): void => {
-        editorRef.current.commands.selectAll()
+        editorRef.current?.commands.selectAll()
       }}
     />
   )

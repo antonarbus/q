@@ -1,4 +1,3 @@
-export type { TItem } from './model/types'
 export { defaultItems } from './model/defaultItems'
 export {
   itemsReducer,
