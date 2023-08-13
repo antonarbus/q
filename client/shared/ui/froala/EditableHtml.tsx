@@ -3,7 +3,7 @@ import { Box } from '@mui/material'
 import { useStartFroala } from './useStartFroala'
 import { usePutCaretAtTheEndOfText } from './usePutCaretAtTheEndOfText'
 import type { MutableRefObject } from 'react'
-import type { SaveFroalaReducer } from './Froala'
+import type { ISaveFroalaReducer } from './Froala'
 import type { RefDiv } from 'client/shared/types'
 import type FroalaEditor from 'froala-editor'
 
@@ -17,7 +17,7 @@ interface IProps {
   additionalStyle?: SxProps
   onClickAwayIfHtmChanged?: () => void
   rowIndex?: number
-  saveFroalaReducer: SaveFroalaReducer
+  saveFroalaReducer: ISaveFroalaReducer
   heightDuringAnimationRef: MutableRefObject<number | undefined>
 }
 

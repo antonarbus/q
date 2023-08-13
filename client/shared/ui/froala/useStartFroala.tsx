@@ -1,6 +1,6 @@
 import type { RefDiv, RefString } from 'client/shared/types'
 import type { MutableRefObject } from 'react'
-import type { SaveFroalaReducer } from './Froala'
+import type { ISaveFroalaReducer } from './Froala'
 import { useDispatchTyped } from 'client/shared/hooks'
 import { useEffect, useRef } from 'react'
 import { saveItemsLocally } from 'client/shared/lib'
@@ -18,7 +18,7 @@ interface IProps {
   froalaElementRef: RefDiv
   editorRef: MutableRefObject<FroalaEditor | null>
   placeholder?: string
-  saveFroalaReducer: SaveFroalaReducer
+  saveFroalaReducer: ISaveFroalaReducer
   rowIndex?: number
 }
 

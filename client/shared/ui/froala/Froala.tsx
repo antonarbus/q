@@ -9,19 +9,19 @@ import { useViewPortObserver } from './useViewPortObserver'
 import type { MutableRefObject } from 'react'
 import type FroalaEditor from 'froala-editor'
 
-interface ReducerProps {
+interface IReducerProps {
   index: number
   html: string
   rowIndex?: number
 }
 
-export type SaveFroalaReducer = ({
+export type ISaveFroalaReducer = ({
   index,
   html,
   rowIndex,
-}: ReducerProps) => AnyAction
+}: IReducerProps) => AnyAction
 
-interface Props {
+interface IProps {
   index: number
   padding?: number | string
   getHtml: () => string
@@ -31,7 +31,7 @@ interface Props {
   additionalStyle?: SxProps
   onClickAwayIfHtmChanged?: () => void
   rowIndex?: number
-  saveFroalaReducer: SaveFroalaReducer
+  saveFroalaReducer: ISaveFroalaReducer
 }
 
 export const Froala = ({
@@ -45,7 +45,7 @@ export const Froala = ({
   placeholder,
   rowIndex,
   saveFroalaReducer,
-}: Props): JSX.Element => {
+}: IProps): JSX.Element => {
   const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
   const { heightDuringAnimationRef } = useFixedHeightForAnimation({ froalaElementRef })
   const { observerRef, isInsideViewPort } = useViewPortObserver({ index })
