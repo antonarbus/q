@@ -27,7 +27,8 @@ const variants: Variants = {
         transition: {
           delay: 0,
           duration: theme.copy.animationDuration,
-          type: 'spring',
+          // type: 'spring',
+          ease: 'linear',
         },
       }
     }
@@ -40,7 +41,8 @@ const variants: Variants = {
         transition: {
           delay: 0,
           duration: theme.copy.animationDuration,
-          type: 'spring',
+          // type: 'spring',
+          ease: 'linear',
         },
       }
     }
