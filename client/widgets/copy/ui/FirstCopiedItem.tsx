@@ -14,7 +14,7 @@ interface IProps {
 const variants: Variants = {
   initial: ({ isCopying, height }: IProps) => {
     if (isCopying) return {
-      y: -height - 50,
+      y: -height - 100,
     }
     return {}
   },
@@ -25,7 +25,8 @@ const variants: Variants = {
         transition: {
           delay: isSoleItem ? theme.copy.animationDuration : 0,
           duration: theme.copy.animationDuration,
-          type: 'spring',
+          // type: 'spring',
+          ease: 'linear',
         },
       }
     }
@@ -34,11 +35,12 @@ const variants: Variants = {
   exit: ({ isCopying, height }: IProps) => {
     if (!isCopying) {
       return {
-        y: -height - 50,
+        y: -height - 100,
         transition: {
           delay: 0,
           duration: theme.copy.animationDuration,
-          type: 'tween',
+          // type: 'tween',
+          ease: 'linear',
         },
       }
     }

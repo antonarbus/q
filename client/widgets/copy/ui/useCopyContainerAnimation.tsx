@@ -23,7 +23,8 @@ export const useCopyContainerAnimation = (): AnimationControls => {
         transition: {
           delay: 0,
           duration: theme.copy.animationDuration,
-          type: 'spring',
+          // type: 'spring',
+          ease: 'linear',
         },
       })
     }
@@ -33,7 +34,8 @@ export const useCopyContainerAnimation = (): AnimationControls => {
       transition: {
         delay: 0,
         duration: theme.copy.animationDuration,
-        type: 'spring',
+        // type: 'spring',
+        ease: 'linear',
       },
     })
 
