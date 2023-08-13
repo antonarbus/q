@@ -1,4 +1,4 @@
-import type { ThemeOptions } from '@mui/material/styles';
+import type { ThemeOptions } from '@mui/material/styles'
 import { createTheme } from '@mui/material/styles'
 
 const muiTheme: ThemeOptions = {
@@ -48,7 +48,7 @@ const customTheme = {
   },
   copy: {
     pasteTextColor: '#6c6c6c',
-    animationDuration: 0.5,
+    animationDuration: 0.35,
   },
 }
 
