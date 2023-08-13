@@ -4,6 +4,7 @@ import { useSelectorTyped } from 'client/shared/hooks'
 import { containerPadding, containerWidth, itemMarginBottom } from './CopyContainer'
 import { theme } from 'client/shared/clients'
 import { ScaledCopyItem } from './ScaledCopyItem'
+import { useRef } from 'react'
 
 interface IProps {
   isCopying: boolean
@@ -50,11 +51,10 @@ const variants: Variants = {
   },
 }
 
-let prevFirstItemHeight = 0
-
 export const RestOfCopiedItems = (): JSX.Element | null => {
   const items = useSelectorTyped((state) => state.copy.items)
   const isCopying = useSelectorTyped((state) => state.copy.isCopying)
+  const prevFirstItemHeightRef = useRef(0)
 
   const firstItem = items[0]
   if (!firstItem) return null
@@ -65,10 +65,10 @@ export const RestOfCopiedItems = (): JSX.Element | null => {
   const animationProps: IProps = {
     isCopying,
     firstItemHeight,
-    prevFirstItemHeight,
+    prevFirstItemHeight: prevFirstItemHeightRef.current,
   }
 
-  prevFirstItemHeight = firstItemHeight
+  prevFirstItemHeightRef.current = firstItemHeight
 
   return (
     <AnimatePresence
