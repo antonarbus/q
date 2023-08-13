@@ -31,7 +31,7 @@ const variants: Variants = {
   exit: ({ isCopying }: IProps) => {
     if (!isCopying) {
       return {
-        y: -500,
+        y: -200,
         transition: {
           delay: 0,
           duration: theme.copy.animationDuration,
