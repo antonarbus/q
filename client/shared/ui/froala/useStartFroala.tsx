@@ -28,7 +28,6 @@ window.froalas = []
 
 export const useStartFroala = ({ index, getHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder, saveFroalaReducer, rowIndex }: IProps): void => {
   const dispatch = useDispatchTyped()
-  const prevHtmlRef = useRef(getHtml()) as RefString
 
   useEffect(() => {
     const initFroalaInstance = (): void => {
@@ -48,16 +47,11 @@ export const useStartFroala = ({ index, getHtml, onClickAwayIfHtmChanged, froala
               console.log('froalas qty after init: ', window.froalas.length)
             },
             contentChanged: (): void => {
-              // if (!froalaElementRef.current) return
               if (!editorRef.current) return
-              const updatedHtml = editorRef.current.html.get()
-              const contentHasChanged = prevHtmlRef.current !== updatedHtml
-              if (!contentHasChanged) return
               const html = editorRef.current.html.get()
               dispatch(saveFroalaReducer({ index, html, rowIndex }))
               onClickAwayIfHtmChanged?.()
               saveItemsLocally({ msgAboveItemWithIndex: index })
-              prevHtmlRef.current = updatedHtml
             },
           },
         },

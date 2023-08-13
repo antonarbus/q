@@ -116,7 +116,10 @@ const itemsSlice = createSlice({
       if (item.type !== 'text') return
       if (html !== undefined) item.text.html = html
     },
-    removePasteItem: (state) => state.filter((item) => item.type !== 'paste'),
+    removePasteItem: (state) => {
+      const itemsWithoutPaste = state.filter((item) => item.type !== 'paste')
+      return itemsWithoutPaste
+    },
     insertPasteItem: (state, action: PayloadAction<ICopyPlace>) => {
       const { pastePos, itemId } = action.payload
       const itemsWithoutPasteText = state.filter((item) => item.type !== 'paste')
@@ -137,7 +140,6 @@ const itemsSlice = createSlice({
   },
 })
 
-// exports
 export const {
   reOrderItems,
   deleteItem,
