@@ -39,7 +39,6 @@
     "framer-motion": "^10.15.0",
     "gsap": "^3.12.2",
     "hamburger-react": "^2.5.0",
-    "html-react-parser": "^4.2.0",
     "jsonwebtoken": "^9.0.1",
     "jwt-decode": "^3.1.2",
     "lodash.isequal": "^4.5.0",

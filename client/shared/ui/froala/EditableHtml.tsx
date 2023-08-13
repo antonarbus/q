@@ -1,14 +1,11 @@
-import parseHtml from 'html-react-parser'
 import type { SxProps } from '@mui/material'
 import { Box } from '@mui/material'
 import { useStartFroala } from './useStartFroala'
 import { usePutCaretAtTheEndOfText } from './usePutCaretAtTheEndOfText'
-import type { MutableRefObject } from 'react'
+import { useEffect, type MutableRefObject } from 'react'
 import type { SaveFroalaReducer } from './Froala'
 import type { RefDiv } from 'client/shared/types'
 import type FroalaEditor from 'froala-editor'
-
-// todo: try to avoid "parseHtml"
 
 interface IProps {
   index: number
@@ -68,8 +65,6 @@ export const EditableHtml = ({
         },
         ...additionalStyle,
       }}
-    >
-      {parseHtml(getHtml())}
-    </Box>
+    />
   )
 }
