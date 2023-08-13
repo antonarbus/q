@@ -14,7 +14,6 @@ export const PasteHere = ({ children, index }: IProps): JSX.Element => {
   return (
     <>
       <div
-        className='reduce-opacity-if-paste-here'
         style={{
           opacity: isPasteHere ? 0.2 : 1,
         }}

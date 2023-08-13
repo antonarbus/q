@@ -6,6 +6,7 @@ import type { MutableRefObject } from 'react'
 import type { ISaveFroalaReducer } from './Froala'
 import type { RefDiv } from 'client/shared/types'
 import type FroalaEditor from 'froala-editor'
+import { className } from 'client/shared/className'
 
 interface IProps {
   index: number
@@ -53,7 +54,6 @@ export const EditableHtml = ({
   return (
     <Box
       ref={froalaElementRef}
-      className='q-froala-element'
       style={{
         padding: padding ?? 0,
         height: heightDuringAnimationRef.current ?? 'auto', // for animation, will be removed after froala is initialized

@@ -1,3 +1,4 @@
+import { className } from 'client/shared/className'
 import type { ReactNode } from 'react'
 
 interface IProps {
@@ -6,7 +7,6 @@ interface IProps {
 
 export const ActionsContainer = ({ itemActionElements }: IProps): JSX.Element => (
   <div
-    className='actions'
     css={{
       display: 'flex',
       flexDirection: 'column',

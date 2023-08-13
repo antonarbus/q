@@ -42,7 +42,6 @@ export const StaticHtml = ({
   return (
     <Box
       ref={ref}
-      className='q-froala-element not-editable'
       style={{
         padding: padding ?? 0,
       }}

@@ -4,6 +4,7 @@ import isEqual from 'lodash.isequal'
 import { hidePasteText, showPasteText, updatePastePos } from 'client/entities/copy'
 import { insertPasteItem } from 'client/entities/items'
 import type { ICopyPlace } from 'client/shared/types'
+import { className } from 'client/shared/className'
 
 interface IProps {
   item: Element
@@ -48,7 +49,7 @@ const movePasteTextAfterCursor = (e: MouseEvent): void => {
   const isNarrowGapAboveNav = e.clientY < 10
   if (isNarrowGapAboveNav) return
 
-  const item = (e.target as Element).closest('.item')
+  const item = (e.target as Element).closest(`.${className.item}`)
 
   const pastePlace = item ? getPastePlace({ item, e }) : prevPlace
 

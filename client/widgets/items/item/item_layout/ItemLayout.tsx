@@ -6,6 +6,7 @@ import type { ComponentClass, ReactNode } from 'react'
 import { useRef } from 'react'
 import { ActionsContainer } from './ActionsContainer'
 import { ResizablePaper } from './ResizablePaper'
+import { className } from 'client/shared/className'
 
 interface IProps {
   children: ReactNode
@@ -33,7 +34,7 @@ export const ItemLayout: ComponentClass<ISortableItem> =
       <motion.div
         ref={itemRef}
         id={itemId}
-        className='item'
+        className={className.item}
         initial={{
           height: 0,
           marginBottom: 0,
