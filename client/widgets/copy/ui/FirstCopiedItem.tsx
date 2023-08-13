@@ -8,11 +8,14 @@ import { ScaledCopyItem } from './ScaledCopyItem'
 interface IProps {
   isCopying: boolean
   isSoleItem: boolean
+  height: number
 }
 
 const variants: Variants = {
-  initial: ({ isCopying }: IProps) => {
-    if (isCopying) return { y: -500 }
+  initial: ({ isCopying, height }: IProps) => {
+    if (isCopying) return {
+      y: -height - 50,
+    }
     return {}
   },
   animate: ({ isCopying, isSoleItem }: IProps) => {
@@ -28,10 +31,10 @@ const variants: Variants = {
     }
     return {}
   },
-  exit: ({ isCopying }: IProps) => {
+  exit: ({ isCopying, height }: IProps) => {
     if (!isCopying) {
       return {
-        y: -200,
+        y: -height - 50,
         transition: {
           delay: 0,
           duration: theme.copy.animationDuration,
@@ -51,12 +54,16 @@ export const FirstCopiedItem = (): JSX.Element | null => {
   if (!firstItem) return null
 
 
+
+  const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / firstItem.width
+  const height = firstItem.height * scaleFactorForFirstItem
+  const width = firstItem.width * scaleFactorForFirstItem
+
   const animationProps: IProps = {
     isCopying,
     isSoleItem: items.length === 1,
+    height,
   }
-
-  const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / firstItem.width
 
   return (
     <AnimatePresence
@@ -71,8 +78,8 @@ export const FirstCopiedItem = (): JSX.Element | null => {
         animate='animate'
         exit='exit'
         css={{
-          height: firstItem.height * scaleFactorForFirstItem,
-          width: firstItem.width * scaleFactorForFirstItem,
+          height,
+          width,
           marginTop: 15,
           marginBottom: itemMarginBottom,
           background: 'white',
