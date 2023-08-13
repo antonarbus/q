@@ -2,6 +2,7 @@ import { useDispatchTyped } from 'client/shared/hooks'
 import { Resizable } from 're-resizable'
 import type { ReactNode } from 'react'
 import { onItemResizeStop } from 'client/features/resize_item'
+import { className } from 'client/shared/className'
 
 interface IProps {
   children: ReactNode
@@ -14,7 +15,7 @@ export const ResizablePaper = ({ children, index, itemWidth }: IProps): JSX.Elem
 
   return (
     <Resizable
-      className='item-paper'
+      className={className.paper}
       // size={{ width, height: 'auto' }}
       css={{
         background: 'white',

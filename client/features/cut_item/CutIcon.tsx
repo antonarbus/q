@@ -7,6 +7,7 @@ import { cleanHtml } from 'client/shared/lib/itemsUtils'
 import { saveItemsLocally } from 'client/shared/lib'
 import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/entities/copy'
 import type { MouseEvent } from 'react'
+import { className } from 'client/shared/className'
 
 interface IProps {
   index: number
@@ -36,9 +37,9 @@ export const CutIcon = ({ index }: IProps): JSX.Element => {
 
         const clickedIconElement = e.target
         if (!(clickedIconElement instanceof Element)) return
-        const itemElement = clickedIconElement.closest('.item')
+        const itemElement = clickedIconElement.closest(`.${className.item}`)
         if (!(itemElement instanceof Element)) return
-        const paperElement = itemElement.querySelector('.item-paper')
+        const paperElement = itemElement.querySelector(`.${className.paper}`)
         if (!(paperElement instanceof Element)) return
 
         const html = paperElement.innerHTML
