@@ -57,7 +57,6 @@ export const useStartFroala = ({ index, getHtml, onClickAwayIfHtmChanged, froala
               dispatch(saveFroalaReducer({ index, html, rowIndex }))
               onClickAwayIfHtmChanged?.()
               saveItemsLocally({ msgAboveItemWithIndex: index })
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               prevHtmlRef.current = updatedHtml
             },
           },

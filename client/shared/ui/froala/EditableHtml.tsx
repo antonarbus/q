@@ -45,6 +45,7 @@ export const EditableHtml = ({
     rowIndex,
     saveFroalaReducer,
   })
+
   usePutCaretAtTheEndOfText({
     index,
     editorRef,
