@@ -1,4 +1,4 @@
-import type { Event, RefDiv } from 'client/shared/types'
+import type { Event } from 'client/shared/types'
 import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Avatar } from '@mui/material'
@@ -13,10 +13,10 @@ import { BackdropWithSlidableContent } from 'client/shared/components/BackdropWi
 import { CardCustom } from 'client/shared/components/CardCustom'
 import { ButtonCustom } from 'client/shared/components/ButtonCustom'
 
-export const Register = () => {
+export const Register = (): JSX.Element => {
   const [email, setEmail] = useState('')
-  const inputRef = useRef() as RefDiv
-  const cardRef = useRef() as RefDiv
+  const inputRef = useRef<HTMLDivElement>(null)
+  const cardRef = useRef<HTMLDivElement>(null)
   const [isEmailOk, setIsEmailOk] = useState(false)
   const [password, setPassword] = useState('')
   const [isConfirmPasswordOk, setIsConfirmPasswordOk] = useState(false)
@@ -25,19 +25,19 @@ export const Register = () => {
   const navigate = useNavigate()
   useEffect(
     () => {
-      setIsButtonDisabled(!(isEmailOk && isConfirmPasswordOk));
+      setIsButtonDisabled(!(isEmailOk && isConfirmPasswordOk))
     },
     [isEmailOk, isConfirmPasswordOk],
   )
 
   return (
     <BackdropWithSlidableContent
-      onSlideIn={() => {
+      onSlideIn={(): void => {
 
         /* inputRef.current.focus() */
       }}
-      onSlideOut={() => {
-        navigate('/');
+      onSlideOut={(): void => {
+        navigate('/')
       }}
     >
       <CardCustom
@@ -49,7 +49,7 @@ export const Register = () => {
         }
         reference={cardRef}
       >
-        <form onSubmit={async (e: Event) => registerUser({ e, email, password })}>
+        <form onSubmit={(e: Event): void => void registerUser({ e, email, password })}>
           <EmailInput
             email={email}
             setEmail={setEmail}
@@ -73,12 +73,13 @@ export const Register = () => {
             <Link
               to='/login'
               children='Log in?'
-              onClick={(e: Event) => {
+              onClick={(e: Event): void => {
+                if (!cardRef.current) return
                 e.preventDefault()
                 slideElement({
                   element: cardRef.current,
                   cb: () => {
-                    navigate('/login');
+                    navigate('/login')
                   },
                 })
               }}
@@ -88,4 +89,4 @@ export const Register = () => {
       </CardCustom>
     </BackdropWithSlidableContent>
   )
-};
+}
