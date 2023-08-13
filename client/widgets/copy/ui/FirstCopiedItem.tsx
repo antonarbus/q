@@ -1,10 +1,9 @@
-import parseHtml from 'html-react-parser'
 import type { Variants } from 'framer-motion'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useSelectorTyped } from 'client/shared/hooks'
 import { containerPadding, containerWidth, itemMarginBottom } from './CopyContainer'
 import { theme } from 'client/shared/clients'
-import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
+import { ScaledCopyItem } from './ScaledCopyItem'
 
 interface IProps {
   isCopying: boolean
@@ -51,6 +50,7 @@ export const FirstCopiedItem = (): JSX.Element | null => {
   const firstItem = items[0]
   if (!firstItem) return null
 
+
   const animationProps: IProps = {
     isCopying,
     isSoleItem: items.length === 1,
@@ -81,15 +81,11 @@ export const FirstCopiedItem = (): JSX.Element | null => {
           overflow: 'hidden',
         }}
       >
-        <div
-          css={{
-            width: firstItem.width,
-            transformOrigin: 'left top',
-            scale: `${scaleFactorForFirstItem}`,
-          }}
-        >
-          {parseHtml(firstItem.previewHtml)}
-        </div>
+        <ScaledCopyItem
+          html={firstItem.previewHtml}
+          width={firstItem.width}
+          scaleFactor={`${scaleFactorForFirstItem}`}
+        />
       </motion.div>
     </AnimatePresence>
   )

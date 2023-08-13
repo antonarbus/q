@@ -1,12 +1,9 @@
-import parseHtml from 'html-react-parser'
 import type { Variants } from 'framer-motion'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useSelectorTyped } from 'client/shared/hooks'
 import { containerPadding, containerWidth, itemMarginBottom } from './CopyContainer'
 import { theme } from 'client/shared/clients'
-
-// todo: check if we can use a hook to add rendered html instead of parseHtml
-// todo: do not trust it much, browser should do it better
+import { ScaledCopyItem } from './ScaledCopyItem'
 
 interface IProps {
   isCopying: boolean
@@ -102,16 +99,11 @@ export const RestOfCopiedItems = (): JSX.Element | null => {
                 overflow: 'hidden',
               }}
             >
-              <div
-                className='fr-wrapper fr-element fr-view fr-box'
-                css={{
-                  width: item.width,
-                  transformOrigin: 'left top',
-                  scale: `${scaleFactor}`,
-                }}
-              >
-                {parseHtml(item.previewHtml)}
-              </div>
+              <ScaledCopyItem
+                html={item.previewHtml}
+                width={item.width}
+                scaleFactor={`${scaleFactor}`}
+              />
             </div>
           )
         })}
