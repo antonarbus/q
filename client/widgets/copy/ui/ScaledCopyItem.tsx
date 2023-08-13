@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useRef } from 'react'
 
 interface IProps {
   width: number
@@ -9,7 +9,7 @@ interface IProps {
 export const ScaledCopyItem = ({ width, scaleFactor, html }: IProps): JSX.Element => {
   const divRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!divRef.current) return
     divRef.current.innerHTML = html
   }, [])

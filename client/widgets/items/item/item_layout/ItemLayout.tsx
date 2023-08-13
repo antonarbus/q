@@ -27,7 +27,7 @@ export const ItemLayout: ComponentClass<ISortableItem> =
     itemActionElements,
     itemWidth,
   }: IProps) => {
-    const itemRef = useRef<HTMLDivElement>(null);
+    const itemRef = useRef<HTMLDivElement>(null)
 
     return (
       <motion.div
