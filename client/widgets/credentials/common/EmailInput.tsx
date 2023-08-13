@@ -1,22 +1,29 @@
+import type { RefObject } from 'react'
 import { useState } from 'react'
 import { useUpdateEffect } from 'react-use'
 import mailcheck from 'mailcheck'
 import { InputAdornment, TextField } from '@mui/material'
 import { Person } from '@mui/icons-material'
 import { theme } from 'client/shared/clients'
-import { Event, RefDiv } from 'client/shared/types'
+import type { Event } from 'client/shared/types'
 
-const isEmailPatternOk = (email: string) =>
+const isEmailPatternOk = (email: string): boolean =>
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-    email
+    email,
   )
 
-type Props = {
+interface Props {
   email: string
   setEmail: (value: string) => void
   isEmailOk: boolean
   setIsEmailOk: (value: boolean) => void
-  inputRef?: RefDiv
+  inputRef?: RefObject<HTMLDivElement>
+}
+
+interface ISuggestion {
+  address: string;
+  domain: string;
+  full: string;
 }
 
 /**
@@ -29,44 +36,58 @@ type Props = {
  * @param props.inputRef reference to the input element, for ex. to put a focus on
  */
 
-export function EmailInput({
+export const EmailInput = ({
   email,
   setEmail,
   isEmailOk,
   setIsEmailOk,
   inputRef,
-}: Props) {
+}: Props): JSX.Element => {
   // input focused out ones (show validation msg only after first focus out)
   const [inputFocusedOutOnes, setInputFocusedOutOnes] = useState(false)
 
   // is email pattern ok
   useUpdateEffect(
-    function checkIfEmailPatternIsOk() {
-      isEmailPatternOk(email) ? setIsEmailOk(true) : setIsEmailOk(false)
+    // eslint-disable-next-line no-restricted-syntax
+    function checkIfEmailPatternIsOk(): void {
+      const isPatternOk = isEmailPatternOk(email)
+      if (isPatternOk) {
+        setIsEmailOk(true)
+      } else {
+        setIsEmailOk(false)
+      }
     },
-    [email]
+    [email],
   )
 
   // label msg
   const initEmailLabel = 'Email'
   const [emailLabel, setEmailLabel] = useState(initEmailLabel)
   useUpdateEffect(
+    // eslint-disable-next-line no-restricted-syntax
     function setLabelMsgBasedOnValidation() {
-      inputFocusedOutOnes && email !== '' && !isEmailOk
-        ? setEmailLabel('Check email pattern')
-        : setEmailLabel(initEmailLabel)
+      const isMailPatternOk = inputFocusedOutOnes && email !== '' && !isEmailOk
+      if (isMailPatternOk) {
+        setEmailLabel('Check email pattern')
+      } else {
+        setEmailLabel(initEmailLabel)
+      }
     },
-    [email, inputFocusedOutOnes, isEmailOk]
+    [email, inputFocusedOutOnes, isEmailOk],
   )
 
   // email suggestion
   const [emailSuggestion, setEmailSuggestion] = useState('')
 
-  function suggestEmail(emailVal?: string) {
+  const suggestEmail = (emailVal?: string): void => {
     mailcheck.run({
-      email: emailVal || email,
-      suggested: (suggestion: any) => setEmailSuggestion(suggestion.full),
-      empty: () => setEmailSuggestion(''),
+      email: emailVal ?? email,
+      suggested: (suggestion: ISuggestion) => {
+        setEmailSuggestion(suggestion.full)
+      },
+      empty: () => {
+        setEmailSuggestion('')
+      },
     })
   }
 
@@ -81,8 +102,10 @@ export function EmailInput({
         autoComplete='email'
         placeholder='Email'
         value={email}
-        onChange={(e: Event) => setEmail((e.target as HTMLInputElement).value)}
-        onBlur={() => {
+        onChange={(e: Event): void => {
+          setEmail((e.target as HTMLInputElement).value)
+        }}
+        onBlur={(): void => {
           setInputFocusedOutOnes(true)
           suggestEmail()
         }}
@@ -114,7 +137,7 @@ export function EmailInput({
           Did you mean?{' '}
           <a
             style={{ textDecoration: 'underline' }}
-            onClick={(e) => {
+            onClick={(e): void => {
               e.preventDefault()
               setEmail(emailSuggestion)
               suggestEmail(emailSuggestion)

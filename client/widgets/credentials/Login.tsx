@@ -1,4 +1,4 @@
-import type { Event, RefDiv } from 'client/shared/types'
+import type { Event } from 'client/shared/types'
 import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Avatar } from '@mui/material'
@@ -16,8 +16,8 @@ import { ButtonCustom } from 'client/shared/components/ButtonCustom'
 
 export const Login = (): JSX.Element => {
   const [email, setEmail] = useState('')
-  const inputRef = useRef() as RefDiv
-  const cardRef = useRef() as RefDiv
+  const inputRef = useRef<HTMLDivElement>(null)
+  const cardRef = useRef<HTMLDivElement>(null)
   const [isEmailOk, setIsEmailOk] = useState(false)
   const [password, setPassword] = useState('')
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
@@ -50,9 +50,10 @@ export const Login = (): JSX.Element => {
         reference={cardRef}
       >
         <form
-          onSubmit={async (e: Event) =>
-            loginUser({ e, email, password, cardElement: cardRef.current })
-          }
+          onSubmit={(e: Event): void => {
+            if (!cardRef.current) return
+            void loginUser({ e, email, password, cardElement: cardRef.current })
+          }}
         >
           <EmailInput
             email={email}
@@ -80,6 +81,7 @@ export const Login = (): JSX.Element => {
               children='Reset?'
               onClick={(e: Event): void => {
                 e.preventDefault()
+                if (!cardRef.current) return
                 slideElement({
                   element: cardRef.current,
                   cb: () => {
@@ -92,6 +94,7 @@ export const Login = (): JSX.Element => {
               to='/register'
               children='Register?'
               onClick={(e: Event): void => {
+                if (!cardRef.current) return
                 e.preventDefault()
                 slideElement({
                   element: cardRef.current,

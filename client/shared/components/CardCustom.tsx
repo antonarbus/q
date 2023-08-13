@@ -1,12 +1,12 @@
 import { Typography } from '@mui/material'
 import type { RefDiv } from 'client/shared/types'
-import type { MouseEvent, ReactNode } from 'react'
+import type { MouseEvent, ReactNode, RefObject } from 'react'
 
 interface Props {
   children?: ReactNode
   content?: React.ReactNode
   cssProps?: React.CSSProperties
-  reference?: RefDiv
+  reference?: RefObject<HTMLDivElement>
   title?: React.ReactNode
   logo?: React.ReactNode
 }
@@ -28,7 +28,7 @@ export const CardCustom = ({
   reference,
   title,
   logo,
-}: Props) => (
+}: Props): JSX.Element => (
   <div
     css={{
       display: 'flex',
