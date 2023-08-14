@@ -9,7 +9,7 @@ import { theme } from 'client/shared/clients'
 export const useCopyContainerAnimation = (): AnimationControls => {
   const copyContainerAnimationControls = useAnimationControls()
   const isFirstMount = useFirstMountState()
-  const items = useSelectorTyped((state) => state.copy.items)
+  const items = useSelectorTyped(state => state.copy.items)
 
   useEffect(() => {
     const newHeight = items.reduce((accumulator, item) => {
@@ -23,7 +23,6 @@ export const useCopyContainerAnimation = (): AnimationControls => {
         transition: {
           delay: 0,
           duration: theme.copy.animationDuration,
-          // type: 'spring',
           ease: 'linear',
         },
       })
@@ -34,7 +33,6 @@ export const useCopyContainerAnimation = (): AnimationControls => {
       transition: {
         delay: 0,
         duration: theme.copy.animationDuration,
-        // type: 'spring',
         ease: 'linear',
       },
     })

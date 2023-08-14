@@ -21,8 +21,7 @@ export const DraggableItemsContainer: React.ComponentClass<ISortableContainer> =
         opacity: 1,
       }}
       transition={{
-        // show "Q" logo for short time to avoid some jumps on init load
-        delay: 0.7,
+        delay: 0.7, // show "Q" logo for short time to avoid some jumps on init load
       }}
       css={{
         display: 'flex',

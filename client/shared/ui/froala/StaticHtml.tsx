@@ -20,6 +20,8 @@ export const StaticHtml = ({
   editorRef,
   heightDuringAnimationRef,
 }: Props): JSX.Element => {
+  const getHtm.WithBoundIndex = getHtml.bind(null, { index })
+
   const ref = useRef<HTMLDivElement>()
   const html = useRef(getHtml())
 

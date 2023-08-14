@@ -8,7 +8,7 @@ interface IProps {
 }
 
 export const useCursorCords = (): IProps => {
-  const initCords = useSelectorTyped((state) => state.copy.initCords)
+  const initCords = useSelectorTyped(state => state.copy.initCords)
   const [cursorCords, setCursorCords] = useState(initCords)
 
   const followCursor = (e: MouseEvent): void => {
