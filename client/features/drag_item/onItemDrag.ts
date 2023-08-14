@@ -16,12 +16,15 @@ const onItemDragStart = (): void => {
 }
 
 const onItemDragEnd = ({ oldIndex, newIndex }: IProps): void => {
-  const { items } = store.getState()
-  const reOrderedItems = arrayMoveImmutable(items, oldIndex, newIndex)
-  store.dispatch(reOrderItems({ reOrderedItems }))
-  saveItemsLocally({ msgAboveItemWithIndex: newIndex })
   exitCopyMode({ delayed: true })
   document.body.style.removeProperty('cursor')
+
+  if (oldIndex !== newIndex) {
+    const { items } = store.getState()
+    const reOrderedItems = arrayMoveImmutable(items, oldIndex, newIndex)
+    store.dispatch(reOrderItems({ reOrderedItems }))
+    saveItemsLocally({ msgAboveItemWithIndex: newIndex })
+  }
 }
 
 export const onItemDrag = {
