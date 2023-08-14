@@ -1,18 +1,18 @@
 import { notify } from 'client/shared/ui/top_msg/notify'
-import { Event } from 'client/shared/types'
+import type { FormEvent } from 'react'
 import { useState } from 'react'
-import { HttpStatusType } from './types'
+import type { HttpStatusType } from './types'
 
-type Props = {
-  e: Event
+interface Props {
+  e: FormEvent
   email: string
   password: string
 }
 
-export function useRegister() {
+export const useRegister = () => {
   const [httpStatus, setHttpStatus] = useState<HttpStatusType>('')
 
-  async function registerUser({ e, email, password }: Props) {
+  const registerUser = async ({ e, email, password }: Props) => {
     e.preventDefault()
     const method = 'POST'
     const headers = { 'Content-Type': 'application/json' }
@@ -23,13 +23,16 @@ export function useRegister() {
       const res = await fetch('/api/register', options)
       const data = await res.json()
       const { status, message } = data
-      status === 'error' && setHttpStatus('error')
-      status === 'error' &&
-        message === 'user with such email already exists' &&
+      if (status === 'error') {
+        setHttpStatus('error')
+      }
+      if (status === 'error' && message === 'user with such email already exists') {
         notify({ msg: 'Already registered', type: 'info', theme: 'light' })
-      status === 'ok' && setHttpStatus('success')
-      status === 'ok' &&
+      }
+      if (status === 'ok') {
+        setHttpStatus('success')
         notify({ msg: 'Done! Check your mailbox.', theme: 'light' })
+      }
       console.log(data)
     } catch (err) {
       setHttpStatus('error')

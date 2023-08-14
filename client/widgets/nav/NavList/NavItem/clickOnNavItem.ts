@@ -1,23 +1,17 @@
-import type { TMenuItem } from 'client/entities/nav';
+import type { TMenuItem } from 'client/entities/nav'
 import { closeMenu, openMenuWithId, setNavItemRightPos } from 'client/entities/nav'
 import { store } from 'client/app/store'
-import type { Event } from 'client/shared/types'
+import type { MouseEvent } from 'react'
 
 interface IProps {
-  e: Event
+  e: MouseEvent
   navItem: TMenuItem | undefined
   id: string
   navItemRef: React.MutableRefObject<HTMLLIElement>
   disabled: boolean
 }
 
-export function clickOnNavItem({
-  e,
-  navItem,
-  id,
-  navItemRef,
-  disabled,
-}: IProps) {
+export const clickOnNavItem = ({ e, navItem, id, navItemRef, disabled }: IProps): void => {
   (document.activeElement as HTMLElement).blur() // to prevent open an active navItem link on Enter key
 
   const link = navItem?.link
@@ -27,7 +21,7 @@ export function clickOnNavItem({
 
   if (link && func) {
     // just follow the link natively and call the func
-    func()
+    void func()
     return
   }
 
@@ -49,8 +43,7 @@ export function clickOnNavItem({
 
   // if click on NavItem for which Menu is opened, then close it, otherwise it closes and opens immediately
   const currentMenuId = store.getState().nav.idsToCurrentMenuItems.at(-1)
-  const isMenuOpenedUnderThisNavItem =
-    currentMenuId === id && currentMenuId !== 'top'
+  const isMenuOpenedUnderThisNavItem = currentMenuId === id && currentMenuId !== 'top'
 
   if (isMenuOpenedUnderThisNavItem) {
     store.dispatch(closeMenu())
@@ -58,7 +51,7 @@ export function clickOnNavItem({
   }
 
   if (func) {
-    func()
+    void func()
     return
   }
 

@@ -1,9 +1,8 @@
 import { didClickInsideThisElement } from 'client/shared/lib/isClickInsideThisElement'
 import { useDispatchTyped } from 'client/shared/hooks'
-import type { MutableRefObject } from 'react';
+import type { MutableRefObject } from 'react'
 import { useEffect } from 'react'
 import { closeMenu } from 'client/entities/nav'
-import type { Event, RefDiv } from 'client/shared/types'
 
 interface Props {
   menuContainerRef: MutableRefObject<HTMLDivElement | null>
@@ -32,7 +31,7 @@ export const useCloseMenuOnClickOutside = ({ menuContainerRef }: Props): void =>
     if (!didClickInsideThisElement({ clickedElement, thisElement: menuContainer })) {
       dispatch(closeMenu())
     }
-  };
+  }
 
   type TReturn = () => void
   const hideMenuOnClickOutside = (): TReturn => {
@@ -40,7 +39,7 @@ export const useCloseMenuOnClickOutside = ({ menuContainerRef }: Props): void =>
     return () => {
       document.removeEventListener('mousedown', mouseDownHandler)
     }
-  };
+  }
 
   useEffect(hideMenuOnClickOutside, [])
-};
+}

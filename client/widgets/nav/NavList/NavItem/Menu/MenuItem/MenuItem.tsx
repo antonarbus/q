@@ -6,15 +6,16 @@ import { RoundSpanForIcon } from '../../RoundSpanForIcon'
 import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
 import { Shortcut } from './Shortcut'
 import { clickOnMenuItem } from './function/clickOnMenuItem'
-import type { TMenuItem } from 'client/entities/nav';
+import type { TMenuItem } from 'client/entities/nav'
 import { setMenuItemHoverIndex } from 'client/entities/nav'
+import type { MouseEvent } from 'react'
 
 interface IProps {
   menuItem: TMenuItem
   hoveredMenuItemIndex: number
 }
 
-export function MenuItem({ menuItem, hoveredMenuItemIndex }: IProps) {
+export const MenuItem = ({ menuItem, hoveredMenuItemIndex }: IProps) => {
   const dispatch = useDispatchTyped()
   const isHovered = useSelectorTyped(
     (state) => state.nav.menuItemHoverIndex === hoveredMenuItemIndex,
@@ -28,9 +29,13 @@ export function MenuItem({ menuItem, hoveredMenuItemIndex }: IProps) {
 
   return (
     <MenuItemStyled
-      to={link || '/'}
-      onClick={(e) => { clickOnMenuItem(e, menuId, disabled); }}
-      onMouseEnter={() => dispatch(setMenuItemHoverIndex(hoveredMenuItemIndex))}
+      to={link ?? '/'}
+      onClick={(e: MouseEvent): void => {
+        clickOnMenuItem(e, menuId, disabled)
+      }}
+      onMouseEnter={(): void => {
+        dispatch(setMenuItemHoverIndex(hoveredMenuItemIndex))
+      }}
       state={{ isHovered }}
     >
       {isIcon && <Icon icon={menuItem.icon} disabled={disabled} />}

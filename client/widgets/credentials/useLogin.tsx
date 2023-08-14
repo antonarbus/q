@@ -1,7 +1,6 @@
 import { notify } from 'client/shared/ui/top_msg/notify'
-// import { slideElement } from 'client/shared/lib/slideElement'
 import { useDispatchTyped } from 'client/shared/hooks'
-import type { Event } from 'client/shared/types'
+import type { FormEvent } from 'react'
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { navUpdate } from './navUpdate'
@@ -14,11 +13,11 @@ export const useLogin = () => {
   const [httpStatus, setHttpStatus] = useState<HttpStatusType>('')
   const navigate = useNavigate()
   const location = useLocation()
-  const from = location.state?.from?.pathname || '/'
+  const from = location.state?.from?.pathname ?? '/'
   const dispatch = useDispatchTyped()
 
   interface IProps {
-    e: Event
+    e: FormEvent
     email: string
     password: string
     cardElement: HTMLElement
@@ -81,7 +80,7 @@ export const useLogin = () => {
         })
       }, 2000)
     }
-  };
+  }
 
   return { loginUser, httpStatus, setHttpStatus }
-};
+}

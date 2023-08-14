@@ -1,5 +1,6 @@
 import { useSelectorTyped } from 'client/shared/hooks'
 import { store } from 'client/shared/clients'
+import type { MouseEvent } from 'react'
 import { useRef } from 'react'
 import { Icon } from './Icon'
 import { Menu } from './Menu'
@@ -26,7 +27,7 @@ interface IProps {
  * - required to avoid Menu to go over the narrow window
  */
 
-export function NavItem({ children, id }: IProps): JSX.Element {
+export const NavItem = ({ children, id }: IProps): JSX.Element => {
   // required to avoid Menu to go over the narrow window
   const navItemRef = useRef() as React.MutableRefObject<HTMLLIElement>
 
@@ -114,8 +115,8 @@ export function NavItem({ children, id }: IProps): JSX.Element {
     >
       <Link
         to={link ?? '/'}
-        onClick={(e): void => {
-          clickOnNavItem({ e, navItem, id, navItemRef, disabled });
+        onClick={(e: MouseEvent): void => {
+          clickOnNavItem({ e, navItem, id, navItemRef, disabled })
         }}
       >
         {icon && <Icon icon={icon} disabled={disabled} />}

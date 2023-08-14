@@ -1,3 +1,4 @@
+import type { MouseEvent } from 'react'
 import { createElement } from 'react'
 import { TextInMenu } from './TextInMenu'
 import { Icon } from '../../Icon'
@@ -6,27 +7,24 @@ import { MenuItemStyled } from './MenuItemStyled'
 import { closeMenu, setMenuItemHoverIndex } from 'client/entities/nav'
 import { theme } from 'client/shared/clients'
 import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
-import type { Event } from 'client/shared/types'
 
 const closeIcon = createElement(CloseIcon, {})
 
-export function CloseMenuItem() {
+export const CloseMenuItem = (): JSX.Element => {
   const color = theme.colors.topMenuItem
   const dispatch = useDispatchTyped()
-  const isHovered = useSelectorTyped(
-    (state) => state.nav.menuItemHoverIndex === 1,
-  )
-
-  const onClickHandler = (e: Event) => {
-    e.preventDefault()
-    dispatch(closeMenu())
-  }
+  const isHovered = useSelectorTyped(state => state.nav.menuItemHoverIndex === 1)
 
   return (
     <MenuItemStyled
-      to={'/'}
-      onClick={onClickHandler}
-      onMouseEnter={() => dispatch(setMenuItemHoverIndex(1))}
+      to='/'
+      onClick={(e: MouseEvent): void => {
+        e.preventDefault()
+        dispatch(closeMenu())
+      }}
+      onMouseEnter={(): void => {
+        dispatch(setMenuItemHoverIndex(1))
+      }}
       state={{ isHovered }}
     >
       <Icon icon={closeIcon} />

@@ -1,4 +1,4 @@
-import type { Event } from 'client/shared/types'
+import type { FormEvent, MouseEvent } from 'react'
 import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Avatar } from '@mui/material'
@@ -23,12 +23,10 @@ export const Register = (): JSX.Element => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
   const { registerUser, httpStatus, setHttpStatus } = useRegister()
   const navigate = useNavigate()
-  useEffect(
-    () => {
-      setIsButtonDisabled(!(isEmailOk && isConfirmPasswordOk))
-    },
-    [isEmailOk, isConfirmPasswordOk],
-  )
+
+  useEffect(() => {
+    setIsButtonDisabled(!(isEmailOk && isConfirmPasswordOk))
+  }, [isEmailOk, isConfirmPasswordOk])
 
   return (
     <BackdropWithSlidableContent
@@ -49,7 +47,7 @@ export const Register = (): JSX.Element => {
         }
         reference={cardRef}
       >
-        <form onSubmit={(e: Event): void => void registerUser({ e, email, password })}>
+        <form onSubmit={(e: FormEvent): void => void registerUser({ e, email, password })}>
           <EmailInput
             email={email}
             setEmail={setEmail}
@@ -73,7 +71,7 @@ export const Register = (): JSX.Element => {
             <Link
               to='/login'
               children='Log in?'
-              onClick={(e: Event): void => {
+              onClick={(e: MouseEvent): void => {
                 if (!cardRef.current) return
                 e.preventDefault()
                 slideElement({
