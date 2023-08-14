@@ -55,7 +55,7 @@ export const copySlice = createSlice({
       const itemIdAndWhereToPlace = action.payload
       state.place = itemIdAndWhereToPlace
     },
-    showPasteText: (state) => {
+    showPasteTextOverItem: (state) => {
       state.isPasteTextShown = true
     },
     hidePasteText: (state) => {
@@ -71,7 +71,7 @@ export const {
   addItemIntoCopyContainer,
   removeItemFromCopyContainer,
   updatePastePos,
-  showPasteText,
+  showPasteTextOverItem,
   hidePasteText,
   enterIntoCopyMode,
   exitFromCopyMode,
