@@ -7,6 +7,7 @@ import { saveText } from 'client/entities/items'
 import { PencilAtBottomRight } from 'client/shared/components/PencilAtBottomRight'
 import { Item } from './item'
 import type FroalaEditor from 'froala-editor'
+import { saveItemText } from 'client/features/save_item_text'
 
 
 interface IProps {
@@ -31,7 +32,7 @@ export const TextItem = ({ index }: IProps): JSX.Element => {
         }}
         placeholder='Type text or drop images, files, links...'
         padding={theme.item.padding}
-        saveFroalaReducer={saveText}
+        onContentChange={saveItemText}
       />
       <PencilAtBottomRight editorRef={editorRef} />
     </Item>

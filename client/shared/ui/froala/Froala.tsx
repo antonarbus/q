@@ -1,4 +1,4 @@
-import type { RefDiv } from 'client/shared/types'
+import type { RefDiv, TOnFroalaContentChange } from 'client/shared/types'
 import type { AnyAction } from '@reduxjs/toolkit'
 import type { SxProps } from '@mui/material'
 import { useSelectorTyped } from 'client/shared/hooks'
@@ -9,18 +9,6 @@ import { useViewPortObserver } from './useViewPortObserver'
 import type { MutableRefObject } from 'react'
 import type FroalaEditor from 'froala-editor'
 
-interface IReducerProps {
-  index: number
-  html: string
-  rowIndex?: number
-}
-
-export type ISaveFroalaReducer = ({
-  index,
-  html,
-  rowIndex,
-}: IReducerProps) => AnyAction
-
 interface IProps {
   index: number
   padding?: number | string
@@ -29,9 +17,8 @@ interface IProps {
   editorRef: MutableRefObject<FroalaEditor | null>
   placeholder?: string
   additionalStyle?: SxProps
-  onClickAwayIfHtmChanged?: () => void
   rowIndex?: number
-  saveFroalaReducer: ISaveFroalaReducer
+  onContentChange: TOnFroalaContentChange
 }
 
 export const Froala = ({
@@ -40,11 +27,10 @@ export const Froala = ({
   froalaElementRef,
   index,
   getHtml,
-  onClickAwayIfHtmChanged,
   padding,
   placeholder,
   rowIndex,
-  saveFroalaReducer,
+  onContentChange,
 }: IProps): JSX.Element => {
   const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
   const { heightDuringAnimationRef } = useFixedHeightForAnimation({ froalaElementRef })
@@ -71,11 +57,10 @@ export const Froala = ({
           froalaElementRef={froalaElementRef}
           index={index}
           getHtml={getHtml}
-          onClickAwayIfHtmChanged={onClickAwayIfHtmChanged}
           padding={padding}
           placeholder={placeholder}
           rowIndex={rowIndex}
-          saveFroalaReducer={saveFroalaReducer}
+          onContentChange={onContentChange}
           heightDuringAnimationRef={heightDuringAnimationRef}
         />
       )}

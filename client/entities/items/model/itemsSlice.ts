@@ -107,7 +107,6 @@ const itemsSlice = createSlice({
     saveText: (state, action: PayloadAction<{
       index: number
       html?: string
-      height?: number
       rowIndex?: number
     }>) => {
       const { index, html } = action.payload
