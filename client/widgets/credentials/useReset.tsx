@@ -1,12 +1,11 @@
 import { notify } from 'client/shared/ui/top_msg/notify'
-import type { Event } from 'client/shared/types'
-import type { Dispatch, SetStateAction } from 'react'
+import type { Dispatch, FormEvent, SetStateAction } from 'react'
 import { useState } from 'react'
 import { token } from '../../shared/auth/token'
 import type { HttpStatusType } from './types'
 
 interface Props {
-  e: Event
+  e: FormEvent
   email: string
 }
 

@@ -1,8 +1,8 @@
+import type { FormEvent } from 'react'
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Avatar } from '@mui/material'
 import { useReset } from './useReset'
-import type { Event } from 'client/shared/types'
 import { EmailInput } from './common/EmailInput'
 import { theme } from 'client/shared/clients'
 import PasswordRoundedIcon from '@mui/icons-material/PasswordRounded'
@@ -35,7 +35,7 @@ export const Reset = (): JSX.Element => {
           </Avatar>
         }
       >
-        <form onSubmit={(e: Event): void => void resetPassword({ e, email })}>
+        <form onSubmit={(e: FormEvent): void => void resetPassword({ e, email })}>
           <EmailInput
             email={email}
             setEmail={setEmail}

@@ -1,10 +1,9 @@
 import { Lock, Visibility, VisibilityOff } from '@mui/icons-material'
 import { IconButton, InputAdornment, TextField } from '@mui/material'
 import { theme } from 'client/shared/clients'
-import { Event } from 'client/shared/types'
 import { useState } from 'react'
 
-type Props = {
+interface Props {
   password: string
   setPassword: (value: string) => void
   onBlur?: () => void
@@ -21,25 +20,27 @@ type Props = {
  * @param props.label label
  */
 
-export function PasswordInput({
+export const PasswordInput = ({
   password,
   setPassword,
   onBlur,
   label,
   isLabelRed,
-}: Props) {
+}: Props): JSX.Element => {
   const [showPassword, setShowPassword] = useState(false)
 
   return (
     <TextField
       fullWidth
       name='password'
-      label={label || 'Password'}
+      label={label ?? 'Password'}
       type={showPassword ? 'text' : 'password'}
       autoComplete='new-password'
       placeholder='Password'
       value={password}
-      onChange={(e: Event) => setPassword((e.target as HTMLInputElement).value)}
+      onChange={(e): void => {
+        setPassword(e.target.value)
+      }}
       onBlur={onBlur}
       sx={{
         mb: 2,
@@ -56,7 +57,9 @@ export function PasswordInput({
         endAdornment: (
           <InputAdornment position='end'>
             <IconButton
-              onClick={() => setShowPassword(!showPassword)}
+              onClick={(): void => {
+                setShowPassword(!showPassword)
+              }}
               edge='end'
             >
               {showPassword ? <VisibilityOff /> : <Visibility />}
