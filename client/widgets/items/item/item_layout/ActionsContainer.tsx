@@ -7,6 +7,7 @@ interface IProps {
 
 export const ActionsContainer = ({ itemActionElements }: IProps): JSX.Element => (
   <div
+    className={className.actions}
     css={{
       display: 'flex',
       flexDirection: 'column',

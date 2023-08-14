@@ -34,7 +34,7 @@ const movePasteTextAfterCursor = (e: MouseEvent): void => {
     return
   }
 
-  const actionsButton = (e.target as Element).closest('.actions > *')
+  const actionsButton = (e.target as Element).closest(`.${className.actions} > *`)
 
   if (actionsButton && isPasteTextShown) {
     store.dispatch(hidePasteText())
