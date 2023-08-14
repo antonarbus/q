@@ -1,10 +1,10 @@
 import type { SxProps } from '@mui/material'
-import { Box } from '@mui/material'
-import { useStartFroala } from './useStartFroala'
-import { usePutCaretAtTheEndOfText } from './usePutCaretAtTheEndOfText'
 import type { MutableRefObject } from 'react'
 import type { RefDiv, TOnFroalaContentChange } from 'client/shared/types'
 import type FroalaEditor from 'froala-editor'
+import { Box } from '@mui/material'
+import { useStartFroala } from './useStartFroala'
+import { usePutCaretAtTheEndOfText } from './usePutCaretAtTheEndOfText'
 
 interface IProps {
   index: number
