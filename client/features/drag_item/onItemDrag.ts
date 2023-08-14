@@ -17,6 +17,7 @@ const onItemDragStart = (): void => {
 
 const onItemDragEnd = ({ oldIndex, newIndex }: IProps): void => {
   // exitCopyMode({ delayed: true })
+  // todo: why is it 'copyMode', not good name
   exitCopyMode()
   document.body.style.removeProperty('cursor')
 
