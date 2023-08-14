@@ -16,7 +16,8 @@ const onItemDragStart = (): void => {
 }
 
 const onItemDragEnd = ({ oldIndex, newIndex }: IProps): void => {
-  exitCopyMode({ delayed: true })
+  // exitCopyMode({ delayed: true })
+  exitCopyMode()
   document.body.style.removeProperty('cursor')
 
   if (oldIndex !== newIndex) {
