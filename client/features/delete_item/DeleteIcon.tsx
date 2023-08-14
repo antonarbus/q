@@ -4,7 +4,6 @@ import { RxCross2 } from 'react-icons/rx'
 import { deleteItem, selectIsItemAlone } from 'client/entities/items'
 import { gsap } from 'gsap'
 import { useRef } from 'react'
-import type { RefSpan } from 'client/shared/types'
 import { saveItemsLocally } from 'client/shared/lib'
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 
@@ -14,7 +13,7 @@ interface IProps {
 
 export const DeleteIcon = ({ index }: IProps): EmotionJSX.Element => {
   const dispatch = useDispatchTyped()
-  const ref = useRef() as RefSpan
+  const ref = useRef<HTMLSpanElement>(null)
   const isItemAlone = useSelectorTyped(selectIsItemAlone)
 
   return (
