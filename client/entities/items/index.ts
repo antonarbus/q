@@ -17,4 +17,5 @@ export {
 } from './model/itemsSlice'
 
 export { saveItemHeightByIndex } from './lib/saveItemHeightByIndex'
+export { itemTextHtmlGetter } from './model/getItemTextHtml'
 

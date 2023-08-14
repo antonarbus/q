@@ -1,18 +1,18 @@
-import type { RefDiv, TOnFroalaContentChange } from 'client/shared/types'
-import type { AnyAction } from '@reduxjs/toolkit'
+import type { RefDiv, THtmlGetter, TOnFroalaContentChange } from 'client/shared/types'
 import type { SxProps } from '@mui/material'
+import type { MutableRefObject } from 'react'
+import type FroalaEditor from 'froala-editor'
 import { useSelectorTyped } from 'client/shared/hooks'
 import { StaticHtml } from './StaticHtml'
 import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
 import { EditableHtml } from './EditableHtml'
 import { useViewPortObserver } from './useViewPortObserver'
-import type { MutableRefObject } from 'react'
-import type FroalaEditor from 'froala-editor'
 
 interface IProps {
   index: number
   padding?: number | string
-  getHtml: () => string
+  // todo: rename to 'htmlGetter'
+  getHtml: THtmlGetter
   froalaElementRef: RefDiv
   editorRef: MutableRefObject<FroalaEditor | null>
   placeholder?: string
@@ -39,11 +39,13 @@ export const Froala = ({
   const showStaticHtml = isCopyMode || !isInsideViewPort
   const showEditableHtml = !isCopyMode && isInsideViewPort
 
+  const htmlGetter = getHtml.bind(null, { index, rowIndex })
+
   return (
     <div ref={observerRef}>
       {showStaticHtml && (
         <StaticHtml
-          getHtml={getHtml}
+          getHtml={htmlGetter}
           padding={padding}
           additionalStyle={additionalStyle}
           editorRef={editorRef}
@@ -56,7 +58,7 @@ export const Froala = ({
           editorRef={editorRef}
           froalaElementRef={froalaElementRef}
           index={index}
-          getHtml={getHtml}
+          getHtml={htmlGetter}
           padding={padding}
           placeholder={placeholder}
           rowIndex={rowIndex}
