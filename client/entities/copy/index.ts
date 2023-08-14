@@ -6,7 +6,7 @@ export {
   addItemIntoCopyContainer,
   removeItemFromCopyContainer,
   updatePastePos,
-  showPasteTextOverItem,
+  showPasteText,
   hidePasteText,
   enterIntoCopyMode,
   exitFromCopyMode,
