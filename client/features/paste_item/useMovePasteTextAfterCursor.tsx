@@ -1,8 +1,8 @@
 import { useEffectOnce, useUnmount } from 'react-use'
 import { store } from 'client/app/store'
 import isEqual from 'lodash.isequal'
-import { hidePasteText, showPasteTextOverItem, updatePastePos } from 'client/entities/copy'
-import { insertPasteItem } from 'client/entities/items'
+import { hidePasteText, showPasteText, updatePastePos } from 'client/entities/copy'
+import { insertPasteItem, removePasteItem } from 'client/entities/items'
 import type { ICopyPlace } from 'client/shared/types'
 import { className } from 'client/shared/className'
 
@@ -22,7 +22,7 @@ const getPastePlace = ({ item, e }: IProps): ICopyPlace => {
   return { pastePos: 'middle', itemId: item.id }
 }
 
-// todo: do not show "paste here" when we move cursor over action icons
+// todo: do not insert "paste here" when we move cursor over action icons
 
 const movePasteTextAfterCursor = (e: MouseEvent): void => {
   const prevPlace = store.getState().copy.place
@@ -36,15 +36,16 @@ const movePasteTextAfterCursor = (e: MouseEvent): void => {
     return
   }
 
-  const actionsButton = (e.target as Element).closest(`.${className.actions} > *`)
+  const actionsContainer = (e.target as Element).closest(`.${className.actions}`)
 
-  if (actionsButton && isPasteTextShown) {
+  if (actionsContainer && isPasteTextShown) {
     store.dispatch(hidePasteText())
+    store.dispatch(removePasteItem())
     return
   }
 
-  if (!actionsButton && !isPasteTextShown) {
-    store.dispatch(showPasteTextOverItem())
+  if (!actionsContainer && !isPasteTextShown) {
+    store.dispatch(showPasteText())
     return
   }
 
@@ -57,7 +58,7 @@ const movePasteTextAfterCursor = (e: MouseEvent): void => {
 
   if (isEqual(pastePlace, prevPlace)) return
 
-  store.dispatch(showPasteTextOverItem())
+  store.dispatch(showPasteText())
   store.dispatch(updatePastePos(pastePlace))
   store.dispatch(insertPasteItem(pastePlace))
 }
