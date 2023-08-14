@@ -48,8 +48,13 @@ export const CutIcon = ({ index }: IProps): JSX.Element => {
 
         dispatch(addItemIntoCopyContainer(item))
         dispatch(deleteItem({ itemId: item.id }))
-        dispatch(saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
-        dispatch(showCopyContainer())
+
+        const isCopyContainer = store.getState().copy.isCopyContainer
+        if (!isCopyContainer) {
+          dispatch(saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
+          dispatch(showCopyContainer())
+        }
+
         saveItemsLocally()
       }}
     >
