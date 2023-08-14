@@ -1,9 +1,6 @@
-import type { RefDiv, RefString } from 'client/shared/types'
+import type { RefDiv, TOnFroalaContentChange } from 'client/shared/types'
 import type { MutableRefObject } from 'react'
-import type { ISaveFroalaReducer } from './Froala'
-import { useDispatchTyped } from 'client/shared/hooks'
-import { useEffect, useRef } from 'react'
-import { saveItemsLocally } from 'client/shared/lib'
+import { useEffect } from 'react'
 import FroalaEditor from 'froala-editor'
 import 'froala-editor/js/froala_editor.pkgd.min.js'
 import 'froala-editor/js/plugins.pkgd.min.js'
@@ -14,11 +11,10 @@ import { froalaStaticOptions } from './froalaStaticOptions'
 interface IProps {
   index: number
   getHtml: () => string
-  onClickAwayIfHtmChanged?: () => void
+  onContentChange: TOnFroalaContentChange
   froalaElementRef: RefDiv
   editorRef: MutableRefObject<FroalaEditor | null>
   placeholder?: string
-  saveFroalaReducer: ISaveFroalaReducer
   rowIndex?: number
 }
 
@@ -26,8 +22,15 @@ declare const window: Window & typeof globalThis & { froalas: MutableRefObject<F
 
 window.froalas = []
 
-export const useStartFroala = ({ index, getHtml, onClickAwayIfHtmChanged, froalaElementRef, editorRef, placeholder, saveFroalaReducer, rowIndex }: IProps): void => {
-  const dispatch = useDispatchTyped()
+export const useStartFroala = ({
+  index,
+  getHtml,
+  froalaElementRef,
+  editorRef,
+  placeholder,
+  rowIndex,
+  onContentChange,
+}: IProps): void => {
 
   useEffect(() => {
     const initFroalaInstance = (): void => {
@@ -49,9 +52,8 @@ export const useStartFroala = ({ index, getHtml, onClickAwayIfHtmChanged, froala
             contentChanged: (): void => {
               if (!editorRef.current) return
               const html = editorRef.current.html.get()
-              dispatch(saveFroalaReducer({ index, html, rowIndex }))
-              onClickAwayIfHtmChanged?.()
-              saveItemsLocally({ msgAboveItemWithIndex: index })
+              const onContentChangeWithBoundArgs = onContentChange.bind(null, { index, html, rowIndex })
+              onContentChangeWithBoundArgs()
             },
           },
         },

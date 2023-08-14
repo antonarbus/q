@@ -3,10 +3,8 @@ import { Box } from '@mui/material'
 import { useStartFroala } from './useStartFroala'
 import { usePutCaretAtTheEndOfText } from './usePutCaretAtTheEndOfText'
 import type { MutableRefObject } from 'react'
-import type { ISaveFroalaReducer } from './Froala'
-import type { RefDiv } from 'client/shared/types'
+import type { RefDiv, TOnFroalaContentChange } from 'client/shared/types'
 import type FroalaEditor from 'froala-editor'
-import { className } from 'client/shared/className'
 
 interface IProps {
   index: number
@@ -16,9 +14,8 @@ interface IProps {
   editorRef: MutableRefObject<FroalaEditor | null>
   placeholder?: string
   additionalStyle?: SxProps
-  onClickAwayIfHtmChanged?: () => void
   rowIndex?: number
-  saveFroalaReducer: ISaveFroalaReducer
+  onContentChange: TOnFroalaContentChange
   heightDuringAnimationRef: MutableRefObject<number | undefined>
 }
 
@@ -28,11 +25,10 @@ export const EditableHtml = ({
   froalaElementRef,
   index,
   getHtml,
-  onClickAwayIfHtmChanged,
   padding,
   placeholder,
   rowIndex,
-  saveFroalaReducer,
+  onContentChange,
   heightDuringAnimationRef,
 }: IProps): JSX.Element => {
   useStartFroala({
@@ -40,10 +36,9 @@ export const EditableHtml = ({
     froalaElementRef,
     index,
     getHtml,
-    onClickAwayIfHtmChanged,
     placeholder,
     rowIndex,
-    saveFroalaReducer,
+    onContentChange,
   })
 
   usePutCaretAtTheEndOfText({
