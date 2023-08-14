@@ -7,14 +7,14 @@ import { useEffectOnce } from 'react-use'
 
 interface Props {
   padding?: number | string
-  getHtml: () => string
+  initHtmlGetter: () => string
   additionalStyle?: SxProps
   editorRef: MutableRefObject<FroalaEditor | null>
   heightDuringAnimationRef: MutableRefObject<number | undefined>
 }
 
 export const StaticHtml = ({
-  getHtml,
+  initHtmlGetter,
   padding,
   additionalStyle,
   editorRef,
@@ -23,7 +23,7 @@ export const StaticHtml = ({
 
 
   const ref = useRef<HTMLDivElement>()
-  const html = useRef(getHtml())
+  const html = useRef(initHtmlGetter())
 
   if (editorRef.current?.html) {
     html.current = editorRef.current.html.get()
@@ -32,7 +32,7 @@ export const StaticHtml = ({
   useEffectOnce(() => {
     // insert Html Into Element
     if (!ref.current) return
-    ref.current.innerHTML = html.current || getHtml()
+    ref.current.innerHTML = html.current || initHtmlGetter()
   })
 
   useEffectOnce(() => {

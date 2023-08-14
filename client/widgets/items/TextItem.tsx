@@ -1,12 +1,12 @@
+import type { RefDiv } from 'client/shared/types'
+import type FroalaEditor from 'froala-editor'
 import { theme } from 'client/shared/clients'
 import { useRef } from 'react'
 import { Froala } from 'client/shared/ui/froala'
-import type { RefDiv } from 'client/shared/types'
 import { itemTextHtmlGetter } from 'client/entities/items'
 import { PencilAtBottomRight } from 'client/shared/components/PencilAtBottomRight'
 import { Item } from './item'
-import type FroalaEditor from 'froala-editor'
-import { saveItemText } from 'client/features/save_item_text'
+import { onItemTextContentChange } from 'client/features/on_item_text_content_change'
 
 interface IProps {
   index: number
@@ -22,10 +22,10 @@ export const TextItem = ({ index }: IProps): JSX.Element => {
         index={index}
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
-        getHtml={itemTextHtmlGetter}
+        initHtmlGetter={itemTextHtmlGetter}
         placeholder='Type text or drop images, files, links...'
         padding={theme.item.padding}
-        onContentChange={saveItemText}
+        onContentChange={onItemTextContentChange}
       />
       <PencilAtBottomRight editorRef={editorRef} />
     </Item>

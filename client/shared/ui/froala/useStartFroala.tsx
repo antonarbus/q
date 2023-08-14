@@ -10,7 +10,7 @@ import { froalaStaticOptions } from './froalaStaticOptions'
 
 interface IProps {
   index: number
-  getHtml: () => string
+  initHtmlGetter: () => string
   onContentChange: TOnFroalaContentChange
   froalaElementRef: RefDiv
   editorRef: MutableRefObject<FroalaEditor | null>
@@ -24,7 +24,7 @@ window.froalas = []
 
 export const useStartFroala = ({
   index,
-  getHtml,
+  initHtmlGetter,
   froalaElementRef,
   editorRef,
   placeholder,
@@ -45,7 +45,7 @@ export const useStartFroala = ({
             initialized: (): void => {
               window.froalas.push(editorRef)
               if (!editorRef.current?.html) return
-              editorRef.current.html.set(getHtml())
+              editorRef.current.html.set(initHtmlGetter())
               window.froalas = window.froalas.filter(({ current }) => Boolean(current))
               console.log('froalas qty after init: ', window.froalas.length)
             },
