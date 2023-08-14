@@ -43,8 +43,12 @@ export const CopyIcon = ({ index }: IProps): JSX.Element => {
         const item = { ...itemToCopy, previewHtml: cleanedHtml }
 
         dispatch(addItemIntoCopyContainer(item))
-        dispatch(saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
-        dispatch(showCopyContainer())
+
+        const isCopyContainer = store.getState().copy.isCopyContainer
+        if (!isCopyContainer) {
+          dispatch(saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
+          dispatch(showCopyContainer())
+        }
       }}
     >
       <MdCopyAll />
