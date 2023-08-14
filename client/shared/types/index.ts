@@ -7,5 +7,3 @@ export type { ICopyPlace } from './Copy'
 export type { TCopyItem } from './Copy'
 
 export type { TOnFroalaContentChange } from './froala'
-
-export type RefDiv = React.MutableRefObject<HTMLDivElement>

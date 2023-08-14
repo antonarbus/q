@@ -1,17 +1,12 @@
 import { elementHeight } from 'client/shared/lib/elementHeight'
-import {
-  goDownInCurrentMenu,
-  goDownInNextMenu,
-  goUpInCurrentMenu,
-  goUpInNextMenu,
-} from 'client/entities/nav'
+import { goDownInCurrentMenu, goDownInNextMenu, goUpInCurrentMenu, goUpInNextMenu } from 'client/entities/nav'
 import { useDispatchTyped } from 'client/shared/hooks'
 import { theme } from 'client/shared/clients'
 import { gsap } from 'gsap'
+import type { RefObject } from 'react'
 import { useEffect } from 'react'
 import { getMenuItemByIdsChain } from './getMenuItemByIdsChain'
 import { useFirstMountState } from 'react-use'
-import type { RefDiv } from 'client/shared/types'
 
 interface PropsForNavigateInMenu {
   up: (() => void) | null
@@ -22,30 +17,30 @@ export const navigateInMenu: PropsForNavigateInMenu = {
   up: () => {
     console.log(
       'put function here for going up the menu, otherwise need to pass it in many props',
-    );
+    )
   },
   down: (id) => {
     console.log(
       'put function here for going into submenu, otherwise need to pass it in many props',
-    );
+    )
   },
 }
 
 interface Props {
-  currentMenuRef: RefDiv
-  nextMenuRef: RefDiv
-  menuContainerRef: RefDiv
-  fakeMenuRef: RefDiv
+  currentMenuRef: RefObject<HTMLDivElement>
+  nextMenuRef: RefObject<HTMLDivElement>
+  menuContainerRef: RefObject<HTMLDivElement>
+  fakeMenuRef: RefObject<HTMLDivElement>
   idsToNextMenuItems: string[]
 }
 
-export function useMenuAnimation({
+export const useMenuAnimation = ({
   currentMenuRef,
   nextMenuRef,
   menuContainerRef,
   fakeMenuRef,
   idsToNextMenuItems,
-}: Props) {
+}: Props) => {
   const dispatch = useDispatchTyped()
   const isFirstMount = useFirstMountState()
   const duration = 0.5
@@ -60,7 +55,7 @@ export function useMenuAnimation({
    * - when animation is finished we change moved away 'currentMenuRef' content with 'currentMenuItems' state update
    */
 
-  function goDownInMenu(id: string) {
+  const goDownInMenu = (id: string) => {
     type Function = () => void
     const cb: Function = () => dispatch(goDownInCurrentMenu(id))
     dispatch(goDownInNextMenu(id))
@@ -76,7 +71,7 @@ export function useMenuAnimation({
     )
   }
 
-  function goUpInMenu() {
+  const goUpInMenu = () => {
     type Function = () => void
     const cb: Function = () => dispatch(goUpInCurrentMenu())
     dispatch(goUpInNextMenu())
@@ -104,7 +99,9 @@ export function useMenuAnimation({
    * - height animation is triggered every time 'nextMenu' state is updated
    */
 
-  function animateMenuHeight() {
+  const animateMenuHeight = (): void => {
+    if (!fakeMenuRef.current) return
+
     gsap.to(menuContainerRef.current, {
       duration: isFirstMount ? 0 : duration,
       height:

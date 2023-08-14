@@ -1,19 +1,19 @@
 import { selectMenuItemByIdsChainSelector } from 'client/entities/nav'
 import { useSelectorTyped } from 'client/shared/hooks'
 import { MenuItem } from './MenuItem'
-import type { RefDiv } from 'client/shared/types'
+import type { RefObject } from 'react'
 
 interface Props {
-  reference: RefDiv
+  reference: RefObject<HTMLDivElement>
   idsToMenu: string[]
   className: string
 }
 
-export function SlidableMenuItemsContainer({
+export const SlidableMenuItemsContainer = ({
   reference,
   idsToMenu,
   className,
-}: Props) {
+}: Props) => {
   const menuItems = useSelectorTyped(
     selectMenuItemByIdsChainSelector(idsToMenu),
   )

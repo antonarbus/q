@@ -1,11 +1,10 @@
-import type { RefDiv } from 'client/shared/types'
-import type { MutableRefObject } from 'react'
+import type { MutableRefObject, RefObject } from 'react'
 import { useEffect } from 'react'
 import type FroalaEditor from 'froala-editor'
 
 interface Props {
   index: number
-  froalaElementRef: RefDiv
+  froalaElementRef: RefObject<HTMLDivElement>
   editorRef: MutableRefObject<FroalaEditor | null>
 }
 
@@ -38,7 +37,7 @@ export const usePutCaretAtTheEndOfText = ({
       editorRef.current.selection.restore()
     }
 
-    froalaElementRef.current.addEventListener('click', focusOnTextIfCellOrPaddingAreClicked)
+    froalaElementRef.current?.addEventListener('click', focusOnTextIfCellOrPaddingAreClicked)
 
   }, [index])
 }

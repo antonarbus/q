@@ -1,6 +1,5 @@
-import type { MutableRefObject } from 'react';
+import type { MutableRefObject } from 'react'
 import { useEffect, useRef, useState } from 'react'
-import { useEffectOnce } from 'react-use'
 
 interface IProps {
   index: number

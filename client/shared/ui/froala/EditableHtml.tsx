@@ -1,6 +1,6 @@
 import type { SxProps } from '@mui/material'
-import type { MutableRefObject } from 'react'
-import type { RefDiv, TOnFroalaContentChange } from 'client/shared/types'
+import type { MutableRefObject, RefObject } from 'react'
+import type { TOnFroalaContentChange } from 'client/shared/types'
 import type FroalaEditor from 'froala-editor'
 import { Box } from '@mui/material'
 import { useStartFroala } from './useStartFroala'
@@ -10,7 +10,7 @@ interface IProps {
   index: number
   padding?: number | string
   initHtmlGetter: () => string
-  froalaElementRef: RefDiv
+  froalaElementRef: RefObject<HTMLDivElement>
   editorRef: MutableRefObject<FroalaEditor | null>
   placeholder?: string
   additionalStyle?: SxProps

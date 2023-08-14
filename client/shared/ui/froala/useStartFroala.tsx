@@ -1,5 +1,5 @@
-import type { RefDiv, TOnFroalaContentChange } from 'client/shared/types'
-import type { MutableRefObject } from 'react'
+import type { TOnFroalaContentChange } from 'client/shared/types'
+import type { MutableRefObject, RefObject } from 'react'
 import { useEffect } from 'react'
 import FroalaEditor from 'froala-editor'
 import 'froala-editor/js/froala_editor.pkgd.min.js'
@@ -12,7 +12,7 @@ interface IProps {
   index: number
   initHtmlGetter: () => string
   onContentChange: TOnFroalaContentChange
-  froalaElementRef: RefDiv
+  froalaElementRef: RefObject<HTMLDivElement>
   editorRef: MutableRefObject<FroalaEditor | null>
   placeholder?: string
   rowIndex?: number

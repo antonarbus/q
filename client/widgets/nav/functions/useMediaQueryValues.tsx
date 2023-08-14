@@ -1,20 +1,16 @@
+import type { RefObject } from 'react'
 import { useLayoutEffect } from 'react'
 import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
-import {
-  disableMedia,
-  enableMedia,
-  setNavMediaQueryWidths,
-} from 'client/entities/nav'
+import { disableMedia, enableMedia, setNavMediaQueryWidths } from 'client/entities/nav'
 import { calcNavMediaQueryParams } from './calcNavMediaQueryParams'
 import { useFirstMountState } from 'react-use'
-import type { RefDiv } from 'client/shared/types'
 
 interface IProps {
-  navRef: RefDiv
-  logoRef: RefDiv
+  navRef: RefObject<HTMLDivElement>
+  logoRef: RefObject<HTMLDivElement>
 }
 
-export function useMediaQueryValues({ navRef, logoRef }: IProps) {
+export const useMediaQueryValues = ({ navRef, logoRef }: IProps) => {
   const dispatch = useDispatchTyped()
   const isFirstMount = useFirstMountState()
   const navStructure = useSelectorTyped((state) => state.nav.navStructure)
@@ -22,11 +18,10 @@ export function useMediaQueryValues({ navRef, logoRef }: IProps) {
 
   useLayoutEffect(() => {
     // initial calculation of media query values
-    const { logoExtension, logoPart, icon, name, burger } =
-      calcNavMediaQueryParams(navRef.current, logoRef.current)
-    dispatch(
-      setNavMediaQueryWidths({ logoExtension, logoPart, icon, name, burger }),
-    )
+    if (!navRef.current) return
+    if (!logoRef.current) return
+    const { logoExtension, logoPart, icon, name, burger } = calcNavMediaQueryParams(navRef.current, logoRef.current)
+    dispatch(setNavMediaQueryWidths({ logoExtension, logoPart, icon, name, burger }))
   }, [])
 
   useLayoutEffect(() => {
@@ -39,11 +34,10 @@ export function useMediaQueryValues({ navRef, logoRef }: IProps) {
     // if media queries came disabled (after nav change), recalculate media query values
     if (isFirstMount) return
     if (mediaEnabled) return
-    const { logoExtension, logoPart, icon, name, burger } =
-      calcNavMediaQueryParams(navRef.current, logoRef.current)
-    dispatch(
-      setNavMediaQueryWidths({ logoExtension, logoPart, icon, name, burger }),
-    )
+    if (!navRef.current) return
+    if (!logoRef.current) return
+    const { logoExtension, logoPart, icon, name, burger } = calcNavMediaQueryParams(navRef.current, logoRef.current)
+    dispatch(setNavMediaQueryWidths({ logoExtension, logoPart, icon, name, burger }))
     dispatch(enableMedia())
   }, [mediaEnabled])
 }
