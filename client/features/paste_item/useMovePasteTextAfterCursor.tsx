@@ -1,7 +1,7 @@
 import { useEffectOnce, useUnmount } from 'react-use'
 import { store } from 'client/app/store'
 import isEqual from 'lodash.isequal'
-import { hidePasteText, showPasteText, updatePastePos } from 'client/entities/copy'
+import { hidePasteText, showPasteTextOverItem, updatePastePos } from 'client/entities/copy'
 import { insertPasteItem } from 'client/entities/items'
 import type { ICopyPlace } from 'client/shared/types'
 import { className } from 'client/shared/className'
@@ -42,7 +42,7 @@ const movePasteTextAfterCursor = (e: MouseEvent): void => {
   }
 
   if (!actionsButton && !isPasteTextShown) {
-    store.dispatch(showPasteText())
+    store.dispatch(showPasteTextOverItem())
     return
   }
 
@@ -55,7 +55,7 @@ const movePasteTextAfterCursor = (e: MouseEvent): void => {
 
   if (isEqual(pastePlace, prevPlace)) return
 
-  store.dispatch(showPasteText())
+  store.dispatch(showPasteTextOverItem())
   store.dispatch(updatePastePos(pastePlace))
   store.dispatch(insertPasteItem(pastePlace))
 }
