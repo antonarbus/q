@@ -9,7 +9,6 @@ import { Item } from './item'
 import type FroalaEditor from 'froala-editor'
 import { saveItemText } from 'client/features/save_item_text'
 
-
 interface IProps {
   index: number
 }

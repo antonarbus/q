@@ -52,8 +52,8 @@ const variants: Variants = {
 }
 
 export const RestOfCopiedItems = (): JSX.Element | null => {
-  const items = useSelectorTyped((state) => state.copy.items)
-  const isCopying = useSelectorTyped((state) => state.copy.isCopying)
+  const items = useSelectorTyped(state => state.copy.items)
+  const isCopying = useSelectorTyped(state => state.copy.isCopying)
   const prevFirstItemHeightRef = useRef(0)
 
   const firstItem = items[0]
