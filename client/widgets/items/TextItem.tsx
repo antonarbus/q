@@ -1,4 +1,3 @@
-import type { RefDiv } from 'client/shared/types'
 import type FroalaEditor from 'froala-editor'
 import { theme } from 'client/shared/clients'
 import { useRef } from 'react'
@@ -13,7 +12,7 @@ interface IProps {
 }
 
 export const TextItem = ({ index }: IProps): JSX.Element => {
-  const froalaElementRef = useRef() as RefDiv
+  const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
 
   return (

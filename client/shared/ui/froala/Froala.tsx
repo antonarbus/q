@@ -1,6 +1,6 @@
-import type { RefDiv, THtmlGetter, TOnFroalaContentChange } from 'client/shared/types'
+import type { THtmlGetter, TOnFroalaContentChange } from 'client/shared/types'
 import type { SxProps } from '@mui/material'
-import type { MutableRefObject } from 'react'
+import type { MutableRefObject, RefObject } from 'react'
 import type FroalaEditor from 'froala-editor'
 import { useSelectorTyped } from 'client/shared/hooks'
 import { StaticHtml } from './StaticHtml'
@@ -12,7 +12,7 @@ interface IProps {
   index: number
   padding?: number | string
   initHtmlGetter: THtmlGetter
-  froalaElementRef: RefDiv
+  froalaElementRef: RefObject<HTMLDivElement>
   editorRef: MutableRefObject<FroalaEditor | null>
   placeholder?: string
   additionalStyle?: SxProps

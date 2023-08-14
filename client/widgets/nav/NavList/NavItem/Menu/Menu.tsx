@@ -9,13 +9,12 @@ import { SlidableMenuItemsContainer } from './SlidableMenuItemsContainer'
 import { TopMenuItemsContainer } from './TopMenuItemsContainer'
 import { setMenuItemHoverIndex } from 'client/entities/nav'
 import { theme } from 'client/shared/clients'
-import type { RefDiv } from 'client/shared/types'
 
 export function Menu() {
-  const menuContainerRef = useRef() as RefDiv
-  const currentMenuRef = useRef() as RefDiv
-  const nextMenuRef = useRef() as RefDiv
-  const fakeMenuRef = useRef() as RefDiv
+  const menuContainerRef = useRef<HTMLDivElement>(null)
+  const currentMenuRef = useRef<HTMLDivElement>(null)
+  const nextMenuRef = useRef<HTMLDivElement>(null)
+  const fakeMenuRef = useRef<HTMLDivElement>(null)
   const idsToNextMenuItems = useSelectorTyped(
     (state) => state.nav.idsToNextMenuItems,
   )

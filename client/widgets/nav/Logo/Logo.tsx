@@ -1,12 +1,12 @@
 import { useSelectorTyped } from 'client/shared/hooks'
-import type { RefDiv } from 'client/shared/types'
+import type { RefObject } from 'react'
 import { Link } from 'react-router-dom'
 
 interface Prop {
-  logoRef: RefDiv
+  logoRef: RefObject<HTMLDivElement>
 }
 
-export function Logo({ logoRef }: Prop) {
+export const Logo = ({ logoRef }: Prop) => {
   const mediaQueryWidth = useSelectorTyped((state) => state.nav.mediaQueryWidth)
   const mediaEnabled = useSelectorTyped((state) => state.nav.mediaEnabled)
 

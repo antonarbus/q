@@ -1,5 +1,4 @@
 import { Typography } from '@mui/material'
-import type { RefDiv } from 'client/shared/types'
 import type { MouseEvent, ReactNode, RefObject } from 'react'
 
 interface Props {

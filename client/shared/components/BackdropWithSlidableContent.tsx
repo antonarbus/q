@@ -1,7 +1,6 @@
 import { slideElement } from 'client/shared/lib/slideElement'
 import { useLayoutEffect, useRef } from 'react'
 import { useEffectOnce } from 'react-use'
-import type { RefDiv } from 'client/shared/types'
 
 interface IProps {
   children?: React.ReactNode
@@ -21,8 +20,11 @@ export const BackdropWithSlidableContent = ({
   onSlideIn,
   onSlideOut,
 }: IProps): JSX.Element => {
-  const contentRef = useRef() as RefDiv
+  const contentRef = useRef<HTMLDivElement>(null)
+
   useLayoutEffect(() => {
+    if (!contentRef.current) return
+
     slideElement({
       intoView: true,
       element: contentRef.current,
@@ -34,6 +36,7 @@ export const BackdropWithSlidableContent = ({
 
   useEffectOnce(() => {
     const slideAway = (e: KeyboardEvent): void => {
+      if (!contentRef.current) return
       if (e.key === 'Escape') {
         slideElement({
           element: contentRef.current,
@@ -54,6 +57,7 @@ export const BackdropWithSlidableContent = ({
   return (
     <div
       onMouseDown={(): void => {
+        if (!contentRef.current) return
         slideElement({
           element: contentRef.current,
           cb: () => {
