@@ -9,7 +9,7 @@ import { usePutCaretAtTheEndOfText } from './usePutCaretAtTheEndOfText'
 interface IProps {
   index: number
   padding?: number | string
-  getHtml: () => string
+  initHtmlGetter: () => string
   froalaElementRef: RefDiv
   editorRef: MutableRefObject<FroalaEditor | null>
   placeholder?: string
@@ -24,7 +24,7 @@ export const EditableHtml = ({
   editorRef,
   froalaElementRef,
   index,
-  getHtml,
+  initHtmlGetter,
   padding,
   placeholder,
   rowIndex,
@@ -35,17 +35,13 @@ export const EditableHtml = ({
     editorRef,
     froalaElementRef,
     index,
-    getHtml,
+    initHtmlGetter,
     placeholder,
     rowIndex,
     onContentChange,
   })
 
-  usePutCaretAtTheEndOfText({
-    index,
-    editorRef,
-    froalaElementRef,
-  })
+  usePutCaretAtTheEndOfText({ index, editorRef, froalaElementRef })
 
   return (
     <Box

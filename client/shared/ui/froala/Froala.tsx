@@ -11,8 +11,7 @@ import { useViewPortObserver } from './useViewPortObserver'
 interface IProps {
   index: number
   padding?: number | string
-  // todo: rename to 'htmlGetter'
-  getHtml: THtmlGetter
+  initHtmlGetter: THtmlGetter
   froalaElementRef: RefDiv
   editorRef: MutableRefObject<FroalaEditor | null>
   placeholder?: string
@@ -26,7 +25,7 @@ export const Froala = ({
   editorRef,
   froalaElementRef,
   index,
-  getHtml,
+  initHtmlGetter,
   padding,
   placeholder,
   rowIndex,
@@ -39,13 +38,11 @@ export const Froala = ({
   const showStaticHtml = isCopyMode || !isInsideViewPort
   const showEditableHtml = !isCopyMode && isInsideViewPort
 
-  const htmlGetter = getHtml.bind(null, { index, rowIndex })
-
   return (
     <div ref={observerRef}>
       {showStaticHtml && (
         <StaticHtml
-          getHtml={htmlGetter}
+          initHtmlGetter={initHtmlGetter.bind(null, { index, rowIndex })}
           padding={padding}
           additionalStyle={additionalStyle}
           editorRef={editorRef}
@@ -58,7 +55,7 @@ export const Froala = ({
           editorRef={editorRef}
           froalaElementRef={froalaElementRef}
           index={index}
-          getHtml={htmlGetter}
+          initHtmlGetter={initHtmlGetter.bind(null, { index, rowIndex })}
           padding={padding}
           placeholder={placeholder}
           rowIndex={rowIndex}
