@@ -10,17 +10,26 @@ import bcrypt from 'bcryptjs'
 import { refreshJwtTokenExpirationSeconds, token } from '../services/jwt'
 
 export const loginRouter = express.Router()
+// eslint-disable-next-line @typescript-eslint/no-misused-promises
 loginRouter.post('/', async (req: ReqType, res: ResType, next: NextType) => {
   try {
     // get mail & password from body
-    let { email, password } = req.body
+    interface IBody {
+      email: string
+      password: string
+    }
+
+    const password = (req.body as IBody).password
+    let email = (req.body as IBody).email
     email = email.toLowerCase()
 
     // check email & password
     const user = await UserModel.findOne({ email })
-    const isPasswordValid =
-      user && (await bcrypt.compare(password, user.password!))
-    if (!user || !isPasswordValid)
+    if (!user) return res.json({ status: 'error', message: 'no user data' })
+    const passwordFromDB = user.password
+    if (!passwordFromDB) return res.json({ status: 'error', message: 'no password' })
+    const isPasswordValid = await bcrypt.compare(password, passwordFromDB)
+    if (!isPasswordValid)
       return res.json({ status: 'error', message: 'invalid credentials' })
 
     // check if account is activated
@@ -53,7 +62,7 @@ loginRouter.post('/', async (req: ReqType, res: ResType, next: NextType) => {
       email,
       roles,
     })
-  } catch (error: any) {
+  } catch (error) {
     next(error)
   }
 })
