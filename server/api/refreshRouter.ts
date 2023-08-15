@@ -1,16 +1,19 @@
-import express, {
-  Request as ReqType,
-  Response as ResType,
-  NextFunction as NextType,
-} from 'express'
+import type { Request as ReqType, Response as ResType, NextFunction as NextType } from 'express'
+import express from 'express'
 import { UserModel } from '../db/models/user.model'
 import { refreshJwtTokenExpirationSeconds, token } from '../services/jwt'
 
 export const refreshRouter = express.Router()
+// eslint-disable-next-line @typescript-eslint/no-misused-promises
 refreshRouter.get('/', async (req: ReqType, res: ResType, next: NextType) => {
   try {
     // get refresh token from cookie
-    const { refreshJwtToken } = req.cookies
+
+    interface IProps {
+      'refreshJwtToken': string | undefined,
+    }
+    const refreshJwtToken = (req.cookies as IProps).refreshJwtToken
+
     if (!refreshJwtToken) {
       return res.json({
         status: 'error',
@@ -21,6 +24,7 @@ refreshRouter.get('/', async (req: ReqType, res: ResType, next: NextType) => {
 
     // check if token is ok
     const { email } = token.verify.refresh(refreshJwtToken)
+
     if (!email) {
       return res.json({
         status: 'error',
@@ -38,14 +42,14 @@ refreshRouter.get('/', async (req: ReqType, res: ResType, next: NextType) => {
     }
 
     // generate refresh token and save in db
-    const updatedRefreshJwtToken = token.new.refresh({ email })
+    const updatedRefreshJwtToken = token.new.refresh({ email, roles: [''] })
     res.cookie('refreshJwtToken', updatedRefreshJwtToken, {
       maxAge: refreshJwtTokenExpirationSeconds * 1000,
       httpOnly: true,
     })
     await UserModel.findOneAndUpdate(
       { email },
-      { refreshJwtToken: updatedRefreshJwtToken }
+      { refreshJwtToken: updatedRefreshJwtToken },
     )
 
     // generate access token and send to client
