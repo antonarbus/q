@@ -48,6 +48,7 @@ module.exports = {
     "object-curly-spacing": "off",
     "@typescript-eslint/object-curly-spacing": "off",
     'no-restricted-syntax': ['error', 'FunctionExpression', 'FunctionDeclaration'],
-    'space-before-function-paren': 'off'
+    'space-before-function-paren': 'off',
+    "@typescript-eslint/no-misused-promises": [ "error", { "checksVoidReturn": false } ]
   },
 }
