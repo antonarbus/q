@@ -1,8 +1,11 @@
-import type { Request as ReqType, Response, NextFunction as NextType } from 'express'
 import { Router } from 'express'
+import type { TRouteHandler } from '../types'
 
 export const hiRouter = Router()
 
-hiRouter.get('/', (req: ReqType, res: Response, next: NextType): void => {
+const routeHandler: TRouteHandler = (_req, res, _next) => {
+  // throw new Error('some error')
   return void res.json({ message: '/hi' })
-})
+}
+
+hiRouter.get('/', routeHandler)
