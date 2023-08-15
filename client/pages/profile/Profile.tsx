@@ -23,10 +23,12 @@ async function getUsersFromDb() {
   }
 }
 
-export const Profile = () => (
+export const Profile = (): JSX.Element => (
   <>
     <h3>Profile</h3>
-    <button onClick={() => notify({ msg: 'hi' })}>
+    <button onClick={(): void => {
+      notify({ msg: 'hi' })
+    }}>
       say hi in bottom popup
     </button>
     <button onClick={getEmailFromDb}>get user's email from db</button>
