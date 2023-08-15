@@ -8,7 +8,7 @@ module.exports = {
     'plugin:@typescript-eslint/all', // very strict, but cool
     // 'plugin:@typescript-eslint/stylistic-type-checked',
   ],
-  ignorePatterns: ['dist', 'build', '.eslintrc.cjs', 'vite.config.ts', 'node_modules'],
+  ignorePatterns: ['dist', 'build', '.eslintrc.cjs', 'vite.config.ts', 'node_modules', "test-setup.ts"],
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh', '@typescript-eslint'],
   parserOptions: {

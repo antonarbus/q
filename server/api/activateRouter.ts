@@ -1,9 +1,10 @@
 // activateRouter
-import express, {
+import type {
   Request as ReqType,
   Response as ResType,
   NextFunction as NextType,
 } from 'express'
+import express from 'express'
 import { UserModel } from '../db/models/user.model'
 const domain = process.env.DOMAIN
 const port = process.env.PORT_FRONT_END
@@ -22,9 +23,9 @@ activateRouter.get(
         })
       user.isActivated = true
       await user.save()
-      return res.redirect(`${domain}:${port}/login`)
+      res.redirect(`${domain}:${port}/login`); return
     } catch (error: any) {
       next(error)
     }
-  }
+  },
 )
