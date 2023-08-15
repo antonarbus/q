@@ -14,6 +14,7 @@ import { activateRouter } from './api/activateRouter'
 import { refreshRouter } from './api/refreshRouter'
 import { errorHandler } from './middleware/errorHandler'
 import { usersRouter } from './api/usersRouter'
+import { hiRouter } from './api/hiRouter'
 
 void (async (): Promise<void> => {
   const app = express()
@@ -29,9 +30,7 @@ void (async (): Promise<void> => {
   app.get('/api', (req: ReqType, res: ResType) => res.json({ message: '/api' }))
 
   // use router from separate file
-  const hi = require('./api/hi')
-  app.use('/api/hi', hi)
-
+  app.use('/api/hi', hiRouter)
   app.use('/api/register', registerRouter)
   app.use('/api/login', loginRouter)
   app.use('/api/logout', logoutRouter)

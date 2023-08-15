@@ -1,9 +1,5 @@
 // loginRouter.ts
-import type {
-  Request as ReqType,
-  Response as ResType,
-  NextFunction as NextType,
-} from 'express'
+import type { Request as ReqType, Response as ResType, NextFunction as NextType } from 'express'
 import express from 'express'
 import { UserModel } from '../db/models/user.model'
 import bcrypt from 'bcryptjs'
