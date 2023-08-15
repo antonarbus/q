@@ -9,9 +9,10 @@ interface IProps {
 
 type TResize = ResizeCallback | undefined
 
-export const onItemResizeStop = ({ index }: IProps): TResize =>
-  (e, direction, refToElement): void => {
-    const width = parseInt(refToElement.style.width)
-    store.dispatch(saveItemWidth({ index, width }))
-    saveItemsLocally({ msgAboveItemWithIndex: index })
-  }
+export const onItemResizeStop = ({ index }: IProps): TResize => (e, direction, refToElement): void => {
+  const width = parseInt(refToElement.style.width)
+  const prevItemWidth = store.getState().items[index]?.width
+  if (width === prevItemWidth) return
+  store.dispatch(saveItemWidth({ index, width }))
+  saveItemsLocally({ msgAboveItemWithIndex: index })
+}
