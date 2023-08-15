@@ -38,7 +38,8 @@
   "include": [
     "client",
     "server",
-    "utils"
+    "utils",
+    "environment.d.ts"
   ],
   "exclude": [
     "node_modules",

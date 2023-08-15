@@ -11,5 +11,8 @@
     "forceConsistentCasingInFileNames": true,
     "allowJs": true
   },
-  "include": ["./**/*.ts"]
+  "include": [
+    "./**/*.ts",
+    "../environment.d.ts"
+  ]
 }
