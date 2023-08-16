@@ -2,12 +2,15 @@
 import express from 'express'
 import { UserModel } from '../db/models/user.model'
 import { verifyToken } from '../middleware/verifyToken'
-import type { Response, NextFunction } from 'express'
-import type { TypedRequestBody } from '../types'
+import type { TNext, TReqWithBody, TRes } from '../types'
 
 export const userDetailsRouter = express.Router()
 
-const routeHandler = async (req: TypedRequestBody<{ email: string | undefined }>, res: Response, next: NextFunction): Promise<void> => {
+interface IBody {
+  email: string | undefined
+}
+
+const routeHandler = async (req: TReqWithBody<IBody>, res: TRes, next: TNext): Promise<void> => {
   try {
     const { email } = req.body
     if (!email) {
