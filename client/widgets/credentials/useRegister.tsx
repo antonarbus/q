@@ -12,7 +12,7 @@ interface Props {
 export const useRegister = () => {
   const [httpStatus, setHttpStatus] = useState<HttpStatusType>('')
 
-  const registerUser = async ({ e, email, password }: Props) => {
+  const registerUser = async ({ e, email, password }: Props): Promise<void> => {
     e.preventDefault()
     const method = 'POST'
     const headers = { 'Content-Type': 'application/json' }

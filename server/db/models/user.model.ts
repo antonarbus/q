@@ -1,6 +1,8 @@
-import mongoose from 'mongoose'
+import type { HydratedDocumentFromSchema, InferSchemaType } from 'mongoose'
+import { model, Schema } from 'mongoose'
 
-const User = new mongoose.Schema({
+
+const UserSchema = new Schema({
   email: {
     type: String,
     required: [true, 'email is required'],
@@ -36,4 +38,10 @@ const User = new mongoose.Schema({
   },
 })
 
-export const UserModel = mongoose.model('Users', User)
+export const UserModel = model('Users', UserSchema)
+
+// Type of an hydrated document (with all the getters, etc...)
+export type THydratedUserModel = HydratedDocumentFromSchema<typeof UserSchema>
+
+// Only the fields defined in the schema
+export type TUserModel = InferSchemaType<typeof UserSchema>
