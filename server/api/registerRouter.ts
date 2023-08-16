@@ -1,24 +1,31 @@
-// registerRouter.ts
-import express, {
-  Request as ReqType,
-  Response as ResType,
-  NextFunction as NextType,
-} from 'express'
-// import { connectToDb } from '../db/connectToDb'
+import express from 'express'
 import { UserModel } from '../db/models/user.model'
 import bcrypt from 'bcryptjs'
 import { v4 as uuidv4 } from 'uuid'
 import { sendMail } from '../services/mail/sendMail'
 import { body, validationResult } from 'express-validator'
+import type { TNext, TReq, TReqWithBody, TRes } from '../types'
 const domain = process.env.DOMAIN
 const port = process.env.PORT_FRONT_END
 
+export interface TRegisterReqBody {
+  email: string
+  password: string
+}
+
+export interface TRegisterRes {
+  status: string
+  message: string
+  validationErrors?: string
+}
+
 export const registerRouter = express.Router()
+
 registerRouter.post(
   '/',
   body('email').isEmail(),
   body('password').isLength({ min: 1 }),
-  async (req: ReqType, res: ResType, next: NextType) => {
+  async (req: TReqWithBody<TRegisterReqBody>, res: TRes, next: TNext) => {
     try {
       // validation
       const validationErrors = validationResult(req)
@@ -52,8 +59,8 @@ registerRouter.post(
 
       // all went good, send the response
       res.json({ status: 'ok', message: 'user is registered' })
-    } catch (error: any) {
+    } catch (error) {
       next(error)
     }
-  }
+  },
 )
