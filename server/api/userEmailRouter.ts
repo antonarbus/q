@@ -10,6 +10,12 @@ interface IBody {
   email: string | undefined
 }
 
+export interface TUserEmailRes {
+  status: string
+  message: string
+  email: string | undefined
+}
+
 const getUserEmail = async (req: TReqWithBody<IBody>, res: TRes, next: TNext): Promise<void> => {
   try {
     const { email } = req.body
@@ -20,8 +26,8 @@ const getUserEmail = async (req: TReqWithBody<IBody>, res: TRes, next: TNext): P
     }
     const user = await UserModel.findOne({ email })
     console.log('user', user)
-    res.json({ status: 'ok', message: 'email is returned', email: user?.email })
-
+    const response = { status: 'ok', message: 'email is returned', email: user?.email }
+    res.json(response)
   } catch (error) {
     next(error)
   }

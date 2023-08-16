@@ -1,20 +1,20 @@
 import { axiosWithAuth } from 'client/shared/auth'
 import { notify } from 'client/shared/ui/top_msg/notify'
-// eslint-disable-next-line camelcase
+import type { TUserEmailRes } from 'server/api/userEmailRouter'
 
-async function getEmailFromDb() {
+const getEmailFromDb = async (): Promise<void> => {
   try {
     // if we just go in browser to http://localhost:3009/api/user or fetch it with just fetch or axios general instance
     // we get msg "accessJwtToken is not verified, user is not authorized"
     // but with axiosWithAuth we add access token to the header and check it inside the middleware 'verifyToken '
-    const res = await axiosWithAuth('/api/user')
+    const res = await axiosWithAuth<TUserEmailRes>('/api/user')
     console.log(res)
   } catch (error) {
     console.log(error)
   }
 }
 
-async function getUsersFromDb() {
+const getUsersFromDb = async (): Promise<void> => {
   try {
     const res = await axiosWithAuth('/api/users')
     console.log(res)
