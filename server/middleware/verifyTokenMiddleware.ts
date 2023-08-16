@@ -1,8 +1,8 @@
 import type { IJwtPayload } from '../services/jwt'
 import { token } from '../services/jwt'
-import type { TNext, TRes } from '../types'
+import type { TNext, TReqWithBody, TRes } from '../types'
 
-export const verifyToken = (req: any, res: TRes, next: TNext) => {
+export const verifyTokenMiddleware = (req: TReqWithBody<{ email?: string }>, res: TRes, next: TNext): TRes | undefined => {
   try {
     const accessJwtToken = req.headers['access-jwt-token'] as string
     const { email } = token.verify.access(accessJwtToken) as IJwtPayload

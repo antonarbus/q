@@ -7,12 +7,12 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import { loginRouter } from './api/loginRouter'
 import { registerRouter } from './api/registerRouter'
-import { userDetailsRouter } from './api/userDetailsRouter'
+import { userEmailRouter } from './api/userEmailRouter'
 import { connectToDb } from './db/connectToDb'
 import { logoutRouter } from './api/logoutRouter'
 import { activateRouter } from './api/activateRouter'
 import { refreshRouter } from './api/refreshRouter'
-import { errorHandler } from './middleware/errorHandler'
+import { errorHandlerMiddleware } from './middleware/errorHandlerMiddleware'
 import { usersRouter } from './api/usersRouter'
 import { hiRouter } from './api/hiRouter'
 
@@ -37,9 +37,9 @@ void (async (): Promise<void> => {
   app.use('/api/activate', activateRouter)
   app.use('/api/refresh', refreshRouter)
   app.use('/api/users', usersRouter)
-  app.use('/api/user', userDetailsRouter)
+  app.use('/api/user', userEmailRouter)
 
-  app.use(errorHandler)
+  app.use(errorHandlerMiddleware)
 
   const port = process.env.PORT_BACK_END
   const domain = process.env.DOMAIN
