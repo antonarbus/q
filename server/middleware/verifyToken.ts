@@ -1,8 +1,8 @@
-import type { Response as ResType, NextFunction as NextType } from 'express'
 import type { IJwtPayload } from '../services/jwt'
 import { token } from '../services/jwt'
+import type { TNext, TRes } from '../types'
 
-export const verifyToken = (req: any, res: ResType, next: NextType) => {
+export const verifyToken = (req: any, res: TRes, next: TNext) => {
   try {
     const accessJwtToken = req.headers['access-jwt-token'] as string
     const { email } = token.verify.access(accessJwtToken) as IJwtPayload
