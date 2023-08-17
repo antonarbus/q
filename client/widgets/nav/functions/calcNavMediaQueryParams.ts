@@ -49,7 +49,7 @@ export const calcNavMediaQueryParams = (nav: HTMLElement, logo: HTMLElement): II
       }
     }
     return nav.offsetWidth + 50
-  };
+  }
 
   // calc init min nav width to accumulate all elements
   const navItemsQty = nav.querySelectorAll('.nav-item').length
@@ -75,9 +75,9 @@ export const calcNavMediaQueryParams = (nav: HTMLElement, logo: HTMLElement): II
   nav
     .querySelectorAll('.app-ext, .uotation, .icon-round-wrapper, .nav-item-name')
     .forEach((el) => {
-      el.setAttribute('style', '');
+      el.setAttribute('style', '')
     })
   nav.setAttribute('style', '')
 
   return { logoExtension, logoPart, icon, name, burger }
-};
+}

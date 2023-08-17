@@ -5,23 +5,35 @@ import { toggleBurger } from 'client/entities/nav'
 import { theme } from 'client/shared/clients'
 // https://hamburger-react.netlify.app/
 
-export function Burger() {
+interface Props {
+  screenWidthWhenShowBurger: number
+}
+
+const BurgerContainer = styled.div<Props>`
+  display: none;
+
+  @media (max-width: ${(props): number => props.screenWidthWhenShowBurger}px) {
+    display: block;
+  }
+`
+
+export const Burger = (): JSX.Element => {
   const dispatch = useDispatchTyped()
   const isOpen = useSelectorTyped((state) => state.nav.burger.isOpen)
-  const screenWidthWhenShowBurger = useSelectorTyped(
-    (state) => state.nav.mediaQueryWidth.burger
-  )
+  const screenWidthWhenShowBurger = useSelectorTyped(state => state.nav.mediaQueryWidth.burger)
 
   return (
     <BurgerContainer screenWidthWhenShowBurger={screenWidthWhenShowBurger}>
       <BurgerIcon
         toggled={isOpen}
-        toggle={() => dispatch(toggleBurger())}
+        toggle={(): void => {
+          dispatch(toggleBurger())
+        }}
         size={20}
         color={theme.colors.greyFont}
         rounded
         label='Show menu'
-        onToggle={(toggled) => {
+        onToggle={(toggled): void => {
           // if (toggled) console.log('menu opened')
           // if (!toggled) dispatch(closeMenu())
         }}
@@ -29,14 +41,3 @@ export function Burger() {
     </BurgerContainer>
   )
 }
-type Props = {
-  screenWidthWhenShowBurger: number
-}
-
-const BurgerContainer = styled.div<Props>`
-  display: none;
-
-  @media (max-width: ${(props) => props.screenWidthWhenShowBurger}px) {
-    display: block;
-  }
-`

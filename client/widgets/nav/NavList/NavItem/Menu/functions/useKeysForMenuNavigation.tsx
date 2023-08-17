@@ -6,17 +6,15 @@ import { getMenuItemByIdsChain } from './getMenuItemByIdsChain'
 import { useNavigate } from 'react-router-dom'
 import { navigateInMenu } from './useMenuAnimation'
 
-export function useKeysForMenuNavigation() {
+export const useKeysForMenuNavigation = (): void => {
   const dispatch = useDispatchTyped()
   const navigate = useNavigate()
 
-  function navKeyboardHandler(e: KeyboardEvent) {
+  const navKeyboardHandler = (e: KeyboardEvent): void => {
     const currentMenuItems = getMenuItemByIdsChain(
-      store.getState().nav.idsToCurrentMenuItems
+      store.getState().nav.idsToCurrentMenuItems,
     )
-    const currentMenuItemsNotHidden = currentMenuItems.filter(
-      (menuItem) => !menuItem.isHidden
-    )
+    const currentMenuItemsNotHidden = currentMenuItems.filter((menuItem) => !menuItem.isHidden)
     const menuItemsQty = currentMenuItemsNotHidden.length + 1
     const hoveredMenuItemIndex = store.getState().nav.menuItemHoverIndex
     const isNestedMenu = store.getState().nav.idsToNextMenuItems.length > 2
@@ -44,7 +42,7 @@ export function useKeysForMenuNavigation() {
     }
 
     if (isNestedMenu && e.key === 'Backspace') {
-      navigateInMenu.up && navigateInMenu.up()
+      navigateInMenu.up?.()
       return
     }
 
@@ -60,16 +58,14 @@ export function useKeysForMenuNavigation() {
 
     if (e.key === 'Enter') {
       const nextMenu = getMenuItemByIdsChain(
-        store.getState().nav.idsToNextMenuItems
+        store.getState().nav.idsToNextMenuItems,
       )
-      const menuId = nextMenu[hoveredMenuItemIndex - 2]?.id || ''
-      const menuItem = currentMenuItemsNotHidden!.find(
-        (menuItem) => menuItem.id === menuId
-      )
+      const menuId = nextMenu[hoveredMenuItemIndex - 2]?.id ?? ''
+      const menuItem = currentMenuItemsNotHidden.find((item) => item.id === menuId)
 
       const isBackMenuItem = hoveredMenuItemIndex === 1 && isNestedMenu
       if (isBackMenuItem) {
-        navigateInMenu.up && navigateInMenu.up()
+        navigateInMenu.up?.()
         return
       }
 
@@ -88,20 +84,20 @@ export function useKeysForMenuNavigation() {
 
       const func = menuItem?.func
       if (func) {
-        func()
+        void func()
         dispatch(closeMenu())
         return
       }
 
       const isNestedMenuAvailable = !!menuItem?.menuItems
       if (isNestedMenuAvailable) {
-        navigateInMenu.down && navigateInMenu.down(menuId)
+        navigateInMenu.down?.(menuId)
         return
       }
     }
 
     const anyLetter = /\w/
-    if (e.key.match(anyLetter)) {
+    if (anyLetter.exec(e.key)) {
       if (!isNestedMenu && e.key === 'c') {
         dispatch(setMenuItemHoverIndex(1))
         return
@@ -111,11 +107,10 @@ export function useKeysForMenuNavigation() {
         return
       }
       // search in items below hovered item
-      const index = currentMenuItemsNotHidden.findIndex((menuItem, index) => {
-        const isiKeySameAsFirstItemLetter =
-          menuItem.name && menuItem.name.toLowerCase().startsWith(e.key)
+      const index = currentMenuItemsNotHidden.findIndex((menuItem, i) => {
+        const isiKeySameAsFirstItemLetter = menuItem.name && menuItem.name.toLowerCase().startsWith(e.key)
         if (!isiKeySameAsFirstItemLetter) return false
-        if (index + 2 > hoveredMenuItemIndex) return true
+        if (i + 2 > hoveredMenuItemIndex) return true
         return false
       })
       if (index > -1) {
@@ -124,8 +119,7 @@ export function useKeysForMenuNavigation() {
       // if no found below hovered item, do it again from the top
       if (index === -1) {
         const newIndex = currentMenuItemsNotHidden.findIndex((menuItem) => {
-          const isiKeySameAsFirstItemLetter =
-            menuItem.name && menuItem.name.toLowerCase().startsWith(e.key)
+          const isiKeySameAsFirstItemLetter = menuItem.name && menuItem.name.toLowerCase().startsWith(e.key)
           return isiKeySameAsFirstItemLetter
         })
         if (newIndex > -1) {
@@ -135,12 +129,11 @@ export function useKeysForMenuNavigation() {
     }
   }
 
-  function keyShortcutsForMenu() {
+
+  useEffect(() => {
     window.addEventListener('keydown', navKeyboardHandler)
-    return () => {
+    return (): void => {
       window.removeEventListener('keydown', navKeyboardHandler)
     }
-  }
-
-  useEffect(keyShortcutsForMenu, [])
+  }, [])
 }

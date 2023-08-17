@@ -1,40 +1,52 @@
-// logoutRouter.ts
-import express, {
-  Request as ReqType,
-  Response as ResType,
-  NextFunction as NextType,
-} from 'express'
 import { UserModel } from '../db/models/user.model'
-// eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode'
+import type { TNext, TReq, TRes } from '../types'
+import { Router } from 'express'
+import type { TJwtPayload } from '../services/jwt'
 
-export const logoutRouter = express.Router()
-logoutRouter.get('/', async (req: ReqType, res: ResType, next: NextType) => {
+export const logoutRouter = Router()
+
+interface TReqWithCookies {
+  cookies: {
+    refreshJwtToken: string | undefined
+  }
+}
+
+logoutRouter.get('/', async (req: TReq, res: TRes, next: TNext) => {
   try {
-    // check refresh token
-    const { refreshJwtToken } = req.cookies
-    if (!refreshJwtToken)
+
+    const refreshJwtToken = (req as TReqWithCookies).cookies.refreshJwtToken
+
+    if (!refreshJwtToken) {
       res.json({ status: 'error', message: 'no refresh token in cookies' })
+      return
+    }
 
     // get email from refresh token
-    const { email }: { email: string } = jwt_decode(refreshJwtToken)
-    if (!email)
+    const { email } = jwt_decode<TJwtPayload>(refreshJwtToken)
+
+    if (!email) {
       res.json({ status: 'error', message: 'no email in refresh token' })
+      return
+    }
 
     // delete refreshJwtToken from cookie
     res.clearCookie('refreshJwtToken')
 
     // delete token from db
     const user = await UserModel.findOne({ refreshJwtToken })
-    if (!user)
-      return res.json({
+
+    if (!user) {
+      res.json({
         status: 'error',
         message: 'no user with such refresh token',
       })
+      return
+    }
+
     user.refreshJwtToken = undefined
     await user.save()
 
-    // send response
     res.json({
       status: 'ok',
       message: `user with email: ${email} logged out`,
