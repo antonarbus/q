@@ -5,7 +5,7 @@ import type { IJwtPayload } from '../services/jwt'
 import { refreshJwtTokenExpirationSeconds, token } from '../services/jwt'
 
 export const refreshRouter = express.Router()
-// eslint-disable-next-line @typescript-eslint/no-misused-promises
+
 refreshRouter.get('/', async (req: ReqType, res: ResType, next: NextType) => {
   try {
     // get refresh token from cookie
