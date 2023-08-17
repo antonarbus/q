@@ -19,7 +19,7 @@ const BurgerContainer = styled.div<Props>`
 
 export const Burger = (): JSX.Element => {
   const dispatch = useDispatchTyped()
-  const isOpen = useSelectorTyped((state) => state.nav.burger.isOpen)
+  const isOpen = useSelectorTyped(state => state.nav.burger.isOpen)
   const screenWidthWhenShowBurger = useSelectorTyped(state => state.nav.mediaQueryWidth.burger)
 
   return (

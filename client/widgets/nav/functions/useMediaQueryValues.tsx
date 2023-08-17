@@ -10,7 +10,7 @@ interface IProps {
   logoRef: RefObject<HTMLDivElement>
 }
 
-export const useMediaQueryValues = ({ navRef, logoRef }: IProps) => {
+export const useMediaQueryValues = ({ navRef, logoRef }: IProps): void => {
   const dispatch = useDispatchTyped()
   const isFirstMount = useFirstMountState()
   const navStructure = useSelectorTyped((state) => state.nav.navStructure)
