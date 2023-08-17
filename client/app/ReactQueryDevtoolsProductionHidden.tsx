@@ -1,20 +1,24 @@
 import { Suspense, lazy, useState } from 'react'
 import { useEffectOnce } from 'react-use'
 
-const ReactQueryDevtoolsProduction = lazy(() =>
+const ReactQueryDevtoolsProduction = lazy(async () =>
   import('@tanstack/react-query-devtools/build/lib/index.prod.js').then(
-    (d) => ({ default: d.ReactQueryDevtools })
-  )
+    (d) => ({ default: d.ReactQueryDevtools }),
+  ),
 )
 
 // press R+Q for several seconds to activate ReactQuery dev tools in production
 // works only within 1st min after the load
-export const ReactQueryDevtoolsProductionHidden = () => {
+export const ReactQueryDevtoolsProductionHidden = (): JSX.Element | null => {
   const [showDevtools, setShowDevtools] = useState(false)
 
   let keysPressed: string[] = []
 
-  const activateReactQueryDevTools = (e: KeyboardEvent) => {
+  const emptyKeysPressedArray = (): void => {
+    keysPressed = []
+  }
+
+  const activateReactQueryDevTools = (e: KeyboardEvent): void => {
     if (!e.key) return
     keysPressed.push(e.key)
     if (!keysPressed.includes('r')) return
@@ -25,10 +29,6 @@ export const ReactQueryDevtoolsProductionHidden = () => {
     keysPressed = []
     window.removeEventListener('keydown', activateReactQueryDevTools)
     window.removeEventListener('keyup', emptyKeysPressedArray)
-  }
-
-  const emptyKeysPressedArray = () => {
-    keysPressed = []
   }
 
   useEffectOnce(() => {

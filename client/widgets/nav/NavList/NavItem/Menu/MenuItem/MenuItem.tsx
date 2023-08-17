@@ -15,7 +15,7 @@ interface IProps {
   hoveredMenuItemIndex: number
 }
 
-export const MenuItem = ({ menuItem, hoveredMenuItemIndex }: IProps) => {
+export const MenuItem = ({ menuItem, hoveredMenuItemIndex }: IProps): JSX.Element => {
   const dispatch = useDispatchTyped()
   const isHovered = useSelectorTyped(
     (state) => state.nav.menuItemHoverIndex === hoveredMenuItemIndex,

@@ -10,67 +10,16 @@ import { TopMenuItemsContainer } from './TopMenuItemsContainer'
 import { setMenuItemHoverIndex } from 'client/entities/nav'
 import { theme } from 'client/shared/clients'
 
-export function Menu() {
-  const menuContainerRef = useRef<HTMLDivElement>(null)
-  const currentMenuRef = useRef<HTMLDivElement>(null)
-  const nextMenuRef = useRef<HTMLDivElement>(null)
-  const fakeMenuRef = useRef<HTMLDivElement>(null)
-  const idsToNextMenuItems = useSelectorTyped(
-    (state) => state.nav.idsToNextMenuItems,
-  )
-  const idsToCurrentMenuItems = useSelectorTyped(
-    (state) => state.nav.idsToCurrentMenuItems,
-  )
-  useMenuAnimation({
-    currentMenuRef,
-    nextMenuRef,
-    menuContainerRef,
-    fakeMenuRef,
-    idsToNextMenuItems,
-  })
-  useKeysForMenuNavigation()
-  useCloseMenuOnClickOutside({ menuContainerRef })
-  const isMenuOutsideWindow = useIsMenuOutsideWindow()
-  const dispatch = useDispatchTyped()
-
-  return (
-    <MenuStyled
-      ref={menuContainerRef}
-      isMenuOutsideWindow={isMenuOutsideWindow}
-      onMouseLeave={() => dispatch(setMenuItemHoverIndex(0))}
-      className='drop-down-nav-menu'
-    >
-      <TopMenuItemsContainer />
-      <SlidableMenuItemsContainer
-        reference={currentMenuRef}
-        idsToMenu={idsToCurrentMenuItems}
-        className='slidable current'
-      />
-      <SlidableMenuItemsContainer
-        reference={nextMenuRef}
-        idsToMenu={idsToNextMenuItems}
-        className='slidable
-        next'
-      />
-      <SlidableMenuItemsContainer
-        reference={fakeMenuRef}
-        idsToMenu={idsToNextMenuItems}
-        className='measurable-div'
-      />
-    </MenuStyled>
-  )
-}
-
-interface Props {
+interface TProps {
   isMenuOutsideWindow: boolean
 }
 
-export const MenuStyled = styled.div<Props>`
+export const MenuStyled = styled.div<TProps>`
   position: absolute;
   top: calc(100% + 5px);
   right: -${theme.menu.navItem.marginRight}px;
   /* if right corner goes over the screen fix the left instead of right */
-  left: ${(props) => (props.isMenuOutsideWindow ? '0' : 'not set')};
+  left: ${(props): string => (props.isMenuOutsideWindow ? '0' : 'not set')};
   width: ${theme.menu.width}px;
   padding-top: ${theme.menu.paddingTop}px;
   padding-bottom: ${theme.menu.paddingBottom}px;
@@ -102,3 +51,54 @@ export const MenuStyled = styled.div<Props>`
     transform: translateX(9999px);
   }
 `
+
+export const Menu = (): JSX.Element => {
+  const menuContainerRef = useRef<HTMLDivElement>(null)
+  const currentMenuRef = useRef<HTMLDivElement>(null)
+  const nextMenuRef = useRef<HTMLDivElement>(null)
+  const fakeMenuRef = useRef<HTMLDivElement>(null)
+  const idsToNextMenuItems = useSelectorTyped(
+    (state) => state.nav.idsToNextMenuItems,
+  )
+  const idsToCurrentMenuItems = useSelectorTyped((state) => state.nav.idsToCurrentMenuItems)
+  useMenuAnimation({
+    currentMenuRef,
+    nextMenuRef,
+    menuContainerRef,
+    fakeMenuRef,
+    idsToNextMenuItems,
+  })
+  useKeysForMenuNavigation()
+  useCloseMenuOnClickOutside({ menuContainerRef })
+  const isMenuOutsideWindow = useIsMenuOutsideWindow()
+  const dispatch = useDispatchTyped()
+
+  return (
+    <MenuStyled
+      ref={menuContainerRef}
+      isMenuOutsideWindow={isMenuOutsideWindow}
+      onMouseLeave={(): void => {
+        dispatch(setMenuItemHoverIndex(0))
+      }}
+      className='drop-down-nav-menu'
+    >
+      <TopMenuItemsContainer />
+      <SlidableMenuItemsContainer
+        reference={currentMenuRef}
+        idsToMenu={idsToCurrentMenuItems}
+        className='slidable current'
+      />
+      <SlidableMenuItemsContainer
+        reference={nextMenuRef}
+        idsToMenu={idsToNextMenuItems}
+        className='slidable
+        next'
+      />
+      <SlidableMenuItemsContainer
+        reference={fakeMenuRef}
+        idsToMenu={idsToNextMenuItems}
+        className='measurable-div'
+      />
+    </MenuStyled>
+  )
+}

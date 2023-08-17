@@ -1,1 +1,1 @@
-export type HttpStatusType = 'loading' | 'error' | 'success' | ''
+export type HttpStatusType = '' | 'error' | 'loading' | 'success'

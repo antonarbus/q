@@ -1,11 +1,11 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { useSelectorTyped } from 'client/shared/hooks'
 
-type Props = {
+interface Props {
   allowedRoles: string[]
 }
 
-export function RequireAuth({ allowedRoles }: Props) {
+export const RequireAuth = ({ allowedRoles }: Props): JSX.Element => {
   const location = useLocation()
   const isLogged = useSelectorTyped((state) => state.user.isLogged)
   const roles = useSelectorTyped((state) => state.user.roles)

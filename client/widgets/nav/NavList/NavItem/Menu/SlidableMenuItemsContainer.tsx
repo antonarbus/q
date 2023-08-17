@@ -9,11 +9,7 @@ interface Props {
   className: string
 }
 
-export const SlidableMenuItemsContainer = ({
-  reference,
-  idsToMenu,
-  className,
-}: Props) => {
+export const SlidableMenuItemsContainer = ({ reference, idsToMenu, className }: Props): JSX.Element => {
   const menuItems = useSelectorTyped(
     selectMenuItemByIdsChainSelector(idsToMenu),
   )

@@ -1,10 +1,10 @@
 // https://fkhadra.github.io/react-toastify/positioning-toast
+import type { ReactNode } from 'react'
 import { toast, Slide, Bounce, Flip, Zoom } from 'react-toastify'
 
 interface IProps {
-  msg: React.ReactNode | string
-  position?:
-  'bottom-center' | 'bottom-left' | 'bottom-right' | 'top-center' | 'top-left' | 'top-right'
+  msg: ReactNode | string
+  position?: 'bottom-center' | 'bottom-left' | 'bottom-right' | 'top-center' | 'top-left' | 'top-right'
   hideProgressBar?: boolean
   closeAfterMs?: number
   shouldStay?: true
@@ -26,17 +26,17 @@ export const notify = ({
   onClose,
 }: IProps): void => {
   const options = {
-    position: position || 'top-right',
-    autoClose: shouldStay ? false : ((closeAfterMs || 5000) as any),
+    position: position ?? 'top-right',
+    autoClose: shouldStay ? false : (closeAfterMs ?? 5000),
     delay: 0,
-    hideProgressBar: hideProgressBar || false,
+    hideProgressBar: hideProgressBar ?? false,
     closeButton: true,
     closeOnClick: true,
     pauseOnHover: true,
     pauseOnFocusLoss: true,
     draggable: true,
     progress: undefined,
-    theme: theme || 'dark',
+    theme: theme ?? 'dark',
     onClose,
     // onOpen: () => window.alert('Called when I open'),
     transition:
@@ -52,20 +52,28 @@ export const notify = ({
   }
 
   if (type === undefined || type === 'success') {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     toast.success(msg, options)
     return
   }
 
   if (type === 'error') {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     toast.error(msg, options)
     return
   }
 
   if (type === 'warn') {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     toast.warn(msg, options)
     return
   }
 
   // type === 'info'
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   toast.info(msg, options)
 }

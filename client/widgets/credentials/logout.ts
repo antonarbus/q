@@ -3,34 +3,43 @@ import { store } from 'client/app/store'
 import { navUpdate } from './navUpdate'
 import { token } from '../../shared/auth/token'
 import { forgetLoggedUser } from 'client/entities/user'
+import type { TLogoutApiRes } from 'server/api/logoutRouter'
 
-export async function logoutUser(): Promise<void> {
+export const logoutUser = async (): Promise<void> => {
   const method = 'GET'
   const options = { method }
   try {
     const res = await fetch('/api/logout', options)
-    const data = await res.json()
+    const data = await res.json() as TLogoutApiRes
     const { status, message, email } = data
+
     if (status === 'error') {
-      message === 'no refresh token in cookies' &&
+      if (message === 'no refresh token in cookies') {
         notify({
           msg: 'Already logged out before',
           type: 'info',
           theme: 'light',
         })
-      message === 'no email in refresh token' &&
+      }
+
+      if (message === 'no email in refresh token') {
         notify({
           msg: 'No email in refresh token, smth is wrong',
           type: 'info',
           theme: 'light',
         })
-      message === 'no user with such refresh token' &&
+      }
+
+      if (message === 'no user with such refresh token') {
         notify({
           msg: 'No user with such refresh token',
           type: 'info',
           theme: 'light',
         })
+      }
+
     }
+
     if (status === 'ok') {
       // notify({ msg: `User with ${email} is logged out`, type: 'success', theme: 'light' })
     }

@@ -33,3 +33,8 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action<string>
 >
+
+declare global {
+  export type TState = ReturnType<typeof store.getState>
+  export type TDispatch = typeof store.dispatch
+}

@@ -1,10 +1,10 @@
 import { navStructure } from '../../widgets/nav/navStructure'
-import type { PayloadAction } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from 'client/app/store'
 import { setMenuItemPropValue } from './setMenuItemPropValue'
 import type { IMenuItem } from './TMenuItem'
-import type { TMediaQueryParams } from 'client/widgets/nav';
+import type { TMediaQueryParams } from 'client/widgets/nav'
 
 const initialState = {
   navStructure,

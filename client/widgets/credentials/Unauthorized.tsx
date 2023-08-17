@@ -3,7 +3,7 @@ import { theme } from 'client/shared/clients'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { useNavigate } from 'react-router-dom'
 
-export const Unauthorized = () => {
+export const Unauthorized = (): JSX.Element => {
   const navigate = useNavigate()
 
   return (
@@ -24,7 +24,9 @@ export const Unauthorized = () => {
         variant='contained'
         startIcon={<ArrowBackIcon />}
         sx={{ mt: 2 }}
-        onClick={() => navigate(-1)}
+        onClick={(): void => {
+          navigate(-1)
+        }}
       >
         Back
       </Button>

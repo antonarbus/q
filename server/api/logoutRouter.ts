@@ -12,6 +12,12 @@ interface TReqWithCookies {
   }
 }
 
+export interface TLogoutApiRes {
+  status: string
+  message: string
+  email?: string
+}
+
 logoutRouter.get('/', async (req: TReq, res: TRes, next: TNext) => {
   try {
 
@@ -26,7 +32,10 @@ logoutRouter.get('/', async (req: TReq, res: TRes, next: TNext) => {
     const { email } = jwt_decode<TJwtPayload>(refreshJwtToken)
 
     if (!email) {
-      res.json({ status: 'error', message: 'no email in refresh token' })
+      res.json({
+        status: 'error',
+        message: 'no email in refresh token',
+      })
       return
     }
 

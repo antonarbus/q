@@ -11,7 +11,7 @@ import { navStructure } from '../../../../navStructure'
  * @param idsToCurrentMenuItems array of menu ids from the top to the clicked one
  */
 
-export function getMenuItemByIdsChain(idsToCurrentMenuItems: string[]): TMenuItem[] {
+export const getMenuItemByIdsChain = (idsToCurrentMenuItems: string[]): TMenuItem[] => {
   let clicked: TMenuItem[] = navStructure
   let tempMenu: TMenuItem[] = navStructure
   idsToCurrentMenuItems.forEach((id: string) => {

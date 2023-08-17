@@ -1,46 +1,10 @@
 // https://fkhadra.github.io/react-toastify/introduction/
+import type { CloseButtonProps } from 'react-toastify'
 import { ToastContainer } from 'react-toastify'
 import styled from '@emotion/styled'
 import { theme } from 'client/shared/clients'
 import { Close } from '@mui/icons-material'
-
-interface IProps {
-  closeToast: any
-}
-
-const CloseIcon = ({ closeToast }: IProps): JSX.Element => (
-  <span
-    css={{
-      '& :hover': {
-        transform: 'scale(1.2)',
-        transformOrigin: 'center',
-        transition: 'transform 0.2s',
-      },
-    }}
-  >
-    <Close fontSize='small' onClick={closeToast} />
-  </span>
-)
-
-export const TopMsg = (): JSX.Element => {
-  return (
-    <ToastStyled>
-      <ToastContainer
-        position='bottom-center'
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme='dark'
-        closeButton={CloseIcon}
-      />
-    </ToastStyled>
-  )
-}
+import type { ReactNode } from 'react'
 
 // taken from /node_modules/react-toastify/dist/ReactToastify.css
 const ToastStyled = styled.div`
@@ -695,3 +659,43 @@ const ToastStyled = styled.div`
     }
   }
 `
+
+interface IProps {
+  closeToast: () => void
+}
+
+const CloseIcon = ({ closeToast }: IProps): JSX.Element => (
+  <span
+    css={{
+      '& :hover': {
+        transform: 'scale(1.2)',
+        transformOrigin: 'center',
+        transition: 'transform 0.2s',
+      },
+    }}
+  >
+    <Close fontSize='small' onClick={closeToast} />
+  </span>
+)
+
+export const TopMsg = (): JSX.Element => {
+  return (
+    <ToastStyled>
+      <ToastContainer
+        position='bottom-center'
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme='dark'
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
+        closeButton={CloseIcon as any}
+      />
+    </ToastStyled>
+  )
+}
+

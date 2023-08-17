@@ -4,7 +4,16 @@ import { UserModel } from '../db/models/user.model'
 import bcrypt from 'bcryptjs'
 import { refreshJwtTokenExpirationSeconds, token } from '../services/jwt'
 
+export interface TLoginApiRes {
+  status: string
+  message: string
+  accessJwtToken: string
+  email: string
+  roles: string[]
+}
+
 export const loginRouter = express.Router()
+
 loginRouter.post('/', async (req: ReqType, res: ResType, next: NextType) => {
   try {
     // get mail & password from body
@@ -19,17 +28,40 @@ loginRouter.post('/', async (req: ReqType, res: ResType, next: NextType) => {
 
     // check email & password
     const user = await UserModel.findOne({ email })
-    if (!user) return res.json({ status: 'error', message: 'no user data' })
+    if (!user) {
+      res.json({ status: 'error', message: 'no user data' })
+      return
+    }
+
     const passwordFromDB = user.password
-    if (!passwordFromDB) return res.json({ status: 'error', message: 'no password' })
+    if (!passwordFromDB) {
+      res.json({ status: 'error', message: 'no password' })
+      return
+    }
+
     const isPasswordValid = await bcrypt.compare(password, passwordFromDB)
-    if (!isPasswordValid)
-      return res.json({ status: 'error', message: 'invalid credentials' })
+    if (!isPasswordValid) {
+      res.json({
+        status: 'error',
+        message: 'invalid credentials',
+        accessJwtToken: 'no token',
+        email: 'no email',
+        roles: ['no role'],
+      })
+      return
+    }
 
     // check if account is activated
     if (!user.isActivated) {
       // todo: send email with activation link
-      return res.json({ status: 'error', message: 'account is not activated' })
+      res.json({
+        status: 'error',
+        message: 'account is not activated',
+        accessJwtToken: 'no token',
+        email: 'no email',
+        roles: ['no role'],
+      })
+      return
     }
 
     // generate jwt tokens
@@ -49,13 +81,15 @@ loginRouter.post('/', async (req: ReqType, res: ResType, next: NextType) => {
     await UserModel.findOneAndUpdate(filter, update)
 
     // return data to the client
-    res.json({
+    const response = {
       status: 'ok',
       message: `user with email: ${email} logged in and tokens are refreshed`,
       accessJwtToken,
       email,
       roles,
-    })
+    }
+
+    res.json(response)
   } catch (error) {
     next(error)
   }

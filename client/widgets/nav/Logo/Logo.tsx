@@ -6,7 +6,7 @@ interface Prop {
   logoRef: RefObject<HTMLDivElement>
 }
 
-export const Logo = ({ logoRef }: Prop) => {
+export const Logo = ({ logoRef }: Prop): JSX.Element => {
   const mediaQueryWidth = useSelectorTyped((state) => state.nav.mediaQueryWidth)
   const mediaEnabled = useSelectorTyped((state) => state.nav.mediaEnabled)
 
