@@ -7,8 +7,9 @@ import { refreshJwtTokenExpirationSeconds, token } from '../services/jwt'
 export interface TRefreshAipRes {
   status: string
   message: string
-  accessJwtToken?: string
-  roles?: string[]
+  email: string
+  accessJwtToken: string
+  roles: string[]
 }
 
 export const refreshRouter = express.Router()
@@ -26,6 +27,9 @@ refreshRouter.get('/', async (req: ReqType, res: ResType, next: NextType) => {
       res.json({
         status: 'error',
         message: 'no refresh token found in cookies during token refresh, probably not authorized',
+        email: 'no email',
+        accessJwtToken: 'no access token',
+        roles: ['no role'],
       })
       return
     }
@@ -37,6 +41,9 @@ refreshRouter.get('/', async (req: ReqType, res: ResType, next: NextType) => {
       res.json({
         status: 'error',
         message: 'refresh token is not validated, probably not authorized',
+        email: 'no email',
+        accessJwtToken: 'no access token',
+        roles: ['no role'],
       })
       return
     }
@@ -47,6 +54,9 @@ refreshRouter.get('/', async (req: ReqType, res: ResType, next: NextType) => {
       res.json({
         status: 'error',
         message: 'no user found with such refresh token in db',
+        email: 'no email',
+        accessJwtToken: 'no access token',
+        roles: ['no role'],
       })
       return
     }
@@ -72,6 +82,7 @@ refreshRouter.get('/', async (req: ReqType, res: ResType, next: NextType) => {
       message: `refresh token for email: ${email} is refreshed`,
       accessJwtToken,
       roles,
+      email,
     })
   } catch (error) {
     next(error)

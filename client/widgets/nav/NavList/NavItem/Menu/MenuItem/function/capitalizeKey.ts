@@ -1,4 +1,4 @@
-export function capitalizeKey(keyStr: string) {
+export const capitalizeKey = (keyStr: string): string => {
   return keyStr
     .toUpperCase()
     .replaceAll('CONTROL', 'Ctrl')

@@ -26,7 +26,8 @@ const customTheme = {
     height: 60,
     marginTop: 10,
     marginBottom: 0,
-    get fullHeight() {
+    // eslint-disable-next-line no-restricted-syntax
+    get fullHeight(): number {
       return this.height + this.marginTop + this.marginBottom
     },
   },
@@ -55,7 +56,6 @@ const customTheme = {
 // https://mui.com/material-ui/customization/theming/#typescript
 // https://medium.com/@bahuguna.shubhanshu19/how-to-create-custom-theme-in-react-written-in-typescript-using-material-ui-154ed1daeae6
 declare module '@mui/material/styles' {
-  // eslint-disable-next-line no-unused-vars
   interface Theme {
     // from mui
     palette: {

@@ -1,6 +1,6 @@
 import { Global, css } from '@emotion/react'
 
-export const GlobalStyles = () => (
+export const GlobalStyles = (): JSX.Element => (
   <Global
     styles={css`
       /* scrollbar */

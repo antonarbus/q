@@ -1,22 +1,18 @@
 import { Button, CircularProgress } from '@mui/material'
+import type { Dispatch, ReactNode, SetStateAction } from 'react'
 import { useRef } from 'react'
 import { useUpdateEffect } from 'react-use'
 import './successErrorIcons.css'
+import type { HttpStatusType } from 'client/widgets/credentials/types'
 
 interface Props {
-  children?: React.ReactNode
-  content?: React.ReactNode
+  [x: string]: unknown // all other ...restProps props
+  children?: ReactNode
+  content?: ReactNode
   circleProgressSize?: number | string
   disabled?: boolean
-  loading?: any
-  setLoading?: any
-  success?: any
-  setSuccess?: any
-  error?: any
-  setError?: any
-  httpStatus?: '' | 'error' | 'loading' | 'success'
-  setHttpStatus?: any
-  [x: string]: any // all other ...restProps props
+  httpStatus?: HttpStatusType
+  setHttpStatus?: Dispatch<SetStateAction<HttpStatusType>>
 }
 
 export const ButtonCustom = ({
@@ -32,7 +28,10 @@ export const ButtonCustom = ({
   const errorIconRef = useRef<HTMLDivElement>(null)
 
   useUpdateEffect(() => {
-    const timer = window.setTimeout(() => setHttpStatus(''), 3000)
+    const timer = window.setTimeout(() => {
+      setHttpStatus?.('')
+    }, 3000)
+
     return () => {
       clearTimeout(timer)
     }
@@ -46,13 +45,13 @@ export const ButtonCustom = ({
     borderRadius: '50%',
   }
 
+  const isNetworkProgress = ['loading', 'error', 'success'].includes(httpStatus ?? 'no network status')
+
+
   return (
     <Button
       variant='contained'
-      disabled={
-        (httpStatus && ['loading', 'error', 'success'].includes(httpStatus)) ||
-        disabled
-      }
+      disabled={isNetworkProgress || disabled}
       type='submit'
       fullWidth
       sx={{
@@ -68,7 +67,7 @@ export const ButtonCustom = ({
       {content}
       {httpStatus === 'loading' && (
         <CircularProgress
-          size={circleProgressSize || 30}
+          size={circleProgressSize ?? 30}
           sx={{
             color: 'black',
             position: 'absolute',
@@ -80,8 +79,8 @@ export const ButtonCustom = ({
           ref={successIconRef}
           css={{
             ...iconBackgroundStyle,
-            height: circleProgressSize || 30,
-            width: circleProgressSize || 30,
+            height: circleProgressSize ?? 30,
+            width: circleProgressSize ?? 30,
           }}
         >
           {
@@ -107,8 +106,8 @@ export const ButtonCustom = ({
           ref={errorIconRef}
           css={{
             ...iconBackgroundStyle,
-            height: circleProgressSize || 30,
-            width: circleProgressSize || 30,
+            height: circleProgressSize ?? 30,
+            width: circleProgressSize ?? 30,
           }}
         >
           {

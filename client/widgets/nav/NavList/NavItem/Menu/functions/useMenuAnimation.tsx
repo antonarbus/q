@@ -15,14 +15,10 @@ interface PropsForNavigateInMenu {
 
 export const navigateInMenu: PropsForNavigateInMenu = {
   up: () => {
-    console.log(
-      'put function here for going up the menu, otherwise need to pass it in many props',
-    )
+    console.log('put function here for going up the menu, otherwise need to pass it in many props')
   },
   down: (id) => {
-    console.log(
-      'put function here for going into submenu, otherwise need to pass it in many props',
-    )
+    console.log('put function here for going into submenu, otherwise need to pass it in many props')
   },
 }
 
@@ -40,7 +36,7 @@ export const useMenuAnimation = ({
   menuContainerRef,
   fakeMenuRef,
   idsToNextMenuItems,
-}: Props) => {
+}: Props): void => {
   const dispatch = useDispatchTyped()
   const isFirstMount = useFirstMountState()
   const duration = 0.5
@@ -55,9 +51,10 @@ export const useMenuAnimation = ({
    * - when animation is finished we change moved away 'currentMenuRef' content with 'currentMenuItems' state update
    */
 
-  const goDownInMenu = (id: string) => {
-    type Function = () => void
-    const cb: Function = () => dispatch(goDownInCurrentMenu(id))
+  const goDownInMenu = (id: string): void => {
+    const cb = (): void => {
+      dispatch(goDownInCurrentMenu(id))
+    }
     dispatch(goDownInNextMenu(id))
     gsap.fromTo(
       currentMenuRef.current,
@@ -71,9 +68,11 @@ export const useMenuAnimation = ({
     )
   }
 
-  const goUpInMenu = () => {
+  const goUpInMenu = (): void => {
     type Function = () => void
-    const cb: Function = () => dispatch(goUpInCurrentMenu())
+    const cb = (): void => {
+      dispatch(goUpInCurrentMenu())
+    }
     dispatch(goUpInNextMenu())
     gsap.fromTo(
       currentMenuRef.current,

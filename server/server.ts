@@ -1,7 +1,6 @@
-// server.ts
 import 'dotenv/config'
 import type { Request as ReqType, Response as ResType } from 'express'
-import express, { NextFunction as NextType } from 'express'
+import express from 'express'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
@@ -15,6 +14,7 @@ import { refreshRouter } from './api/refreshRouter'
 import { errorHandlerMiddleware } from './middleware/errorHandlerMiddleware'
 import { usersRouter } from './api/usersRouter'
 import { hiRouter } from './api/hiRouter'
+import type { TReq, TRes } from './types'
 
 void (async (): Promise<void> => {
   const app = express()
@@ -24,12 +24,11 @@ void (async (): Promise<void> => {
   app.use(express.json()) // parses incoming requests with JSON because we use lots of json, let it be default
   app.use(cookieParser())
   app.use(cors())
-  app.get('/', (req: ReqType, res: ResType) =>
+  app.get('/', (_req: TReq, res: TRes) =>
     res.send('This is from express.js'),
   )
   app.get('/api', (req: ReqType, res: ResType) => res.json({ message: '/api' }))
 
-  // use router from separate file
   app.use('/api/hi', hiRouter)
   app.use('/api/register', registerRouter)
   app.use('/api/login', loginRouter)

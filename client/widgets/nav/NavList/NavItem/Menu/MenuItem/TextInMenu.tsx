@@ -1,6 +1,8 @@
-type Props = {
+import type { ReactNode } from 'react'
+
+interface Props {
   reserveSpaceForIcon?: boolean
-  name: string | React.ReactNode
+  name: ReactNode | string
   disabled?: boolean
 }
 
@@ -10,7 +12,7 @@ type Props = {
  * - if we have nested menu some space should be reserved for 'go inside' icon
  * - if name is long it will be trimmed ellipsis (... dots)
  */
-export function TextInMenu({ reserveSpaceForIcon, name, disabled }: Props) {
+export const TextInMenu = ({ reserveSpaceForIcon, name, disabled }: Props): JSX.Element => {
   return (
     <span
       css={{

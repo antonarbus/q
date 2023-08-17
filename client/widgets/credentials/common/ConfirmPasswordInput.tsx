@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { PasswordInput } from './PasswordInput'
 
-type Props = {
+interface Props {
   originalPassword: string
   isConfirmPasswordOk: boolean
   setIsConfirmPasswordOk: (value: boolean) => void
@@ -16,45 +16,40 @@ type Props = {
  * @param props.setIsConfirmPasswordOk isConfirmPasswordOk state setter
  */
 
-export function ConfirmPasswordInput({
+export const ConfirmPasswordInput = ({
   originalPassword,
   isConfirmPasswordOk,
   setIsConfirmPasswordOk,
-}: Props) {
+}: Props): JSX.Element => {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [didBlur, setDidBlur] = useState(false)
   const initLabel = 'Confirm password'
   const [label, setLabel] = useState(initLabel)
   const [isLabelRed, setIsLabelRed] = useState(false)
 
-  useUpdateEffect(
-    () =>
-      setIsConfirmPasswordOk(
-        !!originalPassword && originalPassword === confirmPassword
-      ),
-    [originalPassword, confirmPassword]
-  )
-  useUpdateEffect(
-    () =>
-      setIsLabelRed(
-        didBlur &&
-          !!originalPassword &&
-          !!confirmPassword &&
-          !isConfirmPasswordOk
-      ),
-    [didBlur, originalPassword, confirmPassword, isConfirmPasswordOk]
-  )
-  useUpdateEffect(
-    () =>
-      isLabelRed ? setLabel('Passwords do not match') : setLabel(initLabel),
-    [isLabelRed]
-  )
+  useUpdateEffect(() => {
+    setIsConfirmPasswordOk(!!originalPassword && originalPassword === confirmPassword)
+  }, [originalPassword, confirmPassword])
+
+  useUpdateEffect(() => {
+    setIsLabelRed(didBlur && !!originalPassword && !!confirmPassword && !isConfirmPasswordOk)
+  }, [didBlur, originalPassword, confirmPassword, isConfirmPasswordOk])
+
+  useUpdateEffect(() => {
+    if (isLabelRed) {
+      setLabel('Passwords do not match')
+    } else {
+      setLabel(initLabel)
+    }
+  }, [isLabelRed])
 
   return (
     <PasswordInput
       password={confirmPassword}
       setPassword={setConfirmPassword}
-      onBlur={() => setDidBlur(true)}
+      onBlur={(): void => {
+        setDidBlur(true)
+      }}
       label={label}
       isLabelRed={isLabelRed}
     />

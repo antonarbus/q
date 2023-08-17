@@ -9,7 +9,7 @@ import { useSelectorTyped } from 'client/shared/hooks'
  * - if window is narrow, then menu can go over the screen's left side
  * - if so, we can fix 'left' side of the menu, instead of 'right'
  */
-export function useIsMenuOutsideWindow() {
+export const useIsMenuOutsideWindow = (): boolean => {
   const navItemRightPos = useSelectorTyped((state) => state.nav.navItemRightPos)
   const isMenuOutsideWindow = theme.menu.width > navItemRightPos
   return isMenuOutsideWindow

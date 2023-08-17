@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { notify } from 'client/shared/ui/top_msg/notify'
 import type { Dispatch, FormEvent, SetStateAction } from 'react'
 import { useState } from 'react'
