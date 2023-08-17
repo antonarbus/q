@@ -2,7 +2,7 @@ import { NavItem } from './NavItem'
 import { Burger } from './NavItem/Burger'
 import { useSelectorTyped } from 'client/shared/hooks'
 
-export function NavList(): JSX.Element {
+export const NavList = (): JSX.Element => {
   const navStructure = useSelectorTyped((state) => state.nav.navStructure)
 
   return (

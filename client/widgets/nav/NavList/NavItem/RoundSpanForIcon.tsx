@@ -12,7 +12,7 @@ export const RoundSpanForIcon = ({
   css,
   className,
   disabled,
-}: Props) => {
+}: Props): JSX.Element => {
   return (
     <span
       className={className}
