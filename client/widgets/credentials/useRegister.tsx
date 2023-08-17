@@ -1,28 +1,35 @@
 import { notify } from 'client/shared/ui/top_msg/notify'
-import type { FormEvent } from 'react'
+import type { Dispatch, FormEvent, SetStateAction } from 'react'
 import { useState } from 'react'
 import type { HttpStatusType } from './types'
 import type { TRegisterReqBody, TRegisterRes } from 'server/api/registerRouter'
 
-interface Props {
+interface TProps {
   e: FormEvent
   email: string
   password: string
 }
 
-export const useRegister = () => {
+interface TResponse {
+  registerUser: ({ e, email, password }: TProps) => Promise<void>
+  httpStatus: HttpStatusType
+  setHttpStatus: Dispatch<SetStateAction<HttpStatusType>>
+}
+
+export const useRegister = (): TResponse => {
   const [httpStatus, setHttpStatus] = useState<HttpStatusType>('')
 
-  const registerUser = async ({ e, email, password }: Props): Promise<void> => {
+  const registerUser = async ({ e, email, password }: TProps): Promise<void> => {
     e.preventDefault()
     const method = 'POST'
     const headers = { 'Content-Type': 'application/json' }
-    const body = JSON.stringify({ email, password } satisfies TRegisterReqBody)
+    const bodyObj: TRegisterReqBody = { email, password }
+    const body = JSON.stringify(bodyObj)
     const options = { method, headers, body }
     try {
       setHttpStatus('loading')
       const res = await fetch('/api/register', options)
-      const data: TRegisterRes = await res.json()
+      const data = await res.json() as TRegisterRes
       const { status, message } = data
       if (status === 'error') {
         setHttpStatus('error')
