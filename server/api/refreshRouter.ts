@@ -1,8 +1,15 @@
 import type { Request as ReqType, Response as ResType, NextFunction as NextType } from 'express'
 import express from 'express'
 import { UserModel } from '../db/models/user.model'
-import type { IJwtPayload } from '../services/jwt'
+import type { TJwtPayload } from '../services/jwt'
 import { refreshJwtTokenExpirationSeconds, token } from '../services/jwt'
+
+export interface TRefreshAipRes {
+  status: string
+  message: string
+  accessJwtToken?: string
+  roles?: string[]
+}
 
 export const refreshRouter = express.Router()
 
@@ -16,30 +23,32 @@ refreshRouter.get('/', async (req: ReqType, res: ResType, next: NextType) => {
     const refreshJwtToken = (req.cookies as IProps).refreshJwtToken
 
     if (!refreshJwtToken) {
-      return res.json({
+      res.json({
         status: 'error',
-        message:
-          'no refresh token found in cookies during token refresh, probably not authorized',
+        message: 'no refresh token found in cookies during token refresh, probably not authorized',
       })
+      return
     }
 
     // check if token is ok
-    const { email } = token.verify.refresh(refreshJwtToken) as IJwtPayload
+    const { email } = token.verify.refresh(refreshJwtToken) as TJwtPayload
 
     if (!email) {
-      return res.json({
+      res.json({
         status: 'error',
         message: 'refresh token is not validated, probably not authorized',
       })
+      return
     }
 
     // find token in db
     const user = await UserModel.findOne({ refreshJwtToken })
     if (!user) {
-      return res.json({
+      res.json({
         status: 'error',
         message: 'no user found with such refresh token in db',
       })
+      return
     }
 
     // generate refresh token and save in db
