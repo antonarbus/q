@@ -9,6 +9,7 @@ import type { HttpStatusType } from './types'
 import { rememberLoggedUser } from 'client/entities/user'
 import { slideElement } from 'client/shared/lib/slideElement'
 import type { TLoginApiRes } from 'server/api/loginRouter'
+import { apiUrl } from 'server/apiUrls'
 
 interface TState {
   from?: {
@@ -47,16 +48,18 @@ export const useLogin = (): TResponse => {
     const options = { method, headers, body }
     try {
       setHttpStatus('loading')
-      const res = await fetch('/api/login', options)
+      const res = await fetch(apiUrl.login, options)
       const data = await res.json() as TLoginApiRes
       const { status, message, accessJwtToken, roles } = data
 
       if (status === 'error') {
         setHttpStatus('error')
         token.access = ''
+
         if (message === 'invalid credentials') {
           notify({ msg: 'Invalid credentials', type: 'error', theme: 'light' })
         }
+
         if (message === 'account is not activated') {
           notify({
             msg: 'Account is not activated. Check mailbox.',
@@ -64,6 +67,7 @@ export const useLogin = (): TResponse => {
             theme: 'light',
           })
         }
+
         return
       }
 

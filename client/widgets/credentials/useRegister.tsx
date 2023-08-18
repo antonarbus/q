@@ -3,6 +3,7 @@ import type { Dispatch, FormEvent, SetStateAction } from 'react'
 import { useState } from 'react'
 import type { HttpStatusType } from './types'
 import type { TRegisterReqBody, TRegisterRes } from 'server/api/registerRouter'
+import { apiUrl } from 'server/apiUrls'
 
 interface TProps {
   e: FormEvent
@@ -28,7 +29,7 @@ export const useRegister = (): TResponse => {
     const options = { method, headers, body }
     try {
       setHttpStatus('loading')
-      const res = await fetch('/api/register', options)
+      const res = await fetch(apiUrl.register, options)
       const data = await res.json() as TRegisterRes
       const { status, message } = data
       if (status === 'error') {

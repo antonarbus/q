@@ -3,6 +3,7 @@ import axios from 'axios'
 import { store } from 'client/app/store'
 import { token } from './token'
 import { forgetLoggedUser, rememberLoggedUser } from 'client/entities/user'
+import { apiUrl } from 'server/apiUrls'
 
 export const axiosWithAuth = axios.create({ withCredentials: true })
 
@@ -25,7 +26,7 @@ axiosWithAuth.interceptors.response.use(
       try {
         originalRequest._isRetry = true
 
-        const response = await axios.get('/api/refresh', {
+        const response = await axios.get(apiUrl.refresh, {
           withCredentials: true,
         })
 

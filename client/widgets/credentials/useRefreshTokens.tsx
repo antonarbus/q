@@ -9,6 +9,7 @@ import { token } from '../../shared/auth/token'
 import { forgetLoggedUser, rememberLoggedUser } from 'client/entities/user'
 import type { TJwtPayload } from 'server/services/jwt'
 import type { TRefreshAipRes } from 'server/api/refreshRouter'
+import { apiUrl } from 'server/apiUrls'
 
 interface Props {
   withLoadingState?: boolean
@@ -51,7 +52,7 @@ export const useRefreshTokens = ({ withLoadingState }: Props): TRes => {
           }
         }
 
-        const response = await axios.get<TRefreshAipRes>('/api/refresh', {
+        const response = await axios.get<TRefreshAipRes>(apiUrl.refresh, {
           withCredentials: true,
         })
         const { status, accessJwtToken, roles } = response.data
