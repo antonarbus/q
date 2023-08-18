@@ -44,7 +44,7 @@ loginRouter.post('/', async (req: ReqType, res: ResType, next: NextType) => {
       res.json({
         status: 'error',
         message: 'invalid credentials',
-        accessJwtToken: 'no token',
+        accessJwtToken: 'no access token',
         email: 'no email',
         roles: ['no role'],
       })
@@ -57,7 +57,7 @@ loginRouter.post('/', async (req: ReqType, res: ResType, next: NextType) => {
       res.json({
         status: 'error',
         message: 'account is not activated',
-        accessJwtToken: 'no token',
+        accessJwtToken: 'no access token',
         email: 'no email',
         roles: ['no role'],
       })
