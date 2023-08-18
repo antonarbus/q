@@ -22,8 +22,6 @@ const getPastePlace = ({ item, e }: IProps): ICopyPlace => {
   return { pastePos: 'middle', itemId: item.id }
 }
 
-// todo: do not insert "paste here" when we move cursor over action icons
-
 const movePasteTextAfterCursor = (e: MouseEvent): void => {
   const prevPlace = store.getState().copy.place
   const isPasteTextShown = store.getState().copy.isPasteTextShown
@@ -46,6 +44,14 @@ const movePasteTextAfterCursor = (e: MouseEvent): void => {
 
   if (!actionsContainer && !isPasteTextShown) {
     store.dispatch(showPasteText())
+    return
+  }
+
+  const isPastable = store.getState().copy.isPastable
+
+  if (!isPastable) {
+    store.dispatch(hidePasteText())
+    store.dispatch(removePasteItem())
     return
   }
 

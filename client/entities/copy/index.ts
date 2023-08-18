@@ -10,5 +10,7 @@ export {
   hidePasteText,
   enterIntoCopyMode,
   exitFromCopyMode,
+  allowToPaste,
+  forbidToPaste,
 } from './model/copySlice'
 export { exitCopyMode } from './model/exitCopyMode'

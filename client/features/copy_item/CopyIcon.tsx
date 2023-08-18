@@ -3,7 +3,7 @@ import { store } from 'client/shared/clients'
 import { MdCopyAll } from 'react-icons/md'
 import { motion } from 'framer-motion'
 import { cleanHtml } from 'client/shared/lib/itemsUtils'
-import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/entities/copy'
+import { addItemIntoCopyContainer, allowToPaste, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/entities/copy'
 import { saveItemHeightByIndex } from 'client/entities/items'
 import type { MouseEvent } from 'react'
 import { className } from 'client/shared/className'
@@ -43,6 +43,7 @@ export const CopyIcon = ({ index }: IProps): JSX.Element => {
         const item = { ...itemToCopy, previewHtml: cleanedHtml }
 
         dispatch(addItemIntoCopyContainer(item))
+        dispatch(allowToPaste())
 
         const isCopyContainer = store.getState().copy.isCopyContainer
         if (!isCopyContainer) {
