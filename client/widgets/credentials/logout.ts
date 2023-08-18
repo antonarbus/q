@@ -4,12 +4,13 @@ import { navUpdate } from './navUpdate'
 import { token } from '../../shared/auth/token'
 import { forgetLoggedUser } from 'client/entities/user'
 import type { TLogoutApiRes } from 'server/api/logoutRouter'
+import { apiUrl } from 'server/apiUrls'
 
 export const logoutUser = async (): Promise<void> => {
   const method = 'GET'
   const options = { method }
   try {
-    const res = await fetch('/api/logout', options)
+    const res = await fetch(apiUrl.logout, options)
     const data = await res.json() as TLogoutApiRes
     const { status, message, email } = data
 

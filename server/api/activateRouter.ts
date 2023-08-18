@@ -1,21 +1,25 @@
 import express from 'express'
 import { UserModel } from '../db/models/user.model'
 import type { TNext, TReq, TRes } from '../types'
+import { apiUrl } from '../apiUrls'
 const domain = process.env.DOMAIN
 const port = process.env.PORT_FRONT_END
 
 export const activateRouter = express.Router()
+
 activateRouter.get(
   '/:link',
   async (req: TReq, res: TRes, next: TNext) => {
     try {
-      const activationLink = `${domain}:${port}/api/activate/${req.params.link}`
+      const activationLink = `${domain}:${port}${apiUrl.activate}/${req.params.link}`
       const user = await UserModel.findOne({ activationLink })
-      if (!user)
-        return res.json({
+      if (!user) {
+        res.json({
           status: 'error',
           message: 'no account with such activation link',
         })
+        return
+      }
       user.isActivated = true
       await user.save()
       res.redirect(`${domain}:${port}/login`)

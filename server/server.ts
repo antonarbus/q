@@ -15,6 +15,7 @@ import { errorHandlerMiddleware } from './middleware/errorHandlerMiddleware'
 import { usersRouter } from './api/usersRouter'
 import { hiRouter } from './api/hiRouter'
 import type { TReq, TRes } from './types'
+import { apiUrl } from './apiUrls'
 
 void (async (): Promise<void> => {
   const app = express()
@@ -24,19 +25,17 @@ void (async (): Promise<void> => {
   app.use(express.json()) // parses incoming requests with JSON because we use lots of json, let it be default
   app.use(cookieParser())
   app.use(cors())
-  app.get('/', (_req: TReq, res: TRes) =>
-    res.send('This is from express.js'),
-  )
-  app.get('/api', (req: ReqType, res: ResType) => res.json({ message: '/api' }))
 
-  app.use('/api/hi', hiRouter)
-  app.use('/api/register', registerRouter)
-  app.use('/api/login', loginRouter)
-  app.use('/api/logout', logoutRouter)
-  app.use('/api/activate', activateRouter)
-  app.use('/api/refresh', refreshRouter)
-  app.use('/api/users', usersRouter)
-  app.use('/api/user', userEmailRouter)
+  app.get(apiUrl.root, (_req: TReq, res: TRes) => res.send('This is from express.js'))
+  app.get(apiUrl.api, (_req: ReqType, res: ResType) => res.json({ message: '/api' }))
+  app.use(apiUrl.hi, hiRouter)
+  app.use(apiUrl.register, registerRouter)
+  app.use(apiUrl.login, loginRouter)
+  app.use(apiUrl.logout, logoutRouter)
+  app.use(apiUrl.activate, activateRouter)
+  app.use(apiUrl.refresh, refreshRouter)
+  app.use(apiUrl.users, usersRouter)
+  app.use(apiUrl.user, userEmailRouter)
 
   app.use(errorHandlerMiddleware)
 

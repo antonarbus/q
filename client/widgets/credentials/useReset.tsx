@@ -5,6 +5,7 @@ import type { Dispatch, FormEvent, SetStateAction } from 'react'
 import { useState } from 'react'
 import { token } from '../../shared/auth/token'
 import type { HttpStatusType } from './types'
+import { apiUrl } from 'server/apiUrls'
 
 interface Props {
   e: FormEvent
@@ -29,7 +30,7 @@ export const useReset = (): IReturn => {
     const options = { method, headers, body }
     try {
       // todo: create a /reset api
-      const res = await fetch('/api/reset', options)
+      const res = await fetch(apiUrl.reset, options)
       const data = await res.json()
       if (data.status === 'error') {
         setHttpStatus('error')
