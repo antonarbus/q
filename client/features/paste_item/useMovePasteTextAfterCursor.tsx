@@ -64,8 +64,8 @@ const movePasteTextAfterCursor = (e: MouseEvent): void => {
 
   if (isEqual(pastePlace, prevPlace)) return
 
-  store.dispatch(showPasteText())
   store.dispatch(updatePastePos(pastePlace))
+  store.dispatch(showPasteText())
   store.dispatch(insertPasteItem(pastePlace))
 }
 
