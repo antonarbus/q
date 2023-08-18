@@ -1,10 +1,11 @@
-import { useSelectorTyped } from 'client/shared/hooks'
+import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
 import { onItemDrag } from 'client/features/drag_item'
 import { TextItem } from './TextItem'
 import { PasteItem } from './PasteItem'
 import { AnimatePresence } from 'framer-motion'
 import { DraggableItemsContainer } from './DraggableItemsContainer'
 import type { TItem } from 'client/shared/types'
+import { allowToPaste, showPasteText } from 'client/entities/copy'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type EqualityFn = (a: any, b: any) => boolean
@@ -21,6 +22,7 @@ const equalityFn: EqualityFn = (prevItems: TItem[], currentItems: TItem[]): bool
 export const Items = (): JSX.Element => {
   const items = useSelectorTyped(state => state.items, equalityFn)
   const shouldReRender = useSelectorTyped(state => state.offer.toggleOffer)
+  const dispatch = useDispatchTyped()
 
   return (
     <DraggableItemsContainer
@@ -31,7 +33,13 @@ export const Items = (): JSX.Element => {
         onItemDrag.end({ oldIndex, newIndex })
       }}
     >
-      <AnimatePresence initial={false}>
+      <AnimatePresence
+        initial={false}
+        onExitComplete={(): void => {
+          console.log('onExitComplete, no props there')
+          dispatch(allowToPaste())
+        }}
+      >
         {items.map((item, index) => {
           const key = item.id + shouldReRender.toString()
 

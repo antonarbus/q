@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import { deleteItem, saveItemHeight, saveItemHeightByIndex, selectIsItemAlone } from 'client/entities/items'
 import { cleanHtml } from 'client/shared/lib/itemsUtils'
 import { saveItemsLocally } from 'client/shared/lib'
-import { addItemIntoCopyContainer, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/entities/copy'
+import { addItemIntoCopyContainer, allowToPaste, forbidToPaste, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/entities/copy'
 import type { MouseEvent } from 'react'
 import { className } from 'client/shared/className'
 
@@ -48,6 +48,7 @@ export const CutIcon = ({ index }: IProps): JSX.Element => {
 
         dispatch(addItemIntoCopyContainer(item))
         dispatch(deleteItem({ itemId: item.id }))
+        dispatch(forbidToPaste())
 
         const isCopyContainer = store.getState().copy.isCopyContainer
         if (!isCopyContainer) {

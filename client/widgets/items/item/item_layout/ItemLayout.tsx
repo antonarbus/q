@@ -30,6 +30,10 @@ export const ItemLayout: ComponentClass<ISortableItem> =
   }: IProps) => {
     const itemRef = useRef<HTMLDivElement>(null)
 
+    // todo: do not show paste text during the animation, probably it will fix the copy container strange behavior
+    // dispatch(hidePasteText())
+    // dispatch(showPasteText())
+
     return (
       <motion.div
         ref={itemRef}
@@ -69,6 +73,12 @@ export const ItemLayout: ComponentClass<ISortableItem> =
           maxWidth: '100%',
           width: '100%',
         }}
+      // onAnimationStart={(params): void => {
+      //   console.log('onAnimationStart params', params)
+      // }}
+      // onAnimationComplete={(params): void => {
+      //   console.log('onAnimationComplete params', params)
+      // }}
       >
         <ActionsContainer itemActionElements={itemActionElements} />
         <ResizablePaper itemWidth={itemWidth} index={i} >

@@ -6,6 +6,7 @@ import { gsap } from 'gsap'
 import { useRef } from 'react'
 import { saveItemsLocally } from 'client/shared/lib'
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
+import { forbidToPaste } from 'client/entities/copy'
 
 interface IProps {
   index: number
@@ -29,6 +30,7 @@ export const DeleteIcon = ({ index }: IProps): EmotionJSX.Element => {
         const item = store.getState().items[index]
         if (!item) return
         dispatch(deleteItem({ itemId: item.id }))
+        dispatch(forbidToPaste())
         saveItemsLocally()
       }}
       onMouseOver={(): void => {

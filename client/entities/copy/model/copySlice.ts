@@ -10,6 +10,7 @@ interface IProps {
   place: ICopyPlace
   isCopying: boolean
   isPasteTextShown: boolean
+  isPastable: boolean
 }
 
 const initialState: IProps = {
@@ -20,6 +21,7 @@ const initialState: IProps = {
   place: { pastePos: 'middle', itemId: 'some id' },
   isCopying: false,
   isPasteTextShown: false,
+  isPastable: false,
 }
 
 export const copySlice = createSlice({
@@ -61,6 +63,12 @@ export const copySlice = createSlice({
     hidePasteText: (state) => {
       state.isPasteTextShown = false
     },
+    allowToPaste: (state) => {
+      state.isPastable = true
+    },
+    forbidToPaste: (state) => {
+      state.isPastable = false
+    },
   },
 })
 
@@ -75,5 +83,7 @@ export const {
   hidePasteText,
   enterIntoCopyMode,
   exitFromCopyMode,
+  allowToPaste,
+  forbidToPaste,
 } = copySlice.actions
 export const copyReducer = copySlice.reducer
