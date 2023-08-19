@@ -1,4 +1,4 @@
-import { useDispatchTyped } from 'client/shared/hooks'
+import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
 import { store } from 'client/shared/clients'
 import { MdCopyAll } from 'react-icons/md'
 import { motion } from 'framer-motion'
@@ -15,16 +15,24 @@ interface IProps {
 export const CopyIcon = ({ index }: IProps): JSX.Element => {
   const dispatch = useDispatchTyped()
 
+  const isCopyable = useSelectorTyped(state => state.copy.isCopyable)
+  const disabled = !isCopyable
+
   return (
     <motion.span
-      whileHover={{ scale: 1.3 }}
+      whileHover={{
+        scale: disabled ? 1 : 1.3,
+      }}
       whileTap={{ scale: 1 }}
       css={{
-        cursor: 'pointer',
         position: 'relative',
         top: 1,
+        cursor: disabled ? 'default' : 'pointer',
+        color: disabled ? '#acacac' : '#000',
       }}
       onClick={(e: MouseEvent): void => {
+        if (disabled) return
+
         saveItemHeightByIndex({ index })
 
         const itemToCopy = store.getState().items[index]

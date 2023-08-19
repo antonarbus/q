@@ -5,7 +5,7 @@ import { PasteItem } from './PasteItem'
 import { AnimatePresence } from 'framer-motion'
 import { DraggableItemsContainer } from './DraggableItemsContainer'
 import type { TItem } from 'client/shared/types'
-import { allowToPaste } from 'client/entities/copy'
+import { allowToCopy, allowToCut, allowToDelete, allowToPaste } from 'client/entities/copy'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type EqualityFn = (a: any, b: any) => boolean
@@ -36,7 +36,11 @@ export const Items = (): JSX.Element => {
       <AnimatePresence
         initial={false}
         onExitComplete={(): void => {
+          console.log('animation completed')
           dispatch(allowToPaste())
+          dispatch(allowToCopy())
+          dispatch(allowToCut())
+          dispatch(allowToDelete())
         }}
       >
         {items.map((item, index) => {
