@@ -20,8 +20,6 @@ export const StaticHtml = ({
   editorRef,
   heightDuringAnimationRef,
 }: Props): JSX.Element => {
-
-
   const ref = useRef<HTMLDivElement>()
   const html = useRef(initHtmlGetter())
 
@@ -50,7 +48,7 @@ export const StaticHtml = ({
       sx={{
         wordBreak: 'break-word',
         '& .fr-element:hover:not(:focus)': {
-          textShadow: '0px 0px 0.8px',
+          // textShadow: '0px 0px 0.8px',
         },
         ...additionalStyle,
       }}
