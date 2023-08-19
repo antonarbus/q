@@ -11,6 +11,9 @@ interface IProps {
   isCopying: boolean
   isPasteTextShown: boolean
   isPastable: boolean
+  isCopyable: boolean
+  isCuttable: boolean
+  isDeletable: boolean
 }
 
 const initialState: IProps = {
@@ -22,6 +25,9 @@ const initialState: IProps = {
   isCopying: false,
   isPasteTextShown: false,
   isPastable: false,
+  isCopyable: true,
+  isCuttable: true,
+  isDeletable: true,
 }
 
 export const copySlice = createSlice({
@@ -69,6 +75,24 @@ export const copySlice = createSlice({
     forbidToPaste: (state) => {
       state.isPastable = false
     },
+    allowToCopy: (state) => {
+      state.isCopyable = true
+    },
+    forbidToCopy: (state) => {
+      state.isCopyable = false
+    },
+    allowToCut: (state) => {
+      state.isCuttable = true
+    },
+    forbidToCut: (state) => {
+      state.isCuttable = false
+    },
+    allowToDelete: (state) => {
+      state.isDeletable = true
+    },
+    forbidToDelete: (state) => {
+      state.isDeletable = false
+    },
   },
 })
 
@@ -85,5 +109,11 @@ export const {
   exitFromCopyMode,
   allowToPaste,
   forbidToPaste,
+  allowToCopy,
+  forbidToCopy,
+  allowToCut,
+  forbidToCut,
+  allowToDelete,
+  forbidToDelete,
 } = copySlice.actions
 export const copyReducer = copySlice.reducer

@@ -12,5 +12,12 @@ export {
   exitFromCopyMode,
   allowToPaste,
   forbidToPaste,
+
+  allowToCopy,
+  forbidToCopy,
+  allowToCut,
+  forbidToCut,
+  allowToDelete,
+  forbidToDelete,
 } from './model/copySlice'
 export { exitCopyMode } from './model/exitCopyMode'

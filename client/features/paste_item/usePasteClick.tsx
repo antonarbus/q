@@ -1,7 +1,7 @@
 import { useEffectOnce, useUnmount } from 'react-use'
 import { store } from 'client/app/store'
 import { cleanItem } from 'client/shared/lib/itemsUtils'
-import { exitCopyMode, forbidToPaste, hideCopyContainer, hidePasteText, removeItemFromCopyContainer } from 'client/entities/copy'
+import { exitCopyMode, forbidToCopy, forbidToCut, forbidToDelete, forbidToPaste, hideCopyContainer, hidePasteText, removeItemFromCopyContainer } from 'client/entities/copy'
 import { pasteItem, removePasteItem } from 'client/entities/items'
 import { saveItemsLocally } from 'client/shared/lib'
 
@@ -18,6 +18,9 @@ const pasteItemOnClick = (): void => {
   store.dispatch(removeItemFromCopyContainer())
   store.dispatch(pasteItem({ itemId, pastePos, item: cleanedItem }))
   store.dispatch(forbidToPaste())
+  store.dispatch(forbidToCopy())
+  store.dispatch(forbidToCut())
+  store.dispatch(forbidToDelete())
   saveItemsLocally()
   const itemsInCopyContainer = store.getState().copy.items
   if (itemsInCopyContainer.length === 0) {

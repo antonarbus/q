@@ -60,47 +60,47 @@ declare module '@mui/material/styles' {
     // from mui
     palette: {
       primary: {
-        main: '#757575'
+        main: string
       }
     }
     typography: {
       button: {
-        textTransform: 'none'
+        textTransform: string
       }
     }
     // from customTheme
     colors: {
-      grey: '#5a5a5a'
-      red: '#ee6666'
-      topMenuItem: '#858383'
-      darkBackground: 'rgb(52 52 52 / 95%)'
-      greyFont: '#bcbcbc'
+      grey: string
+      red: string
+      topMenuItem: string
+      darkBackground: string
+      greyFont: string
     }
     nav: {
-      height: 60
-      marginTop: 10
-      marginBottom: 0
+      height: number
+      marginTop: number
+      marginBottom: number
       fullHeight: number
     }
     menu: {
-      width: 300
-      paddingTop: 16
-      paddingBottom: 16
+      width: number
+      paddingTop: number
+      paddingBottom: number
       menuItem: {
-        height: 50
+        height: number
       }
       navItem: {
-        marginLeft: 10
-        marginRight: 10
+        marginLeft: number
+        marginRight: number
       }
     }
     item: {
-      padding: 20
-      animationDuration: 0.5
+      padding: number
+      animationDuration: number
     }
     copy: {
-      pasteTextColor: '#6c6c6c'
-      animationDuration: 0.5
+      pasteTextColor: string
+      animationDuration: number
     }
   }
 }
