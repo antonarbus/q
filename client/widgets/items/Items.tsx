@@ -35,13 +35,8 @@ export const Items = (): JSX.Element => {
     >
       <AnimatePresence
         initial={false}
-        onExitComplete={(): void => {
-          console.log('animation completed')
-          dispatch(allowToPaste())
-          dispatch(allowToCopy())
-          dispatch(allowToCut())
-          dispatch(allowToDelete())
-        }}
+      // onExitComplete={(): void => {
+      // }}
       >
         {items.map((item, index) => {
           const key = item.id + shouldReRender.toString()

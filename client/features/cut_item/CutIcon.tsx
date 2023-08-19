@@ -2,12 +2,13 @@ import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
 import { store } from 'client/shared/clients'
 import { TbCut } from 'react-icons/tb'
 import { motion } from 'framer-motion'
-import { deleteItem, saveItemHeight, saveItemHeightByIndex, selectIsItemAlone } from 'client/entities/items'
+import { deleteItem, saveItemHeightByIndex, selectIsItemAlone } from 'client/entities/items'
 import { cleanHtml } from 'client/shared/lib/itemsUtils'
 import { saveItemsLocally } from 'client/shared/lib'
-import { addItemIntoCopyContainer, allowToPaste, forbidToCopy, forbidToCut, forbidToDelete, forbidToPaste, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/entities/copy'
+import { addItemIntoCopyContainer, allowToCopy, allowToCut, allowToDelete, allowToPaste, forbidToCopy, forbidToCut, forbidToDelete, forbidToPaste, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/entities/copy'
 import type { MouseEvent } from 'react'
 import { className } from 'client/shared/className'
+import { theme } from 'client/shared/clients'
 
 interface IProps {
   index: number
@@ -52,15 +53,22 @@ export const CutIcon = ({ index }: IProps): JSX.Element => {
         dispatch(addItemIntoCopyContainer(item))
         dispatch(deleteItem({ itemId: item.id }))
         dispatch(forbidToPaste())
-        store.dispatch(forbidToCopy())
-        store.dispatch(forbidToCut())
-        store.dispatch(forbidToDelete())
+        dispatch(forbidToCopy())
+        dispatch(forbidToCut())
+        dispatch(forbidToDelete())
 
         const isCopyContainer = store.getState().copy.isCopyContainer
         if (!isCopyContainer) {
           dispatch(saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
           dispatch(showCopyContainer())
         }
+
+        setTimeout(() => {
+          dispatch(allowToPaste())
+          dispatch(allowToCopy())
+          dispatch(allowToCut())
+          dispatch(allowToDelete())
+        }, 1000 * theme.item.animationDuration)
 
         saveItemsLocally()
       }}

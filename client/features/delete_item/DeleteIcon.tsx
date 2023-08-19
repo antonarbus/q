@@ -1,12 +1,12 @@
 import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
-import { store } from 'client/shared/clients'
+import { store, theme } from 'client/shared/clients'
 import { RxCross2 } from 'react-icons/rx'
 import { deleteItem, selectIsItemAlone } from 'client/entities/items'
 import { gsap } from 'gsap'
 import { useRef } from 'react'
 import { saveItemsLocally } from 'client/shared/lib'
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
-import { forbidToCopy, forbidToCut, forbidToDelete, forbidToPaste } from 'client/entities/copy'
+import { allowToCopy, allowToCut, allowToDelete, allowToPaste, forbidToCopy, forbidToCut, forbidToDelete, forbidToPaste } from 'client/entities/copy'
 
 interface IProps {
   index: number
@@ -37,10 +37,17 @@ export const DeleteIcon = ({ index }: IProps): EmotionJSX.Element => {
 
         dispatch(deleteItem({ itemId: item.id }))
         dispatch(forbidToPaste())
-        store.dispatch(forbidToCopy())
-        store.dispatch(forbidToCut())
-        store.dispatch(forbidToDelete())
+        dispatch(forbidToCopy())
+        dispatch(forbidToCut())
+        dispatch(forbidToDelete())
         saveItemsLocally()
+
+        setTimeout(() => {
+          dispatch(allowToPaste())
+          dispatch(allowToCopy())
+          dispatch(allowToCut())
+          dispatch(allowToDelete())
+        }, 1000 * theme.item.animationDuration)
       }}
       onMouseOver={(): void => {
         gsap.to(ref.current, {
