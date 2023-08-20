@@ -1,15 +1,15 @@
 import type { MutableRefObject } from 'react'
 import { useEffect, useRef } from 'react'
 
-interface IProps {
+interface Props {
   froalaElementRef: MutableRefObject<HTMLElement | null>
 }
 
-interface IReturn {
+interface ReturnFunc {
   heightDuringAnimationRef: MutableRefObject<number>
 }
 
-export const useFixedHeightForAnimation = ({ froalaElementRef }: IProps): IReturn => {
+export const useFixedHeightForAnimation = ({ froalaElementRef }: Props): ReturnFunc => {
   const heightDuringAnimationRef = useRef<number>(0)
 
   useEffect(() => {

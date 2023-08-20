@@ -1,10 +1,10 @@
-import type { Request as ReqType, Response as ResType, NextFunction as NextType } from 'express'
 import express from 'express'
 import { UserModel } from '../db/models/user.model'
 import bcrypt from 'bcryptjs'
 import { refreshJwtTokenExpirationSeconds, token } from '../services/jwt'
+import type { Next, Req, Res } from '../types'
 
-export interface TLoginApiRes {
+export interface LoginApiRes {
   status: string
   message: string
   accessJwtToken: string
@@ -14,16 +14,16 @@ export interface TLoginApiRes {
 
 export const loginRouter = express.Router()
 
-loginRouter.post('/', async (req: ReqType, res: ResType, next: NextType) => {
+loginRouter.post('/', async (req: Req, res: Res, next: Next) => {
   try {
     // get mail & password from body
-    interface IBody {
+    interface Body {
       email: string
       password: string
     }
 
-    const password = (req.body as IBody).password
-    let email = (req.body as IBody).email
+    const password = (req.body as Body).password
+    let email = (req.body as Body).email
     email = email.toLowerCase()
 
     // check email & password

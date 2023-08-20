@@ -1,17 +1,17 @@
-import type { TMenuItem } from 'client/entities/nav'
+import type { MenuItemTypes } from 'client/entities/nav'
 import { closeMenu, openMenuWithId, setNavItemRightPos } from 'client/entities/nav'
 import { store } from 'client/app/store'
-import type { MouseEvent } from 'react'
+import type { MouseEvent, MutableRefObject } from 'react'
 
-interface IProps {
+interface Props {
   e: MouseEvent
-  navItem: TMenuItem | undefined
+  navItem: MenuItemTypes | undefined
   id: string
-  navItemRef: React.MutableRefObject<HTMLLIElement>
+  navItemRef: MutableRefObject<HTMLLIElement>
   disabled: boolean
 }
 
-export const clickOnNavItem = ({ e, navItem, id, navItemRef, disabled }: IProps): void => {
+export const clickOnNavItem = ({ e, navItem, id, navItemRef, disabled }: Props): void => {
   (document.activeElement as HTMLElement).blur() // to prevent open an active navItem link on Enter key
 
   const link = navItem?.link

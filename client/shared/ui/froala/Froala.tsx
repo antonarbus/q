@@ -1,4 +1,4 @@
-import type { HtmlGetter, TOnFroalaContentChange } from 'client/shared/types'
+import type { HtmlGetter, OnFroalaContentChange } from 'client/shared/types'
 import type { SxProps } from '@mui/material'
 import type { MutableRefObject, RefObject } from 'react'
 import type FroalaEditor from 'froala-editor'
@@ -8,7 +8,7 @@ import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
 import { EditableHtml } from './EditableHtml'
 import { useViewPortObserver } from './useViewPortObserver'
 
-interface IProps {
+interface Props {
   index: number
   padding?: number | string
   initHtmlGetter: HtmlGetter
@@ -17,7 +17,7 @@ interface IProps {
   placeholder?: string
   additionalStyle?: SxProps
   rowIndex?: number
-  onContentChange: TOnFroalaContentChange
+  onContentChange: OnFroalaContentChange
 }
 
 export const Froala = ({
@@ -30,7 +30,7 @@ export const Froala = ({
   placeholder,
   rowIndex,
   onContentChange,
-}: IProps): JSX.Element => {
+}: Props): JSX.Element => {
   const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
   const { heightDuringAnimationRef } = useFixedHeightForAnimation({ froalaElementRef })
   const { observerRef, isInsideViewPort } = useViewPortObserver({ index })

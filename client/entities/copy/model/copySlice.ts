@@ -1,13 +1,13 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
-import type { ICopyPlace, TCopyItem } from 'client/shared/types'
+import type { CopyPlace, CopyItem } from 'client/shared/types'
 
-interface IProps {
+interface Props {
   isCopyMode: boolean
   isCopyContainer: boolean
   initCords: { x: number; y: number }
-  items: TCopyItem[]
-  place: ICopyPlace
+  items: CopyItem[]
+  place: CopyPlace
   isCopying: boolean
   isPasteTextShown: boolean
   isPastable: boolean
@@ -16,7 +16,7 @@ interface IProps {
   isDeletable: boolean
 }
 
-const initialState: IProps = {
+const initialState: Props = {
   isCopyMode: false, // should tell froala & ag-grid to initialize with some delay after animation end, otherwise elements height jumps
   isCopyContainer: false,
   initCords: { x: 0, y: 0 },
@@ -49,7 +49,7 @@ export const copySlice = createSlice({
       const coords = action.payload
       state.initCords = coords
     },
-    addItemIntoCopyContainer: (state, action: PayloadAction<TCopyItem>) => {
+    addItemIntoCopyContainer: (state, action: PayloadAction<CopyItem>) => {
       state.isCopying = true
       const item = action.payload
       state.items.unshift(item)
@@ -59,7 +59,7 @@ export const copySlice = createSlice({
       state.isCopying = false
       state.place = initialState.place
     },
-    updatePastePos: (state, action: PayloadAction<ICopyPlace>) => {
+    updatePastePos: (state, action: PayloadAction<CopyPlace>) => {
       const itemIdAndWhereToPlace = action.payload
       state.place = itemIdAndWhereToPlace
     },

@@ -1,13 +1,13 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
 
-interface IProps {
+interface Props {
   email: string | null
   isLogged: boolean
   roles: string[]
 }
 
-const initialState: IProps = {
+const initialState: Props = {
   email: null,
   isLogged: false,
   roles: ['no role'],
@@ -17,7 +17,7 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    rememberLoggedUser: (state, action: PayloadAction<IProps>) => {
+    rememberLoggedUser: (state, action: PayloadAction<Props>) => {
       const { email, isLogged, roles } = action.payload
       return { ...state, email, isLogged, roles }
     },

@@ -1,6 +1,6 @@
-import type { TItem } from '../types'
+import type { Item } from '../types'
 
-export const cleanItem = (item: TItem): TItem => {
+export const cleanItem = (item: Item): Item => {
   const modifiableItem = structuredClone(item)
   modifiableItem.msg = ''
   return modifiableItem

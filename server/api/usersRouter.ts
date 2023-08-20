@@ -1,14 +1,15 @@
-import express, { Request as ReqType } from 'express'
+import { Router } from 'express'
 import { UserModel } from '../db/models/user.model'
 import { verifyTokenMiddleware } from '../middleware/verifyTokenMiddleware'
-import type { TNext, TRes } from '../types'
+import type { Next, Res } from '../types'
 
 // todo: delete, it is temp file not related to the project
-export const usersRouter = express.Router()
+export const usersRouter = Router()
+
 usersRouter.get(
   '/',
   verifyTokenMiddleware,
-  async (_req, res: TRes, next: TNext) => {
+  async (_req, res: Res, next: Next) => {
     try {
       const users = await UserModel.find()
       res.json({ status: 'ok', message: 'all users', users })

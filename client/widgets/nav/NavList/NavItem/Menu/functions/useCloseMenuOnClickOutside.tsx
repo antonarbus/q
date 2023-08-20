@@ -33,8 +33,9 @@ export const useCloseMenuOnClickOutside = ({ menuContainerRef }: Props): void =>
     }
   }
 
-  type TReturn = () => void
-  const hideMenuOnClickOutside = (): TReturn => {
+  type FuncReturn = () => void
+
+  const hideMenuOnClickOutside = (): FuncReturn => {
     document.addEventListener('mousedown', mouseDownHandler)
     return () => {
       document.removeEventListener('mousedown', mouseDownHandler)

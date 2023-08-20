@@ -1,27 +1,27 @@
 import { UserModel } from '../db/models/user.model'
 import jwt_decode from 'jwt-decode'
-import type { TNext, TReq, TRes } from '../types'
+import type { Next, Req, Res } from '../types'
 import { Router } from 'express'
-import type { TJwtPayload } from '../services/jwt'
+import type { JwtPayloadExtended } from '../services/jwt'
 
 export const logoutRouter = Router()
 
-interface TReqWithCookies {
+interface ReqWithCookies {
   cookies: {
     refreshJwtToken: string | undefined
   }
 }
 
-export interface TLogoutApiRes {
+export interface LogoutApiRes {
   status: string
   message: string
   email?: string
 }
 
-logoutRouter.get('/', async (req: TReq, res: TRes, next: TNext) => {
+logoutRouter.get('/', async (req: Req, res: Res, next: Next) => {
   try {
 
-    const refreshJwtToken = (req as TReqWithCookies).cookies.refreshJwtToken
+    const refreshJwtToken = (req as ReqWithCookies).cookies.refreshJwtToken
 
     if (!refreshJwtToken) {
       res.json({ status: 'error', message: 'no refresh token in cookies' })
@@ -29,7 +29,7 @@ logoutRouter.get('/', async (req: TReq, res: TRes, next: TNext) => {
     }
 
     // get email from refresh token
-    const { email } = jwt_decode<TJwtPayload>(refreshJwtToken)
+    const { email } = jwt_decode<JwtPayloadExtended>(refreshJwtToken)
 
     if (!email) {
       res.json({

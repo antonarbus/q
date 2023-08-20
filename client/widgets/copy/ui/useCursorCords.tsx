@@ -2,12 +2,12 @@ import { useSelectorTyped } from 'client/shared/hooks'
 import { useState } from 'react'
 import { useEffectOnce } from 'react-use'
 
-interface IProps {
+interface Props {
   x: number;
   y: number;
 }
 
-export const useCursorCords = (): IProps => {
+export const useCursorCords = (): Props => {
   const initCords = useSelectorTyped(state => state.copy.initCords)
   const [cursorCords, setCursorCords] = useState(initCords)
 
@@ -15,9 +15,9 @@ export const useCursorCords = (): IProps => {
     setCursorCords({ x: e.x, y: e.y })
   }
 
-  type TReturn = () => void
+  type FuncReturn = () => void
 
-  const listenForMousemove = (): TReturn => {
+  const listenForMousemove = (): FuncReturn => {
     window.addEventListener('mousemove', followCursor)
     return () => {
       window.removeEventListener('mousemove', followCursor)

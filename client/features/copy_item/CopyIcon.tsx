@@ -8,11 +8,11 @@ import { saveItemHeightByIndex } from 'client/entities/items'
 import type { MouseEvent } from 'react'
 import { className } from 'client/shared/className'
 
-interface IProps {
+interface Props {
   index: number
 }
 
-export const CopyIcon = ({ index }: IProps): JSX.Element => {
+export const CopyIcon = ({ index }: Props): JSX.Element => {
   const dispatch = useDispatchTyped()
 
   const isCopyable = useSelectorTyped(state => state.copy.isCopyable)

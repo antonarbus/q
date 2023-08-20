@@ -3,13 +3,13 @@ import { store } from 'client/shared/clients'
 import { saveItemsLocally } from 'client/shared/lib'
 import type { ResizeCallback } from 're-resizable'
 
-interface IProps {
+interface Props {
   index: number
 }
 
-type TResize = ResizeCallback | undefined
+type FuncReturn = ResizeCallback | undefined
 
-export const onItemResizeStop = ({ index }: IProps): TResize => (e, direction, refToElement): void => {
+export const onItemResizeStop = ({ index }: Props): FuncReturn => (e, direction, refToElement): void => {
   const width = parseInt(refToElement.style.width)
   const prevItemWidth = store.getState().items[index]?.width
   if (width === prevItemWidth) return

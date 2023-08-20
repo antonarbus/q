@@ -6,14 +6,14 @@ import { theme } from 'client/shared/clients'
 import { ScaledCopyItem } from './ScaledCopyItem'
 import { useRef } from 'react'
 
-interface IProps {
+interface Props {
   isCopying: boolean
   firstItemHeight: number
   prevFirstItemHeight: number
 }
 
 const variants: Variants = {
-  initial: ({ isCopying, firstItemHeight }: IProps) => {
+  initial: ({ isCopying, firstItemHeight }: Props) => {
     if (isCopying) {
       return {
         y: -firstItemHeight,
@@ -21,7 +21,7 @@ const variants: Variants = {
     }
     return {}
   },
-  animate: ({ isCopying }: IProps) => {
+  animate: ({ isCopying }: Props) => {
     if (isCopying) {
       return {
         y: 0,
@@ -35,7 +35,7 @@ const variants: Variants = {
     }
     return {}
   },
-  exit: ({ isCopying, prevFirstItemHeight }: IProps) => {
+  exit: ({ isCopying, prevFirstItemHeight }: Props) => {
     if (!isCopying) {
       return {
         y: -prevFirstItemHeight,
@@ -62,7 +62,7 @@ export const RestOfCopiedItems = (): JSX.Element | null => {
   const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / firstItem.width
   const firstItemHeight = firstItem.height * scaleFactorForFirstItem + itemMarginBottom
 
-  const animationProps: IProps = {
+  const animationProps: Props = {
     isCopying,
     firstItemHeight,
     prevFirstItemHeight: prevFirstItemHeightRef.current,

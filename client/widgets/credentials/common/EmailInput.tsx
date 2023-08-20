@@ -19,7 +19,7 @@ interface Props {
   inputRef?: RefObject<HTMLDivElement>
 }
 
-interface ISuggestion {
+interface Suggestion {
   address: string;
   domain: string;
   full: string;
@@ -81,7 +81,7 @@ export const EmailInput = ({
   const suggestEmail = (emailVal?: string): void => {
     mailcheck.run({
       email: emailVal ?? email,
-      suggested: (suggestion: ISuggestion) => {
+      suggested: (suggestion: Suggestion) => {
         setEmailSuggestion(suggestion.full)
       },
       empty: () => {

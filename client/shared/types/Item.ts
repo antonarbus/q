@@ -1,4 +1,4 @@
-interface ICommon {
+interface Common {
   id: string
   width: number
   height: number
@@ -6,7 +6,7 @@ interface ICommon {
   // previewHtml: string
 }
 
-interface IBoqRow {
+interface BoqRow {
   id: string
   description: {
     html: string
@@ -25,7 +25,7 @@ interface IBoqRow {
   }
 }
 
-interface IBoqCols {
+interface BoqCols {
   description: {
     html: string
     width: number | undefined
@@ -44,7 +44,7 @@ interface IBoqCols {
   }
 }
 
-interface IBoqItem extends ICommon {
+interface BoqItem extends Common {
   type: 'boq'
   boq: {
     header: {
@@ -64,22 +64,22 @@ interface IBoqItem extends ICommon {
         }
       }
     }
-    column: IBoqCols
-    rows: IBoqRow[]
+    column: BoqCols
+    rows: BoqRow[]
   }
 }
 
-interface ITextItem extends ICommon {
+interface TextItem extends Common {
   type: 'text'
   text: {
     html: string
   }
 }
 
-export interface IPasteItem extends ICommon {
+export interface PasteItem extends Common {
   type: 'paste'
 }
 
-export type TItem = IBoqItem | IPasteItem | ITextItem
+export type Item = BoqItem | PasteItem | TextItem
 
 export type HtmlGetter = (props: { index: number, rowIndex?: number }) => string

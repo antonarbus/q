@@ -1,12 +1,12 @@
 import type { SxProps } from '@mui/material'
 import type { MutableRefObject, RefObject } from 'react'
-import type { TOnFroalaContentChange } from 'client/shared/types'
+import type { OnFroalaContentChange } from 'client/shared/types'
 import type FroalaEditor from 'froala-editor'
 import { Box } from '@mui/material'
 import { useStartFroala } from './useStartFroala'
 import { usePutCaretAtTheEndOfText } from './usePutCaretAtTheEndOfText'
 
-interface IProps {
+interface Props {
   index: number
   padding?: number | string
   initHtmlGetter: () => string
@@ -15,7 +15,7 @@ interface IProps {
   placeholder?: string
   additionalStyle?: SxProps
   rowIndex?: number
-  onContentChange: TOnFroalaContentChange
+  onContentChange: OnFroalaContentChange
   heightDuringAnimationRef: MutableRefObject<number | undefined>
 }
 
@@ -30,7 +30,7 @@ export const EditableHtml = ({
   rowIndex,
   onContentChange,
   heightDuringAnimationRef,
-}: IProps): JSX.Element => {
+}: Props): JSX.Element => {
   useStartFroala({
     editorRef,
     froalaElementRef,

@@ -10,11 +10,11 @@ import type { MouseEvent } from 'react'
 import { className } from 'client/shared/className'
 import { theme } from 'client/shared/clients'
 
-interface IProps {
+interface Props {
   index: number
 }
 
-export const CutIcon = ({ index }: IProps): JSX.Element => {
+export const CutIcon = ({ index }: Props): JSX.Element => {
   const dispatch = useDispatchTyped()
 
   const isItemAlone = useSelectorTyped(selectIsItemAlone)
@@ -51,7 +51,8 @@ export const CutIcon = ({ index }: IProps): JSX.Element => {
         const item = { ...itemToCut, previewHtml: cleanedHtml }
 
         dispatch(addItemIntoCopyContainer(item))
-        dispatch(deleteItem({ itemId: item.id }))
+        dispatch(deleteItem({ itemId: itemToCut.id }))
+
         dispatch(forbidToPaste())
         dispatch(forbidToCopy())
         dispatch(forbidToCut())

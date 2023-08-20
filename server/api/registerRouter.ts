@@ -4,17 +4,17 @@ import bcrypt from 'bcryptjs'
 import { v4 as uuidv4 } from 'uuid'
 import { sendMail } from '../services/mail/sendMail'
 import { body, validationResult } from 'express-validator'
-import type { TNext, TReq, TReqWithBody, TRes } from '../types'
+import type { Next, Req, ReqWithBody, Res } from '../types'
 import { apiUrl } from '../apiUrls'
 const domain = process.env.DOMAIN
 const port = process.env.PORT_FRONT_END
 
-export interface TRegisterReqBody {
+export interface RegisterReqBody {
   email: string
   password: string
 }
 
-export interface TRegisterRes {
+export interface RegisterRes {
   status: string
   message: string
   validationErrors?: string
@@ -26,7 +26,7 @@ registerRouter.post(
   '/',
   body('email').isEmail(),
   body('password').isLength({ min: 1 }),
-  async (req: TReqWithBody<TRegisterReqBody>, res: TRes, next: TNext) => {
+  async (req: ReqWithBody<RegisterReqBody>, res: Res, next: Next) => {
     try {
       // validation
       const validationErrors = validationResult(req)

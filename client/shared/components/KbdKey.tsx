@@ -1,11 +1,11 @@
 import { css } from '@emotion/react'
 import type { ReactNode } from 'react'
 
-interface IProps {
+interface Props {
   children: ReactNode
 }
 
-export const KbdKey = ({ children }: IProps): JSX.Element => {
+export const KbdKey = ({ children }: Props): JSX.Element => {
   return (
     <div
       css={css`

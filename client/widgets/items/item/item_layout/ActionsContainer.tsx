@@ -1,11 +1,11 @@
 import { className } from 'client/shared/className'
 import type { ReactNode } from 'react'
 
-interface IProps {
+interface Props {
   itemActionElements?: ReactNode
 }
 
-export const ActionsContainer = ({ itemActionElements }: IProps): JSX.Element => (
+export const ActionsContainer = ({ itemActionElements }: Props): JSX.Element => (
   <div
     className={className.actions}
     css={{

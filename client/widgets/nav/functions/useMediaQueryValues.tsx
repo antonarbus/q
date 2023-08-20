@@ -5,12 +5,12 @@ import { disableMedia, enableMedia, setNavMediaQueryWidths } from 'client/entiti
 import { calcNavMediaQueryParams } from './calcNavMediaQueryParams'
 import { useFirstMountState } from 'react-use'
 
-interface IProps {
+interface Props {
   navRef: RefObject<HTMLDivElement>
   logoRef: RefObject<HTMLDivElement>
 }
 
-export const useMediaQueryValues = ({ navRef, logoRef }: IProps): void => {
+export const useMediaQueryValues = ({ navRef, logoRef }: Props): void => {
   const dispatch = useDispatchTyped()
   const isFirstMount = useFirstMountState()
   const navStructure = useSelectorTyped((state) => state.nav.navStructure)

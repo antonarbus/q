@@ -1,9 +1,9 @@
-export type { IPasteItem } from './Item'
-export type { TItem } from './Item'
+export type { PasteItem } from './Item'
+export type { Item } from './Item'
 export type { HtmlGetter } from './Item'
 
-export type { TPastePos } from './Copy'
-export type { ICopyPlace } from './Copy'
-export type { TCopyItem } from './Copy'
+export type { PastePos } from './Copy'
+export type { CopyPlace } from './Copy'
+export type { CopyItem } from './Copy'
 
-export type { TOnFroalaContentChange } from './froala'
+export type { OnFroalaContentChange } from './froala'

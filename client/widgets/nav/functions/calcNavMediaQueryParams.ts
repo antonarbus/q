@@ -4,7 +4,7 @@ const shrinkElementSlightly = (el: HTMLElement): void => {
   el.style.width = el.offsetWidth - 10 + 'px'
 }
 
-export interface IItemsMediaQueryWidths {
+export interface ItemsMediaQueryWidths {
   logoExtension: number
   logoPart: number
   icon: number
@@ -12,33 +12,33 @@ export interface IItemsMediaQueryWidths {
   burger: number
 }
 
-export const calcNavMediaQueryParams = (nav: HTMLElement, logo: HTMLElement): IItemsMediaQueryWidths => {
-  interface IProps {
+export const calcNavMediaQueryParams = (nav: HTMLElement, logo: HTMLElement): ItemsMediaQueryWidths => {
+  interface Props {
     elsToHideClass?: string
     elsToShowClass?: string
   }
 
-  const calcNavWidthWhenLogoIsOverlay = ({
-    elsToHideClass,
-    elsToShowClass,
-  }: IProps = {},
-  ): number => {
+  const calcNavWidthWhenLogoIsOverlay = ({ elsToHideClass, elsToShowClass }: Props = {}): number => {
     if (elsToHideClass) {
       const elsToHideArr = Array.from(nav.querySelectorAll(elsToHideClass))
+
       elsToHideArr.forEach((el) => {
         if (!(el instanceof HTMLElement)) return
         el.style.display = 'none'
       })
+
       const elsToShowArr = Array.from(
         nav.querySelectorAll(
           elsToShowClass ?? 'non-existing-class-where-nothing-will-be-found',
         ),
       )
+
       elsToShowArr.forEach((el) => {
         if (!(el instanceof HTMLElement)) return
         el.style.display = ''
       })
     }
+
     let i = 0
     while (!isOverflown({ element: logo })) {
       shrinkElementSlightly(nav)

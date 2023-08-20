@@ -13,9 +13,9 @@ export const useExitCopyOnEsc = (): void => {
     exitCopyMode()
   }
 
-  type TReturn = () => void
+  type FuncReturn = () => void
 
-  const listenForEsc = (): TReturn => {
+  const listenForEsc = (): FuncReturn => {
     window.addEventListener('keydown', closeOnEsc)
     return (): void => {
       window.removeEventListener('keydown', closeOnEsc)

@@ -5,7 +5,7 @@ import { store } from 'client/shared/clients'
 import { saveItemsLocally } from 'client/shared/lib'
 import { enterIntoCopyMode } from 'client/entities/copy'
 
-interface IProps {
+interface Props {
   oldIndex: number
   newIndex: number
 }
@@ -15,7 +15,7 @@ const onItemDragStart = (): void => {
   store.dispatch(enterIntoCopyMode())
 }
 
-const onItemDragEnd = ({ oldIndex, newIndex }: IProps): void => {
+const onItemDragEnd = ({ oldIndex, newIndex }: Props): void => {
   // exitCopyMode({ delayed: true })
   // todo: why is it 'copyMode', not good name
   exitCopyMode()

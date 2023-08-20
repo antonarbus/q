@@ -12,13 +12,13 @@ interface Props {
   email: string
 }
 
-interface IReturn {
+interface ReturnFunc {
   resetPassword: ({ e, email }: Props) => Promise<void>;
   httpStatus: HttpStatusType;
   setHttpStatus: Dispatch<SetStateAction<HttpStatusType>>;
 }
 
-export const useReset = (): IReturn => {
+export const useReset = (): ReturnFunc => {
   const [httpStatus, setHttpStatus] = useState<HttpStatusType>('')
 
   const resetPassword = async ({ e, email }: Props): Promise<void> => {
