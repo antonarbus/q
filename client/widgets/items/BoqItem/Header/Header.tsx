@@ -6,6 +6,8 @@ interface Props {
   index: number
 }
 
+// todo: make HeaderLayout
+
 export const Header = ({ index }: Props): JSX.Element => {
   return (
     <div
