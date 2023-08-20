@@ -82,4 +82,4 @@ export interface IPasteItem extends ICommon {
 
 export type TItem = IBoqItem | IPasteItem | ITextItem
 
-export type THtmlGetter = (props: { index: number, rowIndex?: number }) => string
+export type HtmlGetter = (props: { index: number, rowIndex?: number }) => string

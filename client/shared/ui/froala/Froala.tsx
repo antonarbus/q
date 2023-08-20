@@ -1,4 +1,4 @@
-import type { THtmlGetter, TOnFroalaContentChange } from 'client/shared/types'
+import type { HtmlGetter, TOnFroalaContentChange } from 'client/shared/types'
 import type { SxProps } from '@mui/material'
 import type { MutableRefObject, RefObject } from 'react'
 import type FroalaEditor from 'froala-editor'
@@ -11,7 +11,7 @@ import { useViewPortObserver } from './useViewPortObserver'
 interface IProps {
   index: number
   padding?: number | string
-  initHtmlGetter: THtmlGetter
+  initHtmlGetter: HtmlGetter
   froalaElementRef: RefObject<HTMLDivElement>
   editorRef: MutableRefObject<FroalaEditor | null>
   placeholder?: string

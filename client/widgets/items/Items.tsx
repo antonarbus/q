@@ -6,6 +6,7 @@ import { AnimatePresence } from 'framer-motion'
 import { DraggableItemsContainer } from './DraggableItemsContainer'
 import type { TItem } from 'client/shared/types'
 import { allowToCopy, allowToCut, allowToDelete, allowToPaste } from 'client/entities/copy'
+import { BoqItem } from './BoqItem/BoqItem'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type EqualityFn = (a: any, b: any) => boolean
@@ -42,7 +43,7 @@ export const Items = (): JSX.Element => {
           const key = item.id + shouldReRender.toString()
 
           if (item.type === 'text') return <TextItem key={key} index={index} />
-          if (item.type === 'boq') return <div key={key}>boq</div>
+          if (item.type === 'boq') return <BoqItem key={key} index={index} />
           return <PasteItem key={key} />
         })}
       </AnimatePresence>
