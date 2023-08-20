@@ -1,7 +1,7 @@
 import { store } from 'client/shared/clients'
-import type { THtmlGetter } from 'client/shared/types'
+import type { HtmlGetter } from 'client/shared/types'
 
-export const itemTextHtmlGetter: THtmlGetter = ({ index, rowIndex }) => {
+export const itemTextHtmlGetter: HtmlGetter = ({ index, rowIndex }) => {
   const item = store.getState().items[index]
   if (!item) return ''
   if (item.type !== 'text') return ''
