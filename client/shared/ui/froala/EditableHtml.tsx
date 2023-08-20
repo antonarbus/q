@@ -52,9 +52,6 @@ export const EditableHtml = ({
       }}
       sx={{
         wordBreak: 'break-word',
-        '& .fr-element:hover:not(:focus)': {
-          // textShadow: '0px 0px 0.8px',
-        },
         ...additionalStyle,
       }}
     />
