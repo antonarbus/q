@@ -39,7 +39,12 @@ export const Froala = ({
   const showEditableHtml = !isCopyMode && isInsideViewPort
 
   return (
-    <div ref={observerRef}>
+    <div
+      ref={observerRef}
+      css={{
+        width: '100%',
+      }}
+    >
       {showStaticHtml && (
         <StaticHtml
           initHtmlGetter={initHtmlGetter.bind(null, { index, rowIndex })}

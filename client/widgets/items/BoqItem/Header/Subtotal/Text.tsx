@@ -1,6 +1,4 @@
-import { itemBoqHeaderSubtotalTextHtmlGetter, itemBoqHeaderTitleHtmlGetter } from 'client/entities/items'
-import { itemBoqColumnNameItemHtmlGetter } from 'client/entities/items/model/itemBoqColumnNameItemHtmlGetter'
-import { onBoqItemColumnNameChange } from 'client/features/on_boq_item_column_name_change'
+import { itemBoqHeaderSubtotalTextHtmlGetter } from 'client/entities/items'
 import { store } from 'client/shared/clients'
 import { Froala } from 'client/shared/ui/froala'
 import { useRef } from 'react'
