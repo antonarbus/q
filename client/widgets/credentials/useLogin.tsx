@@ -8,39 +8,37 @@ import { token } from '../../shared/auth/token'
 import type { HttpStatusType } from './types'
 import { rememberLoggedUser } from 'client/entities/user'
 import { slideElement } from 'client/shared/lib/slideElement'
-import type { TLoginApiRes } from 'server/api/loginRouter'
+import type { LoginApiRes } from 'server/api/loginRouter'
 import { apiUrl } from 'server/apiUrls'
 
-interface TState {
+interface StateProps {
   from?: {
     [key: string]: unknown
     pathname: string
   }
 }
 
-interface IProps {
+interface Props {
   e: FormEvent
   email: string
   password: string
   cardElement: HTMLElement
 }
 
-interface TResponse {
-  loginUser: ({ e, email, password, cardElement }: IProps) => Promise<void>;
+interface FuncRes {
+  loginUser: ({ e, email, password, cardElement }: Props) => Promise<void>;
   httpStatus: HttpStatusType;
   setHttpStatus: Dispatch<SetStateAction<HttpStatusType>>;
 }
 
-export const useLogin = (): TResponse => {
+export const useLogin = (): FuncRes => {
   const [httpStatus, setHttpStatus] = useState<HttpStatusType>('')
   const navigate = useNavigate()
   const location = useLocation()
-  const from = (location.state as TState | undefined)?.from?.pathname ?? '/'
+  const from = (location.state as StateProps | undefined)?.from?.pathname ?? '/'
   const dispatch = useDispatchTyped()
 
-
-
-  const loginUser = async ({ e, email, password, cardElement }: IProps): Promise<void> => {
+  const loginUser = async ({ e, email, password, cardElement }: Props): Promise<void> => {
     e.preventDefault()
     const method = 'POST'
     const headers = { 'Content-Type': 'application/json' }
@@ -49,7 +47,7 @@ export const useLogin = (): TResponse => {
     try {
       setHttpStatus('loading')
       const res = await fetch(apiUrl.login, options)
-      const data = await res.json() as TLoginApiRes
+      const data = await res.json() as LoginApiRes
       const { status, message, accessJwtToken, roles } = data
 
       if (status === 'error') {

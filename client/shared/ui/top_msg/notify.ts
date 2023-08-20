@@ -2,7 +2,7 @@
 import type { ReactNode } from 'react'
 import { toast, Slide, Bounce, Flip, Zoom } from 'react-toastify'
 
-interface IProps {
+interface Props {
   msg: ReactNode | string
   position?: 'bottom-center' | 'bottom-left' | 'bottom-right' | 'top-center' | 'top-left' | 'top-right'
   hideProgressBar?: boolean
@@ -24,7 +24,7 @@ export const notify = ({
   theme,
   transition,
   onClose,
-}: IProps): void => {
+}: Props): void => {
   const options = {
     position: position ?? 'top-right',
     autoClose: shouldStay ? false : (closeAfterMs ?? 5000),

@@ -1,11 +1,11 @@
-export interface IMenuItem {
+export interface MenuItemTypes {
   id: string
   name: string
   icon?: React.ReactNode | string
   link?: string
   func?: () => Promise<void> | void
   shortcut?: string[]
-  menuItems?: IMenuItem[]
+  menuItems?: MenuItemTypes[]
   isHidden: boolean
   disabled?: boolean
 }

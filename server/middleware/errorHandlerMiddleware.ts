@@ -1,7 +1,6 @@
-import type { Request as ReqType, Response as ResType, NextFunction as NextType } from 'express'
-import express from 'express'
+import type { Next, Req, Res } from '../types'
 
-export const errorHandlerMiddleware = (error: Error, req: ReqType, res: ResType, next: NextType): void => {
+export const errorHandlerMiddleware = (error: Error, _req: Req, res: Res, _next: Next): void => {
   console.log(error)
   const { message, name, stack } = error
   return void res.json({ name, message, stack })

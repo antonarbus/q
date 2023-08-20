@@ -8,7 +8,7 @@ import { ActionsContainer } from './ActionsContainer'
 import { ResizablePaper } from './ResizablePaper'
 import { className } from 'client/shared/className'
 
-interface IProps {
+interface Props {
   children: ReactNode
   itemHeight: number
   itemId: string,
@@ -17,9 +17,9 @@ interface IProps {
   itemWidth: number
 }
 
-interface ISortableItem extends SortableElementProps, IProps { }
+interface SortableItem extends SortableElementProps, Props { }
 
-export const ItemLayout: ComponentClass<ISortableItem> =
+export const ItemLayout: ComponentClass<SortableItem> =
   SortableElement(({
     i,
     children,
@@ -27,7 +27,7 @@ export const ItemLayout: ComponentClass<ISortableItem> =
     itemId,
     itemActionElements,
     itemWidth,
-  }: IProps) => {
+  }: Props) => {
     const itemRef = useRef<HTMLDivElement>(null)
 
     return (

@@ -3,8 +3,8 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from 'client/app/store'
 import { setMenuItemPropValue } from './setMenuItemPropValue'
-import type { IMenuItem } from './TMenuItem'
-import type { TMediaQueryParams } from 'client/widgets/nav'
+import type { MenuItemTypes } from './TMenuItem'
+import type { ItemsMediaQueryWidths } from 'client/widgets/nav'
 
 const initialState = {
   navStructure,
@@ -39,7 +39,7 @@ const navSlice = createSlice({
     enableMedia: (state) => {
       state.mediaEnabled = true
     },
-    setNavMediaQueryWidths: (state, action: PayloadAction<TMediaQueryParams>) => {
+    setNavMediaQueryWidths: (state, action: PayloadAction<ItemsMediaQueryWidths>) => {
       const elementMediaQueryWidths = action.payload
       state.mediaQueryWidth = elementMediaQueryWidths
     },
@@ -162,12 +162,12 @@ export const {
 } = navSlice.actions
 
 export const selectMenuItemByIdsChainSelector =
-  (idsToCurrentMenuItems: string[]) => (state: RootState): IMenuItem[] => {
+  (idsToCurrentMenuItems: string[]) => (state: RootState): MenuItemTypes[] => {
     const topLevelNavMenu = state.nav.navStructure[0]
     if (!topLevelNavMenu) return navStructure
 
-    let clicked: IMenuItem[] = navStructure
-    let tempMenu: IMenuItem[] = navStructure
+    let clicked: MenuItemTypes[] = navStructure
+    let tempMenu: MenuItemTypes[] = navStructure
 
     idsToCurrentMenuItems.forEach((id: string) => {
       if (id === 'burger') {

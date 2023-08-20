@@ -7,8 +7,8 @@ import { tokenExpirationMinutes } from './tokenExpirationMinutes'
 import { navUpdate } from './navUpdate'
 import { token } from '../../shared/auth/token'
 import { forgetLoggedUser, rememberLoggedUser } from 'client/entities/user'
-import type { TJwtPayload } from 'server/services/jwt'
-import type { TRefreshAipRes } from 'server/api/refreshRouter'
+import type { JwtPayloadExtended } from 'server/services/jwt'
+import type { RefreshAipRes } from 'server/api/refreshRouter'
 import { apiUrl } from 'server/apiUrls'
 
 interface Props {
@@ -30,11 +30,11 @@ interface Props {
 // but no need to do, because all protected apis calls will do the same
 // he may stay logged in forever without making any harm
 
-interface TRes {
+interface FuncReturn {
   isCheckingTokens: boolean;
 }
 
-export const useRefreshTokens = ({ withLoadingState }: Props): TRes => {
+export const useRefreshTokens = ({ withLoadingState }: Props): FuncReturn => {
   const [isCheckingTokens, setIsCheckingTokens] = useState(true)
 
   useEffectOnce(() => {
@@ -43,7 +43,7 @@ export const useRefreshTokens = ({ withLoadingState }: Props): TRes => {
         if (token.access) {
           const expirationInMin = tokenExpirationMinutes(token.access)
           if (expirationInMin > 5) {
-            const payloadFromExistingAccessToken = jwt_decode<TJwtPayload>(token.access)
+            const payloadFromExistingAccessToken = jwt_decode<JwtPayloadExtended>(token.access)
             const { email, roles } = payloadFromExistingAccessToken
             store.dispatch(rememberLoggedUser({ email, isLogged: true, roles }))
             navUpdate.login()
@@ -52,7 +52,7 @@ export const useRefreshTokens = ({ withLoadingState }: Props): TRes => {
           }
         }
 
-        const response = await axios.get<TRefreshAipRes>(apiUrl.refresh, {
+        const response = await axios.get<RefreshAipRes>(apiUrl.refresh, {
           withCredentials: true,
         })
         const { status, accessJwtToken, roles } = response.data
@@ -72,7 +72,7 @@ export const useRefreshTokens = ({ withLoadingState }: Props): TRes => {
           return
         }
 
-        const payloadFromUpdatedAccessToken = jwt_decode<TJwtPayload>(accessJwtToken)
+        const payloadFromUpdatedAccessToken = jwt_decode<JwtPayloadExtended>(accessJwtToken)
         const { email } = payloadFromUpdatedAccessToken
         if (!email) {
           store.dispatch(forgetLoggedUser())

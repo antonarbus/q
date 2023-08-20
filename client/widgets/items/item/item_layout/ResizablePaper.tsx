@@ -4,13 +4,13 @@ import type { ReactNode } from 'react'
 import { onItemResizeStop } from 'client/features/resize_item'
 import { className } from 'client/shared/className'
 
-interface IProps {
+interface Props {
   children: ReactNode
   index: number
   itemWidth: number
 }
 
-export const ResizablePaper = ({ children, index, itemWidth }: IProps): JSX.Element | null => {
+export const ResizablePaper = ({ children, index, itemWidth }: Props): JSX.Element | null => {
   const dispatch = useDispatchTyped()
 
   return (

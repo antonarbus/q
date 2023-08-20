@@ -5,20 +5,20 @@ import { containerPadding, containerWidth, itemMarginBottom } from './CopyContai
 import { theme } from 'client/shared/clients'
 import { ScaledCopyItem } from './ScaledCopyItem'
 
-interface IProps {
+interface Props {
   isCopying: boolean
   isSoleItem: boolean
   height: number
 }
 
 const variants: Variants = {
-  initial: ({ isCopying, height }: IProps) => {
+  initial: ({ isCopying, height }: Props) => {
     if (isCopying) return {
       y: -height - 100,
     }
     return {}
   },
-  animate: ({ isCopying, isSoleItem }: IProps) => {
+  animate: ({ isCopying, isSoleItem }: Props) => {
     if (isCopying) {
       return {
         y: 0,
@@ -32,7 +32,7 @@ const variants: Variants = {
     }
     return {}
   },
-  exit: ({ isCopying, height }: IProps) => {
+  exit: ({ isCopying, height }: Props) => {
     if (!isCopying) {
       return {
         y: -height - 100,
@@ -59,7 +59,7 @@ export const FirstCopiedItem = (): JSX.Element | null => {
   const height = firstItem.height * scaleFactorForFirstItem
   const width = firstItem.width * scaleFactorForFirstItem
 
-  const animationProps: IProps = {
+  const animationProps: Props = {
     isCopying,
     isSoleItem: items.length === 1,
     height,

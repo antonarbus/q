@@ -1,6 +1,6 @@
 import type FroalaEditor from 'froala-editor'
 import type { MutableRefObject } from 'react'
-import { BiEditAlt as PencilIcon } from 'react-icons/bi'
+import { BiEditAlt } from 'react-icons/bi'
 
 interface Props {
   editorRef: MutableRefObject<FroalaEditor | null>
@@ -8,7 +8,7 @@ interface Props {
 
 export const PencilAtBottomRight = ({ editorRef }: Props): JSX.Element => {
   return (
-    <PencilIcon
+    <BiEditAlt
       css={{
         position: 'absolute',
         bottom: 5,

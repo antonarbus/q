@@ -2,17 +2,17 @@ import { store } from 'client/shared/clients'
 import { saveItemsIntoLocalStorage } from './saveItemsIntoLocalStorage'
 import { tellItemsSavedLocally } from './tellItemsSavedLocally'
 import { tellItemSavedLocally } from 'client/entities/items'
-import type { TItem } from 'client/shared/types'
+import type { Item } from 'client/shared/types'
 
-interface IProps {
-  items?: TItem[]
+interface Props {
+  items?: Item[]
   msgAboveItemWithIndex?: number
 }
 
 export const saveItemsLocally = ({
   items = store.getState().items,
   msgAboveItemWithIndex,
-}: IProps = {}): void => {
+}: Props = {}): void => {
   saveItemsIntoLocalStorage({ items })
   tellItemsSavedLocally()
   if (msgAboveItemWithIndex !== undefined) {

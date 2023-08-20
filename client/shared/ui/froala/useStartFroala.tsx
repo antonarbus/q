@@ -1,4 +1,4 @@
-import type { TOnFroalaContentChange } from 'client/shared/types'
+import type { OnFroalaContentChange } from 'client/shared/types'
 import type { MutableRefObject, RefObject } from 'react'
 import { useEffect } from 'react'
 import FroalaEditor from 'froala-editor'
@@ -8,10 +8,10 @@ import 'froala-editor/js/third_party/font_awesome.min.js'
 import './froala_editor.pkgd.min.css'
 import { froalaStaticOptions } from './froalaStaticOptions'
 
-interface IProps {
+interface Props {
   index: number
   initHtmlGetter: () => string
-  onContentChange: TOnFroalaContentChange
+  onContentChange: OnFroalaContentChange
   froalaElementRef: RefObject<HTMLDivElement>
   editorRef: MutableRefObject<FroalaEditor | null>
   placeholder?: string
@@ -30,7 +30,7 @@ export const useStartFroala = ({
   placeholder,
   rowIndex,
   onContentChange,
-}: IProps): void => {
+}: Props): void => {
 
   useEffect(() => {
     const initFroalaInstance = (): void => {

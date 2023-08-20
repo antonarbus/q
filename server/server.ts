@@ -1,5 +1,4 @@
 import 'dotenv/config'
-import type { Request as ReqType, Response as ResType } from 'express'
 import express from 'express'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
@@ -14,7 +13,7 @@ import { refreshRouter } from './api/refreshRouter'
 import { errorHandlerMiddleware } from './middleware/errorHandlerMiddleware'
 import { usersRouter } from './api/usersRouter'
 import { hiRouter } from './api/hiRouter'
-import type { TReq, TRes } from './types'
+import type { Req, Res } from './types'
 import { apiUrl } from './apiUrls'
 
 void (async (): Promise<void> => {
@@ -26,8 +25,8 @@ void (async (): Promise<void> => {
   app.use(cookieParser())
   app.use(cors())
 
-  app.get(apiUrl.root, (_req: TReq, res: TRes) => res.send('This is from express.js'))
-  app.get(apiUrl.api, (_req: ReqType, res: ResType) => res.json({ message: '/api' }))
+  app.get(apiUrl.root, (_req: Req, res: Res) => res.send('This is from express.js'))
+  app.get(apiUrl.api, (_req: Req, res: Res) => res.json({ message: '/api' }))
   app.use(apiUrl.hi, hiRouter)
   app.use(apiUrl.register, registerRouter)
   app.use(apiUrl.login, loginRouter)

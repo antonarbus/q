@@ -1,10 +1,10 @@
-import type { TItem } from './Item'
+import type { Item } from './Item'
 
-export type TPastePos = 'bottom' | 'middle' | 'top'
+export type PastePos = 'bottom' | 'middle' | 'top'
 
-export interface ICopyPlace {
+export interface CopyPlace {
   itemId: string
-  pastePos: TPastePos
+  pastePos: PastePos
 }
-export type TCopyItem = TItem & { previewHtml: string }
+export type CopyItem = Item & { previewHtml: string }
 

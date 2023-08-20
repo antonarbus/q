@@ -1,11 +1,13 @@
 import { useEffect } from 'react'
 import { useAnimationControls, type AnimationControls } from 'framer-motion'
 import { useFirstMountState } from 'react-use'
-import { useSelectorTyped } from 'client/shared/hooks'
+import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
 import { containerPadding, containerWidth } from './CopyContainer'
 import { theme } from 'client/shared/clients'
+import { allowToCopy, allowToCut, allowToDelete, allowToPaste, forbidToCopy, forbidToCut, forbidToDelete, forbidToPaste } from 'client/entities/copy'
 
 export const useCopyContainerAnimation = (): AnimationControls => {
+  const dispatch = useDispatchTyped()
   const copyContainerAnimationControls = useAnimationControls()
   const isFirstMount = useFirstMountState()
   const items = useSelectorTyped(state => state.copy.items)
@@ -35,6 +37,18 @@ export const useCopyContainerAnimation = (): AnimationControls => {
         ease: 'linear',
       },
     })
+
+    dispatch(forbidToPaste())
+    dispatch(forbidToCopy())
+    dispatch(forbidToCut())
+    dispatch(forbidToDelete())
+
+    setTimeout(() => {
+      dispatch(allowToPaste())
+      dispatch(allowToCopy())
+      dispatch(allowToCut())
+      dispatch(allowToDelete())
+    }, 1000 * theme.item.animationDuration)
 
   }, [items.length])
 

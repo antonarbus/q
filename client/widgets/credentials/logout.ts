@@ -3,7 +3,7 @@ import { store } from 'client/app/store'
 import { navUpdate } from './navUpdate'
 import { token } from '../../shared/auth/token'
 import { forgetLoggedUser } from 'client/entities/user'
-import type { TLogoutApiRes } from 'server/api/logoutRouter'
+import type { LogoutApiRes } from 'server/api/logoutRouter'
 import { apiUrl } from 'server/apiUrls'
 
 export const logoutUser = async (): Promise<void> => {
@@ -11,7 +11,7 @@ export const logoutUser = async (): Promise<void> => {
   const options = { method }
   try {
     const res = await fetch(apiUrl.logout, options)
-    const data = await res.json() as TLogoutApiRes
+    const data = await res.json() as LogoutApiRes
     const { status, message, email } = data
 
     if (status === 'error') {

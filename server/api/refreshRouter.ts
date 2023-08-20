@@ -1,10 +1,10 @@
-import type { Request as ReqType, Response as ResType, NextFunction as NextType } from 'express'
 import express from 'express'
 import { UserModel } from '../db/models/user.model'
-import type { TJwtPayload } from '../services/jwt'
+import type { JwtPayloadExtended } from '../services/jwt'
 import { refreshJwtTokenExpirationSeconds, token } from '../services/jwt'
+import type { Next, Req, Res } from '../types'
 
-export interface TRefreshAipRes {
+export interface RefreshAipRes {
   status: string
   message: string
   email: string
@@ -14,14 +14,14 @@ export interface TRefreshAipRes {
 
 export const refreshRouter = express.Router()
 
-refreshRouter.get('/', async (req: ReqType, res: ResType, next: NextType) => {
+refreshRouter.get('/', async (req: Req, res: Res, next: Next) => {
   try {
     // get refresh token from cookie
 
-    interface IProps {
+    interface Props {
       'refreshJwtToken': string | undefined,
     }
-    const refreshJwtToken = (req.cookies as IProps).refreshJwtToken
+    const refreshJwtToken = (req.cookies as Props).refreshJwtToken
 
     if (!refreshJwtToken) {
       res.json({
@@ -35,7 +35,7 @@ refreshRouter.get('/', async (req: ReqType, res: ResType, next: NextType) => {
     }
 
     // check if token is ok
-    const { email } = token.verify.refresh(refreshJwtToken) as TJwtPayload
+    const { email } = token.verify.refresh(refreshJwtToken) as JwtPayloadExtended
 
     if (!email) {
       res.json({

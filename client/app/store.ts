@@ -35,6 +35,6 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 >
 
 declare global {
-  export type TState = ReturnType<typeof store.getState>
-  export type TDispatch = typeof store.dispatch
+  export type RootState = ReturnType<typeof store.getState>
+  export type AppDispatch = typeof store.dispatch
 }

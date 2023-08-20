@@ -10,11 +10,11 @@ import { TopMenuItemsContainer } from './TopMenuItemsContainer'
 import { setMenuItemHoverIndex } from 'client/entities/nav'
 import { theme } from 'client/shared/clients'
 
-interface TProps {
+interface Props {
   isMenuOutsideWindow: boolean
 }
 
-export const MenuStyled = styled.div<TProps>`
+export const MenuStyled = styled.div<Props>`
   position: absolute;
   top: calc(100% + 5px);
   right: -${theme.menu.navItem.marginRight}px;

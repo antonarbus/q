@@ -1,4 +1,4 @@
-import type { TMenuItem } from 'client/entities/nav'
+import type { MenuItemTypes } from 'client/entities/nav'
 import { navStructure } from '../../../../navStructure'
 
 /**
@@ -11,9 +11,9 @@ import { navStructure } from '../../../../navStructure'
  * @param idsToCurrentMenuItems array of menu ids from the top to the clicked one
  */
 
-export const getMenuItemByIdsChain = (idsToCurrentMenuItems: string[]): TMenuItem[] => {
-  let clicked: TMenuItem[] = navStructure
-  let tempMenu: TMenuItem[] = navStructure
+export const getMenuItemByIdsChain = (idsToCurrentMenuItems: string[]): MenuItemTypes[] => {
+  let clicked: MenuItemTypes[] = navStructure
+  let tempMenu: MenuItemTypes[] = navStructure
   idsToCurrentMenuItems.forEach((id: string) => {
     if (id === 'burger') {
       if (!navStructure[0]) return clicked

@@ -1,15 +1,15 @@
 import type { MutableRefObject } from 'react'
 import { useEffect, useRef, useState } from 'react'
 
-interface IProps {
+interface Props {
   index: number
 }
-interface IReturn {
+interface ReturnFunc {
   observerRef: MutableRefObject<HTMLDivElement | null>
   isInsideViewPort: boolean
 }
 
-export const useViewPortObserver = ({ index }: IProps): IReturn => {
+export const useViewPortObserver = ({ index }: Props): ReturnFunc => {
   const observerRef = useRef<HTMLDivElement | null>(null)
   const [isInsideViewPort, setIsInsideViewPort] = useState(false)
 

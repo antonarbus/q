@@ -1,6 +1,6 @@
 import { TextInMenu } from './TextInMenu'
 import { Icon } from '../../Icon'
-import { FaChevronLeft as LeftArrowIcon } from 'react-icons/fa'
+import { FaChevronLeft } from 'react-icons/fa'
 import { MenuItemStyled } from './MenuItemStyled'
 import { theme } from 'client/shared/clients'
 import { setMenuItemHoverIndex } from 'client/entities/nav'
@@ -25,7 +25,7 @@ export const BackMenuItem = (): JSX.Element => {
       }}
       state={{ isHovered }}
     >
-      <Icon icon={<LeftArrowIcon />} />
+      <Icon icon={<FaChevronLeft />} />
       <TextInMenu name={<span style={{ color }}>Back</span>} />
     </MenuItemStyled>
   )

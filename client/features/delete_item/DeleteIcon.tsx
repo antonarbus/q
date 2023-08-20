@@ -8,11 +8,11 @@ import { saveItemsLocally } from 'client/shared/lib'
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 import { allowToCopy, allowToCut, allowToDelete, allowToPaste, forbidToCopy, forbidToCut, forbidToDelete, forbidToPaste } from 'client/entities/copy'
 
-interface IProps {
+interface Props {
   index: number
 }
 
-export const DeleteIcon = ({ index }: IProps): EmotionJSX.Element => {
+export const DeleteIcon = ({ index }: Props): EmotionJSX.Element => {
   const dispatch = useDispatchTyped()
   const ref = useRef<HTMLSpanElement>(null)
 
@@ -32,15 +32,15 @@ export const DeleteIcon = ({ index }: IProps): EmotionJSX.Element => {
 
         if (disabled) return
 
-        const item = store.getState().items[index]
-        if (!item) return
+        const itemToDelete = store.getState().items[index]
+        if (!itemToDelete) return
 
-        dispatch(deleteItem({ itemId: item.id }))
+        dispatch(deleteItem({ itemId: itemToDelete.id }))
+
         dispatch(forbidToPaste())
         dispatch(forbidToCopy())
         dispatch(forbidToCut())
         dispatch(forbidToDelete())
-        saveItemsLocally()
 
         setTimeout(() => {
           dispatch(allowToPaste())
@@ -48,6 +48,8 @@ export const DeleteIcon = ({ index }: IProps): EmotionJSX.Element => {
           dispatch(allowToCut())
           dispatch(allowToDelete())
         }, 1000 * theme.item.animationDuration)
+
+        saveItemsLocally()
       }}
       onMouseOver={(): void => {
         gsap.to(ref.current, {

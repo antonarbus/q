@@ -10,12 +10,12 @@ import { ItemMsg } from './ItemMsg'
 import { PasteHere } from './PasteHere'
 import { ItemLayout } from './item_layout'
 
-interface IProps {
+interface Props {
   index: number
   children: ReactNode
 }
 
-export const Item = ({ index, children }: IProps): JSX.Element => {
+export const Item = ({ index, children }: Props): JSX.Element => {
   const isItemDisabled = useIsItemDisabled()
   const item = store.getState().items[index]
 

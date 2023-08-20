@@ -1,7 +1,7 @@
-import type { TItem } from 'client/shared/types'
+import type { Item } from 'client/shared/types'
 import { nanoid } from 'nanoid'
 
-export const defaultItems: TItem[] = [
+export const defaultItems: Item[] = [
   {
     id: nanoid(3),
     type: 'text',

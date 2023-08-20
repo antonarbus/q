@@ -1,7 +1,7 @@
-interface IProps1 {
+interface Props {
   html: string
   index: number
   rowIndex?: number
 }
 
-export type TOnFroalaContentChange = (props: IProps1) => void
+export type OnFroalaContentChange = (props: Props) => void

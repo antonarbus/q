@@ -1,11 +1,11 @@
-import type { TItem } from 'client/shared/types'
+import type { Item } from 'client/shared/types'
 import { cleanItems } from './cleanItems'
 
-interface IProps {
-  items: TItem[]
+interface Props {
+  items: Item[]
 }
 
-export const saveItemsIntoLocalStorage = ({ items }: IProps): void => {
+export const saveItemsIntoLocalStorage = ({ items }: Props): void => {
   const cleanedItems = cleanItems(items)
   localStorage.setItem('items', JSON.stringify(cleanedItems))
 }

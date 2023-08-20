@@ -660,11 +660,11 @@ const ToastStyled = styled.div`
   }
 `
 
-interface IProps {
+interface Props {
   closeToast: () => void
 }
 
-const CloseIcon = ({ closeToast }: IProps): JSX.Element => (
+const CloseIcon = ({ closeToast }: Props): JSX.Element => (
   <span
     css={{
       '& :hover': {

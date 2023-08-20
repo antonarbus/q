@@ -1,7 +1,7 @@
-interface IToken {
+interface Token {
   access: string | null
 }
 
-export const token: IToken = {
+export const token: Token = {
   access: '',
 }

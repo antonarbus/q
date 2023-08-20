@@ -1,4 +1,4 @@
-export type { IMenuItem as TMenuItem } from './TMenuItem'
+export type { MenuItemTypes } from './TMenuItem'
 export {
   closeBurger,
   toggleBurger,

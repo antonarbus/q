@@ -7,11 +7,11 @@
  * @returns {boolean} true or false
  */
 
-interface IProps {
+interface Props {
   element: HTMLElement
 }
 
-export const isOverflown = ({ element }: IProps): boolean => {
+export const isOverflown = ({ element }: Props): boolean => {
   const overflown =
     (element.scrollHeight > element.clientHeight) ||
     (element.scrollWidth > element.clientWidth)

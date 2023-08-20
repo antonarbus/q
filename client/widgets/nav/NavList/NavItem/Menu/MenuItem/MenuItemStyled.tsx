@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { theme } from 'client/shared/clients'
 
-interface TProps {
+interface Props {
   to: string
   state: {
     isHovered: boolean
@@ -21,7 +21,7 @@ export const MenuItemStyled = styled(Link)`
   color: #dadce1;
   white-space: nowrap;
   text-decoration: none;
-  background-color: ${(props: TProps): '#525357' | 'initial' =>
+  background-color: ${(props: Props): '#525357' | 'initial' =>
     props.state.isHovered ? '#525357' : 'initial'};
-  filter: ${(props: TProps): 'brightness(1.2)' | 'none' => (props.state.isHovered ? 'brightness(1.2)' : 'none')};
+  filter: ${(props: Props): 'brightness(1.2)' | 'none' => (props.state.isHovered ? 'brightness(1.2)' : 'none')};
 `

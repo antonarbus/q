@@ -1,18 +1,18 @@
 import { createElement } from 'react'
-import { nanoid as id } from 'nanoid'
+import { nanoid } from 'nanoid'
 import { FiLogOut, FiLogIn } from 'react-icons/fi'
 import { BiReset } from 'react-icons/bi'
 import { IoDocumentOutline, IoDocumentsOutline, IoSaveOutline, IoShareOutline } from 'react-icons/io5'
 import { IoIosSwap } from 'react-icons/io'
 import logo from './img/logo.svg'
-import { Person as PersonIcon, Settings as SettingsIcon } from '@mui/icons-material'
-import type { TMenuItem } from 'client/entities/nav'
+import { Person, Settings } from '@mui/icons-material'
+import type { MenuItemTypes } from 'client/entities/nav'
 import { logoutUser } from '../credentials/logout'
 import { resetItems } from 'client/features/reset_items'
 
 const reactIcon = createElement(IoShareOutline, {})
 
-export const navStructure: TMenuItem[] = [
+export const navStructure: MenuItemTypes[] = [
   {
     id: 'top',
     name: 'top',
@@ -43,43 +43,43 @@ export const navStructure: TMenuItem[] = [
                 isHidden: false,
                 menuItems: [
                   {
-                    id: id(5),
+                    id: nanoid(5),
                     name: 'long long long long long long long long name',
                     icon: reactIcon,
                     isHidden: false,
                   },
                   {
-                    id: id(5),
+                    id: nanoid(5),
                     name: 'item in menu 1',
                     icon: null,
                     isHidden: false,
                   },
                   {
-                    id: id(5),
+                    id: nanoid(5),
                     name: 'item in menu 1',
                     icon: <img src={logo} />,
                     isHidden: false,
                   },
                   {
-                    id: id(5),
+                    id: nanoid(5),
                     name: 'item in menu 1',
                     icon: reactIcon,
                     isHidden: false,
                   },
                   {
-                    id: id(5),
+                    id: nanoid(5),
                     name: 'item in menu 1',
                     icon: reactIcon,
                     isHidden: false,
                   },
                   {
-                    id: id(5),
+                    id: nanoid(5),
                     name: 'item in menu 1',
                     icon: reactIcon,
                     isHidden: false,
                   },
                   {
-                    id: id(5),
+                    id: nanoid(5),
                     name: 'item in menu 1',
                     icon: reactIcon,
                     isHidden: false,
@@ -87,13 +87,13 @@ export const navStructure: TMenuItem[] = [
                 ],
               },
               {
-                id: id(5),
+                id: nanoid(5),
                 name: 'item in menu 1',
                 icon: '😎',
                 isHidden: false,
               },
               {
-                id: id(5),
+                id: nanoid(5),
                 name: 'item in menu 1',
                 icon: '😎',
                 isHidden: false,
@@ -101,20 +101,20 @@ export const navStructure: TMenuItem[] = [
             ],
           },
           {
-            id: id(5),
+            id: nanoid(5),
             name: 'Reset to default offer',
             icon: <BiReset />,
             isHidden: false,
             func: resetItems,
           },
           {
-            id: id(5),
+            id: nanoid(5),
             name: 'hidden menu',
             icon: '',
             isHidden: true,
           },
           {
-            id: id(5),
+            id: nanoid(5),
             name: 'not hidden menu',
             icon: '😇',
             isHidden: false,
@@ -136,55 +136,55 @@ export const navStructure: TMenuItem[] = [
         name: 'Share',
         menuItems: [
           {
-            id: id(5),
+            id: nanoid(5),
             name: 'item in menu 1',
             icon: '😇',
             isHidden: false,
             menuItems: [
               {
-                id: id(5),
+                id: nanoid(5),
                 name: 'item in menu 1',
                 icon: '😎',
                 isHidden: false,
                 menuItems: [
                   {
-                    id: id(5),
+                    id: nanoid(5),
                     name: 'long long long long long long long long name',
                     icon: reactIcon,
                     isHidden: false,
                   },
                   {
-                    id: id(5),
+                    id: nanoid(5),
                     name: 'item in menu 1',
                     icon: null,
                     isHidden: false,
                   },
                   {
-                    id: id(5),
+                    id: nanoid(5),
                     name: 'item in menu 1',
                     icon: <img src={logo} />,
                     isHidden: false,
                   },
                   {
-                    id: id(5),
+                    id: nanoid(5),
                     name: 'item in menu 1',
                     icon: reactIcon,
                     isHidden: false,
                   },
                   {
-                    id: id(5),
+                    id: nanoid(5),
                     name: 'item in menu 1',
                     icon: reactIcon,
                     isHidden: false,
                   },
                   {
-                    id: id(5),
+                    id: nanoid(5),
                     name: 'item in menu 1',
                     icon: reactIcon,
                     isHidden: false,
                   },
                   {
-                    id: id(5),
+                    id: nanoid(5),
                     name: 'item in menu 1',
                     icon: reactIcon,
                     isHidden: false,
@@ -192,13 +192,13 @@ export const navStructure: TMenuItem[] = [
                 ],
               },
               {
-                id: id(5),
+                id: nanoid(5),
                 name: 'item in menu 1',
                 icon: '😎',
                 isHidden: false,
               },
               {
-                id: id(5),
+                id: nanoid(5),
                 name: 'item in menu 1',
                 icon: '😎',
                 isHidden: false,
@@ -206,13 +206,13 @@ export const navStructure: TMenuItem[] = [
             ],
           },
           {
-            id: id(5),
+            id: nanoid(5),
             name: 'item in menu 1',
             icon: 'IC',
             isHidden: false,
           },
           {
-            id: id(5),
+            id: nanoid(5),
             name: 'link',
             link: '/',
             icon: '😇',
@@ -220,13 +220,13 @@ export const navStructure: TMenuItem[] = [
             shortcut: ['control', 'x'],
           },
           {
-            id: id(5),
+            id: nanoid(5),
             name: 'item in menu 1',
             icon: '',
             isHidden: false,
           },
           {
-            id: id(5),
+            id: nanoid(5),
             name: 'func',
             func: (): void => {
               alert('i am the function')
@@ -252,20 +252,20 @@ export const navStructure: TMenuItem[] = [
       },
       {
         id: 'account',
-        icon: <PersonIcon />,
+        icon: <Person />,
         name: 'Account',
         isHidden: true,
         menuItems: [
           {
             id: 'settings',
-            icon: <SettingsIcon />,
+            icon: <Settings />,
             isHidden: false,
             name: 'Settings',
             link: '/settings',
           },
           {
             id: 'profile',
-            icon: <PersonIcon />,
+            icon: <Person />,
             isHidden: false,
             name: 'Profile',
             link: '/profile',

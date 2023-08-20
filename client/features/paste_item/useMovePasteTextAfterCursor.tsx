@@ -3,15 +3,15 @@ import { store } from 'client/app/store'
 import isEqual from 'lodash.isequal'
 import { hidePasteText, showPasteText, updatePastePos } from 'client/entities/copy'
 import { insertPasteItem, removePasteItem } from 'client/entities/items'
-import type { ICopyPlace } from 'client/shared/types'
+import type { CopyPlace } from 'client/shared/types'
 import { className } from 'client/shared/className'
 
-interface IProps {
+interface Props {
   item: Element
   e: MouseEvent
 }
 
-const getPastePlace = ({ item, e }: IProps): ICopyPlace => {
+const getPastePlace = ({ item, e }: Props): CopyPlace => {
   const { height, top } = item.getBoundingClientRect()
   const yWithinElement = e.clientY - top
   const distToTop = yWithinElement

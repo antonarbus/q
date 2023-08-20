@@ -41,7 +41,7 @@ const UserSchema = new Schema({
 export const UserModel = model('Users', UserSchema)
 
 // Type of an hydrated document (with all the getters, etc...)
-export type THydratedUserModel = HydratedDocumentFromSchema<typeof UserSchema>
+export type HydratedUserModel = HydratedDocumentFromSchema<typeof UserSchema>
 
 // Only the fields defined in the schema
-export type TUserModel = InferSchemaType<typeof UserSchema>
+export type UserModelProps = InferSchemaType<typeof UserSchema>

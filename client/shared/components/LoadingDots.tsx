@@ -6,7 +6,7 @@ const bounceLoading = keyframes`
     transform: translate3d(0, -1.5rem, 0);
   }
 `
-interface IProps {
+interface Props {
   size?: string
   margin?: string
   background?: string
@@ -20,7 +20,7 @@ export const LoadingDots = ({
   background,
   duration,
   dots,
-}: IProps): JSX.Element => (
+}: Props): JSX.Element => (
   <div
     css={{
       display: 'inline-flex',
