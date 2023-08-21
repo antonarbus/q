@@ -14,13 +14,13 @@ export const Header = ({ index }: Props): JSX.Element => {
   return (
     <BoqHeaderLayout
       // title={<Title index={index} />}
-      title={<div>title</div>}
-      // subtotalText={<SubtotalText index={index} />}
-      subtotalText={<div>title</div>}
+      title={<div contentEditable>title</div>}
+      subtotalText={<SubtotalText index={index} />}
+      // subtotalText={<div contentEditable>title</div>}
       // price={<Price index={index} />}
-      price={<div>price</div>}
+      price={<div contentEditable>price</div>}
       // currency={<Currency index={index} />}
-      currency={<div>currency</div>}
+      currency={<div contentEditable>currency</div>}
       outlinedForDevPurposes
     // hideContentForDevPurpose
     />
