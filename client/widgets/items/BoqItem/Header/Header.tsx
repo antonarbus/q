@@ -1,30 +1,28 @@
 import { Title } from './Title'
 import { Subtotal } from './Subtotal'
 import { theme } from 'client/app/theme'
+import { BoqHeaderLayout } from 'client/shared/layouts/BoqHeaderLayout'
+import { SubtotalText } from './Subtotal/SubtotalText'
+import { Price } from './Subtotal/Price'
+import { Currency } from './Subtotal/Currency'
 
 interface Props {
   index: number
 }
 
-// todo: make HeaderLayout
-
 export const Header = ({ index }: Props): JSX.Element => {
   return (
-    <div
-      css={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'flex-end',
-        gap: '10px',
-        background: '#343434e6',
-        padding: '10px 15px',
-        color: theme.colors.greyFont,
-        borderTopLeftRadius: 6,
-        borderTopRightRadius: 6,
-      }}
-    >
-      <Title index={index} />
-      <Subtotal index={index} />
-    </div>
+    <BoqHeaderLayout
+      // title={<Title index={index} />}
+      title={<div>title</div>}
+      // subtotalText={<SubtotalText index={index} />}
+      subtotalText={<div>title</div>}
+      // price={<Price index={index} />}
+      price={<div>price</div>}
+      // currency={<Currency index={index} />}
+      currency={<div>currency</div>}
+      outlinedForDevPurposes
+    // hideContentForDevPurpose
+    />
   )
 }

@@ -1,5 +1,5 @@
 
-import { Text } from './Text'
+import { SubtotalText } from './SubtotalText'
 import { Price } from './Price'
 import { Currency } from './Currency'
 
@@ -18,7 +18,7 @@ export const Subtotal = ({ index }: Props): JSX.Element => {
         minWidth: 100,
       }}
     >
-      <Text index={index} />
+      <SubtotalText index={index} />
       <div
         css={{
           display: 'flex',
