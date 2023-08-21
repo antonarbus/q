@@ -19,7 +19,7 @@ export const Currency = ({ index }: Props): JSX.Element | null => {
       index={index}
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
-      placeholder='$'
+      placeholder='$...'
       initHtmlGetter={itemBoqHeaderCurrencyHtmlGetter}
       onContentChange={(): void => {
         console.log('xxx')

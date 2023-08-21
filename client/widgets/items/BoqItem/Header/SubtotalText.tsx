@@ -1,7 +1,8 @@
 import { itemBoqHeaderSubtotalTextHtmlGetter } from 'client/entities/items'
 import { store } from 'client/shared/clients'
 import { Froala } from 'client/shared/ui/froala'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
+import { useEffectOnce } from 'react-use'
 
 interface Props {
   index: number
