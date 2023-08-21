@@ -6,8 +6,8 @@ interface Props {
   subtotalText: React.ReactNode
   price: JSX.Element
   currency: JSX.Element
-  hideContent?: boolean
-  outlined?: boolean
+  hideContentForDevPurposes?: boolean
+  outlinedForDevPurposes?: boolean
 }
 
 export const BoqHeaderLayout = ({
@@ -15,18 +15,18 @@ export const BoqHeaderLayout = ({
   subtotalText,
   price,
   currency,
-  hideContent = false,
-  outlined = false,
+  hideContentForDevPurposes = false,
+  outlinedForDevPurposes = false,
 }: Props): JSX.Element => {
 
   return (
     <Box
       sx={{
         '& .layout': {
-          boxShadow: outlined ? '0 0 1px 1px #cf5757c3 inset' : 'none',
+          boxShadow: outlinedForDevPurposes ? '0 0 1px 1px #cf5757c3 inset' : 'none',
         },
         '& :where(.item)': {
-          visibility: hideContent ? 'hidden' : 'visible',
+          visibility: hideContentForDevPurposes ? 'hidden' : 'visible',
         },
       }}
     >

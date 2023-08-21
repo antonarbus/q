@@ -7,7 +7,7 @@ interface Props {
   index: number
 }
 
-export const Text = ({ index }: Props): JSX.Element | null => {
+export const SubtotalText = ({ index }: Props): JSX.Element | null => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef(null)
   const item = store.getState().items[index]
