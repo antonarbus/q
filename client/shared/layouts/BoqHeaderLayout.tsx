@@ -59,11 +59,15 @@ export const BoqHeaderLayout = ({
             flexDirection: 'column',
             alignItems: 'flex-end',
             flexShrink: 0,
-            minWidth: 100,
+            minWidth: '100px',
           }}
         >
           <Box
             className='layout item subtotal-text'
+            sx={{
+              width: '100%',
+              textAlign: 'right',
+            }}
           >
             {subtotalText}
           </Box>
@@ -73,16 +77,16 @@ export const BoqHeaderLayout = ({
               display: 'flex',
               justifyContent: 'flex-end',
               alignItems: 'baseline',
-              gap: 10,
+              gap: '10px',
               width: '100%',
             }}
           >
             <Box
               className='layout item price'
               sx={{
-                width: '100%',
-                whiteSpace: 'nowrap',
                 textAlign: 'right',
+                whiteSpace: 'nowrap',
+                minWidth: '60px',
               }}
             >
               {price}
@@ -92,8 +96,7 @@ export const BoqHeaderLayout = ({
               sx={{
                 textAlign: 'right',
                 whiteSpace: 'nowrap',
-                flexShrink: 0,
-                minWidth: 10,
+                minWidth: '30px',
               }}
             >
               {currency}

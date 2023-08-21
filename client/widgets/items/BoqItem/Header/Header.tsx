@@ -1,10 +1,8 @@
 import { Title } from './Title'
-import { Subtotal } from './Subtotal'
-import { theme } from 'client/app/theme'
 import { BoqHeaderLayout } from 'client/shared/layouts/BoqHeaderLayout'
-import { SubtotalText } from './Subtotal/SubtotalText'
-import { Price } from './Subtotal/Price'
-import { Currency } from './Subtotal/Currency'
+import { Currency } from './Currency'
+import { SubtotalText } from './SubtotalText'
+import { Price } from './Price'
 
 interface Props {
   index: number
@@ -13,16 +11,11 @@ interface Props {
 export const Header = ({ index }: Props): JSX.Element => {
   return (
     <BoqHeaderLayout
-      // title={<Title index={index} />}
-      title={<div contentEditable>title</div>}
+      title={<Title index={index} />}
       subtotalText={<SubtotalText index={index} />}
-      // subtotalText={<div contentEditable>title</div>}
-      // price={<Price index={index} />}
-      price={<div contentEditable>price</div>}
-      // currency={<Currency index={index} />}
-      currency={<div contentEditable>currency</div>}
+      price={<Price index={index} />}
+      currency={<Currency index={index} />}
       outlinedForDevPurposes
-    // hideContentForDevPurpose
     />
   )
 }
