@@ -4,8 +4,8 @@ import { useRef } from 'react'
 import { Froala } from 'client/shared/ui/froala'
 import { PencilAtBottomRight } from 'client/shared/components/PencilAtBottomRight'
 import { Item } from './item'
-import { onItemTextChange } from 'client/features/on_item_text_change'
 import { itemTextHtmlGetter } from 'client/entities/items'
+import { changeItemText } from 'client/features/change_text'
 
 interface Props {
   index: number
@@ -24,7 +24,7 @@ export const TextItem = ({ index }: Props): JSX.Element => {
         initHtmlGetter={itemTextHtmlGetter}
         placeholder='Type text or drop images, files, links...'
         padding={theme.item.padding}
-        onContentChange={onItemTextChange}
+        onContentChange={changeItemText}
       />
       <PencilAtBottomRight editorRef={editorRef} />
     </Item>

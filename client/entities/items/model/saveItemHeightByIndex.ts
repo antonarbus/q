@@ -1,5 +1,5 @@
 import { store } from 'client/shared/clients'
-import { saveItemHeight } from '../model/itemsSlice'
+import { saveItemHeight } from './itemsSlice'
 import { className } from 'client/shared/className'
 
 interface Props {

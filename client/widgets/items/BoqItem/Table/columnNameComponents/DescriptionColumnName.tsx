@@ -1,5 +1,5 @@
 import { itemBoqColumnNameDescriptionHtmlGetter } from 'client/entities/items'
-import { onBoqDescriptionColumnNameChange } from 'client/features/on_boq_description_column_name_change'
+import { changeBoqDescriptionColumnName } from 'client/features/change_text'
 import { store } from 'client/shared/clients'
 import { Froala } from 'client/shared/ui/froala'
 import { useRef } from 'react'
@@ -22,7 +22,7 @@ export const DescriptionColumnName = ({ index }: Props): JSX.Element | null => {
       froalaElementRef={froalaElementRef}
       placeholder='Description...'
       initHtmlGetter={itemBoqColumnNameDescriptionHtmlGetter}
-      onContentChange={onBoqDescriptionColumnNameChange}
+      onContentChange={changeBoqDescriptionColumnName}
       additionalStyle={{
         textAlign: 'left',
       }}

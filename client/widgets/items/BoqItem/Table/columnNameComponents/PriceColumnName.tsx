@@ -1,5 +1,5 @@
 import { itemBoqColumnNamePriceHtmlGetter } from 'client/entities/items'
-import { onBoqPriceColumnNameChange } from 'client/features/on_boq_price_column_name_change'
+import { changeBoqPriceColumnName } from 'client/features/change_text'
 import { store } from 'client/shared/clients'
 import { Froala } from 'client/shared/ui/froala'
 import { useRef } from 'react'
@@ -22,7 +22,7 @@ export const PriceColumnName = ({ index }: Props): JSX.Element | null => {
       froalaElementRef={froalaElementRef}
       placeholder='Price...'
       initHtmlGetter={itemBoqColumnNamePriceHtmlGetter}
-      onContentChange={onBoqPriceColumnNameChange}
+      onContentChange={changeBoqPriceColumnName}
       additionalStyle={{
         textAlign: 'center',
       }}

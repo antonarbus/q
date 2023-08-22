@@ -1,5 +1,5 @@
 import { itemBoqColumnNameQtyHtmlGetter } from 'client/entities/items'
-import { onBoqQtyColumnNameChange } from 'client/features/on_boq_qty_column_name_change'
+import { changeBoqQtyColumnName } from 'client/features/change_text'
 import { store } from 'client/shared/clients'
 import { Froala } from 'client/shared/ui/froala'
 import { useRef } from 'react'
@@ -22,7 +22,7 @@ export const QtyColumnName = ({ index }: Props): JSX.Element | null => {
       froalaElementRef={froalaElementRef}
       placeholder='Qty...'
       initHtmlGetter={itemBoqColumnNameQtyHtmlGetter}
-      onContentChange={onBoqQtyColumnNameChange}
+      onContentChange={changeBoqQtyColumnName}
       additionalStyle={{
         textAlign: 'center',
       }}
