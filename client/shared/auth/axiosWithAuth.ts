@@ -2,8 +2,8 @@
 import axios from 'axios'
 import { store } from 'client/app/store'
 import { token } from './token'
-import { forgetLoggedUser, rememberLoggedUser } from 'client/entities/user'
 import { apiUrl } from 'server/apiUrls'
+import { userSlice } from 'client/entities/user'
 
 export const axiosWithAuth = axios.create({ withCredentials: true })
 
@@ -34,12 +34,12 @@ axiosWithAuth.interceptors.response.use(
 
         if (accessJwtToken) {
           token.access = accessJwtToken
-          store.dispatch(rememberLoggedUser({ email, isLogged: true, roles: ['viewer'] }))
+          store.dispatch(userSlice.actions.rememberLoggedUser({ email, isLogged: true, roles: ['viewer'] }))
         }
 
         if (!accessJwtToken) {
           token.access = ''
-          store.dispatch(forgetLoggedUser())
+          store.dispatch(userSlice.actions.forgetLoggedUser())
         }
 
         return await axiosWithAuth.request(originalRequest)
@@ -50,7 +50,7 @@ axiosWithAuth.interceptors.response.use(
     }
 
     if (error.response.status === 401) {
-      store.dispatch(forgetLoggedUser())
+      store.dispatch(userSlice.actions.forgetLoggedUser())
     }
 
     throw error

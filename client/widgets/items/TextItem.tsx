@@ -4,8 +4,8 @@ import { useRef } from 'react'
 import { Froala } from 'client/shared/ui/froala'
 import { PencilAtBottomRight } from 'client/shared/components/PencilAtBottomRight'
 import { Item } from './item'
-import { itemTextHtmlGetter } from 'client/entities/items'
 import { changeItemText } from 'client/features/change_text'
+import { itemTextHtmlGetter } from 'client/entities/items'
 
 interface Props {
   index: number

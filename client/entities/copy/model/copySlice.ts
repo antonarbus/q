@@ -96,24 +96,24 @@ export const copySlice = createSlice({
   },
 })
 
-export const {
-  showCopyContainer,
-  hideCopyContainer,
-  saveInitCordsOfCopyContainer,
-  addItemIntoCopyContainer,
-  removeItemFromCopyContainer,
-  updatePastePos,
-  showPasteText,
-  hidePasteText,
-  enterIntoCopyMode,
-  exitFromCopyMode,
-  allowToPaste,
-  forbidToPaste,
-  allowToCopy,
-  forbidToCopy,
-  allowToCut,
-  forbidToCut,
-  allowToDelete,
-  forbidToDelete,
-} = copySlice.actions
-export const copyReducer = copySlice.reducer
+// export const {
+//   showCopyContainer,
+//   hideCopyContainer,
+//   saveInitCordsOfCopyContainer,
+//   addItemIntoCopyContainer,
+//   removeItemFromCopyContainer,
+//   updatePastePos,
+//   showPasteText,
+//   hidePasteText,
+//   enterIntoCopyMode,
+//   exitFromCopyMode,
+//   allowToPaste,
+//   forbidToPaste,
+//   allowToCopy,
+//   forbidToCopy,
+//   allowToCut,
+//   forbidToCut,
+//   allowToDelete,
+//   forbidToDelete,
+// } = copySlice.actions
+// export const copyReducer = copySlice.reducer

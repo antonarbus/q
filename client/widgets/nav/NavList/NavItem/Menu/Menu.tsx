@@ -7,7 +7,7 @@ import { useCloseMenuOnClickOutside } from './functions/useCloseMenuOnClickOutsi
 import { useIsMenuOutsideWindow } from './functions/useIsMenuOutsideWindow'
 import { SlidableMenuItemsContainer } from './SlidableMenuItemsContainer'
 import { TopMenuItemsContainer } from './TopMenuItemsContainer'
-import { setMenuItemHoverIndex } from 'client/entities/nav'
+import { navSlice } from 'client/entities/nav'
 import { theme } from 'client/shared/clients'
 
 interface Props {
@@ -78,7 +78,7 @@ export const Menu = (): JSX.Element => {
       ref={menuContainerRef}
       isMenuOutsideWindow={isMenuOutsideWindow}
       onMouseLeave={(): void => {
-        dispatch(setMenuItemHoverIndex(0))
+        dispatch(navSlice.actions.setMenuItemHoverIndex(0))
       }}
       className='drop-down-nav-menu'
     >

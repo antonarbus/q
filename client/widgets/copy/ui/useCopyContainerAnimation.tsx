@@ -4,7 +4,7 @@ import { useFirstMountState } from 'react-use'
 import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
 import { containerPadding, containerWidth } from './CopyContainer'
 import { theme } from 'client/shared/clients'
-import { allowToCopy, allowToCut, allowToDelete, allowToPaste, forbidToCopy, forbidToCut, forbidToDelete, forbidToPaste } from 'client/entities/copy'
+import { copySlice } from 'client/entities/copy'
 
 export const useCopyContainerAnimation = (): AnimationControls => {
   const dispatch = useDispatchTyped()
@@ -38,16 +38,16 @@ export const useCopyContainerAnimation = (): AnimationControls => {
       },
     })
 
-    dispatch(forbidToPaste())
-    dispatch(forbidToCopy())
-    dispatch(forbidToCut())
-    dispatch(forbidToDelete())
+    dispatch(copySlice.actions.forbidToPaste())
+    dispatch(copySlice.actions.forbidToCopy())
+    dispatch(copySlice.actions.forbidToCut())
+    dispatch(copySlice.actions.forbidToDelete())
 
     setTimeout(() => {
-      dispatch(allowToPaste())
-      dispatch(allowToCopy())
-      dispatch(allowToCut())
-      dispatch(allowToDelete())
+      dispatch(copySlice.actions.allowToPaste())
+      dispatch(copySlice.actions.allowToCopy())
+      dispatch(copySlice.actions.allowToCut())
+      dispatch(copySlice.actions.allowToDelete())
     }, 1000 * theme.item.animationDuration)
 
   }, [items.length])

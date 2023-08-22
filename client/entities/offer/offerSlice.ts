@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const offerSlice = createSlice({
+export const offerSlice = createSlice({
   name: 'offer',
   initialState: {
     toggleOffer: true,
@@ -12,6 +12,3 @@ const offerSlice = createSlice({
   },
 })
 
-export const { reloadOffer } = offerSlice.actions
-
-export const offerReducer = offerSlice.reducer

@@ -1,8 +1,8 @@
 import { useEffectOnce, useUnmount } from 'react-use'
 import { store } from 'client/app/store'
 import isEqual from 'lodash.isequal'
-import { hidePasteText, showPasteText, updatePastePos } from 'client/entities/copy'
-import { insertPasteItem, removePasteItem } from 'client/entities/items'
+import { copySlice } from 'client/entities/copy'
+import { itemsSlice } from 'client/entities/items'
 import type { CopyPlace } from 'client/shared/types'
 import { className } from 'client/shared/className'
 
@@ -30,28 +30,28 @@ const movePasteTextAfterCursor = (e: MouseEvent): void => {
 
   if (nav) {
     if (!isPasteTextShown) return
-    store.dispatch(hidePasteText())
+    store.dispatch(copySlice.actions.hidePasteText())
     return
   }
 
   const actionsContainer = (e.target as Element).closest(`.${className.actions}`)
 
   if (actionsContainer && isPasteTextShown) {
-    store.dispatch(hidePasteText())
-    store.dispatch(removePasteItem())
+    store.dispatch(copySlice.actions.hidePasteText())
+    store.dispatch(itemsSlice.actions.removePasteItem())
     return
   }
 
   if (!actionsContainer && !isPasteTextShown) {
-    store.dispatch(showPasteText())
+    store.dispatch(copySlice.actions.showPasteText())
     return
   }
 
   const isPastable = store.getState().copy.isPastable
 
   if (!isPastable) {
-    store.dispatch(hidePasteText())
-    store.dispatch(removePasteItem())
+    store.dispatch(copySlice.actions.hidePasteText())
+    store.dispatch(itemsSlice.actions.removePasteItem())
     return
   }
 
@@ -64,9 +64,9 @@ const movePasteTextAfterCursor = (e: MouseEvent): void => {
 
   if (isEqual(pastePlace, prevPlace)) return
 
-  store.dispatch(updatePastePos(pastePlace))
-  store.dispatch(showPasteText())
-  store.dispatch(insertPasteItem(pastePlace))
+  store.dispatch(copySlice.actions.updatePastePos(pastePlace))
+  store.dispatch(copySlice.actions.showPasteText())
+  store.dispatch(itemsSlice.actions.insertPasteItem(pastePlace))
 }
 
 export const useMovePasteTextAfterCursor = (): void => {

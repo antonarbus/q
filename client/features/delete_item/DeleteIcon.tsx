@@ -1,12 +1,12 @@
 import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
 import { store, theme } from 'client/shared/clients'
 import { RxCross2 } from 'react-icons/rx'
-import { deleteItem, selectIsItemAlone } from 'client/entities/items'
+import { itemsSlice, selectIsItemAlone } from 'client/entities/items'
 import { gsap } from 'gsap'
 import { useRef } from 'react'
 import { saveItemsLocally } from 'client/shared/lib'
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
-import { allowToCopy, allowToCut, allowToDelete, allowToPaste, forbidToCopy, forbidToCut, forbidToDelete, forbidToPaste } from 'client/entities/copy'
+import { copySlice } from 'client/entities/copy'
 
 interface Props {
   index: number
@@ -35,18 +35,18 @@ export const DeleteIcon = ({ index }: Props): EmotionJSX.Element => {
         const itemToDelete = store.getState().items[index]
         if (!itemToDelete) return
 
-        dispatch(deleteItem({ itemId: itemToDelete.id }))
+        dispatch(itemsSlice.actions.deleteItem({ itemId: itemToDelete.id }))
 
-        dispatch(forbidToPaste())
-        dispatch(forbidToCopy())
-        dispatch(forbidToCut())
-        dispatch(forbidToDelete())
+        dispatch(copySlice.actions.forbidToPaste())
+        dispatch(copySlice.actions.forbidToCopy())
+        dispatch(copySlice.actions.forbidToCut())
+        dispatch(copySlice.actions.forbidToDelete())
 
         setTimeout(() => {
-          dispatch(allowToPaste())
-          dispatch(allowToCopy())
-          dispatch(allowToCut())
-          dispatch(allowToDelete())
+          dispatch(copySlice.actions.allowToPaste())
+          dispatch(copySlice.actions.allowToCopy())
+          dispatch(copySlice.actions.allowToCut())
+          dispatch(copySlice.actions.allowToDelete())
         }, 1000 * theme.item.animationDuration)
 
         saveItemsLocally()

@@ -1,4 +1,4 @@
-import { closeMenu } from 'client/entities/nav'
+import { navSlice } from 'client/entities/nav'
 import { store } from 'client/app/store'
 import { getMenuItemByIdsChain } from '../../functions/getMenuItemByIdsChain'
 import { navigateInMenu } from '../../functions/useMenuAnimation'
@@ -23,13 +23,13 @@ export const clickOnMenuItem = (e: MouseEvent, menuId: string, disabled: boolean
   if (link && func) {
     // follow the link natively and call the func
     void func()
-    store.dispatch(closeMenu())
+    store.dispatch(navSlice.actions.closeMenu())
     return
   }
 
   if (link) {
     // just follow the link natively
-    store.dispatch(closeMenu())
+    store.dispatch(navSlice.actions.closeMenu())
     return
   }
 
@@ -37,7 +37,7 @@ export const clickOnMenuItem = (e: MouseEvent, menuId: string, disabled: boolean
 
   if (func) {
     void func()
-    store.dispatch(closeMenu())
+    store.dispatch(navSlice.actions.closeMenu())
     return
   }
 

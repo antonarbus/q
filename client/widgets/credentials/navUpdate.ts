@@ -1,13 +1,13 @@
-import { hideAccountMenuItem, hideLogInMenuItem, showAccountMenuItem, showLogInMenuItem } from 'client/entities/nav'
+import { navSlice } from 'client/entities/nav'
 import { store } from 'client/app/store'
 
 export const navUpdate = {
   login: (): void => {
-    store.dispatch(hideLogInMenuItem())
-    store.dispatch(showAccountMenuItem())
+    store.dispatch(navSlice.actions.hideLogInMenuItem())
+    store.dispatch(navSlice.actions.showAccountMenuItem())
   },
   logout: (): void => {
-    store.dispatch(showLogInMenuItem())
-    store.dispatch(hideAccountMenuItem())
+    store.dispatch(navSlice.actions.showLogInMenuItem())
+    store.dispatch(navSlice.actions.hideAccountMenuItem())
   },
 }

@@ -1,5 +1,1 @@
-export {
-  bottomMsgReducer,
-  showMsgOnBottom,
-  resetMsgOnBottom,
-} from './bottomMsgSlice'
+export { bottomMsgSlice } from './bottomMsgSlice'

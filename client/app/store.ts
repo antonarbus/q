@@ -1,38 +1,34 @@
 import type { Action, ThunkAction } from '@reduxjs/toolkit'
 import { configureStore } from '@reduxjs/toolkit'
-import { navReducer } from 'client/entities/nav'
-import { offerReducer } from 'client/entities/offer'
-import { spinnerReducer } from 'client/shared/ui/spinner'
-import { bottomMsgReducer } from 'client/shared/ui/bottom_msg'
-import { userReducer } from 'client/entities/user'
-import { copyReducer } from 'client/entities/copy'
-import { itemsReducer } from 'client/entities/items'
+import { navSlice } from 'client/entities/nav'
+import { spinnerSlice } from 'client/shared/ui/spinner'
+import { bottomMsgSlice } from 'client/shared/ui/bottom_msg'
+import { userSlice } from 'client/entities/user'
+import { copySlice } from 'client/entities/copy'
+import { itemsSlice } from 'client/entities/items'
+import { offerSlice } from 'client/entities/offer'
 
 export const store = configureStore({
   reducer: {
-    user: userReducer,
-    nav: navReducer,
-    offer: offerReducer,
-    items: itemsReducer,
-    spinner: spinnerReducer,
-    copy: copyReducer,
-    bottomMsg: bottomMsgReducer,
+    user: userSlice.reducer,
+    nav: navSlice.reducer,
+    offer: offerSlice.reducer,
+    items: itemsSlice.reducer,
+    spinner: spinnerSlice.reducer,
+    copy: copySlice.reducer,
+    bottomMsg: bottomMsgSlice.reducer,
   },
-  middleware: (defaultMiddleware) =>
-    defaultMiddleware({
-      serializableCheck: false,
-    }),
+  middleware: (defaultMiddleware) => defaultMiddleware({ serializableCheck: false }),
   devTools: process.env.NODE_ENV !== 'production',
 })
 
+// eslint-disable-next-line @typescript-eslint/unbound-method
+export const getState = store.getState
+export const dispatch = store.dispatch
+
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  Action<string>
->
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>
 
 declare global {
   export type RootState = ReturnType<typeof store.getState>

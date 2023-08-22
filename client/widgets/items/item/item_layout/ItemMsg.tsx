@@ -1,4 +1,4 @@
-import { removeItemMsg } from 'client/entities/items'
+import { itemsSlice } from 'client/entities/items'
 import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useUpdateEffect } from 'react-use'
@@ -15,7 +15,7 @@ export const ItemMsg = ({ index }: Props): JSX.Element => {
     // hide msg
     const timeout = setTimeout(() => {
       if (!msg) return
-      dispatch(removeItemMsg({ index }))
+      dispatch(itemsSlice.actions.removeItemMsg({ index }))
     }, 1700)
 
     return () => {

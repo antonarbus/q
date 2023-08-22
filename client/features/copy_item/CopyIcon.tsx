@@ -3,7 +3,7 @@ import { store } from 'client/shared/clients'
 import { MdCopyAll } from 'react-icons/md'
 import { motion } from 'framer-motion'
 import { cleanHtml } from 'client/shared/lib/itemsUtils'
-import { addItemIntoCopyContainer, allowToPaste, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/entities/copy'
+import { copySlice } from 'client/entities/copy'
 import { saveItemHeightByIndex } from 'client/entities/items'
 import type { MouseEvent } from 'react'
 import { className } from 'client/shared/className'
@@ -50,13 +50,13 @@ export const CopyIcon = ({ index }: Props): JSX.Element => {
 
         const item = { ...itemToCopy, previewHtml: cleanedHtml }
 
-        dispatch(addItemIntoCopyContainer(item))
-        dispatch(allowToPaste())
+        dispatch(copySlice.actions.addItemIntoCopyContainer(item))
+        dispatch(copySlice.actions.allowToPaste())
 
         const isCopyContainer = store.getState().copy.isCopyContainer
         if (!isCopyContainer) {
-          dispatch(saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
-          dispatch(showCopyContainer())
+          dispatch(copySlice.actions.saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
+          dispatch(copySlice.actions.showCopyContainer())
         }
       }}
     >

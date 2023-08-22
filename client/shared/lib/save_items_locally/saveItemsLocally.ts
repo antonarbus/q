@@ -1,7 +1,7 @@
 import { store } from 'client/shared/clients'
 import { saveItemsIntoLocalStorage } from './saveItemsIntoLocalStorage'
 import { tellItemsSavedLocally } from './tellItemsSavedLocally'
-import { tellItemSavedLocally } from 'client/entities/items'
+import { itemsSlice } from 'client/entities/items'
 import type { Item } from 'client/shared/types'
 
 interface Props {
@@ -16,6 +16,6 @@ export const saveItemsLocally = ({
   saveItemsIntoLocalStorage({ items })
   tellItemsSavedLocally()
   if (msgAboveItemWithIndex !== undefined) {
-    store.dispatch(tellItemSavedLocally({ index: msgAboveItemWithIndex }))
+    store.dispatch(itemsSlice.actions.tellItemSavedLocally({ index: msgAboveItemWithIndex }))
   }
 }

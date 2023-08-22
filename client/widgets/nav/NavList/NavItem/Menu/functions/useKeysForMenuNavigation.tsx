@@ -1,7 +1,7 @@
 import { store } from 'client/shared/clients'
 import { useDispatchTyped } from 'client/shared/hooks'
 import { useEffect } from 'react'
-import { closeMenu, setMenuItemHoverIndex } from 'client/entities/nav'
+import { navSlice } from 'client/entities/nav'
 import { getMenuItemByIdsChain } from './getMenuItemByIdsChain'
 import { useNavigate } from 'react-router-dom'
 import { navigateInMenu } from './useMenuAnimation'
@@ -23,10 +23,10 @@ export const useKeysForMenuNavigation = (): void => {
       e.preventDefault()
       const isLastMenuItem = hoveredMenuItemIndex === menuItemsQty
       if (isLastMenuItem) {
-        dispatch(setMenuItemHoverIndex(1))
+        dispatch(navSlice.actions.setMenuItemHoverIndex(1))
         return
       }
-      dispatch(setMenuItemHoverIndex(hoveredMenuItemIndex + 1))
+      dispatch(navSlice.actions.setMenuItemHoverIndex(hoveredMenuItemIndex + 1))
       return
     }
 
@@ -34,10 +34,10 @@ export const useKeysForMenuNavigation = (): void => {
       e.preventDefault()
       const isTopMenuItem = hoveredMenuItemIndex < 2
       if (isTopMenuItem) {
-        dispatch(setMenuItemHoverIndex(menuItemsQty))
+        dispatch(navSlice.actions.setMenuItemHoverIndex(menuItemsQty))
         return
       }
-      dispatch(setMenuItemHoverIndex(hoveredMenuItemIndex - 1))
+      dispatch(navSlice.actions.setMenuItemHoverIndex(hoveredMenuItemIndex - 1))
       return
     }
 
@@ -47,12 +47,12 @@ export const useKeysForMenuNavigation = (): void => {
     }
 
     if (!isNestedMenu && e.key === 'Backspace') {
-      dispatch(closeMenu())
+      dispatch(navSlice.actions.closeMenu())
       return
     }
 
     if (e.key === 'Escape') {
-      dispatch(closeMenu())
+      dispatch(navSlice.actions.closeMenu())
       return
     }
 
@@ -71,21 +71,21 @@ export const useKeysForMenuNavigation = (): void => {
 
       const isCloseMenuItem = hoveredMenuItemIndex === 1 && !isNestedMenu
       if (isCloseMenuItem) {
-        dispatch(closeMenu())
+        dispatch(navSlice.actions.closeMenu())
         return
       }
 
       const link = menuItem?.link
       if (link) {
         navigate(link)
-        dispatch(closeMenu())
+        dispatch(navSlice.actions.closeMenu())
         return
       }
 
       const func = menuItem?.func
       if (func) {
         void func()
-        dispatch(closeMenu())
+        dispatch(navSlice.actions.closeMenu())
         return
       }
 
@@ -99,11 +99,11 @@ export const useKeysForMenuNavigation = (): void => {
     const anyLetter = /\w/
     if (anyLetter.exec(e.key)) {
       if (!isNestedMenu && e.key === 'c') {
-        dispatch(setMenuItemHoverIndex(1))
+        dispatch(navSlice.actions.setMenuItemHoverIndex(1))
         return
       }
       if (isNestedMenu && e.key === 'b') {
-        dispatch(setMenuItemHoverIndex(1))
+        dispatch(navSlice.actions.setMenuItemHoverIndex(1))
         return
       }
       // search in items below hovered item
@@ -114,7 +114,7 @@ export const useKeysForMenuNavigation = (): void => {
         return false
       })
       if (index > -1) {
-        dispatch(setMenuItemHoverIndex(index + 2))
+        dispatch(navSlice.actions.setMenuItemHoverIndex(index + 2))
       }
       // if no found below hovered item, do it again from the top
       if (index === -1) {
@@ -123,7 +123,7 @@ export const useKeysForMenuNavigation = (): void => {
           return isiKeySameAsFirstItemLetter
         })
         if (newIndex > -1) {
-          dispatch(setMenuItemHoverIndex(newIndex + 2))
+          dispatch(navSlice.actions.setMenuItemHoverIndex(newIndex + 2))
         }
       }
     }
