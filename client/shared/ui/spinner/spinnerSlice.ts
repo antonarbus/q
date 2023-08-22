@@ -6,7 +6,7 @@ const initialState = {
   text: '',
 }
 
-const spinnerSlice = createSlice({
+export const spinnerSlice = createSlice({
   name: 'spinner',
   initialState,
   reducers: {
@@ -17,6 +17,3 @@ const spinnerSlice = createSlice({
     stopSpinner: () => initialState,
   },
 })
-
-export const spinnerReducer = spinnerSlice.reducer
-export const { startSpinner, stopSpinner } = spinnerSlice.actions

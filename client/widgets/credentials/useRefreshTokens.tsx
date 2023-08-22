@@ -6,10 +6,10 @@ import axios from 'axios'
 import { tokenExpirationMinutes } from './tokenExpirationMinutes'
 import { navUpdate } from './navUpdate'
 import { token } from '../../shared/auth/token'
-import { forgetLoggedUser, rememberLoggedUser } from 'client/entities/user'
 import type { JwtPayloadExtended } from 'server/services/jwt'
 import type { RefreshAipRes } from 'server/api/refreshRouter'
 import { apiUrl } from 'server/apiUrls'
+import { userSlice } from 'client/entities/user'
 
 interface Props {
   withLoadingState?: boolean
@@ -45,7 +45,7 @@ export const useRefreshTokens = ({ withLoadingState }: Props): FuncReturn => {
           if (expirationInMin > 5) {
             const payloadFromExistingAccessToken = jwt_decode<JwtPayloadExtended>(token.access)
             const { email, roles } = payloadFromExistingAccessToken
-            store.dispatch(rememberLoggedUser({ email, isLogged: true, roles }))
+            store.dispatch(userSlice.actions.rememberLoggedUser({ email, isLogged: true, roles }))
             navUpdate.login()
             console.log(`access token expires in ${expirationInMin.toFixed(2)} min, which is more than 5 min, skip the refresh for now`)
             return
@@ -59,14 +59,14 @@ export const useRefreshTokens = ({ withLoadingState }: Props): FuncReturn => {
 
         if (status === 'error') {
           token.access = ''
-          store.dispatch(forgetLoggedUser())
+          store.dispatch(userSlice.actions.forgetLoggedUser())
           navUpdate.logout()
           console.log(response.data.message)
           return
         }
 
         if (!accessJwtToken) {
-          store.dispatch(forgetLoggedUser())
+          store.dispatch(userSlice.actions.forgetLoggedUser())
           navUpdate.logout()
           console.log('no access token in db')
           return
@@ -75,7 +75,7 @@ export const useRefreshTokens = ({ withLoadingState }: Props): FuncReturn => {
         const payloadFromUpdatedAccessToken = jwt_decode<JwtPayloadExtended>(accessJwtToken)
         const { email } = payloadFromUpdatedAccessToken
         if (!email) {
-          store.dispatch(forgetLoggedUser())
+          store.dispatch(userSlice.actions.forgetLoggedUser())
           navUpdate.logout()
           console.log('token is invalid')
           return
@@ -84,7 +84,7 @@ export const useRefreshTokens = ({ withLoadingState }: Props): FuncReturn => {
         if (email) {
           token.access = accessJwtToken
           // console.log(response)
-          store.dispatch(rememberLoggedUser({ email, isLogged: true, roles }))
+          store.dispatch(userSlice.actions.rememberLoggedUser({ email, isLogged: true, roles }))
           navUpdate.login()
           console.log(`tokens for ${email} are refreshed`)
           return

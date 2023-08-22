@@ -2,9 +2,9 @@ import { notify } from 'client/shared/ui/top_msg/notify'
 import { store } from 'client/app/store'
 import { navUpdate } from './navUpdate'
 import { token } from '../../shared/auth/token'
-import { forgetLoggedUser } from 'client/entities/user'
 import type { LogoutApiRes } from 'server/api/logoutRouter'
 import { apiUrl } from 'server/apiUrls'
+import { userSlice } from 'client/entities/user'
 
 export const logoutUser = async (): Promise<void> => {
   const method = 'GET'
@@ -44,7 +44,7 @@ export const logoutUser = async (): Promise<void> => {
     if (status === 'ok') {
       // notify({ msg: `User with ${email} is logged out`, type: 'success', theme: 'light' })
     }
-    store.dispatch(forgetLoggedUser())
+    store.dispatch(userSlice.actions.forgetLoggedUser())
     navUpdate.logout()
   } catch (err) {
     console.log(err)

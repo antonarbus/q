@@ -1,4 +1,4 @@
-import { removeItemMsg } from 'client/entities/items'
+import { itemsSlice } from 'client/entities/items'
 import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
 import { useUpdateEffect } from 'react-use'
 
@@ -13,7 +13,7 @@ export const useRemoveItemMsgAfterSomeTime = ({ index }: Props): void => {
   useUpdateEffect(() => {
     const timeout = setTimeout(() => {
       if (!msg) return
-      dispatch(removeItemMsg({ index }))
+      dispatch(itemsSlice.actions.removeItemMsg({ index }))
     }, 1700)
 
     return () => {

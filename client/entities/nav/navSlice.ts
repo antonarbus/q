@@ -23,7 +23,7 @@ const initialState = {
   menuItemHoverIndex: 0,
 }
 
-const navSlice = createSlice({
+export const navSlice = createSlice({
   name: 'nav',
   initialState,
   reducers: {
@@ -136,30 +136,30 @@ const navSlice = createSlice({
   },
 })
 
-export const {
-  closeBurger,
-  toggleBurger,
-  setNavMediaQueryWidths,
-  setNavItemRightPos,
-  openMenuWithId,
-  closeMenu,
-  // we track the state of 'current' and 'next' menus for the slide effect, coz we actually have two parallel menus
-  // 1st menu state
-  goDownInCurrentMenu,
-  goUpInCurrentMenu,
-  // 2nd menu state
-  goDownInNextMenu,
-  goUpInNextMenu,
-  setMenuItemHoverIndex,
-  showLogInMenuItem,
-  hideLogInMenuItem,
-  showAccountMenuItem,
-  hideAccountMenuItem,
-  disableTopMenuItemsExceptItemId,
-  enableTopMenuItems,
-  disableMedia,
-  enableMedia,
-} = navSlice.actions
+// export const {
+//   closeBurger,
+//   toggleBurger,
+//   setNavMediaQueryWidths,
+//   setNavItemRightPos,
+//   openMenuWithId,
+//   closeMenu,
+//   // we track the state of 'current' and 'next' menus for the slide effect, coz we actually have two parallel menus
+//   // 1st menu state
+//   goDownInCurrentMenu,
+//   goUpInCurrentMenu,
+//   // 2nd menu state
+//   goDownInNextMenu,
+//   goUpInNextMenu,
+//   setMenuItemHoverIndex,
+//   showLogInMenuItem,
+//   hideLogInMenuItem,
+//   showAccountMenuItem,
+//   hideAccountMenuItem,
+//   disableTopMenuItemsExceptItemId,
+//   enableTopMenuItems,
+//   disableMedia,
+//   enableMedia,
+// } = navSlice.actions
 
 export const selectMenuItemByIdsChainSelector =
   (idsToCurrentMenuItems: string[]) => (state: RootState): MenuItemTypes[] => {
@@ -182,4 +182,4 @@ export const selectMenuItemByIdsChainSelector =
     return clicked
   }
 
-export const navReducer = navSlice.reducer
+// export const navReducer = navSlice.reducer

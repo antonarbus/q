@@ -3,23 +3,6 @@ export { defaultItems } from './model/defaultItems'
 // slice
 export { itemsSlice } from './model/itemsSlice'
 
-// reducers
-export {
-  itemsReducer,
-  reOrderItems,
-  deleteItem,
-  pasteItem,
-  resetItemsToDefault,
-  tellItemSavedLocally,
-  removeItemMsg,
-  saveItemWidth,
-  saveItemHeight,
-  saveItemHeights,
-  saveItemText,
-  removePasteItem,
-  insertPasteItem,
-} from './model/itemsSlice'
-
 // selectors
 export { itemsShapeEqualityFn } from './model/selectors/itemsShapeEqualityFn'
 export { selectIsItemAlone } from './model/selectors/selectIsItemAlone'
@@ -28,7 +11,7 @@ export { selectIsItemAlone } from './model/selectors/selectIsItemAlone'
 export { saveItemHeightByIndex } from './model/saveItemHeightByIndex'
 
 // html getters
-export { itemTextHtmlGetter } from './model/reducers/itemTextHtmlGetter'
+export { itemTextHtmlGetter } from './model/html_getters/itemTextHtmlGetter'
 export { itemBoqColumnNameDescriptionHtmlGetter } from './model/html_getters/itemBoqColumnNameDescriptionHtmlGetter'
 export { itemBoqColumnNameItemHtmlGetter } from './model/html_getters/itemBoqColumnNameItemHtmlGetter'
 export { itemBoqColumnNamePriceHtmlGetter } from './model/html_getters/itemBoqColumnNamePriceHtmlGetter'

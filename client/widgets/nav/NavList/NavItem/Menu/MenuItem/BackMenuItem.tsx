@@ -3,7 +3,7 @@ import { Icon } from '../../Icon'
 import { FaChevronLeft } from 'react-icons/fa'
 import { MenuItemStyled } from './MenuItemStyled'
 import { theme } from 'client/shared/clients'
-import { setMenuItemHoverIndex } from 'client/entities/nav'
+import { navSlice } from 'client/entities/nav'
 import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
 import { navigateInMenu } from '../functions/useMenuAnimation'
 import type { MouseEvent } from 'react'
@@ -21,7 +21,7 @@ export const BackMenuItem = (): JSX.Element => {
         navigateInMenu.up?.()
       }}
       onMouseEnter={(): void => {
-        dispatch(setMenuItemHoverIndex(1))
+        dispatch(navSlice.actions.setMenuItemHoverIndex(1))
       }}
       state={{ isHovered }}
     >

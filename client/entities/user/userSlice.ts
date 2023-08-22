@@ -13,7 +13,7 @@ const initialState: Props = {
   roles: ['no role'],
 }
 
-const userSlice = createSlice({
+export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
@@ -24,6 +24,3 @@ const userSlice = createSlice({
     forgetLoggedUser: () => initialState,
   },
 })
-
-export const userReducer = userSlice.reducer
-export const { rememberLoggedUser, forgetLoggedUser } = userSlice.actions

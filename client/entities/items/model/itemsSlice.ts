@@ -45,23 +45,23 @@ export const itemsSlice = createSlice({
   },
 })
 
-export const {
-  reOrderItems,
-  deleteItem,
-  pasteItem,
-  resetItemsToDefault,
-  tellItemSavedLocally,
-  removeItemMsg,
-  saveItemWidth,
-  saveItemHeight,
-  saveItemHeights,
-  saveItemText,
-  removePasteItem,
-  insertPasteItem,
-  saveBoqHeaderTitle,
-  saveBoqHeaderCurrency,
-  saveBoqHeaderPrice,
-  saveBoqHeaderSubtotal,
-} = itemsSlice.actions
+// export const {
+//   reOrderItems,
+//   deleteItem,
+//   pasteItem,
+//   resetItemsToDefault,
+//   tellItemSavedLocally,
+//   removeItemMsg,
+//   saveItemWidth,
+//   saveItemHeight,
+//   saveItemHeights,
+//   saveItemText,
+//   removePasteItem,
+//   insertPasteItem,
+//   saveBoqHeaderTitle,
+//   saveBoqHeaderCurrency,
+//   saveBoqHeaderPrice,
+//   saveBoqHeaderSubtotal,
+// } = itemsSlice.actions
 
-export const itemsReducer = itemsSlice.reducer
+// export const itemsReducer = itemsSlice.reducer

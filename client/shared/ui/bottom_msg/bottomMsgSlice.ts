@@ -6,7 +6,7 @@ const initialState = {
   msg: '',
 }
 
-const bottomMsgSlice = createSlice({
+export const bottomMsgSlice = createSlice({
   name: 'bottomMsg',
   initialState,
   reducers: {
@@ -17,5 +17,5 @@ const bottomMsgSlice = createSlice({
   },
 })
 
-export const bottomMsgReducer = bottomMsgSlice.reducer
-export const { showMsgOnBottom, resetMsgOnBottom } = bottomMsgSlice.actions
+// export const bottomMsgReducer = bottomMsgSlice.reducer
+// export const { showMsgOnBottom, resetMsgOnBottom } = bottomMsgSlice.actions

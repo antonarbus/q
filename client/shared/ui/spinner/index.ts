@@ -1,1 +1,1 @@
-export { spinnerReducer, startSpinner, stopSpinner } from './spinnerSlice'
+export { spinnerSlice } from './spinnerSlice'

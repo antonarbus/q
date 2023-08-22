@@ -1,7 +1,7 @@
 import type { RefObject } from 'react'
 import { useLayoutEffect } from 'react'
 import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
-import { disableMedia, enableMedia, setNavMediaQueryWidths } from 'client/entities/nav'
+import { navSlice } from 'client/entities/nav'
 import { calcNavMediaQueryParams } from './calcNavMediaQueryParams'
 import { useFirstMountState } from 'react-use'
 
@@ -21,13 +21,13 @@ export const useMediaQueryValues = ({ navRef, logoRef }: Props): void => {
     if (!navRef.current) return
     if (!logoRef.current) return
     const { logoExtension, logoPart, icon, name, burger } = calcNavMediaQueryParams(navRef.current, logoRef.current)
-    dispatch(setNavMediaQueryWidths({ logoExtension, logoPart, icon, name, burger }))
+    dispatch(navSlice.actions.setNavMediaQueryWidths({ logoExtension, logoPart, icon, name, burger }))
   }, [])
 
   useLayoutEffect(() => {
     // if menu item is hidden disable all media queries and get whole nav
     if (isFirstMount) return
-    dispatch(disableMedia())
+    dispatch(navSlice.actions.disableMedia())
   }, [navStructure])
 
   useLayoutEffect(() => {
@@ -37,7 +37,7 @@ export const useMediaQueryValues = ({ navRef, logoRef }: Props): void => {
     if (!navRef.current) return
     if (!logoRef.current) return
     const { logoExtension, logoPart, icon, name, burger } = calcNavMediaQueryParams(navRef.current, logoRef.current)
-    dispatch(setNavMediaQueryWidths({ logoExtension, logoPart, icon, name, burger }))
-    dispatch(enableMedia())
+    dispatch(navSlice.actions.setNavMediaQueryWidths({ logoExtension, logoPart, icon, name, burger }))
+    dispatch(navSlice.actions.enableMedia())
   }, [mediaEnabled])
 }

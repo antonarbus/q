@@ -1,5 +1,5 @@
 import { elementHeight } from 'client/shared/lib/elementHeight'
-import { goDownInCurrentMenu, goDownInNextMenu, goUpInCurrentMenu, goUpInNextMenu } from 'client/entities/nav'
+import { navSlice } from 'client/entities/nav'
 import { useDispatchTyped } from 'client/shared/hooks'
 import { theme } from 'client/shared/clients'
 import { gsap } from 'gsap'
@@ -53,9 +53,9 @@ export const useMenuAnimation = ({
 
   const goDownInMenu = (id: string): void => {
     const cb = (): void => {
-      dispatch(goDownInCurrentMenu(id))
+      dispatch(navSlice.actions.goDownInCurrentMenu(id))
     }
-    dispatch(goDownInNextMenu(id))
+    dispatch(navSlice.actions.goDownInNextMenu(id))
     gsap.fromTo(
       currentMenuRef.current,
       { xPercent: 0 },
@@ -71,9 +71,9 @@ export const useMenuAnimation = ({
   const goUpInMenu = (): void => {
     type Function = () => void
     const cb = (): void => {
-      dispatch(goUpInCurrentMenu())
+      dispatch(navSlice.actions.goUpInCurrentMenu())
     }
-    dispatch(goUpInNextMenu())
+    dispatch(navSlice.actions.goUpInNextMenu())
     gsap.fromTo(
       currentMenuRef.current,
       { xPercent: 0 },

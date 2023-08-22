@@ -6,10 +6,10 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { navUpdate } from './navUpdate'
 import { token } from '../../shared/auth/token'
 import type { HttpStatusType } from './types'
-import { rememberLoggedUser } from 'client/entities/user'
 import { slideElement } from 'client/shared/lib/slideElement'
 import type { LoginApiRes } from 'server/api/loginRouter'
 import { apiUrl } from 'server/apiUrls'
+import { userSlice } from 'client/entities/user'
 
 interface StateProps {
   from?: {
@@ -72,7 +72,7 @@ export const useLogin = (): FuncRes => {
       if (status === 'ok' && accessJwtToken) {
         setHttpStatus('success')
         token.access = accessJwtToken
-        dispatch(rememberLoggedUser({ email, isLogged: true, roles }))
+        dispatch(userSlice.actions.rememberLoggedUser({ email, isLogged: true, roles }))
         // notify({ msg: 'Logged in!', theme: 'light', closeAfterMs: 3000 })
         navUpdate.login()
         setTimeout(() => {

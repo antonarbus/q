@@ -7,7 +7,7 @@ import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
 import { Shortcut } from './Shortcut'
 import { clickOnMenuItem } from './function/clickOnMenuItem'
 import type { MenuItemTypes } from 'client/entities/nav'
-import { setMenuItemHoverIndex } from 'client/entities/nav'
+import { navSlice } from 'client/entities/nav'
 import type { MouseEvent } from 'react'
 
 interface Props {
@@ -34,7 +34,7 @@ export const MenuItem = ({ menuItem, hoveredMenuItemIndex }: Props): JSX.Element
         clickOnMenuItem(e, menuId, disabled)
       }}
       onMouseEnter={(): void => {
-        dispatch(setMenuItemHoverIndex(hoveredMenuItemIndex))
+        dispatch(navSlice.actions.setMenuItemHoverIndex(hoveredMenuItemIndex))
       }}
       state={{ isHovered }}
     >

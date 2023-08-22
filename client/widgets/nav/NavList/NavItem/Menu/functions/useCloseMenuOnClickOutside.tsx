@@ -2,7 +2,7 @@ import { didClickInsideThisElement } from 'client/shared/lib/isClickInsideThisEl
 import { useDispatchTyped } from 'client/shared/hooks'
 import type { MutableRefObject } from 'react'
 import { useEffect } from 'react'
-import { closeMenu } from 'client/entities/nav'
+import { navSlice } from 'client/entities/nav'
 
 interface Props {
   menuContainerRef: MutableRefObject<HTMLDivElement | null>
@@ -29,7 +29,7 @@ export const useCloseMenuOnClickOutside = ({ menuContainerRef }: Props): void =>
       !didClickInsideThisElement({ clickedElement, thisElement: menuContainer })
     if (isClickOnOpenedNavItem) return
     if (!didClickInsideThisElement({ clickedElement, thisElement: menuContainer })) {
-      dispatch(closeMenu())
+      dispatch(navSlice.actions.closeMenu())
     }
   }
 

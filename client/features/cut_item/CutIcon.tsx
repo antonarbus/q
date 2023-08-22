@@ -2,10 +2,10 @@ import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
 import { store } from 'client/shared/clients'
 import { TbCut } from 'react-icons/tb'
 import { motion } from 'framer-motion'
-import { deleteItem, saveItemHeightByIndex, selectIsItemAlone } from 'client/entities/items'
+import { itemsSlice, saveItemHeightByIndex, selectIsItemAlone } from 'client/entities/items'
 import { cleanHtml } from 'client/shared/lib/itemsUtils'
 import { saveItemsLocally } from 'client/shared/lib'
-import { addItemIntoCopyContainer, allowToCopy, allowToCut, allowToDelete, allowToPaste, forbidToCopy, forbidToCut, forbidToDelete, forbidToPaste, saveInitCordsOfCopyContainer, showCopyContainer } from 'client/entities/copy'
+import { copySlice } from 'client/entities/copy'
 import type { MouseEvent } from 'react'
 import { className } from 'client/shared/className'
 import { theme } from 'client/shared/clients'
@@ -50,25 +50,25 @@ export const CutIcon = ({ index }: Props): JSX.Element => {
         const cleanedHtml = cleanHtml(html)
         const item = { ...itemToCut, previewHtml: cleanedHtml }
 
-        dispatch(addItemIntoCopyContainer(item))
-        dispatch(deleteItem({ itemId: itemToCut.id }))
+        dispatch(copySlice.actions.addItemIntoCopyContainer(item))
+        dispatch(itemsSlice.actions.deleteItem({ itemId: itemToCut.id }))
 
-        dispatch(forbidToPaste())
-        dispatch(forbidToCopy())
-        dispatch(forbidToCut())
-        dispatch(forbidToDelete())
+        dispatch(copySlice.actions.forbidToPaste())
+        dispatch(copySlice.actions.forbidToCopy())
+        dispatch(copySlice.actions.forbidToCut())
+        dispatch(copySlice.actions.forbidToDelete())
 
         const isCopyContainer = store.getState().copy.isCopyContainer
         if (!isCopyContainer) {
-          dispatch(saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
-          dispatch(showCopyContainer())
+          dispatch(copySlice.actions.saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
+          dispatch(copySlice.actions.showCopyContainer())
         }
 
         setTimeout(() => {
-          dispatch(allowToPaste())
-          dispatch(allowToCopy())
-          dispatch(allowToCut())
-          dispatch(allowToDelete())
+          dispatch(copySlice.actions.allowToPaste())
+          dispatch(copySlice.actions.allowToCopy())
+          dispatch(copySlice.actions.allowToCut())
+          dispatch(copySlice.actions.allowToDelete())
         }, 1000 * theme.item.animationDuration)
 
         saveItemsLocally()

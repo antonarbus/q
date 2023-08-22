@@ -1,1 +1,1 @@
-export { userReducer, rememberLoggedUser, forgetLoggedUser } from './userSlice'
+export { userSlice } from './userSlice'

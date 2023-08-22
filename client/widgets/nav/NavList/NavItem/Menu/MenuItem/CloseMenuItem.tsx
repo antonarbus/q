@@ -4,7 +4,7 @@ import { TextInMenu } from './TextInMenu'
 import { Icon } from '../../Icon'
 import { CgClose as CloseIcon } from 'react-icons/cg'
 import { MenuItemStyled } from './MenuItemStyled'
-import { closeMenu, setMenuItemHoverIndex } from 'client/entities/nav'
+import { navSlice } from 'client/entities/nav'
 import { theme } from 'client/shared/clients'
 import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
 
@@ -20,10 +20,10 @@ export const CloseMenuItem = (): JSX.Element => {
       to='/'
       onClick={(e: MouseEvent): void => {
         e.preventDefault()
-        dispatch(closeMenu())
+        dispatch(navSlice.actions.closeMenu())
       }}
       onMouseEnter={(): void => {
-        dispatch(setMenuItemHoverIndex(1))
+        dispatch(navSlice.actions.setMenuItemHoverIndex(1))
       }}
       state={{ isHovered }}
     >
