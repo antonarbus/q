@@ -1,5 +1,5 @@
 import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
-import { store, theme } from 'client/shared/clients'
+import { getState, theme } from 'client/shared/clients'
 import { RxCross2 } from 'react-icons/rx'
 import { itemsSlice, selectIsItemAlone } from 'client/entities/items'
 import { gsap } from 'gsap'
@@ -32,7 +32,7 @@ export const DeleteIcon = ({ index }: Props): EmotionJSX.Element => {
 
         if (disabled) return
 
-        const itemToDelete = store.getState().items[index]
+        const itemToDelete = getState().items[index]
         if (!itemToDelete) return
 
         dispatch(itemsSlice.actions.deleteItem({ itemId: itemToDelete.id }))

@@ -1,6 +1,6 @@
 import { itemBoqHeaderCurrencyHtmlGetter } from 'client/entities/items'
 import { changeBoqHeaderCurrency } from 'client/features/change_text'
-import { store } from 'client/shared/clients'
+import { getState } from 'client/shared/clients'
 import { Froala } from 'client/shared/ui/froala'
 import { useRef } from 'react'
 
@@ -11,7 +11,7 @@ interface Props {
 export const Currency = ({ index }: Props): JSX.Element | null => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef(null)
-  const item = store.getState().items[index]
+  const item = getState().items[index]
 
   if (item?.type !== 'boq') return null
 

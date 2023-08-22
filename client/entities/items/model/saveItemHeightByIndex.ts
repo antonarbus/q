@@ -1,4 +1,4 @@
-import { store } from 'client/shared/clients'
+import { dispatch } from 'client/shared/clients'
 import { itemsSlice } from './itemsSlice'
 import { className } from 'client/shared/className'
 
@@ -11,5 +11,5 @@ export const saveItemHeightByIndex = ({ index }: Props): void => {
   const item = items[index]
   if (!item) return
   const height = item.clientHeight
-  store.dispatch(itemsSlice.actions.saveItemHeight({ index, height }))
+  dispatch(itemsSlice.actions.saveItemHeight({ index, height }))
 }

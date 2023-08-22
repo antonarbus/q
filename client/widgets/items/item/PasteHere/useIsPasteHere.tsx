@@ -1,12 +1,12 @@
 import { useSelectorTyped } from 'client/shared/hooks'
-import { store } from 'client/shared/clients'
+import { getState, store } from 'client/shared/clients'
 
 interface Props {
   index: number
 }
 
 export const useIsPasteHere = ({ index }: Props): boolean => {
-  const itemId = store.getState().items[index]?.id
+  const itemId = getState().items[index]?.id
   const pastePos = useSelectorTyped(state => state.copy.place.pastePos)
   const pasteItemId = useSelectorTyped(state => state.copy.place.itemId)
   const isPasteTextShown = useSelectorTyped(state => state.copy.isPasteTextShown)

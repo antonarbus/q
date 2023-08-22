@@ -1,6 +1,6 @@
 import type { MenuItemTypes } from 'client/entities/nav'
 import { navSlice } from 'client/entities/nav'
-import { store } from 'client/app/store'
+import { dispatch, getState } from 'client/shared/clients'
 import type { MouseEvent, MutableRefObject } from 'react'
 
 interface Props {
@@ -35,18 +35,18 @@ export const clickOnNavItem = ({ e, navItem, id, navItemRef, disabled }: Props):
   e.preventDefault()
 
   // handle burger close separately
-  const isBurger = store.getState().nav.idsToCurrentMenuItems.includes('burger')
+  const isBurger = getState().nav.idsToCurrentMenuItems.includes('burger')
   if (isBurger) {
-    store.dispatch(navSlice.actions.closeMenu())
+    dispatch(navSlice.actions.closeMenu())
     return
   }
 
   // if click on NavItem for which Menu is opened, then close it, otherwise it closes and opens immediately
-  const currentMenuId = store.getState().nav.idsToCurrentMenuItems.at(-1)
+  const currentMenuId = getState().nav.idsToCurrentMenuItems.at(-1)
   const isMenuOpenedUnderThisNavItem = currentMenuId === id && currentMenuId !== 'top'
 
   if (isMenuOpenedUnderThisNavItem) {
-    store.dispatch(navSlice.actions.closeMenu())
+    dispatch(navSlice.actions.closeMenu())
     return
   }
 
@@ -57,6 +57,6 @@ export const clickOnNavItem = ({ e, navItem, id, navItemRef, disabled }: Props):
 
   // open menu and determine its position (right: 0 OR left: 0)
   const navItemRightPos = navItemRef.current.getBoundingClientRect().right
-  store.dispatch(navSlice.actions.setNavItemRightPos(navItemRightPos))
-  store.dispatch(navSlice.actions.openMenuWithId(id))
+  dispatch(navSlice.actions.setNavItemRightPos(navItemRightPos))
+  dispatch(navSlice.actions.openMenuWithId(id))
 }

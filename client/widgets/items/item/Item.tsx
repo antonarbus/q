@@ -1,7 +1,7 @@
 
 import type { ReactNode } from 'react'
 import { useIsItemDisabled } from './useIsItemDisabled'
-import { store } from 'client/shared/clients'
+import { getState, store } from 'client/shared/clients'
 import { DragIcon } from 'client/features/drag_item'
 import { CopyIcon } from 'client/features/copy_item/CopyIcon'
 import { CutIcon } from 'client/features/cut_item/CutIcon'
@@ -17,7 +17,7 @@ interface Props {
 
 export const Item = ({ index, children }: Props): JSX.Element => {
   const isItemDisabled = useIsItemDisabled()
-  const item = store.getState().items[index]
+  const item = getState().items[index]
 
   return (
     <ItemLayout
