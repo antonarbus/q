@@ -4,26 +4,12 @@ import { TextItem } from './TextItem'
 import { PasteItem } from './PasteItem'
 import { AnimatePresence } from 'framer-motion'
 import { DraggableItemsContainer } from './DraggableItemsContainer'
-import type { Item } from 'client/shared/types'
-import { allowToCopy, allowToCut, allowToDelete, allowToPaste } from 'client/entities/copy'
 import { BoqItem } from './BoqItem/BoqItem'
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type EqualityFn = (a: any, b: any) => boolean
-
-// re-render the list only if item is replaced or new item is added
-const equalityFn: EqualityFn = (prevItems: Item[], currentItems: Item[]): boolean => {
-  const isDifferentLength = prevItems.length !== currentItems.length
-  if (isDifferentLength) return false
-  const idsDoNotMatch = prevItems.some((item: Item, index: number) => prevItems[index]?.id !== currentItems[index]?.id)
-  if (idsDoNotMatch) return false
-  return true
-}
+import { itemsShapeEqualityFn } from 'client/entities/items'
 
 export const Items = (): JSX.Element => {
-  const items = useSelectorTyped(state => state.items, equalityFn)
+  const items = useSelectorTyped(state => state.items, itemsShapeEqualityFn)
   const shouldReRender = useSelectorTyped(state => state.offer.toggleOffer)
-  const dispatch = useDispatchTyped()
 
   return (
     <DraggableItemsContainer
