@@ -1,4 +1,5 @@
 import { itemBoqHeaderPriceHtmlGetter } from 'client/entities/items'
+import { changeBoqHeaderPrice } from 'client/features/change_text'
 import { store } from 'client/shared/clients'
 import { Froala } from 'client/shared/ui/froala'
 import { useRef } from 'react'
@@ -21,9 +22,7 @@ export const Price = ({ index }: Props): JSX.Element | null => {
       froalaElementRef={froalaElementRef}
       placeholder='Price...'
       initHtmlGetter={itemBoqHeaderPriceHtmlGetter}
-      onContentChange={(): void => {
-        console.log('xxx')
-      }}
+      onContentChange={changeBoqHeaderPrice}
       additionalStyle={{
         width: '100%',
         whiteSpace: 'nowrap',

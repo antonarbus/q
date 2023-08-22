@@ -1,4 +1,5 @@
 import { itemBoqHeaderCurrencyHtmlGetter } from 'client/entities/items'
+import { changeBoqHeaderCurrency } from 'client/features/change_text'
 import { store } from 'client/shared/clients'
 import { Froala } from 'client/shared/ui/froala'
 import { useRef } from 'react'
@@ -21,9 +22,7 @@ export const Currency = ({ index }: Props): JSX.Element | null => {
       froalaElementRef={froalaElementRef}
       placeholder='$...'
       initHtmlGetter={itemBoqHeaderCurrencyHtmlGetter}
-      onContentChange={(): void => {
-        console.log('xxx')
-      }}
+      onContentChange={changeBoqHeaderCurrency}
       additionalStyle={{
         textAlign: 'right',
         whiteSpace: 'nowrap',
