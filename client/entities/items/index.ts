@@ -1,5 +1,8 @@
 export { defaultItems } from './model/defaultItems'
 
+// slice
+export { itemsSlice } from './model/itemsSlice'
+
 // reducers
 export {
   itemsReducer,

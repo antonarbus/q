@@ -1,4 +1,5 @@
 import { itemBoqHeaderSubtotalTextHtmlGetter } from 'client/entities/items'
+import { changeBoqHeaderSubtotal } from 'client/features/change_text'
 import { store } from 'client/shared/clients'
 import { Froala } from 'client/shared/ui/froala'
 import { useEffect, useRef } from 'react'
@@ -22,9 +23,7 @@ export const SubtotalText = ({ index }: Props): JSX.Element | null => {
       froalaElementRef={froalaElementRef}
       placeholder='Subtotal...'
       initHtmlGetter={itemBoqHeaderSubtotalTextHtmlGetter}
-      onContentChange={(): void => {
-        console.log('xxx')
-      }}
+      onContentChange={changeBoqHeaderSubtotal}
       additionalStyle={{
         height: '100%',
         width: '100%',

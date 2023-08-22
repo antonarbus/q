@@ -1,4 +1,5 @@
 import { itemBoqHeaderTitleHtmlGetter } from 'client/entities/items'
+import { changeBoqHeaderTitle } from 'client/features/change_text'
 import { store } from 'client/shared/clients'
 import { Froala } from 'client/shared/ui/froala'
 import { useRef } from 'react'
@@ -21,9 +22,7 @@ export const Title = ({ index }: Props): JSX.Element | null => {
       froalaElementRef={froalaElementRef}
       placeholder='Title...'
       initHtmlGetter={itemBoqHeaderTitleHtmlGetter}
-      onContentChange={(): void => {
-        console.log('xxx')
-      }}
+      onContentChange={changeBoqHeaderTitle}
       additionalStyle={{
         flexGrow: 1,
       }}

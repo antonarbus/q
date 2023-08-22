@@ -13,12 +13,16 @@ import { saveItemTextReducer } from './reducers/saveItemTextReducer'
 import { saveItemWidthReducer } from './reducers/saveItemWidthReducer'
 import { tellItemSavedLocallyReducer } from './reducers/tellItemSavedLocallyReducer'
 import { getDefaultOrLocalItems } from './getDefaultOrLocalItems'
+import { saveBoqHeaderTitleReducer } from './reducers/saveBoqHeaderTitleReducer'
+import { saveBoqHeaderCurrencyReducer } from './reducers/saveBoqHeaderCurrencyReducer'
+import { saveBoqHeaderPriceReducer } from './reducers/saveBoqHeaderPriceReducer'
+import { saveBoqHeaderSubtotalReducer } from './reducers/saveBoqHeaderSubtotalReducer'
 
 export type ItemsState = Item[]
 
 const initialState = getDefaultOrLocalItems()
 
-const itemsSlice = createSlice({
+export const itemsSlice = createSlice({
   name: 'items',
   initialState,
   reducers: {
@@ -30,10 +34,14 @@ const itemsSlice = createSlice({
     removeItemMsg: removeItemMsgReducer,
     saveItemWidth: saveItemWidthReducer,
     saveItemHeight: saveItemHeightReducer,
-    saveItemHeights: saveItemHeightsReducer,
+    saveItemHeights: saveItemHeightsReducer, // todo: not used anywhere
     saveItemText: saveItemTextReducer,
     removePasteItem: removePasteItemReducer,
     insertPasteItem: insertPasteItemReducer,
+    saveBoqHeaderTitle: saveBoqHeaderTitleReducer,
+    saveBoqHeaderCurrency: saveBoqHeaderCurrencyReducer,
+    saveBoqHeaderPrice: saveBoqHeaderPriceReducer,
+    saveBoqHeaderSubtotal: saveBoqHeaderSubtotalReducer,
   },
 })
 
@@ -46,9 +54,14 @@ export const {
   removeItemMsg,
   saveItemWidth,
   saveItemHeight,
-  saveItemHeights, // todo: not used anywhere
+  saveItemHeights,
   saveItemText,
   removePasteItem,
   insertPasteItem,
+  saveBoqHeaderTitle,
+  saveBoqHeaderCurrency,
+  saveBoqHeaderPrice,
+  saveBoqHeaderSubtotal,
 } = itemsSlice.actions
+
 export const itemsReducer = itemsSlice.reducer
