@@ -1,5 +1,5 @@
 import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
-import { store } from 'client/shared/clients'
+import { getState } from 'client/shared/clients'
 import { MdCopyAll } from 'react-icons/md'
 import { motion } from 'framer-motion'
 import { cleanHtml } from 'client/shared/lib/itemsUtils'
@@ -35,7 +35,7 @@ export const CopyIcon = ({ index }: Props): JSX.Element => {
 
         saveItemHeightByIndex({ index })
 
-        const itemToCopy = store.getState().items[index]
+        const itemToCopy = getState().items[index]
         if (!itemToCopy) return
 
         const clickedIconElement = e.target
@@ -53,7 +53,7 @@ export const CopyIcon = ({ index }: Props): JSX.Element => {
         dispatch(copySlice.actions.addItemIntoCopyContainer(item))
         dispatch(copySlice.actions.allowToPaste())
 
-        const isCopyContainer = store.getState().copy.isCopyContainer
+        const isCopyContainer = getState().copy.isCopyContainer
         if (!isCopyContainer) {
           dispatch(copySlice.actions.saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
           dispatch(copySlice.actions.showCopyContainer())

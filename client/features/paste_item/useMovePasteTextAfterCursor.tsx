@@ -1,5 +1,5 @@
 import { useEffectOnce, useUnmount } from 'react-use'
-import { store } from 'client/app/store'
+import { dispatch, getState } from 'client/shared/clients'
 import isEqual from 'lodash.isequal'
 import { copySlice } from 'client/entities/copy'
 import { itemsSlice } from 'client/entities/items'
@@ -23,35 +23,35 @@ const getPastePlace = ({ item, e }: Props): CopyPlace => {
 }
 
 const movePasteTextAfterCursor = (e: MouseEvent): void => {
-  const prevPlace = store.getState().copy.place
-  const isPasteTextShown = store.getState().copy.isPasteTextShown
+  const prevPlace = getState().copy.place
+  const isPasteTextShown = getState().copy.isPasteTextShown
 
   const nav = (e.target as Element).closest('nav')
 
   if (nav) {
     if (!isPasteTextShown) return
-    store.dispatch(copySlice.actions.hidePasteText())
+    dispatch(copySlice.actions.hidePasteText())
     return
   }
 
   const actionsContainer = (e.target as Element).closest(`.${className.actions}`)
 
   if (actionsContainer && isPasteTextShown) {
-    store.dispatch(copySlice.actions.hidePasteText())
-    store.dispatch(itemsSlice.actions.removePasteItem())
+    dispatch(copySlice.actions.hidePasteText())
+    dispatch(itemsSlice.actions.removePasteItem())
     return
   }
 
   if (!actionsContainer && !isPasteTextShown) {
-    store.dispatch(copySlice.actions.showPasteText())
+    dispatch(copySlice.actions.showPasteText())
     return
   }
 
-  const isPastable = store.getState().copy.isPastable
+  const isPastable = getState().copy.isPastable
 
   if (!isPastable) {
-    store.dispatch(copySlice.actions.hidePasteText())
-    store.dispatch(itemsSlice.actions.removePasteItem())
+    dispatch(copySlice.actions.hidePasteText())
+    dispatch(itemsSlice.actions.removePasteItem())
     return
   }
 
@@ -64,9 +64,9 @@ const movePasteTextAfterCursor = (e: MouseEvent): void => {
 
   if (isEqual(pastePlace, prevPlace)) return
 
-  store.dispatch(copySlice.actions.updatePastePos(pastePlace))
-  store.dispatch(copySlice.actions.showPasteText())
-  store.dispatch(itemsSlice.actions.insertPasteItem(pastePlace))
+  dispatch(copySlice.actions.updatePastePos(pastePlace))
+  dispatch(copySlice.actions.showPasteText())
+  dispatch(itemsSlice.actions.insertPasteItem(pastePlace))
 }
 
 export const useMovePasteTextAfterCursor = (): void => {

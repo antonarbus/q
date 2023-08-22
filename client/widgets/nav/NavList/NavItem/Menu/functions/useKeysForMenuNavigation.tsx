@@ -1,10 +1,10 @@
-import { store } from 'client/shared/clients'
 import { useDispatchTyped } from 'client/shared/hooks'
 import { useEffect } from 'react'
 import { navSlice } from 'client/entities/nav'
 import { getMenuItemByIdsChain } from './getMenuItemByIdsChain'
 import { useNavigate } from 'react-router-dom'
 import { navigateInMenu } from './useMenuAnimation'
+import { getState } from 'client/shared/clients'
 
 export const useKeysForMenuNavigation = (): void => {
   const dispatch = useDispatchTyped()
@@ -12,12 +12,12 @@ export const useKeysForMenuNavigation = (): void => {
 
   const navKeyboardHandler = (e: KeyboardEvent): void => {
     const currentMenuItems = getMenuItemByIdsChain(
-      store.getState().nav.idsToCurrentMenuItems,
+      getState().nav.idsToCurrentMenuItems,
     )
     const currentMenuItemsNotHidden = currentMenuItems.filter((menuItem) => !menuItem.isHidden)
     const menuItemsQty = currentMenuItemsNotHidden.length + 1
-    const hoveredMenuItemIndex = store.getState().nav.menuItemHoverIndex
-    const isNestedMenu = store.getState().nav.idsToNextMenuItems.length > 2
+    const hoveredMenuItemIndex = getState().nav.menuItemHoverIndex
+    const isNestedMenu = getState().nav.idsToNextMenuItems.length > 2
 
     if (e.key === 'ArrowDown') {
       e.preventDefault()
@@ -58,7 +58,7 @@ export const useKeysForMenuNavigation = (): void => {
 
     if (e.key === 'Enter') {
       const nextMenu = getMenuItemByIdsChain(
-        store.getState().nav.idsToNextMenuItems,
+        getState().nav.idsToNextMenuItems,
       )
       const menuId = nextMenu[hoveredMenuItemIndex - 2]?.id ?? ''
       const menuItem = currentMenuItemsNotHidden.find((item) => item.id === menuId)

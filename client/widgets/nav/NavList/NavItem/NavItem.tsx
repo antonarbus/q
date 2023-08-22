@@ -1,5 +1,5 @@
 import { useSelectorTyped } from 'client/shared/hooks'
-import { store } from 'client/shared/clients'
+import { getState } from 'client/shared/clients'
 import type { MouseEvent, MutableRefObject } from 'react'
 import { useRef } from 'react'
 import { Icon } from './Icon'
@@ -38,7 +38,7 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
    * - for that reason we track window's width with 'useWindowSize' hook
   */
   const windowWidth = useWindowSize().width
-  const widthWhenIconsAreShown = store.getState().nav.mediaQueryWidth.icon
+  const widthWhenIconsAreShown = getState().nav.mediaQueryWidth.icon
   const shouldDisplayIcon = windowWidth < widthWhenIconsAreShown
 
   // needs to open only menu under clicked navItem, otherwise multiple menus are opened under all navItems

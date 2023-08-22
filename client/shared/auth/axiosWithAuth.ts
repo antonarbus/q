@@ -1,6 +1,6 @@
 /* eslint-disable */
 import axios from 'axios'
-import { store } from 'client/app/store'
+import { dispatch } from 'client/shared/clients'
 import { token } from './token'
 import { apiUrl } from 'server/apiUrls'
 import { userSlice } from 'client/entities/user'
@@ -34,12 +34,12 @@ axiosWithAuth.interceptors.response.use(
 
         if (accessJwtToken) {
           token.access = accessJwtToken
-          store.dispatch(userSlice.actions.rememberLoggedUser({ email, isLogged: true, roles: ['viewer'] }))
+          dispatch(userSlice.actions.rememberLoggedUser({ email, isLogged: true, roles: ['viewer'] }))
         }
 
         if (!accessJwtToken) {
           token.access = ''
-          store.dispatch(userSlice.actions.forgetLoggedUser())
+          dispatch(userSlice.actions.forgetLoggedUser())
         }
 
         return await axiosWithAuth.request(originalRequest)
@@ -50,7 +50,7 @@ axiosWithAuth.interceptors.response.use(
     }
 
     if (error.response.status === 401) {
-      store.dispatch(userSlice.actions.forgetLoggedUser())
+      dispatch(userSlice.actions.forgetLoggedUser())
     }
 
     throw error

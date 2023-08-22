@@ -1,5 +1,5 @@
 import { itemsSlice } from 'client/entities/items'
-import { store } from 'client/shared/clients'
+import { dispatch, getState } from 'client/shared/clients'
 import { saveItemsLocally } from 'client/shared/lib'
 import type { ResizeCallback } from 're-resizable'
 
@@ -11,8 +11,8 @@ type FuncReturn = ResizeCallback | undefined
 
 export const onItemResizeStop = ({ index }: Props): FuncReturn => (e, direction, refToElement): void => {
   const width = parseInt(refToElement.style.width)
-  const prevItemWidth = store.getState().items[index]?.width
+  const prevItemWidth = getState().items[index]?.width
   if (width === prevItemWidth) return
-  store.dispatch(itemsSlice.actions.saveItemWidth({ index, width }))
+  dispatch(itemsSlice.actions.saveItemWidth({ index, width }))
   saveItemsLocally({ msgAboveItemWithIndex: index })
 }

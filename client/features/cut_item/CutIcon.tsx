@@ -1,5 +1,5 @@
 import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
-import { store } from 'client/shared/clients'
+import { getState } from 'client/shared/clients'
 import { TbCut } from 'react-icons/tb'
 import { motion } from 'framer-motion'
 import { itemsSlice, saveItemHeightByIndex, selectIsItemAlone } from 'client/entities/items'
@@ -36,7 +36,7 @@ export const CutIcon = ({ index }: Props): JSX.Element => {
 
         saveItemHeightByIndex({ index })
 
-        const itemToCut = store.getState().items[index]
+        const itemToCut = getState().items[index]
         if (!itemToCut) return
 
         const clickedIconElement = e.target
@@ -58,7 +58,7 @@ export const CutIcon = ({ index }: Props): JSX.Element => {
         dispatch(copySlice.actions.forbidToCut())
         dispatch(copySlice.actions.forbidToDelete())
 
-        const isCopyContainer = store.getState().copy.isCopyContainer
+        const isCopyContainer = getState().copy.isCopyContainer
         if (!isCopyContainer) {
           dispatch(copySlice.actions.saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
           dispatch(copySlice.actions.showCopyContainer())

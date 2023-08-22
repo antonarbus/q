@@ -1,7 +1,6 @@
 import { navStructure } from '../../widgets/nav/navStructure'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
-import type { RootState } from 'client/app/store'
 import { setMenuItemPropValue } from './setMenuItemPropValue'
 import type { MenuItemTypes } from './TMenuItem'
 import type { ItemsMediaQueryWidths } from 'client/widgets/nav'
@@ -136,31 +135,6 @@ export const navSlice = createSlice({
   },
 })
 
-// export const {
-//   closeBurger,
-//   toggleBurger,
-//   setNavMediaQueryWidths,
-//   setNavItemRightPos,
-//   openMenuWithId,
-//   closeMenu,
-//   // we track the state of 'current' and 'next' menus for the slide effect, coz we actually have two parallel menus
-//   // 1st menu state
-//   goDownInCurrentMenu,
-//   goUpInCurrentMenu,
-//   // 2nd menu state
-//   goDownInNextMenu,
-//   goUpInNextMenu,
-//   setMenuItemHoverIndex,
-//   showLogInMenuItem,
-//   hideLogInMenuItem,
-//   showAccountMenuItem,
-//   hideAccountMenuItem,
-//   disableTopMenuItemsExceptItemId,
-//   enableTopMenuItems,
-//   disableMedia,
-//   enableMedia,
-// } = navSlice.actions
-
 export const selectMenuItemByIdsChainSelector =
   (idsToCurrentMenuItems: string[]) => (state: RootState): MenuItemTypes[] => {
     const topLevelNavMenu = state.nav.navStructure[0]
@@ -181,5 +155,3 @@ export const selectMenuItemByIdsChainSelector =
     })
     return clicked
   }
-
-// export const navReducer = navSlice.reducer
