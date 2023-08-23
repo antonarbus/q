@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { setMenuItemPropValue } from './setMenuItemPropValue'
 import type { MenuItemTypes } from './TMenuItem'
 import type { ItemsMediaQueryWidths } from 'client/widgets/nav'
+import type { RootState } from 'client/shared/types'
 
 const initialState = {
   navStructure,

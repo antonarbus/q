@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit'
-import type { Item } from 'client/shared/types'
+import type { Item, RootState } from 'client/shared/types'
 
 export const selectItemsShape = createSelector(
   [(state: RootState): Item[] => state.items],
