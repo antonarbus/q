@@ -2,7 +2,8 @@ import 'client/shared/lib/nonPassiveEventErrorFix'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { reactQuery } from './reactQuery'
 import { QueryClientProvider } from '@tanstack/react-query'
-// import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { ReactQueryDevtoolsProductionHidden } from './ReactQueryDevtoolsProductionHidden'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { ThemeProvider } from '@mui/material/styles'
 import { themeClient } from './theme'
 import { GlobalStyles } from './GlobalStyles'
@@ -10,7 +11,6 @@ import { Nav } from 'client/widgets/nav'
 import { TopMsg } from 'client/shared/ui/top_msg'
 import { Main } from 'client/app/Main'
 import { Profile } from 'client/pages/profile'
-import { ReactQueryDevtoolsProductionHidden } from './ReactQueryDevtoolsProductionHidden'
 import { store } from './store'
 import { Provider } from 'react-redux'
 import { BottomMsg } from 'client/widgets/bottom_msg'
@@ -42,7 +42,7 @@ export const App = (): JSX.Element => (
           <TopMsg />
           <BottomMsg />
         </BrowserRouter>
-        {/* <ReactQueryDevtools /> */}
+        <ReactQueryDevtools />
         <ReactQueryDevtoolsProductionHidden />
       </ThemeProvider>
     </QueryClientProvider>
