@@ -1,5 +1,6 @@
 import { itemsSlice } from 'client/entities/items'
-import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
+import { dispatch } from 'client/shared/clients'
+import { useSelectorTyped } from 'client/shared/hooks'
 import { useUpdateEffect } from 'react-use'
 
 interface Props {
@@ -7,7 +8,6 @@ interface Props {
 }
 
 export const useRemoveItemMsgAfterSomeTime = ({ index }: Props): void => {
-  const dispatch = useDispatchTyped()
   const msg = useSelectorTyped(state => state.items[index]?.msg)
 
   useUpdateEffect(() => {

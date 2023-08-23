@@ -3,7 +3,7 @@ import { Burger } from './NavItem/Burger'
 import { useSelectorTyped } from 'client/shared/hooks'
 
 export const NavList = (): JSX.Element => {
-  const navStructure = useSelectorTyped((state) => state.nav.navStructure)
+  const navStructure = useSelectorTyped(state => state.nav.navStructure)
 
   return (
     <ul
@@ -13,7 +13,7 @@ export const NavList = (): JSX.Element => {
         justifyContent: 'flex-end',
       }}
     >
-      {navStructure[0]?.menuItems?.filter((navItem) => !navItem.isHidden).map((navItem) => (
+      {navStructure[0]?.menuItems?.filter(navItem => !navItem.isHidden).map(navItem => (
         <NavItem id={navItem.id} key={navItem.id} />
       ))}
       <NavItem id={'burger'} key={'burger'}>

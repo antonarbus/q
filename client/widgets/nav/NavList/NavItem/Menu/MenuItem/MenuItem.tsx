@@ -3,12 +3,13 @@ import { Icon } from '../../Icon'
 import { MenuItemStyled } from './MenuItemStyled'
 import { TextInMenu } from './TextInMenu'
 import { RoundSpanForIcon } from '../../RoundSpanForIcon'
-import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
+import { useSelectorTyped } from 'client/shared/hooks'
 import { Shortcut } from './Shortcut'
 import { clickOnMenuItem } from './function/clickOnMenuItem'
 import type { MenuItemTypes } from 'client/entities/nav'
 import { navSlice } from 'client/entities/nav'
 import type { MouseEvent } from 'react'
+import { dispatch } from 'client/shared/clients'
 
 interface Props {
   menuItem: MenuItemTypes
@@ -16,10 +17,7 @@ interface Props {
 }
 
 export const MenuItem = ({ menuItem, hoveredMenuItemIndex }: Props): JSX.Element => {
-  const dispatch = useDispatchTyped()
-  const isHovered = useSelectorTyped(
-    (state) => state.nav.menuItemHoverIndex === hoveredMenuItemIndex,
-  )
+  const isHovered = useSelectorTyped(state => state.nav.menuItemHoverIndex === hoveredMenuItemIndex)
   const isNextMenuAvailable = !!menuItem.menuItems
   const isIcon = !!menuItem.icon
   const menuId = menuItem.id

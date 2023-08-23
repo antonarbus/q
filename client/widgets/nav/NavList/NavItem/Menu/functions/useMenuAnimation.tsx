@@ -1,7 +1,6 @@
 import { elementHeight } from 'client/shared/lib/elementHeight'
 import { navSlice } from 'client/entities/nav'
-import { useDispatchTyped } from 'client/shared/hooks'
-import { theme } from 'client/shared/clients'
+import { dispatch, theme } from 'client/shared/clients'
 import { gsap } from 'gsap'
 import type { RefObject } from 'react'
 import { useEffect } from 'react'
@@ -37,7 +36,6 @@ export const useMenuAnimation = ({
   fakeMenuRef,
   idsToNextMenuItems,
 }: Props): void => {
-  const dispatch = useDispatchTyped()
   const isFirstMount = useFirstMountState()
   const duration = 0.5
   const nextMenu = getMenuItemByIdsChain(idsToNextMenuItems)

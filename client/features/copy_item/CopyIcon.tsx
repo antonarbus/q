@@ -1,5 +1,5 @@
-import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
-import { getState } from 'client/shared/clients'
+import { useSelectorTyped } from 'client/shared/hooks'
+import { dispatch, getState } from 'client/shared/clients'
 import { MdCopyAll } from 'react-icons/md'
 import { motion } from 'framer-motion'
 import { cleanHtml } from 'client/shared/lib/itemsUtils'
@@ -13,8 +13,6 @@ interface Props {
 }
 
 export const CopyIcon = ({ index }: Props): JSX.Element => {
-  const dispatch = useDispatchTyped()
-
   const isCopyable = useSelectorTyped(state => state.copy.isCopyable)
   const disabled = !isCopyable
 

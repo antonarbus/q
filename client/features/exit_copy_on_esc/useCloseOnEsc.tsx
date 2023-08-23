@@ -1,11 +1,9 @@
 import { copySlice, exitCopyMode } from 'client/entities/copy'
 import { itemsSlice } from 'client/entities/items'
-import { useDispatchTyped } from 'client/shared/hooks'
+import { dispatch } from 'client/shared/clients'
 import { useEffectOnce } from 'react-use'
 
 export const useExitCopyOnEsc = (): void => {
-  const dispatch = useDispatchTyped()
-
   const closeOnEsc = (e: KeyboardEvent): void => {
     if (e.key !== 'Escape') return
     dispatch(copySlice.actions.hideCopyContainer())

@@ -1,5 +1,6 @@
 import { itemsSlice } from 'client/entities/items'
-import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
+import { dispatch } from 'client/shared/clients'
+import { useSelectorTyped } from 'client/shared/hooks'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useUpdateEffect } from 'react-use'
 
@@ -8,7 +9,6 @@ interface Props {
 }
 
 export const ItemMsg = ({ index }: Props): JSX.Element => {
-  const dispatch = useDispatchTyped()
   const msg = useSelectorTyped(state => state.items[index]?.msg)
 
   useUpdateEffect(() => {

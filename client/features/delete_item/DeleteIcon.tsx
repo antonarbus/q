@@ -1,5 +1,5 @@
-import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
-import { getState, theme } from 'client/shared/clients'
+import { useSelectorTyped } from 'client/shared/hooks'
+import { dispatch, getState, theme } from 'client/shared/clients'
 import { RxCross2 } from 'react-icons/rx'
 import { itemsSlice, selectIsItemAlone } from 'client/entities/items'
 import { gsap } from 'gsap'
@@ -13,7 +13,6 @@ interface Props {
 }
 
 export const DeleteIcon = ({ index }: Props): EmotionJSX.Element => {
-  const dispatch = useDispatchTyped()
   const ref = useRef<HTMLSpanElement>(null)
 
   const isItemAlone = useSelectorTyped(selectIsItemAlone)

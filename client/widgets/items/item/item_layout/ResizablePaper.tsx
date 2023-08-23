@@ -1,4 +1,3 @@
-import { useDispatchTyped } from 'client/shared/hooks'
 import { Resizable } from 're-resizable'
 import type { ReactNode } from 'react'
 import { onItemResizeStop } from 'client/features/resize_item'
@@ -11,8 +10,6 @@ interface Props {
 }
 
 export const ResizablePaper = ({ children, index, itemWidth }: Props): JSX.Element | null => {
-  const dispatch = useDispatchTyped()
-
   return (
     <Resizable
       className={className.paper}

@@ -1,19 +1,15 @@
-import { useDispatchTyped } from 'client/shared/hooks'
 import { useEffect } from 'react'
 import { navSlice } from 'client/entities/nav'
 import { getMenuItemByIdsChain } from './getMenuItemByIdsChain'
 import { useNavigate } from 'react-router-dom'
 import { navigateInMenu } from './useMenuAnimation'
-import { getState } from 'client/shared/clients'
+import { dispatch, getState } from 'client/shared/clients'
 
 export const useKeysForMenuNavigation = (): void => {
-  const dispatch = useDispatchTyped()
   const navigate = useNavigate()
 
   const navKeyboardHandler = (e: KeyboardEvent): void => {
-    const currentMenuItems = getMenuItemByIdsChain(
-      getState().nav.idsToCurrentMenuItems,
-    )
+    const currentMenuItems = getMenuItemByIdsChain(getState().nav.idsToCurrentMenuItems)
     const currentMenuItemsNotHidden = currentMenuItems.filter((menuItem) => !menuItem.isHidden)
     const menuItemsQty = currentMenuItemsNotHidden.length + 1
     const hoveredMenuItemIndex = getState().nav.menuItemHoverIndex

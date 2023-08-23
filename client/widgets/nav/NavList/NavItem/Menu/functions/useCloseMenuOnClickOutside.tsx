@@ -1,15 +1,14 @@
 import { didClickInsideThisElement } from 'client/shared/lib/isClickInsideThisElement'
-import { useDispatchTyped } from 'client/shared/hooks'
 import type { MutableRefObject } from 'react'
 import { useEffect } from 'react'
 import { navSlice } from 'client/entities/nav'
+import { dispatch } from 'client/shared/clients'
 
 interface Props {
   menuContainerRef: MutableRefObject<HTMLDivElement | null>
 }
 
 export const useCloseMenuOnClickOutside = ({ menuContainerRef }: Props): void => {
-  const dispatch = useDispatchTyped()
 
   /**
    * - menu is absolutely positioned inside NavItem li element

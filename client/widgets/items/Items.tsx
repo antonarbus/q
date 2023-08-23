@@ -1,4 +1,4 @@
-import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
+import { useSelectorTyped } from 'client/shared/hooks'
 import { onItemDrag } from 'client/features/drag_item'
 import { TextItem } from './TextItem'
 import { PasteItem } from './PasteItem'

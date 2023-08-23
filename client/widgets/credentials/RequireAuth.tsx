@@ -7,8 +7,8 @@ interface Props {
 
 export const RequireAuth = ({ allowedRoles }: Props): JSX.Element => {
   const location = useLocation()
-  const isLogged = useSelectorTyped((state) => state.user.isLogged)
-  const roles = useSelectorTyped((state) => state.user.roles)
+  const isLogged = useSelectorTyped(state => state.user.isLogged)
+  const roles = useSelectorTyped(state => state.user.roles)
   const haveRequiredRole = allowedRoles.some((role) => roles.includes(role))
 
   if (isLogged && haveRequiredRole) return <Outlet />
