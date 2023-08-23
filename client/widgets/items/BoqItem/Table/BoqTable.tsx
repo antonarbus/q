@@ -1,12 +1,12 @@
 import { Box } from '@mui/material'
-
+import { Resizable } from 're-resizable'
 
 export const BoqTable = (): JSX.Element => {
   return (
     <Box
       sx={{
         p: '10px',
-        '& *': {
+        '& > *, & > * > *': {
           background: '#ff00003d',
           border: '1px dotted grey',
         },
@@ -18,6 +18,7 @@ export const BoqTable = (): JSX.Element => {
           display: 'flex',
           minHeight: '40px',
           alignItems: 'center',
+          gap: '10px',
         }}
       >
         <Box
@@ -36,7 +37,20 @@ export const BoqTable = (): JSX.Element => {
             flexGrow: 2,
           }}
         >
-          Description
+          <Resizable
+            enable={{ right: true }}
+            style={{
+              width: '100%',
+            }}
+            handleStyles={{
+              right: {
+                background: 'grey',
+                width: '3px',
+              },
+            }}
+          >
+            Description
+          </Resizable>
         </Box>
         <Box
           className='th'
@@ -45,7 +59,11 @@ export const BoqTable = (): JSX.Element => {
             flexGrow: 1,
           }}
         >
-          Item
+          <Resizable
+            enable={{ right: true }}
+          >
+            Item
+          </Resizable>
         </Box>
         <Box
           className='th'
@@ -54,7 +72,11 @@ export const BoqTable = (): JSX.Element => {
             flexGrow: 1,
           }}
         >
-          Qty
+          <Resizable
+            enable={{ right: true }}
+          >
+            Qty
+          </Resizable>
         </Box>
         <Box
           className='th'
