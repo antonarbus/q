@@ -1,3 +1,4 @@
+import 'client/shared/lib/nonPassiveEventErrorFix'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { reactQuery } from './reactQuery'
 import { QueryClientProvider } from '@tanstack/react-query'
@@ -14,14 +15,7 @@ import { store } from './store'
 import { Provider } from 'react-redux'
 import { BottomMsg } from 'client/widgets/bottom_msg'
 import { Spinner } from 'client/widgets/spinner'
-import {
-  Login,
-  PersistentAuth,
-  Register,
-  RequireAuth,
-  Reset,
-  Unauthorized,
-} from 'client/widgets/credentials'
+import { Login, PersistentAuth, Register, RequireAuth, Reset, Unauthorized } from 'client/widgets/credentials'
 
 export const App = (): JSX.Element => (
   <Provider store={store}>

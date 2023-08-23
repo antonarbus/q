@@ -5,5 +5,5 @@ import { App } from './App'
 if (process.env.NODE_ENV === 'production') disableReactDevTools()
 
 const rootElement = document.getElementById('root') as Element
-
-ReactDOM.createRoot(rootElement).render(<App />)
+const root = ReactDOM.createRoot(rootElement)
+root.render(<App />)
