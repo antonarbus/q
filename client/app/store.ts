@@ -22,12 +22,4 @@ export const store = configureStore({
   devTools: process.env.NODE_ENV !== 'production',
 })
 
-// eslint-disable-next-line @typescript-eslint/unbound-method
-export const getState = store.getState
-export const dispatch = store.dispatch
 
-declare global {
-  export type RootState = ReturnType<typeof store.getState>
-  export type AppDispatch = typeof store.dispatch
-  export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>
-}
