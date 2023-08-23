@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
+import { useSelectorTyped } from 'client/shared/hooks'
 import { useRef } from 'react'
 import { useMenuAnimation } from './functions/useMenuAnimation'
 import { useKeysForMenuNavigation } from './functions/useKeysForMenuNavigation'
@@ -8,7 +8,7 @@ import { useIsMenuOutsideWindow } from './functions/useIsMenuOutsideWindow'
 import { SlidableMenuItemsContainer } from './SlidableMenuItemsContainer'
 import { TopMenuItemsContainer } from './TopMenuItemsContainer'
 import { navSlice } from 'client/entities/nav'
-import { theme } from 'client/shared/clients'
+import { dispatch, theme } from 'client/shared/clients'
 
 interface Props {
   isMenuOutsideWindow: boolean
@@ -57,21 +57,12 @@ export const Menu = (): JSX.Element => {
   const currentMenuRef = useRef<HTMLDivElement>(null)
   const nextMenuRef = useRef<HTMLDivElement>(null)
   const fakeMenuRef = useRef<HTMLDivElement>(null)
-  const idsToNextMenuItems = useSelectorTyped(
-    (state) => state.nav.idsToNextMenuItems,
-  )
-  const idsToCurrentMenuItems = useSelectorTyped((state) => state.nav.idsToCurrentMenuItems)
-  useMenuAnimation({
-    currentMenuRef,
-    nextMenuRef,
-    menuContainerRef,
-    fakeMenuRef,
-    idsToNextMenuItems,
-  })
+  const idsToNextMenuItems = useSelectorTyped(state => state.nav.idsToNextMenuItems)
+  const idsToCurrentMenuItems = useSelectorTyped(state => state.nav.idsToCurrentMenuItems)
+  useMenuAnimation({ currentMenuRef, nextMenuRef, menuContainerRef, fakeMenuRef, idsToNextMenuItems })
   useKeysForMenuNavigation()
   useCloseMenuOnClickOutside({ menuContainerRef })
   const isMenuOutsideWindow = useIsMenuOutsideWindow()
-  const dispatch = useDispatchTyped()
 
   return (
     <MenuStyled

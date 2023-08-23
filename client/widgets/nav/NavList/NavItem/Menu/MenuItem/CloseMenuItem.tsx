@@ -5,14 +5,13 @@ import { Icon } from '../../Icon'
 import { CgClose as CloseIcon } from 'react-icons/cg'
 import { MenuItemStyled } from './MenuItemStyled'
 import { navSlice } from 'client/entities/nav'
-import { theme } from 'client/shared/clients'
-import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
+import { dispatch, theme } from 'client/shared/clients'
+import { useSelectorTyped } from 'client/shared/hooks'
 
 const closeIcon = createElement(CloseIcon, {})
 
 export const CloseMenuItem = (): JSX.Element => {
   const color = theme.colors.topMenuItem
-  const dispatch = useDispatchTyped()
   const isHovered = useSelectorTyped(state => state.nav.menuItemHoverIndex === 1)
 
   return (

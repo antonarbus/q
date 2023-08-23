@@ -1,5 +1,5 @@
-import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
-import { getState } from 'client/shared/clients'
+import { useSelectorTyped } from 'client/shared/hooks'
+import { dispatch, getState } from 'client/shared/clients'
 import { TbCut } from 'react-icons/tb'
 import { motion } from 'framer-motion'
 import { itemsSlice, saveItemHeightByIndex, selectIsItemAlone } from 'client/entities/items'
@@ -15,8 +15,6 @@ interface Props {
 }
 
 export const CutIcon = ({ index }: Props): JSX.Element => {
-  const dispatch = useDispatchTyped()
-
   const isItemAlone = useSelectorTyped(selectIsItemAlone)
   const isCuttable = useSelectorTyped(state => state.copy.isCuttable)
   const disabled = isItemAlone || !isCuttable

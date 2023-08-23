@@ -1,5 +1,4 @@
 import { notify } from 'client/shared/ui/top_msg/notify'
-import { useDispatchTyped } from 'client/shared/hooks'
 import type { Dispatch, FormEvent, SetStateAction } from 'react'
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
@@ -10,6 +9,7 @@ import { slideElement } from 'client/shared/lib/slideElement'
 import type { LoginApiRes } from 'server/api/loginRouter'
 import { apiUrl } from 'server/apiUrls'
 import { userSlice } from 'client/entities/user'
+import { dispatch } from 'client/shared/clients'
 
 interface StateProps {
   from?: {
@@ -36,7 +36,6 @@ export const useLogin = (): FuncRes => {
   const navigate = useNavigate()
   const location = useLocation()
   const from = (location.state as StateProps | undefined)?.from?.pathname ?? '/'
-  const dispatch = useDispatchTyped()
 
   const loginUser = async ({ e, email, password, cardElement }: Props): Promise<void> => {
     e.preventDefault()

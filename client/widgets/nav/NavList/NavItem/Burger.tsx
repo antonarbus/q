@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
 import { Fade as BurgerIcon } from 'hamburger-react'
-import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
+import { useSelectorTyped } from 'client/shared/hooks'
 import { navSlice } from 'client/entities/nav'
-import { theme } from 'client/shared/clients'
+import { dispatch, theme } from 'client/shared/clients'
 // https://hamburger-react.netlify.app/
 
 interface Props {
@@ -18,7 +18,6 @@ const BurgerContainer = styled.div<Props>`
 `
 
 export const Burger = (): JSX.Element => {
-  const dispatch = useDispatchTyped()
   const isOpen = useSelectorTyped(state => state.nav.burger.isOpen)
   const screenWidthWhenShowBurger = useSelectorTyped(state => state.nav.mediaQueryWidth.burger)
 

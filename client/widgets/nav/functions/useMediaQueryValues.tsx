@@ -1,9 +1,10 @@
 import type { RefObject } from 'react'
 import { useLayoutEffect } from 'react'
-import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
+import { useSelectorTyped } from 'client/shared/hooks'
 import { navSlice } from 'client/entities/nav'
 import { calcNavMediaQueryParams } from './calcNavMediaQueryParams'
 import { useFirstMountState } from 'react-use'
+import { dispatch } from 'client/shared/clients'
 
 interface Props {
   navRef: RefObject<HTMLDivElement>
@@ -11,10 +12,9 @@ interface Props {
 }
 
 export const useMediaQueryValues = ({ navRef, logoRef }: Props): void => {
-  const dispatch = useDispatchTyped()
   const isFirstMount = useFirstMountState()
-  const navStructure = useSelectorTyped((state) => state.nav.navStructure)
-  const mediaEnabled = useSelectorTyped((state) => state.nav.mediaEnabled)
+  const navStructure = useSelectorTyped(state => state.nav.navStructure)
+  const mediaEnabled = useSelectorTyped(state => state.nav.mediaEnabled)
 
   useLayoutEffect(() => {
     // initial calculation of media query values

@@ -2,14 +2,13 @@ import { TextInMenu } from './TextInMenu'
 import { Icon } from '../../Icon'
 import { FaChevronLeft } from 'react-icons/fa'
 import { MenuItemStyled } from './MenuItemStyled'
-import { theme } from 'client/shared/clients'
+import { dispatch, theme } from 'client/shared/clients'
 import { navSlice } from 'client/entities/nav'
-import { useDispatchTyped, useSelectorTyped } from 'client/shared/hooks'
+import { useSelectorTyped } from 'client/shared/hooks'
 import { navigateInMenu } from '../functions/useMenuAnimation'
 import type { MouseEvent } from 'react'
 
 export const BackMenuItem = (): JSX.Element => {
-  const dispatch = useDispatchTyped()
   const isHovered = useSelectorTyped(state => state.nav.menuItemHoverIndex === 1)
   const color = theme.colors.topMenuItem
 
