@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import { selectIsItemAlone } from 'client/entities/items'
 
 const Handle = (): JSX.Element => {
-  const isCopyMode = useSelectorTyped((state) => state.copy.isCopyMode)
+  const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
   const isItemAlone = useSelectorTyped(selectIsItemAlone)
   const isDisabled = isCopyMode || isItemAlone
 

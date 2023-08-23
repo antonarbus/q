@@ -15,9 +15,7 @@ const onItemDragStart = (): void => {
 }
 
 const onItemDragEnd = ({ oldIndex, newIndex }: Props): void => {
-  // exitCopyMode({ delayed: true })
-  // todo: why it is 'copyMode', not good name
-  exitCopyMode()
+  exitCopyMode({ delayed: true, delayMs: 500 })
   document.body.style.removeProperty('cursor')
 
   if (oldIndex !== newIndex) {
