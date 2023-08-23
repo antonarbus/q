@@ -1,4 +1,3 @@
-import type { Action, ThunkAction } from '@reduxjs/toolkit'
 import { configureStore } from '@reduxjs/toolkit'
 import { navSlice } from 'client/entities/nav'
 import { spinnerSlice } from 'client/shared/ui/spinner'
@@ -18,7 +17,7 @@ export const store = configureStore({
     copy: copySlice.reducer,
     bottomMsg: bottomMsgSlice.reducer,
   },
-  middleware: (defaultMiddleware) => defaultMiddleware({ serializableCheck: false }),
+  middleware: (defaultMiddleware) => defaultMiddleware({ serializableCheck: false }), // we have components and functions in nav structure
   devTools: process.env.NODE_ENV !== 'production',
 })
 
