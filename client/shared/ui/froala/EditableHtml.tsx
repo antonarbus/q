@@ -48,7 +48,7 @@ export const EditableHtml = ({
       ref={froalaElementRef}
       style={{
         padding: padding ?? 0,
-        height: heightDuringAnimationRef.current ?? 'auto', // for animation, will be removed after froala is initialized
+        height: heightDuringAnimationRef.current ?? 'auto', // needed for animation, height will be removed after froala is initialized
       }}
       sx={{
         wordBreak: 'break-word',
