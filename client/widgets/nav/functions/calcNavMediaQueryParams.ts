@@ -28,9 +28,7 @@ export const calcNavMediaQueryParams = (nav: HTMLElement, logo: HTMLElement): It
       })
 
       const elsToShowArr = Array.from(
-        nav.querySelectorAll(
-          elsToShowClass ?? 'non-existing-class-where-nothing-will-be-found',
-        ),
+        nav.querySelectorAll(elsToShowClass ?? 'non-existing-class-where-nothing-will-be-found'),
       )
 
       elsToShowArr.forEach((el) => {

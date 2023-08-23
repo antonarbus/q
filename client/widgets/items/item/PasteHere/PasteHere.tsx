@@ -1,4 +1,4 @@
-import { useTheme } from '@mui/material'
+import { theme } from 'client/shared/clients'
 import { useIsPasteHere } from './useIsPasteHere'
 import type { ReactNode } from 'react'
 
@@ -8,7 +8,6 @@ interface Props {
 }
 
 export const PasteHere = ({ children, index }: Props): JSX.Element => {
-  const theme = useTheme()
   const isPasteHere = useIsPasteHere({ index })
 
   return (
