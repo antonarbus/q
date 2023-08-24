@@ -35,12 +35,15 @@ export const BoqTable = (): JSX.Element => {
           sx={{
             display: 'flex',
             flexGrow: 2,
+            position: 'relative',
           }}
         >
           <Resizable
+            className='resizable'
             enable={{ right: true }}
             style={{
               width: '100%',
+              position: 'static',
             }}
             handleStyles={{
               right: {
