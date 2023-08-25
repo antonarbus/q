@@ -56,27 +56,28 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
           <ResizableColHeader
             index={index}
             headerName='description'
-            flexGrow={4}
             minWidth={200}
           >
             Description
           </ResizableColHeader>
-          <ResizableColHeader
-            index={index}
-            headerName='item'
-            flexGrow={1}
-            minWidth={100}
+          <Box
+            className='th'
+            sx={{
+              display: 'flex',
+              flexGrow: 1,
+            }}
           >
             Item
-          </ResizableColHeader>
-          <ResizableColHeader
-            index={index}
-            headerName='qty'
-            flexGrow={1}
-            minWidth={100}
+          </Box>
+          <Box
+            className='th'
+            sx={{
+              display: 'flex',
+              flexGrow: 1,
+            }}
           >
             Qty
-          </ResizableColHeader>
+          </Box>
           <Box
             className='th'
             sx={{
