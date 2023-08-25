@@ -5,6 +5,7 @@ import { saveItemsLocally } from 'client/shared/lib'
 import type { BoqColWidth } from 'client/shared/types'
 import { Resizable } from 're-resizable'
 import { useState } from 'react'
+import { ResizableColHeader } from './ResizableColHeader'
 
 interface Props {
   index: number
@@ -46,106 +47,36 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
           <Box
             className='th'
             sx={{
-              display: 'flex',
-              width: '40px',
-              minWidth: '40px',
+              width: '30px',
+              minWidth: '30px',
             }}
           >
             #
           </Box>
-          <Resizable
-            className='th resizable'
-            enable={{ right: true }}
+          <ResizableColHeader
+            index={index}
+            headerName='description'
+            flexGrow={4}
             minWidth={200}
-            size={{
-              width: descriptionColWidth ?? 'auto',
-              height: 'auto',
-            }}
-            style={{
-              display: !descriptionColWidth ? 'flex' : 'block',
-              flexGrow: !descriptionColWidth ? 4 : 0,
-              flexShrink: 0,
-              width: descriptionColWidth ?? 'auto',
-            }}
-            handleStyles={{
-              right: {
-                background: 'grey',
-                width: '3px',
-                right: '-6px',
-                borderRadius: '3px',
-              },
-            }}
-            onResizeStart={(event, direction, element): void => {
-              const newWidth = element.clientWidth
-              setDescriptionColWidth(newWidth)
-            }}
-            onResize={(event, direction, element, delta): void => {
-              const newWidth = element.clientWidth
-              setDescriptionColWidth(newWidth)
-            }}
-            onResizeStop={(event, direction, element): void => {
-              const width = element.clientWidth
-              dispatch(itemsSlice.actions.saveColWidth({ index, width, colKey: 'description' }))
-              saveItemsLocally()
-              dispatch(itemsSlice.actions.tellItemSavedLocally({ index }))
-            }}
           >
             Description
-          </Resizable>
-          <Box
-            className='th'
-            sx={{
-              display: 'flex',
-              flexGrow: 1,
-              position: 'relative',
-            }}
+          </ResizableColHeader>
+          <ResizableColHeader
+            index={index}
+            headerName='item'
+            flexGrow={1}
+            minWidth={100}
           >
-            <Resizable
-              className='resizable'
-              enable={{ right: true }}
-              style={{
-                width: '100%',
-                position: 'static',
-              }}
-              handleStyles={{
-                right: {
-                  background: 'grey',
-                  width: '3px',
-                  right: '-6px',
-                  borderRadius: '3px',
-                },
-              }}
-            >
-              Item
-            </Resizable>
-          </Box>
-          <Box
-            className='th'
-            sx={{
-              display: 'flex',
-              flexGrow: 1,
-              position: 'relative',
-            }}
+            Item
+          </ResizableColHeader>
+          <ResizableColHeader
+            index={index}
+            headerName='qty'
+            flexGrow={1}
+            minWidth={100}
           >
-            <Resizable
-              className='resizable'
-              enable={{ right: true }}
-              style={{
-                width: '100%',
-                position: 'static',
-              }}
-              handleStyles={{
-                right: {
-                  background: 'grey',
-                  width: '3px',
-                  right: '-6px',
-                  borderRadius: '3px',
-                },
-              }}
-            >
-              Qty
-            </Resizable>
-          </Box>
+            Qty
+          </ResizableColHeader>
           <Box
             className='th'
             sx={{
