@@ -10,7 +10,7 @@ export const BoqItem = ({ index }: Props): JSX.Element => {
   return (
     <Item index={index} >
       <Header index={index} />
-      <BoqTable />
+      <BoqTable index={index} />
     </Item>
   )
 }

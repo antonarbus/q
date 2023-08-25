@@ -1,88 +1,66 @@
 import { Box } from '@mui/material'
+import { getState } from 'client/shared/clients'
 import { Resizable } from 're-resizable'
 import { useState } from 'react'
 
-export const BoqTable = (): JSX.Element => {
+interface Props {
+  index: number
+}
+
+export const BoqTable = ({ index }: Props): JSX.Element | null => {
   const [isColResized, setIsColResized] = useState(false)
-  const [widthDescriptionCol, setWidthDescriptionCol] = useState<number | '100%'>('100%')
+  const item = getState().items[index]
+  if (item?.type !== 'boq') return null
+  const defaultDescriptionColWidth = item.boq.column.description.width
+  console.log('🚀  defaultDescriptionColWidth:', defaultDescriptionColWidth)
+  const [widthDescriptionCol, setWidthDescriptionCol] = useState<number | 'auto'>(defaultDescriptionColWidth)
 
 
   return (
     <Box
+      className='boq-table-container-with-paddings'
       sx={{
         p: '10px',
-        '& > *, & > * > *': {
-          background: '#ff00003d',
-          border: '1px dotted grey',
-        },
       }}
     >
       <Box
-        className='tr'
+        className='boq-table-container'
         sx={{
-          display: 'flex',
-          minHeight: '40px',
-          alignItems: 'center',
-          gap: '10px',
+          overflow: 'auto',
+          '& > *, & > * > *': {
+            background: '#ff00003d',
+            border: '1px dotted grey',
+          },
         }}
       >
         <Box
-          className='th'
+          className='tr'
           sx={{
             display: 'flex',
-            width: '40px',
-            minWidth: '40px',
+            minHeight: '40px',
+            alignItems: 'center',
+            gap: '10px',
           }}
         >
-          #
-        </Box>
-        <Resizable
-          className='resizable'
-          enable={{ right: true }}
-          style={{
-            display: !isColResized ? 'flex' : 'block',
-            flexGrow: !isColResized ? 3 : 0,
-            flexShrink: 0,
-            width: widthDescriptionCol,
-          }}
-          handleStyles={{
-            right: {
-              background: 'grey',
-              width: '3px',
-              right: '-7.5px',
-              borderRadius: '3px',
-            },
-          }}
-          onResizeStart={(event, direction, element): void => {
-            const newWidth = element.clientWidth
-            console.log('🚀  newWidth:', newWidth)
-            setWidthDescriptionCol(newWidth)
-            setIsColResized(true)
-
-          }}
-          onResize={(event, direction, element, delta): void => {
-            const newWidth = element.clientWidth
-            console.log('🚀  newWidth:', newWidth)
-            setWidthDescriptionCol(element.clientWidth)
-          }}
-        >
-          Description
-        </Resizable>
-
-        <Box
-          className='th'
-          sx={{
-            display: 'flex',
-            flexGrow: 1,
-            position: 'relative',
-          }}
-        >
+          <Box
+            className='th'
+            sx={{
+              display: 'flex',
+              width: '40px',
+              minWidth: '40px',
+            }}
+          >
+            #
+          </Box>
           <Resizable
-            className='resizable'
+            className='th resizable'
             enable={{ right: true }}
+            minWidth={200}
             style={{
-              width: '100%',
-              position: 'static',
+              display: !isColResized ? 'flex' : 'block',
+              flexGrow: !isColResized ? 4 : 0,
+              flexShrink: 0,
+              width: widthDescriptionCol,
             }}
             handleStyles={{
               right: {
@@ -92,192 +70,233 @@ export const BoqTable = (): JSX.Element => {
                 borderRadius: '3px',
               },
             }}
-          >
-            Item
-          </Resizable>
-        </Box>
-        <Box
-          className='th'
-          sx={{
-            display: 'flex',
-            flexGrow: 1,
-            position: 'relative',
-          }}
-        >
-          <Resizable
-            className='resizable'
-            enable={{ right: true }}
-            style={{
-              width: '100%',
-              position: 'static',
+            onResizeStart={(event, direction, element): void => {
+              const newWidth = element.clientWidth
+              setWidthDescriptionCol(newWidth)
+              setIsColResized(true)
             }}
-            handleStyles={{
-              right: {
-                background: 'grey',
-                width: '3px',
-                right: '-7.5px',
-                borderRadius: '3px',
-              },
+            onResize={(event, direction, element, delta): void => {
+              const newWidth = element.clientWidth
+              setWidthDescriptionCol(newWidth)
+            }}
+            onResizeStop={(event, direction, element): void => {
+              const newWidth = element.clientWidth
+              // todo: update redux
+              // todo: update local storage
             }}
           >
-            Qty
+            Description
           </Resizable>
+          <Box
+            className='th'
+            sx={{
+              display: 'flex',
+              flexGrow: 1,
+              position: 'relative',
+            }}
+          >
+            <Resizable
+              className='resizable'
+              enable={{ right: true }}
+              style={{
+                width: '100%',
+                position: 'static',
+              }}
+              handleStyles={{
+                right: {
+                  background: 'grey',
+                  width: '3px',
+                  right: '-7.5px',
+                  borderRadius: '3px',
+                },
+              }}
+            >
+              Item
+            </Resizable>
+          </Box>
+          <Box
+            className='th'
+            sx={{
+              display: 'flex',
+              flexGrow: 1,
+              position: 'relative',
+            }}
+          >
+            <Resizable
+              className='resizable'
+              enable={{ right: true }}
+              style={{
+                width: '100%',
+                position: 'static',
+              }}
+              handleStyles={{
+                right: {
+                  background: 'grey',
+                  width: '3px',
+                  right: '-7.5px',
+                  borderRadius: '3px',
+                },
+              }}
+            >
+              Qty
+            </Resizable>
+          </Box>
+          <Box
+            className='th'
+            sx={{
+              display: 'flex',
+              flexGrow: 1,
+            }}
+          >
+            Price
+          </Box>
         </Box>
         <Box
-          className='th'
+          className='tr'
           sx={{
             display: 'flex',
-            flexGrow: 1,
+            minHeight: '40px',
+            alignItems: 'flex-end',
           }}
         >
-          Price
-        </Box>
-      </Box>
-      <Box
-        className='tr'
-        sx={{
-          display: 'flex',
-          minHeight: '40px',
-          alignItems: 'flex-end',
-        }}
-      >
-        <Box
-          className='td'
-          sx={{
-            display: 'flex',
-          }}
-        >
-          1
-        </Box>
-        <Box
-          className='td'
-          sx={{
-            display: 'flex',
-          }}
-        >
-          Description 1
-        </Box>
-        <Box
-          className='td'
-          sx={{
-            display: 'flex',
-          }}
-        >
-          500
-        </Box>
-        <Box
-          className='td'
-          sx={{
-            display: 'flex',
-          }}
-        >
-          1
-        </Box>
-        <Box
-          className='td'
-          sx={{
-            display: 'flex',
-          }}
-        >
-          500
-        </Box>
-      </Box>
-      <Box
-        className='tr'
-        sx={{
-          display: 'flex',
-          minHeight: '40px',
-          alignItems: 'flex-end',
-        }}
-      >
-        <Box
-          className='td'
-          sx={{
-            display: 'flex',
-          }}
-        >
-          2
+          <Box
+            className='td'
+            sx={{
+              display: 'flex',
+            }}
+          >
+            1
+          </Box>
+          <Box
+            className='td'
+            sx={{
+              display: 'flex',
+            }}
+          >
+            Description 1
+          </Box>
+          <Box
+            className='td'
+            sx={{
+              display: 'flex',
+            }}
+          >
+            500
+          </Box>
+          <Box
+            className='td'
+            sx={{
+              display: 'flex',
+            }}
+          >
+            1
+          </Box>
+          <Box
+            className='td'
+            sx={{
+              display: 'flex',
+            }}
+          >
+            500
+          </Box>
         </Box>
         <Box
-          className='td'
+          className='tr'
           sx={{
             display: 'flex',
+            minHeight: '40px',
+            alignItems: 'flex-end',
           }}
         >
-          Description 2
+          <Box
+            className='td'
+            sx={{
+              display: 'flex',
+            }}
+          >
+            2
+          </Box>
+          <Box
+            className='td'
+            sx={{
+              display: 'flex',
+            }}
+          >
+            Description 2
+          </Box>
+          <Box
+            className='td'
+            sx={{
+              display: 'flex',
+            }}
+          >
+            600
+          </Box>
+          <Box
+            className='td'
+            sx={{
+              display: 'flex',
+            }}
+          >
+            2
+          </Box>
+          <Box
+            className='td'
+            sx={{
+              display: 'flex',
+            }}
+          >
+            1200
+          </Box>
         </Box>
         <Box
-          className='td'
+          className='tr'
           sx={{
             display: 'flex',
+            minHeight: '40px',
+            alignItems: 'flex-end',
           }}
         >
-          600
-        </Box>
-        <Box
-          className='td'
-          sx={{
-            display: 'flex',
-          }}
-        >
-          2
-        </Box>
-        <Box
-          className='td'
-          sx={{
-            display: 'flex',
-          }}
-        >
-          1200
-        </Box>
-      </Box>
-      <Box
-        className='tr'
-        sx={{
-          display: 'flex',
-          minHeight: '40px',
-          alignItems: 'flex-end',
-        }}
-      >
-        <Box
-          className='td'
-          sx={{
-            display: 'flex',
-          }}
-        >
-          3
-        </Box>
-        <Box
-          className='td'
-          sx={{
-            display: 'flex',
-          }}
-        >
-          Description 3
-        </Box>
-        <Box
-          className='td'
-          sx={{
-            display: 'flex',
-          }}
-        >
-          700
-        </Box>
-        <Box
-          className='td'
-          sx={{
-            display: 'flex',
-          }}
-        >
-          3
-        </Box>
-        <Box
-          className='td'
-          sx={{
-            display: 'flex',
-          }}
-        >
-          2100
+          <Box
+            className='td'
+            sx={{
+              display: 'flex',
+            }}
+          >
+            3
+          </Box>
+          <Box
+            className='td'
+            sx={{
+              display: 'flex',
+            }}
+          >
+            Description 3
+          </Box>
+          <Box
+            className='td'
+            sx={{
+              display: 'flex',
+            }}
+          >
+            700
+          </Box>
+          <Box
+            className='td'
+            sx={{
+              display: 'flex',
+            }}
+          >
+            3
+          </Box>
+          <Box
+            className='td'
+            sx={{
+              display: 'flex',
+            }}
+          >
+            2100
+          </Box>
         </Box>
       </Box>
     </Box >

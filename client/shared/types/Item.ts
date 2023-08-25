@@ -28,19 +28,19 @@ interface BoqRow {
 interface BoqCols {
   description: {
     html: string
-    width: number | undefined
+    width: number | 'auto'
   }
   item: {
     html: string
-    width: number | undefined
+    width: number | 'auto'
   }
   qty: {
     html: string
-    width: number | undefined
+    width: number | 'auto'
   }
   price: {
     html: string
-    width: number | undefined
+    width: number | 'auto'
   }
 }
 
