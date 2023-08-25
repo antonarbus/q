@@ -1,5 +1,8 @@
 import { Box } from '@mui/material'
-import { getState } from 'client/shared/clients'
+import { itemsSlice } from 'client/entities/items'
+import { dispatch, getState } from 'client/shared/clients'
+import { saveItemsLocally } from 'client/shared/lib'
+import type { BoqColWidth } from 'client/shared/types'
 import { Resizable } from 're-resizable'
 import { useState } from 'react'
 
@@ -8,13 +11,10 @@ interface Props {
 }
 
 export const BoqTable = ({ index }: Props): JSX.Element | null => {
-  const [isColResized, setIsColResized] = useState(false)
   const item = getState().items[index]
   if (item?.type !== 'boq') return null
-  const defaultDescriptionColWidth = item.boq.column.description.width
-  console.log('🚀  defaultDescriptionColWidth:', defaultDescriptionColWidth)
-  const [widthDescriptionCol, setWidthDescriptionCol] = useState<number | 'auto'>(defaultDescriptionColWidth)
-
+  const initDescriptionColWidth = item.boq.column.description.width
+  const [descriptionColWidth, setDescriptionColWidth] = useState<BoqColWidth>(initDescriptionColWidth)
 
   return (
     <Box
@@ -29,7 +29,6 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
           overflow: 'auto',
           '& > *, & > * > *': {
             background: '#ff00003d',
-            border: '1px dotted grey',
           },
         }}
       >
@@ -39,7 +38,7 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
             display: 'flex',
             minHeight: '40px',
             alignItems: 'center',
-            gap: '10px',
+            gap: '9px',
           }}
         >
           <Box
@@ -56,33 +55,37 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
             className='th resizable'
             enable={{ right: true }}
             minWidth={200}
+            size={{
+              width: descriptionColWidth ?? '100%',
+              height: 'auto',
+            }}
             style={{
-              display: !isColResized ? 'flex' : 'block',
-              flexGrow: !isColResized ? 4 : 0,
+              display: !descriptionColWidth ? 'flex' : 'block',
+              flexGrow: !descriptionColWidth ? 4 : 0,
               flexShrink: 0,
-              width: widthDescriptionCol,
+              width: descriptionColWidth,
             }}
             handleStyles={{
               right: {
                 background: 'grey',
                 width: '3px',
-                right: '-7.5px',
+                right: '-6px',
                 borderRadius: '3px',
               },
             }}
             onResizeStart={(event, direction, element): void => {
               const newWidth = element.clientWidth
-              setWidthDescriptionCol(newWidth)
-              setIsColResized(true)
+              setDescriptionColWidth(newWidth)
             }}
             onResize={(event, direction, element, delta): void => {
               const newWidth = element.clientWidth
-              setWidthDescriptionCol(newWidth)
+              setDescriptionColWidth(newWidth)
             }}
             onResizeStop={(event, direction, element): void => {
-              const newWidth = element.clientWidth
-              // todo: update redux
-              // todo: update local storage
+              const width = element.clientWidth
+              dispatch(itemsSlice.actions.saveColWidth({ index, width, colKey: 'description' }))
+              saveItemsLocally()
+              dispatch(itemsSlice.actions.tellItemSavedLocally({ index }))
             }}
           >
             Description
@@ -106,7 +109,7 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
                 right: {
                   background: 'grey',
                   width: '3px',
-                  right: '-7.5px',
+                  right: '0',
                   borderRadius: '3px',
                 },
               }}
@@ -133,7 +136,7 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
                 right: {
                   background: 'grey',
                   width: '3px',
-                  right: '-7.5px',
+                  right: '0',
                   borderRadius: '3px',
                 },
               }}
