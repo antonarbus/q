@@ -12,7 +12,9 @@ interface Props {
 
 export const BoqTable = ({ index }: Props): JSX.Element | null => {
   const item = getState().items[index]
+
   if (item?.type !== 'boq') return null
+
   const initDescriptionColWidth = item.boq.column.description.width
   const [descriptionColWidth, setDescriptionColWidth] = useState<BoqColWidth>(initDescriptionColWidth)
 
@@ -109,7 +111,7 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
                 right: {
                   background: 'grey',
                   width: '3px',
-                  right: '0',
+                  right: '-6px',
                   borderRadius: '3px',
                 },
               }}
@@ -136,7 +138,7 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
                 right: {
                   background: 'grey',
                   width: '3px',
-                  right: '0',
+                  right: '-6px',
                   borderRadius: '3px',
                 },
               }}
