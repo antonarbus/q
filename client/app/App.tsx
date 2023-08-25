@@ -16,6 +16,7 @@ import { Provider } from 'react-redux'
 import { BottomMsg } from 'client/widgets/bottom_msg'
 import { Spinner } from 'client/widgets/spinner'
 import { Login, PersistentAuth, Register, RequireAuth, Reset, Unauthorized } from 'client/widgets/credentials'
+import { BarChart } from 'client/pages/chart/Chart'
 
 export const App = (): JSX.Element => (
   <Provider store={store}>
@@ -38,6 +39,7 @@ export const App = (): JSX.Element => (
               </Route>
             </Route>
             <Route path='unauthorized' element={<Unauthorized />} />
+            <Route path='chart' element={<BarChart />} />
           </Routes>
           <TopMsg />
           <BottomMsg />
