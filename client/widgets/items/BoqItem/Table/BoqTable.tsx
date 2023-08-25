@@ -26,6 +26,7 @@ export const BoqTable = (): JSX.Element => {
           sx={{
             display: 'flex',
             width: '40px',
+            minWidth: '40px',
           }}
         >
           #
@@ -35,6 +36,7 @@ export const BoqTable = (): JSX.Element => {
           sx={{
             display: 'flex',
             flexGrow: 2,
+            flexShrink: 0,
             position: 'relative',
           }}
         >
@@ -49,6 +51,8 @@ export const BoqTable = (): JSX.Element => {
               right: {
                 background: 'grey',
                 width: '3px',
+                right: '-7px',
+                borderRadius: '3px',
               },
             }}
           >
@@ -60,10 +64,24 @@ export const BoqTable = (): JSX.Element => {
           sx={{
             display: 'flex',
             flexGrow: 1,
+            position: 'relative',
           }}
         >
           <Resizable
+            className='resizable'
             enable={{ right: true }}
+            style={{
+              width: '100%',
+              position: 'static',
+            }}
+            handleStyles={{
+              right: {
+                background: 'grey',
+                width: '3px',
+                right: '-7px',
+                borderRadius: '3px',
+              },
+            }}
           >
             Item
           </Resizable>
@@ -73,10 +91,24 @@ export const BoqTable = (): JSX.Element => {
           sx={{
             display: 'flex',
             flexGrow: 1,
+            position: 'relative',
           }}
         >
           <Resizable
+            className='resizable'
             enable={{ right: true }}
+            style={{
+              width: '100%',
+              position: 'static',
+            }}
+            handleStyles={{
+              right: {
+                background: 'grey',
+                width: '3px',
+                right: '-7px',
+                borderRadius: '3px',
+              },
+            }}
           >
             Qty
           </Resizable>
