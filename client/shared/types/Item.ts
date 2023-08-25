@@ -25,22 +25,24 @@ interface BoqRow {
   }
 }
 
-interface BoqCols {
+export type BoqColWidth = number | undefined
+
+export interface BoqCols {
   description: {
     html: string
-    width: number | 'auto'
+    width: BoqColWidth
   }
   item: {
     html: string
-    width: number | 'auto'
+    width: BoqColWidth
   }
   qty: {
     html: string
-    width: number | 'auto'
+    width: BoqColWidth
   }
   price: {
     html: string
-    width: number | 'auto'
+    width: BoqColWidth
   }
 }
 
