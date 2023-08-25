@@ -37,19 +37,19 @@ export const defaultItems: Item[] = [
       column: {
         description: {
           html: '<b>Description</b>',
-          width: undefined,
+          width: null,
         },
         item: {
           html: '<b>Item</b>',
-          width: undefined,
+          width: null,
         },
         qty: {
           html: '<b>Qty</b>',
-          width: undefined,
+          width: null,
         },
         price: {
           html: '<b>Price</b>',
-          width: undefined,
+          width: null,
         },
       },
       rows: [

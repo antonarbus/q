@@ -56,14 +56,14 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
             enable={{ right: true }}
             minWidth={200}
             size={{
-              width: descriptionColWidth ?? '100%',
+              width: descriptionColWidth ?? 'auto',
               height: 'auto',
             }}
             style={{
               display: !descriptionColWidth ? 'flex' : 'block',
               flexGrow: !descriptionColWidth ? 4 : 0,
               flexShrink: 0,
-              width: descriptionColWidth,
+              width: descriptionColWidth ?? 'auto',
             }}
             handleStyles={{
               right: {
