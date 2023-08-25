@@ -25,7 +25,7 @@ interface BoqRow {
   }
 }
 
-export type BoqColWidth = number | undefined
+export type BoqColWidth = number | null
 
 export interface BoqCols {
   description: {
