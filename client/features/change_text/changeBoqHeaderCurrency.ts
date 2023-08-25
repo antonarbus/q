@@ -6,9 +6,9 @@ import type { OnFroalaContentChange } from 'client/shared/types'
 export const changeBoqHeaderCurrency: OnFroalaContentChange = ({ html, index, rowIndex }) => {
   const item = getState().items[index]
   if (item?.type !== 'boq') return
-  const prevHtml = item.boq.header.subtotal.currency.html
+  const prevHtml = item.boq.header.currency.html
   const didTextChange = prevHtml !== html
   if (!didTextChange) return
-  dispatch(itemsSlice.actions.saveBoqHeaderCurrency({ index, html, rowIndex }))
+  dispatch(itemsSlice.actions.saveBoqHeaderText({ index, html, rowIndex, headerElementName: 'currency' }))
   saveItemsLocally({ msgAboveItemWithIndex: index })
 }

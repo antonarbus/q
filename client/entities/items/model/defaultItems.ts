@@ -24,16 +24,14 @@ export const defaultItems: Item[] = [
           html: '<b>Title</b>',
         },
         subtotal: {
-          text: {
-            html: '<div>Subtotal</div>',
-          },
-          price: {
-            value: 666,
-            html: '<b>666</b>',
-          },
-          currency: {
-            html: '<div>EUR</div>',
-          },
+          html: '<div>Subtotal</div>',
+        },
+        price: {
+          value: 666,
+          html: '<b>666</b>',
+        },
+        currency: {
+          html: '<div>EUR</div>',
         },
       },
       column: {

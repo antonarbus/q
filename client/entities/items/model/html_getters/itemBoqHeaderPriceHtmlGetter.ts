@@ -5,5 +5,5 @@ export const itemBoqHeaderPriceHtmlGetter: HtmlGetter = ({ index, rowIndex }) =>
   const item = getState().items[index]
   if (!item) return ''
   if (item.type !== 'boq') return ''
-  return item.boq.header.subtotal.price.html
+  return item.boq.header.price.html
 }
