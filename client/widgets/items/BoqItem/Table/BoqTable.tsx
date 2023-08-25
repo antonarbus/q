@@ -1,7 +1,12 @@
 import { Box } from '@mui/material'
 import { Resizable } from 're-resizable'
+import { useState } from 'react'
 
 export const BoqTable = (): JSX.Element => {
+  const [isColResized, setIsColResized] = useState(false)
+  const [widthDescriptionCol, setWidthDescriptionCol] = useState<number | '100%'>('100%')
+
+
   return (
     <Box
       sx={{
@@ -31,34 +36,39 @@ export const BoqTable = (): JSX.Element => {
         >
           #
         </Box>
-        <Box
-          className='th'
-          sx={{
-            display: 'flex',
-            flexGrow: 2,
+        <Resizable
+          className='resizable'
+          enable={{ right: true }}
+          style={{
+            display: !isColResized ? 'flex' : 'block',
+            flexGrow: !isColResized ? 3 : 0,
             flexShrink: 0,
-            position: 'relative',
+            width: widthDescriptionCol,
+          }}
+          handleStyles={{
+            right: {
+              background: 'grey',
+              width: '3px',
+              right: '-7.5px',
+              borderRadius: '3px',
+            },
+          }}
+          onResizeStart={(event, direction, element): void => {
+            const newWidth = element.clientWidth
+            console.log('🚀  newWidth:', newWidth)
+            setWidthDescriptionCol(newWidth)
+            setIsColResized(true)
+
+          }}
+          onResize={(event, direction, element, delta): void => {
+            const newWidth = element.clientWidth
+            console.log('🚀  newWidth:', newWidth)
+            setWidthDescriptionCol(element.clientWidth)
           }}
         >
-          <Resizable
-            className='resizable'
-            enable={{ right: true }}
-            style={{
-              width: '100%',
-              position: 'static',
-            }}
-            handleStyles={{
-              right: {
-                background: 'grey',
-                width: '3px',
-                right: '-7px',
-                borderRadius: '3px',
-              },
-            }}
-          >
-            Description
-          </Resizable>
-        </Box>
+          Description
+        </Resizable>
+
         <Box
           className='th'
           sx={{
@@ -78,7 +88,7 @@ export const BoqTable = (): JSX.Element => {
               right: {
                 background: 'grey',
                 width: '3px',
-                right: '-7px',
+                right: '-7.5px',
                 borderRadius: '3px',
               },
             }}
@@ -105,7 +115,7 @@ export const BoqTable = (): JSX.Element => {
               right: {
                 background: 'grey',
                 width: '3px',
-                right: '-7px',
+                right: '-7.5px',
                 borderRadius: '3px',
               },
             }}
@@ -270,6 +280,6 @@ export const BoqTable = (): JSX.Element => {
           2100
         </Box>
       </Box>
-    </Box>
+    </Box >
   )
 }
