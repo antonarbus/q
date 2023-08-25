@@ -9,6 +9,6 @@ export const changeBoqHeaderTitle: OnFroalaContentChange = ({ html, index, rowIn
   const prevHtml = item.boq.header.title.html
   const didTextChange = prevHtml !== html
   if (!didTextChange) return
-  dispatch(itemsSlice.actions.saveBoqHeaderTitle({ index, html, rowIndex }))
+  dispatch(itemsSlice.actions.saveBoqHeaderText({ index, html, rowIndex, headerElementName: 'title' }))
   saveItemsLocally({ msgAboveItemWithIndex: index })
 }

@@ -1,6 +1,6 @@
+import type { Item } from 'client/shared/types'
 import { createSlice, current } from '@reduxjs/toolkit'
 import { defaultItems } from './defaultItems'
-import type { Item } from 'client/shared/types'
 import { reOrderItemsReducer } from './reducers/reOrderItemsReducer'
 import { deleteItemReducer } from './reducers/deleteItemReducer'
 import { pasteItemReducer } from './reducers/pasteItemReducer'
@@ -13,11 +13,8 @@ import { saveItemTextReducer } from './reducers/saveItemTextReducer'
 import { saveItemWidthReducer } from './reducers/saveItemWidthReducer'
 import { tellItemSavedLocallyReducer } from './reducers/tellItemSavedLocallyReducer'
 import { getDefaultOrLocalItems } from './getDefaultOrLocalItems'
-import { saveBoqHeaderTitleReducer } from './reducers/saveBoqHeaderTitleReducer'
-import { saveBoqHeaderCurrencyReducer } from './reducers/saveBoqHeaderCurrencyReducer'
-import { saveBoqHeaderPriceReducer } from './reducers/saveBoqHeaderPriceReducer'
-import { saveBoqHeaderSubtotalReducer } from './reducers/saveBoqHeaderSubtotalReducer'
-import { saveColWidth, saveColWidthReducer } from './reducers/saveColWidthReducer'
+import { saveBoqHeaderTextReducer } from './reducers/saveBoqHeaderTextReducer'
+import { saveColWidthReducer } from './reducers/saveColWidthReducer'
 
 export type ItemsState = Item[]
 
@@ -39,10 +36,7 @@ export const itemsSlice = createSlice({
     saveItemText: saveItemTextReducer,
     removePasteItem: removePasteItemReducer,
     insertPasteItem: insertPasteItemReducer,
-    saveBoqHeaderTitle: saveBoqHeaderTitleReducer,
-    saveBoqHeaderCurrency: saveBoqHeaderCurrencyReducer,
-    saveBoqHeaderPrice: saveBoqHeaderPriceReducer,
-    saveBoqHeaderSubtotal: saveBoqHeaderSubtotalReducer,
+    saveBoqHeaderText: saveBoqHeaderTextReducer,
     saveColWidth: saveColWidthReducer,
   },
 })

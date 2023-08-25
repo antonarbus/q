@@ -6,9 +6,9 @@ import type { OnFroalaContentChange } from 'client/shared/types'
 export const changeBoqHeaderSubtotal: OnFroalaContentChange = ({ html, index, rowIndex }) => {
   const item = getState().items[index]
   if (item?.type !== 'boq') return
-  const prevHtml = item.boq.header.subtotal.text.html
+  const prevHtml = item.boq.header.subtotal.html
   const didTextChange = prevHtml !== html
   if (!didTextChange) return
-  dispatch(itemsSlice.actions.saveBoqHeaderSubtotal({ index, html, rowIndex }))
+  dispatch(itemsSlice.actions.saveBoqHeaderText({ index, html, rowIndex, headerElementName: 'subtotal' }))
   saveItemsLocally({ msgAboveItemWithIndex: index })
 }

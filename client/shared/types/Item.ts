@@ -54,22 +54,22 @@ interface BoqItem extends Common {
         html: string
       }
       subtotal: {
-        text: {
-          html: string
-        }
-        price: {
-          value: number
-          html: string
-        }
-        currency: {
-          html: string
-        }
+        html: string
+      }
+      price: {
+        value: number
+        html: string
+      }
+      currency: {
+        html: string
       }
     }
     column: BoqCols
     rows: BoqRow[]
   }
 }
+
+export type BoqHeaderKey = keyof BoqItem['boq']['header']
 
 interface TextItem extends Common {
   type: 'text'
