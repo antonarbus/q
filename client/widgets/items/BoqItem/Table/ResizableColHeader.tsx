@@ -62,6 +62,8 @@ export const ResizableColHeader = ({
       onResize={(event, direction, element, delta): void => {
         const width = element.clientWidth
         setColWidth(width)
+        const isExpanding = delta.width > 0
+        if (!isExpanding) return
         makeItemWiderIfHeaderDoesNotFit()
       }}
       onResizeStop={(event, direction, element): void => {
