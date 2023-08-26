@@ -21,7 +21,6 @@ export const BoqTable = ({ index }: Props): JSX.Element => {
     }
   }
 
-
   return (
     <Box
       className='boq-table-container-with-paddings'

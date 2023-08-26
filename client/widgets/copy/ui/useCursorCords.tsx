@@ -15,9 +15,9 @@ export const useCursorCords = (): Props => {
     setCursorCords({ x: e.x, y: e.y })
   }
 
-  type FuncReturn = () => void
+  type FuncReturnType = () => void
 
-  const listenForMousemove = (): FuncReturn => {
+  const listenForMousemove = (): FuncReturnType => {
     window.addEventListener('mousemove', followCursor)
     return () => {
       window.removeEventListener('mousemove', followCursor)

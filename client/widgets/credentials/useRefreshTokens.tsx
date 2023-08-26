@@ -30,11 +30,11 @@ interface Props {
 // but no need to do, because all protected apis calls will do the same
 // he may stay logged in forever without making any harm
 
-interface FuncReturn {
+interface FuncReturnType {
   isCheckingTokens: boolean;
 }
 
-export const useRefreshTokens = ({ withLoadingState }: Props): FuncReturn => {
+export const useRefreshTokens = ({ withLoadingState }: Props): FuncReturnType => {
   const [isCheckingTokens, setIsCheckingTokens] = useState(true)
 
   useEffectOnce(() => {
