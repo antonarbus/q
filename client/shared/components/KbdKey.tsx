@@ -21,6 +21,7 @@ export const KbdKey = ({ children }: Props): JSX.Element => {
           inset 0px 0px 0px 2px #ffffff;
         text-shadow: 0 1px 0 #fff;
         font-size: 11px;
+        background: white;
       `}
     >
       {children}
