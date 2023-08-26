@@ -11,13 +11,13 @@ interface Props {
   password: string
 }
 
-interface FuncReturn {
+interface FuncReturnType {
   registerUser: ({ e, email, password }: Props) => Promise<void>
   httpStatus: HttpStatusType
   setHttpStatus: Dispatch<SetStateAction<HttpStatusType>>
 }
 
-export const useRegister = (): FuncReturn => {
+export const useRegister = (): FuncReturnType => {
   const [httpStatus, setHttpStatus] = useState<HttpStatusType>('')
 
   const registerUser = async ({ e, email, password }: Props): Promise<void> => {
