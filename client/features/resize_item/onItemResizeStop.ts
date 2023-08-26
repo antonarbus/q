@@ -9,10 +9,12 @@ interface Props {
 
 type FuncReturn = ResizeCallback | undefined
 
-export const onItemResizeStop = ({ index }: Props): FuncReturn => (e, direction, refToElement): void => {
-  const width = parseInt(refToElement.style.width)
-  const prevItemWidth = getState().items[index]?.width
-  if (width === prevItemWidth) return
-  dispatch(itemsSlice.actions.saveItemWidth({ index, width }))
-  saveItemsLocally({ msgAboveItemWithIndex: index })
-}
+export const onItemResizeStop =
+  ({ index }: Props): FuncReturn =>
+    (e, direction, refToElement): void => {
+      const width = parseInt(refToElement.style.width)
+      const prevItemWidth = getState().items[index]?.width
+      if (width === prevItemWidth) return
+      dispatch(itemsSlice.actions.saveItemWidth({ index, width }))
+      saveItemsLocally({ msgAboveItemWithIndex: index })
+    }

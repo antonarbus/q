@@ -15,6 +15,7 @@ import { tellItemSavedLocallyReducer } from './reducers/tellItemSavedLocallyRedu
 import { getDefaultOrLocalItems } from './getDefaultOrLocalItems'
 import { saveBoqHeaderTextReducer } from './reducers/saveBoqHeaderTextReducer'
 import { saveColWidthReducer } from './reducers/saveColWidthReducer'
+import { makeItemBitWiderReducer } from './reducers/makeItemBitWiderReducer'
 
 export type ItemsState = Item[]
 
@@ -31,6 +32,7 @@ export const itemsSlice = createSlice({
     tellItemSavedLocally: tellItemSavedLocallyReducer,
     removeItemMsg: removeItemMsgReducer,
     saveItemWidth: saveItemWidthReducer,
+    makeItemBitWider: makeItemBitWiderReducer,
     saveItemHeight: saveItemHeightReducer,
     saveItemHeights: saveItemHeightsReducer, // todo: not used anywhere
     saveItemText: saveItemTextReducer,

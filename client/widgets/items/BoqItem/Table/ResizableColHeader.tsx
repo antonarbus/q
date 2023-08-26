@@ -12,6 +12,7 @@ interface Props {
   children: ReactNode
   flexGrow?: number
   minWidth: number
+  className: string
 }
 
 export const ResizableColHeader = ({
@@ -20,6 +21,7 @@ export const ResizableColHeader = ({
   children,
   flexGrow = 1,
   minWidth,
+  className,
 }: Props): JSX.Element | null => {
   const item = getState().items[index]
 
@@ -30,7 +32,7 @@ export const ResizableColHeader = ({
 
   return (
     <Resizable
-      className='th resizable'
+      className={className}
       enable={{ right: true }}
       minWidth={minWidth}
       size={{
@@ -45,7 +47,7 @@ export const ResizableColHeader = ({
       }}
       handleStyles={{
         right: {
-          background: 'grey',
+          background: '#a7a7a7',
           width: '3px',
           right: '-6px',
           borderRadius: '3px',
