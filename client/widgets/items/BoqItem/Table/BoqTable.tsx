@@ -35,40 +35,40 @@ export const BoqTable = ({ index }: Props): JSX.Element => {
           overflow: 'auto',
           '& > *, & > * > *': {
             background: '#ff00003d',
+            // border: '1px dotted grey',
+          },
+          '.tr': {
+            display: 'flex',
+            minHeight: '40px',
+            alignItems: 'flex-end',
+            // alignItems: 'center',
+            gap: '9px',
+          },
+          '.number': {
+            width: '30px',
+            minWidth: '30px',
+          },
+          '.description': {
+
+          },
+          '.item, .qty, .price': {
+            display: 'flex',
+            flexGrow: 1,
+            minWidth: '100px',
           },
         }}
       >
         <Box
           ref={headerRef}
           className='header tr'
-          sx={{
-            display: 'flex',
-            minHeight: '40px',
-            alignItems: 'center',
-            gap: '9px',
-          }}
-          onClick={(e): void => {
-            console.log(e.currentTarget)
-            const overflown = isOverflown({ element: e.currentTarget })
-            console.log('🚀  overflown:', overflown)
-            // todo: if header is overflown on col width change, then start change the width of paper
-            if (overflown) {
-              // dispatch(itemsSlice.actions.saveItemWidth({ index, width: 600 }))
-              dispatch(itemsSlice.actions.makeItemBitWider({ index }))
-            }
-          }}
         >
           <Box
-            className='th'
-            sx={{
-              width: '30px',
-              minWidth: '30px',
-            }}
+            className='th number'
           >
             #
           </Box>
           <ResizableColHeader
-            className='th resizable'
+            className='th description resizable'
             index={index}
             headerName='description'
             minWidth={200}
@@ -77,129 +77,77 @@ export const BoqTable = ({ index }: Props): JSX.Element => {
             Description
           </ResizableColHeader>
           <Box
-            className='th'
-            sx={{
-              display: 'flex',
-              flexGrow: 1,
-              minWidth: '100px',
-            }}
+            className='th item'
           >
             Item
           </Box>
           <Box
-            className='th'
-            sx={{
-              display: 'flex',
-              flexGrow: 1,
-              minWidth: '100px',
-            }}
+            className='th qty'
           >
             Qty
           </Box>
           <Box
-            className='th'
-            sx={{
-              display: 'flex',
-              flexGrow: 1,
-              minWidth: '100px',
-            }}
+            className='th price'
           >
             Price
           </Box>
         </Box>
         <Box
           className='tr'
-          sx={{
-            display: 'flex',
-            minHeight: '40px',
-            alignItems: 'flex-end',
-          }}
         >
           <Box
-            className='td'
-            sx={{
-              display: 'flex',
-            }}
+            className='td number'
           >
             1
           </Box>
           <Box
-            className='td'
-            sx={{
-              display: 'flex',
-            }}
+            className='td description'
           >
             Description 1
           </Box>
           <Box
-            className='td'
-            sx={{
-              display: 'flex',
-            }}
+            className='td item'
           >
             500
           </Box>
           <Box
-            className='td'
-            sx={{
-              display: 'flex',
-            }}
+            className='td qty'
           >
             1
           </Box>
           <Box
-            className='td'
-            sx={{
-              display: 'flex',
-            }}
+            className='td price'
           >
             500
           </Box>
         </Box>
         <Box
           className='tr'
-          sx={{
-            display: 'flex',
-            minHeight: '40px',
-            alignItems: 'flex-end',
-          }}
         >
           <Box
-            className='td'
-            sx={{
-              display: 'flex',
-            }}
+            className='td number'
           >
             2
           </Box>
           <Box
-            className='td'
-            sx={{
-              display: 'flex',
-            }}
+            className='td description'
           >
             Description 2
           </Box>
           <Box
-            className='td'
-            sx={{
-              display: 'flex',
-            }}
+            className='td item'
           >
             600
           </Box>
           <Box
-            className='td'
-            sx={{
-              display: 'flex',
-            }}
+            className='td qty'
           >
             2
           </Box>
           <Box
-            className='td'
+            className='td price'
             sx={{
-              display: 'flex',
+              // display: 'flex',
             }}
           >
             1200
@@ -207,54 +155,34 @@ export const BoqTable = ({ index }: Props): JSX.Element => {
         </Box>
         <Box
           className='tr'
-          sx={{
-            display: 'flex',
-            minHeight: '40px',
-            alignItems: 'flex-end',
-          }}
         >
           <Box
-            className='td'
-            sx={{
-              display: 'flex',
-            }}
+            className='td number'
           >
             3
           </Box>
           <Box
-            className='td'
-            sx={{
-              display: 'flex',
-            }}
+            className='td description'
           >
             Description 3
           </Box>
           <Box
-            className='td'
-            sx={{
-              display: 'flex',
-            }}
+            className='td item'
           >
             700
           </Box>
           <Box
-            className='td'
-            sx={{
-              display: 'flex',
-            }}
+            className='td qty'
           >
             3
           </Box>
           <Box
-            className='td'
-            sx={{
-              display: 'flex',
-            }}
+            className='td price'
           >
             2100
           </Box>
         </Box>
       </Box>
-    </Box >
+    </Box>
   )
 }
