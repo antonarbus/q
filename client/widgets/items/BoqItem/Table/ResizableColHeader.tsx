@@ -13,6 +13,7 @@ interface Props {
   flexGrow?: number
   minWidth: number
   className: string
+  makeItemWiderIfHeaderDoesNotFit: () => void
 }
 
 export const ResizableColHeader = ({
@@ -22,6 +23,7 @@ export const ResizableColHeader = ({
   flexGrow = 1,
   minWidth,
   className,
+  makeItemWiderIfHeaderDoesNotFit,
 }: Props): JSX.Element | null => {
   const item = getState().items[index]
 
@@ -60,6 +62,7 @@ export const ResizableColHeader = ({
       onResize={(event, direction, element, delta): void => {
         const width = element.clientWidth
         setColWidth(width)
+        makeItemWiderIfHeaderDoesNotFit()
       }}
       onResizeStop={(event, direction, element): void => {
         const width = element.clientWidth
