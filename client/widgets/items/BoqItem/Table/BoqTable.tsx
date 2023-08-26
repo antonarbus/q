@@ -1,10 +1,7 @@
 import { Box } from '@mui/material'
 import { itemsSlice } from 'client/entities/items'
-import { dispatch, getState } from 'client/shared/clients'
-import { saveItemsLocally } from 'client/shared/lib'
-import type { BoqColWidth } from 'client/shared/types'
-import { Resizable } from 're-resizable'
-import { useRef, useState } from 'react'
+import { dispatch } from 'client/shared/clients'
+import { useRef } from 'react'
 import { ResizableColHeader } from './ResizableColHeader'
 import { isOverflown } from 'client/shared/lib/isOverflown'
 
@@ -14,7 +11,16 @@ interface Props {
 
 export const BoqTable = ({ index }: Props): JSX.Element => {
 
-  const ref = useRef<HTMLDivElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
+
+  const makeItemWiderIfHeaderDoesNotFit = (): void => {
+    if (!headerRef.current) return
+    const isHeaderOverflown = isOverflown({ element: headerRef.current })
+    if (isHeaderOverflown) {
+      dispatch(itemsSlice.actions.makeItemBitWider({ index }))
+    }
+  }
+
 
   return (
     <Box
@@ -33,8 +39,8 @@ export const BoqTable = ({ index }: Props): JSX.Element => {
         }}
       >
         <Box
-          ref={ref}
-          className='tr'
+          ref={headerRef}
+          className='header tr'
           sx={{
             display: 'flex',
             minHeight: '40px',
@@ -66,6 +72,7 @@ export const BoqTable = ({ index }: Props): JSX.Element => {
             index={index}
             headerName='description'
             minWidth={200}
+            makeItemWiderIfHeaderDoesNotFit={makeItemWiderIfHeaderDoesNotFit}
           >
             Description
           </ResizableColHeader>
