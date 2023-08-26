@@ -4,20 +4,17 @@ import { dispatch, getState } from 'client/shared/clients'
 import { saveItemsLocally } from 'client/shared/lib'
 import type { BoqColWidth } from 'client/shared/types'
 import { Resizable } from 're-resizable'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { ResizableColHeader } from './ResizableColHeader'
+import { isOverflown } from 'client/shared/lib/isOverflown'
 
 interface Props {
   index: number
 }
 
-export const BoqTable = ({ index }: Props): JSX.Element | null => {
-  const item = getState().items[index]
+export const BoqTable = ({ index }: Props): JSX.Element => {
 
-  if (item?.type !== 'boq') return null
-
-  const initDescriptionColWidth = item.boq.column.description.width
-  const [descriptionColWidth, setDescriptionColWidth] = useState<BoqColWidth>(initDescriptionColWidth)
+  const ref = useRef<HTMLDivElement>(null)
 
   return (
     <Box
@@ -36,12 +33,23 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
         }}
       >
         <Box
+          ref={ref}
           className='tr'
           sx={{
             display: 'flex',
             minHeight: '40px',
             alignItems: 'center',
             gap: '9px',
+          }}
+          onClick={(e): void => {
+            console.log(e.currentTarget)
+            const overflown = isOverflown({ element: e.currentTarget })
+            console.log('🚀  overflown:', overflown)
+            // todo: if header is overflown on col width change, then start change the width of paper
+            if (overflown) {
+              // dispatch(itemsSlice.actions.saveItemWidth({ index, width: 600 }))
+              dispatch(itemsSlice.actions.makeItemBitWider({ index }))
+            }
           }}
         >
           <Box
@@ -54,6 +62,7 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
             #
           </Box>
           <ResizableColHeader
+            className='th resizable'
             index={index}
             headerName='description'
             minWidth={200}
@@ -65,6 +74,7 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
             sx={{
               display: 'flex',
               flexGrow: 1,
+              minWidth: '100px',
             }}
           >
             Item
@@ -74,6 +84,7 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
             sx={{
               display: 'flex',
               flexGrow: 1,
+              minWidth: '100px',
             }}
           >
             Qty
@@ -83,6 +94,7 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
             sx={{
               display: 'flex',
               flexGrow: 1,
+              minWidth: '100px',
             }}
           >
             Price

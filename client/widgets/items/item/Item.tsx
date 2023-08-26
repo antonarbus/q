@@ -25,7 +25,6 @@ export const Item = ({ index, children }: Props): JSX.Element => {
       disabled={isItemDisabled} // internal prop consumed by SortableElement HOC
       i={index}
       itemHeight={item?.height ?? 0}
-      itemWidth={item?.width ?? 0}
       itemId={item?.id ?? 'no id'}
       itemActionElements={(
         <>
