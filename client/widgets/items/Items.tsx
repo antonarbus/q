@@ -20,11 +20,7 @@ export const Items = (): JSX.Element => {
         onItemDrag.end({ oldIndex, newIndex })
       }}
     >
-      <AnimatePresence
-        initial={false}
-      // onExitComplete={(): void => {
-      // }}
-      >
+      <AnimatePresence initial={false}>
         {items.map((item, index) => {
           const key = item.id + shouldReRender.toString()
 

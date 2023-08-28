@@ -5,6 +5,7 @@ import { useRef, useState } from 'react'
 import { ResizableColHeader } from './ResizableColHeader'
 import { isOverflown } from 'client/shared/lib/isOverflown'
 import type { BoqColWidth } from 'client/shared/types'
+import { BoqRows } from './boq_rows/BoqRows'
 
 interface Props {
   index: number
@@ -198,6 +199,7 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
             2100
           </Box>
         </Box>
+        <BoqRows index={index} />
       </Box>
     </Box>
   )
