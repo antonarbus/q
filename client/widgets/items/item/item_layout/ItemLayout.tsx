@@ -1,9 +1,8 @@
 import type { SortableElementProps } from 'react-sortable-hoc'
+import type { ComponentClass, ReactNode } from 'react'
 import { SortableElement } from 'react-sortable-hoc'
 import { motion } from 'framer-motion'
 import { theme } from 'client/shared/clients'
-import type { ComponentClass, ReactNode } from 'react'
-import { useRef } from 'react'
 import { ActionsContainer } from './ActionsContainer'
 import { ResizablePaper } from './ResizablePaper'
 import { className } from 'client/shared/className'
@@ -25,11 +24,8 @@ export const ItemLayout: ComponentClass<SortableItem> = SortableElement(({
   itemId,
   itemActionElements,
 }: Props) => {
-  const itemRef = useRef<HTMLDivElement>(null)
-
   return (
     <motion.div
-      ref={itemRef}
       id={itemId}
       className={className.item}
       initial={{
