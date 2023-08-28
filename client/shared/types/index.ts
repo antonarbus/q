@@ -1,7 +1,7 @@
 import type { Action, ThunkAction } from '@reduxjs/toolkit'
 import type { store } from '../clients'
 
-export type { PasteItem, BoqCols, Item, HtmlGetter, BoqColWidth, BoqHeaderKey } from './Item'
+export type { PasteItem, BoqCols, Item, HtmlGetter, BoqColWidth, BoqHeaderKey, BoqRow } from './Item'
 
 export type { PastePos, CopyPlace, CopyItem } from './Copy'
 

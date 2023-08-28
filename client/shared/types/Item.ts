@@ -6,8 +6,9 @@ interface Common {
   // previewHtml: string
 }
 
-interface BoqRow {
+export interface BoqRow {
   id: string
+  type: 'boq paste' | 'boq row'
   description: {
     html: string
   }
