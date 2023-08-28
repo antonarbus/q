@@ -1,10 +1,9 @@
 import type { BoqColWidth, BoqCols } from 'client/shared/types'
-import type { ReactNode } from 'react'
+import type { Dispatch, ReactNode, SetStateAction } from 'react'
 import { itemsSlice } from 'client/entities/items'
 import { dispatch, getState } from 'client/shared/clients'
 import { saveItemsLocally } from 'client/shared/lib'
 import { Resizable } from 're-resizable'
-import { useState } from 'react'
 
 interface Props {
   index: number
@@ -14,6 +13,8 @@ interface Props {
   minWidth: number
   className: string
   makeItemWiderIfHeaderDoesNotFit: () => void
+  descriptionColWidth: BoqColWidth
+  setDescriptionColWidth: Dispatch<SetStateAction<BoqColWidth>>
 }
 
 export const ResizableColHeader = ({
@@ -24,13 +25,12 @@ export const ResizableColHeader = ({
   minWidth,
   className,
   makeItemWiderIfHeaderDoesNotFit,
+  descriptionColWidth,
+  setDescriptionColWidth,
 }: Props): JSX.Element | null => {
   const item = getState().items[index]
 
   if (item?.type !== 'boq') return null
-
-  const initColWidth = item.boq.column[headerName].width
-  const [colWidth, setColWidth] = useState<BoqColWidth>(initColWidth)
 
   return (
     <Resizable
@@ -38,14 +38,14 @@ export const ResizableColHeader = ({
       enable={{ right: true }}
       minWidth={minWidth}
       size={{
-        width: colWidth ?? 'auto',
+        width: descriptionColWidth ?? 'auto',
         height: 'auto',
       }}
       style={{
-        display: !colWidth ? 'flex' : 'block',
-        flexGrow: !colWidth ? flexGrow : 0,
+        display: !descriptionColWidth ? 'flex' : 'block',
+        flexGrow: !descriptionColWidth ? flexGrow : 0,
         flexShrink: 0,
-        width: colWidth ?? 'auto',
+        width: descriptionColWidth ?? 'auto',
       }}
       handleStyles={{
         right: {
@@ -57,11 +57,11 @@ export const ResizableColHeader = ({
       }}
       onResizeStart={(event, direction, element): void => {
         const width = element.clientWidth
-        setColWidth(width)
+        setDescriptionColWidth(width)
       }}
       onResize={(event, direction, element, delta): void => {
         const width = element.clientWidth
-        setColWidth(width)
+        setDescriptionColWidth(width)
         const isExpanding = delta.width > 0
         if (!isExpanding) return
         makeItemWiderIfHeaderDoesNotFit()

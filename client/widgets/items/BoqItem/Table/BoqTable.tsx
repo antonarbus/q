@@ -1,15 +1,24 @@
 import { Box } from '@mui/material'
 import { itemsSlice } from 'client/entities/items'
-import { dispatch } from 'client/shared/clients'
-import { useRef } from 'react'
+import { dispatch, getState } from 'client/shared/clients'
+import { useRef, useState } from 'react'
 import { ResizableColHeader } from './ResizableColHeader'
 import { isOverflown } from 'client/shared/lib/isOverflown'
+import type { BoqColWidth } from 'client/shared/types'
 
 interface Props {
   index: number
 }
 
-export const BoqTable = ({ index }: Props): JSX.Element => {
+export const BoqTable = ({ index }: Props): JSX.Element | null => {
+  const item = getState().items[index]
+
+  if (item?.type !== 'boq') return null
+
+  const initColWidth = item.boq.column.description.width
+
+  const [descriptionColWidth, setDescriptionColWidth] = useState<BoqColWidth>(initColWidth)
+
 
   const headerRef = useRef<HTMLDivElement>(null)
 
@@ -20,6 +29,9 @@ export const BoqTable = ({ index }: Props): JSX.Element => {
       dispatch(itemsSlice.actions.makeItemBitWider({ index }))
     }
   }
+
+
+
 
   return (
     <Box
@@ -48,12 +60,15 @@ export const BoqTable = ({ index }: Props): JSX.Element => {
             minWidth: '30px',
           },
           '.description': {
-
+            display: !descriptionColWidth ? 'flex' : 'block',
+            flexGrow: !descriptionColWidth ? 1 : 0,
+            flexShrink: 0,
+            width: descriptionColWidth ?? 'auto',
           },
           '.item, .qty, .price': {
-            display: 'flex',
             flexGrow: 1,
             minWidth: '100px',
+            width: '100%',
           },
         }}
       >
@@ -72,6 +87,8 @@ export const BoqTable = ({ index }: Props): JSX.Element => {
             headerName='description'
             minWidth={200}
             makeItemWiderIfHeaderDoesNotFit={makeItemWiderIfHeaderDoesNotFit}
+            descriptionColWidth={descriptionColWidth}
+            setDescriptionColWidth={setDescriptionColWidth}
           >
             Description
           </ResizableColHeader>
@@ -149,7 +166,7 @@ export const BoqTable = ({ index }: Props): JSX.Element => {
               // display: 'flex',
             }}
           >
-            1200
+            120000
           </Box>
         </Box>
         <Box
