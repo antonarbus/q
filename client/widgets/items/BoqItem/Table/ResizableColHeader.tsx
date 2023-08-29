@@ -57,10 +57,12 @@ export const ResizableColHeader = ({
       }}
       onResizeStart={(event, direction, element): void => {
         const width = element.clientWidth
+        // dispatch(itemsSlice.actions.saveColWidth({ index, width, headerName }))
         setDescriptionColWidth(width)
       }}
       onResize={(event, direction, element, delta): void => {
         const width = element.clientWidth
+        // dispatch(itemsSlice.actions.saveColWidth({ index, width, headerName }))
         setDescriptionColWidth(width)
         const isExpanding = delta.width > 0
         if (!isExpanding) return
