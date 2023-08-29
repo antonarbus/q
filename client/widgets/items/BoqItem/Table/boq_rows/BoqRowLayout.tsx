@@ -56,11 +56,11 @@ export const BoqRowLayout: ComponentClass<SortableItem> = SortableElement(({
         duration: theme.item.animationDuration,
       }}
       css={{
-        display: 'flex',
-        justifyContent: 'center',
-        position: 'relative',
-        maxWidth: '100%',
-        width: '100%',
+        // display: 'flex',
+        // justifyContent: 'center',
+        // position: 'relative',
+        // maxWidth: '100%',
+        // width: '100%',
       }}
     >
       {/* <ActionsContainer itemActionElements={itemActionElements} /> */}

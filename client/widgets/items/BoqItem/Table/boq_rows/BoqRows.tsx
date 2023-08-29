@@ -1,9 +1,9 @@
 import { useSelectorTyped } from 'client/shared/hooks'
 import { AnimatePresence } from 'framer-motion'
 import { boqRowsShapeEqualityFn } from 'client/entities/items/model/selectors/boqRowsShapeEqualityFn'
-import { DraggableIBoqRowsContainer } from './DraggableIBoqRowsContainer'
+import { DraggableBoqRowsContainer } from './DraggableBoqRowsContainer'
 import { BoqRowLayout } from './BoqRowLayout'
-import { DragIcon } from 'client/features/drag_item'
+import { BoqRow } from './BoqRow'
 
 interface Props {
   index: number
@@ -20,7 +20,7 @@ export const BoqRows = ({ index }: Props): JSX.Element => {
   console.log('🚀  boqRows:', boqRows)
 
   return (
-    <DraggableIBoqRowsContainer
+    <DraggableBoqRowsContainer
       useDragHandle
       useWindowAsScrollContainer
       onSortStart={(): void => {
@@ -43,13 +43,12 @@ export const BoqRows = ({ index }: Props): JSX.Element => {
               // itemHeight={item?.height ?? 0}
               rowId={boqRow.id}
             >
-              boq row {rowIndex}
-              <DragIcon />
+              <BoqRow index={index} rowIndex={rowIndex} boqRow={boqRow} />
             </BoqRowLayout>
           )
           return 'boq paste'
         })}
       </AnimatePresence>
-    </DraggableIBoqRowsContainer >
+    </DraggableBoqRowsContainer >
   )
 }

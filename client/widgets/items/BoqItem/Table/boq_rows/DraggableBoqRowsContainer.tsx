@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import type { ReactNode } from 'react'
 import type { SortableContainerProps } from 'react-sortable-hoc'
 import { SortableContainer } from 'react-sortable-hoc'
@@ -10,7 +9,7 @@ interface Props {
 }
 interface SortableContainerExtended extends SortableContainerProps, Props { }
 
-export const DraggableIBoqRowsContainer: React.ComponentClass<SortableContainerExtended> =
+export const DraggableBoqRowsContainer: React.ComponentClass<SortableContainerExtended> =
   SortableContainer(({ children }: Props) => (
     <div
       id='boq rows'
