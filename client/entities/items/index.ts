@@ -6,6 +6,7 @@ export { itemsSlice } from './model/itemsSlice'
 // selectors
 export { itemsShapeEqualityFn } from './model/selectors/itemsShapeEqualityFn'
 export { selectIsItemAlone } from './model/selectors/selectIsItemAlone'
+export { selectColumnWidth } from './model/selectors/selectColumnWidth'
 
 // thunks
 export { saveItemHeightByIndex } from './model/saveItemHeightByIndex'
