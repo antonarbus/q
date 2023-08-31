@@ -1,4 +1,5 @@
 import { Box } from '@mui/material'
+import { selectColumnWidth } from 'client/entities/items'
 import { DragIcon } from 'client/features/drag_item'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColWidth, BoqRow as BoqRowType } from 'client/shared/types'
@@ -10,11 +11,7 @@ interface Props {
 }
 
 export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
-  const descriptionColWidth = useSelectorTyped(state => {
-    const boqItem = state.items[index]
-    if (boqItem?.type !== 'boq') return undefined
-    return boqItem.boq.column.description.width
-  })
+  const descriptionColWidth = useSelectorTyped(selectColumnWidth({ index, headerName: 'description' }))
 
   return (
     <Box

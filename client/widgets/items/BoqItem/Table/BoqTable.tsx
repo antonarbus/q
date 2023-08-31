@@ -1,11 +1,10 @@
 import { Box } from '@mui/material'
-import { itemsSlice } from 'client/entities/items'
-import { dispatch, getState } from 'client/shared/clients'
-import { useRef, useState } from 'react'
+import { getState } from 'client/shared/clients'
+import { useRef } from 'react'
 import { ResizableColHeader } from './ResizableColHeader'
-import { isOverflown } from 'client/shared/lib/isOverflown'
-import type { BoqColWidth } from 'client/shared/types'
 import { BoqRows } from './boq_rows/BoqRows'
+import { useSelectorTyped } from 'client/shared/hooks'
+import { selectColumnWidth } from 'client/entities/items'
 
 interface Props {
   index: number
@@ -16,21 +15,8 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
 
   if (item?.type !== 'boq') return null
 
-  // todo: try to use only redux
-  const initColWidth = item.boq.column.description.width
-
-  const [descriptionColWidth, setDescriptionColWidth] = useState<BoqColWidth>(initColWidth)
-
-
+  const descriptionColWidth = useSelectorTyped(selectColumnWidth({ index, headerName: 'description' }))
   const headerRef = useRef<HTMLDivElement>(null)
-
-  const makeItemWiderIfHeaderDoesNotFit = (): void => {
-    if (!headerRef.current) return
-    const isHeaderOverflown = isOverflown({ element: headerRef.current })
-    if (isHeaderOverflown) {
-      dispatch(itemsSlice.actions.makeItemBitWider({ index }))
-    }
-  }
 
   return (
     <Box
@@ -85,9 +71,7 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
             index={index}
             headerName='description'
             minWidth={200}
-            makeItemWiderIfHeaderDoesNotFit={makeItemWiderIfHeaderDoesNotFit}
-            descriptionColWidth={descriptionColWidth}
-            setDescriptionColWidth={setDescriptionColWidth}
+            headerRef={headerRef}
           >
             Description
           </ResizableColHeader>

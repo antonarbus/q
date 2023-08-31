@@ -1,9 +1,11 @@
-import type { BoqColWidth, BoqCols } from 'client/shared/types'
-import type { Dispatch, ReactNode, SetStateAction } from 'react'
-import { itemsSlice } from 'client/entities/items'
+import type { BoqCols } from 'client/shared/types'
+import type { ReactNode, RefObject } from 'react'
+import { itemsSlice, selectColumnWidth } from 'client/entities/items'
 import { dispatch, getState } from 'client/shared/clients'
 import { saveItemsLocally } from 'client/shared/lib'
 import { Resizable } from 're-resizable'
+import { useSelectorTyped } from 'client/shared/hooks'
+import { isOverflown } from 'client/shared/lib/isOverflown'
 
 interface Props {
   index: number
@@ -12,9 +14,7 @@ interface Props {
   flexGrow?: number
   minWidth: number
   className: string
-  makeItemWiderIfHeaderDoesNotFit: () => void
-  descriptionColWidth: BoqColWidth
-  setDescriptionColWidth: Dispatch<SetStateAction<BoqColWidth>>
+  headerRef: RefObject<HTMLDivElement>
 }
 
 export const ResizableColHeader = ({
@@ -24,13 +24,21 @@ export const ResizableColHeader = ({
   flexGrow = 1,
   minWidth,
   className,
-  makeItemWiderIfHeaderDoesNotFit,
-  descriptionColWidth,
-  setDescriptionColWidth,
+  headerRef,
 }: Props): JSX.Element | null => {
   const item = getState().items[index]
 
   if (item?.type !== 'boq') return null
+
+  const descriptionColWidth = useSelectorTyped(selectColumnWidth({ index, headerName: 'description' }))
+
+  const makeItemWiderIfHeaderDoesNotFit = (): void => {
+    if (!headerRef.current) return
+    const isHeaderOverflown = isOverflown({ element: headerRef.current })
+    if (isHeaderOverflown) {
+      dispatch(itemsSlice.actions.makeItemBitWider({ index }))
+    }
+  }
 
   return (
     <Resizable
@@ -57,13 +65,11 @@ export const ResizableColHeader = ({
       }}
       onResizeStart={(event, direction, element): void => {
         const width = element.clientWidth
-        // dispatch(itemsSlice.actions.saveColWidth({ index, width, headerName }))
-        setDescriptionColWidth(width)
+        dispatch(itemsSlice.actions.saveColWidth({ index, width, headerName }))
       }}
       onResize={(event, direction, element, delta): void => {
         const width = element.clientWidth
-        // dispatch(itemsSlice.actions.saveColWidth({ index, width, headerName }))
-        setDescriptionColWidth(width)
+        dispatch(itemsSlice.actions.saveColWidth({ index, width, headerName }))
         const isExpanding = delta.width > 0
         if (!isExpanding) return
         makeItemWiderIfHeaderDoesNotFit()
