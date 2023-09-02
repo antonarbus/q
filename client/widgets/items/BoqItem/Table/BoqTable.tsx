@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { getState } from 'client/shared/clients'
 import { useRef } from 'react'
-import { ResizableColHeader } from './ResizableColHeader'
+import { ResizableHeader } from './ResizableColHeader'
 import { BoqRows } from './boq_rows/BoqRows'
 import { useSelectorTyped } from 'client/shared/hooks'
 import { selectColumnWidth } from 'client/entities/items'
@@ -66,7 +66,7 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
         >
           <Box className='th icons'></Box>
           <Box className='th number'>#</Box>
-          <ResizableColHeader
+          <ResizableHeader
             className='th description resizable'
             index={index}
             headerName='description'
@@ -74,7 +74,7 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
             headerRef={headerRef}
           >
             Description
-          </ResizableColHeader>
+          </ResizableHeader>
           <Box className='th item'>Item</Box>
           <Box className='th qty'>Qty</Box>
           <Box className='th price'>Price</Box>

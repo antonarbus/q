@@ -17,7 +17,7 @@ interface Props {
   headerRef: RefObject<HTMLDivElement>
 }
 
-export const ResizableColHeader = ({
+export const ResizableHeader = ({
   index,
   headerName,
   children,
