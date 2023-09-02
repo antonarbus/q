@@ -1,23 +1,16 @@
 import { useSelectorTyped } from 'client/shared/hooks'
 import { AnimatePresence } from 'framer-motion'
-import { boqRowsShapeEqualityFn } from 'client/entities/items/model/selectors/boqRowsShapeEqualityFn'
 import { DraggableBoqRowsContainer } from './DraggableBoqRowsContainer'
 import { BoqRowLayout } from './BoqRowLayout'
 import { BoqRow } from './BoqRow'
+import { boqRowsShapeEqualityFn, selectBoqRows } from 'client/entities/items'
 
 interface Props {
   index: number
 }
 
 export const BoqRows = ({ index }: Props): JSX.Element => {
-
-  const boqRows = useSelectorTyped(state => {
-    const item = state.items[index]
-    if (item?.type !== 'boq') return []
-    return item.boq.rows
-  }, boqRowsShapeEqualityFn)
-
-  console.log('🚀  boqRows:', boqRows)
+  const boqRows = useSelectorTyped(selectBoqRows({ index }), boqRowsShapeEqualityFn)
 
   return (
     <DraggableBoqRowsContainer

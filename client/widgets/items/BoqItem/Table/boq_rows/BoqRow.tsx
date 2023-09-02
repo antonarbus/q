@@ -12,6 +12,7 @@ interface Props {
 
 export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
   const descriptionColWidth = useSelectorTyped(selectColumnWidth({ index, headerName: 'description' }))
+  console.log('🚀  descriptionColWidth:', descriptionColWidth)
 
   return (
     <Box
