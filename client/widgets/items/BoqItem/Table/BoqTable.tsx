@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { getState } from 'client/shared/clients'
 import { useRef } from 'react'
-import { ResizableHeader } from './ResizableColHeader'
+import { ResizableHeader } from './ResizableHeader'
 import { BoqRows } from './boq_rows/BoqRows'
 import { useSelectorTyped } from 'client/shared/hooks'
 import { selectColumnWidth } from 'client/entities/items'
@@ -11,12 +11,13 @@ interface Props {
 }
 
 export const BoqTable = ({ index }: Props): JSX.Element | null => {
+  const headerRef = useRef<HTMLDivElement>(null)
   const item = getState().items[index]
 
   if (item?.type !== 'boq') return null
 
   const descriptionColWidth = useSelectorTyped(selectColumnWidth({ index, headerName: 'description' }))
-  const headerRef = useRef<HTMLDivElement>(null)
+  const isDescriptionColWidthSetManually = descriptionColWidth !== undefined
 
   return (
     <Box
@@ -48,10 +49,11 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
             minWidth: '30px',
           },
           '.description': {
-            display: !descriptionColWidth ? 'flex' : 'block',
-            flexGrow: !descriptionColWidth ? 1 : 0,
+            display: isDescriptionColWidthSetManually ? 'block' : 'flex',
+            flexGrow: isDescriptionColWidthSetManually ? 0 : 1,
             flexShrink: 0,
-            width: descriptionColWidth ?? 'auto',
+            width: isDescriptionColWidthSetManually ? descriptionColWidth : 'auto',
+            minWidth: '200px',
           },
           '.item, .qty, .price': {
             flexGrow: 1,

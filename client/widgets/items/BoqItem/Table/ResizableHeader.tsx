@@ -30,7 +30,8 @@ export const ResizableHeader = ({
 
   if (item?.type !== 'boq') return null
 
-  const descriptionColWidth = useSelectorTyped(selectColumnWidth({ index, headerName: 'description' }))
+  const colWidth = useSelectorTyped(selectColumnWidth({ index, headerName }))
+  const isColWidthSetManually = colWidth !== undefined
 
   const makeItemWiderIfHeaderDoesNotFit = (): void => {
     if (!headerRef.current) return
@@ -46,14 +47,14 @@ export const ResizableHeader = ({
       enable={{ right: true }}
       minWidth={minWidth}
       size={{
-        width: descriptionColWidth ?? 'auto',
+        width: isColWidthSetManually ? colWidth : 'auto',
         height: 'auto',
       }}
       style={{
-        display: !descriptionColWidth ? 'flex' : 'block',
-        flexGrow: !descriptionColWidth ? flexGrow : 0,
+        display: isColWidthSetManually ? 'block' : 'flex',
+        flexGrow: isColWidthSetManually ? 0 : flexGrow,
         flexShrink: 0,
-        width: descriptionColWidth ?? 'auto',
+        width: isColWidthSetManually ? colWidth : 'auto',
       }}
       handleStyles={{
         right: {
