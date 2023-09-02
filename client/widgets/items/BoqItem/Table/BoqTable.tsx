@@ -67,14 +67,23 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
           <Box className='th icons'></Box>
           <Box className='th number'>#</Box>
           <ResizableHeader
+            headerName='description'
             className='th description resizable'
             index={index}
-            headerName='description'
             minWidth={200}
             headerRef={headerRef}
           >
             Description
           </ResizableHeader>
+          {/* <ResizableHeader
+            headerName='item'
+            className='th item resizable'
+            index={index}
+            minWidth={100}
+            headerRef={headerRef}
+          >
+            Item
+          </ResizableHeader> */}
           <Box className='th item'>Item</Box>
           <Box className='th qty'>Qty</Box>
           <Box className='th price'>Price</Box>

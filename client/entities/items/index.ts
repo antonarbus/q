@@ -7,6 +7,7 @@ export { itemsSlice } from './model/itemsSlice'
 export { itemsShapeEqualityFn } from './model/selectors/itemsShapeEqualityFn'
 export { selectIsItemAlone } from './model/selectors/selectIsItemAlone'
 export { selectColumnWidth } from './model/selectors/selectColumnWidth'
+export { selectBoqRows, boqRowsShapeEqualityFn } from './model/selectors/selectBoqRows'
 
 // thunks
 export { saveItemHeightByIndex } from './model/saveItemHeightByIndex'
@@ -21,4 +22,3 @@ export { itemBoqHeaderCurrencyHtmlGetter } from './model/html_getters/itemBoqHea
 export { itemBoqHeaderPriceHtmlGetter } from './model/html_getters/itemBoqHeaderPriceHtmlGetter'
 export { itemBoqHeaderSubtotalTextHtmlGetter } from './model/html_getters/itemBoqHeaderSubtotalTextHtmlGetter'
 export { itemBoqHeaderTitleHtmlGetter } from './model/html_getters/itemBoqHeaderTitleHtmlGetter'
-
