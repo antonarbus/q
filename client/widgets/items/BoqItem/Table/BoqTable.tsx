@@ -48,18 +48,18 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
             width: '30px',
             minWidth: '30px',
           },
-          '.description': {
-            display: isDescriptionColWidthSetManually ? 'block' : 'flex',
-            flexGrow: isDescriptionColWidthSetManually ? 0 : 1,
-            flexShrink: 0,
-            width: isDescriptionColWidthSetManually ? descriptionColWidth : 'auto',
-            minWidth: '200px',
-          },
-          '.item, .qty, .price': {
-            flexGrow: 1,
-            minWidth: '100px',
-            width: '100%',
-          },
+          // '.description': {
+          //   display: isDescriptionColWidthSetManually ? 'block' : 'flex',
+          //   flexGrow: isDescriptionColWidthSetManually ? 0 : 1,
+          //   flexShrink: 0,
+          //   width: isDescriptionColWidthSetManually ? descriptionColWidth : 'auto',
+          //   minWidth: '200px',
+          // },
+          // '.item, .qty, .price': {
+          //   flexGrow: 1,
+          //   minWidth: '100px',
+          //   width: '100%',
+          // },
         }}
       >
         <Box
@@ -74,21 +74,43 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
             index={index}
             minWidth={200}
             headerRef={headerRef}
+            flexGrow={1}
           >
             Description
           </ResizableHeader>
-          {/* <ResizableHeader
+          <ResizableHeader
             headerName='item'
             className='th item resizable'
             index={index}
             minWidth={100}
             headerRef={headerRef}
+            flexGrow={0}
           >
             Item
-          </ResizableHeader> */}
-          <Box className='th item'>Item</Box>
-          <Box className='th qty'>Qty</Box>
-          <Box className='th price'>Price</Box>
+          </ResizableHeader>
+          <ResizableHeader
+            headerName='qty'
+            className='th qty resizable'
+            index={index}
+            minWidth={100}
+            headerRef={headerRef}
+            flexGrow={0}
+          >
+            Qty
+          </ResizableHeader>
+          <ResizableHeader
+            headerName='price'
+            className='th price resizable'
+            index={index}
+            minWidth={100}
+            headerRef={headerRef}
+            flexGrow={0}
+          >
+            Price
+          </ResizableHeader>
+          {/* <Box className='th item'>Item</Box> */}
+          {/* <Box className='th qty'>Qty</Box> */}
+          {/* <Box className='th price'>Price</Box> */}
         </Box>
         <BoqRows index={index} />
       </Box>

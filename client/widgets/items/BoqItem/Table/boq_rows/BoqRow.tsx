@@ -13,6 +13,12 @@ interface Props {
 export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
   const descriptionColWidth = useSelectorTyped(selectColumnWidth({ index, headerName: 'description' }))
   const isDescriptionColWidthSetManually = descriptionColWidth !== undefined
+  const itemColWidth = useSelectorTyped(selectColumnWidth({ index, headerName: 'item' }))
+  const isItemColWidthSetManually = itemColWidth !== undefined
+  const qtyColWidth = useSelectorTyped(selectColumnWidth({ index, headerName: 'qty' }))
+  const isQtyColWidthSetManually = qtyColWidth !== undefined
+  const priceColWidth = useSelectorTyped(selectColumnWidth({ index, headerName: 'price' }))
+  const isPriceColWidthSetManually = priceColWidth !== undefined
 
   return (
     <Box
@@ -68,9 +74,11 @@ export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
       <Box
         className='td item'
         sx={{
-          flexGrow: 1,
+          display: isItemColWidthSetManually ? 'block' : 'flex',
+          // flexGrow: isItemColWidthSetManually ? 0 : 1,
+          flexShrink: 0,
+          width: isItemColWidthSetManually ? itemColWidth : 'auto',
           minWidth: '100px',
-          width: '100%',
         }}
       >
         {boqRow.item.html}
@@ -78,9 +86,11 @@ export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
       <Box
         className='td qty'
         sx={{
-          flexGrow: 1,
+          display: isQtyColWidthSetManually ? 'block' : 'flex',
+          // flexGrow: isQtyColWidthSetManually ? 0 : 1,
+          flexShrink: 0,
+          width: isQtyColWidthSetManually ? qtyColWidth : 'auto',
           minWidth: '100px',
-          width: '100%',
         }}
       >
         {boqRow.qty.html}
@@ -88,9 +98,11 @@ export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
       <Box
         className='td price'
         sx={{
-          flexGrow: 1,
+          display: isPriceColWidthSetManually ? 'block' : 'flex',
+          // flexGrow: isPriceColWidthSetManually ? 0 : 1,
+          flexShrink: 0,
+          width: isPriceColWidthSetManually ? priceColWidth : 'auto',
           minWidth: '100px',
-          width: '100%',
         }}
       >
         {boqRow.price.html}

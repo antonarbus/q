@@ -21,7 +21,7 @@ export const ResizableHeader = ({
   index,
   headerName,
   children,
-  flexGrow = 1,
+  flexGrow,
   minWidth,
   className,
   headerRef,
@@ -44,7 +44,9 @@ export const ResizableHeader = ({
   return (
     <Resizable
       className={className}
-      enable={{ right: true }}
+      enable={{
+        right: true,
+      }}
       minWidth={minWidth}
       size={{
         width: isColWidthSetManually ? colWidth : 'auto',
