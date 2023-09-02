@@ -12,6 +12,7 @@ interface Props {
 
 export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
   const descriptionColWidth = useSelectorTyped(selectColumnWidth({ index, headerName: 'description' }))
+  const isDescriptionColWidthSetManually = descriptionColWidth !== undefined
 
   return (
     <Box
@@ -55,10 +56,10 @@ export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
       <Box
         className='td description'
         sx={{
-          display: !descriptionColWidth ? 'flex' : 'block',
-          flexGrow: !descriptionColWidth ? 1 : 0,
+          display: isDescriptionColWidthSetManually ? 'block' : 'flex',
+          flexGrow: isDescriptionColWidthSetManually ? 0 : 1,
           flexShrink: 0,
-          width: descriptionColWidth ?? 'auto',
+          width: isDescriptionColWidthSetManually ? descriptionColWidth : 'auto',
           minWidth: '200px',
         }}
       >
