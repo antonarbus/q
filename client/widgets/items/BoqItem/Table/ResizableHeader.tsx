@@ -57,12 +57,13 @@ export const ResizableHeader = ({
         flexGrow: isColWidthSetManually ? 0 : flexGrow,
         flexShrink: 0,
         width: isColWidthSetManually ? colWidth : 'auto',
+        maxWidth: isColWidthSetManually ? colWidth : 'auto',
       }}
       handleStyles={{
         right: {
           background: '#a7a7a7',
           width: '3px',
-          right: '-6px',
+          right: '0px',
           borderRadius: '3px',
         },
       }}
