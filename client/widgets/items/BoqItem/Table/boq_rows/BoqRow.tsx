@@ -12,7 +12,6 @@ interface Props {
 
 export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
   const descriptionColWidth = useSelectorTyped(selectColumnWidth({ index, headerName: 'description' }))
-  console.log('🚀  descriptionColWidth:', descriptionColWidth)
 
   return (
     <Box
@@ -60,6 +59,7 @@ export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
           flexGrow: !descriptionColWidth ? 1 : 0,
           flexShrink: 0,
           width: descriptionColWidth ?? 'auto',
+          minWidth: '200px',
         }}
       >
         {boqRow.description.html}
