@@ -36,6 +36,7 @@ export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
         sx={{
           width: '30px',
           minWidth: '30px',
+          maxWidth: '30px',
         }}
       >
         <Box
@@ -55,6 +56,7 @@ export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
         sx={{
           width: '30px',
           minWidth: '30px',
+          maxWidth: '30px',
         }}
       >
         {rowIndex + 1}
@@ -66,6 +68,7 @@ export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
           flexGrow: isDescriptionColWidthSetManually ? 0 : 1,
           flexShrink: 0,
           width: isDescriptionColWidthSetManually ? descriptionColWidth : 'auto',
+          maxWidth: isDescriptionColWidthSetManually ? descriptionColWidth : 'auto',
           minWidth: '200px',
         }}
       >
@@ -78,6 +81,7 @@ export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
           // flexGrow: isItemColWidthSetManually ? 0 : 1,
           flexShrink: 0,
           width: isItemColWidthSetManually ? itemColWidth : 'auto',
+          maxWidth: isItemColWidthSetManually ? itemColWidth : 'auto',
           minWidth: '100px',
         }}
       >
@@ -90,6 +94,7 @@ export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
           // flexGrow: isQtyColWidthSetManually ? 0 : 1,
           flexShrink: 0,
           width: isQtyColWidthSetManually ? qtyColWidth : 'auto',
+          maxWidth: isQtyColWidthSetManually ? qtyColWidth : 'auto',
           minWidth: '100px',
         }}
       >
@@ -102,6 +107,7 @@ export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
           // flexGrow: isPriceColWidthSetManually ? 0 : 1,
           flexShrink: 0,
           width: isPriceColWidthSetManually ? priceColWidth : 'auto',
+          maxWidth: isPriceColWidthSetManually ? priceColWidth : 'auto',
           minWidth: '100px',
         }}
       >
