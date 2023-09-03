@@ -6,6 +6,7 @@ import { theme } from 'client/shared/clients'
 import { ActionsContainer } from './ActionsContainer'
 import { ResizablePaper } from './ResizablePaper'
 import { className } from 'client/shared/className'
+import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from 'client/shared/types'
 
 interface Props {
   children: ReactNode
@@ -14,6 +15,10 @@ interface Props {
   itemActionElements?: ReactNode
   i: number
   disableResize?: boolean
+  autoWidth?: boolean
+  onItemResizeStop?: OnItemResizeStop
+  onItemResize?: OnItemResize
+  onItemResizeStart?: OnItemResizeStart
 }
 
 interface SortableItem extends SortableElementProps, Props { }
@@ -25,6 +30,10 @@ export const ItemLayout: ComponentClass<SortableItem> = SortableElement(({
   itemId,
   itemActionElements,
   disableResize,
+  autoWidth,
+  onItemResizeStop,
+  onItemResize,
+  onItemResizeStart,
 }: Props) => {
   return (
     <motion.div
@@ -69,6 +78,10 @@ export const ItemLayout: ComponentClass<SortableItem> = SortableElement(({
       <ResizablePaper
         index={i}
         disableResize={disableResize}
+        autoWidth={autoWidth}
+        onItemResizeStop={onItemResizeStop}
+        onItemResize={onItemResize}
+        onItemResizeStart={onItemResizeStart}
       >
         {children}
       </ResizablePaper>

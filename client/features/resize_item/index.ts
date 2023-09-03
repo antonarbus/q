@@ -1,1 +1,1 @@
-export { onItemResizeStop } from './onItemResizeStop'
+export { onTextItemResizeStop } from './onTextItemResizeStop'
