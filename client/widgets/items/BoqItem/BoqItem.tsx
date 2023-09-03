@@ -8,7 +8,10 @@ interface Props {
 
 export const BoqItem = ({ index }: Props): JSX.Element => {
   return (
-    <Item index={index} >
+    <Item
+      index={index}
+      disableResize={true}
+    >
       <Header index={index} />
       <BoqTable index={index} />
     </Item>

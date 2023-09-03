@@ -13,9 +13,14 @@ import { ItemLayout } from './item_layout'
 interface Props {
   index: number
   children: ReactNode
+  disableResize?: boolean
 }
 
-export const Item = ({ index, children }: Props): JSX.Element => {
+export const Item = ({
+  index,
+  children,
+  disableResize,
+}: Props): JSX.Element => {
   const isItemDisabled = useIsItemDisabled()
   const item = getState().items[index]
 
@@ -24,6 +29,7 @@ export const Item = ({ index, children }: Props): JSX.Element => {
       index={index} // internal prop consumed by SortableElement HOC
       disabled={isItemDisabled} // internal prop consumed by SortableElement HOC
       i={index}
+      disableResize={disableResize}
       itemHeight={item?.height ?? 0}
       itemId={item?.id ?? 'no id'}
       itemActionElements={(

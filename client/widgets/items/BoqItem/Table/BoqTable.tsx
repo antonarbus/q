@@ -1,6 +1,5 @@
 import { Box } from '@mui/material'
 import { getState } from 'client/shared/clients'
-import { useRef } from 'react'
 import { BoqRows } from './boq_rows/BoqRows'
 import { BoqHeader } from './boq_header/BoqHeader'
 
@@ -9,7 +8,6 @@ interface Props {
 }
 
 export const BoqTable = ({ index }: Props): JSX.Element | null => {
-  const headerRef = useRef<HTMLDivElement>(null)
   const item = getState().items[index]
 
   if (item?.type !== 'boq') return null
@@ -29,7 +27,7 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
           },
         }}
       >
-        <BoqHeader index={index} headerRef={headerRef} />
+        <BoqHeader index={index} />
         <BoqRows index={index} />
       </Box>
     </Box>

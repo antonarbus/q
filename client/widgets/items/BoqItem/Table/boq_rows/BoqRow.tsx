@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import { selectColumnWidth } from 'client/entities/items'
 import { DragIcon } from 'client/features/drag_item'
 import { useSelectorTyped } from 'client/shared/hooks'
-import type { BoqColWidth, BoqRow as BoqRowType } from 'client/shared/types'
+import type { BoqRow as BoqRowType } from 'client/shared/types'
 
 interface Props {
   index: number
@@ -35,9 +35,6 @@ export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
       <Box
         className='td icons'
         sx={{
-          // width: '30px',
-          // minWidth: '30px',
-          // maxWidth: '30px',
           position: 'absolute',
           top: 0,
           height: 0,
@@ -46,9 +43,7 @@ export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
         <Box
           sx={{
             display: 'inline-flex',
-            // position: 'absolute',
             background: 'yellow',
-            // left: '20px',
             scale: '0.5',
           }}
         >
@@ -59,7 +54,6 @@ export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
         className='td number'
         sx={{
           display: isNumberColWidthSetManually ? 'block' : 'flex',
-          // flexGrow: isNumberColWidthSetManually ? 0 : 1,
           flexShrink: 0,
           width: isNumberColWidthSetManually ? numberColWidth : 'auto',
           maxWidth: isNumberColWidthSetManually ? numberColWidth : 'auto',
@@ -85,7 +79,6 @@ export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
         className='td item'
         sx={{
           display: isItemColWidthSetManually ? 'block' : 'flex',
-          // flexGrow: isItemColWidthSetManually ? 0 : 1,
           flexShrink: 0,
           width: isItemColWidthSetManually ? itemColWidth : 'auto',
           maxWidth: isItemColWidthSetManually ? itemColWidth : 'auto',
@@ -98,7 +91,6 @@ export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
         className='td qty'
         sx={{
           display: isQtyColWidthSetManually ? 'block' : 'flex',
-          // flexGrow: isQtyColWidthSetManually ? 0 : 1,
           flexShrink: 0,
           width: isQtyColWidthSetManually ? qtyColWidth : 'auto',
           maxWidth: isQtyColWidthSetManually ? qtyColWidth : 'auto',
@@ -111,7 +103,6 @@ export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
         className='td price'
         sx={{
           display: isPriceColWidthSetManually ? 'block' : 'flex',
-          // flexGrow: isPriceColWidthSetManually ? 0 : 1,
           flexShrink: 0,
           width: isPriceColWidthSetManually ? priceColWidth : 'auto',
           maxWidth: isPriceColWidthSetManually ? priceColWidth : 'auto',
