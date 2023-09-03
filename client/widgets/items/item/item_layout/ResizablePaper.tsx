@@ -1,23 +1,32 @@
 import type { ReactNode } from 'react'
 import { Resizable } from 're-resizable'
-import { onItemResizeStop } from 'client/features/resize_item'
 import { className } from 'client/shared/className'
 import { useSelectorTyped } from 'client/shared/hooks'
+import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from 'client/shared/types'
+
 
 interface Props {
   children: ReactNode
   index: number
   disableResize?: boolean
+  autoWidth?: boolean
+  onItemResizeStop?: OnItemResizeStop
+  onItemResize?: OnItemResize
+  onItemResizeStart?: OnItemResizeStart
 }
 
 export const ResizablePaper = ({
   children,
   index,
   disableResize = false,
+  autoWidth = false,
+  onItemResizeStop,
+  onItemResizeStart,
+  onItemResize,
 }: Props): JSX.Element => {
   const width = useSelectorTyped(state => state.items[index]?.width)
   const isWidthSetManually = width !== undefined
-  const isAutoWidth = !isWidthSetManually || disableResize
+  const isAutoWidth = !isWidthSetManually || disableResize || autoWidth
 
   return (
     <Resizable
@@ -44,9 +53,15 @@ export const ResizablePaper = ({
         right: disableResize ? false : true,
         left: disableResize ? false : true,
       }}
-      // onResize={(e, direction, refToElement, delta) => { }}
-      // onResizeStart={() => { }}
-      onResizeStop={onItemResizeStop({ index })}
+      onResize={(e, direction, elementRef, delta): void => {
+        onItemResize?.bind(null, { e, direction, elementRef, delta, index })()
+      }}
+      onResizeStart={(e, dir, elementRef): void => {
+        onItemResizeStart?.bind(null, { e, dir, elementRef, index })()
+      }}
+      onResizeStop={(e, direction, elementRef, delta): void => {
+        onItemResizeStop?.bind(null, { e, direction, elementRef, delta, index })()
+      }}
     >
       {children}
     </Resizable>

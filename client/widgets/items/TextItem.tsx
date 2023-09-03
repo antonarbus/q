@@ -6,6 +6,7 @@ import { PencilAtBottomRight } from 'client/shared/components/PencilAtBottomRigh
 import { Item } from './item'
 import { changeItemText } from 'client/features/change_text'
 import { itemTextHtmlGetter } from 'client/entities/items'
+import { onTextItemResizeStop } from 'client/features/resize_item'
 
 interface Props {
   index: number
@@ -16,7 +17,10 @@ export const TextItem = ({ index }: Props): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
 
   return (
-    <Item index={index}>
+    <Item
+      index={index}
+      onItemResizeStop={onTextItemResizeStop}
+    >
       <Froala
         index={index}
         editorRef={editorRef}

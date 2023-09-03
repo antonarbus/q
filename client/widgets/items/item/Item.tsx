@@ -9,17 +9,26 @@ import { DeleteIcon } from 'client/features/delete_item/DeleteIcon'
 import { ItemMsg } from './ItemMsg'
 import { PasteHere } from './PasteHere'
 import { ItemLayout } from './item_layout'
+import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from 'client/shared/types'
 
 interface Props {
   index: number
   children: ReactNode
   disableResize?: boolean
+  onItemResizeStop?: OnItemResizeStop
+  onItemResize?: OnItemResize
+  onItemResizeStart?: OnItemResizeStart
+  autoWidth: boolean
 }
 
 export const Item = ({
   index,
   children,
   disableResize,
+  onItemResizeStop,
+  onItemResize,
+  onItemResizeStart,
+  autoWidth,
 }: Props): JSX.Element => {
   const isItemDisabled = useIsItemDisabled()
   const item = getState().items[index]
@@ -30,8 +39,12 @@ export const Item = ({
       disabled={isItemDisabled} // internal prop consumed by SortableElement HOC
       i={index}
       disableResize={disableResize}
+      autoWidth={autoWidth}
       itemHeight={item?.height ?? 0}
       itemId={item?.id ?? 'no id'}
+      onItemResizeStop={onItemResizeStop}
+      onItemResize={onItemResize}
+      onItemResizeStart={onItemResizeStart}
       itemActionElements={(
         <>
           <DragIcon />
