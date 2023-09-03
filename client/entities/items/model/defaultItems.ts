@@ -35,6 +35,10 @@ export const defaultItems: Item[] = [
         },
       },
       column: {
+        number: {
+          html: '<b>#</b>',
+          width: undefined,
+        },
         description: {
           html: '<b>Description</b>',
           width: undefined,
@@ -56,6 +60,10 @@ export const defaultItems: Item[] = [
         {
           id: nanoid(3),
           type: 'boq row',
+          number: {
+            html: '1',
+            value: 1,
+          },
           description: {
             html: 'description 1',
           },
@@ -75,6 +83,10 @@ export const defaultItems: Item[] = [
         {
           id: nanoid(3),
           type: 'boq row',
+          number: {
+            html: '2',
+            value: 2,
+          },
           description: {
             html: 'description 2',
           },
@@ -94,6 +106,10 @@ export const defaultItems: Item[] = [
         {
           id: nanoid(3),
           type: 'boq row',
+          number: {
+            html: '3',
+            value: 3,
+          },
           description: {
             html: 'description 3',
           },
