@@ -27,7 +27,7 @@ export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
       className='tr'
       sx={{
         display: 'flex',
-        minHeight: '40px',
+        minHeight: '50px',
         alignItems: 'flex-end',
         position: 'relative',
       }}
@@ -35,9 +35,12 @@ export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
       <Box
         className='td icons'
         sx={{
-          width: '30px',
-          minWidth: '30px',
-          maxWidth: '30px',
+          // width: '30px',
+          // minWidth: '30px',
+          // maxWidth: '30px',
+          position: 'absolute',
+          top: 0,
+          height: 0,
         }}
       >
         <Box
