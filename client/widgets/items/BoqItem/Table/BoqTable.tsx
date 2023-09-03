@@ -38,7 +38,7 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
             alignItems: 'flex-end',
             position: 'relative',
             // alignItems: 'center',
-            gap: '9px',
+            gap: '0px',
           },
           '.icons': {
             width: '30px',
