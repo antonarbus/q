@@ -8,23 +8,23 @@ import { useSelectorTyped } from 'client/shared/hooks'
 import { isOverflown } from 'client/shared/lib/isOverflown'
 
 interface Props {
-  index: number
-  headerName: keyof BoqCols
   children: ReactNode
-  flexGrow?: number
-  minWidth: number
   className: string
+  flexGrow?: number
+  headerName: keyof BoqCols
   headerRef: RefObject<HTMLDivElement>
+  index: number
+  minWidth: number
 }
 
 export const ResizableHeader = ({
-  index,
-  headerName,
   children,
-  flexGrow,
-  minWidth,
   className,
+  flexGrow,
+  headerName,
   headerRef,
+  index,
+  minWidth,
 }: Props): JSX.Element | null => {
   const item = getState().items[index]
 

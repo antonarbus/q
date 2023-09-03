@@ -6,5 +6,5 @@ export const makeItemBitWiderReducer = (state: ItemsState, action: PayloadAction
   const item = state[index]
   if (!item) return
   const currentWidth = item.width
-  item.width = currentWidth + 5
+  item.width = currentWidth + 3
 }
