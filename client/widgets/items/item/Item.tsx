@@ -18,7 +18,7 @@ interface Props {
   onItemResizeStop?: OnItemResizeStop
   onItemResize?: OnItemResize
   onItemResizeStart?: OnItemResizeStart
-  autoWidth: boolean
+  autoWidth?: boolean
 }
 
 export const Item = ({

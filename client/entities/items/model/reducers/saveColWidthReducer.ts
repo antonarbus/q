@@ -1,10 +1,10 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { BoqCols } from 'client/shared/types'
+import type { BoqColWidth, BoqCols } from 'client/shared/types'
 import type { ItemsState } from '../itemsSlice'
 
 export const saveColWidthReducer = (state: ItemsState, action: PayloadAction<{
   index: number
-  width: number
+  width: BoqColWidth
   headerName: keyof BoqCols
 }>): void => {
   const { index, width, headerName: colKey } = action.payload
