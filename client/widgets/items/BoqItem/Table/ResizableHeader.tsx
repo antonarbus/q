@@ -12,7 +12,6 @@ interface Props {
   className: string
   flexGrow?: number
   headerName: keyof BoqCols
-  headerRef: RefObject<HTMLDivElement>
   index: number
   minWidth: number
 }
@@ -22,7 +21,6 @@ export const ResizableHeader = ({
   className,
   flexGrow,
   headerName,
-  headerRef,
   index,
   minWidth,
 }: Props): JSX.Element | null => {
@@ -32,14 +30,6 @@ export const ResizableHeader = ({
 
   const colWidth = useSelectorTyped(selectColumnWidth({ index, headerName }))
   const isColWidthSetManually = colWidth !== undefined
-
-  const makeItemWiderIfHeaderDoesNotFit = (): void => {
-    if (!headerRef.current) return
-    const isHeaderOverflown = isOverflown({ element: headerRef.current })
-    if (isHeaderOverflown) {
-      dispatch(itemsSlice.actions.makeItemBitWider({ index }))
-    }
-  }
 
   return (
     <Resizable
@@ -74,9 +64,6 @@ export const ResizableHeader = ({
       onResize={(event, direction, element, delta): void => {
         const width = element.clientWidth
         dispatch(itemsSlice.actions.saveColWidth({ index, width, headerName }))
-        const isExpanding = delta.width > 0
-        if (!isExpanding) return
-        makeItemWiderIfHeaderDoesNotFit()
       }}
       onResizeStop={(event, direction, element): void => {
         const width = element.clientWidth

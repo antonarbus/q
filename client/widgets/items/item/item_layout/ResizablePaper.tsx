@@ -7,16 +7,23 @@ import { useSelectorTyped } from 'client/shared/hooks'
 interface Props {
   children: ReactNode
   index: number
+  disableResize?: boolean
 }
 
-export const ResizablePaper = ({ children, index }: Props): JSX.Element => {
-  const width = useSelectorTyped(state => state.items[index]?.width ?? 'auto')
+export const ResizablePaper = ({
+  children,
+  index,
+  disableResize = false,
+}: Props): JSX.Element => {
+  const width = useSelectorTyped(state => state.items[index]?.width)
+  const isWidthSetManually = width !== undefined
+  const isAutoWidth = !isWidthSetManually || disableResize
 
   return (
     <Resizable
       className={className.paper}
       size={{
-        width: width,
+        width: isAutoWidth ? 'auto' : width,
         height: 'auto',
       }}
       css={{
@@ -26,14 +33,17 @@ export const ResizablePaper = ({ children, index }: Props): JSX.Element => {
         position: 'relative',
       }}
       defaultSize={{
-        width,
+        width: isAutoWidth ? 'auto' : width,
         height: 'auto',
       }}
       grid={[20, 0]}
       minWidth='200px'
       maxWidth='100%'
       bounds={'window'}
-      enable={{ right: true, left: true }}
+      enable={{
+        right: disableResize ? false : true,
+        left: disableResize ? false : true,
+      }}
       // onResize={(e, direction, refToElement, delta) => { }}
       // onResizeStart={() => { }}
       onResizeStop={onItemResizeStop({ index })}

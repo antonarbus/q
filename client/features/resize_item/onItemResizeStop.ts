@@ -7,11 +7,11 @@ interface Props {
   index: number
 }
 
-type FuncReturnType = ResizeCallback | undefined
+type FuncReturn = ResizeCallback | undefined
 
 export const onItemResizeStop =
-  ({ index }: Props): FuncReturnType =>
-    (e, direction, refToElement): void => {
+  ({ index }: Props): FuncReturn =>
+    (e, direction, refToElement, delta): void => {
       const width = parseInt(refToElement.style.width)
       const prevItemWidth = getState().items[index]?.width
       if (width === prevItemWidth) return

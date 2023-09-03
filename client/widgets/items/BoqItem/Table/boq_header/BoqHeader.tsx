@@ -1,16 +1,15 @@
 import { Box } from '@mui/material'
-import type { RefObject } from 'react'
+import { useRef, type RefObject } from 'react'
 import { ResizableHeader } from '../ResizableHeader'
 
 interface Props {
   index: number
-  headerRef: RefObject<HTMLDivElement>
 }
 
-export const BoqHeader = ({ index, headerRef }: Props): JSX.Element => {
+export const BoqHeader = ({ index }: Props): JSX.Element => {
+
   return (
     <Box
-      ref={headerRef}
       className='header tr'
       sx={{
         display: 'flex',
@@ -24,7 +23,6 @@ export const BoqHeader = ({ index, headerRef }: Props): JSX.Element => {
         className='th number resizable'
         index={index}
         minWidth={30}
-        headerRef={headerRef}
         flexGrow={0}
       >
         #
@@ -34,7 +32,6 @@ export const BoqHeader = ({ index, headerRef }: Props): JSX.Element => {
         className='th description resizable'
         index={index}
         minWidth={200}
-        headerRef={headerRef}
         flexGrow={1}
       >
         Description
@@ -44,7 +41,6 @@ export const BoqHeader = ({ index, headerRef }: Props): JSX.Element => {
         className='th item resizable'
         index={index}
         minWidth={100}
-        headerRef={headerRef}
         flexGrow={0}
       >
         Item
@@ -54,7 +50,6 @@ export const BoqHeader = ({ index, headerRef }: Props): JSX.Element => {
         className='th qty resizable'
         index={index}
         minWidth={100}
-        headerRef={headerRef}
         flexGrow={0}
       >
         Qty
@@ -64,7 +59,6 @@ export const BoqHeader = ({ index, headerRef }: Props): JSX.Element => {
         className='th price resizable'
         index={index}
         minWidth={100}
-        headerRef={headerRef}
         flexGrow={0}
       >
         Price

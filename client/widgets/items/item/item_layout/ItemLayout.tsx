@@ -10,9 +10,10 @@ import { className } from 'client/shared/className'
 interface Props {
   children: ReactNode
   itemHeight: number
-  itemId: string,
+  itemId: string
   itemActionElements?: ReactNode
-  i: number,
+  i: number
+  disableResize?: boolean
 }
 
 interface SortableItem extends SortableElementProps, Props { }
@@ -23,6 +24,7 @@ export const ItemLayout: ComponentClass<SortableItem> = SortableElement(({
   itemHeight,
   itemId,
   itemActionElements,
+  disableResize,
 }: Props) => {
   return (
     <motion.div
@@ -64,7 +66,10 @@ export const ItemLayout: ComponentClass<SortableItem> = SortableElement(({
       }}
     >
       <ActionsContainer itemActionElements={itemActionElements} />
-      <ResizablePaper index={i} >
+      <ResizablePaper
+        index={i}
+        disableResize={disableResize}
+      >
         {children}
       </ResizablePaper>
       <ActionsContainer /> {/* Right action container is used for symmetry, no icons inside */}
