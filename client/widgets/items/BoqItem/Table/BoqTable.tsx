@@ -16,9 +16,6 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
 
   if (item?.type !== 'boq') return null
 
-  const descriptionColWidth = useSelectorTyped(selectColumnWidth({ index, headerName: 'description' }))
-  const isDescriptionColWidthSetManually = descriptionColWidth !== undefined
-
   return (
     <Box
       className='boq-table-container-with-paddings'
@@ -32,42 +29,36 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
             background: '#ff00001b',
             // border: '1px dotted grey',
           },
-          '.tr': {
-            display: 'flex',
-            minHeight: '40px',
-            alignItems: 'flex-end',
-            position: 'relative',
-            // alignItems: 'center',
-            gap: '0px',
-          },
-          '.icons': {
-            width: '30px',
-            minWidth: '30px',
-          },
-          '.number': {
-            width: '30px',
-            minWidth: '30px',
-          },
-          // '.description': {
-          //   display: isDescriptionColWidthSetManually ? 'block' : 'flex',
-          //   flexGrow: isDescriptionColWidthSetManually ? 0 : 1,
-          //   flexShrink: 0,
-          //   width: isDescriptionColWidthSetManually ? descriptionColWidth : 'auto',
-          //   minWidth: '200px',
-          // },
-          // '.item, .qty, .price': {
-          //   flexGrow: 1,
-          //   minWidth: '100px',
-          //   width: '100%',
-          // },
         }}
       >
         <Box
           ref={headerRef}
           className='header tr'
+          sx={{
+            display: 'flex',
+            minHeight: '40px',
+            alignItems: 'flex-end',
+            position: 'relative',
+          }}
         >
-          <Box className='th icons'></Box>
-          <Box className='th number'>#</Box>
+          <Box
+            className='th icons'
+            sx={{
+              width: '30px',
+              minWidth: '30px',
+            }}
+          >
+          </Box>
+          <ResizableHeader
+            headerName='number'
+            className='th number resizable'
+            index={index}
+            minWidth={30}
+            headerRef={headerRef}
+            flexGrow={0}
+          >
+            #
+          </ResizableHeader>
           <ResizableHeader
             headerName='description'
             className='th description resizable'
@@ -108,9 +99,6 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
           >
             Price
           </ResizableHeader>
-          {/* <Box className='th item'>Item</Box> */}
-          {/* <Box className='th qty'>Qty</Box> */}
-          {/* <Box className='th price'>Price</Box> */}
         </Box>
         <BoqRows index={index} />
       </Box>

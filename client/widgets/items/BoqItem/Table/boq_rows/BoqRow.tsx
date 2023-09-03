@@ -11,6 +11,8 @@ interface Props {
 }
 
 export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
+  const numberColWidth = useSelectorTyped(selectColumnWidth({ index, headerName: 'number' }))
+  const isNumberColWidthSetManually = numberColWidth !== undefined
   const descriptionColWidth = useSelectorTyped(selectColumnWidth({ index, headerName: 'description' }))
   const isDescriptionColWidthSetManually = descriptionColWidth !== undefined
   const itemColWidth = useSelectorTyped(selectColumnWidth({ index, headerName: 'item' }))
@@ -28,7 +30,6 @@ export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
         minHeight: '40px',
         alignItems: 'flex-end',
         position: 'relative',
-        gap: '9px',
       }}
     >
       <Box
@@ -54,12 +55,15 @@ export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
       <Box
         className='td number'
         sx={{
-          width: '30px',
+          display: isNumberColWidthSetManually ? 'block' : 'flex',
+          // flexGrow: isNumberColWidthSetManually ? 0 : 1,
+          flexShrink: 0,
+          width: isNumberColWidthSetManually ? numberColWidth : 'auto',
+          maxWidth: isNumberColWidthSetManually ? numberColWidth : 'auto',
           minWidth: '30px',
-          maxWidth: '30px',
         }}
       >
-        {rowIndex + 1}
+        {boqRow.number.html}
       </Box>
       <Box
         className='td description'
