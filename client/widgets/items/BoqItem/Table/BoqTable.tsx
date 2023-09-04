@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { getState } from 'client/shared/clients'
 import { BoqRows } from './boq_rows/BoqRows'
-import { BoqHeader } from './boq_header/BoqHeader'
+import { BoqHeader } from './boq_header'
 
 interface Props {
   index: number
