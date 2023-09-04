@@ -1,4 +1,4 @@
-import { ResizableHeader } from '../ResizableHeader'
+import { ResizableColHeader } from './ResizableColHeader'
 
 interface Props {
   index: number
@@ -6,7 +6,7 @@ interface Props {
 
 export const PriceColHeader = ({ index }: Props): JSX.Element => {
   return (
-    <ResizableHeader
+    <ResizableColHeader
       headerName='price'
       className='th price resizable'
       index={index}
@@ -14,6 +14,6 @@ export const PriceColHeader = ({ index }: Props): JSX.Element => {
       flexGrow={0}
     >
       Price
-    </ResizableHeader>
+    </ResizableColHeader>
   )
 }
