@@ -15,18 +15,14 @@ interface Props {
   minWidth: number
 }
 
-export const ResizableHeader = ({
+export const ResizableColHeader = ({
   children,
   className,
   flexGrow,
   headerName,
   index,
   minWidth,
-}: Props): JSX.Element | null => {
-  const item = getState().items[index]
-
-  if (item?.type !== 'boq') return null
-
+}: Props): JSX.Element => {
   const colWidth = useSelectorTyped(selectColumnWidth({ index, headerName }))
   const isColWidthSetManually = colWidth !== undefined
 
