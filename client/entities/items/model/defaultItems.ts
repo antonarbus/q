@@ -41,7 +41,7 @@ export const defaultItems: Item[] = [
         },
         description: {
           html: '<b>Description</b>',
-          width: undefined,
+          width: 350,
         },
         item: {
           html: '<b>Item</b>',
