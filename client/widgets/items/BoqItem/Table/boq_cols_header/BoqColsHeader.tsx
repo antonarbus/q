@@ -1,8 +1,8 @@
-import { NumberColHeader } from './NumberHeader'
-import { DescriptionColHeader } from './DescriptionHeader'
-import { ItemColHeader } from './ItemHeader'
-import { QtyHeader } from './QtyHeader'
-import { PriceHeader } from './PriceHeader'
+import { NumberColHeader } from './NumberColHeader'
+import { DescriptionColHeader } from './DescriptionColHeader'
+import { ItemColHeader } from './ItemColHeader'
+import { QtyColHeader } from './QtyColHeader'
+import { PriceColHeader } from './PriceColHeader'
 import { BoqColsHeaderLayout } from 'client/shared/layouts/BoqColsHeaderLayout'
 
 interface Props {
@@ -15,8 +15,8 @@ export const BoqColsHeader = ({ index }: Props): JSX.Element => {
       <NumberColHeader index={index} />
       <DescriptionColHeader index={index} />
       <ItemColHeader index={index} />
-      <QtyHeader index={index} />
-      <PriceHeader index={index} />
+      <QtyColHeader index={index} />
+      <PriceColHeader index={index} />
     </BoqColsHeaderLayout>
   )
 }

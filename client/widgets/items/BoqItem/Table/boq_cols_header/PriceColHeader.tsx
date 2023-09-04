@@ -4,16 +4,16 @@ interface Props {
   index: number
 }
 
-export const QtyHeader = ({ index }: Props): JSX.Element => {
+export const PriceColHeader = ({ index }: Props): JSX.Element => {
   return (
     <ResizableHeader
-      headerName='qty'
-      className='th qty resizable'
+      headerName='price'
+      className='th price resizable'
       index={index}
       minWidth={100}
       flexGrow={0}
     >
-      Qty
+      Price
     </ResizableHeader>
   )
 }

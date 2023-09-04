@@ -5,7 +5,6 @@ import { dispatch, getState } from 'client/shared/clients'
 import { saveItemsLocally } from 'client/shared/lib'
 import { Resizable } from 're-resizable'
 import { useSelectorTyped } from 'client/shared/hooks'
-import { isOverflown } from 'client/shared/lib/isOverflown'
 
 interface Props {
   children: ReactNode
