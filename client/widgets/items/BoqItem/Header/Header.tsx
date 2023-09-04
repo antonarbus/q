@@ -1,5 +1,5 @@
 import { Title } from './Title'
-import { BoqHeaderLayout } from 'client/shared/layouts/BoqHeaderLayout'
+import { BoqHeaderLayout } from 'client/shared/layouts'
 import { Currency } from './Currency'
 import { SubtotalText } from './SubtotalText'
 import { Price } from './Price'

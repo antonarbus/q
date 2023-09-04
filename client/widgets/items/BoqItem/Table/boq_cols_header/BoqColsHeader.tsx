@@ -3,7 +3,7 @@ import { DescriptionColHeader } from './DescriptionColHeader'
 import { ItemColHeader } from './ItemColHeader'
 import { QtyColHeader } from './QtyColHeader'
 import { PriceColHeader } from './PriceColHeader'
-import { BoqColsHeaderLayout } from 'client/shared/layouts/BoqColsHeaderLayout'
+import { BoqColsHeaderLayout } from 'client/shared/layouts'
 
 interface Props {
   index: number
