@@ -55,7 +55,7 @@ export interface BoqCols {
   }
 }
 
-interface BoqItem extends Common {
+export interface BoqItem extends Common {
   type: 'boq'
   boq: {
     header: {
