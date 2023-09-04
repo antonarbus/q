@@ -4,6 +4,7 @@ import { DraggableBoqRowsContainer } from './DraggableBoqRowsContainer'
 import { BoqRowLayout } from './BoqRowLayout'
 import { BoqRow } from './BoqRow'
 import { boqRowsShapeEqualityFn, selectBoqRows } from 'client/entities/items'
+import { onBoqRowDrag } from 'client/features/drag_boq_row'
 
 interface Props {
   index: number
@@ -12,17 +13,16 @@ interface Props {
 export const BoqRows = ({ index }: Props): JSX.Element => {
   const boqRows = useSelectorTyped(selectBoqRows({ index }), boqRowsShapeEqualityFn)
 
+  // todo: draggable part should belong to "drag" feature
   return (
     <DraggableBoqRowsContainer
       useDragHandle
       useWindowAsScrollContainer
       onSortStart={(): void => {
-        // onItemDrag.start
-        console.log('boq row onSortStart')
+        onBoqRowDrag.start()
       }}
       onSortEnd={({ oldIndex, newIndex }): void => {
-        // onItemDrag.end({ oldIndex, newIndex })
-        console.log('boq row onSortEnd')
+        onBoqRowDrag.end({ oldIndex, newIndex, index })
       }}
     >
       <AnimatePresence initial={false}>

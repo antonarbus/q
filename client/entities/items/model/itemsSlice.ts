@@ -16,6 +16,7 @@ import { getDefaultOrLocalItems } from './getDefaultOrLocalItems'
 import { saveBoqHeaderTextReducer } from './reducers/saveBoqHeaderTextReducer'
 import { saveColWidthReducer } from './reducers/saveColWidthReducer'
 import { makeItemBitWiderReducer } from './reducers/makeItemBitWiderReducer'
+import { reOrderBoqRowsReducer } from './reducers/reOrderBoqRowsReducer'
 
 export type ItemsState = Item[]
 
@@ -26,6 +27,7 @@ export const itemsSlice = createSlice({
   initialState,
   reducers: {
     reOrderItems: reOrderItemsReducer,
+    reOrderBoqRows: reOrderBoqRowsReducer,
     deleteItem: deleteItemReducer,
     pasteItem: pasteItemReducer,
     resetItemsToDefault: () => defaultItems,
@@ -42,4 +44,3 @@ export const itemsSlice = createSlice({
     saveColWidth: saveColWidthReducer,
   },
 })
-
