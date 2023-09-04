@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { getState } from 'client/shared/clients'
 import { BoqRows } from './boq_rows/BoqRows'
-import { BoqHeader } from './boq_header'
+import { BoqColsHeader } from './boq_header'
 
 interface Props {
   index: number
@@ -27,7 +27,7 @@ export const BoqTable = ({ index }: Props): JSX.Element | null => {
           },
         }}
       >
-        <BoqHeader index={index} />
+        <BoqColsHeader index={index} />
         <BoqRows index={index} />
       </Box>
     </Box>

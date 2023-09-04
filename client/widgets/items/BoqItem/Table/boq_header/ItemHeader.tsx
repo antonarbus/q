@@ -4,7 +4,7 @@ interface Props {
   index: number
 }
 
-export const ItemHeader = ({ index }: Props): JSX.Element => {
+export const ItemColHeader = ({ index }: Props): JSX.Element => {
   return (
     <ResizableHeader
       headerName='item'

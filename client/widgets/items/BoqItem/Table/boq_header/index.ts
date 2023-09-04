@@ -1,1 +1,1 @@
-export { BoqHeader } from './BoqHeader'
+export { BoqColsHeader } from './BoqHeader'
