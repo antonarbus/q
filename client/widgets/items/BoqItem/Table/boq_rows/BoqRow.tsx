@@ -5,7 +5,7 @@ import { DescriptionCell } from './DescriptionCell'
 import { ItemCell } from './ItemCell'
 import { QtyCell } from './QtyCell'
 import { PriceCell } from './PriceCell'
-import { BoqRowLayout } from 'client/shared/layouts/BoqRowLayout'
+import { BoqRowLayout } from 'client/shared/layouts'
 
 interface Props {
   index: number
