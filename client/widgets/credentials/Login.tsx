@@ -13,7 +13,6 @@ import { CardCustom } from 'client/shared/components/CardCustom'
 import { ButtonCustom } from 'client/shared/components/ButtonCustom'
 
 // todo: store user data in redux
-
 export const Login = (): JSX.Element => {
   const [email, setEmail] = useState('')
   const inputRef = useRef<HTMLDivElement>(null)
