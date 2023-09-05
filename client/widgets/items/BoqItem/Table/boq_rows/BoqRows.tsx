@@ -13,7 +13,6 @@ interface Props {
 export const BoqRows = ({ index }: Props): JSX.Element => {
   const boqRows = useSelectorTyped(selectBoqRows({ index }), boqRowsShapeEqualityFn)
 
-  // todo: draggable part should belong to "drag" feature
   return (
     <DraggableBoqRowsContainer
       useDragHandle
