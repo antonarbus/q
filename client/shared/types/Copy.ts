@@ -7,4 +7,3 @@ export interface CopyPlace {
   pastePos: PastePos
 }
 export type CopyItem = Item & { previewHtml: string }
-
