@@ -16,7 +16,7 @@ interface Props {
 export const BoqRow = ({ boqRow, index, rowIndex }: Props): JSX.Element => {
   return (
     <BoqRowLayout>
-      <IconsCell />
+      <IconsCell index={index} rowIndex={rowIndex} boqRow={boqRow} />
       <NumberCell index={index} boqRow={boqRow} rowIndex={rowIndex} />
       <DescriptionCell index={index} boqRow={boqRow} rowIndex={rowIndex} />
       <ItemCell index={index} boqRow={boqRow} rowIndex={rowIndex} />

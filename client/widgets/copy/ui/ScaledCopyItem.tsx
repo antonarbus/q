@@ -17,7 +17,6 @@ export const ScaledCopyItem = ({ width, scaleFactor, html }: Props): JSX.Element
   return (
     <div
       ref={divRef}
-      // className='fr-wrapper fr-element fr-view fr-box'
       css={{
         width,
         transformOrigin: 'left top',
