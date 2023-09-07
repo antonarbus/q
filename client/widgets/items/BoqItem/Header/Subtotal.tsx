@@ -4,10 +4,10 @@ import { Price } from './Price'
 import { Currency } from './Currency'
 
 interface Props {
-  index: number
+  itemIndex: number
 }
 
-export const Subtotal = ({ index }: Props): JSX.Element => {
+export const Subtotal = ({ itemIndex }: Props): JSX.Element => {
   return (
     <div
       css={{
@@ -18,7 +18,7 @@ export const Subtotal = ({ index }: Props): JSX.Element => {
         minWidth: 100,
       }}
     >
-      <SubtotalText index={index} />
+      <SubtotalText itemIndex={itemIndex} />
       <div
         css={{
           display: 'flex',
@@ -28,8 +28,8 @@ export const Subtotal = ({ index }: Props): JSX.Element => {
           width: '100%',
         }}
       >
-        <Price index={index} />
-        <Currency index={index} />
+        <Price itemIndex={itemIndex} />
+        <Currency itemIndex={itemIndex} />
       </div>
     </div>
   )

@@ -6,17 +6,17 @@ import { PriceColHeader } from './PriceColHeader'
 import { BoqColsHeaderLayout } from 'client/shared/layouts'
 
 interface Props {
-  index: number
+  itemIndex: number
 }
 
-export const BoqColsHeader = ({ index }: Props): JSX.Element => {
+export const BoqColsHeader = ({ itemIndex }: Props): JSX.Element => {
   return (
     <BoqColsHeaderLayout>
-      <NumberColHeader index={index} />
-      <DescriptionColHeader index={index} />
-      <ItemColHeader index={index} />
-      <QtyColHeader index={index} />
-      <PriceColHeader index={index} />
+      <NumberColHeader itemIndex={itemIndex} />
+      <DescriptionColHeader itemIndex={itemIndex} />
+      <ItemColHeader itemIndex={itemIndex} />
+      <QtyColHeader itemIndex={itemIndex} />
+      <PriceColHeader itemIndex={itemIndex} />
     </BoqColsHeaderLayout>
   )
 }

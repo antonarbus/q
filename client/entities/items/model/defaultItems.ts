@@ -7,7 +7,6 @@ export const defaultItems: Item[] = [
     type: 'text',
     width: 800,
     height: 0,
-    width: 0,
     msg: '',
     text: {
       html: '<div>editable text</div>',
@@ -18,7 +17,6 @@ export const defaultItems: Item[] = [
     type: 'boq',
     width: 700,
     height: 0,
-    width: 0,
     msg: '',
     boq: {
       header: {
@@ -142,7 +140,6 @@ export const defaultItems: Item[] = [
     type: 'text',
     width: 600,
     height: 0,
-    width: 0,
     msg: '',
     text: {
       html: '<div>editable text</div>',
@@ -153,7 +150,6 @@ export const defaultItems: Item[] = [
     type: 'text',
     width: 500,
     height: 0,
-    width: 0,
     msg: '',
     text: {
       html: '<div>editable text</div>',

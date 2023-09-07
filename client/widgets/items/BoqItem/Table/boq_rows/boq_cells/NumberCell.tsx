@@ -4,13 +4,13 @@ import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqRow } from 'client/shared/types'
 
 interface Props {
-  index: number
+  itemIndex: number
   rowIndex: number
   boqRow: BoqRow
 }
 
-export const NumberCell = ({ index, boqRow }: Props): JSX.Element => {
-  const numberColWidth = useSelectorTyped(selectColumnWidth({ index, headerName: 'number' }))
+export const NumberCell = ({ itemIndex, boqRow }: Props): JSX.Element => {
+  const numberColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, headerName: 'number' }))
   const isNumberColWidthSetManually = numberColWidth !== undefined
 
   return (

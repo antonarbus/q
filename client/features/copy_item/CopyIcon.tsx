@@ -9,10 +9,10 @@ import type { MouseEvent } from 'react'
 import { className } from 'client/shared/className'
 
 interface Props {
-  index: number
+  itemIndex: number
 }
 
-export const CopyIcon = ({ index }: Props): JSX.Element => {
+export const CopyIcon = ({ itemIndex }: Props): JSX.Element => {
   const isCopyable = useSelectorTyped(state => state.copy.isCopyable)
   const disabled = !isCopyable
 
@@ -31,10 +31,11 @@ export const CopyIcon = ({ index }: Props): JSX.Element => {
       onClick={(e: MouseEvent): void => {
         if (disabled) return
 
-        saveItemHeightByIndex({ index })
+        saveItemHeightByIndex({ itemIndex })
 
-        const itemToCopy = getState().items[index]
+        const itemToCopy = getState().items[itemIndex]
         if (!itemToCopy) return
+        if (itemToCopy.type === 'paste') return
 
         const clickedIconElement = e.target
         if (!(clickedIconElement instanceof Element)) return
@@ -46,9 +47,7 @@ export const CopyIcon = ({ index }: Props): JSX.Element => {
         const html = paperElement.innerHTML
         const cleanedHtml = cleanHtml(html)
 
-        const item = { ...itemToCopy, previewHtml: cleanedHtml }
-
-        dispatch(copySlice.actions.addItemIntoCopyContainer(item))
+        dispatch(copySlice.actions.addItemIntoCopyContainer({ copyItem: itemToCopy, preview: cleanedHtml }))
         dispatch(copySlice.actions.allowToPaste())
 
         const isCopyContainer = getState().copy.isCopyContainer

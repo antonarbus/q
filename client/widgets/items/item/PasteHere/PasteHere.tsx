@@ -3,12 +3,12 @@ import { useIsPasteHere } from './useIsPasteHere'
 import type { ReactNode } from 'react'
 
 interface Props {
-  index: number
+  itemIndex: number
   children: ReactNode
 }
 
-export const PasteHere = ({ children, index }: Props): JSX.Element => {
-  const isPasteHere = useIsPasteHere({ index })
+export const PasteHere = ({ children, itemIndex }: Props): JSX.Element => {
+  const isPasteHere = useIsPasteHere({ itemIndex })
 
   return (
     <>

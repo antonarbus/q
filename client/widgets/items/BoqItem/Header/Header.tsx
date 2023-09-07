@@ -5,7 +5,7 @@ import { SubtotalText } from './SubtotalText'
 import { Price } from './Price'
 
 interface Props {
-  index: number
+  itemIndex: number
 }
 
 // todo: now we have a placeholder for price and currency
@@ -16,13 +16,13 @@ interface Props {
 
 // also maybe we do not need placeholder for Title and Subtotal
 
-export const Header = ({ index }: Props): JSX.Element => {
+export const Header = ({ itemIndex }: Props): JSX.Element => {
   return (
     <BoqHeaderLayout
-      title={<Title index={index} />}
-      subtotalText={<SubtotalText index={index} />}
-      price={<Price index={index} />}
-      currency={<Currency index={index} />}
+      title={<Title itemIndex={itemIndex} />}
+      subtotalText={<SubtotalText itemIndex={itemIndex} />}
+      price={<Price itemIndex={itemIndex} />}
+      currency={<Currency itemIndex={itemIndex} />}
     />
   )
 }

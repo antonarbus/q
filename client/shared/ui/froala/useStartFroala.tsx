@@ -9,7 +9,7 @@ import './froala_editor.pkgd.min.css'
 import { froalaStaticOptions } from './froalaStaticOptions'
 
 interface Props {
-  index: number
+  itemIndex: number
   initHtmlGetter: () => string
   onContentChange: OnFroalaContentChange
   froalaElementRef: RefObject<HTMLDivElement>
@@ -23,7 +23,7 @@ declare const window: Window & typeof globalThis & { froalas: MutableRefObject<F
 window.froalas = []
 
 export const useStartFroala = ({
-  index,
+  itemIndex,
   initHtmlGetter,
   froalaElementRef,
   editorRef,
@@ -52,7 +52,7 @@ export const useStartFroala = ({
             contentChanged: (): void => {
               if (!editorRef.current) return
               const html = editorRef.current.html.get()
-              const onContentChangeWithBoundArgs = onContentChange.bind(null, { index, html, rowIndex })
+              const onContentChangeWithBoundArgs = onContentChange.bind(null, { itemIndex, html, rowIndex })
               onContentChangeWithBoundArgs()
             },
           },

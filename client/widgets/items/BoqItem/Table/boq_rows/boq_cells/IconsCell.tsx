@@ -4,12 +4,12 @@ import { DragIcon } from 'client/features/drag_item'
 import type { BoqRow } from 'client/shared/types'
 
 interface Props {
-  index: number
+  itemIndex: number
   rowIndex: number
   boqRow: BoqRow
 }
 
-export const IconsCell = ({ index, rowIndex, boqRow }: Props): JSX.Element => {
+export const IconsCell = ({ itemIndex, rowIndex, boqRow }: Props): JSX.Element => {
   return (
     <Box
       className='td icons'
@@ -27,7 +27,7 @@ export const IconsCell = ({ index, rowIndex, boqRow }: Props): JSX.Element => {
         }}
       >
         <DragIcon />
-        <CopyBoqRowIcon index={index} rowIndex={rowIndex} boqRow={boqRow} />
+        <CopyBoqRowIcon itemIndex={itemIndex} rowIndex={rowIndex} boqRow={boqRow} />
       </Box>
     </Box>
   )

@@ -7,7 +7,7 @@ import { useStartFroala } from './useStartFroala'
 import { usePutCaretAtTheEndOfText } from './usePutCaretAtTheEndOfText'
 
 interface Props {
-  index: number
+  itemIndex: number
   padding?: number | string
   initHtmlGetter: () => string
   froalaElementRef: RefObject<HTMLDivElement>
@@ -23,7 +23,7 @@ export const EditableHtml = ({
   additionalStyle,
   editorRef,
   froalaElementRef,
-  index,
+  itemIndex,
   initHtmlGetter,
   padding,
   placeholder,
@@ -34,14 +34,14 @@ export const EditableHtml = ({
   useStartFroala({
     editorRef,
     froalaElementRef,
-    index,
+    itemIndex,
     initHtmlGetter,
     placeholder,
     rowIndex,
     onContentChange,
   })
 
-  usePutCaretAtTheEndOfText({ index, editorRef, froalaElementRef })
+  usePutCaretAtTheEndOfText({ itemIndex, editorRef, froalaElementRef })
 
   return (
     <Box

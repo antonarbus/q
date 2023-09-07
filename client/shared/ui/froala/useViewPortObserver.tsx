@@ -2,14 +2,14 @@ import type { MutableRefObject } from 'react'
 import { useEffect, useRef, useState } from 'react'
 
 interface Props {
-  index: number
+  itemIndex: number
 }
 interface ReturnFunc {
   observerRef: MutableRefObject<HTMLDivElement | null>
   isInsideViewPort: boolean
 }
 
-export const useViewPortObserver = ({ index }: Props): ReturnFunc => {
+export const useViewPortObserver = ({ itemIndex }: Props): ReturnFunc => {
   const observerRef = useRef<HTMLDivElement | null>(null)
   const [isInsideViewPort, setIsInsideViewPort] = useState(false)
 
@@ -28,7 +28,7 @@ export const useViewPortObserver = ({ index }: Props): ReturnFunc => {
     return () => {
       observer.disconnect()
     }
-  }, [index])
+  }, [itemIndex])
 
   return { observerRef, isInsideViewPort }
 }

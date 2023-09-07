@@ -53,6 +53,7 @@ const variants: Variants = {
 
 export const RestOfCopiedItems = (): JSX.Element | null => {
   const items = useSelectorTyped(state => state.copy.items)
+  const previews = useSelectorTyped(state => state.copy.previews)
   const isCopying = useSelectorTyped(state => state.copy.isCopying)
   const prevFirstItemHeightRef = useRef(0)
 
@@ -85,6 +86,7 @@ export const RestOfCopiedItems = (): JSX.Element | null => {
       >
         {items.map((item, index) => {
           const scaleFactor = (containerWidth - 2 * containerPadding) / item.width
+          const preview = previews[index]
 
           if (index === 0) return null
 
@@ -102,7 +104,7 @@ export const RestOfCopiedItems = (): JSX.Element | null => {
               }}
             >
               <ScaledCopyItem
-                html={item.previewHtml}
+                html={preview ?? ''}
                 width={item.width}
                 scaleFactor={`${scaleFactor}`}
               />

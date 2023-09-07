@@ -16,6 +16,6 @@ export const saveItemsLocally = ({
   saveItemsIntoLocalStorage({ items })
   tellItemsSavedLocally()
   if (msgAboveItemWithIndex !== undefined) {
-    dispatch(itemsSlice.actions.tellItemSavedLocally({ index: msgAboveItemWithIndex }))
+    dispatch(itemsSlice.actions.tellItemSavedLocally({ itemIndex: msgAboveItemWithIndex }))
   }
 }

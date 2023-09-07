@@ -7,11 +7,11 @@ import { boqRowsShapeEqualityFn, selectBoqRows } from 'client/entities/items'
 import { onBoqRowDrag } from 'client/features/drag_boq_row'
 
 interface Props {
-  index: number
+  itemIndex: number
 }
 
-export const BoqRows = ({ index }: Props): JSX.Element => {
-  const boqRows = useSelectorTyped(selectBoqRows({ index }), boqRowsShapeEqualityFn)
+export const BoqRows = ({ itemIndex }: Props): JSX.Element => {
+  const boqRows = useSelectorTyped(selectBoqRows({ itemIndex }), boqRowsShapeEqualityFn)
 
   return (
     <DraggableBoqRowsContainer
@@ -21,7 +21,7 @@ export const BoqRows = ({ index }: Props): JSX.Element => {
         onBoqRowDrag.start()
       }}
       onSortEnd={({ oldIndex, newIndex }): void => {
-        onBoqRowDrag.end({ oldIndex, newIndex, index })
+        onBoqRowDrag.end({ oldIndex, newIndex, itemIndex })
       }}
     >
       <AnimatePresence initial={false}>
@@ -29,13 +29,13 @@ export const BoqRows = ({ index }: Props): JSX.Element => {
           if (boqRow.type === 'boq row') return (
             <BoqRowLayout
               key={boqRow.id}
-              index={rowIndex} // internal prop consumed by SortableElement HOC
+              index={rowIndex} // 'index' is internal prop consumed by SortableElement HOC
               // disabled={isItemDisabled} // internal prop consumed by SortableElement HOC
               i={rowIndex}
               // itemHeight={item?.height ?? 0}
               rowId={boqRow.id}
             >
-              <BoqRow index={index} rowIndex={rowIndex} boqRow={boqRow} />
+              <BoqRow itemIndex={itemIndex} rowIndex={rowIndex} boqRow={boqRow} />
             </BoqRowLayout>
           )
           return 'boq paste'

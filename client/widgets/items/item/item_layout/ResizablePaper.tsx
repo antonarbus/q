@@ -7,7 +7,7 @@ import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from 'client/s
 
 interface Props {
   children: ReactNode
-  index: number
+  itemIndex: number
   disableResize?: boolean
   autoWidth?: boolean
   onItemResizeStop?: OnItemResizeStop
@@ -17,14 +17,14 @@ interface Props {
 
 export const ResizablePaper = ({
   children,
-  index,
+  itemIndex,
   disableResize = false,
   autoWidth = false,
   onItemResizeStop,
   onItemResizeStart,
   onItemResize,
 }: Props): JSX.Element => {
-  const width = useSelectorTyped(state => state.items[index]?.width)
+  const width = useSelectorTyped(state => state.items[itemIndex]?.width)
   const isWidthSetManually = width !== undefined
   const isAutoWidth = !isWidthSetManually || disableResize || autoWidth
 
@@ -54,13 +54,13 @@ export const ResizablePaper = ({
         left: disableResize ? false : true,
       }}
       onResize={(e, direction, elementRef, delta): void => {
-        onItemResize?.bind(null, { e, direction, elementRef, delta, index })()
+        onItemResize?.bind(null, { e, direction, elementRef, delta, itemIndex })()
       }}
       onResizeStart={(e, dir, elementRef): void => {
-        onItemResizeStart?.bind(null, { e, dir, elementRef, index })()
+        onItemResizeStart?.bind(null, { e, dir, elementRef, itemIndex })()
       }}
       onResizeStop={(e, direction, elementRef, delta): void => {
-        onItemResizeStop?.bind(null, { e, direction, elementRef, delta, index })()
+        onItemResizeStop?.bind(null, { e, direction, elementRef, delta, itemIndex })()
       }}
     >
       {children}

@@ -5,17 +5,17 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useUpdateEffect } from 'react-use'
 
 interface Props {
-  index: number
+  itemIndex: number
 }
 
-export const ItemMsg = ({ index }: Props): JSX.Element => {
-  const msg = useSelectorTyped(state => state.items[index]?.msg)
+export const ItemMsg = ({ itemIndex }: Props): JSX.Element => {
+  const msg = useSelectorTyped(state => state.items[itemIndex]?.msg)
 
   useUpdateEffect(() => {
     // hide msg
     const timeout = setTimeout(() => {
       if (!msg) return
-      dispatch(itemsSlice.actions.removeItemMsg({ index }))
+      dispatch(itemsSlice.actions.removeItemMsg({ itemIndex }))
     }, 1700)
 
     return () => {

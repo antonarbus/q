@@ -3,13 +3,13 @@ import { itemsSlice } from './itemsSlice'
 import { className } from 'client/shared/className'
 
 interface Props {
-  index: number
+  itemIndex: number
 }
 
-export const saveItemHeightByIndex = ({ index }: Props): void => {
+export const saveItemHeightByIndex = ({ itemIndex }: Props): void => {
   const items = document.querySelectorAll(`.${className.paper}`)
-  const item = items[index]
+  const item = items[itemIndex]
   if (!item) return
   const height = item.clientHeight
-  dispatch(itemsSlice.actions.saveItemHeight({ index, height }))
+  dispatch(itemsSlice.actions.saveItemHeight({ itemIndex, height }))
 }

@@ -50,10 +50,14 @@ const variants: Variants = {
 
 export const FirstCopiedItem = (): JSX.Element | null => {
   const items = useSelectorTyped(state => state.copy.items)
+  const previews = useSelectorTyped(state => state.copy.previews)
   const isCopying = useSelectorTyped(state => state.copy.isCopying)
 
   const firstItem = items[0]
+  const firstPreview = previews[0]
+
   if (!firstItem) return null
+  if (!firstPreview) return null
 
   const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / firstItem.width
   const height = firstItem.height * scaleFactorForFirstItem
@@ -89,7 +93,7 @@ export const FirstCopiedItem = (): JSX.Element | null => {
         }}
       >
         <ScaledCopyItem
-          html={firstItem.previewHtml}
+          html={firstPreview}
           width={firstItem.width}
           scaleFactor={`${scaleFactorForFirstItem}`}
         />

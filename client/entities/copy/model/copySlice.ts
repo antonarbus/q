@@ -1,12 +1,13 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
-import type { CopyPlace, CopyItem } from 'client/shared/types'
+import type { CopyPlace, Copyable } from 'client/shared/types'
 
 interface Props {
   isCopyMode: boolean
   isCopyContainer: boolean
   initCords: { x: number; y: number }
-  items: CopyItem[]
+  items: Copyable[]
+  previews: string[],
   place: CopyPlace
   isCopying: boolean
   isPasteTextShown: boolean
@@ -21,6 +22,7 @@ const initialState: Props = {
   isCopyContainer: false,
   initCords: { x: 0, y: 0 },
   items: [],
+  previews: [],
   place: { pastePos: 'middle', itemId: 'some id' },
   isCopying: false,
   isPasteTextShown: false,
@@ -49,13 +51,18 @@ export const copySlice = createSlice({
       const coords = action.payload
       state.initCords = coords
     },
-    addItemIntoCopyContainer: (state, action: PayloadAction<CopyItem>) => {
+    addItemIntoCopyContainer: (state, action: PayloadAction<{
+      copyItem: Copyable
+      preview: string
+    }>) => {
+      const { copyItem, preview } = action.payload
       state.isCopying = true
-      const item = action.payload
-      state.items.unshift(item)
+      state.items.unshift(copyItem)
+      state.previews.unshift(preview)
     },
     removeItemFromCopyContainer: (state) => {
       state.items.shift()
+      state.previews.shift()
       state.isCopying = false
       state.place = initialState.place
     },
@@ -95,25 +102,3 @@ export const copySlice = createSlice({
     },
   },
 })
-
-// export const {
-//   showCopyContainer,
-//   hideCopyContainer,
-//   saveInitCordsOfCopyContainer,
-//   addItemIntoCopyContainer,
-//   removeItemFromCopyContainer,
-//   updatePastePos,
-//   showPasteText,
-//   hidePasteText,
-//   enterIntoCopyMode,
-//   exitFromCopyMode,
-//   allowToPaste,
-//   forbidToPaste,
-//   allowToCopy,
-//   forbidToCopy,
-//   allowToCut,
-//   forbidToCut,
-//   allowToDelete,
-//   forbidToDelete,
-// } = copySlice.actions
-// export const copyReducer = copySlice.reducer

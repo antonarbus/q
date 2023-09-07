@@ -11,7 +11,7 @@ interface Props {
   className: string
   flexGrow?: number
   headerName: keyof BoqCols
-  index: number
+  itemIndex: number
   minWidth: number
 }
 
@@ -20,10 +20,10 @@ export const ResizableColHeader = ({
   className,
   flexGrow,
   headerName,
-  index,
+  itemIndex,
   minWidth,
 }: Props): JSX.Element => {
-  const colWidth = useSelectorTyped(selectColumnWidth({ index, headerName }))
+  const colWidth = useSelectorTyped(selectColumnWidth({ itemIndex, headerName }))
   const isColWidthSetManually = colWidth !== undefined
 
   return (
@@ -54,17 +54,17 @@ export const ResizableColHeader = ({
       }}
       onResizeStart={(event, direction, element): void => {
         const width = element.clientWidth
-        dispatch(itemsSlice.actions.saveColWidth({ index, width, headerName }))
+        dispatch(itemsSlice.actions.saveColWidth({ itemIndex, width, headerName }))
       }}
       onResize={(event, direction, element, delta): void => {
         const width = element.clientWidth
-        dispatch(itemsSlice.actions.saveColWidth({ index, width, headerName }))
+        dispatch(itemsSlice.actions.saveColWidth({ itemIndex, width, headerName }))
       }}
       onResizeStop={(event, direction, element): void => {
         const width = element.clientWidth
-        dispatch(itemsSlice.actions.saveColWidth({ index, width, headerName }))
+        dispatch(itemsSlice.actions.saveColWidth({ itemIndex, width, headerName }))
         saveItemsLocally()
-        dispatch(itemsSlice.actions.tellItemSavedLocally({ index }))
+        dispatch(itemsSlice.actions.tellItemSavedLocally({ itemIndex }))
       }}
     >
       {children}

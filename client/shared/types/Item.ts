@@ -95,4 +95,7 @@ export interface PasteItem extends Common {
 
 export type Item = BoqItem | PasteItem | TextItem
 
-export type HtmlGetter = (props: { index: number, rowIndex?: number }) => string
+export type Copyable = BoqItem | BoqRow | TextItem
+export type CopyableItem = BoqItem | TextItem
+
+export type HtmlGetter = (props: { itemIndex: number, rowIndex?: number }) => string
