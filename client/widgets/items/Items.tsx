@@ -21,11 +21,11 @@ export const Items = (): JSX.Element => {
       }}
     >
       <AnimatePresence initial={false}>
-        {items.map((item, index) => {
+        {items.map((item, itemIndex) => {
           const key = item.id + shouldReRender.toString()
 
-          if (item.type === 'text') return <TextItem key={key} index={index} />
-          if (item.type === 'boq') return <BoqItem key={key} index={index} />
+          if (item.type === 'text') return <TextItem key={key} itemIndex={itemIndex} />
+          if (item.type === 'boq') return <BoqItem key={key} itemIndex={itemIndex} />
           return <PasteItem key={key} />
         })}
       </AnimatePresence>

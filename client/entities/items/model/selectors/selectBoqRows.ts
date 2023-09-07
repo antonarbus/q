@@ -7,17 +7,17 @@ type EqualityFn = (a: any, b: any) => boolean
 export const boqRowsShapeEqualityFn: EqualityFn = (prevItems: BoqRow[], currentItems: BoqRow[]): boolean => {
   const isDifferentLength = prevItems.length !== currentItems.length
   if (isDifferentLength) return false
-  const idsDoNotMatch = prevItems.some((item: BoqRow, index: number) => prevItems[index]?.id !== currentItems[index]?.id)
+  const idsDoNotMatch = prevItems.some((item: BoqRow, itemIndex: number) => prevItems[itemIndex]?.id !== currentItems[itemIndex]?.id)
   if (idsDoNotMatch) return false
   return true
 }
 
 interface Props {
-  index: number
+  itemIndex: number
 }
 
-export const selectBoqRows = ({ index }: Props) => (state: RootState): BoqRow[] => {
-  const item = state.items[index]
+export const selectBoqRows = ({ itemIndex }: Props) => (state: RootState): BoqRow[] => {
+  const item = state.items[itemIndex]
   if (item?.type !== 'boq') return []
   return item.boq.rows
 }

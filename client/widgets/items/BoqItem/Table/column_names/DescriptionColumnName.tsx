@@ -5,19 +5,19 @@ import { Froala } from 'client/shared/ui/froala'
 import { useRef } from 'react'
 
 interface Props {
-  index: number
+  itemIndex: number
 }
 
-export const DescriptionColumnName = ({ index }: Props): JSX.Element | null => {
+export const DescriptionColumnName = ({ itemIndex }: Props): JSX.Element | null => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef(null)
-  const item = getState().items[index]
+  const item = getState().items[itemIndex]
 
   if (item?.type !== 'boq') return null
 
   return (
     <Froala
-      index={index}
+      itemIndex={itemIndex}
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
       placeholder='Description...'

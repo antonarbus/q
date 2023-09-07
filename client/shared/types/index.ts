@@ -1,9 +1,20 @@
 import type { Action, ThunkAction } from '@reduxjs/toolkit'
 import type { store } from '../clients'
 
-export type { PasteItem, BoqCols, Item, HtmlGetter, BoqColWidth, BoqHeaderKey, BoqRow, BoqItem } from './Item'
+export type {
+  PasteItem,
+  BoqCols,
+  Item,
+  Copyable,
+  CopyableItem,
+  HtmlGetter,
+  BoqColWidth,
+  BoqHeaderKey,
+  BoqRow,
+  BoqItem,
+} from './Item'
 
-export type { PastePos, CopyPlace, CopyItem } from './Copy'
+export type { PastePos, CopyPlace } from './Copy'
 
 export type { OnFroalaContentChange } from './froala'
 

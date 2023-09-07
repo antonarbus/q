@@ -9,7 +9,7 @@ import { EditableHtml } from './EditableHtml'
 import { useViewPortObserver } from './useViewPortObserver'
 
 interface Props {
-  index: number
+  itemIndex: number
   padding?: number | string
   initHtmlGetter: HtmlGetter
   froalaElementRef: RefObject<HTMLDivElement>
@@ -24,7 +24,7 @@ export const Froala = ({
   additionalStyle,
   editorRef,
   froalaElementRef,
-  index,
+  itemIndex,
   initHtmlGetter,
   padding,
   placeholder,
@@ -33,7 +33,7 @@ export const Froala = ({
 }: Props): JSX.Element => {
   const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
   const { heightDuringAnimationRef } = useFixedHeightForAnimation({ froalaElementRef })
-  const { observerRef, isInsideViewPort } = useViewPortObserver({ index })
+  const { observerRef, isInsideViewPort } = useViewPortObserver({ itemIndex })
 
   const showStaticHtml = isCopyMode || !isInsideViewPort
   const showEditableHtml = !isCopyMode && isInsideViewPort
@@ -47,7 +47,7 @@ export const Froala = ({
     >
       {showStaticHtml && (
         <StaticHtml
-          initHtmlGetter={initHtmlGetter.bind(null, { index, rowIndex })}
+          initHtmlGetter={initHtmlGetter.bind(null, { itemIndex, rowIndex })}
           padding={padding}
           additionalStyle={additionalStyle}
           editorRef={editorRef}
@@ -59,8 +59,8 @@ export const Froala = ({
           additionalStyle={additionalStyle}
           editorRef={editorRef}
           froalaElementRef={froalaElementRef}
-          index={index}
-          initHtmlGetter={initHtmlGetter.bind(null, { index, rowIndex })}
+          itemIndex={itemIndex}
+          initHtmlGetter={initHtmlGetter.bind(null, { itemIndex, rowIndex })}
           padding={padding}
           placeholder={placeholder}
           rowIndex={rowIndex}

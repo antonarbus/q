@@ -11,10 +11,10 @@ import { className } from 'client/shared/className'
 import { theme } from 'client/shared/clients'
 
 interface Props {
-  index: number
+  itemIndex: number
 }
 
-export const CutIcon = ({ index }: Props): JSX.Element => {
+export const CutIcon = ({ itemIndex }: Props): JSX.Element => {
   const isItemAlone = useSelectorTyped(selectIsItemAlone)
   const isCuttable = useSelectorTyped(state => state.copy.isCuttable)
   const disabled = isItemAlone || !isCuttable
@@ -32,10 +32,11 @@ export const CutIcon = ({ index }: Props): JSX.Element => {
       onClick={(e: MouseEvent): void => {
         if (disabled) return
 
-        saveItemHeightByIndex({ index })
+        saveItemHeightByIndex({ itemIndex })
 
-        const itemToCut = getState().items[index]
+        const itemToCut = getState().items[itemIndex]
         if (!itemToCut) return
+        if (itemToCut.type === 'paste') return
 
         const clickedIconElement = e.target
         if (!(clickedIconElement instanceof Element)) return
@@ -46,9 +47,8 @@ export const CutIcon = ({ index }: Props): JSX.Element => {
 
         const html = paperElement.innerHTML
         const cleanedHtml = cleanHtml(html)
-        const item = { ...itemToCut, previewHtml: cleanedHtml }
 
-        dispatch(copySlice.actions.addItemIntoCopyContainer(item))
+        dispatch(copySlice.actions.addItemIntoCopyContainer({ copyItem: itemToCut, preview: cleanedHtml }))
         dispatch(itemsSlice.actions.deleteItem({ itemId: itemToCut.id }))
 
         dispatch(copySlice.actions.forbidToPaste())

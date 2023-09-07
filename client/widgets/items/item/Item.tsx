@@ -12,7 +12,7 @@ import { ItemLayout } from './item_layout'
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from 'client/shared/types'
 
 interface Props {
-  index: number
+  itemIndex: number
   children: ReactNode
   disableResize?: boolean
   onItemResizeStop?: OnItemResizeStop
@@ -22,7 +22,7 @@ interface Props {
 }
 
 export const Item = ({
-  index,
+  itemIndex,
   children,
   disableResize,
   onItemResizeStop,
@@ -31,13 +31,13 @@ export const Item = ({
   autoWidth,
 }: Props): JSX.Element => {
   const isItemDisabled = useIsItemDisabled()
-  const item = getState().items[index]
+  const item = getState().items[itemIndex]
 
   return (
     <ItemLayout
-      index={index} // internal prop consumed by SortableElement HOC
+      index={itemIndex} // "index" is internal prop consumed by SortableElement HOC
       disabled={isItemDisabled} // internal prop consumed by SortableElement HOC
-      i={index}
+      itemIndex={itemIndex}
       disableResize={disableResize}
       autoWidth={autoWidth}
       itemHeight={item?.height ?? 0}
@@ -48,14 +48,14 @@ export const Item = ({
       itemActionElements={(
         <>
           <DragIcon />
-          <CopyIcon index={index} />
-          <CutIcon index={index} />
-          <DeleteIcon index={index} />
+          <CopyIcon itemIndex={itemIndex} />
+          <CutIcon itemIndex={itemIndex} />
+          <DeleteIcon itemIndex={itemIndex} />
         </>
       )}
     >
-      <ItemMsg index={index} />
-      <PasteHere index={index}>
+      <ItemMsg itemIndex={itemIndex} />
+      <PasteHere itemIndex={itemIndex}>
         {children}
       </PasteHere>
     </ItemLayout>

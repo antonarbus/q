@@ -4,19 +4,19 @@ import { Header } from './Header'
 import { BoqTable } from './Table/BoqTable'
 
 interface Props {
-  index: number
+  itemIndex: number
 }
 
-export const BoqItem = ({ index }: Props): JSX.Element => {
+export const BoqItem = ({ itemIndex }: Props): JSX.Element => {
   return (
     <Item
-      index={index}
+      itemIndex={itemIndex}
       autoWidth={true}
       onItemResizeStop={onBoqItemResizeStop}
       onItemResizeStart={onBoqItemResizeStart}
     >
-      <Header index={index} />
-      <BoqTable index={index} />
+      <Header itemIndex={itemIndex} />
+      <BoqTable itemIndex={itemIndex} />
     </Item>
   )
 }

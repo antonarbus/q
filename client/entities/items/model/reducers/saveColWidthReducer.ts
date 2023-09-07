@@ -3,12 +3,12 @@ import type { BoqColWidth, BoqCols } from 'client/shared/types'
 import type { ItemsState } from '../itemsSlice'
 
 export const saveColWidthReducer = (state: ItemsState, action: PayloadAction<{
-  index: number
+  itemIndex: number
   width: BoqColWidth
   headerName: keyof BoqCols
 }>): void => {
-  const { index, width, headerName: colKey } = action.payload
-  const item = state[index]
+  const { itemIndex, width, headerName: colKey } = action.payload
+  const item = state[itemIndex]
   if (!item) return
   if (item.type !== 'boq') return
   item.boq.column[colKey].width = width

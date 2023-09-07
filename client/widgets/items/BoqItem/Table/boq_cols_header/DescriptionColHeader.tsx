@@ -1,15 +1,15 @@
 import { ResizableColHeader } from './ResizableColHeader'
 
 interface Props {
-  index: number
+  itemIndex: number
 }
 
-export const DescriptionColHeader = ({ index }: Props): JSX.Element => {
+export const DescriptionColHeader = ({ itemIndex }: Props): JSX.Element => {
   return (
     <ResizableColHeader
       headerName='description'
       className='th description resizable'
-      index={index}
+      itemIndex={itemIndex}
       minWidth={200}
       flexGrow={1}
     >

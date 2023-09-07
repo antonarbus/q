@@ -6,7 +6,7 @@ export type OnItemResizeStop = (params: {
   direction: Direction,
   elementRef: HTMLElement,
   delta: NumberSize,
-  index: number
+  itemIndex: number
 }) => void
 
 export type OnItemResize = (params: {
@@ -14,12 +14,12 @@ export type OnItemResize = (params: {
   direction: Direction,
   elementRef: HTMLElement,
   delta: NumberSize,
-  index: number
+  itemIndex: number
 }) => void
 
 export type OnItemResizeStart = (params: {
   e: React.MouseEvent<HTMLElement> | React.TouchEvent<HTMLElement>,
   dir: Direction,
   elementRef: HTMLElement,
-  index: number
+  itemIndex: number
 }) => void

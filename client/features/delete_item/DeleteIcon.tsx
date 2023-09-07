@@ -9,10 +9,10 @@ import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 import { copySlice } from 'client/entities/copy'
 
 interface Props {
-  index: number
+  itemIndex: number
 }
 
-export const DeleteIcon = ({ index }: Props): EmotionJSX.Element => {
+export const DeleteIcon = ({ itemIndex }: Props): EmotionJSX.Element => {
   const ref = useRef<HTMLSpanElement>(null)
 
   const isItemAlone = useSelectorTyped(selectIsItemAlone)
@@ -31,7 +31,7 @@ export const DeleteIcon = ({ index }: Props): EmotionJSX.Element => {
 
         if (disabled) return
 
-        const itemToDelete = getState().items[index]
+        const itemToDelete = getState().items[itemIndex]
         if (!itemToDelete) return
 
         dispatch(copySlice.actions.enterIntoCopyMode())

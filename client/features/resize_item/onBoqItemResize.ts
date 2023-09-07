@@ -3,17 +3,17 @@ import { dispatch } from 'client/shared/clients'
 import { saveItemsLocally } from 'client/shared/lib'
 import type { OnItemResizeStart, OnItemResizeStop } from 'client/shared/types'
 
-export const onBoqItemResizeStart: OnItemResizeStart = ({ index, e, dir, elementRef }) => {
+export const onBoqItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, elementRef }) => {
   const descriptionHeader = elementRef.querySelector('.th.description')
 
   if (!descriptionHeader) return
   if (!(descriptionHeader instanceof HTMLElement)) return
 
   elementRef.style.width = elementRef.clientWidth + 'px' // otherwise col jumps
-  dispatch(itemsSlice.actions.saveColWidth({ index, headerName: 'description', width: undefined }))
+  dispatch(itemsSlice.actions.saveColWidth({ itemIndex, headerName: 'description', width: undefined }))
 }
 
-export const onBoqItemResizeStop: OnItemResizeStop = ({ index, e, direction, elementRef, delta }) => {
+export const onBoqItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction, elementRef, delta }) => {
   const descriptionHeader = elementRef.querySelector('.th.description')
 
   if (!descriptionHeader) return
@@ -21,6 +21,6 @@ export const onBoqItemResizeStop: OnItemResizeStop = ({ index, e, direction, ele
 
   const width = descriptionHeader.clientWidth
 
-  dispatch(itemsSlice.actions.saveColWidth({ index, headerName: 'description', width }))
-  saveItemsLocally({ msgAboveItemWithIndex: index })
+  dispatch(itemsSlice.actions.saveColWidth({ itemIndex, headerName: 'description', width }))
+  saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
 }

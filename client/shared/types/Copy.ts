@@ -6,4 +6,3 @@ export interface CopyPlace {
   itemId: string
   pastePos: PastePos
 }
-export type CopyItem = { previewHtml: string } & (BoqRow | Item)

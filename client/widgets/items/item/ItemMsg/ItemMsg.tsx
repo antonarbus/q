@@ -3,12 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useRemoveItemMsgAfterSomeTime } from './useRemoveItemMsg'
 
 interface Props {
-  index: number
+  itemIndex: number
 }
 
-export const ItemMsg = ({ index }: Props): JSX.Element => {
-  const msg = useSelectorTyped(state => state.items[index]?.msg)
-  useRemoveItemMsgAfterSomeTime({ index })
+export const ItemMsg = ({ itemIndex }: Props): JSX.Element => {
+  const msg = useSelectorTyped(state => state.items[itemIndex]?.msg)
+  useRemoveItemMsgAfterSomeTime({ itemIndex })
 
   return (
     <AnimatePresence>

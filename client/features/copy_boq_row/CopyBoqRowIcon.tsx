@@ -10,12 +10,12 @@ import { className } from 'client/shared/className'
 import type { BoqRow } from 'client/shared/types'
 
 interface Props {
-  index: number
+  itemIndex: number
   rowIndex: number
   boqRow: BoqRow
 }
 
-export const CopyBoqRowIcon = ({ index, rowIndex }: Props): JSX.Element => {
+export const CopyBoqRowIcon = ({ itemIndex, rowIndex }: Props): JSX.Element => {
   const isCopyable = useSelectorTyped(state => state.copy.isCopyable)
   const disabled = !isCopyable
 
@@ -33,17 +33,14 @@ export const CopyBoqRowIcon = ({ index, rowIndex }: Props): JSX.Element => {
       }}
       onClick={(e: MouseEvent): void => {
         if (disabled) return
-
-        // saveItemHeightByIndex({ index })
         const clickedIconElement = e.target
-
         if (!(clickedIconElement instanceof Element)) return
 
         const boqRowElement = clickedIconElement.closest('.tr')
         if (!boqRowElement) return
 
         dispatch(itemsSlice.actions.saveBoqRowHeightAndWidth({
-          index,
+          itemIndex,
           rowIndex,
           height: boqRowElement.clientHeight,
           width: boqRowElement.clientWidth,
@@ -52,14 +49,12 @@ export const CopyBoqRowIcon = ({ index, rowIndex }: Props): JSX.Element => {
         const html = boqRowElement.outerHTML
         const cleanedHtml = cleanHtml(html)
 
-        const item = getState().items[index]
+        const item = getState().items[itemIndex]
         if (item?.type !== 'boq') return
         const boqRow = item.boq.rows[rowIndex]
         if (!boqRow) return
 
-        const itemForCopyContainer = { ...boqRow, previewHtml: cleanedHtml }
-
-        dispatch(copySlice.actions.addItemIntoCopyContainer(itemForCopyContainer))
+        dispatch(copySlice.actions.addItemIntoCopyContainer({ copyItem: boqRow, preview: cleanedHtml }))
         dispatch(copySlice.actions.allowToPaste())
 
         const isCopyContainer = getState().copy.isCopyContainer

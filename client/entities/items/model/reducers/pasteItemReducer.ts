@@ -1,13 +1,13 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { ItemsState } from '../itemsSlice'
-import type { Item, PastePos } from 'client/shared/types'
+import type { CopyableItem, PastePos } from 'client/shared/types'
 import { nanoid } from 'nanoid'
 import { cleanItem } from 'client/shared/lib/itemsUtils'
 
 export const pasteItemReducer = (state: ItemsState, action: PayloadAction<{
   itemId: string
   pastePos: PastePos
-  item: Item
+  item: CopyableItem
 }>): ItemsState => {
   const { itemId, pastePos, item } = action.payload
   const cleanedItem = cleanItem(item)

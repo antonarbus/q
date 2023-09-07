@@ -14,26 +14,29 @@ const pasteItemOnClick = (): void => {
   const { itemId, pastePos } = getState().copy.place
   const topItemFromCopyContainer = getState().copy.items[0]
   if (!topItemFromCopyContainer) return
-  const cleanedItem = cleanItem(topItemFromCopyContainer)
-  dispatch(copySlice.actions.removeItemFromCopyContainer())
-  dispatch(itemsSlice.actions.pasteItem({ itemId, pastePos, item: cleanedItem }))
-  dispatch(copySlice.actions.forbidToPaste())
-  dispatch(copySlice.actions.forbidToCopy())
-  dispatch(copySlice.actions.forbidToCut())
-  dispatch(copySlice.actions.forbidToDelete())
-  saveItemsLocally()
-  const itemsInCopyContainer = getState().copy.items
-  if (itemsInCopyContainer.length === 0) {
-    dispatch(copySlice.actions.hideCopyContainer())
-    dispatch(itemsSlice.actions.removePasteItem())
-    exitCopyMode({ delayed: true })
+  if (topItemFromCopyContainer.type === 'boq paste') return
+
+  if (topItemFromCopyContainer.type === 'boq' || topItemFromCopyContainer.type === 'text') {
+    dispatch(itemsSlice.actions.pasteItem({ itemId, pastePos, item: topItemFromCopyContainer }))
+    dispatch(copySlice.actions.removeItemFromCopyContainer())
+    dispatch(copySlice.actions.forbidToPaste())
+    dispatch(copySlice.actions.forbidToCopy())
+    dispatch(copySlice.actions.forbidToCut())
+    dispatch(copySlice.actions.forbidToDelete())
+    saveItemsLocally()
+    const itemsInCopyContainer = getState().copy.items
+    if (itemsInCopyContainer.length === 0) {
+      dispatch(copySlice.actions.hideCopyContainer())
+      dispatch(itemsSlice.actions.removePasteItem())
+      exitCopyMode({ delayed: true })
+    }
+    setTimeout(() => {
+      dispatch(copySlice.actions.allowToPaste())
+      dispatch(copySlice.actions.allowToCopy())
+      dispatch(copySlice.actions.allowToCut())
+      dispatch(copySlice.actions.allowToDelete())
+    }, 1000 * theme.item.animationDuration)
   }
-  setTimeout(() => {
-    dispatch(copySlice.actions.allowToPaste())
-    dispatch(copySlice.actions.allowToCopy())
-    dispatch(copySlice.actions.allowToCut())
-    dispatch(copySlice.actions.allowToDelete())
-  }, 1000 * theme.item.animationDuration)
 }
 
 export const usePasteClick = (): void => {

@@ -9,20 +9,20 @@ import { itemTextHtmlGetter } from 'client/entities/items'
 import { onTextItemResizeStop } from 'client/features/resize_item'
 
 interface Props {
-  index: number
+  itemIndex: number
 }
 
-export const TextItem = ({ index }: Props): JSX.Element => {
+export const TextItem = ({ itemIndex }: Props): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
 
   return (
     <Item
-      index={index}
+      itemIndex={itemIndex}
       onItemResizeStop={onTextItemResizeStop}
     >
       <Froala
-        index={index}
+        itemIndex={itemIndex}
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
         initHtmlGetter={itemTextHtmlGetter}

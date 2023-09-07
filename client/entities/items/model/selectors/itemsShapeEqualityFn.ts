@@ -7,7 +7,7 @@ type EqualityFn = (a: any, b: any) => boolean
 export const itemsShapeEqualityFn: EqualityFn = (prevItems: Item[], currentItems: Item[]): boolean => {
   const isDifferentLength = prevItems.length !== currentItems.length
   if (isDifferentLength) return false
-  const idsDoNotMatch = prevItems.some((item: Item, index: number) => prevItems[index]?.id !== currentItems[index]?.id)
+  const idsDoNotMatch = prevItems.some((item: Item, itemIndex: number) => prevItems[itemIndex]?.id !== currentItems[itemIndex]?.id)
   if (idsDoNotMatch) return false
   return true
 }

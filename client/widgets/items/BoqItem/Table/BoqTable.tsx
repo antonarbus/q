@@ -3,14 +3,14 @@ import { BoqColsHeader } from './boq_cols_header'
 import { BoqTableLayout } from 'client/shared/layouts'
 
 interface Props {
-  index: number
+  itemIndex: number
 }
 
-export const BoqTable = ({ index }: Props): JSX.Element => {
+export const BoqTable = ({ itemIndex }: Props): JSX.Element => {
   return (
     <BoqTableLayout>
-      <BoqColsHeader index={index} />
-      <BoqRows index={index} />
+      <BoqColsHeader itemIndex={itemIndex} />
+      <BoqRows itemIndex={itemIndex} />
     </BoqTableLayout>
   )
 }

@@ -1,6 +1,6 @@
 interface Props {
   html: string
-  index: number
+  itemIndex: number
   rowIndex?: number
 }
 

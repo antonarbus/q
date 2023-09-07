@@ -3,13 +3,13 @@ import { useEffect } from 'react'
 import type FroalaEditor from 'froala-editor'
 
 interface Props {
-  index: number
+  itemIndex: number
   froalaElementRef: RefObject<HTMLDivElement>
   editorRef: MutableRefObject<FroalaEditor | null>
 }
 
 export const usePutCaretAtTheEndOfText = ({
-  index,
+  itemIndex,
   editorRef,
   froalaElementRef,
 }: Props): void => {
@@ -39,5 +39,5 @@ export const usePutCaretAtTheEndOfText = ({
 
     froalaElementRef.current?.addEventListener('click', focusOnTextIfCellOrPaddingAreClicked)
 
-  }, [index])
+  }, [itemIndex])
 }
