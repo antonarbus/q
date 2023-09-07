@@ -17,6 +17,7 @@ import { saveBoqHeaderTextReducer } from './reducers/saveBoqHeaderTextReducer'
 import { saveColWidthReducer } from './reducers/saveColWidthReducer'
 import { makeItemBitWiderReducer } from './reducers/makeItemBitWiderReducer'
 import { reOrderBoqRowsReducer } from './reducers/reOrderBoqRowsReducer'
+import { saveBoqRowHeightAndWidthReducer } from './reducers/saveBoqRowHeightAndWidthReducer'
 
 export type ItemsState = Item[]
 
@@ -36,6 +37,7 @@ export const itemsSlice = createSlice({
     saveItemWidth: saveItemWidthReducer,
     makeItemBitWider: makeItemBitWiderReducer,
     saveItemHeight: saveItemHeightReducer,
+    saveBoqRowHeightAndWidth: saveBoqRowHeightAndWidthReducer,
     saveItemHeights: saveItemHeightsReducer, // todo: not used anywhere
     saveItemText: saveItemTextReducer,
     removePasteItem: removePasteItemReducer,
