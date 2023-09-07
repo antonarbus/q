@@ -9,6 +9,8 @@ interface Common {
 export interface BoqRow {
   id: string
   type: 'boq paste' | 'boq row'
+  height: number
+  width: number
   number: {
     html: string
     value: number

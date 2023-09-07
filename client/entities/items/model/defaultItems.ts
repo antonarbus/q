@@ -7,6 +7,7 @@ export const defaultItems: Item[] = [
     type: 'text',
     width: 800,
     height: 0,
+    width: 0,
     msg: '',
     text: {
       html: '<div>editable text</div>',
@@ -17,6 +18,7 @@ export const defaultItems: Item[] = [
     type: 'boq',
     width: 700,
     height: 0,
+    width: 0,
     msg: '',
     boq: {
       header: {
@@ -60,6 +62,8 @@ export const defaultItems: Item[] = [
         {
           id: nanoid(3),
           type: 'boq row',
+          height: 0,
+          width: 0,
           number: {
             html: '1',
             value: 1,
@@ -83,6 +87,8 @@ export const defaultItems: Item[] = [
         {
           id: nanoid(3),
           type: 'boq row',
+          height: 0,
+          width: 0,
           number: {
             html: '2',
             value: 2,
@@ -106,6 +112,8 @@ export const defaultItems: Item[] = [
         {
           id: nanoid(3),
           type: 'boq row',
+          height: 0,
+          width: 0,
           number: {
             html: '3',
             value: 3,
@@ -134,6 +142,7 @@ export const defaultItems: Item[] = [
     type: 'text',
     width: 600,
     height: 0,
+    width: 0,
     msg: '',
     text: {
       html: '<div>editable text</div>',
@@ -144,6 +153,7 @@ export const defaultItems: Item[] = [
     type: 'text',
     width: 500,
     height: 0,
+    width: 0,
     msg: '',
     text: {
       html: '<div>editable text</div>',

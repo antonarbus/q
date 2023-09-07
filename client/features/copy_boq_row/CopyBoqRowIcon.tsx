@@ -4,7 +4,7 @@ import { MdCopyAll } from 'react-icons/md'
 import { motion } from 'framer-motion'
 import { cleanHtml } from 'client/shared/lib/itemsUtils'
 import { copySlice } from 'client/entities/copy'
-import { saveItemHeightByIndex } from 'client/entities/items'
+import { itemsSlice, saveItemHeightByIndex } from 'client/entities/items'
 import type { MouseEvent } from 'react'
 import { className } from 'client/shared/className'
 import type { BoqRow } from 'client/shared/types'
@@ -15,7 +15,7 @@ interface Props {
   boqRow: BoqRow
 }
 
-export const CopyBoqRowIcon = ({ index, rowIndex, boqRow }: Props): JSX.Element => {
+export const CopyBoqRowIcon = ({ index, rowIndex }: Props): JSX.Element => {
   const isCopyable = useSelectorTyped(state => state.copy.isCopyable)
   const disabled = !isCopyable
 
@@ -34,26 +34,37 @@ export const CopyBoqRowIcon = ({ index, rowIndex, boqRow }: Props): JSX.Element 
       onClick={(e: MouseEvent): void => {
         if (disabled) return
 
-        // todo: as our icon inside tr we can get it easier then by index
         // saveItemHeightByIndex({ index })
-
-        const itemToCopy = boqRow
-
         const clickedIconElement = e.target
+
         if (!(clickedIconElement instanceof Element)) return
+
         const boqRowElement = clickedIconElement.closest('.tr')
-        console.log('🚀  boqRowElement:', boqRowElement)
-        if (!(boqRowElement instanceof Element)) return
+        if (!boqRowElement) return
+
+        dispatch(itemsSlice.actions.saveBoqRowHeightAndWidth({
+          index,
+          rowIndex,
+          height: boqRowElement.clientHeight,
+          width: boqRowElement.clientWidth,
+        }))
+
 
 
         const html = boqRowElement.outerHTML
         const cleanedHtml = cleanHtml(html)
 
-        const item = { ...itemToCopy, previewHtml: cleanedHtml }
+        const item = getState().items[index]
+        if (item?.type !== 'boq') return
+        const boqRow = item.boq.rows[rowIndex]
+        if (!boqRow) return
+
+
+        const itemForCopyContainer = { ...boqRow, previewHtml: cleanedHtml }
 
         // todo: add width and height on boq row items
         // todo: may be add dedicated reducer or rename this one or make universal, to be checked
-        dispatch(copySlice.actions.addItemIntoCopyContainer(item))
+        dispatch(copySlice.actions.addItemIntoCopyContainer(itemForCopyContainer))
         dispatch(copySlice.actions.allowToPaste())
 
         const isCopyContainer = getState().copy.isCopyContainer
