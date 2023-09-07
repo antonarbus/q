@@ -2,7 +2,7 @@ import type { Variants } from 'framer-motion'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useSelectorTyped } from 'client/shared/hooks'
 import { containerPadding, containerWidth, itemMarginBottom } from './CopyContainer'
-import { theme } from 'client/shared/clients'
+import { getState, theme } from 'client/shared/clients'
 import { ScaledCopyItem } from './ScaledCopyItem'
 
 interface Props {
@@ -50,14 +50,12 @@ const variants: Variants = {
 
 export const FirstCopiedItem = (): JSX.Element | null => {
   const items = useSelectorTyped(state => state.copy.items)
-  const previews = useSelectorTyped(state => state.copy.previews)
   const isCopying = useSelectorTyped(state => state.copy.isCopying)
 
   const firstItem = items[0]
-  const firstPreview = previews[0]
+  const firstPreview = getState().copy.previews[0]
 
   if (!firstItem) return null
-  if (!firstPreview) return null
 
   const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / firstItem.width
   const height = firstItem.height * scaleFactorForFirstItem
@@ -93,7 +91,7 @@ export const FirstCopiedItem = (): JSX.Element | null => {
         }}
       >
         <ScaledCopyItem
-          html={firstPreview}
+          html={firstPreview ?? '∑'}
           width={firstItem.width}
           scaleFactor={`${scaleFactorForFirstItem}`}
         />

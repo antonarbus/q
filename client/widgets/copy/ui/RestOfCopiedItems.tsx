@@ -2,7 +2,7 @@ import type { Variants } from 'framer-motion'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useSelectorTyped } from 'client/shared/hooks'
 import { containerPadding, containerWidth, itemMarginBottom } from './CopyContainer'
-import { theme } from 'client/shared/clients'
+import { getState, theme } from 'client/shared/clients'
 import { ScaledCopyItem } from './ScaledCopyItem'
 import { useRef } from 'react'
 
@@ -86,7 +86,7 @@ export const RestOfCopiedItems = (): JSX.Element | null => {
       >
         {items.map((item, index) => {
           const scaleFactor = (containerWidth - 2 * containerPadding) / item.width
-          const preview = previews[index]
+          const preview = getState().copy.previews[index]
 
           if (index === 0) return null
 
