@@ -49,8 +49,6 @@ export const CopyBoqRowIcon = ({ index, rowIndex }: Props): JSX.Element => {
           width: boqRowElement.clientWidth,
         }))
 
-
-
         const html = boqRowElement.outerHTML
         const cleanedHtml = cleanHtml(html)
 
@@ -59,11 +57,8 @@ export const CopyBoqRowIcon = ({ index, rowIndex }: Props): JSX.Element => {
         const boqRow = item.boq.rows[rowIndex]
         if (!boqRow) return
 
-
         const itemForCopyContainer = { ...boqRow, previewHtml: cleanedHtml }
 
-        // todo: add width and height on boq row items
-        // todo: may be add dedicated reducer or rename this one or make universal, to be checked
         dispatch(copySlice.actions.addItemIntoCopyContainer(itemForCopyContainer))
         dispatch(copySlice.actions.allowToPaste())
 
