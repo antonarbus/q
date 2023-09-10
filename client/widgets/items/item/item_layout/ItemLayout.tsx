@@ -3,7 +3,7 @@ import type { ComponentClass, ReactNode } from 'react'
 import { SortableElement } from 'react-sortable-hoc'
 import { motion } from 'framer-motion'
 import { theme } from 'client/shared/clients'
-import { ActionsContainer } from './ActionsContainer'
+import { ItemActionsContainer } from './ItemActionsContainer'
 import { ResizablePaper } from './ResizablePaper'
 import { className } from 'client/shared/className'
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from 'client/shared/types'
@@ -74,7 +74,7 @@ export const ItemLayout: ComponentClass<SortableItem> = SortableElement(({
         width: '100%',
       }}
     >
-      <ActionsContainer itemActionElements={itemActionElements} />
+      <ItemActionsContainer itemActionElements={itemActionElements} />
       <ResizablePaper
         itemIndex={itemIndex}
         disableResize={disableResize}
@@ -85,7 +85,7 @@ export const ItemLayout: ComponentClass<SortableItem> = SortableElement(({
       >
         {children}
       </ResizablePaper>
-      <ActionsContainer /> {/* Right action container is used for symmetry, no icons inside */}
+      <ItemActionsContainer /> {/* Right action container is used for symmetry, no icons inside */}
     </motion.div>
   )
 })

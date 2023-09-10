@@ -34,7 +34,9 @@ const movePasteTextAfterCursor = (e: MouseEvent): void => {
     return
   }
 
-  const actionsContainer = (e.target as Element).closest(`.${className.actions}`)
+  const actionsContainer = (e.target as Element).closest(`.${className.actionsContainer}`)
+
+  console.log('🚀  actionsContainer:', actionsContainer)
 
   if (actionsContainer && isPasteTextShown) {
     dispatch(copySlice.actions.hidePasteText())
