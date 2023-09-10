@@ -5,6 +5,8 @@ import { copySlice } from 'client/entities/copy'
 import { itemsSlice } from 'client/entities/items'
 import type { CopyPlace } from 'client/shared/types'
 import { className } from 'client/shared/className'
+import { useSelectorTyped } from 'client/shared/hooks'
+import { useEffect } from 'react'
 
 interface Props {
   item: Element
@@ -34,17 +36,16 @@ const movePasteTextAfterCursor = (e: MouseEvent): void => {
     return
   }
 
-  const actionsContainer = (e.target as Element).closest(`.${className.actionsContainer}`)
+  const elementsUnderCursor = document.elementsFromPoint(e.x, e.y)
+  const overActionsContainer = elementsUnderCursor.some(element => element.classList.contains(className.actionsContainer))
 
-  console.log('🚀  actionsContainer:', actionsContainer)
-
-  if (actionsContainer && isPasteTextShown) {
+  if (overActionsContainer && isPasteTextShown) {
     dispatch(copySlice.actions.hidePasteText())
     dispatch(itemsSlice.actions.removePasteItem())
     return
   }
 
-  if (!actionsContainer && !isPasteTextShown) {
+  if (!overActionsContainer && !isPasteTextShown) {
     dispatch(copySlice.actions.showPasteText())
     return
   }
@@ -72,15 +73,32 @@ const movePasteTextAfterCursor = (e: MouseEvent): void => {
 }
 
 export const useMovePasteTextAfterCursor = (): void => {
-  useEffectOnce(() => {
-    document.body.style.cursor = 'pointer'
-    document.addEventListener('mousemove', movePasteTextAfterCursor, {
-      passive: true,
-    })
-  })
+  const typeOfNextPasteItem = useSelectorTyped(state => state.copy.items.at(0)?.type)
 
-  useUnmount(() => {
-    document.body.style.removeProperty('cursor')
-    document.removeEventListener('mousemove', movePasteTextAfterCursor)
-  })
+  const isItem = typeOfNextPasteItem === 'boq' || typeOfNextPasteItem === 'text'
+  const isBoqRow = typeOfNextPasteItem === 'boq row'
+
+  useEffect(() => {
+    if (isItem) {
+      document.body.style.cursor = 'pointer'
+      document.addEventListener('mousemove', movePasteTextAfterCursor, {
+        passive: true,
+      })
+    }
+
+    if (isBoqRow) {
+      console.log('here goes event listener for tracking paste text position for boq row')
+    }
+
+    return () => {
+      console.log('remove paste listeners')
+      document.body.style.removeProperty('cursor')
+      document.removeEventListener('mousemove', movePasteTextAfterCursor)
+    }
+  }, [isItem, isBoqRow])
+
+  // useUnmount(() => {
+  //   document.body.style.removeProperty('cursor')
+  //   document.removeEventListener('mousemove', movePasteTextAfterCursor)
+  // })
 }
