@@ -5,9 +5,9 @@ interface Props {
   itemActionElements?: ReactNode
 }
 
-export const ActionsContainer = ({ itemActionElements }: Props): JSX.Element => (
+export const ItemActionsContainer = ({ itemActionElements }: Props): JSX.Element => (
   <div
-    className={className.actions}
+    className={className.actionsContainer}
     css={{
       display: 'flex',
       flexDirection: 'column',

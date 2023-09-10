@@ -4,9 +4,8 @@ import { MdCopyAll } from 'react-icons/md'
 import { motion } from 'framer-motion'
 import { cleanHtml } from 'client/shared/lib/itemsUtils'
 import { copySlice } from 'client/entities/copy'
-import { itemsSlice, saveItemHeightByIndex } from 'client/entities/items'
+import { itemsSlice } from 'client/entities/items'
 import type { MouseEvent } from 'react'
-import { className } from 'client/shared/className'
 import type { BoqRow } from 'client/shared/types'
 
 interface Props {

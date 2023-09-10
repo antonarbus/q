@@ -1,6 +1,7 @@
 import { Box } from '@mui/material'
 import { CopyBoqRowIcon } from 'client/features/copy_boq_row'
 import { DragIcon } from 'client/features/drag_item'
+import { className } from 'client/shared/className'
 import type { BoqRow } from 'client/shared/types'
 
 interface Props {
@@ -9,14 +10,13 @@ interface Props {
   boqRow: BoqRow
 }
 
-export const IconsCell = ({ itemIndex, rowIndex, boqRow }: Props): JSX.Element => {
+export const BoqRowActionsContainer = ({ itemIndex, rowIndex, boqRow }: Props): JSX.Element => {
   return (
     <Box
-      className='td icons'
+      className={className.actionsContainer}
       sx={{
         position: 'absolute',
         top: 0,
-        height: 0,
       }}
     >
       <Box

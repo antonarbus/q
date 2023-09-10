@@ -3,8 +3,6 @@ import type { ComponentClass, ReactNode } from 'react'
 import { SortableElement } from 'react-sortable-hoc'
 import { motion } from 'framer-motion'
 import { theme } from 'client/shared/clients'
-// import { ActionsContainer } from './ActionsContainer'
-import { className } from 'client/shared/className'
 
 interface Props {
   children: ReactNode
