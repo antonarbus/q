@@ -2,31 +2,16 @@ import { dispatch, getState } from 'client/shared/clients'
 import isEqual from 'lodash.isequal'
 import { copySlice } from 'client/entities/copy'
 import { itemsSlice } from 'client/entities/items'
-import type { CopyPlace } from 'client/shared/types'
 import { className } from 'client/shared/className'
-
-interface Props {
-  item: Element
-  e: MouseEvent
-}
-
-const getPastePlace = ({ item, e }: Props): CopyPlace => {
-  const { height, top } = item.getBoundingClientRect()
-  const yWithinElement = e.clientY - top
-  const distToTop = yWithinElement
-  const distToBottom = height - yWithinElement
-  const distanceToEdge = 0.2 * height
-
-  if (distToTop < 20) return { pastePos: 'top', itemId: item.id }
-  if (distToBottom < 20) return { pastePos: 'bottom', itemId: item.id }
-  return { pastePos: 'middle', itemId: item.id }
-}
+import { getPastePlace } from './getPastePlace'
 
 export const movePasteTextForItem = (e: MouseEvent): void => {
+  if (!(e.target instanceof Element)) return
+
   const prevPlace = getState().copy.place
   const isPasteTextShown = getState().copy.isPasteTextShown
 
-  const nav = (e.target as Element).closest('nav')
+  const nav = e.target.closest('nav')
 
   if (nav) {
     if (!isPasteTextShown) return
@@ -59,9 +44,10 @@ export const movePasteTextForItem = (e: MouseEvent): void => {
   const isNarrowGapAboveNav = e.clientY < 10
   if (isNarrowGapAboveNav) return
 
-  const item = (e.target as Element).closest(`.${className.item}`)
+  const item = (e.target).closest(`.${className.item}`)
+  if (!item) return
 
-  const pastePlace = item ? getPastePlace({ item, e }) : prevPlace
+  const pastePlace = getPastePlace({ item, e, distanceToEdge: 20 })
 
   if (isEqual(pastePlace, prevPlace)) return
 
