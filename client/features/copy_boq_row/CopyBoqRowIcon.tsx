@@ -7,6 +7,7 @@ import { copySlice } from 'client/entities/copy'
 import { itemsSlice } from 'client/entities/items'
 import type { MouseEvent } from 'react'
 import type { BoqRow } from 'client/shared/types'
+import { className } from 'client/shared/className'
 
 interface Props {
   itemIndex: number
@@ -35,7 +36,7 @@ export const CopyBoqRowIcon = ({ itemIndex, rowIndex }: Props): JSX.Element => {
         const clickedIconElement = e.target
         if (!(clickedIconElement instanceof Element)) return
 
-        const boqRowElement = clickedIconElement.closest('.tr')
+        const boqRowElement = clickedIconElement.closest(`.${className.boqRow}`)
         if (!boqRowElement) return
 
         dispatch(itemsSlice.actions.saveBoqRowHeightAndWidth({

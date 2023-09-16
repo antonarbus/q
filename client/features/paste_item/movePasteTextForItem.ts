@@ -15,6 +15,7 @@ const getPastePlace = ({ item, e }: Props): CopyPlace => {
   const yWithinElement = e.clientY - top
   const distToTop = yWithinElement
   const distToBottom = height - yWithinElement
+  const distanceToEdge = 0.2 * height
 
   if (distToTop < 20) return { pastePos: 'top', itemId: item.id }
   if (distToBottom < 20) return { pastePos: 'bottom', itemId: item.id }
