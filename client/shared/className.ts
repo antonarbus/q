@@ -4,4 +4,5 @@ export const className = {
   itemActions: 'item-actions',
   boqRowActions: 'item-actions',
   actionsContainer: 'actions-container',
+  boqRow: 'boq-row',
 }
