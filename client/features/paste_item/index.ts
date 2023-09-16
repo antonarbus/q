@@ -1,2 +1,2 @@
 export { usePasteClick } from './usePasteClick'
-export { useMovePasteTextAfterCursor } from './useMovePasteTextAfterCursor'
+export { useMovePasteText as useMovePasteTextAfterCursor } from './useMovePasteText'

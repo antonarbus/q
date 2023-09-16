@@ -1,12 +1,9 @@
-import { useEffectOnce, useUnmount } from 'react-use'
 import { dispatch, getState } from 'client/shared/clients'
 import isEqual from 'lodash.isequal'
 import { copySlice } from 'client/entities/copy'
 import { itemsSlice } from 'client/entities/items'
 import type { CopyPlace } from 'client/shared/types'
 import { className } from 'client/shared/className'
-import { useSelectorTyped } from 'client/shared/hooks'
-import { useEffect } from 'react'
 
 interface Props {
   item: Element
@@ -24,7 +21,7 @@ const getPastePlace = ({ item, e }: Props): CopyPlace => {
   return { pastePos: 'middle', itemId: item.id }
 }
 
-const movePasteTextAfterCursor = (e: MouseEvent): void => {
+export const movePasteTextForItem = (e: MouseEvent): void => {
   const prevPlace = getState().copy.place
   const isPasteTextShown = getState().copy.isPasteTextShown
 
@@ -37,15 +34,15 @@ const movePasteTextAfterCursor = (e: MouseEvent): void => {
   }
 
   const elementsUnderCursor = document.elementsFromPoint(e.x, e.y)
-  const overActionsContainer = elementsUnderCursor.some(element => element.classList.contains(className.actionsContainer))
+  const isOverActionsContainer = elementsUnderCursor.some(element => element.classList.contains(className.actionsContainer))
 
-  if (overActionsContainer && isPasteTextShown) {
+  if (isOverActionsContainer && isPasteTextShown) {
     dispatch(copySlice.actions.hidePasteText())
     dispatch(itemsSlice.actions.removePasteItem())
     return
   }
 
-  if (!overActionsContainer && !isPasteTextShown) {
+  if (!isOverActionsContainer && !isPasteTextShown) {
     dispatch(copySlice.actions.showPasteText())
     return
   }
@@ -70,35 +67,4 @@ const movePasteTextAfterCursor = (e: MouseEvent): void => {
   dispatch(copySlice.actions.updatePastePos(pastePlace))
   dispatch(copySlice.actions.showPasteText())
   dispatch(itemsSlice.actions.insertPasteItem(pastePlace))
-}
-
-export const useMovePasteTextAfterCursor = (): void => {
-  const typeOfNextPasteItem = useSelectorTyped(state => state.copy.items.at(0)?.type)
-
-  const isItem = typeOfNextPasteItem === 'boq' || typeOfNextPasteItem === 'text'
-  const isBoqRow = typeOfNextPasteItem === 'boq row'
-
-  useEffect(() => {
-    if (isItem) {
-      document.body.style.cursor = 'pointer'
-      document.addEventListener('mousemove', movePasteTextAfterCursor, {
-        passive: true,
-      })
-    }
-
-    if (isBoqRow) {
-      console.log('here goes event listener for tracking paste text position for boq row')
-    }
-
-    return () => {
-      console.log('remove paste listeners')
-      document.body.style.removeProperty('cursor')
-      document.removeEventListener('mousemove', movePasteTextAfterCursor)
-    }
-  }, [isItem, isBoqRow])
-
-  // useUnmount(() => {
-  //   document.body.style.removeProperty('cursor')
-  //   document.removeEventListener('mousemove', movePasteTextAfterCursor)
-  // })
 }
