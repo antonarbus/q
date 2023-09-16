@@ -23,7 +23,7 @@ export const BoqRowLayout: ComponentClass<SortableItem> = SortableElement(({
 }: Props) => {
   return (
     <motion.div
-      id={rowId}
+      // id={rowId}
       // className={className.item}
       initial={{
         height: 0,

@@ -4,11 +4,13 @@ import { className } from '../className'
 
 interface Props {
   children: ReactNode
+  id: string
 }
 
-export const BoqRowLayout = ({ children }: Props): JSX.Element => {
+export const BoqRowLayout = ({ children, id }: Props): JSX.Element => {
   return (
     <Box
+      id={id}
       className={className.boqRow}
       sx={{
         display: 'flex',
