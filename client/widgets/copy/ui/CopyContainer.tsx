@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { FirstCopiedItem } from './FirstCopiedItem'
 import { RestOfCopiedItems } from './RestOfCopiedItems'
 import { useCopyContainerAnimation } from './useCopyContainerAnimation'
-import { useMovePasteTextAfterCursor, usePasteClick } from 'client/features/paste_item'
+import { useMovePasteText, usePasteClick } from 'client/features/paste_item'
 import { useDisableNavItems } from 'client/features/disable_nav_items'
 import { PressEsc } from 'client/features/exit_copy_on_esc'
 
@@ -12,7 +12,7 @@ export const containerPadding = 20
 export const itemMarginBottom = 5
 
 export const CopyContainer = (): JSX.Element => {
-  useMovePasteTextAfterCursor()
+  useMovePasteText()
   usePasteClick()
   useDisableNavItems()
   const copyContainerAnimationControls = useCopyContainerAnimation()
