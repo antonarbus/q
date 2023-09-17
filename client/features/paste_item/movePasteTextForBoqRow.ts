@@ -53,7 +53,7 @@ export const movePasteTextForBoqRow = (e: MouseEvent): void => {
   if (isEqual(pastePlace, prevPlace)) return
 
   dispatch(copySlice.actions.updatePastePos(pastePlace))
-  console.log('🚀  pastePlace:', pastePlace)
   dispatch(copySlice.actions.showPasteText())
   // dispatch(itemsSlice.actions.insertPasteItem(pastePlace))
+  dispatch(itemsSlice.actions.insertPasteBoqRow(pastePlace))
 }
