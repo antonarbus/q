@@ -8,7 +8,7 @@ import { ResizablePaper } from './ResizablePaper'
 import { className } from 'client/shared/className'
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from 'client/shared/types'
 
-interface Props {
+type Props = {
   children: ReactNode
   itemHeight: number
   itemId: string
@@ -21,7 +21,7 @@ interface Props {
   onItemResizeStart?: OnItemResizeStart
 }
 
-interface SortableItem extends SortableElementProps, Props { }
+type SortableItem = SortableElementProps & Props
 
 export const ItemLayout: ComponentClass<SortableItem> = SortableElement(({
   itemIndex,

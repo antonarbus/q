@@ -1,4 +1,3 @@
-/* eslint-disable */
 import axios from 'axios'
 import { dispatch } from 'client/shared/clients'
 import { token } from './token'

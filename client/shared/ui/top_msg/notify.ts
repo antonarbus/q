@@ -2,7 +2,7 @@
 import type { ReactNode } from 'react'
 import { toast, Slide, Bounce, Flip, Zoom } from 'react-toastify'
 
-interface Props {
+type Props = {
   msg: ReactNode | string
   position?: 'bottom-center' | 'bottom-left' | 'bottom-right' | 'top-center' | 'top-left' | 'top-right'
   hideProgressBar?: boolean

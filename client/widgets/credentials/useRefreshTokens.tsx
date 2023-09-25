@@ -11,7 +11,7 @@ import type { RefreshAipRes } from 'server/api/refreshRouter'
 import { apiUrl } from 'server/apiUrls'
 import { userSlice } from 'client/entities/user'
 
-interface Props {
+type Props = {
   withLoadingState?: boolean
 }
 
@@ -30,8 +30,8 @@ interface Props {
 // but no need to do, because all protected apis calls will do the same
 // he may stay logged in forever without making any harm
 
-interface FuncReturnType {
-  isCheckingTokens: boolean;
+type FuncReturnType = {
+  isCheckingTokens: boolean
 }
 
 export const useRefreshTokens = ({ withLoadingState }: Props): FuncReturnType => {
@@ -87,7 +87,6 @@ export const useRefreshTokens = ({ withLoadingState }: Props): FuncReturnType =>
           dispatch(userSlice.actions.rememberLoggedUser({ email, isLogged: true, roles }))
           navUpdate.login()
           console.log(`tokens for ${email} are refreshed`)
-          return
         }
       } catch (error) {
         console.log(error)

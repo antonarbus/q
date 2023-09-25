@@ -4,7 +4,7 @@ const shrinkElementSlightly = (el: HTMLElement): void => {
   el.style.width = el.offsetWidth - 10 + 'px'
 }
 
-export interface ItemsMediaQueryWidths {
+export type ItemsMediaQueryWidths = {
   logoExtension: number
   logoPart: number
   icon: number
@@ -13,7 +13,7 @@ export interface ItemsMediaQueryWidths {
 }
 
 export const calcNavMediaQueryParams = (nav: HTMLElement, logo: HTMLElement): ItemsMediaQueryWidths => {
-  interface Props {
+  type Props = {
     elsToHideClass?: string
     elsToShowClass?: string
   }

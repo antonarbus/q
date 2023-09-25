@@ -5,7 +5,7 @@ import { Box } from '@mui/material'
 import { useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 
-interface Props {
+type Props = {
   padding?: number | string
   initHtmlGetter: () => string
   additionalStyle?: SxProps

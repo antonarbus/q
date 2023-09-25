@@ -1,5 +1,5 @@
 import { itemsSlice } from 'client/entities/items'
-import { dispatch, getState, store } from 'client/shared/clients'
+import { dispatch, getState } from 'client/shared/clients'
 import { saveItemsLocally } from 'client/shared/lib'
 import type { OnFroalaContentChange } from 'client/shared/types'
 

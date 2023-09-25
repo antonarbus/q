@@ -4,4 +4,3 @@ import type { AppDispatch, RootState } from '../types'
 
 export const useDispatchTyped = (): AppDispatch => useDispatch<AppDispatch>()
 export const useSelectorTyped: TypedUseSelectorHook<RootState> = useSelector
-

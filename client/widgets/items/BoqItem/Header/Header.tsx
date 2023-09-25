@@ -4,7 +4,7 @@ import { Currency } from './Currency'
 import { SubtotalText } from './SubtotalText'
 import { Price } from './Price'
 
-interface Props {
+type Props = {
   itemIndex: number
 }
 

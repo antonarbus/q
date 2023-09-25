@@ -2,12 +2,12 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
 import type { CopyPlace, Copyable } from 'client/shared/types'
 
-interface Props {
+type Props = {
   isCopyMode: boolean
   isCopyContainer: boolean
-  initCords: { x: number; y: number }
+  initCords: { x: number, y: number }
   items: Copyable[]
-  previews: string[],
+  previews: string[]
   place: CopyPlace
   isCopying: boolean
   isPasteTextShown: boolean

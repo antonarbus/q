@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef } from 'react'
 
-interface Props {
+type Props = {
   width: number
   scaleFactor: string
   html: string

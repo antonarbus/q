@@ -9,19 +9,17 @@ export type RouteHandler = (req: Request, res: Response, next: NextFunction) => 
 export type RouteHandlerAsync = (req: Request, res: Response, next: NextFunction) => Promise<void>
 
 // https://plainenglish.io/blog/typed-express-request-and-response-with-typescript
-export interface ReqWithBody<TBodyObject> extends Request {
+export type ReqWithBody<TBodyObject> = {
   body: TBodyObject
-}
-export interface ReqWithQuery<TQueryObject extends Query> extends Request {
+} & Request
+
+export type ReqWithQuery<TQueryObject extends Query> = {
   query: TQueryObject
-}
+} & Request
+
 export type ReqExtended<TOtherProps> = Request & TOtherProps
 
-export interface ReqWithBodyAndQuery<T extends Query, U> extends Request {
-  body: U,
+export type ReqWithBodyAndQuery<T extends Query, U> = {
+  body: U
   query: T
-}
-
-export interface ResWithBody<ResBody> extends Response {
-  json: Send<ResBody, this>;
-}
+} & Request

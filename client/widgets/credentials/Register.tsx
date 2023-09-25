@@ -47,7 +47,11 @@ export const Register = (): JSX.Element => {
         }
         reference={cardRef}
       >
-        <form onSubmit={(e: FormEvent): void => void registerUser({ e, email, password })}>
+        <form
+          onSubmit={async (e: FormEvent): Promise<void> => {
+            await registerUser({ e, email, password })
+          }}
+        >
           <EmailInput
             email={email}
             setEmail={setEmail}

@@ -1,10 +1,10 @@
 import type { MutableRefObject } from 'react'
 import { useEffect, useRef, useState } from 'react'
 
-interface Props {
+type Props = {
   itemIndex: number
 }
-interface ReturnFunc {
+type ReturnFunc = {
   observerRef: MutableRefObject<HTMLDivElement | null>
   isInsideViewPort: boolean
 }

@@ -4,15 +4,15 @@ import { SortableElement } from 'react-sortable-hoc'
 import { motion } from 'framer-motion'
 import { theme } from 'client/shared/clients'
 
-interface Props {
+type Props = {
   children: ReactNode
   // itemHeight: number
-  rowId: string,
+  rowId: string
   // itemActionElements?: ReactNode
-  i: number,
+  i: number
 }
 
-interface SortableItem extends SortableElementProps, Props { }
+type SortableItem = SortableElementProps & Props
 
 export const BoqRowLayout: ComponentClass<SortableItem> = SortableElement(({
   i,

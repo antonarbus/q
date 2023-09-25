@@ -4,7 +4,7 @@ import type { JwtPayloadExtended } from '../services/jwt'
 import { refreshJwtTokenExpirationSeconds, token } from '../services/jwt'
 import type { Next, Req, Res } from '../types'
 
-export interface RefreshAipRes {
+export type RefreshAipRes = {
   status: string
   message: string
   email: string
@@ -18,8 +18,8 @@ refreshRouter.get('/', async (req: Req, res: Res, next: Next) => {
   try {
     // get refresh token from cookie
 
-    interface Props {
-      'refreshJwtToken': string | undefined,
+    type Props = {
+      'refreshJwtToken': string | undefined
     }
     const refreshJwtToken = (req.cookies as Props).refreshJwtToken
 

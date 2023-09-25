@@ -6,7 +6,7 @@ import { Box } from '@mui/material'
 import { useStartFroala } from './useStartFroala'
 import { usePutCaretAtTheEndOfText } from './usePutCaretAtTheEndOfText'
 
-interface Props {
+type Props = {
   itemIndex: number
   padding?: number | string
   initHtmlGetter: () => string

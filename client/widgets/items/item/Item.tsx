@@ -1,7 +1,6 @@
-
 import type { ReactNode } from 'react'
 import { useIsItemDisabled } from './useIsItemDisabled'
-import { getState, store } from 'client/shared/clients'
+import { getState } from 'client/shared/clients'
 import { DragIcon } from 'client/features/drag_item'
 import { CopyIcon } from 'client/features/copy_item/CopyIcon'
 import { CutIcon } from 'client/features/cut_item/CutIcon'
@@ -11,7 +10,7 @@ import { PasteHere } from './PasteHere'
 import { ItemLayout } from './item_layout'
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from 'client/shared/types'
 
-interface Props {
+type Props = {
   itemIndex: number
   children: ReactNode
   disableResize?: boolean

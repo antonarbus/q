@@ -1,7 +1,7 @@
 import type { Item } from 'client/shared/types'
 import { cleanItems } from './cleanItems'
 
-interface Props {
+type Props = {
   items: Item[]
 }
 

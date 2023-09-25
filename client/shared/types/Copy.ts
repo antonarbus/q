@@ -1,8 +1,6 @@
-import type { BoqRow, Item } from './Item'
-
 export type PastePos = 'bottom' | 'middle' | 'top'
 
-export interface CopyPlace {
+export type CopyPlace = {
   itemId: string
   pastePos: PastePos
 }

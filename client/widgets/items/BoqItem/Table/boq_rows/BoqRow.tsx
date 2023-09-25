@@ -7,7 +7,7 @@ import { QtyCell } from './boq_cells/QtyCell'
 import { PriceCell } from './boq_cells/PriceCell'
 import { BoqRowLayout } from 'client/shared/layouts'
 
-interface Props {
+type Props = {
   itemIndex: number
   rowIndex: number
   boqRow: BoqRowType

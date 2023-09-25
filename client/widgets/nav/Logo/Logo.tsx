@@ -2,7 +2,7 @@ import { useSelectorTyped } from 'client/shared/hooks'
 import type { RefObject } from 'react'
 import { Link } from 'react-router-dom'
 
-interface Prop {
+type Prop = {
   logoRef: RefObject<HTMLDivElement>
 }
 

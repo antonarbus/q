@@ -1,11 +1,11 @@
 import type { MutableRefObject } from 'react'
 import { useEffect, useRef } from 'react'
 
-interface Props {
+type Props = {
   froalaElementRef: MutableRefObject<HTMLElement | null>
 }
 
-interface ReturnFunc {
+type ReturnFunc = {
   heightDuringAnimationRef: MutableRefObject<number>
 }
 

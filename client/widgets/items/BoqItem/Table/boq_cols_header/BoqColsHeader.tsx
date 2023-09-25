@@ -5,7 +5,7 @@ import { QtyColHeader } from './QtyColHeader'
 import { PriceColHeader } from './PriceColHeader'
 import { BoqColsHeaderLayout } from 'client/shared/layouts'
 
-interface Props {
+type Props = {
   itemIndex: number
 }
 

@@ -1,4 +1,3 @@
-
 import express from 'express'
 import { UserModel } from '../db/models/user.model'
 import { verifyTokenMiddleware } from '../middleware/verifyTokenMiddleware'
@@ -6,11 +5,11 @@ import type { Next, ReqWithBody, Res } from '../types'
 
 export const userEmailRouter = express.Router()
 
-interface Body {
+type Body = {
   email: string | undefined
 }
 
-export interface UserEmailRes {
+export type UserEmailRes = {
   status: string
   message: string
   email: string | undefined
@@ -34,4 +33,3 @@ const getUserEmail = async (req: ReqWithBody<Body>, res: Res, next: Next): Promi
 }
 
 userEmailRouter.get('/', verifyTokenMiddleware, getUserEmail)
-

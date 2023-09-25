@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useEffectOnce } from 'react-use'
 import { navStructure } from '../navStructure'
 
-interface Shortcuts {
+type Shortcuts = {
   name: string
   shortcut: string[]
   function: (() => void) | null

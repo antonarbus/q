@@ -3,7 +3,7 @@ import { navSlice } from 'client/entities/nav'
 import { dispatch, getState } from 'client/shared/clients'
 import type { MouseEvent, MutableRefObject } from 'react'
 
-interface Props {
+type Props = {
   e: MouseEvent
   navItem: MenuItemTypes | undefined
   id: string

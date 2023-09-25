@@ -1,6 +1,6 @@
 import { ResizableColHeader } from './ResizableColHeader'
 
-interface Props {
+type Props = {
   itemIndex: number
 }
 

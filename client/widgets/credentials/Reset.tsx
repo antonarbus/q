@@ -35,7 +35,9 @@ export const Reset = (): JSX.Element => {
           </Avatar>
         }
       >
-        <form onSubmit={(e: FormEvent): void => void resetPassword({ e, email })}>
+        <form onSubmit={async (e: FormEvent): Promise<void> => {
+          await resetPassword({ e, email })
+        }}>
           <EmailInput
             email={email}
             setEmail={setEmail}

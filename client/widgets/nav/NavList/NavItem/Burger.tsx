@@ -5,7 +5,7 @@ import { navSlice } from 'client/entities/nav'
 import { dispatch, theme } from 'client/shared/clients'
 // https://hamburger-react.netlify.app/
 
-interface Props {
+type Props = {
   screenWidthWhenShowBurger: number
 }
 

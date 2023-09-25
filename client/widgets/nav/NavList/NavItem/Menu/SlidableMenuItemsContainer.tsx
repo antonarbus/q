@@ -3,7 +3,7 @@ import { useSelectorTyped } from 'client/shared/hooks'
 import { MenuItem } from './MenuItem'
 import type { RefObject } from 'react'
 
-interface Props {
+type Props = {
   reference: RefObject<HTMLDivElement>
   idsToMenu: string[]
   className: string

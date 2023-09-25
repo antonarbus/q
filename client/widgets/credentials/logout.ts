@@ -12,7 +12,7 @@ export const logoutUser = async (): Promise<void> => {
   try {
     const res = await fetch(apiUrl.logout, options)
     const data = await res.json() as LogoutApiRes
-    const { status, message, email } = data
+    const { status, message } = data
 
     if (status === 'error') {
       if (message === 'no refresh token in cookies') {
@@ -38,7 +38,6 @@ export const logoutUser = async (): Promise<void> => {
           theme: 'light',
         })
       }
-
     }
 
     if (status === 'ok') {

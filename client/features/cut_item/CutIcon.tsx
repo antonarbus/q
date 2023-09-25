@@ -1,5 +1,5 @@
 import { useSelectorTyped } from 'client/shared/hooks'
-import { dispatch, getState } from 'client/shared/clients'
+import { dispatch, getState, theme } from 'client/shared/clients'
 import { TbCut } from 'react-icons/tb'
 import { motion } from 'framer-motion'
 import { itemsSlice, saveItemHeightByIndex, selectIsItemAlone } from 'client/entities/items'
@@ -8,9 +8,8 @@ import { saveItemsLocally } from 'client/shared/lib'
 import { copySlice } from 'client/entities/copy'
 import type { MouseEvent } from 'react'
 import { className } from 'client/shared/className'
-import { theme } from 'client/shared/clients'
 
-interface Props {
+type Props = {
   itemIndex: number
 }
 

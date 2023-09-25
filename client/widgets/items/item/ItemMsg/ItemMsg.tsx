@@ -2,7 +2,7 @@ import { useSelectorTyped } from 'client/shared/hooks'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRemoveItemMsgAfterSomeTime } from './useRemoveItemMsg'
 
-interface Props {
+type Props = {
   itemIndex: number
 }
 

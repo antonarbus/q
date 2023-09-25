@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs'
 import { refreshJwtTokenExpirationSeconds, token } from '../services/jwt'
 import type { Next, Req, Res } from '../types'
 
-export interface LoginApiRes {
+export type LoginApiRes = {
   status: string
   message: string
   accessJwtToken: string
@@ -17,7 +17,7 @@ export const loginRouter = express.Router()
 loginRouter.post('/', async (req: Req, res: Res, next: Next) => {
   try {
     // get mail & password from body
-    interface Body {
+    type Body = {
       email: string
       password: string
     }

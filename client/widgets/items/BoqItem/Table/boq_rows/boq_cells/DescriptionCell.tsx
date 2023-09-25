@@ -3,7 +3,7 @@ import { selectColumnWidth } from 'client/entities/items'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqRow } from 'client/shared/types'
 
-interface Props {
+type Props = {
   itemIndex: number
   rowIndex: number
   boqRow: BoqRow

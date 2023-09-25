@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import type { ReactNode } from 'react'
 import { className } from '../className'
 
-interface Props {
+type Props = {
   children: ReactNode
   id: string
 }

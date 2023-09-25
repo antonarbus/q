@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { PasswordInput } from './PasswordInput'
 
-interface Props {
+type Props = {
   originalPassword: string
   isConfirmPasswordOk: boolean
   setIsConfirmPasswordOk: (value: boolean) => void

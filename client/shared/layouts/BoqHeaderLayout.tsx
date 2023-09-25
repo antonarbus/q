@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { theme } from '../clients'
 
-interface Props {
+type Props = {
   title: JSX.Element
   subtotalText: React.ReactNode
   price: JSX.Element
@@ -18,7 +18,6 @@ export const BoqHeaderLayout = ({
   hideContentForDevPurposes = false,
   outlinedForDevPurposes = false,
 }: Props): JSX.Element => {
-
   return (
     <Box
       sx={{

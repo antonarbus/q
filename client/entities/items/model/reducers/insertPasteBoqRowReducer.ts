@@ -5,7 +5,6 @@ import type { BoqItem, BoqRow, CopyPlace, PasteItem } from 'client/shared/types'
 import { current } from '@reduxjs/toolkit'
 
 export const insertPasteBoqRowReducer = (state: ItemsState, action: PayloadAction<CopyPlace>): ItemsState => {
-
   const { pastePos, itemId } = action.payload
   console.log('🚀  { pastePos, itemId }:', { pastePos, itemId })
 
@@ -26,5 +25,4 @@ export const insertPasteBoqRowReducer = (state: ItemsState, action: PayloadActio
       return state
     })
   })
-
 }

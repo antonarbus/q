@@ -1,4 +1,4 @@
-export interface MenuItemTypes {
+export type MenuItemTypes = {
   id: string
   name: string
   icon?: React.ReactNode | string

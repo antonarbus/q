@@ -4,9 +4,6 @@ import { Spinner } from 'client/widgets/spinner'
 
 export const PersistentAuth = (): JSX.Element => {
   const { isCheckingTokens } = useRefreshTokens({ withLoadingState: true })
-  return isCheckingTokens ? (
-    <Spinner isShowing title='Password checking' />
-  ) : (
-    <Outlet />
-  )
+  if (isCheckingTokens) return <Spinner isShowing title='Password checking' />
+  return <Outlet />
 }

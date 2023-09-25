@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 const accessJwtTokenExpirationSeconds = 15 * 60 // 15 min
 export const refreshJwtTokenExpirationSeconds = 30 * 24 * 60 * 60 // 30 days
 
-export interface JwtPayloadExtended {
+export type JwtPayloadExtended = {
   email: string
   roles: string[]
 }

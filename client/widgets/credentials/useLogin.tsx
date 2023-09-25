@@ -11,24 +11,24 @@ import { apiUrl } from 'server/apiUrls'
 import { userSlice } from 'client/entities/user'
 import { dispatch } from 'client/shared/clients'
 
-interface StateProps {
+type StateProps = {
   from?: {
     [key: string]: unknown
     pathname: string
   }
 }
 
-interface Props {
+type Props = {
   e: FormEvent
   email: string
   password: string
   cardElement: HTMLElement
 }
 
-interface FuncRes {
-  loginUser: ({ e, email, password, cardElement }: Props) => Promise<void>;
-  httpStatus: HttpStatusType;
-  setHttpStatus: Dispatch<SetStateAction<HttpStatusType>>;
+type FuncRes = {
+  loginUser: ({ e, email, password, cardElement }: Props) => Promise<void>
+  httpStatus: HttpStatusType
+  setHttpStatus: Dispatch<SetStateAction<HttpStatusType>>
 }
 
 export const useLogin = (): FuncRes => {

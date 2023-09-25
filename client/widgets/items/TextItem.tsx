@@ -8,7 +8,7 @@ import { changeItemText } from 'client/features/change_text'
 import { itemTextHtmlGetter } from 'client/entities/items'
 import { onTextItemResizeStop } from 'client/features/resize_item'
 
-interface Props {
+type Props = {
   itemIndex: number
 }
 

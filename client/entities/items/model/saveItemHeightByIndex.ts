@@ -2,7 +2,7 @@ import { dispatch } from 'client/shared/clients'
 import { itemsSlice } from './itemsSlice'
 import { className } from 'client/shared/className'
 
-interface Props {
+type Props = {
   itemIndex: number
 }
 

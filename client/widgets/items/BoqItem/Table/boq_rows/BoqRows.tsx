@@ -6,7 +6,7 @@ import { BoqRow } from './BoqRow'
 import { boqRowsShapeEqualityFn, selectBoqRows } from 'client/entities/items'
 import { onBoqRowDrag } from 'client/features/drag_boq_row'
 
-interface Props {
+type Props = {
   itemIndex: number
 }
 
@@ -26,18 +26,20 @@ export const BoqRows = ({ itemIndex }: Props): JSX.Element => {
     >
       <AnimatePresence initial={false}>
         {boqRows.map((boqRow, rowIndex) => {
-          if (boqRow.type === 'boq row') return (
-            <BoqRowLayout
-              key={boqRow.id}
-              index={rowIndex} // 'index' is internal prop consumed by SortableElement HOC
-              // disabled={isItemDisabled} // internal prop consumed by SortableElement HOC
-              i={rowIndex}
-              // itemHeight={item?.height ?? 0}
-              rowId={boqRow.id}
-            >
-              <BoqRow itemIndex={itemIndex} rowIndex={rowIndex} boqRow={boqRow} />
-            </BoqRowLayout>
-          )
+          if (boqRow.type === 'boq row') {
+            return (
+              <BoqRowLayout
+                key={boqRow.id}
+                index={rowIndex} // 'index' is internal prop consumed by SortableElement HOC
+                // disabled={isItemDisabled} // internal prop consumed by SortableElement HOC
+                i={rowIndex}
+                // itemHeight={item?.height ?? 0}
+                rowId={boqRow.id}
+              >
+                <BoqRow itemIndex={itemIndex} rowIndex={rowIndex} boqRow={boqRow} />
+              </BoqRowLayout>
+            )
+          }
           return 'boq paste'
         })}
       </AnimatePresence>

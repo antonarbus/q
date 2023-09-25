@@ -6,7 +6,7 @@ import { calcNavMediaQueryParams } from './calcNavMediaQueryParams'
 import { useFirstMountState } from 'react-use'
 import { dispatch } from 'client/shared/clients'
 
-interface Props {
+type Props = {
   navRef: RefObject<HTMLDivElement>
   logoRef: RefObject<HTMLDivElement>
 }

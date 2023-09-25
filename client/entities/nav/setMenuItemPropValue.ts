@@ -15,7 +15,8 @@ export const setMenuItemPropValue = <K extends keyof MenuItemTypes>({ menu, id, 
       return
     }
 
-    if (el.menuItems)
+    if (el.menuItems) {
       setMenuItemPropValue({ menu: el.menuItems, id, prop, value })
+    }
   })
 }

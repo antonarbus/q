@@ -4,8 +4,7 @@ import { className } from 'client/shared/className'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from 'client/shared/types'
 
-
-interface Props {
+type Props = {
   children: ReactNode
   itemIndex: number
   disableResize?: boolean
@@ -50,8 +49,8 @@ export const ResizablePaper = ({
       maxWidth='100%'
       bounds={'window'}
       enable={{
-        right: disableResize ? false : true,
-        left: disableResize ? false : true,
+        right: !disableResize,
+        left: !disableResize,
       }}
       onResize={(e, direction, elementRef, delta): void => {
         onItemResize?.bind(null, { e, direction, elementRef, delta, itemIndex })()

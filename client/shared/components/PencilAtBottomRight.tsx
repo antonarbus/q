@@ -2,7 +2,7 @@ import type FroalaEditor from 'froala-editor'
 import type { MutableRefObject } from 'react'
 import { BiEditAlt } from 'react-icons/bi'
 
-interface Props {
+type Props = {
   editorRef: MutableRefObject<FroalaEditor | null>
 }
 

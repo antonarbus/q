@@ -1,6 +1,6 @@
 import type { BoqColWidth, BoqCols, RootState } from 'client/shared/types'
 
-interface Props {
+type Props = {
   itemIndex: number
   headerName: keyof BoqCols
 }

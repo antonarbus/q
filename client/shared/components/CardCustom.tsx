@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material'
 import type { MouseEvent, ReactNode, RefObject } from 'react'
 
-interface Props {
+type Props = {
   children?: ReactNode
   content?: React.ReactNode
   cssProps?: React.CSSProperties

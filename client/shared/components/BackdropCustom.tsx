@@ -1,4 +1,4 @@
-interface Props {
+type Props = {
   onMouseDown: () => void
   children?: React.ReactNode
   content?: React.ReactNode
