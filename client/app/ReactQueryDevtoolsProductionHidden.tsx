@@ -2,7 +2,7 @@ import { Suspense, lazy, useState } from 'react'
 import { useEffectOnce } from 'react-use'
 
 const ReactQueryDevtoolsProduction = lazy(async () =>
-  import('@tanstack/react-query-devtools/build/lib/index.prod.js').then(
+  await import('@tanstack/react-query-devtools/build/lib/index.prod.js').then(
     (d) => ({ default: d.ReactQueryDevtools }),
   ),
 )

@@ -1,19 +1,17 @@
-
 import React, { useEffect, useRef } from 'react'
 import Chart from 'chart.js/auto'
 
 export const BarChart: React.FC = () => {
   const chartRef = useRef<HTMLCanvasElement | null>(null)
 
-
   const buildChart = (): void => {
-
     if (!chartRef.current) return
 
     const myChartRef = chartRef.current.getContext('2d')
 
     if (!myChartRef) return
 
+    // eslint-disable-next-line no-new
     new Chart(myChartRef, {
       type: 'bar',
       data: {
@@ -51,7 +49,6 @@ export const BarChart: React.FC = () => {
       },
     })
   }
-
 
   useEffect(() => {
     if (chartRef.current) {

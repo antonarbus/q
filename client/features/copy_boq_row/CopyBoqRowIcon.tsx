@@ -9,7 +9,7 @@ import type { MouseEvent } from 'react'
 import type { BoqRow } from 'client/shared/types'
 import { className } from 'client/shared/className'
 
-interface Props {
+type Props = {
   itemIndex: number
   rowIndex: number
   boqRow: BoqRow

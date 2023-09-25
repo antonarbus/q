@@ -125,7 +125,6 @@ export const useKeysForMenuNavigation = (): void => {
     }
   }
 
-
   useEffect(() => {
     window.addEventListener('keydown', navKeyboardHandler)
     return (): void => {

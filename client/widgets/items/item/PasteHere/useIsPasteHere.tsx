@@ -1,7 +1,7 @@
 import { useSelectorTyped } from 'client/shared/hooks'
-import { getState, store } from 'client/shared/clients'
+import { getState } from 'client/shared/clients'
 
-interface Props {
+type Props = {
   itemIndex: number
 }
 

@@ -1,4 +1,4 @@
-interface Props {
+type Props = {
   html: string
   itemIndex: number
   rowIndex?: number

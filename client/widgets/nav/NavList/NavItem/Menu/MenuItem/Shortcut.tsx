@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { capitalizeKey } from './function/capitalizeKey'
 
-interface PropsForSC {
+type PropsForSC = {
   $isHovered: boolean
 }
 
@@ -15,7 +15,7 @@ const Span = styled.span<PropsForSC>`
   color: #a5a4a4;
 `
 
-interface Props {
+type Props = {
   shortcut: string[]
   $isHovered: boolean
 }

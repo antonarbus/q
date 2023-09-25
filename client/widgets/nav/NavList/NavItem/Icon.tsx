@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { RoundSpanForIcon } from './RoundSpanForIcon'
 
-interface Props {
+type Props = {
   icon: ReactNode | string
   disabled?: boolean
 }
@@ -15,11 +15,10 @@ interface Props {
 export const Icon = ({ icon, disabled }: Props): JSX.Element => {
   return (
     <RoundSpanForIcon className='icon-round-wrapper' disabled={disabled}>
-      {typeof icon === 'string' ? (
-        <span style={{ fontWeight: 600 }}>{icon}</span>
-      ) : (
-        icon
-      )}
+      {typeof icon === 'string'
+        ? <span style={{ fontWeight: 600 }}>{icon}</span>
+        : icon
+      }
     </RoundSpanForIcon>
   )
 }

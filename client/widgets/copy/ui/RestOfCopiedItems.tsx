@@ -6,7 +6,7 @@ import { getState, theme } from 'client/shared/clients'
 import { ScaledCopyItem } from './ScaledCopyItem'
 import { useRef } from 'react'
 
-interface Props {
+type Props = {
   isCopying: boolean
   firstItemHeight: number
   prevFirstItemHeight: number
@@ -53,7 +53,6 @@ const variants: Variants = {
 
 export const RestOfCopiedItems = (): JSX.Element | null => {
   const items = useSelectorTyped(state => state.copy.items)
-  const previews = useSelectorTyped(state => state.copy.previews)
   const isCopying = useSelectorTyped(state => state.copy.isCopying)
   const prevFirstItemHeightRef = useRef(0)
 

@@ -1,6 +1,6 @@
 import { gsap } from 'gsap'
 
-interface Props {
+type Props = {
   element: HTMLElement
   cb?: () => void
   intoView?: boolean

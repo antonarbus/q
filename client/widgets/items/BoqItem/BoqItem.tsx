@@ -3,7 +3,7 @@ import { Item } from '../item'
 import { Header } from './Header'
 import { BoqTable } from './Table/BoqTable'
 
-interface Props {
+type Props = {
   itemIndex: number
 }
 

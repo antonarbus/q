@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer'
 
-interface Props {
+type Props = {
   to: string
   subject: string
   html: string

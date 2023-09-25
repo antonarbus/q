@@ -1,11 +1,10 @@
 import { itemBoqHeaderSubtotalTextHtmlGetter } from 'client/entities/items'
 import { changeBoqHeaderSubtotal } from 'client/features/change_text'
-import { getState, store } from 'client/shared/clients'
+import { getState } from 'client/shared/clients'
 import { Froala } from 'client/shared/ui/froala'
-import { useEffect, useRef } from 'react'
-import { useEffectOnce } from 'react-use'
+import { useRef } from 'react'
 
-interface Props {
+type Props = {
   itemIndex: number
 }
 

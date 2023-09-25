@@ -4,7 +4,7 @@ import { getState } from 'client/shared/clients'
 import { Froala } from 'client/shared/ui/froala'
 import { useRef } from 'react'
 
-interface Props {
+type Props = {
   itemIndex: number
 }
 

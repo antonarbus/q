@@ -1,4 +1,4 @@
-interface Token {
+type Token = {
   access: string | null
 }
 

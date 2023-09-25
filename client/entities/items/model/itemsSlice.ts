@@ -1,5 +1,5 @@
 import type { Item } from 'client/shared/types'
-import { createSlice, current } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import { defaultItems } from './defaultItems'
 import { reOrderItemsReducer } from './reducers/reOrderItemsReducer'
 import { deleteItemReducer } from './reducers/deleteItemReducer'

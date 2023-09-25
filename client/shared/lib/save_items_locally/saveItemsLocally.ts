@@ -4,7 +4,7 @@ import { tellItemsSavedLocally } from './tellItemsSavedLocally'
 import { itemsSlice } from 'client/entities/items'
 import type { Item } from 'client/shared/types'
 
-interface Props {
+type Props = {
   items?: Item[]
   msgAboveItemWithIndex?: number
 }

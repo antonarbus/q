@@ -4,7 +4,7 @@ import { DragIcon } from 'client/features/drag_item'
 import { className } from 'client/shared/className'
 import type { BoqRow } from 'client/shared/types'
 
-interface Props {
+type Props = {
   itemIndex: number
   rowIndex: number
   boqRow: BoqRow

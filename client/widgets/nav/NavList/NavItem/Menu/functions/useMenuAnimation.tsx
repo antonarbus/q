@@ -7,7 +7,7 @@ import { useEffect } from 'react'
 import { getMenuItemByIdsChain } from './getMenuItemByIdsChain'
 import { useFirstMountState } from 'react-use'
 
-interface PropsForNavigateInMenu {
+type PropsForNavigateInMenu = {
   up: (() => void) | null
   down: ((id: string) => void) | null
 }
@@ -21,7 +21,7 @@ export const navigateInMenu: PropsForNavigateInMenu = {
   },
 }
 
-interface Props {
+type Props = {
   currentMenuRef: RefObject<HTMLDivElement>
   nextMenuRef: RefObject<HTMLDivElement>
   menuContainerRef: RefObject<HTMLDivElement>
@@ -67,7 +67,6 @@ export const useMenuAnimation = ({
   }
 
   const goUpInMenu = (): void => {
-    type Function = () => void
     const cb = (): void => {
       dispatch(navSlice.actions.goUpInCurrentMenu())
     }

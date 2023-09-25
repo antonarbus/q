@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import type { ReactNode } from 'react'
 
-interface Props {
+type Props = {
   children: ReactNode
 }
 

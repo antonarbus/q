@@ -5,7 +5,7 @@ import { useUpdateEffect } from 'react-use'
 import './successErrorIcons.css'
 import type { HttpStatusType } from 'client/widgets/credentials/types'
 
-interface Props {
+type Props = {
   [x: string]: unknown // all other ...restProps props
   children?: ReactNode
   content?: ReactNode
@@ -46,7 +46,6 @@ export const ButtonCustom = ({
   }
 
   const isNetworkProgress = ['loading', 'error', 'success'].includes(httpStatus ?? 'no network status')
-
 
   return (
     <Button

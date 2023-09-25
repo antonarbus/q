@@ -4,12 +4,11 @@ import { useEffect } from 'react'
 import { navSlice } from 'client/entities/nav'
 import { dispatch } from 'client/shared/clients'
 
-interface Props {
+type Props = {
   menuContainerRef: MutableRefObject<HTMLDivElement | null>
 }
 
 export const useCloseMenuOnClickOutside = ({ menuContainerRef }: Props): void => {
-
   /**
    * - menu is absolutely positioned inside NavItem li element
    * - if click outside menu - close

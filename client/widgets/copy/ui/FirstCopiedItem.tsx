@@ -5,7 +5,7 @@ import { containerPadding, containerWidth, itemMarginBottom } from './CopyContai
 import { getState, theme } from 'client/shared/clients'
 import { ScaledCopyItem } from './ScaledCopyItem'
 
-interface Props {
+type Props = {
   isCopying: boolean
   isSoleItem: boolean
   height: number
@@ -13,8 +13,10 @@ interface Props {
 
 const variants: Variants = {
   initial: ({ isCopying, height }: Props) => {
-    if (isCopying) return {
-      y: -height - 100,
+    if (isCopying) {
+      return {
+        y: -height - 100,
+      }
     }
     return {}
   },

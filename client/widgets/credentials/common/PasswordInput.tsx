@@ -3,7 +3,7 @@ import { IconButton, InputAdornment, TextField } from '@mui/material'
 import { theme } from 'client/shared/clients'
 import { useState } from 'react'
 
-interface Props {
+type Props = {
   password: string
   setPassword: (value: string) => void
   onBlur?: () => void

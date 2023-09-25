@@ -2,7 +2,7 @@ import { theme } from 'client/shared/clients'
 import { useIsPasteHere } from './useIsPasteHere'
 import type { ReactNode } from 'react'
 
-interface Props {
+type Props = {
   itemIndex: number
   children: ReactNode
 }

@@ -3,7 +3,7 @@ import { dispatch } from 'client/shared/clients'
 import { useSelectorTyped } from 'client/shared/hooks'
 import { useUpdateEffect } from 'react-use'
 
-interface Props {
+type Props = {
   itemIndex: number
 }
 

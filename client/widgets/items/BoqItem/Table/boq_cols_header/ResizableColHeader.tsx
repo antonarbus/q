@@ -1,12 +1,12 @@
 import type { BoqCols } from 'client/shared/types'
-import type { ReactNode, RefObject } from 'react'
+import type { ReactNode } from 'react'
 import { itemsSlice, selectColumnWidth } from 'client/entities/items'
-import { dispatch, getState } from 'client/shared/clients'
+import { dispatch } from 'client/shared/clients'
 import { saveItemsLocally } from 'client/shared/lib'
 import { Resizable } from 're-resizable'
 import { useSelectorTyped } from 'client/shared/hooks'
 
-interface Props {
+type Props = {
   children: ReactNode
   className: string
   flexGrow?: number

@@ -2,7 +2,7 @@ import type { MutableRefObject, RefObject } from 'react'
 import { useEffect } from 'react'
 import type FroalaEditor from 'froala-editor'
 
-interface Props {
+type Props = {
   itemIndex: number
   froalaElementRef: RefObject<HTMLDivElement>
   editorRef: MutableRefObject<FroalaEditor | null>
@@ -23,14 +23,12 @@ export const usePutCaretAtTheEndOfText = ({
       if (clickedElement.matches('.fr-box')) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-expect-error
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
         editorRef.current.selection.setAtEnd(editorRef.current.$el.get(0))
       }
 
       if (clickedElement.matches('.ag-cell')) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-expect-error
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
         editorRef.current.selection.setAtEnd(editorRef.current.$el.get(0))
       }
 
@@ -38,6 +36,5 @@ export const usePutCaretAtTheEndOfText = ({
     }
 
     froalaElementRef.current?.addEventListener('click', focusOnTextIfCellOrPaddingAreClicked)
-
   }, [itemIndex])
 }

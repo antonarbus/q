@@ -10,7 +10,7 @@ import { TopMenuItemsContainer } from './TopMenuItemsContainer'
 import { navSlice } from 'client/entities/nav'
 import { dispatch, theme } from 'client/shared/clients'
 
-interface Props {
+type Props = {
   isMenuOutsideWindow: boolean
 }
 

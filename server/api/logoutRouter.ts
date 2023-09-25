@@ -6,13 +6,13 @@ import type { JwtPayloadExtended } from '../services/jwt'
 
 export const logoutRouter = Router()
 
-interface ReqWithCookies {
+type ReqWithCookies = {
   cookies: {
     refreshJwtToken: string | undefined
   }
 }
 
-export interface LogoutApiRes {
+export type LogoutApiRes = {
   status: string
   message: string
   email?: string
@@ -20,7 +20,6 @@ export interface LogoutApiRes {
 
 logoutRouter.get('/', async (req: Req, res: Res, next: Next) => {
   try {
-
     const refreshJwtToken = (req as ReqWithCookies).cookies.refreshJwtToken
 
     if (!refreshJwtToken) {

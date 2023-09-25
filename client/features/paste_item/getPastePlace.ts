@@ -1,6 +1,6 @@
 import type { CopyPlace } from 'client/shared/types'
 
-interface Props {
+type Props = {
   item: Element
   e: MouseEvent
   distanceToEdge: number

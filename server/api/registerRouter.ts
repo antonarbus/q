@@ -4,17 +4,17 @@ import bcrypt from 'bcryptjs'
 import { v4 as uuidv4 } from 'uuid'
 import { sendMail } from '../services/mail/sendMail'
 import { body, validationResult } from 'express-validator'
-import type { Next, Req, ReqWithBody, Res } from '../types'
+import type { Next, ReqWithBody, Res } from '../types'
 import { apiUrl } from '../apiUrls'
 const domain = process.env.DOMAIN
 const port = process.env.PORT_FRONT_END
 
-export interface RegisterReqBody {
+export type RegisterReqBody = {
   email: string
   password: string
 }
 
-export interface RegisterRes {
+export type RegisterRes = {
   status: string
   message: string
   validationErrors?: string
@@ -30,12 +30,13 @@ registerRouter.post(
     try {
       // validation
       const validationErrors = validationResult(req)
-      if (!validationErrors.isEmpty())
+      if (!validationErrors.isEmpty()) {
         return res.json({
           status: 'error',
           message: 'validation error',
           validationErrors,
         })
+      }
 
       // check if user already exists
       // await connectToDb()

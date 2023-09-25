@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import type { ReactNode } from 'react'
 
-interface Props {
+type Props = {
   children: ReactNode
 }
 

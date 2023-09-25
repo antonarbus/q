@@ -8,7 +8,7 @@ import { saveItemHeightByIndex } from 'client/entities/items'
 import type { MouseEvent } from 'react'
 import { className } from 'client/shared/className'
 
-interface Props {
+type Props = {
   itemIndex: number
 }
 

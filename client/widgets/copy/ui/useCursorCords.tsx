@@ -2,9 +2,9 @@ import { useSelectorTyped } from 'client/shared/hooks'
 import { useState } from 'react'
 import { useEffectOnce } from 'react-use'
 
-interface Props {
-  x: number;
-  y: number;
+type Props = {
+  x: number
+  y: number
 }
 
 export const useCursorCords = (): Props => {

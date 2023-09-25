@@ -1,4 +1,4 @@
-interface Props {
+type Props = {
   clickedElement: HTMLElement
   thisElement: HTMLElement
 }
@@ -6,4 +6,3 @@ interface Props {
 export const didClickInsideThisElement = ({ clickedElement, thisElement }: Props): boolean => {
   return thisElement.contains(clickedElement)
 }
-

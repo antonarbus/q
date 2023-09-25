@@ -1,10 +1,8 @@
 // https://fkhadra.github.io/react-toastify/introduction/
-import type { CloseButtonProps } from 'react-toastify'
 import { ToastContainer } from 'react-toastify'
 import styled from '@emotion/styled'
 import { theme } from 'client/shared/clients'
 import { Close } from '@mui/icons-material'
-import type { ReactNode } from 'react'
 
 // taken from /node_modules/react-toastify/dist/ReactToastify.css
 const ToastStyled = styled.div`
@@ -660,7 +658,7 @@ const ToastStyled = styled.div`
   }
 `
 
-interface Props {
+type Props = {
   closeToast: () => void
 }
 
@@ -692,10 +690,9 @@ export const TopMsg = (): JSX.Element => {
         draggable
         pauseOnHover
         theme='dark'
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         closeButton={CloseIcon as any}
       />
     </ToastStyled>
   )
 }
-

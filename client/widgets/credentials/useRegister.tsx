@@ -5,13 +5,13 @@ import type { HttpStatusType } from './types'
 import type { RegisterReqBody, RegisterRes } from 'server/api/registerRouter'
 import { apiUrl } from 'server/apiUrls'
 
-interface Props {
+type Props = {
   e: FormEvent
   email: string
   password: string
 }
 
-interface FuncReturnType {
+type FuncReturnType = {
   registerUser: ({ e, email, password }: Props) => Promise<void>
   httpStatus: HttpStatusType
   setHttpStatus: Dispatch<SetStateAction<HttpStatusType>>

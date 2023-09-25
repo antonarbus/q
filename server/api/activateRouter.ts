@@ -23,7 +23,6 @@ activateRouter.get(
       user.isActivated = true
       await user.save()
       res.redirect(`${domain}:${port}/login`)
-      return
     } catch (error) {
       next(error)
     }

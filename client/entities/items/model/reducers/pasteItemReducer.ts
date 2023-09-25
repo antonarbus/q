@@ -14,7 +14,7 @@ export const pasteItemReducer = (state: ItemsState, action: PayloadAction<{
   const itemToPaste = { ...cleanedItem, id: nanoid(5) }
   const hoveredItemIndex = state.findIndex(({ id }) => id === itemId)
 
-  interface SplicingSettings {
+  type SplicingSettings = {
     insertAtIndex: number
     deleteCount: number
   }

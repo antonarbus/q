@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-interface Props {
+type Props = {
   children: ReactNode
   css?: React.CSSProperties
   className?: string

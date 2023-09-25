@@ -11,7 +11,7 @@ const isEmailPatternOk = (email: string): boolean =>
     email,
   )
 
-interface Props {
+type Props = {
   email: string
   setEmail: (value: string) => void
   isEmailOk: boolean
@@ -19,10 +19,10 @@ interface Props {
   inputRef?: RefObject<HTMLDivElement>
 }
 
-interface Suggestion {
-  address: string;
-  domain: string;
-  full: string;
+type Suggestion = {
+  address: string
+  domain: string
+  full: string
 }
 
 /**
@@ -47,7 +47,6 @@ export const EmailInput = ({
 
   // is email pattern ok
   useUpdateEffect(
-    // eslint-disable-next-line no-restricted-syntax
     function checkIfEmailPatternIsOk(): void {
       const isPatternOk = isEmailPatternOk(email)
       if (isPatternOk) {
@@ -63,7 +62,6 @@ export const EmailInput = ({
   const initEmailLabel = 'Email'
   const [emailLabel, setEmailLabel] = useState(initEmailLabel)
   useUpdateEffect(
-    // eslint-disable-next-line no-restricted-syntax
     function setLabelMsgBasedOnValidation() {
       const isMailPatternOk = inputFocusedOutOnes && email !== '' && !isEmailOk
       if (isMailPatternOk) {

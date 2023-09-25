@@ -8,7 +8,7 @@ import { saveItemsLocally } from 'client/shared/lib'
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 import { copySlice } from 'client/entities/copy'
 
-interface Props {
+type Props = {
   itemIndex: number
 }
 

@@ -1,5 +1,5 @@
 import { useSelectorTyped } from 'client/shared/hooks'
-import { getState } from 'client/shared/clients'
+import { getState, theme } from 'client/shared/clients'
 import type { MouseEvent, MutableRefObject } from 'react'
 import { useRef } from 'react'
 import { Icon } from './Icon'
@@ -8,10 +8,9 @@ import { useWindowSize } from 'react-use'
 import { Link } from 'react-router-dom'
 import { clickOnNavItem } from './clickOnNavItem'
 import { TiArrowSortedDown } from 'react-icons/ti'
-import { theme } from 'client/shared/clients'
 import { css } from '@emotion/react'
 
-interface Props {
+type Props = {
   children?: React.ReactNode
   id: string
 }

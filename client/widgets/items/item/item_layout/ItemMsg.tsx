@@ -4,7 +4,7 @@ import { useSelectorTyped } from 'client/shared/hooks'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useUpdateEffect } from 'react-use'
 
-interface Props {
+type Props = {
   itemIndex: number
 }
 

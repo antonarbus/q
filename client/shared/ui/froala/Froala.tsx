@@ -8,7 +8,7 @@ import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
 import { EditableHtml } from './EditableHtml'
 import { useViewPortObserver } from './useViewPortObserver'
 
-interface Props {
+type Props = {
   itemIndex: number
   padding?: number | string
   initHtmlGetter: HtmlGetter

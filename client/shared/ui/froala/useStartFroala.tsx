@@ -8,7 +8,7 @@ import 'froala-editor/js/third_party/font_awesome.min.js'
 import './froala_editor.pkgd.min.css'
 import { froalaStaticOptions } from './froalaStaticOptions'
 
-interface Props {
+type Props = {
   itemIndex: number
   initHtmlGetter: () => string
   onContentChange: OnFroalaContentChange
@@ -18,7 +18,7 @@ interface Props {
   rowIndex?: number
 }
 
-declare const window: Window & typeof globalThis & { froalas: MutableRefObject<FroalaEditor | null>[] }
+declare const window: Window & typeof globalThis & { froalas: Array<MutableRefObject<FroalaEditor | null>> }
 
 window.froalas = []
 
@@ -31,7 +31,6 @@ export const useStartFroala = ({
   rowIndex,
   onContentChange,
 }: Props): void => {
-
   useEffect(() => {
     const initFroalaInstance = (): void => {
       const froalaInstance = new FroalaEditor(

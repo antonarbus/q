@@ -11,7 +11,7 @@ import { navSlice } from 'client/entities/nav'
 import type { MouseEvent } from 'react'
 import { dispatch } from 'client/shared/clients'
 
-interface Props {
+type Props = {
   menuItem: MenuItemTypes
   hoveredMenuItemIndex: number
 }

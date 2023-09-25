@@ -1,4 +1,4 @@
-interface Common {
+type Common = {
   id: string
   width: number
   height: number
@@ -6,7 +6,7 @@ interface Common {
   // previewHtml: string
 }
 
-export interface BoqRow {
+export type BoqRow = {
   id: string
   type: 'boq paste' | 'boq row'
   height: number
@@ -34,11 +34,11 @@ export interface BoqRow {
 
 export type BoqColWidth = number | undefined
 
-export interface BoqCols {
+export type BoqCols = {
   number: {
     html: string
     width: BoqColWidth
-  },
+  }
   description: {
     html: string
     width: BoqColWidth
@@ -57,7 +57,7 @@ export interface BoqCols {
   }
 }
 
-export interface BoqItem extends Common {
+export type BoqItem = {
   type: 'boq'
   boq: {
     header: {
@@ -78,20 +78,20 @@ export interface BoqItem extends Common {
     column: BoqCols
     rows: BoqRow[]
   }
-}
+} & Common
 
 export type BoqHeaderKey = keyof BoqItem['boq']['header']
 
-interface TextItem extends Common {
+type TextItem = {
   type: 'text'
   text: {
     html: string
   }
-}
+} & Common
 
-export interface PasteItem extends Common {
+export type PasteItem = {
   type: 'paste'
-}
+} & Common
 
 export type Item = BoqItem | PasteItem | TextItem
 

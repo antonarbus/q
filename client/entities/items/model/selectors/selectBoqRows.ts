@@ -12,7 +12,7 @@ export const boqRowsShapeEqualityFn: EqualityFn = (prevItems: BoqRow[], currentI
   return true
 }
 
-interface Props {
+type Props = {
   itemIndex: number
 }
 

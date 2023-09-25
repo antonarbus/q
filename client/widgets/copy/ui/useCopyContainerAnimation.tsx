@@ -48,7 +48,6 @@ export const useCopyContainerAnimation = (): AnimationControls => {
       dispatch(copySlice.actions.allowToCut())
       dispatch(copySlice.actions.allowToDelete())
     }, 1000 * theme.item.animationDuration)
-
   }, [items.length])
 
   return copyContainerAnimationControls

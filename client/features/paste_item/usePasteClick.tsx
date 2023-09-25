@@ -1,5 +1,4 @@
 import { useEffectOnce, useUnmount } from 'react-use'
-import { cleanItem } from 'client/shared/lib/itemsUtils'
 import { copySlice, exitCopyMode } from 'client/entities/copy'
 import { itemsSlice } from 'client/entities/items'
 import { saveItemsLocally } from 'client/shared/lib'

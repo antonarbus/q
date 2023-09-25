@@ -7,7 +7,7 @@
  * @returns {boolean} true or false
  */
 
-interface Props {
+type Props = {
   element: HTMLElement
 }
 

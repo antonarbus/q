@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { theme } from 'client/shared/clients'
 
-interface Props {
+type Props = {
   to: string
   state: {
     isHovered: boolean

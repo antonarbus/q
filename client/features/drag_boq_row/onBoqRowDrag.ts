@@ -4,7 +4,7 @@ import { itemsSlice } from 'client/entities/items'
 import { dispatch, getState } from 'client/shared/clients'
 import { saveItemsLocally } from 'client/shared/lib'
 
-interface Props {
+type Props = {
   oldIndex: number
   newIndex: number
   itemIndex: number
