@@ -10,19 +10,36 @@ export const insertPasteBoqRowReducer = (state: ItemsState, action: PayloadActio
 
   state.forEach((item, itemIndex) => {
     if (item.type !== 'boq') return state
-    const boqRows = item.boq.rows.filter(boqRow => boqRow.type === 'boq row')
-    item.boq.rows = boqRows
+    const boqRowsWithoutPasteText = item.boq.rows.filter(boqRow => boqRow.type === 'boq row')
+    item.boq.rows = boqRowsWithoutPasteText
 
-    boqRows.forEach((boqRow, boqRowIndex) => {
+    boqRowsWithoutPasteText.forEach((boqRow, boqRowIndex) => {
       if (boqRow.id !== itemId) return state
       if (pastePos === 'middle') return state
 
       const insertAtIndex = boqRowIndex + (pastePos === 'bottom' ? 1 : 0)
       const boqItem = state[itemIndex]
       if (boqItem?.type !== 'boq') return state
-      const boqRowsWithPasteText = boqRows.toSpliced(insertAtIndex, 0, 'paste boq row')
+
+      const pasteText: BoqRow = {
+        id: 'id of boq row paste',
+        type: 'boq paste',
+        height: 0,
+        width: 0,
+        number: { html: '', value: 0 },
+        description: { html: '' },
+        item: { html: '', value: 0 },
+        qty: { html: '', value: 0 },
+        price: { html: '', value: 0 },
+      }
+
+      const boqRowsWithPasteText = boqRowsWithoutPasteText.toSpliced(insertAtIndex, 0, pasteText)
       boqItem.boq.rows = boqRowsWithPasteText
       return state
     })
+
+    return state
   })
+
+  return state
 }
