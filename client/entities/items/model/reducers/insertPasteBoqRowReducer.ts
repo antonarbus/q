@@ -1,12 +1,9 @@
-/* eslint-disable @typescript-eslint/prefer-for-of */
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { ItemsState } from '../itemsSlice'
-import type { BoqItem, BoqRow, CopyPlace, PasteItem } from 'client/shared/types'
-import { current } from '@reduxjs/toolkit'
+import type { BoqRow, CopyPlace } from 'client/shared/types'
 
 export const insertPasteBoqRowReducer = (state: ItemsState, action: PayloadAction<CopyPlace>): ItemsState => {
   const { pastePos, itemId } = action.payload
-  console.log('🚀  { pastePos, itemId }:', { pastePos, itemId })
 
   state.forEach((item, itemIndex) => {
     if (item.type !== 'boq') return state
