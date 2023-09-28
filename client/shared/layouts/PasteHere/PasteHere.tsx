@@ -32,7 +32,6 @@ export const PasteHere = ({ children, id }: Props): JSX.Element => {
             placeItems: 'center',
             zIndex: 2,
             userSelect: 'none',
-            // fontSize: '14px',
           }}
         >
           Paste here
