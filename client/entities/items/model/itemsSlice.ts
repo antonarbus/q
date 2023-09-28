@@ -30,6 +30,8 @@ export const itemsSlice = createSlice({
   reducers: {
     reOrderItems: reOrderItemsReducer,
     reOrderBoqRows: reOrderBoqRowsReducer,
+    insertPasteItem: insertPasteItemReducer,
+    insertPasteBoqRow: insertPasteBoqRowReducer,
     deleteItem: deleteItemReducer,
     pasteItem: pasteItemReducer,
     resetItemsToDefault: () => defaultItems,
@@ -42,8 +44,6 @@ export const itemsSlice = createSlice({
     saveItemHeights: saveItemHeightsReducer, // todo: not used anywhere
     saveItemText: saveItemTextReducer,
     removePasteItem: removePasteItemReducer,
-    insertPasteItem: insertPasteItemReducer,
-    insertPasteBoqRow: insertPasteBoqRowReducer,
     saveBoqHeaderText: saveBoqHeaderTextReducer,
     saveColWidth: saveColWidthReducer,
   },

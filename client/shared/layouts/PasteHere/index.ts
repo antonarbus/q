@@ -1,0 +1,1 @@
+export { PasteHere } from './PasteHere'
