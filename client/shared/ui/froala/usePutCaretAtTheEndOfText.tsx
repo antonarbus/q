@@ -21,14 +21,10 @@ export const usePutCaretAtTheEndOfText = ({
       if (!editorRef.current) return
 
       if (clickedElement.matches('.fr-box')) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
         editorRef.current.selection.setAtEnd(editorRef.current.$el.get(0))
       }
 
       if (clickedElement.matches('.ag-cell')) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
         editorRef.current.selection.setAtEnd(editorRef.current.$el.get(0))
       }
 
