@@ -12,6 +12,12 @@ export const pasteItemReducer = (state: ItemsState, action: PayloadAction<{
   const { itemId, pastePos, item } = action.payload
   const cleanedItem = cleanItem(item)
   const itemToPaste = { ...cleanedItem, id: nanoid(5) }
+  if (itemToPaste.type === 'boq') {
+    const boqRows = itemToPaste.boq.rows
+    boqRows.forEach((boqRow, index) => {
+      boqRow.id = nanoid(5)
+    })
+  }
   const hoveredItemIndex = state.findIndex(({ id }) => id === itemId)
 
   type SplicingSettings = {
