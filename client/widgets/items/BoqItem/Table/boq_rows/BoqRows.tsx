@@ -5,6 +5,7 @@ import { BoqRowLayout } from './BoqRowLayout'
 import { BoqRow } from './BoqRow'
 import { boqRowsShapeEqualityFn, selectBoqRows } from 'client/entities/items'
 import { onBoqRowDrag } from 'client/features/drag_boq_row'
+import { BoqRowPasteItem } from './BoqRowPasteItem'
 
 type Props = {
   itemIndex: number
@@ -40,7 +41,12 @@ export const BoqRows = ({ itemIndex }: Props): JSX.Element => {
               </BoqRowLayout>
             )
           }
-          return 'boq paste'
+
+          if (boqRow.type === 'boq paste') {
+            return <BoqRowPasteItem />
+          }
+
+          return null
         })}
       </AnimatePresence>
     </DraggableBoqRowsContainer >

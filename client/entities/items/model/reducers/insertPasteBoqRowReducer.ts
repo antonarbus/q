@@ -2,7 +2,9 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import type { ItemsState } from '../itemsSlice'
 import type { BoqRow, CopyPlace } from 'client/shared/types'
 
-export const insertPasteBoqRowReducer = (state: ItemsState, action: PayloadAction<CopyPlace>): ItemsState => {
+type Type = (state: ItemsState, action: PayloadAction<CopyPlace>) => ItemsState
+
+export const insertPasteBoqRowReducer: Type = (state, action) => {
   const { pastePos, itemId } = action.payload
 
   state.forEach((item, itemIndex) => {
@@ -30,7 +32,6 @@ export const insertPasteBoqRowReducer = (state: ItemsState, action: PayloadActio
         price: { html: '', value: 0 },
       }
 
-      // @ts-expect-error: very new array method
       const boqRowsWithPasteText = boqRowsWithoutPasteText.toSpliced(insertAtIndex, 0, pasteText)
       boqItem.boq.rows = boqRowsWithPasteText
       return state
