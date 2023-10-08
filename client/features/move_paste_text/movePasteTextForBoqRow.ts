@@ -2,8 +2,8 @@ import { dispatch, getState } from 'client/shared/clients'
 import isEqual from 'lodash.isequal'
 import { copySlice } from 'client/entities/copy'
 import { className } from 'client/shared/className'
-import { getPastePlace } from './getPastePlace'
 import { itemsSlice } from 'client/entities/items'
+import { getPastePlace } from 'client/shared/lib'
 
 export const movePasteTextForBoqRow = (e: MouseEvent): void => {
   if (!(e.target instanceof Element)) return

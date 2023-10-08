@@ -3,7 +3,7 @@ import isEqual from 'lodash.isequal'
 import { copySlice } from 'client/entities/copy'
 import { itemsSlice } from 'client/entities/items'
 import { className } from 'client/shared/className'
-import { getPastePlace } from './getPastePlace'
+import { getPastePlace } from 'client/shared/lib'
 
 export const movePasteTextForItem = (e: MouseEvent): void => {
   if (!(e.target instanceof Element)) return

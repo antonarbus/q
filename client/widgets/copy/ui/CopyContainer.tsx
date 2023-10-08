@@ -3,9 +3,10 @@ import { motion } from 'framer-motion'
 import { FirstCopiedItem } from './FirstCopiedItem'
 import { RestOfCopiedItems } from './RestOfCopiedItems'
 import { useCopyContainerAnimation } from './useCopyContainerAnimation'
-import { useMovePasteText, usePasteClick } from 'client/features/paste_item'
+import { usePasteClick } from 'client/features/paste_item'
 import { useDisableNavItems } from 'client/features/disable_nav_items'
 import { PressEsc } from 'client/features/exit_copy_on_esc'
+import { useMovePasteText } from 'client/features/move_paste_text'
 
 export const containerWidth = 200
 export const containerPadding = 20
