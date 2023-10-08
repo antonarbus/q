@@ -1,9 +1,11 @@
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
+// import { className } from 'client/shared/className'
 import { theme } from 'client/shared/clients'
 import { motion } from 'framer-motion'
 
 export const BoqRowPasteItem = (): EmotionJSX.Element => (
   <motion.div
+    // className={className.boqRow}
     initial={{
       height: 0,
       opacity: 0,
