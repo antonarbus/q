@@ -11,9 +11,9 @@ export const movePasteTextForItem = (e: MouseEvent): void => {
   const prevPlace = getState().copy.place
   const isPasteTextShown = getState().copy.isPasteTextShown
 
-  const nav = e.target.closest('nav')
+  const navElement = e.target.closest('nav')
 
-  if (nav) {
+  if (navElement) {
     if (!isPasteTextShown) return
     dispatch(copySlice.actions.hidePasteText())
     return
