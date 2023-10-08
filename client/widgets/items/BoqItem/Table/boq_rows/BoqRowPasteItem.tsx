@@ -6,22 +6,18 @@ export const BoqRowPasteItem = (): EmotionJSX.Element => (
   <motion.div
     initial={{
       height: 0,
-      marginBottom: 0,
       opacity: 0,
     }}
     animate={{
-      height: 20,
-      marginBottom: 20,
+      height: 40,
       opacity: 1,
     }}
     exit={{
       height: 0,
-      marginBottom: 0,
       opacity: 0,
     }}
     transition={{
       height: { duration: theme.item.animationDuration },
-      marginBottom: { duration: theme.item.animationDuration },
       opacity: { duration: 0 },
     }}
     css={{
@@ -30,6 +26,7 @@ export const BoqRowPasteItem = (): EmotionJSX.Element => (
       fontWeight: 600,
       color: theme.copy.pasteTextColor,
       userSelect: 'none',
+      borderBottom: '1px solid #e8e8e8',
     }}
   >
     Paste here
