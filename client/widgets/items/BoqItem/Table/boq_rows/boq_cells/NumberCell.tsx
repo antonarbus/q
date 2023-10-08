@@ -18,10 +18,10 @@ export const NumberCell = ({ itemIndex, boqRow }: Props): JSX.Element => {
       className='td number'
       sx={{
         display: isNumberColWidthSetManually ? 'block' : 'flex',
-        flexShrink: 0,
         width: isNumberColWidthSetManually ? numberColWidth : 'auto',
         maxWidth: isNumberColWidthSetManually ? numberColWidth : 'auto',
         minWidth: '30px',
+        flexShrink: 0,
       }}
     >
       {boqRow.number.html}

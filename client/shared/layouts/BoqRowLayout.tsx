@@ -16,6 +16,7 @@ export const BoqRowLayout = ({ children, id }: Props): JSX.Element => {
       sx={{
         minHeight: '50px',
         position: 'relative',
+        borderBottom: '1px solid #e8e8e8',
       }}
     >
       <PasteHere id={id}>
