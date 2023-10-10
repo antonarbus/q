@@ -6,29 +6,43 @@ import { className } from 'client/shared/className'
 import { getPastePlace } from 'client/shared/lib'
 
 export const movePasteTextForItem = (e: MouseEvent): void => {
-  if (!(e.target instanceof Element)) return
-
-  const prevPlace = getState().copy.place
-  const isPasteTextShown = getState().copy.isPasteTextShown
+  if (!(e.target instanceof Element)) {
+    return
+  }
 
   const navElement = e.target.closest('nav')
+  const isPasteTextShown = getState().copy.isPasteTextShown
+  const isPasteItem = getState().items.some(item => item.type === 'paste')
 
   if (navElement) {
-    if (!isPasteTextShown) return
-    dispatch(copySlice.actions.hidePasteText())
+    if (isPasteItem) {
+      console.log('🚀  isPasteItem:', isPasteItem)
+      dispatch(itemsSlice.actions.removePasteItem())
+    }
+
+    if (isPasteTextShown) {
+      dispatch(copySlice.actions.hidePasteText())
+    }
+
     return
   }
 
   const elementsUnderCursor = document.elementsFromPoint(e.x, e.y)
-  const isOverActionsContainer = elementsUnderCursor.some(element => element.classList.contains(className.actionsContainer))
+  const isCursorOverActionsContainer = elementsUnderCursor.some(element => element.classList.contains(className.actionsContainer))
 
-  if (isOverActionsContainer && isPasteTextShown) {
-    dispatch(copySlice.actions.hidePasteText())
-    dispatch(itemsSlice.actions.removePasteItem())
+  if (isCursorOverActionsContainer) {
+    if (isPasteItem) {
+      dispatch(itemsSlice.actions.removePasteItem())
+    }
+
+    if (isPasteTextShown) {
+      dispatch(copySlice.actions.hidePasteText())
+    }
+
     return
   }
 
-  if (!isOverActionsContainer && !isPasteTextShown) {
+  if (!isPasteTextShown) {
     dispatch(copySlice.actions.showPasteText())
     return
   }
@@ -42,14 +56,21 @@ export const movePasteTextForItem = (e: MouseEvent): void => {
   }
 
   const isNarrowGapAboveNav = e.clientY < 10
-  if (isNarrowGapAboveNav) return
+  if (isNarrowGapAboveNav) {
+    return
+  }
 
   const item = (e.target).closest(`.${className.item}`)
-  if (!item) return
+  if (!item) {
+    return
+  }
 
+  const prevPlace = getState().copy.place
   const pastePlace = getPastePlace({ item, e, distanceToEdge: 20 })
 
-  if (isEqual(pastePlace, prevPlace)) return
+  if (isEqual(pastePlace, prevPlace)) {
+    return
+  }
 
   dispatch(copySlice.actions.updatePastePos(pastePlace))
   dispatch(copySlice.actions.showPasteText())
