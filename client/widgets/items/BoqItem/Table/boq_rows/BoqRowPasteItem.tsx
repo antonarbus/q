@@ -19,8 +19,12 @@ export const BoqRowPasteItem = (): EmotionJSX.Element => (
       opacity: 0,
     }}
     transition={{
-      height: { duration: theme.item.animationDuration },
-      opacity: { duration: 0 },
+      height: {
+        duration: theme.item.animationDuration,
+      },
+      opacity: {
+        duration: 0,
+      },
     }}
     css={{
       display: 'grid',
