@@ -15,15 +15,18 @@ export const movePasteTextForItem = (e: MouseEvent): void => {
   const isPasteTextShown = getState().copy.isPasteTextShown
   const isPasteItem = getState().items.some(item => item.type === 'paste')
 
-  if (navElement) {
-    if (isPasteItem) {
-      dispatch(itemsSlice.actions.removePasteItem())
-    }
-
+  const removePasteIfNeeded = (): void => {
     if (isPasteTextShown) {
       dispatch(copySlice.actions.hidePasteText())
     }
 
+    if (isPasteItem) {
+      dispatch(itemsSlice.actions.removePasteItem())
+    }
+  }
+
+  if (navElement) {
+    removePasteIfNeeded()
     return
   }
 
@@ -31,22 +34,14 @@ export const movePasteTextForItem = (e: MouseEvent): void => {
   const isCursorOverActionsContainer = elementsUnderCursor.some(element => element.classList.contains(className.actionsContainer))
 
   if (isCursorOverActionsContainer) {
-    if (isPasteItem) {
-      dispatch(itemsSlice.actions.removePasteItem())
-    }
-
-    if (isPasteTextShown) {
-      dispatch(copySlice.actions.hidePasteText())
-    }
-
+    removePasteIfNeeded()
     return
   }
 
   const isPastable = getState().copy.isPastable
 
   if (!isPastable) {
-    dispatch(copySlice.actions.hidePasteText())
-    dispatch(itemsSlice.actions.removePasteItem())
+    removePasteIfNeeded()
     return
   }
 

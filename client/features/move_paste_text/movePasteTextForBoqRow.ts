@@ -19,7 +19,7 @@ export const movePasteTextForBoqRow = (e: MouseEvent): void => {
     .flatMap(item => item.boq.rows)
     .some(boqRow => boqRow.type === 'boq paste')
 
-  if (!boqRowsElement) {
+  const removePasteIfNeeded = (): void => {
     if (isPasteTextShown) {
       dispatch(copySlice.actions.hidePasteText())
     }
@@ -27,7 +27,10 @@ export const movePasteTextForBoqRow = (e: MouseEvent): void => {
     if (isBoqPasteItem) {
       dispatch(itemsSlice.actions.removePasteItem())
     }
+  }
 
+  if (!boqRowsElement) {
+    removePasteIfNeeded()
     return
   }
 
@@ -35,22 +38,14 @@ export const movePasteTextForBoqRow = (e: MouseEvent): void => {
   const isCursorOverActionsContainer = elementsUnderCursor.some(element => element.classList.contains(className.actionsContainer))
 
   if (isCursorOverActionsContainer) {
-    if (isPasteTextShown) {
-      dispatch(copySlice.actions.hidePasteText())
-    }
-
-    if (isBoqPasteItem) {
-      dispatch(itemsSlice.actions.removePasteItem())
-    }
-
+    removePasteIfNeeded()
     return
   }
 
   const isPastable = getState().copy.isPastable
 
   if (!isPastable) {
-    dispatch(copySlice.actions.hidePasteText())
-    dispatch(itemsSlice.actions.removePasteItem())
+    removePasteIfNeeded()
     return
   }
 
