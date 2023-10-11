@@ -33,6 +33,8 @@ export const BoqRowPasteItem = (): EmotionJSX.Element => (
       color: theme.copy.pasteTextColor,
       userSelect: 'none',
       borderBottom: '1px solid #e8e8e8',
+      marginBottom: '-1px',
+
     }}
   >
     Paste here
