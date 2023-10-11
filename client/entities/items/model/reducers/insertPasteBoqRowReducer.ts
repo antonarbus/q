@@ -8,17 +8,28 @@ export const insertPasteBoqRowReducer: Type = (state, action) => {
   const { pastePos, itemId } = action.payload
 
   state.forEach((item, itemIndex) => {
-    if (item.type !== 'boq') return state
+    if (item.type !== 'boq') {
+      return state
+    }
+
     const boqRowsWithoutPasteText = item.boq.rows.filter(boqRow => boqRow.type === 'boq row')
     item.boq.rows = boqRowsWithoutPasteText
 
     boqRowsWithoutPasteText.forEach((boqRow, boqRowIndex) => {
-      if (boqRow.id !== itemId) return state
-      if (pastePos === 'middle') return state
+      if (boqRow.id !== itemId) {
+        return state
+      }
+
+      if (pastePos === 'middle') {
+        return state
+      }
 
       const insertAtIndex = boqRowIndex + (pastePos === 'bottom' ? 1 : 0)
       const boqItem = state[itemIndex]
-      if (boqItem?.type !== 'boq') return state
+
+      if (boqItem?.type !== 'boq') {
+        return state
+      }
 
       const pasteText: BoqRow = {
         id: 'id of boq row paste',
@@ -32,6 +43,7 @@ export const insertPasteBoqRowReducer: Type = (state, action) => {
         price: { html: '', value: 0 },
       }
 
+      // @ts-expect-error: new node method
       const boqRowsWithPasteText = boqRowsWithoutPasteText.toSpliced(insertAtIndex, 0, pasteText)
       boqItem.boq.rows = boqRowsWithPasteText
       return state
