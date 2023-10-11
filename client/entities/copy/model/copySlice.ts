@@ -18,12 +18,15 @@ type Props = {
 }
 
 const initialState: Props = {
-  isCopyMode: false, // should tell froala & ag-grid to initialize with some delay after animation end, otherwise elements height jumps
+  isCopyMode: false, // should tell froala to initialize with some delay after animation end, otherwise elements height jumps
   isCopyContainer: false,
   initCords: { x: 0, y: 0 },
   items: [],
   previews: [],
-  place: { pastePos: 'middle', itemId: 'some id' },
+  place: {
+    pastePos: 'middle',
+    itemId: 'some id',
+  },
   isCopying: false,
   isPasteTextShown: false,
   isPastable: false,
