@@ -47,7 +47,6 @@ export const DeleteIcon = ({ itemIndex }: Props): EmotionJSX.Element => {
           dispatch(copySlice.actions.allowToCopy())
           dispatch(copySlice.actions.allowToCut())
           dispatch(copySlice.actions.allowToDelete())
-          dispatch(copySlice.actions.exitFromCopyMode())
         }, 1000 * theme.item.animationDuration)
 
         saveItemsLocally()
