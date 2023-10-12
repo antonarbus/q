@@ -43,7 +43,7 @@ export const BoqRows = ({ itemIndex }: Props): JSX.Element => {
             )
           }
 
-          return <BoqRowPasteItem key={nanoid(5)} />
+          return <BoqRowPasteItem key={nanoid(3)} />
         })}
       </AnimatePresence>
     </DraggableBoqRowsContainer >

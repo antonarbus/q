@@ -43,43 +43,43 @@ export const navStructure: MenuItemTypes[] = [
                 isHidden: false,
                 menuItems: [
                   {
-                    id: nanoid(5),
+                    id: nanoid(3),
                     name: 'long long long long long long long long name',
                     icon: reactIcon,
                     isHidden: false,
                   },
                   {
-                    id: nanoid(5),
+                    id: nanoid(3),
                     name: 'item in menu 1',
                     icon: null,
                     isHidden: false,
                   },
                   {
-                    id: nanoid(5),
+                    id: nanoid(3),
                     name: 'item in menu 1',
                     icon: <img src={logo} />,
                     isHidden: false,
                   },
                   {
-                    id: nanoid(5),
+                    id: nanoid(3),
                     name: 'item in menu 1',
                     icon: reactIcon,
                     isHidden: false,
                   },
                   {
-                    id: nanoid(5),
+                    id: nanoid(3),
                     name: 'item in menu 1',
                     icon: reactIcon,
                     isHidden: false,
                   },
                   {
-                    id: nanoid(5),
+                    id: nanoid(3),
                     name: 'item in menu 1',
                     icon: reactIcon,
                     isHidden: false,
                   },
                   {
-                    id: nanoid(5),
+                    id: nanoid(3),
                     name: 'item in menu 1',
                     icon: reactIcon,
                     isHidden: false,
@@ -87,13 +87,13 @@ export const navStructure: MenuItemTypes[] = [
                 ],
               },
               {
-                id: nanoid(5),
+                id: nanoid(3),
                 name: 'item in menu 1',
                 icon: '😎',
                 isHidden: false,
               },
               {
-                id: nanoid(5),
+                id: nanoid(3),
                 name: 'item in menu 1',
                 icon: '😎',
                 isHidden: false,
@@ -101,20 +101,20 @@ export const navStructure: MenuItemTypes[] = [
             ],
           },
           {
-            id: nanoid(5),
+            id: nanoid(3),
             name: 'Reset to default offer',
             icon: <BiReset />,
             isHidden: false,
             func: resetItems,
           },
           {
-            id: nanoid(5),
+            id: nanoid(3),
             name: 'hidden menu',
             icon: '',
             isHidden: true,
           },
           {
-            id: nanoid(5),
+            id: nanoid(3),
             name: 'not hidden menu',
             icon: '😇',
             isHidden: false,
@@ -136,55 +136,55 @@ export const navStructure: MenuItemTypes[] = [
         name: 'Share',
         menuItems: [
           {
-            id: nanoid(5),
+            id: nanoid(3),
             name: 'item in menu 1',
             icon: '😇',
             isHidden: false,
             menuItems: [
               {
-                id: nanoid(5),
+                id: nanoid(3),
                 name: 'item in menu 1',
                 icon: '😎',
                 isHidden: false,
                 menuItems: [
                   {
-                    id: nanoid(5),
+                    id: nanoid(3),
                     name: 'long long long long long long long long name',
                     icon: reactIcon,
                     isHidden: false,
                   },
                   {
-                    id: nanoid(5),
+                    id: nanoid(3),
                     name: 'item in menu 1',
                     icon: null,
                     isHidden: false,
                   },
                   {
-                    id: nanoid(5),
+                    id: nanoid(3),
                     name: 'item in menu 1',
                     icon: <img src={logo} />,
                     isHidden: false,
                   },
                   {
-                    id: nanoid(5),
+                    id: nanoid(3),
                     name: 'item in menu 1',
                     icon: reactIcon,
                     isHidden: false,
                   },
                   {
-                    id: nanoid(5),
+                    id: nanoid(3),
                     name: 'item in menu 1',
                     icon: reactIcon,
                     isHidden: false,
                   },
                   {
-                    id: nanoid(5),
+                    id: nanoid(3),
                     name: 'item in menu 1',
                     icon: reactIcon,
                     isHidden: false,
                   },
                   {
-                    id: nanoid(5),
+                    id: nanoid(3),
                     name: 'item in menu 1',
                     icon: reactIcon,
                     isHidden: false,
@@ -192,13 +192,13 @@ export const navStructure: MenuItemTypes[] = [
                 ],
               },
               {
-                id: nanoid(5),
+                id: nanoid(3),
                 name: 'item in menu 1',
                 icon: '😎',
                 isHidden: false,
               },
               {
-                id: nanoid(5),
+                id: nanoid(3),
                 name: 'item in menu 1',
                 icon: '😎',
                 isHidden: false,
@@ -206,13 +206,13 @@ export const navStructure: MenuItemTypes[] = [
             ],
           },
           {
-            id: nanoid(5),
+            id: nanoid(3),
             name: 'item in menu 1',
             icon: 'IC',
             isHidden: false,
           },
           {
-            id: nanoid(5),
+            id: nanoid(3),
             name: 'link',
             link: '/',
             icon: '😇',
@@ -220,13 +220,13 @@ export const navStructure: MenuItemTypes[] = [
             shortcut: ['control', 'x'],
           },
           {
-            id: nanoid(5),
+            id: nanoid(3),
             name: 'item in menu 1',
             icon: '',
             isHidden: false,
           },
           {
-            id: nanoid(5),
+            id: nanoid(3),
             name: 'func',
             func: (): void => {
               alert('i am the function')
