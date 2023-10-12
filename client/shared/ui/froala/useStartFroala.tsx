@@ -46,7 +46,7 @@ export const useStartFroala = ({
               if (!editorRef.current?.html) return
               editorRef.current.html.set(initHtmlGetter())
               window.froalas = window.froalas.filter(({ current }) => Boolean(current))
-              console.log('froalas qty after init: ', window.froalas.length)
+              // console.log('froalas qty after init: ', window.froalas.length)
             },
             contentChanged: (): void => {
               if (!editorRef.current) return
@@ -67,7 +67,7 @@ export const useStartFroala = ({
       editorRef.current?.destroy()
       editorRef.current = null
       window.froalas = window.froalas.filter(({ current }) => Boolean(current))
-      console.log('froalas qty after destroy: ', window.froalas.length)
+      // console.log('froalas qty after destroy: ', window.froalas.length)
     }
   })
 }

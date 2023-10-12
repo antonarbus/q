@@ -6,36 +6,54 @@ import { dispatch, getState, theme } from 'client/shared/clients'
 
 const pasteItemOnClick = (): void => {
   const isPasteTextShown = getState().copy.isPasteTextShown
-  if (!isPasteTextShown) return
+
+  if (!isPasteTextShown) {
+    return
+  }
+
   dispatch(copySlice.actions.hidePasteText())
+
   const isPastable = getState().copy.isPastable
-  if (!isPastable) return
+
+  if (!isPastable) {
+    return
+  }
+
   const { itemId, pastePos } = getState().copy.place
   const topItemFromCopyContainer = getState().copy.items[0]
-  if (!topItemFromCopyContainer) return
-  if (topItemFromCopyContainer.type === 'boq paste') return
 
-  if (topItemFromCopyContainer.type === 'boq' || topItemFromCopyContainer.type === 'text') {
-    dispatch(itemsSlice.actions.pasteItem({ itemId, pastePos, item: topItemFromCopyContainer }))
-    dispatch(copySlice.actions.removeItemFromCopyContainer())
-    dispatch(copySlice.actions.forbidToPaste())
-    dispatch(copySlice.actions.forbidToCopy())
-    dispatch(copySlice.actions.forbidToCut())
-    dispatch(copySlice.actions.forbidToDelete())
-    saveItemsLocally()
-    const itemsInCopyContainer = getState().copy.items
-    if (itemsInCopyContainer.length === 0) {
-      dispatch(copySlice.actions.hideCopyContainer())
-      dispatch(itemsSlice.actions.removePasteItem())
-      exitCopyMode({ delayed: true })
-    }
-    setTimeout(() => {
-      dispatch(copySlice.actions.allowToPaste())
-      dispatch(copySlice.actions.allowToCopy())
-      dispatch(copySlice.actions.allowToCut())
-      dispatch(copySlice.actions.allowToDelete())
-    }, 1000 * theme.item.animationDuration)
+  if (!topItemFromCopyContainer) {
+    return
   }
+
+  // if (topItemFromCopyContainer.type === 'boq paste') {
+  //   return
+  // }
+
+  // if (topItemFromCopyContainer.type === 'boq' || topItemFromCopyContainer.type === 'text') {
+  dispatch(itemsSlice.actions.pasteItem({ itemId, pastePos, item: topItemFromCopyContainer }))
+  dispatch(copySlice.actions.removeItemFromCopyContainer())
+  dispatch(copySlice.actions.forbidToPaste())
+  dispatch(copySlice.actions.forbidToCopy())
+  dispatch(copySlice.actions.forbidToCut())
+  dispatch(copySlice.actions.forbidToDelete())
+  saveItemsLocally()
+
+  const itemsInCopyContainer = getState().copy.items
+
+  if (itemsInCopyContainer.length === 0) {
+    dispatch(copySlice.actions.hideCopyContainer())
+    dispatch(itemsSlice.actions.removePasteItem())
+    exitCopyMode({ delayed: true })
+  }
+
+  setTimeout(() => {
+    dispatch(copySlice.actions.allowToPaste())
+    dispatch(copySlice.actions.allowToCopy())
+    dispatch(copySlice.actions.allowToCut())
+    dispatch(copySlice.actions.allowToDelete())
+  }, 1000 * theme.item.animationDuration)
+  // }
 }
 
 export const usePasteClick = (): void => {
