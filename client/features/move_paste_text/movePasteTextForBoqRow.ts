@@ -14,6 +14,7 @@ export const movePasteTextForBoqRow = (e: MouseEvent): void => {
   const prevPlace = getState().copy.place
   const isPasteTextShown = getState().copy.isPasteTextShown
   const boqRowsElement = e.target.closest('.boq-rows')
+
   const isBoqPasteItem = (getState().items
     .filter(item => item.type === 'boq') as BoqItem[])
     .flatMap(item => item.boq.rows)
