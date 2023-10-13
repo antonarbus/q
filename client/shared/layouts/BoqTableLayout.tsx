@@ -16,7 +16,10 @@ export const BoqTableLayout = ({ children }: Props): JSX.Element => {
       <Box
         className='boq-table-container'
         sx={{
-          overflow: 'auto',
+          // todo: think about logic to enable overflow when width of content goes over the screen
+          // todo: we may put actions inside and enable overflow: auto
+          // overflow: 'auto',
+          clipPath: 'inset(0 0 0 -100px)',
           '& *': {
             // background: '#ff00001b',
           },
