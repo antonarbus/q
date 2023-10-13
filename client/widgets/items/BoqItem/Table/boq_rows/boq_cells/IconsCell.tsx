@@ -17,6 +17,7 @@ export const BoqRowActionsContainer = ({ itemIndex, rowIndex, boqRow }: Props): 
       sx={{
         position: 'absolute',
         top: 0,
+        left: '-40px',
       }}
     >
       <Box
