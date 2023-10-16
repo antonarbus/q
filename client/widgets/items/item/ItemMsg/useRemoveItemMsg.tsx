@@ -13,7 +13,7 @@ export const useRemoveItemMsgAfterSomeTime = ({ itemIndex }: Props): void => {
   useUpdateEffect(() => {
     const timeout = setTimeout(() => {
       if (!msg) return
-      dispatch(itemsSlice.actions.removeItemMsg({ itemIndex }))
+      dispatch(itemsSlice.actions.removeItemsMsg({ itemIndex }))
     }, 1700)
 
     return () => {
