@@ -5,7 +5,7 @@ import { reOrderItemsReducer } from './reducers/reOrderItemsReducer'
 import { deleteItemReducer } from './reducers/deleteItemReducer'
 import { pasteItemReducer } from './reducers/pasteItemReducer'
 import { insertPasteItemReducer } from './reducers/insertPasteItemReducer'
-import { removeItemMsgReducer } from './reducers/removeItemMsgReducer'
+import { removeItemsMsgReducer } from './reducers/removeItemMsgReducer'
 import { removePasteItemReducer } from './reducers/removePasteItemReducer'
 import { saveItemHeightReducer } from './reducers/saveItemHeightReducer'
 import { saveItemHeightsReducer } from './reducers/saveItemHeightsReducer'
@@ -36,7 +36,7 @@ export const itemsSlice = createSlice({
     pasteItem: pasteItemReducer,
     resetItemsToDefault: () => defaultItems,
     tellItemSavedLocally: tellItemSavedLocallyReducer,
-    removeItemMsg: removeItemMsgReducer,
+    removeItemsMsg: removeItemsMsgReducer,
     saveItemWidth: saveItemWidthReducer,
     makeItemBitWider: makeItemBitWiderReducer,
     saveItemHeight: saveItemHeightReducer,

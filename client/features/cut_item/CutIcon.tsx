@@ -31,6 +31,8 @@ export const CutIcon = ({ itemIndex }: Props): JSX.Element => {
       onClick={(e: MouseEvent): void => {
         if (disabled) return
 
+        dispatch(itemsSlice.actions.removeItemsMsg())
+
         saveItemHeightByIndex({ itemIndex })
 
         const itemToCut = getState().items[itemIndex]

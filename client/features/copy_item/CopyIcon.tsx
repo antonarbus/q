@@ -4,7 +4,7 @@ import { MdCopyAll } from 'react-icons/md'
 import { motion } from 'framer-motion'
 import { cleanHtml } from 'client/shared/lib/itemsUtils'
 import { copySlice } from 'client/entities/copy'
-import { saveItemHeightByIndex } from 'client/entities/items'
+import { itemsSlice, saveItemHeightByIndex } from 'client/entities/items'
 import type { MouseEvent } from 'react'
 import { className } from 'client/shared/className'
 
@@ -30,6 +30,8 @@ export const CopyIcon = ({ itemIndex }: Props): JSX.Element => {
       }}
       onClick={(e: MouseEvent): void => {
         if (disabled) return
+
+        dispatch(itemsSlice.actions.removeItemsMsg())
 
         saveItemHeightByIndex({ itemIndex })
 
