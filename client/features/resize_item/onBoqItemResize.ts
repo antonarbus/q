@@ -3,34 +3,39 @@ import { dispatch, getState } from 'client/shared/clients'
 import { saveItemsLocally } from 'client/shared/lib'
 import type { OnItemResizeStart, OnItemResizeStop } from 'client/shared/types'
 
-export const onBoqItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, elementRef }) => {
-  const descriptionHeader = elementRef.querySelector('.th.description')
+export const onBoqItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, elementRef: itemElement }) => {
+  const descriptionHeaderElement = itemElement.querySelector('.th.description')
 
-  if (!descriptionHeader) return
-  if (!(descriptionHeader instanceof HTMLElement)) return
+  if (!descriptionHeaderElement) return
+  if (!(descriptionHeaderElement instanceof HTMLElement)) return
 
-  elementRef.style.width = elementRef.clientWidth + 'px' // otherwise col jumps
+  // not 'auto' anymore, otherwise col jumps
+  // in ResizablePaper comp width will be set to auto back after re-render
+  itemElement.style.width = itemElement.clientWidth + 'px'
   dispatch(itemsSlice.actions.saveColWidth({ itemIndex, headerName: 'description', width: undefined }))
 }
 
-export const onBoqItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction, elementRef, delta }) => {
-  const descriptionHeader = elementRef.querySelector('.th.description')
+export const onBoqItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction, elementRef: itemElement, delta }) => {
+  const descriptionHeaderElement = itemElement.querySelector('.th.description')
 
-  if (!descriptionHeader) return
-  if (!(descriptionHeader instanceof HTMLElement)) return
+  if (!descriptionHeaderElement) return
+  if (!(descriptionHeaderElement instanceof HTMLElement)) return
 
-  const descriptionColWidth = descriptionHeader.clientWidth
+  const descriptionColWidth = descriptionHeaderElement.clientWidth
 
   dispatch(itemsSlice.actions.saveColWidth({ itemIndex, headerName: 'description', width: descriptionColWidth }))
 
+  // setTimeout to make save the width after it will become back auto
+  // on ResizablePaper component render
+  // probably there is a better way to do it, but I am lazy now
   setTimeout(() => {
-    const width = elementRef.clientWidth
+    const itemWidth = itemElement.clientWidth
     const prevItemWidth = getState().items[itemIndex]?.width
 
-    if (width !== prevItemWidth) {
-      dispatch(itemsSlice.actions.saveItemWidth({ itemIndex, width }))
+    if (itemWidth !== prevItemWidth) {
+      dispatch(itemsSlice.actions.saveItemWidth({ itemIndex, width: itemWidth }))
     }
 
     saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
-  }, 500)
+  })
 }
