@@ -1,5 +1,6 @@
 import { passiveSupport } from 'passive-events-support/src/utils'
 
+// https://github.com/clauderic/react-sortable-hoc/pull/850
 // https://stackoverflow.com/questions/59282213/react-warning-non-passive-event-listener-to-a-scroll-blocking-touchstart
 
 passiveSupport({
