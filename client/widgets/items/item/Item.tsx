@@ -1,3 +1,4 @@
+import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from 'client/shared/types'
 import type { ReactNode } from 'react'
 import { useIsItemDisabled } from './useIsItemDisabled'
 import { getState } from 'client/shared/clients'
@@ -8,7 +9,6 @@ import { DeleteIcon } from 'client/features/delete_item/DeleteIcon'
 import { ItemMsg } from './ItemMsg'
 import { PasteHere } from './PasteHere'
 import { ItemLayout } from './item_layout'
-import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from 'client/shared/types'
 
 type Props = {
   itemIndex: number
