@@ -1,7 +1,7 @@
 import express from 'express'
 import { UserModel } from '../db/models/user.model'
 import bcrypt from 'bcryptjs'
-import { v4 as uuidv4 } from 'uuid'
+import { nanoid } from 'nanoid'
 import { sendMail } from '../services/mail/sendMail'
 import { body, validationResult } from 'express-validator'
 import type { Next, ReqWithBody, Res } from '../types'
@@ -51,7 +51,7 @@ registerRouter.post(
 
       // save user to db
       const password = await bcrypt.hash(req.body.password, 10)
-      const activationLink = `${domain}:${port}${apiUrl.activate}/${uuidv4()}`
+      const activationLink = `${domain}:${port}${apiUrl.activate}/${nanoid(5)}`
       await UserModel.create({ email, password, activationLink })
 
       // send email with activation link
