@@ -1,5 +1,5 @@
 import { itemsSlice } from 'client/entities/items'
-import { dispatch } from 'client/shared/clients'
+import { dispatch, getState } from 'client/shared/clients'
 import { saveItemsLocally } from 'client/shared/lib'
 import type { OnItemResizeStart, OnItemResizeStop } from 'client/shared/types'
 
@@ -19,8 +19,18 @@ export const onBoqItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction,
   if (!descriptionHeader) return
   if (!(descriptionHeader instanceof HTMLElement)) return
 
-  const width = descriptionHeader.clientWidth
+  const descriptionColWidth = descriptionHeader.clientWidth
 
-  dispatch(itemsSlice.actions.saveColWidth({ itemIndex, headerName: 'description', width }))
-  saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
+  dispatch(itemsSlice.actions.saveColWidth({ itemIndex, headerName: 'description', width: descriptionColWidth }))
+
+  setTimeout(() => {
+    const width = elementRef.clientWidth
+    const prevItemWidth = getState().items[itemIndex]?.width
+
+    if (width !== prevItemWidth) {
+      dispatch(itemsSlice.actions.saveItemWidth({ itemIndex, width }))
+    }
+
+    saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
+  }, 500)
 }

@@ -21,7 +21,6 @@ export const useMovePasteText = (): void => {
     }
 
     return () => {
-      console.log('remove paste listeners')
       document.body.style.removeProperty('cursor')
       document.removeEventListener('mousemove', movePasteTextForItem)
       document.removeEventListener('mousemove', movePasteTextForBoqRow)
