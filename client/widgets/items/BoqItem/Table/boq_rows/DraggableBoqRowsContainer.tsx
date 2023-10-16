@@ -12,6 +12,7 @@ type SortableContainerExtended = SortableContainerProps & Props
 export const DraggableBoqRowsContainer: React.ComponentClass<SortableContainerExtended> =
   SortableContainer(({ children }: Props) => (
     <div
+      id='boq-rows'
       className='boq-rows'
       css={{
         display: 'flex',
