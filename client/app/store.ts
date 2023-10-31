@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { navSlice } from 'client/entities/nav'
 import { spinnerSlice } from 'client/shared/ui/spinner'
 import { bottomMsgSlice } from 'client/shared/ui/bottom_msg'
+import { navSlice } from 'client/entities/nav'
 import { userSlice } from 'client/entities/user'
 import { copySlice } from 'client/entities/copy'
 import { itemsSlice } from 'client/entities/items'

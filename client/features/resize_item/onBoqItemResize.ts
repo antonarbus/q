@@ -12,10 +12,21 @@ export const onBoqItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, ele
   // not 'auto' anymore, otherwise col jumps
   // in ResizablePaper comp width will be set to auto back after re-render
   itemElement.style.width = itemElement.clientWidth + 'px'
-  dispatch(itemsSlice.actions.saveColWidth({ itemIndex, headerName: 'description', width: undefined }))
+
+  dispatch(itemsSlice.actions.saveColWidth({
+    itemIndex,
+    headerName: 'description',
+    width: undefined,
+  }))
 }
 
-export const onBoqItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction, elementRef: itemElement, delta }) => {
+export const onBoqItemResizeStop: OnItemResizeStop = ({
+  itemIndex,
+  e,
+  direction,
+  elementRef: itemElement,
+  delta,
+}) => {
   const descriptionHeaderElement = itemElement.querySelector('.th.description')
 
   if (!descriptionHeaderElement) return
@@ -23,9 +34,13 @@ export const onBoqItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction,
 
   const descriptionColWidth = descriptionHeaderElement.clientWidth
 
-  dispatch(itemsSlice.actions.saveColWidth({ itemIndex, headerName: 'description', width: descriptionColWidth }))
+  dispatch(itemsSlice.actions.saveColWidth({
+    itemIndex,
+    headerName: 'description',
+    width: descriptionColWidth,
+  }))
 
-  // setTimeout to make save the width after it will become back auto
+  // setTimeout to make save the width after it will become back to width: auto
   // on ResizablePaper component render
   // probably there is a better way to do it, but I am lazy now
   setTimeout(() => {
@@ -37,5 +52,5 @@ export const onBoqItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction,
     }
 
     saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
-  })
+  }, 50)
 }
