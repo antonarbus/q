@@ -1,10 +1,9 @@
 import type { BoqCols } from 'client/shared/types'
 import type { ReactNode } from 'react'
-import { itemsSlice, selectColumnWidth } from 'client/entities/items'
-import { dispatch } from 'client/shared/clients'
-import { saveItemsLocally } from 'client/shared/lib'
+import { selectColumnWidth } from 'client/entities/items'
 import { Resizable } from 're-resizable'
 import { useSelectorTyped } from 'client/shared/hooks'
+import { onColumnResize, onColumnResizeStart, onColumnResizeStop } from 'client/features/resize_column'
 
 type Props = {
   children: ReactNode
@@ -53,18 +52,25 @@ export const ResizableColHeader = ({
         },
       }}
       onResizeStart={(event, direction, element): void => {
-        const width = element.clientWidth
-        dispatch(itemsSlice.actions.saveColWidth({ itemIndex, width, headerName }))
+        onColumnResizeStart({
+          headerColumnElement: element,
+          itemIndex,
+          headerName,
+        })
       }}
       onResize={(event, direction, element, delta): void => {
-        const width = element.clientWidth
-        dispatch(itemsSlice.actions.saveColWidth({ itemIndex, width, headerName }))
+        onColumnResize({
+          headerColumnElement: element,
+          itemIndex,
+          headerName,
+        })
       }}
       onResizeStop={(event, direction, element): void => {
-        const width = element.clientWidth
-        dispatch(itemsSlice.actions.saveColWidth({ itemIndex, width, headerName }))
-        saveItemsLocally()
-        dispatch(itemsSlice.actions.tellItemSavedLocally({ itemIndex }))
+        onColumnResizeStop({
+          headerColumnElement: element,
+          itemIndex,
+          headerName,
+        })
       }}
     >
       {children}
