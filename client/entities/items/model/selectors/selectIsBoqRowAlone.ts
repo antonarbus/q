@@ -1,27 +1,16 @@
 import type { RootState } from 'client/shared/types'
 
 type Props = {
-  boqRowId: string
+  itemIndex: number
 }
 
-export const selectIsBoqRowAlone = ({ boqRowId }: Props) => (state: RootState): boolean => {
-  let boqRowIsAlone = false
+export const selectIsBoqRowAlone = ({ itemIndex }: Props) => (state: RootState): boolean => {
+  const item = state.items[itemIndex]
 
-  state.items.forEach((item) => {
-    if (item.type !== 'boq') return
+  if (item?.type !== 'boq') return false
 
-    const boqRows = item.boq.rows.filter(boqRow => boqRow.type === 'boq row')
+  const boqRows = item.boq.rows
+  const isBoqRowAlone = boqRows.length === 1
 
-    boqRows.forEach((boqRow) => {
-      if (boqRow.id === boqRowId) {
-        const isBoqRowAlone = boqRows.length === 1
-
-        if (isBoqRowAlone) {
-          boqRowIsAlone = true
-        }
-      }
-    })
-  })
-
-  return boqRowIsAlone
+  return isBoqRowAlone
 }

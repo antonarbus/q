@@ -10,13 +10,12 @@ import { saveItemsLocally } from 'client/shared/lib'
 type Props = {
   itemIndex: number
   rowIndex: number
-  boqRowId: string
 }
 
-export const DeleteBoqRowIcon = ({ boqRowId, rowIndex, itemIndex }: Props): JSX.Element => {
+export const DeleteBoqRowIcon = ({ rowIndex, itemIndex }: Props): JSX.Element => {
   const ref = useRef<HTMLSpanElement>(null)
 
-  const isBoqRowAlone = useSelectorTyped(selectIsBoqRowAlone({ boqRowId }))
+  const isBoqRowAlone = useSelectorTyped(selectIsBoqRowAlone({ itemIndex }))
   const isDeletable = useSelectorTyped(state => state.copy.isDeletable)
   const disabled = isBoqRowAlone || !isDeletable
 
