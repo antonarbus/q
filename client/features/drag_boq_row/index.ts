@@ -1,2 +1,2 @@
 export { onBoqRowDrag } from './onBoqRowDrag'
-export { DragIcon } from './DragIcon'
+export { DragBoqRow } from './DragIcon'

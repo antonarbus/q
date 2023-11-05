@@ -26,11 +26,6 @@ const pasteItemOnClick = (): void => {
     return
   }
 
-  // if (topItemFromCopyContainer.type === 'boq paste') {
-  //   return
-  // }
-
-  // if (topItemFromCopyContainer.type === 'boq' || topItemFromCopyContainer.type === 'text') {
   dispatch(itemsSlice.actions.pasteItem({ itemId, pastePos, item: topItemFromCopyContainer }))
   dispatch(copySlice.actions.removeItemFromCopyContainer())
   dispatch(copySlice.actions.forbidToPaste())
@@ -53,7 +48,6 @@ const pasteItemOnClick = (): void => {
     dispatch(copySlice.actions.allowToCut())
     dispatch(copySlice.actions.allowToDelete())
   }, 1000 * theme.item.animationDuration)
-  // }
 }
 
 export const usePasteClick = (): void => {
