@@ -2,12 +2,16 @@ import { SortableHandle } from 'react-sortable-hoc'
 import { MdDragIndicator } from 'react-icons/md'
 import { useSelectorTyped } from 'client/shared/hooks'
 import { motion } from 'framer-motion'
-import { selectIsItemAlone } from 'client/entities/items'
+import { selectIsBoqRowAlone } from 'client/entities/items'
 
-const Handle = (): JSX.Element => {
+type Props = {
+  itemIndex: number
+}
+
+const Handle = ({ itemIndex }: Props): JSX.Element => {
   const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
-  const isItemAlone = useSelectorTyped(selectIsItemAlone)
-  const isDisabled = isCopyMode || isItemAlone
+  const isBoqRowAlone = useSelectorTyped(selectIsBoqRowAlone({ itemIndex }))
+  const isDisabled = isCopyMode || isBoqRowAlone
 
   return (
     <motion.span
@@ -22,4 +26,4 @@ const Handle = (): JSX.Element => {
   )
 }
 
-export const DragIcon = SortableHandle(Handle)
+export const DragBoqRow = SortableHandle<Props>(Handle)

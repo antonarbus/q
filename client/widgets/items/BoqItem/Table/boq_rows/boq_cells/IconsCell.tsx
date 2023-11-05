@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { CopyBoqRowIcon } from 'client/features/copy_boq_row'
 import { DeleteBoqRowIcon } from 'client/features/delete_boq_row'
-import { DragIcon } from 'client/features/drag_item'
+import { DragBoqRow } from 'client/features/drag_boq_row'
 import { className } from 'client/shared/className'
 import type { BoqRow } from 'client/shared/types'
 
@@ -30,7 +30,7 @@ export const BoqRowActionsContainer = ({ itemIndex, rowIndex, boqRow }: Props): 
           transformOrigin: 'top center',
         }}
       >
-        <DragIcon />
+        <DragBoqRow itemIndex={itemIndex} />
         <CopyBoqRowIcon itemIndex={itemIndex} rowIndex={rowIndex} boqRow={boqRow} />
         <DeleteBoqRowIcon itemIndex={itemIndex} rowIndex={rowIndex} />
       </Box>

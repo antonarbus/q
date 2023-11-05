@@ -1,5 +1,5 @@
 import { useSelectorTyped } from 'client/shared/hooks'
-import { copySlice } from 'client/entities/copy'
+import { copySlice, exitCopyMode } from 'client/entities/copy'
 import { dispatch, theme } from 'client/shared/clients'
 import { RxCross2 } from 'react-icons/rx'
 import { itemsSlice, selectIsBoqRowAlone } from 'client/entities/items'
@@ -46,6 +46,7 @@ export const DeleteBoqRowIcon = ({ rowIndex, itemIndex }: Props): JSX.Element =>
           dispatch(copySlice.actions.allowToDelete())
         }, 1000 * theme.item.animationDuration)
 
+        exitCopyMode({ delayed: true }) // todo: check if we really need a delay when Froala is in place
         saveItemsLocally()
       }}
       onMouseOver={(): void => {
