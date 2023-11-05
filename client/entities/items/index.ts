@@ -6,6 +6,7 @@ export { itemsSlice } from './model/itemsSlice'
 // selectors
 export { itemsShapeEqualityFn } from './model/selectors/itemsShapeEqualityFn'
 export { selectIsItemAlone } from './model/selectors/selectIsItemAlone'
+export { selectIsBoqRowAlone } from './model/selectors/selectIsBoqRowAlone'
 export { selectColumnWidth } from './model/selectors/selectColumnWidth'
 export { selectBoqRows, boqRowsShapeEqualityFn } from './model/selectors/selectBoqRows'
 
