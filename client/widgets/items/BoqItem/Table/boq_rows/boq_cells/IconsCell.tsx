@@ -32,7 +32,7 @@ export const BoqRowActionsContainer = ({ itemIndex, rowIndex, boqRow }: Props): 
       >
         <DragIcon />
         <CopyBoqRowIcon itemIndex={itemIndex} rowIndex={rowIndex} boqRow={boqRow} />
-        <DeleteBoqRowIcon boqRowId={boqRow.id} />
+        <DeleteBoqRowIcon itemIndex={itemIndex} rowIndex={rowIndex} boqRowId={boqRow.id} />
       </Box>
     </Box>
   )

@@ -8,10 +8,12 @@ import { useRef } from 'react'
 import { saveItemsLocally } from 'client/shared/lib'
 
 type Props = {
+  itemIndex: number
+  rowIndex: number
   boqRowId: string
 }
 
-export const DeleteBoqRowIcon = ({ boqRowId }: Props): JSX.Element => {
+export const DeleteBoqRowIcon = ({ boqRowId, rowIndex, itemIndex }: Props): JSX.Element => {
   const ref = useRef<HTMLSpanElement>(null)
 
   const isBoqRowAlone = useSelectorTyped(selectIsBoqRowAlone({ boqRowId }))
@@ -31,7 +33,7 @@ export const DeleteBoqRowIcon = ({ boqRowId }: Props): JSX.Element => {
         if (disabled) return
 
         dispatch(copySlice.actions.enterIntoCopyMode())
-        dispatch(itemsSlice.actions.deleteBoqRow({ boqRowId }))
+        dispatch(itemsSlice.actions.deleteBoqRow({ itemIndex, rowIndex }))
 
         dispatch(copySlice.actions.forbidToPaste())
         dispatch(copySlice.actions.forbidToCopy())
