@@ -43,7 +43,6 @@ export const insertPasteBoqRowReducer: Type = (state, action) => {
         price: { html: '', value: 0 },
       }
 
-      // @ts-expect-error: new node method
       const boqRowsWithPasteText = boqRowsWithoutPasteText.toSpliced(insertAtIndex, 0, pasteText)
       boqItem.boq.rows = boqRowsWithPasteText
       return state

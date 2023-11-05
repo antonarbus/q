@@ -69,8 +69,6 @@ export const pasteItemReducer: Reducer = (state, action) => {
     state.forEach((item, index) => {
       if (item.type !== 'boq') return
 
-      console.log({ item, index })
-
       type SplicingSettings = {
         insertAtIndex: number
         deleteCount: number

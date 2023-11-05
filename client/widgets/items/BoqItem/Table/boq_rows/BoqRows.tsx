@@ -19,10 +19,10 @@ export const BoqRows = ({ itemIndex }: Props): JSX.Element => {
     <DraggableBoqRowsContainer
       useDragHandle
       useWindowAsScrollContainer
-      onSortStart={(): void => {
+      onSortStart={() => {
         onBoqRowDrag.start()
       }}
-      onSortEnd={({ oldIndex, newIndex }): void => {
+      onSortEnd={({ oldIndex, newIndex }) => {
         onBoqRowDrag.end({ oldIndex, newIndex, itemIndex })
       }}
     >
@@ -33,12 +33,16 @@ export const BoqRows = ({ itemIndex }: Props): JSX.Element => {
               <BoqRowLayout
                 key={boqRow.id}
                 index={rowIndex} // 'index' is internal prop consumed by SortableElement HOC
-                // disabled={isItemDisabled} // internal prop consumed by SortableElement HOC
                 i={rowIndex}
-                // itemHeight={item?.height ?? 0}
                 rowId={boqRow.id}
+              // disabled={isItemDisabled} // internal prop consumed by SortableElement HOC
+              // itemHeight={item?.height ?? 0}
               >
-                <BoqRow itemIndex={itemIndex} rowIndex={rowIndex} boqRow={boqRow} />
+                <BoqRow
+                  itemIndex={itemIndex}
+                  rowIndex={rowIndex}
+                  boqRow={boqRow}
+                />
               </BoqRowLayout>
             )
           }
