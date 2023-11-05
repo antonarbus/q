@@ -1,26 +1,22 @@
 import { useSelectorTyped } from 'client/shared/hooks'
 import { copySlice } from 'client/entities/copy'
-import type { BoqRow } from 'client/shared/types'
 import { dispatch, theme } from 'client/shared/clients'
 import { RxCross2 } from 'react-icons/rx'
-import { itemsSlice, selectIsItemAlone } from 'client/entities/items'
+import { itemsSlice, selectIsBoqRowAlone } from 'client/entities/items'
 import { gsap } from 'gsap'
 import { useRef } from 'react'
 import { saveItemsLocally } from 'client/shared/lib'
 
 type Props = {
-  itemIndex: number
-  rowIndex: number
-  boqRow: BoqRow
+  boqRowId: string
 }
 
-export const DeleteBoqRowIcon = ({ itemIndex, rowIndex, boqRow }: Props): JSX.Element => {
+export const DeleteBoqRowIcon = ({ boqRowId }: Props): JSX.Element => {
   const ref = useRef<HTMLSpanElement>(null)
 
-  // ! now it is the same as delete item, it should be different
-  const isItemAlone = useSelectorTyped(selectIsItemAlone)
+  const isBoqRowAlone = useSelectorTyped(selectIsBoqRowAlone({ boqRowId }))
   const isDeletable = useSelectorTyped(state => state.copy.isDeletable)
-  const disabled = isItemAlone || !isDeletable
+  const disabled = isBoqRowAlone || !isDeletable
 
   return (
     <span
@@ -35,7 +31,7 @@ export const DeleteBoqRowIcon = ({ itemIndex, rowIndex, boqRow }: Props): JSX.El
         if (disabled) return
 
         dispatch(copySlice.actions.enterIntoCopyMode())
-        dispatch(itemsSlice.actions.deleteBoqRow({ boqRowId: boqRow.id }))
+        dispatch(itemsSlice.actions.deleteBoqRow({ boqRowId }))
 
         dispatch(copySlice.actions.forbidToPaste())
         dispatch(copySlice.actions.forbidToCopy())
