@@ -1,24 +1,25 @@
 import type { Item } from 'client/shared/types'
 import { createSlice } from '@reduxjs/toolkit'
 import { defaultItems } from './defaultItems'
-import { reOrderItemsReducer } from './reducers/reOrderItemsReducer'
+import { deleteBoqRowReducer } from './reducers/deleteBoqRowReducer'
 import { deleteItemReducer } from './reducers/deleteItemReducer'
-import { pasteItemReducer } from './reducers/pasteItemReducer'
+import { getDefaultOrLocalItems } from './getDefaultOrLocalItems'
+import { insertPasteBoqRowReducer } from './reducers/insertPasteBoqRowReducer'
 import { insertPasteItemReducer } from './reducers/insertPasteItemReducer'
+import { makeItemBitWiderReducer } from './reducers/makeItemBitWiderReducer'
+import { pasteItemReducer } from './reducers/pasteItemReducer'
 import { removeItemsMsgReducer } from './reducers/removeItemMsgReducer'
 import { removePasteItemReducer } from './reducers/removePasteItemReducer'
+import { reOrderBoqRowsReducer } from './reducers/reOrderBoqRowsReducer'
+import { reOrderItemsReducer } from './reducers/reOrderItemsReducer'
+import { saveBoqHeaderTextReducer } from './reducers/saveBoqHeaderTextReducer'
+import { saveBoqRowHeightAndWidthReducer } from './reducers/saveBoqRowHeightAndWidthReducer'
+import { saveColWidthReducer } from './reducers/saveColWidthReducer'
 import { saveItemHeightReducer } from './reducers/saveItemHeightReducer'
 import { saveItemHeightsReducer } from './reducers/saveItemHeightsReducer'
 import { saveItemTextReducer } from './reducers/saveItemTextReducer'
 import { saveItemWidthReducer } from './reducers/saveItemWidthReducer'
 import { tellItemSavedLocallyReducer } from './reducers/tellItemSavedLocallyReducer'
-import { getDefaultOrLocalItems } from './getDefaultOrLocalItems'
-import { saveBoqHeaderTextReducer } from './reducers/saveBoqHeaderTextReducer'
-import { saveColWidthReducer } from './reducers/saveColWidthReducer'
-import { makeItemBitWiderReducer } from './reducers/makeItemBitWiderReducer'
-import { reOrderBoqRowsReducer } from './reducers/reOrderBoqRowsReducer'
-import { saveBoqRowHeightAndWidthReducer } from './reducers/saveBoqRowHeightAndWidthReducer'
-import { insertPasteBoqRowReducer } from './reducers/insertPasteBoqRowReducer'
 
 export type ItemsState = Item[]
 
@@ -28,23 +29,24 @@ export const itemsSlice = createSlice({
   name: 'items',
   initialState,
   reducers: {
-    reOrderItems: reOrderItemsReducer,
-    reOrderBoqRows: reOrderBoqRowsReducer,
-    insertPasteItem: insertPasteItemReducer,
-    insertPasteBoqRow: insertPasteBoqRowReducer,
+    deleteBoqRow: deleteBoqRowReducer,
     deleteItem: deleteItemReducer,
-    pasteItem: pasteItemReducer,
-    resetItemsToDefault: () => defaultItems,
-    tellItemSavedLocally: tellItemSavedLocallyReducer,
-    removeItemsMsg: removeItemsMsgReducer,
-    saveItemWidth: saveItemWidthReducer,
+    insertPasteBoqRow: insertPasteBoqRowReducer,
+    insertPasteItem: insertPasteItemReducer,
     makeItemBitWider: makeItemBitWiderReducer,
-    saveItemHeight: saveItemHeightReducer,
+    pasteItem: pasteItemReducer, // ? what is the difference between insertPasteItem
+    removeItemsMsg: removeItemsMsgReducer,
+    removePasteItem: removePasteItemReducer,
+    reOrderBoqRows: reOrderBoqRowsReducer,
+    reOrderItems: reOrderItemsReducer,
+    resetItemsToDefault: () => defaultItems,
+    saveBoqHeaderText: saveBoqHeaderTextReducer,
     saveBoqRowHeightAndWidth: saveBoqRowHeightAndWidthReducer,
+    saveColWidth: saveColWidthReducer,
+    saveItemHeight: saveItemHeightReducer,
     saveItemHeights: saveItemHeightsReducer, // todo: not used anywhere
     saveItemText: saveItemTextReducer,
-    removePasteItem: removePasteItemReducer,
-    saveBoqHeaderText: saveBoqHeaderTextReducer,
-    saveColWidth: saveColWidthReducer,
+    saveItemWidth: saveItemWidthReducer,
+    tellItemSavedLocally: tellItemSavedLocallyReducer,
   },
 })

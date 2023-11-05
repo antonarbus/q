@@ -10,7 +10,7 @@ export const onBoqItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, ele
   if (!(descriptionHeaderElement instanceof HTMLElement)) return
 
   // not 'auto' anymore, otherwise col jumps
-  // in ResizablePaper comp width will be set to auto back after re-render
+  // in ResizablePaper comp width will be set back to "auto" after re-render
   itemElement.style.width = itemElement.clientWidth + 'px'
 
   dispatch(itemsSlice.actions.saveColWidth({
@@ -40,7 +40,7 @@ export const onBoqItemResizeStop: OnItemResizeStop = ({
     width: descriptionColWidth,
   }))
 
-  // setTimeout to make save the width after it will become back to width: auto
+  // setTimeout to make save the width after it will become back to "width: auto"
   // on ResizablePaper component render
   // probably there is a better way to do it, but I am lazy now
   setTimeout(() => {
