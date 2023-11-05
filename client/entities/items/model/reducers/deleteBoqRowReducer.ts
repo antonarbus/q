@@ -1,35 +1,16 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { ItemsState } from '../itemsSlice'
 
-export const deleteBoqRowReducer = (state: ItemsState, action: PayloadAction<{ boqRowId: string }>): ItemsState => {
-  const { boqRowId } = action.payload
+export const deleteBoqRowReducer = (state: ItemsState, action: PayloadAction<{ itemIndex: number, rowIndex: number }>): ItemsState => {
+  const { itemIndex, rowIndex } = action.payload
 
-  state.forEach((item, itemIndex) => {
-    if (item.type !== 'boq') {
-      return state
-    }
+  const boqItem = state[itemIndex]
 
-    const boqRowsWithoutPasteText = item.boq.rows.filter(boqRow => boqRow.type === 'boq row')
-    item.boq.rows = boqRowsWithoutPasteText
+  if (boqItem?.type !== 'boq') return state
 
-    boqRowsWithoutPasteText.forEach((boqRow, boqRowIndex) => {
-      if (boqRow.id !== boqRowId) {
-        return state
-      }
-
-      const boqItem = state[itemIndex]
-
-      if (boqItem?.type !== 'boq') {
-        return state
-      }
-
-      const boqRowsWithoutDeletedRow = boqRowsWithoutPasteText.toSpliced(boqRowIndex, 1)
-      boqItem.boq.rows = boqRowsWithoutDeletedRow
-      return state
-    })
-
-    return state
-  })
+  const boqRows = boqItem.boq.rows
+  const boqRowsWithoutDeletedRow = boqRows.toSpliced(rowIndex, 1)
+  boqItem.boq.rows = boqRowsWithoutDeletedRow
 
   return state
 }
