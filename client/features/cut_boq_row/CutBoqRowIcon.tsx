@@ -1,13 +1,14 @@
 import { useSelectorTyped } from 'client/shared/hooks'
-import { dispatch, getState } from 'client/shared/clients'
-import { MdCopyAll } from 'react-icons/md'
+import { dispatch, getState, theme } from 'client/shared/clients'
+import { TbCut } from 'react-icons/tb'
 import { motion } from 'framer-motion'
 import { cleanHtml } from 'client/shared/lib/itemsUtils'
-import { copySlice } from 'client/entities/copy'
-import { itemsSlice } from 'client/entities/items'
+import { copySlice, exitCopyMode } from 'client/entities/copy'
+import { itemsSlice, selectIsBoqRowAlone } from 'client/entities/items'
 import type { MouseEvent } from 'react'
 import type { BoqRow } from 'client/shared/types'
 import { className } from 'client/shared/className'
+import { saveItemsLocally } from 'client/shared/lib'
 
 type Props = {
   itemIndex: number
@@ -15,9 +16,11 @@ type Props = {
   boqRow: BoqRow
 }
 
-export const CopyBoqRowIcon = ({ itemIndex, rowIndex }: Props): JSX.Element => {
+export const CutBoqRowIcon = ({ itemIndex, rowIndex }: Props): JSX.Element => {
   const isCopyable = useSelectorTyped(state => state.copy.isCopyable)
-  const disabled = !isCopyable
+  const isBoqRowAlone = useSelectorTyped(selectIsBoqRowAlone({ itemIndex }))
+  const isDeletable = useSelectorTyped(state => state.copy.isDeletable)
+  const disabled = isBoqRowAlone || !isDeletable || !isCopyable
 
   return (
     <motion.span
@@ -33,10 +36,13 @@ export const CopyBoqRowIcon = ({ itemIndex, rowIndex }: Props): JSX.Element => {
       }}
       onClick={(e: MouseEvent): void => {
         if (disabled) return
+
         const clickedIconElement = e.target
+
         if (!(clickedIconElement instanceof Element)) return
 
         const boqRowElement = clickedIconElement.closest(`.${className.boqRow}`)
+
         if (!boqRowElement) return
 
         dispatch(itemsSlice.actions.saveBoqRowHeightAndWidth({
@@ -55,16 +61,35 @@ export const CopyBoqRowIcon = ({ itemIndex, rowIndex }: Props): JSX.Element => {
         if (!boqRow) return
 
         dispatch(copySlice.actions.addItemIntoCopyContainer({ copyItem: boqRow, preview: cleanedHtml }))
-        dispatch(copySlice.actions.allowToPaste())
+        // dispatch(copySlice.actions.allowToPaste())
 
         const isCopyContainer = getState().copy.isCopyContainer
+
         if (!isCopyContainer) {
           dispatch(copySlice.actions.saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
           dispatch(copySlice.actions.showCopyContainer())
         }
+
+        dispatch(copySlice.actions.enterIntoCopyMode())
+        dispatch(itemsSlice.actions.deleteBoqRow({ itemIndex, rowIndex }))
+
+        dispatch(copySlice.actions.forbidToPaste())
+        dispatch(copySlice.actions.forbidToCopy())
+        dispatch(copySlice.actions.forbidToCut())
+        dispatch(copySlice.actions.forbidToDelete())
+
+        setTimeout(() => {
+          dispatch(copySlice.actions.allowToPaste())
+          dispatch(copySlice.actions.allowToCopy())
+          dispatch(copySlice.actions.allowToCut())
+          dispatch(copySlice.actions.allowToDelete())
+        }, 1000 * theme.item.animationDuration)
+
+        // exitCopyMode({ delayed: true })
+        saveItemsLocally()
       }}
     >
-      <MdCopyAll />
+      <TbCut />
     </motion.span>
   )
 }

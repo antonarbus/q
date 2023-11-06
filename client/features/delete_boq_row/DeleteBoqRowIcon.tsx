@@ -46,13 +46,13 @@ export const DeleteBoqRowIcon = ({ rowIndex, itemIndex }: Props): JSX.Element =>
           dispatch(copySlice.actions.allowToDelete())
         }, 1000 * theme.item.animationDuration)
 
-        exitCopyMode({ delayed: true }) // todo: check if we really need a delay when Froala is in place
+        // exitCopyMode({ delayed: true })
         saveItemsLocally()
       }}
       onMouseOver={(): void => {
         gsap.to(ref.current, {
           duration: 0.2,
-          scale: disabled ? 1 : 1.3,
+          scale: disabled ? 1 : 2.3,
           color: disabled ? '#acacac' : '#d25959',
         })
       }}
