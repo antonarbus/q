@@ -1,5 +1,5 @@
 import { dispatch } from 'client/shared/clients'
-import { itemsSlice } from './itemsSlice'
+import { itemsSlice } from '../itemsSlice'
 import { className } from 'client/shared/className'
 
 type Props = {

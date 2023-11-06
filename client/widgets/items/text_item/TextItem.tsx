@@ -3,10 +3,10 @@ import { theme } from 'client/shared/clients'
 import { useRef } from 'react'
 import { Froala } from 'client/shared/ui/froala'
 import { PencilAtBottomRight } from 'client/shared/components/PencilAtBottomRight'
-import { Item } from './item'
 import { changeItemText } from 'client/features/change_text'
 import { itemTextHtmlGetter } from 'client/entities/items'
 import { onTextItemResizeStop } from 'client/features/resize_item'
+import { Item } from '../Item'
 
 type Props = {
   itemIndex: number
