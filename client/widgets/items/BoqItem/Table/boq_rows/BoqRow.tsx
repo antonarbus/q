@@ -1,5 +1,5 @@
 import type { BoqRow as BoqRowType } from 'client/shared/types'
-import { BoqRowActionsContainer } from './boq_cells/IconsCell'
+import { BoqRowActionsContainer } from './BoqRowActionsContainer'
 import { NumberCell } from './boq_cells/NumberCell'
 import { DescriptionCell } from './boq_cells/DescriptionCell'
 import { ItemCell } from './boq_cells/ItemCell'
