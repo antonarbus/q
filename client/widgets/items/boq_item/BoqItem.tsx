@@ -1,5 +1,5 @@
 import { onBoqItemResizeStart, onBoqItemResizeStop } from 'client/features/resize_item'
-import { Item } from '../item'
+import { Item } from '../Item'
 import { Header } from './Header'
 import { BoqTable } from './Table/BoqTable'
 
