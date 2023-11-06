@@ -15,7 +15,7 @@ const Handle = ({ itemIndex }: Props): JSX.Element => {
 
   return (
     <motion.span
-      whileHover={{ scale: isDisabled ? 1 : 1.3 }}
+      whileHover={{ scale: isDisabled ? 1 : 2.3 }}
       style={{
         color: isDisabled ? '#acacac' : '#000',
         cursor: isDisabled ? 'default' : 'move',

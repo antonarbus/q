@@ -49,7 +49,7 @@ export const DeleteIcon = ({ itemIndex }: Props): EmotionJSX.Element => {
           dispatch(copySlice.actions.allowToDelete())
         }, 1000 * theme.item.animationDuration)
 
-        exitCopyMode({ delayed: true }) // todo: check if we really need a delay when Froala is in place
+        // exitCopyMode({ delayed: true })
         saveItemsLocally()
       }}
       onMouseOver={(): void => {
