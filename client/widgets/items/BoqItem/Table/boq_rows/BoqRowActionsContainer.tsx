@@ -18,8 +18,8 @@ export const BoqRowActionsContainer = ({ itemIndex, rowIndex, boqRow }: Props): 
       className={className.actionsContainer}
       sx={{
         position: 'absolute',
-        top: 0,
         left: '-28px',
+        top: 0,
       }}
     >
       <Box
