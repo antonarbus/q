@@ -4,7 +4,7 @@ import { DraggableBoqRowsContainer } from './DraggableBoqRowsContainer'
 import { BoqRowLayout } from './BoqRowLayout'
 import { BoqRow } from './BoqRow'
 import { boqRowsShapeEqualityFn, selectBoqRows } from 'client/entities/items'
-import { onBoqRowDrag } from 'client/features/drag_boq_row'
+import { onBoqRowDrag } from 'client/features/boq_row_actions/drag_boq_row'
 import { BoqRowPasteItem } from './BoqRowPasteItem'
 import { nanoid } from 'nanoid'
 

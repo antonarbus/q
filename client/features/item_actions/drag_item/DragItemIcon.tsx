@@ -22,4 +22,4 @@ const Handle = (): JSX.Element => {
   )
 }
 
-export const DragIcon = SortableHandle(Handle)
+export const DragItemIcon = SortableHandle(Handle)

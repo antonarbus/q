@@ -1,0 +1,1 @@
+export { DeleteItemIcon } from './DeleteItemIcon'

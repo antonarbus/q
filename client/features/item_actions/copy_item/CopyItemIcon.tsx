@@ -12,7 +12,7 @@ type Props = {
   itemIndex: number
 }
 
-export const CopyIcon = ({ itemIndex }: Props): JSX.Element => {
+export const CopyItemIcon = ({ itemIndex }: Props): JSX.Element => {
   const isCopyable = useSelectorTyped(state => state.copy.isCopyable)
   const disabled = !isCopyable
 

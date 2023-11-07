@@ -12,7 +12,7 @@ type Props = {
   itemIndex: number
 }
 
-export const DeleteIcon = ({ itemIndex }: Props): EmotionJSX.Element => {
+export const DeleteItemIcon = ({ itemIndex }: Props): EmotionJSX.Element => {
   const ref = useRef<HTMLSpanElement>(null)
 
   const isItemAlone = useSelectorTyped(selectIsItemAlone)

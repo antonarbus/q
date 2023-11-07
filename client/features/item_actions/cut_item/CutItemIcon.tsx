@@ -13,7 +13,7 @@ type Props = {
   itemIndex: number
 }
 
-export const CutIcon = ({ itemIndex }: Props): JSX.Element => {
+export const CutItemIcon = ({ itemIndex }: Props): JSX.Element => {
   const isItemAlone = useSelectorTyped(selectIsItemAlone)
   const isCuttable = useSelectorTyped(state => state.copy.isCuttable)
   const disabled = isItemAlone || !isCuttable

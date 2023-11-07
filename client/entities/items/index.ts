@@ -13,15 +13,10 @@ export { selectBoqRows, boqRowsShapeEqualityFn } from './selectors/selectBoqRows
 // thunks
 export { saveItemHeightByIndex } from './model/saveItemHeightByIndex'
 
-// hooks
-export { useIsItemDisabled } from './hooks/useIsItemDisabled'
-
 // ui
 
 export { DraggableItemsContainer } from './ui/DraggableItemsContainer'
-export { ItemLayout } from './ui/item_layout'
-export { ItemMsg } from './ui/item_msg'
-export { PasteHere } from './ui/item_paste_text'
+export { Item } from './ui/Item'
 
 // html getters
 export { itemTextHtmlGetter } from './html_getters/itemTextHtmlGetter'

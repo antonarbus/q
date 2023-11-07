@@ -1,5 +1,5 @@
 import type { BoqRow as BoqRowType } from 'client/shared/types'
-import { BoqRowActionsContainer } from './BoqRowActionsContainer'
+import { BoqRowActions } from 'client/features/boq_row_actions'
 import { NumberCell } from './boq_cells/NumberCell'
 import { DescriptionCell } from './boq_cells/DescriptionCell'
 import { ItemCell } from './boq_cells/ItemCell'
@@ -16,7 +16,7 @@ type Props = {
 export const BoqRow = ({ boqRow, itemIndex, rowIndex }: Props): JSX.Element => {
   return (
     <BoqRowLayout id={boqRow.id}>
-      <BoqRowActionsContainer itemIndex={itemIndex} rowIndex={rowIndex} boqRow={boqRow} />
+      <BoqRowActions itemIndex={itemIndex} rowIndex={rowIndex} boqRow={boqRow} />
       <NumberCell itemIndex={itemIndex} boqRow={boqRow} rowIndex={rowIndex} />
       <DescriptionCell itemIndex={itemIndex} boqRow={boqRow} rowIndex={rowIndex} />
       <ItemCell itemIndex={itemIndex} boqRow={boqRow} rowIndex={rowIndex} />
