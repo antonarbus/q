@@ -1,5 +1,5 @@
 import { useSelectorTyped } from 'client/shared/hooks'
-import { onItemDrag } from 'client/features/drag_item'
+import { onItemDrag } from 'client/features/item_actions/drag_item'
 import { TextItem } from './text_item/TextItem'
 import { PasteItem } from './paste_item/PasteItem'
 import { AnimatePresence } from 'framer-motion'

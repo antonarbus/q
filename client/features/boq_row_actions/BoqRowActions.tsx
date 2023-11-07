@@ -1,8 +1,8 @@
 import { Box } from '@mui/material'
-import { CopyBoqRowIcon } from 'client/features/copy_boq_row'
-import { CutBoqRowIcon } from 'client/features/cut_boq_row'
-import { DeleteBoqRowIcon } from 'client/features/delete_boq_row'
-import { DragBoqRow } from 'client/features/drag_boq_row'
+import { CopyBoqRowIcon } from './copy_boq_row'
+import { CutBoqRowIcon } from './cut_boq_row'
+import { DeleteBoqRowIcon } from './delete_boq_row'
+import { DragBoqRow } from './drag_boq_row'
 import { className } from 'client/shared/className'
 import type { BoqRow } from 'client/shared/types'
 
@@ -12,7 +12,7 @@ type Props = {
   boqRow: BoqRow
 }
 
-export const BoqRowActionsContainer = ({ itemIndex, rowIndex, boqRow }: Props): JSX.Element => {
+export const BoqRowActions = ({ itemIndex, rowIndex, boqRow }: Props): JSX.Element => {
   return (
     <Box
       className={className.actionsContainer}

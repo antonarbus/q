@@ -1,11 +1,10 @@
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from 'client/shared/types'
 import type { ReactNode } from 'react'
-import { useIsItemDisabled, ItemMsg, PasteHere, ItemLayout } from 'client/entities/items'
 import { getState } from 'client/shared/clients'
-import { DragIcon } from 'client/features/drag_item'
-import { CopyIcon } from 'client/features/copy_item/CopyIcon'
-import { CutIcon } from 'client/features/cut_item/CutIcon'
-import { DeleteIcon } from 'client/features/delete_item/DeleteIcon'
+import { useIsItemDisabled } from '../hooks/useIsItemDisabled'
+import { ItemLayout } from './item_layout'
+import { ItemMsg } from './item_msg'
+import { PasteHere } from './item_paste_text'
 
 type Props = {
   itemIndex: number
@@ -15,6 +14,7 @@ type Props = {
   onItemResize?: OnItemResize
   onItemResizeStart?: OnItemResizeStart
   autoWidth?: boolean
+  itemActions: JSX.Element
 }
 
 export const Item = ({
@@ -25,6 +25,7 @@ export const Item = ({
   onItemResize,
   onItemResizeStart,
   autoWidth,
+  itemActions,
 }: Props): JSX.Element => {
   const isItemDisabled = useIsItemDisabled()
   const item = getState().items[itemIndex]
@@ -41,14 +42,7 @@ export const Item = ({
       onItemResizeStop={onItemResizeStop}
       onItemResize={onItemResize}
       onItemResizeStart={onItemResizeStart}
-      itemActionElements={(
-        <>
-          <DragIcon />
-          <CopyIcon itemIndex={itemIndex} />
-          <CutIcon itemIndex={itemIndex} />
-          <DeleteIcon itemIndex={itemIndex} />
-        </>
-      )}
+      itemActionElements={itemActions}
     >
       <ItemMsg itemIndex={itemIndex} />
       <PasteHere itemIndex={itemIndex}>
