@@ -2,10 +2,6 @@ import { onBoqItemResizeStart, onBoqItemResizeStop } from 'client/features/resiz
 import { Header } from './Header'
 import { BoqTable } from './Table/BoqTable'
 import { Item } from 'client/entities/items'
-import { DragItemIcon } from 'client/features/item_actions/drag_item'
-import { CopyItemIcon } from 'client/features/item_actions/copy_item'
-import { CutItemIcon } from 'client/features/item_actions/cut_item'
-import { DeleteItemIcon } from 'client/features/item_actions/delete_item'
 import { ItemActions } from 'client/features/item_actions'
 
 type Props = {

@@ -6,10 +6,6 @@ import { PencilAtBottomRight } from 'client/shared/components/PencilAtBottomRigh
 import { changeItemText } from 'client/features/change_text'
 import { Item, itemTextHtmlGetter } from 'client/entities/items'
 import { onTextItemResizeStop } from 'client/features/resize_item'
-import { DragItemIcon } from 'client/features/item_actions/drag_item'
-import { CopyItemIcon } from 'client/features/item_actions/copy_item'
-import { CutItemIcon } from 'client/features/item_actions/cut_item'
-import { DeleteItemIcon } from 'client/features/item_actions/delete_item'
 import { ItemActions } from 'client/features/item_actions'
 
 type Props = {

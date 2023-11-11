@@ -49,7 +49,12 @@ export const DeleteItemIcon = ({ itemIndex }: Props): EmotionJSX.Element => {
           dispatch(copySlice.actions.allowToDelete())
         }, 1000 * theme.item.animationDuration)
 
-        // exitCopyMode({ delayed: true })
+        const isCopyContainer = getState().copy.isCopyContainer
+
+        if (!isCopyContainer) {
+          exitCopyMode({ delayed: true })
+        }
+
         saveItemsLocally()
       }}
       onMouseOver={(): void => {

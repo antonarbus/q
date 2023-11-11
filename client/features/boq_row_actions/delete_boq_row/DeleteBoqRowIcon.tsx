@@ -1,6 +1,6 @@
 import { useSelectorTyped } from 'client/shared/hooks'
 import { copySlice, exitCopyMode } from 'client/entities/copy'
-import { dispatch, theme } from 'client/shared/clients'
+import { dispatch, getState, theme } from 'client/shared/clients'
 import { RxCross2 } from 'react-icons/rx'
 import { itemsSlice, selectIsBoqRowAlone } from 'client/entities/items'
 import { gsap } from 'gsap'
@@ -46,7 +46,12 @@ export const DeleteBoqRowIcon = ({ rowIndex, itemIndex }: Props): JSX.Element =>
           dispatch(copySlice.actions.allowToDelete())
         }, 1000 * theme.item.animationDuration)
 
-        // exitCopyMode({ delayed: true })
+        const isCopyContainer = getState().copy.isCopyContainer
+
+        if (!isCopyContainer) {
+          exitCopyMode({ delayed: true })
+        }
+
         saveItemsLocally()
       }}
       onMouseOver={(): void => {
