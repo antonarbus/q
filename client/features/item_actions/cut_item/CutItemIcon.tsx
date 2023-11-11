@@ -58,6 +58,7 @@ export const CutItemIcon = ({ itemIndex }: Props): JSX.Element => {
         dispatch(copySlice.actions.forbidToDelete())
 
         const isCopyContainer = getState().copy.isCopyContainer
+
         if (!isCopyContainer) {
           dispatch(copySlice.actions.saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
           dispatch(copySlice.actions.showCopyContainer())
