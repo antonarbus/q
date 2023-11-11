@@ -1,6 +1,5 @@
 import type { SxProps } from '@mui/material'
 import type { MutableRefObject, RefObject } from 'react'
-import type { OnFroalaContentChange } from 'client/shared/types'
 import type FroalaEditor from 'froala-editor'
 import { Box } from '@mui/material'
 import { useStartFroala } from './useStartFroala'
@@ -15,7 +14,7 @@ type Props = {
   placeholder?: string
   additionalStyle?: SxProps
   rowIndex?: number
-  onContentChange: OnFroalaContentChange
+  onContentChange: () => void
   heightDuringAnimationRef: MutableRefObject<number | undefined>
 }
 

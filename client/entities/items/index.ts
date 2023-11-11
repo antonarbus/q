@@ -20,11 +20,5 @@ export { Item } from './ui/Item'
 
 // html getters
 export { itemTextHtmlGetter } from './html_getters/itemTextHtmlGetter'
-export { itemBoqColumnNameDescriptionHtmlGetter } from './html_getters/itemBoqColumnNameDescriptionHtmlGetter'
-export { itemBoqColumnNameItemHtmlGetter } from './html_getters/itemBoqColumnNameItemHtmlGetter'
-export { itemBoqColumnNamePriceHtmlGetter } from './html_getters/itemBoqColumnNamePriceHtmlGetter'
-export { itemBoqColumnNameQtyHtmlGetter } from './html_getters/itemBoqColumnNameQtyHtmlGetter'
-export { itemBoqHeaderCurrencyHtmlGetter } from './html_getters/itemBoqHeaderCurrencyHtmlGetter'
-export { itemBoqHeaderPriceHtmlGetter } from './html_getters/itemBoqHeaderPriceHtmlGetter'
-export { itemBoqHeaderSubtotalTextHtmlGetter } from './html_getters/itemBoqHeaderSubtotalTextHtmlGetter'
-export { itemBoqHeaderTitleHtmlGetter } from './html_getters/itemBoqHeaderTitleHtmlGetter'
+export { boqColumnNameHtmlGetter } from './html_getters/boqColumnNameHtmlGetter'
+export { boqHeaderHtmlGetter } from './html_getters/boqHeaderHtmlGetter'

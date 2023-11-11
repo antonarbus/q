@@ -1,4 +1,3 @@
-import type { OnFroalaContentChange } from 'client/shared/types'
 import type { MutableRefObject, RefObject } from 'react'
 import { useEffect } from 'react'
 import FroalaEditor from 'froala-editor'
@@ -11,7 +10,7 @@ import { froalaStaticOptions } from './froalaStaticOptions'
 type Props = {
   itemIndex: number
   initHtmlGetter: () => string
-  onContentChange: OnFroalaContentChange
+  onContentChange: () => void
   froalaElementRef: RefObject<HTMLDivElement>
   editorRef: MutableRefObject<FroalaEditor | null>
   placeholder?: string
@@ -48,11 +47,8 @@ export const useStartFroala = ({
               window.froalas = window.froalas.filter(({ current }) => Boolean(current))
               // console.log('froalas qty after init: ', window.froalas.length)
             },
-            contentChanged: (): void => {
-              if (!editorRef.current) return
-              const html = editorRef.current.html.get()
-              const onContentChangeWithBoundArgs = onContentChange.bind(null, { itemIndex, html, rowIndex })
-              onContentChangeWithBoundArgs()
+            contentChanged: () => {
+              onContentChange()
             },
           },
         },
