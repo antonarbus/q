@@ -5,5 +5,6 @@ export const itemBoqColumnNameDescriptionHtmlGetter: HtmlGetter = ({ itemIndex, 
   const item = getState().items[itemIndex]
   if (!item) return ''
   if (item.type !== 'boq') return ''
-  return item.boq.column.description.html
+  const html = item.boq.column.description.html
+  return html
 }

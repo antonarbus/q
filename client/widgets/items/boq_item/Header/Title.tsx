@@ -1,6 +1,6 @@
 import { itemBoqHeaderTitleHtmlGetter } from 'client/entities/items'
 import { changeBoqHeaderTitle } from 'client/features/change_text'
-import { getState } from 'client/shared/clients'
+// import { getState } from 'client/shared/clients'
 import { Froala } from 'client/shared/ui/froala'
 import { useRef } from 'react'
 
@@ -8,12 +8,12 @@ type Props = {
   itemIndex: number
 }
 
-export const Title = ({ itemIndex }: Props): JSX.Element | null => {
+export const Title = ({ itemIndex }: Props): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef(null)
-  const item = getState().items[itemIndex]
+  // const item = getState().items[itemIndex]
 
-  if (item?.type !== 'boq') return null
+  // if (item?.type !== 'boq') return null
 
   return (
     <Froala

@@ -9,6 +9,8 @@ export const changeBoqDescriptionColumnName: OnFroalaContentChange = ({ html, it
   const prevHtml = item.boq.column.description.html
   const didTextChange = prevHtml !== html
   if (!didTextChange) return
-  dispatch(itemsSlice.actions.saveItemText({ itemIndex, html, rowIndex }))
+  console.log('🚀  prevHtml:', prevHtml)
+  console.log('🚀  html:', html)
+  dispatch(itemsSlice.actions.saveBoqColumnNameText({ itemIndex, html, columnName: 'description' }))
   saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
 }
