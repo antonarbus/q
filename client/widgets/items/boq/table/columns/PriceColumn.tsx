@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { ResizableColHeader } from './ResizableColHeader'
+import { ResizableColumn } from './ResizableColumn'
 import { Froala } from 'client/shared/ui/froala'
 import { boqColumnNameHtmlGetter } from 'client/entities/items'
 import type FroalaEditor from 'froala-editor'
@@ -9,16 +9,16 @@ type Props = {
   itemIndex: number
 }
 
-const boqColumnKey = 'qty'
+const boqColumnKey = 'price'
 
-export const QtyColHeader = ({ itemIndex }: Props): JSX.Element => {
+export const PriceColumn = ({ itemIndex }: Props): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
 
   return (
-    <ResizableColHeader
-      headerName='qty'
-      className='th qty resizable'
+    <ResizableColumn
+      headerName='price'
+      className='th price resizable'
       itemIndex={itemIndex}
       minWidth={100}
       flexGrow={0}
@@ -27,7 +27,7 @@ export const QtyColHeader = ({ itemIndex }: Props): JSX.Element => {
         itemIndex={itemIndex}
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
-        placeholder='Qty...'
+        placeholder='Price...'
         initHtmlGetter={() => boqColumnNameHtmlGetter({ itemIndex, boqColumnKey })}
         onContentChange={() => {
           if (editorRef.current === null) return
@@ -38,6 +38,6 @@ export const QtyColHeader = ({ itemIndex }: Props): JSX.Element => {
           flexGrow: 1,
         }}
       />
-    </ResizableColHeader>
+    </ResizableColumn>
   )
 }

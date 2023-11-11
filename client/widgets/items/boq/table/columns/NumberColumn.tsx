@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { ResizableColHeader } from './ResizableColHeader'
+import { ResizableColumn } from './ResizableColumn'
 import type FroalaEditor from 'froala-editor'
 import { changeBoqColumnName } from 'client/features/change_text'
 import { boqColumnNameHtmlGetter } from 'client/entities/items'
@@ -11,12 +11,12 @@ type Props = {
 
 const boqColumnKey = 'number'
 
-export const NumberColHeader = ({ itemIndex }: Props): JSX.Element => {
+export const NumberColumn = ({ itemIndex }: Props): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
 
   return (
-    <ResizableColHeader
+    <ResizableColumn
       headerName='number'
       className='th number resizable'
       itemIndex={itemIndex}
@@ -38,6 +38,6 @@ export const NumberColHeader = ({ itemIndex }: Props): JSX.Element => {
           flexGrow: 1,
         }}
       />
-    </ResizableColHeader>
+    </ResizableColumn>
   )
 }

@@ -1,6 +1,6 @@
 import { onBoqItemResizeStart, onBoqItemResizeStop } from 'client/features/resize_item'
-import { Header } from './Header'
-import { BoqTable } from './Table/BoqTable'
+import { Header } from './header'
+import { BoqTable } from './table/BoqTable'
 import { Item } from 'client/entities/items'
 import { ItemActions } from 'client/features/item_actions'
 

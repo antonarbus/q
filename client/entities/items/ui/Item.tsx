@@ -4,7 +4,7 @@ import { getState } from 'client/shared/clients'
 import { useIsItemDisabled } from '../hooks/useIsItemDisabled'
 import { ItemLayout } from './item_layout'
 import { ItemMsg } from './item_msg'
-import { PasteHere } from './item_paste_text'
+import { PasteItemTextOverlay } from './paste_item_overlay_text'
 
 type Props = {
   itemIndex: number
@@ -45,9 +45,9 @@ export const Item = ({
       itemActionElements={itemActions}
     >
       <ItemMsg itemIndex={itemIndex} />
-      <PasteHere itemIndex={itemIndex}>
+      <PasteItemTextOverlay itemIndex={itemIndex}>
         {children}
-      </PasteHere>
+      </PasteItemTextOverlay>
     </ItemLayout>
   )
 }
