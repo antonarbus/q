@@ -49,6 +49,7 @@ export const ResizableColHeader = ({
           width: '3px',
           right: '0px',
           borderRadius: '3px',
+          zIndex: 1,
         },
       }}
       onResizeStart={(event, direction, element): void => {
