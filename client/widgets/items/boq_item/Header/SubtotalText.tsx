@@ -2,13 +2,13 @@ import { itemBoqHeaderSubtotalTextHtmlGetter } from 'client/entities/items'
 import { changeBoqHeaderSubtotal } from 'client/features/change_text'
 import { getState } from 'client/shared/clients'
 import { Froala } from 'client/shared/ui/froala'
-import { useRef } from 'react'
+import { type ReactNode, useRef } from 'react'
 
 type Props = {
   itemIndex: number
 }
 
-export const SubtotalText = ({ itemIndex }: Props): JSX.Element | null => {
+export const SubtotalText = ({ itemIndex }: Props): ReactNode => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef(null)
   const item = getState().items[itemIndex]

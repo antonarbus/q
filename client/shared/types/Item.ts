@@ -81,6 +81,7 @@ export type BoqItem = {
 } & Common
 
 export type BoqHeaderKey = keyof BoqItem['boq']['header']
+export type BoqColumnKey = keyof BoqCols
 
 type TextItem = {
   type: 'text'

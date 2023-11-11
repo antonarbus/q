@@ -10,6 +10,7 @@ export type {
   HtmlGetter,
   BoqColWidth,
   BoqHeaderKey,
+  BoqColumnKey,
   BoqRow,
   BoqItem,
 } from './Item'
