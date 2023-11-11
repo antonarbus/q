@@ -1,19 +1,18 @@
-import { itemBoqHeaderSubtotalTextHtmlGetter } from 'client/entities/items'
-import { changeBoqHeaderSubtotal } from 'client/features/change_text'
-import { getState } from 'client/shared/clients'
+import { boqHeaderHtmlGetter } from 'client/entities/items'
+import { changeBoqHeaderText } from 'client/features/change_text'
 import { Froala } from 'client/shared/ui/froala'
-import { type ReactNode, useRef } from 'react'
+import { useRef } from 'react'
+import type FroalaEditor from 'froala-editor'
 
 type Props = {
   itemIndex: number
 }
 
-export const SubtotalText = ({ itemIndex }: Props): ReactNode => {
-  const froalaElementRef = useRef<HTMLDivElement>(null)
-  const editorRef = useRef(null)
-  const item = getState().items[itemIndex]
+const boqHeaderKey = 'subtotal'
 
-  if (item?.type !== 'boq') return null
+export const SubtotalText = ({ itemIndex }: Props): JSX.Element => {
+  const froalaElementRef = useRef<HTMLDivElement>(null)
+  const editorRef = useRef<FroalaEditor | null>(null)
 
   return (
     <Froala
@@ -21,8 +20,12 @@ export const SubtotalText = ({ itemIndex }: Props): ReactNode => {
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
       placeholder='Subtotal...'
-      initHtmlGetter={itemBoqHeaderSubtotalTextHtmlGetter}
-      onContentChange={changeBoqHeaderSubtotal}
+      initHtmlGetter={() => boqHeaderHtmlGetter({ itemIndex, boqHeaderKey })}
+      onContentChange={() => {
+        if (editorRef.current === null) return
+        const html = editorRef.current.html.get()
+        changeBoqHeaderText({ itemIndex, html, boqHeaderKey })
+      }}
       additionalStyle={{
         height: '100%',
         width: '100%',

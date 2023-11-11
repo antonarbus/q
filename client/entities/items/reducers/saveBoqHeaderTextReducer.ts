@@ -6,12 +6,12 @@ export const saveBoqHeaderTextReducer = (state: ItemsState, action: PayloadActio
   itemIndex: number
   html?: string
   rowIndex?: number
-  headerElementName: BoqHeaderKey
+  boqHeaderKey: BoqHeaderKey
 }>): void => {
-  const { itemIndex, html, headerElementName } = action.payload
+  const { itemIndex, html, boqHeaderKey } = action.payload
   const item = state[itemIndex]
   if (!item) return
   if (item.type !== 'boq') return
   if (html === undefined) return
-  item.boq.header[headerElementName].html = html
+  item.boq.header[boqHeaderKey].html = html
 }

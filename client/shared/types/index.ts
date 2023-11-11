@@ -17,8 +17,6 @@ export type {
 
 export type { PastePos, CopyPlace } from './Copy'
 
-export type { OnFroalaContentChange } from './froala'
-
 export type { OnItemResizeStop, OnItemResizeStart, OnItemResize } from './ResizablePaper'
 
 export type RootState = ReturnType<typeof store.getState>

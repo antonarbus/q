@@ -1,14 +1,20 @@
 import { itemsSlice } from 'client/entities/items'
 import { dispatch, getState } from 'client/shared/clients'
 import { saveItemsLocally } from 'client/shared/lib'
-import type { OnFroalaContentChange } from 'client/shared/types'
+import type { BoqColumnKey } from 'client/shared/types'
 
-export const changeBoqHeaderCurrency: OnFroalaContentChange = ({ html, itemIndex, rowIndex }) => {
+type Props = {
+  html: string
+  itemIndex: number
+  boqColumnKey: BoqColumnKey
+}
+
+export const changeBoqColumnName = ({ html, itemIndex, boqColumnKey }: Props): void => {
   const item = getState().items[itemIndex]
   if (item?.type !== 'boq') return
-  const prevHtml = item.boq.header.currency.html
+  const prevHtml = item.boq.column[boqColumnKey].html
   const didTextChange = prevHtml !== html
   if (!didTextChange) return
-  dispatch(itemsSlice.actions.saveBoqHeaderText({ itemIndex, html, rowIndex, headerElementName: 'currency' }))
+  dispatch(itemsSlice.actions.saveBoqColumnNameText({ itemIndex, html, boqColumnKey }))
   saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
 }

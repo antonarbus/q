@@ -1,19 +1,18 @@
-import { itemBoqHeaderTitleHtmlGetter } from 'client/entities/items'
-import { changeBoqHeaderTitle } from 'client/features/change_text'
-// import { getState } from 'client/shared/clients'
+import { boqHeaderHtmlGetter } from 'client/entities/items'
+import { changeBoqHeaderText } from 'client/features/change_text'
 import { Froala } from 'client/shared/ui/froala'
 import { useRef } from 'react'
+import type FroalaEditor from 'froala-editor'
 
 type Props = {
   itemIndex: number
 }
 
+const boqHeaderKey = 'title'
+
 export const Title = ({ itemIndex }: Props): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
-  const editorRef = useRef(null)
-  // const item = getState().items[itemIndex]
-
-  // if (item?.type !== 'boq') return null
+  const editorRef = useRef<FroalaEditor | null>(null)
 
   return (
     <Froala
@@ -21,8 +20,12 @@ export const Title = ({ itemIndex }: Props): JSX.Element => {
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
       placeholder='Title...'
-      initHtmlGetter={itemBoqHeaderTitleHtmlGetter}
-      onContentChange={changeBoqHeaderTitle}
+      initHtmlGetter={() => boqHeaderHtmlGetter({ itemIndex, boqHeaderKey })}
+      onContentChange={() => {
+        if (editorRef.current === null) return
+        const html = editorRef.current.html.get()
+        changeBoqHeaderText({ itemIndex, html, boqHeaderKey })
+      }}
       additionalStyle={{
         flexGrow: 1,
       }}

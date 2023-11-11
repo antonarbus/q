@@ -1,4 +1,4 @@
-import type { HtmlGetter, OnFroalaContentChange } from 'client/shared/types'
+import type { HtmlGetter } from 'client/shared/types'
 import type { SxProps } from '@mui/material'
 import type { MutableRefObject, RefObject } from 'react'
 import type FroalaEditor from 'froala-editor'
@@ -17,7 +17,7 @@ type Props = {
   placeholder?: string
   additionalStyle?: SxProps
   rowIndex?: number
-  onContentChange: OnFroalaContentChange
+  onContentChange: () => void
 }
 
 export const Froala = ({

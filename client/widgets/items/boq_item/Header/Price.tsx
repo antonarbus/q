@@ -1,19 +1,18 @@
-import { itemBoqHeaderPriceHtmlGetter } from 'client/entities/items'
-import { changeBoqHeaderPrice } from 'client/features/change_text'
-import { getState } from 'client/shared/clients'
+import { boqHeaderHtmlGetter } from 'client/entities/items'
+import { changeBoqHeaderText } from 'client/features/change_text'
 import { Froala } from 'client/shared/ui/froala'
-import { type ReactNode, useRef } from 'react'
+import { useRef } from 'react'
+import type FroalaEditor from 'froala-editor'
 
 type Props = {
   itemIndex: number
 }
 
-export const Price = ({ itemIndex }: Props): ReactNode => {
-  const froalaElementRef = useRef<HTMLDivElement>(null)
-  const editorRef = useRef(null)
-  const item = getState().items[itemIndex]
+const boqHeaderKey = 'price'
 
-  if (item?.type !== 'boq') return null
+export const Price = ({ itemIndex }: Props): JSX.Element => {
+  const froalaElementRef = useRef<HTMLDivElement>(null)
+  const editorRef = useRef<FroalaEditor | null>(null)
 
   return (
     <Froala
@@ -21,8 +20,12 @@ export const Price = ({ itemIndex }: Props): ReactNode => {
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
       placeholder='Price...'
-      initHtmlGetter={itemBoqHeaderPriceHtmlGetter}
-      onContentChange={changeBoqHeaderPrice}
+      initHtmlGetter={() => boqHeaderHtmlGetter({ itemIndex, boqHeaderKey })}
+      onContentChange={() => {
+        if (editorRef.current === null) return
+        const html = editorRef.current.html.get()
+        changeBoqHeaderText({ itemIndex, html, boqHeaderKey })
+      }}
       additionalStyle={{
         width: '100%',
         whiteSpace: 'nowrap',
