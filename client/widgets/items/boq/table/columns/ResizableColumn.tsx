@@ -14,7 +14,7 @@ type Props = {
   minWidth: number
 }
 
-export const ResizableColHeader = ({
+export const ResizableColumn = ({
   children,
   className,
   flexGrow,

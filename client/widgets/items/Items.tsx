@@ -1,10 +1,10 @@
 import { useSelectorTyped } from 'client/shared/hooks'
 import { onItemDrag } from 'client/features/item_actions/drag_item'
-import { TextItem } from './text_item/TextItem'
-import { PasteItem } from './paste_item/PasteItem'
+import { TextItem } from './text/TextItem'
+import { PasteItem } from './paste/PasteItem'
 import { AnimatePresence } from 'framer-motion'
 import { DraggableItemsContainer } from '../../entities/items/ui/DraggableItemsContainer'
-import { BoqItem } from './boq_item/BoqItem'
+import { BoqItem } from './boq/BoqItem'
 import { itemsShapeEqualityFn } from 'client/entities/items'
 
 export const Items = (): JSX.Element => {

@@ -1,5 +1,5 @@
-import { BoqRows } from './boq_rows/BoqRows'
-import { BoqColsHeader } from './boq_cols_header'
+import { BoqRows } from './rows/BoqRows'
+import { BoqColumns } from './columns'
 import { BoqTableLayout } from 'client/shared/layouts'
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 export const BoqTable = ({ itemIndex }: Props): JSX.Element => {
   return (
     <BoqTableLayout>
-      <BoqColsHeader itemIndex={itemIndex} />
+      <BoqColumns itemIndex={itemIndex} />
       <BoqRows itemIndex={itemIndex} />
     </BoqTableLayout>
   )

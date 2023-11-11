@@ -5,7 +5,7 @@ import { BoqRowLayout } from './BoqRowLayout'
 import { BoqRow } from './BoqRow'
 import { boqRowsShapeEqualityFn, selectBoqRows } from 'client/entities/items'
 import { onBoqRowDrag } from 'client/features/boq_row_actions/drag_boq_row'
-import { BoqRowPasteItem } from './BoqRowPasteItem'
+import { BoqPasteRowTextOverlay } from './BoqPasteRowTextOverlay'
 import { nanoid } from 'nanoid'
 
 type Props = {
@@ -47,7 +47,7 @@ export const BoqRows = ({ itemIndex }: Props): JSX.Element => {
             )
           }
 
-          return <BoqRowPasteItem key={nanoid(3)} />
+          return <BoqPasteRowTextOverlay key={nanoid(3)} />
         })}
       </AnimatePresence>
     </DraggableBoqRowsContainer >

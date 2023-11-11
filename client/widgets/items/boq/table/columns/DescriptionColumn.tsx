@@ -1,5 +1,5 @@
 import { Froala } from 'client/shared/ui/froala'
-import { ResizableColHeader } from './ResizableColHeader'
+import { ResizableColumn } from './ResizableColumn'
 import { type ReactNode, useRef } from 'react'
 import { boqColumnNameHtmlGetter } from 'client/entities/items'
 import { changeBoqColumnName } from 'client/features/change_text'
@@ -11,12 +11,12 @@ type Props = {
 
 const boqColumnKey = 'description'
 
-export const DescriptionColHeader = ({ itemIndex }: Props): ReactNode => {
+export const DescriptionColumn = ({ itemIndex }: Props): ReactNode => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
 
   return (
-    <ResizableColHeader
+    <ResizableColumn
       headerName='description'
       className='th description resizable'
       itemIndex={itemIndex}
@@ -38,6 +38,6 @@ export const DescriptionColHeader = ({ itemIndex }: Props): ReactNode => {
           flexGrow: 1,
         }}
       />
-    </ResizableColHeader>
+    </ResizableColumn>
   )
 }
