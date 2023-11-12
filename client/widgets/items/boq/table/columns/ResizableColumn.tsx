@@ -22,7 +22,7 @@ export const ResizableColumn = ({
   itemIndex,
   minWidth,
 }: Props): JSX.Element => {
-  const colWidth = useSelectorTyped(selectColumnWidth({ itemIndex, headerName }))
+  const colWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColKey: headerName }))
   const isColWidthSetManually = colWidth !== undefined
 
   return (

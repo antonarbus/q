@@ -1,8 +1,8 @@
-import { NumberColumn } from './NumberColumn'
-import { DescriptionColumn } from './DescriptionColumn'
-import { ItemColumn } from './ItemColumn'
-import { QtyColumn } from './QtyColumn'
-import { PriceColumn } from './PriceColumn'
+import { NumberColumn } from './column_headers/NumberColumn'
+import { DescriptionColumn } from './column_headers/DescriptionColumn'
+import { ItemColumn } from './column_headers/ItemColumn'
+import { QtyColumn } from './column_headers/QtyColumn'
+import { PriceColumn } from './column_headers/PriceColumn'
 import { BoqColumnsLayout } from 'client/shared/layouts'
 
 type Props = {

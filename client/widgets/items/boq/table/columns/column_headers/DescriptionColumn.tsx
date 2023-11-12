@@ -1,5 +1,5 @@
 import { Froala } from 'client/shared/ui/froala'
-import { ResizableColumn } from './ResizableColumn'
+import { ResizableColumn } from '../ResizableColumn'
 import { type ReactNode, useRef } from 'react'
 import { boqColumnNameHtmlGetter } from 'client/entities/items'
 import { changeBoqColumnName } from 'client/features/change_text'

@@ -9,13 +9,15 @@ type Props = {
   boqRow: BoqRow
 }
 
-export const NumberCell = ({ itemIndex, boqRow }: Props): JSX.Element => {
-  const numberColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, headerName: 'number' }))
+const boqColKey = 'number'
+
+export const NumberCell = ({ itemIndex, boqRow, rowIndex }: Props): JSX.Element => {
+  const numberColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColKey }))
   const isNumberColWidthSetManually = numberColWidth !== undefined
 
   return (
     <Box
-      className='td number'
+      className={'td ' + boqColKey}
       sx={{
         display: isNumberColWidthSetManually ? 'block' : 'flex',
         width: isNumberColWidthSetManually ? numberColWidth : 'auto',
@@ -24,7 +26,7 @@ export const NumberCell = ({ itemIndex, boqRow }: Props): JSX.Element => {
         flexShrink: 0,
       }}
     >
-      {boqRow.number.html}
+      {boqRow[boqColKey].html}
     </Box>
   )
 }
