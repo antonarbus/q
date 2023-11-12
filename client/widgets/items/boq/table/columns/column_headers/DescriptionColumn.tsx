@@ -17,8 +17,8 @@ export const DescriptionColumn = ({ itemIndex }: Props): ReactNode => {
 
   return (
     <ResizableColumn
-      headerName='description'
-      className='th description resizable'
+      boqColumnKey={boqColumnKey}
+      className={`th ${boqColumnKey} resizable`}
       itemIndex={itemIndex}
       minWidth={200}
       flexGrow={1}

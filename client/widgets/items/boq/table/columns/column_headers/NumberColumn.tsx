@@ -17,8 +17,8 @@ export const NumberColumn = ({ itemIndex }: Props): JSX.Element => {
 
   return (
     <ResizableColumn
-      headerName='number'
-      className='th number resizable'
+      boqColumnKey={boqColumnKey}
+      className={`th ${boqColumnKey} resizable`}
       itemIndex={itemIndex}
       minWidth={30}
       flexGrow={0}

@@ -15,7 +15,7 @@ export const onBoqItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, ele
 
   dispatch(itemsSlice.actions.saveColWidth({
     itemIndex,
-    headerName: 'description',
+    boqColumnKey: 'description',
     width: undefined,
   }))
 }
@@ -36,7 +36,7 @@ export const onBoqItemResizeStop: OnItemResizeStop = ({
 
   dispatch(itemsSlice.actions.saveColWidth({
     itemIndex,
-    headerName: 'description',
+    boqColumnKey: 'description',
     width: descriptionColWidth,
   }))
 
