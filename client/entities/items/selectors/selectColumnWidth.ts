@@ -1,12 +1,13 @@
-import type { BoqColWidth, BoqCols, RootState } from 'client/shared/types'
+import type { BoqColWidth, BoqColumnKey, RootState } from 'client/shared/types'
 
 type Props = {
   itemIndex: number
-  boqColKey: keyof BoqCols
+  boqColumnKey: BoqColumnKey
 }
 
-export const selectColumnWidth = ({ itemIndex, boqColKey }: Props) => (state: RootState): BoqColWidth => {
+export const selectColumnWidth = ({ itemIndex, boqColumnKey }: Props) => (state: RootState): BoqColWidth => {
   const boqItem = state.items[itemIndex]
   if (boqItem?.type !== 'boq') return undefined
-  return boqItem.boq.column[boqColKey].width
+  const width = boqItem.boq.column[boqColumnKey].width
+  return width
 }

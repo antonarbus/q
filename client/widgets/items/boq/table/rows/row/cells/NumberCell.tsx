@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import { boqCellHtmlGetter, selectColumnWidth } from 'client/entities/items'
 import { changeBoqCell } from 'client/features/change_text'
 import { useSelectorTyped } from 'client/shared/hooks'
-import type { BoqRow } from 'client/shared/types'
+import type { BoqColumnKey, BoqRow } from 'client/shared/types'
 import { Froala } from 'client/shared/ui/froala'
 import type FroalaEditor from 'froala-editor'
 import { useRef } from 'react'
@@ -13,12 +13,12 @@ type Props = {
   boqRow: BoqRow
 }
 
-const boqColumnKey = 'number'
+const boqColumnKey: BoqColumnKey = 'number'
 
 export const NumberCell = ({ itemIndex, boqRow, rowIndex }: Props): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
-  const numberColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColKey: boqColumnKey }))
+  const numberColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
   const isNumberColWidthSetManually = numberColWidth !== undefined
 
   return (

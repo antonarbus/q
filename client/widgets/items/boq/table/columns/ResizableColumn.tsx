@@ -1,4 +1,4 @@
-import type { BoqCols } from 'client/shared/types'
+import type { BoqColumnKey } from 'client/shared/types'
 import type { ReactNode } from 'react'
 import { selectColumnWidth } from 'client/entities/items'
 import { Resizable } from 're-resizable'
@@ -9,7 +9,7 @@ type Props = {
   children: ReactNode
   className: string
   flexGrow?: number
-  headerName: keyof BoqCols
+  boqColumnKey: BoqColumnKey
   itemIndex: number
   minWidth: number
 }
@@ -18,11 +18,11 @@ export const ResizableColumn = ({
   children,
   className,
   flexGrow,
-  headerName,
+  boqColumnKey,
   itemIndex,
   minWidth,
 }: Props): JSX.Element => {
-  const colWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColKey: headerName }))
+  const colWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
   const isColWidthSetManually = colWidth !== undefined
 
   return (
@@ -56,21 +56,21 @@ export const ResizableColumn = ({
         onColumnResizeStart({
           headerColumnElement: element,
           itemIndex,
-          headerName,
+          boqColumnKey,
         })
       }}
       onResize={(event, direction, element, delta): void => {
         onColumnResize({
           headerColumnElement: element,
           itemIndex,
-          headerName,
+          boqColumnKey,
         })
       }}
       onResizeStop={(event, direction, element): void => {
         onColumnResizeStop({
           headerColumnElement: element,
           itemIndex,
-          headerName,
+          boqColumnKey,
         })
       }}
     >

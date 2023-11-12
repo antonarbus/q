@@ -17,8 +17,8 @@ export const PriceColumn = ({ itemIndex }: Props): JSX.Element => {
 
   return (
     <ResizableColumn
-      headerName='price'
-      className='th price resizable'
+      boqColumnKey={boqColumnKey}
+      className={`th ${boqColumnKey} resizable`}
       itemIndex={itemIndex}
       minWidth={100}
       flexGrow={0}

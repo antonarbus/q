@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import { boqCellHtmlGetter, selectColumnWidth } from 'client/entities/items'
 import { changeBoqCell } from 'client/features/change_text'
 import { useSelectorTyped } from 'client/shared/hooks'
-import type { BoqRow } from 'client/shared/types'
+import type { BoqColumnKey, BoqRow } from 'client/shared/types'
 import { Froala } from 'client/shared/ui/froala'
 import type FroalaEditor from 'froala-editor'
 import { useRef } from 'react'
@@ -13,16 +13,15 @@ type Props = {
   boqRow: BoqRow
 }
 
-const boqColumnKey = 'description'
+const boqColumnKey: BoqColumnKey = 'description'
 
 export const DescriptionCell = ({ itemIndex, boqRow, rowIndex }: Props): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
-  const descriptionColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColKey: boqColumnKey }))
+  const descriptionColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
   const isDescriptionColWidthSetManually = descriptionColWidth !== undefined
 
-  console.log(666) // todo: froala is re-init on col width change, should go into copy mode on start and release on end
-  // todo: maybe rename "copyMode" to smth "froalaDisabled"
+  // todo: maybe split and rename "copyMode" to "isFroala" & "isDrag"
 
   return (
     <Box
