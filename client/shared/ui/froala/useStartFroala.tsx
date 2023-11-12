@@ -9,7 +9,7 @@ import { froalaStaticOptions } from './froalaStaticOptions'
 
 type Props = {
   itemIndex: number
-  initHtmlGetter: () => string
+  initHtml: string
   onContentChange: () => void
   froalaElementRef: RefObject<HTMLDivElement>
   editorRef: MutableRefObject<FroalaEditor | null>
@@ -23,7 +23,7 @@ window.froalas = []
 
 export const useStartFroala = ({
   itemIndex,
-  initHtmlGetter,
+  initHtml,
   froalaElementRef,
   editorRef,
   placeholder,
@@ -43,7 +43,7 @@ export const useStartFroala = ({
             initialized: (): void => {
               window.froalas.push(editorRef)
               if (!editorRef.current?.html) return
-              editorRef.current.html.set(initHtmlGetter())
+              editorRef.current.html.set(initHtml)
               window.froalas = window.froalas.filter(({ current }) => Boolean(current))
               // console.log('froalas qty after init: ', window.froalas.length)
             },

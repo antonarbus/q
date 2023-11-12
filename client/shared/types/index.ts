@@ -7,7 +7,6 @@ export type {
   Item,
   Copyable,
   CopyableItem,
-  HtmlGetter,
   BoqColWidth,
   BoqHeaderKey,
   BoqColumnKey,

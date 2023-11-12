@@ -28,7 +28,7 @@ export const DescriptionColumn = ({ itemIndex }: Props): ReactNode => {
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
         placeholder='Description...'
-        initHtmlGetter={() => boqColumnNameHtmlGetter({ itemIndex, boqColumnKey })}
+        initHtml={boqColumnNameHtmlGetter({ itemIndex, boqColumnKey })}
         onContentChange={() => {
           if (editorRef.current === null) return
           const html = editorRef.current.html.get()

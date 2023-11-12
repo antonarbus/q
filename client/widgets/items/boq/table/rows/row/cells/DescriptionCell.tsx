@@ -21,7 +21,7 @@ export const DescriptionCell = ({ itemIndex, boqRow, rowIndex }: Props): JSX.Ele
   const descriptionColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
   const isDescriptionColWidthSetManually = descriptionColWidth !== undefined
 
-  // todo: maybe split and rename "copyMode" to "isFroala" & "isDrag"
+  // todo: split and rename "copyMode" to "isFroala" & "isDrag" and put is into appSlice
 
   return (
     <Box
@@ -40,7 +40,7 @@ export const DescriptionCell = ({ itemIndex, boqRow, rowIndex }: Props): JSX.Ele
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
         placeholder={boqColumnKey + '...'}
-        initHtmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
+        initHtml={boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
         onContentChange={() => {
           if (editorRef.current === null) return
           const html = editorRef.current.html.get()
