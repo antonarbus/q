@@ -46,6 +46,7 @@ export const StaticHtml = ({
         padding: padding ?? 0,
       }}
       sx={{
+        opacity: 0.5,
         wordBreak: 'break-word',
         '& .fr-element:hover:not(:focus)': {
           // textShadow: '0px 0px 0.8px',
