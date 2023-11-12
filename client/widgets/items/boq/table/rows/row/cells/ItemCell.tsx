@@ -37,7 +37,7 @@ export const ItemCell = ({ itemIndex, boqRow, rowIndex }: Props): JSX.Element =>
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
         placeholder={boqColumnKey + '...'}
-        initHtmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
+        initHtml={boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
         onContentChange={() => {
           if (editorRef.current === null) return
           const html = editorRef.current.html.get()

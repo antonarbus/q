@@ -1,4 +1,3 @@
-import type { HtmlGetter } from 'client/shared/types'
 import type { SxProps } from '@mui/material'
 import type { MutableRefObject, RefObject } from 'react'
 import type FroalaEditor from 'froala-editor'
@@ -11,7 +10,7 @@ import { useViewPortObserver } from './useViewPortObserver'
 type Props = {
   itemIndex: number
   padding?: number | string
-  initHtmlGetter: HtmlGetter
+  initHtml: string
   froalaElementRef: RefObject<HTMLDivElement>
   editorRef: MutableRefObject<FroalaEditor | null>
   placeholder?: string
@@ -25,7 +24,7 @@ export const Froala = ({
   editorRef,
   froalaElementRef,
   itemIndex,
-  initHtmlGetter,
+  initHtml,
   padding,
   placeholder,
   rowIndex,
@@ -38,6 +37,10 @@ export const Froala = ({
   const showStaticHtml = isCopyMode || !isInsideViewPort
   const showEditableHtml = !isCopyMode && isInsideViewPort
 
+  if (showStaticHtml) {
+    console.log({ showStaticHtml, isCopyMode, isInsideViewPort, rowIndex })
+  }
+
   return (
     <div
       ref={observerRef}
@@ -47,7 +50,7 @@ export const Froala = ({
     >
       {showStaticHtml && (
         <StaticHtml
-          initHtmlGetter={initHtmlGetter.bind(null, { itemIndex, rowIndex })}
+          initHtml={initHtml}
           padding={padding}
           additionalStyle={additionalStyle}
           editorRef={editorRef}
@@ -60,7 +63,7 @@ export const Froala = ({
           editorRef={editorRef}
           froalaElementRef={froalaElementRef}
           itemIndex={itemIndex}
-          initHtmlGetter={initHtmlGetter.bind(null, { itemIndex, rowIndex })}
+          initHtml={initHtml}
           padding={padding}
           placeholder={placeholder}
           rowIndex={rowIndex}

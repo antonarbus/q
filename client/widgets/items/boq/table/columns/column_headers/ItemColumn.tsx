@@ -28,7 +28,7 @@ export const ItemColumn = ({ itemIndex }: Props): JSX.Element => {
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
         placeholder='Item...'
-        initHtmlGetter={() => boqColumnNameHtmlGetter({ itemIndex, boqColumnKey })}
+        initHtml={boqColumnNameHtmlGetter({ itemIndex, boqColumnKey })}
         onContentChange={() => {
           if (editorRef.current === null) return
           const html = editorRef.current.html.get()

@@ -1,7 +1,10 @@
 import { getState } from 'client/shared/clients'
-import type { HtmlGetter } from 'client/shared/types'
 
-export const itemTextHtmlGetter: HtmlGetter = ({ itemIndex, rowIndex }) => {
+type Props = {
+  itemIndex: number
+}
+
+export const itemTextHtmlGetter = ({ itemIndex }: Props): string => {
   const item = getState().items[itemIndex]
   if (!item) return ''
   if (item.type !== 'text') return ''
