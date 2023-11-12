@@ -1,5 +1,5 @@
 import type { SxProps } from '@mui/material'
-import type { MutableRefObject, RefObject } from 'react'
+import { type MutableRefObject, type RefObject } from 'react'
 import type FroalaEditor from 'froala-editor'
 import { useSelectorTyped } from 'client/shared/hooks'
 import { StaticHtml } from './StaticHtml'
@@ -24,22 +24,18 @@ export const Froala = ({
   editorRef,
   froalaElementRef,
   itemIndex,
+  rowIndex,
   initHtml,
   padding,
   placeholder,
-  rowIndex,
   onContentChange,
 }: Props): JSX.Element => {
   const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
   const { heightDuringAnimationRef } = useFixedHeightForAnimation({ froalaElementRef })
-  const { observerRef, isInsideViewPort } = useViewPortObserver({ itemIndex })
+  const { observerRef, isInsideViewPort } = useViewPortObserver({ itemIndex, rowIndex })
 
   const showStaticHtml = isCopyMode || !isInsideViewPort
   const showEditableHtml = !isCopyMode && isInsideViewPort
-
-  if (showStaticHtml) {
-    console.log({ showStaticHtml, isCopyMode, isInsideViewPort, rowIndex })
-  }
 
   return (
     <div

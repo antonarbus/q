@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import { boqCellHtmlGetter, selectColumnWidth } from 'client/entities/items'
 import { changeBoqCell } from 'client/features/change_text'
 import { useSelectorTyped } from 'client/shared/hooks'
-import type { BoqColumnKey, BoqRow } from 'client/shared/types'
+import type { BoqColumnKey } from 'client/shared/types'
 import { Froala } from 'client/shared/ui/froala'
 import type FroalaEditor from 'froala-editor'
 import { useRef } from 'react'
@@ -10,12 +10,11 @@ import { useRef } from 'react'
 type Props = {
   itemIndex: number
   rowIndex: number
-  boqRow: BoqRow
 }
 
 const boqColumnKey: BoqColumnKey = 'qty'
 
-export const QtyCell = ({ itemIndex, boqRow, rowIndex }: Props): JSX.Element => {
+export const QtyCell = ({ itemIndex, rowIndex }: Props): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
   const qtyColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
@@ -34,6 +33,7 @@ export const QtyCell = ({ itemIndex, boqRow, rowIndex }: Props): JSX.Element => 
     >
       <Froala
         itemIndex={itemIndex}
+        rowIndex={rowIndex}
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
         placeholder={boqColumnKey + '...'}

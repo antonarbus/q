@@ -17,11 +17,11 @@ export const BoqRow = ({ boqRow, itemIndex, rowIndex }: Props): JSX.Element => {
   return (
     <BoqRowLayout id={boqRow.id}>
       <BoqRowActions itemIndex={itemIndex} rowIndex={rowIndex} boqRow={boqRow} />
-      <NumberCell itemIndex={itemIndex} boqRow={boqRow} rowIndex={rowIndex} />
-      <DescriptionCell itemIndex={itemIndex} boqRow={boqRow} rowIndex={rowIndex} />
-      <ItemCell itemIndex={itemIndex} boqRow={boqRow} rowIndex={rowIndex} />
-      <QtyCell itemIndex={itemIndex} boqRow={boqRow} rowIndex={rowIndex} />
-      <PriceCell itemIndex={itemIndex} boqRow={boqRow} rowIndex={rowIndex} />
+      <NumberCell itemIndex={itemIndex} rowIndex={rowIndex} />
+      <DescriptionCell itemIndex={itemIndex} rowIndex={rowIndex} />
+      <ItemCell itemIndex={itemIndex} rowIndex={rowIndex} />
+      <QtyCell itemIndex={itemIndex} rowIndex={rowIndex} />
+      <PriceCell itemIndex={itemIndex} rowIndex={rowIndex} />
     </BoqRowLayout>
   )
 }
