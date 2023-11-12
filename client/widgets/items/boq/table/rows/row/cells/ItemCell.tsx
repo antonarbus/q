@@ -9,15 +9,15 @@ type Props = {
   boqRow: BoqRow
 }
 
-const boqColKey = 'item'
+const boqColumnKey = 'item'
 
 export const ItemCell = ({ itemIndex, boqRow, rowIndex }: Props): JSX.Element => {
-  const itemColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColKey }))
+  const itemColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColKey: boqColumnKey }))
   const isItemColWidthSetManually = itemColWidth !== undefined
 
   return (
     <Box
-      className={'td ' + boqColKey}
+      className={'td ' + boqColumnKey}
       sx={{
         display: isItemColWidthSetManually ? 'block' : 'flex',
         flexShrink: 0,
@@ -26,7 +26,7 @@ export const ItemCell = ({ itemIndex, boqRow, rowIndex }: Props): JSX.Element =>
         minWidth: '100px',
       }}
     >
-      {boqRow[boqColKey].html}
+      {boqRow[boqColumnKey].html}
     </Box>
   )
 }

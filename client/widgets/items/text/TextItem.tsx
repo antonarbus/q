@@ -2,7 +2,7 @@ import { theme } from 'client/shared/clients'
 import { useRef } from 'react'
 import { Froala } from 'client/shared/ui/froala'
 import { PencilAtBottomRight } from 'client/shared/components/PencilAtBottomRight'
-import { changeItemText } from 'client/features/change_text'
+import { changeItem } from 'client/features/change_text'
 import { Item, itemTextHtmlGetter } from 'client/entities/items'
 import { onTextItemResizeStop } from 'client/features/resize_item'
 import { ItemActions } from 'client/features/item_actions'
@@ -32,7 +32,7 @@ export const TextItem = ({ itemIndex }: Props): JSX.Element => {
         onContentChange={() => {
           if (editorRef.current === null) return
           const html = editorRef.current.html.get()
-          changeItemText({ html, itemIndex })
+          changeItem({ html, itemIndex })
         }}
       />
       <PencilAtBottomRight editorRef={editorRef} />
