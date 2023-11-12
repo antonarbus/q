@@ -21,6 +21,9 @@ export const DescriptionCell = ({ itemIndex, boqRow, rowIndex }: Props): JSX.Ele
   const descriptionColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColKey: boqColumnKey }))
   const isDescriptionColWidthSetManually = descriptionColWidth !== undefined
 
+  console.log(666) // todo: froala is re-init on col width change, should go into copy mode on start and release on end
+  // todo: maybe rename "copyMode" to smth "froalaDisabled"
+
   return (
     <Box
       className={'td ' + boqColumnKey}
