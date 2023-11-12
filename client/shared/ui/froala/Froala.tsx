@@ -37,6 +37,8 @@ export const Froala = ({
   const showStaticHtml = isCopyMode || !isInsideViewPort
   const showEditableHtml = !isCopyMode && isInsideViewPort
 
+  // todo: what if we always show static html and onClickStart (if it is available) change it to the Froala
+
   return (
     <div
       ref={observerRef}
