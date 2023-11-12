@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { ResizableColumn } from './ResizableColumn'
+import { ResizableColumn } from '../ResizableColumn'
 import type FroalaEditor from 'froala-editor'
 import { changeBoqColumnName } from 'client/features/change_text'
 import { boqColumnNameHtmlGetter } from 'client/entities/items'
@@ -27,7 +27,7 @@ export const NumberColumn = ({ itemIndex }: Props): JSX.Element => {
         itemIndex={itemIndex}
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
-        placeholder='#...'
+        placeholder=''
         initHtmlGetter={() => boqColumnNameHtmlGetter({ itemIndex, boqColumnKey })}
         onContentChange={() => {
           if (editorRef.current === null) return

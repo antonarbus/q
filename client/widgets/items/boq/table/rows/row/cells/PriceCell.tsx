@@ -9,13 +9,15 @@ type Props = {
   boqRow: BoqRow
 }
 
-export const PriceCell = ({ itemIndex, boqRow }: Props): JSX.Element => {
-  const priceColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, headerName: 'price' }))
+const boqColKey = 'price'
+
+export const PriceCell = ({ itemIndex, boqRow, rowIndex }: Props): JSX.Element => {
+  const priceColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColKey }))
   const isPriceColWidthSetManually = priceColWidth !== undefined
 
   return (
     <Box
-      className='td price'
+      className={'td ' + boqColKey}
       sx={{
         display: isPriceColWidthSetManually ? 'block' : 'flex',
         flexShrink: 0,
@@ -24,7 +26,7 @@ export const PriceCell = ({ itemIndex, boqRow }: Props): JSX.Element => {
         minWidth: '100px',
       }}
     >
-      {boqRow.price.html}
+      {boqRow[boqColKey].html}
     </Box>
   )
 }

@@ -1,4 +1,4 @@
-import { BoqRows } from './rows/BoqRows'
+import { BoqRows } from './rows'
 import { BoqColumns } from './columns'
 import { BoqTableLayout } from 'client/shared/layouts'
 

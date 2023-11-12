@@ -9,13 +9,15 @@ type Props = {
   boqRow: BoqRow
 }
 
-export const DescriptionCell = ({ itemIndex, boqRow }: Props): JSX.Element => {
-  const descriptionColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, headerName: 'description' }))
+const boqColKey = 'description'
+
+export const DescriptionCell = ({ itemIndex, boqRow, rowIndex }: Props): JSX.Element => {
+  const descriptionColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColKey }))
   const isDescriptionColWidthSetManually = descriptionColWidth !== undefined
 
   return (
     <Box
-      className='td description'
+      className={'td ' + boqColKey}
       sx={{
         display: isDescriptionColWidthSetManually ? 'block' : 'flex',
         flexGrow: isDescriptionColWidthSetManually ? 0 : 1,
@@ -25,7 +27,7 @@ export const DescriptionCell = ({ itemIndex, boqRow }: Props): JSX.Element => {
         minWidth: '200px',
       }}
     >
-      {boqRow.description.html}
+      {boqRow[boqColKey].html}
     </Box>
   )
 }
