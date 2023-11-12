@@ -1,5 +1,5 @@
 import { boqHeaderHtmlGetter } from 'client/entities/items'
-import { changeBoqHeaderText } from 'client/features/change_text'
+import { changeBoqHeader } from 'client/features/change_text'
 import { Froala } from 'client/shared/ui/froala'
 import { useRef } from 'react'
 import type FroalaEditor from 'froala-editor'
@@ -24,7 +24,7 @@ export const Currency = ({ itemIndex }: Props): JSX.Element => {
       onContentChange={() => {
         if (editorRef.current === null) return
         const html = editorRef.current.html.get()
-        changeBoqHeaderText({ itemIndex, html, boqHeaderKey })
+        changeBoqHeader({ itemIndex, html, boqHeaderKey })
       }}
       additionalStyle={{
         textAlign: 'right',

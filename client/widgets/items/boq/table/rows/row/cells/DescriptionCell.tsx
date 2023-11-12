@@ -1,7 +1,11 @@
 import { Box } from '@mui/material'
-import { selectColumnWidth } from 'client/entities/items'
+import { boqCellHtmlGetter, selectColumnWidth } from 'client/entities/items'
+import { changeBoqCell } from 'client/features/change_text'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqRow } from 'client/shared/types'
+import { Froala } from 'client/shared/ui/froala'
+import type FroalaEditor from 'froala-editor'
+import { useRef } from 'react'
 
 type Props = {
   itemIndex: number
@@ -9,15 +13,18 @@ type Props = {
   boqRow: BoqRow
 }
 
-const boqColKey = 'description'
+const boqColumnKey = 'description'
 
 export const DescriptionCell = ({ itemIndex, boqRow, rowIndex }: Props): JSX.Element => {
-  const descriptionColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColKey }))
+  const descriptionColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColKey: boqColumnKey }))
   const isDescriptionColWidthSetManually = descriptionColWidth !== undefined
+
+  const froalaElementRef = useRef<HTMLDivElement>(null)
+  const editorRef = useRef<FroalaEditor | null>(null)
 
   return (
     <Box
-      className={'td ' + boqColKey}
+      className={'td ' + boqColumnKey}
       sx={{
         display: isDescriptionColWidthSetManually ? 'block' : 'flex',
         flexGrow: isDescriptionColWidthSetManually ? 0 : 1,
@@ -27,7 +34,21 @@ export const DescriptionCell = ({ itemIndex, boqRow, rowIndex }: Props): JSX.Ele
         minWidth: '200px',
       }}
     >
-      {boqRow[boqColKey].html}
+      <Froala
+        itemIndex={itemIndex}
+        editorRef={editorRef}
+        froalaElementRef={froalaElementRef}
+        placeholder='Description...'
+        initHtmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
+        onContentChange={() => {
+          if (editorRef.current === null) return
+          const html = editorRef.current.html.get()
+          changeBoqCell({ itemIndex, rowIndex, boqColumnKey, html })
+        }}
+        additionalStyle={{
+          flexGrow: 1,
+        }}
+      />
     </Box>
   )
 }

@@ -1,3 +1,4 @@
-export { changeItemText } from './changeItemText'
-export { changeBoqColumnName } from './changeBoqColumnName'
-export { changeBoqHeaderText } from './changeBoqHeaderText'
+export { changeItem } from './changeItem'
+export { changeBoqColumn } from './changeBoqColumn'
+export { changeBoqHeader } from './changeBoqHeader'
+export { changeBoqCell } from './changeBoqCell'
