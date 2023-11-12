@@ -3,13 +3,15 @@ import { useEffect, useRef, useState } from 'react'
 
 type Props = {
   itemIndex: number
+  rowIndex?: number
 }
-type ReturnFunc = {
+
+type Res = {
   observerRef: MutableRefObject<HTMLDivElement | null>
   isInsideViewPort: boolean
 }
 
-export const useViewPortObserver = ({ itemIndex }: Props): ReturnFunc => {
+export const useViewPortObserver = ({ itemIndex, rowIndex }: Props): Res => {
   const observerRef = useRef<HTMLDivElement | null>(null)
   const [isInsideViewPort, setIsInsideViewPort] = useState(false)
 
@@ -28,7 +30,7 @@ export const useViewPortObserver = ({ itemIndex }: Props): ReturnFunc => {
     return () => {
       observer.disconnect()
     }
-  }, [itemIndex])
+  }, [itemIndex, rowIndex])
 
   return { observerRef, isInsideViewPort }
 }
