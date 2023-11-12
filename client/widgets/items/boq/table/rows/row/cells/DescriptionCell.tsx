@@ -16,11 +16,10 @@ type Props = {
 const boqColumnKey = 'description'
 
 export const DescriptionCell = ({ itemIndex, boqRow, rowIndex }: Props): JSX.Element => {
-  const descriptionColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColKey: boqColumnKey }))
-  const isDescriptionColWidthSetManually = descriptionColWidth !== undefined
-
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
+  const descriptionColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColKey: boqColumnKey }))
+  const isDescriptionColWidthSetManually = descriptionColWidth !== undefined
 
   return (
     <Box
@@ -38,7 +37,7 @@ export const DescriptionCell = ({ itemIndex, boqRow, rowIndex }: Props): JSX.Ele
         itemIndex={itemIndex}
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
-        placeholder='Description...'
+        placeholder={boqColumnKey + '...'}
         initHtmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
         onContentChange={() => {
           if (editorRef.current === null) return
