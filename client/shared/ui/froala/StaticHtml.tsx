@@ -23,13 +23,13 @@ export const StaticHtml = ({
   const ref = useRef<HTMLDivElement>()
 
   useEffectOnce(() => {
-    // insert Html Into Element
+    // insert html into element
     if (!ref.current) return
     ref.current.innerHTML = editorRef.current?.html.get() ?? initHtml
   })
 
   useEffectOnce(() => {
-    // save Height After Loading Content
+    // save height after loading content
     if (!ref.current?.clientHeight) return
     heightDuringAnimationRef.current = ref.current.clientHeight
   })
