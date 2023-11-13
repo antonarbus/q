@@ -42,6 +42,7 @@ export const StaticHtml = ({
   return (
     <Box
       ref={ref}
+      className='static-html'
       style={{
         padding: padding ?? 0,
       }}
