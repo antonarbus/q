@@ -21,16 +21,11 @@ export const StaticHtml = ({
   heightDuringAnimationRef,
 }: Props): JSX.Element => {
   const ref = useRef<HTMLDivElement>()
-  const html = useRef(initHtml)
-
-  if (editorRef.current?.html) {
-    html.current = editorRef.current.html.get()
-  }
 
   useEffectOnce(() => {
     // insert Html Into Element
     if (!ref.current) return
-    ref.current.innerHTML = html.current || initHtml
+    ref.current.innerHTML = editorRef.current?.html.get() || initHtml
   })
 
   useEffectOnce(() => {
