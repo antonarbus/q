@@ -45,6 +45,7 @@ export const EditableHtml = ({
   return (
     <Box
       ref={froalaElementRef}
+      className='editable-html'
       style={{
         padding: padding ?? 0,
         height: heightDuringAnimationRef.current ?? 'auto', // needed for animation, height will be removed after froala is initialized
