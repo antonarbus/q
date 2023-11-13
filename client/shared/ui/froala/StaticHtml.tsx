@@ -25,7 +25,7 @@ export const StaticHtml = ({
   useEffectOnce(() => {
     // insert Html Into Element
     if (!ref.current) return
-    ref.current.innerHTML = editorRef.current?.html.get() || initHtml
+    ref.current.innerHTML = editorRef.current?.html.get() ?? initHtml
   })
 
   useEffectOnce(() => {
