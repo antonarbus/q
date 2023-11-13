@@ -14,7 +14,6 @@ type Props = {
 
 export const BoqRows = ({ itemIndex }: Props): JSX.Element => {
   const boqRows = useSelectorTyped(selectBoqRows({ itemIndex }), boqRowsShapeEqualityFn)
-  console.log('🚀  boqRows:', boqRows)
 
   return (
     <DraggableBoqRowsContainer
