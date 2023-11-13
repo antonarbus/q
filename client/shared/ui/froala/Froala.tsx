@@ -44,6 +44,7 @@ export const Froala = ({
       ref={observerRef}
       css={{
         width: '100%',
+        position: 'relative',
       }}
     >
       {showStaticHtml && (
@@ -56,18 +57,30 @@ export const Froala = ({
         />
       )}
       {showEditableHtml && (
-        <EditableHtml
-          additionalStyle={additionalStyle}
-          editorRef={editorRef}
-          froalaElementRef={froalaElementRef}
-          itemIndex={itemIndex}
-          initHtml={initHtml}
-          padding={padding}
-          placeholder={placeholder}
-          rowIndex={rowIndex}
-          onContentChange={onContentChange}
-          heightDuringAnimationRef={heightDuringAnimationRef}
-        />
+        <>
+          <StaticHtml
+            initHtml={initHtml}
+            padding={padding}
+            // * needed to smoothen the froala blink
+            // todo: move it into separate component and after froala initiated make visibility: none
+            additionalStyle={{ ...additionalStyle, position: 'absolute' }}
+            editorRef={editorRef}
+            heightDuringAnimationRef={heightDuringAnimationRef}
+          />
+          <EditableHtml
+            additionalStyle={additionalStyle}
+            editorRef={editorRef}
+            froalaElementRef={froalaElementRef}
+            itemIndex={itemIndex}
+            initHtml={initHtml}
+            padding={padding}
+            placeholder={placeholder}
+            rowIndex={rowIndex}
+            onContentChange={onContentChange}
+            heightDuringAnimationRef={heightDuringAnimationRef}
+          />
+        </>
+
       )}
     </div>
   )
