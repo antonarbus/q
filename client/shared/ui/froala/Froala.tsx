@@ -48,6 +48,8 @@ export const Froala = ({
       }}
     >
       {showStaticHtml && (
+        // * needed to disable Froala to avoid expensive frequent Froala initializing
+        // * for ex. when we move copied item around
         <StaticHtml
           initHtml={initHtml}
           padding={padding}
@@ -58,10 +60,12 @@ export const Froala = ({
       )}
       {showEditableHtml && (
         <>
+          // * needed to smoothen the froala blink effect on init
+          // * it stays behind the real EditableHtml and
+          // * when EditableHtml blinks on init we do not see the real blink as we look at this static replica
           <StaticHtml
             initHtml={initHtml}
             padding={padding}
-            // * needed to smoothen the froala blink
             // todo: move it into separate component and after froala initiated make visibility: none
             additionalStyle={{ ...additionalStyle, position: 'absolute' }}
             editorRef={editorRef}
@@ -80,7 +84,6 @@ export const Froala = ({
             heightDuringAnimationRef={heightDuringAnimationRef}
           />
         </>
-
       )}
     </div>
   )
