@@ -8,7 +8,7 @@ import { usePutCaretAtTheEndOfText } from './usePutCaretAtTheEndOfText'
 type Props = {
   itemIndex: number
   padding?: number | string
-  initHtml: string
+  htmlGetter: () => string
   froalaElementRef: RefObject<HTMLDivElement>
   editorRef: MutableRefObject<FroalaEditor | null>
   placeholder?: string
@@ -23,7 +23,7 @@ export const EditableHtml = ({
   editorRef,
   froalaElementRef,
   itemIndex,
-  initHtml,
+  htmlGetter,
   padding,
   placeholder,
   rowIndex,
@@ -34,7 +34,7 @@ export const EditableHtml = ({
     editorRef,
     froalaElementRef,
     itemIndex,
-    initHtml,
+    htmlGetter,
     placeholder,
     rowIndex,
     onContentChange,

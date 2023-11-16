@@ -11,7 +11,7 @@ import { StaticHtmlBackgroundToFixBlinkIssue } from './StaticHtmlBackgroundToFix
 type Props = {
   itemIndex: number
   padding?: number | string
-  initHtml: string
+  htmlGetter: () => string
   froalaElementRef: RefObject<HTMLDivElement>
   editorRef: MutableRefObject<FroalaEditor | null>
   placeholder?: string
@@ -26,7 +26,7 @@ export const Froala = ({
   froalaElementRef,
   itemIndex,
   rowIndex,
-  initHtml,
+  htmlGetter,
   padding,
   placeholder,
   onContentChange,
@@ -50,20 +50,18 @@ export const Froala = ({
         // * needed to disable Froala to avoid expensive frequent Froala initializing
         // * for ex. when we move copied items around
         <StaticHtml
-          initHtml={initHtml}
+          htmlGetter={htmlGetter}
           padding={padding}
           additionalStyle={additionalStyle}
-          editorRef={editorRef}
           heightDuringAnimationRef={heightDuringAnimationRef}
         />
       )}
       {showEditableHtml && (
         <>
           <StaticHtmlBackgroundToFixBlinkIssue
-            initHtml={initHtml}
+            htmlGetter={htmlGetter}
             padding={padding}
             additionalStyle={additionalStyle}
-            editorRef={editorRef}
             heightDuringAnimationRef={heightDuringAnimationRef}
           />
           <EditableHtml
@@ -71,7 +69,7 @@ export const Froala = ({
             editorRef={editorRef}
             froalaElementRef={froalaElementRef}
             itemIndex={itemIndex}
-            initHtml={initHtml}
+            htmlGetter={htmlGetter}
             padding={padding}
             placeholder={placeholder}
             rowIndex={rowIndex}

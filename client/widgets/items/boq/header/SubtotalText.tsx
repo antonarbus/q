@@ -20,7 +20,7 @@ export const SubtotalText = ({ itemIndex }: Props): JSX.Element => {
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
       placeholder='Subtotal...'
-      initHtml={boqHeaderHtmlGetter({ itemIndex, boqHeaderKey })}
+      htmlGetter={() => boqHeaderHtmlGetter({ itemIndex, boqHeaderKey })}
       onContentChange={() => {
         if (editorRef.current === null) return
         const html = editorRef.current.html.get()

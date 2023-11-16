@@ -1,23 +1,20 @@
 import type { SxProps } from '@mui/material'
 import type { MutableRefObject } from 'react'
-import type FroalaEditor from 'froala-editor'
 import { Box } from '@mui/material'
 import { useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 
 type Props = {
   padding?: number | string
-  initHtml: string
+  htmlGetter: () => string
   additionalStyle?: SxProps
-  editorRef: MutableRefObject<FroalaEditor | null>
   heightDuringAnimationRef: MutableRefObject<number | undefined>
 }
 
 export const StaticHtml = ({
-  initHtml,
+  htmlGetter,
   padding,
   additionalStyle,
-  editorRef,
   heightDuringAnimationRef,
 }: Props): JSX.Element => {
   const ref = useRef<HTMLDivElement>()
@@ -25,10 +22,7 @@ export const StaticHtml = ({
   useEffectOnce(() => {
     // insert html into element
     if (!ref.current) return
-    console.log('🚀  editorRef.current:', editorRef.current)
-    console.log('🚀  editorRef.current?.html.get():', editorRef.current?.html.get())
-    console.log('🚀  initHtml:', initHtml)
-    ref.current.innerHTML = editorRef.current?.html.get() ?? initHtml
+    ref.current.innerHTML = htmlGetter()
   })
 
   useEffectOnce(() => {

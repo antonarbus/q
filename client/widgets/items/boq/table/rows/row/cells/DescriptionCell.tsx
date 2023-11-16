@@ -40,7 +40,7 @@ export const DescriptionCell = ({ itemIndex, rowIndex }: Props): JSX.Element => 
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
         placeholder={boqColumnKey + '...'}
-        initHtml={boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
+        htmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
         onContentChange={() => {
           if (editorRef.current === null) return
           const html = editorRef.current.html.get()
@@ -48,6 +48,7 @@ export const DescriptionCell = ({ itemIndex, rowIndex }: Props): JSX.Element => 
         }}
         additionalStyle={{
           flexGrow: 1,
+          // background: '#ff000045',
         }}
       />
     </Box>
