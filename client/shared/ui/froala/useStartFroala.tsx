@@ -5,7 +5,7 @@ import 'froala-editor/js/froala_editor.pkgd.min.js'
 import 'froala-editor/js/plugins.pkgd.min.js'
 import 'froala-editor/js/third_party/font_awesome.min.js'
 import './froala_editor.pkgd.min.css'
-import { froalaStaticOptions } from './froalaStaticOptions'
+import { froalaDefaultOptions } from './froalaDefaultOptions'
 
 type Props = {
   itemIndex: number
@@ -35,7 +35,7 @@ export const useStartFroala = ({
       const froalaInstance = new FroalaEditor(
         froalaElementRef.current,
         {
-          ...froalaStaticOptions,
+          ...froalaDefaultOptions,
           placeholderText: placeholder ?? 'Text...',
           events: {
             // 'paste.afterCleanup': function (clipboardHtml: string) { },

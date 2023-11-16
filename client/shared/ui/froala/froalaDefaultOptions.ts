@@ -1,4 +1,4 @@
-export const froalaStaticOptions = {
+export const froalaDefaultOptions = {
   initOnClick: false,
   toolbarInline: true,
   toolbarVisibleWithoutSelection: false,

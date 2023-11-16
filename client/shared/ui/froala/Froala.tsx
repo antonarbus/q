@@ -6,6 +6,7 @@ import { StaticHtml } from './StaticHtml'
 import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
 import { EditableHtml } from './EditableHtml'
 import { useViewPortObserver } from './useViewPortObserver'
+import { StaticHtmlBackgroundToFixBlinkIssue } from './StaticHtmlBackgroundToFixBlinkIssue'
 
 type Props = {
   itemIndex: number
@@ -37,8 +38,6 @@ export const Froala = ({
   const showStaticHtml = isCopyMode || !isInsideViewPort
   const showEditableHtml = !isCopyMode && isInsideViewPort
 
-  // todo: what if we always show static html and onClickStart (if it is available) change it to the Froala
-
   return (
     <div
       ref={observerRef}
@@ -49,7 +48,7 @@ export const Froala = ({
     >
       {showStaticHtml && (
         // * needed to disable Froala to avoid expensive frequent Froala initializing
-        // * for ex. when we move copied item around
+        // * for ex. when we move copied items around
         <StaticHtml
           initHtml={initHtml}
           padding={padding}
@@ -60,13 +59,9 @@ export const Froala = ({
       )}
       {showEditableHtml && (
         <>
-          // * needed to smoothen the froala blink effect on init
-          // * it stays behind the real EditableHtml and
-          // * when EditableHtml blinks on init we do not see the real blink as we look at this static replica
-          <StaticHtml
+          <StaticHtmlBackgroundToFixBlinkIssue
             initHtml={initHtml}
             padding={padding}
-            // todo: move it into separate component and after froala initiated make visibility: none
             additionalStyle={{ ...additionalStyle, position: 'absolute' }}
             editorRef={editorRef}
             heightDuringAnimationRef={heightDuringAnimationRef}
