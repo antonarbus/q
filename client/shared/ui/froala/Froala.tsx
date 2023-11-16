@@ -62,7 +62,7 @@ export const Froala = ({
           <StaticHtmlBackgroundToFixBlinkIssue
             initHtml={initHtml}
             padding={padding}
-            additionalStyle={{ ...additionalStyle, position: 'absolute' }}
+            additionalStyle={additionalStyle}
             editorRef={editorRef}
             heightDuringAnimationRef={heightDuringAnimationRef}
           />

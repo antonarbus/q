@@ -4,7 +4,7 @@ import { Froala } from 'client/shared/ui/froala'
 import { PencilAtBottomRight } from 'client/shared/components/PencilAtBottomRight'
 import { changeItem } from 'client/features/change_text'
 import { Item, itemTextHtmlGetter } from 'client/entities/items'
-import { onTextItemResizeStop } from 'client/features/resize_item'
+import { onTextItemResizeStart, onTextItemResizeStop } from 'client/features/resize_item'
 import { ItemActions } from 'client/features/item_actions'
 import type FroalaEditor from 'froala-editor'
 
@@ -19,6 +19,7 @@ export const TextItem = ({ itemIndex }: Props): JSX.Element => {
   return (
     <Item
       itemIndex={itemIndex}
+      onItemResize={onTextItemResizeStart}
       onItemResizeStop={onTextItemResizeStop}
       itemActions={<ItemActions itemIndex={itemIndex} />}
     >
