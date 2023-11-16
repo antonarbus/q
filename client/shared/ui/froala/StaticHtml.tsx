@@ -25,6 +25,9 @@ export const StaticHtml = ({
   useEffectOnce(() => {
     // insert html into element
     if (!ref.current) return
+    console.log('🚀  editorRef.current:', editorRef.current)
+    console.log('🚀  editorRef.current?.html.get():', editorRef.current?.html.get())
+    console.log('🚀  initHtml:', initHtml)
     ref.current.innerHTML = editorRef.current?.html.get() ?? initHtml
   })
 
