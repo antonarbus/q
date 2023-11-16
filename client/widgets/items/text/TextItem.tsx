@@ -27,7 +27,7 @@ export const TextItem = ({ itemIndex }: Props): JSX.Element => {
         itemIndex={itemIndex}
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
-        initHtml={itemTextHtmlGetter({ itemIndex })}
+        htmlGetter={() => itemTextHtmlGetter({ itemIndex })}
         placeholder='Type text or drop images, files, links...'
         padding={theme.item.padding}
         onContentChange={() => {

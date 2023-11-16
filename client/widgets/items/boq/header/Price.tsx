@@ -20,7 +20,7 @@ export const Price = ({ itemIndex }: Props): JSX.Element => {
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
       placeholder='Price...'
-      initHtml={boqHeaderHtmlGetter({ itemIndex, boqHeaderKey })}
+      htmlGetter={() => boqHeaderHtmlGetter({ itemIndex, boqHeaderKey })}
       onContentChange={() => {
         if (editorRef.current === null) return
         const html = editorRef.current.html.get()

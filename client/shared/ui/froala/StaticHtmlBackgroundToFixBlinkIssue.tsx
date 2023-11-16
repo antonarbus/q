@@ -1,15 +1,13 @@
 import type { SxProps } from '@mui/material'
 import type { CSSProperties, MutableRefObject } from 'react'
-import type FroalaEditor from 'froala-editor'
 import { useState } from 'react'
 import { useEffectOnce } from 'react-use'
 import { StaticHtml } from './StaticHtml'
 
 type Props = {
   padding?: number | string
-  initHtml: string
+  htmlGetter: () => string
   additionalStyle?: SxProps
-  editorRef: MutableRefObject<FroalaEditor | null>
   heightDuringAnimationRef: MutableRefObject<number | undefined>
 }
 
@@ -19,10 +17,9 @@ type Props = {
 // * after froala initiated make "visibility: hidden", otherwise you will see static text when delete dynamic text in Froala
 
 export const StaticHtmlBackgroundToFixBlinkIssue = ({
-  initHtml,
+  htmlGetter,
   padding,
   additionalStyle,
-  editorRef,
   heightDuringAnimationRef,
 }: Props): JSX.Element => {
   const [visibility, setVisibility] = useState<CSSProperties['visibility']>('visible')
@@ -30,7 +27,7 @@ export const StaticHtmlBackgroundToFixBlinkIssue = ({
   useEffectOnce(() => {
     const timeoutId = setTimeout(() => {
       setVisibility('hidden')
-    }, 100)
+    }, 500)
 
     return () => {
       clearTimeout(timeoutId)
@@ -39,14 +36,13 @@ export const StaticHtmlBackgroundToFixBlinkIssue = ({
 
   return (
     <StaticHtml
-      initHtml={initHtml}
+      htmlGetter={htmlGetter}
       padding={padding}
       additionalStyle={{
         ...additionalStyle,
         position: 'absolute',
         visibility,
       }}
-      editorRef={editorRef}
       heightDuringAnimationRef={heightDuringAnimationRef}
     />
   )
