@@ -17,10 +17,6 @@ export const DraggableBoqRowsContainer: React.ComponentClass<SortableContainerEx
       css={{
         display: 'flex',
         flexDirection: 'column',
-        // gap: '10px',
-        // justifyContent: 'center',
-        // alignItems: 'center',
-        // padding: '20px 5px',
       }}
     >
       {children}

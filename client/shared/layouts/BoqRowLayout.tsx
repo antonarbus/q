@@ -15,7 +15,7 @@ export const BoqRowLayout = ({ children, id }: Props): JSX.Element => {
       className={className.boqRow}
       sx={{
         display: 'flex',
-        minHeight: '50px',
+        minHeight: '60px',
         position: 'relative',
         borderBottom: '1px solid #e8e8e8',
       }}
