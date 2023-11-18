@@ -1,6 +1,6 @@
 import { BoqRows } from './rows'
 import { BoqColumns } from './columns'
-import { BoqTableLayout } from 'client/shared/layouts'
+import { BoqTableLayout } from './BoqTableLayout'
 
 type Props = {
   itemIndex: number

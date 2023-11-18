@@ -3,7 +3,7 @@ import { DescriptionColumn } from './column_headers/DescriptionColumn'
 import { ItemColumn } from './column_headers/ItemColumn'
 import { QtyColumn } from './column_headers/QtyColumn'
 import { PriceColumn } from './column_headers/PriceColumn'
-import { BoqColumnsLayout } from 'client/shared/layouts'
+import { BoqColumnsLayout } from './BoqColumnsLayout'
 
 type Props = {
   itemIndex: number
