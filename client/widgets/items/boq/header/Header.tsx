@@ -1,8 +1,8 @@
 import { Title } from './Title'
-import { BoqHeaderLayout } from 'client/shared/layouts'
 import { Currency } from './Currency'
 import { SubtotalText } from './SubtotalText'
 import { Price } from './Price'
+import { BoqHeaderLayout } from './BoqHeaderLayout'
 
 type Props = {
   itemIndex: number

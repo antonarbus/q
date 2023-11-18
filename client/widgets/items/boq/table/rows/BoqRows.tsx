@@ -1,7 +1,7 @@
 import { useSelectorTyped } from 'client/shared/hooks'
 import { AnimatePresence } from 'framer-motion'
 import { DraggableBoqRowsContainer } from './DraggableBoqRowsContainer'
-import { BoqRowLayout } from './row/BoqRowLayout'
+import { BoqRowLayout2 } from './row/BoqRowLayout2'
 import { BoqRow } from './row/BoqRow'
 import { boqRowsShapeEqualityFn, selectBoqRows } from 'client/entities/items'
 import { onBoqRowDrag } from 'client/features/boq_row_actions/drag_boq_row'
@@ -30,7 +30,7 @@ export const BoqRows = ({ itemIndex }: Props): JSX.Element => {
         {boqRows.map((boqRow, rowIndex) => {
           if (boqRow.type === 'boq row') {
             return (
-              <BoqRowLayout
+              <BoqRowLayout2
                 key={boqRow.id}
                 index={rowIndex} // 'index' is internal prop consumed by SortableElement HOC
                 i={rowIndex}
@@ -41,7 +41,7 @@ export const BoqRows = ({ itemIndex }: Props): JSX.Element => {
                   rowIndex={rowIndex}
                   boqRow={boqRow}
                 />
-              </BoqRowLayout>
+              </BoqRowLayout2>
             )
           }
 
