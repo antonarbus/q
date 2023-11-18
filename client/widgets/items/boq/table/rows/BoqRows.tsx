@@ -35,8 +35,6 @@ export const BoqRows = ({ itemIndex }: Props): JSX.Element => {
                 index={rowIndex} // 'index' is internal prop consumed by SortableElement HOC
                 i={rowIndex}
                 rowId={boqRow.id}
-              // disabled={isItemDisabled} // internal prop consumed by SortableElement HOC
-              // itemHeight={item?.height ?? 0}
               >
                 <BoqRow
                   itemIndex={itemIndex}

@@ -25,8 +25,6 @@ export const onBoqItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, ele
 
 export const onBoqItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction, elementRef: itemElement, delta }) => {
   const descriptionHeaderElement = itemElement.querySelector('.th.description')
-
-  if (!descriptionHeaderElement) return
   if (!(descriptionHeaderElement instanceof HTMLElement)) return
 
   const descriptionColWidth = descriptionHeaderElement.clientWidth
