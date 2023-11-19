@@ -15,7 +15,12 @@ type Props = {
 
 export const BoqRow = ({ boqRow, itemIndex, rowIndex }: Props): JSX.Element => {
   return (
-    <BoqRowLayout id={boqRow.id}>
+    <BoqRowLayout
+      key={boqRow.id}
+      index={rowIndex} // 'index' is internal prop consumed by SortableElement HOC
+      i={rowIndex}
+      id={boqRow.id}
+    >
       <BoqRowActions itemIndex={itemIndex} rowIndex={rowIndex} boqRow={boqRow} />
       <NumberCell itemIndex={itemIndex} rowIndex={rowIndex} />
       <DescriptionCell itemIndex={itemIndex} rowIndex={rowIndex} />

@@ -1,19 +1,53 @@
-import { Box } from '@mui/material'
-import type { ReactNode } from 'react'
-import { PasteHere } from './paste_here_row'
+import type { SortableElementProps } from 'react-sortable-hoc'
+import type { ComponentClass, ReactNode } from 'react'
+import { SortableElement } from 'react-sortable-hoc'
+import { motion } from 'framer-motion'
+import { theme } from 'client/shared/clients'
 import { className } from 'client/shared/className'
+import { PasteHere } from './paste_here_row'
 
 type Props = {
   children: ReactNode
+  i: number
   id: string
 }
 
-export const BoqRowLayout = ({ children, id }: Props): JSX.Element => {
+type SortableItem = SortableElementProps & Props
+
+export const BoqRowLayout: ComponentClass<SortableItem> = SortableElement(({
+  i,
+  children,
+  id,
+}: Props) => {
   return (
-    <Box
+    <motion.div
       id={id}
       className={className.boqRow}
-      sx={{
+      initial={{
+        height: 0,
+        opacity: 0,
+        y: '100vh',
+        overflow: 'hidden',
+      }}
+      animate={{
+        height: 'auto', // height is being stored on copy/cut icon click
+        opacity: 1,
+        y: 0,
+        transitionEnd: {
+          height: 'auto',
+          overflow: 'visible',
+        },
+      }}
+      exit={{
+        height: 0,
+        opacity: 0,
+        x: '150vw',
+        overflow: 'hidden',
+      }}
+      transition={{
+        duration: theme.item.animationDuration,
+      }}
+      css={{
         // https://stackoverflow.com/questions/8468066/child-inside-parent-with-min-height-100-not-inheriting-height
         display: 'flex',
         flexDirection: 'column',
@@ -26,6 +60,6 @@ export const BoqRowLayout = ({ children, id }: Props): JSX.Element => {
       <PasteHere id={id}>
         {children}
       </PasteHere>
-    </Box>
+    </motion.div>
   )
-}
+})
