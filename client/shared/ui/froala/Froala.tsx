@@ -48,7 +48,7 @@ export const Froala = ({
     >
       {showStaticHtml && (
         // * needed to disable Froala to avoid expensive frequent Froala initializing
-        // * for ex. when we move copied items around
+        // * for ex. when we change column width
         <StaticHtml
           htmlGetter={htmlGetter}
           padding={padding}
@@ -69,11 +69,11 @@ export const Froala = ({
             editorRef={editorRef}
             froalaElementRef={froalaElementRef}
             itemIndex={itemIndex}
+            rowIndex={rowIndex}
             htmlGetter={htmlGetter}
+            onContentChange={onContentChange}
             padding={padding}
             placeholder={placeholder}
-            rowIndex={rowIndex}
-            onContentChange={onContentChange}
             heightDuringAnimationRef={heightDuringAnimationRef}
           />
         </>

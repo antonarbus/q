@@ -30,6 +30,8 @@ export const Price = ({ itemIndex }: Props): JSX.Element => {
         width: '100%',
         whiteSpace: 'nowrap',
         textAlign: 'right',
+        flexShrink: 0,
+        right: 0,
       }}
     />
   )

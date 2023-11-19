@@ -30,9 +30,6 @@ export const defaultItems: Item[] = [
           value: 666,
           html: '<b>666</b>',
         },
-        currency: {
-          html: '<div>EUR</div>',
-        },
       },
       column: {
         number: {

@@ -13,7 +13,7 @@ type Props = {
 export const changeBoqHeader = ({ html, itemIndex, boqHeaderKey }: Props): void => {
   const item = getState().items[itemIndex]
   if (item?.type !== 'boq') return
-  const prevHtml = item.boq.header.currency.html
+  const prevHtml = item.boq.header[boqHeaderKey].html
   const didTextChange = prevHtml !== html
   if (!didTextChange) return
   dispatch(itemsSlice.actions.saveBoqHeaderText({ itemIndex, html, boqHeaderKey }))
