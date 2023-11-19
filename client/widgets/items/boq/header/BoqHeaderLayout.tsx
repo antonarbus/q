@@ -1,11 +1,10 @@
 import { Box } from '@mui/material'
-import { theme } from '../../../../shared/clients'
+import { theme } from 'client/shared/clients'
 
 type Props = {
   title: JSX.Element
   subtotalText: React.ReactNode
   price: JSX.Element
-  currency: JSX.Element
   hideContentForDevPurposes?: boolean
   outlinedForDevPurposes?: boolean
 }
@@ -14,7 +13,6 @@ export const BoqHeaderLayout = ({
   title,
   subtotalText,
   price,
-  currency,
   hideContentForDevPurposes = false,
   outlinedForDevPurposes = false,
 }: Props): JSX.Element => {
@@ -71,7 +69,7 @@ export const BoqHeaderLayout = ({
             {subtotalText}
           </Box>
           <Box
-            className='layout price-currency'
+            className='layout price'
             sx={{
               display: 'flex',
               justifyContent: 'flex-end',
@@ -89,16 +87,6 @@ export const BoqHeaderLayout = ({
               }}
             >
               {price}
-            </Box>
-            <Box
-              className='layout item currency'
-              sx={{
-                textAlign: 'right',
-                whiteSpace: 'nowrap',
-                minWidth: '30px',
-              }}
-            >
-              {currency}
             </Box>
           </Box>
         </Box>

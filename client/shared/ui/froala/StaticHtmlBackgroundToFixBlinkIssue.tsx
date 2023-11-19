@@ -38,12 +38,12 @@ export const StaticHtmlBackgroundToFixBlinkIssue = ({
     <StaticHtml
       htmlGetter={htmlGetter}
       padding={padding}
+      heightDuringAnimationRef={heightDuringAnimationRef}
       additionalStyle={{
-        ...additionalStyle,
         position: 'absolute',
         visibility,
+        ...additionalStyle,
       }}
-      heightDuringAnimationRef={heightDuringAnimationRef}
     />
   )
 }

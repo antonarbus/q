@@ -71,9 +71,6 @@ export type BoqItem = {
         value: number
         html: string
       }
-      currency: {
-        html: string
-      }
     }
     column: BoqCols
     rows: BoqRow[]
