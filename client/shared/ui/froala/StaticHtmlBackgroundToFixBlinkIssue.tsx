@@ -26,7 +26,7 @@ export const StaticHtmlBackgroundToFixBlinkIssue = ({
 
   useEffectOnce(() => {
     const timeoutId = setTimeout(() => {
-      // setVisibility('hidden')
+      setVisibility('hidden')
     }, 500)
 
     return () => {
