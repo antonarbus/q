@@ -2,7 +2,7 @@ import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from 'client/s
 import type { ReactNode } from 'react'
 import { getState } from 'client/shared/clients'
 import { useIsItemDisabled } from '../hooks/useIsItemDisabled'
-import { ItemLayout } from './item_layout'
+import { ItemSortAndAnimate } from './item_layout'
 import { ItemMsg } from './item_msg'
 import { PasteItemTextOverlay } from './paste_item_overlay_text'
 
@@ -31,7 +31,7 @@ export const Item = ({
   const item = getState().items[itemIndex]
 
   return (
-    <ItemLayout
+    <ItemSortAndAnimate
       index={itemIndex} // "index" is internal prop consumed by SortableElement HOC
       disabled={isItemDisabled} // internal prop consumed by SortableElement HOC
       itemIndex={itemIndex}
@@ -48,6 +48,6 @@ export const Item = ({
       <PasteItemTextOverlay itemIndex={itemIndex}>
         {children}
       </PasteItemTextOverlay>
-    </ItemLayout>
+    </ItemSortAndAnimate>
   )
 }
