@@ -45,6 +45,7 @@ export const NumberCell = ({ itemIndex, rowIndex }: Props): JSX.Element => {
         }}
         additionalStyle={{
           flexGrow: 1,
+          textAlign: 'center',
         }}
       />
     </Box>

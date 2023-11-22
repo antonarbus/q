@@ -36,6 +36,7 @@ export const NumberColumn = ({ itemIndex }: Props): JSX.Element => {
         }}
         additionalStyle={{
           flexGrow: 1,
+          textAlign: 'center',
         }}
       />
     </ResizableColumn>
