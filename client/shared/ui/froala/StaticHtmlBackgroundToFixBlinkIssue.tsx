@@ -26,7 +26,7 @@ export const StaticHtmlBackgroundToFixBlinkIssue = ({
 
   useEffectOnce(() => {
     const timeoutId = setTimeout(() => {
-      setVisibility('hidden')
+      // setVisibility('hidden')
     }, 500)
 
     return () => {
@@ -41,6 +41,7 @@ export const StaticHtmlBackgroundToFixBlinkIssue = ({
       heightDuringAnimationRef={heightDuringAnimationRef}
       additionalStyle={{
         position: 'absolute',
+        width: '100%',
         visibility,
         ...additionalStyle,
       }}
