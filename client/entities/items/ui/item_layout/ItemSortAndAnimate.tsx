@@ -23,7 +23,7 @@ type Props = {
 
 type SortableItem = SortableElementProps & Props
 
-export const ItemLayout: ComponentClass<SortableItem> = SortableElement(({
+export const ItemSortAndAnimate: ComponentClass<SortableItem> = SortableElement(({
   itemIndex,
   children,
   itemHeight,
