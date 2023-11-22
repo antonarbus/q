@@ -12,7 +12,7 @@ type Props = {
 
 type SortableItem = SortableElementProps & Props
 
-export const BoqRowLayout2: ComponentClass<SortableItem> = SortableElement(({
+export const BoqRowSortAndAnimation: ComponentClass<SortableItem> = SortableElement(({
   i,
   children,
   rowId,
