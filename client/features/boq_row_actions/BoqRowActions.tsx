@@ -19,7 +19,8 @@ export const BoqRowActions = ({ itemIndex, rowIndex, boqRow }: Props): JSX.Eleme
       sx={{
         position: 'absolute',
         left: '-28px',
-        top: 0,
+        bottom: 0,
+        height: '45px',
       }}
     >
       <Box
