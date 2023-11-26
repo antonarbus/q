@@ -1,7 +1,7 @@
 import type { SxProps } from '@mui/material'
 import type { MutableRefObject } from 'react'
 import { Box } from '@mui/material'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 
 type Props = {
@@ -25,7 +25,8 @@ export const StaticHtml = ({
     ref.current.innerHTML = htmlGetter()
   })
 
-  useEffectOnce(() => {
+  useEffect(() => {
+    console.log(555)
     // save height after loading content
     if (!ref.current?.clientHeight) return
     heightDuringAnimationRef.current = ref.current.clientHeight
