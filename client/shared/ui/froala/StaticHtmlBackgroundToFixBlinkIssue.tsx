@@ -8,7 +8,7 @@ type Props = {
   padding?: number | string
   htmlGetter: () => string
   additionalStyle?: SxProps
-  heightDuringAnimationRef: MutableRefObject<number | undefined>
+  froalaHeightRef: MutableRefObject<number | undefined>
 }
 
 // * needed to smoothen the froala blink effect on initiation
@@ -20,7 +20,7 @@ export const StaticHtmlBackgroundToFixBlinkIssue = ({
   htmlGetter,
   padding,
   additionalStyle,
-  heightDuringAnimationRef,
+  froalaHeightRef,
 }: Props): JSX.Element => {
   const [visibility, setVisibility] = useState<CSSProperties['visibility']>('visible')
 
@@ -38,7 +38,7 @@ export const StaticHtmlBackgroundToFixBlinkIssue = ({
     <StaticHtml
       htmlGetter={htmlGetter}
       padding={padding}
-      heightDuringAnimationRef={heightDuringAnimationRef}
+      froalaHeightRef={froalaHeightRef}
       additionalStyle={{
         position: 'absolute',
         width: '100%',

@@ -20,6 +20,12 @@ export const DescriptionCell = ({ itemIndex, rowIndex }: Props): JSX.Element => 
   const descriptionColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
   const isDescriptionColWidthSetManually = descriptionColWidth !== undefined
 
+  useSelectorTyped(state => {
+    // re render component to calculated height of static html during item width change
+    // it will trigger useEffect at <StaticHtml />
+    return state.items[itemIndex]?.width
+  })
+
   // todo: split and rename "copyMode" to "isFroala" & "isDrag" and put is into appSlice
 
   return (
@@ -28,7 +34,6 @@ export const DescriptionCell = ({ itemIndex, rowIndex }: Props): JSX.Element => 
       sx={{
         display: isDescriptionColWidthSetManually ? 'block' : 'flex',
         flexGrow: isDescriptionColWidthSetManually ? 0 : 1,
-        // flexShrink: 0,
         width: isDescriptionColWidthSetManually ? descriptionColWidth : 'auto',
         maxWidth: isDescriptionColWidthSetManually ? descriptionColWidth : 'auto',
         minWidth: '200px',
@@ -48,7 +53,6 @@ export const DescriptionCell = ({ itemIndex, rowIndex }: Props): JSX.Element => 
         }}
         additionalStyle={{
           flexGrow: 1,
-          // background: '#ff000045',
         }}
       />
     </Box>
