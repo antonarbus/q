@@ -5,17 +5,13 @@ import { saveItemsLocally } from 'client/shared/lib'
 import type { OnItemResizeStart, OnItemResizeStop } from 'client/shared/types'
 
 export const onBoqItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, elementRef: itemElement }) => {
-  const descriptionHeaderElement = itemElement.querySelector('.th.description')
-
-  if (!descriptionHeaderElement) return
-  if (!(descriptionHeaderElement instanceof HTMLElement)) return
-
   // not 'auto' anymore, otherwise col jumps
   // in ResizablePaper comp width will be set back to "auto" after re-render
   itemElement.style.width = itemElement.clientWidth + 'px'
 
   dispatch(copySlice.actions.enterIntoCopyMode())
 
+  // todo: froala becomes broken
   dispatch(itemsSlice.actions.saveColWidth({
     itemIndex,
     boqColumnKey: 'description',
