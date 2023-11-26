@@ -5,14 +5,15 @@ type Props = {
   froalaElementRef: MutableRefObject<HTMLElement | null>
 }
 
-type ReturnFunc = {
+type Res = {
   heightDuringAnimationRef: MutableRefObject<number>
 }
 
-export const useFixedHeightForAnimation = ({ froalaElementRef }: Props): ReturnFunc => {
-  const heightDuringAnimationRef = useRef<number>(0)
+export const useFixedHeightForAnimation = ({ froalaElementRef }: Props): Res => {
+  const heightDuringAnimationRef = useRef(0)
 
   useEffect(() => {
+    console.log(666)
     // setHeightBackToAuto
     // timeout is needed, coz froala takes some time to initiate and
     // we need to preserve fixed height during that time, otherwise element jumps

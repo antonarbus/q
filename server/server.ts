@@ -25,7 +25,7 @@ void (async (): Promise<void> => {
   app.use(cookieParser())
   app.use(cors())
 
-  app.get(apiUrl.root, (_req: Req, res: Res) => res.send('This is from express.js'))
+  app.get(apiUrl.root, (_req: Req, res: Res) => res.send('i am express.js'))
   app.get(apiUrl.api, (_req: Req, res: Res) => res.json({ message: '/api' }))
   app.use(apiUrl.hi, hiRouter)
   app.use(apiUrl.register, registerRouter)
