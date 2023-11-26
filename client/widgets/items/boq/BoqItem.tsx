@@ -1,4 +1,4 @@
-import { onBoqItemResizeStart, onBoqItemResizeStop } from 'client/features/resize_item'
+import { onBoqItemResize, onBoqItemResizeStart, onBoqItemResizeStop } from 'client/features/resize_item'
 import { Header } from './header'
 import { BoqTable } from './table/BoqTable'
 import { Item } from 'client/entities/items'
@@ -13,8 +13,9 @@ export const BoqItem = ({ itemIndex }: Props): JSX.Element => {
     <Item
       itemIndex={itemIndex}
       autoWidth={true}
-      onItemResizeStop={onBoqItemResizeStop}
       onItemResizeStart={onBoqItemResizeStart}
+      onItemResize={onBoqItemResize}
+      onItemResizeStop={onBoqItemResizeStop}
       itemActions={<ItemActions itemIndex={itemIndex} />}
     >
       <Header itemIndex={itemIndex} />

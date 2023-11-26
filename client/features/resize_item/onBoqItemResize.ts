@@ -2,7 +2,7 @@ import { copySlice } from 'client/entities/copy'
 import { itemsSlice } from 'client/entities/items'
 import { dispatch, getState } from 'client/shared/clients'
 import { saveItemsLocally } from 'client/shared/lib'
-import type { OnItemResizeStart, OnItemResizeStop } from 'client/shared/types'
+import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from 'client/shared/types'
 
 export const onBoqItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, elementRef: itemElement }) => {
   // not 'auto' anymore, otherwise col jumps
@@ -11,12 +11,15 @@ export const onBoqItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, ele
 
   dispatch(copySlice.actions.enterIntoCopyMode())
 
-  // todo: froala becomes broken
   dispatch(itemsSlice.actions.saveColWidth({
     itemIndex,
     boqColumnKey: 'description',
     width: undefined,
   }))
+}
+
+export const onBoqItemResize: OnItemResize = ({ itemIndex, e, direction, elementRef: itemElement, delta }) => {
+  dispatch(itemsSlice.actions.saveItemWidth({ itemIndex, width: itemElement.clientWidth }))
 }
 
 export const onBoqItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction, elementRef: itemElement, delta }) => {
