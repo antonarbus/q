@@ -17,9 +17,13 @@ export const useFixedHeightForAnimation = ({ froalaElementRef }: Props): Res => 
   useEffect(() => {
     // timeout is needed, coz froala takes some time to initiate and
     // we need to preserve fixed height during that time, otherwise element jumps
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       froalaElementRef.current?.style.removeProperty('height')
     }, 500)
+
+    return () => {
+      clearTimeout(timeoutId)
+    }
   }, [isCopyMode])
 
   return { heightDuringAnimationRef }
