@@ -24,11 +24,11 @@ export const DescriptionCell = ({ itemIndex, rowIndex }: Props): JSX.Element => 
 
   return (
     <Box
-      className={'td ' + boqColumnKey}
+      className={`td ${boqColumnKey}`}
       sx={{
         display: isDescriptionColWidthSetManually ? 'block' : 'flex',
         flexGrow: isDescriptionColWidthSetManually ? 0 : 1,
-        flexShrink: 0,
+        // flexShrink: 0,
         width: isDescriptionColWidthSetManually ? descriptionColWidth : 'auto',
         maxWidth: isDescriptionColWidthSetManually ? descriptionColWidth : 'auto',
         minWidth: '200px',
@@ -39,7 +39,7 @@ export const DescriptionCell = ({ itemIndex, rowIndex }: Props): JSX.Element => 
         rowIndex={rowIndex}
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
-        placeholder={boqColumnKey + '...'}
+        placeholder={`${boqColumnKey}...`}
         htmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
         onContentChange={() => {
           if (editorRef.current === null) return
