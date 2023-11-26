@@ -22,7 +22,7 @@ export const NumberCell = ({ itemIndex, rowIndex }: Props): JSX.Element => {
 
   return (
     <Box
-      className={'td ' + boqColumnKey}
+      className={`td ${boqColumnKey}`}
       sx={{
         display: isNumberColWidthSetManually ? 'block' : 'flex',
         width: isNumberColWidthSetManually ? numberColWidth : 'auto',
@@ -36,7 +36,7 @@ export const NumberCell = ({ itemIndex, rowIndex }: Props): JSX.Element => {
         rowIndex={rowIndex}
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
-        placeholder={boqColumnKey + '...'}
+        placeholder={`${boqColumnKey}...`}
         htmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
         onContentChange={() => {
           if (editorRef.current === null) return
