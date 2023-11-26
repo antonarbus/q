@@ -45,7 +45,7 @@ export const ResizableColumn = ({
       }}
       handleStyles={{
         right: {
-          background: '#a7a7a7',
+          background: '#ebe9e9',
           width: '3px',
           right: '0px',
           borderRadius: '3px',
