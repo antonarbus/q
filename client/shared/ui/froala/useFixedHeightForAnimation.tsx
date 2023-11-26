@@ -7,12 +7,12 @@ type Props = {
 }
 
 type Res = {
-  heightDuringAnimationRef: MutableRefObject<number>
+  froalaHeightRef: MutableRefObject<number>
 }
 
 export const useFixedHeightForAnimation = ({ froalaElementRef }: Props): Res => {
   const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
-  const heightDuringAnimationRef = useRef(0)
+  const froalaHeightRef = useRef(0)
 
   useEffect(() => {
     // timeout is needed, coz froala takes some time to initiate and
@@ -26,5 +26,5 @@ export const useFixedHeightForAnimation = ({ froalaElementRef }: Props): Res => 
     }
   }, [isCopyMode])
 
-  return { heightDuringAnimationRef }
+  return { froalaHeightRef }
 }

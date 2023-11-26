@@ -32,7 +32,7 @@ export const Froala = ({
   onContentChange,
 }: Props): JSX.Element => {
   const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
-  const { heightDuringAnimationRef } = useFixedHeightForAnimation({ froalaElementRef })
+  const { froalaHeightRef } = useFixedHeightForAnimation({ froalaElementRef })
   const { observerRef, isInsideViewPort } = useViewPortObserver({ itemIndex, rowIndex })
 
   const showStaticHtml = isCopyMode || !isInsideViewPort
@@ -53,7 +53,7 @@ export const Froala = ({
           htmlGetter={htmlGetter}
           padding={padding}
           additionalStyle={additionalStyle}
-          heightDuringAnimationRef={heightDuringAnimationRef}
+          froalaHeightRef={froalaHeightRef}
         />
       )}
       {showEditableHtml && (
@@ -62,7 +62,7 @@ export const Froala = ({
             htmlGetter={htmlGetter}
             padding={padding}
             additionalStyle={additionalStyle}
-            heightDuringAnimationRef={heightDuringAnimationRef}
+            froalaHeightRef={froalaHeightRef}
           />
           <EditableHtml
             additionalStyle={additionalStyle}
@@ -74,7 +74,7 @@ export const Froala = ({
             onContentChange={onContentChange}
             padding={padding}
             placeholder={placeholder}
-            heightDuringAnimationRef={heightDuringAnimationRef}
+            froalaHeightRef={froalaHeightRef}
           />
         </>
       )}

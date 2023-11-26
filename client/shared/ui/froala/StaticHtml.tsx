@@ -8,32 +8,32 @@ type Props = {
   padding?: number | string
   htmlGetter: () => string
   additionalStyle?: SxProps
-  heightDuringAnimationRef: MutableRefObject<number | undefined>
+  froalaHeightRef: MutableRefObject<number | undefined>
 }
 
 export const StaticHtml = ({
   htmlGetter,
   padding,
   additionalStyle,
-  heightDuringAnimationRef,
+  froalaHeightRef,
 }: Props): JSX.Element => {
-  const ref = useRef<HTMLDivElement>()
+  const staticHtmlRef = useRef<HTMLDivElement>()
 
   useEffectOnce(() => {
     // insert html into element
-    if (!ref.current) return
-    ref.current.innerHTML = htmlGetter()
+    if (!staticHtmlRef.current) return
+    staticHtmlRef.current.innerHTML = htmlGetter()
   })
 
   useEffect(() => {
     // save height after loading content
-    if (!ref.current?.clientHeight) return
-    heightDuringAnimationRef.current = ref.current.clientHeight
+    if (!staticHtmlRef.current?.clientHeight) return
+    froalaHeightRef.current = staticHtmlRef.current.clientHeight
   })
 
   return (
     <Box
-      ref={ref}
+      ref={staticHtmlRef}
       className='static-html'
       style={{
         padding: padding ?? 0,

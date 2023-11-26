@@ -15,7 +15,7 @@ type Props = {
   additionalStyle?: SxProps
   rowIndex?: number
   onContentChange: () => void
-  heightDuringAnimationRef: MutableRefObject<number | undefined>
+  froalaHeightRef: MutableRefObject<number | undefined>
 }
 
 export const EditableHtml = ({
@@ -28,7 +28,7 @@ export const EditableHtml = ({
   placeholder,
   rowIndex,
   onContentChange,
-  heightDuringAnimationRef,
+  froalaHeightRef,
 }: Props): JSX.Element => {
   useStartFroala({
     editorRef,
@@ -48,7 +48,7 @@ export const EditableHtml = ({
       className='editable-html'
       style={{
         padding: padding ?? 0,
-        height: heightDuringAnimationRef.current ?? 'auto', // needed for animation, height will be removed after froala is initialized
+        height: froalaHeightRef.current ?? 'auto', // needed for animation, height will be removed after froala is initialized
       }}
       sx={{
         wordBreak: 'break-word',
