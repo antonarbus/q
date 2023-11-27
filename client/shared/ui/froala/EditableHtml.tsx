@@ -52,6 +52,7 @@ export const EditableHtml = ({
       }}
       sx={{
         wordBreak: 'break-word',
+        minHeight: '24px', // otherwise placeholder is misplaced on init
         ...additionalStyle,
       }}
     />
