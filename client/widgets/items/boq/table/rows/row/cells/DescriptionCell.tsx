@@ -1,4 +1,5 @@
 import { Box } from '@mui/material'
+import { theme } from 'client/shared/clients'
 import { boqCellHtmlGetter, selectColumnWidth } from 'client/entities/items'
 import { changeBoqCell } from 'client/features/change_text'
 import { useSelectorTyped } from 'client/shared/hooks'
@@ -46,6 +47,7 @@ export const DescriptionCell = ({ itemIndex, rowIndex }: Props): JSX.Element => 
         froalaElementRef={froalaElementRef}
         placeholder={`${boqColumnKey}...`}
         htmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
+        // padding={theme.cell.padding}
         onContentChange={() => {
           if (editorRef.current === null) return
           const html = editorRef.current.html.get()
@@ -53,6 +55,11 @@ export const DescriptionCell = ({ itemIndex, rowIndex }: Props): JSX.Element => 
         }}
         additionalStyle={{
           flexGrow: 1,
+          padding: theme.cell.padding,
+          minHeight: '44px', // otherwise placeholder is misplaced on init
+          '.fr-wrapper': {
+            minHeight: '24px', // otherwise placeholder is misplaced on init
+          },
         }}
       />
     </Box>
