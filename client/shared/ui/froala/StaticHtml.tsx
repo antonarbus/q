@@ -5,7 +5,6 @@ import { useEffect, useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 
 type Props = {
-  padding?: number | string
   htmlGetter: () => string
   additionalStyle?: SxProps
   froalaHeightRef: MutableRefObject<number | undefined>
@@ -13,7 +12,6 @@ type Props = {
 
 export const StaticHtml = ({
   htmlGetter,
-  padding,
   additionalStyle,
   froalaHeightRef,
 }: Props): JSX.Element => {
@@ -35,9 +33,6 @@ export const StaticHtml = ({
     <Box
       ref={staticHtmlRef}
       className='static-html'
-      style={{
-        padding: padding ?? 0,
-      }}
       sx={{
         opacity: 0.5,
         wordBreak: 'break-word',

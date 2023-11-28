@@ -5,7 +5,6 @@ import { useEffectOnce } from 'react-use'
 import { StaticHtml } from './StaticHtml'
 
 type Props = {
-  padding?: number | string
   htmlGetter: () => string
   additionalStyle?: SxProps
   froalaHeightRef: MutableRefObject<number | undefined>
@@ -18,7 +17,6 @@ type Props = {
 
 export const StaticHtmlBackgroundToFixBlinkIssue = ({
   htmlGetter,
-  padding,
   additionalStyle,
   froalaHeightRef,
 }: Props): JSX.Element => {
@@ -37,7 +35,6 @@ export const StaticHtmlBackgroundToFixBlinkIssue = ({
   return (
     <StaticHtml
       htmlGetter={htmlGetter}
-      padding={padding}
       froalaHeightRef={froalaHeightRef}
       additionalStyle={{
         position: 'absolute',

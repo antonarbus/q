@@ -26,7 +26,7 @@ const customTheme = {
     height: 60,
     marginTop: 10,
     marginBottom: 0,
-    get fullHeight(): number {
+    get fullHeight (): number {
       return this.height + this.marginTop + this.marginBottom
     },
   },
@@ -43,66 +43,72 @@ const customTheme = {
     },
   },
   item: {
-    padding: 20,
+    padding: '20px',
     animationDuration: 0.5,
   },
   copy: {
     pasteTextColor: '#6c6c6c',
     animationDuration: 0.35,
   },
+  cell: {
+    padding: '20px 5px 0px 5px',
+  },
 }
+
+type CustomTheme = typeof customTheme
 
 // https://mui.com/material-ui/customization/theming/#typescript
 // https://medium.com/@bahuguna.shubhanshu19/how-to-create-custom-theme-in-react-written-in-typescript-using-material-ui-154ed1daeae6
 declare module '@mui/material/styles' {
   // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-  interface Theme {
-    // from mui
-    palette: {
-      primary: {
-        main: string
-      }
-    }
-    typography: {
-      button: {
-        textTransform: string
-      }
-    }
-    // from customTheme
-    colors: {
-      grey: string
-      red: string
-      topMenuItem: string
-      darkBackground: string
-      greyFont: string
-    }
-    nav: {
-      height: number
-      marginTop: number
-      marginBottom: number
-      fullHeight: number
-    }
-    menu: {
-      width: number
-      paddingTop: number
-      paddingBottom: number
-      menuItem: {
-        height: number
-      }
-      navItem: {
-        marginLeft: number
-        marginRight: number
-      }
-    }
-    item: {
-      padding: number
-      animationDuration: number
-    }
-    copy: {
-      pasteTextColor: string
-      animationDuration: number
-    }
-  }
+  // interface Theme {
+  //   // from mui
+  //   palette: {
+  //     primary: {
+  //       main: string
+  //     }
+  //   }
+  //   typography: {
+  //     button: {
+  //       textTransform: string
+  //     }
+  //   }
+  //   // from customTheme
+  //   colors: {
+  //     grey: string
+  //     red: string
+  //     topMenuItem: string
+  //     darkBackground: string
+  //     greyFont: string
+  //   }
+  //   nav: {
+  //     height: number
+  //     marginTop: number
+  //     marginBottom: number
+  //     fullHeight: number
+  //   }
+  //   menu: {
+  //     width: number
+  //     paddingTop: number
+  //     paddingBottom: number
+  //     menuItem: {
+  //       height: number
+  //     }
+  //     navItem: {
+  //       marginLeft: number
+  //       marginRight: number
+  //     }
+  //   }
+  //   item: {
+  //     padding: number
+  //     animationDuration: number
+  //   }
+  //   copy: {
+  //     pasteTextColor: string
+  //     animationDuration: number
+  //   },
+
+  // }
 }
 
 export const theme = { ...muiTheme, ...customTheme }

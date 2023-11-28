@@ -28,12 +28,14 @@ export const TextItem = ({ itemIndex }: Props): JSX.Element => {
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
         htmlGetter={() => itemTextHtmlGetter({ itemIndex })}
-        placeholder='Type text or drop images, files, links...'
-        padding={theme.item.padding}
+        placeholder='Add & format text, add tables, drop images, files, links...'
         onContentChange={() => {
           if (editorRef.current === null) return
           const html = editorRef.current.html.get()
           changeItem({ html, itemIndex })
+        }}
+        additionalStyle={{
+          padding: theme.item.padding,
         }}
       />
       <PencilAtBottomRight editorRef={editorRef} />

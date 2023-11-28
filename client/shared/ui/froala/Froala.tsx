@@ -10,7 +10,6 @@ import { StaticHtmlBackgroundToFixBlinkIssue } from './StaticHtmlBackgroundToFix
 
 type Props = {
   itemIndex: number
-  padding?: number | string
   htmlGetter: () => string
   froalaElementRef: RefObject<HTMLDivElement>
   editorRef: MutableRefObject<FroalaEditor | null>
@@ -27,7 +26,6 @@ export const Froala = ({
   itemIndex,
   rowIndex,
   htmlGetter,
-  padding,
   placeholder,
   onContentChange,
 }: Props): JSX.Element => {
@@ -51,7 +49,6 @@ export const Froala = ({
         // * for ex. when we change column width
         <StaticHtml
           htmlGetter={htmlGetter}
-          padding={padding}
           additionalStyle={additionalStyle}
           froalaHeightRef={froalaHeightRef}
         />
@@ -60,7 +57,6 @@ export const Froala = ({
         <>
           <StaticHtmlBackgroundToFixBlinkIssue
             htmlGetter={htmlGetter}
-            padding={padding}
             additionalStyle={additionalStyle}
             froalaHeightRef={froalaHeightRef}
           />
@@ -72,7 +68,6 @@ export const Froala = ({
             rowIndex={rowIndex}
             htmlGetter={htmlGetter}
             onContentChange={onContentChange}
-            padding={padding}
             placeholder={placeholder}
             froalaHeightRef={froalaHeightRef}
           />

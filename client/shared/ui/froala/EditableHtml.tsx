@@ -3,11 +3,10 @@ import type { MutableRefObject, RefObject } from 'react'
 import type FroalaEditor from 'froala-editor'
 import { Box } from '@mui/material'
 import { useStartFroala } from './useStartFroala'
-import { usePutCaretAtTheEndOfText } from './usePutCaretAtTheEndOfText'
+import { usePutCaretAtTheEnd } from './usePutCaretAtTheEnd'
 
 type Props = {
   itemIndex: number
-  padding?: number | string
   htmlGetter: () => string
   froalaElementRef: RefObject<HTMLDivElement>
   editorRef: MutableRefObject<FroalaEditor | null>
@@ -24,7 +23,6 @@ export const EditableHtml = ({
   froalaElementRef,
   itemIndex,
   htmlGetter,
-  padding,
   placeholder,
   rowIndex,
   onContentChange,
@@ -40,19 +38,17 @@ export const EditableHtml = ({
     onContentChange,
   })
 
-  usePutCaretAtTheEndOfText({ itemIndex, editorRef, froalaElementRef })
+  usePutCaretAtTheEnd({ itemIndex, editorRef, froalaElementRef })
 
   return (
     <Box
       ref={froalaElementRef}
       className='editable-html'
       style={{
-        padding: padding ?? 0,
         height: froalaHeightRef.current ?? 'auto', // needed for animation, height will be removed after froala is initialized
       }}
       sx={{
         wordBreak: 'break-word',
-        minHeight: '24px', // otherwise placeholder is misplaced on init
         ...additionalStyle,
       }}
     />

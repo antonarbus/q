@@ -1,4 +1,5 @@
 import { Box } from '@mui/material'
+import { theme } from 'client/shared/clients'
 import { boqCellHtmlGetter, selectColumnWidth } from 'client/entities/items'
 import { changeBoqCell } from 'client/features/change_text'
 import { useSelectorTyped } from 'client/shared/hooks'
@@ -46,8 +47,13 @@ export const NumberCell = ({ itemIndex, rowIndex }: Props): JSX.Element => {
         additionalStyle={{
           flexGrow: 1,
           textAlign: 'center',
+          padding: theme.cell.padding,
           '.fr-placeholder': {
             left: '15px',
+          },
+          minHeight: '44px', // otherwise placeholder is misplaced on init
+          '.fr-wrapper': {
+            minHeight: '24px', // otherwise placeholder is misplaced on init
           },
         }}
       />
