@@ -1,7 +1,7 @@
 import { useSelectorTyped } from 'client/shared/hooks'
 import { dispatch, getState, theme } from 'client/shared/clients'
 import { RxCross2 } from 'react-icons/rx'
-import { itemsSlice, selectIsItemAlone } from 'client/entities/items'
+import { itemsSlice, selectIsLastItem } from 'client/entities/items'
 import { gsap } from 'gsap'
 import { useRef } from 'react'
 import { saveItemsLocally } from 'client/shared/lib'
@@ -15,7 +15,7 @@ type Props = {
 export const DeleteItemIcon = ({ itemIndex }: Props): EmotionJSX.Element => {
   const ref = useRef<HTMLSpanElement>(null)
 
-  const isItemAlone = useSelectorTyped(selectIsItemAlone)
+  const isItemAlone = useSelectorTyped(selectIsLastItem)
   const isDeletable = useSelectorTyped(state => state.copy.isDeletable)
   const disabled = isItemAlone || !isDeletable
 

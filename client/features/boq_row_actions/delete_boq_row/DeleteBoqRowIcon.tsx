@@ -15,9 +15,9 @@ type Props = {
 export const DeleteBoqRowIcon = ({ rowIndex, itemIndex }: Props): JSX.Element => {
   const ref = useRef<HTMLSpanElement>(null)
 
-  const isBoqRowAlone = useSelectorTyped(selectIsLastBoqRow({ itemIndex }))
+  const isLastBoqRow = useSelectorTyped(selectIsLastBoqRow({ itemIndex }))
   const isDeletable = useSelectorTyped(state => state.copy.isDeletable)
-  const disabled = isBoqRowAlone || !isDeletable
+  const disabled = isLastBoqRow || !isDeletable
 
   return (
     <span
