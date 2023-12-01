@@ -9,7 +9,7 @@ import { itemsShapeEqualityFn } from 'client/entities/items'
 
 export const Items = (): JSX.Element => {
   const items = useSelectorTyped(state => state.items, itemsShapeEqualityFn)
-  const shouldReRender = useSelectorTyped(state => state.offer.toggleOffer)
+  const shouldReRender = useSelectorTyped(state => state.app.reLoadOfferFlag)
 
   return (
     <DraggableItemsContainer

@@ -2,11 +2,11 @@ import { useSelectorTyped } from 'client/shared/hooks'
 import { AnimatePresence, motion } from 'framer-motion'
 
 export const BottomMsg = (): JSX.Element => {
-  const msg = useSelectorTyped(state => state.bottomMsg.msg)
+  const bottomMsg = useSelectorTyped(state => state.app.bottomMsg)
 
   return (
     <AnimatePresence>
-      {msg && (
+      {Boolean(bottomMsg) && (
         <motion.span
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -21,7 +21,7 @@ export const BottomMsg = (): JSX.Element => {
             userSelect: 'none',
           }}
         >
-          {msg}
+          {bottomMsg}
         </motion.span>
       )}
     </AnimatePresence>

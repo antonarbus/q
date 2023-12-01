@@ -1,1 +1,0 @@
-export { bottomMsgSlice } from './bottomMsgSlice'

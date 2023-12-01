@@ -47,8 +47,10 @@ export const copySlice = createSlice({
       state.isCopyContainer = false
     },
     enterIntoCopyMode: (state) => {
+      // todo: check why we need it, maybe it was all about froala
       state.isCopyMode = true
     },
+    // todo: check why we need it, maybe it was all about froala
     exitFromCopyMode: () => initialState,
     saveInitCordsOfCopyContainer: (state, action: PayloadAction<{ x: number, y: number }>) => {
       const coords = action.payload
