@@ -1,4 +1,3 @@
-import { useSelectorTyped } from 'client/shared/hooks'
 import type { MutableRefObject } from 'react'
 import { useEffect, useRef } from 'react'
 
@@ -11,20 +10,19 @@ type Res = {
 }
 
 export const useFixedHeightForAnimation = ({ froalaElementRef }: Props): Res => {
-  const isFroala = useSelectorTyped(state => state.app.isFroala)
   const froalaHeightRef = useRef(0)
 
   useEffect(() => {
-    // timeout is needed, coz froala takes some time to initiate and
-    // we need to preserve fixed height during that time, otherwise element jumps
     const timeoutId = setTimeout(() => {
+      // timeout is needed, coz froala takes some time to get initiated
+      // we need to preserve fixed height during that time to avoid element jumps
       froalaElementRef.current?.style.removeProperty('height')
     }, 500)
 
     return () => {
       clearTimeout(timeoutId)
     }
-  }, [isFroala])
+  })
 
   return { froalaHeightRef }
 }
