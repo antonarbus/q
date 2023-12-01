@@ -1,17 +1,15 @@
 import { SortableHandle } from 'react-sortable-hoc'
 import { MdDragIndicator } from 'react-icons/md'
-import { useSelectorTyped } from 'client/shared/hooks'
 import { motion } from 'framer-motion'
-import { selectIsLastBoqRow } from 'client/entities/items'
+// todo: obviously need to move items into entities
+import { useIsBoqRowSortDisabled } from 'client/widgets/items/boq/table/rows/useIsBoqRowSortDisabled'
 
 type Props = {
   itemIndex: number
 }
 
 const Handle = ({ itemIndex }: Props): JSX.Element => {
-  const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
-  const isBoqRowAlone = useSelectorTyped(selectIsLastBoqRow({ itemIndex }))
-  const isDisabled = isCopyMode || isBoqRowAlone
+  const isDisabled = useIsBoqRowSortDisabled({ itemIndex })
 
   return (
     <motion.span

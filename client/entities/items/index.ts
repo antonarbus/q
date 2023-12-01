@@ -5,7 +5,7 @@ export { itemsSlice } from './itemsSlice'
 
 // selectors
 export { itemsShapeEqualityFn } from './selectors/itemsShapeEqualityFn'
-export { selectIsItemAlone } from './selectors/selectIsItemAlone'
+export { selectIsLastItem } from './selectors/selectIsLastItem'
 export { selectIsLastBoqRow } from './selectors/selectIsLastBoqRow'
 export { selectColumnWidth } from './selectors/selectColumnWidth'
 export { selectBoqRows, boqRowsShapeEqualityFn } from './selectors/selectBoqRows'
@@ -22,3 +22,6 @@ export { itemTextHtmlGetter } from './html_getters/itemTextHtmlGetter'
 export { boqColumnNameHtmlGetter } from './html_getters/boqColumnNameHtmlGetter'
 export { boqHeaderHtmlGetter } from './html_getters/boqHeaderHtmlGetter'
 export { boqCellHtmlGetter } from './html_getters/boqCellHtmlGetter'
+
+// hooks
+export { useIsItemSortDisabled } from './hooks/useIsItemSortDisabled'
