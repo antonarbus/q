@@ -1,17 +1,12 @@
 import type { MutableRefObject } from 'react'
 import { useEffect, useRef, useState } from 'react'
 
-type Props = {
-  itemIndex: number
-  rowIndex?: number
-}
-
 type Res = {
   observerRef: MutableRefObject<HTMLDivElement | null>
   isInsideViewPort: boolean
 }
 
-export const useViewPortObserver = ({ itemIndex, rowIndex }: Props): Res => {
+export const useViewPortObserver = (): Res => {
   const observerRef = useRef<HTMLDivElement | null>(null)
   const [isInsideViewPort, setIsInsideViewPort] = useState(false)
 
@@ -19,7 +14,7 @@ export const useViewPortObserver = ({ itemIndex, rowIndex }: Props): Res => {
     const options = { root: null, rootMargin: '0px', threshold: 0 }
 
     const callback: IntersectionObserverCallback = ([entry], observer) => {
-      if (!entry) return
+      // if (!entry) return
       setIsInsideViewPort(entry.isIntersecting)
     }
 
@@ -30,7 +25,7 @@ export const useViewPortObserver = ({ itemIndex, rowIndex }: Props): Res => {
     return () => {
       observer.disconnect()
     }
-  }, [itemIndex, rowIndex])
+  })
 
   return { observerRef, isInsideViewPort }
 }
