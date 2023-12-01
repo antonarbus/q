@@ -4,7 +4,7 @@ type Props = {
   itemIndex: number
 }
 
-export const selectIsBoqRowAlone = ({ itemIndex }: Props) => (state: RootState): boolean => {
+export const selectIsLastBoqRow = ({ itemIndex }: Props) => (state: RootState): boolean => {
   const item = state.items[itemIndex]
 
   if (item?.type !== 'boq') return false

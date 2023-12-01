@@ -6,7 +6,7 @@ export { itemsSlice } from './itemsSlice'
 // selectors
 export { itemsShapeEqualityFn } from './selectors/itemsShapeEqualityFn'
 export { selectIsItemAlone } from './selectors/selectIsItemAlone'
-export { selectIsBoqRowAlone } from './selectors/selectIsBoqRowAlone'
+export { selectIsLastBoqRow } from './selectors/selectIsLastBoqRow'
 export { selectColumnWidth } from './selectors/selectColumnWidth'
 export { selectBoqRows, boqRowsShapeEqualityFn } from './selectors/selectBoqRows'
 
@@ -14,7 +14,6 @@ export { selectBoqRows, boqRowsShapeEqualityFn } from './selectors/selectBoqRows
 export { saveItemHeightByIndex } from './model/saveItemHeightByIndex'
 
 // ui
-
 export { DraggableItemsContainer } from './ui/DraggableItemsContainer'
 export { Item } from './ui/Item'
 
