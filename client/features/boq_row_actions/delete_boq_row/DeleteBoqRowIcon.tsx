@@ -2,7 +2,7 @@ import { useSelectorTyped } from 'client/shared/hooks'
 import { copySlice, exitCopyMode } from 'client/entities/copy'
 import { dispatch, getState, theme } from 'client/shared/clients'
 import { RxCross2 } from 'react-icons/rx'
-import { itemsSlice, selectIsBoqRowAlone } from 'client/entities/items'
+import { itemsSlice, selectIsLastBoqRow } from 'client/entities/items'
 import { gsap } from 'gsap'
 import { useRef } from 'react'
 import { saveItemsLocally } from 'client/shared/lib'
@@ -15,7 +15,7 @@ type Props = {
 export const DeleteBoqRowIcon = ({ rowIndex, itemIndex }: Props): JSX.Element => {
   const ref = useRef<HTMLSpanElement>(null)
 
-  const isBoqRowAlone = useSelectorTyped(selectIsBoqRowAlone({ itemIndex }))
+  const isBoqRowAlone = useSelectorTyped(selectIsLastBoqRow({ itemIndex }))
   const isDeletable = useSelectorTyped(state => state.copy.isDeletable)
   const disabled = isBoqRowAlone || !isDeletable
 

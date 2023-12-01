@@ -1,7 +1,7 @@
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from 'client/shared/types'
 import type { ReactNode } from 'react'
 import { getState } from 'client/shared/clients'
-import { useIsItemDisabled } from '../hooks/useIsItemDisabled'
+import { useIsItemSortDisabled } from '../hooks/useIsItemSortDisabled'
 import { ItemSortAndAnimate } from './item_layout'
 import { ItemMsg } from './item_msg'
 import { PasteItemTextOverlay } from './paste_item_overlay_text'
@@ -27,13 +27,13 @@ export const Item = ({
   autoWidth,
   itemActions,
 }: Props): JSX.Element => {
-  const isItemDisabled = useIsItemDisabled()
   const item = getState().items[itemIndex]
+  const isItemSortDisabled = useIsItemSortDisabled()
 
   return (
     <ItemSortAndAnimate
       index={itemIndex} // "index" is internal prop consumed by SortableElement HOC
-      disabled={isItemDisabled} // internal prop consumed by SortableElement HOC
+      disabled={isItemSortDisabled} // internal prop consumed by SortableElement HOC
       itemIndex={itemIndex}
       disableResize={disableResize}
       autoWidth={autoWidth}

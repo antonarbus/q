@@ -3,7 +3,7 @@ import { onItemDrag } from 'client/features/item_actions/drag_item'
 import { TextItem } from './text/TextItem'
 import { PasteItem } from './paste/PasteItem'
 import { AnimatePresence } from 'framer-motion'
-import { DraggableItemsContainer } from '../../entities/items/ui/DraggableItemsContainer'
+import { DraggableItemsContainer } from 'client/entities/items/ui/DraggableItemsContainer'
 import { BoqItem } from './boq/BoqItem'
 import { itemsShapeEqualityFn } from 'client/entities/items'
 

@@ -4,7 +4,7 @@ import { TbCut } from 'react-icons/tb'
 import { motion } from 'framer-motion'
 import { cleanHtml } from 'client/shared/lib/itemsUtils'
 import { copySlice, exitCopyMode } from 'client/entities/copy'
-import { itemsSlice, selectIsBoqRowAlone } from 'client/entities/items'
+import { itemsSlice, selectIsLastBoqRow } from 'client/entities/items'
 import type { MouseEvent } from 'react'
 import type { BoqRow } from 'client/shared/types'
 import { className } from 'client/shared/className'
@@ -18,7 +18,7 @@ type Props = {
 
 export const CutBoqRowIcon = ({ itemIndex, rowIndex }: Props): JSX.Element => {
   const isCopyable = useSelectorTyped(state => state.copy.isCopyable)
-  const isBoqRowAlone = useSelectorTyped(selectIsBoqRowAlone({ itemIndex }))
+  const isBoqRowAlone = useSelectorTyped(selectIsLastBoqRow({ itemIndex }))
   const isDeletable = useSelectorTyped(state => state.copy.isDeletable)
   const disabled = isBoqRowAlone || !isDeletable || !isCopyable
 
