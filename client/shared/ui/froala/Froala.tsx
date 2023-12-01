@@ -31,9 +31,8 @@ export const Froala = ({
 }: Props): JSX.Element => {
   const isFroala = useSelectorTyped(state => state.app.isFroala)
   const { froalaHeightRef } = useFixedHeightForAnimation({ froalaElementRef })
-  const { observerRef, isInsideViewPort } = useViewPortObserver({ itemIndex, rowIndex })
+  const { observerRef, isInsideViewPort } = useViewPortObserver()
 
-  // const showStaticHtml = !isFroala || !isInsideViewPort
   const showEditableHtml = isFroala && isInsideViewPort
 
   return (
@@ -45,8 +44,7 @@ export const Froala = ({
       }}
     >
       {!showEditableHtml && (
-        // * needed to disable Froala to avoid expensive frequent Froala initializing
-        // * for ex. when we change column width
+        // * needed to disable Froala to avoid expensive frequent Froala initializing, for ex. when we change column width
         <StaticHtml
           htmlGetter={htmlGetter}
           additionalStyle={additionalStyle}
