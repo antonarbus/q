@@ -48,9 +48,10 @@ const pasteItemOnClick = (): void => {
     dispatch(copySlice.actions.hideCopyContainer())
     dispatch(itemsSlice.actions.removePasteItem())
 
+    // need more time than animation, otherwise some distortion is visible
     setTimeout(() => {
       dispatch(appSlice.actions.enableFroala())
-    }, 1000 * theme.item.animationDuration)
+    }, 1000 * theme.item.animationDuration + 500)
   }
 }
 
