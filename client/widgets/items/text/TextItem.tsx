@@ -28,7 +28,7 @@ export const TextItem = ({ itemIndex }: Props): JSX.Element => {
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
         htmlGetter={() => itemTextHtmlGetter({ itemIndex })}
-        placeholder='Add & format text, add tables, drop images, files, links...'
+        placeholder='Add text, tables, drop images, files, links, select to format...'
         onContentChange={() => {
           if (editorRef.current === null) return
           const html = editorRef.current.html.get()

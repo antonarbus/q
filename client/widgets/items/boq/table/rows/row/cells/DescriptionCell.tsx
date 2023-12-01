@@ -45,7 +45,6 @@ export const DescriptionCell = ({ itemIndex, rowIndex }: Props): JSX.Element => 
         froalaElementRef={froalaElementRef}
         placeholder={`${boqColumnKey}...`}
         htmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
-        // padding={theme.cell.padding}
         onContentChange={() => {
           if (editorRef.current === null) return
           const html = editorRef.current.html.get()

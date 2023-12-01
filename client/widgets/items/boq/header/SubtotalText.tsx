@@ -31,6 +31,7 @@ export const SubtotalText = ({ itemIndex }: Props): JSX.Element => {
         width: '100%',
         whiteSpace: 'nowrap',
         textAlign: 'right',
+        minHeight: '24px',
       }}
     />
   )

@@ -32,6 +32,7 @@ export const Price = ({ itemIndex }: Props): JSX.Element => {
         textAlign: 'right',
         flexShrink: 0,
         right: 0,
+        minHeight: '24px',
       }}
     />
   )
