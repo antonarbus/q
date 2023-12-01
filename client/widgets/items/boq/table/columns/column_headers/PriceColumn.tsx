@@ -37,6 +37,7 @@ export const PriceColumn = ({ itemIndex }: Props): JSX.Element => {
         additionalStyle={{
           flexGrow: 1,
           textAlign: 'center',
+          minHeight: '24px',
         }}
       />
     </ResizableColumn>

@@ -28,6 +28,7 @@ export const Title = ({ itemIndex }: Props): JSX.Element => {
       }}
       additionalStyle={{
         flexGrow: 1,
+        minHeight: '24px',
       }}
     />
   )
