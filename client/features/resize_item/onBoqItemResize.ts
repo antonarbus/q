@@ -1,4 +1,4 @@
-import { copySlice } from 'client/entities/copy'
+import { appSlice } from 'client/entities/app'
 import { itemsSlice } from 'client/entities/items'
 import { dispatch, getState } from 'client/shared/clients'
 import { saveItemsLocally } from 'client/shared/lib'
@@ -9,7 +9,7 @@ export const onBoqItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, ele
   // in ResizablePaper comp width will be set back to "auto" after re-render
   itemElement.style.width = itemElement.clientWidth + 'px'
 
-  dispatch(copySlice.actions.enterIntoCopyMode())
+  dispatch(appSlice.actions.disableFroala())
 
   dispatch(itemsSlice.actions.saveColWidth({
     itemIndex,
@@ -34,7 +34,7 @@ export const onBoqItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction,
     width: descriptionColWidth,
   }))
 
-  dispatch(copySlice.actions.exitFromCopyMode())
+  dispatch(appSlice.actions.enableFroala())
 
   // setTimeout to make save the width after it will become back to "width: auto"
   // on ResizablePaper component render

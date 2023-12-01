@@ -1,11 +1,12 @@
 import { useSelectorTyped } from 'client/shared/hooks'
-import { copySlice, exitCopyMode } from 'client/entities/copy'
+import { copySlice } from 'client/entities/copy'
 import { dispatch, getState, theme } from 'client/shared/clients'
 import { RxCross2 } from 'react-icons/rx'
 import { itemsSlice, selectIsLastBoqRow } from 'client/entities/items'
 import { gsap } from 'gsap'
 import { useRef } from 'react'
 import { saveItemsLocally } from 'client/shared/lib'
+import { appSlice } from 'client/entities/app'
 
 type Props = {
   itemIndex: number
@@ -31,7 +32,7 @@ export const DeleteBoqRowIcon = ({ rowIndex, itemIndex }: Props): JSX.Element =>
 
         if (disabled) return
 
-        dispatch(copySlice.actions.enterIntoCopyMode())
+        dispatch(appSlice.actions.disableFroala())
         dispatch(itemsSlice.actions.deleteBoqRow({ itemIndex, rowIndex }))
 
         dispatch(copySlice.actions.forbidToPaste())
@@ -49,7 +50,9 @@ export const DeleteBoqRowIcon = ({ rowIndex, itemIndex }: Props): JSX.Element =>
         const isCopyContainer = getState().copy.isCopyContainer
 
         if (!isCopyContainer) {
-          exitCopyMode({ delayed: true })
+          setTimeout(() => {
+            dispatch(appSlice.actions.enableFroala())
+          }, 1000 * theme.item.animationDuration)
         }
 
         saveItemsLocally()

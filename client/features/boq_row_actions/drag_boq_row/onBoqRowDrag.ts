@@ -1,5 +1,5 @@
 import { arrayMoveImmutable } from 'array-move'
-import { copySlice, exitCopyMode } from 'client/entities/copy'
+import { appSlice } from 'client/entities/app'
 import { itemsSlice } from 'client/entities/items'
 import { dispatch, getState } from 'client/shared/clients'
 import { saveItemsLocally } from 'client/shared/lib'
@@ -12,11 +12,11 @@ type Props = {
 
 const onBoqRowDragStart = (): void => {
   document.body.style.cursor = 'move'
-  dispatch(copySlice.actions.enterIntoCopyMode())
+  dispatch(appSlice.actions.disableFroala())
 }
 
 const onBoqRowDragEnd = ({ oldIndex, newIndex, itemIndex }: Props): void => {
-  exitCopyMode({ delayed: true, delayMs: 500 })
+  dispatch(appSlice.actions.enableFroala())
   document.body.style.removeProperty('cursor')
 
   if (oldIndex !== newIndex) {

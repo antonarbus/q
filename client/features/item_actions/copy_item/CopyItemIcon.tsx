@@ -7,6 +7,7 @@ import { copySlice } from 'client/entities/copy'
 import { itemsSlice, saveItemHeightByIndex } from 'client/entities/items'
 import type { MouseEvent } from 'react'
 import { className } from 'client/shared/className'
+import { appSlice } from 'client/entities/app'
 
 type Props = {
   itemIndex: number
@@ -55,6 +56,7 @@ export const CopyItemIcon = ({ itemIndex }: Props): JSX.Element => {
         const isCopyContainer = getState().copy.isCopyContainer
         if (!isCopyContainer) {
           dispatch(copySlice.actions.saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
+          dispatch(appSlice.actions.disableFroala())
           dispatch(copySlice.actions.showCopyContainer())
         }
       }}

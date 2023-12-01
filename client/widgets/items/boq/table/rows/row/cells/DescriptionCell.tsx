@@ -27,8 +27,6 @@ export const DescriptionCell = ({ itemIndex, rowIndex }: Props): JSX.Element => 
     return state.items[itemIndex]?.width
   })
 
-  // todo: split and rename "copyMode" to "isFroala" & "isDrag" and put is into appSlice
-
   return (
     <Box
       className={`td ${boqColumnKey}`}

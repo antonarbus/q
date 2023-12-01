@@ -9,6 +9,7 @@ import type { MouseEvent } from 'react'
 import type { BoqRow } from 'client/shared/types'
 import { className } from 'client/shared/className'
 import { saveItemsLocally } from 'client/shared/lib'
+import { appSlice } from 'client/entities/app'
 
 type Props = {
   itemIndex: number
@@ -66,10 +67,11 @@ export const CutBoqRowIcon = ({ itemIndex, rowIndex }: Props): JSX.Element => {
 
         if (!isCopyContainer) {
           dispatch(copySlice.actions.saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
+          dispatch(appSlice.actions.disableFroala())
           dispatch(copySlice.actions.showCopyContainer())
         }
 
-        dispatch(copySlice.actions.enterIntoCopyMode())
+        dispatch(appSlice.actions.disableFroala())
         dispatch(itemsSlice.actions.deleteBoqRow({ itemIndex, rowIndex }))
 
         dispatch(copySlice.actions.forbidToPaste())

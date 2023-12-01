@@ -4,7 +4,7 @@ export const appSlice = createSlice({
   name: 'app',
   initialState: {
     reLoadOfferFlag: true,
-    isFroala: false,
+    isFroala: true,
     bottomMsg: '',
   },
   reducers: {
