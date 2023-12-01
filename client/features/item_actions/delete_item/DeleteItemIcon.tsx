@@ -6,7 +6,8 @@ import { gsap } from 'gsap'
 import { useRef } from 'react'
 import { saveItemsLocally } from 'client/shared/lib'
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
-import { copySlice, exitCopyMode } from 'client/entities/copy'
+import { copySlice } from 'client/entities/copy'
+import { appSlice } from 'client/entities/app'
 
 type Props = {
   itemIndex: number
@@ -34,7 +35,7 @@ export const DeleteItemIcon = ({ itemIndex }: Props): EmotionJSX.Element => {
         const itemToDelete = getState().items[itemIndex]
         if (!itemToDelete) return
 
-        dispatch(copySlice.actions.enterIntoCopyMode())
+        dispatch(appSlice.actions.disableFroala())
         dispatch(itemsSlice.actions.deleteItem({ itemId: itemToDelete.id }))
 
         dispatch(copySlice.actions.forbidToPaste())
@@ -52,7 +53,9 @@ export const DeleteItemIcon = ({ itemIndex }: Props): EmotionJSX.Element => {
         const isCopyContainer = getState().copy.isCopyContainer
 
         if (!isCopyContainer) {
-          exitCopyMode({ delayed: true })
+          setTimeout(() => {
+            dispatch(appSlice.actions.enableFroala())
+          }, 1000 * theme.item.animationDuration)
         }
 
         saveItemsLocally()

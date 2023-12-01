@@ -1,4 +1,4 @@
-import { copySlice } from 'client/entities/copy'
+import { appSlice } from 'client/entities/app'
 import { itemsSlice } from 'client/entities/items'
 import { className } from 'client/shared/className'
 import { dispatch } from 'client/shared/clients'
@@ -13,7 +13,7 @@ type Props = {
 
 export const onColumnResizeStart = ({ headerColumnElement, itemIndex, boqColumnKey }: Props): void => {
   const width = headerColumnElement.clientWidth
-  dispatch(copySlice.actions.enterIntoCopyMode())
+  dispatch(appSlice.actions.disableFroala())
   dispatch(itemsSlice.actions.saveColWidth({ itemIndex, width, boqColumnKey }))
 }
 
@@ -27,7 +27,7 @@ export const onColumnResizeStop = ({ headerColumnElement, itemIndex, boqColumnKe
   dispatch(itemsSlice.actions.saveColWidth({ itemIndex, width: columnWidth, boqColumnKey }))
   const itemWidth = headerColumnElement.closest(`.${className.paper}`)?.clientWidth
   dispatch(itemsSlice.actions.saveItemWidth({ itemIndex, width: itemWidth ?? 0 }))
-  dispatch(copySlice.actions.exitFromCopyMode())
+  dispatch(appSlice.actions.enableFroala())
   saveItemsLocally()
   dispatch(itemsSlice.actions.tellItemSavedLocally({ itemIndex }))
 }

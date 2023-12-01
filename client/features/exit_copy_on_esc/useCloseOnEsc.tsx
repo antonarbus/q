@@ -1,4 +1,5 @@
-import { copySlice, exitCopyMode } from 'client/entities/copy'
+import { appSlice } from 'client/entities/app'
+import { copySlice } from 'client/entities/copy'
 import { itemsSlice } from 'client/entities/items'
 import { dispatch } from 'client/shared/clients'
 import { useEffectOnce } from 'react-use'
@@ -8,7 +9,7 @@ export const useExitCopyOnEsc = (): void => {
     if (e.key !== 'Escape') return
     dispatch(copySlice.actions.hideCopyContainer())
     dispatch(itemsSlice.actions.removePasteItem())
-    exitCopyMode()
+    dispatch(appSlice.actions.enableFroala())
   }
 
   type FuncReturnType = () => void

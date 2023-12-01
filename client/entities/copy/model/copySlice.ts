@@ -3,7 +3,6 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { CopyPlace, Copyable } from 'client/shared/types'
 
 type Props = {
-  isCopyMode: boolean
   isCopyContainer: boolean
   initCords: { x: number, y: number }
   items: Copyable[]
@@ -18,7 +17,6 @@ type Props = {
 }
 
 const initialState: Props = {
-  isCopyMode: false, // should tell froala to initialize with some delay after animation end, otherwise elements height jumps
   isCopyContainer: false,
   initCords: { x: 0, y: 0 },
   items: [],
@@ -41,17 +39,8 @@ export const copySlice = createSlice({
   reducers: {
     showCopyContainer: (state) => {
       state.isCopyContainer = true
-      state.isCopyMode = true
     },
-    hideCopyContainer: (state) => {
-      state.isCopyContainer = false
-    },
-    enterIntoCopyMode: (state) => {
-      // todo: check why we need it, maybe it was all about froala
-      state.isCopyMode = true
-    },
-    // todo: check why we need it, maybe it was all about froala
-    exitFromCopyMode: () => initialState,
+    hideCopyContainer: (state) => initialState,
     saveInitCordsOfCopyContainer: (state, action: PayloadAction<{ x: number, y: number }>) => {
       const coords = action.payload
       state.initCords = coords

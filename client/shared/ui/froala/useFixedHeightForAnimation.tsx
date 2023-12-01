@@ -11,7 +11,7 @@ type Res = {
 }
 
 export const useFixedHeightForAnimation = ({ froalaElementRef }: Props): Res => {
-  const isCopyMode = useSelectorTyped(state => state.copy.isCopyMode)
+  const isFroala = useSelectorTyped(state => state.app.isFroala)
   const froalaHeightRef = useRef(0)
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export const useFixedHeightForAnimation = ({ froalaElementRef }: Props): Res => 
     return () => {
       clearTimeout(timeoutId)
     }
-  }, [isCopyMode])
+  }, [isFroala])
 
   return { froalaHeightRef }
 }

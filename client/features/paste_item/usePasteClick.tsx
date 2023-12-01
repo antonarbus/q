@@ -1,8 +1,9 @@
 import { useEffectOnce, useUnmount } from 'react-use'
-import { copySlice, exitCopyMode } from 'client/entities/copy'
+import { copySlice } from 'client/entities/copy'
 import { itemsSlice } from 'client/entities/items'
 import { saveItemsLocally } from 'client/shared/lib'
 import { dispatch, getState, theme } from 'client/shared/clients'
+import { appSlice } from 'client/entities/app'
 
 const pasteItemOnClick = (): void => {
   const isPasteTextShown = getState().copy.isPasteTextShown
@@ -34,20 +35,23 @@ const pasteItemOnClick = (): void => {
   dispatch(copySlice.actions.forbidToDelete())
   saveItemsLocally()
 
-  const itemsInCopyContainer = getState().copy.items
-
-  if (itemsInCopyContainer.length === 0) {
-    dispatch(copySlice.actions.hideCopyContainer())
-    dispatch(itemsSlice.actions.removePasteItem())
-    exitCopyMode({ delayed: true })
-  }
-
   setTimeout(() => {
     dispatch(copySlice.actions.allowToPaste())
     dispatch(copySlice.actions.allowToCopy())
     dispatch(copySlice.actions.allowToCut())
     dispatch(copySlice.actions.allowToDelete())
   }, 1000 * theme.item.animationDuration)
+
+  const itemsInCopyContainer = getState().copy.items
+
+  if (itemsInCopyContainer.length === 0) {
+    dispatch(copySlice.actions.hideCopyContainer())
+    dispatch(itemsSlice.actions.removePasteItem())
+
+    setTimeout(() => {
+      dispatch(appSlice.actions.enableFroala())
+    }, 1000 * theme.item.animationDuration)
+  }
 }
 
 export const usePasteClick = (): void => {
