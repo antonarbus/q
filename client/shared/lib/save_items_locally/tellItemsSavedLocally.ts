@@ -1,9 +1,9 @@
+import { appSlice } from 'client/entities/app'
 import { dispatch } from 'client/shared/clients'
-import { bottomMsgSlice } from 'client/shared/ui/bottom_msg'
 
 export const tellItemsSavedLocally = ({ ms = 2000 } = {}): void => {
-  dispatch(bottomMsgSlice.actions.showMsgOnBottom('saved locally'))
+  dispatch(appSlice.actions.showBottomMsg('saved locally'))
   setTimeout(() => {
-    dispatch(bottomMsgSlice.actions.resetMsgOnBottom())
+    dispatch(appSlice.actions.hideBottomMsg())
   }, ms)
 }

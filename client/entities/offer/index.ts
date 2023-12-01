@@ -1,1 +1,0 @@
-export { offerSlice } from './offerSlice'
