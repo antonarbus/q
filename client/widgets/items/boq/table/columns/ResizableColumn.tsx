@@ -47,7 +47,7 @@ export const ResizableColumn = ({
         right: {
           background: '#ebe9e9',
           width: '3px',
-          right: '0px',
+          right: '-1px',
           borderRadius: '3px',
           zIndex: 1,
         },
