@@ -37,6 +37,7 @@ export const DescriptionColumn = ({ itemIndex }: Props): ReactNode => {
         additionalStyle={{
           flexGrow: 1,
           minHeight: '24px',
+          paddingInline: '5px',
         }}
       />
     </ResizableColumn>
