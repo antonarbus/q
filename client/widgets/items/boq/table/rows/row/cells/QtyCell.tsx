@@ -20,15 +20,17 @@ export const QtyCell = ({ itemIndex, rowIndex }: Props): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
   const qtyColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
   const isQtyColWidthSetManually = qtyColWidth !== undefined
+  const width = isQtyColWidthSetManually ? qtyColWidth : 'auto'
 
   return (
     <Box
       className={`td ${boqColumnKey}`}
       sx={{
         display: isQtyColWidthSetManually ? 'block' : 'flex',
+        flexGrow: 0,
         flexShrink: 0,
-        width: isQtyColWidthSetManually ? qtyColWidth : 'auto',
-        maxWidth: isQtyColWidthSetManually ? qtyColWidth : 'auto',
+        width,
+        maxWidth: width,
         minWidth: '100px',
       }}
     >

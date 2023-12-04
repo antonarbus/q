@@ -20,15 +20,17 @@ export const PriceCell = ({ itemIndex, rowIndex }: Props): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
   const priceColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
   const isPriceColWidthSetManually = priceColWidth !== undefined
+  const width = isPriceColWidthSetManually ? priceColWidth : 'auto'
 
   return (
     <Box
       className={`td ${boqColumnKey}`}
       sx={{
         display: isPriceColWidthSetManually ? 'block' : 'flex',
+        flexGrow: 0,
         flexShrink: 0,
-        width: isPriceColWidthSetManually ? priceColWidth : 'auto',
-        maxWidth: isPriceColWidthSetManually ? priceColWidth : 'auto',
+        width,
+        maxWidth: width,
         minWidth: '100px',
       }}
     >
