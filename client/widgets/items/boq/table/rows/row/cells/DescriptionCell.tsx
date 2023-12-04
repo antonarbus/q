@@ -23,7 +23,7 @@ export const DescriptionCell = ({ itemIndex, rowIndex }: Props): JSX.Element => 
   const width = isDescriptionColWidthSetManually ? descriptionColWidth : 'auto'
 
   useSelectorTyped(state => {
-    // re render component to calculated height of static html during item width change
+    // re-render component to calculated height of static html during item width change
     // it will trigger useEffect at <StaticHtml />
     return state.items[itemIndex]?.width
   })
