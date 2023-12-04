@@ -55,7 +55,7 @@ const customTheme = {
   },
 }
 
-type CustomTheme = typeof customTheme
+// type CustomTheme = typeof customTheme
 
 // https://mui.com/material-ui/customization/theming/#typescript
 // https://medium.com/@bahuguna.shubhanshu19/how-to-create-custom-theme-in-react-written-in-typescript-using-material-ui-154ed1daeae6

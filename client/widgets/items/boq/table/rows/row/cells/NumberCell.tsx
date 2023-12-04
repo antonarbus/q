@@ -37,7 +37,7 @@ export const NumberCell = ({ itemIndex, rowIndex }: Props): JSX.Element => {
         rowIndex={rowIndex}
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
-        placeholder={`${boqColumnKey}...`}
+        placeholder='#...'
         htmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
         onContentChange={() => {
           if (editorRef.current === null) return
@@ -45,7 +45,6 @@ export const NumberCell = ({ itemIndex, rowIndex }: Props): JSX.Element => {
           changeBoqCell({ itemIndex, rowIndex, boqColumnKey, html })
         }}
         additionalStyle={{
-          flexGrow: 1,
           textAlign: 'center',
           padding: theme.cell.padding,
           '.fr-placeholder': {
