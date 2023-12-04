@@ -11,8 +11,7 @@ export const BoqColumnsLayout = ({ children }: Props): JSX.Element => {
       className='header tr'
       sx={{
         display: 'flex',
-        minHeight: '40px',
-        alignItems: 'flex-end',
+        alignItems: 'stretch',
         position: 'relative',
       }}
     >
