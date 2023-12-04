@@ -20,6 +20,7 @@ export const DescriptionCell = ({ itemIndex, rowIndex }: Props): JSX.Element => 
   const editorRef = useRef<FroalaEditor | null>(null)
   const descriptionColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
   const isDescriptionColWidthSetManually = descriptionColWidth !== undefined
+  const width = isDescriptionColWidthSetManually ? descriptionColWidth : 'auto'
 
   useSelectorTyped(state => {
     // re render component to calculated height of static html during item width change
@@ -32,9 +33,10 @@ export const DescriptionCell = ({ itemIndex, rowIndex }: Props): JSX.Element => 
       className={`td ${boqColumnKey}`}
       sx={{
         display: isDescriptionColWidthSetManually ? 'block' : 'flex',
-        flexGrow: 1,
-        width: isDescriptionColWidthSetManually ? descriptionColWidth : 'auto',
-        maxWidth: isDescriptionColWidthSetManually ? descriptionColWidth : 'auto',
+        flexGrow: isDescriptionColWidthSetManually ? 0 : 1,
+        flexShrink: 0,
+        width,
+        maxWidth: width,
         minWidth: '200px',
       }}
     >

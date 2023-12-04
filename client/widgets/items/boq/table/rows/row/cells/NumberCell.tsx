@@ -20,16 +20,18 @@ export const NumberCell = ({ itemIndex, rowIndex }: Props): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
   const numberColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
   const isNumberColWidthSetManually = numberColWidth !== undefined
+  const width = isNumberColWidthSetManually ? numberColWidth : 'auto'
 
   return (
     <Box
       className={`td ${boqColumnKey}`}
       sx={{
         display: isNumberColWidthSetManually ? 'block' : 'flex',
-        width: isNumberColWidthSetManually ? numberColWidth : 'auto',
-        maxWidth: isNumberColWidthSetManually ? numberColWidth : 'auto',
-        minWidth: '30px',
+        flexGrow: 0,
         flexShrink: 0,
+        width,
+        maxWidth: width,
+        minWidth: '30px',
       }}
     >
       <Froala
