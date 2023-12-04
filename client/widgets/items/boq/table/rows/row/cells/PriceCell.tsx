@@ -45,7 +45,6 @@ export const PriceCell = ({ itemIndex, rowIndex }: Props): JSX.Element => {
           changeBoqCell({ itemIndex, rowIndex, boqColumnKey, html })
         }}
         additionalStyle={{
-          flexGrow: 1,
           textAlign: 'center',
           padding: theme.cell.padding,
           '.fr-placeholder': {

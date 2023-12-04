@@ -32,7 +32,7 @@ export const DescriptionCell = ({ itemIndex, rowIndex }: Props): JSX.Element => 
       className={`td ${boqColumnKey}`}
       sx={{
         display: isDescriptionColWidthSetManually ? 'block' : 'flex',
-        flexGrow: isDescriptionColWidthSetManually ? 0 : 1,
+        flexGrow: 1,
         width: isDescriptionColWidthSetManually ? descriptionColWidth : 'auto',
         maxWidth: isDescriptionColWidthSetManually ? descriptionColWidth : 'auto',
         minWidth: '200px',
@@ -51,7 +51,6 @@ export const DescriptionCell = ({ itemIndex, rowIndex }: Props): JSX.Element => 
           changeBoqCell({ itemIndex, rowIndex, boqColumnKey, html })
         }}
         additionalStyle={{
-          flexGrow: 1,
           padding: theme.cell.padding,
           minHeight: '44px', // otherwise placeholder is misplaced on init
           '.fr-wrapper': {
