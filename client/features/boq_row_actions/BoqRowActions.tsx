@@ -18,7 +18,7 @@ export const BoqRowActions = ({ itemIndex, rowIndex, boqRow }: Props): JSX.Eleme
       className={className.actionsContainer}
       sx={{
         position: 'absolute',
-        left: '-28px',
+        left: '-33px',
         bottom: 0,
         height: '45px',
       }}

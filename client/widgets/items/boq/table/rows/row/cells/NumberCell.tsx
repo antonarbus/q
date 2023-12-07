@@ -31,7 +31,7 @@ export const NumberCell = ({ itemIndex, rowIndex }: Props): JSX.Element => {
         flexShrink: 0,
         width,
         maxWidth: width,
-        minWidth: '30px',
+        minWidth: 0,
       }}
     >
       <Froala
@@ -39,7 +39,7 @@ export const NumberCell = ({ itemIndex, rowIndex }: Props): JSX.Element => {
         rowIndex={rowIndex}
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
-        placeholder='#...'
+        placeholder=''
         htmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
         onContentChange={() => {
           if (editorRef.current === null) return

@@ -20,7 +20,7 @@ export const NumberColumn = ({ itemIndex }: Props): JSX.Element => {
       boqColumnKey={boqColumnKey}
       className={`th ${boqColumnKey} resizable`}
       itemIndex={itemIndex}
-      minWidth={30}
+      minWidth={0}
       flexGrow={0}
     >
       <Froala
