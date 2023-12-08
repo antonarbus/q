@@ -1,7 +1,7 @@
 import { dispatch } from 'client/shared/clients'
 import { useState } from 'react'
 import { useEffectOnce } from 'react-use'
-import jwt_decode from 'jwt-decode'
+import { jwtDecode } from 'jwt-decode'
 import axios from 'axios'
 import { tokenExpirationMinutes } from './tokenExpirationMinutes'
 import { navUpdate } from './navUpdate'
@@ -43,7 +43,7 @@ export const useRefreshTokens = ({ withLoadingState }: Props): FuncReturnType =>
         if (token.access) {
           const expirationInMin = tokenExpirationMinutes(token.access)
           if (expirationInMin > 5) {
-            const payloadFromExistingAccessToken = jwt_decode<JwtPayloadExtended>(token.access)
+            const payloadFromExistingAccessToken = jwtDecode<JwtPayloadExtended>(token.access)
             const { email, roles } = payloadFromExistingAccessToken
             dispatch(userSlice.actions.rememberLoggedUser({ email, isLogged: true, roles }))
             navUpdate.login()
@@ -72,7 +72,7 @@ export const useRefreshTokens = ({ withLoadingState }: Props): FuncReturnType =>
           return
         }
 
-        const payloadFromUpdatedAccessToken = jwt_decode<JwtPayloadExtended>(accessJwtToken)
+        const payloadFromUpdatedAccessToken = jwtDecode<JwtPayloadExtended>(accessJwtToken)
         const { email } = payloadFromUpdatedAccessToken
         if (!email) {
           dispatch(userSlice.actions.forgetLoggedUser())
