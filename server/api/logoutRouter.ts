@@ -1,5 +1,5 @@
 import { UserModel } from '../db/models/user.model'
-import jwt_decode from 'jwt-decode'
+import { jwtDecode } from 'jwt-decode'
 import type { Next, Req, Res } from '../types'
 import { Router } from 'express'
 import type { JwtPayloadExtended } from '../services/jwt'
@@ -28,7 +28,7 @@ logoutRouter.get('/', async (req: Req, res: Res, next: Next) => {
     }
 
     // get email from refresh token
-    const { email } = jwt_decode<JwtPayloadExtended>(refreshJwtToken)
+    const { email } = jwtDecode<JwtPayloadExtended>(refreshJwtToken)
 
     if (!email) {
       res.json({
