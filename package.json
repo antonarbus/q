@@ -6,7 +6,7 @@
     "start": "concurrently \"npm run back\" \"npx wait-on http://localhost:3006 && npm run front\"",
     "stop": "npx kill-port 3005 3006",
     "front": "vite",
-    "back": "npx tsx watch server/server.ts",
+    "back": "npx tsx watch server/index.ts",
     "build_front": "tsc && vite build",
     "build_back": "cp -r ./server ./build  && cd ./server && tsc && cd -",
     "build_all": "npm run build_front && npm run build_back",
