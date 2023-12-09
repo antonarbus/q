@@ -14,7 +14,7 @@ export const useViewPortObserver = (): Res => {
     const options = { root: null, rootMargin: '0px', threshold: 0 }
 
     const callback: IntersectionObserverCallback = ([entry], observer) => {
-      // if (!entry) return
+      if (!entry) return
       setIsInsideViewPort(entry.isIntersecting)
     }
 
