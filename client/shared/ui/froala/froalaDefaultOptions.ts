@@ -51,7 +51,7 @@ export const froalaDefaultOptions = {
   },
   fontSize: ['6', '8', '9', '10', '11', '12', '13', '14', '15', '16', '18', '20', '24', '30', '36', '48', '60', '72', '96'],
   fontFamily: {
-    '"Roboto","Helvetica","Arial",sans-serif': 'Roboto',
+    'sans-serif': 'Sans-serif',
     'Arial,Helvetica,sans-serif': 'Arial',
     'Georgia,serif': 'Georgia',
     'Impact,Charcoal,sans-serif': 'Impact',
