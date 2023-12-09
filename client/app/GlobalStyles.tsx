@@ -30,7 +30,7 @@ export const GlobalStyles = (): JSX.Element => (
 
       html:after {
         content: 'Q';
-        font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+        font-family: sans-serif;
         position: fixed;
         color: #ddd;
         top: 50%;
@@ -43,7 +43,7 @@ export const GlobalStyles = (): JSX.Element => (
       body {
         background-color: #e9e9e9;
         color: rgba(0, 0, 0, 0.87);
-        font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+        font-family: sans-serif;
         font-weight: 300;
         font-size: 1rem;
         line-height: 1.5;
