@@ -9,6 +9,7 @@ export { selectIsLastItem } from './selectors/selectIsLastItem'
 export { selectIsLastBoqRow } from './selectors/selectIsLastBoqRow'
 export { selectColumnWidth } from './selectors/selectColumnWidth'
 export { selectBoqRows, boqRowsShapeEqualityFn } from './selectors/selectBoqRows'
+export { selectReRenderTotalPrice } from './selectors/selectReRenderTotalPrice'
 
 // thunks
 export { saveItemHeightByIndex } from './model/saveItemHeightByIndex'

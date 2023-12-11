@@ -1,12 +1,13 @@
 import { Box } from '@mui/material'
-import { theme } from 'client/shared/clients'
-import { boqCellHtmlGetter, selectColumnWidth } from 'client/entities/items'
-import { changeBoqCell } from 'client/features/change_text'
+import { dispatch, theme } from 'client/shared/clients'
+import { boqCellHtmlGetter, itemsSlice, selectColumnWidth } from 'client/entities/items'
+import { changeBoqCell } from 'client/features/change_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
 import { Froala } from 'client/shared/ui/froala'
 import type FroalaEditor from 'froala-editor'
 import { useRef } from 'react'
+import { getTextContentFromHtml } from 'client/shared/lib'
 
 type Props = {
   itemIndex: number
@@ -44,7 +45,10 @@ export const PriceCell = ({ itemIndex, rowIndex }: Props): JSX.Element => {
         onContentChange={() => {
           if (editorRef.current === null) return
           const html = editorRef.current.html.get()
+
           changeBoqCell({ itemIndex, rowIndex, boqColumnKey, html })
+          dispatch(itemsSlice.actions.updateTotalPrice({ itemIndex }))
+          dispatch(itemsSlice.actions.reRenderTotalPrice({ itemIndex }))
         }}
         additionalStyle={{
           textAlign: 'center',

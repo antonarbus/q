@@ -29,6 +29,7 @@ export const defaultItems: Item[] = [
         price: {
           value: 666,
           html: '<b>666</b>',
+          reRender: false,
         },
       },
       column: {

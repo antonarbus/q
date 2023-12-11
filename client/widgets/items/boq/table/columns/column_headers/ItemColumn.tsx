@@ -3,7 +3,7 @@ import { ResizableColumn } from '../ResizableColumn'
 import { useRef } from 'react'
 import { boqColumnNameHtmlGetter } from 'client/entities/items'
 import type FroalaEditor from 'froala-editor'
-import { changeBoqColumn } from 'client/features/change_text'
+import { changeBoqColumn } from 'client/features/change_cell'
 
 type Props = {
   itemIndex: number

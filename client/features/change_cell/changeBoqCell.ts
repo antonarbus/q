@@ -1,6 +1,6 @@
 import { itemsSlice } from 'client/entities/items'
 import { dispatch, getState } from 'client/shared/clients'
-import { saveItemsLocally } from 'client/shared/lib'
+import { getTextContentFromHtml, saveItemsLocally } from 'client/shared/lib'
 import type { BoqColumnKey } from 'client/shared/types'
 
 type Props = {
@@ -10,14 +10,25 @@ type Props = {
   boqColumnKey: BoqColumnKey
 }
 
-export const changeBoqCell = ({ html, itemIndex, rowIndex, boqColumnKey }: Props): void => {
+export const changeBoqCell = ({
+  html,
+  itemIndex,
+  rowIndex,
+  boqColumnKey,
+}: Props): void => {
   const item = getState().items[itemIndex]
   if (item?.type !== 'boq') return
+
   const row = item.boq.rows[rowIndex]
   if (row === undefined) return
+
   const prevHtml = row[boqColumnKey].html
   const didTextChange = prevHtml !== html
   if (!didTextChange) return
-  dispatch(itemsSlice.actions.saveBoqCellHtml({ itemIndex, rowIndex, html, boqColumnKey }))
+
+  const textContent = getTextContentFromHtml({ html })
+  const value = Number(textContent)
+  dispatch(itemsSlice.actions.saveBoqCell({ itemIndex, rowIndex, html, value, boqColumnKey }))
+
   saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
 }
