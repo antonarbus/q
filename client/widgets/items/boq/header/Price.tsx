@@ -1,8 +1,9 @@
-import { boqHeaderHtmlGetter } from 'client/entities/items'
-import { changeBoqHeader } from 'client/features/change_text'
+import { boqHeaderHtmlGetter, selectReRenderTotalPrice } from 'client/entities/items'
+import { changeBoqHeader } from 'client/features/change_cell'
 import { Froala } from 'client/shared/ui/froala'
 import { useRef } from 'react'
 import type FroalaEditor from 'froala-editor'
+import { useSelectorTyped } from 'client/shared/hooks'
 
 type Props = {
   itemIndex: number
@@ -13,6 +14,8 @@ const boqHeaderKey = 'price'
 export const Price = ({ itemIndex }: Props): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
+
+  const reRenderPrice = useSelectorTyped(selectReRenderTotalPrice({ itemIndex }))
 
   return (
     <Froala

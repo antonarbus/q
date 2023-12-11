@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { ResizableColumn } from '../ResizableColumn'
 import type FroalaEditor from 'froala-editor'
-import { changeBoqColumn } from 'client/features/change_text'
+import { changeBoqColumn } from 'client/features/change_cell'
 import { boqColumnNameHtmlGetter } from 'client/entities/items'
 import { Froala } from 'client/shared/ui/froala'
 

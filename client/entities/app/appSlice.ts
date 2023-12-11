@@ -3,13 +3,13 @@ import { type PayloadAction, createSlice } from '@reduxjs/toolkit'
 export const appSlice = createSlice({
   name: 'app',
   initialState: {
-    reLoadOfferFlag: true,
+    reRenderOffer: false,
     isFroala: true,
     bottomMsg: '',
   },
   reducers: {
-    reLoadOffer: (state) => {
-      state.reLoadOfferFlag = !state.reLoadOfferFlag
+    reRenderOffer: (state) => {
+      state.reRenderOffer = !state.reRenderOffer
     },
     enableFroala: (state) => {
       state.isFroala = true

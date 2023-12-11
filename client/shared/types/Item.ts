@@ -14,21 +14,27 @@ export type BoqRow = {
   number: {
     html: string
     value: number
+    reRender: boolean
   }
   description: {
     html: string
+    value: number
+    reRender: boolean
   }
   item: {
     html: string
     value: number
+    reRender: boolean
   }
   qty: {
     html: string
     value: number
+    reRender: boolean
   }
   price: {
     html: string
     value: number
+    reRender: boolean
   }
 }
 
@@ -63,13 +69,18 @@ export type BoqItem = {
     header: {
       title: {
         html: string
+        value: number
+        reRender: boolean
       }
       subtotal: {
         html: string
+        value: number
+        reRender: boolean
       }
       price: {
-        value: number
         html: string
+        value: number
+        reRender: boolean
       }
     }
     column: BoqCols

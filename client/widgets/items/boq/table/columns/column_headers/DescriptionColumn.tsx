@@ -2,7 +2,7 @@ import { Froala } from 'client/shared/ui/froala'
 import { ResizableColumn } from '../ResizableColumn'
 import { type ReactNode, useRef } from 'react'
 import { boqColumnNameHtmlGetter } from 'client/entities/items'
-import { changeBoqColumn } from 'client/features/change_text'
+import { changeBoqColumn } from 'client/features/change_cell'
 import type FroalaEditor from 'froala-editor'
 
 type Props = {

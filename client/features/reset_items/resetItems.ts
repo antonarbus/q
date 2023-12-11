@@ -7,7 +7,7 @@ export const resetItems = (): void => {
   dispatch(appSlice.actions.disableFroala())
   saveItemsLocally({ items: defaultItems })
   dispatch(itemsSlice.actions.resetItemsToDefault())
-  dispatch(appSlice.actions.reLoadOffer())
+  dispatch(appSlice.actions.reRenderOffer())
   setTimeout(() => {
     dispatch(appSlice.actions.enableFroala())
   }, 1000 * theme.item.animationDuration)

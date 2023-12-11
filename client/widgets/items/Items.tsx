@@ -9,7 +9,7 @@ import { itemsShapeEqualityFn } from 'client/entities/items'
 
 export const Items = (): JSX.Element => {
   const items = useSelectorTyped(state => state.items, itemsShapeEqualityFn)
-  const shouldReloadOfferState = useSelectorTyped(state => state.app.reLoadOfferFlag)
+  const reRenderOffer = useSelectorTyped(state => state.app.reRenderOffer)
 
   return (
     <DraggableItemsContainer
@@ -22,7 +22,7 @@ export const Items = (): JSX.Element => {
     >
       <AnimatePresence initial={false}>
         {items.map((item, itemIndex) => {
-          const key = item.id + shouldReloadOfferState.toString()
+          const key = item.id + reRenderOffer.toString()
 
           if (item.type === 'text') return <TextItem key={key} itemIndex={itemIndex} />
           if (item.type === 'boq') return <BoqItem key={key} itemIndex={itemIndex} />

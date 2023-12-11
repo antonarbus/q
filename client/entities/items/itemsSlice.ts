@@ -21,7 +21,9 @@ import { saveItemTextReducer } from './reducers/saveItemTextReducer'
 import { saveItemWidthReducer } from './reducers/saveItemWidthReducer'
 import { tellItemSavedLocallyReducer } from './reducers/tellItemSavedLocallyReducer'
 import { saveBoqColumnNameTextReducer } from './reducers/saveBoqColumnNameTextReducer'
-import { saveBoqCellHtmlReducer } from './reducers/saveBoqCellHtmlReducer'
+import { saveBoqCellReducer } from './reducers/saveBoqCellReducer'
+import { reRenderTotalPriceReducer } from './reducers/reRenderTotalPriceReducer'
+import { updateTotalPriceReducer } from './reducers/updateTotalPriceReducer'
 
 export type ItemsState = Item[]
 
@@ -44,7 +46,7 @@ export const itemsSlice = createSlice({
     resetItemsToDefault: () => defaultItems,
     saveBoqHeaderText: saveBoqHeaderTextReducer,
     saveBoqColumnNameText: saveBoqColumnNameTextReducer,
-    saveBoqCellHtml: saveBoqCellHtmlReducer,
+    saveBoqCell: saveBoqCellReducer,
     saveBoqRowHeightAndWidth: saveBoqRowHeightAndWidthReducer,
     saveColWidth: saveColWidthReducer,
     saveItemHeight: saveItemHeightReducer,
@@ -52,5 +54,7 @@ export const itemsSlice = createSlice({
     saveItemText: saveItemTextReducer,
     saveItemWidth: saveItemWidthReducer,
     tellItemSavedLocally: tellItemSavedLocallyReducer,
+    reRenderTotalPrice: reRenderTotalPriceReducer,
+    updateTotalPrice: updateTotalPriceReducer,
   },
 })
