@@ -14,27 +14,26 @@ export type BoqRow = {
   number: {
     html: string
     value: number
-    reRender: boolean
+    isFroala: boolean
   }
   description: {
     html: string
-    value: number
-    reRender: boolean
+    isFroala: boolean
   }
   item: {
     html: string
     value: number
-    reRender: boolean
+    isFroala: boolean
   }
   qty: {
     html: string
     value: number
-    reRender: boolean
+    isFroala: boolean
   }
   price: {
     html: string
     value: number
-    reRender: boolean
+    isFroala: boolean
   }
 }
 
@@ -69,18 +68,17 @@ export type BoqItem = {
     header: {
       title: {
         html: string
-        value: number
-        reRender: boolean
+        // value: number
+        isFroala: boolean
       }
       subtotal: {
         html: string
-        value: number
-        reRender: boolean
+        isFroala: boolean
       }
       price: {
         html: string
         value: number
-        reRender: boolean
+        isFroala: boolean
       }
     }
     column: BoqCols

@@ -45,10 +45,14 @@ export const PriceCell = ({ itemIndex, rowIndex }: Props): JSX.Element => {
         onContentChange={() => {
           if (editorRef.current === null) return
           const html = editorRef.current.html.get()
-
           changeBoqCell({ itemIndex, rowIndex, boqColumnKey, html })
+          // todo: very hacky way to update the total price, better think how to move froala editors on top
+          // todo: and share it between all components to be able to control all values from anywhere
+          dispatch(itemsSlice.actions.disableSubTotalPriceFroala({ itemIndex }))
           dispatch(itemsSlice.actions.updateTotalPrice({ itemIndex }))
-          dispatch(itemsSlice.actions.reRenderTotalPrice({ itemIndex }))
+          setTimeout(() => {
+            dispatch(itemsSlice.actions.enableSubTotalPriceFroala({ itemIndex }))
+          }, 500)
         }}
         additionalStyle={{
           textAlign: 'center',

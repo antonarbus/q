@@ -4,11 +4,11 @@ type Props = {
   itemIndex: number
 }
 
-export const selectReRenderTotalPrice = ({ itemIndex }: Props) => (state: RootState): boolean => {
+export const selectIsSubTotalPriceFroala = ({ itemIndex }: Props) => (state: RootState): boolean => {
   const item = state.items[itemIndex]
 
   if (item?.type !== 'boq') return false
 
-  const reRender = item.boq.header.price.reRender
-  return reRender
+  const isFroala = item.boq.header.price.isFroala
+  return isFroala
 }
