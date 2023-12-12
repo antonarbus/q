@@ -13,9 +13,9 @@ export const updateTotalPriceReducer = (state: ItemsState, action: PayloadAction
     return accumulator + price
   }, 0)
 
-  item.boq.header.price.value = totalPrice
   const htmlValue = getTextContentFromHtml({ html: item.boq.header.price.html })
   const updatedHtml = item.boq.header.price.html.replace(String(htmlValue), String(totalPrice))
-  console.log('🚀  updatedHtml:', updatedHtml)
+
+  item.boq.header.price.value = totalPrice
   item.boq.header.price.html = updatedHtml
 }

@@ -7,6 +7,7 @@ import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
 import { EditableHtml } from './EditableHtml'
 import { useViewPortObserver } from './useViewPortObserver'
 import { StaticHtmlBackgroundToFixBlinkIssue } from './StaticHtmlBackgroundToFixBlinkIssue'
+import { type RootState } from 'client/shared/types'
 
 type Props = {
   itemIndex: number
@@ -17,6 +18,8 @@ type Props = {
   additionalStyle?: SxProps
   rowIndex?: number
   onContentChange: () => void
+  onFocus?: () => void
+  isSpecificFroalaSelector?: (state: RootState) => boolean
 }
 
 export const Froala = ({
@@ -28,12 +31,16 @@ export const Froala = ({
   htmlGetter,
   placeholder,
   onContentChange,
+  onFocus,
+  isSpecificFroalaSelector = () => true,
 }: Props): JSX.Element => {
   const isFroala = useSelectorTyped(state => state.app.isFroala)
+  const isSpecificFroala = useSelectorTyped(isSpecificFroalaSelector)
+  console.log('🚀  isSpecificFroala:', isSpecificFroala)
   const { froalaHeightRef } = useFixedHeightForAnimation({ froalaElementRef })
   const { observerRef, isInsideViewPort } = useViewPortObserver()
 
-  const showEditableHtml = isFroala && isInsideViewPort
+  const showEditableHtml = isFroala && isInsideViewPort && isSpecificFroala
 
   return (
     <div
@@ -66,6 +73,7 @@ export const Froala = ({
             rowIndex={rowIndex}
             htmlGetter={htmlGetter}
             onContentChange={onContentChange}
+            onFocus={onFocus}
             placeholder={placeholder}
             froalaHeightRef={froalaHeightRef}
           />

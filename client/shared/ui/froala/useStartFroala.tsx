@@ -11,6 +11,7 @@ type Props = {
   itemIndex: number
   htmlGetter: () => string
   onContentChange: () => void
+  onFocus?: () => void
   froalaElementRef: RefObject<HTMLDivElement>
   editorRef: MutableRefObject<FroalaEditor | null>
   placeholder?: string
@@ -29,6 +30,7 @@ export const useStartFroala = ({
   placeholder,
   rowIndex,
   onContentChange,
+  onFocus,
 }: Props): void => {
   useEffect(() => {
     const initFroalaInstance = (): void => {
@@ -49,6 +51,9 @@ export const useStartFroala = ({
             },
             contentChanged: () => {
               onContentChange()
+            },
+            focus: () => {
+              onFocus?.()
             },
           },
         },

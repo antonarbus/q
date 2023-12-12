@@ -1,9 +1,9 @@
-import { boqHeaderHtmlGetter, selectReRenderTotalPrice } from 'client/entities/items'
+import { boqHeaderHtmlGetter, selectIsSubTotalPriceFroala, selectReRenderTotalPrice } from 'client/entities/items'
 import { changeBoqHeader } from 'client/features/change_cell'
 import { Froala } from 'client/shared/ui/froala'
 import { useRef } from 'react'
 import type FroalaEditor from 'froala-editor'
-import { useSelectorTyped } from 'client/shared/hooks'
+// import { useSelectorTyped } from 'client/shared/hooks'
 
 type Props = {
   itemIndex: number
@@ -15,7 +15,7 @@ export const Price = ({ itemIndex }: Props): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
 
-  const reRenderPrice = useSelectorTyped(selectReRenderTotalPrice({ itemIndex }))
+  // const reRenderPrice = useSelectorTyped(selectReRenderTotalPrice({ itemIndex }))
 
   return (
     <Froala
@@ -24,6 +24,7 @@ export const Price = ({ itemIndex }: Props): JSX.Element => {
       froalaElementRef={froalaElementRef}
       placeholder='Price...'
       htmlGetter={() => boqHeaderHtmlGetter({ itemIndex, boqHeaderKey })}
+      isSpecificFroalaSelector={selectIsSubTotalPriceFroala({ itemIndex })}
       onContentChange={() => {
         if (editorRef.current === null) return
         const html = editorRef.current.html.get()
@@ -31,6 +32,7 @@ export const Price = ({ itemIndex }: Props): JSX.Element => {
       }}
       additionalStyle={{
         width: '100%',
+        minWidth: '100px',
         whiteSpace: 'nowrap',
         textAlign: 'right',
         flexShrink: 0,
