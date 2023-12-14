@@ -10,6 +10,7 @@ export const defaultItems: Item[] = [
     msg: '',
     text: {
       html: '<div>editable text</div>',
+      value: null,
     },
   },
   {
@@ -22,16 +23,15 @@ export const defaultItems: Item[] = [
       header: {
         title: {
           html: '<b>Title</b>',
-          isFroala: true,
+          value: null,
         },
         subtotal: {
           html: '<div>Subtotal</div>',
-          isFroala: true,
+          value: null,
         },
         price: {
-          value: 666,
           html: '<b>666</b>',
-          isFroala: true,
+          value: 666,
         },
       },
       column: {
@@ -65,26 +65,22 @@ export const defaultItems: Item[] = [
           number: {
             html: '1',
             value: 1,
-            isFroala: true,
           },
           description: {
             html: 'description 1',
-            isFroala: true,
+            value: null,
           },
           item: {
             html: '500',
             value: 500,
-            isFroala: true,
           },
           qty: {
             html: '1',
             value: 1,
-            isFroala: true,
           },
           price: {
             html: '500',
             value: 500,
-            isFroala: true,
           },
         },
         {
@@ -95,26 +91,22 @@ export const defaultItems: Item[] = [
           number: {
             html: '2',
             value: 2,
-            isFroala: true,
           },
           description: {
             html: 'description 2',
-            isFroala: true,
+            value: null,
           },
           item: {
             html: '500',
             value: 500,
-            isFroala: true,
           },
           qty: {
             html: '2',
             value: 2,
-            isFroala: true,
           },
           price: {
             html: '1000',
             value: 1000,
-            isFroala: true,
           },
         },
         {
@@ -125,26 +117,22 @@ export const defaultItems: Item[] = [
           number: {
             html: '3',
             value: 3,
-            isFroala: true,
           },
           description: {
             html: 'description 3',
-            isFroala: true,
+            value: null,
           },
           item: {
             html: '500',
             value: 500,
-            isFroala: true,
           },
           qty: {
             html: '3',
             value: 3,
-            isFroala: true,
           },
           price: {
             html: '1500',
             value: 1500,
-            isFroala: true,
           },
         },
       ],
@@ -158,6 +146,7 @@ export const defaultItems: Item[] = [
     msg: '',
     text: {
       html: '<div>editable text</div>',
+      value: null,
     },
   },
   {
@@ -168,6 +157,7 @@ export const defaultItems: Item[] = [
     msg: '',
     text: {
       html: '<div>editable text</div>',
+      value: null,
     },
   },
 ]

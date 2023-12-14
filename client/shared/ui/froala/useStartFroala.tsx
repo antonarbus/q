@@ -16,7 +16,7 @@ type Props = {
   onFocus?: () => void
   froalaElementRef: RefObject<HTMLDivElement>
   editorRef: MutableRefObject<FroalaEditor | null>
-  boqEditorsRef: BoqEditorsRef
+  boqEditorsRef?: BoqEditorsRef
   placeholder?: string
   rowIndex?: number
 }

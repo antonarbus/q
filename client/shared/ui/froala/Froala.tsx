@@ -14,7 +14,7 @@ type Props = {
   htmlGetter: () => string
   froalaElementRef: RefObject<HTMLDivElement>
   editorRef: MutableRefObject<FroalaEditor | null>
-  boqEditorsRef: BoqEditorsRef
+  boqEditorsRef?: BoqEditorsRef
   placeholder?: string
   additionalStyle?: SxProps
   rowIndex?: number

@@ -3,7 +3,6 @@ type Common = {
   width: number
   height: number
   msg: string
-  // previewHtml: string
 }
 
 export type BoqRow = {
@@ -14,26 +13,22 @@ export type BoqRow = {
   number: {
     html: string
     value: number
-    isFroala: boolean
   }
   description: {
     html: string
-    isFroala: boolean
+    value: null
   }
   item: {
     html: string
     value: number
-    isFroala: boolean
   }
   qty: {
     html: string
     value: number
-    isFroala: boolean
   }
   price: {
     html: string
     value: number
-    isFroala: boolean
   }
 }
 
@@ -68,17 +63,15 @@ export type BoqItem = {
     header: {
       title: {
         html: string
-        // value: number
-        isFroala: boolean
+        value: null
       }
       subtotal: {
         html: string
-        isFroala: boolean
+        value: null
       }
       price: {
         html: string
         value: number
-        isFroala: boolean
       }
     }
     column: BoqCols
@@ -93,6 +86,7 @@ type TextItem = {
   type: 'text'
   text: {
     html: string
+    value: null
   }
 } & Common
 

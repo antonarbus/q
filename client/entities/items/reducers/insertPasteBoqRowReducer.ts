@@ -37,7 +37,7 @@ export const insertPasteBoqRowReducer: Type = (state, action) => {
         height: 0,
         width: 0,
         number: { html: '', value: 0 },
-        description: { html: '' },
+        description: { html: '', value: null },
         item: { html: '', value: 0 },
         qty: { html: '', value: 0 },
         price: { html: '', value: 0 },

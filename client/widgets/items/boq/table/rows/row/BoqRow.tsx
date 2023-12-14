@@ -6,11 +6,13 @@ import { ItemCell } from './cells/ItemCell'
 import { QtyCell } from './cells/QtyCell'
 import { PriceCell } from './cells/PriceCell'
 import { BoqRowLayout } from './BoqRowLayout'
+import { type BoqEditorsRef } from 'client/entities/items'
 
 type Props = {
   itemIndex: number
   rowIndex: number
   boqRow: BoqRowType
+  boqEditorsRef?: BoqEditorsRef
 }
 
 export const BoqRow = ({
