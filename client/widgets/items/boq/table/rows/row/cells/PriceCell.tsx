@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { dispatch, getState, theme } from 'client/shared/clients'
-import { boqCellHtmlGetter, itemsSlice, selectColumnWidth } from 'client/entities/items'
+import { type BoqEditorsRef, boqCellHtmlGetter, itemsSlice, selectColumnWidth } from 'client/entities/items'
 import { changeBoqCell } from 'client/features/change_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey, BoqItem } from 'client/shared/types'
@@ -11,11 +11,16 @@ import { useRef } from 'react'
 type Props = {
   itemIndex: number
   rowIndex: number
+  boqEditorsRef?: BoqEditorsRef
 }
 
 const boqColumnKey: BoqColumnKey = 'price'
 
-export const PriceCell = ({ itemIndex, rowIndex, boqEditorsRef }: Props): JSX.Element => {
+export const PriceCell = ({
+  itemIndex,
+  rowIndex,
+  boqEditorsRef,
+}: Props): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
   const priceColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))

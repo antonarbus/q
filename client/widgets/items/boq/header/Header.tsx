@@ -6,7 +6,7 @@ import { type BoqEditorsRef } from 'client/entities/items'
 
 type Props = {
   itemIndex: number
-  boqEditorsRef: BoqEditorsRef
+  boqEditorsRef?: BoqEditorsRef
 }
 
 // todo: integrate currency in price directly and create a logic to update only price part

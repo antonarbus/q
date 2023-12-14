@@ -6,7 +6,7 @@ import type FroalaEditor from 'froala-editor'
 
 type Props = {
   itemIndex: number
-  boqEditorsRef: BoqEditorsRef
+  boqEditorsRef?: BoqEditorsRef
 }
 
 const boqHeaderKey = 'subtotal'

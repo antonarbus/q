@@ -18,5 +18,8 @@ export const saveBoqCellReducer = (state: ItemsState, action: PayloadAction<{
   if (row === undefined) return
 
   row[boqColumnKey].html = html
-  row[boqColumnKey].value = value
+
+  if (row[boqColumnKey]?.value) {
+    row[boqColumnKey].value = value
+  }
 }
