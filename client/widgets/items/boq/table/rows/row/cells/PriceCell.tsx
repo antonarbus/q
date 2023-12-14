@@ -1,13 +1,12 @@
 import { Box } from '@mui/material'
-import { dispatch, theme } from 'client/shared/clients'
+import { dispatch, getState, theme } from 'client/shared/clients'
 import { boqCellHtmlGetter, itemsSlice, selectColumnWidth } from 'client/entities/items'
 import { changeBoqCell } from 'client/features/change_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
-import type { BoqColumnKey } from 'client/shared/types'
+import type { BoqColumnKey, BoqItem } from 'client/shared/types'
 import { Froala } from 'client/shared/ui/froala'
 import type FroalaEditor from 'froala-editor'
 import { useRef } from 'react'
-import { getTextContentFromHtml } from 'client/shared/lib'
 
 type Props = {
   itemIndex: number
@@ -16,7 +15,7 @@ type Props = {
 
 const boqColumnKey: BoqColumnKey = 'price'
 
-export const PriceCell = ({ itemIndex, rowIndex }: Props): JSX.Element => {
+export const PriceCell = ({ itemIndex, rowIndex, boqEditorsRef }: Props): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
   const priceColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
@@ -46,13 +45,10 @@ export const PriceCell = ({ itemIndex, rowIndex }: Props): JSX.Element => {
           if (editorRef.current === null) return
           const html = editorRef.current.html.get()
           changeBoqCell({ itemIndex, rowIndex, boqColumnKey, html })
-          // todo: very hacky way to update the total price, better think how to move froala editors on top
-          // todo: and share it between all components to be able to control all values from anywhere
-          dispatch(itemsSlice.actions.disableSubTotalPriceFroala({ itemIndex }))
           dispatch(itemsSlice.actions.updateTotalPrice({ itemIndex }))
-          setTimeout(() => {
-            dispatch(itemsSlice.actions.enableSubTotalPriceFroala({ itemIndex }))
-          }, 500)
+          // todo: make it better
+          const updatedPrice = (getState().items[itemIndex] as BoqItem).boq.header.price.html
+          boqEditorsRef.current.subTotalEditor.html.set(updatedPrice)
         }}
         additionalStyle={{
           textAlign: 'center',

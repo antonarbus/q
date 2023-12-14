@@ -6,6 +6,8 @@ import 'froala-editor/js/plugins.pkgd.min.js'
 import 'froala-editor/js/third_party/font_awesome.min.js'
 import './froala_editor.pkgd.min.css'
 import { froalaDefaultOptions } from './froalaDefaultOptions'
+import { type BoqEditorsRef } from 'client/entities/items'
+import { saveItemsLocally } from 'client/shared/lib'
 
 type Props = {
   itemIndex: number
@@ -14,6 +16,7 @@ type Props = {
   onFocus?: () => void
   froalaElementRef: RefObject<HTMLDivElement>
   editorRef: MutableRefObject<FroalaEditor | null>
+  boqEditorsRef: BoqEditorsRef
   placeholder?: string
   rowIndex?: number
 }
@@ -27,6 +30,7 @@ export const useStartFroala = ({
   htmlGetter,
   froalaElementRef,
   editorRef,
+  boqEditorsRef,
   placeholder,
   rowIndex,
   onContentChange,
@@ -47,10 +51,11 @@ export const useStartFroala = ({
               if (!editorRef.current?.html) return
               editorRef.current.html.set(htmlGetter())
               window.froalas = window.froalas.filter(({ current }) => Boolean(current))
-              console.log('💚 froalas qty after init: ', window.froalas.length)
+              // console.log('💚 froalas qty after init: ', window.froalas.length)
             },
             contentChanged: () => {
               onContentChange()
+              saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
             },
             focus: () => {
               onFocus?.()
@@ -60,6 +65,10 @@ export const useStartFroala = ({
       )
 
       editorRef.current = froalaInstance
+
+      if (boqEditorsRef) {
+        boqEditorsRef.current.subTotalEditor = froalaInstance
+      }
     }
 
     initFroalaInstance()
@@ -68,7 +77,7 @@ export const useStartFroala = ({
       editorRef.current?.destroy()
       editorRef.current = null
       window.froalas = window.froalas.filter(({ current }) => Boolean(current))
-      console.log('💔 froalas qty after destroy: ', window.froalas.length)
+      // console.log('💔 froalas qty after destroy: ', window.froalas.length)
     }
   })
 }

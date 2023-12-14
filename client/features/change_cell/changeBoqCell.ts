@@ -29,6 +29,4 @@ export const changeBoqCell = ({
   const textContent = getTextContentFromHtml({ html })
   const value = Number(textContent)
   dispatch(itemsSlice.actions.saveBoqCell({ itemIndex, rowIndex, html, value, boqColumnKey }))
-
-  saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
 }

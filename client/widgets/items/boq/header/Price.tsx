@@ -1,30 +1,31 @@
-import { boqHeaderHtmlGetter, selectIsSubTotalPriceFroala, selectReRenderTotalPrice } from 'client/entities/items'
+import { type BoqEditorsRef, boqHeaderHtmlGetter } from 'client/entities/items'
 import { changeBoqHeader } from 'client/features/change_cell'
 import { Froala } from 'client/shared/ui/froala'
 import { useRef } from 'react'
 import type FroalaEditor from 'froala-editor'
-// import { useSelectorTyped } from 'client/shared/hooks'
 
 type Props = {
   itemIndex: number
+  boqEditorsRef: BoqEditorsRef
 }
 
 const boqHeaderKey = 'price'
 
-export const Price = ({ itemIndex }: Props): JSX.Element => {
+export const Price = ({
+  itemIndex,
+  boqEditorsRef,
+}: Props): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
-
-  // const reRenderPrice = useSelectorTyped(selectReRenderTotalPrice({ itemIndex }))
 
   return (
     <Froala
       itemIndex={itemIndex}
       editorRef={editorRef}
+      boqEditorsRef={boqEditorsRef}
       froalaElementRef={froalaElementRef}
       placeholder='Price...'
       htmlGetter={() => boqHeaderHtmlGetter({ itemIndex, boqHeaderKey })}
-      isSpecificFroalaSelector={selectIsSubTotalPriceFroala({ itemIndex })}
       onContentChange={() => {
         if (editorRef.current === null) return
         const html = editorRef.current.html.get()

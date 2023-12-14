@@ -13,7 +13,10 @@ type Props = {
   itemIndex: number
 }
 
-export const BoqRows = ({ itemIndex }: Props): JSX.Element => {
+export const BoqRows = ({
+  itemIndex,
+  boqEditorsRef,
+}: Props): JSX.Element => {
   const boqRows = useSelectorTyped(selectBoqRows({ itemIndex }), boqRowsShapeEqualityFn)
   const isBoqRowSortDisabled = useIsBoqRowSortDisabled({ itemIndex })
 
@@ -43,6 +46,7 @@ export const BoqRows = ({ itemIndex }: Props): JSX.Element => {
                   itemIndex={itemIndex}
                   rowIndex={rowIndex}
                   boqRow={boqRow}
+                  boqEditorsRef={boqEditorsRef}
                 />
               </BoqRowSortAndAnimation>
             )

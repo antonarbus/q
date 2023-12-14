@@ -1,7 +1,7 @@
 export { defaultItems } from './model/defaultItems'
 
 // slice
-export { itemsSlice } from './itemsSlice'
+export { itemsSlice } from './redux/itemsSlice'
 
 // selectors
 export { itemsShapeEqualityFn } from './selectors/itemsShapeEqualityFn'
@@ -9,7 +9,6 @@ export { selectIsLastItem } from './selectors/selectIsLastItem'
 export { selectIsLastBoqRow } from './selectors/selectIsLastBoqRow'
 export { selectColumnWidth } from './selectors/selectColumnWidth'
 export { selectBoqRows, boqRowsShapeEqualityFn } from './selectors/selectBoqRows'
-export { selectIsSubTotalPriceFroala } from './selectors/selectIsSubTotalPriceFroala'
 
 // thunks
 export { saveItemHeightByIndex } from './model/saveItemHeightByIndex'
@@ -26,3 +25,6 @@ export { boqCellHtmlGetter } from './html_getters/boqCellHtmlGetter'
 
 // hooks
 export { useIsItemSortDisabled } from './hooks/useIsItemSortDisabled'
+
+// types
+export type { BoqEditorsRef } from './types/BoqEditorsRef'

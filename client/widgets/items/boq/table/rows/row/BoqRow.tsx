@@ -13,7 +13,12 @@ type Props = {
   boqRow: BoqRowType
 }
 
-export const BoqRow = ({ boqRow, itemIndex, rowIndex }: Props): JSX.Element => {
+export const BoqRow = ({
+  boqRow,
+  itemIndex,
+  rowIndex,
+  boqEditorsRef,
+}: Props): JSX.Element => {
   return (
     <BoqRowLayout id={boqRow.id}>
       <BoqRowActions itemIndex={itemIndex} rowIndex={rowIndex} boqRow={boqRow} />
@@ -21,7 +26,11 @@ export const BoqRow = ({ boqRow, itemIndex, rowIndex }: Props): JSX.Element => {
       <DescriptionCell itemIndex={itemIndex} rowIndex={rowIndex} />
       <ItemCell itemIndex={itemIndex} rowIndex={rowIndex} />
       <QtyCell itemIndex={itemIndex} rowIndex={rowIndex} />
-      <PriceCell itemIndex={itemIndex} rowIndex={rowIndex} />
+      <PriceCell
+        itemIndex={itemIndex}
+        rowIndex={rowIndex}
+        boqEditorsRef={boqEditorsRef}
+      />
     </BoqRowLayout>
   )
 }
