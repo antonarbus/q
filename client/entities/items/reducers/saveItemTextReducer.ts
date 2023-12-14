@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { ItemsState } from '../itemsSlice'
+import type { ItemsState } from '../redux/itemsSlice'
 
 export const saveItemTextReducer = (state: ItemsState, action: PayloadAction<{
   itemIndex: number

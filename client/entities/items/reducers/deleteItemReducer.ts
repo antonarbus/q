@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { ItemsState } from '../itemsSlice'
+import type { ItemsState } from '../redux/itemsSlice'
 
 export const deleteItemReducer = (state: ItemsState, action: PayloadAction<{ itemId: string }>): ItemsState => {
   const { itemId } = action.payload

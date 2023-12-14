@@ -6,11 +6,17 @@ type Props = {
   itemIndex: number
 }
 
-export const BoqTable = ({ itemIndex }: Props): JSX.Element => {
+export const BoqTable = ({
+  itemIndex,
+  boqEditorsRef,
+}: Props): JSX.Element => {
   return (
     <BoqTableLayout>
       <BoqColumns itemIndex={itemIndex} />
-      <BoqRows itemIndex={itemIndex} />
+      <BoqRows
+        itemIndex={itemIndex}
+        boqEditorsRef={boqEditorsRef}
+      />
     </BoqTableLayout>
   )
 }

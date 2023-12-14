@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { ItemsState } from '../itemsSlice'
+import type { ItemsState } from '../redux/itemsSlice'
 
 // todo: not in use
 export const makeItemBitWiderReducer = (state: ItemsState, action: PayloadAction<{ itemIndex: number }>): void => {

@@ -1,4 +1,4 @@
-import type { ItemsState } from '../itemsSlice'
+import type { ItemsState } from '../redux/itemsSlice'
 
 export const removePasteItemReducer = (state: ItemsState): void => {
   const pasteItemIndex = state.findIndex((item) => item.type === 'paste')

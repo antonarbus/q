@@ -4,12 +4,14 @@ import type FroalaEditor from 'froala-editor'
 import { Box } from '@mui/material'
 import { useStartFroala } from './useStartFroala'
 import { usePutCaretAtTheEnd } from './usePutCaretAtTheEnd'
+import { type BoqEditorsRef } from 'client/entities/items'
 
 type Props = {
   itemIndex: number
   htmlGetter: () => string
   froalaElementRef: RefObject<HTMLDivElement>
   editorRef: MutableRefObject<FroalaEditor | null>
+  boqEditorsRef: BoqEditorsRef
   placeholder?: string
   additionalStyle?: SxProps
   rowIndex?: number
@@ -21,6 +23,7 @@ type Props = {
 export const EditableHtml = ({
   additionalStyle,
   editorRef,
+  boqEditorsRef,
   froalaElementRef,
   itemIndex,
   htmlGetter,
@@ -32,6 +35,7 @@ export const EditableHtml = ({
 }: Props): JSX.Element => {
   useStartFroala({
     editorRef,
+    boqEditorsRef,
     froalaElementRef,
     itemIndex,
     htmlGetter,

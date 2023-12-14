@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { ItemsState } from '../itemsSlice'
+import type { ItemsState } from '../redux/itemsSlice'
 
 export const saveItemHeightsReducer = (state: ItemsState, action: PayloadAction<Array<{ itemIndex: number, height: number }>>): void => {
   const indexesAndHeights = action.payload
