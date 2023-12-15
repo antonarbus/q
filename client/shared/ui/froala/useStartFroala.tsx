@@ -21,7 +21,9 @@ type Props = {
   rowIndex?: number
 }
 
-declare const window: Window & typeof globalThis & { froalas: Array<MutableRefObject<FroalaEditor | null>> }
+declare const window: Window & typeof globalThis & {
+  froalas: Array<MutableRefObject<FroalaEditor | null>>
+}
 
 window.froalas = []
 
@@ -44,8 +46,6 @@ export const useStartFroala = ({
           ...froalaDefaultOptions,
           placeholderText: placeholder ?? 'Text...',
           events: {
-            // 'paste.afterCleanup': function (clipboardHtml: string) { },
-            // click: (event: MouseEvent) => {},
             initialized: (): void => {
               window.froalas.push(editorRef)
               if (!editorRef.current?.html) return
@@ -60,6 +60,8 @@ export const useStartFroala = ({
             focus: () => {
               onFocus?.()
             },
+            // 'paste.afterCleanup': function (clipboardHtml: string) { },
+            // click: (event: MouseEvent) => {},
           },
         },
       )
