@@ -7,14 +7,12 @@ import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
 import { EditableHtml } from './EditableHtml'
 import { useViewPortObserver } from './useViewPortObserver'
 import { StaticHtmlBackgroundToFixBlinkIssue } from './StaticHtmlBackgroundToFixBlinkIssue'
-import { type BoqEditorsRef } from 'client/entities/items'
 
 type Props = {
   itemIndex: number
   htmlGetter: () => string
   froalaElementRef: RefObject<HTMLDivElement>
   editorRef: MutableRefObject<FroalaEditor | null>
-  boqEditorsRef?: BoqEditorsRef
   placeholder?: string
   additionalStyle?: SxProps
   rowIndex?: number
@@ -25,7 +23,6 @@ type Props = {
 export const Froala = ({
   additionalStyle,
   editorRef,
-  boqEditorsRef,
   froalaElementRef,
   itemIndex,
   rowIndex,
@@ -66,7 +63,6 @@ export const Froala = ({
           <EditableHtml
             additionalStyle={additionalStyle}
             editorRef={editorRef}
-            boqEditorsRef={boqEditorsRef}
             froalaElementRef={froalaElementRef}
             itemIndex={itemIndex}
             rowIndex={rowIndex}

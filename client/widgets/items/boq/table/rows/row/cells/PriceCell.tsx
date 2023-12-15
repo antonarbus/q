@@ -11,7 +11,7 @@ import { useRef } from 'react'
 type Props = {
   itemIndex: number
   rowIndex: number
-  boqEditorsRef?: BoqEditorsRef
+  boqEditorsRef: BoqEditorsRef
 }
 
 const boqColumnKey: BoqColumnKey = 'price'
@@ -55,8 +55,8 @@ export const PriceCell = ({
           // todo: make it better
           const updatedPrice = (getState().items[itemIndex] as BoqItem).boq.header.price.html
 
-          if (boqEditorsRef?.current.subTotalEditor) {
-            boqEditorsRef.current.subTotalEditor.html.set(updatedPrice)
+          if (boqEditorsRef?.current.subTotalEditorRef.current) {
+            boqEditorsRef.current.subTotalEditorRef.current.html.set(updatedPrice)
           }
         }}
         additionalStyle={{

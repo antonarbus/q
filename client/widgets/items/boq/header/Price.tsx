@@ -6,7 +6,7 @@ import type FroalaEditor from 'froala-editor'
 
 type Props = {
   itemIndex: number
-  boqEditorsRef?: BoqEditorsRef
+  boqEditorsRef: BoqEditorsRef
 }
 
 const boqHeaderKey = 'price'
@@ -18,11 +18,13 @@ export const Price = ({
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
 
+  boqEditorsRef.current.subTotalEditorRef = editorRef
+  console.log('🚀  boqEditorsRef:', boqEditorsRef)
+
   return (
     <Froala
       itemIndex={itemIndex}
       editorRef={editorRef}
-      boqEditorsRef={boqEditorsRef}
       froalaElementRef={froalaElementRef}
       placeholder='Price...'
       htmlGetter={() => boqHeaderHtmlGetter({ itemIndex, boqHeaderKey })}

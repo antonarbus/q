@@ -3,5 +3,7 @@ import { type MutableRefObject } from 'react'
 import type FroalaEditor from 'froala-editor'
 
 export type BoqEditorsRef = MutableRefObject<{
-  subTotalEditor: FroalaEditor | null
+  subTotalEditorRef: {
+    current: FroalaEditor | null
+  }
 }>
