@@ -51,9 +51,13 @@ export const PriceCell = ({
           const html = editorRef.current.html.get()
           changeBoqCell({ itemIndex, rowIndex, boqColumnKey, html })
           dispatch(itemsSlice.actions.updateTotalPrice({ itemIndex }))
+
           // todo: make it better
           const updatedPrice = (getState().items[itemIndex] as BoqItem).boq.header.price.html
-          boqEditorsRef.current.subTotalEditor.html.set(updatedPrice)
+
+          if (boqEditorsRef?.current.subTotalEditor) {
+            boqEditorsRef.current.subTotalEditor.html.set(updatedPrice)
+          }
         }}
         additionalStyle={{
           textAlign: 'center',
