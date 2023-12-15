@@ -11,7 +11,7 @@ import { useIsBoqRowSortDisabled } from './useIsBoqRowSortDisabled'
 
 type Props = {
   itemIndex: number
-  boqEditorsRef?: BoqEditorsRef
+  boqEditorsRef: BoqEditorsRef
 }
 
 export const BoqRows = ({

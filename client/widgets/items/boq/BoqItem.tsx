@@ -11,7 +11,9 @@ type Props = {
 
 export const BoqItem = ({ itemIndex }: Props): JSX.Element => {
   const boqEditorsRef: BoqEditorsRef = useRef({
-    subTotalEditor: null,
+    subTotalEditorRef: {
+      current: null,
+    },
   })
 
   return (

@@ -5,7 +5,7 @@ import { type BoqEditorsRef } from 'client/entities/items'
 
 type Props = {
   itemIndex: number
-  boqEditorsRef?: BoqEditorsRef
+  boqEditorsRef: BoqEditorsRef
 }
 
 export const BoqTable = ({

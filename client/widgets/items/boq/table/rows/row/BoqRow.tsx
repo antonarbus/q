@@ -12,7 +12,7 @@ type Props = {
   itemIndex: number
   rowIndex: number
   boqRow: BoqRowType
-  boqEditorsRef?: BoqEditorsRef
+  boqEditorsRef: BoqEditorsRef
 }
 
 export const BoqRow = ({
