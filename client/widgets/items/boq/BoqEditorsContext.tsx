@@ -5,20 +5,20 @@ type Props = {
   children: ReactNode
 }
 
-export type BoqItemEditorsRef = MutableRefObject<{
+type BoqItemEditorsRef = {
   subTotalEditorRef: {
     current: FroalaEditor | null
   }
-}>
+}
 
 const BoqEditorsContext = createContext<BoqItemEditorsRef | undefined>(undefined)
 
 export const BoqEditorsContextProvider = ({ children }: Props): JSX.Element => {
-  const boqItemEditorsRef: BoqItemEditorsRef = useRef({
+  const boqItemEditorsRef: BoqItemEditorsRef = {
     subTotalEditorRef: {
       current: null,
     },
-  })
+  }
 
   return (
     <BoqEditorsContext.Provider value={boqItemEditorsRef}>

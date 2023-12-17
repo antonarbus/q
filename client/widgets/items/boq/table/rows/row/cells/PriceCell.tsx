@@ -56,8 +56,8 @@ export const PriceCell = ({
           // todo: make it better
           const updatedPrice = (getState().items[itemIndex] as BoqItem).boq.header.price.html
 
-          if (boqItemEditors?.current.subTotalEditorRef.current) {
-            boqItemEditors.current.subTotalEditorRef.current.html.set(updatedPrice)
+          if (boqItemEditors.subTotalEditorRef.current) {
+            boqItemEditors.subTotalEditorRef.current.html.set(updatedPrice)
           }
         }}
         additionalStyle={{
