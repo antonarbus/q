@@ -1,13 +1,11 @@
 import { useSelectorTyped } from 'client/shared/hooks'
+import { useRow } from '../../RowProvider'
 
-type Props = {
-  id: string
-}
-
-export const useIsPasteHere = ({ id }: Props): boolean => {
+export const useIsPasteHere = (): boolean => {
+  const { rowId } = useRow()
   const pastePos = useSelectorTyped(state => state.copy.place.pastePos)
   const pasteItemId = useSelectorTyped(state => state.copy.place.itemId)
   const isPasteTextShown = useSelectorTyped(state => state.copy.isPasteTextShown)
-  const isPasteHere = isPasteTextShown && id === pasteItemId && pastePos === 'middle'
+  const isPasteHere = isPasteTextShown && rowId === pasteItemId && pastePos === 'middle'
   return isPasteHere
 }

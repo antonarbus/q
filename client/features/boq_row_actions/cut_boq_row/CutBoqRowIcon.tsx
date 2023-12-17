@@ -10,11 +10,11 @@ import { className } from 'client/shared/className'
 import { saveItemsLocally } from 'client/shared/lib'
 import { appSlice } from 'client/entities/app'
 import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
-import { useRowIndex } from 'client/widgets/items/boq/table/rows/RowIndexProvider'
+import { useRow } from 'client/widgets/items/boq/table/rows/RowProvider'
 
 export const CutBoqRowIcon = (): JSX.Element => {
   const { itemIndex } = useItemIndex()
-  const { rowIndex } = useRowIndex()
+  const { rowIndex } = useRow()
   const isCopyable = useSelectorTyped(state => state.copy.isCopyable)
   const isLastBoqRow = useSelectorTyped(selectIsLastBoqRow({ itemIndex }))
   const isDeletable = useSelectorTyped(state => state.copy.isDeletable)

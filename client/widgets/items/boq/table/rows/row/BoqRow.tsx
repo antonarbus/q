@@ -7,14 +7,10 @@ import { QtyCell } from './cells/QtyCell'
 import { PriceCell } from './cells/PriceCell'
 import { BoqRowLayout } from './BoqRowLayout'
 
-type Props = {
-  boqRow: BoqRowType
-}
-
-export const BoqRow = ({ boqRow }: Props): JSX.Element => {
+export const BoqRow = (): JSX.Element => {
   return (
-    <BoqRowLayout id={boqRow.id}>
-      <BoqRowActions boqRow={boqRow} />
+    <BoqRowLayout>
+      <BoqRowActions />
       <NumberCell />
       <DescriptionCell />
       <ItemCell />

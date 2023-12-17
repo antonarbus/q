@@ -9,10 +9,10 @@ import type { MouseEvent } from 'react'
 import { className } from 'client/shared/className'
 import { appSlice } from 'client/entities/app'
 import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
-import { useRowIndex } from 'client/widgets/items/boq/table/rows/RowIndexProvider'
+import { useRow } from 'client/widgets/items/boq/table/rows/RowProvider'
 
 export const CopyBoqRowIcon = (): JSX.Element => {
-  const { rowIndex } = useRowIndex()
+  const { rowIndex } = useRow()
   const { itemIndex } = useItemIndex()
   const isCopyable = useSelectorTyped(state => state.copy.isCopyable)
   const disabled = !isCopyable

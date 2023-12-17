@@ -6,16 +6,12 @@ import { theme } from 'client/shared/clients'
 
 type Props = {
   children: ReactNode
-  rowId: string
-  i: number
 }
 
 type SortableItem = SortableElementProps & Props
 
 export const BoqRowSortAndAnimation: ComponentClass<SortableItem> = SortableElement(({
-  i,
   children,
-  rowId,
 }: Props) => {
   return (
     <motion.div
