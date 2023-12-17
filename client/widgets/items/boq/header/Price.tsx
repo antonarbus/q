@@ -16,7 +16,7 @@ export const Price = ({ itemIndex }: Props): JSX.Element => {
 
   const boqItemEditors = useBoqItemEditors()
   const editorRef = useRef<FroalaEditor | null>(null)
-  boqItemEditors.current.subTotalEditorRef = editorRef
+  boqItemEditors.subTotalEditorRef = editorRef
 
   return (
     <Froala
