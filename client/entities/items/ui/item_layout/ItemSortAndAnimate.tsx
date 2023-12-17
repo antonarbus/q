@@ -13,7 +13,6 @@ type Props = {
   itemHeight: number
   itemId: string
   itemActionElements?: ReactNode
-  itemIndex: number
   disableResize?: boolean
   autoWidth?: boolean
   onItemResizeStop?: OnItemResizeStop
@@ -24,7 +23,6 @@ type Props = {
 type SortableItem = SortableElementProps & Props
 
 export const ItemSortAndAnimate: ComponentClass<SortableItem> = SortableElement(({
-  itemIndex,
   children,
   itemHeight,
   itemId,
@@ -76,7 +74,6 @@ export const ItemSortAndAnimate: ComponentClass<SortableItem> = SortableElement(
     >
       <ItemActionsContainer itemActionElements={itemActionElements} />
       <ResizablePaper
-        itemIndex={itemIndex}
         disableResize={disableResize}
         autoWidth={autoWidth}
         onItemResizeStop={onItemResizeStop}

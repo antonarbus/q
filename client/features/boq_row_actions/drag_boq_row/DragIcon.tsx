@@ -4,12 +4,8 @@ import { motion } from 'framer-motion'
 // todo: obviously need to move items into entities
 import { useIsBoqRowSortDisabled } from 'client/widgets/items/boq/table/rows/useIsBoqRowSortDisabled'
 
-type Props = {
-  itemIndex: number
-}
-
-const Handle = ({ itemIndex }: Props): JSX.Element => {
-  const isDisabled = useIsBoqRowSortDisabled({ itemIndex })
+const Handle = (): JSX.Element => {
+  const isDisabled = useIsBoqRowSortDisabled()
 
   return (
     <motion.span
@@ -24,4 +20,4 @@ const Handle = ({ itemIndex }: Props): JSX.Element => {
   )
 }
 
-export const DragBoqRow = SortableHandle<Props>(Handle)
+export const DragBoqRow = SortableHandle(Handle)

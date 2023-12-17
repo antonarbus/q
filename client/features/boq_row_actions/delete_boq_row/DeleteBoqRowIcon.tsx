@@ -7,14 +7,15 @@ import { gsap } from 'gsap'
 import { useRef } from 'react'
 import { saveItemsLocally } from 'client/shared/lib'
 import { appSlice } from 'client/entities/app'
+import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
 
 type Props = {
-  itemIndex: number
   rowIndex: number
 }
 
-export const DeleteBoqRowIcon = ({ rowIndex, itemIndex }: Props): JSX.Element => {
+export const DeleteBoqRowIcon = ({ rowIndex }: Props): JSX.Element => {
   const ref = useRef<HTMLSpanElement>(null)
+  const { itemIndex } = useItemIndex()
 
   const isLastBoqRow = useSelectorTyped(selectIsLastBoqRow({ itemIndex }))
   const isDeletable = useSelectorTyped(state => state.copy.isDeletable)

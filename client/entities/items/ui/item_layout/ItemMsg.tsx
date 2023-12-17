@@ -1,14 +1,12 @@
 import { itemsSlice } from 'client/entities/items'
 import { dispatch } from 'client/shared/clients'
 import { useSelectorTyped } from 'client/shared/hooks'
+import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useUpdateEffect } from 'react-use'
 
-type Props = {
-  itemIndex: number
-}
-
-export const ItemMsg = ({ itemIndex }: Props): JSX.Element => {
+export const ItemMsg = (): JSX.Element => {
+  const { itemIndex } = useItemIndex()
   const msg = useSelectorTyped(state => state.items[itemIndex]?.msg)
 
   useUpdateEffect(() => {

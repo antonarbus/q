@@ -8,14 +8,12 @@ import { onBoqRowDrag } from 'client/features/boq_row_actions/drag_boq_row'
 import { BoqPasteRowTextOverlay } from './row/BoqPasteRowTextOverlay'
 import { nanoid } from 'nanoid'
 import { useIsBoqRowSortDisabled } from './useIsBoqRowSortDisabled'
+import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
 
-type Props = {
-  itemIndex: number
-}
-
-export const BoqRows = ({ itemIndex }: Props): JSX.Element => {
+export const BoqRows = (): JSX.Element => {
+  const { itemIndex } = useItemIndex()
   const boqRows = useSelectorTyped(selectBoqRows({ itemIndex }), boqRowsShapeEqualityFn)
-  const isBoqRowSortDisabled = useIsBoqRowSortDisabled({ itemIndex })
+  const isBoqRowSortDisabled = useIsBoqRowSortDisabled()
 
   return (
     <DraggableBoqRowsContainer
@@ -40,7 +38,6 @@ export const BoqRows = ({ itemIndex }: Props): JSX.Element => {
                 rowId={boqRow.id}
               >
                 <BoqRow
-                  itemIndex={itemIndex}
                   rowIndex={rowIndex}
                   boqRow={boqRow}
                 />

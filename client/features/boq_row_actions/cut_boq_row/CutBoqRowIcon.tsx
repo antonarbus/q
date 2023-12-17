@@ -10,14 +10,15 @@ import type { BoqRow } from 'client/shared/types'
 import { className } from 'client/shared/className'
 import { saveItemsLocally } from 'client/shared/lib'
 import { appSlice } from 'client/entities/app'
+import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
 
 type Props = {
-  itemIndex: number
   rowIndex: number
   boqRow: BoqRow
 }
 
-export const CutBoqRowIcon = ({ itemIndex, rowIndex }: Props): JSX.Element => {
+export const CutBoqRowIcon = ({ rowIndex }: Props): JSX.Element => {
+  const { itemIndex } = useItemIndex()
   const isCopyable = useSelectorTyped(state => state.copy.isCopyable)
   const isLastBoqRow = useSelectorTyped(selectIsLastBoqRow({ itemIndex }))
   const isDeletable = useSelectorTyped(state => state.copy.isDeletable)

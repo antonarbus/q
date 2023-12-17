@@ -5,18 +5,14 @@ import { QtyColumn } from './column_headers/QtyColumn'
 import { PriceColumn } from './column_headers/PriceColumn'
 import { BoqColumnsLayout } from './BoqColumnsLayout'
 
-type Props = {
-  itemIndex: number
-}
-
-export const BoqColumns = ({ itemIndex }: Props): JSX.Element => {
+export const BoqColumns = (): JSX.Element => {
   return (
     <BoqColumnsLayout>
-      <NumberColumn itemIndex={itemIndex} />
-      <DescriptionColumn itemIndex={itemIndex} />
-      <ItemColumn itemIndex={itemIndex} />
-      <QtyColumn itemIndex={itemIndex} />
-      <PriceColumn itemIndex={itemIndex} />
+      <NumberColumn />
+      <DescriptionColumn />
+      <ItemColumn />
+      <QtyColumn />
+      <PriceColumn />
     </BoqColumnsLayout>
   )
 }
