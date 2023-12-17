@@ -1,25 +1,22 @@
-import { type BoqEditorsRef, boqHeaderHtmlGetter } from 'client/entities/items'
+import { boqHeaderHtmlGetter } from 'client/entities/items'
 import { changeBoqHeader } from 'client/features/change_cell'
 import { Froala } from 'client/shared/ui/froala'
 import { useRef } from 'react'
 import type FroalaEditor from 'froala-editor'
+import { useBoqItemEditors } from '../BoqEditorsContext'
 
 type Props = {
   itemIndex: number
-  boqEditorsRef: BoqEditorsRef
 }
 
 const boqHeaderKey = 'price'
 
-export const Price = ({
-  itemIndex,
-  boqEditorsRef,
-}: Props): JSX.Element => {
+export const Price = ({ itemIndex }: Props): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
-  const editorRef = useRef<FroalaEditor | null>(null)
 
-  boqEditorsRef.current.subTotalEditorRef = editorRef
-  console.log('🚀  boqEditorsRef:', boqEditorsRef)
+  const boqItemEditors = useBoqItemEditors()
+  const editorRef = useRef<FroalaEditor | null>(null)
+  boqItemEditors.current.subTotalEditorRef = editorRef
 
   return (
     <Froala

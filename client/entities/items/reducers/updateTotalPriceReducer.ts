@@ -5,7 +5,7 @@ import { getTextContentFromHtml } from 'client/shared/lib'
 
 export const updateTotalPriceReducer = (state: ItemsState, action: PayloadAction<{ itemIndex: number }>): void => {
   const { itemIndex } = action.payload
-  console.log('🚀  itemIndex:', itemIndex)
+
   const item = state[itemIndex]
   if (item?.type !== 'boq') return
 
