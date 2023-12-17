@@ -9,6 +9,7 @@ import { BoqPasteRowTextOverlay } from './row/BoqPasteRowTextOverlay'
 import { nanoid } from 'nanoid'
 import { useIsBoqRowSortDisabled } from './useIsBoqRowSortDisabled'
 import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
+import { RowIndexProvider } from './RowIndexProvider'
 
 export const BoqRows = (): JSX.Element => {
   const { itemIndex } = useItemIndex()
@@ -37,10 +38,9 @@ export const BoqRows = (): JSX.Element => {
                 disabled={isBoqRowSortDisabled}
                 rowId={boqRow.id}
               >
-                <BoqRow
-                  rowIndex={rowIndex}
-                  boqRow={boqRow}
-                />
+                <RowIndexProvider rowIndex={rowIndex} >
+                  <BoqRow boqRow={boqRow} />
+                </RowIndexProvider>
               </BoqRowSortAndAnimation>
             )
           }

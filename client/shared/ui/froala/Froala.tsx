@@ -14,7 +14,6 @@ type Props = {
   editorRef: MutableRefObject<FroalaEditor | null>
   placeholder?: string
   additionalStyle?: SxProps
-  rowIndex?: number
   onContentChange: () => void
   onFocus?: () => void
 }
@@ -23,7 +22,6 @@ export const Froala = ({
   additionalStyle,
   editorRef,
   froalaElementRef,
-  rowIndex,
   htmlGetter,
   placeholder,
   onContentChange,
@@ -62,7 +60,6 @@ export const Froala = ({
             additionalStyle={additionalStyle}
             editorRef={editorRef}
             froalaElementRef={froalaElementRef}
-            rowIndex={rowIndex}
             htmlGetter={htmlGetter}
             onContentChange={onContentChange}
             onFocus={onFocus}

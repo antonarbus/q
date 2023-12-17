@@ -8,17 +8,15 @@ import { Froala } from 'client/shared/ui/froala'
 import type FroalaEditor from 'froala-editor'
 import { useRef } from 'react'
 import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
-
-type Props = {
-  rowIndex: number
-}
+import { useRowIndex } from '../../RowIndexProvider'
 
 const boqColumnKey: BoqColumnKey = 'description'
 
-export const DescriptionCell = ({ rowIndex }: Props): JSX.Element => {
+export const DescriptionCell = (): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
   const { itemIndex } = useItemIndex()
+  const { rowIndex } = useRowIndex()
   const descriptionColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
   const isDescriptionColWidthSetManually = descriptionColWidth !== undefined
   const width = isDescriptionColWidthSetManually ? descriptionColWidth : 'auto'
@@ -42,7 +40,6 @@ export const DescriptionCell = ({ rowIndex }: Props): JSX.Element => {
       }}
     >
       <Froala
-        rowIndex={rowIndex}
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
         placeholder={`${boqColumnKey}...`}

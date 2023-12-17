@@ -6,19 +6,15 @@ import { cleanHtml } from 'client/shared/lib/itemsUtils'
 import { copySlice } from 'client/entities/copy'
 import { itemsSlice, selectIsLastBoqRow } from 'client/entities/items'
 import type { MouseEvent } from 'react'
-import type { BoqRow } from 'client/shared/types'
 import { className } from 'client/shared/className'
 import { saveItemsLocally } from 'client/shared/lib'
 import { appSlice } from 'client/entities/app'
 import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
+import { useRowIndex } from 'client/widgets/items/boq/table/rows/RowIndexProvider'
 
-type Props = {
-  rowIndex: number
-  boqRow: BoqRow
-}
-
-export const CutBoqRowIcon = ({ rowIndex }: Props): JSX.Element => {
+export const CutBoqRowIcon = (): JSX.Element => {
   const { itemIndex } = useItemIndex()
+  const { rowIndex } = useRowIndex()
   const isCopyable = useSelectorTyped(state => state.copy.isCopyable)
   const isLastBoqRow = useSelectorTyped(selectIsLastBoqRow({ itemIndex }))
   const isDeletable = useSelectorTyped(state => state.copy.isDeletable)

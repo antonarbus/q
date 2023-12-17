@@ -7,11 +7,10 @@ import { className } from 'client/shared/className'
 import type { BoqRow } from 'client/shared/types'
 
 type Props = {
-  rowIndex: number
   boqRow: BoqRow
 }
 
-export const BoqRowActions = ({ rowIndex, boqRow }: Props): JSX.Element => {
+export const BoqRowActions = ({ boqRow }: Props): JSX.Element => {
   return (
     <Box
       className={className.actionsContainer}
@@ -31,9 +30,9 @@ export const BoqRowActions = ({ rowIndex, boqRow }: Props): JSX.Element => {
         }}
       >
         <DragBoqRow />
-        <CopyBoqRowIcon rowIndex={rowIndex} boqRow={boqRow} />
-        <CutBoqRowIcon rowIndex={rowIndex} boqRow={boqRow} />
-        <DeleteBoqRowIcon rowIndex={rowIndex} />
+        <CopyBoqRowIcon />
+        <CutBoqRowIcon />
+        <DeleteBoqRowIcon />
       </Box>
     </Box>
   )

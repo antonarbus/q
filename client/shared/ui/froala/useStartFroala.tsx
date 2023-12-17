@@ -16,7 +16,6 @@ type Props = {
   froalaElementRef: RefObject<HTMLDivElement>
   editorRef: MutableRefObject<FroalaEditor | null>
   placeholder?: string
-  rowIndex?: number
 }
 
 declare const window: Window & typeof globalThis & {
@@ -30,7 +29,6 @@ export const useStartFroala = ({
   froalaElementRef,
   editorRef,
   placeholder,
-  rowIndex,
   onContentChange,
   onFocus,
 }: Props): void => {
