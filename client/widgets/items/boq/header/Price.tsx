@@ -4,7 +4,7 @@ import { Froala } from 'client/shared/ui/froala'
 import { useRef } from 'react'
 import type FroalaEditor from 'froala-editor'
 import { useBoqItemEditors } from '../BoqEditorsContext'
-import { useItemIndex } from '../../ItemIndexProvider'
+import { useItem } from '../../ItemProvider'
 
 const boqHeaderKey = 'price'
 
@@ -14,7 +14,7 @@ export const Price = (): JSX.Element => {
   const boqItemEditors = useBoqItemEditors()
   const editorRef = useRef<FroalaEditor | null>(null)
   boqItemEditors.subTotalEditorRef = editorRef
-  const { itemIndex } = useItemIndex()
+  const { itemIndex } = useItem()
 
   return (
     <Froala

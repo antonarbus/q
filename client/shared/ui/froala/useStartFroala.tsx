@@ -7,7 +7,7 @@ import { useEffect } from 'react'
 import FroalaEditor from 'froala-editor'
 import { froalaDefaultOptions } from './froalaDefaultOptions'
 import { saveItemsLocally } from 'client/shared/lib'
-import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
+import { useItem } from 'client/widgets/items/ItemProvider'
 
 type Props = {
   htmlGetter: () => string
@@ -32,7 +32,7 @@ export const useStartFroala = ({
   onContentChange,
   onFocus,
 }: Props): void => {
-  const { itemIndex } = useItemIndex()
+  const { itemIndex } = useItem()
 
   useEffect(() => {
     const initFroalaInstance = (): void => {

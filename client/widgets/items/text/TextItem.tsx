@@ -7,12 +7,12 @@ import { Item, itemTextHtmlGetter } from 'client/entities/items'
 import { onTextItemResizeStart, onTextItemResizeStop } from 'client/features/resize_item'
 import { ItemActions } from 'client/features/item_actions'
 import type FroalaEditor from 'froala-editor'
-import { useItemIndex } from '../ItemIndexProvider'
+import { useItem } from '../ItemProvider'
 
 export const TextItem = (): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
-  const { itemIndex } = useItemIndex()
+  const { itemIndex } = useItem()
 
   return (
     <Item

@@ -8,11 +8,11 @@ import { onBoqRowDrag } from 'client/features/boq_row_actions/drag_boq_row'
 import { BoqPasteRowTextOverlay } from './row/BoqPasteRowTextOverlay'
 import { nanoid } from 'nanoid'
 import { useIsBoqRowSortDisabled } from './useIsBoqRowSortDisabled'
-import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
+import { useItem } from 'client/widgets/items/ItemProvider'
 import { RowProvider } from './RowProvider'
 
 export const BoqRows = (): JSX.Element => {
-  const { itemIndex } = useItemIndex()
+  const { itemIndex } = useItem()
   const boqRows = useSelectorTyped(selectBoqRows({ itemIndex }), boqRowsShapeEqualityFn)
   const isBoqRowSortDisabled = useIsBoqRowSortDisabled()
 

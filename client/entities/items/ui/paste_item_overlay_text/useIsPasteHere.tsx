@@ -1,9 +1,9 @@
 import { useSelectorTyped } from 'client/shared/hooks'
 import { getState } from 'client/shared/clients'
-import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
+import { useItem } from 'client/widgets/items/ItemProvider'
 
 export const useIsPasteHere = (): boolean => {
-  const { itemIndex } = useItemIndex()
+  const { itemIndex } = useItem()
   const itemId = getState().items[itemIndex]?.id
   const pastePos = useSelectorTyped(state => state.copy.place.pastePos)
   const pasteItemId = useSelectorTyped(state => state.copy.place.itemId)

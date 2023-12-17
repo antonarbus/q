@@ -8,10 +8,10 @@ import { itemsSlice, saveItemHeightByIndex } from 'client/entities/items'
 import type { MouseEvent } from 'react'
 import { className } from 'client/shared/className'
 import { appSlice } from 'client/entities/app'
-import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
+import { useItem } from 'client/widgets/items/ItemProvider'
 
 export const CopyItemIcon = (): JSX.Element => {
-  const { itemIndex } = useItemIndex()
+  const { itemIndex } = useItem()
   const isCopyable = useSelectorTyped(state => state.copy.isCopyable)
   const disabled = !isCopyable
 

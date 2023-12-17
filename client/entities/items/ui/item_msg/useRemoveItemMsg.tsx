@@ -1,11 +1,11 @@
 import { itemsSlice } from 'client/entities/items'
 import { dispatch } from 'client/shared/clients'
 import { useSelectorTyped } from 'client/shared/hooks'
-import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
+import { useItem } from 'client/widgets/items/ItemProvider'
 import { useUpdateEffect } from 'react-use'
 
 export const useRemoveItemMsgAfterSomeTime = (): void => {
-  const { itemIndex } = useItemIndex()
+  const { itemIndex } = useItem()
   const msg = useSelectorTyped(state => state.items[itemIndex]?.msg)
 
   useUpdateEffect(() => {
