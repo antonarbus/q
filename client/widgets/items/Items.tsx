@@ -7,6 +7,7 @@ import { DraggableItemsContainer } from 'client/entities/items/ui/DraggableItems
 import { BoqItem } from './boq/BoqItem'
 import { itemsShapeEqualityFn } from 'client/entities/items'
 import { ItemProvider } from './ItemProvider'
+import { BoqItemProvider } from './boq/BoqItemProvider'
 
 export const Items = (): JSX.Element => {
   const items = useSelectorTyped(state => state.items, itemsShapeEqualityFn)
@@ -27,7 +28,7 @@ export const Items = (): JSX.Element => {
 
           if (item.type === 'text') {
             return (
-              <ItemProvider key={key} itemIndex={itemIndex} >
+              <ItemProvider key={key} itemIndex={itemIndex}>
                 <TextItem />
               </ItemProvider>
             )
@@ -35,8 +36,10 @@ export const Items = (): JSX.Element => {
 
           if (item.type === 'boq') {
             return (
-              <ItemProvider key={key} itemIndex={itemIndex} >
-                <BoqItem />
+              <ItemProvider key={key} itemIndex={itemIndex}>
+                <BoqItemProvider>
+                  <BoqItem />
+                </BoqItemProvider>
               </ItemProvider>
             )
           }

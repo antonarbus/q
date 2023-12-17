@@ -9,18 +9,18 @@ type Props = {
   children: ReactNode
   disableResize?: boolean
   autoWidth?: boolean
-  onItemResizeStop?: OnItemResizeStop
-  onItemResize?: OnItemResize
   onItemResizeStart?: OnItemResizeStart
+  onItemResize?: OnItemResize
+  onItemResizeStop?: OnItemResizeStop
 }
 
 export const ResizablePaper = ({
   children,
   disableResize = false,
   autoWidth = false,
-  onItemResizeStop,
   onItemResizeStart,
   onItemResize,
+  onItemResizeStop,
 }: Props): JSX.Element => {
   const { itemIndex } = useItem()
   const width = useSelectorTyped(state => state.items[itemIndex]?.width)

@@ -16,7 +16,7 @@ export const TextItem = (): JSX.Element => {
 
   return (
     <Item
-      onItemResize={onTextItemResizeStart}
+      onItemResizeStart={onTextItemResizeStart}
       onItemResizeStop={onTextItemResizeStop}
       itemActions={<ItemActions />}
     >

@@ -10,9 +10,9 @@ import { useItem } from 'client/widgets/items/ItemProvider'
 type Props = {
   children: ReactNode
   disableResize?: boolean
-  onItemResizeStop?: OnItemResizeStop
-  onItemResize?: OnItemResize
   onItemResizeStart?: OnItemResizeStart
+  onItemResize?: OnItemResize
+  onItemResizeStop?: OnItemResizeStop
   autoWidth?: boolean
   itemActions: JSX.Element
 }
@@ -20,9 +20,9 @@ type Props = {
 export const Item = ({
   children,
   disableResize,
-  onItemResizeStop,
-  onItemResize,
   onItemResizeStart,
+  onItemResize,
+  onItemResizeStop,
   autoWidth,
   itemActions,
 }: Props): JSX.Element => {
@@ -38,9 +38,9 @@ export const Item = ({
       autoWidth={autoWidth}
       itemHeight={item?.height ?? 0}
       itemId={item?.id ?? 'no id'}
-      onItemResizeStop={onItemResizeStop}
-      onItemResize={onItemResize}
       onItemResizeStart={onItemResizeStart}
+      onItemResize={onItemResize}
+      onItemResizeStop={onItemResizeStop}
       itemActionElements={itemActions}
     >
       <ItemMsg />

@@ -7,7 +7,7 @@ import type { BoqColumnKey, BoqItem } from 'client/shared/types'
 import { Froala } from 'client/shared/ui/froala'
 import type FroalaEditor from 'froala-editor'
 import { useRef } from 'react'
-import { useBoqItemEditors } from 'client/widgets/items/boq/BoqEditorsContext'
+import { useBoqItem } from 'client/widgets/items/boq/BoqItemProvider'
 import { useItem } from 'client/widgets/items/ItemProvider'
 import { useRow } from '../../RowProvider'
 
@@ -22,7 +22,7 @@ export const PriceCell = (): JSX.Element => {
   const isPriceColWidthSetManually = priceColWidth !== undefined
   const width = isPriceColWidthSetManually ? priceColWidth : 'auto'
 
-  const boqItemEditors = useBoqItemEditors()
+  const boqItemEditors = useBoqItem()
 
   return (
     <Box

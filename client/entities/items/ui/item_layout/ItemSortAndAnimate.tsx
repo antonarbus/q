@@ -15,9 +15,9 @@ type Props = {
   itemActionElements?: ReactNode
   disableResize?: boolean
   autoWidth?: boolean
-  onItemResizeStop?: OnItemResizeStop
-  onItemResize?: OnItemResize
   onItemResizeStart?: OnItemResizeStart
+  onItemResize?: OnItemResize
+  onItemResizeStop?: OnItemResizeStop
 }
 
 type SortableItem = SortableElementProps & Props
@@ -29,9 +29,9 @@ export const ItemSortAndAnimate: ComponentClass<SortableItem> = SortableElement(
   itemActionElements,
   disableResize,
   autoWidth,
-  onItemResizeStop,
-  onItemResize,
   onItemResizeStart,
+  onItemResize,
+  onItemResizeStop,
 }: Props) => {
   return (
     <motion.div
@@ -76,9 +76,9 @@ export const ItemSortAndAnimate: ComponentClass<SortableItem> = SortableElement(
       <ResizablePaper
         disableResize={disableResize}
         autoWidth={autoWidth}
-        onItemResizeStop={onItemResizeStop}
-        onItemResize={onItemResize}
         onItemResizeStart={onItemResizeStart}
+        onItemResize={onItemResize}
+        onItemResizeStop={onItemResizeStop}
       >
         {children}
       </ResizablePaper>
