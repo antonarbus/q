@@ -6,6 +6,7 @@ export const BoqTable = (): JSX.Element => {
   return (
     <BoqTableLayout>
       <BoqColumns />
-      <BoqRows /> </BoqTableLayout>
+      <BoqRows />
+    </BoqTableLayout>
   )
 }

@@ -8,14 +8,12 @@ import { useRef } from 'react'
 import { saveItemsLocally } from 'client/shared/lib'
 import { appSlice } from 'client/entities/app'
 import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
+import { useRowIndex } from 'client/widgets/items/boq/table/rows/RowIndexProvider'
 
-type Props = {
-  rowIndex: number
-}
-
-export const DeleteBoqRowIcon = ({ rowIndex }: Props): JSX.Element => {
+export const DeleteBoqRowIcon = (): JSX.Element => {
   const ref = useRef<HTMLSpanElement>(null)
   const { itemIndex } = useItemIndex()
+  const { rowIndex } = useRowIndex()
 
   const isLastBoqRow = useSelectorTyped(selectIsLastBoqRow({ itemIndex }))
   const isDeletable = useSelectorTyped(state => state.copy.isDeletable)

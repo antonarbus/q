@@ -8,22 +8,18 @@ import { PriceCell } from './cells/PriceCell'
 import { BoqRowLayout } from './BoqRowLayout'
 
 type Props = {
-  rowIndex: number
   boqRow: BoqRowType
 }
 
-export const BoqRow = ({
-  boqRow,
-  rowIndex,
-}: Props): JSX.Element => {
+export const BoqRow = ({ boqRow }: Props): JSX.Element => {
   return (
     <BoqRowLayout id={boqRow.id}>
-      <BoqRowActions rowIndex={rowIndex} boqRow={boqRow} />
-      <NumberCell rowIndex={rowIndex} />
-      <DescriptionCell rowIndex={rowIndex} />
-      <ItemCell rowIndex={rowIndex} />
-      <QtyCell rowIndex={rowIndex} />
-      <PriceCell rowIndex={rowIndex} />
+      <BoqRowActions boqRow={boqRow} />
+      <NumberCell />
+      <DescriptionCell />
+      <ItemCell />
+      <QtyCell />
+      <PriceCell />
     </BoqRowLayout>
   )
 }

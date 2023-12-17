@@ -6,17 +6,13 @@ import { cleanHtml } from 'client/shared/lib/itemsUtils'
 import { copySlice } from 'client/entities/copy'
 import { itemsSlice } from 'client/entities/items'
 import type { MouseEvent } from 'react'
-import type { BoqRow } from 'client/shared/types'
 import { className } from 'client/shared/className'
 import { appSlice } from 'client/entities/app'
 import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
+import { useRowIndex } from 'client/widgets/items/boq/table/rows/RowIndexProvider'
 
-type Props = {
-  rowIndex: number
-  boqRow: BoqRow
-}
-
-export const CopyBoqRowIcon = ({ rowIndex, boqRow }: Props): JSX.Element => {
+export const CopyBoqRowIcon = (): JSX.Element => {
+  const { rowIndex } = useRowIndex()
   const { itemIndex } = useItemIndex()
   const isCopyable = useSelectorTyped(state => state.copy.isCopyable)
   const disabled = !isCopyable
