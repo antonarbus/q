@@ -7,17 +7,18 @@ import type { BoqColumnKey } from 'client/shared/types'
 import { Froala } from 'client/shared/ui/froala'
 import type FroalaEditor from 'froala-editor'
 import { useRef } from 'react'
+import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
 
 type Props = {
-  itemIndex: number
   rowIndex: number
 }
 
 const boqColumnKey: BoqColumnKey = 'qty'
 
-export const QtyCell = ({ itemIndex, rowIndex }: Props): JSX.Element => {
+export const QtyCell = ({ rowIndex }: Props): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
+  const { itemIndex } = useItemIndex()
   const qtyColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
   const isQtyColWidthSetManually = qtyColWidth !== undefined
   const width = isQtyColWidthSetManually ? qtyColWidth : 'auto'
@@ -35,7 +36,6 @@ export const QtyCell = ({ itemIndex, rowIndex }: Props): JSX.Element => {
       }}
     >
       <Froala
-        itemIndex={itemIndex}
         rowIndex={rowIndex}
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}

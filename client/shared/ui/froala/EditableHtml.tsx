@@ -6,7 +6,6 @@ import { useStartFroala } from './useStartFroala'
 import { usePutCaretAtTheEnd } from './usePutCaretAtTheEnd'
 
 type Props = {
-  itemIndex: number
   htmlGetter: () => string
   froalaElementRef: RefObject<HTMLDivElement>
   editorRef: MutableRefObject<FroalaEditor | null>
@@ -22,7 +21,6 @@ export const EditableHtml = ({
   additionalStyle,
   editorRef,
   froalaElementRef,
-  itemIndex,
   htmlGetter,
   placeholder,
   rowIndex,
@@ -33,7 +31,6 @@ export const EditableHtml = ({
   useStartFroala({
     editorRef,
     froalaElementRef,
-    itemIndex,
     htmlGetter,
     placeholder,
     rowIndex,
@@ -41,7 +38,7 @@ export const EditableHtml = ({
     onFocus,
   })
 
-  usePutCaretAtTheEnd({ itemIndex, editorRef, froalaElementRef })
+  usePutCaretAtTheEnd({ editorRef, froalaElementRef })
 
   return (
     <Box

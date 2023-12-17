@@ -9,14 +9,15 @@ import type { MouseEvent } from 'react'
 import type { BoqRow } from 'client/shared/types'
 import { className } from 'client/shared/className'
 import { appSlice } from 'client/entities/app'
+import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
 
 type Props = {
-  itemIndex: number
   rowIndex: number
   boqRow: BoqRow
 }
 
-export const CopyBoqRowIcon = ({ itemIndex, rowIndex }: Props): JSX.Element => {
+export const CopyBoqRowIcon = ({ rowIndex, boqRow }: Props): JSX.Element => {
+  const { itemIndex } = useItemIndex()
   const isCopyable = useSelectorTyped(state => state.copy.isCopyable)
   const disabled = !isCopyable
 

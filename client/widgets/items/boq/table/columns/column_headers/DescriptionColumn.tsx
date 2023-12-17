@@ -4,27 +4,23 @@ import { type ReactNode, useRef } from 'react'
 import { boqColumnNameHtmlGetter } from 'client/entities/items'
 import { changeBoqColumn } from 'client/features/change_cell'
 import type FroalaEditor from 'froala-editor'
-
-type Props = {
-  itemIndex: number
-}
+import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
 
 const boqColumnKey = 'description'
 
-export const DescriptionColumn = ({ itemIndex }: Props): ReactNode => {
+export const DescriptionColumn = (): ReactNode => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
+  const { itemIndex } = useItemIndex()
 
   return (
     <ResizableColumn
       boqColumnKey={boqColumnKey}
       className={`th ${boqColumnKey} resizable`}
-      itemIndex={itemIndex}
       minWidth={200}
       flexGrow={1}
     >
       <Froala
-        itemIndex={itemIndex}
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
         placeholder='Description...'

@@ -1,18 +1,16 @@
 import type { MutableRefObject, RefObject } from 'react'
 import { useEffect } from 'react'
 import type FroalaEditor from 'froala-editor'
+import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
 
 type Props = {
-  itemIndex: number
   froalaElementRef: RefObject<HTMLDivElement>
   editorRef: MutableRefObject<FroalaEditor | null>
 }
 
-export const usePutCaretAtTheEnd = ({
-  itemIndex,
-  editorRef,
-  froalaElementRef,
-}: Props): void => {
+export const usePutCaretAtTheEnd = ({ editorRef, froalaElementRef }: Props): void => {
+  const { itemIndex } = useItemIndex()
+
   useEffect(() => {
     const focusOnTextIfCellOrPaddingAreClicked = (e: MouseEvent): void => {
       if (!editorRef.current) return

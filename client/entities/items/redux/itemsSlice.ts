@@ -6,7 +6,6 @@ import { deleteItemReducer } from '../reducers/deleteItemReducer'
 import { getDefaultOrLocalItems } from '../model/getDefaultOrLocalItems'
 import { insertPasteBoqRowReducer } from '../reducers/insertPasteBoqRowReducer'
 import { insertPasteItemReducer } from '../reducers/insertPasteItemReducer'
-import { makeItemBitWiderReducer } from '../reducers/makeItemBitWiderReducer'
 import { pasteItemReducer } from '../reducers/pasteItemReducer'
 import { removeItemsMsgReducer } from '../reducers/removeItemMsgReducer'
 import { removePasteItemReducer } from '../reducers/removePasteItemReducer'
@@ -36,7 +35,6 @@ export const itemsSlice = createSlice({
     deleteItem: deleteItemReducer,
     insertPasteBoqRow: insertPasteBoqRowReducer,
     insertPasteItem: insertPasteItemReducer,
-    makeItemBitWider: makeItemBitWiderReducer,
     pasteItem: pasteItemReducer, // ? what is the difference between insertPasteItem
     removeItemsMsg: removeItemsMsgReducer,
     removePasteItem: removePasteItemReducer,

@@ -5,9 +5,9 @@ import { useIsItemSortDisabled } from '../hooks/useIsItemSortDisabled'
 import { ItemSortAndAnimate } from './item_layout'
 import { ItemMsg } from './item_msg'
 import { PasteItemTextOverlay } from './paste_item_overlay_text'
+import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
 
 type Props = {
-  itemIndex: number
   children: ReactNode
   disableResize?: boolean
   onItemResizeStop?: OnItemResizeStop
@@ -18,7 +18,6 @@ type Props = {
 }
 
 export const Item = ({
-  itemIndex,
   children,
   disableResize,
   onItemResizeStop,
@@ -27,6 +26,7 @@ export const Item = ({
   autoWidth,
   itemActions,
 }: Props): JSX.Element => {
+  const { itemIndex } = useItemIndex()
   const item = getState().items[itemIndex]
   const isItemSortDisabled = useIsItemSortDisabled()
 
@@ -34,7 +34,6 @@ export const Item = ({
     <ItemSortAndAnimate
       index={itemIndex} // "index" is internal prop consumed by SortableElement HOC
       disabled={isItemSortDisabled} // internal prop consumed by SortableElement HOC
-      itemIndex={itemIndex}
       disableResize={disableResize}
       autoWidth={autoWidth}
       itemHeight={item?.height ?? 0}
@@ -44,8 +43,8 @@ export const Item = ({
       onItemResizeStart={onItemResizeStart}
       itemActionElements={itemActions}
     >
-      <ItemMsg itemIndex={itemIndex} />
-      <PasteItemTextOverlay itemIndex={itemIndex}>
+      <ItemMsg />
+      <PasteItemTextOverlay >
         {children}
       </PasteItemTextOverlay>
     </ItemSortAndAnimate>

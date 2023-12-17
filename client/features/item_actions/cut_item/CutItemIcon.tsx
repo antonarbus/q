@@ -9,12 +9,10 @@ import { copySlice } from 'client/entities/copy'
 import type { MouseEvent } from 'react'
 import { className } from 'client/shared/className'
 import { appSlice } from 'client/entities/app'
+import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
 
-type Props = {
-  itemIndex: number
-}
-
-export const CutItemIcon = ({ itemIndex }: Props): JSX.Element => {
+export const CutItemIcon = (): JSX.Element => {
+  const { itemIndex } = useItemIndex()
   const isItemAlone = useSelectorTyped(selectIsLastItem)
   const isCuttable = useSelectorTyped(state => state.copy.isCuttable)
   const disabled = isItemAlone || !isCuttable

@@ -9,7 +9,6 @@ import { useViewPortObserver } from './useViewPortObserver'
 import { StaticHtmlBackgroundToFixBlinkIssue } from './StaticHtmlBackgroundToFixBlinkIssue'
 
 type Props = {
-  itemIndex: number
   htmlGetter: () => string
   froalaElementRef: RefObject<HTMLDivElement>
   editorRef: MutableRefObject<FroalaEditor | null>
@@ -24,7 +23,6 @@ export const Froala = ({
   additionalStyle,
   editorRef,
   froalaElementRef,
-  itemIndex,
   rowIndex,
   htmlGetter,
   placeholder,
@@ -64,7 +62,6 @@ export const Froala = ({
             additionalStyle={additionalStyle}
             editorRef={editorRef}
             froalaElementRef={froalaElementRef}
-            itemIndex={itemIndex}
             rowIndex={rowIndex}
             htmlGetter={htmlGetter}
             onContentChange={onContentChange}

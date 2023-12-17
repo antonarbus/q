@@ -4,27 +4,23 @@ import type FroalaEditor from 'froala-editor'
 import { changeBoqColumn } from 'client/features/change_cell'
 import { boqColumnNameHtmlGetter } from 'client/entities/items'
 import { Froala } from 'client/shared/ui/froala'
-
-type Props = {
-  itemIndex: number
-}
+import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
 
 const boqColumnKey = 'number'
 
-export const NumberColumn = ({ itemIndex }: Props): JSX.Element => {
+export const NumberColumn = (): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
+  const { itemIndex } = useItemIndex()
 
   return (
     <ResizableColumn
       boqColumnKey={boqColumnKey}
       className={`th ${boqColumnKey} resizable`}
-      itemIndex={itemIndex}
       minWidth={30}
       flexGrow={0}
     >
       <Froala
-        itemIndex={itemIndex}
         editorRef={editorRef}
         froalaElementRef={froalaElementRef}
         placeholder=''

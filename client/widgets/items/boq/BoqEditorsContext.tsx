@@ -1,4 +1,4 @@
-import { createContext, useContext, type ReactNode, useRef, type MutableRefObject } from 'react'
+import { createContext, useContext, type ReactNode } from 'react'
 import type FroalaEditor from 'froala-editor'
 
 type Props = {
@@ -11,7 +11,7 @@ type BoqItemEditorsRef = {
   }
 }
 
-const BoqEditorsContext = createContext<BoqItemEditorsRef | undefined>(undefined)
+const BoqEditorsContext = createContext<BoqItemEditorsRef | null>(null)
 
 export const BoqEditorsContextProvider = ({ children }: Props): JSX.Element => {
   const boqItemEditorsRef: BoqItemEditorsRef = {

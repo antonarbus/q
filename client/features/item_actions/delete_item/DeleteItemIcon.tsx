@@ -8,13 +8,11 @@ import { saveItemsLocally } from 'client/shared/lib'
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 import { copySlice } from 'client/entities/copy'
 import { appSlice } from 'client/entities/app'
+import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
 
-type Props = {
-  itemIndex: number
-}
-
-export const DeleteItemIcon = ({ itemIndex }: Props): EmotionJSX.Element => {
+export const DeleteItemIcon = (): EmotionJSX.Element => {
   const ref = useRef<HTMLSpanElement>(null)
+  const { itemIndex } = useItemIndex()
 
   const isItemAlone = useSelectorTyped(selectIsLastItem)
   const isDeletable = useSelectorTyped(state => state.copy.isDeletable)

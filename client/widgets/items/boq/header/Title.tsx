@@ -3,20 +3,17 @@ import { changeBoqHeader } from 'client/features/change_cell'
 import { Froala } from 'client/shared/ui/froala'
 import { useRef } from 'react'
 import type FroalaEditor from 'froala-editor'
-
-type Props = {
-  itemIndex: number
-}
+import { useItemIndex } from '../../ItemIndexProvider'
 
 const boqHeaderKey = 'title'
 
-export const Title = ({ itemIndex }: Props): JSX.Element => {
+export const Title = (): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
+  const { itemIndex } = useItemIndex()
 
   return (
     <Froala
-      itemIndex={itemIndex}
       editorRef={editorRef}
       froalaElementRef={froalaElementRef}
       placeholder='Title...'

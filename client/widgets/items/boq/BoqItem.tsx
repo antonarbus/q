@@ -5,23 +5,18 @@ import { Item } from 'client/entities/items'
 import { ItemActions } from 'client/features/item_actions'
 import { BoqEditorsContextProvider } from './BoqEditorsContext'
 
-type Props = {
-  itemIndex: number
-}
-
-export const BoqItem = ({ itemIndex }: Props): JSX.Element => {
+export const BoqItem = (): JSX.Element => {
   return (
     <BoqEditorsContextProvider>
       <Item
-        itemIndex={itemIndex}
         autoWidth={true}
         onItemResizeStart={onBoqItemResizeStart}
         onItemResize={onBoqItemResize}
         onItemResizeStop={onBoqItemResizeStop}
-        itemActions={<ItemActions itemIndex={itemIndex} />}
+        itemActions={<ItemActions />}
       >
-        <Header itemIndex={itemIndex} />
-        <BoqTable itemIndex={itemIndex} />
+        <Header />
+        <BoqTable />
       </Item>
     </BoqEditorsContextProvider>
   )
