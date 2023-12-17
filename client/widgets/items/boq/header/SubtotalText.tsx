@@ -3,14 +3,14 @@ import { changeBoqHeader } from 'client/features/change_cell'
 import { Froala } from 'client/shared/ui/froala'
 import { useRef } from 'react'
 import type FroalaEditor from 'froala-editor'
-import { useItemIndex } from '../../ItemIndexProvider'
+import { useItem } from '../../ItemProvider'
 
 const boqHeaderKey = 'subtotal'
 
 export const SubtotalText = (): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
-  const { itemIndex } = useItemIndex()
+  const { itemIndex } = useItem()
 
   return (
     <Froala

@@ -7,7 +7,7 @@ import type { BoqColumnKey } from 'client/shared/types'
 import { Froala } from 'client/shared/ui/froala'
 import type FroalaEditor from 'froala-editor'
 import { useRef } from 'react'
-import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
+import { useItem } from 'client/widgets/items/ItemProvider'
 import { useRow } from '../../RowProvider'
 
 const boqColumnKey: BoqColumnKey = 'number'
@@ -15,7 +15,7 @@ const boqColumnKey: BoqColumnKey = 'number'
 export const NumberCell = (): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
-  const { itemIndex } = useItemIndex()
+  const { itemIndex } = useItem()
   const { rowIndex } = useRow()
   const numberColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
   const isNumberColWidthSetManually = numberColWidth !== undefined

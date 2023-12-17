@@ -3,7 +3,7 @@ import { Resizable } from 're-resizable'
 import { className } from 'client/shared/className'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from 'client/shared/types'
-import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
+import { useItem } from 'client/widgets/items/ItemProvider'
 
 type Props = {
   children: ReactNode
@@ -22,7 +22,7 @@ export const ResizablePaper = ({
   onItemResizeStart,
   onItemResize,
 }: Props): JSX.Element => {
-  const { itemIndex } = useItemIndex()
+  const { itemIndex } = useItem()
   const width = useSelectorTyped(state => state.items[itemIndex]?.width)
   const isWidthSetManually = width !== undefined
   const isAutoWidth = !isWidthSetManually || disableResize || autoWidth

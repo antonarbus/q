@@ -4,7 +4,7 @@ import { selectColumnWidth } from 'client/entities/items'
 import { Resizable } from 're-resizable'
 import { useSelectorTyped } from 'client/shared/hooks'
 import { onColumnResize, onColumnResizeStart, onColumnResizeStop } from 'client/features/resize_column'
-import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
+import { useItem } from 'client/widgets/items/ItemProvider'
 
 type Props = {
   children: ReactNode
@@ -21,7 +21,7 @@ export const ResizableColumn = ({
   boqColumnKey,
   minWidth,
 }: Props): JSX.Element => {
-  const { itemIndex } = useItemIndex()
+  const { itemIndex } = useItem()
   const colWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
   const isColWidthSetManually = colWidth !== undefined
 

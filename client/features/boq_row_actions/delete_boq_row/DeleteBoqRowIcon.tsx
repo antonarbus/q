@@ -7,12 +7,12 @@ import { gsap } from 'gsap'
 import { useRef } from 'react'
 import { saveItemsLocally } from 'client/shared/lib'
 import { appSlice } from 'client/entities/app'
-import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
+import { useItem } from 'client/widgets/items/ItemProvider'
 import { useRow } from 'client/widgets/items/boq/table/rows/RowProvider'
 
 export const DeleteBoqRowIcon = (): JSX.Element => {
   const ref = useRef<HTMLSpanElement>(null)
-  const { itemIndex } = useItemIndex()
+  const { itemIndex } = useItem()
   const { rowIndex } = useRow()
 
   const isLastBoqRow = useSelectorTyped(selectIsLastBoqRow({ itemIndex }))

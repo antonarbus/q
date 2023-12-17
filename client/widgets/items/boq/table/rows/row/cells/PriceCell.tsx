@@ -8,7 +8,7 @@ import { Froala } from 'client/shared/ui/froala'
 import type FroalaEditor from 'froala-editor'
 import { useRef } from 'react'
 import { useBoqItemEditors } from 'client/widgets/items/boq/BoqEditorsContext'
-import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
+import { useItem } from 'client/widgets/items/ItemProvider'
 import { useRow } from '../../RowProvider'
 
 const boqColumnKey: BoqColumnKey = 'price'
@@ -16,7 +16,7 @@ const boqColumnKey: BoqColumnKey = 'price'
 export const PriceCell = (): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
-  const { itemIndex } = useItemIndex()
+  const { itemIndex } = useItem()
   const { rowIndex } = useRow()
   const priceColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
   const isPriceColWidthSetManually = priceColWidth !== undefined

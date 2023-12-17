@@ -6,7 +6,7 @@ import { AnimatePresence } from 'framer-motion'
 import { DraggableItemsContainer } from 'client/entities/items/ui/DraggableItemsContainer'
 import { BoqItem } from './boq/BoqItem'
 import { itemsShapeEqualityFn } from 'client/entities/items'
-import { ItemIndexProvider } from './ItemIndexProvider'
+import { ItemProvider } from './ItemProvider'
 
 export const Items = (): JSX.Element => {
   const items = useSelectorTyped(state => state.items, itemsShapeEqualityFn)
@@ -27,17 +27,17 @@ export const Items = (): JSX.Element => {
 
           if (item.type === 'text') {
             return (
-              <ItemIndexProvider key={key} itemIndex={itemIndex} >
+              <ItemProvider key={key} itemIndex={itemIndex} >
                 <TextItem />
-              </ItemIndexProvider>
+              </ItemProvider>
             )
           }
 
           if (item.type === 'boq') {
             return (
-              <ItemIndexProvider key={key} itemIndex={itemIndex} >
+              <ItemProvider key={key} itemIndex={itemIndex} >
                 <BoqItem />
-              </ItemIndexProvider>
+              </ItemProvider>
             )
           }
 

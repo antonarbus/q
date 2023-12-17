@@ -5,7 +5,7 @@ import { useIsItemSortDisabled } from '../hooks/useIsItemSortDisabled'
 import { ItemSortAndAnimate } from './item_layout'
 import { ItemMsg } from './item_msg'
 import { PasteItemTextOverlay } from './paste_item_overlay_text'
-import { useItemIndex } from 'client/widgets/items/ItemIndexProvider'
+import { useItem } from 'client/widgets/items/ItemProvider'
 
 type Props = {
   children: ReactNode
@@ -26,7 +26,7 @@ export const Item = ({
   autoWidth,
   itemActions,
 }: Props): JSX.Element => {
-  const { itemIndex } = useItemIndex()
+  const { itemIndex } = useItem()
   const item = getState().items[itemIndex]
   const isItemSortDisabled = useIsItemSortDisabled()
 
