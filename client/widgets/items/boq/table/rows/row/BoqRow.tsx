@@ -6,20 +6,17 @@ import { ItemCell } from './cells/ItemCell'
 import { QtyCell } from './cells/QtyCell'
 import { PriceCell } from './cells/PriceCell'
 import { BoqRowLayout } from './BoqRowLayout'
-import { type BoqEditorsRef } from 'client/entities/items'
 
 type Props = {
   itemIndex: number
   rowIndex: number
   boqRow: BoqRowType
-  boqEditorsRef: BoqEditorsRef
 }
 
 export const BoqRow = ({
   boqRow,
   itemIndex,
   rowIndex,
-  boqEditorsRef,
 }: Props): JSX.Element => {
   return (
     <BoqRowLayout id={boqRow.id}>
@@ -28,11 +25,7 @@ export const BoqRow = ({
       <DescriptionCell itemIndex={itemIndex} rowIndex={rowIndex} />
       <ItemCell itemIndex={itemIndex} rowIndex={rowIndex} />
       <QtyCell itemIndex={itemIndex} rowIndex={rowIndex} />
-      <PriceCell
-        itemIndex={itemIndex}
-        rowIndex={rowIndex}
-        boqEditorsRef={boqEditorsRef}
-      />
+      <PriceCell itemIndex={itemIndex} rowIndex={rowIndex} />
     </BoqRowLayout>
   )
 }

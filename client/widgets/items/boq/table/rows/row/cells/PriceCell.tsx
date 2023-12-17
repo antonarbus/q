@@ -1,17 +1,17 @@
 import { Box } from '@mui/material'
 import { dispatch, getState, theme } from 'client/shared/clients'
-import { type BoqEditorsRef, boqCellHtmlGetter, itemsSlice, selectColumnWidth } from 'client/entities/items'
+import { boqCellHtmlGetter, itemsSlice, selectColumnWidth } from 'client/entities/items'
 import { changeBoqCell } from 'client/features/change_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey, BoqItem } from 'client/shared/types'
 import { Froala } from 'client/shared/ui/froala'
 import type FroalaEditor from 'froala-editor'
 import { useRef } from 'react'
+import { useBoqItemEditors } from 'client/widgets/items/boq/BoqEditorsContext'
 
 type Props = {
   itemIndex: number
   rowIndex: number
-  boqEditorsRef: BoqEditorsRef
 }
 
 const boqColumnKey: BoqColumnKey = 'price'
@@ -19,13 +19,14 @@ const boqColumnKey: BoqColumnKey = 'price'
 export const PriceCell = ({
   itemIndex,
   rowIndex,
-  boqEditorsRef,
 }: Props): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
   const priceColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
   const isPriceColWidthSetManually = priceColWidth !== undefined
   const width = isPriceColWidthSetManually ? priceColWidth : 'auto'
+
+  const boqItemEditors = useBoqItemEditors()
 
   return (
     <Box
@@ -54,10 +55,9 @@ export const PriceCell = ({
 
           // todo: make it better
           const updatedPrice = (getState().items[itemIndex] as BoqItem).boq.header.price.html
-          console.log('🚀  updatedPrice:', updatedPrice)
 
-          if (boqEditorsRef?.current.subTotalEditorRef.current) {
-            boqEditorsRef.current.subTotalEditorRef.current.html.set(updatedPrice)
+          if (boqItemEditors?.current.subTotalEditorRef.current) {
+            boqItemEditors.current.subTotalEditorRef.current.html.set(updatedPrice)
           }
         }}
         additionalStyle={{

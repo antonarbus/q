@@ -27,4 +27,3 @@ export { boqCellHtmlGetter } from './html_getters/boqCellHtmlGetter'
 export { useIsItemSortDisabled } from './hooks/useIsItemSortDisabled'
 
 // types
-export type { BoqEditorsRef } from './types/BoqEditorsRef'
