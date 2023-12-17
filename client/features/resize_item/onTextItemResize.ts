@@ -2,9 +2,9 @@ import { appSlice } from 'client/entities/app'
 import { itemsSlice } from 'client/entities/items'
 import { dispatch, getState } from 'client/shared/clients'
 import { saveItemsLocally } from 'client/shared/lib'
-import type { OnItemResizeStop } from 'client/shared/types'
+import type { OnItemResizeStart, OnItemResizeStop } from 'client/shared/types'
 
-export const onTextItemResizeStart: OnItemResizeStop = ({ itemIndex, e, direction, elementRef, delta }) => {
+export const onTextItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, elementRef }) => {
   dispatch(appSlice.actions.disableFroala())
 }
 

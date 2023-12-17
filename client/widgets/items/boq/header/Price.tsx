@@ -3,7 +3,7 @@ import { changeBoqHeader } from 'client/features/change_cell'
 import { Froala } from 'client/shared/ui/froala'
 import { useRef } from 'react'
 import type FroalaEditor from 'froala-editor'
-import { useBoqItemEditors } from '../BoqEditorsContext'
+import { useBoqItem } from '../BoqItemProvider'
 import { useItem } from '../../ItemProvider'
 
 const boqHeaderKey = 'price'
@@ -11,7 +11,7 @@ const boqHeaderKey = 'price'
 export const Price = (): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
 
-  const boqItemEditors = useBoqItemEditors()
+  const boqItemEditors = useBoqItem()
   const editorRef = useRef<FroalaEditor | null>(null)
   boqItemEditors.subTotalEditorRef = editorRef
   const { itemIndex } = useItem()

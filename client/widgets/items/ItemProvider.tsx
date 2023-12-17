@@ -1,17 +1,19 @@
 import { createContext, useContext, type ReactNode } from 'react'
 
-type Props = {
-  children: ReactNode
-  itemIndex: number
-}
-
 type Context = {
   itemIndex: number
 }
 
+type Props = Context & {
+  children: ReactNode
+}
+
 const ItemContext = createContext<Context | null>(null)
 
-export const ItemProvider = ({ children, itemIndex }: Props): JSX.Element => {
+export const ItemProvider = ({
+  children,
+  itemIndex,
+}: Props): JSX.Element => {
   return (
     <ItemContext.Provider value={{ itemIndex }}>
       {children}
@@ -23,7 +25,7 @@ export const useItem = (): Context => {
   const context = useContext(ItemContext)
 
   if (!context) {
-    throw new Error('useItemIdex must be used within a ItemIdexProvider')
+    throw new Error('useItem must be used within a ItemProvider')
   }
 
   return context
