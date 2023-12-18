@@ -13,7 +13,7 @@ type Props = {
 
 export const onColumnResizeStart = ({ headerColumnElement, itemIndex, boqColumnKey }: Props): void => {
   const width = headerColumnElement.clientWidth
-  dispatch(appSlice.actions.disableFroala())
+  dispatch(itemsSlice.actions.disableFroala({ itemIndex }))
   dispatch(itemsSlice.actions.saveColWidth({ itemIndex, width, boqColumnKey }))
 }
 
@@ -27,7 +27,7 @@ export const onColumnResizeStop = ({ headerColumnElement, itemIndex, boqColumnKe
   dispatch(itemsSlice.actions.saveColWidth({ itemIndex, width: columnWidth, boqColumnKey }))
   const itemWidth = headerColumnElement.closest(`.${className.paper}`)?.clientWidth
   dispatch(itemsSlice.actions.saveItemWidth({ itemIndex, width: itemWidth ?? 0 }))
-  dispatch(appSlice.actions.enableFroala())
+  dispatch(itemsSlice.actions.enableFroala({ itemIndex }))
   saveItemsLocally()
   dispatch(itemsSlice.actions.tellItemSavedLocally({ itemIndex }))
 }

@@ -7,6 +7,7 @@ import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
 import { EditableHtml } from './EditableHtml'
 import { useViewPortObserver } from './useViewPortObserver'
 import { StaticHtmlBackgroundToFixBlinkIssue } from './StaticHtmlBackgroundToFixBlinkIssue'
+import { useItem } from 'client/widgets/items/ItemProvider'
 
 type Props = {
   htmlGetter: () => string
@@ -27,11 +28,13 @@ export const Froala = ({
   onContentChange,
   onFocus,
 }: Props): JSX.Element => {
-  const isFroala = useSelectorTyped(state => state.app.isFroala)
+  const isAppFroala = useSelectorTyped(state => state.app.isFroala)
+  const { itemIndex } = useItem()
+  const isItemFroala = useSelectorTyped(state => state.items[itemIndex]?.isFroala)
   const { froalaHeightRef } = useFixedHeightForAnimation({ froalaElementRef })
   const { observerRef, isInsideViewPort } = useViewPortObserver()
 
-  const showEditableHtml = isFroala && isInsideViewPort
+  const showEditableHtml = isAppFroala && isInsideViewPort && isItemFroala
 
   return (
     <div
