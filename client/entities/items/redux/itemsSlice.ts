@@ -22,6 +22,8 @@ import { tellItemSavedLocallyReducer } from '../reducers/tellItemSavedLocallyRed
 import { saveBoqColumnNameTextReducer } from '../reducers/saveBoqColumnNameTextReducer'
 import { saveBoqCellReducer } from '../reducers/saveBoqCellReducer'
 import { updateTotalPriceReducer } from '../reducers/updateTotalPriceReducer'
+import { disableFroalaReducer } from '../reducers/disableFroalaReducer'
+import { enableFroalaReducer } from '../reducers/enableFroalaReducer'
 
 export type ItemsState = Item[]
 
@@ -52,5 +54,7 @@ export const itemsSlice = createSlice({
     saveItemWidth: saveItemWidthReducer,
     tellItemSavedLocally: tellItemSavedLocallyReducer,
     updateTotalPrice: updateTotalPriceReducer,
+    disableFroala: disableFroalaReducer,
+    enableFroala: enableFroalaReducer,
   },
 })

@@ -3,6 +3,7 @@ type Common = {
   width: number
   height: number
   msg: string
+  isFroala: boolean
 }
 
 export type BoqRow = {

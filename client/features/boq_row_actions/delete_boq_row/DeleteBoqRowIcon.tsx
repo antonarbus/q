@@ -6,7 +6,6 @@ import { itemsSlice, selectIsLastBoqRow } from 'client/entities/items'
 import { gsap } from 'gsap'
 import { useRef } from 'react'
 import { saveItemsLocally } from 'client/shared/lib'
-import { appSlice } from 'client/entities/app'
 import { useItem } from 'client/widgets/items/ItemProvider'
 import { useRow } from 'client/widgets/items/boq/table/rows/RowProvider'
 
@@ -31,7 +30,7 @@ export const DeleteBoqRowIcon = (): JSX.Element => {
 
         if (disabled) return
 
-        dispatch(appSlice.actions.disableFroala())
+        dispatch(itemsSlice.actions.disableFroala({ itemIndex }))
         dispatch(itemsSlice.actions.deleteBoqRow({ itemIndex, rowIndex }))
 
         dispatch(copySlice.actions.forbidToPaste())
@@ -50,7 +49,7 @@ export const DeleteBoqRowIcon = (): JSX.Element => {
 
         if (!isCopyContainer) {
           setTimeout(() => {
-            dispatch(appSlice.actions.enableFroala())
+            dispatch(itemsSlice.actions.enableFroala({ itemIndex }))
           }, 1000 * theme.item.animationDuration)
         }
 

@@ -1,5 +1,4 @@
 import { arrayMoveImmutable } from 'array-move'
-import { appSlice } from 'client/entities/app'
 import { itemsSlice } from 'client/entities/items'
 import { dispatch, getState } from 'client/shared/clients'
 import { saveItemsLocally } from 'client/shared/lib'
@@ -10,13 +9,14 @@ type Props = {
   itemIndex: number
 }
 
-const onBoqRowDragStart = (): void => {
+const onBoqRowDragStart = ({ itemIndex }: Pick<Props, 'itemIndex'>): void => {
   document.body.style.cursor = 'move'
-  dispatch(appSlice.actions.disableFroala())
+  dispatch(itemsSlice.actions.disableFroala({ itemIndex }))
 }
 
 const onBoqRowDragEnd = ({ oldIndex, newIndex, itemIndex }: Props): void => {
-  dispatch(appSlice.actions.enableFroala())
+  dispatch(itemsSlice.actions.enableFroala({ itemIndex }))
+
   document.body.style.removeProperty('cursor')
 
   if (oldIndex !== newIndex) {

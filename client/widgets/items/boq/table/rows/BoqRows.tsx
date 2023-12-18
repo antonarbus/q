@@ -21,7 +21,7 @@ export const BoqRows = (): JSX.Element => {
       useDragHandle
       useWindowAsScrollContainer
       onSortStart={() => {
-        onBoqRowDrag.start()
+        onBoqRowDrag.start({ itemIndex })
       }}
       onSortEnd={({ oldIndex, newIndex }) => {
         onBoqRowDrag.end({ oldIndex, newIndex, itemIndex })

@@ -8,6 +8,7 @@ export const defaultItems: Item[] = [
     width: 800,
     height: 0,
     msg: '',
+    isFroala: true,
     text: {
       html: '<div>editable text</div>',
       value: null,
@@ -19,6 +20,7 @@ export const defaultItems: Item[] = [
     width: 700,
     height: 0,
     msg: '',
+    isFroala: true,
     boq: {
       header: {
         title: {
@@ -144,6 +146,7 @@ export const defaultItems: Item[] = [
     width: 600,
     height: 0,
     msg: '',
+    isFroala: true,
     text: {
       html: '<div>editable text</div>',
       value: null,
@@ -155,6 +158,7 @@ export const defaultItems: Item[] = [
     width: 500,
     height: 0,
     msg: '',
+    isFroala: true,
     text: {
       html: '<div>editable text</div>',
       value: null,
