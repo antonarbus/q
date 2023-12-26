@@ -1,1 +1,1 @@
-export { BoqRowActions } from './BoqRowActions'
+export { BoqRowActions } from './ui/BoqRowActions'

@@ -12,9 +12,9 @@ export const useExitCopyOnEsc = (): void => {
     dispatch(appSlice.actions.enableFroala())
   }
 
-  type FuncReturnType = () => void
+  type Res = () => void
 
-  const listenForEsc = (): FuncReturnType => {
+  const listenForEsc = (): Res => {
     window.addEventListener('keydown', closeOnEsc)
     return (): void => {
       window.removeEventListener('keydown', closeOnEsc)
