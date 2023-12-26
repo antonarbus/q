@@ -10,6 +10,7 @@ export const updateBoqCellReducer = (state: ItemsState, action: PayloadAction<{
   boqColumnKey: BoqColumnKey
 }>): void => {
   const { itemIndex, rowIndex, html, value, boqColumnKey } = action.payload
+
   const item = state[itemIndex]
   if (!item) return
   if (item.type !== 'boq') return
@@ -18,8 +19,5 @@ export const updateBoqCellReducer = (state: ItemsState, action: PayloadAction<{
   if (row === undefined) return
 
   row[boqColumnKey].html = html
-
-  if (row[boqColumnKey]?.value) {
-    row[boqColumnKey].value = value
-  }
+  row[boqColumnKey].value = value
 }

@@ -15,18 +15,20 @@ export const updateSubTotalPrice = ({ itemIndex, subTotalEditor }: Props): void 
   const item = getState().items[itemIndex]
   if (item?.type !== 'boq') return
 
-  const totalPrice: number = item.boq.rows.reduce((accumulator: number, boqRow: BoqRow) => {
+  const boqRows = item.boq.rows
+
+  const subTotalPrice: number = boqRows.reduce((accumulator: number, boqRow: BoqRow) => {
     const price = boqRow.price.value
     return accumulator + price
   }, 0)
 
   const htmlValue = getTextContentFromHtml({ html: item.boq.header.price.html })
-  const updatedHtml = item.boq.header.price.html.replace(String(htmlValue), String(totalPrice))
+  const updatedHtml = item.boq.header.price.html.replace(String(htmlValue), String(subTotalPrice))
 
   dispatch(itemsSlice.actions.updateTotalPrice({
     itemIndex,
     html: updatedHtml,
-    value: totalPrice,
+    value: subTotalPrice,
   }))
 
   subTotalEditor.html.set(updatedHtml)
