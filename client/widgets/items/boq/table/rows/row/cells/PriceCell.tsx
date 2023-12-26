@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { dispatch, getState, theme } from 'client/shared/clients'
 import { boqCellHtmlGetter, itemsSlice, selectColumnWidth } from 'client/entities/items'
-import { updateBoqCell } from 'client/features/change_cell'
+import { updateBoqCell, updateTotalPrice } from 'client/features/change_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey, BoqItem } from 'client/shared/types'
 import { Froala } from 'client/shared/ui/froala'
@@ -45,7 +45,7 @@ export const PriceCell = (): JSX.Element => {
           if (editorRef.current === null) return
           const html = editorRef.current.html.get()
           updateBoqCell({ itemIndex, rowIndex, boqColumnKey, html })
-          dispatch(itemsSlice.actions.updateTotalPrice({ itemIndex }))
+          updateTotalPrice({ itemIndex })
 
           // todo: make it better
           const updatedPrice = (getState().items[itemIndex] as BoqItem).boq.header.price.html
