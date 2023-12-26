@@ -4,9 +4,12 @@ type Props = {
 
 export const getNumberFromString = ({ string }: Props): number => {
   if (string === null) return 0
-  const numbersArray = string.match(/\d/g)
-  if (numbersArray === null) return 0
-  const numberString = numbersArray.join('')
-  const number = Number(numberString)
+
+  const stringWithNumbersOnly = string
+    .replace(/[^0-9,.]/g, '')
+    .replace(/,/g, '.')
+
+  const number = parseFloat(stringWithNumbersOnly)
+
   return number
 }
