@@ -1,5 +1,5 @@
 import { boqHeaderHtmlGetter } from 'client/entities/items'
-import { changeBoqHeader } from 'client/features/change_cell'
+import { updateBoqHeader } from 'client/features/update_cell'
 import { Froala } from 'client/shared/ui/froala'
 import { useRef } from 'react'
 import type FroalaEditor from 'froala-editor'
@@ -21,7 +21,7 @@ export const Title = (): JSX.Element => {
       onContentChange={() => {
         if (editorRef.current === null) return
         const html = editorRef.current.html.get()
-        changeBoqHeader({ itemIndex, html, boqHeaderKey })
+        updateBoqHeader({ itemIndex, html, boqHeaderKey })
       }}
       additionalStyle={{
         flexGrow: 1,

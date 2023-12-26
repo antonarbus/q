@@ -9,7 +9,7 @@ type Props = {
   boqColumnKey: BoqColumnKey
 }
 
-export const changeBoqColumn = ({ html, itemIndex, boqColumnKey }: Props): void => {
+export const updateBoqColumn = ({ html, itemIndex, boqColumnKey }: Props): void => {
   const item = getState().items[itemIndex]
   if (item?.type !== 'boq') return
   const prevHtml = item.boq.column[boqColumnKey].html
