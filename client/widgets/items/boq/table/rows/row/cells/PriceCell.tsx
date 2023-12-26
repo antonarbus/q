@@ -45,10 +45,8 @@ export const PriceCell = (): JSX.Element => {
           if (editorRef.current === null) return
           const html = editorRef.current.html.get()
           updateBoqCell({ itemIndex, rowIndex, boqColumnKey, html })
-          updateTotalPrice({
-            itemIndex,
-            subTotalEditor: boqItemEditor.subTotalEditorRef.current,
-          })
+          const subTotalEditor = boqItemEditor.subTotalEditorRef.current
+          updateTotalPrice({ itemIndex, subTotalEditor })
         }}
         additionalStyle={{
           textAlign: 'center',
