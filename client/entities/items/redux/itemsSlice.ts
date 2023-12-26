@@ -3,6 +3,8 @@ import { createSlice } from '@reduxjs/toolkit'
 import { defaultItems } from '../model/defaultItems'
 import { deleteBoqRowReducer } from '../reducers/deleteBoqRowReducer'
 import { deleteItemReducer } from '../reducers/deleteItemReducer'
+import { disableFroalaReducer } from '../reducers/disableFroalaReducer'
+import { enableFroalaReducer } from '../reducers/enableFroalaReducer'
 import { getDefaultOrLocalItems } from '../model/getDefaultOrLocalItems'
 import { insertPasteBoqRowReducer } from '../reducers/insertPasteBoqRowReducer'
 import { insertPasteItemReducer } from '../reducers/insertPasteItemReducer'
@@ -11,19 +13,17 @@ import { removeItemsMsgReducer } from '../reducers/removeItemMsgReducer'
 import { removePasteItemReducer } from '../reducers/removePasteItemReducer'
 import { reOrderBoqRowsReducer } from '../reducers/reOrderBoqRowsReducer'
 import { reOrderItemsReducer } from '../reducers/reOrderItemsReducer'
-import { saveBoqHeaderTextReducer } from '../reducers/saveBoqHeaderTextReducer'
-import { saveBoqRowHeightAndWidthReducer } from '../reducers/saveBoqRowHeightAndWidthReducer'
-import { saveColWidthReducer } from '../reducers/saveColWidthReducer'
-import { saveItemHeightReducer } from '../reducers/saveItemHeightReducer'
-import { saveItemHeightsReducer } from '../reducers/saveItemHeightsReducer'
-import { saveItemTextReducer } from '../reducers/saveItemTextReducer'
-import { saveItemWidthReducer } from '../reducers/saveItemWidthReducer'
 import { tellItemSavedLocallyReducer } from '../reducers/tellItemSavedLocallyReducer'
-import { saveBoqColumnNameTextReducer } from '../reducers/saveBoqColumnNameTextReducer'
-import { saveBoqCellReducer } from '../reducers/saveBoqCellReducer'
+import { updateBoqCellReducer } from '../reducers/updateBoqCellReducer'
+import { updateBoqColumnNameTextReducer } from '../reducers/updateBoqColumnNameTextReducer'
+import { updateBoqHeaderTextReducer } from '../reducers/updateBoqHeaderTextReducer'
+import { updateBoqRowHeightAndWidthReducer } from '../reducers/updateBoqRowHeightAndWidthReducer'
+import { updateColWidthReducer } from '../reducers/updateColWidthReducer'
+import { updateItemHeightReducer } from '../reducers/updateItemHeightReducer'
+import { updateItemHeightsReducer } from '../reducers/updateItemHeightsReducer'
+import { updateItemTextReducer } from '../reducers/updateItemTextReducer'
+import { updateItemWidthReducer } from '../reducers/updateItemWidthReducer'
 import { updateTotalPriceReducer } from '../reducers/updateTotalPriceReducer'
-import { disableFroalaReducer } from '../reducers/disableFroalaReducer'
-import { enableFroalaReducer } from '../reducers/enableFroalaReducer'
 
 export type ItemsState = Item[]
 
@@ -35,6 +35,8 @@ export const itemsSlice = createSlice({
   reducers: {
     deleteBoqRow: deleteBoqRowReducer,
     deleteItem: deleteItemReducer,
+    disableFroala: disableFroalaReducer,
+    enableFroala: enableFroalaReducer,
     insertPasteBoqRow: insertPasteBoqRowReducer,
     insertPasteItem: insertPasteItemReducer,
     pasteItem: pasteItemReducer, // ? what is the difference between insertPasteItem
@@ -43,18 +45,16 @@ export const itemsSlice = createSlice({
     reOrderBoqRows: reOrderBoqRowsReducer,
     reOrderItems: reOrderItemsReducer,
     resetItemsToDefault: () => defaultItems,
-    saveBoqHeaderText: saveBoqHeaderTextReducer,
-    saveBoqColumnNameText: saveBoqColumnNameTextReducer,
-    saveBoqCell: saveBoqCellReducer,
-    saveBoqRowHeightAndWidth: saveBoqRowHeightAndWidthReducer,
-    saveColWidth: saveColWidthReducer,
-    saveItemHeight: saveItemHeightReducer,
-    saveItemHeights: saveItemHeightsReducer, // todo: not used anywhere
-    saveItemText: saveItemTextReducer,
-    saveItemWidth: saveItemWidthReducer,
     tellItemSavedLocally: tellItemSavedLocallyReducer,
+    updateBoqCell: updateBoqCellReducer,
+    updateBoqColumnNameText: updateBoqColumnNameTextReducer,
+    updateBoqHeaderText: updateBoqHeaderTextReducer,
+    updateBoqRowHeightAndWidth: updateBoqRowHeightAndWidthReducer,
+    updateColWidth: updateColWidthReducer,
+    updateItemHeight: updateItemHeightReducer,
+    updateItemHeights: updateItemHeightsReducer, // todo: not used anywhere
+    updateItemText: updateItemTextReducer,
+    updateItemWidth: updateItemWidthReducer,
     updateTotalPrice: updateTotalPriceReducer,
-    disableFroala: disableFroalaReducer,
-    enableFroala: enableFroalaReducer,
   },
 })

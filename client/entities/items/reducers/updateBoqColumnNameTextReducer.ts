@@ -2,7 +2,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import type { ItemsState } from '../redux/itemsSlice'
 import type { BoqColumnKey } from 'client/shared/types'
 
-export const saveBoqColumnNameTextReducer = (state: ItemsState, action: PayloadAction<{
+export const updateBoqColumnNameTextReducer = (state: ItemsState, action: PayloadAction<{
   itemIndex: number
   html: string
   boqColumnKey: BoqColumnKey

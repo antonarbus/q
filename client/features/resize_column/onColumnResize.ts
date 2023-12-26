@@ -14,19 +14,19 @@ type Props = {
 export const onColumnResizeStart = ({ headerColumnElement, itemIndex, boqColumnKey }: Props): void => {
   const width = headerColumnElement.clientWidth
   dispatch(itemsSlice.actions.disableFroala({ itemIndex }))
-  dispatch(itemsSlice.actions.saveColWidth({ itemIndex, width, boqColumnKey }))
+  dispatch(itemsSlice.actions.updateColWidth({ itemIndex, width, boqColumnKey }))
 }
 
 export const onColumnResize = ({ headerColumnElement, itemIndex, boqColumnKey }: Props): void => {
   const width = headerColumnElement.clientWidth
-  dispatch(itemsSlice.actions.saveColWidth({ itemIndex, width, boqColumnKey }))
+  dispatch(itemsSlice.actions.updateColWidth({ itemIndex, width, boqColumnKey }))
 }
 
 export const onColumnResizeStop = ({ headerColumnElement, itemIndex, boqColumnKey }: Props): void => {
   const columnWidth = headerColumnElement.clientWidth
-  dispatch(itemsSlice.actions.saveColWidth({ itemIndex, width: columnWidth, boqColumnKey }))
+  dispatch(itemsSlice.actions.updateColWidth({ itemIndex, width: columnWidth, boqColumnKey }))
   const itemWidth = headerColumnElement.closest(`.${className.paper}`)?.clientWidth
-  dispatch(itemsSlice.actions.saveItemWidth({ itemIndex, width: itemWidth ?? 0 }))
+  dispatch(itemsSlice.actions.updateItemWidth({ itemIndex, width: itemWidth ?? 0 }))
   dispatch(itemsSlice.actions.enableFroala({ itemIndex }))
   saveItemsLocally()
   dispatch(itemsSlice.actions.tellItemSavedLocally({ itemIndex }))

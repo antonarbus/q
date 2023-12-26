@@ -2,7 +2,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import type { ItemsState } from '../redux/itemsSlice'
 import type { BoqHeaderKey } from 'client/shared/types'
 
-export const saveBoqHeaderTextReducer = (state: ItemsState, action: PayloadAction<{
+export const updateBoqHeaderTextReducer = (state: ItemsState, action: PayloadAction<{
   itemIndex: number
   html?: string
   rowIndex?: number

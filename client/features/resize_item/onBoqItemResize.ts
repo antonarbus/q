@@ -10,7 +10,7 @@ export const onBoqItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, ele
 
   dispatch(itemsSlice.actions.disableFroala({ itemIndex }))
 
-  dispatch(itemsSlice.actions.saveColWidth({
+  dispatch(itemsSlice.actions.updateColWidth({
     itemIndex,
     boqColumnKey: 'description',
     width: undefined,
@@ -18,7 +18,7 @@ export const onBoqItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, ele
 }
 
 export const onBoqItemResize: OnItemResize = ({ itemIndex, e, direction, elementRef: itemElement, delta }) => {
-  dispatch(itemsSlice.actions.saveItemWidth({ itemIndex, width: itemElement.clientWidth }))
+  dispatch(itemsSlice.actions.updateItemWidth({ itemIndex, width: itemElement.clientWidth }))
 }
 
 export const onBoqItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction, elementRef: itemElement, delta }) => {
@@ -27,7 +27,7 @@ export const onBoqItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction,
 
   const descriptionColWidth = descriptionHeaderElement.clientWidth
 
-  dispatch(itemsSlice.actions.saveColWidth({
+  dispatch(itemsSlice.actions.updateColWidth({
     itemIndex,
     boqColumnKey: 'description',
     width: descriptionColWidth,
@@ -43,7 +43,7 @@ export const onBoqItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction,
     const prevItemWidth = getState().items[itemIndex]?.width
 
     if (itemWidth !== prevItemWidth) {
-      dispatch(itemsSlice.actions.saveItemWidth({ itemIndex, width: itemWidth }))
+      dispatch(itemsSlice.actions.updateItemWidth({ itemIndex, width: itemWidth }))
     }
 
     saveItemsLocally({ msgAboveItemWithIndex: itemIndex })

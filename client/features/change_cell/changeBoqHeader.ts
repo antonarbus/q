@@ -16,6 +16,6 @@ export const changeBoqHeader = ({ html, itemIndex, boqHeaderKey }: Props): void 
   const prevHtml = item.boq.header[boqHeaderKey].html
   const didTextChange = prevHtml !== html
   if (!didTextChange) return
-  dispatch(itemsSlice.actions.saveBoqHeaderText({ itemIndex, html, boqHeaderKey }))
+  dispatch(itemsSlice.actions.updateBoqHeaderText({ itemIndex, html, boqHeaderKey }))
   saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
 }

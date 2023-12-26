@@ -2,7 +2,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import type { ItemsState } from '../redux/itemsSlice'
 import type { BoqColumnKey } from 'client/shared/types'
 
-export const saveBoqCellReducer = (state: ItemsState, action: PayloadAction<{
+export const updateBoqCellReducer = (state: ItemsState, action: PayloadAction<{
   itemIndex: number
   rowIndex: number
   html: string

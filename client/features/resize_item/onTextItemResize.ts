@@ -14,6 +14,6 @@ export const onTextItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction
 
   if (width === prevItemWidth) return
 
-  dispatch(itemsSlice.actions.saveItemWidth({ itemIndex, width }))
+  dispatch(itemsSlice.actions.updateItemWidth({ itemIndex, width }))
   saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
 }

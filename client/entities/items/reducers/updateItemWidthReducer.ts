@@ -1,12 +1,12 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { ItemsState } from '../redux/itemsSlice'
 
-export const saveItemHeightReducer = (state: ItemsState, action: PayloadAction<{
+export const updateItemWidthReducer = (state: ItemsState, action: PayloadAction<{
   itemIndex: number
-  height: number
+  width: number
 }>): void => {
-  const { itemIndex, height } = action.payload
+  const { itemIndex, width } = action.payload
   const item = state[itemIndex]
   if (!item) return
-  item.height = height
+  item.width = width
 }

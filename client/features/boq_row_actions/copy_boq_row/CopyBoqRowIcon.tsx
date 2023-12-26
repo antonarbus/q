@@ -37,7 +37,7 @@ export const CopyBoqRowIcon = (): JSX.Element => {
         const boqRowElement = clickedIconElement.closest(`.${className.boqRow}`)
         if (!boqRowElement) return
 
-        dispatch(itemsSlice.actions.saveBoqRowHeightAndWidth({
+        dispatch(itemsSlice.actions.updateBoqRowHeightAndWidth({
           itemIndex,
           rowIndex,
           height: boqRowElement.clientHeight,
