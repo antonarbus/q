@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { theme } from 'client/shared/clients'
 import { boqCellHtmlGetter, selectColumnWidth } from 'client/entities/items'
-import { changeBoqCell } from 'client/features/change_cell'
+import { updateBoqCell } from 'client/features/change_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
 import { Froala } from 'client/shared/ui/froala'
@@ -41,7 +41,7 @@ export const QtyCell = (): JSX.Element => {
         onContentChange={() => {
           if (editorRef.current === null) return
           const html = editorRef.current.html.get()
-          changeBoqCell({ itemIndex, rowIndex, boqColumnKey, html })
+          updateBoqCell({ itemIndex, rowIndex, boqColumnKey, html })
         }}
         additionalStyle={{
           textAlign: 'center',
