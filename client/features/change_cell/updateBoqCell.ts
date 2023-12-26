@@ -10,7 +10,7 @@ type Props = {
   boqColumnKey: BoqColumnKey
 }
 
-export const changeBoqCell = ({
+export const updateBoqCell = ({
   html,
   itemIndex,
   rowIndex,
