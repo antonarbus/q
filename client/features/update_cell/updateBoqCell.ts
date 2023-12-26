@@ -1,6 +1,6 @@
 import { itemsSlice } from 'client/entities/items'
 import { dispatch, getState } from 'client/shared/clients'
-import { getTextContentFromHtml } from 'client/shared/lib'
+import { getNumberFromString, getTextContentFromHtml } from 'client/shared/lib'
 import type { BoqColumnKey } from 'client/shared/types'
 
 type Props = {
@@ -16,6 +16,7 @@ export const updateBoqCell = ({
   rowIndex,
   boqColumnKey,
 }: Props): void => {
+  console.log('🚀  html:', html)
   const item = getState().items[itemIndex]
   if (item?.type !== 'boq') return
 
@@ -27,8 +28,6 @@ export const updateBoqCell = ({
   if (!didTextChange) return
 
   const textContent = getTextContentFromHtml({ html })
-  const numberConvertedFromText = Number(textContent)
-  const isNaN = Number.isNaN(numberConvertedFromText)
-  const value = isNaN ? 0 : numberConvertedFromText
+  const value = getNumberFromString({ string: textContent })
   dispatch(itemsSlice.actions.updateBoqCell({ itemIndex, rowIndex, html, value, boqColumnKey }))
 }
