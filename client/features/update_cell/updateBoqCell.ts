@@ -27,6 +27,8 @@ export const updateBoqCell = ({
   if (!didTextChange) return
 
   const textContent = getTextContentFromHtml({ html })
-  const value = Number(textContent)
+  const numberConvertedFromText = Number(textContent)
+  const isNaN = Number.isNaN(numberConvertedFromText)
+  const value = isNaN ? 0 : numberConvertedFromText
   dispatch(itemsSlice.actions.updateBoqCell({ itemIndex, rowIndex, html, value, boqColumnKey }))
 }
