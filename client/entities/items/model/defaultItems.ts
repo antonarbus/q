@@ -32,8 +32,8 @@ export const defaultItems: Item[] = [
           value: null,
         },
         price: {
-          html: '<b>666</b>',
-          value: 666,
+          html: '<b>140</b>',
+          value: 140,
         },
       },
       column: {
@@ -73,16 +73,16 @@ export const defaultItems: Item[] = [
             value: null,
           },
           item: {
-            html: '500',
-            value: 500,
+            html: '10',
+            value: 10,
           },
           qty: {
             html: '1',
             value: 1,
           },
           price: {
-            html: '500',
-            value: 500,
+            html: '10',
+            value: 10,
           },
         },
         {
@@ -99,16 +99,16 @@ export const defaultItems: Item[] = [
             value: null,
           },
           item: {
-            html: '500',
-            value: 500,
+            html: '20',
+            value: 20,
           },
           qty: {
             html: '2',
             value: 2,
           },
           price: {
-            html: '1000',
-            value: 1000,
+            html: '40',
+            value: 40,
           },
         },
         {
@@ -125,16 +125,16 @@ export const defaultItems: Item[] = [
             value: null,
           },
           item: {
-            html: '500',
-            value: 500,
+            html: '30',
+            value: 30,
           },
           qty: {
             html: '3',
             value: 3,
           },
           price: {
-            html: '1500',
-            value: 1500,
+            html: '90',
+            value: 90,
           },
         },
       ],
