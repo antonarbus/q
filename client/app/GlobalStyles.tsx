@@ -46,7 +46,7 @@ export const GlobalStyles = (): JSX.Element => (
         font-family: system-ui, sans-serif;
         font-weight: 300;
         font-size: 1rem;
-        line-height: 1.5;
+        line-height: 1.2;
         letter-spacing: 0.00938em;
         height: 100dvh;
       }
