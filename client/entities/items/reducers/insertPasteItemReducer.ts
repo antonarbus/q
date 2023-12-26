@@ -14,6 +14,7 @@ export const insertPasteItemReducer = (state: ItemsState, action: PayloadAction<
     height: 0,
     width: 0,
     msg: '',
+    isFroala: true,
   }
 
   itemsWithoutPasteText.splice(insertAtIndex, 0, pasteTextEl)
