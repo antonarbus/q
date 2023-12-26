@@ -7,7 +7,7 @@ type Props = {
   itemIndex: number
 }
 
-export const changeItem = ({ html, itemIndex }: Props): void => {
+export const updateItem = ({ html, itemIndex }: Props): void => {
   const item = getState().items[itemIndex]
   if (item?.type !== 'text') return
   const prevHtml = item.text.html

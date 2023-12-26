@@ -10,7 +10,7 @@ type Props = {
 
 }
 
-export const changeBoqHeader = ({ html, itemIndex, boqHeaderKey }: Props): void => {
+export const updateBoqHeader = ({ html, itemIndex, boqHeaderKey }: Props): void => {
   const item = getState().items[itemIndex]
   if (item?.type !== 'boq') return
   const prevHtml = item.boq.header[boqHeaderKey].html

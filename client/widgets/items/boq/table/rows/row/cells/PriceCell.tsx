@@ -1,9 +1,9 @@
 import { Box } from '@mui/material'
-import { dispatch, getState, theme } from 'client/shared/clients'
-import { boqCellHtmlGetter, itemsSlice, selectColumnWidth } from 'client/entities/items'
-import { updateBoqCell, updateTotalPrice } from 'client/features/change_cell'
+import { theme } from 'client/shared/clients'
+import { boqCellHtmlGetter, selectColumnWidth } from 'client/entities/items'
+import { updateBoqCell, updateSubTotalPrice } from 'client/features/update_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
-import type { BoqColumnKey, BoqItem } from 'client/shared/types'
+import type { BoqColumnKey } from 'client/shared/types'
 import { Froala } from 'client/shared/ui/froala'
 import type FroalaEditor from 'froala-editor'
 import { useRef } from 'react'
@@ -46,7 +46,7 @@ export const PriceCell = (): JSX.Element => {
           const html = editorRef.current.html.get()
           updateBoqCell({ itemIndex, rowIndex, boqColumnKey, html })
           const subTotalEditor = boqItemEditor.subTotalEditorRef.current
-          updateTotalPrice({ itemIndex, subTotalEditor })
+          updateSubTotalPrice({ itemIndex, subTotalEditor })
         }}
         additionalStyle={{
           textAlign: 'center',

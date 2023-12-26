@@ -9,7 +9,7 @@ type Props = {
   subTotalEditor: FroalaEditor | null
 }
 
-export const updateTotalPrice = ({ itemIndex, subTotalEditor }: Props): void => {
+export const updateSubTotalPrice = ({ itemIndex, subTotalEditor }: Props): void => {
   if (subTotalEditor === null) return
 
   const item = getState().items[itemIndex]

@@ -3,7 +3,7 @@ import { ResizableColumn } from '../ResizableColumn'
 import { Froala } from 'client/shared/ui/froala'
 import { boqColumnNameHtmlGetter } from 'client/entities/items'
 import type FroalaEditor from 'froala-editor'
-import { changeBoqColumn } from 'client/features/change_cell'
+import { updateBoqColumn } from 'client/features/update_cell'
 import { useItem } from 'client/widgets/items/ItemProvider'
 
 const boqColumnKey = 'price'
@@ -28,7 +28,7 @@ export const PriceColumn = (): JSX.Element => {
         onContentChange={() => {
           if (editorRef.current === null) return
           const html = editorRef.current.html.get()
-          changeBoqColumn({ itemIndex, boqColumnKey, html })
+          updateBoqColumn({ itemIndex, boqColumnKey, html })
         }}
         additionalStyle={{
           flexGrow: 1,
