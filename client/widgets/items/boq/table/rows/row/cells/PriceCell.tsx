@@ -22,7 +22,7 @@ export const PriceCell = (): JSX.Element => {
   const isPriceColWidthSetManually = priceColWidth !== undefined
   const width = isPriceColWidthSetManually ? priceColWidth : 'auto'
 
-  const boqItemEditors = useBoqItem()
+  const boqItemEditor = useBoqItem()
 
   return (
     <Box
@@ -45,14 +45,10 @@ export const PriceCell = (): JSX.Element => {
           if (editorRef.current === null) return
           const html = editorRef.current.html.get()
           updateBoqCell({ itemIndex, rowIndex, boqColumnKey, html })
-          updateTotalPrice({ itemIndex })
-
-          // todo: make it better
-          const updatedPrice = (getState().items[itemIndex] as BoqItem).boq.header.price.html
-
-          if (boqItemEditors.subTotalEditorRef.current) {
-            boqItemEditors.subTotalEditorRef.current.html.set(updatedPrice)
-          }
+          updateTotalPrice({
+            itemIndex,
+            subTotalEditor: boqItemEditor.subTotalEditorRef.current,
+          })
         }}
         additionalStyle={{
           textAlign: 'center',
