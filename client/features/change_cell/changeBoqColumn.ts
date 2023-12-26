@@ -15,6 +15,6 @@ export const changeBoqColumn = ({ html, itemIndex, boqColumnKey }: Props): void 
   const prevHtml = item.boq.column[boqColumnKey].html
   const didTextChange = prevHtml !== html
   if (!didTextChange) return
-  dispatch(itemsSlice.actions.saveBoqColumnNameText({ itemIndex, html, boqColumnKey }))
+  dispatch(itemsSlice.actions.updateBoqColumnNameText({ itemIndex, html, boqColumnKey }))
   saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
 }

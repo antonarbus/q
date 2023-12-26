@@ -13,6 +13,6 @@ export const changeItem = ({ html, itemIndex }: Props): void => {
   const prevHtml = item.text.html
   const didTextChange = prevHtml !== html
   if (!didTextChange) return
-  dispatch(itemsSlice.actions.saveItemText({ itemIndex, html }))
+  dispatch(itemsSlice.actions.updateItemText({ itemIndex, html }))
   saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
 }

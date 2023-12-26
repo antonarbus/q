@@ -1,6 +1,6 @@
 import { itemsSlice } from 'client/entities/items'
 import { dispatch, getState } from 'client/shared/clients'
-import { getTextContentFromHtml, saveItemsLocally } from 'client/shared/lib'
+import { getTextContentFromHtml } from 'client/shared/lib'
 import type { BoqColumnKey } from 'client/shared/types'
 
 type Props = {
@@ -28,5 +28,5 @@ export const updateBoqCell = ({
 
   const textContent = getTextContentFromHtml({ html })
   const value = Number(textContent)
-  dispatch(itemsSlice.actions.saveBoqCell({ itemIndex, rowIndex, html, value, boqColumnKey }))
+  dispatch(itemsSlice.actions.updateBoqCell({ itemIndex, rowIndex, html, value, boqColumnKey }))
 }

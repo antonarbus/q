@@ -43,7 +43,7 @@ export const CutBoqRowIcon = (): JSX.Element => {
 
         if (!boqRowElement) return
 
-        dispatch(itemsSlice.actions.saveBoqRowHeightAndWidth({
+        dispatch(itemsSlice.actions.updateBoqRowHeightAndWidth({
           itemIndex,
           rowIndex,
           height: boqRowElement.clientHeight,
