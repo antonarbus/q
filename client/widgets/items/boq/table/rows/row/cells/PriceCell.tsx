@@ -21,7 +21,8 @@ export const PriceCell = (): JSX.Element => {
   const priceColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
   const isPriceColWidthSetManually = priceColWidth !== undefined
   const width = isPriceColWidthSetManually ? priceColWidth : 'auto'
-
+  const minWidth = '100px'
+  const maxWidth = width === 'auto' ? minWidth : width
   const boqItemEditor = useBoqItem()
 
   return (
@@ -32,8 +33,8 @@ export const PriceCell = (): JSX.Element => {
         flexGrow: 0,
         flexShrink: 0,
         width,
-        maxWidth: width,
-        minWidth: '100px',
+        maxWidth,
+        minWidth,
       }}
     >
       <Froala

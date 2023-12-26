@@ -20,6 +20,8 @@ export const ItemCell = (): JSX.Element => {
   const itemColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
   const isItemColWidthSetManually = itemColWidth !== undefined
   const width = isItemColWidthSetManually ? itemColWidth : 'auto'
+  const minWidth = '100px'
+  const maxWidth = width === 'auto' ? minWidth : width
 
   return (
     <Box
@@ -29,8 +31,8 @@ export const ItemCell = (): JSX.Element => {
         flexGrow: 0,
         flexShrink: 0,
         width,
-        maxWidth: width,
-        minWidth: '100px',
+        maxWidth,
+        minWidth,
       }}
     >
       <Froala
