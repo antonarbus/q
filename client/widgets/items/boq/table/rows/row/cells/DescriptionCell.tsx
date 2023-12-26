@@ -20,12 +20,12 @@ export const DescriptionCell = (): JSX.Element => {
   const descriptionColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
   const isDescriptionColWidthSetManually = descriptionColWidth !== undefined
   const width = isDescriptionColWidthSetManually ? descriptionColWidth : 'auto'
+  const minWidth = '200px'
+  const maxWidth = width
 
-  useSelectorTyped(state => {
-    // re-render component to calculated height of static html during item width change
-    // it will trigger useEffect at <StaticHtml />
-    return state.items[itemIndex]?.width
-  })
+  // re-render component to calculated height of static html during item width change
+  // it will trigger useEffect at <StaticHtml />
+  useSelectorTyped(state => state.items[itemIndex]?.width)
 
   return (
     <Box
@@ -35,8 +35,8 @@ export const DescriptionCell = (): JSX.Element => {
         flexGrow: isDescriptionColWidthSetManually ? 0 : 1,
         flexShrink: 0,
         width,
-        maxWidth: width,
-        minWidth: '200px',
+        maxWidth,
+        minWidth,
       }}
     >
       <Froala
