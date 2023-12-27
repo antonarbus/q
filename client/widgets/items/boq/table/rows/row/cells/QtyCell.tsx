@@ -42,13 +42,12 @@ export const QtyCell = (): JSX.Element => {
           const html = qtyCellEditorRef.current.html.get()
           updateBoqCell({ itemIndex, rowIndex, boqColumnKey, html })
 
-          // todo: add priceCellEditorRef in context
-          const priceCellEditor = priceCellEditorRef.current
           // todo: modify updatePriceCell to multiply item x qty
-          updatePriceCell({ itemIndex, priceCellEditor })
+          const priceCellEditor = priceCellEditorRef.current
+          updatePriceCell({ itemIndex, rowIndex, priceCellEditor })
 
-          const subTotalEditor = subTotalEditorRef.current
-          updateSubTotalPrice({ itemIndex, subTotalEditor })
+          // const subTotalEditor = subTotalEditorRef.current
+          // updateSubTotalPrice({ itemIndex, subTotalEditor })
         }}
         additionalStyle={{
           textAlign: 'center',

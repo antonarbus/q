@@ -1,35 +1,34 @@
-import { itemsSlice } from 'client/entities/items'
-import { dispatch, getState } from 'client/shared/clients'
+import { getState } from 'client/shared/clients'
 import { getTextContentFromHtml } from 'client/shared/lib'
-import { type BoqRow } from 'client/shared/types'
 import type FroalaEditor from 'froala-editor'
+import { updateBoqCell } from './updateBoqCell'
 
 type Props = {
   itemIndex: number
+  rowIndex: number
   priceCellEditor: FroalaEditor | null
 }
 
-export const updatePriceCell = ({ itemIndex, priceCellEditor }: Props): void => {
+export const updatePriceCell = ({ itemIndex, rowIndex, priceCellEditor }: Props): void => {
   if (priceCellEditor === null) return
 
   const item = getState().items[itemIndex]
   if (item?.type !== 'boq') return
 
-  const boqRows = item.boq.rows
+  const row = item.boq.rows[rowIndex]
+  if (row === undefined) return
 
-  const subTotalPrice: number = boqRows.reduce((accumulator: number, boqRow: BoqRow) => {
-    const price = boqRow.price.value
-    return accumulator + price
-  }, 0)
+  const newPriceValue = row.qty.value * row.item.value
 
-  const htmlValue = getTextContentFromHtml({ html: item.boq.header.price.html })
-  const updatedHtml = item.boq.header.price.html.replace(String(htmlValue), String(subTotalPrice))
+  const priceHtmlTextContent = getTextContentFromHtml({ html: row.price.html })
+  const newPriceHtml = row.price.html.replace(String(priceHtmlTextContent), String(newPriceValue))
 
-  dispatch(itemsSlice.actions.updateTotalPrice({
+  updateBoqCell({
     itemIndex,
-    html: updatedHtml,
-    value: subTotalPrice,
-  }))
+    rowIndex,
+    boqColumnKey: 'price',
+    html: newPriceHtml,
+  })
 
-  priceCellEditor.html.set(updatedHtml)
+  priceCellEditor.html.set(newPriceHtml)
 }
