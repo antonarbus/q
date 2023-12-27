@@ -11,6 +11,7 @@ export const getNumberFromString = ({ string }: Props): number => {
     .replace(/,/g, '.')
 
   const number = parseFloat(stringWithNumbersOnly)
+  if (isNaN(number)) return 0
 
   return number
 }

@@ -5,7 +5,6 @@ import { updateBoqCell, updateSubTotalPrice } from 'client/features/update_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
 import { Froala } from 'client/shared/ui/froala'
-import type FroalaEditor from 'froala-editor'
 import { useRef } from 'react'
 import { useBoqItem } from 'client/widgets/items/boq/BoqItemProvider'
 import { useItem } from 'client/widgets/items/ItemProvider'
@@ -15,15 +14,14 @@ const boqColumnKey: BoqColumnKey = 'price'
 
 export const PriceCell = (): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
-  const editorRef = useRef<FroalaEditor | null>(null)
   const { itemIndex } = useItem()
-  const { rowIndex } = useRow()
+  const { rowIndex, priceCellEditorRef } = useRow()
+  const { subTotalEditorRef } = useBoqItem()
   const priceColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
   const isPriceColWidthSetManually = priceColWidth !== undefined
   const width = isPriceColWidthSetManually ? priceColWidth : 'auto'
   const minWidth = '100px'
   const maxWidth = width === 'auto' ? minWidth : width
-  const boqItemEditor = useBoqItem()
 
   return (
     <Box
@@ -38,15 +36,15 @@ export const PriceCell = (): JSX.Element => {
       }}
     >
       <Froala
-        editorRef={editorRef}
+        editorRef={priceCellEditorRef}
         froalaElementRef={froalaElementRef}
         placeholder={`${boqColumnKey}...`}
         htmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
         onContentChange={() => {
-          if (editorRef.current === null) return
-          const html = editorRef.current.html.get()
+          if (priceCellEditorRef.current === null) return
+          const html = priceCellEditorRef.current.html.get()
           updateBoqCell({ itemIndex, rowIndex, boqColumnKey, html })
-          const subTotalEditor = boqItemEditor.subTotalEditorRef.current
+          const subTotalEditor = subTotalEditorRef.current
           updateSubTotalPrice({ itemIndex, subTotalEditor })
         }}
         additionalStyle={{
