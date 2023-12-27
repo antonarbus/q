@@ -10,7 +10,6 @@ import type FroalaEditor from 'froala-editor'
 import { useItem } from '../ItemProvider'
 
 export const TextItem = (): JSX.Element => {
-  const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
   const { itemIndex } = useItem()
 
@@ -22,7 +21,6 @@ export const TextItem = (): JSX.Element => {
     >
       <Froala
         editorRef={editorRef}
-        froalaElementRef={froalaElementRef}
         htmlGetter={() => itemTextHtmlGetter({ itemIndex })}
         placeholder='Add text, tables, drop images, files, links, select to format...'
         onContentChange={() => {

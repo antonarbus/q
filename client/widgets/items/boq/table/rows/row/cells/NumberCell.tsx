@@ -13,7 +13,6 @@ import { useRow } from '../../RowProvider'
 const boqColumnKey: BoqColumnKey = 'number'
 
 export const NumberCell = (): JSX.Element => {
-  const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
   const { itemIndex } = useItem()
   const { rowIndex } = useRow()
@@ -37,7 +36,6 @@ export const NumberCell = (): JSX.Element => {
     >
       <Froala
         editorRef={editorRef}
-        froalaElementRef={froalaElementRef}
         placeholder=''
         htmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
         onContentChange={() => {

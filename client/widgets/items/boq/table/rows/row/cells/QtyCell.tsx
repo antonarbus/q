@@ -5,8 +5,6 @@ import { updateBoqCell, updatePriceCell, updateSubTotalPrice } from 'client/feat
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
 import { Froala } from 'client/shared/ui/froala'
-import type FroalaEditor from 'froala-editor'
-import { useRef } from 'react'
 import { useItem } from 'client/widgets/items/ItemProvider'
 import { useRow } from '../../RowProvider'
 import { useBoqItem } from 'client/widgets/items/boq/BoqItemProvider'
@@ -14,7 +12,6 @@ import { useBoqItem } from 'client/widgets/items/boq/BoqItemProvider'
 const boqColumnKey: BoqColumnKey = 'qty'
 
 export const QtyCell = (): JSX.Element => {
-  const froalaElementRef = useRef<HTMLDivElement>(null)
   const { itemIndex } = useItem()
   const { subTotalEditorRef } = useBoqItem()
   const { rowIndex, qtyCellEditorRef, priceCellEditorRef } = useRow()
@@ -38,7 +35,6 @@ export const QtyCell = (): JSX.Element => {
     >
       <Froala
         editorRef={qtyCellEditorRef}
-        froalaElementRef={froalaElementRef}
         placeholder={`${boqColumnKey}...`}
         htmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
         onContentChange={() => {

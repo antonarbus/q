@@ -8,14 +8,12 @@ import { useItem } from '../../ItemProvider'
 const boqHeaderKey = 'title'
 
 export const Title = (): JSX.Element => {
-  const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
   const { itemIndex } = useItem()
 
   return (
     <Froala
       editorRef={editorRef}
-      froalaElementRef={froalaElementRef}
       placeholder='Title...'
       htmlGetter={() => boqHeaderHtmlGetter({ itemIndex, boqHeaderKey })}
       onContentChange={() => {
