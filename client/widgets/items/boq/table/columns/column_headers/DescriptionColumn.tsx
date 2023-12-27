@@ -9,7 +9,6 @@ import { useItem } from 'client/widgets/items/ItemProvider'
 const boqColumnKey = 'description'
 
 export const DescriptionColumn = (): ReactNode => {
-  const froalaElementRef = useRef<HTMLDivElement>(null)
   const editorRef = useRef<FroalaEditor | null>(null)
   const { itemIndex } = useItem()
 
@@ -22,7 +21,6 @@ export const DescriptionColumn = (): ReactNode => {
     >
       <Froala
         editorRef={editorRef}
-        froalaElementRef={froalaElementRef}
         placeholder='Description...'
         htmlGetter={() => boqColumnNameHtmlGetter({ itemIndex, boqColumnKey })}
         onContentChange={() => {

@@ -1,5 +1,5 @@
 import type { SxProps } from '@mui/material'
-import { type MutableRefObject, type RefObject } from 'react'
+import { useRef, type MutableRefObject, type RefObject } from 'react'
 import type FroalaEditor from 'froala-editor'
 import { useSelectorTyped } from 'client/shared/hooks'
 import { StaticHtml } from './StaticHtml'
@@ -11,7 +11,6 @@ import { useItem } from 'client/widgets/items/ItemProvider'
 
 type Props = {
   htmlGetter: () => string
-  froalaElementRef: RefObject<HTMLDivElement>
   editorRef: MutableRefObject<FroalaEditor | null>
   placeholder?: string
   additionalStyle?: SxProps
@@ -22,12 +21,12 @@ type Props = {
 export const Froala = ({
   additionalStyle,
   editorRef,
-  froalaElementRef,
   htmlGetter,
   placeholder,
   onContentChange,
   onFocus,
 }: Props): JSX.Element => {
+  const froalaElementRef = useRef<HTMLDivElement>(null)
   const isAppFroala = useSelectorTyped(state => state.app.isFroala)
   const { itemIndex } = useItem()
   const isItemFroala = useSelectorTyped(state => state.items[itemIndex]?.isFroala)
