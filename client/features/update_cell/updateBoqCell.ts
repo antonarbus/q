@@ -16,7 +16,6 @@ export const updateBoqCell = ({
   rowIndex,
   boqColumnKey,
 }: Props): void => {
-  console.log('🚀  html:', html)
   const item = getState().items[itemIndex]
   if (item?.type !== 'boq') return
 
@@ -29,5 +28,6 @@ export const updateBoqCell = ({
 
   const textContent = getTextContentFromHtml({ html })
   const value = getNumberFromString({ string: textContent })
+
   dispatch(itemsSlice.actions.updateBoqCell({ itemIndex, rowIndex, html, value, boqColumnKey }))
 }
