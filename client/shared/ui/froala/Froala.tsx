@@ -1,5 +1,5 @@
 import type { SxProps } from '@mui/material'
-import { useRef, type MutableRefObject, type RefObject } from 'react'
+import { useRef, type MutableRefObject } from 'react'
 import type FroalaEditor from 'froala-editor'
 import { useSelectorTyped } from 'client/shared/hooks'
 import { StaticHtml } from './StaticHtml'

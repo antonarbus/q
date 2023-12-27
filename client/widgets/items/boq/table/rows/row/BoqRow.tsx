@@ -1,4 +1,3 @@
-import type { BoqRow as BoqRowType } from 'client/shared/types'
 import { BoqRowActions } from 'client/features/boq_row_actions'
 import { NumberCell } from './cells/NumberCell'
 import { DescriptionCell } from './cells/DescriptionCell'
