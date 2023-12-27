@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { theme } from 'client/shared/clients'
 import { boqCellHtmlGetter, selectColumnWidth } from 'client/entities/items'
-import { updateBoqCell } from 'client/features/update_cell'
+import { updateBoqCell, updatePriceCell, updateSubTotalPrice } from 'client/features/update_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
 import { Froala } from 'client/shared/ui/froala'
@@ -9,14 +9,15 @@ import type FroalaEditor from 'froala-editor'
 import { useRef } from 'react'
 import { useItem } from 'client/widgets/items/ItemProvider'
 import { useRow } from '../../RowProvider'
+import { useBoqItem } from 'client/widgets/items/boq/BoqItemProvider'
 
 const boqColumnKey: BoqColumnKey = 'qty'
 
 export const QtyCell = (): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
-  const editorRef = useRef<FroalaEditor | null>(null)
   const { itemIndex } = useItem()
-  const { rowIndex } = useRow()
+  const { subTotalEditorRef } = useBoqItem()
+  const { rowIndex, qtyCellEditorRef, priceCellEditorRef } = useRow()
   const qtyColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
   const isQtyColWidthSetManually = qtyColWidth !== undefined
   const width = isQtyColWidthSetManually ? qtyColWidth : 'auto'
@@ -36,14 +37,22 @@ export const QtyCell = (): JSX.Element => {
       }}
     >
       <Froala
-        editorRef={editorRef}
+        editorRef={qtyCellEditorRef}
         froalaElementRef={froalaElementRef}
         placeholder={`${boqColumnKey}...`}
         htmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
         onContentChange={() => {
-          if (editorRef.current === null) return
-          const html = editorRef.current.html.get()
+          if (qtyCellEditorRef.current === null) return
+          const html = qtyCellEditorRef.current.html.get()
           updateBoqCell({ itemIndex, rowIndex, boqColumnKey, html })
+
+          // todo: add priceCellEditorRef in context
+          const priceCellEditor = priceCellEditorRef.current
+          // todo: modify updatePriceCell to multiply item x qty
+          updatePriceCell({ itemIndex, priceCellEditor })
+
+          const subTotalEditor = subTotalEditorRef.current
+          updateSubTotalPrice({ itemIndex, subTotalEditor })
         }}
         additionalStyle={{
           textAlign: 'center',

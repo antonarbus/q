@@ -5,7 +5,6 @@ import { updateBoqCell } from 'client/features/update_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
 import { Froala } from 'client/shared/ui/froala'
-import type FroalaEditor from 'froala-editor'
 import { useRef } from 'react'
 import { useItem } from 'client/widgets/items/ItemProvider'
 import { useRow } from '../../RowProvider'
@@ -14,9 +13,8 @@ const boqColumnKey: BoqColumnKey = 'item'
 
 export const ItemCell = (): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
-  const editorRef = useRef<FroalaEditor | null>(null)
   const { itemIndex } = useItem()
-  const { rowIndex } = useRow()
+  const { rowIndex, itemCellEditorRef } = useRow()
   const itemColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
   const isItemColWidthSetManually = itemColWidth !== undefined
   const width = isItemColWidthSetManually ? itemColWidth : 'auto'
@@ -36,13 +34,13 @@ export const ItemCell = (): JSX.Element => {
       }}
     >
       <Froala
-        editorRef={editorRef}
+        editorRef={itemCellEditorRef}
         froalaElementRef={froalaElementRef}
         placeholder={`${boqColumnKey}...`}
         htmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
         onContentChange={() => {
-          if (editorRef.current === null) return
-          const html = editorRef.current.html.get()
+          if (itemCellEditorRef.current === null) return
+          const html = itemCellEditorRef.current.html.get()
           updateBoqCell({ itemIndex, rowIndex, boqColumnKey, html })
         }}
         additionalStyle={{

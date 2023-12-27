@@ -1,6 +1,6 @@
 import { Title } from './Title'
 import { SubtotalText } from './SubtotalText'
-import { Price } from './Price'
+import { SubTotalPrice } from './SubTotalPrice'
 import { BoqHeaderLayout } from './BoqHeaderLayout'
 
 // todo: integrate currency in price directly and create a logic to update only price part
@@ -11,7 +11,7 @@ export const Header = (): JSX.Element => {
     <BoqHeaderLayout
       title={<Title />}
       subtotalText={<SubtotalText />}
-      price={<Price />}
+      subTotalPrice={<SubTotalPrice />}
     />
   )
 }

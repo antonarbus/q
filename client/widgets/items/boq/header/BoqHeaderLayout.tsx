@@ -4,7 +4,7 @@ import { theme } from 'client/shared/clients'
 type Props = {
   title: JSX.Element
   subtotalText: React.ReactNode
-  price: JSX.Element
+  subTotalPrice: JSX.Element
   hideContentForDevPurposes?: boolean
   outlinedForDevPurposes?: boolean
 }
@@ -12,7 +12,7 @@ type Props = {
 export const BoqHeaderLayout = ({
   title,
   subtotalText,
-  price,
+  subTotalPrice,
   hideContentForDevPurposes = false,
   outlinedForDevPurposes = false,
 }: Props): JSX.Element => {
@@ -86,7 +86,7 @@ export const BoqHeaderLayout = ({
                 minWidth: '60px',
               }}
             >
-              {price}
+              {subTotalPrice}
             </Box>
           </Box>
         </Box>

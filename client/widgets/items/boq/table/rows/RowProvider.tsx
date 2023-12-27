@@ -1,13 +1,20 @@
 import { createContext, useContext, type ReactNode } from 'react'
+import type FroalaEditor from 'froala-editor'
+
+type FroalaEditorRef = {
+  current: FroalaEditor | null
+}
 
 type Context = {
   rowIndex: number
   rowId: string
+  itemCellEditorRef: FroalaEditorRef
+  qtyCellEditorRef: FroalaEditorRef
+  priceCellEditorRef: FroalaEditorRef
 }
 
-type Props = Context & {
+type Props = Omit<Context, 'itemCellEditorRef' | 'qtyCellEditorRef' | 'priceCellEditorRef'> & {
   children: ReactNode
-
 }
 
 const RowContext = createContext<Context | null>(null)
@@ -22,6 +29,9 @@ export const RowProvider = ({
       value={{
         rowIndex,
         rowId,
+        itemCellEditorRef: { current: null },
+        qtyCellEditorRef: { current: null },
+        priceCellEditorRef: { current: null },
       }}
     >
       {children}

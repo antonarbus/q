@@ -2,29 +2,26 @@ import { boqHeaderHtmlGetter } from 'client/entities/items'
 import { updateBoqHeader } from 'client/features/update_cell'
 import { Froala } from 'client/shared/ui/froala'
 import { useRef } from 'react'
-import type FroalaEditor from 'froala-editor'
 import { useBoqItem } from '../BoqItemProvider'
 import { useItem } from '../../ItemProvider'
 
 const boqHeaderKey = 'price'
 
-export const Price = (): JSX.Element => {
+export const SubTotalPrice = (): JSX.Element => {
+  // todo: looks like we do not have to pass froalaElementRef
   const froalaElementRef = useRef<HTMLDivElement>(null)
-
-  const boqItemEditors = useBoqItem()
-  const editorRef = useRef<FroalaEditor | null>(null)
-  boqItemEditors.subTotalEditorRef = editorRef
+  const { subTotalEditorRef } = useBoqItem()
   const { itemIndex } = useItem()
 
   return (
     <Froala
-      editorRef={editorRef}
+      editorRef={subTotalEditorRef}
       froalaElementRef={froalaElementRef}
       placeholder='Price...'
       htmlGetter={() => boqHeaderHtmlGetter({ itemIndex, boqHeaderKey })}
       onContentChange={() => {
-        if (editorRef.current === null) return
-        const html = editorRef.current.html.get()
+        if (subTotalEditorRef.current === null) return
+        const html = subTotalEditorRef.current.html.get()
         updateBoqHeader({ itemIndex, html, boqHeaderKey })
       }}
       additionalStyle={{
