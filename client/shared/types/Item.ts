@@ -66,7 +66,7 @@ export type BoqItem = {
         html: string
         value: null
       }
-      subtotal: {
+      subtotalText: {
         html: string
         value: null
       }
