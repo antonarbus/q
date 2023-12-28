@@ -3,6 +3,7 @@ import { dispatch, getState } from 'client/shared/clients'
 import { getTextContentFromHtml } from 'client/shared/lib'
 import { type BoqRow } from 'client/shared/types'
 import type FroalaEditor from 'froala-editor'
+import { roundTo } from 'round-to'
 
 type Props = {
   itemIndex: number
@@ -22,13 +23,15 @@ export const updateSubTotalPrice = ({ itemIndex, subTotalEditor }: Props): void 
     return accumulator + price
   }, 0)
 
+  const subTotalPriceRounded = roundTo(subTotalPrice, 2)
+
   const htmlValue = getTextContentFromHtml({ html: item.boq.header.price.html })
-  const updatedHtml = item.boq.header.price.html.replace(String(htmlValue), String(subTotalPrice))
+  const updatedHtml = item.boq.header.price.html.replace(String(htmlValue), String(subTotalPriceRounded))
 
   dispatch(itemsSlice.actions.updateTotalPrice({
     itemIndex,
     html: updatedHtml,
-    value: subTotalPrice,
+    value: subTotalPriceRounded,
   }))
 
   subTotalEditor.html.set(updatedHtml)
