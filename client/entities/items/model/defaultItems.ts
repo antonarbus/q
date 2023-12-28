@@ -31,7 +31,7 @@ export const defaultItems: Item[] = [
           html: '<div>Subtotal</div>',
           value: null,
         },
-        price: {
+        subTotalPrice: {
           html: '<b>140</b>',
           value: 140,
         },
