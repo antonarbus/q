@@ -27,7 +27,7 @@ export const defaultItems: Item[] = [
           html: '<b>Title</b>',
           value: null,
         },
-        subtotal: {
+        subtotalText: {
           html: '<div>Subtotal</div>',
           value: null,
         },

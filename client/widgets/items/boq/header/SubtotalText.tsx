@@ -5,7 +5,7 @@ import { useRef } from 'react'
 import type FroalaEditor from 'froala-editor'
 import { useItem } from '../../ItemProvider'
 
-const boqHeaderKey = 'subtotal'
+const boqHeaderKey = 'subtotalText'
 
 export const SubtotalText = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
