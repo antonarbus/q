@@ -4,7 +4,7 @@ import { Froala } from 'client/shared/ui/froala'
 import { useBoqItem } from '../BoqItemProvider'
 import { useItem } from '../../ItemProvider'
 
-const boqHeaderKey = 'price'
+const boqHeaderKey = 'subTotalPrice'
 
 export const SubTotalPrice = (): JSX.Element => {
   const { subTotalEditorRef } = useBoqItem()

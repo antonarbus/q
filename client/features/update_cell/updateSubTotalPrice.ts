@@ -25,8 +25,8 @@ export const updateSubTotalPrice = ({ itemIndex, subTotalEditor }: Props): void 
 
   const subTotalPriceRounded = roundTo(subTotalPrice, 2)
 
-  const htmlValue = getTextContentFromHtml({ html: item.boq.header.price.html })
-  const updatedHtml = item.boq.header.price.html.replace(String(htmlValue), String(subTotalPriceRounded))
+  const htmlValue = getTextContentFromHtml({ html: item.boq.header.subTotalPrice.html })
+  const updatedHtml = item.boq.header.subTotalPrice.html.replace(String(htmlValue), String(subTotalPriceRounded))
 
   dispatch(itemsSlice.actions.updateTotalPrice({
     itemIndex,

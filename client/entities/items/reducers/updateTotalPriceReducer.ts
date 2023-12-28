@@ -11,6 +11,6 @@ export const updateTotalPriceReducer = (state: ItemsState, action: PayloadAction
   const item = state[itemIndex]
   if (item?.type !== 'boq') return
 
-  item.boq.header.price.value = value
-  item.boq.header.price.html = html
+  item.boq.header.subTotalPrice.value = value
+  item.boq.header.subTotalPrice.html = html
 }

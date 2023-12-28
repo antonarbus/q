@@ -70,7 +70,7 @@ export type BoqItem = {
         html: string
         value: null
       }
-      price: {
+      subTotalPrice: {
         html: string
         value: number
       }
