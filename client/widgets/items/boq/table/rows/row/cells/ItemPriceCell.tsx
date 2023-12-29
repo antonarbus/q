@@ -1,18 +1,20 @@
 import { Box } from '@mui/material'
 import { theme } from 'client/shared/clients'
 import { boqCellHtmlGetter, selectColumnWidth } from 'client/entities/items'
-import { updateBoqCell } from 'client/features/update_cell'
+import { updateBoqCell, updatePriceCell, updateSubTotalPrice } from 'client/features/update_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
 import { Froala } from 'client/shared/ui/froala'
 import { useItem } from 'client/widgets/items/ItemProvider'
 import { useRow } from '../../RowProvider'
+import { useBoqItem } from 'client/widgets/items/boq/BoqItemProvider'
 
 const boqColumnKey: BoqColumnKey = 'itemPrice'
 
 export const ItemPriceCell = (): JSX.Element => {
   const { itemIndex } = useItem()
-  const { rowIndex, itemCellEditorRef } = useRow()
+  const { subTotalEditorRef } = useBoqItem()
+  const { rowIndex, itemCellEditorRef, priceCellEditorRef } = useRow()
   const itemColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
   const isItemColWidthSetManually = itemColWidth !== undefined
   const width = isItemColWidthSetManually ? itemColWidth : 'auto'
@@ -39,6 +41,12 @@ export const ItemPriceCell = (): JSX.Element => {
           if (itemCellEditorRef.current === null) return
           const html = itemCellEditorRef.current.html.get()
           updateBoqCell({ itemIndex, rowIndex, boqColumnKey, html })
+
+          const priceCellEditor = priceCellEditorRef.current
+          updatePriceCell({ itemIndex, rowIndex, priceCellEditor })
+
+          const subTotalEditor = subTotalEditorRef.current
+          updateSubTotalPrice({ itemIndex, subTotalEditor })
         }}
         additionalStyle={{
           textAlign: 'center',
