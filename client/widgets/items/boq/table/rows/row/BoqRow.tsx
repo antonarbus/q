@@ -1,7 +1,7 @@
 import { BoqRowActions } from 'client/features/boq_row_actions'
 import { NumberCell } from './cells/NumberCell'
 import { DescriptionCell } from './cells/DescriptionCell'
-import { ItemCell } from './cells/ItemCell'
+import { ItemPriceCell } from './cells/ItemPriceCell'
 import { QtyCell } from './cells/QtyCell'
 import { PriceCell } from './cells/PriceCell'
 import { BoqRowLayout } from './BoqRowLayout'
@@ -12,7 +12,7 @@ export const BoqRow = (): JSX.Element => {
       <BoqRowActions />
       <NumberCell />
       <DescriptionCell />
-      <ItemCell />
+      <ItemPriceCell />
       <QtyCell />
       <PriceCell />
     </BoqRowLayout>

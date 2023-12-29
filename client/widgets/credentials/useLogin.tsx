@@ -46,7 +46,7 @@ export const useLogin = (): FuncRes => {
     try {
       setHttpStatus('loading')
       const res = await fetch(apiUrl.login, options)
-      const data = await res.json() as LoginApiRes
+      const data: LoginApiRes = await res.json()
       const { status, message, accessJwtToken, roles } = data
 
       if (status === 'error') {

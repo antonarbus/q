@@ -5,8 +5,9 @@ import { boqColumnNameHtmlGetter } from 'client/entities/items'
 import { updateBoqColumn } from 'client/features/update_cell'
 import type FroalaEditor from 'froala-editor'
 import { useItem } from 'client/widgets/items/ItemProvider'
+import { type BoqColumnKey } from 'client/shared/types'
 
-const boqColumnKey = 'description'
+const boqColumnKey: BoqColumnKey = 'description'
 
 export const DescriptionColumn = (): ReactNode => {
   const editorRef = useRef<FroalaEditor | null>(null)

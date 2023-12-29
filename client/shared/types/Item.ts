@@ -19,7 +19,7 @@ export type BoqRow = {
     html: string
     value: null
   }
-  item: {
+  itemPrice: {
     html: string
     value: number
   }
@@ -44,7 +44,7 @@ export type BoqCols = {
     html: string
     width: BoqColWidth
   }
-  item: {
+  itemPrice: {
     html: string
     width: BoqColWidth
   }
