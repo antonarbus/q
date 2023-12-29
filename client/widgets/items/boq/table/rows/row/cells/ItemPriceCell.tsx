@@ -8,9 +8,9 @@ import { Froala } from 'client/shared/ui/froala'
 import { useItem } from 'client/widgets/items/ItemProvider'
 import { useRow } from '../../RowProvider'
 
-const boqColumnKey: BoqColumnKey = 'item'
+const boqColumnKey: BoqColumnKey = 'itemPrice'
 
-export const ItemCell = (): JSX.Element => {
+export const ItemPriceCell = (): JSX.Element => {
   const { itemIndex } = useItem()
   const { rowIndex, itemCellEditorRef } = useRow()
   const itemColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))

@@ -5,8 +5,9 @@ import { boqColumnNameHtmlGetter } from 'client/entities/items'
 import type FroalaEditor from 'froala-editor'
 import { updateBoqColumn } from 'client/features/update_cell'
 import { useItem } from 'client/widgets/items/ItemProvider'
+import { type BoqColumnKey } from 'client/shared/types'
 
-const boqColumnKey = 'qty'
+const boqColumnKey: BoqColumnKey = 'qty'
 
 export const QtyColumn = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)

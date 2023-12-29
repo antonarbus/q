@@ -30,7 +30,7 @@ export const useRegister = (): FuncReturnType => {
     try {
       setHttpStatus('loading')
       const res = await fetch(apiUrl.register, options)
-      const data = await res.json() as RegisterRes
+      const data: RegisterRes = await res.json()
       const { status, message } = data
       if (status === 'error') {
         setHttpStatus('error')

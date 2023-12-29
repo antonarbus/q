@@ -11,7 +11,7 @@ export const logoutUser = async (): Promise<void> => {
   const options = { method }
   try {
     const res = await fetch(apiUrl.logout, options)
-    const data = await res.json() as LogoutApiRes
+    const data: LogoutApiRes = await res.json()
     const { status, message } = data
 
     if (status === 'error') {

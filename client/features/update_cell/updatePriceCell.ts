@@ -19,7 +19,7 @@ export const updatePriceCell = ({ itemIndex, rowIndex, priceCellEditor }: Props)
   const row = item.boq.rows[rowIndex]
   if (row === undefined) return
 
-  const newPriceValue = row.qty.value * row.item.value
+  const newPriceValue = row.qty.value * row.itemPrice.value
   const roundedPriceValue = roundTo(newPriceValue, 2)
 
   const priceHtmlTextContent = getTextContentFromHtml({ html: row.price.html })

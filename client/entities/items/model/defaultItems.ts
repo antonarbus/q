@@ -45,7 +45,7 @@ export const defaultItems: Item[] = [
           html: '<b>Description</b>',
           width: 350,
         },
-        item: {
+        itemPrice: {
           html: '<b>Item</b>',
           width: undefined,
         },
@@ -72,7 +72,7 @@ export const defaultItems: Item[] = [
             html: 'description 1',
             value: null,
           },
-          item: {
+          itemPrice: {
             html: '10',
             value: 10,
           },
@@ -98,7 +98,7 @@ export const defaultItems: Item[] = [
             html: 'description 2',
             value: null,
           },
-          item: {
+          itemPrice: {
             html: '20',
             value: 20,
           },
@@ -124,7 +124,7 @@ export const defaultItems: Item[] = [
             html: 'description 3',
             value: null,
           },
-          item: {
+          itemPrice: {
             html: '30',
             value: 30,
           },

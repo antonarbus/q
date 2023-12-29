@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { BoqItem, BoqRow } from 'client/shared/types'
+import type { BoqRow } from 'client/shared/types'
 import type { ItemsState } from '../redux/itemsSlice'
 
 export const reOrderBoqRowsReducer = (state: ItemsState, action: PayloadAction<{
@@ -8,6 +8,7 @@ export const reOrderBoqRowsReducer = (state: ItemsState, action: PayloadAction<{
 }>): ItemsState | undefined => {
   const { reOrderedBoqRows, itemIndex } = action.payload
   if (state[itemIndex]?.type !== 'boq') return state
-  const boqItem = state[itemIndex] as BoqItem
+  const boqItem = state[itemIndex]
+  if (boqItem?.type !== 'boq') return state
   boqItem.boq.rows = reOrderedBoqRows
 }
