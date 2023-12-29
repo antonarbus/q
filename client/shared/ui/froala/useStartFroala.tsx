@@ -13,6 +13,7 @@ type Props = {
   htmlGetter: () => string
   onContentChange: () => void
   onFocus?: () => void
+  onBlur?: () => void
   froalaElementRef: RefObject<HTMLDivElement>
   editorRef: MutableRefObject<FroalaEditor | null>
   placeholder?: string
@@ -31,6 +32,7 @@ export const useStartFroala = ({
   placeholder,
   onContentChange,
   onFocus,
+  onBlur,
 }: Props): void => {
   const { itemIndex } = useItem()
 
@@ -55,6 +57,9 @@ export const useStartFroala = ({
             },
             focus: () => {
               onFocus?.()
+            },
+            blur: () => {
+              onBlur?.()
             },
             // 'paste.afterCleanup': function (clipboardHtml: string) { },
             // click: (event: MouseEvent) => {},

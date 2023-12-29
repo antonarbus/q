@@ -1,5 +1,5 @@
 import { getState } from 'client/shared/clients'
-import { getTextContentFromHtml } from 'client/shared/lib'
+import { getNumberFromString, getTextContentFromHtml } from 'client/shared/lib'
 import type FroalaEditor from 'froala-editor'
 import { updateBoqCell } from './updateBoqCell'
 import { roundTo } from 'round-to'
@@ -20,10 +20,16 @@ export const updatePriceCell = ({ itemIndex, rowIndex, priceCellEditor }: Props)
   if (row === undefined) return
 
   const newPriceValue = row.qty.value * row.itemPrice.value
+  console.log('🚀  newPriceValue:', newPriceValue)
   const roundedPriceValue = roundTo(newPriceValue, 2)
+  console.log('🚀  roundedPriceValue:', roundedPriceValue)
 
   const priceHtmlTextContent = getTextContentFromHtml({ html: row.price.html })
-  const newPriceHtml = row.price.html.replace(String(priceHtmlTextContent), String(roundedPriceValue))
+  const value = getNumberFromString({ string: priceHtmlTextContent })
+  console.log('🚀  value:', value)
+
+  const newPriceHtml = row.price.html.replace(String(value), String(roundedPriceValue))
+  console.log('🚀  newPriceHtml:', newPriceHtml)
 
   updateBoqCell({
     itemIndex,

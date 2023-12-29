@@ -1,6 +1,7 @@
 export const froalaDefaultOptions = {
   initOnClick: false,
   toolbarInline: true,
+  keepFormatOnDelete: true,
   toolbarVisibleWithoutSelection: false,
   quickInsertEnabled: true,
   pastePlain: false,
