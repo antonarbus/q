@@ -28,15 +28,20 @@ export const updatePriceCell = ({ itemIndex, rowIndex, priceCellEditor }: Props)
   const value = getNumberFromString({ string: priceHtmlTextContent })
   console.log('🚀  value:', value)
 
-  const newPriceHtml = row.price.html.replace(String(value), String(roundedPriceValue))
-  console.log('🚀  newPriceHtml:', newPriceHtml)
+  // RegExp to avoid values inside html tags
+  // Create a regular expression with a negative lookbehind assertion
+  const regExp = new RegExp(`(?<!<[^>]*>)${String(value)}`)
+  const newValue = String(roundedPriceValue)
+  const updatedHtmlString = row.price.html.replace(regExp, newValue)
+
+  console.log('🚀  newPriceHtml:', updatedHtmlString)
 
   updateBoqCell({
     itemIndex,
     rowIndex,
     boqColumnKey: 'price',
-    html: newPriceHtml,
+    html: updatedHtmlString,
   })
 
-  priceCellEditor.html.set(newPriceHtml)
+  priceCellEditor.html.set(updatedHtmlString)
 }
