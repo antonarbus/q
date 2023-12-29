@@ -7,11 +7,11 @@ import { roundTo } from 'round-to'
 
 type Props = {
   itemIndex: number
-  subTotalEditor: FroalaEditor | null
+  subTotalPriceEditor: FroalaEditor | null
 }
 
-export const updateSubTotalPrice = ({ itemIndex, subTotalEditor }: Props): void => {
-  if (subTotalEditor === null) return
+export const updateSubTotalPrice = ({ itemIndex, subTotalPriceEditor }: Props): void => {
+  if (subTotalPriceEditor === null) return
 
   const item = getState().items[itemIndex]
   if (item?.type !== 'boq') return
@@ -34,5 +34,5 @@ export const updateSubTotalPrice = ({ itemIndex, subTotalEditor }: Props): void 
     value: subTotalPriceRounded,
   }))
 
-  subTotalEditor.html.set(updatedHtml)
+  subTotalPriceEditor.html.set(updatedHtml)
 }

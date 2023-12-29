@@ -13,8 +13,8 @@ const boqColumnKey: BoqColumnKey = 'itemPrice'
 
 export const ItemPriceCell = (): JSX.Element => {
   const { itemIndex } = useItem()
-  const { subTotalEditorRef } = useBoqItem()
-  const { rowIndex, itemCellEditorRef, priceCellEditorRef } = useRow()
+  const { subTotalPriceEditorRef } = useBoqItem()
+  const { rowIndex, itemPriceCellEditorRef, priceCellEditorRef } = useRow()
   const itemColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
   const isItemColWidthSetManually = itemColWidth !== undefined
   const width = isItemColWidthSetManually ? itemColWidth : 'auto'
@@ -34,19 +34,14 @@ export const ItemPriceCell = (): JSX.Element => {
       }}
     >
       <Froala
-        editorRef={itemCellEditorRef}
+        editorRef={itemPriceCellEditorRef}
         placeholder={`${boqColumnKey}...`}
         htmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
         onContentChange={() => {
-          if (itemCellEditorRef.current === null) return
-          const html = itemCellEditorRef.current.html.get()
-          updateBoqCell({ itemIndex, rowIndex, boqColumnKey, html })
-
-          const priceCellEditor = priceCellEditorRef.current
-          updatePriceCell({ itemIndex, rowIndex, priceCellEditor })
-
-          const subTotalEditor = subTotalEditorRef.current
-          updateSubTotalPrice({ itemIndex, subTotalEditor })
+          if (itemPriceCellEditorRef.current === null) return
+          updateBoqCell({ itemIndex, rowIndex, boqColumnKey, html: itemPriceCellEditorRef.current.html.get() })
+          updatePriceCell({ itemIndex, rowIndex, priceCellEditor: priceCellEditorRef.current })
+          updateSubTotalPrice({ itemIndex, subTotalPriceEditor: subTotalPriceEditorRef.current })
         }}
         additionalStyle={{
           textAlign: 'center',
