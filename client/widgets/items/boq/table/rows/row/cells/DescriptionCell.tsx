@@ -44,8 +44,7 @@ export const DescriptionCell = (): JSX.Element => {
         htmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
         onContentChange={() => {
           if (editorRef.current === null) return
-          const html = editorRef.current.html.get()
-          updateBoqCell({ itemIndex, rowIndex, boqColumnKey, html })
+          updateBoqCell({ itemIndex, rowIndex, boqColumnKey, html: editorRef.current.html.get() })
         }}
         additionalStyle={{
           padding: theme.cell.padding,

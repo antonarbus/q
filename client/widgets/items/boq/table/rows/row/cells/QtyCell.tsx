@@ -13,7 +13,7 @@ const boqColumnKey: BoqColumnKey = 'qty'
 
 export const QtyCell = (): JSX.Element => {
   const { itemIndex } = useItem()
-  const { subTotalEditorRef } = useBoqItem()
+  const { subTotalPriceEditorRef } = useBoqItem()
   const { rowIndex, qtyCellEditorRef, priceCellEditorRef } = useRow()
   const qtyColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
   const isQtyColWidthSetManually = qtyColWidth !== undefined
@@ -39,14 +39,9 @@ export const QtyCell = (): JSX.Element => {
         htmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
         onContentChange={() => {
           if (qtyCellEditorRef.current === null) return
-          const html = qtyCellEditorRef.current.html.get()
-          updateBoqCell({ itemIndex, rowIndex, boqColumnKey, html })
-
-          const priceCellEditor = priceCellEditorRef.current
-          updatePriceCell({ itemIndex, rowIndex, priceCellEditor })
-
-          const subTotalEditor = subTotalEditorRef.current
-          updateSubTotalPrice({ itemIndex, subTotalEditor })
+          updateBoqCell({ itemIndex, rowIndex, boqColumnKey, html: qtyCellEditorRef.current.html.get() })
+          updatePriceCell({ itemIndex, rowIndex, priceCellEditor: priceCellEditorRef.current })
+          updateSubTotalPrice({ itemIndex, subTotalPriceEditor: subTotalPriceEditorRef.current })
         }}
         additionalStyle={{
           textAlign: 'center',

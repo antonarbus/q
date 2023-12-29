@@ -8,12 +8,12 @@ type FroalaEditorRef = {
 type Context = {
   rowIndex: number
   rowId: string
-  itemCellEditorRef: FroalaEditorRef
+  itemPriceCellEditorRef: FroalaEditorRef
   qtyCellEditorRef: FroalaEditorRef
   priceCellEditorRef: FroalaEditorRef
 }
 
-type Props = Omit<Context, 'itemCellEditorRef' | 'qtyCellEditorRef' | 'priceCellEditorRef'> & {
+type Props = Omit<Context, 'itemPriceCellEditorRef' | 'qtyCellEditorRef' | 'priceCellEditorRef'> & {
   children: ReactNode
 }
 
@@ -29,7 +29,7 @@ export const RowProvider = ({
       value={{
         rowIndex,
         rowId,
-        itemCellEditorRef: { current: null },
+        itemPriceCellEditorRef: { current: null },
         qtyCellEditorRef: { current: null },
         priceCellEditorRef: { current: null },
       }}

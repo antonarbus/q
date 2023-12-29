@@ -7,18 +7,17 @@ import { useItem } from '../../ItemProvider'
 const boqHeaderKey = 'subTotalPrice'
 
 export const SubTotalPrice = (): JSX.Element => {
-  const { subTotalEditorRef } = useBoqItem()
+  const { subTotalPriceEditorRef } = useBoqItem()
   const { itemIndex } = useItem()
 
   return (
     <Froala
-      editorRef={subTotalEditorRef}
+      editorRef={subTotalPriceEditorRef}
       placeholder='Price...'
       htmlGetter={() => boqHeaderHtmlGetter({ itemIndex, boqHeaderKey })}
       onContentChange={() => {
-        if (subTotalEditorRef.current === null) return
-        const html = subTotalEditorRef.current.html.get()
-        updateBoqHeader({ itemIndex, html, boqHeaderKey })
+        if (subTotalPriceEditorRef.current === null) return
+        updateBoqHeader({ itemIndex, boqHeaderKey, html: subTotalPriceEditorRef.current.html.get() })
       }}
       additionalStyle={{
         width: '100%',
