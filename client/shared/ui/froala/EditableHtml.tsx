@@ -13,6 +13,7 @@ type Props = {
   additionalStyle?: SxProps
   onContentChange: () => void
   onFocus?: () => void
+  onBlur?: () => void
   froalaHeightRef: MutableRefObject<number | undefined>
 }
 
@@ -24,6 +25,7 @@ export const EditableHtml = ({
   placeholder,
   onContentChange,
   onFocus,
+  onBlur,
   froalaHeightRef,
 }: Props): JSX.Element => {
   useStartFroala({
@@ -33,6 +35,7 @@ export const EditableHtml = ({
     placeholder,
     onContentChange,
     onFocus,
+    onBlur,
   })
 
   usePutCaretAtTheEnd({ editorRef, froalaElementRef })

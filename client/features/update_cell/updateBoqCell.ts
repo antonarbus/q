@@ -29,5 +29,11 @@ export const updateBoqCell = ({
   const textContent = getTextContentFromHtml({ html })
   const value = getNumberFromString({ string: textContent })
 
-  dispatch(itemsSlice.actions.updateBoqCell({ itemIndex, rowIndex, html, value, boqColumnKey }))
+  dispatch(itemsSlice.actions.updateBoqCell({
+    itemIndex,
+    rowIndex,
+    html,
+    value,
+    boqColumnKey,
+  }))
 }

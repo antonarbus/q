@@ -16,6 +16,7 @@ type Props = {
   additionalStyle?: SxProps
   onContentChange: () => void
   onFocus?: () => void
+  onBlur?: () => void
 }
 
 export const Froala = ({
@@ -25,6 +26,7 @@ export const Froala = ({
   placeholder,
   onContentChange,
   onFocus,
+  onBlur,
 }: Props): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const isAppFroala = useSelectorTyped(state => state.app.isFroala)
@@ -65,6 +67,7 @@ export const Froala = ({
             htmlGetter={htmlGetter}
             onContentChange={onContentChange}
             onFocus={onFocus}
+            onBlur={onBlur}
             placeholder={placeholder}
             froalaHeightRef={froalaHeightRef}
           />
