@@ -46,7 +46,7 @@ export const defaultItems: Item[] = [
           width: 350,
         },
         itemPrice: {
-          html: '<b>Item</b>',
+          html: '<b>Item price</b>',
           width: undefined,
         },
         qty: {
