@@ -1,16 +1,12 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { ItemsState } from '../redux/itemsSlice'
+import { getBoqItem } from '../utils/getBoqItem'
 
 export const deleteBoqRowReducer = (state: ItemsState, action: PayloadAction<{ itemIndex: number, rowIndex: number }>): ItemsState => {
   const { itemIndex, rowIndex } = action.payload
-
-  const boqItem = state[itemIndex]
-
-  if (boqItem?.type !== 'boq') return state
-
-  const boqRows = boqItem.boq.rows
-  const boqRowsWithoutDeletedRow = boqRows.toSpliced(rowIndex, 1)
+  const boqItem = getBoqItem({ itemIndex, state })
+  if (boqItem === undefined) return state
+  const boqRowsWithoutDeletedRow = boqItem.boq.rows.toSpliced(rowIndex, 1)
   boqItem.boq.rows = boqRowsWithoutDeletedRow
-
   return state
 }

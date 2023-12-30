@@ -1,5 +1,5 @@
-import { itemsSlice } from 'client/entities/items'
-import { dispatch, getState } from 'client/shared/clients'
+import { getBoqItem, getBoqRows, itemsSlice } from 'client/entities/items'
+import { dispatch } from 'client/shared/clients'
 import { getTextContent } from 'client/shared/lib'
 import { type BoqRow } from 'client/shared/types'
 import type FroalaEditor from 'froala-editor'
@@ -13,10 +13,11 @@ type Props = {
 export const updateSubTotalPrice = ({ itemIndex, subTotalPriceEditor }: Props): void => {
   if (subTotalPriceEditor === null) return
 
-  const item = getState().items[itemIndex]
-  if (item?.type !== 'boq') return
+  const boqItem = getBoqItem({ itemIndex })
+  if (boqItem === undefined) return
 
-  const boqRows = item.boq.rows
+  const boqRows = getBoqRows({ itemIndex })
+  if (boqRows === undefined) return
 
   const subTotalPrice: number = boqRows.reduce((accumulator: number, boqRow: BoqRow) => {
     const price = boqRow.price.value
@@ -25,8 +26,8 @@ export const updateSubTotalPrice = ({ itemIndex, subTotalPriceEditor }: Props): 
 
   const subTotalPriceRounded = roundTo(subTotalPrice, 2)
 
-  const htmlValue = getTextContent({ html: item.boq.header.subTotalPrice.html })
-  const updatedHtml = item.boq.header.subTotalPrice.html.replace(String(htmlValue), String(subTotalPriceRounded))
+  const htmlValue = getTextContent({ html: boqItem.boq.header.subTotalPrice.html })
+  const updatedHtml = boqItem.boq.header.subTotalPrice.html.replace(String(htmlValue), String(subTotalPriceRounded))
 
   dispatch(itemsSlice.actions.updateTotalPrice({
     itemIndex,
