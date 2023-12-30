@@ -1,6 +1,6 @@
 import { getBoqItem, getBoqRows, itemsSlice } from 'client/entities/items'
 import { dispatch } from 'client/shared/clients'
-import { getTextContent } from 'client/shared/lib'
+import { getNumber, getTextContent, replaceNumber } from 'client/shared/lib'
 import { type BoqRow } from 'client/shared/types'
 import type FroalaEditor from 'froala-editor'
 import { roundTo } from 'round-to'
@@ -10,7 +10,10 @@ type Props = {
   subTotalPriceEditor: FroalaEditor | null
 }
 
-export const updateSubTotalPrice = ({ itemIndex, subTotalPriceEditor }: Props): void => {
+export const updateSubTotalPrice = ({
+  itemIndex,
+  subTotalPriceEditor,
+}: Props): void => {
   if (subTotalPriceEditor === null) return
 
   const boqItem = getBoqItem({ itemIndex })
@@ -19,20 +22,31 @@ export const updateSubTotalPrice = ({ itemIndex, subTotalPriceEditor }: Props): 
   const boqRows = getBoqRows({ itemIndex })
   if (boqRows === undefined) return
 
-  const subTotalPrice: number = boqRows.reduce((accumulator: number, boqRow: BoqRow) => {
+  const subTotalPriceValue: number = boqRows.reduce((accumulator: number, boqRow: BoqRow) => {
     const price = boqRow.price.value
     return accumulator + price
   }, 0)
 
-  const subTotalPriceRounded = roundTo(subTotalPrice, 2)
+  const subTotalPriceValueRounded = roundTo(subTotalPriceValue, 2)
 
-  const htmlValue = getTextContent({ html: boqItem.boq.header.subTotalPrice.html })
-  const updatedHtml = boqItem.boq.header.subTotalPrice.html.replace(String(htmlValue), String(subTotalPriceRounded))
+  const subTotalPriceTextContent = getTextContent({
+    html: boqItem.boq.header.subTotalPrice.html,
+  })
+
+  const subTotalPriceValueFromHtml = getNumber({
+    string: subTotalPriceTextContent,
+  })
+
+  const updatedHtml = replaceNumber({
+    html: boqItem.boq.header.subTotalPrice.html,
+    oldNumber: subTotalPriceValueFromHtml,
+    newNumber: subTotalPriceValueRounded,
+  })
 
   dispatch(itemsSlice.actions.updateTotalPrice({
     itemIndex,
     html: updatedHtml,
-    value: subTotalPriceRounded,
+    value: subTotalPriceValueRounded,
   }))
 
   subTotalPriceEditor.html.set(updatedHtml)

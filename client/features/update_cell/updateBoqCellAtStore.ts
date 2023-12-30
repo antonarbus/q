@@ -10,7 +10,7 @@ type Props = {
   boqColumnKey: BoqColumnKey
 }
 
-export const updateBoqCell = ({
+export const updateBoqCellAtStore = ({
   html,
   itemIndex,
   rowIndex,
@@ -23,14 +23,17 @@ export const updateBoqCell = ({
   const didTextChange = prevHtml !== html
   if (!didTextChange) return
 
-  const textContent = getTextContent({ html })
-  const value = getNumber({ string: textContent })
+  const cellTextContent = getTextContent({ html })
+
+  const cellValueFromHtml = getNumber({
+    string: cellTextContent,
+  })
 
   dispatch(itemsSlice.actions.updateBoqCell({
     itemIndex,
     rowIndex,
     html,
-    value,
+    value: cellValueFromHtml,
     boqColumnKey,
   }))
 }

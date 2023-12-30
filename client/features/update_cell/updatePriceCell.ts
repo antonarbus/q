@@ -1,6 +1,6 @@
 import type FroalaEditor from 'froala-editor'
 import { getNumber, getTextContent, replaceNumber } from 'client/shared/lib'
-import { updateBoqCell } from './updateBoqCell'
+import { updateBoqCellAtStore } from './updateBoqCellAtStore'
 import { roundTo } from 'round-to'
 import { getBoqRow } from 'client/entities/items'
 
@@ -9,8 +9,6 @@ type Props = {
   rowIndex: number
   priceCellEditor: FroalaEditor | null
 }
-
-// todo: check other cell updater functions to be readable as this one
 
 export const updatePriceCell = ({
   itemIndex,
@@ -29,17 +27,17 @@ export const updatePriceCell = ({
     html: boqRow.price.html,
   })
 
-  const priceValueAtHtml = getNumber({
+  const priceValueFromHtml = getNumber({
     string: priceTextContent,
   })
 
   const updatedHtml = replaceNumber({
     html: boqRow.price.html,
-    oldNumber: priceValueAtHtml,
+    oldNumber: priceValueFromHtml,
     newNumber: newPriceValueRounded,
   })
 
-  updateBoqCell({
+  updateBoqCellAtStore({
     itemIndex,
     rowIndex,
     boqColumnKey: 'price',

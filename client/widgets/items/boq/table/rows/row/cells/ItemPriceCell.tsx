@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { theme } from 'client/shared/clients'
 import { boqCellHtmlGetter, selectColumnWidth } from 'client/entities/items'
-import { roundBoqCell, updateBoqCell, updatePriceCell, updateSubTotalPrice } from 'client/features/update_cell'
+import { roundBoqCell, updateBoqCellAtStore, updatePriceCell, updateSubTotalPrice } from 'client/features/update_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
 import { Froala } from 'client/shared/ui/froala'
@@ -39,12 +39,32 @@ export const ItemPriceCell = (): JSX.Element => {
         htmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
         onContentChange={() => {
           if (itemPriceCellEditorRef.current === null) return
-          updateBoqCell({ itemIndex, rowIndex, boqColumnKey, html: itemPriceCellEditorRef.current.html.get() })
-          updatePriceCell({ itemIndex, rowIndex, priceCellEditor: priceCellEditorRef.current })
-          updateSubTotalPrice({ itemIndex, subTotalPriceEditor: subTotalPriceEditorRef.current })
+
+          updateBoqCellAtStore({
+            itemIndex,
+            rowIndex,
+            boqColumnKey,
+            html: itemPriceCellEditorRef.current.html.get(),
+          })
+
+          updatePriceCell({
+            itemIndex,
+            rowIndex,
+            priceCellEditor: priceCellEditorRef.current,
+          })
+
+          updateSubTotalPrice({
+            itemIndex,
+            subTotalPriceEditor: subTotalPriceEditorRef.current,
+          })
         }}
         onBlur={() => {
-          roundBoqCell({ itemIndex, rowIndex, boqColumnKey, cellEditor: itemPriceCellEditorRef.current })
+          roundBoqCell({
+            itemIndex,
+            rowIndex,
+            boqColumnKey,
+            cellEditor: itemPriceCellEditorRef.current,
+          })
         }}
         additionalStyle={{
           textAlign: 'center',
