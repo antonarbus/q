@@ -10,8 +10,11 @@ export { selectIsLastBoqRow } from './selectors/selectIsLastBoqRow'
 export { selectColumnWidth } from './selectors/selectColumnWidth'
 export { selectBoqRows, boqRowsShapeEqualityFn } from './selectors/selectBoqRows'
 
-// thunks
-export { saveItemHeightByIndex } from './model/saveItemHeightByIndex'
+// utils
+export { saveItemHeightByIndex } from './utils/saveItemHeightByIndex'
+export { getBoqRow } from './utils/getBoqRow'
+export { getBoqRows } from './utils/getBoqRows'
+export { getBoqItem } from './utils/getBoqItem'
 
 // ui
 export { DraggableItemsContainer } from './ui/DraggableItemsContainer'

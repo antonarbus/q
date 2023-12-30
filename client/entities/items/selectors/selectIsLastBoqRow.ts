@@ -1,16 +1,13 @@
 import type { RootState } from 'client/shared/types'
+import { getBoqRows } from '../utils/getBoqRows'
 
 type Props = {
   itemIndex: number
 }
 
 export const selectIsLastBoqRow = ({ itemIndex }: Props) => (state: RootState): boolean => {
-  const item = state.items[itemIndex]
-
-  if (item?.type !== 'boq') return false
-
-  const boqRows = item.boq.rows
+  const boqRows = getBoqRows({ itemIndex })
+  if (boqRows === undefined) return false
   const isBoqRowAlone = boqRows.length === 1
-
   return isBoqRowAlone
 }

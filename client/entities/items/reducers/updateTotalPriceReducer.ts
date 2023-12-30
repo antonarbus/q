@@ -1,5 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { ItemsState } from '../redux/itemsSlice'
+import { getBoqItem } from '../utils/getBoqItem'
 
 export const updateTotalPriceReducer = (state: ItemsState, action: PayloadAction<{
   itemIndex: number
@@ -7,10 +8,8 @@ export const updateTotalPriceReducer = (state: ItemsState, action: PayloadAction
   html: string
 }>): void => {
   const { itemIndex, html, value } = action.payload
-
-  const item = state[itemIndex]
-  if (item?.type !== 'boq') return
-
-  item.boq.header.subTotalPrice.value = value
-  item.boq.header.subTotalPrice.html = html
+  const boqItem = getBoqItem({ itemIndex, state })
+  if (boqItem === undefined) return
+  boqItem.boq.header.subTotalPrice.value = value
+  boqItem.boq.header.subTotalPrice.html = html
 }

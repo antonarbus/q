@@ -1,5 +1,5 @@
 import { jsonParseSafe } from 'client/shared/lib/jsonParseSafe'
-import { defaultItems } from './defaultItems'
+import { defaultItems } from '../model/defaultItems'
 import type { ItemsState } from '../redux/itemsSlice'
 import type { Item } from 'client/shared/types'
 
