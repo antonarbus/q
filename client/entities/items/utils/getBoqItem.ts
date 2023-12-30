@@ -11,7 +11,7 @@ export const getBoqItem = ({
   itemIndex,
   state,
 }: Props): BoqItem | undefined => {
-  // if we call it from reducer
+  // if we call it from reducer is own state is required
   if (state !== undefined) {
     const item = state[itemIndex]
     if (item?.type !== 'boq') return

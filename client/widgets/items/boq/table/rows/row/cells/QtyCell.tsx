@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { theme } from 'client/shared/clients'
 import { boqCellHtmlGetter, selectColumnWidth } from 'client/entities/items'
-import { updateBoqCell, updatePriceCell, updateSubTotalPrice } from 'client/features/update_cell'
+import { updateBoqCellAtStore, updatePriceCell, updateSubTotalPrice } from 'client/features/update_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
 import { Froala } from 'client/shared/ui/froala'
@@ -39,9 +39,24 @@ export const QtyCell = (): JSX.Element => {
         htmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
         onContentChange={() => {
           if (qtyCellEditorRef.current === null) return
-          updateBoqCell({ itemIndex, rowIndex, boqColumnKey, html: qtyCellEditorRef.current.html.get() })
-          updatePriceCell({ itemIndex, rowIndex, priceCellEditor: priceCellEditorRef.current })
-          updateSubTotalPrice({ itemIndex, subTotalPriceEditor: subTotalPriceEditorRef.current })
+
+          updateBoqCellAtStore({
+            itemIndex,
+            rowIndex,
+            boqColumnKey,
+            html: qtyCellEditorRef.current.html.get(),
+          })
+
+          updatePriceCell({
+            itemIndex,
+            rowIndex,
+            priceCellEditor: priceCellEditorRef.current,
+          })
+
+          updateSubTotalPrice({
+            itemIndex,
+            subTotalPriceEditor: subTotalPriceEditorRef.current,
+          })
         }}
         additionalStyle={{
           textAlign: 'center',
