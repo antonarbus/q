@@ -2,7 +2,7 @@ type Props = {
   string: string | null
 }
 
-export const getNumberFromString = ({ string }: Props): number => {
+export const getNumber = ({ string }: Props): number => {
   if (string === null) return 0
   if (string.trim() === '') return 0
 
