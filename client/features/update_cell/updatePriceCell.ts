@@ -10,7 +10,11 @@ type Props = {
   priceCellEditor: FroalaEditor | null
 }
 
-export const updatePriceCell = ({ itemIndex, rowIndex, priceCellEditor }: Props): void => {
+export const updatePriceCell = ({
+  itemIndex,
+  rowIndex,
+  priceCellEditor,
+}: Props): void => {
   if (priceCellEditor === null) return
 
   const item = getState().items[itemIndex]
@@ -26,13 +30,13 @@ export const updatePriceCell = ({ itemIndex, rowIndex, priceCellEditor }: Props)
     html: row.price.html,
   })
 
-  const priceValue = getNumber({
+  const priceValueAtHtml = getNumber({
     string: priceTextContent,
   })
 
   const updatedHtml = replaceNumber({
     html: row.price.html,
-    oldNumber: priceValue,
+    oldNumber: priceValueAtHtml,
     newNumber: newPriceValueRounded,
   })
 
