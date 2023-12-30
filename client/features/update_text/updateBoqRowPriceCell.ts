@@ -1,6 +1,6 @@
 import type FroalaEditor from 'froala-editor'
 import { getNumber, getTextContent, replaceNumber } from 'client/shared/lib'
-import { updateBoqCellAtStore } from './updateBoqCellAtStore'
+import { updateBoqRowCellAtStore } from './updateBoqRowCellAtStore'
 import { roundTo } from 'round-to'
 import { getBoqRow } from 'client/entities/items'
 
@@ -10,7 +10,7 @@ type Props = {
   priceCellEditor: FroalaEditor | null
 }
 
-export const updatePriceCell = ({
+export const updateBoqRowPriceCell = ({
   itemIndex,
   rowIndex,
   priceCellEditor,
@@ -37,7 +37,7 @@ export const updatePriceCell = ({
     newNumber: newPriceValueRounded,
   })
 
-  updateBoqCellAtStore({
+  updateBoqRowCellAtStore({
     itemIndex,
     rowIndex,
     boqColumnKey: 'price',

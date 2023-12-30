@@ -2,7 +2,7 @@ import { Froala } from 'client/shared/ui/froala'
 import { ResizableColumn } from '../ResizableColumn'
 import { type ReactNode, useRef } from 'react'
 import { boqColumnNameHtmlGetter } from 'client/entities/items'
-import { updateBoqColumn } from 'client/features/update_cell'
+import { updateBoqColumnCell } from 'client/features/update_text'
 import type FroalaEditor from 'froala-editor'
 import { useItem } from 'client/widgets/items/ItemProvider'
 import { type BoqColumnKey } from 'client/shared/types'
@@ -27,7 +27,7 @@ export const DescriptionColumn = (): ReactNode => {
         onContentChange={() => {
           if (editorRef.current === null) return
           const html = editorRef.current.html.get()
-          updateBoqColumn({ itemIndex, boqColumnKey, html })
+          updateBoqColumnCell({ itemIndex, boqColumnKey, html })
         }}
         additionalStyle={{
           flexGrow: 1,

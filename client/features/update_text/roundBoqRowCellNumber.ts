@@ -12,7 +12,7 @@ type Props = {
   cellEditor: FroalaEditor | null
 }
 
-export const roundBoqCell = ({
+export const roundBoqRowCellNumber = ({
   itemIndex,
   rowIndex,
   boqColumnKey,
@@ -23,12 +23,17 @@ export const roundBoqCell = ({
 
   const value = boqRow[boqColumnKey].value
   if (value === null) return
+
   const roundedValue = roundTo(value, 2)
   const shouldRound = value !== roundedValue
 
   if (shouldRound) {
-    const htmlTextContent = getTextContent({ html: boqRow[boqColumnKey].html })
+    const htmlTextContent = getTextContent({
+      html: boqRow[boqColumnKey].html,
+    })
+
     if (htmlTextContent === null) return
+
     const newHtml = boqRow[boqColumnKey].html.replace(String(value), String(roundedValue))
 
     dispatch(itemsSlice.actions.updateBoqCell({
