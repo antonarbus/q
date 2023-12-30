@@ -59,6 +59,7 @@ export const ItemPriceCell = (): JSX.Element => {
           })
         }}
         onBlur={() => {
+          // todo: separate thousands as we did at eReceipt
           roundBoqRowCellNumber({
             itemIndex,
             rowIndex,
