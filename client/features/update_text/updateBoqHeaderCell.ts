@@ -7,15 +7,22 @@ type Props = {
   html: string
   itemIndex: number
   boqHeaderKey: BoqHeaderKey
-
 }
 
-export const updateBoqHeader = ({ html, itemIndex, boqHeaderKey }: Props): void => {
+export const updateBoqHeaderCell = ({
+  html,
+  itemIndex,
+  boqHeaderKey,
+}: Props): void => {
   const boqItem = getBoqItem({ itemIndex })
   if (boqItem === undefined) return
+
   const prevHtml = boqItem.boq.header[boqHeaderKey].html
   const didTextChange = prevHtml !== html
   if (!didTextChange) return
+
   dispatch(itemsSlice.actions.updateBoqHeaderText({ itemIndex, html, boqHeaderKey }))
-  saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
+  saveItemsLocally({
+    msgAboveItemWithIndex: itemIndex,
+  })
 }

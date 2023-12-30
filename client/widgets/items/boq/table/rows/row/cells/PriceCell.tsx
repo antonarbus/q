@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { theme } from 'client/shared/clients'
 import { boqCellHtmlGetter, selectColumnWidth } from 'client/entities/items'
-import { updateBoqCellAtStore, updateSubTotalPrice } from 'client/features/update_cell'
+import { updateBoqRowCellAtStore, updateSubTotalPriceCell } from 'client/features/update_text'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
 import { Froala } from 'client/shared/ui/froala'
@@ -40,14 +40,14 @@ export const PriceCell = (): JSX.Element => {
         onContentChange={() => {
           if (priceCellEditorRef.current === null) return
 
-          updateBoqCellAtStore({
+          updateBoqRowCellAtStore({
             itemIndex,
             rowIndex,
             boqColumnKey,
             html: priceCellEditorRef.current.html.get(),
           })
 
-          updateSubTotalPrice({
+          updateSubTotalPriceCell({
             itemIndex,
             subTotalPriceEditor: subTotalPriceEditorRef.current,
           })

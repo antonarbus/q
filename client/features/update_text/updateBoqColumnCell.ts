@@ -9,12 +9,20 @@ type Props = {
   boqColumnKey: BoqColumnKey
 }
 
-export const updateBoqColumn = ({ html, itemIndex, boqColumnKey }: Props): void => {
+export const updateBoqColumnCell = ({
+  html,
+  itemIndex,
+  boqColumnKey,
+}: Props): void => {
   const boqItem = getBoqItem({ itemIndex })
   if (boqItem === undefined) return
+
   const prevHtml = boqItem.boq.column[boqColumnKey].html
   const didTextChange = prevHtml !== html
   if (!didTextChange) return
+
   dispatch(itemsSlice.actions.updateBoqColumnNameText({ itemIndex, html, boqColumnKey }))
-  saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
+  saveItemsLocally({
+    msgAboveItemWithIndex: itemIndex,
+  })
 }

@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { theme } from 'client/shared/clients'
 import { boqCellHtmlGetter, selectColumnWidth } from 'client/entities/items'
-import { updateBoqCellAtStore } from 'client/features/update_cell'
+import { updateBoqRowCellAtStore } from 'client/features/update_text'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
 import { Froala } from 'client/shared/ui/froala'
@@ -45,7 +45,7 @@ export const DescriptionCell = (): JSX.Element => {
         onContentChange={() => {
           if (editorRef.current === null) return
 
-          updateBoqCellAtStore({
+          updateBoqRowCellAtStore({
             itemIndex,
             rowIndex,
             boqColumnKey,

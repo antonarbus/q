@@ -7,12 +7,19 @@ type Props = {
   itemIndex: number
 }
 
-export const updateItem = ({ html, itemIndex }: Props): void => {
+export const updateTextItem = ({
+  html,
+  itemIndex,
+}: Props): void => {
   const item = getState().items[itemIndex]
   if (item?.type !== 'text') return
+
   const prevHtml = item.text.html
   const didTextChange = prevHtml !== html
   if (!didTextChange) return
+
   dispatch(itemsSlice.actions.updateItemText({ itemIndex, html }))
-  saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
+  saveItemsLocally({
+    msgAboveItemWithIndex: itemIndex,
+  })
 }

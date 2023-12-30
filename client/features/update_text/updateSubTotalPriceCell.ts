@@ -10,7 +10,7 @@ type Props = {
   subTotalPriceEditor: FroalaEditor | null
 }
 
-export const updateSubTotalPrice = ({
+export const updateSubTotalPriceCell = ({
   itemIndex,
   subTotalPriceEditor,
 }: Props): void => {

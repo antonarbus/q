@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { theme } from 'client/shared/clients'
 import { boqCellHtmlGetter, selectColumnWidth } from 'client/entities/items'
-import { roundBoqCell, updateBoqCellAtStore, updatePriceCell, updateSubTotalPrice } from 'client/features/update_cell'
+import { roundBoqRowCellNumber, updateBoqRowCellAtStore, updateBoqRowPriceCell, updateSubTotalPriceCell } from 'client/features/update_text'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
 import { Froala } from 'client/shared/ui/froala'
@@ -40,26 +40,26 @@ export const ItemPriceCell = (): JSX.Element => {
         onContentChange={() => {
           if (itemPriceCellEditorRef.current === null) return
 
-          updateBoqCellAtStore({
+          updateBoqRowCellAtStore({
             itemIndex,
             rowIndex,
             boqColumnKey,
             html: itemPriceCellEditorRef.current.html.get(),
           })
 
-          updatePriceCell({
+          updateBoqRowPriceCell({
             itemIndex,
             rowIndex,
             priceCellEditor: priceCellEditorRef.current,
           })
 
-          updateSubTotalPrice({
+          updateSubTotalPriceCell({
             itemIndex,
             subTotalPriceEditor: subTotalPriceEditorRef.current,
           })
         }}
         onBlur={() => {
-          roundBoqCell({
+          roundBoqRowCellNumber({
             itemIndex,
             rowIndex,
             boqColumnKey,
