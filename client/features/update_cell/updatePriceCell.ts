@@ -20,19 +20,21 @@ export const updatePriceCell = ({ itemIndex, rowIndex, priceCellEditor }: Props)
   if (row === undefined) return
 
   const newPriceValue = row.qty.value * row.itemPrice.value
-  console.log('🚀  newPriceValue:', newPriceValue)
   const roundedPriceValue = roundTo(newPriceValue, 2)
-  console.log('🚀  roundedPriceValue:', roundedPriceValue)
 
   const priceHtmlTextContent = getTextContentFromHtml({ html: row.price.html })
   const value = getNumberFromString({ string: priceHtmlTextContent })
-  console.log('🚀  value:', value)
 
   // RegExp to avoid values inside html tags
   // Create a regular expression with a negative lookbehind assertion
-  const regExp = new RegExp(`(?<!<[^>]*>)${String(value)}`)
+  // const regExp = new RegExp(`(?<!<[^>]*>)${String(value)}`)
+  const searchText = String(value)
+  const regExp = new RegExp(`(?![^<>]*>)${searchText}`, 'g')
   const newValue = String(roundedPriceValue)
+  console.log('🚀  newValue:', newValue)
   const updatedHtmlString = row.price.html.replace(regExp, newValue)
+  console.log('🚀  row.price.html:', row.price.html)
+  console.log('🚀  value:', value)
 
   console.log('🚀  newPriceHtml:', updatedHtmlString)
 
