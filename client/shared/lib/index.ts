@@ -1,5 +1,5 @@
 export { saveItemsLocally } from './save_items_locally/saveItemsLocally'
 export { getPastePlace } from './getPastePlace'
-export { getTextContent } from './getTextContent'
-export { getNumber } from './getNumber'
-export { replaceNumber } from './replaceNumber'
+export { getTextContentFromHtml } from './getTextContentFromHtml'
+export { getNumberFromString } from './getNumberFromString'
+export { getHtmlWithReplaceNumber } from './getHtmlWithReplaceNumber'

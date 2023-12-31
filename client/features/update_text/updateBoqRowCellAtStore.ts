@@ -1,6 +1,6 @@
 import { getBoqRow, itemsSlice } from 'client/entities/items'
 import { dispatch } from 'client/shared/clients'
-import { getNumber, getTextContent } from 'client/shared/lib'
+import { getNumberFromString, getTextContentFromHtml } from 'client/shared/lib'
 import type { BoqColumnKey } from 'client/shared/types'
 
 type Props = {
@@ -23,9 +23,9 @@ export const updateBoqRowCellAtStore = ({
   const didTextChange = prevHtml !== html
   if (!didTextChange) return
 
-  const cellTextContent = getTextContent({ html })
+  const cellTextContent = getTextContentFromHtml({ html })
 
-  const cellValueFromHtml = getNumber({
+  const cellValueFromHtml = getNumberFromString({
     string: cellTextContent,
   })
 

@@ -1,6 +1,6 @@
 import { getBoqItem, getBoqRows, itemsSlice } from 'client/entities/items'
 import { dispatch } from 'client/shared/clients'
-import { getNumber, getTextContent, replaceNumber } from 'client/shared/lib'
+import { getNumberFromString, getTextContentFromHtml, getHtmlWithReplaceNumber } from 'client/shared/lib'
 import { type BoqRow } from 'client/shared/types'
 import type FroalaEditor from 'froala-editor'
 import { roundTo } from 'round-to'
@@ -29,15 +29,15 @@ export const updateSubTotalPriceCell = ({
 
   const subTotalPriceValueRounded = roundTo(subTotalPriceValue, 2)
 
-  const subTotalPriceTextContent = getTextContent({
+  const subTotalPriceTextContent = getTextContentFromHtml({
     html: boqItem.boq.header.subTotalPrice.html,
   })
 
-  const subTotalPriceValueFromHtml = getNumber({
+  const subTotalPriceValueFromHtml = getNumberFromString({
     string: subTotalPriceTextContent,
   })
 
-  const updatedHtml = replaceNumber({
+  const updatedHtml = getHtmlWithReplaceNumber({
     html: boqItem.boq.header.subTotalPrice.html,
     oldNumber: subTotalPriceValueFromHtml,
     newNumber: subTotalPriceValueRounded,
