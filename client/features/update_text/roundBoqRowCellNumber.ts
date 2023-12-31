@@ -1,5 +1,5 @@
 import { dispatch } from 'client/shared/clients'
-import { getStringWithReplaceNumber } from 'client/shared/lib'
+import { getStringWithReplacedNumber } from 'client/shared/lib'
 import type FroalaEditor from 'froala-editor'
 import { roundTo } from 'round-to'
 import { type BoqColumnKey } from 'client/shared/types'
@@ -29,7 +29,7 @@ export const roundBoqRowCellNumber = ({
   const html = boqRow[boqColumnKey].html
   const htmlWithoutSpacesBetweenNumbers = html.replace(/(?<=\d)\s+(?=\d)/g, '')
 
-  const newHtml = getStringWithReplaceNumber({
+  const newHtml = getStringWithReplacedNumber({
     string: htmlWithoutSpacesBetweenNumbers,
     oldNumber: value,
     newNumber: roundedValue,

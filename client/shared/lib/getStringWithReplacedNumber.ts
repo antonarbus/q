@@ -4,7 +4,7 @@ type Props = {
   newNumber: string | number
 }
 
-export const getStringWithReplaceNumber = ({
+export const getStringWithReplacedNumber = ({
   string,
   oldNumber,
   newNumber,
