@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { theme } from 'client/shared/clients'
 import { boqCellHtmlGetter, selectColumnWidth } from 'client/entities/items'
-import { updateBoqRowCellAtStore, updateBoqRowPriceCell, updateSubTotalPriceCell } from 'client/features/update_text'
+import { formatBoqRowCellNumber, updateBoqRowCellAtStore, updateBoqRowPriceCell, updateSubTotalPriceCell } from 'client/features/update_text'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
 import { Froala } from 'client/shared/ui/froala'
@@ -56,6 +56,15 @@ export const QtyCell = (): JSX.Element => {
           updateSubTotalPriceCell({
             itemIndex,
             subTotalPriceEditor: subTotalPriceEditorRef.current,
+          })
+        }}
+        onBlur={() => {
+          formatBoqRowCellNumber({
+            itemIndex,
+            rowIndex,
+            boqColumnKey,
+            cellEditor: qtyCellEditorRef.current,
+            roundToTwoDecimals: false,
           })
         }}
         additionalStyle={{
