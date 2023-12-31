@@ -40,6 +40,8 @@ export const PriceCell = (): JSX.Element => {
         onContentChange={() => {
           if (priceCellEditorRef.current === null) return
 
+          console.log('price is manually changed, choose if item price or qty to be recalculated accordingly?')
+
           updateBoqRowCellAtStore({
             itemIndex,
             rowIndex,
