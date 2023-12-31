@@ -1,5 +1,5 @@
 import { dispatch } from 'client/shared/clients'
-import { getHtmlWithReplaceNumber, getTextContentFromHtml } from 'client/shared/lib'
+import { getStringWithReplaceNumber } from 'client/shared/lib'
 import type FroalaEditor from 'froala-editor'
 import { roundTo } from 'round-to'
 import { type BoqColumnKey } from 'client/shared/types'
@@ -23,28 +23,29 @@ export const roundBoqRowCellNumber = ({
 
   const value = boqRow[boqColumnKey].value
   if (value === null) return
-  console.log('🚀  value:', value)
 
   const roundedValue = roundTo(value, 2)
-  const shouldRound = value !== roundedValue
 
-  if (shouldRound) {
-    const newHtml = getHtmlWithReplaceNumber({
-      html: boqRow[boqColumnKey].html,
-      oldNumber: value,
-      newNumber: roundedValue,
-    })
+  const html = boqRow[boqColumnKey].html
+  const htmlWithoutSpacesBetweenNumbers = html.replace(/(?<=\d)\s+(?=\d)/g, '')
 
-    dispatch(itemsSlice.actions.updateBoqCell({
-      itemIndex,
-      rowIndex,
-      html: newHtml,
-      value: roundedValue,
-      boqColumnKey,
-    }))
+  const newHtml = getStringWithReplaceNumber({
+    string: htmlWithoutSpacesBetweenNumbers,
+    oldNumber: value,
+    newNumber: roundedValue,
+  })
 
-    if (cellEditor === null) return
+  if (htmlWithoutSpacesBetweenNumbers === newHtml) return
 
-    cellEditor.html.set(newHtml)
-  }
+  dispatch(itemsSlice.actions.updateBoqCell({
+    itemIndex,
+    rowIndex,
+    html: newHtml,
+    value: roundedValue,
+    boqColumnKey,
+  }))
+
+  if (cellEditor === null) return
+
+  cellEditor.html.set(newHtml)
 }
