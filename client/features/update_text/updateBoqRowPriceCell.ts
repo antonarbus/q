@@ -1,5 +1,5 @@
 import type FroalaEditor from 'froala-editor'
-import { getNumber, getTextContent, replaceNumber } from 'client/shared/lib'
+import { getNumberFromString, getTextContentFromHtml, getHtmlWithReplaceNumber } from 'client/shared/lib'
 import { updateBoqRowCellAtStore } from './updateBoqRowCellAtStore'
 import { roundTo } from 'round-to'
 import { getBoqRow } from 'client/entities/items'
@@ -23,15 +23,15 @@ export const updateBoqRowPriceCell = ({
   const newPriceValue = boqRow.qty.value * boqRow.itemPrice.value
   const newPriceValueRounded = roundTo(newPriceValue, 2)
 
-  const priceTextContent = getTextContent({
+  const priceTextContent = getTextContentFromHtml({
     html: boqRow.price.html,
   })
 
-  const priceValueFromHtml = getNumber({
+  const priceValueFromHtml = getNumberFromString({
     string: priceTextContent,
   })
 
-  const updatedHtml = replaceNumber({
+  const updatedHtml = getHtmlWithReplaceNumber({
     html: boqRow.price.html,
     oldNumber: priceValueFromHtml,
     newNumber: newPriceValueRounded,
