@@ -16,7 +16,6 @@ export const updateBoqRowCellAtStore = ({
   rowIndex,
   boqColumnKey,
 }: Props): void => {
-  console.log('🚀  html:', html)
   const boqRow = getBoqRow({ itemIndex, rowIndex })
   if (boqRow === undefined) return
 

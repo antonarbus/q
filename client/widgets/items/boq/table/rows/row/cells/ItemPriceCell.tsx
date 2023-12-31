@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { theme } from 'client/shared/clients'
 import { boqCellHtmlGetter, selectColumnWidth } from 'client/entities/items'
-import { roundBoqRowCellNumber, updateBoqRowCellAtStore, updateBoqRowPriceCell, updateSubTotalPriceCell } from 'client/features/update_text'
+import { formatBoqRowCellNumber, updateBoqRowCellAtStore, updateBoqRowPriceCell, updateSubTotalPriceCell } from 'client/features/update_text'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
 import { Froala } from 'client/shared/ui/froala'
@@ -59,12 +59,12 @@ export const ItemPriceCell = (): JSX.Element => {
           })
         }}
         onBlur={() => {
-          // todo: separate thousands as we did at eReceipt
-          roundBoqRowCellNumber({
+          formatBoqRowCellNumber({
             itemIndex,
             rowIndex,
             boqColumnKey,
             cellEditor: itemPriceCellEditorRef.current,
+            roundToTwoDecimals: true,
           })
         }}
         additionalStyle={{
