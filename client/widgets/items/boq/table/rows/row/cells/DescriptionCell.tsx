@@ -40,7 +40,7 @@ export const DescriptionCell = (): JSX.Element => {
     >
       <Froala
         editorRef={editorRef}
-        placeholder={`${boqColumnKey}...`}
+        placeholder='Description...'
         htmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
         onContentChange={() => {
           if (editorRef.current === null) return

@@ -35,7 +35,7 @@ export const QtyCell = (): JSX.Element => {
     >
       <Froala
         editorRef={qtyCellEditorRef}
-        placeholder={`${boqColumnKey}...`}
+        placeholder='Qty...'
         htmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
         onContentChange={() => {
           if (qtyCellEditorRef.current === null) return

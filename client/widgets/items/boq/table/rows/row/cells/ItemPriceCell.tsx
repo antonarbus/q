@@ -35,7 +35,7 @@ export const ItemPriceCell = (): JSX.Element => {
     >
       <Froala
         editorRef={itemPriceCellEditorRef}
-        placeholder={`${boqColumnKey}...`}
+        placeholder='Item price...'
         htmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
         onContentChange={() => {
           if (itemPriceCellEditorRef.current === null) return
