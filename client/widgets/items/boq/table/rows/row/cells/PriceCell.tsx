@@ -1,13 +1,15 @@
 import { Box } from '@mui/material'
-import { theme } from 'client/shared/clients'
+import { dispatch, theme } from 'client/shared/clients'
 import { boqCellHtmlGetter, selectColumnWidth } from 'client/entities/items'
-import { updateBoqRowCellAtStore, updateSubTotalPriceCell } from 'client/features/update_text'
+import { isBoqRowPriceValid, updateBoqRowCellAtStore, updateSubTotalPriceCell } from 'client/features/update_text'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
 import { Froala } from 'client/shared/ui/froala'
 import { useBoqItem } from 'client/widgets/items/boq/BoqItemProvider'
 import { useItem } from 'client/widgets/items/ItemProvider'
 import { useRow } from '../../RowProvider'
+import { dialogSlice } from 'client/shared/components/dialog/dialogSlice'
+import { PriceWasChangedManuallyDialog } from './PriceWasChangedManuallyDialog'
 
 const boqColumnKey: BoqColumnKey = 'price'
 
@@ -40,8 +42,6 @@ export const PriceCell = (): JSX.Element => {
         onContentChange={() => {
           if (priceCellEditorRef.current === null) return
 
-          console.log('price is manually changed, choose if item price or qty to be recalculated accordingly?')
-
           updateBoqRowCellAtStore({
             itemIndex,
             rowIndex,
@@ -53,6 +53,14 @@ export const PriceCell = (): JSX.Element => {
             itemIndex,
             subTotalPriceEditor: subTotalPriceEditorRef.current,
           })
+        }}
+        onBlur={() => {
+          if (!isBoqRowPriceValid({ itemIndex, rowIndex })) {
+            dispatch(dialogSlice.actions.showPriceWasChangedManuallyDialog({
+              itemIndex,
+              rowIndex,
+            }))
+          }
         }}
         additionalStyle={{
           textAlign: 'center',
@@ -66,6 +74,7 @@ export const PriceCell = (): JSX.Element => {
           },
         }}
       />
+      <PriceWasChangedManuallyDialog />
     </Box>
   )
 }
