@@ -3,7 +3,6 @@ import { Global, css } from '@emotion/react'
 export const GlobalStyles = (): JSX.Element => (
   <Global
     styles={css`
-      /* scrollbar */
       html {
         overflow-y: scroll;
         overflow-x: hidden;
@@ -81,10 +80,22 @@ export const GlobalStyles = (): JSX.Element => (
       }
 
       /* Remove list styles (bullets/numbers) */
-      ol,
-      ul,
-      menu {
-        list-style: none;
+      ol, ul, menu {
+        padding-left: 25px;
+        list-style-type: inherit;
+      }
+
+      ol ol, ul ul {
+        padding-left: 25px;
+        list-style-type: inherit;
+      }
+
+      ol {
+        list-style-type: decimal;
+      }
+
+      ul {
+        list-style-type: disc;
       }
 
       /* For images to not be able to exceed their container */
