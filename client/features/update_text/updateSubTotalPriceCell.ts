@@ -2,6 +2,7 @@ import { getBoqItem, getBoqRows, itemsSlice } from 'client/entities/items'
 import { dispatch } from 'client/shared/clients'
 import { getNumberFromString, getTextContentFromHtml, getStringWithNewFormattedNumber } from 'client/shared/lib'
 import { type BoqRow } from 'client/shared/types'
+import { updateNumberInsideHtmlIncrementallyWithFroala } from 'client/shared/ui/froala'
 import type FroalaEditor from 'froala-editor'
 import { roundTo } from 'round-to'
 
@@ -22,12 +23,14 @@ export const updateSubTotalPriceCell = ({
   const boqRows = getBoqRows({ itemIndex })
   if (boqRows === undefined) return
 
-  const subTotalPriceValue: number = boqRows.reduce((accumulator: number, boqRow: BoqRow) => {
+  const subTotalPriceValueCurrent = boqItem.boq.header.subTotalPrice.value
+
+  const subTotalPriceValueNew: number = boqRows.reduce((accumulator: number, boqRow: BoqRow) => {
     const price = boqRow.price.value
     return accumulator + price
   }, 0)
 
-  const subTotalPriceValueRounded = roundTo(subTotalPriceValue, 2)
+  const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
 
   const subTotalPriceTextContent = getTextContentFromHtml({
     html: boqItem.boq.header.subTotalPrice.html,
@@ -40,14 +43,19 @@ export const updateSubTotalPriceCell = ({
   const updatedHtml = getStringWithNewFormattedNumber({
     string: boqItem.boq.header.subTotalPrice.html,
     oldNumber: subTotalPriceValueFromHtml,
-    newNumber: subTotalPriceValueRounded,
+    newNumber: subTotalPriceValueNewRounded,
   })
 
-  dispatch(itemsSlice.actions.updateTotalPrice({
+  dispatch(itemsSlice.actions.updateSubTotalPrice({
     itemIndex,
     html: updatedHtml,
-    value: subTotalPriceValueRounded,
+    value: subTotalPriceValueNewRounded,
   }))
 
-  subTotalPriceEditor.html.set(updatedHtml)
+  updateNumberInsideHtmlIncrementallyWithFroala({
+    oldNumber: subTotalPriceValueCurrent,
+    newNumber: subTotalPriceValueNewRounded,
+    editor: subTotalPriceEditor,
+    html: boqItem.boq.header.subTotalPrice.html,
+  })
 }
