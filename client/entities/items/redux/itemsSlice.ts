@@ -23,7 +23,7 @@ import { updateItemHeightReducer } from '../reducers/updateItemHeightReducer'
 import { updateItemHeightsReducer } from '../reducers/updateItemHeightsReducer'
 import { updateItemTextReducer } from '../reducers/updateItemTextReducer'
 import { updateItemWidthReducer } from '../reducers/updateItemWidthReducer'
-import { updateTotalPriceReducer } from '../reducers/updateTotalPriceReducer'
+import { updateSubTotalPriceReducer } from '../reducers/updateTotalPriceReducer'
 
 export type ItemsState = Item[]
 
@@ -55,6 +55,6 @@ export const itemsSlice = createSlice({
     updateItemHeights: updateItemHeightsReducer, // todo: not used anywhere
     updateItemText: updateItemTextReducer,
     updateItemWidth: updateItemWidthReducer,
-    updateTotalPrice: updateTotalPriceReducer,
+    updateSubTotalPrice: updateSubTotalPriceReducer,
   },
 })

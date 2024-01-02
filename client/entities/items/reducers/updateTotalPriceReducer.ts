@@ -2,7 +2,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import type { ItemsState } from '../redux/itemsSlice'
 import { getBoqItem } from '../utils/getBoqItem'
 
-export const updateTotalPriceReducer = (state: ItemsState, action: PayloadAction<{
+export const updateSubTotalPriceReducer = (state: ItemsState, action: PayloadAction<{
   itemIndex: number
   value: number
   html: string
