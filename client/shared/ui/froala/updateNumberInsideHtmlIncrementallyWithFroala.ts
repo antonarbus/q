@@ -15,28 +15,28 @@ export const updateNumberInsideHtmlIncrementallyWithFroala = ({
   html,
   editor,
 }: Props): void => {
-  const steps = 1000
+  const steps = 100
   const valueDifference = newNumber - oldNumber
   const stepValue = valueDifference / steps
 
   for (let i = 1; i <= steps; i++) {
+    const incrementedValue = roundTo(oldNumber + i * stepValue, 0)
+
+    const textContent = getTextContentFromHtml({ html })
+
+    const numberFromHtml = getNumberFromString({
+      string: textContent,
+    })
+
+    const updatedHtml = getStringWithNewFormattedNumber({
+      string: html,
+      oldNumber: numberFromHtml,
+      newNumber: incrementedValue,
+    })
+
     setTimeout(() => {
-      const incrementedValue = roundTo(oldNumber + i * stepValue, 0)
-
-      const textContent = getTextContentFromHtml({ html })
-
-      const numberFromHtml = getNumberFromString({
-        string: textContent,
-      })
-
-      const updatedHtml = getStringWithNewFormattedNumber({
-        string: html,
-        oldNumber: numberFromHtml,
-        newNumber: incrementedValue,
-      })
-
       editor.html.set(updatedHtml)
-    }, 10)
+    }, 5 * i)
   }
 
   setTimeout(() => {
@@ -47,5 +47,5 @@ export const updateNumberInsideHtmlIncrementallyWithFroala = ({
     })
 
     editor.html.set(finalHtml)
-  }, 100)
+  }, 5 * steps + 50)
 }
