@@ -55,62 +55,6 @@ const customTheme = {
   },
 }
 
-// type CustomTheme = typeof customTheme
-
-// https://mui.com/material-ui/customization/theming/#typescript
-// https://medium.com/@bahuguna.shubhanshu19/how-to-create-custom-theme-in-react-written-in-typescript-using-material-ui-154ed1daeae6
-declare module '@mui/material/styles' {
-  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-  // interface Theme {
-  //   // from mui
-  //   palette: {
-  //     primary: {
-  //       main: string
-  //     }
-  //   }
-  //   typography: {
-  //     button: {
-  //       textTransform: string
-  //     }
-  //   }
-  //   // from customTheme
-  //   colors: {
-  //     grey: string
-  //     red: string
-  //     topMenuItem: string
-  //     darkBackground: string
-  //     greyFont: string
-  //   }
-  //   nav: {
-  //     height: number
-  //     marginTop: number
-  //     marginBottom: number
-  //     fullHeight: number
-  //   }
-  //   menu: {
-  //     width: number
-  //     paddingTop: number
-  //     paddingBottom: number
-  //     menuItem: {
-  //       height: number
-  //     }
-  //     navItem: {
-  //       marginLeft: number
-  //       marginRight: number
-  //     }
-  //   }
-  //   item: {
-  //     padding: number
-  //     animationDuration: number
-  //   }
-  //   copy: {
-  //     pasteTextColor: string
-  //     animationDuration: number
-  //   },
-
-  // }
-}
-
 export const theme = { ...muiTheme, ...customTheme }
 
 export const themeClient = createTheme(theme)

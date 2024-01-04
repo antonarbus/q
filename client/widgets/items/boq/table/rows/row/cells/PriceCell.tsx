@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { dispatch, theme } from 'client/shared/clients'
+import { theme } from 'client/shared/clients'
 import { boqCellHtmlGetter, selectColumnWidth } from 'client/entities/items'
 import { isBoqRowPriceValid, updateBoqRowCellAtStore, updateSubTotalPriceCell } from 'client/features/update_text'
 import { useSelectorTyped } from 'client/shared/hooks'
@@ -8,8 +8,6 @@ import { Froala } from 'client/shared/ui/froala'
 import { useBoqItem } from 'client/widgets/items/boq/BoqItemProvider'
 import { useItem } from 'client/widgets/items/ItemProvider'
 import { useRow } from '../../RowProvider'
-import { dialogSlice } from 'client/shared/components/dialog/dialogSlice'
-import { PriceWasChangedManuallyDialog } from './PriceWasChangedManuallyDialog'
 
 const boqColumnKey: BoqColumnKey = 'price'
 
@@ -54,14 +52,6 @@ export const PriceCell = (): JSX.Element => {
             subTotalPriceEditor: subTotalPriceEditorRef.current,
           })
         }}
-        onBlur={() => {
-          if (!isBoqRowPriceValid({ itemIndex, rowIndex })) {
-            dispatch(dialogSlice.actions.showPriceWasChangedManuallyDialog({
-              itemIndex,
-              rowIndex,
-            }))
-          }
-        }}
         additionalStyle={{
           textAlign: 'center',
           padding: theme.cell.padding,
@@ -74,7 +64,6 @@ export const PriceCell = (): JSX.Element => {
           },
         }}
       />
-      <PriceWasChangedManuallyDialog />
     </Box>
   )
 }

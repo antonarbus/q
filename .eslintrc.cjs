@@ -20,17 +20,17 @@ module.exports = {
     tsconfigRootDir: __dirname,
   },
   rules: {
-    "@typescript-eslint/no-misused-promises": ["error", { "checksVoidReturn": false }],
-    "@typescript-eslint/strict-boolean-expressions": "off",
-    "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/consistent-type-definitions": "off",
-    "jsx-quotes": ["error", "prefer-single"],
-
-    // 'no-console': ['warn', { allow: ['error'] }],
+    'jsx-quotes': ['error', 'prefer-single'],
+    'no-console': ['error', { allow: ['error', 'warn'] }], // no console.log(), but allow console.error/warn()
     'comma-dangle': ['error', 'always-multiline'],
+    '@typescript-eslint/no-misused-promises': ['error', { 'checksVoidReturn': false }],
+    '@typescript-eslint/strict-boolean-expressions': 'off',
+    '@typescript-eslint/no-explicit-any': 'error',
+    '@typescript-eslint/consistent-type-definitions': 'off',
     '@typescript-eslint/comma-dangle': 'off',
     '@typescript-eslint/space-before-function-paren': 'off',
-    "@typescript-eslint/consistent-type-definitions": ["error", "type"],
+    '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+    '@typescript-eslint/unbound-method': 'off', // new rule after upgrade, not clear, take a look later
     // '@typescript-eslint/indent': 'off',
     // '@typescript-eslint/quotes': 'off',
     // 'semi': ['error', 'never'],
