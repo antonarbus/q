@@ -21,6 +21,10 @@ export const PriceCell = (): JSX.Element => {
   const minWidth = '100px'
   const maxWidth = width === 'auto' ? minWidth : width
 
+  // todo: on focus show pins in itemPrice and Qty
+  // todo: and animate them away to blur to let it be pressed
+  // todo: bring "pinned" prop into store
+
   return (
     <Box
       className={`td ${boqColumnKey}`}
