@@ -1,4 +1,3 @@
-import { appSlice } from 'client/entities/app'
 import { itemsSlice } from 'client/entities/items'
 import { className } from 'client/shared/className'
 import { dispatch } from 'client/shared/clients'
