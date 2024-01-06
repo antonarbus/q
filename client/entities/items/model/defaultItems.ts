@@ -69,7 +69,7 @@ export const defaultItems: Item[] = [
             value: 1,
             pin: {
               isPinned: false,
-              isDisplayed: false,
+              isShown: false,
             },
           },
           description: {
@@ -77,7 +77,7 @@ export const defaultItems: Item[] = [
             value: 0,
             pin: {
               isPinned: false,
-              isDisplayed: false,
+              isShown: false,
             },
           },
           itemPrice: {
@@ -85,7 +85,7 @@ export const defaultItems: Item[] = [
             value: 10,
             pin: {
               isPinned: false,
-              isDisplayed: false,
+              isShown: false,
             },
           },
           qty: {
@@ -93,7 +93,7 @@ export const defaultItems: Item[] = [
             value: 1,
             pin: {
               isPinned: true,
-              isDisplayed: false,
+              isShown: false,
             },
           },
           price: {
@@ -101,7 +101,7 @@ export const defaultItems: Item[] = [
             value: 10,
             pin: {
               isPinned: false,
-              isDisplayed: false,
+              isShown: false,
             },
           },
         },
@@ -115,7 +115,7 @@ export const defaultItems: Item[] = [
             value: 2,
             pin: {
               isPinned: false,
-              isDisplayed: false,
+              isShown: false,
             },
           },
           description: {
@@ -123,7 +123,7 @@ export const defaultItems: Item[] = [
             value: 0,
             pin: {
               isPinned: false,
-              isDisplayed: false,
+              isShown: false,
             },
           },
           itemPrice: {
@@ -131,7 +131,7 @@ export const defaultItems: Item[] = [
             value: 20,
             pin: {
               isPinned: false,
-              isDisplayed: false,
+              isShown: false,
             },
           },
           qty: {
@@ -139,7 +139,7 @@ export const defaultItems: Item[] = [
             value: 2,
             pin: {
               isPinned: true,
-              isDisplayed: false,
+              isShown: false,
             },
           },
           price: {
@@ -147,7 +147,7 @@ export const defaultItems: Item[] = [
             value: 40,
             pin: {
               isPinned: false,
-              isDisplayed: false,
+              isShown: false,
             },
           },
         },
@@ -161,7 +161,7 @@ export const defaultItems: Item[] = [
             value: 3,
             pin: {
               isPinned: false,
-              isDisplayed: false,
+              isShown: false,
             },
           },
           description: {
@@ -169,7 +169,7 @@ export const defaultItems: Item[] = [
             value: 0,
             pin: {
               isPinned: false,
-              isDisplayed: false,
+              isShown: false,
             },
           },
           itemPrice: {
@@ -177,7 +177,7 @@ export const defaultItems: Item[] = [
             value: 30,
             pin: {
               isPinned: false,
-              isDisplayed: false,
+              isShown: false,
             },
           },
           qty: {
@@ -185,7 +185,7 @@ export const defaultItems: Item[] = [
             value: 3,
             pin: {
               isPinned: true,
-              isDisplayed: false,
+              isShown: false,
             },
           },
           price: {
@@ -193,7 +193,7 @@ export const defaultItems: Item[] = [
             value: 90,
             pin: {
               isPinned: false,
-              isDisplayed: false,
+              isShown: false,
             },
           },
         },

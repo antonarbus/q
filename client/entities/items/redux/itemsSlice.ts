@@ -20,10 +20,11 @@ import { updateBoqHeaderTextReducer } from './reducers/updateBoqHeaderTextReduce
 import { updateBoqRowHeightAndWidthReducer } from './reducers/updateBoqRowHeightAndWidthReducer'
 import { updateColWidthReducer } from './reducers/updateColWidthReducer'
 import { updateItemHeightReducer } from './reducers/updateItemHeightReducer'
-import { updateItemHeightsReducer } from './reducers/updateItemHeightsReducer'
 import { updateItemTextReducer } from './reducers/updateItemTextReducer'
 import { updateItemWidthReducer } from './reducers/updateItemWidthReducer'
 import { updateSubTotalPriceReducer } from './reducers/updateTotalPriceReducer'
+import { showBoqRowCellPinReducer } from './reducers/showShowBoqRowCellPinReducer'
+import { hideBoqRowCellPinReducer } from './reducers/hideBoqRowCellPinReducer'
 
 export type ItemsState = Item[]
 
@@ -52,9 +53,10 @@ export const itemsSlice = createSlice({
     updateBoqRowHeightAndWidth: updateBoqRowHeightAndWidthReducer,
     updateColWidth: updateColWidthReducer,
     updateItemHeight: updateItemHeightReducer,
-    updateItemHeights: updateItemHeightsReducer, // todo: not used anywhere
     updateItemText: updateItemTextReducer,
     updateItemWidth: updateItemWidthReducer,
     updateSubTotalPrice: updateSubTotalPriceReducer,
+    showBoqRowCellPin: showBoqRowCellPinReducer,
+    hideBoqRowCellPin: hideBoqRowCellPinReducer,
   },
 })
