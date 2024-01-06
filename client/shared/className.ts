@@ -5,4 +5,5 @@ export const className = {
   boqRowActions: 'item-actions',
   actionsContainer: 'actions-container',
   boqRow: 'boq-row',
+  pin: 'pin',
 }
