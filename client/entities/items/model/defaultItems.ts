@@ -68,7 +68,7 @@ export const defaultItems: Item[] = [
             html: '1',
             value: 1,
             pin: {
-              isActive: false,
+              isPinned: false,
               isDisplayed: false,
             },
           },
@@ -76,7 +76,7 @@ export const defaultItems: Item[] = [
             html: 'description 1',
             value: 0,
             pin: {
-              isActive: false,
+              isPinned: false,
               isDisplayed: false,
             },
           },
@@ -84,7 +84,7 @@ export const defaultItems: Item[] = [
             html: '10',
             value: 10,
             pin: {
-              isActive: false,
+              isPinned: false,
               isDisplayed: false,
             },
           },
@@ -92,7 +92,7 @@ export const defaultItems: Item[] = [
             html: '1',
             value: 1,
             pin: {
-              isActive: false,
+              isPinned: true,
               isDisplayed: false,
             },
           },
@@ -100,7 +100,7 @@ export const defaultItems: Item[] = [
             html: '10',
             value: 10,
             pin: {
-              isActive: false,
+              isPinned: false,
               isDisplayed: false,
             },
           },
@@ -114,7 +114,7 @@ export const defaultItems: Item[] = [
             html: '2',
             value: 2,
             pin: {
-              isActive: false,
+              isPinned: false,
               isDisplayed: false,
             },
           },
@@ -122,7 +122,7 @@ export const defaultItems: Item[] = [
             html: 'description 2',
             value: 0,
             pin: {
-              isActive: false,
+              isPinned: false,
               isDisplayed: false,
             },
           },
@@ -130,7 +130,7 @@ export const defaultItems: Item[] = [
             html: '20',
             value: 20,
             pin: {
-              isActive: false,
+              isPinned: false,
               isDisplayed: false,
             },
           },
@@ -138,7 +138,7 @@ export const defaultItems: Item[] = [
             html: '2',
             value: 2,
             pin: {
-              isActive: false,
+              isPinned: true,
               isDisplayed: false,
             },
           },
@@ -146,7 +146,7 @@ export const defaultItems: Item[] = [
             html: '40',
             value: 40,
             pin: {
-              isActive: false,
+              isPinned: false,
               isDisplayed: false,
             },
           },
@@ -160,7 +160,7 @@ export const defaultItems: Item[] = [
             html: '3',
             value: 3,
             pin: {
-              isActive: false,
+              isPinned: false,
               isDisplayed: false,
             },
           },
@@ -168,7 +168,7 @@ export const defaultItems: Item[] = [
             html: 'description 3',
             value: 0,
             pin: {
-              isActive: false,
+              isPinned: false,
               isDisplayed: false,
             },
           },
@@ -176,7 +176,7 @@ export const defaultItems: Item[] = [
             html: '30',
             value: 30,
             pin: {
-              isActive: false,
+              isPinned: false,
               isDisplayed: false,
             },
           },
@@ -184,7 +184,7 @@ export const defaultItems: Item[] = [
             html: '3',
             value: 3,
             pin: {
-              isActive: false,
+              isPinned: true,
               isDisplayed: false,
             },
           },
@@ -192,7 +192,7 @@ export const defaultItems: Item[] = [
             html: '90',
             value: 90,
             pin: {
-              isActive: false,
+              isPinned: false,
               isDisplayed: false,
             },
           },
