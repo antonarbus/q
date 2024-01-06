@@ -9,7 +9,7 @@ type Props = {
   editor: FroalaEditor
 }
 
-export const updateNumberInHtmlIncrementally = ({
+export const updateNumberInHtmlIncrementallyByFroala = ({
   oldNumber,
   newNumber,
   html,

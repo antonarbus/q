@@ -29,7 +29,6 @@ export { Froala } from './ui/froala/Froala'
 
 // hooks
 export { useIsItemSortDisabled } from './hooks/useIsItemSortDisabled'
-export { updateNumberInHtmlIncrementally } from './ui/froala/updateNumberInHtmlIncrementally'
 
 // providers
 export { BoqItemProvider, useBoqItem } from './providers/BoqItemProvider'
