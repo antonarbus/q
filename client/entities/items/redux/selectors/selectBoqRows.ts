@@ -1,5 +1,5 @@
 import type { BoqRow, RootState } from 'client/shared/types'
-import { getBoqRows } from '../../utils/getBoqRows'
+import { getBoqRows } from '../state_getters/getBoqRows'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type EqualityFn = (a: any, b: any) => boolean
@@ -17,8 +17,9 @@ type Props = {
   itemIndex: number
 }
 
-export const selectBoqRows = ({ itemIndex }: Props) => (state: RootState): BoqRow[] => {
-  const boqRows = getBoqRows({ itemIndex })
-  if (boqRows === undefined) return []
-  return boqRows
-}
+export const selectBoqRows = ({ itemIndex }: Props) =>
+  (state: RootState): BoqRow[] => {
+    const boqRows = getBoqRows({ itemIndex })
+    if (boqRows === undefined) return []
+    return boqRows
+  }

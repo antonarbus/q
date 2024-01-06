@@ -1,6 +1,6 @@
 import { getState } from 'client/shared/clients'
 import { type BoqItem } from 'client/shared/types'
-import { type ItemsState } from '../redux/itemsSlice'
+import { type ItemsState } from '../itemsSlice'
 
 type Props = {
   itemIndex: number
@@ -11,14 +11,8 @@ export const getBoqItem = ({
   itemIndex,
   state,
 }: Props): BoqItem | undefined => {
-  // if we call it from reducer is own state is required
-  if (state !== undefined) {
-    const item = state[itemIndex]
-    if (item?.type !== 'boq') return
-    return item
-  }
-
-  const item = getState().items[itemIndex]
+  // if we call func from reducer is should use own state which we pass here
+  const item = (state === undefined) ? getState().items[itemIndex] : state[itemIndex]
   if (item?.type !== 'boq') return
   return item
 }
