@@ -1,6 +1,5 @@
-import { selectIsLastBoqRow } from 'client/entities/items'
+import { selectIsLastBoqRow, useItem } from 'client/entities/items'
 import { useSelectorTyped } from 'client/shared/hooks'
-import { useItem } from 'client/widgets/items/ItemProvider'
 
 export const useIsBoqRowSortDisabled = (): boolean => {
   const { itemIndex } = useItem()

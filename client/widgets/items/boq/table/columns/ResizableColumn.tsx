@@ -1,10 +1,9 @@
 import type { BoqColumnKey } from 'client/shared/types'
 import type { ReactNode } from 'react'
-import { selectColumnWidth } from 'client/entities/items'
+import { selectColumnWidth, useItem } from 'client/entities/items'
 import { Resizable } from 're-resizable'
 import { useSelectorTyped } from 'client/shared/hooks'
 import { onColumnResize, onColumnResizeStart, onColumnResizeStop } from 'client/features/resize_column'
-import { useItem } from 'client/widgets/items/ItemProvider'
 
 type Props = {
   children: ReactNode

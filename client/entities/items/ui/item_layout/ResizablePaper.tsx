@@ -3,7 +3,7 @@ import { Resizable } from 're-resizable'
 import { className } from 'client/shared/className'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from 'client/shared/types'
-import { useItem } from 'client/widgets/items/ItemProvider'
+import { useItem } from '../../providers/ItemProvider'
 
 type Props = {
   children: ReactNode

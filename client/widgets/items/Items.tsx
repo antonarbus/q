@@ -5,9 +5,7 @@ import { PasteItem } from './paste/PasteItem'
 import { AnimatePresence } from 'framer-motion'
 import { DraggableItemsContainer } from 'client/entities/items/ui/DraggableItemsContainer'
 import { BoqItem } from './boq/BoqItem'
-import { itemsShapeEqualityFn } from 'client/entities/items'
-import { ItemProvider } from './ItemProvider'
-import { BoqItemProvider } from './boq/BoqItemProvider'
+import { ItemProvider, itemsShapeEqualityFn, BoqItemProvider } from 'client/entities/items'
 
 export const Items = (): JSX.Element => {
   const items = useSelectorTyped(state => state.items, itemsShapeEqualityFn)

@@ -2,12 +2,10 @@ import { useSelectorTyped } from 'client/shared/hooks'
 import { copySlice } from 'client/entities/copy'
 import { dispatch, getState, theme } from 'client/shared/clients'
 import { RxCross2 } from 'react-icons/rx'
-import { itemsSlice, selectIsLastBoqRow } from 'client/entities/items'
+import { itemsSlice, selectIsLastBoqRow, useItem, useRow } from 'client/entities/items'
 import { gsap } from 'gsap'
 import { useRef } from 'react'
 import { saveItemsLocally } from 'client/shared/lib'
-import { useItem } from 'client/widgets/items/ItemProvider'
-import { useRow } from 'client/widgets/items/boq/table/rows/RowProvider'
 
 export const DeleteBoqRowIcon = (): JSX.Element => {
   const ref = useRef<HTMLSpanElement>(null)

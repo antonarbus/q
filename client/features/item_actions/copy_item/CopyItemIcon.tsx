@@ -4,11 +4,10 @@ import { MdCopyAll } from 'react-icons/md'
 import { motion } from 'framer-motion'
 import { cleanHtml } from 'client/shared/lib/itemsUtils'
 import { copySlice } from 'client/entities/copy'
-import { itemsSlice, saveItemHeightByIndex } from 'client/entities/items'
+import { itemsSlice, saveItemHeightByIndex, useItem } from 'client/entities/items'
 import type { MouseEvent } from 'react'
 import { className } from 'client/shared/className'
 import { appSlice } from 'client/entities/app'
-import { useItem } from 'client/widgets/items/ItemProvider'
 
 export const CopyItemIcon = (): JSX.Element => {
   const { itemIndex } = useItem()

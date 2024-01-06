@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import type { ReactNode } from 'react'
 import { PasteHere } from './paste_here_row'
 import { className } from 'client/shared/className'
-import { useRow } from '../RowProvider'
+import { useRow } from 'client/entities/items'
 
 type Props = {
   children: ReactNode

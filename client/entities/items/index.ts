@@ -29,4 +29,9 @@ export { boqCellHtmlGetter } from './html_getters/boqCellHtmlGetter'
 // hooks
 export { useIsItemSortDisabled } from './hooks/useIsItemSortDisabled'
 
+// providers
+export { BoqItemProvider, useBoqItem } from './providers/BoqItemProvider'
+export { ItemProvider, useItem } from './providers/ItemProvider'
+export { RowProvider, useRow } from './providers/RowProvider'
+
 // types

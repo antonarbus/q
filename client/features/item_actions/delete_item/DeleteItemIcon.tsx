@@ -1,14 +1,13 @@
 import { useSelectorTyped } from 'client/shared/hooks'
 import { dispatch, getState, theme } from 'client/shared/clients'
 import { RxCross2 } from 'react-icons/rx'
-import { itemsSlice, selectIsLastItem } from 'client/entities/items'
+import { itemsSlice, selectIsLastItem, useItem } from 'client/entities/items'
 import { gsap } from 'gsap'
 import { useRef } from 'react'
 import { saveItemsLocally } from 'client/shared/lib'
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 import { copySlice } from 'client/entities/copy'
 import { appSlice } from 'client/entities/app'
-import { useItem } from 'client/widgets/items/ItemProvider'
 
 export const DeleteItemIcon = (): EmotionJSX.Element => {
   const ref = useRef<HTMLSpanElement>(null)

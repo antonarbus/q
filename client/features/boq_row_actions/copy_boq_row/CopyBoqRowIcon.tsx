@@ -4,12 +4,10 @@ import { MdCopyAll } from 'react-icons/md'
 import { motion } from 'framer-motion'
 import { cleanHtml } from 'client/shared/lib/itemsUtils'
 import { copySlice } from 'client/entities/copy'
-import { getBoqRow, itemsSlice } from 'client/entities/items'
+import { getBoqRow, itemsSlice, useItem, useRow } from 'client/entities/items'
 import type { MouseEvent } from 'react'
 import { className } from 'client/shared/className'
 import { appSlice } from 'client/entities/app'
-import { useItem } from 'client/widgets/items/ItemProvider'
-import { useRow } from 'client/widgets/items/boq/table/rows/RowProvider'
 
 export const CopyBoqRowIcon = (): JSX.Element => {
   const { rowIndex } = useRow()

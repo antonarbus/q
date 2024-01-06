@@ -1,6 +1,7 @@
 import type { Action, ThunkAction } from '@reduxjs/toolkit'
 import type { store } from '../clients'
 
+// todo: move this type into items
 export type {
   PasteItem,
   BoqCols,
