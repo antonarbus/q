@@ -76,7 +76,7 @@ export const QtyCell = (): JSX.Element => {
           },
         }}
       />
-      <Pin />
+      <Pin boqColumnKey={boqColumnKey} />
     </Box>
   )
 }

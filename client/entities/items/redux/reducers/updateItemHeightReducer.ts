@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { ItemsState } from '../redux/itemsSlice'
+import type { ItemsState } from '../itemsSlice'
 
 export const updateItemHeightReducer = (state: ItemsState, action: PayloadAction<{
   itemIndex: number

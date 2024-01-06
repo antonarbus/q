@@ -6,13 +6,15 @@ type Common = {
   isFroala: boolean
 }
 
+export type BoqRowCellPin = {
+  isPinned: boolean
+  isDisplayed: boolean
+}
+
 export type BoqRowCell = {
   html: string
   value: number
-  pin: {
-    isPinned: boolean
-    isDisplayed: boolean
-  }
+  pin: BoqRowCellPin
 }
 
 export type BoqRow = {
