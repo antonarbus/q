@@ -1,4 +1,4 @@
-import type { ItemsState } from '../redux/itemsSlice'
+import type { ItemsState } from '../itemsSlice'
 
 export const removeItemsMsgReducer = (state: ItemsState): ItemsState => {
   const items = state

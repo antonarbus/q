@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { ItemsState } from '../redux/itemsSlice'
+import type { ItemsState } from '../itemsSlice'
 import type { BoqRow, BoqRowCell, CopyPlace } from 'client/shared/types'
-import { getBoqItem } from '../utils/getBoqItem'
+import { getBoqItem } from '../../utils/getBoqItem'
 
 const defaultCellValues: BoqRowCell = {
   html: '',

@@ -1,8 +1,22 @@
+import { useSelectorTyped } from 'client/shared/hooks'
 import { useRow } from '../providers/RowProvider'
 import { VscPinned } from 'react-icons/vsc'
+import { selectBoqRowCellPin } from '../redux/selectors/selectBoqRowCellPin'
+import { useItem } from '../providers/ItemProvider'
+import { type BoqColumnKey } from 'client/shared/types'
+import { type ReactNode } from 'react'
 
-export const Pin = (): JSX.Element => {
-  const { rowId, rowIndex } = useRow()
+type Props = {
+  boqColumnKey: BoqColumnKey
+}
+
+export const Pin = ({ boqColumnKey }: Props): ReactNode => {
+  const { itemIndex } = useItem()
+  const { rowIndex } = useRow()
+  const pin = useSelectorTyped(selectBoqRowCellPin({ itemIndex, rowIndex, boqColumnKey }))
+
+  if (pin === undefined) return null
+  if (!pin.isDisplayed) return null
 
   return (
     <VscPinned

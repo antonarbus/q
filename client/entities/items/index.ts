@@ -4,17 +4,20 @@ export { defaultItems } from './model/defaultItems'
 export { itemsSlice } from './redux/itemsSlice'
 
 // selectors
-export { itemsShapeEqualityFn } from './selectors/itemsShapeEqualityFn'
-export { selectIsLastItem } from './selectors/selectIsLastItem'
-export { selectIsLastBoqRow } from './selectors/selectIsLastBoqRow'
-export { selectColumnWidth } from './selectors/selectColumnWidth'
-export { selectBoqRows, boqRowsShapeEqualityFn } from './selectors/selectBoqRows'
+export { itemsShapeEqualityFn } from './redux/selectors/itemsShapeEqualityFn'
+export { selectIsLastItem } from './redux/selectors/selectIsLastItem'
+export { selectIsLastBoqRow } from './redux/selectors/selectIsLastBoqRow'
+export { selectColumnWidth } from './redux/selectors/selectColumnWidth'
+export { selectBoqRows, boqRowsShapeEqualityFn } from './redux/selectors/selectBoqRows'
+export { selectBoqRowCell } from './redux/selectors/selectBoqRowCell'
+export { selectBoqRowCellPin } from './redux/selectors/selectBoqRowCellPin'
 
 // utils
 export { saveItemHeightByIndex } from './utils/saveItemHeightByIndex'
 export { getBoqRow } from './utils/getBoqRow'
 export { getBoqRows } from './utils/getBoqRows'
 export { getBoqItem } from './utils/getBoqItem'
+export { getBoqRowCell } from './utils/getBoqRowCell'
 
 // html getters
 export { itemTextHtmlGetter } from './html_getters/itemTextHtmlGetter'

@@ -4,6 +4,7 @@ import { boqCellHtmlGetter, selectColumnWidth, useItem, useRow, useBoqItem, Froa
 import { formatBoqRowCellNumber, updateBoqRowCellAtStore, updateBoqRowPriceCell, updateSubTotalPriceCell } from 'client/features/update_text'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
+
 const boqColumnKey: BoqColumnKey = 'itemPrice'
 
 export const ItemPriceCell = (): JSX.Element => {
@@ -75,7 +76,7 @@ export const ItemPriceCell = (): JSX.Element => {
           },
         }}
       />
-      <Pin />
+      <Pin boqColumnKey={boqColumnKey} />
     </Box>
   )
 }
