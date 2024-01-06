@@ -22,7 +22,7 @@ export const PriceCell = (): JSX.Element => {
   const maxWidth = width === 'auto' ? minWidth : width
 
   // todo: on focus show pins in itemPrice and Qty
-  // todo: and animate them away to blur to let it be pressed
+  // todo: and slowly animate them away on blur to let it be pressed meanwhile
   // todo: bring "pinned" prop into store
 
   return (
@@ -30,6 +30,7 @@ export const PriceCell = (): JSX.Element => {
       className={`td ${boqColumnKey}`}
       sx={{
         display: isPriceColWidthSetManually ? 'block' : 'flex',
+        position: 'relative',
         flexGrow: 0,
         flexShrink: 0,
         width,
@@ -41,6 +42,12 @@ export const PriceCell = (): JSX.Element => {
         editorRef={priceCellEditorRef}
         placeholder='Price...'
         htmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
+        onFocus={() => {
+          console.log('show pinns')
+        }}
+        onBlur={() => {
+          console.log('hide pinns')
+        }}
         onContentChange={() => {
           if (priceCellEditorRef.current === null) return
 

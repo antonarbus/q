@@ -67,22 +67,42 @@ export const defaultItems: Item[] = [
           number: {
             html: '1',
             value: 1,
+            pin: {
+              isActive: false,
+              isDisplayed: false,
+            },
           },
           description: {
             html: 'description 1',
-            value: null,
+            value: 0,
+            pin: {
+              isActive: false,
+              isDisplayed: false,
+            },
           },
           itemPrice: {
             html: '10',
             value: 10,
+            pin: {
+              isActive: false,
+              isDisplayed: false,
+            },
           },
           qty: {
             html: '1',
             value: 1,
+            pin: {
+              isActive: false,
+              isDisplayed: false,
+            },
           },
           price: {
             html: '10',
             value: 10,
+            pin: {
+              isActive: false,
+              isDisplayed: false,
+            },
           },
         },
         {
@@ -93,22 +113,42 @@ export const defaultItems: Item[] = [
           number: {
             html: '2',
             value: 2,
+            pin: {
+              isActive: false,
+              isDisplayed: false,
+            },
           },
           description: {
             html: 'description 2',
-            value: null,
+            value: 0,
+            pin: {
+              isActive: false,
+              isDisplayed: false,
+            },
           },
           itemPrice: {
             html: '20',
             value: 20,
+            pin: {
+              isActive: false,
+              isDisplayed: false,
+            },
           },
           qty: {
             html: '2',
             value: 2,
+            pin: {
+              isActive: false,
+              isDisplayed: false,
+            },
           },
           price: {
             html: '40',
             value: 40,
+            pin: {
+              isActive: false,
+              isDisplayed: false,
+            },
           },
         },
         {
@@ -119,22 +159,42 @@ export const defaultItems: Item[] = [
           number: {
             html: '3',
             value: 3,
+            pin: {
+              isActive: false,
+              isDisplayed: false,
+            },
           },
           description: {
             html: 'description 3',
-            value: null,
+            value: 0,
+            pin: {
+              isActive: false,
+              isDisplayed: false,
+            },
           },
           itemPrice: {
             html: '30',
             value: 30,
+            pin: {
+              isActive: false,
+              isDisplayed: false,
+            },
           },
           qty: {
             html: '3',
             value: 3,
+            pin: {
+              isActive: false,
+              isDisplayed: false,
+            },
           },
           price: {
             html: '90',
             value: 90,
+            pin: {
+              isActive: false,
+              isDisplayed: false,
+            },
           },
         },
       ],

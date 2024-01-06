@@ -11,6 +11,7 @@ export type {
   BoqHeaderKey,
   BoqColumnKey,
   BoqRow,
+  BoqRowCell,
   BoqItem,
 } from './Item'
 

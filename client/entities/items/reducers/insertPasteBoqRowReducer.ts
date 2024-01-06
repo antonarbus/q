@@ -1,18 +1,28 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { ItemsState } from '../redux/itemsSlice'
-import type { BoqRow, CopyPlace } from 'client/shared/types'
+import type { BoqRow, BoqRowCell, CopyPlace } from 'client/shared/types'
 import { getBoqItem } from '../utils/getBoqItem'
+
+const defaultCellValues: BoqRowCell = {
+  html: '',
+  value: 0,
+  pin: {
+    isActive: false,
+    isDisplayed: false,
+  },
+}
 
 const pasteText: BoqRow = {
   id: 'id of boq row paste',
   type: 'boq paste',
   height: 0,
   width: 0,
-  number: { html: '', value: 0 },
-  description: { html: '', value: null },
-  itemPrice: { html: '', value: 0 },
-  qty: { html: '', value: 0 },
-  price: { html: '', value: 0 },
+  number: defaultCellValues,
+  description: defaultCellValues,
+  itemPrice: defaultCellValues,
+  qty: defaultCellValues,
+  price: defaultCellValues,
+
 }
 
 type Type = (state: ItemsState, action: PayloadAction<CopyPlace>) => ItemsState

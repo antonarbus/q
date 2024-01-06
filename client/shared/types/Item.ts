@@ -6,31 +6,25 @@ type Common = {
   isFroala: boolean
 }
 
+export type BoqRowCell = {
+  html: string
+  value: number
+  pin: {
+    isActive: boolean
+    isDisplayed: boolean
+  }
+}
+
 export type BoqRow = {
   id: string
   type: 'boq paste' | 'boq row'
   height: number
   width: number
-  number: {
-    html: string
-    value: number
-  }
-  description: {
-    html: string
-    value: null
-  }
-  itemPrice: {
-    html: string
-    value: number
-  }
-  qty: {
-    html: string
-    value: number
-  }
-  price: {
-    html: string
-    value: number
-  }
+  number: BoqRowCell
+  description: BoqRowCell
+  itemPrice: BoqRowCell
+  qty: BoqRowCell
+  price: BoqRowCell
 }
 
 export type BoqColWidth = number | undefined
