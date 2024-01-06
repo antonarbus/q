@@ -5,10 +5,17 @@ import { ItemPriceCell } from './cells/ItemPriceCell'
 import { QtyCell } from './cells/QtyCell'
 import { PriceCell } from './cells/PriceCell'
 import { BoqRowLayout } from './BoqRowLayout'
+import { type FocusEvent } from 'react'
 
-export const BoqRow = (): JSX.Element => {
+type Props = {
+  onBlur: (e: FocusEvent<HTMLDivElement, Element>) => void
+}
+
+export const BoqRow = ({ onBlur }: Props): JSX.Element => {
   return (
-    <BoqRowLayout>
+    <BoqRowLayout
+      onBlur={onBlur}
+    >
       <BoqRowActions />
       <NumberCell />
       <DescriptionCell />

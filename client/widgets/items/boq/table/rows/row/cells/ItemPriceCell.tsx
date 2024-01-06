@@ -1,9 +1,10 @@
 import { Box } from '@mui/material'
 import { theme } from 'client/shared/clients'
-import { boqCellHtmlGetter, selectColumnWidth, useItem, useRow, useBoqItem, Froala, Pin } from 'client/entities/items'
+import { boqCellHtmlGetter, selectColumnWidth, useItem, useRow, useBoqItem, Froala } from 'client/entities/items'
 import { formatBoqRowCellNumber, updateBoqRowCellAtStore, updateBoqRowPriceCell, updateSubTotalPriceCell } from 'client/features/update_text'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
+import { Pin } from 'client/features/pin'
 
 const boqColumnKey: BoqColumnKey = 'itemPrice'
 

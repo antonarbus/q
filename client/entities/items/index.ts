@@ -29,7 +29,6 @@ export { boqCellHtmlGetter } from './html_getters/boqCellHtmlGetter'
 export { DraggableItemsContainer } from './ui/DraggableItemsContainer'
 export { Item } from './ui/Item'
 export { Froala } from './ui/froala/Froala'
-export { Pin } from './ui/Pin'
 
 // hooks
 export { useIsItemSortDisabled } from './hooks/useIsItemSortDisabled'

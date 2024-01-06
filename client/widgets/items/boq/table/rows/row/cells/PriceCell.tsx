@@ -4,6 +4,7 @@ import { boqCellHtmlGetter, selectColumnWidth, useBoqItem, useItem, useRow, Froa
 import { isBoqRowPriceValid, updateBoqRowCellAtStore, updateSubTotalPriceCell } from 'client/features/update_text'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
+import { showPinsOnPriceCellFocus } from 'client/features/pin'
 
 const boqColumnKey: BoqColumnKey = 'price'
 
@@ -16,10 +17,6 @@ export const PriceCell = (): JSX.Element => {
   const width = isPriceColWidthSetManually ? priceColWidth : 'auto'
   const minWidth = '100px'
   const maxWidth = width === 'auto' ? minWidth : width
-
-  // todo: on focus show pins in itemPrice and Qty
-  // todo: and slowly animate them away on blur to let it be pressed meanwhile
-  // todo: bring "pinned" prop into store
 
   return (
     <Box
@@ -39,30 +36,7 @@ export const PriceCell = (): JSX.Element => {
         placeholder='Price...'
         htmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
         onFocus={() => {
-          dispatch(itemsSlice.actions.showBoqRowCellPin({
-            itemIndex,
-            rowIndex,
-            boqColumnKey: 'itemPrice',
-          }))
-
-          dispatch(itemsSlice.actions.showBoqRowCellPin({
-            itemIndex,
-            rowIndex,
-            boqColumnKey: 'qty',
-          }))
-        }}
-        onBlur={() => {
-          dispatch(itemsSlice.actions.hideBoqRowCellPin({
-            itemIndex,
-            rowIndex,
-            boqColumnKey: 'itemPrice',
-          }))
-
-          dispatch(itemsSlice.actions.hideBoqRowCellPin({
-            itemIndex,
-            rowIndex,
-            boqColumnKey: 'qty',
-          }))
+          showPinsOnPriceCellFocus({ itemIndex, rowIndex })
         }}
         onContentChange={() => {
           if (priceCellEditorRef.current === null) return
