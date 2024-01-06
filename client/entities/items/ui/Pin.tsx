@@ -16,7 +16,7 @@ export const Pin = ({ boqColumnKey }: Props): ReactNode => {
   const pin = useSelectorTyped(selectBoqRowCellPin({ itemIndex, rowIndex, boqColumnKey }))
 
   if (pin === undefined) return null
-  if (!pin.isDisplayed) return null
+  if (!pin.isShown) return null
 
   return (
     <VscPinned

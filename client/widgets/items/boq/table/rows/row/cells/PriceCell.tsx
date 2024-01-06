@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
-import { theme } from 'client/shared/clients'
-import { boqCellHtmlGetter, selectColumnWidth, useBoqItem, useItem, useRow, Froala } from 'client/entities/items'
+import { dispatch, theme } from 'client/shared/clients'
+import { boqCellHtmlGetter, selectColumnWidth, useBoqItem, useItem, useRow, Froala, itemsSlice } from 'client/entities/items'
 import { isBoqRowPriceValid, updateBoqRowCellAtStore, updateSubTotalPriceCell } from 'client/features/update_text'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
@@ -39,10 +39,30 @@ export const PriceCell = (): JSX.Element => {
         placeholder='Price...'
         htmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
         onFocus={() => {
-          console.log('show pinns')
+          dispatch(itemsSlice.actions.showBoqRowCellPin({
+            itemIndex,
+            rowIndex,
+            boqColumnKey: 'itemPrice',
+          }))
+
+          dispatch(itemsSlice.actions.showBoqRowCellPin({
+            itemIndex,
+            rowIndex,
+            boqColumnKey: 'qty',
+          }))
         }}
         onBlur={() => {
-          console.log('hide pinns')
+          dispatch(itemsSlice.actions.hideBoqRowCellPin({
+            itemIndex,
+            rowIndex,
+            boqColumnKey: 'itemPrice',
+          }))
+
+          dispatch(itemsSlice.actions.hideBoqRowCellPin({
+            itemIndex,
+            rowIndex,
+            boqColumnKey: 'qty',
+          }))
         }}
         onContentChange={() => {
           if (priceCellEditorRef.current === null) return

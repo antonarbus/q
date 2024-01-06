@@ -8,7 +8,7 @@ type Common = {
 
 export type BoqRowCellPin = {
   isPinned: boolean
-  isDisplayed: boolean
+  isShown: boolean
 }
 
 export type BoqRowCell = {
