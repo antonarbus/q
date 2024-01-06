@@ -1,6 +1,6 @@
 import { useSelectorTyped } from 'client/shared/hooks'
 import { getState } from 'client/shared/clients'
-import { useItem } from 'client/widgets/items/ItemProvider'
+import { useItem } from '../../providers/ItemProvider'
 
 export const useIsPasteHere = (): boolean => {
   const { itemIndex } = useItem()

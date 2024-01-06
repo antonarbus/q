@@ -4,13 +4,11 @@ import { TbCut } from 'react-icons/tb'
 import { motion } from 'framer-motion'
 import { cleanHtml } from 'client/shared/lib/itemsUtils'
 import { copySlice } from 'client/entities/copy'
-import { getBoqRow, itemsSlice, selectIsLastBoqRow } from 'client/entities/items'
+import { getBoqRow, itemsSlice, selectIsLastBoqRow, useItem, useRow } from 'client/entities/items'
 import type { MouseEvent } from 'react'
 import { className } from 'client/shared/className'
 import { saveItemsLocally } from 'client/shared/lib'
 import { appSlice } from 'client/entities/app'
-import { useItem } from 'client/widgets/items/ItemProvider'
-import { useRow } from 'client/widgets/items/boq/table/rows/RowProvider'
 
 export const CutBoqRowIcon = (): JSX.Element => {
   const { itemIndex } = useItem()

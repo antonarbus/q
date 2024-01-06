@@ -5,7 +5,7 @@ import { useIsItemSortDisabled } from '../hooks/useIsItemSortDisabled'
 import { ItemSortAndAnimate } from './item_layout'
 import { ItemMsg } from './item_msg'
 import { PasteItemTextOverlay } from './paste_item_overlay_text'
-import { useItem } from 'client/widgets/items/ItemProvider'
+import { useItem } from '../providers/ItemProvider'
 
 type Props = {
   children: ReactNode

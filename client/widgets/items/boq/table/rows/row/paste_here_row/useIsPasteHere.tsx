@@ -1,5 +1,5 @@
 import { useSelectorTyped } from 'client/shared/hooks'
-import { useRow } from '../../RowProvider'
+import { useRow } from 'client/entities/items'
 
 export const useIsPasteHere = (): boolean => {
   const { rowId } = useRow()

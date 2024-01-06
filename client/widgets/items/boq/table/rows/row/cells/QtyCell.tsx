@@ -1,13 +1,10 @@
 import { Box } from '@mui/material'
 import { theme } from 'client/shared/clients'
-import { boqCellHtmlGetter, selectColumnWidth } from 'client/entities/items'
+import { boqCellHtmlGetter, selectColumnWidth, useItem, useRow, useBoqItem } from 'client/entities/items'
 import { formatBoqRowCellNumber, updateBoqRowCellAtStore, updateBoqRowPriceCell, updateSubTotalPriceCell } from 'client/features/update_text'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
 import { Froala } from 'client/shared/ui/froala'
-import { useItem } from 'client/widgets/items/ItemProvider'
-import { useRow } from '../../RowProvider'
-import { useBoqItem } from 'client/widgets/items/boq/BoqItemProvider'
 
 const boqColumnKey: BoqColumnKey = 'qty'
 

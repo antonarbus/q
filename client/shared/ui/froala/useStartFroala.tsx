@@ -7,7 +7,8 @@ import { useEffect } from 'react'
 import FroalaEditor from 'froala-editor'
 import { froalaDefaultOptions } from './froalaDefaultOptions'
 import { saveItemsLocally } from 'client/shared/lib'
-import { useItem } from 'client/widgets/items/ItemProvider'
+// todo: move to entities/items
+import { useItem } from 'client/entities/items/providers/ItemProvider'
 
 type Props = {
   htmlGetter: () => string

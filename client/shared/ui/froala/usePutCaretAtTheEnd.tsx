@@ -1,7 +1,8 @@
 import type { MutableRefObject, RefObject } from 'react'
 import { useEffect } from 'react'
 import type FroalaEditor from 'froala-editor'
-import { useItem } from 'client/widgets/items/ItemProvider'
+// todo: move to entities/items
+import { useItem } from 'client/entities/items/providers/ItemProvider'
 
 type Props = {
   froalaElementRef: RefObject<HTMLDivElement>

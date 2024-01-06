@@ -1,9 +1,8 @@
-import { boqHeaderHtmlGetter } from 'client/entities/items'
+import { boqHeaderHtmlGetter, useItem } from 'client/entities/items'
 import { updateBoqHeaderCell } from 'client/features/update_text'
 import { Froala } from 'client/shared/ui/froala'
 import { useRef } from 'react'
 import type FroalaEditor from 'froala-editor'
-import { useItem } from '../../ItemProvider'
 
 const boqHeaderKey = 'title'
 

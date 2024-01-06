@@ -1,7 +1,7 @@
 import { useSelectorTyped } from 'client/shared/hooks'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRemoveItemMsgAfterSomeTime } from './useRemoveItemMsg'
-import { useItem } from 'client/widgets/items/ItemProvider'
+import { useItem } from '../../providers/ItemProvider'
 
 export const ItemMsg = (): JSX.Element => {
   const { itemIndex } = useItem()

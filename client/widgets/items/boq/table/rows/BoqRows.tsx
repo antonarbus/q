@@ -3,13 +3,11 @@ import { AnimatePresence } from 'framer-motion'
 import { DraggableBoqRowsContainer } from './DraggableBoqRowsContainer'
 import { BoqRowSortAndAnimation } from './row/BoqRowSortAndAnimation'
 import { BoqRow } from './row/BoqRow'
-import { boqRowsShapeEqualityFn, selectBoqRows } from 'client/entities/items'
+import { boqRowsShapeEqualityFn, selectBoqRows, RowProvider, useItem } from 'client/entities/items'
 import { onBoqRowDrag } from 'client/features/boq_row_actions/drag_boq_row'
 import { BoqPasteRowTextOverlay } from './row/BoqPasteRowTextOverlay'
 import { nanoid } from 'nanoid'
 import { useIsBoqRowSortDisabled } from './useIsBoqRowSortDisabled'
-import { useItem } from 'client/widgets/items/ItemProvider'
-import { RowProvider } from './RowProvider'
 
 export const BoqRows = (): JSX.Element => {
   const { itemIndex } = useItem()
