@@ -1,10 +1,9 @@
 import { Box } from '@mui/material'
 import { theme } from 'client/shared/clients'
-import { boqCellHtmlGetter, selectColumnWidth, useRow, useItem } from 'client/entities/items'
+import { boqCellHtmlGetter, selectColumnWidth, useRow, useItem, Froala } from 'client/entities/items'
 import { updateBoqRowCellAtStore } from 'client/features/update_text'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
-import { Froala } from 'client/shared/ui/froala'
 import type FroalaEditor from 'froala-editor'
 import { useRef } from 'react'
 
