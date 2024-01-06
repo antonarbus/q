@@ -1,6 +1,5 @@
-import { boqHeaderHtmlGetter, useBoqItem, useItem } from 'client/entities/items'
+import { boqHeaderHtmlGetter, useBoqItem, useItem, Froala } from 'client/entities/items'
 import { updateBoqHeaderCell } from 'client/features/update_text'
-import { Froala } from 'client/shared/ui/froala'
 import { type BoqHeaderKey } from 'client/shared/types'
 
 const boqHeaderKey: BoqHeaderKey = 'subTotalPrice'

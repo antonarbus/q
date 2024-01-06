@@ -7,8 +7,7 @@ import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
 import { EditableHtml } from './EditableHtml'
 import { useViewPortObserver } from './useViewPortObserver'
 import { StaticHtmlBackgroundToFixBlinkIssue } from './StaticHtmlBackgroundToFixBlinkIssue'
-// todo: move to entities/items
-import { useItem } from 'client/entities/items/providers/ItemProvider'
+import { useItem } from '../../providers/ItemProvider'
 
 type Props = {
   htmlGetter: () => string

@@ -16,18 +16,20 @@ export { getBoqRow } from './utils/getBoqRow'
 export { getBoqRows } from './utils/getBoqRows'
 export { getBoqItem } from './utils/getBoqItem'
 
-// ui
-export { DraggableItemsContainer } from './ui/DraggableItemsContainer'
-export { Item } from './ui/Item'
-
 // html getters
 export { itemTextHtmlGetter } from './html_getters/itemTextHtmlGetter'
 export { boqColumnNameHtmlGetter } from './html_getters/boqColumnNameHtmlGetter'
 export { boqHeaderHtmlGetter } from './html_getters/boqHeaderHtmlGetter'
 export { boqCellHtmlGetter } from './html_getters/boqCellHtmlGetter'
 
+// ui
+export { DraggableItemsContainer } from './ui/DraggableItemsContainer'
+export { Item } from './ui/Item'
+export { Froala } from './ui/froala/Froala'
+
 // hooks
 export { useIsItemSortDisabled } from './hooks/useIsItemSortDisabled'
+export { updateNumberInHtmlIncrementally } from './ui/froala/updateNumberInHtmlIncrementally'
 
 // providers
 export { BoqItemProvider, useBoqItem } from './providers/BoqItemProvider'
