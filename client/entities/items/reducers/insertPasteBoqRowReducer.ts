@@ -7,7 +7,7 @@ const defaultCellValues: BoqRowCell = {
   html: '',
   value: 0,
   pin: {
-    isActive: false,
+    isPinned: false,
     isDisplayed: false,
   },
 }

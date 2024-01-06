@@ -10,7 +10,7 @@ export type BoqRowCell = {
   html: string
   value: number
   pin: {
-    isActive: boolean
+    isPinned: boolean
     isDisplayed: boolean
   }
 }
