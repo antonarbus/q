@@ -23,6 +23,7 @@ export const NumberCell = (): JSX.Element => {
       className={`td ${boqColumnKey}`}
       sx={{
         display: isNumberColWidthSetManually ? 'block' : 'flex',
+        position: 'relative',
         flexGrow: 0,
         flexShrink: 0,
         width,

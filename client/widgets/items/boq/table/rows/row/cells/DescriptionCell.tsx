@@ -28,6 +28,7 @@ export const DescriptionCell = (): JSX.Element => {
       className={`td ${boqColumnKey}`}
       sx={{
         display: isDescriptionColWidthSetManually ? 'block' : 'flex',
+        position: 'relative',
         flexGrow: isDescriptionColWidthSetManually ? 0 : 1,
         flexShrink: 0,
         width,
