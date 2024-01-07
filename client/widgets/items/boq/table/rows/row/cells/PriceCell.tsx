@@ -1,16 +1,17 @@
 import { Box } from '@mui/material'
-import { dispatch, theme } from 'client/shared/clients'
-import { boqCellHtmlGetter, selectColumnWidth, useBoqItem, useItem, useRow, Froala, itemsSlice } from 'client/entities/items'
-import { isBoqRowPriceValid, updateBoqRowCellAtStore, updateSubTotalPriceCell } from 'client/features/update_text'
+import { theme } from 'client/shared/clients'
+import { boqCellHtmlGetter, selectColumnWidth, useBoqItem, useItem, useRow, Froala, getBoqRow } from 'client/entities/items'
+import { formatBoqRowCellNumber, isBoqRowPriceValid, updateBoqRowCellAtStore, updateBoqRowQtyCell, updateSubTotalPriceCell } from 'client/features/update_text'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
 import { showBoqRowPins } from 'client/features/pin'
+import { updateBoqRowItemPriceCell } from 'client/features/update_text/updateBoqRowItemPriceCell'
 
 const boqColumnKey: BoqColumnKey = 'price'
 
 export const PriceCell = (): JSX.Element => {
   const { itemIndex } = useItem()
-  const { rowIndex, priceCellEditorRef } = useRow()
+  const { rowIndex, priceCellEditorRef, qtyCellEditorRef, itemPriceCellEditorRef } = useRow()
   const { subTotalPriceEditorRef } = useBoqItem()
   const priceColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
   const isPriceColWidthSetManually = priceColWidth !== undefined
@@ -48,9 +49,38 @@ export const PriceCell = (): JSX.Element => {
             html: priceCellEditorRef.current.html.get(),
           })
 
+          const boqRow = getBoqRow({ itemIndex, rowIndex })
+
+          const isItemPricePinned = boqRow?.itemPrice.pin.isPinned
+          if (isItemPricePinned) {
+            updateBoqRowQtyCell({
+              qtyCellEditor: qtyCellEditorRef.current,
+              itemIndex,
+              rowIndex,
+            })
+          }
+
+          const isQtyPinned = boqRow?.qty.pin.isPinned
+          if (isQtyPinned) {
+            updateBoqRowItemPriceCell({
+              itemPriceCellEditor: itemPriceCellEditorRef.current,
+              itemIndex,
+              rowIndex,
+            })
+          }
+
           updateSubTotalPriceCell({
             itemIndex,
             subTotalPriceEditor: subTotalPriceEditorRef.current,
+          })
+        }}
+        onBlur={() => {
+          formatBoqRowCellNumber({
+            itemIndex,
+            rowIndex,
+            boqColumnKey,
+            cellEditor: priceCellEditorRef.current,
+            roundToTwoDecimals: true,
           })
         }}
         additionalStyle={{
