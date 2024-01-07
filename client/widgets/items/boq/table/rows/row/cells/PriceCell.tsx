@@ -75,6 +75,7 @@ export const PriceCell = (): JSX.Element => {
           })
         }}
         onBlur={() => {
+          // todo: recalculate value if it is not valid, which happens now
           formatBoqRowCellNumber({
             itemIndex,
             rowIndex,

@@ -9,6 +9,7 @@ type Props = {
   editor: FroalaEditor
 }
 
+// todo: if values are close to each other make smaller increments
 export const updateNumberInHtmlIncrementallyByFroala = ({
   oldNumber,
   newNumber,
