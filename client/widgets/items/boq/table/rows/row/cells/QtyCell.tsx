@@ -80,7 +80,7 @@ export const QtyCell = (): JSX.Element => {
       <Pin
         boqColumnKey={boqColumnKey}
         onClick={() => {
-          dispatch(itemsSlice.actions.pinQty({ itemIndex, rowIndex }))
+          dispatch(itemsSlice.actions.pinQtyReducer({ itemIndex, rowIndex }))
         }}
       />
     </Box>

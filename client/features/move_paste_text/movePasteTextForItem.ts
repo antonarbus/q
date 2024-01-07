@@ -21,7 +21,7 @@ export const movePasteTextForItem = (e: MouseEvent): void => {
     }
 
     if (isPasteItem) {
-      dispatch(itemsSlice.actions.removePasteItem())
+      dispatch(itemsSlice.actions.removePasteItemReducer())
     }
   }
 
@@ -59,7 +59,7 @@ export const movePasteTextForItem = (e: MouseEvent): void => {
     const pastePlace: CopyPlace = { pastePos: 'top', itemId: firstItem.id }
     dispatch(copySlice.actions.updatePastePos(pastePlace))
     dispatch(copySlice.actions.showPasteText())
-    dispatch(itemsSlice.actions.insertPasteItem(pastePlace))
+    dispatch(itemsSlice.actions.insertPasteItemReducer(pastePlace))
     return
   }
 
@@ -78,5 +78,5 @@ export const movePasteTextForItem = (e: MouseEvent): void => {
 
   dispatch(copySlice.actions.updatePastePos(pastePlace))
   dispatch(copySlice.actions.showPasteText())
-  dispatch(itemsSlice.actions.insertPasteItem(pastePlace))
+  dispatch(itemsSlice.actions.insertPasteItemReducer(pastePlace))
 }

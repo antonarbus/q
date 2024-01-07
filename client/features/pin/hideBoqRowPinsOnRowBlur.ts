@@ -19,13 +19,13 @@ export const hideBoqRowPinsOnRowBlur = ({
 
   if (isPin) return
 
-  dispatch(itemsSlice.actions.hideBoqRowCellPin({
+  dispatch(itemsSlice.actions.hideBoqRowCellPinReducer({
     itemIndex,
     rowIndex,
     boqColumnKey: 'itemPrice',
   }))
 
-  dispatch(itemsSlice.actions.hideBoqRowCellPin({
+  dispatch(itemsSlice.actions.hideBoqRowCellPinReducer({
     itemIndex,
     rowIndex,
     boqColumnKey: 'qty',

@@ -38,7 +38,7 @@ export const formatBoqRowCellNumber = ({
 
   if (html === newHtml) return
 
-  dispatch(itemsSlice.actions.updateBoqCell({
+  dispatch(itemsSlice.actions.updateBoqCellReducer({
     itemIndex,
     rowIndex,
     html: newHtml,

@@ -26,7 +26,7 @@ export const movePasteTextForBoqRow = (e: MouseEvent): void => {
     }
 
     if (isBoqPasteItem) {
-      dispatch(itemsSlice.actions.removePasteItem())
+      dispatch(itemsSlice.actions.removePasteItemReducer())
     }
   }
 
@@ -64,5 +64,5 @@ export const movePasteTextForBoqRow = (e: MouseEvent): void => {
 
   dispatch(copySlice.actions.updatePastePos(pastePlace))
   dispatch(copySlice.actions.showPasteText())
-  dispatch(itemsSlice.actions.insertPasteBoqRow(pastePlace))
+  dispatch(itemsSlice.actions.insertPasteBoqRowReducer(pastePlace))
 }

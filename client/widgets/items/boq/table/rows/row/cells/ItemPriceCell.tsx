@@ -80,7 +80,7 @@ export const ItemPriceCell = (): JSX.Element => {
       <Pin
         boqColumnKey={boqColumnKey}
         onClick={() => {
-          dispatch(itemsSlice.actions.pinItemPrice({ itemIndex, rowIndex }))
+          dispatch(itemsSlice.actions.pinItemPriceReducer({ itemIndex, rowIndex }))
         }}
       />
     </Box>

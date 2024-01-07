@@ -29,7 +29,7 @@ export const updateBoqRowCellAtStore = ({
     string: cellTextContent,
   })
 
-  dispatch(itemsSlice.actions.updateBoqCell({
+  dispatch(itemsSlice.actions.updateBoqCellReducer({
     itemIndex,
     rowIndex,
     html,

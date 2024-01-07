@@ -45,7 +45,7 @@ export const updateSubTotalPriceCell = ({
     newNumber: subTotalPriceValueNewRounded,
   })
 
-  dispatch(itemsSlice.actions.updateSubTotalPrice({
+  dispatch(itemsSlice.actions.updateSubTotalPriceReducer({
     itemIndex,
     html: updatedHtml,
     value: subTotalPriceValueNewRounded,

@@ -18,7 +18,7 @@ export const updateTextItem = ({
   const didTextChange = prevHtml !== html
   if (!didTextChange) return
 
-  dispatch(itemsSlice.actions.updateItemText({ itemIndex, html }))
+  dispatch(itemsSlice.actions.updateItemTextReducer({ itemIndex, html }))
   saveItemsLocally({
     msgAboveItemWithIndex: itemIndex,
   })

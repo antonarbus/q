@@ -29,7 +29,7 @@ export const CutItemIcon = (): JSX.Element => {
       onClick={(e: MouseEvent): void => {
         if (disabled) return
 
-        dispatch(itemsSlice.actions.removeItemsMsg())
+        dispatch(itemsSlice.actions.removeItemsMsgReducer())
 
         saveItemHeightByIndex({ itemIndex })
 
@@ -48,7 +48,7 @@ export const CutItemIcon = (): JSX.Element => {
         const cleanedHtml = cleanHtml(html)
 
         dispatch(copySlice.actions.addItemIntoCopyContainer({ copyItem: itemToCut, preview: cleanedHtml }))
-        dispatch(itemsSlice.actions.deleteItem({ itemId: itemToCut.id }))
+        dispatch(itemsSlice.actions.deleteItemReducer({ itemId: itemToCut.id }))
 
         dispatch(copySlice.actions.forbidToPaste())
         dispatch(copySlice.actions.forbidToCopy())

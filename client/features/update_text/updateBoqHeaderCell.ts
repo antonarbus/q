@@ -21,7 +21,7 @@ export const updateBoqHeaderCell = ({
   const didTextChange = prevHtml !== html
   if (!didTextChange) return
 
-  dispatch(itemsSlice.actions.updateBoqHeaderText({ itemIndex, html, boqHeaderKey }))
+  dispatch(itemsSlice.actions.updateBoqHeaderTextReducer({ itemIndex, html, boqHeaderKey }))
   saveItemsLocally({
     msgAboveItemWithIndex: itemIndex,
   })

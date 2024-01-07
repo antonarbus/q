@@ -6,7 +6,7 @@ import { saveItemsLocally } from 'client/shared/lib'
 export const resetItems = (): void => {
   dispatch(appSlice.actions.disableFroala())
   saveItemsLocally({ items: defaultItems })
-  dispatch(itemsSlice.actions.resetItemsToDefault())
+  dispatch(itemsSlice.actions.resetItemsToDefaultReducer())
   dispatch(appSlice.actions.reRenderOffer())
   setTimeout(() => {
     dispatch(appSlice.actions.enableFroala())

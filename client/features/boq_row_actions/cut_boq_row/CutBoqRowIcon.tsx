@@ -41,7 +41,7 @@ export const CutBoqRowIcon = (): JSX.Element => {
 
         if (!boqRowElement) return
 
-        dispatch(itemsSlice.actions.updateBoqRowHeightAndWidth({
+        dispatch(itemsSlice.actions.updateBoqRowHeightAndWidthReducer({
           itemIndex,
           rowIndex,
           height: boqRowElement.clientHeight,
@@ -65,7 +65,7 @@ export const CutBoqRowIcon = (): JSX.Element => {
         }
 
         dispatch(appSlice.actions.disableFroala())
-        dispatch(itemsSlice.actions.deleteBoqRow({ itemIndex, rowIndex }))
+        dispatch(itemsSlice.actions.deleteBoqRowReducer({ itemIndex, rowIndex }))
 
         dispatch(copySlice.actions.forbidToPaste())
         dispatch(copySlice.actions.forbidToCopy())

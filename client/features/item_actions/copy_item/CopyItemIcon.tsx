@@ -29,7 +29,7 @@ export const CopyItemIcon = (): JSX.Element => {
       onClick={(e: MouseEvent): void => {
         if (disabled) return
 
-        dispatch(itemsSlice.actions.removeItemsMsg())
+        dispatch(itemsSlice.actions.removeItemsMsgReducer())
 
         saveItemHeightByIndex({ itemIndex })
 
