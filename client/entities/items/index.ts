@@ -38,5 +38,6 @@ export { useIsItemSortDisabled } from './hooks/useIsItemSortDisabled'
 export { BoqItemProvider, useBoqItem } from './providers/BoqItemProvider'
 export { ItemProvider, useItem } from './providers/ItemProvider'
 export { RowProvider, useRow } from './providers/RowProvider'
+export { FroalaProvider, useFroala } from './providers/FroalaProvider'
 
 // types

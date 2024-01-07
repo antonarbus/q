@@ -1,30 +1,24 @@
-import type { SxProps } from '@mui/material'
-import type { MutableRefObject } from 'react'
 import { Box } from '@mui/material'
-import { useEffect, useRef } from 'react'
+import { type CSSProperties, useEffect, useRef } from 'react'
 import { useEffectOnce } from 'react-use'
+import { useFroala } from '../../providers/FroalaProvider'
 
 type Props = {
-  htmlGetter: () => string
-  additionalStyle?: SxProps
-  froalaHeightRef: MutableRefObject<number | undefined>
+  additionalStyles2?: CSSProperties
 }
 
-export const StaticHtml = ({
-  htmlGetter,
-  additionalStyle,
-  froalaHeightRef,
-}: Props): JSX.Element => {
+export const StaticHtml = ({ additionalStyles2 }: Props): JSX.Element => {
   const staticHtmlRef = useRef<HTMLDivElement>()
+  const { htmlGetter, additionalStyle, froalaHeightRef } = useFroala()
 
+  // insert html into element
   useEffectOnce(() => {
-    // insert html into element
     if (!staticHtmlRef.current) return
     staticHtmlRef.current.innerHTML = htmlGetter()
   })
 
+  // save height after loading content
   useEffect(() => {
-    // save height after loading content
     if (!staticHtmlRef.current?.clientHeight) return
     froalaHeightRef.current = staticHtmlRef.current.clientHeight
   })
@@ -36,11 +30,9 @@ export const StaticHtml = ({
       sx={{
         opacity: 0.5,
         wordBreak: 'break-word',
-        '& .fr-element:hover:not(:focus)': {
-          // textShadow: '0px 0px 0.8px',
-        },
         ...additionalStyle,
       }}
+      style={additionalStyles2}
     ></Box>
   )
 }

@@ -2,23 +2,13 @@ import 'froala-editor/js/froala_editor.pkgd.min.js'
 import 'froala-editor/js/plugins.pkgd.min.js'
 import 'froala-editor/js/third_party/font_awesome.min.js'
 import './froala_editor.pkgd.min.css'
-import type { MutableRefObject, RefObject } from 'react'
+import type { MutableRefObject } from 'react'
 import { useEffect } from 'react'
 import FroalaEditor from 'froala-editor'
 import { froalaDefaultOptions } from './froalaDefaultOptions'
 import { saveItemsLocally } from 'client/shared/lib'
-// todo: move to entities/items
-import { useItem } from 'client/entities/items/providers/ItemProvider'
-
-type Props = {
-  htmlGetter: () => string
-  onContentChange: () => void
-  onFocus?: () => void
-  onBlur?: () => void
-  froalaElementRef: RefObject<HTMLDivElement>
-  editorRef: MutableRefObject<FroalaEditor | null>
-  placeholder?: string
-}
+import { useItem } from '../../providers/ItemProvider'
+import { useFroala } from '../../providers/FroalaProvider'
 
 declare const window: Window & typeof globalThis & {
   froalas: Array<MutableRefObject<FroalaEditor | null>>
@@ -26,16 +16,9 @@ declare const window: Window & typeof globalThis & {
 
 window.froalas = []
 
-export const useStartFroala = ({
-  htmlGetter,
-  froalaElementRef,
-  editorRef,
-  placeholder,
-  onContentChange,
-  onFocus,
-  onBlur,
-}: Props): void => {
+export const useStartFroala = (): void => {
   const { itemIndex } = useItem()
+  const { htmlGetter, froalaElementRef, editorRef, placeholder, onContentChange, onFocus, onBlur } = useFroala()
 
   useEffect(() => {
     const initFroalaInstance = (): void => {
