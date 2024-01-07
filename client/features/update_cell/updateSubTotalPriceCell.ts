@@ -1,4 +1,4 @@
-import { getNumberFromString, getTextContentFromHtml, getStringWithNewFormattedNumber, updateNumberInHtmlIncrementallyByFroala } from 'client/shared/lib'
+import { getNumberFromString, getTextContentFromHtml, getStringWithNewFormattedNumber, updateNumberInHtmlIncrementally } from 'client/shared/lib'
 import { getBoqItem, getBoqRows, itemsSlice } from 'client/entities/items'
 import { dispatch } from 'client/shared/clients'
 import { type BoqRow } from 'client/shared/types'
@@ -51,7 +51,7 @@ export const updateSubTotalPriceCell = ({
     value: subTotalPriceValueNewRounded,
   }))
 
-  updateNumberInHtmlIncrementallyByFroala({
+  updateNumberInHtmlIncrementally({
     oldNumber: subTotalPriceValueCurrent,
     newNumber: subTotalPriceValueNewRounded,
     editor: subTotalPriceEditor,
