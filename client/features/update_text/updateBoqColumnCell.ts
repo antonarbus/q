@@ -21,7 +21,7 @@ export const updateBoqColumnCell = ({
   const didTextChange = prevHtml !== html
   if (!didTextChange) return
 
-  dispatch(itemsSlice.actions.updateBoqColumnNameText({ itemIndex, html, boqColumnKey }))
+  dispatch(itemsSlice.actions.updateBoqColumnNameTextReducer({ itemIndex, html, boqColumnKey }))
   saveItemsLocally({
     msgAboveItemWithIndex: itemIndex,
   })

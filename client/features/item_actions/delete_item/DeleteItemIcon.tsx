@@ -33,7 +33,7 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
         if (!itemToDelete) return
 
         dispatch(appSlice.actions.disableFroala())
-        dispatch(itemsSlice.actions.deleteItem({ itemId: itemToDelete.id }))
+        dispatch(itemsSlice.actions.deleteItemReducer({ itemId: itemToDelete.id }))
 
         dispatch(copySlice.actions.forbidToPaste())
         dispatch(copySlice.actions.forbidToCopy())

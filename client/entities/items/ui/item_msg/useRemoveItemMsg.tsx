@@ -11,7 +11,7 @@ export const useRemoveItemMsgAfterSomeTime = (): void => {
   useUpdateEffect(() => {
     const timeout = setTimeout(() => {
       if (!msg) return
-      dispatch(itemsSlice.actions.removeItemsMsg())
+      dispatch(itemsSlice.actions.removeItemsMsgReducer())
     }, 1700)
 
     return () => {

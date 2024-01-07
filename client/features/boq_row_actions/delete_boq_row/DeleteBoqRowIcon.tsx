@@ -28,8 +28,8 @@ export const DeleteBoqRowIcon = (): JSX.Element => {
 
         if (disabled) return
 
-        dispatch(itemsSlice.actions.disableFroala({ itemIndex }))
-        dispatch(itemsSlice.actions.deleteBoqRow({ itemIndex, rowIndex }))
+        dispatch(itemsSlice.actions.disableFroalaReducer({ itemIndex }))
+        dispatch(itemsSlice.actions.deleteBoqRowReducer({ itemIndex, rowIndex }))
 
         dispatch(copySlice.actions.forbidToPaste())
         dispatch(copySlice.actions.forbidToCopy())
@@ -47,7 +47,7 @@ export const DeleteBoqRowIcon = (): JSX.Element => {
 
         if (!isCopyContainer) {
           setTimeout(() => {
-            dispatch(itemsSlice.actions.enableFroala({ itemIndex }))
+            dispatch(itemsSlice.actions.enableFroalaReducer({ itemIndex }))
           }, 1000 * theme.item.animationDuration)
         }
 

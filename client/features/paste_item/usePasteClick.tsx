@@ -27,7 +27,7 @@ const pasteItemOnClick = (): void => {
     return
   }
 
-  dispatch(itemsSlice.actions.pasteItem({ itemId, pastePos, item: topItemFromCopyContainer }))
+  dispatch(itemsSlice.actions.pasteItemReducer({ itemId, pastePos, item: topItemFromCopyContainer }))
   dispatch(copySlice.actions.removeItemFromCopyContainer())
   dispatch(copySlice.actions.forbidToPaste())
   dispatch(copySlice.actions.forbidToCopy())
@@ -46,7 +46,7 @@ const pasteItemOnClick = (): void => {
 
   if (itemsInCopyContainer.length === 0) {
     dispatch(copySlice.actions.hideCopyContainer())
-    dispatch(itemsSlice.actions.removePasteItem())
+    dispatch(itemsSlice.actions.removePasteItemReducer())
 
     // need more time than animation, otherwise some distortion is visible
     setTimeout(() => {

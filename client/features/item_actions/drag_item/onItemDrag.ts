@@ -22,7 +22,7 @@ const onItemDragEnd = ({ oldIndex, newIndex }: Props): void => {
   if (oldIndex !== newIndex) {
     const { items } = getState()
     const reOrderedItems = arrayMoveImmutable(items, oldIndex, newIndex)
-    dispatch(itemsSlice.actions.reOrderItems({ reOrderedItems }))
+    dispatch(itemsSlice.actions.reOrderItemsReducer({ reOrderedItems }))
     saveItemsLocally({ msgAboveItemWithIndex: newIndex })
   }
 }

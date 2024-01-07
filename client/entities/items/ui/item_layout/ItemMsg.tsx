@@ -13,7 +13,7 @@ export const ItemMsg = (): JSX.Element => {
     // hide msg
     const timeout = setTimeout(() => {
       if (!msg) return
-      dispatch(itemsSlice.actions.removeItemsMsg())
+      dispatch(itemsSlice.actions.removeItemsMsgReducer())
     }, 1700)
 
     return () => {

@@ -4,16 +4,16 @@ import { saveItemsLocally } from 'client/shared/lib'
 import type { OnItemResizeStart, OnItemResizeStop } from 'client/shared/types'
 
 export const onTextItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, elementRef }) => {
-  dispatch(itemsSlice.actions.disableFroala({ itemIndex }))
+  dispatch(itemsSlice.actions.disableFroalaReducer({ itemIndex }))
 }
 
 export const onTextItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction, elementRef, delta }) => {
   const width = parseInt(elementRef.style.width)
   const prevItemWidth = getState().items[itemIndex]?.width
-  dispatch(itemsSlice.actions.enableFroala({ itemIndex }))
+  dispatch(itemsSlice.actions.enableFroalaReducer({ itemIndex }))
 
   if (width === prevItemWidth) return
 
-  dispatch(itemsSlice.actions.updateItemWidth({ itemIndex, width }))
+  dispatch(itemsSlice.actions.updateItemWidthReducer({ itemIndex, width }))
   saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
 }

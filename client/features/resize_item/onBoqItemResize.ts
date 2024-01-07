@@ -8,9 +8,9 @@ export const onBoqItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, ele
   // in ResizablePaper comp width will be set back to "auto" after re-render
   itemElement.style.width = itemElement.clientWidth + 'px'
 
-  dispatch(itemsSlice.actions.disableFroala({ itemIndex }))
-  dispatch(itemsSlice.actions.hideBoqItemPins({ itemIndex }))
-  dispatch(itemsSlice.actions.updateColWidth({
+  dispatch(itemsSlice.actions.disableFroalaReducer({ itemIndex }))
+  dispatch(itemsSlice.actions.hideBoqItemPinsReducer({ itemIndex }))
+  dispatch(itemsSlice.actions.updateColWidthReducer({
     itemIndex,
     boqColumnKey: 'description',
     width: undefined,
@@ -18,7 +18,7 @@ export const onBoqItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, ele
 }
 
 export const onBoqItemResize: OnItemResize = ({ itemIndex, e, direction, elementRef: itemElement, delta }) => {
-  dispatch(itemsSlice.actions.updateItemWidth({ itemIndex, width: itemElement.clientWidth }))
+  dispatch(itemsSlice.actions.updateItemWidthReducer({ itemIndex, width: itemElement.clientWidth }))
 }
 
 export const onBoqItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction, elementRef: itemElement, delta }) => {
@@ -27,13 +27,13 @@ export const onBoqItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction,
 
   const descriptionColWidth = descriptionHeaderElement.clientWidth
 
-  dispatch(itemsSlice.actions.updateColWidth({
+  dispatch(itemsSlice.actions.updateColWidthReducer({
     itemIndex,
     boqColumnKey: 'description',
     width: descriptionColWidth,
   }))
 
-  dispatch(itemsSlice.actions.enableFroala({ itemIndex }))
+  dispatch(itemsSlice.actions.enableFroalaReducer({ itemIndex }))
 
   // setTimeout to make save the width after it will become back to "width: auto"
   // on ResizablePaper component render
@@ -43,7 +43,7 @@ export const onBoqItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction,
     const prevItemWidth = getState().items[itemIndex]?.width
 
     if (itemWidth !== prevItemWidth) {
-      dispatch(itemsSlice.actions.updateItemWidth({ itemIndex, width: itemWidth }))
+      dispatch(itemsSlice.actions.updateItemWidthReducer({ itemIndex, width: itemWidth }))
     }
 
     saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
