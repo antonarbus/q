@@ -8,8 +8,9 @@ import { EditableHtml } from './EditableHtml'
 import { useViewPortObserver } from './useViewPortObserver'
 import { StaticHtmlBackgroundToFixBlinkIssue } from './StaticHtmlBackgroundToFixBlinkIssue'
 import { useItem } from '../../providers/ItemProvider'
+import { FroalaProvider } from '../../providers/FroalaProvider'
 
-type Props = {
+export type FroalaProps = {
   htmlGetter: () => string
   editorRef: MutableRefObject<FroalaEditor | null>
   placeholder?: string
@@ -19,60 +20,45 @@ type Props = {
   onBlur?: () => void
 }
 
-export const Froala = ({
-  additionalStyle,
-  editorRef,
-  htmlGetter,
-  placeholder,
-  onContentChange,
-  onFocus,
-  onBlur,
-}: Props): JSX.Element => {
+export const Froala = (props: FroalaProps): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
-  const isAppFroala = useSelectorTyped(state => state.app.isFroala)
   const { itemIndex } = useItem()
-  const isItemFroala = useSelectorTyped(state => state.items[itemIndex]?.isFroala)
   const { froalaHeightRef } = useFixedHeightForAnimation({ froalaElementRef })
-  const { observerRef, isInsideViewPort } = useViewPortObserver()
 
+  const isItemFroala = useSelectorTyped(state => state.items[itemIndex]?.isFroala)
+  const { observerRef, isInsideViewPort } = useViewPortObserver()
+  const isAppFroala = useSelectorTyped(state => state.app.isFroala)
   const showEditableHtml = isAppFroala && isInsideViewPort && isItemFroala
 
   return (
-    <div
-      ref={observerRef}
-      css={{
-        width: '100%',
-        position: 'relative',
-      }}
+    <FroalaProvider
+      editorRef={props.editorRef}
+      htmlGetter={props.htmlGetter}
+      additionalStyle={props.additionalStyle}
+      placeholder={props.placeholder}
+      onContentChange={props.onContentChange}
+      onFocus={props.onFocus}
+      onBlur={props.onBlur}
+      froalaElementRef={froalaElementRef}
+      froalaHeightRef={froalaHeightRef}
     >
-      {!showEditableHtml && (
-        // * needed to disable Froala to avoid expensive frequent Froala initializing, for ex. when we change column width
-        <StaticHtml
-          htmlGetter={htmlGetter}
-          additionalStyle={additionalStyle}
-          froalaHeightRef={froalaHeightRef}
-        />
-      )}
-      {showEditableHtml && (
-        <>
-          <StaticHtmlBackgroundToFixBlinkIssue
-            htmlGetter={htmlGetter}
-            additionalStyle={additionalStyle}
-            froalaHeightRef={froalaHeightRef}
-          />
-          <EditableHtml
-            additionalStyle={additionalStyle}
-            editorRef={editorRef}
-            froalaElementRef={froalaElementRef}
-            htmlGetter={htmlGetter}
-            onContentChange={onContentChange}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            placeholder={placeholder}
-            froalaHeightRef={froalaHeightRef}
-          />
-        </>
-      )}
-    </div>
+      <div
+        ref={observerRef}
+        css={{
+          width: '100%',
+          position: 'relative',
+        }}
+      >
+        {!showEditableHtml && (
+          <StaticHtml />
+        )}
+        {showEditableHtml && (
+          <>
+            <StaticHtmlBackgroundToFixBlinkIssue />
+            <EditableHtml />
+          </>
+        )}
+      </div>
+    </FroalaProvider>
   )
 }

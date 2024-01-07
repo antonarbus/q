@@ -1,44 +1,12 @@
-import type { SxProps } from '@mui/material'
-import type { MutableRefObject, RefObject } from 'react'
-import type FroalaEditor from 'froala-editor'
 import { Box } from '@mui/material'
 import { useStartFroala } from './useStartFroala'
 import { usePutCaretAtTheEnd } from './usePutCaretAtTheEnd'
+import { useFroala } from '../../providers/FroalaProvider'
 
-type Props = {
-  htmlGetter: () => string
-  froalaElementRef: RefObject<HTMLDivElement>
-  editorRef: MutableRefObject<FroalaEditor | null>
-  placeholder?: string
-  additionalStyle?: SxProps
-  onContentChange: () => void
-  onFocus?: () => void
-  onBlur?: () => void
-  froalaHeightRef: MutableRefObject<number | undefined>
-}
-
-export const EditableHtml = ({
-  additionalStyle,
-  editorRef,
-  froalaElementRef,
-  htmlGetter,
-  placeholder,
-  onContentChange,
-  onFocus,
-  onBlur,
-  froalaHeightRef,
-}: Props): JSX.Element => {
-  useStartFroala({
-    editorRef,
-    froalaElementRef,
-    htmlGetter,
-    placeholder,
-    onContentChange,
-    onFocus,
-    onBlur,
-  })
-
-  usePutCaretAtTheEnd({ editorRef, froalaElementRef })
+export const EditableHtml = (): JSX.Element => {
+  const { additionalStyle, froalaElementRef, froalaHeightRef } = useFroala()
+  useStartFroala()
+  usePutCaretAtTheEnd()
 
   return (
     <Box
