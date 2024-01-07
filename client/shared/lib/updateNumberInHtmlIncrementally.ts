@@ -1,6 +1,7 @@
 import { getNumberFromString, getStringWithNewFormattedNumber, getTextContentFromHtml } from 'client/shared/lib'
 import { roundTo } from 'round-to'
 import type FroalaEditor from 'froala-editor'
+import { getDecimalPrecision } from './getDecimalPrecision'
 
 type Props = {
   oldNumber: number
@@ -17,11 +18,12 @@ export const updateNumberInHtmlIncrementally = ({
 }: Props): void => {
   const steps = 100
   const valueDifference = newNumber - oldNumber
+  if (valueDifference === 0) return
   const stepValue = valueDifference / steps
+  const decimalPrecision = getDecimalPrecision({ valueDifference })
 
   for (let i = 1; i <= steps; i++) {
-    const decimals = valueDifference > 100 ? 0 : 1
-    const incrementedValue = roundTo(oldNumber + i * stepValue, decimals)
+    const incrementedValue = roundTo(oldNumber + i * stepValue, decimalPrecision)
 
     const textContent = getTextContentFromHtml({ html })
 
