@@ -1,3 +1,3 @@
 export { Pin } from './ui/Pin'
-export { hidePinsOnRowBlur } from './hidePinsOnRowBlur'
-export { showPinsOnPriceCellFocus } from './showPinsOnPriceCellFocus'
+export { hideBoqRowPinsOnRowBlur } from './hideBoqRowPinsOnRowBlur'
+export { showBoqRowPins } from './showBoqRowPins'

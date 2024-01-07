@@ -10,7 +10,9 @@ type Props = {
   boqColumnKey: BoqColumnKey
 }
 
-export const Pin = ({ boqColumnKey }: Props): ReactNode => {
+export const Pin = ({
+  boqColumnKey,
+}: Props): ReactNode => {
   const { itemIndex } = useItem()
   const { rowIndex } = useRow()
   const pin = useSelectorTyped(selectBoqRowCellPin({ itemIndex, rowIndex, boqColumnKey }))
@@ -21,7 +23,7 @@ export const Pin = ({ boqColumnKey }: Props): ReactNode => {
   return (
     <Box
       className={className.pin}
-      component='button' // to make it focusable to understand if we click within same row // https://stackoverflow.com/a/42764495/7239778
+      component='button' // to make it focusable to understand if we click within same row on pins and not hide them at BoqRow onBlur callback // https://stackoverflow.com/a/42764495/7239778
       sx={{
         all: 'unset',
         position: 'absolute',
