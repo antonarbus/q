@@ -1,6 +1,5 @@
 import type { Item } from 'client/shared/types'
 import { createSlice } from '@reduxjs/toolkit'
-import { defaultItems } from '../model/defaultItems'
 import { deleteBoqRowReducer } from './reducers/deleteBoqRowReducer'
 import { deleteItemReducer } from './reducers/deleteItemReducer'
 import { disableFroalaReducer } from './reducers/disableFroalaReducer'
@@ -28,6 +27,7 @@ import { hideBoqRowCellPinReducer } from './reducers/hideBoqRowCellPinReducer'
 import { hideBoqItemPinsReducer } from './reducers/hideBoqItemPinsReducer'
 import { pinQtyReducer } from './reducers/pinQtyReducer'
 import { pinItemPriceReducer } from './reducers/pinItemPriceReducer'
+import { resetItemsToDefaultReducer } from './reducers/resetItemsToDefaultReducer'
 
 export type ItemsState = Item[]
 
@@ -43,12 +43,12 @@ export const itemsSlice = createSlice({
     enableFroalaReducer,
     insertPasteBoqRowReducer,
     insertPasteItemReducer,
-    pasteItemReducer, // ? what is the difference between insertPasteItem
+    pasteItemReducer,
     removeItemsMsgReducer,
     removePasteItemReducer,
     reOrderBoqRowsReducer,
     reOrderItemsReducer,
-    resetItemsToDefaultReducer: () => defaultItems,
+    resetItemsToDefaultReducer,
     tellItemSavedLocallyReducer,
     updateBoqCellReducer,
     updateBoqColumnNameTextReducer,
