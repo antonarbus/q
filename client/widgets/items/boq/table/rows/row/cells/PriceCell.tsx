@@ -1,11 +1,11 @@
 import { Box } from '@mui/material'
 import { theme } from 'client/shared/clients'
 import { boqCellHtmlGetter, selectColumnWidth, useBoqItem, useItem, useRow, Froala, getBoqRow } from 'client/entities/items'
-import { formatBoqRowCellNumber, isBoqRowPriceValid, updateBoqRowCellAtStore, updateBoqRowQtyCell, updateSubTotalPriceCell } from 'client/features/update_text'
+import { formatBoqRowCellNumber, isBoqRowPriceValid, updateBoqRowCellAtStore, updateBoqRowQtyCell, updateSubTotalPriceCell } from 'client/features/update_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
 import { showBoqRowPins } from 'client/features/pin'
-import { updateBoqRowItemPriceCell } from 'client/features/update_text/updateBoqRowItemPriceCell'
+import { updateBoqRowItemPriceCell } from 'client/features/update_cell/updateBoqRowItemPriceCell'
 
 const boqColumnKey: BoqColumnKey = 'price'
 

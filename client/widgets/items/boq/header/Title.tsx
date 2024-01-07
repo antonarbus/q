@@ -1,5 +1,5 @@
 import { boqHeaderHtmlGetter, useItem, Froala } from 'client/entities/items'
-import { updateBoqHeaderCell } from 'client/features/update_text'
+import { updateBoqHeaderCell } from 'client/features/update_cell'
 import { useRef } from 'react'
 import type FroalaEditor from 'froala-editor'
 

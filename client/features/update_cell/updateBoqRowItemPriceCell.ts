@@ -40,6 +40,7 @@ export const updateBoqRowItemPriceCell = ({
     newNumber: newItemPriceValueRounded,
   })
 
+  // todo: move to items
   updateBoqRowCellAtStore({
     itemIndex,
     rowIndex,
