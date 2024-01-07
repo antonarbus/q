@@ -8,9 +8,7 @@ import { onBoqRowDrag } from 'client/features/boq_row_actions/drag_boq_row'
 import { BoqPasteRowTextOverlay } from './row/BoqPasteRowTextOverlay'
 import { nanoid } from 'nanoid'
 import { useIsBoqRowSortDisabled } from './useIsBoqRowSortDisabled'
-import { dispatch } from 'client/shared/clients'
-import { className } from 'client/shared/className'
-import { hidePinsOnRowBlur } from 'client/features/pin'
+import { hideBoqRowPinsOnRowBlur } from 'client/features/pin'
 
 export const BoqRows = (): JSX.Element => {
   const { itemIndex } = useItem()
@@ -43,7 +41,7 @@ export const BoqRows = (): JSX.Element => {
                 >
                   <BoqRow
                     onBlur={(e) => {
-                      hidePinsOnRowBlur({ e, itemIndex, rowIndex })
+                      hideBoqRowPinsOnRowBlur({ e, itemIndex, rowIndex })
                     }}
                   />
                 </BoqRowSortAndAnimation>

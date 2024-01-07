@@ -14,6 +14,7 @@ export const onColumnResizeStart = ({ headerColumnElement, itemIndex, boqColumnK
   const width = headerColumnElement.clientWidth
   dispatch(itemsSlice.actions.disableFroala({ itemIndex }))
   dispatch(itemsSlice.actions.updateColWidth({ itemIndex, width, boqColumnKey }))
+  dispatch(itemsSlice.actions.hideBoqItemPins({ itemIndex }))
 }
 
 export const onColumnResize = ({ headerColumnElement, itemIndex, boqColumnKey }: Props): void => {

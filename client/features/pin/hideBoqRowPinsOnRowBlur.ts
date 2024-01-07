@@ -9,7 +9,11 @@ type Props = {
   rowIndex: number
 }
 
-export const hidePinsOnRowBlur = ({ e, itemIndex, rowIndex }: Props): void => {
+export const hideBoqRowPinsOnRowBlur = ({
+  e,
+  itemIndex,
+  rowIndex,
+}: Props): void => {
   const elementReceivedFocus = e.relatedTarget
   const isPin = elementReceivedFocus?.classList.contains(className.pin)
 

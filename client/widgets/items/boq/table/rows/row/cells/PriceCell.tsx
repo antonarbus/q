@@ -4,7 +4,7 @@ import { boqCellHtmlGetter, selectColumnWidth, useBoqItem, useItem, useRow, Froa
 import { isBoqRowPriceValid, updateBoqRowCellAtStore, updateSubTotalPriceCell } from 'client/features/update_text'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
-import { showPinsOnPriceCellFocus } from 'client/features/pin'
+import { showBoqRowPins } from 'client/features/pin'
 
 const boqColumnKey: BoqColumnKey = 'price'
 
@@ -36,7 +36,7 @@ export const PriceCell = (): JSX.Element => {
         placeholder='Price...'
         htmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
         onFocus={() => {
-          showPinsOnPriceCellFocus({ itemIndex, rowIndex })
+          showBoqRowPins({ itemIndex, rowIndex })
         }}
         onContentChange={() => {
           if (priceCellEditorRef.current === null) return

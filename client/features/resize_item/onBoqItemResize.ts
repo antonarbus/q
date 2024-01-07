@@ -9,7 +9,7 @@ export const onBoqItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, ele
   itemElement.style.width = itemElement.clientWidth + 'px'
 
   dispatch(itemsSlice.actions.disableFroala({ itemIndex }))
-
+  dispatch(itemsSlice.actions.hideBoqItemPins({ itemIndex }))
   dispatch(itemsSlice.actions.updateColWidth({
     itemIndex,
     boqColumnKey: 'description',

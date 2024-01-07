@@ -6,7 +6,7 @@ type Props = {
   rowIndex: number
 }
 
-export const showPinsOnPriceCellFocus = ({ itemIndex, rowIndex }: Props): void => {
+export const showBoqRowPins = ({ itemIndex, rowIndex }: Props): void => {
   dispatch(itemsSlice.actions.showBoqRowCellPin({
     itemIndex,
     rowIndex,
