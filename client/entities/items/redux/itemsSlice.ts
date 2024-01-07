@@ -26,6 +26,8 @@ import { updateSubTotalPriceReducer } from './reducers/updateTotalPriceReducer'
 import { showBoqRowCellPinReducer } from './reducers/showShowBoqRowCellPinReducer'
 import { hideBoqRowCellPinReducer } from './reducers/hideBoqRowCellPinReducer'
 import { hideBoqItemPinsReducer } from './reducers/hideBoqItemPinsReducer'
+import { pinQtyReducer } from './reducers/pinQtyReducer'
+import { pinItemPriceReducer } from './reducers/pinItemPriceReducer'
 
 export type ItemsState = Item[]
 
@@ -60,5 +62,7 @@ export const itemsSlice = createSlice({
     showBoqRowCellPin: showBoqRowCellPinReducer,
     hideBoqRowCellPin: hideBoqRowCellPinReducer,
     hideBoqItemPins: hideBoqItemPinsReducer,
+    pinQty: pinQtyReducer,
+    pinItemPrice: pinItemPriceReducer,
   },
 })
