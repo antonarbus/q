@@ -8,26 +8,24 @@ import { appSlice } from 'client/entities/app'
 const pasteItemOnClick = (): void => {
   const isPasteTextShown = getState().copy.isPasteTextShown
 
-  if (!isPasteTextShown) {
-    return
-  }
+  if (!isPasteTextShown) return
 
   dispatch(copySlice.actions.hidePasteText())
 
   const isPastable = getState().copy.isPastable
 
-  if (!isPastable) {
-    return
-  }
+  if (!isPastable) return
 
   const { itemId, pastePos } = getState().copy.place
   const topItemFromCopyContainer = getState().copy.items[0]
 
-  if (!topItemFromCopyContainer) {
-    return
-  }
+  if (!topItemFromCopyContainer) return
 
-  dispatch(itemsSlice.actions.pasteItemReducer({ itemId, pastePos, item: topItemFromCopyContainer }))
+  dispatch(itemsSlice.actions.pasteItemReducer({
+    item: topItemFromCopyContainer,
+    itemId,
+    pastePos,
+  }))
   dispatch(copySlice.actions.removeItemFromCopyContainer())
   dispatch(copySlice.actions.forbidToPaste())
   dispatch(copySlice.actions.forbidToCopy())
