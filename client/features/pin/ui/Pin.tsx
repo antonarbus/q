@@ -8,10 +8,12 @@ import { selectBoqRowCellPin, useItem, useRow } from 'client/entities/items'
 
 type Props = {
   boqColumnKey: BoqColumnKey
+  onClick: () => void
 }
 
 export const Pin = ({
   boqColumnKey,
+  onClick,
 }: Props): ReactNode => {
   const { itemIndex } = useItem()
   const { rowIndex } = useRow()
@@ -38,9 +40,7 @@ export const Pin = ({
           strokeWidth: pin.isPinned ? '0.2px' : '0px',
           cursor: 'pointer',
         }}
-        onClick={() => {
-          console.log(666)
-        }}
+        onClick={onClick}
       />
     </Box>
   )

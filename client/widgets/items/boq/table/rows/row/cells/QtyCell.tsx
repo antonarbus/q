@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
-import { theme } from 'client/shared/clients'
-import { boqCellHtmlGetter, selectColumnWidth, useItem, useRow, useBoqItem, Froala } from 'client/entities/items'
+import { dispatch, theme } from 'client/shared/clients'
+import { boqCellHtmlGetter, selectColumnWidth, useItem, useRow, useBoqItem, Froala, itemsSlice } from 'client/entities/items'
 import { formatBoqRowCellNumber, updateBoqRowCellAtStore, updateBoqRowPriceCell, updateSubTotalPriceCell } from 'client/features/update_text'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
@@ -77,7 +77,12 @@ export const QtyCell = (): JSX.Element => {
           },
         }}
       />
-      <Pin boqColumnKey={boqColumnKey} />
+      <Pin
+        boqColumnKey={boqColumnKey}
+        onClick={() => {
+          dispatch(itemsSlice.actions.pinQty({ itemIndex, rowIndex }))
+        }}
+      />
     </Box>
   )
 }
