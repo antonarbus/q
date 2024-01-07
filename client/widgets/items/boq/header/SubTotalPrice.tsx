@@ -15,6 +15,7 @@ export const SubTotalPrice = (): JSX.Element => {
       htmlGetter={() => boqHeaderHtmlGetter({ itemIndex, boqHeaderKey })}
       onContentChange={() => {
         if (subTotalPriceEditorRef.current === null) return
+
         updateBoqHeaderCell({
           itemIndex,
           boqHeaderKey,

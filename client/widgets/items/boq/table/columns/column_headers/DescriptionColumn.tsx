@@ -24,8 +24,12 @@ export const DescriptionColumn = (): ReactNode => {
         htmlGetter={() => boqColumnNameHtmlGetter({ itemIndex, boqColumnKey })}
         onContentChange={() => {
           if (editorRef.current === null) return
-          const html = editorRef.current.html.get()
-          updateBoqColumnCell({ itemIndex, boqColumnKey, html })
+
+          updateBoqColumnCell({
+            html: editorRef.current.html.get(),
+            itemIndex,
+            boqColumnKey,
+          })
         }}
         additionalStyle={{
           flexGrow: 1,

@@ -20,8 +20,12 @@ export const SubtotalText = (): JSX.Element => {
       htmlGetter={() => boqHeaderHtmlGetter({ itemIndex, boqHeaderKey })}
       onContentChange={() => {
         if (editorRef.current === null) return
-        const html = editorRef.current.html.get()
-        updateBoqHeaderCell({ itemIndex, html, boqHeaderKey })
+
+        updateBoqHeaderCell({
+          html: editorRef.current.html.get(),
+          itemIndex,
+          boqHeaderKey,
+        })
       }}
       additionalStyle={{
         height: '100%',
