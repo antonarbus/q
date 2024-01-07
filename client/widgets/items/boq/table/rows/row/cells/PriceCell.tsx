@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { theme } from 'client/shared/clients'
-import { boqCellHtmlGetter, selectColumnWidth, useBoqItem, useItem, useRow, Froala, getBoqRow } from 'client/entities/items'
-import { formatBoqRowCellNumber, isBoqRowPriceValid, updateBoqRowCellAtStore, updateBoqRowQtyCell, updateSubTotalPriceCell } from 'client/features/update_cell'
+import { boqCellHtmlGetter, selectColumnWidth, useBoqItem, useItem, useRow, Froala, getBoqRow, didBoqRowCellContentChange } from 'client/entities/items'
+import { formatBoqRowCellNumber, isBoqRowPriceValid, updateBoqRowCellAtStore, updateBoqRowPriceCell, updateBoqRowQtyCell, updateSubTotalPriceCell } from 'client/features/update_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
 import { showBoqRowPins } from 'client/features/pin'
@@ -42,6 +42,15 @@ export const PriceCell = (): JSX.Element => {
         onContentChange={() => {
           if (priceCellEditorRef.current === null) return
 
+          const didContentChange = didBoqRowCellContentChange({
+            editor: priceCellEditorRef.current,
+            itemIndex,
+            rowIndex,
+            boqColumnKey,
+          })
+
+          if (!didContentChange) return
+
           updateBoqRowCellAtStore({
             itemIndex,
             rowIndex,
@@ -75,7 +84,21 @@ export const PriceCell = (): JSX.Element => {
           })
         }}
         onBlur={() => {
-          // todo: recalculate value if it is not valid, which happens now
+          if (!isBoqRowPriceValid({ itemIndex, rowIndex })) {
+            console.log('need to recalculate the value')
+
+            updateBoqRowPriceCell({
+              itemIndex,
+              rowIndex,
+              priceCellEditor: priceCellEditorRef.current,
+            })
+
+            updateSubTotalPriceCell({
+              itemIndex,
+              subTotalPriceEditor: subTotalPriceEditorRef.current,
+            })
+          }
+
           formatBoqRowCellNumber({
             itemIndex,
             rowIndex,

@@ -6,7 +6,6 @@ type Props = {
   rowIndex: number
 }
 
-// todo: not in used now
 export const isBoqRowPriceValid = ({
   itemIndex,
   rowIndex,
