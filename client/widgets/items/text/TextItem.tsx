@@ -23,8 +23,11 @@ export const TextItem = (): JSX.Element => {
         placeholder='Add text, tables, drop images, files, links, select to format...'
         onContentChange={() => {
           if (editorRef.current === null) return
-          const html = editorRef.current.html.get()
-          updateTextItem({ html, itemIndex })
+
+          updateTextItem({
+            html: editorRef.current.html.get(),
+            itemIndex,
+          })
         }}
         additionalStyle={{
           padding: theme.item.padding,

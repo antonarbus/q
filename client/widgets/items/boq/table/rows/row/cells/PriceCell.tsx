@@ -85,8 +85,6 @@ export const PriceCell = (): JSX.Element => {
         }}
         onBlur={() => {
           if (!isBoqRowPriceValid({ itemIndex, rowIndex })) {
-            console.log('need to recalculate the value')
-
             updateBoqRowPriceCell({
               itemIndex,
               rowIndex,
