@@ -1,5 +1,5 @@
 import type FroalaEditor from 'froala-editor'
-import { getNumberFromString, getTextContentFromHtml, getStringWithNewFormattedNumber, updateNumberInHtmlIncrementallyByFroala } from 'client/shared/lib'
+import { getNumberFromString, getTextContentFromHtml, getStringWithNewFormattedNumber, updateNumberInHtmlIncrementally } from 'client/shared/lib'
 import { updateBoqRowCellAtStore } from './updateBoqRowCellAtStore'
 import { roundTo } from 'round-to'
 import { getBoqRow } from 'client/entities/items'
@@ -47,7 +47,7 @@ export const updateBoqRowPriceCell = ({
     html: updatedHtml,
   })
 
-  updateNumberInHtmlIncrementallyByFroala({
+  updateNumberInHtmlIncrementally({
     oldNumber: priceValueFromHtml,
     newNumber: newPriceValueRounded,
     editor: priceCellEditor,

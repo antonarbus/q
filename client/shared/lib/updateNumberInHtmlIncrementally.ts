@@ -9,8 +9,7 @@ type Props = {
   editor: FroalaEditor
 }
 
-// todo: if values are close to each other make smaller increments
-export const updateNumberInHtmlIncrementallyByFroala = ({
+export const updateNumberInHtmlIncrementally = ({
   oldNumber,
   newNumber,
   html,
@@ -21,7 +20,8 @@ export const updateNumberInHtmlIncrementallyByFroala = ({
   const stepValue = valueDifference / steps
 
   for (let i = 1; i <= steps; i++) {
-    const incrementedValue = roundTo(oldNumber + i * stepValue, 0)
+    const decimals = valueDifference > 100 ? 0 : 1
+    const incrementedValue = roundTo(oldNumber + i * stepValue, decimals)
 
     const textContent = getTextContentFromHtml({ html })
 
