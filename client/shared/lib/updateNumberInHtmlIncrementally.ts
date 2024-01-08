@@ -10,45 +10,53 @@ type Props = {
   editor: FroalaEditor
 }
 
-export const updateNumberInHtmlIncrementally = ({
+export const updateNumberInHtmlIncrementally = async ({
   oldNumber,
   newNumber,
   html,
   editor,
-}: Props): void => {
+}: Props): Promise<void> => {
   const steps = 100
   const valueDifference = newNumber - oldNumber
   if (valueDifference === 0) return
   const stepValue = valueDifference / steps
   const decimalPrecision = getDecimalPrecision({ valueDifference })
 
-  for (let i = 1; i <= steps; i++) {
-    const incrementedValue = roundTo(oldNumber + i * stepValue, decimalPrecision)
+  const incrementValues = async (): Promise<void> => {
+    await new Promise(resolve => {
+      for (let i = 1; i <= steps; i++) {
+        const incrementedValue = roundTo(oldNumber + i * stepValue, decimalPrecision)
 
-    const textContent = getTextContentFromHtml({ html })
+        const textContent = getTextContentFromHtml({ html })
 
-    const numberFromHtml = getNumberFromString({
-      string: textContent,
+        const numberFromHtml = getNumberFromString({
+          string: textContent,
+        })
+
+        const updatedHtml = getStringWithNewFormattedNumber({
+          string: html,
+          oldNumber: numberFromHtml,
+          newNumber: incrementedValue,
+        })
+
+        setTimeout(() => {
+          editor.html.set(updatedHtml)
+          if (i === steps) {
+            resolve('done')
+          }
+        }, 5 * i)
+      }
     })
-
-    const updatedHtml = getStringWithNewFormattedNumber({
-      string: html,
-      oldNumber: numberFromHtml,
-      newNumber: incrementedValue,
-    })
-
-    setTimeout(() => {
-      editor.html.set(updatedHtml)
-    }, 5 * i)
   }
 
-  setTimeout(() => {
-    const finalHtml = getStringWithNewFormattedNumber({
-      string: html,
-      oldNumber,
-      newNumber,
-    })
+  await incrementValues()
 
-    editor.html.set(finalHtml)
-  }, 5 * steps + 50)
+  const finalHtml = getStringWithNewFormattedNumber({
+    string: html,
+    oldNumber,
+    newNumber,
+  })
+
+  editor.html.set(finalHtml)
+  editor.undo.saveStep()
 }
