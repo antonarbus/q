@@ -84,7 +84,14 @@ export const PriceCell = (): JSX.Element => {
           })
         }}
         onBlur={() => {
-          if (!isBoqRowPriceValid({ itemIndex, rowIndex })) {
+          if (priceCellEditorRef.current === null) return
+          if (subTotalPriceEditorRef.current === null) return
+
+          if (!isBoqRowPriceValid({
+            html: priceCellEditorRef.current.html.get(),
+            itemIndex,
+            rowIndex,
+          })) {
             updateBoqRowPriceCell({
               itemIndex,
               rowIndex,

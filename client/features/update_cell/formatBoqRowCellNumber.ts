@@ -49,4 +49,5 @@ export const formatBoqRowCellNumber = ({
   if (cellEditor === null) return
 
   cellEditor.html.set(newHtml)
+  cellEditor.undo.saveStep()
 }
