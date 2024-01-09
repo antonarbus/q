@@ -1,6 +1,6 @@
 import { type BoqColumnKey } from 'client/shared/types'
 import type FroalaEditor from 'froala-editor'
-import { getBoqRowCellFromStore } from '../redux/getters/getBoqRowCellFromStore'
+import { getBoqCellFromStore } from '../redux/getters/getBoqCellFromStore'
 
 type Props = {
   editor: FroalaEditor
@@ -12,14 +12,14 @@ type Props = {
 // froala has a bug, on first render it always thinks that content is changed
 // https://github.com/froala/wysiwyg-editor/issues/3022
 
-export const didBoqRowCellContentChange = ({
+export const didBoqCellContentChange = ({
   editor,
   itemIndex,
   rowIndex,
   boqColumnKey,
 }: Props): boolean => {
   const htmlOnDisplay = editor.html.get()
-  const htmlFromStore = getBoqRowCellFromStore({ itemIndex, rowIndex, boqColumnKey })?.html
+  const htmlFromStore = getBoqCellFromStore({ itemIndex, rowIndex, boqColumnKey })?.html
   const didContentChange = htmlOnDisplay !== htmlFromStore
   return didContentChange
 }

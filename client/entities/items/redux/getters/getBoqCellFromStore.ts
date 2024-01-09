@@ -9,7 +9,7 @@ type Props = {
   state?: ItemsState
 }
 
-export const getBoqRowCellFromStore = ({
+export const getBoqCellFromStore = ({
   itemIndex,
   rowIndex,
   boqColumnKey,

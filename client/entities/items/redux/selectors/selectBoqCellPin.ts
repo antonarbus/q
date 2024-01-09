@@ -7,7 +7,7 @@ type Props = {
   boqColumnKey: BoqColumnKey
 }
 
-export const selectBoqRowCellPin =
+export const selectBoqCellPin =
   ({ itemIndex, rowIndex, boqColumnKey }: Props) =>
     (state: RootState): BoqRowCellPin | undefined => {
       const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })

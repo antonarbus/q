@@ -4,7 +4,7 @@ import { type BoqColumnKey } from 'client/shared/types'
 import { type ReactNode } from 'react'
 import { Box } from '@mui/material'
 import { className } from 'client/shared/className'
-import { selectBoqRowCellPin, useItem, useRow } from 'client/entities/items'
+import { selectBoqCellPin, useItem, useRow } from 'client/entities/items'
 
 type Props = {
   boqColumnKey: BoqColumnKey
@@ -17,7 +17,7 @@ export const Pin = ({
 }: Props): ReactNode => {
   const { itemIndex } = useItem()
   const { rowIndex } = useRow()
-  const pin = useSelectorTyped(selectBoqRowCellPin({ itemIndex, rowIndex, boqColumnKey }))
+  const pin = useSelectorTyped(selectBoqCellPin({ itemIndex, rowIndex, boqColumnKey }))
 
   if (pin === undefined) return null
   if (!pin.isShown) return null
