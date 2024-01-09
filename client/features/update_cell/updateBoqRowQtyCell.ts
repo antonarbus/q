@@ -2,7 +2,7 @@ import type FroalaEditor from 'froala-editor'
 import { getNumberFromString, getTextContentFromHtml, getStringWithNewFormattedNumber, updateNumberInHtmlIncrementally } from 'client/shared/lib'
 import { updateBoqRowCellAtStore } from './updateBoqRowCellAtStore'
 import { roundTo } from 'round-to'
-import { getBoqRow } from 'client/entities/items'
+import { getBoqRowFromStore } from 'client/entities/items'
 import { type BoqColumnKey } from 'client/shared/types'
 
 type Props = {
@@ -20,7 +20,7 @@ export const updateBoqRowQtyCell = ({
 }: Props): void => {
   if (qtyCellEditor === null) return
 
-  const boqRow = getBoqRow({ itemIndex, rowIndex })
+  const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
   if (boqRow === undefined) return
 
   const newQtyValue = boqRow.price.value / boqRow.itemPrice.value

@@ -1,5 +1,5 @@
 import type { BoqColumnKey, BoqRowCellPin, RootState } from 'client/shared/types'
-import { getBoqRow } from '../getters/getBoqRow'
+import { getBoqRowFromStore } from '../getters/getBoqRowFromStore'
 
 type Props = {
   itemIndex: number
@@ -10,7 +10,7 @@ type Props = {
 export const selectBoqRowCellPin =
   ({ itemIndex, rowIndex, boqColumnKey }: Props) =>
     (state: RootState): BoqRowCellPin | undefined => {
-      const boqRow = getBoqRow({ itemIndex, rowIndex })
+      const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
       if (boqRow === undefined) return
       const boqRowCellPin = boqRow[boqColumnKey].pin
       return boqRowCellPin

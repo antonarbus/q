@@ -14,11 +14,13 @@ export { selectBoqRowCellPin } from './redux/selectors/selectBoqRowCellPin'
 
 // utils
 export { saveItemHeightByIndex } from './utils/saveItemHeightByIndex'
-export { getBoqRow } from './redux/getters/getBoqRow'
-export { getBoqRows } from './redux/getters/getBoqRows'
-export { getBoqItem } from './redux/getters/getBoqItem'
-export { getBoqRowCell } from './redux/getters/getBoqRowCell'
 export { didBoqRowCellContentChange } from './utils/didBoqRowCellContentChange'
+
+// store getters
+export { getBoqRowFromStore } from './redux/getters/getBoqRowFromStore'
+export { getBoqRowsFromStore } from './redux/getters/getBoqRowsFromStore'
+export { getBoqItemFromStore } from './redux/getters/getBoqItemFromStore'
+export { getBoqRowCellFromStore } from './redux/getters/getBoqRowCellFromStore'
 
 // html getters
 export { itemTextHtmlGetter } from './html_getters/itemTextHtmlGetter'

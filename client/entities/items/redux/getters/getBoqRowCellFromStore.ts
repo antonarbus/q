@@ -1,6 +1,6 @@
 import { type BoqColumnKey, type BoqRowCell } from 'client/shared/types'
 import { type ItemsState } from '../itemsSlice'
-import { getBoqRow } from './getBoqRow'
+import { getBoqRowFromStore } from './getBoqRowFromStore'
 
 type Props = {
   itemIndex: number
@@ -9,14 +9,14 @@ type Props = {
   state?: ItemsState
 }
 
-export const getBoqRowCell = ({
+export const getBoqRowCellFromStore = ({
   itemIndex,
   rowIndex,
   boqColumnKey,
   state,
 }: Props): BoqRowCell | undefined => {
   // if we call func from reducer is should use own state which we pass here
-  const boqRow = getBoqRow({ itemIndex, rowIndex, state })
+  const boqRow = getBoqRowFromStore({ itemIndex, rowIndex, state })
   if (boqRow === undefined) return
   const boqRowCell = boqRow[boqColumnKey]
   return boqRowCell

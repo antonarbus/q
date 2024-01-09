@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { theme } from 'client/shared/clients'
-import { boqCellHtmlGetter, selectColumnWidth, useBoqItem, useItem, useRow, Froala, getBoqRow, didBoqRowCellContentChange } from 'client/entities/items'
+import { boqCellHtmlGetter, selectColumnWidth, useBoqItem, useItem, useRow, Froala, getBoqRowFromStore, didBoqRowCellContentChange } from 'client/entities/items'
 import { formatBoqRowCellNumber, isBoqRowPriceValid, updateBoqRowCellAtStore, updateBoqRowPriceCell, updateBoqRowQtyCell, updateSubTotalPriceCell } from 'client/features/update_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
@@ -58,7 +58,7 @@ export const PriceCell = (): JSX.Element => {
             html: priceCellEditorRef.current.html.get(),
           })
 
-          const boqRow = getBoqRow({ itemIndex, rowIndex })
+          const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
 
           const isItemPricePinned = boqRow?.itemPrice.pin.isPinned
           if (isItemPricePinned) {

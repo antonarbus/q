@@ -1,4 +1,4 @@
-import { getBoqItem, itemsSlice } from 'client/entities/items'
+import { getBoqItemFromStore, itemsSlice } from 'client/entities/items'
 import { dispatch } from 'client/shared/clients'
 import { saveItemsLocally } from 'client/shared/lib'
 import type { BoqColumnKey } from 'client/shared/types'
@@ -14,7 +14,7 @@ export const updateBoqColumnCell = ({
   itemIndex,
   boqColumnKey,
 }: Props): void => {
-  const boqItem = getBoqItem({ itemIndex })
+  const boqItem = getBoqItemFromStore({ itemIndex })
   if (boqItem === undefined) return
 
   const prevHtml = boqItem.boq.column[boqColumnKey].html
