@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { theme } from 'client/shared/clients'
-import { boqCellHtmlGetter, selectColumnWidth, useBoqItem, useItem, useRow, Froala, getBoqRowFromStore, didBoqRowCellContentChange } from 'client/entities/items'
+import { getBoqCellHtmlFromStore, selectColumnWidth, useBoqItem, useItem, useRow, Froala, getBoqRowFromStore, didBoqRowCellContentChange } from 'client/entities/items'
 import { formatBoqRowCellNumber, isBoqRowPriceValid, updateBoqRowCellAtStore, updateBoqRowPriceCell, updateBoqRowQtyCell, updateSubTotalPriceCell } from 'client/features/update_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
@@ -35,7 +35,7 @@ export const PriceCell = (): JSX.Element => {
       <Froala
         editorRef={priceCellEditorRef}
         placeholder='Price...'
-        htmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
+        htmlGetter={() => getBoqCellHtmlFromStore({ itemIndex, rowIndex, boqColumnKey })}
         onFocus={() => {
           showBoqRowPins({ itemIndex, rowIndex })
         }}

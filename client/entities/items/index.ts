@@ -16,17 +16,17 @@ export { selectBoqRowCellPin } from './redux/selectors/selectBoqRowCellPin'
 export { saveItemHeightByIndex } from './utils/saveItemHeightByIndex'
 export { didBoqRowCellContentChange } from './utils/didBoqRowCellContentChange'
 
-// store getters
+// store item getters
 export { getBoqRowFromStore } from './redux/getters/getBoqRowFromStore'
 export { getBoqRowsFromStore } from './redux/getters/getBoqRowsFromStore'
 export { getBoqItemFromStore } from './redux/getters/getBoqItemFromStore'
 export { getBoqRowCellFromStore } from './redux/getters/getBoqRowCellFromStore'
 
-// html getters
-export { itemTextHtmlGetter } from './html_getters/itemTextHtmlGetter'
-export { boqColumnNameHtmlGetter } from './html_getters/boqColumnNameHtmlGetter'
-export { boqHeaderHtmlGetter } from './html_getters/boqHeaderHtmlGetter'
-export { boqCellHtmlGetter } from './html_getters/boqCellHtmlGetter'
+// store html getters
+export { getItemTextHtmlFromStore } from './redux/getters/getItemTextHtmlFromStore'
+export { getBoqColumnHtmlFromStore } from './redux/getters/getBoqColumnHtmlFromStore'
+export { getBoqHeaderHtmlFromStore } from './redux/getters/getBoqHeaderHtmlFromStore'
+export { getBoqCellHtmlFromStore } from './redux/getters/getBoqCellHtmlFromStore'
 
 // ui
 export { DraggableItemsContainer } from './ui/DraggableItemsContainer'

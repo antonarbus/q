@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { theme } from 'client/shared/clients'
-import { boqCellHtmlGetter, selectColumnWidth, useItem, useRow, Froala } from 'client/entities/items'
+import { getBoqCellHtmlFromStore, selectColumnWidth, useItem, useRow, Froala } from 'client/entities/items'
 import { updateBoqRowCellAtStore } from 'client/features/update_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
@@ -34,7 +34,7 @@ export const NumberCell = (): JSX.Element => {
       <Froala
         editorRef={editorRef}
         placeholder=''
-        htmlGetter={() => boqCellHtmlGetter({ itemIndex, rowIndex, boqColumnKey })}
+        htmlGetter={() => getBoqCellHtmlFromStore({ itemIndex, rowIndex, boqColumnKey })}
         onContentChange={() => {
           if (editorRef.current === null) return
 

@@ -1,6 +1,6 @@
 import { theme } from 'client/shared/clients'
 import { useRef } from 'react'
-import { Froala, Item, itemTextHtmlGetter, useItem } from 'client/entities/items'
+import { Froala, Item, getItemTextHtmlFromStore, useItem } from 'client/entities/items'
 import { PencilAtBottomRight } from 'client/shared/components/PencilAtBottomRight'
 import { updateTextItem } from 'client/features/update_cell'
 import { onTextItemResizeStart, onTextItemResizeStop } from 'client/features/resize_item'
@@ -19,7 +19,7 @@ export const TextItem = (): JSX.Element => {
     >
       <Froala
         editorRef={editorRef}
-        htmlGetter={() => itemTextHtmlGetter({ itemIndex })}
+        htmlGetter={() => getItemTextHtmlFromStore({ itemIndex })}
         placeholder='Add text, tables, drop images, files, links, select to format...'
         onContentChange={() => {
           if (editorRef.current === null) return

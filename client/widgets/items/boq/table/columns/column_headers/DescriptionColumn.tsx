@@ -1,4 +1,4 @@
-import { Froala, boqColumnNameHtmlGetter, useItem } from 'client/entities/items'
+import { Froala, getBoqColumnHtmlFromStore, useItem } from 'client/entities/items'
 import { ResizableColumn } from '../ResizableColumn'
 import { type ReactNode, useRef } from 'react'
 import { updateBoqColumnCell } from 'client/features/update_cell'
@@ -21,7 +21,7 @@ export const DescriptionColumn = (): ReactNode => {
       <Froala
         editorRef={editorRef}
         placeholder='Description...'
-        htmlGetter={() => boqColumnNameHtmlGetter({ itemIndex, boqColumnKey })}
+        htmlGetter={() => getBoqColumnHtmlFromStore({ itemIndex, boqColumnKey })}
         onContentChange={() => {
           if (editorRef.current === null) return
 

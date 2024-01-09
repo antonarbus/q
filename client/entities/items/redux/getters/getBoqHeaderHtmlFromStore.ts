@@ -7,7 +7,7 @@ type Props = {
 
 }
 
-export const boqHeaderHtmlGetter = ({ itemIndex, boqHeaderKey }: Props): string => {
+export const getBoqHeaderHtmlFromStore = ({ itemIndex, boqHeaderKey }: Props): string => {
   const item = getState().items[itemIndex]
   if (!item) return ''
   if (item.type !== 'boq') return ''
