@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { theme } from 'client/shared/clients'
-import { getBoqCellHtmlFromStore, selectColumnWidth, useRow, useItem, Froala, didBoqRowCellContentChange } from 'client/entities/items'
+import { getBoqCellHtmlFromStore, selectColumnWidth, useRow, useItem, Froala, didBoqCellContentChange } from 'client/entities/items'
 import { updateBoqRowCellAtStore } from 'client/features/update_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
@@ -43,7 +43,7 @@ export const DescriptionCell = (): JSX.Element => {
         onContentChange={() => {
           if (editorRef.current === null) return
 
-          const didContentChange = didBoqRowCellContentChange({
+          const didContentChange = didBoqCellContentChange({
             editor: editorRef.current,
             itemIndex,
             rowIndex,
