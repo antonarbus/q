@@ -14,12 +14,10 @@ export const SubTotalPrice = (): JSX.Element => {
       placeholder='Price...'
       htmlGetter={() => getBoqHeaderHtmlFromStore({ itemIndex, boqHeaderKey })}
       onContentChange={() => {
-        if (subTotalPriceEditorRef.current === null) return
-
         updateBoqHeaderCell({
           itemIndex,
           boqHeaderKey,
-          html: subTotalPriceEditorRef.current.html.get(),
+          html: subTotalPriceEditorRef.current?.html.get() ?? '',
         })
       }}
       additionalStyle={{
