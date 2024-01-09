@@ -1,4 +1,4 @@
-import { boqHeaderHtmlGetter, useItem, Froala } from 'client/entities/items'
+import { getBoqHeaderHtmlFromStore, useItem, Froala } from 'client/entities/items'
 import { updateBoqHeaderCell } from 'client/features/update_cell'
 import { useRef } from 'react'
 import type FroalaEditor from 'froala-editor'
@@ -17,7 +17,7 @@ export const SubtotalText = (): JSX.Element => {
     <Froala
       editorRef={editorRef}
       placeholder='Subtotal...'
-      htmlGetter={() => boqHeaderHtmlGetter({ itemIndex, boqHeaderKey })}
+      htmlGetter={() => getBoqHeaderHtmlFromStore({ itemIndex, boqHeaderKey })}
       onContentChange={() => {
         if (editorRef.current === null) return
 

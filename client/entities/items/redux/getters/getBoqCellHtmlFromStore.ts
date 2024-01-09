@@ -3,13 +3,16 @@ import { type BoqColumnKey } from 'client/shared/types'
 
 type Props = {
   itemIndex: number
+  rowIndex: number
   boqColumnKey: BoqColumnKey
 }
 
-export const boqColumnNameHtmlGetter = ({ itemIndex, boqColumnKey }: Props): string => {
+export const getBoqCellHtmlFromStore = ({ itemIndex, rowIndex, boqColumnKey }: Props): string => {
   const item = getState().items[itemIndex]
   if (!item) return ''
   if (item.type !== 'boq') return ''
-  const html = item.boq.column[boqColumnKey].html
+  const row = item.boq.rows[rowIndex]
+  if (row === undefined) return ''
+  const html = row[boqColumnKey].html
   return html
 }
