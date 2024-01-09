@@ -1,5 +1,5 @@
 import type { BoqColumnKey, BoqRowCell, RootState } from 'client/shared/types'
-import { getBoqRow } from '../state_getters/getBoqRow'
+import { getBoqRow } from '../getters/getBoqRow'
 
 type Props = {
   itemIndex: number
