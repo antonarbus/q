@@ -1,5 +1,4 @@
-import { getBoqHeaderHtmlFromStore, useBoqItem, useItem, Froala } from 'client/entities/items'
-import { updateBoqHeaderCell } from 'client/features/update_cell'
+import { getBoqHeaderHtmlFromStore, useBoqItem, useItem, Froala, updateBoqHeaderCellAtStore } from 'client/entities/items'
 import { type BoqHeaderKey } from 'client/shared/types'
 
 const boqHeaderKey: BoqHeaderKey = 'subTotalPrice'
@@ -14,7 +13,7 @@ export const SubTotalPrice = (): JSX.Element => {
       placeholder='Price...'
       htmlGetter={() => getBoqHeaderHtmlFromStore({ itemIndex, boqHeaderKey })}
       onContentChange={() => {
-        updateBoqHeaderCell({
+        updateBoqHeaderCellAtStore({
           itemIndex,
           boqHeaderKey,
           html: subTotalPriceEditorRef.current?.html.get() ?? '',

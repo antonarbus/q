@@ -29,6 +29,11 @@ export { getBoqColumnHtmlFromStore } from './redux/getters/getBoqColumnHtmlFromS
 export { getBoqHeaderHtmlFromStore } from './redux/getters/getBoqHeaderHtmlFromStore'
 export { getBoqCellHtmlFromStore } from './redux/getters/getBoqCellHtmlFromStore'
 
+// store cell updaters (html + value)
+export { updateBoqColumnCellAtStore } from './redux/updaters/updateBoqColumnCellAtStore'
+export { updateBoqHeaderCellAtStore } from './redux/updaters/updateBoqHeaderCellAtStore'
+export { updateBoqRowCellAtStore } from './redux/updaters/updateBoqRowCellAtStore'
+
 // ui
 export { DraggableItemsContainer } from './ui/DraggableItemsContainer'
 export { Item } from './ui/Item'
