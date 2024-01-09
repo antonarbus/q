@@ -47,7 +47,7 @@ export const updateBoqRowQtyCell = ({
     html: updatedHtml,
   })
 
-  updateNumberInHtmlIncrementally({
+  void updateNumberInHtmlIncrementally({
     oldNumber: qtyValueFromHtml,
     newNumber: newQtyValueRounded,
     editor: qtyCellEditor,
