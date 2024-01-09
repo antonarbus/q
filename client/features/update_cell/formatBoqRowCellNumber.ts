@@ -3,7 +3,7 @@ import { getStringWithNewFormattedNumber } from 'client/shared/lib'
 import type FroalaEditor from 'froala-editor'
 import { roundTo } from 'round-to'
 import { type BoqColumnKey } from 'client/shared/types'
-import { getBoqRow, itemsSlice } from 'client/entities/items'
+import { getBoqRowFromStore, itemsSlice } from 'client/entities/items'
 
 type Props = {
   itemIndex: number
@@ -20,7 +20,7 @@ export const formatBoqRowCellNumber = ({
   cellEditor,
   roundToTwoDecimals,
 }: Props): void => {
-  const boqRow = getBoqRow({ itemIndex, rowIndex })
+  const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
   if (boqRow === undefined) return
 
   const value = boqRow[boqColumnKey].value

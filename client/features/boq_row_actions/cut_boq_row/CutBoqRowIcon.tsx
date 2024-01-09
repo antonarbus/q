@@ -4,7 +4,7 @@ import { TbCut } from 'react-icons/tb'
 import { motion } from 'framer-motion'
 import { cleanHtml } from 'client/shared/lib/itemsUtils'
 import { copySlice } from 'client/entities/copy'
-import { getBoqRow, itemsSlice, selectIsLastBoqRow, useItem, useRow } from 'client/entities/items'
+import { getBoqRowFromStore, itemsSlice, selectIsLastBoqRow, useItem, useRow } from 'client/entities/items'
 import type { MouseEvent } from 'react'
 import { className } from 'client/shared/className'
 import { saveItemsLocally } from 'client/shared/lib'
@@ -51,7 +51,7 @@ export const CutBoqRowIcon = (): JSX.Element => {
         const html = boqRowElement.outerHTML
         const cleanedHtml = cleanHtml(html)
 
-        const boqRow = getBoqRow({ itemIndex, rowIndex })
+        const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
         if (boqRow === undefined) return
 
         dispatch(copySlice.actions.addItemIntoCopyContainer({ copyItem: boqRow, preview: cleanedHtml }))

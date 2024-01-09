@@ -1,6 +1,6 @@
 import { type BoqColumnKey } from 'client/shared/types'
 import type FroalaEditor from 'froala-editor'
-import { getBoqRowCell } from '../redux/getters/getBoqRowCell'
+import { getBoqRowCellFromStore } from '../redux/getters/getBoqRowCellFromStore'
 
 type Props = {
   editor: FroalaEditor
@@ -19,7 +19,7 @@ export const didBoqRowCellContentChange = ({
   boqColumnKey,
 }: Props): boolean => {
   const htmlOnDisplay = editor.html.get()
-  const htmlFromStore = getBoqRowCell({ itemIndex, rowIndex, boqColumnKey })?.html
+  const htmlFromStore = getBoqRowCellFromStore({ itemIndex, rowIndex, boqColumnKey })?.html
   const didContentChange = htmlOnDisplay !== htmlFromStore
   return didContentChange
 }

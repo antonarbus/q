@@ -1,5 +1,5 @@
 import { roundTo } from 'round-to'
-import { getBoqRow } from 'client/entities/items'
+import { getBoqRowFromStore } from 'client/entities/items'
 import { getNumberFromString, getTextContentFromHtml } from 'client/shared/lib'
 
 type Props = {
@@ -13,7 +13,7 @@ export const isBoqRowPriceValid = ({
   rowIndex,
   html,
 }: Props): boolean => {
-  const boqRow = getBoqRow({ itemIndex, rowIndex })
+  const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
   if (boqRow === undefined) return true
   const priceValue = boqRow.price.value
   const calculatedPriceValue = boqRow.qty.value * boqRow.itemPrice.value

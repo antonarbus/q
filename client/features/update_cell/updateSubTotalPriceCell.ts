@@ -1,5 +1,5 @@
 import { getNumberFromString, getTextContentFromHtml, getStringWithNewFormattedNumber, updateNumberInHtmlIncrementally } from 'client/shared/lib'
-import { getBoqItem, getBoqRows, itemsSlice } from 'client/entities/items'
+import { getBoqItemFromStore, getBoqRowsFromStore, itemsSlice } from 'client/entities/items'
 import { dispatch } from 'client/shared/clients'
 import { type BoqRow } from 'client/shared/types'
 import type FroalaEditor from 'froala-editor'
@@ -16,10 +16,10 @@ export const updateSubTotalPriceCell = ({
 }: Props): void => {
   if (subTotalPriceEditor === null) return
 
-  const boqItem = getBoqItem({ itemIndex })
+  const boqItem = getBoqItemFromStore({ itemIndex })
   if (boqItem === undefined) return
 
-  const boqRows = getBoqRows({ itemIndex })
+  const boqRows = getBoqRowsFromStore({ itemIndex })
   if (boqRows === undefined) return
 
   const subTotalPriceValueCurrent = boqItem.boq.header.subTotalPrice.value

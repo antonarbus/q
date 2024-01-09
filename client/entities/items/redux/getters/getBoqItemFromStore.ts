@@ -7,7 +7,7 @@ type Props = {
   state?: ItemsState
 }
 
-export const getBoqItem = ({
+export const getBoqItemFromStore = ({
   itemIndex,
   state,
 }: Props): BoqItem | undefined => {

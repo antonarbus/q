@@ -1,5 +1,5 @@
 import { arrayMoveImmutable } from 'array-move'
-import { getBoqRows, itemsSlice } from 'client/entities/items'
+import { getBoqRowsFromStore, itemsSlice } from 'client/entities/items'
 import { dispatch } from 'client/shared/clients'
 import { saveItemsLocally } from 'client/shared/lib'
 
@@ -20,7 +20,7 @@ const onBoqRowDragEnd = ({ oldIndex, newIndex, itemIndex }: Props): void => {
   document.body.style.removeProperty('cursor')
 
   if (oldIndex !== newIndex) {
-    const boqRows = getBoqRows({ itemIndex })
+    const boqRows = getBoqRowsFromStore({ itemIndex })
     if (boqRows === undefined) return
     const reOrderedBoqRows = arrayMoveImmutable(boqRows, oldIndex, newIndex)
     dispatch(itemsSlice.actions.reOrderBoqRowsReducer({ reOrderedBoqRows, itemIndex }))
