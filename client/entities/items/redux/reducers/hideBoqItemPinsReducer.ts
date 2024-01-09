@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { ItemsState } from '../itemsSlice'
-import { getBoqRows } from '../state_getters/getBoqRows'
+import { getBoqRows } from '../getters/getBoqRows'
 
 export const hideBoqItemPinsReducer = (state: ItemsState, action: PayloadAction<{
   itemIndex: number

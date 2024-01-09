@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { ItemsState } from '../itemsSlice'
 import type { BoqColumnKey } from 'client/shared/types'
-import { getBoqRowCell } from '../state_getters/getBoqRowCell'
+import { getBoqRowCell } from '../getters/getBoqRowCell'
 
 export const showBoqRowCellPinReducer = (state: ItemsState, action: PayloadAction<{
   itemIndex: number

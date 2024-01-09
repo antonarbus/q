@@ -1,5 +1,5 @@
 import type { BoqRow, RootState } from 'client/shared/types'
-import { getBoqRows } from '../state_getters/getBoqRows'
+import { getBoqRows } from '../getters/getBoqRows'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type EqualityFn = (a: any, b: any) => boolean

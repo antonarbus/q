@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { ItemsState } from '../itemsSlice'
-import { getBoqRowCell } from '../state_getters/getBoqRowCell'
+import { getBoqRowCell } from '../getters/getBoqRowCell'
 
 export const pinItemPriceReducer = (state: ItemsState, action: PayloadAction<{
   itemIndex: number
