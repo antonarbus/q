@@ -41,6 +41,7 @@ export { Froala } from './ui/froala/Froala'
 
 // hooks
 export { useIsItemSortDisabled } from './hooks/useIsItemSortDisabled'
+export { useIsBoqRowSortDisabled } from './hooks/useIsBoqRowSortDisabled'
 
 // providers
 export { BoqItemProvider, useBoqItem } from './providers/BoqItemProvider'
