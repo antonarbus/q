@@ -51,7 +51,7 @@ export const updateSubTotalPriceCell = ({
     value: subTotalPriceValueNewRounded,
   }))
 
-  updateNumberInHtmlIncrementally({
+  void updateNumberInHtmlIncrementally({
     oldNumber: subTotalPriceValueCurrent,
     newNumber: subTotalPriceValueNewRounded,
     editor: subTotalPriceEditor,
