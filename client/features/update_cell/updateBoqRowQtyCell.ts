@@ -1,6 +1,6 @@
 import type FroalaEditor from 'froala-editor'
 import { getNumberFromString, getTextContentFromHtml, getStringWithNewFormattedNumber, updateNumberInHtmlIncrementally } from 'client/shared/lib'
-import { updateBoqRowCellAtStore } from './updateBoqRowCellAtStore'
+import { updateBoqRowCellAtStore } from '../../entities/items/redux/updaters/updateBoqRowCellAtStore'
 import { roundTo } from 'round-to'
 import { getBoqRowFromStore } from 'client/entities/items'
 import { type BoqColumnKey } from 'client/shared/types'

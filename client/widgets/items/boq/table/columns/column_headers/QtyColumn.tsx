@@ -1,8 +1,7 @@
 import { useRef } from 'react'
 import { ResizableColumn } from '../ResizableColumn'
-import { Froala, getBoqColumnHtmlFromStore, useItem } from 'client/entities/items'
+import { Froala, getBoqColumnHtmlFromStore, useItem, updateBoqColumnCellAtStore } from 'client/entities/items'
 import type FroalaEditor from 'froala-editor'
-import { updateBoqColumnCell } from 'client/features/update_cell'
 import { type BoqColumnKey } from 'client/shared/types'
 
 const boqColumnKey: BoqColumnKey = 'qty'
@@ -23,10 +22,8 @@ export const QtyColumn = (): JSX.Element => {
         placeholder='Qty...'
         htmlGetter={() => getBoqColumnHtmlFromStore({ itemIndex, boqColumnKey })}
         onContentChange={() => {
-          if (editorRef.current === null) return
-
-          updateBoqColumnCell({
-            html: editorRef.current.html.get(),
+          updateBoqColumnCellAtStore({
+            html: editorRef.current?.html.get() ?? '',
             itemIndex,
             boqColumnKey,
           })

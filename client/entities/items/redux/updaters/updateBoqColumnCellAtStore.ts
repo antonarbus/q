@@ -1,27 +1,27 @@
 import { getBoqItemFromStore, itemsSlice } from 'client/entities/items'
 import { dispatch } from 'client/shared/clients'
 import { saveItemsLocally } from 'client/shared/lib'
-import { type BoqHeaderKey } from 'client/shared/types'
+import type { BoqColumnKey } from 'client/shared/types'
 
 type Props = {
   html: string
   itemIndex: number
-  boqHeaderKey: BoqHeaderKey
+  boqColumnKey: BoqColumnKey
 }
 
-export const updateBoqHeaderCell = ({
+export const updateBoqColumnCellAtStore = ({
   html,
   itemIndex,
-  boqHeaderKey,
+  boqColumnKey,
 }: Props): void => {
   const boqItem = getBoqItemFromStore({ itemIndex })
   if (boqItem === undefined) return
 
-  const prevHtml = boqItem.boq.header[boqHeaderKey].html
+  const prevHtml = boqItem.boq.column[boqColumnKey].html
   const didTextChange = prevHtml !== html
   if (!didTextChange) return
 
-  dispatch(itemsSlice.actions.updateBoqHeaderTextReducer({ itemIndex, html, boqHeaderKey }))
+  dispatch(itemsSlice.actions.updateBoqColumnNameTextReducer({ itemIndex, html, boqColumnKey }))
   saveItemsLocally({
     msgAboveItemWithIndex: itemIndex,
   })

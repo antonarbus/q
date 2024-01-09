@@ -1,5 +1,4 @@
-import { getBoqHeaderHtmlFromStore, useItem, Froala } from 'client/entities/items'
-import { updateBoqHeaderCell } from 'client/features/update_cell'
+import { getBoqHeaderHtmlFromStore, useItem, Froala, updateBoqHeaderCellAtStore } from 'client/entities/items'
 import { useRef } from 'react'
 import type FroalaEditor from 'froala-editor'
 import { type BoqHeaderKey } from 'client/shared/types'
@@ -16,7 +15,7 @@ export const Title = (): JSX.Element => {
       placeholder='Title...'
       htmlGetter={() => getBoqHeaderHtmlFromStore({ itemIndex, boqHeaderKey })}
       onContentChange={() => {
-        updateBoqHeaderCell({
+        updateBoqHeaderCellAtStore({
           html: editorRef.current?.html.get() ?? '',
           itemIndex,
           boqHeaderKey,
