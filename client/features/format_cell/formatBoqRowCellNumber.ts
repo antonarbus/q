@@ -20,6 +20,7 @@ export const formatBoqRowCellNumber = ({
   cellEditor,
   roundToTwoDecimals,
 }: Props): void => {
+  console.log(666)
   const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
   if (boqRow === undefined) return
 

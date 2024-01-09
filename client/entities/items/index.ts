@@ -16,6 +16,7 @@ export { selectBoqCellPin } from './redux/selectors/selectBoqCellPin'
 // utils
 export { saveItemHeightByIndex } from './utils/saveItemHeightByIndex'
 export { didBoqCellContentChange } from './utils/didBoqCellContentChange'
+export { isBoqRowPriceValid } from './utils/isBoqRowPriceValid'
 
 // store item getters
 export { getBoqRowFromStore } from './redux/getters/getBoqRowFromStore'
