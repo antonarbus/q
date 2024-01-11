@@ -34,6 +34,7 @@ export const Pin = ({
       }}
     >
       <VscPinned
+        className={className.pin + ' svg'}
         css={{
           rotate: '35deg',
           fill: pin.isPinned ? 'black' : '#b8b8b8',

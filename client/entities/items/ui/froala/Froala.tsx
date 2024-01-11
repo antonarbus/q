@@ -17,7 +17,8 @@ export type FroalaProps = {
   additionalStyle?: SxProps
   onContentChange: () => void
   onFocus?: () => void
-  onBlur?: () => void
+  onClick?: (e: MouseEvent) => void
+  onBlur?: (e: MouseEvent) => void
 }
 
 export const Froala = (props: FroalaProps): JSX.Element => {
@@ -38,6 +39,7 @@ export const Froala = (props: FroalaProps): JSX.Element => {
       placeholder={props.placeholder}
       onContentChange={props.onContentChange}
       onFocus={props.onFocus}
+      onClick={props.onClick}
       onBlur={props.onBlur}
       froalaElementRef={froalaElementRef}
       froalaHeightRef={froalaHeightRef}

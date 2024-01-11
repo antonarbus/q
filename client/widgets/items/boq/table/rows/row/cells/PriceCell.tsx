@@ -1,10 +1,10 @@
 import { Box } from '@mui/material'
-import { theme } from 'client/shared/clients'
-import { getBoqCellHtmlFromStore, selectColumnWidth, useBoqItem, useItem, useRow, Froala, getBoqRowFromStore, didBoqCellContentChange, updateBoqRowCellAtStore, isBoqRowPriceValid } from 'client/entities/items'
+import { dispatch, theme } from 'client/shared/clients'
+import { getBoqCellHtmlFromStore, selectColumnWidth, useBoqItem, useItem, useRow, Froala, getBoqRowFromStore, didBoqCellContentChange, updateBoqRowCellAtStore, isBoqRowPriceValid, itemsSlice } from 'client/entities/items'
 import { updateBoqRowPriceCell, updateBoqRowQtyCell, updateSubTotalPriceCell } from 'client/features/update_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
-import { showBoqRowPins } from 'client/features/pin'
+import { Pin, showBoqRowPins } from 'client/features/pin'
 import { updateBoqRowItemPriceCell } from 'client/features/update_cell/updateBoqRowItemPriceCell'
 import { formatBoqRowCellNumber } from 'client/features/format_cell'
 
@@ -123,6 +123,12 @@ export const PriceCell = (): JSX.Element => {
           '.fr-wrapper': {
             minHeight: '24px', // otherwise placeholder is misplaced on init
           },
+        }}
+      />
+      <Pin
+        boqColumnKey={boqColumnKey}
+        onClick={() => {
+          dispatch(itemsSlice.actions.pinPriceReducer({ itemIndex, rowIndex }))
         }}
       />
     </Box>

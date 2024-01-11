@@ -22,12 +22,15 @@ import { updateItemHeightReducer } from './reducers/updateItemHeightReducer'
 import { updateItemTextReducer } from './reducers/updateItemTextReducer'
 import { updateItemWidthReducer } from './reducers/updateItemWidthReducer'
 import { updateSubTotalPriceReducer } from './reducers/updateTotalPriceReducer'
-import { showBoqRowCellPinReducer } from './reducers/showShowBoqRowCellPinReducer'
+import { showBoqRowCellPinReducer } from './reducers/showBoqRowCellPinReducer'
 import { hideBoqRowCellPinReducer } from './reducers/hideBoqRowCellPinReducer'
 import { hideBoqItemPinsReducer } from './reducers/hideBoqItemPinsReducer'
 import { pinQtyReducer } from './reducers/pinQtyReducer'
+import { pinPriceReducer } from './reducers/pinPriceReducer'
 import { pinItemPriceReducer } from './reducers/pinItemPriceReducer'
 import { resetItemsToDefaultReducer } from './reducers/resetItemsToDefaultReducer'
+import { showBoqPriceCellPinsReducer } from './reducers/showBoqPriceCellPinsReducer'
+import { hideBoqPriceCellPinsReducer } from './reducers/hideBoqPriceCellPinsReducer'
 
 export type ItemsState = Item[]
 
@@ -48,12 +51,15 @@ export const itemsSlice = createSlice({
     pasteItemReducer,
     pinItemPriceReducer,
     pinQtyReducer,
+    pinPriceReducer,
     removeItemsMsgReducer,
     removePasteItemReducer,
     reOrderBoqRowsReducer,
     reOrderItemsReducer,
     resetItemsToDefaultReducer,
     showBoqRowCellPinReducer,
+    showBoqPriceCellPinsReducer,
+    hideBoqPriceCellPinsReducer,
     tellItemSavedLocallyReducer,
     updateBoqCellReducer,
     updateBoqColumnNameTextReducer,
