@@ -19,6 +19,10 @@ export const SubTotalPrice = (): JSX.Element => {
     htmlGetter={() => getBoqHeaderHtmlFromStore({ itemIndex, boqHeaderKey })}
     onClick={(e) => {
       console.log('🚀 ~ SubTotalPrice ~ boqPriceEditorRefs:', boqPriceEditorRefs)
+      boqPriceEditorRefs.at(0)?.current?.html.set('xxx')
+      boqPriceEditorRefs.at(1)?.current?.html.set('yyy')
+      boqPriceEditorRefs.at(2)?.current?.html.set('zzz')
+      boqPriceEditorRefs.at(3)?.current?.html.set('sss')
       showHideBoqPricePins({
         e,
         itemIndex,
