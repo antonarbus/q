@@ -16,6 +16,7 @@ export { selectBoqCellPin } from './redux/selectors/selectBoqCellPin'
 // utils
 export { saveItemHeightByIndex } from './utils/saveItemHeightByIndex'
 export { didBoqCellContentChange } from './utils/didBoqCellContentChange'
+export { didBoqHeaderCellContentChange } from './utils/didBoqHeaderCellContentChange'
 export { isBoqRowPriceValid } from './utils/isBoqRowPriceValid'
 
 // store item getters
@@ -23,6 +24,7 @@ export { getBoqRowFromStore } from './redux/getters/getBoqRowFromStore'
 export { getBoqRowsFromStore } from './redux/getters/getBoqRowsFromStore'
 export { getBoqItemFromStore } from './redux/getters/getBoqItemFromStore'
 export { getBoqCellFromStore } from './redux/getters/getBoqCellFromStore'
+export { getBoqHeaderFromStore } from './redux/getters/getBoqHeaderFromStore'
 
 // store html getters
 export { getItemTextHtmlFromStore } from './redux/getters/getItemTextHtmlFromStore'

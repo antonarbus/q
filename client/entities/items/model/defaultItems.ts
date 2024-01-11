@@ -25,11 +25,11 @@ export const defaultItems: Item[] = [
       header: {
         title: {
           html: '<b>Title</b>',
-          value: null,
+          value: 0,
         },
         subtotalText: {
           html: '<div>Subtotal</div>',
-          value: null,
+          value: 0,
         },
         subTotalPrice: {
           html: '<b>140</b>',

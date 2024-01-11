@@ -54,22 +54,18 @@ export type BoqCols = {
   }
 }
 
+export type BoqHeaderCell = {
+  html: string
+  value: number
+}
+
 export type BoqItem = {
   type: 'boq'
   boq: {
     header: {
-      title: {
-        html: string
-        value: null
-      }
-      subtotalText: {
-        html: string
-        value: null
-      }
-      subTotalPrice: {
-        html: string
-        value: number
-      }
+      title: BoqHeaderCell
+      subtotalText: BoqHeaderCell
+      subTotalPrice: BoqHeaderCell
     }
     column: BoqCols
     rows: BoqRow[]
