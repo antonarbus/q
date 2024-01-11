@@ -24,8 +24,6 @@ export const showHideBoqPricePins = ({
       return
     }
 
-    console.log('🚀 ~ clickHandler')
-
     const clickedElement = e.target
     if (clickedElement instanceof Element) {
       const isPin = Boolean(clickedElement.closest(`.${className.pin}`))

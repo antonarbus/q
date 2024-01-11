@@ -6,7 +6,7 @@ import { useRef } from 'react'
 const boqHeaderKey: BoqHeaderKey = 'subTotalPrice'
 
 export const SubTotalPrice = (): JSX.Element => {
-  const { subTotalPriceEditorRef } = useBoqItem()
+  const { subTotalPriceEditorRef, boqPriceEditorRefs } = useBoqItem()
   const { itemIndex } = useItem()
 
   const hidePinsClickHandlerRef = useRef<(e: MouseEvent) => void>((e) => {})
@@ -14,17 +14,18 @@ export const SubTotalPrice = (): JSX.Element => {
 
   return (
     <Froala
-      editorRef={subTotalPriceEditorRef}
-      placeholder='Price...'
-      htmlGetter={() => getBoqHeaderHtmlFromStore({ itemIndex, boqHeaderKey })}
-      onClick={(e) => {
-        showHideBoqPricePins({
-          e,
-          itemIndex,
-          hidePinsClickHandlerRef,
-          isInitClickRef,
-        })
-      }}
+    editorRef={subTotalPriceEditorRef}
+    placeholder='Price...'
+    htmlGetter={() => getBoqHeaderHtmlFromStore({ itemIndex, boqHeaderKey })}
+    onClick={(e) => {
+      console.log('🚀 ~ SubTotalPrice ~ boqPriceEditorRefs:', boqPriceEditorRefs)
+      showHideBoqPricePins({
+        e,
+        itemIndex,
+        hidePinsClickHandlerRef,
+        isInitClickRef,
+      })
+    }}
       onContentChange={() => {
         updateBoqHeaderCellAtStore({
           itemIndex,

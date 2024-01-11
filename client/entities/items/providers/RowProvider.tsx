@@ -1,5 +1,6 @@
-import { createContext, useContext, type ReactNode } from 'react'
+import { createContext, useContext, type ReactNode, useEffect } from 'react'
 import type FroalaEditor from 'froala-editor'
+import { useBoqItem } from './BoqItemProvider'
 
 type FroalaEditorRef = {
   current: FroalaEditor | null
@@ -24,14 +25,21 @@ export const RowProvider = ({
   rowIndex,
   rowId,
 }: Props): JSX.Element => {
+  const itemPriceCellEditorRef = { current: null }
+  const qtyCellEditorRef = { current: null }
+  const priceCellEditorRef = { current: null }
+
+  const { boqPriceEditorRefs } = useBoqItem()
+  boqPriceEditorRefs[rowIndex] = priceCellEditorRef
+
   return (
     <RowContext.Provider
       value={{
         rowIndex,
         rowId,
-        itemPriceCellEditorRef: { current: null },
-        qtyCellEditorRef: { current: null },
-        priceCellEditorRef: { current: null },
+        itemPriceCellEditorRef,
+        qtyCellEditorRef,
+        priceCellEditorRef,
       }}
     >
       {children}

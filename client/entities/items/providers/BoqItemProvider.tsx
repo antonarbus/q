@@ -1,12 +1,13 @@
 import { createContext, useContext, type ReactNode } from 'react'
 import type FroalaEditor from 'froala-editor'
 
-type Context = {
-  subTotalPriceEditorRef: { current: FroalaEditor | null }
+type Props = {
+  children: ReactNode
 }
 
-type Props = Omit<Context, 'subTotalPriceEditorRef'> & {
-  children: ReactNode
+type Context = {
+  subTotalPriceEditorRef: { current: FroalaEditor | null }
+  boqPriceEditorRefs: Array<{ current: FroalaEditor | null }>
 }
 
 const BoqItemContext = createContext<Context | null>(null)
@@ -18,6 +19,7 @@ export const BoqItemProvider = ({
     <BoqItemContext.Provider
       value={{
         subTotalPriceEditorRef: { current: null },
+        boqPriceEditorRefs: [],
       }}
     >
       {children}
