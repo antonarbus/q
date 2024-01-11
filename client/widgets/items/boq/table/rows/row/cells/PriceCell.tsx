@@ -53,15 +53,16 @@ export const PriceCell = (): JSX.Element => {
           if (!didContentChange) return
 
           updateBoqRowCellAtStore({
+            html: priceCellEditorRef.current.html.get(),
             itemIndex,
             rowIndex,
             boqColumnKey,
-            html: priceCellEditorRef.current.html.get(),
           })
 
           const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
 
           const isItemPricePinned = boqRow?.itemPrice.pin.isPinned
+
           if (isItemPricePinned) {
             updateBoqRowQtyCell({
               qtyCellEditor: qtyCellEditorRef.current,

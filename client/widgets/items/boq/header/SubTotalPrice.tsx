@@ -1,7 +1,9 @@
-import { getBoqHeaderHtmlFromStore, useBoqItem, useItem, Froala, updateBoqHeaderCellAtStore } from 'client/entities/items'
+import { getBoqHeaderHtmlFromStore, useBoqItem, useItem, Froala, updateBoqHeaderCellAtStore, didBoqCellContentChange, didBoqHeaderCellContentChange, getBoqRowsFromStore, getBoqHeaderFromStore } from 'client/entities/items'
 import { showHideBoqPricePins } from 'client/features/pin'
 import { type BoqHeaderKey } from 'client/shared/types'
 import { useRef } from 'react'
+import type FroalaEditor from 'froala-editor'
+import { roundTo } from 'round-to'
 
 const boqHeaderKey: BoqHeaderKey = 'subTotalPrice'
 
@@ -18,11 +20,7 @@ export const SubTotalPrice = (): JSX.Element => {
     placeholder='Price...'
     htmlGetter={() => getBoqHeaderHtmlFromStore({ itemIndex, boqHeaderKey })}
     onClick={(e) => {
-      console.log('🚀 ~ SubTotalPrice ~ boqPriceEditorRefs:', boqPriceEditorRefs)
-      boqPriceEditorRefs.at(0)?.current?.html.set('xxx')
-      boqPriceEditorRefs.at(1)?.current?.html.set('yyy')
-      boqPriceEditorRefs.at(2)?.current?.html.set('zzz')
-      boqPriceEditorRefs.at(3)?.current?.html.set('sss')
+      // console.log('🚀 ~ SubTotalPrice ~ boqPriceEditorRefs:', boqPriceEditorRefs)
       showHideBoqPricePins({
         e,
         itemIndex,
@@ -31,16 +29,74 @@ export const SubTotalPrice = (): JSX.Element => {
       })
     }}
       onContentChange={() => {
-        updateBoqHeaderCellAtStore({
+        if (subTotalPriceEditorRef.current === null) return
+
+        const didContentChange = didBoqHeaderCellContentChange({
+          editor: subTotalPriceEditorRef.current,
           itemIndex,
           boqHeaderKey,
-          html: subTotalPriceEditorRef.current?.html.get() ?? '',
         })
+
+        if (!didContentChange) return
+
+        const boqRows = getBoqRowsFromStore({ itemIndex })
+        if (boqRows === undefined) return
+
+        updateBoqHeaderCellAtStore({
+          html: subTotalPriceEditorRef.current?.html.get() ?? '',
+          itemIndex,
+          boqHeaderKey,
+        })
+
+        // todo: get array of prices
+        // todo: get array of new proportioned prices
+
+        const prevSubTotalPriceValue = boqRows.reduce((accumulator, boqRow) => {
+          return accumulator + boqRow.price.value
+        }, 0)
+
+        const pinnedPricesSum = boqRows.reduce((accumulator, boqRow) => {
+          if (boqRow.price.pin.isPinned) {
+            return accumulator + boqRow.price.value
+          }
+
+          return accumulator
+        }, 0)
+
+        const subTotalPriceFromStore = getBoqHeaderFromStore({ itemIndex, boqHeaderKey })
+        if (subTotalPriceFromStore === undefined) return
+        const newSubTotalPriceValue = subTotalPriceFromStore.value
+
+        const unpinnedPricesSumTarget = newSubTotalPriceValue - pinnedPricesSum
+        const unpinnedPricesSum = prevSubTotalPriceValue - pinnedPricesSum
+
+        type PricesDetails = Array<{
+          oldPrice: number
+          isPinned: boolean
+          newPrice: number
+          editor: FroalaEditor | null
+        }>
+
+        const pricesDetails: PricesDetails = boqRows.map((boqRow, index) => {
+          const oldPrice = boqRow.price.value
+          const isPinned = boqRow.price.pin.isPinned
+
+          const newPrice = oldPrice * (unpinnedPricesSumTarget / unpinnedPricesSum)
+
+          return {
+            oldPrice,
+            isPinned,
+            newPrice: isPinned ? oldPrice : roundTo(newPrice, 2),
+            editor: boqPriceEditorRefs.at(index)?.current ?? null,
+          }
+        })
+
+        console.log(pricesDetails)
+
+        // todo: go through pricesDetails array and do exactly what we did for boqRowPrice change
       }}
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onBlur={(e: any) => {
-        // todo: looks like we need an click event listener
-
       }}
       additionalStyle={{
         width: '100%',
