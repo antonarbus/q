@@ -22,6 +22,7 @@ export const FroalaProvider = (props: Props): JSX.Element => {
         additionalStyle: props.additionalStyle,
         onContentChange: props.onContentChange,
         onFocus: props.onFocus,
+        onClick: props.onClick,
         onBlur: props.onBlur,
         froalaElementRef: props.froalaElementRef,
         froalaHeightRef: props.froalaHeightRef,

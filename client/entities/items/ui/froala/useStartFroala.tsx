@@ -18,7 +18,7 @@ window.froalas = []
 
 export const useStartFroala = (): void => {
   const { itemIndex } = useItem()
-  const { htmlGetter, froalaElementRef, editorRef, placeholder, onContentChange, onFocus, onBlur } = useFroala()
+  const { htmlGetter, froalaElementRef, editorRef, placeholder, onContentChange, onFocus, onClick, onBlur } = useFroala()
 
   useEffect(() => {
     const initFroalaInstance = (): void => {
@@ -43,8 +43,13 @@ export const useStartFroala = (): void => {
             focus: () => {
               onFocus?.()
             },
-            blur: () => {
-              onBlur?.()
+            click: (e: MouseEvent) => {
+              onClick?.(e)
+            },
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
+            blur: (e: MouseEvent) => {
+              onBlur?.(e)
             },
             // 'paste.afterCleanup': function (clipboardHtml: string) { },
             // click: (event: MouseEvent) => {},
