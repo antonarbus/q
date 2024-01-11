@@ -28,8 +28,10 @@ export const showHideBoqPricePins = ({
 
     const clickedElement = e.target
     if (clickedElement instanceof Element) {
-      const isPin = clickedElement.classList.contains(className.pin)
+      const isPin = Boolean(clickedElement.closest(`.${className.pin}`))
+
       if (isPin) return
+
       document.removeEventListener('click', hidePinsClickHandlerRef.current)
     }
 
