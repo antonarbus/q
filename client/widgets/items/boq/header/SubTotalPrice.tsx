@@ -4,6 +4,7 @@ import { type BoqHeaderKey } from 'client/shared/types'
 import { useRef } from 'react'
 import type FroalaEditor from 'froala-editor'
 import { roundTo } from 'round-to'
+import { updateBoqRowCellWithValue } from 'client/features/update_cell'
 
 const boqHeaderKey: BoqHeaderKey = 'subTotalPrice'
 
@@ -20,7 +21,6 @@ export const SubTotalPrice = (): JSX.Element => {
     placeholder='Price...'
     htmlGetter={() => getBoqHeaderHtmlFromStore({ itemIndex, boqHeaderKey })}
     onClick={(e) => {
-      // console.log('🚀 ~ SubTotalPrice ~ boqPriceEditorRefs:', boqPriceEditorRefs)
       showHideBoqPricePins({
         e,
         itemIndex,
@@ -67,30 +67,41 @@ export const SubTotalPrice = (): JSX.Element => {
         const unpinnedPricesSumTarget = newSubTotalPriceValue - pinnedPricesSum
         const unpinnedPricesSum = prevSubTotalPriceValue - pinnedPricesSum
 
-        type PricesDetails = Array<{
-          oldPrice: number
+        type Prices = Array<{
+          oldValue: number
           isPinned: boolean
-          newPrice: number
+          newValue: number
           editor: FroalaEditor | null
         }>
 
-        const pricesDetails: PricesDetails = boqRows.map((boqRow, index) => {
-          const oldPrice = boqRow.price.value
+        const prices: Prices = boqRows.map((boqRow, index) => {
+          const oldValue = boqRow.price.value
           const isPinned = boqRow.price.pin.isPinned
 
-          const newPrice = oldPrice * (unpinnedPricesSumTarget / unpinnedPricesSum)
+          const newValue = oldValue * (unpinnedPricesSumTarget / unpinnedPricesSum)
 
           return {
-            oldPrice,
+            oldValue,
             isPinned,
-            newPrice: isPinned ? oldPrice : roundTo(newPrice, 2),
+            newValue: isPinned ? oldValue : roundTo(newValue, 2),
             editor: boqPriceEditorRefs.at(index)?.current ?? null,
           }
         })
 
-        console.log(pricesDetails)
+        console.log(prices)
 
-        // todo: go through pricesDetails array and do exactly what we did for boqRowPrice change
+        prices.forEach((price, index) => {
+          updateBoqRowCellWithValue({
+            boqColumnKey: 'price',
+            editor: price.editor,
+            itemIndex,
+            rowIndex: index,
+            value: price.newValue,
+          })
+
+          // todo: at this point we need to modify itemPrice or qty
+          // todo: and for that we need froalas
+        })
       }}
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onBlur={(e: any) => {
