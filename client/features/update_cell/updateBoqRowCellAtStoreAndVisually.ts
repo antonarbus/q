@@ -7,36 +7,35 @@ import { type BoqColumnKey } from 'client/shared/types'
 type Props = {
   itemIndex: number
   rowIndex: number
-  itemPriceCellEditor: FroalaEditor | null
+  editor: FroalaEditor | null
+  boqColumnKey: BoqColumnKey
+  value: number
 }
 
-const boqColumnKey: BoqColumnKey = 'itemPrice'
-
-export const updateBoqRowItemPriceCell = ({
+export const updateBoqRowCellAtStoreAndVisually = ({
   itemIndex,
   rowIndex,
-  itemPriceCellEditor,
+  editor,
+  boqColumnKey,
+  value,
 }: Props): void => {
-  if (itemPriceCellEditor === null) return
+  if (editor === null) return
 
   const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
   if (boqRow === undefined) return
 
-  const newItemPriceValue = boqRow.price.value / boqRow.qty.value
-  const newItemPriceValueRounded = roundTo(newItemPriceValue, 2)
-
-  const itemPriceTextContent = getTextContentFromHtml({
+  const priceTextContent = getTextContentFromHtml({
     html: boqRow[boqColumnKey].html,
   })
 
-  const itemPriceValueFromHtml = getNumberFromString({
-    string: itemPriceTextContent,
+  const priceValueFromHtml = getNumberFromString({
+    string: priceTextContent,
   })
 
   const updatedHtml = getStringWithNewFormattedNumber({
     string: boqRow[boqColumnKey].html,
-    oldNumber: itemPriceValueFromHtml,
-    newNumber: newItemPriceValueRounded,
+    oldNumber: priceValueFromHtml,
+    newNumber: value,
   })
 
   updateBoqRowCellAtStore({
@@ -47,9 +46,9 @@ export const updateBoqRowItemPriceCell = ({
   })
 
   void updateNumberInHtmlIncrementally({
-    oldNumber: itemPriceValueFromHtml,
-    newNumber: newItemPriceValueRounded,
-    editor: itemPriceCellEditor,
+    oldNumber: priceValueFromHtml,
+    newNumber: value,
+    editor,
     html: boqRow[boqColumnKey].html,
   })
 }

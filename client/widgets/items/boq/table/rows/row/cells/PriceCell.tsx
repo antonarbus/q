@@ -1,12 +1,12 @@
 import { Box } from '@mui/material'
 import { dispatch, theme } from 'client/shared/clients'
 import { getBoqCellHtmlFromStore, selectColumnWidth, useBoqItem, useItem, useRow, Froala, getBoqRowFromStore, didBoqCellContentChange, updateBoqRowCellAtStore, isBoqRowPriceValid, itemsSlice } from 'client/entities/items'
-import { updateBoqRowPriceCell, updateBoqRowQtyCell, updateSubTotalPriceCell } from 'client/features/update_cell'
+import { updateBoqRowCellAtStoreAndVisually, updateSubTotalPriceCell } from 'client/features/update_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
 import { Pin, showBoqRowPins } from 'client/features/pin'
-import { updateBoqRowItemPriceCell } from 'client/features/update_cell/updateBoqRowItemPriceCell'
 import { formatBoqRowCellNumber } from 'client/features/format_cell'
+import { roundTo } from 'round-to'
 
 const boqColumnKey: BoqColumnKey = 'price'
 
@@ -64,19 +64,30 @@ export const PriceCell = (): JSX.Element => {
           const isItemPricePinned = boqRow?.itemPrice.pin.isPinned
 
           if (isItemPricePinned) {
-            updateBoqRowQtyCell({
-              qtyCellEditor: qtyCellEditorRef.current,
+            const newQtyValue = boqRow.price.value / boqRow.itemPrice.value
+            const newQtyValueRounded = roundTo(newQtyValue, 5)
+
+            updateBoqRowCellAtStoreAndVisually({
+              editor: qtyCellEditorRef.current,
               itemIndex,
               rowIndex,
+              boqColumnKey: 'qty',
+              value: newQtyValueRounded,
             })
           }
 
           const isQtyPinned = boqRow?.qty.pin.isPinned
+
           if (isQtyPinned) {
-            updateBoqRowItemPriceCell({
-              itemPriceCellEditor: itemPriceCellEditorRef.current,
+            const newItemPriceValue = boqRow.price.value / boqRow.qty.value
+            const newItemPriceValueRounded = roundTo(newItemPriceValue, 2)
+
+            updateBoqRowCellAtStoreAndVisually({
+              editor: itemPriceCellEditorRef.current,
               itemIndex,
               rowIndex,
+              boqColumnKey: 'itemPrice',
+              value: newItemPriceValueRounded,
             })
           }
 
@@ -89,15 +100,25 @@ export const PriceCell = (): JSX.Element => {
           if (priceCellEditorRef.current === null) return
           if (subTotalPriceEditorRef.current === null) return
 
-          if (!isBoqRowPriceValid({
+          const isPriceValid = isBoqRowPriceValid({
             html: priceCellEditorRef.current.html.get(),
             itemIndex,
             rowIndex,
-          })) {
-            updateBoqRowPriceCell({
+          })
+
+          if (!isPriceValid) {
+            const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
+            if (boqRow === undefined) return
+
+            const newPriceValue = boqRow.qty.value * boqRow.itemPrice.value
+            const newPriceValueRounded = roundTo(newPriceValue, 2)
+
+            updateBoqRowCellAtStoreAndVisually({
+              boqColumnKey: 'price',
+              editor: priceCellEditorRef.current,
               itemIndex,
               rowIndex,
-              priceCellEditor: priceCellEditorRef.current,
+              value: newPriceValueRounded,
             })
 
             updateSubTotalPriceCell({
