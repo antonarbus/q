@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { dispatch, theme } from 'client/shared/clients'
 import { getBoqCellHtmlFromStore, selectColumnWidth, useBoqItem, useItem, useRow, Froala, getBoqRowFromStore, didBoqCellContentChange, updateBoqRowCellAtStore, isBoqRowPriceValid, itemsSlice } from 'client/entities/items'
-import { updateBoqRowCellAtStoreAndVisually, updateSubTotalPriceCell } from 'client/features/update_cell'
+import { updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from 'client/features/update_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
 import { Pin, showBoqRowPins } from 'client/features/pin'
@@ -67,7 +67,7 @@ export const PriceCell = (): JSX.Element => {
             const newQtyValue = boqRow.price.value / boqRow.itemPrice.value
             const newQtyValueRounded = roundTo(newQtyValue, 5)
 
-            updateBoqRowCellAtStoreAndVisually({
+            updateBoqRowCellWithValue({
               editor: qtyCellEditorRef.current,
               itemIndex,
               rowIndex,
@@ -82,7 +82,7 @@ export const PriceCell = (): JSX.Element => {
             const newItemPriceValue = boqRow.price.value / boqRow.qty.value
             const newItemPriceValueRounded = roundTo(newItemPriceValue, 2)
 
-            updateBoqRowCellAtStoreAndVisually({
+            updateBoqRowCellWithValue({
               editor: itemPriceCellEditorRef.current,
               itemIndex,
               rowIndex,
@@ -91,7 +91,7 @@ export const PriceCell = (): JSX.Element => {
             })
           }
 
-          updateSubTotalPriceCell({
+          updateSubTotalPriceWithValue({
             itemIndex,
             subTotalPriceEditor: subTotalPriceEditorRef.current,
           })
@@ -113,7 +113,7 @@ export const PriceCell = (): JSX.Element => {
             const newPriceValue = boqRow.qty.value * boqRow.itemPrice.value
             const newPriceValueRounded = roundTo(newPriceValue, 2)
 
-            updateBoqRowCellAtStoreAndVisually({
+            updateBoqRowCellWithValue({
               boqColumnKey: 'price',
               editor: priceCellEditorRef.current,
               itemIndex,
@@ -121,7 +121,7 @@ export const PriceCell = (): JSX.Element => {
               value: newPriceValueRounded,
             })
 
-            updateSubTotalPriceCell({
+            updateSubTotalPriceWithValue({
               itemIndex,
               subTotalPriceEditor: subTotalPriceEditorRef.current,
             })

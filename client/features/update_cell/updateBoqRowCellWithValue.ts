@@ -12,7 +12,7 @@ type Props = {
   value: number
 }
 
-export const updateBoqRowCellAtStoreAndVisually = ({
+export const updateBoqRowCellWithValue = ({
   itemIndex,
   rowIndex,
   editor,
