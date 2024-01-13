@@ -1,9 +1,9 @@
 import { Box } from '@mui/material'
 import { dispatch, theme } from 'client/shared/clients'
-import { getBoqCellHtmlFromStore, selectColumnWidth, useBoqItem, useItem, useRow, Froala, getBoqRowFromStore, didBoqCellContentChange, updateBoqRowCellAtStore, isBoqRowPriceValid, itemsSlice } from 'client/entities/items'
+import { getBoqCellHtmlFromStore, selectColumnWidth, useBoqItem, useItem, useRow, Froala, getBoqRowFromStore, didBoqCellContentChange, updateBoqRowCellAtStore, isBoqRowPriceValid, itemsSlice, getBoqRowsFromStore } from 'client/entities/items'
 import { updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from 'client/features/update_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
-import type { BoqColumnKey } from 'client/shared/types'
+import type { BoqColumnKey, BoqRow } from 'client/shared/types'
 import { Pin, showBoqRowPins } from 'client/features/pin'
 import { formatBoqRowCellNumber } from 'client/features/format_cell'
 import { roundTo } from 'round-to'
@@ -91,9 +91,20 @@ export const PriceCell = (): JSX.Element => {
             })
           }
 
+          const boqRows = getBoqRowsFromStore({ itemIndex })
+          if (boqRows === undefined) return
+
+          const subTotalPriceValueNew: number = boqRows.reduce((accumulator: number, boqRow: BoqRow) => {
+            const price = boqRow.price.value
+            return accumulator + price
+          }, 0)
+
+          const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
+
           updateSubTotalPriceWithValue({
             itemIndex,
             subTotalPriceEditor: subTotalPriceEditorRef.current,
+            value: subTotalPriceValueNewRounded,
           })
         }}
         onBlur={() => {
@@ -121,9 +132,20 @@ export const PriceCell = (): JSX.Element => {
               value: newPriceValueRounded,
             })
 
+            const boqRows = getBoqRowsFromStore({ itemIndex })
+            if (boqRows === undefined) return
+
+            const subTotalPriceValueNew: number = boqRows.reduce((accumulator: number, boqRow: BoqRow) => {
+              const price = boqRow.price.value
+              return accumulator + price
+            }, 0)
+
+            const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
+
             updateSubTotalPriceWithValue({
               itemIndex,
               subTotalPriceEditor: subTotalPriceEditorRef.current,
+              value: subTotalPriceValueNewRounded,
             })
           }
 

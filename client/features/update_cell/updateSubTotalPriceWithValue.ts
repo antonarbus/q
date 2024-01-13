@@ -8,11 +8,13 @@ import { roundTo } from 'round-to'
 type Props = {
   itemIndex: number
   subTotalPriceEditor: FroalaEditor | null
+  value: number
 }
 
 export const updateSubTotalPriceWithValue = ({
   itemIndex,
   subTotalPriceEditor,
+  value,
 }: Props): void => {
   if (subTotalPriceEditor === null) return
 
@@ -24,12 +26,12 @@ export const updateSubTotalPriceWithValue = ({
 
   const subTotalPriceValueCurrent = boqItem.boq.header.subTotalPrice.value
 
-  const subTotalPriceValueNew: number = boqRows.reduce((accumulator: number, boqRow: BoqRow) => {
-    const price = boqRow.price.value
-    return accumulator + price
-  }, 0)
+  // const subTotalPriceValueNew: number = boqRows.reduce((accumulator: number, boqRow: BoqRow) => {
+  //   const price = boqRow.price.value
+  //   return accumulator + price
+  // }, 0)
 
-  const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
+  // const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
 
   const subTotalPriceTextContent = getTextContentFromHtml({
     html: boqItem.boq.header.subTotalPrice.html,
@@ -42,18 +44,18 @@ export const updateSubTotalPriceWithValue = ({
   const updatedHtml = getStringWithNewFormattedNumber({
     string: boqItem.boq.header.subTotalPrice.html,
     oldNumber: subTotalPriceValueFromHtml,
-    newNumber: subTotalPriceValueNewRounded,
+    newNumber: value,
   })
 
   dispatch(itemsSlice.actions.updateSubTotalPriceReducer({
     itemIndex,
     html: updatedHtml,
-    value: subTotalPriceValueNewRounded,
+    value,
   }))
 
   void updateNumberInHtmlIncrementally({
     oldNumber: subTotalPriceValueCurrent,
-    newNumber: subTotalPriceValueNewRounded,
+    newNumber: value,
     editor: subTotalPriceEditor,
     html: boqItem.boq.header.subTotalPrice.html,
   })
