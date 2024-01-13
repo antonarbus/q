@@ -1,3 +1,3 @@
 export { updateTextItem } from './updateTextItem'
-export { updateSubTotalPriceCell } from './updateSubTotalPriceCell'
-export { updateBoqRowCellAtStoreAndVisually } from './updateBoqRowCellAtStoreAndVisually'
+export { updateSubTotalPriceWithValue } from './updateSubTotalPriceWithValue'
+export { updateBoqRowCellWithValue } from './updateBoqRowCellWithValue'

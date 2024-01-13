@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { dispatch, theme } from 'client/shared/clients'
 import { getBoqCellHtmlFromStore, selectColumnWidth, useItem, useRow, useBoqItem, Froala, itemsSlice, didBoqCellContentChange, updateBoqRowCellAtStore, getBoqRowFromStore } from 'client/entities/items'
-import { updateBoqRowCellAtStoreAndVisually, updateSubTotalPriceCell } from 'client/features/update_cell'
+import { updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from 'client/features/update_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
 import { Pin } from 'client/features/pin'
@@ -62,7 +62,7 @@ export const ItemPriceCell = (): JSX.Element => {
           const newPriceValue = boqRow.qty.value * boqRow.itemPrice.value
           const newPriceValueRounded = roundTo(newPriceValue, 2)
 
-          updateBoqRowCellAtStoreAndVisually({
+          updateBoqRowCellWithValue({
             boqColumnKey: 'price',
             editor: priceCellEditorRef.current,
             itemIndex,
@@ -70,7 +70,7 @@ export const ItemPriceCell = (): JSX.Element => {
             value: newPriceValueRounded,
           })
 
-          updateSubTotalPriceCell({
+          updateSubTotalPriceWithValue({
             itemIndex,
             subTotalPriceEditor: subTotalPriceEditorRef.current,
           })
