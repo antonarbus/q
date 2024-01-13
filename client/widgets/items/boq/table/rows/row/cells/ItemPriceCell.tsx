@@ -1,11 +1,12 @@
 import { Box } from '@mui/material'
 import { dispatch, theme } from 'client/shared/clients'
-import { getBoqCellHtmlFromStore, selectColumnWidth, useItem, useRow, useBoqItem, Froala, itemsSlice, didBoqCellContentChange, updateBoqRowCellAtStore } from 'client/entities/items'
-import { updateBoqRowPriceCell, updateSubTotalPriceCell } from 'client/features/update_cell'
+import { getBoqCellHtmlFromStore, selectColumnWidth, useItem, useRow, useBoqItem, Froala, itemsSlice, didBoqCellContentChange, updateBoqRowCellAtStore, getBoqRowFromStore } from 'client/entities/items'
+import { updateBoqRowCellAtStoreAndVisually, updateSubTotalPriceCell } from 'client/features/update_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
 import { Pin } from 'client/features/pin'
 import { formatBoqRowCellNumber } from 'client/features/format_cell'
+import { roundTo } from 'round-to'
 
 const boqColumnKey: BoqColumnKey = 'itemPrice'
 
@@ -55,10 +56,18 @@ export const ItemPriceCell = (): JSX.Element => {
             html: itemPriceCellEditorRef.current.html.get(),
           })
 
-          updateBoqRowPriceCell({
+          const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
+          if (boqRow === undefined) return
+
+          const newPriceValue = boqRow.qty.value * boqRow.itemPrice.value
+          const newPriceValueRounded = roundTo(newPriceValue, 2)
+
+          updateBoqRowCellAtStoreAndVisually({
+            boqColumnKey: 'price',
+            editor: priceCellEditorRef.current,
             itemIndex,
             rowIndex,
-            priceCellEditor: priceCellEditorRef.current,
+            value: newPriceValueRounded,
           })
 
           updateSubTotalPriceCell({

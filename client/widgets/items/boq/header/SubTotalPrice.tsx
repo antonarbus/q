@@ -48,9 +48,6 @@ export const SubTotalPrice = (): JSX.Element => {
           boqHeaderKey,
         })
 
-        // todo: get array of prices
-        // todo: get array of new proportioned prices
-
         const prevSubTotalPriceValue = boqRows.reduce((accumulator, boqRow) => {
           return accumulator + boqRow.price.value
         }, 0)
