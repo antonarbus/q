@@ -1,4 +1,4 @@
-import { getBoqHeaderHtmlFromStore, useItem, Froala, updateBoqHeaderCellAtStore } from 'client/entities/items'
+import { getBoqHeaderHtmlFromStore, useItem, Froala, updateBoqHeaderCellAtStore, subTotalTextCellStyle } from 'client/entities/items'
 import { useRef } from 'react'
 import type FroalaEditor from 'froala-editor'
 import { type BoqHeaderKey } from 'client/shared/types'
@@ -26,13 +26,7 @@ export const SubtotalText = (): JSX.Element => {
           boqHeaderKey,
         })
       }}
-      additionalStyle={{
-        height: '100%',
-        width: '100%',
-        whiteSpace: 'nowrap',
-        textAlign: 'right',
-        minHeight: '24px',
-      }}
+      additionalStyle={subTotalTextCellStyle}
     />
   )
 }

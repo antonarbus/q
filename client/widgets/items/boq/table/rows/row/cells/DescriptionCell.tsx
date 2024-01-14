@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { theme } from 'client/shared/clients'
-import { getBoqCellHtmlFromStore, selectColumnWidth, useRow, useItem, Froala, didBoqCellContentChange, updateBoqRowCellAtStore } from 'client/entities/items'
+import { getBoqCellHtmlFromStore, selectColumnWidth, useRow, useItem, Froala, didBoqCellContentChange, updateBoqRowCellAtStore, descriptionCellStyle } from 'client/entities/items'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
 import type FroalaEditor from 'froala-editor'
@@ -58,13 +58,7 @@ export const DescriptionCell = (): JSX.Element => {
             html: editorRef.current.html.get(),
           })
         }}
-        additionalStyle={{
-          padding: theme.cell.padding,
-          minHeight: '44px', // otherwise placeholder is misplaced on init
-          '.fr-wrapper': {
-            minHeight: '24px', // otherwise placeholder is misplaced on init
-          },
-        }}
+        additionalStyle={descriptionCellStyle}
       />
     </Box>
   )

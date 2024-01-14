@@ -1,4 +1,4 @@
-import { Froala, getBoqColumnHtmlFromStore, updateBoqColumnCellAtStore, useItem } from 'client/entities/items'
+import { Froala, getBoqColumnHtmlFromStore, columnHeaderStyle, updateBoqColumnCellAtStore, useItem } from 'client/entities/items'
 import { ResizableColumn } from '../ResizableColumn'
 import { useRef } from 'react'
 import type FroalaEditor from 'froala-editor'
@@ -28,12 +28,7 @@ export const ItemPriceColumn = (): JSX.Element => {
             boqColumnKey,
           })
         }}
-        additionalStyle={{
-          flexGrow: 1,
-          textAlign: 'center',
-          minHeight: '24px',
-          paddingInline: '5px',
-        }}
+        additionalStyle={columnHeaderStyle}
       />
     </ResizableColumn>
   )

@@ -42,6 +42,15 @@ export { DraggableItemsContainer } from './ui/DraggableItemsContainer'
 export { Item } from './ui/Item'
 export { Froala } from './ui/froala/Froala'
 
+// styles
+export { textItemCellStyle } from './styles/textItemCellStyle'
+export { boqRowCellStyle } from './styles/boqRowCellStyle'
+export { descriptionCellStyle } from './styles/descriptionCellStyle'
+export { columnHeaderStyle } from './styles/columnHeaderStyle'
+export { subTotalPriceCellStyle } from './styles/subTotalPriceCellStyle'
+export { subTotalTextCellStyle } from './styles/subTotalTextCellStyle'
+export { titleCellStyle } from './styles/titleCellStyle'
+
 // hooks
 export { useIsItemSortDisabled } from './hooks/useIsItemSortDisabled'
 export { useIsBoqRowSortDisabled } from './hooks/useIsBoqRowSortDisabled'

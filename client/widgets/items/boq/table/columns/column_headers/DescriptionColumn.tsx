@@ -1,4 +1,4 @@
-import { Froala, getBoqColumnHtmlFromStore, updateBoqColumnCellAtStore, useItem } from 'client/entities/items'
+import { Froala, getBoqColumnHtmlFromStore, updateBoqColumnCellAtStore, useItem, columnHeaderStyle } from 'client/entities/items'
 import { ResizableColumn } from '../ResizableColumn'
 import { type ReactNode, useRef } from 'react'
 import type FroalaEditor from 'froala-editor'
@@ -29,9 +29,8 @@ export const DescriptionColumn = (): ReactNode => {
           })
         }}
         additionalStyle={{
-          flexGrow: 1,
-          minHeight: '24px',
-          paddingInline: '5px',
+          ...columnHeaderStyle,
+          textAlign: 'left',
         }}
       />
     </ResizableColumn>

@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
-import { dispatch, theme } from 'client/shared/clients'
-import { getBoqCellHtmlFromStore, selectColumnWidth, useItem, useRow, useBoqItem, Froala, itemsSlice, didBoqCellContentChange, updateBoqRowCellAtStore, getBoqRowFromStore, getBoqRowsFromStore } from 'client/entities/items'
+import { dispatch } from 'client/shared/clients'
+import { getBoqCellHtmlFromStore, selectColumnWidth, useItem, useRow, useBoqItem, Froala, itemsSlice, didBoqCellContentChange, updateBoqRowCellAtStore, getBoqRowFromStore, getBoqRowsFromStore, boqRowCellStyle } from 'client/entities/items'
 import { updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from 'client/features/update_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey, BoqRow } from 'client/shared/types'
@@ -95,17 +95,7 @@ export const QtyCell = (): JSX.Element => {
             roundToTwoDecimals: false,
           })
         }}
-        additionalStyle={{
-          textAlign: 'center',
-          padding: theme.cell.padding,
-          '.fr-placeholder': {
-            left: '15px',
-          },
-          minHeight: '44px', // otherwise placeholder is misplaced on init
-          '.fr-wrapper': {
-            minHeight: '24px', // otherwise placeholder is misplaced on init
-          },
-        }}
+        additionalStyle={boqRowCellStyle}
       />
       <Pin
         boqColumnKey={boqColumnKey}

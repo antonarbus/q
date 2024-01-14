@@ -1,4 +1,4 @@
-import { getBoqHeaderHtmlFromStore, useBoqItem, useItem, Froala, updateBoqHeaderCellAtStore, didBoqCellContentChange, didBoqHeaderCellContentChange, getBoqRowsFromStore, getBoqHeaderFromStore } from 'client/entities/items'
+import { getBoqHeaderHtmlFromStore, useBoqItem, useItem, Froala, updateBoqHeaderCellAtStore, didBoqCellContentChange, didBoqHeaderCellContentChange, getBoqRowsFromStore, getBoqHeaderFromStore, subTotalPriceCellStyle } from 'client/entities/items'
 import { showHideBoqPricePins } from 'client/features/pin'
 import { type BoqHeaderKey } from 'client/shared/types'
 import { useRef } from 'react'
@@ -124,15 +124,7 @@ export const SubTotalPrice = (): JSX.Element => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onBlur={(e: any) => {
       }}
-      additionalStyle={{
-        width: '100%',
-        minWidth: '100px',
-        whiteSpace: 'nowrap',
-        textAlign: 'right',
-        flexShrink: 0,
-        right: 0,
-        minHeight: '24px',
-      }}
+      additionalStyle={subTotalPriceCellStyle}
     />
   )
 }

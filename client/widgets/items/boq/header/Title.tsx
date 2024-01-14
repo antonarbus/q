@@ -1,4 +1,4 @@
-import { getBoqHeaderHtmlFromStore, useItem, Froala, updateBoqHeaderCellAtStore } from 'client/entities/items'
+import { getBoqHeaderHtmlFromStore, useItem, Froala, updateBoqHeaderCellAtStore, titleCellStyle } from 'client/entities/items'
 import { useRef } from 'react'
 import type FroalaEditor from 'froala-editor'
 import { type BoqHeaderKey } from 'client/shared/types'
@@ -21,10 +21,7 @@ export const Title = (): JSX.Element => {
           boqHeaderKey,
         })
       }}
-      additionalStyle={{
-        flexGrow: 1,
-        minHeight: '24px',
-      }}
+      additionalStyle={titleCellStyle}
     />
   )
 }
