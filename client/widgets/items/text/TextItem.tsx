@@ -1,4 +1,3 @@
-import { theme } from 'client/shared/clients'
 import { useRef } from 'react'
 import { Froala, Item, getItemTextHtmlFromStore, textItemCellStyle, useItem } from 'client/entities/items'
 import { PencilAtBottomRight } from 'client/shared/components/PencilAtBottomRight'
@@ -22,12 +21,7 @@ export const TextItem = (): JSX.Element => {
         htmlGetter={() => getItemTextHtmlFromStore({ itemIndex })}
         placeholder='Add text, tables, drop images, files, links, select to format...'
         onContentChange={() => {
-          if (editorRef.current === null) return
-
-          updateTextItem({
-            html: editorRef.current.html.get(),
-            itemIndex,
-          })
+          updateTextItem({ editorRef, itemIndex })
         }}
         additionalStyle={textItemCellStyle}
       />

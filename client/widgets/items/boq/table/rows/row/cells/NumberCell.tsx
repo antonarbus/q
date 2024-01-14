@@ -1,13 +1,11 @@
 import { Box } from '@mui/material'
-import { getBoqCellHtmlFromStore, selectColumnWidth, useItem, useRow, Froala, updateBoqRowCellAtStore, boqRowCellStyle } from 'client/entities/items'
+import { selectColumnWidth, useItem, useRow } from 'client/entities/items'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
-import type FroalaEditor from 'froala-editor'
-import { useRef } from 'react'
+
 const boqColumnKey: BoqColumnKey = 'number'
 
 export const NumberCell = (): JSX.Element => {
-  const editorRef = useRef<FroalaEditor | null>(null)
   const { itemIndex } = useItem()
   const { rowIndex } = useRow()
   const numberColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
@@ -15,6 +13,8 @@ export const NumberCell = (): JSX.Element => {
   const width = isNumberColWidthSetManually ? numberColWidth : 'auto'
   const minWidth = '30px'
   const maxWidth = width === 'auto' ? minWidth : width
+
+  // todo: create a selector to understand sequential number of boqItem
 
   return (
     <Box
@@ -27,24 +27,12 @@ export const NumberCell = (): JSX.Element => {
         width,
         maxWidth,
         minWidth,
+        fontSize: '10px',
+        color: 'grey',
+        paddingBottom: '6px',
       }}
     >
-      <Froala
-        editorRef={editorRef}
-        placeholder=''
-        htmlGetter={() => getBoqCellHtmlFromStore({ itemIndex, rowIndex, boqColumnKey })}
-        onContentChange={() => {
-          if (editorRef.current === null) return
-
-          updateBoqRowCellAtStore({
-            itemIndex,
-            rowIndex,
-            boqColumnKey,
-            html: editorRef.current.html.get(),
-          })
-        }}
-        additionalStyle={boqRowCellStyle}
-      />
+      {itemIndex + 1}.{rowIndex + 1}
     </Box>
   )
 }

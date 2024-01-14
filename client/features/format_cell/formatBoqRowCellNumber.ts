@@ -4,12 +4,13 @@ import type FroalaEditor from 'froala-editor'
 import { roundTo } from 'round-to'
 import { type BoqColumnKey } from 'client/shared/types'
 import { getBoqRowFromStore, itemsSlice } from 'client/entities/items'
+import { type MutableRefObject } from 'react'
 
 type Props = {
   itemIndex: number
   rowIndex: number
   boqColumnKey: BoqColumnKey
-  cellEditor: FroalaEditor | null
+  editorRef: MutableRefObject<FroalaEditor | null>
   roundToTwoDecimals: boolean
 }
 
@@ -17,9 +18,11 @@ export const formatBoqRowCellNumber = ({
   itemIndex,
   rowIndex,
   boqColumnKey,
-  cellEditor,
+  editorRef,
   roundToTwoDecimals,
 }: Props): void => {
+  if (editorRef.current === null) return
+
   const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
   if (boqRow === undefined) return
 
@@ -36,7 +39,7 @@ export const formatBoqRowCellNumber = ({
     newNumber: roundToTwoDecimals ? roundedValue : value,
   })
 
-  if (html === newHtml) return
+  // if (html === newHtml) return
 
   dispatch(itemsSlice.actions.updateBoqCellReducer({
     itemIndex,
@@ -46,8 +49,6 @@ export const formatBoqRowCellNumber = ({
     boqColumnKey,
   }))
 
-  if (cellEditor === null) return
-
-  cellEditor.html.set(newHtml)
-  cellEditor.undo.saveStep()
+  editorRef.current.html.set(newHtml)
+  editorRef.current.undo.saveStep()
 }
