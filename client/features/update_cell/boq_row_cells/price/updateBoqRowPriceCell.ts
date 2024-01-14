@@ -89,5 +89,6 @@ export const updateBoqRowPriceCell = ({
     itemIndex,
     subTotalPriceEditor: subTotalPriceEditorRef.current,
     value: subTotalPriceValueNewRounded,
+    incrementally: true,
   })
 }

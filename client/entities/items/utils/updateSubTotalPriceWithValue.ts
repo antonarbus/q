@@ -1,4 +1,4 @@
-import { getNumberFromString, getTextContentFromHtml, getStringWithNewFormattedNumber, updateNumberInHtmlIncrementally } from 'client/shared/lib'
+import { getNumberFromString, getTextContentFromHtml, getStringWithNewFormattedNumber, updateNumberAtHtmlIncrementally, updateNumberAtHtml } from 'client/shared/lib'
 import { getBoqItemFromStore, getBoqRowsFromStore, itemsSlice } from 'client/entities/items'
 import { dispatch } from 'client/shared/clients'
 import type FroalaEditor from 'froala-editor'
@@ -7,12 +7,14 @@ type Props = {
   itemIndex: number
   subTotalPriceEditor: FroalaEditor | null
   value: number
+  incrementally: boolean
 }
 
 export const updateSubTotalPriceWithValue = ({
   itemIndex,
   subTotalPriceEditor,
   value,
+  incrementally,
 }: Props): void => {
   if (subTotalPriceEditor === null) return
 
@@ -44,10 +46,19 @@ export const updateSubTotalPriceWithValue = ({
     value,
   }))
 
-  void updateNumberInHtmlIncrementally({
-    oldNumber: subTotalPriceValueCurrent,
-    newNumber: value,
-    editor: subTotalPriceEditor,
-    html: boqItem.boq.header.subTotalPrice.html,
-  })
+  if (incrementally) {
+    void updateNumberAtHtmlIncrementally({
+      oldNumber: subTotalPriceValueCurrent,
+      newNumber: value,
+      editor: subTotalPriceEditor,
+      html: boqItem.boq.header.subTotalPrice.html,
+    })
+  } else {
+    updateNumberAtHtml({
+      oldNumber: subTotalPriceValueCurrent,
+      newNumber: value,
+      editor: subTotalPriceEditor,
+      html: boqItem.boq.header.subTotalPrice.html,
+    })
+  }
 }

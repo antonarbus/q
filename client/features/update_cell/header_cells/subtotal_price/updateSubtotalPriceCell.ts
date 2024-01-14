@@ -91,6 +91,7 @@ export const updateSubtotalPriceCell = ({
       itemIndex,
       subTotalPriceEditor: subTotalPriceEditorRef.current,
       value: prevSubTotalPriceValue,
+      incrementally: true,
     })
 
     return
@@ -106,6 +107,7 @@ export const updateSubtotalPriceCell = ({
       itemIndex,
       subTotalPriceEditor: subTotalPriceEditorRef.current,
       value: prevSubTotalPriceValue,
+      incrementally: true,
     })
 
     return
