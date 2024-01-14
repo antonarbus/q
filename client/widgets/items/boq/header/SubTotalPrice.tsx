@@ -1,6 +1,6 @@
-import { getBoqHeaderHtmlFromStore, useBoqItem, useItem, Froala, updateBoqHeaderCellAtStore, didBoqCellContentChange, didBoqHeaderCellContentChange, getBoqRowsFromStore, getBoqHeaderFromStore, subTotalPriceCellStyle } from 'client/entities/items'
+import { getBoqHeaderHtmlFromStore, useBoqItem, useItem, Froala, updateBoqHeaderCellAtStore, didBoqCellContentChange, didBoqHeaderCellContentChange, getBoqRowsFromStore, getBoqHeaderFromStore, subTotalPriceCellStyle, isBoqRowPriceValid, getBoqRowFromStore } from 'client/entities/items'
 import { showHideBoqPricePins } from 'client/features/pin'
-import { type BoqHeaderKey } from 'client/shared/types'
+import { type BoqRow, type BoqHeaderKey } from 'client/shared/types'
 import { useRef } from 'react'
 import type FroalaEditor from 'froala-editor'
 import { roundTo } from 'round-to'
@@ -68,6 +68,21 @@ export const SubTotalPrice = (): JSX.Element => {
         const unpinnedPricesSumTarget = newSubTotalPriceValue - pinnedPricesSum
         const unpinnedPricesSum = prevSubTotalPriceValue - pinnedPricesSum
 
+        if (unpinnedPricesSum === 0) {
+          notify({
+            msg: 'Unpinned prices give 0. Do not know how to adjust individual prices.',
+            type: 'info',
+          })
+
+          updateSubTotalPriceWithValue({
+            itemIndex,
+            subTotalPriceEditor: subTotalPriceEditorRef.current,
+            value: prevSubTotalPriceValue,
+          })
+
+          return
+        }
+
         type Prices = Array<{
           oldValue: number
           isPinned: boolean
@@ -114,15 +129,58 @@ export const SubTotalPrice = (): JSX.Element => {
             rowIndex: index,
             value: price.newValue,
           })
-
-          console.log(prices)
-
-          // todo: at this point we need to modify itemPrice or qty
-          // todo: and for that we need froalas
         })
       }}
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      onBlur={(e: any) => {
+      onBlur={() => {
+        const boqRows = getBoqRowsFromStore({ itemIndex })
+        if (boqRows === undefined) return
+
+        boqRows.forEach((boqRow, rowIndex) => {
+          const priceCellEditorRef = boqPriceEditorRefs.at(rowIndex)
+          if (priceCellEditorRef === undefined) return
+          if (priceCellEditorRef === null) return
+          if (priceCellEditorRef.current === null) return
+
+          const isPriceValid = isBoqRowPriceValid({
+            html: priceCellEditorRef.current.html.get(),
+            itemIndex,
+            rowIndex,
+          })
+
+          if (!isPriceValid) {
+            notify({
+              msg: 'Individual prices can not give desired subtotal value. Setting the closest value.',
+              type: 'info',
+            })
+
+            const newPriceValue = boqRow.qty.value * boqRow.itemPrice.value
+            const newPriceValueRounded = roundTo(newPriceValue, 2)
+
+            updateBoqRowCellWithValue({
+              boqColumnKey: 'price',
+              editor: priceCellEditorRef.current,
+              itemIndex,
+              rowIndex,
+              value: newPriceValueRounded,
+            })
+
+            const boqRows = getBoqRowsFromStore({ itemIndex })
+            if (boqRows === undefined) return
+
+            const subTotalPriceValueNew: number = boqRows.reduce((accumulator: number, boqRow: BoqRow) => {
+              const price = boqRow.price.value
+              return accumulator + price
+            }, 0)
+
+            const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
+
+            updateSubTotalPriceWithValue({
+              itemIndex,
+              subTotalPriceEditor: subTotalPriceEditorRef.current,
+              value: subTotalPriceValueNewRounded,
+            })
+          }
+        })
       }}
       additionalStyle={subTotalPriceCellStyle}
     />
