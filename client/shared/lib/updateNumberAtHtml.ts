@@ -1,0 +1,25 @@
+import { getStringWithNewFormattedNumber } from 'client/shared/lib'
+import type FroalaEditor from 'froala-editor'
+
+type Props = {
+  oldNumber: number
+  newNumber: number
+  html: string
+  editor: FroalaEditor
+}
+
+export const updateNumberAtHtml = ({
+  oldNumber,
+  newNumber,
+  html,
+  editor,
+}: Props): void => {
+  const finalHtml = getStringWithNewFormattedNumber({
+    string: html,
+    oldNumber,
+    newNumber,
+  })
+
+  editor.html.set(finalHtml)
+  editor.undo.saveStep()
+}

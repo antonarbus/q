@@ -59,6 +59,7 @@ export const validateBoqRowPrice = ({
       itemIndex,
       subTotalPriceEditor: subTotalPriceEditorRef.current,
       value: subTotalPriceValueNewRounded,
+      incrementally: true,
     })
   }
 

@@ -69,6 +69,7 @@ export const validateBoqRowPrices = ({
         itemIndex,
         subTotalPriceEditor: subTotalPriceEditorRef.current,
         value: subTotalPriceValueNewRounded,
+        incrementally: false,
       })
     }
   })
