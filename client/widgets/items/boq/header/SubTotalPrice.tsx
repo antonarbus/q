@@ -93,7 +93,7 @@ export const SubTotalPrice = (): JSX.Element => {
 
         if (areAllCellsPinned) {
           notify({
-            msg: 'All row prices are pinned',
+            msg: 'Can\'t be changed. All row prices are pinned.',
             type: 'info',
           })
 
