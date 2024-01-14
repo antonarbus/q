@@ -18,6 +18,8 @@ export { saveItemHeightByIndex } from './utils/saveItemHeightByIndex'
 export { didBoqCellContentChange } from './utils/didBoqCellContentChange'
 export { didBoqHeaderCellContentChange } from './utils/didBoqHeaderCellContentChange'
 export { isBoqRowPriceValid } from './utils/isBoqRowPriceValid'
+export { updateBoqRowCellWithValue } from './utils/updateBoqRowCellWithValue'
+export { updateSubTotalPriceWithValue } from './utils/updateSubTotalPriceWithValue'
 
 // store item getters
 export { getBoqRowFromStore } from './redux/getters/getBoqRowFromStore'

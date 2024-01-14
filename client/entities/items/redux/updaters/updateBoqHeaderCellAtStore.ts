@@ -2,22 +2,27 @@ import { getBoqItemFromStore, itemsSlice } from 'client/entities/items'
 import { dispatch } from 'client/shared/clients'
 import { getNumberFromString, getTextContentFromHtml, saveItemsLocally } from 'client/shared/lib'
 import { type BoqHeaderKey } from 'client/shared/types'
+import type FroalaEditor from 'froala-editor'
+import { type MutableRefObject } from 'react'
 
 type Props = {
-  html: string
+  editorRef: MutableRefObject<FroalaEditor | null>
   itemIndex: number
   boqHeaderKey: BoqHeaderKey
 }
 
 export const updateBoqHeaderCellAtStore = ({
-  html,
+  editorRef,
   itemIndex,
   boqHeaderKey,
 }: Props): void => {
+  if (editorRef.current === null) return
+
   const boqItem = getBoqItemFromStore({ itemIndex })
   if (boqItem === undefined) return
 
   const prevHtml = boqItem.boq.header[boqHeaderKey].html
+  const html = editorRef.current?.html.get()
   const didTextChange = prevHtml !== html
   if (!didTextChange) return
 

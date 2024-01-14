@@ -1,15 +1,11 @@
-import { useRef } from 'react'
 import { ResizableColumn } from '../ResizableColumn'
-import type FroalaEditor from 'froala-editor'
-import { getBoqColumnHtmlFromStore, useItem, Froala, updateBoqColumnCellAtStore, columnHeaderStyle } from 'client/entities/items'
+import { columnHeaderStyle } from 'client/entities/items'
 import { type BoqColumnKey } from 'client/shared/types'
+import { Box } from '@mui/material'
 
 const boqColumnKey: BoqColumnKey = 'number'
 
 export const NumberColumn = (): JSX.Element => {
-  const editorRef = useRef<FroalaEditor | null>(null)
-  const { itemIndex } = useItem()
-
   return (
     <ResizableColumn
       boqColumnKey={boqColumnKey}
@@ -17,18 +13,8 @@ export const NumberColumn = (): JSX.Element => {
       minWidth={30}
       flexGrow={0}
     >
-      <Froala
-        editorRef={editorRef}
-        placeholder=''
-        htmlGetter={() => getBoqColumnHtmlFromStore({ itemIndex, boqColumnKey })}
-        onContentChange={() => {
-          updateBoqColumnCellAtStore({
-            html: editorRef.current?.html.get() ?? '',
-            itemIndex,
-            boqColumnKey,
-          })
-        }}
-        additionalStyle={columnHeaderStyle}
+      <Box
+        sx={columnHeaderStyle}
       />
     </ResizableColumn>
   )

@@ -1,12 +1,10 @@
 import { Box } from '@mui/material'
 import { dispatch } from 'client/shared/clients'
-import { getBoqCellHtmlFromStore, selectColumnWidth, useItem, useRow, useBoqItem, Froala, itemsSlice, didBoqCellContentChange, updateBoqRowCellAtStore, getBoqRowFromStore, getBoqRowsFromStore, boqRowCellStyle } from 'client/entities/items'
-import { updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from 'client/features/update_cell'
+import { getBoqCellHtmlFromStore, selectColumnWidth, useItem, useRow, useBoqItem, Froala, itemsSlice, boqRowCellStyle } from 'client/entities/items'
 import { useSelectorTyped } from 'client/shared/hooks'
-import type { BoqColumnKey, BoqRow } from 'client/shared/types'
+import type { BoqColumnKey } from 'client/shared/types'
 import { Pin } from 'client/features/pin'
-import { formatBoqRowCellNumber } from 'client/features/format_cell'
-import { roundTo } from 'round-to'
+import { formatBoqRowItemPriceCell, updateBoqRowItemPriceCell } from 'client/features/update_cell'
 
 const boqColumnKey: BoqColumnKey = 'itemPrice'
 
@@ -38,63 +36,10 @@ export const ItemPriceCell = (): JSX.Element => {
         placeholder='Item price...'
         htmlGetter={() => getBoqCellHtmlFromStore({ itemIndex, rowIndex, boqColumnKey })}
         onContentChange={() => {
-          console.log(555)
-          if (itemPriceCellEditorRef.current === null) return
-
-          const didContentChange = didBoqCellContentChange({
-            editor: itemPriceCellEditorRef.current,
-            itemIndex,
-            rowIndex,
-            boqColumnKey,
-          })
-
-          if (!didContentChange) return
-
-          updateBoqRowCellAtStore({
-            itemIndex,
-            rowIndex,
-            boqColumnKey,
-            html: itemPriceCellEditorRef.current.html.get(),
-          })
-
-          const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
-          if (boqRow === undefined) return
-
-          const newPriceValue = boqRow.qty.value * boqRow.itemPrice.value
-          const newPriceValueRounded = roundTo(newPriceValue, 2)
-
-          updateBoqRowCellWithValue({
-            boqColumnKey: 'price',
-            editor: priceCellEditorRef.current,
-            itemIndex,
-            rowIndex,
-            value: newPriceValueRounded,
-          })
-
-          const boqRows = getBoqRowsFromStore({ itemIndex })
-          if (boqRows === undefined) return
-
-          const subTotalPriceValueNew: number = boqRows.reduce((accumulator: number, boqRow: BoqRow) => {
-            const price = boqRow.price.value
-            return accumulator + price
-          }, 0)
-
-          const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
-
-          updateSubTotalPriceWithValue({
-            itemIndex,
-            subTotalPriceEditor: subTotalPriceEditorRef.current,
-            value: subTotalPriceValueNewRounded,
-          })
+          updateBoqRowItemPriceCell({ boqColumnKey, itemIndex, itemPriceCellEditorRef, priceCellEditorRef, rowIndex, subTotalPriceEditorRef })
         }}
         onBlur={() => {
-          formatBoqRowCellNumber({
-            itemIndex,
-            rowIndex,
-            boqColumnKey,
-            cellEditor: itemPriceCellEditorRef.current,
-            roundToTwoDecimals: true,
-          })
+          formatBoqRowItemPriceCell({ itemIndex, rowIndex, boqColumnKey, itemPriceCellEditorRef })
         }}
         additionalStyle={boqRowCellStyle}
       />

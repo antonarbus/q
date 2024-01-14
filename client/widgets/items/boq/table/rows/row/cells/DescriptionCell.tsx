@@ -1,5 +1,6 @@
 import { Box } from '@mui/material'
-import { getBoqCellHtmlFromStore, selectColumnWidth, useRow, useItem, Froala, didBoqCellContentChange, updateBoqRowCellAtStore, descriptionCellStyle } from 'client/entities/items'
+import { getBoqCellHtmlFromStore, selectColumnWidth, useRow, useItem, Froala, descriptionCellStyle } from 'client/entities/items'
+import { updateDescriptionCell } from 'client/features/update_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
 import type FroalaEditor from 'froala-editor'
@@ -39,23 +40,7 @@ export const DescriptionCell = (): JSX.Element => {
         placeholder='Description...'
         htmlGetter={() => getBoqCellHtmlFromStore({ itemIndex, rowIndex, boqColumnKey })}
         onContentChange={() => {
-          if (editorRef.current === null) return
-
-          const didContentChange = didBoqCellContentChange({
-            editor: editorRef.current,
-            itemIndex,
-            rowIndex,
-            boqColumnKey,
-          })
-
-          if (!didContentChange) return
-
-          updateBoqRowCellAtStore({
-            itemIndex,
-            rowIndex,
-            boqColumnKey,
-            html: editorRef.current.html.get(),
-          })
+          updateDescriptionCell({ editorRef, itemIndex, rowIndex, boqColumnKey })
         }}
         additionalStyle={descriptionCellStyle}
       />
