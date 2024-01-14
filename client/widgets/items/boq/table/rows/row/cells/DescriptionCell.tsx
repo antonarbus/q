@@ -1,5 +1,4 @@
 import { Box } from '@mui/material'
-import { theme } from 'client/shared/clients'
 import { getBoqCellHtmlFromStore, selectColumnWidth, useRow, useItem, Froala, didBoqCellContentChange, updateBoqRowCellAtStore, descriptionCellStyle } from 'client/entities/items'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
