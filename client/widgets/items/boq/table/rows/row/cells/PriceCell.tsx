@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { dispatch } from 'client/shared/clients'
-import { getBoqCellHtmlFromStore, selectColumnWidth, useBoqItem, useItem, useRow, Froala, getBoqRowFromStore, updateBoqRowCellAtStore, isBoqRowPriceValid, itemsSlice, getBoqRowsFromStore, boqRowCellStyle } from 'client/entities/items'
+import { getBoqCellHtmlFromStore, selectColumnWidth, useBoqItem, useItem, useRow, Froala, getBoqRowFromStore, updateBoqRowCellAtStore, isBoqRowPriceValid, itemsSlice, getBoqRowsFromStore, boqRowCellStyle, didBoqCellContentChange } from 'client/entities/items'
 import { updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from 'client/features/update_cell'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey, BoqRow } from 'client/shared/types'

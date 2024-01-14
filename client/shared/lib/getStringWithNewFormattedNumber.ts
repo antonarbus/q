@@ -17,6 +17,8 @@ export const getStringWithNewFormattedNumber = ({
   }).format(Number(newNumber))
   const stringWithoutSpacesBetweenNumber = string.replace(/(?<=\d)\s+(?=\d)/g, '')
   const stringWithCommasBetweenNumbers = stringWithoutSpacesBetweenNumber.replace(/(?<=\d)\.(?=\d)/g, ',')
-  const htmlWithNewNumber = stringWithCommasBetweenNumbers.replace(regExpToSearchTextOutsideHtmlTags, newNumberFormatted)
+  const htmlWithNewNumber = stringWithCommasBetweenNumbers
+    .replace(regExpToSearchTextOutsideHtmlTags, newNumberFormatted)
+    .replace('NaN', newNumberFormatted)
   return htmlWithNewNumber
 }

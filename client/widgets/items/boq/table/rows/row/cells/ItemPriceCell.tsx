@@ -38,6 +38,7 @@ export const ItemPriceCell = (): JSX.Element => {
         placeholder='Item price...'
         htmlGetter={() => getBoqCellHtmlFromStore({ itemIndex, rowIndex, boqColumnKey })}
         onContentChange={() => {
+          console.log(555)
           if (itemPriceCellEditorRef.current === null) return
 
           const didContentChange = didBoqCellContentChange({
