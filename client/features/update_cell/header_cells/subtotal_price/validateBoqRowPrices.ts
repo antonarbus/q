@@ -21,10 +21,11 @@ export const validateBoqRowPrices = ({
   const boqRows = getBoqRowsFromStore({ itemIndex })
   if (boqRows === undefined) return
 
+  let didNotifyAboutInvalidPriceOnes = false
+
   boqRows.forEach((boqRow, rowIndex) => {
     const priceCellEditorRef = boqPriceEditorRefs.at(rowIndex)
     if (priceCellEditorRef === undefined) return
-    if (priceCellEditorRef === null) return
     if (priceCellEditorRef.current === null) return
 
     const isPriceValid = isBoqRowPriceValid({
@@ -34,10 +35,14 @@ export const validateBoqRowPrices = ({
     })
 
     if (!isPriceValid) {
-      notify({
-        msg: 'Impossible to set desired subtotal value. Price was set as close as possible.',
-        type: 'info',
-      })
+      if (!didNotifyAboutInvalidPriceOnes) {
+        notify({
+          msg: 'Impossible to set desired subtotal value. Price was set as close as possible.',
+          type: 'info',
+        })
+
+        didNotifyAboutInvalidPriceOnes = true
+      }
 
       const newPriceValue = boqRow.qty.value * boqRow.itemPrice.value
       const newPriceValueRounded = roundTo(newPriceValue, 2)
