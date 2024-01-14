@@ -18,3 +18,16 @@ export const getDecimalPrecision = ({ valueDifference }: Props): number => {
   if (absValDifference >= 0.0000001) return 9
   return 0
 }
+
+/* ChatGPT version
+
+export const getDecimalPrecision = ({ valueDifference }: Props): number => {
+  const absValDifference = Math.abs(valueDifference)
+
+  if (absValDifference === 0) return 0
+
+  const precision = Math.floor(Math.log10(1 / absValDifference))
+  return Math.max(0, precision)
+}
+
+*/

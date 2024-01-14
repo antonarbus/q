@@ -41,6 +41,7 @@ export const PriceCell = (): JSX.Element => {
           showBoqRowPins({ itemIndex, rowIndex })
         }}
         onContentChange={() => {
+          console.log(666)
           if (priceCellEditorRef.current === null) return
 
           const didContentChange = didBoqCellContentChange({
@@ -50,7 +51,8 @@ export const PriceCell = (): JSX.Element => {
             boqColumnKey,
           })
 
-          if (!didContentChange) return
+          // todo: we may need it but what for?
+          // if (!didContentChange) return
 
           updateBoqRowCellAtStore({
             html: priceCellEditorRef.current.html.get(),
@@ -64,6 +66,7 @@ export const PriceCell = (): JSX.Element => {
           const isItemPricePinned = boqRow?.itemPrice.pin.isPinned
 
           if (isItemPricePinned) {
+            if (boqRow.itemPrice.value === 0) return
             const newQtyValue = boqRow.price.value / boqRow.itemPrice.value
             const newQtyValueRounded = roundTo(newQtyValue, 5)
 
@@ -79,6 +82,7 @@ export const PriceCell = (): JSX.Element => {
           const isQtyPinned = boqRow?.qty.pin.isPinned
 
           if (isQtyPinned) {
+            if (boqRow.qty.value === 0) return
             const newItemPriceValue = boqRow.price.value / boqRow.qty.value
             const newItemPriceValueRounded = roundTo(newItemPriceValue, 2)
 

@@ -2,7 +2,6 @@
 import { ToastContainer } from 'react-toastify'
 import styled from '@emotion/styled'
 import { theme } from 'client/shared/clients'
-import { Close } from '@mui/icons-material'
 
 // taken from /node_modules/react-toastify/dist/ReactToastify.css
 const ToastStyled = styled.div`
@@ -236,7 +235,7 @@ const ToastStyled = styled.div`
     opacity: 0.7;
     transition: 0.3s ease;
     -ms-flex-item-align: start;
-    align-self: flex-start;
+    align-self: center;
   }
   .Toastify__close-button--light {
     color: #000;
@@ -658,41 +657,10 @@ const ToastStyled = styled.div`
   }
 `
 
-type Props = {
-  closeToast: () => void
-}
-
-const CloseIcon = ({ closeToast }: Props): JSX.Element => (
-  <span
-    css={{
-      '& :hover': {
-        transform: 'scale(1.2)',
-        transformOrigin: 'center',
-        transition: 'transform 0.2s',
-      },
-    }}
-  >
-    <Close fontSize='small' onClick={closeToast} />
-  </span>
-)
-
 export const TopMsg = (): JSX.Element => {
   return (
     <ToastStyled>
-      <ToastContainer
-        position='bottom-center'
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme='dark'
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        closeButton={CloseIcon as any}
-      />
+      <ToastContainer />
     </ToastStyled>
   )
 }

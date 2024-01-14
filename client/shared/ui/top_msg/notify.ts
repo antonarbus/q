@@ -31,7 +31,7 @@ export const notify = ({
     delay: 0,
     hideProgressBar: hideProgressBar ?? false,
     closeButton: true,
-    closeOnClick: true,
+    closeOnClick: false,
     pauseOnHover: true,
     pauseOnFocusLoss: true,
     draggable: true,

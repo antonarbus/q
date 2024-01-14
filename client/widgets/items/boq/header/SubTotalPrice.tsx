@@ -4,7 +4,8 @@ import { type BoqHeaderKey } from 'client/shared/types'
 import { useRef } from 'react'
 import type FroalaEditor from 'froala-editor'
 import { roundTo } from 'round-to'
-import { updateBoqRowCellWithValue } from 'client/features/update_cell'
+import { updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from 'client/features/update_cell'
+import { notify } from 'client/shared/ui/top_msg'
 
 const boqHeaderKey: BoqHeaderKey = 'subTotalPrice'
 
@@ -88,7 +89,22 @@ export const SubTotalPrice = (): JSX.Element => {
           }
         })
 
-        console.log(prices)
+        const areAllCellsPinned = prices.every(price => price.isPinned)
+
+        if (areAllCellsPinned) {
+          notify({
+            msg: 'All row prices are pinned',
+            type: 'info',
+          })
+
+          updateSubTotalPriceWithValue({
+            itemIndex,
+            subTotalPriceEditor: subTotalPriceEditorRef.current,
+            value: prevSubTotalPriceValue,
+          })
+
+          return
+        }
 
         prices.forEach((price, index) => {
           updateBoqRowCellWithValue({
@@ -98,6 +114,8 @@ export const SubTotalPrice = (): JSX.Element => {
             rowIndex: index,
             value: price.newValue,
           })
+
+          console.log(prices)
 
           // todo: at this point we need to modify itemPrice or qty
           // todo: and for that we need froalas
