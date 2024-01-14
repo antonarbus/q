@@ -68,21 +68,6 @@ export const SubTotalPrice = (): JSX.Element => {
         const unpinnedPricesSumTarget = newSubTotalPriceValue - pinnedPricesSum
         const unpinnedPricesSum = prevSubTotalPriceValue - pinnedPricesSum
 
-        if (unpinnedPricesSum === 0) {
-          notify({
-            msg: 'Unpinned prices give 0. Do not know how to adjust individual prices.',
-            type: 'info',
-          })
-
-          updateSubTotalPriceWithValue({
-            itemIndex,
-            subTotalPriceEditor: subTotalPriceEditorRef.current,
-            value: prevSubTotalPriceValue,
-          })
-
-          return
-        }
-
         type Prices = Array<{
           oldValue: number
           isPinned: boolean
@@ -109,6 +94,21 @@ export const SubTotalPrice = (): JSX.Element => {
         if (areAllCellsPinned) {
           notify({
             msg: 'Can\'t be changed. All row prices are pinned.',
+            type: 'info',
+          })
+
+          updateSubTotalPriceWithValue({
+            itemIndex,
+            subTotalPriceEditor: subTotalPriceEditorRef.current,
+            value: prevSubTotalPriceValue,
+          })
+
+          return
+        }
+
+        if (unpinnedPricesSum === 0) {
+          notify({
+            msg: 'Unpinned prices give zero. Impossible to adjust individual prices.',
             type: 'info',
           })
 
