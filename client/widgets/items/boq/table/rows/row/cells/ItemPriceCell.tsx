@@ -39,7 +39,7 @@ export const ItemPriceCell = (): JSX.Element => {
           updateBoqRowItemPriceCell({ boqColumnKey, itemIndex, itemPriceCellEditorRef, priceCellEditorRef, rowIndex, subTotalPriceEditorRef })
         }}
         onBlur={() => {
-          formatBoqRowItemPriceCell({ itemIndex, rowIndex, boqColumnKey, itemPriceCellEditorRef })
+          formatBoqRowItemPriceCell({ itemIndex, rowIndex, itemPriceCellEditorRef })
         }}
         additionalStyle={boqRowCellStyle}
       />

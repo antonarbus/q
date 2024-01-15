@@ -8,6 +8,7 @@ type Props = {
   newNumber: number
   html: string
   editor: FroalaEditor
+  triggerContentChange?: boolean
 }
 
 export const updateNumberAtHtmlIncrementally = async ({
@@ -15,6 +16,7 @@ export const updateNumberAtHtmlIncrementally = async ({
   newNumber,
   html,
   editor,
+  triggerContentChange,
 }: Props): Promise<void> => {
   const steps = 100
   const valueDifference = newNumber - oldNumber
@@ -58,5 +60,8 @@ export const updateNumberAtHtmlIncrementally = async ({
   })
 
   editor.html.set(finalHtml)
-  editor.undo.saveStep()
+
+  if (triggerContentChange) {
+    editor.undo.saveStep()
+  }
 }

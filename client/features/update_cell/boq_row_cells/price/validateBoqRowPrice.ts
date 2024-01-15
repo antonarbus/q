@@ -1,7 +1,5 @@
 import { getBoqRowFromStore, getBoqRowsFromStore, isBoqRowPriceValid, updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from 'client/entities/items'
-import { formatBoqRowCellNumber } from 'client/features/format_cell'
-import { type BoqColumnKey, type BoqRow } from 'client/shared/types'
-import { notify } from 'client/shared/ui/top_msg'
+import { type BoqRow } from 'client/shared/types'
 import type FroalaEditor from 'froala-editor'
 import { type MutableRefObject } from 'react'
 import { roundTo } from 'round-to'
@@ -11,7 +9,6 @@ type Props = {
   subTotalPriceEditorRef: MutableRefObject<FroalaEditor | null>
   itemIndex: number
   rowIndex: number
-  boqColumnKey: BoqColumnKey
 }
 
 export const validateBoqRowPrice = ({
@@ -19,7 +16,6 @@ export const validateBoqRowPrice = ({
   priceCellEditorRef,
   subTotalPriceEditorRef,
   rowIndex,
-  boqColumnKey,
 }: Props): void => {
   if (priceCellEditorRef.current === null) return
   if (subTotalPriceEditorRef.current === null) return
@@ -62,12 +58,4 @@ export const validateBoqRowPrice = ({
       incrementally: true,
     })
   }
-
-  formatBoqRowCellNumber({
-    itemIndex,
-    rowIndex,
-    boqColumnKey,
-    editorRef: priceCellEditorRef,
-    roundToTwoDecimals: true,
-  })
 }

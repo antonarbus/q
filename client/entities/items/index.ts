@@ -20,6 +20,7 @@ export { didBoqHeaderCellContentChange } from './utils/didBoqHeaderCellContentCh
 export { isBoqRowPriceValid } from './utils/isBoqRowPriceValid'
 export { updateBoqRowCellWithValue } from './utils/updateBoqRowCellWithValue'
 export { updateSubTotalPriceWithValue } from './utils/updateSubTotalPriceWithValue'
+export { formatBoqRowCellNumber } from './utils/formatBoqRowCellNumber'
 
 // store item getters
 export { getBoqRowFromStore } from './redux/getters/getBoqRowFromStore'

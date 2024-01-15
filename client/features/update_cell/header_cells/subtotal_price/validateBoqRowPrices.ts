@@ -37,7 +37,7 @@ export const validateBoqRowPrices = ({
     if (!isPriceValid) {
       if (!didNotifyAboutInvalidPriceOnes) {
         notify({
-          msg: 'Impossible to set desired subtotal value. Price was set as close as possible.',
+          msg: 'Impossible to set exact price. Did it as close as possible.',
           type: 'info',
         })
 

@@ -120,6 +120,7 @@ export const updateSubtotalPriceCell = ({
       itemIndex,
       rowIndex: index,
       value: price.newValue,
+      triggerContentChange: true,
     })
   })
 }

@@ -4,7 +4,7 @@ import { getBoqCellHtmlFromStore, selectColumnWidth, useBoqItem, useItem, useRow
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
 import { Pin, showBoqRowPins } from 'client/features/pin'
-import { updateBoqRowPriceCell, validateBoqRowPrice } from 'client/features/update_cell'
+import { formatBoqRowPriceCell, updateBoqRowPriceCell, validateBoqRowPrice } from 'client/features/update_cell'
 
 const boqColumnKey: BoqColumnKey = 'price'
 
@@ -42,7 +42,8 @@ export const PriceCell = (): JSX.Element => {
           updateBoqRowPriceCell({ boqColumnKey, itemIndex, itemPriceCellEditorRef, priceCellEditorRef, qtyCellEditorRef, rowIndex, subTotalPriceEditorRef })
         }}
         onBlur={() => {
-          validateBoqRowPrice({ boqColumnKey, itemIndex, priceCellEditorRef, rowIndex, subTotalPriceEditorRef })
+          formatBoqRowPriceCell({ rowIndex, priceCellEditorRef, itemIndex })
+          validateBoqRowPrice({ itemIndex, priceCellEditorRef, rowIndex, subTotalPriceEditorRef })
         }}
         additionalStyle={boqRowCellStyle}
       />

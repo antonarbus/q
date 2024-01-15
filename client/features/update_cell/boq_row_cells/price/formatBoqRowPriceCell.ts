@@ -3,21 +3,21 @@ import type FroalaEditor from 'froala-editor'
 import { formatBoqRowCellNumber } from 'client/entities/items'
 
 type Props = {
-  itemPriceCellEditorRef: MutableRefObject<FroalaEditor | null>
+  priceCellEditorRef: MutableRefObject<FroalaEditor | null>
   itemIndex: number
   rowIndex: number
 }
 
-export const formatBoqRowItemPriceCell = ({
-  itemPriceCellEditorRef,
+export const formatBoqRowPriceCell = ({
+  priceCellEditorRef,
   itemIndex,
   rowIndex,
 }: Props): void => {
   formatBoqRowCellNumber({
     itemIndex,
     rowIndex,
-    boqColumnKey: 'itemPrice',
-    editorRef: itemPriceCellEditorRef,
+    boqColumnKey: 'price',
+    editorRef: priceCellEditorRef,
     roundToTwoDecimals: true,
   })
 }
