@@ -1,6 +1,5 @@
 import { Box } from '@mui/material'
-import { selectColumnWidth, useItem, useRow } from 'client/entities/items'
-import { getState } from 'client/shared/clients'
+import { getNumberOfBoqItemsAbove, selectColumnWidth, useItem, useRow } from 'client/entities/items'
 import { useSelectorTyped } from 'client/shared/hooks'
 import type { BoqColumnKey } from 'client/shared/types'
 
@@ -14,14 +13,6 @@ export const NumberCell = (): JSX.Element => {
   const width = isNumberColWidthSetManually ? numberColWidth : 'auto'
   const minWidth = '30px'
   const maxWidth = width === 'auto' ? minWidth : width
-
-  const numberOfBoqItemsAbove = getState().items.reduce((accumulator, item, index) => {
-    if (item.type === 'boq' && index < itemIndex) {
-      return accumulator + 1
-    }
-
-    return accumulator
-  }, 0)
 
   return (
     <Box
@@ -39,7 +30,7 @@ export const NumberCell = (): JSX.Element => {
         paddingBottom: '6px',
       }}
     >
-      {numberOfBoqItemsAbove + 1}.{rowIndex + 1}
+      {getNumberOfBoqItemsAbove({ itemIndex }) + 1}.{rowIndex + 1}
     </Box>
   )
 }
