@@ -1,6 +1,5 @@
 import type FroalaEditor from 'froala-editor'
 import { getNumberFromString, getTextContentFromHtml, getStringWithNewFormattedNumber, updateNumberAtHtmlIncrementally } from 'client/shared/lib'
-import { roundTo } from 'round-to'
 import { getBoqRowFromStore, updateBoqRowCellAtStore } from 'client/entities/items'
 import { type BoqColumnKey } from 'client/shared/types'
 
@@ -10,6 +9,7 @@ type Props = {
   editor: FroalaEditor | null
   boqColumnKey: BoqColumnKey
   value: number
+  triggerContentChange?: boolean
 }
 
 export const updateBoqRowCellWithValue = ({
@@ -18,6 +18,7 @@ export const updateBoqRowCellWithValue = ({
   editor,
   boqColumnKey,
   value,
+  triggerContentChange,
 }: Props): void => {
   if (editor === null) return
 
@@ -50,5 +51,6 @@ export const updateBoqRowCellWithValue = ({
     newNumber: value,
     editor,
     html: boqRow[boqColumnKey].html,
+    triggerContentChange,
   })
 }

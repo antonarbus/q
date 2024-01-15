@@ -2,7 +2,7 @@ import { getBoqHeaderHtmlFromStore, useBoqItem, useItem, Froala, subTotalPriceCe
 import { showHideBoqPricePins } from 'client/features/pin'
 import { type BoqHeaderKey } from 'client/shared/types'
 import { useRef } from 'react'
-import { updateSubtotalPriceCell, validateBoqRowPrices } from 'client/features/update_cell'
+import { formatSubtotalPriceCell, updateSubtotalPriceCell, validateBoqRowPrices } from 'client/features/update_cell'
 
 const boqHeaderKey: BoqHeaderKey = 'subTotalPrice'
 
@@ -25,6 +25,7 @@ export const SubTotalPrice = (): JSX.Element => {
         updateSubtotalPriceCell({ subTotalPriceEditorRef, boqPriceEditorRefs, itemIndex })
       }}
       onBlur={() => {
+        formatSubtotalPriceCell({ itemIndex, subTotalPriceEditorRef })
         validateBoqRowPrices({ boqPriceEditorRefs, itemIndex, subTotalPriceEditorRef })
       }}
       additionalStyle={subTotalPriceCellStyle}

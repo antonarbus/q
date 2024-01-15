@@ -6,6 +6,7 @@ type Props = {
   newNumber: number
   html: string
   editor: FroalaEditor
+  triggerContentChange?: boolean
 }
 
 export const updateNumberAtHtml = ({
@@ -13,6 +14,7 @@ export const updateNumberAtHtml = ({
   newNumber,
   html,
   editor,
+  triggerContentChange,
 }: Props): void => {
   const finalHtml = getStringWithNewFormattedNumber({
     string: html,
@@ -21,5 +23,8 @@ export const updateNumberAtHtml = ({
   })
 
   editor.html.set(finalHtml)
-  editor.undo.saveStep()
+
+  if (triggerContentChange) {
+    editor.undo.saveStep()
+  }
 }
