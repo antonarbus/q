@@ -1,24 +1,30 @@
 import { itemsSlice } from 'client/entities/items'
 import { dispatch, getState } from 'client/shared/clients'
 import { saveItemsLocally } from 'client/shared/lib'
-import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from 'client/shared/types'
+import type { BoqItem, OnItemResize, OnItemResizeStart, OnItemResizeStop } from 'client/shared/types'
+
+// can be global var for different boqItems as we can change width of one item at a time
+let initDescriptionColumnWidth = 0
 
 export const onBoqItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, elementRef: itemElement }) => {
-  // not 'auto' anymore, otherwise col jumps
-  // in ResizablePaper comp width will be set back to "auto" after re-render
-  itemElement.style.width = itemElement.clientWidth + 'px'
-
+  // itemElement.style.width = itemElement.clientWidth + 'px'
   dispatch(itemsSlice.actions.disableFroalaReducer({ itemIndex }))
   dispatch(itemsSlice.actions.hideBoqItemPinsReducer({ itemIndex }))
-  dispatch(itemsSlice.actions.updateColWidthReducer({
-    itemIndex,
-    boqColumnKey: 'description',
-    width: undefined,
-  }))
+
+  initDescriptionColumnWidth = (getState().items[itemIndex] as BoqItem).boq.column.description.width ?? 0
 }
 
 export const onBoqItemResize: OnItemResize = ({ itemIndex, e, direction, elementRef: itemElement, delta }) => {
-  dispatch(itemsSlice.actions.updateItemWidthReducer({ itemIndex, width: itemElement.clientWidth }))
+  // const descriptionHeaderElement = itemElement.querySelector('.th.description')
+  // if (!(descriptionHeaderElement instanceof HTMLElement)) return
+
+  dispatch(itemsSlice.actions.updateColWidthReducer({
+    itemIndex,
+    boqColumnKey: 'description',
+    width: initDescriptionColumnWidth + delta.width,
+  }))
+
+  // dispatch(itemsSlice.actions.updateItemWidthReducer({ itemIndex, width: itemElement.clientWidth }))
 }
 
 export const onBoqItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction, elementRef: itemElement, delta }) => {
@@ -38,14 +44,14 @@ export const onBoqItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction,
   // setTimeout to make save the width after it will become back to "width: auto"
   // on ResizablePaper component render
   // probably there is a better way to do it, but I am lazy now
-  setTimeout(() => {
-    const itemWidth = itemElement.clientWidth
-    const prevItemWidth = getState().items[itemIndex]?.width
+  // setTimeout(() => {
+  const itemWidth = itemElement.clientWidth
+  const prevItemWidth = getState().items[itemIndex]?.width
 
-    if (itemWidth !== prevItemWidth) {
-      dispatch(itemsSlice.actions.updateItemWidthReducer({ itemIndex, width: itemWidth }))
-    }
+  if (itemWidth !== prevItemWidth) {
+    dispatch(itemsSlice.actions.updateItemWidthReducer({ itemIndex, width: itemWidth }))
+  }
 
-    saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
-  }, 50)
+  saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
+  // }, 50)
 }
