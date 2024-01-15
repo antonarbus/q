@@ -33,6 +33,6 @@ export const StaticHtml = ({ additionalStyles2 }: Props): JSX.Element => {
         ...additionalStyle,
       }}
       style={additionalStyles2}
-    ></Box>
+    />
   )
 }

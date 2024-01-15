@@ -12,6 +12,7 @@ export const DescriptionCell = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
   const { itemIndex } = useItem()
   const { rowIndex } = useRow()
+
   const descriptionColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
   const isDescriptionColWidthSetManually = descriptionColWidth !== undefined
   const width = isDescriptionColWidthSetManually ? descriptionColWidth : 'auto'

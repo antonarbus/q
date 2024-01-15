@@ -1,10 +1,10 @@
-import { Box } from '@mui/material'
-import { dispatch } from 'client/shared/clients'
-import { getBoqCellHtmlFromStore, selectColumnWidth, useBoqItem, useItem, useRow, Froala, itemsSlice, boqRowCellStyle } from 'client/entities/items'
-import { useSelectorTyped } from 'client/shared/hooks'
-import type { BoqColumnKey } from 'client/shared/types'
-import { Pin, showBoqRowPins } from 'client/features/pin'
+import { getBoqCellHtmlFromStore, useBoqItem, useItem, useRow, Froala, itemsSlice, boqRowCellStyle } from 'client/entities/items'
 import { formatBoqRowPriceCell, updateBoqRowPriceCell, validateBoqRowPrice } from 'client/features/update_cell'
+import { useStylesForResizableCell } from './useStylesForResizableCell'
+import { Pin, showBoqRowPins } from 'client/features/pin'
+import type { BoqColumnKey } from 'client/shared/types'
+import { dispatch } from 'client/shared/clients'
+import { Box } from '@mui/material'
 
 const boqColumnKey: BoqColumnKey = 'price'
 
@@ -12,24 +12,12 @@ export const PriceCell = (): JSX.Element => {
   const { itemIndex } = useItem()
   const { rowIndex, priceCellEditorRef, qtyCellEditorRef, itemPriceCellEditorRef } = useRow()
   const { subTotalPriceEditorRef } = useBoqItem()
-  const priceColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
-  const isPriceColWidthSetManually = priceColWidth !== undefined
-  const width = isPriceColWidthSetManually ? priceColWidth : 'auto'
-  const minWidth = '100px'
-  const maxWidth = width === 'auto' ? minWidth : width
+  const { stylesForResizableCell } = useStylesForResizableCell({ itemIndex, boqColumnKey, minWidth: '100px' })
 
   return (
     <Box
       className={`td ${boqColumnKey}`}
-      sx={{
-        display: isPriceColWidthSetManually ? 'block' : 'flex',
-        position: 'relative',
-        flexGrow: 0,
-        flexShrink: 0,
-        width,
-        maxWidth,
-        minWidth,
-      }}
+      sx={stylesForResizableCell}
     >
       <Froala
         editorRef={priceCellEditorRef}
