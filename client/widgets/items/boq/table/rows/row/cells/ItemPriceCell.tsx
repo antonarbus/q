@@ -33,6 +33,7 @@ export const ItemPriceCell = (): JSX.Element => {
       <Pin
         boqColumnKey={boqColumnKey}
         onClick={() => {
+          // todo: make a proxy function in features
           dispatch(itemsSlice.actions.pinItemPriceReducer({ itemIndex, rowIndex }))
         }}
       />
