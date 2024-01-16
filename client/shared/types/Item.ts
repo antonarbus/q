@@ -29,29 +29,17 @@ export type BoqRow = {
   price: BoqRowCell
 }
 
-export type BoqColWidth = number | undefined
+type BoqCol = {
+  html: string
+  width: number
+}
 
 export type BoqCols = {
-  number: {
-    html: string
-    width: BoqColWidth
-  }
-  description: {
-    html: string
-    width: BoqColWidth
-  }
-  itemPrice: {
-    html: string
-    width: BoqColWidth
-  }
-  qty: {
-    html: string
-    width: BoqColWidth
-  }
-  price: {
-    html: string
-    width: BoqColWidth
-  }
+  number: BoqCol
+  description: BoqCol
+  itemPrice: BoqCol
+  qty: BoqCol
+  price: BoqCol
 }
 
 export type BoqHeaderCell = {

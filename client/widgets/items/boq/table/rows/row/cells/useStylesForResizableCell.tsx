@@ -20,17 +20,12 @@ export const useStylesForResizableCell = ({
   minWidth = '100px',
 }: Props): Res => {
   const columnWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
-  const isColumnWidthSetManually = columnWidth !== undefined
-  const width = isColumnWidthSetManually ? columnWidth : 'auto'
-  const maxWidth = width === 'auto' ? minWidth : width
 
   const stylesForResizableCell: SxProps = {
-    display: isColumnWidthSetManually ? 'block' : 'flex',
+    display: 'block',
     position: 'relative',
-    flexGrow: 0,
-    flexShrink: 0,
-    width,
-    maxWidth,
+    width: columnWidth,
+    maxWidth: columnWidth,
     minWidth,
   }
 

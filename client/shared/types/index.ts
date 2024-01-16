@@ -8,7 +8,6 @@ export type {
   Item,
   Copyable,
   CopyableItem,
-  BoqColWidth,
   BoqHeaderCell,
   BoqHeaderKey,
   BoqColumnKey,

@@ -39,23 +39,23 @@ export const defaultItems: Item[] = [
       column: {
         number: {
           html: '<b>#</b>',
-          width: undefined,
+          width: 30,
         },
         description: {
           html: '<b>Description</b>',
-          width: 350,
+          width: 200,
         },
         itemPrice: {
           html: '<b>Item price</b>',
-          width: undefined,
+          width: 100,
         },
         qty: {
           html: '<b>Qty</b>',
-          width: undefined,
+          width: 100,
         },
         price: {
           html: '<b>Price</b>',
-          width: undefined,
+          width: 100,
         },
       },
       rows: [
