@@ -1,6 +1,5 @@
-import { getBoqCellHtmlFromStore, useBoqItem, useItem, useRow, Froala, itemsSlice, boqRowCellStyle } from 'client/entities/items'
+import { getBoqCellHtmlFromStore, useBoqItem, useItem, useRow, Froala, itemsSlice, boqRowCellStyle, useStylesForResizableCell } from 'client/entities/items'
 import { formatBoqRowPriceCell, updateBoqRowPriceCell, validateBoqRowPrice } from 'client/features/update_cell'
-import { useStylesForResizableCell } from './useStylesForResizableCell'
 import { Pin, showBoqRowPins } from 'client/features/pin'
 import type { BoqColumnKey } from 'client/shared/types'
 import { dispatch } from 'client/shared/clients'

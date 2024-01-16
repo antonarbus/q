@@ -1,10 +1,9 @@
-import { Box } from '@mui/material'
-import { getBoqCellHtmlFromStore, useRow, useItem, Froala, descriptionCellStyle } from 'client/entities/items'
+import { getBoqCellHtmlFromStore, useRow, useItem, Froala, descriptionCellStyle, useStylesForResizableCell } from 'client/entities/items'
 import { updateDescriptionCell } from 'client/features/update_cell'
 import type { BoqColumnKey } from 'client/shared/types'
 import type FroalaEditor from 'froala-editor'
+import { Box } from '@mui/material'
 import { useRef } from 'react'
-import { useStylesForResizableCell } from './useStylesForResizableCell'
 
 const boqColumnKey: BoqColumnKey = 'description'
 

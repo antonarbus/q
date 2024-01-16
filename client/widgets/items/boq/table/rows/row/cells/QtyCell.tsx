@@ -1,6 +1,5 @@
-import { getBoqCellHtmlFromStore, useItem, useRow, useBoqItem, Froala, itemsSlice, boqRowCellStyle } from 'client/entities/items'
+import { getBoqCellHtmlFromStore, useItem, useRow, useBoqItem, Froala, itemsSlice, boqRowCellStyle, useStylesForResizableCell } from 'client/entities/items'
 import { formatBoqRowQtyCell, updateBoqRowQtyCell } from 'client/features/update_cell'
-import { useStylesForResizableCell } from './useStylesForResizableCell'
 import type { BoqColumnKey } from 'client/shared/types'
 import { dispatch } from 'client/shared/clients'
 import { Pin } from 'client/features/pin'
@@ -13,12 +12,6 @@ export const QtyCell = (): JSX.Element => {
   const { subTotalPriceEditorRef } = useBoqItem()
   const { rowIndex, qtyCellEditorRef, priceCellEditorRef } = useRow()
   const { stylesForResizableCell } = useStylesForResizableCell({ itemIndex, boqColumnKey, minWidth: '100px' })
-
-  // const qtyColWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
-  // const isQtyColWidthSetManually = qtyColWidth !== undefined
-  // const width = isQtyColWidthSetManually ? qtyColWidth : 'auto'
-  // const minWidth = '100px'
-  // const maxWidth = width === 'auto' ? minWidth : width
 
   return (
     <Box

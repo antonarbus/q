@@ -58,6 +58,7 @@ export { titleCellStyle } from './styles/titleCellStyle'
 // hooks
 export { useIsItemSortDisabled } from './hooks/useIsItemSortDisabled'
 export { useIsBoqRowSortDisabled } from './hooks/useIsBoqRowSortDisabled'
+export { useStylesForResizableCell } from './hooks/useStylesForResizableCell'
 
 // providers
 export { BoqItemProvider, useBoqItem } from './providers/BoqItemProvider'
