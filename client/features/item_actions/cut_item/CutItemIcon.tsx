@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion'
 import type { MouseEvent } from 'react'
 import { TbCut } from 'react-icons/tb'
-import { appSlice } from '@entities/app'
 import { copySlice } from '@entities/copy'
+import { generalSlice } from '@entities/general'
 import { itemsSlice, saveItemHeightByIndex, selectIsLastItem, useItem } from '@entities/items'
 import { className } from '@shared/className'
 import { dispatch, getState, theme } from '@shared/clients'
@@ -59,7 +59,7 @@ export const CutItemIcon = (): JSX.Element => {
 
         if (!isCopyContainer) {
           dispatch(copySlice.actions.saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
-          dispatch(appSlice.actions.disableFroala())
+          dispatch(generalSlice.actions.disableFroala())
           dispatch(copySlice.actions.showCopyContainer())
         }
 

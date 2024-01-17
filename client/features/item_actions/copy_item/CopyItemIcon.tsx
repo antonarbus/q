@@ -1,13 +1,13 @@
-import { useSelectorTyped } from '@shared/hooks'
-import { dispatch, getState } from '@shared/clients'
-import { MdCopyAll } from 'react-icons/md'
 import { motion } from 'framer-motion'
-import { cleanHtml } from '@shared/lib/itemsUtils'
-import { copySlice } from '@entities/copy'
-import { itemsSlice, saveItemHeightByIndex, useItem } from '@entities/items'
 import type { MouseEvent } from 'react'
+import { MdCopyAll } from 'react-icons/md'
+import { copySlice } from '@entities/copy'
+import { generalSlice } from '@entities/general'
+import { itemsSlice, saveItemHeightByIndex, useItem } from '@entities/items'
 import { className } from '@shared/className'
-import { appSlice } from '@entities/app'
+import { dispatch, getState } from '@shared/clients'
+import { useSelectorTyped } from '@shared/hooks'
+import { cleanHtml } from '@shared/lib/itemsUtils'
 
 export const CopyItemIcon = (): JSX.Element => {
   const { itemIndex } = useItem()
@@ -53,7 +53,7 @@ export const CopyItemIcon = (): JSX.Element => {
         const isCopyContainer = getState().copy.isCopyContainer
         if (!isCopyContainer) {
           dispatch(copySlice.actions.saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
-          dispatch(appSlice.actions.disableFroala())
+          dispatch(generalSlice.actions.disableFroala())
           dispatch(copySlice.actions.showCopyContainer())
         }
       }}
