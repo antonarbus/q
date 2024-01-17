@@ -1,6 +1,5 @@
-import { itemsSlice } from '@entities/items'
+import { itemsSlice, saveItemsLocally } from '@entities/items'
 import { dispatch, getState } from '@shared/clients'
-import { saveItemsLocally } from '@shared/lib'
 import type { OnItemResizeStart, OnItemResizeStop } from '@shared/types'
 
 export const onTextItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, elementRef }) => {

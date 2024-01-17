@@ -5,9 +5,9 @@ import './froala_editor.pkgd.min.css'
 import FroalaEditor from 'froala-editor'
 import type { MutableRefObject } from 'react'
 import { useEffect } from 'react'
-import { saveItemsLocally } from '@shared/lib'
 import { useFroala } from '../../providers/FroalaProvider'
 import { useItem } from '../../providers/ItemProvider'
+import { saveItemsLocally } from '../../utils/saveItemsLocally'
 import { froalaDefaultOptions } from './froalaDefaultOptions'
 
 declare const window: Window & typeof globalThis & {

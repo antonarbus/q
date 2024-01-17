@@ -3,11 +3,10 @@ import type { MouseEvent } from 'react'
 import { TbCut } from 'react-icons/tb'
 import { copySlice } from '@entities/copy'
 import { generalSlice } from '@entities/general'
-import { itemsSlice, saveItemHeightByIndex, selectIsLastItem, useItem } from '@entities/items'
+import { itemsSlice, saveItemHeightByIndex, selectIsLastItem, useItem, saveItemsLocally } from '@entities/items'
 import { className } from '@shared/className'
 import { dispatch, getState, theme } from '@shared/clients'
 import { useSelectorTyped } from '@shared/hooks'
-import { saveItemsLocally } from '@shared/lib'
 import { cleanHtml } from '@shared/lib/itemsUtils'
 
 export const CutItemIcon = (): JSX.Element => {
