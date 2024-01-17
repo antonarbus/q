@@ -1,21 +1,19 @@
-/* eslint-disable */
-
-import { notify } from '@shared/ui/top_msg/notify'
 import type { Dispatch, FormEvent, SetStateAction } from 'react'
 import { useState } from 'react'
-import { token } from '../../shared/auth/token'
-import type { HttpStatusType } from './types'
 import { apiUrl } from 'server/apiUrls'
+import { token } from '@entities/user'
+import { notify } from '@shared/ui/top_msg/notify'
+import type { HttpStatusType } from './types'
 
-interface Props {
+type Props = {
   e: FormEvent
   email: string
 }
 
-interface ReturnFunc {
-  resetPassword: ({ e, email }: Props) => Promise<void>;
-  httpStatus: HttpStatusType;
-  setHttpStatus: Dispatch<SetStateAction<HttpStatusType>>;
+type ReturnFunc = {
+  resetPassword: ({ e, email }: Props) => Promise<void>
+  httpStatus: HttpStatusType
+  setHttpStatus: Dispatch<SetStateAction<HttpStatusType>>
 }
 
 export const useReset = (): ReturnFunc => {
@@ -45,10 +43,10 @@ export const useReset = (): ReturnFunc => {
           closeAfterMs: 5000,
         })
       }
-      console.log(data)
+      console.info(data)
     } catch (err) {
       setHttpStatus('error')
-      console.log(err)
+      console.error(err)
       notify({ msg: 'Reset password failed', type: 'error', theme: 'light' })
     }
   }

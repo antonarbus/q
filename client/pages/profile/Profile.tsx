@@ -1,6 +1,6 @@
 import type { UserEmailRes } from 'server/api/userEmailRouter'
 import { apiUrl } from 'server/apiUrls'
-import { axiosWithAuth } from '@shared/auth'
+import { axiosWithAuth } from '@entities/user'
 import { notify } from '@shared/ui/top_msg/notify'
 
 const getEmailFromDb = async (): Promise<void> => {
