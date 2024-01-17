@@ -2,7 +2,7 @@ import express from 'express'
 import { UserModel } from '../db/models/user.model'
 import bcrypt from 'bcryptjs'
 import { nanoid } from 'nanoid'
-import { sendMail } from '../services/mail/sendMail'
+// import { sendMail } from '../services/mail/sendMail'
 import { body, validationResult } from 'express-validator'
 import type { Next, ReqWithBody, Res } from '../types'
 import { apiUrl } from '../apiUrls'
@@ -55,8 +55,8 @@ registerRouter.post(
       await UserModel.create({ email, password, activationLink })
 
       // send email with activation link
-      const subject = 'Activation for quotation.app'
-      const html = `<div><h1>Follow the link to confirm the registration</h1><a href="${activationLink}">${activationLink}</a></div> `
+      // const subject = 'Activation for quotation.app'
+      // const html = `<div><h1>Follow the link to confirm the registration</h1><a href="${activationLink}">${activationLink}</a></div> `
       // await sendMail({ to: email, subject, html })
 
       // all went good, send the response

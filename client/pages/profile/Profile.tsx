@@ -9,18 +9,18 @@ const getEmailFromDb = async (): Promise<void> => {
     // we get msg "accessJwtToken is not verified, user is not authorized"
     // but with axiosWithAuth we add access token to the header and check it inside the middleware 'verifyToken '
     const res = await axiosWithAuth<UserEmailRes>(apiUrl.user)
-    console.log(res)
+    console.info(res)
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
 }
 
 const getUsersFromDb = async (): Promise<void> => {
   try {
     const res = await axiosWithAuth(apiUrl.users)
-    console.log(res)
+    console.info(res)
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
 }
 

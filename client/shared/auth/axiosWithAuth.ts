@@ -41,10 +41,11 @@ axiosWithAuth.interceptors.response.use(
           dispatch(userSlice.actions.forgetLoggedUser())
         }
 
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         return await axiosWithAuth.request(originalRequest)
       } catch (err) {
-        console.log('not authorized')
-        console.log(err)
+        console.warn('not authorized')
+        console.error(err)
       }
     }
 

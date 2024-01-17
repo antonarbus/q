@@ -1,7 +1,7 @@
 import type { Next, Req, Res } from '../types'
 
 export const errorHandlerMiddleware = (error: Error, _req: Req, res: Res, _next: Next): void => {
-  console.log(error)
+  console.error(error)
   const { message, name, stack } = error
   res.json({ name, message, stack })
   // todo: save error into database

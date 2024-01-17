@@ -18,13 +18,13 @@ export type UserEmailRes = {
 const getUserEmail = async (req: ReqWithBody<Body>, res: Res, next: Next): Promise<void> => {
   try {
     const { email } = req.body
-    console.log('🚀  req.body:', req.body)
+    console.info('🚀  req.body:', req.body)
     if (!email) {
       res.json({ status: 'ups', message: 'no email in req.body, probably not authorized' })
       return
     }
     const user = await UserModel.findOne({ email })
-    console.log('user', user)
+    console.info('user', user)
     const response = { status: 'ok', message: 'email is returned', email: user?.email }
     res.json(response)
   } catch (error) {

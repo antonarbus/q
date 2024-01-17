@@ -1,4 +1,4 @@
-import { createContext, useContext, type ReactNode, useEffect } from 'react'
+import { createContext, useContext, type ReactNode } from 'react'
 import type FroalaEditor from 'froala-editor'
 import { useBoqItem } from './BoqItemProvider'
 

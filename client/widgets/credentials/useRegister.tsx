@@ -42,10 +42,10 @@ export const useRegister = (): FuncReturnType => {
         setHttpStatus('success')
         notify({ msg: 'Done! Check your mailbox.', theme: 'light' })
       }
-      console.log(data)
+      console.info(data)
     } catch (err) {
       setHttpStatus('error')
-      console.log(err)
+      console.error(err)
       notify({ msg: 'Internal error', type: 'error', theme: 'light' })
     }
   }
