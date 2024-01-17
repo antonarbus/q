@@ -1,9 +1,9 @@
-import type { BoqColumnKey } from 'client/shared/types'
+import type { BoqColumnKey } from '@shared/types'
 import type { ReactNode } from 'react'
-import { selectColumnWidth, useItem } from 'client/entities/items'
+import { selectColumnWidth, useItem } from '@entities/items'
 import { Resizable } from 're-resizable'
-import { useSelectorTyped } from 'client/shared/hooks'
-import { onColumnResize, onColumnResizeStart, onColumnResizeStop } from 'client/features/resize_column'
+import { useSelectorTyped } from '@shared/hooks'
+import { onColumnResize, onColumnResizeStart, onColumnResizeStop } from '@features/resize_column'
 
 type Props = {
   children: ReactNode

@@ -1,4 +1,4 @@
-import { useSelectorTyped } from 'client/shared/hooks'
+import { useSelectorTyped } from '@shared/hooks'
 import { useState } from 'react'
 import { useEffectOnce } from 'react-use'
 

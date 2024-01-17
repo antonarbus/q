@@ -1,6 +1,6 @@
-import { itemsSlice } from 'client/entities/items'
-import { className } from 'client/shared/className'
-import { dispatch } from 'client/shared/clients'
+import { itemsSlice } from '@entities/items'
+import { className } from '@shared/className'
+import { dispatch } from '@shared/clients'
 import { type FocusEvent } from 'react'
 
 type Props = {

@@ -1,4 +1,4 @@
-import { useSelectorTyped } from 'client/shared/hooks'
+import { useSelectorTyped } from '@shared/hooks'
 import { useEffect } from 'react'
 import { movePasteTextForItem } from './movePasteTextForItem'
 import { movePasteTextForBoqRow } from './movePasteTextForBoqRow'

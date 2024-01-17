@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { ItemsState } from '../itemsSlice'
-import type { BoqHeaderKey } from 'client/shared/types'
+import type { BoqHeaderKey } from '@shared/types'
 
 export const updateBoqHeaderTextReducer = (state: ItemsState, action: PayloadAction<{
   itemIndex: number

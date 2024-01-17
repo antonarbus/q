@@ -1,4 +1,4 @@
-import type { Item } from 'client/shared/types'
+import type { Item } from '@shared/types'
 import { createSlice } from '@reduxjs/toolkit'
 import { deleteBoqRowReducer } from './reducers/deleteBoqRowReducer'
 import { deleteItemReducer } from './reducers/deleteItemReducer'

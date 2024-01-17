@@ -1,5 +1,5 @@
-import { getState } from 'client/shared/clients'
-import { type BoqItem } from 'client/shared/types'
+import { getState } from '@shared/clients'
+import { type BoqItem } from '@shared/types'
 import { type ItemsState } from '../itemsSlice'
 
 type Props = {

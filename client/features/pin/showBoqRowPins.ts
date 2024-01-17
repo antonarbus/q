@@ -1,5 +1,5 @@
-import { itemsSlice } from 'client/entities/items'
-import { dispatch } from 'client/shared/clients'
+import { itemsSlice } from '@entities/items'
+import { dispatch } from '@shared/clients'
 
 type Props = {
   itemIndex: number

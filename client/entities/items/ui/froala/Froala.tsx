@@ -1,7 +1,7 @@
 import type { SxProps } from '@mui/material'
 import { useRef, type MutableRefObject } from 'react'
 import type FroalaEditor from 'froala-editor'
-import { useSelectorTyped } from 'client/shared/hooks'
+import { useSelectorTyped } from '@shared/hooks'
 import { StaticHtml } from './StaticHtml'
 import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
 import { EditableHtml } from './EditableHtml'

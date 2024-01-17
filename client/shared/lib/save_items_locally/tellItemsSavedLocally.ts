@@ -1,5 +1,5 @@
-import { appSlice } from 'client/entities/app'
-import { dispatch } from 'client/shared/clients'
+import { appSlice } from '@entities/app'
+import { dispatch } from '@shared/clients'
 
 export const tellItemsSavedLocally = ({ ms = 2000 } = {}): void => {
   dispatch(appSlice.actions.showBottomMsg('saved locally'))

@@ -1,5 +1,5 @@
-import { getBoqRowFromStore, getBoqRowsFromStore, isBoqRowPriceValid, updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from 'client/entities/items'
-import { type BoqRow } from 'client/shared/types'
+import { getBoqRowFromStore, getBoqRowsFromStore, isBoqRowPriceValid, updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from '@entities/items'
+import { type BoqRow } from '@shared/types'
 import type FroalaEditor from 'froala-editor'
 import { type MutableRefObject } from 'react'
 import { roundTo } from 'round-to'

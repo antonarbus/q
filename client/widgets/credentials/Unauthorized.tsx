@@ -1,5 +1,5 @@
 import { Button } from '@mui/material'
-import { theme } from 'client/shared/clients'
+import { theme } from '@shared/clients'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { useNavigate } from 'react-router-dom'
 

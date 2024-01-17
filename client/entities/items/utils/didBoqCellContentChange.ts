@@ -1,4 +1,4 @@
-import { type BoqColumnKey } from 'client/shared/types'
+import { type BoqColumnKey } from '@shared/types'
 import type FroalaEditor from 'froala-editor'
 import { getBoqCellFromStore } from '../redux/getters/getBoqCellFromStore'
 

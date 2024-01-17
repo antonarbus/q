@@ -1,7 +1,7 @@
-import { appSlice } from 'client/entities/app'
-import { copySlice } from 'client/entities/copy'
-import { itemsSlice } from 'client/entities/items'
-import { dispatch } from 'client/shared/clients'
+import { appSlice } from '@entities/app'
+import { copySlice } from '@entities/copy'
+import { itemsSlice } from '@entities/items'
+import { dispatch } from '@shared/clients'
 import { useEffectOnce } from 'react-use'
 
 export const useExitCopyOnEsc = (): void => {

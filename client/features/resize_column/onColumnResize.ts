@@ -1,8 +1,8 @@
-import { itemsSlice } from 'client/entities/items'
-import { className } from 'client/shared/className'
-import { dispatch } from 'client/shared/clients'
-import { saveItemsLocally } from 'client/shared/lib'
-import { type BoqColumnKey } from 'client/shared/types'
+import { itemsSlice } from '@entities/items'
+import { className } from '@shared/className'
+import { dispatch } from '@shared/clients'
+import { saveItemsLocally } from '@shared/lib'
+import { type BoqColumnKey } from '@shared/types'
 
 type Props = {
   headerColumnElement: HTMLElement

@@ -1,10 +1,10 @@
-import { dispatch, getState } from 'client/shared/clients'
+import { dispatch, getState } from '@shared/clients'
 import isEqual from 'lodash.isequal'
-import { copySlice } from 'client/entities/copy'
-import { itemsSlice } from 'client/entities/items'
-import { className } from 'client/shared/className'
-import { getPastePlace } from 'client/shared/lib'
-import { type CopyPlace } from 'client/shared/types'
+import { copySlice } from '@entities/copy'
+import { itemsSlice } from '@entities/items'
+import { className } from '@shared/className'
+import { getPastePlace } from '@shared/lib'
+import { type CopyPlace } from '@shared/types'
 
 export const movePasteTextForItem = (e: MouseEvent): void => {
   if (!(e.target instanceof Element)) {

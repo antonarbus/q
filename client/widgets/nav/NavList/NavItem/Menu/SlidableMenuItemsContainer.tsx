@@ -1,5 +1,5 @@
-import { selectMenuItemByIdsChainSelector } from 'client/entities/nav'
-import { useSelectorTyped } from 'client/shared/hooks'
+import { selectMenuItemByIdsChainSelector } from '@entities/nav'
+import { useSelectorTyped } from '@shared/hooks'
 import { MenuItem } from './MenuItem'
 import type { RefObject } from 'react'
 

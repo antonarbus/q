@@ -1,4 +1,4 @@
-import { useSelectorTyped } from 'client/shared/hooks'
+import { useSelectorTyped } from '@shared/hooks'
 import type { RefObject } from 'react'
 import { Link } from 'react-router-dom'
 

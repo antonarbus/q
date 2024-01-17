@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { ItemsState } from '../itemsSlice'
-import type { CopyableItem, PastePos } from 'client/shared/types'
+import type { CopyableItem, PastePos } from '@shared/types'
 import { nanoid } from 'nanoid'
 
 type Payload = {

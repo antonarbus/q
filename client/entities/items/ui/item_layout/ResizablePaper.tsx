@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react'
 import { Resizable } from 're-resizable'
-import { className } from 'client/shared/className'
-import { useSelectorTyped } from 'client/shared/hooks'
-import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from 'client/shared/types'
+import { className } from '@shared/className'
+import { useSelectorTyped } from '@shared/hooks'
+import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
 import { useItem } from '../../providers/ItemProvider'
 
 type Props = {

@@ -1,5 +1,5 @@
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
-import { theme } from 'client/shared/clients'
+import { theme } from '@shared/clients'
 import { motion } from 'framer-motion'
 
 export const BoqPasteRowTextOverlay = (): EmotionJSX.Element => (

@@ -1,5 +1,5 @@
 import { type SxProps } from '@mui/material'
-import { theme } from 'client/shared/clients'
+import { theme } from '@shared/clients'
 
 export const subTotalPriceCellStyle: SxProps = {
   width: '100%',

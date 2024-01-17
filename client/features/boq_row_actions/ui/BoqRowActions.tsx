@@ -3,7 +3,7 @@ import { CopyBoqRowIcon } from '../copy_boq_row'
 import { CutBoqRowIcon } from '../cut_boq_row'
 import { DeleteBoqRowIcon } from '../delete_boq_row'
 import { DragBoqRow } from '../drag_boq_row'
-import { className } from 'client/shared/className'
+import { className } from '@shared/className'
 
 export const BoqRowActions = (): JSX.Element => {
   return (

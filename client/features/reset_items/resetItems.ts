@@ -1,7 +1,7 @@
-import { dispatch, theme } from 'client/shared/clients'
-import { defaultItems, itemsSlice } from 'client/entities/items'
-import { appSlice } from 'client/entities/app'
-import { saveItemsLocally } from 'client/shared/lib'
+import { dispatch, theme } from '@shared/clients'
+import { defaultItems, itemsSlice } from '@entities/items'
+import { appSlice } from '@entities/app'
+import { saveItemsLocally } from '@shared/lib'
 
 export const resetItems = (): void => {
   dispatch(appSlice.actions.disableFroala())

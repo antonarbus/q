@@ -1,9 +1,9 @@
-import { Froala, getBoqColumnHtmlFromStore, columnHeaderStyle, useItem } from 'client/entities/items'
+import { Froala, getBoqColumnHtmlFromStore, columnHeaderStyle, useItem } from '@entities/items'
 import { ResizableColumn } from '../ResizableColumn'
 import { useRef } from 'react'
 import type FroalaEditor from 'froala-editor'
-import { type BoqColumnKey } from 'client/shared/types'
-import { updateBoqColumnCell } from 'client/features/update_cell'
+import { type BoqColumnKey } from '@shared/types'
+import { updateBoqColumnCell } from '@features/update_cell'
 
 const boqColumnKey: BoqColumnKey = 'itemPrice'
 

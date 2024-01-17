@@ -1,4 +1,4 @@
-import type { RootState } from 'client/shared/types'
+import type { RootState } from '@shared/types'
 import { getBoqRowsFromStore } from '../getters/getBoqRowsFromStore'
 
 type Props = {

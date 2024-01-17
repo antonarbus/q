@@ -1,11 +1,11 @@
-import { useSelectorTyped } from 'client/shared/hooks'
-import { copySlice } from 'client/entities/copy'
-import { dispatch, getState, theme } from 'client/shared/clients'
+import { useSelectorTyped } from '@shared/hooks'
+import { copySlice } from '@entities/copy'
+import { dispatch, getState, theme } from '@shared/clients'
 import { RxCross2 } from 'react-icons/rx'
-import { itemsSlice, selectIsLastBoqRow, useItem, useRow } from 'client/entities/items'
+import { itemsSlice, selectIsLastBoqRow, useItem, useRow } from '@entities/items'
 import { gsap } from 'gsap'
 import { useRef } from 'react'
-import { saveItemsLocally } from 'client/shared/lib'
+import { saveItemsLocally } from '@shared/lib'
 
 export const DeleteBoqRowIcon = (): JSX.Element => {
   const ref = useRef<HTMLSpanElement>(null)

@@ -1,4 +1,4 @@
-import { slideElement } from 'client/shared/lib/slideElement'
+import { slideElement } from '@shared/lib/slideElement'
 import { useLayoutEffect, useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 

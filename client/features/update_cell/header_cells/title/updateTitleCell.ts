@@ -1,5 +1,5 @@
-import { updateBoqHeaderCellAtStore } from 'client/entities/items'
-import { type BoqHeaderKey } from 'client/shared/types'
+import { updateBoqHeaderCellAtStore } from '@entities/items'
+import { type BoqHeaderKey } from '@shared/types'
 import type FroalaEditor from 'froala-editor'
 import { type MutableRefObject } from 'react'
 

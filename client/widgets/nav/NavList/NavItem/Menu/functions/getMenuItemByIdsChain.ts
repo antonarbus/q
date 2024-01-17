@@ -1,4 +1,4 @@
-import type { MenuItemTypes } from 'client/entities/nav'
+import type { MenuItemTypes } from '@entities/nav'
 import { navStructure } from '../../../../navStructure'
 
 /**

@@ -1,8 +1,8 @@
-import { getBoqCellHtmlFromStore, useBoqItem, useItem, useRow, Froala, itemsSlice, boqRowCellStyle, useStylesForResizableCell } from 'client/entities/items'
-import { formatBoqRowPriceCell, updateBoqRowPriceCell, validateBoqRowPrice } from 'client/features/update_cell'
-import { Pin, showBoqRowPins } from 'client/features/pin'
-import type { BoqColumnKey } from 'client/shared/types'
-import { dispatch } from 'client/shared/clients'
+import { getBoqCellHtmlFromStore, useBoqItem, useItem, useRow, Froala, itemsSlice, boqRowCellStyle, useStylesForResizableCell } from '@entities/items'
+import { formatBoqRowPriceCell, updateBoqRowPriceCell, validateBoqRowPrice } from '@features/update_cell'
+import { Pin, showBoqRowPins } from '@features/pin'
+import type { BoqColumnKey } from '@shared/types'
+import { dispatch } from '@shared/clients'
 import { Box } from '@mui/material'
 
 const boqColumnKey: BoqColumnKey = 'price'

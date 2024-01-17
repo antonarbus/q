@@ -1,4 +1,4 @@
-import { getStringWithNewFormattedNumber } from 'client/shared/lib'
+import { getStringWithNewFormattedNumber } from '@shared/lib'
 import type FroalaEditor from 'froala-editor'
 
 type Props = {

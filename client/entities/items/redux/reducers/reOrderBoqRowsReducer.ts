@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { BoqRow } from 'client/shared/types'
+import type { BoqRow } from '@shared/types'
 import type { ItemsState } from '../itemsSlice'
 import { getBoqItemFromStore } from '../getters/getBoqItemFromStore'
 

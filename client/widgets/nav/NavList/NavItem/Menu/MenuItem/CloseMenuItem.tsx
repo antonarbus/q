@@ -4,9 +4,9 @@ import { TextInMenu } from './TextInMenu'
 import { Icon } from '../../Icon'
 import { CgClose as CloseIcon } from 'react-icons/cg'
 import { MenuItemStyled } from './MenuItemStyled'
-import { navSlice } from 'client/entities/nav'
-import { dispatch, theme } from 'client/shared/clients'
-import { useSelectorTyped } from 'client/shared/hooks'
+import { navSlice } from '@entities/nav'
+import { dispatch, theme } from '@shared/clients'
+import { useSelectorTyped } from '@shared/hooks'
 
 const closeIcon = createElement(CloseIcon, {})
 

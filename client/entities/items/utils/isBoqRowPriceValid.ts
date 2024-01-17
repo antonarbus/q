@@ -1,6 +1,6 @@
 import { roundTo } from 'round-to'
-import { getBoqRowFromStore } from 'client/entities/items'
-import { getNumberFromString, getTextContentFromHtml } from 'client/shared/lib'
+import { getBoqRowFromStore } from '@entities/items'
+import { getNumberFromString, getTextContentFromHtml } from '@shared/lib'
 
 type Props = {
   itemIndex: number

@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { BoqColumnKey } from 'client/shared/types'
+import type { BoqColumnKey } from '@shared/types'
 import type { ItemsState } from '../itemsSlice'
 
 export const updateColWidthReducer = (state: ItemsState, action: PayloadAction<{

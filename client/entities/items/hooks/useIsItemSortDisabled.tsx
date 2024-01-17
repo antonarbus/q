@@ -1,5 +1,5 @@
-import { selectIsLastItem } from 'client/entities/items'
-import { useSelectorTyped } from 'client/shared/hooks'
+import { selectIsLastItem } from '@entities/items'
+import { useSelectorTyped } from '@shared/hooks'
 
 export const useIsItemSortDisabled = (): boolean => {
   const isCopyContainer = useSelectorTyped(state => state.copy.isCopyContainer)

@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
-import type { CopyPlace, Copyable } from 'client/shared/types'
+import type { CopyPlace, Copyable } from '@shared/types'
 
 type Props = {
   isCopyContainer: boolean

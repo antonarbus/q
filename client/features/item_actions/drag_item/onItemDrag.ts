@@ -1,8 +1,8 @@
 import { arrayMoveImmutable } from 'array-move'
-import { appSlice } from 'client/entities/app'
-import { itemsSlice } from 'client/entities/items'
-import { dispatch, getState } from 'client/shared/clients'
-import { saveItemsLocally } from 'client/shared/lib'
+import { appSlice } from '@entities/app'
+import { itemsSlice } from '@entities/items'
+import { dispatch, getState } from '@shared/clients'
+import { saveItemsLocally } from '@shared/lib'
 
 type Props = {
   oldIndex: number

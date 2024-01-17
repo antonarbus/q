@@ -1,4 +1,4 @@
-import { dispatch } from 'client/shared/clients'
+import { dispatch } from '@shared/clients'
 import { useState } from 'react'
 import { useEffectOnce } from 'react-use'
 import { jwtDecode } from 'jwt-decode'
@@ -9,7 +9,7 @@ import { token } from '../../shared/auth/token'
 import type { JwtPayloadExtended } from 'server/services/jwt'
 import type { RefreshAipRes } from 'server/api/refreshRouter'
 import { apiUrl } from 'server/apiUrls'
-import { userSlice } from 'client/entities/user'
+import { userSlice } from '@entities/user'
 
 type Props = {
   withLoadingState?: boolean
