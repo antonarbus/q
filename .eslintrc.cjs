@@ -7,7 +7,8 @@ module.exports = {
     // 'eslint:recommended',
     // 'plugin:@typescript-eslint/all', // very strict, but cool
     // 'eslint:recommended', // https://typescript-eslint.io/linting/configs/
-    'standard-with-typescript' // https://github.com/standard/eslint-config-standard-with-typescript#example-config
+    'standard-with-typescript', // https://github.com/standard/eslint-config-standard-with-typescript#example-config
+    'plugin:@conarti/feature-sliced/recommended'
   ],
   ignorePatterns: ['dist', 'build', '.eslintrc.cjs', 'vite.config.ts', 'node_modules', 'test-setup.ts'],
   parser: '@typescript-eslint/parser',
