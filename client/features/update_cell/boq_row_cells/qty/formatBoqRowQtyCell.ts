@@ -1,5 +1,5 @@
-import { type MutableRefObject } from 'react'
 import type FroalaEditor from 'froala-editor'
+import { type MutableRefObject } from 'react'
 import { formatBoqRowCellNumber } from '@entities/items'
 
 type Props = {

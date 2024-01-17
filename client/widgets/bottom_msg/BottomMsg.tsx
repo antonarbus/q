@@ -1,5 +1,5 @@
-import { useSelectorTyped } from '@shared/hooks'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useSelectorTyped } from '@shared/hooks'
 
 export const BottomMsg = (): JSX.Element => {
   const bottomMsg = useSelectorTyped(state => state.app.bottomMsg)

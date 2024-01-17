@@ -1,8 +1,8 @@
-import { itemsSlice } from '../../redux/itemsSlice'
+import { useUpdateEffect } from 'react-use'
 import { dispatch } from '@shared/clients'
 import { useSelectorTyped } from '@shared/hooks'
 import { useItem } from '../../providers/ItemProvider'
-import { useUpdateEffect } from 'react-use'
+import { itemsSlice } from '../../redux/itemsSlice'
 
 export const useRemoveItemMsgAfterSomeTime = (): void => {
   const { itemIndex } = useItem()

@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
-import { useRefreshTokens } from './useRefreshTokens'
 import { Spinner } from '@widgets/spinner'
+import { useRefreshTokens } from './useRefreshTokens'
 
 export const PersistentAuth = (): JSX.Element => {
   const { isCheckingTokens } = useRefreshTokens({ withLoadingState: true })

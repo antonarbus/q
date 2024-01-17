@@ -1,11 +1,11 @@
-import express from 'express'
-import { UserModel } from '../db/models/user.model'
 import bcrypt from 'bcryptjs'
-import { nanoid } from 'nanoid'
-// import { sendMail } from '../services/mail/sendMail'
+import express from 'express'
 import { body, validationResult } from 'express-validator'
-import type { Next, ReqWithBody, Res } from '../types'
+import { nanoid } from 'nanoid'
 import { apiUrl } from '../apiUrls'
+import { UserModel } from '../db/models/user.model'
+// import { sendMail } from '../services/mail/sendMail'
+import type { Next, ReqWithBody, Res } from '../types'
 const domain = process.env.DOMAIN
 const port = process.env.PORT_FRONT_END
 

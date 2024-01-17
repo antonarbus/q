@@ -1,13 +1,13 @@
-import { useSelectorTyped } from '@shared/hooks'
-import { dispatch, getState } from '@shared/clients'
-import { MdCopyAll } from 'react-icons/md'
 import { motion } from 'framer-motion'
-import { cleanHtml } from '@shared/lib/itemsUtils'
+import type { MouseEvent } from 'react'
+import { MdCopyAll } from 'react-icons/md'
+import { appSlice } from '@entities/app'
 import { copySlice } from '@entities/copy'
 import { getBoqRowFromStore, itemsSlice, useItem, useRow } from '@entities/items'
-import type { MouseEvent } from 'react'
 import { className } from '@shared/className'
-import { appSlice } from '@entities/app'
+import { dispatch, getState } from '@shared/clients'
+import { useSelectorTyped } from '@shared/hooks'
+import { cleanHtml } from '@shared/lib/itemsUtils'
 
 export const CopyBoqRowIcon = (): JSX.Element => {
   const { rowIndex } = useRow()

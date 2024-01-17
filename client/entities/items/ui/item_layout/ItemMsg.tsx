@@ -1,9 +1,9 @@
-import { itemsSlice } from '../../redux/itemsSlice'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useUpdateEffect } from 'react-use'
 import { dispatch } from '@shared/clients'
 import { useSelectorTyped } from '@shared/hooks'
 import { useItem } from '../../providers/ItemProvider'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useUpdateEffect } from 'react-use'
+import { itemsSlice } from '../../redux/itemsSlice'
 
 export const ItemMsg = (): JSX.Element => {
   const { itemIndex } = useItem()

@@ -1,5 +1,5 @@
-import { useSelectorTyped } from '@shared/hooks'
 import { getState } from '@shared/clients'
+import { useSelectorTyped } from '@shared/hooks'
 import { useItem } from '../../providers/ItemProvider'
 
 export const useIsPasteHere = (): boolean => {

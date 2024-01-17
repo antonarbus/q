@@ -1,9 +1,9 @@
-import { NumberColumn } from './column_headers/NumberColumn'
+import { BoqColumnsLayout } from './BoqColumnsLayout'
 import { DescriptionColumn } from './column_headers/DescriptionColumn'
 import { ItemPriceColumn } from './column_headers/ItemPriceColumn'
-import { QtyColumn } from './column_headers/QtyColumn'
+import { NumberColumn } from './column_headers/NumberColumn'
 import { PriceColumn } from './column_headers/PriceColumn'
-import { BoqColumnsLayout } from './BoqColumnsLayout'
+import { QtyColumn } from './column_headers/QtyColumn'
 
 export const BoqColumns = (): JSX.Element => {
   return (

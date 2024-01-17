@@ -1,10 +1,10 @@
+import type FroalaEditor from 'froala-editor'
+import { type MutableRefObject } from 'react'
+import { roundTo } from 'round-to'
+import { getBoqRowFromStore, itemsSlice } from '@entities/items'
 import { dispatch } from '@shared/clients'
 import { getStringWithNewFormattedNumber } from '@shared/lib'
-import type FroalaEditor from 'froala-editor'
-import { roundTo } from 'round-to'
 import { type BoqColumnKey } from '@shared/types'
-import { getBoqRowFromStore, itemsSlice } from '@entities/items'
-import { type MutableRefObject } from 'react'
 
 type Props = {
   itemIndex: number

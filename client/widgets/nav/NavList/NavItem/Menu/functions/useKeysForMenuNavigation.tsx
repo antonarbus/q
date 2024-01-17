@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
-import { navSlice } from '@entities/nav'
-import { getMenuItemByIdsChain } from './getMenuItemByIdsChain'
 import { useNavigate } from 'react-router-dom'
-import { navigateInMenu } from './useMenuAnimation'
+import { navSlice } from '@entities/nav'
 import { dispatch, getState } from '@shared/clients'
+import { getMenuItemByIdsChain } from './getMenuItemByIdsChain'
+import { navigateInMenu } from './useMenuAnimation'
 
 export const useKeysForMenuNavigation = (): void => {
   const navigate = useNavigate()

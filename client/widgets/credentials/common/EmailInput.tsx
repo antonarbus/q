@@ -1,9 +1,9 @@
+import { Person } from '@mui/icons-material'
+import { InputAdornment, TextField } from '@mui/material'
+import mailcheck from 'mailcheck'
 import type { RefObject } from 'react'
 import { useState } from 'react'
 import { useUpdateEffect } from 'react-use'
-import mailcheck from 'mailcheck'
-import { InputAdornment, TextField } from '@mui/material'
-import { Person } from '@mui/icons-material'
 import { theme } from '@shared/clients'
 
 const isEmailPatternOk = (email: string): boolean =>

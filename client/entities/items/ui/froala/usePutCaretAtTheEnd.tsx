@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import { useItem } from '../../providers/ItemProvider'
 import { useFroala } from '../../providers/FroalaProvider'
+import { useItem } from '../../providers/ItemProvider'
 
 export const usePutCaretAtTheEnd = (): void => {
   const { itemIndex } = useItem()

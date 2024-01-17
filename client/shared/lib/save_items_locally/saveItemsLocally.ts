@@ -1,8 +1,8 @@
+import { itemsSlice } from '@entities/items'
 import { dispatch, getState } from '@shared/clients'
+import type { Item } from '@shared/types'
 import { saveItemsIntoLocalStorage } from './saveItemsIntoLocalStorage'
 import { tellItemsSavedLocally } from './tellItemsSavedLocally'
-import { itemsSlice } from '@entities/items'
-import type { Item } from '@shared/types'
 
 type Props = {
   items?: Item[]

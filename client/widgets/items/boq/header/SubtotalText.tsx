@@ -1,8 +1,8 @@
-import { getBoqHeaderHtmlFromStore, useItem, Froala, subTotalTextCellStyle } from '@entities/items'
-import { useRef } from 'react'
 import type FroalaEditor from 'froala-editor'
-import { type BoqHeaderKey } from '@shared/types'
+import { useRef } from 'react'
 import { updateSubtotalTextCell } from '@features/update_cell'
+import { getBoqHeaderHtmlFromStore, useItem, Froala, subTotalTextCellStyle } from '@entities/items'
+import { type BoqHeaderKey } from '@shared/types'
 
 const boqHeaderKey: BoqHeaderKey = 'subtotalText'
 

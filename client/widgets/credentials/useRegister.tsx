@@ -1,9 +1,9 @@
-import { notify } from '@shared/ui/top_msg/notify'
 import type { Dispatch, FormEvent, SetStateAction } from 'react'
 import { useState } from 'react'
-import type { HttpStatusType } from './types'
 import type { RegisterReqBody, RegisterRes } from 'server/api/registerRouter'
 import { apiUrl } from 'server/apiUrls'
+import { notify } from '@shared/ui/top_msg/notify'
+import type { HttpStatusType } from './types'
 
 type Props = {
   e: FormEvent

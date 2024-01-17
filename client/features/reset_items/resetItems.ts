@@ -1,6 +1,6 @@
-import { dispatch, theme } from '@shared/clients'
-import { defaultItems, itemsSlice } from '@entities/items'
 import { appSlice } from '@entities/app'
+import { defaultItems, itemsSlice } from '@entities/items'
+import { dispatch, theme } from '@shared/clients'
 import { saveItemsLocally } from '@shared/lib'
 
 export const resetItems = (): void => {

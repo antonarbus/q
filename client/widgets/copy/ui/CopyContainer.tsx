@@ -1,12 +1,12 @@
-import { useCursorCords } from './useCursorCords'
 import { motion } from 'framer-motion'
+import { PressEsc } from '@features/close_copy_container_on_esc_key'
+import { useMovePasteText } from '@features/move_paste_text'
+import { usePasteClick } from '@features/paste_item'
+import { useDisableNavItems } from '@entities/nav'
 import { FirstCopiedItem } from './FirstCopiedItem'
 import { RestOfCopiedItems } from './RestOfCopiedItems'
 import { useCopyContainerAnimation } from './useCopyContainerAnimation'
-import { usePasteClick } from '@features/paste_item'
-import { PressEsc } from '@features/close_copy_container_on_esc_key'
-import { useMovePasteText } from '@features/move_paste_text'
-import { useDisableNavItems } from '@entities/nav'
+import { useCursorCords } from './useCursorCords'
 
 export const containerWidth = 200
 export const containerPadding = 20

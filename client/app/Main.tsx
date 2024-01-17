@@ -1,6 +1,6 @@
+import { Outlet, Route, Routes } from 'react-router-dom'
 import { Offer } from '@pages/offer'
 import { useRefreshTokens } from '@widgets/credentials'
-import { Outlet, Route, Routes } from 'react-router-dom'
 
 export const Main = (): JSX.Element => {
   useRefreshTokens({ withLoadingState: false })

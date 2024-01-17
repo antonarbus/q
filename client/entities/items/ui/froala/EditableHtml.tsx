@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
-import { useStartFroala } from './useStartFroala'
-import { usePutCaretAtTheEnd } from './usePutCaretAtTheEnd'
 import { useFroala } from '../../providers/FroalaProvider'
+import { usePutCaretAtTheEnd } from './usePutCaretAtTheEnd'
+import { useStartFroala } from './useStartFroala'
 
 export const EditableHtml = (): JSX.Element => {
   const { additionalStyle, froalaElementRef, froalaHeightRef } = useFroala()

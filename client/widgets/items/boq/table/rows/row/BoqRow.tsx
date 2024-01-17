@@ -1,11 +1,11 @@
+import { type FocusEvent } from 'react'
 import { BoqRowActions } from '@features/boq_row_actions'
-import { NumberCell } from './cells/NumberCell'
+import { BoqRowLayout } from './BoqRowLayout'
 import { DescriptionCell } from './cells/DescriptionCell'
 import { ItemPriceCell } from './cells/ItemPriceCell'
-import { QtyCell } from './cells/QtyCell'
+import { NumberCell } from './cells/NumberCell'
 import { PriceCell } from './cells/PriceCell'
-import { BoqRowLayout } from './BoqRowLayout'
-import { type FocusEvent } from 'react'
+import { QtyCell } from './cells/QtyCell'
 
 type Props = {
   onBlur: (e: FocusEvent<HTMLDivElement, Element>) => void

@@ -1,15 +1,15 @@
+import type { MouseEvent } from 'react'
 import { FaChevronRight } from 'react-icons/fa'
-import { Icon } from '../../Icon'
-import { MenuItemStyled } from './MenuItemStyled'
-import { TextInMenu } from './TextInMenu'
-import { RoundSpanForIcon } from '../../RoundSpanForIcon'
-import { useSelectorTyped } from '@shared/hooks'
-import { Shortcut } from './Shortcut'
-import { clickOnMenuItem } from './function/clickOnMenuItem'
 import type { MenuItemTypes } from '@entities/nav'
 import { navSlice } from '@entities/nav'
-import type { MouseEvent } from 'react'
 import { dispatch } from '@shared/clients'
+import { useSelectorTyped } from '@shared/hooks'
+import { Icon } from '../../Icon'
+import { RoundSpanForIcon } from '../../RoundSpanForIcon'
+import { clickOnMenuItem } from './function/clickOnMenuItem'
+import { MenuItemStyled } from './MenuItemStyled'
+import { Shortcut } from './Shortcut'
+import { TextInMenu } from './TextInMenu'
 
 type Props = {
   menuItem: MenuItemTypes

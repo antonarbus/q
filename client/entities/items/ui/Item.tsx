@@ -1,11 +1,11 @@
-import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
 import type { ReactNode } from 'react'
 import { getState } from '@shared/clients'
+import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
 import { useIsItemSortDisabled } from '../hooks/useIsItemSortDisabled'
+import { useItem } from '../providers/ItemProvider'
 import { ItemSortAndAnimate } from './item_layout'
 import { ItemMsg } from './item_msg'
 import { PasteItemTextOverlay } from './paste_item_overlay_text'
-import { useItem } from '../providers/ItemProvider'
 
 type Props = {
   children: ReactNode

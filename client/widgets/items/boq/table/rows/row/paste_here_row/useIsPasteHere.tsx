@@ -1,5 +1,5 @@
-import { useSelectorTyped } from '@shared/hooks'
 import { useRow } from '@entities/items'
+import { useSelectorTyped } from '@shared/hooks'
 
 export const useIsPasteHere = (): boolean => {
   const { rowId } = useRow()
