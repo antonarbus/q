@@ -1,15 +1,15 @@
-import { notify } from '@shared/ui/top_msg/notify'
 import type { Dispatch, FormEvent, SetStateAction } from 'react'
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { navUpdate } from './navUpdate'
-import { token } from '../../shared/auth/token'
-import type { HttpStatusType } from './types'
-import { slideElement } from '@shared/lib/slideElement'
 import type { LoginApiRes } from 'server/api/loginRouter'
 import { apiUrl } from 'server/apiUrls'
 import { userSlice } from '@entities/user'
 import { dispatch } from '@shared/clients'
+import { slideElement } from '@shared/lib/slideElement'
+import { notify } from '@shared/ui/top_msg/notify'
+import { token } from '../../shared/auth/token'
+import { navUpdate } from './navUpdate'
+import type { HttpStatusType } from './types'
 
 type StateProps = {
   from?: {

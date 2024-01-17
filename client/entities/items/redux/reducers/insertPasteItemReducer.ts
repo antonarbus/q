@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { ItemsState } from '../itemsSlice'
 import type { CopyPlace, PasteItem } from '@shared/types'
+import type { ItemsState } from '../itemsSlice'
 
 export const insertPasteItemReducer = (state: ItemsState, action: PayloadAction<CopyPlace>): ItemsState => {
   const { pastePos, itemId } = action.payload

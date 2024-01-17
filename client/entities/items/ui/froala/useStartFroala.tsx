@@ -2,13 +2,13 @@ import 'froala-editor/js/froala_editor.pkgd.min.js'
 import 'froala-editor/js/plugins.pkgd.min.js'
 import 'froala-editor/js/third_party/font_awesome.min.js'
 import './froala_editor.pkgd.min.css'
+import FroalaEditor from 'froala-editor'
 import type { MutableRefObject } from 'react'
 import { useEffect } from 'react'
-import FroalaEditor from 'froala-editor'
-import { froalaDefaultOptions } from './froalaDefaultOptions'
 import { saveItemsLocally } from '@shared/lib'
-import { useItem } from '../../providers/ItemProvider'
 import { useFroala } from '../../providers/FroalaProvider'
+import { useItem } from '../../providers/ItemProvider'
+import { froalaDefaultOptions } from './froalaDefaultOptions'
 
 declare const window: Window & typeof globalThis & {
   froalas: Array<MutableRefObject<FroalaEditor | null>>

@@ -1,7 +1,7 @@
-import { useSelectorTyped } from '@shared/hooks'
 import { useEffect } from 'react'
-import { movePasteTextForItem } from './movePasteTextForItem'
+import { useSelectorTyped } from '@shared/hooks'
 import { movePasteTextForBoqRow } from './movePasteTextForBoqRow'
+import { movePasteTextForItem } from './movePasteTextForItem'
 
 export const useMovePasteText = (): void => {
   const typeOfNextPasteItem = useSelectorTyped(state => state.copy.items.at(0)?.type)

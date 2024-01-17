@@ -1,5 +1,5 @@
-import { type BoqColumnKey } from '@shared/types'
 import type FroalaEditor from 'froala-editor'
+import { type BoqColumnKey } from '@shared/types'
 import { getBoqCellFromStore } from '../redux/getters/getBoqCellFromStore'
 
 type Props = {

@@ -1,14 +1,14 @@
-import { useSelectorTyped } from '@shared/hooks'
-import { dispatch, getState, theme } from '@shared/clients'
-import { TbCut } from 'react-icons/tb'
 import { motion } from 'framer-motion'
-import { itemsSlice, saveItemHeightByIndex, selectIsLastItem, useItem } from '@entities/items'
-import { cleanHtml } from '@shared/lib/itemsUtils'
-import { saveItemsLocally } from '@shared/lib'
-import { copySlice } from '@entities/copy'
 import type { MouseEvent } from 'react'
-import { className } from '@shared/className'
+import { TbCut } from 'react-icons/tb'
 import { appSlice } from '@entities/app'
+import { copySlice } from '@entities/copy'
+import { itemsSlice, saveItemHeightByIndex, selectIsLastItem, useItem } from '@entities/items'
+import { className } from '@shared/className'
+import { dispatch, getState, theme } from '@shared/clients'
+import { useSelectorTyped } from '@shared/hooks'
+import { saveItemsLocally } from '@shared/lib'
+import { cleanHtml } from '@shared/lib/itemsUtils'
 
 export const CutItemIcon = (): JSX.Element => {
   const { itemIndex } = useItem()

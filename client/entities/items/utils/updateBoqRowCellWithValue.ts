@@ -1,6 +1,6 @@
 import type FroalaEditor from 'froala-editor'
-import { getNumberFromString, getTextContentFromHtml, getStringWithNewFormattedNumber, updateNumberAtHtmlIncrementally } from '@shared/lib'
 import { getBoqRowFromStore, updateBoqRowCellAtStore } from '@entities/items'
+import { getNumberFromString, getTextContentFromHtml, getStringWithNewFormattedNumber, updateNumberAtHtmlIncrementally } from '@shared/lib'
 import { type BoqColumnKey } from '@shared/types'
 
 type Props = {

@@ -1,10 +1,10 @@
-import { useSelectorTyped } from '@shared/hooks'
-import { VscPinned } from 'react-icons/vsc'
-import { type BoqColumnKey } from '@shared/types'
-import { type ReactNode } from 'react'
 import { Box } from '@mui/material'
-import { className } from '@shared/className'
+import { type ReactNode } from 'react'
+import { VscPinned } from 'react-icons/vsc'
 import { selectBoqCellPin, useItem, useRow } from '@entities/items'
+import { className } from '@shared/className'
+import { useSelectorTyped } from '@shared/hooks'
+import { type BoqColumnKey } from '@shared/types'
 
 type Props = {
   boqColumnKey: BoqColumnKey

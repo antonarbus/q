@@ -1,8 +1,8 @@
-import { didClickInsideThisElement } from '@shared/lib/isClickInsideThisElement'
 import type { MutableRefObject } from 'react'
 import { useEffect } from 'react'
 import { navSlice } from '@entities/nav'
 import { dispatch } from '@shared/clients'
+import { didClickInsideThisElement } from '@shared/lib/isClickInsideThisElement'
 
 type Props = {
   menuContainerRef: MutableRefObject<HTMLDivElement | null>

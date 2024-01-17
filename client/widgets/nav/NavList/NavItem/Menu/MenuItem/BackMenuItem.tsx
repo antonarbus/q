@@ -1,12 +1,12 @@
-import { TextInMenu } from './TextInMenu'
-import { Icon } from '../../Icon'
-import { FaChevronLeft } from 'react-icons/fa'
-import { MenuItemStyled } from './MenuItemStyled'
-import { dispatch, theme } from '@shared/clients'
-import { navSlice } from '@entities/nav'
-import { useSelectorTyped } from '@shared/hooks'
-import { navigateInMenu } from '../functions/useMenuAnimation'
 import type { MouseEvent } from 'react'
+import { FaChevronLeft } from 'react-icons/fa'
+import { navSlice } from '@entities/nav'
+import { dispatch, theme } from '@shared/clients'
+import { useSelectorTyped } from '@shared/hooks'
+import { Icon } from '../../Icon'
+import { navigateInMenu } from '../functions/useMenuAnimation'
+import { MenuItemStyled } from './MenuItemStyled'
+import { TextInMenu } from './TextInMenu'
 
 export const BackMenuItem = (): JSX.Element => {
   const isHovered = useSelectorTyped(state => state.nav.menuItemHoverIndex === 1)

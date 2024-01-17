@@ -1,5 +1,5 @@
-import { createContext, useContext, type ReactNode } from 'react'
 import type FroalaEditor from 'froala-editor'
+import { createContext, useContext, type ReactNode } from 'react'
 
 type Props = {
   children: ReactNode

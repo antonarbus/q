@@ -1,11 +1,11 @@
-import { elementHeight } from '@shared/lib/elementHeight'
-import { navSlice } from '@entities/nav'
-import { dispatch, theme } from '@shared/clients'
 import { gsap } from 'gsap'
 import type { RefObject } from 'react'
 import { useEffect } from 'react'
-import { getMenuItemByIdsChain } from './getMenuItemByIdsChain'
 import { useFirstMountState } from 'react-use'
+import { navSlice } from '@entities/nav'
+import { dispatch, theme } from '@shared/clients'
+import { elementHeight } from '@shared/lib/elementHeight'
+import { getMenuItemByIdsChain } from './getMenuItemByIdsChain'
 
 type PropsForNavigateInMenu = {
   up: (() => void) | null

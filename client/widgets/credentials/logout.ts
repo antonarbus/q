@@ -1,10 +1,10 @@
-import { notify } from '@shared/ui/top_msg/notify'
-import { navUpdate } from './navUpdate'
-import { token } from '@shared/auth/token'
 import type { LogoutApiRes } from 'server/api/logoutRouter'
 import { apiUrl } from 'server/apiUrls'
 import { userSlice } from '@entities/user'
+import { token } from '@shared/auth/token'
 import { dispatch } from '@shared/clients'
+import { notify } from '@shared/ui/top_msg/notify'
+import { navUpdate } from './navUpdate'
 
 export const logoutUser = async (): Promise<void> => {
   const method = 'GET'

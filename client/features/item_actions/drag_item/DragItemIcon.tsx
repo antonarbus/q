@@ -1,6 +1,6 @@
-import { SortableHandle } from 'react-sortable-hoc'
-import { MdDragIndicator } from 'react-icons/md'
 import { motion } from 'framer-motion'
+import { MdDragIndicator } from 'react-icons/md'
+import { SortableHandle } from 'react-sortable-hoc'
 import { useIsItemSortDisabled } from '@entities/items'
 
 const Handle = (): JSX.Element => {

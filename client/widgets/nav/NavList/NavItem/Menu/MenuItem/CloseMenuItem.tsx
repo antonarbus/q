@@ -1,12 +1,12 @@
 import type { MouseEvent } from 'react'
 import { createElement } from 'react'
-import { TextInMenu } from './TextInMenu'
-import { Icon } from '../../Icon'
 import { CgClose as CloseIcon } from 'react-icons/cg'
-import { MenuItemStyled } from './MenuItemStyled'
 import { navSlice } from '@entities/nav'
 import { dispatch, theme } from '@shared/clients'
 import { useSelectorTyped } from '@shared/hooks'
+import { Icon } from '../../Icon'
+import { MenuItemStyled } from './MenuItemStyled'
+import { TextInMenu } from './TextInMenu'
 
 const closeIcon = createElement(CloseIcon, {})
 

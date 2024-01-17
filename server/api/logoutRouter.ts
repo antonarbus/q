@@ -1,8 +1,8 @@
-import { UserModel } from '../db/models/user.model'
-import { jwtDecode } from 'jwt-decode'
-import type { Next, Req, Res } from '../types'
 import { Router } from 'express'
+import { jwtDecode } from 'jwt-decode'
+import { UserModel } from '../db/models/user.model'
 import type { JwtPayloadExtended } from '../services/jwt'
+import type { Next, Req, Res } from '../types'
 
 export const logoutRouter = Router()
 

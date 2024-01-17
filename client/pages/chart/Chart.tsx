@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react'
 import Chart from 'chart.js/auto'
+import React, { useEffect, useRef } from 'react'
 
 export const BarChart: React.FC = () => {
   const chartRef = useRef<HTMLCanvasElement | null>(null)

@@ -1,7 +1,7 @@
+import type { RefObject } from 'react'
 import { selectMenuItemByIdsChainSelector } from '@entities/nav'
 import { useSelectorTyped } from '@shared/hooks'
 import { MenuItem } from './MenuItem'
-import type { RefObject } from 'react'
 
 type Props = {
   reference: RefObject<HTMLDivElement>

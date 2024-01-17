@@ -1,14 +1,14 @@
-import { createElement } from 'react'
-import { nanoid } from 'nanoid'
-import { FiLogOut, FiLogIn } from 'react-icons/fi'
-import { BiReset } from 'react-icons/bi'
-import { IoDocumentOutline, IoDocumentsOutline, IoSaveOutline, IoShareOutline } from 'react-icons/io5'
-import { IoIosSwap } from 'react-icons/io'
-import logo from './img/logo.svg'
 import { Person, Settings } from '@mui/icons-material'
+import { nanoid } from 'nanoid'
+import { createElement } from 'react'
+import { BiReset } from 'react-icons/bi'
+import { FiLogOut, FiLogIn } from 'react-icons/fi'
+import { IoIosSwap } from 'react-icons/io'
+import { IoDocumentOutline, IoDocumentsOutline, IoSaveOutline, IoShareOutline } from 'react-icons/io5'
+import { resetItems } from '@features/reset_items'
 import type { MenuItemTypes } from '@entities/nav'
 import { logoutUser } from '../credentials/logout'
-import { resetItems } from '@features/reset_items'
+import logo from './img/logo.svg'
 
 const reactIcon = createElement(IoShareOutline, {})
 

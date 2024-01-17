@@ -1,15 +1,15 @@
-import { dispatch } from '@shared/clients'
+import axios from 'axios'
+import { jwtDecode } from 'jwt-decode'
 import { useState } from 'react'
 import { useEffectOnce } from 'react-use'
-import { jwtDecode } from 'jwt-decode'
-import axios from 'axios'
-import { tokenExpirationMinutes } from './tokenExpirationMinutes'
-import { navUpdate } from './navUpdate'
-import { token } from '../../shared/auth/token'
-import type { JwtPayloadExtended } from 'server/services/jwt'
 import type { RefreshAipRes } from 'server/api/refreshRouter'
 import { apiUrl } from 'server/apiUrls'
+import type { JwtPayloadExtended } from 'server/services/jwt'
 import { userSlice } from '@entities/user'
+import { dispatch } from '@shared/clients'
+import { token } from '../../shared/auth/token'
+import { navUpdate } from './navUpdate'
+import { tokenExpirationMinutes } from './tokenExpirationMinutes'
 
 type Props = {
   withLoadingState?: boolean

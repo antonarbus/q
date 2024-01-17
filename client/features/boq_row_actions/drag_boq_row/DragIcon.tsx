@@ -1,6 +1,6 @@
-import { SortableHandle } from 'react-sortable-hoc'
-import { MdDragIndicator } from 'react-icons/md'
 import { motion } from 'framer-motion'
+import { MdDragIndicator } from 'react-icons/md'
+import { SortableHandle } from 'react-sortable-hoc'
 // todo: obviously need to move items into entities
 import { useIsBoqRowSortDisabled } from '@entities/items/hooks/useIsBoqRowSortDisabled'
 

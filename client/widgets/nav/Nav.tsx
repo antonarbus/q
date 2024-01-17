@@ -1,10 +1,10 @@
 import { useRef } from 'react'
-import { useSelectorTyped } from '@shared/hooks'
 import { theme } from '@shared/clients'
+import { useSelectorTyped } from '@shared/hooks'
+import { useMediaQueryValues } from './functions/useMediaQueryValues'
+import { useMenuItemActionShortcuts } from './functions/useMenuItemActionShortcuts'
 import { Logo } from './Logo'
 import { NavList } from './NavList'
-import { useMenuItemActionShortcuts } from './functions/useMenuItemActionShortcuts'
-import { useMediaQueryValues } from './functions/useMediaQueryValues'
 
 export const Nav = (): JSX.Element => {
   const navRef = useRef<HTMLDivElement>(null)

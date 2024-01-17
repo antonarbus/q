@@ -1,14 +1,14 @@
-import { useSelectorTyped } from '@shared/hooks'
-import { getState, theme } from '@shared/clients'
+import { css } from '@emotion/react'
 import type { MouseEvent, MutableRefObject } from 'react'
 import { useRef } from 'react'
+import { TiArrowSortedDown } from 'react-icons/ti'
+import { Link } from 'react-router-dom'
+import { useWindowSize } from 'react-use'
+import { getState, theme } from '@shared/clients'
+import { useSelectorTyped } from '@shared/hooks'
+import { clickOnNavItem } from './clickOnNavItem'
 import { Icon } from './Icon'
 import { Menu } from './Menu'
-import { useWindowSize } from 'react-use'
-import { Link } from 'react-router-dom'
-import { clickOnNavItem } from './clickOnNavItem'
-import { TiArrowSortedDown } from 'react-icons/ti'
-import { css } from '@emotion/react'
 
 type Props = {
   children?: React.ReactNode

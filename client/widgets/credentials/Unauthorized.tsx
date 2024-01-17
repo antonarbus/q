@@ -1,7 +1,7 @@
-import { Button } from '@mui/material'
-import { theme } from '@shared/clients'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import { Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { theme } from '@shared/clients'
 
 export const Unauthorized = (): JSX.Element => {
   const navigate = useNavigate()

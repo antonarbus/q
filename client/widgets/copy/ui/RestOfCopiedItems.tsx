@@ -1,10 +1,10 @@
 import type { Variants } from 'framer-motion'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useRef } from 'react'
+import { getState, theme } from '@shared/clients'
 import { useSelectorTyped } from '@shared/hooks'
 import { containerPadding, containerWidth, itemMarginBottom } from './CopyContainer'
-import { getState, theme } from '@shared/clients'
 import { ScaledCopyItem } from './ScaledCopyItem'
-import { useRef } from 'react'
 
 type Props = {
   isCopying: boolean

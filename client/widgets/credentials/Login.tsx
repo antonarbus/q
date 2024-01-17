@@ -1,16 +1,16 @@
+import { LoginRounded } from '@mui/icons-material'
+import { Avatar } from '@mui/material'
 import type { FormEvent, MouseEvent } from 'react'
 import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Avatar } from '@mui/material'
 import { theme } from '@shared/clients'
+import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
+import { ButtonCustom } from '@shared/components/ButtonCustom'
+import { CardCustom } from '@shared/components/CardCustom'
+import { slideElement } from '@shared/lib/slideElement'
 import { EmailInput } from './common/EmailInput'
 import { PasswordInput } from './common/PasswordInput'
 import { useLogin } from './useLogin'
-import { LoginRounded } from '@mui/icons-material'
-import { slideElement } from '@shared/lib/slideElement'
-import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
-import { CardCustom } from '@shared/components/CardCustom'
-import { ButtonCustom } from '@shared/components/ButtonCustom'
 
 // todo: store user data in redux
 export const Login = (): JSX.Element => {

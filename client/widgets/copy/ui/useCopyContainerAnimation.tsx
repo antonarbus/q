@@ -1,10 +1,10 @@
-import { useEffect } from 'react'
 import { useAnimationControls, type AnimationControls } from 'framer-motion'
+import { useEffect } from 'react'
 import { useFirstMountState } from 'react-use'
+import { copySlice } from '@entities/copy'
+import { dispatch, theme } from '@shared/clients'
 import { useSelectorTyped } from '@shared/hooks'
 import { containerPadding, containerWidth } from './CopyContainer'
-import { dispatch, theme } from '@shared/clients'
-import { copySlice } from '@entities/copy'
 
 export const useCopyContainerAnimation = (): AnimationControls => {
   const copyContainerAnimationControls = useAnimationControls()

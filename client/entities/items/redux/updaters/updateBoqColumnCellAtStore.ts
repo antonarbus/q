@@ -1,9 +1,9 @@
+import type FroalaEditor from 'froala-editor'
+import { type MutableRefObject } from 'react'
 import { getBoqItemFromStore, itemsSlice } from '@entities/items'
 import { dispatch } from '@shared/clients'
 import { saveItemsLocally } from '@shared/lib'
 import type { BoqColumnKey } from '@shared/types'
-import type FroalaEditor from 'froala-editor'
-import { type MutableRefObject } from 'react'
 
 type Props = {
   editorRef: MutableRefObject<FroalaEditor | null>

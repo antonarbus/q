@@ -1,7 +1,7 @@
 import express from 'express'
+import { apiUrl } from '../apiUrls'
 import { UserModel } from '../db/models/user.model'
 import type { Next, Req, Res } from '../types'
-import { apiUrl } from '../apiUrls'
 const domain = process.env.DOMAIN
 const port = process.env.PORT_FRONT_END
 

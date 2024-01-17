@@ -1,8 +1,8 @@
 import { Box } from '@mui/material'
 import type { FocusEvent, ReactNode } from 'react'
-import { PasteHere } from './paste_here_row'
-import { className } from '@shared/className'
 import { useRow } from '@entities/items'
+import { className } from '@shared/className'
+import { PasteHere } from './paste_here_row'
 
 type Props = {
   children: ReactNode

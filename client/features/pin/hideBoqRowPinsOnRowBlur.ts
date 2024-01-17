@@ -1,7 +1,7 @@
+import { type FocusEvent } from 'react'
 import { itemsSlice } from '@entities/items'
 import { className } from '@shared/className'
 import { dispatch } from '@shared/clients'
-import { type FocusEvent } from 'react'
 
 type Props = {
   e: FocusEvent<HTMLDivElement, Element>

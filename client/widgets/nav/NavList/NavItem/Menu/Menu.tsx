@@ -1,14 +1,14 @@
 import styled from '@emotion/styled'
-import { useSelectorTyped } from '@shared/hooks'
 import { useRef } from 'react'
-import { useMenuAnimation } from './functions/useMenuAnimation'
-import { useKeysForMenuNavigation } from './functions/useKeysForMenuNavigation'
-import { useCloseMenuOnClickOutside } from './functions/useCloseMenuOnClickOutside'
-import { useIsMenuOutsideWindow } from './functions/useIsMenuOutsideWindow'
-import { SlidableMenuItemsContainer } from './SlidableMenuItemsContainer'
-import { TopMenuItemsContainer } from './TopMenuItemsContainer'
 import { navSlice } from '@entities/nav'
 import { dispatch, theme } from '@shared/clients'
+import { useSelectorTyped } from '@shared/hooks'
+import { useCloseMenuOnClickOutside } from './functions/useCloseMenuOnClickOutside'
+import { useIsMenuOutsideWindow } from './functions/useIsMenuOutsideWindow'
+import { useKeysForMenuNavigation } from './functions/useKeysForMenuNavigation'
+import { useMenuAnimation } from './functions/useMenuAnimation'
+import { SlidableMenuItemsContainer } from './SlidableMenuItemsContainer'
+import { TopMenuItemsContainer } from './TopMenuItemsContainer'
 
 type Props = {
   isMenuOutsideWindow: boolean

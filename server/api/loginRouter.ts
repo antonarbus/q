@@ -1,6 +1,6 @@
+import bcrypt from 'bcryptjs'
 import express from 'express'
 import { UserModel } from '../db/models/user.model'
-import bcrypt from 'bcryptjs'
 import { refreshJwtTokenExpirationSeconds, token } from '../services/jwt'
 import type { Next, Req, Res } from '../types'
 

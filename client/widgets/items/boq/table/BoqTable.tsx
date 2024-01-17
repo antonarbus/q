@@ -1,6 +1,6 @@
-import { BoqRows } from './rows'
-import { BoqColumns } from './columns'
 import { BoqTableLayout } from './BoqTableLayout'
+import { BoqColumns } from './columns'
+import { BoqRows } from './rows'
 
 export const BoqTable = (): JSX.Element => {
   return (

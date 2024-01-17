@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { BoqRow } from '@shared/types'
-import type { ItemsState } from '../itemsSlice'
 import { getBoqItemFromStore } from '../getters/getBoqItemFromStore'
+import type { ItemsState } from '../itemsSlice'
 
 export const reOrderBoqRowsReducer = (state: ItemsState, action: PayloadAction<{
   itemIndex: number

@@ -1,14 +1,14 @@
 import type { SxProps } from '@mui/material'
-import { useRef, type MutableRefObject } from 'react'
 import type FroalaEditor from 'froala-editor'
+import { useRef, type MutableRefObject } from 'react'
 import { useSelectorTyped } from '@shared/hooks'
-import { StaticHtml } from './StaticHtml'
-import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
-import { EditableHtml } from './EditableHtml'
-import { useViewPortObserver } from './useViewPortObserver'
-import { StaticHtmlBackgroundToFixBlinkIssue } from './StaticHtmlBackgroundToFixBlinkIssue'
-import { useItem } from '../../providers/ItemProvider'
 import { FroalaProvider } from '../../providers/FroalaProvider'
+import { useItem } from '../../providers/ItemProvider'
+import { EditableHtml } from './EditableHtml'
+import { StaticHtml } from './StaticHtml'
+import { StaticHtmlBackgroundToFixBlinkIssue } from './StaticHtmlBackgroundToFixBlinkIssue'
+import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
+import { useViewPortObserver } from './useViewPortObserver'
 
 export type FroalaProps = {
   htmlGetter: () => string
