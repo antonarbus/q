@@ -5,9 +5,9 @@ import { BiReset } from 'react-icons/bi'
 import { FiLogOut, FiLogIn } from 'react-icons/fi'
 import { IoIosSwap } from 'react-icons/io'
 import { IoDocumentOutline, IoDocumentsOutline, IoSaveOutline, IoShareOutline } from 'react-icons/io5'
+import { logout } from '@features/log_out'
 import { resetItems } from '@features/reset_items'
 import type { MenuItemTypes } from '@entities/nav'
-import { logoutUser } from '../credentials/logout'
 import logo from './img/logo.svg'
 
 const reactIcon = createElement(IoShareOutline, {})
@@ -276,7 +276,7 @@ export const navStructure: MenuItemTypes[] = [
             isHidden: false,
             name: 'Log out',
             link: '/',
-            func: logoutUser,
+            func: logout,
           },
         ],
       },

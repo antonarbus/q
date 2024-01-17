@@ -3,8 +3,8 @@ import { appSlice } from '@entities/app'
 import { copySlice } from '@entities/copy'
 import { itemsSlice } from '@entities/items'
 import { navSlice } from '@entities/nav'
+import { spinnerSlice } from '@entities/spinner'
 import { userSlice } from '@entities/user'
-import { spinnerSlice } from '@shared/ui/spinner'
 
 export const store = configureStore({
   reducer: {

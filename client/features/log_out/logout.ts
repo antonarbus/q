@@ -6,7 +6,7 @@ import { dispatch } from '@shared/clients'
 import { notify } from '@shared/ui/top_msg/notify'
 import { navUpdate } from './navUpdate'
 
-export const logoutUser = async (): Promise<void> => {
+export const logout = async (): Promise<void> => {
   const method = 'GET'
   const options = { method }
   try {

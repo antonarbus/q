@@ -5,10 +5,10 @@ import { useEffectOnce } from 'react-use'
 import type { RefreshAipRes } from 'server/api/refreshRouter'
 import { apiUrl } from 'server/apiUrls'
 import type { JwtPayloadExtended } from 'server/services/jwt'
+import { navUpdate } from '@features/log_out'
 import { userSlice } from '@entities/user'
+import { token } from '@shared/auth'
 import { dispatch } from '@shared/clients'
-import { token } from '../../shared/auth/token'
-import { navUpdate } from './navUpdate'
 import { tokenExpirationMinutes } from './tokenExpirationMinutes'
 
 type Props = {

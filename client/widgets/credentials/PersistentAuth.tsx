@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import { Spinner } from '@widgets/spinner'
+import { Spinner } from '@entities/spinner'
 import { useRefreshTokens } from './useRefreshTokens'
 
 export const PersistentAuth = (): JSX.Element => {
