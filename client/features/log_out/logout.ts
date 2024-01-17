@@ -1,7 +1,6 @@
 import type { LogoutApiRes } from 'server/api/logoutRouter'
 import { apiUrl } from 'server/apiUrls'
-import { userSlice } from '@entities/user'
-import { token } from '@shared/auth/token'
+import { token, userSlice } from '@entities/user'
 import { dispatch } from '@shared/clients'
 import { notify } from '@shared/ui/top_msg/notify'
 import { navUpdate } from './navUpdate'

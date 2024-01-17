@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { apiUrl } from 'server/apiUrls'
-import { userSlice } from '@entities/user'
 import { dispatch } from '@shared/clients'
+import { userSlice } from '../userSlice'
 import { token } from './token'
 
 export const axiosWithAuth = axios.create({ withCredentials: true })
