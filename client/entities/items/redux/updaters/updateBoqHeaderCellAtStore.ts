@@ -2,8 +2,9 @@ import type FroalaEditor from 'froala-editor'
 import { type MutableRefObject } from 'react'
 import { getBoqItemFromStore, itemsSlice } from '@entities/items'
 import { dispatch } from '@shared/clients'
-import { getNumberFromString, getTextContentFromHtml, saveItemsLocally } from '@shared/lib'
+import { getNumberFromString, getTextContentFromHtml } from '@shared/lib'
 import { type BoqHeaderKey } from '@shared/types'
+import { saveItemsLocally } from '../../utils/saveItemsLocally'
 
 type Props = {
   editorRef: MutableRefObject<FroalaEditor | null>

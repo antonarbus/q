@@ -2,10 +2,9 @@ import { gsap } from 'gsap'
 import { useRef } from 'react'
 import { RxCross2 } from 'react-icons/rx'
 import { copySlice } from '@entities/copy'
-import { itemsSlice, selectIsLastBoqRow, useItem, useRow } from '@entities/items'
+import { itemsSlice, selectIsLastBoqRow, useItem, useRow, saveItemsLocally } from '@entities/items'
 import { dispatch, getState, theme } from '@shared/clients'
 import { useSelectorTyped } from '@shared/hooks'
-import { saveItemsLocally } from '@shared/lib'
 
 export const DeleteBoqRowIcon = (): JSX.Element => {
   const ref = useRef<HTMLSpanElement>(null)

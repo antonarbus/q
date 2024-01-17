@@ -1,13 +1,12 @@
 import { motion } from 'framer-motion'
 import type { MouseEvent } from 'react'
 import { TbCut } from 'react-icons/tb'
-import { generalSlice } from '@entities/general'
 import { copySlice } from '@entities/copy'
-import { getBoqRowFromStore, itemsSlice, selectIsLastBoqRow, useItem, useRow } from '@entities/items'
+import { generalSlice } from '@entities/general'
+import { getBoqRowFromStore, itemsSlice, saveItemsLocally, selectIsLastBoqRow, useItem, useRow } from '@entities/items'
 import { className } from '@shared/className'
 import { dispatch, getState, theme } from '@shared/clients'
 import { useSelectorTyped } from '@shared/hooks'
-import { saveItemsLocally } from '@shared/lib'
 import { cleanHtml } from '@shared/lib/itemsUtils'
 
 export const CutBoqRowIcon = (): JSX.Element => {

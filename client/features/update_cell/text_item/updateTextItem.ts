@@ -1,8 +1,7 @@
 import type FroalaEditor from 'froala-editor'
 import { type MutableRefObject } from 'react'
-import { itemsSlice } from '@entities/items'
+import { itemsSlice, saveItemsLocally } from '@entities/items'
 import { dispatch, getState } from '@shared/clients'
-import { saveItemsLocally } from '@shared/lib'
 
 type Props = {
   editorRef: MutableRefObject<FroalaEditor | null>

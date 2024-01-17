@@ -1,7 +1,6 @@
 import { generalSlice } from '@entities/general'
-import { defaultItems, itemsSlice } from '@entities/items'
+import { defaultItems, itemsSlice, saveItemsLocally } from '@entities/items'
 import { dispatch, theme } from '@shared/clients'
-import { saveItemsLocally } from '@shared/lib'
 
 export const resetItems = (): void => {
   dispatch(generalSlice.actions.disableFroala())

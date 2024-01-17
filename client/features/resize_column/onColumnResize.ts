@@ -1,7 +1,6 @@
-import { itemsSlice } from '@entities/items'
+import { itemsSlice, saveItemsLocally } from '@entities/items'
 import { className } from '@shared/className'
 import { dispatch } from '@shared/clients'
-import { saveItemsLocally } from '@shared/lib'
 import { type BoqColumnKey } from '@shared/types'
 
 type Props = {

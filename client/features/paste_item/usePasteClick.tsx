@@ -1,9 +1,8 @@
 import { useEffectOnce, useUnmount } from 'react-use'
 import { copySlice } from '@entities/copy'
 import { generalSlice } from '@entities/general'
-import { itemsSlice } from '@entities/items'
+import { itemsSlice, saveItemsLocally } from '@entities/items'
 import { dispatch, getState, theme } from '@shared/clients'
-import { saveItemsLocally } from '@shared/lib'
 
 const pasteItemOnClick = (): void => {
   const isPasteTextShown = getState().copy.isPasteTextShown
