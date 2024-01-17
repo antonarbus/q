@@ -1,6 +1,6 @@
-import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from 'client/shared/types'
+import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
 import type { ReactNode } from 'react'
-import { getState } from 'client/shared/clients'
+import { getState } from '@shared/clients'
 import { useIsItemSortDisabled } from '../hooks/useIsItemSortDisabled'
 import { ItemSortAndAnimate } from './item_layout'
 import { ItemMsg } from './item_msg'

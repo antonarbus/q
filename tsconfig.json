@@ -24,8 +24,16 @@
     "jsxImportSource": "@emotion/react",
     // Base directory to resolve non-relative module names.
     "baseUrl": ".",
-    // path mapping to be computed relative to baseUrl option
-    // may use import {func} from 'client/folder', instead of '../../../../folder'
+    "paths": {
+      // "@server/*": ["./server/*"],
+      // "@client/*": ["./client/*"],
+      "@app/*": ["./client/app/*"],
+      "@pages/*": ["./client/pages/*"],
+      "@widgets/*": ["./client/widgets/*"],
+      "@features/*": ["./client/features/*"],
+      "@entities/*": ["./client/entities/*"],
+      "@shared/*": ["./client/shared/*"],
+    },
     "types": [
       "vite/client",
       "vitest/globals",

@@ -1,6 +1,6 @@
 import { useRef } from 'react'
-import { useSelectorTyped } from 'client/shared/hooks'
-import { theme } from 'client/shared/clients'
+import { useSelectorTyped } from '@shared/hooks'
+import { theme } from '@shared/clients'
 import { Logo } from './Logo'
 import { NavList } from './NavList'
 import { useMenuItemActionShortcuts } from './functions/useMenuItemActionShortcuts'

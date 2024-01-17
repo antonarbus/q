@@ -1,5 +1,5 @@
-import { navSlice } from 'client/entities/nav'
-import { dispatch } from 'client/shared/clients'
+import { navSlice } from '@entities/nav'
+import { dispatch } from '@shared/clients'
 
 export const navUpdate = {
   login: (): void => {

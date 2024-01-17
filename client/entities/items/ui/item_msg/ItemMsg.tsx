@@ -1,4 +1,4 @@
-import { useSelectorTyped } from 'client/shared/hooks'
+import { useSelectorTyped } from '@shared/hooks'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRemoveItemMsgAfterSomeTime } from './useRemoveItemMsg'
 import { useItem } from '../../providers/ItemProvider'

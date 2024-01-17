@@ -1,8 +1,8 @@
-import { getBoqHeaderHtmlFromStore, useItem, Froala, titleCellStyle } from 'client/entities/items'
+import { getBoqHeaderHtmlFromStore, useItem, Froala, titleCellStyle } from '@entities/items'
 import { useRef } from 'react'
 import type FroalaEditor from 'froala-editor'
-import { type BoqHeaderKey } from 'client/shared/types'
-import { updateTitleCell } from 'client/features/update_cell'
+import { type BoqHeaderKey } from '@shared/types'
+import { updateTitleCell } from '@features/update_cell'
 
 const boqHeaderKey: BoqHeaderKey = 'title'
 

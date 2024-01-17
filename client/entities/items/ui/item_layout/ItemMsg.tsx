@@ -1,6 +1,6 @@
 import { itemsSlice } from '../../redux/itemsSlice'
-import { dispatch } from 'client/shared/clients'
-import { useSelectorTyped } from 'client/shared/hooks'
+import { dispatch } from '@shared/clients'
+import { useSelectorTyped } from '@shared/hooks'
 import { useItem } from '../../providers/ItemProvider'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useUpdateEffect } from 'react-use'

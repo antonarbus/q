@@ -6,9 +6,9 @@ import { IoDocumentOutline, IoDocumentsOutline, IoSaveOutline, IoShareOutline } 
 import { IoIosSwap } from 'react-icons/io'
 import logo from './img/logo.svg'
 import { Person, Settings } from '@mui/icons-material'
-import type { MenuItemTypes } from 'client/entities/nav'
+import type { MenuItemTypes } from '@entities/nav'
 import { logoutUser } from '../credentials/logout'
-import { resetItems } from 'client/features/reset_items'
+import { resetItems } from '@features/reset_items'
 
 const reactIcon = createElement(IoShareOutline, {})
 

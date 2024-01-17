@@ -1,5 +1,5 @@
-import { didBoqHeaderCellContentChange, getBoqHeaderFromStore, getBoqRowsFromStore, updateBoqHeaderCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from 'client/entities/items'
-import { notify } from 'client/shared/ui/top_msg'
+import { didBoqHeaderCellContentChange, getBoqHeaderFromStore, getBoqRowsFromStore, updateBoqHeaderCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from '@entities/items'
+import { notify } from '@shared/ui/top_msg'
 import type FroalaEditor from 'froala-editor'
 import { type MutableRefObject } from 'react'
 import { roundTo } from 'round-to'

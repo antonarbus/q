@@ -1,5 +1,5 @@
-import { getNumberOfBoqItemsAbove, useItem, useRow, useStylesForResizableCell } from 'client/entities/items'
-import type { BoqColumnKey } from 'client/shared/types'
+import { getNumberOfBoqItemsAbove, useItem, useRow, useStylesForResizableCell } from '@entities/items'
+import type { BoqColumnKey } from '@shared/types'
 import { Box } from '@mui/material'
 
 const boqColumnKey: BoqColumnKey = 'number'

@@ -3,13 +3,13 @@ import { Icon } from '../../Icon'
 import { MenuItemStyled } from './MenuItemStyled'
 import { TextInMenu } from './TextInMenu'
 import { RoundSpanForIcon } from '../../RoundSpanForIcon'
-import { useSelectorTyped } from 'client/shared/hooks'
+import { useSelectorTyped } from '@shared/hooks'
 import { Shortcut } from './Shortcut'
 import { clickOnMenuItem } from './function/clickOnMenuItem'
-import type { MenuItemTypes } from 'client/entities/nav'
-import { navSlice } from 'client/entities/nav'
+import type { MenuItemTypes } from '@entities/nav'
+import { navSlice } from '@entities/nav'
 import type { MouseEvent } from 'react'
-import { dispatch } from 'client/shared/clients'
+import { dispatch } from '@shared/clients'
 
 type Props = {
   menuItem: MenuItemTypes

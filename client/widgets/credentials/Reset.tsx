@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom'
 import { Avatar } from '@mui/material'
 import { useReset } from './useReset'
 import { EmailInput } from './common/EmailInput'
-import { theme } from 'client/shared/clients'
+import { theme } from '@shared/clients'
 import PasswordRoundedIcon from '@mui/icons-material/PasswordRounded'
-import { BackdropWithSlidableContent } from 'client/shared/components/BackdropWithSlidableContent'
-import { CardCustom } from 'client/shared/components/CardCustom'
-import { ButtonCustom } from 'client/shared/components/ButtonCustom'
+import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
+import { CardCustom } from '@shared/components/CardCustom'
+import { ButtonCustom } from '@shared/components/ButtonCustom'
 
 export const Reset = (): JSX.Element => {
   const navigate = useNavigate()

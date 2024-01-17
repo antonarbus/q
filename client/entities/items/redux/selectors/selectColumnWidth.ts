@@ -1,4 +1,4 @@
-import type { BoqColumnKey, RootState } from 'client/shared/types'
+import type { BoqColumnKey, RootState } from '@shared/types'
 import { getBoqItemFromStore } from '../getters/getBoqItemFromStore'
 
 type Props = {

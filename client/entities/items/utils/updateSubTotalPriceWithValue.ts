@@ -1,6 +1,6 @@
-import { getNumberFromString, getTextContentFromHtml, getStringWithNewFormattedNumber, updateNumberAtHtmlIncrementally, updateNumberAtHtml } from 'client/shared/lib'
-import { getBoqItemFromStore, getBoqRowsFromStore, itemsSlice } from 'client/entities/items'
-import { dispatch } from 'client/shared/clients'
+import { getNumberFromString, getTextContentFromHtml, getStringWithNewFormattedNumber, updateNumberAtHtmlIncrementally, updateNumberAtHtml } from '@shared/lib'
+import { getBoqItemFromStore, getBoqRowsFromStore, itemsSlice } from '@entities/items'
+import { dispatch } from '@shared/clients'
 import type FroalaEditor from 'froala-editor'
 
 type Props = {

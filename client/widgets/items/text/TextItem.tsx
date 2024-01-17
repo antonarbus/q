@@ -1,9 +1,9 @@
 import { useRef } from 'react'
-import { Froala, Item, getItemTextHtmlFromStore, textItemCellStyle, useItem } from 'client/entities/items'
-import { PencilAtBottomRight } from 'client/shared/components/PencilAtBottomRight'
-import { updateTextItem } from 'client/features/update_cell'
-import { onTextItemResizeStart, onTextItemResizeStop } from 'client/features/resize_item'
-import { ItemActions } from 'client/features/item_actions'
+import { Froala, Item, getItemTextHtmlFromStore, textItemCellStyle, useItem } from '@entities/items'
+import { PencilAtBottomRight } from '@shared/components/PencilAtBottomRight'
+import { updateTextItem } from '@features/update_cell'
+import { onTextItemResizeStart, onTextItemResizeStop } from '@features/resize_item'
+import { ItemActions } from '@features/item_actions'
 import type FroalaEditor from 'froala-editor'
 
 export const TextItem = (): JSX.Element => {

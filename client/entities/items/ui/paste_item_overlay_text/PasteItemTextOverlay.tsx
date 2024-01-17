@@ -1,4 +1,4 @@
-import { theme } from 'client/shared/clients'
+import { theme } from '@shared/clients'
 import { useIsPasteHere } from './useIsPasteHere'
 import type { ReactNode } from 'react'
 

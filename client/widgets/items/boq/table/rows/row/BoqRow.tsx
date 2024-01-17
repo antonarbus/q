@@ -1,4 +1,4 @@
-import { BoqRowActions } from 'client/features/boq_row_actions'
+import { BoqRowActions } from '@features/boq_row_actions'
 import { NumberCell } from './cells/NumberCell'
 import { DescriptionCell } from './cells/DescriptionCell'
 import { ItemPriceCell } from './cells/ItemPriceCell'

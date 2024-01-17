@@ -1,5 +1,5 @@
-import { updateBoqColumnCellAtStore } from 'client/entities/items'
-import type { BoqColumnKey } from 'client/shared/types'
+import { updateBoqColumnCellAtStore } from '@entities/items'
+import type { BoqColumnKey } from '@shared/types'
 import type FroalaEditor from 'froala-editor'
 import { type MutableRefObject } from 'react'
 

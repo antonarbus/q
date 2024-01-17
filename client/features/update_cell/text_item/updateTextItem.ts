@@ -1,6 +1,6 @@
-import { itemsSlice } from 'client/entities/items'
-import { dispatch, getState } from 'client/shared/clients'
-import { saveItemsLocally } from 'client/shared/lib'
+import { itemsSlice } from '@entities/items'
+import { dispatch, getState } from '@shared/clients'
+import { saveItemsLocally } from '@shared/lib'
 import { type MutableRefObject } from 'react'
 import type FroalaEditor from 'froala-editor'
 

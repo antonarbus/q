@@ -1,4 +1,4 @@
-import { getState } from 'client/shared/clients'
+import { getState } from '@shared/clients'
 
 type Props = {
   itemIndex: number

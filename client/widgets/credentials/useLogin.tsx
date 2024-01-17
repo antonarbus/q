@@ -1,15 +1,15 @@
-import { notify } from 'client/shared/ui/top_msg/notify'
+import { notify } from '@shared/ui/top_msg/notify'
 import type { Dispatch, FormEvent, SetStateAction } from 'react'
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { navUpdate } from './navUpdate'
 import { token } from '../../shared/auth/token'
 import type { HttpStatusType } from './types'
-import { slideElement } from 'client/shared/lib/slideElement'
+import { slideElement } from '@shared/lib/slideElement'
 import type { LoginApiRes } from 'server/api/loginRouter'
 import { apiUrl } from 'server/apiUrls'
-import { userSlice } from 'client/entities/user'
-import { dispatch } from 'client/shared/clients'
+import { userSlice } from '@entities/user'
+import { dispatch } from '@shared/clients'
 
 type StateProps = {
   from?: {

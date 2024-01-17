@@ -3,8 +3,8 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
 import { setMenuItemPropValue } from './setMenuItemPropValue'
 import type { MenuItemTypes } from './TMenuItem'
-import type { ItemsMediaQueryWidths } from 'client/widgets/nav'
-import type { RootState } from 'client/shared/types'
+import type { ItemsMediaQueryWidths } from '@widgets/nav'
+import type { RootState } from '@shared/types'
 
 const initialState = {
   navStructure,

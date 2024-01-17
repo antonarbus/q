@@ -1,6 +1,6 @@
 import { type MutableRefObject } from 'react'
 import type FroalaEditor from 'froala-editor'
-import { formatBoqRowCellNumber } from 'client/entities/items'
+import { formatBoqRowCellNumber } from '@entities/items'
 
 type Props = {
   priceCellEditorRef: MutableRefObject<FroalaEditor | null>

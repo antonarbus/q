@@ -1,4 +1,4 @@
-import { useSelectorTyped } from 'client/shared/hooks'
+import { useSelectorTyped } from '@shared/hooks'
 import { AnimatePresence, motion } from 'framer-motion'
 
 export const BottomMsg = (): JSX.Element => {

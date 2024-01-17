@@ -1,9 +1,9 @@
-import { dispatch } from 'client/shared/clients'
-import { getStringWithNewFormattedNumber } from 'client/shared/lib'
+import { dispatch } from '@shared/clients'
+import { getStringWithNewFormattedNumber } from '@shared/lib'
 import type FroalaEditor from 'froala-editor'
 import { roundTo } from 'round-to'
-import { type BoqColumnKey } from 'client/shared/types'
-import { getBoqRowFromStore, itemsSlice } from 'client/entities/items'
+import { type BoqColumnKey } from '@shared/types'
+import { getBoqRowFromStore, itemsSlice } from '@entities/items'
 import { type MutableRefObject } from 'react'
 
 type Props = {

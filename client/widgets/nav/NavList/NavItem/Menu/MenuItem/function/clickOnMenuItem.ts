@@ -1,8 +1,8 @@
-import { navSlice } from 'client/entities/nav'
+import { navSlice } from '@entities/nav'
 import { getMenuItemByIdsChain } from '../../functions/getMenuItemByIdsChain'
 import { navigateInMenu } from '../../functions/useMenuAnimation'
 import type { MouseEvent } from 'react'
-import { dispatch, getState } from 'client/shared/clients'
+import { dispatch, getState } from '@shared/clients'
 
 export const clickOnMenuItem = (e: MouseEvent, menuId: string, disabled: boolean): void => {
   const chainToClickedItem = [

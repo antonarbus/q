@@ -1,8 +1,8 @@
-import { getBoqHeaderHtmlFromStore, useBoqItem, useItem, Froala, subTotalPriceCellStyle } from 'client/entities/items'
-import { showHideBoqPricePins } from 'client/features/pin'
-import { type BoqHeaderKey } from 'client/shared/types'
+import { getBoqHeaderHtmlFromStore, useBoqItem, useItem, Froala, subTotalPriceCellStyle } from '@entities/items'
+import { showHideBoqPricePins } from '@features/pin'
+import { type BoqHeaderKey } from '@shared/types'
 import { useRef } from 'react'
-import { formatSubtotalPriceCell, updateSubtotalPriceCell, validateBoqRowPrices } from 'client/features/update_cell'
+import { formatSubtotalPriceCell, updateSubtotalPriceCell, validateBoqRowPrices } from '@features/update_cell'
 
 const boqHeaderKey: BoqHeaderKey = 'subTotalPrice'
 

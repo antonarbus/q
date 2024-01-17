@@ -1,14 +1,14 @@
-import { useSelectorTyped } from 'client/shared/hooks'
-import { dispatch, getState, theme } from 'client/shared/clients'
+import { useSelectorTyped } from '@shared/hooks'
+import { dispatch, getState, theme } from '@shared/clients'
 import { TbCut } from 'react-icons/tb'
 import { motion } from 'framer-motion'
-import { cleanHtml } from 'client/shared/lib/itemsUtils'
-import { copySlice } from 'client/entities/copy'
-import { getBoqRowFromStore, itemsSlice, selectIsLastBoqRow, useItem, useRow } from 'client/entities/items'
+import { cleanHtml } from '@shared/lib/itemsUtils'
+import { copySlice } from '@entities/copy'
+import { getBoqRowFromStore, itemsSlice, selectIsLastBoqRow, useItem, useRow } from '@entities/items'
 import type { MouseEvent } from 'react'
-import { className } from 'client/shared/className'
-import { saveItemsLocally } from 'client/shared/lib'
-import { appSlice } from 'client/entities/app'
+import { className } from '@shared/className'
+import { saveItemsLocally } from '@shared/lib'
+import { appSlice } from '@entities/app'
 
 export const CutBoqRowIcon = (): JSX.Element => {
   const { itemIndex } = useItem()

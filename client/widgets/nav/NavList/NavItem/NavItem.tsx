@@ -1,5 +1,5 @@
-import { useSelectorTyped } from 'client/shared/hooks'
-import { getState, theme } from 'client/shared/clients'
+import { useSelectorTyped } from '@shared/hooks'
+import { getState, theme } from '@shared/clients'
 import type { MouseEvent, MutableRefObject } from 'react'
 import { useRef } from 'react'
 import { Icon } from './Icon'

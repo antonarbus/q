@@ -6,7 +6,7 @@ import type { MutableRefObject } from 'react'
 import { useEffect } from 'react'
 import FroalaEditor from 'froala-editor'
 import { froalaDefaultOptions } from './froalaDefaultOptions'
-import { saveItemsLocally } from 'client/shared/lib'
+import { saveItemsLocally } from '@shared/lib'
 import { useItem } from '../../providers/ItemProvider'
 import { useFroala } from '../../providers/FroalaProvider'
 

@@ -1,6 +1,6 @@
-import type { MenuItemTypes } from 'client/entities/nav'
-import { navSlice } from 'client/entities/nav'
-import { dispatch, getState } from 'client/shared/clients'
+import type { MenuItemTypes } from '@entities/nav'
+import { navSlice } from '@entities/nav'
+import { dispatch, getState } from '@shared/clients'
 import type { MouseEvent, MutableRefObject } from 'react'
 
 type Props = {

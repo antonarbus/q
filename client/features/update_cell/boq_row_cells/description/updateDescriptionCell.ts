@@ -1,7 +1,7 @@
 import { type MutableRefObject } from 'react'
 import type FroalaEditor from 'froala-editor'
-import { didBoqCellContentChange, updateBoqRowCellAtStore } from 'client/entities/items'
-import { type BoqColumnKey } from 'client/shared/types'
+import { didBoqCellContentChange, updateBoqRowCellAtStore } from '@entities/items'
+import { type BoqColumnKey } from '@shared/types'
 
 type Props = {
   editorRef: MutableRefObject<FroalaEditor | null>

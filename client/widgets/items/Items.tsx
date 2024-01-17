@@ -1,11 +1,11 @@
-import { useSelectorTyped } from 'client/shared/hooks'
-import { onItemDrag } from 'client/features/item_actions/drag_item'
+import { useSelectorTyped } from '@shared/hooks'
+import { onItemDrag } from '@features/item_actions/drag_item'
 import { TextItem } from './text/TextItem'
 import { PasteItem } from './paste/PasteItem'
 import { AnimatePresence } from 'framer-motion'
-import { DraggableItemsContainer } from 'client/entities/items/ui/DraggableItemsContainer'
+import { DraggableItemsContainer } from '@entities/items/ui/DraggableItemsContainer'
 import { BoqItem } from './boq/BoqItem'
-import { ItemProvider, itemsShapeEqualityFn, BoqItemProvider } from 'client/entities/items'
+import { ItemProvider, itemsShapeEqualityFn, BoqItemProvider } from '@entities/items'
 
 export const Items = (): JSX.Element => {
   const items = useSelectorTyped(state => state.items, itemsShapeEqualityFn)

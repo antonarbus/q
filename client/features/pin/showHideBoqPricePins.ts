@@ -1,6 +1,6 @@
-import { itemsSlice } from 'client/entities/items'
-import { dispatch } from 'client/shared/clients'
-import { className } from 'client/shared/className'
+import { itemsSlice } from '@entities/items'
+import { dispatch } from '@shared/clients'
+import { className } from '@shared/className'
 import { type MutableRefObject } from 'react'
 
 type Props = {

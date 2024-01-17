@@ -1,4 +1,4 @@
-import { getNumberFromString, getStringWithNewFormattedNumber, getTextContentFromHtml } from 'client/shared/lib'
+import { getNumberFromString, getStringWithNewFormattedNumber, getTextContentFromHtml } from '@shared/lib'
 import { roundTo } from 'round-to'
 import type FroalaEditor from 'froala-editor'
 import { getDecimalPrecision } from './getDecimalPrecision'

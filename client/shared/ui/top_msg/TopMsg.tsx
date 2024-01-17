@@ -1,7 +1,7 @@
 // https://fkhadra.github.io/react-toastify/introduction/
 import { ToastContainer } from 'react-toastify'
 import styled from '@emotion/styled'
-import { theme } from 'client/shared/clients'
+import { theme } from '@shared/clients'
 
 // taken from /node_modules/react-toastify/dist/ReactToastify.css
 const ToastStyled = styled.div`

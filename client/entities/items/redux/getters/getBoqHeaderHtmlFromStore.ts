@@ -1,5 +1,5 @@
-import { getState } from 'client/shared/clients'
-import type { BoqHeaderKey } from 'client/shared/types'
+import { getState } from '@shared/clients'
+import type { BoqHeaderKey } from '@shared/types'
 
 type Props = {
   itemIndex: number

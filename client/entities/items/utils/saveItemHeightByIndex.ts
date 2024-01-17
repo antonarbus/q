@@ -1,6 +1,6 @@
-import { dispatch } from 'client/shared/clients'
+import { dispatch } from '@shared/clients'
 import { itemsSlice } from '../redux/itemsSlice'
-import { className } from 'client/shared/className'
+import { className } from '@shared/className'
 
 type Props = {
   itemIndex: number

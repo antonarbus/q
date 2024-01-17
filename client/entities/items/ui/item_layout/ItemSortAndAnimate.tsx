@@ -2,11 +2,11 @@ import type { SortableElementProps } from 'react-sortable-hoc'
 import type { ComponentClass, ReactNode } from 'react'
 import { SortableElement } from 'react-sortable-hoc'
 import { motion } from 'framer-motion'
-import { theme } from 'client/shared/clients'
+import { theme } from '@shared/clients'
 import { ItemActionsContainer } from './ItemActionsContainer'
 import { ResizablePaper } from './ResizablePaper'
-import { className } from 'client/shared/className'
-import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from 'client/shared/types'
+import { className } from '@shared/className'
+import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
 
 type Props = {
   children: ReactNode

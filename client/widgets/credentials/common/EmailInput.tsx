@@ -4,7 +4,7 @@ import { useUpdateEffect } from 'react-use'
 import mailcheck from 'mailcheck'
 import { InputAdornment, TextField } from '@mui/material'
 import { Person } from '@mui/icons-material'
-import { theme } from 'client/shared/clients'
+import { theme } from '@shared/clients'
 
 const isEmailPatternOk = (email: string): boolean =>
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(

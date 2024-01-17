@@ -1,4 +1,4 @@
-import type { BoqRow, RootState } from 'client/shared/types'
+import type { BoqRow, RootState } from '@shared/types'
 import { getBoqRowsFromStore } from '../getters/getBoqRowsFromStore'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

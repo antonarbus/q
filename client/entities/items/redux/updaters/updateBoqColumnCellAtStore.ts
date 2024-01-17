@@ -1,7 +1,7 @@
-import { getBoqItemFromStore, itemsSlice } from 'client/entities/items'
-import { dispatch } from 'client/shared/clients'
-import { saveItemsLocally } from 'client/shared/lib'
-import type { BoqColumnKey } from 'client/shared/types'
+import { getBoqItemFromStore, itemsSlice } from '@entities/items'
+import { dispatch } from '@shared/clients'
+import { saveItemsLocally } from '@shared/lib'
+import type { BoqColumnKey } from '@shared/types'
 import type FroalaEditor from 'froala-editor'
 import { type MutableRefObject } from 'react'
 

@@ -1,6 +1,6 @@
 import { ResizableColumn } from '../ResizableColumn'
-import { columnHeaderStyle } from 'client/entities/items'
-import { type BoqColumnKey } from 'client/shared/types'
+import { columnHeaderStyle } from '@entities/items'
+import { type BoqColumnKey } from '@shared/types'
 import { Box } from '@mui/material'
 
 const boqColumnKey: BoqColumnKey = 'number'

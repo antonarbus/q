@@ -1,4 +1,4 @@
-import { className } from 'client/shared/className'
+import { className } from '@shared/className'
 import type { ReactNode } from 'react'
 
 type Props = {

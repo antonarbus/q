@@ -2,7 +2,7 @@ import type { SortableElementProps } from 'react-sortable-hoc'
 import type { ComponentClass, ReactNode } from 'react'
 import { SortableElement } from 'react-sortable-hoc'
 import { motion } from 'framer-motion'
-import { theme } from 'client/shared/clients'
+import { theme } from '@shared/clients'
 
 type Props = {
   children: ReactNode

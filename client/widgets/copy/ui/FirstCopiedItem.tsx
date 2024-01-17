@@ -1,8 +1,8 @@
 import type { Variants } from 'framer-motion'
 import { AnimatePresence, motion } from 'framer-motion'
-import { useSelectorTyped } from 'client/shared/hooks'
+import { useSelectorTyped } from '@shared/hooks'
 import { containerPadding, containerWidth, itemMarginBottom } from './CopyContainer'
-import { getState, theme } from 'client/shared/clients'
+import { getState, theme } from '@shared/clients'
 import { ScaledCopyItem } from './ScaledCopyItem'
 
 type Props = {

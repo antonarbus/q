@@ -1,4 +1,4 @@
-import type { Item } from 'client/shared/types'
+import type { Item } from '@shared/types'
 
 type Props = {
   items: Item[]

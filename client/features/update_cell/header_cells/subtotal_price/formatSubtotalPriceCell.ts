@@ -1,8 +1,8 @@
-import { dispatch } from 'client/shared/clients'
-import { getStringWithNewFormattedNumber } from 'client/shared/lib'
+import { dispatch } from '@shared/clients'
+import { getStringWithNewFormattedNumber } from '@shared/lib'
 import type FroalaEditor from 'froala-editor'
 import { roundTo } from 'round-to'
-import { getBoqItemFromStore, itemsSlice } from 'client/entities/items'
+import { getBoqItemFromStore, itemsSlice } from '@entities/items'
 import { type MutableRefObject } from 'react'
 
 type Props = {

@@ -1,4 +1,4 @@
-import { type BoqColumnKey, type BoqRowCell } from 'client/shared/types'
+import { type BoqColumnKey, type BoqRowCell } from '@shared/types'
 import { type ItemsState } from '../itemsSlice'
 import { getBoqRowFromStore } from './getBoqRowFromStore'
 
