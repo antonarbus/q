@@ -1,6 +1,6 @@
 import { useEffectOnce, useUnmount } from 'react-use'
-import { appSlice } from '@entities/app'
 import { copySlice } from '@entities/copy'
+import { generalSlice } from '@entities/general'
 import { itemsSlice } from '@entities/items'
 import { dispatch, getState, theme } from '@shared/clients'
 import { saveItemsLocally } from '@shared/lib'
@@ -48,7 +48,7 @@ const pasteItemOnClick = (): void => {
 
     // need more time than animation, otherwise some distortion is visible
     setTimeout(() => {
-      dispatch(appSlice.actions.enableFroala())
+      dispatch(generalSlice.actions.enableFroala())
     }, 1000 * theme.item.animationDuration + 500)
   }
 }

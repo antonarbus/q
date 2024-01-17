@@ -1,7 +1,7 @@
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-export const appSlice = createSlice({
-  name: 'app',
+export const generalSlice = createSlice({
+  name: 'general',
   initialState: {
     reRenderOffer: false,
     isFroala: true,

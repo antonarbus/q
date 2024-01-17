@@ -1,5 +1,5 @@
 import { arrayMoveImmutable } from 'array-move'
-import { appSlice } from '@entities/app'
+import { generalSlice } from '@entities/general'
 import { itemsSlice } from '@entities/items'
 import { dispatch, getState } from '@shared/clients'
 import { saveItemsLocally } from '@shared/lib'
@@ -11,11 +11,11 @@ type Props = {
 
 const onItemDragStart = (): void => {
   document.body.style.cursor = 'move'
-  dispatch(appSlice.actions.disableFroala())
+  dispatch(generalSlice.actions.disableFroala())
 }
 
 const onItemDragEnd = ({ oldIndex, newIndex }: Props): void => {
-  dispatch(appSlice.actions.enableFroala())
+  dispatch(generalSlice.actions.enableFroala())
 
   document.body.style.removeProperty('cursor')
 

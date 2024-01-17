@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import type { MouseEvent } from 'react'
 import { MdCopyAll } from 'react-icons/md'
-import { appSlice } from '@entities/app'
+import { generalSlice } from '@entities/general'
 import { copySlice } from '@entities/copy'
 import { getBoqRowFromStore, itemsSlice, useItem, useRow } from '@entities/items'
 import { className } from '@shared/className'
@@ -54,7 +54,7 @@ export const CopyBoqRowIcon = (): JSX.Element => {
         const isCopyContainer = getState().copy.isCopyContainer
         if (!isCopyContainer) {
           dispatch(copySlice.actions.saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
-          dispatch(appSlice.actions.disableFroala())
+          dispatch(generalSlice.actions.disableFroala())
           dispatch(copySlice.actions.showCopyContainer())
         }
       }}

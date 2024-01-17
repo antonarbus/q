@@ -2,7 +2,7 @@ import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 import { gsap } from 'gsap'
 import { useRef } from 'react'
 import { RxCross2 } from 'react-icons/rx'
-import { appSlice } from '@entities/app'
+import { generalSlice } from '@entities/general'
 import { copySlice } from '@entities/copy'
 import { itemsSlice, selectIsLastItem, useItem } from '@entities/items'
 import { dispatch, getState, theme } from '@shared/clients'
@@ -32,7 +32,7 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
         const itemToDelete = getState().items[itemIndex]
         if (!itemToDelete) return
 
-        dispatch(appSlice.actions.disableFroala())
+        dispatch(generalSlice.actions.disableFroala())
         dispatch(itemsSlice.actions.deleteItemReducer({ itemId: itemToDelete.id }))
 
         dispatch(copySlice.actions.forbidToPaste())
@@ -51,7 +51,7 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
 
         if (!isCopyContainer) {
           setTimeout(() => {
-            dispatch(appSlice.actions.enableFroala())
+            dispatch(generalSlice.actions.enableFroala())
           }, 1000 * theme.item.animationDuration)
         }
 

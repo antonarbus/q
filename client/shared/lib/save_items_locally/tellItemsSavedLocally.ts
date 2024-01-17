@@ -1,9 +1,9 @@
-import { appSlice } from '@entities/app'
+import { generalSlice } from '@entities/general'
 import { dispatch } from '@shared/clients'
 
 export const tellItemsSavedLocally = ({ ms = 2000 } = {}): void => {
-  dispatch(appSlice.actions.showBottomMsg('saved locally'))
+  dispatch(generalSlice.actions.showBottomMsg('saved locally'))
   setTimeout(() => {
-    dispatch(appSlice.actions.hideBottomMsg())
+    dispatch(generalSlice.actions.hideBottomMsg())
   }, ms)
 }

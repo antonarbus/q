@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import type { MouseEvent } from 'react'
 import { TbCut } from 'react-icons/tb'
-import { appSlice } from '@entities/app'
+import { generalSlice } from '@entities/general'
 import { copySlice } from '@entities/copy'
 import { getBoqRowFromStore, itemsSlice, selectIsLastBoqRow, useItem, useRow } from '@entities/items'
 import { className } from '@shared/className'
@@ -60,11 +60,11 @@ export const CutBoqRowIcon = (): JSX.Element => {
 
         if (!isCopyContainer) {
           dispatch(copySlice.actions.saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
-          dispatch(appSlice.actions.disableFroala())
+          dispatch(generalSlice.actions.disableFroala())
           dispatch(copySlice.actions.showCopyContainer())
         }
 
-        dispatch(appSlice.actions.disableFroala())
+        dispatch(generalSlice.actions.disableFroala())
         dispatch(itemsSlice.actions.deleteBoqRowReducer({ itemIndex, rowIndex }))
 
         dispatch(copySlice.actions.forbidToPaste())
