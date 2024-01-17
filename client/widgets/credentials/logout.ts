@@ -46,7 +46,7 @@ export const logoutUser = async (): Promise<void> => {
     dispatch(userSlice.actions.forgetLoggedUser())
     navUpdate.logout()
   } catch (err) {
-    console.log(err)
+    console.error(err)
     notify({ msg: 'Internal error', type: 'error', theme: 'light' })
   } finally {
     token.access = ''

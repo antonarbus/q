@@ -83,10 +83,10 @@ export const useLogin = (): FuncRes => {
           })
         }, 2000)
       }
-      console.log(data)
+      console.info(data)
     } catch (err) {
       setHttpStatus('error')
-      console.log(err)
+      console.error(err)
       notify({ msg: 'Internal error', type: 'error', theme: 'light' })
       setTimeout(() => {
         slideElement({

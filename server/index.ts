@@ -42,6 +42,6 @@ void (async (): Promise<void> => {
   const domain = process.env.DOMAIN
 
   app.listen(port, () => {
-    console.log(`server started at ${domain}:${port}`)
+    console.info(`server started at ${domain}:${port}`)
   })
 })()

@@ -61,14 +61,14 @@ export const useRefreshTokens = ({ withLoadingState }: Props): FuncReturnType =>
           token.access = ''
           dispatch(userSlice.actions.forgetLoggedUser())
           navUpdate.logout()
-          console.log(response.data.message)
+          console.error(response.data.message)
           return
         }
 
         if (!accessJwtToken) {
           dispatch(userSlice.actions.forgetLoggedUser())
           navUpdate.logout()
-          console.log('no access token in db')
+          console.warn('no access token in db')
           return
         }
 
@@ -77,7 +77,7 @@ export const useRefreshTokens = ({ withLoadingState }: Props): FuncReturnType =>
         if (!email) {
           dispatch(userSlice.actions.forgetLoggedUser())
           navUpdate.logout()
-          console.log('token is invalid')
+          console.warn('token is invalid')
           return
         }
 
@@ -86,10 +86,10 @@ export const useRefreshTokens = ({ withLoadingState }: Props): FuncReturnType =>
           // console.log(response)
           dispatch(userSlice.actions.rememberLoggedUser({ email, isLogged: true, roles }))
           navUpdate.login()
-          console.log(`tokens for ${email} are refreshed`)
+          console.info(`tokens for ${email} are refreshed`)
         }
       } catch (error) {
-        console.log(error)
+        console.error(error)
       } finally {
         if (withLoadingState) {
           setIsCheckingTokens(false)
