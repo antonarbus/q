@@ -1,10 +1,10 @@
+import { theme } from '@libras/theme'
 import { Person } from '@mui/icons-material'
 import { InputAdornment, TextField } from '@mui/material'
 import mailcheck from 'mailcheck'
 import type { RefObject } from 'react'
 import { useState } from 'react'
 import { useUpdateEffect } from 'react-use'
-import { theme } from '@shared/clients'
 
 const isEmailPatternOk = (email: string): boolean =>
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(

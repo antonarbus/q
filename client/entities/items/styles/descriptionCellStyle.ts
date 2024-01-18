@@ -1,5 +1,5 @@
+import { theme } from '@libras/theme'
 import { type SxProps } from '@mui/material'
-import { theme } from '@shared/clients'
 
 export const descriptionCellStyle: SxProps = {
   padding: theme.cell.padding,

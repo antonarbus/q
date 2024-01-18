@@ -1,5 +1,5 @@
+import { theme } from '@libras/theme'
 import { Box } from '@mui/material'
-import { theme } from '@shared/clients'
 
 type Props = {
   title: JSX.Element

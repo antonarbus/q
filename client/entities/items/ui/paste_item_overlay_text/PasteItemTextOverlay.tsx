@@ -1,5 +1,5 @@
+import { theme } from '@libras/theme'
 import type { ReactNode } from 'react'
-import { theme } from '@shared/clients'
 import { useIsPasteHere } from './useIsPasteHere'
 
 type Props = {

@@ -1,8 +1,8 @@
+import { theme } from '@libras/theme'
 import { motion } from 'framer-motion'
 import type { ComponentClass, ReactNode } from 'react'
 import type { SortableElementProps } from 'react-sortable-hoc'
 import { SortableElement } from 'react-sortable-hoc'
-import { theme } from '@shared/clients'
 
 type Props = {
   children: ReactNode

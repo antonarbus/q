@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
+import { theme } from '@libras/theme'
 import { Link } from 'react-router-dom'
-import { theme } from '@shared/clients'
 
 type Props = {
   to: string

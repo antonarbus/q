@@ -1,10 +1,11 @@
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
+import { theme } from '@libras/theme'
 import { gsap } from 'gsap'
 import { useRef } from 'react'
 import { RxCross2 } from 'react-icons/rx'
 import { copySlice } from '@entities/copy'
 import { itemsSlice, selectIsLastItem, useItem, saveItemsLocally } from '@entities/items'
-import { dispatch, getState, theme } from '@shared/clients'
+import { dispatch, getState } from '@shared/clients'
 import { generalSlice } from '@shared/general'
 import { useSelectorTyped } from '@shared/hooks'
 
