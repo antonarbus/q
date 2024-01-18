@@ -1,7 +1,7 @@
+import { type RootState } from '@libras/store'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
 import type { ItemsMediaQueryWidths } from '@widgets/nav'
-import type { RootState } from '@shared/types'
 import { setMenuItemPropValue } from './setMenuItemPropValue'
 import type { MenuItemTypes } from './TMenuItem'
 

@@ -1,6 +1,6 @@
+import { useSelectorTyped } from '@libras/store'
 import { useState } from 'react'
 import { useEffectOnce } from 'react-use'
-import { useSelectorTyped } from '@shared/hooks'
 
 type Props = {
   x: number

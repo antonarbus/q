@@ -1,8 +1,8 @@
+import { useSelectorTyped } from '@libras/store'
 import { Resizable } from 're-resizable'
 import type { ReactNode } from 'react'
 import { onColumnResize, onColumnResizeStart, onColumnResizeStop } from '@features/resize_column'
 import { selectColumnWidth, useItem } from '@entities/items'
-import { useSelectorTyped } from '@shared/hooks'
 import type { BoqColumnKey } from '@shared/types'
 
 type Props = {

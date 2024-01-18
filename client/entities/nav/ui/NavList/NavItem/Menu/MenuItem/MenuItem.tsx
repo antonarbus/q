@@ -1,7 +1,6 @@
-import { dispatch } from '@libras/store'
+import { dispatch, useSelectorTyped } from '@libras/store'
 import type { MouseEvent } from 'react'
 import { FaChevronRight } from 'react-icons/fa'
-import { useSelectorTyped } from '@shared/hooks'
 import { navSlice } from '../../../../../navSlice'
 import { type MenuItemTypes } from '../../../../../TMenuItem'
 import { Icon } from '../../Icon'

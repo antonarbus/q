@@ -1,5 +1,5 @@
+import { useSelectorTyped } from '@libras/store'
 import type { RefObject } from 'react'
-import { useSelectorTyped } from '@shared/hooks'
 import { selectMenuItemByIdsChainSelector } from '../../../../navSlice'
 import { MenuItem } from './MenuItem'
 

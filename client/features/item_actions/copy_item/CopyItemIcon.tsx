@@ -1,4 +1,4 @@
-import { dispatch, getState } from '@libras/store'
+import { dispatch, getState, useSelectorTyped } from '@libras/store'
 import { motion } from 'framer-motion'
 import type { MouseEvent } from 'react'
 import { MdCopyAll } from 'react-icons/md'
@@ -6,7 +6,6 @@ import { copySlice } from '@entities/copy'
 import { itemsSlice, saveItemHeightByIndex, useItem } from '@entities/items'
 import { className } from '@shared/className'
 import { generalSlice } from '@shared/general'
-import { useSelectorTyped } from '@shared/hooks'
 import { cleanHtml } from '@shared/lib/itemsUtils'
 
 export const CopyItemIcon = (): JSX.Element => {

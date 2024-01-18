@@ -1,4 +1,4 @@
-import { dispatch, getState } from '@libras/store'
+import { dispatch, getState, useSelectorTyped } from '@libras/store'
 import { theme } from '@libras/theme'
 import { motion } from 'framer-motion'
 import type { MouseEvent } from 'react'
@@ -7,7 +7,6 @@ import { copySlice } from '@entities/copy'
 import { itemsSlice, saveItemHeightByIndex, selectIsLastItem, useItem, saveItemsLocally } from '@entities/items'
 import { className } from '@shared/className'
 import { generalSlice } from '@shared/general'
-import { useSelectorTyped } from '@shared/hooks'
 import { cleanHtml } from '@shared/lib/itemsUtils'
 
 export const CutItemIcon = (): JSX.Element => {

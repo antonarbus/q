@@ -1,10 +1,10 @@
-import { dispatch } from '@libras/store'
+import { dispatch, useSelectorTyped } from '@libras/store'
 import { theme } from '@libras/theme'
 import { useAnimationControls, type AnimationControls } from 'framer-motion'
 import { useEffect } from 'react'
 import { useFirstMountState } from 'react-use'
 import { copySlice } from '@entities/copy'
-import { useSelectorTyped } from '@shared/hooks'
+import { containerPadding, containerWidth } from './const'
 
 export const useCopyContainerAnimation = (): AnimationControls => {
   const copyContainerAnimationControls = useAnimationControls()

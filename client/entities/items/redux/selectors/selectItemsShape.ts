@@ -1,5 +1,6 @@
+import { type RootState } from '@libras/store'
 import { createSelector } from '@reduxjs/toolkit'
-import type { Item, RootState } from '@shared/types'
+import type { Item } from '@shared/types'
 
 export const selectItemsShape = createSelector(
   [(state: RootState): Item[] => state.items],

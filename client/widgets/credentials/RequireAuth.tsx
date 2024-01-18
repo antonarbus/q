@@ -1,5 +1,5 @@
+import { useSelectorTyped } from '@libras/store'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
-import { useSelectorTyped } from '@shared/hooks'
 
 type Props = {
   allowedRoles: string[]

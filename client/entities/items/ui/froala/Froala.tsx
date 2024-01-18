@@ -1,7 +1,7 @@
+import { useSelectorTyped } from '@libras/store'
 import type { SxProps } from '@mui/material'
 import type FroalaEditor from 'froala-editor'
 import { useRef, type MutableRefObject } from 'react'
-import { useSelectorTyped } from '@shared/hooks'
 import { FroalaProvider } from '../../providers/FroalaProvider'
 import { useItem } from '../../providers/ItemProvider'
 import { EditableHtml } from './EditableHtml'

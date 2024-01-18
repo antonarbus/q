@@ -1,6 +1,6 @@
+import { useSelectorTyped } from '@libras/store'
 import { type SxProps } from '@mui/material'
 import { type CSSProperties } from 'react'
-import { useSelectorTyped } from '@shared/hooks'
 import { type BoqColumnKey } from '@shared/types'
 import { selectColumnWidth } from '../redux/selectors/selectColumnWidth'
 

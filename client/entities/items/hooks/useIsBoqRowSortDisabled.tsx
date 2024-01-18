@@ -1,4 +1,4 @@
-import { useSelectorTyped } from '@shared/hooks'
+import { useSelectorTyped } from '@libras/store'
 import { useItem } from '../providers/ItemProvider'
 import { selectIsLastBoqRow } from '../redux/selectors/selectIsLastBoqRow'
 

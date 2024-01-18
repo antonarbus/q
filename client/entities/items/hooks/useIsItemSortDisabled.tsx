@@ -1,4 +1,4 @@
-import { useSelectorTyped } from '@shared/hooks'
+import { useSelectorTyped } from '@libras/store'
 import { selectIsLastItem } from '../redux/selectors/selectIsLastItem'
 
 export const useIsItemSortDisabled = (): boolean => {
