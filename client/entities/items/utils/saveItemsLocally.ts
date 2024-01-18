@@ -1,8 +1,8 @@
-import { tellItemsSavedLocally } from '@entities/bottom_msg'
-import { itemsSlice } from '@entities/items'
+import { tellItemsSavedLocally } from '@entities/bottom_msg' // todo: not good
 import { dispatch, getState } from '@shared/clients'
 import { saveItemsIntoLocalStorage } from '@shared/lib/saveItemsIntoLocalStorage'
 import type { Item } from '@shared/types'
+import { itemsSlice } from '../redux/itemsSlice'
 
 type Props = {
   items?: Item[]

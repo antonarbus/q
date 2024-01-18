@@ -1,5 +1,6 @@
-import { selectIsLastBoqRow, useItem } from '@entities/items'
 import { useSelectorTyped } from '@shared/hooks'
+import { useItem } from '../providers/ItemProvider'
+import { selectIsLastBoqRow } from '../redux/selectors/selectIsLastBoqRow'
 
 export const useIsBoqRowSortDisabled = (): boolean => {
   const { itemIndex } = useItem()

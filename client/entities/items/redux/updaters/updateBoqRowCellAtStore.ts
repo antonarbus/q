@@ -1,7 +1,8 @@
-import { getBoqRowFromStore, itemsSlice } from '@entities/items'
 import { dispatch } from '@shared/clients'
 import { getNumberFromString, getTextContentFromHtml } from '@shared/lib'
 import type { BoqColumnKey } from '@shared/types'
+import { getBoqRowFromStore } from '../getters/getBoqRowFromStore'
+import { itemsSlice } from '../itemsSlice'
 
 type Props = {
   html: string
