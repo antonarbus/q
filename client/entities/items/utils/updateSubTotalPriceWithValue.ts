@@ -1,7 +1,9 @@
 import type FroalaEditor from 'froala-editor'
-import { getBoqItemFromStore, getBoqRowsFromStore, itemsSlice } from '@entities/items'
 import { dispatch } from '@shared/clients'
 import { getNumberFromString, getTextContentFromHtml, getStringWithNewFormattedNumber, updateNumberAtHtmlIncrementally, updateNumberAtHtml } from '@shared/lib'
+import { getBoqItemFromStore } from '../redux/getters/getBoqItemFromStore'
+import { getBoqRowsFromStore } from '../redux/getters/getBoqRowsFromStore'
+import { itemsSlice } from '../redux/itemsSlice'
 
 type Props = {
   itemIndex: number
