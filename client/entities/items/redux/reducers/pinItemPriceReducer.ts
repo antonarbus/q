@@ -1,8 +1,8 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { type Item } from '@shared/types'
 import { getBoqCellFromStore } from '../getters/getBoqCellFromStore'
-import type { ItemsState } from '../itemsSlice'
 
-export const pinItemPriceReducer = (state: ItemsState, action: PayloadAction<{
+export const pinItemPriceReducer = (state: Item[], action: PayloadAction<{
   itemIndex: number
   rowIndex: number
 }>): void => {

@@ -1,7 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { BoqRow, BoqRowCell, CopyPlace } from '@shared/types'
+import type { BoqRow, BoqRowCell, CopyPlace, Item } from '@shared/types'
 import { getBoqItemFromStore } from '../getters/getBoqItemFromStore'
-import type { ItemsState } from '../itemsSlice'
 
 const defaultCellValues: BoqRowCell = {
   html: '',
@@ -25,7 +24,7 @@ const pasteText: BoqRow = {
 
 }
 
-type Type = (state: ItemsState, action: PayloadAction<CopyPlace>) => ItemsState
+type Type = (state: Item[], action: PayloadAction<CopyPlace>) => Item[]
 
 export const insertPasteBoqRowReducer: Type = (state, action) => {
   const { pastePos, itemId } = action.payload

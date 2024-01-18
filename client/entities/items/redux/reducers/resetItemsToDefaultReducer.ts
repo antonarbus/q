@@ -1,6 +1,6 @@
+import { type Item } from '@shared/types'
 import { defaultItems } from '../../model/defaultItems'
-import type { ItemsState } from '../itemsSlice'
 
-export const resetItemsToDefaultReducer = (): ItemsState => {
+export const resetItemsToDefaultReducer = (): Item[] => {
   return defaultItems
 }

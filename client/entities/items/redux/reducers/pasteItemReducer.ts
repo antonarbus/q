@@ -1,7 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { nanoid } from 'nanoid'
-import type { CopyableItem, PastePos } from '@shared/types'
-import type { ItemsState } from '../itemsSlice'
+import type { CopyableItem, PastePos, Item } from '@shared/types'
 
 type Payload = {
   itemId: string
@@ -9,7 +8,7 @@ type Payload = {
   item: CopyableItem
 }
 
-type Reducer = (state: ItemsState, action: PayloadAction<Payload>) => ItemsState
+type Reducer = (state: Item[], action: PayloadAction<Payload>) => Item[]
 
 export const pasteItemReducer: Reducer = (state, action) => {
   const { itemId, pastePos, item } = action.payload

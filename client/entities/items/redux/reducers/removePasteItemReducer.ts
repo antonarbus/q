@@ -1,6 +1,6 @@
-import type { ItemsState } from '../itemsSlice'
+import { type Item } from '@shared/types'
 
-export const removePasteItemReducer = (state: ItemsState): void => {
+export const removePasteItemReducer = (state: Item[]): void => {
   const pasteItemIndex = state.findIndex((item) => item.type === 'paste')
   if (pasteItemIndex >= 0) {
     state.splice(pasteItemIndex, 1)
