@@ -1,4 +1,4 @@
-import { dispatch } from '@libras/store'
+import { dispatch } from '@lib_instances/store'
 import type FroalaEditor from 'froala-editor'
 import { type MutableRefObject } from 'react'
 import { getNumberFromString, getTextContentFromHtml } from '@shared/lib'

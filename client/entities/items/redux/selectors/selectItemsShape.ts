@@ -1,4 +1,4 @@
-import { type RootState } from '@libras/store'
+import { type RootState } from '@lib_instances/store'
 import { createSelector } from '@reduxjs/toolkit'
 import type { Item } from '@shared/types'
 

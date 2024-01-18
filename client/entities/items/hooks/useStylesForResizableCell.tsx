@@ -1,4 +1,4 @@
-import { useSelectorTyped } from '@libras/store'
+import { useSelectorTyped } from '@lib_instances/store'
 import { type SxProps } from '@mui/material'
 import { type CSSProperties } from 'react'
 import { type BoqColumnKey } from '@shared/types'

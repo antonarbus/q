@@ -1,4 +1,4 @@
-import { type RootState } from '@libras/store'
+import { type RootState } from '@lib_instances/store'
 import type { BoqColumnKey } from '@shared/types'
 import { getBoqItemFromStore } from '../getters/getBoqItemFromStore'
 

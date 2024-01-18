@@ -1,4 +1,4 @@
-import { theme } from '@libras/theme'
+import { theme } from '@lib_instances/theme'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'

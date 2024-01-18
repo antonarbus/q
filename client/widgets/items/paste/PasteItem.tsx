@@ -1,5 +1,5 @@
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
-import { theme } from '@libras/theme'
+import { theme } from '@lib_instances/theme'
 import { motion } from 'framer-motion'
 
 export const PasteItem = (): EmotionJSX.Element => (

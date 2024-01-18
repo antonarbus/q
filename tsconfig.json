@@ -33,7 +33,7 @@
       "@features/*": ["./client/features/*"],
       "@entities/*": ["./client/entities/*"],
       "@shared/*": ["./client/shared/*"],
-      "@libras/*": ["./client/libras/*"],
+      "@lib_instances/*": ["client/lib_instances/*"],
     },
     "types": [
       "vite/client",

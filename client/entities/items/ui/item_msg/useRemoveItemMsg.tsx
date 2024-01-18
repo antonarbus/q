@@ -1,4 +1,4 @@
-import { dispatch, useSelectorTyped } from '@libras/store'
+import { dispatch, useSelectorTyped } from '@lib_instances/store'
 import { useUpdateEffect } from 'react-use'
 import { useItem } from '../../providers/ItemProvider'
 import { itemsSlice } from '../../redux/itemsSlice'

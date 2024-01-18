@@ -1,4 +1,4 @@
-import { dispatch } from '@libras/store'
+import { dispatch } from '@lib_instances/store'
 import { type MutableRefObject } from 'react'
 import { itemsSlice } from '@entities/items'
 import { className } from '@shared/className'

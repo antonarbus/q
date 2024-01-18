@@ -1,4 +1,4 @@
-import { dispatch } from '@libras/store'
+import { dispatch } from '@lib_instances/store'
 import { className } from '@shared/className'
 import { itemsSlice } from '../redux/itemsSlice'
 

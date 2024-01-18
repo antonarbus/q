@@ -1,4 +1,4 @@
-import { getState } from '@libras/store'
+import { getState } from '@lib_instances/store'
 import type { BoqHeaderCell, BoqHeaderKey } from '@shared/types'
 
 type Props = {

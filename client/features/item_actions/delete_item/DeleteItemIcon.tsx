@@ -1,6 +1,6 @@
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
-import { dispatch, getState, useSelectorTyped } from '@libras/store'
-import { theme } from '@libras/theme'
+import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
+import { theme } from '@lib_instances/theme'
 import { gsap } from 'gsap'
 import { useRef } from 'react'
 import { RxCross2 } from 'react-icons/rx'

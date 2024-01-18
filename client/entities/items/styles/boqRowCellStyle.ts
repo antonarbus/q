@@ -1,4 +1,4 @@
-import { theme } from '@libras/theme'
+import { theme } from '@lib_instances/theme'
 import { type SxProps } from '@mui/material'
 
 export const boqRowCellStyle: SxProps = {

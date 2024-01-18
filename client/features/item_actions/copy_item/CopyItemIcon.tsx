@@ -1,4 +1,4 @@
-import { dispatch, getState, useSelectorTyped } from '@libras/store'
+import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
 import { motion } from 'framer-motion'
 import type { MouseEvent } from 'react'
 import { MdCopyAll } from 'react-icons/md'

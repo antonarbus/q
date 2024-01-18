@@ -1,4 +1,4 @@
-import { theme } from '@libras/theme'
+import { theme } from '@lib_instances/theme'
 import PasswordRoundedIcon from '@mui/icons-material/PasswordRounded'
 import { Avatar } from '@mui/material'
 import type { FormEvent } from 'react'

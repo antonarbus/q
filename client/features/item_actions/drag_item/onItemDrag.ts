@@ -1,4 +1,4 @@
-import { dispatch, getState } from '@libras/store'
+import { dispatch, getState } from '@lib_instances/store'
 import { arrayMoveImmutable } from 'array-move'
 import { itemsSlice, saveItemsLocally } from '@entities/items'
 import { generalSlice } from '@shared/general'

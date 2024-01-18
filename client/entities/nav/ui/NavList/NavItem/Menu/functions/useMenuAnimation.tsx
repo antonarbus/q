@@ -1,5 +1,5 @@
-import { dispatch } from '@libras/store'
-import { theme } from '@libras/theme'
+import { dispatch } from '@lib_instances/store'
+import { theme } from '@lib_instances/theme'
 import { gsap } from 'gsap'
 import type { RefObject } from 'react'
 import { useEffect } from 'react'

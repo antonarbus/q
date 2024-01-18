@@ -1,4 +1,4 @@
-import { dispatch, getState } from '@libras/store'
+import { dispatch, getState } from '@lib_instances/store'
 import isEqual from 'lodash.isequal'
 import { copySlice, getPastePlace } from '@entities/copy'
 import { itemsSlice } from '@entities/items'

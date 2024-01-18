@@ -1,4 +1,4 @@
-import { useSelectorTyped } from '@libras/store'
+import { useSelectorTyped } from '@lib_instances/store'
 import type { RefObject } from 'react'
 import { Link } from 'react-router-dom'
 

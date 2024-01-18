@@ -1,4 +1,4 @@
-import { dispatch } from '@libras/store'
+import { dispatch } from '@lib_instances/store'
 import { itemsSlice } from '@entities/items'
 
 type Props = {

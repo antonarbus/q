@@ -1,4 +1,4 @@
-import { useSelectorTyped } from '@libras/store'
+import { useSelectorTyped } from '@lib_instances/store'
 import { AnimatePresence } from 'framer-motion'
 import { nanoid } from 'nanoid'
 import { onBoqRowDrag } from '@features/boq_row_actions/drag_boq_row'

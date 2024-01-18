@@ -1,4 +1,4 @@
-import { dispatch } from '@libras/store'
+import { dispatch } from '@lib_instances/store'
 import { navSlice } from '@entities/nav'
 
 export const navUpdate = {

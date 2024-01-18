@@ -1,4 +1,4 @@
-import { useSelectorTyped } from '@libras/store'
+import { useSelectorTyped } from '@lib_instances/store'
 import { AnimatePresence } from 'framer-motion'
 import { onItemDrag } from '@features/item_actions/drag_item'
 import { ItemProvider, itemsShapeEqualityFn, BoqItemProvider } from '@entities/items'

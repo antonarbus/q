@@ -1,4 +1,4 @@
-import { theme } from '@libras/theme'
+import { theme } from '@lib_instances/theme'
 import { LockOutlined } from '@mui/icons-material'
 import { Avatar } from '@mui/material'
 import type { FormEvent, MouseEvent } from 'react'

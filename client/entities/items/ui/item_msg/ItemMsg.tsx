@@ -1,4 +1,4 @@
-import { useSelectorTyped } from '@libras/store'
+import { useSelectorTyped } from '@lib_instances/store'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useItem } from '../../providers/ItemProvider'
 import { useRemoveItemMsgAfterSomeTime } from './useRemoveItemMsg'

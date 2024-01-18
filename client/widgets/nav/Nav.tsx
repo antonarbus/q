@@ -1,5 +1,5 @@
-import { dispatch, useSelectorTyped } from '@libras/store'
-import { theme } from '@libras/theme'
+import { dispatch, useSelectorTyped } from '@lib_instances/store'
+import { theme } from '@lib_instances/theme'
 import { useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 import { navSlice, useMediaQueryValues, useMenuItemActionShortcuts, Logo, NavList } from '@entities/nav'

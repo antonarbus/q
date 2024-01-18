@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
-import { getState, useSelectorTyped } from '@libras/store'
-import { theme } from '@libras/theme'
+import { getState, useSelectorTyped } from '@lib_instances/store'
+import { theme } from '@lib_instances/theme'
 import type { MouseEvent, MutableRefObject } from 'react'
 import { useRef } from 'react'
 import { TiArrowSortedDown } from 'react-icons/ti'

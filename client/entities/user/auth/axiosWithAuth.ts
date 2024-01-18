@@ -1,5 +1,5 @@
-import { dispatch } from '@libras/store'
 import axios from 'axios'
+import { dispatch } from '@lib_instances/store'
 import { apiUrl } from 'server/apiUrls'
 import { userSlice } from '../userSlice'
 import { token } from './token'

@@ -1,5 +1,5 @@
-import { dispatch, useSelectorTyped } from '@libras/store'
-import { theme } from '@libras/theme'
+import { dispatch, useSelectorTyped } from '@lib_instances/store'
+import { theme } from '@lib_instances/theme'
 import type { MouseEvent } from 'react'
 import { FaChevronLeft } from 'react-icons/fa'
 import { navSlice } from '../../../../../navSlice'

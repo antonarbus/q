@@ -1,4 +1,4 @@
-import { useSelectorTyped } from '@libras/store'
+import { useSelectorTyped } from '@lib_instances/store'
 import { CopyContainer } from './CopyContainer'
 
 export const Copy = (): JSX.Element | null => {

@@ -1,4 +1,4 @@
-import { dispatch } from '@libras/store'
+import { dispatch } from '@lib_instances/store'
 import type { Dispatch, FormEvent, SetStateAction } from 'react'
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'

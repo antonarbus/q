@@ -1,4 +1,4 @@
-import { dispatch } from '@libras/store'
+import { dispatch } from '@lib_instances/store'
 import type { LogoutApiRes } from 'server/api/logoutRouter'
 import { apiUrl } from 'server/apiUrls'
 import { token, userSlice } from '@entities/user'

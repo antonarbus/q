@@ -1,4 +1,4 @@
-import { dispatch } from '@libras/store'
+import { dispatch } from '@lib_instances/store'
 import { itemsSlice, saveItemsLocally } from '@entities/items'
 import { className } from '@shared/className'
 import { type BoqColumnKey } from '@shared/types'
