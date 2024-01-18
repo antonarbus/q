@@ -1,7 +1,7 @@
 import type { MouseEvent, MutableRefObject } from 'react'
-import type { MenuItemTypes } from '@entities/nav'
-import { navSlice } from '@entities/nav'
 import { dispatch, getState } from '@shared/clients'
+import { navSlice } from '../../../navSlice'
+import type { MenuItemTypes } from '../../../TMenuItem'
 
 type Props = {
   e: MouseEvent

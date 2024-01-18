@@ -1,5 +1,5 @@
-import type { MenuItemTypes } from '@entities/nav'
-import { navStructure } from '../../../../navStructure'
+import { getState } from '@shared/clients'
+import type { MenuItemTypes } from '../../../../../TMenuItem'
 
 /**
  * returns clicked menu object from navStructure
@@ -12,6 +12,7 @@ import { navStructure } from '../../../../navStructure'
  */
 
 export const getMenuItemByIdsChain = (idsToCurrentMenuItems: string[]): MenuItemTypes[] => {
+  const navStructure = getState().nav.navStructure
   let clicked: MenuItemTypes[] = navStructure
   let tempMenu: MenuItemTypes[] = navStructure
   idsToCurrentMenuItems.forEach((id: string) => {
