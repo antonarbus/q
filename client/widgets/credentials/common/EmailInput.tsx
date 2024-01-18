@@ -1,6 +1,6 @@
+import { theme } from '@lib_instances/theme'
 import { Person } from '@mui/icons-material'
 import { InputAdornment, TextField } from '@mui/material'
-import { theme } from '@lib_instances/theme'
 import mailcheck from 'mailcheck'
 import type { RefObject } from 'react'
 import { useState } from 'react'

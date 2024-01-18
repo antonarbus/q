@@ -1,5 +1,5 @@
-import type { SxProps } from '@mui/material'
 import { useSelectorTyped } from '@lib_instances/store'
+import type { SxProps } from '@mui/material'
 import type FroalaEditor from 'froala-editor'
 import { useRef, type MutableRefObject } from 'react'
 import { FroalaProvider } from '../../providers/FroalaProvider'
