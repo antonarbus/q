@@ -8,7 +8,7 @@ import { IoDocumentOutline, IoDocumentsOutline, IoSaveOutline, IoShareOutline } 
 import { logout } from '@features/log_out'
 import { resetItems } from '@features/reset_items'
 import type { MenuItemTypes } from '@entities/nav'
-import logo from './img/logo.svg'
+import logo from './logo.svg'
 
 const reactIcon = createElement(IoShareOutline, {})
 

@@ -1,18 +1,21 @@
 import { useRef } from 'react'
-import { theme } from '@shared/clients'
+import { useEffectOnce } from 'react-use'
+import { navSlice, useMediaQueryValues, useMenuItemActionShortcuts, Logo, NavList } from '@entities/nav'
+import { dispatch, theme } from '@shared/clients'
 import { useSelectorTyped } from '@shared/hooks'
-import { useMediaQueryValues } from './functions/useMediaQueryValues'
-import { useMenuItemActionShortcuts } from './functions/useMenuItemActionShortcuts'
-import { Logo } from './Logo'
-import { NavList } from './NavList'
+import { navStructure } from './navStructure'
 
 export const Nav = (): JSX.Element => {
   const navRef = useRef<HTMLDivElement>(null)
   const logoRef = useRef<HTMLDivElement>(null)
   const mediaQueryWidth = useSelectorTyped(state => state.nav.mediaQueryWidth)
   const mediaEnabled = useSelectorTyped(state => state.nav.mediaEnabled)
-  useMenuItemActionShortcuts()
+  useMenuItemActionShortcuts({ navStructure })
   useMediaQueryValues({ navRef, logoRef })
+
+  useEffectOnce(() => {
+    dispatch(navSlice.actions.addNavStructure({ navStructure }))
+  })
 
   return (
     <nav

@@ -1,9 +1,9 @@
 import type { RefObject } from 'react'
 import { useLayoutEffect } from 'react'
 import { useFirstMountState } from 'react-use'
-import { navSlice } from '@entities/nav'
 import { dispatch } from '@shared/clients'
 import { useSelectorTyped } from '@shared/hooks'
+import { navSlice } from '../../navSlice'
 import { calcNavMediaQueryParams } from './calcNavMediaQueryParams'
 
 type Props = {

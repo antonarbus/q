@@ -1,6 +1,6 @@
 import type { RefObject } from 'react'
-import { selectMenuItemByIdsChainSelector } from '@entities/nav'
 import { useSelectorTyped } from '@shared/hooks'
+import { selectMenuItemByIdsChainSelector } from '../../../../navSlice'
 import { MenuItem } from './MenuItem'
 
 type Props = {

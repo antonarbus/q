@@ -1,6 +1,6 @@
 import { useEffectOnce, useUnmount } from 'react-use'
-import { navSlice } from '@entities/nav'
 import { dispatch } from '@shared/clients'
+import { navSlice } from './navSlice'
 
 export const useDisableNavItems = (): void => {
   useEffectOnce(() => {

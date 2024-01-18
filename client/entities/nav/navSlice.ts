@@ -2,12 +2,11 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
 import type { ItemsMediaQueryWidths } from '@widgets/nav'
 import type { RootState } from '@shared/types'
-import { navStructure } from '../../widgets/nav/navStructure'
 import { setMenuItemPropValue } from './setMenuItemPropValue'
 import type { MenuItemTypes } from './TMenuItem'
 
 const initialState = {
-  navStructure,
+  navStructure: [] as MenuItemTypes[],
   burger: { isOpen: false },
   mediaEnabled: true,
   mediaQueryWidth: {
@@ -27,6 +26,12 @@ export const navSlice = createSlice({
   name: 'nav',
   initialState,
   reducers: {
+    addNavStructure: (state, action: PayloadAction<{
+      navStructure: MenuItemTypes[]
+    }>) => {
+      const { navStructure } = action.payload
+      state.navStructure = navStructure
+    },
     closeBurger: (state) => {
       state.burger.isOpen = false
     },
@@ -139,14 +144,14 @@ export const navSlice = createSlice({
 export const selectMenuItemByIdsChainSelector =
   (idsToCurrentMenuItems: string[]) => (state: RootState): MenuItemTypes[] => {
     const topLevelNavMenu = state.nav.navStructure[0]
-    if (!topLevelNavMenu) return navStructure
+    if (!topLevelNavMenu) return state.nav.navStructure
 
-    let clicked: MenuItemTypes[] = navStructure
-    let tempMenu: MenuItemTypes[] = navStructure
+    let clicked: MenuItemTypes[] = state.nav.navStructure
+    let tempMenu: MenuItemTypes[] = state.nav.navStructure
 
     idsToCurrentMenuItems.forEach((id: string) => {
       if (id === 'burger') {
-        clicked = topLevelNavMenu.menuItems ?? navStructure
+        clicked = topLevelNavMenu.menuItems ?? state.nav.navStructure
         return clicked
       }
       if (id !== 'burger') {

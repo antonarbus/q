@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { navSlice } from '@entities/nav'
 import { dispatch, getState } from '@shared/clients'
+import { navSlice } from '../../../../../navSlice'
 import { getMenuItemByIdsChain } from './getMenuItemByIdsChain'
 import { navigateInMenu } from './useMenuAnimation'
 
