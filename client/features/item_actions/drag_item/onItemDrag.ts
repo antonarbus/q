@@ -1,6 +1,6 @@
+import { dispatch, getState } from '@libras/store'
 import { arrayMoveImmutable } from 'array-move'
 import { itemsSlice, saveItemsLocally } from '@entities/items'
-import { dispatch, getState } from '@shared/clients'
 import { generalSlice } from '@shared/general'
 
 type Props = {

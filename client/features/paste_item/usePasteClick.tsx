@@ -1,8 +1,8 @@
+import { dispatch, getState } from '@libras/store'
 import { theme } from '@libras/theme'
 import { useEffectOnce, useUnmount } from 'react-use'
 import { copySlice } from '@entities/copy'
 import { itemsSlice, saveItemsLocally } from '@entities/items'
-import { dispatch, getState } from '@shared/clients'
 import { generalSlice } from '@shared/general'
 
 const pasteItemOnClick = (): void => {

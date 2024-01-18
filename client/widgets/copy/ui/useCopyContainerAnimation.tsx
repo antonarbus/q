@@ -1,9 +1,9 @@
+import { dispatch } from '@libras/store'
 import { theme } from '@libras/theme'
 import { useAnimationControls, type AnimationControls } from 'framer-motion'
 import { useEffect } from 'react'
 import { useFirstMountState } from 'react-use'
 import { copySlice } from '@entities/copy'
-import { dispatch } from '@shared/clients'
 import { useSelectorTyped } from '@shared/hooks'
 import { containerPadding, containerWidth } from './CopyContainer'
 

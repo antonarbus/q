@@ -1,5 +1,5 @@
+import { dispatch, getState } from '@libras/store'
 import type { MouseEvent, MutableRefObject } from 'react'
-import { dispatch, getState } from '@shared/clients'
 import { navSlice } from '../../../navSlice'
 import type { MenuItemTypes } from '../../../TMenuItem'
 

@@ -1,4 +1,4 @@
-import { getState } from '@shared/clients'
+import { getState } from '@libras/store'
 import type { MenuItemTypes } from '../../../../../TMenuItem'
 
 /**

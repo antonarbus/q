@@ -1,7 +1,7 @@
+import { dispatch } from '@libras/store'
 import type FroalaEditor from 'froala-editor'
 import { type MutableRefObject } from 'react'
 import { roundTo } from 'round-to'
-import { dispatch } from '@shared/clients'
 import { getStringWithNewFormattedNumber } from '@shared/lib'
 import { type BoqColumnKey } from '@shared/types'
 import { getBoqRowFromStore } from '../redux/getters/getBoqRowFromStore'

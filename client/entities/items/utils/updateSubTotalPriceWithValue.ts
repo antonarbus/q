@@ -1,5 +1,5 @@
+import { dispatch } from '@libras/store'
 import type FroalaEditor from 'froala-editor'
-import { dispatch } from '@shared/clients'
 import { getNumberFromString, getTextContentFromHtml, getStringWithNewFormattedNumber, updateNumberAtHtmlIncrementally, updateNumberAtHtml } from '@shared/lib'
 import { getBoqItemFromStore } from '../redux/getters/getBoqItemFromStore'
 import { getBoqRowsFromStore } from '../redux/getters/getBoqRowsFromStore'

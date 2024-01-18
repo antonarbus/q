@@ -1,7 +1,7 @@
+import { dispatch, getState } from '@libras/store'
 import type FroalaEditor from 'froala-editor'
 import { type MutableRefObject } from 'react'
 import { itemsSlice, saveItemsLocally } from '@entities/items'
-import { dispatch, getState } from '@shared/clients'
 
 type Props = {
   editorRef: MutableRefObject<FroalaEditor | null>

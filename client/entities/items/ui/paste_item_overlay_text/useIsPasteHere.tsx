@@ -1,4 +1,4 @@
-import { getState } from '@shared/clients'
+import { getState } from '@libras/store'
 import { useSelectorTyped } from '@shared/hooks'
 import { useItem } from '../../providers/ItemProvider'
 

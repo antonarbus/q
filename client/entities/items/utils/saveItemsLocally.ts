@@ -1,4 +1,4 @@
-import { dispatch, getState } from '@shared/clients'
+import { dispatch, getState } from '@libras/store'
 import { tellItemsSavedLocally } from '@shared/general'
 import type { Item } from '@shared/types'
 import { itemsSlice } from '../redux/itemsSlice'

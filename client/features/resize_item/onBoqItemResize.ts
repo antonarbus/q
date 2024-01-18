@@ -1,5 +1,5 @@
+import { dispatch, getState } from '@libras/store'
 import { itemsSlice, saveItemsLocally } from '@entities/items'
-import { dispatch, getState } from '@shared/clients'
 import type { BoqItem, OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
 
 // can be global var for different boqItems as we can change width of one item at a time

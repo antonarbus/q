@@ -1,6 +1,6 @@
+import { dispatch } from '@libras/store'
 import { arrayMoveImmutable } from 'array-move'
 import { getBoqRowsFromStore, itemsSlice, saveItemsLocally } from '@entities/items'
-import { dispatch } from '@shared/clients'
 
 type Props = {
   oldIndex: number

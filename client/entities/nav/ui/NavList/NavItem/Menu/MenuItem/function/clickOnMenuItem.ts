@@ -1,5 +1,5 @@
+import { dispatch, getState } from '@libras/store'
 import type { MouseEvent } from 'react'
-import { dispatch, getState } from '@shared/clients'
 import { navSlice } from '../../../../../../navSlice'
 import { getMenuItemByIdsChain } from '../../functions/getMenuItemByIdsChain'
 import { navigateInMenu } from '../../functions/useMenuAnimation'

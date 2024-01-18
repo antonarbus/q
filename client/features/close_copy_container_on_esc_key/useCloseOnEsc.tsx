@@ -1,7 +1,7 @@
+import { dispatch } from '@libras/store'
 import { useEffectOnce } from 'react-use'
 import { copySlice } from '@entities/copy'
 import { itemsSlice } from '@entities/items'
-import { dispatch } from '@shared/clients'
 import { generalSlice } from '@shared/general'
 
 export const useExitCopyOnEsc = (): void => {

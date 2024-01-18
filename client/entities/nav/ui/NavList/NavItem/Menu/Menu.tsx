@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
+import { dispatch } from '@libras/store'
 import { theme } from '@libras/theme'
 import { useRef } from 'react'
-import { dispatch } from '@shared/clients'
 import { useSelectorTyped } from '@shared/hooks'
 import { navSlice } from '../../../../navSlice'
 import { useCloseMenuOnClickOutside } from './functions/useCloseMenuOnClickOutside'

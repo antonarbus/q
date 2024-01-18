@@ -1,5 +1,5 @@
+import { dispatch, getState } from '@libras/store'
 import { itemsSlice, saveItemsLocally } from '@entities/items'
-import { dispatch, getState } from '@shared/clients'
 import type { OnItemResizeStart, OnItemResizeStop } from '@shared/types'
 
 export const onTextItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, elementRef }) => {

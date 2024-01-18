@@ -1,3 +1,4 @@
+import { dispatch } from '@libras/store'
 import axios from 'axios'
 import { jwtDecode } from 'jwt-decode'
 import { useState } from 'react'
@@ -7,7 +8,6 @@ import { apiUrl } from 'server/apiUrls'
 import type { JwtPayloadExtended } from 'server/services/jwt'
 import { navUpdate } from '@features/log_out'
 import { userSlice, token } from '@entities/user'
-import { dispatch } from '@shared/clients'
 import { tokenExpirationMinutes } from './tokenExpirationMinutes'
 
 type Props = {
