@@ -1,10 +1,9 @@
 import { getState } from '@libras/store'
-import { type BoqItem } from '@shared/types'
-import { type ItemsState } from '../itemsSlice'
+import { type Item, type BoqItem } from '@shared/types'
 
 type Props = {
   itemIndex: number
-  state?: ItemsState
+  state?: Item[]
 }
 
 export const getBoqItemFromStore = ({

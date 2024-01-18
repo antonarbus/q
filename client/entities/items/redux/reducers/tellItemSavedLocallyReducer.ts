@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { ItemsState } from '../itemsSlice'
+import { type Item } from '@shared/types'
 
-export const tellItemSavedLocallyReducer = (state: ItemsState, action: PayloadAction<{ itemIndex: number }>): void => {
+export const tellItemSavedLocallyReducer = (state: Item[], action: PayloadAction<{ itemIndex: number }>): void => {
   const { itemIndex } = action.payload
   const item = state[itemIndex]
   if (!item) return

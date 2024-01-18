@@ -1,8 +1,8 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { type Item } from '@shared/types'
 import { getBoqItemFromStore } from '../getters/getBoqItemFromStore'
-import type { ItemsState } from '../itemsSlice'
 
-export const deleteBoqRowReducer = (state: ItemsState, action: PayloadAction<{ itemIndex: number, rowIndex: number }>): ItemsState => {
+export const deleteBoqRowReducer = (state: Item[], action: PayloadAction<{ itemIndex: number, rowIndex: number }>): Item[] => {
   const { itemIndex, rowIndex } = action.payload
   const boqItem = getBoqItemFromStore({ itemIndex, state })
   if (boqItem === undefined) return state

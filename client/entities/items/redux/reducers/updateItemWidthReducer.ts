@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { ItemsState } from '../itemsSlice'
+import { type Item } from '@shared/types'
 
-export const updateItemWidthReducer = (state: ItemsState, action: PayloadAction<{
+export const updateItemWidthReducer = (state: Item[], action: PayloadAction<{
   itemIndex: number
   width: number
 }>): void => {

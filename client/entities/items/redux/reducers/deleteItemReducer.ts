@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { ItemsState } from '../itemsSlice'
+import { type Item } from '@shared/types'
 
-export const deleteItemReducer = (state: ItemsState, action: PayloadAction<{ itemId: string }>): ItemsState => {
+export const deleteItemReducer = (state: Item[], action: PayloadAction<{ itemId: string }>): Item[] => {
   const { itemId } = action.payload
   const itemsWithoutDeletedOne = state.filter(item => item.id !== itemId)
   return itemsWithoutDeletedOne

@@ -1,8 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { CopyPlace, PasteItem } from '@shared/types'
-import type { ItemsState } from '../itemsSlice'
+import type { CopyPlace, PasteItem, Item } from '@shared/types'
 
-export const insertPasteItemReducer = (state: ItemsState, action: PayloadAction<CopyPlace>): ItemsState => {
+export const insertPasteItemReducer = (state: Item[], action: PayloadAction<CopyPlace>): Item[] => {
   const { pastePos, itemId } = action.payload
   const itemsWithoutPasteText = state.filter((item) => item.type !== 'paste')
   if (pastePos === 'middle') return itemsWithoutPasteText

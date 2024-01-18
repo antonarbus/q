@@ -1,12 +1,11 @@
-import { type BoqColumnKey, type BoqRowCell } from '@shared/types'
-import { type ItemsState } from '../itemsSlice'
+import { type Item, type BoqColumnKey, type BoqRowCell } from '@shared/types'
 import { getBoqRowFromStore } from './getBoqRowFromStore'
 
 type Props = {
   itemIndex: number
   rowIndex: number
   boqColumnKey: BoqColumnKey
-  state?: ItemsState
+  state?: Item[]
 }
 
 export const getBoqCellFromStore = ({

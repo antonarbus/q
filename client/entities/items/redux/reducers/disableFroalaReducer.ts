@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { ItemsState } from '../itemsSlice'
+import { type Item } from '@shared/types'
 
-export const disableFroalaReducer = (state: ItemsState, action: PayloadAction<{
+export const disableFroalaReducer = (state: Item[], action: PayloadAction<{
   itemIndex: number
 }>): void => {
   const { itemIndex } = action.payload
