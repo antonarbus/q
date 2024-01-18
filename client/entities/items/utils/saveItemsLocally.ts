@@ -1,5 +1,5 @@
-import { tellItemsSavedLocally } from '@entities/bottom_msg' // todo: not good
 import { dispatch, getState } from '@shared/clients'
+import { tellItemsSavedLocally } from '@shared/general'
 import type { Item } from '@shared/types'
 import { itemsSlice } from '../redux/itemsSlice'
 
