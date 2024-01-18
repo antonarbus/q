@@ -8,10 +8,6 @@ import { RestOfCopiedItems } from './RestOfCopiedItems'
 import { useCopyContainerAnimation } from './useCopyContainerAnimation'
 import { useCursorCords } from './useCursorCords'
 
-export const containerWidth = 200
-export const containerPadding = 20
-export const itemMarginBottom = 5
-
 export const CopyContainer = (): JSX.Element => {
   useMovePasteText()
   usePasteClick()
