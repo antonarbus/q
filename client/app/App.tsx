@@ -1,4 +1,5 @@
 import '@shared/lib/nonPassiveEventErrorFix'
+import { reactQuery } from '@libras/reactQuery'
 import { themeClient } from '@libras/theme'
 import { ThemeProvider } from '@mui/material/styles'
 import { QueryClientProvider } from '@tanstack/react-query'
@@ -14,7 +15,6 @@ import { Spinner } from '@entities/spinner'
 import { TopMsg } from '@shared/ui/top_msg'
 import { GlobalStyles } from './GlobalStyles'
 import { Main } from './Main'
-import { reactQuery } from './reactQuery'
 import { ReactQueryDevtoolsProductionHidden } from './ReactQueryDevtoolsProductionHidden'
 import { store } from './store'
 
