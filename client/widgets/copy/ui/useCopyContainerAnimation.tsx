@@ -5,7 +5,6 @@ import { useEffect } from 'react'
 import { useFirstMountState } from 'react-use'
 import { copySlice } from '@entities/copy'
 import { useSelectorTyped } from '@shared/hooks'
-import { containerPadding, containerWidth } from './CopyContainer'
 
 export const useCopyContainerAnimation = (): AnimationControls => {
   const copyContainerAnimationControls = useAnimationControls()

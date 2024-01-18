@@ -3,7 +3,7 @@ import { theme } from '@libras/theme'
 import type { Variants } from 'framer-motion'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useSelectorTyped } from '@shared/hooks'
-import { containerPadding, containerWidth, itemMarginBottom } from './CopyContainer'
+import { containerPadding, containerWidth, itemMarginBottom } from './const'
 import { ScaledCopyItem } from './ScaledCopyItem'
 
 type Props = {
