@@ -1,5 +1,5 @@
 import { dispatch } from '@shared/clients'
-import { generalSlice } from '@shared/general'
+import { generalSlice } from './generalSlice'
 
 export const tellItemsSavedLocally = ({ ms = 2000 } = {}): void => {
   dispatch(generalSlice.actions.showBottomMsg('saved locally'))
