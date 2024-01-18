@@ -17,3 +17,5 @@ export const spinnerSlice = createSlice({
     stopSpinner: () => initialState,
   },
 })
+
+export const spinnerReducer = spinnerSlice.reducer

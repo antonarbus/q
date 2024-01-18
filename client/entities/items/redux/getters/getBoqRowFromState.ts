@@ -1,18 +1,18 @@
 import { type Item, type BoqRow } from '@shared/types'
-import { getBoqItemFromStore } from './getBoqItemFromStore'
+import { getBoqItemFromState } from './getBoqItemFromState'
 
 type Props = {
   itemIndex: number
   rowIndex: number
-  state?: Item[]
+  state: Item[]
 }
 
-export const getBoqRowFromStore = ({
+export const getBoqRowFromState = ({
   itemIndex,
   rowIndex,
   state,
 }: Props): BoqRow | undefined => {
-  const boqItem = getBoqItemFromStore({ itemIndex })
+  const boqItem = getBoqItemFromState({ itemIndex, state })
   if (boqItem === undefined) return
   const boqRow = boqItem.boq.rows[rowIndex]
   return boqRow

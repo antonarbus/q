@@ -1,2 +1,2 @@
-export { copySlice } from './model/copySlice'
+export { copySlice } from './copySlice'
 export { getPastePlace } from './getPastePlace'

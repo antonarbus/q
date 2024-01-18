@@ -1,18 +1,18 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { type Item } from '@shared/types'
-import { getBoqCellFromStore } from '../getters/getBoqCellFromStore'
+import { getBoqCellFromState } from '../getters/getBoqCellFromState'
 
 export const pinItemPriceReducer = (state: Item[], action: PayloadAction<{
   itemIndex: number
   rowIndex: number
 }>): void => {
   const { itemIndex, rowIndex } = action.payload
-  const itemPriceCell = getBoqCellFromStore({ itemIndex, rowIndex, boqColumnKey: 'itemPrice', state })
+  const itemPriceCell = getBoqCellFromState({ itemIndex, rowIndex, boqColumnKey: 'itemPrice', state })
 
   if (itemPriceCell === undefined) return
   itemPriceCell.pin.isPinned = true
 
-  const qtyCell = getBoqCellFromStore({ itemIndex, rowIndex, boqColumnKey: 'qty', state })
+  const qtyCell = getBoqCellFromState({ itemIndex, rowIndex, boqColumnKey: 'qty', state })
   if (qtyCell === undefined) return
   qtyCell.pin.isPinned = false
 }

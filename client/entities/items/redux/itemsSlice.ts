@@ -69,3 +69,5 @@ export const itemsSlice = createSlice({
     updateSubTotalPriceReducer,
   },
 })
+
+export const itemsReducer = itemsSlice.reducer
