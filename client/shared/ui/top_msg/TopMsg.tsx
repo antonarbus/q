@@ -1,8 +1,8 @@
-// https://fkhadra.github.io/react-toastify/introduction/
 import styled from '@emotion/styled'
 import { ToastContainer } from 'react-toastify'
 import { theme } from '@shared/clients'
 
+// https://fkhadra.github.io/react-toastify/introduction/
 // taken from /node_modules/react-toastify/dist/ReactToastify.css
 const ToastStyled = styled.div`
   --toastify-color-light: #fff;
