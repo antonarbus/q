@@ -44,9 +44,10 @@
   },
   // folders and files for providing you with file search, code completion etc...
   "include": [
+    "index.tsx",
     "client",
     "server",
-    "utils",
+    "utils", "index.tsx",
   ],
   "exclude": [
     "node_modules",
