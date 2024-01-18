@@ -1,7 +1,8 @@
 import type FroalaEditor from 'froala-editor'
-import { getBoqRowFromStore, updateBoqRowCellAtStore } from '@entities/items'
 import { getNumberFromString, getTextContentFromHtml, getStringWithNewFormattedNumber, updateNumberAtHtmlIncrementally } from '@shared/lib'
 import { type BoqColumnKey } from '@shared/types'
+import { getBoqRowFromStore } from '../redux/getters/getBoqRowFromStore'
+import { updateBoqRowCellAtStore } from '../redux/updaters/updateBoqRowCellAtStore'
 
 type Props = {
   itemIndex: number
