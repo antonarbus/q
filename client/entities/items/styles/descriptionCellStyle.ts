@@ -1,5 +1,5 @@
-import { type SxProps } from '@mui/material'
 import { theme } from '@lib_instances/theme'
+import { type SxProps } from '@mui/material'
 
 export const descriptionCellStyle: SxProps = {
   padding: theme.cell.padding,
