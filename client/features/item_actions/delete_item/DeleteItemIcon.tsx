@@ -3,9 +3,9 @@ import { gsap } from 'gsap'
 import { useRef } from 'react'
 import { RxCross2 } from 'react-icons/rx'
 import { copySlice } from '@entities/copy'
-import { generalSlice } from '@entities/general'
 import { itemsSlice, selectIsLastItem, useItem, saveItemsLocally } from '@entities/items'
 import { dispatch, getState, theme } from '@shared/clients'
+import { generalSlice } from '@shared/general'
 import { useSelectorTyped } from '@shared/hooks'
 
 export const DeleteItemIcon = (): EmotionJSX.Element => {

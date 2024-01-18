@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { copySlice } from '@entities/copy'
-import { generalSlice } from '@entities/general'
 import { itemsSlice } from '@entities/items'
 import { navSlice } from '@entities/nav'
 import { spinnerSlice } from '@entities/spinner'
 import { userSlice } from '@entities/user'
+import { generalSlice } from '@shared/general'
 
 export const store = configureStore({
   reducer: {

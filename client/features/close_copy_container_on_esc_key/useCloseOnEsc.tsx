@@ -1,8 +1,8 @@
 import { useEffectOnce } from 'react-use'
 import { copySlice } from '@entities/copy'
-import { generalSlice } from '@entities/general'
 import { itemsSlice } from '@entities/items'
 import { dispatch } from '@shared/clients'
+import { generalSlice } from '@shared/general'
 
 export const useExitCopyOnEsc = (): void => {
   const closeOnEsc = (e: KeyboardEvent): void => {
