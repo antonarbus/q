@@ -1,6 +1,6 @@
+import { useSelectorTyped } from '@libras/store'
 import type { RefObject } from 'react'
 import { Link } from 'react-router-dom'
-import { useSelectorTyped } from '@shared/hooks'
 
 type Prop = {
   logoRef: RefObject<HTMLDivElement>

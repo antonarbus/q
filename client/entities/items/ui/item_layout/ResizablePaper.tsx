@@ -1,7 +1,7 @@
+import { useSelectorTyped } from '@libras/store'
 import { Resizable } from 're-resizable'
 import type { ReactNode } from 'react'
 import { className } from '@shared/className'
-import { useSelectorTyped } from '@shared/hooks'
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
 import { useItem } from '../../providers/ItemProvider'
 

@@ -1,9 +1,9 @@
+import { useSelectorTyped } from '@libras/store'
 import { Box } from '@mui/material'
 import { type ReactNode } from 'react'
 import { VscPinned } from 'react-icons/vsc'
 import { selectBoqCellPin, useItem, useRow } from '@entities/items'
 import { className } from '@shared/className'
-import { useSelectorTyped } from '@shared/hooks'
 import { type BoqColumnKey } from '@shared/types'
 
 type Props = {

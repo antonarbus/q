@@ -1,5 +1,5 @@
+import { useSelectorTyped } from '@libras/store'
 import { theme } from '@libras/theme'
-import { useSelectorTyped } from '@shared/hooks'
 
 /**
  * check if menu width is more than distance to the left side of the window

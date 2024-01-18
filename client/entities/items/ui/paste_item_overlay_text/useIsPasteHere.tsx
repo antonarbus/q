@@ -1,5 +1,4 @@
-import { getState } from '@libras/store'
-import { useSelectorTyped } from '@shared/hooks'
+import { getState, useSelectorTyped } from '@libras/store'
 import { useItem } from '../../providers/ItemProvider'
 
 export const useIsPasteHere = (): boolean => {

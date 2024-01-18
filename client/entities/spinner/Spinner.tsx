@@ -1,5 +1,5 @@
+import { useSelectorTyped } from '@libras/store'
 import { LoadingDots } from '@shared/components/LoadingDots'
-import { useSelectorTyped } from '@shared/hooks'
 
 type Props = {
   isShowing?: boolean

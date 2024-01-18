@@ -1,4 +1,4 @@
-import { useSelectorTyped } from '@shared/hooks'
+import { useSelectorTyped } from '@libras/store'
 import { BackMenuItem } from './MenuItem/BackMenuItem'
 import { CloseMenuItem } from './MenuItem/CloseMenuItem'
 

@@ -1,11 +1,10 @@
-import { dispatch, getState } from '@libras/store'
+import { dispatch, getState, useSelectorTyped } from '@libras/store'
 import { theme } from '@libras/theme'
 import { gsap } from 'gsap'
 import { useRef } from 'react'
 import { RxCross2 } from 'react-icons/rx'
 import { copySlice } from '@entities/copy'
 import { itemsSlice, selectIsLastBoqRow, useItem, useRow, saveItemsLocally } from '@entities/items'
-import { useSelectorTyped } from '@shared/hooks'
 
 export const DeleteBoqRowIcon = (): JSX.Element => {
   const ref = useRef<HTMLSpanElement>(null)

@@ -1,6 +1,5 @@
-import { dispatch } from '@libras/store'
+import { dispatch, useSelectorTyped } from '@libras/store'
 import { useUpdateEffect } from 'react-use'
-import { useSelectorTyped } from '@shared/hooks'
 import { useItem } from '../../providers/ItemProvider'
 import { itemsSlice } from '../../redux/itemsSlice'
 

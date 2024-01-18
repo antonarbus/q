@@ -1,5 +1,5 @@
+import { useSelectorTyped } from '@libras/store'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useSelectorTyped } from '@shared/hooks'
 import { useItem } from '../../providers/ItemProvider'
 import { useRemoveItemMsgAfterSomeTime } from './useRemoveItemMsg'
 

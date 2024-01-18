@@ -1,4 +1,4 @@
-import type { RootState } from '@shared/types'
+import { type RootState } from '@libras/store'
 import { getBoqRowsFromStore } from '../getters/getBoqRowsFromStore'
 
 type Props = {

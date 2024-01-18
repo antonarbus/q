@@ -1,5 +1,5 @@
+import { useSelectorTyped } from '@libras/store'
 import { useEffect } from 'react'
-import { useSelectorTyped } from '@shared/hooks'
 import { movePasteTextForBoqRow } from './movePasteTextForBoqRow'
 import { movePasteTextForItem } from './movePasteTextForItem'
 

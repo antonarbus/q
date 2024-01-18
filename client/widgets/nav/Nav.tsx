@@ -1,9 +1,8 @@
-import { dispatch } from '@libras/store'
+import { dispatch, useSelectorTyped } from '@libras/store'
 import { theme } from '@libras/theme'
 import { useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 import { navSlice, useMediaQueryValues, useMenuItemActionShortcuts, Logo, NavList } from '@entities/nav'
-import { useSelectorTyped } from '@shared/hooks'
 import { navStructure } from './navStructure'
 
 export const Nav = (): JSX.Element => {

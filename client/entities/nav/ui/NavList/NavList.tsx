@@ -1,4 +1,4 @@
-import { useSelectorTyped } from '@shared/hooks'
+import { useSelectorTyped } from '@libras/store'
 import { NavItem } from './NavItem'
 import { Burger } from './NavItem/Burger'
 
