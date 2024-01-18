@@ -1,4 +1,4 @@
-import { dispatch } from '@libras/store'
+import { dispatch } from '@lib_instances/store'
 import axios from 'axios'
 import { jwtDecode } from 'jwt-decode'
 import { useState } from 'react'

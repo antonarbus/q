@@ -1,4 +1,4 @@
-import { theme } from '@libras/theme'
+import { theme } from '@lib_instances/theme'
 import { Lock, Visibility, VisibilityOff } from '@mui/icons-material'
 import { IconButton, InputAdornment, TextField } from '@mui/material'
 import { useState } from 'react'

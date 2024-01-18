@@ -1,4 +1,4 @@
-import { useSelectorTyped } from '@libras/store'
+import { useSelectorTyped } from '@lib_instances/store'
 import { Resizable } from 're-resizable'
 import type { ReactNode } from 'react'
 import { onColumnResize, onColumnResizeStart, onColumnResizeStop } from '@features/resize_column'

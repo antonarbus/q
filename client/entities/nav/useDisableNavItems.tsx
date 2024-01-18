@@ -1,4 +1,4 @@
-import { dispatch } from '@libras/store'
+import { dispatch } from '@lib_instances/store'
 import { useEffectOnce, useUnmount } from 'react-use'
 import { navSlice } from './navSlice'
 

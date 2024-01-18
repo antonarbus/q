@@ -1,4 +1,4 @@
-import { dispatch } from '@libras/store'
+import { dispatch } from '@lib_instances/store'
 import { useEffectOnce } from 'react-use'
 import { copySlice } from '@entities/copy'
 import { itemsSlice } from '@entities/items'

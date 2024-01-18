@@ -1,4 +1,4 @@
-import { useSelectorTyped } from '@libras/store'
+import { useSelectorTyped } from '@lib_instances/store'
 import { useEffect } from 'react'
 import { movePasteTextForBoqRow } from './movePasteTextForBoqRow'
 import { movePasteTextForItem } from './movePasteTextForItem'

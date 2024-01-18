@@ -1,4 +1,4 @@
-import { dispatch, getState } from '@libras/store'
+import { dispatch, getState } from '@lib_instances/store'
 import type { MouseEvent } from 'react'
 import { navSlice } from '../../../../../../navSlice'
 import { getMenuItemByIdsChain } from '../../functions/getMenuItemByIdsChain'

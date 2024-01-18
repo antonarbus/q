@@ -1,4 +1,4 @@
-import { theme } from '@libras/theme'
+import { theme } from '@lib_instances/theme'
 import { motion } from 'framer-motion'
 import type { ComponentClass, ReactNode } from 'react'
 import type { SortableElementProps } from 'react-sortable-hoc'

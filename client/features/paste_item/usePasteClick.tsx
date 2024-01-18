@@ -1,5 +1,5 @@
-import { dispatch, getState } from '@libras/store'
-import { theme } from '@libras/theme'
+import { dispatch, getState } from '@lib_instances/store'
+import { theme } from '@lib_instances/theme'
 import { useEffectOnce, useUnmount } from 'react-use'
 import { copySlice } from '@entities/copy'
 import { itemsSlice, saveItemsLocally } from '@entities/items'

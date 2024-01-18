@@ -1,4 +1,4 @@
-import { getState, useSelectorTyped } from '@libras/store'
+import { getState, useSelectorTyped } from '@lib_instances/store'
 import { useItem } from '../../providers/ItemProvider'
 
 export const useIsPasteHere = (): boolean => {

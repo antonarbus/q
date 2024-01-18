@@ -1,4 +1,4 @@
-import { dispatch } from '@libras/store'
+import { dispatch } from '@lib_instances/store'
 import { arrayMoveImmutable } from 'array-move'
 import { getBoqRowsFromStore, itemsSlice, saveItemsLocally } from '@entities/items'
 

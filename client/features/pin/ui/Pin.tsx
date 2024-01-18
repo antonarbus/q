@@ -1,4 +1,4 @@
-import { useSelectorTyped } from '@libras/store'
+import { useSelectorTyped } from '@lib_instances/store'
 import { Box } from '@mui/material'
 import { type ReactNode } from 'react'
 import { VscPinned } from 'react-icons/vsc'

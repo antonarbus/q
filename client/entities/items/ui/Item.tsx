@@ -1,4 +1,4 @@
-import { getState } from '@libras/store'
+import { getState } from '@lib_instances/store'
 import type { ReactNode } from 'react'
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
 import { useIsItemSortDisabled } from '../hooks/useIsItemSortDisabled'

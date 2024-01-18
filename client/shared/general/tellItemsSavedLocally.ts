@@ -1,4 +1,4 @@
-import { dispatch } from '@libras/store'
+import { dispatch } from '@lib_instances/store'
 import { generalSlice } from './generalSlice'
 
 export const tellItemsSavedLocally = ({ ms = 2000 } = {}): void => {

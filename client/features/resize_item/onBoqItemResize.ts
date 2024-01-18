@@ -1,4 +1,4 @@
-import { dispatch, getState } from '@libras/store'
+import { dispatch, getState } from '@lib_instances/store'
 import { itemsSlice, saveItemsLocally } from '@entities/items'
 import type { BoqItem, OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
 

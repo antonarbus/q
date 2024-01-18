@@ -1,4 +1,4 @@
-import { useSelectorTyped } from '@libras/store'
+import { useSelectorTyped } from '@lib_instances/store'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 
 type Props = {

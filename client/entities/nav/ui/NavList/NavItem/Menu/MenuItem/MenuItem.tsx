@@ -1,4 +1,4 @@
-import { dispatch, useSelectorTyped } from '@libras/store'
+import { dispatch, useSelectorTyped } from '@lib_instances/store'
 import type { MouseEvent } from 'react'
 import { FaChevronRight } from 'react-icons/fa'
 import { navSlice } from '../../../../../navSlice'

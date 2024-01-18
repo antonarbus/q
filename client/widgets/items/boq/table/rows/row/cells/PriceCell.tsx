@@ -1,4 +1,4 @@
-import { dispatch } from '@libras/store'
+import { dispatch } from '@lib_instances/store'
 import { Box } from '@mui/material'
 import { Pin, showBoqRowPins } from '@features/pin'
 import { formatBoqRowPriceCell, updateBoqRowPriceCell, validateBoqRowPrice } from '@features/update_cell'

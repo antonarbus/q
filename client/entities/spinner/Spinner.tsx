@@ -1,4 +1,4 @@
-import { useSelectorTyped } from '@libras/store'
+import { useSelectorTyped } from '@lib_instances/store'
 import { LoadingDots } from '@shared/components/LoadingDots'
 
 type Props = {

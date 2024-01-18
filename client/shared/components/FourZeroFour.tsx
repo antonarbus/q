@@ -1,4 +1,4 @@
-import { theme } from '@libras/theme'
+import { theme } from '@lib_instances/theme'
 
 export const FourZeroFour = (): JSX.Element => (
   <div

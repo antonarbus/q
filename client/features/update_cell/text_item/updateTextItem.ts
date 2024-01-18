@@ -1,4 +1,4 @@
-import { dispatch, getState } from '@libras/store'
+import { dispatch, getState } from '@lib_instances/store'
 import type FroalaEditor from 'froala-editor'
 import { type MutableRefObject } from 'react'
 import { itemsSlice, saveItemsLocally } from '@entities/items'

@@ -1,4 +1,4 @@
-import { getState } from '@libras/store'
+import { getState } from '@lib_instances/store'
 import { type BoqColumnKey } from '@shared/types'
 
 type Props = {
