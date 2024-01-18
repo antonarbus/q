@@ -1,6 +1,6 @@
+import { dispatch } from '@libras/store'
 import { itemsSlice, saveItemsLocally } from '@entities/items'
 import { className } from '@shared/className'
-import { dispatch } from '@shared/clients'
 import { type BoqColumnKey } from '@shared/types'
 
 type Props = {

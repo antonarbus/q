@@ -18,3 +18,6 @@ export const store = configureStore({
   middleware: (defaultMiddleware) => defaultMiddleware({ serializableCheck: false }), // we have not serializable components and functions in nav structure
   devTools: process.env.NODE_ENV !== 'production',
 })
+
+export const getState = store.getState
+export const dispatch = store.dispatch

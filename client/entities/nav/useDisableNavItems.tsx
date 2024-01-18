@@ -1,5 +1,5 @@
+import { dispatch } from '@libras/store'
 import { useEffectOnce, useUnmount } from 'react-use'
-import { dispatch } from '@shared/clients'
 import { navSlice } from './navSlice'
 
 export const useDisableNavItems = (): void => {

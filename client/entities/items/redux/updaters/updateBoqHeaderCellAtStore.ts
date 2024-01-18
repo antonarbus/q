@@ -1,6 +1,6 @@
+import { dispatch } from '@libras/store'
 import type FroalaEditor from 'froala-editor'
 import { type MutableRefObject } from 'react'
-import { dispatch } from '@shared/clients'
 import { getNumberFromString, getTextContentFromHtml } from '@shared/lib'
 import { type BoqHeaderKey } from '@shared/types'
 import { saveItemsLocally } from '../../utils/saveItemsLocally'

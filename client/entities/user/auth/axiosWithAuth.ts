@@ -1,6 +1,6 @@
+import { dispatch } from '@libras/store'
 import axios from 'axios'
 import { apiUrl } from 'server/apiUrls'
-import { dispatch } from '@shared/clients'
 import { userSlice } from '../userSlice'
 import { token } from './token'
 

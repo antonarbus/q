@@ -1,7 +1,7 @@
+import { dispatch } from '@libras/store'
 import { type MutableRefObject } from 'react'
 import { itemsSlice } from '@entities/items'
 import { className } from '@shared/className'
-import { dispatch } from '@shared/clients'
 
 type Props = {
   e: MouseEvent

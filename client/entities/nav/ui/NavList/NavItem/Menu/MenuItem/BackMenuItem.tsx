@@ -1,7 +1,7 @@
+import { dispatch } from '@libras/store'
 import { theme } from '@libras/theme'
 import type { MouseEvent } from 'react'
 import { FaChevronLeft } from 'react-icons/fa'
-import { dispatch } from '@shared/clients'
 import { useSelectorTyped } from '@shared/hooks'
 import { navSlice } from '../../../../../navSlice'
 import { Icon } from '../../Icon'

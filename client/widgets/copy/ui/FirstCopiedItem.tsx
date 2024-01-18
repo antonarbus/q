@@ -1,7 +1,7 @@
+import { getState } from '@libras/store'
 import { theme } from '@libras/theme'
 import type { Variants } from 'framer-motion'
 import { AnimatePresence, motion } from 'framer-motion'
-import { getState } from '@shared/clients'
 import { useSelectorTyped } from '@shared/hooks'
 import { containerPadding, containerWidth, itemMarginBottom } from './CopyContainer'
 import { ScaledCopyItem } from './ScaledCopyItem'

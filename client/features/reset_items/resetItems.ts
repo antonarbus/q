@@ -1,6 +1,6 @@
+import { dispatch } from '@libras/store'
 import { theme } from '@libras/theme'
 import { defaultItems, itemsSlice, saveItemsLocally } from '@entities/items'
-import { dispatch } from '@shared/clients'
 import { generalSlice } from '@shared/general'
 
 export const resetItems = (): void => {

@@ -1,5 +1,5 @@
+import { getState } from '@libras/store'
 import type { ReactNode } from 'react'
-import { getState } from '@shared/clients'
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
 import { useIsItemSortDisabled } from '../hooks/useIsItemSortDisabled'
 import { useItem } from '../providers/ItemProvider'

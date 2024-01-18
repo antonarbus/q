@@ -1,7 +1,7 @@
+import { dispatch } from '@libras/store'
 import type { RefObject } from 'react'
 import { useLayoutEffect } from 'react'
 import { useFirstMountState } from 'react-use'
-import { dispatch } from '@shared/clients'
 import { useSelectorTyped } from '@shared/hooks'
 import { navSlice } from '../../navSlice'
 import { calcNavMediaQueryParams } from './calcNavMediaQueryParams'

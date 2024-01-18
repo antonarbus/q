@@ -1,5 +1,5 @@
+import { dispatch } from '@libras/store'
 import { itemsSlice } from '@entities/items'
-import { dispatch } from '@shared/clients'
 
 type Props = {
   itemIndex: number

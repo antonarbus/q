@@ -1,5 +1,6 @@
 import '@shared/lib/nonPassiveEventErrorFix'
 import { reactQuery } from '@libras/reactQuery'
+import { store } from '@libras/store'
 import { themeClient } from '@libras/theme'
 import { ThemeProvider } from '@mui/material/styles'
 import { QueryClientProvider } from '@tanstack/react-query'
@@ -16,7 +17,6 @@ import { TopMsg } from '@shared/ui/top_msg'
 import { GlobalStyles } from './GlobalStyles'
 import { Main } from './Main'
 import { ReactQueryDevtoolsProductionHidden } from './ReactQueryDevtoolsProductionHidden'
-import { store } from './store'
 
 export const App = (): JSX.Element => (
   <Provider store={store}>

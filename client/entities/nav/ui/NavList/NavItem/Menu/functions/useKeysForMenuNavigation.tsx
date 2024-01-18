@@ -1,6 +1,6 @@
+import { dispatch, getState } from '@libras/store'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { dispatch, getState } from '@shared/clients'
 import { navSlice } from '../../../../../navSlice'
 import { getMenuItemByIdsChain } from './getMenuItemByIdsChain'
 import { navigateInMenu } from './useMenuAnimation'

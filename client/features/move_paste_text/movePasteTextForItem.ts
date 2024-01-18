@@ -1,8 +1,8 @@
+import { dispatch, getState } from '@libras/store'
 import isEqual from 'lodash.isequal'
 import { copySlice, getPastePlace } from '@entities/copy'
 import { itemsSlice } from '@entities/items'
 import { className } from '@shared/className'
-import { dispatch, getState } from '@shared/clients'
 import { type CopyPlace } from '@shared/types'
 
 export const movePasteTextForItem = (e: MouseEvent): void => {
