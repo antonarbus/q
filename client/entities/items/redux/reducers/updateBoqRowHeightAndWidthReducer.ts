@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { type Item } from '@shared/types'
-import { getBoqRowFromStore } from '../getters/getBoqRowFromStore'
+import { getBoqRowFromState } from '../getters/getBoqRowFromState'
 
 export const updateBoqRowHeightAndWidthReducer = (state: Item[], action: PayloadAction<{
   itemIndex: number
@@ -9,7 +9,7 @@ export const updateBoqRowHeightAndWidthReducer = (state: Item[], action: Payload
   width: number
 }>): void => {
   const { itemIndex, rowIndex, height, width } = action.payload
-  const boqRow = getBoqRowFromStore({ itemIndex, rowIndex, state })
+  const boqRow = getBoqRowFromState({ itemIndex, rowIndex, state })
   if (boqRow === undefined) return
   boqRow.height = height
   boqRow.width = width

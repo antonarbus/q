@@ -25,3 +25,5 @@ export const generalSlice = createSlice({
     },
   },
 })
+
+export const generalReducer = generalSlice.reducer

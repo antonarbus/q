@@ -1,20 +1,20 @@
 import { type Action, type ThunkAction, configureStore } from '@reduxjs/toolkit'
 import { type TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import { copySlice } from '@entities/copy'
-import { itemsSlice } from '@entities/items'
-import { navSlice } from '@entities/nav'
-import { spinnerSlice } from '@entities/spinner'
-import { userSlice } from '@entities/user'
-import { generalSlice } from '@shared/general'
+import { copyReducer } from '@entities/copy/copySlice'
+import { itemsReducer } from '@entities/items/redux/itemsSlice'
+import { navReducer } from '@entities/nav/navSlice'
+import { spinnerReducer } from '@entities/spinner/spinnerSlice'
+import { userReducer } from '@entities/user/userSlice'
+import { generalReducer } from '@shared/general/generalSlice'
 
 const store = configureStore({
   reducer: {
-    app: generalSlice.reducer,
-    user: userSlice.reducer,
-    nav: navSlice.reducer,
-    items: itemsSlice.reducer,
-    spinner: spinnerSlice.reducer,
-    copy: copySlice.reducer,
+    app: generalReducer,
+    user: userReducer,
+    nav: navReducer,
+    items: itemsReducer,
+    spinner: spinnerReducer,
+    copy: copyReducer,
   },
   middleware: (defaultMiddleware) => defaultMiddleware({ serializableCheck: false }), // we have not serializable components and functions in nav structure
   devTools: process.env.NODE_ENV !== 'production',

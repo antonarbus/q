@@ -24,3 +24,5 @@ export const userSlice = createSlice({
     forgetLoggedUser: () => initialState,
   },
 })
+
+export const userReducer = userSlice.reducer

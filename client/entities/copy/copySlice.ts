@@ -96,3 +96,5 @@ export const copySlice = createSlice({
     },
   },
 })
+
+export const copyReducer = copySlice.reducer

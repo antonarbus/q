@@ -1,6 +1,6 @@
 import { useSelectorTyped } from '@libras/store'
 import type { RefObject } from 'react'
-import { selectMenuItemByIdsChainSelector } from '../../../../navSlice'
+import { selectMenuItemByIdsChainSelector } from './functions/selectMenuItemByIdsChainSelector'
 import { MenuItem } from './MenuItem'
 
 type Props = {
