@@ -1,7 +1,8 @@
+import { theme } from '@libras/theme'
 import { useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 import { navSlice, useMediaQueryValues, useMenuItemActionShortcuts, Logo, NavList } from '@entities/nav'
-import { dispatch, theme } from '@shared/clients'
+import { dispatch } from '@shared/clients'
 import { useSelectorTyped } from '@shared/hooks'
 import { navStructure } from './navStructure'
 

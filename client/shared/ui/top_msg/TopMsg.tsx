@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
+import { theme } from '@libras/theme'
 import { ToastContainer } from 'react-toastify'
-import { theme } from '@shared/clients'
 
 // https://fkhadra.github.io/react-toastify/introduction/
 // taken from /node_modules/react-toastify/dist/ReactToastify.css

@@ -1,5 +1,5 @@
+import { theme } from '@libras/theme'
 import { type SxProps } from '@mui/material'
-import { theme } from '@shared/clients'
 
 export const boqRowCellStyle: SxProps = {
   textAlign: 'center',

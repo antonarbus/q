@@ -1,4 +1,5 @@
 import '@shared/lib/nonPassiveEventErrorFix'
+import { themeClient } from '@libras/theme'
 import { ThemeProvider } from '@mui/material/styles'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
@@ -16,7 +17,6 @@ import { Main } from './Main'
 import { reactQuery } from './reactQuery'
 import { ReactQueryDevtoolsProductionHidden } from './ReactQueryDevtoolsProductionHidden'
 import { store } from './store'
-import { themeClient } from './theme'
 
 export const App = (): JSX.Element => (
   <Provider store={store}>

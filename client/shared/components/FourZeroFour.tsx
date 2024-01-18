@@ -1,4 +1,4 @@
-import { theme } from '@shared/clients'
+import { theme } from '@libras/theme'
 
 export const FourZeroFour = (): JSX.Element => (
   <div
