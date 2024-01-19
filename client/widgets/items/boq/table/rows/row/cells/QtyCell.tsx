@@ -1,8 +1,7 @@
-import { dispatch } from '@lib_instances/store'
 import { Box } from '@mui/material'
-import { Pin } from '@features/pin'
+import { Pin, pinBoqRowQtyCell } from '@features/pin'
 import { formatBoqRowQtyCell, updateBoqRowQtyCell } from '@features/update_cell'
-import { getBoqCellHtmlFromStore, useItem, useRow, useBoqItem, Froala, itemsSlice, boqRowCellStyle, useStylesForResizableCell } from '@entities/items'
+import { getBoqCellHtmlFromStore, useItem, useRow, useBoqItem, Froala, boqRowCellStyle, useStylesForResizableCell } from '@entities/items'
 import type { BoqColumnKey } from '@shared/types'
 
 const boqColumnKey: BoqColumnKey = 'qty'
@@ -33,7 +32,7 @@ export const QtyCell = (): JSX.Element => {
       <Pin
         boqColumnKey={boqColumnKey}
         onClick={() => {
-          dispatch(itemsSlice.actions.pinQtyReducer({ itemIndex, rowIndex }))
+          pinBoqRowQtyCell({ itemIndex, rowIndex })
         }}
       />
     </Box>
