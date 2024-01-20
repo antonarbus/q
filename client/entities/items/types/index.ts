@@ -76,6 +76,4 @@ export type PasteItem = {
 } & Common
 
 export type Item = BoqItem | PasteItem | TextItem
-
-export type Copyable = BoqItem | BoqRow | TextItem
-export type CopyableItem = BoqItem | TextItem | BoqRow
+export type CopyableItem = BoqItem | BoqRow | TextItem

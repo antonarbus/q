@@ -3,8 +3,8 @@ import { Box } from '@mui/material'
 import { type ReactNode } from 'react'
 import { VscPinned } from 'react-icons/vsc'
 import { selectBoqCellPin, useItem, useRow } from '@entities/items'
-import { className } from '@shared/className'
-import { type BoqColumnKey } from '@shared/types'
+import { type BoqColumnKey } from '@entities/items'
+import { className } from '@shared/consts/className'
 
 type Props = {
   boqColumnKey: BoqColumnKey

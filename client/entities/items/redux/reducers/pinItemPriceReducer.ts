@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { type Item } from '@shared/types'
+import { type Item } from '../../types'
 import { getBoqCellFromState } from '../getters/getBoqCellFromState'
 
 export const pinItemPriceReducer = (state: Item[], action: PayloadAction<{

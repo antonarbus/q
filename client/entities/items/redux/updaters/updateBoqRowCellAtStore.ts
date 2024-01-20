@@ -1,6 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { getNumberFromString, getTextContentFromHtml } from '@shared/lib'
-import type { BoqColumnKey } from '@shared/types'
+import type { BoqColumnKey } from '../../types'
 import { getBoqRowFromStore } from '../getters/getBoqRowFromStore'
 import { itemsSlice } from '../itemsSlice'
 

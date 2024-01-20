@@ -1,8 +1,7 @@
 import { Box } from '@mui/material'
 import { Pin, pinBoqRowQtyCell } from '@features/pin'
 import { formatBoqRowQtyCell, updateBoqRowQtyCell } from '@features/update_cell'
-import { getBoqCellHtmlFromStore, useItem, useRow, useBoqItem, Froala, boqRowCellStyle, useStylesForResizableCell } from '@entities/items'
-import type { BoqColumnKey } from '@shared/types'
+import { getBoqCellHtmlFromStore, useItem, useRow, useBoqItem, Froala, boqRowCellStyle, useStylesForResizableCell, type BoqColumnKey } from '@entities/items'
 
 const boqColumnKey: BoqColumnKey = 'qty'
 

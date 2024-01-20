@@ -3,9 +3,9 @@ import type FroalaEditor from 'froala-editor'
 import { type MutableRefObject } from 'react'
 import { roundTo } from 'round-to'
 import { getStringWithNewFormattedNumber } from '@shared/lib'
-import { type BoqColumnKey } from '@shared/types'
 import { getBoqRowFromStore } from '../redux/getters/getBoqRowFromStore'
 import { itemsSlice } from '../redux/itemsSlice'
+import { type BoqColumnKey } from '../types'
 
 type Props = {
   itemIndex: number

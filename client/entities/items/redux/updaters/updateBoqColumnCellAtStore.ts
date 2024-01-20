@@ -1,7 +1,7 @@
 import { dispatch } from '@lib_instances/store'
 import type FroalaEditor from 'froala-editor'
 import { type MutableRefObject } from 'react'
-import type { BoqColumnKey } from '@shared/types'
+import type { BoqColumnKey } from '../../types'
 import { saveItemsLocally } from '../../utils/saveItemsLocally'
 import { getBoqItemFromStore } from '../getters/getBoqItemFromStore'
 import { itemsSlice } from '../itemsSlice'

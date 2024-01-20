@@ -3,7 +3,7 @@ import type FroalaEditor from 'froala-editor'
 import { useRef } from 'react'
 import { updateDescriptionCell } from '@features/update_cell'
 import { getBoqCellHtmlFromStore, useRow, useItem, Froala, descriptionCellStyle, useStylesForResizableCell } from '@entities/items'
-import type { BoqColumnKey } from '@shared/types'
+import type { BoqColumnKey } from '@entities/items'
 
 const boqColumnKey: BoqColumnKey = 'description'
 

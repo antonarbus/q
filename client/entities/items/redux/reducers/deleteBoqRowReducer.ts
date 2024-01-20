@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { type Item } from '@shared/types'
+import { type Item } from '../../types'
 import { getBoqItemFromState } from '../getters/getBoqItemFromState'
 
 export const deleteBoqRowReducer = (state: Item[], action: PayloadAction<{ itemIndex: number, rowIndex: number }>): Item[] => {

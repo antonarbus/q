@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { className } from '@shared/className'
+import { className } from '@shared/consts/className'
 
 type Props = {
   itemActionElements?: ReactNode

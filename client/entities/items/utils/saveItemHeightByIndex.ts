@@ -1,5 +1,5 @@
 import { dispatch } from '@lib_instances/store'
-import { className } from '@shared/className'
+import { className } from '@shared/consts/className'
 import { itemsSlice } from '../redux/itemsSlice'
 
 type Props = {

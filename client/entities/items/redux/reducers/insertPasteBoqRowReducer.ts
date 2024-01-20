@@ -1,5 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { BoqRow, BoqRowCell, CopyPlace, Item } from '@shared/types'
+import { type CopyPlace } from '@entities/copy'
+import type { BoqRow, BoqRowCell, Item } from '../../types'
 import { getBoqItemFromState } from '../getters/getBoqItemFromState'
 
 const defaultCellValues: BoqRowCell = {

@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { className } from '@shared/className'
+import { className } from '@shared/consts/className'
 import { CopyBoqRowIcon } from '../copy_boq_row'
 import { CutBoqRowIcon } from '../cut_boq_row'
 import { DeleteBoqRowIcon } from '../delete_boq_row'

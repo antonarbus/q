@@ -1,6 +1,6 @@
 import { dispatch, getState } from '@lib_instances/store'
-import { itemsSlice, saveItemsLocally } from '@entities/items'
-import type { BoqItem, OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
+import { type BoqItem, itemsSlice, saveItemsLocally } from '@entities/items'
+import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
 
 // can be global var for different boqItems as we can change width of one item at a time
 let initDescriptionColumnWidth = 0

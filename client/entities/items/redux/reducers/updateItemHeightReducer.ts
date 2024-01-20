@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { type Item } from '@shared/types'
+import { type Item } from '../../types'
 
 export const updateItemHeightReducer = (state: Item[], action: PayloadAction<{
   itemIndex: number

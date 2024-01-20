@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { BoqColumnKey, Item } from '@shared/types'
+import type { BoqColumnKey, Item } from '../../types'
 
 export const updateBoqColumnNameTextReducer = (state: Item[], action: PayloadAction<{
   itemIndex: number
