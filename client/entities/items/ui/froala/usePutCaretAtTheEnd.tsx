@@ -18,11 +18,6 @@ export const usePutCaretAtTheEnd = (): void => {
         editorRef.current.selection.setAtEnd(editorRef.current.$el.get(0))
       }
 
-      if (clickedElement.matches('.ag-cell')) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        editorRef.current.selection.setAtEnd(editorRef.current.$el.get(0))
-      }
-
       editorRef.current.selection.restore()
     }
 
