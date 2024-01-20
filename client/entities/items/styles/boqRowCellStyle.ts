@@ -5,6 +5,7 @@ export const boqRowCellStyle: SxProps = {
   textAlign: 'center',
   padding: theme.cell.padding,
   minHeight: '40px', // otherwise placeholder is misplaced on init
+  cursor: 'text',
   '.fr-placeholder': {
     left: '15px',
   },
