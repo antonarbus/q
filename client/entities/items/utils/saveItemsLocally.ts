@@ -1,7 +1,7 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { tellItemsSavedLocally } from '@shared/general'
-import type { Item } from '@shared/types'
 import { itemsSlice } from '../redux/itemsSlice'
+import type { Item } from '../types'
 
 type Props = {
   items?: Item[]

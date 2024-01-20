@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { BoqColumnKey, Item } from '@shared/types'
+import type { BoqColumnKey, Item } from '../../types'
 import { getBoqCellFromState } from '../getters/getBoqCellFromState'
 
 export const hideBoqRowCellPinReducer = (state: Item[], action: PayloadAction<{

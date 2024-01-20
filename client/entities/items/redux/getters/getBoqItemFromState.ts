@@ -1,4 +1,4 @@
-import { type Item, type BoqItem } from '@shared/types'
+import { type Item, type BoqItem } from '../../types'
 
 type Props = {
   itemIndex: number

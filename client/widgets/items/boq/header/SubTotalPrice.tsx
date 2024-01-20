@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { showHideBoqPricePins } from '@features/pin'
 import { formatSubtotalPriceCell, updateSubtotalPriceCell, validateBoqRowPrices } from '@features/update_cell'
 import { getBoqHeaderHtmlFromStore, useBoqItem, useItem, Froala, subTotalPriceCellStyle } from '@entities/items'
-import { type BoqHeaderKey } from '@shared/types'
+import { type BoqHeaderKey } from '@entities/items'
 
 const boqHeaderKey: BoqHeaderKey = 'subTotalPrice'
 

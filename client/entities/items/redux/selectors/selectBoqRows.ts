@@ -1,5 +1,5 @@
 import { type RootState } from '@lib_instances/store'
-import type { BoqRow } from '@shared/types'
+import type { BoqRow } from '../../types'
 import { getBoqRowsFromStore } from '../getters/getBoqRowsFromStore'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

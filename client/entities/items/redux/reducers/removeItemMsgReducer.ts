@@ -1,4 +1,4 @@
-import { type Item } from '@shared/types'
+import { type Item } from '../../types'
 
 export const removeItemsMsgReducer = (state: Item[]): Item[] => {
   const items = state
