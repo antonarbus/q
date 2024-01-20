@@ -45,6 +45,8 @@ export default defineConfig(({ command, mode }) => {
                 fileName: true,
               },
             ],
+            // https://github.com/preactjs/signals/tree/main/packages/react#react-integration
+            ["module:@preact/signals-react-transform"],
           ],
         },
       }),
