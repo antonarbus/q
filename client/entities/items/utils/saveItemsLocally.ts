@@ -1,5 +1,5 @@
 import { dispatch, getState } from '@lib_instances/store'
-import { hideBottomMsg, showBottomMsg } from '@shared/bottom_msg'
+import { hideBottomMessage, showBottomMessage } from '@shared/components/bottom_message'
 import type { Item } from '@shared/types'
 import { itemsSlice } from '../redux/itemsSlice'
 
@@ -14,10 +14,10 @@ export const saveItemsLocally = ({
 }: Props = {}): void => {
   localStorage.setItem('items', JSON.stringify(items))
 
-  showBottomMsg('saved locally')
+  showBottomMessage('saved locally')
 
   setTimeout(() => {
-    hideBottomMsg()
+    hideBottomMessage()
   }, 2000)
 
   if (msgAboveItemWithIndex !== undefined) {
