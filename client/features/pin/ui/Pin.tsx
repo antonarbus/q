@@ -26,11 +26,14 @@ export const Pin = ({
     <Box
       className={className.pin}
       component='button' // to make it focusable to understand if we click within same row on pins and not hide them at BoqRow onBlur callback // https://stackoverflow.com/a/42764495/7239778
+      onClick={onClick}
       sx={{
         all: 'unset',
         position: 'absolute',
-        top: '-5px',
+        cursor: 'pointer',
+        top: 0,
         right: 0,
+        zIndex: 1,
       }}
     >
       <VscPinned
@@ -39,9 +42,7 @@ export const Pin = ({
           rotate: '35deg',
           fill: pin.isPinned ? 'black' : '#b8b8b8',
           strokeWidth: pin.isPinned ? '0.2px' : '0px',
-          cursor: 'pointer',
         }}
-        onClick={onClick}
       />
     </Box>
   )

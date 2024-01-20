@@ -16,7 +16,7 @@ export const NumberCell = (): JSX.Element => {
         ...stylesForResizableCell,
         fontSize: '10px',
         color: 'grey',
-        paddingBottom: '6px',
+        paddingBottom: '2px',
       }}
     >
       {getNumberOfBoqItemsAbove({ itemIndex }) + 1}.{rowIndex + 1}
