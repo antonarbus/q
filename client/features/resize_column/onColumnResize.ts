@@ -1,7 +1,6 @@
 import { dispatch } from '@lib_instances/store'
-import { itemsSlice, saveItemsLocally } from '@entities/items'
+import { type BoqColumnKey, itemsSlice, saveItemsLocally } from '@entities/items'
 import { className } from '@shared/consts/className'
-import { type BoqColumnKey } from '@shared/types'
 
 type Props = {
   headerColumnElement: HTMLElement

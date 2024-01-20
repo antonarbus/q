@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import { Pin, pinBoqRowPriceCell, showBoqRowPins } from '@features/pin'
 import { formatBoqRowPriceCell, updateBoqRowPriceCell, validateBoqRowPrice } from '@features/update_cell'
 import { getBoqCellHtmlFromStore, useBoqItem, useItem, useRow, Froala, boqRowCellStyle, useStylesForResizableCell } from '@entities/items'
-import type { BoqColumnKey } from '@shared/types'
+import type { BoqColumnKey } from '@entities/items'
 
 const boqColumnKey: BoqColumnKey = 'price'
 

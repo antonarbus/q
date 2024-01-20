@@ -1,8 +1,8 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { type SxProps } from '@mui/material'
 import { type CSSProperties } from 'react'
-import { type BoqColumnKey } from '@shared/types'
 import { selectColumnWidth } from '../redux/selectors/selectColumnWidth'
+import { type BoqColumnKey } from '../types'
 
 type Props = {
   itemIndex: number
