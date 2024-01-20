@@ -1,1 +1,0 @@
-export { BottomMsg } from './BottomMsg'

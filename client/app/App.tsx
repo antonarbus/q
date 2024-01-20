@@ -9,10 +9,10 @@ import { Provider } from 'react-redux'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { BarChart } from '@pages/chart/Chart'
 import { Profile } from '@pages/profile'
-import { BottomMsg } from '@widgets/bottom_msg'
 import { Login, PersistentAuth, Register, RequireAuth, Reset, Unauthorized } from '@widgets/credentials'
 import { Nav } from '@widgets/nav'
 import { Spinner } from '@entities/spinner'
+import { BottomMessage } from '@shared/components/bottom_message'
 import { TopMsg } from '@shared/ui/top_msg'
 import { GlobalStyles } from './GlobalStyles'
 import { Main } from './Main'
@@ -42,7 +42,7 @@ export const App = (): JSX.Element => (
             <Route path='chart' element={<BarChart />} />
           </Routes>
           <TopMsg />
-          <BottomMsg />
+          <BottomMessage />
         </BrowserRouter>
         <ReactQueryDevtools />
         <ReactQueryDevtoolsProductionHidden />

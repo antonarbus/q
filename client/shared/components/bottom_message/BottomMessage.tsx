@@ -1,10 +1,10 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { bottomMsg } from '@shared/bottom_msg'
+import { bottomMessage } from './bottomMessageSignal'
 
-export const BottomMsg = (): JSX.Element => {
+export const BottomMessage = (): JSX.Element => {
   return (
     <AnimatePresence>
-      {bottomMsg.value !== '' && (
+      {bottomMessage.value !== '' && (
         <motion.span
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -20,7 +20,7 @@ export const BottomMsg = (): JSX.Element => {
             userSelect: 'none',
           }}
         >
-          {bottomMsg.value}
+          {bottomMessage.value}
         </motion.span>
       )}
     </AnimatePresence>
