@@ -1,7 +1,7 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { hideBottomMessage, showBottomMessage } from '@shared/components/bottom_message'
-import type { Item } from '@shared/types'
 import { itemsSlice } from '../redux/itemsSlice'
+import type { Item } from '../types'
 
 type Props = {
   items?: Item[]

@@ -68,3 +68,16 @@ export { RowProvider, useRow } from './providers/RowProvider'
 export { FroalaProvider, useFroala } from './providers/FroalaProvider'
 
 // types
+export type {
+  PasteItem,
+  BoqCols,
+  Item as ItemType,
+  CopyableItem,
+  BoqHeaderCell,
+  BoqHeaderKey,
+  BoqColumnKey,
+  BoqRow,
+  BoqRowCellPin,
+  BoqRowCell,
+  BoqItem,
+} from './types'

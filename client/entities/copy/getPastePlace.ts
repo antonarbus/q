@@ -1,4 +1,4 @@
-import type { CopyPlace } from '@shared/types'
+import { type CopyPlace } from './types'
 
 type Props = {
   item: Element

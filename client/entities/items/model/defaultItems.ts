@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid'
-import type { Item } from '@shared/types'
+import { type Item } from '../types'
 
 export const defaultItems: Item[] = [
   {

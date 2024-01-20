@@ -1,6 +1,6 @@
 import { jsonParseSafe } from '@shared/lib/jsonParseSafe'
-import type { Item } from '@shared/types'
 import { defaultItems } from '../model/defaultItems'
+import type { Item } from '../types'
 
 export const getDefaultOrLocalItems = (): Item[] => {
   const itemsFromLocalStorage = localStorage.getItem('items')

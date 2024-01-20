@@ -2,7 +2,7 @@ import type FroalaEditor from 'froala-editor'
 import { type MutableRefObject } from 'react'
 import { roundTo } from 'round-to'
 import { getBoqRowFromStore, getBoqRowsFromStore, isBoqRowPriceValid, updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from '@entities/items'
-import { type BoqRow } from '@shared/types'
+import { type BoqRow } from '@entities/items'
 
 type Props = {
   priceCellEditorRef: MutableRefObject<FroalaEditor | null>

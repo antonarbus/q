@@ -1,4 +1,4 @@
-import type { Item } from '@shared/types'
+import type { Item } from '../../types'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type EqualityFn = (a: any, b: any) => boolean

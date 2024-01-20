@@ -1,4 +1,4 @@
-import { type Item } from '@shared/types'
+import { type Item } from '../../types'
 
 export const removePasteItemReducer = (state: Item[]): void => {
   const pasteItemIndex = state.findIndex((item) => item.type === 'paste')
