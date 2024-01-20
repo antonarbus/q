@@ -211,7 +211,7 @@ export const GlobalStyles = (): JSX.Element => (
       // caret at Froala
       .fr-wrapper {
         cursor: 'text';
-        caret-color: red;
+        /* caret-color: red; */
       }
 
       // Froala insert button
