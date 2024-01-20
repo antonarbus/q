@@ -5,7 +5,7 @@ import type { MouseEvent } from 'react'
 import { TbCut } from 'react-icons/tb'
 import { copySlice } from '@entities/copy'
 import { itemsSlice, saveItemHeightByIndex, selectIsLastItem, useItem, saveItemsLocally } from '@entities/items'
-import { className } from '@shared/className'
+import { className } from '@shared/consts/className'
 import { generalSlice } from '@shared/general'
 import { cleanHtml } from '@shared/lib/itemsUtils'
 

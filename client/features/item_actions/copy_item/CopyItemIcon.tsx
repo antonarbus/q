@@ -4,7 +4,7 @@ import type { MouseEvent } from 'react'
 import { MdCopyAll } from 'react-icons/md'
 import { copySlice } from '@entities/copy'
 import { itemsSlice, saveItemHeightByIndex, useItem } from '@entities/items'
-import { className } from '@shared/className'
+import { className } from '@shared/consts/className'
 import { generalSlice } from '@shared/general'
 import { cleanHtml } from '@shared/lib/itemsUtils'
 
