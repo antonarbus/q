@@ -13,14 +13,15 @@ export const useSelectOnDoubleClick = (): void => {
       const clickedElement = e.target
       if (!(clickedElement instanceof HTMLElement)) return
 
-      const clickedElementChildNodes = clickedElement.childNodes
+      const toolbar = editorRef.current?.$tb?.['0']
 
-      // if clicked a text node, no need to do anything manually coz selection works correctly by default
-      const isTextNodeClicked = Array.from(clickedElementChildNodes).some(node => node.nodeType === Node.TEXT_NODE)
-
-      if (isTextNodeClicked) return
-
-      editorRef.current?.commands.selectAll()
+      setTimeout(() => {
+        if (!(toolbar instanceof HTMLElement)) return
+        const toolbarDisplay = toolbar.style.display
+        if (toolbarDisplay === 'none') {
+          editorRef.current?.commands.selectAll()
+        }
+      })
     }
 
     froalaElementRef.current?.addEventListener('dblclick', selectOnDoubleClick)

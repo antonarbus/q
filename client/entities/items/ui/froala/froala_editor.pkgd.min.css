@@ -6750,10 +6750,3 @@ span.fr-img-caption.fr-view.fr-dii.fr-fir {
   margin: 5px 0 5px 5px;
   max-width: calc(100% - 5px);
 }
-
-/* custom tweak to let us understand with JS if we click on text element our outside */
-/* need to detect double click inside froala but outside the text as it works poorly */
-
-.fr-element.fr-view p {
-  display: inline-block;
-}
