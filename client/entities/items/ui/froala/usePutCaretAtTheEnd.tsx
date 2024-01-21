@@ -8,14 +8,16 @@ export const usePutCaretAtTheEnd = (): void => {
 
   useEffect(() => {
     const focusOnTextIfCellOrPaddingAreClicked = (e: MouseEvent): void => {
+      if (froalaElementRef.current === null) return
       if (!editorRef.current) return
 
       const clickedElement = e.target
       if (!(clickedElement instanceof HTMLElement)) return
 
       if (clickedElement.matches('.fr-box')) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        editorRef.current.selection.setAtEnd(editorRef.current.$el.get(0))
+        const contentEditableElement = editorRef.current.$el.get(0)
+        if (!(contentEditableElement instanceof HTMLElement)) return
+        editorRef.current.selection.setAtEnd(contentEditableElement)
       }
 
       editorRef.current.selection.restore()
