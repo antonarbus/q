@@ -5,6 +5,8 @@ import { useRef, type MutableRefObject, type MouseEvent } from 'react'
 import { FroalaProvider } from '../../providers/FroalaProvider'
 import { useItem } from '../../providers/ItemProvider'
 import { EditableHtml } from './EditableHtml'
+import { placeCaretAtTheEnd } from './placeCaretAtTheEnd'
+import { selectText } from './selectText'
 import { StaticHtml } from './StaticHtml'
 import { StaticHtmlBackgroundToFixBlinkIssue } from './StaticHtmlBackgroundToFixBlinkIssue'
 import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
@@ -23,7 +25,18 @@ export type FroalaProps = {
   wrapperStyles?: SxProps
 }
 
-export const Froala = (props: FroalaProps): JSX.Element => {
+export const Froala = ({
+  editorRef,
+  htmlGetter,
+  additionalStyle,
+  placeholder,
+  onContentChange,
+  onFocus,
+  onClick,
+  onBlur,
+  className,
+  wrapperStyles,
+}: FroalaProps): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const { itemIndex } = useItem()
   const { froalaHeightRef } = useFixedHeightForAnimation({ froalaElementRef })
@@ -35,67 +48,25 @@ export const Froala = (props: FroalaProps): JSX.Element => {
 
   return (
     <FroalaProvider
-      editorRef={props.editorRef}
-      htmlGetter={props.htmlGetter}
-      additionalStyle={props.additionalStyle}
-      placeholder={props.placeholder}
-      onContentChange={props.onContentChange}
-      onFocus={props.onFocus}
-      onClick={props.onClick}
-      onBlur={props.onBlur}
+      editorRef={editorRef}
+      htmlGetter={htmlGetter}
+      additionalStyle={additionalStyle}
+      placeholder={placeholder}
+      onContentChange={onContentChange}
+      onFocus={onFocus}
+      onClick={onClick}
+      onBlur={onBlur}
       froalaElementRef={froalaElementRef}
       froalaHeightRef={froalaHeightRef}
     >
       <Box
-        className={'froala-wrapper ' + (props.className ?? '')}
-        sx={props.wrapperStyles}
+        className={'froala-wrapper ' + (className ?? '')}
+        sx={wrapperStyles}
         onClick={(e: MouseEvent) => {
-          const focusOnTextIfCellOrPaddingAreClicked = (e: MouseEvent): void => {
-            console.log('wrapper clicked')
-            if (froalaElementRef.current === null) return
-            if (!props.editorRef.current) return
-
-            const clickedElement = e.target
-            if (!(clickedElement instanceof HTMLElement)) return
-
-            const isFrBox = clickedElement.matches('.fr-box')
-            const isFroalaWrapper = clickedElement.matches('.froala-wrapper')
-
-            if (isFrBox || isFroalaWrapper) {
-              const contentEditableElement = props.editorRef.current.$el.get(0)
-              if (!(contentEditableElement instanceof HTMLElement)) return
-              props.editorRef.current.selection.setAtEnd(contentEditableElement)
-            }
-
-            props.editorRef.current.selection.restore()
-          }
-
-          focusOnTextIfCellOrPaddingAreClicked(e)
+          placeCaretAtTheEnd({ e, editorRef, froalaElementRef })
         }}
         onDoubleClickCapture={(e: MouseEvent) => {
-          const selectOnDoubleClick = (e: MouseEvent): void => {
-            console.log('wrapper double clicked')
-            if (props.editorRef.current === null) return
-
-            const clickedElement = e.target
-            if (!(clickedElement instanceof HTMLElement)) return
-
-            setTimeout((): void => {
-              if (props.editorRef.current === null) return
-
-              // const toolbar = props.editorRef.current?.$tb?.['0']
-              // if (!(toolbar instanceof HTMLElement)) return
-              // const isToolbarVisible = toolbar.style.display === 'block'
-
-              const selectedText = props.editorRef.current.selection.text()
-
-              if (selectedText.trim() === '') {
-                props.editorRef.current.commands.selectAll()
-              }
-            })
-          }
-
-          selectOnDoubleClick(e)
+          selectText({ e, editorRef })
         }}
       >
         <div
