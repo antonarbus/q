@@ -19,7 +19,7 @@ export const SubTotalPrice = (): JSX.Element => {
       placeholder='Price...'
       htmlGetter={() => getBoqHeaderHtmlFromStore({ itemIndex, boqHeaderKey })}
       onClick={(e) => {
-        showHideBoqPricePins({ e, itemIndex, hidePinsClickHandlerRef, isInitClickRef })
+        showHideBoqPricePins({ e: e.nativeEvent, itemIndex, hidePinsClickHandlerRef, isInitClickRef })
       }}
       onContentChange={() => {
         updateSubtotalPriceCell({ subTotalPriceEditorRef, boqPriceEditorRefs, itemIndex })
