@@ -4,7 +4,6 @@ import { ItemActions } from '@features/item_actions'
 import { onTextItemResizeStart, onTextItemResizeStop } from '@features/resize_item'
 import { updateTextItem } from '@features/update_cell'
 import { Froala, Item, getItemTextHtmlFromStore, textItemCellStyle, useItem } from '@entities/items'
-import { PencilAtBottomRight } from '@shared/components/PencilAtBottomRight'
 
 export const TextItem = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
@@ -25,7 +24,6 @@ export const TextItem = (): JSX.Element => {
         }}
         additionalStyle={textItemCellStyle}
       />
-      <PencilAtBottomRight editorRef={editorRef} />
     </Item>
   )
 }

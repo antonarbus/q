@@ -9,7 +9,7 @@ export const usePutCaretAtTheEnd = (): void => {
   useEffect(() => {
     const focusOnTextIfCellOrPaddingAreClicked = (e: MouseEvent): void => {
       if (!editorRef.current) return
-      // https://stackoverflow.com/a/35191761/7239778
+
       const clickedElement = e.target
       if (!(clickedElement instanceof HTMLElement)) return
 
@@ -22,5 +22,9 @@ export const usePutCaretAtTheEnd = (): void => {
     }
 
     froalaElementRef.current?.addEventListener('click', focusOnTextIfCellOrPaddingAreClicked)
+
+    return () => {
+      froalaElementRef.current?.removeEventListener('click', focusOnTextIfCellOrPaddingAreClicked)
+    }
   }, [itemIndex])
 }
