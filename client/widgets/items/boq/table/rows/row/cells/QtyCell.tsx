@@ -13,10 +13,13 @@ export const QtyCell = (): JSX.Element => {
 
   return (
     <Box
-      className={`td ${boqColumnKey}`}
-      sx={stylesForResizableCell}
+      sx={{
+        display: 'flex',
+        position: 'relative',
+      }}
     >
       <Froala
+             className={`td ${boqColumnKey}`}
         editorRef={qtyCellEditorRef}
         placeholder='Qty...'
         htmlGetter={() => getBoqCellHtmlFromStore({ itemIndex, rowIndex, boqColumnKey })}
@@ -26,6 +29,7 @@ export const QtyCell = (): JSX.Element => {
         onBlur={() => {
           formatBoqRowQtyCell({ itemIndex, qtyCellEditorRef, rowIndex })
         }}
+        wrapperStyles={stylesForResizableCell}
         additionalStyle={boqRowCellStyle}
       />
       <Pin

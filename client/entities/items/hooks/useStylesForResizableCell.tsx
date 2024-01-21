@@ -28,6 +28,7 @@ export const useStylesForResizableCell = ({
     width: columnWidth,
     maxWidth: columnWidth,
     minWidth,
+    cursor: 'text',
   }
 
   return { stylesForResizableCell }

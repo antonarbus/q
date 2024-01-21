@@ -14,10 +14,13 @@ export const PriceCell = (): JSX.Element => {
 
   return (
     <Box
-      className={`td ${boqColumnKey}`}
-      sx={stylesForResizableCell}
+      sx={{
+        display: 'flex',
+        position: 'relative',
+      }}
     >
       <Froala
+             className={`td ${boqColumnKey}`}
         editorRef={priceCellEditorRef}
         placeholder='Price...'
         htmlGetter={() => getBoqCellHtmlFromStore({ itemIndex, rowIndex, boqColumnKey })}
@@ -31,6 +34,7 @@ export const PriceCell = (): JSX.Element => {
           formatBoqRowPriceCell({ rowIndex, priceCellEditorRef, itemIndex })
           validateBoqRowPrice({ itemIndex, priceCellEditorRef, rowIndex, subTotalPriceEditorRef })
         }}
+        wrapperStyles={stylesForResizableCell}
         additionalStyle={boqRowCellStyle}
       />
       <Pin
