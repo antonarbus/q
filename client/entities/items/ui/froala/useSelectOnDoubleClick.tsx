@@ -8,18 +8,22 @@ export const useSelectOnDoubleClick = (): void => {
 
   useEffect(() => {
     const selectOnDoubleClick = (e: MouseEvent): void => {
-      if (!editorRef.current) return
+      if (editorRef.current === null) return
 
       const clickedElement = e.target
       if (!(clickedElement instanceof HTMLElement)) return
 
-      const toolbar = editorRef.current?.$tb?.['0']
+      setTimeout((): void => {
+        if (editorRef.current === null) return
 
-      setTimeout(() => {
-        if (!(toolbar instanceof HTMLElement)) return
-        const toolbarDisplay = toolbar.style.display
-        if (toolbarDisplay === 'none') {
-          editorRef.current?.commands.selectAll()
+        // const toolbar = editorRef.current?.$tb?.['0']
+        // if (!(toolbar instanceof HTMLElement)) return
+        // const isToolbarVisible = toolbar.style.display === 'block'
+
+        const selectedText = editorRef.current.selection.text()
+
+        if (selectedText.trim() === '') {
+          editorRef.current.commands.selectAll()
         }
       })
     }
