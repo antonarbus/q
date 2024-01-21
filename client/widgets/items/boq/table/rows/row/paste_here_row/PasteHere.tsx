@@ -12,10 +12,11 @@ export const PasteHere = ({ children }: Props): JSX.Element => {
   return (
     <>
       <div
+        className='paste-here'
         style={{
           opacity: isPasteHere ? 0.2 : 1,
           display: 'flex',
-          alignItems: 'flex-end',
+          alignItems: 'stretch',
         }}
       >
         {children}

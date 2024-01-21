@@ -22,7 +22,8 @@ export const useStylesForResizableCell = ({
   const columnWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
 
   const stylesForResizableCell: SxProps = {
-    display: 'block',
+    display: 'flex',
+    alignItems: 'flex-end',
     position: 'relative',
     width: columnWidth,
     maxWidth: columnWidth,

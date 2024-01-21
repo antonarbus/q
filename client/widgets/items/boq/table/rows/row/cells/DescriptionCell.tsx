@@ -15,8 +15,14 @@ export const DescriptionCell = (): JSX.Element => {
 
   return (
     <Box
-      className={`td ${boqColumnKey}`}
-      sx={stylesForResizableCell}
+    className={`td ${boqColumnKey}`}
+    sx={{ ...stylesForResizableCell, background: 'yellow' }}
+    onClick={() => {
+      // todo: to set cursor and select on dbClick we need to put also
+      // todo: descriptionCellEditorRef into RowProvider
+      // todo: also we may need to remove that logic from froala, maybe just move those hooks here
+      console.log(666)
+    }}
     >
       <Froala
         editorRef={editorRef}
@@ -25,7 +31,10 @@ export const DescriptionCell = (): JSX.Element => {
         onContentChange={() => {
           updateDescriptionCell({ editorRef, itemIndex, rowIndex, boqColumnKey })
         }}
-        additionalStyle={descriptionCellStyle}
+        onClick={() => {
+          console.log(555)
+        }}
+        additionalStyle={{ ...descriptionCellStyle, background: 'red' }}
       />
     </Box>
   )
