@@ -24,7 +24,7 @@ export const BoqRowLayout = ({ children, onBlur }: Props): JSX.Element => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-end',
-        minHeight: '60px',
+        minHeight: '60px', // todo: because of this we have not clickable area, better to move upper gap inside cell
         position: 'relative',
         borderBottom: '1px solid #e8e8e8',
       }}
