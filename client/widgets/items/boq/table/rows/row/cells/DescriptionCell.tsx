@@ -1,7 +1,7 @@
 import type FroalaEditor from 'froala-editor'
 import { useRef } from 'react'
 import { updateDescriptionCell } from '@features/update_cell'
-import { getBoqCellHtmlFromStore, useRow, useItem, Froala, descriptionCellStyle, useStylesForResizableCell } from '@entities/items'
+import { getBoqCellHtmlFromStore, useRow, useItem, Froala, useStylesForResizableCell, boqRowCellStyle } from '@entities/items'
 import type { BoqColumnKey } from '@entities/items'
 
 const boqColumnKey: BoqColumnKey = 'description'
@@ -22,7 +22,13 @@ export const DescriptionCell = (): JSX.Element => {
           updateDescriptionCell({ editorRef, itemIndex, rowIndex, boqColumnKey })
         }}
         wrapperStyles={stylesForResizableCell}
-        additionalStyle={descriptionCellStyle}
+        additionalStyle={{
+          ...boqRowCellStyle,
+          textAlign: 'left',
+          '.fr-placeholder': {
+            left: 0,
+          },
+        }}
       />
   )
 }

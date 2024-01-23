@@ -7,6 +7,7 @@ import { useItem } from '../../providers/ItemProvider'
 import { EditableHtml } from './EditableHtml'
 import { placeCaretAtTheEnd } from './placeCaretAtTheEnd'
 import { selectText } from './selectText'
+// import { selectText2 } from './selectText2'
 import { StaticHtml } from './StaticHtml'
 import { StaticHtmlBackgroundToFixBlinkIssue } from './StaticHtmlBackgroundToFixBlinkIssue'
 import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
@@ -61,9 +62,12 @@ export const Froala = ({
     >
       <Box
         className={'froala-wrapper ' + (className ?? '')}
-        sx={wrapperStyles}
+        sx={{ ...wrapperStyles, cursor: 'pointer' }}
         onClick={(e: MouseEvent) => {
           placeCaretAtTheEnd({ e, editorRef, froalaElementRef })
+          // todo: let's make a pointer for cell and select text on click
+          // todo: as it happens in selectText2(), but need to orchestrate it with non table cells
+          // selectText2({ e, editorRef })
         }}
         onDoubleClickCapture={(e: MouseEvent) => {
           selectText({ e, editorRef })
