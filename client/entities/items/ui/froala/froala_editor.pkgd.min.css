@@ -6750,3 +6750,8 @@ span.fr-img-caption.fr-view.fr-dii.fr-fir {
   margin: 5px 0 5px 5px;
   max-width: calc(100% - 5px);
 }
+
+/* custom, move toolbar a bit lower */
+.fr-toolbar.fr-desktop.fr-inline {
+  translate: 0px 10px
+}
