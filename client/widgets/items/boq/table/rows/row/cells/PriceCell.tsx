@@ -20,7 +20,7 @@ export const PriceCell = (): JSX.Element => {
       }}
     >
       <Froala
-             className={`td ${boqColumnKey}`}
+        className={`td ${boqColumnKey}`}
         editorRef={priceCellEditorRef}
         placeholder='Price...'
         htmlGetter={() => getBoqCellHtmlFromStore({ itemIndex, rowIndex, boqColumnKey })}

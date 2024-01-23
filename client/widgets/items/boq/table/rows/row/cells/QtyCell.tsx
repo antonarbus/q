@@ -19,7 +19,7 @@ export const QtyCell = (): JSX.Element => {
       }}
     >
       <Froala
-             className={`td ${boqColumnKey}`}
+        className={`td ${boqColumnKey}`}
         editorRef={qtyCellEditorRef}
         placeholder='Qty...'
         htmlGetter={() => getBoqCellHtmlFromStore({ itemIndex, rowIndex, boqColumnKey })}
