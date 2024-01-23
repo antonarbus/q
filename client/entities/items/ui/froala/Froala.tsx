@@ -62,7 +62,10 @@ export const Froala = ({
     >
       <Box
         className={'froala-wrapper ' + (className ?? '')}
-        sx={{ ...wrapperStyles, cursor: 'pointer' }}
+        sx={{
+          ...wrapperStyles,
+          cursor: 'text',
+        }}
         onClick={(e: MouseEvent) => {
           placeCaretAtTheEnd({ e, editorRef, froalaElementRef })
           // todo: let's make a pointer for cell and select text on click
