@@ -5,8 +5,8 @@ import { useRef, type MutableRefObject, type MouseEvent } from 'react'
 import { FroalaProvider } from '../../providers/FroalaProvider'
 import { useItem } from '../../providers/ItemProvider'
 import { EditableHtml } from './EditableHtml'
-import { placeCaretAtTheEnd } from './placeCaretAtTheEnd'
-import { selectText2 } from './selectText2'
+import { placeCaretAtTheEndIfToolbarIsNotShown } from './placeCaretAtTheEndIfToolbarIsNotShown'
+import { selectTextOrCloseToolbar } from './selectTextOrCloseToolbar'
 import { StaticHtml } from './StaticHtml'
 import { StaticHtmlBackgroundToFixBlinkIssue } from './StaticHtmlBackgroundToFixBlinkIssue'
 import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
@@ -66,13 +66,13 @@ export const Froala = ({
           cursor: 'pointer',
         }}
         onMouseDown={(e: MouseEvent) => {
-          selectText2({ e, editorRef })
+          selectTextOrCloseToolbar({ e, editorRef })
         }}
         onClick={(e: MouseEvent) => {
-          placeCaretAtTheEnd({ e, editorRef, froalaElementRef })
+          placeCaretAtTheEndIfToolbarIsNotShown({ e, editorRef, froalaElementRef })
         }}
         onDoubleClickCapture={(e: MouseEvent) => {
-          selectText2({ e, editorRef })
+          selectTextOrCloseToolbar({ e, editorRef })
         }}
       >
         <div

@@ -7,7 +7,7 @@ type Props = {
   editorRef: MutableRefObject<FroalaEditor | null>
 }
 
-export const placeCaretAtTheEnd = ({
+export const placeCaretAtTheEndIfToolbarIsNotShown = ({
   e,
   froalaElementRef,
   editorRef,
