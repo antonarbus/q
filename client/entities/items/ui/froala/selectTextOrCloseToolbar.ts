@@ -6,7 +6,7 @@ type Props = {
   editorRef: MutableRefObject<FroalaEditor | null>
 }
 
-export const selectText2 = ({
+export const selectTextOrCloseToolbar = ({
   e,
   editorRef,
 }: Props): void => {
@@ -23,9 +23,7 @@ export const selectText2 = ({
   const toolbarElement = editorRef.current.$tb['0']
   const isToolbarOpened = toolbarElement.style.display === 'block'
 
-  if (e.type === 'dblclick' && outsideEditableZone) {
-    return
-  }
+  if (e.type === 'dblclick' && outsideEditableZone) return
 
   if (e.type === 'dblclick' && insideEditableZone) {
     setTimeout((): void => {
@@ -35,6 +33,7 @@ export const selectText2 = ({
         editorRef.current.commands.selectAll()
       }
     })
+
     return
   }
 
