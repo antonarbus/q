@@ -17,8 +17,34 @@ export const selectText2 = ({
 
   const isFrBox = clickedElement.matches('.fr-box')
   const isFroalaWrapper = clickedElement.matches('.froala-wrapper')
+  const outsideEditableZone = isFrBox || isFroalaWrapper
+  const insideEditableZone = !outsideEditableZone
 
-  if (isFrBox || isFroalaWrapper) {
+  const toolbarElement = editorRef.current.$tb['0']
+  const isToolbarOpened = toolbarElement.style.display === 'block'
+
+  if (e.type === 'dblclick' && outsideEditableZone) {
+    return
+  }
+
+  if (e.type === 'dblclick' && insideEditableZone) {
+    setTimeout((): void => {
+      if (editorRef.current === null) return
+      const selectedText = editorRef.current.selection.text()
+      if (selectedText.trim() === '') {
+        editorRef.current.commands.selectAll()
+      }
+    })
+    return
+  }
+
+  if (e.type === 'mousedown' && isToolbarOpened) {
+    editorRef.current.toolbar.hide()
+    e.stopPropagation()
+    return
+  }
+
+  if (e.type === 'mousedown' && outsideEditableZone) {
     setTimeout((): void => {
       if (editorRef.current === null) return
       const selectedText = editorRef.current.selection.text()

@@ -15,6 +15,11 @@ export const placeCaretAtTheEnd = ({
   if (froalaElementRef.current === null) return
   if (!editorRef.current) return
 
+  const toolbarElement = editorRef.current.$tb['0']
+  const isToolbarOpened = toolbarElement.style.display === 'block'
+
+  if (isToolbarOpened) return
+
   const clickedElement = e.target
   if (!(clickedElement instanceof HTMLElement)) return
 
