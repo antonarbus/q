@@ -1,6 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { type FocusEvent } from 'react'
-import { itemsSlice } from '@entities/items'
+import { getBoqRowFromStore, itemsSlice } from '@entities/items'
 import { className } from '@shared/consts/className'
 
 type Props = {
@@ -15,19 +15,30 @@ export const hideBoqRowPinsOnRowBlur = ({
   rowIndex,
 }: Props): void => {
   const elementReceivedFocus = e.relatedTarget
-  const isPin = elementReceivedFocus?.classList.contains(className.pin)
+  const pinClicked = elementReceivedFocus?.classList.contains(className.pin)
 
-  if (isPin) return
+  if (pinClicked) return
 
-  dispatch(itemsSlice.actions.hideBoqRowCellPinReducer({
-    itemIndex,
-    rowIndex,
-    boqColumnKey: 'itemPrice',
-  }))
+  const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
+  if (boqRow === undefined) return
 
-  dispatch(itemsSlice.actions.hideBoqRowCellPinReducer({
-    itemIndex,
-    rowIndex,
-    boqColumnKey: 'qty',
-  }))
+  const isItemPricePinShown = boqRow.itemPrice.pin.isShown
+
+  if (isItemPricePinShown) {
+    dispatch(itemsSlice.actions.hideBoqRowCellPinReducer({
+      itemIndex,
+      rowIndex,
+      boqColumnKey: 'itemPrice',
+    }))
+  }
+
+  const isQtyPinShown = boqRow.qty.pin.isShown
+
+  if (isQtyPinShown) {
+    dispatch(itemsSlice.actions.hideBoqRowCellPinReducer({
+      itemIndex,
+      rowIndex,
+      boqColumnKey: 'qty',
+    }))
+  }
 }
