@@ -6,8 +6,6 @@ import FroalaEditor from 'froala-editor'
 import type { MouseEvent, MutableRefObject } from 'react'
 import { useEffect } from 'react'
 import { useFroala } from '../../providers/FroalaProvider'
-import { useItem } from '../../providers/ItemProvider'
-import { saveItemsLocally } from '../../utils/saveItemsLocally'
 import { froalaDefaultOptions } from './froalaDefaultOptions'
 
 declare const window: Window & typeof globalThis & {
@@ -17,7 +15,6 @@ declare const window: Window & typeof globalThis & {
 window.froalas = []
 
 export const useStartFroala = (): void => {
-  const { itemIndex } = useItem()
   const { htmlGetter, froalaElementRef, editorRef, placeholder, onContentChange, onFocus, onClick, onBlur } = useFroala()
 
   useEffect(() => {
@@ -37,9 +34,7 @@ export const useStartFroala = (): void => {
               // console.log('💚 froalas qty after init: ', window.froalas.length)
             },
             contentChanged: () => {
-              console.log(666)
               onContentChange()
-              // saveItemsLocally({ msgAboveItemWithIndex: itemIndex }) // todo: move it away into real content change feature
             },
             focus: () => {
               onFocus?.()
