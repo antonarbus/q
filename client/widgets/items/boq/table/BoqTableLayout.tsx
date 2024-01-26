@@ -10,7 +10,7 @@ export const BoqTableLayout = ({ children }: Props): JSX.Element => {
     <Box
       className='boq-table-container-with-paddings'
       sx={{
-        p: '10px', // to have a gap when overflow
+        p: '10px 10px 2px 10px', // to have a gap when overflow
       }}
     >
       <Box

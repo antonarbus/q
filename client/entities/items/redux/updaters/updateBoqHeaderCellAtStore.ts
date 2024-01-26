@@ -3,7 +3,6 @@ import type FroalaEditor from 'froala-editor'
 import { type MutableRefObject } from 'react'
 import { getNumberFromString, getTextContentFromHtml } from '@shared/lib'
 import { type BoqHeaderKey } from '../../types'
-import { saveItemsLocally } from '../../utils/saveItemsLocally'
 import { getBoqItemFromStore } from '../getters/getBoqItemFromStore'
 import { itemsSlice } from '../itemsSlice'
 
@@ -13,20 +12,24 @@ type Props = {
   boqHeaderKey: BoqHeaderKey
 }
 
+type Res = {
+  didUpdate: boolean
+}
+
 export const updateBoqHeaderCellAtStore = ({
   editorRef,
   itemIndex,
   boqHeaderKey,
-}: Props): void => {
-  if (editorRef.current === null) return
+}: Props): Res => {
+  if (editorRef.current === null) return { didUpdate: false }
 
   const boqItem = getBoqItemFromStore({ itemIndex })
-  if (boqItem === undefined) return
+  if (boqItem === undefined) return { didUpdate: false }
 
   const prevHtml = boqItem.boq.header[boqHeaderKey].html
   const html = editorRef.current?.html.get()
   const didTextChange = prevHtml !== html
-  if (!didTextChange) return
+  if (!didTextChange) return { didUpdate: false }
 
   const cellTextContent = getTextContentFromHtml({ html })
 
@@ -41,7 +44,5 @@ export const updateBoqHeaderCellAtStore = ({
     boqHeaderKey,
   }))
 
-  saveItemsLocally({
-    msgAboveItemWithIndex: itemIndex,
-  })
+  return { didUpdate: true }
 }

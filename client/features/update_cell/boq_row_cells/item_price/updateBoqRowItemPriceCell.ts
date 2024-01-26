@@ -1,7 +1,7 @@
 import type FroalaEditor from 'froala-editor'
 import { type MutableRefObject } from 'react'
 import { roundTo } from 'round-to'
-import { didBoqCellContentChange, getBoqRowFromStore, getBoqRowsFromStore, updateBoqRowCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from '@entities/items'
+import { didBoqCellContentChange, getBoqRowFromStore, getBoqRowsFromStore, saveItemsLocally, updateBoqRowCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from '@entities/items'
 import { type BoqRow, type BoqColumnKey } from '@entities/items'
 
 type Props = {
@@ -68,5 +68,9 @@ export const updateBoqRowItemPriceCell = ({
     subTotalPriceEditor: subTotalPriceEditorRef.current,
     value: subTotalPriceValueNewRounded,
     incrementally: true,
+  })
+
+  saveItemsLocally({
+    msgAboveItemWithIndex: itemIndex,
   })
 }

@@ -39,7 +39,7 @@ export const useStartFroala = (): void => {
             contentChanged: () => {
               console.log(666)
               onContentChange()
-              saveItemsLocally({ msgAboveItemWithIndex: itemIndex }) // todo: move it away into real content change feature
+              // saveItemsLocally({ msgAboveItemWithIndex: itemIndex }) // todo: move it away into real content change feature
             },
             focus: () => {
               onFocus?.()

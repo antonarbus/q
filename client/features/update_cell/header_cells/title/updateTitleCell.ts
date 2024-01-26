@@ -1,6 +1,6 @@
 import type FroalaEditor from 'froala-editor'
 import { type MutableRefObject } from 'react'
-import { updateBoqHeaderCellAtStore } from '@entities/items'
+import { saveItemsLocally, updateBoqHeaderCellAtStore } from '@entities/items'
 import { type BoqHeaderKey } from '@entities/items'
 
 type Props = {
@@ -10,5 +10,11 @@ type Props = {
 }
 
 export const updateTitleCell = ({ editorRef, itemIndex, boqHeaderKey }: Props): void => {
-  updateBoqHeaderCellAtStore({ editorRef, itemIndex, boqHeaderKey })
+  const { didUpdate } = updateBoqHeaderCellAtStore({ editorRef, itemIndex, boqHeaderKey })
+
+  if (didUpdate) {
+    saveItemsLocally({
+      msgAboveItemWithIndex: itemIndex,
+    })
+  }
 }
