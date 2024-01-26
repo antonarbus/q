@@ -37,8 +37,9 @@ export const useStartFroala = (): void => {
               // console.log('💚 froalas qty after init: ', window.froalas.length)
             },
             contentChanged: () => {
+              console.log(666)
               onContentChange()
-              saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
+              saveItemsLocally({ msgAboveItemWithIndex: itemIndex }) // todo: move it away into real content change feature
             },
             focus: () => {
               onFocus?.()
