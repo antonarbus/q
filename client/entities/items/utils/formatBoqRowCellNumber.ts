@@ -40,7 +40,7 @@ export const formatBoqRowCellNumber = ({
     newNumber: roundToTwoDecimals ? roundedValue : value,
   })
 
-  // if (html === newHtml) return // todo: why?
+  if (html === newHtml) return
 
   dispatch(itemsSlice.actions.updateBoqCellReducer({
     itemIndex,
