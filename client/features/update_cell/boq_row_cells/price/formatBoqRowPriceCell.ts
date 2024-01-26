@@ -1,6 +1,6 @@
 import type FroalaEditor from 'froala-editor'
 import { type MutableRefObject } from 'react'
-import { formatBoqRowCellNumber } from '@entities/items'
+import { formatBoqRowCellNumber, saveItemsLocally } from '@entities/items'
 
 type Props = {
   priceCellEditorRef: MutableRefObject<FroalaEditor | null>
@@ -19,5 +19,9 @@ export const formatBoqRowPriceCell = ({
     boqColumnKey: 'price',
     editorRef: priceCellEditorRef,
     roundToTwoDecimals: true,
+  })
+
+  saveItemsLocally({
+    msgAboveItemWithIndex: itemIndex,
   })
 }

@@ -1,7 +1,7 @@
 import type FroalaEditor from 'froala-editor'
 import { type MutableRefObject } from 'react'
 import { roundTo } from 'round-to'
-import { didBoqHeaderCellContentChange, getBoqHeaderFromStore, getBoqRowsFromStore, updateBoqHeaderCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from '@entities/items'
+import { didBoqHeaderCellContentChange, getBoqHeaderFromStore, getBoqRowsFromStore, saveItemsLocally, updateBoqHeaderCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from '@entities/items'
 import { notify } from '@shared/ui/top_msg'
 
 type Props = {
@@ -30,11 +30,17 @@ export const updateSubtotalPriceCell = ({
   const boqRows = getBoqRowsFromStore({ itemIndex })
   if (boqRows === undefined) return
 
-  updateBoqHeaderCellAtStore({
+  const { didUpdate } = updateBoqHeaderCellAtStore({
     editorRef: subTotalPriceEditorRef,
     itemIndex,
     boqHeaderKey: 'subTotalPrice',
   })
+
+  if (didUpdate) {
+    saveItemsLocally({
+      msgAboveItemWithIndex: itemIndex,
+    })
+  }
 
   const prevSubTotalPriceValue = boqRows.reduce((accumulator, boqRow) => {
     return accumulator + boqRow.price.value
@@ -52,7 +58,9 @@ export const updateSubtotalPriceCell = ({
     itemIndex,
     boqHeaderKey: 'subTotalPrice',
   })
+
   if (subTotalPriceFromStore === undefined) return
+
   const newSubTotalPriceValue = subTotalPriceFromStore.value
 
   const unpinnedPricesSumTarget = newSubTotalPriceValue - pinnedPricesSum
@@ -122,5 +130,9 @@ export const updateSubtotalPriceCell = ({
       value: price.newValue,
       triggerContentChange: true,
     })
+  })
+
+  saveItemsLocally({
+    msgAboveItemWithIndex: itemIndex,
   })
 }
