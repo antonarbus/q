@@ -12,7 +12,6 @@ import { Profile } from '@pages/profile'
 import { Login, PersistentAuth, Register, RequireAuth, Reset, Unauthorized } from '@widgets/credentials'
 import { Nav } from '@widgets/nav'
 import { Spinner } from '@entities/spinner'
-import { BottomMessage } from '@shared/components/bottom_message'
 import { TopMsg } from '@shared/ui/top_msg'
 import { GlobalStyles } from './GlobalStyles'
 import { Main } from './Main'
@@ -24,6 +23,7 @@ export const App = (): JSX.Element => (
       <ThemeProvider theme={themeClient}>
         <GlobalStyles />
         <BrowserRouter>
+          <TopMsg />
           <Spinner />
           <Nav />
           <Routes>
@@ -41,8 +41,6 @@ export const App = (): JSX.Element => (
             <Route path='unauthorized' element={<Unauthorized />} />
             <Route path='chart' element={<BarChart />} />
           </Routes>
-          <TopMsg />
-          <BottomMessage />
         </BrowserRouter>
         <ReactQueryDevtools />
         <ReactQueryDevtoolsProductionHidden />
