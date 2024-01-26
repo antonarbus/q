@@ -23,10 +23,11 @@ export const updateSubTotalPriceWithValue = ({
   const boqItem = getBoqItemFromStore({ itemIndex })
   if (boqItem === undefined) return
 
-  const boqRows = getBoqRowsFromStore({ itemIndex })
-  if (boqRows === undefined) return
-
   const subTotalPriceValueCurrent = boqItem.boq.header.subTotalPrice.value
+
+  const didValueChange = value !== subTotalPriceValueCurrent
+
+  if (!didValueChange) return
 
   const subTotalPriceTextContent = getTextContentFromHtml({
     html: boqItem.boq.header.subTotalPrice.html,
