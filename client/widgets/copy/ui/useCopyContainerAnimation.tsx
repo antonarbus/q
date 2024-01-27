@@ -37,16 +37,10 @@ export const useCopyContainerAnimation = (): AnimationControls => {
       },
     })
 
-    dispatch(copySlice.actions.forbidToPaste())
-    dispatch(copySlice.actions.forbidToCopy())
-    dispatch(copySlice.actions.forbidToCut())
-    dispatch(copySlice.actions.forbidToDelete())
+    dispatch(copySlice.actions.forbidAllActions())
 
     setTimeout(() => {
-      dispatch(copySlice.actions.allowToPaste())
-      dispatch(copySlice.actions.allowToCopy())
-      dispatch(copySlice.actions.allowToCut())
-      dispatch(copySlice.actions.allowToDelete())
+      dispatch(copySlice.actions.allowAllActions())
     }, 1000 * theme.item.animationDuration)
   }, [items.length])
 
