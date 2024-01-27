@@ -1,5 +1,5 @@
 export { getTextContentFromHtml } from './getTextContentFromHtml'
 export { getNumberFromString } from './getNumberFromString'
 export { getStringWithNewFormattedNumber } from './getStringWithNewFormattedNumber'
-export { updateNumberAtHtmlIncrementally } from './updateNumberAtHtmlIncrementally'
-export { updateNumberAtHtml } from './updateNumberAtHtml'
+export { updateNumberAtHtmlIncrementally } from './froala/updateNumberAtHtmlIncrementally'
+export { updateNumberAtHtml } from './froala/updateNumberAtHtml'

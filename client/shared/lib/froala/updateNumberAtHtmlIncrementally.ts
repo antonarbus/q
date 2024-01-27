@@ -1,9 +1,10 @@
 import type FroalaEditor from 'froala-editor'
 import { roundTo } from 'round-to'
-import { getDecimalPrecision } from './getDecimalPrecision'
-import { getNumberFromString } from './getNumberFromString'
-import { getStringWithNewFormattedNumber } from './getStringWithNewFormattedNumber'
-import { getTextContentFromHtml } from './getTextContentFromHtml'
+import { getDecimalPrecision } from '../getDecimalPrecision'
+import { getNumberFromString } from '../getNumberFromString'
+import { getStringWithNewFormattedNumber } from '../getStringWithNewFormattedNumber'
+import { getTextContentFromHtml } from '../getTextContentFromHtml'
+import { triggerFroalaContentChange } from './triggerFroalaContentChange'
 
 type Props = {
   oldNumber: number
@@ -64,6 +65,6 @@ export const updateNumberAtHtmlIncrementally = async ({
   editor.html.set(finalHtml)
 
   if (triggerContentChange) {
-    editor.undo.saveStep()
+    triggerFroalaContentChange({ editor })
   }
 }
