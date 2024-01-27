@@ -1,5 +1,5 @@
 import { dispatch } from '@lib_instances/store'
-import { type BoqColumnKey, itemsSlice, saveItemsLocally } from '@entities/items'
+import { type BoqColumnKey, itemsSlice, saveItemsLocally, getBoqHeaderFromStore, getBoqColumnHtmlFromStore, getBoqColumnFromStore } from '@entities/items'
 import { className } from '@shared/consts/className'
 
 type Props = {
@@ -17,6 +17,10 @@ export const onColumnResizeStart = ({ headerColumnElement, itemIndex, boqColumnK
 
 export const onColumnResize = ({ headerColumnElement, itemIndex, boqColumnKey }: Props): void => {
   const width = headerColumnElement.clientWidth
+  const column = getBoqColumnFromStore({ itemIndex, boqColumnKey })
+  if (column === undefined) return
+  const didWidthChange = column.width !== width
+  if (!didWidthChange) return
   dispatch(itemsSlice.actions.updateColWidthReducer({ itemIndex, width, boqColumnKey }))
 }
 

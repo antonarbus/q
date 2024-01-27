@@ -30,6 +30,7 @@ export { getBoqRowsFromStore } from './redux/getters/getBoqRowsFromStore'
 export { getBoqItemFromStore } from './redux/getters/getBoqItemFromStore'
 export { getBoqCellFromStore } from './redux/getters/getBoqCellFromStore'
 export { getBoqHeaderFromStore } from './redux/getters/getBoqHeaderFromStore'
+export { getBoqColumnFromStore } from './redux/getters/getBoqColumnFromStore'
 
 // store html getters
 export { getItemTextHtmlFromStore } from './redux/getters/getItemTextHtmlFromStore'
