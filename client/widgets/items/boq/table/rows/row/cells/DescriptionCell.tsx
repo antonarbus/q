@@ -10,11 +10,7 @@ export const DescriptionCell = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
   const { itemIndex } = useItem()
   const { rowIndex } = useRow()
-  const { stylesForResizableCell } = useStylesForResizableCell({
-    itemIndex,
-    boqColumnKey: boqRowCellKey,
-    minWidth: '200px',
-  })
+  const { stylesForResizableCell } = useStylesForResizableCell({ itemIndex, boqColumnKey: boqRowCellKey, minWidth: '200px' })
 
   return (
       <Froala

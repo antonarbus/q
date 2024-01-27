@@ -10,19 +10,10 @@ export const ItemPriceCell = (): JSX.Element => {
   const { itemIndex } = useItem()
   const { subTotalPriceEditorRef } = useBoqItem()
   const { rowIndex, itemPriceCellEditorRef, priceCellEditorRef } = useRow()
-  const { stylesForResizableCell } = useStylesForResizableCell({
-    itemIndex,
-    boqColumnKey: boqRowCellKey,
-    minWidth: '100px',
-  })
+  const { stylesForResizableCell } = useStylesForResizableCell({ itemIndex, boqColumnKey: boqRowCellKey, minWidth: '100px' })
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        position: 'relative',
-      }}
-    >
+    <Box sx={{ display: 'flex', position: 'relative' }} >
       <Froala
         className={`td ${boqRowCellKey}`}
         editorRef={itemPriceCellEditorRef}
