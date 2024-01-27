@@ -7,10 +7,10 @@ export const onTextItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, el
 }
 
 export const onTextItemResize: OnItemResize = ({ itemIndex, e, direction, elementRef, delta }) => {
-  // const width = parseInt(elementRef.style.width)
-  // const prevItemWidth = getState().items[itemIndex]?.width
-  // if (width === prevItemWidth) return
-  // dispatch(itemsSlice.actions.updateItemWidthReducer({ itemIndex, width }))
+  const width = parseInt(elementRef.style.width)
+  const prevItemWidth = getState().items[itemIndex]?.width
+  if (width === prevItemWidth) return
+  dispatch(itemsSlice.actions.updateItemWidthReducer({ itemIndex, width }))
 }
 
 export const onTextItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction, elementRef, delta }) => {
