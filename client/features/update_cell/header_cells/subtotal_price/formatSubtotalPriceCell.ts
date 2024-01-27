@@ -32,7 +32,7 @@ export const formatSubtotalPriceCell = ({
     newNumber: roundedValue,
   })
 
-  // if (html === newHtml) return
+  if (html === newHtml) return
 
   dispatch(itemsSlice.actions.updateSubTotalPriceReducer({
     itemIndex,

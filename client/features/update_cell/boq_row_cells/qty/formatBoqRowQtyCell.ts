@@ -13,7 +13,7 @@ export const formatBoqRowQtyCell = ({
   itemIndex,
   rowIndex,
 }: Props): void => {
-  formatBoqRowCellNumber({
+  const { didUpdate } = formatBoqRowCellNumber({
     itemIndex,
     rowIndex,
     boqColumnKey: 'qty',
@@ -21,7 +21,9 @@ export const formatBoqRowQtyCell = ({
     roundToTwoDecimals: false,
   })
 
-  saveItemsLocally({
-    msgAboveItemWithIndex: itemIndex,
-  })
+  if (didUpdate) {
+    saveItemsLocally({
+      msgAboveItemWithIndex: itemIndex,
+    })
+  }
 }

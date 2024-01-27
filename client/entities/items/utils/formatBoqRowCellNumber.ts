@@ -15,20 +15,36 @@ type Props = {
   roundToTwoDecimals: boolean
 }
 
+type Res = {
+  didUpdate: boolean
+}
+
 export const formatBoqRowCellNumber = ({
   itemIndex,
   rowIndex,
   boqColumnKey,
   editorRef,
   roundToTwoDecimals,
-}: Props): void => {
-  if (editorRef.current === null) return
+}: Props): Res => {
+  if (editorRef.current === null) {
+    return {
+      didUpdate: false,
+    }
+  }
 
   const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
-  if (boqRow === undefined) return
+  if (boqRow === undefined) {
+    return {
+      didUpdate: false,
+    }
+  }
 
   const value = boqRow[boqColumnKey].value
-  if (value === null) return
+  if (value === null) {
+    return {
+      didUpdate: false,
+    }
+  }
 
   const roundedValue = roundTo(value, 2)
 
@@ -40,7 +56,11 @@ export const formatBoqRowCellNumber = ({
     newNumber: roundToTwoDecimals ? roundedValue : value,
   })
 
-  if (html === newHtml) return
+  if (html === newHtml) {
+    return {
+      didUpdate: false,
+    }
+  }
 
   dispatch(itemsSlice.actions.updateBoqCellReducer({
     itemIndex,
@@ -51,4 +71,8 @@ export const formatBoqRowCellNumber = ({
   }))
 
   editorRef.current.html.set(newHtml)
+
+  return {
+    didUpdate: true,
+  }
 }
