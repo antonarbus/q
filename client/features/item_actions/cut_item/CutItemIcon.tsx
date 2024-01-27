@@ -48,11 +48,7 @@ export const CutItemIcon = (): JSX.Element => {
 
         dispatch(copySlice.actions.addItemIntoCopyContainer({ copyItem: itemToCut, preview: cleanedHtml }))
         dispatch(itemsSlice.actions.deleteItemReducer({ itemId: itemToCut.id }))
-
-        dispatch(copySlice.actions.forbidToPaste())
-        dispatch(copySlice.actions.forbidToCopy())
-        dispatch(copySlice.actions.forbidToCut())
-        dispatch(copySlice.actions.forbidToDelete())
+        dispatch(copySlice.actions.forbidAllActions())
 
         const isCopyContainer = getState().copy.isCopyContainer
 
@@ -63,10 +59,7 @@ export const CutItemIcon = (): JSX.Element => {
         }
 
         setTimeout(() => {
-          dispatch(copySlice.actions.allowToPaste())
-          dispatch(copySlice.actions.allowToCopy())
-          dispatch(copySlice.actions.allowToCut())
-          dispatch(copySlice.actions.allowToDelete())
+          dispatch(copySlice.actions.allowAllActions())
         }, 1000 * theme.item.animationDuration)
 
         saveItemsLocally()

@@ -26,18 +26,12 @@ const pasteItemOnClick = (): void => {
     itemId,
     pastePos,
   }))
+
   dispatch(copySlice.actions.removeItemFromCopyContainer())
-  dispatch(copySlice.actions.forbidToPaste())
-  dispatch(copySlice.actions.forbidToCopy())
-  dispatch(copySlice.actions.forbidToCut())
-  dispatch(copySlice.actions.forbidToDelete())
-  saveItemsLocally()
+  dispatch(copySlice.actions.forbidAllActions())
 
   setTimeout(() => {
-    dispatch(copySlice.actions.allowToPaste())
-    dispatch(copySlice.actions.allowToCopy())
-    dispatch(copySlice.actions.allowToCut())
-    dispatch(copySlice.actions.allowToDelete())
+    dispatch(copySlice.actions.allowAllActions())
   }, 1000 * theme.item.animationDuration)
 
   const itemsInCopyContainer = getState().copy.items
@@ -49,6 +43,9 @@ const pasteItemOnClick = (): void => {
     // need more time than animation, otherwise some distortion is visible
     setTimeout(() => {
       dispatch(generalSlice.actions.enableFroala())
+      saveItemsLocally({
+        msgAboveItemWithIndex: 0, // todo: findIndex of this pasted item
+      })
     }, 1000 * theme.item.animationDuration + 500)
   }
 }

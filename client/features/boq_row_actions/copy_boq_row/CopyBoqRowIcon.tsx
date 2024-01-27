@@ -51,6 +51,7 @@ export const CopyBoqRowIcon = (): JSX.Element => {
         dispatch(copySlice.actions.allowToPaste())
 
         const isCopyContainer = getState().copy.isCopyContainer
+
         if (!isCopyContainer) {
           dispatch(copySlice.actions.saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
           dispatch(generalSlice.actions.disableFroala())

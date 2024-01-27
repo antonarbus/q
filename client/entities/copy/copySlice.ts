@@ -74,26 +74,17 @@ export const copySlice = createSlice({
     allowToPaste: (state) => {
       state.isPastable = true
     },
-    forbidToPaste: (state) => {
+    forbidAllActions: (state) => {
       state.isPastable = false
-    },
-    allowToCopy: (state) => {
-      state.isCopyable = true
-    },
-    forbidToCopy: (state) => {
       state.isCopyable = false
-    },
-    allowToCut: (state) => {
-      state.isCuttable = true
-    },
-    forbidToCut: (state) => {
       state.isCuttable = false
-    },
-    allowToDelete: (state) => {
-      state.isDeletable = true
-    },
-    forbidToDelete: (state) => {
       state.isDeletable = false
+    },
+    allowAllActions: (state) => {
+      state.isPastable = true
+      state.isCopyable = true
+      state.isCuttable = true
+      state.isDeletable = true
     },
   },
 })
