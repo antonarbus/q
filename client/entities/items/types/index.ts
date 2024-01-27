@@ -22,14 +22,13 @@ export type BoqRow = {
   type: 'boq paste' | 'boq row'
   height: number
   width: number
-  // number: BoqRowCell
   description: BoqRowCell
   itemPrice: BoqRowCell
   qty: BoqRowCell
   price: BoqRowCell
 }
 
-type BoqCol = {
+export type BoqCol = {
   html: string
   width: number
 }
