@@ -10,7 +10,7 @@ export const tellItemSavedLocally = ({ itemIndex }: Props): void => {
   if (item === undefined) return
   if (item.msg === 'saved locally') return
 
-  dispatch(itemsSlice.actions.showMsgAboveItemReducer({
+  dispatch(itemsSlice.actions.showItemMsgReducer({
     msg: 'saved locally',
     itemIndex,
   }))
