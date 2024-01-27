@@ -1,20 +1,19 @@
 import type FroalaEditor from 'froala-editor'
 import { type MutableRefObject } from 'react'
-import { didBoqCellContentChange, saveItemsLocally, updateBoqRowCellAtStore } from '@entities/items'
-import { type BoqColumnKey } from '@entities/items'
+import { type BoqRowCellKey, didBoqCellContentChange, saveItemsLocally, updateBoqRowCellAtStore, type BoqColumnKey } from '@entities/items'
 
 type Props = {
   editorRef: MutableRefObject<FroalaEditor | null>
   itemIndex: number
   rowIndex: number
-  boqColumnKey: BoqColumnKey
+  boqRowCellKey: BoqRowCellKey
 }
 
 export const updateDescriptionCell = ({
   editorRef,
   itemIndex,
   rowIndex,
-  boqColumnKey,
+  boqRowCellKey,
 }: Props): void => {
   if (editorRef.current === null) return
 
@@ -22,7 +21,7 @@ export const updateDescriptionCell = ({
     editor: editorRef.current,
     itemIndex,
     rowIndex,
-    boqColumnKey,
+    boqRowCellKey,
   })
 
   if (!didContentChange) return
@@ -30,7 +29,7 @@ export const updateDescriptionCell = ({
   updateBoqRowCellAtStore({
     itemIndex,
     rowIndex,
-    boqColumnKey,
+    boqRowCellKey,
     html: editorRef.current.html.get(),
   })
 

@@ -22,7 +22,7 @@ export type BoqRow = {
   type: 'boq paste' | 'boq row'
   height: number
   width: number
-  number: BoqRowCell
+  // number: BoqRowCell
   description: BoqRowCell
   itemPrice: BoqRowCell
   qty: BoqRowCell
@@ -62,6 +62,7 @@ export type BoqItem = {
 
 export type BoqHeaderKey = keyof BoqItem['boq']['header']
 export type BoqColumnKey = keyof BoqCols
+export type BoqRowCellKey = keyof Omit<BoqCols, 'number'>
 
 type TextItem = {
   type: 'text'

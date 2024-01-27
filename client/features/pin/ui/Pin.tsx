@@ -2,22 +2,21 @@ import { useSelectorTyped } from '@lib_instances/store'
 import { Box } from '@mui/material'
 import { type ReactNode } from 'react'
 import { VscPinned } from 'react-icons/vsc'
-import { selectBoqCellPin, useItem, useRow } from '@entities/items'
-import { type BoqColumnKey } from '@entities/items'
+import { type BoqRowCellKey, selectBoqCellPin, useItem, useRow, type BoqColumnKey } from '@entities/items'
 import { className } from '@shared/consts/className'
 
 type Props = {
-  boqColumnKey: BoqColumnKey
+  boqRowCellKey: BoqRowCellKey
   onClick: () => void
 }
 
 export const Pin = ({
-  boqColumnKey,
+  boqRowCellKey,
   onClick,
 }: Props): ReactNode => {
   const { itemIndex } = useItem()
   const { rowIndex } = useRow()
-  const pin = useSelectorTyped(selectBoqCellPin({ itemIndex, rowIndex, boqColumnKey }))
+  const pin = useSelectorTyped(selectBoqCellPin({ itemIndex, rowIndex, boqRowCellKey }))
 
   if (pin === undefined) return null
   if (!pin.isShown) return null

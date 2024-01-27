@@ -16,7 +16,7 @@ export const showBoqRowPins = ({ itemIndex, rowIndex }: Props): void => {
     dispatch(itemsSlice.actions.showBoqRowCellPinReducer({
       itemIndex,
       rowIndex,
-      boqColumnKey: 'itemPrice',
+      boqRowCellKey: 'itemPrice',
     }))
   }
 
@@ -26,7 +26,7 @@ export const showBoqRowPins = ({ itemIndex, rowIndex }: Props): void => {
     dispatch(itemsSlice.actions.showBoqRowCellPinReducer({
       itemIndex,
       rowIndex,
-      boqColumnKey: 'qty',
+      boqRowCellKey: 'qty',
     }))
   }
 }

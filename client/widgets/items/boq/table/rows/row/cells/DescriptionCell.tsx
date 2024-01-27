@@ -17,9 +17,9 @@ export const DescriptionCell = (): JSX.Element => {
         className={`td ${boqColumnKey}`}
         editorRef={editorRef}
         placeholder='Description...'
-        htmlGetter={() => getBoqCellHtmlFromStore({ itemIndex, rowIndex, boqColumnKey })}
+        htmlGetter={() => getBoqCellHtmlFromStore({ itemIndex, rowIndex, boqRowCellKey: boqColumnKey })}
         onContentChange={() => {
-          updateDescriptionCell({ editorRef, itemIndex, rowIndex, boqColumnKey })
+          updateDescriptionCell({ editorRef, itemIndex, rowIndex, boqRowCellKey: boqColumnKey })
         }}
         wrapperStyles={stylesForResizableCell}
         additionalStyle={{

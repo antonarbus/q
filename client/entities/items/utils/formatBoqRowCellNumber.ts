@@ -5,12 +5,12 @@ import { roundTo } from 'round-to'
 import { getStringWithNewFormattedNumber } from '@shared/lib'
 import { getBoqRowFromStore } from '../redux/getters/getBoqRowFromStore'
 import { itemsSlice } from '../redux/itemsSlice'
-import { type BoqColumnKey } from '../types'
+import { type BoqRowCellKey, type BoqColumnKey } from '../types'
 
 type Props = {
   itemIndex: number
   rowIndex: number
-  boqColumnKey: BoqColumnKey
+  boqRowCellKey: BoqRowCellKey
   editorRef: MutableRefObject<FroalaEditor | null>
   roundToTwoDecimals: boolean
 }
@@ -22,7 +22,7 @@ type Res = {
 export const formatBoqRowCellNumber = ({
   itemIndex,
   rowIndex,
-  boqColumnKey,
+  boqRowCellKey,
   editorRef,
   roundToTwoDecimals,
 }: Props): Res => {
@@ -39,7 +39,7 @@ export const formatBoqRowCellNumber = ({
     }
   }
 
-  const value = boqRow[boqColumnKey].value
+  const value = boqRow[boqRowCellKey].value
   if (value === null) {
     return {
       didUpdate: false,
@@ -48,7 +48,7 @@ export const formatBoqRowCellNumber = ({
 
   const roundedValue = roundTo(value, 2)
 
-  const html = boqRow[boqColumnKey].html
+  const html = boqRow[boqRowCellKey].html
 
   const newHtml = getStringWithNewFormattedNumber({
     string: html,
@@ -67,7 +67,7 @@ export const formatBoqRowCellNumber = ({
     rowIndex,
     html: newHtml,
     value: roundToTwoDecimals ? roundedValue : value,
-    boqColumnKey,
+    boqRowCellKey,
   }))
 
   editorRef.current.html.set(newHtml)

@@ -123,7 +123,7 @@ export const updateSubtotalPriceCell = ({
 
   prices.forEach((price, index) => {
     updateBoqRowCellWithValue({
-      boqColumnKey: 'price',
+      boqRowCellKey: 'price',
       editor: price.editor,
       itemIndex,
       rowIndex: index,

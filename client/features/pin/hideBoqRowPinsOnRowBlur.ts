@@ -28,7 +28,7 @@ export const hideBoqRowPinsOnRowBlur = ({
     dispatch(itemsSlice.actions.hideBoqRowCellPinReducer({
       itemIndex,
       rowIndex,
-      boqColumnKey: 'itemPrice',
+      boqRowCellKey: 'itemPrice',
     }))
   }
 
@@ -38,7 +38,7 @@ export const hideBoqRowPinsOnRowBlur = ({
     dispatch(itemsSlice.actions.hideBoqRowCellPinReducer({
       itemIndex,
       rowIndex,
-      boqColumnKey: 'qty',
+      boqRowCellKey: 'qty',
     }))
   }
 }

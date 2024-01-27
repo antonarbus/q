@@ -16,7 +16,7 @@ export const formatBoqRowQtyCell = ({
   const { didUpdate } = formatBoqRowCellNumber({
     itemIndex,
     rowIndex,
-    boqColumnKey: 'qty',
+    boqRowCellKey: 'qty',
     editorRef: qtyCellEditorRef,
     roundToTwoDecimals: false,
   })

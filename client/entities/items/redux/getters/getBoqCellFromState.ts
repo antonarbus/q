@@ -1,21 +1,21 @@
-import { type Item, type BoqColumnKey, type BoqRowCell } from '../../types'
+import { type Item, type BoqColumnKey, type BoqRowCell, type BoqRowCellKey } from '../../types'
 import { getBoqRowFromState } from './getBoqRowFromState'
 
 type Props = {
   itemIndex: number
   rowIndex: number
-  boqColumnKey: BoqColumnKey
+  boqRowCellKey: BoqRowCellKey
   state: Item[]
 }
 
 export const getBoqCellFromState = ({
   itemIndex,
   rowIndex,
-  boqColumnKey,
+  boqRowCellKey,
   state,
 }: Props): BoqRowCell | undefined => {
   const boqRow = getBoqRowFromState({ itemIndex, rowIndex, state })
   if (boqRow === undefined) return
-  const boqRowCell = boqRow[boqColumnKey]
+  const boqRowCell = boqRow[boqRowCellKey]
   return boqRowCell
 }
