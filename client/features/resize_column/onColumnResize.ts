@@ -1,5 +1,5 @@
 import { dispatch } from '@lib_instances/store'
-import { type BoqColumnKey, itemsSlice, saveItemsLocally, getBoqHeaderFromStore, getBoqColumnHtmlFromStore, getBoqColumnFromStore } from '@entities/items'
+import { type BoqColumnKey, itemsSlice, saveItemsLocally, getBoqColumnFromStore } from '@entities/items'
 import { className } from '@shared/consts/className'
 
 type Props = {
