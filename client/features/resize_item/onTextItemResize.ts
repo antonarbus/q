@@ -1,9 +1,16 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { itemsSlice, saveItemsLocally } from '@entities/items'
-import type { OnItemResizeStart, OnItemResizeStop } from '@shared/types'
+import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
 
 export const onTextItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, elementRef }) => {
   dispatch(itemsSlice.actions.disableFroalaReducer({ itemIndex }))
+}
+
+export const onTextItemResize: OnItemResize = ({ itemIndex, e, direction, elementRef, delta }) => {
+  const width = parseInt(elementRef.style.width)
+  const prevItemWidth = getState().items[itemIndex]?.width
+  if (width === prevItemWidth) return
+  dispatch(itemsSlice.actions.updateItemWidthReducer({ itemIndex, width }))
 }
 
 export const onTextItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction, elementRef, delta }) => {
