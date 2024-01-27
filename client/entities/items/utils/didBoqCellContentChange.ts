@@ -1,12 +1,12 @@
 import type FroalaEditor from 'froala-editor'
 import { getBoqCellFromStore } from '../redux/getters/getBoqCellFromStore'
-import { type BoqColumnKey } from '../types'
+import { type BoqRowCellKey, type BoqColumnKey } from '../types'
 
 type Props = {
   editor: FroalaEditor
   itemIndex: number
   rowIndex: number
-  boqColumnKey: BoqColumnKey
+  boqRowCellKey: BoqRowCellKey
 }
 
 // froala has a bug, on first render it always thinks that content is changed
@@ -16,10 +16,10 @@ export const didBoqCellContentChange = ({
   editor,
   itemIndex,
   rowIndex,
-  boqColumnKey,
+  boqRowCellKey,
 }: Props): boolean => {
   const htmlOnDisplay = editor.html.get()
-  const htmlFromStore = getBoqCellFromStore({ itemIndex, rowIndex, boqColumnKey })?.html
+  const htmlFromStore = getBoqCellFromStore({ itemIndex, rowIndex, boqRowCellKey })?.html
   const didContentChange = htmlOnDisplay !== htmlFromStore
   return didContentChange
 }

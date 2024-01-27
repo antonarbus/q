@@ -34,7 +34,7 @@ export const validateBoqRowPrice = ({
     const newPriceValueRounded = roundTo(newPriceValue, 2)
 
     updateBoqRowCellWithValue({
-      boqColumnKey: 'price',
+      boqRowCellKey: 'price',
       editor: priceCellEditorRef.current,
       itemIndex,
       rowIndex,

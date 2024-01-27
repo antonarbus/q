@@ -16,7 +16,7 @@ export const formatBoqRowPriceCell = ({
   const { didUpdate } = formatBoqRowCellNumber({
     itemIndex,
     rowIndex,
-    boqColumnKey: 'price',
+    boqRowCellKey: 'price',
     editorRef: priceCellEditorRef,
     roundToTwoDecimals: true,
   })

@@ -75,6 +75,7 @@ export type {
   BoqHeaderCell,
   BoqHeaderKey,
   BoqColumnKey,
+  BoqRowCellKey,
   BoqRow,
   BoqRowCellPin,
   BoqRowCell,

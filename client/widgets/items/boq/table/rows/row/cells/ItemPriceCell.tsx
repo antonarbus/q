@@ -23,9 +23,9 @@ export const ItemPriceCell = (): JSX.Element => {
         className={`td ${boqColumnKey}`}
         editorRef={itemPriceCellEditorRef}
         placeholder='Item price...'
-        htmlGetter={() => getBoqCellHtmlFromStore({ itemIndex, rowIndex, boqColumnKey })}
+        htmlGetter={() => getBoqCellHtmlFromStore({ itemIndex, rowIndex, boqRowCellKey: boqColumnKey })}
         onContentChange={() => {
-          updateBoqRowItemPriceCell({ boqColumnKey, itemIndex, itemPriceCellEditorRef, priceCellEditorRef, rowIndex, subTotalPriceEditorRef })
+          updateBoqRowItemPriceCell({ boqRowCellKey: boqColumnKey, itemIndex, itemPriceCellEditorRef, priceCellEditorRef, rowIndex, subTotalPriceEditorRef })
         }}
         onBlur={() => {
           formatBoqRowItemPriceCell({ itemIndex, rowIndex, itemPriceCellEditorRef })
@@ -34,7 +34,7 @@ export const ItemPriceCell = (): JSX.Element => {
         additionalStyle={boqRowCellStyle}
       />
       <Pin
-        boqColumnKey={boqColumnKey}
+        boqRowCellKey={boqColumnKey}
         onClick={() => {
           pinBoqRowItemPriceCell({ itemIndex, rowIndex })
         }}

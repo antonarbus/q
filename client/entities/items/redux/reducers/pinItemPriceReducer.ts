@@ -7,12 +7,12 @@ export const pinItemPriceReducer = (state: Item[], action: PayloadAction<{
   rowIndex: number
 }>): void => {
   const { itemIndex, rowIndex } = action.payload
-  const itemPriceCell = getBoqCellFromState({ itemIndex, rowIndex, boqColumnKey: 'itemPrice', state })
+  const itemPriceCell = getBoqCellFromState({ itemIndex, rowIndex, boqRowCellKey: 'itemPrice', state })
 
   if (itemPriceCell === undefined) return
   itemPriceCell.pin.isPinned = true
 
-  const qtyCell = getBoqCellFromState({ itemIndex, rowIndex, boqColumnKey: 'qty', state })
+  const qtyCell = getBoqCellFromState({ itemIndex, rowIndex, boqRowCellKey: 'qty', state })
   if (qtyCell === undefined) return
   qtyCell.pin.isPinned = false
 }

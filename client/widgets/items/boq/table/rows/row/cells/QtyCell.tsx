@@ -22,9 +22,9 @@ export const QtyCell = (): JSX.Element => {
         className={`td ${boqColumnKey}`}
         editorRef={qtyCellEditorRef}
         placeholder='Qty...'
-        htmlGetter={() => getBoqCellHtmlFromStore({ itemIndex, rowIndex, boqColumnKey })}
+        htmlGetter={() => getBoqCellHtmlFromStore({ itemIndex, rowIndex, boqRowCellKey: boqColumnKey })}
         onContentChange={() => {
-          updateBoqRowQtyCell({ boqColumnKey, itemIndex, priceCellEditorRef, qtyCellEditorRef, rowIndex, subTotalPriceEditorRef })
+          updateBoqRowQtyCell({ boqRowCellKey: boqColumnKey, itemIndex, priceCellEditorRef, qtyCellEditorRef, rowIndex, subTotalPriceEditorRef })
         }}
         onBlur={() => {
           formatBoqRowQtyCell({ itemIndex, qtyCellEditorRef, rowIndex })
@@ -33,7 +33,7 @@ export const QtyCell = (): JSX.Element => {
         additionalStyle={boqRowCellStyle}
       />
       <Pin
-        boqColumnKey={boqColumnKey}
+        boqRowCellKey={boqColumnKey}
         onClick={() => {
           pinBoqRowQtyCell({ itemIndex, rowIndex })
         }}

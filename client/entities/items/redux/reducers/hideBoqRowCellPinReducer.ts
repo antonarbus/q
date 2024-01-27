@@ -1,14 +1,14 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { BoqColumnKey, Item } from '../../types'
+import type { BoqColumnKey, BoqRowCellKey, Item } from '../../types'
 import { getBoqCellFromState } from '../getters/getBoqCellFromState'
 
 export const hideBoqRowCellPinReducer = (state: Item[], action: PayloadAction<{
   itemIndex: number
   rowIndex: number
-  boqColumnKey: BoqColumnKey
+  boqRowCellKey: BoqRowCellKey
 }>): void => {
-  const { itemIndex, rowIndex, boqColumnKey } = action.payload
-  const boqRowCell = getBoqCellFromState({ itemIndex, rowIndex, boqColumnKey, state })
+  const { itemIndex, rowIndex, boqRowCellKey } = action.payload
+  const boqRowCell = getBoqCellFromState({ itemIndex, rowIndex, boqRowCellKey, state })
   if (boqRowCell === undefined) return
   boqRowCell.pin.isShown = false
 }

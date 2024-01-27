@@ -1,6 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { getNumberFromString, getTextContentFromHtml } from '@shared/lib'
-import type { BoqColumnKey } from '../../types'
+import type { BoqColumnKey, BoqRowCellKey } from '../../types'
 import { getBoqRowFromStore } from '../getters/getBoqRowFromStore'
 import { itemsSlice } from '../itemsSlice'
 
@@ -8,7 +8,7 @@ type Props = {
   html: string
   itemIndex: number
   rowIndex: number
-  boqColumnKey: BoqColumnKey
+  boqRowCellKey: BoqRowCellKey
 }
 
 type Res = {
@@ -19,7 +19,7 @@ export const updateBoqRowCellAtStore = ({
   html,
   itemIndex,
   rowIndex,
-  boqColumnKey,
+  boqRowCellKey,
 }: Props): Res => {
   const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
   if (boqRow === undefined) {
@@ -28,7 +28,7 @@ export const updateBoqRowCellAtStore = ({
     }
   }
 
-  const prevHtml = boqRow[boqColumnKey].html
+  const prevHtml = boqRow[boqRowCellKey].html
   const didTextChange = prevHtml !== html
 
   if (!didTextChange) {
@@ -48,7 +48,7 @@ export const updateBoqRowCellAtStore = ({
     rowIndex,
     html,
     value: cellValueFromHtml,
-    boqColumnKey,
+    boqRowCellKey,
   }))
 
   return {
