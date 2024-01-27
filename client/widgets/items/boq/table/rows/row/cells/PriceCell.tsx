@@ -23,6 +23,7 @@ export const PriceCell = (): JSX.Element => {
           showBoqRowPins({ itemIndex, rowIndex })
         }}
         onContentChange={() => {
+          console.log(666)
           updateBoqRowPriceCell({ boqRowCellKey, itemIndex, itemPriceCellEditorRef, priceCellEditorRef, qtyCellEditorRef, rowIndex, subTotalPriceEditorRef })
         }}
         onBlur={() => {

@@ -31,7 +31,7 @@ export const updateBoqRowPriceCell = ({
     boqRowCellKey,
   })
 
-  if (!didUpdate) return
+  // if (!didUpdate) return
 
   const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
 

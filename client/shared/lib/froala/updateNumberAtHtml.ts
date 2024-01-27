@@ -1,5 +1,6 @@
 import type FroalaEditor from 'froala-editor'
-import { getStringWithNewFormattedNumber } from './getStringWithNewFormattedNumber'
+import { getStringWithNewFormattedNumber } from '../getStringWithNewFormattedNumber'
+import { triggerFroalaContentChange } from './triggerFroalaContentChange'
 
 type Props = {
   oldNumber: number
@@ -25,6 +26,6 @@ export const updateNumberAtHtml = ({
   editor.html.set(finalHtml)
 
   if (triggerContentChange) {
-    editor.undo.saveStep()
+    triggerFroalaContentChange({ editor })
   }
 }
