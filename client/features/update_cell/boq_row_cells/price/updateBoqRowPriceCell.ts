@@ -1,7 +1,7 @@
 import type FroalaEditor from 'froala-editor'
 import { type MutableRefObject } from 'react'
 import { roundTo } from 'round-to'
-import { getBoqRowFromStore, getBoqRowsFromStore, updateBoqRowCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from '@entities/items'
+import { getBoqRowFromStore, getBoqRowsFromStore, saveItemsLocally, updateBoqRowCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from '@entities/items'
 import { type BoqRow, type BoqColumnKey } from '@entities/items'
 
 type Props = {
@@ -25,21 +25,14 @@ export const updateBoqRowPriceCell = ({
 }: Props): void => {
   if (priceCellEditorRef.current === null) return
 
-  // const didContentChange = didBoqCellContentChange({
-  //   editor: priceCellEditorRef.current,
-  //   itemIndex,
-  //   rowIndex,
-  //   boqColumnKey,
-  // })
-
-  // if (!didContentChange) return
-
-  updateBoqRowCellAtStore({
+  const { didUpdate } = updateBoqRowCellAtStore({
     html: priceCellEditorRef.current.html.get(),
     itemIndex,
     rowIndex,
     boqColumnKey,
   })
+
+  if (!didUpdate) return
 
   const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
 
@@ -90,5 +83,9 @@ export const updateBoqRowPriceCell = ({
     subTotalPriceEditor: subTotalPriceEditorRef.current,
     value: subTotalPriceValueNewRounded,
     incrementally: true,
+  })
+
+  saveItemsLocally({
+    msgAboveItemWithIndex: itemIndex,
   })
 }

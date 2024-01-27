@@ -27,5 +27,4 @@ export const onColumnResizeStop = ({ headerColumnElement, itemIndex, boqColumnKe
   dispatch(itemsSlice.actions.updateItemWidthReducer({ itemIndex, width: itemWidth ?? 0 }))
   dispatch(itemsSlice.actions.enableFroalaReducer({ itemIndex }))
   saveItemsLocally()
-  dispatch(itemsSlice.actions.tellItemSavedLocallyReducer({ itemIndex }))
 }

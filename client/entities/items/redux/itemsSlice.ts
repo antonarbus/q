@@ -20,7 +20,7 @@ import { reOrderItemsReducer } from './reducers/reOrderItemsReducer'
 import { resetItemsToDefaultReducer } from './reducers/resetItemsToDefaultReducer'
 import { showBoqPriceCellPinsReducer } from './reducers/showBoqPriceCellPinsReducer'
 import { showBoqRowCellPinReducer } from './reducers/showBoqRowCellPinReducer'
-import { tellItemSavedLocallyReducer } from './reducers/tellItemSavedLocallyReducer'
+import { showMsgAboveItemReducer } from './reducers/showMsgAboveItemReducer'
 import { updateBoqCellReducer } from './reducers/updateBoqCellReducer'
 import { updateBoqColumnNameTextReducer } from './reducers/updateBoqColumnNameTextReducer'
 import { updateBoqHeaderTextReducer } from './reducers/updateBoqHeaderTextReducer'
@@ -57,7 +57,7 @@ export const itemsSlice = createSlice({
     showBoqRowCellPinReducer,
     showBoqPriceCellPinsReducer,
     hideBoqPriceCellPinsReducer,
-    tellItemSavedLocallyReducer,
+    showMsgAboveItemReducer,
     updateBoqCellReducer,
     updateBoqColumnNameTextReducer,
     updateBoqHeaderTextReducer,

@@ -11,18 +11,31 @@ type Props = {
   boqColumnKey: BoqColumnKey
 }
 
+type Res = {
+  didUpdate: boolean
+}
+
 export const updateBoqRowCellAtStore = ({
   html,
   itemIndex,
   rowIndex,
   boqColumnKey,
-}: Props): void => {
+}: Props): Res => {
   const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
-  if (boqRow === undefined) return
+  if (boqRow === undefined) {
+    return {
+      didUpdate: false,
+    }
+  }
 
   const prevHtml = boqRow[boqColumnKey].html
   const didTextChange = prevHtml !== html
-  if (!didTextChange) return
+
+  if (!didTextChange) {
+    return {
+      didUpdate: false,
+    }
+  }
 
   const cellTextContent = getTextContentFromHtml({ html })
 
@@ -37,4 +50,8 @@ export const updateBoqRowCellAtStore = ({
     value: cellValueFromHtml,
     boqColumnKey,
   }))
+
+  return {
+    didUpdate: true,
+  }
 }
