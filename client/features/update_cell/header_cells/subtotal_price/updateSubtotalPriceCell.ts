@@ -128,7 +128,7 @@ export const updateSubtotalPriceCell = ({
       itemIndex,
       rowIndex: index,
       value: price.newValue,
-      triggerContentChange: true,
+      triggerContentChange: true, // todo: we should not rely on contentChange, but put logic here, it will become a mess
     })
   })
 

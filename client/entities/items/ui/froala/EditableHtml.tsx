@@ -13,10 +13,7 @@ export const EditableHtml = (): JSX.Element => {
       style={{
         height: froalaHeightRef.current ?? 'auto', // needed for animation, height will be removed after froala is initialized
       }}
-      sx={{
-        wordBreak: 'break-word',
-        ...additionalStyle,
-      }}
+      sx={{ wordBreak: 'break-word', ...additionalStyle }}
     />
   )
 }
