@@ -24,7 +24,7 @@ export const defaultItems: Item[] = [
     boq: {
       header: {
         title: {
-          html: '<b>Title</b>',
+          html: '<p><strong>Title</strong></p>',
           value: 0,
         },
         subtotalText: {
@@ -32,7 +32,7 @@ export const defaultItems: Item[] = [
           value: 0,
         },
         subTotalPrice: {
-          html: '<b>140</b>',
+          html: '<p><strong>140</strong></p>',
           value: 140,
         },
       },
@@ -42,19 +42,19 @@ export const defaultItems: Item[] = [
           width: 30,
         },
         description: {
-          html: '<b>Description</b>',
+          html: '<p><strong>Description</strong></p>',
           width: 200,
         },
         itemPrice: {
-          html: '<b>Item price</b>',
+          html: '<p><strong>Item price</strong></p>',
           width: 100,
         },
         qty: {
-          html: '<b>Qty</b>',
+          html: '<p><strong>Qty</strong></p>',
           width: 100,
         },
         price: {
-          html: '<b>Price</b>',
+          html: '<p><strong>Price</strong></p>',
           width: 100,
         },
       },
@@ -73,7 +73,7 @@ export const defaultItems: Item[] = [
             },
           },
           description: {
-            html: 'description 1',
+            html: '<p>description 1</p>',
             value: 0,
             pin: {
               isPinned: false,
@@ -81,7 +81,7 @@ export const defaultItems: Item[] = [
             },
           },
           itemPrice: {
-            html: '10',
+            html: '<p>10</p>',
             value: 10,
             pin: {
               isPinned: false,
@@ -89,7 +89,7 @@ export const defaultItems: Item[] = [
             },
           },
           qty: {
-            html: '1',
+            html: '<p>1</p>',
             value: 1,
             pin: {
               isPinned: true,
@@ -97,7 +97,7 @@ export const defaultItems: Item[] = [
             },
           },
           price: {
-            html: '10',
+            html: '<p>10</p>',
             value: 10,
             pin: {
               isPinned: false,
@@ -119,7 +119,7 @@ export const defaultItems: Item[] = [
             },
           },
           description: {
-            html: 'description 2',
+            html: '<p>description 2</p>',
             value: 0,
             pin: {
               isPinned: false,
@@ -127,7 +127,7 @@ export const defaultItems: Item[] = [
             },
           },
           itemPrice: {
-            html: '20',
+            html: '<p>20</p>',
             value: 20,
             pin: {
               isPinned: false,
@@ -135,7 +135,7 @@ export const defaultItems: Item[] = [
             },
           },
           qty: {
-            html: '2',
+            html: '<p>2</p>',
             value: 2,
             pin: {
               isPinned: true,
@@ -143,7 +143,7 @@ export const defaultItems: Item[] = [
             },
           },
           price: {
-            html: '40',
+            html: '<p>40</p>',
             value: 40,
             pin: {
               isPinned: false,
@@ -165,7 +165,7 @@ export const defaultItems: Item[] = [
             },
           },
           description: {
-            html: 'description 3',
+            html: '<p>description 3</p>',
             value: 0,
             pin: {
               isPinned: false,
@@ -173,7 +173,7 @@ export const defaultItems: Item[] = [
             },
           },
           itemPrice: {
-            html: '30',
+            html: '<p>30</p>',
             value: 30,
             pin: {
               isPinned: false,
@@ -181,7 +181,7 @@ export const defaultItems: Item[] = [
             },
           },
           qty: {
-            html: '3',
+            html: '<p>3</p>',
             value: 3,
             pin: {
               isPinned: true,
@@ -189,7 +189,7 @@ export const defaultItems: Item[] = [
             },
           },
           price: {
-            html: '90',
+            html: '<p>90</p>',
             value: 90,
             pin: {
               isPinned: false,

@@ -1,6 +1,7 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { itemsSlice } from '../redux/itemsSlice'
 import type { Item } from '../types'
+import { tellItemSavedLocally } from './tellItemSavedLocally'
 
 type Props = {
   items?: Item[]
@@ -26,9 +27,9 @@ export const saveItemsLocally = ({
   localStorage.setItem('items', JSON.stringify(cleanedItems))
 
   if (msgAboveItemWithIndex !== undefined) {
-    dispatch(itemsSlice.actions.showMsgAboveItemReducer({
+    tellItemSavedLocally({
       itemIndex: msgAboveItemWithIndex,
-      msg: 'saved locally',
-    }))
+
+    })
   }
 }
