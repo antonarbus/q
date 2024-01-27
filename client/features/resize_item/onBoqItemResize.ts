@@ -1,9 +1,10 @@
 import { dispatch, getState } from '@lib_instances/store'
-import { type BoqItem, itemsSlice, saveItemsLocally, getBoqColumnFromStore } from '@entities/items'
+import { type BoqItem, itemsSlice, saveItemsLocally, getBoqColumnFromStore, type BoqColumnKey } from '@entities/items'
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
 
-// can be global var for different boqItems as we can change width of one item at a time
-let initDescriptionColumnWidth = 0
+let initDescriptionColumnWidth = 0 // can be global var for different boqItems as we can change width of one item at a time
+
+const boqColumnKey: BoqColumnKey = 'description'
 
 export const onBoqItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, elementRef: itemElement }) => {
   dispatch(itemsSlice.actions.disableFroalaReducer({ itemIndex }))
@@ -15,30 +16,20 @@ export const onBoqItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, ele
 export const onBoqItemResize: OnItemResize = ({ itemIndex, e, direction, elementRef: itemElement, delta }) => {
   const width = initDescriptionColumnWidth + delta.width
 
-  const descriptionColumn = getBoqColumnFromStore({ itemIndex, boqColumnKey: 'description' })
+  const descriptionColumn = getBoqColumnFromStore({ itemIndex, boqColumnKey })
   if (descriptionColumn === undefined) return
   const didWidthChange = descriptionColumn.width !== width
   if (!didWidthChange) return
 
-  dispatch(itemsSlice.actions.updateColWidthReducer({
-    itemIndex,
-    boqColumnKey: 'description',
-    width,
-  }))
+  dispatch(itemsSlice.actions.updateColWidthReducer({ itemIndex, boqColumnKey, width }))
 }
 
 export const onBoqItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction, elementRef: itemElement, delta }) => {
   const descriptionHeaderElement = itemElement.querySelector('.th.description')
   if (!(descriptionHeaderElement instanceof HTMLElement)) return
 
-  const descriptionColWidth = descriptionHeaderElement.clientWidth
-
-  dispatch(itemsSlice.actions.updateColWidthReducer({
-    itemIndex,
-    boqColumnKey: 'description',
-    width: descriptionColWidth,
-  }))
-
+  const width = descriptionHeaderElement.clientWidth
+  dispatch(itemsSlice.actions.updateColWidthReducer({ itemIndex, boqColumnKey, width }))
   dispatch(itemsSlice.actions.enableFroalaReducer({ itemIndex }))
 
   const itemWidth = itemElement.clientWidth
