@@ -5,7 +5,7 @@ import { roundTo } from 'round-to'
 import { getStringWithNewFormattedNumber } from '@shared/lib'
 import { getBoqRowFromStore } from '../redux/getters/getBoqRowFromStore'
 import { itemsSlice } from '../redux/itemsSlice'
-import { type BoqRowCellKey, type BoqColumnKey } from '../types'
+import { type BoqRowCellKey } from '../types'
 
 type Props = {
   itemIndex: number

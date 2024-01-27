@@ -2,15 +2,19 @@ import { Box } from '@mui/material'
 import { Pin, pinBoqRowItemPriceCell } from '@features/pin'
 import { formatBoqRowItemPriceCell, updateBoqRowItemPriceCell } from '@features/update_cell'
 import { getBoqCellHtmlFromStore, useItem, useRow, useBoqItem, Froala, boqRowCellStyle, useStylesForResizableCell } from '@entities/items'
-import type { BoqColumnKey } from '@entities/items'
+import type { BoqRowCellKey } from '@entities/items'
 
-const boqColumnKey: BoqColumnKey = 'itemPrice'
+const boqRowCellKey: BoqRowCellKey = 'itemPrice'
 
 export const ItemPriceCell = (): JSX.Element => {
   const { itemIndex } = useItem()
   const { subTotalPriceEditorRef } = useBoqItem()
   const { rowIndex, itemPriceCellEditorRef, priceCellEditorRef } = useRow()
-  const { stylesForResizableCell } = useStylesForResizableCell({ itemIndex, boqColumnKey, minWidth: '100px' })
+  const { stylesForResizableCell } = useStylesForResizableCell({
+    itemIndex,
+    boqColumnKey: boqRowCellKey,
+    minWidth: '100px',
+  })
 
   return (
     <Box
@@ -20,12 +24,12 @@ export const ItemPriceCell = (): JSX.Element => {
       }}
     >
       <Froala
-        className={`td ${boqColumnKey}`}
+        className={`td ${boqRowCellKey}`}
         editorRef={itemPriceCellEditorRef}
         placeholder='Item price...'
-        htmlGetter={() => getBoqCellHtmlFromStore({ itemIndex, rowIndex, boqRowCellKey: boqColumnKey })}
+        htmlGetter={() => getBoqCellHtmlFromStore({ itemIndex, rowIndex, boqRowCellKey })}
         onContentChange={() => {
-          updateBoqRowItemPriceCell({ boqRowCellKey: boqColumnKey, itemIndex, itemPriceCellEditorRef, priceCellEditorRef, rowIndex, subTotalPriceEditorRef })
+          updateBoqRowItemPriceCell({ boqRowCellKey, itemIndex, itemPriceCellEditorRef, priceCellEditorRef, rowIndex, subTotalPriceEditorRef })
         }}
         onBlur={() => {
           formatBoqRowItemPriceCell({ itemIndex, rowIndex, itemPriceCellEditorRef })
@@ -34,7 +38,7 @@ export const ItemPriceCell = (): JSX.Element => {
         additionalStyle={boqRowCellStyle}
       />
       <Pin
-        boqRowCellKey={boqColumnKey}
+        boqRowCellKey={boqRowCellKey}
         onClick={() => {
           pinBoqRowItemPriceCell({ itemIndex, rowIndex })
         }}

@@ -2,24 +2,28 @@ import type FroalaEditor from 'froala-editor'
 import { useRef } from 'react'
 import { updateDescriptionCell } from '@features/update_cell'
 import { getBoqCellHtmlFromStore, useRow, useItem, Froala, useStylesForResizableCell, boqRowCellStyle } from '@entities/items'
-import type { BoqColumnKey } from '@entities/items'
+import type { BoqRowCellKey } from '@entities/items'
 
-const boqColumnKey: BoqColumnKey = 'description'
+const boqRowCellKey: BoqRowCellKey = 'description'
 
 export const DescriptionCell = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
   const { itemIndex } = useItem()
   const { rowIndex } = useRow()
-  const { stylesForResizableCell } = useStylesForResizableCell({ itemIndex, boqColumnKey, minWidth: '200px' })
+  const { stylesForResizableCell } = useStylesForResizableCell({
+    itemIndex,
+    boqColumnKey: boqRowCellKey,
+    minWidth: '200px',
+  })
 
   return (
       <Froala
-        className={`td ${boqColumnKey}`}
+        className={`td ${boqRowCellKey}`}
         editorRef={editorRef}
         placeholder='Description...'
-        htmlGetter={() => getBoqCellHtmlFromStore({ itemIndex, rowIndex, boqRowCellKey: boqColumnKey })}
+        htmlGetter={() => getBoqCellHtmlFromStore({ itemIndex, rowIndex, boqRowCellKey })}
         onContentChange={() => {
-          updateDescriptionCell({ editorRef, itemIndex, rowIndex, boqRowCellKey: boqColumnKey })
+          updateDescriptionCell({ editorRef, itemIndex, rowIndex, boqRowCellKey })
         }}
         wrapperStyles={stylesForResizableCell}
         additionalStyle={{
