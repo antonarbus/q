@@ -1,21 +1,18 @@
 import type FroalaEditor from 'froala-editor'
-import { type MutableRefObject } from 'react'
 import { roundTo } from 'round-to'
-import { didBoqHeaderCellContentChange, getBoqHeaderFromStore, getBoqRowsFromStore, saveItemsLocally, updateBoqHeaderCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from '@entities/items'
+import { type BoqItemContextType, didBoqHeaderCellContentChange, getBoqHeaderFromStore, getBoqRowsFromStore, saveItemsLocally, updateBoqHeaderCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from '@entities/items'
 import { notify } from '@shared/ui/top_msg'
 
 type Props = {
-  subTotalPriceEditorRef: MutableRefObject<FroalaEditor | null>
   itemIndex: number
-  boqPriceEditorRefs: Array<{
-    current: FroalaEditor | null
-  }>
+  subTotalPriceEditorRef: BoqItemContextType['subTotalPriceEditorRef']
+  boqRowEditorRefs: BoqItemContextType['boqRowEditorRefs']
 }
 
 export const updateSubtotalPriceCell = ({
   subTotalPriceEditorRef,
   itemIndex,
-  boqPriceEditorRefs,
+  boqRowEditorRefs,
 }: Props): void => {
   if (subTotalPriceEditorRef.current === null) return
 
@@ -83,7 +80,7 @@ export const updateSubtotalPriceCell = ({
       oldValue,
       isPinned,
       newValue: isPinned ? oldValue : roundTo(newValue, 2),
-      editor: boqPriceEditorRefs.at(index)?.current ?? null,
+      editor: boqRowEditorRefs.at(index)?.price.current ?? null,
     }
   })
 

@@ -25,12 +25,17 @@ export const RowProvider = ({
   rowIndex,
   rowId,
 }: Props): JSX.Element => {
+  const { boqRowEditorRefs } = useBoqItem()
+
   const itemPriceCellEditorRef = { current: null }
   const qtyCellEditorRef = { current: null }
   const priceCellEditorRef = { current: null }
 
-  const { boqPriceEditorRefs } = useBoqItem()
-  boqPriceEditorRefs[rowIndex] = priceCellEditorRef
+  boqRowEditorRefs[rowIndex] = {
+    itemPrice: itemPriceCellEditorRef,
+    qty: qtyCellEditorRef,
+    price: priceCellEditorRef,
+  }
 
   return (
     <RowContext.Provider
