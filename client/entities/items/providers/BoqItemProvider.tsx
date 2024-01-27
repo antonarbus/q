@@ -5,12 +5,16 @@ type Props = {
   children: ReactNode
 }
 
-type Context = {
+export type BoqItemContextType = {
   subTotalPriceEditorRef: { current: FroalaEditor | null }
-  boqPriceEditorRefs: Array<{ current: FroalaEditor | null }>
+  boqRowEditorRefs: Array<{
+    itemPrice: { current: FroalaEditor | null }
+    qty: { current: FroalaEditor | null }
+    price: { current: FroalaEditor | null }
+  }>
 }
 
-const BoqItemContext = createContext<Context | null>(null)
+const BoqItemContext = createContext<BoqItemContextType | null>(null)
 
 export const BoqItemProvider = ({
   children,
@@ -19,7 +23,7 @@ export const BoqItemProvider = ({
     <BoqItemContext.Provider
       value={{
         subTotalPriceEditorRef: { current: null },
-        boqPriceEditorRefs: [],
+        boqRowEditorRefs: [],
       }}
     >
       {children}
@@ -27,7 +31,7 @@ export const BoqItemProvider = ({
   )
 }
 
-export const useBoqItem = (): Context => {
+export const useBoqItem = (): BoqItemContextType => {
   const context = useContext(BoqItemContext)
 
   if (!context) {

@@ -7,7 +7,7 @@ import { type BoqHeaderKey } from '@entities/items'
 const boqHeaderKey: BoqHeaderKey = 'subTotalPrice'
 
 export const SubTotalPrice = (): JSX.Element => {
-  const { subTotalPriceEditorRef, boqPriceEditorRefs } = useBoqItem()
+  const { subTotalPriceEditorRef, boqRowEditorRefs } = useBoqItem()
   const { itemIndex } = useItem()
 
   const hidePinsClickHandlerRef = useRef<(e: MouseEvent) => void>((e) => {})
@@ -22,11 +22,11 @@ export const SubTotalPrice = (): JSX.Element => {
         showHideBoqPricePins({ e: e.nativeEvent, itemIndex, hidePinsClickHandlerRef, isInitClickRef })
       }}
       onContentChange={() => {
-        updateSubtotalPriceCell({ subTotalPriceEditorRef, boqPriceEditorRefs, itemIndex })
+        updateSubtotalPriceCell({ subTotalPriceEditorRef, boqRowEditorRefs, itemIndex })
       }}
       onBlur={() => {
         formatSubtotalPriceCell({ itemIndex, subTotalPriceEditorRef })
-        validateBoqRowPrices({ boqPriceEditorRefs, itemIndex, subTotalPriceEditorRef })
+        validateBoqRowPrices({ boqRowEditorRefs, itemIndex, subTotalPriceEditorRef })
       }}
       additionalStyle={subTotalPriceCellStyle}
     />

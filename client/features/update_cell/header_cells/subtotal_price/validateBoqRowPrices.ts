@@ -1,21 +1,16 @@
-import type FroalaEditor from 'froala-editor'
-import { type MutableRefObject } from 'react'
 import { roundTo } from 'round-to'
-import { getBoqRowsFromStore, isBoqRowPriceValid, updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from '@entities/items'
-import { type BoqRow } from '@entities/items'
+import { type BoqItemContextType, getBoqRowsFromStore, isBoqRowPriceValid, updateBoqRowCellWithValue, updateSubTotalPriceWithValue, type BoqRow } from '@entities/items'
 import { notify } from '@shared/ui/top_msg'
 
 type Props = {
-  subTotalPriceEditorRef: MutableRefObject<FroalaEditor | null>
   itemIndex: number
-  boqPriceEditorRefs: Array<{
-    current: FroalaEditor | null
-  }>
+  subTotalPriceEditorRef: BoqItemContextType['subTotalPriceEditorRef']
+  boqRowEditorRefs: BoqItemContextType['boqRowEditorRefs']
 }
 
 export const validateBoqRowPrices = ({
   itemIndex,
-  boqPriceEditorRefs,
+  boqRowEditorRefs,
   subTotalPriceEditorRef,
 }: Props): void => {
   const boqRows = getBoqRowsFromStore({ itemIndex })
@@ -24,12 +19,12 @@ export const validateBoqRowPrices = ({
   let didNotifyAboutInvalidPriceOnes = false
 
   boqRows.forEach((boqRow, rowIndex) => {
-    const priceCellEditorRef = boqPriceEditorRefs.at(rowIndex)
+    const priceCellEditorRef = boqRowEditorRefs.at(rowIndex)
     if (priceCellEditorRef === undefined) return
-    if (priceCellEditorRef.current === null) return
+    if (priceCellEditorRef.price.current === null) return
 
     const isPriceValid = isBoqRowPriceValid({
-      html: priceCellEditorRef.current.html.get(),
+      html: priceCellEditorRef.price.current.html.get(),
       itemIndex,
       rowIndex,
     })
@@ -49,7 +44,7 @@ export const validateBoqRowPrices = ({
 
       updateBoqRowCellWithValue({
         boqRowCellKey: 'price',
-        editor: priceCellEditorRef.current,
+        editor: priceCellEditorRef.price.current,
         itemIndex,
         rowIndex,
         value: newPriceValueRounded,
