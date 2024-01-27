@@ -4,21 +4,12 @@ import { getNumberOfBoqItemsAbove, useItem, useRow, useStylesForResizableCell } 
 export const NumberCell = (): JSX.Element => {
   const { itemIndex } = useItem()
   const { rowIndex } = useRow()
-  const { stylesForResizableCell } = useStylesForResizableCell({
-    itemIndex,
-    boqColumnKey: 'number',
-    minWidth: '30px',
-  })
+  const { stylesForResizableCell } = useStylesForResizableCell({ itemIndex, boqColumnKey: 'number', minWidth: '30px' })
 
   return (
     <Box
       className={'td number'}
-      sx={{
-        ...stylesForResizableCell,
-        fontSize: '10px',
-        color: 'grey',
-        paddingBottom: '2px',
-      }}
+      sx={{ ...stylesForResizableCell, fontSize: '10px', color: 'grey', paddingBottom: '2px' }}
     >
       {getNumberOfBoqItemsAbove({ itemIndex }) + 1}.{rowIndex + 1}
     </Box>
