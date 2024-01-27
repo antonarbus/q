@@ -38,9 +38,11 @@ export const ResizableColumn = ({
       style={{
         display: isColWidthSetManually ? 'block' : 'flex',
         flexGrow: isColWidthSetManually ? 0 : flexGrow,
-        flexShrink: 0,
         width: isColWidthSetManually ? colWidth : 'auto',
         maxWidth: isColWidthSetManually ? colWidth : 'auto',
+      }}
+      css={{
+        flexShrink: '1 !important',
       }}
       handleStyles={{
         right: {
