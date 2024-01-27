@@ -1,4 +1,4 @@
-import { type Item, type BoqColumnKey, type BoqRowCell, type BoqRowCellKey } from '../../types'
+import { type Item, type BoqRowCell, type BoqRowCellKey } from '../../types'
 import { getBoqRowFromState } from './getBoqRowFromState'
 
 type Props = {

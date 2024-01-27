@@ -1,5 +1,4 @@
-import { dispatch, getState } from '@lib_instances/store'
-import { itemsSlice } from '../redux/itemsSlice'
+import { getState } from '@lib_instances/store'
 import type { Item } from '../types'
 import { tellItemSavedLocally } from './tellItemSavedLocally'
 

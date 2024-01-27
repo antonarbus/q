@@ -1,5 +1,5 @@
 import { type RootState } from '@lib_instances/store'
-import type { BoqColumnKey, BoqRowCellKey, BoqRowCellPin } from '../../types'
+import type { BoqRowCellKey, BoqRowCellPin } from '../../types'
 import { getBoqRowFromStore } from '../getters/getBoqRowFromStore'
 
 type Props = {
