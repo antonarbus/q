@@ -15,7 +15,6 @@ const onItemDragStart = (): void => {
 
 const onItemDragEnd = ({ oldIndex, newIndex }: Props): void => {
   dispatch(generalSlice.actions.enableFroala())
-
   document.body.style.removeProperty('cursor')
 
   if (oldIndex !== newIndex) {
