@@ -45,26 +45,9 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
           setTimeout(() => {
             dispatch(generalSlice.actions.enableFroala())
 
-            let msgAboveItemWithIndex = -1
-
-            const itemsLength = getState().items.length
-
-            const isLastItemLeft = itemsLength === 1
-            if (isLastItemLeft) {
-              msgAboveItemWithIndex = 0
-            }
-
-            const doesItemBelowExist = itemsLength >= itemIndex + 1
-            if (doesItemBelowExist) {
-              msgAboveItemWithIndex = itemIndex
-            }
-
-            const isLastItemDeleted = itemsLength + 1 === itemIndex + 1
-            if (isLastItemDeleted) {
-              msgAboveItemWithIndex = itemIndex - 1
-            }
-
-            saveItemsLocally({ msgAboveItemWithIndex })
+            saveItemsLocally({
+              msgAboveItemWithIndex: getIndexWhereToShowMsg({ itemIndex }),
+            })
           }, 1000 * theme.item.animationDuration)
         }
       }}
@@ -92,4 +75,19 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
       <RxCross2 />
     </span>
   )
+}
+
+function getIndexWhereToShowMsg({ itemIndex }: { itemIndex: number }): number {
+  const itemsLength = getState().items.length
+
+  const isLastItemLeft = itemsLength === 1
+  if (isLastItemLeft) return 0
+
+  const doesItemBelowExist = itemsLength >= itemIndex + 1
+  if (doesItemBelowExist) return itemIndex
+
+  const isLastItemDeleted = itemsLength + 1 === itemIndex + 1
+  if (isLastItemDeleted) return itemIndex - 1
+
+  return -1
 }
