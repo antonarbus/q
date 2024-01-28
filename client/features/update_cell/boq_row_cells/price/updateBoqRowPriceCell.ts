@@ -31,7 +31,7 @@ export const updateBoqRowPriceCell = ({
     boqRowCellKey,
   })
 
-  if (!didUpdate) return // todo: as we trigger contentChange when change SubTotalPrice it will not work
+  if (!didUpdate) return
 
   const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
 
