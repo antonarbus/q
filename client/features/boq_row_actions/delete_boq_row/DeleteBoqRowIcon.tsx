@@ -33,6 +33,7 @@ export const DeleteBoqRowIcon = (): JSX.Element => {
 
         setTimeout(() => {
           dispatch(copySlice.actions.allowAllActions())
+          saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
         }, 1000 * theme.item.animationDuration)
 
         const isCopyContainer = getState().copy.isCopyContainer
@@ -42,8 +43,6 @@ export const DeleteBoqRowIcon = (): JSX.Element => {
             dispatch(itemsSlice.actions.enableFroalaReducer({ itemIndex }))
           }, 1000 * theme.item.animationDuration)
         }
-
-        saveItemsLocally()
       }}
       onMouseOver={(): void => {
         gsap.to(ref.current, {

@@ -44,10 +44,7 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
         if (!isCopyContainer) {
           setTimeout(() => {
             dispatch(generalSlice.actions.enableFroala())
-
-            saveItemsLocally({
-              msgAboveItemWithIndex: getIndexWhereToShowMsg({ itemIndex }),
-            })
+            saveItemsLocally({ msgAboveItemWithIndex: getIndexWhereToShowMsg({ itemIndex }) })
           }, 1000 * theme.item.animationDuration)
         }
       }}

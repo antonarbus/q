@@ -59,7 +59,6 @@ export const CutBoqRowIcon = (): JSX.Element => {
 
         if (!isCopyContainer) {
           dispatch(copySlice.actions.saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
-          dispatch(generalSlice.actions.disableFroala())
           dispatch(copySlice.actions.showCopyContainer())
         }
 
@@ -69,9 +68,8 @@ export const CutBoqRowIcon = (): JSX.Element => {
 
         setTimeout(() => {
           dispatch(copySlice.actions.allowAllActions())
+          saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
         }, 1000 * theme.item.animationDuration)
-
-        saveItemsLocally()
       }}
     >
       <TbCut />

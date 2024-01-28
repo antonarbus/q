@@ -46,10 +46,7 @@ function pasteItemOnClick(): void {
 
   setTimeout(() => {
     dispatch(copySlice.actions.allowAllActions())
-
-    saveItemsLocally({
-      msgAboveItemWithIndex: getIndexWhereToShowMsg({ newItemId, topItemFromCopyContainer }),
-    })
+    saveItemsLocally({ msgAboveItemWithIndex: getIndexWhereToShowMsg({ newItemId, topItemFromCopyContainer }) })
   }, 1000 * theme.item.animationDuration)
 
   const itemsInCopyContainer = getState().copy.items
