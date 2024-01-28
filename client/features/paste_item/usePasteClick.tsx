@@ -6,7 +6,17 @@ import { copySlice } from '@entities/copy'
 import { type CopyableItem, getBoqItemFromStore, itemsSlice, saveItemsLocally } from '@entities/items'
 import { generalSlice } from '@shared/general'
 
-const pasteItemOnClick = (): void => {
+export const usePasteClick = (): void => {
+  useEffectOnce(() => {
+    document.addEventListener('click', pasteItemOnClick)
+  })
+
+  useUnmount((): void => {
+    document.removeEventListener('click', pasteItemOnClick)
+  })
+}
+
+function pasteItemOnClick(): void {
   const isPasteTextShown = getState().copy.isPasteTextShown
 
   if (!isPasteTextShown) return
@@ -53,16 +63,6 @@ const pasteItemOnClick = (): void => {
       dispatch(generalSlice.actions.enableFroala())
     }, 1000 * theme.item.animationDuration + 500)
   }
-}
-
-export const usePasteClick = (): void => {
-  useEffectOnce(() => {
-    document.addEventListener('click', pasteItemOnClick)
-  })
-
-  useUnmount((): void => {
-    document.removeEventListener('click', pasteItemOnClick)
-  })
 }
 
 function getIndexWhereToShowMsg({ newItemId, topItemFromCopyContainer }: {
