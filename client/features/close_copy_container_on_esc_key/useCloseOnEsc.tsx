@@ -1,7 +1,7 @@
 import { dispatch } from '@lib_instances/store'
 import { useEffectOnce } from 'react-use'
 import { copySlice } from '@entities/copy'
-import { itemsSlice } from '@entities/items'
+import { itemsSlice, saveItemsLocally } from '@entities/items'
 import { generalSlice } from '@shared/general'
 
 export const useExitCopyOnEsc = (): void => {
@@ -10,12 +10,15 @@ export const useExitCopyOnEsc = (): void => {
     dispatch(copySlice.actions.hideCopyContainer())
     dispatch(itemsSlice.actions.removePasteItemReducer())
     dispatch(generalSlice.actions.enableFroala())
+    saveItemsLocally()
   }
 
   type Res = () => void
 
   const listenForEsc = (): Res => {
     window.addEventListener('keydown', closeOnEsc)
+
+    // cleanup
     return (): void => {
       window.removeEventListener('keydown', closeOnEsc)
     }

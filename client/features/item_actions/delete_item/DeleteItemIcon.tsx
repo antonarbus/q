@@ -44,10 +44,29 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
         if (!isCopyContainer) {
           setTimeout(() => {
             dispatch(generalSlice.actions.enableFroala())
+
+            let msgAboveItemWithIndex = -1
+
+            const itemsLength = getState().items.length
+
+            const isLastItemLeft = itemsLength === 1
+            if (isLastItemLeft) {
+              msgAboveItemWithIndex = 0
+            }
+
+            const doesItemBelowExist = itemsLength >= itemIndex + 1
+            if (doesItemBelowExist) {
+              msgAboveItemWithIndex = itemIndex
+            }
+
+            const isLastItemDeleted = itemsLength + 1 === itemIndex + 1
+            if (isLastItemDeleted) {
+              msgAboveItemWithIndex = itemIndex - 1
+            }
+
+            saveItemsLocally({ msgAboveItemWithIndex })
           }, 1000 * theme.item.animationDuration)
         }
-
-        saveItemsLocally()
       }}
       onMouseOver={(): void => {
         gsap.to(ref.current, {

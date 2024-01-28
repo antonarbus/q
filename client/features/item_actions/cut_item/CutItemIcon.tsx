@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import type { MouseEvent } from 'react'
 import { TbCut } from 'react-icons/tb'
 import { copySlice } from '@entities/copy'
-import { itemsSlice, saveItemHeightByIndex, selectIsLastItem, useItem, saveItemsLocally } from '@entities/items'
+import { itemsSlice, saveItemHeightByIndex, selectIsLastItem, useItem } from '@entities/items'
 import { className } from '@shared/consts/className'
 import { generalSlice } from '@shared/general'
 import { cleanHtml } from '@shared/lib/itemsUtils'
@@ -61,8 +61,6 @@ export const CutItemIcon = (): JSX.Element => {
         setTimeout(() => {
           dispatch(copySlice.actions.allowAllActions())
         }, 1000 * theme.item.animationDuration)
-
-        saveItemsLocally()
       }}
     >
       <TbCut />
