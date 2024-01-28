@@ -1,6 +1,6 @@
 import type FroalaEditor from 'froala-editor'
 import { roundTo } from 'round-to'
-import { type BoqItemContextType, didBoqHeaderCellContentChange, getBoqHeaderFromStore, getBoqRowsFromStore, saveItemsLocally, updateBoqHeaderCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from '@entities/items'
+import { type BoqItemContextType, didBoqHeaderCellContentChange, getBoqHeaderFromStore, getBoqRowsFromStore, saveItemsLocally, updateBoqHeaderCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue, getBoqRowFromStore, type BoqRow } from '@entities/items'
 import { notify } from '@shared/ui/top_msg'
 
 type Props = {
@@ -118,15 +118,66 @@ export const updateSubtotalPriceCell = ({
     return
   }
 
-  prices.forEach((price, index) => {
+  prices.forEach((price, rowIndex) => {
     updateBoqRowCellWithValue({
       boqRowCellKey: 'price',
-      editor: price.editor,
+      editor: boqRowEditorRefs.at(rowIndex)?.price.current ?? null,
       itemIndex,
-      rowIndex: index,
+      rowIndex,
       value: price.newValue,
-      triggerContentChange: true, // todo: we should not rely on contentChange, but put logic here, it will become a mess
+      triggerContentChange: false,
     })
+
+    const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
+
+    const isItemPricePinned = boqRow?.itemPrice.pin.isPinned
+
+    if (isItemPricePinned) {
+      if (boqRow.itemPrice.value === 0) return
+      const newQtyValue = boqRow.price.value / boqRow.itemPrice.value
+      const newQtyValueRounded = roundTo(newQtyValue, 5)
+
+      updateBoqRowCellWithValue({
+        editor: boqRowEditorRefs.at(rowIndex)?.qty.current ?? null,
+        itemIndex,
+        rowIndex,
+        boqRowCellKey: 'qty',
+        value: newQtyValueRounded,
+      })
+    }
+
+    const isQtyPinned = boqRow?.qty.pin.isPinned
+
+    if (isQtyPinned) {
+      if (boqRow.qty.value === 0) return
+      const newItemPriceValue = boqRow.price.value / boqRow.qty.value
+      const newItemPriceValueRounded = roundTo(newItemPriceValue, 2)
+
+      updateBoqRowCellWithValue({
+        editor: boqRowEditorRefs.at(rowIndex)?.itemPrice.current ?? null,
+        itemIndex,
+        rowIndex,
+        boqRowCellKey: 'itemPrice',
+        value: newItemPriceValueRounded,
+      })
+    }
+  })
+
+  const boqRowsUpdated = getBoqRowsFromStore({ itemIndex })
+  if (boqRowsUpdated === undefined) return
+
+  const subTotalPriceValueNew: number = boqRowsUpdated.reduce((accumulator: number, boqRow: BoqRow) => {
+    const price = boqRow.price.value
+    return accumulator + price
+  }, 0)
+
+  const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
+
+  updateSubTotalPriceWithValue({
+    itemIndex,
+    subTotalPriceEditor: subTotalPriceEditorRef.current,
+    value: subTotalPriceValueNewRounded,
+    incrementally: true,
   })
 
   saveItemsLocally({

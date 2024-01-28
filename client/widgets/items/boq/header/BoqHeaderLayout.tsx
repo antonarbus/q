@@ -55,8 +55,8 @@ export const BoqHeaderLayout = ({
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'flex-end',
+            minWidth: '150px',
             flexShrink: 0,
-            minWidth: '100px',
           }}
         >
           <Box
