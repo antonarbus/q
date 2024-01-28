@@ -5,6 +5,7 @@ import type { CopyableItem, Item } from '../../types'
 
 type Payload = {
   itemId: string
+  newItemId: string
   pastePos: PastePos
   item: CopyableItem
 }
@@ -12,8 +13,8 @@ type Payload = {
 type Reducer = (state: Item[], action: PayloadAction<Payload>) => Item[]
 
 export const pasteItemReducer: Reducer = (state, action) => {
-  const { itemId, pastePos, item } = action.payload
-  const itemToPaste = { ...structuredClone(item), id: nanoid(3) }
+  const { itemId, newItemId, pastePos, item } = action.payload
+  const itemToPaste = { ...structuredClone(item), id: newItemId }
 
   if (itemToPaste.type === 'boq') {
     const boqRows = itemToPaste.boq.rows
@@ -56,6 +57,7 @@ export const pasteItemReducer: Reducer = (state, action) => {
     const spliceSettings = getSpliceSettings()
 
     const itemsWithoutPasteText = state.filter(({ type }) => type !== 'paste')
+
     itemsWithoutPasteText.splice(
       spliceSettings.insertAtIndex,
       spliceSettings.deleteCount,

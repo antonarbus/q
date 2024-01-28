@@ -1,8 +1,9 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
+import { nanoid } from 'nanoid'
 import { useEffectOnce, useUnmount } from 'react-use'
 import { copySlice } from '@entities/copy'
-import { itemsSlice, saveItemsLocally } from '@entities/items'
+import { getBoqItemFromStore, itemsSlice, saveItemsLocally } from '@entities/items'
 import { generalSlice } from '@shared/general'
 
 const pasteItemOnClick = (): void => {
@@ -21,17 +22,42 @@ const pasteItemOnClick = (): void => {
 
   if (!topItemFromCopyContainer) return
 
+  const newItemId = nanoid(3)
+
   dispatch(itemsSlice.actions.pasteItemReducer({
     item: topItemFromCopyContainer,
     itemId,
+    newItemId,
     pastePos,
   }))
 
   dispatch(copySlice.actions.removeItemFromCopyContainer())
   dispatch(copySlice.actions.forbidAllActions())
 
+  // find pasted index to show msg on top
+  let pastedAtItemIndex = -1
+
+  if (topItemFromCopyContainer.type !== 'boq row') {
+    pastedAtItemIndex = getState().items.findIndex(item => item.id === newItemId)
+  }
+
+  if (topItemFromCopyContainer.type === 'boq row') {
+    getState().items.forEach((item, itemIndex) => {
+      const boqItem = getBoqItemFromStore({ itemIndex })
+      if (boqItem === undefined) return
+      const pastedRow = boqItem.boq.rows.find(boqRow => boqRow.id === newItemId)
+      if (pastedRow !== undefined) {
+        pastedAtItemIndex = itemIndex
+      }
+    })
+  }
+
   setTimeout(() => {
     dispatch(copySlice.actions.allowAllActions())
+
+    saveItemsLocally({
+      msgAboveItemWithIndex: pastedAtItemIndex,
+    })
   }, 1000 * theme.item.animationDuration)
 
   const itemsInCopyContainer = getState().copy.items
@@ -40,12 +66,9 @@ const pasteItemOnClick = (): void => {
     dispatch(copySlice.actions.hideCopyContainer())
     dispatch(itemsSlice.actions.removePasteItemReducer())
 
-    // need more time than animation, otherwise some distortion is visible
+    // * need more time than animation, otherwise some distortion is visible
     setTimeout(() => {
       dispatch(generalSlice.actions.enableFroala())
-      saveItemsLocally({
-        msgAboveItemWithIndex: 0, // todo: findIndex of this pasted item
-      })
     }, 1000 * theme.item.animationDuration + 500)
   }
 }
