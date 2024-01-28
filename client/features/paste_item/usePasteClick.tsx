@@ -3,7 +3,7 @@ import { theme } from '@lib_instances/theme'
 import { nanoid } from 'nanoid'
 import { useEffectOnce, useUnmount } from 'react-use'
 import { copySlice } from '@entities/copy'
-import { getBoqItemFromStore, itemsSlice, saveItemsLocally } from '@entities/items'
+import { type CopyableItem, getBoqItemFromStore, itemsSlice, saveItemsLocally } from '@entities/items'
 import { generalSlice } from '@shared/general'
 
 const pasteItemOnClick = (): void => {
@@ -34,29 +34,11 @@ const pasteItemOnClick = (): void => {
   dispatch(copySlice.actions.removeItemFromCopyContainer())
   dispatch(copySlice.actions.forbidAllActions())
 
-  // find pasted index to show msg on top
-  let pastedAtItemIndex = -1
-
-  if (topItemFromCopyContainer.type !== 'boq row') {
-    pastedAtItemIndex = getState().items.findIndex(item => item.id === newItemId)
-  }
-
-  if (topItemFromCopyContainer.type === 'boq row') {
-    getState().items.forEach((item, itemIndex) => {
-      const boqItem = getBoqItemFromStore({ itemIndex })
-      if (boqItem === undefined) return
-      const pastedRow = boqItem.boq.rows.find(boqRow => boqRow.id === newItemId)
-      if (pastedRow !== undefined) {
-        pastedAtItemIndex = itemIndex
-      }
-    })
-  }
-
   setTimeout(() => {
     dispatch(copySlice.actions.allowAllActions())
 
     saveItemsLocally({
-      msgAboveItemWithIndex: pastedAtItemIndex,
+      msgAboveItemWithIndex: getIndexWhereToShowMsg({ newItemId, topItemFromCopyContainer }),
     })
   }, 1000 * theme.item.animationDuration)
 
@@ -81,4 +63,30 @@ export const usePasteClick = (): void => {
   useUnmount((): void => {
     document.removeEventListener('click', pasteItemOnClick)
   })
+}
+
+function getIndexWhereToShowMsg({ newItemId, topItemFromCopyContainer }: {
+  newItemId: string
+  topItemFromCopyContainer: CopyableItem
+}): number {
+  if (topItemFromCopyContainer.type !== 'boq row') {
+    const pastedAtItemIndex = getState().items.findIndex(item => item.id === newItemId)
+    return pastedAtItemIndex
+  }
+
+  if (topItemFromCopyContainer.type === 'boq row') {
+    let pastedAtItemIndex = -1
+    getState().items.forEach((item, itemIndex) => {
+      const boqItem = getBoqItemFromStore({ itemIndex })
+      if (boqItem === undefined) return
+      const pastedRow = boqItem.boq.rows.find(boqRow => boqRow.id === newItemId)
+      if (pastedRow !== undefined) {
+        pastedAtItemIndex = itemIndex
+      }
+    })
+
+    return pastedAtItemIndex
+  }
+
+  return -1
 }
