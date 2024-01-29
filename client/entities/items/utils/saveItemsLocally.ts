@@ -17,8 +17,8 @@ export const saveItemsLocally = ({
     item.isFroala = true
 
     if (item.type !== 'boq') return
-    const boqRows = item.boq.rows
-    boqRows.forEach(boqRow => {
+
+    item.boq.rows.forEach(boqRow => {
       boqRow.itemPrice.pin.isShown = false
       boqRow.qty.pin.isShown = false
       boqRow.price.pin.isShown = false
