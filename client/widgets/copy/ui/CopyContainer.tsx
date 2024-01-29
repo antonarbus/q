@@ -31,6 +31,9 @@ export const CopyContainer = (): JSX.Element => {
         height: 0,
         width: 0,
         maxHeight: 265,
+        '.static-html': {
+          opacity: '1 !important',
+        },
       }}
     >
       <div
