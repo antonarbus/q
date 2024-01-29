@@ -4,14 +4,12 @@ import { getDecimalPrecision } from '../getDecimalPrecision'
 import { getNumberFromString } from '../getNumberFromString'
 import { getStringWithNewFormattedNumber } from '../getStringWithNewFormattedNumber'
 import { getTextContentFromHtml } from '../getTextContentFromHtml'
-import { triggerFroalaContentChange } from './triggerFroalaContentChange'
 
 type Props = {
   oldNumber: number
   newNumber: number
   html: string
   editor: FroalaEditor
-  triggerContentChange?: boolean
 }
 
 export const updateNumberAtHtmlIncrementally = async ({
@@ -19,7 +17,6 @@ export const updateNumberAtHtmlIncrementally = async ({
   newNumber,
   html,
   editor,
-  triggerContentChange,
 }: Props): Promise<void> => {
   const steps = 100
   const valueDifference = newNumber - oldNumber
@@ -63,8 +60,4 @@ export const updateNumberAtHtmlIncrementally = async ({
   })
 
   editor.html.set(finalHtml)
-
-  if (triggerContentChange) {
-    triggerFroalaContentChange({ editor })
-  }
 }
