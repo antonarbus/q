@@ -14,6 +14,8 @@ export const saveItemsLocally = ({
   const cleanedItems = structuredClone(items)
   cleanedItems.forEach(item => {
     item.msg = ''
+    item.isFroala = true
+
     if (item.type !== 'boq') return
     const boqRows = item.boq.rows
     boqRows.forEach(boqRow => {
