@@ -125,7 +125,6 @@ export const updateSubtotalPriceCell = ({
       itemIndex,
       rowIndex,
       value: price.newValue,
-      triggerContentChange: false,
     })
 
     const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })

@@ -10,7 +10,6 @@ type Props = {
   editor: FroalaEditor | null
   boqRowCellKey: BoqRowCellKey
   value: number
-  triggerContentChange?: boolean
 }
 
 export const updateBoqRowCellWithValue = ({
@@ -19,7 +18,6 @@ export const updateBoqRowCellWithValue = ({
   editor,
   boqRowCellKey,
   value,
-  triggerContentChange,
 }: Props): void => {
   if (editor === null) return
 
@@ -52,6 +50,5 @@ export const updateBoqRowCellWithValue = ({
     newNumber: value,
     editor,
     html: boqRow[boqRowCellKey].html,
-    triggerContentChange,
   })
 }
