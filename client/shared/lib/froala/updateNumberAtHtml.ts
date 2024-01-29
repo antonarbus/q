@@ -1,6 +1,5 @@
 import type FroalaEditor from 'froala-editor'
 import { getStringWithNewFormattedNumber } from '../getStringWithNewFormattedNumber'
-import { triggerFroalaContentChange } from './triggerFroalaContentChange'
 
 type Props = {
   oldNumber: number
