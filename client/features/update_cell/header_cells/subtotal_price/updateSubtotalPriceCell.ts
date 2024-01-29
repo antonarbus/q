@@ -25,6 +25,7 @@ export const updateSubtotalPriceCell = ({
   if (!didContentChange) return
 
   const boqRows = getBoqRowsFromStore({ itemIndex })
+
   if (boqRows === undefined) return
 
   const { didUpdate } = updateBoqHeaderCellAtStore({

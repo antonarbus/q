@@ -67,7 +67,9 @@ export const updateBoqRowPriceCell = ({
     })
   }
 
+  // update subTotalPrice
   const boqRows = getBoqRowsFromStore({ itemIndex })
+
   if (boqRows === undefined) return
 
   const subTotalPriceValueNew: number = boqRows.reduce((accumulator: number, boqRow: BoqRow) => {
