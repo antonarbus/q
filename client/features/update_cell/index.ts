@@ -9,6 +9,7 @@ export { updateTitleCell } from './header_cells/title/updateTitleCell'
 export { updateSubtotalTextCell } from './header_cells/subtotal_text/updateSubtotalTextCell'
 export { updateSubtotalPriceCell } from './header_cells/subtotal_price/updateSubtotalPriceCell'
 export { formatSubtotalPriceCell } from './header_cells/subtotal_price/formatSubtotalPriceCell'
+export { useUpdateSubtotalPriceCellOnRowsQtyChange } from './header_cells/subtotal_price/useUpdateSubtotalPriceCellOnRowsQtyChange'
 
 export { validateBoqRowPrices } from './header_cells/subtotal_price/validateBoqRowPrices'
 
