@@ -2,17 +2,17 @@ import { createContext, useContext, type ReactNode } from 'react'
 import { type FroalaEditorRef } from '@shared/types'
 import { useBoqItem } from './BoqItemProvider'
 
-type Context = {
+type Props = {
   rowIndex: number
   rowId: string
+  children: ReactNode
+}
+
+type Context = Omit<Props, 'children'> & {
   descriptionEditorRef: FroalaEditorRef
   itemPriceCellEditorRef: FroalaEditorRef
   qtyCellEditorRef: FroalaEditorRef
   priceCellEditorRef: FroalaEditorRef
-}
-
-type Props = Omit<Context, 'descriptionEditorRef' | 'itemPriceCellEditorRef' | 'qtyCellEditorRef' | 'priceCellEditorRef'> & {
-  children: ReactNode
 }
 
 const RowContext = createContext<Context | null>(null)
