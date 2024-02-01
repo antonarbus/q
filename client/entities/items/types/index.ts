@@ -1,3 +1,5 @@
+import { type FroalaEditorRef } from '@shared/types'
+
 type Common = {
   id: string
   width: number
@@ -77,3 +79,10 @@ export type PasteItem = {
 
 export type Item = BoqItem | PasteItem | TextItem
 export type CopyableItem = BoqItem | BoqRow | TextItem
+
+export type BoqRowEditorRefs = Array<{
+  description: FroalaEditorRef
+  itemPrice: FroalaEditorRef
+  qty: FroalaEditorRef
+  price: FroalaEditorRef
+}>

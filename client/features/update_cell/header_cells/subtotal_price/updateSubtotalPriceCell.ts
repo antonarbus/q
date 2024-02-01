@@ -1,12 +1,13 @@
 import type FroalaEditor from 'froala-editor'
 import { roundTo } from 'round-to'
-import { type BoqItemContextType, didBoqHeaderCellContentChange, getBoqHeaderFromStore, getBoqRowsFromStore, saveItemsLocally, updateBoqHeaderCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue, getBoqRowFromStore, type BoqRow } from '@entities/items'
+import { didBoqHeaderCellContentChange, getBoqHeaderFromStore, getBoqRowsFromStore, saveItemsLocally, updateBoqHeaderCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue, getBoqRowFromStore, type BoqRow, type BoqRowEditorRefs } from '@entities/items'
+import { type FroalaEditorRef } from '@shared/types'
 import { notify } from '@shared/ui/top_msg'
 
 type Props = {
   itemIndex: number
-  subTotalPriceEditorRef: BoqItemContextType['subTotalPriceEditorRef']
-  boqRowEditorRefs: BoqItemContextType['boqRowEditorRefs']
+  subTotalPriceEditorRef: FroalaEditorRef
+  boqRowEditorRefs: BoqRowEditorRefs
 }
 
 export const updateSubtotalPriceCell = ({

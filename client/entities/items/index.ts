@@ -81,4 +81,5 @@ export type {
   BoqRowCellPin,
   BoqRowCell,
   BoqItem,
+  BoqRowEditorRefs,
 } from './types'

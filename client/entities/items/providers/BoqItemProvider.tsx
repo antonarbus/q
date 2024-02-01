@@ -1,18 +1,14 @@
-import type FroalaEditor from 'froala-editor'
 import { createContext, useContext, type ReactNode } from 'react'
+import { type FroalaEditorRef } from '@shared/types'
+import { type BoqRowEditorRefs } from '../types'
 
 type Props = {
   children: ReactNode
 }
 
 export type BoqItemContextType = {
-  subTotalPriceEditorRef: { current: FroalaEditor | null }
-  boqRowEditorRefs: Array<{
-    description: { current: FroalaEditor | null }
-    itemPrice: { current: FroalaEditor | null }
-    qty: { current: FroalaEditor | null }
-    price: { current: FroalaEditor | null }
-  }>
+  subTotalPriceEditorRef: FroalaEditorRef
+  boqRowEditorRefs: BoqRowEditorRefs
 }
 
 const BoqItemContext = createContext<BoqItemContextType | null>(null)

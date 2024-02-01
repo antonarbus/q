@@ -1,3 +1,4 @@
+import { tabFromDescriptionCell } from '@features/tab_from_cell'
 import { updateDescriptionCell } from '@features/update_cell'
 import { getBoqCellHtmlFromStore, useRow, useItem, Froala, useStylesForResizableCell, boqRowCellStyle } from '@entities/items'
 import type { BoqRowCellKey } from '@entities/items'
@@ -19,11 +20,7 @@ export const DescriptionCell = (): JSX.Element => {
           updateDescriptionCell({ editorRef: descriptionEditorRef, itemIndex, rowIndex, boqRowCellKey })
         }}
         onKeydown={(e) => {
-          const isTabKey = e.key === 'Tab'
-          if (isTabKey) {
-            e.preventDefault()
-            itemPriceCellEditorRef.current?.commands.selectAll()
-          }
+          tabFromDescriptionCell({ e, rowIndex, itemPriceCellEditorRef })
         }}
         wrapperStyles={stylesForResizableCell}
         additionalStyle={{
