@@ -1,9 +1,9 @@
-import type FroalaEditor from 'froala-editor'
-import { type MouseEvent, type MutableRefObject } from 'react'
+import { type MouseEvent } from 'react'
+import { type FroalaEditorRef } from '@shared/types'
 
 type Props = {
   e: MouseEvent
-  editorRef: MutableRefObject<FroalaEditor | null>
+  editorRef: FroalaEditorRef
 }
 
 export const selectTextOrCloseToolbar = ({

@@ -1,13 +1,12 @@
 import { dispatch } from '@lib_instances/store'
-import type FroalaEditor from 'froala-editor'
-import { type MutableRefObject } from 'react'
 import { roundTo } from 'round-to'
 import { getBoqItemFromStore, itemsSlice } from '@entities/items'
 import { getStringWithNewFormattedNumber } from '@shared/lib'
+import { type FroalaEditorRef } from '@shared/types'
 
 type Props = {
   itemIndex: number
-  subTotalPriceEditorRef: MutableRefObject<FroalaEditor | null>
+  subTotalPriceEditorRef: FroalaEditorRef
 }
 
 export const formatSubtotalPriceCell = ({

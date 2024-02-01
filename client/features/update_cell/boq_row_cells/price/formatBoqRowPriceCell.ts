@@ -1,9 +1,8 @@
-import type FroalaEditor from 'froala-editor'
-import { type MutableRefObject } from 'react'
 import { formatBoqRowCellNumber, saveItemsLocally } from '@entities/items'
+import { type FroalaEditorRef } from '@shared/types'
 
 type Props = {
-  priceCellEditorRef: MutableRefObject<FroalaEditor | null>
+  priceCellEditorRef: FroalaEditorRef
   itemIndex: number
   rowIndex: number
 }

@@ -1,10 +1,9 @@
-import type FroalaEditor from 'froala-editor'
-import { type MutableRefObject } from 'react'
 import { saveItemsLocally, updateBoqHeaderCellAtStore } from '@entities/items'
 import { type BoqHeaderKey } from '@entities/items'
+import { type FroalaEditorRef } from '@shared/types'
 
 type Props = {
-  editorRef: MutableRefObject<FroalaEditor | null>
+  editorRef: FroalaEditorRef
   itemIndex: number
   boqHeaderKey: BoqHeaderKey
 }
