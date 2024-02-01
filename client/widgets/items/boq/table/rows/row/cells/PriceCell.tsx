@@ -1,5 +1,6 @@
 import { Box } from '@mui/material'
 import { Pin, pinBoqRowPriceCell, showBoqRowPins } from '@features/pin'
+import { tabFromPriceCell } from '@features/tab_from_cell'
 import { formatBoqRowPriceCell, updateBoqRowPriceCell, validateBoqRowPrice } from '@features/update_cell'
 import { getBoqCellHtmlFromStore, useBoqItem, useItem, useRow, Froala, boqRowCellStyle, useStylesForResizableCell } from '@entities/items'
 import type { BoqRowCellKey } from '@entities/items'
@@ -30,17 +31,7 @@ export const PriceCell = (): JSX.Element => {
           validateBoqRowPrice({ itemIndex, priceCellEditorRef, rowIndex, subTotalPriceEditorRef })
         }}
         onKeydown={(e) => {
-          const isTabKey = e.key === 'Tab'
-          if (isTabKey) {
-            const isLastRow = boqRowEditorRefs.length === rowIndex + 1
-            if (isLastRow) {
-              // just use default tabbing to the next focusable area
-            }
-            if (!isLastRow) {
-              e.preventDefault()
-              boqRowEditorRefs.at(rowIndex + 1)?.description.current?.commands.selectAll()
-            }
-          }
+          tabFromPriceCell({ e, rowIndex, boqRowEditorRefs })
         }}
         wrapperStyles={stylesForResizableCell}
         additionalStyle={boqRowCellStyle}

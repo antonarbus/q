@@ -1,5 +1,6 @@
 import { Box } from '@mui/material'
 import { Pin, pinBoqRowQtyCell } from '@features/pin'
+import { tabFromQtyCell } from '@features/tab_from_cell'
 import { formatBoqRowQtyCell, updateBoqRowQtyCell } from '@features/update_cell'
 import { getBoqCellHtmlFromStore, useItem, useRow, useBoqItem, Froala, boqRowCellStyle, useStylesForResizableCell, type BoqRowCellKey } from '@entities/items'
 
@@ -25,11 +26,7 @@ export const QtyCell = (): JSX.Element => {
           formatBoqRowQtyCell({ itemIndex, qtyCellEditorRef, rowIndex })
         }}
         onKeydown={(e) => {
-          const isTabKey = e.key === 'Tab'
-          if (isTabKey) {
-            e.preventDefault()
-            priceCellEditorRef.current?.commands.selectAll()
-          }
+          tabFromQtyCell({ e, rowIndex, priceCellEditorRef })
         }}
         wrapperStyles={stylesForResizableCell}
         additionalStyle={boqRowCellStyle}
