@@ -7,7 +7,7 @@ export const froalaDefaultOptions = {
   pastePlain: false,
   charCounterCount: false,
   fontSizeSelection: true,
-  tabSpaces: 0,
+  tabSpaces: 0, // otherwise tab key can not be prevented
   toolbarButtons: {
     moreText: {
       buttons: [
