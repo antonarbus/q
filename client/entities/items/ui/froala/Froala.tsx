@@ -21,6 +21,7 @@ export type FroalaProps = {
   onFocus?: () => void
   onClick?: (e: MouseEvent) => void
   onBlur?: (e: MouseEvent) => void
+  onKeydown?: (e: KeyboardEvent) => void
   className?: string
   wrapperStyles?: SxProps
 }
@@ -34,6 +35,7 @@ export const Froala = ({
   onFocus,
   onClick,
   onBlur,
+  onKeydown,
   className,
   wrapperStyles,
 }: FroalaProps): JSX.Element => {
@@ -56,6 +58,7 @@ export const Froala = ({
       onFocus={onFocus}
       onClick={onClick}
       onBlur={onBlur}
+      onKeydown={onKeydown}
       froalaElementRef={froalaElementRef}
       froalaHeightRef={froalaHeightRef}
     >

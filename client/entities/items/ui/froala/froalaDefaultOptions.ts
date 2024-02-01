@@ -7,7 +7,7 @@ export const froalaDefaultOptions = {
   pastePlain: false,
   charCounterCount: false,
   fontSizeSelection: true,
-  tabSpaces: 4,
+  tabSpaces: 0,
   toolbarButtons: {
     moreText: {
       buttons: [

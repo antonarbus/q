@@ -9,7 +9,7 @@ const boqRowCellKey: BoqRowCellKey = 'description'
 export const DescriptionCell = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
   const { itemIndex } = useItem()
-  const { rowIndex } = useRow()
+  const { rowIndex, itemPriceCellEditorRef } = useRow()
   const { stylesForResizableCell } = useStylesForResizableCell({ itemIndex, boqColumnKey: boqRowCellKey, minWidth: '200px' })
 
   return (
@@ -20,6 +20,16 @@ export const DescriptionCell = (): JSX.Element => {
         htmlGetter={() => getBoqCellHtmlFromStore({ itemIndex, rowIndex, boqRowCellKey })}
         onContentChange={() => {
           updateDescriptionCell({ editorRef, itemIndex, rowIndex, boqRowCellKey })
+        }}
+        onKeydown={(e) => {
+          console.log('🚀 ~ e:', e)
+          // e.stopPropagation()
+          const isTabKey = e.key === 'Tab'
+          if (isTabKey) {
+            e.originalEvent.preventDefault()
+            itemPriceCellEditorRef.current?.commands.selectAll()
+            return false
+          }
         }}
         wrapperStyles={stylesForResizableCell}
         additionalStyle={{
