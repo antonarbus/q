@@ -135,7 +135,7 @@ export const updateSubtotalPriceCell = ({
     if (isItemPricePinned) {
       if (boqRow.itemPrice.value === 0) return
       const newQtyValue = boqRow.price.value / boqRow.itemPrice.value
-      const newQtyValueRounded = roundTo(newQtyValue, 5)
+      const newQtyValueRounded = roundTo(newQtyValue, 3)
 
       updateBoqRowCellWithValue({
         editor: boqRowEditorRefs.at(rowIndex)?.qty.current ?? null,
