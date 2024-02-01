@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
 import { MdDragIndicator } from 'react-icons/md'
 import { SortableHandle } from 'react-sortable-hoc'
-// todo: obviously need to move items into entities
 import { useIsBoqRowSortDisabled } from '@entities/items/hooks/useIsBoqRowSortDisabled'
 
 const Handle = (): JSX.Element => {
@@ -14,6 +13,7 @@ const Handle = (): JSX.Element => {
         color: isDisabled ? '#acacac' : '#000',
         cursor: isDisabled ? 'default' : 'move',
       }}
+      tabIndex={-1}
     >
       <MdDragIndicator />
     </motion.span>

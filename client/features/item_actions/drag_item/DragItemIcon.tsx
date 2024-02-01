@@ -13,6 +13,7 @@ const Handle = (): JSX.Element => {
         color: isDisabled ? '#acacac' : '#000',
         cursor: isDisabled ? 'default' : 'move',
       }}
+      tabIndex={-1}
     >
       <MdDragIndicator />
     </motion.span>

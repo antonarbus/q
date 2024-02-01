@@ -8,6 +8,7 @@ type Props = {
 export type BoqItemContextType = {
   subTotalPriceEditorRef: { current: FroalaEditor | null }
   boqRowEditorRefs: Array<{
+    description: { current: FroalaEditor | null }
     itemPrice: { current: FroalaEditor | null }
     qty: { current: FroalaEditor | null }
     price: { current: FroalaEditor | null }

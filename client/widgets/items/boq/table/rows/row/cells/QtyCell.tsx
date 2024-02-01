@@ -24,6 +24,13 @@ export const QtyCell = (): JSX.Element => {
         onBlur={() => {
           formatBoqRowQtyCell({ itemIndex, qtyCellEditorRef, rowIndex })
         }}
+        onKeydown={(e) => {
+          const isTabKey = e.key === 'Tab'
+          if (isTabKey) {
+            e.preventDefault()
+            priceCellEditorRef.current?.commands.selectAll()
+          }
+        }}
         wrapperStyles={stylesForResizableCell}
         additionalStyle={boqRowCellStyle}
       />
