@@ -1,7 +1,6 @@
-import type FroalaEditor from 'froala-editor'
 import { roundTo } from 'round-to'
 import { didBoqHeaderCellContentChange, getBoqHeaderFromStore, getBoqRowsFromStore, saveItemsLocally, updateBoqHeaderCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue, getBoqRowFromStore, type BoqRow, type BoqRowEditorRefs } from '@entities/items'
-import { type FroalaEditorRef } from '@shared/types'
+import { type FroalaEditor, type FroalaEditorRef } from '@shared/types'
 import { notify } from '@shared/ui/top_msg'
 
 type Props = {

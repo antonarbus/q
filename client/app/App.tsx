@@ -17,10 +17,6 @@ import { GlobalStyles } from './GlobalStyles'
 import { Main } from './Main'
 import { ReactQueryDevtoolsProductionHidden } from './ReactQueryDevtoolsProductionHidden'
 
-document.addEventListener('focusin', function(event) {
-  console.log('Focused element:', document.activeElement)
-})
-
 export const App = (): JSX.Element => (
   <Provider store={store}>
     <QueryClientProvider client={reactQuery}>

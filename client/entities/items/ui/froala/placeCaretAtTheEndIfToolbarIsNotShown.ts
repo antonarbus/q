@@ -1,10 +1,10 @@
-import type FroalaEditor from 'froala-editor'
-import { type RefObject, type MouseEvent, type MutableRefObject } from 'react'
+import { type RefObject, type MouseEvent } from 'react'
+import { type FroalaEditorRef } from '@shared/types'
 
 type Props = {
   e: MouseEvent
   froalaElementRef: RefObject<HTMLDivElement>
-  editorRef: MutableRefObject<FroalaEditor | null>
+  editorRef: FroalaEditorRef
 }
 
 export const placeCaretAtTheEndIfToolbarIsNotShown = ({

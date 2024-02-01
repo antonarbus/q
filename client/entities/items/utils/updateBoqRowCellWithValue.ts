@@ -1,5 +1,5 @@
-import type FroalaEditor from 'froala-editor'
 import { getNumberFromString, getTextContentFromHtml, getStringWithNewFormattedNumber, updateNumberAtHtmlIncrementally } from '@shared/lib'
+import { type FroalaEditor } from '@shared/types'
 import { getBoqRowFromStore } from '../redux/getters/getBoqRowFromStore'
 import { updateBoqRowCellAtStore } from '../redux/updaters/updateBoqRowCellAtStore'
 import { type BoqRowCellKey } from '../types'

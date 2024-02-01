@@ -1,10 +1,6 @@
-import type FroalaEditor from 'froala-editor'
 import { createContext, useContext, type ReactNode } from 'react'
+import { type FroalaEditorRef } from '@shared/types'
 import { useBoqItem } from './BoqItemProvider'
-
-type FroalaEditorRef = {
-  current: FroalaEditor | null
-}
 
 type Context = {
   rowIndex: number

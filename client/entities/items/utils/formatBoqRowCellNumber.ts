@@ -1,8 +1,7 @@
 import { dispatch } from '@lib_instances/store'
-import type FroalaEditor from 'froala-editor'
-import { type MutableRefObject } from 'react'
 import { roundTo } from 'round-to'
 import { getStringWithNewFormattedNumber } from '@shared/lib'
+import { type FroalaEditorRef } from '@shared/types'
 import { getBoqRowFromStore } from '../redux/getters/getBoqRowFromStore'
 import { itemsSlice } from '../redux/itemsSlice'
 import { type BoqRowCellKey } from '../types'
@@ -11,7 +10,7 @@ type Props = {
   itemIndex: number
   rowIndex: number
   boqRowCellKey: BoqRowCellKey
-  editorRef: MutableRefObject<FroalaEditor | null>
+  editorRef: FroalaEditorRef
   roundToTwoDecimals: boolean
 }
 

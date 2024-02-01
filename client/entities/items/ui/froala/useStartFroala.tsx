@@ -3,13 +3,14 @@ import 'froala-editor/js/plugins.pkgd.min.js'
 import 'froala-editor/js/third_party/font_awesome.min.js'
 import './froala_editor.pkgd.min.css'
 import FroalaEditor from 'froala-editor'
-import type { MouseEvent, MutableRefObject } from 'react'
+import type { MouseEvent } from 'react'
 import { useEffect } from 'react'
+import { type FroalaEditorRef } from '@shared/types'
 import { useFroala } from '../../providers/FroalaProvider'
 import { froalaDefaultOptions } from './froalaDefaultOptions'
 
 declare const window: Window & typeof globalThis & {
-  froalas: Array<MutableRefObject<FroalaEditor | null>>
+  froalas: FroalaEditorRef[]
 }
 
 window.froalas = []

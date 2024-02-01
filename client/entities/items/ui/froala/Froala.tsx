@@ -1,7 +1,7 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { Box, type SxProps } from '@mui/material'
-import type FroalaEditor from 'froala-editor'
-import { useRef, type MutableRefObject, type MouseEvent } from 'react'
+import { useRef, type MouseEvent } from 'react'
+import { type FroalaEditorRef } from '@shared/types'
 import { FroalaProvider } from '../../providers/FroalaProvider'
 import { useItem } from '../../providers/ItemProvider'
 import { EditableHtml } from './EditableHtml'
@@ -14,7 +14,7 @@ import { useViewPortObserver } from './useViewPortObserver'
 
 export type FroalaProps = {
   htmlGetter: () => string
-  editorRef: MutableRefObject<FroalaEditor | null>
+  editorRef: FroalaEditorRef
   placeholder?: string
   additionalStyle?: SxProps
   onContentChange: () => void

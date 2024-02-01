@@ -1,12 +1,11 @@
-import type FroalaEditor from 'froala-editor'
-import { type MutableRefObject } from 'react'
 import { roundTo } from 'round-to'
 import { getBoqRowFromStore, getBoqRowsFromStore, isBoqRowPriceValid, saveItemsLocally, updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from '@entities/items'
 import { type BoqRow } from '@entities/items'
+import { type FroalaEditorRef } from '@shared/types'
 
 type Props = {
-  priceCellEditorRef: MutableRefObject<FroalaEditor | null>
-  subTotalPriceEditorRef: MutableRefObject<FroalaEditor | null>
+  priceCellEditorRef: FroalaEditorRef
+  subTotalPriceEditorRef: FroalaEditorRef
   itemIndex: number
   rowIndex: number
 }
