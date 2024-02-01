@@ -9,7 +9,7 @@ const boqRowCellKey: BoqRowCellKey = 'price'
 export const PriceCell = (): JSX.Element => {
   const { itemIndex } = useItem()
   const { rowIndex, priceCellEditorRef, qtyCellEditorRef, itemPriceCellEditorRef } = useRow()
-  const { subTotalPriceEditorRef } = useBoqItem()
+  const { subTotalPriceEditorRef, boqRowEditorRefs } = useBoqItem()
   const { stylesForResizableCell } = useStylesForResizableCell({ itemIndex, boqColumnKey: boqRowCellKey, minWidth: '100px' })
 
   return (
@@ -28,6 +28,19 @@ export const PriceCell = (): JSX.Element => {
         onBlur={() => {
           formatBoqRowPriceCell({ rowIndex, priceCellEditorRef, itemIndex })
           validateBoqRowPrice({ itemIndex, priceCellEditorRef, rowIndex, subTotalPriceEditorRef })
+        }}
+        onKeydown={(e) => {
+          const isTabKey = e.key === 'Tab'
+          if (isTabKey) {
+            const isLastRow = boqRowEditorRefs.length === rowIndex + 1
+            if (isLastRow) {
+              // just use default tabbing to the next focusable area
+            }
+            if (!isLastRow) {
+              e.preventDefault()
+              boqRowEditorRefs.at(rowIndex + 1)?.description.current?.commands.selectAll()
+            }
+          }
         }}
         wrapperStyles={stylesForResizableCell}
         additionalStyle={boqRowCellStyle}

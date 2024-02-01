@@ -9,7 +9,7 @@ const boqRowCellKey: BoqRowCellKey = 'itemPrice'
 export const ItemPriceCell = (): JSX.Element => {
   const { itemIndex } = useItem()
   const { subTotalPriceEditorRef } = useBoqItem()
-  const { rowIndex, itemPriceCellEditorRef, priceCellEditorRef } = useRow()
+  const { rowIndex, itemPriceCellEditorRef, priceCellEditorRef, qtyCellEditorRef } = useRow()
   const { stylesForResizableCell } = useStylesForResizableCell({ itemIndex, boqColumnKey: boqRowCellKey, minWidth: '100px' })
 
   return (
@@ -24,6 +24,13 @@ export const ItemPriceCell = (): JSX.Element => {
         }}
         onBlur={() => {
           formatBoqRowItemPriceCell({ itemIndex, rowIndex, itemPriceCellEditorRef })
+        }}
+        onKeydown={(e) => {
+          const isTabKey = e.key === 'Tab'
+          if (isTabKey) {
+            e.preventDefault()
+            qtyCellEditorRef.current?.commands.selectAll()
+          }
         }}
         wrapperStyles={stylesForResizableCell}
         additionalStyle={boqRowCellStyle}

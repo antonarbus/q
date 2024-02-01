@@ -25,6 +25,7 @@ export const CopyItemIcon = (): JSX.Element => {
         cursor: disabled ? 'default' : 'pointer',
         color: disabled ? '#acacac' : '#000',
       }}
+      tabIndex={-1}
       onClick={(e: MouseEvent): void => {
         if (disabled) return
 

@@ -22,6 +22,7 @@ export const DeleteBoqRowIcon = (): JSX.Element => {
         color: disabled ? '#acacac' : '#000',
         cursor: disabled ? 'default' : 'pointer',
       }}
+      tabIndex={-1}
       onClick={(): void => {
         gsap.to(ref.current, { duration: 0.2, scale: 0.9 })
 

@@ -25,6 +25,7 @@ export const CutItemIcon = (): JSX.Element => {
         color: disabled ? '#acacac' : '#000',
         cursor: disabled ? 'default' : 'pointer',
       }}
+      tabIndex={-1}
       onClick={(e: MouseEvent): void => {
         if (disabled) return
 

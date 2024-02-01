@@ -9,12 +9,13 @@ type FroalaEditorRef = {
 type Context = {
   rowIndex: number
   rowId: string
+  descriptionEditorRef: FroalaEditorRef
   itemPriceCellEditorRef: FroalaEditorRef
   qtyCellEditorRef: FroalaEditorRef
   priceCellEditorRef: FroalaEditorRef
 }
 
-type Props = Omit<Context, 'itemPriceCellEditorRef' | 'qtyCellEditorRef' | 'priceCellEditorRef'> & {
+type Props = Omit<Context, 'descriptionEditorRef' | 'itemPriceCellEditorRef' | 'qtyCellEditorRef' | 'priceCellEditorRef'> & {
   children: ReactNode
 }
 
@@ -27,11 +28,13 @@ export const RowProvider = ({
 }: Props): JSX.Element => {
   const { boqRowEditorRefs } = useBoqItem()
 
+  const descriptionEditorRef = { current: null }
   const itemPriceCellEditorRef = { current: null }
   const qtyCellEditorRef = { current: null }
   const priceCellEditorRef = { current: null }
 
   boqRowEditorRefs[rowIndex] = {
+    description: descriptionEditorRef,
     itemPrice: itemPriceCellEditorRef,
     qty: qtyCellEditorRef,
     price: priceCellEditorRef,
@@ -42,6 +45,7 @@ export const RowProvider = ({
       value={{
         rowIndex,
         rowId,
+        descriptionEditorRef,
         itemPriceCellEditorRef,
         qtyCellEditorRef,
         priceCellEditorRef,
