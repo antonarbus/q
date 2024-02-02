@@ -21,7 +21,7 @@ export type BoqRowCell = {
 
 export type BoqRow = {
   id: string
-  type: 'boq paste' | 'boq row'
+  type: 'paste' | 'row'
   height: number
   width: number
   description: BoqRowCell

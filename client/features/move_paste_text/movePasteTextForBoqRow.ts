@@ -17,7 +17,7 @@ export const movePasteTextForBoqRow = (e: MouseEvent): void => {
   const isBoqPasteItem = (getState().items
     .filter(item => item.type === 'boq') as BoqItem[])
     .flatMap(item => item.boq.rows)
-    .some(boqRow => boqRow.type === 'boq paste')
+    .some(boqRow => boqRow.type === 'paste')
 
   const removePasteIfNeeded = (): void => {
     if (isPasteTextShown) {

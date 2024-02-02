@@ -66,12 +66,12 @@ function getIndexWhereToShowMsg({ newItemId, topItemFromCopyContainer }: {
   newItemId: string
   topItemFromCopyContainer: CopyableItem
 }): number {
-  if (topItemFromCopyContainer.type !== 'boq row') {
+  if (topItemFromCopyContainer.type !== 'row') {
     const pastedAtItemIndex = getState().items.findIndex(item => item.id === newItemId)
     return pastedAtItemIndex
   }
 
-  if (topItemFromCopyContainer.type === 'boq row') {
+  if (topItemFromCopyContainer.type === 'row') {
     let pastedAtItemIndex = -1
     getState().items.forEach((item, itemIndex) => {
       const boqItem = getBoqItemFromStore({ itemIndex })
