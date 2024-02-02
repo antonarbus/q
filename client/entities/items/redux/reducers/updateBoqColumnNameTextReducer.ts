@@ -1,4 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { itemType } from '../../consts/itemType'
 import type { BoqColumnKey, Item } from '../../types'
 
 export const updateBoqColumnNameTextReducer = (state: Item[], action: PayloadAction<{
@@ -9,6 +10,6 @@ export const updateBoqColumnNameTextReducer = (state: Item[], action: PayloadAct
   const { itemIndex, html, boqColumnKey } = action.payload
   const item = state[itemIndex]
   if (!item) return
-  if (item.type !== 'boq') return
+  if (item.type !== itemType.boq) return
   item.boq.column[boqColumnKey].html = html
 }

@@ -1,7 +1,7 @@
 import { dispatch, getState } from '@lib_instances/store'
 import isEqual from 'lodash.isequal'
 import { copySlice, getPastePlace } from '@entities/copy'
-import { itemsSlice } from '@entities/items'
+import { boqRowType, itemType, itemsSlice } from '@entities/items'
 import { type BoqItem } from '@entities/items'
 import { className } from '@shared/consts/className'
 
@@ -15,9 +15,9 @@ export const movePasteTextForBoqRow = (e: MouseEvent): void => {
   const boqRowsElement = e.target.closest('.boq-rows')
 
   const isBoqPasteItem = (getState().items
-    .filter(item => item.type === 'boq') as BoqItem[])
+    .filter(item => item.type === itemType.boq) as BoqItem[])
     .flatMap(item => item.boq.rows)
-    .some(boqRow => boqRow.type === 'paste')
+    .some(boqRow => boqRow.type === boqRowType.paste)
 
   const removePasteIfNeeded = (): void => {
     if (isPasteTextShown) {

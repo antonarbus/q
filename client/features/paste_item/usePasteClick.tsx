@@ -3,7 +3,7 @@ import { theme } from '@lib_instances/theme'
 import { nanoid } from 'nanoid'
 import { useEffectOnce, useUnmount } from 'react-use'
 import { copySlice } from '@entities/copy'
-import { type CopyableItem, getBoqItemFromStore, itemsSlice, saveItemsLocally } from '@entities/items'
+import { type CopyableItem, getBoqItemFromStore, itemsSlice, saveItemsLocally, boqRowType } from '@entities/items'
 import { generalSlice } from '@shared/general'
 
 export const usePasteClick = (): void => {
@@ -66,12 +66,12 @@ function getIndexWhereToShowMsg({ newItemId, topItemFromCopyContainer }: {
   newItemId: string
   topItemFromCopyContainer: CopyableItem
 }): number {
-  if (topItemFromCopyContainer.type !== 'row') {
+  if (topItemFromCopyContainer.type !== boqRowType.row) {
     const pastedAtItemIndex = getState().items.findIndex(item => item.id === newItemId)
     return pastedAtItemIndex
   }
 
-  if (topItemFromCopyContainer.type === 'row') {
+  if (topItemFromCopyContainer.type === boqRowType.row) {
     let pastedAtItemIndex = -1
     getState().items.forEach((item, itemIndex) => {
       const boqItem = getBoqItemFromStore({ itemIndex })

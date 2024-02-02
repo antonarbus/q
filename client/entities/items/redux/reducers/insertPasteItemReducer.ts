@@ -1,16 +1,17 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { type CopyPlace } from '@entities/copy'
+import { itemType } from '../../consts/itemType'
 import type { PasteItem, Item } from '../../types'
 
 export const insertPasteItemReducer = (state: Item[], action: PayloadAction<CopyPlace>): Item[] => {
   const { pastePos, itemId } = action.payload
-  const itemsWithoutPasteText = state.filter((item) => item.type !== 'paste')
+  const itemsWithoutPasteText = state.filter((item) => item.type !== itemType.paste)
   if (pastePos === 'middle') return itemsWithoutPasteText
   const insertAtIndex = itemsWithoutPasteText.findIndex((item) => item.id === itemId) + (pastePos === 'bottom' ? 1 : 0)
 
   const pasteTextEl: PasteItem = {
     id: 'paste id',
-    type: 'paste',
+    type: itemType.paste,
     height: 0,
     width: 0,
     msg: '',

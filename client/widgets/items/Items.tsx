@@ -1,7 +1,7 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { AnimatePresence } from 'framer-motion'
 import { onItemDrag } from '@features/item_actions/drag_item'
-import { ItemProvider, itemsShapeEqualityFn, BoqItemProvider } from '@entities/items'
+import { ItemProvider, itemsShapeEqualityFn, BoqItemProvider, itemType } from '@entities/items'
 import { DraggableItemsContainer } from '@entities/items/ui/DraggableItemsContainer'
 import { BoqItem } from './boq/BoqItem'
 import { PasteItem } from './paste/PasteItem'
@@ -25,7 +25,7 @@ export const Items = (): JSX.Element => {
         {items.map((item, itemIndex) => {
           const key = item.id + reRenderOffer.toString()
 
-          if (item.type === 'text') {
+          if (item.type === itemType.text) {
             return (
               <ItemProvider key={key} itemIndex={itemIndex}>
                 <TextItem />
@@ -33,7 +33,7 @@ export const Items = (): JSX.Element => {
             )
           }
 
-          if (item.type === 'boq') {
+          if (item.type === itemType.boq) {
             return (
               <ItemProvider key={key} itemIndex={itemIndex}>
                 <BoqItemProvider>
@@ -43,7 +43,7 @@ export const Items = (): JSX.Element => {
             )
           }
 
-          if (item.type === 'price') {
+          if (item.type === itemType.price) {
             return (
               <ItemProvider key={key} itemIndex={itemIndex}>
                 <TotalPriceItem />

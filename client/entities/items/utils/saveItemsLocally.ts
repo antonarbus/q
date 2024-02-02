@@ -1,4 +1,5 @@
 import { getState } from '@lib_instances/store'
+import { itemType } from '../consts/itemType'
 import type { Item } from '../types'
 import { tellItemSavedLocally } from './tellItemSavedLocally'
 
@@ -16,7 +17,7 @@ export const saveItemsLocally = ({
     item.msg = ''
     item.isFroala = true
 
-    if (item.type !== 'boq') return
+    if (item.type !== itemType.boq) return
 
     item.boq.rows.forEach(boqRow => {
       boqRow.itemPrice.pin.isShown = false
