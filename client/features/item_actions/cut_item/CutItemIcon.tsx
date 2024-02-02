@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import type { MouseEvent } from 'react'
 import { TbCut } from 'react-icons/tb'
 import { copySlice } from '@entities/copy'
-import { itemsSlice, saveItemHeightByIndex, selectIsLastItem, useItem } from '@entities/items'
+import { itemType, itemsSlice, saveItemHeightByIndex, selectIsLastItem, useItem } from '@entities/items'
 import { className } from '@shared/consts/className'
 import { generalSlice } from '@shared/general'
 import { cleanHtml } from '@shared/lib/itemsUtils'
@@ -35,7 +35,7 @@ export const CutItemIcon = (): JSX.Element => {
 
         const itemToCut = getState().items[itemIndex]
         if (!itemToCut) return
-        if (itemToCut.type === 'paste') return
+        if (itemToCut.type === itemType.paste) return
 
         const clickedIconElement = e.target
         if (!(clickedIconElement instanceof Element)) return

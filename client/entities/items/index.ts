@@ -67,6 +67,10 @@ export { ItemProvider, useItem } from './providers/ItemProvider'
 export { RowProvider, useRow } from './providers/RowProvider'
 export { FroalaProvider, useFroala } from './providers/FroalaProvider'
 
+// consts
+export { itemType } from './consts/itemType'
+export { boqRowType } from './consts/boqRowType'
+
 // types
 export type {
   PasteItem,

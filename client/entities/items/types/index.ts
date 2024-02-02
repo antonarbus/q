@@ -1,4 +1,6 @@
 import { type FroalaEditorRef } from '@shared/types'
+import { type BoqRowType } from '../consts/boqRowType'
+import { type itemType } from '../consts/itemType'
 
 type Common = {
   id: string
@@ -21,7 +23,7 @@ export type BoqRowCell = {
 
 export type BoqRow = {
   id: string
-  type: 'paste' | 'row'
+  type: BoqRowType
   height: number
   width: number
   description: BoqRowCell
@@ -49,7 +51,7 @@ export type BoqHeaderCell = {
 }
 
 export type BoqItem = {
-  type: 'boq'
+  type: typeof itemType['boq']
   boq: {
     header: {
       title: BoqHeaderCell
@@ -66,7 +68,7 @@ export type BoqColumnKey = keyof BoqCols
 export type BoqRowCellKey = keyof Omit<BoqCols, 'number'>
 
 type TextItem = {
-  type: 'text'
+  type: typeof itemType['text']
   text: {
     html: string
     value: null
@@ -74,11 +76,11 @@ type TextItem = {
 } & Common
 
 type PriceItem = {
-  type: 'price'
+  type: typeof itemType['price']
 } & Common
 
 export type PasteItem = {
-  type: 'paste'
+  type: typeof itemType['paste']
 } & Common
 
 export type Item = BoqItem | PasteItem | TextItem | PriceItem

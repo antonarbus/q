@@ -3,4 +3,6 @@ export const itemType = {
   boq: 'boq',
   price: 'price',
   paste: 'paste',
-}
+} as const
+
+export type ItemType = keyof typeof itemType

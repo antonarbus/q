@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import type { MouseEvent } from 'react'
 import { MdCopyAll } from 'react-icons/md'
 import { copySlice } from '@entities/copy'
-import { itemsSlice, saveItemHeightByIndex, useItem } from '@entities/items'
+import { itemType, itemsSlice, saveItemHeightByIndex, useItem } from '@entities/items'
 import { className } from '@shared/consts/className'
 import { generalSlice } from '@shared/general'
 import { cleanHtml } from '@shared/lib/itemsUtils'
@@ -35,7 +35,7 @@ export const CopyItemIcon = (): JSX.Element => {
 
         const itemToCopy = getState().items[itemIndex]
         if (!itemToCopy) return
-        if (itemToCopy.type === 'paste') return
+        if (itemToCopy.type === itemType.paste) return
 
         const clickedIconElement = e.target
         if (!(clickedIconElement instanceof Element)) return

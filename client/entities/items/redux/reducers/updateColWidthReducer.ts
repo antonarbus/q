@@ -1,4 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { itemType } from '../../consts/itemType'
 import type { BoqColumnKey, Item } from '../../types'
 
 export const updateColWidthReducer = (state: Item[], action: PayloadAction<{
@@ -9,6 +10,6 @@ export const updateColWidthReducer = (state: Item[], action: PayloadAction<{
   const { itemIndex, width, boqColumnKey } = action.payload
   const item = state[itemIndex]
   if (!item) return
-  if (item.type !== 'boq') return
+  if (item.type !== itemType.boq) return
   item.boq.column[boqColumnKey].width = width
 }
