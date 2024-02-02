@@ -5,6 +5,7 @@ import { ItemProvider, itemsShapeEqualityFn, BoqItemProvider } from '@entities/i
 import { DraggableItemsContainer } from '@entities/items/ui/DraggableItemsContainer'
 import { BoqItem } from './boq/BoqItem'
 import { PasteItem } from './paste/PasteItem'
+import { TotalPriceItem } from './price/PriceItem'
 import { TextItem } from './text/TextItem'
 
 export const Items = (): JSX.Element => {
@@ -38,6 +39,14 @@ export const Items = (): JSX.Element => {
                 <BoqItemProvider>
                   <BoqItem />
                 </BoqItemProvider>
+              </ItemProvider>
+            )
+          }
+
+          if (item.type === 'price') {
+            return (
+              <ItemProvider key={key} itemIndex={itemIndex}>
+                <TotalPriceItem />
               </ItemProvider>
             )
           }

@@ -6,7 +6,7 @@ import { movePasteTextForItem } from './movePasteTextForItem'
 export const useMovePasteText = (): void => {
   const typeOfNextPasteItem = useSelectorTyped(state => state.copy.items.at(0)?.type)
 
-  const isItem = typeOfNextPasteItem === 'boq' || typeOfNextPasteItem === 'text'
+  const isItem = typeOfNextPasteItem === 'boq' || typeOfNextPasteItem === 'text' || typeOfNextPasteItem === 'price'
   const isBoqRow = typeOfNextPasteItem === 'boq row'
 
   useEffect(() => {

@@ -73,12 +73,16 @@ type TextItem = {
   }
 } & Common
 
+type PriceItem = {
+  type: 'price'
+} & Common
+
 export type PasteItem = {
   type: 'paste'
 } & Common
 
-export type Item = BoqItem | PasteItem | TextItem
-export type CopyableItem = BoqItem | BoqRow | TextItem
+export type Item = BoqItem | PasteItem | TextItem | PriceItem
+export type CopyableItem = BoqItem | BoqRow | TextItem | PriceItem
 
 export type BoqRowEditorRefs = Array<{
   description: FroalaEditorRef

@@ -64,14 +64,6 @@ export const defaultItems: Item[] = [
           type: 'boq row',
           height: 0,
           width: 0,
-          // number: {
-          //   html: '1',
-          //   value: 1,
-          //   pin: {
-          //     isPinned: false,
-          //     isShown: false,
-          //   },
-          // },
           description: {
             html: '<p>description 1</p>',
             value: 0,
@@ -110,14 +102,6 @@ export const defaultItems: Item[] = [
           type: 'boq row',
           height: 0,
           width: 0,
-          // number: {
-          //   html: '2',
-          //   value: 2,
-          //   pin: {
-          //     isPinned: false,
-          //     isShown: false,
-          //   },
-          // },
           description: {
             html: '<p>description 2</p>',
             value: 0,
@@ -156,14 +140,6 @@ export const defaultItems: Item[] = [
           type: 'boq row',
           height: 0,
           width: 0,
-          // number: {
-          //   html: '3',
-          //   value: 3,
-          //   pin: {
-          //     isPinned: false,
-          //     isShown: false,
-          //   },
-          // },
           description: {
             html: '<p>description 3</p>',
             value: 0,
@@ -223,5 +199,13 @@ export const defaultItems: Item[] = [
       html: '<div>editable text</div>',
       value: null,
     },
+  },
+  {
+    id: nanoid(3),
+    type: 'price',
+    width: 400,
+    height: 0,
+    msg: '',
+    isFroala: true,
   },
 ]
