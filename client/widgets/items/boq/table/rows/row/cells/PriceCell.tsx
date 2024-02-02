@@ -2,29 +2,26 @@ import { Box } from '@mui/material'
 import { Pin, pinBoqRowPriceCell, showBoqRowPins } from '@features/pin'
 import { tabFromPriceCell } from '@features/tab_from_cell'
 import { formatBoqRowPriceCell, updateBoqRowPriceCell, validateBoqRowPrice } from '@features/update_cell'
-import { getBoqCellHtmlFromStore, useBoqItem, useItem, useRow, Froala, boqRowCellStyle, useStylesForResizableCell } from '@entities/items'
-import type { BoqRowCellKey } from '@entities/items'
-
-const boqRowCellKey: BoqRowCellKey = 'price'
+import { getBoqCellHtmlFromStore, useBoqItem, useItem, useRow, Froala, boqRowCellStyle, useStylesForResizableCell, boqRowCellKey, boqColumnKey } from '@entities/items'
 
 export const PriceCell = (): JSX.Element => {
   const { itemIndex } = useItem()
   const { rowIndex, priceCellEditorRef, qtyCellEditorRef, itemPriceCellEditorRef } = useRow()
   const { subTotalPriceEditorRef, boqRowEditorRefs } = useBoqItem()
-  const { stylesForResizableCell } = useStylesForResizableCell({ itemIndex, boqColumnKey: boqRowCellKey, minWidth: '100px' })
+  const { stylesForResizableCell } = useStylesForResizableCell({ itemIndex, boqColumnKey: boqColumnKey.price, minWidth: '100px' })
 
   return (
     <Box sx={{ display: 'flex', position: 'relative' }} >
       <Froala
-        className={`td ${boqRowCellKey}`}
+        className={`td ${boqRowCellKey.price}`}
         editorRef={priceCellEditorRef}
         placeholder='Price...'
-        htmlGetter={() => getBoqCellHtmlFromStore({ itemIndex, rowIndex, boqRowCellKey })}
+        htmlGetter={() => getBoqCellHtmlFromStore({ itemIndex, rowIndex, boqRowCellKey: boqRowCellKey.price })}
         onFocus={() => {
           showBoqRowPins({ itemIndex, rowIndex })
         }}
         onContentChange={() => {
-          updateBoqRowPriceCell({ boqRowCellKey, itemIndex, itemPriceCellEditorRef, priceCellEditorRef, qtyCellEditorRef, rowIndex, subTotalPriceEditorRef })
+          updateBoqRowPriceCell({ itemIndex, itemPriceCellEditorRef, priceCellEditorRef, qtyCellEditorRef, rowIndex, subTotalPriceEditorRef })
         }}
         onBlur={() => {
           formatBoqRowPriceCell({ rowIndex, priceCellEditorRef, itemIndex })
@@ -37,7 +34,7 @@ export const PriceCell = (): JSX.Element => {
         additionalStyle={boqRowCellStyle}
       />
       <Pin
-        boqRowCellKey={boqRowCellKey}
+        boqRowCellKey={boqRowCellKey.price}
         onClick={() => {
           pinBoqRowPriceCell({ itemIndex, rowIndex })
         }}

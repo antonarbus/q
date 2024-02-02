@@ -1,7 +1,7 @@
 import type FroalaEditor from 'froala-editor'
 import { type MutableRefObject } from 'react'
 import { roundTo } from 'round-to'
-import { type BoqRowCellKey, didBoqCellContentChange, getBoqRowFromStore, getBoqRowsFromStore, saveItemsLocally, updateBoqRowCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue, type BoqRow } from '@entities/items'
+import { didBoqCellContentChange, getBoqRowFromStore, getBoqRowsFromStore, saveItemsLocally, updateBoqRowCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue, type BoqRow, boqRowCellKey } from '@entities/items'
 
 type Props = {
   itemPriceCellEditorRef: MutableRefObject<FroalaEditor | null>
@@ -9,7 +9,6 @@ type Props = {
   subTotalPriceEditorRef: MutableRefObject<FroalaEditor | null>
   itemIndex: number
   rowIndex: number
-  boqRowCellKey: BoqRowCellKey
 }
 
 export const updateBoqRowItemPriceCell = ({
@@ -18,7 +17,6 @@ export const updateBoqRowItemPriceCell = ({
   subTotalPriceEditorRef,
   itemIndex,
   rowIndex,
-  boqRowCellKey,
 }: Props): void => {
   if (itemPriceCellEditorRef.current === null) return
 
@@ -26,7 +24,7 @@ export const updateBoqRowItemPriceCell = ({
     editor: itemPriceCellEditorRef.current,
     itemIndex,
     rowIndex,
-    boqRowCellKey,
+    boqRowCellKey: boqRowCellKey.price,
   })
 
   if (!didContentChange) return
@@ -34,7 +32,7 @@ export const updateBoqRowItemPriceCell = ({
   updateBoqRowCellAtStore({
     itemIndex,
     rowIndex,
-    boqRowCellKey,
+    boqRowCellKey: boqRowCellKey.price,
     html: itemPriceCellEditorRef.current.html.get(),
   })
 
@@ -45,7 +43,7 @@ export const updateBoqRowItemPriceCell = ({
   const newPriceValueRounded = roundTo(newPriceValue, 2)
 
   updateBoqRowCellWithValue({
-    boqRowCellKey: 'price',
+    boqRowCellKey: boqRowCellKey.price,
     editor: priceCellEditorRef.current,
     itemIndex,
     rowIndex,

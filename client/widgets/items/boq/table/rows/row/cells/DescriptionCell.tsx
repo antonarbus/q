@@ -1,23 +1,20 @@
 import { tabFromDescriptionCell } from '@features/tab_from_cell'
 import { updateDescriptionCell } from '@features/update_cell'
-import { getBoqCellHtmlFromStore, useRow, useItem, Froala, useStylesForResizableCell, boqRowCellStyle } from '@entities/items'
-import type { BoqRowCellKey } from '@entities/items'
-
-const boqRowCellKey: BoqRowCellKey = 'description'
+import { getBoqCellHtmlFromStore, useRow, useItem, Froala, useStylesForResizableCell, boqRowCellStyle, boqRowCellKey, boqColumnKey } from '@entities/items'
 
 export const DescriptionCell = (): JSX.Element => {
   const { itemIndex } = useItem()
   const { rowIndex, itemPriceCellEditorRef, descriptionEditorRef } = useRow()
-  const { stylesForResizableCell } = useStylesForResizableCell({ itemIndex, boqColumnKey: boqRowCellKey, minWidth: '200px' })
+  const { stylesForResizableCell } = useStylesForResizableCell({ itemIndex, boqColumnKey: boqColumnKey.description, minWidth: '200px' })
 
   return (
       <Froala
-        className={`td ${boqRowCellKey}`}
+        className={`td ${boqRowCellKey.description}`}
         editorRef={descriptionEditorRef}
         placeholder='Description...'
-        htmlGetter={() => getBoqCellHtmlFromStore({ itemIndex, rowIndex, boqRowCellKey })}
+        htmlGetter={() => getBoqCellHtmlFromStore({ itemIndex, rowIndex, boqRowCellKey: boqRowCellKey.description })}
         onContentChange={() => {
-          updateDescriptionCell({ editorRef: descriptionEditorRef, itemIndex, rowIndex, boqRowCellKey })
+          updateDescriptionCell({ editorRef: descriptionEditorRef, itemIndex, rowIndex, boqRowCellKey: boqRowCellKey.description })
         }}
         onKeydown={(e) => {
           tabFromDescriptionCell({ e, rowIndex, itemPriceCellEditorRef })

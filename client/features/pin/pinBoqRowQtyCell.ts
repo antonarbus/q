@@ -1,5 +1,5 @@
 import { dispatch } from '@lib_instances/store'
-import { getBoqCellFromStore, itemsSlice, saveItemsLocally } from '@entities/items'
+import { boqRowCellKey, getBoqCellFromStore, itemsSlice, saveItemsLocally } from '@entities/items'
 
 type Props = {
   itemIndex: number
@@ -7,7 +7,7 @@ type Props = {
 }
 
 export const pinBoqRowQtyCell = ({ itemIndex, rowIndex }: Props): void => {
-  const itemPrice = getBoqCellFromStore({ itemIndex, rowIndex, boqRowCellKey: 'qty' })
+  const itemPrice = getBoqCellFromStore({ itemIndex, rowIndex, boqRowCellKey: boqRowCellKey.qty })
   const isPinned = itemPrice?.pin.isPinned
 
   if (isPinned) return

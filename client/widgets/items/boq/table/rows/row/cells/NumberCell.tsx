@@ -1,10 +1,10 @@
 import { Box } from '@mui/material'
-import { getNumberOfBoqItemsAbove, useItem, useRow, useStylesForResizableCell } from '@entities/items'
+import { boqColumnKey, getNumberOfBoqItemsAbove, useItem, useRow, useStylesForResizableCell } from '@entities/items'
 
 export const NumberCell = (): JSX.Element => {
   const { itemIndex } = useItem()
   const { rowIndex } = useRow()
-  const { stylesForResizableCell } = useStylesForResizableCell({ itemIndex, boqColumnKey: 'number', minWidth: '30px' })
+  const { stylesForResizableCell } = useStylesForResizableCell({ itemIndex, boqColumnKey: boqColumnKey.number, minWidth: '30px' })
 
   return (
     <Box

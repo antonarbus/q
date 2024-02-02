@@ -1,5 +1,5 @@
 import { roundTo } from 'round-to'
-import { didBoqHeaderCellContentChange, getBoqHeaderFromStore, getBoqRowsFromStore, saveItemsLocally, updateBoqHeaderCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue, getBoqRowFromStore, type BoqRow, type BoqRowEditorRefs } from '@entities/items'
+import { didBoqHeaderCellContentChange, getBoqHeaderFromStore, getBoqRowsFromStore, saveItemsLocally, updateBoqHeaderCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue, getBoqRowFromStore, type BoqRow, type BoqRowEditorRefs, boqRowCellKey } from '@entities/items'
 import { type FroalaEditor, type FroalaEditorRef } from '@shared/types'
 import { notify } from '@shared/ui/top_msg'
 
@@ -121,7 +121,7 @@ export const updateSubtotalPriceCell = ({
 
   prices.forEach((price, rowIndex) => {
     updateBoqRowCellWithValue({
-      boqRowCellKey: 'price',
+      boqRowCellKey: boqRowCellKey.price,
       editor: boqRowEditorRefs.at(rowIndex)?.price.current ?? null,
       itemIndex,
       rowIndex,
@@ -141,7 +141,7 @@ export const updateSubtotalPriceCell = ({
         editor: boqRowEditorRefs.at(rowIndex)?.qty.current ?? null,
         itemIndex,
         rowIndex,
-        boqRowCellKey: 'qty',
+        boqRowCellKey: boqRowCellKey.qty,
         value: newQtyValueRounded,
       })
     }
@@ -157,7 +157,7 @@ export const updateSubtotalPriceCell = ({
         editor: boqRowEditorRefs.at(rowIndex)?.itemPrice.current ?? null,
         itemIndex,
         rowIndex,
-        boqRowCellKey: 'itemPrice',
+        boqRowCellKey: boqRowCellKey.itemPrice,
         value: newItemPriceValueRounded,
       })
     }

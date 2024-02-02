@@ -1,5 +1,5 @@
 import { roundTo } from 'round-to'
-import { getBoqRowFromStore, getBoqRowsFromStore, isBoqRowPriceValid, saveItemsLocally, updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from '@entities/items'
+import { boqRowCellKey, getBoqRowFromStore, getBoqRowsFromStore, isBoqRowPriceValid, saveItemsLocally, updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from '@entities/items'
 import { type BoqRow } from '@entities/items'
 import { type FroalaEditorRef } from '@shared/types'
 
@@ -33,7 +33,7 @@ export const validateBoqRowPrice = ({
     const newPriceValueRounded = roundTo(newPriceValue, 2)
 
     updateBoqRowCellWithValue({
-      boqRowCellKey: 'price',
+      boqRowCellKey: boqRowCellKey.price,
       editor: priceCellEditorRef.current,
       itemIndex,
       rowIndex,
