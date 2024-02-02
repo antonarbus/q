@@ -24,7 +24,7 @@ export const updateBoqRowItemPriceCell = ({
     editor: itemPriceCellEditorRef.current,
     itemIndex,
     rowIndex,
-    boqRowCellKey: boqRowCellKey.price,
+    boqRowCellKey: boqRowCellKey.itemPrice,
   })
 
   if (!didContentChange) return
@@ -32,7 +32,7 @@ export const updateBoqRowItemPriceCell = ({
   updateBoqRowCellAtStore({
     itemIndex,
     rowIndex,
-    boqRowCellKey: boqRowCellKey.price,
+    boqRowCellKey: boqRowCellKey.itemPrice,
     html: itemPriceCellEditorRef.current.html.get(),
   })
 
