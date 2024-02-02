@@ -23,11 +23,13 @@ export const pasteItemReducer: Reducer = (state, action) => {
     })
   }
 
-  const isItem = itemToPaste.type === 'boq' || itemToPaste.type === 'text'
+  // todo: check it, probably should bring item word into the type and then it will be easier to work with
+  // todo: as a next step we may convert type into tags, but that needs a separate experiment
+  const isItem = itemToPaste.type === 'boq' || itemToPaste.type === 'text' || itemToPaste.type === 'price'
   const isBoqRow = !isItem
 
   if (isItem) {
-    const hoveredItemIndex = state.findIndex(({ id }) => id === itemId)
+    const hoveredItemIndex = state.findIndex((item) => item.id === itemId)
 
     type SplicingSettings = {
       insertAtIndex: number
