@@ -9,7 +9,7 @@ export const removePasteItemReducer = (state: Item[]): void => {
   state.forEach((boqItem) => {
     if (boqItem.type !== 'boq') return
     const boqRows = boqItem.boq.rows
-    const pasteBoqRowIndex = boqRows.findIndex(boqRow => boqRow.type === 'boq paste')
+    const pasteBoqRowIndex = boqRows.findIndex(boqRow => boqRow.type === 'paste')
     if (pasteBoqRowIndex >= 0) {
       boqRows.splice(pasteBoqRowIndex, 1)
     }

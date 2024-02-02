@@ -108,7 +108,7 @@ export const pasteItemReducer: Reducer = (state, action) => {
 
       if (spliceSettings === undefined) return
 
-      const boqRowsWithoutPasteText = item.boq.rows.filter((boqRow) => boqRow.type !== 'boq paste')
+      const boqRowsWithoutPasteText = item.boq.rows.filter((boqRow) => boqRow.type !== 'paste')
 
       boqRowsWithoutPasteText.splice(
         spliceSettings.insertAtIndex,

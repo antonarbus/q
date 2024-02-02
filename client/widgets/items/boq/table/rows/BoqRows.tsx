@@ -27,7 +27,7 @@ export const BoqRows = (): JSX.Element => {
     >
       <AnimatePresence initial={false}>
         {boqRows.map((boqRow, rowIndex) => {
-          if (boqRow.type === 'boq row') {
+          if (boqRow.type === 'row') {
             return (
               <RowProvider
                 rowIndex={rowIndex}

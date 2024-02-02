@@ -14,10 +14,9 @@ const defaultCellValues: BoqRowCell = {
 
 const pasteText: BoqRow = {
   id: 'id of boq row paste',
-  type: 'boq paste',
+  type: 'paste',
   height: 0,
   width: 0,
-  // number: defaultCellValues,
   description: defaultCellValues,
   itemPrice: defaultCellValues,
   qty: defaultCellValues,
@@ -34,7 +33,7 @@ export const insertPasteBoqRowReducer: Type = (state, action) => {
     const boqItem = getBoqItemFromState({ itemIndex, state })
     if (boqItem === undefined) return state
 
-    const boqRowsWithoutPasteText = boqItem.boq.rows.filter(boqRow => boqRow.type === 'boq row')
+    const boqRowsWithoutPasteText = boqItem.boq.rows.filter(boqRow => boqRow.type === 'row')
     boqItem.boq.rows = boqRowsWithoutPasteText
 
     boqRowsWithoutPasteText.forEach((boqRow, boqRowIndex) => {
