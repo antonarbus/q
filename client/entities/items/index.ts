@@ -70,6 +70,8 @@ export { FroalaProvider, useFroala } from './providers/FroalaProvider'
 // consts
 export { itemType } from './consts/itemType'
 export { boqRowType } from './consts/boqRowType'
+export { boqColumnKey } from './consts/boqColumnKey'
+export { boqRowCellKey } from './consts/boqRowCellKey'
 
 // types
 export type {

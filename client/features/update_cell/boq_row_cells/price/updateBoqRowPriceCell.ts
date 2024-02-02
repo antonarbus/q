@@ -1,5 +1,5 @@
 import { roundTo } from 'round-to'
-import { type BoqRowCellKey, getBoqRowFromStore, getBoqRowsFromStore, saveItemsLocally, updateBoqRowCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue, type BoqRow } from '@entities/items'
+import { getBoqRowFromStore, getBoqRowsFromStore, saveItemsLocally, updateBoqRowCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue, type BoqRow, boqRowCellKey } from '@entities/items'
 import { type FroalaEditorRef } from '@shared/types'
 
 type Props = {
@@ -9,7 +9,6 @@ type Props = {
   subTotalPriceEditorRef: FroalaEditorRef
   itemIndex: number
   rowIndex: number
-  boqRowCellKey: BoqRowCellKey
 }
 
 export const updateBoqRowPriceCell = ({
@@ -19,7 +18,6 @@ export const updateBoqRowPriceCell = ({
   subTotalPriceEditorRef,
   itemIndex,
   rowIndex,
-  boqRowCellKey,
 }: Props): void => {
   if (priceCellEditorRef.current === null) return
 
@@ -27,7 +25,7 @@ export const updateBoqRowPriceCell = ({
     html: priceCellEditorRef.current.html.get(),
     itemIndex,
     rowIndex,
-    boqRowCellKey,
+    boqRowCellKey: boqRowCellKey.price,
   })
 
   if (!didUpdate) return
@@ -45,7 +43,7 @@ export const updateBoqRowPriceCell = ({
       editor: qtyCellEditorRef.current,
       itemIndex,
       rowIndex,
-      boqRowCellKey: 'qty',
+      boqRowCellKey: boqRowCellKey.qty,
       value: newQtyValueRounded,
     })
   }
@@ -61,7 +59,7 @@ export const updateBoqRowPriceCell = ({
       editor: itemPriceCellEditorRef.current,
       itemIndex,
       rowIndex,
-      boqRowCellKey: 'itemPrice',
+      boqRowCellKey: boqRowCellKey.itemPrice,
       value: newItemPriceValueRounded,
     })
   }

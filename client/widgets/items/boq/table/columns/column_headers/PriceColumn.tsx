@@ -1,10 +1,8 @@
 import { useRef } from 'react'
 import { updateBoqColumnCell } from '@features/update_cell'
-import { Froala, getBoqColumnHtmlFromStore, columnHeaderStyle, useItem, type BoqColumnKey } from '@entities/items'
+import { Froala, getBoqColumnHtmlFromStore, columnHeaderStyle, useItem, boqColumnKey } from '@entities/items'
 import { type FroalaEditor } from '@shared/types'
 import { ResizableColumn } from '../ResizableColumn'
-
-const boqColumnKey: BoqColumnKey = 'price'
 
 export const PriceColumn = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
@@ -12,17 +10,17 @@ export const PriceColumn = (): JSX.Element => {
 
   return (
     <ResizableColumn
-      boqColumnKey={boqColumnKey}
-      className={`th ${boqColumnKey} resizable`}
+      boqColumnKey={boqColumnKey.price}
+      className={`th ${boqColumnKey.price} resizable`}
       minWidth={100}
       flexGrow={0}
     >
       <Froala
         editorRef={editorRef}
         placeholder='Price...'
-        htmlGetter={() => getBoqColumnHtmlFromStore({ itemIndex, boqColumnKey })}
+        htmlGetter={() => getBoqColumnHtmlFromStore({ itemIndex, boqColumnKey: boqColumnKey.price })}
         onContentChange={() => {
-          updateBoqColumnCell({ editorRef, itemIndex, boqColumnKey })
+          updateBoqColumnCell({ editorRef, itemIndex, boqColumnKey: boqColumnKey.price })
         }}
         additionalStyle={columnHeaderStyle}
       />

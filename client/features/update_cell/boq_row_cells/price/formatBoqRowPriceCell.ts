@@ -1,4 +1,4 @@
-import { formatBoqRowCellNumber, saveItemsLocally } from '@entities/items'
+import { boqRowCellKey, formatBoqRowCellNumber, saveItemsLocally } from '@entities/items'
 import { type FroalaEditorRef } from '@shared/types'
 
 type Props = {
@@ -15,7 +15,7 @@ export const formatBoqRowPriceCell = ({
   const { didUpdate } = formatBoqRowCellNumber({
     itemIndex,
     rowIndex,
-    boqRowCellKey: 'price',
+    boqRowCellKey: boqRowCellKey.price,
     editorRef: priceCellEditorRef,
     roundToTwoDecimals: true,
   })
