@@ -7,21 +7,22 @@ type Props = {
   itemIndex: number
 }
 
-export const updateTextItem = ({
+export const updatePriceTitle = ({
   editorRef,
   itemIndex,
 }: Props): void => {
   if (editorRef.current === null) return
 
-  const item = getState().items[itemIndex]
-  if (item?.type !== itemType.text) return
+  const priceItem = getState().items[itemIndex]
+  if (priceItem?.type !== itemType.price) return
 
-  const prevHtml = item.text.html
+  const prevHtml = priceItem.title.html
   const html = editorRef.current.html.get()
   const didTextChange = prevHtml !== html
+
   if (!didTextChange) return
 
-  dispatch(itemsSlice.actions.updateItemTextReducer({ itemIndex, html }))
+  dispatch(itemsSlice.actions.updatePriceTitleReducer({ itemIndex, html }))
 
   saveItemsLocally({
     msgAboveItemWithIndex: itemIndex,

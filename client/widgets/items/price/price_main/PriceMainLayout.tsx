@@ -7,23 +7,13 @@ type Props = {
 export const PriceMainLayout = ({ main }: Props): JSX.Element => {
   return (
     <Box
-      className='boq-table-container-with-paddings'
+      className='layout price-value'
       sx={{
-        p: '10px 10px 2px 10px', // to have a gap when overflow
+        padding: '10px 15px',
+        minHeight: '40px',
       }}
     >
-      <Box
-        className='boq-table-container'
-        sx={{
-          p: '5px',
-          clipPath: 'inset(0 0 0 -100px)',
-          '& *': {
-            // background: '#ff00001b',
-          },
-        }}
-      >
-        {main}
-      </Box>
+      {main}
     </Box>
   )
 }

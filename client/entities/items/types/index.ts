@@ -51,7 +51,7 @@ export type BoqHeaderCell = {
 }
 
 export type BoqItem = {
-  type: typeof itemType['boq']
+  type: typeof itemType.boq
   boq: {
     header: {
       title: BoqHeaderCell
@@ -68,7 +68,7 @@ export type BoqColumnKey = keyof BoqCols
 export type BoqRowCellKey = keyof Omit<BoqCols, 'number'>
 
 type TextItem = {
-  type: typeof itemType['text']
+  type: typeof itemType.text
   text: {
     html: string
     value: null
@@ -76,11 +76,19 @@ type TextItem = {
 } & Common
 
 type PriceItem = {
-  type: typeof itemType['price']
+  type: typeof itemType.price
+  title: {
+    html: string
+    value: null
+  }
+  price: {
+    html: string
+    value: number
+  }
 } & Common
 
 export type PasteItem = {
-  type: typeof itemType['paste']
+  type: typeof itemType.paste
 } & Common
 
 export type Item = BoqItem | PasteItem | TextItem | PriceItem
