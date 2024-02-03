@@ -205,9 +205,17 @@ export const defaultItems: Item[] = [
   {
     id: nanoid(3),
     type: itemType.price,
-    width: 400,
-    height: 0,
+    width: 250,
+    height: 90,
     msg: '',
     isFroala: true,
+    title: {
+      html: '<p style="text-align: center;"><strong>Total price</strong></p>',
+      value: null,
+    },
+    price: {
+      html: '<p style="text-align: center;"><strong>666</strong> <span style="font-size: 16px; color: rgb(204, 204, 204);">EUR</span></p>',
+      value: 666,
+    },
   },
 ]

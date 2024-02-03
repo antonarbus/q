@@ -29,7 +29,9 @@ import { updateColWidthReducer } from './reducers/updateColWidthReducer'
 import { updateItemHeightReducer } from './reducers/updateItemHeightReducer'
 import { updateItemTextReducer } from './reducers/updateItemTextReducer'
 import { updateItemWidthReducer } from './reducers/updateItemWidthReducer'
-import { updateSubTotalPriceReducer } from './reducers/updateTotalPriceReducer'
+import { updatePriceReducer } from './reducers/updatePriceReducer'
+import { updatePriceTitleReducer } from './reducers/updatePriceTitleReducer'
+import { updateSubTotalPriceReducer } from './reducers/updateSubTotalPriceReducer'
 
 const initialState = getDefaultOrLocalItems()
 
@@ -67,6 +69,8 @@ export const itemsSlice = createSlice({
     updateItemTextReducer,
     updateItemWidthReducer,
     updateSubTotalPriceReducer,
+    updatePriceTitleReducer,
+    updatePriceReducer,
   },
 })
 
