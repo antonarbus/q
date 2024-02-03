@@ -1,6 +1,6 @@
 import { getState } from '@lib_instances/store'
 import { useRef } from 'react'
-import { updatePriceTitle, updatePriceValue } from '@features/update_cell'
+import { updatePriceValue } from '@features/update_cell'
 import { useItem, Froala, itemType } from '@entities/items'
 import { type FroalaEditor } from '@shared/types'
 
