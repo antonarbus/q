@@ -42,6 +42,7 @@ export { getBoqCellHtmlFromStore } from './redux/getters/getBoqCellHtmlFromStore
 export { updateBoqColumnCellAtStore } from './redux/updaters/updateBoqColumnCellAtStore'
 export { updateBoqHeaderCellAtStore } from './redux/updaters/updateBoqHeaderCellAtStore'
 export { updateBoqRowCellAtStore } from './redux/updaters/updateBoqRowCellAtStore'
+export { updatePriceAtStore } from './redux/updaters/updatePriceAtStore'
 
 // ui
 export { DraggableItemsContainer } from './ui/DraggableItemsContainer'

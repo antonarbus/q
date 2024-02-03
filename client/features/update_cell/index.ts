@@ -1,7 +1,6 @@
 export { updateTextItem } from './text_item/updateTextItem'
 
 export { updatePriceTitle } from './price_item/updatePriceTitle'
-export { updatePrice as updatePriceValue } from './price_item/updatePriceValue'
 
 export { updateDescriptionCell } from './boq_row_cells/description/updateDescriptionCell'
 

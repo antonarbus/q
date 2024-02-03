@@ -1,12 +1,33 @@
-import { getState } from '@lib_instances/store'
+import { getState, useSelectorTyped } from '@lib_instances/store'
 import { useRef } from 'react'
-import { updatePriceValue } from '@features/update_cell'
-import { useItem, Froala, itemType } from '@entities/items'
+import { useUpdateEffect } from 'react-use'
+import { useItem, Froala, itemType, updatePriceAtStore, saveItemsLocally } from '@entities/items'
 import { type FroalaEditor } from '@shared/types'
 
 export const PriceValue = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
   const { itemIndex } = useItem()
+
+  const price = useSelectorTyped(state => {
+    const items = state.items
+    const totalPriceAbove = items.reduce((accumulator, item, index) => {
+      if (index >= itemIndex) return accumulator
+
+      if (item.type === itemType.boq) {
+        return accumulator + item.boq.header.subTotalPrice.value
+      }
+
+      return accumulator
+    }, 0)
+
+    return totalPriceAbove
+  })
+
+  useUpdateEffect(() => {
+
+  }, [price])
+
+  console.log('🚀 ~ price:', price)
 
   return (
     <Froala
@@ -19,7 +40,12 @@ export const PriceValue = (): JSX.Element => {
         return priceHtml
       }}
       onContentChange={() => {
-        updatePriceValue({ editorRef, itemIndex })
+        const { didUpdate } = updatePriceAtStore({ editorRef, itemIndex })
+
+        if (didUpdate) {
+          saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
+        }
+
         // todo: allow to style, but put value automatically, do not allow to update it manually
         // todo: maybe check if value is correct on blur
       }}
