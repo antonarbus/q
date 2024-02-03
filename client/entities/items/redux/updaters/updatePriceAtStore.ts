@@ -8,25 +8,43 @@ type Props = {
   itemIndex: number
 }
 
-export const updatePrice = ({
+type Res = {
+  didUpdate: boolean
+}
+
+export const updatePriceAtStore = ({
   editorRef,
   itemIndex,
-}: Props): void => {
-  if (editorRef.current === null) return
+}: Props): Res => {
+  if (editorRef.current === null) {
+    return {
+      didUpdate: false,
+    }
+  }
 
   const priceItem = getState().items[itemIndex]
-  if (priceItem?.type !== itemType.price) return
+  if (priceItem?.type !== itemType.price) {
+    return {
+      didUpdate: false,
+    }
+  }
 
   const prevHtml = priceItem.price.html
   const html = editorRef.current.html.get()
   const didHtmlChange = prevHtml !== html
 
-  if (!didHtmlChange) return
+  if (!didHtmlChange) {
+    return {
+      didUpdate: false,
+    }
+  }
 
   const cellTextContent = getTextContentFromHtml({ html })
   const cellValueFromHtml = getNumberFromString({ string: cellTextContent })
 
   dispatch(itemsSlice.actions.updatePriceReducer({ itemIndex, html, value: cellValueFromHtml }))
 
-  saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
+  return {
+    didUpdate: true,
+  }
 }
