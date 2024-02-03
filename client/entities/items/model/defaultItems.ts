@@ -205,7 +205,7 @@ export const defaultItems: Item[] = [
   {
     id: nanoid(3),
     type: itemType.price,
-    width: 250,
+    width: 150,
     height: 90,
     msg: '',
     isFroala: true,

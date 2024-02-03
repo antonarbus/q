@@ -45,7 +45,7 @@ export const ResizablePaper = ({
         height: 'auto',
       }}
       // grid={[20, 0]}
-      minWidth='200px'
+      minWidth='150px'
       maxWidth='100%'
       bounds={'window'}
       enable={{
