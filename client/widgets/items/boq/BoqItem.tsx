@@ -1,8 +1,8 @@
 import { ItemActions } from '@features/item_actions'
 import { onBoqItemResize, onBoqItemResizeStart, onBoqItemResizeStop } from '@features/resize_item'
 import { Item } from '@entities/items'
-import { Header } from './header'
-import { BoqTable } from './table/BoqTable'
+import { BoqHeader } from './boq_header'
+import { BoqTable } from './boq_table'
 
 export const BoqItem = (): JSX.Element => {
   return (
@@ -13,7 +13,7 @@ export const BoqItem = (): JSX.Element => {
       onItemResizeStop={onBoqItemResizeStop}
       itemActions={<ItemActions />}
     >
-      <Header />
+      <BoqHeader />
       <BoqTable />
     </Item>
   )
