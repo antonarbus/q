@@ -6322,6 +6322,7 @@ table th {
 
 .fr-view .fr-file {
   position: relative;
+  cursor: pointer !important;
 }
 
 .fr-view .fr-file::after {
@@ -6329,6 +6330,7 @@ table th {
   content: '\1F4CE';
   font-weight: normal;
   right: -3px;
+  cursor: pointer !important;
 }
 
 .fr-view pre {
