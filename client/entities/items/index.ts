@@ -23,6 +23,7 @@ export { updateSubTotalPriceWithValue } from './utils/updateSubTotalPriceWithVal
 export { formatBoqRowCellNumber } from './utils/formatBoqRowCellNumber'
 export { getNumberOfBoqItemsAbove } from './utils/getNumberOfBoqItemsAbove'
 export { saveItemsLocally } from './utils/saveItemsLocally'
+export { getTotalPriceAbove } from './utils/getTotalPriceAbove'
 
 // store item getters
 export { getBoqRowFromStore } from './redux/getters/getBoqRowFromStore'
@@ -37,6 +38,7 @@ export { getItemTextHtmlFromStore } from './redux/getters/getItemTextHtmlFromSto
 export { getBoqColumnHtmlFromStore } from './redux/getters/getBoqColumnHtmlFromStore'
 export { getBoqHeaderHtmlFromStore } from './redux/getters/getBoqHeaderHtmlFromStore'
 export { getBoqCellHtmlFromStore } from './redux/getters/getBoqCellHtmlFromStore'
+export { getTotalPriceHtmlFromStore } from './redux/getters/getTotalPriceHtmlFromStore'
 
 // store cell updaters (html + value)
 export { updateBoqColumnCellAtStore } from './redux/updaters/updateBoqColumnCellAtStore'

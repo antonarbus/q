@@ -7,7 +7,7 @@ type Props = {
   itemIndex: number
 }
 
-export const updatePriceTitle = ({
+export const updatePriceTitleCell = ({
   editorRef,
   itemIndex,
 }: Props): void => {

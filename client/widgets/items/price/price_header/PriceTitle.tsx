@@ -1,6 +1,6 @@
 import { getState } from '@lib_instances/store'
 import { useRef } from 'react'
-import { updatePriceTitle } from '@features/update_cell'
+import { updatePriceTitleCell } from '@features/update'
 import { useItem, Froala, itemType } from '@entities/items'
 import { type FroalaEditor } from '@shared/types'
 
@@ -19,7 +19,7 @@ export const PriceTitle = (): JSX.Element => {
         return titleHtml
       }}
       onContentChange={() => {
-        updatePriceTitle({ editorRef, itemIndex })
+        updatePriceTitleCell({ editorRef, itemIndex })
       }}
     />
   )

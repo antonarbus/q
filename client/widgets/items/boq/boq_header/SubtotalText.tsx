@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { updateSubtotalTextCell } from '@features/update_cell'
+import { updateSubtotalTextCell } from '@features/update'
 import { getBoqHeaderHtmlFromStore, useItem, Froala, subTotalTextCellStyle } from '@entities/items'
 import { type BoqHeaderKey } from '@entities/items'
 import { type FroalaEditor } from '@shared/types'
