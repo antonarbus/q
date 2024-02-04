@@ -1,5 +1,5 @@
 import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { useItem, Froala, itemType, saveItemsLocally, itemsSlice, type BoqItem } from '@entities/items'
 import { type Item } from '@entities/items/types'

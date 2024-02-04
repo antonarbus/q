@@ -214,8 +214,8 @@ export const defaultItems: Item[] = [
       value: null,
     },
     price: {
-      html: '<p style="text-align: center;"><strong>666</strong> <span style="font-size: 16px; color: rgb(204, 204, 204);">EUR</span></p>',
-      value: 666,
+      html: '<p style="text-align: center;"><strong>140</strong> <span style="font-size: 16px; color: rgb(204, 204, 204);">EUR</span></p>',
+      value: 140,
     },
   },
 ]
