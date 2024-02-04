@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { Pin, pinBoqRowItemPriceCell } from '@features/pin'
 import { tabFromItemPriceCell } from '@features/tab_from_cell'
-import { formatBoqRowItemPriceCell, updateBoqRowItemPriceCell } from '@features/update'
+import { formatBoqRowItemPriceCell, updateBoqRowItemPriceCell } from '@features/update_cell'
 import { getBoqCellHtmlFromStore, useItem, useRow, useBoqItem, Froala, boqRowCellStyle, useStylesForResizableCell, boqRowCellKey, boqColumnKey } from '@entities/items'
 
 export const ItemPriceCell = (): JSX.Element => {
