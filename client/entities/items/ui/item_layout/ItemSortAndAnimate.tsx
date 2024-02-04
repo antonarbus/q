@@ -82,7 +82,7 @@ export const ItemSortAndAnimate: ComponentClass<SortableItem> = SortableElement(
       >
         {children}
       </ResizablePaper>
-      <ItemActionsContainer /> {/* Right action container is used for symmetry, no icons inside */}
+      <ItemActionsContainer /> {/* Right action container is used for symmetry, no icons inside yet */}
     </motion.div>
   )
 })
