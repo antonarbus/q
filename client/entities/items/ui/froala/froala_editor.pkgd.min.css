@@ -6757,6 +6757,9 @@ span.fr-img-caption.fr-view.fr-dii.fr-fir {
   border-radius: 10px;
   width: 240px;
 }
+.fr-toolbar.fr-desktop.fr-inline.fr-above {
+  translate: 0px -10px;
+}
 .fr-popup.fr-desktop.fr-inline.fr-active {
   translate: -120px 0px;
 }
