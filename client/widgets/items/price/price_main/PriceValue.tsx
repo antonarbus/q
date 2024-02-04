@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { updatePriceValueCell, useUpdateTotalPriceIfPricesAboveWereChanged, validateTotalPrice } from '@features/update'
+import { updatePriceValueCell, useUpdateTotalPriceIfPricesAboveWereChanged, validateTotalPrice } from '@features/update_cell'
 import { useItem, Froala, getTotalPriceHtmlFromStore } from '@entities/items'
 import { type FroalaEditor } from '@shared/types'
 

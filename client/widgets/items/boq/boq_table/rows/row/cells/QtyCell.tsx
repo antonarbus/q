@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { Pin, pinBoqRowQtyCell } from '@features/pin'
 import { tabFromQtyCell } from '@features/tab_from_cell'
-import { formatBoqRowQtyCell, updateBoqRowQtyCell } from '@features/update'
+import { formatBoqRowQtyCell, updateBoqRowQtyCell } from '@features/update_cell'
 import { getBoqCellHtmlFromStore, useItem, useRow, useBoqItem, Froala, boqRowCellStyle, useStylesForResizableCell, boqColumnKey, boqRowCellKey } from '@entities/items'
 
 export const QtyCell = (): JSX.Element => {
