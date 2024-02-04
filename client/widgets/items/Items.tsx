@@ -51,7 +51,11 @@ export const Items = (): JSX.Element => {
             )
           }
 
-          return <PasteItem key={key} />
+          if (item.type === itemType.paste) {
+            return <PasteItem key={key} />
+          }
+
+          return null
         })}
       </AnimatePresence>
     </DraggableItemsContainer >
