@@ -25,6 +25,7 @@ export const FroalaProvider = (props: Props): JSX.Element => {
         onClick: props.onClick,
         onBlur: props.onBlur,
         onKeydown: props.onKeydown,
+        onInitialized: props.onInitialized,
         froalaElementRef: props.froalaElementRef,
         froalaHeightRef: props.froalaHeightRef,
       }}

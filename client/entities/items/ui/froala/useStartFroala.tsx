@@ -16,7 +16,7 @@ declare const window: Window & typeof globalThis & {
 window.froalas = []
 
 export const useStartFroala = (): void => {
-  const { htmlGetter, froalaElementRef, editorRef, placeholder, onContentChange, onFocus, onClick, onBlur, onKeydown } = useFroala()
+  const { htmlGetter, froalaElementRef, editorRef, placeholder, onContentChange, onFocus, onClick, onBlur, onKeydown, onInitialized } = useFroala()
 
   useEffect(() => {
     const initFroalaInstance = (): void => {
@@ -50,6 +50,7 @@ export const useStartFroala = (): void => {
               editorRef.current.html.set(htmlGetter())
               // editorRef.current.undo.saveStep() // triggers contentChange // without it any first click on cell considered as a fresh value and "contentChanged" callback is fired // https://github.com/froala/wysiwyg-editor/issues/1578#issuecomment-256577412
               window.froalas = window.froalas.filter(({ current }) => Boolean(current))
+              onInitialized?.()
               // console.log('💚 froalas qty after init: ', window.froalas.length)
             },
           },
