@@ -6328,6 +6328,7 @@ table th {
   position: relative;
   content: '\1F4CE';
   font-weight: normal;
+  right: -3px;
 }
 
 .fr-view pre {
