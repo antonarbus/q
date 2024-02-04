@@ -718,25 +718,12 @@ iframe.fr-iframe {
   color: #333333;
 }
 
-/* .fr-desktop .fr-command:hover:not(.fr-table-cell),
-.fr-desktop .fr-command:focus:not(.fr-table-cell),
-.fr-desktop .fr-command.fr-btn-hover:not(.fr-table-cell),
-.fr-desktop .fr-command.fr-expanded:not(.fr-table-cell) {
-  background: #ebebeb
-} */
-
 .fr-desktop .fr-command:hover::after,
 .fr-desktop .fr-command:focus::after,
 .fr-desktop .fr-command.fr-btn-hover::after,
 .fr-desktop .fr-command.fr-expanded::after {
   border-top-color: #333333;
 }
-
-/* .fr-desktop .fr-command.fr-selected:not(.fr-table-cell),
-.fr-desktop .fr-command:active {
-  color: #333333;
-  background: #d6d6d6
-} */
 
 .fr-desktop .fr-command.fr-active:hover,
 .fr-desktop .fr-command.fr-active:focus,
@@ -4536,10 +4523,6 @@ body.fr-fullscreen {
   padding: 6px 0 4px;
 }
 
-/* .fr-modal .fr-modal-wrapper .fr-modal-body .fr-help-modal table tbody tr {
-  border-bottom: solid 1px #ebebeb
-} */
-
 .fr-modal .fr-modal-wrapper .fr-modal-body .fr-help-modal table tbody td:first-child {
   width: 60%;
   color: #646464;
@@ -6282,6 +6265,8 @@ div.fr-modal-body div.fr-image-list div.fr-image-container .fr-insert-img {
 
 .fr-view table td {
   min-width: 5px;
+  font-weight: 200;
+  padding: 5px;
 }
 
 .fr-view table.fr-dashed-borders td,
@@ -6293,12 +6278,6 @@ div.fr-modal-body div.fr-image-list div.fr-image-container .fr-insert-img {
   background: whitesmoke;
 }
 
-/* .fr-view table td,
-.fr-view table th {
-  border: 1px solid #DDD
-} */
-
-/* made global table style, otherwise in copy mode table is not visible */
 table td,
 table th {
   border: 1px solid #ddd;
@@ -6321,6 +6300,8 @@ table th {
 
 .fr-view table th {
   background: #ececec;
+  padding: 5px;
+  font-weight: 300;
 }
 
 .fr-view table tfoot td {
@@ -6766,4 +6747,8 @@ span.fr-img-caption.fr-view.fr-dii.fr-fir {
 
 .fr-element.fr-view * {
   cursor: text;
+}
+
+.fr-video iframe {
+  border-radius: 10px;
 }
