@@ -25,14 +25,23 @@ export const StaticHtml = ({ additionalStyles2 }: Props): JSX.Element => {
 
   return (
     <Box
-      ref={staticHtmlRef}
-      className='static-html'
-      sx={{
-        opacity: 0.5,
-        wordBreak: 'break-word',
-        ...additionalStyle,
-      }}
-      style={additionalStyles2}
-    />
+      className='static-html fr-box fr-inline'
+    >
+      <Box
+        className='fr-wrapper'
+      >
+        <Box
+          ref={staticHtmlRef}
+          className='fr-element fr-view'
+          sx={{
+            opacity: 0.5,
+            wordBreak: 'break-word',
+            ...additionalStyle,
+          }}
+          style={additionalStyles2}
+        >
+        </Box>
+      </Box>
+    </Box>
   )
 }
