@@ -1,6 +1,9 @@
 export { updateTextItem } from './text_item/updateTextItem'
 
-export { updatePriceTitle } from './price_item/updatePriceTitle'
+export { updatePriceTitleCell } from './price_item/updatePriceTitleCell'
+export { updatePriceValueCell } from './price_item/updatePriceValueCell'
+export { useUpdateTotalPriceIfPricesAboveWereChanged } from './price_item/useUpdateTotalPriceIfPricesAboveWereChanged'
+export { validateTotalPrice } from './price_item/validateTotalPrice'
 
 export { updateDescriptionCell } from './boq_row_cells/description/updateDescriptionCell'
 

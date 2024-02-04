@@ -1,5 +1,5 @@
 import { tabFromDescriptionCell } from '@features/tab_from_cell'
-import { updateDescriptionCell } from '@features/update_cell'
+import { updateDescriptionCell } from '@features/update'
 import { getBoqCellHtmlFromStore, useRow, useItem, Froala, useStylesForResizableCell, boqRowCellStyle, boqRowCellKey, boqColumnKey } from '@entities/items'
 
 export const DescriptionCell = (): JSX.Element => {
