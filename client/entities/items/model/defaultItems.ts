@@ -21,7 +21,7 @@ export const defaultItems: Item[] = [
         <br>
         <br>
 
-        <p style="text-align: center;"><span>You may</span></p>
+        <p style="text-align: center;"><span>You may...</span></p>
         <br>
 
         <ul>
@@ -91,7 +91,7 @@ export const defaultItems: Item[] = [
           height: 0,
           width: 0,
           description: {
-            html: '<p>description 1</p>',
+            html: '<p>item 1</p>',
             value: 0,
             pin: {
               isPinned: false,
@@ -99,7 +99,7 @@ export const defaultItems: Item[] = [
             },
           },
           itemPrice: {
-            html: '<p>10</p>',
+            html: '<p>10 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
             value: 10,
             pin: {
               isPinned: false,
@@ -107,7 +107,7 @@ export const defaultItems: Item[] = [
             },
           },
           qty: {
-            html: '<p>1</p>',
+            html: '<p>1 <span style="font-size: 12px; color: rgb(61, 142, 185);">pcs</span></p>',
             value: 1,
             pin: {
               isPinned: true,
@@ -115,7 +115,7 @@ export const defaultItems: Item[] = [
             },
           },
           price: {
-            html: '<p>10</p>',
+            html: '<p>10 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
             value: 10,
             pin: {
               isPinned: false,
@@ -129,7 +129,7 @@ export const defaultItems: Item[] = [
           height: 0,
           width: 0,
           description: {
-            html: '<p>description 2</p>',
+            html: '<p>item 2</p>',
             value: 0,
             pin: {
               isPinned: false,
@@ -137,7 +137,7 @@ export const defaultItems: Item[] = [
             },
           },
           itemPrice: {
-            html: '<p>20</p>',
+            html: '<p>20 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
             value: 20,
             pin: {
               isPinned: false,
@@ -145,7 +145,7 @@ export const defaultItems: Item[] = [
             },
           },
           qty: {
-            html: '<p>2</p>',
+            html: '<p>2 <span style="font-size: 12px; color: rgb(61, 142, 185);">pcs</span></p>',
             value: 2,
             pin: {
               isPinned: true,
@@ -153,7 +153,7 @@ export const defaultItems: Item[] = [
             },
           },
           price: {
-            html: '<p>40</p>',
+            html: '<p>40 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
             value: 40,
             pin: {
               isPinned: false,
@@ -167,7 +167,7 @@ export const defaultItems: Item[] = [
           height: 0,
           width: 0,
           description: {
-            html: '<p>description 3</p>',
+            html: '<p>service</p>',
             value: 0,
             pin: {
               isPinned: false,
@@ -175,7 +175,7 @@ export const defaultItems: Item[] = [
             },
           },
           itemPrice: {
-            html: '<p>30</p>',
+            html: '<p>30 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
             value: 30,
             pin: {
               isPinned: false,
@@ -183,7 +183,7 @@ export const defaultItems: Item[] = [
             },
           },
           qty: {
-            html: '<p>3</p>',
+            html: '<p>3 <span style="font-size: 12px; color: rgb(61, 142, 185);">h</span></p>',
             value: 3,
             pin: {
               isPinned: true,
@@ -191,7 +191,169 @@ export const defaultItems: Item[] = [
             },
           },
           price: {
-            html: '<p>90</p>',
+            html: '<p>90 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+            value: 90,
+            pin: {
+              isPinned: false,
+              isShown: false,
+            },
+          },
+        },
+      ],
+    },
+  },
+  {
+    id: nanoid(3),
+    type: itemType.boq,
+    width: 600,
+    height: 0,
+    msg: '',
+    isFroala: true,
+    boq: {
+      header: {
+        title: {
+          html: '<p><strong>Title</strong></p>',
+          value: 0,
+        },
+        subtotalText: {
+          html: '<div>Subtotal</div>',
+          value: 0,
+        },
+        subTotalPrice: {
+          html: '<p><strong>140</strong></p>',
+          value: 140,
+        },
+      },
+      column: {
+        number: {
+          html: '',
+          width: 30,
+        },
+        description: {
+          html: '<p><strong>Description</strong></p>',
+          width: 240,
+        },
+        itemPrice: {
+          html: '<p><strong>Item price</strong></p>',
+          width: 100,
+        },
+        qty: {
+          html: '<p><strong>Qty</strong></p>',
+          width: 100,
+        },
+        price: {
+          html: '<p><strong>Price</strong></p>',
+          width: 100,
+        },
+      },
+      rows: [
+        {
+          id: nanoid(3),
+          type: boqRowType.row,
+          height: 0,
+          width: 0,
+          description: {
+            html: '<p>item 1</p>',
+            value: 0,
+            pin: {
+              isPinned: false,
+              isShown: false,
+            },
+          },
+          itemPrice: {
+            html: '<p>10 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+            value: 10,
+            pin: {
+              isPinned: false,
+              isShown: false,
+            },
+          },
+          qty: {
+            html: '<p>1 <span style="font-size: 12px; color: rgb(61, 142, 185);">pcs</span></p>',
+            value: 1,
+            pin: {
+              isPinned: true,
+              isShown: false,
+            },
+          },
+          price: {
+            html: '<p>10 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+            value: 10,
+            pin: {
+              isPinned: false,
+              isShown: false,
+            },
+          },
+        },
+        {
+          id: nanoid(3),
+          type: boqRowType.row,
+          height: 0,
+          width: 0,
+          description: {
+            html: '<p>item 2</p>',
+            value: 0,
+            pin: {
+              isPinned: false,
+              isShown: false,
+            },
+          },
+          itemPrice: {
+            html: '<p>20 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+            value: 20,
+            pin: {
+              isPinned: false,
+              isShown: false,
+            },
+          },
+          qty: {
+            html: '<p>2 <span style="font-size: 12px; color: rgb(61, 142, 185);">pcs</span></p>',
+            value: 2,
+            pin: {
+              isPinned: true,
+              isShown: false,
+            },
+          },
+          price: {
+            html: '<p>40 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+            value: 40,
+            pin: {
+              isPinned: false,
+              isShown: false,
+            },
+          },
+        },
+        {
+          id: nanoid(3),
+          type: boqRowType.row,
+          height: 0,
+          width: 0,
+          description: {
+            html: '<p>service</p>',
+            value: 0,
+            pin: {
+              isPinned: false,
+              isShown: false,
+            },
+          },
+          itemPrice: {
+            html: '<p>30 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+            value: 30,
+            pin: {
+              isPinned: false,
+              isShown: false,
+            },
+          },
+          qty: {
+            html: '<p>3 <span style="font-size: 12px; color: rgb(61, 142, 185);">h</span></p>',
+            value: 3,
+            pin: {
+              isPinned: true,
+              isShown: false,
+            },
+          },
+          price: {
+            html: '<p>90 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
             value: 90,
             pin: {
               isPinned: false,
@@ -214,8 +376,8 @@ export const defaultItems: Item[] = [
       value: null,
     },
     price: {
-      html: '<p style="text-align: center;"><strong>140</strong> <span style=" color: rgb(204, 204, 204);">EUR</span></p>',
-      value: 140,
+      html: '<p style="text-align: center;"><strong>280</strong> <span>USD</span></p>',
+      value: 280,
     },
   },
   {
