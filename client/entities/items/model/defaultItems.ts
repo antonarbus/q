@@ -17,12 +17,11 @@ export const defaultItems: Item[] = [
         <br>
 
         <p style="text-align: center;"><span>This is the text block.</span></p>
-        <br>
         <p style="text-align: center;"><span>Here goes any offer technical and commercial information.</span></p>
         <br>
         <br>
 
-        <p style="text-align: center;"><span>You may...</span></p>
+        <p style="text-align: center;"><span>You may</span></p>
         <br>
 
         <ul>
