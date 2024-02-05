@@ -6755,3 +6755,12 @@ span.fr-img-caption.fr-view.fr-dii.fr-fir {
 .fr-video iframe {
   border-radius: 10px;
 }
+
+li::marker {
+  color: rgb(189, 189, 189);
+}
+
+.fr-view a {
+  cursor: pointer !important;
+}
+
