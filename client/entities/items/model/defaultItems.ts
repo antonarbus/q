@@ -6,8 +6,45 @@ import { type Item } from '../types'
 export const defaultItems: Item[] = [
   {
     id: nanoid(3),
+    type: itemType.text,
+    width: 600,
+    height: 0,
+    msg: '',
+    isFroala: true,
+    text: {
+      html: `
+        <p style="text-align: center; font-size: 24px;">Cover letter.</p>
+        <br>
+
+        <p style="text-align: center;"><span>This is the text block.</span></p>
+        <br>
+        <p style="text-align: center;"><span>Here goes any offer technical and commercial information.</span></p>
+        <br>
+        <br>
+
+        <p style="text-align: center;"><span>You may...</span></p>
+        <br>
+
+        <ul>
+          <li style="text-align: left;"><span>write, select and <span style="color: rgb(226, 80, 65);">format</span> text</span></li>
+          <li style="text-align: left;"><span>insert tables, drop <a href="911.pdf" target="_blank" rel="noopener noreferrer">files</a>, images, attach videos</span></li>
+          <li style="text-align: left;"><span>copy, cut, delete, insert, sort, resize blocks and rows</span></li>
+          <li style="text-align: left;"><span>calculate prices</span></li>
+          <li style="text-align: left;"><span>auto save data in browser</span></li>
+          <li style="text-align: left;"><span>store and share quotations</span></li>
+          <li style="text-align: left;"><span>review, track and update offers</span></li>
+          <li style="text-align: left;"><span>save and search though products portfolio</span></li>
+          <li style="text-align: left;"><span>copy items from other quotations</span></li>
+          <li style="text-align: left;"><span>all elements are editable and customizable</span></li>
+        </ul>
+      `,
+      value: null,
+    },
+  },
+  {
+    id: nanoid(3),
     type: itemType.boq,
-    width: 700,
+    width: 600,
     height: 0,
     msg: '',
     isFroala: true,
@@ -33,7 +70,7 @@ export const defaultItems: Item[] = [
         },
         description: {
           html: '<p><strong>Description</strong></p>',
-          width: 200,
+          width: 240,
         },
         itemPrice: {
           html: '<p><strong>Item price</strong></p>',
@@ -185,101 +222,7 @@ export const defaultItems: Item[] = [
   {
     id: nanoid(3),
     type: itemType.text,
-    width: 800,
-    height: 0,
-    msg: '',
-    isFroala: true,
-    text: {
-      html: `
-        <p style="text-align: center; font-size: 24px;">Info</p>
-        <br>
-        <p style="text-align: center;"><span style="color: grey;">1.&nbsp;</span><span style="color: grey;">Add</span><span>&nbsp; products description.</span></p>
-        <br>
-        <p style="text-align: center;"><span>Select text to&nbsp;</span><span style="color: rgb(226, 80, 65);">format</span><span>&nbsp;</span><span><span>it.</span></span></p>
-        <br>
-        <p style="text-align: center;"><span style="color: grey;">2. Insert</span> tables.</p>
-        <p style="text-align: center;"><span><br></span></p>
-        <table style="width: 100%;">
-          <thead>
-            <tr>
-              <th style="width: 33%;">
-                <div style="text-align: center;">Week</div>
-              </th>
-              <th style="width: 33%;">
-                <div style="text-align: center;">Milestone</div>
-              </th>
-              <th style="width: 33%;">
-                <div style="text-align: center;">Payment</div>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <div style="text-align: center;">Week 1</div>
-              </td>
-              <td>
-                <div style="text-align: center;">Design phase</div>
-              </td>
-              <td>
-                <div style="text-align: center;">30%</div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div style="text-align: center;">Week 4</div>
-              </td>
-              <td>
-                <div style="text-align: center;">Customer approval</div>
-              </td>
-              <td>
-                <div style="text-align: center;">20%</div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div style="text-align: center;">Week 6</div>
-              </td>
-              <td>
-                <div style="text-align: center;">Implementation phase</div>
-              </td>
-              <td>
-                <div style="text-align: center;">40%</div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div style="text-align: center;">Week 16</div>
-              </td>
-              <td>
-                <div style="text-align: center;">Take-over</div>
-              </td>
-              <td>
-                <div style="text-align: center;">10%</div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <br>
-        <p style="text-align: center;"><span style="color: grey;">3. Drop</span><span>&nbsp;</span><span>files.</span></p>
-        <br>
-        <p style="text-align: center;"><span><a class="fr-file" href="911.pdf" target="_blank">911 Carrera.pdf</a></span></p>
-        <br>
-        <p style="text-align: center;"><span style="color: grey;">4. Drop</span><span>&nbsp;</span><span>images.</span></p>
-        <br>
-        <p><span><img src="macbook.png" style="width: 546px;" class="fr-fic fr-dib fr-rounded"></span></p>
-        <br>
-        <p style="text-align: center;"><span style="color: grey;">5. Attach</span><span>&nbsp;</span><span>videos.</span></p>
-        <br>
-        <p style="text-align: center;"><span><span class="fr-video fr-deletable fr-fvc fr-dvb fr-draggable"><iframe src="https://www.youtube.com/embed/861Dt8Fy0IA?&wmode=opaque&rel=0" frameborder="0" allowfullscreen="" class="fr-draggable" style="width: 540px; height: 300px;"><span class="fr-mk" style="display: none;">&nbsp;</span></iframe></span></span></p>
-      `,
-      value: null,
-    },
-  },
-  {
-    id: nanoid(3),
-    type: itemType.text,
-    width: 800,
+    width: 600,
     height: 0,
     msg: '',
     isFroala: true,
