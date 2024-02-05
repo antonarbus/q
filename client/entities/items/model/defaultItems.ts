@@ -50,7 +50,7 @@ export const defaultItems: Item[] = [
     boq: {
       header: {
         title: {
-          html: '<p><strong>Title</strong></p>',
+          html: '<p><strong>Title 1</strong></p>',
           value: 0,
         },
         subtotalText: {
@@ -212,7 +212,7 @@ export const defaultItems: Item[] = [
     boq: {
       header: {
         title: {
-          html: '<p><strong>Title</strong></p>',
+          html: '<p><strong>Title 2</strong></p>',
           value: 0,
         },
         subtotalText: {
@@ -376,7 +376,7 @@ export const defaultItems: Item[] = [
       value: null,
     },
     price: {
-      html: '<p style="text-align: center;"><strong>280</strong> <span>USD</span></p>',
+      html: '<p style="text-align: center;">280<strong></strong> <span>USD</span></p>',
       value: 280,
     },
   },
@@ -391,56 +391,39 @@ export const defaultItems: Item[] = [
       html: `
         <p style="font-size: 24px; text-align: center;">Terms &amp; Conditions</p>
         <br>
-    
-        <p><strong>1. APPLICABILITY AND ACCEPTANCE.</strong> These Terms govern the sale of products (Products) by the Seller to the Buyer. The Terms, along with a valid quotation, constitute the entire Agreement, and the Buyer can accept a quotation by issuing a purchase order.</p>
+        <p>1. <strong>APPLICABILITY AND ACCEPTANCE.</strong> These Terms govern the sale of products (Products) by the Seller to the Buyer. The Terms, along with a valid quotation, constitute the entire Agreement, and the Buyer can accept a quotation by issuing a purchase order.</p>
         <br>
-    
-        <p><strong>2. PRICE.</strong> Prices are subject to change without notice. Prices indicated in the Purchase Order apply, and shipping fees are exclusive.</p>
+        <p>2. <strong>PRICE.</strong> Prices are subject to change without notice. Prices indicated in the Purchase Order apply, and shipping fees are exclusive.</p>
         <br>
-    
-        <p><strong>3. PAYMENT.</strong> Payments are due net thirty (30) days from the invoice date.</p>
+        <p>3. <strong>PAYMENT.</strong> Payments are due net thirty (30) days from the invoice date.</p>
         <br>
-    
-        <p><strong>4. DELIVERY.</strong> Products are delivered according to the Quotation's International Commercial Term (Incoterms® 2010). Buyer is responsible for any applicable taxes, duties, and insurance.</p>
+        <p>4. <strong>DELIVERY.</strong> Products are delivered according to the Quotation's International Commercial Term (Incoterms® 2010). Buyer is responsible for any applicable taxes, duties, and insurance.</p>
         <br>
-    
-        <p><strong>5. TITLE AND RISK OF LOSS.</strong> Title and Risk of Loss pass upon product delivery. Buyer agrees to maintain appropriate insurance coverage.</p>
+        <p>5. <strong>TITLE AND RISK OF LOSS.</strong> Title and Risk of Loss pass upon product delivery. Buyer agrees to maintain appropriate insurance coverage.</p>
         <br>
-    
-        <p><strong>6. INSPECTION AND REJECTION.</strong> Buyer must inspect Products within ten (10) days of receipt. Nonconforming Products must be reported within the Inspection Period for resolution.</p>
+        <p>6. <strong>INSPECTION AND REJECTION.</strong> Buyer must inspect Products within ten (10) days of receipt. Nonconforming Products must be reported within the Inspection Period for resolution.</p>
         <br>
-    
-        <p><strong>7. CHANGES AND CANCELLATIONS.</strong> Buyer may request changes, subject to Seller's approval. Cancellations require written approval and may incur fees.</p>
+        <p>7. <strong>CHANGES AND CANCELLATIONS.</strong> Buyer may request changes, subject to Seller's approval. Cancellations require written approval and may incur fees.</p>
         <br>
-    
-        <p><strong>8. WARRANTY.</strong> Seller warrants Products free from defects for a specified period. Limited warranty terms and conditions apply.</p>
+        <p>8. <strong>WARRANTY.</strong> Seller warrants Products free from defects for a specified period. Limited warranty terms and conditions apply.</p>
         <br>
-    
-        <p><strong>9. INTELLECTUAL PROPERTY RIGHTS.</strong> Seller retains all intellectual property rights associated with the Products.</p>
+        <p>9. <strong>INTELLECTUAL PROPERTY RIGHTS.</strong> Seller retains all intellectual property rights associated with the Products.</p>
         <br>
-    
-        <p><strong>10. CONFIDENTIALITY.</strong> Buyer shall not disclose business information without legal necessity.</p>
+        <p>10. <strong>CONFIDENTIALITY.</strong> Buyer shall not disclose business information without legal necessity.</p>
         <br>
-    
-        <p><strong>11. COMPLIANCE WITH LAWS.</strong> Buyer agrees to comply with applicable laws and regulations.</p>
+        <p>11. <strong>COMPLIANCE WITH LAWS.</strong> Buyer agrees to comply with applicable laws and regulations.</p>
         <br>
-    
-        <p><strong>12. WAIVER.</strong> No waiver by Seller is effective unless in writing and signed.</p>
+        <p>12. <strong>WAIVER.</strong> No waiver by Seller is effective unless in writing and signed.</p>
         <br>
-    
-        <p><strong>13. GOVERNING LAW AND DISPUTES.</strong> The contract is governed by the laws of the State of Texas. Disputes shall be referred exclusively to the courts in Harris County, Texas.</p>
+        <p>13. <strong>GOVERNING LAW AND DISPUTES.</strong> The contract is governed by the laws of the State of Texas. Disputes shall be referred exclusively to the courts in Harris County, Texas.</p>
         <br>
-    
-        <p><strong>14. SURVIVAL AND SEVERABILITY.</strong> Certain provisions survive termination. If any term is invalid, it will be reformed to comply with applicable law.</p>
+        <p>14. <strong>SURVIVAL AND SEVERABILITY.</strong> Certain provisions survive termination. If any term is invalid, it will be reformed to comply with applicable law.</p>
         <br>
-    
-        <p><strong>15. LIMITATION OF LIABILITY.</strong> Seller's liability is limited; specific terms apply.</p>
+        <p>15. <strong>LIMITATION OF LIABILITY.</strong> Seller's liability is limited; specific terms apply.</p>
         <br>
-    
-        <p><strong>16. CLERICAL ERRORS AND PUBLISHED DATA.</strong> Stenographic errors may be corrected, and specifications should be verified.</p>
+        <p>16. <strong>CLERICAL ERRORS AND PUBLISHED DATA.</strong> Stenographic errors may be corrected, and specifications should be verified.</p>
         <br>
-    
-        <p><strong>17. PRECEDENCE.</strong> Inconsistent provisions follow a specified order: Terms, Quotation's terms, Purchase Order's terms, any Schedules, addenda, and Specifications.</p>
+        <p>17. <strong>PRECEDENCE.</strong> Inconsistent provisions follow a specified order: Terms, Quotation's terms, Purchase Order's terms, any Schedules, addenda, and Specifications.</p>
       `,
       value: null,
     },
