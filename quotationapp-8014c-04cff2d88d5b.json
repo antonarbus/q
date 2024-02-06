@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "quotationapp-8014c",
+  "private_key_id": "04cff2d88d5b77a1696c9228b7df2c231d56522a",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDgYCD2+y6RyvDA\nJm60GZVfQ5UGYm9lOtitSTAm5g17tUnEq9rnJCw2XwWlhQuPFvjtmn5qz4ZLSRJM\nEdEgwA+AtEoT5NwQOLp3l+0gmkFf3S95neDgMprVQJIM4yZfVcIKyAyvZDqdRW6Z\ncaB/URqzSN7cuvebkCrw4gyI3oscMiZ32PH7Amxt2Ir9KOVeQvbrBWtcdxXN0hXI\nzLdskDmdnfHJYWoMpIHcuuEcKh6mF9GsAcmVlfM2YQdv5KzQ9KETan+idE+EIDxK\nUqCWBfMNOipabnWj8uxTF5KbeP9IVlSDfO1CRE43wyBQOBM+smGZc7GusxITVmNo\nkrUX4MnjAgMBAAECggEAFVNISXZweSky05hzhMjlB7O1Khut9GRGQXCyKRL2whoQ\nuPwP0fsqppTxGke4ZFutwhYhIMa46qvhwiV0B8BUA4q0ewqRQzYZEZJ41lSYP7kW\nhjZpWqBZ/fMP+TXs/jpONyxx+YjgV0qeQJWU8wotgaUR5XnHBzE0cPDoeb5pC1Sn\n7bCmbJb5OfygOOYuSYq/Xd8HE0xI7nBGjl6V10w6FI/xoda41cS+JMRrAO4J1aUv\nvaSEwfj6Ovo3X2X36QttoJxyWNWyfIJWRpUbwUNB5JOWwJXUNBi+OIws/E7g99VW\nrB75ODnlGKEhC69m02jz0atZA/dVdGTaaul2bP1wQQKBgQD9yp2li7CeclA9db9t\nqHQ8yRcVf1Qp4kPlCxJnIbWh+kTm21ymcVFlBoz5ka+nU9fVzzmkN7HfUMPQ2LAN\nFtfXJgQ2ohw7QhgUy1wtU6ta07sw6DWqzPTT79sd6iOxptKrSR4TV+eyhZOurjJK\nnURYiwub1WdFlhuJElpzwy8GowKBgQDiU/tEqEDDSqJGmktQTrVyrv6eppqBAU8W\n88f2r/D/FGdimm+KG/8FPQqMSxTGnVgZnI9+rPhFBqj5SVfDxv1vzVNQENDwS2Vi\nCAbCdK3o9QME+WTMNn0c6srZdjQzQA42iRjMIBZewHVB4h5zGqP0d6le48TVEc30\nYf4kCTGjwQKBgQDar/UX6T7PyYEK9KN3Qmim2EBj7cwAK1CF1PyOkaWJZbZplyxG\n3+5bN0HS646IiN67Bk2NC9DhtR6Gn7FUFhL2+XM4AIiDJ3jIslNDW42UPk5W3kEg\nZGuzFEOji1YmhrGRlverg1vLoP6YztHXKZzzDx15snHCrI4dlwsKJW4oMQKBgDUa\ngV1FoRRxYYvxTfSE0zwaZTGyY5QbS4RWJLfz5jbjgbJ4C+26zeZbwSrTvwcvCenQ\neza8vO/tNR5woAAWo4ZlBcRGfc+z0RDkUzmzCM8dFd1H6uejbU2opXnKq0rPH8aZ\n+lCCwtzuiVSxCnX1bTzCCuJxzNA1gj5x86Be69/BAoGAXbPdRew+HYph+o6HmVG8\nenEjyaZWcob74ABrPWcf/foGTQYts+cp8xT3093ueFOjPZNRloHup4gLXAofHD6l\nADQb6mGbk7LyX9BBVhOlmHtB0KVomFlmYfnY5aZSCdgoixgTjYmXQb1cika83b1I\nGKr+5v4GTStG7MkyiQQme9k=\n-----END PRIVATE KEY-----\n",
+  "client_email": "cloud-storage-service-account@quotationapp-8014c.iam.gserviceaccount.com",
+  "client_id": "106875911907528867969",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/cloud-storage-service-account%40quotationapp-8014c.iam.gserviceaccount.com"
+}
