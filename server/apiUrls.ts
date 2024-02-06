@@ -10,4 +10,5 @@ export const apiUrl = {
   users: '/api/users',
   user: '/api/user',
   reset: '/api/reset',
+  upload: '/api/upload',
 }

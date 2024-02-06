@@ -2,9 +2,11 @@ import 'froala-editor/js/froala_editor.pkgd.min.js'
 import 'froala-editor/js/plugins.pkgd.min.js'
 import 'froala-editor/js/third_party/font_awesome.min.js'
 import './froala_editor.pkgd.min.css'
+import { useSelectorTyped } from '@lib_instances/store'
 import FroalaEditor from 'froala-editor'
 import type { MouseEvent } from 'react'
 import { useEffect } from 'react'
+import { apiUrl } from 'server/apiUrls'
 import { type FroalaEditorRef } from '@shared/types'
 import { useFroala } from '../../providers/FroalaProvider'
 import { froalaDefaultOptions } from './froalaDefaultOptions'
@@ -17,6 +19,7 @@ window.froalas = []
 
 export const useStartFroala = (): void => {
   const { htmlGetter, froalaElementRef, editorRef, placeholder, onContentChange, onFocus, onClick, onBlur, onKeydown, onInitialized } = useFroala()
+  const isLogged = useSelectorTyped(state => state.user.isLogged)
 
   useEffect(() => {
     const initFroalaInstance = (): void => {
@@ -25,6 +28,11 @@ export const useStartFroala = (): void => {
         {
           ...froalaDefaultOptions,
           placeholderText: placeholder ?? 'Text...',
+          // if logged in files are uploaded to the bucket, if not, they are just stored in browser
+          ...(isLogged && { imageUploadURL: apiUrl.upload }),
+          ...(isLogged && { fileUploadURL: apiUrl.upload }),
+          ...(isLogged && { videoUploadURL: apiUrl.upload }),
+          fileMaxSize: 1024 * 1024 * 30,
           events: {
             contentChanged: () => {
               onContentChange()
@@ -43,7 +51,39 @@ export const useStartFroala = (): void => {
             blur: (e: MouseEvent) => {
               onBlur?.(e)
             },
-            // 'paste.afterCleanup': function (clipboardHtml: string) { },
+            'file.beforeUpload': function (files) {
+              const upload = confirm(`
+                File will be uploaded into your profile?
+                File size: ${(files[0].size / 1024 / 1024).toFixed(20).match(/^-?\d*\.?0*\d{0,2}/)[0]} Mb
+              `)
+              if (!upload) {
+                document.querySelector('.fr-file-progress-bar-layer.fr-layer.fr-active').classList.remove('fr-active')
+              }
+            },
+            'file.unlink': function (link) {
+              console.log('file.unlink')
+              const href = link.getAttribute('href')
+              const isFileInBucket = href.includes('bucket')
+              if (!isFileInBucket) return
+              const removeFile = confirm(`
+                Remove file from your profile?
+                ${href}
+              `)
+
+              if (removeFile) {
+                // todo: remove file from DB
+                // todo: check if any other offers or depend on the file
+              }
+            },
+
+            // todo: check events for images and videos like for files
+
+            // https://froala.com/wysiwyg-editor/docs/events/#image.removed
+            'image.removed': function ($img) {
+              // Do something here.
+              console.log(this)
+              console.log($img.attr('src'))
+            },
             initialized: (): void => {
               window.froalas.push(editorRef)
               if (!editorRef.current?.html) return
