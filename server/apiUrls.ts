@@ -11,4 +11,6 @@ export const apiUrl = {
   user: '/api/user',
   reset: '/api/reset',
   upload: '/api/upload',
+  setBucketCors: '/api/set-bucket-cors',
+  getBucketCors: '/api/get-bucket-cors',
 }
