@@ -6,6 +6,7 @@ export const downloadPdf = async (): Promise<void> => {
   if (mainElement === null) return
 
   // replaceImageUrls()
+  // todo: create a container with auto width, add all items there, remove opacity style somehow
 
   const width = mainElement.clientWidth
   const height = mainElement.clientHeight
@@ -27,26 +28,26 @@ export const downloadPdf = async (): Promise<void> => {
   pdf.save('quotation.pdf')
 }
 
-function imageToBase64(img: HTMLImageElement): string | undefined {
-  const canvas = document.createElement('canvas')
-  canvas.width = img.width
-  canvas.height = img.height
-  const ctx = canvas.getContext('2d')
-  if (ctx === null) return
-  ctx.drawImage(img, 0, 0, img.width, img.height)
-  return canvas.toDataURL()
-}
+// function imageToBase64(img: HTMLImageElement): string | undefined {
+//   const canvas = document.createElement('canvas')
+//   canvas.width = img.width
+//   canvas.height = img.height
+//   const ctx = canvas.getContext('2d')
+//   if (ctx === null) return
+//   ctx.drawImage(img, 0, 0, img.width, img.height)
+//   return canvas.toDataURL()
+// }
 
-function replaceImageUrls(): void {
-  const images = document.querySelectorAll('img')
+// function replaceImageUrls(): void {
+//   const images = document.querySelectorAll('img')
 
-  images.forEach((img) => {
-    const src = img.getAttribute('src')
-    if (src === null) return
-    const isExternalImage = src.startsWith('http://') || src.startsWith('https://')
-    if (!isExternalImage) return
-    const base64Url = imageToBase64(img)
-    if (base64Url === undefined) return
-    img.setAttribute('src', base64Url)
-  })
-}
+//   images.forEach((img) => {
+//     const src = img.getAttribute('src')
+//     if (src === null) return
+//     const isExternalImage = src.startsWith('http://') || src.startsWith('https://')
+//     if (!isExternalImage) return
+//     const base64Url = imageToBase64(img)
+//     if (base64Url === undefined) return
+//     img.setAttribute('src', base64Url)
+//   })
+// }
