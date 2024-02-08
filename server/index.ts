@@ -5,11 +5,13 @@ import express from 'express'
 import morgan from 'morgan'
 import multer from 'multer'
 import { activateRouter } from './api/activateRouter'
+import { getBucketCors } from './api/getBucketCors'
 import { hiRouter } from './api/hiRouter'
 import { loginRouter } from './api/loginRouter'
 import { logoutRouter } from './api/logoutRouter'
 import { refreshRouter } from './api/refreshRouter'
 import { registerRouter } from './api/registerRouter'
+import { setBucketCors } from './api/setBucketCors'
 import { uploadRouter } from './api/uploadRouter'
 import { userEmailRouter } from './api/userEmailRouter'
 import { usersRouter } from './api/usersRouter'
@@ -42,6 +44,8 @@ void (async (): Promise<void> => {
   app.use(apiUrl.users, usersRouter)
   app.use(apiUrl.user, userEmailRouter)
   app.use(apiUrl.upload, uploadRouter)
+  app.use(apiUrl.setBucketCors, setBucketCors)
+  app.use(apiUrl.getBucketCors, getBucketCors)
 
   app.use(errorHandlerMiddleware)
 
