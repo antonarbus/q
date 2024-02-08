@@ -5,6 +5,7 @@ import { BiReset } from 'react-icons/bi'
 import { FiLogOut, FiLogIn } from 'react-icons/fi'
 import { IoIosSwap } from 'react-icons/io'
 import { IoDocumentOutline, IoDocumentsOutline, IoSaveOutline, IoShareOutline } from 'react-icons/io5'
+import { downloadPdf } from '@features/download_pdf'
 import { logout } from '@features/log_out'
 import { resetItems } from '@features/reset_items'
 import type { MenuItemTypes } from '@entities/nav'
@@ -232,6 +233,16 @@ export const navStructure: MenuItemTypes[] = [
               alert('i am the function')
             },
             shortcut: ['control', 'c'],
+            isHidden: false,
+          },
+          {
+            id: nanoid(3),
+            name: 'pdf',
+            func: (): void => {
+              console.log('loading pdf')
+              downloadPdf()
+            },
+            // shortcut: ['control', 'c'],
             isHidden: false,
           },
         ],
