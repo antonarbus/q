@@ -9,6 +9,7 @@ const storage = new Storage({
   projectId: 'quotationapp-8014c',
 })
 
+// todo: now it is completely open, restrict it to my domain and make a test domain like in heeros, check ereceipt vite config
 const bucketName = 'quotation-app-bucket'
 const origin = '*'
 const responseHeader = 'Content-Type'
