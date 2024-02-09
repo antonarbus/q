@@ -1,6 +1,7 @@
 // Imports the Google Cloud client library
 import { Storage } from '@google-cloud/storage'
 import express from 'express'
+import { type Req, type Res } from '../types'
 
 // https://cloud.google.com/storage/docs/samples/storage-cors-configuration#storage_cors_configuration-nodejs
 
@@ -9,27 +10,28 @@ const storage = new Storage({
   projectId: 'quotationapp-8014c',
 })
 
-// todo: now it is completely open, restrict it to my domain and make a test domain like in heeros, check ereceipt vite config
 const bucketName = 'quotation-app-bucket'
-const origin = '*'
-const responseHeader = 'Content-Type'
-const method = 'GET'
 
-async function configureBucketCors(): Promise<void> {
-  await storage.bucket(bucketName).setCorsConfiguration([
+async function configureBucketCors(_req: Req, res: Res): Promise<void> {
+  const corsUpdateRes = await storage.bucket(bucketName).setCorsConfiguration([
     {
-      // maxAgeSeconds,
-      method: [method],
-      origin: [origin],
-      responseHeader: [responseHeader],
+      origin: [
+        'https://quotation.app',
+        'http://quotation.app',
+        'https://*.quotation.app',
+        'http://*.quotation.app',
+      ],
+      method: ['GET'],
+      maxAgeSeconds: 3600,
+      responseHeader: ['Content-Type'],
     },
   ])
 
   console.info(`
     Bucket ${bucketName} was updated with a CORS config
-    to allow ${method} requests from ${origin} sharing 
-    ${responseHeader} responses across origins
   `)
+
+  res.json(corsUpdateRes.at(0)?.cors)
 }
 
 export const setBucketCors = express.Router()
