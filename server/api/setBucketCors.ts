@@ -32,11 +32,6 @@ async function configureBucketCors(): Promise<void> {
   `)
 }
 
-configureBucketCors().catch(console.error)
-
 export const setBucketCors = express.Router()
 
-setBucketCors.get(
-  '/',
-  configureBucketCors,
-)
+setBucketCors.get('/', configureBucketCors)

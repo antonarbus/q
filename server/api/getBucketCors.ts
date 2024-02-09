@@ -17,7 +17,4 @@ async function getBucketMetadata(): Promise<void> {
 
 export const getBucketCors = express.Router()
 
-getBucketCors.get(
-  '/',
-  getBucketMetadata,
-)
+getBucketCors.get('/', getBucketMetadata)
