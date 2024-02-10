@@ -76,13 +76,12 @@ export const useStartFroala = (): void => {
               }
             },
 
-            // todo: check events for images and videos like for files
-
-            // https://froala.com/wysiwyg-editor/docs/events/#image.removed
             'image.removed': function ($img) {
-              // Do something here.
-              console.log(this)
               console.log($img.attr('src'))
+            },
+            'image.loaded': function (props: { '0': HTMLImageElement }) {
+              const imageElement = props['0']
+              imageElement.style.height = imageElement.clientHeight + 'px'
             },
             initialized: (): void => {
               window.froalas.push(editorRef)

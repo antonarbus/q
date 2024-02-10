@@ -48,7 +48,7 @@ export const Froala = ({
   const isItemFroala = useSelectorTyped(state => state.items[itemIndex]?.isFroala)
   const { observerRef, isInsideViewPort } = useViewPortObserver()
   const isAppFroala = useSelectorTyped(state => state.app.isFroala)
-  const showEditableHtml = isAppFroala && isInsideViewPort && isItemFroala
+  const showEditableHtml = isAppFroala && isItemFroala && isInsideViewPort
 
   return (
     <FroalaProvider
