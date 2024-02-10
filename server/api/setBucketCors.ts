@@ -16,10 +16,11 @@ async function configureBucketCors(_req: Req, res: Res): Promise<void> {
   const corsUpdateRes = await storage.bucket(bucketName).setCorsConfiguration([
     {
       origin: [
-        'https://quotation.app',
-        'http://quotation.app',
-        'https://*.quotation.app',
-        'http://*.quotation.app',
+        // 'https://quotation.app',
+        // 'http://quotation.app',
+        // 'https://*.quotation.app',
+        // 'http://*.quotation.app',
+        '*', // todo: pdf download not working with enabled cors for some reason
       ],
       method: ['GET'],
       maxAgeSeconds: 3600,
