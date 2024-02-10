@@ -16,9 +16,7 @@ export const defaultItems: Item[] = [
         <p style="text-align: center; font-size: 24px;">Cover letter</p>
         <br>
 
-        <p style="text-align: center;"><span>This is the text block.</span></p>
-        <p style="text-align: center;"><span>Here goes any offer technical and commercial information.</span></p>
-        <br>
+        <p style="text-align: center;"><span>Here goes any technical and commercial information.</span></p>
         <br>
 
         <p style="text-align: center;"><span>You may...</span></p>
