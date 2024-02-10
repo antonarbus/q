@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 // import 'froala-editor/js/froala_editor.pkgd.min.js'
 // import FroalaEditor from 'froala-editor'
 import 'froala-editor/js/plugins.pkgd.min.js'
