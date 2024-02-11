@@ -5,9 +5,22 @@ import { className } from '@shared/consts/className'
 export const downloadPdf = async (): Promise<void> => {
   const itemsElement = document.querySelector(`.${className.items}`)
   if (!(itemsElement instanceof HTMLElement)) return
-  const width = itemsElement.clientWidth
-  const height = itemsElement.clientHeight
-  const canvas = await html2canvas(itemsElement, { allowTaint: true, useCORS: true })
+
+  // itemsElement.querySelectorAll(`.${className.actionsContainer}`).forEach(element => {
+  //   element.remove()
+  // })
+
+  const width = itemsElement.clientWidth / 2
+  const height = itemsElement.clientHeight / 2
+  const canvas = await html2canvas(itemsElement, {
+    allowTaint: true,
+    useCORS: true,
+    ignoreElements: (element) => {
+      if (element.classList.contains(className.actionsContainer)) return true
+      return false
+    },
+  })
+  // document.body.appendChild(canvas)
   const base64image = canvas.toDataURL('image/png')
   // eslint-disable-next-line new-cap
   const pdf = new jsPDF({
