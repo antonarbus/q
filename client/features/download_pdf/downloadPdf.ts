@@ -31,7 +31,7 @@ export const downloadPdf = async (): Promise<void> => {
   const base64image = canvas.toDataURL('image/png')
   // eslint-disable-next-line new-cap
   const pdf = new jsPDF({
-    orientation: 'portrait',
+    orientation: width > height ? 'landscape' : 'portrait',
     unit: 'px',
     format: [width, height],
   })

@@ -1,5 +1,5 @@
 import { dispatch } from '@lib_instances/store'
-import { type BoqColumnKey, itemsSlice, saveItemsLocally, getBoqColumnFromStore } from '@entities/items'
+import { type BoqColumnKey, itemsSlice, saveItemsLocally, getBoqColumnFromStore, unfixItemImagesHeight, fixItemImagesHeight } from '@entities/items'
 import { className } from '@shared/consts/className'
 
 type Props = {
@@ -9,6 +9,7 @@ type Props = {
 }
 
 export const onColumnResizeStart = ({ headerColumnElement, itemIndex, boqColumnKey }: Props): void => {
+  unfixItemImagesHeight()
   const width = headerColumnElement.clientWidth
   dispatch(itemsSlice.actions.disableFroalaReducer({ itemIndex }))
   dispatch(itemsSlice.actions.updateColWidthReducer({ itemIndex, width, boqColumnKey }))
@@ -16,6 +17,7 @@ export const onColumnResizeStart = ({ headerColumnElement, itemIndex, boqColumnK
 }
 
 export const onColumnResize = ({ headerColumnElement, itemIndex, boqColumnKey }: Props): void => {
+  // unfixItemImagesHeight()
   const width = headerColumnElement.clientWidth
   const column = getBoqColumnFromStore({ itemIndex, boqColumnKey })
   if (column === undefined) return
@@ -25,6 +27,8 @@ export const onColumnResize = ({ headerColumnElement, itemIndex, boqColumnKey }:
 }
 
 export const onColumnResizeStop = ({ headerColumnElement, itemIndex, boqColumnKey }: Props): void => {
+  fixItemImagesHeight()
+  // todo: that is not enough, we somehow need to update image heights in store, no idea how
   const columnWidth = headerColumnElement.clientWidth
   dispatch(itemsSlice.actions.updateColWidthReducer({ itemIndex, width: columnWidth, boqColumnKey }))
   const itemWidth = headerColumnElement.closest(`.${className.paper}`)?.clientWidth
