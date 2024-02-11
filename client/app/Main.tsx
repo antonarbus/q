@@ -6,7 +6,12 @@ export const Main = (): JSX.Element => {
   useRefreshTokens({ withLoadingState: false })
 
   return (
-    <main css={{ padding: '10px 20px' }}>
+    <main
+      css={{
+        display: 'flex',
+        justifyContent: 'center',
+        padding: '10px 20px',
+      }}>
       <Outlet />
       <Routes>
         <Route path='/*' element={<Offer />} />

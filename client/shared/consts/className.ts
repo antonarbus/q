@@ -1,4 +1,5 @@
 export const className = {
+  items: 'items',
   item: 'item',
   paper: 'paper',
   itemActions: 'item-actions',
