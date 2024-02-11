@@ -24,6 +24,7 @@ export { formatBoqRowCellNumber } from './utils/formatBoqRowCellNumber'
 export { getNumberOfBoqItemsAbove } from './utils/getNumberOfBoqItemsAbove'
 export { saveItemsLocally } from './utils/saveItemsLocally'
 export { getTotalPriceAbove } from './utils/getTotalPriceAbove'
+export { fixItemImagesHeight, unfixItemImagesHeight } from './utils/itemImagesHeight'
 
 // store item getters
 export { getBoqRowFromStore } from './redux/getters/getBoqRowFromStore'
