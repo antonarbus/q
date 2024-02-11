@@ -2,12 +2,14 @@ import html2canvas from 'html2canvas'
 import { jsPDF } from 'jspdf'
 import { className } from '@shared/consts/className'
 
+// todo: add some spinner
+
 export const downloadPdf = async (): Promise<void> => {
   const itemsElement = document.querySelector(`.${className.items}`)
   if (!(itemsElement instanceof HTMLElement)) return
 
-  const width = itemsElement.clientWidth / 2
-  const height = itemsElement.clientHeight / 2
+  const width = itemsElement.clientWidth
+  const height = itemsElement.clientHeight
   const canvas = await html2canvas(itemsElement, {
     allowTaint: true,
     useCORS: true,
@@ -32,5 +34,6 @@ export const downloadPdf = async (): Promise<void> => {
     format: [width, height],
   })
   pdf.addImage(base64image, 'PNG', 0, 0, width, height, undefined, 'FAST')
+  // todo: add quotation number
   pdf.save('quotation.pdf')
 }
