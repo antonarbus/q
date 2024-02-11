@@ -2,7 +2,9 @@ import html2canvas from 'html2canvas'
 import { jsPDF } from 'jspdf'
 import { className } from '@shared/consts/className'
 
-// todo: add some spinner
+// todo: add some spinner, maybe into icon
+// todo: before pdf we need to enable all froalas
+// todo: images height to be set not on image load in froala, but somewhere else, now can not change its width, it squeezes
 
 export const downloadPdf = async (): Promise<void> => {
   const itemsElement = document.querySelector(`.${className.items}`)
