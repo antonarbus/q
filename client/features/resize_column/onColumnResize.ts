@@ -27,8 +27,8 @@ export const onColumnResize = ({ headerColumnElement, itemIndex, boqColumnKey }:
 }
 
 export const onColumnResizeStop = ({ headerColumnElement, itemIndex, boqColumnKey }: Props): void => {
-  fixItemImagesHeight()
   // todo: that is not enough, we somehow need to update image heights in store, no idea how
+  fixItemImagesHeight()
   const columnWidth = headerColumnElement.clientWidth
   dispatch(itemsSlice.actions.updateColWidthReducer({ itemIndex, width: columnWidth, boqColumnKey }))
   const itemWidth = headerColumnElement.closest(`.${className.paper}`)?.clientWidth
