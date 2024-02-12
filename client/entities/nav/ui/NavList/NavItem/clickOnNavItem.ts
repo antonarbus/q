@@ -1,11 +1,11 @@
 import { dispatch, getState } from '@lib_instances/store'
 import type { MouseEvent, MutableRefObject } from 'react'
 import { navSlice } from '../../../navSlice'
-import type { MenuItemTypes } from '../../../TMenuItem'
+import type { MenuItemType } from '../../../type/MenuItemType'
 
 type Props = {
   e: MouseEvent
-  navItem: MenuItemTypes | undefined
+  navItem: MenuItemType | undefined
   id: string
   navItemRef: MutableRefObject<HTMLLIElement>
   disabled: boolean

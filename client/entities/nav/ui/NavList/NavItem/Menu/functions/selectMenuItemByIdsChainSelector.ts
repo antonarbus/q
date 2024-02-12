@@ -1,13 +1,13 @@
 import { type RootState } from '@lib_instances/store'
-import { type MenuItemTypes } from '../../../../../TMenuItem'
+import { type MenuItemType } from '../../../../../type/MenuItemType'
 
 export const selectMenuItemByIdsChainSelector =
-  (idsToCurrentMenuItems: string[]) => (state: RootState): MenuItemTypes[] => {
+  (idsToCurrentMenuItems: string[]) => (state: RootState): MenuItemType[] => {
     const topLevelNavMenu = state.nav.navStructure[0]
     if (!topLevelNavMenu) return state.nav.navStructure
 
-    let clicked: MenuItemTypes[] = state.nav.navStructure
-    let tempMenu: MenuItemTypes[] = state.nav.navStructure
+    let clicked: MenuItemType[] = state.nav.navStructure
+    let tempMenu: MenuItemType[] = state.nav.navStructure
 
     idsToCurrentMenuItems.forEach((id: string) => {
       if (id === 'burger') {

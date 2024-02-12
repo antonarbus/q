@@ -1,5 +1,5 @@
 import { getState } from '@lib_instances/store'
-import type { MenuItemTypes } from '../../../../../TMenuItem'
+import type { MenuItemType } from '../../../../../type/MenuItemType'
 
 /**
  * returns clicked menu object from navStructure
@@ -11,10 +11,10 @@ import type { MenuItemTypes } from '../../../../../TMenuItem'
  * @param idsToCurrentMenuItems array of menu ids from the top to the clicked one
  */
 
-export const getMenuItemByIdsChain = (idsToCurrentMenuItems: string[]): MenuItemTypes[] => {
+export const getMenuItemByIdsChain = (idsToCurrentMenuItems: string[]): MenuItemType[] => {
   const navStructure = getState().nav.navStructure
-  let clicked: MenuItemTypes[] = navStructure
-  let tempMenu: MenuItemTypes[] = navStructure
+  let clicked: MenuItemType[] = navStructure
+  let tempMenu: MenuItemType[] = navStructure
   idsToCurrentMenuItems.forEach((id: string) => {
     if (id === 'burger') {
       if (!navStructure[0]) return clicked
