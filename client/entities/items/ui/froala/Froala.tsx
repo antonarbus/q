@@ -10,7 +10,7 @@ import { selectTextOrCloseToolbar } from './selectTextOrCloseToolbar'
 import { StaticHtml } from './StaticHtml'
 import { StaticHtmlBackgroundToFixBlinkIssue } from './StaticHtmlBackgroundToFixBlinkIssue'
 import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
-import { useViewPortObserver } from './useViewPortObserver'
+// import { useViewPortObserver } from './useViewPortObserver'
 
 export type FroalaProps = {
   htmlGetter: () => string
@@ -46,9 +46,10 @@ export const Froala = ({
   const { froalaHeightRef } = useFixedHeightForAnimation({ froalaElementRef })
 
   const isItemFroala = useSelectorTyped(state => state.items[itemIndex]?.isFroala)
-  const { observerRef, isInsideViewPort } = useViewPortObserver()
+  // todo: disabled viewport observer for time being otherwise total price being out of view is not calculated and pdf produces incorrect file, maybe we do not even need it
+  // const { observerRef, isInsideViewPort } = useViewPortObserver()
   const isAppFroala = useSelectorTyped(state => state.app.isFroala)
-  const showEditableHtml = isAppFroala && isItemFroala && isInsideViewPort
+  const showEditableHtml = isAppFroala && isItemFroala // && isInsideViewPort
 
   return (
     <FroalaProvider
@@ -83,7 +84,7 @@ export const Froala = ({
       >
         <div
           className='view-port-observer'
-          ref={observerRef}
+          // ref={observerRef}
           css={{
             width: '100%',
             position: 'relative',
