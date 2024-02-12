@@ -18,5 +18,6 @@ export const fixItemImagesHeight = (): void => {
   itemImages.forEach(imageElement => {
     if (!(imageElement instanceof HTMLElement)) return
     imageElement.style.height = imageElement.clientHeight + 'px'
+    // todo: that is not enough, we somehow need to update image heights in store, no idea how
   })
 }

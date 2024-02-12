@@ -1,4 +1,4 @@
-export type { MenuItemTypes } from './TMenuItem'
+export type { MenuItemType as MenuItemTypes } from './type/MenuItemType'
 export { navSlice } from './navSlice'
 export { useDisableNavItems } from './useDisableNavItems'
 export { useMediaQueryValues } from './ui/functions/useMediaQueryValues'

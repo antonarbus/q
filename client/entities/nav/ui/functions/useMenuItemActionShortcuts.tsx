@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useEffectOnce } from 'react-use'
 import { notify } from '@shared/ui/top_msg/notify'
-import { type MenuItemTypes } from '../../TMenuItem'
+import { type MenuItemType } from '../../type/MenuItemType'
 
 type Shortcuts = {
   name: string
@@ -11,9 +11,9 @@ type Shortcuts = {
 }
 
 const shortcuts: Shortcuts[] = []
-let arr: MenuItemTypes[] = []
+let arr: MenuItemType[] = []
 
-const searchForShortcutsInNavStructure = ({ navStructure }: { navStructure: MenuItemTypes[] }): void => {
+const searchForShortcutsInNavStructure = ({ navStructure }: { navStructure: MenuItemType[] }): void => {
   arr = navStructure
 
   arr.forEach((menuItem) => {
@@ -36,7 +36,7 @@ const searchForShortcutsInNavStructure = ({ navStructure }: { navStructure: Menu
 }
 
 type Props = {
-  navStructure: MenuItemTypes[]
+  navStructure: MenuItemType[]
 }
 
 export const useMenuItemActionShortcuts = ({ navStructure }: Props): void => {

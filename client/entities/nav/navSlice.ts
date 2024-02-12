@@ -2,10 +2,10 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
 import type { ItemsMediaQueryWidths } from '@widgets/nav'
 import { setMenuItemPropValue } from './setMenuItemPropValue'
-import type { MenuItemTypes } from './TMenuItem'
+import type { MenuItemType } from './type/MenuItemType'
 
 const initialState = {
-  navStructure: [] as MenuItemTypes[],
+  navStructure: [] as MenuItemType[],
   burger: { isOpen: false },
   mediaEnabled: true,
   mediaQueryWidth: {
@@ -26,7 +26,7 @@ export const navSlice = createSlice({
   initialState,
   reducers: {
     addNavStructure: (state, action: PayloadAction<{
-      navStructure: MenuItemTypes[]
+      navStructure: MenuItemType[]
     }>) => {
       const { navStructure } = action.payload
       state.navStructure = navStructure
@@ -135,6 +135,28 @@ export const navSlice = createSlice({
         id: 'account',
         prop: 'isHidden',
         value: true,
+      })
+    },
+    showLoadingIcon: (state, action: PayloadAction<{
+      id: string
+    }>) => {
+      const { id } = action.payload
+      setMenuItemPropValue({
+        menu: state.navStructure,
+        id,
+        prop: 'isLoading',
+        value: true,
+      })
+    },
+    hideLoadingIcon: (state, action: PayloadAction<{
+      id: string
+    }>) => {
+      const { id } = action.payload
+      setMenuItemPropValue({
+        menu: state.navStructure,
+        id,
+        prop: 'isLoading',
+        value: false,
       })
     },
   },

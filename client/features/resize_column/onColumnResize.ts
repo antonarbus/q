@@ -9,7 +9,7 @@ type Props = {
 }
 
 export const onColumnResizeStart = ({ headerColumnElement, itemIndex, boqColumnKey }: Props): void => {
-  unfixItemImagesHeight()
+  // unfixItemImagesHeight()
   const width = headerColumnElement.clientWidth
   dispatch(itemsSlice.actions.disableFroalaReducer({ itemIndex }))
   dispatch(itemsSlice.actions.updateColWidthReducer({ itemIndex, width, boqColumnKey }))

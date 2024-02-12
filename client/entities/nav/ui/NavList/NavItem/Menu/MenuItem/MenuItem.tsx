@@ -2,16 +2,17 @@ import { dispatch, useSelectorTyped } from '@lib_instances/store'
 import type { MouseEvent } from 'react'
 import { FaChevronRight } from 'react-icons/fa'
 import { navSlice } from '../../../../../navSlice'
-import { type MenuItemTypes } from '../../../../../TMenuItem'
+import { type MenuItemType } from '../../../../../type/MenuItemType'
 import { Icon } from '../../Icon'
 import { RoundSpanForIcon } from '../../RoundSpanForIcon'
+import { SpinnerIcon } from '../../SpinnerIcon'
 import { clickOnMenuItem } from './function/clickOnMenuItem'
 import { MenuItemStyled } from './MenuItemStyled'
 import { Shortcut } from './Shortcut'
 import { TextInMenu } from './TextInMenu'
 
 type Props = {
-  menuItem: MenuItemTypes
+  menuItem: MenuItemType
   hoveredMenuItemIndex: number
 }
 
@@ -23,6 +24,7 @@ export const MenuItem = ({ menuItem, hoveredMenuItemIndex }: Props): JSX.Element
   const link = menuItem.link
   const shortcut = menuItem.shortcut
   const disabled = !!menuItem.disabled
+  const isLoading = menuItem?.isLoading
 
   return (
     <MenuItemStyled
@@ -35,7 +37,8 @@ export const MenuItem = ({ menuItem, hoveredMenuItemIndex }: Props): JSX.Element
       }}
       state={{ isHovered }}
     >
-      {isIcon && <Icon icon={menuItem.icon} disabled={disabled} />}
+      {isIcon && !isLoading && <Icon icon={menuItem.icon} disabled={disabled} />}
+      {isIcon && isLoading && <SpinnerIcon />}
       <TextInMenu
         reserveSpaceForIcon={isNextMenuAvailable}
         name={menuItem.name}
