@@ -4,7 +4,6 @@ import { jsPDF } from 'jspdf'
 import { navSlice } from '@entities/nav'
 import { className } from '@shared/consts/className'
 
-// todo: before pdf we need to enable all froalas
 // todo: images height to be set not on image load in froala, but somewhere else, now can not change its width, it squeezes
 
 export const downloadPdf = async (): Promise<void> => {
@@ -13,7 +12,7 @@ export const downloadPdf = async (): Promise<void> => {
 
   dispatch(navSlice.actions.showLoadingIcon({ id: 'pdf' }))
 
-  // show spinner icon, then process canvas & pdf
+  //* show spinner icon, then process canvas & pdf
   setTimeout(async() => {
     const width = itemsElement.clientWidth
     const height = itemsElement.clientHeight
