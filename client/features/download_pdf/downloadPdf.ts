@@ -4,8 +4,6 @@ import { jsPDF } from 'jspdf'
 import { navSlice } from '@entities/nav'
 import { className } from '@shared/consts/className'
 
-// todo: images height to be set not on image load in froala, but somewhere else, now can not change its width, it squeezes
-
 export const downloadPdf = async (): Promise<void> => {
   const itemsElement = document.querySelector(`.${className.items}`)
   if (!(itemsElement instanceof HTMLElement)) return
