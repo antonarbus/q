@@ -9,7 +9,7 @@ type Props = {
 }
 
 export const onColumnResizeStart = ({ headerColumnElement, itemIndex, boqColumnKey }: Props): void => {
-  // unfixItemImagesHeight()
+  unfixItemImagesHeight()
   const width = headerColumnElement.clientWidth
   dispatch(itemsSlice.actions.disableFroalaReducer({ itemIndex }))
   dispatch(itemsSlice.actions.updateColWidthReducer({ itemIndex, width, boqColumnKey }))
@@ -27,7 +27,6 @@ export const onColumnResize = ({ headerColumnElement, itemIndex, boqColumnKey }:
 }
 
 export const onColumnResizeStop = ({ headerColumnElement, itemIndex, boqColumnKey }: Props): void => {
-  // todo: that is not enough, we somehow need to update image heights in store, no idea how
   fixItemImagesHeight()
   const columnWidth = headerColumnElement.clientWidth
   dispatch(itemsSlice.actions.updateColWidthReducer({ itemIndex, width: columnWidth, boqColumnKey }))

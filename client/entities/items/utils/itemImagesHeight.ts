@@ -1,14 +1,16 @@
+import { dispatch } from '@lib_instances/store'
 import { className } from '@shared/consts/className'
+import { itemsSlice } from '../redux/itemsSlice'
 
 export const unfixItemImagesHeight = (): void => {
-  console.log('unfix the height')
   const itemImages = document.querySelectorAll(`.${className.item} img`)
   if (itemImages === undefined) return
-  console.log('🚀 ~ itemImages:', itemImages)
   itemImages.forEach(imageElement => {
     if (!(imageElement instanceof HTMLElement)) return
     imageElement.style.height = 'auto'
   })
+
+  dispatch(itemsSlice.actions.unfixImagesHeightReducer())
 }
 
 export const fixItemImagesHeight = (): void => {
@@ -18,6 +20,9 @@ export const fixItemImagesHeight = (): void => {
   itemImages.forEach(imageElement => {
     if (!(imageElement instanceof HTMLElement)) return
     imageElement.style.height = imageElement.clientHeight + 'px'
-    // todo: that is not enough, we somehow need to update image heights in store, no idea how
+    dispatch(itemsSlice.actions.fixImagesHeightReducer({
+      imageHeight: imageElement.clientHeight,
+      imageId: imageElement.id,
+    }))
   })
 }

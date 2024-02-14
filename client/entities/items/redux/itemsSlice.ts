@@ -4,6 +4,7 @@ import { deleteBoqRowReducer } from './reducers/deleteBoqRowReducer'
 import { deleteItemReducer } from './reducers/deleteItemReducer'
 import { disableFroalaReducer } from './reducers/disableFroalaReducer'
 import { enableFroalaReducer } from './reducers/enableFroalaReducer'
+import { fixImagesHeightReducer } from './reducers/fixImagesHeightReducer'
 import { hideBoqItemPinsReducer } from './reducers/hideBoqItemPinsReducer'
 import { hideBoqPriceCellPinsReducer } from './reducers/hideBoqPriceCellPinsReducer'
 import { hideBoqRowCellPinReducer } from './reducers/hideBoqRowCellPinReducer'
@@ -21,6 +22,7 @@ import { resetItemsToDefaultReducer } from './reducers/resetItemsToDefaultReduce
 import { showBoqPriceCellPinsReducer } from './reducers/showBoqPriceCellPinsReducer'
 import { showBoqRowCellPinReducer } from './reducers/showBoqRowCellPinReducer'
 import { showItemMsgReducer } from './reducers/showItemMsgReducer'
+import { unfixImagesHeightReducer } from './reducers/unfixImagesHeightReducer'
 import { updateBoqCellReducer } from './reducers/updateBoqCellReducer'
 import { updateBoqColumnNameTextReducer } from './reducers/updateBoqColumnNameTextReducer'
 import { updateBoqHeaderTextReducer } from './reducers/updateBoqHeaderTextReducer'
@@ -71,6 +73,8 @@ export const itemsSlice = createSlice({
     updateSubTotalPriceReducer,
     updatePriceTitleReducer,
     updatePriceReducer,
+    fixImagesHeightReducer,
+    unfixImagesHeightReducer,
   },
 })
 
