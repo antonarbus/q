@@ -9,6 +9,7 @@ type Props = {
 }
 
 export const onColumnResizeStart = ({ headerColumnElement, itemIndex, boqColumnKey }: Props): void => {
+  // todo: add also to item resize, boq resize and maybe window resize
   unfixItemImagesHeight()
   const width = headerColumnElement.clientWidth
   dispatch(itemsSlice.actions.disableFroalaReducer({ itemIndex }))
@@ -17,7 +18,6 @@ export const onColumnResizeStart = ({ headerColumnElement, itemIndex, boqColumnK
 }
 
 export const onColumnResize = ({ headerColumnElement, itemIndex, boqColumnKey }: Props): void => {
-  // unfixItemImagesHeight()
   const width = headerColumnElement.clientWidth
   const column = getBoqColumnFromStore({ itemIndex, boqColumnKey })
   if (column === undefined) return
