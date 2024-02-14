@@ -6,6 +6,7 @@ import 'froala-editor/js/plugins.pkgd.min.js'
 import 'froala-editor/js/third_party/font_awesome.min.js'
 import './froala_editor.pkgd.min.css'
 import { useSelectorTyped } from '@lib_instances/store'
+import { nanoid } from 'nanoid'
 import type { MouseEvent } from 'react'
 import { useEffect } from 'react'
 import { apiUrl } from 'server/apiUrls'
@@ -84,6 +85,7 @@ export const useStartFroala = (): void => {
             'image.loaded': function (props: { '0': HTMLImageElement }) {
               const imageElement = props['0']
               imageElement.style.height = imageElement.clientHeight + 'px'
+              imageElement.id = `img-${nanoid(3)}`
             },
             initialized: (): void => {
               window.froalas.push(editorRef)
