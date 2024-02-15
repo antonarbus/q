@@ -1,10 +1,10 @@
 // https://www.typescriptlang.org/tsconfig#target
 {
   "compilerOptions": {
-    "target": "ES6",
+    "target": "ESNext",
     "rootDir": ".",
     "outDir": "../build/server",
-    "module": "commonjs",
+    "module": "ESNext",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
