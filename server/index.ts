@@ -21,13 +21,13 @@ import { multerMiddleware } from './middleware/multerMiddleware'
 import type { Req, Res } from './types'
 
 const app = express()
-await connectToDb()
+// await connectToDb() // should we await for db connection or not?
+void connectToDb()
 app.use(morgan('dev')) // http logs in terminal
 app.use(express.json()) // parses incoming requests with JSON because we use lots of json, let it be default
 app.use(cookieParser())
 app.use(cors())
 app.use(multerMiddleware.single('file'))
-
 app.set('trust proxy', true) // for app engine
 
 app.get(apiUrl.root, (_req: Req, res: Res) => res.send('i am express.js'))
@@ -48,7 +48,5 @@ app.use(errorHandlerMiddleware)
 
 const port = process.env.PORT_BACK_END
 const domain = process.env.DOMAIN
-
-app.listen(port, () => {
-  console.info(`server started at ${domain}:${port}`)
-})
+const tellServerStarted = (): void => { console.info(`server started at ${domain}:${port}`) }
+app.listen(port, tellServerStarted)
