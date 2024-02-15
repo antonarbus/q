@@ -86,6 +86,7 @@ export const useStartFroala = (): void => {
               const imageElement = props['0']
               imageElement.style.height = imageElement.clientHeight + 'px'
               imageElement.id = `img-${nanoid(3)}`
+              imageElement.classList.add('fr-rounded')
             },
             initialized: (): void => {
               window.froalas.push(editorRef)
