@@ -15,7 +15,7 @@ const UserSchema = new Schema({
   },
   registeredAt: {
     type: Date,
-    default: Date.now,
+    default: () => Date.now,
   },
   roles: {
     type: [String],
@@ -23,7 +23,7 @@ const UserSchema = new Schema({
   },
   loggedAt: {
     type: Date,
-    default: Date.now,
+    default: () => Date.now,
   },
   isActivated: {
     type: Boolean,
