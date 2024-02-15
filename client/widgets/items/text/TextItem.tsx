@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { ItemActions } from '@features/item_actions'
-import { onTextItemResizeStop } from '@features/resize_item'
+import { onTextItemResizeStart, onTextItemResizeStop } from '@features/resize_item'
 import { updateTextItem } from '@features/update_cell'
 import { Froala, Item, getItemTextHtmlFromStore, textItemCellStyle, useItem } from '@entities/items'
 import { type FroalaEditor } from '@shared/types'
@@ -11,6 +11,7 @@ export const TextItem = (): JSX.Element => {
 
   return (
     <Item
+      onItemResizeStart={onTextItemResizeStart}
       onItemResizeStop={onTextItemResizeStop}
       itemActions={<ItemActions />}
     >

@@ -1,10 +1,11 @@
 import { dispatch, getState } from '@lib_instances/store'
-import { type BoqItem, itemsSlice, saveItemsLocally, getBoqColumnFromStore, boqColumnKey } from '@entities/items'
+import { type BoqItem, itemsSlice, saveItemsLocally, getBoqColumnFromStore, boqColumnKey, unfixItemImagesHeight, fixItemImagesHeight } from '@entities/items'
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
 
 let initDescriptionColumnWidth = 0 // can be global var for different boqItems as we can change width of one item at a time
 
 export const onBoqItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, elementRef: itemElement }) => {
+  unfixItemImagesHeight()
   dispatch(itemsSlice.actions.disableFroalaReducer({ itemIndex }))
   dispatch(itemsSlice.actions.hideBoqItemPinsReducer({ itemIndex }))
 
@@ -23,6 +24,7 @@ export const onBoqItemResize: OnItemResize = ({ itemIndex, e, direction, element
 }
 
 export const onBoqItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction, elementRef: itemElement, delta }) => {
+  fixItemImagesHeight()
   const descriptionHeaderElement = itemElement.querySelector('.th.description')
   if (!(descriptionHeaderElement instanceof HTMLElement)) return
 
