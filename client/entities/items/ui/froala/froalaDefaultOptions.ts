@@ -50,6 +50,8 @@ export const froalaDefaultOptions = {
       buttonsVisible: 4,
     },
   },
+  imageInsertButtons: ['imageBack', '|', 'imageUpload', 'imageByURL'],
+  linkInsertButtons: ['linkBack'],
   imageEditButtons: ['imageReplace', 'imageAlign', 'imageRemove', '|', 'imageLink', 'linkOpen', 'linkEdit', 'linkRemove', '-', 'imageDisplay', 'imageStyle', 'imageAlt', 'imageSize'],
   fontSize: ['6', '8', '9', '10', '11', '12', '13', '14', '15', '16', '18', '20', '24', '30', '36', '48', '60', '72', '96'],
   fontFamily: {
