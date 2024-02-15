@@ -2,6 +2,7 @@
   "name": "quotation.app",
   "private": true,
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "start": "concurrently \"npm run back\" \"npx wait-on http://localhost:3006 && npm run front\"",
     "stop": "npx kill-port 3005 3006",
