@@ -1,7 +1,8 @@
-import type { HydratedDocumentFromSchema, InferSchemaType } from 'mongoose'
+// import type { HydratedDocumentFromSchema, InferSchemaType } from 'mongoose'
 import { model, Schema } from 'mongoose'
 
-const UserSchema = new Schema({
+// define schema for documents in collection
+const userSchema = new Schema({
   email: {
     type: String,
     required: [true, 'email is required'],
@@ -37,10 +38,13 @@ const UserSchema = new Schema({
   },
 })
 
-export const UserModel = model('Users', UserSchema)
+// define model, a class with which we construct documents
+// each document is a user with props as in schema
+// * "users" collection will be created automatically based on this model
+export const User = model('user', userSchema)
 
 // Type of an hydrated document (with all the getters, etc...)
-export type HydratedUserModel = HydratedDocumentFromSchema<typeof UserSchema>
+// export type HydratedUserModel = HydratedDocumentFromSchema<typeof UserSchema>
 
 // Only the fields defined in the schema
-export type UserModelProps = InferSchemaType<typeof UserSchema>
+// export type UserModelProps = InferSchemaType<typeof UserSchema>

@@ -11,6 +11,7 @@ import { logoutRouter } from './api/logoutRouter'
 import { refreshRouter } from './api/refreshRouter'
 import { registerRouter } from './api/registerRouter'
 import { setBucketCors } from './api/setBucketCors'
+import { testRouter } from './api/testRouter'
 import { uploadRouter } from './api/uploadRouter'
 import { userEmailRouter } from './api/userEmailRouter'
 import { usersRouter } from './api/usersRouter'
@@ -33,6 +34,7 @@ app.set('trust proxy', true) // for app engine
 app.get(apiUrl.root, (_req: Req, res: Res) => res.send('i am express.js'))
 app.get(apiUrl.api, (_req: Req, res: Res) => res.json({ message: '/api' }))
 app.use(apiUrl.hi, hiRouter)
+app.use(apiUrl.test, testRouter)
 app.use(apiUrl.register, registerRouter)
 app.use(apiUrl.login, loginRouter)
 app.use(apiUrl.logout, logoutRouter)

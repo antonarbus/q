@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { jwtDecode } from 'jwt-decode'
-import { UserModel } from '../db/models/user.model'
+import { User } from '../db/models/userModel'
 import type { JwtPayloadExtended } from '../services/jwt'
 import type { Next, Req, Res } from '../types'
 
@@ -42,7 +42,7 @@ logoutRouter.get('/', async (req: Req, res: Res, next: Next) => {
     res.clearCookie('refreshJwtToken')
 
     // delete token from db
-    const user = await UserModel.findOne({ refreshJwtToken })
+    const user = await User.findOne({ refreshJwtToken })
 
     if (!user) {
       res.json({

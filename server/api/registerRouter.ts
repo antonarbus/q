@@ -3,7 +3,7 @@ import express from 'express'
 import { body, validationResult } from 'express-validator'
 import { nanoid } from 'nanoid'
 import { apiUrl } from '../apiUrls'
-import { UserModel } from '../db/models/user.model'
+import { User } from '../db/models/userModel'
 // import { sendMail } from '../services/mail/sendMail'
 import type { Next, ReqWithBody, Res } from '../types'
 const domain = process.env.DOMAIN
@@ -41,7 +41,7 @@ registerRouter.post(
       // check if user already exists
       // await connectToDb()
       const email = req.body.email.toLowerCase()
-      const user = await UserModel.findOne({ email })
+      const user = await User.findOne({ email })
       if (user) {
         return res.json({
           status: 'error',
@@ -52,7 +52,7 @@ registerRouter.post(
       // save user to db
       const password = await bcrypt.hash(req.body.password, 10)
       const activationLink = `${domain}:${port}${apiUrl.activate}/${nanoid(5)}`
-      await UserModel.create({ email, password, activationLink })
+      await User.create({ email, password, activationLink })
 
       // send email with activation link
       // const subject = 'Activation for quotation.app'
