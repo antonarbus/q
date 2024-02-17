@@ -1,6 +1,6 @@
 import express from 'express'
 import { apiUrl } from '../apiUrls'
-import { UserModel } from '../db/models/user.model'
+import { User } from '../db/models/userModel'
 import type { Next, Req, Res } from '../types'
 const domain = process.env.DOMAIN
 const port = process.env.PORT_FRONT_END
@@ -12,7 +12,7 @@ activateRouter.get(
   async (req: Req, res: Res, next: Next) => {
     try {
       const activationLink = `${domain}:${port}${apiUrl.activate}/${req.params.link}`
-      const user = await UserModel.findOne({ activationLink })
+      const user = await User.findOne({ activationLink })
       if (!user) {
         res.json({
           status: 'error',

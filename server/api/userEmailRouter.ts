@@ -1,5 +1,5 @@
 import express from 'express'
-import { UserModel } from '../db/models/user.model'
+import { User } from '../db/models/userModel'
 import { verifyTokenMiddleware } from '../middleware/verifyTokenMiddleware'
 import type { Next, ReqWithBody, Res } from '../types'
 
@@ -23,7 +23,7 @@ const getUserEmail = async (req: ReqWithBody<Body>, res: Res, next: Next): Promi
       res.json({ status: 'ups', message: 'no email in req.body, probably not authorized' })
       return
     }
-    const user = await UserModel.findOne({ email })
+    const user = await User.findOne({ email })
     console.info('user', user)
     const response = { status: 'ok', message: 'email is returned', email: user?.email }
     res.json(response)

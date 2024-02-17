@@ -2,6 +2,7 @@ export const apiUrl = {
   root: '/',
   api: '/api',
   hi: '/api/hi',
+  test: '/api/test',
   register: '/api/register',
   login: '/api/login',
   logout: '/api/logout',
@@ -13,4 +14,4 @@ export const apiUrl = {
   upload: '/api/upload',
   setBucketCors: '/api/set-bucket-cors',
   getBucketCors: '/api/get-bucket-cors',
-}
+} as const

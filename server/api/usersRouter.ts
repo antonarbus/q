@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { UserModel } from '../db/models/user.model'
+import { User } from '../db/models/userModel'
 import { verifyTokenMiddleware } from '../middleware/verifyTokenMiddleware'
 import type { Next, Res } from '../types'
 
@@ -11,7 +11,7 @@ usersRouter.get(
   verifyTokenMiddleware,
   async (_req, res: Res, next: Next) => {
     try {
-      const users = await UserModel.find()
+      const users = await User.find()
       res.json({ status: 'ok', message: 'all users', users })
     } catch (error) {
       next(error)
