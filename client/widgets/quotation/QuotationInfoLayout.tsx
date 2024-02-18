@@ -32,6 +32,9 @@ export const QuotationInfoLayout = ({
           alignItems: 'center',
           cursor: 'pointer',
           gap: '5px',
+          ':hover svg': {
+            fill: '#3c5588 !important',
+          },
         }}
       >
         <FaInfoCircle
