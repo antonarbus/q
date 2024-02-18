@@ -1,4 +1,4 @@
-import { dispatch } from '@lib_instances/store'
+import { dispatch, getState } from '@lib_instances/store'
 import { domToPng } from 'modern-screenshot'
 import { navSlice } from '@entities/nav'
 import { className } from '@shared/consts/className'
@@ -33,7 +33,8 @@ export const downloadPdf = async (): Promise<void> => {
     const pdfDataUrl = URL.createObjectURL(blobImage)
     const downloadLink = document.createElement('a')
     downloadLink.href = pdfDataUrl
-    downloadLink.download = 'quotation.pdf'
+    const quotationId = getState().quotation.id
+    downloadLink.download = `quotation - ${quotationId}.pdf`
     document.body.appendChild(downloadLink)
     downloadLink.click()
     document.body.removeChild(downloadLink)
