@@ -1,11 +1,23 @@
+import { localStorageKey } from '@shared/consts/localStorageKey'
 import { jsonParseSafe } from '@shared/lib/jsonParseSafe'
-import { defaultQuotation } from '../model/defaultQuotation'
+import { getDefaultQuotation } from '../model/getDefaultQuotation'
 import { type Quotation } from '../types'
 
 export const getDefaultOrLocalQuotation = (): Quotation => {
-  const quotationFromLocalStorage = localStorage.getItem('quotation')
-  if (quotationFromLocalStorage === null) return defaultQuotation
+  console.log(666)
+  const defaultQuotation = getDefaultQuotation()
+  const quotationFromLocalStorage = localStorage.getItem(localStorageKey.quotation)
+
+  if (quotationFromLocalStorage === null) {
+    localStorage.setItem(localStorageKey.quotation, JSON.stringify(defaultQuotation))
+    return defaultQuotation
+  }
+
   const quotation = jsonParseSafe<Quotation>(quotationFromLocalStorage)
-  if (quotation === undefined) return defaultQuotation
+  if (quotation === undefined) {
+    localStorage.setItem(localStorageKey.quotation, JSON.stringify(defaultQuotation))
+    return defaultQuotation
+  }
+
   return quotation
 }
