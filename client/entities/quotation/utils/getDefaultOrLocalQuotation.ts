@@ -4,7 +4,6 @@ import { getDefaultQuotation } from '../model/getDefaultQuotation'
 import { type Quotation } from '../types'
 
 export const getDefaultOrLocalQuotation = (): Quotation => {
-  console.log(666)
   const defaultQuotation = getDefaultQuotation()
   const quotationFromLocalStorage = localStorage.getItem(localStorageKey.quotation)
 
