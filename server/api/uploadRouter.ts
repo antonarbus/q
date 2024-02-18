@@ -20,8 +20,8 @@ const upload = async (req: Req, res: Res, next: Next): Promise<void> => {
   try {
     if (req.file === undefined) return
 
-    const { fileName, link } = await uploadFileIntoMemory(req.file) // upload file
-    await bucket.file(fileName).makePublic() // make file public
+    const { fileName, link } = await uploadFileIntoMemory(req.file)
+    await bucket.file(fileName).makePublic()
 
     const fileInfo = {
       link,
