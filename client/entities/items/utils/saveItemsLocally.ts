@@ -1,4 +1,5 @@
 import { getState } from '@lib_instances/store'
+import { localStorageKey } from '@shared/consts/localStorageKey'
 import { itemType } from '../consts/itemType'
 import type { Item } from '../types'
 import { tellItemSavedLocally } from './tellItemSavedLocally'
@@ -26,7 +27,7 @@ export const saveItemsLocally = ({
     })
   })
 
-  localStorage.setItem('items', JSON.stringify(cleanedItems))
+  localStorage.setItem(localStorageKey.items, JSON.stringify(cleanedItems))
 
   if (msgAboveItemWithIndex !== undefined) {
     tellItemSavedLocally({
