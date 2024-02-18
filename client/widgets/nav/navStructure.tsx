@@ -9,6 +9,7 @@ import { IoDocumentOutline, IoDocumentsOutline, IoSaveOutline, IoShareOutline } 
 import { downloadPdf } from '@features/download_pdf'
 import { logout } from '@features/log_out'
 import { resetItems } from '@features/reset_items'
+import { saveQuotation } from '@features/save_quotation'
 import type { MenuItemTypes } from '@entities/nav'
 import logo from './logo.svg'
 
@@ -128,7 +129,9 @@ export const navStructure: MenuItemTypes[] = [
         icon: <IoSaveOutline />,
         isHidden: false,
         name: 'Save',
-        link: '/linkA',
+        func: () => {
+          void saveQuotation()
+        },
         shortcut: ['control', 'z'],
       },
       {
