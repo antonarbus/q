@@ -10,7 +10,7 @@ import { TextItem } from './text/TextItem'
 
 export const Items = (): JSX.Element => {
   const items = useSelectorTyped(state => state.items, itemsShapeEqualityFn)
-  const reRenderOffer = useSelectorTyped(state => state.app.reRenderOffer)
+  const reRenderOffer = useSelectorTyped(state => state.general.reRenderOffer)
 
   return (
     <DraggableItemsContainer
