@@ -38,7 +38,7 @@ const userSchema = new Schema({
   },
 })
 
-// define model, a class with which we construct documents
+// define model - a class with which we construct documents
 // each document is a user with props as in schema
 // * "users" collection will be created automatically based on this model
 export const User = model('user', userSchema)

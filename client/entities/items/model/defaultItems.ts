@@ -23,16 +23,16 @@ export const defaultItems: Item[] = [
         <br>
 
         <ul>
-          <li style="text-align: left;"><span>write, select and <span style="color: rgb(226, 80, 65);">format</span> text</span></li>
-          <li style="text-align: left;"><span>insert tables, drop <a href="911.pdf" target="_blank" rel="noopener noreferrer">files</a>, images, attach videos</span></li>
-          <li style="text-align: left;"><span>copy, cut, delete, insert, sort, resize blocks and rows</span></li>
-          <li style="text-align: left;"><span>calculate prices</span></li>
-          <li style="text-align: left;"><span>auto save data in browser</span></li>
-          <li style="text-align: left;"><span>store and share quotations</span></li>
-          <li style="text-align: left;"><span>review, track and update offers</span></li>
-          <li style="text-align: left;"><span>save and search though products portfolio</span></li>
-          <li style="text-align: left;"><span>copy items from other quotations</span></li>
-          <li style="text-align: left;"><span>all elements are editable and customizable</span></li>
+          <li>write, select and <span style="color: rgb(226, 80, 65);">format</span> text</li>
+          <li>insert tables, drop <a href="911.pdf" target="_blank" rel="noopener noreferrer">files</a>, images, attach videos</li>
+          <li>copy, cut, delete, insert, sort, resize blocks and rows</li>
+          <li>calculate prices</li>
+          <li>auto save data in browser</li>
+          <li>store and share quotations</li>
+          <li>review, track and update offers</li>
+          <li>save and search though products portfolio</li>
+          <li>copy items from other quotations</li>
+          <li>all elements are editable and customizable</li>
         </ul>
       `,
       value: null,
