@@ -3,18 +3,20 @@ import { type TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux
 import { copyReducer } from '@entities/copy/copySlice'
 import { itemsReducer } from '@entities/items/redux/itemsSlice'
 import { navReducer } from '@entities/nav/navSlice'
+import { quotationReducer } from '@entities/quotation/redux/quotationSlice'
 import { spinnerReducer } from '@entities/spinner/spinnerSlice'
-import { userReducer } from '@entities/user/userSlice'
+import { userReducer } from '@entities/user/redux/userSlice'
 import { generalReducer } from '@shared/general/generalSlice'
 
 const store = configureStore({
   reducer: {
-    app: generalReducer,
+    general: generalReducer,
     user: userReducer,
     nav: navReducer,
     items: itemsReducer,
     spinner: spinnerReducer,
     copy: copyReducer,
+    quotation: quotationReducer,
   },
   middleware: (defaultMiddleware) => defaultMiddleware({ serializableCheck: false }), // we have not serializable components and functions in nav structure
   devTools: process.env.NODE_ENV !== 'production',

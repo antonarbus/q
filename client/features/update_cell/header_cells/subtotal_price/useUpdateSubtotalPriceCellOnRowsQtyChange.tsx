@@ -7,7 +7,7 @@ export const useUpdateSubtotalPriceCellOnRowsQtyChange = (): void => {
   const { itemIndex } = useItem()
   const { subTotalPriceEditorRef } = useBoqItem()
 
-  const isFroala = useSelectorTyped(state => state.app.isFroala)
+  const isFroala = useSelectorTyped(state => state.general.isFroala)
   const isItemFroala = useSelectorTyped(state => state.items[itemIndex]?.isFroala)
 
   useUpdateEffect(() => {

@@ -1,7 +1,7 @@
 import { dispatch } from '@lib_instances/store'
 import axios from 'axios'
 import { apiUrl } from 'server/apiUrls'
-import { userSlice } from '../userSlice'
+import { userSlice } from '../redux/userSlice'
 import { token } from './token'
 
 export const axiosWithAuth = axios.create({ withCredentials: true })

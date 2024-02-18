@@ -48,7 +48,7 @@ export const Froala = ({
   const isItemFroala = useSelectorTyped(state => state.items[itemIndex]?.isFroala)
   // todo: disabled viewport observer for time being otherwise total price being out of view is not calculated and pdf produces incorrect file, maybe we do not even need it
   // const { observerRef, isInsideViewPort } = useViewPortObserver()
-  const isAppFroala = useSelectorTyped(state => state.app.isFroala)
+  const isAppFroala = useSelectorTyped(state => state.general.isFroala)
   const showEditableHtml = isAppFroala && isItemFroala // && isInsideViewPort
 
   return (
