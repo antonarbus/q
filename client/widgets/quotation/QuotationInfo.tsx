@@ -15,6 +15,7 @@ export const QuotationInfo = (): JSX.Element => {
         color: 'grey',
         paddingRight: '15px',
         height: '20px',
+        translate: '0px 5px',
       }}
     >
       <Box
