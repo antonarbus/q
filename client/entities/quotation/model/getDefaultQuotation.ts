@@ -2,7 +2,7 @@
 import { customAlphabet } from 'nanoid'
 import { type Quotation } from '../types'
 
-const nanoid = customAlphabet('1234567890abcdefghijklmnopqrstuvwxyz')
+const nanoid = customAlphabet('1234567890abcdefghijkmnopqrstuvwxyz')
 
 export const getDefaultQuotation = (): Quotation => {
   return {

@@ -30,7 +30,7 @@ export const DraggableItemsContainer: React.ComponentClass<SortableContainerExte
         justifyContent: 'center',
         alignItems: 'center',
         maxWidth: '100%',
-        padding: '20px 5px',
+        padding: '10px 5px 20px 5px',
       }}
     >
       {children}
