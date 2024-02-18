@@ -25,9 +25,7 @@ export const QuotationInfoLayout = ({
     >
       <Box
         component='button'
-        onClick={() => {
-          alert('show popup with all info with proper route')
-        }}
+        onClick={onClick}
         sx={{
           all: 'unset',
           display: 'flex',
