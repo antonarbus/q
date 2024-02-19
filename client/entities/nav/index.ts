@@ -14,6 +14,6 @@ export { Logo } from './ui/Logo'
 export { NavList } from './ui/NavList'
 
 // utils
-export { showLoadingAtNavIcon } from './utils/showLoadingAtNavIcon'
-export { showSuccessAtNavIcon } from './utils/showSuccessAtNavIcon'
-export { showErrorAtNavIcon } from './utils/showErrorAtNavIcon'
+export { showLoadingNavIcon } from './utils/showLoadingNavIcon'
+export { showSuccessNavIcon } from './utils/showSuccessNavIcon'
+export { showErrorNavIcon } from './utils/showErrorNavIcon'

@@ -6,12 +6,12 @@ type Props = {
   navMenuItemIdKey: NavMenuItemIdKey
 }
 
-export const showSuccessAtNavIcon = ({ navMenuItemIdKey }: Props): void => {
+export const showErrorNavIcon = ({ navMenuItemIdKey }: Props): void => {
   setTimeout(() => {
     dispatch(navSlice.actions.hideLoadingIcon({ navMenuItemIdKey }))
-    dispatch(navSlice.actions.showSuccessIcon({ navMenuItemIdKey }))
+    dispatch(navSlice.actions.showErrorIcon({ navMenuItemIdKey }))
   }, 1000)
   setTimeout(() => {
-    dispatch(navSlice.actions.hideSuccessIcon({ navMenuItemIdKey }))
+    dispatch(navSlice.actions.hideErrorIcon({ navMenuItemIdKey }))
   }, 3000)
 }

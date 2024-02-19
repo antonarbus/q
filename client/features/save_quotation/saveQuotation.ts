@@ -1,10 +1,10 @@
 import { getState } from '@lib_instances/store'
 import { apiUrl } from 'server/consts/apiUrl'
-import { showErrorAtNavIcon, showLoadingAtNavIcon, showSuccessAtNavIcon } from '@entities/nav'
+import { showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@entities/nav'
 import { axiosWithAuth } from '@entities/user'
 
 export const saveQuotation = async (): Promise<void> => {
-  showLoadingAtNavIcon({ navMenuItemIdKey: 'save' })
+  showLoadingNavIcon({ navMenuItemIdKey: 'save' })
 
   try {
     const res = await axiosWithAuth({
@@ -16,8 +16,8 @@ export const saveQuotation = async (): Promise<void> => {
       },
     })
 
-    showSuccessAtNavIcon({ navMenuItemIdKey: 'save' })
+    showSuccessNavIcon({ navMenuItemIdKey: 'save' })
   } catch (error) {
-    showErrorAtNavIcon({ navMenuItemIdKey: 'save' })
+    showErrorNavIcon({ navMenuItemIdKey: 'save' })
   }
 }
