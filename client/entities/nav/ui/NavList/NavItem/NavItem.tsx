@@ -3,14 +3,15 @@ import { getState, useSelectorTyped } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
 import type { MouseEvent, MutableRefObject } from 'react'
 import { useRef } from 'react'
-import { FiLoader } from 'react-icons/fi'
 import { TiArrowSortedDown } from 'react-icons/ti'
 import { Link } from 'react-router-dom'
 import { useWindowSize } from 'react-use'
 import { clickOnNavItem } from './clickOnNavItem'
+import { ErrorIcon } from './ErrorIcon'
 import { Icon } from './Icon'
 import { Menu } from './Menu'
 import { SpinnerIcon } from './SpinnerIcon'
+import { SuccessIcon } from './SuccessIcon'
 
 type Props = {
   children?: React.ReactNode
@@ -53,10 +54,12 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
   })
 
   const isNestedMenu = !!navItem?.menuItems
-  const icon = navItem?.icon
+  const isIcon = navItem?.icon
   const name = navItem?.name
   const link = navItem?.link
   const isLoading = navItem?.isLoading
+  const isSuccess = navItem?.isSuccess
+  const isError = navItem?.isError
   const disabled = Boolean(navItem?.disabled)
 
   return (
@@ -121,9 +124,11 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
           clickOnNavItem({ e, navItem, id, navItemRef, disabled })
         }}
       >
-        {icon && !isLoading && <Icon icon={icon} disabled={disabled} />}
-        {icon && isLoading && <SpinnerIcon />}
-        {!icon && shouldDisplayIcon && <Icon icon={name?.[0]} disabled={disabled} />}
+        {isIcon && !isLoading && !isSuccess && !isError && <Icon icon={isIcon} disabled={disabled} />}
+        {isIcon && isLoading && <SpinnerIcon />}
+        {isIcon && isSuccess && <SuccessIcon /> }
+        {isIcon && isError && <ErrorIcon /> }
+        {!isIcon && shouldDisplayIcon && <Icon icon={name?.[0]} disabled={disabled} />}
         {name && <span className='nav-item-name'>{name}</span>}
         {isNestedMenu && !disabled && <TiArrowSortedDown className='arrow-for-nested-menu' />}
         {children}

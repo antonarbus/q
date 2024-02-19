@@ -12,11 +12,11 @@ export type JwtPayloadExtended = {
 export const token = {
   new: {
     access: (payload: JwtPayloadExtended): string =>
-      jwt.sign(payload, process.env.JWT_ACCESS_SECRET ?? 'some fake secret to suppress ts stupid error', {
+      jwt.sign(payload, process.env.JWT_ACCESS_SECRET ?? 'some fake secret to suppress ts error', {
         expiresIn: accessJwtTokenExpirationSeconds,
       }),
     refresh: (payload: JwtPayloadExtended): string =>
-      jwt.sign(payload, process.env.JWT_REFRESH_SECRET ?? 'some fake secret to suppress ts stupid error', {
+      jwt.sign(payload, process.env.JWT_REFRESH_SECRET ?? 'some fake secret to suppress ts error', {
         expiresIn: refreshJwtTokenExpirationSeconds,
       }),
   },
@@ -24,12 +24,12 @@ export const token = {
     access: (accessJwtToken: string): JwtPayload | string =>
       jwt.verify(
         accessJwtToken,
-        process.env.JWT_ACCESS_SECRET ?? 'some fake secret to suppress ts stupid error',
+        process.env.JWT_ACCESS_SECRET ?? 'some fake secret to suppress ts error',
       ),
     refresh: (refreshJwtToken: string): JwtPayload | string =>
       jwt.verify(
         refreshJwtToken,
-        process.env.JWT_REFRESH_SECRET ?? 'some fake secret to suppress ts stupid error',
+        process.env.JWT_REFRESH_SECRET ?? 'some fake secret to suppress ts error',
       ),
   },
 }

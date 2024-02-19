@@ -14,4 +14,5 @@ export const apiUrl = {
   upload: '/api/upload',
   setBucketCors: '/api/set-bucket-cors',
   getBucketCors: '/api/get-bucket-cors',
+  saveQuotation: '/api/save-quotation',
 } as const

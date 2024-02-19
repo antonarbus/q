@@ -2,10 +2,12 @@ import { dispatch, useSelectorTyped } from '@lib_instances/store'
 import type { MouseEvent } from 'react'
 import { FaChevronRight } from 'react-icons/fa'
 import { navSlice } from '../../../../../navSlice'
-import { type MenuItemType } from '../../../../../type/MenuItemType'
+import { type MenuItemType } from '../../../../../type'
+import { ErrorIcon } from '../../ErrorIcon'
 import { Icon } from '../../Icon'
 import { RoundSpanForIcon } from '../../RoundSpanForIcon'
 import { SpinnerIcon } from '../../SpinnerIcon'
+import { SuccessIcon } from '../../SuccessIcon'
 import { clickOnMenuItem } from './function/clickOnMenuItem'
 import { MenuItemStyled } from './MenuItemStyled'
 import { Shortcut } from './Shortcut'
@@ -25,6 +27,8 @@ export const MenuItem = ({ menuItem, hoveredMenuItemIndex }: Props): JSX.Element
   const shortcut = menuItem.shortcut
   const disabled = !!menuItem.disabled
   const isLoading = menuItem?.isLoading
+  const isSuccess = menuItem?.isSuccess
+  const isError = menuItem?.isError
 
   return (
     <MenuItemStyled
@@ -39,6 +43,8 @@ export const MenuItem = ({ menuItem, hoveredMenuItemIndex }: Props): JSX.Element
     >
       {isIcon && !isLoading && <Icon icon={menuItem.icon} disabled={disabled} />}
       {isIcon && isLoading && <SpinnerIcon />}
+      {isIcon && isSuccess && <SuccessIcon /> }
+      {isIcon && isError && <ErrorIcon /> }
       <TextInMenu
         reserveSpaceForIcon={isNextMenuAvailable}
         name={menuItem.name}

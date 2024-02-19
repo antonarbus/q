@@ -1,3 +1,5 @@
+import { type navMenuItemId } from '@shared/consts/navMenuItemId'
+
 export type MenuItemType = {
   id: string
   name: string
@@ -9,4 +11,8 @@ export type MenuItemType = {
   isHidden: boolean
   disabled?: boolean
   isLoading?: boolean
+  isSuccess?: boolean
+  isError?: boolean
 }
+
+export type NavMenuItemIdKey = keyof typeof navMenuItemId

@@ -1,5 +1,5 @@
 import { getState } from '@lib_instances/store'
-import type { MenuItemType } from '../../../../../type/MenuItemType'
+import type { MenuItemType } from '../../../../../type'
 
 /**
  * returns clicked menu object from navStructure
