@@ -1,2 +1,2 @@
 export { Nav } from './Nav'
-export type { ItemsMediaQueryWidths } from '../../entities/nav/ui/functions/calcNavMediaQueryParams'
+export type { ItemsMediaQueryWidths } from '../../entities/nav/functions/calcNavMediaQueryParams'

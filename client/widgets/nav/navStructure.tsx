@@ -11,18 +11,19 @@ import { logout } from '@features/log_out'
 import { resetItems } from '@features/reset_items'
 import { saveQuotation } from '@features/save_quotation'
 import type { MenuItemTypes } from '@entities/nav'
+import { navMenuItemId } from '@shared/consts/navMenuItemId'
 import logo from './logo.svg'
 
 const reactIcon = createElement(IoShareOutline, {})
 
 export const navStructure: MenuItemTypes[] = [
   {
-    id: 'top',
+    id: navMenuItemId.top,
     name: 'top',
     isHidden: false,
     menuItems: [
       {
-        id: 'Offer',
+        id: navMenuItemId.offer,
         icon: <IoDocumentOutline />,
         isHidden: false,
         name: 'Offer',
@@ -125,7 +126,7 @@ export const navStructure: MenuItemTypes[] = [
         ],
       },
       {
-        id: 'Save',
+        id: navMenuItemId.save,
         icon: <IoSaveOutline />,
         isHidden: false,
         name: 'Save',
@@ -135,7 +136,7 @@ export const navStructure: MenuItemTypes[] = [
         shortcut: ['control', 'z'],
       },
       {
-        id: 'pdf',
+        id: navMenuItemId.pdf,
         icon: <BsFiletypePdf />,
         isHidden: false,
         name: 'Pdf',
@@ -144,7 +145,7 @@ export const navStructure: MenuItemTypes[] = [
         },
       },
       {
-        id: 'Share',
+        id: navMenuItemId.share,
         icon: <IoShareOutline />,
         isHidden: false,
         name: 'Share',
@@ -251,41 +252,41 @@ export const navStructure: MenuItemTypes[] = [
         ],
       },
       {
-        id: 'Offers',
+        id: navMenuItemId.offers,
         icon: <IoDocumentsOutline />,
         isHidden: false,
         name: 'Offers',
         link: '/linkB',
       },
       {
-        id: 'logIn',
+        id: navMenuItemId.login,
         icon: <FiLogIn />,
         isHidden: false,
         name: 'Log in',
         link: '/login',
       },
       {
-        id: 'account',
+        id: navMenuItemId.account,
         icon: <Person />,
         name: 'Account',
         isHidden: true,
         menuItems: [
           {
-            id: 'settings',
+            id: navMenuItemId.settings,
             icon: <Settings />,
             isHidden: false,
             name: 'Settings',
             link: '/settings',
           },
           {
-            id: 'profile',
+            id: navMenuItemId.profile,
             icon: <Person />,
             isHidden: false,
             name: 'Profile',
             link: '/profile',
           },
           {
-            id: 'logOut',
+            id: navMenuItemId.logout,
             icon: <FiLogOut />,
             isHidden: false,
             name: 'Log out',

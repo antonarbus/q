@@ -2,8 +2,8 @@ import { dispatch, useSelectorTyped } from '@lib_instances/store'
 import type { RefObject } from 'react'
 import { useLayoutEffect } from 'react'
 import { useFirstMountState } from 'react-use'
-import { navSlice } from '../../navSlice'
-import { calcNavMediaQueryParams } from './calcNavMediaQueryParams'
+import { calcNavMediaQueryParams } from '../functions/calcNavMediaQueryParams'
+import { navSlice } from '../navSlice'
 
 type Props = {
   navRef: RefObject<HTMLDivElement>

@@ -1,4 +1,4 @@
-import { dispatch } from '@lib_instances/store'
+import { dispatch, getState } from '@lib_instances/store'
 import axios from 'axios'
 import { apiUrl } from 'server/apiUrls'
 import { userSlice } from '../redux/userSlice'
@@ -9,6 +9,7 @@ export const axiosWithAuth = axios.create({ withCredentials: true })
 axiosWithAuth.interceptors.request.use((config) => {
   if (config.headers && token.access) {
     config.headers['access-jwt-token'] = token.access
+    config.headers.email = getState().user.email ?? null
   }
 
   return config
@@ -51,6 +52,7 @@ axiosWithAuth.interceptors.response.use(
 
     if (error.response.status === 401) {
       dispatch(userSlice.actions.forgetLoggedUser())
+      // todo: navigate to login route
     }
 
     throw error

@@ -14,7 +14,6 @@ export const unfixItemImagesHeight = (): void => {
 }
 
 export const fixItemImagesHeight = (): void => {
-  console.log('fix the height')
   const itemImages = document.querySelectorAll(`.${className.item} img`)
   if (itemImages === undefined) return
   itemImages.forEach(imageElement => {

@@ -1,10 +1,10 @@
-import { dispatch, getState } from '@lib_instances/store'
+import { getState } from '@lib_instances/store'
 import { domToPng } from 'modern-screenshot'
-import { navSlice } from '@entities/nav'
+import { showErrorAtNavIcon, showLoadingAtNavIcon, showSuccessAtNavIcon } from '@entities/nav'
 import { className } from '@shared/consts/className'
 
 export const downloadPdf = async (): Promise<void> => {
-  dispatch(navSlice.actions.showLoadingIcon({ id: 'pdf' }))
+  showLoadingAtNavIcon({ navMenuItemIdKey: 'pdf' })
 
   const itemsElement = document.querySelector(`.${className.items}`)
   if (!(itemsElement instanceof HTMLElement)) return
@@ -40,6 +40,10 @@ export const downloadPdf = async (): Promise<void> => {
     document.body.removeChild(downloadLink)
     URL.revokeObjectURL(pdfDataUrl) // Revoke the data URL to free up resources
 
-    dispatch(navSlice.actions.hideLoadingIcon({ id: 'pdf' }))
+    showSuccessAtNavIcon({ navMenuItemIdKey: 'pdf' })
+  }
+
+  worker.onerror = function () {
+    showErrorAtNavIcon({ navMenuItemIdKey: 'save' })
   }
 }

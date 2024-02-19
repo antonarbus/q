@@ -10,6 +10,7 @@ import { loginRouter } from './api/loginRouter'
 import { logoutRouter } from './api/logoutRouter'
 import { refreshRouter } from './api/refreshRouter'
 import { registerRouter } from './api/registerRouter'
+import { saveQuotationRouter } from './api/saveQuotationRouter'
 import { setBucketCors } from './api/setBucketCors'
 import { testRouter } from './api/testRouter'
 import { uploadRouter } from './api/uploadRouter'
@@ -45,6 +46,7 @@ app.use(apiUrl.user, userEmailRouter)
 app.use(apiUrl.upload, uploadRouter)
 app.use(apiUrl.setBucketCors, setBucketCors)
 app.use(apiUrl.getBucketCors, getBucketCors)
+app.use(apiUrl.saveQuotation, saveQuotationRouter)
 
 app.use(errorHandlerMiddleware)
 

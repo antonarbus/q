@@ -1,7 +1,7 @@
 import { dispatch, getState } from '@lib_instances/store'
 import type { MouseEvent, MutableRefObject } from 'react'
 import { navSlice } from '../../../navSlice'
-import type { MenuItemType } from '../../../type/MenuItemType'
+import type { MenuItemType } from '../../../type'
 
 type Props = {
   e: MouseEvent
