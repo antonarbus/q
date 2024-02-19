@@ -11,7 +11,7 @@ export const SuccessIcon = (): JSX.Element => {
           }}
         />
       )}
-      disabled={true}
+      // disabled={true}
     />
   )
 }
