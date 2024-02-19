@@ -6,6 +6,6 @@ type Props = {
   navMenuItemIdKey: NavMenuItemIdKey
 }
 
-export const showLoadingAtNavIcon = ({ navMenuItemIdKey }: Props): void => {
+export const showLoadingNavIcon = ({ navMenuItemIdKey }: Props): void => {
   dispatch(navSlice.actions.showLoadingIcon({ navMenuItemIdKey }))
 }
