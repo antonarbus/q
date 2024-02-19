@@ -17,7 +17,7 @@ export const SpinnerIcon = (): JSX.Element => {
           `}
         />
       )}
-      disabled={true}
+      // disabled={true}
     />
   )
 }

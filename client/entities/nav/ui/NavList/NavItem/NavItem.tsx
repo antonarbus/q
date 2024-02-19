@@ -54,7 +54,7 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
   })
 
   const isNestedMenu = !!navItem?.menuItems
-  const isIcon = navItem?.icon
+  const icon = navItem?.icon
   const name = navItem?.name
   const link = navItem?.link
   const isLoading = navItem?.isLoading
@@ -124,11 +124,11 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
           clickOnNavItem({ e, navItem, id, navItemRef, disabled })
         }}
       >
-        {isIcon && !isLoading && !isSuccess && !isError && <Icon icon={isIcon} disabled={disabled} />}
-        {isIcon && isLoading && <SpinnerIcon />}
-        {isIcon && isSuccess && <SuccessIcon /> }
-        {isIcon && isError && <ErrorIcon /> }
-        {!isIcon && shouldDisplayIcon && <Icon icon={name?.[0]} disabled={disabled} />}
+        {icon && !isLoading && !isSuccess && !isError && <Icon icon={icon} disabled={disabled} />}
+        {icon && isLoading && <SpinnerIcon />}
+        {icon && isSuccess && <SuccessIcon /> }
+        {icon && isError && <ErrorIcon /> }
+        {!icon && shouldDisplayIcon && <Icon icon={name?.[0]} disabled={disabled} />}
         {name && <span className='nav-item-name'>{name}</span>}
         {isNestedMenu && !disabled && <TiArrowSortedDown className='arrow-for-nested-menu' />}
         {children}
