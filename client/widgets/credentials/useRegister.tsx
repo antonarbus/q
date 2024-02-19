@@ -1,7 +1,7 @@
 import type { Dispatch, FormEvent, SetStateAction } from 'react'
 import { useState } from 'react'
 import type { RegisterReqBody, RegisterRes } from 'server/api/registerRouter'
-import { apiUrl } from 'server/apiUrls'
+import { apiUrl } from 'server/consts/apiUrl'
 import { notify } from '@shared/ui/top_msg/notify'
 import type { HttpStatusType } from './types'
 

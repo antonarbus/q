@@ -1,5 +1,5 @@
 import { getState } from '@lib_instances/store'
-import { apiUrl } from 'server/apiUrls'
+import { apiUrl } from 'server/consts/apiUrl'
 import { showErrorAtNavIcon, showLoadingAtNavIcon, showSuccessAtNavIcon } from '@entities/nav'
 import { axiosWithAuth } from '@entities/user'
 
