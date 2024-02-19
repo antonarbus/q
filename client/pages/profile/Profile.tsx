@@ -1,5 +1,5 @@
 import type { UserEmailRes } from 'server/api/userEmailRouter'
-import { apiUrl } from 'server/apiUrls'
+import { apiUrl } from 'server/consts/apiUrl'
 import { axiosWithAuth } from '@entities/user'
 import { notify } from '@shared/ui/top_msg/notify'
 

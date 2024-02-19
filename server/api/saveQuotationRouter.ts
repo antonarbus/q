@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
 import express from 'express'
 import { nanoid } from 'nanoid'
-import { apiUrl } from '../apiUrls'
+import { apiUrl } from '../consts/apiUrl'
 import { User } from '../db/models/userModel'
 import { verifyTokenMiddleware } from '../middleware/verifyTokenMiddleware'
 import type { Next, ReqWithBody, Res } from '../types'

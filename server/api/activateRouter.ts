@@ -1,5 +1,5 @@
 import express from 'express'
-import { apiUrl } from '../apiUrls'
+import { apiUrl } from '../consts/apiUrl'
 import { User } from '../db/models/userModel'
 import type { Next, Req, Res } from '../types'
 const domain = process.env.DOMAIN

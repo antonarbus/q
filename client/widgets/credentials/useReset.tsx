@@ -1,6 +1,6 @@
 import type { Dispatch, FormEvent, SetStateAction } from 'react'
 import { useState } from 'react'
-import { apiUrl } from 'server/apiUrls'
+import { apiUrl } from 'server/consts/apiUrl'
 import { token } from '@entities/user'
 import { notify } from '@shared/ui/top_msg/notify'
 import type { HttpStatusType } from './types'
