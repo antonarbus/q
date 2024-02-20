@@ -1,9 +1,9 @@
 import { headerName } from '../consts/headerName'
 import type { JwtPayloadExtended } from '../services/jwt'
 import { token } from '../services/jwt'
-import type { Next, ReqWithBody, Res } from '../types'
+import type { Next, Req, Res } from '../types'
 
-export const verifyTokenMiddleware = (req: ReqWithBody<{ email?: string }>, res: Res, next: Next): Res | undefined => {
+export const verifyTokenMiddleware = (req: Req, res: Res, next: Next): Res | undefined => {
   try {
     const accessJwtToken = req.headers[headerName.accessJwtToken]
     console.log('🚀 ~ req.headers:', req.headers)

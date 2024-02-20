@@ -11,7 +11,6 @@ export const ErrorIcon = (): JSX.Element => {
           }}
         />
       )}
-      // disabled={true}
     />
   )
 }

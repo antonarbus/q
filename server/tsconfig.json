@@ -2,7 +2,7 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "rootDir": ".",
+    // "rootDir": ".",
     "outDir": "../build/server",
     "module": "ESNext",
     "strict": true,
@@ -10,7 +10,19 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
-    "moduleResolution": "node" 
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      // "@server/*": ["./server/*"],
+      // "@client/*": ["./client/*"],
+      "@app/*": ["../client/app/*"],
+      "@pages/*": ["../client/pages/*"],
+      "@widgets/*": ["../client/widgets/*"],
+      "@features/*": ["../client/features/*"],
+      "@entities/*": ["../client/entities/*"],
+      "@shared/*": ["../client/shared/*"],
+      "@lib_instances/*": ["client/lib_instances/*"],
+    },
   },
   "include": [
     "./**/*.ts",

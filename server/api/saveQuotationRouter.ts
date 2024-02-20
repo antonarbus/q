@@ -1,29 +1,27 @@
-import bcrypt from 'bcryptjs'
-import express from 'express'
-import { nanoid } from 'nanoid'
-import { apiUrl } from '../consts/apiUrl'
-import { User } from '../db/models/userModel'
+import express, { type NextFunction, type Request, type Response } from 'express'
+import { type ParamsDictionary } from 'express-serve-static-core'
+import type { ItemType } from '@entities/items'
+import type { Quotation } from '@entities/quotation'
 import { verifyTokenMiddleware } from '../middleware/verifyTokenMiddleware'
-import type { Next, ReqWithBody, Res } from '../types'
-const domain = process.env.DOMAIN
-const port = process.env.PORT_FRONT_END
 
-export type RegisterReqBody = {
-  email: string
-  password: string
+export type ReqBody = {
+  quotation: Quotation
+  items: ItemType[]
 }
 
-export type RegisterRes = {
+export type ResBody = {
   status: string
   message: string
-  validationErrors?: string
 }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type RouterHandler = (req: Request<ParamsDictionary, ResBody, ReqBody>, res: Response<ResBody>, next: NextFunction) => Promise<express.Response<ResBody, Record<string, any>> | undefined>
 
 export const saveQuotationRouter = express.Router()
 
-export const saveQuotation = async (req: ReqWithBody<RegisterReqBody>, res: Res, next: Next): Promise<Res | undefined> => {
+export const saveQuotation: RouterHandler = async (req, res, next) => {
   try {
-    console.log(req.body)
+    // console.log(req.body.items)
     return res.json({ status: 'ok', message: 'quotation saved' })
 
     // const email = req.body.email.toLowerCase()
