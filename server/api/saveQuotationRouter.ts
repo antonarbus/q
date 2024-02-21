@@ -1,8 +1,8 @@
-import express, { type NextFunction, type Request, type Response } from 'express'
-import { type ParamsDictionary } from 'express-serve-static-core'
+import express, { type NextFunction } from 'express'
 import type { ItemType } from '@entities/items'
 import type { Quotation } from '@entities/quotation'
 import { verifyTokenMiddleware } from '../middleware/verifyTokenMiddleware'
+import { type ResWithBody, type ReqWithBody, type Next } from '../types'
 
 export type ReqBody = {
   quotation: Quotation
@@ -14,14 +14,13 @@ export type ResBody = {
   message: string
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type RouterHandler = (req: Request<ParamsDictionary, ResBody, ReqBody>, res: Response<ResBody>, next: NextFunction) => Promise<express.Response<ResBody, Record<string, any>> | undefined>
+type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
 
 export const saveQuotationRouter = express.Router()
 
 export const saveQuotation: RouterHandler = async (req, res, next) => {
   try {
-    // console.log(req.body.items)
+    console.log(req.body.items)
     return res.json({ status: 'ok', message: 'quotation saved' })
 
     // const email = req.body.email.toLowerCase()
@@ -44,7 +43,7 @@ export const saveQuotation: RouterHandler = async (req, res, next) => {
     // await sendMail({ to: email, subject, html })
 
     // all went good, send the response
-    res.json({ status: 'ok', message: 'user is registered' })
+    // res.json({ status: 'ok', message: 'user is registered' })
   } catch (error) {
     next(error)
   }

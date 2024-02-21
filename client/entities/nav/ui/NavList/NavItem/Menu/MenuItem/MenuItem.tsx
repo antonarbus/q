@@ -34,6 +34,9 @@ export const MenuItem = ({ menuItem, hoveredMenuItemIndex }: Props): JSX.Element
     <MenuItemStyled
       to={link ?? '/'}
       onClick={(e: MouseEvent): void => {
+        if (isLoading) return
+        if (isSuccess) return
+        if (isError) return
         clickOnMenuItem(e, menuId, disabled)
       }}
       onMouseEnter={(): void => {
