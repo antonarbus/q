@@ -6,8 +6,6 @@ import type { Next, Req, Res } from '../types'
 export const verifyTokenMiddleware = (req: Req, res: Res, next: Next): Res | undefined => {
   try {
     const accessJwtToken = req.headers[headerName.accessJwtToken]
-    console.log('🚀 ~ req.headers:', req.headers)
-    console.log('🚀 ~ accessJwtToken:', accessJwtToken)
 
     if (typeof accessJwtToken !== 'string') {
       return res
