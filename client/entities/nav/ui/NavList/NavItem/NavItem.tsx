@@ -121,6 +121,9 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
       <Link
         to={link ?? '/'}
         onClick={(e: MouseEvent): void => {
+          if (isLoading) return
+          if (isSuccess) return
+          if (isError) return
           clickOnNavItem({ e, navItem, id, navItemRef, disabled })
         }}
       >

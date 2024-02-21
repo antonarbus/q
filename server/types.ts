@@ -20,6 +20,8 @@ export interface ReqWithBody<T> extends Express.Request {
   body: T
 }
 
+export type ResWithBody<T> = Response<T>
+
 export type ReqWithQuery<TQueryObject extends Query> = {
   query: TQueryObject
 } & Request
