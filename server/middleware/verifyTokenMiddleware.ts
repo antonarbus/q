@@ -1,6 +1,5 @@
 import { headerName } from '../consts/headerName'
-import type { JwtPayloadExtended } from '../services/jwt'
-import { token } from '../services/jwt'
+import { verifyAccessToken, type JwtPayloadExtended } from '../services/jwt'
 import type { Next, Req, Res } from '../types'
 
 export const verifyTokenMiddleware = (req: Req, res: Res, next: Next): Res | undefined => {
@@ -13,7 +12,7 @@ export const verifyTokenMiddleware = (req: Req, res: Res, next: Next): Res | und
         .send('something happened during jwt token validation')
     }
 
-    const { email } = token.verify.access(accessJwtToken) as JwtPayloadExtended
+    const { email } = verifyAccessToken(accessJwtToken) as JwtPayloadExtended
 
     if (typeof email !== 'string') {
       return res

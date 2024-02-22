@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import type { LoginApiRes } from 'server/api/loginRouter'
 import { apiUrl } from 'server/consts/apiUrl'
 import { navUpdate } from '@features/log_out'
-import { userSlice, token } from '@entities/user'
+import { userSlice, accessTokenRef } from '@entities/user'
 import { slideElement } from '@shared/lib/slideElement'
 import { notify } from '@shared/ui/top_msg/notify'
 import type { HttpStatusType } from './types'
@@ -50,7 +50,7 @@ export const useLogin = (): FuncRes => {
 
       if (status === 'error') {
         setHttpStatus('error')
-        token.access = ''
+        accessTokenRef.current = null
 
         if (message === 'invalid credentials') {
           notify({ msg: 'Invalid credentials', type: 'error', theme: 'light' })
@@ -69,7 +69,7 @@ export const useLogin = (): FuncRes => {
 
       if (status === 'ok' && accessJwtToken) {
         setHttpStatus('success')
-        token.access = accessJwtToken
+        accessTokenRef.current = accessJwtToken
         dispatch(userSlice.actions.rememberLoggedUser({ email, isLogged: true, roles }))
         // notify({ msg: 'Logged in!', theme: 'light', closeAfterMs: 3000 })
         navUpdate.login()
