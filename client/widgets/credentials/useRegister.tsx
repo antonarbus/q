@@ -1,6 +1,6 @@
 import type { Dispatch, FormEvent, SetStateAction } from 'react'
 import { useState } from 'react'
-import type { RegisterReqBody, RegisterRes } from 'server/api/registerRouter'
+import type { ReqBody, ResBody } from 'server/api/registerRouter'
 import { apiUrl } from 'server/consts/apiUrl'
 import { notify } from '@shared/ui/top_msg/notify'
 import type { HttpStatusType } from './types'
@@ -24,13 +24,13 @@ export const useRegister = (): FuncReturnType => {
     e.preventDefault()
     const method = 'POST'
     const headers = { 'Content-Type': 'application/json' }
-    const bodyObj: RegisterReqBody = { email, password }
+    const bodyObj: ReqBody = { email, password }
     const body = JSON.stringify(bodyObj)
     const options = { method, headers, body }
     try {
       setHttpStatus('loading')
       const res = await fetch(apiUrl.register, options)
-      const data: RegisterRes = await res.json()
+      const data: ResBody = await res.json()
       const { status, message } = data
       if (status === 'error') {
         setHttpStatus('error')

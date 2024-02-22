@@ -29,7 +29,7 @@ const upload = async (req: Req, res: Res, next: Next): Promise<void> => {
       size: req.file.size / 1024 / 1024,
       date: new Date(),
     }
-    // ACTION: send fileInfo into user's DB
+    // todo: send fileInfo into quotation collection DB
 
     res.status(200).json({ link })
   } catch (error) {

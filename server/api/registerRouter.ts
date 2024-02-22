@@ -9,12 +9,12 @@ import type { Next, ReqWithBody, Res } from '../types'
 const domain = process.env.DOMAIN
 const port = process.env.PORT_FRONT_END
 
-export type RegisterReqBody = {
+export type ReqBody = {
   email: string
   password: string
 }
 
-export type RegisterRes = {
+export type ResBody = {
   status: string
   message: string
   validationErrors?: string
@@ -26,7 +26,7 @@ registerRouter.post(
   '/',
   body('email').isEmail(),
   body('password').isLength({ min: 1 }),
-  async (req: ReqWithBody<RegisterReqBody>, res: Res, next: Next) => {
+  async (req: ReqWithBody<ReqBody>, res: Res, next: Next) => {
     try {
       // validation
       const validationErrors = validationResult(req)

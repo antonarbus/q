@@ -3,7 +3,7 @@ import axios from 'axios'
 import { jwtDecode } from 'jwt-decode'
 import { useState } from 'react'
 import { useEffectOnce } from 'react-use'
-import type { RefreshAipRes } from 'server/api/refreshRouter'
+import type { ResBody } from 'server/api/refreshRouter'
 import { apiUrl } from 'server/consts/apiUrl'
 import type { JwtPayloadExtended } from 'server/services/jwt'
 import { navUpdate } from '@features/log_out'
@@ -39,7 +39,7 @@ export const useRefreshTokens = ({ withLoadingState }: Props): Res => {
   const refreshTokens = async (): Promise<void> => {
     try {
       if (accessTokenRef.current === null) {
-        const response = await axios.get<RefreshAipRes>(apiUrl.refresh, { withCredentials: true })
+        const response = await axios.get<ResBody>(apiUrl.refresh, { withCredentials: true })
         const { status, accessJwtToken, roles } = response.data
 
         if (status === 'error') {

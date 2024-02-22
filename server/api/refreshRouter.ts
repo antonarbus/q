@@ -2,9 +2,9 @@ import express from 'express'
 import { User } from '../db/models/userModel'
 import type { JwtPayloadExtended } from '../services/jwt'
 import { getNewAccessToken, getNewRefreshToken, refreshJwtTokenExpirationSeconds, verifyRefreshToken } from '../services/jwt'
-import type { Next, Req, Res } from '../types'
+import type { Next, Req, ResWithBody } from '../types'
 
-export type RefreshAipRes = {
+export type ResBody = {
   status: string
   message: string
   email: string
@@ -14,7 +14,7 @@ export type RefreshAipRes = {
 
 export const refreshRouter = express.Router()
 
-refreshRouter.get('/', async (req: Req, res: Res, next: Next) => {
+refreshRouter.get('/', async (req: Req, res: ResWithBody<ResBody>, next: Next) => {
   try {
     // get refresh token from cookie
 
