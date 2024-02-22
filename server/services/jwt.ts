@@ -9,27 +9,24 @@ export type JwtPayloadExtended = {
   roles: string[]
 }
 
-export const token = {
-  new: {
-    access: (payload: JwtPayloadExtended): string =>
-      jwt.sign(payload, process.env.JWT_ACCESS_SECRET ?? 'some fake secret to suppress ts error', {
-        expiresIn: accessJwtTokenExpirationSeconds,
-      }),
-    refresh: (payload: JwtPayloadExtended): string =>
-      jwt.sign(payload, process.env.JWT_REFRESH_SECRET ?? 'some fake secret to suppress ts error', {
-        expiresIn: refreshJwtTokenExpirationSeconds,
-      }),
-  },
-  verify: {
-    access: (accessJwtToken: string): JwtPayload | string =>
-      jwt.verify(
-        accessJwtToken,
-        process.env.JWT_ACCESS_SECRET ?? 'some fake secret to suppress ts error',
-      ),
-    refresh: (refreshJwtToken: string): JwtPayload | string =>
-      jwt.verify(
-        refreshJwtToken,
-        process.env.JWT_REFRESH_SECRET ?? 'some fake secret to suppress ts error',
-      ),
-  },
-}
+export const getNewAccessToken = (payload: JwtPayloadExtended): string =>
+  jwt.sign(payload, process.env.JWT_ACCESS_SECRET ?? 'some fake secret to suppress ts error', {
+    expiresIn: accessJwtTokenExpirationSeconds,
+  })
+
+export const getNewRefreshToken = (payload: JwtPayloadExtended): string =>
+  jwt.sign(payload, process.env.JWT_REFRESH_SECRET ?? 'some fake secret to suppress ts error', {
+    expiresIn: refreshJwtTokenExpirationSeconds,
+  })
+
+export const verifyAccessToken = (accessJwtToken: string): JwtPayload | string =>
+  jwt.verify(
+    accessJwtToken,
+    process.env.JWT_ACCESS_SECRET ?? 'some fake secret to suppress ts error',
+  )
+
+export const verifyRefreshToken = (refreshJwtToken: string): JwtPayload | string =>
+  jwt.verify(
+    refreshJwtToken,
+    process.env.JWT_REFRESH_SECRET ?? 'some fake secret to suppress ts error',
+  )

@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
 import express from 'express'
 import { User } from '../db/models/userModel'
-import { refreshJwtTokenExpirationSeconds, token } from '../services/jwt'
+import { getNewAccessToken, getNewRefreshToken, refreshJwtTokenExpirationSeconds } from '../services/jwt'
 import type { Next, Req, Res } from '../types'
 
 export type LoginApiRes = {
@@ -66,8 +66,8 @@ loginRouter.post('/', async (req: Req, res: Res, next: Next) => {
 
     // generate jwt tokens
     const { roles } = user
-    const accessJwtToken = token.new.access({ email, roles })
-    const refreshJwtToken = token.new.refresh({ email, roles })
+    const accessJwtToken = getNewAccessToken({ email, roles })
+    const refreshJwtToken = getNewRefreshToken({ email, roles })
 
     // put refresh token in cookie
     res.cookie('refreshJwtToken', refreshJwtToken, {

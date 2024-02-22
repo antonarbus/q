@@ -1,7 +1,7 @@
 import express from 'express'
 import { User } from '../db/models/userModel'
 import type { JwtPayloadExtended } from '../services/jwt'
-import { refreshJwtTokenExpirationSeconds, token } from '../services/jwt'
+import { getNewAccessToken, getNewRefreshToken, refreshJwtTokenExpirationSeconds, verifyRefreshToken } from '../services/jwt'
 import type { Next, Req, Res } from '../types'
 
 export type RefreshAipRes = {
@@ -35,7 +35,7 @@ refreshRouter.get('/', async (req: Req, res: Res, next: Next) => {
     }
 
     // check if token is ok
-    const { email } = token.verify.refresh(refreshJwtToken) as JwtPayloadExtended
+    const { email } = verifyRefreshToken(refreshJwtToken) as JwtPayloadExtended
 
     if (!email) {
       res.json({
@@ -62,7 +62,7 @@ refreshRouter.get('/', async (req: Req, res: Res, next: Next) => {
     }
 
     // generate refresh token and save in db
-    const updatedRefreshJwtToken = token.new.refresh({ email, roles: [''] })
+    const updatedRefreshJwtToken = getNewRefreshToken({ email, roles: [''] })
     res.cookie('refreshJwtToken', updatedRefreshJwtToken, {
       maxAge: refreshJwtTokenExpirationSeconds * 1000,
       httpOnly: true,
@@ -74,7 +74,7 @@ refreshRouter.get('/', async (req: Req, res: Res, next: Next) => {
 
     // generate access token and send to client
     const { roles } = user
-    const accessJwtToken = token.new.access({ email, roles })
+    const accessJwtToken = getNewAccessToken({ email, roles })
 
     // send response
     res.json({
