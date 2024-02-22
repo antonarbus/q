@@ -1,21 +1,21 @@
 import express from 'express'
 import { User } from '../db/models/userModel'
 import { verifyTokenMiddleware } from '../middleware/verifyTokenMiddleware'
-import type { Next, ReqWithBody, Res } from '../types'
+import type { Next, ReqWithBody, Res, ResWithBody } from '../types'
 
 export const userEmailRouter = express.Router()
 
-type Body = {
+type ReqBody = {
   email: string | undefined
 }
 
-export type UserEmailRes = {
+export type ResBody = {
   status: string
   message: string
-  email: string | undefined
+  email?: string | undefined
 }
 
-const getUserEmail = async (req: ReqWithBody<Body>, res: Res, next: Next): Promise<void> => {
+const getUserEmail = async (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next): Promise<void> => {
   try {
     const { email } = req.body
     console.info('🚀  req.body:', req.body)

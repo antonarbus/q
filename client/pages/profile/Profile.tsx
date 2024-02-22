@@ -1,4 +1,4 @@
-import type { UserEmailRes } from 'server/api/userEmailRouter'
+import type { ResBody } from 'server/api/userEmailRouter'
 import { apiUrl } from 'server/consts/apiUrl'
 import { axiosWithAuth } from '@entities/user'
 import { notify } from '@shared/ui/top_msg/notify'
@@ -8,7 +8,7 @@ const getEmailFromDb = async (): Promise<void> => {
     // if we just go in browser to http://localhost:3009/api/user or fetch it with just fetch or axios general instance
     // we get msg "accessJwtToken is not verified, user is not authorized"
     // but with axiosWithAuth we add access token to the header and check it inside the middleware 'verifyToken '
-    const res = await axiosWithAuth<UserEmailRes>(apiUrl.user)
+    const res = await axiosWithAuth<ResBody>(apiUrl.user)
     console.info(res)
   } catch (error) {
     console.error(error)
