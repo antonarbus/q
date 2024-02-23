@@ -42,13 +42,6 @@ export const QuotationInfoLayout = ({
             fill: '#6488cf',
           }}
         />
-        <span
-          css={{
-            fontWeight: 400,
-          }}
-        >
-          id:
-        </span>
         {quotationId}
       </Box>
     </Box>
