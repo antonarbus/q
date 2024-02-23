@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs'
 import express from 'express'
-import { User } from '../db/models/userModel'
+import { UserModel } from '../db/models/userModel'
 import { getNewAccessToken, getNewRefreshToken, refreshJwtTokenExpirationSeconds } from '../services/jwt'
 import type { Next, Req, Res } from '../types'
 
@@ -27,7 +27,7 @@ loginRouter.post('/', async (req: Req, res: Res, next: Next) => {
     email = email.toLowerCase()
 
     // check email & password
-    const user = await User.findOne({ email })
+    const user = await UserModel.findOne({ email })
     if (!user) {
       res.json({ status: 'error', message: 'no user data' })
       return
@@ -78,7 +78,7 @@ loginRouter.post('/', async (req: Req, res: Res, next: Next) => {
     // put refresh token in db & update login date
     const filter = { email }
     const update = { loggedAt: new Date(), refreshJwtToken }
-    await User.findOneAndUpdate(filter, update)
+    await UserModel.findOneAndUpdate(filter, update)
 
     // return data to the client
     const response = {

@@ -13,8 +13,8 @@
     "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
-      // "@server/*": ["./server/*"],
-      // "@client/*": ["./client/*"],
+      "@server/*": ["./*"],
+      "@client/*": ["../client/*"],
       "@app/*": ["../client/app/*"],
       "@pages/*": ["../client/pages/*"],
       "@widgets/*": ["../client/widgets/*"],

@@ -3,16 +3,39 @@ import { customAlphabet } from 'nanoid'
 
 const nanoid = customAlphabet('1234567890abcdefghijkmnopqrstuvwxyzABCDEFGHJKMNOPQRSTUVWXYZ')
 
-const quotationSchema = new Schema({
-  _id: {
+type Quotation = {
+  id: string
+  url: string
+  name?: string
+  from?: {
+    email: string
+    name: string
+    company: string
+  }
+  to?: {
+    email: string
+    name: string
+    company: string
+  }
+  version: Array<{
+    number: number
+    createdOn: Date
+    updatedOn: Date
+    sharedOn: Date
+  }>
+}
+
+const quotationSchema = new Schema<Quotation>({
+  id: {
     type: String,
     default: () => nanoid(5),
   },
-  // id: {
-  //   type: String,
-  //   default: () => nanoid(5),
-  // },
-  url: String,
+  url: {
+    type: String,
+    default: function () {
+      return `domain/quotation/${this.id}`
+    },
+  },
   name: String,
   from: {
     email: String,
@@ -23,14 +46,6 @@ const quotationSchema = new Schema({
     email: String,
     name: String,
     company: String,
-  },
-  createdOn: {
-    type: Date,
-    default: () => Date.now(),
-  },
-  updatedOn: {
-    type: Date,
-    default: Date.now,
   },
   version: [{
     number: {
@@ -48,4 +63,4 @@ const quotationSchema = new Schema({
   }],
 })
 
-export const Quotation = model('quotation', quotationSchema)
+export const QuotationModel = model<Quotation>('quotation', quotationSchema)
