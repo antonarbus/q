@@ -1,21 +1,51 @@
 import { model, Schema } from 'mongoose'
-import { nanoid } from 'nanoid'
+import { customAlphabet } from 'nanoid'
+
+const nanoid = customAlphabet('1234567890abcdefghijkmnopqrstuvwxyzABCDEFGHJKMNOPQRSTUVWXYZ')
 
 const quotationSchema = new Schema({
-  id: {
+  _id: {
     type: String,
     default: () => nanoid(5),
   },
+  // id: {
+  //   type: String,
+  //   default: () => nanoid(5),
+  // },
   url: String,
-  email: String,
+  name: String,
+  from: {
+    email: String,
+    name: String,
+    company: String,
+  },
+  to: {
+    email: String,
+    name: String,
+    company: String,
+  },
   createdOn: {
     type: Date,
-    default: () => Date.now,
+    default: () => Date.now(),
   },
   updatedOn: {
     type: Date,
-    default: () => Date.now,
+    default: Date.now,
   },
+  version: [{
+    number: {
+      type: Number,
+      default: 1,
+    },
+    createdOn: {
+      type: Date,
+      default: () => Date.now(),
+    },
+    updatedOn: {
+      type: Date,
+      default: Date.now,
+    },
+  }],
 })
 
 export const Quotation = model('quotation', quotationSchema)

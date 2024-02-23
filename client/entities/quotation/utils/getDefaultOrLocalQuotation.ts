@@ -13,6 +13,7 @@ export const getDefaultOrLocalQuotation = (): Quotation => {
   }
 
   const quotation = jsonParseSafe<Quotation>(quotationFromLocalStorage)
+
   if (quotation === undefined) {
     localStorage.setItem(localStorageKey.quotation, JSON.stringify(defaultQuotation))
     return defaultQuotation
