@@ -1,5 +1,5 @@
 import express from 'express'
-import { User } from '../db/models/userModel'
+import { UserModel } from '../db/models/userModel'
 import type { JwtPayloadExtended } from '../services/jwt'
 import { getNewAccessToken, getNewRefreshToken, refreshJwtTokenExpirationSeconds, verifyRefreshToken } from '../services/jwt'
 import type { Next, Req, ResWithBody } from '../types'
@@ -49,7 +49,7 @@ refreshRouter.get('/', async (req: Req, res: ResWithBody<ResBody>, next: Next) =
     }
 
     // find token in db
-    const user = await User.findOne({ refreshJwtToken })
+    const user = await UserModel.findOne({ refreshJwtToken })
     if (!user) {
       res.json({
         status: 'error',
@@ -67,7 +67,7 @@ refreshRouter.get('/', async (req: Req, res: ResWithBody<ResBody>, next: Next) =
       maxAge: refreshJwtTokenExpirationSeconds * 1000,
       httpOnly: true,
     })
-    await User.findOneAndUpdate(
+    await UserModel.findOneAndUpdate(
       { email },
       { refreshJwtToken: updatedRefreshJwtToken },
     )

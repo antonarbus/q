@@ -1,6 +1,7 @@
-import express, { type NextFunction } from 'express'
+import { Router } from 'express'
 import type { ItemType } from '@entities/items'
 import type { Quotation } from '@entities/quotation'
+import { QuotationModel } from '../db/models/quotationModel'
 import { verifyTokenMiddleware } from '../middleware/verifyTokenMiddleware'
 import { type ResWithBody, type ReqWithBody, type Next } from '../types'
 
@@ -16,11 +17,13 @@ export type ResBody = {
 
 type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
 
-export const saveQuotationRouter = express.Router()
+export const saveQuotationRouter = Router()
 
 export const saveQuotation: RouterHandler = async (req, res, next) => {
   try {
     console.log(req.body.items)
+
+    await QuotationModel.create({ from: 'Anton' })
     return res.json({ status: 'ok', message: 'quotation saved' })
 
     // const email = req.body.email.toLowerCase()
