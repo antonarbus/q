@@ -1,8 +1,8 @@
 // https://www.typescriptlang.org/tsconfig#target
 {
+  "extends": "../tsconfig.json",
   "compilerOptions": {
     "target": "ESNext",
-    // "rootDir": ".",
     "outDir": "../build/server",
     "module": "ESNext",
     "strict": true,
@@ -11,18 +11,6 @@
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
     "moduleResolution": "node",
-    "baseUrl": ".",
-    "paths": {
-      "@server/*": ["./*"],
-      "@client/*": ["../client/*"],
-      "@app/*": ["../client/app/*"],
-      "@pages/*": ["../client/pages/*"],
-      "@widgets/*": ["../client/widgets/*"],
-      "@features/*": ["../client/features/*"],
-      "@entities/*": ["../client/entities/*"],
-      "@shared/*": ["../client/shared/*"],
-      "@lib_instances/*": ["client/lib_instances/*"],
-    },
   },
   "include": [
     "./**/*.ts",
