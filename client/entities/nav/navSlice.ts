@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
-import type { ItemsMediaQueryWidths } from '@widgets/nav'
+import type { NavItemsMediaQueryWidths } from '@widgets/nav'
 import { type navMenuItemId } from '@shared/consts/navMenuItemId'
 import { setMenuItemPropValue } from './setMenuItemPropValue'
 import type { MenuItemType, NavMenuItemIdKey } from './type'
@@ -44,7 +44,7 @@ export const navSlice = createSlice({
     enableMedia: (state) => {
       state.mediaEnabled = true
     },
-    setNavMediaQueryWidths: (state, action: PayloadAction<ItemsMediaQueryWidths>) => {
+    setNavMediaQueryWidths: (state, action: PayloadAction<NavItemsMediaQueryWidths>) => {
       const elementMediaQueryWidths = action.payload
       state.mediaQueryWidth = elementMediaQueryWidths
     },
