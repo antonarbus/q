@@ -23,7 +23,7 @@ export const saveQuotation: RouterHandler = async (req, res, next) => {
   try {
     console.log(req.body.items)
 
-    await QuotationModel.create({ from: 'Anton' })
+    await QuotationModel.create({ name: 'Anton' })
     return res.json({ status: 'ok', message: 'quotation saved' })
 
     // const email = req.body.email.toLowerCase()

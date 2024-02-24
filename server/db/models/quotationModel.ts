@@ -1,4 +1,4 @@
-import { model, Schema } from 'mongoose'
+import { type Model, model, Schema } from 'mongoose'
 import { customAlphabet } from 'nanoid'
 
 const nanoid = customAlphabet('1234567890abcdefghijkmnopqrstuvwxyzABCDEFGHJKMNOPQRSTUVWXYZ')
@@ -6,6 +6,9 @@ const nanoid = customAlphabet('1234567890abcdefghijkmnopqrstuvwxyzABCDEFGHJKMNOP
 type Quotation = {
   id: string
   url: string
+  createdOn: Date
+  updatedOn: Date
+  sharedOn?: Date
   name?: string
   from?: {
     email: string
@@ -17,15 +20,13 @@ type Quotation = {
     name: string
     company: string
   }
-  version: Array<{
-    number: number
-    createdOn: Date
-    updatedOn: Date
-    sharedOn: Date
-  }>
 }
 
-const quotationSchema = new Schema<Quotation>({
+type QuotationMethods = {
+  showAll: () => Promise<unknown>
+} & Model<Quotation>
+
+const quotationSchema = new Schema<Quotation, Model<Quotation>, QuotationMethods>({
   id: {
     type: String,
     default: () => nanoid(5),
@@ -37,6 +38,17 @@ const quotationSchema = new Schema<Quotation>({
     },
   },
   name: String,
+  createdOn: {
+    type: Date,
+    default: () => Date.now(),
+  },
+  updatedOn: {
+    type: Date,
+    default: function () {
+      return this.createdOn
+    },
+  },
+  sharedOn: Date,
   from: {
     email: String,
     name: String,
@@ -47,20 +59,12 @@ const quotationSchema = new Schema<Quotation>({
     name: String,
     company: String,
   },
-  version: [{
-    number: {
-      type: Number,
-      default: 1,
+}, {
+  statics: {
+    showAll() {
+      return this.find()
     },
-    createdOn: {
-      type: Date,
-      default: () => Date.now(),
-    },
-    updatedOn: {
-      type: Date,
-      default: Date.now,
-    },
-  }],
+  },
 })
 
-export const QuotationModel = model<Quotation>('quotation', quotationSchema)
+export const QuotationModel = model<Quotation, QuotationMethods>('quotation', quotationSchema)
