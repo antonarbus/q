@@ -18,7 +18,7 @@ export const saveQuotation = async (): Promise<void> => {
       },
     })
 
-    console.log(res.data)
+    // console.log(res.data)
 
     showSuccessNavIcon({ navMenuItemIdKey: 'save' })
   } catch (error) {
