@@ -1,8 +1,9 @@
+import { QuotationModel, type QuotationModelType } from '@server/db/models/quotationModel'
+import { verifyTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
 import { Router } from 'express'
+import { type HydratedDocument } from 'mongoose'
 import type { ItemType } from '@entities/items'
 import type { Quotation } from '@entities/quotation'
-import { QuotationModel } from '../db/models/quotationModel'
-import { verifyTokenMiddleware } from '../middleware/verifyTokenMiddleware'
 import { type ResWithBody, type ReqWithBody, type Next } from '../types'
 
 export type ReqBody = {
@@ -13,6 +14,7 @@ export type ReqBody = {
 export type ResBody = {
   status: string
   message: string
+  document: HydratedDocument<QuotationModelType>
 }
 
 type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
@@ -21,32 +23,17 @@ export const saveQuotationRouter = Router()
 
 export const saveQuotation: RouterHandler = async (req, res, next) => {
   try {
-    console.log(req.body.items)
+    const document: HydratedDocument<QuotationModelType> = await QuotationModel.create({
+      email: req.headers.email,
+    })
 
-    await QuotationModel.create({ name: 'Anton' })
-    return res.json({ status: 'ok', message: 'quotation saved' })
+    console.log('🚀 ~ mongoRes:', document)
 
-    // const email = req.body.email.toLowerCase()
-    // const user = await User.findOne({ email })
-    // if (user) {
-    //   return res.json({
-    //     status: 'error',
-    //     message: 'user with such email already exists',
-    //   })
-    // }
-
-    // // save user to db
-    // const password = await bcrypt.hash(req.body.password, 10)
-    // const activationLink = `${domain}:${port}${apiUrl.activate}/${nanoid(5)}`
-    // await User.create({ email, password, activationLink })
-
-    // send email with activation link
-    // const subject = 'Activation for quotation.app'
-    // const html = `<div><h1>Follow the link to confirm the registration</h1><a href="${activationLink}">${activationLink}</a></div> `
-    // await sendMail({ to: email, subject, html })
-
-    // all went good, send the response
-    // res.json({ status: 'ok', message: 'user is registered' })
+    return res.json({
+      status: 'ok',
+      message: 'quotation saved',
+      document,
+    })
   } catch (error) {
     next(error)
   }
