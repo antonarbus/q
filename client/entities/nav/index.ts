@@ -1,5 +1,6 @@
 // type
 export type { MenuItemType as MenuItemTypes } from './type'
+export type { NavItemsMediaQueryWidths } from './functions/calcNavMediaQueryParams'
 
 // redux
 export { navSlice } from './navSlice'
