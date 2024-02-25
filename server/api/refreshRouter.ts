@@ -67,10 +67,11 @@ refreshRouter.get('/', async (req: Req, res: ResWithBody<ResBody>, next: Next) =
       maxAge: refreshJwtTokenExpirationSeconds * 1000,
       httpOnly: true,
     })
-    await UserModel.findOneAndUpdate(
-      { email },
-      { refreshJwtToken: updatedRefreshJwtToken },
-    )
+
+    const filter = { email }
+    const update = { refreshJwtToken: updatedRefreshJwtToken }
+
+    await UserModel.findOneAndUpdate(filter, update)
 
     // generate access token and send to client
     const { roles } = user
