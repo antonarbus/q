@@ -1,5 +1,6 @@
-// redux
-export { quotationSlice } from './redux/quotationSlice'
+// signals
+export { quotationSignal } from './signals/quotationSignal'
+export { getDefaultOrLocalQuotation } from './utils/getDefaultOrLocalQuotation'
 
 // types
 export type { Quotation } from './types/index'
