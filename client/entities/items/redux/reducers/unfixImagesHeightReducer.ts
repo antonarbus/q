@@ -1,4 +1,4 @@
-import { itemType } from '@entities/items/consts/itemType'
+import { itemType } from '../../consts/itemType'
 import { type Item } from '../../types'
 
 export const unfixImagesHeightReducer = (state: Item[]): void => {

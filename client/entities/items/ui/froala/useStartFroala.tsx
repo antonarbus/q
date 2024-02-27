@@ -64,7 +64,6 @@ export const useStartFroala = (): void => {
               }
             },
             'file.unlink': function (link) {
-              console.log('file.unlink')
               const href = link.getAttribute('href')
               const isFileInBucket = href.includes('bucket')
               if (!isFileInBucket) return
@@ -80,7 +79,7 @@ export const useStartFroala = (): void => {
             },
 
             'image.removed': function ($img) {
-              console.log($img.attr('src'))
+              // console.log($img.attr('src'))
             },
             'image.loaded': function (props: { '0': HTMLImageElement }) {
               const imageElement = props['0']

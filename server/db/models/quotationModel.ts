@@ -12,14 +12,14 @@ export type QuotationModelType = {
   updatedAt: Date
   sharedAt?: Date
   from?: {
-    email: string
-    name: string
-    company: string
+    email?: string
+    name?: string
+    company?: string
   }
   to?: {
-    email: string
-    name: string
-    company: string
+    email?: string
+    name?: string
+    company?: string
   }
   version: number
 }

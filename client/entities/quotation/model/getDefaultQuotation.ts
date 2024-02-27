@@ -2,7 +2,7 @@ import { type Quotation } from '../types'
 
 export const getDefaultQuotation = (): Quotation => {
   return {
-    id: undefined,
+    isLocal: true,
     isSaved: false,
   }
 }

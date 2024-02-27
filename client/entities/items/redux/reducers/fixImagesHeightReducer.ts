@@ -1,5 +1,5 @@
 import { type PayloadAction } from '@reduxjs/toolkit'
-import { itemType } from '@entities/items/consts/itemType'
+import { itemType } from '../../consts/itemType'
 import { type Item } from '../../types'
 
 export const fixImagesHeightReducer = (state: Item[], action: PayloadAction<{

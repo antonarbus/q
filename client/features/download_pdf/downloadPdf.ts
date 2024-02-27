@@ -1,4 +1,3 @@
-import { getState } from '@lib_instances/store'
 import { domToPng } from 'modern-screenshot'
 import { quotationSignal } from '@client/entities/quotation'
 import { showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@entities/nav'
