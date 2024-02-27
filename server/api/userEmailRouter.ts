@@ -1,7 +1,7 @@
 import express from 'express'
 import { UserModel } from '../db/models/userModel'
 import { verifyTokenMiddleware } from '../middleware/verifyTokenMiddleware'
-import type { Next, ReqWithBody, Res, ResWithBody } from '../types'
+import type { Next, ReqWithBody, ResWithBody } from '../types'
 
 export const userEmailRouter = express.Router()
 

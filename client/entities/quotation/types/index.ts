@@ -1,4 +1,6 @@
+import { type QuotationModelType } from '@server/db/models/quotationModel'
+
 export type Quotation = {
-  id: string | undefined
   isSaved: boolean
-}
+  isLocal: boolean
+} & Partial<Omit<QuotationModelType, '_id'>>

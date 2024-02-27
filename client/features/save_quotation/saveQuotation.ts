@@ -1,9 +1,8 @@
 import { getState } from '@lib_instances/store'
 import { type AxiosResponse } from 'axios'
-import { produce } from 'immer'
 import { type ResBody, type ReqBody } from 'server/api/saveQuotationRouter'
 import { apiUrl } from 'server/consts/apiUrl'
-import { quotationSignal } from '@client/entities/quotation'
+import { quotationSignal, saveQuotationLocally } from '@client/entities/quotation'
 import { showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@entities/nav'
 import { axiosWithAuth } from '@entities/user'
 
@@ -20,10 +19,14 @@ export const saveQuotation = async (): Promise<void> => {
       },
     })
 
-    quotationSignal.value = produce(quotationSignal.value, (draft) => {
-      draft.id = res.data.document?.id
-      draft.isSaved = true
-    })
+    quotationSignal.value = {
+      ...quotationSignal.value,
+      ...res.data.document,
+      isLocal: false,
+      isSaved: true,
+    }
+
+    saveQuotationLocally()
 
     showSuccessNavIcon({ navMenuItemIdKey: 'save' })
   } catch (error) {
