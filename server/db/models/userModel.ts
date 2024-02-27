@@ -8,23 +8,16 @@ const userSchema = new Schema({
     required: [true, 'email is required'],
     unique: true,
     trim: true,
+    match: /.+@.+\..+/,
   },
   password: {
     type: String,
-    required: [true, 'email is required'],
+    required: [true, 'password is required'],
     trim: true,
-  },
-  registeredAt: {
-    type: Date,
-    default: () => Date.now,
   },
   roles: {
     type: [String],
     default: ['user'],
-  },
-  loggedAt: {
-    type: Date,
-    default: () => Date.now,
   },
   isActivated: {
     type: Boolean,
@@ -36,6 +29,8 @@ const userSchema = new Schema({
   refreshJwtToken: {
     type: String,
   },
+}, {
+  timestamps: true,
 })
 
 // define model - a class with which we construct documents

@@ -1,17 +1,16 @@
 import { model, type ObjectId, Schema } from 'mongoose'
 import { customAlphabet } from 'nanoid'
 
-const nanoid = customAlphabet('1234567890abcdefghijkmnopqrstuvwxyzABCDEFGHJKMNOPQRSTUVWXYZ')
+const nanoid = customAlphabet('123456789abcdefghijkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ')
 
 export type QuotationModelType = {
   _id: ObjectId
   id: string
   email: string
   quotationName?: string
-  url: string
-  createdOn: Date
-  updatedOn: Date
-  sharedOn?: Date
+  createdAt: Date
+  updatedAt: Date
+  sharedAt?: Date
   from?: {
     email: string
     name: string
@@ -22,6 +21,7 @@ export type QuotationModelType = {
     name: string
     company: string
   }
+  version: number
 }
 
 const quotationSchema = new Schema<QuotationModelType>({
@@ -39,24 +39,13 @@ const quotationSchema = new Schema<QuotationModelType>({
     lowercase: true,
     trim: true,
   },
-  url: {
-    type: String,
-    default: function () {
-      return `https://quotation.app/id/${this.id}`
-    },
-  },
   quotationName: {
     type: String,
     trim: true,
   },
-  createdOn: {
-    type: Date,
-    default: () => Date.now(),
-  },
-  updatedOn: {
-    type: Date,
-  },
-  sharedOn: Date,
+  createdAt: Date,
+  updatedAt: Date,
+  sharedAt: Date,
   from: {
     email: String,
     name: String,
@@ -67,6 +56,13 @@ const quotationSchema = new Schema<QuotationModelType>({
     name: String,
     company: String,
   },
+  version: {
+    type: Number,
+    default: 1,
+    validate: (version: number) => version >= 0,
+  },
+}, {
+  timestamps: true,
 })
 
 export const QuotationModel = model<QuotationModelType>('quotation', quotationSchema)

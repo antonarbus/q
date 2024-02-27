@@ -1,12 +1,12 @@
-import { useSelectorTyped } from '@lib_instances/store'
+import { quotationSignal } from '@client/entities/quotation'
 import { QuotationInfoLayout } from './QuotationInfoLayout'
 
 export const QuotationInfo = (): JSX.Element => {
-  const quotationId = useSelectorTyped(state => state.quotation.id)
+  console.log(quotationSignal.value)
 
   return (
     <QuotationInfoLayout
-      quotationId={quotationId}
+      quotationId={quotationSignal.value.id}
       onClick={() => {
         alert('show popup with all info with proper route')
       }}

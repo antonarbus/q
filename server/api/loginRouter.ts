@@ -77,7 +77,7 @@ loginRouter.post('/', async (req: Req, res: Res, next: Next) => {
 
     // put refresh token in db & update login date
     const filter = { email }
-    const update = { loggedAt: new Date(), refreshJwtToken }
+    const update = { refreshJwtToken }
     await UserModel.findOneAndUpdate(filter, update)
 
     // return data to the client
