@@ -1,4 +1,4 @@
 export type Quotation = {
-  id: string
+  id: string | undefined
   isSaved: boolean
 }

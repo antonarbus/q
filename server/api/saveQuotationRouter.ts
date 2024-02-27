@@ -12,9 +12,8 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  status: string
   message: string
-  document: HydratedDocument<QuotationModelType>
+  document: HydratedDocument<QuotationModelType> | null
 }
 
 type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
@@ -23,17 +22,37 @@ export const saveQuotationRouter = Router()
 
 export const saveQuotation: RouterHandler = async (req, res, next) => {
   try {
-    const document: HydratedDocument<QuotationModelType> = await QuotationModel.create({
-      email: req.headers.email,
-    })
+    if (req.body.quotation.id === undefined) {
+      const document = await QuotationModel.create({
+        email: req.headers.email,
+      })
 
-    console.log('🚀 ~ mongoRes:', document)
+      return res.json({
+        message: 'quotation saved',
+        document,
+      })
+    } else {
+      const document = await QuotationModel.findOneAndUpdate({
+        email: req.headers.email,
+        id: req.body.quotation.id,
+      }, {
+        // updatedAt: Date.now(), // no need to set it manually
+      }, {
+        new: true,
+      })
 
-    return res.json({
-      status: 'ok',
-      message: 'quotation saved',
-      document,
-    })
+      if (document === null) {
+        return res.status(404).json({
+          message: 'not found',
+          document: null,
+        })
+      }
+
+      return res.json({
+        message: 'quotation updated',
+        document,
+      })
+    }
   } catch (error) {
     next(error)
   }

@@ -21,7 +21,7 @@ export const saveQuotation = async (): Promise<void> => {
     })
 
     quotationSignal.value = produce(quotationSignal.value, (draft) => {
-      draft.id = res.data.document.id
+      draft.id = res.data.document?.id
       draft.isSaved = true
     })
 
