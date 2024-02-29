@@ -9,10 +9,8 @@ const storage = new Storage({
   projectId: 'quotationapp-8014c',
 })
 
-const bucketName = 'quotation-app-bucket'
-
 async function getBucketMetadata(_req: Req, res: Res): Promise<void> {
-  const [metadata] = await storage.bucket(bucketName).getMetadata()
+  const [metadata] = await storage.bucket(process.env.BUCKET_NAME!).getMetadata()
   console.info(JSON.stringify(metadata, null, 2))
   res.json(metadata.cors)
 }

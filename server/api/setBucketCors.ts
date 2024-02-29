@@ -10,10 +10,8 @@ const storage = new Storage({
   projectId: 'quotationapp-8014c',
 })
 
-const bucketName = 'quotation-app-bucket'
-
 async function configureBucketCors(_req: Req, res: Res): Promise<void> {
-  const corsUpdateRes = await storage.bucket(bucketName).setCorsConfiguration([
+  const corsUpdateRes = await storage.bucket(process.env.BUCKET_NAME!).setCorsConfiguration([
     {
       origin: [
         'https://quotation.app',
@@ -29,7 +27,7 @@ async function configureBucketCors(_req: Req, res: Res): Promise<void> {
     },
   ])
 
-  console.info(`Bucket ${bucketName} was updated with a CORS config`)
+  console.info(`Bucket ${process.env.BUCKET_NAME!} was updated with a CORS config`)
 
   res.json(corsUpdateRes.at(0)?.cors)
 }

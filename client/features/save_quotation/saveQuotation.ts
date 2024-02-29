@@ -22,8 +22,6 @@ export const saveQuotation = async (): Promise<void> => {
     quotationSignal.value = {
       ...quotationSignal.value,
       ...res.data.document,
-      isLocal: false,
-      isSaved: true,
     }
 
     saveQuotationLocally()
