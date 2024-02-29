@@ -1,3 +1,4 @@
+import { Storage } from '@google-cloud/storage'
 import { QuotationModel, type QuotationModelType } from '@server/db/models/quotationModel'
 import { verifyTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
 import { Router } from 'express'
@@ -22,10 +23,24 @@ export const saveQuotationRouter = Router()
 
 export const saveQuotation: RouterHandler = async (req, res, next) => {
   try {
+    const email = req.headers.email
     if (req.body.quotation.id === undefined) {
-      const document = await QuotationModel.create({
-        email: req.headers.email,
+      const document = await QuotationModel.create({ email })
+
+      const storage = new Storage({
+        keyFilename: './quotationapp-8014c-04cff2d88d5b.json',
+        projectId: 'quotationapp-8014c',
       })
+
+      const bucket = storage.bucket(process.env.BUCKET_NAME!)
+      const fileName = `${document.email}/${document.id}/quotation-${document.version}.json`
+      const file = bucket.file(fileName)
+      const data = {
+        quotation: document,
+        items: req.body.items,
+      }
+      const contents = JSON.stringify(data, null, 2)
+      await file.save(contents)
 
       return res.json({
         message: 'quotation saved',

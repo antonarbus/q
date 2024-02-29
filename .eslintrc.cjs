@@ -32,6 +32,7 @@ module.exports = {
     '@typescript-eslint/space-before-function-paren': 'off',
     '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
     '@typescript-eslint/unbound-method': 'off', // new rule after upgrade, not clear, take a look later
+    '@typescript-eslint/no-non-null-assertion': 'off'
     // '@typescript-eslint/indent': 'off',
     // '@typescript-eslint/quotes': 'off',
     // 'semi': ['error', 'never'],

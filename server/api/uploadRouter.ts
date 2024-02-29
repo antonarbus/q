@@ -12,7 +12,7 @@ const storage = new Storage({
   projectId: 'quotationapp-8014c',
 })
 
-const bucket = storage.bucket('quotation-app-bucket')
+const bucket = storage.bucket(process.env.BUCKET_NAME!)
 
 export const uploadRouter = express.Router()
 
