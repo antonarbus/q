@@ -24,7 +24,7 @@ function MainLayout ({ children }: { children: ReactNode }): JSX.Element {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        padding: '10px 0px 10px 10px',
+        padding: '10px 20px',
       }}
     >
       {children}
