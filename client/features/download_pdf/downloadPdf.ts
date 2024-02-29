@@ -1,6 +1,6 @@
 import { domToPng } from 'modern-screenshot'
-import { quotationSignal } from '@client/entities/quotation'
 import { showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@entities/nav'
+import { quotationSignal } from '@entities/quotation'
 import { className } from '@shared/consts/className'
 
 export const downloadPdf = async (): Promise<void> => {

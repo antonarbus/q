@@ -2,8 +2,8 @@ import { getState } from '@lib_instances/store'
 import { type AxiosResponse } from 'axios'
 import { type ResBody, type ReqBody } from 'server/api/saveQuotationRouter'
 import { apiUrl } from 'server/consts/apiUrl'
-import { quotationSignal, saveQuotationLocally } from '@client/entities/quotation'
 import { showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@entities/nav'
+import { quotationSignal, saveQuotationLocally } from '@entities/quotation'
 import { axiosWithAuth } from '@entities/user'
 
 export const saveQuotation = async (): Promise<void> => {

@@ -1,4 +1,4 @@
-import { quotationSignal } from '@client/entities/quotation'
+import { quotationSignal } from '@entities/quotation'
 import { QuotationInfoLayout } from './QuotationInfoLayout'
 
 export const QuotationInfo = (): JSX.Element => {
