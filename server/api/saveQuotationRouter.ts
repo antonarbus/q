@@ -10,6 +10,7 @@ import { type ResWithBody, type ReqWithBody, type Next } from '../types'
 export type ReqBody = {
   quotation: Quotation
   items: ItemType[]
+  id: string
 }
 
 export type ResBody = {
@@ -21,53 +22,53 @@ type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next
 
 export const saveQuotationRouter = Router()
 
+const storage = new Storage({
+  keyFilename: './quotationapp-8014c-04cff2d88d5b.json',
+  projectId: 'quotationapp-8014c',
+})
+
+const bucket = storage.bucket(process.env.BUCKET_NAME!)
+
 export const saveQuotation: RouterHandler = async (req, res, next) => {
   try {
+    const { items, quotation, id } = req.body
     const email = req.headers.email
-    if (req.body.quotation.id === undefined) {
-      const document = await QuotationModel.create({ email })
 
-      const storage = new Storage({
-        keyFilename: './quotationapp-8014c-04cff2d88d5b.json',
-        projectId: 'quotationapp-8014c',
-      })
+    const filter = { email, id }
+    const update = { quotation }
 
-      const bucket = storage.bucket(process.env.BUCKET_NAME!)
-      const fileName = `${document.email}/${document.id}/quotation-${document.version}.json`
-      const file = bucket.file(fileName)
-      const data = {
-        quotation: document,
-        items: req.body.items,
-      }
-      const contents = JSON.stringify(data, null, 2)
-      await file.save(contents)
+    const document = await QuotationModel.findOneAndUpdate(filter, update, {
+      new: true,
+      setDefaultsOnInsert: true,
+      upsert: true,
+    })
 
-      return res.json({
-        message: 'quotation saved',
-        document,
-      })
-    } else {
-      const document = await QuotationModel.findOneAndUpdate({
-        email: req.headers.email,
-        id: req.body.quotation.id,
-      }, {
-        // updatedAt: Date.now(), // no need to set it manually
-      }, {
-        new: true,
-      })
+    const isNew = document.createdAt.toISOString() === document.updatedAt.toISOString()
 
-      if (document === null) {
-        return res.status(404).json({
-          message: 'not found',
-          document: null,
-        })
-      }
-
-      return res.json({
-        message: 'quotation updated',
-        document,
+    if (document === null) {
+      return res.status(404).json({
+        message: 'not saved',
+        document: null,
       })
     }
+
+    const fileName = `${email}/${id}/quotation-${document.version}.json`
+    const file = bucket.file(fileName)
+    const contents = JSON.stringify({ quotation, items, id }, null, 2)
+
+    await file.save(contents)
+
+    return res.json({
+      message: isNew ? 'inserted' : 'saved',
+      document,
+    })
+
+    // if (document === null) {
+    //   return res.status(404).json({
+    //     message: 'not found',
+    //     document: null,
+    //   })
+    // }
   } catch (error) {
     next(error)
   }

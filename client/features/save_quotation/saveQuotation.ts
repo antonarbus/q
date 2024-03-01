@@ -5,6 +5,7 @@ import { apiUrl } from 'server/consts/apiUrl'
 import { showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@entities/nav'
 import { quotationSignal, saveQuotationLocally } from '@entities/quotation'
 import { axiosWithAuth } from '@entities/user'
+import { markAsSaved } from '@shared/isSaved'
 
 export const saveQuotation = async (): Promise<void> => {
   showLoadingNavIcon({ navMenuItemIdKey: 'save' })
@@ -16,6 +17,7 @@ export const saveQuotation = async (): Promise<void> => {
       data: {
         quotation: quotationSignal.value,
         items: getState().items,
+        id: quotationSignal.value.id,
       },
     })
 
@@ -25,6 +27,7 @@ export const saveQuotation = async (): Promise<void> => {
     }
 
     saveQuotationLocally()
+    markAsSaved()
 
     showSuccessNavIcon({ navMenuItemIdKey: 'save' })
   } catch (error) {
