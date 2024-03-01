@@ -1,4 +1,5 @@
 import { dispatch } from '@lib_instances/store'
+import { markAsNotSaved } from '@shared/isSaved'
 import { type FroalaEditorRef } from '@shared/types'
 import type { BoqColumnKey } from '../../types'
 import { saveItemsLocally } from '../../utils/saveItemsLocally'
@@ -27,7 +28,6 @@ export const updateBoqColumnCellAtStore = ({
   if (!didTextChange) return
 
   dispatch(itemsSlice.actions.updateBoqColumnNameTextReducer({ itemIndex, html, boqColumnKey }))
-  saveItemsLocally({
-    msgAboveItemWithIndex: itemIndex,
-  })
+  saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
+  markAsNotSaved()
 }

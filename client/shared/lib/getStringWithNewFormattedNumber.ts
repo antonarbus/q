@@ -4,21 +4,32 @@ type Props = {
   newNumber: string | number
 }
 
-export const getStringWithNewFormattedNumber = ({
-  string,
-  oldNumber,
-  newNumber,
-}: Props): string => {
-  const searchText = String(oldNumber).replace('.', ',')
-  const regExpToSearchTextOutsideHtmlTags = new RegExp(`(?![^<>]*>)${searchText}`, 'g')
+export const getStringWithNewFormattedNumber = ({ string, oldNumber, newNumber }: Props): string => {
   const newNumberFormatted = new Intl.NumberFormat('fr', {
     minimumFractionDigits: 0,
-    maximumFractionDigits: 100,
+    maximumFractionDigits: 10,
   }).format(Number(newNumber))
-  const stringWithoutSpacesBetweenNumber = string.replace(/(?<=\d)\s+(?=\d)/g, '')
-  const stringWithCommasBetweenNumbers = stringWithoutSpacesBetweenNumber.replace(/(?<=\d)\.(?=\d)/g, ',')
-  const htmlWithNewNumber = stringWithCommasBetweenNumbers
-    .replace(regExpToSearchTextOutsideHtmlTags, newNumberFormatted)
-    .replace('NaN', newNumberFormatted)
+
+  const htmlWithNewNumber = findAndReplaceOutsideHtmlTags({
+    string,
+    searchText: String(oldNumber),
+    replacementText: newNumberFormatted,
+  })
+
   return htmlWithNewNumber
+}
+
+function findAndReplaceOutsideHtmlTags({ string, searchText, replacementText }: {
+  string: string
+  searchText: string
+  replacementText: string
+}): string {
+  const regExpToRemoveGapsBetweenDigits = /(?<=\d)\s+(?=\d)/g
+  const regExpToFindSearchTextOutsideHtmlTags = new RegExp(`([^<>]*)(${searchText})([^<>]*)`, 'g')
+  const resultString = string
+    .replace(regExpToRemoveGapsBetweenDigits, '')
+    .replace(regExpToFindSearchTextOutsideHtmlTags, (match, before, found, after) => {
+      return before + replacementText + after
+    })
+  return resultString
 }

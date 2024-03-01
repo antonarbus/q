@@ -1,6 +1,7 @@
 import { roundTo } from 'round-to'
 import { boqRowCellKey, getBoqRowFromStore, getBoqRowsFromStore, isBoqRowPriceValid, saveItemsLocally, updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from '@entities/items'
 import { type BoqRow } from '@entities/items'
+import { markAsNotSaved } from '@shared/isSaved'
 import { type FroalaEditorRef } from '@shared/types'
 
 type Props = {
@@ -50,15 +51,16 @@ export const validateBoqRowPrice = ({
 
     const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
 
-    updateSubTotalPriceWithValue({
+    const { didChange } = updateSubTotalPriceWithValue({
       itemIndex,
       subTotalPriceEditor: subTotalPriceEditorRef.current,
       value: subTotalPriceValueNewRounded,
       incrementally: true,
     })
 
-    saveItemsLocally({
-      msgAboveItemWithIndex: itemIndex,
-    })
+    if (!didChange) return
+
+    saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
+    markAsNotSaved()
   }
 }

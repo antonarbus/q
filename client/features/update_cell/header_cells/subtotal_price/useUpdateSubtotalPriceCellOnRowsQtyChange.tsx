@@ -2,6 +2,7 @@ import { useSelectorTyped } from '@lib_instances/store'
 import { useUpdateEffect } from 'react-use'
 import { roundTo } from 'round-to'
 import { useBoqItem, useItem, getBoqRowsFromStore, type BoqRow, updateSubTotalPriceWithValue, saveItemsLocally } from '@entities/items'
+import { markAsNotSaved } from '@shared/isSaved'
 
 export const useUpdateSubtotalPriceCellOnRowsQtyChange = (): void => {
   const { itemIndex } = useItem()
@@ -25,15 +26,16 @@ export const useUpdateSubtotalPriceCellOnRowsQtyChange = (): void => {
 
     const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
 
-    updateSubTotalPriceWithValue({
+    const { didChange } = updateSubTotalPriceWithValue({
       itemIndex,
       subTotalPriceEditor: subTotalPriceEditorRef.current,
       value: subTotalPriceValueNewRounded,
       incrementally: true,
     })
 
-    saveItemsLocally({
-      msgAboveItemWithIndex: itemIndex,
-    })
+    if (!didChange) return
+
+    saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
+    markAsNotSaved()
   }, [isItemFroala, isFroala])
 }
