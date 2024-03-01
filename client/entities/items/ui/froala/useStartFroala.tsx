@@ -10,6 +10,7 @@ import { nanoid } from 'nanoid'
 import type { MouseEvent } from 'react'
 import { useEffect } from 'react'
 import { apiUrl } from 'server/consts/apiUrl'
+import { quotationSignal } from '@entities/quotation'
 import { type FroalaEditorRef } from '@shared/types'
 import { useFroala } from '../../providers/FroalaProvider'
 import { froalaDefaultOptions } from './froalaDefaultOptions'
@@ -32,9 +33,24 @@ export const useStartFroala = (): void => {
           ...froalaDefaultOptions,
           placeholderText: placeholder ?? 'Text...',
           // if logged in files are uploaded to the bucket, if not, they are just stored in browser
-          ...(isLogged && { imageUploadURL: apiUrl.upload }),
-          ...(isLogged && { fileUploadURL: apiUrl.upload }),
-          ...(isLogged && { videoUploadURL: apiUrl.upload }),
+          ...(isLogged && {
+            imageUploadURL: apiUrl.upload,
+            fileUploadURL: apiUrl.upload,
+            videoUploadURL: apiUrl.upload,
+            imageUploadParams: {
+              id: quotationSignal.value.id,
+              email: quotationSignal.value.email,
+            },
+            fileUploadParams: {
+              id: quotationSignal.value.id,
+              email: quotationSignal.value.email,
+            },
+            videoUploadParams: {
+              id: quotationSignal.value.id,
+              email: quotationSignal.value.email,
+            },
+          }),
+
           fileMaxSize: 1024 * 1024 * 30,
           events: {
             contentChanged: () => {

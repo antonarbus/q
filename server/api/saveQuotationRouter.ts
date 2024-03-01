@@ -22,7 +22,7 @@ type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next
 
 export const saveQuotationRouter = Router()
 
-export const saveQuotation: RouterHandler = async (req, res, next) => {
+const saveQuotation: RouterHandler = async (req, res, next) => {
   try {
     const { items, quotation, id } = req.body
     const email = req.headers.email
@@ -45,8 +45,8 @@ export const saveQuotation: RouterHandler = async (req, res, next) => {
       })
     }
 
-    const fileName = `${email}/${id}/quotation-${document.version}.json`
-    const file = bucket.file(fileName)
+    const filePath = `${email}/${id}/quotation-${document.version}.json`
+    const file = bucket.file(filePath)
     const contents = JSON.stringify({ quotation, items, id }, null, 2)
     await file.save(contents)
 

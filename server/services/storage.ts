@@ -1,5 +1,8 @@
 import { Storage } from '@google-cloud/storage'
 
+//* https://console.cloud.google.com/storage/browser/quotation-app-bucket
+//* https://cloud.google.com/nodejs/docs/reference/storage/latest
+
 const storage = new Storage({
   keyFilename: process.env.GOOGLE_CLOUD_PROJECT_FILE_KEY,
   projectId: process.env.GOOGLE_CLOUD_PROJECT_ID,

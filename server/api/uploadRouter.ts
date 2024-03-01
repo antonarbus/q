@@ -1,27 +1,28 @@
-import crypto from 'node:crypto'
-import path from 'node:path'
-import { format } from 'node:util'
-import { Storage } from '@google-cloud/storage'
-import express from 'express'
 // import { verifyTokenMiddleware } from '../middleware/verifyTokenMiddleware'
-import type { Next, Res, Req } from '../types'
+import { bucket } from '@server/services/storage'
+import express from 'express'
+import type { Next, ReqWithBody, ResWithBody } from '../types'
 
-//* https://console.cloud.google.com/storage/browser/quotation-app-bucket
-const storage = new Storage({
-  keyFilename: './quotationapp-8014c-04cff2d88d5b.json',
-  projectId: 'quotationapp-8014c',
-})
+export type ReqBody = {
+  // quotation: Quotation
+  // items: ItemType[]
+  // id: string
+}
 
-const bucket = storage.bucket(process.env.BUCKET_NAME!)
+export type ResBody = {
+  // message: string
+  // document: HydratedDocument<QuotationModelType> | null
+}
+
+type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
 
 export const uploadRouter = express.Router()
 
-const upload = async (req: Req, res: Res, next: Next): Promise<void> => {
+const upload: RouterHandler = async (req, res, next) => {
   try {
     if (req.file === undefined) return
-
-    const { fileName, link } = await uploadFileIntoMemory(req.file)
-    await bucket.file(fileName).makePublic()
+    const { id, email } = req.body
+    const { fileName, link } = await uploadFileIntoMemory({ file: req.file, email, id })
 
     const fileInfo = {
       link,
@@ -46,23 +47,21 @@ uploadRouter.post(
 
 // https://medium.com/@olamilekan001/image-upload-with-google-cloud-storage-and-node-js-a1cf9baa1876
 
-async function uploadFileIntoMemory(file: Express.Multer.File): Promise<{ link: string, fileName: string }> {
+async function uploadFileIntoMemory({ file, email, id }: {
+  file: Express.Multer.File
+  email: string
+  id: string
+}): Promise<{ link: string, fileName: string }> {
   return await new Promise((resolve, reject) => {
-    const fileHash = crypto.createHash('sha256').update(file.buffer).digest('hex')
-    const fileExt = path.extname(file.originalname) // fileExt constrains '.' // .doc
-    const finalFileName = fileHash + fileExt
-
-    const blob = bucket.file(finalFileName)
+    const originalNameUtf8 = Buffer.from(file.originalname, 'ascii').toString('utf8')
+    const fileName = `${email}/${id}/${originalNameUtf8}`
+    const blob = bucket.file(fileName)
     const blobStream = blob.createWriteStream({ resumable: false })
-
     blobStream
-      .on('finish', () => {
-        const publicUrl = format(`https://storage.googleapis.com/${bucket.name}/${finalFileName}`)
-
-        resolve({
-          link: publicUrl,
-          fileName: finalFileName,
-        })
+      .on('finish', async () => {
+        await bucket.file(fileName).makePublic()
+        const link = `https://storage.googleapis.com/${bucket.name}/${fileName}`
+        resolve({ link, fileName })
       })
       .on('error', (error) => {
         console.error(error)
