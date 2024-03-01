@@ -10,7 +10,7 @@ export const getStringWithNewFormattedNumber = ({ string, oldNumber, newNumber }
     maximumFractionDigits: 10,
   }).format(Number(newNumber))
 
-  const htmlWithNewNumber = findAndReplaceOutsideHtmlTags({
+  const htmlWithNewNumber = findAndReplaceStringOutsideHtmlTags({
     string,
     searchText: String(oldNumber),
     replacementText: newNumberFormatted,
@@ -19,7 +19,7 @@ export const getStringWithNewFormattedNumber = ({ string, oldNumber, newNumber }
   return htmlWithNewNumber
 }
 
-function findAndReplaceOutsideHtmlTags({ string, searchText, replacementText }: {
+function findAndReplaceStringOutsideHtmlTags({ string, searchText, replacementText }: {
   string: string
   searchText: string
   replacementText: string

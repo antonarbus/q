@@ -1,4 +1,4 @@
-import { localStorageKey } from '@shared/consts/localStorageKey'
+import { localStorageKey } from '../consts/localStorageKey'
 import { isSavedSignal } from './isSavedSignal'
 
 export const markAsSaved = (): void => {
