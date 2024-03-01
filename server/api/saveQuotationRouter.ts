@@ -1,6 +1,6 @@
-import { Storage } from '@google-cloud/storage'
 import { QuotationModel, type QuotationModelType } from '@server/db/models/quotationModel'
 import { verifyTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
+import { bucket } from '@server/services/storage'
 import { Router } from 'express'
 import { type HydratedDocument } from 'mongoose'
 import type { ItemType } from '@entities/items'
@@ -21,13 +21,6 @@ export type ResBody = {
 type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
 
 export const saveQuotationRouter = Router()
-
-const storage = new Storage({
-  keyFilename: './quotationapp-8014c-04cff2d88d5b.json',
-  projectId: 'quotationapp-8014c',
-})
-
-const bucket = storage.bucket(process.env.BUCKET_NAME!)
 
 export const saveQuotation: RouterHandler = async (req, res, next) => {
   try {
@@ -55,7 +48,6 @@ export const saveQuotation: RouterHandler = async (req, res, next) => {
     const fileName = `${email}/${id}/quotation-${document.version}.json`
     const file = bucket.file(fileName)
     const contents = JSON.stringify({ quotation, items, id }, null, 2)
-
     await file.save(contents)
 
     return res.json({
