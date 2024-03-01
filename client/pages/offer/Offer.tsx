@@ -5,8 +5,8 @@ import { QuotationInfo } from '@widgets/quotation'
 export const Offer = (): JSX.Element => {
   return (
     <>
-      <Copy />
       <QuotationInfo />
+      <Copy />
       <Items />
     </>
   )

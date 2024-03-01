@@ -1,5 +1,6 @@
 import { Box } from '@mui/material'
 import { FaInfoCircle } from 'react-icons/fa'
+import { isSavedSignal } from '@shared/isSaved'
 
 type Props = {
   quotationId: string
@@ -18,7 +19,6 @@ export const QuotationInfoLayout = ({
         justifyContent: 'flex-end',
         fontWeight: 600,
         color: 'grey',
-        paddingRight: '15px',
         height: '20px',
         translate: '0px 5px',
       }}
@@ -33,13 +33,13 @@ export const QuotationInfoLayout = ({
           cursor: 'pointer',
           gap: '5px',
           ':hover svg': {
-            fill: '#3c5588 !important',
+            fill: isSavedSignal.value ? '#55883c !important' : '#3c5588 !important',
           },
         }}
       >
         <FaInfoCircle
           css={{
-            fill: '#6488cf',
+            fill: isSavedSignal.value ? '#47a95a' : '#6488cf',
           }}
         />
         {quotationId}
