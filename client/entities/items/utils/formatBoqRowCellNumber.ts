@@ -54,9 +54,6 @@ export const formatBoqRowCellNumber = ({
     oldNumber: value,
     newNumber: roundToTwoDecimals ? roundedValue : value,
   })
-
-  console.log(111)
-
   if (html === newHtml) {
     return {
       didUpdate: false,
