@@ -1,5 +1,6 @@
 import { saveItemsLocally, updateBoqHeaderCellAtStore } from '@entities/items'
 import { type BoqHeaderKey } from '@entities/items'
+import { markAsNotSaved } from '@shared/isSaved'
 import { type FroalaEditorRef } from '@shared/types'
 
 type Props = {
@@ -12,8 +13,7 @@ export const updateSubtotalTextCell = ({ editorRef, itemIndex, boqHeaderKey }: P
   const { didUpdate } = updateBoqHeaderCellAtStore({ editorRef, itemIndex, boqHeaderKey })
 
   if (didUpdate) {
-    saveItemsLocally({
-      msgAboveItemWithIndex: itemIndex,
-    })
+    saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
+    markAsNotSaved()
   }
 }

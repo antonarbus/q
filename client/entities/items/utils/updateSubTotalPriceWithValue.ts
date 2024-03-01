@@ -11,22 +11,38 @@ type Props = {
   incrementally: boolean
 }
 
+type Res = {
+  didChange: boolean
+}
+
 export const updateSubTotalPriceWithValue = ({
   itemIndex,
   subTotalPriceEditor,
   value,
   incrementally,
-}: Props): void => {
-  if (subTotalPriceEditor === null) return
+}: Props): Res => {
+  if (subTotalPriceEditor === null) {
+    return {
+      didChange: false,
+    }
+  }
 
   const boqItem = getBoqItemFromStore({ itemIndex })
-  if (boqItem === undefined) return
+  if (boqItem === undefined) {
+    return {
+      didChange: false,
+    }
+  }
 
   const subTotalPriceValueCurrent = boqItem.boq.header.subTotalPrice.value
 
   const didValueChange = value !== subTotalPriceValueCurrent
 
-  if (!didValueChange) return
+  if (!didValueChange) {
+    return {
+      didChange: false,
+    }
+  }
 
   const subTotalPriceTextContent = getTextContentFromHtml({
     html: boqItem.boq.header.subTotalPrice.html,
@@ -62,5 +78,9 @@ export const updateSubTotalPriceWithValue = ({
       editor: subTotalPriceEditor,
       html: boqItem.boq.header.subTotalPrice.html,
     })
+  }
+
+  return {
+    didChange: true,
   }
 }

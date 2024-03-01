@@ -1,5 +1,6 @@
 import { roundTo } from 'round-to'
 import { didBoqHeaderCellContentChange, getBoqHeaderFromStore, getBoqRowsFromStore, saveItemsLocally, updateBoqHeaderCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue, getBoqRowFromStore, type BoqRow, type BoqRowEditorRefs, boqRowCellKey } from '@entities/items'
+import { markAsNotSaved } from '@shared/isSaved'
 import { type FroalaEditor, type FroalaEditorRef } from '@shared/types'
 import { notify } from '@shared/ui/top_msg'
 
@@ -35,9 +36,8 @@ export const updateSubtotalPriceCell = ({
   })
 
   if (didUpdate) {
-    saveItemsLocally({
-      msgAboveItemWithIndex: itemIndex,
-    })
+    saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
+    markAsNotSaved()
   }
 
   const prevSubTotalPriceValue = boqRows.reduce((accumulator, boqRow) => {
@@ -99,8 +99,6 @@ export const updateSubtotalPriceCell = ({
       value: prevSubTotalPriceValue,
       incrementally: true,
     })
-
-    return
   }
 
   if (unpinnedPricesSum === 0) {
@@ -115,8 +113,6 @@ export const updateSubtotalPriceCell = ({
       value: prevSubTotalPriceValue,
       incrementally: true,
     })
-
-    return
   }
 
   prices.forEach((price, rowIndex) => {
@@ -173,14 +169,15 @@ export const updateSubtotalPriceCell = ({
 
   const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
 
-  updateSubTotalPriceWithValue({
+  const { didChange } = updateSubTotalPriceWithValue({
     itemIndex,
     subTotalPriceEditor: subTotalPriceEditorRef.current,
     value: subTotalPriceValueNewRounded,
     incrementally: true,
   })
 
-  saveItemsLocally({
-    msgAboveItemWithIndex: itemIndex,
-  })
+  if (!didChange) return
+
+  saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
+  markAsNotSaved()
 }

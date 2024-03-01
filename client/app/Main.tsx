@@ -17,7 +17,11 @@ export const Main = (): JSX.Element => {
   )
 }
 
-function MainLayout ({ children }: { children: ReactNode }): JSX.Element {
+type Props = {
+  children: ReactNode
+}
+
+function MainLayout ({ children }: Props): JSX.Element {
   return (
     <main
       css={{

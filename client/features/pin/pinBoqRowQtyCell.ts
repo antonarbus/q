@@ -1,5 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { boqRowCellKey, getBoqCellFromStore, itemsSlice, saveItemsLocally } from '@entities/items'
+import { markAsNotSaved } from '@shared/isSaved'
 
 type Props = {
   itemIndex: number
@@ -13,8 +14,6 @@ export const pinBoqRowQtyCell = ({ itemIndex, rowIndex }: Props): void => {
   if (isPinned) return
 
   dispatch(itemsSlice.actions.pinQtyReducer({ itemIndex, rowIndex }))
-
-  saveItemsLocally({
-    msgAboveItemWithIndex: itemIndex,
-  })
+  saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
+  markAsNotSaved()
 }

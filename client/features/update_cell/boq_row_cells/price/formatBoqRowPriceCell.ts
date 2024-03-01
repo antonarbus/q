@@ -1,4 +1,5 @@
 import { boqRowCellKey, formatBoqRowCellNumber, saveItemsLocally } from '@entities/items'
+import { markAsNotSaved } from '@shared/isSaved'
 import { type FroalaEditorRef } from '@shared/types'
 
 type Props = {
@@ -21,8 +22,7 @@ export const formatBoqRowPriceCell = ({
   })
 
   if (didUpdate) {
-    saveItemsLocally({
-      msgAboveItemWithIndex: itemIndex,
-    })
+    saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
+    markAsNotSaved()
   }
 }

@@ -5,6 +5,7 @@ import { useEffectOnce, useUnmount } from 'react-use'
 import { copySlice } from '@entities/copy'
 import { type CopyableItem, getBoqItemFromStore, itemsSlice, saveItemsLocally, boqRowType } from '@entities/items'
 import { generalSlice } from '@shared/general'
+import { markAsNotSaved } from '@shared/isSaved'
 
 export const usePasteClick = (): void => {
   useEffectOnce(() => {
@@ -47,6 +48,7 @@ function pasteItemOnClick(): void {
   setTimeout(() => {
     dispatch(copySlice.actions.allowAllActions())
     saveItemsLocally({ msgAboveItemWithIndex: getIndexWhereToShowMsg({ newItemId, topItemFromCopyContainer }) })
+    markAsNotSaved()
   }, 1000 * theme.item.animationDuration)
 
   const itemsInCopyContainer = getState().copy.items

@@ -1,6 +1,7 @@
 import { dispatch } from '@lib_instances/store'
 import { type BoqColumnKey, itemsSlice, saveItemsLocally, getBoqColumnFromStore, unfixItemImagesHeight, fixItemImagesHeight } from '@entities/items'
 import { className } from '@shared/consts/className'
+import { markAsNotSaved } from '@shared/isSaved'
 
 type Props = {
   headerColumnElement: HTMLElement
@@ -33,4 +34,5 @@ export const onColumnResizeStop = ({ headerColumnElement, itemIndex, boqColumnKe
   dispatch(itemsSlice.actions.updateItemWidthReducer({ itemIndex, width: itemWidth ?? 0 }))
   dispatch(itemsSlice.actions.enableFroalaReducer({ itemIndex }))
   saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
+  markAsNotSaved()
 }

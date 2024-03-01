@@ -1,5 +1,6 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { itemType, itemsSlice, saveItemsLocally } from '@entities/items'
+import { markAsNotSaved } from '@shared/isSaved'
 import { type FroalaEditorRef } from '@shared/types'
 
 type Props = {
@@ -23,8 +24,6 @@ export const updatePriceTitleCell = ({
   if (!didTextChange) return
 
   dispatch(itemsSlice.actions.updatePriceTitleReducer({ itemIndex, html }))
-
-  saveItemsLocally({
-    msgAboveItemWithIndex: itemIndex,
-  })
+  saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
+  markAsNotSaved()
 }

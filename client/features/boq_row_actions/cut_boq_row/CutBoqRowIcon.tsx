@@ -7,6 +7,7 @@ import { copySlice } from '@entities/copy'
 import { getBoqRowFromStore, itemsSlice, saveItemsLocally, selectIsLastBoqRow, useItem, useRow } from '@entities/items'
 import { className } from '@shared/consts/className'
 import { generalSlice } from '@shared/general'
+import { markAsNotSaved } from '@shared/isSaved'
 import { cleanHtml } from '@shared/lib/itemsUtils'
 
 export const CutBoqRowIcon = (): JSX.Element => {
@@ -70,6 +71,7 @@ export const CutBoqRowIcon = (): JSX.Element => {
         setTimeout(() => {
           dispatch(copySlice.actions.allowAllActions())
           saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
+          markAsNotSaved()
         }, 1000 * theme.item.animationDuration)
       }}
     >

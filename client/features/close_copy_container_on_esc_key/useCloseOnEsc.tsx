@@ -10,7 +10,7 @@ export const useExitCopyOnEsc = (): void => {
     dispatch(copySlice.actions.hideCopyContainer())
     dispatch(itemsSlice.actions.removePasteItemReducer())
     dispatch(generalSlice.actions.enableFroala())
-    saveItemsLocally()
+    // saveItemsLocally()
   }
 
   type Res = () => void

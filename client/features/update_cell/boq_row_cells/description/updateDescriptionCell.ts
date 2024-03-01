@@ -1,4 +1,5 @@
 import { type BoqRowCellKey, didBoqCellContentChange, saveItemsLocally, updateBoqRowCellAtStore } from '@entities/items'
+import { markAsNotSaved } from '@shared/isSaved'
 import { type FroalaEditorRef } from '@shared/types'
 
 type Props = {
@@ -32,7 +33,6 @@ export const updateDescriptionCell = ({
     html: editorRef.current.html.get(),
   })
 
-  saveItemsLocally({
-    msgAboveItemWithIndex: itemIndex,
-  })
+  saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
+  markAsNotSaved()
 }

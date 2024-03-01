@@ -7,6 +7,7 @@ import { RxCross2 } from 'react-icons/rx'
 import { copySlice } from '@entities/copy'
 import { itemsSlice, selectIsLastItem, useItem, saveItemsLocally } from '@entities/items'
 import { generalSlice } from '@shared/general'
+import { markAsNotSaved } from '@shared/isSaved'
 
 export const DeleteItemIcon = (): EmotionJSX.Element => {
   const ref = useRef<HTMLSpanElement>(null)
@@ -46,6 +47,7 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
           setTimeout(() => {
             dispatch(generalSlice.actions.enableFroala())
             saveItemsLocally({ msgAboveItemWithIndex: getIndexWhereToShowMsg({ itemIndex }) })
+            markAsNotSaved()
           }, 1000 * theme.item.animationDuration)
         }
       }}
