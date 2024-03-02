@@ -5,7 +5,7 @@
 import 'froala-editor/js/plugins.pkgd.min.js'
 import 'froala-editor/js/third_party/font_awesome.min.js'
 import './froala_editor.pkgd.min.css'
-import { useSelectorTyped } from '@lib_instances/store'
+import { getState, useSelectorTyped } from '@lib_instances/store'
 import { nanoid } from 'nanoid'
 import type { MouseEvent } from 'react'
 import { useEffect } from 'react'
@@ -39,15 +39,15 @@ export const useStartFroala = (): void => {
             videoUploadURL: apiUrl.upload,
             imageUploadParams: {
               id: quotationSignal.value.id,
-              email: quotationSignal.value.email,
+              email: getState().user.email,
             },
             fileUploadParams: {
               id: quotationSignal.value.id,
-              email: quotationSignal.value.email,
+              email: getState().user.email,
             },
             videoUploadParams: {
               id: quotationSignal.value.id,
-              email: quotationSignal.value.email,
+              email: getState().user.email,
             },
           }),
 

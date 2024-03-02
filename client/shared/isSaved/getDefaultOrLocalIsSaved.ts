@@ -5,15 +5,15 @@ export const getDefaultOrLocalIsSaved = (): boolean => {
   const isSavedFromLocalStorage = localStorage.getItem(localStorageKey.isSaved)
 
   if (isSavedFromLocalStorage === null) {
-    localStorage.setItem(localStorageKey.isSaved, JSON.stringify(true))
-    return true
+    localStorage.setItem(localStorageKey.isSaved, JSON.stringify(false))
+    return false
   }
 
   const isSaved = jsonParseSafe<boolean>(isSavedFromLocalStorage)
 
   if (isSaved === undefined) {
-    localStorage.setItem(localStorageKey.isSaved, JSON.stringify(true))
-    return true
+    localStorage.setItem(localStorageKey.isSaved, JSON.stringify(false))
+    return false
   }
 
   return isSaved
