@@ -54,13 +54,6 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
       message: isNew ? 'inserted' : 'saved',
       document,
     })
-
-    // if (document === null) {
-    //   return res.status(404).json({
-    //     message: 'not found',
-    //     document: null,
-    //   })
-    // }
   } catch (error) {
     next(error)
   }
