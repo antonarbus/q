@@ -1,3 +1,4 @@
+import { router } from '@lib_instances/Router'
 import { dispatch, getState } from '@lib_instances/store'
 import axios, { AxiosError } from 'axios'
 import { apiUrl } from 'server/consts/apiUrl'
@@ -28,40 +29,36 @@ axiosWithAuth.interceptors.request.use((config) => {
   return config
 })
 
-axiosWithAuth.interceptors.response.use(
-  (config) => {
-    return config
-  },
-  async (error) => {
-    const originalRequest = error.config
-    const isTokenProbablyExpired = error.response.status === 401 && error.config && !error.config._isRetry
-    if (isTokenProbablyExpired) {
-      originalRequest._isRetry = true
-      try {
-        const response = await axios.get(apiUrl.refresh, { withCredentials: true })
-        const { accessJwtToken } = response.data
+axiosWithAuth.interceptors.response.use((config) => {
+  return config
+}, async (error) => {
+  const originalRequest = error.config
+  const isTokenProbablyExpired = error.response.status === 401 && error.config && !error.config._isRetry
+  if (isTokenProbablyExpired) {
+    originalRequest._isRetry = true
+    try {
+      const response = await axios.get(apiUrl.refresh, { withCredentials: true })
+      const { accessJwtToken } = response.data
 
-        if (accessJwtToken) {
-          accessTokenRef.current = accessJwtToken
-        }
+      if (accessJwtToken) {
+        accessTokenRef.current = accessJwtToken
+      }
 
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        return await axiosWithAuth.request(originalRequest)
-      } catch (err: unknown) {
-        if (err instanceof AxiosError && err.response?.status === 401) {
-          if (getState().user.isLogged) {
-            dispatch(userSlice.actions.forgetLoggedUser())
-          }
-          accessTokenRef.current = null
-          console.log('show login window')
-          console.warn('not authorized')
-          console.error(err)
-          // todo: show login window
-          // todo: need to navigate for the route and router to be exposed, fuck!
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      return await axiosWithAuth.request(originalRequest)
+    } catch (err: unknown) {
+      if (err instanceof AxiosError && err.response?.status === 401) {
+        if (getState().user.isLogged) {
+          dispatch(userSlice.actions.forgetLoggedUser())
         }
+        accessTokenRef.current = null
+        console.warn('not authorized')
+        console.error(err)
+        void router.navigate('/login')
       }
     }
+  }
 
-    throw error
-  },
+  throw error
+},
 )
