@@ -1,11 +1,10 @@
 import express from 'express'
 import { UserModel } from '../db/models/userModel'
 import type { JwtPayloadExtended } from '../services/jwt'
-import { getNewAccessToken, getNewRefreshToken, refreshJwtTokenExpirationSeconds, verifyRefreshToken } from '../services/jwt'
+import { getNewAccessToken, getNewRefreshToken, thirtyDaysInSec, verifyRefreshToken } from '../services/jwt'
 import type { Next, Req, ResWithBody } from '../types'
 
 export type ResBody = {
-  status: string
   message: string
   email: string
   accessJwtToken: string
@@ -16,55 +15,43 @@ export const refreshRouter = express.Router()
 
 refreshRouter.get('/', async (req: Req, res: ResWithBody<ResBody>, next: Next) => {
   try {
-    // get refresh token from cookie
+    const refreshJwtToken = req.cookies.refreshJwtToken
 
-    type Props = {
-      'refreshJwtToken': string | undefined
-    }
-    const refreshJwtToken = (req.cookies as Props).refreshJwtToken
-
-    if (!refreshJwtToken) {
-      res.json({
-        status: 'error',
-        message: 'no refresh token found in cookies during token refresh, probably not authorized',
+    if (typeof refreshJwtToken !== 'string') {
+      return res.status(401).json({
+        message: 'no refresh token found in cookies, not authorized',
         email: 'no email',
         accessJwtToken: 'no access token',
         roles: ['no role'],
       })
-      return
     }
 
     // check if token is ok
     const { email } = verifyRefreshToken(refreshJwtToken) as JwtPayloadExtended
 
     if (!email) {
-      res.json({
-        status: 'error',
-        message: 'refresh token is not validated, probably not authorized',
+      return res.status(401).json({
+        message: 'refresh token is not validated, not authorized',
         email: 'no email',
         accessJwtToken: 'no access token',
         roles: ['no role'],
       })
-      return
     }
 
-    // find token in db
     const user = await UserModel.findOne({ refreshJwtToken })
     if (!user) {
-      res.json({
-        status: 'error',
-        message: 'no user found with such refresh token in db',
+      return res.status(401).json({
+        message: 'no user found with such refresh token',
         email: 'no email',
         accessJwtToken: 'no access token',
         roles: ['no role'],
       })
-      return
     }
 
     // generate refresh token and save in db
     const updatedRefreshJwtToken = getNewRefreshToken({ email, roles: [''] })
     res.cookie('refreshJwtToken', updatedRefreshJwtToken, {
-      maxAge: refreshJwtTokenExpirationSeconds * 1000,
+      maxAge: thirtyDaysInSec * 1000,
       httpOnly: true,
     })
 
@@ -78,9 +65,8 @@ refreshRouter.get('/', async (req: Req, res: ResWithBody<ResBody>, next: Next) =
     const accessJwtToken = getNewAccessToken({ email, roles })
 
     // send response
-    res.json({
-      status: 'ok',
-      message: `refresh token for email: ${email} is refreshed`,
+    return res.status(200).json({
+      message: `updated refresh token for email: ${email} is refreshed`,
       accessJwtToken,
       roles,
       email,

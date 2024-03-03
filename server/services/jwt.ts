@@ -1,8 +1,8 @@
 import type { JwtPayload } from 'jsonwebtoken'
 import jwt from 'jsonwebtoken'
 
-const accessJwtTokenExpirationSeconds = 15 * 60 // 15 min
-export const refreshJwtTokenExpirationSeconds = 30 * 24 * 60 * 60 // 30 days
+const fifteenMinInSec = 15 * 60
+export const thirtyDaysInSec = 30 * 24 * 60 * 60
 
 export type JwtPayloadExtended = {
   email: string
@@ -11,12 +11,12 @@ export type JwtPayloadExtended = {
 
 export const getNewAccessToken = (payload: JwtPayloadExtended): string =>
   jwt.sign(payload, process.env.JWT_ACCESS_SECRET ?? 'some fake secret to suppress ts error', {
-    expiresIn: accessJwtTokenExpirationSeconds,
+    expiresIn: fifteenMinInSec,
   })
 
 export const getNewRefreshToken = (payload: JwtPayloadExtended): string =>
   jwt.sign(payload, process.env.JWT_REFRESH_SECRET ?? 'some fake secret to suppress ts error', {
-    expiresIn: refreshJwtTokenExpirationSeconds,
+    expiresIn: thirtyDaysInSec,
   })
 
 export const verifyAccessToken = (accessJwtToken: string): JwtPayload | string =>

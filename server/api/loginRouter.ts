@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
 import express from 'express'
 import { UserModel } from '../db/models/userModel'
-import { getNewAccessToken, getNewRefreshToken, refreshJwtTokenExpirationSeconds } from '../services/jwt'
+import { getNewAccessToken, getNewRefreshToken, thirtyDaysInSec } from '../services/jwt'
 import type { Next, Req, Res } from '../types'
 
 export type LoginApiRes = {
@@ -71,7 +71,7 @@ loginRouter.post('/', async (req: Req, res: Res, next: Next) => {
 
     // put refresh token in cookie
     res.cookie('refreshJwtToken', refreshJwtToken, {
-      maxAge: refreshJwtTokenExpirationSeconds * 1000,
+      maxAge: thirtyDaysInSec * 1000,
       httpOnly: true,
     })
 

@@ -40,9 +40,8 @@ export const useRefreshTokens = ({ withLoadingState }: Props): Res => {
     try {
       if (accessTokenRef.current === null) {
         const response = await axios.get<ResBody>(apiUrl.refresh, { withCredentials: true })
-        const { status, accessJwtToken, roles } = response.data
 
-        if (status === 'error') {
+        if (response.status === 401) {
           accessTokenRef.current = null
           dispatch(userSlice.actions.forgetLoggedUser())
           navUpdate.logout()
@@ -50,14 +49,14 @@ export const useRefreshTokens = ({ withLoadingState }: Props): Res => {
           return
         }
 
-        if (!accessJwtToken) {
+        if (!response.data.accessJwtToken) {
           dispatch(userSlice.actions.forgetLoggedUser())
           navUpdate.logout()
           console.warn('no access token in db')
           return
         }
 
-        const payloadFromUpdatedAccessToken = jwtDecode<JwtPayloadExtended>(accessJwtToken)
+        const payloadFromUpdatedAccessToken = jwtDecode<JwtPayloadExtended>(response.data.accessJwtToken)
         const { email } = payloadFromUpdatedAccessToken
 
         if (!email) {
@@ -68,8 +67,8 @@ export const useRefreshTokens = ({ withLoadingState }: Props): Res => {
         }
 
         if (email) {
-          accessTokenRef.current = accessJwtToken
-          dispatch(userSlice.actions.rememberLoggedUser({ email, isLogged: true, roles }))
+          accessTokenRef.current = response.data.accessJwtToken
+          dispatch(userSlice.actions.rememberLoggedUser({ email, isLogged: true, roles: response.data.roles }))
           navUpdate.login()
           console.info(`tokens for ${email} are refreshed`)
         }
