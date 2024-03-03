@@ -23,15 +23,12 @@ const upload: RouterHandler = async (req, res, next) => {
   try {
     if (req.file === undefined) return
     const { id, email } = req.body
-    const { name, link } = await uploadFileIntoMemory({ file: req.file, email, id })
-
-    const size = req.file.size / 1024 / 1024
+    const { name, link, size } = await uploadFileIntoMemory({ file: req.file, email, id })
 
     const document = await QuotationModel.findOne({ email, id })
     if (document !== null) {
       document.files.push({ name, size })
-      const dbRes = await document.save()
-      console.log('🚀 ~ dbRes:', dbRes)
+      await document.save()
     }
 
     // todo: add types
@@ -55,16 +52,18 @@ async function uploadFileIntoMemory({ file, email, id }: {
   file: Express.Multer.File
   email: string
   id: string
-}): Promise<{ link: string, name: string }> {
+}): Promise<{ link: string, name: string, size: number }> {
   return await new Promise((resolve, reject) => {
     const name = Buffer.from(file.originalname, 'ascii').toString('utf8')
     const blob = bucket.file(`${email}/${id}/${name}`)
     const blobStream = blob.createWriteStream({ resumable: false })
+    const size = file.size / 1024 / 1024
+
     blobStream
       .on('finish', async () => {
         await bucket.file(`${email}/${id}/${name}`).makePublic()
         const link = `https://storage.googleapis.com/${bucket.name}/${email}/${id}/${name}`
-        resolve({ link, name })
+        resolve({ link, name, size })
       })
       .on('error', (error) => {
         console.error(error)
