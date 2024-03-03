@@ -1,17 +1,11 @@
-// Imports the Google Cloud client library
-import { Storage } from '@google-cloud/storage'
+import { bucket } from '@server/services/storage'
 import express from 'express'
 import { type Req, type Res } from '../types'
 
 // https://cloud.google.com/storage/docs/samples/storage-cors-configuration#storage_cors_configuration-nodejs
 
-const storage = new Storage({
-  keyFilename: './quotationapp-8014c-04cff2d88d5b.json',
-  projectId: 'quotationapp-8014c',
-})
-
 async function configureBucketCors(_req: Req, res: Res): Promise<void> {
-  const corsUpdateRes = await storage.bucket(process.env.BUCKET_NAME!).setCorsConfiguration([
+  const corsUpdateRes = await bucket.setCorsConfiguration([
     {
       origin: [
         'https://quotation.app',
