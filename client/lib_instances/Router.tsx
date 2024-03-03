@@ -20,6 +20,7 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
+        // * just an example of routes protection with specific roles, may be helpful for administration
         element: <PersistentAuth />,
         children: [
           {
