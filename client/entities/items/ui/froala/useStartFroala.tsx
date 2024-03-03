@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
+
 // import 'froala-editor/js/froala_editor.pkgd.min.js'
 // import FroalaEditor from 'froala-editor'
 import 'froala-editor/js/plugins.pkgd.min.js'
@@ -13,6 +16,7 @@ import { apiUrl } from 'server/consts/apiUrl'
 import { quotationSignal } from '@entities/quotation'
 import { type FroalaEditorRef } from '@shared/types'
 import { useFroala } from '../../providers/FroalaProvider'
+import { beforeUpload } from './beforeUpload'
 import { froalaDefaultOptions } from './froalaDefaultOptions'
 
 declare const window: Window & typeof globalThis & {
@@ -69,25 +73,14 @@ export const useStartFroala = (): void => {
             blur: (e: MouseEvent) => {
               onBlur?.(e)
             },
-            'image.beforeUpload': function (files) {
-              const upload = confirm(`
-                Image will be uploaded into your profile?
-                Image size: ${(files[0].size / 1024 / 1024).toFixed(20).match(/^-?\d*\.?0*\d{0,2}/)[0]} Mb
-              `)
-              if (!upload) {
-                document.querySelector('.fr-file-progress-bar-layer.fr-layer.fr-active').classList.remove('fr-active')
-                return false
-              }
+            'image.beforeUpload': (files) => {
+              beforeUpload(files)
             },
-            'file.beforeUpload': function (files) {
-              const upload = confirm(`
-                File will be uploaded into your profile?
-                File size: ${(files[0].size / 1024 / 1024).toFixed(20).match(/^-?\d*\.?0*\d{0,2}/)[0]} Mb
-              `)
-              if (!upload) {
-                document.querySelector('.fr-file-progress-bar-layer.fr-layer.fr-active').classList.remove('fr-active')
-                return false
-              }
+            'file.beforeUpload': (files) => {
+              beforeUpload(files)
+            },
+            'video.beforeUpload': (files) => {
+              beforeUpload(files)
             },
             'file.unlink': function (link) {
               const href = link.getAttribute('href')

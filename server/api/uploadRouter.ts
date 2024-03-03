@@ -42,7 +42,7 @@ const upload: RouterHandler = async (req, res, next) => {
 
 uploadRouter.post(
   '/',
-  // verifyTokenMiddleware, // todo: do not know how to use axios instance to validate jwt
+  // verifyTokenMiddleware, // todo: do not know how to use axios instance with froala update to validate jwt
   upload,
 )
 
