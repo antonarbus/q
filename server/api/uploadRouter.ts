@@ -1,3 +1,4 @@
+import { QuotationModel } from '@server/db/models/quotationModel'
 import { verifyTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
 import { bucket } from '@server/services/storage'
 import express from 'express'
@@ -22,18 +23,20 @@ const upload: RouterHandler = async (req, res, next) => {
   try {
     if (req.file === undefined) return
     const { id, email } = req.body
-    const { fileName, link } = await uploadFileIntoMemory({ file: req.file, email, id })
+    const { name, link } = await uploadFileIntoMemory({ file: req.file, email, id })
 
-    const fileInfo = {
-      link,
-      origName: req.file.originalname,
-      size: req.file.size / 1024 / 1024,
-      date: new Date(),
+    const size = req.file.size / 1024 / 1024
+
+    const document = await QuotationModel.findOne({ email, id })
+    if (document !== null) {
+      document.files.push({ name, size })
+      const dbRes = await document.save()
+      console.log('🚀 ~ dbRes:', dbRes)
     }
-    // todo: send fileInfo into quotation collection DB
+
     // todo: add types
 
-    res.status(200).json({ link })
+    res.status(200).json({ link, name, size })
   } catch (error) {
     console.error(error)
     next(error)
@@ -52,17 +55,16 @@ async function uploadFileIntoMemory({ file, email, id }: {
   file: Express.Multer.File
   email: string
   id: string
-}): Promise<{ link: string, fileName: string }> {
+}): Promise<{ link: string, name: string }> {
   return await new Promise((resolve, reject) => {
-    const originalNameUtf8 = Buffer.from(file.originalname, 'ascii').toString('utf8')
-    const fileName = `${email}/${id}/${originalNameUtf8}`
-    const blob = bucket.file(fileName)
+    const name = Buffer.from(file.originalname, 'ascii').toString('utf8')
+    const blob = bucket.file(`${email}/${id}/${name}`)
     const blobStream = blob.createWriteStream({ resumable: false })
     blobStream
       .on('finish', async () => {
-        await bucket.file(fileName).makePublic()
-        const link = `https://storage.googleapis.com/${bucket.name}/${fileName}`
-        resolve({ link, fileName })
+        await bucket.file(`${email}/${id}/${name}`).makePublic()
+        const link = `https://storage.googleapis.com/${bucket.name}/${email}/${id}/${name}`
+        resolve({ link, name })
       })
       .on('error', (error) => {
         console.error(error)
