@@ -1,11 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom'
+import { Main } from '@app/Main'
 import { BarChart } from '@pages/chart/Chart'
 import { Profile } from '@pages/profile'
 import { Login, PersistentAuth, Register, RequireAuth, Reset, Unauthorized } from '@widgets/credentials'
 import { Nav } from '@widgets/nav'
 import { Spinner } from '@entities/spinner'
 import { TopMsg } from '@shared/ui/top_msg'
-import { Main } from './Main'
 
 export const router = createBrowserRouter([
   {

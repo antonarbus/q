@@ -1,5 +1,6 @@
 import '@shared/lib/nonPassiveEventErrorFix'
 import { reactQuery } from '@lib_instances/reactQuery'
+import { router } from '@lib_instances/Router'
 import { store } from '@lib_instances/store'
 import { themeClient } from '@lib_instances/theme'
 import { ThemeProvider } from '@mui/material/styles'
@@ -9,7 +10,6 @@ import { Provider } from 'react-redux'
 import { RouterProvider } from 'react-router-dom'
 import { GlobalStyles } from './GlobalStyles'
 import { ReactQueryDevtoolsProductionHidden } from './ReactQueryDevtoolsProductionHidden'
-import { router } from './Router'
 
 export const App = (): JSX.Element => (
   <Provider store={store}>
