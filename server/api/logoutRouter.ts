@@ -6,12 +6,6 @@ import type { Next, Req, Res } from '../types'
 
 export const logoutRouter = Router()
 
-type ReqWithCookies = {
-  cookies: {
-    refreshJwtToken: string | undefined
-  }
-}
-
 export type LogoutApiRes = {
   status: string
   message: string
@@ -20,9 +14,9 @@ export type LogoutApiRes = {
 
 logoutRouter.get('/', async (req: Req, res: Res, next: Next) => {
   try {
-    const refreshJwtToken = (req as ReqWithCookies).cookies.refreshJwtToken
+    const refreshJwtToken = req.cookies.refreshJwtToken
 
-    if (!refreshJwtToken) {
+    if (typeof refreshJwtToken !== 'string') {
       res.json({ status: 'error', message: 'no refresh token in cookies' })
       return
     }
