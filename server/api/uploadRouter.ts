@@ -1,4 +1,4 @@
-// import { verifyTokenMiddleware } from '../middleware/verifyTokenMiddleware'
+import { verifyTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
 import { bucket } from '@server/services/storage'
 import express from 'express'
 import type { Next, ReqWithBody, ResWithBody } from '../types'
@@ -31,6 +31,7 @@ const upload: RouterHandler = async (req, res, next) => {
       date: new Date(),
     }
     // todo: send fileInfo into quotation collection DB
+    // todo: add types
 
     res.status(200).json({ link })
   } catch (error) {
@@ -41,7 +42,7 @@ const upload: RouterHandler = async (req, res, next) => {
 
 uploadRouter.post(
   '/',
-  // verifyTokenMiddleware,
+  // verifyTokenMiddleware, // todo: do not know how to use axios instance to validate jwt
   upload,
 )
 

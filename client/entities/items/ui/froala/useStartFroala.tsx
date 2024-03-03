@@ -21,9 +21,17 @@ declare const window: Window & typeof globalThis & {
 
 window.froalas = []
 
+// * do not open image in browser
+document.addEventListener('dragover', (e) => { e.preventDefault() })
+document.addEventListener('drop', (e) => { e.preventDefault() })
+
 export const useStartFroala = (): void => {
   const { htmlGetter, froalaElementRef, editorRef, placeholder, onContentChange, onFocus, onClick, onBlur, onKeydown, onInitialized } = useFroala()
   const isLogged = useSelectorTyped(state => state.user.isLogged)
+  const uploadParams = {
+    id: quotationSignal.value.id,
+    email: getState().user.email,
+  }
 
   useEffect(() => {
     const initFroalaInstance = (): void => {
@@ -37,18 +45,9 @@ export const useStartFroala = (): void => {
             imageUploadURL: apiUrl.upload,
             fileUploadURL: apiUrl.upload,
             videoUploadURL: apiUrl.upload,
-            imageUploadParams: {
-              id: quotationSignal.value.id,
-              email: getState().user.email,
-            },
-            fileUploadParams: {
-              id: quotationSignal.value.id,
-              email: getState().user.email,
-            },
-            videoUploadParams: {
-              id: quotationSignal.value.id,
-              email: getState().user.email,
-            },
+            imageUploadParams: uploadParams,
+            fileUploadParams: uploadParams,
+            videoUploadParams: uploadParams,
           }),
 
           fileMaxSize: 1024 * 1024 * 30,
@@ -70,6 +69,16 @@ export const useStartFroala = (): void => {
             blur: (e: MouseEvent) => {
               onBlur?.(e)
             },
+            'image.beforeUpload': function (files) {
+              const upload = confirm(`
+                Image will be uploaded into your profile?
+                Image size: ${(files[0].size / 1024 / 1024).toFixed(20).match(/^-?\d*\.?0*\d{0,2}/)[0]} Mb
+              `)
+              if (!upload) {
+                document.querySelector('.fr-file-progress-bar-layer.fr-layer.fr-active').classList.remove('fr-active')
+                return false
+              }
+            },
             'file.beforeUpload': function (files) {
               const upload = confirm(`
                 File will be uploaded into your profile?
@@ -77,6 +86,7 @@ export const useStartFroala = (): void => {
               `)
               if (!upload) {
                 document.querySelector('.fr-file-progress-bar-layer.fr-layer.fr-active').classList.remove('fr-active')
+                return false
               }
             },
             'file.unlink': function (link) {
