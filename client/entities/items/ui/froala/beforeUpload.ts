@@ -9,7 +9,7 @@ export const beforeUpload = (files: File[]): boolean => {
   }
 
   if (!getState().user.email) {
-    alert('Not logged in')
+    alert('You are not logged in, file will be saved in browser until page refresh.')
     return false
   }
 
@@ -17,10 +17,13 @@ export const beforeUpload = (files: File[]): boolean => {
     File will be uploaded into your profile.
     File size: ${getFileSizeInMbAsText({ file: files['0'] })}
   `)
+
   if (!upload) {
     const progressBarElement = document.querySelector('.fr-file-progress-bar-layer.fr-layer.fr-active')
     if (!(progressBarElement instanceof HTMLElement)) return false
     progressBarElement.classList.remove('fr-active')
+    return false
   }
-  return false
+
+  return true
 }

@@ -32,12 +32,13 @@ document.addEventListener('drop', (e) => { e.preventDefault() })
 export const useStartFroala = (): void => {
   const { htmlGetter, froalaElementRef, editorRef, placeholder, onContentChange, onFocus, onClick, onBlur, onKeydown, onInitialized } = useFroala()
   const isLogged = useSelectorTyped(state => state.user.isLogged)
-  const uploadParams = {
-    id: quotationSignal.value.id,
-    email: getState().user.email,
-  }
 
   useEffect(() => {
+    const uploadParams = {
+      id: quotationSignal.value.id,
+      email: getState().user.email,
+    }
+
     const initFroalaInstance = (): void => {
       const froalaInstance = new FroalaEditor(
         froalaElementRef.current,
@@ -73,15 +74,9 @@ export const useStartFroala = (): void => {
             blur: (e: MouseEvent) => {
               onBlur?.(e)
             },
-            'image.beforeUpload': (files) => {
-              beforeUpload(files)
-            },
-            'file.beforeUpload': (files) => {
-              beforeUpload(files)
-            },
-            'video.beforeUpload': (files) => {
-              beforeUpload(files)
-            },
+            'image.beforeUpload': (files) => beforeUpload(files),
+            'file.beforeUpload': (files) => beforeUpload(files),
+            'video.beforeUpload': (files) => beforeUpload(files),
             'file.unlink': function (link) {
               const href = link.getAttribute('href')
               const isFileInBucket = href.includes('bucket')
