@@ -1,18 +1,19 @@
 import { QuotationModel } from '@server/db/models/quotationModel'
-import { verifyTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
 import { bucket } from '@server/services/storage'
 import express from 'express'
 import type { Next, ReqWithBody, ResWithBody } from '../types'
+// import { verifyTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
 
 export type ReqBody = {
-  // quotation: Quotation
-  // items: ItemType[]
-  // id: string
+  id?: string
+  email?: string
 }
 
 export type ResBody = {
-  // message: string
-  // document: HydratedDocument<QuotationModelType> | null
+  message: string
+  link: string | null
+  name: string | null
+  size: number | null
 }
 
 type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
@@ -21,19 +22,33 @@ export const uploadRouter = express.Router()
 
 const upload: RouterHandler = async (req, res, next) => {
   try {
-    if (req.file === undefined) return
     const { id, email } = req.body
-    const { name, link, size } = await uploadFileIntoMemory({ file: req.file, email, id })
+    const { file } = req
+
+    if (id === undefined || email === undefined || file === undefined) {
+      return res.status(200).json({
+        message: 'not uploaded',
+        link: null,
+        name: null,
+        size: null,
+      })
+    }
+
+    const { name, link, size } = await uploadFileIntoMemory({ file, email, id })
 
     const document = await QuotationModel.findOne({ email, id })
+
     if (document !== null) {
       document.files.push({ name, size })
       await document.save()
     }
 
-    // todo: add types
-
-    res.status(200).json({ link, name, size })
+    return res.status(200).json({
+      message: 'uploaded',
+      link,
+      name,
+      size,
+    })
   } catch (error) {
     console.error(error)
     next(error)
