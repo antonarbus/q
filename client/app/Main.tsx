@@ -1,10 +1,12 @@
 import { type ReactNode } from 'react'
 import { Outlet, Route, Routes } from 'react-router-dom'
 import { Offer } from '@pages/offer'
-import { useRefreshTokens } from '@widgets/credentials'
+import { useGetAccessToken } from '@widgets/credentials'
 
 export const Main = (): JSX.Element => {
-  useRefreshTokens({ withLoadingState: false })
+  // ! maybe it was not a good idea to refresh token every time we hit the page
+  // ! do it only for protected routes when 15 min is over
+  useGetAccessToken({ withLoadingState: false })
 
   return (
     <MainLayout>

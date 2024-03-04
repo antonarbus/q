@@ -1,9 +1,9 @@
 import { dispatch } from '@lib_instances/store'
+import type { ResBody } from '@server/api/getAccessTokenRouter'
 import axios from 'axios'
 import { jwtDecode } from 'jwt-decode'
 import { useState } from 'react'
 import { useEffectOnce } from 'react-use'
-import type { ResBody } from 'server/api/refreshRouter'
 import { apiUrl } from 'server/consts/apiUrl'
 import type { JwtPayloadExtended } from 'server/services/jwt'
 import { navUpdate } from '@features/log_out'
@@ -33,16 +33,15 @@ type Res = {
   isCheckingTokens: boolean
 }
 
-export const useRefreshTokens = ({ withLoadingState }: Props): Res => {
+export const useGetAccessToken = ({ withLoadingState }: Props): Res => {
   const [isCheckingTokens, setIsCheckingTokens] = useState(true)
 
-  const refreshTokens = async (): Promise<void> => {
+  const getAccessToken = async (): Promise<void> => {
     try {
       if (accessTokenRef.current === null) {
-        const response = await axios.get<ResBody>(apiUrl.refresh, { withCredentials: true })
+        const response = await axios.get<ResBody>(apiUrl.getAccessToken, { withCredentials: true })
 
         if (response.status === 401) {
-          accessTokenRef.current = null
           dispatch(userSlice.actions.forgetLoggedUser())
           navUpdate.logout()
           console.error(response.data.message)
@@ -52,12 +51,12 @@ export const useRefreshTokens = ({ withLoadingState }: Props): Res => {
         if (!response.data.accessJwtToken) {
           dispatch(userSlice.actions.forgetLoggedUser())
           navUpdate.logout()
-          console.warn('no access token in db')
+          console.warn('no access token granted')
           return
         }
 
-        const payloadFromUpdatedAccessToken = jwtDecode<JwtPayloadExtended>(response.data.accessJwtToken)
-        const { email } = payloadFromUpdatedAccessToken
+        const payloadFromAccessToken = jwtDecode<JwtPayloadExtended>(response.data.accessJwtToken)
+        const { email } = payloadFromAccessToken
 
         if (!email) {
           dispatch(userSlice.actions.forgetLoggedUser())
@@ -97,7 +96,7 @@ export const useRefreshTokens = ({ withLoadingState }: Props): Res => {
   }
 
   useEffectOnce(() => {
-    void refreshTokens()
+    void getAccessToken()
   })
 
   return { isCheckingTokens }

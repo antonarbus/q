@@ -4,11 +4,12 @@ import cors from 'cors'
 import express from 'express'
 import morgan from 'morgan'
 import { activateRouter } from './api/activateRouter'
+import { getAccessTokenRouter } from './api/getAccessTokenRouter'
 import { getBucketCors } from './api/getBucketCors'
+import { getQuotationRouter } from './api/getQuotationRouter'
 import { hiRouter } from './api/hiRouter'
 import { loginRouter } from './api/loginRouter'
 import { logoutRouter } from './api/logoutRouter'
-import { refreshRouter } from './api/refreshRouter'
 import { registerRouter } from './api/registerRouter'
 import { saveQuotationRouter } from './api/saveQuotationRouter'
 import { setBucketCors } from './api/setBucketCors'
@@ -23,7 +24,6 @@ import { multerMiddleware } from './middleware/multerMiddleware'
 import type { Req, Res } from './types'
 
 const app = express()
-// await connectToDb() // should we await for db connection or not?
 void connectToDb()
 app.use(morgan('dev')) // http logs in terminal
 app.use(express.json()) // parses incoming requests with JSON because we use lots of json, let it be default
@@ -40,13 +40,14 @@ app.use(apiUrl.register, registerRouter)
 app.use(apiUrl.login, loginRouter)
 app.use(apiUrl.logout, logoutRouter)
 app.use(apiUrl.activate, activateRouter)
-app.use(apiUrl.refresh, refreshRouter)
+app.use(apiUrl.getAccessToken, getAccessTokenRouter)
 app.use(apiUrl.users, usersRouter)
 app.use(apiUrl.user, userEmailRouter)
 app.use(apiUrl.upload, uploadRouter)
 app.use(apiUrl.setBucketCors, setBucketCors)
 app.use(apiUrl.getBucketCors, getBucketCors)
 app.use(apiUrl.saveQuotation, saveQuotationRouter)
+app.use(apiUrl.getQuotation, getQuotationRouter)
 
 app.use(errorHandlerMiddleware)
 

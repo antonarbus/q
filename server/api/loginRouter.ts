@@ -28,18 +28,21 @@ loginRouter.post('/', async (req: Req, res: Res, next: Next) => {
 
     // check email & password
     const user = await UserModel.findOne({ email })
+
     if (!user) {
       res.json({ status: 'error', message: 'no user data' })
       return
     }
 
     const passwordFromDB = user.password
+
     if (!passwordFromDB) {
       res.json({ status: 'error', message: 'no password' })
       return
     }
 
     const isPasswordValid = await bcrypt.compare(password, passwordFromDB)
+
     if (!isPasswordValid) {
       res.json({
         status: 'error',

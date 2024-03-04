@@ -7,7 +7,7 @@ export const apiUrl = {
   login: '/api/login',
   logout: '/api/logout',
   activate: '/api/activate',
-  refresh: '/api/refresh',
+  getAccessToken: '/api/get-access-token',
   users: '/api/users',
   user: '/api/user',
   reset: '/api/reset',
@@ -15,4 +15,5 @@ export const apiUrl = {
   setBucketCors: '/api/set-bucket-cors',
   getBucketCors: '/api/get-bucket-cors',
   saveQuotation: '/api/save-quotation',
+  getQuotation: '/api/get-quotation',
 } as const

@@ -1,9 +1,9 @@
 import { Outlet } from 'react-router-dom'
 import { Spinner } from '@entities/spinner'
-import { useRefreshTokens } from './useRefreshTokens'
+import { useGetAccessToken } from './useGetAccessToken'
 
 export const PersistentAuth = (): JSX.Element => {
-  const { isCheckingTokens } = useRefreshTokens({ withLoadingState: true })
+  const { isCheckingTokens } = useGetAccessToken({ withLoadingState: true })
   if (isCheckingTokens) return <Spinner isShowing title='Password checking' />
   return <Outlet />
 }
