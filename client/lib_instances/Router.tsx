@@ -4,6 +4,7 @@ import { BarChart } from '@pages/chart/Chart'
 import { Profile } from '@pages/profile'
 import { Login, PersistentAuth, Register, RequireAuth, Reset, Unauthorized } from '@widgets/credentials'
 import { Nav } from '@widgets/nav'
+import { FetchQuotation } from '@entities/quotation'
 import { Spinner } from '@entities/spinner'
 import { TopMsg } from '@shared/ui/top_msg'
 
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
             ],
           },
         ],
+      },
+      {
+        path: ':id',
+        element: <FetchQuotation />,
       },
       {
         path: 'register',

@@ -37,7 +37,7 @@ axiosWithAuth.interceptors.response.use((config) => {
   if (isTokenProbablyExpired) {
     originalRequest._isRetry = true
     try {
-      const response = await axios.get(apiUrl.refresh, { withCredentials: true })
+      const response = await axios.get(apiUrl.getAccessToken, { withCredentials: true })
       const { accessJwtToken } = response.data
 
       if (accessJwtToken) {
