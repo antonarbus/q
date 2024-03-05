@@ -29,25 +29,24 @@ const getQuotation: RouterHandler = async (req, res, next) => {
 
     // todo: make a logic to return shared offer for non-logged-in user
     if (typeof refreshJwtToken !== 'string') {
-      return res.status(404).json({ message: 'not logged in' })
+      return res.status(200).json({ message: 'not logged in' })
     }
 
     const { email } = verifyRefreshToken(refreshJwtToken) as JwtPayloadExtended
 
     if (!email) {
-      return res.status(404).json({ message: 'not logged in' })
+      return res.status(200).json({ message: 'not logged in' })
     }
 
     const document = await QuotationModel.findOne({ email, id })
 
     if (document === null) {
-      return res.status(404).json({ message: 'not found' })
+      return res.status(200).json({ message: 'not found' })
     }
 
     const oneHour = Date.now() + 3600 * 1000
     const filePath = `${email}/${id}/quotation-${document.version}.json`
 
-    // todo: make same for images instead making them public
     const jsonSignedUrlRes = await bucket.file(filePath).getSignedUrl({
       action: 'read',
       expires: oneHour,
@@ -56,7 +55,7 @@ const getQuotation: RouterHandler = async (req, res, next) => {
     const jsonSignedUrl = jsonSignedUrlRes.at(0)
 
     if (jsonSignedUrl === undefined) {
-      return res.status(404).json({ message: 'json url is not generated' })
+      return res.status(200).json({ message: 'json url is not generated' })
     }
 
     return res.status(200).json({
