@@ -1,5 +1,7 @@
 import { Box } from '@mui/material'
 import { FaInfoCircle } from 'react-icons/fa'
+import { useGetQuotation } from '@entities/quotation'
+import { RotatingLoaderIcon } from '@shared/components'
 import { isSavedSignal } from '@shared/isSaved'
 
 type Props = {
@@ -11,6 +13,8 @@ export const QuotationInfoLayout = ({
   quotationId,
   onClick,
 }: Props): JSX.Element => {
+  const { isFetching } = useGetQuotation()
+
   return (
     <Box
       sx={{
@@ -37,11 +41,14 @@ export const QuotationInfoLayout = ({
           },
         }}
       >
-        <FaInfoCircle
-          css={{
-            fill: isSavedSignal.value ? '#47a95a' : '#6488cf',
-          }}
-        />
+        {isFetching && <RotatingLoaderIcon />}
+        {!isFetching && (
+          <FaInfoCircle
+            css={{
+              fill: isSavedSignal.value ? '#47a95a' : '#6488cf',
+            }}
+          />
+        )}
         {quotationId}
       </Box>
     </Box>

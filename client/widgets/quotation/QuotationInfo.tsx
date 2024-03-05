@@ -6,7 +6,7 @@ export const QuotationInfo = (): JSX.Element => {
 
   return (
     <QuotationInfoLayout
-      quotationId={id ?? 'local version'}
+      quotationId={id}
       onClick={() => {
         alert('show popup with all info with proper route')
       }}

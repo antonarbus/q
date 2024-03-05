@@ -51,7 +51,7 @@ getAccessTokenRouter.get('/', async (req: Req, res: ResWithBody<ResBody>, next: 
     const accessJwtToken = getNewAccessToken({ email, roles: user.roles })
 
     return res.status(200).json({
-      message: `generated access token for email: ${email}`,
+      message: `issued access token for email: ${email}`,
       accessJwtToken,
       roles: user.roles,
       email,

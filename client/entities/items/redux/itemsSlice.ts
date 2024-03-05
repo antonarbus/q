@@ -10,11 +10,13 @@ import { hideBoqPriceCellPinsReducer } from './reducers/hideBoqPriceCellPinsRedu
 import { hideBoqRowCellPinReducer } from './reducers/hideBoqRowCellPinReducer'
 import { insertPasteBoqRowReducer } from './reducers/insertPasteBoqRowReducer'
 import { insertPasteItemReducer } from './reducers/insertPasteItemReducer'
+import { loadItemsReducer } from './reducers/loadItemsReducer'
 import { pasteItemReducer } from './reducers/pasteItemReducer'
 import { pinItemPriceReducer } from './reducers/pinItemPriceReducer'
 import { pinPriceReducer } from './reducers/pinPriceReducer'
 import { pinQtyReducer } from './reducers/pinQtyReducer'
 import { removeItemsMsgReducer } from './reducers/removeItemMsgReducer'
+import { removeItemsReducer } from './reducers/removeItemsReducer'
 import { removePasteItemReducer } from './reducers/removePasteItemReducer'
 import { reOrderBoqRowsReducer } from './reducers/reOrderBoqRowsReducer'
 import { reOrderItemsReducer } from './reducers/reOrderItemsReducer'
@@ -41,6 +43,8 @@ export const itemsSlice = createSlice({
   name: 'items',
   initialState,
   reducers: {
+    loadItemsReducer,
+    removeItemsReducer,
     deleteBoqRowReducer,
     deleteItemReducer,
     disableFroalaReducer,
