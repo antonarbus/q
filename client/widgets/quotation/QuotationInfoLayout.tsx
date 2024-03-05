@@ -13,8 +13,6 @@ export const QuotationInfoLayout = ({
   quotationId,
   onClick,
 }: Props): JSX.Element => {
-  const { isFetching } = useGetQuotation()
-
   return (
     <Box
       sx={{
@@ -41,14 +39,11 @@ export const QuotationInfoLayout = ({
           },
         }}
       >
-        {isFetching && <RotatingLoaderIcon />}
-        {!isFetching && (
-          <FaInfoCircle
-            css={{
-              fill: isSavedSignal.value ? '#47a95a' : '#6488cf',
-            }}
-          />
-        )}
+        <FaInfoCircle
+          css={{
+            fill: isSavedSignal.value ? '#47a95a' : '#6488cf',
+          }}
+        />
         {quotationId}
       </Box>
     </Box>

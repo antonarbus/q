@@ -6,13 +6,19 @@ import axios, { type AxiosResponse } from 'axios'
 import { useParams } from 'react-router-dom'
 import { queryKey } from '@shared/consts/queryKey'
 
-export const useGetQuotation = (): UseQueryResult< Quotation | undefined, Error> => {
+type Res = Partial<ResBody & Quotation>
+
+type Props = {
+  enabled: boolean
+}
+
+export const useGetQuotation = ({ enabled }: Props): UseQueryResult<Res, Error> => {
   const { id } = useParams()
 
   const query = useQuery({
     queryKey: [queryKey.getQuotation, { id }],
     queryFn: async () => {
-      const quotationRes = await axios<ResBody, AxiosResponse<ResBody>, ReqBody>({
+      const quotationRes = await axios<Res, AxiosResponse<ResBody>, ReqBody>({
         method: 'POST',
         url: apiUrl.getQuotation,
         data: {
@@ -20,19 +26,21 @@ export const useGetQuotation = (): UseQueryResult< Quotation | undefined, Error>
         },
       })
 
-      if (quotationRes.data?.jsonSignedUrl) {
-        throw new Error('no signed url for json file')
+      if (!quotationRes.data.jsonSignedUrl) {
+        return quotationRes.data
       }
-
-      // todo: break into 2 queries, and two routes, difficult to handle errors
 
       const jsonRes = await axios<Quotation>({
         method: 'GET',
         url: quotationRes.data.jsonSignedUrl,
       })
 
-      return jsonRes.data
+      return {
+        ...quotationRes.data,
+        ...jsonRes.data,
+      }
     },
+    enabled,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,

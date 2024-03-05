@@ -1,10 +1,22 @@
-import { RotatingLoaderIcon } from '@shared/components'
+import { css } from '@emotion/react'
+import { FiLoader } from 'react-icons/fi'
 import { Icon } from './Icon'
 
 export const SpinnerIcon = (): JSX.Element => {
   return (
     <Icon
-      icon={<RotatingLoaderIcon />}
+      icon={(
+        <FiLoader
+          css={css`
+            animation: rotate 1.5s linear infinite;
+            @keyframes rotate {
+              to { 
+                transform: rotate(360deg); 
+              }
+            }
+          `}
+        />
+      )}
     />
   )
 }
