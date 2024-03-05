@@ -51,7 +51,7 @@ export const useGetAccessToken = ({ withLoadingState }: Props): Res => {
         if (!response.data.accessJwtToken) {
           dispatch(userSlice.actions.forgetLoggedUser())
           navUpdate.logout()
-          console.warn('no access token granted')
+          console.warn('no access token issued')
           return
         }
 
@@ -69,7 +69,7 @@ export const useGetAccessToken = ({ withLoadingState }: Props): Res => {
           accessTokenRef.current = response.data.accessJwtToken
           dispatch(userSlice.actions.rememberLoggedUser({ email, isLogged: true, roles: response.data.roles }))
           navUpdate.login()
-          console.info(`tokens for ${email} are refreshed`)
+          console.info(`access tokens was issued for ${email}`)
         }
 
         return

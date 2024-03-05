@@ -1,11 +1,12 @@
 import { type ReqBody, type ResBody } from '@server/api/getQuotationRouter'
+import { type ReqBody as Quotation } from '@server/api/saveQuotationRouter'
 import { apiUrl } from '@server/consts/apiUrl'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import axios, { type AxiosResponse } from 'axios'
 import { useParams } from 'react-router-dom'
 import { queryKey } from '@shared/consts/queryKey'
 
-export const useGetQuotation = (): UseQueryResult<ResBody | undefined, Error> => {
+export const useGetQuotation = (): UseQueryResult< Quotation | undefined, Error> => {
   const { id } = useParams()
 
   const query = useQuery({
@@ -19,9 +20,13 @@ export const useGetQuotation = (): UseQueryResult<ResBody | undefined, Error> =>
         },
       })
 
-      if (quotationRes.data.jsonSignedUrl === null) return
+      if (quotationRes.data?.jsonSignedUrl) {
+        throw new Error('no signed url for json file')
+      }
 
-      const jsonRes = await axios<ResBody, AxiosResponse<ResBody>, ReqBody>({
+      // todo: break into 2 queries, and two routes, difficult to handle errors
+
+      const jsonRes = await axios<Quotation>({
         method: 'GET',
         url: quotationRes.data.jsonSignedUrl,
       })
