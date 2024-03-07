@@ -16,4 +16,5 @@ export const apiUrl = {
   getBucketCors: '/api/get-bucket-cors',
   saveQuotation: '/api/save-quotation',
   getQuotation: '/api/get-quotation',
+  getQuotations: '/api/get-quotations',
 } as const
