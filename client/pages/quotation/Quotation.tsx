@@ -1,7 +1,7 @@
 import { Items } from '@widgets/items'
 import { QuotationInfo } from '@widgets/quotation'
 
-export const Offer = (): JSX.Element => {
+export const Quotation = (): JSX.Element => {
   return (
     <>
       <QuotationInfo />

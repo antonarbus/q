@@ -12,6 +12,7 @@ import { resetItems } from '@features/reset_items'
 import { saveQuotation } from '@features/save_quotation'
 import type { MenuItemTypes } from '@entities/nav'
 import { navMenuItemId } from '@shared/consts/navMenuItemId'
+import { route } from '@shared/consts/route'
 import logo from './logo.svg'
 
 const reactIcon = createElement(IoShareOutline, {})
@@ -23,7 +24,7 @@ export const navStructure: MenuItemTypes[] = [
     isHidden: false,
     menuItems: [
       {
-        id: navMenuItemId.offer,
+        id: navMenuItemId.quotation,
         icon: <IoDocumentOutline />,
         isHidden: false,
         name: 'Offer',
@@ -229,7 +230,7 @@ export const navStructure: MenuItemTypes[] = [
           {
             id: nanoid(3),
             name: 'link',
-            link: '/',
+            link: route.root,
             icon: '😇',
             isHidden: false,
             shortcut: ['control', 'x'],
@@ -252,18 +253,18 @@ export const navStructure: MenuItemTypes[] = [
         ],
       },
       {
-        id: navMenuItemId.offers,
+        id: navMenuItemId.quotations,
         icon: <IoDocumentsOutline />,
         isHidden: false,
-        name: 'Offers',
-        link: '/linkB',
+        name: 'Quotations',
+        link: route.quotations,
       },
       {
         id: navMenuItemId.login,
         icon: <FiLogIn />,
         isHidden: false,
         name: 'Log in',
-        link: '/login',
+        link: route.login,
       },
       {
         id: navMenuItemId.account,
@@ -276,21 +277,21 @@ export const navStructure: MenuItemTypes[] = [
             icon: <Settings />,
             isHidden: false,
             name: 'Settings',
-            link: '/settings',
+            link: route.settings,
           },
           {
             id: navMenuItemId.profile,
             icon: <Person />,
             isHidden: false,
             name: 'Profile',
-            link: '/profile',
+            link: route.profile,
           },
           {
             id: navMenuItemId.logout,
             icon: <FiLogOut />,
             isHidden: false,
             name: 'Log out',
-            link: '/',
+            link: route.root,
             func: logout,
           },
         ],
