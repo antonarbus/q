@@ -6,7 +6,7 @@ import { Quotations } from '@pages/quotations'
 import { Copy } from '@widgets/copy'
 import { Login, PersistentAuth, Register, RequireAuth, Reset, Unauthorized } from '@widgets/credentials'
 import { Nav } from '@widgets/nav'
-import { FetchQuotation } from '@entities/quotation'
+import { useFetchQuotation } from '@entities/quotation'
 import { Spinner } from '@entities/spinner'
 import { route } from '@shared/consts/route'
 import { Main } from '@shared/layouts'
@@ -14,6 +14,7 @@ import { TopMsg } from '@shared/ui/top_msg'
 
 export const router = createBrowserRouter([
   {
+    path: route.root,
     element: (
       <>
         <TopMsg />
@@ -25,14 +26,8 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: route.root,
+        path: '/:id?',
         element: <Quotation />,
-        children: [
-          {
-            path: ':id',
-            element: <FetchQuotation />,
-          },
-        ],
       },
       {
         path: route.register,

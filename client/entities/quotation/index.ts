@@ -11,5 +11,5 @@ export { saveQuotationLocally } from './utils/saveQuotationLocally'
 // api
 export { useGetQuotation } from './api/useGetQuotation'
 
-// ui
-export { FetchQuotation } from './ui/FetchQuotation'
+// hooks
+export { useFetchQuotation } from './hooks/useFetchQuotation'

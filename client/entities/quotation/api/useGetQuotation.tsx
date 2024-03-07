@@ -9,11 +9,7 @@ import { queryKey } from '@shared/consts/queryKey'
 
 type Res = Partial<ResBody & Quotation>
 
-type Props = {
-  enabled: boolean
-}
-
-export const useGetQuotation = ({ enabled }: Props): UseQueryResult<Res, Error> => {
+export const useGetQuotation = (): UseQueryResult<Res, Error> => {
   const { id } = useParams()
 
   const query = useQuery({
@@ -41,7 +37,7 @@ export const useGetQuotation = ({ enabled }: Props): UseQueryResult<Res, Error> 
         ...jsonRes.data,
       }
     },
-    enabled,
+    enabled: id !== undefined,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
