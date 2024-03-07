@@ -1,17 +1,19 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { BarChart } from '@pages/chart/Chart'
-import { Main } from '@pages/main'
 import { Profile } from '@pages/profile'
+import { Quotation } from '@pages/quotation'
+import { Quotations } from '@pages/quotations'
 import { Copy } from '@widgets/copy'
 import { Login, PersistentAuth, Register, RequireAuth, Reset, Unauthorized } from '@widgets/credentials'
 import { Nav } from '@widgets/nav'
 import { FetchQuotation } from '@entities/quotation'
 import { Spinner } from '@entities/spinner'
+import { route } from '@shared/consts/route'
+import { Main } from '@shared/layouts'
 import { TopMsg } from '@shared/ui/top_msg'
 
 export const router = createBrowserRouter([
   {
-    path: '/',
     element: (
       <>
         <TopMsg />
@@ -23,20 +25,30 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: ':id',
-        element: <FetchQuotation />,
+        path: route.root,
+        element: <Quotation />,
+        children: [
+          {
+            path: ':id',
+            element: <FetchQuotation />,
+          },
+        ],
       },
       {
-        path: 'register',
+        path: route.register,
         element: <Register />,
       },
       {
-        path: 'login',
+        path: route.login,
         element: <Login />,
       },
       {
-        path: 'reset',
+        path: route.reset,
         element: <Reset />,
+      },
+      {
+        path: route.quotations,
+        element: <Quotations />,
       },
       {
         // just an example of protected routes with specific roles, may be helpful for administration
@@ -46,11 +58,11 @@ export const router = createBrowserRouter([
             element: <RequireAuth allowedRoles={['user']} />,
             children: [
               {
-                path: 'profile',
+                path: route.profile,
                 element: <Profile />,
               },
               {
-                path: 'settings',
+                path: route.settings,
                 element: <div>Settings</div>,
               },
             ],
@@ -66,9 +78,5 @@ export const router = createBrowserRouter([
   {
     path: 'chart',
     element: <BarChart />,
-  },
-  {
-    path: 'offers',
-    element: '666',
   },
 ])

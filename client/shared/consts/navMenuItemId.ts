@@ -1,10 +1,10 @@
 export const navMenuItemId = {
   top: 'top',
-  offer: 'offer',
+  quotation: 'offer',
   save: 'save',
   pdf: 'pdf',
   share: 'share',
-  offers: 'offers',
+  quotations: 'quotations',
   login: 'login',
   account: 'account',
   settings: 'settings',
