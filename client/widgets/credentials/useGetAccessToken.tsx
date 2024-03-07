@@ -69,7 +69,7 @@ export const useGetAccessToken = ({ withLoadingState }: Props): Res => {
           accessTokenRef.current = response.data.accessJwtToken
           dispatch(userSlice.actions.rememberLoggedUser({ email, isLogged: true, roles: response.data.roles }))
           navUpdate.login()
-          console.info(`access tokens was issued for ${email}`)
+          console.info(`access token was issued for ${email}`)
         }
 
         return

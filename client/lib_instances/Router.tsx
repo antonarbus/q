@@ -39,7 +39,7 @@ export const router = createBrowserRouter([
         element: <Reset />,
       },
       {
-        // * just an example of routes protection with specific roles, may be helpful for administration
+        // just an example of protected routes with specific roles, may be helpful for administration
         element: <PersistentAuth />,
         children: [
           {
