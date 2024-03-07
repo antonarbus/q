@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { Box, LinearProgress } from '@mui/material'
 import { type QuotationModelType } from '@server/db/models/quotationModel'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef } from 'react'
@@ -11,7 +11,6 @@ import { quotationsAgGridRef } from './quotationsAgGridRef'
 export const QuotationsTable = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
   const { data, isFetching } = useGetQuotations()
-  console.log('🚀 ~ data:', data)
 
   return (
     <Box
@@ -20,6 +19,7 @@ export const QuotationsTable = (): JSX.Element => {
       sx={{ flexGrow: 1, position: 'relative', overflow: 'visible', height: '100%' }}
     >
       {/* <AgGridHeerosStyles /> */}
+      {isFetching && <LinearProgress sx={{ height: '1px', top: '91px', zIndex: 2, mb: '-1px' }} />}
       <AgGridReact<QuotationModelType>
         ref={quotationsAgGridRef}
         rowData={data?.documents}

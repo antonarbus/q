@@ -20,9 +20,6 @@ export const columnDefs: Array<ColDef<QuotationModelType>> = [
     field: 'id',
   },
   {
-    field: 'email',
-  },
-  {
     field: 'version',
   },
   {

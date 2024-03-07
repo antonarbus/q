@@ -27,7 +27,7 @@ export const navStructure: MenuItemTypes[] = [
         id: navMenuItemId.quotation,
         icon: <IoDocumentOutline />,
         isHidden: false,
-        name: 'Offer',
+        name: 'Quotation',
         menuItems: [
           {
             id: 'Previous offer',
