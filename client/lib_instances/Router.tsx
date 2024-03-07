@@ -23,6 +23,22 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
+        path: ':id',
+        element: <FetchQuotation />,
+      },
+      {
+        path: 'register',
+        element: <Register />,
+      },
+      {
+        path: 'login',
+        element: <Login />,
+      },
+      {
+        path: 'reset',
+        element: <Reset />,
+      },
+      {
         // * just an example of routes protection with specific roles, may be helpful for administration
         element: <PersistentAuth />,
         children: [
@@ -40,22 +56,6 @@ export const router = createBrowserRouter([
             ],
           },
         ],
-      },
-      {
-        path: ':id',
-        element: <FetchQuotation />,
-      },
-      {
-        path: 'register',
-        element: <Register />,
-      },
-      {
-        path: 'login',
-        element: <Login />,
-      },
-      {
-        path: 'reset',
-        element: <Reset />,
       },
     ],
   },
