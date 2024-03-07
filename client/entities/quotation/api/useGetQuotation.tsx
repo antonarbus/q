@@ -19,8 +19,8 @@ export const useGetQuotation = ({ enabled }: Props): UseQueryResult<Res, Error> 
     queryKey: [queryKey.getQuotation, { id }],
     queryFn: async () => {
       const quotationRes = await axios<Res, AxiosResponse<ResBody>, ReqBody>({
-        method: 'POST',
         url: apiUrl.getQuotation,
+        method: 'POST',
         data: {
           id: id ?? 'some non existing id',
         },
