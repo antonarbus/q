@@ -4,7 +4,6 @@ import { slideElement } from '../lib/slideElement'
 
 type Props = {
   children?: React.ReactNode
-  content?: React.ReactNode
   color?: string
   onSlideIn?: () => void
   onSlideOut?: () => void
@@ -16,7 +15,6 @@ type Props = {
 
 export const BackdropWithSlidableContent = ({
   children,
-  content,
   onSlideIn,
   onSlideOut,
 }: Props): JSX.Element => {
@@ -37,6 +35,7 @@ export const BackdropWithSlidableContent = ({
   useEffectOnce(() => {
     const slideAway = (e: KeyboardEvent): void => {
       if (!contentRef.current) return
+
       if (e.key === 'Escape') {
         slideElement({
           element: contentRef.current,
@@ -81,7 +80,6 @@ export const BackdropWithSlidableContent = ({
       }}
     >
       {Boolean(children) && <div ref={contentRef}>{children}</div>}
-      {Boolean(content) && <div ref={contentRef}>{content}</div>}
     </div>
   )
 }

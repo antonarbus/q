@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { Main } from '@app/Main'
 import { BarChart } from '@pages/chart/Chart'
+import { Main } from '@pages/main'
 import { Profile } from '@pages/profile'
 import { Copy } from '@widgets/copy'
 import { Login, PersistentAuth, Register, RequireAuth, Reset, Unauthorized } from '@widgets/credentials'
@@ -66,5 +66,9 @@ export const router = createBrowserRouter([
   {
     path: 'chart',
     element: <BarChart />,
+  },
+  {
+    path: 'offers',
+    element: '666',
   },
 ])
