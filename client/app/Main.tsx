@@ -1,7 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { useEffect, type ReactNode } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
-import { useEffectOnce } from 'react-use'
 import { Offer } from '@pages/offer'
 import { itemsSlice } from '@entities/items'
 import { type Item } from '@entities/items/types'
@@ -13,7 +12,6 @@ export const Main = (): JSX.Element => {
   const { pathname } = useLocation()
   useEffect(() => {
     if (pathname !== '/') return
-    console.log(666)
     const itemsFromLocalStorage = localStorage.getItem(localStorageKey.items)
     const quotationFromLocalStorage = localStorage.getItem(localStorageKey.quotation)
 
