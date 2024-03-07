@@ -25,8 +25,11 @@ export const QuotationsTable = (): JSX.Element => {
         rowData={data?.documents}
         defaultColDef={defaultColDef}
         columnDefs={columnDefs}
+        suppressCellFocus
+        enableCellTextSelection
+        ensureDomOrder
         // animateRows
-        suppressRowClickSelection
+        // suppressRowClickSelection
         // enableRangeSelection={true}
         // ensureDomOrder
         // suppressScrollOnNewData
