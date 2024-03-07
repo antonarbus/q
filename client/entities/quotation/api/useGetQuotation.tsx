@@ -4,6 +4,7 @@ import { apiUrl } from '@server/consts/apiUrl'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import axios, { type AxiosResponse } from 'axios'
 import { useParams } from 'react-router-dom'
+import { axiosWithAuth } from '@entities/user'
 import { queryKey } from '@shared/consts/queryKey'
 
 type Res = Partial<ResBody & Quotation>
@@ -18,7 +19,7 @@ export const useGetQuotation = ({ enabled }: Props): UseQueryResult<Res, Error> 
   const query = useQuery({
     queryKey: [queryKey.getQuotation, { id }],
     queryFn: async () => {
-      const quotationRes = await axios<Res, AxiosResponse<ResBody>, ReqBody>({
+      const quotationRes = await axiosWithAuth<Res, AxiosResponse<ResBody>, ReqBody>({
         url: apiUrl.getQuotation,
         method: 'POST',
         data: {
