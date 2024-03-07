@@ -28,11 +28,9 @@ const getQuotations: RouterHandler = async (req, res, next) => {
       return res.status(200).json({ message: 'not logged in' })
     }
 
-    const documents = await QuotationModel.find({ email })
-
-    // if (document === null) {
-    //   return res.status(200).json({ message: 'not found' })
-    // }
+    const documents = await QuotationModel
+      .find({ email })
+      .select({ _id: 0, __v: 0, email: 0 })
 
     return res.status(200).json({
       message: 'found',
@@ -45,6 +43,6 @@ const getQuotations: RouterHandler = async (req, res, next) => {
 
 getQuotationsRouter.get(
   '/',
-  // verifyTokenMiddleware,
+  verifyTokenMiddleware,
   getQuotations,
 )
