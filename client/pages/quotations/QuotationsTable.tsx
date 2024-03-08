@@ -4,7 +4,7 @@ import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef } from 'react'
 import 'ag-grid-community/styles/ag-grid.css' // Mandatory CSS required by the grid
 import 'ag-grid-community/styles/ag-theme-quartz.css'
-import { useGetQuotations } from '@entities/quotations'
+import { useGetQuotations } from '@entities/quotation'
 import { columnDefs, defaultColDef } from './columnDefs'
 import { quotationsAgGridRef } from './quotationsAgGridRef'
 

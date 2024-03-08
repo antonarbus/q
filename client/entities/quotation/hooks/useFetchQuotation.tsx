@@ -30,7 +30,7 @@ export const useFetchQuotation = (): ReactNode => {
     if (quotation === undefined) return
     if (quotationFromLocalStorage === null) return
 
-    dispatch(spinnerSlice.actions.startSpinner({ text: 'Loading quotation from the browser' }))
+    dispatch(spinnerSlice.actions.startSpinner({ text: 'Loading from the browser' }))
 
     dispatch(itemsSlice.actions.loadItemsReducer({ items }))
     quotationSignal.value = quotation
@@ -42,10 +42,9 @@ export const useFetchQuotation = (): ReactNode => {
 
   useEffect(() => {
     if (id === undefined) return
-    if (isLoading) {
-      // dispatch(itemsSlice.actions.removeItemsReducer())
-      dispatch(spinnerSlice.actions.startSpinner({ text: `Loading quotation ${id} from the server` }))
-    }
+    if (!isLoading) return
+    // dispatch(itemsSlice.actions.removeItemsReducer())
+    dispatch(spinnerSlice.actions.startSpinner({ text: 'Loading from the server' }))
   }, [isLoading])
 
   useEffect(() => {
@@ -80,14 +79,12 @@ export const useFetchQuotation = (): ReactNode => {
       data.items.length !== 0 &&
       data.quotation !== undefined
     ) {
-      dispatch(itemsSlice.actions.loadItemsReducer({
-        items: data.items,
-      }))
+      dispatch(itemsSlice.actions.loadItemsReducer({ items: data.items }))
       quotationSignal.value = data.quotation
       saveQuotationLocally()
       saveItemsLocally()
       setTimeout(() => {
-        dispatch(spinnerSlice.actions.startSpinner({ text: `Quotation ${id} found` }))
+        dispatch(spinnerSlice.actions.startSpinner({ text: 'Quotation found' }))
       }, 1000)
       setTimeout(() => {
         dispatch(spinnerSlice.actions.stopSpinner())
@@ -103,6 +100,17 @@ export const useFetchQuotation = (): ReactNode => {
       )) {
       setTimeout(() => {
         dispatch(spinnerSlice.actions.startSpinner({ text: 'Quotation is empty' }))
+      }, 1000)
+      setTimeout(() => {
+        dispatch(spinnerSlice.actions.stopSpinner())
+      }, 3000)
+      return
+    }
+
+    if (
+      data.message === 'json does not exist') {
+      setTimeout(() => {
+        dispatch(spinnerSlice.actions.startSpinner({ text: 'Does not exist' }))
       }, 1000)
       setTimeout(() => {
         dispatch(spinnerSlice.actions.stopSpinner())

@@ -18,15 +18,14 @@ export type ResBody = {
 
 type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
 
-export const getQuotationRouter = Router()
+export const deleteQuotationRouter = Router()
 
-const getQuotation: RouterHandler = async (req, res, next) => {
+const deleteQuotation: RouterHandler = async (req, res, next) => {
   try {
     const { id } = req.body
 
     const refreshJwtToken = req.cookies.refreshJwtToken
 
-    // todo: make a logic to return shared offer for non-logged-in user
     if (typeof refreshJwtToken !== 'string') {
       return res.status(200).json({ message: 'not logged in' })
     }
@@ -37,44 +36,29 @@ const getQuotation: RouterHandler = async (req, res, next) => {
       return res.status(200).json({ message: 'not logged in' })
     }
 
-    const document = await QuotationModel.findOne({ email, id })
+    const deleteFromDbResult = await QuotationModel.deleteOne({ email, id })
 
-    if (document === null) {
+    if (deleteFromDbResult.deletedCount === 0) {
       return res.status(200).json({ message: 'not found' })
     }
 
-    const oneHour = Date.now() + 3600 * 1000
-    const filePath = `${email}/${id}/quotation-${document.version}.json`
-
-    const [exists] = await bucket.file(filePath).exists()
-
-    if (!exists) {
-      return res.status(200).json({ message: 'json does not exist' })
-    }
-
-    const jsonSignedUrlRes = await bucket.file(filePath).getSignedUrl({
-      action: 'read',
-      expires: oneHour,
+    const [files] = await bucket.getFiles({
+      prefix: `${email}/${id}/`,
     })
 
-    const jsonSignedUrl = jsonSignedUrlRes.at(0)
-
-    if (jsonSignedUrl === undefined) {
-      return res.status(200).json({ message: 'json url is not generated' })
-    }
+    const filesDeletionRes = await Promise.all(files.map(async file => await file.delete()))
+    console.log('🚀 ~ filesDeletionRes:', filesDeletionRes)
 
     return res.status(200).json({
-      message: 'found',
-      document,
-      jsonSignedUrl,
+      message: 'deleted',
     })
   } catch (error) {
     next(error)
   }
 }
 
-getQuotationRouter.post(
+deleteQuotationRouter.delete(
   '/',
-  // verifyTokenMiddleware,
-  getQuotation,
+  verifyTokenMiddleware,
+  deleteQuotation,
 )

@@ -10,6 +10,7 @@ export { saveQuotationLocally } from './utils/saveQuotationLocally'
 
 // api
 export { useGetQuotation } from './api/useGetQuotation'
+export { useGetQuotations } from './api/useGetQuotations'
 
 // hooks
 export { useFetchQuotation } from './hooks/useFetchQuotation'

@@ -10,9 +10,10 @@ export const testRouter = Router()
 
 export async function test(req: Req, res: Res, next: Next): Promise<void> {
   try {
-    const dbRes = await QuotationModel.find()
+    const dbRes = await QuotationModel.deleteOne({ email: 'anton.arbus@gmail.commmmmmm' })
+    // const dbRes = await QuotationModel.find()
 
-    res.status(404).json({ dbRes })
+    res.status(200).json({ dbRes })
   } catch (error) {
     next(error)
   }
