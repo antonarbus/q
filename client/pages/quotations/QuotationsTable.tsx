@@ -4,13 +4,13 @@ import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef } from 'react'
 import 'ag-grid-community/styles/ag-grid.css' // Mandatory CSS required by the grid
 import 'ag-grid-community/styles/ag-theme-quartz.css'
-import { useGetQuotations } from '@entities/quotation'
+import { useGetQuotationsQuery } from '@entities/quotation'
 import { columnDefs, defaultColDef } from './columnDefs'
 import { quotationsAgGridRef } from './quotationsAgGridRef'
 
 export const QuotationsTable = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
-  const { data, isFetching } = useGetQuotations()
+  const { data, isFetching } = useGetQuotationsQuery()
 
   return (
     <Box
@@ -23,15 +23,13 @@ export const QuotationsTable = (): JSX.Element => {
       <AgGridReact<QuotationModelType>
         ref={quotationsAgGridRef}
         rowData={data?.documents}
+        getRowId={params => params.data.id}
         defaultColDef={defaultColDef}
         columnDefs={columnDefs}
         suppressCellFocus
         enableCellTextSelection
-        ensureDomOrder
-        // animateRows
         // suppressRowClickSelection
         // enableRangeSelection={true}
-        // ensureDomOrder
         // suppressScrollOnNewData
         // suppressColumnVirtualisation
         headerHeight={45}

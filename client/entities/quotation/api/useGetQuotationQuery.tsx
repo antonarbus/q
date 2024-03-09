@@ -9,7 +9,7 @@ import { queryKey } from '@shared/consts/queryKey'
 
 type Res = Partial<ResBody & Quotation>
 
-export const useGetQuotation = (): UseQueryResult<Res, Error> => {
+export const useGetQuotationQuery = (): UseQueryResult<Res, Error> => {
   const { id } = useParams()
 
   const query = useQuery({

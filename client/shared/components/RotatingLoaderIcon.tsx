@@ -1,4 +1,4 @@
-import { css } from '@emotion/css'
+import { css } from '@emotion/react'
 import { FiLoader } from 'react-icons/fi'
 
 export const RotatingLoaderIcon = (): JSX.Element => {
