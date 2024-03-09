@@ -9,7 +9,7 @@ type Payload = {
   id: string
 }
 
-export const useDeleteQuotation = (): UseMutationResult<any, Error, Payload, unknown> => {
+export const useDeleteQuotationMutation = (): UseMutationResult<any, Error, Payload, unknown> => {
   const mutation = useMutation({
     mutationKey: [queryKey.deleteQuotation],
     mutationFn: async (payload: Payload) => {

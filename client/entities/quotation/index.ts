@@ -9,8 +9,9 @@ export { getDefaultOrLocalQuotation } from './utils/getDefaultOrLocalQuotation'
 export { saveQuotationLocally } from './utils/saveQuotationLocally'
 
 // api
-export { useGetQuotation } from './api/useGetQuotation'
-export { useGetQuotations } from './api/useGetQuotations'
+export { useGetQuotationQuery } from './api/useGetQuotationQuery'
+export { useGetQuotationsQuery } from './api/useGetQuotationsQuery'
+export { useDeleteQuotationMutation } from './api/useDeleteQuotationMutation'
 
 // hooks
 export { useFetchQuotation } from './hooks/useFetchQuotation'

@@ -7,14 +7,14 @@ import { type Item } from '@entities/items/types'
 import { spinnerSlice } from '@entities/spinner/spinnerSlice'
 import { localStorageKey } from '@shared/consts/localStorageKey'
 import { jsonParseSafe } from '@shared/lib/jsonParseSafe'
-import { useGetQuotation } from '../api/useGetQuotation'
+import { useGetQuotationQuery } from '../api/useGetQuotationQuery'
 import { quotationSignal } from '../signals/quotationSignal'
 import { type Quotation } from '../types'
 import { saveQuotationLocally } from '../utils/saveQuotationLocally'
 
 export const useFetchQuotation = (): ReactNode => {
   const { id } = useParams()
-  const { data, isSuccess, isLoading, isError } = useGetQuotation()
+  const { data, isSuccess, isLoading, isError } = useGetQuotationQuery()
 
   // load quotation from the browser
   useEffectOnce(() => {

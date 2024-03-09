@@ -5,7 +5,7 @@ import { type AxiosResponse } from 'axios'
 import { axiosWithAuth } from '@entities/user'
 import { queryKey } from '@shared/consts/queryKey'
 
-export const useGetQuotations = (): UseQueryResult<ResBody, Error> => {
+export const useGetQuotationsQuery = (): UseQueryResult<ResBody, Error> => {
   const query = useQuery({
     queryKey: [queryKey.getQuotations],
     queryFn: async () => {

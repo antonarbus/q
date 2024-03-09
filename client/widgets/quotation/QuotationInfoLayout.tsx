@@ -1,7 +1,5 @@
 import { Box } from '@mui/material'
 import { FaInfoCircle } from 'react-icons/fa'
-import { useGetQuotation } from '@entities/quotation'
-import { RotatingLoaderIcon } from '@shared/components'
 import { isSavedSignal } from '@shared/isSaved'
 
 type Props = {
