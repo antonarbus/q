@@ -38,11 +38,11 @@ export const useGetQuotationQuery = (): UseQueryResult<Res, Error> => {
       }
     },
     enabled: id !== undefined,
-    refetchOnMount: false,
+    refetchOnMount: true,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
-    staleTime: Infinity,
-    gcTime: Infinity,
+    staleTime: 0,
+    // gcTime: Infinity,
     retry: 0,
   })
 
