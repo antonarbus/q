@@ -65,16 +65,18 @@ export const columnDefs: Array<ColDef<QuotationModelType>> = [
   },
   {
     field: 'createdAt',
-    headerName: 'created at',
+    headerName: 'created',
     valueGetter: dateValueGetter({ columnDef: 'createdAt' }),
     valueFormatter: dateValueFormatter,
     filter: 'agDateColumnFilter',
+    minWidth: 200,
   },
   {
     field: 'updatedAt',
-    headerName: 'updated at',
+    headerName: 'updated',
     valueGetter: dateValueGetter({ columnDef: 'updatedAt' }),
     valueFormatter: dateValueFormatter,
     filter: 'agDateColumnFilter',
+    minWidth: 200,
   },
 ]
