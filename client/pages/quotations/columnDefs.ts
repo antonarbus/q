@@ -22,8 +22,6 @@ export const defaultColDef: ColDef<QuotationModelType> = {
 
 export const columnDefs: Array<ColDef<QuotationModelType>> = [
   {
-    // field: 'open',
-    headerName: '',
     cellRenderer: OpenQuotationButton,
     width: 100,
     minWidth: 100,
@@ -36,23 +34,20 @@ export const columnDefs: Array<ColDef<QuotationModelType>> = [
     pinned: 'left',
     suppressColumnsToolPanel: true,
     suppressNavigable: true,
-    cellClass: ['no-focus'],
   },
   {
-    // field: 'delete',
-    headerName: '',
     cellRenderer: DeleteQuotationButton,
     width: 100,
     minWidth: 100,
     maxWidth: 100,
     sortable: false,
     filter: false,
+    resizable: false,
     suppressMovable: true,
     lockPosition: 'left',
     pinned: 'left',
     suppressColumnsToolPanel: true,
     suppressNavigable: true,
-    cellClass: ['no-focus'],
   },
   {
     field: 'id',
