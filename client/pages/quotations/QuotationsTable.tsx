@@ -16,8 +16,8 @@ export const QuotationsTable = (): JSX.Element => {
 
   return (
     <Box
-      className='ag-theme-quartz ag-quotations-table'
       ref={gridContainerRef}
+      className='ag-theme-quartz quotations-table'
       sx={{ flexGrow: 1, position: 'relative', overflow: 'visible', height: '100%' }}
     >
       <AgGridStyles />
