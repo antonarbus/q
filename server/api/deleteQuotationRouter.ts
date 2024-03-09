@@ -27,30 +27,33 @@ const deleteQuotation: RouterHandler = async (req, res, next) => {
     const refreshJwtToken = req.cookies.refreshJwtToken
 
     if (typeof refreshJwtToken !== 'string') {
-      return res.status(200).json({ message: 'not logged in' })
+      return res.status(200).json({
+        message: 'not logged in',
+      })
     }
 
     const { email } = verifyRefreshToken(refreshJwtToken) as JwtPayloadExtended
 
     if (!email) {
-      return res.status(200).json({ message: 'not logged in' })
+      return res.status(200).json({
+        message: 'not logged in',
+      })
     }
 
     const deleteFromDbResult = await QuotationModel.deleteOne({ email, id })
 
     if (deleteFromDbResult.deletedCount === 0) {
-      return res.status(200).json({ message: 'not found' })
+      return res.status(200).json({
+        message: 'did not find document in db',
+      })
     }
 
-    const [files] = await bucket.getFiles({
-      prefix: `${email}/${id}/`,
-    })
+    const [files] = await bucket.getFiles({ prefix: `${email}/${id}/` })
 
     const filesDeletionRes = await Promise.all(files.map(async file => await file.delete()))
-    console.log('🚀 ~ filesDeletionRes:', filesDeletionRes)
 
     return res.status(200).json({
-      message: 'deleted',
+      message: `deleted the document in db & ${filesDeletionRes.length} files in bucket`,
     })
   } catch (error) {
     next(error)
