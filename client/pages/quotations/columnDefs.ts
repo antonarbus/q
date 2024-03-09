@@ -22,7 +22,7 @@ export const defaultColDef: ColDef<QuotationModelType> = {
 
 export const columnDefs: Array<ColDef<QuotationModelType>> = [
   {
-    field: 'open',
+    // field: 'open',
     headerName: '',
     cellRenderer: OpenQuotationButton,
     width: 100,
@@ -39,7 +39,7 @@ export const columnDefs: Array<ColDef<QuotationModelType>> = [
     cellClass: ['no-focus'],
   },
   {
-    field: 'delete',
+    // field: 'delete',
     headerName: '',
     cellRenderer: DeleteQuotationButton,
     width: 100,

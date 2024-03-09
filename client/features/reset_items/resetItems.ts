@@ -1,20 +1,20 @@
 import { dispatch } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
-import { defaultItems, itemsSlice, saveItemsLocally } from '@entities/items'
+import { nanoid } from 'nanoid'
+import { defaultItems, isItemsFroalaSignal, itemsSlice, reRenderItemsSignal, saveItemsLocally } from '@entities/items'
 import { getDefaultOrLocalQuotation, quotationSignal } from '@entities/quotation'
 import { localStorageKey } from '@shared/consts/localStorageKey'
-import { generalSlice } from '@shared/general'
 import { markAsNotSaved } from '@shared/isSaved'
 
 export const resetItems = (): void => {
-  dispatch(generalSlice.actions.disableFroala())
+  isItemsFroalaSignal.value = false
   saveItemsLocally({ items: defaultItems })
   localStorage.removeItem(localStorageKey.quotation)
   quotationSignal.value = getDefaultOrLocalQuotation()
   markAsNotSaved()
   dispatch(itemsSlice.actions.resetItemsToDefaultReducer())
-  dispatch(generalSlice.actions.reRenderOffer())
+  reRenderItemsSignal.value = nanoid(3)
   setTimeout(() => {
-    dispatch(generalSlice.actions.enableFroala())
+    isItemsFroalaSignal.value = true
   }, 1000 * theme.item.animationDuration)
 }

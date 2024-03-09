@@ -4,11 +4,9 @@ import { copyReducer } from '@entities/copy/copySlice'
 import { itemsReducer } from '@entities/items/redux/itemsSlice'
 import { navReducer } from '@entities/nav/navSlice'
 import { userReducer } from '@entities/user/redux/userSlice'
-import { generalReducer } from '@shared/general/generalSlice'
 
 const store = configureStore({
   reducer: {
-    general: generalReducer,
     user: userReducer,
     nav: navReducer,
     items: itemsReducer,

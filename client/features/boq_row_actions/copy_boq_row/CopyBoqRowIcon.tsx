@@ -3,9 +3,8 @@ import { motion } from 'framer-motion'
 import type { MouseEvent } from 'react'
 import { MdCopyAll } from 'react-icons/md'
 import { copySlice } from '@entities/copy'
-import { getBoqRowFromStore, itemsSlice, useItem, useRow } from '@entities/items'
+import { getBoqRowFromStore, isItemsFroalaSignal, itemsSlice, useItem, useRow } from '@entities/items'
 import { className } from '@shared/consts/className'
-import { generalSlice } from '@shared/general'
 import { cleanHtml } from '@shared/lib/itemsUtils'
 
 export const CopyBoqRowIcon = (): JSX.Element => {
@@ -55,7 +54,7 @@ export const CopyBoqRowIcon = (): JSX.Element => {
 
         if (!isCopyContainer) {
           dispatch(copySlice.actions.saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
-          dispatch(generalSlice.actions.disableFroala())
+          isItemsFroalaSignal.value = false
           dispatch(copySlice.actions.showCopyContainer())
         }
       }}

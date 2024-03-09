@@ -3,8 +3,7 @@ import { theme } from '@lib_instances/theme'
 import { nanoid } from 'nanoid'
 import { useEffectOnce, useUnmount } from 'react-use'
 import { copySlice } from '@entities/copy'
-import { type CopyableItem, getBoqItemFromStore, itemsSlice, saveItemsLocally, boqRowType } from '@entities/items'
-import { generalSlice } from '@shared/general'
+import { type CopyableItem, getBoqItemFromStore, itemsSlice, saveItemsLocally, boqRowType, isItemsFroalaSignal } from '@entities/items'
 import { markAsNotSaved } from '@shared/isSaved'
 
 export const usePasteClick = (): void => {
@@ -59,7 +58,7 @@ function pasteItemOnClick(): void {
 
     // * need more time than animation, otherwise some distortion is visible
     setTimeout(() => {
-      dispatch(generalSlice.actions.enableFroala())
+      isItemsFroalaSignal.value = true
     }, 1000 * theme.item.animationDuration + 500)
   }
 }

@@ -1,1 +1,0 @@
-export { generalSlice } from './generalSlice'

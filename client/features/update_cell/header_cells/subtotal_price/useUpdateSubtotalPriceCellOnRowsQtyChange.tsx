@@ -1,18 +1,16 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { useUpdateEffect } from 'react-use'
 import { roundTo } from 'round-to'
-import { useBoqItem, useItem, getBoqRowsFromStore, type BoqRow, updateSubTotalPriceWithValue, saveItemsLocally } from '@entities/items'
+import { useBoqItem, useItem, getBoqRowsFromStore, type BoqRow, updateSubTotalPriceWithValue, saveItemsLocally, isItemsFroalaSignal } from '@entities/items'
 import { markAsNotSaved } from '@shared/isSaved'
 
 export const useUpdateSubtotalPriceCellOnRowsQtyChange = (): void => {
   const { itemIndex } = useItem()
   const { subTotalPriceEditorRef } = useBoqItem()
-
-  const isFroala = useSelectorTyped(state => state.general.isFroala)
   const isItemFroala = useSelectorTyped(state => state.items[itemIndex]?.isFroala)
 
   useUpdateEffect(() => {
-    if (!isFroala) return
+    if (!isItemsFroalaSignal.value) return
     if (!isItemFroala) return
 
     const boqRows = getBoqRowsFromStore({ itemIndex })
@@ -37,5 +35,5 @@ export const useUpdateSubtotalPriceCellOnRowsQtyChange = (): void => {
 
     saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
     markAsNotSaved()
-  }, [isItemFroala, isFroala])
+  }, [isItemFroala, isItemsFroalaSignal.value])
 }

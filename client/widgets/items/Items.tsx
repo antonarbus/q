@@ -1,7 +1,7 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { AnimatePresence } from 'framer-motion'
 import { onItemDrag } from '@features/item_actions/drag_item'
-import { ItemProvider, itemsShapeEqualityFn, BoqItemProvider, itemType } from '@entities/items'
+import { ItemProvider, itemsShapeEqualityFn, BoqItemProvider, itemType, reRenderItemsSignal } from '@entities/items'
 import { DraggableItemsContainer } from '@entities/items/ui/DraggableItemsContainer'
 import { BoqItem } from './boq/BoqItem'
 import { PasteItem } from './paste/PasteItem'
@@ -10,7 +10,6 @@ import { TextItem } from './text/TextItem'
 
 export const Items = (): JSX.Element => {
   const items = useSelectorTyped(state => state.items, itemsShapeEqualityFn)
-  const reRenderOffer = useSelectorTyped(state => state.general.reRenderOffer)
 
   return (
     <DraggableItemsContainer
@@ -23,7 +22,7 @@ export const Items = (): JSX.Element => {
     >
       <AnimatePresence initial={false}>
         {items.map((item, itemIndex) => {
-          const key = item.id + reRenderOffer.toString()
+          const key = item.id + reRenderItemsSignal.value
 
           if (item.type === itemType.text) {
             return (
