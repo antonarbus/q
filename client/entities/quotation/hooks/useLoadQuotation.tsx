@@ -4,47 +4,54 @@ import { useParams } from 'react-router-dom'
 import { useEffectOnce } from 'react-use'
 import { itemsSlice, saveItemsLocally } from '@entities/items'
 import { type Item } from '@entities/items/types'
-import { spinnerSlice } from '@entities/spinner/spinnerSlice'
 import { localStorageKey } from '@shared/consts/localStorageKey'
 import { jsonParseSafe } from '@shared/lib/jsonParseSafe'
+import { spinnerTextSignal } from '@shared/spinner'
 import { useGetQuotationQuery } from '../api/useGetQuotationQuery'
 import { quotationSignal } from '../signals/quotationSignal'
 import { type Quotation } from '../types'
 import { saveQuotationLocally } from '../utils/saveQuotationLocally'
 
-export const useFetchQuotation = (): ReactNode => {
+export const useLoadQuotation = (): ReactNode => {
   const { id } = useParams()
   const { data, isSuccess, isLoading, isError } = useGetQuotationQuery()
 
-  // load quotation from the browser
+  // todo: if we have an id, then always load from the server
+  // todo: if it is root url we need to load items here, instead of add it as a default values in items and quotation slices
+
+  // if we locally keep the same quotation load it from the browser
   useEffectOnce(() => {
     if (id !== undefined) return
     const itemsFromLocalStorage = localStorage.getItem(localStorageKey.items)
-    const quotationFromLocalStorage = localStorage.getItem(localStorageKey.quotation)
     if (itemsFromLocalStorage === null) return
-    if (quotationFromLocalStorage === null) return
     const items = jsonParseSafe<Item[]>(itemsFromLocalStorage)
-    const quotation = jsonParseSafe<Quotation>(quotationFromLocalStorage)
     if (items === undefined) return
     if (items.length === 0) return
+
+    const quotationFromLocalStorage = localStorage.getItem(localStorageKey.quotation)
+    if (quotationFromLocalStorage === null) return
+    const quotation = jsonParseSafe<Quotation>(quotationFromLocalStorage)
     if (quotation === undefined) return
     if (quotationFromLocalStorage === null) return
 
-    dispatch(spinnerSlice.actions.startSpinner({ text: 'Loading from the browser' }))
+    // todo: if we did not come here we should load default quotation
+
+    // todo: if we came here we have a valid quotation in browser and may load it
+
+    spinnerTextSignal.value = 'Loading from the browser'
 
     dispatch(itemsSlice.actions.loadItemsReducer({ items }))
     quotationSignal.value = quotation
 
     setTimeout(() => {
-      dispatch(spinnerSlice.actions.stopSpinner())
+      spinnerTextSignal.value = null
     }, 3000)
   })
 
   useEffect(() => {
     if (id === undefined) return
     if (!isLoading) return
-    // dispatch(itemsSlice.actions.removeItemsReducer())
-    dispatch(spinnerSlice.actions.startSpinner({ text: 'Loading from the server' }))
+    spinnerTextSignal.value = 'Loading from the server'
   }, [isLoading])
 
   useEffect(() => {
@@ -53,10 +60,10 @@ export const useFetchQuotation = (): ReactNode => {
 
     if (data.message === 'not found') {
       setTimeout(() => {
-        dispatch(spinnerSlice.actions.startSpinner({ text: 'Not found' }))
+        spinnerTextSignal.value = 'Not found'
       }, 1000)
       setTimeout(() => {
-        dispatch(spinnerSlice.actions.stopSpinner())
+        spinnerTextSignal.value = null
       }, 3000)
 
       return
@@ -64,10 +71,10 @@ export const useFetchQuotation = (): ReactNode => {
 
     if (data.message === 'not logged in') {
       setTimeout(() => {
-        dispatch(spinnerSlice.actions.startSpinner({ text: 'Not logged in' }))
+        spinnerTextSignal.value = 'Not logged in'
       }, 1000)
       setTimeout(() => {
-        dispatch(spinnerSlice.actions.stopSpinner())
+        spinnerTextSignal.value = null
       }, 3000)
 
       return
@@ -84,10 +91,10 @@ export const useFetchQuotation = (): ReactNode => {
       saveQuotationLocally()
       saveItemsLocally()
       setTimeout(() => {
-        dispatch(spinnerSlice.actions.startSpinner({ text: 'Quotation found' }))
+        spinnerTextSignal.value = 'Quotation found'
       }, 1000)
       setTimeout(() => {
-        dispatch(spinnerSlice.actions.stopSpinner())
+        spinnerTextSignal.value = null
       }, 3000)
       return
     }
@@ -99,10 +106,10 @@ export const useFetchQuotation = (): ReactNode => {
         data.quotation === undefined
       )) {
       setTimeout(() => {
-        dispatch(spinnerSlice.actions.startSpinner({ text: 'Quotation is empty' }))
+        spinnerTextSignal.value = 'Quotation is empty'
       }, 1000)
       setTimeout(() => {
-        dispatch(spinnerSlice.actions.stopSpinner())
+        spinnerTextSignal.value = null
       }, 3000)
       return
     }
@@ -110,10 +117,10 @@ export const useFetchQuotation = (): ReactNode => {
     if (
       data.message === 'json does not exist') {
       setTimeout(() => {
-        dispatch(spinnerSlice.actions.startSpinner({ text: 'Does not exist' }))
+        spinnerTextSignal.value = 'Does not exist'
       }, 1000)
       setTimeout(() => {
-        dispatch(spinnerSlice.actions.stopSpinner())
+        spinnerTextSignal.value = null
       }, 3000)
     }
   }, [isSuccess])
@@ -123,10 +130,10 @@ export const useFetchQuotation = (): ReactNode => {
     if (!isError) return
 
     setTimeout(() => {
-      dispatch(spinnerSlice.actions.startSpinner({ text: 'Error' }))
+      spinnerTextSignal.value = 'Error'
     }, 1000)
     setTimeout(() => {
-      dispatch(spinnerSlice.actions.stopSpinner())
+      spinnerTextSignal.value = null
     }, 3000)
   }, [isError])
 

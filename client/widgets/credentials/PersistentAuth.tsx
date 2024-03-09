@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import { Spinner } from '@entities/spinner'
+import { Spinner } from '@shared/spinner'
 import { useGetAccessToken } from './useGetAccessToken'
 
 export const PersistentAuth = (): JSX.Element => {
