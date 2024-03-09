@@ -6,7 +6,7 @@ export const AgGridStyles = (): JSX.Element => {
   return (
     <Global
       styles={css`
-        .ag-quotations-table {
+        .quotations-table {
           // https://www.ag-grid.com/react-data-grid/global-style-customisation-variables/
           --ag-row-hover-color: #dcdcdc24;
 
