@@ -1,5 +1,5 @@
-import { useSelectorTyped } from '@lib_instances/store'
 import { LoadingDots } from '@shared/components/LoadingDots'
+import { spinnerTextSignal } from './spinnerTextSignal'
 
 type Props = {
   isShowing?: boolean
@@ -7,9 +7,7 @@ type Props = {
 }
 
 export const Spinner = ({ isShowing, title }: Props): JSX.Element | null => {
-  const isLoading = useSelectorTyped(state => state.spinner.isLoading)
-  const text = useSelectorTyped(state => state.spinner.text)
-  if (!isLoading && !isShowing) return null
+  if (spinnerTextSignal.value === null && !isShowing) return null
 
   return (
     <div
@@ -40,7 +38,7 @@ export const Spinner = ({ isShowing, title }: Props): JSX.Element | null => {
           top: '-60px',
         }}
       >
-        {text || title}
+        {spinnerTextSignal.value ?? title}
       </div>
       <LoadingDots />
     </div>

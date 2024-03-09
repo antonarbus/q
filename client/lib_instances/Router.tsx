@@ -6,10 +6,10 @@ import { Quotations } from '@pages/quotations'
 import { Copy } from '@widgets/copy'
 import { Login, PersistentAuth, Register, RequireAuth, Reset, Unauthorized } from '@widgets/credentials'
 import { Nav } from '@widgets/nav'
-import { useFetchQuotation } from '@entities/quotation'
-import { Spinner } from '@entities/spinner'
+import { useLoadQuotation } from '@entities/quotation'
 import { route } from '@shared/consts/route'
 import { Main } from '@shared/layouts'
+import { Spinner } from '@shared/spinner'
 import { TopMsg } from '@shared/ui/top_msg'
 
 export const router = createBrowserRouter([
