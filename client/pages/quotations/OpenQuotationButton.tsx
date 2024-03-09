@@ -1,7 +1,8 @@
-import { Button } from '@mui/material'
+import { IconButton } from '@mui/material'
 import { type QuotationModelType } from '@server/db/models/quotationModel'
 import type { ICellRendererParams } from 'ag-grid-community'
 import type { ReactNode } from 'react'
+import { AiOutlineFolderOpen } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 
 export const OpenQuotationButton = (params: ICellRendererParams<QuotationModelType>): ReactNode => {
@@ -11,17 +12,11 @@ export const OpenQuotationButton = (params: ICellRendererParams<QuotationModelTy
     <Link
       to={`/${params.data.id}`}
     >
-      <Button
-        variant='outlined'
+      <IconButton
         size='small'
-        sx={{
-          fontWeight: 400,
-          lineHeight: 1.4,
-          minWidth: 'unset',
-        }}
-      >
-        Open
-      </Button>
+    >
+      <AiOutlineFolderOpen />
+    </IconButton>
     </Link>
   )
 }
