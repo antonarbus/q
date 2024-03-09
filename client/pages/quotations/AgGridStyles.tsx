@@ -35,15 +35,18 @@ export const AgGridStyles = (): JSX.Element => {
             justify-content: center;
           }
 
-          .ag-floating-filter input::placeholder {
+          // filter placeholder and date pattern
+          .ag-floating-filter input::placeholder,
+          .ag-input-field-input.ag-text-field-input[type='date'] {
             opacity: 0.5;
           }
 
           // remove pin border line
-          .ag-cell.ag-cell-last-left-pinned:not(.ag-cell-range-right):not(.ag-cell-range-single-cell),
-          .ag-pinned-left-header {
-            border-right-color: transparent;
+          .ag-pinned-left-header,
+          .ag-cell.ag-cell-last-left-pinned:not(.ag-cell-range-right):not(.ag-cell-range-single-cell) {
+            border-right: 1px dotted #80808045;
           }
+          
 
         }
       `}
