@@ -3,9 +3,8 @@ import { motion } from 'framer-motion'
 import type { MouseEvent } from 'react'
 import { MdCopyAll } from 'react-icons/md'
 import { copySlice } from '@entities/copy'
-import { itemType, itemsSlice, saveItemHeightByIndex, useItem } from '@entities/items'
+import { isItemsFroalaSignal, itemType, itemsSlice, saveItemHeightByIndex, useItem } from '@entities/items'
 import { className } from '@shared/consts/className'
-import { generalSlice } from '@shared/general'
 import { cleanHtml } from '@shared/lib/itemsUtils'
 
 export const CopyItemIcon = (): JSX.Element => {
@@ -53,7 +52,7 @@ export const CopyItemIcon = (): JSX.Element => {
         const isCopyContainer = getState().copy.isCopyContainer
         if (!isCopyContainer) {
           dispatch(copySlice.actions.saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
-          dispatch(generalSlice.actions.disableFroala())
+          isItemsFroalaSignal.value = false
           dispatch(copySlice.actions.showCopyContainer())
         }
       }}

@@ -1,7 +1,6 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { arrayMoveImmutable } from 'array-move'
-import { itemsSlice, saveItemsLocally } from '@entities/items'
-import { generalSlice } from '@shared/general'
+import { isItemsFroalaSignal, itemsSlice, saveItemsLocally } from '@entities/items'
 import { markAsNotSaved } from '@shared/isSaved'
 
 type Props = {
@@ -11,11 +10,11 @@ type Props = {
 
 const onItemDragStart = (): void => {
   document.body.style.cursor = 'move'
-  dispatch(generalSlice.actions.disableFroala())
+  isItemsFroalaSignal.value = false
 }
 
 const onItemDragEnd = ({ oldIndex, newIndex }: Props): void => {
-  dispatch(generalSlice.actions.enableFroala())
+  isItemsFroalaSignal.value = true
   document.body.style.removeProperty('cursor')
 
   if (oldIndex !== newIndex) {

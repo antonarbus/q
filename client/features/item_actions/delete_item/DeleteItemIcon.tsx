@@ -5,8 +5,7 @@ import { gsap } from 'gsap'
 import { useRef } from 'react'
 import { RxCross2 } from 'react-icons/rx'
 import { copySlice } from '@entities/copy'
-import { itemsSlice, selectIsLastItem, useItem, saveItemsLocally } from '@entities/items'
-import { generalSlice } from '@shared/general'
+import { itemsSlice, selectIsLastItem, useItem, saveItemsLocally, isItemsFroalaSignal } from '@entities/items'
 import { markAsNotSaved } from '@shared/isSaved'
 
 export const DeleteItemIcon = (): EmotionJSX.Element => {
@@ -33,7 +32,7 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
         const itemToDelete = getState().items[itemIndex]
         if (!itemToDelete) return
 
-        dispatch(generalSlice.actions.disableFroala())
+        isItemsFroalaSignal.value = false
         dispatch(itemsSlice.actions.deleteItemReducer({ itemId: itemToDelete.id }))
         dispatch(copySlice.actions.forbidAllActions())
 
@@ -45,7 +44,7 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
 
         if (!isCopyContainer) {
           setTimeout(() => {
-            dispatch(generalSlice.actions.enableFroala())
+            isItemsFroalaSignal.value = true
             saveItemsLocally({ msgAboveItemWithIndex: getIndexWhereToShowMsg({ itemIndex }) })
             markAsNotSaved()
           }, 1000 * theme.item.animationDuration)

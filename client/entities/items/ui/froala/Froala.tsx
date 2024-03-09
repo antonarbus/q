@@ -1,6 +1,7 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { Box, type SxProps } from '@mui/material'
 import { useRef, type MouseEvent } from 'react'
+import { isItemsFroalaSignal } from '@entities/items/signals/isItemsFroalaSignal'
 import { type FroalaEditorRef } from '@shared/types'
 import { FroalaProvider } from '../../providers/FroalaProvider'
 import { useItem } from '../../providers/ItemProvider'
@@ -48,8 +49,7 @@ export const Froala = ({
   const isItemFroala = useSelectorTyped(state => state.items[itemIndex]?.isFroala)
   // todo: disabled viewport observer for time being otherwise total price being out of view is not calculated and pdf produces incorrect file, maybe we do not even need it
   // const { observerRef, isInsideViewPort } = useViewPortObserver()
-  const isAppFroala = useSelectorTyped(state => state.general.isFroala)
-  const showEditableHtml = isAppFroala && isItemFroala // && isInsideViewPort
+  const showEditableHtml = isItemsFroalaSignal.value && isItemFroala // && isInsideViewPort
 
   return (
     <FroalaProvider
