@@ -1,6 +1,9 @@
 import { type QuotationModelType } from '@server/db/models/quotationModel'
 import type { ColDef } from 'ag-grid-community'
+import { dateValueFormatter } from './dateValueFormatter'
+import { dateValueGetter } from './dateValueGetter'
 import { DeleteQuotationButton } from './DeleteQuotationButton'
+import { LinkRenderer } from './LinkRenderer'
 import { OpenQuotationButton } from './OpenQuotationButton'
 
 export const defaultColDef: ColDef<QuotationModelType> = {
@@ -27,6 +30,7 @@ export const columnDefs: Array<ColDef<QuotationModelType>> = [
     maxWidth: 100,
     sortable: false,
     filter: false,
+    resizable: false,
     suppressMovable: true,
     lockPosition: 'left',
     pinned: 'left',
@@ -52,14 +56,25 @@ export const columnDefs: Array<ColDef<QuotationModelType>> = [
   },
   {
     field: 'id',
+    headerName: 'id',
+    cellRenderer: LinkRenderer,
   },
   {
     field: 'version',
+    headerName: 'version',
   },
   {
     field: 'createdAt',
+    headerName: 'created at',
+    valueGetter: dateValueGetter({ columnDef: 'createdAt' }),
+    valueFormatter: dateValueFormatter,
+    filter: 'agDateColumnFilter',
   },
   {
     field: 'updatedAt',
+    headerName: 'updated at',
+    valueGetter: dateValueGetter({ columnDef: 'updatedAt' }),
+    valueFormatter: dateValueFormatter,
+    filter: 'agDateColumnFilter',
   },
 ]
