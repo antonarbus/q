@@ -1,4 +1,4 @@
-import { domToPng, domToJpeg } from 'modern-screenshot'
+import { domToJpeg } from 'modern-screenshot'
 import { showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@entities/nav'
 import { quotationSignal } from '@entities/quotation'
 import { className } from '@shared/consts/className'
@@ -19,12 +19,12 @@ export const downloadPdf = async (): Promise<void> => {
     return maxWidth
   }, 0) + 40
 
-  const screenshot = await domToPng(itemsElement, {
+  const screenshot = await domToJpeg(itemsElement, {
     width: maxPaperWidth,
     height: itemsElement.clientHeight,
     backgroundColor: 'grey',
     quality: 1,
-    scale: 4,
+    scale: 1.5,
     onCloneNode: (node) => {
       if (!(node instanceof HTMLElement)) return
       const actionElements = node.querySelectorAll(`.${className.actionsContainer}`)
