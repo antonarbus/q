@@ -108,7 +108,7 @@ export const useStartFroala = (): void => {
               // editorRef.current.undo.saveStep() // triggers contentChange // without it any first click on cell considered as a fresh value and "contentChanged" callback is fired // https://github.com/froala/wysiwyg-editor/issues/1578#issuecomment-256577412
               window.froalas = window.froalas.filter(({ current }) => Boolean(current))
               onInitialized?.()
-              // console.log('💚 froalas qty after init: ', window.froalas.length)
+              console.log('💚 froalas qty after init: ', window.froalas.length)
             },
           },
         },
@@ -123,7 +123,7 @@ export const useStartFroala = (): void => {
       editorRef.current?.destroy()
       editorRef.current = null
       window.froalas = window.froalas.filter(({ current }) => Boolean(current))
-      // console.log('💔 froalas qty after destroy: ', window.froalas.length)
+      console.log('💔 froalas qty after destroy: ', window.froalas.length)
     }
   })
 }
