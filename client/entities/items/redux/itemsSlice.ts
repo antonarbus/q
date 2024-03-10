@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { type Item } from '../types'
 import { getDefaultOrLocalItems } from '../utils/getDefaultOrLocalItems'
 import { deleteBoqRowReducer } from './reducers/deleteBoqRowReducer'
 import { deleteItemReducer } from './reducers/deleteItemReducer'
@@ -37,7 +38,7 @@ import { updatePriceReducer } from './reducers/updatePriceReducer'
 import { updatePriceTitleReducer } from './reducers/updatePriceTitleReducer'
 import { updateSubTotalPriceReducer } from './reducers/updateSubTotalPriceReducer'
 
-const initialState = getDefaultOrLocalItems()
+const initialState: Item[] = []// getDefaultOrLocalItems()
 
 export const itemsSlice = createSlice({
   name: 'items',
