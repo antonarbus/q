@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
 import express from 'express'
 import { body, validationResult } from 'express-validator'
-import { nanoid } from 'nanoid'
+import { nanoid } from '@shared/lib/nanoid'
 import { apiUrl } from '../consts/apiUrl'
 import { UserModel } from '../db/models/userModel'
 // import { sendMail } from '../services/mail/sendMail'

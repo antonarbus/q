@@ -1,4 +1,4 @@
-import { nanoid } from 'nanoid'
+import { nanoid } from '@shared/lib/nanoid'
 import { boqRowKey } from '../consts/boqRowKey'
 import { itemKey } from '../consts/itemKey'
 import { type Item } from '../types'

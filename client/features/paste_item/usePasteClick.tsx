@@ -1,10 +1,10 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
-import { nanoid } from 'nanoid'
 import { useEffectOnce, useUnmount } from 'react-use'
 import { copySlice } from '@entities/copy'
 import { type CopyableItem, getBoqItemFromStore, itemsSlice, saveItemsLocally, boqRowType, isItemsFroalaSignal } from '@entities/items'
 import { markAsNotSaved } from '@shared/isSaved'
+import { nanoid } from '@shared/lib/nanoid'
 
 export const usePasteClick = (): void => {
   useEffectOnce(() => {

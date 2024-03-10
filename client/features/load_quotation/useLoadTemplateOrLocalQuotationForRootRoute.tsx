@@ -1,5 +1,4 @@
 import { dispatch } from '@lib_instances/store'
-import { customAlphabet } from 'nanoid'
 import { useEffectOnce } from 'react-use'
 import { defaultItems, itemsSlice } from '@entities/items'
 import { type Item } from '@entities/items/types'
@@ -49,14 +48,10 @@ export function useLoadTemplateOrLocalQuotationForRootRoute(): void {
   })
 }
 
-const nanoid = customAlphabet('123456789abcdefghijkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ')
-const quotationId = nanoid(5)
-
 function loadTemplate(): void {
   loadingDotsOverlayTextSignal.value = 'Loading default template...'
   setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 3000)
   dispatch(itemsSlice.actions.loadItemsReducer({ items: defaultItems }))
-  quotationSignal.value = { id: quotationId }
   localStorage.setItem(localStorageKey.items, JSON.stringify(defaultItems))
   localStorage.setItem(localStorageKey.quotation, JSON.stringify(quotationSignal.value))
 }
