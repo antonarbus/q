@@ -1,5 +1,4 @@
 import { Person, Settings } from '@mui/icons-material'
-import { nanoid } from 'nanoid'
 import { createElement } from 'react'
 import { BiReset } from 'react-icons/bi'
 import { BsFiletypePdf } from 'react-icons/bs'
@@ -13,6 +12,7 @@ import { saveQuotation } from '@features/save_quotation'
 import type { MenuItemTypes } from '@entities/nav'
 import { navMenuItemId } from '@shared/consts/navMenuItemId'
 import { route } from '@shared/consts/route'
+import { nanoid } from '@shared/lib/nanoid'
 import logo from './logo.svg'
 
 const reactIcon = createElement(IoShareOutline, {})

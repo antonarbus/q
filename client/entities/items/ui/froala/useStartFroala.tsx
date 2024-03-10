@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
@@ -9,11 +8,11 @@ import 'froala-editor/js/plugins.pkgd.min.js'
 import 'froala-editor/js/third_party/font_awesome.min.js'
 import './froala_editor.pkgd.min.css'
 import { getState, useSelectorTyped } from '@lib_instances/store'
-import { nanoid } from 'nanoid'
 import type { MouseEvent } from 'react'
 import { useEffect } from 'react'
 import { apiUrl } from 'server/consts/apiUrl'
 import { quotationSignal } from '@entities/quotation'
+import { nanoid } from '@shared/lib/nanoid'
 import { type FroalaEditorRef } from '@shared/types'
 import { useFroala } from '../../providers/FroalaProvider'
 import { beforeUpload } from './beforeUpload'

@@ -1,7 +1,5 @@
 import { model, type ObjectId, Schema } from 'mongoose'
-import { customAlphabet } from 'nanoid'
-
-const nanoid = customAlphabet('123456789abcdefghijkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ')
+import { nanoid } from '@shared/lib/nanoid'
 
 export type QuotationModelType = {
   _id: ObjectId
