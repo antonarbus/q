@@ -1,9 +1,10 @@
 import { Items } from '@widgets/items'
 import { QuotationInfo } from '@widgets/quotation'
-import { useLoadQuotation } from '@entities/quotation'
+import { useLoadQuotationFromServer, useLoadTemplateOrLocalQuotationForRootRoute } from '@entities/quotation'
 
 export const Quotation = (): JSX.Element => {
-  useLoadQuotation()
+  useLoadTemplateOrLocalQuotationForRootRoute()
+  useLoadQuotationFromServer()
 
   return (
     <>

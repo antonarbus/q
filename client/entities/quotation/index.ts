@@ -14,4 +14,5 @@ export { useGetQuotationsQuery } from './api/useGetQuotationsQuery'
 export { useDeleteQuotationMutation } from './api/useDeleteQuotationMutation'
 
 // hooks
-export { useLoadQuotation } from './hooks/useLoadQuotation'
+export { useLoadQuotationFromServer } from './hooks/useLoadQuotationFromServer'
+export { useLoadTemplateOrLocalQuotationForRootRoute } from './hooks/useLoadTemplateOrLocalQuotationForRootRoute'
