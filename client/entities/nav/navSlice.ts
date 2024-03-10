@@ -77,7 +77,7 @@ export const navSlice = createSlice({
     setMenuItemHoverIndex: (state, action: PayloadAction<number>) => {
       state.menuItemHoverIndex = action.payload
     },
-    disableTopMenuItemsExceptItemId: (state, action: PayloadAction<{ exceptItemId?: string }>) => {
+    disableTopMenuItemsExceptItemId: (state, action: PayloadAction<{ exceptItemId?: NavMenuItemIdKey }>) => {
       const { exceptItemId } = action.payload
       const topLevelNavMenu = state.navStructure[0]
       if (!topLevelNavMenu) return

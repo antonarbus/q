@@ -11,6 +11,7 @@ import { RouterProvider } from 'react-router-dom'
 import { useGetAccessToken } from '@widgets/credentials'
 import { GlobalStyles } from './GlobalStyles'
 import { ReactQueryDevtoolsProductionHidden } from './ReactQueryDevtoolsProductionHidden'
+import './signalsDevTools'
 
 export const App = (): JSX.Element => {
   useGetAccessToken({ withLoadingState: false })
