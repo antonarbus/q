@@ -67,7 +67,7 @@ export const useLoadQuotation = (): ReactNode => {
       quotationSignal.value = data.quotation
       saveQuotationLocally()
       saveItemsLocally()
-      setTimeout(() => { spinnerTextSignal.value = 'Quotation found' }, 1000)
+      setTimeout(() => { spinnerTextSignal.value = 'Loading...' }, 1000)
       setTimeout(() => { spinnerTextSignal.value = null }, 3000)
       return
     }
