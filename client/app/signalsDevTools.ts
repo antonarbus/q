@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { effect } from '@preact/signals-react'
 import { totalRowsSignal } from '@pages/quotations/TotalRowsCount'
 import { isItemsFroalaSignal, reRenderItemsSignal } from '@entities/items'

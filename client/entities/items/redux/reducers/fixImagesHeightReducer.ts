@@ -1,5 +1,5 @@
 import { type PayloadAction } from '@reduxjs/toolkit'
-import { itemType } from '../../consts/itemType'
+import { itemKey } from '../../consts/itemKey'
 import { type Item } from '../../types'
 
 export const fixImagesHeightReducer = (state: Item[], action: PayloadAction<{
@@ -9,7 +9,7 @@ export const fixImagesHeightReducer = (state: Item[], action: PayloadAction<{
   const { imageId, imageHeight } = action.payload
 
   state.forEach(item => {
-    if (item.type === itemType.text) {
+    if (item.type === itemKey.text) {
       if (!item.text.html.includes('img')) return
       if (!item.text.html.includes(imageId)) return
       item.text.html = makeHeightFixedInHtmlString({
@@ -18,7 +18,7 @@ export const fixImagesHeightReducer = (state: Item[], action: PayloadAction<{
       })
     }
 
-    if (item.type === itemType.boq) {
+    if (item.type === itemKey.boq) {
       const boqRows = item.boq.rows
       boqRows.forEach(boqRow => {
         if (!boqRow.description.html.includes('img')) return

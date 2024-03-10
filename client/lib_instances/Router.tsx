@@ -8,7 +8,7 @@ import { Login, PersistentAuth, Register, RequireAuth, Reset, Unauthorized } fro
 import { Nav } from '@widgets/nav'
 import { route } from '@shared/consts/route'
 import { Main } from '@shared/layouts'
-import { Spinner } from '@shared/spinner'
+import { LoadingDotsOverlay } from '@shared/loading_dots_overlay'
 import { TopMsg } from '@shared/ui/top_msg'
 
 export const router = createBrowserRouter([
@@ -17,7 +17,7 @@ export const router = createBrowserRouter([
     element: (
       <>
         <TopMsg />
-        <Spinner />
+        <LoadingDotsOverlay />
         <Nav />
         <Copy />
         <Main />

@@ -1,6 +1,5 @@
 import { reactQuery } from '@lib_instances/reactQuery'
-import { Delete } from '@mui/icons-material/'
-import { Button, IconButton } from '@mui/material'
+import { IconButton } from '@mui/material'
 import { type ResBody } from '@server/api/getQuotationsRouter'
 import { type QuotationModelType } from '@server/db/models/quotationModel'
 import type { ICellRendererParams } from 'ag-grid-community'
@@ -12,7 +11,7 @@ import { RotatingLoaderIcon } from '@shared/components'
 import { queryKey } from '@shared/consts/queryKey'
 
 export const DeleteQuotationButton = (params: ICellRendererParams<Partial<QuotationModelType>>): ReactNode => {
-  const { mutate, isPending, isSuccess, data } = useDeleteQuotationMutation()
+  const { mutate, isPending, isSuccess } = useDeleteQuotationMutation()
 
   useEffect(() => {
     if (!isSuccess) return

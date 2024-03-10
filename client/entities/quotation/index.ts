@@ -12,7 +12,3 @@ export { saveQuotationLocally } from './utils/saveQuotationLocally'
 export { useGetQuotationQuery } from './api/useGetQuotationQuery'
 export { useGetQuotationsQuery } from './api/useGetQuotationsQuery'
 export { useDeleteQuotationMutation } from './api/useDeleteQuotationMutation'
-
-// hooks
-export { useLoadQuotationFromServer } from './hooks/useLoadQuotationFromServer'
-export { useLoadTemplateOrLocalQuotationForRootRoute } from './hooks/useLoadTemplateOrLocalQuotationForRootRoute'

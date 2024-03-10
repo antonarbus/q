@@ -75,8 +75,8 @@ export { RowProvider, useRow } from './providers/RowProvider'
 export { FroalaProvider, useFroala } from './providers/FroalaProvider'
 
 // consts
-export { itemType } from './consts/itemType'
-export { boqRowType } from './consts/boqRowType'
+export { itemKey as itemType } from './consts/itemKey'
+export { boqRowKey as boqRowType } from './consts/boqRowKey'
 export { boqColumnKey } from './consts/boqColumnKey'
 export { boqRowCellKey } from './consts/boqRowCellKey'
 

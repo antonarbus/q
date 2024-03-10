@@ -1,12 +1,11 @@
 import 'ag-grid-community/styles/ag-grid.css' // Mandatory CSS required by the grid
 import 'ag-grid-community/styles/ag-theme-quartz.css'
 import { Box, LinearProgress } from '@mui/material'
-import { signal } from '@preact/signals-react'
 import { type QuotationModelType } from '@server/db/models/quotationModel'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef, useEffect } from 'react'
 import { useGetQuotationsQuery } from '@entities/quotation'
-import { spinnerTextSignal } from '@shared/spinner'
+import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
 import { addPlaceholderToFloatingFilters } from './addPlaceholderToFloatingFilters'
 import { AgGridStyles } from './AgGridStyles'
 import { columnDefs, defaultColDef } from './columnDefs'
@@ -19,7 +18,7 @@ export const QuotationsTable = (): JSX.Element => {
 
   useEffect(() => {
     if (!isFetched) return
-    spinnerTextSignal.value = null
+    loadingDotsOverlayTextSignal.value = null
   },
   [isFetched])
 
