@@ -11,7 +11,7 @@ let isAnimationPrevented = false // needed to avoid second click on backdrop whi
 export const slideElement = ({ intoView, element, cb }: Props): void => {
   if (isAnimationPrevented) return
   isAnimationPrevented = true
-  const screenHeight = window.window.innerHeight
+  const screenHeight = window.window.innerHeight // todo: what?
   const elementHeight = element.offsetHeight
   const offsetPosition = screenHeight / 2 + elementHeight / 2
   gsap.fromTo(

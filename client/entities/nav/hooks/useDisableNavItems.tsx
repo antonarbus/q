@@ -4,7 +4,7 @@ import { navSlice } from '../navSlice'
 
 export const useDisableNavItems = (): void => {
   useEffectOnce(() => {
-    dispatch(navSlice.actions.disableTopMenuItemsExceptItemId({ exceptItemId: 'Offers' }))
+    dispatch(navSlice.actions.disableTopMenuItemsExceptItemId({ exceptItemId: 'quotations' }))
   })
 
   useUnmount(() => {
