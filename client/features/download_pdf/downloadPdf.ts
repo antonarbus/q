@@ -2,21 +2,31 @@ import { domToPng } from 'modern-screenshot'
 import { showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@entities/nav'
 import { quotationSignal } from '@entities/quotation'
 import { className } from '@shared/consts/className'
+import { navMenuItemId } from '@shared/consts/navMenuItemId'
 
 export const downloadPdf = async (): Promise<void> => {
-  showLoadingNavIcon({ navMenuItemIdKey: 'pdf' })
+  showLoadingNavIcon({ navMenuItemIdKey: navMenuItemId.pdf })
 
   const itemsElement = document.querySelector(`.${className.items}`)
   if (!(itemsElement instanceof HTMLElement)) return
 
+  const paperElements = document.querySelectorAll(`.${className.paper}`)
+  if (paperElements === null) return
+
+  const maxPaperWidth = Array.from(paperElements).reduce((maxWidth, paperElement) => {
+    const paperElementWidth = paperElement.clientWidth
+    if (paperElementWidth > maxWidth) return paperElementWidth
+    return maxWidth
+  }, 0) + 40
+
   const screenshot = await domToPng(itemsElement, {
+    width: maxPaperWidth,
+    height: itemsElement.clientHeight,
     backgroundColor: 'grey',
     onCloneNode: (node) => {
       if (!(node instanceof HTMLElement)) return
-      const actionsElements = node.querySelectorAll(`.${className.actionsContainer}`)
-      actionsElements.forEach((element) => {
-        element.remove()
-      })
+      const actionElements = node.querySelectorAll(`.${className.actionsContainer}`)
+      actionElements.forEach((element) => { element.remove() })
     },
   })
 
@@ -24,7 +34,7 @@ export const downloadPdf = async (): Promise<void> => {
 
   worker.postMessage({
     imageData: screenshot,
-    width: itemsElement.clientWidth,
+    width: maxPaperWidth,
     height: itemsElement.clientHeight,
   })
 
@@ -40,10 +50,10 @@ export const downloadPdf = async (): Promise<void> => {
     document.body.removeChild(downloadLink)
     URL.revokeObjectURL(pdfDataUrl) // Revoke the data URL to free up resources
 
-    showSuccessNavIcon({ navMenuItemIdKey: 'pdf' })
+    showSuccessNavIcon({ navMenuItemIdKey: navMenuItemId.pdf })
   }
 
   worker.onerror = function () {
-    showErrorNavIcon({ navMenuItemIdKey: 'save' })
+    showErrorNavIcon({ navMenuItemIdKey: navMenuItemId.pdf })
   }
 }
