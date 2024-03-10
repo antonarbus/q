@@ -1,19 +1,19 @@
 import { dispatch } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
-import { nanoid } from 'nanoid'
+import { customAlphabet } from 'nanoid'
 import { defaultItems, isItemsFroalaSignal, itemsSlice, reRenderItemsSignal, saveItemsLocally } from '@entities/items'
-import { getDefaultOrLocalQuotation, quotationSignal } from '@entities/quotation'
-import { localStorageKey } from '@shared/consts/localStorageKey'
+import { quotationSignal, saveQuotationLocally } from '@entities/quotation'
 import { markAsNotSaved } from '@shared/isSaved'
+
+const nanoid = customAlphabet('123456789abcdefghijkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ')
 
 export const resetItems = (): void => {
   isItemsFroalaSignal.value = false
+  dispatch(itemsSlice.actions.loadItemsReducer({ items: defaultItems }))
   saveItemsLocally({ items: defaultItems })
-
-  localStorage.removeItem(localStorageKey.quotation)
-  quotationSignal.value = getDefaultOrLocalQuotation()
+  quotationSignal.value = { id: 'local version' }
+  saveQuotationLocally()
   markAsNotSaved()
-  // dispatch(itemsSlice.actions.resetItemsToDefaultReducer())
   reRenderItemsSignal.value = nanoid(3)
   setTimeout(() => {
     isItemsFroalaSignal.value = true
