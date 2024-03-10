@@ -1,13 +1,13 @@
-import { LoadingDots } from '@shared/components/LoadingDots'
-import { spinnerTextSignal } from './spinnerTextSignal'
+import { LoadingDots } from './LoadingDots'
+import { loadingDotsOverlayTextSignal } from './loadingDotsOverlayTextSignal'
 
 type Props = {
   isShowing?: boolean
   title?: string
 }
 
-export const Spinner = ({ isShowing, title }: Props): JSX.Element | null => {
-  if (spinnerTextSignal.value === null && !isShowing) return null
+export const LoadingDotsOverlay = ({ isShowing, title }: Props): JSX.Element | null => {
+  if (loadingDotsOverlayTextSignal.value === null && !isShowing) return null
 
   return (
     <div
@@ -39,7 +39,7 @@ export const Spinner = ({ isShowing, title }: Props): JSX.Element | null => {
           height: '60px',
         }}
       >
-        {spinnerTextSignal.value ?? title}
+        {loadingDotsOverlayTextSignal.value ?? title}
       </div>
       <LoadingDots />
     </div>

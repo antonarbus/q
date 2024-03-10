@@ -1,8 +1,8 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { nanoid } from 'nanoid'
 import { type PastePos } from '@entities/copy'
-import { boqRowType } from '../../consts/boqRowType'
-import { itemType } from '../../consts/itemType'
+import { boqRowKey } from '../../consts/boqRowKey'
+import { itemKey } from '../../consts/itemKey'
 import type { CopyableItem, Item } from '../../types'
 
 type Payload = {
@@ -18,7 +18,7 @@ export const pasteItemReducer: Reducer = (state, action) => {
   const { itemId, newItemId, pastePos, item } = action.payload
   const itemToPaste = { ...structuredClone(item), id: newItemId }
 
-  if (itemToPaste.type === itemType.boq) {
+  if (itemToPaste.type === itemKey.boq) {
     const boqRows = itemToPaste.boq.rows
     boqRows.forEach((boqRow) => {
       boqRow.id = nanoid(3)
@@ -27,7 +27,7 @@ export const pasteItemReducer: Reducer = (state, action) => {
 
   // todo: check it, probably should bring item word into the type and then it will be easier to work with
   // todo: as a next step we may convert type into tags, but that needs a separate experiment
-  const isItem = itemToPaste.type === itemType.boq || itemToPaste.type === itemType.text || itemToPaste.type === itemType.price
+  const isItem = itemToPaste.type === itemKey.boq || itemToPaste.type === itemKey.text || itemToPaste.type === itemKey.price
   const isBoqRow = !isItem
 
   if (isItem) {
@@ -60,7 +60,7 @@ export const pasteItemReducer: Reducer = (state, action) => {
 
     const spliceSettings = getSpliceSettings()
 
-    const itemsWithoutPasteText = state.filter(({ type }) => type !== itemType.paste)
+    const itemsWithoutPasteText = state.filter(({ type }) => type !== itemKey.paste)
 
     itemsWithoutPasteText.splice(
       spliceSettings.insertAtIndex,
@@ -73,7 +73,7 @@ export const pasteItemReducer: Reducer = (state, action) => {
 
   if (isBoqRow) {
     state.forEach((item, index) => {
-      if (item.type !== itemType.boq) return
+      if (item.type !== itemKey.boq) return
 
       type SplicingSettings = {
         insertAtIndex: number
@@ -110,7 +110,7 @@ export const pasteItemReducer: Reducer = (state, action) => {
 
       if (spliceSettings === undefined) return
 
-      const boqRowsWithoutPasteText = item.boq.rows.filter((boqRow) => boqRow.type !== boqRowType.paste)
+      const boqRowsWithoutPasteText = item.boq.rows.filter((boqRow) => boqRow.type !== boqRowKey.paste)
 
       boqRowsWithoutPasteText.splice(
         spliceSettings.insertAtIndex,

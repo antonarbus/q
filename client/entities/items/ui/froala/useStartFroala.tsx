@@ -25,7 +25,7 @@ declare const window: Window & typeof globalThis & {
 
 window.froalas = []
 
-// * do not open image in browser
+// * prevent image to be opened in browser
 document.addEventListener('dragover', (e) => { e.preventDefault() })
 document.addEventListener('drop', (e) => { e.preventDefault() })
 
@@ -55,7 +55,7 @@ export const useStartFroala = (): void => {
             videoUploadParams: uploadParams,
           }),
 
-          fileMaxSize: 1024 * 1024 * 30,
+          fileMaxSize: 1024 * 1024 * 10,
           events: {
             contentChanged: () => {
               onContentChange()

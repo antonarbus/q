@@ -1,5 +1,5 @@
 import { getState } from '@lib_instances/store'
-import { itemType } from '../../consts/itemType'
+import { itemKey } from '../../consts/itemKey'
 import { type BoqItem } from '../../types'
 
 type Props = {
@@ -8,6 +8,6 @@ type Props = {
 
 export const getBoqItemFromStore = ({ itemIndex }: Props): BoqItem | undefined => {
   const item = getState().items[itemIndex]
-  if (item?.type !== itemType.boq) return
+  if (item?.type !== itemKey.boq) return
   return item
 }

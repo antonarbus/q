@@ -1,12 +1,12 @@
 import { nanoid } from 'nanoid'
-import { boqRowType } from '../consts/boqRowType'
-import { itemType } from '../consts/itemType'
+import { boqRowKey } from '../consts/boqRowKey'
+import { itemKey } from '../consts/itemKey'
 import { type Item } from '../types'
 
 export const defaultItems: Item[] = [
   {
     id: nanoid(3),
-    type: itemType.text,
+    type: itemKey.text,
     width: 600,
     height: 0,
     msg: '',
@@ -18,7 +18,7 @@ export const defaultItems: Item[] = [
   },
   {
     id: nanoid(3),
-    type: itemType.boq,
+    type: itemKey.boq,
     width: 600,
     height: 0,
     msg: '',
@@ -63,7 +63,7 @@ export const defaultItems: Item[] = [
       rows: [
         {
           id: nanoid(3),
-          type: boqRowType.row,
+          type: boqRowKey.row,
           height: 0,
           width: 0,
           description: {
@@ -101,7 +101,7 @@ export const defaultItems: Item[] = [
         },
         {
           id: nanoid(3),
-          type: boqRowType.row,
+          type: boqRowKey.row,
           height: 0,
           width: 0,
           description: {
@@ -139,7 +139,7 @@ export const defaultItems: Item[] = [
         },
         {
           id: nanoid(3),
-          type: boqRowType.row,
+          type: boqRowKey.row,
           height: 0,
           width: 0,
           description: {
@@ -180,7 +180,7 @@ export const defaultItems: Item[] = [
   },
   {
     id: nanoid(3),
-    type: itemType.price,
+    type: itemKey.price,
     width: 150,
     height: 0,
     msg: '',
@@ -196,7 +196,7 @@ export const defaultItems: Item[] = [
   },
   {
     id: nanoid(3),
-    type: itemType.text,
+    type: itemKey.text,
     width: 600,
     height: 0,
     msg: '',

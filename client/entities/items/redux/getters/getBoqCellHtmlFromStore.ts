@@ -1,5 +1,5 @@
 import { getState } from '@lib_instances/store'
-import { itemType } from '../../consts/itemType'
+import { itemKey } from '../../consts/itemKey'
 import { type BoqRowCellKey } from '../../types'
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 export const getBoqCellHtmlFromStore = ({ itemIndex, rowIndex, boqRowCellKey }: Props): string => {
   const item = getState().items[itemIndex]
   if (!item) return ''
-  if (item.type !== itemType.boq) return ''
+  if (item.type !== itemKey.boq) return ''
   const row = item.boq.rows[rowIndex]
   if (row === undefined) return ''
   const html = row[boqRowCellKey].html

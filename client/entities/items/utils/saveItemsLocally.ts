@@ -1,6 +1,6 @@
 import { getState } from '@lib_instances/store'
 import { localStorageKey } from '@shared/consts/localStorageKey'
-import { itemType } from '../consts/itemType'
+import { itemKey } from '../consts/itemKey'
 import type { Item } from '../types'
 import { tellItemSavedLocally } from './tellItemSavedLocally'
 
@@ -18,7 +18,7 @@ export const saveItemsLocally = ({
     item.msg = ''
     item.isFroala = true
 
-    if (item.type !== itemType.boq) return
+    if (item.type !== itemKey.boq) return
 
     item.boq.rows.forEach(boqRow => {
       boqRow.itemPrice.pin.isShown = false

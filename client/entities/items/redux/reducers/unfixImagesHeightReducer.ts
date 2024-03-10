@@ -1,14 +1,14 @@
-import { itemType } from '../../consts/itemType'
+import { itemKey } from '../../consts/itemKey'
 import { type Item } from '../../types'
 
 export const unfixImagesHeightReducer = (state: Item[]): void => {
   state.forEach(item => {
-    if (item.type === itemType.text) {
+    if (item.type === itemKey.text) {
       if (!item.text.html.includes('img')) return
       item.text.html = makeHeightAutoInHtmlString({ htmlString: item.text.html })
     }
 
-    if (item.type === itemType.boq) {
+    if (item.type === itemKey.boq) {
       const boqRows = item.boq.rows
       boqRows.forEach(boqRow => {
         if (!boqRow.description.html.includes('img')) return

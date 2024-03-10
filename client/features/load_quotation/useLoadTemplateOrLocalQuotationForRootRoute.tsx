@@ -3,12 +3,11 @@ import { customAlphabet } from 'nanoid'
 import { useEffectOnce } from 'react-use'
 import { defaultItems, itemsSlice } from '@entities/items'
 import { type Item } from '@entities/items/types'
+import { type Quotation, quotationSignal } from '@entities/quotation'
 import { localStorageKey } from '@shared/consts/localStorageKey'
 import { route } from '@shared/consts/route'
 import { jsonParseSafe } from '@shared/lib/jsonParseSafe'
-import { spinnerTextSignal } from '@shared/spinner'
-import { quotationSignal } from '../signals/quotationSignal'
-import { type Quotation } from '../types'
+import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
 
 export function useLoadTemplateOrLocalQuotationForRootRoute(): void {
   useEffectOnce(() => {
@@ -43,8 +42,8 @@ export function useLoadTemplateOrLocalQuotationForRootRoute(): void {
       return
     }
 
-    spinnerTextSignal.value = 'Loading existing quotation from browser...'
-    setTimeout(() => { spinnerTextSignal.value = null }, 2000)
+    loadingDotsOverlayTextSignal.value = 'Loading existing quotation from browser...'
+    setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 2000)
     quotationSignal.value = quotation
     dispatch(itemsSlice.actions.loadItemsReducer({ items }))
   })
@@ -54,8 +53,8 @@ const nanoid = customAlphabet('123456789abcdefghijkmnpqrstuvwxyzABCDEFGHJKMNPQRS
 const quotationId = nanoid(5)
 
 function loadTemplate(): void {
-  spinnerTextSignal.value = 'Loading default template...'
-  setTimeout(() => { spinnerTextSignal.value = null }, 3000)
+  loadingDotsOverlayTextSignal.value = 'Loading default template...'
+  setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 3000)
   dispatch(itemsSlice.actions.loadItemsReducer({ items: defaultItems }))
   quotationSignal.value = { id: quotationId }
   localStorage.setItem(localStorageKey.items, JSON.stringify(defaultItems))
