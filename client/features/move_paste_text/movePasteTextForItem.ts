@@ -3,9 +3,14 @@ import isEqual from 'lodash.isequal'
 import { type CopyPlace, copySlice, getPastePlace } from '@entities/copy'
 import { itemType, itemsSlice } from '@entities/items'
 import { className } from '@shared/consts/className'
+import { route } from '@shared/consts/route'
 
 export const movePasteTextForItem = (e: MouseEvent): void => {
   if (!(e.target instanceof Element)) {
+    return
+  }
+
+  if (window.location.pathname.includes(route.quotations)) {
     return
   }
 
@@ -57,6 +62,7 @@ export const movePasteTextForItem = (e: MouseEvent): void => {
     const pastePlace: CopyPlace = { pastePos: 'top', itemId: firstItem.id }
     dispatch(copySlice.actions.updatePastePos(pastePlace))
     dispatch(copySlice.actions.showPasteText())
+
     dispatch(itemsSlice.actions.insertPasteItemReducer(pastePlace))
     return
   }
