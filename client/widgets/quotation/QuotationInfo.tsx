@@ -1,8 +1,10 @@
+import { type ReactNode } from 'react'
 import { quotationSignal } from '@entities/quotation'
 import { QuotationInfoLayout } from './QuotationInfoLayout'
 
-export const QuotationInfo = (): JSX.Element => {
+export const QuotationInfo = (): ReactNode => {
   const { id } = quotationSignal.value
+  if (id === '') return null
 
   return (
     <QuotationInfoLayout

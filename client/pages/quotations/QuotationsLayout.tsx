@@ -11,7 +11,7 @@ export const QuotationsLayout = ({ children }: Props): JSX.Element => {
     <Box
       sx={{
         mt: '5px',
-        height: `calc(100vh - ${theme.nav.height + 30}px)`,
+        height: `calc(100vh - ${theme.nav.height + 50}px)`,
         // background: '#ffcdd2',
       }}
     >

@@ -36,6 +36,7 @@ export const Spinner = ({ isShowing, title }: Props): JSX.Element | null => {
           fontWeight: 300,
           position: 'relative',
           top: '-60px',
+          height: '60px',
         }}
       >
         {spinnerTextSignal.value ?? title}
