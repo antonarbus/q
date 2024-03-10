@@ -1,4 +1,4 @@
-import { domToPng } from 'modern-screenshot'
+import { domToPng, domToJpeg } from 'modern-screenshot'
 import { showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@entities/nav'
 import { quotationSignal } from '@entities/quotation'
 import { className } from '@shared/consts/className'
@@ -23,6 +23,8 @@ export const downloadPdf = async (): Promise<void> => {
     width: maxPaperWidth,
     height: itemsElement.clientHeight,
     backgroundColor: 'grey',
+    quality: 1,
+    scale: 4,
     onCloneNode: (node) => {
       if (!(node instanceof HTMLElement)) return
       const actionElements = node.querySelectorAll(`.${className.actionsContainer}`)
@@ -48,8 +50,7 @@ export const downloadPdf = async (): Promise<void> => {
     document.body.appendChild(downloadLink)
     downloadLink.click()
     document.body.removeChild(downloadLink)
-    URL.revokeObjectURL(pdfDataUrl) // Revoke the data URL to free up resources
-
+    URL.revokeObjectURL(pdfDataUrl) // revoke the data URL to free up resources
     showSuccessNavIcon({ navMenuItemIdKey: navMenuItemId.pdf })
   }
 
