@@ -16,7 +16,7 @@ export const useGetQuotationsQuery = (): UseQueryResult<ResBody, Error> => {
 
       return res.data
     },
-    refetchOnMount: false,
+    refetchOnMount: true,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     staleTime: 0,

@@ -6,5 +6,5 @@ import { type Quotation } from '../types'
 // const nanoid = customAlphabet('123456789abcdefghijkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ')
 
 export const quotationSignal: Signal<Quotation> = signal({
-  id: '',
+  id: 'local version',
 })
