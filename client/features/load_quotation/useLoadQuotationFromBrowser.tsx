@@ -8,17 +8,19 @@ import { route } from '@shared/consts/route'
 import { jsonParseSafe } from '@shared/lib/jsonParseSafe'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
 
-export function useLoadTemplateOrLocalQuotationForRootRoute(): void {
+export function useLoadQuotationFromBrowser(): void {
   useEffectOnce(() => {
     if (window.location.pathname !== route.root) return
 
     const itemsFromLocalStorage = localStorage.getItem(localStorageKey.items)
+
     if (itemsFromLocalStorage === null) {
       loadTemplate()
       return
     }
 
     const items = jsonParseSafe<Item[]>(itemsFromLocalStorage)
+
     if (items === undefined) {
       loadTemplate()
       return
@@ -30,6 +32,7 @@ export function useLoadTemplateOrLocalQuotationForRootRoute(): void {
     }
 
     const quotationFromLocalStorage = localStorage.getItem(localStorageKey.quotation)
+
     if (quotationFromLocalStorage === null) {
       loadTemplate()
       return
@@ -43,6 +46,7 @@ export function useLoadTemplateOrLocalQuotationForRootRoute(): void {
 
     loadingDotsOverlayTextSignal.value = 'Loading existing quotation from browser...'
     setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 2000)
+
     quotationSignal.value = quotation
     dispatch(itemsSlice.actions.loadItemsReducer({ items }))
   })

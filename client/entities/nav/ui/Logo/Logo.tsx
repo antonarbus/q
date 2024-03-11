@@ -53,7 +53,16 @@ export const Logo = ({ logoRef }: Prop): JSX.Element => {
         },
       }}
     >
-      <Link to='/'>
+      <Link
+        to='/'
+        onClick={(e) => {
+          const doNotReRenderIfOnTheSamePage = location.pathname === '/'
+
+          if (doNotReRenderIfOnTheSamePage) {
+            e.preventDefault()
+          }
+        }}
+      >
         <span>Q</span>
         <span className='uotation'>uotation</span>
         <span className='app-ext'>.app</span>
