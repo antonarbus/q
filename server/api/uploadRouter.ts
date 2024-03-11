@@ -38,7 +38,7 @@ const upload: RouterHandler = async (req, res, next) => {
 
     const document = await QuotationModel.findOne({ email, id })
 
-    if (document !== null) {
+    if (document?.files !== undefined) {
       document.files.push({ name, size })
       await document.save()
     }

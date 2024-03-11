@@ -1,8 +1,9 @@
 import { dispatch } from '@lib_instances/store'
+import { type QuotationModelType } from '@server/db/models/quotationModel'
 import { useEffectOnce } from 'react-use'
 import { defaultItems, itemsSlice } from '@entities/items'
 import { type Item } from '@entities/items/types'
-import { type Quotation, quotationSignal } from '@entities/quotation'
+import { quotationSignal } from '@entities/quotation'
 import { localStorageKey } from '@shared/consts/localStorageKey'
 import { route } from '@shared/consts/route'
 import { jsonParseSafe } from '@shared/lib/jsonParseSafe'
@@ -38,7 +39,7 @@ export function useLoadQuotationFromBrowser(): void {
       return
     }
 
-    const quotation = jsonParseSafe<Quotation>(quotationFromLocalStorage)
+    const quotation = jsonParseSafe<QuotationModelType>(quotationFromLocalStorage)
     if (quotation === undefined) {
       loadTemplate()
       return

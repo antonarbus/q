@@ -4,11 +4,10 @@ import { bucket } from '@server/services/storage'
 import { Router } from 'express'
 import { type HydratedDocument } from 'mongoose'
 import type { ItemType } from '@entities/items'
-import type { Quotation } from '@entities/quotation'
 import { type ResWithBody, type ReqWithBody, type Next } from '../types'
 
 export type ReqBody = {
-  quotation: Quotation
+  quotation: QuotationModelType
   items: ItemType[]
   id: string
 }
@@ -30,13 +29,15 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
     const filter = { email, id }
     const update = { quotation }
 
-    const document = await QuotationModel.findOneAndUpdate(filter, update, {
-      new: true,
-      setDefaultsOnInsert: true,
-      upsert: true,
-    })
+    const document = await QuotationModel
+      .findOneAndUpdate(filter, update, {
+        new: true,
+        setDefaultsOnInsert: true,
+        upsert: true,
+      })
+      .select({ _id: 0, __v: 0 })
 
-    const isNew = document.createdAt.toISOString() === document.updatedAt.toISOString()
+    const isNew = document.createdAt?.toISOString() === document.updatedAt?.toISOString()
 
     if (document === null) {
       return res.status(404).json({

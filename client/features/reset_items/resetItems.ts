@@ -9,7 +9,7 @@ export const resetItems = (): void => {
   isItemsFroalaSignal.value = false
   dispatch(itemsSlice.actions.loadItemsReducer({ items: defaultItems }))
   saveItemsLocally({ items: defaultItems })
-  quotationSignal.value = { id: 'local version' }
+  quotationSignal.value = { id: 'local version', email: '' }
   saveQuotationLocally()
   markAsNotSaved()
   reRenderItemsSignal.value = nanoid(3)

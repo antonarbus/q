@@ -7,7 +7,7 @@ import { type ResWithBody, type Next, type Req } from '../types'
 
 export type ResBody = {
   message: string
-  documents?: Array<HydratedDocument<QuotationModelType>>
+  documents?: QuotationModelType[]
 }
 
 type RouterHandler = (req: Req, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>

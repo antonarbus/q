@@ -1,6 +1,3 @@
-// types
-export type { Quotation } from './types/index'
-
 // signals
 export { quotationSignal } from './signals/quotationSignal'
 
