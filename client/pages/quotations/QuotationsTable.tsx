@@ -39,9 +39,7 @@ export const QuotationsTable = (): JSX.Element => {
         columnDefs={columnDefs}
         suppressCellFocus
         enableCellTextSelection
-        onGridReady={() => {
-          addPlaceholderToFloatingFilters({ gridContainerRef })
-        }}
+        onGridReady={() => { addPlaceholderToFloatingFilters({ gridContainerRef }) }}
         onModelUpdated={(params) => {
           const filteredRowCount = params.api.getDisplayedRowCount()
           totalRowsSignal.value = filteredRowCount
