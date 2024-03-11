@@ -2,7 +2,6 @@ import { QuotationModel, type QuotationModelType } from '@server/db/models/quota
 import { verifyTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
 import { type JwtPayloadExtended, verifyRefreshToken } from '@server/services/jwt'
 import { Router } from 'express'
-import { type HydratedDocument } from 'mongoose'
 import { type ResWithBody, type Next, type Req } from '../types'
 
 export type ResBody = {
