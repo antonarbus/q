@@ -15,7 +15,7 @@ export function useLoadQuotationFromServer(): void {
     if (!isFetching) return
     loadingDotsOverlayTextSignal.value = 'Checking...'
     dispatch(itemsSlice.actions.loadItemsReducer({ items: [] }))
-    quotationSignal.value = { id: '' }
+    quotationSignal.value = { id: '', email: '' }
   }, [isFetching])
 
   useEffect(() => {

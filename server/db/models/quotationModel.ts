@@ -1,13 +1,12 @@
-import { model, type ObjectId, Schema } from 'mongoose'
+import { model, Schema } from 'mongoose'
 import { nanoid } from '@shared/lib/nanoid'
 
 export type QuotationModelType = {
-  _id: ObjectId
   id: string
   email: string
   quotationName?: string
-  createdAt: Date
-  updatedAt: Date
+  createdAt?: Date
+  updatedAt?: Date
   sharedAt?: Date
   from?: {
     email?: string
@@ -19,11 +18,11 @@ export type QuotationModelType = {
     name?: string
     company?: string
   }
-  files: Array<{
+  files?: Array<{
     size: number
     name: string
   }>
-  version: number
+  version?: number
 }
 
 const quotationSchema = new Schema<QuotationModelType>({

@@ -1,10 +1,14 @@
+import { reactQuery } from '@lib_instances/reactQuery'
 import { getState } from '@lib_instances/store'
+import { type ResBody as ResBodyQuotations } from '@server/api/getQuotationsRouter'
 import { type AxiosResponse } from 'axios'
+import { produce } from 'immer'
 import { type ResBody, type ReqBody } from 'server/api/saveQuotationRouter'
 import { apiUrl } from 'server/consts/apiUrl'
 import { showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@entities/nav'
 import { quotationSignal, saveQuotationLocally } from '@entities/quotation'
 import { axiosWithAuth } from '@entities/user'
+import { queryKey } from '@shared/consts/queryKey'
 import { markAsSaved } from '@shared/isSaved'
 import { nanoid } from '@shared/lib/nanoid'
 
@@ -33,6 +37,21 @@ export const saveQuotation = async (): Promise<void> => {
 
     saveQuotationLocally()
     markAsSaved()
+
+    reactQuery.setQueriesData<ResBodyQuotations>(
+      { queryKey: [queryKey.getQuotations] },
+      (cacheData) => {
+        const updatedCacheData = produce(cacheData, (draft) => {
+          if (draft?.documents === undefined) return
+          const quotations = draft.documents
+          const index = quotations.findIndex(quotation => quotation.id === quotationSignal.value.id)
+          const foundInCache = index !== -1
+          if (foundInCache) {
+            quotations.splice(index, 1, quotationSignal.value)
+          }
+        })
+        return updatedCacheData
+      })
 
     showSuccessNavIcon({ navMenuItemIdKey: 'save' })
   } catch (error) {
