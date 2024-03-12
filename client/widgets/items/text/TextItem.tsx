@@ -3,6 +3,7 @@ import { ItemActions } from '@features/item_actions'
 import { onTextItemResizeStart, onTextItemResizeStop } from '@features/resize_item'
 import { updateTextItem } from '@features/update_cell'
 import { Froala, Item, getItemTextHtmlFromStore, textItemCellStyle, useItem } from '@entities/items'
+import { quotationSignal } from '@entities/quotation'
 import { type FroalaEditor } from '@shared/types'
 
 export const TextItem = (): JSX.Element => {
@@ -23,6 +24,10 @@ export const TextItem = (): JSX.Element => {
           updateTextItem({ editorRef, itemIndex })
         }}
         additionalStyle={textItemCellStyle}
+        uploadParams={{
+          id: quotationSignal.value.id,
+          email: quotationSignal.value.email,
+        }}
       />
     </Item>
   )

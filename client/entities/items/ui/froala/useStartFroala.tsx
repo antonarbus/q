@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
@@ -7,12 +6,9 @@
 import 'froala-editor/js/plugins.pkgd.min.js'
 import 'froala-editor/js/third_party/font_awesome.min.js'
 import './froala_editor.pkgd.min.css'
-import { getState } from '@lib_instances/store'
 import type { MouseEvent } from 'react'
 import { useEffect } from 'react'
 import { apiUrl } from 'server/consts/apiUrl'
-import { quotationSignal } from '@entities/quotation'
-import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 import { nanoid } from '@shared/lib/nanoid'
 import { type FroalaEditorRef } from '@shared/types'
 import { useFroala } from '../../providers/FroalaProvider'
@@ -30,15 +26,9 @@ document.addEventListener('dragover', (e) => { e.preventDefault() })
 document.addEventListener('drop', (e) => { e.preventDefault() })
 
 export const useStartFroala = (): void => {
-  const { htmlGetter, froalaElementRef, editorRef, placeholder, onContentChange, onFocus, onClick, onBlur, onKeydown, onInitialized } = useFroala()
-  const isLogged = accessTokenSignal.value !== null
+  const { htmlGetter, froalaElementRef, editorRef, placeholder, onContentChange, onFocus, onClick, onBlur, onKeydown, onInitialized, uploadParams } = useFroala()
 
   useEffect(() => {
-    const uploadParams = {
-      id: quotationSignal.value.id,
-      email: getState().user.email,
-    }
-
     const initFroalaInstance = (): void => {
       const froalaInstance = new FroalaEditor(
         froalaElementRef.current,
@@ -46,7 +36,7 @@ export const useStartFroala = (): void => {
           ...froalaDefaultOptions,
           placeholderText: placeholder ?? 'Text...',
           // if logged then files are uploaded to the bucket, if not, they are just stored in browser
-          ...(isLogged && {
+          ...(Boolean(uploadParams?.email) && {
             imageUploadURL: apiUrl.upload,
             fileUploadURL: apiUrl.upload,
             videoUploadURL: apiUrl.upload,
@@ -72,9 +62,15 @@ export const useStartFroala = (): void => {
             blur: (e: MouseEvent) => {
               onBlur?.(e)
             },
-            'image.beforeUpload': (files) => beforeUpload(files),
-            'file.beforeUpload': (files) => beforeUpload(files),
-            'video.beforeUpload': (files) => beforeUpload(files),
+            'image.beforeUpload': (files) => {
+              beforeUpload({ files, uploadParams })
+            },
+            'file.beforeUpload': (files) => {
+              beforeUpload({ files, uploadParams })
+            },
+            'video.beforeUpload': (files) => {
+              beforeUpload({ files, uploadParams })
+            },
             'file.unlink': function (link) {
               const href = link.getAttribute('href')
               const isFileInBucket = href.includes('bucket')
