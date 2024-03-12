@@ -1,5 +1,5 @@
 import { router } from '@lib_instances/Router'
-import { dispatch, getState } from '@lib_instances/store'
+import { dispatch } from '@lib_instances/store'
 import axios, { AxiosError } from 'axios'
 import { apiUrl } from 'server/consts/apiUrl'
 import { headerName } from 'server/consts/headerName'
