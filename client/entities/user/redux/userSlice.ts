@@ -3,13 +3,11 @@ import { createSlice } from '@reduxjs/toolkit'
 
 type Props = {
   email: string | null
-  isLogged: boolean
   roles: string[]
 }
 
 const initialState: Props = {
   email: null,
-  isLogged: false,
   roles: ['no role'],
 }
 
@@ -18,8 +16,8 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     rememberLoggedUser: (state, action: PayloadAction<Props>) => {
-      const { email, isLogged, roles } = action.payload
-      return { ...state, email, isLogged, roles }
+      const { email, roles } = action.payload
+      return { ...state, email, roles }
     },
     forgetLoggedUser: () => initialState,
   },

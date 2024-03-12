@@ -7,9 +7,9 @@ import { type ResBody, type ReqBody } from 'server/api/saveQuotationRouter'
 import { apiUrl } from 'server/consts/apiUrl'
 import { showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@entities/nav'
 import { quotationSignal, saveQuotationLocally } from '@entities/quotation'
-import { axiosWithAuth } from '@entities/user'
 import { queryKey } from '@shared/consts/queryKey'
 import { markAsSaved } from '@shared/isSaved'
+import { axiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
 import { nanoid } from '@shared/lib/nanoid'
 
 export const saveQuotation = async (): Promise<void> => {

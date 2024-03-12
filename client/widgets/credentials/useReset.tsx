@@ -1,7 +1,7 @@
 import type { Dispatch, FormEvent, SetStateAction } from 'react'
 import { useState } from 'react'
 import { apiUrl } from 'server/consts/apiUrl'
-import { accessTokenRef } from '@entities/user'
+import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 import { notify } from '@shared/ui/top_msg/notify'
 import type { HttpStatusType } from './types'
 
@@ -32,7 +32,7 @@ export const useReset = (): ReturnFunc => {
       const data = await res.json()
       if (data.status === 'error') {
         setHttpStatus('error')
-        accessTokenRef.current = null
+        accessTokenSignal.value = null
       }
 
       if (data.status === 'ok') {

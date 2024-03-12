@@ -1,8 +1,8 @@
 import { type ResBody } from '@server/api/deleteQuotationRouter'
 import { apiUrl } from '@server/consts/apiUrl'
 import { type UseMutationResult, useMutation } from '@tanstack/react-query'
-import { axiosWithAuth } from '@entities/user'
 import { queryKey } from '@shared/consts/queryKey'
+import { axiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
 
 // type Res = UseMutationResult<Receipt, Error>
 

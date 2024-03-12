@@ -30,7 +30,8 @@ document.addEventListener('drop', (e) => { e.preventDefault() })
 
 export const useStartFroala = (): void => {
   const { htmlGetter, froalaElementRef, editorRef, placeholder, onContentChange, onFocus, onClick, onBlur, onKeydown, onInitialized } = useFroala()
-  const isLogged = useSelectorTyped(state => state.user.isLogged)
+  // todo: maybe no need this logic, and just use event "before upload" and check if you are logged in or not
+  const isLogged = accessTokenSignal.value !== null
 
   useEffect(() => {
     const uploadParams = {

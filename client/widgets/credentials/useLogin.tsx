@@ -5,9 +5,10 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import type { LoginApiRes } from 'server/api/loginRouter'
 import { apiUrl } from 'server/consts/apiUrl'
 import { navUpdate } from '@features/log_out'
-import { userSlice, accessTokenRef } from '@entities/user'
-import { slideElement } from '@shared/utils/slideElement'
+import { userSlice } from '@entities/user'
+import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 import { notify } from '@shared/ui/top_msg/notify'
+import { slideElement } from '@shared/utils/slideElement'
 import type { HttpStatusType } from './types'
 
 type StateProps = {
@@ -50,7 +51,7 @@ export const useLogin = (): FuncRes => {
 
       if (status === 'error') {
         setHttpStatus('error')
-        accessTokenRef.current = null
+        accessTokenSignal.value = null
 
         if (message === 'invalid credentials') {
           notify({ msg: 'Invalid credentials', type: 'error', theme: 'light' })
@@ -69,8 +70,8 @@ export const useLogin = (): FuncRes => {
 
       if (status === 'ok' && accessJwtToken) {
         setHttpStatus('success')
-        accessTokenRef.current = accessJwtToken
-        dispatch(userSlice.actions.rememberLoggedUser({ email, isLogged: true, roles }))
+        accessTokenSignal.value = accessJwtToken
+        dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
         // notify({ msg: 'Logged in!', theme: 'light', closeAfterMs: 3000 })
         navUpdate.login()
         setTimeout(() => {
