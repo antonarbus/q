@@ -3,13 +3,15 @@ import { quotationSignal } from '@entities/quotation'
 import { getFileSizeInMbAsText } from '@shared/utils'
 
 export const beforeUpload = (files: File[]): boolean => {
-  if (!quotationSignal.value.id) {
+  if (!quotationSignal.value.id || quotationSignal.value.id === 'local version') {
     alert('No quotation id, something is wrong')
+    removeLoadingBar()
     return false
   }
 
   if (!getState().user.email) {
     alert('You are not logged in, file will be saved in browser until page refresh.')
+    removeLoadingBar()
     return false
   }
 
@@ -19,11 +21,15 @@ export const beforeUpload = (files: File[]): boolean => {
   `)
 
   if (!upload) {
-    const progressBarElement = document.querySelector('.fr-file-progress-bar-layer.fr-layer.fr-active')
-    if (!(progressBarElement instanceof HTMLElement)) return false
-    progressBarElement.classList.remove('fr-active')
+    removeLoadingBar()
     return false
   }
 
   return true
+}
+
+function removeLoadingBar(): void {
+  const progressBarElement = document.querySelector('.fr-popup.fr-desktop.fr-inline.fr-active')
+  if (!(progressBarElement instanceof HTMLElement)) return
+  progressBarElement.classList.remove('fr-active')
 }

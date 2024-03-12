@@ -2,7 +2,7 @@ import { router } from '@lib_instances/Router'
 import axios, { AxiosError } from 'axios'
 import { apiUrl } from 'server/consts/apiUrl'
 import { headerName } from 'server/consts/headerName'
-import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
+import { accessTokenSignal } from '../../auth/accessTokenSignal'
 
 //* for protected routes we use this special axios instance which automatically attach access token into the header
 
