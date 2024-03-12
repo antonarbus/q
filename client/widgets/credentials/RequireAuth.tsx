@@ -1,5 +1,6 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
+import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 
 type Props = {
   allowedRoles: string[]
@@ -7,7 +8,7 @@ type Props = {
 
 export const RequireAuth = ({ allowedRoles }: Props): JSX.Element => {
   const location = useLocation()
-  const isLogged = useSelectorTyped(state => state.user.isLogged)
+  const isLogged = accessTokenSignal.value !== null
   const roles = useSelectorTyped(state => state.user.roles)
   const haveRequiredRole = allowedRoles.some((role) => roles.includes(role))
 

@@ -4,8 +4,8 @@ import { apiUrl } from '@server/consts/apiUrl'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import axios, { type AxiosResponse } from 'axios'
 import { useParams } from 'react-router-dom'
-import { axiosWithAuth } from '@entities/user'
 import { queryKey } from '@shared/consts/queryKey'
+import { axiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
 
 type Res = Partial<ResBody & Quotation>
 

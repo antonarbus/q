@@ -1,6 +1,6 @@
 import type { ResBody } from 'server/api/userEmailRouter'
 import { apiUrl } from 'server/consts/apiUrl'
-import { axiosWithAuth } from '@entities/user'
+import { axiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
 import { notify } from '@shared/ui/top_msg/notify'
 
 const getEmailFromDb = async (): Promise<void> => {

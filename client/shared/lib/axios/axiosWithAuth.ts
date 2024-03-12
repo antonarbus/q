@@ -3,8 +3,8 @@ import { dispatch, getState } from '@lib_instances/store'
 import axios, { AxiosError } from 'axios'
 import { apiUrl } from 'server/consts/apiUrl'
 import { headerName } from 'server/consts/headerName'
-import { userSlice } from '../redux/userSlice'
-import { accessTokenRef } from './accessTokenRef'
+import { userSlice } from '../../../entities/user/redux/userSlice'
+import { accessTokenSignal } from '../../auth/accessTokenSignal'
 
 //* for protected routes we use this special axios instance which automatically attach access token into the header
 
@@ -21,9 +21,9 @@ import { accessTokenRef } from './accessTokenRef'
 export const axiosWithAuth = axios.create({ withCredentials: true })
 
 axiosWithAuth.interceptors.request.use((config) => {
-  if (config.headers && accessTokenRef.current !== null) {
-    config.headers[headerName.accessJwtToken] = accessTokenRef.current
-    config.headers.email = getState().user.email ?? null
+  if (config.headers && accessTokenSignal.value !== null) {
+    config.headers[headerName.accessJwtToken] = accessTokenSignal.value
+    // config.headers.email = getState().user.email ?? null
   }
 
   return config
@@ -41,17 +41,17 @@ axiosWithAuth.interceptors.response.use((config) => {
       const { accessJwtToken } = response.data
 
       if (accessJwtToken) {
-        accessTokenRef.current = accessJwtToken
+        accessTokenSignal.value = accessJwtToken
       }
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       return await axiosWithAuth.request(originalRequest)
     } catch (err: unknown) {
       if (err instanceof AxiosError && err.response?.status === 401) {
-        if (getState().user.isLogged) {
+        if (accessTokenSignal.value !== null) {
           dispatch(userSlice.actions.forgetLoggedUser())
         }
-        accessTokenRef.current = null
+        accessTokenSignal.value = null
         console.warn('not authorized')
         console.error(err)
         void router.navigate('/login')
@@ -60,5 +60,4 @@ axiosWithAuth.interceptors.response.use((config) => {
   }
 
   throw error
-},
-)
+})

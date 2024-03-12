@@ -7,7 +7,8 @@ import { useEffectOnce } from 'react-use'
 import { apiUrl } from 'server/consts/apiUrl'
 import type { JwtPayloadExtended } from 'server/services/jwt'
 import { navUpdate } from '@features/log_out'
-import { userSlice, accessTokenRef } from '@entities/user'
+import { userSlice } from '@entities/user'
+import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 import { tokenExpirationMinutes } from './tokenExpirationMinutes'
 
 type Props = {
@@ -38,7 +39,7 @@ export const useGetAccessToken = ({ withLoadingState }: Props): Res => {
 
   const getAccessToken = async (): Promise<void> => {
     try {
-      if (accessTokenRef.current === null) {
+      if (accessTokenSignal.value === null) {
         const response = await axios.get<ResBody>(apiUrl.getAccessToken, { withCredentials: true })
 
         if (response.status === 401) {
@@ -66,8 +67,8 @@ export const useGetAccessToken = ({ withLoadingState }: Props): Res => {
         }
 
         if (email) {
-          accessTokenRef.current = response.data.accessJwtToken
-          dispatch(userSlice.actions.rememberLoggedUser({ email, isLogged: true, roles: response.data.roles }))
+          accessTokenSignal.value = response.data.accessJwtToken
+          dispatch(userSlice.actions.rememberLoggedUser({ email, roles: response.data.roles }))
           navUpdate.login()
           console.info(`access token was issued for ${email}`)
         }
@@ -75,13 +76,13 @@ export const useGetAccessToken = ({ withLoadingState }: Props): Res => {
         return
       }
 
-      if (accessTokenRef.current !== null) {
-        const expirationInMin = tokenExpirationMinutes(accessTokenRef.current)
+      if (accessTokenSignal.value !== null) {
+        const expirationInMin = tokenExpirationMinutes(accessTokenSignal.value)
 
         if (expirationInMin > 5) {
-          const payloadFromExistingAccessToken = jwtDecode<JwtPayloadExtended>(accessTokenRef.current)
+          const payloadFromExistingAccessToken = jwtDecode<JwtPayloadExtended>(accessTokenSignal.value)
           const { email, roles } = payloadFromExistingAccessToken
-          dispatch(userSlice.actions.rememberLoggedUser({ email, isLogged: true, roles }))
+          dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
           navUpdate.login()
           console.warn(`access token expires in ${expirationInMin.toFixed(2)} min, which is more than 5 min, skip the refresh for now`)
         }

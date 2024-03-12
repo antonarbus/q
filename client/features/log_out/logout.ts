@@ -1,7 +1,8 @@
 import { dispatch } from '@lib_instances/store'
 import type { LogoutApiRes } from 'server/api/logoutRouter'
 import { apiUrl } from 'server/consts/apiUrl'
-import { accessTokenRef, userSlice } from '@entities/user'
+import { userSlice } from '@entities/user'
+import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 import { notify } from '@shared/ui/top_msg/notify'
 import { navUpdate } from './navUpdate'
 
@@ -48,6 +49,6 @@ export const logout = async (): Promise<void> => {
     console.error(err)
     notify({ msg: 'Internal error', type: 'error', theme: 'light' })
   } finally {
-    accessTokenRef.current = null
+    accessTokenSignal.value = null
   }
 }
