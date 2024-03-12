@@ -1,16 +1,23 @@
 import { getState } from '@lib_instances/store'
-import { quotationSignal } from '@entities/quotation'
 import { getFileSizeInMbAsText } from '@shared/utils'
 
-export const beforeUpload = (files: File[]): boolean => {
-  if (!quotationSignal.value.id || quotationSignal.value.id === 'local version') {
-    alert('No quotation id, something is wrong')
+type Props = {
+  files: File[]
+  uploadParams?: {
+    id: string
+    email: string
+  }
+}
+
+export const beforeUpload = ({ files, uploadParams }: Props): boolean => {
+  if (!uploadParams?.id || uploadParams?.id === 'local version') {
+    alert('No quotation id, file will be kept in browser until page is refreshed')
     removeLoadingBar()
     return false
   }
 
   if (!getState().user.email) {
-    alert('You are not logged in, file will be saved in browser until page refresh.')
+    alert('You are not logged in, file will be kept in browser until page is refreshed')
     removeLoadingBar()
     return false
   }
