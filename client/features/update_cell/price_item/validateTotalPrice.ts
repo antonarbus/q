@@ -1,7 +1,8 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { itemType, itemsSlice, getTotalPriceAbove } from '@entities/items'
-import { getNumberFromString, getStringWithNewFormattedNumber, getTextContentFromHtml, updateNumberAtHtmlIncrementally } from '@shared/lib'
+import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
 import { type FroalaEditorRef } from '@shared/types'
+import { getNumberFromString, getStringWithNewFormattedNumber, getTextContentFromHtml } from '@shared/utils'
 
 type Props = {
   editorRef: FroalaEditorRef

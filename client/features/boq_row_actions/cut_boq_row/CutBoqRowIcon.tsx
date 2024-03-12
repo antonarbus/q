@@ -7,7 +7,7 @@ import { copySlice } from '@entities/copy'
 import { getBoqRowFromStore, isItemsFroalaSignal, itemsSlice, saveItemsLocally, selectIsLastBoqRow, useItem, useRow } from '@entities/items'
 import { className } from '@shared/consts/className'
 import { markAsNotSaved } from '@shared/isSaved'
-import { cleanHtml } from '@shared/lib/itemsUtils'
+import { cleanHtml } from '@shared/utils/itemsUtils'
 
 export const CutBoqRowIcon = (): JSX.Element => {
   const { itemIndex } = useItem()

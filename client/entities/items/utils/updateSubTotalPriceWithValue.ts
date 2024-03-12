@@ -1,6 +1,8 @@
 import { dispatch } from '@lib_instances/store'
 import type FroalaEditor from 'froala-editor'
-import { getNumberFromString, getTextContentFromHtml, getStringWithNewFormattedNumber, updateNumberAtHtmlIncrementally, updateNumberAtHtml } from '@shared/lib'
+import { updateNumberAtHtml } from '@shared/lib/froala/updateNumberAtHtml'
+import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
+import { getNumberFromString, getTextContentFromHtml, getStringWithNewFormattedNumber } from '@shared/utils'
 import { getBoqItemFromStore } from '../redux/getters/getBoqItemFromStore'
 import { itemsSlice } from '../redux/itemsSlice'
 
