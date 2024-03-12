@@ -9,12 +9,14 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Provider } from 'react-redux'
 import { RouterProvider } from 'react-router-dom'
 import { useGetAccessToken } from '@widgets/credentials'
+import { useLogoutIfAccessTokenRemoved } from '@features/log_out'
 import { GlobalStyles } from './GlobalStyles'
 import { ReactQueryDevtoolsProductionHidden } from './ReactQueryDevtoolsProductionHidden'
 import './signalsDevTools'
 
 export const App = (): JSX.Element => {
   useGetAccessToken({ withLoadingState: false })
+  useLogoutIfAccessTokenRemoved()
 
   return (
     <Provider store={store}>

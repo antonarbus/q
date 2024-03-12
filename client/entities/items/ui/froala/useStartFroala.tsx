@@ -31,7 +31,6 @@ document.addEventListener('drop', (e) => { e.preventDefault() })
 
 export const useStartFroala = (): void => {
   const { htmlGetter, froalaElementRef, editorRef, placeholder, onContentChange, onFocus, onClick, onBlur, onKeydown, onInitialized } = useFroala()
-  // todo: maybe no need this logic, and just use event "before upload" and check if you are logged in or not
   const isLogged = accessTokenSignal.value !== null
 
   useEffect(() => {
@@ -46,7 +45,7 @@ export const useStartFroala = (): void => {
         {
           ...froalaDefaultOptions,
           placeholderText: placeholder ?? 'Text...',
-          // if logged in files are uploaded to the bucket, if not, they are just stored in browser
+          // if logged then files are uploaded to the bucket, if not, they are just stored in browser
           ...(isLogged && {
             imageUploadURL: apiUrl.upload,
             fileUploadURL: apiUrl.upload,
@@ -70,8 +69,6 @@ export const useStartFroala = (): void => {
             keydown: (e: KeyboardEvent) => {
               onKeydown?.(e)
             },
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-expect-error
             blur: (e: MouseEvent) => {
               onBlur?.(e)
             },
