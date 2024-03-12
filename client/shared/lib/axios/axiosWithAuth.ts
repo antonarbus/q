@@ -1,10 +1,8 @@
 import { router } from '@lib_instances/Router'
-import { dispatch } from '@lib_instances/store'
 import axios, { AxiosError } from 'axios'
 import { apiUrl } from 'server/consts/apiUrl'
 import { headerName } from 'server/consts/headerName'
-import { userSlice } from '../../../entities/user/redux/userSlice'
-import { accessTokenSignal } from '../../auth/accessTokenSignal'
+import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 
 //* for protected routes we use this special axios instance which automatically attach access token into the header
 
@@ -23,7 +21,6 @@ export const axiosWithAuth = axios.create({ withCredentials: true })
 axiosWithAuth.interceptors.request.use((config) => {
   if (config.headers && accessTokenSignal.value !== null) {
     config.headers[headerName.accessJwtToken] = accessTokenSignal.value
-    // config.headers.email = getState().user.email ?? null
   }
 
   return config
@@ -48,9 +45,6 @@ axiosWithAuth.interceptors.response.use((config) => {
       return await axiosWithAuth.request(originalRequest)
     } catch (err: unknown) {
       if (err instanceof AxiosError && err.response?.status === 401) {
-        if (accessTokenSignal.value !== null) {
-          dispatch(userSlice.actions.forgetLoggedUser())
-        }
         accessTokenSignal.value = null
         console.warn('not authorized')
         console.error(err)
