@@ -6,7 +6,7 @@ import type { LoginApiRes } from 'server/api/loginRouter'
 import { apiUrl } from 'server/consts/apiUrl'
 import { navUpdate } from '@features/log_out'
 import { userSlice, accessTokenRef } from '@entities/user'
-import { slideElement } from '@shared/lib/slideElement'
+import { slideElement } from '@shared/utils/slideElement'
 import { notify } from '@shared/ui/top_msg/notify'
 import type { HttpStatusType } from './types'
 

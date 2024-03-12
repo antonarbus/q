@@ -5,7 +5,7 @@ import { MdCopyAll } from 'react-icons/md'
 import { copySlice } from '@entities/copy'
 import { getBoqRowFromStore, isItemsFroalaSignal, itemsSlice, useItem, useRow } from '@entities/items'
 import { className } from '@shared/consts/className'
-import { cleanHtml } from '@shared/lib/itemsUtils'
+import { cleanHtml } from '@shared/utils/itemsUtils'
 
 export const CopyBoqRowIcon = (): JSX.Element => {
   const { rowIndex } = useRow()

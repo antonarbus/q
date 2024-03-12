@@ -1,6 +1,6 @@
 import { getState } from '@lib_instances/store'
 import { quotationSignal } from '@entities/quotation'
-import { getFileSizeInMbAsText } from '@shared/lib'
+import { getFileSizeInMbAsText } from '@shared/utils'
 
 export const beforeUpload = (files: File[]): boolean => {
   if (!quotationSignal.value.id) {

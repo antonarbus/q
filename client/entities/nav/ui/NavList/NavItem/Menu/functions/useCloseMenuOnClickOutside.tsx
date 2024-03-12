@@ -1,7 +1,7 @@
 import { dispatch } from '@lib_instances/store'
 import type { MutableRefObject } from 'react'
 import { useEffect } from 'react'
-import { didClickInsideThisElement } from '@shared/lib/isClickInsideThisElement'
+import { didClickInsideThisElement } from '@shared/utils/isClickInsideThisElement'
 import { navSlice } from '../../../../../navSlice'
 
 type Props = {

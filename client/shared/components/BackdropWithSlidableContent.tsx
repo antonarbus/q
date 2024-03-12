@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef } from 'react'
 import { useEffectOnce } from 'react-use'
-import { slideElement } from '../lib/slideElement'
+import { slideElement } from '../utils/slideElement'
 
 type Props = {
   children?: React.ReactNode

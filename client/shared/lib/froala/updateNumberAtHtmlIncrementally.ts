@@ -1,9 +1,9 @@
 import type FroalaEditor from 'froala-editor'
 import { roundTo } from 'round-to'
-import { getDecimalPrecision } from '../getDecimalPrecision'
-import { getNumberFromString } from '../getNumberFromString'
-import { getStringWithNewFormattedNumber } from '../getStringWithNewFormattedNumber'
-import { getTextContentFromHtml } from '../getTextContentFromHtml'
+import { getDecimalPrecision } from '../../utils/getDecimalPrecision'
+import { getNumberFromString } from '../../utils/getNumberFromString'
+import { getStringWithNewFormattedNumber } from '../../utils/getStringWithNewFormattedNumber'
+import { getTextContentFromHtml } from '../../utils/getTextContentFromHtml'
 
 type Props = {
   oldNumber: number

@@ -1,8 +1,9 @@
 import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
 import { useUpdateEffect } from 'react-use'
 import { getTotalPriceAbove, itemType, itemsSlice } from '@entities/items'
-import { getStringWithNewFormattedNumber, updateNumberAtHtmlIncrementally } from '@shared/lib'
+import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
 import { type FroalaEditorRef } from '@shared/types'
+import { getStringWithNewFormattedNumber } from '@shared/utils'
 
 type Props = {
   editorRef: FroalaEditorRef

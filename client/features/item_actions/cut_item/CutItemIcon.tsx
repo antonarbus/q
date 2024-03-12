@@ -6,7 +6,7 @@ import { TbCut } from 'react-icons/tb'
 import { copySlice } from '@entities/copy'
 import { isItemsFroalaSignal, itemType, itemsSlice, saveItemHeightByIndex, selectIsLastItem, useItem } from '@entities/items'
 import { className } from '@shared/consts/className'
-import { cleanHtml } from '@shared/lib/itemsUtils'
+import { cleanHtml } from '@shared/utils/itemsUtils'
 
 export const CutItemIcon = (): JSX.Element => {
   const { itemIndex } = useItem()

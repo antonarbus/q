@@ -1,5 +1,5 @@
 import { localStorageKey } from '../consts/localStorageKey'
-import { jsonParseSafe } from '../lib/jsonParseSafe'
+import { jsonParseSafe } from '../utils/jsonParseSafe'
 
 export const getDefaultOrLocalIsSaved = (): boolean => {
   const isSavedFromLocalStorage = localStorage.getItem(localStorageKey.isSaved)

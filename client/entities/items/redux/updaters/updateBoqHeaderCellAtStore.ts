@@ -1,5 +1,5 @@
 import { dispatch } from '@lib_instances/store'
-import { getNumberFromString, getTextContentFromHtml } from '@shared/lib'
+import { getNumberFromString, getTextContentFromHtml } from '@shared/utils'
 import { type FroalaEditorRef } from '@shared/types'
 import { type BoqHeaderKey } from '../../types'
 import { getBoqItemFromStore } from '../getters/getBoqItemFromStore'

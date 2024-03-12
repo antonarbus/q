@@ -1,6 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { roundTo } from 'round-to'
-import { getStringWithNewFormattedNumber } from '@shared/lib'
+import { getStringWithNewFormattedNumber } from '@shared/utils'
 import { type FroalaEditorRef } from '@shared/types'
 import { getBoqRowFromStore } from '../redux/getters/getBoqRowFromStore'
 import { itemsSlice } from '../redux/itemsSlice'

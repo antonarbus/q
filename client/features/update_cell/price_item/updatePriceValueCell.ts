@@ -1,7 +1,7 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { itemType, saveItemsLocally, itemsSlice } from '@entities/items'
 import { markAsNotSaved } from '@shared/isSaved'
-import { getNumberFromString, getTextContentFromHtml } from '@shared/lib'
+import { getNumberFromString, getTextContentFromHtml } from '@shared/utils'
 import { type FroalaEditorRef } from '@shared/types'
 
 type Props = {
