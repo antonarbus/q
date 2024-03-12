@@ -1,8 +1,8 @@
 import { dispatch } from '@lib_instances/store'
 import { roundTo } from 'round-to'
 import { getBoqItemFromStore, itemsSlice } from '@entities/items'
-import { getStringWithNewFormattedNumber } from '@shared/utils'
 import { type FroalaEditorRef } from '@shared/types'
+import { getStringWithNewFormattedNumber } from '@shared/utils'
 
 type Props = {
   itemIndex: number
