@@ -9,9 +9,8 @@ import { className } from '@shared/consts/className'
 type Props = {
   children: ReactNode
 }
-type SortableContainerExtended = SortableContainerProps & Props
 
-export const DraggableItemsContainer: React.ComponentClass<SortableContainerExtended> =
+export const DraggableItemsContainer: React.ComponentClass<SortableContainerProps & Props> =
   SortableContainer(({ children }: Props) => (
     <motion.div
       className={className.items}

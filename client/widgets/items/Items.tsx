@@ -1,5 +1,6 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { AnimatePresence } from 'framer-motion'
+import { type ReactNode } from 'react'
 import { onItemDrag } from '@features/item_actions/drag_item'
 import { ItemProvider, itemsShapeEqualityFn, BoqItemProvider, itemType, reRenderItemsSignal } from '@entities/items'
 import { DraggableItemsContainer } from '@entities/items/ui/DraggableItemsContainer'
@@ -8,8 +9,12 @@ import { PasteItem } from './paste/PasteItem'
 import { TotalPriceItem } from './price/PriceItem'
 import { TextItem } from './text/TextItem'
 
-export const Items = (): JSX.Element => {
+export const Items = (): ReactNode => {
   const items = useSelectorTyped(state => state.items, itemsShapeEqualityFn)
+
+  if (items.length === 0) return null
+
+  console.log(666)
 
   return (
     <DraggableItemsContainer
