@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { Box, Chip } from '@mui/material'
 import { signal } from '@preact/signals-react'
 
 export const totalRowsSignal = signal(0)
@@ -9,11 +9,20 @@ export const TotalRowsCount = (): JSX.Element => {
       sx={{
         position: 'absolute',
         left: '10px',
-        bottom: '-25px',
+        bottom: '-30px',
         zIndex: 2,
       }}
     >
-      Total rows: {totalRowsSignal}
+      Rows
+      {' '}
+      <Chip
+        label={totalRowsSignal}
+        size='small'
+        sx={{
+          color: 'grey',
+          fontWeight: 600,
+        }}
+      />
     </Box>
   )
 }
