@@ -25,8 +25,8 @@ export const TextItem = (): JSX.Element => {
         }}
         additionalStyle={textItemCellStyle}
         uploadParams={{
-          id: quotationSignal.value.id,
-          email: quotationSignal.value.email,
+          id: quotationSignal.peek().id,
+          email: quotationSignal.peek().email,
         }}
       />
     </Item>
