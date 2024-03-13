@@ -2,9 +2,10 @@ import { Person, Settings } from '@mui/icons-material'
 import { createElement } from 'react'
 import { BiReset } from 'react-icons/bi'
 import { BsFiletypePdf } from 'react-icons/bs'
+import { CiViewTable } from 'react-icons/ci'
 import { FiLogOut, FiLogIn } from 'react-icons/fi'
 import { IoIosSwap } from 'react-icons/io'
-import { IoDocumentOutline, IoDocumentsOutline, IoSaveOutline, IoShareOutline } from 'react-icons/io5'
+import { IoDocumentOutline, IoSaveOutline, IoShareOutline } from 'react-icons/io5'
 import { downloadPdf } from '@features/download_pdf'
 import { logout } from '@features/log_out'
 import { resetItems } from '@features/reset_items'
@@ -254,7 +255,7 @@ export const navStructure: MenuItemTypes[] = [
       },
       {
         id: navMenuItemId.quotations,
-        icon: <IoDocumentsOutline />,
+        icon: <CiViewTable />,
         isHidden: false,
         name: 'Quotations',
         link: route.quotations,
