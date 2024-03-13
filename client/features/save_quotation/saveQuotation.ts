@@ -30,6 +30,9 @@ export const saveQuotation = async (): Promise<void> => {
       },
     })
 
+    // console.log('🚀 ~ quotationSignal.value:', quotationSignal.value)
+    // console.log('🚀 ~ res.data.document:', res.data.document)
+
     quotationSignal.value = {
       ...quotationSignal.value,
       ...res.data.document,
