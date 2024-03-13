@@ -42,7 +42,7 @@ export const useGetQuotationQuery = (): UseQueryResult<Res, Error> => {
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     staleTime: 0,
-    // gcTime: Infinity,
+    gcTime: 0,
     retry: 0,
   })
 

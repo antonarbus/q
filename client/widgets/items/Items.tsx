@@ -14,7 +14,7 @@ export const Items = (): ReactNode => {
 
   if (items.length === 0) return null
 
-  console.log(666)
+  console.log('items')
 
   return (
     <DraggableItemsContainer

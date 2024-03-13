@@ -9,6 +9,7 @@ export function useLoadQuotationFromServer(): void {
   const navigate = useNavigate()
   const { id } = useParams()
   const { data, isSuccess, isFetching, isError } = useGetQuotationQuery()
+  console.log('🚀 ~ data:', data)
 
   useEffect(() => {
     if (id === undefined) return
@@ -38,21 +39,17 @@ export function useLoadQuotationFromServer(): void {
         loadingDotsOverlayTextSignal.value = null
         navigate(-1)
       }, 3000)
+
       return
     }
 
-    if (
-      data.message === 'found' &&
-      data.items !== undefined &&
-      data.items.length !== 0 &&
-      data.quotation !== undefined
-    ) {
-      dispatch(itemsSlice.actions.loadItemsReducer({ items: data.items }))
-      quotationSignal.value = data.quotation
-      saveQuotationLocally()
-      saveItemsLocally()
-      setTimeout(() => { loadingDotsOverlayTextSignal.value = 'Loading...' }, 1000)
-      setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 3000)
+    if (data.message === 'json does not exist') {
+      setTimeout(() => { loadingDotsOverlayTextSignal.value = 'Does not exist' }, 1000)
+      setTimeout(() => {
+        loadingDotsOverlayTextSignal.value = null
+        navigate(-1)
+      }, 3000)
+
       return
     }
 
@@ -68,15 +65,22 @@ export function useLoadQuotationFromServer(): void {
         loadingDotsOverlayTextSignal.value = null
         navigate(-1)
       }, 3000)
+
       return
     }
 
-    if (data.message === 'json does not exist') {
-      setTimeout(() => { loadingDotsOverlayTextSignal.value = 'Does not exist' }, 1000)
-      setTimeout(() => {
-        loadingDotsOverlayTextSignal.value = null
-        navigate(-1)
-      }, 3000)
+    if (
+      data.message === 'found' &&
+      data.items !== undefined &&
+      data.items.length !== 0 &&
+      data.quotation !== undefined
+    ) {
+      dispatch(itemsSlice.actions.loadItemsReducer({ items: data.items }))
+      quotationSignal.value = data.quotation
+      saveQuotationLocally()
+      saveItemsLocally()
+      setTimeout(() => { loadingDotsOverlayTextSignal.value = 'Loading...' }, 1000)
+      setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 3000)
     }
   }, [isSuccess])
 
