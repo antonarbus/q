@@ -24,6 +24,7 @@ export const MenuItem = ({ menuItem, hoveredMenuItemIndex }: Props): JSX.Element
   const isIcon = !!menuItem.icon
   const menuId = menuItem.id
   const link = menuItem.link
+  const isLink = Boolean(menuItem.link)
   const shortcut = menuItem.shortcut
   const disabled = !!menuItem.disabled
   const isLoading = menuItem?.isLoading
@@ -34,6 +35,9 @@ export const MenuItem = ({ menuItem, hoveredMenuItemIndex }: Props): JSX.Element
     <MenuItemStyled
       to={link ?? '/'}
       onClick={(e: MouseEvent): void => {
+        if (!isLink) {
+          e.preventDefault()
+        }
         if (isLoading) return
         if (isSuccess) return
         if (isError) return
