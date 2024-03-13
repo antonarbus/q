@@ -1,5 +1,6 @@
 import { type QuotationModelType } from '@server/db/models/quotationModel'
 import type { ColDef } from 'ag-grid-community'
+import { ActionButtonsCellRenderer } from './ActionButtonsCellRenderer'
 import { DateCellRenderer } from './DateCellRenderer'
 import { dateFilterComparator } from './dateFilterComparator'
 import { dateValueFormatter } from './dateValueFormatter'
@@ -24,21 +25,7 @@ export const defaultColDef: ColDef<QuotationModelType> = {
 
 export const columnDefs: Array<ColDef<QuotationModelType>> = [
   {
-    cellRenderer: OpenQuotationButton,
-    width: 100,
-    minWidth: 100,
-    maxWidth: 100,
-    sortable: false,
-    filter: false,
-    resizable: false,
-    suppressMovable: true,
-    lockPosition: 'left',
-    pinned: 'left',
-    suppressColumnsToolPanel: true,
-    suppressNavigable: true,
-  },
-  {
-    cellRenderer: DeleteQuotationButton,
+    cellRenderer: ActionButtonsCellRenderer,
     width: 100,
     minWidth: 100,
     maxWidth: 100,
