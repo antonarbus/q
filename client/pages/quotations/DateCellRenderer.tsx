@@ -9,12 +9,20 @@ export const DateCellRenderer = (params: ICellRendererParams<QuotationModelType,
   if (params.value === null) return null
 
   const date = format(params.value, 'dd.MM.yyyy')
-  const time = format(params.value, 'HH:mm:ss')
+  const time = format(params.value, 'HH:mm')
 
   return (
     <>
-      <Box sx={{ textAlign: 'center' }}>{date}</Box>
-      <Box sx={{ color: 'grey', fontSize: '12px', lineHeight: '12px', textAlign: 'center' }}>{time}</Box>
+      <Box
+        sx={{ textAlign: 'center' }}
+      >
+        {date}
+      </Box>
+      <Box
+        sx={{ color: 'grey', fontSize: '12px', lineHeight: '12px', textAlign: 'center' }}
+      >
+        {time}
+      </Box>
     </>
   )
 }
