@@ -19,8 +19,7 @@ export const QuotationsTable = (): JSX.Element => {
   useEffect(() => {
     if (!isFetched) return
     loadingDotsOverlayTextSignal.value = null
-  },
-  [isFetched])
+  }, [isFetched])
 
   return (
     <Box

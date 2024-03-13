@@ -1,5 +1,6 @@
 import { type QuotationModelType } from '@server/db/models/quotationModel'
 import type { ColDef } from 'ag-grid-community'
+import { DateCellRenderer } from './DateCellRenderer'
 import { dateFilterComparator } from './dateFilterComparator'
 import { dateValueFormatter } from './dateValueFormatter'
 import { dateValueGetter } from './dateValueGetter'
@@ -65,6 +66,7 @@ export const columnDefs: Array<ColDef<QuotationModelType>> = [
     filter: 'agDateColumnFilter',
     valueGetter: dateValueGetter({ columnDef: 'createdAt' }),
     valueFormatter: dateValueFormatter,
+    cellRenderer: DateCellRenderer,
     filterParams: {
       comparator: dateFilterComparator,
     },
@@ -76,6 +78,7 @@ export const columnDefs: Array<ColDef<QuotationModelType>> = [
     filter: 'agDateColumnFilter',
     valueGetter: dateValueGetter({ columnDef: 'updatedAt' }),
     valueFormatter: dateValueFormatter,
+    cellRenderer: DateCellRenderer,
     filterParams: {
       comparator: dateFilterComparator,
     },
