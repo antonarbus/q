@@ -10,11 +10,11 @@ declare const window: Window & typeof globalThis & {
 }
 
 function signalsOn(): void {
-  effect(() => { console.trace('totalRowsSignal', totalRowsSignal.value) })
-  effect(() => { console.trace('isItemsFroalaSignal', isItemsFroalaSignal.value) })
-  effect(() => { console.trace('reRenderItemsSignal', reRenderItemsSignal.value) })
-  effect(() => { console.trace('quotationSignal', quotationSignal.value) })
-  effect(() => { console.trace('isSavedSignal', isSavedSignal.value) })
+  effect(() => { console.log('totalRowsSignal', totalRowsSignal.value) })
+  effect(() => { console.log('isItemsFroalaSignal', isItemsFroalaSignal.value) })
+  effect(() => { console.log('reRenderItemsSignal', reRenderItemsSignal.value) })
+  effect(() => { console.log('quotationSignal', quotationSignal.value) })
+  effect(() => { console.log('isSavedSignal', isSavedSignal.value) })
 }
 
 // signalsOn()
