@@ -57,6 +57,7 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
   const icon = navItem?.icon
   const name = navItem?.name
   const link = navItem?.link
+  const isLink = Boolean(navItem?.link)
   const isLoading = navItem?.isLoading
   const isSuccess = navItem?.isSuccess
   const isError = navItem?.isError
@@ -121,6 +122,9 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
       <Link
         to={link ?? '/'}
         onClick={(e: MouseEvent): void => {
+          if (!isLink) {
+            e.preventDefault()
+          }
           if (isLoading) return
           if (isSuccess) return
           if (isError) return
