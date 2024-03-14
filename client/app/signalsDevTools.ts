@@ -17,6 +17,6 @@ function signalsOn(): void {
   effect(() => { console.log('isSavedSignal', isSavedSignal.value) })
 }
 
-signalsOn()
+// signalsOn()
 
 window.signalsOn = signalsOn
