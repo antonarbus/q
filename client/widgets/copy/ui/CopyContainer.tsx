@@ -1,7 +1,10 @@
+import { theme } from '@lib_instances/theme'
 import { motion } from 'framer-motion'
+import { useEffectOnce } from 'react-use'
 import { PressEsc } from '@features/close_copy_container_on_esc_key'
 import { useMovePasteText } from '@features/move_paste_text'
 import { usePasteClick } from '@features/paste_item'
+import { isItemsFroalaSignal } from '@entities/items'
 import { useDisableNavItems } from '@entities/nav'
 import { FirstCopiedItem } from './FirstCopiedItem'
 import { RestOfCopiedItems } from './RestOfCopiedItems'
@@ -15,6 +18,15 @@ export const CopyContainer = (): JSX.Element => {
   const copyContainerAnimationControls = useCopyContainerAnimation()
   const { x, y } = useCursorCords()
   // const { x, y } = { x: 300, y: 0 }
+
+  useEffectOnce(() => {
+    isItemsFroalaSignal.value = false
+    return () => {
+      setTimeout(() => {
+        isItemsFroalaSignal.value = true
+      }, 1000 * theme.item.animationDuration)
+    }
+  })
 
   return (
     <motion.div
