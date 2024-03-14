@@ -9,7 +9,6 @@ export function useLoadQuotationFromServer(): void {
   const navigate = useNavigate()
   const { id } = useParams()
   const { data, isSuccess, isFetching, isError } = useGetQuotationQuery()
-  console.log('🚀 ~ data:', data)
 
   useEffect(() => {
     if (id === undefined) return

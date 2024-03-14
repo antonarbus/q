@@ -1,14 +1,13 @@
 import { dispatch } from '@lib_instances/store'
 import { useEffectOnce } from 'react-use'
 import { copySlice } from '@entities/copy'
-import { isItemsFroalaSignal, itemsSlice } from '@entities/items'
+import { itemsSlice } from '@entities/items'
 
 export const useExitCopyOnEsc = (): void => {
   const closeOnEsc = (e: KeyboardEvent): void => {
     if (e.key !== 'Escape') return
     dispatch(copySlice.actions.hideCopyContainer())
     dispatch(itemsSlice.actions.removePasteItemReducer())
-    isItemsFroalaSignal.value = true
   }
 
   type Res = () => void

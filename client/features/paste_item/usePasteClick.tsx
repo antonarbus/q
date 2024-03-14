@@ -2,7 +2,7 @@ import { dispatch, getState } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
 import { useEffectOnce, useUnmount } from 'react-use'
 import { copySlice } from '@entities/copy'
-import { type CopyableItem, getBoqItemFromStore, itemsSlice, saveItemsLocally, boqRowType, isItemsFroalaSignal } from '@entities/items'
+import { type CopyableItem, getBoqItemFromStore, itemsSlice, saveItemsLocally, boqRowType } from '@entities/items'
 import { markAsNotSaved } from '@shared/isSaved'
 import { nanoid } from '@shared/lib/nanoid'
 
@@ -55,11 +55,6 @@ function pasteItemOnClick(): void {
   if (itemsInCopyContainer.length === 0) {
     dispatch(copySlice.actions.hideCopyContainer())
     dispatch(itemsSlice.actions.removePasteItemReducer())
-
-    // * need more time than animation, otherwise some distortion is visible
-    setTimeout(() => {
-      isItemsFroalaSignal.value = true
-    }, 1000 * theme.item.animationDuration + 500)
   }
 }
 
