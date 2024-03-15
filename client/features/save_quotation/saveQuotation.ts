@@ -13,8 +13,6 @@ import { navSlice, showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } fr
 
 // todo: make a mutation, just for the consistency sake
 // todo: ones we saved re-direct to id route
-// todo: dump green icon logic at info
-
 // todo: rename Quotation --> Reset to default offer to NEW
 
 export const saveQuotation = async (): Promise<void> => {
