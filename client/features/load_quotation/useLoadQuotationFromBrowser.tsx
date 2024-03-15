@@ -8,6 +8,8 @@ import { localStorageKey } from '@shared/consts/localStorageKey'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
 import { jsonParseSafe } from '@shared/utils/jsonParseSafe'
 
+// todo: loadTemplate() should go into NEW button
+
 export function useLoadQuotationFromBrowser(): void {
   useEffectOnce(() => {
     const itemsFromLocalStorage = localStorage.getItem(localStorageKey.items)
@@ -42,17 +44,22 @@ export function useLoadQuotationFromBrowser(): void {
       return
     }
 
-    loadingDotsOverlayTextSignal.value = 'Loading local quotation from browser...'
-    setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 2000)
+    // loadingDotsOverlayTextSignal.value = 'Loading local quotation from browser...'
+    // setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 2000)
 
     quotationSignal.value = quotation
     dispatch(itemsSlice.actions.loadItemsReducer({ items }))
+    // loadingDotsOverlayTextSignal.value = null
+    setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 1000)
   })
 }
 
 function loadTemplate(): void {
-  loadingDotsOverlayTextSignal.value = 'Loading default template...'
-  setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 3000)
+  // loadingDotsOverlayTextSignal.value = 'Loading default template...'
+  // setTimeout(() => {
+  // loadingDotsOverlayTextSignal.value = null
+  // }, 3000)
+
   dispatch(itemsSlice.actions.loadItemsReducer({ items: defaultItems }))
   localStorage.setItem(localStorageKey.items, JSON.stringify(defaultItems))
   localStorage.setItem(localStorageKey.quotation, JSON.stringify(quotationSignal.value))
