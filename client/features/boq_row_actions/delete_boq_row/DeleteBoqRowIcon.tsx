@@ -5,7 +5,7 @@ import { useRef } from 'react'
 import { RxCross2 } from 'react-icons/rx'
 import { copySlice } from '@entities/copy'
 import { itemsSlice, selectIsLastBoqRow, useItem, useRow, saveItemsLocally } from '@entities/items'
-import { navSlice } from '@entities/nav'
+import { navSlice } from '@shared/nav'
 
 export const DeleteBoqRowIcon = (): JSX.Element => {
   const ref = useRef<HTMLSpanElement>(null)

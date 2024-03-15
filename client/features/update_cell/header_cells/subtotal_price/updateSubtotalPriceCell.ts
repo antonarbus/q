@@ -1,7 +1,7 @@
 import { dispatch } from '@lib_instances/store'
 import { roundTo } from 'round-to'
 import { didBoqHeaderCellContentChange, getBoqHeaderFromStore, getBoqRowsFromStore, saveItemsLocally, updateBoqHeaderCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue, getBoqRowFromStore, type BoqRow, type BoqRowEditorRefs, boqRowCellKey } from '@entities/items'
-import { navSlice } from '@entities/nav'
+import { navSlice } from '@shared/nav'
 import { type FroalaEditor, type FroalaEditorRef } from '@shared/types'
 import { notify } from '@shared/ui/top_msg'
 

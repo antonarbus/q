@@ -2,7 +2,7 @@ import { dispatch, useSelectorTyped } from '@lib_instances/store'
 import { useUpdateEffect } from 'react-use'
 import { roundTo } from 'round-to'
 import { useBoqItem, useItem, getBoqRowsFromStore, type BoqRow, updateSubTotalPriceWithValue, saveItemsLocally, isItemsFroalaSignal } from '@entities/items'
-import { navSlice } from '@entities/nav'
+import { navSlice } from '@shared/nav'
 
 export const useUpdateSubtotalPriceCellOnRowsQtyChange = (): void => {
   const { itemIndex } = useItem()

@@ -1,4 +1,4 @@
-import { isOverflown } from '@shared/utils/isOverflown'
+import { isOverflown } from '../../utils/isOverflown'
 
 const shrinkElementSlightly = (el: HTMLElement): void => {
   el.style.width = el.offsetWidth - 10 + 'px'

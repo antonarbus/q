@@ -1,6 +1,6 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { type BoqItem, itemsSlice, saveItemsLocally, getBoqColumnFromStore, boqColumnKey, unfixItemImagesHeight, fixItemImagesHeight } from '@entities/items'
-import { navSlice } from '@entities/nav'
+import { navSlice } from '@shared/nav'
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
 
 let initDescriptionColumnWidth = 0 // can be global var for different boqItems as we can change width of one item at a time

@@ -1,5 +1,5 @@
 import { dispatch } from '@lib_instances/store'
-import { navSlice } from '@entities/nav'
+import { navSlice } from '@shared/nav'
 import { type FroalaEditorRef } from '@shared/types'
 import type { BoqColumnKey } from '../../types'
 import { saveItemsLocally } from '../../utils/saveItemsLocally'

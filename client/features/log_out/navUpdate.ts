@@ -1,5 +1,5 @@
 import { dispatch } from '@lib_instances/store'
-import { navSlice } from '@entities/nav'
+import { navSlice } from '@shared/nav'
 
 export const navUpdate = {
   login: (): void => {

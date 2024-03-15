@@ -1,6 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { boqRowCellKey, formatBoqRowCellNumber, saveItemsLocally } from '@entities/items'
-import { navSlice } from '@entities/nav'
+import { navSlice } from '@shared/nav'
 import { type FroalaEditorRef } from '@shared/types'
 
 type Props = {

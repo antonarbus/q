@@ -2,9 +2,9 @@ import { dispatch } from '@lib_instances/store'
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { itemsSlice, saveItemsLocally } from '@entities/items'
-import { navSlice } from '@entities/nav'
 import { quotationSignal, saveQuotationLocally, useGetQuotationQuery } from '@entities/quotation'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
+import { navSlice } from '@shared/nav'
 
 export function useLoadQuotationFromServer(): void {
   const navigate = useNavigate()

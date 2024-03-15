@@ -1,6 +1,6 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { itemsSlice, saveItemsLocally } from '@entities/items'
-import { navSlice } from '@entities/nav'
+import { navSlice } from '@shared/nav'
 import type { OnItemResizeStop } from '@shared/types'
 
 export const onPriceItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction, elementRef, delta }) => {

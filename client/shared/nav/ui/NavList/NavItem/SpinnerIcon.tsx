@@ -1,4 +1,4 @@
-import { RotatingLoaderIcon } from '@shared/components'
+import { RotatingLoaderIcon } from '../../../../components/RotatingLoaderIcon'
 import { Icon } from './Icon'
 
 export const SpinnerIcon = (): JSX.Element => {

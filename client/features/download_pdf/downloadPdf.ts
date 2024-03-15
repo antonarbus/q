@@ -1,8 +1,8 @@
 import { domToJpeg } from 'modern-screenshot'
-import { showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@entities/nav'
 import { quotationSignal } from '@entities/quotation'
 import { className } from '@shared/consts/className'
 import { navMenuItemId } from '@shared/consts/navMenuItemId'
+import { showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@shared/nav'
 
 export const downloadPdf = async (): Promise<void> => {
   showLoadingNavIcon({ navMenuItemIdKey: navMenuItemId.pdf })
