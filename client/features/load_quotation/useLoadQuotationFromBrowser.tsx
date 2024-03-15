@@ -5,14 +5,11 @@ import { defaultItems, itemsSlice } from '@entities/items'
 import { type Item } from '@entities/items/types'
 import { quotationSignal } from '@entities/quotation'
 import { localStorageKey } from '@shared/consts/localStorageKey'
-import { route } from '@shared/consts/route'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
 import { jsonParseSafe } from '@shared/utils/jsonParseSafe'
 
 export function useLoadQuotationFromBrowser(): void {
   useEffectOnce(() => {
-    if (window.location.pathname !== route.root) return
-
     const itemsFromLocalStorage = localStorage.getItem(localStorageKey.items)
 
     if (itemsFromLocalStorage === null) {
