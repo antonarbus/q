@@ -1,7 +1,7 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { type RouteObject, createBrowserRouter } from 'react-router-dom'
 import { BarChart } from '@pages/chart/Chart'
 import { Profile } from '@pages/profile'
-import { Quotation } from '@pages/quotation'
+import { QuotationLocal, QuotationServer } from '@pages/quotation'
 import { Quotations } from '@pages/quotations'
 import { Copy } from '@widgets/copy'
 import { Login, PersistentAuth, Register, RequireAuth, Reset, Unauthorized } from '@widgets/credentials'
@@ -11,9 +11,24 @@ import { Main } from '@shared/layouts'
 import { LoadingDotsOverlay } from '@shared/loading_dots_overlay'
 import { TopMsg } from '@shared/ui/top_msg'
 
+const authRoutes: RouteObject[] = [
+  {
+    path: route.login,
+    element: <Login />,
+  },
+  {
+    path: route.register,
+    element: <Register />,
+  },
+  {
+    path: route.reset,
+    element: <Reset />,
+  },
+]
+
 export const router = createBrowserRouter([
   {
-    path: route.root,
+
     element: (
       <>
         <TopMsg />
@@ -25,24 +40,20 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: '/:id?',
-        element: <Quotation />,
+        path: route.root,
+        element: <QuotationLocal />,
+        children: authRoutes,
       },
       {
-        path: route.register,
-        element: <Register />,
-      },
-      {
-        path: route.login,
-        element: <Login />,
-      },
-      {
-        path: route.reset,
-        element: <Reset />,
+        path: ':id?',
+        element: <QuotationServer />,
+        caseSensitive: true,
+        children: authRoutes,
       },
       {
         path: route.quotations,
         element: <Quotations />,
+        children: authRoutes,
       },
       {
         // just an example of protected routes with specific roles, may be helpful for administration
