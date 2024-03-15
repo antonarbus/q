@@ -1,7 +1,7 @@
 import { dispatch } from '@lib_instances/store'
 import { arrayMoveImmutable } from 'array-move'
 import { getBoqRowsFromStore, itemsSlice, saveItemsLocally } from '@entities/items'
-import { markAsNotSaved } from '@shared/isSaved'
+import { navSlice } from '@entities/nav'
 
 type Props = {
   oldIndex: number
@@ -25,7 +25,7 @@ const onBoqRowDragEnd = ({ oldIndex, newIndex, itemIndex }: Props): void => {
     const reOrderedBoqRows = arrayMoveImmutable(boqRows, oldIndex, newIndex)
     dispatch(itemsSlice.actions.reOrderBoqRowsReducer({ reOrderedBoqRows, itemIndex }))
     saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
-    markAsNotSaved()
+    dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
   }
 }
 

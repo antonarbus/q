@@ -1,6 +1,7 @@
+import { dispatch } from '@lib_instances/store'
 import { roundTo } from 'round-to'
 import { getBoqRowFromStore, getBoqRowsFromStore, saveItemsLocally, updateBoqRowCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue, type BoqRow, boqRowCellKey } from '@entities/items'
-import { markAsNotSaved } from '@shared/isSaved'
+import { navSlice } from '@entities/nav'
 import { type FroalaEditorRef } from '@shared/types'
 
 type Props = {
@@ -87,5 +88,5 @@ export const updateBoqRowPriceCell = ({
   if (!didChange) return
 
   saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
-  markAsNotSaved()
+  dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
 }

@@ -1,8 +1,8 @@
 import { dispatch } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
 import { defaultItems, isItemsFroalaSignal, itemsSlice, reRenderItemsSignal, saveItemsLocally } from '@entities/items'
+import { navSlice } from '@entities/nav'
 import { quotationSignal, saveQuotationLocally } from '@entities/quotation'
-import { markAsNotSaved } from '@shared/isSaved'
 import { nanoid } from '@shared/lib/nanoid'
 
 export const resetItems = (): void => {
@@ -11,7 +11,7 @@ export const resetItems = (): void => {
   saveItemsLocally({ items: defaultItems })
   quotationSignal.value = { id: 'local version', email: '' }
   saveQuotationLocally()
-  markAsNotSaved()
+  dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
   reRenderItemsSignal.value = nanoid(3)
   setTimeout(() => {
     isItemsFroalaSignal.value = true

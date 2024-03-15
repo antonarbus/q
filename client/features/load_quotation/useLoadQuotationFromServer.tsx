@@ -2,6 +2,7 @@ import { dispatch } from '@lib_instances/store'
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { itemsSlice, saveItemsLocally } from '@entities/items'
+import { navSlice } from '@entities/nav'
 import { quotationSignal, saveQuotationLocally, useGetQuotationQuery } from '@entities/quotation'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
 
@@ -78,6 +79,7 @@ export function useLoadQuotationFromServer(): void {
       quotationSignal.value = data.quotation
       saveQuotationLocally()
       saveItemsLocally()
+      dispatch(navSlice.actions.disableTopNavItem({ navMenuItemIdKey: 'save' }))
       setTimeout(() => { loadingDotsOverlayTextSignal.value = 'Loading...' }, 1000)
       setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 3000)
     }

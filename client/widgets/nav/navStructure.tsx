@@ -135,7 +135,7 @@ export const navStructure: MenuItemTypes[] = [
         func: () => {
           void saveQuotation()
         },
-        shortcut: ['control', 'z'],
+        shortcut: ['control', 's'],
       },
       {
         id: navMenuItemId.pdf,

@@ -1,6 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { boqRowCellKey, getBoqCellFromStore, itemsSlice, saveItemsLocally } from '@entities/items'
-import { markAsNotSaved } from '@shared/isSaved'
+import { navSlice } from '@entities/nav'
 
 type Props = {
   itemIndex: number
@@ -15,5 +15,5 @@ export const pinBoqRowQtyCell = ({ itemIndex, rowIndex }: Props): void => {
 
   dispatch(itemsSlice.actions.pinQtyReducer({ itemIndex, rowIndex }))
   saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
-  markAsNotSaved()
+  dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
 }

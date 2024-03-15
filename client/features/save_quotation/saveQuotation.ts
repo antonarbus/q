@@ -1,16 +1,21 @@
 import { reactQuery } from '@lib_instances/reactQuery'
-import { getState } from '@lib_instances/store'
+import { dispatch, getState } from '@lib_instances/store'
 import { type ResBody as ResBodyQuotations } from '@server/api/getQuotationsRouter'
 import { type AxiosResponse } from 'axios'
 import { produce } from 'immer'
 import { type ResBody, type ReqBody } from 'server/api/saveQuotationRouter'
 import { apiUrl } from 'server/consts/apiUrl'
-import { showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@entities/nav'
+import { navSlice, showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@entities/nav'
 import { quotationSignal, saveQuotationLocally } from '@entities/quotation'
 import { queryKey } from '@shared/consts/queryKey'
-import { markAsSaved } from '@shared/isSaved'
 import { axiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
 import { nanoid } from '@shared/lib/nanoid'
+
+// todo: make a mutation, just for the consistency sake
+// todo: ones we saved re-direct to id route
+// todo: dump green icon logic at info
+
+// todo: rename Quotation --> Reset to default offer to NEW
 
 export const saveQuotation = async (): Promise<void> => {
   showLoadingNavIcon({ navMenuItemIdKey: 'save' })
@@ -30,16 +35,14 @@ export const saveQuotation = async (): Promise<void> => {
       },
     })
 
-    // console.log('🚀 ~ quotationSignal.value:', quotationSignal.value)
-    // console.log('🚀 ~ res.data.document:', res.data.document)
-
     quotationSignal.value = {
       ...quotationSignal.value,
       ...res.data.document,
     }
 
     saveQuotationLocally()
-    markAsSaved()
+    showSuccessNavIcon({ navMenuItemIdKey: 'save' })
+    dispatch(navSlice.actions.disableTopNavItem({ navMenuItemIdKey: 'save' }))
 
     reactQuery.setQueriesData<ResBodyQuotations>(
       { queryKey: [queryKey.getQuotations] },
@@ -55,8 +58,6 @@ export const saveQuotation = async (): Promise<void> => {
         })
         return updatedCacheData
       })
-
-    showSuccessNavIcon({ navMenuItemIdKey: 'save' })
   } catch (error) {
     showErrorNavIcon({ navMenuItemIdKey: 'save' })
   }

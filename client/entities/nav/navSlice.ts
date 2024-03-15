@@ -92,6 +92,28 @@ export const navSlice = createSlice({
         })
       })
     },
+    disableTopNavItem: (state, action: PayloadAction<{ navMenuItemIdKey: NavMenuItemIdKey }>) => {
+      const { navMenuItemIdKey } = action.payload
+      // const topLevelNavMenu = state.navStructure[0]
+      // if (!topLevelNavMenu) return
+      setMenuItemPropValue({
+        menu: state.navStructure,
+        navMenuItemIdKey,
+        prop: 'disabled',
+        value: true,
+      })
+    },
+    enableTopNavItem: (state, action: PayloadAction<{ navMenuItemIdKey: NavMenuItemIdKey }>) => {
+      const { navMenuItemIdKey } = action.payload
+      // const topLevelNavMenu = state.navStructure[0]
+      // if (!topLevelNavMenu) return
+      setMenuItemPropValue({
+        menu: state.navStructure,
+        navMenuItemIdKey,
+        prop: 'disabled',
+        value: false,
+      })
+    },
     enableTopMenuItems: (state) => {
       const topLevelNavMenu = state.navStructure[0]
       if (!topLevelNavMenu) return

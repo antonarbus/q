@@ -1,5 +1,6 @@
+import { dispatch } from '@lib_instances/store'
 import { type BoqRowCellKey, didBoqCellContentChange, saveItemsLocally, updateBoqRowCellAtStore } from '@entities/items'
-import { markAsNotSaved } from '@shared/isSaved'
+import { navSlice } from '@entities/nav'
 import { type FroalaEditorRef } from '@shared/types'
 
 type Props = {
@@ -34,5 +35,5 @@ export const updateDescriptionCell = ({
   })
 
   saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
-  markAsNotSaved()
+  dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
 }
