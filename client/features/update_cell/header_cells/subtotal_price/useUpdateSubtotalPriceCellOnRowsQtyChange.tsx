@@ -1,8 +1,8 @@
-import { useSelectorTyped } from '@lib_instances/store'
+import { dispatch, useSelectorTyped } from '@lib_instances/store'
 import { useUpdateEffect } from 'react-use'
 import { roundTo } from 'round-to'
 import { useBoqItem, useItem, getBoqRowsFromStore, type BoqRow, updateSubTotalPriceWithValue, saveItemsLocally, isItemsFroalaSignal } from '@entities/items'
-import { markAsNotSaved } from '@shared/isSaved'
+import { navSlice } from '@entities/nav'
 
 export const useUpdateSubtotalPriceCellOnRowsQtyChange = (): void => {
   const { itemIndex } = useItem()
@@ -34,6 +34,6 @@ export const useUpdateSubtotalPriceCellOnRowsQtyChange = (): void => {
     if (!didChange) return
 
     saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
-    markAsNotSaved()
+    dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
   }, [isItemFroala, isItemsFroalaSignal.value])
 }

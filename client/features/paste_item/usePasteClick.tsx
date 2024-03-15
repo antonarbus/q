@@ -3,7 +3,7 @@ import { theme } from '@lib_instances/theme'
 import { useEffectOnce, useUnmount } from 'react-use'
 import { copySlice } from '@entities/copy'
 import { type CopyableItem, getBoqItemFromStore, itemsSlice, saveItemsLocally, boqRowType } from '@entities/items'
-import { markAsNotSaved } from '@shared/isSaved'
+import { navSlice } from '@entities/nav'
 import { nanoid } from '@shared/lib/nanoid'
 
 export const usePasteClick = (): void => {
@@ -47,7 +47,7 @@ function pasteItemOnClick(): void {
   setTimeout(() => {
     dispatch(copySlice.actions.allowAllActions())
     saveItemsLocally({ msgAboveItemWithIndex: getIndexWhereToShowMsg({ newItemId, topItemFromCopyContainer }) })
-    markAsNotSaved()
+    dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
   }, 1000 * theme.item.animationDuration)
 
   const itemsInCopyContainer = getState().copy.items

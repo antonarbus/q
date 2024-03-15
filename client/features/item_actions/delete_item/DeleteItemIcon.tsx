@@ -6,7 +6,7 @@ import { useRef } from 'react'
 import { RxCross2 } from 'react-icons/rx'
 import { copySlice } from '@entities/copy'
 import { itemsSlice, selectIsLastItem, useItem, saveItemsLocally } from '@entities/items'
-import { markAsNotSaved } from '@shared/isSaved'
+import { navSlice } from '@entities/nav'
 
 export const DeleteItemIcon = (): EmotionJSX.Element => {
   const ref = useRef<HTMLSpanElement>(null)
@@ -44,7 +44,7 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
         if (!isCopyContainer) {
           setTimeout(() => {
             saveItemsLocally({ msgAboveItemWithIndex: getIndexWhereToShowMsg({ itemIndex }) })
-            markAsNotSaved()
+            dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
           }, 1000 * theme.item.animationDuration)
         }
       }}

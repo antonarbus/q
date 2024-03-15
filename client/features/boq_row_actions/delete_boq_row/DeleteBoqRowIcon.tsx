@@ -5,7 +5,7 @@ import { useRef } from 'react'
 import { RxCross2 } from 'react-icons/rx'
 import { copySlice } from '@entities/copy'
 import { itemsSlice, selectIsLastBoqRow, useItem, useRow, saveItemsLocally } from '@entities/items'
-import { markAsNotSaved } from '@shared/isSaved'
+import { navSlice } from '@entities/nav'
 
 export const DeleteBoqRowIcon = (): JSX.Element => {
   const ref = useRef<HTMLSpanElement>(null)
@@ -36,7 +36,7 @@ export const DeleteBoqRowIcon = (): JSX.Element => {
         setTimeout(() => {
           dispatch(copySlice.actions.allowAllActions())
           saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
-          markAsNotSaved()
+          dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
         }, 1000 * theme.item.animationDuration)
 
         const isCopyContainer = getState().copy.isCopyContainer

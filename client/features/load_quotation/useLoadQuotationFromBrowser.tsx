@@ -42,7 +42,7 @@ export function useLoadQuotationFromBrowser(): void {
       return
     }
 
-    loadingDotsOverlayTextSignal.value = 'Loading existing quotation from browser...'
+    loadingDotsOverlayTextSignal.value = 'Loading local quotation from browser...'
     setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 2000)
 
     quotationSignal.value = quotation

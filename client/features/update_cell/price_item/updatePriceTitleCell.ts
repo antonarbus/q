@@ -1,6 +1,6 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { itemType, itemsSlice, saveItemsLocally } from '@entities/items'
-import { markAsNotSaved } from '@shared/isSaved'
+import { navSlice } from '@entities/nav'
 import { type FroalaEditorRef } from '@shared/types'
 
 type Props = {
@@ -25,5 +25,5 @@ export const updatePriceTitleCell = ({
 
   dispatch(itemsSlice.actions.updatePriceTitleReducer({ itemIndex, html }))
   saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
-  markAsNotSaved()
+  dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
 }

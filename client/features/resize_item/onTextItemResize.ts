@@ -1,6 +1,6 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { fixItemImagesHeight, itemsSlice, saveItemsLocally, unfixItemImagesHeight } from '@entities/items'
-import { markAsNotSaved } from '@shared/isSaved'
+import { navSlice } from '@entities/nav'
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
 
 export const onTextItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, elementRef }) => {
@@ -25,5 +25,5 @@ export const onTextItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction
 
   dispatch(itemsSlice.actions.updateItemWidthReducer({ itemIndex, width }))
   saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
-  markAsNotSaved()
+  dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
 }

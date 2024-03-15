@@ -1,6 +1,7 @@
+import { dispatch } from '@lib_instances/store'
 import { roundTo } from 'round-to'
 import { didBoqHeaderCellContentChange, getBoqHeaderFromStore, getBoqRowsFromStore, saveItemsLocally, updateBoqHeaderCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue, getBoqRowFromStore, type BoqRow, type BoqRowEditorRefs, boqRowCellKey } from '@entities/items'
-import { markAsNotSaved } from '@shared/isSaved'
+import { navSlice } from '@entities/nav'
 import { type FroalaEditor, type FroalaEditorRef } from '@shared/types'
 import { notify } from '@shared/ui/top_msg'
 
@@ -37,7 +38,7 @@ export const updateSubtotalPriceCell = ({
 
   if (didUpdate) {
     saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
-    markAsNotSaved()
+    dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
   }
 
   const prevSubTotalPriceValue = boqRows.reduce((accumulator, boqRow) => {
@@ -179,5 +180,5 @@ export const updateSubtotalPriceCell = ({
   if (!didChange) return
 
   saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
-  markAsNotSaved()
+  dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
 }
