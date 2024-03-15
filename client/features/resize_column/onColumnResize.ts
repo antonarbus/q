@@ -1,7 +1,7 @@
 import { dispatch } from '@lib_instances/store'
 import { type BoqColumnKey, itemsSlice, saveItemsLocally, getBoqColumnFromStore, unfixItemImagesHeight, fixItemImagesHeight } from '@entities/items'
-import { navSlice } from '@entities/nav'
 import { className } from '@shared/consts/className'
+import { navSlice } from '@shared/nav'
 
 type Props = {
   headerColumnElement: HTMLElement

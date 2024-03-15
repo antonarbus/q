@@ -1,7 +1,7 @@
 import { dispatch } from '@lib_instances/store'
 import { saveItemsLocally, updateBoqHeaderCellAtStore } from '@entities/items'
 import { type BoqHeaderKey } from '@entities/items'
-import { navSlice } from '@entities/nav'
+import { navSlice } from '@shared/nav'
 import { type FroalaEditorRef } from '@shared/types'
 
 type Props = {

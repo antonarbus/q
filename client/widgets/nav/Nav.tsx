@@ -2,7 +2,7 @@ import { dispatch, useSelectorTyped } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
 import { useRef } from 'react'
 import { useEffectOnce } from 'react-use'
-import { navSlice, useMediaQueryValues, useMenuItemActionShortcuts, Logo, NavList } from '@entities/nav'
+import { navSlice, useMediaQueryValues, useMenuItemActionShortcuts, Logo, NavList } from '@shared/nav'
 import { navStructure } from './navStructure'
 
 export const Nav = (): JSX.Element => {

@@ -1,9 +1,9 @@
 import { dispatch } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
 import { defaultItems, isItemsFroalaSignal, itemsSlice, reRenderItemsSignal, saveItemsLocally } from '@entities/items'
-import { navSlice } from '@entities/nav'
 import { quotationSignal, saveQuotationLocally } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
+import { navSlice } from '@shared/nav'
 
 export const resetItems = (): void => {
   isItemsFroalaSignal.value = false

@@ -5,11 +5,11 @@ import { type AxiosResponse } from 'axios'
 import { produce } from 'immer'
 import { type ResBody, type ReqBody } from 'server/api/saveQuotationRouter'
 import { apiUrl } from 'server/consts/apiUrl'
-import { navSlice, showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@entities/nav'
 import { quotationSignal, saveQuotationLocally } from '@entities/quotation'
 import { queryKey } from '@shared/consts/queryKey'
 import { axiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
 import { nanoid } from '@shared/lib/nanoid'
+import { navSlice, showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@shared/nav'
 
 // todo: make a mutation, just for the consistency sake
 // todo: ones we saved re-direct to id route

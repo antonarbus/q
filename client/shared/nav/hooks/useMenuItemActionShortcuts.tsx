@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useEffectOnce } from 'react-use'
-import { notify } from '@shared/ui/top_msg/notify'
+import { notify } from '../../ui/top_msg/notify'
 import { type MenuItemType } from '../type'
 
 type Shortcuts = {

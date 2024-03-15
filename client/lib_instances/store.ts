@@ -2,8 +2,8 @@ import { type Action, type ThunkAction, configureStore } from '@reduxjs/toolkit'
 import { type TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { copyReducer } from '@entities/copy/copySlice'
 import { itemsReducer } from '@entities/items/redux/itemsSlice'
-import { navReducer } from '@entities/nav/navSlice'
 import { userReducer } from '@entities/user/redux/userSlice'
+import { navReducer } from '@shared/nav/navSlice'
 
 const store = configureStore({
   reducer: {

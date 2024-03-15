@@ -4,7 +4,7 @@ import { gsap } from 'gsap'
 import type { RefObject } from 'react'
 import { useEffect } from 'react'
 import { useFirstMountState } from 'react-use'
-import { elementHeight } from '@shared/utils/elementHeight'
+import { elementHeight } from '../../../../../../utils/elementHeight'
 import { navSlice } from '../../../../../navSlice'
 import { getMenuItemByIdsChain } from './getMenuItemByIdsChain'
 

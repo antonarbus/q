@@ -3,8 +3,8 @@ import { theme } from '@lib_instances/theme'
 import { useEffectOnce, useUnmount } from 'react-use'
 import { copySlice } from '@entities/copy'
 import { type CopyableItem, getBoqItemFromStore, itemsSlice, saveItemsLocally, boqRowType } from '@entities/items'
-import { navSlice } from '@entities/nav'
 import { nanoid } from '@shared/lib/nanoid'
+import { navSlice } from '@shared/nav'
 
 export const usePasteClick = (): void => {
   useEffectOnce(() => {

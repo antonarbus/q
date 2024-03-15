@@ -1,4 +1,4 @@
-import { type navMenuItemId } from '@shared/consts/navMenuItemId'
+import { type navMenuItemId } from '../../consts/navMenuItemId'
 
 export type MenuItemType = {
   id: string

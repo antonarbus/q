@@ -1,6 +1,6 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { fixItemImagesHeight, itemsSlice, saveItemsLocally, unfixItemImagesHeight } from '@entities/items'
-import { navSlice } from '@entities/nav'
+import { navSlice } from '@shared/nav'
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
 
 export const onTextItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, elementRef }) => {

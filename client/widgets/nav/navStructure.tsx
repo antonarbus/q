@@ -10,10 +10,10 @@ import { downloadPdf } from '@features/download_pdf'
 import { logout } from '@features/log_out'
 import { resetItems } from '@features/reset_items'
 import { saveQuotation } from '@features/save_quotation'
-import type { MenuItemTypes } from '@entities/nav'
 import { navMenuItemId } from '@shared/consts/navMenuItemId'
 import { route } from '@shared/consts/route'
 import { nanoid } from '@shared/lib/nanoid'
+import type { MenuItemTypes } from '@shared/nav'
 import logo from './logo.svg'
 
 const reactIcon = createElement(IoShareOutline, {})
