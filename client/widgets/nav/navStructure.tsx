@@ -1,14 +1,14 @@
 import { Person, Settings } from '@mui/icons-material'
 import { createElement } from 'react'
-import { BiReset } from 'react-icons/bi'
 import { BsFiletypePdf } from 'react-icons/bs'
 import { CiViewTable } from 'react-icons/ci'
 import { FiLogOut, FiLogIn } from 'react-icons/fi'
-import { IoIosSwap } from 'react-icons/io'
-import { IoDocumentOutline, IoSaveOutline, IoShareOutline } from 'react-icons/io5'
+import { IoSaveOutline, IoShareOutline } from 'react-icons/io5'
+import { MdPendingActions } from 'react-icons/md'
+import { VscNewFile } from 'react-icons/vsc'
+import { createNewQuotation } from '@features/create_new_quotation'
 import { downloadPdf } from '@features/download_pdf'
 import { logout } from '@features/log_out'
-import { resetItems } from '@features/reset_items'
 import { saveQuotation } from '@features/save_quotation'
 import { navMenuItemId } from '@shared/consts/navMenuItemId'
 import { route } from '@shared/consts/route'
@@ -25,117 +25,24 @@ export const navStructure: MenuItemTypes[] = [
     isHidden: false,
     menuItems: [
       {
-        id: navMenuItemId.quotation,
-        icon: <IoDocumentOutline />,
+        id: navMenuItemId.new,
+        icon: <VscNewFile />,
         isHidden: false,
-        name: 'Quotation',
-        menuItems: [
-          {
-            id: 'Previous offer',
-            name: 'Previous offer',
-            icon: <IoIosSwap />,
-            isHidden: false,
-          },
-          {
-            id: 'Nested menu',
-            name: 'Nested menu',
-            icon: <IoIosSwap />,
-            isHidden: false,
-            menuItems: [
-              {
-                id: 'item in menu 1',
-                name: 'item in menu 1',
-                icon: '😎',
-                isHidden: false,
-                menuItems: [
-                  {
-                    id: nanoid(3),
-                    name: 'long long long long long long long long name',
-                    icon: reactIcon,
-                    isHidden: false,
-                  },
-                  {
-                    id: nanoid(3),
-                    name: 'item in menu 1',
-                    icon: null,
-                    isHidden: false,
-                  },
-                  {
-                    id: nanoid(3),
-                    name: 'item in menu 1',
-                    icon: <img src={logo} />,
-                    isHidden: false,
-                  },
-                  {
-                    id: nanoid(3),
-                    name: 'item in menu 1',
-                    icon: reactIcon,
-                    isHidden: false,
-                  },
-                  {
-                    id: nanoid(3),
-                    name: 'item in menu 1',
-                    icon: reactIcon,
-                    isHidden: false,
-                  },
-                  {
-                    id: nanoid(3),
-                    name: 'item in menu 1',
-                    icon: reactIcon,
-                    isHidden: false,
-                  },
-                  {
-                    id: nanoid(3),
-                    name: 'item in menu 1',
-                    icon: reactIcon,
-                    isHidden: false,
-                  },
-                ],
-              },
-              {
-                id: nanoid(3),
-                name: 'item in menu 1',
-                icon: '😎',
-                isHidden: false,
-              },
-              {
-                id: nanoid(3),
-                name: 'item in menu 1',
-                icon: '😎',
-                isHidden: false,
-              },
-            ],
-          },
-          {
-            id: nanoid(3),
-            name: 'Reset to default offer',
-            icon: <BiReset />,
-            isHidden: false,
-            func: resetItems,
-          },
-          {
-            id: nanoid(3),
-            name: 'hidden menu',
-            icon: '',
-            isHidden: true,
-          },
-          {
-            id: nanoid(3),
-            name: 'not hidden menu',
-            icon: '😇',
-            isHidden: false,
-          },
-        ],
+        name: 'New',
+        shortcut: ['control', 'n'],
+        func: () => {
+          createNewQuotation()
+        },
       },
       {
         id: navMenuItemId.save,
         icon: <IoSaveOutline />,
         isHidden: false,
         name: 'Save',
+        shortcut: ['control', 's'],
         func: () => {
           void saveQuotation()
         },
-        shortcut: ['control', 's'],
       },
       {
         id: navMenuItemId.pdf,

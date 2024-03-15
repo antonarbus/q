@@ -5,7 +5,7 @@ import { quotationSignal, saveQuotationLocally } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 import { navSlice } from '@shared/nav'
 
-export const resetItems = (): void => {
+export const createNewQuotation = (): void => {
   isItemsFroalaSignal.value = false
   dispatch(itemsSlice.actions.loadItemsReducer({ items: defaultItems }))
   saveItemsLocally({ items: defaultItems })

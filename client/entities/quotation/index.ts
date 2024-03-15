@@ -9,3 +9,6 @@ export { useGetQuotationQuery } from './api/useGetQuotationQuery'
 export { useGetQuotationsQuery } from './api/useGetQuotationsQuery'
 export { useDeleteQuotationMutation } from './api/useDeleteQuotationMutation'
 export { saveQuotationFn } from './api/saveQuotationFn'
+
+// cacheUpdaters
+export { updateQuotationsCache } from './cacheUpdaters/updateQuotationsCache'

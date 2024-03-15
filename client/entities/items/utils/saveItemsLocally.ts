@@ -30,9 +30,6 @@ export const saveItemsLocally = ({
   localStorage.setItem(localStorageKey.items, JSON.stringify(cleanedItems))
 
   if (msgAboveItemWithIndex !== undefined) {
-    tellItemSavedLocally({
-      itemIndex: msgAboveItemWithIndex,
-
-    })
+    tellItemSavedLocally({ itemIndex: msgAboveItemWithIndex })
   }
 }

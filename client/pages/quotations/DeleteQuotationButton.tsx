@@ -18,6 +18,7 @@ export const DeleteQuotationButton = ({ id }: Props): ReactNode => {
   useEffect(() => {
     if (!isSuccess) return
 
+    // todo: move to cache updater folder
     reactQuery.setQueriesData<ResBody>(
       { queryKey: [queryKey.getQuotations] },
       (cacheData) => {

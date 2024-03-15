@@ -1,6 +1,7 @@
 export const navMenuItemId = {
   top: 'top',
-  quotation: 'quotation',
+  pending: 'pending',
+  new: 'new',
   save: 'save',
   pdf: 'pdf',
   share: 'share',
