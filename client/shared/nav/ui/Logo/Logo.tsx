@@ -1,7 +1,6 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { Box } from '@mui/material'
 import type { RefObject } from 'react'
-import { Link } from 'react-router-dom'
 
 type Prop = {
   logoRef: RefObject<HTMLDivElement>

@@ -5,7 +5,6 @@ import { DateCellRenderer } from './DateCellRenderer'
 import { dateFilterComparator } from './dateFilterComparator'
 import { dateValueFormatter } from './dateValueFormatter'
 import { dateValueGetter } from './dateValueGetter'
-import { LinkRenderer } from './LinkRenderer'
 
 export const defaultColDef: ColDef<QuotationModelType> = {
   headerClass: ['center'],
