@@ -4,8 +4,6 @@ import { quotationSignal, saveQuotationFn, saveQuotationLocally, updateOrAppendQ
 import { nanoid } from '@shared/lib/nanoid'
 import { navSlice, showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@shared/nav'
 
-// todo: make a close button on quotations table which brings you to the offer with id or local one
-
 export const saveQuotation = async (): Promise<void> => {
   showLoadingNavIcon({ navMenuItemIdKey: 'save' })
 
