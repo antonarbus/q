@@ -9,7 +9,7 @@
       "DOM.Iterable",
       "ESNext"
     ],
-    "allowJs": false,
+    "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
@@ -47,7 +47,7 @@
     "index.tsx",
     "client",
     "server",
-    "utils", "index.tsx",
+    "utils", "index.tsx", "client/entities/items/ui/froala/froalaPkgd.js",
   ],
   "exclude": [
     "node_modules",

@@ -1,11 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
+import './froalaPkgd.js'
+import './froalaPkgd.css'
 
-// import 'froala-editor/js/froala_editor.pkgd.min.js'
-// import FroalaEditor from 'froala-editor'
-import 'froala-editor/js/plugins.pkgd.min.js'
-import 'froala-editor/js/third_party/font_awesome.min.js'
-import './froala_editor.pkgd.min.css'
 import type { MouseEvent } from 'react'
 import { useEffect } from 'react'
 import { apiUrl } from 'server/consts/apiUrl'
