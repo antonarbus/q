@@ -8,7 +8,7 @@ type Props = {
   quotation: QuotationModelType
 }
 
-export const updateOrAppendQuotationsCache = ({ quotation }: Props): void => {
+export const updateOrAppendIntoQuotationsCache = ({ quotation }: Props): void => {
   reactQuery.setQueriesData<ResBodyQuotations>({ queryKey: [queryKey.getQuotations] }, (cacheData) => {
     const updatedCacheData = produce(cacheData, (draft) => {
       if (draft?.documents === undefined) return

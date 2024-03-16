@@ -3,10 +3,10 @@ import 'ag-grid-community/styles/ag-theme-quartz.css'
 import { Box, LinearProgress } from '@mui/material'
 import { type QuotationModelType } from '@server/db/models/quotationModel'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
-import { type ElementRef, useRef, useEffect } from 'react'
+import { type ElementRef, useRef } from 'react'
+import { CloseQuotationsTableButton } from '@features/close_quotations'
 import { useDisableLoadingOverlayWhenQuotationsAreFetched } from '@features/open_quotations'
 import { useGetQuotationsQuery } from '@entities/quotation'
-import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
 import { addPlaceholderToFloatingFilters } from './addPlaceholderToFloatingFilters'
 import { AgGridStyles } from './AgGridStyles'
 import { columnDefs, defaultColDef } from './columnDefs'
@@ -18,17 +18,15 @@ export const QuotationsTable = (): JSX.Element => {
   const { data, isFetching, isFetched } = useGetQuotationsQuery()
   useDisableLoadingOverlayWhenQuotationsAreFetched({ isFetched })
 
-  // todo: make a close button on quotations table which brings you to the offer with id or local one
-
   return (
     <Box
       ref={gridContainerRef}
       className='ag-theme-quartz quotations-table'
-      sx={{ flexGrow: 1, position: 'relative', overflow: 'visible', height: '100%' }}
+      sx={{ flexGrow: 1, position: 'relative', overflow: 'visible', height: '100%', mt: '10px' }}
     >
       <AgGridStyles />
       <TotalRowsCount />
-      <CloseQuotationsButton />
+      <CloseQuotationsTableButton />
       {isFetching && <LinearProgress sx={{ height: '1px', top: '91px', zIndex: 2, mb: '-1px' }} />}
       <AgGridReact<QuotationModelType>
         ref={quotationsAgGridRef}

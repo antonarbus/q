@@ -11,4 +11,5 @@ export { useDeleteQuotationMutation } from './api/useDeleteQuotationMutation'
 export { saveQuotationFn } from './api/saveQuotationFn'
 
 // cacheUpdaters
-export { updateOrAppendQuotationsCache } from './cacheUpdaters/updateOrAppendQuotationsCache'
+export { updateOrAppendIntoQuotationsCache } from './cacheUpdaters/updateOrAppendIntoQuotationsCache'
+export { deleteFromQuotationsCache } from './cacheUpdaters/deleteFromQuotationsCache'
