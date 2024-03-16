@@ -1,4 +1,5 @@
 import { useSelectorTyped } from '@lib_instances/store'
+import { Box } from '@mui/material'
 import type { RefObject } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -22,8 +23,8 @@ export const Logo = ({ logoRef }: Prop): JSX.Element => {
         padding: '3px',
         paddingLeft: '10px',
         overflow: 'auto',
-        '& a': {
-          cursor: 'pointer',
+        '& .logo': {
+          userSelect: 'none',
           fontSize: '16px',
           [`@media (max-width: ${mediaQueryWidth.logoPart}px) and (min-width: ${mediaQueryWidth.burger}px)`]:
             mediaEnabled && {
@@ -53,20 +54,11 @@ export const Logo = ({ logoRef }: Prop): JSX.Element => {
         },
       }}
     >
-      <Link
-        to='/'
-        onClick={(e) => {
-          const doNotReRenderIfOnTheSamePage = location.pathname === '/'
-
-          if (doNotReRenderIfOnTheSamePage) {
-            e.preventDefault()
-          }
-        }}
-      >
+      <Box className='logo'>
         <span>Q</span>
         <span className='uotation'>uotation</span>
         <span className='app-ext'>.app</span>
-      </Link>
+      </Box>
     </div>
   )
 }

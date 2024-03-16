@@ -49,6 +49,9 @@ export function useLoadQuotationFromBrowser(): void {
 
     quotationSignal.value = quotation
     dispatch(itemsSlice.actions.loadItemsReducer({ items }))
+    if (quotation.id !== 'local version') {
+      window.history.replaceState('', '', `/${quotation.id}`)
+    }
     // loadingDotsOverlayTextSignal.value = null
     setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 1000)
   })

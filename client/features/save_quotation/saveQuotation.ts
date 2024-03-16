@@ -4,8 +4,7 @@ import { quotationSignal, saveQuotationFn, saveQuotationLocally, updateQuotation
 import { nanoid } from '@shared/lib/nanoid'
 import { navSlice, showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@shared/nav'
 
-// todo: NEW quotation function
-// todo: on root load append id if we have it in local storage
+// todo: check how NEW quotation function behaves, change url
 // todo: make a close button on quotations table which brings you to the offer with id or local one
 
 export const saveQuotation = async (): Promise<void> => {
