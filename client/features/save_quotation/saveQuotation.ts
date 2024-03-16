@@ -1,6 +1,6 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { saveItemsLocally } from '@entities/items'
-import { quotationSignal, saveQuotationFn, saveQuotationLocally, updateOrAppendQuotationsCache } from '@entities/quotation'
+import { quotationSignal, saveQuotationFn, saveQuotationLocally, updateOrAppendIntoQuotationsCache } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 import { navSlice, showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@shared/nav'
 
@@ -23,7 +23,7 @@ export const saveQuotation = async (): Promise<void> => {
     saveItemsLocally()
     showSuccessNavIcon({ navMenuItemIdKey: 'save' })
     dispatch(navSlice.actions.disableTopNavItem({ navMenuItemIdKey: 'save' }))
-    updateOrAppendQuotationsCache({ quotation: quotationSignal.value })
+    updateOrAppendIntoQuotationsCache({ quotation: quotationSignal.value })
     window.history.replaceState('', '', `/${quotationSignal.value.id}`)
   } catch (error) {
     showErrorNavIcon({ navMenuItemIdKey: 'save' })
