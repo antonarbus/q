@@ -2,13 +2,13 @@ import { router } from '@lib_instances/Router'
 import { dispatch } from '@lib_instances/store'
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { itemsSlice, saveItemsLocally } from '@entities/items'
-import { quotationSignal, saveQuotationLocally, useGetQuotationQuery } from '@entities/quotation'
+import { itemsSlice } from '@entities/items'
+import { quotationSignal, useGetQuotationQuery } from '@entities/quotation'
 import { route } from '@shared/consts/route'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
 import { navSlice } from '@shared/nav'
 
-export function useLoadQuotationFromServer(): void {
+export function useLoadServerQuotation(): void {
   const navigate = useNavigate()
   const { id } = useParams()
   const { data, isSuccess, isFetching, isError } = useGetQuotationQuery()
@@ -82,8 +82,6 @@ export function useLoadQuotationFromServer(): void {
       ) {
         dispatch(itemsSlice.actions.loadItemsReducer({ items: data.items }))
         quotationSignal.value = data.quotation
-        saveQuotationLocally()
-        saveItemsLocally()
         dispatch(navSlice.actions.disableTopNavItem({ navMenuItemIdKey: 'save' }))
         dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'pdf' }))
         dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'share' }))

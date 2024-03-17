@@ -1,9 +1,8 @@
 import { router } from '@lib_instances/Router'
 import { dispatch } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
-import { defaultItems, isItemsFroalaSignal, itemsSlice, reRenderItemsSignal, saveItemsLocally } from '@entities/items'
-import { quotationSignal, saveQuotationLocally } from '@entities/quotation'
-import { localStorageKey } from '@shared/consts/localStorageKey'
+import { defaultItems, isItemsFroalaSignal, itemsSlice, reRenderItemsSignal } from '@entities/items'
+import { quotationSignal } from '@entities/quotation'
 import { route } from '@shared/consts/route'
 import { nanoid } from '@shared/lib/nanoid'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
@@ -19,9 +18,7 @@ export const createNewQuotation = (): void => {
 
   loadingDotsOverlayTextSignal.value = 'Loading template...'
   dispatch(itemsSlice.actions.loadItemsReducer({ items: defaultItems }))
-  quotationSignal.value = { id: 'local version', email: '' }
-  localStorage.setItem(localStorageKey.items, JSON.stringify(defaultItems))
-  localStorage.setItem(localStorageKey.quotation, JSON.stringify(quotationSignal.value))
+  quotationSignal.value = { id: 'template version', email: '' }
 
   dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
   dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'pdf' }))

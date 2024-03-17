@@ -2,7 +2,6 @@ import { dispatch } from '@lib_instances/store'
 import { navSlice } from '@shared/nav'
 import { type FroalaEditorRef } from '@shared/types'
 import type { BoqColumnKey } from '../../types'
-import { saveItemsLocally } from '../../utils/saveItemsLocally'
 import { getBoqItemFromStore } from '../getters/getBoqItemFromStore'
 import { itemsSlice } from '../itemsSlice'
 
@@ -28,6 +27,5 @@ export const updateBoqColumnCellAtStore = ({
   if (!didTextChange) return
 
   dispatch(itemsSlice.actions.updateBoqColumnNameTextReducer({ itemIndex, html, boqColumnKey }))
-  saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
   dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
 }

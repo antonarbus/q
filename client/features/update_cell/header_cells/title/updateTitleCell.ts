@@ -1,5 +1,5 @@
 import { dispatch } from '@lib_instances/store'
-import { saveItemsLocally, updateBoqHeaderCellAtStore } from '@entities/items'
+import { updateBoqHeaderCellAtStore } from '@entities/items'
 import { type BoqHeaderKey } from '@entities/items'
 import { navSlice } from '@shared/nav'
 import { type FroalaEditorRef } from '@shared/types'
@@ -14,7 +14,6 @@ export const updateTitleCell = ({ editorRef, itemIndex, boqHeaderKey }: Props): 
   const { didUpdate } = updateBoqHeaderCellAtStore({ editorRef, itemIndex, boqHeaderKey })
 
   if (didUpdate) {
-    saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
     dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
   }
 }

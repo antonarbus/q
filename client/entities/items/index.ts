@@ -26,7 +26,6 @@ export { updateBoqRowCellWithValue } from './utils/updateBoqRowCellWithValue'
 export { updateSubTotalPriceWithValue } from './utils/updateSubTotalPriceWithValue'
 export { formatBoqRowCellNumber } from './utils/formatBoqRowCellNumber'
 export { getNumberOfBoqItemsAbove } from './utils/getNumberOfBoqItemsAbove'
-export { saveItemsLocally } from './utils/saveItemsLocally'
 export { getTotalPriceAbove } from './utils/getTotalPriceAbove'
 export { fixItemImagesHeight, unfixItemImagesHeight } from './utils/itemImagesHeight'
 

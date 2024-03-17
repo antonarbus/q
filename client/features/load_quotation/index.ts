@@ -1,2 +1,2 @@
-export { useLoadQuotationFromServer } from './useLoadQuotationFromServer'
-export { useLoadQuotationFromBrowser } from './useLoadQuotationFromBrowser'
+export { useLoadServerQuotation } from './useLoadServerQuotation'
+export { useLoadTemplateQuotation } from './useLoadTemplateQuotation'
