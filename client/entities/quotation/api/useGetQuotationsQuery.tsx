@@ -21,7 +21,7 @@ export const useGetQuotationsQuery = (): UseQueryResult<ResBody, Error> => {
     refetchOnReconnect: false,
     staleTime: 0,
     // gcTime: Infinity,
-    // retry: 0,
+    retry: 0,
   })
 
   return query

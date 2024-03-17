@@ -7,12 +7,9 @@ import { notify } from '@shared/ui/top_msg/notify'
 import { navUpdate } from './navUpdate'
 
 export const logout = async (): Promise<void> => {
-  const method = 'GET'
-  const options = { method }
   try {
-    const res = await fetch(apiUrl.logout, options)
-    const data: LogoutApiRes = await res.json()
-    const { status, message } = data
+    const res = await fetch(apiUrl.logout)
+    const { status, message }: LogoutApiRes = await res.json()
 
     if (status === 'error') {
       if (message === 'no refresh token in cookies') {
@@ -40,9 +37,6 @@ export const logout = async (): Promise<void> => {
       }
     }
 
-    if (status === 'ok') {
-      // notify({ msg: `User with ${email} is logged out`, type: 'success', theme: 'light' })
-    }
     dispatch(userSlice.actions.forgetLoggedUser())
     navUpdate.logout()
   } catch (err) {
