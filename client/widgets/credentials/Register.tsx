@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 import { CardCustom } from '@shared/components/CardCustom'
+import { route } from '@shared/consts/route'
 import { slideElement } from '@shared/utils/slideElement'
 import { ConfirmPasswordInput } from './common/ConfirmPasswordInput'
 import { EmailInput } from './common/EmailInput'
@@ -31,21 +32,20 @@ export const Register = (): JSX.Element => {
   return (
     <BackdropWithSlidableContent
       onSlideIn={(): void => {
-
         /* inputRef.current.focus() */
       }}
       onSlideOut={(): void => {
-        navigate('/')
+        navigate('..')
       }}
     >
       <CardCustom
         title='Register'
+        reference={cardRef}
         logo={
           <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }}>
             <LockOutlined />
           </Avatar>
         }
-        reference={cardRef}
       >
         <form
           onSubmit={async (e: FormEvent): Promise<void> => {
@@ -59,7 +59,10 @@ export const Register = (): JSX.Element => {
             setIsEmailOk={setIsEmailOk}
             inputRef={inputRef}
           />
-          <PasswordInput password={password} setPassword={setPassword} />
+          <PasswordInput
+            password={password}
+            setPassword={setPassword}
+          />
           <ConfirmPasswordInput
             originalPassword={password}
             isConfirmPasswordOk={isConfirmPasswordOk}
@@ -73,15 +76,16 @@ export const Register = (): JSX.Element => {
           />
           <div css={{ textAlign: 'right', marginTop: '20px' }}>
             <Link
-              to='/login'
+              to={`../${route.login}`}
               children='Log in?'
               onClick={(e: MouseEvent): void => {
                 if (!cardRef.current) return
                 e.preventDefault()
+
                 slideElement({
                   element: cardRef.current,
                   cb: () => {
-                    navigate('/login')
+                    navigate(`../${route.login}`)
                   },
                 })
               }}

@@ -47,11 +47,11 @@ export const ConfirmPasswordInput = ({
     <PasswordInput
       password={confirmPassword}
       setPassword={setConfirmPassword}
+      label={label}
+      isLabelRed={isLabelRed}
       onBlur={(): void => {
         setDidBlur(true)
       }}
-      label={label}
-      isLabelRed={isLabelRed}
     />
   )
 }

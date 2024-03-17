@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 import { CardCustom } from '@shared/components/CardCustom'
+import { route } from '@shared/consts/route'
 import { slideElement } from '@shared/utils/slideElement'
 import { EmailInput } from './common/EmailInput'
 import { PasswordInput } from './common/PasswordInput'
@@ -23,7 +24,7 @@ export const Login = (): JSX.Element => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    setIsButtonDisabled(!(isEmailOk && !!password))
+    setIsButtonDisabled(!isEmailOk || password === '')
   }, [isEmailOk, password])
 
   return (
@@ -57,7 +58,10 @@ export const Login = (): JSX.Element => {
             setIsEmailOk={setIsEmailOk}
             inputRef={inputRef}
           />
-          <PasswordInput password={password} setPassword={setPassword} />
+          <PasswordInput
+            password={password}
+            setPassword={setPassword}
+          />
           <ButtonCustom
             content='LOG IN'
             disabled={isButtonDisabled}
@@ -72,7 +76,7 @@ export const Login = (): JSX.Element => {
             }}
           >
             <Link
-              to='/reset'
+              to={`../${route.reset}`}
               children='Reset?'
               onClick={(e: MouseEvent): void => {
                 e.preventDefault()
@@ -80,13 +84,13 @@ export const Login = (): JSX.Element => {
                 slideElement({
                   element: cardRef.current,
                   cb: () => {
-                    navigate('/reset')
+                    navigate(`../${route.reset}`)
                   },
                 })
               }}
             />
             <Link
-              to='/register'
+              to={`../${route.register}`}
               children='Register?'
               onClick={(e: MouseEvent): void => {
                 if (!cardRef.current) return
@@ -94,7 +98,7 @@ export const Login = (): JSX.Element => {
                 slideElement({
                   element: cardRef.current,
                   cb: () => {
-                    navigate('/register')
+                    navigate(`../${route.register}`)
                   },
                 })
               }}

@@ -4,7 +4,6 @@ import { Box, LinearProgress } from '@mui/material'
 import { type QuotationModelType } from '@server/db/models/quotationModel'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef } from 'react'
-import { CloseQuotationsTableButton } from '@features/close_quotations'
 import { useDisableLoadingOverlayWhenQuotationsAreFetched } from '@features/open_quotations'
 import { useGetQuotationsQuery } from '@entities/quotation'
 import { addPlaceholderToFloatingFilters } from './addPlaceholderToFloatingFilters'
@@ -26,7 +25,6 @@ export const QuotationsTable = (): JSX.Element => {
     >
       <AgGridStyles />
       <TotalRowsCount />
-      <CloseQuotationsTableButton />
       {isFetching && <LinearProgress sx={{ height: '1px', top: '91px', zIndex: 2, mb: '-1px' }} />}
       <AgGridReact<QuotationModelType>
         ref={quotationsAgGridRef}

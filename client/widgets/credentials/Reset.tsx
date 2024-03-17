@@ -24,7 +24,7 @@ export const Reset = (): JSX.Element => {
         /* inputRef.current.focus() */
       }}
       onSlideOut={(): void => {
-        navigate('/')
+        navigate('..')
       }}
     >
       <CardCustom
