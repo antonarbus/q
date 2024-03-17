@@ -1,2 +1,2 @@
-export { QuotationLocal } from './QuotationLocal'
+export { QuotationTemplate as QuotationLocal } from './QuotationLocal'
 export { QuotationServer } from './QuotationServer'

@@ -1,5 +1,5 @@
 import { dispatch } from '@lib_instances/store'
-import { type BoqColumnKey, itemsSlice, saveItemsLocally, getBoqColumnFromStore, unfixItemImagesHeight, fixItemImagesHeight } from '@entities/items'
+import { type BoqColumnKey, itemsSlice, getBoqColumnFromStore, unfixItemImagesHeight, fixItemImagesHeight } from '@entities/items'
 import { className } from '@shared/consts/className'
 import { navSlice } from '@shared/nav'
 
@@ -33,6 +33,5 @@ export const onColumnResizeStop = ({ headerColumnElement, itemIndex, boqColumnKe
   const itemWidth = headerColumnElement.closest(`.${className.paper}`)?.clientWidth
   dispatch(itemsSlice.actions.updateItemWidthReducer({ itemIndex, width: itemWidth ?? 0 }))
   dispatch(itemsSlice.actions.enableFroalaReducer({ itemIndex }))
-  saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
   dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
 }

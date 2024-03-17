@@ -2,7 +2,7 @@ import { model, Schema } from 'mongoose'
 import { nanoid } from '@shared/lib/nanoid'
 
 export type QuotationModelType = {
-  id: 'local version' | Record<never, never> & string
+  id: 'template version' | Record<never, never> & string
   email: string
   quotationName?: string
   createdAt?: Date

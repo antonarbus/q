@@ -1,5 +1,5 @@
 import { dispatch, getState } from '@lib_instances/store'
-import { itemType, saveItemsLocally, itemsSlice } from '@entities/items'
+import { itemType, itemsSlice } from '@entities/items'
 import { navSlice } from '@shared/nav'
 import { type FroalaEditorRef } from '@shared/types'
 import { getNumberFromString, getTextContentFromHtml } from '@shared/utils'
@@ -28,6 +28,5 @@ export const updatePriceValueCell = ({
   const cellValueFromHtml = getNumberFromString({ string: cellTextContent })
 
   dispatch(itemsSlice.actions.updatePriceReducer({ itemIndex, html, value: cellValueFromHtml }))
-  saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
   dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
 }

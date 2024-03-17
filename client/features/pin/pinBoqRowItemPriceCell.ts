@@ -1,5 +1,5 @@
 import { dispatch } from '@lib_instances/store'
-import { boqRowCellKey, getBoqCellFromStore, itemsSlice, saveItemsLocally } from '@entities/items'
+import { boqRowCellKey, getBoqCellFromStore, itemsSlice } from '@entities/items'
 import { navSlice } from '@shared/nav'
 
 type Props = {
@@ -14,6 +14,5 @@ export const pinBoqRowItemPriceCell = ({ itemIndex, rowIndex }: Props): void => 
   if (isPinned) return
 
   dispatch(itemsSlice.actions.pinItemPriceReducer({ itemIndex, rowIndex }))
-  saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
   dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
 }

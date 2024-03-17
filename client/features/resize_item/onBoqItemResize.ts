@@ -1,5 +1,5 @@
 import { dispatch, getState } from '@lib_instances/store'
-import { type BoqItem, itemsSlice, saveItemsLocally, getBoqColumnFromStore, boqColumnKey, unfixItemImagesHeight, fixItemImagesHeight } from '@entities/items'
+import { type BoqItem, itemsSlice, getBoqColumnFromStore, boqColumnKey, unfixItemImagesHeight, fixItemImagesHeight } from '@entities/items'
 import { navSlice } from '@shared/nav'
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
 
@@ -40,6 +40,5 @@ export const onBoqItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction,
     dispatch(itemsSlice.actions.updateItemWidthReducer({ itemIndex, width: itemWidth }))
   }
 
-  saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
   dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
 }

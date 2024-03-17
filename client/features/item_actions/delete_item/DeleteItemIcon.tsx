@@ -5,7 +5,7 @@ import { gsap } from 'gsap'
 import { useRef } from 'react'
 import { RxCross2 } from 'react-icons/rx'
 import { copySlice } from '@entities/copy'
-import { itemsSlice, selectIsLastItem, useItem, saveItemsLocally } from '@entities/items'
+import { itemsSlice, selectIsLastItem, useItem } from '@entities/items'
 import { navSlice } from '@shared/nav'
 
 export const DeleteItemIcon = (): EmotionJSX.Element => {
@@ -43,7 +43,6 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
 
         if (!isCopyContainer) {
           setTimeout(() => {
-            saveItemsLocally({ msgAboveItemWithIndex: getIndexWhereToShowMsg({ itemIndex }) })
             dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
           }, 1000 * theme.item.animationDuration)
         }
@@ -72,19 +71,4 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
       <RxCross2 />
     </span>
   )
-}
-
-function getIndexWhereToShowMsg({ itemIndex }: { itemIndex: number }): number {
-  const itemsLength = getState().items.length
-
-  const isLastItemLeft = itemsLength === 1
-  if (isLastItemLeft) return 0
-
-  const doesItemBelowExist = itemsLength >= itemIndex + 1
-  if (doesItemBelowExist) return itemIndex
-
-  const isLastItemDeleted = itemsLength + 1 === itemIndex + 1
-  if (isLastItemDeleted) return itemIndex - 1
-
-  return -1
 }

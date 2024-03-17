@@ -1,6 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { roundTo } from 'round-to'
-import { didBoqHeaderCellContentChange, getBoqHeaderFromStore, getBoqRowsFromStore, saveItemsLocally, updateBoqHeaderCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue, getBoqRowFromStore, type BoqRow, type BoqRowEditorRefs, boqRowCellKey } from '@entities/items'
+import { didBoqHeaderCellContentChange, getBoqHeaderFromStore, getBoqRowsFromStore, updateBoqHeaderCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue, getBoqRowFromStore, type BoqRow, type BoqRowEditorRefs, boqRowCellKey } from '@entities/items'
 import { navSlice } from '@shared/nav'
 import { type FroalaEditor, type FroalaEditorRef } from '@shared/types'
 import { notify } from '@shared/ui/top_msg'
@@ -37,7 +37,6 @@ export const updateSubtotalPriceCell = ({
   })
 
   if (didUpdate) {
-    saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
     dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
   }
 
@@ -179,6 +178,5 @@ export const updateSubtotalPriceCell = ({
 
   if (!didChange) return
 
-  saveItemsLocally({ msgAboveItemWithIndex: itemIndex })
   dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
 }
