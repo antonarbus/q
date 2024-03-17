@@ -49,6 +49,7 @@ export const useLogin = (): FuncRes => {
     const headers = { 'Content-Type': 'application/json' }
     const body = JSON.stringify({ email, password })
     const options = { method, headers, body }
+
     try {
       setHttpStatus('loading')
       const res = await fetch(apiUrl.login, options)
@@ -78,8 +79,8 @@ export const useLogin = (): FuncRes => {
         setHttpStatus('success')
         accessTokenSignal.value = accessJwtToken
         dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
-        // notify({ msg: 'Logged in!', theme: 'light', closeAfterMs: 3000 })
         navUpdate.login()
+
         setTimeout(() => {
           slideElement({
             element: cardElement,
@@ -100,6 +101,7 @@ export const useLogin = (): FuncRes => {
       setHttpStatus('error')
       console.error(err)
       notify({ msg: 'Internal error', type: 'error', theme: 'light' })
+
       setTimeout(() => {
         slideElement({
           element: cardElement,
