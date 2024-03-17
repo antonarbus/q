@@ -38,6 +38,7 @@ export const navStructure: MenuItemTypes[] = [
         icon: <IoSaveOutline />,
         isHidden: false,
         name: 'Save',
+        disabled: true,
         shortcut: ['control', 's'],
         func: () => {
           void saveQuotation()
@@ -48,6 +49,7 @@ export const navStructure: MenuItemTypes[] = [
         icon: <BsFiletypePdf />,
         isHidden: false,
         name: 'Pdf',
+        disabled: true,
         func: () => {
           void downloadPdf()
         },
@@ -57,6 +59,7 @@ export const navStructure: MenuItemTypes[] = [
         icon: <IoShareOutline />,
         isHidden: false,
         name: 'Share',
+        disabled: true,
         menuItems: [
           {
             id: nanoid(3),

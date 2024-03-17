@@ -1,12 +1,15 @@
 import { dispatch } from '@lib_instances/store'
 import type { Dispatch, FormEvent, SetStateAction } from 'react'
 import { useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, useParams } from 'react-router-dom'
 import type { LoginApiRes } from 'server/api/loginRouter'
 import { apiUrl } from 'server/consts/apiUrl'
 import { navUpdate } from '@features/log_out'
+import { useGetQuotationQuery, useGetQuotationsQuery } from '@entities/quotation'
 import { userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
+import { route } from '@shared/consts/route'
+import { nanoid } from '@shared/lib/nanoid'
 import { notify } from '@shared/ui/top_msg/notify'
 import { slideElement } from '@shared/utils/slideElement'
 import type { HttpStatusType } from './types'
@@ -34,8 +37,11 @@ type FuncRes = {
 export const useLogin = (): FuncRes => {
   const [httpStatus, setHttpStatus] = useState<HttpStatusType>('')
   const navigate = useNavigate()
+  const { id } = useParams()
   const location = useLocation()
   const from = (location.state as StateProps | undefined)?.from?.pathname ?? '/'
+  const { refetch: refetchQuotation } = useGetQuotationQuery()
+  const { refetch: refetchQuotations } = useGetQuotationsQuery()
 
   const loginUser = async ({ e, email, password, cardElement }: Props): Promise<void> => {
     e.preventDefault()
@@ -78,7 +84,13 @@ export const useLogin = (): FuncRes => {
           slideElement({
             element: cardElement,
             cb: () => {
-              navigate(from, { replace: true })
+              if (location.pathname.includes(route.quotations)) {
+                void refetchQuotations()
+              }
+              if (id) {
+                void refetchQuotation()
+              }
+              navigate('..', { replace: true, state: nanoid() })
             },
           })
         }, 2000)

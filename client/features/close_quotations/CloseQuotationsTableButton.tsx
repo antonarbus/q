@@ -11,8 +11,8 @@ export const CloseQuotationsTableButton = (): JSX.Element => {
       }}
       sx={{
         position: 'absolute',
-        right: '-16px',
-        top: '-22px',
+        right: '-10px',
+        top: '-20px',
         zIndex: 3,
       }}
     >

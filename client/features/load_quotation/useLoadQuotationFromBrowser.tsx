@@ -6,64 +6,44 @@ import { type Item } from '@entities/items/types'
 import { quotationSignal } from '@entities/quotation'
 import { localStorageKey } from '@shared/consts/localStorageKey'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
+import { navSlice } from '@shared/nav'
 import { jsonParseSafe } from '@shared/utils/jsonParseSafe'
-
-// todo: loadTemplate() should go into NEW button
 
 export function useLoadQuotationFromBrowser(): void {
   useEffectOnce(() => {
     const itemsFromLocalStorage = localStorage.getItem(localStorageKey.items)
-
-    if (itemsFromLocalStorage === null) {
-      loadTemplate()
-      return
-    }
-
     const items = jsonParseSafe<Item[]>(itemsFromLocalStorage)
-
-    if (items === undefined) {
-      loadTemplate()
-      return
-    }
-
-    if (items.length === 0) {
-      loadTemplate()
-      return
-    }
-
     const quotationFromLocalStorage = localStorage.getItem(localStorageKey.quotation)
-
-    if (quotationFromLocalStorage === null) {
-      loadTemplate()
-      return
-    }
-
     const quotation = jsonParseSafe<QuotationModelType>(quotationFromLocalStorage)
-    if (quotation === undefined) {
-      loadTemplate()
-      return
+
+    const shouldLoadTemplate =
+      itemsFromLocalStorage === null ||
+      items === undefined ||
+      items.length === 0 ||
+      quotationFromLocalStorage === null ||
+      quotation === undefined
+
+    const shouldLoadFromBrowser = !shouldLoadTemplate
+
+    if (shouldLoadTemplate) {
+      loadingDotsOverlayTextSignal.value = 'Loading template...'
+      dispatch(itemsSlice.actions.loadItemsReducer({ items: defaultItems }))
+      quotationSignal.value = { id: 'local version', email: '' }
+      localStorage.setItem(localStorageKey.items, JSON.stringify(defaultItems))
+      localStorage.setItem(localStorageKey.quotation, JSON.stringify(quotationSignal.value))
     }
 
-    // loadingDotsOverlayTextSignal.value = 'Loading local quotation from browser...'
-    // setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 2000)
-
-    quotationSignal.value = quotation
-    dispatch(itemsSlice.actions.loadItemsReducer({ items }))
-    if (quotation.id !== 'local version') {
-      window.history.replaceState('', '', `/${quotation.id}`)
+    if (shouldLoadFromBrowser) {
+      loadingDotsOverlayTextSignal.value = 'Loading from browser...'
+      quotationSignal.value = quotation
+      dispatch(itemsSlice.actions.loadItemsReducer({ items }))
+      if (quotation.id !== 'local version') {
+        window.history.replaceState('', '', `/${quotation.id}`)
+      }
     }
-    // loadingDotsOverlayTextSignal.value = null
-    setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 1000)
+
+    dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'pdf' }))
+    dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'share' }))
+    setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 2000)
   })
-}
-
-function loadTemplate(): void {
-  // loadingDotsOverlayTextSignal.value = 'Loading default template...'
-  // setTimeout(() => {
-  // loadingDotsOverlayTextSignal.value = null
-  // }, 3000)
-
-  dispatch(itemsSlice.actions.loadItemsReducer({ items: defaultItems }))
-  localStorage.setItem(localStorageKey.items, JSON.stringify(defaultItems))
-  localStorage.setItem(localStorageKey.quotation, JSON.stringify(quotationSignal.value))
 }
