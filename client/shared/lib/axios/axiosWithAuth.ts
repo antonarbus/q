@@ -2,6 +2,7 @@ import { router } from '@lib_instances/Router'
 import axios, { AxiosError } from 'axios'
 import { apiUrl } from 'server/consts/apiUrl'
 import { headerName } from 'server/consts/headerName'
+import { route } from '@shared/consts/route'
 import { accessTokenSignal } from '../../auth/accessTokenSignal'
 
 //* for protected routes we use this special axios instance which automatically attach access token into the header
@@ -31,8 +32,10 @@ axiosWithAuth.interceptors.response.use((config) => {
 }, async (error) => {
   const originalRequest = error.config
   const isTokenProbablyExpired = error.response.status === 401 && error.config && !error.config._isRetry
+
   if (isTokenProbablyExpired) {
     originalRequest._isRetry = true
+
     try {
       const response = await axios.get(apiUrl.getAccessToken, { withCredentials: true })
       const { accessJwtToken } = response.data
@@ -48,7 +51,10 @@ axiosWithAuth.interceptors.response.use((config) => {
         accessTokenSignal.value = null
         console.warn('not authorized')
         console.error(err)
-        void router.navigate('/login')
+
+        if (!location.pathname.includes(route.login)) {
+          void router.navigate(`./${route.login}`)
+        }
       }
     }
   }

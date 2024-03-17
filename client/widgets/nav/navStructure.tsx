@@ -198,7 +198,6 @@ export const navStructure: MenuItemTypes[] = [
             icon: <FiLogOut />,
             isHidden: false,
             name: 'Log out',
-            link: route.root,
             func: logout,
           },
         ],

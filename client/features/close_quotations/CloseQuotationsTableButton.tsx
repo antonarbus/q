@@ -13,7 +13,7 @@ export const CloseQuotationsTableButton = (): JSX.Element => {
         position: 'absolute',
         right: '-16px',
         top: '-22px',
-        zIndex: 1,
+        zIndex: 3,
       }}
     >
       <IoIosCloseCircle />
