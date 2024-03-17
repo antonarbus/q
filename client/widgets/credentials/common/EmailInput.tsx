@@ -92,12 +92,13 @@ export const EmailInput = ({
     <div css={{ position: 'relative' }}>
       <TextField
         fullWidth
-        // id="email"
-        label={emailLabel}
-        // name="email"
-        autoFocus
+        id='email'
+        type='email'
+        name='email'
         autoComplete='email'
         placeholder='Email'
+        label={emailLabel}
+        autoFocus
         value={email}
         onChange={(e): void => {
           setEmail(e.target.value)

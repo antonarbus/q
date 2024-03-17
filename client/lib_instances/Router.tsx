@@ -1,7 +1,7 @@
 import { type RouteObject, createBrowserRouter } from 'react-router-dom'
 import { BarChart } from '@pages/chart/Chart'
 import { Profile } from '@pages/profile'
-import { QuotationLocal, QuotationServer } from '@pages/quotation'
+import { QuotationTemplate, QuotationServer } from '@pages/quotation'
 import { Quotations } from '@pages/quotations'
 import { Copy } from '@widgets/copy'
 import { Login, PersistentAuth, Register, RequireAuth, Reset, Unauthorized } from '@widgets/credentials'
@@ -41,7 +41,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: route.root,
-        element: <QuotationLocal />,
+        element: <QuotationTemplate />,
         children: authRoutes,
       },
       {

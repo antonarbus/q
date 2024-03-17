@@ -32,16 +32,17 @@ export const PasswordInput = ({
   return (
     <TextField
       fullWidth
+      id='password'
       name='password'
       label={label ?? 'Password'}
       type={showPassword ? 'text' : 'password'}
-      autoComplete='new-password'
+      autoComplete='current-password'
       placeholder='Password'
       value={password}
+      onBlur={onBlur}
       onChange={(e): void => {
         setPassword(e.target.value)
       }}
-      onBlur={onBlur}
       sx={{
         mb: 2,
         '& .MuiInputLabel-shrink': {
@@ -57,10 +58,10 @@ export const PasswordInput = ({
         endAdornment: (
           <InputAdornment position='end'>
             <IconButton
+              edge='end'
               onClick={(): void => {
                 setShowPassword(!showPassword)
               }}
-              edge='end'
             >
               {showPassword ? <VisibilityOff /> : <Visibility />}
             </IconButton>
