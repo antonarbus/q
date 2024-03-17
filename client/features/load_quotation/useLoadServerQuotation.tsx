@@ -18,7 +18,7 @@ export function useLoadServerQuotation(): void {
     if (location.pathname.includes(route.login)) return
 
     if (isFetching) {
-      loadingDotsOverlayTextSignal.value = 'Checking...'
+      loadingDotsOverlayTextSignal.value = 'Loading...'
       dispatch(itemsSlice.actions.loadItemsReducer({ items: [] }))
       quotationSignal.value = { id: '', email: '' }
       return
@@ -29,7 +29,7 @@ export function useLoadServerQuotation(): void {
         setTimeout(() => { loadingDotsOverlayTextSignal.value = 'Not found' }, 1000)
         setTimeout(() => {
           loadingDotsOverlayTextSignal.value = null
-          // navigate(-1)
+          navigate(-1)
         }, 3000)
 
         return
@@ -52,7 +52,7 @@ export function useLoadServerQuotation(): void {
         setTimeout(() => { loadingDotsOverlayTextSignal.value = 'Does not exist' }, 1000)
         setTimeout(() => {
           loadingDotsOverlayTextSignal.value = null
-          // navigate(-1)
+          navigate(-1)
         }, 3000)
 
         return
@@ -68,7 +68,7 @@ export function useLoadServerQuotation(): void {
         setTimeout(() => { loadingDotsOverlayTextSignal.value = 'Quotation is empty' }, 1000)
         setTimeout(() => {
           loadingDotsOverlayTextSignal.value = null
-          // navigate(-1)
+          navigate(-1)
         }, 3000)
 
         return
@@ -85,8 +85,7 @@ export function useLoadServerQuotation(): void {
         dispatch(navSlice.actions.disableTopNavItem({ navMenuItemIdKey: 'save' }))
         dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'pdf' }))
         dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'share' }))
-        setTimeout(() => { loadingDotsOverlayTextSignal.value = 'Loading...' }, 1000)
-        setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 3000)
+        setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 2000)
       }
     }
   }, [isFetching, isSuccess])
