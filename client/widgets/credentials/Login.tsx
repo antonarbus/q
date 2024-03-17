@@ -12,7 +12,6 @@ import { EmailInput } from './common/EmailInput'
 import { PasswordInput } from './common/PasswordInput'
 import { useLogin } from './useLogin'
 
-// todo: store user data in redux
 export const Login = (): JSX.Element => {
   const [email, setEmail] = useState('')
   const inputRef = useRef<HTMLDivElement>(null)
@@ -30,11 +29,10 @@ export const Login = (): JSX.Element => {
   return (
     <BackdropWithSlidableContent
       onSlideIn={(): void => {
-
         /* inputRef.current.focus() */
       }}
       onSlideOut={(): void => {
-        navigate('/')
+        navigate('..')
       }}
     >
       <CardCustom
