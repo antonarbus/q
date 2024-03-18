@@ -1,3 +1,5 @@
+import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
+
 export const NoRowsTableOverlay = (): JSX.Element | null => {
   return (
     <div
@@ -22,7 +24,7 @@ export const NoRowsTableOverlay = (): JSX.Element | null => {
           height: '60px',
         }}
       >
-        No rows
+        {accessTokenSignal.value === null ? 'Not logged in' : 'No rows'}
       </div>
     </div>
   )
