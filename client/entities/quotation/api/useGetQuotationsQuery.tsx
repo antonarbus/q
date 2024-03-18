@@ -20,8 +20,9 @@ export const useGetQuotationsQuery = (): UseQueryResult<ResBody, Error> => {
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     staleTime: 0,
-    // gcTime: Infinity,
     retry: 0,
+    // enabled: Boolean(accessTokenSignal.value),
+    // gcTime: Infinity,
   })
 
   return query

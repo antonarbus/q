@@ -9,6 +9,8 @@ import { useGetQuotationsQuery } from '@entities/quotation'
 import { addPlaceholderToFloatingFilters } from './addPlaceholderToFloatingFilters'
 import { AgGridStyles } from './AgGridStyles'
 import { columnDefs, defaultColDef } from './columnDefs'
+import { LoadingTableOverlay } from './LoadingTableOverlay'
+import { NoRowsTableOverlay } from './NoRowsTableOverlay'
 import { quotationsAgGridRef } from './quotationsAgGridRef'
 import { TotalRowsCount, totalRowsSignal } from './TotalRowsCount'
 
@@ -34,6 +36,8 @@ export const QuotationsTable = (): JSX.Element => {
         columnDefs={columnDefs}
         suppressCellFocus
         enableCellTextSelection
+        loadingOverlayComponent={LoadingTableOverlay}
+        noRowsOverlayComponent={NoRowsTableOverlay}
         onGridReady={() => {
           addPlaceholderToFloatingFilters({ gridContainerRef })
         }}
