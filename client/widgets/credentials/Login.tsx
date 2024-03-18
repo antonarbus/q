@@ -14,11 +14,11 @@ import { PasswordInput } from './common/PasswordInput'
 import { useLogin } from './useLogin'
 
 export const Login = (): JSX.Element => {
-  const [email, setEmail] = useState('')
   const inputRef = useRef<HTMLDivElement>(null)
   const cardRef = useRef<HTMLDivElement>(null)
-  const [isEmailOk, setIsEmailOk] = useState(false)
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isEmailOk, setIsEmailOk] = useState(false)
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
   const { loginUser, httpStatus, setHttpStatus } = useLogin()
   const navigate = useNavigate()
@@ -29,10 +29,10 @@ export const Login = (): JSX.Element => {
 
   return (
     <BackdropWithSlidableContent
-      onSlideIn={(): void => {
+      onSlideIn={() => {
         /* inputRef.current.focus() */
       }}
-      onSlideOut={(): void => {
+      onSlideOut={() => {
         navigate('..')
       }}
     >

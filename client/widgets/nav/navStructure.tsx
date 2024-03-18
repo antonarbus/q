@@ -174,7 +174,7 @@ export const navStructure: MenuItemTypes[] = [
         icon: <FiLogIn />,
         isHidden: false,
         name: 'Log in',
-        link: `${location.pathname}/${route.login}`,
+        link: `${location.pathname}/${route.login}`.replaceAll('//', '/'),
       },
       {
         id: navMenuItemId.account,
