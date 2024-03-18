@@ -28,6 +28,7 @@ type Props = {
   cardElement: HTMLElement
 }
 
+// todo: type should come form the router
 type FuncRes = {
   loginUser: ({ e, email, password, cardElement }: Props) => Promise<void>
   httpStatus: HttpStatusType
@@ -42,6 +43,8 @@ export const useLogin = (): FuncRes => {
   const from = (location.state as StateProps | undefined)?.from?.pathname ?? '/'
   const { refetch: refetchQuotation } = useGetQuotationQuery()
   const { refetch: refetchQuotations } = useGetQuotationsQuery()
+
+  // todo: mode fetch func into api at user entity
 
   const loginUser = async ({ e, email, password, cardElement }: Props): Promise<void> => {
     e.preventDefault()
