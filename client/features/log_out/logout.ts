@@ -1,6 +1,7 @@
 import { dispatch } from '@lib_instances/store'
 import type { LogoutApiRes } from 'server/api/logoutRouter'
 import { apiUrl } from 'server/consts/apiUrl'
+import { deleteQuotationsCache } from '@entities/quotation'
 import { userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 import { notify } from '@shared/ui/top_msg/notify'
@@ -38,6 +39,8 @@ export const logout = async (): Promise<void> => {
     }
 
     dispatch(userSlice.actions.forgetLoggedUser())
+    console.log(666)
+    deleteQuotationsCache()
     navUpdate.logout()
   } catch (err) {
     console.error(err)

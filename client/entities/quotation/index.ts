@@ -10,3 +10,4 @@ export { saveQuotationFn } from './api/saveQuotationFn'
 // cacheUpdaters
 export { updateOrAppendIntoQuotationsCache } from './cacheUpdaters/updateOrAppendIntoQuotationsCache'
 export { deleteFromQuotationsCache } from './cacheUpdaters/deleteFromQuotationsCache'
+export { deleteQuotationsCache } from './cacheUpdaters/deleteQuotationsCache'
