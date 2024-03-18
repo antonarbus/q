@@ -32,7 +32,6 @@ export const PasswordInput = ({
   return (
     <TextField
       fullWidth
-      id='password'
       name='password'
       label={label ?? 'Password'}
       type={showPassword ? 'text' : 'password'}
@@ -42,12 +41,6 @@ export const PasswordInput = ({
       onBlur={onBlur}
       onChange={(e): void => {
         setPassword(e.target.value)
-      }}
-      sx={{
-        mb: 2,
-        '& .MuiInputLabel-shrink': {
-          color: isLabelRed ? theme.colors.red : '',
-        },
       }}
       InputProps={{
         startAdornment: (
@@ -67,6 +60,12 @@ export const PasswordInput = ({
             </IconButton>
           </InputAdornment>
         ),
+      }}
+      sx={{
+        mb: 2,
+        '& .MuiInputLabel-shrink': {
+          color: isLabelRed ? theme.colors.red : '',
+        },
       }}
     />
   )
