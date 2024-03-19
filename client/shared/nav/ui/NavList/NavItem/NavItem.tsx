@@ -58,6 +58,7 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
   const name = navItem?.name
   const link = navItem?.link
   const isLink = Boolean(navItem?.link)
+  const isFunc = Boolean(navItem?.func)
   const isLoading = navItem?.isLoading
   const isSuccess = navItem?.isSuccess
   const isError = navItem?.isError
@@ -122,7 +123,7 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
       <Link
         to={link ?? '/'}
         onClick={(e: MouseEvent): void => {
-          if (!isLink) {
+          if (isFunc) {
             e.preventDefault()
           }
           if (isLoading) return

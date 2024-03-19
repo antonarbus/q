@@ -1,4 +1,4 @@
-import { tabFromDescriptionCell } from '@features/tab_from_cell'
+import { tabFromDescriptionCell } from '@features/tab_away_from_cell'
 import { updateDescriptionCell } from '@features/update_cell'
 import { getBoqCellHtmlFromStore, useRow, useItem, Froala, useStylesForResizableCell, boqRowCellStyle, boqRowCellKey, boqColumnKey } from '@entities/items'
 
