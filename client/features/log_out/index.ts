@@ -1,3 +1,3 @@
-export { logout } from './logout'
+export { logOut } from './logOut'
 export { navUpdate } from './navUpdate'
 export { useLogoutIfAccessTokenRemoved } from './useLogoutIfAccessTokenRemoved'
