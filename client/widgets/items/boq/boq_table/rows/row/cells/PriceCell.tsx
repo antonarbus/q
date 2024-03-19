@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { Pin, pinBoqRowPriceCell, showBoqRowPins } from '@features/pin'
-import { tabFromPriceCell } from '@features/tab_from_cell'
+import { tabFromPriceCell } from '@features/tab_away_from_cell'
 import { formatBoqRowPriceCell, updateBoqRowPriceCell, validateBoqRowPrice } from '@features/update_cell'
 import { getBoqCellHtmlFromStore, useBoqItem, useItem, useRow, Froala, boqRowCellStyle, useStylesForResizableCell, boqRowCellKey, boqColumnKey } from '@entities/items'
 
