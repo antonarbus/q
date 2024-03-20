@@ -7,7 +7,7 @@ import { IoSaveOutline, IoShareOutline } from 'react-icons/io5'
 import { VscNewFile } from 'react-icons/vsc'
 import { createNewQuotation } from '@features/create_new_quotation'
 import { downloadPdf } from '@features/download_pdf'
-import { logIn } from '@features/log_in'
+import { openLogin } from '@features/log_in'
 import { logOut } from '@features/log_out'
 import { saveQuotation } from '@features/save_quotation'
 import { navMenuItemId } from '@shared/consts/navMenuItemId'
@@ -176,7 +176,7 @@ export const navStructure: MenuItemTypes[] = [
         isHidden: false,
         name: 'Log in',
         link: route.login,
-        func: logIn,
+        func: openLogin,
       },
       {
         id: navMenuItemId.account,
