@@ -12,7 +12,8 @@ import { route } from '@shared/consts/route'
 import { nanoid } from '@shared/lib/nanoid'
 import { notify } from '@shared/ui/top_msg/notify'
 import { slideElement } from '@shared/utils/slideElement'
-import type { HttpStatusType } from './types'
+
+type HttpStatusType = '' | 'error' | 'loading' | 'success'
 
 type StateProps = {
   from?: {
