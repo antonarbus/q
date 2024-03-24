@@ -2,6 +2,7 @@ import { dispatch } from '@lib_instances/store'
 import type { ResBody } from '@server/api/getAccessTokenRouter'
 import axios from 'axios'
 import { jwtDecode } from 'jwt-decode'
+import type { JwtPayload } from 'jwt-decode'
 import { useState } from 'react'
 import { useEffectOnce } from 'react-use'
 import { apiUrl } from 'server/consts/apiUrl'
@@ -9,7 +10,6 @@ import type { JwtPayloadExtended } from 'server/services/jwt'
 import { userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 import { navSlice } from '@shared/nav'
-import { tokenExpirationMinutes } from './tokenExpirationMinutes'
 
 type Props = {
   withLoadingState?: boolean
@@ -106,4 +106,20 @@ export const useGetAccessToken = ({ withLoadingState }: Props): Res => {
   })
 
   return { isCheckingTokens }
+}
+
+export function tokenExpirationMinutes(token: string): number {
+  const jwtPayloadHashed = token.split('.')[1]
+  if (!jwtPayloadHashed) return 0
+  const jwtPayloadDecodedIntoJson = window.atob(jwtPayloadHashed) // atob() decodes Base64 decoded string
+  const jwtPayload = JSON.parse(jwtPayloadDecodedIntoJson) as JwtPayload
+  const { exp } = jwtPayload // in seconds since 01.01.1970 GMT
+  if (!exp) return 0
+  const d = new Date('1970-01-01T00:00:00Z') // Thu Jan 01 1970 02:00:00 GMT+0200 (Eastern European Standard Time)
+  const expiration = d.setUTCSeconds(exp) // 1663584953000 //the value of 'exp', note use UTC not setSeconds().
+  const now = new Date().valueOf()
+  const difference = expiration - now
+  const oneMin = 1 * 60 * 1000
+  const expirationInMin = difference / oneMin
+  return expirationInMin
 }
