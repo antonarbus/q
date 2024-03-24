@@ -4,8 +4,8 @@ import { apiUrl } from 'server/consts/apiUrl'
 import { deleteQuotationsCache } from '@entities/quotation'
 import { userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
+import { navSlice } from '@shared/nav'
 import { notify } from '@shared/ui/top_msg/notify'
-import { navUpdate } from './navUpdate'
 
 export const logOut = async (): Promise<void> => {
   try {
@@ -40,7 +40,8 @@ export const logOut = async (): Promise<void> => {
 
     dispatch(userSlice.actions.forgetLoggedUser())
     deleteQuotationsCache()
-    navUpdate.logout()
+    dispatch(navSlice.actions.showLogInMenuItem())
+    dispatch(navSlice.actions.hideAccountMenuItem())
   } catch (err) {
     console.error(err)
     notify({ msg: 'Internal error', type: 'error', theme: 'light' })

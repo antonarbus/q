@@ -57,7 +57,6 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
   const icon = navItem?.icon
   const name = navItem?.name
   const link = navItem?.link
-  const isLink = Boolean(navItem?.link)
   const isFunc = Boolean(navItem?.func)
   const isLoading = navItem?.isLoading
   const isSuccess = navItem?.isSuccess

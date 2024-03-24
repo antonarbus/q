@@ -4,14 +4,13 @@ import { Avatar } from '@mui/material'
 import type { FormEvent, MouseEvent } from 'react'
 import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useLogin } from '@features/log_in'
+import { EmailInput, PasswordInput } from '@shared/components'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 import { CardCustom } from '@shared/components/CardCustom'
 import { route } from '@shared/consts/route'
 import { slideElement } from '@shared/utils/slideElement'
-import { EmailInput } from './common/EmailInput'
-import { PasswordInput } from './common/PasswordInput'
+import { useLogin } from './useLogin'
 
 export const Login = (): JSX.Element => {
   const inputRef = useRef<HTMLDivElement>(null)

@@ -3,7 +3,8 @@ import { useState } from 'react'
 import { apiUrl } from 'server/consts/apiUrl'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 import { notify } from '@shared/ui/top_msg/notify'
-import type { HttpStatusType } from './types'
+
+type HttpStatusType = '' | 'error' | 'loading' | 'success'
 
 type Props = {
   e: FormEvent

@@ -6,9 +6,9 @@ import { useState } from 'react'
 import { useEffectOnce } from 'react-use'
 import { apiUrl } from 'server/consts/apiUrl'
 import type { JwtPayloadExtended } from 'server/services/jwt'
-import { navUpdate } from '@features/log_out'
 import { userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
+import { navSlice } from '@shared/nav'
 import { tokenExpirationMinutes } from './tokenExpirationMinutes'
 
 type Props = {
@@ -44,14 +44,16 @@ export const useGetAccessToken = ({ withLoadingState }: Props): Res => {
 
         if (response.status === 401) {
           dispatch(userSlice.actions.forgetLoggedUser())
-          navUpdate.logout()
+          dispatch(navSlice.actions.showLogInMenuItem())
+          dispatch(navSlice.actions.hideAccountMenuItem())
           console.error(response.data.message)
           return
         }
 
         if (!response.data.accessJwtToken) {
           dispatch(userSlice.actions.forgetLoggedUser())
-          navUpdate.logout()
+          dispatch(navSlice.actions.showLogInMenuItem())
+          dispatch(navSlice.actions.hideAccountMenuItem())
           console.warn('no access token issued')
           return
         }
@@ -61,7 +63,8 @@ export const useGetAccessToken = ({ withLoadingState }: Props): Res => {
 
         if (!email) {
           dispatch(userSlice.actions.forgetLoggedUser())
-          navUpdate.logout()
+          dispatch(navSlice.actions.showLogInMenuItem())
+          dispatch(navSlice.actions.hideAccountMenuItem())
           console.warn('token is invalid')
           return
         }
@@ -69,7 +72,8 @@ export const useGetAccessToken = ({ withLoadingState }: Props): Res => {
         if (email) {
           accessTokenSignal.value = response.data.accessJwtToken
           dispatch(userSlice.actions.rememberLoggedUser({ email, roles: response.data.roles }))
-          navUpdate.login()
+          dispatch(navSlice.actions.hideLogInMenuItem())
+          dispatch(navSlice.actions.showAccountMenuItem())
           console.info(`access token was issued for ${email}`)
         }
 
@@ -83,7 +87,8 @@ export const useGetAccessToken = ({ withLoadingState }: Props): Res => {
           const payloadFromExistingAccessToken = jwtDecode<JwtPayloadExtended>(accessTokenSignal.value)
           const { email, roles } = payloadFromExistingAccessToken
           dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
-          navUpdate.login()
+          dispatch(navSlice.actions.hideLogInMenuItem())
+          dispatch(navSlice.actions.showAccountMenuItem())
           console.warn(`access token expires in ${expirationInMin.toFixed(2)} min, which is more than 5 min, skip the refresh for now`)
         }
       }

@@ -4,10 +4,10 @@ import { Avatar } from '@mui/material'
 import type { FormEvent } from 'react'
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { EmailInput } from '@shared/components'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 import { CardCustom } from '@shared/components/CardCustom'
-import { EmailInput } from './common/EmailInput'
 import { useReset } from './useReset'
 
 export const Reset = (): JSX.Element => {

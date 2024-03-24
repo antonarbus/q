@@ -1,3 +1,6 @@
 export { FourZeroFour } from './FourZeroFour'
 export { KbdKey } from './KbdKey'
 export { RotatingLoaderIcon } from './RotatingLoaderIcon'
+export { EmailInput } from './EmailInput'
+export { PasswordInput } from './PasswordInput'
+export { ConfirmPasswordInput } from './ConfirmPasswordInput'
