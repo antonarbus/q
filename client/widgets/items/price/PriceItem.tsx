@@ -1,5 +1,5 @@
-import { ItemActions } from '@features/item_actions'
-import { onPriceItemResizeStop } from '@features/resize_item'
+import { ItemActions } from '@features/items/item_actions'
+import { onPriceItemResizeStop } from '@features/items/resize_item'
 import { Item } from '@entities/items'
 import { PriceHeader } from './price_header/PriceHeader'
 import { PriceMain } from './price_main/PriceMain'

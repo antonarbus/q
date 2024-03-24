@@ -4,7 +4,7 @@ import { Box, LinearProgress } from '@mui/material'
 import { type QuotationModelType } from '@server/db/models/quotationModel'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef } from 'react'
-import { useDisableLoadingOverlayWhenQuotationsAreFetched } from '@features/open_quotations'
+import { useDisableLoadingOverlayWhenQuotationsAreFetched } from '@features/quotation/open_quotations'
 import { useGetQuotationsQuery } from '@entities/quotation'
 import { addPlaceholderToFloatingFilters } from './addPlaceholderToFloatingFilters'
 import { AgGridStyles } from './AgGridStyles'
