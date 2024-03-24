@@ -3,7 +3,7 @@ import type { Dispatch, ReactNode, SetStateAction } from 'react'
 import { useRef } from 'react'
 import { useUpdateEffect } from 'react-use'
 import './successErrorIcons.css'
-import type { HttpStatusType } from '@widgets/credentials/types'
+import type { HttpStatusType } from '@widgets/auth/types'
 
 type Props = {
   [x: string]: unknown // all other ...restProps props
