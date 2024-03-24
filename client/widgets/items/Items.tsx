@@ -1,7 +1,7 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { AnimatePresence } from 'framer-motion'
 import { type ReactNode } from 'react'
-import { onItemDrag } from '@features/item_actions/drag_item'
+import { onItemDrag } from '@features/items/item_actions/drag_item'
 import { ItemProvider, itemsShapeEqualityFn, BoqItemProvider, itemType, reRenderItemsSignal } from '@entities/items'
 import { DraggableItemsContainer } from '@entities/items/ui/DraggableItemsContainer'
 import { BoqItem } from './boq/BoqItem'

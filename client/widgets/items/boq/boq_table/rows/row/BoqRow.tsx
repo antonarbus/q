@@ -1,5 +1,5 @@
 import { type FocusEvent } from 'react'
-import { BoqRowActions } from '@features/boq_row_actions'
+import { BoqRowActions } from '@features/items/boq_row_actions'
 import { BoqRowLayout } from './BoqRowLayout'
 import { DescriptionCell } from './cells/DescriptionCell'
 import { ItemPriceCell } from './cells/ItemPriceCell'
