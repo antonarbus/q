@@ -4,12 +4,12 @@ import { useState } from 'react'
 import { useNavigate, useLocation, useParams } from 'react-router-dom'
 import type { LoginApiRes } from 'server/api/loginRouter'
 import { apiUrl } from 'server/consts/apiUrl'
-import { navUpdate } from '@features/log_out'
 import { useGetQuotationQuery, useGetQuotationsQuery } from '@entities/quotation'
 import { userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 import { route } from '@shared/consts/route'
 import { nanoid } from '@shared/lib/nanoid'
+import { navSlice } from '@shared/nav'
 import { notify } from '@shared/ui/top_msg/notify'
 import { slideElement } from '@shared/utils/slideElement'
 
@@ -29,7 +29,7 @@ type Props = {
   cardElement: HTMLElement
 }
 
-// todo: type should come form the router
+// todo: type should come form the route from the backend
 type FuncRes = {
   loginUser: ({ e, email, password, cardElement }: Props) => Promise<void>
   httpStatus: HttpStatusType
@@ -83,7 +83,8 @@ export const useLogin = (): FuncRes => {
         setHttpStatus('success')
         accessTokenSignal.value = accessJwtToken
         dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
-        navUpdate.login()
+        dispatch(navSlice.actions.hideLogInMenuItem())
+        dispatch(navSlice.actions.showAccountMenuItem())
 
         setTimeout(() => {
           slideElement({
