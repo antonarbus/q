@@ -4,7 +4,12 @@ import { UserModel } from '../db/models/userModel'
 import { getNewAccessToken, getNewRefreshToken, thirtyDaysInSec } from '../services/jwt'
 import type { Next, Req, Res } from '../types'
 
-export type LoginApiRes = {
+export type ReqBody = {
+  email: string
+  password: string
+}
+
+export type ResBody = {
   status: string
   message: string
   accessJwtToken: string
@@ -16,14 +21,8 @@ export const loginRouter = express.Router()
 
 loginRouter.post('/', async (req: Req, res: Res, next: Next) => {
   try {
-    // get mail & password from body
-    type Body = {
-      email: string
-      password: string
-    }
-
-    const password = (req.body as Body).password
-    let email = (req.body as Body).email
+    const password = (req.body as ReqBody).password
+    let email = (req.body as ReqBody).email
     email = email.toLowerCase()
 
     // check email & password
@@ -44,7 +43,7 @@ loginRouter.post('/', async (req: Req, res: Res, next: Next) => {
     const isPasswordValid = await bcrypt.compare(password, passwordFromDB)
 
     if (!isPasswordValid) {
-      res.json({
+      res.status(401).json({
         status: 'error',
         message: 'invalid credentials',
         accessJwtToken: 'no access token',
