@@ -1,7 +1,7 @@
 import { gsap } from 'gsap'
 
 type Props = {
-  element: HTMLElement
+  element: HTMLElement | null
   cb?: () => void
   intoView?: boolean
 }
@@ -10,6 +10,8 @@ let isAnimationPrevented = false // needed to avoid second click on backdrop whi
 
 export const slideElement = ({ intoView, element, cb }: Props): void => {
   if (isAnimationPrevented) return
+  if (element === null) return
+
   isAnimationPrevented = true
   const screenHeight = window.window.innerHeight // todo: what?
   const elementHeight = element.offsetHeight
