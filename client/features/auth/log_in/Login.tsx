@@ -2,7 +2,6 @@ import { dispatch } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
 import { LoginRounded } from '@mui/icons-material'
 import { Avatar, Box } from '@mui/material'
-import { Message } from '@server/api/loginRouter'
 import type { FormEvent, MouseEvent } from 'react'
 import { useState, useRef } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
@@ -71,11 +70,11 @@ export const Login = (): JSX.Element => {
 
     accessTokenSignal.value = null
 
-    if (error.response?.data.message === Message.badPassword) {
+    if (error.response?.data.message === 'bad password') {
       notify({ msg: 'Invalid credentials', type: 'error', theme: 'light' })
     }
 
-    if (error.response?.data.message === Message.notActivated) {
+    if (error.response?.data.message === 'not activated') {
       notify({ msg: 'Account is not activated. Check mailbox.', type: 'error', theme: 'light' })
     }
   }, [isError])
