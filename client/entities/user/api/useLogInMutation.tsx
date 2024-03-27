@@ -1,10 +1,10 @@
 import { apiUrl } from '@server/consts/apiUrl'
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
-import axios from 'axios'
+import axios, { type AxiosError } from 'axios'
 import type { ResBody, ReqBody as Payload } from 'server/api/loginRouter'
 import { queryKey } from '@shared/consts/queryKey'
 
-export const useLogInMutation = (): UseMutationResult<ResBody, Error, Payload, unknown> => {
+export const useLogInMutation = (): UseMutationResult<ResBody, AxiosError<ResBody>, Payload> => {
   const query = useMutation({
     mutationKey: [queryKey.login],
     mutationFn: async ({ email, password }: Payload) => {

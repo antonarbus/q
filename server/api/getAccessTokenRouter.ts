@@ -1,7 +1,7 @@
 import express from 'express'
 import { UserModel } from '../db/models/userModel'
 import type { JwtPayloadExtended } from '../services/jwt'
-import { getNewAccessToken, verifyRefreshToken } from '../services/jwt'
+import { createAccessToken, verifyRefreshToken } from '../services/jwt'
 import type { Next, Req, ResWithBody } from '../types'
 
 export type ResBody = {
@@ -48,7 +48,7 @@ getAccessTokenRouter.get('/', async (req: Req, res: ResWithBody<ResBody>, next: 
       })
     }
 
-    const accessJwtToken = getNewAccessToken({ email, roles: user.roles })
+    const accessJwtToken = createAccessToken({ email, roles: user.roles })
 
     return res.status(200).json({
       message: `issued access token for email: ${email}`,
