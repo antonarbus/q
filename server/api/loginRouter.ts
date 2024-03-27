@@ -10,8 +10,16 @@ export type ReqBody = {
   password: string
 }
 
+export const enum Message {
+  noUserData = 'no user data',
+  noPassword = 'no password',
+  badPassword = 'bad password',
+  goodPassword = 'good password',
+  notActivated = 'not activated'
+}
+
 export type ResBody = {
-  message: 'no user data' | 'no password' | 'bad password' | 'not activated' | 'good password'
+  message: Message
   accessJwtToken?: string
   email?: string
   roles?: string[]
@@ -31,7 +39,7 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
     if (!user) {
       return res
         .status(httpStatus.badRequest_400)
-        .json({ message: 'no user data' })
+        .json({ message: Message.noUserData })
     }
 
     const passwordFromDB = user.password
@@ -39,7 +47,7 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
     if (!user.password) {
       return res
         .status(httpStatus.badRequest_400)
-        .json({ message: 'no password' })
+        .json({ message: Message.noPassword })
     }
 
     const isPasswordValid = await bcrypt.compare(password, passwordFromDB)
@@ -47,14 +55,14 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
     if (!isPasswordValid) {
       return res
         .status(httpStatus.forbidden_403)
-        .json({ message: 'bad password' })
+        .json({ message: Message.badPassword })
     }
 
     // todo: send email with activation link
     if (!user.isActivated) {
       return res
         .status(httpStatus.created_201)
-        .json({ message: 'not activated' })
+        .json({ message: Message.notActivated })
     }
 
     const accessJwtToken = createAccessToken({ email, roles: user.roles })
@@ -71,7 +79,7 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
 
     return res
       .status(httpStatus.success_200)
-      .json({ message: 'good password', accessJwtToken, email, roles: user.roles })
+      .json({ message: Message.goodPassword, accessJwtToken, email, roles: user.roles })
   } catch (error) {
     next(error)
   }
