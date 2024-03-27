@@ -9,12 +9,12 @@ export type JwtPayloadExtended = {
   roles: string[]
 }
 
-export const getNewAccessToken = (payload: JwtPayloadExtended): string =>
+export const createAccessToken = (payload: JwtPayloadExtended): string =>
   jwt.sign(payload, process.env.JWT_ACCESS_SECRET ?? 'some fake secret to suppress ts error', {
     expiresIn: fifteenMinInSec,
   })
 
-export const getNewRefreshToken = (payload: JwtPayloadExtended): string =>
+export const createRefreshToken = (payload: JwtPayloadExtended): string =>
   jwt.sign(payload, process.env.JWT_REFRESH_SECRET ?? 'some fake secret to suppress ts error', {
     expiresIn: thirtyDaysInSec,
   })

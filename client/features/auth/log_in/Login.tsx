@@ -20,64 +20,64 @@ import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
 
 export const Login = (): JSX.Element => {
+  const navigate = useNavigate()
+  const { id } = useParams()
   const inputRef = useRef<HTMLDivElement>(null)
   const cardRef = useRef<HTMLDivElement>(null)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isEmailOk, setIsEmailOk] = useState(false)
-  const navigate = useNavigate()
-  const { id } = useParams()
 
-  const { mutate: logIn, isPending, data, isSuccess, isError } = useLogInMutation()
-  console.log('🚀 ~ isError:', isError)
+  const { mutate: logIn, isPending, data, isSuccess, isError, error } = useLogInMutation()
   const { refetch: refetchQuotation } = useGetQuotationQuery()
   const { refetch: refetchQuotations } = useGetQuotationsQuery()
-
-  // useEffect(() => {
-  //   setIsButtonDisabled(!isEmailOk || password === '')
-  // }, [isEmailOk, password])
 
   useUpdateEffect(() => {
     if (!isSuccess) return
 
-    if (data.status === 'ok' && data.accessJwtToken) {
-      accessTokenSignal.value = data.accessJwtToken
-      dispatch(userSlice.actions.rememberLoggedUser({ email: data.email, roles: data.roles }))
-      dispatch(navSlice.actions.hideLogInMenuItem())
-      dispatch(navSlice.actions.showAccountMenuItem())
+    const { accessJwtToken, email, roles, message } = data
 
-      if (location.pathname.includes(route.quotations)) {
-        void refetchQuotations()
-      }
+    if (message !== 'good password') return
+    if (!accessJwtToken) return
+    if (!email) return
+    if (!roles) return
 
-      if (id) {
-        void refetchQuotation()
-      }
+    accessTokenSignal.value = accessJwtToken
+    dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
+    dispatch(navSlice.actions.hideLogInMenuItem())
+    dispatch(navSlice.actions.showAccountMenuItem())
 
-      setTimeout(() => {
-        slideElement({
-          element: cardRef.current,
-          cb: () => {
-            navigate('..', { replace: true, state: nanoid() })
-          },
-        })
-      }, 2000)
-
-      return
+    if (location.pathname.includes(route.quotations)) {
+      void refetchQuotations()
     }
 
-    if (data.status === 'error') {
-      accessTokenSignal.value = null
-
-      if (data.message === 'invalid credentials') {
-        notify({ msg: 'Invalid credentials', type: 'error', theme: 'light' })
-      }
-
-      if (data.message === 'account is not activated') {
-        notify({ msg: 'Account is not activated. Check mailbox.', type: 'error', theme: 'light' })
-      }
+    if (id) {
+      void refetchQuotation()
     }
+
+    setTimeout(() => {
+      slideElement({
+        element: cardRef.current,
+        cb: () => {
+          navigate('..', { replace: true, state: nanoid() })
+        },
+      })
+    }, 2500)
   }, [isSuccess])
+
+  useUpdateEffect(() => {
+    if (!isError) return
+
+    accessTokenSignal.value = null
+
+    if (error.response?.data.message === 'bad password') {
+      notify({ msg: 'Invalid credentials', type: 'error', theme: 'light' })
+    }
+
+    if (error.response?.data.message === 'not activated') {
+      notify({ msg: 'Account is not activated. Check mailbox.', type: 'error', theme: 'light' })
+    }
+  }, [isError])
 
   return (
     <BackdropWithSlidableContent
@@ -117,10 +117,13 @@ export const Login = (): JSX.Element => {
             setPassword={setPassword}
           />
           <ButtonCustom
-            children='LOG IN'
             disabled={!isEmailOk || password === '' || isPending}
             isPending={isPending}
-          />
+            isSuccess={isSuccess}
+            isError={isError}
+          >
+            LOG IN
+          </ButtonCustom>
           <Box
             sx={{
               display: 'flex',
@@ -141,7 +144,7 @@ export const Login = (): JSX.Element => {
                 })
               }}
             >
-              Reset?
+              Forgot?
             </Link>
             <Link
               to={`../${route.register}`}

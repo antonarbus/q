@@ -1,8 +1,8 @@
-import { httpStatus } from '@server/consts/httpStatus'
 import bcrypt from 'bcryptjs'
 import express from 'express'
+import { httpStatus } from '@shared/consts/httpStatus'
 import { UserModel } from '../db/models/userModel'
-import { getNewAccessToken, getNewRefreshToken, thirtyDaysInSec } from '../services/jwt'
+import { createAccessToken, createRefreshToken, thirtyDaysInSec } from '../services/jwt'
 import type { Next, ReqWithBody, ResWithBody } from '../types'
 
 export type ReqBody = {
@@ -11,11 +11,10 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  status: string
-  message: string
-  accessJwtToken: string
-  email: string
-  roles: string[]
+  message: 'no user data' | 'no password' | 'bad password' | 'not activated' | 'good password'
+  accessJwtToken?: string
+  email?: string
+  roles?: string[]
 }
 
 type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
@@ -31,71 +30,48 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
 
     if (!user) {
       return res
-        .status(httpStatus.unauthorized_401)
-        .json({ status: 'error', message: 'no user data' })
+        .status(httpStatus.badRequest_400)
+        .json({ message: 'no user data' })
     }
 
     const passwordFromDB = user.password
 
-    if (!passwordFromDB) {
+    if (!user.password) {
       return res
-        .status(httpStatus.unauthorized_401)
-        .json({ status: 'error', message: 'no password' })
+        .status(httpStatus.badRequest_400)
+        .json({ message: 'no password' })
     }
 
     const isPasswordValid = await bcrypt.compare(password, passwordFromDB)
 
     if (!isPasswordValid) {
       return res
-        .status(httpStatus.unauthorized_401)
-        .json({
-          status: 'error',
-          message: 'invalid credentials',
-          accessJwtToken: 'no access token',
-          email: 'no email',
-          roles: ['no role'],
-        })
+        .status(httpStatus.forbidden_403)
+        .json({ message: 'bad password' })
     }
 
-    // check if account is activated
+    // todo: send email with activation link
     if (!user.isActivated) {
-      // todo: send email with activation link
       return res
         .status(httpStatus.created_201)
-        .json({
-          status: 'error',
-          message: 'account is not activated',
-          accessJwtToken: 'no access token',
-          email: 'no email',
-          roles: ['no role'],
-        })
+        .json({ message: 'not activated' })
     }
 
-    // generate jwt tokens
-    const accessJwtToken = getNewAccessToken({ email, roles: user.roles })
-    const refreshJwtToken = getNewRefreshToken({ email, roles: user.roles })
+    const accessJwtToken = createAccessToken({ email, roles: user.roles })
+    const refreshJwtToken = createRefreshToken({ email, roles: user.roles })
 
-    // put refresh token in cookie
     res.cookie('refreshJwtToken', refreshJwtToken, {
       maxAge: thirtyDaysInSec * 1000,
       httpOnly: true,
     })
 
-    // put refresh token in db & update login date
     const filter = { email }
     const update = { refreshJwtToken }
     await UserModel.findOneAndUpdate(filter, update)
 
-    // return data to the client
     return res
       .status(httpStatus.success_200)
-      .json({
-        status: 'ok',
-        message: `user with email: ${email} logged in and tokens are refreshed`,
-        accessJwtToken,
-        email,
-        roles: user.roles,
-      })
+      .json({ message: 'good password', accessJwtToken, email, roles: user.roles })
   } catch (error) {
     next(error)
   }
