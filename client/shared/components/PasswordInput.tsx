@@ -1,28 +1,18 @@
 import { theme } from '@lib_instances/theme'
 import { Lock, Visibility, VisibilityOff } from '@mui/icons-material'
 import { IconButton, InputAdornment, TextField } from '@mui/material'
+import { type Signal } from '@preact/signals-react'
 import { useState } from 'react'
 
 type Props = {
-  password: string
-  setPassword: (value: string) => void
+  passwordSignal: Signal<string>
   onBlur?: () => void
   label?: string
   isLabelRed?: boolean
 }
 
-/**
- * Password input field with an eye
- * @param props props
- * @param props.password password string value state
- * @param props.setPassword password state setter
- * @param props.onBlur optional handler function, used in ConfirmPasswordInput to start comparing passwords only after focusing out
- * @param props.label label
- */
-
 export const PasswordInput = ({
-  password,
-  setPassword,
+  passwordSignal,
   onBlur,
   label,
   isLabelRed,
@@ -37,10 +27,10 @@ export const PasswordInput = ({
       type={showPassword ? 'text' : 'password'}
       autoComplete='current-password'
       placeholder='Password'
-      value={password}
+      value={passwordSignal.value}
       onBlur={onBlur}
       onChange={(e): void => {
-        setPassword(e.target.value)
+        passwordSignal.value = e.target.value
       }}
       InputProps={{
         startAdornment: (

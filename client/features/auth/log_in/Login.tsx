@@ -2,8 +2,9 @@ import { dispatch } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
 import { LoginRounded } from '@mui/icons-material'
 import { Avatar, Box } from '@mui/material'
+import { useSignal } from '@preact/signals-react'
 import type { FormEvent, MouseEvent } from 'react'
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetQuotationQuery, useGetQuotationsQuery } from '@entities/quotation'
@@ -24,9 +25,9 @@ export const Login = (): JSX.Element => {
   const { id } = useParams()
   const inputRef = useRef<HTMLDivElement>(null)
   const cardRef = useRef<HTMLDivElement>(null)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [isEmailOk, setIsEmailOk] = useState(false)
+  const emailSignal = useSignal('')
+  const passwordSignal = useSignal('')
+  const isEmailOkSignal = useSignal(false)
 
   const { mutate: logIn, isPending, data, isSuccess, isError, error } = useLogInMutation()
   const { refetch: refetchQuotation } = useGetQuotationQuery()
@@ -102,22 +103,22 @@ export const Login = (): JSX.Element => {
         <form
           onSubmit={(e: FormEvent): void => {
             e.preventDefault()
-            logIn({ email, password })
+            logIn({
+              email: emailSignal.value,
+              password: passwordSignal.value,
+            })
           }}
         >
           <EmailInput
             inputRef={inputRef}
-            email={email}
-            setEmail={setEmail}
-            isEmailOk={isEmailOk}
-            setIsEmailOk={setIsEmailOk}
+            emailSignal={emailSignal}
+            isEmailOkSignal={isEmailOkSignal}
           />
           <PasswordInput
-            password={password}
-            setPassword={setPassword}
+            passwordSignal={passwordSignal}
           />
           <ButtonCustom
-            disabled={!isEmailOk || password === '' || isPending}
+            disabled={!isEmailOkSignal.value || passwordSignal.value === '' || isPending}
             isPending={isPending}
             isSuccess={isSuccess}
             isError={isError}

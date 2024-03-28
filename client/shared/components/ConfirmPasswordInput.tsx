@@ -1,3 +1,4 @@
+import { useSignal } from '@preact/signals-react'
 import { useState } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { PasswordInput } from './PasswordInput'
@@ -8,32 +9,24 @@ type Props = {
   setIsConfirmPasswordOk: (value: boolean) => void
 }
 
-/**
- * Confirmation password input field, based on PasswordInput component
- * @param props props
- * @param props.originalPassword original password
- * @param props.isConfirmPasswordOk boolean state, need to pass it from parent because action button is disabled based on this state
- * @param props.setIsConfirmPasswordOk isConfirmPasswordOk state setter
- */
-
 export const ConfirmPasswordInput = ({
   originalPassword,
   isConfirmPasswordOk,
   setIsConfirmPasswordOk,
 }: Props): JSX.Element => {
-  const [confirmPassword, setConfirmPassword] = useState('')
+  const confirmPasswordSignal = useSignal('')
   const [didBlur, setDidBlur] = useState(false)
   const initLabel = 'Confirm password'
   const [label, setLabel] = useState(initLabel)
   const [isLabelRed, setIsLabelRed] = useState(false)
 
   useUpdateEffect(() => {
-    setIsConfirmPasswordOk(!!originalPassword && originalPassword === confirmPassword)
-  }, [originalPassword, confirmPassword])
+    setIsConfirmPasswordOk(!!originalPassword && originalPassword === confirmPasswordSignal.value)
+  }, [originalPassword, confirmPasswordSignal.value])
 
   useUpdateEffect(() => {
-    setIsLabelRed(didBlur && !!originalPassword && !!confirmPassword && !isConfirmPasswordOk)
-  }, [didBlur, originalPassword, confirmPassword, isConfirmPasswordOk])
+    setIsLabelRed(didBlur && !!originalPassword && !!confirmPasswordSignal.value && !isConfirmPasswordOk)
+  }, [didBlur, originalPassword, confirmPasswordSignal.value, isConfirmPasswordOk])
 
   useUpdateEffect(() => {
     if (isLabelRed) {
@@ -45,8 +38,7 @@ export const ConfirmPasswordInput = ({
 
   return (
     <PasswordInput
-      password={confirmPassword}
-      setPassword={setConfirmPassword}
+      passwordSignal={confirmPasswordSignal}
       label={label}
       isLabelRed={isLabelRed}
       onBlur={(): void => {
