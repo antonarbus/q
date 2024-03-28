@@ -1,26 +1,31 @@
 import { theme } from '@lib_instances/theme'
 import PasswordRoundedIcon from '@mui/icons-material/PasswordRounded'
-import { Avatar } from '@mui/material'
+import { Avatar, Box } from '@mui/material'
+import { useSignal } from '@preact/signals-react'
 import type { FormEvent } from 'react'
-import { useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useRef } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { EmailInput } from '@shared/components'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 import { CardCustom } from '@shared/components/CardCustom'
+import { route } from '@shared/consts/route'
+import { slideElement } from '@shared/utils/slideElement'
 import { useReset } from './useReset'
 
 export const Reset = (): JSX.Element => {
-  const navigate = useNavigate()
-  const [email, setEmail] = useState('')
+  const cardRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLDivElement>(null)
-  const { resetPassword, httpStatus, setHttpStatus } = useReset()
-  const [isEmailOk, setIsEmailOk] = useState(false)
+  const navigate = useNavigate()
+
+  const emailSignal = useSignal('')
+  const isEmailOkSignal = useSignal(false)
+
+  const { resetPassword } = useReset()
 
   return (
     <BackdropWithSlidableContent
       onSlideIn={(): void => {
-
         /* inputRef.current.focus() */
       }}
       onSlideOut={(): void => {
@@ -28,6 +33,7 @@ export const Reset = (): JSX.Element => {
       }}
     >
       <CardCustom
+        reference={cardRef}
         title='Reset password'
         logo={
           <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }}>
@@ -35,22 +41,41 @@ export const Reset = (): JSX.Element => {
           </Avatar>
         }
       >
-        <form onSubmit={async (e: FormEvent): Promise<void> => {
-          await resetPassword({ e, email })
-        }}>
+        <form
+          onSubmit={async (e: FormEvent): Promise<void> => {
+            await resetPassword({ e, email: emailSignal.value })
+          }}
+        >
           <EmailInput
-            email={email}
-            setEmail={setEmail}
-            isEmailOk={isEmailOk}
-            setIsEmailOk={setIsEmailOk}
             inputRef={inputRef}
+            emailSignal={emailSignal}
+            isEmailOkSignal={isEmailOkSignal}
           />
           <ButtonCustom
-            content='RESET'
-            disabled={!isEmailOk}
-            httpStatus={httpStatus}
-            setHttpStatus={setHttpStatus}
-          />
+            disabled={!isEmailOkSignal.value}
+          >
+            RESET
+          </ButtonCustom>
+          <Box
+            sx={{ textAlign: 'right', marginTop: '20px' }}
+          >
+            <Link
+              to={`../${route.login}`}
+              onClick={(e: MouseEvent): void => {
+                if (!cardRef.current) return
+                e.preventDefault()
+
+                slideElement({
+                  element: cardRef.current,
+                  cb: () => {
+                    navigate(`../${route.login}`)
+                  },
+                })
+              }}
+            >
+              Log in?
+            </Link>
+          </Box>
         </form>
       </CardCustom>
     </BackdropWithSlidableContent>

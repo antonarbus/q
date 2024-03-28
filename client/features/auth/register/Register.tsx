@@ -1,8 +1,9 @@
 import { theme } from '@lib_instances/theme'
 import { LockOutlined } from '@mui/icons-material'
-import { Avatar } from '@mui/material'
+import { Avatar, Box } from '@mui/material'
+import { useSignal } from '@preact/signals-react'
 import type { FormEvent, MouseEvent } from 'react'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ConfirmPasswordInput, EmailInput, PasswordInput } from '@shared/components'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
@@ -13,19 +14,21 @@ import { slideElement } from '@shared/utils/slideElement'
 import { useRegister } from './useRegister'
 
 export const Register = (): JSX.Element => {
-  const [email, setEmail] = useState('')
+  const navigate = useNavigate()
   const inputRef = useRef<HTMLDivElement>(null)
   const cardRef = useRef<HTMLDivElement>(null)
-  const [isEmailOk, setIsEmailOk] = useState(false)
-  const [password, setPassword] = useState('')
-  const [isConfirmPasswordOk, setIsConfirmPasswordOk] = useState(false)
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true)
-  const { registerUser, httpStatus, setHttpStatus } = useRegister()
-  const navigate = useNavigate()
+
+  const emailSignal = useSignal('')
+  const passwordSignal = useSignal('')
+  const isEmailOkSignal = useSignal(false)
+  const isConfirmPasswordOkSignal = useSignal(false)
+  const isButtonDisabledSignal = useSignal(false)
+
+  const { registerUser } = useRegister()
 
   useEffect(() => {
-    setIsButtonDisabled(!(isEmailOk && isConfirmPasswordOk))
-  }, [isEmailOk, isConfirmPasswordOk])
+    isButtonDisabledSignal.value = !(isEmailOkSignal.value && isConfirmPasswordOkSignal.value)
+  }, [isEmailOkSignal.value, isConfirmPasswordOkSignal.value])
 
   return (
     <BackdropWithSlidableContent
@@ -37,8 +40,8 @@ export const Register = (): JSX.Element => {
       }}
     >
       <CardCustom
-        title='Register'
         reference={cardRef}
+        title='Register'
         logo={
           <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }}>
             <LockOutlined />
@@ -47,35 +50,35 @@ export const Register = (): JSX.Element => {
       >
         <form
           onSubmit={async (e: FormEvent): Promise<void> => {
-            await registerUser({ e, email, password })
+            await registerUser({
+              e,
+              email: emailSignal.value,
+              password: passwordSignal.value,
+            })
           }}
         >
           <EmailInput
-            email={email}
-            setEmail={setEmail}
-            isEmailOk={isEmailOk}
-            setIsEmailOk={setIsEmailOk}
             inputRef={inputRef}
+            emailSignal={emailSignal}
+            isEmailOkSignal={isEmailOkSignal}
           />
           <PasswordInput
-            password={password}
-            setPassword={setPassword}
+            passwordSignal={passwordSignal}
           />
           <ConfirmPasswordInput
-            originalPassword={password}
-            isConfirmPasswordOk={isConfirmPasswordOk}
-            setIsConfirmPasswordOk={setIsConfirmPasswordOk}
+            originalPassword={passwordSignal.value}
+            isConfirmPasswordOkSignal={isConfirmPasswordOkSignal}
           />
           <ButtonCustom
-            content='REGISTER'
-            disabled={isButtonDisabled}
-            httpStatus={httpStatus}
-            setHttpStatus={setHttpStatus}
-          />
-          <div css={{ textAlign: 'right', marginTop: '20px' }}>
+            disabled={isButtonDisabledSignal.value}
+          >
+            REGISTER
+          </ButtonCustom>
+          <Box
+            sx={{ textAlign: 'right', marginTop: '20px' }}
+          >
             <Link
               to={`../${route.login}`}
-              children='Log in?'
               onClick={(e: MouseEvent): void => {
                 if (!cardRef.current) return
                 e.preventDefault()
@@ -87,8 +90,10 @@ export const Register = (): JSX.Element => {
                   },
                 })
               }}
-            />
-          </div>
+            >
+              Log in?
+            </Link>
+          </Box>
         </form>
       </CardCustom>
     </BackdropWithSlidableContent>
