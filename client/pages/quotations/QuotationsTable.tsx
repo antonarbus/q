@@ -36,6 +36,7 @@ export const QuotationsTable = (): JSX.Element => {
         columnDefs={columnDefs}
         suppressCellFocus
         enableCellTextSelection
+        reactiveCustomComponents={true}
         loadingOverlayComponent={LoadingTableOverlay}
         noRowsOverlayComponent={NoRowsTableOverlay}
         onGridReady={() => {
