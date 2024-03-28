@@ -73,11 +73,15 @@ export const Login = (): JSX.Element => {
 
     if (error.response?.data.message === 'bad password') {
       notify({ msg: 'Invalid credentials', type: 'error', theme: 'light' })
+      return
     }
 
     if (error.response?.data.message === 'not activated') {
       notify({ msg: 'Account is not activated. Check mailbox.', type: 'error', theme: 'light' })
+      return
     }
+
+    notify({ msg: 'Internal error', type: 'error', theme: 'light' })
   }, [isError])
 
   return (
