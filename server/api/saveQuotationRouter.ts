@@ -56,10 +56,12 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
     const isNew = document.createdAt?.toISOString() === document.updatedAt?.toISOString()
 
     if (document === null) {
-      return res.status(404).json({
-        message: 'not saved',
-        document: null,
-      })
+      return res
+        .status(404)
+        .json({
+          message: 'not saved',
+          document: null,
+        })
     }
 
     const filePath = `${email}/${id}/quotation-${document.version}.json`
