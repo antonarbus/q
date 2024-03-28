@@ -1,7 +1,7 @@
 import { theme } from '@lib_instances/theme'
 import { LockOutlined } from '@mui/icons-material'
 import { Avatar, Box } from '@mui/material'
-import { useSignal } from '@preact/signals-react'
+import { useSignal, useSignalEffect } from '@preact/signals-react'
 import type { FormEvent, MouseEvent } from 'react'
 import { useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
@@ -28,9 +28,9 @@ export const Register = (): JSX.Element => {
 
   const { mutate: register, isPending, data, isSuccess, isError, error } = useRegisterMutation()
 
-  useEffect(() => {
+  useSignalEffect(() => {
     isButtonDisabledSignal.value = !(isEmailOkSignal.value && isConfirmPasswordOkSignal.value)
-  }, [isEmailOkSignal.value, isConfirmPasswordOkSignal.value])
+  })
 
   useUpdateEffect(() => {
     if (!isSuccess) return
@@ -44,12 +44,12 @@ export const Register = (): JSX.Element => {
     if (!isError) return
 
     if (error.response?.data.message === 'already exists') {
-      notify({ msg: 'Already exists', type: 'error', theme: 'light' })
+      notify({ msg: 'Already exists', type: 'info', theme: 'light' })
       return
     }
 
     if (error.response?.data.message === 'validation error') {
-      notify({ msg: 'Validation error', type: 'error', theme: 'light' })
+      notify({ msg: 'Validation error', type: 'warn', theme: 'light' })
       return
     }
 
@@ -92,7 +92,7 @@ export const Register = (): JSX.Element => {
             passwordSignal={passwordSignal}
           />
           <ConfirmPasswordInput
-            originalPassword={passwordSignal.value}
+            originalPasswordSignal={passwordSignal}
             isConfirmPasswordOkSignal={isConfirmPasswordOkSignal}
           />
           <ButtonCustom

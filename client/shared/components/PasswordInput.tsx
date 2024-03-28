@@ -1,8 +1,7 @@
 import { theme } from '@lib_instances/theme'
 import { Lock, Visibility, VisibilityOff } from '@mui/icons-material'
 import { IconButton, InputAdornment, TextField } from '@mui/material'
-import { type Signal } from '@preact/signals-react'
-import { useState } from 'react'
+import { useSignal, type Signal } from '@preact/signals-react'
 
 type Props = {
   passwordSignal: Signal<string>
@@ -11,20 +10,15 @@ type Props = {
   isLabelRed?: boolean
 }
 
-export const PasswordInput = ({
-  passwordSignal,
-  onBlur,
-  label,
-  isLabelRed,
-}: Props): JSX.Element => {
-  const [showPassword, setShowPassword] = useState(false)
+export const PasswordInput = ({ passwordSignal, onBlur, label, isLabelRed }: Props): JSX.Element => {
+  const showPassword = useSignal(false)
 
   return (
     <TextField
       fullWidth
       name='password'
       label={label ?? 'Password'}
-      type={showPassword ? 'text' : 'password'}
+      type={showPassword.value ? 'text' : 'password'}
       autoComplete='current-password'
       placeholder='Password'
       value={passwordSignal.value}
@@ -43,10 +37,10 @@ export const PasswordInput = ({
             <IconButton
               edge='end'
               onClick={(): void => {
-                setShowPassword(!showPassword)
+                showPassword.value = !showPassword.value
               }}
             >
-              {showPassword ? <VisibilityOff /> : <Visibility />}
+              {showPassword.value ? <VisibilityOff /> : <Visibility />}
             </IconButton>
           </InputAdornment>
         ),

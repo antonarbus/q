@@ -1,16 +1,12 @@
 import { theme } from '@lib_instances/theme'
 import { Person } from '@mui/icons-material'
 import { InputAdornment, TextField } from '@mui/material'
-import { useSignal, type Signal } from '@preact/signals-react'
+import { useSignal, type Signal, useSignalEffect } from '@preact/signals-react'
 import mailcheck from 'mailcheck'
 import type { RefObject } from 'react'
-import { useState } from 'react'
-import { useUpdateEffect } from 'react-use'
 
-const isEmailPatternOk = (email: string): boolean =>
-  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-    email,
-  )
+const emailRegExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+const isEmailPatternOk = (email: string): boolean => emailRegExp.test(email)
 
 type Props = {
   emailSignal: Signal<string>
@@ -25,31 +21,25 @@ type Suggestion = {
 }
 
 export const EmailInput = ({ emailSignal, isEmailOkSignal, inputRef }: Props): JSX.Element => {
-  const [inputFocusedOutOnes, setInputFocusedOutOnes] = useState(false)
-
-  useUpdateEffect((): void => {
-    const isPatternOk = isEmailPatternOk(emailSignal.value)
-    isEmailOkSignal.value = isPatternOk
-  }, [emailSignal.value])
-
+  const emailSuggestionSignal = useSignal('')
   const initEmailLabel = 'Email'
   const emailLabelSignal = useSignal(initEmailLabel)
+  const inputFocusedOutOnesSignal = useSignal(false)
 
-  useUpdateEffect(() => {
-    const isMailPatternOk = inputFocusedOutOnes && emailSignal.value !== '' && !isEmailOkSignal.value
+  useSignalEffect(() => {
+    isEmailOkSignal.value = isEmailPatternOk(emailSignal.value)
+    const isMailPatternOk = inputFocusedOutOnesSignal.value && emailSignal.value !== '' && !isEmailOkSignal.value
     emailLabelSignal.value = isMailPatternOk ? 'Check email pattern' : initEmailLabel
-  }, [emailSignal.value, inputFocusedOutOnes, isEmailOkSignal.value])
+  })
 
-  const [emailSuggestion, setEmailSuggestion] = useState('')
-
-  const suggestEmail = (emailVal?: string): void => {
+  const suggestEmail = (email: string): void => {
     mailcheck.run({
-      email: emailVal ?? emailSignal.value,
+      email,
       suggested: (suggestion: Suggestion) => {
-        setEmailSuggestion(suggestion.full)
+        emailSuggestionSignal.value = suggestion.full
       },
       empty: () => {
-        setEmailSuggestion('')
+        emailSuggestionSignal.value = ''
       },
     })
   }
@@ -57,6 +47,7 @@ export const EmailInput = ({ emailSignal, isEmailOkSignal, inputRef }: Props): J
   return (
     <div css={{ position: 'relative' }}>
       <TextField
+        inputRef={inputRef}
         fullWidth
         id='email'
         type='email'
@@ -70,8 +61,8 @@ export const EmailInput = ({ emailSignal, isEmailOkSignal, inputRef }: Props): J
           emailSignal.value = e.target.value
         }}
         onBlur={(): void => {
-          setInputFocusedOutOnes(true)
-          suggestEmail()
+          inputFocusedOutOnesSignal.value = true
+          suggestEmail(emailSignal.value)
         }}
         InputProps={{
           startAdornment: (
@@ -86,9 +77,8 @@ export const EmailInput = ({ emailSignal, isEmailOkSignal, inputRef }: Props): J
           },
           mb: 2,
         }}
-        inputRef={inputRef}
       />
-      {!!emailSuggestion && (
+      {!!emailSuggestionSignal.value && (
         <div
           css={{
             position: 'absolute',
@@ -103,11 +93,11 @@ export const EmailInput = ({ emailSignal, isEmailOkSignal, inputRef }: Props): J
             style={{ textDecoration: 'underline' }}
             onClick={(e): void => {
               e.preventDefault()
-              emailSignal.value = emailSuggestion
-              suggestEmail(emailSuggestion)
+              emailSignal.value = emailSuggestionSignal.value
+              suggestEmail(emailSuggestionSignal.value)
             }}
           >
-            {emailSuggestion}
+            {emailSuggestionSignal.value}
           </a>
         </div>
       )}
