@@ -145,7 +145,7 @@ export const Login = (): JSX.Element => {
                 })
               }}
             >
-              Forgot?
+              Reset?
             </Link>
             <Link
               to={`../${route.register}`}
