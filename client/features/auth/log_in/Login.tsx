@@ -72,12 +72,12 @@ export const Login = (): JSX.Element => {
     accessTokenSignal.value = null
 
     if (error.response?.data.message === 'bad password') {
-      notify({ msg: 'Invalid credentials', type: 'error', theme: 'light' })
+      notify({ msg: 'Invalid credentials', type: 'warn', theme: 'light' })
       return
     }
 
     if (error.response?.data.message === 'not activated') {
-      notify({ msg: 'Account is not activated. Check mailbox.', type: 'error', theme: 'light' })
+      notify({ msg: 'Account is not activated. Check mailbox.', type: 'info', theme: 'light' })
       return
     }
 

@@ -1,33 +1,30 @@
-import { type Signal, useSignal } from '@preact/signals-react'
+import { type Signal, useSignal, useSignalEffect } from '@preact/signals-react'
 import { useUpdateEffect } from 'react-use'
 import { PasswordInput } from './PasswordInput'
 
 type Props = {
-  originalPassword: string
+  originalPasswordSignal: Signal<string>
   isConfirmPasswordOkSignal: Signal<boolean>
 }
 
-export const ConfirmPasswordInput = ({
-  originalPassword,
-  isConfirmPasswordOkSignal,
-}: Props): JSX.Element => {
+export const ConfirmPasswordInput = ({ originalPasswordSignal, isConfirmPasswordOkSignal }: Props): JSX.Element => {
   const confirmPasswordSignal = useSignal('')
   const didBlurSignal = useSignal(false)
   const initLabel = 'Confirm password'
   const labelSignal = useSignal(initLabel)
   const isLabelRedSignal = useSignal(false)
 
-  useUpdateEffect(() => {
-    isConfirmPasswordOkSignal.value = !!originalPassword && originalPassword === confirmPasswordSignal.value
-  }, [originalPassword, confirmPasswordSignal.value])
-
-  useUpdateEffect(() => {
-    isLabelRedSignal.value = didBlurSignal.value && !!originalPassword && !!confirmPasswordSignal.value && !isConfirmPasswordOkSignal.value
-  }, [didBlurSignal.value, originalPassword, confirmPasswordSignal.value, isConfirmPasswordOkSignal.value])
-
-  useUpdateEffect(() => {
+  useSignalEffect(() => {
+    isConfirmPasswordOkSignal.value = !!originalPasswordSignal.value && originalPasswordSignal.value === confirmPasswordSignal.value
+    isLabelRedSignal.value = didBlurSignal.value && !!originalPasswordSignal.value && !!confirmPasswordSignal.value && !isConfirmPasswordOkSignal.value
     labelSignal.value = isLabelRedSignal.value ? 'Passwords do not match' : initLabel
-  }, [isLabelRedSignal.value])
+  })
+
+  // useUpdateEffect(() => {
+  // }, [didBlurSignal.value, originalPasswordSignal.value, confirmPasswordSignal.value, isConfirmPasswordOkSignal.value])
+
+  // useUpdateEffect(() => {
+  // }, [isLabelRedSignal.value])
 
   return (
     <PasswordInput
