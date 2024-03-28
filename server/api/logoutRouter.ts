@@ -46,7 +46,7 @@ logoutRouter.get('/', async (req: Req, res: Res, next: Next) => {
       return
     }
 
-    user.refreshJwtToken = undefined
+    user.refreshJwtToken = ''
     await user.save()
 
     res.json({
