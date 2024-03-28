@@ -3,4 +3,5 @@ export const queryKey = {
   getQuotations: 'getQuotations',
   deleteQuotation: 'deleteQuotation',
   login: 'login',
+  register: 'register',
 } as const

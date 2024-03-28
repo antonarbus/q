@@ -1,9 +1,9 @@
 import { Box, Chip } from '@mui/material'
 import { signal } from '@preact/signals-react'
 
-export const totalRowsSignal = signal(0)
+export const displayedRowsCountSignal = signal(0)
 
-export const TotalRowsCount = (): JSX.Element => {
+export const DisplayedRowsCount = (): JSX.Element => {
   return (
     <Box
       sx={{
@@ -16,7 +16,7 @@ export const TotalRowsCount = (): JSX.Element => {
       Rows
       {' '}
       <Chip
-        label={totalRowsSignal}
+        label={displayedRowsCountSignal}
         size='small'
         sx={{
           color: 'grey',

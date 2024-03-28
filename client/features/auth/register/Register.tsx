@@ -5,13 +5,15 @@ import { useSignal } from '@preact/signals-react'
 import type { FormEvent, MouseEvent } from 'react'
 import { useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useUpdateEffect } from 'react-use'
+import { useRegisterMutation } from '@entities/user'
 import { ConfirmPasswordInput, EmailInput, PasswordInput } from '@shared/components'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 import { CardCustom } from '@shared/components/CardCustom'
 import { route } from '@shared/consts/route'
+import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
-import { useRegister } from './useRegister'
 
 export const Register = (): JSX.Element => {
   const navigate = useNavigate()
@@ -24,11 +26,35 @@ export const Register = (): JSX.Element => {
   const isConfirmPasswordOkSignal = useSignal(false)
   const isButtonDisabledSignal = useSignal(false)
 
-  const { registerUser } = useRegister()
+  const { mutate: register, isPending, data, isSuccess, isError, error } = useRegisterMutation()
 
   useEffect(() => {
     isButtonDisabledSignal.value = !(isEmailOkSignal.value && isConfirmPasswordOkSignal.value)
   }, [isEmailOkSignal.value, isConfirmPasswordOkSignal.value])
+
+  useUpdateEffect(() => {
+    if (!isSuccess) return
+
+    if (data.message === 'activation link sent') {
+      notify({ msg: 'Done! Check your mailbox.', theme: 'light' })
+    }
+  }, [isSuccess])
+
+  useUpdateEffect(() => {
+    if (!isError) return
+
+    if (error.response?.data.message === 'already exists') {
+      notify({ msg: 'Already exists', type: 'error', theme: 'light' })
+      return
+    }
+
+    if (error.response?.data.message === 'validation error') {
+      notify({ msg: 'Validation error', type: 'error', theme: 'light' })
+      return
+    }
+
+    notify({ msg: 'Internal error', type: 'error', theme: 'light' })
+  }, [isError])
 
   return (
     <BackdropWithSlidableContent
@@ -50,8 +76,8 @@ export const Register = (): JSX.Element => {
       >
         <form
           onSubmit={async (e: FormEvent): Promise<void> => {
-            await registerUser({
-              e,
+            e.preventDefault()
+            register({
               email: emailSignal.value,
               password: passwordSignal.value,
             })
@@ -71,6 +97,9 @@ export const Register = (): JSX.Element => {
           />
           <ButtonCustom
             disabled={isButtonDisabledSignal.value}
+            isPending={isPending}
+            isSuccess={isSuccess}
+            isError={isError}
           >
             REGISTER
           </ButtonCustom>
