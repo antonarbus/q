@@ -1,6 +1,7 @@
 import { theme } from '@lib_instances/theme'
 import { Person } from '@mui/icons-material'
 import { InputAdornment, TextField } from '@mui/material'
+import { useSignal, type Signal } from '@preact/signals-react'
 import mailcheck from 'mailcheck'
 import type { RefObject } from 'react'
 import { useState } from 'react'
@@ -12,10 +13,8 @@ const isEmailPatternOk = (email: string): boolean =>
   )
 
 type Props = {
-  email: string
-  setEmail: (value: string) => void
-  isEmailOk: boolean
-  setIsEmailOk: (value: boolean) => void
+  emailSignal: Signal<string>
+  isEmailOkSignal: Signal<boolean>
   inputRef?: RefObject<HTMLDivElement>
 }
 
@@ -25,60 +24,27 @@ type Suggestion = {
   full: string
 }
 
-/**
- * Email input field with pattern validation and email suggestion
- * @param props props
- * @param props.email email string value state
- * @param props.setEmail email state setter
- * @param props.isEmailOk  email pattern check state, may be needed to disable action button
- * @param props.setIsEmailOk state setter for email pattern check
- * @param props.inputRef reference to the input element, for ex. to put a focus on
- */
-
-export const EmailInput = ({
-  email,
-  setEmail,
-  isEmailOk,
-  setIsEmailOk,
-  inputRef,
-}: Props): JSX.Element => {
-  // input focused out ones (show validation msg only after first focus out)
+export const EmailInput = ({ emailSignal, isEmailOkSignal, inputRef }: Props): JSX.Element => {
   const [inputFocusedOutOnes, setInputFocusedOutOnes] = useState(false)
 
-  // is email pattern ok
-  useUpdateEffect(
-    function checkIfEmailPatternIsOk(): void {
-      const isPatternOk = isEmailPatternOk(email)
-      if (isPatternOk) {
-        setIsEmailOk(true)
-      } else {
-        setIsEmailOk(false)
-      }
-    },
-    [email],
-  )
+  useUpdateEffect((): void => {
+    const isPatternOk = isEmailPatternOk(emailSignal.value)
+    isEmailOkSignal.value = isPatternOk
+  }, [emailSignal.value])
 
-  // label msg
   const initEmailLabel = 'Email'
-  const [emailLabel, setEmailLabel] = useState(initEmailLabel)
-  useUpdateEffect(
-    function setLabelMsgBasedOnValidation() {
-      const isMailPatternOk = inputFocusedOutOnes && email !== '' && !isEmailOk
-      if (isMailPatternOk) {
-        setEmailLabel('Check email pattern')
-      } else {
-        setEmailLabel(initEmailLabel)
-      }
-    },
-    [email, inputFocusedOutOnes, isEmailOk],
-  )
+  const emailLabelSignal = useSignal(initEmailLabel)
 
-  // email suggestion
+  useUpdateEffect(() => {
+    const isMailPatternOk = inputFocusedOutOnes && emailSignal.value !== '' && !isEmailOkSignal.value
+    emailLabelSignal.value = isMailPatternOk ? 'Check email pattern' : initEmailLabel
+  }, [emailSignal.value, inputFocusedOutOnes, isEmailOkSignal.value])
+
   const [emailSuggestion, setEmailSuggestion] = useState('')
 
   const suggestEmail = (emailVal?: string): void => {
     mailcheck.run({
-      email: emailVal ?? email,
+      email: emailVal ?? emailSignal.value,
       suggested: (suggestion: Suggestion) => {
         setEmailSuggestion(suggestion.full)
       },
@@ -97,11 +63,11 @@ export const EmailInput = ({
         name='email'
         autoComplete='email'
         placeholder='Email'
-        label={emailLabel}
+        label={emailLabelSignal.value}
         autoFocus
-        value={email}
+        value={emailSignal.value}
         onChange={(e): void => {
-          setEmail(e.target.value)
+          emailSignal.value = e.target.value
         }}
         onBlur={(): void => {
           setInputFocusedOutOnes(true)
@@ -116,7 +82,7 @@ export const EmailInput = ({
         }}
         sx={{
           '& .MuiInputLabel-shrink': {
-            color: emailLabel !== initEmailLabel ? theme.colors.red : '',
+            color: emailLabelSignal.value !== initEmailLabel ? theme.colors.red : '',
           },
           mb: 2,
         }}
@@ -137,7 +103,7 @@ export const EmailInput = ({
             style={{ textDecoration: 'underline' }}
             onClick={(e): void => {
               e.preventDefault()
-              setEmail(emailSuggestion)
+              emailSignal.value = emailSuggestion
               suggestEmail(emailSuggestion)
             }}
           >
