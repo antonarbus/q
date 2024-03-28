@@ -1,48 +1,41 @@
-import { useSignal } from '@preact/signals-react'
-import { useState } from 'react'
+import { type Signal, useSignal } from '@preact/signals-react'
 import { useUpdateEffect } from 'react-use'
 import { PasswordInput } from './PasswordInput'
 
 type Props = {
   originalPassword: string
-  isConfirmPasswordOk: boolean
-  setIsConfirmPasswordOk: (value: boolean) => void
+  isConfirmPasswordOkSignal: Signal<boolean>
 }
 
 export const ConfirmPasswordInput = ({
   originalPassword,
-  isConfirmPasswordOk,
-  setIsConfirmPasswordOk,
+  isConfirmPasswordOkSignal,
 }: Props): JSX.Element => {
   const confirmPasswordSignal = useSignal('')
-  const [didBlur, setDidBlur] = useState(false)
+  const didBlurSignal = useSignal(false)
   const initLabel = 'Confirm password'
-  const [label, setLabel] = useState(initLabel)
-  const [isLabelRed, setIsLabelRed] = useState(false)
+  const labelSignal = useSignal(initLabel)
+  const isLabelRedSignal = useSignal(false)
 
   useUpdateEffect(() => {
-    setIsConfirmPasswordOk(!!originalPassword && originalPassword === confirmPasswordSignal.value)
+    isConfirmPasswordOkSignal.value = !!originalPassword && originalPassword === confirmPasswordSignal.value
   }, [originalPassword, confirmPasswordSignal.value])
 
   useUpdateEffect(() => {
-    setIsLabelRed(didBlur && !!originalPassword && !!confirmPasswordSignal.value && !isConfirmPasswordOk)
-  }, [didBlur, originalPassword, confirmPasswordSignal.value, isConfirmPasswordOk])
+    isLabelRedSignal.value = didBlurSignal.value && !!originalPassword && !!confirmPasswordSignal.value && !isConfirmPasswordOkSignal.value
+  }, [didBlurSignal.value, originalPassword, confirmPasswordSignal.value, isConfirmPasswordOkSignal.value])
 
   useUpdateEffect(() => {
-    if (isLabelRed) {
-      setLabel('Passwords do not match')
-    } else {
-      setLabel(initLabel)
-    }
-  }, [isLabelRed])
+    labelSignal.value = isLabelRedSignal.value ? 'Passwords do not match' : initLabel
+  }, [isLabelRedSignal.value])
 
   return (
     <PasswordInput
       passwordSignal={confirmPasswordSignal}
-      label={label}
-      isLabelRed={isLabelRed}
+      label={labelSignal.value}
+      isLabelRed={isLabelRedSignal.value}
       onBlur={(): void => {
-        setDidBlur(true)
+        didBlurSignal.value = true
       }}
     />
   )
