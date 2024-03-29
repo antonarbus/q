@@ -12,7 +12,7 @@ export const defaultItems: Item[] = [
     msg: '',
     isFroala: true,
     text: {
-      html: '<p style="text-align: center; font-size: 24px;">Cover letter</p><p><br></p><p style="text-align: center;"><span>Here goes any technical and commercial information.</span></p><p><br></p><p style="text-align: center;"><span>You may...</span></p><p><br></p><ul><li>write, select and <span style="color: rgb(226, 80, 65);">format</span> text</li><li>insert tables, drop <a href="911.pdf" rel="noopener noreferrer" target="_blank">files</a>, images, attach videos</li><li>copy, cut, delete, insert, sort, resize blocks and rows</li><li>calculate prices</li><li>auto save data in browser</li><li>store and share quotations</li><li>review, track and update offers</li><li>save and search though products portfolio</li><li>copy items from other quotations</li><li>all elements are editable and customizable</li></ul><p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>',
+      html: '<p style="text-align: center; font-size: 24px;">Cover letter</p><p><br></p><p style="text-align: center;"><span>Here goes any technical and commercial information.</span></p><p><br></p><p style="text-align: center;"><span>You may...</span></p><p><br></p><ul><li>write, select and <span style="color: rgb(226, 80, 65);">format</span> text</li><li>insert tables, drop <a href="911.pdf" rel="noopener noreferrer" target="_blank">files</a>, images, attach videos</li><li>copy, cut, delete, insert, sort, resize blocks and rows</li><li>calculate prices</li><li>auto save data in browser</li><li>store and share quotations</li><li>review, track and update offers</li><li>save and search though products portfolio</li><li>copy items from other quotations</li><li>all elements are editable and customizable</li></ul>',
       value: null,
     },
   },
@@ -26,15 +26,15 @@ export const defaultItems: Item[] = [
     boq: {
       header: {
         title: {
-          html: '<p><strong>Title 1</strong></p><p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>',
+          html: '<p><strong>Title 1</strong></p>',
           value: 0,
         },
         subtotalText: {
-          html: '<div>Subtotal</div><p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>',
+          html: '<div>Subtotal</div>',
           value: 0,
         },
         subTotalPrice: {
-          html: '<p><strong>140</strong></p><p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>',
+          html: '<p><strong>140</strong></p>',
           value: 140,
         },
       },
@@ -44,19 +44,19 @@ export const defaultItems: Item[] = [
           width: 30,
         },
         description: {
-          html: '<p><strong>Description</strong></p><p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>',
+          html: '<p><strong>Description</strong></p>',
           width: 240,
         },
         itemPrice: {
-          html: '<p><strong>Item price</strong></p><p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>',
+          html: '<p><strong>Item price</strong></p>',
           width: 100,
         },
         qty: {
-          html: '<p><strong>Qty</strong></p><p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>',
+          html: '<p><strong>Qty</strong></p>',
           width: 100,
         },
         price: {
-          html: '<p><strong>Price</strong></p><p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>',
+          html: '<p><strong>Price</strong></p>',
           width: 100,
         },
       },
@@ -67,7 +67,7 @@ export const defaultItems: Item[] = [
           height: 0,
           width: 0,
           description: {
-            html: '<p>item 1</p><p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>',
+            html: '<p>item 1</p>',
             value: 0,
             pin: {
               isPinned: false,
@@ -75,7 +75,7 @@ export const defaultItems: Item[] = [
             },
           },
           itemPrice: {
-            html: '<p>10 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p><p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>',
+            html: '<p>10 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
             value: 10,
             pin: {
               isPinned: false,
@@ -83,7 +83,7 @@ export const defaultItems: Item[] = [
             },
           },
           qty: {
-            html: '<p>1 <span style="font-size: 12px; color: rgb(61, 142, 185);">pcs</span></p><p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>',
+            html: '<p>1 <span style="font-size: 12px; color: rgb(61, 142, 185);">pcs</span></p>',
             value: 1,
             pin: {
               isPinned: true,
@@ -91,7 +91,7 @@ export const defaultItems: Item[] = [
             },
           },
           price: {
-            html: '<p>10 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p><p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>',
+            html: '<p>10 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
             value: 10,
             pin: {
               isPinned: false,
@@ -105,7 +105,7 @@ export const defaultItems: Item[] = [
           height: 0,
           width: 0,
           description: {
-            html: '<p>item 2</p><p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>',
+            html: '<p>item 2</p>',
             value: 0,
             pin: {
               isPinned: false,
@@ -113,7 +113,7 @@ export const defaultItems: Item[] = [
             },
           },
           itemPrice: {
-            html: '<p>20 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p><p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>',
+            html: '<p>20 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
             value: 20,
             pin: {
               isPinned: false,
@@ -121,7 +121,7 @@ export const defaultItems: Item[] = [
             },
           },
           qty: {
-            html: '<p>2 <span style="font-size: 12px; color: rgb(61, 142, 185);">pcs</span></p><p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>',
+            html: '<p>2 <span style="font-size: 12px; color: rgb(61, 142, 185);">pcs</span></p>',
             value: 2,
             pin: {
               isPinned: true,
@@ -129,7 +129,7 @@ export const defaultItems: Item[] = [
             },
           },
           price: {
-            html: '<p>40 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p><p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>',
+            html: '<p>40 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
             value: 40,
             pin: {
               isPinned: false,
@@ -143,7 +143,7 @@ export const defaultItems: Item[] = [
           height: 0,
           width: 0,
           description: {
-            html: '<p>service</p><p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>',
+            html: '<p>service</p>',
             value: 0,
             pin: {
               isPinned: false,
@@ -151,7 +151,7 @@ export const defaultItems: Item[] = [
             },
           },
           itemPrice: {
-            html: '<p>30 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p><p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>',
+            html: '<p>30 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
             value: 30,
             pin: {
               isPinned: false,
@@ -159,7 +159,7 @@ export const defaultItems: Item[] = [
             },
           },
           qty: {
-            html: '<p>3 <span style="font-size: 12px; color: rgb(61, 142, 185);">h</span></p><p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>',
+            html: '<p>3 <span style="font-size: 12px; color: rgb(61, 142, 185);">h</span></p>',
             value: 3,
             pin: {
               isPinned: true,
@@ -167,7 +167,7 @@ export const defaultItems: Item[] = [
             },
           },
           price: {
-            html: '<p>90 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p><p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>',
+            html: '<p>90 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
             value: 90,
             pin: {
               isPinned: false,
@@ -186,11 +186,11 @@ export const defaultItems: Item[] = [
     msg: '',
     isFroala: true,
     title: {
-      html: '<p style="text-align: center;"><strong>Total price</strong></p><p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>',
+      html: '<p style="text-align: center;"><strong>Total price</strong></p>',
       value: null,
     },
     price: {
-      html: '<p style="text-align: center;">280 <span>USD</span></p><p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>',
+      html: '<p style="text-align: center;">280 <span>USD</span></p>',
       value: 280,
     },
   },
@@ -220,7 +220,6 @@ export const defaultItems: Item[] = [
         <p><strong>Force Majeure.</strong> Neither party shall be liable for any failure to perform their obligations under this quotation due to unforeseen circumstances beyond their control.</p><p><br></p>
         <p><strong>Indemnity.</strong> The Buyer agrees to indemnify and hold Seller harmless from any claims arising from the use of the products or services provided under this quotation.</p><p><br></p>
         <p><strong>Notices.</strong> Any notices or communications regarding this quotation shall be sent to the addresses provided by each party.</p><p><br></p>
-        <p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>
       `,
       value: null,
     },
