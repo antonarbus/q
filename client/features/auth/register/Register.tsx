@@ -36,7 +36,7 @@ export const Register = (): JSX.Element => {
     if (!isSuccess) return
 
     if (data.message === 'activation link sent') {
-      notify({ msg: 'Done! Check your mailbox.', theme: 'light' })
+      notify({ msg: 'Check your mailbox.', theme: 'light' })
     }
   }, [isSuccess])
 

@@ -4,6 +4,7 @@ export const route = {
   logout: 'logout',
   register: 'register',
   reset: 'reset',
+  activate: 'activate',
   quotations: 'quotations',
   profile: 'profile',
   settings: 'settings',

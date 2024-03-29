@@ -3,32 +3,18 @@ import type { MouseEvent, ReactNode, RefObject } from 'react'
 
 type Props = {
   children?: ReactNode
-  content?: React.ReactNode
   cssProps?: React.CSSProperties
   reference?: RefObject<HTMLDivElement>
   title?: React.ReactNode
   logo?: React.ReactNode
 }
 
-/**
- * Just a white card
- * @param props object with parameters
- * @param props.children anything, goes inside tags
- * @param props.content anything, same, but goes as a prop
- * @param props.cssProps css object props to be added to the existing ones
- * @param props.title title
- * @param props.logo logo component
- */
-
-export const CardCustom = ({
-  children,
-  content,
-  cssProps,
-  reference,
-  title,
-  logo,
-}: Props): JSX.Element => (
+export const CardCustom = ({ children, cssProps, reference, title, logo }: Props): JSX.Element => (
   <div
+    ref={reference}
+    onMouseDown={(e: MouseEvent): void => {
+      e.stopPropagation()
+    }}
     css={{
       display: 'flex',
       flexDirection: 'column',
@@ -52,13 +38,15 @@ export const CardCustom = ({
       },
       ...cssProps,
     }}
-    onMouseDown={(e: MouseEvent): void => {
-      e.stopPropagation()
-    }}
-    ref={reference}
   >
-    {logo && <div css={{ alignSelf: 'center' }}>{logo}</div>}
-    {title && (
+    {Boolean(logo) && (
+      <div
+        css={{ alignSelf: 'center' }}
+      >
+        {logo}
+      </div>
+    )}
+    {Boolean(title) && (
       <Typography
         component='h1'
         variant='h5'
@@ -68,6 +56,5 @@ export const CardCustom = ({
       </Typography>
     )}
     {children}
-    {content}
   </div>
 )

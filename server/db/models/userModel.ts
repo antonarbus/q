@@ -6,7 +6,7 @@ export type UserModelType = {
   password: string
   roles: string[]
   isActivated: boolean
-  activationLink: string
+  activationKey: string
   resetLink: string
   refreshJwtToken: string
   createdAt: Date
@@ -35,7 +35,7 @@ const userSchema = new Schema<UserModelType>({
     type: Boolean,
     default: false,
   },
-  activationLink: String,
+  activationKey: String,
   resetLink: String,
   refreshJwtToken: String,
   createdAt: Date,
