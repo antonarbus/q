@@ -1,16 +1,18 @@
+import { dispatch } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
 import { Avatar, Box } from '@mui/material'
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { GrValidate } from 'react-icons/gr'
 import { PiSmileySadBold, PiSmileyBold } from 'react-icons/pi'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
-import { useActivateMutation } from '@entities/user'
+import { useActivateMutation, userSlice } from '@entities/user'
+import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 import { RotatingLoaderIcon } from '@shared/components'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
 import { CardCustom } from '@shared/components/CardCustom'
+import { navSlice } from '@shared/nav'
 import { notify } from '@shared/ui/top_msg'
-import { slideElement } from '@shared/utils/slideElement'
 
 export const Activation = (): JSX.Element => {
   const { activationKey } = useParams()
@@ -28,6 +30,17 @@ export const Activation = (): JSX.Element => {
 
     if (data.message === 'activated') {
       notify({ msg: 'Activated', theme: 'light' })
+
+      const { accessJwtToken, email, roles } = data
+
+      if (!accessJwtToken) return
+      if (!email) return
+      if (!roles) return
+
+      accessTokenSignal.value = accessJwtToken
+      dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
+      dispatch(navSlice.actions.hideLogInMenuItem())
+      dispatch(navSlice.actions.showAccountMenuItem())
     }
 
     if (data.message === 'already activated') {
