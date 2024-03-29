@@ -6740,6 +6740,7 @@ span.fr-img-caption.fr-view.fr-dii.fr-fir {
   translate: 0px 10px;
   border-radius: 10px;
   width: 240px;
+  z-index: 1px;
 }
 .fr-toolbar.fr-desktop.fr-inline.fr-above {
   translate: 0px -10px;
