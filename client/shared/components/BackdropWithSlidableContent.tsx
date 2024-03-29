@@ -1,27 +1,28 @@
-import { useLayoutEffect, useRef } from 'react'
+import { type ReactNode, useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 import { slideElement } from '../utils/slideElement'
 
 type Props = {
-  children?: React.ReactNode
+  children: ReactNode
   color?: string
   onSlideIn?: () => void
   onSlideOut?: () => void
+  shouldSlideIn?: boolean
+  clickAway?: boolean
 }
-
-/**
- * Dark transparent div with slidable into view content on mount and slidable out view on mouse click or esc button
- */
 
 export const BackdropWithSlidableContent = ({
   children,
   onSlideIn,
   onSlideOut,
+  shouldSlideIn = true,
+  clickAway = true,
 }: Props): JSX.Element => {
   const contentRef = useRef<HTMLDivElement>(null)
 
-  useLayoutEffect(() => {
+  useEffectOnce(() => {
     if (!contentRef.current) return
+    if (!shouldSlideIn) return
 
     slideElement({
       intoView: true,
@@ -30,9 +31,11 @@ export const BackdropWithSlidableContent = ({
         onSlideIn?.()
       },
     })
-  }, [])
+  })
 
   useEffectOnce(() => {
+    if (!clickAway) return
+
     const slideAway = (e: KeyboardEvent): void => {
       if (!contentRef.current) return
 
@@ -57,6 +60,8 @@ export const BackdropWithSlidableContent = ({
     <div
       onMouseDown={(): void => {
         if (!contentRef.current) return
+        if (!clickAway) return
+
         slideElement({
           element: contentRef.current,
           cb: () => {
@@ -66,10 +71,7 @@ export const BackdropWithSlidableContent = ({
       }}
       css={{
         position: 'fixed',
-        top: 0,
-        bottom: 0,
-        right: 0,
-        left: 0,
+        inset: 0,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -79,7 +81,11 @@ export const BackdropWithSlidableContent = ({
         zIndex: 1000,
       }}
     >
-      {Boolean(children) && <div ref={contentRef}>{children}</div>}
+      <div
+        ref={contentRef}
+      >
+        {children}
+      </div>
     </div>
   )
 }

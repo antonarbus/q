@@ -50,8 +50,8 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
         .json({ message: 'bad password' })
     }
 
-    // todo: send email with activation link
     if (!user.isActivated) {
+      // todo: send email with activation link
       return res
         .status(httpStatus.created_201)
         .json({ message: 'not activated' })

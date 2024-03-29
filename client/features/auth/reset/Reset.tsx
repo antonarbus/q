@@ -28,7 +28,7 @@ export const Reset = (): JSX.Element => {
     if (!isSuccess) return
 
     if (data.message === 'reset link sent') {
-      notify({ msg: 'Done! Check your mailbox.', theme: 'light' })
+      notify({ msg: 'Check your mailbox.', theme: 'light' })
     }
   }, [isSuccess])
 

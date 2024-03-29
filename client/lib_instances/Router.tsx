@@ -1,4 +1,5 @@
 import { type RouteObject, createBrowserRouter } from 'react-router-dom'
+import { Activation } from '@pages/auth/Activation'
 import { PersistentAuth } from '@pages/auth/PersistentAuth'
 import { RequireAuth } from '@pages/auth/RequireAuth'
 import { Unauthorized } from '@pages/auth/Unauthorized'
@@ -28,6 +29,11 @@ const authRoutes: RouteObject[] = [
   {
     path: route.reset,
     element: <Reset />,
+  },
+  {
+    path: `${route.activate}/:activationKey`,
+    caseSensitive: true,
+    element: <Activation />,
   },
 ]
 
