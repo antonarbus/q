@@ -7,4 +7,4 @@ export const className = {
   actionsContainer: 'actions-container',
   boqRow: 'boq-row',
   pin: 'pin',
-}
+} as const
