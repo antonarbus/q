@@ -10,10 +10,7 @@ type Props = Context & {
 
 const ItemContext = createContext<Context | null>(null)
 
-export const ItemProvider = ({
-  children,
-  itemIndex,
-}: Props): JSX.Element => {
+export const ItemProvider = ({ children, itemIndex }: Props): JSX.Element => {
   return (
     <ItemContext.Provider value={{ itemIndex }}>
       {children}
