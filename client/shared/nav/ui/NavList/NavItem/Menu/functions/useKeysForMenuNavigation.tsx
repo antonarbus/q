@@ -104,7 +104,7 @@ export const useKeysForMenuNavigation = (): void => {
       }
       // search in items below hovered item
       const index = currentMenuItemsNotHidden.findIndex((menuItem, i) => {
-        const isiKeySameAsFirstItemLetter = menuItem.name && menuItem.name.toLowerCase().startsWith(e.key)
+        const isiKeySameAsFirstItemLetter = menuItem.name.toLowerCase().startsWith(e.key)
         if (!isiKeySameAsFirstItemLetter) return false
         if (i + 2 > hoveredMenuItemIndex) return true
         return false
@@ -115,7 +115,7 @@ export const useKeysForMenuNavigation = (): void => {
       // if no found below hovered item, do it again from the top
       if (index === -1) {
         const newIndex = currentMenuItemsNotHidden.findIndex((menuItem) => {
-          const isiKeySameAsFirstItemLetter = menuItem.name && menuItem.name.toLowerCase().startsWith(e.key)
+          const isiKeySameAsFirstItemLetter = menuItem.name.toLowerCase().startsWith(e.key)
           return isiKeySameAsFirstItemLetter
         })
         if (newIndex > -1) {

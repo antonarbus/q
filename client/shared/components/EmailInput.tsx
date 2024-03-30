@@ -12,6 +12,7 @@ type Props = {
   emailSignal: Signal<string>
   isEmailOkSignal: Signal<boolean>
   inputRef?: RefObject<HTMLDivElement>
+  disabled?: boolean
 }
 
 type Suggestion = {
@@ -20,7 +21,7 @@ type Suggestion = {
   full: string
 }
 
-export const EmailInput = ({ emailSignal, isEmailOkSignal, inputRef }: Props): JSX.Element => {
+export const EmailInput = ({ emailSignal, isEmailOkSignal, inputRef, disabled }: Props): JSX.Element => {
   const emailSuggestionSignal = useSignal('')
   const initEmailLabel = 'Email'
   const emailLabelSignal = useSignal(initEmailLabel)
@@ -48,6 +49,7 @@ export const EmailInput = ({ emailSignal, isEmailOkSignal, inputRef }: Props): J
     <div css={{ position: 'relative' }}>
       <TextField
         inputRef={inputRef}
+        disabled={disabled}
         fullWidth
         id='email'
         type='email'

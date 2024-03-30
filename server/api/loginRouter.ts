@@ -65,13 +65,20 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
       httpOnly: true,
     })
 
-    const filter = { email }
-    const update = { refreshJwtToken }
-    await UserModel.findOneAndUpdate(filter, update)
+    const document = await UserModel.findOneAndUpdate(
+      { email },
+      { refreshJwtToken },
+      { new: true },
+    )
 
     return res
       .status(httpStatus.success_200)
-      .json({ message: 'good password', accessJwtToken, email, roles: user.roles })
+      .json({
+        message: 'good password',
+        accessJwtToken,
+        email: document?.email,
+        roles: document?.roles,
+      })
   } catch (error) {
     next(error)
   }

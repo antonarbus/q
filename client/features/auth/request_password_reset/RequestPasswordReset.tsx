@@ -6,7 +6,7 @@ import type { FormEvent, MouseEvent } from 'react'
 import { useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { useResetMutation } from '@entities/user'
+import { useRequestPasswordResetMutation } from '@entities/user'
 import { EmailInput } from '@shared/components'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
@@ -15,20 +15,29 @@ import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
 
-export const Reset = (): JSX.Element => {
+export const RequestPasswordReset = (): JSX.Element => {
   const cardRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
   const emailSignal = useSignal('')
   const isEmailOkSignal = useSignal(false)
 
-  const { mutate: reset, isPending, data, isSuccess, isError, error } = useResetMutation()
+  const { mutate: requestPasswordReset, isPending, data, isSuccess, isError, error } = useRequestPasswordResetMutation()
 
   useUpdateEffect(() => {
     if (!isSuccess) return
 
     if (data.message === 'reset link sent') {
       notify({ msg: 'Check your mailbox.', theme: 'light' })
+
+      setTimeout(() => {
+        slideElement({
+          element: cardRef.current,
+          cb: () => {
+            navigate('..')
+          },
+        })
+      }, 2500)
     }
   }, [isSuccess])
 
@@ -69,7 +78,7 @@ export const Reset = (): JSX.Element => {
         <form
           onSubmit={async (e: FormEvent): Promise<void> => {
             e.preventDefault()
-            reset({ email: emailSignal.value })
+            requestPasswordReset({ email: emailSignal.value })
           }}
         >
           <EmailInput
