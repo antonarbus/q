@@ -20,9 +20,9 @@ type Props = {
   onItemResizeStop?: OnItemResizeStop
 }
 
-type SortableItem = SortableElementProps & Props
+type SortableItem = ComponentClass<SortableElementProps & Props>
 
-export const ItemSortAndAnimate: ComponentClass<SortableItem> = SortableElement(({
+export const ItemSortAndAnimate: SortableItem = SortableElement(({
   children,
   itemHeight,
   itemId,

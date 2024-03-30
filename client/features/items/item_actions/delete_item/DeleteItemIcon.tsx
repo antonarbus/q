@@ -2,10 +2,11 @@ import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
 import { gsap } from 'gsap'
-import { useRef } from 'react'
+import { type MouseEvent, useRef } from 'react'
 import { RxCross2 } from 'react-icons/rx'
 import { copySlice } from '@entities/copy'
 import { isItemsFroalaSignal, itemsSlice, selectIsLastItem, useItem } from '@entities/items'
+import { className } from '@shared/consts/className'
 import { navSlice } from '@shared/nav'
 
 export const DeleteItemIcon = (): EmotionJSX.Element => {
@@ -24,7 +25,7 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
         cursor: disabled ? 'default' : 'pointer',
       }}
       tabIndex={-1}
-      onClick={(): void => {
+      onClick={(e: MouseEvent): void => {
         gsap.to(ref.current, { duration: 0.2, scale: 0.9 })
 
         if (disabled) return
@@ -32,6 +33,17 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
         const itemToDelete = getState().items[itemIndex]
 
         if (!itemToDelete) return
+
+        const clickedIconElement = e.target
+        if (!(clickedIconElement instanceof Element)) return
+        const itemElement = clickedIconElement.closest(`.${className.item}`)
+        if (!(itemElement instanceof Element)) return
+        const paperElement = itemElement.querySelector(`.${className.paper}`)
+        if (!(paperElement instanceof HTMLElement)) return
+
+        // set max-width to avoid unexplainable element stretching
+        // use getElementById() coz some ids may start from a number and querySelector() does not like it
+        paperElement.style.maxWidth = paperElement.style.width
 
         isItemsFroalaSignal.value = false
         dispatch(itemsSlice.actions.deleteItemReducer({ itemId: itemToDelete.id }))
