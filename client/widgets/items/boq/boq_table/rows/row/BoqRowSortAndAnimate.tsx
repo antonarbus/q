@@ -35,7 +35,7 @@ export const BoqRowSortAndAnimate: SortableItem = SortableElement(({ children }:
         overflow: 'hidden',
       }}
       transition={{
-        duration: theme.item.animationDuration + 5,
+        duration: theme.item.animationDuration,
       }}
     >
       {children}
