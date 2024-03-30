@@ -39,7 +39,11 @@ export const CutItemIcon = (): JSX.Element => {
         const itemElement = clickedIconElement.closest(`.${className.item}`)
         if (!(itemElement instanceof Element)) return
         const paperElement = itemElement.querySelector(`.${className.paper}`)
-        if (!(paperElement instanceof Element)) return
+        if (!(paperElement instanceof HTMLElement)) return
+
+        // set max-width to avoid unexplainable element stretching
+        // use getElementById() coz some ids may start from a number and querySelector() does not like it
+        paperElement.style.maxWidth = paperElement.style.width
 
         const html = paperElement.innerHTML
         const cleanedHtml = cleanHtml(html)
