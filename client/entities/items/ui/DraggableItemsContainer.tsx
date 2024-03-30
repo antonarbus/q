@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import type { ReactNode } from 'react'
+import type { ComponentClass, ReactNode } from 'react'
 import type { SortableContainerProps } from 'react-sortable-hoc'
 import { SortableContainer } from 'react-sortable-hoc'
 import { className } from '@shared/consts/className'
@@ -10,7 +10,9 @@ type Props = {
   children: ReactNode
 }
 
-export const DraggableItemsContainer: React.ComponentClass<SortableContainerProps & Props> =
+type SortableBox = ComponentClass<SortableContainerProps & Props>
+
+export const DraggableItemsContainer: SortableBox =
   SortableContainer(({ children }: Props) => (
     <motion.div
       className={className.items}
