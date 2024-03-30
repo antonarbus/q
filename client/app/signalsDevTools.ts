@@ -15,6 +15,6 @@ function signalsOn(): void {
   effect(() => { console.log('🚦 quotationSignal', quotationSignal.value) })
 }
 
-signalsOn()
+// signalsOn()
 
 window.signalsOn = signalsOn

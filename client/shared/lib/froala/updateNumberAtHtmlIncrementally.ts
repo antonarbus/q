@@ -51,13 +51,15 @@ export const updateNumberAtHtmlIncrementally = async ({
     })
   }
 
-  await incrementValues()
+  setTimeout(async() => {
+    await incrementValues()
 
-  const finalHtml = getStringWithNewFormattedNumber({
-    string: html,
-    oldNumber,
-    newNumber,
+    const finalHtml = getStringWithNewFormattedNumber({
+      string: html,
+      oldNumber,
+      newNumber,
+    })
+
+    editor.html.set(finalHtml)
   })
-
-  editor.html.set(finalHtml)
 }
