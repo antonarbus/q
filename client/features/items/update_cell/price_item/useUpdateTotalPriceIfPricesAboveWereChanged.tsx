@@ -33,11 +33,14 @@ export const useUpdateTotalPriceIfPricesAboveWereChanged = ({
 
     dispatch(itemsSlice.actions.updatePriceReducer({ itemIndex, html: updatedHtml, value: price }))
 
+    console.log(666)
+    // setTimeout(() => {
     void updateNumberAtHtmlIncrementally({
       oldNumber: priceItem.price.value,
       newNumber: price,
       editor: editorRef.current,
       html: priceItem.price.html,
     })
+    // }, 0)
   }, [price])
 }
