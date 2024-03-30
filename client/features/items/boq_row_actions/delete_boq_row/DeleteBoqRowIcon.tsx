@@ -43,7 +43,7 @@ export const DeleteBoqRowIcon = (): JSX.Element => {
         if (!isCopyContainer) {
           setTimeout(() => {
             dispatch(itemsSlice.actions.enableFroalaReducer({ itemIndex }))
-          }, 1000 * theme.item.animationDuration)
+          }, 1000 * theme.item.animationDuration + 500)
         }
       }}
       onMouseOver={(): void => {

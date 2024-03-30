@@ -8,11 +8,9 @@ type Props = {
   children: ReactNode
 }
 
-type SortableItem = SortableElementProps & Props
+type SortableItem = ComponentClass<SortableElementProps & Props>
 
-export const BoqRowSortAndAnimation: ComponentClass<SortableItem> = SortableElement(({
-  children,
-}: Props) => {
+export const BoqRowSortAndAnimate: SortableItem = SortableElement(({ children }: Props) => {
   return (
     <motion.div
       initial={{
@@ -37,7 +35,7 @@ export const BoqRowSortAndAnimation: ComponentClass<SortableItem> = SortableElem
         overflow: 'hidden',
       }}
       transition={{
-        duration: theme.item.animationDuration,
+        duration: theme.item.animationDuration + 5,
       }}
     >
       {children}

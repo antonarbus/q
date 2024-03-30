@@ -7,7 +7,7 @@ import { nanoid } from '@shared/lib/nanoid'
 import { DraggableBoqRowsContainer } from './DraggableBoqRowsContainer'
 import { BoqPasteRowTextOverlay } from './row/BoqPasteRowTextOverlay'
 import { BoqRow } from './row/BoqRow'
-import { BoqRowSortAndAnimation } from './row/BoqRowSortAndAnimation'
+import { BoqRowSortAndAnimate } from './row/BoqRowSortAndAnimate'
 
 export const BoqRows = (): JSX.Element => {
   const { itemIndex } = useItem()
@@ -34,7 +34,7 @@ export const BoqRows = (): JSX.Element => {
                 rowId={boqRow.id}
                 key={boqRow.id}
               >
-                <BoqRowSortAndAnimation
+                <BoqRowSortAndAnimate
                   index={rowIndex} // 'index' is internal prop consumed by SortableElement HOC
                   disabled={isBoqRowSortDisabled}
                 >
@@ -43,12 +43,16 @@ export const BoqRows = (): JSX.Element => {
                       hideBoqRowPinsOnRowBlur({ e, itemIndex, rowIndex })
                     }}
                   />
-                </BoqRowSortAndAnimation>
+                </BoqRowSortAndAnimate>
               </RowProvider>
             )
           }
 
-          return <BoqPasteRowTextOverlay key={nanoid(3)} />
+          if (boqRow.type === boqRowType.paste) {
+            return <BoqPasteRowTextOverlay key={nanoid(3)} />
+          }
+
+          return null
         })}
       </AnimatePresence>
     </DraggableBoqRowsContainer >
