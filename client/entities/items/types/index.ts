@@ -6,7 +6,6 @@ type Common = {
   id: string
   width: number
   height: number
-  msg: string
   isFroala: boolean
 }
 

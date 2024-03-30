@@ -5,7 +5,7 @@ import { gsap } from 'gsap'
 import { useRef } from 'react'
 import { RxCross2 } from 'react-icons/rx'
 import { copySlice } from '@entities/copy'
-import { itemsSlice, selectIsLastItem, useItem } from '@entities/items'
+import { isItemsFroalaSignal, itemsSlice, selectIsLastItem, useItem } from '@entities/items'
 import { navSlice } from '@shared/nav'
 
 export const DeleteItemIcon = (): EmotionJSX.Element => {
@@ -30,8 +30,10 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
         if (disabled) return
 
         const itemToDelete = getState().items[itemIndex]
+
         if (!itemToDelete) return
 
+        isItemsFroalaSignal.value = false
         dispatch(itemsSlice.actions.deleteItemReducer({ itemId: itemToDelete.id }))
         dispatch(copySlice.actions.forbidAllActions())
 
@@ -43,8 +45,9 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
 
         if (!isCopyContainer) {
           setTimeout(() => {
+            isItemsFroalaSignal.value = true
             dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
-          }, 1000 * theme.item.animationDuration)
+          }, 1000 * theme.item.animationDuration + 500)
         }
       }}
       onMouseOver={(): void => {

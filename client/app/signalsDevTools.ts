@@ -9,12 +9,12 @@ declare const window: Window & typeof globalThis & {
 }
 
 function signalsOn(): void {
-  effect(() => { console.log('totalRowsSignal', displayedRowsCountSignal.value) })
-  effect(() => { console.log('isItemsFroalaSignal', isItemsFroalaSignal.value) })
-  effect(() => { console.log('reRenderItemsSignal', reRenderItemsSignal.value) })
-  effect(() => { console.log('quotationSignal', quotationSignal.value) })
+  effect(() => { console.log('🚦 totalRowsSignal', displayedRowsCountSignal.value) })
+  effect(() => { console.trace('🚦 isItemsFroalaSignal', isItemsFroalaSignal.value) })
+  effect(() => { console.log('🚦 reRenderItemsSignal', reRenderItemsSignal.value) })
+  effect(() => { console.log('🚦 quotationSignal', quotationSignal.value) })
 }
 
-// signalsOn()
+signalsOn()
 
 window.signalsOn = signalsOn
