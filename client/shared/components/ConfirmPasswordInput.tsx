@@ -1,5 +1,4 @@
 import { type Signal, useSignal, useSignalEffect } from '@preact/signals-react'
-import { useUpdateEffect } from 'react-use'
 import { PasswordInput } from './PasswordInput'
 
 type Props = {

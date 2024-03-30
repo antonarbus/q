@@ -13,7 +13,8 @@ import { hiRouter } from './api/hiRouter'
 import { loginRouter } from './api/loginRouter'
 import { logoutRouter } from './api/logoutRouter'
 import { registerRouter } from './api/registerRouter'
-import { resetRouter } from './api/resetRouter'
+import { requestPasswordResetRouter } from './api/requestPasswordResetRouter'
+import { resetPasswordRouter } from './api/resetPasswordRouter'
 import { saveQuotationRouter } from './api/saveQuotationRouter'
 import { setBucketCors } from './api/setBucketCors'
 import { testRouter } from './api/testRouter'
@@ -40,7 +41,8 @@ app.get(apiUrl.api, (_req: Req, res: Res) => res.json({ message: '/api' }))
 app.use(apiUrl.hi, hiRouter)
 app.use(apiUrl.test, testRouter)
 app.use(apiUrl.register, registerRouter)
-app.use(apiUrl.reset, resetRouter)
+app.use(apiUrl.resetPassword, resetPasswordRouter)
+app.use(apiUrl.requestPasswordReset, requestPasswordResetRouter)
 app.use(apiUrl.login, loginRouter)
 app.use(apiUrl.logout, logoutRouter)
 app.use(apiUrl.activate, activateRouter)

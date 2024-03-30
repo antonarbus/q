@@ -5,5 +5,6 @@ export const queryKey = {
   login: 'login',
   activate: 'activate',
   register: 'register',
-  reset: 'reset',
+  requestPasswordReset: 'requestPasswordReset',
+  resetPassword: 'resetPassword',
 } as const

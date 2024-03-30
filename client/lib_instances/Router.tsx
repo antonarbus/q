@@ -11,7 +11,8 @@ import { Copy } from '@widgets/copy'
 import { Nav } from '@widgets/nav'
 import { Login } from '@features/auth/log_in'
 import { Register } from '@features/auth/register'
-import { Reset } from '@features/auth/reset'
+import { RequestPasswordReset } from '@features/auth/request_password_reset'
+import { ResetPassword } from '@features/auth/reset_password'
 import { route } from '@shared/consts/route'
 import { Main } from '@shared/layouts'
 import { LoadingDotsOverlay } from '@shared/loading_dots_overlay'
@@ -27,13 +28,18 @@ const authRoutes: RouteObject[] = [
     element: <Register />,
   },
   {
-    path: route.reset,
-    element: <Reset />,
+    path: route.requestPasswordReset,
+    element: <RequestPasswordReset />,
   },
   {
     path: `${route.activate}/:activationKey`,
     caseSensitive: true,
     element: <Activation />,
+  },
+  {
+    path: `${route.resetPassword}/:email/:resetPasswordKey`,
+    caseSensitive: true,
+    element: <ResetPassword />,
   },
 ]
 
