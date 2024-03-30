@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import type { MouseEvent } from 'react'
 import { MdCopyAll } from 'react-icons/md'
 import { copySlice } from '@entities/copy'
-import { getBoqRowFromStore, itemsSlice, useItem, useRow } from '@entities/items'
+import { getBoqRowFromStore, isItemsFroalaSignal, itemsSlice, useItem, useRow } from '@entities/items'
 import { className } from '@shared/consts/className'
 import { cleanHtml } from '@shared/utils/itemsUtils'
 
@@ -33,6 +33,8 @@ export const CopyBoqRowIcon = (): JSX.Element => {
 
         const boqRowElement = clickedIconElement.closest(`.${className.boqRow}`)
         if (!boqRowElement) return
+
+        isItemsFroalaSignal.value = false
 
         dispatch(itemsSlice.actions.updateBoqRowHeightAndWidthReducer({
           itemIndex,

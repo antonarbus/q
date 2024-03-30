@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import type { MouseEvent } from 'react'
 import { TbCut } from 'react-icons/tb'
 import { copySlice } from '@entities/copy'
-import { getBoqRowFromStore, itemsSlice, selectIsLastBoqRow, useItem, useRow } from '@entities/items'
+import { getBoqRowFromStore, isItemsFroalaSignal, itemsSlice, selectIsLastBoqRow, useItem, useRow } from '@entities/items'
 import { className } from '@shared/consts/className'
 import { navSlice } from '@shared/nav'
 import { cleanHtml } from '@shared/utils/itemsUtils'
@@ -40,6 +40,8 @@ export const CutBoqRowIcon = (): JSX.Element => {
         const boqRowElement = clickedIconElement.closest(`.${className.boqRow}`)
 
         if (!boqRowElement) return
+
+        isItemsFroalaSignal.value = false
 
         dispatch(itemsSlice.actions.updateBoqRowHeightAndWidthReducer({
           itemIndex,

@@ -2,7 +2,7 @@ import { dispatch, getState } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
 import { useEffectOnce, useUnmount } from 'react-use'
 import { copySlice } from '@entities/copy'
-import { itemsSlice } from '@entities/items'
+import { isItemsFroalaSignal, itemsSlice } from '@entities/items'
 import { nanoid } from '@shared/lib/nanoid'
 import { navSlice } from '@shared/nav'
 
@@ -54,5 +54,10 @@ function pasteItemOnClick(): void {
   if (itemsInCopyContainer.length === 0) {
     dispatch(copySlice.actions.hideCopyContainer())
     dispatch(itemsSlice.actions.removePasteItemReducer())
+
+    setTimeout(() => {
+      isItemsFroalaSignal.value = true
+      dispatch(copySlice.actions.allowAllActions())
+    }, 1000 * theme.item.animationDuration + 500)
   }
 }

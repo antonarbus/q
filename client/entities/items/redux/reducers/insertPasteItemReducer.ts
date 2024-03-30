@@ -14,7 +14,6 @@ export const insertPasteItemReducer = (state: Item[], action: PayloadAction<Copy
     type: itemKey.paste,
     height: 0,
     width: 0,
-    msg: '',
     isFroala: true,
   }
 

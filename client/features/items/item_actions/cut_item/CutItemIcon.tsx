@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import type { MouseEvent } from 'react'
 import { TbCut } from 'react-icons/tb'
 import { copySlice } from '@entities/copy'
-import { itemType, itemsSlice, saveItemHeightByIndex, selectIsLastItem, useItem } from '@entities/items'
+import { isItemsFroalaSignal, itemType, itemsSlice, saveItemHeightByIndex, selectIsLastItem, useItem } from '@entities/items'
 import { className } from '@shared/consts/className'
 import { cleanHtml } from '@shared/utils/itemsUtils'
 
@@ -28,8 +28,6 @@ export const CutItemIcon = (): JSX.Element => {
       onClick={(e: MouseEvent): void => {
         if (disabled) return
 
-        dispatch(itemsSlice.actions.removeItemsMsgReducer())
-
         saveItemHeightByIndex({ itemIndex })
 
         const itemToCut = getState().items[itemIndex]
@@ -45,7 +43,7 @@ export const CutItemIcon = (): JSX.Element => {
 
         const html = paperElement.innerHTML
         const cleanedHtml = cleanHtml(html)
-
+        isItemsFroalaSignal.value = false
         dispatch(copySlice.actions.addItemIntoCopyContainer({ copyItem: itemToCut, preview: cleanedHtml }))
         dispatch(itemsSlice.actions.deleteItemReducer({ itemId: itemToCut.id }))
         dispatch(copySlice.actions.forbidAllActions())
@@ -59,7 +57,7 @@ export const CutItemIcon = (): JSX.Element => {
 
         setTimeout(() => {
           dispatch(copySlice.actions.allowAllActions())
-        }, 1000 * theme.item.animationDuration)
+        }, 1000 * theme.item.animationDuration + 500)
       }}
     >
       <TbCut />

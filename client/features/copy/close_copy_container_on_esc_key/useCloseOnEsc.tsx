@@ -1,13 +1,18 @@
 import { dispatch } from '@lib_instances/store'
 import { useEffectOnce } from 'react-use'
 import { copySlice } from '@entities/copy'
-import { itemsSlice } from '@entities/items'
+import { isItemsFroalaSignal, itemsSlice } from '@entities/items'
 
 export const useExitCopyOnEsc = (): void => {
   const closeOnEsc = (e: KeyboardEvent): void => {
     if (e.key !== 'Escape') return
     dispatch(copySlice.actions.hideCopyContainer())
     dispatch(itemsSlice.actions.removePasteItemReducer())
+    setTimeout(() => {
+      // dispatch(copySlice.actions.allowAllActions())
+      // dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
+      isItemsFroalaSignal.value = true
+    }, 500)
   }
 
   type Res = () => void

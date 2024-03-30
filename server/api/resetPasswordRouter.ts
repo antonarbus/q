@@ -44,9 +44,7 @@ const resetPassword: RouterHandler = async (req, res, next) => {
     }
 
     const email = req.body.email.toLowerCase()
-    console.log('🚀 ~ email:', email)
     const resetPasswordKey = req.body.resetPasswordKey
-    console.log('🚀 ~ resetPasswordKey:', resetPasswordKey)
 
     const user = await UserModel.findOne({ email, resetPasswordKey })
 

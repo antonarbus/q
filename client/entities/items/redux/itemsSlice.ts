@@ -15,7 +15,6 @@ import { pasteItemReducer } from './reducers/pasteItemReducer'
 import { pinItemPriceReducer } from './reducers/pinItemPriceReducer'
 import { pinPriceReducer } from './reducers/pinPriceReducer'
 import { pinQtyReducer } from './reducers/pinQtyReducer'
-import { removeItemsMsgReducer } from './reducers/removeItemMsgReducer'
 import { removeItemsReducer } from './reducers/removeItemsReducer'
 import { removePasteItemReducer } from './reducers/removePasteItemReducer'
 import { reOrderBoqRowsReducer } from './reducers/reOrderBoqRowsReducer'
@@ -23,7 +22,6 @@ import { reOrderItemsReducer } from './reducers/reOrderItemsReducer'
 import { resetItemsToDefaultReducer } from './reducers/resetItemsToDefaultReducer'
 import { showBoqPriceCellPinsReducer } from './reducers/showBoqPriceCellPinsReducer'
 import { showBoqRowCellPinReducer } from './reducers/showBoqRowCellPinReducer'
-import { showItemMsgReducer } from './reducers/showItemMsgReducer'
 import { unfixImagesHeightReducer } from './reducers/unfixImagesHeightReducer'
 import { updateBoqCellReducer } from './reducers/updateBoqCellReducer'
 import { updateBoqColumnNameTextReducer } from './reducers/updateBoqColumnNameTextReducer'
@@ -57,7 +55,6 @@ export const itemsSlice = createSlice({
     pinItemPriceReducer,
     pinQtyReducer,
     pinPriceReducer,
-    removeItemsMsgReducer,
     removePasteItemReducer,
     reOrderBoqRowsReducer,
     reOrderItemsReducer,
@@ -65,7 +62,6 @@ export const itemsSlice = createSlice({
     showBoqRowCellPinReducer,
     showBoqPriceCellPinsReducer,
     hideBoqPriceCellPinsReducer,
-    showItemMsgReducer,
     updateBoqCellReducer,
     updateBoqColumnNameTextReducer,
     updateBoqHeaderTextReducer,

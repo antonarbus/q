@@ -4,7 +4,6 @@ import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/
 import { useIsItemSortDisabled } from '../hooks/useIsItemSortDisabled'
 import { useItem } from '../providers/ItemProvider'
 import { ItemSortAndAnimate } from './item_layout'
-import { ItemMsg } from './item_msg'
 import { PasteItemTextOverlay } from './paste_item_overlay_text'
 
 type Props = {
@@ -43,7 +42,6 @@ export const Item = ({
       onItemResizeStop={onItemResizeStop}
       itemActionElements={itemActions}
     >
-      <ItemMsg />
       <PasteItemTextOverlay >
         {children}
       </PasteItemTextOverlay>
