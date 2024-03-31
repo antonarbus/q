@@ -26,10 +26,6 @@ export type FroalaProps = {
   onInitialized?: () => void
   className?: string
   wrapperStyles?: SxProps
-  uploadParams?: {
-    id: string
-    email: string
-  }
 }
 
 export const Froala = ({
@@ -45,7 +41,6 @@ export const Froala = ({
   onInitialized,
   className,
   wrapperStyles,
-  uploadParams,
 }: FroalaProps): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const { itemIndex } = useItem()
@@ -70,7 +65,6 @@ export const Froala = ({
       onInitialized={onInitialized}
       froalaElementRef={froalaElementRef}
       froalaHeightRef={froalaHeightRef}
-      uploadParams={uploadParams}
     >
       <Box
         className={'froala-wrapper ' + (className ?? '')}
