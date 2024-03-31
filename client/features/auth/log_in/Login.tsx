@@ -53,6 +53,7 @@ export const Login = (): JSX.Element => {
     }
 
     if (id) {
+      console.log(666)
       void refetchQuotation()
     }
 

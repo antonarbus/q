@@ -2,6 +2,7 @@ import { router } from '@lib_instances/Router'
 import { dispatch } from '@lib_instances/store'
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useUpdateEffect } from 'react-use'
 import { itemsSlice } from '@entities/items'
 import { quotationSignal, useGetQuotationQuery } from '@entities/quotation'
 import { route } from '@shared/consts/route'
@@ -12,6 +13,19 @@ export function useLoadServerQuotation(): void {
   const navigate = useNavigate()
   const { id } = useParams()
   const { data, isSuccess, isFetching, isError } = useGetQuotationQuery()
+
+  useUpdateEffect(() => {
+    if (data?.items === undefined) return
+    if (data?.quotation === undefined) return
+
+    const { items, quotation } = data
+    dispatch(itemsSlice.actions.loadItemsReducer({ items }))
+    quotationSignal.value = quotation
+    dispatch(navSlice.actions.disableTopNavItem({ navMenuItemIdKey: 'save' }))
+    dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'pdf' }))
+    dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'share' }))
+    setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 2000)
+  }, [data?.quotation?.id])
 
   useEffect(() => {
     if (id === undefined) return
@@ -70,23 +84,6 @@ export function useLoadServerQuotation(): void {
           loadingDotsOverlayTextSignal.value = null
           navigate(-1)
         }, 3000)
-
-        return
-      }
-
-      if (
-        data.message === 'found' &&
-        data.items !== undefined &&
-        data.items.length !== 0 &&
-        data.quotation !== undefined
-      ) {
-        const { items, quotation } = data
-        dispatch(itemsSlice.actions.loadItemsReducer({ items }))
-        quotationSignal.value = quotation
-        dispatch(navSlice.actions.disableTopNavItem({ navMenuItemIdKey: 'save' }))
-        dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'pdf' }))
-        dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'share' }))
-        setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 2000)
       }
     }
   }, [isFetching, isSuccess])
