@@ -80,8 +80,9 @@ export function useLoadServerQuotation(): void {
         data.items.length !== 0 &&
         data.quotation !== undefined
       ) {
-        dispatch(itemsSlice.actions.loadItemsReducer({ items: data.items }))
-        quotationSignal.value = data.quotation
+        const { items, quotation } = data
+        dispatch(itemsSlice.actions.loadItemsReducer({ items }))
+        quotationSignal.value = quotation
         dispatch(navSlice.actions.disableTopNavItem({ navMenuItemIdKey: 'save' }))
         dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'pdf' }))
         dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'share' }))

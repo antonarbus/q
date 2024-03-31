@@ -23,7 +23,7 @@ document.addEventListener('dragover', (e) => { e.preventDefault() })
 document.addEventListener('drop', (e) => { e.preventDefault() })
 
 export const useStartFroala = (): void => {
-  const { htmlGetter, froalaElementRef, editorRef, placeholder, onContentChange, onFocus, onClick, onBlur, onKeydown, onInitialized, uploadParams } = useFroala()
+  const { htmlGetter, froalaElementRef, editorRef, placeholder, onContentChange, onFocus, onClick, onBlur, onKeydown, onInitialized } = useFroala()
 
   useEffect(() => {
     const initFroalaInstance = (): void => {
@@ -32,17 +32,6 @@ export const useStartFroala = (): void => {
         {
           ...froalaDefaultOptions,
           placeholderText: placeholder ?? 'Text...',
-          // if logged then files are uploaded to the bucket, if not, they are just stored in browser
-          ...(Boolean(uploadParams?.email) && {
-            imageUploadURL: apiUrl.upload,
-            fileUploadURL: apiUrl.upload,
-            videoUploadURL: apiUrl.upload,
-            imageUploadParams: uploadParams,
-            fileUploadParams: uploadParams,
-            videoUploadParams: uploadParams,
-          }),
-
-          fileMaxSize: 1024 * 1024 * 10,
           events: {
             contentChanged: () => {
               onContentChange()
@@ -59,14 +48,14 @@ export const useStartFroala = (): void => {
             blur: (e: MouseEvent) => {
               onBlur?.(e)
             },
-            'image.beforeUpload': (files) => {
-              beforeUpload({ files, uploadParams })
+            'image.beforeUpload': function (files) {
+              beforeUpload({ files, editor: this })
             },
-            'file.beforeUpload': (files) => {
-              beforeUpload({ files, uploadParams })
+            'file.beforeUpload': function (files) {
+              beforeUpload({ files, editor: this })
             },
-            'video.beforeUpload': (files) => {
-              beforeUpload({ files, uploadParams })
+            'video.beforeUpload': function (files) {
+              beforeUpload({ files, editor: this })
             },
             'file.unlink': function (link) {
               const href = link.getAttribute('href')

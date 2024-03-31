@@ -5,16 +5,16 @@ import { bucket } from '@server/services/storage'
 import { Router } from 'express'
 import { type HydratedDocument } from 'mongoose'
 import type { ItemType } from '@entities/items'
+import { httpStatus } from '@shared/consts/httpStatus'
 import { type ResWithBody, type ReqWithBody, type Next } from '../types'
 
 export type ReqBody = {
   quotation: QuotationModelType
   items: ItemType[]
-  id: string
 }
 
 export type ResBody = {
-  message: string
+  message: 'not logged in' | 'not owner' | 'not saved' | 'inserted' | 'saved' | 'xxx' | 'xxx' | 'xxx' | 'xxx'
   document?: HydratedDocument<QuotationModelType> | null
 }
 
@@ -24,55 +24,64 @@ export const saveQuotationRouter = Router()
 
 const saveQuotation: RouterHandler = async (req, res, next) => {
   try {
+    const { items, quotation } = req.body
     const refreshJwtToken = req.cookies.refreshJwtToken
 
     if (typeof refreshJwtToken !== 'string') {
-      return res.status(200).json({
-        message: 'not logged in',
-      })
+      return res
+        .status(httpStatus.unauthorized_401)
+        .json({
+          message: 'not logged in',
+        })
     }
 
     const { email } = verifyRefreshToken(refreshJwtToken) as JwtPayloadExtended
 
     if (!email) {
-      return res.status(200).json({
-        message: 'not logged in',
-      })
+      return res
+        .status(httpStatus.unauthorized_401)
+        .json({
+          message: 'not logged in',
+        })
     }
 
-    const { items, quotation, id } = req.body
-
-    const filter = { email, id }
-    const update = { quotation }
+    if (email !== quotation?.email) {
+      return res
+        .status(httpStatus.forbidden_403)
+        .json({
+          message: 'not owner',
+        })
+    }
 
     const document = await QuotationModel
-      .findOneAndUpdate(filter, update, {
-        new: true,
-        setDefaultsOnInsert: true,
-        upsert: true,
-      })
+      .findOneAndUpdate(
+        { email: quotation.email, id: quotation.id },
+        { quotation },
+        { new: true, setDefaultsOnInsert: true, upsert: true },
+      )
       .select({ _id: 0, __v: 0 })
 
     const isNew = document.createdAt?.toISOString() === document.updatedAt?.toISOString()
 
     if (document === null) {
       return res
-        .status(404)
+        .status(httpStatus.forbidden_403)
         .json({
           message: 'not saved',
-          document: null,
         })
     }
 
-    const filePath = `${email}/${id}/quotation-${document.version}.json`
+    const filePath = `${quotation.email}/${quotation.id}/quotation-${document.version}.json`
     const file = bucket.file(filePath)
-    const contents = JSON.stringify({ quotation, items, id }, null, 2)
+    const contents = JSON.stringify({ quotation, items }, null, 2)
     await file.save(contents)
 
-    return res.json({
-      message: isNew ? 'inserted' : 'saved',
-      document,
-    })
+    return res
+      .status(httpStatus.success_200)
+      .json({
+        message: isNew ? 'inserted' : 'saved',
+        document,
+      })
   } catch (error) {
     next(error)
   }

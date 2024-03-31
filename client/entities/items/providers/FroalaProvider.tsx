@@ -28,7 +28,6 @@ export const FroalaProvider = (props: Props): JSX.Element => {
         onInitialized: props.onInitialized,
         froalaElementRef: props.froalaElementRef,
         froalaHeightRef: props.froalaHeightRef,
-        uploadParams: props.uploadParams,
       }}
     >
       {props.children}
