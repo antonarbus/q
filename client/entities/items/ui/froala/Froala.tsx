@@ -89,8 +89,8 @@ export const Froala = ({
         }}
       >
         <div
-          className='view-port-observer'
           // ref={observerRef}
+          className='view-port-observer'
           css={{
             width: '100%',
             position: 'relative',

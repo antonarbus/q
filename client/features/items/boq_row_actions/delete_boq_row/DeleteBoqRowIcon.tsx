@@ -2,6 +2,7 @@ import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
 import { gsap } from 'gsap'
 import { useRef } from 'react'
+import { flushSync } from 'react-dom'
 import { RxCross2 } from 'react-icons/rx'
 import { copySlice } from '@entities/copy'
 import { itemsSlice, selectIsLastBoqRow, useItem, useRow } from '@entities/items'
@@ -29,7 +30,10 @@ export const DeleteBoqRowIcon = (): JSX.Element => {
 
         if (disabled) return
 
-        dispatch(itemsSlice.actions.disableFroalaReducer({ itemIndex }))
+        flushSync(() => {
+          dispatch(itemsSlice.actions.disableFroalaReducer({ itemIndex }))
+        })
+
         dispatch(itemsSlice.actions.deleteBoqRowReducer({ itemIndex, rowIndex }))
         dispatch(copySlice.actions.forbidAllActions())
 
