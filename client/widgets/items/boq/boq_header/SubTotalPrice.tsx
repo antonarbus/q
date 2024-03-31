@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { showHideBoqPricePins } from '@features/items/pin'
-import { formatSubtotalPriceCell, updateSubtotalPriceCell, useUpdateSubtotalPriceCellOnRowsQtyChange, validateBoqRowPrices } from '@features/items/update_cell'
+import { formatSubtotalPriceCell, updateSubtotalPriceCell, useUpdateSubtotalPrice, validateBoqRowPrices } from '@features/items/update_cell'
 import { getBoqHeaderHtmlFromStore, useBoqItem, useItem, Froala, subTotalPriceCellStyle, type BoqHeaderKey } from '@entities/items'
 
 const boqHeaderKey: BoqHeaderKey = 'subTotalPrice'
@@ -10,7 +10,7 @@ export const SubTotalPrice = (): JSX.Element => {
   const { itemIndex } = useItem()
   const hidePinsClickHandlerRef = useRef<(e: MouseEvent) => void>((e) => {})
   const isInitClickRef = useRef(true)
-  useUpdateSubtotalPriceCellOnRowsQtyChange()
+  useUpdateSubtotalPrice()
 
   return (
     <Froala
