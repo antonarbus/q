@@ -4,7 +4,7 @@ import { roundTo } from 'round-to'
 import { useBoqItem, useItem, getBoqRowsFromStore, type BoqRow, updateSubTotalPriceWithValue, isItemsFroalaSignal } from '@entities/items'
 import { navSlice } from '@shared/nav'
 
-export const useUpdateSubtotalPriceCellOnRowsQtyChange = (): void => {
+export const useUpdateSubtotalPrice = (): void => {
   const { itemIndex } = useItem()
   const { subTotalPriceEditorRef } = useBoqItem()
   const isItemFroala = useSelectorTyped(state => state.items[itemIndex]?.isFroala)
@@ -24,15 +24,17 @@ export const useUpdateSubtotalPriceCellOnRowsQtyChange = (): void => {
 
     const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
 
-    const { didChange } = updateSubTotalPriceWithValue({
-      itemIndex,
-      subTotalPriceEditor: subTotalPriceEditorRef.current,
-      value: subTotalPriceValueNewRounded,
-      incrementally: true,
+    setTimeout(() => {
+      const { didChange } = updateSubTotalPriceWithValue({
+        itemIndex,
+        subTotalPriceEditor: subTotalPriceEditorRef.current,
+        value: subTotalPriceValueNewRounded,
+        incrementally: true,
+      })
+
+      if (!didChange) return
+
+      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
     })
-
-    if (!didChange) return
-
-    dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
   }, [isItemFroala, isItemsFroalaSignal.value])
 }
