@@ -47,15 +47,10 @@ const authRoutes: RouteObject[] = [
     caseSensitive: true,
     element: <ResetPassword />,
   },
-  {
-    path: `${route.saveQuotation}`,
-    element: <SaveQuotation />,
-  },
 ]
 
 export const router = createBrowserRouter([
   {
-
     element: (
       <>
         <TopMsg />
@@ -70,7 +65,13 @@ export const router = createBrowserRouter([
         path: ':id?',
         element: <Quotation />,
         caseSensitive: true,
-        children: authRoutes,
+        children: [
+          ...authRoutes,
+          {
+            path: route.saveQuotation,
+            element: <SaveQuotation />,
+          },
+        ],
       },
       {
         path: route.quotations,

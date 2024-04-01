@@ -1,7 +1,8 @@
 import { router } from '@lib_instances/Router'
 import { dispatch } from '@lib_instances/store'
+import { useEffect } from 'react'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
-import { defaultItems, itemsSlice } from '@entities/items'
+import { defaultItems, itemsSlice, reRenderItemsSignal } from '@entities/items'
 import { quotationSignal, useGetQuotationMutation } from '@entities/quotation'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
 import { navSlice } from '@shared/nav'
@@ -11,14 +12,23 @@ export function useLoadQuotation(): void {
   const { mutate: getQuotation, data, isSuccess, isPending, isError, error } = useGetQuotationMutation()
   const id = router.state.matches.at(0)?.params.id
 
-  useEffectOnce(() => {
+  useEffect(() => {
     if (id === undefined) {
-      dispatch(itemsSlice.actions.loadItemsReducer({ items: defaultItems }))
-      quotationSignal.value = { id: 'template version', email: '' }
+      quotationSignal.value = { email: '', id: '' }
+      dispatch(itemsSlice.actions.loadItemsReducer({ items: [] }))
+      loadingDotsOverlayTextSignal.value = 'Loading template...'
+
+      setTimeout(() => {
+        dispatch(itemsSlice.actions.loadItemsReducer({ items: defaultItems }))
+        quotationSignal.value = { id: 'template version', email: '' }
+      }, 200)
+
+      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
       dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'pdf' }))
       dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'share' }))
+      setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 2000)
     }
-  })
+  }, [reRenderItemsSignal.value])
 
   useEffectOnce(() => {
     if (id !== undefined) {
