@@ -1,5 +1,6 @@
 import { apiUrl } from '@server/consts/apiUrl'
 import { quotationSignal } from '@entities/quotation'
+import { removeLoadingBar } from '@shared/lib/froala/removeLoadingBar'
 import { type FroalaEditor } from '@shared/types'
 import { getFileSizeInMbAsText } from '@shared/utils'
 
@@ -48,10 +49,4 @@ export const beforeUpload = ({ files, editor }: Props): boolean => {
   editor.opts.videoUploadURL = apiUrl.upload
 
   return true
-}
-
-function removeLoadingBar(): void {
-  const progressBarElement = document.querySelector('.fr-popup.fr-desktop.fr-inline.fr-active')
-  if (!(progressBarElement instanceof HTMLElement)) return
-  progressBarElement.classList.remove('fr-active')
 }

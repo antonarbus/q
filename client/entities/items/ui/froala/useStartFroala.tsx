@@ -7,6 +7,7 @@ import type { MouseEvent } from 'react'
 import { useEffect } from 'react'
 import { nanoid } from '@shared/lib/nanoid'
 import { type FroalaEditorRef } from '@shared/types'
+import { notify } from '@shared/ui/top_msg/notify.js'
 import { useFroala } from '../../providers/FroalaProvider'
 import { froalaDefaultOptions } from './froalaDefaultOptions'
 
@@ -47,13 +48,28 @@ export const useStartFroala = (): void => {
               onBlur?.(e)
             },
             'image.beforeUpload': function (files) {
-              beforeUpload?.({ files, editor: this })
+              if (beforeUpload === undefined) {
+                notify({ msg: 'may drop files into text block & description cell', type: 'info' })
+                removeLoadingBar()
+                return false
+              }
+              beforeUpload({ files, editor: this })
             },
             'file.beforeUpload': function (files) {
-              beforeUpload?.({ files, editor: this })
+              if (beforeUpload === undefined) {
+                notify({ msg: 'may drop files into text block & description cell', type: 'info' })
+                removeLoadingBar()
+                return false
+              }
+              beforeUpload({ files, editor: this })
             },
             'video.beforeUpload': function (files) {
-              beforeUpload?.({ files, editor: this })
+              if (beforeUpload === undefined) {
+                notify({ msg: 'may drop files into text block & description cell', type: 'info' })
+                removeLoadingBar()
+                return false
+              }
+              beforeUpload({ files, editor: this })
             },
             'file.unlink': function (link) {
               const href = link.getAttribute('href')
