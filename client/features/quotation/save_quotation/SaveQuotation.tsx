@@ -49,6 +49,7 @@ export const SaveQuotation = (): JSX.Element => {
     notify({ msg: 'Saved', type: 'info', position: 'bottom-center' })
     showSuccessNavIcon({ navMenuItemIdKey: 'save' })
     dispatch(navSlice.actions.disableTopNavItem({ navMenuItemIdKey: 'save' }))
+    quotationSignal.value = { ...quotationSignal.value, ...data.document }
     updateOrAppendIntoQuotationsCache({ quotation: quotationSignal.value })
   }, [isSuccess])
 

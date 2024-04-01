@@ -1,2 +1,1 @@
-export { useLoadServerQuotation } from './useLoadServerQuotation'
-export { useLoadTemplateQuotation } from './useLoadTemplateQuotation'
+export { useLoadQuotation } from './useLoadQuotation'

@@ -1,23 +1,34 @@
 import { router } from '@lib_instances/Router'
 import { dispatch } from '@lib_instances/store'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
-import { itemsSlice } from '@entities/items'
+import { defaultItems, itemsSlice } from '@entities/items'
 import { quotationSignal, useGetQuotationMutation } from '@entities/quotation'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
 import { navSlice } from '@shared/nav'
 import { notify } from '@shared/ui/top_msg'
 
-export function useLoadServerQuotation(): void {
+export function useLoadQuotation(): void {
   const { mutate: getQuotation, data, isSuccess, isPending, isError, error } = useGetQuotationMutation()
+  const id = router.state.matches.at(0)?.params.id
 
   useEffectOnce(() => {
-    const id = router.state.matches.at(0)?.params.id ?? 'some fake id'
-    const didSavedNewQuotation = quotationSignal.peek().id === id
-    if (didSavedNewQuotation) return
-    quotationSignal.value = { email: '', id: '' }
-    dispatch(itemsSlice.actions.loadItemsReducer({ items: [] }))
+    if (id === undefined) {
+      dispatch(itemsSlice.actions.loadItemsReducer({ items: defaultItems }))
+      quotationSignal.value = { id: 'template version', email: '' }
+      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'pdf' }))
+      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'share' }))
+    }
+  })
 
-    getQuotation({ id })
+  useEffectOnce(() => {
+    if (id !== undefined) {
+      const didSavedNewQuotation = quotationSignal.peek().id === id
+      if (didSavedNewQuotation) return
+      quotationSignal.value = { email: '', id: '' }
+      dispatch(itemsSlice.actions.loadItemsReducer({ items: [] }))
+
+      getQuotation({ id })
+    }
   })
 
   useUpdateEffect(() => {
