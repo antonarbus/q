@@ -36,7 +36,6 @@ export const navStructure: MenuItemTypes[] = [
         icon: <IoSaveOutline />,
         isHidden: false,
         name: 'Save',
-        disabled: true,
         shortcut: ['control', 's'],
         link: `./${route.saveQuotation}`,
 

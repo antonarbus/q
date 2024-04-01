@@ -39,17 +39,17 @@ export const SaveQuotation = (): JSX.Element => {
     if (!isSuccess) return
 
     if (data.message === 'inserted') {
-      notify({ msg: 'Created', type: 'success', theme: 'light' })
+      navigate(`/${quotationSignal.peek().id}`)
     }
 
     if (data.message === 'saved') {
-      notify({ msg: 'Updated', type: 'success', theme: 'light' })
+      navigate('..')
     }
 
+    notify({ msg: 'Saved', type: 'info', position: 'bottom-center' })
     showSuccessNavIcon({ navMenuItemIdKey: 'save' })
     dispatch(navSlice.actions.disableTopNavItem({ navMenuItemIdKey: 'save' }))
     updateOrAppendIntoQuotationsCache({ quotation: quotationSignal.value })
-    navigate('..')
   }, [isSuccess])
 
   useUpdateEffect(() => {

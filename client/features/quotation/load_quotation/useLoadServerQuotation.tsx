@@ -11,9 +11,13 @@ export function useLoadServerQuotation(): void {
   const { mutate: getQuotation, data, isSuccess, isPending, isError, error } = useGetQuotationMutation()
 
   useEffectOnce(() => {
+    const id = router.state.matches.at(0)?.params.id ?? 'some fake id'
+    const didSavedNewQuotation = quotationSignal.peek().id === id
+    if (didSavedNewQuotation) return
     quotationSignal.value = { email: '', id: '' }
     dispatch(itemsSlice.actions.loadItemsReducer({ items: [] }))
-    getQuotation({ id: router.state.matches.at(0)?.params.id ?? 'some id' })
+
+    getQuotation({ id })
   })
 
   useUpdateEffect(() => {
@@ -35,6 +39,7 @@ export function useLoadServerQuotation(): void {
       dispatch(navSlice.actions.disableTopNavItem({ navMenuItemIdKey: 'save' }))
       dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'pdf' }))
       dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'share' }))
+      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
       setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 1000)
     }
   }, [isSuccess])
