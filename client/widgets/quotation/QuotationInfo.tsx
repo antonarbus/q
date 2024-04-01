@@ -3,8 +3,9 @@ import { quotationSignal } from '@entities/quotation'
 import { QuotationInfoLayout } from './QuotationInfoLayout'
 
 export const QuotationInfo = (): ReactNode => {
-  const { id } = quotationSignal.value
-  if (id === '') return null
+  const id = quotationSignal.value?.id
+
+  if (id === '' || id === undefined) return null
 
   return (
     <QuotationInfoLayout

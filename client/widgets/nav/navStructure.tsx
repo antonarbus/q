@@ -5,10 +5,8 @@ import { CiViewTable } from 'react-icons/ci'
 import { FiLogOut, FiLogIn } from 'react-icons/fi'
 import { IoSaveOutline, IoShareOutline } from 'react-icons/io5'
 import { VscNewFile } from 'react-icons/vsc'
-// import { logOut } from '@features/auth/log_out'
 import { createNewQuotation } from '@features/quotation/create_new_quotation'
 import { downloadPdf } from '@features/quotation/download_pdf'
-import { saveQuotation } from '@features/quotation/save_quotation'
 import { navMenuItemId } from '@shared/consts/navMenuItemId'
 import { route } from '@shared/consts/route'
 import { nanoid } from '@shared/lib/nanoid'
@@ -40,9 +38,8 @@ export const navStructure: MenuItemTypes[] = [
         name: 'Save',
         disabled: true,
         shortcut: ['control', 's'],
-        func: () => {
-          void saveQuotation()
-        },
+        link: `./${route.saveQuotation}`,
+
       },
       {
         id: navMenuItemId.pdf,
@@ -174,8 +171,7 @@ export const navStructure: MenuItemTypes[] = [
         icon: <FiLogIn />,
         isHidden: false,
         name: 'Log in',
-        link: './login',
-        // func: openLogin,
+        link: `./${route.login}`,
       },
       {
         id: navMenuItemId.account,
@@ -202,7 +198,7 @@ export const navStructure: MenuItemTypes[] = [
             icon: <FiLogOut />,
             isHidden: false,
             name: 'Log out',
-            link: './logout',
+            link: `./${route.logout}`,
           },
         ],
       },

@@ -14,6 +14,7 @@ import { LogOut } from '@features/auth/log_out'
 import { Register } from '@features/auth/register'
 import { RequestPasswordReset } from '@features/auth/request_password_reset'
 import { ResetPassword } from '@features/auth/reset_password'
+import { SaveQuotation } from '@features/quotation/save_quotation'
 import { route } from '@shared/consts/route'
 import { Main } from '@shared/layouts'
 import { LoadingDotsOverlay } from '@shared/loading_dots_overlay'
@@ -45,6 +46,10 @@ const authRoutes: RouteObject[] = [
     path: `${route.resetPassword}/:email/:resetPasswordKey`,
     caseSensitive: true,
     element: <ResetPassword />,
+  },
+  {
+    path: `${route.saveQuotation}`,
+    element: <SaveQuotation />,
   },
 ]
 
