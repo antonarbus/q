@@ -1,7 +1,7 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { Box, type SxProps } from '@mui/material'
 import { useRef, type MouseEvent } from 'react'
-import { type FroalaEditorRef } from '@shared/types'
+import { type FroalaEditor, type FroalaEditorRef } from '@shared/types'
 import { FroalaProvider } from '../../providers/FroalaProvider'
 import { useItem } from '../../providers/ItemProvider'
 import { isItemsFroalaSignal } from '../../signals/isItemsFroalaSignal'
@@ -26,6 +26,7 @@ export type FroalaProps = {
   onInitialized?: () => void
   className?: string
   wrapperStyles?: SxProps
+  beforeUpload?: ({ editor, files }: { editor: FroalaEditor, files: File[] }) => boolean
 }
 
 export const Froala = ({
@@ -41,6 +42,7 @@ export const Froala = ({
   onInitialized,
   className,
   wrapperStyles,
+  beforeUpload,
 }: FroalaProps): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const { itemIndex } = useItem()
@@ -65,6 +67,7 @@ export const Froala = ({
       onInitialized={onInitialized}
       froalaElementRef={froalaElementRef}
       froalaHeightRef={froalaHeightRef}
+      beforeUpload={beforeUpload}
     >
       <Box
         className={'froala-wrapper ' + (className ?? '')}

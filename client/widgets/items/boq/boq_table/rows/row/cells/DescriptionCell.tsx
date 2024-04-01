@@ -1,5 +1,6 @@
 import { tabFromDescriptionCell } from '@features/items/tab_away_from_cell'
 import { updateDescriptionCell } from '@features/items/update_cell'
+import { beforeUpload } from '@features/items/upload'
 import { getBoqCellHtmlFromStore, useRow, useItem, Froala, useStylesForResizableCell, boqRowCellStyle, boqRowCellKey, boqColumnKey } from '@entities/items'
 
 export const DescriptionCell = (): JSX.Element => {
@@ -12,6 +13,7 @@ export const DescriptionCell = (): JSX.Element => {
         className={`td ${boqRowCellKey.description}`}
         editorRef={descriptionEditorRef}
         placeholder='Description...'
+        beforeUpload={beforeUpload}
         htmlGetter={() => getBoqCellHtmlFromStore({ itemIndex, rowIndex, boqRowCellKey: boqRowCellKey.description })}
         onContentChange={() => {
           updateDescriptionCell({ editorRef: descriptionEditorRef, itemIndex, rowIndex, boqRowCellKey: boqRowCellKey.description })
