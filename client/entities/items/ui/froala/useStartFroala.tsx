@@ -5,7 +5,6 @@ import './froalaPkgd.css'
 
 import type { MouseEvent } from 'react'
 import { useEffect } from 'react'
-import { apiUrl } from 'server/consts/apiUrl'
 import { nanoid } from '@shared/lib/nanoid'
 import { type FroalaEditorRef } from '@shared/types'
 import { useFroala } from '../../providers/FroalaProvider'

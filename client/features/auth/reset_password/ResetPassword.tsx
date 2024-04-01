@@ -20,8 +20,6 @@ import { slideElement } from '@shared/utils/slideElement'
 
 export const ResetPassword = (): ReactNode => {
   const { email, resetPasswordKey } = useParams()
-  console.log('🚀 ~ email:', email)
-  console.log('🚀 ~ resetPasswordKey:', resetPasswordKey)
   const navigate = useNavigate()
   const inputRef = useRef<HTMLDivElement>(null)
   const cardRef = useRef<HTMLDivElement>(null)

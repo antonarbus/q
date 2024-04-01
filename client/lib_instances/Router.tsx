@@ -9,7 +9,7 @@ import { QuotationTemplate, QuotationServer } from '@pages/quotation'
 import { Quotations } from '@pages/quotations'
 import { Copy } from '@widgets/copy'
 import { Nav } from '@widgets/nav'
-import { Login } from '@features/auth/log_in'
+import { LogIn } from '@features/auth/log_in'
 import { LogOut } from '@features/auth/log_out'
 import { Register } from '@features/auth/register'
 import { RequestPasswordReset } from '@features/auth/request_password_reset'
@@ -22,7 +22,7 @@ import { TopMsg } from '@shared/ui/top_msg'
 const authRoutes: RouteObject[] = [
   {
     path: route.login,
-    element: <Login />,
+    element: <LogIn />,
   },
   {
     path: route.logout,
