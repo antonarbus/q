@@ -25,7 +25,7 @@ export const Items = (): ReactNode => {
     >
       <AnimatePresence initial={false}>
         {items.map((item, itemIndex) => {
-          const key = item.id + reRenderItemsSignal.value
+          const key = item.id// + reRenderItemsSignal.value
 
           if (item.type === itemType.text) {
             return (
