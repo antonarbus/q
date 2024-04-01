@@ -8,7 +8,6 @@ import { useEffect } from 'react'
 import { nanoid } from '@shared/lib/nanoid'
 import { type FroalaEditorRef } from '@shared/types'
 import { useFroala } from '../../providers/FroalaProvider'
-import { beforeUpload } from './beforeUpload'
 import { froalaDefaultOptions } from './froalaDefaultOptions'
 
 declare const window: Window & typeof globalThis & {
@@ -22,7 +21,7 @@ document.addEventListener('dragover', (e) => { e.preventDefault() })
 document.addEventListener('drop', (e) => { e.preventDefault() })
 
 export const useStartFroala = (): void => {
-  const { htmlGetter, froalaElementRef, editorRef, placeholder, onContentChange, onFocus, onClick, onBlur, onKeydown, onInitialized } = useFroala()
+  const { htmlGetter, froalaElementRef, editorRef, placeholder, onContentChange, onFocus, onClick, onBlur, onKeydown, onInitialized, beforeUpload } = useFroala()
 
   useEffect(() => {
     const initFroalaInstance = (): void => {
@@ -48,13 +47,13 @@ export const useStartFroala = (): void => {
               onBlur?.(e)
             },
             'image.beforeUpload': function (files) {
-              beforeUpload({ files, editor: this })
+              beforeUpload?.({ files, editor: this })
             },
             'file.beforeUpload': function (files) {
-              beforeUpload({ files, editor: this })
+              beforeUpload?.({ files, editor: this })
             },
             'video.beforeUpload': function (files) {
-              beforeUpload({ files, editor: this })
+              beforeUpload?.({ files, editor: this })
             },
             'file.unlink': function (link) {
               const href = link.getAttribute('href')

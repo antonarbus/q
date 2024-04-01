@@ -1,0 +1,1 @@
+export { beforeUpload } from './beforeUpload'
