@@ -7,7 +7,7 @@ import type { FormEvent, MouseEvent } from 'react'
 import { useRef } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { useGetQuotationQuery, useGetQuotationsQuery } from '@entities/quotation'
+import { useGetQuotationMutation, useGetQuotationsQuery } from '@entities/quotation'
 import { useLogInMutation, userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 import { EmailInput, PasswordInput } from '@shared/components'
@@ -30,8 +30,8 @@ export const LogIn = (): JSX.Element => {
   const isEmailOkSignal = useSignal(false)
 
   const { mutate: logIn, isPending, data, isSuccess, isError, error } = useLogInMutation()
-  const { refetch: refetchQuotation } = useGetQuotationQuery()
-  const { refetch: refetchQuotations } = useGetQuotationsQuery()
+  // const { refetch: refetchQuotation } = useGetQuotationQuery()
+  // const { refetch: refetchQuotations } = useGetQuotationsQuery()
 
   useUpdateEffect(() => {
     if (!isSuccess) return
@@ -73,15 +73,11 @@ export const LogIn = (): JSX.Element => {
 
     if (error.response?.data.message === 'bad password') {
       notify({ msg: 'Invalid credentials', type: 'warn', theme: 'light' })
-      return
-    }
-
-    if (error.response?.data.message === 'not activated') {
+    } else if (error.response?.data.message === 'not activated') {
       notify({ msg: 'Account is not activated. Check mailbox.', type: 'info', theme: 'light' })
-      return
+    } else {
+      notify({ msg: 'Internal error', type: 'error', theme: 'light' })
     }
-
-    notify({ msg: 'Internal error', type: 'error', theme: 'light' })
   }, [isError])
 
   return (

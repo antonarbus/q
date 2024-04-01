@@ -14,7 +14,7 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  message: 'not logged in' | 'not owner' | 'not saved' | 'inserted' | 'saved' | 'xxx' | 'xxx' | 'xxx' | 'xxx'
+  message: 'not logged in' | 'not owner' | 'not saved' | 'inserted' | 'saved'
   document?: HydratedDocument<QuotationModelType> | null
 }
 

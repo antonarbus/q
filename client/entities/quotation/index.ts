@@ -2,10 +2,10 @@
 export { quotationSignal } from './signals/quotationSignal'
 
 // api
-export { useGetQuotationQuery } from './api/useGetQuotationQuery'
+export { useGetQuotationMutation } from './api/useGetQuotationMutation'
 export { useGetQuotationsQuery } from './api/useGetQuotationsQuery'
 export { useDeleteQuotationMutation } from './api/useDeleteQuotationMutation'
-export { saveQuotationFn } from './api/saveQuotationFn'
+export { useSaveQuotationMutation } from './api/useSaveQuotationMutation'
 
 // cacheUpdaters
 export { updateOrAppendIntoQuotationsCache } from './cacheUpdaters/updateOrAppendIntoQuotationsCache'

@@ -1,9 +1,10 @@
 import { QuotationModel, type QuotationModelType } from '@server/db/models/quotationModel'
-// import { verifyTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
 import { type JwtPayloadExtended, verifyRefreshToken } from '@server/services/jwt'
 import { bucket } from '@server/services/storage'
 import { Router } from 'express'
 import { type HydratedDocument } from 'mongoose'
+import { type Item } from '@entities/items/types'
+import { httpStatus } from '@shared/consts/httpStatus'
 import { type ResWithBody, type ReqWithBody, type Next } from '../types'
 
 export type ReqBody = {
@@ -11,9 +12,11 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  message: string
+  message: 'not logged in' | 'not found' | 'found'
   document?: HydratedDocument<QuotationModelType>
   jsonSignedUrl?: string
+  items?: Item[]
+  quotation?: QuotationModelType
 }
 
 type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
@@ -28,19 +31,25 @@ const getQuotation: RouterHandler = async (req, res, next) => {
 
     // todo: make a logic to return shared offer for non-logged-in user
     if (typeof refreshJwtToken !== 'string') {
-      return res.status(200).json({ message: 'not logged in' })
+      return res
+        .status(httpStatus.forbidden_403)
+        .json({ message: 'not logged in' })
     }
 
     const { email } = verifyRefreshToken(refreshJwtToken) as JwtPayloadExtended
 
     if (!email) {
-      return res.status(200).json({ message: 'not logged in' })
+      return res
+        .status(httpStatus.forbidden_403)
+        .json({ message: 'not logged in' })
     }
 
     const document = await QuotationModel.findOne({ email, id })
 
     if (document === null) {
-      return res.status(200).json({ message: 'not found' })
+      return res
+        .status(httpStatus.notFound_404)
+        .json({ message: 'not found' })
     }
 
     const oneHour = Date.now() + 3600 * 1000
@@ -49,7 +58,9 @@ const getQuotation: RouterHandler = async (req, res, next) => {
     const [exists] = await bucket.file(filePath).exists()
 
     if (!exists) {
-      return res.status(200).json({ message: 'json does not exist' })
+      return res
+        .status(httpStatus.notFound_404)
+        .json({ message: 'not found' })
     }
 
     const jsonSignedUrlRes = await bucket.file(filePath).getSignedUrl({
@@ -60,14 +71,14 @@ const getQuotation: RouterHandler = async (req, res, next) => {
     const jsonSignedUrl = jsonSignedUrlRes.at(0)
 
     if (jsonSignedUrl === undefined) {
-      return res.status(200).json({ message: 'json url is not generated' })
+      return res
+        .status(httpStatus.notFound_404)
+        .json({ message: 'not found' })
     }
 
-    return res.status(200).json({
-      message: 'found',
-      document,
-      jsonSignedUrl,
-    })
+    return res
+      .status(httpStatus.success_200)
+      .json({ message: 'found', document, jsonSignedUrl })
   } catch (error) {
     next(error)
   }
@@ -75,6 +86,5 @@ const getQuotation: RouterHandler = async (req, res, next) => {
 
 getQuotationRouter.post(
   '/',
-  // verifyTokenMiddleware,
   getQuotation,
 )

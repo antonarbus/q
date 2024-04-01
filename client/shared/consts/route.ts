@@ -9,4 +9,5 @@ export const route = {
   quotations: 'quotations',
   profile: 'profile',
   settings: 'settings',
+  saveQuotation: 'save-quotation',
 } as const

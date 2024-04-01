@@ -64,7 +64,13 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
   const isError = navItem?.isError
   const disabled = Boolean(navItem?.disabled)
 
-  const to = (location.pathname + '/' + link).replace('.', '').replace('//', '/').replace('//', '/')
+  let to = ''
+
+  if (link?.includes('.')) {
+    to = (location.pathname + '/' + link).replace('.', '').replace('//', '/').replace('//', '/')
+  } else {
+    to = link ?? ''
+  }
 
   return (
     <li

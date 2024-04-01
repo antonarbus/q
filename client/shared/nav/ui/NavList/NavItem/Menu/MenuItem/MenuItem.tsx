@@ -33,7 +33,13 @@ export const MenuItem = ({ menuItem, hoveredMenuItemIndex }: Props): JSX.Element
   const isSuccess = menuItem?.isSuccess
   const isError = menuItem?.isError
 
-  const to = (location.pathname + '/' + link).replace('.', '').replace('//', '/').replace('//', '/')
+  let to = ''
+
+  if (link?.includes('.')) {
+    to = (location.pathname + '/' + link).replace('.', '').replace('//', '/').replace('//', '/')
+  } else {
+    to = link ?? ''
+  }
 
   return (
     <MenuItemStyled

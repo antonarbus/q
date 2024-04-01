@@ -8,4 +8,5 @@ export const queryKey = {
   register: 'register',
   requestPasswordReset: 'requestPasswordReset',
   resetPassword: 'resetPassword',
+  saveQuotation: 'saveQuotation',
 } as const
