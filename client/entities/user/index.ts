@@ -3,6 +3,7 @@ export { userSlice } from './redux/userSlice'
 
 // api
 export { useLogInMutation } from './api/useLogInMutation'
+export { useLogOutMutation } from './api/useLogOutMutation'
 export { useRegisterMutation } from './api/useRegisterMutation'
 export { useRequestPasswordResetMutation } from './api/useRequestPasswordResetMutation'
 export { useResetPasswordMutation } from './api/useResetPasswordMutation'
