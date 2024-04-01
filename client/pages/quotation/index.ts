@@ -1,2 +1,1 @@
-export { QuotationTemplate } from './QuotationTemplate'
-export { QuotationServer } from './QuotationServer'
+export { Quotation } from './Quotation'

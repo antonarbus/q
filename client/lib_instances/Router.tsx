@@ -5,7 +5,7 @@ import { RequireAuth } from '@pages/auth/RequireAuth'
 import { Unauthorized } from '@pages/auth/Unauthorized'
 import { BarChart } from '@pages/chart/Chart'
 import { Profile } from '@pages/profile'
-import { QuotationTemplate, QuotationServer } from '@pages/quotation'
+import { Quotation } from '@pages/quotation'
 import { Quotations } from '@pages/quotations'
 import { Copy } from '@widgets/copy'
 import { Nav } from '@widgets/nav'
@@ -67,13 +67,8 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: route.root,
-        element: <QuotationTemplate />,
-        children: authRoutes,
-      },
-      {
         path: ':id?',
-        element: <QuotationServer />,
+        element: <Quotation />,
         caseSensitive: true,
         children: authRoutes,
       },
