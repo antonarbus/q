@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import type { MouseEvent } from 'react'
 import { MdCopyAll } from 'react-icons/md'
 import { copySlice } from '@entities/copy'
-import { isItemsFroalaSignal, itemType, itemsSlice, saveItemHeightByIndex, useItem } from '@entities/items'
+import { isItemsFroalaSignal, itemType, saveItemHeightByIndex, useItem } from '@entities/items'
 import { className } from '@shared/consts/className'
 import { cleanHtml } from '@shared/utils/itemsUtils'
 

@@ -133,9 +133,9 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
           if (isError) return
           clickOnNavItem({ e, navItem, id, navItemRef, disabled })
         }}
-        onMouseEnter={() => {
-          console.log({ link, to, pathname: location.pathname })
-        }}
+        // onMouseEnter={() => {
+        //   console.log({ link, to, pathname: location.pathname })
+        // }}
       >
         {icon && isLoading && <SpinnerIcon />}
         {icon && isSuccess && <SuccessIcon /> }

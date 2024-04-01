@@ -20,7 +20,7 @@ import { navSlice } from '@shared/nav'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
 
-export const Login = (): JSX.Element => {
+export const LogIn = (): JSX.Element => {
   const navigate = useNavigate()
   const { id } = useParams()
   const inputRef = useRef<HTMLDivElement>(null)

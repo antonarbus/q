@@ -3,7 +3,6 @@ import { ItemActions } from '@features/items/item_actions'
 import { onTextItemResizeStart, onTextItemResizeStop } from '@features/items/resize_item'
 import { updateTextItem } from '@features/items/update_cell'
 import { Froala, Item, getItemTextHtmlFromStore, textItemCellStyle, useItem } from '@entities/items'
-import { quotationSignal } from '@entities/quotation'
 import { type FroalaEditor } from '@shared/types'
 
 export const TextItem = (): JSX.Element => {
