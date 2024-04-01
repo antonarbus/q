@@ -5,8 +5,7 @@ import { CiViewTable } from 'react-icons/ci'
 import { FiLogOut, FiLogIn } from 'react-icons/fi'
 import { IoSaveOutline, IoShareOutline } from 'react-icons/io5'
 import { VscNewFile } from 'react-icons/vsc'
-import { openLogin } from '@features/auth/log_in'
-import { logOut } from '@features/auth/log_out'
+// import { logOut } from '@features/auth/log_out'
 import { createNewQuotation } from '@features/quotation/create_new_quotation'
 import { downloadPdf } from '@features/quotation/download_pdf'
 import { saveQuotation } from '@features/quotation/save_quotation'
@@ -175,8 +174,8 @@ export const navStructure: MenuItemTypes[] = [
         icon: <FiLogIn />,
         isHidden: false,
         name: 'Log in',
-        link: route.login,
-        func: openLogin,
+        link: './login',
+        // func: openLogin,
       },
       {
         id: navMenuItemId.account,
@@ -203,7 +202,7 @@ export const navStructure: MenuItemTypes[] = [
             icon: <FiLogOut />,
             isHidden: false,
             name: 'Log out',
-            func: logOut,
+            link: './logout',
           },
         ],
       },

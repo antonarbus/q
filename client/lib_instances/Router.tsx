@@ -10,6 +10,7 @@ import { Quotations } from '@pages/quotations'
 import { Copy } from '@widgets/copy'
 import { Nav } from '@widgets/nav'
 import { Login } from '@features/auth/log_in'
+import { LogOut } from '@features/auth/log_out'
 import { Register } from '@features/auth/register'
 import { RequestPasswordReset } from '@features/auth/request_password_reset'
 import { ResetPassword } from '@features/auth/reset_password'
@@ -22,6 +23,10 @@ const authRoutes: RouteObject[] = [
   {
     path: route.login,
     element: <Login />,
+  },
+  {
+    path: route.logout,
+    element: <LogOut />,
   },
   {
     path: route.register,

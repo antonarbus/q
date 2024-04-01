@@ -4,7 +4,7 @@ import { theme } from '@lib_instances/theme'
 import type { MouseEvent, MutableRefObject } from 'react'
 import { useRef } from 'react'
 import { TiArrowSortedDown } from 'react-icons/ti'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useWindowSize } from 'react-use'
 import { clickOnNavItem } from './clickOnNavItem'
 import { ErrorIcon } from './ErrorIcon'
@@ -30,6 +30,7 @@ type Props = {
  */
 
 export const NavItem = ({ children, id }: Props): JSX.Element => {
+  const location = useLocation()
   // required to avoid Menu to go over the narrow window
   const navItemRef = useRef() as MutableRefObject<HTMLLIElement>
 
@@ -62,6 +63,8 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
   const isSuccess = navItem?.isSuccess
   const isError = navItem?.isError
   const disabled = Boolean(navItem?.disabled)
+
+  const to = (location.pathname + '/' + link).replace('.', '').replace('//', '/').replace('//', '/')
 
   return (
     <li
@@ -120,7 +123,7 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
       `}
     >
       <Link
-        to={link ?? '/'}
+        to={to}
         onClick={(e: MouseEvent): void => {
           if (isFunc) {
             e.preventDefault()
@@ -129,6 +132,9 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
           if (isSuccess) return
           if (isError) return
           clickOnNavItem({ e, navItem, id, navItemRef, disabled })
+        }}
+        onMouseEnter={() => {
+          console.log({ link, to, pathname: location.pathname })
         }}
       >
         {icon && isLoading && <SpinnerIcon />}

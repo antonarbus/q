@@ -10,8 +10,8 @@ import { getBucketCors } from './api/getBucketCors'
 import { getQuotationRouter } from './api/getQuotationRouter'
 import { getQuotationsRouter } from './api/getQuotationsRouter'
 import { hiRouter } from './api/hiRouter'
-import { loginRouter } from './api/loginRouter'
-import { logoutRouter } from './api/logoutRouter'
+import { logInRouter } from './api/logInRouter'
+import { logOutRouter } from './api/logOutRouter'
 import { registerRouter } from './api/registerRouter'
 import { requestPasswordResetRouter } from './api/requestPasswordResetRouter'
 import { resetPasswordRouter } from './api/resetPasswordRouter'
@@ -43,8 +43,8 @@ app.use(apiUrl.test, testRouter)
 app.use(apiUrl.register, registerRouter)
 app.use(apiUrl.resetPassword, resetPasswordRouter)
 app.use(apiUrl.requestPasswordReset, requestPasswordResetRouter)
-app.use(apiUrl.login, loginRouter)
-app.use(apiUrl.logout, logoutRouter)
+app.use(apiUrl.logIn, logInRouter)
+app.use(apiUrl.logOut, logOutRouter)
 app.use(apiUrl.activate, activateRouter)
 app.use(apiUrl.getAccessToken, getAccessTokenRouter)
 app.use(apiUrl.users, usersRouter)

@@ -1,60 +1,55 @@
 import { Router } from 'express'
 import { jwtDecode } from 'jwt-decode'
+import { httpStatus } from '@shared/consts/httpStatus'
 import { UserModel } from '../db/models/userModel'
 import type { JwtPayloadExtended } from '../services/jwt'
-import type { Next, Req, Res } from '../types'
+import type { Next, Req, ResWithBody } from '../types'
 
-export const logoutRouter = Router()
-
-export type LogoutApiRes = {
-  status: string
-  message: string
-  email?: string
+export type ResBody = {
+  message: 'token not found' | 'user not found' | 'no user in db' | 'logged out'
 }
 
-logoutRouter.get('/', async (req: Req, res: Res, next: Next) => {
+type RouterHandler = (req: Req, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
+
+export const logOutRouter = Router()
+
+const logOut: RouterHandler = async (req, res, next) => {
   try {
     const refreshJwtToken = req.cookies.refreshJwtToken
 
     if (typeof refreshJwtToken !== 'string') {
-      res.json({ status: 'error', message: 'no refresh token in cookies' })
-      return
+      return res
+        .status(httpStatus.forbidden_403)
+        .json({ message: 'token not found' })
     }
 
-    // get email from refresh token
     const { email } = jwtDecode<JwtPayloadExtended>(refreshJwtToken)
 
     if (!email) {
-      res.json({
-        status: 'error',
-        message: 'no email in refresh token',
-      })
-      return
+      return res
+        .status(httpStatus.forbidden_403)
+        .json({ message: 'user not found' })
     }
 
-    // delete refreshJwtToken from cookie
+    // delete refreshJwtToken from cookie and db
     res.clearCookie('refreshJwtToken')
-
-    // delete token from db
     const user = await UserModel.findOne({ refreshJwtToken })
 
     if (!user) {
-      res.json({
-        status: 'error',
-        message: 'no user with such refresh token',
-      })
-      return
+      return res
+        .status(httpStatus.forbidden_403)
+        .json({ message: 'no user in db' })
     }
 
     user.refreshJwtToken = ''
     await user.save()
 
-    res.json({
-      status: 'ok',
-      message: `user with email: ${email} logged out`,
-      email,
-    })
+    return res
+      .status(httpStatus.success_200)
+      .json({ message: 'logged out' })
   } catch (error) {
     next(error)
   }
-})
+}
+
+logOutRouter.get('/', logOut)

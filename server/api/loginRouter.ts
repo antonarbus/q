@@ -19,7 +19,7 @@ export type ResBody = {
 
 type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
 
-export const loginRouter = express.Router()
+export const logInRouter = express.Router()
 
 const checkCredentials: RouterHandler = async (req, res, next) => {
   try {
@@ -84,4 +84,4 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
   }
 }
 
-loginRouter.post('/', checkCredentials)
+logInRouter.post('/', checkCredentials)

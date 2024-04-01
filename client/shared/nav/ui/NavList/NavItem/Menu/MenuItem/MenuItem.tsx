@@ -1,6 +1,7 @@
 import { dispatch, useSelectorTyped } from '@lib_instances/store'
 import type { MouseEvent } from 'react'
 import { FaChevronRight } from 'react-icons/fa'
+import { useLocation } from 'react-router-dom'
 import { navSlice } from '../../../../../navSlice'
 import { type MenuItemType } from '../../../../../type'
 import { ErrorIcon } from '../../ErrorIcon'
@@ -19,6 +20,7 @@ type Props = {
 }
 
 export const MenuItem = ({ menuItem, hoveredMenuItemIndex }: Props): JSX.Element => {
+  const location = useLocation()
   const isHovered = useSelectorTyped(state => state.nav.menuItemHoverIndex === hoveredMenuItemIndex)
   const isNextMenuAvailable = !!menuItem.menuItems
   const isIcon = !!menuItem.icon
@@ -31,9 +33,12 @@ export const MenuItem = ({ menuItem, hoveredMenuItemIndex }: Props): JSX.Element
   const isSuccess = menuItem?.isSuccess
   const isError = menuItem?.isError
 
+  const to = (location.pathname + '/' + link).replace('.', '').replace('//', '/').replace('//', '/')
+
   return (
     <MenuItemStyled
-      to={link ?? '/'}
+      to={to}
+      state={{ isHovered }}
       onClick={(e: MouseEvent): void => {
         if (!isLink) {
           e.preventDefault()
@@ -46,7 +51,6 @@ export const MenuItem = ({ menuItem, hoveredMenuItemIndex }: Props): JSX.Element
       onMouseEnter={(): void => {
         dispatch(navSlice.actions.setMenuItemHoverIndex(hoveredMenuItemIndex))
       }}
-      state={{ isHovered }}
     >
       {isIcon && !isLoading && <Icon icon={menuItem.icon} disabled={disabled} />}
       {isIcon && isLoading && <SpinnerIcon />}
