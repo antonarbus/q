@@ -1,7 +1,7 @@
 import { router } from '@lib_instances/Router'
 import { dispatch } from '@lib_instances/store'
 import { useEffect } from 'react'
-import { useEffectOnce, useUpdateEffect } from 'react-use'
+import { useUpdateEffect } from 'react-use'
 import { defaultItems, itemsSlice } from '@entities/items'
 import { quotationSignal, useGetQuotationMutation } from '@entities/quotation'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
@@ -31,7 +31,7 @@ export function useLoadQuotation(): void {
     }
   }, [reRenderQuotationSignal.value])
 
-  useEffectOnce(() => {
+  useEffect(() => {
     if (id !== undefined && id !== 'new') {
       const didSavedNewQuotation = quotationSignal.peek().id === id
       if (didSavedNewQuotation) return
@@ -40,7 +40,7 @@ export function useLoadQuotation(): void {
 
       getQuotation({ id })
     }
-  })
+  }, [reRenderQuotationSignal.value])
 
   useUpdateEffect(() => {
     if (!isPending) return
@@ -71,6 +71,7 @@ export function useLoadQuotation(): void {
 
     if (error.response?.data.message === 'not logged in') {
       notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
+      void router.navigate('./login')
     } else if (error.response?.data.message === 'not found') {
       notify({ msg: 'Not found', type: 'warn', theme: 'light' })
     } else {

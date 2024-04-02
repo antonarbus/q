@@ -7,7 +7,8 @@ import type { FormEvent, MouseEvent } from 'react'
 import { useRef } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { useGetQuotationMutation, useGetQuotationsQuery } from '@entities/quotation'
+import { reRenderQuotationSignal } from '@features/quotation/create_new_quotation'
+import { useGetQuotationsQuery } from '@entities/quotation'
 import { useLogInMutation, userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 import { EmailInput, PasswordInput } from '@shared/components'
@@ -30,8 +31,7 @@ export const LogIn = (): JSX.Element => {
   const isEmailOkSignal = useSignal(false)
 
   const { mutate: logIn, isPending, data, isSuccess, isError, error } = useLogInMutation()
-  // const { refetch: refetchQuotation } = useGetQuotationQuery()
-  // const { refetch: refetchQuotations } = useGetQuotationsQuery()
+  const { refetch: refetchQuotations } = useGetQuotationsQuery()
 
   useUpdateEffect(() => {
     if (!isSuccess) return
@@ -53,7 +53,7 @@ export const LogIn = (): JSX.Element => {
     }
 
     if (id) {
-      void refetchQuotation()
+      reRenderQuotationSignal.value = nanoid(3)
     }
 
     setTimeout(() => {
