@@ -10,4 +10,5 @@ export const route = {
   profile: 'profile',
   settings: 'settings',
   save: 'save',
+  new: 'new',
 } as const

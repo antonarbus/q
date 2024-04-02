@@ -14,7 +14,7 @@ export function useLoadQuotation(): void {
   const id = router.state.matches.at(0)?.params.id
 
   useEffect(() => {
-    if (id === undefined) {
+    if (id === undefined || id === 'new') {
       quotationSignal.value = { email: '', id: '' }
       dispatch(itemsSlice.actions.loadItemsReducer({ items: [] }))
       loadingDotsOverlayTextSignal.value = 'Loading template...'
@@ -32,7 +32,7 @@ export function useLoadQuotation(): void {
   }, [reRenderQuotationSignal.value])
 
   useEffectOnce(() => {
-    if (id !== undefined) {
+    if (id !== undefined && id !== 'new') {
       const didSavedNewQuotation = quotationSignal.peek().id === id
       if (didSavedNewQuotation) return
       quotationSignal.value = { email: '', id: '' }
