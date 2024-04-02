@@ -30,6 +30,7 @@ export const navStructure: MenuItemTypes[] = [
         func: () => {
           createNewQuotation()
         },
+        link: route.new,
       },
       {
         id: navMenuItemId.save,

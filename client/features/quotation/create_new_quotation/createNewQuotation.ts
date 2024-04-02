@@ -5,5 +5,5 @@ import { reRenderQuotationSignal } from './reRenderQuotationSignal'
 
 export const createNewQuotation = (): void => {
   reRenderQuotationSignal.value = nanoid(3)
-  void router.navigate(route.root)
+  void router.navigate(`/${route.new}`)
 }
