@@ -37,7 +37,7 @@ export const navStructure: MenuItemTypes[] = [
         isHidden: false,
         name: 'Save',
         shortcut: ['control', 's'],
-        link: `./${route.saveQuotation}`,
+        link: `./${route.save}`,
 
       },
       {
