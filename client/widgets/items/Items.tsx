@@ -2,7 +2,7 @@ import { useSelectorTyped } from '@lib_instances/store'
 import { AnimatePresence } from 'framer-motion'
 import { type ReactNode } from 'react'
 import { onItemDrag } from '@features/items/item_actions/drag_item'
-import { ItemProvider, itemsShapeEqualityFn, BoqItemProvider, itemType, reRenderItemsSignal } from '@entities/items'
+import { ItemProvider, itemsShapeEqualityFn, BoqItemProvider, itemType } from '@entities/items'
 import { DraggableItemsContainer } from '@entities/items/ui/DraggableItemsContainer'
 import { BoqItem } from './boq/BoqItem'
 import { PasteItem } from './paste/PasteItem'
@@ -25,7 +25,7 @@ export const Items = (): ReactNode => {
     >
       <AnimatePresence initial={false}>
         {items.map((item, itemIndex) => {
-          const key = item.id// + reRenderItemsSignal.value
+          const key = item.id
 
           if (item.type === itemType.text) {
             return (
