@@ -68,7 +68,7 @@ export const router = createBrowserRouter([
         children: [
           ...authRoutes,
           {
-            path: route.saveQuotation,
+            path: route.save,
             element: <SaveQuotation />,
           },
         ],

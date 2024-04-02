@@ -59,7 +59,7 @@ export const SaveQuotation = (): JSX.Element => {
     if (error.response?.data.message === 'not logged in') {
       notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
     } else if (error.response?.data.message === 'not owner') {
-      notify({ msg: 'You are not the quotation owner', type: 'warn', theme: 'light' })
+      notify({ msg: 'Not owner', type: 'warn', theme: 'light' })
     } else if (error.response?.data.message === 'not saved') {
       notify({ msg: 'Not saved', type: 'warn', theme: 'light' })
     } else {
