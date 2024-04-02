@@ -13,7 +13,7 @@ export const beforeUpload = ({ files, editor }: Props): boolean => {
   const id = quotationSignal.peek().id
   const email = quotationSignal.peek().email
 
-  if (id === 'template version') {
+  if (id === 'new') {
     alert('This is not saved template quotation, file will be kept in browser until page is refreshed')
     removeLoadingBar()
     return false

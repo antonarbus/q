@@ -19,7 +19,7 @@ export const SaveQuotation = (): JSX.Element => {
       return
     }
 
-    if (quotationSignal.peek().id === 'template version') {
+    if (quotationSignal.peek().id === 'new') {
       quotationSignal.value = { ...quotationSignal.value, id: nanoid(5), email }
     }
 

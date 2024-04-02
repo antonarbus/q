@@ -20,7 +20,7 @@ export function useLoadQuotation(): void {
 
       setTimeout(() => {
         dispatch(itemsSlice.actions.loadItemsReducer({ items: defaultItems }))
-        quotationSignal.value = { id: 'template version', email: '' }
+        quotationSignal.value = { id: 'new', email: '' }
       }, 200)
 
       dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
