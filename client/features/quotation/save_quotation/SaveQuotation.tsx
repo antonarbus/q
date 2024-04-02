@@ -46,7 +46,7 @@ export const SaveQuotation = (): JSX.Element => {
       navigate('..')
     }
 
-    notify({ msg: 'Saved', type: 'info', position: 'bottom-center' })
+    notify({ msg: 'Saved', type: 'success', position: 'bottom-center' })
     showSuccessNavIcon({ navMenuItemIdKey: 'save' })
     dispatch(navSlice.actions.disableTopNavItem({ navMenuItemIdKey: 'save' }))
     quotationSignal.value = { ...quotationSignal.value, ...data.document }

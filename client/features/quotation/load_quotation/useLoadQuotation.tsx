@@ -15,9 +15,9 @@ export function useLoadQuotation(): void {
 
   useEffect(() => {
     if (id === undefined || id === 'new') {
+      loadingDotsOverlayTextSignal.value = 'Loading template...'
       quotationSignal.value = { email: '', id: '' }
       dispatch(itemsSlice.actions.loadItemsReducer({ items: [] }))
-      loadingDotsOverlayTextSignal.value = 'Loading template...'
 
       setTimeout(() => {
         dispatch(itemsSlice.actions.loadItemsReducer({ items: defaultItems }))
@@ -44,7 +44,7 @@ export function useLoadQuotation(): void {
 
   useUpdateEffect(() => {
     if (!isPending) return
-    loadingDotsOverlayTextSignal.value = 'Loading'
+    loadingDotsOverlayTextSignal.value = 'Loading...'
   }, [isPending])
 
   useUpdateEffect(() => {
