@@ -6,7 +6,6 @@ export { itemsSlice } from './redux/itemsSlice'
 
 // signals
 export { isItemsFroalaSignal } from './signals/isItemsFroalaSignal'
-export { reRenderItemsSignal } from './signals/reRenderItemsSignal'
 
 // selectors
 export { itemsShapeEqualityFn } from './redux/selectors/itemsShapeEqualityFn'

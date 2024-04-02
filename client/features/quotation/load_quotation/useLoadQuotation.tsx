@@ -2,11 +2,12 @@ import { router } from '@lib_instances/Router'
 import { dispatch } from '@lib_instances/store'
 import { useEffect } from 'react'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
-import { defaultItems, itemsSlice, reRenderItemsSignal } from '@entities/items'
+import { defaultItems, itemsSlice } from '@entities/items'
 import { quotationSignal, useGetQuotationMutation } from '@entities/quotation'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
 import { navSlice } from '@shared/nav'
 import { notify } from '@shared/ui/top_msg'
+import { reRenderQuotationSignal } from '../create_new_quotation'
 
 export function useLoadQuotation(): void {
   const { mutate: getQuotation, data, isSuccess, isPending, isError, error } = useGetQuotationMutation()
@@ -28,7 +29,7 @@ export function useLoadQuotation(): void {
       dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'share' }))
       setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 2000)
     }
-  }, [reRenderItemsSignal.value])
+  }, [reRenderQuotationSignal.value])
 
   useEffectOnce(() => {
     if (id !== undefined) {
