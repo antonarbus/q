@@ -27,6 +27,7 @@ export function useLoadQuotation(): void {
       dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
       dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'pdf' }))
       dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'share' }))
+      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'add' }))
       setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 2000)
     }
   }, [reRenderQuotationSignal.value])
