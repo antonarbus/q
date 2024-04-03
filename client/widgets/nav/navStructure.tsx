@@ -1,9 +1,10 @@
 import { Person, Settings } from '@mui/icons-material'
-import { createElement } from 'react'
 import { BsFiletypePdf } from 'react-icons/bs'
 import { CiViewTable } from 'react-icons/ci'
-import { FiLogOut, FiLogIn } from 'react-icons/fi'
-import { IoSaveOutline, IoShareOutline } from 'react-icons/io5'
+import { FiLogOut, FiLogIn, FiDollarSign } from 'react-icons/fi'
+import { IoSaveOutline, IoText } from 'react-icons/io5'
+import { MdOutlineAdd, MdOutlineTableRows } from 'react-icons/md'
+import { TbTableRow } from 'react-icons/tb'
 import { VscNewFile } from 'react-icons/vsc'
 import { createNewQuotation } from '@features/quotation/create_new_quotation'
 import { downloadPdf } from '@features/quotation/download_pdf'
@@ -11,9 +12,6 @@ import { navMenuItemId } from '@shared/consts/navMenuItemId'
 import { route } from '@shared/consts/route'
 import { nanoid } from '@shared/lib/nanoid'
 import type { MenuItemTypes } from '@shared/nav'
-import logo from './logo.svg'
-
-const reactIcon = createElement(IoShareOutline, {})
 
 export const navStructure: MenuItemTypes[] = [
   {
@@ -52,110 +50,51 @@ export const navStructure: MenuItemTypes[] = [
         },
       },
       {
-        id: navMenuItemId.share,
-        icon: <IoShareOutline />,
+        id: navMenuItemId.add,
+        icon: <MdOutlineAdd />,
         isHidden: false,
-        name: 'Share',
+        name: 'Add',
         disabled: true,
         menuItems: [
           {
-            id: nanoid(3),
-            name: 'item in menu 1',
-            icon: '😇',
+            id: navMenuItemId.textBlock,
+            name: 'Text block',
+            icon: <IoText />,
             isHidden: false,
-            menuItems: [
-              {
-                id: nanoid(3),
-                name: 'item in menu 1',
-                icon: '😎',
-                isHidden: false,
-                menuItems: [
-                  {
-                    id: nanoid(3),
-                    name: 'long long long long long long long long name',
-                    icon: reactIcon,
-                    isHidden: false,
-                  },
-                  {
-                    id: nanoid(3),
-                    name: 'item in menu 1',
-                    icon: null,
-                    isHidden: false,
-                  },
-                  {
-                    id: nanoid(3),
-                    name: 'item in menu 1',
-                    icon: <img src={logo} />,
-                    isHidden: false,
-                  },
-                  {
-                    id: nanoid(3),
-                    name: 'item in menu 1',
-                    icon: reactIcon,
-                    isHidden: false,
-                  },
-                  {
-                    id: nanoid(3),
-                    name: 'item in menu 1',
-                    icon: reactIcon,
-                    isHidden: false,
-                  },
-                  {
-                    id: nanoid(3),
-                    name: 'item in menu 1',
-                    icon: reactIcon,
-                    isHidden: false,
-                  },
-                  {
-                    id: nanoid(3),
-                    name: 'item in menu 1',
-                    icon: reactIcon,
-                    isHidden: false,
-                  },
-                ],
-              },
-              {
-                id: nanoid(3),
-                name: 'item in menu 1',
-                icon: '😎',
-                isHidden: false,
-              },
-              {
-                id: nanoid(3),
-                name: 'item in menu 1',
-                icon: '😎',
-                isHidden: false,
-              },
-            ],
-          },
-          {
-            id: nanoid(3),
-            name: 'item in menu 1',
-            icon: 'IC',
-            isHidden: false,
-          },
-          {
-            id: nanoid(3),
-            name: 'link',
-            link: route.root,
-            icon: '😇',
-            isHidden: false,
-            shortcut: ['control', 'x'],
-          },
-          {
-            id: nanoid(3),
-            name: 'item in menu 1',
-            icon: '',
-            isHidden: false,
-          },
-          {
-            id: nanoid(3),
-            name: 'func',
-            func: (): void => {
-              alert('i am the function')
+            shortcut: ['control', 'shift', 't'],
+            func: () => {
+              alert('text')
             },
-            shortcut: ['control', 'c'],
+          },
+          {
+            id: navMenuItemId.itemsBlock,
+            name: 'Items block',
+            icon: <TbTableRow />,
             isHidden: false,
+            shortcut: ['control', 'shift', 'i'],
+            func: () => {
+              alert('boq')
+            },
+          },
+          {
+            id: navMenuItemId.priceBlock,
+            name: 'Price block',
+            icon: <FiDollarSign />,
+            isHidden: false,
+            shortcut: ['control', 'shift', 'p'],
+            func: () => {
+              alert('price')
+            },
+          },
+          {
+            id: navMenuItemId.row,
+            name: 'Row',
+            icon: < MdOutlineTableRows/>,
+            isHidden: false,
+            shortcut: ['control', 'shift', 'r'],
+            func: () => {
+              alert('row')
+            },
           },
         ],
       },
