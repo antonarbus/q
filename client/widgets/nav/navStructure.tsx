@@ -7,7 +7,7 @@ import { IoSaveOutline, IoText } from 'react-icons/io5'
 import { MdOutlineAdd } from 'react-icons/md'
 import { TbTableRow } from 'react-icons/tb'
 import { VscNewFile } from 'react-icons/vsc'
-import { addTextItem } from '@features/items/add'
+import { addPriceItem, addTextItem } from '@features/items/add'
 import { createNewQuotation } from '@features/quotation/create_new_quotation'
 import { downloadPdf } from '@features/quotation/download_pdf'
 import { navMenuItemId } from '@shared/consts/navMenuItemId'
@@ -25,7 +25,7 @@ export const navStructure: MenuItemTypes[] = [
         icon: <VscNewFile />,
         isHidden: false,
         name: 'New',
-        shortcut: ['control', 'n'],
+        // shortcut: ['control', 'n'],
         func: () => {
           createNewQuotation()
         },
@@ -36,7 +36,7 @@ export const navStructure: MenuItemTypes[] = [
         icon: <IoSaveOutline />,
         isHidden: false,
         name: 'Save',
-        shortcut: ['control', 's'],
+        // shortcut: ['control', 's'],
         link: `./${route.save}`,
 
       },
@@ -62,7 +62,7 @@ export const navStructure: MenuItemTypes[] = [
             name: 'Text',
             icon: <IoText />,
             isHidden: false,
-            shortcut: ['control', 'shift', 't'],
+            // shortcut: ['control', 'shift', 't'],
             func: (e) => {
               if (e === undefined) return
               addTextItem(e)
@@ -73,7 +73,7 @@ export const navStructure: MenuItemTypes[] = [
             name: 'Items',
             icon: <TbTableRow />,
             isHidden: false,
-            shortcut: ['control', 'shift', 'i'],
+            // shortcut: ['control', 'shift', 'i'],
             func: () => {
               alert('boq')
             },
@@ -83,9 +83,10 @@ export const navStructure: MenuItemTypes[] = [
             name: 'Price',
             icon: <FiDollarSign />,
             isHidden: false,
-            shortcut: ['control', 'shift', 'p'],
-            func: () => {
-              alert('price')
+            // shortcut: ['control', 'shift', 'p'],
+            func: (e) => {
+              if (e === undefined) return
+              addPriceItem(e)
             },
           },
           {
@@ -93,7 +94,7 @@ export const navStructure: MenuItemTypes[] = [
             name: 'Row',
             icon: <AiOutlineMinus/>,
             isHidden: false,
-            shortcut: ['control', 'shift', 'r'],
+            // shortcut: ['control', 'shift', 'r'],
             func: () => {
               alert('row')
             },

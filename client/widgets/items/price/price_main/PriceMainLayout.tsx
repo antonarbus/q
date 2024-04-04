@@ -8,7 +8,7 @@ export const PriceMainLayout = ({ main }: Props): JSX.Element => {
   return (
     <Box
       className='layout price-value'
-      sx={{
+      style={{
         padding: '10px 15px',
         minHeight: '40px',
       }}
