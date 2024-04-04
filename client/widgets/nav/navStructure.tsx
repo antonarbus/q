@@ -1,16 +1,16 @@
 import { Person, Settings } from '@mui/icons-material'
+import { AiOutlineMinus } from 'react-icons/ai'
 import { BsFiletypePdf } from 'react-icons/bs'
 import { CiViewTable } from 'react-icons/ci'
 import { FiLogOut, FiLogIn, FiDollarSign } from 'react-icons/fi'
 import { IoSaveOutline, IoText } from 'react-icons/io5'
-import { MdOutlineAdd, MdOutlineTableRows } from 'react-icons/md'
+import { MdOutlineAdd } from 'react-icons/md'
 import { TbTableRow } from 'react-icons/tb'
 import { VscNewFile } from 'react-icons/vsc'
 import { createNewQuotation } from '@features/quotation/create_new_quotation'
 import { downloadPdf } from '@features/quotation/download_pdf'
 import { navMenuItemId } from '@shared/consts/navMenuItemId'
 import { route } from '@shared/consts/route'
-import { nanoid } from '@shared/lib/nanoid'
 import type { MenuItemTypes } from '@shared/nav'
 
 export const navStructure: MenuItemTypes[] = [
@@ -58,7 +58,7 @@ export const navStructure: MenuItemTypes[] = [
         menuItems: [
           {
             id: navMenuItemId.textBlock,
-            name: 'Text block',
+            name: 'Text',
             icon: <IoText />,
             isHidden: false,
             shortcut: ['control', 'shift', 't'],
@@ -68,7 +68,7 @@ export const navStructure: MenuItemTypes[] = [
           },
           {
             id: navMenuItemId.itemsBlock,
-            name: 'Items block',
+            name: 'Items',
             icon: <TbTableRow />,
             isHidden: false,
             shortcut: ['control', 'shift', 'i'],
@@ -78,7 +78,7 @@ export const navStructure: MenuItemTypes[] = [
           },
           {
             id: navMenuItemId.priceBlock,
-            name: 'Price block',
+            name: 'Price',
             icon: <FiDollarSign />,
             isHidden: false,
             shortcut: ['control', 'shift', 'p'],
@@ -89,7 +89,7 @@ export const navStructure: MenuItemTypes[] = [
           {
             id: navMenuItemId.row,
             name: 'Row',
-            icon: < MdOutlineTableRows/>,
+            icon: <AiOutlineMinus/>,
             isHidden: false,
             shortcut: ['control', 'shift', 'r'],
             func: () => {

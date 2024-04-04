@@ -73,14 +73,6 @@ export const useMenuItemActionShortcuts = ({ navStructure }: Props): void => {
       if (shortcutItem.link) {
         navigate(shortcutItem.link)
       }
-      notify({
-        msg: (
-          <>
-            <span style={{ color: 'orange' }}>{shortcutItem.name}</span>{' '}
-            triggered with keyboard
-          </>
-        ),
-      })
     })
   })
 }
