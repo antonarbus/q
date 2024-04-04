@@ -22,7 +22,7 @@ export const DescriptionCell = (): JSX.Element => {
           tabFromDescriptionCell({ e, rowIndex, itemPriceCellEditorRef })
         }}
         wrapperStyles={stylesForResizableCell}
-        additionalStyle={{
+        sx={{
           ...boqRowCellStyle,
           textAlign: 'left',
           '.fr-placeholder': {

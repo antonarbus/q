@@ -27,7 +27,7 @@ export const ItemPriceCell = (): JSX.Element => {
           tabFromItemPriceCell({ e, rowIndex, qtyCellEditorRef })
         }}
         wrapperStyles={stylesForResizableCell}
-        additionalStyle={boqRowCellStyle}
+        sx={boqRowCellStyle}
       />
       <Pin
         boqRowCellKey={boqRowCellKey.itemPrice}
