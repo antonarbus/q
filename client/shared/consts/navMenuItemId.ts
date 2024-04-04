@@ -12,8 +12,8 @@ export const navMenuItemId = {
   settings: 'settings',
   profile: 'profile',
   logout: 'logout',
-  textBlock: 'textBlock',
-  itemsBlock: 'itemsBlock',
-  priceBlock: 'priceBlock',
-  row: 'row',
+  textItem: 'textItem',
+  boqItem: 'boqItem',
+  priceItem: 'priceItem',
+  boqRow: 'boqRow',
 } as const

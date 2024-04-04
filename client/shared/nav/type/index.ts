@@ -1,3 +1,4 @@
+import { type MouseEvent } from 'react'
 import { type navMenuItemId } from '../../consts/navMenuItemId'
 
 export type MenuItemType = {
@@ -5,7 +6,7 @@ export type MenuItemType = {
   name: string
   icon?: React.ReactNode | string
   link?: string
-  func?: () => Promise<void> | void
+  func?: (e: MouseEvent) => Promise<void> | void
   shortcut?: string[]
   menuItems?: MenuItemType[]
   isHidden: boolean
