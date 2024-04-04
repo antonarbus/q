@@ -18,7 +18,7 @@ export const Title = (): JSX.Element => {
       onContentChange={() => {
         updateTitleCell({ editorRef, itemIndex, boqHeaderKey })
       }}
-      additionalStyle={titleCellStyle}
+      style={titleCellStyle}
     />
   )
 }

@@ -18,7 +18,7 @@ export const SubtotalText = (): JSX.Element => {
       onContentChange={() => {
         updateSubtotalTextCell({ editorRef, itemIndex, boqHeaderKey })
       }}
-      additionalStyle={subTotalTextCellStyle}
+      style={subTotalTextCellStyle}
     />
   )
 }

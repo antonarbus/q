@@ -27,7 +27,7 @@ export const SubTotalPrice = (): JSX.Element => {
         formatSubtotalPriceCell({ itemIndex, subTotalPriceEditorRef })
         validateBoqRowPrices({ boqRowEditorRefs, itemIndex, subTotalPriceEditorRef })
       }}
-      additionalStyle={subTotalPriceCellStyle}
+      style={subTotalPriceCellStyle}
     />
   )
 }

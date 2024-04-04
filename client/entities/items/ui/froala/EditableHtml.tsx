@@ -3,7 +3,7 @@ import { useFroala } from '../../providers/FroalaProvider'
 import { useStartFroala } from './useStartFroala'
 
 export const EditableHtml = (): JSX.Element => {
-  const { additionalStyle, froalaElementRef, froalaHeightRef, sx } = useFroala()
+  const { style, froalaElementRef, froalaHeightRef, sx } = useFroala()
   useStartFroala()
 
   return (
@@ -13,7 +13,7 @@ export const EditableHtml = (): JSX.Element => {
       style={{
         height: froalaHeightRef.current ?? 'auto', // needed for animation, height will be removed after froala is initialized
         wordBreak: 'break-word',
-        ...additionalStyle,
+        ...style,
       }}
       sx={sx}
     />

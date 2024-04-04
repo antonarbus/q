@@ -22,7 +22,7 @@ export const QtyColumn = (): JSX.Element => {
         onContentChange={() => {
           updateBoqColumnCell({ editorRef, itemIndex, boqColumnKey: boqColumnKey.qty })
         }}
-        additionalStyle={columnHeaderStyle}
+        style={columnHeaderStyle}
       />
     </ResizableColumn>
   )

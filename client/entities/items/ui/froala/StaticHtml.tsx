@@ -9,7 +9,7 @@ type Props = {
 
 export const StaticHtml = ({ additionalStyles2 }: Props): JSX.Element => {
   const staticHtmlRef = useRef<HTMLDivElement>()
-  const { htmlGetter, additionalStyle, froalaHeightRef, sx } = useFroala()
+  const { htmlGetter, style, froalaHeightRef, sx } = useFroala()
 
   // insert html into element
   useEffectOnce(() => {
@@ -38,7 +38,7 @@ export const StaticHtml = ({ additionalStyles2 }: Props): JSX.Element => {
             opacity: 0.5,
             wordBreak: 'break-word',
             ...additionalStyles2,
-            ...additionalStyle,
+            ...style,
           }}
         >
         </Box>
