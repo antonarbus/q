@@ -25,7 +25,7 @@ export const PriceHeaderLayout = ({
     >
       <Box
         className='layout price-header'
-        sx={{
+        style={{
           background: '#343434e6',
           padding: '15px 15px',
           color: theme.colors.greyFont,

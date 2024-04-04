@@ -5,15 +5,10 @@ import { getMenuItemByIdsChain } from '../../functions/getMenuItemByIdsChain'
 import { navigateInMenu } from '../../functions/useMenuAnimation'
 
 export const clickOnMenuItem = (e: MouseEvent, menuId: string, disabled: boolean): void => {
-  const chainToClickedItem = [
-    ...getState().nav.idsToCurrentMenuItems,
-    menuId,
-  ]
+  const chainToClickedItem = [...getState().nav.idsToCurrentMenuItems, menuId]
   const nextMenu = getMenuItemByIdsChain(chainToClickedItem)
   const isNestedMenuAvailable = !!nextMenu.length
-  const menuItems = getMenuItemByIdsChain(
-    getState().nav.idsToCurrentMenuItems,
-  )
+  const menuItems = getMenuItemByIdsChain(getState().nav.idsToCurrentMenuItems)
   const menuItem = menuItems.find((item) => item.id === menuId)
   const link = menuItem?.link
   const func = menuItem?.func
@@ -36,6 +31,7 @@ export const clickOnMenuItem = (e: MouseEvent, menuId: string, disabled: boolean
   e.preventDefault()
 
   if (func) {
+    console.log('hi')
     void func(e)
     dispatch(navSlice.actions.closeMenu())
     return

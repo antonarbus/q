@@ -67,6 +67,7 @@ export const useMenuItemActionShortcuts = ({ navStructure }: Props): void => {
       if (shortcutItem === undefined) return
       e.preventDefault()
       if (shortcutItem.function) {
+        console.log(666)
         shortcutItem.function()
       }
       if (shortcutItem.link) {
