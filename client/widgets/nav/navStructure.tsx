@@ -7,6 +7,7 @@ import { IoSaveOutline, IoText } from 'react-icons/io5'
 import { MdOutlineAdd } from 'react-icons/md'
 import { TbTableRow } from 'react-icons/tb'
 import { VscNewFile } from 'react-icons/vsc'
+import { addTextItem } from '@features/items/add'
 import { createNewQuotation } from '@features/quotation/create_new_quotation'
 import { downloadPdf } from '@features/quotation/download_pdf'
 import { navMenuItemId } from '@shared/consts/navMenuItemId'
@@ -57,17 +58,17 @@ export const navStructure: MenuItemTypes[] = [
         disabled: true,
         menuItems: [
           {
-            id: navMenuItemId.textBlock,
+            id: navMenuItemId.textItem,
             name: 'Text',
             icon: <IoText />,
             isHidden: false,
             shortcut: ['control', 'shift', 't'],
-            func: () => {
-              alert('text')
+            func: (e) => {
+              addTextItem(e)
             },
           },
           {
-            id: navMenuItemId.itemsBlock,
+            id: navMenuItemId.boqItem,
             name: 'Items',
             icon: <TbTableRow />,
             isHidden: false,
@@ -77,7 +78,7 @@ export const navStructure: MenuItemTypes[] = [
             },
           },
           {
-            id: navMenuItemId.priceBlock,
+            id: navMenuItemId.priceItem,
             name: 'Price',
             icon: <FiDollarSign />,
             isHidden: false,
@@ -87,7 +88,7 @@ export const navStructure: MenuItemTypes[] = [
             },
           },
           {
-            id: navMenuItemId.row,
+            id: navMenuItemId.boqRow,
             name: 'Row',
             icon: <AiOutlineMinus/>,
             isHidden: false,

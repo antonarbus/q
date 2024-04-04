@@ -22,7 +22,7 @@ export const clickOnMenuItem = (e: MouseEvent, menuId: string, disabled: boolean
 
   if (link && func) {
     // follow the link natively and call the func
-    void func()
+    void func(e)
     dispatch(navSlice.actions.closeMenu())
     return
   }
@@ -36,7 +36,7 @@ export const clickOnMenuItem = (e: MouseEvent, menuId: string, disabled: boolean
   e.preventDefault()
 
   if (func) {
-    void func()
+    void func(e)
     dispatch(navSlice.actions.closeMenu())
     return
   }

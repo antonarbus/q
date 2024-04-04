@@ -21,7 +21,7 @@ export const clickOnNavItem = ({ e, navItem, id, navItemRef, disabled }: Props):
 
   if (link && func) {
     // just follow the link natively and call the func
-    void func()
+    void func(e)
     return
   }
 
@@ -51,7 +51,7 @@ export const clickOnNavItem = ({ e, navItem, id, navItemRef, disabled }: Props):
   }
 
   if (func) {
-    void func()
+    void func(e)
     return
   }
 
