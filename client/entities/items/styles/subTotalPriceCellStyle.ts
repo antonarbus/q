@@ -1,6 +1,4 @@
-import { type SxProps } from '@mui/material'
-
-export const subTotalPriceCellStyle: SxProps = {
+export const subTotalPriceCellStyle: React.CSSProperties = {
   width: '100%',
   minWidth: '100px',
   whiteSpace: 'nowrap',

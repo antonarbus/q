@@ -21,10 +21,10 @@ export const TextItem = (): JSX.Element => {
         htmlGetter={() => getItemTextHtmlFromStore({ itemIndex })}
         placeholder='Add text, tables, drop images, files, links, select to format...'
         beforeUpload={beforeUpload}
+        additionalStyle={textItemCellStyle}
         onContentChange={() => {
           updateTextItem({ editorRef, itemIndex })
         }}
-        additionalStyle={textItemCellStyle}
       />
     </Item>
   )

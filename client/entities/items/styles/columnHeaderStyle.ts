@@ -1,6 +1,4 @@
-import { type SxProps } from '@mui/material'
-
-export const columnHeaderStyle: SxProps = {
+export const columnHeaderStyle: React.CSSProperties = {
   flexGrow: 1,
   textAlign: 'center',
   minHeight: '24px',

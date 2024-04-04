@@ -1,6 +1,4 @@
-import { type SxProps } from '@mui/material'
-
-export const titleCellStyle: SxProps = {
+export const titleCellStyle: React.CSSProperties = {
   flexGrow: 1,
   minHeight: '24px',
 }
