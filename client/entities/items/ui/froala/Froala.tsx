@@ -17,7 +17,7 @@ export type FroalaProps = {
   htmlGetter: () => string
   editorRef: FroalaEditorRef
   placeholder?: string
-  additionalStyle?: React.CSSProperties
+  style?: React.CSSProperties
   sx?: SxProps
   onContentChange: () => void
   onFocus?: () => void
@@ -33,7 +33,7 @@ export type FroalaProps = {
 export const Froala = ({
   editorRef,
   htmlGetter,
-  additionalStyle,
+  style,
   sx,
   placeholder,
   onContentChange,
@@ -59,7 +59,7 @@ export const Froala = ({
     <FroalaProvider
       editorRef={editorRef}
       htmlGetter={htmlGetter}
-      additionalStyle={additionalStyle}
+      style={style}
       sx={sx}
       placeholder={placeholder}
       onContentChange={onContentChange}

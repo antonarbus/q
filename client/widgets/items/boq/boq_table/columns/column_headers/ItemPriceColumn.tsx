@@ -22,7 +22,7 @@ export const ItemPriceColumn = (): JSX.Element => {
         onContentChange={() => {
           updateBoqColumnCell({ editorRef, itemIndex, boqColumnKey: boqColumnKey.itemPrice })
         }}
-        additionalStyle={columnHeaderStyle}
+        style={columnHeaderStyle}
       />
     </ResizableColumn>
   )

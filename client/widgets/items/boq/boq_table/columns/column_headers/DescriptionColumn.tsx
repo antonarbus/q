@@ -22,7 +22,7 @@ export const DescriptionColumn = (): ReactNode => {
         onContentChange={() => {
           updateBoqColumnCell({ editorRef, itemIndex, boqColumnKey: boqColumnKey.description })
         }}
-        additionalStyle={{
+        style={{
           ...columnHeaderStyle,
           textAlign: 'left',
         }}
