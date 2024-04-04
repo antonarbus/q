@@ -4,10 +4,10 @@ import { useEffectOnce } from 'react-use'
 import { useFroala } from '../../providers/FroalaProvider'
 
 type Props = {
-  additionalStyles2?: CSSProperties
+  styleAgainstFroalaBlinks?: CSSProperties
 }
 
-export const StaticHtml = ({ additionalStyles2 }: Props): JSX.Element => {
+export const StaticHtml = ({ styleAgainstFroalaBlinks }: Props): JSX.Element => {
   const staticHtmlRef = useRef<HTMLDivElement>()
   const { htmlGetter, style, froalaHeightRef, sx } = useFroala()
 
@@ -37,7 +37,7 @@ export const StaticHtml = ({ additionalStyles2 }: Props): JSX.Element => {
           style={{
             opacity: 0.5,
             wordBreak: 'break-word',
-            ...additionalStyles2,
+            ...styleAgainstFroalaBlinks,
             ...style,
           }}
         >

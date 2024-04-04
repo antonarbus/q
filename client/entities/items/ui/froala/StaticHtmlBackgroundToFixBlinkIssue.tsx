@@ -23,7 +23,7 @@ export const StaticHtmlBackgroundToFixBlinkIssue = (): JSX.Element => {
 
   return (
     <StaticHtml
-      additionalStyles2={{
+      styleAgainstFroalaBlinks={{
         position: 'absolute',
         width: '100%',
         visibility,
