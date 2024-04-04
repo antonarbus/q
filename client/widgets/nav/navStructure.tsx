@@ -64,6 +64,7 @@ export const navStructure: MenuItemTypes[] = [
             isHidden: false,
             shortcut: ['control', 'shift', 't'],
             func: (e) => {
+              if (e === undefined) return
               addTextItem(e)
             },
           },

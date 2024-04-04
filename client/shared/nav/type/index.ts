@@ -6,7 +6,7 @@ export type MenuItemType = {
   name: string
   icon?: React.ReactNode | string
   link?: string
-  func?: (e: MouseEvent) => Promise<void> | void
+  func?: (e?: MouseEvent) => Promise<void> | void
   shortcut?: string[]
   menuItems?: MenuItemType[]
   isHidden: boolean
