@@ -13,8 +13,8 @@ export const CopyContainer = (): JSX.Element => {
   usePasteClick()
   useDisableNavItems()
   const copyContainerAnimationControls = useCopyContainerAnimation()
-  const { x, y } = useCursorCords()
-  // const { x, y } = { x: 300, y: 0 }
+  // const { x, y } = useCursorCords()
+  const { x, y } = { x: 300, y: 0 }
 
   return (
     <motion.div
@@ -32,7 +32,7 @@ export const CopyContainer = (): JSX.Element => {
         width: 0,
         maxHeight: 265,
         '.static-html .fr-element.fr-view': {
-          opacity: '1',
+          opacity: '1 !important',
         },
       }}
     >
