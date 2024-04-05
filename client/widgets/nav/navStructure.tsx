@@ -69,8 +69,9 @@ export const navStructure: MenuItemTypes[] = [
                 name: 'Text',
                 icon: <IoText />,
                 isHidden: false,
-                // shortcut: ['control', 'shift', 't'],
+                shortcut: ['control', 'shift', 't'],
                 func: (e) => {
+                  console.log('add text item')
                   if (e === undefined) return
                   addTextItem(e)
                 },
@@ -80,8 +81,9 @@ export const navStructure: MenuItemTypes[] = [
                 name: 'Items',
                 icon: <FaRegRectangleList />,
                 isHidden: false,
-                // shortcut: ['control', 'shift', 'i'],
+                shortcut: ['control', 'shift', 'i'],
                 func: (e) => {
+                  console.log('add boq item')
                   if (e === undefined) return
                   addBoqItem(e)
                 },
@@ -91,8 +93,9 @@ export const navStructure: MenuItemTypes[] = [
                 name: 'Price',
                 icon: <FiDollarSign />,
                 isHidden: false,
-                // shortcut: ['control', 'shift', 'p'],
+                shortcut: ['control', 'shift', 'p'],
                 func: (e) => {
+                  console.log('add price item')
                   if (e === undefined) return
                   addPriceItem(e)
                 },
@@ -104,8 +107,9 @@ export const navStructure: MenuItemTypes[] = [
             name: 'Row',
             icon: <AiOutlineMinus/>,
             isHidden: false,
-            // shortcut: ['control', 'shift', 'r'],
+            shortcut: ['control', 'shift', 'r'],
             func: (e) => {
+              console.log('add boq row')
               if (e === undefined) return
               addBoqRow(e)
             },

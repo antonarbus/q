@@ -20,11 +20,11 @@ export const CutItemIcon = (): JSX.Element => {
         scale: disabled ? 1 : 1.3,
       }}
       whileTap={{ scale: 1 }}
+      tabIndex={-1}
       style={{
         color: disabled ? '#acacac' : '#000',
         cursor: disabled ? 'default' : 'pointer',
       }}
-      tabIndex={-1}
       onClick={(e: MouseEvent): void => {
         if (disabled) return
 

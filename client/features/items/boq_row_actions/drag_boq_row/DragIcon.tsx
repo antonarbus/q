@@ -9,11 +9,11 @@ const Handle = (): JSX.Element => {
   return (
     <motion.span
       whileHover={{ scale: isDisabled ? 1 : 2.3 }}
+      tabIndex={-1}
       style={{
         color: isDisabled ? '#acacac' : '#000',
         cursor: isDisabled ? 'default' : 'move',
       }}
-      tabIndex={-1}
     >
       <MdDragIndicator />
     </motion.span>
