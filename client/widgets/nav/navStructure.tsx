@@ -1,8 +1,7 @@
 import { Person, Settings } from '@mui/icons-material'
-import { AiOutlineMinus } from 'react-icons/ai'
 import { BsFiletypePdf } from 'react-icons/bs'
 import { CiViewTable } from 'react-icons/ci'
-import { FaRegRectangleList } from 'react-icons/fa6'
+import { FaRegRectangleList, FaGripLines } from 'react-icons/fa6'
 import { FiLogOut, FiLogIn, FiDollarSign } from 'react-icons/fi'
 import { IoSaveOutline, IoText } from 'react-icons/io5'
 import { MdOutlineAdd } from 'react-icons/md'
@@ -105,7 +104,7 @@ export const navStructure: MenuItemTypes[] = [
           {
             id: navMenuItemId.boqRow,
             name: 'Row',
-            icon: <AiOutlineMinus/>,
+            icon: <FaGripLines/>,
             isHidden: false,
             shortcut: ['control', 'shift', 'r'],
             func: (e) => {
