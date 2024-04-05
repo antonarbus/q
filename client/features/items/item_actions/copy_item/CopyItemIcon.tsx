@@ -18,13 +18,13 @@ export const CopyItemIcon = (): JSX.Element => {
         scale: disabled ? 1 : 1.3,
       }}
       whileTap={{ scale: 1 }}
+      tabIndex={-1}
       style={{
         position: 'relative',
         top: 1,
         cursor: disabled ? 'default' : 'pointer',
         color: disabled ? '#acacac' : '#000',
       }}
-      tabIndex={-1}
       onClick={(e: MouseEvent): void => {
         if (disabled) return
 
