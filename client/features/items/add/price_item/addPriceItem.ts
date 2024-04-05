@@ -26,10 +26,10 @@ export const addPriceItem = (e: MouseEvent): void => {
 
   dispatch(copySlice.actions.addItemIntoCopyContainer({
     copyItem: itemToCopy, preview: `
-      <div class="MuiBox-root css-v7db9u">
+      <div class="MuiBox-root">
         <div class="layout price-header MuiBox-root"
           style="background: rgba(52, 52, 52, 0.9); padding: 15px; color: rgb(188, 188, 188); border-top-left-radius: 6px; border-top-right-radius: 6px; min-height: 50px;">
-          <div class="froala-wrapper  MuiBox-root css-4g6ai3">
+          <div class="froala-wrapper  MuiBox-root">
             <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word;">
               <div class="fr-wrapper">
                 <div class="fr-element fr-view">
@@ -41,7 +41,7 @@ export const addPriceItem = (e: MouseEvent): void => {
         </div>
       </div>
       <div class="layout price-value MuiBox-root" style="padding: 10px 15px; min-height: 40px;">
-        <div class="froala-wrapper  MuiBox-root css-4g6ai3">
+        <div class="froala-wrapper  MuiBox-root">
           <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word;">
             <div class="fr-wrapper">
               <div class="fr-element fr-view">
