@@ -48,7 +48,8 @@ export const addBoqRow = (e: MouseEvent): void => {
   isItemsFroalaSignal.value = false
 
   dispatch(copySlice.actions.addItemIntoCopyContainer({
-    copyItem: itemToCopy, preview: `
+    copyItem: itemToCopy,
+    preview: `
       <div class="boq-row MuiBox-root" id="ynT" style="display: flex; flex-direction: column; justify-content: flex-end; position: relative; border-bottom: 1px solid rgb(232, 232, 232);">
         <div class="paste-here" style="opacity: 1; display: flex; align-items: stretch;">
           <div class="td number MuiBox-root" style="display: flex; align-items: flex-end; position: relative; width: 30px; max-width: 30px; min-width: 30px; font-size: 10px; color: grey; padding-bottom: 2px;">1.1</div>

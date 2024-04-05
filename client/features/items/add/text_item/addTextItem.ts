@@ -21,7 +21,8 @@ export const addTextItem = (e: MouseEvent): void => {
   isItemsFroalaSignal.value = false
 
   dispatch(copySlice.actions.addItemIntoCopyContainer({
-    copyItem: itemToCopy, preview: `
+    copyItem: itemToCopy,
+    preview: `
       <div class="froala-wrapper  MuiBox-root">
         <div class="static-html fr-box fr-inline MuiBox-root">
           <div class="fr-wrapper MuiBox-root">
