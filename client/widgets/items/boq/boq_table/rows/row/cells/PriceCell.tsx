@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import { Pin, pinBoqRowPriceCell, showBoqRowPins } from '@features/items/pin'
 import { tabFromPriceCell } from '@features/items/tab_away_from_cell'
 import { formatBoqRowPriceCell, updateBoqRowPriceCell, validateBoqRowPrice } from '@features/items/update_cell'
-import { getBoqCellHtmlFromStore, useBoqItem, useItem, useRow, Froala, boqRowCellStyle, useStylesForResizableCell, boqRowCellKey, boqColumnKey } from '@entities/items'
+import { getBoqCellHtmlFromStore, useBoqItem, useItem, useRow, Froala, boqRowCellStyle, useStylesForResizableCell, boqRowCellKey, boqColumnKey, boqRowCellSx } from '@entities/items'
 
 export const PriceCell = (): JSX.Element => {
   const { itemIndex } = useItem()
@@ -31,7 +31,8 @@ export const PriceCell = (): JSX.Element => {
           tabFromPriceCell({ e, rowIndex, boqRowEditorRefs })
         }}
         wrapperStyles={stylesForResizableCell}
-        sx={boqRowCellStyle}
+        style={boqRowCellStyle}
+        sx={boqRowCellSx}
       />
       <Pin
         boqRowCellKey={boqRowCellKey.price}

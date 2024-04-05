@@ -1,7 +1,7 @@
 import { tabFromDescriptionCell } from '@features/items/tab_away_from_cell'
 import { updateDescriptionCell } from '@features/items/update_cell'
 import { beforeUpload } from '@features/items/upload'
-import { getBoqCellHtmlFromStore, useRow, useItem, Froala, useStylesForResizableCell, boqRowCellStyle, boqRowCellKey, boqColumnKey } from '@entities/items'
+import { getBoqCellHtmlFromStore, useRow, useItem, Froala, useStylesForResizableCell, boqRowCellStyle, boqRowCellSx, boqRowCellKey, boqColumnKey } from '@entities/items'
 
 export const DescriptionCell = (): JSX.Element => {
   const { itemIndex } = useItem()
@@ -22,12 +22,12 @@ export const DescriptionCell = (): JSX.Element => {
           tabFromDescriptionCell({ e, rowIndex, itemPriceCellEditorRef })
         }}
         wrapperStyles={stylesForResizableCell}
-        sx={{
+        style={{
           ...boqRowCellStyle,
           textAlign: 'left',
-          '.fr-placeholder': {
-            left: 0,
-          },
+        }}
+        sx={{
+          '.fr-placeholder': { left: 0 },
         }}
       />
   )
