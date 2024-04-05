@@ -46,7 +46,7 @@ export const EmailInput = ({ emailSignal, isEmailOkSignal, inputRef, disabled }:
   }
 
   return (
-    <div css={{ position: 'relative' }}>
+    <div style={{ position: 'relative' }}>
       <TextField
         inputRef={inputRef}
         disabled={disabled}
@@ -82,7 +82,7 @@ export const EmailInput = ({ emailSignal, isEmailOkSignal, inputRef, disabled }:
       />
       {!!emailSuggestionSignal.value && (
         <div
-          css={{
+          style={{
             position: 'absolute',
             bottom: '18px',
             right: '5px',

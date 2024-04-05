@@ -9,21 +9,18 @@ export const BoqTableLayout = ({ children }: Props): JSX.Element => {
   return (
     <Box
       className='boq-table-container-with-paddings'
-      sx={{
-        p: '10px 10px 2px 10px', // to have a gap when overflow
+      style={{
+        padding: '10px 10px 2px 10px', // to have a gap when overflow
       }}
     >
       <Box
         className='boq-table-container'
-        sx={{
+        style={{
           // todo: think about logic to enable overflow when width of content goes over the screen
           // todo: we may put actions inside and enable overflow: auto
           // overflow: 'auto',
-          p: '5px',
+          padding: '5px',
           clipPath: 'inset(0 0 0 -100px)',
-          '& *': {
-            // background: '#ff00001b',
-          },
         }}
       >
         {children}

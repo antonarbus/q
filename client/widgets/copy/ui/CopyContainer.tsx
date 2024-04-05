@@ -37,7 +37,7 @@ export const CopyContainer = (): JSX.Element => {
       }}
     >
       <div
-        css={{
+        style={{
           margin: 10, // needed to have a gap at the bottom specifically, otherwise overflow: hidden trims the content at the bottom edge
           padding: 10, // needed to avoid shadow trimming by overflow: hidden
           overflowY: 'hidden',

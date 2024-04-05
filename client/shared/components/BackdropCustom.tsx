@@ -22,7 +22,7 @@ export const BackdropCustom = ({
 }: Props): JSX.Element => (
   <div
     onMouseDown={onMouseDown}
-    css={{
+    style={{
       position: 'fixed',
       top: 0,
       bottom: 0,

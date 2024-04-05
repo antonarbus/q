@@ -24,7 +24,7 @@ export const PasteItem = (): EmotionJSX.Element => (
       marginBottom: { duration: theme.item.animationDuration },
       opacity: { duration: 0 },
     }}
-    css={{
+    style={{
       display: 'grid',
       placeItems: 'center',
       fontWeight: 600,

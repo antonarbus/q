@@ -15,7 +15,7 @@ type Props = {
 export const TextInMenu = ({ reserveSpaceForIcon, name, disabled }: Props): JSX.Element => {
   return (
     <span
-      css={{
+      style={{
         marginLeft: 10,
         marginRight: reserveSpaceForIcon ? 30 : 0,
         textOverflow: 'ellipsis',

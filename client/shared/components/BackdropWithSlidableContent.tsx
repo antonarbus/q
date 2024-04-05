@@ -69,7 +69,7 @@ export const BackdropWithSlidableContent = ({
           },
         })
       }}
-      css={{
+      style={{
         position: 'fixed',
         inset: 0,
         display: 'flex',

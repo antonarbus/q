@@ -34,7 +34,7 @@ export const ResizablePaper = ({
         width: isAutoWidth ? 'auto' : width,
         height: 'auto',
       }}
-      css={{
+      style={{
         background: 'white',
         borderRadius: 6,
         boxShadow: '#00000033 0px 0px 10px 0px',

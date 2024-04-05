@@ -25,7 +25,7 @@ export const DraggableItemsContainer: SortableBox =
       transition={{
         delay: 0.7, // to show "Q" logo on init load to avoid some jumps
       }}
-      css={{
+      style={{
         display: 'inline-flex',
         flexDirection: 'column',
         justifyContent: 'center',

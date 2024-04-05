@@ -37,7 +37,7 @@ export const QuotationInfoLayout = ({
         }}
       >
         <FaInfoCircle
-          css={{
+          style={{
             fill: '#6488cf',
           }}
         />

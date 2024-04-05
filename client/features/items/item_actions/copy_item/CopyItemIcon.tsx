@@ -18,7 +18,7 @@ export const CopyItemIcon = (): JSX.Element => {
         scale: disabled ? 1 : 1.3,
       }}
       whileTap={{ scale: 1 }}
-      css={{
+      style={{
         position: 'relative',
         top: 1,
         cursor: disabled ? 'default' : 'pointer',

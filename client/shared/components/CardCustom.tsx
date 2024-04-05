@@ -40,9 +40,7 @@ export const CardCustom = ({ children, cssProps, reference, title, logo }: Props
     }}
   >
     {Boolean(logo) && (
-      <div
-        css={{ alignSelf: 'center' }}
-      >
+      <div style={{ alignSelf: 'center' }} >
         {logo}
       </div>
     )}

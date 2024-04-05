@@ -149,7 +149,7 @@ export const LogIn = (): JSX.Element => {
             </Link>
             <Link
               to={`../${route.register}`}
-              css={{ textAlign: 'right' }}
+              style={{ textAlign: 'right' }}
               onClick={(e: MouseEvent): void => {
                 e.preventDefault()
                 slideElement({

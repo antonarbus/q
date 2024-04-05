@@ -17,7 +17,7 @@ export const ScaledCopyItem = ({ width, scaleFactor, html }: Props): JSX.Element
   return (
     <div
       ref={divRef}
-      css={{
+      style={{
         width,
         transformOrigin: 'left top',
         scale: scaleFactor,
