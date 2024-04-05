@@ -17,7 +17,7 @@ export const BoqRowActions = (): JSX.Element => {
       }}
     >
       <Box
-        sx={{
+        style={{
           display: 'flex',
           flexDirection: 'column',
           scale: '0.5',

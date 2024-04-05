@@ -7,7 +7,7 @@ import { IoSaveOutline, IoText } from 'react-icons/io5'
 import { MdOutlineAdd } from 'react-icons/md'
 import { TbTableRow } from 'react-icons/tb'
 import { VscNewFile } from 'react-icons/vsc'
-import { addPriceItem, addTextItem } from '@features/items/add'
+import { addBoqRow, addPriceItem, addTextItem } from '@features/items/add'
 import { createNewQuotation } from '@features/quotation/create_new_quotation'
 import { downloadPdf } from '@features/quotation/download_pdf'
 import { navMenuItemId } from '@shared/consts/navMenuItemId'
@@ -95,8 +95,9 @@ export const navStructure: MenuItemTypes[] = [
             icon: <AiOutlineMinus/>,
             isHidden: false,
             // shortcut: ['control', 'shift', 'r'],
-            func: () => {
-              alert('row')
+            func: (e) => {
+              if (e === undefined) return
+              addBoqRow(e)
             },
           },
         ],

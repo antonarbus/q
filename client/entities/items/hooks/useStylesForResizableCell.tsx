@@ -1,5 +1,4 @@
 import { useSelectorTyped } from '@lib_instances/store'
-import { type SxProps } from '@mui/material'
 import { type CSSProperties } from 'react'
 import { selectColumnWidth } from '../redux/selectors/selectColumnWidth'
 import { type BoqColumnKey } from '../types'
@@ -11,7 +10,7 @@ type Props = {
 }
 
 type Res = {
-  stylesForResizableCell: SxProps
+  stylesForResizableCell: CSSProperties
 }
 
 export const useStylesForResizableCell = ({
@@ -21,7 +20,7 @@ export const useStylesForResizableCell = ({
 }: Props): Res => {
   const columnWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
 
-  const stylesForResizableCell: SxProps = {
+  const stylesForResizableCell: CSSProperties = {
     display: 'flex',
     alignItems: 'flex-end',
     position: 'relative',

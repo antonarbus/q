@@ -19,7 +19,7 @@ export const BoqRowLayout = ({ children, onBlur }: Props): JSX.Element => {
       onBlur={(e) => {
         onBlur(e)
       }}
-      sx={{
+      style={{
         // https://stackoverflow.com/questions/8468066/child-inside-parent-with-min-height-100-not-inheriting-height
         display: 'flex',
         flexDirection: 'column',

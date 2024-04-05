@@ -55,7 +55,7 @@ export { Froala } from './ui/froala/Froala'
 
 // styles
 export { textItemCellStyle } from './styles/textItemCellStyle'
-export { boqRowCellStyle } from './styles/boqRowCellStyle'
+export { boqRowCellStyle, boqRowCellSx } from './styles/boqRowCellStyle'
 export { columnHeaderStyle } from './styles/columnHeaderStyle'
 export { subTotalPriceCellStyle } from './styles/subTotalPriceCellStyle'
 export { subTotalTextCellStyle } from './styles/subTotalTextCellStyle'

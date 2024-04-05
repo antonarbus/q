@@ -9,7 +9,7 @@ export const NumberCell = (): JSX.Element => {
   return (
     <Box
       className={'td number'}
-      sx={{ ...stylesForResizableCell, fontSize: '10px', color: 'grey', paddingBottom: '2px' }}
+      style={{ ...stylesForResizableCell, fontSize: '10px', color: 'grey', paddingBottom: '2px' }}
     >
       {getNumberOfBoqItemsAbove({ itemIndex }) + 1}.{rowIndex + 1}
     </Box>
