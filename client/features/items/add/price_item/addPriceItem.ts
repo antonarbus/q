@@ -4,8 +4,9 @@ import { copySlice } from '@entities/copy'
 import { isItemsFroalaSignal } from '@entities/items'
 import { itemKey } from '@entities/items/consts/itemKey'
 import { nanoid } from '@shared/lib/nanoid'
+import { cursorPos } from '@shared/utils/cursorPos'
 
-export const addPriceItem = (e: MouseEvent): void => {
+export const addPriceItem = (e?: MouseEvent): void => {
   const itemToCopy = {
     id: nanoid(3),
     type: itemKey.price,
@@ -58,7 +59,10 @@ export const addPriceItem = (e: MouseEvent): void => {
   const isCopyContainer = getState().copy.isCopyContainer
 
   if (!isCopyContainer) {
-    dispatch(copySlice.actions.saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
+    dispatch(copySlice.actions.saveInitCordsOfCopyContainer({
+      x: e?.clientX ?? cursorPos.x,
+      y: e?.clientY ?? cursorPos.y,
+    }))
     dispatch(copySlice.actions.showCopyContainer())
   }
 }

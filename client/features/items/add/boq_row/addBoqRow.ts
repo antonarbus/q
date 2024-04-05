@@ -4,8 +4,9 @@ import { copySlice } from '@entities/copy'
 import { isItemsFroalaSignal } from '@entities/items'
 import { boqRowKey } from '@entities/items/consts/boqRowKey'
 import { nanoid } from '@shared/lib/nanoid'
+import { cursorPos } from '@shared/utils/cursorPos'
 
-export const addBoqRow = (e: MouseEvent): void => {
+export const addBoqRow = (e?: MouseEvent): void => {
   const itemToCopy = {
     id: nanoid(3),
     type: boqRowKey.row,
@@ -111,7 +112,10 @@ export const addBoqRow = (e: MouseEvent): void => {
   const isCopyContainer = getState().copy.isCopyContainer
 
   if (!isCopyContainer) {
-    dispatch(copySlice.actions.saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
+    dispatch(copySlice.actions.saveInitCordsOfCopyContainer({
+      x: e?.clientX ?? cursorPos.x,
+      y: e?.clientY ?? cursorPos.y,
+    }))
     dispatch(copySlice.actions.showCopyContainer())
   }
 }

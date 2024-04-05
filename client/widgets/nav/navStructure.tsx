@@ -70,8 +70,6 @@ export const navStructure: MenuItemTypes[] = [
                 isHidden: false,
                 shortcut: ['control', 'shift', 't'],
                 func: (e) => {
-                  console.log('add text item')
-                  if (e === undefined) return
                   addTextItem(e)
                 },
               },
@@ -82,8 +80,6 @@ export const navStructure: MenuItemTypes[] = [
                 isHidden: false,
                 shortcut: ['control', 'shift', 'i'],
                 func: (e) => {
-                  console.log('add boq item')
-                  if (e === undefined) return
                   addBoqItem(e)
                 },
               },
@@ -94,8 +90,6 @@ export const navStructure: MenuItemTypes[] = [
                 isHidden: false,
                 shortcut: ['control', 'shift', 'p'],
                 func: (e) => {
-                  console.log('add price item')
-                  if (e === undefined) return
                   addPriceItem(e)
                 },
               },
@@ -108,8 +102,6 @@ export const navStructure: MenuItemTypes[] = [
             isHidden: false,
             shortcut: ['control', 'shift', 'r'],
             func: (e) => {
-              console.log('add boq row')
-              if (e === undefined) return
               addBoqRow(e)
             },
           },

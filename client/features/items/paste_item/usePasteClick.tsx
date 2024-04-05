@@ -35,11 +35,12 @@ function pasteItemOnClick(): void {
 
   // add maxWidth to element for correct animation if we replace an item
   if (pastePos === 'middle') {
+    console.log('middle')
     const elementToBeReplaced = document.getElementById(itemId)
     if (elementToBeReplaced) {
       const paperElement = elementToBeReplaced.querySelector(`.${className.paper}`)
       if (paperElement instanceof HTMLElement) {
-        paperElement.style.maxWidth = paperElement.style.width
+        paperElement.style.maxWidth = paperElement.clientWidth + 'px'
       }
     }
   }
