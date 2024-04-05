@@ -12,6 +12,7 @@ export const navMenuItemId = {
   settings: 'settings',
   profile: 'profile',
   logout: 'logout',
+  block: 'block',
   textItem: 'textItem',
   boqItem: 'boqItem',
   priceItem: 'priceItem',

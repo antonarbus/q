@@ -2,10 +2,11 @@ import { Person, Settings } from '@mui/icons-material'
 import { AiOutlineMinus } from 'react-icons/ai'
 import { BsFiletypePdf } from 'react-icons/bs'
 import { CiViewTable } from 'react-icons/ci'
+import { FaRegRectangleList } from 'react-icons/fa6'
 import { FiLogOut, FiLogIn, FiDollarSign } from 'react-icons/fi'
 import { IoSaveOutline, IoText } from 'react-icons/io5'
 import { MdOutlineAdd } from 'react-icons/md'
-import { TbTableRow } from 'react-icons/tb'
+import { TbRectangleVertical } from 'react-icons/tb'
 import { VscNewFile } from 'react-icons/vsc'
 import { addBoqItem, addBoqRow, addPriceItem, addTextItem } from '@features/items/add'
 import { createNewQuotation } from '@features/quotation/create_new_quotation'
@@ -58,37 +59,45 @@ export const navStructure: MenuItemTypes[] = [
         disabled: true,
         menuItems: [
           {
-            id: navMenuItemId.textItem,
-            name: 'Text',
-            icon: <IoText />,
+            id: navMenuItemId.block,
+            name: 'Block',
+            icon: <TbRectangleVertical />,
             isHidden: false,
-            // shortcut: ['control', 'shift', 't'],
-            func: (e) => {
-              if (e === undefined) return
-              addTextItem(e)
-            },
-          },
-          {
-            id: navMenuItemId.boqItem,
-            name: 'Items',
-            icon: <TbTableRow />,
-            isHidden: false,
-            // shortcut: ['control', 'shift', 'i'],
-            func: (e) => {
-              if (e === undefined) return
-              addBoqItem(e)
-            },
-          },
-          {
-            id: navMenuItemId.priceItem,
-            name: 'Price',
-            icon: <FiDollarSign />,
-            isHidden: false,
-            // shortcut: ['control', 'shift', 'p'],
-            func: (e) => {
-              if (e === undefined) return
-              addPriceItem(e)
-            },
+            menuItems: [
+              {
+                id: navMenuItemId.textItem,
+                name: 'Text',
+                icon: <IoText />,
+                isHidden: false,
+                // shortcut: ['control', 'shift', 't'],
+                func: (e) => {
+                  if (e === undefined) return
+                  addTextItem(e)
+                },
+              },
+              {
+                id: navMenuItemId.boqItem,
+                name: 'Items',
+                icon: <FaRegRectangleList />,
+                isHidden: false,
+                // shortcut: ['control', 'shift', 'i'],
+                func: (e) => {
+                  if (e === undefined) return
+                  addBoqItem(e)
+                },
+              },
+              {
+                id: navMenuItemId.priceItem,
+                name: 'Price',
+                icon: <FiDollarSign />,
+                isHidden: false,
+                // shortcut: ['control', 'shift', 'p'],
+                func: (e) => {
+                  if (e === undefined) return
+                  addPriceItem(e)
+                },
+              },
+            ],
           },
           {
             id: navMenuItemId.boqRow,
