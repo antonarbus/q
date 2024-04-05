@@ -53,22 +53,27 @@ export const useMenuItemActionShortcuts = ({ navStructure }: Props): void => {
 
     window.addEventListener('keyup', (e) => {
       if (!e.key) return
+
       keysPressed.push(e.key.toLowerCase())
       keysPressed = [...new Set(keysPressed)]
+
       const shortcutItem = shortcuts.find((o) => {
         const shortcutSorted = [...o.shortcut].sort() // do not sort original array, but a copy
         const shortcutStr = shortcutSorted.join('')
         const pressedKeysStr = keysPressed.sort().join('')
         return shortcutStr === pressedKeysStr
       })
-      keysPressed = keysPressed.filter(
-        (key) => key !== e.key.toLocaleLowerCase(),
-      )
+
+      keysPressed = keysPressed.filter((key) => key !== e.key.toLocaleLowerCase())
+
       if (shortcutItem === undefined) return
+
       e.preventDefault()
+
       if (shortcutItem.function) {
         shortcutItem.function()
       }
+
       if (shortcutItem.link) {
         navigate(shortcutItem.link)
       }
