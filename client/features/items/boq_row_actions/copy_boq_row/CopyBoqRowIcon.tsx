@@ -44,11 +44,9 @@ export const CopyBoqRowIcon = (): JSX.Element => {
         }))
 
         const html = boqRowElement.outerHTML
-        console.log('🚀 ~ html:', html)
         const cleanedHtml = cleanHtml(html)
 
         const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
-        console.log('🚀 ~ boqRow:', boqRow)
         if (boqRow === undefined) return
 
         dispatch(copySlice.actions.addItemIntoCopyContainer({ copyItem: boqRow, preview: cleanedHtml }))

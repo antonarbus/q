@@ -31,7 +31,6 @@ export const clickOnMenuItem = (e: MouseEvent, menuId: string, disabled: boolean
   e.preventDefault()
 
   if (func) {
-    console.log('hi')
     void func(e)
     dispatch(navSlice.actions.closeMenu())
     return

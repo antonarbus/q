@@ -42,7 +42,6 @@ export const CopyItemIcon = (): JSX.Element => {
         if (!(paperElement instanceof Element)) return
 
         const html = paperElement.innerHTML
-        console.log('🚀 ~ html:', html)
         const cleanedHtml = cleanHtml(html)
         isItemsFroalaSignal.value = false
 
