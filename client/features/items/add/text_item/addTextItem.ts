@@ -22,7 +22,7 @@ export const addTextItem = (e: MouseEvent): void => {
 
   dispatch(copySlice.actions.addItemIntoCopyContainer({
     copyItem: itemToCopy, preview: `
-      <div class="froala-wrapper  MuiBox-root css-4g6ai3">
+      <div class="froala-wrapper  MuiBox-root">
         <div class="static-html fr-box fr-inline MuiBox-root">
           <div class="fr-wrapper MuiBox-root">
             <div class="fr-element fr-view MuiBox-root"
