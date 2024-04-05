@@ -11,7 +11,7 @@ export const NumberColumn = (): JSX.Element => {
       flexGrow={0}
     >
       <Box
-        sx={columnHeaderStyle}
+        style={columnHeaderStyle}
       />
     </ResizableColumn>
   )

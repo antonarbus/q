@@ -6,7 +6,7 @@ export const PressEsc = (): JSX.Element => {
 
   return (
     <div
-      css={{
+      style={{
         position: 'relative',
         textAlign: 'center',
         color: 'grey',

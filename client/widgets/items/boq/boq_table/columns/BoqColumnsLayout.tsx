@@ -9,7 +9,7 @@ export const BoqColumnsLayout = ({ children }: Props): JSX.Element => {
   return (
     <Box
       className='header tr'
-      sx={{
+      style={{
         display: 'flex',
         alignItems: 'stretch',
         position: 'relative',

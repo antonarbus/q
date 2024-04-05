@@ -61,10 +61,10 @@ export const ButtonCustom = ({
         <RotatingLoaderIcon style={{ height: '25px', width: '25px', position: 'absolute', color: 'white' }} />
       )}
       {showSuccessIcon.value && (
-        <FaCircleCheck css={{ height: '25px', width: '25px', position: 'absolute', color: 'white' }} />
+        <FaCircleCheck style={{ height: '25px', width: '25px', position: 'absolute', color: 'white' }} />
       )}
       {showErrorIcon.value && (
-        <PiSmileySadBold css={{ height: '25px', width: '25px', position: 'absolute', color: 'white' }} />
+        <PiSmileySadBold style={{ height: '25px', width: '25px', position: 'absolute', color: 'white' }} />
       )}
     </Button>
   )

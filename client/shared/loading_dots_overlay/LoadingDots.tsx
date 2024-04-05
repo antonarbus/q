@@ -22,7 +22,7 @@ export const LoadingDots = ({
   dots,
 }: Props): JSX.Element => (
   <div
-    css={{
+    style={{
       display: 'inline-flex',
       justifyContent: 'center',
     }}

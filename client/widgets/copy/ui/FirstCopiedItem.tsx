@@ -81,7 +81,7 @@ export const FirstCopiedItem = (): JSX.Element | null => {
         initial='initial'
         animate='animate'
         exit='exit'
-        css={{
+        style={{
           height,
           width,
           marginTop: 15,

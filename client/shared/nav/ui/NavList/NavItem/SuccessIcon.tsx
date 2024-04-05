@@ -6,7 +6,7 @@ export const SuccessIcon = (): JSX.Element => {
     <Icon
       icon={(
         <GrStatusGood
-          css={{
+          style={{
             stroke: '#52cb4b',
           }}
         />

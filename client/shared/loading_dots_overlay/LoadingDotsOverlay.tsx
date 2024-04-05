@@ -11,7 +11,7 @@ export const LoadingDotsOverlay = ({ isShowing, title }: Props): JSX.Element | n
 
   return (
     <div
-      css={{
+      style={{
         position: 'fixed',
         top: 0,
         bottom: 0,
@@ -30,7 +30,7 @@ export const LoadingDotsOverlay = ({ isShowing, title }: Props): JSX.Element | n
       }}
     >
       <div
-        css={{
+        style={{
           color: '#d4d4d4',
           fontSize: '2rem',
           fontWeight: 300,

@@ -7,7 +7,7 @@ export const NavList = (): JSX.Element => {
 
   return (
     <ul
-      css={{
+      style={{
         display: 'flex',
         flexGrow: 1,
         justifyContent: 'flex-end',

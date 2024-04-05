@@ -13,7 +13,7 @@ export const DraggableBoqRowsContainer: React.ComponentClass<SortableContainerEx
     <div
       id='boq-rows'
       className='boq-rows'
-      css={{
+      style={{
         display: 'flex',
         flexDirection: 'column',
       }}

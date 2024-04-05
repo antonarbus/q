@@ -24,7 +24,7 @@ export const BoqPasteRowTextOverlay = (): EmotionJSX.Element => (
         duration: 0,
       },
     }}
-    css={{
+    style={{
       display: 'grid',
       placeItems: 'center',
       fontWeight: 600,
@@ -32,7 +32,6 @@ export const BoqPasteRowTextOverlay = (): EmotionJSX.Element => (
       userSelect: 'none',
       borderBottom: '1px solid #e8e8e8',
       marginBottom: '-1px',
-
     }}
   >
     Paste here

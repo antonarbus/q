@@ -92,7 +92,7 @@ export const RestOfCopiedItems = (): JSX.Element | null => {
           return (
             <div
               key={items.length - index}
-              css={{
+              style={{
                 height: item.height * scaleFactor,
                 width: item.width * scaleFactor,
                 marginBottom: itemMarginBottom,

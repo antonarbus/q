@@ -6,7 +6,7 @@ export const ErrorIcon = (): JSX.Element => {
     <Icon
       icon={(
         <BiErrorCircle
-          css={{
+          style={{
             color: '#cb4b4b !important',
           }}
         />

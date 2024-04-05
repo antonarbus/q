@@ -12,7 +12,7 @@ export const Main = (): JSX.Element => {
 function MainLayout ({ children }: { children: ReactNode }): JSX.Element {
   return (
     <main
-      css={{
+      style={{
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',

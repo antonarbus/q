@@ -2,7 +2,7 @@ import { theme } from '@lib_instances/theme'
 
 export const FourZeroFour = (): JSX.Element => (
   <div
-    css={{
+    style={{
       height: '100vh',
       marginTop: `-${theme.nav.fullHeight}px`,
       display: 'flex',

@@ -9,7 +9,7 @@ export const BoqRowActions = (): JSX.Element => {
   return (
     <Box
       className={className.actionsContainer}
-      sx={{
+      style={{
         position: 'absolute',
         left: '-33px',
         bottom: 0,

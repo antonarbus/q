@@ -26,7 +26,7 @@ export type FroalaProps = {
   onKeydown?: (e: KeyboardEvent) => void
   onInitialized?: () => void
   className?: string
-  wrapperStyles?: SxProps
+  wrapperStyles?: React.CSSProperties
   beforeUpload?: ({ editor, files }: { editor: FroalaEditor, files: File[] }) => boolean
 }
 
@@ -74,7 +74,7 @@ export const Froala = ({
     >
       <Box
         className={'froala-wrapper ' + (className ?? '')}
-        sx={{
+        style={{
           ...wrapperStyles,
           cursor: 'pointer',
         }}
@@ -91,7 +91,7 @@ export const Froala = ({
         <div
           // ref={observerRef}
           className='view-port-observer'
-          css={{
+          style={{
             width: '100%',
             position: 'relative',
           }}

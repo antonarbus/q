@@ -29,7 +29,7 @@ export const BoqHeaderLayout = ({
     >
       <Box
         className='layout title-subtotal'
-        sx={{
+        style={{
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'flex-end',
@@ -43,7 +43,7 @@ export const BoqHeaderLayout = ({
       >
         <Box
           className='layout item title'
-          sx={{
+          style={{
             flexGrow: 1,
           }}
         >
@@ -51,7 +51,7 @@ export const BoqHeaderLayout = ({
         </Box>
         <Box
           className='layout subtotal-container'
-          sx={{
+          style={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'flex-end',
@@ -61,7 +61,7 @@ export const BoqHeaderLayout = ({
         >
           <Box
             className='layout item subtotal-text'
-            sx={{
+            style={{
               width: '100%',
               textAlign: 'right',
             }}
@@ -70,7 +70,7 @@ export const BoqHeaderLayout = ({
           </Box>
           <Box
             className='layout price'
-            sx={{
+            style={{
               display: 'flex',
               justifyContent: 'flex-end',
               alignItems: 'baseline',
@@ -80,7 +80,7 @@ export const BoqHeaderLayout = ({
           >
             <Box
               className='layout item price'
-              sx={{
+              style={{
                 textAlign: 'right',
                 whiteSpace: 'nowrap',
                 minWidth: '60px',

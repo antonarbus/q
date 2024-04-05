@@ -23,7 +23,7 @@ export const CutBoqRowIcon = (): JSX.Element => {
         scale: disabled ? 1 : 2.3,
       }}
       whileTap={{ scale: 1 }}
-      css={{
+      style={{
         position: 'relative',
         top: 1,
         cursor: disabled ? 'default' : 'pointer',

@@ -20,7 +20,7 @@ export const PasteItemTextOverlay = ({ children }: Props): JSX.Element => {
       </div>
       {isPasteHere && (
         <div
-          css={{
+          style={{
             fontWeight: 600,
             color: theme.copy.pasteTextColor,
             position: 'absolute',
