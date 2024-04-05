@@ -64,9 +64,6 @@ export const ItemSortAndAnimate: SortableItem = SortableElement(({
       transition={{
         duration: theme.item.animationDuration,
       }}
-      onAnimationComplete={() => {
-        console.log(666)
-      }}
       style={{
         display: 'flex',
         justifyContent: 'center',

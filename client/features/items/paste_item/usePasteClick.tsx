@@ -3,6 +3,7 @@ import { theme } from '@lib_instances/theme'
 import { useEffectOnce, useUnmount } from 'react-use'
 import { copySlice } from '@entities/copy'
 import { isItemsFroalaSignal, itemsSlice } from '@entities/items'
+import { className } from '@shared/consts/className'
 import { nanoid } from '@shared/lib/nanoid'
 import { navSlice } from '@shared/nav'
 
@@ -31,6 +32,17 @@ function pasteItemOnClick(): void {
   const topItemFromCopyContainer = getState().copy.items[0]
 
   if (!topItemFromCopyContainer) return
+
+  // add maxWidth to element for correct animation if we replace an item
+  if (pastePos === 'middle') {
+    const elementToBeReplaced = document.getElementById(itemId)
+    if (elementToBeReplaced) {
+      const paperElement = elementToBeReplaced.querySelector(`.${className.paper}`)
+      if (paperElement instanceof HTMLElement) {
+        paperElement.style.maxWidth = paperElement.style.width
+      }
+    }
+  }
 
   const newItemId = nanoid(3)
 
