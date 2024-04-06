@@ -6,6 +6,7 @@ import { isItemsFroalaSignal, itemsSlice } from '@entities/items'
 import { className } from '@shared/consts/className'
 import { nanoid } from '@shared/lib/nanoid'
 import { navSlice } from '@shared/nav'
+import { fixElementDimensionStyle } from '@shared/utils/fixElementDimensionStyle'
 
 export const usePasteClick = (): void => {
   useEffectOnce(() => {
@@ -33,13 +34,13 @@ function pasteItemOnClick(): void {
 
   if (!topItemFromCopyContainer) return
 
-  // add maxWidth to element for correct animation if we replace an item
   if (pastePos === 'middle') {
     const elementToBeReplaced = document.getElementById(itemId)
     if (elementToBeReplaced) {
       const paperElement = elementToBeReplaced.querySelector(`.${className.paper}`)
       if (paperElement instanceof HTMLElement) {
-        paperElement.style.maxWidth = paperElement.clientWidth + 'px'
+        // width of animated element is changed for unknown reason, can't explain the issue, so let's fix it for animation purpose
+        fixElementDimensionStyle({ element: paperElement })
       }
     }
   }
