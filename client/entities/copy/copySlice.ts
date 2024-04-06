@@ -42,10 +42,6 @@ export const copySlice = createSlice({
       state.isCopyContainer = true
     },
     hideCopyContainer: (state) => initialState,
-    saveInitCordsOfCopyContainer: (state, action: PayloadAction<{ x: number, y: number }>) => {
-      const coords = action.payload
-      state.initCords = coords
-    },
     addItemIntoCopyContainer: (state, action: PayloadAction<{
       copyItem: CopyableItem
       preview: string
