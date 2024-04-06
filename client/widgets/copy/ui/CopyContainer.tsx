@@ -3,17 +3,17 @@ import { PressEsc } from '@features/copy/close_copy_container_on_esc_key'
 import { useMovePasteText } from '@features/items/move_paste_text'
 import { usePasteClick } from '@features/items/paste_item'
 import { useDisableNavItems } from '@shared/nav'
+import { cursorPosSignal } from '@shared/utils/cursorPos'
 import { FirstCopiedItem } from './FirstCopiedItem'
 import { RestOfCopiedItems } from './RestOfCopiedItems'
 import { useCopyContainerAnimation } from './useCopyContainerAnimation'
-import { useCursorCords } from './useCursorCords'
 
 export const CopyContainer = (): JSX.Element => {
   useMovePasteText()
   usePasteClick()
   useDisableNavItems()
   const copyContainerAnimationControls = useCopyContainerAnimation()
-  const { x, y } = useCursorCords()
+  const { x, y } = cursorPosSignal.value
   // const { x, y } = { x: 300, y: 0 }
 
   return (
