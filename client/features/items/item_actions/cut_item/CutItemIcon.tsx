@@ -6,6 +6,7 @@ import { TbCut } from 'react-icons/tb'
 import { copySlice } from '@entities/copy'
 import { isItemsFroalaSignal, itemType, itemsSlice, saveItemHeightByIndex, selectIsLastItem, useItem } from '@entities/items'
 import { className } from '@shared/consts/className'
+import { fixElementDimensionStyle } from '@shared/utils/fixElementDimensionStyle'
 import { cleanHtml } from '@shared/utils/itemsUtils'
 
 export const CutItemIcon = (): JSX.Element => {
@@ -41,9 +42,8 @@ export const CutItemIcon = (): JSX.Element => {
         const paperElement = itemElement.querySelector(`.${className.paper}`)
         if (!(paperElement instanceof HTMLElement)) return
 
-        // set max-width to avoid unexplainable element stretching
-        // use getElementById() coz some ids may start from a number and querySelector() does not like it
-        paperElement.style.maxWidth = paperElement.style.width
+        // width of animated element is changed for unknown reason, can't explain the issue, so let's fix it for animation purpose
+        fixElementDimensionStyle({ element: paperElement })
 
         const html = paperElement.innerHTML
         const cleanedHtml = cleanHtml(html)

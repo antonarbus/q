@@ -58,11 +58,11 @@ export const ItemSortAndAnimate: SortableItem = SortableElement(({
         height: 0,
         marginBottom: 0,
         opacity: 0,
-        x: '150vw',
+        x: '110vw',
         overflow: 'hidden',
       }}
       transition={{
-        duration: theme.item.animationDuration + 5,
+        duration: theme.item.animationDuration,
       }}
       style={{
         display: 'flex',
