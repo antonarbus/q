@@ -4,7 +4,7 @@ import { copySlice } from '@entities/copy'
 import { isItemsFroalaSignal } from '@entities/items'
 import { boqRowKey } from '@entities/items/consts/boqRowKey'
 import { nanoid } from '@shared/lib/nanoid'
-import { cursorPosSignal } from '@shared/utils/cursorPos'
+import { cursorPosSignal } from '@shared/utils/cursorPosSignal'
 
 export const addBoqRow = (e?: MouseEvent): void => {
   const itemToCopy = {
