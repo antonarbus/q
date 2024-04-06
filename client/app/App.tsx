@@ -13,7 +13,7 @@ import { useLogoutIfAccessTokenRemoved } from '@features/auth/log_out'
 import { GlobalStyles } from './GlobalStyles'
 import { ReactQueryDevtoolsProductionHidden } from './ReactQueryDevtoolsProductionHidden'
 import './signalsDevTools'
-import '@shared/utils/cursorPos'
+import '@shared/utils/cursorPosSignal'
 
 export const App = (): JSX.Element => {
   useGetAccessToken({ withLoadingState: false })

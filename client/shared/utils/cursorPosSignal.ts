@@ -6,5 +6,5 @@ export const cursorPosSignal = signal({
 })
 
 document.addEventListener('mousemove', function(e) {
-  cursorPosSignal.value = { x: e.pageX, y: e.pageY }
+  cursorPosSignal.value = { x: e.x, y: e.y }
 }, false)

@@ -5,7 +5,7 @@ import { isItemsFroalaSignal } from '@entities/items'
 import { boqRowKey } from '@entities/items/consts/boqRowKey'
 import { itemKey } from '@entities/items/consts/itemKey'
 import { nanoid } from '@shared/lib/nanoid'
-import { cursorPosSignal } from '@shared/utils/cursorPos'
+import { cursorPosSignal } from '@shared/utils/cursorPosSignal'
 
 export const addBoqItem = (e?: MouseEvent): void => {
   const itemToCopy = {
