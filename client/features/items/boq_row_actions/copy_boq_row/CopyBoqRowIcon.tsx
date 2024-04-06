@@ -55,7 +55,6 @@ export const CopyBoqRowIcon = (): JSX.Element => {
         const isCopyContainer = getState().copy.isCopyContainer
 
         if (!isCopyContainer) {
-          dispatch(copySlice.actions.saveInitCordsOfCopyContainer({ x: e.clientX, y: e.clientY }))
           dispatch(copySlice.actions.showCopyContainer())
         }
       }}
