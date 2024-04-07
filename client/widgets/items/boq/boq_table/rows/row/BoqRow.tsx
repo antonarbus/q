@@ -1,5 +1,6 @@
+import { Box } from '@mui/material'
 import { type FocusEvent } from 'react'
-import { BoqRowActions } from '@features/items/boq_row_actions'
+import { BoqRowActionButtonsLeft, BoqRowActionButtonsRight } from '@features/items/boq_row_actions'
 import { BoqRowLayout } from './BoqRowLayout'
 import { DescriptionCell } from './cells/DescriptionCell'
 import { ItemPriceCell } from './cells/ItemPriceCell'
@@ -13,15 +14,14 @@ type Props = {
 
 export const BoqRow = ({ onBlur }: Props): JSX.Element => {
   return (
-    <BoqRowLayout
-      onBlur={onBlur}
-    >
-      <BoqRowActions />
+    <BoqRowLayout onBlur={onBlur}>
+      <BoqRowActionButtonsLeft />
       <NumberCell />
       <DescriptionCell />
       <ItemPriceCell />
       <QtyCell />
       <PriceCell />
+      <BoqRowActionButtonsRight />
     </BoqRowLayout>
   )
 }

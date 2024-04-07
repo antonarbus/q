@@ -1,22 +1,17 @@
-import { motion } from 'framer-motion'
 import { MdDragIndicator } from 'react-icons/md'
 import { SortableHandle } from 'react-sortable-hoc'
 import { useIsBoqRowSortDisabled } from '@entities/items/hooks/useIsBoqRowSortDisabled'
 
 const Handle = (): JSX.Element => {
-  const isDisabled = useIsBoqRowSortDisabled()
+  const disabled = useIsBoqRowSortDisabled()
 
   return (
-    <motion.span
-      whileHover={{ scale: isDisabled ? 1 : 2.3 }}
-      tabIndex={-1}
+    <MdDragIndicator
       style={{
-        color: isDisabled ? '#acacac' : '#000',
-        cursor: isDisabled ? 'default' : 'move',
+        cursor: 'move',
+        color: disabled ? '#acacac' : '#000',
       }}
-    >
-      <MdDragIndicator />
-    </motion.span>
+    />
   )
 }
 

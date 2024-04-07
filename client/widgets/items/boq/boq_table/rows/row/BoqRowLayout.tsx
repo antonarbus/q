@@ -26,6 +26,7 @@ export const BoqRowLayout = ({ children, onBlur }: Props): JSX.Element => {
         justifyContent: 'flex-end',
         position: 'relative',
         borderBottom: '1px solid #e8e8e8',
+        // background: 'red',
       }}
     >
       <PasteHere>

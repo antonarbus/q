@@ -20,7 +20,7 @@ export const BoqTableLayout = ({ children }: Props): JSX.Element => {
           // todo: we may put actions inside and enable overflow: auto
           // overflow: 'auto',
           padding: '5px',
-          clipPath: 'inset(0 0 0 -100px)',
+          // clipPath: 'inset(0 0 0 -100px)',
         }}
       >
         {children}
