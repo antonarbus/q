@@ -1,23 +1,23 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { type MouseEvent } from 'react'
-import { IoAddOutline } from 'react-icons/io5'
+import { IoIosSearch } from 'react-icons/io'
 import { useItem, useRow } from '@entities/items'
 
-export const AddBoqRowIcon = (): JSX.Element => {
+export const SearchBoqRowIcon = (): JSX.Element => {
   const { rowIndex } = useRow()
   const { itemIndex } = useItem()
   const isCopyable = useSelectorTyped(state => state.copy.isCopyable)
   const disabled = !isCopyable
 
   return (
-    <IoAddOutline
+    <IoIosSearch
       style={{
         color: disabled ? '#acacac' : '#000',
       }}
       onClick={(e: MouseEvent): void => {
         if (disabled) return
 
-        alert('copy')
+        alert('search')
       }}
     />
   )
