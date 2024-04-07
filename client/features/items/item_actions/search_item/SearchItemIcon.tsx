@@ -23,11 +23,6 @@ export const SearchItemIcon = (): EmotionJSX.Element => {
       style={{
         color: disabled ? '#acacac' : '#000',
       }}
-      css={{
-        '&:hover': {
-          color: disabled ? '#acacac' : 'red !important',
-        },
-      }}
       onClick={(e: MouseEvent): void => {
         if (disabled) return
 
