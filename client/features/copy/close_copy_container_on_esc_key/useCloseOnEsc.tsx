@@ -9,8 +9,6 @@ export const useExitCopyOnEsc = (): void => {
     dispatch(copySlice.actions.hideCopyContainer())
     dispatch(itemsSlice.actions.removePasteItemReducer())
     setTimeout(() => {
-      // dispatch(copySlice.actions.allowAllActions())
-      // dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
       isItemsFroalaSignal.value = true
     }, 500)
   }
