@@ -1,7 +1,9 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { type BoqItem, itemsSlice, getBoqColumnFromStore, boqColumnKey, unfixItemImagesHeight, fixItemImagesHeight } from '@entities/items'
+import { className } from '@shared/consts/className'
 import { navSlice } from '@shared/nav'
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
+import { isOverflown } from '@shared/utils/isOverflown'
 
 let initDescriptionColumnWidth = 0 // can be global var for different boqItems as we can change width of one item at a time
 
@@ -14,6 +16,9 @@ export const onBoqItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, ele
 }
 
 export const onBoqItemResize: OnItemResize = ({ itemIndex, e, direction, elementRef: itemElement, delta }) => {
+  const isTooNarrow = itemElement.clientWidth < 560
+  console.log('🚀 ~ isTooNarrow:', isTooNarrow)
+
   const width = initDescriptionColumnWidth + delta.width
 
   const descriptionColumn = getBoqColumnFromStore({ itemIndex, boqColumnKey: boqColumnKey.description })
