@@ -5,14 +5,14 @@ import type { SortableElementProps } from 'react-sortable-hoc'
 import { SortableElement } from 'react-sortable-hoc'
 import { className } from '@shared/consts/className'
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
-import { ItemActionsContainer } from './ItemActionsContainer'
 import { ResizablePaper } from './ResizablePaper'
 
 type Props = {
   children: ReactNode
   itemHeight: number
   itemId: string
-  itemActionElements?: ReactNode
+  leftItemActionButtons: ReactNode
+  rightItemActionButtons: ReactNode
   disableResize?: boolean
   autoWidth?: boolean
   onItemResizeStart?: OnItemResizeStart
@@ -26,7 +26,8 @@ export const ItemSortAndAnimate: SortableItem = SortableElement(({
   children,
   itemHeight,
   itemId,
-  itemActionElements,
+  leftItemActionButtons,
+  rightItemActionButtons,
   disableResize,
   autoWidth,
   onItemResizeStart,
@@ -72,7 +73,7 @@ export const ItemSortAndAnimate: SortableItem = SortableElement(({
         width: '100%',
       }}
     >
-      <ItemActionsContainer itemActionElements={itemActionElements} />
+      {leftItemActionButtons}
       <ResizablePaper
         disableResize={disableResize}
         autoWidth={autoWidth}
@@ -82,7 +83,7 @@ export const ItemSortAndAnimate: SortableItem = SortableElement(({
       >
         {children}
       </ResizablePaper>
-      <ItemActionsContainer /> {/* Right action container is used for symmetry, no icons inside yet */}
+      {rightItemActionButtons}
     </motion.div>
   )
 })

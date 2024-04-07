@@ -17,7 +17,7 @@ export const SaveBoqRowIcon = (): JSX.Element => {
       onClick={(e: MouseEvent): void => {
         if (disabled) return
 
-        alert('copy')
+        alert('save')
       }}
     />
   )

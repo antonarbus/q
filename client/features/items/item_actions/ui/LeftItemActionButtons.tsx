@@ -1,15 +1,14 @@
 import { CopyItemIcon } from '../copy_item'
 import { CutItemIcon } from '../cut_item'
-import { DeleteItemIcon } from '../delete_item'
 import { DragItemIcon } from '../drag_item'
+import { ItemActionButtonsLayout } from './ItemActionButtonsLayout'
 
-export const ItemActions = (): JSX.Element => {
+export const LeftItemActionButtons = (): JSX.Element => {
   return (
-    <>
+    <ItemActionButtonsLayout>
       <DragItemIcon />
       <CopyItemIcon />
       <CutItemIcon />
-      <DeleteItemIcon />
-    </>
+    </ItemActionButtonsLayout>
   )
 }

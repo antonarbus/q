@@ -26,6 +26,7 @@ export const BoqRowActionButtonsLayout = (props: Props): JSX.Element => {
           width: '10px',
           transition: 'scale 0.2s',
           cursor: 'pointer',
+          outline: 0,
         },
         '& > *:hover': {
           scale: '1.5',

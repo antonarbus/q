@@ -18,6 +18,7 @@ export const CutBoqRowIcon = (): JSX.Element => {
 
   return (
     <TbCut
+      tabIndex={-1}
       style={{
         color: disabled ? '#acacac' : '#000',
       }}
