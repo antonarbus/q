@@ -1,4 +1,5 @@
 import { AddBoqRowIcon } from '../add_boq_row'
+import { SearchBoqRowIcon } from '../search_boq_row copy'
 import { BoqRowActionButtonsLayout } from './BoqRowActionButtonsLayout'
 
 export const BoqRowActionButtonsRight = (): JSX.Element => {
@@ -7,6 +8,7 @@ export const BoqRowActionButtonsRight = (): JSX.Element => {
       style={{ right: '-33px' }}
     >
       <AddBoqRowIcon />
+      <SearchBoqRowIcon />
     </BoqRowActionButtonsLayout>
   )
 }
