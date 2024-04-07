@@ -12,7 +12,6 @@ export const BoqRowActionButtonsLeft = (): JSX.Element => {
       <DragBoqRow />
       <CopyBoqRowIcon />
       <CutBoqRowIcon />
-      <DeleteBoqRowIcon />
     </BoqRowActionButtonsLayout>
   )
 }

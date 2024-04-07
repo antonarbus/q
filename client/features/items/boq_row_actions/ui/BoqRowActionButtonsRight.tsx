@@ -1,4 +1,5 @@
 import { AddBoqRowIcon } from '../add_boq_row'
+import { DeleteBoqRowIcon } from '../delete_boq_row'
 import { SearchBoqRowIcon } from '../search_boq_row copy'
 import { BoqRowActionButtonsLayout } from './BoqRowActionButtonsLayout'
 
@@ -9,6 +10,7 @@ export const BoqRowActionButtonsRight = (): JSX.Element => {
     >
       <AddBoqRowIcon />
       <SearchBoqRowIcon />
+      <DeleteBoqRowIcon />
     </BoqRowActionButtonsLayout>
   )
 }
