@@ -3,8 +3,8 @@ import { BsFiletypePdf } from 'react-icons/bs'
 import { CiViewTable } from 'react-icons/ci'
 import { FaRegRectangleList, FaGripLines } from 'react-icons/fa6'
 import { FiLogOut, FiLogIn, FiDollarSign } from 'react-icons/fi'
-import { IoSaveOutline, IoText } from 'react-icons/io5'
-import { MdOutlineAdd } from 'react-icons/md'
+import { IoText } from 'react-icons/io5'
+import { MdOutlineAdd, MdSaveAlt } from 'react-icons/md'
 import { TbRectangleVertical } from 'react-icons/tb'
 import { VscNewFile } from 'react-icons/vsc'
 import { addBoqItem, addBoqRow, addPriceItem, addTextItem } from '@features/items/add'
@@ -33,7 +33,7 @@ export const navStructure: MenuItemTypes[] = [
       },
       {
         id: navMenuItemId.save,
-        icon: <IoSaveOutline />,
+        icon: <MdSaveAlt />,
         isHidden: false,
         name: 'Save',
         // shortcut: ['control', 's'],
