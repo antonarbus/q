@@ -1,5 +1,6 @@
 import { theme } from '@lib_instances/theme'
 import { motion } from 'framer-motion'
+import { type ResizableProps } from 're-resizable'
 import type { ComponentClass, ReactNode } from 'react'
 import type { SortableElementProps } from 'react-sortable-hoc'
 import { SortableElement } from 'react-sortable-hoc'
@@ -15,6 +16,7 @@ type Props = {
   rightItemActionButtons: ReactNode
   disableResize?: boolean
   autoWidth?: boolean
+  minWidth?: ResizableProps['minWidth']
   onItemResizeStart?: OnItemResizeStart
   onItemResize?: OnItemResize
   onItemResizeStop?: OnItemResizeStop
@@ -30,6 +32,7 @@ export const ItemSortAndAnimate: SortableItem = SortableElement(({
   rightItemActionButtons,
   disableResize,
   autoWidth,
+  minWidth,
   onItemResizeStart,
   onItemResize,
   onItemResizeStop,
@@ -80,6 +83,7 @@ export const ItemSortAndAnimate: SortableItem = SortableElement(({
         onItemResizeStart={onItemResizeStart}
         onItemResize={onItemResize}
         onItemResizeStop={onItemResizeStop}
+        minWidth={minWidth}
       >
         {children}
       </ResizablePaper>

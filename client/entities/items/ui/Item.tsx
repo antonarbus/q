@@ -1,4 +1,5 @@
 import { getState } from '@lib_instances/store'
+import { type ResizableProps } from 're-resizable'
 import type { ReactNode } from 'react'
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
 import { useIsItemSortDisabled } from '../hooks/useIsItemSortDisabled'
@@ -13,6 +14,7 @@ type Props = {
   onItemResize?: OnItemResize
   onItemResizeStop?: OnItemResizeStop
   autoWidth?: boolean
+  minWidth?: ResizableProps['minWidth']
   leftItemActionButtons: JSX.Element
   rightItemActionButtons: JSX.Element
 }
@@ -24,6 +26,7 @@ export const Item = ({
   onItemResize,
   onItemResizeStop,
   autoWidth,
+  minWidth,
   leftItemActionButtons,
   rightItemActionButtons,
 }: Props): JSX.Element => {
@@ -37,6 +40,7 @@ export const Item = ({
       disabled={isItemSortDisabled} // internal prop consumed by SortableElement HOC
       disableResize={disableResize}
       autoWidth={autoWidth}
+      minWidth={minWidth}
       itemHeight={item?.height ?? 0}
       itemId={item?.id ?? 'no id'}
       onItemResizeStart={onItemResizeStart}

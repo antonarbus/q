@@ -1,5 +1,5 @@
 import { useSelectorTyped } from '@lib_instances/store'
-import { Resizable } from 're-resizable'
+import { Resizable, type ResizableProps } from 're-resizable'
 import type { ReactNode } from 'react'
 import { className } from '@shared/consts/className'
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
@@ -9,6 +9,7 @@ type Props = {
   children: ReactNode
   disableResize?: boolean
   autoWidth?: boolean
+  minWidth?: ResizableProps['minWidth']
   onItemResizeStart?: OnItemResizeStart
   onItemResize?: OnItemResize
   onItemResizeStop?: OnItemResizeStop
@@ -21,6 +22,7 @@ export const ResizablePaper = ({
   onItemResizeStart,
   onItemResize,
   onItemResizeStop,
+  minWidth,
 }: Props): JSX.Element => {
   const { itemIndex } = useItem()
   const width = useSelectorTyped(state => state.items[itemIndex]?.width)
@@ -45,7 +47,7 @@ export const ResizablePaper = ({
         height: 'auto',
       }}
       // grid={[20, 0]}
-      minWidth='150px'
+      minWidth={minWidth ?? '150px'}
       maxWidth='100%'
       bounds={'window'}
       enable={{

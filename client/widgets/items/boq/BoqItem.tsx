@@ -8,6 +8,7 @@ export const BoqItem = (): JSX.Element => {
   return (
     <Item
       autoWidth={true}
+      minWidth='560px'
       onItemResizeStart={onBoqItemResizeStart}
       onItemResize={onBoqItemResize}
       onItemResizeStop={onBoqItemResizeStop}

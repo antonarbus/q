@@ -16,9 +16,6 @@ export const onBoqItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, ele
 }
 
 export const onBoqItemResize: OnItemResize = ({ itemIndex, e, direction, elementRef: itemElement, delta }) => {
-  const isTooNarrow = itemElement.clientWidth < 560
-  console.log('🚀 ~ isTooNarrow:', isTooNarrow)
-
   const width = initDescriptionColumnWidth + delta.width
 
   const descriptionColumn = getBoqColumnFromStore({ itemIndex, boqColumnKey: boqColumnKey.description })
