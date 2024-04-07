@@ -1,5 +1,4 @@
 import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
-import { motion } from 'framer-motion'
 import type { MouseEvent } from 'react'
 import { MdCopyAll } from 'react-icons/md'
 import { copySlice } from '@entities/copy'
@@ -13,11 +12,7 @@ export const CopyItemIcon = (): JSX.Element => {
   const disabled = !isCopyable
 
   return (
-    <motion.span
-      whileHover={{
-        scale: disabled ? 1 : 1.3,
-      }}
-      whileTap={{ scale: 1 }}
+    <MdCopyAll
       tabIndex={-1}
       style={{
         position: 'relative',
@@ -54,8 +49,6 @@ export const CopyItemIcon = (): JSX.Element => {
           dispatch(copySlice.actions.showCopyContainer())
         }
       }}
-    >
-      <MdCopyAll />
-    </motion.span>
+    />
   )
 }

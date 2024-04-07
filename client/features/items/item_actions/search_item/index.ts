@@ -1,0 +1,1 @@
+export { SearchItemIcon } from './SearchItemIcon'

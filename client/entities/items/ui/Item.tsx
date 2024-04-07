@@ -13,7 +13,8 @@ type Props = {
   onItemResize?: OnItemResize
   onItemResizeStop?: OnItemResizeStop
   autoWidth?: boolean
-  itemActions: JSX.Element
+  leftItemActionButtons: JSX.Element
+  rightItemActionButtons: JSX.Element
 }
 
 export const Item = ({
@@ -23,7 +24,8 @@ export const Item = ({
   onItemResize,
   onItemResizeStop,
   autoWidth,
-  itemActions,
+  leftItemActionButtons,
+  rightItemActionButtons,
 }: Props): JSX.Element => {
   const { itemIndex } = useItem()
   const item = getState().items[itemIndex]
@@ -40,7 +42,8 @@ export const Item = ({
       onItemResizeStart={onItemResizeStart}
       onItemResize={onItemResize}
       onItemResizeStop={onItemResizeStop}
-      itemActionElements={itemActions}
+      leftItemActionButtons={leftItemActionButtons}
+      rightItemActionButtons={rightItemActionButtons}
     >
       <PasteItemTextOverlay >
         {children}

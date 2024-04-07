@@ -7,6 +7,7 @@ const Handle = (): JSX.Element => {
 
   return (
     <MdDragIndicator
+      tabIndex={-1}
       style={{
         cursor: 'move',
         color: disabled ? '#acacac' : '#000',
@@ -15,4 +16,4 @@ const Handle = (): JSX.Element => {
   )
 }
 
-export const DragBoqRow = SortableHandle(Handle)
+export const DragBoqRowIcon = SortableHandle(Handle)

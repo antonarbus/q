@@ -1,4 +1,4 @@
-import { ItemActions } from '@features/items/item_actions'
+import { LeftItemActionButtons, RightItemActionButtons } from '@features/items/item_actions'
 import { onPriceItemResizeStop } from '@features/items/resize_item'
 import { Item } from '@entities/items'
 import { PriceHeader } from './price_header/PriceHeader'
@@ -8,7 +8,8 @@ export const TotalPriceItem = (): JSX.Element => {
   return (
     <Item
       onItemResizeStop={onPriceItemResizeStop}
-      itemActions={<ItemActions />}
+      leftItemActionButtons={<LeftItemActionButtons />}
+      rightItemActionButtons={<RightItemActionButtons />}
     >
       <PriceHeader />
       <PriceMain />

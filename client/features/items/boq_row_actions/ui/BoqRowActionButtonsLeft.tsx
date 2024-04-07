@@ -1,7 +1,6 @@
 import { CopyBoqRowIcon } from '../copy_boq_row'
 import { CutBoqRowIcon } from '../cut_boq_row'
-import { DeleteBoqRowIcon } from '../delete_boq_row'
-import { DragBoqRow } from '../drag_boq_row'
+import { DragBoqRowIcon } from '../drag_boq_row'
 import { BoqRowActionButtonsLayout } from './BoqRowActionButtonsLayout'
 
 export const BoqRowActionButtonsLeft = (): JSX.Element => {
@@ -9,7 +8,7 @@ export const BoqRowActionButtonsLeft = (): JSX.Element => {
     <BoqRowActionButtonsLayout
       style={{ left: '-33px' }}
     >
-      <DragBoqRow />
+      <DragBoqRowIcon />
       <CopyBoqRowIcon />
       <CutBoqRowIcon />
     </BoqRowActionButtonsLayout>

@@ -1,4 +1,4 @@
-import { ItemActions } from '@features/items/item_actions'
+import { LeftItemActionButtons, RightItemActionButtons } from '@features/items/item_actions'
 import { onBoqItemResize, onBoqItemResizeStart, onBoqItemResizeStop } from '@features/items/resize_item'
 import { Item } from '@entities/items'
 import { BoqHeader } from './boq_header'
@@ -11,7 +11,8 @@ export const BoqItem = (): JSX.Element => {
       onItemResizeStart={onBoqItemResizeStart}
       onItemResize={onBoqItemResize}
       onItemResizeStop={onBoqItemResizeStop}
-      itemActions={<ItemActions />}
+      leftItemActionButtons={<LeftItemActionButtons />}
+      rightItemActionButtons={<RightItemActionButtons />}
     >
       <BoqHeader />
       <BoqTable />

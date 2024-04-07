@@ -14,6 +14,7 @@ export const CopyBoqRowIcon = (): JSX.Element => {
 
   return (
     <MdCopyAll
+      tabIndex={-1}
       style={{
         color: disabled ? '#acacac' : '#000',
       }}

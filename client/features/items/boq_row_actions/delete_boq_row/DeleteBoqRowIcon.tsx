@@ -15,7 +15,8 @@ export const DeleteBoqRowIcon = (): JSX.Element => {
   const disabled = isLastBoqRow || !isDeletable
 
   return (
-    <RxCross2
+      <RxCross2
+      tabIndex={-1}
       style={{
         color: disabled ? '#acacac' : '#000',
       }}

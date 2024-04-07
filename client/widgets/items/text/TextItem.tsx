@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { ItemActions } from '@features/items/item_actions'
+import { LeftItemActionButtons, RightItemActionButtons } from '@features/items/item_actions'
 import { onTextItemResizeStart, onTextItemResizeStop } from '@features/items/resize_item'
 import { updateTextItem } from '@features/items/update_cell'
 import { beforeUpload } from '@features/items/upload'
@@ -14,7 +14,8 @@ export const TextItem = (): JSX.Element => {
     <Item
       onItemResizeStart={onTextItemResizeStart}
       onItemResizeStop={onTextItemResizeStop}
-      itemActions={<ItemActions />}
+      leftItemActionButtons={<LeftItemActionButtons />}
+      rightItemActionButtons={<RightItemActionButtons />}
     >
       <Froala
         editorRef={editorRef}
