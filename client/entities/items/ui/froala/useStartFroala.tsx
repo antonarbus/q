@@ -39,6 +39,14 @@ export const useStartFroala = (): void => {
               onFocus?.()
             },
             click: (e: MouseEvent) => {
+              // close opened inline toolbar
+              // there is some bug in froala that it does not close initial toolbar on first 2...3 clicks
+              const toolbarElement = froalaInstance.$tb['0']
+              const isToolbarOpened = toolbarElement.style.display === 'block'
+              if (isToolbarOpened) {
+                froalaInstance.toolbar.hide()
+              }
+
               onClick?.(e)
             },
             keydown: (e: KeyboardEvent) => {

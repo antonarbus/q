@@ -6,10 +6,7 @@ type Props = {
   editorRef: FroalaEditorRef
 }
 
-export const selectTextOrCloseToolbar = ({
-  e,
-  editorRef,
-}: Props): void => {
+export const selectTextOrCloseToolbar = ({ e, editorRef }: Props): void => {
   if (editorRef.current === null) return
 
   const clickedElement = e.target

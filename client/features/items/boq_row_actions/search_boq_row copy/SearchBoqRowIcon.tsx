@@ -1,11 +1,8 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { type MouseEvent } from 'react'
 import { IoIosSearch } from 'react-icons/io'
-import { useItem, useRow } from '@entities/items'
 
 export const SearchBoqRowIcon = (): JSX.Element => {
-  const { rowIndex } = useRow()
-  const { itemIndex } = useItem()
   const isCopyable = useSelectorTyped(state => state.copy.isCopyable)
   const disabled = !isCopyable
 
