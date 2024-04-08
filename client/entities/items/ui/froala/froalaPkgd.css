@@ -6737,13 +6737,13 @@ span.fr-img-caption.fr-view.fr-dii.fr-fir {
 
 /* custom, move toolbar a bit lower */
 .fr-toolbar.fr-desktop.fr-inline {
-  translate: 0px 10px;
+  translate: 0px 10px !important;
   border-radius: 10px;
   width: 240px;
-  z-index: 1px;
+  z-index: 1;
 }
 .fr-toolbar.fr-desktop.fr-inline.fr-above {
-  translate: 0px -10px;
+  translate: 0px -10px !important;
 }
 .fr-popup.fr-desktop.fr-inline.fr-active {
   translate: -120px 0px;
