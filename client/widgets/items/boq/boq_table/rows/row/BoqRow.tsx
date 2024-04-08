@@ -1,4 +1,3 @@
-import { Box } from '@mui/material'
 import { type FocusEvent } from 'react'
 import { BoqRowActionButtonsLeft, BoqRowActionButtonsRight } from '@features/items/boq_row_actions'
 import { BoqRowLayout } from './BoqRowLayout'
