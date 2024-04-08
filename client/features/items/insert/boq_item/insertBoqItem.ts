@@ -6,7 +6,7 @@ import { boqRowKey } from '@entities/items/consts/boqRowKey'
 import { itemKey } from '@entities/items/consts/itemKey'
 import { nanoid } from '@shared/lib/nanoid'
 
-export const addBoqItem = (e?: MouseEvent): void => {
+export const insertBoqItem = (e?: MouseEvent): void => {
   const itemToCopy = {
     id: nanoid(3),
     type: itemKey.boq,

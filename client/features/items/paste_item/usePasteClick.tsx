@@ -4,6 +4,7 @@ import { useEffectOnce, useUnmount } from 'react-use'
 import { copySlice } from '@entities/copy'
 import { isItemsFroalaSignal, itemsSlice } from '@entities/items'
 import { className } from '@shared/consts/className'
+import { navMenuItemId } from '@shared/consts/navMenuItemId'
 import { nanoid } from '@shared/lib/nanoid'
 import { navSlice } from '@shared/nav'
 import { fixElementDimensionStyle } from '@shared/utils/fixElementDimensionStyle'
@@ -59,7 +60,7 @@ function pasteItemOnClick(): void {
 
   setTimeout(() => {
     dispatch(copySlice.actions.allowAllActions())
-    dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
+    dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.save }))
   }, 1000 * theme.item.animationDuration)
 
   const itemsInCopyContainer = getState().copy.items

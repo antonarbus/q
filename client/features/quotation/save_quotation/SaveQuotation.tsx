@@ -2,6 +2,7 @@ import { dispatch, getState } from '@lib_instances/store'
 import { useNavigate } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { quotationSignal, updateOrAppendIntoQuotationsCache, useSaveQuotationMutation } from '@entities/quotation'
+import { navMenuItemId } from '@shared/consts/navMenuItemId'
 import { nanoid } from '@shared/lib/nanoid'
 import { navSlice, showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@shared/nav'
 import { notify } from '@shared/ui/top_msg'
@@ -32,7 +33,7 @@ export const SaveQuotation = (): JSX.Element => {
   useUpdateEffect(() => {
     if (!isPending) return
 
-    showLoadingNavIcon({ navMenuItemIdKey: 'save' })
+    showLoadingNavIcon({ navMenuItemIdKey: navMenuItemId.save })
   }, [isPending])
 
   useUpdateEffect(() => {
@@ -47,8 +48,8 @@ export const SaveQuotation = (): JSX.Element => {
     }
 
     notify({ msg: 'Saved', type: 'success', position: 'bottom-center' })
-    showSuccessNavIcon({ navMenuItemIdKey: 'save' })
-    dispatch(navSlice.actions.disableTopNavItem({ navMenuItemIdKey: 'save' }))
+    showSuccessNavIcon({ navMenuItemIdKey: navMenuItemId.save })
+    dispatch(navSlice.actions.disableTopNavItem({ navMenuItemIdKey: navMenuItemId.save }))
     quotationSignal.value = { ...quotationSignal.value, ...data.document }
     updateOrAppendIntoQuotationsCache({ quotation: quotationSignal.value })
   }, [isSuccess])
@@ -67,7 +68,7 @@ export const SaveQuotation = (): JSX.Element => {
     }
 
     navigate('..')
-    showErrorNavIcon({ navMenuItemIdKey: 'save' })
+    showErrorNavIcon({ navMenuItemIdKey: navMenuItemId.save })
   }, [isError])
 
   return <></>

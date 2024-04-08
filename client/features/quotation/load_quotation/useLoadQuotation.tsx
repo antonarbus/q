@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { defaultItems, itemsSlice } from '@entities/items'
 import { quotationSignal, useGetQuotationMutation } from '@entities/quotation'
+import { navMenuItemId } from '@shared/consts/navMenuItemId'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
 import { navSlice } from '@shared/nav'
 import { reRenderQuotationSignal } from '@shared/signals/reRenderQuotationSignal'
@@ -24,10 +25,10 @@ export function useLoadQuotation(): void {
         quotationSignal.value = { id: 'new', email: '' }
       }, 200)
 
-      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
-      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'pdf' }))
-      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'share' }))
-      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'add' }))
+      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.save }))
+      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.pdf }))
+      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.share }))
+      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.insert }))
       setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 2000)
     }
   }, [reRenderQuotationSignal.value])
@@ -59,10 +60,10 @@ export function useLoadQuotation(): void {
 
     if (data.message === 'found') {
       quotationSignal.value = quotation
-      dispatch(navSlice.actions.disableTopNavItem({ navMenuItemIdKey: 'save' }))
-      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'pdf' }))
-      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'share' }))
-      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
+      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.save }))
+      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.pdf }))
+      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.share }))
+      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.insert }))
       setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 1000)
     }
   }, [isSuccess])

@@ -5,7 +5,7 @@ import { isItemsFroalaSignal } from '@entities/items'
 import { boqRowKey } from '@entities/items/consts/boqRowKey'
 import { nanoid } from '@shared/lib/nanoid'
 
-export const addBoqRow = (e?: MouseEvent): void => {
+export const insertBoqRow = (e?: MouseEvent): void => {
   const itemToCopy = {
     id: nanoid(3),
     type: boqRowKey.row,

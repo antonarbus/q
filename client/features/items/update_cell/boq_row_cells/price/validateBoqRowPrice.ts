@@ -2,6 +2,7 @@ import { dispatch } from '@lib_instances/store'
 import { roundTo } from 'round-to'
 import { boqRowCellKey, getBoqRowFromStore, getBoqRowsFromStore, isBoqRowPriceValid, updateBoqRowCellWithValue, updateSubTotalPriceWithValue } from '@entities/items'
 import { type BoqRow } from '@entities/items'
+import { navMenuItemId } from '@shared/consts/navMenuItemId'
 import { navSlice } from '@shared/nav'
 import { type FroalaEditorRef } from '@shared/types'
 
@@ -61,6 +62,6 @@ export const validateBoqRowPrice = ({
 
     if (!didChange) return
 
-    dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
+    dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.save }))
   }
 }

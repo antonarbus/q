@@ -5,7 +5,7 @@ import { isItemsFroalaSignal } from '@entities/items'
 import { itemKey } from '@entities/items/consts/itemKey'
 import { nanoid } from '@shared/lib/nanoid'
 
-export const addPriceItem = (e?: MouseEvent): void => {
+export const insertPriceItem = (e?: MouseEvent): void => {
   const itemToCopy = {
     id: nanoid(3),
     type: itemKey.price,

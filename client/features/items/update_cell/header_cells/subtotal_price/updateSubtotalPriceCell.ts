@@ -1,6 +1,7 @@
 import { dispatch } from '@lib_instances/store'
 import { roundTo } from 'round-to'
 import { didBoqHeaderCellContentChange, getBoqHeaderFromStore, getBoqRowsFromStore, updateBoqHeaderCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue, getBoqRowFromStore, type BoqRow, type BoqRowEditorRefs, boqRowCellKey } from '@entities/items'
+import { navMenuItemId } from '@shared/consts/navMenuItemId'
 import { navSlice } from '@shared/nav'
 import { type FroalaEditor, type FroalaEditorRef } from '@shared/types'
 import { notify } from '@shared/ui/top_msg'
@@ -37,7 +38,7 @@ export const updateSubtotalPriceCell = ({
   })
 
   if (didUpdate) {
-    dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
+    dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.save }))
   }
 
   const prevSubTotalPriceValue = boqRows.reduce((accumulator, boqRow) => {
@@ -178,5 +179,5 @@ export const updateSubtotalPriceCell = ({
 
   if (!didChange) return
 
-  dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
+  dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.save }))
 }
