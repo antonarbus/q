@@ -5,7 +5,7 @@ export const navMenuItemId = {
   save: 'save',
   pdf: 'pdf',
   share: 'share',
-  add: 'add',
+  insert: 'insert',
   quotations: 'quotations',
   login: 'login',
   account: 'account',

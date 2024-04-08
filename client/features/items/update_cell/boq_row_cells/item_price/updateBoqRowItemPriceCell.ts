@@ -3,6 +3,7 @@ import type FroalaEditor from 'froala-editor'
 import { type MutableRefObject } from 'react'
 import { roundTo } from 'round-to'
 import { didBoqCellContentChange, getBoqRowFromStore, getBoqRowsFromStore, updateBoqRowCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue, type BoqRow, boqRowCellKey } from '@entities/items'
+import { navMenuItemId } from '@shared/consts/navMenuItemId'
 import { navSlice } from '@shared/nav'
 
 type Props = {
@@ -71,5 +72,5 @@ export const updateBoqRowItemPriceCell = ({
 
   if (!didChange) return
 
-  dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
+  dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.save }))
 }

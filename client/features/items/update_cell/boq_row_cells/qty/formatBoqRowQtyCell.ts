@@ -1,5 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { boqRowCellKey, formatBoqRowCellNumber } from '@entities/items'
+import { navMenuItemId } from '@shared/consts/navMenuItemId'
 import { navSlice } from '@shared/nav'
 import { type FroalaEditorRef } from '@shared/types'
 
@@ -23,6 +24,6 @@ export const formatBoqRowQtyCell = ({
   })
 
   if (didUpdate) {
-    dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
+    dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.save }))
   }
 }

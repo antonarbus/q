@@ -1,6 +1,7 @@
 import { dispatch } from '@lib_instances/store'
 import { updateBoqHeaderCellAtStore } from '@entities/items'
 import { type BoqHeaderKey } from '@entities/items'
+import { navMenuItemId } from '@shared/consts/navMenuItemId'
 import { navSlice } from '@shared/nav'
 import { type FroalaEditorRef } from '@shared/types'
 
@@ -14,6 +15,6 @@ export const updateSubtotalTextCell = ({ editorRef, itemIndex, boqHeaderKey }: P
   const { didUpdate } = updateBoqHeaderCellAtStore({ editorRef, itemIndex, boqHeaderKey })
 
   if (didUpdate) {
-    dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
+    dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.save }))
   }
 }

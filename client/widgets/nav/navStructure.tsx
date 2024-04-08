@@ -4,10 +4,10 @@ import { CiViewTable } from 'react-icons/ci'
 import { FaRegRectangleList, FaGripLines } from 'react-icons/fa6'
 import { FiLogOut, FiLogIn, FiDollarSign } from 'react-icons/fi'
 import { IoText } from 'react-icons/io5'
-import { MdOutlineAdd, MdSaveAlt } from 'react-icons/md'
-import { TbRectangleVertical } from 'react-icons/tb'
+import { MdSaveAlt } from 'react-icons/md'
+import { TbRectangleVertical, TbRowInsertTop } from 'react-icons/tb'
 import { VscNewFile } from 'react-icons/vsc'
-import { addBoqItem, addBoqRow, addPriceItem, addTextItem } from '@features/items/add'
+import { insertBoqItem, insertBoqRow, insertPriceItem, insertTextItem } from '@features/items/insert'
 import { createNewQuotation } from '@features/quotation/create_new_quotation'
 import { downloadPdf } from '@features/quotation/download_pdf'
 import { navMenuItemId } from '@shared/consts/navMenuItemId'
@@ -51,10 +51,10 @@ export const navStructure: MenuItemTypes[] = [
         },
       },
       {
-        id: navMenuItemId.add,
-        icon: <MdOutlineAdd />,
+        id: navMenuItemId.insert,
+        icon: <TbRowInsertTop />,
         isHidden: false,
-        name: 'Add',
+        name: 'Insert',
         disabled: true,
         menuItems: [
           {
@@ -70,7 +70,7 @@ export const navStructure: MenuItemTypes[] = [
                 isHidden: false,
                 shortcut: ['control', 'shift', 't'],
                 func: (e) => {
-                  addTextItem(e)
+                  insertTextItem(e)
                 },
               },
               {
@@ -80,7 +80,7 @@ export const navStructure: MenuItemTypes[] = [
                 isHidden: false,
                 shortcut: ['control', 'shift', 'i'],
                 func: (e) => {
-                  addBoqItem(e)
+                  insertBoqItem(e)
                 },
               },
               {
@@ -90,7 +90,7 @@ export const navStructure: MenuItemTypes[] = [
                 isHidden: false,
                 shortcut: ['control', 'shift', 'p'],
                 func: (e) => {
-                  addPriceItem(e)
+                  insertPriceItem(e)
                 },
               },
             ],
@@ -102,7 +102,7 @@ export const navStructure: MenuItemTypes[] = [
             isHidden: false,
             shortcut: ['control', 'shift', 'r'],
             func: (e) => {
-              addBoqRow(e)
+              insertBoqRow(e)
             },
           },
         ],

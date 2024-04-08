@@ -1,6 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
 import type { NavItemsMediaQueryWidths } from '@widgets/nav'
+import { navMenuItemId } from '../consts/navMenuItemId'
 import { setMenuItemPropValue } from './setMenuItemPropValue'
 import type { MenuItemType, NavMenuItemIdKey } from './type'
 
@@ -130,7 +131,7 @@ export const navSlice = createSlice({
     hideLogInMenuItem: (state) => {
       setMenuItemPropValue({
         menu: state.navStructure,
-        navMenuItemIdKey: 'login',
+        navMenuItemIdKey: navMenuItemId.login,
         prop: 'isHidden',
         value: true,
       })
@@ -138,7 +139,7 @@ export const navSlice = createSlice({
     showLogInMenuItem: (state) => {
       setMenuItemPropValue({
         menu: state.navStructure,
-        navMenuItemIdKey: 'login',
+        navMenuItemIdKey: navMenuItemId.login,
         prop: 'isHidden',
         value: false,
       })
@@ -146,7 +147,7 @@ export const navSlice = createSlice({
     showAccountMenuItem: (state) => {
       setMenuItemPropValue({
         menu: state.navStructure,
-        navMenuItemIdKey: 'account',
+        navMenuItemIdKey: navMenuItemId.account,
         prop: 'isHidden',
         value: false,
       })
@@ -154,7 +155,7 @@ export const navSlice = createSlice({
     hideAccountMenuItem: (state) => {
       setMenuItemPropValue({
         menu: state.navStructure,
-        navMenuItemIdKey: 'account',
+        navMenuItemIdKey: navMenuItemId.account,
         prop: 'isHidden',
         value: true,
       })

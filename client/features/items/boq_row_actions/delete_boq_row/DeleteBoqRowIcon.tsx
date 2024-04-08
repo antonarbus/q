@@ -4,6 +4,7 @@ import { flushSync } from 'react-dom'
 import { RxCross2 } from 'react-icons/rx'
 import { copySlice } from '@entities/copy'
 import { itemsSlice, selectIsLastBoqRow, useItem, useRow } from '@entities/items'
+import { navMenuItemId } from '@shared/consts/navMenuItemId'
 import { navSlice } from '@shared/nav'
 
 export const DeleteBoqRowIcon = (): JSX.Element => {
@@ -37,7 +38,7 @@ export const DeleteBoqRowIcon = (): JSX.Element => {
 
         setTimeout(() => {
           dispatch(copySlice.actions.allowAllActions())
-          dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
+          dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.save }))
         }, 1000 * theme.item.animationDuration)
 
         const isCopyContainer = getState().copy.isCopyContainer

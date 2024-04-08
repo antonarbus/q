@@ -1,5 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { itemsSlice } from '@entities/items'
+import { navMenuItemId } from '@shared/consts/navMenuItemId'
 import { navSlice } from '@shared/nav'
 
 type Props = {
@@ -9,5 +10,5 @@ type Props = {
 
 export const pinBoqRowPriceCell = ({ itemIndex, rowIndex }: Props): void => {
   dispatch(itemsSlice.actions.pinPriceReducer({ itemIndex, rowIndex }))
-  dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: 'save' }))
+  dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.save }))
 }
