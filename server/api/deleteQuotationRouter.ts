@@ -50,7 +50,7 @@ const deleteQuotation: RouterHandler = async (req, res, next) => {
 
     const [files] = await bucket.getFiles({ prefix: `${email}/${id}/` })
 
-    const filesDeletionRes = await Promise.all(files.map(async file => await file.delete()))
+    await Promise.all(files.map(async file => await file.delete()))
 
     return res
       .status(200)
