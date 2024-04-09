@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { boqColumnKey, getNumberOfBoqItemsAbove, useItem, useRow, useStylesForResizableCell } from '@entities/items'
+import { boqColumnKey, getNumberOfBoqItemsAbove, useItem, useRow, useStylesForResizableCell } from '@entities/quotation'
 
 export const NumberCell = (): JSX.Element => {
   const { itemIndex } = useItem()

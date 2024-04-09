@@ -2,8 +2,8 @@ import { useSelectorTyped } from '@lib_instances/store'
 import { Resizable } from 're-resizable'
 import type { ReactNode } from 'react'
 import { onColumnResize, onColumnResizeStart, onColumnResizeStop } from '@features/items/resize_column'
-import { selectColumnWidth, useItem } from '@entities/items'
-import type { BoqColumnKey } from '@entities/items'
+import { selectColumnWidth, useItem } from '@entities/quotation'
+import type { BoqColumnKey } from '@entities/quotation'
 
 type Props = {
   children: ReactNode

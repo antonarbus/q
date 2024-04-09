@@ -1,7 +1,7 @@
 import { tabFromDescriptionCell } from '@features/items/tab_away_from_cell'
 import { updateDescriptionCell } from '@features/items/update_cell'
 import { beforeUpload } from '@features/items/upload'
-import { getBoqCellHtmlFromStore, useRow, useItem, Froala, useStylesForResizableCell, boqRowCellStyle, boqRowCellKey, boqColumnKey } from '@entities/items'
+import { getBoqCellHtmlFromStore, useRow, useItem, Froala, useStylesForResizableCell, boqRowCellStyle, boqRowCellKey, boqColumnKey } from '@entities/quotation'
 
 export const DescriptionCell = (): JSX.Element => {
   const { itemIndex } = useItem()

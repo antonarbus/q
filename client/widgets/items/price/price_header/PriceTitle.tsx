@@ -1,7 +1,7 @@
 import { getState } from '@lib_instances/store'
 import { useRef } from 'react'
 import { updatePriceTitleCell } from '@features/items/update_cell'
-import { useItem, Froala, itemType } from '@entities/items'
+import { useItem, Froala, itemKey } from '@entities/quotation'
 import { type FroalaEditor } from '@shared/types'
 
 export const PriceTitle = (): JSX.Element => {
@@ -14,7 +14,7 @@ export const PriceTitle = (): JSX.Element => {
       placeholder='Total price...'
       htmlGetter={() => {
         const priceItem = getState().items[itemIndex]
-        if (priceItem?.type !== itemType.price) return ''
+        if (priceItem?.type !== itemKey.price) return ''
         const titleHtml = priceItem.title.html
         return titleHtml
       }}

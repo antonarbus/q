@@ -1,5 +1,5 @@
 import { dispatch, getState } from '@lib_instances/store'
-import { itemType, itemsSlice, getTotalPriceAbove } from '@entities/items'
+import { itemKey, itemsSlice, getTotalPriceAbove } from '@entities/quotation'
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
 import { type FroalaEditorRef } from '@shared/types'
 import { getNumberFromString, getStringWithNewFormattedNumber, getTextContentFromHtml } from '@shared/utils'
@@ -16,7 +16,7 @@ export const validateTotalPrice = ({
   if (editorRef.current === null) return
 
   const priceItem = getState().items[itemIndex]
-  if (priceItem?.type !== itemType.price) return
+  if (priceItem?.type !== itemKey.price) return
 
   const currentHtml = editorRef.current.html.get()
   const cellTextContent = getTextContentFromHtml({ html: currentHtml })

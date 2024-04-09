@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { columnHeaderStyle, boqColumnKey } from '@entities/items'
+import { columnHeaderStyle, boqColumnKey } from '@entities/quotation'
 import { ResizableColumn } from '../ResizableColumn'
 
 export const NumberColumn = (): JSX.Element => {

@@ -4,7 +4,7 @@ import { type JwtPayloadExtended, verifyRefreshToken } from '@server/services/jw
 import { bucket } from '@server/services/storage'
 import { Router } from 'express'
 import { type HydratedDocument } from 'mongoose'
-import type { ItemType } from '@entities/items'
+import type { ItemType } from '@entities/quotation'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { type ResWithBody, type ReqWithBody, type Next } from '../types'
 

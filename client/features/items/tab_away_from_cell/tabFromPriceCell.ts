@@ -1,4 +1,4 @@
-import { type BoqRowEditorRefs } from '@entities/items'
+import { type BoqRowEditorRefs } from '@entities/quotation'
 
 type Props = {
   e: KeyboardEvent

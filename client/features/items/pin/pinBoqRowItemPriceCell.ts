@@ -1,5 +1,5 @@
 import { dispatch } from '@lib_instances/store'
-import { boqRowCellKey, getBoqCellFromStore, itemsSlice } from '@entities/items'
+import { boqRowCellKey, getBoqCellFromStore, itemsSlice } from '@entities/quotation'
 import { navMenuItemId } from '@shared/consts/navMenuItemId'
 import { navSlice } from '@shared/nav'
 

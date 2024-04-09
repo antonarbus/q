@@ -2,8 +2,7 @@ import { useSelectorTyped } from '@lib_instances/store'
 import { AnimatePresence } from 'framer-motion'
 import { type ReactNode } from 'react'
 import { onItemDrag } from '@features/items/item_actions/drag_item'
-import { ItemProvider, itemsShapeEqualityFn, BoqItemProvider, itemType } from '@entities/items'
-import { DraggableItemsContainer } from '@entities/items/ui/DraggableItemsContainer'
+import { ItemProvider, itemsShapeEqualityFn, BoqItemProvider, itemKey, DraggableItemsContainer } from '@entities/quotation'
 import { BoqItem } from './boq/BoqItem'
 import { PasteItem } from './paste/PasteItem'
 import { TotalPriceItem } from './price/PriceItem'
@@ -27,7 +26,7 @@ export const Items = (): ReactNode => {
         {items.map((item, itemIndex) => {
           const key = item.id
 
-          if (item.type === itemType.text) {
+          if (item.type === itemKey.text) {
             return (
               <ItemProvider key={key} itemIndex={itemIndex}>
                 <TextItem />
@@ -35,7 +34,7 @@ export const Items = (): ReactNode => {
             )
           }
 
-          if (item.type === itemType.boq) {
+          if (item.type === itemKey.boq) {
             return (
               <ItemProvider key={key} itemIndex={itemIndex}>
                 <BoqItemProvider>
@@ -45,7 +44,7 @@ export const Items = (): ReactNode => {
             )
           }
 
-          if (item.type === itemType.price) {
+          if (item.type === itemKey.price) {
             return (
               <ItemProvider key={key} itemIndex={itemIndex}>
                 <TotalPriceItem />
@@ -53,7 +52,7 @@ export const Items = (): ReactNode => {
             )
           }
 
-          if (item.type === itemType.paste) {
+          if (item.type === itemKey.paste) {
             return <PasteItem key={key} />
           }
 

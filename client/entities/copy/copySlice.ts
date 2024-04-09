@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
-import { type CopyableItem } from '@entities/items' // todo: not good
+import { type CopyableItem } from '@entities/quotation' // todo: not good
 import { type CopyPlace } from './types'
 
 type Props = {

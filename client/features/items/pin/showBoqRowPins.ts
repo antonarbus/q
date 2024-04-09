@@ -1,5 +1,5 @@
 import { dispatch } from '@lib_instances/store'
-import { boqRowCellKey, getBoqRowFromStore, itemsSlice } from '@entities/items'
+import { boqRowCellKey, getBoqRowFromStore, itemsSlice } from '@entities/quotation'
 
 type Props = {
   itemIndex: number

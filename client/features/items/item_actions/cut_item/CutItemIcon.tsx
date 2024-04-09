@@ -3,7 +3,7 @@ import { theme } from '@lib_instances/theme'
 import type { MouseEvent } from 'react'
 import { TbCut } from 'react-icons/tb'
 import { copySlice } from '@entities/copy'
-import { isItemsFroalaSignal, itemType, itemsSlice, saveItemHeightByIndex, selectIsLastItem, useItem } from '@entities/items'
+import { isItemsFroalaSignal, itemKey, itemsSlice, saveItemHeightByIndex, selectIsLastItem, useItem } from '@entities/quotation'
 import { className } from '@shared/consts/className'
 import { fixElementDimensionStyle } from '@shared/utils/fixElementDimensionStyle'
 import { cleanHtml } from '@shared/utils/itemsUtils'
@@ -28,7 +28,7 @@ export const CutItemIcon = (): JSX.Element => {
 
           const itemToCut = getState().items[itemIndex]
           if (!itemToCut) return
-          if (itemToCut.type === itemType.paste) return
+          if (itemToCut.type === itemKey.paste) return
 
           const clickedIconElement = e.target
           if (!(clickedIconElement instanceof Element)) return

@@ -1,6 +1,6 @@
 import { dispatch } from '@lib_instances/store'
-import { updateBoqHeaderCellAtStore } from '@entities/items'
-import { type BoqHeaderKey } from '@entities/items'
+import { updateBoqHeaderCellAtStore } from '@entities/quotation'
+import { type BoqHeaderKey } from '@entities/quotation'
 import { navMenuItemId } from '@shared/consts/navMenuItemId'
 import { navSlice } from '@shared/nav'
 import { type FroalaEditorRef } from '@shared/types'

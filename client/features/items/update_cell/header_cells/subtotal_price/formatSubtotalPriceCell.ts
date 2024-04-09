@@ -1,6 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { roundTo } from 'round-to'
-import { getBoqItemFromStore, itemsSlice } from '@entities/items'
+import { getBoqItemFromStore, itemsSlice } from '@entities/quotation'
 import { type FroalaEditorRef } from '@shared/types'
 import { getStringWithNewFormattedNumber } from '@shared/utils'
 

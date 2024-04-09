@@ -1,7 +1,7 @@
 import { dispatch, getState } from '@lib_instances/store'
 import isEqual from 'lodash.isequal'
 import { type CopyPlace, copySlice, getPastePlace } from '@entities/copy'
-import { itemType, itemsSlice } from '@entities/items'
+import { itemKey, itemsSlice } from '@entities/quotation'
 import { className } from '@shared/consts/className'
 import { route } from '@shared/consts/route'
 
@@ -16,7 +16,7 @@ export const movePasteTextForItem = (e: MouseEvent): void => {
 
   const navElement = e.target.closest('nav')
   const isPasteTextShown = getState().copy.isPasteTextShown
-  const isPasteItem = getState().items.some(item => item.type === itemType.paste)
+  const isPasteItem = getState().items.some(item => item.type === itemKey.paste)
 
   const removePasteIfNeeded = (): void => {
     if (isPasteTextShown) {

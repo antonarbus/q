@@ -1,14 +1,14 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { useEffect } from 'react'
-import { boqRowType, itemType } from '@entities/items'
+import { boqRowKey, itemKey } from '@entities/quotation'
 import { movePasteTextForBoqRow } from './movePasteTextForBoqRow'
 import { movePasteTextForItem } from './movePasteTextForItem'
 
 export const useMovePasteText = (): void => {
   const typeOfNextPasteItem = useSelectorTyped(state => state.copy.items.at(0)?.type)
 
-  const isItem = typeOfNextPasteItem === itemType.boq || typeOfNextPasteItem === itemType.text || typeOfNextPasteItem === itemType.price
-  const isBoqRow = typeOfNextPasteItem === boqRowType.row
+  const isItem = typeOfNextPasteItem === itemKey.boq || typeOfNextPasteItem === itemKey.text || typeOfNextPasteItem === itemKey.price
+  const isBoqRow = typeOfNextPasteItem === boqRowKey.row
 
   useEffect(() => {
     if (isItem) {

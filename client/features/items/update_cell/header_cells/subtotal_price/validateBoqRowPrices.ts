@@ -1,5 +1,5 @@
 import { roundTo } from 'round-to'
-import { getBoqRowsFromStore, isBoqRowPriceValid, updateBoqRowCellWithValue, updateSubTotalPriceWithValue, type BoqRow, type BoqRowEditorRefs, boqRowCellKey } from '@entities/items'
+import { getBoqRowsFromStore, isBoqRowPriceValid, updateBoqRowCellWithValue, updateSubTotalPriceWithValue, type BoqRow, type BoqRowEditorRefs, boqRowCellKey } from '@entities/quotation'
 import { type FroalaEditorRef } from '@shared/types'
 import { notify } from '@shared/ui/top_msg'
 
