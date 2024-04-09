@@ -1,11 +1,12 @@
 import { Person, Settings } from '@mui/icons-material'
 import { BsFiletypePdf } from 'react-icons/bs'
+import { CgInsertAfter } from 'react-icons/cg'
 import { CiViewTable } from 'react-icons/ci'
 import { FaRegRectangleList, FaGripLines } from 'react-icons/fa6'
 import { FiLogOut, FiLogIn, FiDollarSign } from 'react-icons/fi'
 import { IoText } from 'react-icons/io5'
 import { MdSaveAlt } from 'react-icons/md'
-import { TbRectangleVertical, TbRowInsertTop } from 'react-icons/tb'
+import { TbRectangleVertical } from 'react-icons/tb'
 import { VscNewFile } from 'react-icons/vsc'
 import { insertBoqItem, insertBoqRow, insertPriceItem, insertTextItem } from '@features/items/insert'
 import { createNewQuotation } from '@features/quotation/create_new_quotation'
@@ -52,7 +53,7 @@ export const navStructure: MenuItemTypes[] = [
       },
       {
         id: navMenuItemId.insert,
-        icon: <TbRowInsertTop />,
+        icon: <CgInsertAfter />,
         isHidden: false,
         name: 'Insert',
         disabled: true,
