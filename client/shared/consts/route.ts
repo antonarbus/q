@@ -7,7 +7,6 @@ export const route = {
   resetPassword: 'reset-password',
   activate: 'activate',
   quotations: 'quotations',
-  profile: 'profile',
   settings: 'settings',
   save: 'save',
   new: 'new',

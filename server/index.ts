@@ -9,7 +9,6 @@ import { getAccessTokenRouter } from './api/getAccessTokenRouter'
 import { getBucketCors } from './api/getBucketCors'
 import { getQuotationRouter } from './api/getQuotationRouter'
 import { getQuotationsRouter } from './api/getQuotationsRouter'
-import { hiRouter } from './api/hiRouter'
 import { logInRouter } from './api/logInRouter'
 import { logOutRouter } from './api/logOutRouter'
 import { registerRouter } from './api/registerRouter'
@@ -19,8 +18,6 @@ import { saveQuotationRouter } from './api/saveQuotationRouter'
 import { setBucketCors } from './api/setBucketCors'
 import { testRouter } from './api/testRouter'
 import { uploadRouter } from './api/uploadRouter'
-import { userEmailRouter } from './api/userEmailRouter'
-import { usersRouter } from './api/usersRouter'
 import { apiUrl } from './consts/apiUrl'
 import { connectToDb } from './db/connectToDb'
 import { errorHandlerMiddleware } from './middleware/errorHandlerMiddleware'
@@ -38,7 +35,6 @@ app.set('trust proxy', true) // for app engine
 
 app.get(apiUrl.root, (_req: Req, res: Res) => res.send('i am express.js'))
 app.get(apiUrl.api, (_req: Req, res: Res) => res.json({ message: '/api' }))
-app.use(apiUrl.hi, hiRouter)
 app.use(apiUrl.test, testRouter)
 app.use(apiUrl.register, registerRouter)
 app.use(apiUrl.resetPassword, resetPasswordRouter)
@@ -47,8 +43,6 @@ app.use(apiUrl.logIn, logInRouter)
 app.use(apiUrl.logOut, logOutRouter)
 app.use(apiUrl.activate, activateRouter)
 app.use(apiUrl.getAccessToken, getAccessTokenRouter)
-app.use(apiUrl.users, usersRouter)
-app.use(apiUrl.user, userEmailRouter)
 app.use(apiUrl.upload, uploadRouter)
 app.use(apiUrl.setBucketCors, setBucketCors)
 app.use(apiUrl.getBucketCors, getBucketCors)

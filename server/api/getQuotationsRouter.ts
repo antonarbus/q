@@ -18,13 +18,17 @@ const getQuotations: RouterHandler = async (req, res, next) => {
     const refreshJwtToken = req.cookies.refreshJwtToken
 
     if (typeof refreshJwtToken !== 'string') {
-      return res.status(200).json({ message: 'not logged in' })
+      return res
+        .status(200)
+        .json({ message: 'not logged in' })
     }
 
     const { email } = verifyRefreshToken(refreshJwtToken) as JwtPayloadExtended
 
     if (!email) {
-      return res.status(200).json({ message: 'not logged in' })
+      return res
+        .status(200)
+        .json({ message: 'not logged in' })
     }
 
     const documents = await QuotationModel
@@ -32,10 +36,9 @@ const getQuotations: RouterHandler = async (req, res, next) => {
       .sort({ updatedAt: -1 })
       .select({ _id: 0, __v: 0, email: 0 })
 
-    return res.status(200).json({
-      message: 'found',
-      documents,
-    })
+    return res
+      .status(200)
+      .json({ message: 'found', documents })
   } catch (error) {
     next(error)
   }

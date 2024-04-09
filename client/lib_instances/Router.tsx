@@ -4,7 +4,6 @@ import { PersistentAuth } from '@pages/auth/PersistentAuth'
 import { RequireAuth } from '@pages/auth/RequireAuth'
 import { Unauthorized } from '@pages/auth/Unauthorized'
 import { BarChart } from '@pages/chart/Chart'
-import { Profile } from '@pages/profile'
 import { Quotation } from '@pages/quotation'
 import { Quotations } from '@pages/quotations'
 import { Copy } from '@widgets/copy'
@@ -85,10 +84,6 @@ export const router = createBrowserRouter([
           {
             element: <RequireAuth allowedRoles={['user']} />,
             children: [
-              {
-                path: route.profile,
-                element: <Profile />,
-              },
               {
                 path: route.settings,
                 element: <div>Settings</div>,

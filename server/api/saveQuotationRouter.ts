@@ -30,9 +30,7 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
     if (typeof refreshJwtToken !== 'string') {
       return res
         .status(httpStatus.unauthorized_401)
-        .json({
-          message: 'not logged in',
-        })
+        .json({ message: 'not logged in' })
     }
 
     const { email } = verifyRefreshToken(refreshJwtToken) as JwtPayloadExtended
@@ -40,17 +38,13 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
     if (!email) {
       return res
         .status(httpStatus.unauthorized_401)
-        .json({
-          message: 'not logged in',
-        })
+        .json({ message: 'not logged in' })
     }
 
     if (email !== quotation?.email) {
       return res
         .status(httpStatus.forbidden_403)
-        .json({
-          message: 'not owner',
-        })
+        .json({ message: 'not owner' })
     }
 
     const document = await QuotationModel
@@ -66,12 +60,10 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
     if (document === null) {
       return res
         .status(httpStatus.forbidden_403)
-        .json({
-          message: 'not saved',
-        })
+        .json({ message: 'not saved' })
     }
 
-    const filePath = `${quotation.email}/${quotation.id}/quotation-${document.version}.json`
+    const filePath = `${quotation.email}/quotations/${quotation.id}/${document.version}.json`
     const file = bucket.file(filePath)
     const contents = JSON.stringify({ quotation, items }, null, 2)
     await file.save(contents)

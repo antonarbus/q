@@ -30,10 +30,7 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
     if (isValidationError) {
       return res
         .status(httpStatus.forbidden_403)
-        .json({
-          message: 'validation error',
-          validationErrors,
-        })
+        .json({ message: 'validation error', validationErrors })
     }
 
     const email = req.body.email.toLowerCase()
@@ -55,9 +52,7 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
 
     return res
       .status(httpStatus.created_201)
-      .json({
-        message: 'reset link sent',
-      })
+      .json({ message: 'reset link sent' })
   } catch (error) {
     next(error)
   }

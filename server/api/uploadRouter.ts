@@ -26,12 +26,9 @@ const upload: RouterHandler = async (req, res, next) => {
     const { file } = req
 
     if (id === undefined || email === undefined || file === undefined) {
-      return res.status(200).json({
-        message: 'not uploaded',
-        link: null,
-        name: null,
-        size: null,
-      })
+      return res
+        .status(200)
+        .json({ message: 'not uploaded', link: null, name: null, size: null })
     }
 
     const { name, link, size } = await uploadFileIntoMemory({ file, email, id })
@@ -43,12 +40,9 @@ const upload: RouterHandler = async (req, res, next) => {
       await document.save()
     }
 
-    return res.status(200).json({
-      message: 'uploaded',
-      link,
-      name,
-      size,
-    })
+    return res
+      .status(200)
+      .json({ message: 'uploaded', link, name, size })
   } catch (error) {
     console.error(error)
     next(error)
@@ -70,14 +64,15 @@ async function uploadFileIntoMemory({ file, email, id }: {
 }): Promise<{ link: string, name: string, size: number }> {
   return await new Promise((resolve, reject) => {
     const name = Buffer.from(file.originalname, 'ascii').toString('utf8')
-    const blob = bucket.file(`${email}/${id}/${name}`)
+    const filePath = `${email}/files/${name}`
+    const blob = bucket.file(filePath)
     const blobStream = blob.createWriteStream({ resumable: false })
     const size = file.size / 1024 / 1024
 
     blobStream
       .on('finish', async () => {
-        await bucket.file(`${email}/${id}/${name}`).makePublic()
-        const link = `https://storage.googleapis.com/${bucket.name}/${email}/${id}/${name}`
+        await bucket.file(filePath).makePublic()
+        const link = `https://storage.googleapis.com/${bucket.name}/${filePath}`
         resolve({ link, name, size })
       })
       .on('error', (error) => {
