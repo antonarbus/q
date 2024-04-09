@@ -1770,11 +1770,6 @@ ol.decimal_type>li:before {
   z-index: 2147483630;
 }
 
-.fr-toolbar.fr-inline.fr-above {
-  margin-top: -10px;
-  border-top: 0;
-}
-
 .fr-toolbar.fr-inline .fr-newline {
   height: 0;
 }
@@ -6778,3 +6773,9 @@ p[data-f-id="pbf"] * {
   height: 0 !important;
   margin: 0 !important;
 }
+
+/* !comment out, otherwise toolbar jumps */
+/* .fr-toolbar.fr-inline.fr-above {
+  margin-top: -10px;
+  border-top: 0;
+} */
