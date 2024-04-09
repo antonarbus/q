@@ -1,3 +1,4 @@
+import { getState } from '@lib_instances/store'
 import { apiUrl } from '@server/consts/apiUrl'
 import { quotationSignal } from '@entities/quotation'
 import { removeLoadingBar } from '@shared/lib/froala/removeLoadingBar'
@@ -11,19 +12,7 @@ type Props = {
 
 export const beforeUpload = ({ files, editor }: Props): boolean => {
   const id = quotationSignal.peek().id
-  const email = quotationSignal.peek().email
-
-  if (id === 'new') {
-    alert('This is not saved template quotation, file will be kept in browser until page is refreshed')
-    removeLoadingBar()
-    return false
-  }
-
-  if (!id) {
-    alert('This is not saved quotation, file will be kept in browser until page is refreshed')
-    removeLoadingBar()
-    return false
-  }
+  const email = getState().user.email
 
   if (!email) {
     alert('You are not logged in, file will be kept in browser until page is refreshed')
@@ -41,9 +30,13 @@ export const beforeUpload = ({ files, editor }: Props): boolean => {
     return false
   }
 
-  editor.opts.imageUploadParams = { id, email }
-  editor.opts.fileUploadParams = { id, email }
-  editor.opts.videoUploadParams = { id, email }
+  if (id === 'new' || !id) {
+    alert('Do not forget to save the quotation')
+  }
+
+  editor.opts.imageUploadParams = { email }
+  editor.opts.fileUploadParams = { email }
+  editor.opts.videoUploadParams = { email }
   editor.opts.imageUploadURL = apiUrl.upload
   editor.opts.fileUploadURL = apiUrl.upload
   editor.opts.videoUploadURL = apiUrl.upload

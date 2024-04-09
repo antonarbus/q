@@ -5,7 +5,6 @@ import type { Next, ReqWithBody, ResWithBody } from '../types'
 // import { verifyTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
 
 export type ReqBody = {
-  id?: string
   email?: string
 }
 
@@ -22,23 +21,18 @@ export const uploadRouter = express.Router()
 
 const upload: RouterHandler = async (req, res, next) => {
   try {
-    const { id, email } = req.body
+    const { email } = req.body
     const { file } = req
 
-    if (id === undefined || email === undefined || file === undefined) {
+    if (email === undefined || file === undefined) {
       return res
         .status(200)
         .json({ message: 'not uploaded', link: null, name: null, size: null })
     }
 
-    const { name, link, size } = await uploadFileIntoMemory({ file, email, id })
+    const { name, link, size } = await uploadFileIntoMemory({ file, email })
 
-    const document = await QuotationModel.findOne({ email, id })
-
-    if (document?.files !== undefined) {
-      document.files.push({ name, size })
-      await document.save()
-    }
+    const document = await QuotationModel.findOne({ email })
 
     return res
       .status(200)
@@ -51,24 +45,31 @@ const upload: RouterHandler = async (req, res, next) => {
 
 uploadRouter.post(
   '/',
-  // verifyTokenMiddleware, // todo: do not know how to use axios instance with froala update to validate jwt
+  // verifyTokenMiddleware, // todo: do not know how to use axios instance with froala update to validate jwt, so let's validate in this router
   upload,
 )
 
 // https://medium.com/@olamilekan001/image-upload-with-google-cloud-storage-and-node-js-a1cf9baa1876
 
-async function uploadFileIntoMemory({ file, email, id }: {
+type Props = {
   file: Express.Multer.File
   email: string
-  id: string
-}): Promise<{ link: string, name: string, size: number }> {
-  return await new Promise((resolve, reject) => {
-    const name = Buffer.from(file.originalname, 'ascii').toString('utf8')
-    const filePath = `${email}/files/${name}`
-    const blob = bucket.file(filePath)
-    const blobStream = blob.createWriteStream({ resumable: false })
-    const size = file.size / 1024 / 1024
+}
 
+type Res = Promise<{
+  link: string
+  name: string
+  size: number
+}>
+
+async function uploadFileIntoMemory({ file, email }: Props): Res {
+  const name = Buffer.from(file.originalname, 'ascii').toString('utf8')
+  const filePath = `${email}/files/${name}`
+  const blob = bucket.file(filePath)
+  const blobStream = blob.createWriteStream({ resumable: false })
+  const size = file.size / 1024 / 1024
+
+  return await new Promise((resolve, reject) => {
     blobStream
       .on('finish', async () => {
         await bucket.file(filePath).makePublic()
