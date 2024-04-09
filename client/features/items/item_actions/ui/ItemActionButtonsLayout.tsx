@@ -15,6 +15,7 @@ export const ItemActionButtonsLayout = ({ children }: Props): JSX.Element => (
       gap: '3px',
       alignItems: 'center',
       width: '20px',
+      minWidth: '20px',
       userSelect: 'none',
     }}
     sx={{
