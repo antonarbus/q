@@ -18,10 +18,6 @@ export type QuotationModelType = {
     name?: string
     company?: string
   }
-  files?: Array<{
-    size: number
-    name: string
-  }>
   version?: number
 }
 
@@ -56,13 +52,6 @@ const quotationSchema = new Schema<QuotationModelType>({
     email: String,
     name: String,
     company: String,
-  },
-  files: {
-    type: [{
-      size: Number,
-      name: String,
-    }],
-    default: [],
   },
   version: {
     type: Number,
