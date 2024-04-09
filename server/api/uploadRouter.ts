@@ -2,26 +2,25 @@ import { type JwtPayloadExtended, verifyRefreshToken } from '@server/services/jw
 import { bucket } from '@server/services/storage'
 import express from 'express'
 import { httpStatus } from '@shared/consts/httpStatus'
-import type { Next, ReqWithBody, ResWithBody } from '../types'
+import type { Next, Req, ResWithBody } from '../types'
 
-export type ReqBody = {
-  email?: string
-}
+// export type ReqBody = {
+//   email?: string
+// }
 
 export type ResBody = {
   message: 'not uploaded' | 'no file' | 'uploaded' | 'not logged in'
-  link?: string | null
-  name?: string | null
-  size?: number | null
+  link?: string
+  name?: string
+  size?: number
 }
 
-type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
+type RouterHandler = (req: Req, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
 
 export const uploadRouter = express.Router()
 
 const upload: RouterHandler = async (req, res, next) => {
   try {
-    // const { email } = req.body
     const { file } = req
 
     const refreshJwtToken = req.cookies.refreshJwtToken
@@ -55,7 +54,7 @@ const upload: RouterHandler = async (req, res, next) => {
     }
 
     return res
-      .status(httpStatus.badRequest_400)
+      .status(httpStatus.serverError_500)
       .json({ message: 'not uploaded' })
   } catch (error) {
     console.error(error)
