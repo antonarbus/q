@@ -10,6 +10,7 @@ import { type FroalaEditorRef } from '@shared/types'
 import { notify } from '@shared/ui/top_msg/notify.js'
 import { useFroala } from '../../providers/FroalaProvider'
 import { froalaDefaultOptions } from './froalaDefaultOptions'
+import { remindToSaveQuotationOnInsert } from './remindToSaveQuotationOnInsert.js'
 
 declare const window: Window & typeof globalThis & {
   froalas: FroalaEditorRef[]
@@ -78,6 +79,15 @@ export const useStartFroala = (): void => {
                 return false
               }
               beforeUpload({ files, editor: this })
+            },
+            'image.inserted': function (response) {
+              remindToSaveQuotationOnInsert()
+            },
+            'file.inserted': function (response) {
+              remindToSaveQuotationOnInsert()
+            },
+            'video.inserted': function (response) {
+              remindToSaveQuotationOnInsert()
             },
             'file.unlink': function (link) {
               const href = link.getAttribute('href')
