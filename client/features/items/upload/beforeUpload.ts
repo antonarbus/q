@@ -28,9 +28,10 @@ export const beforeUpload = ({ files, editor }: Props): boolean => {
     return false
   }
 
-  editor.opts.imageUploadParams = { email }
-  editor.opts.fileUploadParams = { email }
-  editor.opts.videoUploadParams = { email }
+  // * take email from the jwt refresh token at cookies
+  // editor.opts.imageUploadParams = { email }
+  // editor.opts.fileUploadParams = { email }
+  // editor.opts.videoUploadParams = { email }
   editor.opts.imageUploadURL = apiUrl.upload
   editor.opts.fileUploadURL = apiUrl.upload
   editor.opts.videoUploadURL = apiUrl.upload
