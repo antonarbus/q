@@ -1,5 +1,5 @@
 import { dispatch } from '@lib_instances/store'
-import { type BoqRowCellKey, didBoqCellContentChange, updateBoqRowCellAtStore } from '@entities/items'
+import { type BoqRowCellKey, didBoqCellContentChange, updateBoqRowCellAtStore } from '@entities/quotation'
 import { navMenuItemId } from '@shared/consts/navMenuItemId'
 import { navSlice } from '@shared/nav'
 import { type FroalaEditorRef } from '@shared/types'

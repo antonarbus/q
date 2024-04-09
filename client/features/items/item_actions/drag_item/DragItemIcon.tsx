@@ -1,6 +1,6 @@
 import { MdDragIndicator } from 'react-icons/md'
 import { SortableHandle } from 'react-sortable-hoc'
-import { useIsItemSortDisabled } from '@entities/items'
+import { useIsItemSortDisabled } from '@entities/quotation'
 
 const Handle = (): JSX.Element => {
   const isDisabled = useIsItemSortDisabled()

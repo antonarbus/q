@@ -1,6 +1,6 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { arrayMoveImmutable } from 'array-move'
-import { isItemsFroalaSignal, itemsSlice } from '@entities/items'
+import { isItemsFroalaSignal, itemsSlice } from '@entities/quotation'
 import { navMenuItemId } from '@shared/consts/navMenuItemId'
 import { navSlice } from '@shared/nav'
 

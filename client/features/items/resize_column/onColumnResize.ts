@@ -1,5 +1,5 @@
 import { dispatch } from '@lib_instances/store'
-import { type BoqColumnKey, itemsSlice, getBoqColumnFromStore, unfixItemImagesHeight, fixItemImagesHeight } from '@entities/items'
+import { type BoqColumnKey, itemsSlice, getBoqColumnFromStore, unfixItemImagesHeight, fixItemImagesHeight } from '@entities/quotation'
 import { className } from '@shared/consts/className'
 import { navMenuItemId } from '@shared/consts/navMenuItemId'
 import { navSlice } from '@shared/nav'

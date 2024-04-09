@@ -1,6 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { type MutableRefObject } from 'react'
-import { itemsSlice } from '@entities/items'
+import { itemsSlice } from '@entities/quotation'
 import { className } from '@shared/consts/className'
 
 type Props = {

@@ -1,6 +1,6 @@
 import { LeftItemActionButtons, RightItemActionButtons } from '@features/items/item_actions'
 import { onBoqItemResize, onBoqItemResizeStart, onBoqItemResizeStop } from '@features/items/resize_item'
-import { Item } from '@entities/items'
+import { Item } from '@entities/quotation'
 import { BoqHeader } from './boq_header'
 import { BoqTable } from './boq_table'
 

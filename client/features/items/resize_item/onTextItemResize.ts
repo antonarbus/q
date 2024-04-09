@@ -1,5 +1,5 @@
 import { dispatch, getState } from '@lib_instances/store'
-import { fixItemImagesHeight, itemsSlice, unfixItemImagesHeight } from '@entities/items'
+import { fixItemImagesHeight, itemsSlice, unfixItemImagesHeight } from '@entities/quotation'
 import { navMenuItemId } from '@shared/consts/navMenuItemId'
 import { navSlice } from '@shared/nav'
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'

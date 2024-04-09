@@ -2,7 +2,7 @@ import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
 import type { MouseEvent } from 'react'
 import { MdCopyAll } from 'react-icons/md'
 import { copySlice } from '@entities/copy'
-import { getBoqRowFromStore, isItemsFroalaSignal, itemsSlice, useItem, useRow } from '@entities/items'
+import { getBoqRowFromStore, isItemsFroalaSignal, itemsSlice, useItem, useRow } from '@entities/quotation'
 import { className } from '@shared/consts/className'
 import { cleanHtml } from '@shared/utils/itemsUtils'
 

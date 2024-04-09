@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import { Pin, pinBoqRowQtyCell } from '@features/items/pin'
 import { tabFromQtyCell } from '@features/items/tab_away_from_cell'
 import { formatBoqRowQtyCell, updateBoqRowQtyCell } from '@features/items/update_cell'
-import { getBoqCellHtmlFromStore, useItem, useRow, useBoqItem, Froala, boqRowCellStyle, useStylesForResizableCell, boqColumnKey, boqRowCellKey, boqRowCellSx } from '@entities/items'
+import { getBoqCellHtmlFromStore, useItem, useRow, useBoqItem, Froala, boqRowCellStyle, useStylesForResizableCell, boqColumnKey, boqRowCellKey, boqRowCellSx } from '@entities/quotation'
 
 export const QtyCell = (): JSX.Element => {
   const { itemIndex } = useItem()

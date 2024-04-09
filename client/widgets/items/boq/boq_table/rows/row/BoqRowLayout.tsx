@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import type { FocusEvent, ReactNode } from 'react'
-import { useRow } from '@entities/items'
+import { useRow } from '@entities/quotation'
 import { className } from '@shared/consts/className'
 import { PasteHere } from './paste_here_row'
 

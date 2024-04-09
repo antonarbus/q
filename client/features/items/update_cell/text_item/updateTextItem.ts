@@ -1,5 +1,5 @@
 import { dispatch, getState } from '@lib_instances/store'
-import { itemType, itemsSlice } from '@entities/items'
+import { itemKey, itemsSlice } from '@entities/quotation'
 import { navMenuItemId } from '@shared/consts/navMenuItemId'
 import { navSlice } from '@shared/nav'
 import { type FroalaEditorRef } from '@shared/types'
@@ -16,7 +16,7 @@ export const updateTextItem = ({
   if (editorRef.current === null) return
 
   const item = getState().items[itemIndex]
-  if (item?.type !== itemType.text) return
+  if (item?.type !== itemKey.text) return
 
   const prevHtml = item.text.html
   const html = editorRef.current.html.get()

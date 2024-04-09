@@ -1,5 +1,5 @@
 import { useSelectorTyped } from '@lib_instances/store'
-import { useRow } from '@entities/items'
+import { useRow } from '@entities/quotation'
 
 export const useIsPasteHere = (): boolean => {
   const { rowId } = useRow()

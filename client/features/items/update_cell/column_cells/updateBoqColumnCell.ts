@@ -1,5 +1,5 @@
-import { updateBoqColumnCellAtStore } from '@entities/items'
-import type { BoqColumnKey } from '@entities/items'
+import { updateBoqColumnCellAtStore } from '@entities/quotation'
+import type { BoqColumnKey } from '@entities/quotation'
 import { type FroalaEditorRef } from '@shared/types'
 
 type Props = {

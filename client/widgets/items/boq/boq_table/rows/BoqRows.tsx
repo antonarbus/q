@@ -2,7 +2,7 @@ import { useSelectorTyped } from '@lib_instances/store'
 import { AnimatePresence } from 'framer-motion'
 import { onBoqRowDrag } from '@features/items/boq_row_actions/drag_boq_row'
 import { hideBoqRowPinsOnRowBlur } from '@features/items/pin'
-import { boqRowsShapeEqualityFn, selectBoqRows, RowProvider, useItem, useIsBoqRowSortDisabled, boqRowType } from '@entities/items'
+import { boqRowsShapeEqualityFn, selectBoqRows, RowProvider, useItem, useIsBoqRowSortDisabled, boqRowKey } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 import { DraggableBoqRowsContainer } from './DraggableBoqRowsContainer'
 import { BoqPasteRowTextOverlay } from './row/BoqPasteRowTextOverlay'
@@ -27,7 +27,7 @@ export const BoqRows = (): JSX.Element => {
     >
       <AnimatePresence initial={false}>
         {boqRows.map((boqRow, rowIndex) => {
-          if (boqRow.type === boqRowType.row) {
+          if (boqRow.type === boqRowKey.row) {
             return (
               <RowProvider
                 rowIndex={rowIndex}
@@ -48,7 +48,7 @@ export const BoqRows = (): JSX.Element => {
             )
           }
 
-          if (boqRow.type === boqRowType.paste) {
+          if (boqRow.type === boqRowKey.paste) {
             return <BoqPasteRowTextOverlay key={nanoid(3)} />
           }
 

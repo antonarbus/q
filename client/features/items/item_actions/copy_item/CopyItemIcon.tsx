@@ -2,7 +2,7 @@ import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
 import type { MouseEvent } from 'react'
 import { MdCopyAll } from 'react-icons/md'
 import { copySlice } from '@entities/copy'
-import { isItemsFroalaSignal, itemType, saveItemHeightByIndex, useItem } from '@entities/items'
+import { isItemsFroalaSignal, itemKey, saveItemHeightByIndex, useItem } from '@entities/quotation'
 import { className } from '@shared/consts/className'
 import { cleanHtml } from '@shared/utils/itemsUtils'
 
@@ -27,7 +27,7 @@ export const CopyItemIcon = (): JSX.Element => {
 
         const itemToCopy = getState().items[itemIndex]
         if (!itemToCopy) return
-        if (itemToCopy.type === itemType.paste) return
+        if (itemToCopy.type === itemKey.paste) return
 
         const clickedIconElement = e.target
         if (!(clickedIconElement instanceof Element)) return

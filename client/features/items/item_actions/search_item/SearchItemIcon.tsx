@@ -2,7 +2,7 @@ import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 import { useSelectorTyped } from '@lib_instances/store'
 import { type MouseEvent } from 'react'
 import { IoIosSearch } from 'react-icons/io'
-import { selectIsLastItem } from '@entities/items'
+import { selectIsLastItem } from '@entities/quotation'
 
 export const SearchItemIcon = (): EmotionJSX.Element => {
   const isItemAlone = useSelectorTyped(selectIsLastItem)

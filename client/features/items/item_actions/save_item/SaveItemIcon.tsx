@@ -2,7 +2,7 @@ import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 import { useSelectorTyped } from '@lib_instances/store'
 import { type MouseEvent } from 'react'
 import { MdSaveAlt } from 'react-icons/md'
-import { selectIsLastItem } from '@entities/items'
+import { selectIsLastItem } from '@entities/quotation'
 
 export const SaveItemIcon = (): EmotionJSX.Element => {
   const isItemAlone = useSelectorTyped(selectIsLastItem)

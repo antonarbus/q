@@ -3,7 +3,7 @@ import { theme } from '@lib_instances/theme'
 import { flushSync } from 'react-dom'
 import { RxCross2 } from 'react-icons/rx'
 import { copySlice } from '@entities/copy'
-import { itemsSlice, selectIsLastBoqRow, useItem, useRow } from '@entities/items'
+import { itemsSlice, selectIsLastBoqRow, useItem, useRow } from '@entities/quotation'
 import { navMenuItemId } from '@shared/consts/navMenuItemId'
 import { navSlice } from '@shared/nav'
 

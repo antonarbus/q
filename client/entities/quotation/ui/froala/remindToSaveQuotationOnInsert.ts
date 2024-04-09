@@ -1,6 +1,6 @@
 import { getState } from '@lib_instances/store'
-import { quotationSignal } from '@entities/quotation'
 import { notify } from '@shared/ui/top_msg'
+import { quotationSignal } from '../../signals/quotationSignal'
 
 export const remindToSaveQuotationOnInsert = (): void => {
   const isLogged = Boolean(getState().user.email)

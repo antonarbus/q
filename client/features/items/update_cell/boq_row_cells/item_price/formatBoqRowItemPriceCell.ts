@@ -1,4 +1,4 @@
-import { boqRowCellKey, formatBoqRowCellNumber } from '@entities/items'
+import { boqRowCellKey, formatBoqRowCellNumber } from '@entities/quotation'
 import { type FroalaEditorRef } from '@shared/types'
 
 type Props = {

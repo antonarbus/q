@@ -1,6 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { type FocusEvent } from 'react'
-import { boqRowCellKey, getBoqRowFromStore, itemsSlice } from '@entities/items'
+import { boqRowCellKey, getBoqRowFromStore, itemsSlice } from '@entities/quotation'
 import { className } from '@shared/consts/className'
 
 type Props = {

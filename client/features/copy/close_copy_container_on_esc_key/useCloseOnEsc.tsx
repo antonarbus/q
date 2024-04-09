@@ -1,7 +1,7 @@
 import { dispatch } from '@lib_instances/store'
 import { useEffectOnce } from 'react-use'
 import { copySlice } from '@entities/copy'
-import { isItemsFroalaSignal, itemsSlice } from '@entities/items'
+import { isItemsFroalaSignal, itemsSlice } from '@entities/quotation'
 
 export const useExitCopyOnEsc = (): void => {
   const closeOnEsc = (e: KeyboardEvent): void => {
