@@ -4,10 +4,6 @@ import express from 'express'
 import { httpStatus } from '@shared/consts/httpStatus'
 import type { Next, Req, ResWithBody } from '../types'
 
-// export type ReqBody = {
-//   email?: string
-// }
-
 export type ResBody = {
   message: 'not uploaded' | 'no file' | 'uploaded' | 'not logged in'
   link?: string
@@ -64,7 +60,7 @@ const upload: RouterHandler = async (req, res, next) => {
 
 uploadRouter.post(
   '/',
-  // verifyTokenMiddleware, // todo: do not know how to use axios instance with froala update to validate jwt, so let's validate in this router
+  // verifyTokenMiddleware, // todo: do not know how to use axios instance with froala file update, so let's validate token manually
   upload,
 )
 
