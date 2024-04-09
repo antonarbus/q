@@ -3,8 +3,8 @@ import { quotationSignal } from '@entities/quotation'
 import { notify } from '@shared/ui/top_msg'
 
 export const remindToSaveQuotationOnInsert = (): void => {
-  const email = getState().user.email
-  if (!email) return
+  const isLogged = Boolean(getState().user.email)
+  if (!isLogged) return
 
   const id = quotationSignal.peek().id
   if (id === 'new' || !id) {
