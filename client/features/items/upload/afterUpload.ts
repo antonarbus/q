@@ -1,5 +1,6 @@
 import { getState } from '@lib_instances/store'
 import { apiUrl } from '@server/consts/apiUrl'
+import { quotationSignal } from '@entities/quotation'
 import { removeLoadingBar } from '@shared/lib/froala/removeLoadingBar'
 import { type FroalaEditor } from '@shared/types'
 import { getFileSizeInMbAsText } from '@shared/utils'
@@ -10,6 +11,7 @@ type Props = {
 }
 
 export const beforeUpload = ({ files, editor }: Props): boolean => {
+  const id = quotationSignal.peek().id
   const email = getState().user.email
 
   if (!email) {
@@ -26,6 +28,10 @@ export const beforeUpload = ({ files, editor }: Props): boolean => {
   if (!upload) {
     removeLoadingBar()
     return false
+  }
+
+  if (id === 'new' || !id) {
+    alert('Do not forget to save the quotation')
   }
 
   editor.opts.imageUploadParams = { email }

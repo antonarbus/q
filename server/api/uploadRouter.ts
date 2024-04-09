@@ -1,18 +1,18 @@
-import { QuotationModel } from '@server/db/models/quotationModel'
+import { type JwtPayloadExtended, verifyRefreshToken } from '@server/services/jwt'
 import { bucket } from '@server/services/storage'
 import express from 'express'
+import { httpStatus } from '@shared/consts/httpStatus'
 import type { Next, ReqWithBody, ResWithBody } from '../types'
-// import { verifyTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
 
 export type ReqBody = {
   email?: string
 }
 
 export type ResBody = {
-  message: string
-  link: string | null
-  name: string | null
-  size: number | null
+  message: 'not uploaded' | 'no file' | 'uploaded' | 'not logged in'
+  link?: string | null
+  name?: string | null
+  size?: number | null
 }
 
 type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
@@ -21,22 +21,42 @@ export const uploadRouter = express.Router()
 
 const upload: RouterHandler = async (req, res, next) => {
   try {
-    const { email } = req.body
+    // const { email } = req.body
     const { file } = req
 
-    if (email === undefined || file === undefined) {
+    const refreshJwtToken = req.cookies.refreshJwtToken
+
+    if (typeof refreshJwtToken !== 'string') {
       return res
-        .status(200)
-        .json({ message: 'not uploaded', link: null, name: null, size: null })
+        .status(httpStatus.unauthorized_401)
+        .json({ message: 'not logged in' })
+    }
+
+    const { email } = verifyRefreshToken(refreshJwtToken) as JwtPayloadExtended
+
+    if (!email) {
+      return res
+        .status(httpStatus.unauthorized_401)
+        .json({ message: 'not logged in' })
+    }
+
+    if (file === undefined) {
+      return res
+        .status(httpStatus.badRequest_400)
+        .json({ message: 'no file' })
     }
 
     const { name, link, size } = await uploadFileIntoMemory({ file, email })
 
-    const document = await QuotationModel.findOne({ email })
+    if (link) {
+      return res
+        .status(httpStatus.success_200)
+        .json({ message: 'uploaded', link, name, size })
+    }
 
     return res
-      .status(200)
-      .json({ message: 'uploaded', link, name, size })
+      .status(httpStatus.badRequest_400)
+      .json({ message: 'not uploaded' })
   } catch (error) {
     console.error(error)
     next(error)
