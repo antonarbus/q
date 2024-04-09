@@ -136,13 +136,6 @@ export const navStructure: MenuItemTypes[] = [
             link: route.settings,
           },
           {
-            id: navMenuItemId.profile,
-            icon: <Person />,
-            isHidden: false,
-            name: 'Profile',
-            link: route.profile,
-          },
-          {
             id: navMenuItemId.logout,
             icon: <FiLogOut />,
             isHidden: false,

@@ -53,7 +53,7 @@ const getQuotation: RouterHandler = async (req, res, next) => {
     }
 
     const oneHour = Date.now() + 3600 * 1000
-    const filePath = `${email}/${id}/quotation-${document.version}.json`
+    const filePath = `${email}/quotations/${id}/${document.version}.json`
 
     const [exists] = await bucket.file(filePath).exists()
 

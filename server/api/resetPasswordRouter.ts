@@ -37,10 +37,7 @@ const resetPassword: RouterHandler = async (req, res, next) => {
     if (isValidationError) {
       return res
         .status(httpStatus.forbidden_403)
-        .json({
-          message: 'validation error',
-          validationErrors,
-        })
+        .json({ message: 'validation error', validationErrors })
     }
 
     const email = req.body.email.toLowerCase()
