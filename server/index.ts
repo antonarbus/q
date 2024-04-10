@@ -14,6 +14,7 @@ import { logOutRouter } from './api/logOutRouter'
 import { registerRouter } from './api/registerRouter'
 import { requestPasswordResetRouter } from './api/requestPasswordResetRouter'
 import { resetPasswordRouter } from './api/resetPasswordRouter'
+import { saveItemRouter } from './api/saveItemRouter'
 import { saveQuotationRouter } from './api/saveQuotationRouter'
 import { setBucketCors } from './api/setBucketCors'
 import { testRouter } from './api/testRouter'
@@ -50,6 +51,7 @@ app.use(apiUrl.saveQuotation, saveQuotationRouter)
 app.use(apiUrl.getQuotation, getQuotationRouter)
 app.use(apiUrl.getQuotations, getQuotationsRouter)
 app.use(apiUrl.deleteQuotation, deleteQuotationRouter)
+app.use(apiUrl.saveItem, saveItemRouter)
 
 app.use(errorHandlerMiddleware)
 

@@ -9,4 +9,5 @@ export const queryKey = {
   requestPasswordReset: 'requestPasswordReset',
   resetPassword: 'resetPassword',
   saveQuotation: 'saveQuotation',
+  saveItem: 'saveItem',
 } as const

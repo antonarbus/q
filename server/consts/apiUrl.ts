@@ -13,6 +13,7 @@ export const apiUrl = {
   setBucketCors: '/api/set-bucket-cors',
   getBucketCors: '/api/get-bucket-cors',
   saveQuotation: '/api/save-quotation',
+  saveItem: '/api/save-item',
   getQuotation: '/api/get-quotation',
   getQuotations: '/api/get-quotations',
   deleteQuotation: '/api/delete-quotation',
