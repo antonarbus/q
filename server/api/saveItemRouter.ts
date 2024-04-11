@@ -9,7 +9,7 @@ import { type ResWithBody, type ReqWithBody, type Next } from '../types'
 export type ReqBody = ItemModelType
 
 export type ResBody = {
-  message: 'not logged in' | 'not owner' | 'not saved' | 'inserted' | 'saved'
+  message: 'not logged in' | 'not owner' | 'not saved' | 'inserted' | 'updated'
 }
 
 type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
@@ -73,7 +73,7 @@ const saveItem: RouterHandler = async (req, res, next) => {
 
     return res
       .status(httpStatus.created_201)
-      .json({ message: isNew ? 'inserted' : 'saved' })
+      .json({ message: isNew ? 'inserted' : 'updated' })
   } catch (error) {
     next(error)
   }

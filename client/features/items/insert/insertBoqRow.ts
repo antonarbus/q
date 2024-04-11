@@ -6,7 +6,7 @@ import { nanoid } from '@shared/lib/nanoid'
 
 export const insertBoqRow = (e?: MouseEvent): void => {
   const itemToCopy = {
-    id: nanoid(3),
+    id: nanoid(5),
     type: boqRowKey.row,
     height: 50,
     width: 570,

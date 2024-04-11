@@ -46,7 +46,7 @@ function pasteItemOnClick(): void {
     }
   }
 
-  const newItemId = nanoid(3)
+  const newItemId = nanoid(5)
 
   dispatch(itemsSlice.actions.pasteItemReducer({
     item: topItemFromCopyContainer,

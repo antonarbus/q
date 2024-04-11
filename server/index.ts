@@ -7,6 +7,7 @@ import { activateRouter } from './api/activateRouter'
 import { deleteQuotationRouter } from './api/deleteQuotationRouter'
 import { getAccessTokenRouter } from './api/getAccessTokenRouter'
 import { getBucketCors } from './api/getBucketCors'
+import { getItemsRouter } from './api/getItemsRouter'
 import { getQuotationRouter } from './api/getQuotationRouter'
 import { getQuotationsRouter } from './api/getQuotationsRouter'
 import { logInRouter } from './api/logInRouter'
@@ -52,6 +53,7 @@ app.use(apiUrl.getQuotation, getQuotationRouter)
 app.use(apiUrl.getQuotations, getQuotationsRouter)
 app.use(apiUrl.deleteQuotation, deleteQuotationRouter)
 app.use(apiUrl.saveItem, saveItemRouter)
+app.use(apiUrl.getItems, getItemsRouter)
 
 app.use(errorHandlerMiddleware)
 

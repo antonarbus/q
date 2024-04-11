@@ -5,12 +5,12 @@ import { nanoid } from '@shared/lib/nanoid'
 export type ItemModelType = {
   id: string
   email?: string
+  type: CopyableItem['type']
   category: string
   name: string
   tag: string
-  createdAt?: Date
-  updatedAt?: Date
-  usedAt?: Date
+  createdAt: Date
+  updatedAt: Date
   item: CopyableItem
 }
 
@@ -29,12 +29,12 @@ const itemSchema = new Schema<ItemModelType>({
     lowercase: true,
     trim: true,
   },
+  type: String,
   category: String,
   name: String,
   tag: String,
   createdAt: Date,
   updatedAt: Date,
-  usedAt: Date,
   item: Object,
 }, {
   timestamps: true,

@@ -4,6 +4,6 @@ import { nanoid } from '@shared/lib/nanoid'
 import { reRenderQuotationSignal } from '@shared/signals/reRenderQuotationSignal'
 
 export const createNewQuotation = (): void => {
-  reRenderQuotationSignal.value = nanoid(3)
+  reRenderQuotationSignal.value = nanoid(5)
   void router.navigate(`/${route.new}`)
 }

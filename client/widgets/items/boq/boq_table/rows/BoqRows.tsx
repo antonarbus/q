@@ -49,7 +49,7 @@ export const BoqRows = (): JSX.Element => {
           }
 
           if (boqRow.type === boqRowKey.paste) {
-            return <BoqPasteRowTextOverlay key={nanoid(3)} />
+            return <BoqPasteRowTextOverlay key={nanoid(5)} />
           }
 
           return null

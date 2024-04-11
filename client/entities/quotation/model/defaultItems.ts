@@ -5,7 +5,7 @@ import { type Item } from '../types'
 
 export const defaultItems: Item[] = [
   {
-    id: nanoid(3),
+    id: nanoid(5),
     type: itemKey.text,
     width: 600,
     height: 0,
@@ -16,7 +16,7 @@ export const defaultItems: Item[] = [
     },
   },
   {
-    id: nanoid(3),
+    id: nanoid(5),
     type: itemKey.boq,
     width: 600,
     height: 0,
@@ -60,7 +60,7 @@ export const defaultItems: Item[] = [
       },
       rows: [
         {
-          id: nanoid(3),
+          id: nanoid(5),
           type: boqRowKey.row,
           height: 0,
           width: 0,
@@ -98,7 +98,7 @@ export const defaultItems: Item[] = [
           },
         },
         {
-          id: nanoid(3),
+          id: nanoid(5),
           type: boqRowKey.row,
           height: 0,
           width: 0,
@@ -136,7 +136,7 @@ export const defaultItems: Item[] = [
           },
         },
         {
-          id: nanoid(3),
+          id: nanoid(5),
           type: boqRowKey.row,
           height: 0,
           width: 0,
@@ -177,7 +177,7 @@ export const defaultItems: Item[] = [
     },
   },
   {
-    id: nanoid(3),
+    id: nanoid(5),
     type: itemKey.price,
     width: 150,
     height: 0,
@@ -192,7 +192,7 @@ export const defaultItems: Item[] = [
     },
   },
   {
-    id: nanoid(3),
+    id: nanoid(5),
     type: itemKey.text,
     width: 600,
     height: 0,

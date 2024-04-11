@@ -6,7 +6,7 @@ import { nanoid } from '@shared/lib/nanoid'
 
 export const insertPriceItem = (e?: MouseEvent): void => {
   const itemToCopy = {
-    id: nanoid(3),
+    id: nanoid(5),
     type: itemKey.price,
     width: 150,
     height: 90,

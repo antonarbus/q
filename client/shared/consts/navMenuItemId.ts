@@ -7,6 +7,7 @@ export const navMenuItemId = {
   share: 'share',
   insert: 'insert',
   quotations: 'quotations',
+  items: 'items',
   login: 'login',
   account: 'account',
   settings: 'settings',
