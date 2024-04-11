@@ -53,7 +53,7 @@ export const LogIn = (): JSX.Element => {
     }
 
     if (id) {
-      reRenderQuotationSignal.value = nanoid(3)
+      reRenderQuotationSignal.value = nanoid(5)
     }
 
     setTimeout(() => {

@@ -110,7 +110,7 @@ export const useStartFroala = (): void => {
             'image.loaded': function (props: { '0': HTMLImageElement }) {
               const imageElement = props['0']
               imageElement.style.height = imageElement.clientHeight + 'px'
-              imageElement.id = `img-${nanoid(3)}`
+              imageElement.id = `img-${nanoid(5)}`
               imageElement.classList.add('fr-rounded')
             },
             initialized: (): void => {

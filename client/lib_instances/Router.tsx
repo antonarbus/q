@@ -4,6 +4,7 @@ import { PersistentAuth } from '@pages/auth/PersistentAuth'
 import { RequireAuth } from '@pages/auth/RequireAuth'
 import { Unauthorized } from '@pages/auth/Unauthorized'
 import { BarChart } from '@pages/chart/Chart'
+import { Items } from '@pages/items'
 import { Quotation } from '@pages/quotation'
 import { Quotations } from '@pages/quotations'
 import { Copy } from '@widgets/copy'
@@ -75,6 +76,11 @@ export const router = createBrowserRouter([
       {
         path: route.quotations,
         element: <Quotations />,
+        children: authRoutes,
+      },
+      {
+        path: route.items,
+        element: <Items />,
         children: authRoutes,
       },
       {

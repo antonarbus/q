@@ -3,7 +3,7 @@ import { getState, useSelectorTyped } from '@lib_instances/store'
 import { type MouseEvent } from 'react'
 import { MdSaveAlt } from 'react-icons/md'
 import { useSaveItemMutation } from '@entities/item'
-import { selectIsLastItem } from '@entities/quotation'
+import { itemKey, selectIsLastItem, useBoqItem, useItem, useRow } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 
 export const SaveItemIcon = (): EmotionJSX.Element => {
@@ -11,6 +11,8 @@ export const SaveItemIcon = (): EmotionJSX.Element => {
   const isItemAlone = useSelectorTyped(selectIsLastItem)
   const isDeletable = useSelectorTyped(state => state.copy.isDeletable)
   const disabled = isItemAlone || !isDeletable
+  const { itemIndex } = useItem()
+  console.log('🚀 ~ itemIndex:', itemIndex)
 
   return (
     <MdSaveAlt
@@ -22,17 +24,20 @@ export const SaveItemIcon = (): EmotionJSX.Element => {
         if (disabled) return
 
         const email = getState().user.email
-
         if (!email) return
 
-        alert('save')
+        const item = getState().items.at(itemIndex)
+        if (!item) return
+        if (item.type === itemKey.paste) return
+
         saveItem({
-          id: nanoid(5),
           email,
+          id: item.id,
+          type: item.type,
           category: 'category',
           name: 'name',
           tag: 'tag',
-          item: { key: 'value' },
+          item,
         })
       }}
     />
