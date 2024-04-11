@@ -9,8 +9,8 @@ export type ItemModelType = {
   category: string
   name: string
   tag: string
-  createdAt: Date
-  updatedAt: Date
+  createdAt?: Date
+  updatedAt?: Date
   item: CopyableItem
 }
 

@@ -3,8 +3,7 @@ import { getState, useSelectorTyped } from '@lib_instances/store'
 import { type MouseEvent } from 'react'
 import { MdSaveAlt } from 'react-icons/md'
 import { useSaveItemMutation } from '@entities/item'
-import { itemKey, selectIsLastItem, useBoqItem, useItem, useRow } from '@entities/quotation'
-import { nanoid } from '@shared/lib/nanoid'
+import { itemKey, selectIsLastItem, useItem, useRow } from '@entities/quotation'
 
 export const SaveItemIcon = (): EmotionJSX.Element => {
   const { mutate: saveItem, data, isPending, isSuccess, isError, error } = useSaveItemMutation()
@@ -12,7 +11,6 @@ export const SaveItemIcon = (): EmotionJSX.Element => {
   const isDeletable = useSelectorTyped(state => state.copy.isDeletable)
   const disabled = isItemAlone || !isDeletable
   const { itemIndex } = useItem()
-  console.log('🚀 ~ itemIndex:', itemIndex)
 
   return (
     <MdSaveAlt
