@@ -1,11 +1,11 @@
 import { IconButton } from '@mui/material'
 import type { ReqBody } from '@server/api/deleteItemRouter'
-import { useEffect, type ReactNode } from 'react'
+import { useEffect } from 'react'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useDeleteItemMutation, deleteFromItemsCache } from '@entities/item'
 import { RotatingLoaderIcon } from '@shared/components'
 
-export const DeleteItemButton = ({ id }: ReqBody): ReactNode => {
+export const DeleteItemButton = ({ id }: ReqBody): JSX.Element => {
   const { mutate, isPending, isSuccess } = useDeleteItemMutation()
 
   useEffect(() => {

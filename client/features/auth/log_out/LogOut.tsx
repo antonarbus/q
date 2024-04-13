@@ -1,6 +1,7 @@
 import { dispatch } from '@lib_instances/store'
 import { useNavigate } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
+import { deleteItemsCache } from '@entities/item'
 import { deleteQuotationsCache } from '@entities/quotation'
 import { useLogOutMutation, userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
@@ -15,44 +16,46 @@ export const LogOut = (): JSX.Element => {
   useEffectOnce(logOut)
 
   useUpdateEffect(() => {
-    if (!isPending) return
-
-    loadingDotsOverlayTextSignal.value = 'Logging out'
+    if (isPending) {
+      loadingDotsOverlayTextSignal.value = 'Logging out'
+    }
   }, [isPending])
 
   useUpdateEffect(() => {
-    if (!isSuccess) return
+    if (isSuccess) {
+      if (data.message === 'logged out') {
+        deleteQuotationsCache()
+        deleteItemsCache()
 
-    if (data.message === 'logged out') {
-      accessTokenSignal.value = null
-      dispatch(userSlice.actions.forgetLoggedUser())
-      deleteQuotationsCache()
-      dispatch(navSlice.actions.showLogInMenuItem())
-      dispatch(navSlice.actions.hideAccountMenuItem())
+        accessTokenSignal.value = null
+        dispatch(userSlice.actions.forgetLoggedUser())
+        dispatch(navSlice.actions.showLogInMenuItem())
+        dispatch(navSlice.actions.hideAccountMenuItem())
+        setTimeout(() => {
+          loadingDotsOverlayTextSignal.value = null
+          navigate('..')
+        }, 2000)
+      }
+    }
+  }, [isSuccess])
+
+  useUpdateEffect(() => {
+    if (isError) {
+      if (error.response?.data.message === 'no user in db') {
+        notify({ msg: 'Already logged out', type: 'info', theme: 'light' })
+      } else if (error.response?.data.message === 'token not found') {
+        notify({ msg: 'Already logged out', type: 'info', theme: 'light' })
+      } else if (error.response?.data.message === 'user not found') {
+        notify({ msg: 'Already logged out', type: 'info', theme: 'light' })
+      } else {
+        notify({ msg: 'Problems with logging out', type: 'error', theme: 'light' })
+      }
+
       setTimeout(() => {
         loadingDotsOverlayTextSignal.value = null
         navigate('..')
       }, 2000)
     }
-  }, [isSuccess])
-
-  useUpdateEffect(() => {
-    if (!isError) return
-
-    if (error.response?.data.message === 'no user in db') {
-      notify({ msg: 'Already logged out', type: 'info', theme: 'light' })
-    } else if (error.response?.data.message === 'token not found') {
-      notify({ msg: 'Already logged out', type: 'info', theme: 'light' })
-    } else if (error.response?.data.message === 'user not found') {
-      notify({ msg: 'Already logged out', type: 'info', theme: 'light' })
-    } else {
-      notify({ msg: 'Problems with logging out', type: 'error', theme: 'light' })
-    }
-
-    setTimeout(() => {
-      loadingDotsOverlayTextSignal.value = null
-      navigate('..')
-    }, 2000)
   }, [isError])
 
   return <></>

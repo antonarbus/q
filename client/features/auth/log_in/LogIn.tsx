@@ -7,6 +7,7 @@ import type { FormEvent, MouseEvent } from 'react'
 import { useRef } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
+import { useGetItemsQuery } from '@entities/item'
 import { useGetQuotationsQuery } from '@entities/quotation'
 import { useLogInMutation, userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
@@ -32,6 +33,7 @@ export const LogIn = (): JSX.Element => {
 
   const { mutate: logIn, isPending, data, isSuccess, isError, error } = useLogInMutation()
   const { refetch: refetchQuotations } = useGetQuotationsQuery()
+  const { refetch: refetchItems } = useGetItemsQuery()
 
   useUpdateEffect(() => {
     if (!isSuccess) return
@@ -50,6 +52,10 @@ export const LogIn = (): JSX.Element => {
 
     if (location.pathname.includes(route.quotations)) {
       void refetchQuotations()
+    }
+
+    if (location.pathname.includes(route.items)) {
+      void refetchItems()
     }
 
     if (id) {

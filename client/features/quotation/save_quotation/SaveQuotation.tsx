@@ -31,44 +31,44 @@ export const SaveQuotation = (): JSX.Element => {
   })
 
   useUpdateEffect(() => {
-    if (!isPending) return
-
-    showLoadingNavIcon({ navMenuItemIdKey: navMenuItemId.save })
+    if (isPending) {
+      showLoadingNavIcon({ navMenuItemIdKey: navMenuItemId.save })
+    }
   }, [isPending])
 
   useUpdateEffect(() => {
-    if (!isSuccess) return
+    if (isSuccess) {
+      if (data.message === 'inserted') {
+        navigate(`/${quotationSignal.peek().id}`)
+      }
 
-    if (data.message === 'inserted') {
-      navigate(`/${quotationSignal.peek().id}`)
+      if (data.message === 'saved') {
+        navigate('..')
+      }
+
+      notify({ msg: 'Saved', type: 'success', position: 'bottom-center' })
+      showSuccessNavIcon({ navMenuItemIdKey: navMenuItemId.save })
+      dispatch(navSlice.actions.disableTopNavItem({ navMenuItemIdKey: navMenuItemId.save }))
+      quotationSignal.value = { ...quotationSignal.value, ...data.document }
+      updateOrAppendIntoQuotationsCache({ quotation: quotationSignal.value })
     }
-
-    if (data.message === 'saved') {
-      navigate('..')
-    }
-
-    notify({ msg: 'Saved', type: 'success', position: 'bottom-center' })
-    showSuccessNavIcon({ navMenuItemIdKey: navMenuItemId.save })
-    dispatch(navSlice.actions.disableTopNavItem({ navMenuItemIdKey: navMenuItemId.save }))
-    quotationSignal.value = { ...quotationSignal.value, ...data.document }
-    updateOrAppendIntoQuotationsCache({ quotation: quotationSignal.value })
   }, [isSuccess])
 
   useUpdateEffect(() => {
-    if (!isError) return
+    if (isError) {
+      if (error.response?.data.message === 'not logged in') {
+        notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
+      } else if (error.response?.data.message === 'not owner') {
+        notify({ msg: 'Not owner', type: 'warn', theme: 'light' })
+      } else if (error.response?.data.message === 'not saved') {
+        notify({ msg: 'Not saved', type: 'warn', theme: 'light' })
+      } else {
+        notify({ msg: 'Internal error', type: 'error', theme: 'light' })
+      }
 
-    if (error.response?.data.message === 'not logged in') {
-      notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
-    } else if (error.response?.data.message === 'not owner') {
-      notify({ msg: 'Not owner', type: 'warn', theme: 'light' })
-    } else if (error.response?.data.message === 'not saved') {
-      notify({ msg: 'Not saved', type: 'warn', theme: 'light' })
-    } else {
-      notify({ msg: 'Internal error', type: 'error', theme: 'light' })
+      navigate('..')
+      showErrorNavIcon({ navMenuItemIdKey: navMenuItemId.save })
     }
-
-    navigate('..')
-    showErrorNavIcon({ navMenuItemIdKey: navMenuItemId.save })
   }, [isError])
 
   return <></>
