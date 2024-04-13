@@ -4,6 +4,7 @@ import cors from 'cors'
 import express from 'express'
 import morgan from 'morgan'
 import { activateRouter } from './api/activateRouter'
+import { deleteItemRouter } from './api/deleteItemRouter'
 import { deleteQuotationRouter } from './api/deleteQuotationRouter'
 import { getAccessTokenRouter } from './api/getAccessTokenRouter'
 import { getBucketCors } from './api/getBucketCors'
@@ -52,6 +53,7 @@ app.use(apiUrl.saveQuotation, saveQuotationRouter)
 app.use(apiUrl.getQuotation, getQuotationRouter)
 app.use(apiUrl.getQuotations, getQuotationsRouter)
 app.use(apiUrl.deleteQuotation, deleteQuotationRouter)
+app.use(apiUrl.deleteItem, deleteItemRouter)
 app.use(apiUrl.saveItem, saveItemRouter)
 app.use(apiUrl.getItems, getItemsRouter)
 
