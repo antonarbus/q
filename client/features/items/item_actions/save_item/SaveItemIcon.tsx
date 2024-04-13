@@ -1,22 +1,20 @@
-import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 import { getState, useSelectorTyped } from '@lib_instances/store'
-import { type MouseEvent } from 'react'
+import { type ReactNode, type MouseEvent } from 'react'
 import { MdSaveAlt } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useSaveItemMutation } from '@entities/item'
 import { itemKey, selectIsLastItem, useItem } from '@entities/quotation'
+import { RotatingLoaderIcon } from '@shared/components'
 import { notify } from '@shared/ui/top_msg'
 
-export const SaveItemIcon = (): EmotionJSX.Element => {
+export const SaveItemIcon = (): ReactNode => {
   const navigate = useNavigate()
   const { mutate: saveItem, data, isPending, isSuccess, isError, error } = useSaveItemMutation()
   const isItemAlone = useSelectorTyped(selectIsLastItem)
   const isDeletable = useSelectorTyped(state => state.copy.isDeletable)
   const disabled = isItemAlone || !isDeletable
   const { itemIndex } = useItem()
-
-  // todo: add spinner
 
   useUpdateEffect(() => {
     if (isSuccess) {
@@ -46,36 +44,46 @@ export const SaveItemIcon = (): EmotionJSX.Element => {
     }
   }, [isError])
 
-  return (
-    <MdSaveAlt
-      tabIndex={-1}
-      style={{
-        color: disabled ? '#acacac' : '#000',
-      }}
-      onClick={(e: MouseEvent): void => {
-        if (disabled) return
+  if (isPending) {
+    return (
+      <RotatingLoaderIcon />
+    )
+  }
 
-        const email = getState().user.email
-        if (!email) {
-          notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
-          navigate('./login')
-          return
-        }
+  if (!isPending) {
+    return (
+      <MdSaveAlt
+        tabIndex={-1}
+        style={{
+          color: disabled ? '#acacac' : '#000',
+        }}
+        onClick={(e: MouseEvent): void => {
+          if (disabled) return
 
-        const item = getState().items.at(itemIndex)
-        if (!item) return
-        if (item.type === itemKey.paste) return
+          const email = getState().user.email
+          if (!email) {
+            notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
+            navigate('./login')
+            return
+          }
 
-        saveItem({
-          email,
-          id: item.id,
-          type: item.type,
-          category: 'category',
-          name: 'name',
-          tag: 'tag',
-          item,
-        })
-      }}
-    />
-  )
+          const item = getState().items.at(itemIndex)
+          if (!item) return
+          if (item.type === itemKey.paste) return
+
+          saveItem({
+            email,
+            id: item.id,
+            type: item.type,
+            category: 'category',
+            name: 'name',
+            tag: 'tag',
+            item,
+          })
+        }}
+      />
+    )
+  }
+
+  return null
 }
