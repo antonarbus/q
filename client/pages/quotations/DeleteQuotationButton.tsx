@@ -12,8 +12,9 @@ export const DeleteQuotationButton = ({ id }: Props): ReactNode => {
   const { mutate, isPending, isSuccess } = useDeleteQuotationMutation()
 
   useEffect(() => {
-    if (!isSuccess) return
-    deleteFromQuotationsCache({ id })
+    if (isSuccess) {
+      deleteFromQuotationsCache({ id })
+    }
   }, [isSuccess])
 
   return (
