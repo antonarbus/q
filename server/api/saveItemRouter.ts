@@ -45,15 +45,14 @@ const saveItem: RouterHandler = async (req, res, next) => {
       .findOneAndUpdate(
         {
           email: req.body.email,
-          category: req.body.category,
-          name: req.body.name,
+          id: req.body.id,
         },
         {
           id: req.body.id,
           email: req.body.email,
-          tag: req.body.tag,
           category: req.body.category,
           name: req.body.name,
+          tag: req.body.tag,
         },
         { new: true, setDefaultsOnInsert: true, upsert: true },
       )
