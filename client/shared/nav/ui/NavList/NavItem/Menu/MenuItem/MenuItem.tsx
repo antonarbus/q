@@ -28,7 +28,7 @@ export const MenuItem = ({ menuItem, hoveredMenuItemIndex }: Props): JSX.Element
   const link = menuItem.link
   const isLink = Boolean(menuItem.link)
   const shortcut = menuItem.shortcut
-  const disabled = !!menuItem.disabled
+  const disabled = Boolean(menuItem.disabled)
   const isLoading = menuItem?.isLoading
   const isSuccess = menuItem?.isSuccess
   const isError = menuItem?.isError
@@ -52,6 +52,10 @@ export const MenuItem = ({ menuItem, hoveredMenuItemIndex }: Props): JSX.Element
         if (isLoading) return
         if (isSuccess) return
         if (isError) return
+        if (disabled) {
+          e.preventDefault()
+          return
+        }
         clickOnMenuItem(e, menuId, disabled)
       }}
       onMouseEnter={(): void => {
