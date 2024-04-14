@@ -61,10 +61,7 @@ export const navSlice = createSlice({
       state.menuItemHoverIndex = 0
     },
     goDownInCurrentMenu: (state, action: PayloadAction<string>) => {
-      state.idsToCurrentMenuItems = [
-        ...state.idsToCurrentMenuItems,
-        action.payload,
-      ]
+      state.idsToCurrentMenuItems = [ ...state.idsToCurrentMenuItems, action.payload, ]
     },
     goUpInCurrentMenu: (state) => {
       state.idsToCurrentMenuItems = state.idsToCurrentMenuItems.slice(0, -1)
@@ -78,7 +75,9 @@ export const navSlice = createSlice({
     setMenuItemHoverIndex: (state, action: PayloadAction<number>) => {
       state.menuItemHoverIndex = action.payload
     },
-    disableTopMenuItemsExceptItemId: (state, action: PayloadAction<{ exceptItemId?: NavMenuItemIdKey }>) => {
+    disableTopMenuItemsExceptItemId: (state, action: PayloadAction<{
+      exceptItemId?: NavMenuItemIdKey
+    }>) => {
       const { exceptItemId } = action.payload
       const topLevelNavMenu = state.navStructure[0]
       if (!topLevelNavMenu) return
@@ -93,7 +92,9 @@ export const navSlice = createSlice({
         })
       })
     },
-    disableTopNavItem: (state, action: PayloadAction<{ navMenuItemIdKey: NavMenuItemIdKey }>) => {
+    disableTopNavItem: (state, action: PayloadAction<{
+      navMenuItemIdKey: NavMenuItemIdKey
+    }>) => {
       const { navMenuItemIdKey } = action.payload
       // const topLevelNavMenu = state.navStructure[0]
       // if (!topLevelNavMenu) return
@@ -104,7 +105,9 @@ export const navSlice = createSlice({
         value: true,
       })
     },
-    enableTopNavItem: (state, action: PayloadAction<{ navMenuItemIdKey: NavMenuItemIdKey }>) => {
+    enableTopNavItem: (state, action: PayloadAction<{
+      navMenuItemIdKey: NavMenuItemIdKey
+    }>) => {
       const { navMenuItemIdKey } = action.payload
       // const topLevelNavMenu = state.navStructure[0]
       // if (!topLevelNavMenu) return

@@ -1,5 +1,5 @@
-// type
-export type { MenuItemType as MenuItemTypes } from './type'
+// types
+export type { MenuItemType } from './type'
 export type { NavItemsMediaQueryWidths } from './functions/calcNavMediaQueryParams'
 
 // redux
