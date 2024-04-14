@@ -1,7 +1,7 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { arrayMoveImmutable } from 'array-move'
 import { isItemsFroalaSignal, itemsSlice } from '@entities/quotation'
-import { navMenuItemId } from '@shared/consts/navMenuItemId'
+import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 
 type Props = {
@@ -22,7 +22,7 @@ const onItemDragEnd = ({ oldIndex, newIndex }: Props): void => {
     const { items } = getState()
     const reOrderedItems = arrayMoveImmutable(items, oldIndex, newIndex)
     dispatch(itemsSlice.actions.reOrderItemsReducer({ reOrderedItems }))
-    dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.save }))
+    dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
   }
 }
 

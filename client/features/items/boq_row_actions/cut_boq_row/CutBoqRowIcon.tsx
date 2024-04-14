@@ -5,7 +5,7 @@ import { TbCut } from 'react-icons/tb'
 import { copySlice } from '@entities/copy'
 import { getBoqRowFromStore, isItemsFroalaSignal, itemsSlice, selectIsLastBoqRow, useItem, useRow } from '@entities/quotation'
 import { className } from '@shared/consts/className'
-import { navMenuItemId } from '@shared/consts/navMenuItemId'
+import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 import { cleanHtml } from '@shared/utils/itemsUtils'
 
@@ -62,7 +62,7 @@ export const CutBoqRowIcon = (): JSX.Element => {
 
         setTimeout(() => {
           dispatch(copySlice.actions.allowAllActions())
-          dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.save }))
+          dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
         }, 1000 * theme.item.animationDuration)
       }}
     />

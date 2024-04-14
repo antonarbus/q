@@ -1,9 +1,8 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
 import type { NavItemsMediaQueryWidths } from '@widgets/nav'
-import { navMenuItemId } from '../consts/navMenuItemId'
 import { setMenuItemPropValue } from './setMenuItemPropValue'
-import type { MenuItemType, NavMenuItemIdKey } from './type'
+import type { MenuItemType, NavItemIdKey } from './type'
 
 const initialState = {
   navStructure: [] as MenuItemType[],
@@ -61,7 +60,7 @@ export const navSlice = createSlice({
       state.menuItemHoverIndex = 0
     },
     goDownInCurrentMenu: (state, action: PayloadAction<string>) => {
-      state.idsToCurrentMenuItems = [ ...state.idsToCurrentMenuItems, action.payload, ]
+      state.idsToCurrentMenuItems = [...state.idsToCurrentMenuItems, action.payload]
     },
     goUpInCurrentMenu: (state) => {
       state.idsToCurrentMenuItems = state.idsToCurrentMenuItems.slice(0, -1)
@@ -75,156 +74,166 @@ export const navSlice = createSlice({
     setMenuItemHoverIndex: (state, action: PayloadAction<number>) => {
       state.menuItemHoverIndex = action.payload
     },
-    disableTopMenuItemsExceptItemId: (state, action: PayloadAction<{
-      exceptItemId?: NavMenuItemIdKey
+    disableAllTopNavItems: (state, action: PayloadAction<{
+      exceptNavItemIdKeys?: NavItemIdKey[]
     }>) => {
-      const { exceptItemId } = action.payload
+      const { exceptNavItemIdKeys } = action.payload
+
       const topLevelNavMenu = state.navStructure[0]
       if (!topLevelNavMenu) return
-      const topNavItemsIds = topLevelNavMenu.menuItems?.map((item) => item.id) as (NavMenuItemIdKey[])
+
+      const topNavItemsIds = topLevelNavMenu.menuItems?.map((item) => item.id) as (NavItemIdKey[])
+
       topNavItemsIds?.forEach((id) => {
-        if (id === exceptItemId) return
+        if (exceptNavItemIdKeys?.includes(id)) return
+
         setMenuItemPropValue({
           menu: state.navStructure,
-          navMenuItemIdKey: id,
+          navItemIdKey: id,
           prop: 'disabled',
           value: true,
         })
       })
     },
-    disableTopNavItem: (state, action: PayloadAction<{
-      navMenuItemIdKey: NavMenuItemIdKey
+    disableNavItems: (state, action: PayloadAction<{
+      navItemIdKeys: NavItemIdKey[]
     }>) => {
-      const { navMenuItemIdKey } = action.payload
-      // const topLevelNavMenu = state.navStructure[0]
-      // if (!topLevelNavMenu) return
-      setMenuItemPropValue({
-        menu: state.navStructure,
-        navMenuItemIdKey,
-        prop: 'disabled',
-        value: true,
-      })
-    },
-    enableTopNavItem: (state, action: PayloadAction<{
-      navMenuItemIdKey: NavMenuItemIdKey
-    }>) => {
-      const { navMenuItemIdKey } = action.payload
-      // const topLevelNavMenu = state.navStructure[0]
-      // if (!topLevelNavMenu) return
-      setMenuItemPropValue({
-        menu: state.navStructure,
-        navMenuItemIdKey,
-        prop: 'disabled',
-        value: false,
-      })
-    },
-    enableTopMenuItems: (state) => {
-      const topLevelNavMenu = state.navStructure[0]
-      if (!topLevelNavMenu) return
-      const topNavItemsIds = topLevelNavMenu.menuItems?.map((item) => item.id) as (NavMenuItemIdKey[])
-      topNavItemsIds?.forEach((id) => {
+      const { navItemIdKeys } = action.payload
+
+      navItemIdKeys.forEach(navItemIdKey => {
         setMenuItemPropValue({
           menu: state.navStructure,
-          navMenuItemIdKey: id,
+          navItemIdKey,
+          prop: 'disabled',
+          value: true,
+        })
+      })
+    },
+    enableNavItems: (state, action: PayloadAction<{
+      navItemIdKeys: NavItemIdKey[]
+    }>) => {
+      const { navItemIdKeys } = action.payload
+
+      navItemIdKeys.forEach(navItemIdKey => {
+        setMenuItemPropValue({
+          menu: state.navStructure,
+          navItemIdKey,
           prop: 'disabled',
           value: false,
         })
       })
     },
-    hideLogInMenuItem: (state) => {
-      setMenuItemPropValue({
-        menu: state.navStructure,
-        navMenuItemIdKey: navMenuItemId.login,
-        prop: 'isHidden',
-        value: true,
+    enableAllTopNavItems: (state) => {
+      const topLevelNavMenu = state.navStructure[0]
+      if (!topLevelNavMenu) return
+
+      const topNavItemsIds = topLevelNavMenu.menuItems?.map((item) => item.id) as (NavItemIdKey[])
+
+      topNavItemsIds?.forEach((id) => {
+        setMenuItemPropValue({
+          menu: state.navStructure,
+          navItemIdKey: id,
+          prop: 'disabled',
+          value: false,
+        })
       })
     },
-    showLogInMenuItem: (state) => {
-      setMenuItemPropValue({
-        menu: state.navStructure,
-        navMenuItemIdKey: navMenuItemId.login,
-        prop: 'isHidden',
-        value: false,
+    hideNavItems: (state, action: PayloadAction<{
+      navItemIdKeys: NavItemIdKey[]
+    }>) => {
+      const { navItemIdKeys } = action.payload
+
+      navItemIdKeys.forEach(navItemIdKey => {
+        setMenuItemPropValue({
+          menu: state.navStructure,
+          navItemIdKey,
+          prop: 'isHidden',
+          value: true,
+        })
       })
     },
-    showAccountMenuItem: (state) => {
-      setMenuItemPropValue({
-        menu: state.navStructure,
-        navMenuItemIdKey: navMenuItemId.account,
-        prop: 'isHidden',
-        value: false,
-      })
-    },
-    hideAccountMenuItem: (state) => {
-      setMenuItemPropValue({
-        menu: state.navStructure,
-        navMenuItemIdKey: navMenuItemId.account,
-        prop: 'isHidden',
-        value: true,
+    showNavItems: (state, action: PayloadAction<{
+      navItemIdKeys: NavItemIdKey[]
+    }>) => {
+      const { navItemIdKeys } = action.payload
+
+      navItemIdKeys.forEach(navItemIdKey => {
+        setMenuItemPropValue({
+          menu: state.navStructure,
+          navItemIdKey,
+          prop: 'isHidden',
+          value: false,
+        })
       })
     },
     showLoadingIcon: (state, action: PayloadAction<{
-      navMenuItemIdKey: NavMenuItemIdKey
+      navMenuItemIdKey: NavItemIdKey
     }>) => {
       const { navMenuItemIdKey } = action.payload
+
       setMenuItemPropValue({
         menu: state.navStructure,
-        navMenuItemIdKey,
+        navItemIdKey: navMenuItemIdKey,
         prop: 'isLoading',
         value: true,
       })
     },
     hideLoadingIcon: (state, action: PayloadAction<{
-      navMenuItemIdKey: NavMenuItemIdKey
+      navMenuItemIdKey: NavItemIdKey
     }>) => {
       const { navMenuItemIdKey } = action.payload
+
       setMenuItemPropValue({
         menu: state.navStructure,
-        navMenuItemIdKey,
+        navItemIdKey: navMenuItemIdKey,
         prop: 'isLoading',
         value: false,
       })
     },
     showSuccessIcon: (state, action: PayloadAction<{
-      navMenuItemIdKey: NavMenuItemIdKey
+      navMenuItemIdKey: NavItemIdKey
     }>) => {
       const { navMenuItemIdKey } = action.payload
+
       setMenuItemPropValue({
         menu: state.navStructure,
-        navMenuItemIdKey,
+        navItemIdKey: navMenuItemIdKey,
         prop: 'isSuccess',
         value: true,
       })
     },
     hideSuccessIcon: (state, action: PayloadAction<{
-      navMenuItemIdKey: NavMenuItemIdKey
+      navMenuItemIdKey: NavItemIdKey
     }>) => {
       const { navMenuItemIdKey } = action.payload
+
       setMenuItemPropValue({
         menu: state.navStructure,
-        navMenuItemIdKey,
+        navItemIdKey: navMenuItemIdKey,
         prop: 'isSuccess',
         value: false,
       })
     },
     showErrorIcon: (state, action: PayloadAction<{
-      navMenuItemIdKey: NavMenuItemIdKey
+      navMenuItemIdKey: NavItemIdKey
     }>) => {
       const { navMenuItemIdKey } = action.payload
+
       setMenuItemPropValue({
         menu: state.navStructure,
-        navMenuItemIdKey,
+        navItemIdKey: navMenuItemIdKey,
         prop: 'isError',
         value: true,
       })
     },
     hideErrorIcon: (state, action: PayloadAction<{
-      navMenuItemIdKey: NavMenuItemIdKey
+      navMenuItemIdKey: NavItemIdKey
     }>) => {
       const { navMenuItemIdKey } = action.payload
+
       setMenuItemPropValue({
         menu: state.navStructure,
-        navMenuItemIdKey,
+        navItemIdKey: navMenuItemIdKey,
         prop: 'isError',
         value: false,
       })

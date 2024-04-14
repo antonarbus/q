@@ -13,6 +13,7 @@ import { ConfirmPasswordInput, EmailInput, PasswordInput } from '@shared/compone
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 import { CardCustom } from '@shared/components/CardCustom'
+import { navItemId } from '@shared/consts/navItemId'
 import { route } from '@shared/consts/route'
 import { navSlice } from '@shared/nav'
 import { notify } from '@shared/ui/top_msg'
@@ -50,8 +51,8 @@ export const ResetPassword = (): ReactNode => {
 
       accessTokenSignal.value = accessJwtToken
       dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
-      dispatch(navSlice.actions.hideLogInMenuItem())
-      dispatch(navSlice.actions.showAccountMenuItem())
+      dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.login] }))
+      dispatch(navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.account] }))
     }
   }, [isSuccess])
 

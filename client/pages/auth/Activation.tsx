@@ -11,6 +11,7 @@ import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 import { RotatingLoaderIcon } from '@shared/components'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
 import { CardCustom } from '@shared/components/CardCustom'
+import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 import { notify } from '@shared/ui/top_msg'
 
@@ -39,8 +40,8 @@ export const Activation = (): JSX.Element => {
 
       accessTokenSignal.value = accessJwtToken
       dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
-      dispatch(navSlice.actions.hideLogInMenuItem())
-      dispatch(navSlice.actions.showAccountMenuItem())
+      dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.login] }))
+      dispatch(navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.account] }))
     }
 
     if (data.message === 'already activated') {

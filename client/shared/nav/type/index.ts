@@ -1,5 +1,5 @@
 import { type MouseEvent } from 'react'
-import { type navMenuItemId } from '../../consts/navMenuItemId'
+import { type navItemId } from '../../consts/navItemId'
 
 export type MenuItemType = {
   id: string
@@ -16,4 +16,4 @@ export type MenuItemType = {
   isError?: boolean
 }
 
-export type NavMenuItemIdKey = keyof typeof navMenuItemId
+export type NavItemIdKey = keyof typeof navItemId

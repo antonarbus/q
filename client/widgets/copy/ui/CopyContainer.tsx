@@ -2,16 +2,16 @@ import { motion } from 'framer-motion'
 import { PressEsc } from '@features/copy/close_copy_container_on_esc_key'
 import { useMovePasteText } from '@features/items/move_paste_text'
 import { usePasteClick } from '@features/items/paste_item'
-import { useDisableNavItems } from '@shared/nav'
 import { cursorPosSignal } from '@shared/utils/cursorPosSignal'
 import { FirstCopiedItem } from './FirstCopiedItem'
 import { RestOfCopiedItems } from './RestOfCopiedItems'
 import { useCopyContainerAnimation } from './useCopyContainerAnimation'
+import { useDisableNavItemsExceptQuotations } from './useDisableNavItemsExceptQuotations'
 
 export const CopyContainer = (): JSX.Element => {
   useMovePasteText()
   usePasteClick()
-  useDisableNavItems()
+  useDisableNavItemsExceptQuotations()
   const copyContainerAnimationControls = useCopyContainerAnimation()
   const { x, y } = cursorPosSignal.value
   // const { x, y } = { x: 300, y: 0 }

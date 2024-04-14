@@ -3,7 +3,7 @@ import { dispatch } from '@lib_instances/store'
 import { useEffect } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { defaultItems, itemsSlice, quotationSignal, useGetQuotationMutation } from '@entities/quotation'
-import { navMenuItemId } from '@shared/consts/navMenuItemId'
+import { navItemId } from '@shared/consts/navItemId'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
 import { navSlice } from '@shared/nav'
 import { reRenderQuotationSignal } from '@shared/signals/reRenderQuotationSignal'
@@ -24,10 +24,15 @@ export function useLoadQuotation(): void {
         quotationSignal.value = { id: 'new', email: '' }
       }, 200)
 
-      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.save }))
-      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.pdf }))
-      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.share }))
-      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.insert }))
+      dispatch(navSlice.actions.enableNavItems({
+        navItemIdKeys: [
+          navItemId.save,
+          navItemId.pdf,
+          navItemId.share,
+          navItemId.insert,
+        ],
+      }))
+
       setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 2000)
     }
   }, [reRenderQuotationSignal.value])
@@ -59,10 +64,16 @@ export function useLoadQuotation(): void {
 
     if (data.message === 'found') {
       quotationSignal.value = quotation
-      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.save }))
-      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.pdf }))
-      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.share }))
-      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.insert }))
+
+      dispatch(navSlice.actions.enableNavItems({
+        navItemIdKeys: [
+          navItemId.save,
+          navItemId.pdf,
+          navItemId.share,
+          navItemId.insert,
+        ],
+      }))
+
       setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 1000)
     }
   }, [isSuccess])
