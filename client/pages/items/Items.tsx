@@ -1,10 +1,10 @@
 import { Outlet } from 'react-router-dom'
-import { useDisableNavItemsOnQuotationsOpen } from '@features/quotation/open_quotations'
+import { useDisableNavItemsOnItemsOpen } from '@features/items/open_items'
 import { ItemsLayout } from './ItemsLayout'
 import { ItemsTable } from './ItemsTable'
 
 export const Items = (): JSX.Element => {
-  useDisableNavItemsOnQuotationsOpen()
+  useDisableNavItemsOnItemsOpen()
 
   return (
     <ItemsLayout>

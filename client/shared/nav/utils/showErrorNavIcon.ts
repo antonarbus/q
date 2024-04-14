@@ -1,9 +1,9 @@
 import { dispatch } from '@lib_instances/store'
 import { navSlice } from '..'
-import { type NavMenuItemIdKey } from '../type'
+import { type NavItemIdKey } from '../type'
 
 type Props = {
-  navMenuItemIdKey: NavMenuItemIdKey
+  navMenuItemIdKey: NavItemIdKey
 }
 
 export const showErrorNavIcon = ({ navMenuItemIdKey }: Props): void => {

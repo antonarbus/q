@@ -1,11 +1,11 @@
 import { domToJpeg } from 'modern-screenshot'
 import { quotationSignal } from '@entities/quotation'
 import { className } from '@shared/consts/className'
-import { navMenuItemId } from '@shared/consts/navMenuItemId'
+import { navItemId } from '@shared/consts/navItemId'
 import { showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@shared/nav'
 
 export const downloadPdf = async (): Promise<void> => {
-  showLoadingNavIcon({ navMenuItemIdKey: navMenuItemId.pdf })
+  showLoadingNavIcon({ navMenuItemIdKey: navItemId.pdf })
 
   const itemsElement = document.querySelector(`.${className.items}`)
   if (!(itemsElement instanceof HTMLElement)) return
@@ -51,10 +51,10 @@ export const downloadPdf = async (): Promise<void> => {
     downloadLink.click()
     document.body.removeChild(downloadLink)
     URL.revokeObjectURL(pdfDataUrl) // revoke the data URL to free up resources
-    showSuccessNavIcon({ navMenuItemIdKey: navMenuItemId.pdf })
+    showSuccessNavIcon({ navMenuItemIdKey: navItemId.pdf })
   }
 
   worker.onerror = function () {
-    showErrorNavIcon({ navMenuItemIdKey: navMenuItemId.pdf })
+    showErrorNavIcon({ navMenuItemIdKey: navItemId.pdf })
   }
 }

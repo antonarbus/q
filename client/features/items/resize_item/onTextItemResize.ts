@@ -1,6 +1,6 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { fixItemImagesHeight, itemsSlice, unfixItemImagesHeight } from '@entities/quotation'
-import { navMenuItemId } from '@shared/consts/navMenuItemId'
+import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
 
@@ -25,5 +25,5 @@ export const onTextItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction
   if (width === prevItemWidth) return
 
   dispatch(itemsSlice.actions.updateItemWidthReducer({ itemIndex, width }))
-  dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.save }))
+  dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
 }

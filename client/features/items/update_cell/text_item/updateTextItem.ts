@@ -1,6 +1,6 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { itemKey, itemsSlice } from '@entities/quotation'
-import { navMenuItemId } from '@shared/consts/navMenuItemId'
+import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 import { type FroalaEditorRef } from '@shared/types'
 
@@ -24,5 +24,5 @@ export const updateTextItem = ({
   if (!didTextChange) return
 
   dispatch(itemsSlice.actions.updateItemTextReducer({ itemIndex, html }))
-  dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.save }))
+  dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
 }

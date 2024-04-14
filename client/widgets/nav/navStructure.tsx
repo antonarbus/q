@@ -11,18 +11,18 @@ import { VscNewFile } from 'react-icons/vsc'
 import { insertBoqItem, insertBoqRow, insertPriceItem, insertTextItem } from '@features/items/insert'
 import { createNewQuotation } from '@features/quotation/create_new_quotation'
 import { downloadPdf } from '@features/quotation/download_pdf'
-import { navMenuItemId } from '@shared/consts/navMenuItemId'
+import { navItemId } from '@shared/consts/navItemId'
 import { route } from '@shared/consts/route'
 import type { MenuItemType } from '@shared/nav'
 
 export const navStructure: MenuItemType[] = [
   {
-    id: navMenuItemId.top,
+    id: navItemId.top,
     name: 'top',
     isHidden: false,
     menuItems: [
       {
-        id: navMenuItemId.new,
+        id: navItemId.new,
         icon: <VscNewFile />,
         isHidden: false,
         name: 'New',
@@ -33,7 +33,7 @@ export const navStructure: MenuItemType[] = [
         link: route.new,
       },
       {
-        id: navMenuItemId.save,
+        id: navItemId.save,
         icon: <MdSaveAlt />,
         isHidden: false,
         name: 'Save',
@@ -42,7 +42,7 @@ export const navStructure: MenuItemType[] = [
 
       },
       {
-        id: navMenuItemId.pdf,
+        id: navItemId.pdf,
         icon: <BsFiletypePdf />,
         isHidden: false,
         name: 'Pdf',
@@ -52,20 +52,20 @@ export const navStructure: MenuItemType[] = [
         },
       },
       {
-        id: navMenuItemId.insert,
+        id: navItemId.insert,
         icon: <CgInsertAfter />,
         isHidden: false,
         name: 'Insert',
         disabled: true,
         menuItems: [
           {
-            id: navMenuItemId.block,
+            id: navItemId.block,
             name: 'Block',
             icon: <TbRectangleVertical />,
             isHidden: false,
             menuItems: [
               {
-                id: navMenuItemId.textItem,
+                id: navItemId.textItem,
                 name: 'Text',
                 icon: <IoText />,
                 isHidden: false,
@@ -75,7 +75,7 @@ export const navStructure: MenuItemType[] = [
                 },
               },
               {
-                id: navMenuItemId.boqItem,
+                id: navItemId.boqItem,
                 name: 'Items',
                 icon: <FaRegRectangleList />,
                 isHidden: false,
@@ -85,7 +85,7 @@ export const navStructure: MenuItemType[] = [
                 },
               },
               {
-                id: navMenuItemId.priceItem,
+                id: navItemId.priceItem,
                 name: 'Price',
                 icon: <FiDollarSign />,
                 isHidden: false,
@@ -97,7 +97,7 @@ export const navStructure: MenuItemType[] = [
             ],
           },
           {
-            id: navMenuItemId.boqRow,
+            id: navItemId.boqRow,
             name: 'Row',
             icon: <FaGripLines/>,
             isHidden: false,
@@ -109,41 +109,41 @@ export const navStructure: MenuItemType[] = [
         ],
       },
       {
-        id: navMenuItemId.items,
+        id: navItemId.items,
         icon: <MdLineStyle />,
         isHidden: false,
         name: 'Items',
         link: route.items,
       },
       {
-        id: navMenuItemId.quotations,
+        id: navItemId.quotations,
         icon: <CiViewTable />,
         isHidden: false,
         name: 'Quotations',
         link: route.quotations,
       },
       {
-        id: navMenuItemId.login,
+        id: navItemId.login,
         icon: <FiLogIn />,
         isHidden: false,
         name: 'Log in',
         link: `./${route.login}`,
       },
       {
-        id: navMenuItemId.account,
+        id: navItemId.account,
         icon: <Person />,
         name: 'Account',
         isHidden: true,
         menuItems: [
           {
-            id: navMenuItemId.settings,
+            id: navItemId.settings,
             icon: <Settings />,
             isHidden: false,
             name: 'Settings',
             link: route.settings,
           },
           {
-            id: navMenuItemId.logout,
+            id: navItemId.logout,
             icon: <FiLogOut />,
             isHidden: false,
             name: 'Log out',

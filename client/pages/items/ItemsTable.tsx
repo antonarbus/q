@@ -5,7 +5,7 @@ import { type ItemModelType } from '@server/db/models/itemModel'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef } from 'react'
 import { useUpdateEffect } from 'react-use'
-import { useDisableLoadingOverlayWhenQuotationsAreFetched } from '@features/quotation/open_quotations'
+import { useDisableLoadingOverlayWhenItemsAreFetched } from '@features/items/open_items'
 import { useGetItemsQuery } from '@entities/item'
 import { notify } from '@shared/ui/top_msg'
 import { addPlaceholderToFloatingFilters } from './addPlaceholderToFloatingFilters'
@@ -19,12 +19,12 @@ import { NoRowsTableOverlay } from './NoRowsTableOverlay'
 export const ItemsTable = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
   const { data, isSuccess, isFetching, isFetched, isError, error } = useGetItemsQuery()
-  useDisableLoadingOverlayWhenQuotationsAreFetched({ isFetched })
+  useDisableLoadingOverlayWhenItemsAreFetched({ isFetched })
 
   useUpdateEffect(() => {
     if (isSuccess) {
       if (data.message === 'no content') {
-        notify({ msg: 'No content', type: 'info', theme: 'light' })
+        notify({ msg: 'No content', type: 'info', theme: 'dark', position: 'bottom-center' })
       }
     }
   }, [isSuccess])
@@ -32,11 +32,11 @@ export const ItemsTable = (): JSX.Element => {
   useUpdateEffect(() => {
     if (isError) {
       if (error.response?.data.message === 'something happened') {
-        notify({ msg: 'Something happened', type: 'warn', theme: 'light' })
+        notify({ msg: 'Something happened', type: 'warn', theme: 'dark', position: 'bottom-center' })
         return
       }
 
-      notify({ msg: 'Internal error', type: 'error', theme: 'light' })
+      notify({ msg: 'Internal error', type: 'error', theme: 'dark', position: 'bottom-center' })
     }
   }, [isError])
 

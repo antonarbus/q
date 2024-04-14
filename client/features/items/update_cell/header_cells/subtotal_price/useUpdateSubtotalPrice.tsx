@@ -2,7 +2,7 @@ import { dispatch, useSelectorTyped } from '@lib_instances/store'
 import { useUpdateEffect } from 'react-use'
 import { roundTo } from 'round-to'
 import { useBoqItem, useItem, getBoqRowsFromStore, type BoqRow, updateSubTotalPriceWithValue, isItemsFroalaSignal } from '@entities/quotation'
-import { navMenuItemId } from '@shared/consts/navMenuItemId'
+import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 
 export const useUpdateSubtotalPrice = (): void => {
@@ -35,7 +35,7 @@ export const useUpdateSubtotalPrice = (): void => {
 
       if (!didChange) return
 
-      dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.save }))
+      dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
     })
   }, [isItemFroala, isItemsFroalaSignal.value])
 }

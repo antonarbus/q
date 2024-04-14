@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { QuotationModel } from '@server/db/models/quotationModel'
 import { UserModel } from '@server/db/models/userModel'
 import { Router } from 'express'

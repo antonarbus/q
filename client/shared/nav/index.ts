@@ -6,7 +6,6 @@ export type { NavItemsMediaQueryWidths } from './functions/calcNavMediaQueryPara
 export { navSlice } from './navSlice'
 
 // hooks
-export { useDisableNavItems } from './hooks/useDisableNavItems'
 export { useMediaQueryValues } from './hooks/useMediaQueryValues'
 export { useMenuItemActionShortcuts } from './hooks/useMenuItemActionShortcuts'
 

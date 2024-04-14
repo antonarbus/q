@@ -24,7 +24,7 @@ export const QuotationsTable = (): JSX.Element => {
   useUpdateEffect(() => {
     if (isSuccess) {
       if (data.message === 'no content') {
-        notify({ msg: 'No content', type: 'info', theme: 'light' })
+        notify({ msg: 'No content', type: 'info', theme: 'dark', position: 'bottom-center' })
       }
     }
   }, [isSuccess])
@@ -32,11 +32,11 @@ export const QuotationsTable = (): JSX.Element => {
   useUpdateEffect(() => {
     if (isError) {
       if (error.response?.data.message === 'something happened') {
-        notify({ msg: 'Something happened', type: 'warn', theme: 'light' })
+        notify({ msg: 'Something happened', type: 'warn', theme: 'dark', position: 'bottom-center' })
         return
       }
 
-      notify({ msg: 'Internal error', type: 'error', theme: 'light' })
+      notify({ msg: 'Internal error', type: 'error', theme: 'dark', position: 'bottom-center' })
     }
   }, [isError])
 

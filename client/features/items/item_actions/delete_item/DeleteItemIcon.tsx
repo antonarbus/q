@@ -6,7 +6,7 @@ import { RxCross2 } from 'react-icons/rx'
 import { copySlice } from '@entities/copy'
 import { isItemsFroalaSignal, itemsSlice, selectIsLastItem, useItem } from '@entities/quotation'
 import { className } from '@shared/consts/className'
-import { navMenuItemId } from '@shared/consts/navMenuItemId'
+import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 import { fixElementDimensionStyle } from '@shared/utils/fixElementDimensionStyle'
 
@@ -58,7 +58,7 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
         if (!isCopyContainer) {
           setTimeout(() => {
             isItemsFroalaSignal.value = true
-            dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.save }))
+            dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
           }, 1000 * theme.item.animationDuration + 500)
         }
       }}

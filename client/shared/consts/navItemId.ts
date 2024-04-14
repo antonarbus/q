@@ -1,4 +1,4 @@
-export const navMenuItemId = {
+export const navItemId = {
   top: 'top',
   pending: 'pending',
   new: 'new',

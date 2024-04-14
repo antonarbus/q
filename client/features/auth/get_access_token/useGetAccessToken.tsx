@@ -9,6 +9,7 @@ import { apiUrl } from 'server/consts/apiUrl'
 import type { JwtPayloadExtended } from 'server/services/jwt'
 import { userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
+import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 
 type Props = {
@@ -44,16 +45,16 @@ export const useGetAccessToken = ({ withLoadingState }: Props): Res => {
 
         if (response.status === 401) {
           dispatch(userSlice.actions.forgetLoggedUser())
-          dispatch(navSlice.actions.showLogInMenuItem())
-          dispatch(navSlice.actions.hideAccountMenuItem())
+          dispatch(navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.login] }))
+          dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.account] }))
           console.error(response.data.message)
           return
         }
 
         if (!response.data.accessJwtToken) {
           dispatch(userSlice.actions.forgetLoggedUser())
-          dispatch(navSlice.actions.showLogInMenuItem())
-          dispatch(navSlice.actions.hideAccountMenuItem())
+          dispatch(navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.login] }))
+          dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.account] }))
           console.warn('no access token issued')
           return
         }
@@ -63,8 +64,8 @@ export const useGetAccessToken = ({ withLoadingState }: Props): Res => {
 
         if (!email) {
           dispatch(userSlice.actions.forgetLoggedUser())
-          dispatch(navSlice.actions.showLogInMenuItem())
-          dispatch(navSlice.actions.hideAccountMenuItem())
+          dispatch(navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.login] }))
+          dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.account] }))
           console.warn('token is invalid')
           return
         }
@@ -72,8 +73,8 @@ export const useGetAccessToken = ({ withLoadingState }: Props): Res => {
         if (email) {
           accessTokenSignal.value = response.data.accessJwtToken
           dispatch(userSlice.actions.rememberLoggedUser({ email, roles: response.data.roles }))
-          dispatch(navSlice.actions.hideLogInMenuItem())
-          dispatch(navSlice.actions.showAccountMenuItem())
+          dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.login] }))
+          dispatch(navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.account] }))
           console.info(`access token was issued for ${email}`)
         }
 
@@ -87,8 +88,8 @@ export const useGetAccessToken = ({ withLoadingState }: Props): Res => {
           const payloadFromExistingAccessToken = jwtDecode<JwtPayloadExtended>(accessTokenSignal.value)
           const { email, roles } = payloadFromExistingAccessToken
           dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
-          dispatch(navSlice.actions.hideLogInMenuItem())
-          dispatch(navSlice.actions.showAccountMenuItem())
+          dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.login] }))
+          dispatch(navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.account] }))
           console.warn(`access token expires in ${expirationInMin.toFixed(2)} min, which is more than 5 min, skip the refresh for now`)
         }
       }

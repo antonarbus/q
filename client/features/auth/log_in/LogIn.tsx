@@ -15,6 +15,7 @@ import { EmailInput, PasswordInput } from '@shared/components'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 import { CardCustom } from '@shared/components/CardCustom'
+import { navItemId } from '@shared/consts/navItemId'
 import { route } from '@shared/consts/route'
 import { nanoid } from '@shared/lib/nanoid'
 import { navSlice } from '@shared/nav'
@@ -46,8 +47,8 @@ export const LogIn = (): JSX.Element => {
 
       accessTokenSignal.value = accessJwtToken
       dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
-      dispatch(navSlice.actions.hideLogInMenuItem())
-      dispatch(navSlice.actions.showAccountMenuItem())
+      dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.login] }))
+      dispatch(navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.account] }))
 
       if (location.pathname.includes(route.quotations)) {
         void refetchQuotations()

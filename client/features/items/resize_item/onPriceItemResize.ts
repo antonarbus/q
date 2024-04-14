@@ -1,6 +1,6 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { itemsSlice } from '@entities/quotation'
-import { navMenuItemId } from '@shared/consts/navMenuItemId'
+import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 import type { OnItemResizeStop } from '@shared/types'
 
@@ -11,5 +11,5 @@ export const onPriceItemResizeStop: OnItemResizeStop = ({ itemIndex, e, directio
   if (width === prevItemWidth) return
 
   dispatch(itemsSlice.actions.updateItemWidthReducer({ itemIndex, width }))
-  dispatch(navSlice.actions.enableTopNavItem({ navMenuItemIdKey: navMenuItemId.save }))
+  dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
 }
