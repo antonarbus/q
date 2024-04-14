@@ -6,7 +6,7 @@ import { httpStatus } from '@shared/consts/httpStatus'
 import { type ResWithBody, type Next, type Req } from '../types'
 
 export type ResBody = {
-  message: string
+  message: 'not logged in' | 'found' | 'no content' | 'internal error' | 'something happened'
   documents?: ItemModelType[]
 }
 
@@ -37,11 +37,26 @@ const getItems: RouterHandler = async (req, res, next) => {
       .sort({ updatedAt: -1 })
       .select({ _id: 0, __v: 0, email: 0 })
 
+    if (documents.length === 0) {
+      return res
+        .status(httpStatus.success_200)
+        .json({ message: 'no content', documents })
+    }
+
+    if (documents.length) {
+      return res
+        .status(httpStatus.success_200)
+        .json({ message: 'found', documents })
+    }
+
     return res
-      .status(httpStatus.success_200)
-      .json({ message: 'found', documents })
+      .status(httpStatus.notFound_404)
+      .json({ message: 'something happened' })
   } catch (error) {
-    next(error)
+    return res
+      .status(httpStatus.serverError_500)
+      .json({ message: 'internal error' })
+    // next(error)
   }
 }
 

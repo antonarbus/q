@@ -4,8 +4,10 @@ import { Box, LinearProgress } from '@mui/material'
 import { type QuotationModelType } from '@server/db/models/quotationModel'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef } from 'react'
+import { useUpdateEffect } from 'react-use'
 import { useDisableLoadingOverlayWhenQuotationsAreFetched } from '@features/quotation/open_quotations'
 import { useGetQuotationsQuery } from '@entities/quotation'
+import { notify } from '@shared/ui/top_msg'
 import { addPlaceholderToFloatingFilters } from './addPlaceholderToFloatingFilters'
 import { AgGridStyles } from './AgGridStyles'
 import { columnDefs, defaultColDef } from './columnDefs'
@@ -16,8 +18,27 @@ import { quotationsAgGridRef } from './quotationsAgGridRef'
 
 export const QuotationsTable = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
-  const { data, isFetching, isFetched } = useGetQuotationsQuery()
+  const { data, isSuccess, isFetching, isFetched, isError, error } = useGetQuotationsQuery()
   useDisableLoadingOverlayWhenQuotationsAreFetched({ isFetched })
+
+  useUpdateEffect(() => {
+    if (isSuccess) {
+      if (data.message === 'no content') {
+        notify({ msg: 'No content', type: 'info', theme: 'light' })
+      }
+    }
+  }, [isSuccess])
+
+  useUpdateEffect(() => {
+    if (isError) {
+      if (error.response?.data.message === 'something happened') {
+        notify({ msg: 'Something happened', type: 'warn', theme: 'light' })
+        return
+      }
+
+      notify({ msg: 'Internal error', type: 'error', theme: 'light' })
+    }
+  }, [isError])
 
   return (
     <Box

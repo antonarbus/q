@@ -7,7 +7,8 @@ type Props = {
 
 export const useDisableLoadingOverlayWhenQuotationsAreFetched = ({ isFetched }: Props): void => {
   useEffect(() => {
-    if (!isFetched) return
-    loadingDotsOverlayTextSignal.value = null
+    if (isFetched) {
+      loadingDotsOverlayTextSignal.value = null
+    }
   }, [isFetched])
 }
