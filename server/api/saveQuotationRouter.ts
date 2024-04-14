@@ -63,7 +63,7 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
         .json({ message: 'not saved' })
     }
 
-    const filePath = `${quotation.email}/quotations/${quotation.id}/${document.version}.json`
+    const filePath = `${email}/quotations/${quotation.id}.json`
     const file = bucket.file(filePath)
     const contents = JSON.stringify({ quotation, items }, null, 2)
     await file.save(contents)

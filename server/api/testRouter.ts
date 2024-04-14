@@ -1,5 +1,5 @@
-// import { UserModel } from '@server/db/models/userModel'
-// import { QuotationModel } from '../db/models/quotationModel'
+import { QuotationModel } from '@server/db/models/quotationModel'
+import { UserModel } from '@server/db/models/userModel'
 import { Router } from 'express'
 import { ItemModel } from '../db/models/itemModel'
 import type { Next, Req, Res } from '../types'
@@ -9,9 +9,10 @@ export const testRouter = Router()
 
 export async function test(req: Req, res: Res, next: Next): Promise<void> {
   try {
-    // const dbRes = await QuotationModel.deleteOne({ email: 'anton.arbus@gmail.commmmmmm' })
+    // await QuotationModel.deleteOne({ version: 2 })
+    const dbRes = await QuotationModel.find()
     // const dbRes = await UserModel.find()
-    const dbRes = await ItemModel.find()
+    // const dbRes = await ItemModel.find()
 
     res.status(200).json({ dbRes })
   } catch (error) {
