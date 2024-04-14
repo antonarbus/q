@@ -36,52 +36,56 @@ export const LogIn = (): JSX.Element => {
   const { refetch: refetchItems } = useGetItemsQuery()
 
   useUpdateEffect(() => {
-    if (!isSuccess) return
+    if (isSuccess) {
+      const { accessJwtToken, email, roles, message } = data
 
-    const { accessJwtToken, email, roles, message } = data
+      if (message !== 'good password') return
+      if (!accessJwtToken) return
+      if (!email) return
+      if (!roles) return
 
-    if (message !== 'good password') return
-    if (!accessJwtToken) return
-    if (!email) return
-    if (!roles) return
+      accessTokenSignal.value = accessJwtToken
+      dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
+      dispatch(navSlice.actions.hideLogInMenuItem())
+      dispatch(navSlice.actions.showAccountMenuItem())
 
-    accessTokenSignal.value = accessJwtToken
-    dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
-    dispatch(navSlice.actions.hideLogInMenuItem())
-    dispatch(navSlice.actions.showAccountMenuItem())
+      if (location.pathname.includes(route.quotations)) {
+        void refetchQuotations()
+      }
 
-    if (location.pathname.includes(route.quotations)) {
-      void refetchQuotations()
+      if (location.pathname.includes(route.items)) {
+        void refetchItems()
+      }
+
+      if (id) {
+        reRenderQuotationSignal.value = nanoid(5)
+      }
+
+      setTimeout(() => {
+        slideElement({
+          element: cardRef.current,
+          cb: () => {
+            navigate('..', { replace: true, state: nanoid() })
+          },
+        })
+      }, 2500)
     }
-
-    if (location.pathname.includes(route.items)) {
-      void refetchItems()
-    }
-
-    if (id) {
-      reRenderQuotationSignal.value = nanoid(5)
-    }
-
-    setTimeout(() => {
-      slideElement({
-        element: cardRef.current,
-        cb: () => {
-          navigate('..', { replace: true, state: nanoid() })
-        },
-      })
-    }, 2500)
   }, [isSuccess])
 
   useUpdateEffect(() => {
-    if (!isError) return
+    if (isError) {
+      accessTokenSignal.value = null
 
-    accessTokenSignal.value = null
+      if (error.response?.data.message === 'bad password') {
+        notify({ msg: 'Invalid credentials', type: 'warn', theme: 'light' })
+        return
+      }
 
-    if (error.response?.data.message === 'bad password') {
-      notify({ msg: 'Invalid credentials', type: 'warn', theme: 'light' })
-    } else if (error.response?.data.message === 'not activated') {
-      notify({ msg: 'Account is not activated. Check mailbox.', type: 'info', theme: 'light' })
-    } else {
+      if (error.response?.data.message === 'not activated') {
+        notify({ msg: 'Account is not activated. Check mailbox.', type: 'info', theme: 'light' })
+        return
+      }
+
       notify({ msg: 'Internal error', type: 'error', theme: 'light' })
     }
   }, [isError])
