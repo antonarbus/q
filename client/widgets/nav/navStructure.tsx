@@ -13,9 +13,9 @@ import { createNewQuotation } from '@features/quotation/create_new_quotation'
 import { downloadPdf } from '@features/quotation/download_pdf'
 import { navMenuItemId } from '@shared/consts/navMenuItemId'
 import { route } from '@shared/consts/route'
-import type { MenuItemTypes } from '@shared/nav'
+import type { MenuItemType } from '@shared/nav'
 
-export const navStructure: MenuItemTypes[] = [
+export const navStructure: MenuItemType[] = [
   {
     id: navMenuItemId.top,
     name: 'top',
