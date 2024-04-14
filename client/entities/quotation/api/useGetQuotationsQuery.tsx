@@ -1,11 +1,11 @@
 import type { ResBody } from '@server/api/getQuotationsRouter'
 import { apiUrl } from '@server/consts/apiUrl'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
-import { type AxiosResponse } from 'axios'
+import { type AxiosError, type AxiosResponse } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
 import { axiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
 
-export const useGetQuotationsQuery = (): UseQueryResult<ResBody, Error> => {
+export const useGetQuotationsQuery = (): UseQueryResult<ResBody, AxiosError<ResBody>> => {
   const query = useQuery({
     queryKey: [queryKey.getQuotations],
     queryFn: async () => {

@@ -19,20 +19,15 @@ export const DeleteItemButton = ({ id }: ReqBody): JSX.Element => {
     if (isError) {
       if (error.response?.data.message === 'did not find') {
         notify({ msg: 'Not found', type: 'warn', theme: 'light' })
-        return
-      }
-
-      if (error.response?.data.message === 'no item in bucket') {
+      } else if (error.response?.data.message === 'no item in bucket') {
         notify({ msg: 'Not item in storage', type: 'warn', theme: 'light' })
-        return
-      }
-
-      if (error.response?.data.message === 'not logged in') {
+      } else if (error.response?.data.message === 'not logged in') {
         notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
-        return
+      } else {
+        notify({ msg: 'Internal error', type: 'error', theme: 'light' })
       }
 
-      notify({ msg: 'Internal error', type: 'error', theme: 'light' })
+      deleteFromItemsCache({ id })
     }
   }, [isError])
 

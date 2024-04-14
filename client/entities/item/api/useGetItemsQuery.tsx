@@ -1,11 +1,11 @@
 import type { ResBody } from '@server/api/getItemsRouter'
 import { apiUrl } from '@server/consts/apiUrl'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
-import { type AxiosResponse } from 'axios'
+import { type AxiosError, type AxiosResponse } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
 import { axiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
 
-export const useGetItemsQuery = (): UseQueryResult<ResBody, Error> => {
+export const useGetItemsQuery = (): UseQueryResult<ResBody, AxiosError<ResBody>> => {
   const query = useQuery({
     queryKey: [queryKey.getItems],
     queryFn: async () => {

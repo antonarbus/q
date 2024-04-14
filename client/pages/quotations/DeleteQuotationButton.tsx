@@ -20,20 +20,15 @@ export const DeleteQuotationButton = ({ id }: Payload): ReactNode => {
     if (isError) {
       if (error.response?.data.message === 'did not find') {
         notify({ msg: 'Not found', type: 'warn', theme: 'light' })
-        return
-      }
-
-      if (error.response?.data.message === 'not deleted') {
+      } else if (error.response?.data.message === 'not deleted') {
         notify({ msg: 'Not deleted', type: 'warn', theme: 'light' })
-        return
-      }
-
-      if (error.response?.data.message === 'not logged in') {
+      } else if (error.response?.data.message === 'not logged in') {
         notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
-        return
+      } else {
+        notify({ msg: 'Internal error', type: 'error', theme: 'light' })
       }
 
-      notify({ msg: 'Internal error', type: 'error', theme: 'light' })
+      deleteFromQuotationsCache({ id })
     }
   }, [isError])
 
