@@ -1,19 +1,16 @@
-import { getState, useSelectorTyped } from '@lib_instances/store'
+import { getState } from '@lib_instances/store'
 import { type ReactNode, type MouseEvent } from 'react'
 import { MdSaveAlt } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useSaveItemMutation } from '@entities/item'
-import { itemKey, selectIsLastItem, useItem } from '@entities/quotation'
+import { getItemFromStore, itemKey, useItem } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components'
 import { notify } from '@shared/ui/top_msg'
 
 export const SaveItemIcon = (): ReactNode => {
   const navigate = useNavigate()
   const { mutate: saveItem, data, isPending, isSuccess, isError, error } = useSaveItemMutation()
-  const isItemAlone = useSelectorTyped(selectIsLastItem)
-  const isDeletable = useSelectorTyped(state => state.copy.isDeletable)
-  const disabled = isItemAlone || !isDeletable
   const { itemIndex } = useItem()
 
   useUpdateEffect(() => {
@@ -54,20 +51,17 @@ export const SaveItemIcon = (): ReactNode => {
     return (
       <MdSaveAlt
         tabIndex={-1}
-        style={{
-          color: disabled ? '#acacac' : '#000',
-        }}
         onClick={(e: MouseEvent): void => {
-          if (disabled) return
-
           const email = getState().user.email
+
           if (!email) {
             notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
             navigate('./login')
             return
           }
 
-          const item = getState().items.at(itemIndex)
+          const item = getItemFromStore({ itemIndex })
+
           if (!item) return
           if (item.type === itemKey.paste) return
 

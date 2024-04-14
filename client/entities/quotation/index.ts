@@ -41,6 +41,7 @@ export { getTotalPriceAbove } from './utils/getTotalPriceAbove'
 export { fixItemImagesHeight, unfixItemImagesHeight } from './utils/itemImagesHeight'
 
 // store item getters
+export { getItemFromStore } from './redux/getters/getItemFromStore'
 export { getBoqRowFromStore } from './redux/getters/getBoqRowFromStore'
 export { getBoqRowsFromStore } from './redux/getters/getBoqRowsFromStore'
 export { getBoqItemFromStore } from './redux/getters/getBoqItemFromStore'
