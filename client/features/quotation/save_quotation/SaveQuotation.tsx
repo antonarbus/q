@@ -21,9 +21,11 @@ export const SaveQuotation = (): JSX.Element => {
     }
 
     if (getState().quotation.id === 'new') {
+      const id = nanoid(5)
+
       dispatch(quotationSlice.actions.loadQuotationReducer({
         quotation: {
-          id: nanoid(5),
+          id,
           email,
           items: getState().quotation.items,
         },
@@ -32,7 +34,7 @@ export const SaveQuotation = (): JSX.Element => {
 
     saveQuotation({
       quotation: {
-        id: 'xxx',
+        id: getState().quotation.id,
         email,
         items: getState().quotation.items,
       },

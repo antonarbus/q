@@ -17,16 +17,10 @@ export function useLoadQuotation(): void {
     if (id === undefined || id === 'new') {
       loadingDotsOverlayTextSignal.value = 'Loading template...'
 
-      dispatch(quotationSlice.actions.removeQuotationReducer())
+      dispatch(quotationSlice.actions.resetQuotationReducer())
 
       setTimeout(() => {
-        // todo: should be just "reset quotation reducer"
-        dispatch(quotationSlice.actions.loadQuotationReducer({
-          quotation: {
-            id: 'new',
-            items: defaultItems,
-          },
-        }))
+        dispatch(quotationSlice.actions.resetQuotationReducer())
       }, 200)
 
       dispatch(navSlice.actions.enableNavItems({
@@ -46,15 +40,8 @@ export function useLoadQuotation(): void {
 
       if (didSaveNewQuotation) return
 
-      dispatch(quotationSlice.actions.loadQuotationReducer({
-        quotation: {
-          id: 'new',
-          items: [],
-        },
-      }))
-
+      dispatch(quotationSlice.actions.resetQuotationReducer())
       dispatch(navSlice.actions.removeUnderlineFromTopNav())
-
       getQuotation({ id })
     }
   }, [reRenderQuotationSignal.value])
@@ -71,16 +58,11 @@ export function useLoadQuotation(): void {
 
       if (items === undefined || quotation === undefined) return
 
-      dispatch(quotationSlice.actions.loadQuotationReducer({
-        quotation: {
-          id: 'new',
-          items,
-        },
-      }))
+      dispatch(quotationSlice.actions.resetQuotationReducer())
 
-      if (data.message === 'found') {
+      if (data.message === 'found' && data.quotation) {
         dispatch(quotationSlice.actions.loadQuotationReducer({
-          quotation,
+          quotation: data.quotation,
         }))
 
         dispatch(navSlice.actions.enableNavItems({
