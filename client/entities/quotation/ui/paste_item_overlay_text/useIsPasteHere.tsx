@@ -3,7 +3,7 @@ import { useItem } from '../../providers/ItemProvider'
 
 export const useIsPasteHere = (): boolean => {
   const { itemIndex } = useItem()
-  const itemId = getState().items[itemIndex]?.id
+  const itemId = getState().quotation[itemIndex]?.id
   const pastePos = useSelectorTyped(state => state.copy.place.pastePos)
   const pasteItemId = useSelectorTyped(state => state.copy.place.itemId)
   const isPasteTextShown = useSelectorTyped(state => state.copy.isPasteTextShown)

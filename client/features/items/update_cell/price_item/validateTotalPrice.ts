@@ -15,14 +15,14 @@ export const validateTotalPrice = ({
 }: Props): void => {
   if (editorRef.current === null) return
 
-  const priceItem = getState().items[itemIndex]
+  const priceItem = getState().quotation[itemIndex]
   if (priceItem?.type !== itemKey.price) return
 
   const currentHtml = editorRef.current.html.get()
   const cellTextContent = getTextContentFromHtml({ html: currentHtml })
   const cellValueFromHtml = getNumberFromString({ string: cellTextContent })
 
-  const price = getTotalPriceAbove({ itemIndex, items: getState().items })
+  const price = getTotalPriceAbove({ itemIndex, items: getState().quotation })
   const isCorrectValue = cellValueFromHtml === price
 
   if (isCorrectValue) return

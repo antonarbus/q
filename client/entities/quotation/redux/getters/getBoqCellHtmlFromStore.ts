@@ -9,7 +9,7 @@ type Props = {
 }
 
 export const getBoqCellHtmlFromStore = ({ itemIndex, rowIndex, boqRowCellKey }: Props): string => {
-  const item = getState().items[itemIndex]
+  const item = getState().quotation[itemIndex]
   if (!item) return ''
   if (item.type !== itemKey.boq) return ''
   const row = item.boq.rows[rowIndex]

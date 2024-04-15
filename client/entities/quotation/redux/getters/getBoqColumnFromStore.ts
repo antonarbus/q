@@ -8,7 +8,7 @@ type Props = {
 }
 
 export const getBoqColumnFromStore = ({ itemIndex, boqColumnKey }: Props): BoqCol | undefined => {
-  const item = getState().items[itemIndex]
+  const item = getState().quotation[itemIndex]
   if (!item) return
   if (item.type !== itemKey.boq) return
   const column = item.boq.column[boqColumnKey]

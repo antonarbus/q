@@ -15,14 +15,14 @@ export const useUpdateTotalPriceIfPricesAboveWereChanged = ({
   editorRef,
 }: Props): void => {
   const price = useSelectorTyped(state => {
-    const price = getTotalPriceAbove({ itemIndex, items: state.items })
+    const price = getTotalPriceAbove({ itemIndex, items: state.quotation })
     return price
   })
 
   useUpdateEffect(() => {
     if (editorRef.current === null) return
 
-    const priceItem = getState().items[itemIndex]
+    const priceItem = getState().quotation[itemIndex]
     if (priceItem?.type !== itemKey.price) return
 
     const updatedHtml = getStringWithNewFormattedNumber({
