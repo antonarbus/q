@@ -12,9 +12,6 @@ export { updateOrAppendIntoQuotationsCache } from './cacheUpdaters/updateOrAppen
 export { deleteFromQuotationsCache } from './cacheUpdaters/deleteFromQuotationsCache'
 export { deleteQuotationsCache } from './cacheUpdaters/deleteQuotationsCache'
 
-// init data
-export { defaultItems } from './model/defaultItems'
-
 // slice
 export { quotationSlice } from './redux/quotationSlice'
 
