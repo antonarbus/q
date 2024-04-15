@@ -18,7 +18,6 @@ import { pinQtyReducer } from './reducers/pinQtyReducer'
 import { removePasteItemReducer } from './reducers/removePasteItemReducer'
 import { reOrderBoqRowsReducer } from './reducers/reOrderBoqRowsReducer'
 import { reOrderItemsReducer } from './reducers/reOrderItemsReducer'
-import { resetItemsToDefaultReducer } from './reducers/resetItemsToDefaultReducer'
 import { showBoqPriceCellPinsReducer } from './reducers/showBoqPriceCellPinsReducer'
 import { showBoqRowCellPinReducer } from './reducers/showBoqRowCellPinReducer'
 import { unfixImagesHeightReducer } from './reducers/unfixImagesHeightReducer'
@@ -60,7 +59,6 @@ export const quotationSlice = createSlice({
     removePasteItemReducer,
     reOrderBoqRowsReducer,
     reOrderItemsReducer,
-    resetItemsToDefaultReducer,
     showBoqRowCellPinReducer,
     showBoqPriceCellPinsReducer,
     hideBoqPriceCellPinsReducer,

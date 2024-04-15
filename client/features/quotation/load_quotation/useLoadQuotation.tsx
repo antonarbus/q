@@ -2,12 +2,13 @@ import { router } from '@lib_instances/Router'
 import { dispatch, getState } from '@lib_instances/store'
 import { useEffect } from 'react'
 import { useUpdateEffect } from 'react-use'
-import { defaultItems, quotationSlice, useGetQuotationMutation } from '@entities/quotation'
+import { quotationSlice, useGetQuotationMutation } from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
 import { navSlice } from '@shared/nav'
 import { reRenderQuotationSignal } from '@shared/signals/reRenderQuotationSignal'
 import { notify } from '@shared/ui/top_msg'
+import { newQuotation } from './newQuotation'
 
 export function useLoadQuotation(): void {
   const { mutate: getQuotation, data, isSuccess, isPending, isError, error } = useGetQuotationMutation()
@@ -20,7 +21,9 @@ export function useLoadQuotation(): void {
       dispatch(quotationSlice.actions.resetQuotationReducer())
 
       setTimeout(() => {
-        dispatch(quotationSlice.actions.resetQuotationReducer())
+        dispatch(quotationSlice.actions.loadQuotationReducer({
+          quotation: newQuotation,
+        }))
       }, 200)
 
       dispatch(navSlice.actions.enableNavItems({

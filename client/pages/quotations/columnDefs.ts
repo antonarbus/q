@@ -37,11 +37,6 @@ export const columnDefs: Array<ColDef<QuotationModelType>> = [
   {
     field: 'id',
     headerName: 'id',
-    // cellRenderer: LinkRenderer,
-  },
-  {
-    field: 'version',
-    headerName: 'version',
   },
   {
     field: 'createdAt',
