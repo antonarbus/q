@@ -3,7 +3,7 @@ import { createSelector } from '@reduxjs/toolkit'
 import type { Item } from '../../types'
 
 export const selectItemsShape = createSelector(
-  [(state: RootState): Item[] => state.quotation],
+  [(state: RootState): Item[] => state.quotation.items],
   (items) => items,
   {
     memoizeOptions: {

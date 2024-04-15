@@ -6,8 +6,10 @@ type Props = {
 }
 
 export const getItemTextHtmlFromStore = ({ itemIndex }: Props): string => {
-  const item = getState().quotation[itemIndex]
+  const item = getState().quotation.items[itemIndex]
+
   if (!item) return ''
   if (item.type !== itemKey.text) return ''
+
   return item.text.html
 }

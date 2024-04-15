@@ -7,7 +7,7 @@ type Props = {
 }
 
 export const getTotalPriceHtmlFromStore = ({ itemIndex }: Props): string => {
-  const priceItem = getState().quotation[itemIndex]
+  const priceItem = getState().quotation.items[itemIndex]
   if (priceItem?.type !== itemKey.price) return ''
   const html = priceItem.price.html
   return html

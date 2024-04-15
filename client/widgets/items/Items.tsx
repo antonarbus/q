@@ -9,7 +9,7 @@ import { TotalPriceItem } from './price/PriceItem'
 import { TextItem } from './text/TextItem'
 
 export const Items = (): ReactNode => {
-  const items = useSelectorTyped(state => state.quotation, itemsShapeEqualityFn)
+  const items = useSelectorTyped(state => state.quotation.items, itemsShapeEqualityFn)
 
   if (items.length === 0) return null
 

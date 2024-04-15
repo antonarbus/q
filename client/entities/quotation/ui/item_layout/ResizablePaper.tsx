@@ -25,7 +25,7 @@ export const ResizablePaper = ({
   minWidth,
 }: Props): JSX.Element => {
   const { itemIndex } = useItem()
-  const width = useSelectorTyped(state => state.quotation[itemIndex]?.width)
+  const width = useSelectorTyped(state => state.quotation.items[itemIndex]?.width)
   const isWidthSetManually = width !== undefined
   const isAutoWidth = !isWidthSetManually || disableResize || autoWidth
 
