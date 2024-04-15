@@ -1,2 +1,2 @@
-export { useDisableNavItemsOnQuotationsOpen } from './useDisableNavItemsOnQuotationsOpen'
+export { useNavItemsOnQuotationsOpen } from './useNavItemsOnQuotationsOpen'
 export { useDisableLoadingOverlayWhenQuotationsAreFetched } from './useDisableLoadingOverlayWhenQuotationsAreFetched'

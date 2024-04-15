@@ -33,7 +33,10 @@ export function useLoadQuotation(): void {
         ],
       }))
 
-      setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 2000)
+      dispatch(navSlice.actions.removeUnderlineFromTopNav())
+      dispatch(navSlice.actions.underlineNavItem({ navItemIdKey: navItemId.new }))
+
+      setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 1000)
     }
   }, [reRenderQuotationSignal.value])
 
@@ -43,6 +46,8 @@ export function useLoadQuotation(): void {
       if (didSavedNewQuotation) return
       quotationSignal.value = { email: '', id: '' }
       dispatch(itemsSlice.actions.loadItemsReducer({ items: [] }))
+
+      dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
       getQuotation({ id })
     }
