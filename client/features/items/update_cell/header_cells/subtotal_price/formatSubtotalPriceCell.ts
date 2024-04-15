@@ -1,6 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { roundTo } from 'round-to'
-import { getBoqItemFromStore, itemsSlice } from '@entities/quotation'
+import { getBoqItemFromStore, quotationSlice } from '@entities/quotation'
 import { type FroalaEditorRef } from '@shared/types'
 import { getStringWithNewFormattedNumber } from '@shared/utils'
 
@@ -33,7 +33,7 @@ export const formatSubtotalPriceCell = ({
 
   if (html === newHtml) return
 
-  dispatch(itemsSlice.actions.updateSubTotalPriceReducer({
+  dispatch(quotationSlice.actions.updateSubTotalPriceReducer({
     itemIndex,
     html: newHtml,
     value: roundedValue,

@@ -3,7 +3,7 @@ import { theme } from '@lib_instances/theme'
 import type { MouseEvent } from 'react'
 import { TbCut } from 'react-icons/tb'
 import { copySlice } from '@entities/copy'
-import { isItemsFroalaSignal, itemKey, itemsSlice, saveItemHeightByIndex, selectIsLastItem, useItem } from '@entities/quotation'
+import { isItemsFroalaSignal, itemKey, quotationSlice, saveItemHeightByIndex, selectIsLastItem, useItem } from '@entities/quotation'
 import { className } from '@shared/consts/className'
 import { fixElementDimensionStyle } from '@shared/utils/fixElementDimensionStyle'
 import { cleanHtml } from '@shared/utils/itemsUtils'
@@ -44,7 +44,7 @@ export const CutItemIcon = (): JSX.Element => {
           const cleanedHtml = cleanHtml(html)
           isItemsFroalaSignal.value = false
           dispatch(copySlice.actions.addItemIntoCopyContainer({ copyItem: itemToCut, preview: cleanedHtml }))
-          dispatch(itemsSlice.actions.deleteItemReducer({ itemId: itemToCut.id }))
+          dispatch(quotationSlice.actions.deleteItemReducer({ itemId: itemToCut.id }))
           dispatch(copySlice.actions.forbidAllActions())
 
           const isCopyContainer = getState().copy.isCopyContainer

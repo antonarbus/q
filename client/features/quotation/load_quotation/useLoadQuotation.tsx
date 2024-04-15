@@ -2,7 +2,7 @@ import { router } from '@lib_instances/Router'
 import { dispatch } from '@lib_instances/store'
 import { useEffect } from 'react'
 import { useUpdateEffect } from 'react-use'
-import { defaultItems, itemsSlice, quotationSignal, useGetQuotationMutation } from '@entities/quotation'
+import { defaultItems, quotationSlice, quotationSignal, useGetQuotationMutation } from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
 import { navSlice } from '@shared/nav'
@@ -17,10 +17,10 @@ export function useLoadQuotation(): void {
     if (id === undefined || id === 'new') {
       loadingDotsOverlayTextSignal.value = 'Loading template...'
       quotationSignal.value = { email: '', id: '' }
-      dispatch(itemsSlice.actions.loadItemsReducer({ items: [] }))
+      dispatch(quotationSlice.actions.loadItemsReducer({ items: [] }))
 
       setTimeout(() => {
-        dispatch(itemsSlice.actions.loadItemsReducer({ items: defaultItems }))
+        dispatch(quotationSlice.actions.loadItemsReducer({ items: defaultItems }))
         quotationSignal.value = { id: 'new', email: '' }
       }, 200)
 
@@ -45,7 +45,7 @@ export function useLoadQuotation(): void {
       const didSavedNewQuotation = quotationSignal.peek().id === id
       if (didSavedNewQuotation) return
       quotationSignal.value = { email: '', id: '' }
-      dispatch(itemsSlice.actions.loadItemsReducer({ items: [] }))
+      dispatch(quotationSlice.actions.loadItemsReducer({ items: [] }))
 
       dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
@@ -65,7 +65,7 @@ export function useLoadQuotation(): void {
 
     if (items === undefined || quotation === undefined) return
 
-    dispatch(itemsSlice.actions.loadItemsReducer({ items }))
+    dispatch(quotationSlice.actions.loadItemsReducer({ items }))
 
     if (data.message === 'found') {
       quotationSignal.value = quotation

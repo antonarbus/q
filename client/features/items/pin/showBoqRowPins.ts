@@ -1,5 +1,5 @@
 import { dispatch } from '@lib_instances/store'
-import { boqRowCellKey, getBoqRowFromStore, itemsSlice } from '@entities/quotation'
+import { boqRowCellKey, getBoqRowFromStore, quotationSlice } from '@entities/quotation'
 
 type Props = {
   itemIndex: number
@@ -13,7 +13,7 @@ export const showBoqRowPins = ({ itemIndex, rowIndex }: Props): void => {
   const isItemPricePinShown = boqRow.itemPrice.pin.isShown
 
   if (!isItemPricePinShown) {
-    dispatch(itemsSlice.actions.showBoqRowCellPinReducer({
+    dispatch(quotationSlice.actions.showBoqRowCellPinReducer({
       itemIndex,
       rowIndex,
       boqRowCellKey: boqRowCellKey.itemPrice,
@@ -23,7 +23,7 @@ export const showBoqRowPins = ({ itemIndex, rowIndex }: Props): void => {
   const isQtyPinShown = boqRow.qty.pin.isShown
 
   if (!isQtyPinShown) {
-    dispatch(itemsSlice.actions.showBoqRowCellPinReducer({
+    dispatch(quotationSlice.actions.showBoqRowCellPinReducer({
       itemIndex,
       rowIndex,
       boqRowCellKey: boqRowCellKey.qty,

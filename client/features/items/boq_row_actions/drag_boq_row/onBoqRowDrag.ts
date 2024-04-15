@@ -1,6 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { arrayMoveImmutable } from 'array-move'
-import { getBoqRowsFromStore, itemsSlice } from '@entities/quotation'
+import { getBoqRowsFromStore, quotationSlice } from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 
@@ -12,11 +12,11 @@ type Props = {
 
 const onBoqRowDragStart = ({ itemIndex }: Pick<Props, 'itemIndex'>): void => {
   document.body.style.cursor = 'move'
-  dispatch(itemsSlice.actions.disableFroalaReducer({ itemIndex }))
+  dispatch(quotationSlice.actions.disableFroalaReducer({ itemIndex }))
 }
 
 const onBoqRowDragEnd = ({ oldIndex, newIndex, itemIndex }: Props): void => {
-  dispatch(itemsSlice.actions.enableFroalaReducer({ itemIndex }))
+  dispatch(quotationSlice.actions.enableFroalaReducer({ itemIndex }))
 
   document.body.style.removeProperty('cursor')
 
@@ -24,7 +24,7 @@ const onBoqRowDragEnd = ({ oldIndex, newIndex, itemIndex }: Props): void => {
     const boqRows = getBoqRowsFromStore({ itemIndex })
     if (boqRows === undefined) return
     const reOrderedBoqRows = arrayMoveImmutable(boqRows, oldIndex, newIndex)
-    dispatch(itemsSlice.actions.reOrderBoqRowsReducer({ reOrderedBoqRows, itemIndex }))
+    dispatch(quotationSlice.actions.reOrderBoqRowsReducer({ reOrderedBoqRows, itemIndex }))
     dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
   }
 }

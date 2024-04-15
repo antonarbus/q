@@ -2,7 +2,7 @@ import { dispatch } from '@lib_instances/store'
 import { getNumberFromString, getTextContentFromHtml } from '@shared/utils'
 import type { BoqRowCellKey } from '../../types'
 import { getBoqRowFromStore } from '../getters/getBoqRowFromStore'
-import { itemsSlice } from '../itemsSlice'
+import { quotationSlice } from '../quotationSlice'
 
 type Props = {
   html: string
@@ -43,7 +43,7 @@ export const updateBoqRowCellAtStore = ({
     string: cellTextContent,
   })
 
-  dispatch(itemsSlice.actions.updateBoqCellReducer({
+  dispatch(quotationSlice.actions.updateBoqCellReducer({
     itemIndex,
     rowIndex,
     html,

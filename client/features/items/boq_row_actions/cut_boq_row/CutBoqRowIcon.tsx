@@ -3,7 +3,7 @@ import { theme } from '@lib_instances/theme'
 import type { MouseEvent } from 'react'
 import { TbCut } from 'react-icons/tb'
 import { copySlice } from '@entities/copy'
-import { getBoqRowFromStore, isItemsFroalaSignal, itemsSlice, selectIsLastBoqRow, useItem, useRow } from '@entities/quotation'
+import { getBoqRowFromStore, isItemsFroalaSignal, quotationSlice, selectIsLastBoqRow, useItem, useRow } from '@entities/quotation'
 import { className } from '@shared/consts/className'
 import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
@@ -36,7 +36,7 @@ export const CutBoqRowIcon = (): JSX.Element => {
 
         isItemsFroalaSignal.value = false
 
-        dispatch(itemsSlice.actions.updateBoqRowHeightAndWidthReducer({
+        dispatch(quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
           itemIndex,
           rowIndex,
           height: boqRowElement.clientHeight,
@@ -57,7 +57,7 @@ export const CutBoqRowIcon = (): JSX.Element => {
           dispatch(copySlice.actions.showCopyContainer())
         }
 
-        dispatch(itemsSlice.actions.deleteBoqRowReducer({ itemIndex, rowIndex }))
+        dispatch(quotationSlice.actions.deleteBoqRowReducer({ itemIndex, rowIndex }))
         dispatch(copySlice.actions.forbidAllActions())
 
         setTimeout(() => {

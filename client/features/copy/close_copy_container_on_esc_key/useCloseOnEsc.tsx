@@ -1,13 +1,13 @@
 import { dispatch } from '@lib_instances/store'
 import { useEffectOnce } from 'react-use'
 import { copySlice } from '@entities/copy'
-import { isItemsFroalaSignal, itemsSlice } from '@entities/quotation'
+import { isItemsFroalaSignal, quotationSlice } from '@entities/quotation'
 
 export const useExitCopyOnEsc = (): void => {
   const closeOnEsc = (e: KeyboardEvent): void => {
     if (e.key !== 'Escape') return
     dispatch(copySlice.actions.hideCopyContainer())
-    dispatch(itemsSlice.actions.removePasteItemReducer())
+    dispatch(quotationSlice.actions.removePasteItemReducer())
     setTimeout(() => {
       isItemsFroalaSignal.value = true
     }, 500)
