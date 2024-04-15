@@ -1,5 +1,5 @@
 import { dispatch } from '@lib_instances/store'
-import { boqRowCellKey, getBoqCellFromStore, itemsSlice } from '@entities/quotation'
+import { boqRowCellKey, getBoqCellFromStore, quotationSlice } from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 
@@ -14,6 +14,6 @@ export const pinBoqRowQtyCell = ({ itemIndex, rowIndex }: Props): void => {
 
   if (isPinned) return
 
-  dispatch(itemsSlice.actions.pinQtyReducer({ itemIndex, rowIndex }))
+  dispatch(quotationSlice.actions.pinQtyReducer({ itemIndex, rowIndex }))
   dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
 }

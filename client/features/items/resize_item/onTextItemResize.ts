@@ -1,5 +1,5 @@
 import { dispatch, getState } from '@lib_instances/store'
-import { fixItemImagesHeight, itemsSlice, unfixItemImagesHeight } from '@entities/quotation'
+import { fixItemImagesHeight, quotationSlice, unfixItemImagesHeight } from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
@@ -13,17 +13,17 @@ export const onTextItemResize: OnItemResize = ({ itemIndex, e, direction, elemen
   const width = parseInt(elementRef.style.width)
   const prevItemWidth = getState().items[itemIndex]?.width
   if (width === prevItemWidth) return
-  dispatch(itemsSlice.actions.updateItemWidthReducer({ itemIndex, width }))
+  dispatch(quotationSlice.actions.updateItemWidthReducer({ itemIndex, width }))
 }
 
 export const onTextItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction, elementRef, delta }) => {
   fixItemImagesHeight()
   const width = parseInt(elementRef.style.width)
   const prevItemWidth = getState().items[itemIndex]?.width
-  dispatch(itemsSlice.actions.enableFroalaReducer({ itemIndex }))
+  dispatch(quotationSlice.actions.enableFroalaReducer({ itemIndex }))
 
   if (width === prevItemWidth) return
 
-  dispatch(itemsSlice.actions.updateItemWidthReducer({ itemIndex, width }))
+  dispatch(quotationSlice.actions.updateItemWidthReducer({ itemIndex, width }))
   dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
 }

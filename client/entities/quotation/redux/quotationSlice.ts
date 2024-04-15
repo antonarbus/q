@@ -37,8 +37,8 @@ import { updateSubTotalPriceReducer } from './reducers/updateSubTotalPriceReduce
 
 const initialState: Item[] = []
 
-export const itemsSlice = createSlice({
-  name: 'items',
+export const quotationSlice = createSlice({
+  name: 'quotation',
   initialState,
   reducers: {
     loadItemsReducer,
@@ -78,4 +78,4 @@ export const itemsSlice = createSlice({
   },
 })
 
-export const itemsReducer = itemsSlice.reducer
+export const quotationReducer = quotationSlice.reducer

@@ -3,7 +3,7 @@ import { type FroalaEditorRef } from '@shared/types'
 import { getNumberFromString, getTextContentFromHtml } from '@shared/utils'
 import { type BoqHeaderKey } from '../../types'
 import { getBoqItemFromStore } from '../getters/getBoqItemFromStore'
-import { itemsSlice } from '../itemsSlice'
+import { quotationSlice } from '../quotationSlice'
 
 type Props = {
   editorRef: FroalaEditorRef
@@ -36,7 +36,7 @@ export const updateBoqHeaderCellAtStore = ({
     string: cellTextContent,
   })
 
-  dispatch(itemsSlice.actions.updateBoqHeaderTextReducer({
+  dispatch(quotationSlice.actions.updateBoqHeaderTextReducer({
     itemIndex,
     html,
     value: cellValueFromHtml,

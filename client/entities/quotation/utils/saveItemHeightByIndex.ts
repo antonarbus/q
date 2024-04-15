@@ -1,6 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { className } from '@shared/consts/className'
-import { itemsSlice } from '../redux/itemsSlice'
+import { quotationSlice } from '../redux/quotationSlice'
 
 type Props = {
   itemIndex: number
@@ -11,5 +11,5 @@ export const saveItemHeightByIndex = ({ itemIndex }: Props): void => {
   const item = items[itemIndex]
   if (!item) return
   const height = item.clientHeight
-  dispatch(itemsSlice.actions.updateItemHeightReducer({ itemIndex, height }))
+  dispatch(quotationSlice.actions.updateItemHeightReducer({ itemIndex, height }))
 }

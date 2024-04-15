@@ -1,7 +1,7 @@
 import { type Action, type ThunkAction, configureStore } from '@reduxjs/toolkit'
 import { type TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { copyReducer } from '@entities/copy/copySlice'
-import { itemsReducer } from '@entities/quotation/redux/itemsSlice'
+import { quotationReducer } from '@entities/quotation/redux/quotationSlice'
 import { userReducer } from '@entities/user/redux/userSlice'
 import { navReducer } from '@shared/nav/navSlice'
 
@@ -9,7 +9,7 @@ const store = configureStore({
   reducer: {
     user: userReducer,
     nav: navReducer,
-    items: itemsReducer,
+    items: quotationReducer,
     copy: copyReducer,
   },
   middleware: (defaultMiddleware) => defaultMiddleware({ serializableCheck: false }), // we have not serializable components and functions in nav structure

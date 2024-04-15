@@ -1,6 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { type MutableRefObject } from 'react'
-import { itemsSlice } from '@entities/quotation'
+import { quotationSlice } from '@entities/quotation'
 import { className } from '@shared/consts/className'
 
 type Props = {
@@ -16,7 +16,7 @@ export const showHideBoqPricePins = ({
   hidePinsClickHandlerRef,
   isInitClickRef,
 }: Props): void => {
-  dispatch(itemsSlice.actions.showBoqPriceCellPinsReducer({ itemIndex }))
+  dispatch(quotationSlice.actions.showBoqPriceCellPinsReducer({ itemIndex }))
 
   const clickHandler = (e: MouseEvent): void => {
     if (isInitClickRef.current) {
@@ -33,7 +33,7 @@ export const showHideBoqPricePins = ({
       document.removeEventListener('click', hidePinsClickHandlerRef.current)
     }
 
-    dispatch(itemsSlice.actions.hideBoqPriceCellPinsReducer({ itemIndex }))
+    dispatch(quotationSlice.actions.hideBoqPriceCellPinsReducer({ itemIndex }))
     document.removeEventListener('click', hidePinsClickHandlerRef.current)
     isInitClickRef.current = true
   }

@@ -1,5 +1,5 @@
 import { dispatch, getState } from '@lib_instances/store'
-import { type BoqItem, itemsSlice, getBoqColumnFromStore, boqColumnKey, unfixItemImagesHeight, fixItemImagesHeight } from '@entities/quotation'
+import { type BoqItem, quotationSlice, getBoqColumnFromStore, boqColumnKey, unfixItemImagesHeight, fixItemImagesHeight } from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
@@ -8,8 +8,8 @@ let initDescriptionColumnWidth = 0 // can be global var for different boqItems a
 
 export const onBoqItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, elementRef: itemElement }) => {
   unfixItemImagesHeight()
-  dispatch(itemsSlice.actions.disableFroalaReducer({ itemIndex }))
-  dispatch(itemsSlice.actions.hideBoqItemPinsReducer({ itemIndex }))
+  dispatch(quotationSlice.actions.disableFroalaReducer({ itemIndex }))
+  dispatch(quotationSlice.actions.hideBoqItemPinsReducer({ itemIndex }))
 
   initDescriptionColumnWidth = (getState().items[itemIndex] as BoqItem).boq.column.description.width ?? 0
 }
@@ -22,7 +22,7 @@ export const onBoqItemResize: OnItemResize = ({ itemIndex, e, direction, element
   const didWidthChange = descriptionColumn.width !== width
   if (!didWidthChange) return
 
-  dispatch(itemsSlice.actions.updateColWidthReducer({ itemIndex, boqColumnKey: boqColumnKey.description, width }))
+  dispatch(quotationSlice.actions.updateColWidthReducer({ itemIndex, boqColumnKey: boqColumnKey.description, width }))
 }
 
 export const onBoqItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction, elementRef: itemElement, delta }) => {
@@ -31,14 +31,14 @@ export const onBoqItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction,
   if (!(descriptionHeaderElement instanceof HTMLElement)) return
 
   const width = descriptionHeaderElement.clientWidth
-  dispatch(itemsSlice.actions.updateColWidthReducer({ itemIndex, boqColumnKey: boqColumnKey.description, width }))
-  dispatch(itemsSlice.actions.enableFroalaReducer({ itemIndex }))
+  dispatch(quotationSlice.actions.updateColWidthReducer({ itemIndex, boqColumnKey: boqColumnKey.description, width }))
+  dispatch(quotationSlice.actions.enableFroalaReducer({ itemIndex }))
 
   const itemWidth = itemElement.clientWidth
   const prevItemWidth = getState().items[itemIndex]?.width
 
   if (itemWidth !== prevItemWidth) {
-    dispatch(itemsSlice.actions.updateItemWidthReducer({ itemIndex, width: itemWidth }))
+    dispatch(quotationSlice.actions.updateItemWidthReducer({ itemIndex, width: itemWidth }))
   }
 
   dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))

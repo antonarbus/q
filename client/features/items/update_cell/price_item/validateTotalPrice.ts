@@ -1,5 +1,5 @@
 import { dispatch, getState } from '@lib_instances/store'
-import { itemKey, itemsSlice, getTotalPriceAbove } from '@entities/quotation'
+import { itemKey, quotationSlice, getTotalPriceAbove } from '@entities/quotation'
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
 import { type FroalaEditorRef } from '@shared/types'
 import { getNumberFromString, getStringWithNewFormattedNumber, getTextContentFromHtml } from '@shared/utils'
@@ -33,7 +33,7 @@ export const validateTotalPrice = ({
     newNumber: price,
   })
 
-  dispatch(itemsSlice.actions.updatePriceReducer({ itemIndex, html: updatedHtml, value: price }))
+  dispatch(quotationSlice.actions.updatePriceReducer({ itemIndex, html: updatedHtml, value: price }))
 
   void updateNumberAtHtmlIncrementally({
     oldNumber: priceItem.price.value,

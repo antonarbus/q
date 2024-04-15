@@ -4,7 +4,7 @@ import { navSlice } from '@shared/nav'
 import { type FroalaEditorRef } from '@shared/types'
 import type { BoqColumnKey } from '../../types'
 import { getBoqItemFromStore } from '../getters/getBoqItemFromStore'
-import { itemsSlice } from '../itemsSlice'
+import { quotationSlice } from '../quotationSlice'
 
 type Props = {
   editorRef: FroalaEditorRef
@@ -27,6 +27,6 @@ export const updateBoqColumnCellAtStore = ({
   const didTextChange = prevHtml !== html
   if (!didTextChange) return
 
-  dispatch(itemsSlice.actions.updateBoqColumnNameTextReducer({ itemIndex, html, boqColumnKey }))
+  dispatch(quotationSlice.actions.updateBoqColumnNameTextReducer({ itemIndex, html, boqColumnKey }))
   dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
 }

@@ -4,7 +4,7 @@ import { updateNumberAtHtml } from '@shared/lib/froala/updateNumberAtHtml'
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
 import { getNumberFromString, getTextContentFromHtml, getStringWithNewFormattedNumber } from '@shared/utils'
 import { getBoqItemFromStore } from '../redux/getters/getBoqItemFromStore'
-import { itemsSlice } from '../redux/itemsSlice'
+import { quotationSlice } from '../redux/quotationSlice'
 
 type Props = {
   itemIndex: number
@@ -60,7 +60,7 @@ export const updateSubTotalPriceWithValue = ({
     newNumber: value,
   })
 
-  dispatch(itemsSlice.actions.updateSubTotalPriceReducer({
+  dispatch(quotationSlice.actions.updateSubTotalPriceReducer({
     itemIndex,
     html: updatedHtml,
     value,

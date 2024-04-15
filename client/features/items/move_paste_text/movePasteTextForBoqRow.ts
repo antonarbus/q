@@ -1,7 +1,7 @@
 import { dispatch, getState } from '@lib_instances/store'
 import isEqual from 'lodash.isequal'
 import { copySlice, getPastePlace } from '@entities/copy'
-import { boqRowKey, itemKey, itemsSlice } from '@entities/quotation'
+import { boqRowKey, itemKey, quotationSlice } from '@entities/quotation'
 import { type BoqItem } from '@entities/quotation'
 import { className } from '@shared/consts/className'
 
@@ -25,7 +25,7 @@ export const movePasteTextForBoqRow = (e: MouseEvent): void => {
     }
 
     if (isBoqPasteItem) {
-      dispatch(itemsSlice.actions.removePasteItemReducer())
+      dispatch(quotationSlice.actions.removePasteItemReducer())
     }
   }
 
@@ -63,5 +63,5 @@ export const movePasteTextForBoqRow = (e: MouseEvent): void => {
 
   dispatch(copySlice.actions.updatePastePos(pastePlace))
   dispatch(copySlice.actions.showPasteText())
-  dispatch(itemsSlice.actions.insertPasteBoqRowReducer(pastePlace))
+  dispatch(quotationSlice.actions.insertPasteBoqRowReducer(pastePlace))
 }

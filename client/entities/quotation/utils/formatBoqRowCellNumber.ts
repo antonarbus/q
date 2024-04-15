@@ -3,7 +3,7 @@ import { roundTo } from 'round-to'
 import { type FroalaEditorRef } from '@shared/types'
 import { getStringWithNewFormattedNumber } from '@shared/utils'
 import { getBoqRowFromStore } from '../redux/getters/getBoqRowFromStore'
-import { itemsSlice } from '../redux/itemsSlice'
+import { quotationSlice } from '../redux/quotationSlice'
 import { type BoqRowCellKey } from '../types'
 
 type Props = {
@@ -60,7 +60,7 @@ export const formatBoqRowCellNumber = ({
     }
   }
 
-  dispatch(itemsSlice.actions.updateBoqCellReducer({
+  dispatch(quotationSlice.actions.updateBoqCellReducer({
     itemIndex,
     rowIndex,
     html: newHtml,

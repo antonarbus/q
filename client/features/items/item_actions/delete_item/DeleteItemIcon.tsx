@@ -4,7 +4,7 @@ import { theme } from '@lib_instances/theme'
 import { type MouseEvent } from 'react'
 import { RxCross2 } from 'react-icons/rx'
 import { copySlice } from '@entities/copy'
-import { isItemsFroalaSignal, itemsSlice, selectIsLastItem, useItem } from '@entities/quotation'
+import { isItemsFroalaSignal, quotationSlice, selectIsLastItem, useItem } from '@entities/quotation'
 import { className } from '@shared/consts/className'
 import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
@@ -46,7 +46,7 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
         fixElementDimensionStyle({ element: paperElement })
 
         isItemsFroalaSignal.value = false
-        dispatch(itemsSlice.actions.deleteItemReducer({ itemId: itemToDelete.id }))
+        dispatch(quotationSlice.actions.deleteItemReducer({ itemId: itemToDelete.id }))
         dispatch(copySlice.actions.forbidAllActions())
 
         setTimeout(() => {

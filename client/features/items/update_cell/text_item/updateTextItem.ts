@@ -1,5 +1,5 @@
 import { dispatch, getState } from '@lib_instances/store'
-import { itemKey, itemsSlice } from '@entities/quotation'
+import { itemKey, quotationSlice } from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 import { type FroalaEditorRef } from '@shared/types'
@@ -23,6 +23,6 @@ export const updateTextItem = ({
   const didTextChange = prevHtml !== html
   if (!didTextChange) return
 
-  dispatch(itemsSlice.actions.updateItemTextReducer({ itemIndex, html }))
+  dispatch(quotationSlice.actions.updateItemTextReducer({ itemIndex, html }))
   dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
 }

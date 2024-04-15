@@ -17,7 +17,7 @@ export { deleteQuotationsCache } from './cacheUpdaters/deleteQuotationsCache'
 export { defaultItems } from './model/defaultItems'
 
 // slice
-export { itemsSlice } from './redux/itemsSlice'
+export { quotationSlice } from './redux/quotationSlice'
 
 // selectors
 export { itemsShapeEqualityFn } from './redux/selectors/itemsShapeEqualityFn'

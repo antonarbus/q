@@ -1,6 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { className } from '@shared/consts/className'
-import { itemsSlice } from '../redux/itemsSlice'
+import { quotationSlice } from '../redux/quotationSlice'
 
 export const unfixItemImagesHeight = (): void => {
   const itemImages = document.querySelectorAll(`.${className.item} img`)
@@ -10,7 +10,7 @@ export const unfixItemImagesHeight = (): void => {
     imageElement.style.height = 'auto'
   })
 
-  dispatch(itemsSlice.actions.unfixImagesHeightReducer())
+  dispatch(quotationSlice.actions.unfixImagesHeightReducer())
 }
 
 export const fixItemImagesHeight = (): void => {
@@ -19,7 +19,7 @@ export const fixItemImagesHeight = (): void => {
   itemImages.forEach(imageElement => {
     if (!(imageElement instanceof HTMLElement)) return
     imageElement.style.height = imageElement.clientHeight + 'px'
-    dispatch(itemsSlice.actions.fixImagesHeightReducer({
+    dispatch(quotationSlice.actions.fixImagesHeightReducer({
       imageHeight: imageElement.clientHeight,
       imageId: imageElement.id,
     }))
