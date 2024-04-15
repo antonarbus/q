@@ -8,7 +8,7 @@ import { navSlice } from '@shared/nav'
 export const useUpdateSubtotalPrice = (): void => {
   const { itemIndex } = useItem()
   const { subTotalPriceEditorRef } = useBoqItem()
-  const isItemFroala = useSelectorTyped(state => state.quotation[itemIndex]?.isFroala)
+  const isItemFroala = useSelectorTyped(state => state.quotation.items[itemIndex]?.isFroala)
 
   useUpdateEffect(() => {
     if (!isItemsFroalaSignal.value) return

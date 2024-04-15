@@ -16,7 +16,7 @@ export const movePasteTextForItem = (e: MouseEvent): void => {
 
   const navElement = e.target.closest('nav')
   const isPasteTextShown = getState().copy.isPasteTextShown
-  const isPasteItem = getState().quotation.some(item => item.type === itemKey.paste)
+  const isPasteItem = getState().quotation.items.some(item => item.type === itemKey.paste)
 
   const removePasteIfNeeded = (): void => {
     if (isPasteTextShown) {
@@ -57,7 +57,7 @@ export const movePasteTextForItem = (e: MouseEvent): void => {
   const isNarrowGapUnderNav = e.clientY > 65 && e.clientY < 75
 
   if (isNarrowGapUnderNav && !isPasteTextShown) {
-    const firstItem = getState().quotation[0]
+    const firstItem = getState().quotation.items[0]
     if (!firstItem) return
     const pastePlace: CopyPlace = { pastePos: 'top', itemId: firstItem.id }
     dispatch(copySlice.actions.updatePastePos(pastePlace))

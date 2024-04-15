@@ -31,7 +31,7 @@ export const Item = ({
   rightItemActionButtons,
 }: Props): JSX.Element => {
   const { itemIndex } = useItem()
-  const item = getState().quotation[itemIndex]
+  const item = getState().quotation.items[itemIndex]
   const isItemSortDisabled = useIsItemSortDisabled()
 
   return (

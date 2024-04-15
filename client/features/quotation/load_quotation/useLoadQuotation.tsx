@@ -17,10 +17,15 @@ export function useLoadQuotation(): void {
     if (id === undefined || id === 'new') {
       loadingDotsOverlayTextSignal.value = 'Loading template...'
       quotationSignal.value = { email: '', id: '' }
-      dispatch(quotationSlice.actions.loadItemsReducer({ items: [] }))
+      dispatch(quotationSlice.actions.removeQuotationReducer())
 
       setTimeout(() => {
-        dispatch(quotationSlice.actions.loadItemsReducer({ items: defaultItems }))
+        dispatch(quotationSlice.actions.loadQuotationReducer({
+          quotation: {
+            info: 'info',
+            items: defaultItems,
+          },
+        }))
         quotationSignal.value = { id: 'new', email: '' }
       }, 200)
 
@@ -43,9 +48,17 @@ export function useLoadQuotation(): void {
   useEffect(() => {
     if (id !== undefined && id !== 'new') {
       const didSavedNewQuotation = quotationSignal.peek().id === id
+
       if (didSavedNewQuotation) return
+
       quotationSignal.value = { email: '', id: '' }
-      dispatch(quotationSlice.actions.loadItemsReducer({ items: [] }))
+
+      dispatch(quotationSlice.actions.loadQuotationReducer({
+        quotation: {
+          info: 'info',
+          items: [],
+        },
+      }))
 
       dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
@@ -65,7 +78,12 @@ export function useLoadQuotation(): void {
 
     if (items === undefined || quotation === undefined) return
 
-    dispatch(quotationSlice.actions.loadItemsReducer({ items }))
+    dispatch(quotationSlice.actions.loadQuotationReducer({
+      quotation: {
+        info: 'info',
+        items,
+      },
+    }))
 
     if (data.message === 'found') {
       quotationSignal.value = quotation

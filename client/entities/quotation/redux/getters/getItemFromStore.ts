@@ -6,7 +6,9 @@ type Props = {
 }
 
 export const getItemFromStore = ({ itemIndex }: Props): Item | undefined => {
-  const item = getState().quotation[itemIndex]
+  const item = getState().quotation.items[itemIndex]
+
   if (item === undefined) return
+
   return item
 }

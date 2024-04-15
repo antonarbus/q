@@ -6,7 +6,7 @@ type Props = {
 }
 
 export const getNumberOfBoqItemsAbove = ({ itemIndex }: Props): number => {
-  const numberOfBoqItemsAbove = getState().quotation.reduce((accumulator, item, index) => {
+  const numberOfBoqItemsAbove = getState().quotation.items.reduce((accumulator, item, index) => {
     if (item.type === itemKey.boq && index < itemIndex) {
       return accumulator + 1
     }

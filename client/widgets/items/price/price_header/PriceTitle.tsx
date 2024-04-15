@@ -13,7 +13,7 @@ export const PriceTitle = (): JSX.Element => {
       editorRef={editorRef}
       placeholder='Total price...'
       htmlGetter={() => {
-        const priceItem = getState().quotation[itemIndex]
+        const priceItem = getState().quotation.items[itemIndex]
         if (priceItem?.type !== itemKey.price) return ''
         const titleHtml = priceItem.title.html
         return titleHtml

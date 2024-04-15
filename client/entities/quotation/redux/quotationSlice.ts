@@ -10,7 +10,7 @@ import { hideBoqPriceCellPinsReducer } from './reducers/hideBoqPriceCellPinsRedu
 import { hideBoqRowCellPinReducer } from './reducers/hideBoqRowCellPinReducer'
 import { insertPasteBoqRowReducer } from './reducers/insertPasteBoqRowReducer'
 import { insertPasteItemReducer } from './reducers/insertPasteItemReducer'
-import { loadItemsReducer } from './reducers/loadItemsReducer'
+import { loadQuotationReducer } from './reducers/loadItemsReducer'
 import { pasteItemReducer } from './reducers/pasteItemReducer'
 import { pinItemPriceReducer } from './reducers/pinItemPriceReducer'
 import { pinPriceReducer } from './reducers/pinPriceReducer'
@@ -44,7 +44,7 @@ export const quotationSlice = createSlice({
   name: 'quotation',
   initialState,
   reducers: {
-    loadItemsReducer,
+    loadQuotationReducer,
     removeQuotationReducer,
     deleteBoqRowReducer,
     deleteItemReducer,

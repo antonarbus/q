@@ -11,7 +11,7 @@ export const onTextItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, el
 
 export const onTextItemResize: OnItemResize = ({ itemIndex, e, direction, elementRef, delta }) => {
   const width = parseInt(elementRef.style.width)
-  const prevItemWidth = getState().quotation[itemIndex]?.width
+  const prevItemWidth = getState().quotation.items[itemIndex]?.width
   if (width === prevItemWidth) return
   dispatch(quotationSlice.actions.updateItemWidthReducer({ itemIndex, width }))
 }
@@ -19,7 +19,7 @@ export const onTextItemResize: OnItemResize = ({ itemIndex, e, direction, elemen
 export const onTextItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction, elementRef, delta }) => {
   fixItemImagesHeight()
   const width = parseInt(elementRef.style.width)
-  const prevItemWidth = getState().quotation[itemIndex]?.width
+  const prevItemWidth = getState().quotation.items[itemIndex]?.width
   dispatch(quotationSlice.actions.enableFroalaReducer({ itemIndex }))
 
   if (width === prevItemWidth) return

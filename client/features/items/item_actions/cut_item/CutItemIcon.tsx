@@ -26,7 +26,7 @@ export const CutItemIcon = (): JSX.Element => {
 
           saveItemHeightByIndex({ itemIndex })
 
-          const itemToCut = getState().quotation[itemIndex]
+          const itemToCut = getState().quotation.items[itemIndex]
           if (!itemToCut) return
           if (itemToCut.type === itemKey.paste) return
 

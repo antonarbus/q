@@ -25,7 +25,7 @@ export const CopyItemIcon = (): JSX.Element => {
 
         saveItemHeightByIndex({ itemIndex })
 
-        const itemToCopy = getState().quotation[itemIndex]
+        const itemToCopy = getState().quotation.items[itemIndex]
         if (!itemToCopy) return
         if (itemToCopy.type === itemKey.paste) return
 

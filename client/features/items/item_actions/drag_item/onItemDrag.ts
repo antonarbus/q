@@ -19,7 +19,7 @@ const onItemDragEnd = ({ oldIndex, newIndex }: Props): void => {
   document.body.style.removeProperty('cursor')
 
   if (oldIndex !== newIndex) {
-    const { quotation: items } = getState()
+    const items = getState().quotation.items
     const reOrderedItems = arrayMoveImmutable(items, oldIndex, newIndex)
     dispatch(quotationSlice.actions.reOrderItemsReducer({ reOrderedItems }))
     dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
