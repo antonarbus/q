@@ -48,9 +48,10 @@ export const SaveQuotation = (): JSX.Element => {
 
       notify({ msg: 'Saved', type: 'success', position: 'bottom-center' })
       showSuccessNavIcon({ navMenuItemIdKey: navItemId.save })
-      dispatch(navSlice.actions.disableNavItems({ navItemIdKeys: [navItemId.save] }))
       quotationSignal.value = { ...quotationSignal.value, ...data.document }
       updateOrAppendIntoQuotationsCache({ quotation: quotationSignal.value })
+      dispatch(navSlice.actions.disableNavItems({ navItemIdKeys: [navItemId.save] }))
+      dispatch(navSlice.actions.removeUnderlineFromTopNav())
     }
   }, [isSuccess])
 

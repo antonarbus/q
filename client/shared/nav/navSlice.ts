@@ -238,6 +238,33 @@ export const navSlice = createSlice({
         })
       })
     },
+    removeUnderlineFromTopNav: (state) => {
+      const topLevelNavMenu = state.navStructure[0]
+      if (!topLevelNavMenu) return
+
+      const topNavItemsIds = topLevelNavMenu.menuItems?.map((item) => item.id) as (NavItemIdKey[])
+
+      topNavItemsIds?.forEach((id) => {
+        setMenuItemPropValue({
+          menu: state.navStructure,
+          navItemIdKey: id,
+          prop: 'isActive',
+          value: false,
+        })
+      })
+    },
+    underlineNavItem: (state, action: PayloadAction<{
+      navItemIdKey: NavItemIdKey
+    }>) => {
+      const { navItemIdKey } = action.payload
+
+      setMenuItemPropValue({
+        menu: state.navStructure,
+        navItemIdKey,
+        prop: 'isActive',
+        value: true,
+      })
+    },
   },
 })
 

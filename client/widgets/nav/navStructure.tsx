@@ -31,6 +31,7 @@ export const navStructure: MenuItemType[] = [
           createNewQuotation()
         },
         link: route.new,
+        isActive: true,
       },
       {
         id: navItemId.save,

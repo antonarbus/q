@@ -63,6 +63,7 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
   const isSuccess = navItem?.isSuccess
   const isError = navItem?.isError
   const disabled = Boolean(navItem?.disabled)
+  const isActive = navItem?.isActive
 
   const fixedLink = (location.pathname + '/' + link).replace('.', '').replace('//', '/').replace('//', '/')
   const to = link?.includes('.') ? fixedLink : link
@@ -100,6 +101,7 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
             margin-right: 5px;
             color: ${disabled ? '#585858' : theme.colors.greyFont};
             white-space: nowrap;
+            text-decoration: ${isActive ? 'underline' : 'none'};
           }
 
           .arrow-for-nested-menu {

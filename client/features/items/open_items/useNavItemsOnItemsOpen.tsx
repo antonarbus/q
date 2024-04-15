@@ -3,7 +3,7 @@ import { useEffectOnce, useUnmount } from 'react-use'
 import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 
-export const useDisableNavItemsOnItemsOpen = (): void => {
+export const useNavItemsOnItemsOpen = (): void => {
   useEffectOnce(() => {
     dispatch(navSlice.actions.disableNavItems({
       navItemIdKeys: [
@@ -14,6 +14,9 @@ export const useDisableNavItemsOnItemsOpen = (): void => {
         navItemId.insert,
       ],
     }))
+
+    dispatch(navSlice.actions.removeUnderlineFromTopNav())
+    dispatch(navSlice.actions.underlineNavItem({ navItemIdKey: navItemId.items }))
   })
 
   useUnmount(() => {

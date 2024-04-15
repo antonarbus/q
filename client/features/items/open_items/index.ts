@@ -1,2 +1,2 @@
-export { useDisableNavItemsOnItemsOpen } from './useDisableNavItemsOnItemsOpen'
+export { useNavItemsOnItemsOpen } from './useNavItemsOnItemsOpen'
 export { useDisableLoadingOverlayWhenItemsAreFetched } from './useDisableLoadingOverlayWhenItemsAreFetched'
