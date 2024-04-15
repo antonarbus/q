@@ -6,7 +6,7 @@ import type { OnItemResizeStop } from '@shared/types'
 
 export const onPriceItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction, elementRef, delta }) => {
   const width = parseInt(elementRef.style.width)
-  const prevItemWidth = getState().items[itemIndex]?.width
+  const prevItemWidth = getState().quotation[itemIndex]?.width
 
   if (width === prevItemWidth) return
 

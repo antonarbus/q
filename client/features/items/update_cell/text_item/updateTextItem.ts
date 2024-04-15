@@ -15,7 +15,7 @@ export const updateTextItem = ({
 }: Props): void => {
   if (editorRef.current === null) return
 
-  const item = getState().items[itemIndex]
+  const item = getState().quotation[itemIndex]
   if (item?.type !== itemKey.text) return
 
   const prevHtml = item.text.html

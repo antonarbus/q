@@ -9,7 +9,7 @@ const store = configureStore({
   reducer: {
     user: userReducer,
     nav: navReducer,
-    items: quotationReducer,
+    quotation: quotationReducer,
     copy: copyReducer,
   },
   middleware: (defaultMiddleware) => defaultMiddleware({ serializableCheck: false }), // we have not serializable components and functions in nav structure

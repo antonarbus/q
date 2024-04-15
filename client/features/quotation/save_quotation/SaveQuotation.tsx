@@ -25,7 +25,7 @@ export const SaveQuotation = (): JSX.Element => {
     }
 
     saveQuotation({
-      items: getState().items,
+      items: getState().quotation,
       quotation: quotationSignal.peek(),
     })
   })

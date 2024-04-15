@@ -31,7 +31,7 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
       onClick={(e: MouseEvent): void => {
         if (disabled) return
 
-        const itemToDelete = getState().items[itemIndex]
+        const itemToDelete = getState().quotation[itemIndex]
 
         if (!itemToDelete) return
 

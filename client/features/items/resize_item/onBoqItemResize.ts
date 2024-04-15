@@ -11,7 +11,7 @@ export const onBoqItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, ele
   dispatch(quotationSlice.actions.disableFroalaReducer({ itemIndex }))
   dispatch(quotationSlice.actions.hideBoqItemPinsReducer({ itemIndex }))
 
-  initDescriptionColumnWidth = (getState().items[itemIndex] as BoqItem).boq.column.description.width ?? 0
+  initDescriptionColumnWidth = (getState().quotation[itemIndex] as BoqItem).boq.column.description.width ?? 0
 }
 
 export const onBoqItemResize: OnItemResize = ({ itemIndex, e, direction, elementRef: itemElement, delta }) => {
@@ -35,7 +35,7 @@ export const onBoqItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction,
   dispatch(quotationSlice.actions.enableFroalaReducer({ itemIndex }))
 
   const itemWidth = itemElement.clientWidth
-  const prevItemWidth = getState().items[itemIndex]?.width
+  const prevItemWidth = getState().quotation[itemIndex]?.width
 
   if (itemWidth !== prevItemWidth) {
     dispatch(quotationSlice.actions.updateItemWidthReducer({ itemIndex, width: itemWidth }))

@@ -50,7 +50,7 @@ export const Froala = ({
   const { itemIndex } = useItem()
   const { froalaHeightRef } = useFixedHeightForAnimation({ froalaElementRef })
 
-  const isItemFroala = useSelectorTyped(state => state.items[itemIndex]?.isFroala)
+  const isItemFroala = useSelectorTyped(state => state.quotation[itemIndex]?.isFroala)
   // todo: disabled viewport observer for time being otherwise total price being out of view is not calculated and pdf produces incorrect file, maybe we do not even need it
   // const { observerRef, isInsideViewPort } = useViewPortObserver()
   const showEditableHtml = isItemsFroalaSignal.value && isItemFroala // && isInsideViewPort

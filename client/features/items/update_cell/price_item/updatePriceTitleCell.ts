@@ -15,7 +15,7 @@ export const updatePriceTitleCell = ({
 }: Props): void => {
   if (editorRef.current === null) return
 
-  const priceItem = getState().items[itemIndex]
+  const priceItem = getState().quotation[itemIndex]
   if (priceItem?.type !== itemKey.price) return
 
   const prevHtml = priceItem.title.html

@@ -7,7 +7,7 @@ type Props = {
 }
 
 export const getBoqItemFromStore = ({ itemIndex }: Props): BoqItem | undefined => {
-  const item = getState().items[itemIndex]
+  const item = getState().quotation[itemIndex]
   if (item?.type !== itemKey.boq) return
   return item
 }
