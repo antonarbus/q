@@ -4,7 +4,7 @@ import { theme } from '@lib_instances/theme'
 import { type MouseEvent } from 'react'
 import { RxCross2 } from 'react-icons/rx'
 import { copySlice } from '@entities/copy'
-import { isItemsFroalaSignal, quotationSlice, selectIsLastItem, useItem } from '@entities/quotation'
+import { isFroalaSignal, quotationSlice, selectIsLastItem, useItem } from '@entities/quotation'
 import { className } from '@shared/consts/className'
 import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
@@ -45,7 +45,7 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
         // width of animated element is changed for unknown reason, can't explain the issue, so let's fix it for animation purpose
         fixElementDimensionStyle({ element: paperElement })
 
-        isItemsFroalaSignal.value = false
+        isFroalaSignal.value = false
         dispatch(quotationSlice.actions.deleteItemReducer({ itemId: itemToDelete.id }))
         dispatch(copySlice.actions.forbidAllActions())
 
@@ -57,7 +57,7 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
 
         if (!isCopyContainer) {
           setTimeout(() => {
-            isItemsFroalaSignal.value = true
+            isFroalaSignal.value = true
             dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
           }, 1000 * theme.item.animationDuration + 500)
         }

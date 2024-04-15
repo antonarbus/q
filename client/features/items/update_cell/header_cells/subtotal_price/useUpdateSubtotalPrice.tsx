@@ -1,7 +1,7 @@
 import { dispatch, useSelectorTyped } from '@lib_instances/store'
 import { useUpdateEffect } from 'react-use'
 import { roundTo } from 'round-to'
-import { useBoqItem, useItem, getBoqRowsFromStore, type BoqRow, updateSubTotalPriceWithValue, isItemsFroalaSignal } from '@entities/quotation'
+import { useBoqItem, useItem, getBoqRowsFromStore, type BoqRow, updateSubTotalPriceWithValue, isFroalaSignal } from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 
@@ -11,7 +11,7 @@ export const useUpdateSubtotalPrice = (): void => {
   const isItemFroala = useSelectorTyped(state => state.quotation.items[itemIndex]?.isFroala)
 
   useUpdateEffect(() => {
-    if (!isItemsFroalaSignal.value) return
+    if (!isFroalaSignal.value) return
     if (!isItemFroala) return
 
     const boqRows = getBoqRowsFromStore({ itemIndex })
@@ -37,5 +37,5 @@ export const useUpdateSubtotalPrice = (): void => {
 
       dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
     })
-  }, [isItemFroala, isItemsFroalaSignal.value])
+  }, [isItemFroala, isFroalaSignal.value])
 }

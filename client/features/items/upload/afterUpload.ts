@@ -1,6 +1,5 @@
 import { getState } from '@lib_instances/store'
 import { apiUrl } from '@server/consts/apiUrl'
-import { quotationSignal } from '@entities/quotation'
 import { removeLoadingBar } from '@shared/lib/froala/removeLoadingBar'
 import { type FroalaEditor } from '@shared/types'
 import { getFileSizeInMbAsText } from '@shared/utils'
@@ -11,7 +10,7 @@ type Props = {
 }
 
 export const beforeUpload = ({ files, editor }: Props): boolean => {
-  const id = quotationSignal.peek().id
+  const id = getState().quotation.id
   const email = getState().user.email
 
   if (!email) {

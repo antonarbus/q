@@ -1,6 +1,5 @@
 // signals
-export { quotationSignal } from './signals/quotationSignal'
-export { isItemsFroalaSignal } from './signals/isItemsFroalaSignal'
+export { isFroalaSignal } from './signals/isFroalaSignal'
 
 // api
 export { useGetQuotationMutation } from './api/useGetQuotationMutation'

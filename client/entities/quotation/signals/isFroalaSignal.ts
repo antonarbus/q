@@ -1,3 +1,3 @@
 import { signal } from '@preact/signals-react'
 
-export const isItemsFroalaSignal = signal(true)
+export const isFroalaSignal = signal(true)

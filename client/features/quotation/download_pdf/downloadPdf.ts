@@ -1,5 +1,5 @@
+import { getState } from '@lib_instances/store'
 import { domToJpeg } from 'modern-screenshot'
-import { quotationSignal } from '@entities/quotation'
 import { className } from '@shared/consts/className'
 import { navItemId } from '@shared/consts/navItemId'
 import { showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@shared/nav'
@@ -45,7 +45,7 @@ export const downloadPdf = async (): Promise<void> => {
     const pdfDataUrl = URL.createObjectURL(blobImage)
     const downloadLink = document.createElement('a')
     downloadLink.href = pdfDataUrl
-    const quotationId = quotationSignal.value.id
+    const quotationId = getState().quotation.id
     downloadLink.download = `quotation - ${quotationId}.pdf`
     document.body.appendChild(downloadLink)
     downloadLink.click()

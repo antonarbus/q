@@ -2,7 +2,7 @@ import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
 import type { MouseEvent } from 'react'
 import { MdCopyAll } from 'react-icons/md'
 import { copySlice } from '@entities/copy'
-import { isItemsFroalaSignal, itemKey, saveItemHeightByIndex, useItem } from '@entities/quotation'
+import { isFroalaSignal, itemKey, saveItemHeightByIndex, useItem } from '@entities/quotation'
 import { className } from '@shared/consts/className'
 import { cleanHtml } from '@shared/utils/itemsUtils'
 
@@ -38,7 +38,7 @@ export const CopyItemIcon = (): JSX.Element => {
 
         const html = paperElement.innerHTML
         const cleanedHtml = cleanHtml(html)
-        isItemsFroalaSignal.value = false
+        isFroalaSignal.value = false
 
         dispatch(copySlice.actions.addItemIntoCopyContainer({ copyItem: itemToCopy, preview: cleanedHtml }))
         dispatch(copySlice.actions.allowToPaste())

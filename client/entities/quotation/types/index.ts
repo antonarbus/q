@@ -94,7 +94,22 @@ export type Item = BoqItem | PasteItem | TextItem | PriceItem
 export type CopyableItem = BoqItem | BoqRow | TextItem | PriceItem
 
 export type Quotation = {
-  info: string
+  id: 'new' | Record<never, never> & string
+  email?: string
+  quotationName?: string
+  createdAt?: Date
+  updatedAt?: Date
+  sharedAt?: Date
+  from?: {
+    email?: string
+    name?: string
+    company?: string
+  }
+  to?: {
+    email?: string
+    name?: string
+    company?: string
+  }
   items: Item[]
 }
 

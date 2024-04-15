@@ -4,7 +4,7 @@ import { useRef, type MouseEvent } from 'react'
 import { type FroalaEditor, type FroalaEditorRef } from '@shared/types'
 import { FroalaProvider } from '../../providers/FroalaProvider'
 import { useItem } from '../../providers/ItemProvider'
-import { isItemsFroalaSignal } from '../../signals/isItemsFroalaSignal'
+import { isFroalaSignal } from '../../signals/isFroalaSignal'
 import { EditableHtml } from './EditableHtml'
 import { placeCaretAtTheEndIfToolbarIsNotShown } from './placeCaretAtTheEndIfToolbarIsNotShown'
 import { selectTextOrCloseToolbar } from './selectTextOrCloseToolbar'
@@ -53,7 +53,7 @@ export const Froala = ({
   const isItemFroala = useSelectorTyped(state => state.quotation.items[itemIndex]?.isFroala)
   // todo: disabled viewport observer for time being otherwise total price being out of view is not calculated and pdf produces incorrect file, maybe we do not even need it
   // const { observerRef, isInsideViewPort } = useViewPortObserver()
-  const showEditableHtml = isItemsFroalaSignal.value && isItemFroala // && isInsideViewPort
+  const showEditableHtml = isFroalaSignal.value && isItemFroala // && isInsideViewPort
 
   return (
     <FroalaProvider

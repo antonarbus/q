@@ -36,7 +36,7 @@ import { updatePriceTitleReducer } from './reducers/updatePriceTitleReducer'
 import { updateSubTotalPriceReducer } from './reducers/updateSubTotalPriceReducer'
 
 const initialState: Quotation = {
-  info: 'info',
+  id: 'new',
   items: [],
 }
 
