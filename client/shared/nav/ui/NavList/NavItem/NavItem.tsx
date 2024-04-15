@@ -57,20 +57,15 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
   const isNestedMenu = !!navItem?.menuItems
   const icon = navItem?.icon
   const name = navItem?.name
-  const link = navItem?.link
+  const link = navItem?.link ?? ''
   const isFunc = Boolean(navItem?.func)
   const isLoading = navItem?.isLoading
   const isSuccess = navItem?.isSuccess
   const isError = navItem?.isError
   const disabled = Boolean(navItem?.disabled)
 
-  let to = ''
-
-  if (link?.includes('.')) {
-    to = (location.pathname + '/' + link).replace('.', '').replace('//', '/').replace('//', '/')
-  } else {
-    to = link ?? ''
-  }
+  const fixedLink = (location.pathname + '/' + link).replace('.', '').replace('//', '/').replace('//', '/')
+  const to = link?.includes('.') ? fixedLink : link
 
   return (
     <li

@@ -25,7 +25,7 @@ export const MenuItem = ({ menuItem, hoveredMenuItemIndex }: Props): JSX.Element
   const isNextMenuAvailable = !!menuItem.menuItems
   const isIcon = !!menuItem.icon
   const menuId = menuItem.id
-  const link = menuItem.link
+  const link = menuItem.link ?? ''
   const isLink = Boolean(menuItem.link)
   const shortcut = menuItem.shortcut
   const disabled = Boolean(menuItem.disabled)
@@ -33,13 +33,8 @@ export const MenuItem = ({ menuItem, hoveredMenuItemIndex }: Props): JSX.Element
   const isSuccess = menuItem?.isSuccess
   const isError = menuItem?.isError
 
-  let to = ''
-
-  if (link?.includes('.')) {
-    to = (location.pathname + '/' + link).replace('.', '').replace('//', '/').replace('//', '/')
-  } else {
-    to = link ?? ''
-  }
+  const fixedLink = (location.pathname + '/' + link).replace('.', '').replace('//', '/').replace('//', '/')
+  const to = link?.includes('.') ? fixedLink : link
 
   return (
     <MenuItemStyled
