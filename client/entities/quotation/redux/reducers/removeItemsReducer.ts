@@ -1,5 +1,8 @@
-import { type Item } from '../../types'
+import { type Quotation } from '../../types'
 
-export const removeItemsReducer = (state: Item[]): Item[] => {
-  return []
+export const removeQuotationReducer = (state: Quotation): Quotation => {
+  return {
+    info: 'info',
+    items: [],
+  }
 }

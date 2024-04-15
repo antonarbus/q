@@ -1,7 +1,9 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { Item } from '../../types'
+import type { Item, Quotation } from '../../types'
 
-export const reOrderItemsReducer = (state: Item[], action: PayloadAction<{ reOrderedItems: Item[] }>): Item[] => {
+export const reOrderItemsReducer = (state: Quotation, action: PayloadAction<{
+  reOrderedItems: Item[]
+}>): void => {
   const { reOrderedItems } = action.payload
-  return reOrderedItems
+  state.items = reOrderedItems
 }

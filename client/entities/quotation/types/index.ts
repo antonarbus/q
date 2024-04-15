@@ -93,6 +93,11 @@ export type PasteItem = {
 export type Item = BoqItem | PasteItem | TextItem | PriceItem
 export type CopyableItem = BoqItem | BoqRow | TextItem | PriceItem
 
+export type Quotation = {
+  info: string
+  items: Item[]
+}
+
 export type BoqRowEditorRefs = Array<{
   description: FroalaEditorRef
   itemPrice: FroalaEditorRef
