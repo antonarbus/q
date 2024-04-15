@@ -1,8 +1,8 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { BoqRowCellKey, Item } from '../../types'
+import type { BoqRowCellKey, Quotation } from '../../types'
 import { getBoqCellFromState } from '../getters/getBoqCellFromState'
 
-export const showBoqRowCellPinReducer = (state: Item[], action: PayloadAction<{
+export const showBoqRowCellPinReducer = (state: Quotation, action: PayloadAction<{
   itemIndex: number
   rowIndex: number
   boqRowCellKey: BoqRowCellKey

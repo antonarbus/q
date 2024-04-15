@@ -1,14 +1,14 @@
 import { boqRowKey } from '../../consts/boqRowKey'
 import { itemKey } from '../../consts/itemKey'
-import { type Item } from '../../types'
+import { type Quotation } from '../../types'
 
-export const removePasteItemReducer = (state: Item[]): void => {
-  const pasteItemIndex = state.findIndex((item) => item.type === itemKey.paste)
+export const removePasteItemReducer = (state: Quotation): void => {
+  const pasteItemIndex = state.items.findIndex((item) => item.type === itemKey.paste)
   if (pasteItemIndex >= 0) {
-    state.splice(pasteItemIndex, 1)
+    state.items.splice(pasteItemIndex, 1)
   }
 
-  state.forEach((item) => {
+  state.items.forEach((item) => {
     if (item.type !== itemKey.boq) return
     const boqRows = item.boq.rows
     const pasteBoqRowIndex = boqRows.findIndex(boqRow => boqRow.type === boqRowKey.paste)

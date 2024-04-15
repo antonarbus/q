@@ -1,14 +1,15 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { itemKey } from '../../consts/itemKey'
-import { type Item } from '../../types'
+import { type Quotation } from '../../types'
 
-export const updatePriceReducer = (state: Item[], action: PayloadAction<{
+export const updatePriceReducer = (state: Quotation, action: PayloadAction<{
   itemIndex: number
   html: string
   value: number
 }>): void => {
   const { itemIndex, html, value } = action.payload
-  const priceItem = state[itemIndex]
+  const priceItem = state.items[itemIndex]
+
   if (!priceItem) return
   if (priceItem.type !== itemKey.price) return
 

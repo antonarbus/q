@@ -1,9 +1,9 @@
-import { type Item, type BoqRow } from '../../types'
+import { type Quotation, type BoqRow } from '../../types'
 import { getBoqItemFromState } from './getBoqItemFromState'
 
 type Props = {
   itemIndex: number
-  state: Item[]
+  state: Quotation
 }
 
 export const getBoqRowsFromState = ({

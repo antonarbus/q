@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { type Item } from '../types'
+import { type Quotation } from '../types'
 import { deleteBoqRowReducer } from './reducers/deleteBoqRowReducer'
 import { deleteItemReducer } from './reducers/deleteItemReducer'
 import { disableFroalaReducer } from './reducers/disableFroalaReducer'
@@ -15,7 +15,7 @@ import { pasteItemReducer } from './reducers/pasteItemReducer'
 import { pinItemPriceReducer } from './reducers/pinItemPriceReducer'
 import { pinPriceReducer } from './reducers/pinPriceReducer'
 import { pinQtyReducer } from './reducers/pinQtyReducer'
-import { removeItemsReducer } from './reducers/removeItemsReducer'
+import { removeQuotationReducer } from './reducers/removeItemsReducer'
 import { removePasteItemReducer } from './reducers/removePasteItemReducer'
 import { reOrderBoqRowsReducer } from './reducers/reOrderBoqRowsReducer'
 import { reOrderItemsReducer } from './reducers/reOrderItemsReducer'
@@ -35,14 +35,17 @@ import { updatePriceReducer } from './reducers/updatePriceReducer'
 import { updatePriceTitleReducer } from './reducers/updatePriceTitleReducer'
 import { updateSubTotalPriceReducer } from './reducers/updateSubTotalPriceReducer'
 
-const initialState: Item[] = []
+const initialState: Quotation = {
+  info: 'info',
+  items: [],
+}
 
 export const quotationSlice = createSlice({
   name: 'quotation',
   initialState,
   reducers: {
     loadItemsReducer,
-    removeItemsReducer,
+    removeQuotationReducer,
     deleteBoqRowReducer,
     deleteItemReducer,
     disableFroalaReducer,

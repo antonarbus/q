@@ -1,6 +1,6 @@
 import { defaultItems } from '../../model/defaultItems'
-import { type Item } from '../../types'
+import { type Quotation } from '../../types'
 
-export const resetItemsToDefaultReducer = (): Item[] => {
-  return defaultItems
+export const resetItemsToDefaultReducer = (state: Quotation): void => {
+  state.items = defaultItems
 }

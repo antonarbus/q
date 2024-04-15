@@ -1,13 +1,13 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { Item } from '../../types'
+import type { Quotation } from '../../types'
 
 type Payload = {
-  items: Item[]
+  quotation: Quotation
 }
 
-type Reducer = (state: Item[], action: PayloadAction<Payload>) => Item[]
+type Reducer = (state: Quotation, action: PayloadAction<Payload>) => Quotation
 
 export const loadItemsReducer: Reducer = (state, action) => {
-  const { items } = action.payload
-  return items
+  const { quotation } = action.payload
+  return quotation
 }
