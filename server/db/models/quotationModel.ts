@@ -1,25 +1,8 @@
 import { model, Schema } from 'mongoose'
+import { type Quotation } from '@entities/quotation/types'
 import { nanoid } from '@shared/lib/nanoid'
 
-export type QuotationModelType = {
-  id: 'new' | Record<never, never> & string
-  email: string
-  quotationName?: string
-  createdAt?: Date
-  updatedAt?: Date
-  sharedAt?: Date
-  from?: {
-    email?: string
-    name?: string
-    company?: string
-  }
-  to?: {
-    email?: string
-    name?: string
-    company?: string
-  }
-  version?: number
-}
+export type QuotationModelType = Omit<Quotation, 'items'>
 
 const quotationSchema = new Schema<QuotationModelType>({
   id: {
@@ -52,11 +35,6 @@ const quotationSchema = new Schema<QuotationModelType>({
     email: String,
     name: String,
     company: String,
-  },
-  version: {
-    type: Number,
-    default: 1,
-    validate: (version: number) => version >= 0,
   },
 }, {
   timestamps: true,

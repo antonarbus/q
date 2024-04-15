@@ -1,7 +1,7 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { type MouseEvent } from 'react'
 import { copySlice } from '@entities/copy'
-import { isItemsFroalaSignal, itemKey } from '@entities/quotation'
+import { isFroalaSignal, itemKey } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 
 export const insertTextItem = (e?: MouseEvent): void => {
@@ -17,7 +17,7 @@ export const insertTextItem = (e?: MouseEvent): void => {
     },
   }
 
-  isItemsFroalaSignal.value = false
+  isFroalaSignal.value = false
 
   dispatch(copySlice.actions.addItemIntoCopyContainer({
     copyItem: itemToCopy,

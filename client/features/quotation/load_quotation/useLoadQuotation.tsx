@@ -1,8 +1,8 @@
 import { router } from '@lib_instances/Router'
-import { dispatch } from '@lib_instances/store'
+import { dispatch, getState } from '@lib_instances/store'
 import { useEffect } from 'react'
 import { useUpdateEffect } from 'react-use'
-import { defaultItems, quotationSlice, quotationSignal, useGetQuotationMutation } from '@entities/quotation'
+import { defaultItems, quotationSlice, useGetQuotationMutation } from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
 import { navSlice } from '@shared/nav'
@@ -16,26 +16,21 @@ export function useLoadQuotation(): void {
   useEffect(() => {
     if (id === undefined || id === 'new') {
       loadingDotsOverlayTextSignal.value = 'Loading template...'
-      quotationSignal.value = { email: '', id: '' }
+
       dispatch(quotationSlice.actions.removeQuotationReducer())
 
       setTimeout(() => {
+        // todo: should be just "reset quotation reducer"
         dispatch(quotationSlice.actions.loadQuotationReducer({
           quotation: {
-            info: 'info',
+            id: 'new',
             items: defaultItems,
           },
         }))
-        quotationSignal.value = { id: 'new', email: '' }
       }, 200)
 
       dispatch(navSlice.actions.enableNavItems({
-        navItemIdKeys: [
-          navItemId.save,
-          navItemId.pdf,
-          navItemId.share,
-          navItemId.insert,
-        ],
+        navItemIdKeys: [navItemId.save, navItemId.pdf, navItemId.share, navItemId.insert],
       }))
 
       dispatch(navSlice.actions.removeUnderlineFromTopNav())
@@ -47,15 +42,13 @@ export function useLoadQuotation(): void {
 
   useEffect(() => {
     if (id !== undefined && id !== 'new') {
-      const didSavedNewQuotation = quotationSignal.peek().id === id
+      const didSaveNewQuotation = getState().quotation.id === id
 
-      if (didSavedNewQuotation) return
-
-      quotationSignal.value = { email: '', id: '' }
+      if (didSaveNewQuotation) return
 
       dispatch(quotationSlice.actions.loadQuotationReducer({
         quotation: {
-          info: 'info',
+          id: 'new',
           items: [],
         },
       }))
@@ -67,37 +60,35 @@ export function useLoadQuotation(): void {
   }, [reRenderQuotationSignal.value])
 
   useUpdateEffect(() => {
-    if (!isPending) return
-    loadingDotsOverlayTextSignal.value = 'Loading...'
+    if (isPending) {
+      loadingDotsOverlayTextSignal.value = 'Loading...'
+    }
   }, [isPending])
 
   useUpdateEffect(() => {
-    if (!isSuccess) return
+    if (isSuccess) {
+      const { items, quotation } = data
 
-    const { items, quotation } = data
+      if (items === undefined || quotation === undefined) return
 
-    if (items === undefined || quotation === undefined) return
-
-    dispatch(quotationSlice.actions.loadQuotationReducer({
-      quotation: {
-        info: 'info',
-        items,
-      },
-    }))
-
-    if (data.message === 'found') {
-      quotationSignal.value = quotation
-
-      dispatch(navSlice.actions.enableNavItems({
-        navItemIdKeys: [
-          navItemId.save,
-          navItemId.pdf,
-          navItemId.share,
-          navItemId.insert,
-        ],
+      dispatch(quotationSlice.actions.loadQuotationReducer({
+        quotation: {
+          id: 'new',
+          items,
+        },
       }))
 
-      setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 1000)
+      if (data.message === 'found') {
+        dispatch(quotationSlice.actions.loadQuotationReducer({
+          quotation,
+        }))
+
+        dispatch(navSlice.actions.enableNavItems({
+          navItemIdKeys: [navItemId.save, navItemId.pdf, navItemId.share, navItemId.insert],
+        }))
+
+        setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 1000)
+      }
     }
   }, [isSuccess])
 

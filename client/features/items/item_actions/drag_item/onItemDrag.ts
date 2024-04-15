@@ -1,6 +1,6 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { arrayMoveImmutable } from 'array-move'
-import { isItemsFroalaSignal, quotationSlice } from '@entities/quotation'
+import { isFroalaSignal, quotationSlice } from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 
@@ -11,11 +11,11 @@ type Props = {
 
 const onItemDragStart = (): void => {
   document.body.style.cursor = 'move'
-  isItemsFroalaSignal.value = false
+  isFroalaSignal.value = false
 }
 
 const onItemDragEnd = ({ oldIndex, newIndex }: Props): void => {
-  isItemsFroalaSignal.value = true
+  isFroalaSignal.value = true
   document.body.style.removeProperty('cursor')
 
   if (oldIndex !== newIndex) {

@@ -2,7 +2,7 @@ import { dispatch, getState } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
 import { useEffectOnce, useUnmount } from 'react-use'
 import { copySlice } from '@entities/copy'
-import { isItemsFroalaSignal, quotationSlice } from '@entities/quotation'
+import { isFroalaSignal, quotationSlice } from '@entities/quotation'
 import { className } from '@shared/consts/className'
 import { navItemId } from '@shared/consts/navItemId'
 import { nanoid } from '@shared/lib/nanoid'
@@ -70,7 +70,7 @@ function pasteItemOnClick(): void {
     dispatch(quotationSlice.actions.removePasteItemReducer())
 
     setTimeout(() => {
-      isItemsFroalaSignal.value = true
+      isFroalaSignal.value = true
       dispatch(copySlice.actions.allowAllActions())
     }, 1000 * theme.item.animationDuration + 500)
   }

@@ -1,7 +1,7 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { useNavigate } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
-import { quotationSignal, updateOrAppendIntoQuotationsCache, useSaveQuotationMutation } from '@entities/quotation'
+import { quotationSlice, updateOrAppendIntoQuotationsCache, useSaveQuotationMutation } from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
 import { nanoid } from '@shared/lib/nanoid'
 import { navSlice, showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@shared/nav'
@@ -20,13 +20,22 @@ export const SaveQuotation = (): JSX.Element => {
       return
     }
 
-    if (quotationSignal.peek().id === 'new') {
-      quotationSignal.value = { ...quotationSignal.value, id: nanoid(5), email }
+    if (getState().quotation.id === 'new') {
+      dispatch(quotationSlice.actions.loadQuotationReducer({
+        quotation: {
+          id: nanoid(5),
+          email,
+          items: getState().quotation.items,
+        },
+      }))
     }
 
     saveQuotation({
-      items: getState().quotation.items,
-      quotation: quotationSignal.peek(),
+      quotation: {
+        id: 'xxx',
+        email,
+        items: getState().quotation.items,
+      },
     })
   })
 
@@ -39,7 +48,7 @@ export const SaveQuotation = (): JSX.Element => {
   useUpdateEffect(() => {
     if (isSuccess) {
       if (data.message === 'inserted') {
-        navigate(`/${quotationSignal.peek().id}`)
+        navigate(`/${getState().quotation.id}`)
       }
 
       if (data.message === 'saved') {
@@ -48,8 +57,8 @@ export const SaveQuotation = (): JSX.Element => {
 
       notify({ msg: 'Saved', type: 'success', position: 'bottom-center' })
       showSuccessNavIcon({ navMenuItemIdKey: navItemId.save })
-      quotationSignal.value = { ...quotationSignal.value, ...data.document }
-      updateOrAppendIntoQuotationsCache({ quotation: quotationSignal.value })
+      // quotationSignal.value = { ...quotationSignal.value, ...data.document }
+      // updateOrAppendIntoQuotationsCache({ quotation: quotationSignal.value })
       dispatch(navSlice.actions.disableNavItems({ navItemIdKeys: [navItemId.save] }))
       dispatch(navSlice.actions.removeUnderlineFromTopNav())
     }
