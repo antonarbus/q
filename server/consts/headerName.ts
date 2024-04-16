@@ -1,4 +1,4 @@
 export const headerName = {
   accessJwtToken: 'access-jwt-token',
-  email: 'email',
+  email: 'email', // todo: not in use
 } as const
