@@ -1,21 +1,20 @@
-import { QuotationModel, type QuotationModelType } from '@server/db/models/quotationModel'
+import { QuotationModel } from '@server/db/models/quotationModel'
 import { verifyTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
 import { type JwtPayloadExtended, verifyRefreshToken } from '@server/services/jwt'
 import { bucket } from '@server/services/storage'
 import { Router } from 'express'
-import { type HydratedDocument } from 'mongoose'
-import type { ItemType } from '@entities/quotation'
+import { type FlattenMaps } from 'mongoose'
+import { type Quotation } from '@entities/quotation/types'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { type ResWithBody, type ReqWithBody, type Next } from '../types'
 
 export type ReqBody = {
-  quotation: QuotationModelType
-  items: ItemType[]
+  quotation: Quotation
 }
 
 export type ResBody = {
   message: 'not logged in' | 'not owner' | 'not saved' | 'inserted' | 'saved'
-  document?: HydratedDocument<QuotationModelType> | null
+  document?: FlattenMaps<Quotation>
 }
 
 type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
@@ -24,7 +23,7 @@ export const saveQuotationRouter = Router()
 
 const saveQuotation: RouterHandler = async (req, res, next) => {
   try {
-    const { items, quotation } = req.body
+    const { quotation } = req.body
     const refreshJwtToken = req.cookies.refreshJwtToken
 
     if (typeof refreshJwtToken !== 'string') {
@@ -54,6 +53,7 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
         { new: true, setDefaultsOnInsert: true, upsert: true },
       )
       .select({ _id: 0, __v: 0 })
+      .lean() // otherwise in json we get some internal data which is not visible via console.log(document), strange
 
     const isNew = document.createdAt?.toISOString() === document.updatedAt?.toISOString()
 
@@ -65,7 +65,7 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
 
     const filePath = `${email}/quotations/${quotation.id}.json`
     const file = bucket.file(filePath)
-    const contents = JSON.stringify({ quotation, items }, null, 2)
+    const contents = JSON.stringify({ ...document, ...quotation }, null, 2)
     await file.save(contents)
 
     return res
