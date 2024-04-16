@@ -58,6 +58,7 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
     }
 
     const accessJwtToken = createAccessToken({ email, roles: user.roles })
+    // todo: no need to create new refresh token, if already exists and not expired, it will log you off from other devices
     const refreshJwtToken = createRefreshToken({ email, roles: user.roles })
 
     res.cookie('refreshJwtToken', refreshJwtToken, {
