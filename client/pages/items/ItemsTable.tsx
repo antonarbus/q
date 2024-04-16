@@ -1,9 +1,10 @@
 import 'ag-grid-community/styles/ag-grid.css' // Mandatory CSS required by the grid
 import 'ag-grid-community/styles/ag-theme-quartz.css'
+import { useSelectorTyped } from '@lib_instances/store'
 import { Box, LinearProgress } from '@mui/material'
 import { type ItemModelType } from '@server/db/models/itemModel'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
-import { type ElementRef, useRef } from 'react'
+import { type ElementRef, useRef, useEffect } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@features/items/open_items'
 import { useGetItemsQuery } from '@entities/item'
@@ -18,8 +19,15 @@ import { NoRowsTableOverlay } from './NoRowsTableOverlay'
 
 export const ItemsTable = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
-  const { data, isSuccess, isFetching, isFetched, isError, error } = useGetItemsQuery()
+  const { data, isSuccess, isFetching, isFetched, isError, error, refetch } = useGetItemsQuery()
   useDisableLoadingOverlayWhenItemsAreFetched({ isFetched })
+  const email = useSelectorTyped(state => state.user.email)
+
+  useEffect(() => {
+    if (email) {
+      void refetch()
+    }
+  }, [email])
 
   useUpdateEffect(() => {
     if (isSuccess) {

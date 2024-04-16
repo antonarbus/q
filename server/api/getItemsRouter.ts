@@ -1,5 +1,5 @@
 import { ItemModel, type ItemModelType } from '@server/db/models/itemModel'
-import { verifyTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
+import { verifyAccessTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
 import { type JwtPayloadExtended, verifyRefreshToken } from '@server/services/jwt'
 import { Router } from 'express'
 import { httpStatus } from '@shared/consts/httpStatus'
@@ -62,6 +62,6 @@ const getItems: RouterHandler = async (req, res, next) => {
 
 getItemsRouter.get(
   '/',
-  verifyTokenMiddleware,
+  verifyAccessTokenMiddleware,
   getItems,
 )

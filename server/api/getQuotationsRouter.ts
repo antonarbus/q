@@ -1,5 +1,5 @@
 import { QuotationModel, type QuotationModelType } from '@server/db/models/quotationModel'
-import { verifyTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
+import { verifyAccessTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
 import { type JwtPayloadExtended, verifyRefreshToken } from '@server/services/jwt'
 import { Router } from 'express'
 import { httpStatus } from '@shared/consts/httpStatus'
@@ -62,6 +62,6 @@ const getQuotations: RouterHandler = async (req, res, next) => {
 
 getQuotationsRouter.get(
   '/',
-  verifyTokenMiddleware,
+  verifyAccessTokenMiddleware,
   getQuotations,
 )

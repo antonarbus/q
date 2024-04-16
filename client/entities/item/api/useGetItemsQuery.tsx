@@ -21,7 +21,7 @@ export const useGetItemsQuery = (): UseQueryResult<ResBody, AxiosError<ResBody>>
     refetchOnReconnect: false,
     staleTime: 0,
     retry: 0,
-    // enabled: Boolean(accessTokenSignal.value),
+    enabled: false,
     // gcTime: Infinity,
   })
 

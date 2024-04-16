@@ -57,28 +57,31 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
         .json({ message: 'not activated' })
     }
 
+    const isExistingRefreshJwtToken = Boolean(user.refreshJwtToken)
+
     const accessJwtToken = createAccessToken({ email, roles: user.roles })
-    // todo: no need to create new refresh token, if already exists and not expired, it will log you off from other devices
-    const refreshJwtToken = createRefreshToken({ email, roles: user.roles })
+    const refreshJwtToken = isExistingRefreshJwtToken ? user.refreshJwtToken : createRefreshToken({ email, roles: user.roles })
 
     res.cookie('refreshJwtToken', refreshJwtToken, {
       maxAge: thirtyDaysInSec * 1000,
       httpOnly: true,
     })
 
-    const document = await UserModel.findOneAndUpdate(
-      { email },
-      { refreshJwtToken },
-      { new: true },
-    )
+    if (!isExistingRefreshJwtToken) {
+      await UserModel.findOneAndUpdate(
+        { email },
+        { refreshJwtToken },
+        { new: true },
+      )
+    }
 
     return res
       .status(httpStatus.success_200)
       .json({
         message: 'good password',
         accessJwtToken,
-        email: document?.email,
-        roles: document?.roles,
+        email: user.email,
+        roles: user.roles,
       })
   } catch (error) {
     next(error)

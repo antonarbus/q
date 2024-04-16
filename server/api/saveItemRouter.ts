@@ -1,5 +1,5 @@
 import { ItemModel, type ItemModelType } from '@server/db/models/itemModel'
-import { verifyTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
+import { verifyAccessTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
 import { type JwtPayloadExtended, verifyRefreshToken } from '@server/services/jwt'
 import { bucket } from '@server/services/storage'
 import { Router } from 'express'
@@ -79,4 +79,4 @@ const saveItem: RouterHandler = async (req, res, next) => {
   }
 }
 
-saveItemRouter.post('/', verifyTokenMiddleware, saveItem)
+saveItemRouter.post('/', verifyAccessTokenMiddleware, saveItem)
