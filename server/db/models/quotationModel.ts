@@ -2,9 +2,9 @@ import { model, Schema } from 'mongoose'
 import { type Quotation } from '@entities/quotation/types'
 import { nanoid } from '@shared/lib/nanoid'
 
-export type QuotationModelType = Omit<Quotation, 'items'>
+// export type QuotationModelType = Omit<Quotation, 'items'>
 
-const quotationSchema = new Schema<QuotationModelType>({
+const quotationSchema = new Schema<Quotation>({
   id: {
     type: String,
     default: () => nanoid(5),
@@ -40,4 +40,4 @@ const quotationSchema = new Schema<QuotationModelType>({
   timestamps: true,
 })
 
-export const QuotationModel = model<QuotationModelType>('quotation', quotationSchema)
+export const QuotationModel = model<Quotation>('quotation', quotationSchema)
