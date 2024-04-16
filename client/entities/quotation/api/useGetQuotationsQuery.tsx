@@ -21,6 +21,7 @@ export const useGetQuotationsQuery = (): UseQueryResult<ResBody, AxiosError<ResB
     refetchOnReconnect: false,
     staleTime: 0,
     retry: 0,
+    enabled: false,
     // enabled: Boolean(accessTokenSignal.value),
     // gcTime: Infinity,
   })

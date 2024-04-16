@@ -31,18 +31,18 @@ const logOut: RouterHandler = async (req, res, next) => {
         .json({ message: 'user not found' })
     }
 
-    // delete refreshJwtToken from cookie and db
     res.clearCookie('refreshJwtToken')
-    const user = await UserModel.findOne({ refreshJwtToken })
+    // * let's not remove refreshJwtToken from db as it may be used by other devices
+    // const user = await UserModel.findOne({ refreshJwtToken })
 
-    if (!user) {
-      return res
-        .status(httpStatus.forbidden_403)
-        .json({ message: 'no user in db' })
-    }
+    // if (!user) {
+    //   return res
+    //     .status(httpStatus.forbidden_403)
+    //     .json({ message: 'no user in db' })
+    // }
 
-    user.refreshJwtToken = ''
-    await user.save()
+    // user.refreshJwtToken = ''
+    // await user.save()
 
     return res
       .status(httpStatus.success_200)

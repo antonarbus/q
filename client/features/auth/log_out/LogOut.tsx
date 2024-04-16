@@ -1,4 +1,5 @@
 import { dispatch } from '@lib_instances/store'
+import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { deleteItemsCache } from '@entities/item'
@@ -35,7 +36,7 @@ export const LogOut = (): JSX.Element => {
         setTimeout(() => {
           loadingDotsOverlayTextSignal.value = null
           navigate('..')
-        }, 2000)
+        }, 1000)
       }
     }
   }, [isSuccess])
@@ -55,7 +56,7 @@ export const LogOut = (): JSX.Element => {
       setTimeout(() => {
         loadingDotsOverlayTextSignal.value = null
         navigate('..')
-      }, 2000)
+      }, 1000)
     }
   }, [isError])
 

@@ -1,9 +1,10 @@
 import 'ag-grid-community/styles/ag-grid.css' // Mandatory CSS required by the grid
 import 'ag-grid-community/styles/ag-theme-quartz.css'
+import { useSelectorTyped } from '@lib_instances/store'
 import { Box, LinearProgress } from '@mui/material'
 import { type QuotationModelType } from '@server/db/models/quotationModel'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
-import { type ElementRef, useRef } from 'react'
+import { type ElementRef, useRef, useEffect } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { useDisableLoadingOverlayWhenQuotationsAreFetched } from '@features/quotation/open_quotations'
 import { useGetQuotationsQuery } from '@entities/quotation'
@@ -18,8 +19,15 @@ import { quotationsAgGridRef } from './quotationsAgGridRef'
 
 export const QuotationsTable = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
-  const { data, isSuccess, isFetching, isFetched, isError, error } = useGetQuotationsQuery()
+  const { data, isSuccess, isFetching, isFetched, isError, error, refetch } = useGetQuotationsQuery()
   useDisableLoadingOverlayWhenQuotationsAreFetched({ isFetched })
+  const email = useSelectorTyped(state => state.user.email)
+
+  useEffect(() => {
+    if (email) {
+      void refetch()
+    }
+  }, [email])
 
   useUpdateEffect(() => {
     if (isSuccess) {

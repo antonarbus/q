@@ -2,7 +2,7 @@ import { headerName } from '../consts/headerName'
 import { verifyAccessToken, type JwtPayloadExtended } from '../services/jwt'
 import type { Next, Req, Res } from '../types'
 
-export const verifyTokenMiddleware = (req: Req, res: Res, next: Next): Res | undefined => {
+export const verifyAccessTokenMiddleware = (req: Req, res: Res, next: Next): Res | undefined => {
   try {
     const accessJwtToken = req.headers[headerName.accessJwtToken]
 

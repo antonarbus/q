@@ -69,7 +69,7 @@ export const LogIn = (): JSX.Element => {
             navigate('..', { replace: true, state: nanoid() })
           },
         })
-      }, 2500)
+      }, 1500)
     }
   }, [isSuccess])
 
@@ -156,7 +156,7 @@ export const LogIn = (): JSX.Element => {
                 })
               }}
             >
-              Reset?
+              Reset password?
             </Link>
             <Link
               to={`../${route.register}`}
