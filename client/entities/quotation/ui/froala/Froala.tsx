@@ -1,7 +1,7 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { Box, type SxProps } from '@mui/material'
 import { useRef, type MouseEvent } from 'react'
-import { type FroalaEditor, type FroalaEditorRef } from '@shared/types'
+import { type FroalaEditor, type FroalaEditorRef } from '@shared/types/froala'
 import { FroalaProvider } from '../../providers/FroalaProvider'
 import { useItem } from '../../providers/ItemProvider'
 import { isFroalaSignal } from '../../signals/isFroalaSignal'

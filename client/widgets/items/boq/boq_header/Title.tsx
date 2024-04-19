@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { updateTitleCell } from '@features/items/update_cell'
 import { getBoqHeaderHtmlFromStore, useItem, Froala, titleCellStyle } from '@entities/quotation'
 import { type BoqHeaderKey } from '@entities/quotation'
-import { type FroalaEditor } from '@shared/types'
+import { type FroalaEditor } from '@shared/types/froala'
 
 const boqHeaderKey: BoqHeaderKey = 'title'
 

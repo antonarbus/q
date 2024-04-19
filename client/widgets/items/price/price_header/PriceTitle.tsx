@@ -2,7 +2,7 @@ import { getState } from '@lib_instances/store'
 import { useRef } from 'react'
 import { updatePriceTitleCell } from '@features/items/update_cell'
 import { useItem, Froala, itemKey } from '@entities/quotation'
-import { type FroalaEditor } from '@shared/types'
+import { type FroalaEditor } from '@shared/types/froala'
 
 export const PriceTitle = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)

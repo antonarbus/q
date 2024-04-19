@@ -1,7 +1,7 @@
 import { getState } from '@lib_instances/store'
 import { apiUrl } from '@server/consts/apiUrl'
 import { removeLoadingBar } from '@shared/lib/froala/removeLoadingBar'
-import { type FroalaEditor } from '@shared/types'
+import { type FroalaEditor } from '@shared/types/froala'
 import { getFileSizeInMbAsText } from '@shared/utils'
 
 type Props = {

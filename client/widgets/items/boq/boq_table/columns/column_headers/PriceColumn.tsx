@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { updateBoqColumnCell } from '@features/items/update_cell'
 import { Froala, getBoqColumnHtmlFromStore, columnHeaderStyle, useItem, boqColumnKey } from '@entities/quotation'
-import { type FroalaEditor } from '@shared/types'
+import { type FroalaEditor } from '@shared/types/froala'
 import { ResizableColumn } from '../ResizableColumn'
 
 export const PriceColumn = (): JSX.Element => {

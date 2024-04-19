@@ -2,7 +2,7 @@ import { dispatch } from '@lib_instances/store'
 import { boqRowCellKey, formatBoqRowCellNumber } from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
-import { type FroalaEditorRef } from '@shared/types'
+import { type FroalaEditorRef } from '@shared/types/froala'
 
 type Props = {
   qtyCellEditorRef: FroalaEditorRef

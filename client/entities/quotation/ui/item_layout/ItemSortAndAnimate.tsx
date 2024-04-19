@@ -5,7 +5,7 @@ import type { ComponentClass, ReactNode } from 'react'
 import type { SortableElementProps } from 'react-sortable-hoc'
 import { SortableElement } from 'react-sortable-hoc'
 import { className } from '@shared/consts/className'
-import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
+import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types/resizablePaper'
 import { ResizablePaper } from './ResizablePaper'
 
 type Props = {

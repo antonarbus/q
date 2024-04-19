@@ -3,7 +3,7 @@ import { roundTo } from 'round-to'
 import { getBoqRowFromStore, getBoqRowsFromStore, updateBoqRowCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue, type BoqRow, boqRowCellKey } from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
-import { type FroalaEditorRef } from '@shared/types'
+import { type FroalaEditorRef } from '@shared/types/froala'
 
 type Props = {
   qtyCellEditorRef: FroalaEditorRef

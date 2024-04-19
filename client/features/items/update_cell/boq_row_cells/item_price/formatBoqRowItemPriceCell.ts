@@ -1,5 +1,5 @@
 import { boqRowCellKey, formatBoqRowCellNumber } from '@entities/quotation'
-import { type FroalaEditorRef } from '@shared/types'
+import { type FroalaEditorRef } from '@shared/types/froala'
 
 type Props = {
   itemPriceCellEditorRef: FroalaEditorRef
