@@ -1,11 +1,11 @@
 import { reactQuery } from '@lib_instances/reactQuery'
 import { type ResBody } from '@server/api/getItemsRouter'
-import { type ItemModelType } from '@server/db/models/itemModel'
 import { produce } from 'immer'
+import { type ItemCopyable } from '@entities/quotation'
 import { queryKey } from '@shared/consts/queryKey'
 
 type Props = {
-  item: ItemModelType
+  item: ItemCopyable
 }
 
 export const updateOrAppendIntoItemsCache = ({ item }: Props): void => {

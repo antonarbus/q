@@ -2,20 +2,7 @@ import { model, Schema } from 'mongoose'
 import { type ItemCopyable } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 
-// todo: can be part of Quotation type
-export type ItemModelType = {
-  id: string
-  email?: string
-  type: ItemCopyable['type']
-  category: string
-  name: string
-  tag: string
-  createdAt?: Date
-  updatedAt?: Date
-  item: ItemCopyable
-}
-
-const itemSchema = new Schema<ItemModelType>({
+const itemSchema = new Schema<ItemCopyable>({
   id: {
     type: String,
     default: () => nanoid(5),
@@ -36,9 +23,8 @@ const itemSchema = new Schema<ItemModelType>({
   tag: String,
   createdAt: Date,
   updatedAt: Date,
-  item: Object,
 }, {
   timestamps: true,
 })
 
-export const ItemModel = model<ItemModelType>('item', itemSchema)
+export const ItemModel = model<ItemCopyable>('item', itemSchema)

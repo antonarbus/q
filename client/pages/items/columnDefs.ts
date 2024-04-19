@@ -1,11 +1,11 @@
-import { type ItemModelType } from '@server/db/models/itemModel'
 import type { ColDef } from 'ag-grid-community'
+import { type ItemCopyable } from '@entities/quotation'
 import { ActionButtonsCellRenderer } from './ActionButtonsCellRenderer'
 import { DateCellRenderer } from './DateCellRenderer'
 import { dateFilterComparator } from './dateFilterComparator'
 import { dateValueGetter } from './dateValueGetter'
 
-export const defaultColDef: ColDef<ItemModelType> = {
+export const defaultColDef: ColDef<ItemCopyable> = {
   headerClass: ['center'],
   width: 170,
   minWidth: 170,
@@ -19,7 +19,7 @@ export const defaultColDef: ColDef<ItemModelType> = {
   flex: 1,
 }
 
-export const columnDefs: Array<ColDef<ItemModelType>> = [
+export const columnDefs: Array<ColDef<ItemCopyable>> = [
   {
     cellRenderer: ActionButtonsCellRenderer,
     width: 100,

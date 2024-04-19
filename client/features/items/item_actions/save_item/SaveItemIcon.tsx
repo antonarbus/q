@@ -65,15 +65,7 @@ export const SaveItemIcon = (): ReactNode => {
           if (!item) return
           if (item.type === itemKey.paste) return
 
-          saveItem({
-            email,
-            id: item.id,
-            type: item.type,
-            category: 'category',
-            name: 'name',
-            tag: 'tag',
-            item,
-          })
+          saveItem({ item })
         }}
       />
     )

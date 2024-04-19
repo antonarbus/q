@@ -57,7 +57,9 @@ export const RestOfCopiedItems = (): JSX.Element | null => {
   const prevFirstItemHeightRef = useRef(0)
 
   const firstItem = items[0]
-  if (!firstItem) return null
+
+  if (!firstItem?.width) return null
+  if (!firstItem?.height) return null
 
   const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / firstItem.width
   const firstItemHeight = firstItem.height * scaleFactorForFirstItem + itemMarginBottom
@@ -84,7 +86,7 @@ export const RestOfCopiedItems = (): JSX.Element | null => {
         exit='exit'
       >
         {items.map((item, index) => {
-          const scaleFactor = (containerWidth - 2 * containerPadding) / item.width
+          const scaleFactor = (containerWidth - 2 * containerPadding) / (item.width ?? 1)
           const preview = getState().copy.previews[index]
 
           if (index === 0) return null
@@ -93,8 +95,8 @@ export const RestOfCopiedItems = (): JSX.Element | null => {
             <div
               key={items.length - index}
               style={{
-                height: item.height * scaleFactor,
-                width: item.width * scaleFactor,
+                height: (item.height ?? 0) * scaleFactor,
+                width: (item.width ?? 0) * scaleFactor,
                 marginBottom: itemMarginBottom,
                 background: 'white',
                 borderRadius: 4,
@@ -104,7 +106,7 @@ export const RestOfCopiedItems = (): JSX.Element | null => {
             >
               <ScaledCopyItem
                 html={preview ?? ''}
-                width={item.width}
+                width={item.width ?? 0}
                 scaleFactor={`${scaleFactor}`}
               />
             </div>

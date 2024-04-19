@@ -4,9 +4,15 @@ import { type itemKey } from '../consts/itemKey'
 
 type ItemCommon = {
   id: string
-  width: number
-  height: number
-  isFroala: boolean
+  width?: number
+  height?: number
+  isFroala?: boolean
+  email?: string
+  category?: string
+  name?: string
+  tag?: string
+  createdAt?: Date
+  updatedAt?: Date
 }
 
 export type BoqRowCellPin = {
@@ -20,11 +26,8 @@ export type BoqRowCell = {
   pin: BoqRowCellPin
 }
 
-export type BoqRow = {
-  id: string
+export type BoqRow = ItemCommon & {
   type: BoqRowKey
-  height: number
-  width: number
   description: BoqRowCell
   itemPrice: BoqRowCell
   qty: BoqRowCell
@@ -90,8 +93,8 @@ export type ItemPaste = ItemCommon & {
   type: typeof itemKey.paste
 }
 
-export type Item = ItemCommon & (ItemBoq | ItemPaste | ItemText | ItemPrice)
-export type ItemCopyable = ItemBoq | ItemText | ItemPrice | BoqRow
+export type Item = ItemBoq | ItemPaste | ItemText | ItemPrice
+export type ItemCopyable = ItemText | ItemBoq | ItemPrice | BoqRow
 
 export type Quotation = {
   id: 'new' | Record<never, never> & string

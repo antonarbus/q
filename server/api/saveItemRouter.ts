@@ -1,12 +1,15 @@
-import { ItemModel, type ItemModelType } from '@server/db/models/itemModel'
+import { ItemModel } from '@server/db/models/itemModel'
 import { verifyAccessTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
 import { type JwtPayloadExtended, verifyRefreshToken } from '@server/services/jwt'
 import { bucket } from '@server/services/storage'
 import { Router } from 'express'
+import { type ItemCopyable } from '@entities/quotation'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { type ResWithBody, type ReqWithBody, type Next } from '../types'
 
-export type ReqBody = ItemModelType
+export type ReqBody = {
+  item: ItemCopyable
+}
 
 export type ResBody = {
   message: 'not logged in' | 'not owner' | 'not saved' | 'inserted' | 'updated'
@@ -35,7 +38,7 @@ const saveItem: RouterHandler = async (req, res, next) => {
         .json({ message: 'not logged in' })
     }
 
-    if (email !== req.body.email) {
+    if (email !== req.body.item.email) {
       return res
         .status(httpStatus.forbidden_403)
         .json({ message: 'not owner' })
@@ -44,15 +47,15 @@ const saveItem: RouterHandler = async (req, res, next) => {
     const document = await ItemModel
       .findOneAndUpdate(
         {
-          email: req.body.email,
-          id: req.body.id,
+          email: req.body.item.email,
+          id: req.body.item.id,
         },
         {
-          id: req.body.id,
-          email: req.body.email,
-          category: req.body.category,
-          name: req.body.name,
-          tag: req.body.tag,
+          id: req.body.item.id,
+          email: req.body.item.email,
+          category: req.body.item.category,
+          name: req.body.item.name,
+          tag: req.body.item.tag,
         },
         { new: true, setDefaultsOnInsert: true, upsert: true },
       )
@@ -67,7 +70,7 @@ const saveItem: RouterHandler = async (req, res, next) => {
         .json({ message: 'not saved' })
     }
 
-    const filePath = `${req.body.email}/items/${req.body.id}.json`
+    const filePath = `${req.body.item.email}/items/${req.body.item.id}.json`
     const file = bucket.file(filePath)
     const contents = JSON.stringify({ item: req.body.item }, null, 2)
     await file.save(contents)
