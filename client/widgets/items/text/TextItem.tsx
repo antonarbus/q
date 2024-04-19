@@ -3,7 +3,7 @@ import { LeftItemActionButtons, RightItemActionButtons } from '@features/items/i
 import { onTextItemResizeStart, onTextItemResizeStop } from '@features/items/resize_item'
 import { updateTextItem } from '@features/items/update_cell'
 import { beforeUpload } from '@features/items/upload'
-import { Froala, Item, getItemTextHtmlFromStore, textItemCellStyle, useItem } from '@entities/quotation'
+import { Froala, ItemComp, getItemTextHtmlFromStore, textItemCellStyle, useItem } from '@entities/quotation'
 import { type FroalaEditor } from '@shared/types'
 
 export const TextItem = (): JSX.Element => {
@@ -11,7 +11,7 @@ export const TextItem = (): JSX.Element => {
   const { itemIndex } = useItem()
 
   return (
-    <Item
+    <ItemComp
       onItemResizeStart={onTextItemResizeStart}
       onItemResizeStop={onTextItemResizeStop}
       leftItemActionButtons={<LeftItemActionButtons />}
@@ -27,6 +27,6 @@ export const TextItem = (): JSX.Element => {
           updateTextItem({ editorRef, itemIndex })
         }}
       />
-    </Item>
+    </ItemComp>
   )
 }

@@ -1,20 +1,9 @@
 // import type { HydratedDocumentFromSchema, InferSchemaType } from 'mongoose'
 import { model, Schema } from 'mongoose'
-
-export type UserModelType = {
-  email: string
-  password: string
-  roles: string[]
-  isActivated: boolean
-  activationKey: string
-  resetPasswordKey: string
-  refreshJwtToken: string
-  createdAt: Date
-  updatedAt: Date
-}
+import { type User } from '@entities/user'
 
 // define schema for documents in collection
-const userSchema = new Schema<UserModelType>({
+const userSchema = new Schema<User>({
   email: {
     type: String,
     required: [true, 'email is required'],
@@ -47,7 +36,7 @@ const userSchema = new Schema<UserModelType>({
 // define model - a class with which we construct documents
 // each document is a user with props as in schema
 // * "users" collection will be created automatically based on this model
-export const UserModel = model<UserModelType>('user', userSchema)
+export const UserModel = model<User>('user', userSchema)
 
 // Type of an hydrated document (with all the getters, etc...)
 // export type HydratedUserModel = HydratedDocumentFromSchema<typeof UserSchema>

@@ -1,12 +1,12 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
-import { type CopyableItem } from '@entities/quotation' // todo: not good
+import { type ItemCopyable } from '@entities/quotation' // todo: not good
 import { type CopyPlace } from './types'
 
 type Props = {
   isCopyContainer: boolean
   initCords: { x: number, y: number }
-  items: CopyableItem[]
+  items: ItemCopyable[]
   previews: string[]
   place: CopyPlace
   isCopying: boolean
@@ -43,7 +43,7 @@ export const copySlice = createSlice({
     },
     hideCopyContainer: (state) => initialState,
     addItemIntoCopyContainer: (state, action: PayloadAction<{
-      copyItem: CopyableItem
+      copyItem: ItemCopyable
       preview: string
     }>) => {
       const { copyItem, preview } = action.payload

@@ -19,7 +19,7 @@ type Props = {
   rightItemActionButtons: JSX.Element
 }
 
-export const Item = ({
+export const ItemComp = ({
   children,
   disableResize,
   onItemResizeStart,

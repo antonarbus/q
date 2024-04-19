@@ -57,6 +57,7 @@ const saveItem: RouterHandler = async (req, res, next) => {
         { new: true, setDefaultsOnInsert: true, upsert: true },
       )
       .select({ _id: 0, __v: 0 })
+      .lean()
 
     const isNew = document.createdAt?.toISOString() === document.updatedAt?.toISOString()
 

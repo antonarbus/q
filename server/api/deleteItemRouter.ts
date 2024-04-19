@@ -3,11 +3,12 @@ import { verifyAccessTokenMiddleware } from '@server/middleware/verifyTokenMiddl
 import { type JwtPayloadExtended, verifyRefreshToken } from '@server/services/jwt'
 import { bucket } from '@server/services/storage'
 import { Router } from 'express'
+import { type Item } from '@entities/quotation'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { type ResWithBody, type ReqWithBody, type Next } from '../types'
 
 export type ReqBody = {
-  id: string
+  id: Item['id']
 }
 
 export type ResBody = {

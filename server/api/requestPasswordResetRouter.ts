@@ -1,5 +1,6 @@
 import express from 'express'
 import { type Result, type ValidationError, body, validationResult } from 'express-validator'
+import { type User } from '@entities/user'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { nanoid } from '@shared/lib/nanoid'
 // import { apiUrl } from '../consts/apiUrl'
@@ -10,7 +11,7 @@ import type { Next, ReqWithBody, ResWithBody } from '../types'
 // const port = process.env.PORT_FRONT_END
 
 export type ReqBody = {
-  email: string
+  email: User['email']
 }
 
 export type ResBody = {
@@ -35,7 +36,7 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
 
     const email = req.body.email.toLowerCase()
 
-    const user = await UserModel.findOne({ email })
+    const user = await UserModel.findOne({ email }).lean()
 
     if (!user) {
       return res
@@ -45,6 +46,7 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
 
     await UserModel.findOneAndUpdate({ email }, { resetPasswordKey: nanoid(5) }, { new: true })
 
+    // todo
     // send email with activation link
     // const subject = 'Activation for quotation.app'
     // const html = `<div><h1>Follow the link to confirm the registration</h1><a href="${activationLink}">${activationLink}</a></div> `

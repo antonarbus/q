@@ -1,11 +1,11 @@
 import { Box } from '@mui/material'
-import { type QuotationModelType } from '@server/db/models/quotationModel'
 import type { ICellRendererParams } from 'ag-grid-community'
 import { type ReactNode } from 'react'
+import { type Quotation } from '@entities/quotation'
 import { DeleteItemButton } from './DeleteItemButton'
 import { OpenItemButton } from './OpenItemButton'
 
-export const ActionButtonsCellRenderer = (params: ICellRendererParams<Partial<QuotationModelType>>): ReactNode => {
+export const ActionButtonsCellRenderer = (params: ICellRendererParams<Partial<Quotation>>): ReactNode => {
   if (params.data?.id === undefined) return null
 
   return (

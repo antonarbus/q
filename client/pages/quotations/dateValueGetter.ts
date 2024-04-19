@@ -1,12 +1,12 @@
-import { type QuotationModelType } from '@server/db/models/quotationModel'
 import { type ValueGetterParams } from 'ag-grid-community'
 import { isValid } from 'date-fns'
+import { type Quotation } from '@entities/quotation'
 
 type Props = {
-  columnDef: keyof QuotationModelType
+  columnDef: keyof Quotation
 }
 
-type Params = ValueGetterParams<QuotationModelType, string>
+type Params = ValueGetterParams<Quotation, string>
 
 export const dateValueGetter = ({ columnDef }: Props) => (params: Params): Date | null => {
   const dateIsoString = params.data?.[columnDef]

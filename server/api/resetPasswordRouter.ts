@@ -2,6 +2,7 @@ import { createAccessToken, createRefreshToken, thirtyDaysInSec } from '@server/
 import bcrypt from 'bcryptjs'
 import express from 'express'
 import { type Result, type ValidationError, body, validationResult } from 'express-validator'
+import { type User } from '@entities/user'
 import { httpStatus } from '@shared/consts/httpStatus'
 // import { nanoid } from '@shared/lib/nanoid'
 import { UserModel } from '../db/models/userModel'
@@ -12,17 +13,17 @@ import type { Next, ReqWithBody, ResWithBody } from '../types'
 // const port = process.env.PORT_FRONT_END
 
 export type ReqBody = {
-  email: string
-  password: string
-  resetPasswordKey: string
+  email: User['email']
+  password: User['password']
+  resetPasswordKey: User['resetPasswordKey']
 }
 
 export type ResBody = {
   message: 'validation error' | 'incorrect reset key' | 'not activated' | 'password was reset'
   validationErrors?: Result<ValidationError>
   accessJwtToken?: string
-  email?: string
-  roles?: string[]
+  email?: User['email']
+  roles?: User['roles']
 }
 
 export const resetPasswordRouter = express.Router()
@@ -43,7 +44,7 @@ const resetPassword: RouterHandler = async (req, res, next) => {
     const email = req.body.email.toLowerCase()
     const resetPasswordKey = req.body.resetPasswordKey
 
-    const user = await UserModel.findOne({ email, resetPasswordKey })
+    const user = await UserModel.findOne({ email, resetPasswordKey }).lean()
 
     if (!user) {
       return res
@@ -70,7 +71,7 @@ const resetPassword: RouterHandler = async (req, res, next) => {
       { email, resetPasswordKey },
       { password, refreshJwtToken, resetPasswordKey: '' },
       { new: true },
-    )
+    ).lean()
 
     return res
       .status(httpStatus.created_201)

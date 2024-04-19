@@ -1,5 +1,5 @@
 import { itemKey } from '../consts/itemKey'
-import { type BoqItem, type Item } from '../types'
+import { type ItemBoq, type Item } from '../types'
 
 type Props = {
   itemIndex: number
@@ -22,7 +22,7 @@ export const getTotalPriceAbove = ({
     const isBoqItem = items.at(i)?.type === itemKey.boq
 
     if (isBoqItem) {
-      const boqItem = items.at(i) as BoqItem
+      const boqItem = items.at(i) as ItemBoq
       const subTotalPrice = boqItem.boq.header.subTotalPrice.value
       totalPriceAbove = totalPriceAbove + subTotalPrice
     }

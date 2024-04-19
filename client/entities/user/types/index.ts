@@ -1,0 +1,11 @@
+export type User = {
+  email: string
+  password: string
+  roles: string[]
+  isActivated: boolean
+  activationKey: string
+  resetPasswordKey: string
+  refreshJwtToken: string
+  createdAt: Date
+  updatedAt: Date
+}

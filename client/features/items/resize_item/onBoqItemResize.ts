@@ -1,5 +1,5 @@
 import { dispatch, getState } from '@lib_instances/store'
-import { type BoqItem, quotationSlice, getBoqColumnFromStore, boqColumnKey, unfixItemImagesHeight, fixItemImagesHeight } from '@entities/quotation'
+import { type ItemBoq, quotationSlice, getBoqColumnFromStore, boqColumnKey, unfixItemImagesHeight, fixItemImagesHeight } from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types'
@@ -11,7 +11,7 @@ export const onBoqItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, ele
   dispatch(quotationSlice.actions.disableFroalaReducer({ itemIndex }))
   dispatch(quotationSlice.actions.hideBoqItemPinsReducer({ itemIndex }))
 
-  initDescriptionColumnWidth = (getState().quotation.items[itemIndex] as BoqItem).boq.column.description.width ?? 0
+  initDescriptionColumnWidth = (getState().quotation.items[itemIndex] as ItemBoq).boq.column.description.width ?? 0
 }
 
 export const onBoqItemResize: OnItemResize = ({ itemIndex, e, direction, elementRef: itemElement, delta }) => {

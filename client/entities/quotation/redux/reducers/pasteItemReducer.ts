@@ -3,13 +3,13 @@ import { type PastePos } from '@entities/copy'
 import { nanoid } from '@shared/lib/nanoid'
 import { boqRowKey } from '../../consts/boqRowKey'
 import { itemKey } from '../../consts/itemKey'
-import type { CopyableItem, Quotation } from '../../types'
+import type { ItemCopyable, Quotation } from '../../types'
 
 type Payload = {
   itemId: string
   newItemId: string
   pastePos: PastePos
-  item: CopyableItem
+  item: ItemCopyable
 }
 
 type Reducer = (state: Quotation, action: PayloadAction<Payload>) => void

@@ -1,13 +1,15 @@
-import { QuotationModel, type QuotationModelType } from '@server/db/models/quotationModel'
+import { QuotationModel } from '@server/db/models/quotationModel'
 import { verifyAccessTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
 import { type JwtPayloadExtended, verifyRefreshToken } from '@server/services/jwt'
 import { Router } from 'express'
+import { type FlattenMaps } from 'mongoose'
+import { type Quotation } from '@entities/quotation'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { type ResWithBody, type Next, type Req } from '../types'
 
 export type ResBody = {
   message: 'not logged in' | 'found' | 'no content' | 'internal error' | 'something happened'
-  documents?: QuotationModelType[]
+  documents?: Array<FlattenMaps<Quotation>>
 }
 
 type RouterHandler = (req: Req, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
@@ -36,6 +38,7 @@ const getQuotations: RouterHandler = async (req, res, next) => {
       .find({ email })
       .sort({ updatedAt: -1 })
       .select({ _id: 0, __v: 0, email: 0 })
+      .lean()
 
     if (documents.length === 0) {
       return res

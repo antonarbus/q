@@ -1,11 +1,11 @@
 import { reactQuery } from '@lib_instances/reactQuery'
 import { type ResBody as ResBodyQuotations } from '@server/api/getQuotationsRouter'
-import { type QuotationModelType } from '@server/db/models/quotationModel'
 import { produce } from 'immer'
 import { queryKey } from '@shared/consts/queryKey'
+import { type Quotation } from '../types'
 
 type Props = {
-  quotation: QuotationModelType
+  quotation: Quotation
 }
 
 export const updateOrAppendIntoQuotationsCache = ({ quotation }: Props): void => {

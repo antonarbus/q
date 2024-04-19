@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs'
 import express from 'express'
 import { type Result, type ValidationError, body, validationResult } from 'express-validator'
+import { type User } from '@entities/user'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { nanoid } from '@shared/lib/nanoid'
 import { UserModel } from '../db/models/userModel'
@@ -11,8 +12,8 @@ import type { Next, ReqWithBody, ResWithBody } from '../types'
 // const port = process.env.PORT_FRONT_END
 
 export type ReqBody = {
-  email: string
-  password: string
+  email: User['email']
+  password: User['password']
 }
 
 export type ResBody = {
@@ -40,7 +41,7 @@ const register: RouterHandler = async (req, res, next) => {
 
     const email = req.body.email.toLowerCase()
 
-    const user = await UserModel.findOne({ email })
+    const user = await UserModel.findOne({ email }).lean()
 
     if (user) {
       return res
@@ -53,6 +54,7 @@ const register: RouterHandler = async (req, res, next) => {
 
     await UserModel.create({ email, password, activationKey })
 
+    // todo
     // send email with activation link
     // const subject = 'Activation for quotation.app'
     // const activationLink = `${domain}:${port}${apiUrl.activate}/${activationKey}`

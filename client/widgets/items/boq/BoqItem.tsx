@@ -1,12 +1,12 @@
 import { LeftItemActionButtons, RightItemActionButtons } from '@features/items/item_actions'
 import { onBoqItemResize, onBoqItemResizeStart, onBoqItemResizeStop } from '@features/items/resize_item'
-import { Item } from '@entities/quotation'
+import { ItemComp } from '@entities/quotation'
 import { BoqHeader } from './boq_header'
 import { BoqTable } from './boq_table'
 
 export const BoqItem = (): JSX.Element => {
   return (
-    <Item
+    <ItemComp
       autoWidth={true}
       minWidth='560px'
       onItemResizeStart={onBoqItemResizeStart}
@@ -17,6 +17,6 @@ export const BoqItem = (): JSX.Element => {
     >
       <BoqHeader />
       <BoqTable />
-    </Item>
+    </ItemComp>
   )
 }

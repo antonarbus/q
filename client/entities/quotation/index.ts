@@ -59,7 +59,7 @@ export { updateBoqRowCellAtStore } from './redux/updaters/updateBoqRowCellAtStor
 
 // ui
 export { DraggableItemsContainer } from './ui/DraggableItemsContainer'
-export { Item } from './ui/Item'
+export { ItemComp } from './ui/ItemComp'
 export { Froala } from './ui/froala/Froala'
 
 // styles
@@ -89,10 +89,12 @@ export { boqRowCellKey } from './consts/boqRowCellKey'
 
 // types
 export type {
-  PasteItem,
+  Quotation,
+  Item,
+  ItemPaste,
+  ItemBoq,
+  ItemCopyable,
   BoqCols,
-  Item as ItemType,
-  CopyableItem,
   BoqHeaderCell,
   BoqHeaderKey,
   BoqColumnKey,
@@ -100,6 +102,5 @@ export type {
   BoqRow,
   BoqRowCellPin,
   BoqRowCell,
-  BoqItem,
   BoqRowEditorRefs,
 } from './types'
