@@ -1,8 +1,8 @@
 import { reactQuery } from '@lib_instances/reactQuery'
 import { type ResBody } from '@server/api/getItemsRouter'
 import { produce } from 'immer'
-import { type ItemCopyable } from '@entities/quotation'
 import { queryKey } from '@shared/consts/queryKey'
+import { type ItemCopyable } from '../index'
 
 type Props = {
   item: ItemCopyable

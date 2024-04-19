@@ -1,6 +1,6 @@
 import { type ValueGetterParams } from 'ag-grid-community'
 import { isValid } from 'date-fns'
-import { type ItemCopyable } from '@entities/quotation'
+import { type ItemCopyable } from '@entities/item'
 
 type Props = {
   columnDef: keyof ItemCopyable

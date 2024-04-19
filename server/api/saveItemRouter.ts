@@ -3,7 +3,7 @@ import { verifyAccessTokenMiddleware } from '@server/middleware/verifyTokenMiddl
 import { type JwtPayloadExtended, verifyRefreshToken } from '@server/services/jwt'
 import { bucket } from '@server/services/storage'
 import { Router } from 'express'
-import { type ItemCopyable } from '@entities/quotation'
+import { type ItemCopyable } from '@entities/item'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { type ResWithBody, type ReqWithBody, type Next } from '../types'
 

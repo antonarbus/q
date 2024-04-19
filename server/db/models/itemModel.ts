@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose'
-import { type ItemCopyable } from '@entities/quotation'
+import { type ItemCopyable } from '@entities/item'
 import { nanoid } from '@shared/lib/nanoid'
 
 const itemSchema = new Schema<ItemCopyable>({
