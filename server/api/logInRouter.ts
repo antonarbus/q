@@ -13,6 +13,7 @@ export type ReqBody = {
 
 export type ResBody = {
   message: 'no user data' | 'no password' | 'bad password' | 'not activated' | 'good password'
+  name?: 'MongooseError'
   accessJwtToken?: string
   email?: User['email']
   roles?: User['roles']

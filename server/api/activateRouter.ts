@@ -1,18 +1,19 @@
 import express from 'express'
+import { type User } from '@entities/user'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { UserModel } from '../db/models/userModel'
 import { createAccessToken, createRefreshToken, thirtyDaysInSec } from '../services/jwt'
 import type { Next, ReqWithBody, ResWithBody } from '../types'
 
 export type ReqBody = {
-  activationKey: string
+  activationKey: User['activationKey']
 }
 
 export type ResBody = {
   message: 'activation key not found' | 'already activated' | 'activated'
   accessJwtToken?: string
-  email?: string
-  roles?: string[]
+  email?: User['email']
+  roles?: User['roles']
 }
 
 type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
@@ -47,11 +48,13 @@ const activate: RouterHandler = async (req, res, next) => {
       httpOnly: true,
     })
 
-    const document = await UserModel.findOneAndUpdate(
-      { email, activationKey },
-      { refreshJwtToken, isActivated: true, activationKey: '' },
-      { new: true },
-    )
+    const document = await UserModel
+      .findOneAndUpdate(
+        { email, activationKey },
+        { refreshJwtToken, isActivated: true, activationKey: '' },
+        { new: true },
+      )
+      .lean()
 
     return res
       .status(httpStatus.success_200)

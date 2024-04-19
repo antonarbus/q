@@ -38,7 +38,15 @@ export const LogIn = (): JSX.Element => {
 
   useUpdateEffect(() => {
     if (isSuccess) {
+      console.log('🚀 ~ data:', data)
+      console.log(666)
       const { accessJwtToken, email, roles, message } = data
+
+      if (data.name === 'MongooseError') {
+        console.log('anteks')
+        notify({ msg: 'Database error', type: 'warn', theme: 'light' })
+        return
+      }
 
       if (message !== 'good password') return
       if (!accessJwtToken) return
@@ -74,6 +82,7 @@ export const LogIn = (): JSX.Element => {
   }, [isSuccess])
 
   useUpdateEffect(() => {
+    console.log(777)
     if (isError) {
       accessTokenSignal.value = null
 
