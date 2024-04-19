@@ -1,5 +1,5 @@
 import type { ColDef } from 'ag-grid-community'
-import { type ItemCopyable } from '@entities/quotation'
+import { type ItemCopyable } from '@entities/item'
 import { ActionButtonsCellRenderer } from './ActionButtonsCellRenderer'
 import { DateCellRenderer } from './DateCellRenderer'
 import { dateFilterComparator } from './dateFilterComparator'
