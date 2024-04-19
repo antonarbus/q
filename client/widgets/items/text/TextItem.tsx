@@ -4,7 +4,7 @@ import { onTextItemResizeStart, onTextItemResizeStop } from '@features/items/res
 import { updateTextItem } from '@features/items/update_cell'
 import { beforeUpload } from '@features/items/upload'
 import { Froala, ItemComp, getItemTextHtmlFromStore, textItemCellStyle, useItem } from '@entities/quotation'
-import { type FroalaEditor } from '@shared/types'
+import { type FroalaEditor } from '@shared/types/froala'
 
 export const TextItem = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)

@@ -1,4 +1,4 @@
-import { type FroalaEditor } from '@shared/types'
+import { type FroalaEditor } from '@shared/types/froala'
 import { getBoqItemFromStore } from '../redux/getters/getBoqItemFromStore'
 import { type BoqHeaderKey } from '../types'
 

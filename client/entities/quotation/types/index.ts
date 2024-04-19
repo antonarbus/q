@@ -1,4 +1,4 @@
-import { type FroalaEditorRef } from '@shared/types'
+import { type FroalaEditorRef } from '@shared/types/froala'
 import { type BoqRowKey } from '../consts/boqRowKey'
 import { type itemKey } from '../consts/itemKey'
 
