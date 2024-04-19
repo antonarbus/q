@@ -66,15 +66,7 @@ export const SaveBoqRowIcon = (): ReactNode => {
           if (!boqRow) return
           if (boqRow.type === boqRowKey.paste) return
 
-          saveBoqRow({
-            email,
-            id: boqRow.id,
-            type: boqRow.type,
-            category: 'category',
-            name: 'name',
-            tag: 'tag',
-            item: boqRow,
-          })
+          saveBoqRow({ item: boqRow })
         }}
       />
     )

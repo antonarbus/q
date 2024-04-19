@@ -57,7 +57,8 @@ export const FirstCopiedItem = (): JSX.Element | null => {
   const firstItem = items[0]
   const firstPreview = getState().copy.previews[0]
 
-  if (!firstItem) return null
+  if (!firstItem?.width) return null
+  if (!firstItem?.height) return null
 
   const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / firstItem.width
   const height = firstItem.height * scaleFactorForFirstItem

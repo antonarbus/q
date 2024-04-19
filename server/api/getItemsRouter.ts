@@ -1,13 +1,14 @@
-import { ItemModel, type ItemModelType } from '@server/db/models/itemModel'
+import { ItemModel } from '@server/db/models/itemModel'
 import { verifyAccessTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
 import { type JwtPayloadExtended, verifyRefreshToken } from '@server/services/jwt'
 import { Router } from 'express'
+import { type ItemCopyable } from '@entities/quotation'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { type ResWithBody, type Next, type Req } from '../types'
 
 export type ResBody = {
   message: 'not logged in' | 'found' | 'no content' | 'internal error' | 'something happened'
-  documents?: ItemModelType[]
+  documents?: ItemCopyable[]
 }
 
 type RouterHandler = (req: Req, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
