@@ -4,5 +4,3 @@ export const itemKey = {
   price: 'price',
   paste: 'paste',
 } as const
-
-export type ItemKey = keyof typeof itemKey
