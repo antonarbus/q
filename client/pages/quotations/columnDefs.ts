@@ -1,11 +1,11 @@
-import { type QuotationModelType } from '@server/db/models/quotationModel'
 import type { ColDef } from 'ag-grid-community'
+import { type Quotation } from '@entities/quotation'
 import { ActionButtonsCellRenderer } from './ActionButtonsCellRenderer'
 import { DateCellRenderer } from './DateCellRenderer'
 import { dateFilterComparator } from './dateFilterComparator'
 import { dateValueGetter } from './dateValueGetter'
 
-export const defaultColDef: ColDef<QuotationModelType> = {
+export const defaultColDef: ColDef<Quotation> = {
   headerClass: ['center'],
   width: 170,
   minWidth: 170,
@@ -19,7 +19,7 @@ export const defaultColDef: ColDef<QuotationModelType> = {
   flex: 1,
 }
 
-export const columnDefs: Array<ColDef<QuotationModelType>> = [
+export const columnDefs: Array<ColDef<Quotation>> = [
   {
     cellRenderer: ActionButtonsCellRenderer,
     width: 100,

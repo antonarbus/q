@@ -1,4 +1,5 @@
 import express from 'express'
+import { type User } from '@entities/user'
 import { UserModel } from '../db/models/userModel'
 import type { JwtPayloadExtended } from '../services/jwt'
 import { createAccessToken, verifyRefreshToken } from '../services/jwt'
@@ -6,9 +7,9 @@ import type { Next, Req, ResWithBody } from '../types'
 
 export type ResBody = {
   message: string
-  email: string
+  email: User['email']
   accessJwtToken: string
-  roles: string[]
+  roles: User['roles']
 }
 
 export const getAccessTokenRouter = express.Router()

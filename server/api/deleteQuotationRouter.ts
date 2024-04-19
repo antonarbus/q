@@ -1,19 +1,20 @@
-import { QuotationModel, type QuotationModelType } from '@server/db/models/quotationModel'
+import { QuotationModel } from '@server/db/models/quotationModel'
 import { verifyAccessTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
 import { type JwtPayloadExtended, verifyRefreshToken } from '@server/services/jwt'
 import { bucket } from '@server/services/storage'
 import { Router } from 'express'
 import { type HydratedDocument } from 'mongoose'
+import { type Quotation } from '@entities/quotation/types'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { type ResWithBody, type ReqWithBody, type Next } from '../types'
 
 export type ReqBody = {
-  id: string
+  id: Quotation['id']
 }
 
 export type ResBody = {
   message: 'not logged in' | 'did not find' | 'deleted' | 'internal error' | 'not deleted'
-  document?: HydratedDocument<QuotationModelType>
+  document?: HydratedDocument<Quotation>
 }
 
 type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>

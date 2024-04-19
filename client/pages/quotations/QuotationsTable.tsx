@@ -2,12 +2,12 @@ import 'ag-grid-community/styles/ag-grid.css' // Mandatory CSS required by the g
 import 'ag-grid-community/styles/ag-theme-quartz.css'
 import { useSelectorTyped } from '@lib_instances/store'
 import { Box, LinearProgress } from '@mui/material'
-import { type QuotationModelType } from '@server/db/models/quotationModel'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef, useEffect } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { useDisableLoadingOverlayWhenQuotationsAreFetched } from '@features/quotation/open_quotations'
 import { useGetQuotationsQuery } from '@entities/quotation'
+import { type Quotation } from '@entities/quotation'
 import { notify } from '@shared/ui/top_msg'
 import { addPlaceholderToFloatingFilters } from './addPlaceholderToFloatingFilters'
 import { AgGridStyles } from './AgGridStyles'
@@ -57,7 +57,7 @@ export const QuotationsTable = (): JSX.Element => {
       <AgGridStyles />
       <DisplayedRowsCount />
       {isFetching && <LinearProgress sx={{ height: '1px', top: '91px', zIndex: 2, mb: '-1px' }} />}
-      <AgGridReact<QuotationModelType>
+      <AgGridReact<Quotation>
         ref={quotationsAgGridRef}
         rowData={data?.documents}
         getRowId={params => params.data.id}

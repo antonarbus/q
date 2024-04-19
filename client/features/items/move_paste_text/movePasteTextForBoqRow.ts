@@ -2,7 +2,7 @@ import { dispatch, getState } from '@lib_instances/store'
 import isEqual from 'lodash.isequal'
 import { copySlice, getPastePlace } from '@entities/copy'
 import { boqRowKey, itemKey, quotationSlice } from '@entities/quotation'
-import { type BoqItem } from '@entities/quotation'
+import { type ItemBoq } from '@entities/quotation'
 import { className } from '@shared/consts/className'
 
 export const movePasteTextForBoqRow = (e: MouseEvent): void => {
@@ -15,7 +15,7 @@ export const movePasteTextForBoqRow = (e: MouseEvent): void => {
   const boqRowsElement = e.target.closest(`.${className.boqRows}`)
 
   const isBoqPasteItem = (getState().quotation.items
-    .filter(item => item.type === itemKey.boq) as BoqItem[])
+    .filter(item => item.type === itemKey.boq) as ItemBoq[])
     .flatMap(item => item.boq.rows)
     .some(boqRow => boqRow.type === boqRowKey.paste)
 

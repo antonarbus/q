@@ -1,20 +1,21 @@
 import bcrypt from 'bcryptjs'
 import express from 'express'
+import { type User } from '@entities/user'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { UserModel } from '../db/models/userModel'
 import { createAccessToken, createRefreshToken, thirtyDaysInSec } from '../services/jwt'
 import type { Next, ReqWithBody, ResWithBody } from '../types'
 
 export type ReqBody = {
-  email: string
-  password: string
+  email: User['email']
+  password: User['password']
 }
 
 export type ResBody = {
   message: 'no user data' | 'no password' | 'bad password' | 'not activated' | 'good password'
   accessJwtToken?: string
-  email?: string
-  roles?: string[]
+  email?: User['email']
+  roles?: User['roles']
 }
 
 type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
@@ -26,7 +27,9 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
     const password = req.body.password
     const email = req.body.email.toLowerCase()
 
-    const user = await UserModel.findOne({ email })
+    const user = await UserModel
+      .findOne({ email })
+      .lean()
 
     if (!user) {
       return res
