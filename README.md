@@ -72,48 +72,48 @@ Authorization - checking if password is correct
 Authentication - checking if a user is the same as authorized initially
 
 (A) At registration we store at db email + hashed password with secrete sault + 
-'refresh' jwt token with 30d validity which contains email & role payload
+`refresh` jwt token with 30d validity which contains email & role payload
 
 (B) Client is authorized by comparing email & password's hash 
 against stored email and hashed password.
 
-(C) On successful authorization the server issues new 15 min 'access' jwt token and
-issues new 'refresh' jwt token if pervious one is expired. 
+(C) On successful authorization the server issues new 15 min `access` jwt token and
+issues new `refresh` jwt token if pervious one is expired. 
 
-(D) 'refresh' jwt token is needed for future user authentication to avoid
+(D) `refresh` jwt token is needed for future user authentication to avoid
 asking for credentials on every protected http request.
 
-(E) 'refresh' token is saved id db and on server in secured cookies on successful login. 
-On every protected api request we verify 'refresh' token and check if it is the same as in db.
+(E) `refresh` token is saved id db and on server in secured cookies on successful login. 
+On every protected api request we verify `refresh` token and check if it is the same as in db.
 
 (F) If we want to forbid user's access we may simply delete 'refresh' token from db.
 
-(G) 'access' token is stored locally in memory on client side and is
-attached to request http headers 'access-jwt-token' for protected api requests.
+(G) `access` token is stored locally in memory on client side and is
+attached to request http headers `access-jwt-token` for protected api requests.
 
-(H) 'access' token is attached by 'request' interceptor in ´axiosWithAuth´.
-If we do a request to a protected endpoint we just use ´axiosWithAuth'
+(H) `access` token is attached by 'request' interceptor in `axiosWithAuth`.
+If we do a request to a protected endpoint we just use `axiosWithAuth`
 instance to avoid attaching token manually.
 
-(I) or protected apis the 'verifyTokenMiddleware' is used to check the 'access' token.
+(I) or protected apis the `verifyTokenMiddleware` is used to check the `access` token.
 Verification is fast and does not require database. If the token is ok
-then the request goes forward, otherwise a response of status ´401´ is returned.
+then the request goes forward, otherwise a response of status `401` is returned.
 
-(J) 'access' token expires in 15 min.
-'Response' interceptor in 'axiosWithAuth' checks for 401 status and
-if it is the 401 status, it makes additional request for new 'access' token by
-presenting a 'refresh' token in cookies, which has 30d expiry time.
+(J) `access` token expires in 15 min.
+'Response' interceptor in `axiosWithAuth` checks for `401` status and
+if it is the `401` status, it makes additional request for new `access` token by
+presenting a `refresh` token in cookies, which has 30d expiry time.
 
-(K) 'axiosWithAuth' remembers initial request with all parameters when it
-got 401 error and after getting successful refreshed tokens it repeats
+(K) `axiosWithAuth` remembers initial request with all parameters when it
+got `401` error and after getting successful refreshed tokens it repeats
 initial http request.
 
-(L) If 'refresh' token is invalid or old, then 'access' token is not
+(L) If `refresh` token is invalid or old, then `access` token is not
 issued, client is considered as unauthorized and new login action
 is required.
 
 (M) If a user is deleted from the database, he is still authorized
-for short time until 'access' token is expired (15 min).
+for short time until `access` token is expired (15 min).
 We should consider the duration of access token depending on
 sensitivity of our data.
 
