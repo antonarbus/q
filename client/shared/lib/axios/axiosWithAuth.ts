@@ -11,7 +11,9 @@ export const axiosWithAuth = axios.create({ withCredentials: true })
 
 axiosWithAuth.interceptors.request.use(async (config) => {
   if (accessTokenSignal.value === null) {
-    await asyncDelay(100) // wait a bit if we still do not have access token which we suppose to receive on first load
+    // wait a bit if we still do not have access token which we suppose to receive on first load
+    // maybe in 500ms we already have it and do not need make same request to require access token
+    await asyncDelay(500)
     config.headers[headerName.accessJwtToken] = accessTokenSignal.value
     return config
   } else {
