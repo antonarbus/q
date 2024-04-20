@@ -1,12 +1,17 @@
 import express from 'express'
 import { type User } from '@entities/user'
+import { httpStatus } from '@shared/consts/httpStatus'
 import { UserModel } from '../db/models/userModel'
-import type { JwtPayloadExtended } from '../services/jwt'
 import { createAccessToken, verifyRefreshToken } from '../services/jwt'
 import type { Next, Req, ResWithBody } from '../types'
 
 export type ResBody = {
-  message: string
+  message:
+  'no refresh token found in cookies, not authorized' |
+  'refresh token is not validated, not authorized' |
+  'no user found with such refresh token' |
+  'something went wrong during access token creation' |
+  'issued access token'
   email?: User['email']
   accessJwtToken?: string
   roles?: User['roles']
@@ -20,46 +25,40 @@ getAccessTokenRouter.get('/', async (req: Req, res: ResWithBody<ResBody>, next: 
 
     if (typeof refreshJwtToken !== 'string') {
       return res
-        .status(401)
-        .json({
-          message: 'no refresh token found in cookies, not authorized',
-        })
+        .status(httpStatus.unauthorized_401)
+        .json({ message: 'no refresh token found in cookies, not authorized' })
     }
 
-    const { email } = verifyRefreshToken(refreshJwtToken) as JwtPayloadExtended
+    const jwtPayload = verifyRefreshToken(refreshJwtToken)
 
-    if (!email) {
+    const email = jwtPayload?.email
+
+    if (typeof email !== 'string') {
       return res
-        .status(401)
-        .json({
-          message: 'refresh token is not validated, not authorized',
-        })
+        .status(httpStatus.unauthorized_401)
+        .json({ message: 'refresh token is not validated, not authorized' })
     }
 
-    const user = await UserModel.findOne({ refreshJwtToken })
+    const user = await UserModel.findOne({ email, refreshJwtToken })
 
-    if (user === null) {
+    if (!user) {
       return res
-        .status(401)
-        .json({
-          message: 'no user found with such refresh token',
-        })
+        .status(httpStatus.unauthorized_401)
+        .json({ message: 'no user found with such refresh token' })
     }
 
     const accessJwtToken = createAccessToken({ email, roles: user.roles })
 
     if (!accessJwtToken) {
       return res
-        .status(401)
-        .json({
-          message: 'something wend wrong during access token creation',
-        })
+        .status(httpStatus.unauthorized_401)
+        .json({ message: 'something went wrong during access token creation' })
     }
 
     return res
-      .status(200)
+      .status(httpStatus.success_200)
       .json({
-        message: `issued access token for email: ${email}`,
+        message: 'issued access token',
         accessJwtToken,
         roles: user.roles,
         email,
