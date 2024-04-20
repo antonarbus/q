@@ -5,18 +5,6 @@ import { headerName } from 'server/consts/headerName'
 import { accessTokenSignal } from '../../auth/accessTokenSignal'
 import { route } from '../../consts/route'
 
-//* for protected routes we use this special axios instance which automatically attach access token into the header
-
-//* tokens are checked and refreshed at two places with useRefreshTokens() hook
-//* ones we enter the app at the < Main /> component
-//* and every time we hit any route under <PersistentAuth />
-
-//* protected routes have a middleware which checks the token against db
-//* middleware throw 401 error response if token is not valid
-//* if error is thrown for the 1st time the interceptor bellow will try to refresh the token as it may be simply expired after 15 min
-//* then it will try to make original call again with refreshed token (if it is refreshed)
-//* and if it has again fail with 401 status then we need to show the login form
-
 export const axiosWithAuth = axios.create({ withCredentials: true })
 
 axiosWithAuth.interceptors.request.use((config) => {
