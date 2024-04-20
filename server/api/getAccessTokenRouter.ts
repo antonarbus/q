@@ -7,9 +7,9 @@ import type { Next, Req, ResWithBody } from '../types'
 
 export type ResBody = {
   message: string
-  email: User['email']
-  accessJwtToken: string
-  roles: User['roles']
+  email?: User['email']
+  accessJwtToken?: string
+  roles?: User['roles']
 }
 
 export const getAccessTokenRouter = express.Router()
@@ -23,9 +23,6 @@ getAccessTokenRouter.get('/', async (req: Req, res: ResWithBody<ResBody>, next: 
         .status(401)
         .json({
           message: 'no refresh token found in cookies, not authorized',
-          email: 'no email',
-          accessJwtToken: 'no access token',
-          roles: ['no role'],
         })
     }
 
@@ -36,9 +33,6 @@ getAccessTokenRouter.get('/', async (req: Req, res: ResWithBody<ResBody>, next: 
         .status(401)
         .json({
           message: 'refresh token is not validated, not authorized',
-          email: 'no email',
-          accessJwtToken: 'no access token',
-          roles: ['no role'],
         })
     }
 
@@ -49,13 +43,18 @@ getAccessTokenRouter.get('/', async (req: Req, res: ResWithBody<ResBody>, next: 
         .status(401)
         .json({
           message: 'no user found with such refresh token',
-          email: 'no email',
-          accessJwtToken: 'no access token',
-          roles: ['no role'],
         })
     }
 
     const accessJwtToken = createAccessToken({ email, roles: user.roles })
+
+    if (!accessJwtToken) {
+      return res
+        .status(401)
+        .json({
+          message: 'something wend wrong during access token creation',
+        })
+    }
 
     return res
       .status(200)

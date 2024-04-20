@@ -72,7 +72,7 @@ export const useGetAccessToken = ({ withLoadingState }: Props): Res => {
 
         if (email) {
           accessTokenSignal.value = response.data.accessJwtToken
-          dispatch(userSlice.actions.rememberLoggedUser({ email, roles: response.data.roles }))
+          dispatch(userSlice.actions.rememberLoggedUser({ email, roles: response.data.roles ?? ['some role'] }))
           dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.login] }))
           dispatch(navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.account] }))
           console.info(`access token was issued for ${email}`)
