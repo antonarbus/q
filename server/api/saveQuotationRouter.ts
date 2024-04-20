@@ -53,7 +53,7 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
         { new: true, setDefaultsOnInsert: true, upsert: true },
       )
       .select({ _id: 0, __v: 0 })
-      .lean() // otherwise in json we get some internal data which is not visible via console.log(document), strange
+      .lean() // otherwise in json we get some additional internal data which is not visible via console.log(document), strange
 
     const isNew = document.createdAt?.toISOString() === document.updatedAt?.toISOString()
 

@@ -71,52 +71,58 @@ A _slice_ consists of _segments_ to separate code by its technical nature, commo
 Authorization - checking if password is correct
 Authentication - checking if a user is the same as authorized initially
 
-(A) The client is authorized by comparing email and
-password's hash with secrete sault against database.
+(A) At registration we store at db email + hashed password with secrete sault + 
+'refresh' jwt token with 30d validity which contains email & role payload
 
-(B) On successful authorization the server issues an 'access'
-and a 'refresh' tokens for future user authentication to avoid
-asking for credentials on every http request.
+(B) Client is authorized by comparing email & password's hash 
+against stored email and hashed password.
 
-(C) Client stores 'access' token locally in memory and
-attaches it inside request headers for private api requests.
-Token is attached by 'request' interceptor in 'axiosWithAuth'.
-If we do a request to a protected endpoint we just use axiosWithAuth
+(C) On successful authorization the server issues new 15 min 'access' jwt token and
+issues new 'refresh' jwt token if pervious one is expired. 
+
+(D) 'refresh' jwt token is needed for future user authentication to avoid
+asking for credentials on every protected http request.
+
+(E) 'refresh' token is saved id db and on server in secured cookies on successful login. 
+On every protected api request we verify 'refresh' token and check if it is the same as in db.
+
+(F) If we want to forbid user's access we may simply delete 'refresh' token from db.
+
+(G) 'access' token is stored locally in memory on client side and is
+attached to request http headers 'access-jwt-token' for protected api requests.
+
+(H) 'access' token is attached by 'request' interceptor in ´axiosWithAuth´.
+If we do a request to a protected endpoint we just use ´axiosWithAuth'
 instance to avoid attaching token manually.
 
-(D) For protected apis the 'verifyToken' express middleware verifies an 'access' token.
-If the token is ok, the request goes forward. If the token is bad
-(compromised or outdated) a response of status 401 is returned.
+(I) or protected apis the 'verifyTokenMiddleware' is used to check the 'access' token.
+Verification is fast and does not require database. If the token is ok
+then the request goes forward, otherwise a response of status ´401´ is returned.
 
-(E) 'Access' token expires in 15 min.
+(J) 'access' token expires in 15 min.
 'Response' interceptor in 'axiosWithAuth' checks for 401 status and
-if it is the 401, it makes additional request to update 'access' token by
+if it is the 401 status, it makes additional request for new 'access' token by
 presenting a 'refresh' token in cookies, which has 30d expiry time.
 
-(F) 'Refresh' token is saved on server in secured cookies on the login 
-and on tokens refresh. Token is also kept in database. 
-If the 'refresh' token is valid and available in database, then 
-updated 'access' and updated 'refresh' tokens are issued.
-
-(G) 'axiosWithAuth' remembers initial request with all parameters when it
+(K) 'axiosWithAuth' remembers initial request with all parameters when it
 got 401 error and after getting successful refreshed tokens it repeats
 initial http request.
 
-(H) If 'refresh' token is invalid or old, then 'access' token is not
+(L) If 'refresh' token is invalid or old, then 'access' token is not
 issued, client is considered as unauthorized and new login action
 is required.
 
-(I) If a user is deleted from the database, he is still authorized
+(M) If a user is deleted from the database, he is still authorized
 for short time until 'access' token is expired (15 min).
 We should consider the duration of access token depending on
 sensitivity of our data.
 
-(J) Tokens are also checked and refreshed at the initial app
+(N) Tokens are also checked and refreshed at the initial app
 load in useEffect() on <Main /> component mount. That's how we determine
 if a known client returned back and avoid prompting for credentials
-on a page refresh.
+on every page refresh.
 
-(K) For tokens we use JWT tokens, which contain encrypted (not hashed)
+(O) For tokens we use JWT tokens, which contain encrypted (not hashed)
 payload (usually object with user email, role, etc...), validation time
 and a hash based on a secret keys, which are kept on a server.
 Server can validate the token only if it knows the secrete keys.
