@@ -5,8 +5,8 @@ import type { Next, Req, Res, ResWithBody } from '../types'
 
 export type ResBody = {
   message:
-  'something happened during jwt token validation' |
-  'accessJwtToken is not verified, user is not authorized'
+  'no access token in headers' |
+  'accessJwtToken is not verified'
 }
 
 export const verifyAccessTokenMiddleware = (req: Req, res: ResWithBody<ResBody>, next: Next): Res | undefined => {
@@ -16,7 +16,7 @@ export const verifyAccessTokenMiddleware = (req: Req, res: ResWithBody<ResBody>,
     if (typeof accessJwtToken !== 'string') {
       return res
         .status(httpStatus.unauthorized_401)
-        .json({ message: 'something happened during jwt token validation' })
+        .json({ message: 'no access token in headers' })
     }
 
     const { email } = verifyAccessToken(accessJwtToken) as JwtPayloadExtended
@@ -24,13 +24,13 @@ export const verifyAccessTokenMiddleware = (req: Req, res: ResWithBody<ResBody>,
     if (typeof email !== 'string') {
       return res
         .status(httpStatus.unauthorized_401)
-        .json({ message: 'accessJwtToken is not verified, user is not authorized' })
+        .json({ message: 'accessJwtToken is not verified' })
     }
 
     next()
   } catch (error) {
     return res
       .status(httpStatus.unauthorized_401)
-      .json({ message: 'accessJwtToken is not verified, user is not authorized' })
+      .json({ message: 'accessJwtToken is not verified' })
   }
 }

@@ -24,9 +24,7 @@ export const QuotationsTable = (): JSX.Element => {
   const email = useSelectorTyped(state => state.user.email)
 
   useEffect(() => {
-    if (email) {
-      void refetch()
-    }
+    void refetch()
   }, [email])
 
   useUpdateEffect(() => {
