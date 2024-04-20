@@ -1,5 +1,5 @@
 import { QuotationModel } from '@server/db/models/quotationModel'
-import { type JwtPayloadExtended, verifyRefreshToken } from '@server/services/jwt'
+import { verifyRefreshToken } from '@server/services/jwt'
 import { bucket } from '@server/services/storage'
 import { Router } from 'express'
 import { type FlattenMaps } from 'mongoose'
@@ -36,9 +36,11 @@ const getQuotation: RouterHandler = async (req, res, next) => {
         .json({ message: 'not logged in' })
     }
 
-    const { email } = verifyRefreshToken(refreshJwtToken) as JwtPayloadExtended
+    const jwtPayload = verifyRefreshToken(refreshJwtToken)
 
-    if (!email) {
+    const email = jwtPayload?.email
+
+    if (typeof email !== 'string') {
       return res
         .status(httpStatus.forbidden_403)
         .json({ message: 'not logged in' })
