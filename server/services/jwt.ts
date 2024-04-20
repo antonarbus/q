@@ -1,7 +1,6 @@
 import type { JwtPayload } from 'jsonwebtoken'
 import jwt from 'jsonwebtoken'
 
-const fifteenMinInSec = 15 * 60
 export const thirtyDaysInSec = 30 * 24 * 60 * 60
 
 export type JwtPayloadExtended = {
@@ -9,16 +8,26 @@ export type JwtPayloadExtended = {
   roles: string[]
 }
 
-export const createAccessToken = (payload: JwtPayloadExtended): string => {
-  const token = jwt.sign(payload, process.env.JWT_ACCESS_SECRET ?? 'some fake secret to suppress ts error', {
+export const createAccessToken = (payload: JwtPayloadExtended): string | undefined => {
+  const sault = process.env.JWT_ACCESS_SECRET
+
+  if (!sault) return undefined
+
+  const fifteenMinInSec = 15 * 60
+
+  const token = jwt.sign(payload, sault, {
     expiresIn: fifteenMinInSec,
   })
 
   return token
 }
 
-export const createRefreshToken = (payload: JwtPayloadExtended): string => {
-  const token = jwt.sign(payload, process.env.JWT_REFRESH_SECRET ?? 'some fake secret to suppress ts error', {
+export const createRefreshToken = (payload: JwtPayloadExtended): string | undefined => {
+  const sault = process.env.JWT_REFRESH_SECRET
+
+  if (!sault) return undefined
+
+  const token = jwt.sign(payload, sault, {
     expiresIn: thirtyDaysInSec,
   })
 
@@ -26,27 +35,35 @@ export const createRefreshToken = (payload: JwtPayloadExtended): string => {
 }
 
 export const verifyAccessToken = (accessJwtToken: string): JwtPayload | undefined => {
-  if (typeof process.env.JWT_ACCESS_SECRET !== 'string') return undefined
+  const sault = process.env.JWT_ACCESS_SECRET
+
+  if (!sault) return undefined
+
   if (typeof accessJwtToken !== 'string') return undefined
 
   try {
-    const jwtPayload = jwt.verify(accessJwtToken, process.env.JWT_ACCESS_SECRET)
+    const jwtPayload = jwt.verify(accessJwtToken, sault)
     if (typeof jwtPayload === 'string') return undefined
     return jwtPayload
   } catch (error) {
+    // if token is expired it will result in error
     return undefined
   }
 }
 
 export const verifyRefreshToken = (refreshJwtToken: string): JwtPayload | undefined => {
-  if (typeof process.env.JWT_REFRESH_SECRET !== 'string') return undefined
+  const sault = process.env.JWT_REFRESH_SECRET
+
+  if (!sault) return undefined
+
   if (typeof refreshJwtToken !== 'string') return undefined
 
   try {
-    const jwtPayload = jwt.verify(refreshJwtToken, process.env.JWT_REFRESH_SECRET)
+    const jwtPayload = jwt.verify(refreshJwtToken, sault)
     if (typeof jwtPayload === 'string') return undefined
     return jwtPayload
   } catch (error) {
+    // if token is expired it will result in error
     return undefined
   }
 }
