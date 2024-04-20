@@ -3,49 +3,55 @@ import axios, { AxiosError } from 'axios'
 import { apiUrl } from 'server/consts/apiUrl'
 import { headerName } from 'server/consts/headerName'
 import { accessTokenSignal } from '../../auth/accessTokenSignal'
+import { httpStatus } from '../../consts/httpStatus'
 import { route } from '../../consts/route'
+import { asyncDelay } from '../../utils/delay'
 
 export const axiosWithAuth = axios.create({ withCredentials: true })
 
-axiosWithAuth.interceptors.request.use((config) => {
-  if (config.headers && accessTokenSignal.value !== null) {
+axiosWithAuth.interceptors.request.use(async (config) => {
+  if (accessTokenSignal.value === null) {
+    await asyncDelay(100) // wait a bit if we still do not have access token which we suppose to receive on first load
     config.headers[headerName.accessJwtToken] = accessTokenSignal.value
+    return config
+  } else {
+    config.headers[headerName.accessJwtToken] = accessTokenSignal.value
+    return config
   }
-
-  return config
 })
 
-axiosWithAuth.interceptors.response.use((config) => {
-  return config
-}, async (error) => {
-  const originalRequest = error.config
-  const isTokenProbablyExpired = error.response.status === 401 && error.config && !error.config._isRetry
+axiosWithAuth.interceptors.response.use(
+  (config) => {
+    return config
+  },
+  async (error) => {
+    const originalRequest = error.config
+    const isTokenProbablyExpired = error.response.status === httpStatus.unauthorized_401 && error.config && !error.config._isRetry
 
-  if (isTokenProbablyExpired) {
-    originalRequest._isRetry = true
+    if (isTokenProbablyExpired) {
+      originalRequest._isRetry = true
 
-    try {
-      const response = await axios.get(apiUrl.getAccessToken, { withCredentials: true })
-      const { accessJwtToken } = response.data
+      try {
+        const res = await axios.get(apiUrl.getAccessToken, { withCredentials: true })
 
-      if (accessJwtToken) {
-        accessTokenSignal.value = accessJwtToken
-      }
+        if (res.data.accessJwtToken) {
+          accessTokenSignal.value = res.data.accessJwtToken
+        }
 
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      return await axiosWithAuth.request(originalRequest)
-    } catch (err: unknown) {
-      if (err instanceof AxiosError && err.response?.status === 401) {
-        accessTokenSignal.value = null
-        console.warn('not authorized')
-        console.error(err)
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        return await axiosWithAuth.request(originalRequest)
+      } catch (err: unknown) {
+        if (err instanceof AxiosError && err.response?.status === httpStatus.unauthorized_401) {
+          accessTokenSignal.value = null
+          console.warn('not authorized')
+          console.error(err)
 
-        if (!location.pathname.includes(route.login)) {
-          void router.navigate(`./${route.login}`)
+          if (!location.pathname.includes(route.login)) {
+            void router.navigate(`./${route.login}`)
+          }
         }
       }
     }
-  }
 
-  throw error
-})
+    throw error
+  })

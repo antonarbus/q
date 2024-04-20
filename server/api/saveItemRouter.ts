@@ -1,6 +1,6 @@
 import { ItemModel } from '@server/db/models/itemModel'
 import { verifyAccessTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
-import { type JwtPayloadExtended, verifyRefreshToken } from '@server/services/jwt'
+import { verifyRefreshToken } from '@server/services/jwt'
 import { bucket } from '@server/services/storage'
 import { Router } from 'express'
 import { type ItemCopyable } from '@entities/item'
@@ -30,9 +30,11 @@ const saveItem: RouterHandler = async (req, res, next) => {
         .json({ message: 'not logged in' })
     }
 
-    const { email } = verifyRefreshToken(refreshJwtToken) as JwtPayloadExtended
+    const jwtPayload = verifyRefreshToken(refreshJwtToken)
 
-    if (!email) {
+    const email = jwtPayload?.email
+
+    if (typeof email !== 'string') {
       return res
         .status(httpStatus.unauthorized_401)
         .json({ message: 'not logged in' })
