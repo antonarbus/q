@@ -2,7 +2,7 @@ import { useSelectorTyped } from '@lib_instances/store'
 import { Resizable, type ResizableProps } from 're-resizable'
 import type { ReactNode } from 'react'
 import { className } from '@shared/consts/className'
-import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types/resizablePaper'
+import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types/xxx_resizablePaper'
 import { useItem } from '../../providers/ItemProvider'
 
 type Props = {

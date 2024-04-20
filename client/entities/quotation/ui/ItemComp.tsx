@@ -1,7 +1,7 @@
 import { getState } from '@lib_instances/store'
 import { type ResizableProps } from 're-resizable'
 import type { ReactNode } from 'react'
-import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types/resizablePaper'
+import { type OnItemResize, type OnItemResizeStop, type OnItemResizeStart } from '@shared/types/xxx_resizablePaper'
 import { useIsItemSortDisabled } from '../hooks/useIsItemSortDisabled'
 import { useItem } from '../providers/ItemProvider'
 import { ItemSortAndAnimate } from './item_layout'
