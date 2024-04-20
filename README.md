@@ -86,7 +86,7 @@ asking for credentials on every protected http request.
 (E) `refresh` token is saved id db and on server in secured cookies on successful login. 
 On every protected api request we verify `refresh` token and check if it is the same as in db.
 
-(F) If we want to forbid user's access we may simply delete 'refresh' token from db.
+(F) If we want to forbid user's access we may simply delete `refresh` token from db.
 
 (G) `access` token is stored locally in memory on client side and is
 attached to request http headers `access-jwt-token` for protected api requests.
@@ -118,7 +118,7 @@ We should consider the duration of access token depending on
 sensitivity of our data.
 
 (N) Tokens are also checked and refreshed at the initial app
-load in useEffect() on <Main /> component mount. That's how we determine
+load in `useEffect()` on `<Main />` component mount. That's how we determine
 if a known client returned back and avoid prompting for credentials
 on every page refresh.
 
