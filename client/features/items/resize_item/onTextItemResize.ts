@@ -2,7 +2,7 @@ import { dispatch, getState } from '@lib_instances/store'
 import { fixItemImagesHeight, quotationSlice, unfixItemImagesHeight } from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
-import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types/xxx_resizablePaper'
+import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types/resizablePaper'
 
 export const onTextItemResizeStart: OnItemResizeStart = ({ itemIndex, e, dir, elementRef }) => {
   unfixItemImagesHeight()
