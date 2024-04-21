@@ -1,6 +1,5 @@
 import { type RouteObject, createBrowserRouter } from 'react-router-dom'
 import { Activation } from '@pages/auth/Activation'
-import { PersistentAuth } from '@pages/auth/PersistentAuth'
 import { RequireAuth } from '@pages/auth/RequireAuth'
 import { Unauthorized } from '@pages/auth/Unauthorized'
 import { BarChart } from '@pages/chart/Chart'
@@ -84,21 +83,6 @@ export const router = createBrowserRouter([
         path: route.items,
         element: <Items />,
         children: authRoutes,
-      },
-      {
-        // just an example of protected routes with specific roles, may be helpful for administration
-        element: <PersistentAuth />,
-        children: [
-          {
-            element: <RequireAuth allowedRoles={['user']} />,
-            children: [
-              {
-                path: route.settings,
-                element: <div>Settings</div>,
-              },
-            ],
-          },
-        ],
       },
     ],
   },
