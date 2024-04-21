@@ -39,9 +39,12 @@ export function useLoadQuotation(): void {
 
   useEffect(() => {
     if (id !== undefined && id !== 'new') {
-      const didSaveNewQuotation = getState().quotation.id === id
+      dispatch(navSlice.actions.removeUnderlineFromTopNav())
+      loadingDotsOverlayTextSignal.value = `Loading ${id}...`
+      setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 1000)
 
-      if (didSaveNewQuotation) return
+      const loadingAlreadyLoadedQuotation = getState().quotation.id === id
+      if (loadingAlreadyLoadedQuotation) return
 
       dispatch(quotationSlice.actions.resetQuotationReducer())
       dispatch(navSlice.actions.removeUnderlineFromTopNav())
@@ -51,7 +54,7 @@ export function useLoadQuotation(): void {
 
   useUpdateEffect(() => {
     if (isPending) {
-      loadingDotsOverlayTextSignal.value = 'Loading quotation...'
+      loadingDotsOverlayTextSignal.value = `Loading ${id}...`
     }
   }, [isPending])
 

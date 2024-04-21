@@ -43,7 +43,11 @@ const getQuotation: RouterHandler = async (req, res, next) => {
     }
 
     const document = await QuotationModel
-      .findOne({ email, id })
+      .findOneAndUpdate(
+        { email, id },
+        { openedAt: new Date() },
+        { new: true },
+      )
       .lean()
 
     if (document === null) {

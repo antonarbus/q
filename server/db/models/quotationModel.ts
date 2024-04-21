@@ -23,8 +23,18 @@ const quotationSchema = new Schema<Quotation>({
     type: String,
     trim: true,
   },
-  createdAt: Date,
-  updatedAt: Date,
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now,
+  },
+  openedAt: {
+    type: Date,
+    default: Date.now,
+  },
   sharedAt: Date,
   from: {
     email: String,

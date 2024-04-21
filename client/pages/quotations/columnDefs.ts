@@ -39,6 +39,17 @@ export const columnDefs: Array<ColDef<Quotation>> = [
     headerName: 'id',
   },
   {
+    field: 'openedAt',
+    headerName: 'opened',
+    filter: 'agDateColumnFilter',
+    valueGetter: dateValueGetter({ columnDef: 'openedAt' }),
+    cellRenderer: DateCellRenderer,
+    filterParams: {
+      comparator: dateFilterComparator,
+    },
+    minWidth: 200,
+  },
+  {
     field: 'createdAt',
     headerName: 'created',
     filter: 'agDateColumnFilter',
