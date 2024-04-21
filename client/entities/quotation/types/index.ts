@@ -102,6 +102,7 @@ export type Quotation = {
   quotationName?: string
   createdAt?: Date
   updatedAt?: Date
+  openedAt?: Date
   sharedAt?: Date
   from?: {
     email?: string
