@@ -2,8 +2,7 @@ import { QuotationModel } from '@server/db/models/quotationModel'
 import { verifyRefreshToken } from '@server/services/jwt'
 import { bucket } from '@server/services/storage'
 import { Router } from 'express'
-import { type FlattenMaps } from 'mongoose'
-import { type Item, type Quotation } from '@entities/quotation'
+import { type Quotation } from '@entities/quotation'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { type ResWithBody, type ReqWithBody, type Next } from '../types'
 
@@ -13,9 +12,6 @@ export type ReqBody = {
 
 export type ResBody = {
   message: 'not logged in' | 'not found' | 'found'
-  document?: FlattenMaps<Quotation>
-  jsonSignedUrl?: string
-  items?: Item[]
   quotation?: Quotation
 }
 
@@ -56,33 +52,21 @@ const getQuotation: RouterHandler = async (req, res, next) => {
         .json({ message: 'not found' })
     }
 
-    const oneHour = Date.now() + 3600 * 1000
     const filePath = `${email}/quotations/${id}.json`
 
-    const [exists] = await bucket.file(filePath).exists()
+    const [file] = await bucket.file(filePath).download()
 
-    if (!exists) {
+    if (!file) {
       return res
         .status(httpStatus.notFound_404)
         .json({ message: 'not found' })
     }
 
-    const jsonSignedUrlRes = await bucket.file(filePath).getSignedUrl({
-      action: 'read',
-      expires: oneHour,
-    })
-
-    const jsonSignedUrl = jsonSignedUrlRes.at(0)
-
-    if (jsonSignedUrl === undefined) {
-      return res
-        .status(httpStatus.notFound_404)
-        .json({ message: 'not found' })
-    }
+    const quotation = JSON.parse(file.toString())
 
     return res
       .status(httpStatus.success_200)
-      .json({ message: 'found', document, jsonSignedUrl })
+      .json({ message: 'found', quotation })
   } catch (error) {
     next(error)
   }

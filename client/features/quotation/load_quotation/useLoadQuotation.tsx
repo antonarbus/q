@@ -51,22 +51,25 @@ export function useLoadQuotation(): void {
 
   useUpdateEffect(() => {
     if (isPending) {
-      loadingDotsOverlayTextSignal.value = 'Loading...'
+      loadingDotsOverlayTextSignal.value = 'Loading quotation...'
     }
   }, [isPending])
 
   useUpdateEffect(() => {
     if (isSuccess) {
-      const { items, quotation } = data
+      const quotation = data.quotation
 
-      if (items === undefined || quotation === undefined) return
+      if (quotation === undefined) return
+      if (quotation.items === undefined) {
+        notify({ msg: 'Quotation corrupted', type: 'warn', theme: 'light' })
+        setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 1000)
+        return
+      }
 
       dispatch(quotationSlice.actions.resetQuotationReducer())
 
-      if (data.message === 'found' && data.quotation) {
-        dispatch(quotationSlice.actions.loadQuotationReducer({
-          quotation: data.quotation,
-        }))
+      if (data.message === 'found') {
+        dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
 
         dispatch(navSlice.actions.enableNavItems({
           navItemIdKeys: [navItemId.save, navItemId.pdf, navItemId.share, navItemId.insert],
