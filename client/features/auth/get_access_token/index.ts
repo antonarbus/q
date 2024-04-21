@@ -1,1 +1,1 @@
-export { useGetAccessToken } from './useGetAccessToken'
+export { AccessToken } from './AccessToken'

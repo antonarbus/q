@@ -12,4 +12,5 @@ export const queryKey = {
   resetPassword: 'resetPassword',
   saveQuotation: 'saveQuotation',
   saveItem: 'saveItem',
+  getAccessToken: 'getAccessToken',
 } as const

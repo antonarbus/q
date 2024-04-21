@@ -1,25 +1,20 @@
 import { router } from '@lib_instances/Router'
-import axios, { AxiosError } from 'axios'
+import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
 import { apiUrl } from 'server/consts/apiUrl'
 import { headerName } from 'server/consts/headerName'
 import { accessTokenSignal } from '../../auth/accessTokenSignal'
 import { httpStatus } from '../../consts/httpStatus'
 import { route } from '../../consts/route'
-import { asyncDelay } from '../../utils/delay'
+
+export const { promise: initAccessTokenFetchingPromise, resolve: resolveInitAccessTokenFetching } = Promise.withResolvers<'fetched' | 'failed'>()
 
 export const axiosWithAuth = axios.create({ withCredentials: true })
 
 axiosWithAuth.interceptors.request.use(async (config) => {
-  if (accessTokenSignal.value === null) {
-    // wait a bit if we still do not have access token which we suppose to receive on first load
-    // maybe in 500ms we already have it and do not need make same request to require access token
-    await asyncDelay(500)
-    config.headers[headerName.accessJwtToken] = accessTokenSignal.value
-    return config
-  } else {
-    config.headers[headerName.accessJwtToken] = accessTokenSignal.value
-    return config
-  }
+  // wait till initial access token if fetched, otherwise we put null and another vain request for access token will be sent
+  await initAccessTokenFetchingPromise
+  config.headers[headerName.accessJwtToken] = accessTokenSignal.value
+  return config
 })
 
 axiosWithAuth.interceptors.response.use(
@@ -27,7 +22,7 @@ axiosWithAuth.interceptors.response.use(
     return config
   },
   async (error) => {
-    const originalRequest = error.config
+    const originalRequest = error.config as (AxiosRequestConfig & { _isRetry: boolean })
     const isTokenProbablyExpired = error.response.status === httpStatus.unauthorized_401 && error.config && !error.config._isRetry
 
     if (isTokenProbablyExpired) {
@@ -40,10 +35,11 @@ axiosWithAuth.interceptors.response.use(
           accessTokenSignal.value = res.data.accessJwtToken
         }
 
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         return await axiosWithAuth.request(originalRequest)
       } catch (err: unknown) {
-        if (err instanceof AxiosError && err.response?.status === httpStatus.unauthorized_401) {
+        const unauthorized = err instanceof AxiosError && err.response?.status === httpStatus.unauthorized_401
+
+        if (unauthorized) {
           accessTokenSignal.value = null
           console.warn('not authorized')
           console.error(err)

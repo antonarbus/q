@@ -8,12 +8,12 @@ import { useUpdateEffect } from 'react-use'
 import { useDisableLoadingOverlayWhenQuotationsAreFetched } from '@features/quotation/open_quotations'
 import { useGetQuotationsQuery } from '@entities/quotation'
 import { type Quotation } from '@entities/quotation'
+import { LoadingTableOverlay } from '@shared/components/LoadingTableOverlay'
 import { notify } from '@shared/ui/top_msg'
 import { addPlaceholderToFloatingFilters } from './addPlaceholderToFloatingFilters'
 import { AgGridStyles } from './AgGridStyles'
 import { columnDefs, defaultColDef } from './columnDefs'
 import { DisplayedRowsCount, displayedRowsCountSignal } from './DisplayedRowsCount'
-import { LoadingTableOverlay } from './LoadingTableOverlay'
 import { NoRowsTableOverlay } from './NoRowsTableOverlay'
 import { quotationsAgGridRef } from './quotationsAgGridRef'
 
@@ -54,7 +54,7 @@ export const QuotationsTable = (): JSX.Element => {
     >
       <AgGridStyles />
       <DisplayedRowsCount />
-      {isFetching && <LinearProgress sx={{ height: '1px', top: '91px', zIndex: 2, mb: '-1px' }} />}
+      {isFetching && <LinearProgress sx={{ height: '1px', top: '97px', zIndex: 2, mb: '-1px' }} />}
       <AgGridReact<Quotation>
         ref={quotationsAgGridRef}
         rowData={data?.documents}

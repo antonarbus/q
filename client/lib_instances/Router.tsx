@@ -9,6 +9,7 @@ import { Quotation } from '@pages/quotation'
 import { Quotations } from '@pages/quotations'
 import { Copy } from '@widgets/copy'
 import { Nav } from '@widgets/nav'
+import { AccessToken } from '@features/auth/get_access_token'
 import { LogIn } from '@features/auth/log_in'
 import { LogOut } from '@features/auth/log_out'
 import { Register } from '@features/auth/register'
@@ -53,6 +54,7 @@ export const router = createBrowserRouter([
   {
     element: (
       <>
+        <AccessToken />
         <TopMsg />
         <LoadingDotsOverlay />
         <Nav />

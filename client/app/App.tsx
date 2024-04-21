@@ -8,7 +8,6 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Provider } from 'react-redux'
 import { RouterProvider } from 'react-router-dom'
-import { useGetAccessToken } from '@features/auth/get_access_token'
 import { useLogoutIfAccessTokenRemoved } from '@features/auth/log_out'
 import { GlobalStyles } from './GlobalStyles'
 import { ReactQueryDevtoolsProductionHidden } from './ReactQueryDevtoolsProductionHidden'
@@ -16,7 +15,6 @@ import './signalsDevTools'
 import '@shared/utils/cursorPosSignal'
 
 export const App = (): JSX.Element => {
-  useGetAccessToken({ withLoadingState: false })
   useLogoutIfAccessTokenRemoved()
 
   return (
