@@ -8,7 +8,7 @@ import { useUpdateEffect } from 'react-use'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@features/items/open_items'
 import { useGetItemsQuery } from '@entities/item'
 import { type ItemCopyable } from '@entities/item'
-import { LoadingTableOverlay } from '@shared/components/LoadingTableOverlay'
+import { LoadingTableOverlay, loadingTableOverlaySignal } from '@shared/components/LoadingTableOverlay'
 import { notify } from '@shared/ui/top_msg'
 import { addPlaceholderToFloatingFilters } from './addPlaceholderToFloatingFilters'
 import { AgGridStyles } from './AgGridStyles'
@@ -19,13 +19,19 @@ import { NoRowsTableOverlay } from './NoRowsTableOverlay'
 
 export const ItemsTable = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
-  const { data, isSuccess, isFetching, isFetched, isError, error, refetch } = useGetItemsQuery()
+  const { data, isSuccess, isLoading, isFetching, isFetched, isError, error, refetch } = useGetItemsQuery()
   useDisableLoadingOverlayWhenItemsAreFetched({ isFetched })
   const email = useSelectorTyped(state => state.user.email)
 
   useEffect(() => {
     void refetch()
   }, [email])
+
+  useUpdateEffect(() => {
+    if (isLoading) {
+      loadingTableOverlaySignal.value = { areJumpingDotsShown: true, text: 'Loading' }
+    }
+  }, [isLoading])
 
   useUpdateEffect(() => {
     if (isSuccess) {
