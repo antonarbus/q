@@ -8,25 +8,13 @@ export const useGetQuotationMutation = (): UseMutationResult<ResBody, AxiosError
   const mutation = useMutation({
     mutationKey: [queryKey.getQuotation],
     mutationFn: async ({ id }: Payload) => {
-      const quotationRes = await axios<ResBody, AxiosResponse<ResBody>, Payload>({
+      const { data } = await axios<ResBody, AxiosResponse<ResBody>, Payload>({
         url: apiUrl.getQuotation,
         method: 'POST',
         data: { id },
       })
 
-      if (!quotationRes.data.jsonSignedUrl) {
-        return quotationRes.data
-      }
-
-      const jsonRes = await axios<ResBody>({
-        method: 'GET',
-        url: quotationRes.data.jsonSignedUrl,
-      })
-
-      return {
-        ...quotationRes.data,
-        ...jsonRes.data,
-      }
+      return data
     },
   })
 
