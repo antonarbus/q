@@ -1,7 +1,7 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { useNavigate } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
-import { quotationSlice, updateOrAppendIntoQuotationsCache, useSaveQuotationMutation } from '@entities/quotation'
+import { quotationSlice, useSaveQuotationMutation } from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
 import { nanoid } from '@shared/lib/nanoid'
 import { navSlice, showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@shared/nav'
@@ -59,9 +59,6 @@ export const SaveQuotation = (): JSX.Element => {
 
       notify({ msg: 'Saved', type: 'success', position: 'bottom-center' })
       showSuccessNavIcon({ navMenuItemIdKey: navItemId.save })
-      // todo: do we need to update quotation in redux? not sure
-      // quotationSignal.value = { ...quotationSignal.value, ...data.document }
-      // updateOrAppendIntoQuotationsCache({ quotation: quotationSignal.value })
       dispatch(navSlice.actions.disableNavItems({ navItemIdKeys: [navItemId.save] }))
       dispatch(navSlice.actions.removeUnderlineFromTopNav())
     }
