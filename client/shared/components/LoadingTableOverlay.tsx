@@ -1,5 +1,5 @@
 import { signal } from '@preact/signals-react'
-import { LoadingDots } from '@shared/loading_dots_overlay/LoadingDots'
+import { LoadingDots } from '../loading_dots_overlay/LoadingDots'
 
 export const loadingTableOverlaySignal = signal({ areJumpingDotsShown: false, text: '' })
 

@@ -1,6 +1,5 @@
 import { type RouteObject, createBrowserRouter } from 'react-router-dom'
 import { Activation } from '@pages/auth/Activation'
-import { RequireAuth } from '@pages/auth/RequireAuth'
 import { Unauthorized } from '@pages/auth/Unauthorized'
 import { BarChart } from '@pages/chart/Chart'
 import { Items } from '@pages/items'
