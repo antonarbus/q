@@ -54,15 +54,15 @@ const getQuotation: RouterHandler = async (req, res, next) => {
 
     const filePath = `${email}/quotations/${id}.json`
 
-    const [file] = await bucket.file(filePath).download()
+    const [fileBuffer] = await bucket.file(filePath).download()
 
-    if (!file) {
+    if (!fileBuffer) {
       return res
         .status(httpStatus.notFound_404)
         .json({ message: 'not found' })
     }
 
-    const quotation = JSON.parse(file.toString())
+    const quotation = JSON.parse(fileBuffer.toString())
 
     return res
       .status(httpStatus.success_200)
