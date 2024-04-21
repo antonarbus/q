@@ -4,9 +4,11 @@ export const syncDelay = (ms = 1000): void => {
 }
 
 export const asyncDelay = async (ms = 1000): Promise<string> => {
-  return await new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(`delayed with ${ms} ms`)
-    }, ms)
-  })
+  const { promise, resolve } = Promise.withResolvers<string>()
+
+  setTimeout(() => {
+    resolve(`delayed with ${ms} ms`)
+  }, ms)
+
+  return await promise
 }

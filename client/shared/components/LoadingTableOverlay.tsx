@@ -1,5 +1,7 @@
-import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
+import { signal } from '@preact/signals-react'
 import { LoadingDots } from '@shared/loading_dots_overlay/LoadingDots'
+
+export const loadingTableOverlaySignal = signal({ areJumpingDotsShown: false, text: '' })
 
 export const LoadingTableOverlay = (): JSX.Element | null => {
   return (
@@ -25,9 +27,9 @@ export const LoadingTableOverlay = (): JSX.Element | null => {
           height: '60px',
         }}
       >
-        {accessTokenSignal.value ? 'Loading' : 'Not logged in'}
+        {loadingTableOverlaySignal.value.text}
       </div>
-      {accessTokenSignal.value && <LoadingDots background='grey' />}
+      {loadingTableOverlaySignal.value.areJumpingDotsShown && <LoadingDots background='grey' />}
     </div>
   )
 }
