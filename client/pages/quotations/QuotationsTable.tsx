@@ -8,7 +8,7 @@ import { useUpdateEffect } from 'react-use'
 import { useDisableLoadingOverlayWhenQuotationsAreFetched } from '@features/quotation/open_quotations'
 import { useGetQuotationsQuery } from '@entities/quotation'
 import { type Quotation } from '@entities/quotation'
-import { LoadingTableOverlay } from '@shared/components/LoadingTableOverlay'
+import { LoadingTableOverlay, loadingTableOverlaySignal } from '@shared/components/LoadingTableOverlay'
 import { notify } from '@shared/ui/top_msg'
 import { addPlaceholderToFloatingFilters } from './addPlaceholderToFloatingFilters'
 import { AgGridStyles } from './AgGridStyles'
@@ -19,13 +19,19 @@ import { quotationsAgGridRef } from './quotationsAgGridRef'
 
 export const QuotationsTable = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
-  const { data, isSuccess, isFetching, isFetched, isError, error, refetch } = useGetQuotationsQuery()
+  const { data, isLoading, isSuccess, isFetching, isFetched, isError, error, refetch } = useGetQuotationsQuery()
   useDisableLoadingOverlayWhenQuotationsAreFetched({ isFetched })
   const email = useSelectorTyped(state => state.user.email)
 
   useEffect(() => {
     void refetch()
   }, [email])
+
+  useUpdateEffect(() => {
+    if (isLoading) {
+      loadingTableOverlaySignal.value = { areJumpingDotsShown: true, text: 'Loading' }
+    }
+  }, [isLoading])
 
   useUpdateEffect(() => {
     if (isSuccess) {
