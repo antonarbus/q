@@ -2,9 +2,10 @@ import { type RouteObject, createBrowserRouter } from 'react-router-dom'
 import { Activation } from '@pages/auth/Activation'
 import { Unauthorized } from '@pages/auth/Unauthorized'
 import { BarChart } from '@pages/chart/Chart'
-import { Items } from '@pages/items'
+import { EditItem } from '@pages/edit_item'
+import { ItemsTable } from '@pages/items_table'
 import { Quotation } from '@pages/quotation'
-import { Quotations } from '@pages/quotations'
+import { QuotationsTable } from '@pages/quotations_table'
 import { Copy } from '@widgets/copy'
 import { Nav } from '@widgets/nav'
 import { AccessToken } from '@features/auth/get_access_token'
@@ -71,17 +72,27 @@ export const router = createBrowserRouter([
             path: route.save,
             element: <SaveQuotation />,
           },
+          {
+            path: route.editItem,
+            element: <EditItem />,
+          },
         ],
       },
       {
         path: route.quotations,
-        element: <Quotations />,
+        element: <QuotationsTable />,
         children: authRoutes,
       },
       {
         path: route.items,
-        element: <Items />,
-        children: authRoutes,
+        element: <ItemsTable />,
+        children: [
+          ...authRoutes,
+          {
+            path: route.editItem,
+            element: <EditItem />,
+          },
+        ],
       },
     ],
   },

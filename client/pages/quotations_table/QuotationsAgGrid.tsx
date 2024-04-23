@@ -17,7 +17,7 @@ import { DisplayedRowsCount, displayedRowsCountSignal } from './DisplayedRowsCou
 import { NoRowsTableOverlay } from './NoRowsTableOverlay'
 import { quotationsAgGridRef } from './quotationsAgGridRef'
 
-export const QuotationsTable = (): JSX.Element => {
+export const QuotationsAgGrid = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
   const { data, isLoading, isSuccess, isFetching, isFetched, isError, error, refetch } = useGetQuotationsQuery()
   useDisableLoadingOverlayWhenQuotationsAreFetched({ isFetched })
