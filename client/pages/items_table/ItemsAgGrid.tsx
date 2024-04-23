@@ -17,7 +17,7 @@ import { DisplayedRowsCount, displayedRowsCountSignal } from './DisplayedRowsCou
 import { itemsAgGridRef } from './itemsAgGridRef'
 import { NoRowsTableOverlay } from './NoRowsTableOverlay'
 
-export const ItemsTable = (): JSX.Element => {
+export const ItemsAgGrid = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
   const { data, isSuccess, isLoading, isFetching, isFetched, isError, error, refetch } = useGetItemsQuery()
   useDisableLoadingOverlayWhenItemsAreFetched({ isFetched })
