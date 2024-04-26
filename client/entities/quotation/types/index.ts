@@ -10,7 +10,6 @@ type ItemCommon = {
   email?: string
   category?: string
   name?: string
-  tag?: string
   createdAt?: Date
   updatedAt?: Date
 }

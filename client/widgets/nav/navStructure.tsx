@@ -1,11 +1,11 @@
 import { Person, Settings } from '@mui/icons-material'
-import { BsFiletypePdf } from 'react-icons/bs'
+import { BsFiletypePdf, BsBookmarkPlus } from 'react-icons/bs'
 import { CgInsertAfter } from 'react-icons/cg'
 import { CiViewTable } from 'react-icons/ci'
 import { FaRegRectangleList, FaGripLines } from 'react-icons/fa6'
 import { FiLogOut, FiLogIn, FiDollarSign } from 'react-icons/fi'
 import { IoText } from 'react-icons/io5'
-import { MdSaveAlt, MdLineStyle } from 'react-icons/md'
+import { MdLineStyle } from 'react-icons/md'
 import { TbRectangleVertical } from 'react-icons/tb'
 import { VscNewFile } from 'react-icons/vsc'
 import { insertBoqItem, insertBoqRow, insertPriceItem, insertTextItem } from '@features/items/insert'
@@ -35,7 +35,7 @@ export const navStructure: MenuItemType[] = [
       },
       {
         id: navItemId.save,
-        icon: <MdSaveAlt />,
+        icon: <BsBookmarkPlus />,
         isHidden: false,
         name: 'Save',
         // shortcut: ['control', 's'],
