@@ -26,8 +26,8 @@ export const CategoryInput = (): JSX.Element => {
               // key={hash(option)}
               css={{
                 borderRadius: '6px',
-                paddingBlock: '12px !important',
-                marginBottom: '4px',
+                paddingBlock: '10px !important',
+                margin: '2px 4px',
                 '&:hover': {
                   background: '#dfdfdf !important',
                 },
@@ -65,7 +65,7 @@ export const CategoryInput = (): JSX.Element => {
             sx: {
               translate: '0px 10px',
               borderRadius: '8px',
-              padding: '8px',
+              padding: '2px 8px',
             },
           },
         }}
