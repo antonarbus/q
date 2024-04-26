@@ -73,44 +73,6 @@ export const EditItem = (): JSX.Element => {
           >
             SAVE
           </ButtonCustom>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              marginTop: '20px',
-            }}
-          >
-            <Link
-              to={`../${route.requestPasswordReset}`}
-              onClick={(e: MouseEvent): void => {
-                e.preventDefault()
-                if (!cardRef.current) return
-                slideElement({
-                  element: cardRef.current,
-                  cb: () => {
-                    navigate(`../${route.requestPasswordReset}`)
-                  },
-                })
-              }}
-            >
-              Reset password?
-            </Link>
-            <Link
-              to={`../${route.register}`}
-              style={{ textAlign: 'right' }}
-              onClick={(e: MouseEvent): void => {
-                e.preventDefault()
-                slideElement({
-                  element: cardRef.current,
-                  cb: () => {
-                    navigate(`../${route.register}`)
-                  },
-                })
-              }}
-            >
-              Register?
-            </Link>
-          </Box>
         </form>
       </CardCustom>
     </BackdropWithSlidableContent>
