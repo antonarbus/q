@@ -4,7 +4,7 @@ import { Avatar, Box } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
 import type { FormEvent, MouseEvent } from 'react'
 import { useRef } from 'react'
-import { MdOutlineCategory, MdSaveAlt } from 'react-icons/md'
+import { BsBookmarkStar } from 'react-icons/bs'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetItemsQuery } from '@entities/item'
@@ -16,6 +16,7 @@ import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlid
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 import { CardCustom } from '@shared/components/CardCustom'
 import { CategoryInput } from '@shared/components/CategoryInput'
+import { NameInput } from '@shared/components/NameInput'
 import { navItemId } from '@shared/consts/navItemId'
 import { route } from '@shared/consts/route'
 import { nanoid } from '@shared/lib/nanoid'
@@ -49,7 +50,7 @@ export const EditItem = (): JSX.Element => {
           <Avatar
             sx={{ m: 1, bgcolor: theme.colors.darkBackground }}
           >
-            <MdSaveAlt />
+            <BsBookmarkStar />
           </Avatar>
         }
       >
@@ -59,11 +60,7 @@ export const EditItem = (): JSX.Element => {
             alert('save item')
           }}
         >
-          <EmailInput
-            inputRef={inputRef}
-            emailSignal={emailSignal}
-            isEmailOkSignal={isEmailOkSignal}
-          />
+          <NameInput />
           <CategoryInput />
           <ButtonCustom
             disabled={false}

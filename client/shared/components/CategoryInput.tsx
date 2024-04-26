@@ -6,13 +6,6 @@ import mailcheck from 'mailcheck'
 import type { RefObject } from 'react'
 import { MdCategory } from 'react-icons/md'
 
-// type Props = {
-//   emailSignal: Signal<string>
-//   isEmailOkSignal: Signal<boolean>
-//   inputRef?: RefObject<HTMLDivElement>
-//   disabled?: boolean
-// }
-
 export const CategoryInput = (): JSX.Element => {
   return (
     <div style={{ position: 'relative' }}>
