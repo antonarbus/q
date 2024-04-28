@@ -6,6 +6,7 @@ import { useUpdateEffect } from 'react-use'
 import { useSaveItemMutation } from '@entities/item'
 import { boqRowKey, getBoqRowFromStore, useItem, useRow } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components'
+import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
 
 export const SaveBoqRowIcon = (): ReactNode => {
@@ -66,7 +67,9 @@ export const SaveBoqRowIcon = (): ReactNode => {
           if (!boqRow) return
           if (boqRow.type === boqRowKey.paste) return
 
-          saveBoqRow({ item: boqRow })
+          navigate(`./${route.editItem}`, { state: { itemToSave: boqRow } })
+
+          // saveBoqRow({ item: boqRow })
         }}
       />
     )

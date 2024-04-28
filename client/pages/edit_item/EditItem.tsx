@@ -4,18 +4,51 @@ import { useSignal } from '@preact/signals-react'
 import type { FormEvent } from 'react'
 import { useRef } from 'react'
 import { BsBookmarkStar } from 'react-icons/bs'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useUpdateEffect } from 'react-use'
+import { useSaveItemMutation } from '@entities/item'
+import { type Copyable } from '@entities/quotation'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 import { CardCustom } from '@shared/components/CardCustom'
 import { CategoryInput } from '@shared/components/CategoryInput'
 import { NameInput } from '@shared/components/NameInput'
+import { notify } from '@shared/ui/top_msg'
 
 export const EditItem = (): JSX.Element => {
   const navigate = useNavigate()
+  const location = useLocation()
   const cardRef = useRef<HTMLDivElement>(null)
   const nameSignal = useSignal('')
   const categorySignal = useSignal('')
+  const { mutate: saveItem, data, isSuccess, isPending, isError, error } = useSaveItemMutation()
+
+  const isDisabled = nameSignal.value === '' || categorySignal.value === ''
+
+  useUpdateEffect(() => {
+    if (isSuccess) {
+      if (data.message === 'inserted') {
+        notify({ msg: 'Added new item', type: 'success', theme: 'dark', position: 'bottom-center' })
+      }
+      if (data.message === 'updated') {
+        notify({ msg: 'Updated', type: 'success', theme: 'dark', position: 'bottom-center' })
+      }
+    }
+  }, [isSuccess])
+
+  useUpdateEffect(() => {
+    if (isError) {
+      if (error.response?.data.message === 'not logged in') {
+        notify({ msg: 'Not logged in', type: 'warn', theme: 'dark', position: 'bottom-center' })
+      } else if (error.response?.data.message === 'not owner') {
+        notify({ msg: 'Not owner', type: 'warn', theme: 'dark', position: 'bottom-center' })
+      } else if (error.response?.data.message === 'not saved') {
+        notify({ msg: 'Not saved', type: 'warn', theme: 'dark', position: 'bottom-center' })
+      } else {
+        notify({ msg: 'Internal error', type: 'error', theme: 'dark', position: 'bottom-center' })
+      }
+    }
+  }, [isError])
 
   return (
     <BackdropWithSlidableContent
@@ -40,17 +73,26 @@ export const EditItem = (): JSX.Element => {
         <form
           onSubmit={(e: FormEvent): void => {
             e.preventDefault()
-            console.log('formValue', { name: nameSignal.value, category: categorySignal.value })
+            const itemToSave = location.state.itemToSave as Copyable | undefined
+            if (!itemToSave) return
+
+            const item = {
+              ...itemToSave,
+              name: nameSignal.value,
+              category: categorySignal.value,
+            }
+
+            saveItem({ item })
           }}
         >
           <NameInput nameSignal={nameSignal}/>
           <CategoryInput categorySignal={categorySignal}/>
 
           <ButtonCustom
-            disabled={false}
-            isPending={false}
-            isSuccess={false}
-            isError={false}
+            disabled={isDisabled}
+            isPending={isPending}
+            isSuccess={isSuccess}
+            isError={isError}
           >
             SAVE
           </ButtonCustom>

@@ -6,6 +6,7 @@ import { useUpdateEffect } from 'react-use'
 import { useSaveItemMutation } from '@entities/item'
 import { getItemFromStore, itemKey, useItem } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components'
+import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
 
 export const SaveItemIcon = (): ReactNode => {
@@ -65,7 +66,9 @@ export const SaveItemIcon = (): ReactNode => {
           if (!item) return
           if (item.type === itemKey.paste) return
 
-          saveItem({ item })
+          navigate(`./${route.editItem}`, { state: { itemToSave: item } })
+
+          // saveItem({ item })
         }}
       />
     )
