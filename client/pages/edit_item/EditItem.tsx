@@ -29,10 +29,11 @@ export const EditItem = (): JSX.Element => {
     if (isSuccess) {
       if (data.message === 'inserted') {
         notify({ msg: 'Added new item', type: 'success', theme: 'dark', position: 'bottom-center' })
-      }
-      if (data.message === 'updated') {
+      } else if (data.message === 'updated') {
         notify({ msg: 'Updated', type: 'success', theme: 'dark', position: 'bottom-center' })
       }
+
+      navigate('..')
     }
   }, [isSuccess])
 

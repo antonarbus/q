@@ -12,7 +12,7 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  message: 'not logged in' | 'not owner' | 'not saved' | 'inserted' | 'updated'
+  message: 'not logged in' | 'not saved' | 'inserted' | 'updated'
 }
 
 type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
@@ -40,24 +40,16 @@ const saveItem: RouterHandler = async (req, res, next) => {
         .json({ message: 'not logged in' })
     }
 
-    if (email !== req.body.item.email) {
-      return res
-        .status(httpStatus.forbidden_403)
-        .json({ message: 'not owner' })
-    }
-
     const document = await ItemModel
       .findOneAndUpdate(
         {
-          email: req.body.item.email,
-          id: req.body.item.id,
+          email,
+          name: req.body.item.name,
+          category: req.body.item.category,
         },
         {
-          id: req.body.item.id,
-          email: req.body.item.email,
-          category: req.body.item.category,
-          name: req.body.item.name,
-          tag: req.body.item.tag,
+          ...req.body.item,
+          email,
         },
         { new: true, setDefaultsOnInsert: true, upsert: true },
       )
