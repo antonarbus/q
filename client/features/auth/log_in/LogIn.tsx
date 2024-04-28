@@ -109,9 +109,7 @@ export const LogIn = (): JSX.Element => {
         reference={cardRef}
         title='Log in'
         logo={
-          <Avatar
-            sx={{ m: 1, bgcolor: theme.colors.darkBackground }}
-          >
+          <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }} >
             <LoginRounded />
           </Avatar>
         }
@@ -119,6 +117,7 @@ export const LogIn = (): JSX.Element => {
         <form
           onSubmit={(e: FormEvent): void => {
             e.preventDefault()
+
             logIn({
               email: emailSignal.value,
               password: passwordSignal.value,
