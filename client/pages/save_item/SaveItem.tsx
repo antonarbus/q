@@ -14,7 +14,8 @@ import { CardCustom } from '@shared/components/CardCustom'
 import { nanoid } from '@shared/lib/nanoid'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
-import { CategoryInput } from './CategoryInput'
+import { CategoryAutocomplete } from './CategoryAutocomplete'
+import { DescriptionTextarea } from './DescriptionTextarea'
 import { NameInput } from './NameInput'
 
 export const SaveItem = (): JSX.Element => {
@@ -23,6 +24,7 @@ export const SaveItem = (): JSX.Element => {
   const cardRef = useRef<HTMLDivElement>(null)
   const nameSignal = useSignal('')
   const categorySignal = useSignal('')
+  const descSignal = useSignal('')
   const { mutate: saveItem, data, isSuccess, isPending, isError, error } = useSaveItemMutation()
   const { data: itemsRes, refetch: fetchItems } = useGetItemsQuery()
 
@@ -35,8 +37,10 @@ export const SaveItem = (): JSX.Element => {
   const buttonTextSignal = useSignal('SAVE')
 
   useSignalEffect(() => {
-    const sameNameAndCategory = (itemsRes?.documents ?? []).some(item => item.name === nameSignal.value && item.category === categorySignal.value)
-    buttonTextSignal.value = sameNameAndCategory ? 'UPDATE' : 'SAVE'
+    const isItemWithSameNameAndCategory = (itemsRes?.documents ?? [])
+      .some(item => item.name === nameSignal.value && item.category === categorySignal.value)
+
+    buttonTextSignal.value = isItemWithSameNameAndCategory ? 'UPDATE' : 'SAVE'
   })
 
   useUpdateEffect(() => {
@@ -104,13 +108,15 @@ export const SaveItem = (): JSX.Element => {
               ...itemToSave,
               name: nameSignal.value,
               category: categorySignal.value,
+              desc: descSignal.value,
             }
 
             saveItem({ item })
           }}
         >
           <NameInput nameSignal={nameSignal}/>
-          <CategoryInput categorySignal={categorySignal}/>
+          <CategoryAutocomplete categorySignal={categorySignal}/>
+          <DescriptionTextarea descSignal={descSignal}/>
           <ButtonCustom
             disabled={isDisabled}
             isPending={isPending}
