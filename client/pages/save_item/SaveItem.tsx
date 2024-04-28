@@ -1,12 +1,12 @@
 import { theme } from '@lib_instances/theme'
 import { Avatar } from '@mui/material'
-import { useSignal } from '@preact/signals-react'
+import { useSignal, useSignalEffect } from '@preact/signals-react'
 import type { FormEvent } from 'react'
 import { useRef } from 'react'
 import { BsBookmarkStar } from 'react-icons/bs'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useUpdateEffect } from 'react-use'
-import { useSaveItemMutation } from '@entities/item'
+import { useEffectOnce, useUpdateEffect } from 'react-use'
+import { useGetItemsQuery, useSaveItemMutation } from '@entities/item'
 import { type Copyable } from '@entities/quotation'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
@@ -24,6 +24,18 @@ export const SaveItem = (): JSX.Element => {
   const nameSignal = useSignal('')
   const categorySignal = useSignal('')
   const { mutate: saveItem, data, isSuccess, isPending, isError, error } = useSaveItemMutation()
+  const { data: itemsRes, refetch: fetchItems } = useGetItemsQuery()
+
+  useEffectOnce(() => {
+    void fetchItems()
+  })
+
+  const buttonTextSignal = useSignal('SAVE')
+
+  useSignalEffect(() => {
+    const sameNameAndCategory = (itemsRes?.documents ?? []).some(item => item.name === nameSignal.value && item.category === categorySignal.value)
+    buttonTextSignal.value = sameNameAndCategory ? 'UPDATE' : 'SAVE'
+  })
 
   const isDisabled = nameSignal.value === '' || categorySignal.value === ''
 
@@ -99,14 +111,13 @@ export const SaveItem = (): JSX.Element => {
         >
           <NameInput nameSignal={nameSignal}/>
           <CategoryInput categorySignal={categorySignal}/>
-
           <ButtonCustom
             disabled={isDisabled}
             isPending={isPending}
             isSuccess={isSuccess}
             isError={isError}
           >
-            SAVE
+            {buttonTextSignal}
           </ButtonCustom>
         </form>
       </CardCustom>
