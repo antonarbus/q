@@ -11,11 +11,11 @@ import { type Copyable } from '@entities/quotation'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 import { CardCustom } from '@shared/components/CardCustom'
-import { CategoryInput } from '@shared/components/CategoryInput'
-import { NameInput } from '@shared/components/NameInput'
 import { nanoid } from '@shared/lib/nanoid'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
+import { CategoryInput } from './CategoryInput'
+import { NameInput } from './NameInput'
 
 export const SaveItem = (): JSX.Element => {
   const navigate = useNavigate()
