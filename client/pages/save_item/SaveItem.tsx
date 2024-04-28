@@ -26,6 +26,8 @@ export const SaveItem = (): JSX.Element => {
   const { mutate: saveItem, data, isSuccess, isPending, isError, error } = useSaveItemMutation()
   const { data: itemsRes, refetch: fetchItems } = useGetItemsQuery()
 
+  const isDisabled = nameSignal.value === '' || categorySignal.value === ''
+
   useEffectOnce(() => {
     void fetchItems()
   })
@@ -36,8 +38,6 @@ export const SaveItem = (): JSX.Element => {
     const sameNameAndCategory = (itemsRes?.documents ?? []).some(item => item.name === nameSignal.value && item.category === categorySignal.value)
     buttonTextSignal.value = sameNameAndCategory ? 'UPDATE' : 'SAVE'
   })
-
-  const isDisabled = nameSignal.value === '' || categorySignal.value === ''
 
   useUpdateEffect(() => {
     if (isSuccess) {
