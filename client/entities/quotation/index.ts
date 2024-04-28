@@ -93,7 +93,7 @@ export type {
   Item,
   ItemPaste,
   ItemBoq,
-  ItemCopyable,
+  Copyable,
   BoqCols,
   BoqHeaderCell,
   BoqHeaderKey,

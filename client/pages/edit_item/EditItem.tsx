@@ -1,38 +1,21 @@
-import { dispatch } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
-import { Avatar, Box } from '@mui/material'
+import { Avatar } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
-import type { FormEvent, MouseEvent } from 'react'
+import type { FormEvent } from 'react'
 import { useRef } from 'react'
 import { BsBookmarkStar } from 'react-icons/bs'
-import { Link, useNavigate, useParams } from 'react-router-dom'
-import { useUpdateEffect } from 'react-use'
-import { useGetItemsQuery } from '@entities/item'
-import { useGetQuotationsQuery } from '@entities/quotation'
-import { useLogInMutation, userSlice } from '@entities/user'
-import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
-import { EmailInput, PasswordInput } from '@shared/components'
+import { useNavigate } from 'react-router-dom'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 import { CardCustom } from '@shared/components/CardCustom'
 import { CategoryInput } from '@shared/components/CategoryInput'
 import { NameInput } from '@shared/components/NameInput'
-import { navItemId } from '@shared/consts/navItemId'
-import { route } from '@shared/consts/route'
-import { nanoid } from '@shared/lib/nanoid'
-import { navSlice } from '@shared/nav'
-import { reRenderQuotationSignal } from '@shared/signals/reRenderQuotationSignal'
-import { notify } from '@shared/ui/top_msg'
-import { slideElement } from '@shared/utils/slideElement'
 
 export const EditItem = (): JSX.Element => {
   const navigate = useNavigate()
-  const { id } = useParams()
-  const inputRef = useRef<HTMLDivElement>(null)
   const cardRef = useRef<HTMLDivElement>(null)
-  const emailSignal = useSignal('')
-  const passwordSignal = useSignal('')
-  const isEmailOkSignal = useSignal(false)
+  const nameSignal = useSignal('')
+  const categorySignal = useSignal('')
 
   return (
     <BackdropWithSlidableContent
@@ -57,11 +40,12 @@ export const EditItem = (): JSX.Element => {
         <form
           onSubmit={(e: FormEvent): void => {
             e.preventDefault()
-            alert('save item')
+            console.log('formValue', { name: nameSignal.value, category: categorySignal.value })
           }}
         >
-          <NameInput />
-          <CategoryInput />
+          <NameInput nameSignal={nameSignal}/>
+          <CategoryInput categorySignal={categorySignal}/>
+
           <ButtonCustom
             disabled={false}
             isPending={false}

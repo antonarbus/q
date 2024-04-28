@@ -1,6 +1,6 @@
 import { getState } from '@lib_instances/store'
 import { type ReactNode, type MouseEvent } from 'react'
-import { BsBookmarkPlus } from 'react-icons/bs'
+import { BsBookmarks } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useSaveItemMutation } from '@entities/item'
@@ -49,7 +49,7 @@ export const SaveItemIcon = (): ReactNode => {
 
   if (!isPending) {
     return (
-      <BsBookmarkPlus
+      <BsBookmarks
         tabIndex={-1}
         onClick={(e: MouseEvent): void => {
           const email = getState().user.email
