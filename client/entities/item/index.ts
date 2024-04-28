@@ -9,4 +9,4 @@ export { deleteFromItemsCache } from './cacheUpdaters/deleteFromItemsCache'
 export { deleteItemsCache } from './cacheUpdaters/deleteItemsCache'
 
 // types
-export type { ItemCopyable } from '@entities/quotation'
+export type { Copyable as ItemCopyable } from '@entities/quotation'

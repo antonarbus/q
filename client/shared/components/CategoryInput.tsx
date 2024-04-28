@@ -1,17 +1,21 @@
-import { theme } from '@lib_instances/theme'
-import { Person } from '@mui/icons-material'
 import { Autocomplete, InputAdornment, TextField } from '@mui/material'
-import { useSignal, type Signal, useSignalEffect } from '@preact/signals-react'
-import mailcheck from 'mailcheck'
-import type { RefObject } from 'react'
-import { MdCategory } from 'react-icons/md'
+import { type Signal } from '@preact/signals-react'
+import { BsTags } from 'react-icons/bs'
 
-export const CategoryInput = (): JSX.Element => {
+type Props = {
+  categorySignal: Signal<string>
+}
+
+export const CategoryInput = ({ categorySignal }: Props): JSX.Element => {
   return (
     <div style={{ position: 'relative' }}>
       <Autocomplete
         freeSolo
         options={['a', 'b', 'c']}
+        inputValue={categorySignal.value}
+        onInputChange={(event, newInputValue) => {
+          categorySignal.value = newInputValue
+        }}
         renderOption={(props, option, { selected, index, inputValue }) => {
           return (
             <li
@@ -34,19 +38,20 @@ export const CategoryInput = (): JSX.Element => {
           return (
             <TextField
               {...params}
+              name='category'
               label='Category'
               placeholder='Category'
               InputProps={{
                 ...params.InputProps,
                 startAdornment: (
                   <InputAdornment position='start'>
-                    <MdCategory style={{ height: '22px', width: '22px', translate: '5px' }}/>
+                    <BsTags style={{ height: '18px', width: '18px', translate: '5px' }}/>
                   </InputAdornment>
                 ),
               }}
               sx={{
                 '.MuiInputBase-root': {
-                  pl: '10px',
+                  pl: '14px',
                 },
               }}
             />
