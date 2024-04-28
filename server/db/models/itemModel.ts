@@ -20,7 +20,6 @@ const itemSchema = new Schema<ItemCopyable>({
   type: String,
   category: String,
   name: String,
-  tag: String,
   createdAt: Date,
   updatedAt: Date,
 }, {

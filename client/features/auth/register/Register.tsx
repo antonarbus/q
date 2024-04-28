@@ -114,7 +114,7 @@ export const Register = (): JSX.Element => {
 
                 slideElement({
                   element: cardRef.current,
-                  cb: () => {
+                  onSlide: () => {
                     navigate(`../${route.login}`)
                   },
                 })

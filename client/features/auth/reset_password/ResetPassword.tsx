@@ -144,7 +144,7 @@ export const ResetPassword = (): ReactNode => {
                 e.preventDefault()
                 slideElement({
                   element: cardRef.current,
-                  cb: () => {
+                  onSlide: () => {
                     navigate(`../${route.register}`)
                   },
                 })
@@ -160,7 +160,7 @@ export const ResetPassword = (): ReactNode => {
 
                 slideElement({
                   element: cardRef.current,
-                  cb: () => {
+                  onSlide: () => {
                     navigate(`../${route.login}`)
                   },
                 })

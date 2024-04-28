@@ -27,7 +27,7 @@ export const SaveItemIcon = (): ReactNode => {
         if (!item) return
         if (item.type === itemKey.paste) return
 
-        navigate(`./${route.editItem}`, { state: { itemToSave: item } })
+        navigate(`./${route.saveItem}`, { state: { itemToSave: item } })
       }}
     />
   )

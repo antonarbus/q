@@ -70,7 +70,7 @@ export const LogIn = (): JSX.Element => {
       setTimeout(() => {
         slideElement({
           element: cardRef.current,
-          cb: () => {
+          onSlide: () => {
             navigate('..', { replace: true, state: nanoid() })
           },
         })
@@ -154,7 +154,7 @@ export const LogIn = (): JSX.Element => {
                 if (!cardRef.current) return
                 slideElement({
                   element: cardRef.current,
-                  cb: () => {
+                  onSlide: () => {
                     navigate(`../${route.requestPasswordReset}`)
                   },
                 })
@@ -169,7 +169,7 @@ export const LogIn = (): JSX.Element => {
                 e.preventDefault()
                 slideElement({
                   element: cardRef.current,
-                  cb: () => {
+                  onSlide: () => {
                     navigate(`../${route.register}`)
                   },
                 })

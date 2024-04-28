@@ -12,7 +12,7 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  message: 'not logged in' | 'not saved' | 'inserted' | 'updated'
+  message: 'not logged in' | 'not saved' | 'inserted' | 'updated' | 'name is not provided' | 'category is not provided'
 }
 
 type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
@@ -40,23 +40,28 @@ const saveItem: RouterHandler = async (req, res, next) => {
         .json({ message: 'not logged in' })
     }
 
+    const { name, category } = req.body.item
+
+    if (!name) {
+      return res
+        .status(httpStatus.forbidden_403)
+        .json({ message: 'name is not provided' })
+    }
+
+    if (!category) {
+      return res
+        .status(httpStatus.forbidden_403)
+        .json({ message: 'category is not provided' })
+    }
+
     const document = await ItemModel
       .findOneAndUpdate(
-        {
-          email,
-          name: req.body.item.name,
-          category: req.body.item.category,
-        },
-        {
-          ...req.body.item,
-          email,
-        },
+        { email, name, category },
+        { ...req.body.item, email },
         { new: true, setDefaultsOnInsert: true, upsert: true },
       )
       .select({ _id: 0, __v: 0 })
       .lean()
-
-    const isNew = document.createdAt?.toISOString() === document.updatedAt?.toISOString()
 
     if (document === null) {
       return res
@@ -64,7 +69,9 @@ const saveItem: RouterHandler = async (req, res, next) => {
         .json({ message: 'not saved' })
     }
 
-    const filePath = `${req.body.item.email}/items/${req.body.item.id}.json`
+    const isNew = document.createdAt?.toISOString() === document.updatedAt?.toISOString()
+
+    const filePath = `${email}/items/${req.body.item.id}.json`
     const file = bucket.file(filePath)
     const contents = JSON.stringify({ item: req.body.item }, null, 2)
     await file.save(contents)

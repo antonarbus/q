@@ -11,5 +11,5 @@ export const route = {
   settings: 'settings',
   save: 'save',
   new: 'new',
-  editItem: 'edit-item',
+  saveItem: 'save-item',
 } as const
