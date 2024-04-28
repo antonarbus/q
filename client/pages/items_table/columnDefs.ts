@@ -39,10 +39,6 @@ export const columnDefs: Array<ColDef<ItemCopyable>> = [
     headerName: 'id',
   },
   {
-    field: 'tag',
-    headerName: 'tag',
-  },
-  {
     field: 'category',
     headerName: 'category',
   },

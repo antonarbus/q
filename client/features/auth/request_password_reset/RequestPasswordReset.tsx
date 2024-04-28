@@ -33,7 +33,7 @@ export const RequestPasswordReset = (): JSX.Element => {
       setTimeout(() => {
         slideElement({
           element: cardRef.current,
-          cb: () => {
+          onSlide: () => {
             navigate('..')
           },
         })
@@ -105,7 +105,7 @@ export const RequestPasswordReset = (): JSX.Element => {
 
                 slideElement({
                   element: cardRef.current,
-                  cb: () => {
+                  onSlide: () => {
                     navigate(`../${route.login}`)
                   },
                 })

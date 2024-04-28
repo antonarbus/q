@@ -17,7 +17,7 @@ import { nanoid } from '@shared/lib/nanoid'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
 
-export const EditItem = (): JSX.Element => {
+export const SaveItem = (): JSX.Element => {
   const navigate = useNavigate()
   const location = useLocation()
   const cardRef = useRef<HTMLDivElement>(null)
@@ -30,7 +30,7 @@ export const EditItem = (): JSX.Element => {
   useUpdateEffect(() => {
     if (isSuccess) {
       if (data.message === 'inserted') {
-        notify({ msg: 'Added new item', type: 'success', theme: 'dark', position: 'bottom-center' })
+        notify({ msg: 'Added', type: 'success', theme: 'dark', position: 'bottom-center' })
       } else if (data.message === 'updated') {
         notify({ msg: 'Updated', type: 'info', theme: 'dark', position: 'bottom-center' })
       }
@@ -38,7 +38,7 @@ export const EditItem = (): JSX.Element => {
       setTimeout(() => {
         slideElement({
           element: cardRef.current,
-          cb: () => {
+          onSlide: () => {
             navigate('..', { replace: true, state: nanoid() })
           },
         })
@@ -52,6 +52,10 @@ export const EditItem = (): JSX.Element => {
         notify({ msg: 'Not logged in', type: 'warn', theme: 'dark', position: 'bottom-center' })
       } else if (error.response?.data.message === 'not saved') {
         notify({ msg: 'Not saved', type: 'warn', theme: 'dark', position: 'bottom-center' })
+      } else if (error.response?.data.message === 'category is not provided') {
+        notify({ msg: 'Category is not provided', type: 'warn', theme: 'dark', position: 'bottom-center' })
+      } else if (error.response?.data.message === 'name is not provided') {
+        notify({ msg: 'Name is not provided', type: 'warn', theme: 'dark', position: 'bottom-center' })
       } else {
         notify({ msg: 'Internal error', type: 'error', theme: 'dark', position: 'bottom-center' })
       }

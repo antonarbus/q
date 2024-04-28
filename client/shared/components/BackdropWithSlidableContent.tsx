@@ -27,7 +27,7 @@ export const BackdropWithSlidableContent = ({
     slideElement({
       intoView: true,
       element: contentRef.current,
-      cb: () => {
+      onSlide: () => {
         onSlideIn?.()
       },
     })
@@ -42,7 +42,7 @@ export const BackdropWithSlidableContent = ({
       if (e.key === 'Escape') {
         slideElement({
           element: contentRef.current,
-          cb: () => {
+          onSlide: () => {
             onSlideOut?.()
           },
         })
@@ -64,7 +64,7 @@ export const BackdropWithSlidableContent = ({
 
         slideElement({
           element: contentRef.current,
-          cb: () => {
+          onSlide: () => {
             onSlideOut?.()
           },
         })

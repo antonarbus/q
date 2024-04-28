@@ -28,7 +28,7 @@ export const SaveBoqRowIcon = (): ReactNode => {
         if (!boqRow) return
         if (boqRow.type === boqRowKey.paste) return
 
-        navigate(`./${route.editItem}`, { state: { itemToSave: boqRow } })
+        navigate(`./${route.saveItem}`, { state: { itemToSave: boqRow } })
       }}
     />
   )
