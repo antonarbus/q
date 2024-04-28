@@ -7,7 +7,7 @@ type Props = {
   categorySignal: Signal<string>
 }
 
-export const CategoryInput = ({ categorySignal }: Props): JSX.Element => {
+export const CategoryAutocomplete = ({ categorySignal }: Props): JSX.Element => {
   const { data: itemsRes } = useGetItemsQuery()
 
   const categories = ((itemsRes?.documents ?? [])
@@ -51,6 +51,7 @@ export const CategoryInput = ({ categorySignal }: Props): JSX.Element => {
               name='category'
               label='Category'
               placeholder='Category'
+              required
               InputProps={{
                 ...params.InputProps,
                 startAdornment: (
