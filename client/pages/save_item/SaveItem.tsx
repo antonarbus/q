@@ -26,7 +26,7 @@ export const SaveItem = (): JSX.Element => {
   const categorySignal = useSignal('')
   const descSignal = useSignal('')
   const { mutate: saveItem, data, isSuccess, isPending, isError, error } = useSaveItemMutation()
-  const { refetch: updateCategoriesAfterSave } = useGetItemCategoriesQuery()
+  const { refetch: updateCategories } = useGetItemCategoriesQuery()
 
   const isDisabled = nameSignal.value === '' || categorySignal.value === ''
 
@@ -40,7 +40,7 @@ export const SaveItem = (): JSX.Element => {
         notify({ msg: 'Updated', type: 'info', theme: 'dark', position: 'bottom-center' })
       }
 
-      void updateCategoriesAfterSave()
+      void updateCategories()
 
       setTimeout(() => {
         slideElement({
