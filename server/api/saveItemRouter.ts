@@ -3,12 +3,12 @@ import { verifyAccessTokenMiddleware } from '@server/middleware/verifyTokenMiddl
 import { verifyRefreshToken } from '@server/services/jwt'
 import { bucket } from '@server/services/storage'
 import { Router } from 'express'
-import { type ItemCopyable } from '@entities/item'
+import { type Copyable } from '@entities/item'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { type ResWithBody, type ReqWithBody, type Next } from '../types'
 
 export type ReqBody = {
-  item: ItemCopyable
+  item: Copyable
 }
 
 export type ResBody = {

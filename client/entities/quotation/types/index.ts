@@ -5,8 +5,8 @@ import { type itemKey } from '../consts/itemKey'
 
 type ItemCommon = {
   id: string
-  name?: string
-  category?: string
+  name: string
+  category: string
   desc?: string
   width?: number
   height?: number

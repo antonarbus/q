@@ -18,6 +18,8 @@ const pasteText: BoqRow = {
   type: boqRowKey.paste,
   height: 0,
   width: 0,
+  name: '',
+  category: '',
   description: defaultCellValues,
   itemPrice: defaultCellValues,
   qty: defaultCellValues,

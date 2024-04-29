@@ -20,7 +20,7 @@ export const verifyAccessTokenMiddleware = (req: Req, res: ResWithBody<ResBody>,
         .json({ message: 'no access token in headers' })
     }
 
-    const jwtPayload = verifyAccessToken(accessJwtToken) // as JwtPayloadExtended
+    const jwtPayload = verifyAccessToken(accessJwtToken)
 
     if (jwtPayload === undefined) {
       return res

@@ -2,6 +2,7 @@ export const queryKey = {
   getQuotation: 'getQuotation',
   getQuotations: 'getQuotations',
   getItems: 'getItems',
+  getItemCategories: 'getItemCategories',
   deleteQuotation: 'deleteQuotation',
   deleteItem: 'deleteItem',
   logIn: 'logIn',

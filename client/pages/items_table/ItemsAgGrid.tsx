@@ -7,7 +7,7 @@ import { type ElementRef, useRef, useEffect } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@features/items/open_items'
 import { useGetItemsQuery } from '@entities/item'
-import { type ItemCopyable } from '@entities/item'
+import { type Copyable } from '@entities/item'
 import { LoadingTableOverlay, loadingTableOverlaySignal } from '@shared/components/LoadingTableOverlay'
 import { notify } from '@shared/ui/top_msg'
 import { addPlaceholderToFloatingFilters } from './addPlaceholderToFloatingFilters'
@@ -61,7 +61,7 @@ export const ItemsAgGrid = (): JSX.Element => {
       <AgGridStyles />
       <DisplayedRowsCount />
       {isFetching && <LinearProgress sx={{ height: '1px', top: '97px', zIndex: 2, mb: '-1px' }} />}
-      <AgGridReact<ItemCopyable>
+      <AgGridReact<Copyable>
         ref={itemsAgGridRef}
         rowData={data?.documents}
         getRowId={params => params.data.id}

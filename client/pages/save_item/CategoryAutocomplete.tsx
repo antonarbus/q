@@ -1,27 +1,20 @@
 import { Autocomplete, InputAdornment, TextField } from '@mui/material'
 import { type Signal } from '@preact/signals-react'
 import { BsTags } from 'react-icons/bs'
-import { useGetItemsQuery } from '@entities/item'
+import { useGetItemCategoriesQuery } from '@entities/item'
 
 type Props = {
   categorySignal: Signal<string>
 }
 
 export const CategoryAutocomplete = ({ categorySignal }: Props): JSX.Element => {
-  const { data: itemsRes } = useGetItemsQuery()
-
-  const categories = ((itemsRes?.documents ?? [])
-    .map(item => item.category)
-    .filter(category => Boolean(category)) as string[])
-    .sort((a: string, b: string) => a.localeCompare(b))
-
-  const uniqueCategories = [...new Set(categories)]
+  const { data } = useGetItemCategoriesQuery()
 
   return (
     <div style={{ position: 'relative' }}>
       <Autocomplete
         freeSolo
-        options={uniqueCategories}
+        options={data?.categories ?? []}
         inputValue={categorySignal.value}
         onInputChange={(event, newInputValue) => {
           categorySignal.value = newInputValue
