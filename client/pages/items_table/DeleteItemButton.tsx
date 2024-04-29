@@ -2,16 +2,18 @@ import { IconButton } from '@mui/material'
 import type { ReqBody } from '@server/api/deleteItemRouter'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
-import { useDeleteItemMutation, deleteFromItemsCache } from '@entities/item'
+import { useDeleteItemMutation, deleteFromItemsCache, useGetItemCategoriesQuery } from '@entities/item'
 import { RotatingLoaderIcon } from '@shared/components'
 import { notify } from '@shared/ui/top_msg'
 
 export const DeleteItemButton = ({ id }: ReqBody): JSX.Element => {
   const { mutate: deleteItem, isPending, isSuccess, isError, error } = useDeleteItemMutation()
+  const { refetch: updateCategories } = useGetItemCategoriesQuery()
 
   useUpdateEffect(() => {
     if (isSuccess) {
       deleteFromItemsCache({ id })
+      void updateCategories()
     }
   }, [isSuccess])
 
