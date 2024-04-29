@@ -30,7 +30,7 @@ export const SaveItem = (): JSX.Element => {
 
   const isDisabled = nameSignal.value === '' || categorySignal.value === ''
 
-  // todo: is item already exists return the confirmation to update
+  // todo: if item already exists return a msg from the back and show the confirmation to update
 
   useUpdateEffect(() => {
     if (isSuccess) {
