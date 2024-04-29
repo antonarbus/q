@@ -13,19 +13,19 @@ export const slideElement = ({ intoView, element, onSlide }: Props): void => {
   if (element === null) return
 
   isAnimationPrevented = true
-  const screenHeight = window.window.innerHeight // todo: what?
+  const screenHeight = window.window.innerHeight
   const elementHeight = element.offsetHeight
   const offsetPosition = screenHeight / 2 + elementHeight / 2
+
   gsap.fromTo(
     element,
     {
       y: intoView ? offsetPosition : 0,
-      opacity: intoView ? 0 : 1, // to avoid element be shown for a fraction on component load and then sliding in from the bottom
     },
     {
+      delay: 0.2,
       duration: 0.3,
       y: intoView ? 0 : -offsetPosition,
-      opacity: 1,
       onComplete: () => {
         isAnimationPrevented = false
         onSlide?.()
