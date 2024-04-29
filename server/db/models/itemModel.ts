@@ -1,8 +1,8 @@
 import { model, Schema } from 'mongoose'
-import { type ItemCopyable } from '@entities/item'
+import { type Copyable } from '@entities/item'
 import { nanoid } from '@shared/lib/nanoid'
 
-const itemSchema = new Schema<ItemCopyable>({
+const itemSchema = new Schema<Copyable>({
   id: {
     type: String,
     default: () => nanoid(5),
@@ -27,4 +27,4 @@ const itemSchema = new Schema<ItemCopyable>({
   timestamps: true,
 })
 
-export const ItemModel = model<ItemCopyable>('item', itemSchema)
+export const ItemModel = model<Copyable>('item', itemSchema)

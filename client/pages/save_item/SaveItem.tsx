@@ -6,7 +6,7 @@ import { useRef } from 'react'
 import { BsBookmarkStar } from 'react-icons/bs'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
-import { useGetItemsQuery, useSaveItemMutation } from '@entities/item'
+import { useGetItemCategoriesQuery, useGetItemsQuery, useSaveItemMutation } from '@entities/item'
 import { type Copyable } from '@entities/quotation'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
@@ -26,22 +26,11 @@ export const SaveItem = (): JSX.Element => {
   const categorySignal = useSignal('')
   const descSignal = useSignal('')
   const { mutate: saveItem, data, isSuccess, isPending, isError, error } = useSaveItemMutation()
-  const { data: itemsRes, refetch: fetchItems } = useGetItemsQuery()
+  const { refetch: updateCategoriesAfterSave } = useGetItemCategoriesQuery()
 
   const isDisabled = nameSignal.value === '' || categorySignal.value === ''
 
-  useEffectOnce(() => {
-    void fetchItems()
-  })
-
-  const buttonTextSignal = useSignal('SAVE')
-
-  useSignalEffect(() => {
-    const isItemWithSameNameAndCategory = (itemsRes?.documents ?? [])
-      .some(item => item.name === nameSignal.value && item.category === categorySignal.value)
-
-    buttonTextSignal.value = isItemWithSameNameAndCategory ? 'UPDATE' : 'SAVE'
-  })
+  // todo: is item already exists return the confirmation to update
 
   useUpdateEffect(() => {
     if (isSuccess) {
@@ -50,6 +39,8 @@ export const SaveItem = (): JSX.Element => {
       } else if (data.message === 'updated') {
         notify({ msg: 'Updated', type: 'info', theme: 'dark', position: 'bottom-center' })
       }
+
+      void updateCategoriesAfterSave()
 
       setTimeout(() => {
         slideElement({
@@ -123,7 +114,7 @@ export const SaveItem = (): JSX.Element => {
             isSuccess={isSuccess}
             isError={isError}
           >
-            {buttonTextSignal}
+            SAVE
           </ButtonCustom>
         </form>
       </CardCustom>
