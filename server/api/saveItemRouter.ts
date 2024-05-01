@@ -3,6 +3,7 @@ import { verifyAccessTokenMiddleware } from '@server/middleware/verifyTokenMiddl
 import { verifyRefreshToken } from '@server/services/jwt'
 import { bucket } from '@server/services/storage'
 import { Router } from 'express'
+import { type FlattenMaps } from 'mongoose'
 import { type Copyable } from '@entities/item'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { type ResWithBody, type ReqWithBody, type Next } from '../types'
@@ -12,7 +13,8 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  message: 'not logged in' | 'not saved' | 'inserted' | 'updated' | 'name is not provided' | 'category is not provided'
+  message: 'not logged in' | 'not saved' | 'saved' | 'updated' | 'name is not provided' | 'category is not provided'
+  document?: FlattenMaps<Copyable>
 }
 
 type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
@@ -77,8 +79,11 @@ const saveItem: RouterHandler = async (req, res, next) => {
     await file.save(contents)
 
     return res
-      .status(httpStatus.created_201)
-      .json({ message: isNew ? 'inserted' : 'updated' })
+      .status(httpStatus.success_200)
+      .json({
+        message: isNew ? 'saved' : 'updated',
+        document,
+      })
   } catch (error) {
     next(error)
   }

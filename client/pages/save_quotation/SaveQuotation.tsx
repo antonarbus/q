@@ -1,3 +1,4 @@
+import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
 import { Avatar } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
@@ -7,37 +8,48 @@ import { BsBookmarkStar } from 'react-icons/bs'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetItemCategoriesQuery, useSaveItemMutation } from '@entities/item'
-import { type Copyable } from '@entities/quotation'
+import { quotationSlice, useSaveQuotationMutation, type Copyable } from '@entities/quotation'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 import { CardCustom } from '@shared/components/CardCustom'
+import { navItemId } from '@shared/consts/navItemId'
 import { nanoid } from '@shared/lib/nanoid'
+import { navSlice, showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@shared/nav'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
 import { CategoryAutocomplete } from './CategoryAutocomplete'
 import { DescriptionTextarea } from './DescriptionTextarea'
 import { NameInput } from './NameInput'
 
-export const SaveItem = (): JSX.Element => {
+export const SaveQuotation = (): JSX.Element => {
   const navigate = useNavigate()
   const location = useLocation()
-  const itemToSave = location.state.itemToSave as Copyable | undefined
   const cardRef = useRef<HTMLDivElement>(null)
-  const nameSignal = useSignal(itemToSave?.name ?? '')
-  const categorySignal = useSignal(itemToSave?.category ?? '')
-  const descSignal = useSignal(itemToSave?.desc ?? '')
-  const { mutate: saveItem, data, isSuccess, isPending, isError, error } = useSaveItemMutation()
+  const nameSignal = useSignal(getState().quotation.name ?? '')
+  const categorySignal = useSignal(getState().quotation.category ?? '')
+  const descSignal = useSignal(getState().quotation.desc ?? '')
+  // const { mutate: saveItem, data, isSuccess, isPending, isError, error } = useSaveItemMutation()
+  const { mutate: saveQuotation, data, isSuccess, isPending, isError, error } = useSaveQuotationMutation()
+
   const { refetch: updateCategories } = useGetItemCategoriesQuery()
 
   const isDisabled = nameSignal.value === '' || categorySignal.value === ''
 
+  const quotationId = useSelectorTyped(state => state.quotation.id)
+
   // todo: if item already exists return a msg from the back and show the confirmation to update
+
+  useUpdateEffect(() => {
+    if (isPending) {
+      showLoadingNavIcon({ navMenuItemIdKey: navItemId.save })
+    }
+  }, [isPending])
 
   useUpdateEffect(() => {
     if (isSuccess) {
       if (data.message === 'inserted') {
-        notify({ msg: 'Added', type: 'success', theme: 'dark', position: 'bottom-center' })
-      } else if (data.message === 'updated') {
+        notify({ msg: 'Saved', type: 'success', theme: 'dark', position: 'bottom-center' })
+      } else if (data.message === 'saved') {
         notify({ msg: 'Updated', type: 'info', theme: 'dark', position: 'bottom-center' })
       }
 
@@ -47,7 +59,10 @@ export const SaveItem = (): JSX.Element => {
         slideElement({
           element: cardRef.current,
           onSlide: () => {
-            navigate('..', { replace: true, state: nanoid() })
+            navigate(`/${quotationId}`, { replace: true, state: nanoid() })
+            showSuccessNavIcon({ navMenuItemIdKey: navItemId.save })
+            dispatch(navSlice.actions.disableNavItems({ navItemIdKeys: [navItemId.save] }))
+            dispatch(navSlice.actions.removeUnderlineFromTopNav())
           },
         })
       }, 1500)
@@ -67,6 +82,9 @@ export const SaveItem = (): JSX.Element => {
       } else {
         notify({ msg: 'Internal error', type: 'error', theme: 'dark', position: 'bottom-center' })
       }
+
+      navigate('..')
+      showErrorNavIcon({ navMenuItemIdKey: navItemId.save })
     }
   }, [isError])
 
@@ -81,7 +99,7 @@ export const SaveItem = (): JSX.Element => {
     >
       <CardCustom
         reference={cardRef}
-        title='Save item'
+        title='Save quotation'
         logo={
           <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }} >
             <BsBookmarkStar />
@@ -92,16 +110,25 @@ export const SaveItem = (): JSX.Element => {
           onSubmit={(e: FormEvent): void => {
             e.preventDefault()
 
-            if (!itemToSave) return
+            const email = getState().user.email
 
-            const item = {
-              ...itemToSave,
+            if (!email) {
+              notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
+              return
+            }
+
+            const id = nanoid(5)
+
+            const quotation = {
+              id: quotationId === 'new' ? id : quotationId,
+              items: getState().quotation.items,
               name: nameSignal.value,
               category: categorySignal.value,
               desc: descSignal.value,
             }
 
-            saveItem({ item })
+            dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
+            saveQuotation({ quotation })
           }}
         >
           <NameInput nameSignal={nameSignal}/>
@@ -113,7 +140,7 @@ export const SaveItem = (): JSX.Element => {
             isSuccess={isSuccess}
             isError={isError}
           >
-            SAVE
+            {quotationId ? 'SAVE' : 'UPDATE'}
           </ButtonCustom>
         </form>
       </CardCustom>

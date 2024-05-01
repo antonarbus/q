@@ -13,7 +13,7 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  message: 'not logged in' | 'not owner' | 'not saved' | 'inserted' | 'saved'
+  message: 'not logged in' | 'not saved' | 'saved' | 'updated' | 'name is not provided' | 'category is not provided'
   document?: FlattenMaps<Quotation>
 }
 
@@ -23,7 +23,6 @@ export const saveQuotationRouter = Router()
 
 const saveQuotation: RouterHandler = async (req, res, next) => {
   try {
-    const { quotation } = req.body
     const refreshJwtToken = req.cookies.refreshJwtToken
 
     if (typeof refreshJwtToken !== 'string') {
@@ -42,22 +41,28 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
         .json({ message: 'not logged in' })
     }
 
-    if (email !== quotation?.email) {
+    const { name, category } = req.body.quotation
+
+    if (!name) {
       return res
         .status(httpStatus.forbidden_403)
-        .json({ message: 'not owner' })
+        .json({ message: 'name is not provided' })
+    }
+
+    if (!category) {
+      return res
+        .status(httpStatus.forbidden_403)
+        .json({ message: 'category is not provided' })
     }
 
     const document = await QuotationModel
       .findOneAndUpdate(
-        { email: quotation.email, id: quotation.id },
-        { quotation },
+        { email, name, category },
+        { ...req.body.quotation, email },
         { new: true, setDefaultsOnInsert: true, upsert: true },
       )
       .select({ _id: 0, __v: 0 })
       .lean() // otherwise in json we get some additional internal data which is not visible via console.log(document), strange
-
-    const isNew = document.createdAt?.toISOString() === document.updatedAt?.toISOString()
 
     if (document === null) {
       return res
@@ -65,15 +70,17 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
         .json({ message: 'not saved' })
     }
 
-    const filePath = `${email}/quotations/${quotation.id}.json`
+    const isNew = document.createdAt?.toISOString() === document.updatedAt?.toISOString()
+
+    const filePath = `${email}/quotations/${req.body.quotation.id}.json`
     const file = bucket.file(filePath)
-    const contents = JSON.stringify({ ...document, ...quotation }, null, 2)
+    const contents = JSON.stringify({ ...document, ...req.body.quotation }, null, 2)
     await file.save(contents)
 
     return res
       .status(httpStatus.success_200)
       .json({
-        message: isNew ? 'inserted' : 'saved',
+        message: isNew ? 'saved' : 'updated',
         document,
       })
   } catch (error) {

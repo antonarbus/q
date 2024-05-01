@@ -19,10 +19,12 @@ const quotationSchema = new Schema<Quotation>({
     lowercase: true,
     trim: true,
   },
-  quotationName: {
+  name: {
     type: String,
     trim: true,
   },
+  category: String,
+  desc: String,
   createdAt: {
     type: Date,
     default: Date.now,
