@@ -100,7 +100,9 @@ export type Copyable = ItemText | ItemBoq | ItemPrice | BoqRow
 export type Quotation = {
   id: 'new' | Record<never, never> & string
   email?: string
-  quotationName?: string
+  name?: string
+  category?: string
+  desc?: string
   createdAt?: Date
   updatedAt?: Date
   openedAt?: Date
