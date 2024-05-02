@@ -35,7 +35,7 @@ export const Nav = (): JSX.Element => {
         borderRadius: '4px',
         background: theme.colors.darkBackground,
         boxShadow: '0 0px 5px 0 #0000005c',
-        zIndex: 2,
+        zIndex: 3,
         contain: 'layout inline-size',
         fontWeight: 300,
         '& > ul > li > a > .icon-round-wrapper': mediaEnabled && {

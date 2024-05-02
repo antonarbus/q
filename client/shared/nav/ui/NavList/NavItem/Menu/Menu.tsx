@@ -28,7 +28,8 @@ export const MenuStyled = styled.div<Props>`
   border: 1px solid #474a4d;
   border-radius: 4px;
   overflow: hidden;
-  z-index: 666;
+  /* z-index: 666; */
+  /* background-color: red; */
 
   @media screen and (max-width: 480px) {
     left: 0px;

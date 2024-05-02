@@ -18,9 +18,18 @@ const itemSchema = new Schema<Copyable>({
     trim: true,
   },
   type: String,
-  name: String,
-  category: String,
-  desc: String,
+  name: {
+    type: String,
+    trim: true,
+  },
+  category: {
+    type: String,
+    trim: true,
+  },
+  desc: {
+    type: String,
+    trim: true,
+  },
   createdAt: Date,
   updatedAt: Date,
 }, {

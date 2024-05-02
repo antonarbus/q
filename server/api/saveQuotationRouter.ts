@@ -13,7 +13,14 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  message: 'not logged in' | 'not saved' | 'saved' | 'updated' | 'name is not provided' | 'category is not provided'
+  message:
+  | 'not logged in'
+  | 'not saved'
+  | 'saved'
+  | 'updated'
+  | 'id is not provided'
+  | 'name is not provided'
+  | 'category is not provided'
   document?: FlattenMaps<Quotation>
 }
 
@@ -41,24 +48,18 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
         .json({ message: 'not logged in' })
     }
 
-    const { name, category } = req.body.quotation
+    const { id } = req.body.quotation
 
-    if (!name) {
+    if (!id) {
       return res
         .status(httpStatus.forbidden_403)
-        .json({ message: 'name is not provided' })
-    }
-
-    if (!category) {
-      return res
-        .status(httpStatus.forbidden_403)
-        .json({ message: 'category is not provided' })
+        .json({ message: 'id is not provided' })
     }
 
     const document = await QuotationModel
       .findOneAndUpdate(
-        { email, name, category },
-        { ...req.body.quotation, email },
+        { email, id },
+        { ...req.body.quotation },
         { new: true, setDefaultsOnInsert: true, upsert: true },
       )
       .select({ _id: 0, __v: 0 })
@@ -72,9 +73,9 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
 
     const isNew = document.createdAt?.toISOString() === document.updatedAt?.toISOString()
 
-    const filePath = `${email}/quotations/${req.body.quotation.id}.json`
+    const filePath = `${email}/quotations/${id}.json`
     const file = bucket.file(filePath)
-    const contents = JSON.stringify({ ...document, ...req.body.quotation }, null, 2)
+    const contents = JSON.stringify(req.body.quotation, null, 2)
     await file.save(contents)
 
     return res

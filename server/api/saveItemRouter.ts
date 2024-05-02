@@ -13,7 +13,14 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  message: 'not logged in' | 'not saved' | 'saved' | 'updated' | 'name is not provided' | 'category is not provided'
+  message:
+  | 'not logged in'
+  | 'not saved'
+  | 'saved'
+  | 'updated'
+  | 'name is not provided'
+  | 'category is not provided'
+  | 'id is not provided'
   document?: FlattenMaps<Copyable>
 }
 
@@ -42,7 +49,7 @@ const saveItem: RouterHandler = async (req, res, next) => {
         .json({ message: 'not logged in' })
     }
 
-    const { name, category } = req.body.item
+    const { name, category, id } = req.body.item
 
     if (!name) {
       return res
@@ -54,6 +61,12 @@ const saveItem: RouterHandler = async (req, res, next) => {
       return res
         .status(httpStatus.forbidden_403)
         .json({ message: 'category is not provided' })
+    }
+
+    if (!id) {
+      return res
+        .status(httpStatus.forbidden_403)
+        .json({ message: 'id is not provided' })
     }
 
     const document = await ItemModel
@@ -73,9 +86,9 @@ const saveItem: RouterHandler = async (req, res, next) => {
 
     const isNew = document.createdAt?.toISOString() === document.updatedAt?.toISOString()
 
-    const filePath = `${email}/items/${req.body.item.id}.json`
+    const filePath = `${email}/items/${id}.json`
     const file = bucket.file(filePath)
-    const contents = JSON.stringify({ item: req.body.item }, null, 2)
+    const contents = JSON.stringify(req.body.item, null, 2)
     await file.save(contents)
 
     return res

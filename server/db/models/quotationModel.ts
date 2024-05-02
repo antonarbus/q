@@ -23,8 +23,14 @@ const quotationSchema = new Schema<Quotation>({
     type: String,
     trim: true,
   },
-  category: String,
-  desc: String,
+  category: {
+    type: String,
+    trim: true,
+  },
+  desc: {
+    type: String,
+    trim: true,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
