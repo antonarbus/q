@@ -39,6 +39,18 @@ export const columnDefs: Array<ColDef<Quotation>> = [
     headerName: 'id',
   },
   {
+    field: 'name',
+    headerName: 'name',
+  },
+  {
+    field: 'category',
+    headerName: 'category',
+  },
+  {
+    field: 'desc',
+    headerName: 'description',
+  },
+  {
     field: 'openedAt',
     headerName: 'opened',
     filter: 'agDateColumnFilter',
