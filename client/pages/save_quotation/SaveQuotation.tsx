@@ -28,14 +28,13 @@ export const SaveQuotation = (): JSX.Element => {
   const nameSignal = useSignal(getState().quotation.name ?? '')
   const categorySignal = useSignal(getState().quotation.category ?? '')
   const descSignal = useSignal(getState().quotation.desc ?? '')
-  // const { mutate: saveItem, data, isSuccess, isPending, isError, error } = useSaveItemMutation()
   const { mutate: saveQuotation, data, isSuccess, isPending, isError, error } = useSaveQuotationMutation()
 
   const { refetch: updateCategories } = useGetItemCategoriesQuery()
 
   const isDisabled = nameSignal.value === '' || categorySignal.value === ''
 
-  const quotationId = useSelectorTyped(state => state.quotation.id)
+  const id = useSelectorTyped(state => state.quotation.id)
 
   // todo: if item already exists return a msg from the back and show the confirmation to update
 
@@ -59,7 +58,7 @@ export const SaveQuotation = (): JSX.Element => {
         slideElement({
           element: cardRef.current,
           onSlide: () => {
-            navigate(`/${quotationId}`, { replace: true, state: nanoid() })
+            navigate(`/${id}`, { replace: true, state: nanoid() })
             showSuccessNavIcon({ navMenuItemIdKey: navItemId.save })
             dispatch(navSlice.actions.disableNavItems({ navItemIdKeys: [navItemId.save] }))
             dispatch(navSlice.actions.removeUnderlineFromTopNav())
@@ -120,7 +119,8 @@ export const SaveQuotation = (): JSX.Element => {
             const id = nanoid(5)
 
             const quotation = {
-              id: quotationId === 'new' ? id : quotationId,
+              ...getState().quotation,
+              id: id === 'new' ? id : id,
               items: getState().quotation.items,
               name: nameSignal.value,
               category: categorySignal.value,
@@ -140,7 +140,7 @@ export const SaveQuotation = (): JSX.Element => {
             isSuccess={isSuccess}
             isError={isError}
           >
-            {quotationId ? 'SAVE' : 'UPDATE'}
+            {id === 'new' ? 'SAVE' : 'UPDATE'}
           </ButtonCustom>
         </form>
       </CardCustom>
