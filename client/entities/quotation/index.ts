@@ -6,6 +6,7 @@ export { useGetQuotationMutation } from './api/useGetQuotationMutation'
 export { useGetQuotationsQuery } from './api/useGetQuotationsQuery'
 export { useDeleteQuotationMutation } from './api/useDeleteQuotationMutation'
 export { useSaveQuotationMutation } from './api/useSaveQuotationMutation'
+export { useGetQuotationCategoriesQuery } from './api/useGetQuotationCategoriesQuery'
 
 // cacheUpdaters
 export { updateOrAppendIntoQuotationsCache } from './cacheUpdaters/updateOrAppendIntoQuotationsCache'
