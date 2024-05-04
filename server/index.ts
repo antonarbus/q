@@ -10,6 +10,7 @@ import { getAccessTokenRouter } from './api/getAccessTokenRouter'
 import { getBucketCors } from './api/getBucketCors'
 import { getItemCategoriesRouter } from './api/getItemCategoriesRouter'
 import { getItemsRouter } from './api/getItemsRouter'
+import { getQuotationCategoriesRouter } from './api/getQuotationCategoriesRouter'
 import { getQuotationRouter } from './api/getQuotationRouter'
 import { getQuotationsRouter } from './api/getQuotationsRouter'
 import { logInRouter } from './api/logInRouter'
@@ -58,6 +59,7 @@ app.use(apiUrl.deleteItem, deleteItemRouter)
 app.use(apiUrl.saveItem, saveItemRouter)
 app.use(apiUrl.getItems, getItemsRouter)
 app.use(apiUrl.getItemCategories, getItemCategoriesRouter)
+app.use(apiUrl.getQuotationCategories, getQuotationCategoriesRouter)
 
 app.use(errorHandlerMiddleware)
 

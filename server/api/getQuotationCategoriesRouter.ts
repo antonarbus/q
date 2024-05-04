@@ -1,21 +1,21 @@
-import { ItemModel } from '@server/db/models/itemModel'
+import { QuotationModel } from '@server/db/models/quotationModel'
 import { verifyAccessTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
 import { verifyRefreshToken } from '@server/services/jwt'
 import { Router } from 'express'
-import { type Copyable } from '@entities/item'
+import { type Quotation } from '@entities/quotation'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { type ResWithBody, type Next, type Req } from '../types'
 
 export type ResBody = {
   message: 'not logged in' | 'found' | 'internal error' | 'something happened'
-  categories?: Array<Copyable['category']>
+  categories?: Array<Quotation['category']>
 }
 
 type RouterHandler = (req: Req, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
 
-export const getItemCategoriesRouter = Router()
+export const getQuotationCategoriesRouter = Router()
 
-const getItemCategories: RouterHandler = async (req, res, next) => {
+const getQuotationCategories: RouterHandler = async (req, res, next) => {
   try {
     const refreshJwtToken = req.cookies.refreshJwtToken
 
@@ -35,7 +35,7 @@ const getItemCategories: RouterHandler = async (req, res, next) => {
         .json({ message: 'not logged in' })
     }
 
-    const categories = await ItemModel
+    const categories = await QuotationModel
       .find({ email })
       .distinct('category')
 
@@ -56,8 +56,8 @@ const getItemCategories: RouterHandler = async (req, res, next) => {
   }
 }
 
-getItemCategoriesRouter.get(
+getQuotationCategoriesRouter.get(
   '/',
   verifyAccessTokenMiddleware,
-  getItemCategories,
+  getQuotationCategories,
 )

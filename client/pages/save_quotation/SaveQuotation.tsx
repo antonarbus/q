@@ -7,7 +7,7 @@ import { useRef } from 'react'
 import { BsBookmarkStar } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { quotationSlice, useSaveQuotationMutation } from '@entities/quotation'
+import { quotationSlice, useGetQuotationCategoriesQuery, useSaveQuotationMutation } from '@entities/quotation'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 import { CardCustom } from '@shared/components/CardCustom'
@@ -28,13 +28,10 @@ export const SaveQuotation = (): JSX.Element => {
   const categorySignal = useSignal(getState().quotation.category ?? '')
   const descSignal = useSignal(getState().quotation.desc ?? '')
   const { mutate: saveQuotation, data, isSuccess, isPending, isError, error } = useSaveQuotationMutation()
-  // const { refetch: updateCategories } = useGetItemCategoriesQuery()
-
-  const isDisabled = nameSignal.value === '' || categorySignal.value === ''
+  const { refetch: updateCategories } = useGetQuotationCategoriesQuery()
 
   const id = useSelectorTyped(state => state.quotation.id)
-
-  // todo: if item already exists return a msg from the back and show the confirmation to update
+  const isDisabled = nameSignal.value === '' || categorySignal.value === ''
 
   useUpdateEffect(() => {
     if (isPending) {
@@ -50,8 +47,11 @@ export const SaveQuotation = (): JSX.Element => {
         notify({ msg: 'Updated', type: 'info', theme: 'dark', position: 'bottom-center' })
       }
 
-      // void updateCategories()
-      // void refetchQuotations()
+      void updateCategories()
+
+      if (data.quotation) {
+        dispatch(quotationSlice.actions.loadQuotationReducer({ quotation: data.quotation }))
+      }
 
       setTimeout(() => {
         slideElement({
@@ -127,7 +127,6 @@ export const SaveQuotation = (): JSX.Element => {
               items: getState().quotation.items,
             }
 
-            dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
             saveQuotation({ quotation })
           }}
         >

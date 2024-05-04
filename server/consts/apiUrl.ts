@@ -18,6 +18,7 @@ export const apiUrl = {
   getQuotations: '/api/get-quotations',
   getItems: '/api/get-items',
   getItemCategories: '/api/get-item-categories',
+  getQuotationCategories: '/api/get-quotation-categories',
   deleteQuotation: '/api/delete-quotation',
   deleteItem: '/api/delete-item',
 } as const

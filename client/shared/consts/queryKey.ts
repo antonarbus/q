@@ -3,6 +3,7 @@ export const queryKey = {
   getQuotations: 'getQuotations',
   getItems: 'getItems',
   getItemCategories: 'getItemCategories',
+  getQuotationCategories: 'getQuotationCategories',
   deleteQuotation: 'deleteQuotation',
   deleteItem: 'deleteItem',
   logIn: 'logIn',
