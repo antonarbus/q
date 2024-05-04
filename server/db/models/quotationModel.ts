@@ -1,13 +1,13 @@
 import { model, Schema } from 'mongoose'
 import { type Quotation } from '@entities/quotation/types'
-import { nanoid } from '@shared/lib/nanoid'
+// import { nanoid } from '@shared/lib/nanoid'
 
 // export type QuotationModelType = Omit<Quotation, 'items'>
 
 const quotationSchema = new Schema<Quotation>({
   id: {
     type: String,
-    default: () => nanoid(5),
+    // default: () => nanoid(5),
     required: true,
     unique: true,
     index: true,
@@ -31,18 +31,9 @@ const quotationSchema = new Schema<Quotation>({
     type: String,
     trim: true,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
-  },
-  openedAt: {
-    type: Date,
-    default: Date.now,
-  },
+  createdAt: Date,
+  updatedAt: Date,
+  openedAt: Date,
   sharedAt: Date,
   from: {
     email: String,
@@ -54,8 +45,6 @@ const quotationSchema = new Schema<Quotation>({
     name: String,
     company: String,
   },
-}, {
-  timestamps: true,
 })
 
 export const QuotationModel = model<Quotation>('quotation', quotationSchema)
