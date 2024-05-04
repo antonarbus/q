@@ -49,7 +49,6 @@ const getQuotation: RouterHandler = async (req, res, next) => {
         { new: true },
       )
       .lean()
-    console.log('🚀 ~ document:', document)
 
     if (document === null) {
       return res
