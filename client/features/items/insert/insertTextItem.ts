@@ -1,13 +1,16 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { type MouseEvent } from 'react'
 import { copySlice } from '@entities/copy'
-import { isFroalaSignal, itemKey } from '@entities/quotation'
+import { type Copyable, isFroalaSignal, itemKey } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 
 export const insertTextItem = (e?: MouseEvent): void => {
-  const itemToCopy = {
+  const itemToCopy: Copyable = {
     id: nanoid(5),
     type: itemKey.text,
+    email: '',
+    name: '',
+    category: '',
     width: 600,
     height: 79.2,
     isFroala: true,

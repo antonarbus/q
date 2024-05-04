@@ -8,6 +8,12 @@ import { axiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
 export const useGetQuotationsQuery = (): UseQueryResult<ResBody, AxiosError<ResBody>> => {
   const query = useQuery({
     queryKey: [queryKey.getQuotations],
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    staleTime: 0,
+    retry: 0,
+    enabled: false,
     queryFn: async () => {
       const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
         url: apiUrl.getQuotations,
@@ -16,14 +22,6 @@ export const useGetQuotationsQuery = (): UseQueryResult<ResBody, AxiosError<ResB
 
       return res.data
     },
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
-    staleTime: 0,
-    retry: 0,
-    enabled: false,
-    // enabled: Boolean(accessTokenSignal.value),
-    // gcTime: Infinity,
   })
 
   return query

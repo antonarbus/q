@@ -17,6 +17,9 @@ export const insertPasteItemReducer = (state: Quotation, action: PayloadAction<C
   const pasteTextEl: ItemPaste = {
     id: 'paste id',
     type: itemKey.paste,
+    email: '',
+    name: '',
+    category: '',
     height: 0,
     width: 0,
     isFroala: true,

@@ -4,10 +4,18 @@ import { nanoid } from '@shared/lib/nanoid'
 
 export const newQuotation: Quotation = {
   id: 'new',
+  email: '',
+  name: '',
+  category: '',
+  desc: '',
   items: [
     {
       id: nanoid(5),
       type: itemKey.text,
+      email: '',
+      name: '',
+      category: '',
+      desc: '',
       width: 600,
       height: 0,
       isFroala: true,
@@ -19,6 +27,9 @@ export const newQuotation: Quotation = {
     {
       id: nanoid(5),
       type: itemKey.boq,
+      email: '',
+      name: '',
+      category: '',
       width: 600,
       height: 0,
       isFroala: true,
@@ -63,6 +74,10 @@ export const newQuotation: Quotation = {
           {
             id: nanoid(5),
             type: boqRowKey.row,
+            email: '',
+            name: '',
+            category: '',
+            desc: '',
             height: 0,
             width: 0,
             description: {
@@ -101,6 +116,10 @@ export const newQuotation: Quotation = {
           {
             id: nanoid(5),
             type: boqRowKey.row,
+            email: '',
+            name: '',
+            category: '',
+            desc: '',
             height: 0,
             width: 0,
             description: {
@@ -139,6 +158,9 @@ export const newQuotation: Quotation = {
           {
             id: nanoid(5),
             type: boqRowKey.row,
+            email: '',
+            name: '',
+            category: '',
             height: 0,
             width: 0,
             description: {
@@ -180,6 +202,10 @@ export const newQuotation: Quotation = {
     {
       id: nanoid(5),
       type: itemKey.price,
+      email: '',
+      name: '',
+      category: '',
+      desc: '',
       width: 150,
       height: 0,
       isFroala: true,
@@ -195,6 +221,10 @@ export const newQuotation: Quotation = {
     {
       id: nanoid(5),
       type: itemKey.text,
+      email: '',
+      name: '',
+      category: '',
+      desc: '',
       width: 600,
       height: 0,
       isFroala: true,

@@ -21,7 +21,7 @@ export type ResBody = {
   | 'id is not provided'
   | 'name is not provided'
   | 'category is not provided'
-  document?: FlattenMaps<Quotation>
+  quotation?: FlattenMaps<Quotation>
 }
 
 type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
@@ -48,9 +48,9 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
         .json({ message: 'not logged in' })
     }
 
-    const { id } = req.body.quotation
+    const { quotation } = req.body
 
-    if (!id) {
+    if (!quotation.id) {
       return res
         .status(httpStatus.forbidden_403)
         .json({ message: 'id is not provided' })
@@ -58,9 +58,23 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
 
     const document = await QuotationModel
       .findOneAndUpdate(
-        { email, id },
-        { ...req.body.quotation },
-        { new: true, setDefaultsOnInsert: true, upsert: true },
+        {
+          id: quotation.id,
+          email,
+        },
+        {
+          id: quotation.id,
+          email,
+          name: quotation.name,
+          category: quotation.category,
+          desc: quotation.desc,
+          items: 'can be found in bucket under same id',
+        },
+        {
+          new: true,
+          setDefaultsOnInsert: true,
+          upsert: true,
+        },
       )
       .select({ _id: 0, __v: 0 })
       .lean() // otherwise in json we get some additional internal data which is not visible via console.log(document), strange
@@ -73,16 +87,16 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
 
     const isNew = document.createdAt?.toISOString() === document.updatedAt?.toISOString()
 
-    const filePath = `${email}/quotations/${id}.json`
+    const filePath = `${email}/quotations/${quotation.id}.json`
     const file = bucket.file(filePath)
-    const contents = JSON.stringify(req.body.quotation, null, 2)
+    const contents = JSON.stringify({ ...document, items: quotation.items }, null, 2)
     await file.save(contents)
 
     return res
       .status(httpStatus.success_200)
       .json({
         message: isNew ? 'saved' : 'updated',
-        document,
+        quotation: { ...document, items: quotation.items },
       })
   } catch (error) {
     next(error)

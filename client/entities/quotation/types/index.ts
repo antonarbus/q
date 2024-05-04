@@ -5,13 +5,13 @@ import { type itemKey } from '../consts/itemKey'
 
 type ItemCommon = {
   id: string
+  email: string
   name: string
   category: string
   desc?: string
   width?: number
   height?: number
   isFroala?: boolean
-  email?: string
   createdAt?: Date
   updatedAt?: Date
 }
@@ -99,10 +99,10 @@ export type Copyable = ItemText | ItemBoq | ItemPrice | BoqRow
 
 export type Quotation = {
   id: 'new' | Record<never, never> & string
-  email?: string
-  name?: string
-  category?: string
-  desc?: string
+  email: string
+  name: string
+  category: string
+  desc: string
   createdAt?: Date
   updatedAt?: Date
   openedAt?: Date
