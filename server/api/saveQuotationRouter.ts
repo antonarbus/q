@@ -56,7 +56,14 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
         .json({ message: 'id is not provided' })
     }
 
-    const document = await QuotationModel
+    const existingQuotation = await QuotationModel.findOne({
+      id: quotation.id,
+      email,
+    })
+
+    const isNew = existingQuotation === null
+
+    const quotationDataFromDb = await QuotationModel
       .findOneAndUpdate(
         {
           id: quotation.id,
@@ -68,35 +75,35 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
           name: quotation.name,
           category: quotation.category,
           desc: quotation.desc,
-          items: 'can be found in bucket under same id',
+          items: 'find in bucket under same id',
+          updatedAt: Date.now(),
+          ...(isNew && { createdAt: Date.now() }),
+          ...(isNew && { openedAt: Date.now() }),
         },
         {
           new: true,
-          setDefaultsOnInsert: true,
           upsert: true,
         },
       )
       .select({ _id: 0, __v: 0 })
-      .lean() // otherwise in json we get some additional internal data which is not visible via console.log(document), strange
+      .lean()
 
-    if (document === null) {
+    if (!quotationDataFromDb) {
       return res
         .status(httpStatus.forbidden_403)
         .json({ message: 'not saved' })
     }
 
-    const isNew = document.createdAt?.toISOString() === document.updatedAt?.toISOString()
-
     const filePath = `${email}/quotations/${quotation.id}.json`
     const file = bucket.file(filePath)
-    const contents = JSON.stringify({ ...document, items: quotation.items }, null, 2)
+    const contents = JSON.stringify({ ...quotationDataFromDb, items: quotation.items }, null, 2)
     await file.save(contents)
 
     return res
       .status(httpStatus.success_200)
       .json({
         message: isNew ? 'saved' : 'updated',
-        quotation: { ...document, items: quotation.items },
+        quotation: { ...quotationDataFromDb, items: quotation.items },
       })
   } catch (error) {
     next(error)
