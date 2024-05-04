@@ -8,7 +8,7 @@ import { BsBookmarkStar } from 'react-icons/bs'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetItemCategoriesQuery, useSaveItemMutation } from '@entities/item'
-import { quotationSlice, useSaveQuotationMutation, type Copyable } from '@entities/quotation'
+import { quotationSlice, useGetQuotationsQuery, useSaveQuotationMutation, type Copyable } from '@entities/quotation'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 import { CardCustom } from '@shared/components/CardCustom'
@@ -23,14 +23,13 @@ import { NameInput } from './NameInput'
 
 export const SaveQuotation = (): JSX.Element => {
   const navigate = useNavigate()
-  const location = useLocation()
+  // const location = useLocation()
   const cardRef = useRef<HTMLDivElement>(null)
   const nameSignal = useSignal(getState().quotation.name ?? '')
   const categorySignal = useSignal(getState().quotation.category ?? '')
   const descSignal = useSignal(getState().quotation.desc ?? '')
   const { mutate: saveQuotation, data, isSuccess, isPending, isError, error } = useSaveQuotationMutation()
-
-  const { refetch: updateCategories } = useGetItemCategoriesQuery()
+  // const { refetch: updateCategories } = useGetItemCategoriesQuery()
 
   const isDisabled = nameSignal.value === '' || categorySignal.value === ''
 
@@ -46,13 +45,14 @@ export const SaveQuotation = (): JSX.Element => {
 
   useUpdateEffect(() => {
     if (isSuccess) {
-      if (data.message === 'inserted') {
+      if (data.message === 'saved') {
         notify({ msg: 'Saved', type: 'success', theme: 'dark', position: 'bottom-center' })
-      } else if (data.message === 'saved') {
+      } else if (data.message === 'updated') {
         notify({ msg: 'Updated', type: 'info', theme: 'dark', position: 'bottom-center' })
       }
 
-      void updateCategories()
+      // void updateCategories()
+      // void refetchQuotations()
 
       setTimeout(() => {
         slideElement({
@@ -116,15 +116,16 @@ export const SaveQuotation = (): JSX.Element => {
               return
             }
 
-            const id = nanoid(5)
+            const existingId = getState().quotation.id
+            const id = existingId === 'new' ? nanoid(5) : existingId
 
             const quotation = {
               ...getState().quotation,
-              id: id === 'new' ? id : id,
-              items: getState().quotation.items,
+              id,
               name: nameSignal.value,
               category: categorySignal.value,
               desc: descSignal.value,
+              items: getState().quotation.items,
             }
 
             dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))

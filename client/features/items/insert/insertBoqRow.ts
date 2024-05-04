@@ -1,13 +1,16 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { type MouseEvent } from 'react'
 import { copySlice } from '@entities/copy'
-import { isFroalaSignal, boqRowKey } from '@entities/quotation'
+import { isFroalaSignal, boqRowKey, type Copyable } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 
 export const insertBoqRow = (e?: MouseEvent): void => {
-  const itemToCopy = {
+  const itemToCopy: Copyable = {
     id: nanoid(5),
     type: boqRowKey.row,
+    email: '',
+    name: '',
+    category: '',
     height: 50,
     width: 570,
     description: {

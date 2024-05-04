@@ -1,13 +1,16 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { type MouseEvent } from 'react'
 import { copySlice } from '@entities/copy'
-import { isFroalaSignal, boqRowKey, itemKey } from '@entities/quotation'
+import { isFroalaSignal, boqRowKey, itemKey, type Copyable } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 
 export const insertBoqItem = (e?: MouseEvent): void => {
-  const itemToCopy = {
+  const itemToCopy: Copyable = {
     id: nanoid(5),
     type: itemKey.boq,
+    email: '',
+    name: '',
+    category: '',
     width: 600,
     height: 267,
     isFroala: true,
@@ -52,6 +55,9 @@ export const insertBoqItem = (e?: MouseEvent): void => {
         {
           id: nanoid(5),
           type: boqRowKey.row,
+          email: '',
+          name: '',
+          category: '',
           height: 0,
           width: 0,
           description: {
@@ -90,6 +96,9 @@ export const insertBoqItem = (e?: MouseEvent): void => {
         {
           id: nanoid(5),
           type: boqRowKey.row,
+          email: '',
+          name: '',
+          category: '',
           height: 0,
           width: 0,
           description: {
@@ -128,6 +137,9 @@ export const insertBoqItem = (e?: MouseEvent): void => {
         {
           id: nanoid(5),
           type: boqRowKey.row,
+          email: '',
+          name: '',
+          category: '',
           height: 0,
           width: 0,
           description: {

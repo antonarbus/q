@@ -35,6 +35,10 @@ import { updateSubTotalPriceReducer } from './reducers/updateSubTotalPriceReduce
 
 const initialState: Quotation = {
   id: 'new',
+  email: '',
+  name: '',
+  category: '',
+  desc: '',
   items: [],
 }
 

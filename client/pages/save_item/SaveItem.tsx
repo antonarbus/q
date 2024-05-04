@@ -35,8 +35,8 @@ export const SaveItem = (): JSX.Element => {
 
   useUpdateEffect(() => {
     if (isSuccess) {
-      if (data.message === 'inserted') {
-        notify({ msg: 'Added', type: 'success', theme: 'dark', position: 'bottom-center' })
+      if (data.message === 'saved') {
+        notify({ msg: 'Saved', type: 'success', theme: 'dark', position: 'bottom-center' })
       } else if (data.message === 'updated') {
         notify({ msg: 'Updated', type: 'info', theme: 'dark', position: 'bottom-center' })
       }
