@@ -53,17 +53,18 @@ export const SaveQuotation = (): JSX.Element => {
         dispatch(quotationSlice.actions.loadQuotationReducer({ quotation: data.quotation }))
       }
 
+      showSuccessNavIcon({ navMenuItemIdKey: navItemId.save })
+      dispatch(navSlice.actions.disableNavItems({ navItemIdKeys: [navItemId.save] }))
+      dispatch(navSlice.actions.removeUnderlineFromTopNav())
+
       setTimeout(() => {
         slideElement({
           element: cardRef.current,
           onSlide: () => {
             navigate(`/${id}`, { replace: true, state: nanoid() })
-            showSuccessNavIcon({ navMenuItemIdKey: navItemId.save })
-            dispatch(navSlice.actions.disableNavItems({ navItemIdKeys: [navItemId.save] }))
-            dispatch(navSlice.actions.removeUnderlineFromTopNav())
           },
         })
-      }, 1500)
+      }, 1000)
     }
   }, [isSuccess])
 
