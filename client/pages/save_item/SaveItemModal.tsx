@@ -1,3 +1,4 @@
+import { getState } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
 import { Avatar } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
@@ -26,7 +27,7 @@ export const SaveItemModal = (): JSX.Element => {
   const nameSignal = useSignal(itemToSave?.name ?? '')
   const categorySignal = useSignal(itemToSave?.category ?? '')
   const descSignal = useSignal(itemToSave?.desc ?? '')
-  const { mutate: saveItem, data, isSuccess, isPending, isError, error } = useSaveItemMutation()
+  const { mutate: saveItem, data, isSuccess, isPending, isError, error, reset } = useSaveItemMutation()
   const { refetch: updateCategories } = useGetItemCategoriesQuery()
 
   const isDisabled = nameSignal.value === '' || categorySignal.value === ''
@@ -50,7 +51,7 @@ export const SaveItemModal = (): JSX.Element => {
             navigate('..', { replace: true, state: nanoid() })
           },
         })
-      }, 1500)
+      }, 1000)
     }
   }, [isSuccess])
 
@@ -67,6 +68,8 @@ export const SaveItemModal = (): JSX.Element => {
       } else {
         notify({ msg: 'Internal error', type: 'error', theme: 'dark', position: 'bottom-center' })
       }
+
+      reset()
     }
   }, [isError])
 
@@ -92,6 +95,13 @@ export const SaveItemModal = (): JSX.Element => {
           onSubmit={(e: FormEvent): void => {
             e.preventDefault()
 
+            const email = getState().user.email
+
+            if (!email) {
+              notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
+              return
+            }
+
             if (!itemToSave) return
 
             const item = {
@@ -100,6 +110,8 @@ export const SaveItemModal = (): JSX.Element => {
               category: categorySignal.value,
               desc: descSignal.value,
             }
+
+            console.log(666)
 
             saveItem({ item })
           }}
