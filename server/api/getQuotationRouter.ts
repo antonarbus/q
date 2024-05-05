@@ -1,6 +1,6 @@
 import { QuotationModel } from '@server/db/models/quotationModel'
-import { verifyRefreshToken } from '@server/services/jwt'
 import { bucket } from '@server/services/storage'
+import { getEmailFromRefreshToken } from '@server/utils/getEmailFromRefreshToken'
 import { Router } from 'express'
 import { type Quotation } from '@entities/quotation'
 import { httpStatus } from '@shared/consts/httpStatus'
@@ -23,20 +23,10 @@ const getQuotation: RouterHandler = async (req, res, next) => {
   try {
     const { id } = req.body
 
-    const refreshJwtToken = req.cookies.refreshJwtToken
+    const email = getEmailFromRefreshToken(req)
 
     // todo: make a logic to return shared offer for non-logged-in user
-    if (typeof refreshJwtToken !== 'string') {
-      return res
-        .status(httpStatus.forbidden_403)
-        .json({ message: 'not logged in' })
-    }
-
-    const jwtPayload = verifyRefreshToken(refreshJwtToken)
-
-    const email = jwtPayload?.email
-
-    if (typeof email !== 'string') {
+    if (!email) {
       return res
         .status(httpStatus.forbidden_403)
         .json({ message: 'not logged in' })

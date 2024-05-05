@@ -1,11 +1,12 @@
-import { verifyRefreshToken } from '@server/services/jwt'
 import { bucket } from '@server/services/storage'
+import { getEmailFromRefreshTokenOrThrowUnauthorized } from '@server/utils/getEmailFromRefreshTokenOrThrowUnauthorized'
 import express from 'express'
+import { type ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@shared/consts/httpStatus'
 import type { Next, Req, ResWithBody } from '../types'
 
 export type ResBody = {
-  message: 'not uploaded' | 'no file' | 'uploaded' | 'not logged in'
+  message: ErrorMessageCommon | 'not uploaded' | 'no file' | 'uploaded'
   link?: string
   name?: string
   size?: number
@@ -19,23 +20,7 @@ const upload: RouterHandler = async (req, res, next) => {
   try {
     const { file } = req
 
-    const refreshJwtToken = req.cookies.refreshJwtToken
-
-    if (typeof refreshJwtToken !== 'string') {
-      return res
-        .status(httpStatus.unauthorized_401)
-        .json({ message: 'not logged in' })
-    }
-
-    const jwtPayload = verifyRefreshToken(refreshJwtToken)
-
-    const email = jwtPayload?.email
-
-    if (typeof email !== 'string') {
-      return res
-        .status(httpStatus.unauthorized_401)
-        .json({ message: 'not logged in' })
-    }
+    const email = getEmailFromRefreshTokenOrThrowUnauthorized(req)
 
     if (file === undefined) {
       return res
@@ -55,7 +40,6 @@ const upload: RouterHandler = async (req, res, next) => {
       .status(httpStatus.serverError_500)
       .json({ message: 'not uploaded' })
   } catch (error) {
-    console.error(error)
     next(error)
   }
 }

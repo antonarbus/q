@@ -4,13 +4,9 @@ import express from 'express'
 import { type Result, type ValidationError, body, validationResult } from 'express-validator'
 import { type User } from '@entities/user'
 import { httpStatus } from '@shared/consts/httpStatus'
-// import { nanoid } from '@shared/lib/nanoid'
 import { UserModel } from '../db/models/userModel'
-// import { apiUrl } from '../consts/apiUrl'
 // import { sendMail } from '../services/mail/sendMail'
 import type { Next, ReqWithBody, ResWithBody } from '../types'
-// const domain = process.env.DOMAIN
-// const port = process.env.PORT_FRONT_END
 
 export type ReqBody = {
   email: User['email']

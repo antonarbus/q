@@ -1,10 +1,11 @@
 import { QuotationModel } from '@server/db/models/quotationModel'
 import { verifyAccessTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
-import { verifyRefreshToken } from '@server/services/jwt'
 import { bucket } from '@server/services/storage'
+import { getEmailFromRefreshTokenOrThrowUnauthorized } from '@server/utils/getEmailFromRefreshTokenOrThrowUnauthorized'
 import { Router } from 'express'
 import { type HydratedDocument } from 'mongoose'
 import { type Quotation } from '@entities/quotation/types'
+import { type ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { type ResWithBody, type ReqWithBody, type Next } from '../types'
 
@@ -13,7 +14,7 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  message: 'not logged in' | 'did not find' | 'deleted' | 'internal error' | 'not deleted'
+  message: ErrorMessageCommon | 'did not find' | 'deleted' | 'internal error' | 'not deleted'
   document?: HydratedDocument<Quotation>
 }
 
@@ -23,23 +24,7 @@ export const deleteQuotationRouter = Router()
 
 const deleteQuotation: RouterHandler = async (req, res, next) => {
   try {
-    const refreshJwtToken = req.cookies.refreshJwtToken
-
-    if (typeof refreshJwtToken !== 'string') {
-      return res
-        .status(httpStatus.unauthorized_401)
-        .json({ message: 'not logged in' })
-    }
-
-    const jwtPayload = verifyRefreshToken(refreshJwtToken)
-
-    const email = jwtPayload?.email
-
-    if (typeof email !== 'string') {
-      return res
-        .status(httpStatus.unauthorized_401)
-        .json({ message: 'not logged in' })
-    }
+    const email = getEmailFromRefreshTokenOrThrowUnauthorized(req)
 
     const { id } = req.body
 
@@ -67,10 +52,7 @@ const deleteQuotation: RouterHandler = async (req, res, next) => {
       .status(httpStatus.notFound_404)
       .json({ message: 'not deleted' })
   } catch (error) {
-    return res
-      .status(httpStatus.serverError_500)
-      .json({ message: 'internal error' })
-    // next(error)
+    next(error)
   }
 }
 

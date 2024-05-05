@@ -35,20 +35,15 @@ export const QuotationsAgGrid = (): JSX.Element => {
 
   useUpdateEffect(() => {
     if (isSuccess) {
-      if (data.message === 'no content') {
-        notify({ msg: 'No content', type: 'info', theme: 'dark', position: 'bottom-center' })
+      if (data.message === 'No content') {
+        notify({ msg: data.message, type: 'info', theme: 'dark', position: 'bottom-center' })
       }
     }
   }, [isSuccess])
 
   useUpdateEffect(() => {
     if (isError) {
-      if (error.response?.data.message === 'something happened') {
-        notify({ msg: 'Something happened', type: 'warn', theme: 'dark', position: 'bottom-center' })
-        return
-      }
-
-      notify({ msg: 'Internal error', type: 'error', theme: 'dark', position: 'bottom-center' })
+      notify({ msg: error.response?.data.message, type: 'warn', theme: 'dark', position: 'bottom-center' })
     }
   }, [isError])
 
@@ -63,7 +58,7 @@ export const QuotationsAgGrid = (): JSX.Element => {
       {isFetching && <LinearProgress sx={{ height: '1px', top: '97px', zIndex: 2, mb: '-1px' }} />}
       <AgGridReact<Quotation>
         ref={quotationsAgGridRef}
-        rowData={data?.documents}
+        rowData={data?.quotations ?? []}
         getRowId={params => params.data.id}
         defaultColDef={defaultColDef}
         columnDefs={columnDefs}

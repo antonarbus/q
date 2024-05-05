@@ -11,9 +11,9 @@ type Props = {
 export const updateOrAppendIntoQuotationsCache = ({ quotation }: Props): void => {
   reactQuery.setQueriesData<ResBodyQuotations>({ queryKey: [queryKey.getQuotations] }, (cacheData) => {
     const updatedCacheData = produce(cacheData, (draft) => {
-      if (draft?.documents === undefined) return
+      if (draft?.quotations === undefined) return
 
-      const quotations = draft.documents
+      const quotations = draft.quotations
       const index = quotations.findIndex(quotationInCache => quotationInCache.id === quotation.id)
       const foundInCache = index !== -1
 
