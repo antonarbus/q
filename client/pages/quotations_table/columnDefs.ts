@@ -54,33 +54,34 @@ export const columnDefs: Array<ColDef<Quotation>> = [
     field: 'openedAt',
     headerName: 'opened',
     filter: 'agDateColumnFilter',
+    sort: 'desc',
+    minWidth: 200,
     valueGetter: dateValueGetter({ columnDef: 'openedAt' }),
     cellRenderer: DateCellRenderer,
     filterParams: {
       comparator: dateFilterComparator,
     },
-    minWidth: 200,
   },
   {
     field: 'createdAt',
     headerName: 'created',
     filter: 'agDateColumnFilter',
+    minWidth: 200,
     valueGetter: dateValueGetter({ columnDef: 'createdAt' }),
     cellRenderer: DateCellRenderer,
     filterParams: {
       comparator: dateFilterComparator,
     },
-    minWidth: 200,
   },
   {
     field: 'updatedAt',
     headerName: 'updated',
     filter: 'agDateColumnFilter',
+    minWidth: 200,
     valueGetter: dateValueGetter({ columnDef: 'updatedAt' }),
     cellRenderer: DateCellRenderer,
     filterParams: {
       comparator: dateFilterComparator,
     },
-    minWidth: 200,
   },
 ]

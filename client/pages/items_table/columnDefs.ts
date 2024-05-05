@@ -60,22 +60,23 @@ export const columnDefs: Array<ColDef<Copyable>> = [
     field: 'createdAt',
     headerName: 'created',
     filter: 'agDateColumnFilter',
+    minWidth: 200,
     valueGetter: dateValueGetter({ columnDef: 'createdAt' }),
     cellRenderer: DateCellRenderer,
     filterParams: {
       comparator: dateFilterComparator,
     },
-    minWidth: 200,
   },
   {
     field: 'updatedAt',
     headerName: 'updated',
     filter: 'agDateColumnFilter',
+    sort: 'desc',
+    minWidth: 200,
     valueGetter: dateValueGetter({ columnDef: 'updatedAt' }),
     cellRenderer: DateCellRenderer,
     filterParams: {
       comparator: dateFilterComparator,
     },
-    minWidth: 200,
   },
 ]

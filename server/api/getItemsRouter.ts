@@ -37,7 +37,7 @@ const getItems: RouterHandler = async (req, res, next) => {
 
     const documents = await ItemModel
       .find({ email })
-      .sort({ updatedAt: -1 })
+      // .sort({ updatedAt: -1 })
       .select({ _id: 0, __v: 0, email: 0 })
 
     if (documents.length === 0) {
