@@ -11,22 +11,28 @@ export const { promise: initAccessTokenFetchingPromise, resolve: resolveInitAcce
 export const axiosWithAuth = axios.create({ withCredentials: true })
 
 axiosWithAuth.interceptors.request.use(async (config) => {
-  // wait till initial access token if fetched, otherwise we put null and another vain request for access token will be sent
+  // wait till initial access token if fetched, otherwise token is null and another immediate duplicate request for access token will be sent
   await initAccessTokenFetchingPromise
   config.headers[headerName.accessJwtToken] = accessTokenSignal.value
   return config
 })
+
+type ExtendedAxiosRequestConfig = AxiosRequestConfig & { _isRetry?: boolean }
 
 axiosWithAuth.interceptors.response.use(
   (config) => {
     return config
   },
   async (error) => {
-    const originalRequest = error.config as (AxiosRequestConfig & { _isRetry: boolean })
-    const isTokenProbablyExpired = error.response.status === httpStatus.unauthorized_401 && error.config && !error.config._isRetry
+    const originalRequestConfig = error.config as ExtendedAxiosRequestConfig
 
-    if (isTokenProbablyExpired) {
-      originalRequest._isRetry = true
+    const isUnauthorizedAfterCheckingAccessToken =
+      error instanceof AxiosError &&
+      error.response?.status === httpStatus.unauthorized_401 &&
+      !(error.config as ExtendedAxiosRequestConfig)._isRetry
+
+    if (isUnauthorizedAfterCheckingAccessToken) {
+      originalRequestConfig._isRetry = true
 
       try {
         const res = await axios.get(apiUrl.getAccessToken, { withCredentials: true })
@@ -35,11 +41,11 @@ axiosWithAuth.interceptors.response.use(
           accessTokenSignal.value = res.data.accessJwtToken
         }
 
-        return await axiosWithAuth.request(originalRequest)
+        return await axiosWithAuth.request(originalRequestConfig)
       } catch (err: unknown) {
-        const unauthorized = err instanceof AxiosError && err.response?.status === httpStatus.unauthorized_401
+        const isUnauthorized = err instanceof AxiosError && err.response?.status === httpStatus.unauthorized_401
 
-        if (unauthorized) {
+        if (isUnauthorized) {
           accessTokenSignal.value = null
           console.warn('not authorized')
           console.error(err)
