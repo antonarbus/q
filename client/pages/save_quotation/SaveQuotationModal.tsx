@@ -69,19 +69,7 @@ export const SaveQuotationModal = (): JSX.Element => {
 
   useUpdateEffect(() => {
     if (isError) {
-      if (error.response?.data.message === 'not logged in') {
-        notify({ msg: 'Not logged in', type: 'warn', theme: 'dark', position: 'bottom-center' })
-      } else if (error.response?.data.message === 'not saved') {
-        notify({ msg: 'Not saved', type: 'warn', theme: 'dark', position: 'bottom-center' })
-      } else if (error.response?.data.message === 'category is not provided') {
-        notify({ msg: 'Category is not provided', type: 'warn', theme: 'dark', position: 'bottom-center' })
-      } else if (error.response?.data.message === 'name is not provided') {
-        notify({ msg: 'Name is not provided', type: 'warn', theme: 'dark', position: 'bottom-center' })
-      } else {
-        notify({ msg: 'Internal error', type: 'error', theme: 'dark', position: 'bottom-center' })
-      }
-
-      // navigate('..')
+      notify({ msg: error.response?.data.message, type: 'error', theme: 'dark', position: 'bottom-center' })
       showErrorNavIcon({ navMenuItemIdKey: navItemId.save })
       reset()
     }

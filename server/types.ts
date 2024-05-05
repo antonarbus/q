@@ -14,7 +14,7 @@ export type RouteHandlerAsync = (req: Request, res: Response, next: NextFunction
 // }
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-export interface ReqWithBody<T> extends Express.Request {
+export interface ReqWithBody<T = unknown> extends Express.Request {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [x: string]: any
   body: T

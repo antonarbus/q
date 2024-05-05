@@ -43,12 +43,7 @@ export const ItemsAgGrid = (): JSX.Element => {
 
   useUpdateEffect(() => {
     if (isError) {
-      if (error.response?.data.message === 'something happened') {
-        notify({ msg: 'Something happened', type: 'warn', theme: 'dark', position: 'bottom-center' })
-        return
-      }
-
-      notify({ msg: 'Internal error', type: 'error', theme: 'dark', position: 'bottom-center' })
+      notify({ msg: error.response?.data.message, type: 'error', theme: 'dark', position: 'bottom-center' })
     }
   }, [isError])
 

@@ -1,13 +1,14 @@
 import { ItemModel } from '@server/db/models/itemModel'
 import { verifyAccessTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
-import { verifyRefreshToken } from '@server/services/jwt'
+import { getEmailFromRefreshTokenOrThrowUnauthorized } from '@server/utils/getEmailFromRefreshTokenOrThrowUnauthorized'
 import { Router } from 'express'
 import { type Copyable } from '@entities/item'
+import { type ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { type ResWithBody, type Next, type Req } from '../types'
 
 export type ResBody = {
-  message: 'not logged in' | 'found' | 'no content' | 'internal error' | 'something happened'
+  message: ErrorMessageCommon | 'found' | 'no content' | 'Unhandled error'
   documents?: Copyable[]
 }
 
@@ -17,23 +18,7 @@ export const getItemsRouter = Router()
 
 const getItems: RouterHandler = async (req, res, next) => {
   try {
-    const refreshJwtToken = req.cookies.refreshJwtToken
-
-    if (typeof refreshJwtToken !== 'string') {
-      return res
-        .status(httpStatus.unauthorized_401)
-        .json({ message: 'not logged in' })
-    }
-
-    const jwtPayload = verifyRefreshToken(refreshJwtToken)
-
-    const email = jwtPayload?.email
-
-    if (typeof email !== 'string') {
-      return res
-        .status(httpStatus.unauthorized_401)
-        .json({ message: 'not logged in' })
-    }
+    const email = getEmailFromRefreshTokenOrThrowUnauthorized(req)
 
     const documents = await ItemModel
       .find({ email })
@@ -55,12 +40,9 @@ const getItems: RouterHandler = async (req, res, next) => {
 
     return res
       .status(httpStatus.notFound_404)
-      .json({ message: 'something happened' })
+      .json({ message: 'Unhandled error' })
   } catch (error) {
-    return res
-      .status(httpStatus.serverError_500)
-      .json({ message: 'internal error' })
-    // next(error)
+    next(error)
   }
 }
 

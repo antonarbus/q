@@ -1,9 +1,10 @@
 import { ItemModel } from '@server/db/models/itemModel'
 import { verifyAccessTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
-import { verifyRefreshToken } from '@server/services/jwt'
 import { bucket } from '@server/services/storage'
+import { getEmailFromRefreshTokenOrThrowUnauthorized } from '@server/utils/getEmailFromRefreshTokenOrThrowUnauthorized'
 import { Router } from 'express'
 import { type Item } from '@entities/quotation'
+import { type ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { type ResWithBody, type ReqWithBody, type Next } from '../types'
 
@@ -12,7 +13,7 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  message: 'not logged in' | 'did not find' | 'no item in bucket' | 'deleted'
+  message: ErrorMessageCommon | 'did not find' | 'no item in bucket' | 'deleted'
 }
 
 type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
@@ -21,23 +22,7 @@ export const deleteItemRouter = Router()
 
 const deleteItem: RouterHandler = async (req, res, next) => {
   try {
-    const refreshJwtToken = req.cookies.refreshJwtToken
-
-    if (typeof refreshJwtToken !== 'string') {
-      return res
-        .status(httpStatus.forbidden_403)
-        .json({ message: 'not logged in' })
-    }
-
-    const jwtPayload = verifyRefreshToken(refreshJwtToken)
-
-    const email = jwtPayload?.email
-
-    if (typeof email !== 'string') {
-      return res
-        .status(httpStatus.forbidden_403)
-        .json({ message: 'not logged in' })
-    }
+    const email = getEmailFromRefreshTokenOrThrowUnauthorized(req)
 
     const { id } = req.body
 

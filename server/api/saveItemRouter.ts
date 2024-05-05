@@ -1,10 +1,11 @@
 import { ItemModel } from '@server/db/models/itemModel'
 import { verifyAccessTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
-import { verifyRefreshToken } from '@server/services/jwt'
 import { bucket } from '@server/services/storage'
+import { getEmailFromRefreshTokenOrThrowUnauthorized } from '@server/utils/getEmailFromRefreshTokenOrThrowUnauthorized'
 import { Router } from 'express'
 import { type FlattenMaps } from 'mongoose'
 import { type Copyable } from '@entities/item'
+import { type ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { type ResWithBody, type ReqWithBody, type Next } from '../types'
 
@@ -13,8 +14,7 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  message:
-  | 'not logged in'
+  message: ErrorMessageCommon
   | 'not saved'
   | 'saved'
   | 'updated'
@@ -30,23 +30,7 @@ export const saveItemRouter = Router()
 
 const saveItem: RouterHandler = async (req, res, next) => {
   try {
-    const refreshJwtToken = req.cookies.refreshJwtToken
-
-    if (typeof refreshJwtToken !== 'string') {
-      return res
-        .status(httpStatus.unauthorized_401)
-        .json({ message: 'not logged in' })
-    }
-
-    const jwtPayload = verifyRefreshToken(refreshJwtToken)
-
-    const email = jwtPayload?.email
-
-    if (typeof email !== 'string') {
-      return res
-        .status(httpStatus.unauthorized_401)
-        .json({ message: 'not logged in' })
-    }
+    const email = getEmailFromRefreshTokenOrThrowUnauthorized(req)
 
     const { item } = req.body
 
