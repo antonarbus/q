@@ -111,8 +111,6 @@ export const SaveItemModal = (): JSX.Element => {
               desc: descSignal.value,
             }
 
-            console.log(666)
-
             saveItem({ item })
           }}
         >
