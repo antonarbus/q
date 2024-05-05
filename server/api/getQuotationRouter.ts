@@ -22,6 +22,7 @@ export const getQuotationRouter = Router()
 const getQuotation: RouterHandler = async (req, res, next) => {
   try {
     const { id } = req.body
+    console.log('🚀 ~ id:', id)
 
     const refreshJwtToken = req.cookies.refreshJwtToken
 
@@ -45,7 +46,7 @@ const getQuotation: RouterHandler = async (req, res, next) => {
     const document = await QuotationModel
       .findOneAndUpdate(
         { email, id },
-        { openedAt: new Date() },
+        { openedAt: Date.now() },
         { new: true },
       )
       .lean()
