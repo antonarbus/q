@@ -18,7 +18,7 @@ import { CategoryAutocomplete } from './CategoryAutocomplete'
 import { DescriptionTextarea } from './DescriptionTextarea'
 import { NameInput } from './NameInput'
 
-export const SaveItem = (): JSX.Element => {
+export const SaveItemModal = (): JSX.Element => {
   const navigate = useNavigate()
   const location = useLocation()
   const itemToSave = location.state.itemToSave as Copyable | undefined

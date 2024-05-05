@@ -23,7 +23,7 @@ import { reRenderQuotationSignal } from '@shared/signals/reRenderQuotationSignal
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
 
-export const LogIn = (): JSX.Element => {
+export const LoginModal = (): JSX.Element => {
   const navigate = useNavigate()
   const { id } = useParams()
   const inputRef = useRef<HTMLDivElement>(null)

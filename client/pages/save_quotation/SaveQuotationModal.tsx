@@ -20,7 +20,7 @@ import { CategoryAutocomplete } from './CategoryAutocomplete'
 import { DescriptionTextarea } from './DescriptionTextarea'
 import { NameInput } from './NameInput'
 
-export const SaveQuotation = (): JSX.Element => {
+export const SaveQuotationModal = (): JSX.Element => {
   const navigate = useNavigate()
   // const location = useLocation()
   const cardRef = useRef<HTMLDivElement>(null)

@@ -1,1 +1,1 @@
-export { SaveQuotation } from './SaveQuotation'
+export { SaveQuotationModal } from './SaveQuotationModal'

@@ -1,2 +1,2 @@
-export { LogOut } from './LogOut'
+export { LogoutModal } from './LogoutModal'
 export { useLogoutIfAccessTokenRemoved } from './useLogoutIfAccessTokenRemoved'

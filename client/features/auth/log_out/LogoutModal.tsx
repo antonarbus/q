@@ -10,7 +10,7 @@ import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
 import { navSlice } from '@shared/nav'
 import { notify } from '@shared/ui/top_msg'
 
-export const LogOut = (): JSX.Element => {
+export const LogoutModal = (): JSX.Element => {
   const navigate = useNavigate()
   const { mutate: logOut, isPending, data, isSuccess, isError } = useLogOutMutation()
 
