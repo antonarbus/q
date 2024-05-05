@@ -22,7 +22,6 @@ export const getQuotationRouter = Router()
 const getQuotation: RouterHandler = async (req, res, next) => {
   try {
     const { id } = req.body
-    console.log('🚀 ~ id:', id)
 
     const refreshJwtToken = req.cookies.refreshJwtToken
 

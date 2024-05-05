@@ -39,6 +39,7 @@ const getItems: RouterHandler = async (req, res, next) => {
       .find({ email })
       // .sort({ updatedAt: -1 })
       .select({ _id: 0, __v: 0, email: 0 })
+      .lean()
 
     if (documents.length === 0) {
       return res
