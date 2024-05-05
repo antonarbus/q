@@ -8,12 +8,10 @@ import { notify } from '@shared/ui/top_msg'
 
 export const DeleteItemButton = ({ id }: ReqBody): JSX.Element => {
   const { mutate: deleteItem, isPending, isSuccess, isError, error } = useDeleteItemMutation()
-  const { refetch: updateCategories } = useGetItemCategoriesQuery()
 
   useUpdateEffect(() => {
     if (isSuccess) {
       deleteFromItemsCache({ id })
-      void updateCategories()
     }
   }, [isSuccess])
 
