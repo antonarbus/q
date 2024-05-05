@@ -22,7 +22,6 @@ import { NameInput } from './NameInput'
 
 export const SaveQuotationModal = (): JSX.Element => {
   const navigate = useNavigate()
-  // const location = useLocation()
   const cardRef = useRef<HTMLDivElement>(null)
   const nameSignal = useSignal(getState().quotation.name ?? '')
   const categorySignal = useSignal(getState().quotation.category ?? '')
