@@ -1,1 +1,1 @@
-export { RequestPasswordReset } from './RequestPasswordReset'
+export { RequestPasswordResetModal } from './RequestPasswordResetModal'

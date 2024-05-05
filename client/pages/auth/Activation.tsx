@@ -15,7 +15,7 @@ import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 import { notify } from '@shared/ui/top_msg'
 
-export const Activation = (): JSX.Element => {
+export const ActivationModal = (): JSX.Element => {
   const { activationKey } = useParams()
   const cardRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()

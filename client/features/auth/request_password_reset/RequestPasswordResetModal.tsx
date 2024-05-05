@@ -1,13 +1,13 @@
 import { theme } from '@lib_instances/theme'
-import { LockOutlined } from '@mui/icons-material'
+import PasswordRoundedIcon from '@mui/icons-material/PasswordRounded'
 import { Avatar, Box } from '@mui/material'
-import { useSignal, useSignalEffect } from '@preact/signals-react'
+import { useSignal } from '@preact/signals-react'
 import type { FormEvent, MouseEvent } from 'react'
 import { useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { useRegisterMutation } from '@entities/user'
-import { ConfirmPasswordInput, EmailInput, PasswordInput } from '@shared/components'
+import { useRequestPasswordResetMutation } from '@entities/user'
+import { EmailInput } from '@shared/components'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 import { CardCustom } from '@shared/components/CardCustom'
@@ -15,36 +15,37 @@ import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
 
-export const Register = (): JSX.Element => {
-  const navigate = useNavigate()
-  const inputRef = useRef<HTMLDivElement>(null)
+export const RequestPasswordResetModal = (): JSX.Element => {
   const cardRef = useRef<HTMLDivElement>(null)
-
+  const inputRef = useRef<HTMLDivElement>(null)
+  const navigate = useNavigate()
   const emailSignal = useSignal('')
-  const passwordSignal = useSignal('')
   const isEmailOkSignal = useSignal(false)
-  const isConfirmPasswordOkSignal = useSignal(false)
-  const isButtonDisabledSignal = useSignal(false)
 
-  const { mutate: register, isPending, data, isSuccess, isError, error } = useRegisterMutation()
-
-  useSignalEffect(() => {
-    isButtonDisabledSignal.value = !(isEmailOkSignal.value && isConfirmPasswordOkSignal.value)
-  })
+  const { mutate: requestPasswordReset, isPending, data, isSuccess, isError, error } = useRequestPasswordResetMutation()
 
   useUpdateEffect(() => {
     if (!isSuccess) return
 
-    if (data.message === 'activation link sent') {
+    if (data.message === 'reset link sent') {
       notify({ msg: 'Check your mailbox.', theme: 'light' })
+
+      setTimeout(() => {
+        slideElement({
+          element: cardRef.current,
+          onSlide: () => {
+            navigate('..')
+          },
+        })
+      }, 2500)
     }
   }, [isSuccess])
 
   useUpdateEffect(() => {
     if (!isError) return
 
-    if (error.response?.data.message === 'already exists') {
-      notify({ msg: 'Already exists', type: 'info', theme: 'light' })
+    if (error.response?.data.message === 'does not exists') {
+      notify({ msg: 'Not found', type: 'info', theme: 'light' })
       return
     }
 
@@ -67,20 +68,17 @@ export const Register = (): JSX.Element => {
     >
       <CardCustom
         reference={cardRef}
-        title='Register'
+        title='Reset password'
         logo={
           <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }}>
-            <LockOutlined />
+            <PasswordRoundedIcon />
           </Avatar>
         }
       >
         <form
           onSubmit={async (e: FormEvent): Promise<void> => {
             e.preventDefault()
-            register({
-              email: emailSignal.value,
-              password: passwordSignal.value,
-            })
+            requestPasswordReset({ email: emailSignal.value })
           }}
         >
           <EmailInput
@@ -88,20 +86,13 @@ export const Register = (): JSX.Element => {
             emailSignal={emailSignal}
             isEmailOkSignal={isEmailOkSignal}
           />
-          <PasswordInput
-            passwordSignal={passwordSignal}
-          />
-          <ConfirmPasswordInput
-            originalPasswordSignal={passwordSignal}
-            isConfirmPasswordOkSignal={isConfirmPasswordOkSignal}
-          />
           <ButtonCustom
-            disabled={isButtonDisabledSignal.value}
+            disabled={!isEmailOkSignal.value}
             isPending={isPending}
             isSuccess={isSuccess}
             isError={isError}
           >
-            REGISTER
+            RESET
           </ButtonCustom>
           <Box
             sx={{ textAlign: 'right', marginTop: '20px' }}

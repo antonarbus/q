@@ -1,20 +1,20 @@
 import { type RouteObject, createBrowserRouter } from 'react-router-dom'
-import { Activation } from '@pages/auth/Activation'
+import { ActivationModal } from '@pages/auth/Activation'
 import { Unauthorized } from '@pages/auth/Unauthorized'
 import { BarChart } from '@pages/chart/Chart'
 import { ItemsTable } from '@pages/items_table'
 import { Quotation } from '@pages/quotation'
 import { QuotationsTable } from '@pages/quotations_table'
-import { SaveItem } from '@pages/save_item'
-import { SaveQuotation } from '@pages/save_quotation'
+import { SaveItemModal } from '@pages/save_item'
+import { SaveQuotationModal } from '@pages/save_quotation'
 import { Copy } from '@widgets/copy'
 import { Nav } from '@widgets/nav'
 import { AccessToken } from '@features/auth/get_access_token'
-import { LogIn } from '@features/auth/log_in'
-import { LogOut } from '@features/auth/log_out'
-import { Register } from '@features/auth/register'
-import { RequestPasswordReset } from '@features/auth/request_password_reset'
-import { ResetPassword } from '@features/auth/reset_password'
+import { LoginModal } from '@features/auth/log_in'
+import { LogoutModal } from '@features/auth/log_out'
+import { RegisterModal } from '@features/auth/register'
+import { RequestPasswordResetModal } from '@features/auth/request_password_reset'
+import { ResetPasswordModal } from '@features/auth/reset_password'
 import { route } from '@shared/consts/route'
 import { Main } from '@shared/layouts'
 import { LoadingDotsOverlay } from '@shared/loading_dots_overlay'
@@ -23,29 +23,29 @@ import { TopMsg } from '@shared/ui/top_msg'
 const authRoutes: RouteObject[] = [
   {
     path: route.login,
-    element: <LogIn />,
+    element: <LoginModal />,
   },
   {
     path: route.logout,
-    element: <LogOut />,
+    element: <LogoutModal />,
   },
   {
     path: route.register,
-    element: <Register />,
+    element: <RegisterModal />,
   },
   {
     path: route.requestPasswordReset,
-    element: <RequestPasswordReset />,
+    element: <RequestPasswordResetModal />,
   },
   {
     path: `${route.activate}/:activationKey`,
     caseSensitive: true,
-    element: <Activation />,
+    element: <ActivationModal />,
   },
   {
     path: `${route.resetPassword}/:email/:resetPasswordKey`,
     caseSensitive: true,
-    element: <ResetPassword />,
+    element: <ResetPasswordModal />,
   },
 ]
 
@@ -70,11 +70,11 @@ export const router = createBrowserRouter([
           ...authRoutes,
           {
             path: route.save,
-            element: <SaveQuotation />,
+            element: <SaveQuotationModal />,
           },
           {
             path: route.saveItem,
-            element: <SaveItem />,
+            element: <SaveItemModal />,
           },
         ],
       },
@@ -90,7 +90,7 @@ export const router = createBrowserRouter([
           ...authRoutes,
           {
             path: route.saveItem,
-            element: <SaveItem />,
+            element: <SaveItemModal />,
           },
         ],
       },
