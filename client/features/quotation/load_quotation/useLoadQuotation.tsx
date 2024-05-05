@@ -21,9 +21,7 @@ export function useLoadQuotation(): void {
       dispatch(quotationSlice.actions.resetQuotationReducer())
 
       setTimeout(() => {
-        dispatch(quotationSlice.actions.loadQuotationReducer({
-          quotation: newQuotation,
-        }))
+        dispatch(quotationSlice.actions.loadQuotationReducer({ quotation: newQuotation }))
       }, 200)
 
       dispatch(navSlice.actions.enableNavItems({
@@ -43,8 +41,8 @@ export function useLoadQuotation(): void {
       loadingDotsOverlayTextSignal.value = `Loading ${id}...`
       setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 1000)
 
-      const loadingAlreadyLoadedQuotation = getState().quotation.id === id
-      if (loadingAlreadyLoadedQuotation) return
+      // const loadingAlreadyLoadedQuotation = getState().quotation.id === id
+      // if (loadingAlreadyLoadedQuotation) return
 
       dispatch(quotationSlice.actions.resetQuotationReducer())
       dispatch(navSlice.actions.removeUnderlineFromTopNav())
@@ -63,6 +61,7 @@ export function useLoadQuotation(): void {
       const quotation = data.quotation
 
       if (quotation === undefined) return
+
       if (quotation.items === undefined) {
         notify({ msg: 'Quotation corrupted', type: 'warn', theme: 'light' })
         setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 1000)
