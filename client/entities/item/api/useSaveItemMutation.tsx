@@ -9,7 +9,6 @@ export const useSaveItemMutation = (): UseMutationResult<ResBody, AxiosError<Res
   const query = useMutation({
     mutationKey: [queryKey.saveItem],
     mutationFn: async ({ item }: Payload) => {
-      throw 666
       const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>, Payload>({
         url: apiUrl.saveItem,
         method: 'POST',
