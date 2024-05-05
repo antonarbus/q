@@ -27,7 +27,7 @@ export const SaveQuotationModal = (): JSX.Element => {
   const nameSignal = useSignal(getState().quotation.name ?? '')
   const categorySignal = useSignal(getState().quotation.category ?? '')
   const descSignal = useSignal(getState().quotation.desc ?? '')
-  const { mutate: saveQuotation, data, isSuccess, isPending, isError, error } = useSaveQuotationMutation()
+  const { mutate: saveQuotation, data, isSuccess, isPending, isError, error, reset } = useSaveQuotationMutation()
   const { refetch: updateCategories } = useGetQuotationCategoriesQuery()
 
   const id = useSelectorTyped(state => state.quotation.id)
@@ -82,8 +82,9 @@ export const SaveQuotationModal = (): JSX.Element => {
         notify({ msg: 'Internal error', type: 'error', theme: 'dark', position: 'bottom-center' })
       }
 
-      navigate('..')
+      // navigate('..')
       showErrorNavIcon({ navMenuItemIdKey: navItemId.save })
+      reset()
     }
   }, [isError])
 

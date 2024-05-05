@@ -17,7 +17,6 @@ export const DescriptionTextarea = ({ descSignal }: Props): JSX.Element => {
         label='Description'
         multiline
         rows={4}
-        maxRows={Infinity}
         value={descSignal.value}
         onChange={(e): void => {
           descSignal.value = e.target.value

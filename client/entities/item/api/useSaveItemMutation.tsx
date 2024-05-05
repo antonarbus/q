@@ -8,11 +8,12 @@ import { axiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
 export const useSaveItemMutation = (): UseMutationResult<ResBody, AxiosError<ResBody>, Payload> => {
   const query = useMutation({
     mutationKey: [queryKey.saveItem],
-    mutationFn: async (payload: Payload) => {
+    mutationFn: async ({ item }: Payload) => {
+      throw 666
       const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>, Payload>({
         url: apiUrl.saveItem,
         method: 'POST',
-        data: payload,
+        data: { item },
       })
 
       return res.data
