@@ -9,13 +9,13 @@ export type JwtPayloadExtended = {
 }
 
 export const createAccessToken = (payload: JwtPayloadExtended): string | undefined => {
-  const sault = process.env.JWT_ACCESS_SECRET
+  const salt = process.env.JWT_ACCESS_SECRET
 
-  if (!sault) return undefined
+  if (!salt) return undefined
 
   const fifteenMinInSec = 15 * 60
 
-  const token = jwt.sign(payload, sault, {
+  const token = jwt.sign(payload, salt, {
     expiresIn: fifteenMinInSec,
   })
 
@@ -23,11 +23,11 @@ export const createAccessToken = (payload: JwtPayloadExtended): string | undefin
 }
 
 export const createRefreshToken = (payload: JwtPayloadExtended): string | undefined => {
-  const sault = process.env.JWT_REFRESH_SECRET
+  const salt = process.env.JWT_REFRESH_SECRET
 
-  if (!sault) return undefined
+  if (!salt) return undefined
 
-  const token = jwt.sign(payload, sault, {
+  const token = jwt.sign(payload, salt, {
     expiresIn: thirtyDaysInSec,
   })
 
@@ -35,14 +35,14 @@ export const createRefreshToken = (payload: JwtPayloadExtended): string | undefi
 }
 
 export const verifyAccessToken = (accessJwtToken: string): JwtPayload | undefined => {
-  const sault = process.env.JWT_ACCESS_SECRET
+  const salt = process.env.JWT_ACCESS_SECRET
 
-  if (!sault) return undefined
+  if (!salt) return undefined
 
   if (typeof accessJwtToken !== 'string') return undefined
 
   try {
-    const jwtPayload = jwt.verify(accessJwtToken, sault)
+    const jwtPayload = jwt.verify(accessJwtToken, salt)
     if (typeof jwtPayload === 'string') return undefined
     return jwtPayload
   } catch (error) {
@@ -52,14 +52,14 @@ export const verifyAccessToken = (accessJwtToken: string): JwtPayload | undefine
 }
 
 export const verifyRefreshToken = (refreshJwtToken: string): JwtPayload | undefined => {
-  const sault = process.env.JWT_REFRESH_SECRET
+  const salt = process.env.JWT_REFRESH_SECRET
 
-  if (!sault) return undefined
+  if (!salt) return undefined
 
   if (typeof refreshJwtToken !== 'string') return undefined
 
   try {
-    const jwtPayload = jwt.verify(refreshJwtToken, sault)
+    const jwtPayload = jwt.verify(refreshJwtToken, salt)
     if (typeof jwtPayload === 'string') return undefined
     return jwtPayload
   } catch (error) {
