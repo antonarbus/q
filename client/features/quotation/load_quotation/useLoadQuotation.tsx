@@ -1,5 +1,5 @@
 import { router } from '@lib_instances/Router'
-import { dispatch, getState } from '@lib_instances/store'
+import { dispatch } from '@lib_instances/store'
 import { useEffect } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { quotationSlice, useGetQuotationMutation } from '@entities/quotation'
@@ -40,9 +40,6 @@ export function useLoadQuotation(): void {
       dispatch(navSlice.actions.removeUnderlineFromTopNav())
       loadingDotsOverlayTextSignal.value = `Loading ${id}...`
       setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 1000)
-
-      // const loadingAlreadyLoadedQuotation = getState().quotation.id === id
-      // if (loadingAlreadyLoadedQuotation) return
 
       dispatch(quotationSlice.actions.resetQuotationReducer())
       dispatch(navSlice.actions.removeUnderlineFromTopNav())
