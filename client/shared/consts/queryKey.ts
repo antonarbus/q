@@ -1,6 +1,7 @@
 export const queryKey = {
   getQuotation: 'getQuotation',
   getQuotations: 'getQuotations',
+  getItem: 'getItem',
   getItems: 'getItems',
   getItemCategories: 'getItemCategories',
   getQuotationCategories: 'getQuotationCategories',

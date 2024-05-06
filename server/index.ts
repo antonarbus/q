@@ -9,6 +9,7 @@ import { deleteQuotationRouter } from './api/deleteQuotationRouter'
 import { getAccessTokenRouter } from './api/getAccessTokenRouter'
 import { getBucketCors } from './api/getBucketCors'
 import { getItemCategoriesRouter } from './api/getItemCategoriesRouter'
+import { getItemRouter } from './api/getItemRouter'
 import { getItemsRouter } from './api/getItemsRouter'
 import { getQuotationCategoriesRouter } from './api/getQuotationCategoriesRouter'
 import { getQuotationRouter } from './api/getQuotationRouter'
@@ -53,6 +54,7 @@ app.use(apiUrl.setBucketCors, setBucketCors)
 app.use(apiUrl.getBucketCors, getBucketCors)
 app.use(apiUrl.saveQuotation, saveQuotationRouter)
 app.use(apiUrl.getQuotation, getQuotationRouter)
+app.use(apiUrl.getItem, getItemRouter)
 app.use(apiUrl.getQuotations, getQuotationsRouter)
 app.use(apiUrl.deleteQuotation, deleteQuotationRouter)
 app.use(apiUrl.deleteItem, deleteItemRouter)
@@ -65,7 +67,7 @@ app.use(errorHandlerMiddleware)
 
 const port = process.env.PORT_BACK_END
 const domain = process.env.DOMAIN
-const tellServerStarted = (): void => {
+
+app.listen(port, () => {
   console.info(`🚀 server started at ${domain}:${port}`)
-}
-app.listen(port, tellServerStarted)
+})
