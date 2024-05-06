@@ -5,7 +5,7 @@ import { isFroalaSignal, boqRowKey, type Copyable } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 
 export const insertBoqRow = (e?: MouseEvent): void => {
-  const itemToCopy: Copyable = {
+  const item: Copyable = {
     id: nanoid(5),
     type: boqRowKey.row,
     email: '',
@@ -13,44 +13,6 @@ export const insertBoqRow = (e?: MouseEvent): void => {
     category: '',
     height: 50,
     width: 570,
-    description: {
-      html: '<p>item 1</p>',
-      value: 0,
-      pin: {
-        isPinned: false,
-        isShown: false,
-      },
-    },
-    itemPrice: {
-      html: '<p>10 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
-      value: 10,
-      pin: {
-        isPinned: false,
-        isShown: false,
-      },
-    },
-    qty: {
-      html: '<p>1 <span style="font-size: 12px; color: rgb(61, 142, 185);">pcs</span></p>',
-      value: 1,
-      pin: {
-        isPinned: true,
-        isShown: false,
-      },
-    },
-    price: {
-      html: '<p>10 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
-      value: 10,
-      pin: {
-        isPinned: false,
-        isShown: false,
-      },
-    },
-  }
-
-  isFroalaSignal.value = false
-
-  dispatch(copySlice.actions.addItemIntoCopyContainer({
-    copyItem: itemToCopy,
     preview: `
       <div class="boq-row MuiBox-root" id="ynT" style="display: flex; flex-direction: column; justify-content: flex-end; position: relative; border-bottom: 1px solid rgb(232, 232, 232);">
         <div class="paste-here" style="opacity: 1; display: flex; align-items: stretch;">
@@ -108,7 +70,43 @@ export const insertBoqRow = (e?: MouseEvent): void => {
         </div>
       </div>
     `,
-  }))
+    description: {
+      html: '<p>item 1</p>',
+      value: 0,
+      pin: {
+        isPinned: false,
+        isShown: false,
+      },
+    },
+    itemPrice: {
+      html: '<p>10 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+      value: 10,
+      pin: {
+        isPinned: false,
+        isShown: false,
+      },
+    },
+    qty: {
+      html: '<p>1 <span style="font-size: 12px; color: rgb(61, 142, 185);">pcs</span></p>',
+      value: 1,
+      pin: {
+        isPinned: true,
+        isShown: false,
+      },
+    },
+    price: {
+      html: '<p>10 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+      value: 10,
+      pin: {
+        isPinned: false,
+        isShown: false,
+      },
+    },
+  }
+
+  isFroalaSignal.value = false
+
+  dispatch(copySlice.actions.addItemIntoCopyContainer({ item }))
 
   const isCopyContainer = getState().copy.isCopyContainer
 

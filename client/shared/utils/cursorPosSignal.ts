@@ -7,5 +7,4 @@ const throttledMouseMove = throttle((e: MouseEvent): void => {
   cursorPosSignal.value = { x: e.x, y: e.y }
 }, 25)
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 document.addEventListener('mousemove', throttledMouseMove, false)
