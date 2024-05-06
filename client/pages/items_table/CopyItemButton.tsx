@@ -14,7 +14,7 @@ export const CopyItemButton = ({ id }: ReqBody): JSX.Element => {
   useUpdateEffect(() => {
     if (isSuccess) {
       if (!data.item) return
-      dispatch(copySlice.actions.addItemIntoCopyContainer({ copyItem: data.item, preview: 'preview' }))
+      dispatch(copySlice.actions.addItemIntoCopyContainer({ copyItem: data.item, preview: data.item.preview ?? '' }))
       dispatch(copySlice.actions.allowToPaste())
       dispatch(copySlice.actions.showCopyContainer())
     }
