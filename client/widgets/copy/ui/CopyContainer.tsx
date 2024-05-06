@@ -14,7 +14,6 @@ export const CopyContainer = (): JSX.Element => {
   useDisableNavItemsExceptNewAndQuotations()
   const copyContainerAnimationControls = useCopyContainerAnimation()
   const { x, y } = cursorPosSignal.value
-  console.log('🚀 ~ { x, y }:', { x, y })
   // const { x, y } = { x: 300, y: 0 }
 
   return (
