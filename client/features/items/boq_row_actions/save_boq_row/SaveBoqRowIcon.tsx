@@ -1,8 +1,8 @@
-import { getState } from '@lib_instances/store'
+import { dispatch, getState } from '@lib_instances/store'
 import { type MouseEvent, type ReactNode } from 'react'
 import { BsBookmarks } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
-import { boqRowKey, getBoqRowFromStore, useItem, useRow } from '@entities/quotation'
+import { boqRowKey, getBoqRowFromStore, quotationSlice, useItem, useRow } from '@entities/quotation'
 import { className } from '@shared/consts/className'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
@@ -30,6 +30,14 @@ export const SaveBoqRowIcon = (): ReactNode => {
 
         const boqRowElement = clickedIconElement.closest(`.${className.boqRow}`)
         if (!boqRowElement) return
+
+        dispatch(quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
+          itemIndex,
+          rowIndex,
+          height: boqRowElement.clientHeight,
+          width: boqRowElement.clientWidth,
+        }))
+
         const html = boqRowElement.outerHTML
         const cleanedHtml = cleanHtml(html)
 

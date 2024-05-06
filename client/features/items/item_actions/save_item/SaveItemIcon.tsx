@@ -2,7 +2,7 @@ import { getState } from '@lib_instances/store'
 import { type ReactNode, type MouseEvent } from 'react'
 import { BsBookmarks } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
-import { getItemFromStore, itemKey, useItem } from '@entities/quotation'
+import { getItemFromStore, itemKey, saveItemHeightByIndex, useItem } from '@entities/quotation'
 import { className } from '@shared/consts/className'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
@@ -23,6 +23,8 @@ export const SaveItemIcon = (): ReactNode => {
           navigate('./login')
           return
         }
+
+        saveItemHeightByIndex({ itemIndex })
 
         const clickedIconElement = e.target
         if (!(clickedIconElement instanceof Element)) return

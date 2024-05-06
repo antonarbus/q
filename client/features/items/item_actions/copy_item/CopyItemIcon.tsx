@@ -40,6 +40,7 @@ export const CopyItemIcon = (): JSX.Element => {
         const cleanedHtml = cleanHtml(html)
         isFroalaSignal.value = false
 
+        // todo: we may store preview right into the item
         dispatch(copySlice.actions.addItemIntoCopyContainer({ copyItem: itemToCopy, preview: cleanedHtml }))
         dispatch(copySlice.actions.allowToPaste())
 
