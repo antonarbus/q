@@ -1,6 +1,6 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { type MouseEvent, type ReactNode } from 'react'
-import { BsBookmarks } from 'react-icons/bs'
+import { BsBookmarkPlus } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 import { boqRowKey, getBoqRowFromStore, quotationSlice, useItem, useRow } from '@entities/quotation'
 import { className } from '@shared/consts/className'
@@ -14,7 +14,7 @@ export const SaveBoqRowIcon = (): ReactNode => {
   const { rowIndex } = useRow()
 
   return (
-    <BsBookmarks
+    <BsBookmarkPlus
       tabIndex={-1}
       onClick={(e: MouseEvent): void => {
         const email = getState().user.email

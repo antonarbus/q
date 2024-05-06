@@ -1,6 +1,6 @@
 import { getState } from '@lib_instances/store'
 import { type ReactNode, type MouseEvent } from 'react'
-import { BsBookmarks } from 'react-icons/bs'
+import { BsBookmarkPlus } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 import { getItemFromStore, itemKey, saveItemHeightByIndex, useItem } from '@entities/quotation'
 import { className } from '@shared/consts/className'
@@ -13,7 +13,7 @@ export const SaveItemIcon = (): ReactNode => {
   const { itemIndex } = useItem()
 
   return (
-    <BsBookmarks
+    <BsBookmarkPlus
       tabIndex={-1}
       onClick={(e: MouseEvent): void => {
         const email = getState().user.email
