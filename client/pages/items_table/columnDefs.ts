@@ -37,7 +37,7 @@ export const columnDefs: Array<ColDef<Copyable>> = [
   {
     field: 'id',
     headerName: 'id',
-    hide: true,
+    // hide: true,
   },
   {
     field: 'name',

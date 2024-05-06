@@ -3,8 +3,10 @@ import { type ReactNode, type MouseEvent } from 'react'
 import { BsBookmarks } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 import { getItemFromStore, itemKey, useItem } from '@entities/quotation'
+import { className } from '@shared/consts/className'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
+import { cleanHtml } from '@shared/utils/itemsUtils'
 
 export const SaveItemIcon = (): ReactNode => {
   const navigate = useNavigate()
@@ -22,12 +24,25 @@ export const SaveItemIcon = (): ReactNode => {
           return
         }
 
+        const clickedIconElement = e.target
+        if (!(clickedIconElement instanceof Element)) return
+
+        const itemElement = clickedIconElement.closest(`.${className.item}`)
+        if (!(itemElement instanceof Element)) return
+        const paperElement = itemElement.querySelector(`.${className.paper}`)
+        if (!(paperElement instanceof Element)) return
+        const html = paperElement.innerHTML
+        const cleanedHtml = cleanHtml(html)
+
         const item = getItemFromStore({ itemIndex })
 
         if (!item) return
         if (item.type === itemKey.paste) return
 
-        navigate(`./${route.saveItem}`, { state: { itemToSave: item } })
+        const itemToSave = structuredClone(item)
+        itemToSave.preview = cleanedHtml
+
+        navigate(`./${route.saveItem}`, { state: { itemToSave } })
       }}
     />
   )

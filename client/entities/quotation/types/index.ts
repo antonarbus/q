@@ -14,6 +14,7 @@ type ItemCommon = {
   isFroala?: boolean
   createdAt?: Date
   updatedAt?: Date
+  preview?: string
 }
 
 export type BoqRowCellPin = {
