@@ -3,8 +3,10 @@ import { type MouseEvent, type ReactNode } from 'react'
 import { BsBookmarks } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 import { boqRowKey, getBoqRowFromStore, useItem, useRow } from '@entities/quotation'
+import { className } from '@shared/consts/className'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
+import { cleanHtml } from '@shared/utils/itemsUtils'
 
 export const SaveBoqRowIcon = (): ReactNode => {
   const navigate = useNavigate()
@@ -23,12 +25,23 @@ export const SaveBoqRowIcon = (): ReactNode => {
           return
         }
 
+        const clickedIconElement = e.target
+        if (!(clickedIconElement instanceof Element)) return
+
+        const boqRowElement = clickedIconElement.closest(`.${className.boqRow}`)
+        if (!boqRowElement) return
+        const html = boqRowElement.outerHTML
+        const cleanedHtml = cleanHtml(html)
+
         const boqRow = getBoqRowFromStore({ rowIndex, itemIndex })
 
         if (!boqRow) return
         if (boqRow.type === boqRowKey.paste) return
 
-        navigate(`./${route.saveItem}`, { state: { itemToSave: boqRow } })
+        const itemToSave = structuredClone(boqRow)
+        itemToSave.preview = cleanedHtml
+
+        navigate(`./${route.saveItem}`, { state: { itemToSave } })
       }}
     />
   )
