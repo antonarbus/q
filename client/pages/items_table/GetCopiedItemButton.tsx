@@ -9,7 +9,6 @@ import { isFroalaSignal } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components'
 import { notify } from '@shared/ui/top_msg'
 
-// todo: do not disable new nav item
 // todo: after multiple copies ui slows down a lot
 
 export const GetCopiedItemButton = ({ id }: ReqBody): JSX.Element => {
