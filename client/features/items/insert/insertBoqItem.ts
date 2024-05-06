@@ -5,7 +5,7 @@ import { isFroalaSignal, boqRowKey, itemKey, type Copyable } from '@entities/quo
 import { nanoid } from '@shared/lib/nanoid'
 
 export const insertBoqItem = (e?: MouseEvent): void => {
-  const itemToCopy: Copyable = {
+  const item: Copyable = {
     id: nanoid(5),
     type: itemKey.boq,
     email: '',
@@ -14,175 +14,6 @@ export const insertBoqItem = (e?: MouseEvent): void => {
     width: 600,
     height: 267,
     isFroala: true,
-    boq: {
-      header: {
-        title: {
-          html: '<p><strong>Title 1</strong></p>',
-          value: 0,
-        },
-        subtotalText: {
-          html: '<div>Subtotal</div>',
-          value: 0,
-        },
-        subTotalPrice: {
-          html: '<p><strong>140</strong></p>',
-          value: 140,
-        },
-      },
-      column: {
-        number: {
-          html: '',
-          width: 30,
-        },
-        description: {
-          html: '<p><strong>Description</strong></p>',
-          width: 240,
-        },
-        itemPrice: {
-          html: '<p><strong>Item price</strong></p>',
-          width: 100,
-        },
-        qty: {
-          html: '<p><strong>Qty</strong></p>',
-          width: 100,
-        },
-        price: {
-          html: '<p><strong>Price</strong></p>',
-          width: 100,
-        },
-      },
-      rows: [
-        {
-          id: nanoid(5),
-          type: boqRowKey.row,
-          email: '',
-          name: '',
-          category: '',
-          height: 0,
-          width: 0,
-          description: {
-            html: '<p>item 1</p>',
-            value: 0,
-            pin: {
-              isPinned: false,
-              isShown: false,
-            },
-          },
-          itemPrice: {
-            html: '<p>10 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
-            value: 10,
-            pin: {
-              isPinned: false,
-              isShown: false,
-            },
-          },
-          qty: {
-            html: '<p>1 <span style="font-size: 12px; color: rgb(61, 142, 185);">pcs</span></p>',
-            value: 1,
-            pin: {
-              isPinned: true,
-              isShown: false,
-            },
-          },
-          price: {
-            html: '<p>10 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
-            value: 10,
-            pin: {
-              isPinned: false,
-              isShown: false,
-            },
-          },
-        },
-        {
-          id: nanoid(5),
-          type: boqRowKey.row,
-          email: '',
-          name: '',
-          category: '',
-          height: 0,
-          width: 0,
-          description: {
-            html: '<p>item 2</p>',
-            value: 0,
-            pin: {
-              isPinned: false,
-              isShown: false,
-            },
-          },
-          itemPrice: {
-            html: '<p>20 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
-            value: 20,
-            pin: {
-              isPinned: false,
-              isShown: false,
-            },
-          },
-          qty: {
-            html: '<p>2 <span style="font-size: 12px; color: rgb(61, 142, 185);">pcs</span></p>',
-            value: 2,
-            pin: {
-              isPinned: true,
-              isShown: false,
-            },
-          },
-          price: {
-            html: '<p>40 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
-            value: 40,
-            pin: {
-              isPinned: false,
-              isShown: false,
-            },
-          },
-        },
-        {
-          id: nanoid(5),
-          type: boqRowKey.row,
-          email: '',
-          name: '',
-          category: '',
-          height: 0,
-          width: 0,
-          description: {
-            html: '<p>service</p>',
-            value: 0,
-            pin: {
-              isPinned: false,
-              isShown: false,
-            },
-          },
-          itemPrice: {
-            html: '<p>30 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
-            value: 30,
-            pin: {
-              isPinned: false,
-              isShown: false,
-            },
-          },
-          qty: {
-            html: '<p>3 <span style="font-size: 12px; color: rgb(61, 142, 185);">h</span></p>',
-            value: 3,
-            pin: {
-              isPinned: true,
-              isShown: false,
-            },
-          },
-          price: {
-            html: '<p>90 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
-            value: 90,
-            pin: {
-              isPinned: false,
-              isShown: false,
-            },
-          },
-        },
-      ],
-    },
-  }
-
-  isFroalaSignal.value = false
-
-  dispatch(copySlice.actions.addItemIntoCopyContainer({
-    copyItem: itemToCopy,
     preview: `
       <div class="MuiBox-root">
         <div class="layout title-subtotal MuiBox-root" style="display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; background: rgba(52, 52, 52, 0.9); padding: 10px 15px; color: rgb(188, 188, 188); border-top-left-radius: 6px; border-top-right-radius: 6px;">
@@ -482,7 +313,174 @@ export const insertBoqItem = (e?: MouseEvent): void => {
         </div>
       </div>
     `,
-  }))
+    boq: {
+      header: {
+        title: {
+          html: '<p><strong>Title 1</strong></p>',
+          value: 0,
+        },
+        subtotalText: {
+          html: '<div>Subtotal</div>',
+          value: 0,
+        },
+        subTotalPrice: {
+          html: '<p><strong>140</strong></p>',
+          value: 140,
+        },
+      },
+      column: {
+        number: {
+          html: '',
+          width: 30,
+        },
+        description: {
+          html: '<p><strong>Description</strong></p>',
+          width: 240,
+        },
+        itemPrice: {
+          html: '<p><strong>Item price</strong></p>',
+          width: 100,
+        },
+        qty: {
+          html: '<p><strong>Qty</strong></p>',
+          width: 100,
+        },
+        price: {
+          html: '<p><strong>Price</strong></p>',
+          width: 100,
+        },
+      },
+      rows: [
+        {
+          id: nanoid(5),
+          type: boqRowKey.row,
+          email: '',
+          name: '',
+          category: '',
+          height: 0,
+          width: 0,
+          description: {
+            html: '<p>item 1</p>',
+            value: 0,
+            pin: {
+              isPinned: false,
+              isShown: false,
+            },
+          },
+          itemPrice: {
+            html: '<p>10 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+            value: 10,
+            pin: {
+              isPinned: false,
+              isShown: false,
+            },
+          },
+          qty: {
+            html: '<p>1 <span style="font-size: 12px; color: rgb(61, 142, 185);">pcs</span></p>',
+            value: 1,
+            pin: {
+              isPinned: true,
+              isShown: false,
+            },
+          },
+          price: {
+            html: '<p>10 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+            value: 10,
+            pin: {
+              isPinned: false,
+              isShown: false,
+            },
+          },
+        },
+        {
+          id: nanoid(5),
+          type: boqRowKey.row,
+          email: '',
+          name: '',
+          category: '',
+          height: 0,
+          width: 0,
+          description: {
+            html: '<p>item 2</p>',
+            value: 0,
+            pin: {
+              isPinned: false,
+              isShown: false,
+            },
+          },
+          itemPrice: {
+            html: '<p>20 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+            value: 20,
+            pin: {
+              isPinned: false,
+              isShown: false,
+            },
+          },
+          qty: {
+            html: '<p>2 <span style="font-size: 12px; color: rgb(61, 142, 185);">pcs</span></p>',
+            value: 2,
+            pin: {
+              isPinned: true,
+              isShown: false,
+            },
+          },
+          price: {
+            html: '<p>40 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+            value: 40,
+            pin: {
+              isPinned: false,
+              isShown: false,
+            },
+          },
+        },
+        {
+          id: nanoid(5),
+          type: boqRowKey.row,
+          email: '',
+          name: '',
+          category: '',
+          height: 0,
+          width: 0,
+          description: {
+            html: '<p>service</p>',
+            value: 0,
+            pin: {
+              isPinned: false,
+              isShown: false,
+            },
+          },
+          itemPrice: {
+            html: '<p>30 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+            value: 30,
+            pin: {
+              isPinned: false,
+              isShown: false,
+            },
+          },
+          qty: {
+            html: '<p>3 <span style="font-size: 12px; color: rgb(61, 142, 185);">h</span></p>',
+            value: 3,
+            pin: {
+              isPinned: true,
+              isShown: false,
+            },
+          },
+          price: {
+            html: '<p>90 <span style="font-size: 16px; color: rgb(65, 168, 95);">$</span></p>',
+            value: 90,
+            pin: {
+              isPinned: false,
+              isShown: false,
+            },
+          },
+        },
+      ],
+    },
+  }
+
+  isFroalaSignal.value = false
+
+  dispatch(copySlice.actions.addItemIntoCopyContainer({ item }))
 
   const isCopyContainer = getState().copy.isCopyContainer
 

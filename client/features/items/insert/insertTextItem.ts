@@ -5,7 +5,7 @@ import { type Copyable, isFroalaSignal, itemKey } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 
 export const insertTextItem = (e?: MouseEvent): void => {
-  const itemToCopy: Copyable = {
+  const item: Copyable = {
     id: nanoid(5),
     type: itemKey.text,
     email: '',
@@ -14,16 +14,6 @@ export const insertTextItem = (e?: MouseEvent): void => {
     width: 600,
     height: 79.2,
     isFroala: true,
-    text: {
-      html: '<p>Text, files & images</p>',
-      value: null,
-    },
-  }
-
-  isFroalaSignal.value = false
-
-  dispatch(copySlice.actions.addItemIntoCopyContainer({
-    copyItem: itemToCopy,
     preview: `
       <div class="froala-wrapper  MuiBox-root">
         <div class="static-html fr-box fr-inline MuiBox-root">
@@ -36,7 +26,15 @@ export const insertTextItem = (e?: MouseEvent): void => {
         </div>
       </div>
     `,
-  }))
+    text: {
+      html: '<p>Text, files & images</p>',
+      value: null,
+    },
+  }
+
+  isFroalaSignal.value = false
+
+  dispatch(copySlice.actions.addItemIntoCopyContainer({ item }))
 
   const isCopyContainer = getState().copy.isCopyContainer
 

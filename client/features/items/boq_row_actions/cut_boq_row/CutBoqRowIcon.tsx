@@ -49,7 +49,10 @@ export const CutBoqRowIcon = (): JSX.Element => {
         const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
         if (boqRow === undefined) return
 
-        dispatch(copySlice.actions.addItemIntoCopyContainer({ copyItem: boqRow, preview: cleanedHtml }))
+        const item = structuredClone(boqRow)
+        item.preview = cleanedHtml
+
+        dispatch(copySlice.actions.addItemIntoCopyContainer({ item }))
 
         const isCopyContainer = getState().copy.isCopyContainer
 

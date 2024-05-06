@@ -5,7 +5,7 @@ import { type Copyable, isFroalaSignal, itemKey } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 
 export const insertPriceItem = (e?: MouseEvent): void => {
-  const itemToCopy: Copyable = {
+  const item: Copyable = {
     id: nanoid(5),
     type: itemKey.price,
     email: '',
@@ -14,20 +14,6 @@ export const insertPriceItem = (e?: MouseEvent): void => {
     width: 150,
     height: 90,
     isFroala: true,
-    title: {
-      html: '<p style="text-align: center;"><strong>Total price</strong></p>',
-      value: null,
-    },
-    price: {
-      html: '<p style="text-align: center;">0 <span>USD</span></p>',
-      value: 0,
-    },
-  }
-
-  isFroalaSignal.value = false
-
-  dispatch(copySlice.actions.addItemIntoCopyContainer({
-    copyItem: itemToCopy,
     preview: `
       <div class="MuiBox-root">
         <div class="layout price-header MuiBox-root"
@@ -55,7 +41,19 @@ export const insertPriceItem = (e?: MouseEvent): void => {
         </div>
       </div>
     `,
-  }))
+    title: {
+      html: '<p style="text-align: center;"><strong>Total price</strong></p>',
+      value: null,
+    },
+    price: {
+      html: '<p style="text-align: center;">0 <span>USD</span></p>',
+      value: 0,
+    },
+  }
+
+  isFroalaSignal.value = false
+
+  dispatch(copySlice.actions.addItemIntoCopyContainer({ item }))
 
   const isCopyContainer = getState().copy.isCopyContainer
 

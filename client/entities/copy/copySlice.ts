@@ -43,13 +43,12 @@ export const copySlice = createSlice({
     },
     hideCopyContainer: (state) => initialState,
     addItemIntoCopyContainer: (state, action: PayloadAction<{
-      copyItem: Copyable
-      preview: string
+      item: Copyable
     }>) => {
-      const { copyItem, preview } = action.payload
+      const { item } = action.payload
       state.isCopying = true
-      state.items.unshift(copyItem)
-      state.previews.unshift(preview)
+      state.items.unshift(item)
+      state.previews.unshift(item.preview ?? '')
     },
     removeItemFromCopyContainer: (state) => {
       state.items.shift()

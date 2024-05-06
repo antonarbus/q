@@ -43,7 +43,11 @@ export const CutItemIcon = (): JSX.Element => {
           const html = paperElement.innerHTML
           const cleanedHtml = cleanHtml(html)
           isFroalaSignal.value = false
-          dispatch(copySlice.actions.addItemIntoCopyContainer({ copyItem: itemToCut, preview: cleanedHtml }))
+
+          const item = structuredClone(itemToCut)
+          item.preview = cleanedHtml
+
+          dispatch(copySlice.actions.addItemIntoCopyContainer({ item }))
           dispatch(quotationSlice.actions.deleteItemReducer({ itemId: itemToCut.id }))
           dispatch(copySlice.actions.forbidAllActions())
 

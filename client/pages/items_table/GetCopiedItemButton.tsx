@@ -14,11 +14,13 @@ export const GetCopiedItemButton = ({ id }: ReqBody): JSX.Element => {
 
   useUpdateEffect(() => {
     if (isSuccess) {
-      if (!data.item) return
+      const { item } = data
 
-      // todo: copyItem should already have preview
+      if (!item) return
+
       isFroalaSignal.value = false
-      dispatch(copySlice.actions.addItemIntoCopyContainer({ copyItem: data.item, preview: data.item.preview ?? '' }))
+
+      dispatch(copySlice.actions.addItemIntoCopyContainer({ item }))
       dispatch(copySlice.actions.allowToPaste())
       dispatch(copySlice.actions.showCopyContainer())
     }
