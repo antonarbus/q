@@ -22,9 +22,9 @@ export const defaultColDef: ColDef<Quotation> = {
 export const columnDefs: Array<ColDef<Quotation>> = [
   {
     cellRenderer: ActionButtonsCellRenderer,
-    width: 100,
-    minWidth: 100,
-    maxWidth: 100,
+    width: 150,
+    minWidth: 150,
+    maxWidth: 150,
     sortable: false,
     filter: false,
     resizable: false,

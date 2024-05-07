@@ -54,8 +54,7 @@ const saveItem: RouterHandler = async (req, res, next) => {
 
     const existingItem = await ItemModel.findOne({
       email,
-      name: item.name,
-      category: item.category,
+      id: item.id,
     })
 
     const isNew = existingItem === null
@@ -63,9 +62,8 @@ const saveItem: RouterHandler = async (req, res, next) => {
     const itemDataFromDb = await ItemModel
       .findOneAndUpdate(
         {
+          id: item.id,
           email,
-          name: item.name,
-          category: item.category,
         },
         {
           id: item.id,
