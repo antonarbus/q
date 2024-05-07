@@ -24,9 +24,11 @@ export const EditItemModal = (): JSX.Element => {
   const location = useLocation()
   const item = location.state.item as Copyable | undefined
   const cardRef = useRef<HTMLDivElement>(null)
+
   const nameSignal = useSignal(item?.name ?? '')
   const categorySignal = useSignal(item?.category ?? '')
   const descSignal = useSignal(item?.desc ?? '')
+
   const { mutate: saveItem, data, isSuccess, isPending, isError, error, reset } = useSaveItemMutation()
   const { refetch: updateItemCategories } = useGetItemCategoriesQuery()
   const { refetch: updateItems } = useGetItemsQuery()
