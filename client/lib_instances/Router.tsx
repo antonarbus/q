@@ -2,6 +2,8 @@ import { type RouteObject, createBrowserRouter } from 'react-router-dom'
 import { ActivationModal } from '@pages/auth/Activation'
 import { Unauthorized } from '@pages/auth/Unauthorized'
 import { BarChart } from '@pages/chart/Chart'
+import { EditItemModal } from '@pages/edit_item'
+import { EditQuotationModal } from '@pages/edit_quotation/EditQuotationModal'
 import { ItemsTable } from '@pages/items_table'
 import { Quotation } from '@pages/quotation'
 import { QuotationsTable } from '@pages/quotations_table'
@@ -69,7 +71,7 @@ export const router = createBrowserRouter([
         children: [
           ...authRoutes,
           {
-            path: route.save,
+            path: route.saveQuotation,
             element: <SaveQuotationModal />,
           },
           {
@@ -81,7 +83,13 @@ export const router = createBrowserRouter([
       {
         path: route.quotations,
         element: <QuotationsTable />,
-        children: authRoutes,
+        children: [
+          ...authRoutes,
+          {
+            path: route.editQuotation,
+            element: <EditQuotationModal />,
+          },
+        ],
       },
       {
         path: route.items,
@@ -90,7 +98,7 @@ export const router = createBrowserRouter([
           ...authRoutes,
           {
             path: route.editItem,
-            element: <SaveItemModal />,
+            element: <EditItemModal />,
           },
         ],
       },

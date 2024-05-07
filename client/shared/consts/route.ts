@@ -9,8 +9,9 @@ export const route = {
   quotations: 'quotations',
   items: 'items',
   settings: 'settings',
-  save: 'save',
   new: 'new',
+  saveQuotation: 'save-quotation',
+  editQuotation: 'edit-quotation',
   saveItem: 'save-item',
   editItem: 'edit-item',
 } as const
