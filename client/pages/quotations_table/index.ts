@@ -1,1 +1,2 @@
-export { QuotationsTable } from './QuotationsTable'
+export { QuotationsTable as default } from './QuotationsTable'
+// export { QuotationsTable } from './QuotationsTable'

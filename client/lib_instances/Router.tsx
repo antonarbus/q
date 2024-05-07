@@ -1,13 +1,14 @@
+import React, { Suspense } from 'react'
 import { type RouteObject, createBrowserRouter } from 'react-router-dom'
 import { ActivationModal } from '@pages/auth/Activation'
 import { Unauthorized } from '@pages/auth/Unauthorized'
-import { BarChart } from '@pages/chart/Chart'
+// import { BarChart } from '@pages/chart/Chart'
 import { EditItemModal } from '@pages/edit_item'
 import { EditQuotationModal } from '@pages/edit_quotation/EditQuotationModal'
 import { ErrorPage } from '@pages/error_page'
-import { ItemsTable } from '@pages/items_table'
-import { Quotation } from '@pages/quotation'
-import { QuotationsTable } from '@pages/quotations_table'
+// import { ItemsTable } from '@pages/items_table'
+// import { Quotation } from '@pages/quotation'
+// import { QuotationsTable } from '@pages/quotations_table'
 import { SaveItemModal } from '@pages/save_item'
 import { SaveQuotationModal } from '@pages/save_quotation'
 import { Copy } from '@widgets/copy'
@@ -22,6 +23,14 @@ import { route } from '@shared/consts/route'
 import { Main } from '@shared/layouts'
 import { LoadingDotsOverlay } from '@shared/loading_dots_overlay'
 import { TopMsg } from '@shared/ui/top_msg'
+// import { asyncDelay } from '@shared/utils/delay'
+
+const Quotation = React.lazy(async () => {
+  // await asyncDelay(10000)
+  return await import('@pages/quotation')
+})
+const QuotationsTable = React.lazy(async () => await import('@pages/quotations_table'))
+const ItemsTable = React.lazy(async () => await import('@pages/items_table'))
 
 const authRoutes: RouteObject[] = [
   {
@@ -67,7 +76,11 @@ export const router = createBrowserRouter([
     children: [
       {
         path: ':id?',
-        element: <Quotation />,
+        element: (
+          <Suspense>
+            <Quotation />
+          </Suspense>
+        ),
         caseSensitive: true,
         children: [
           ...authRoutes,
@@ -83,7 +96,11 @@ export const router = createBrowserRouter([
       },
       {
         path: route.quotations,
-        element: <QuotationsTable />,
+        element: (
+          <Suspense>
+            <QuotationsTable />
+          </Suspense>
+        ),
         children: [
           ...authRoutes,
           {
@@ -94,7 +111,11 @@ export const router = createBrowserRouter([
       },
       {
         path: route.items,
-        element: <ItemsTable />,
+        element: (
+          <Suspense>
+            <ItemsTable />
+          </Suspense>
+        ),
         children: [
           ...authRoutes,
           {
@@ -110,8 +131,8 @@ export const router = createBrowserRouter([
     path: 'unauthorized',
     element: <Unauthorized />,
   },
-  {
-    path: 'chart',
-    element: <BarChart />,
-  },
+  // {
+  //   path: 'chart',
+  //   element: <BarChart />,
+  // },
 ])

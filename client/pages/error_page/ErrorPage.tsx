@@ -9,7 +9,7 @@ export const ErrorPage = (): JSX.Element => {
     <div
       style={{
         height: '100vh',
-        paddingTop: `${theme.nav.fullHeight}px`,
+        paddingTop: '100px',
         display: 'flex',
         flexDirection: 'column',
         // justifyContent: 'center',
@@ -18,9 +18,9 @@ export const ErrorPage = (): JSX.Element => {
       }}
     >
       <h1>Oops!</h1>
-      <p>Sorry, an unexpected error has occurred.</p>
+      <p style={{ marginTop: '20px' }}>Sorry, an unexpected error has occurred.</p>
 
-      <p style={{ marginTop: '20px' }}>
+      {/* <p style={{ marginTop: '20px' }}>
         Name
       </p>
       <p >
@@ -31,7 +31,7 @@ export const ErrorPage = (): JSX.Element => {
       </p>
       <p>
         <i>{error.message}</i>
-      </p>
+      </p> */}
       {/* <p style={{ marginTop: '20px' }}>
         Stack
       </p>
