@@ -89,7 +89,7 @@ export const router = createBrowserRouter([
         children: [
           ...authRoutes,
           {
-            path: route.saveItem,
+            path: route.editItem,
             element: <SaveItemModal />,
           },
         ],
