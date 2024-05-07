@@ -46,10 +46,10 @@ export const SaveBoqRowIcon = (): ReactNode => {
         if (!boqRow) return
         if (boqRow.type === boqRowKey.paste) return
 
-        const itemToSave = structuredClone(boqRow)
-        itemToSave.preview = cleanedHtml
+        const itemWithUpdatedPreview = structuredClone(boqRow)
+        itemWithUpdatedPreview.preview = cleanedHtml
 
-        navigate(`./${route.saveItem}`, { state: { itemToSave } })
+        navigate(`./${route.saveItem}`, { state: { item: itemWithUpdatedPreview } })
       }}
     />
   )

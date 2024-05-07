@@ -12,4 +12,5 @@ export const route = {
   save: 'save',
   new: 'new',
   saveItem: 'save-item',
+  editItem: 'edit-item',
 } as const

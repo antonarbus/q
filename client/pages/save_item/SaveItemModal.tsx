@@ -22,11 +22,11 @@ import { NameInput } from './NameInput'
 export const SaveItemModal = (): JSX.Element => {
   const navigate = useNavigate()
   const location = useLocation()
-  const itemToSave = location.state.itemToSave as Copyable | undefined
+  const item = location.state.item as Copyable | undefined
   const cardRef = useRef<HTMLDivElement>(null)
-  const nameSignal = useSignal(itemToSave?.name ?? '')
-  const categorySignal = useSignal(itemToSave?.category ?? '')
-  const descSignal = useSignal(itemToSave?.desc ?? '')
+  const nameSignal = useSignal(item?.name ?? '')
+  const categorySignal = useSignal(item?.category ?? '')
+  const descSignal = useSignal(item?.desc ?? '')
   const { mutate: saveItem, data, isSuccess, isPending, isError, error, reset } = useSaveItemMutation()
   const { refetch: updateCategories } = useGetItemCategoriesQuery()
 
@@ -91,16 +91,16 @@ export const SaveItemModal = (): JSX.Element => {
               return
             }
 
-            if (!itemToSave) return
+            if (!item) return
 
-            const item = {
-              ...itemToSave,
+            const itemWithUpdatedValues = {
+              ...item,
               name: nameSignal.value,
               category: categorySignal.value,
               desc: descSignal.value,
             }
 
-            saveItem({ item })
+            saveItem({ item: itemWithUpdatedValues })
           }}
         >
           <NameInput nameSignal={nameSignal}/>

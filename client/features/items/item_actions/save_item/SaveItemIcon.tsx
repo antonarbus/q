@@ -41,10 +41,10 @@ export const SaveItemIcon = (): ReactNode => {
         if (!item) return
         if (item.type === itemKey.paste) return
 
-        const itemToSave = structuredClone(item)
-        itemToSave.preview = cleanedHtml
+        const itemWithUpdatedPreview = structuredClone(item)
+        item.preview = cleanedHtml
 
-        navigate(`./${route.saveItem}`, { state: { itemToSave } })
+        navigate(`./${route.saveItem}`, { state: { item: itemWithUpdatedPreview } })
       }}
     />
   )
