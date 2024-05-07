@@ -1,4 +1,5 @@
 import { theme } from '@lib_instances/theme'
+import { Box } from '@mui/material'
 import { motion } from 'framer-motion'
 import { type ResizableProps } from 're-resizable'
 import type { ComponentClass, ReactNode } from 'react'
@@ -76,7 +77,9 @@ export const ItemSortAndAnimate: SortableItem = SortableElement(({
         width: '100%',
       }}
     >
-      {leftItemActionButtons}
+      <Box style={{ paddingTop: '5px' }}>
+        {leftItemActionButtons}
+      </Box>
       <ResizablePaper
         disableResize={disableResize}
         autoWidth={autoWidth}
@@ -87,7 +90,9 @@ export const ItemSortAndAnimate: SortableItem = SortableElement(({
       >
         {children}
       </ResizablePaper>
-      {rightItemActionButtons}
+      <Box style={{ paddingTop: '5px' }}>
+        {rightItemActionButtons}
+      </Box>
     </motion.div>
   )
 })
