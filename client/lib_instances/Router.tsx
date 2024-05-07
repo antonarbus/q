@@ -4,6 +4,7 @@ import { Unauthorized } from '@pages/auth/Unauthorized'
 import { BarChart } from '@pages/chart/Chart'
 import { EditItemModal } from '@pages/edit_item'
 import { EditQuotationModal } from '@pages/edit_quotation/EditQuotationModal'
+import { ErrorPage } from '@pages/error_page'
 import { ItemsTable } from '@pages/items_table'
 import { Quotation } from '@pages/quotation'
 import { QuotationsTable } from '@pages/quotations_table'
@@ -103,6 +104,7 @@ export const router = createBrowserRouter([
         ],
       },
     ],
+    errorElement: <ErrorPage />,
   },
   {
     path: 'unauthorized',
