@@ -6,8 +6,6 @@ import { useLoadQuotation } from '@features/quotation/load_quotation'
 export const Quotation = (): JSX.Element => {
   useLoadQuotation()
 
-  throw new Error('xxx')
-
   return (
     <>
       <QuotationInfo />
