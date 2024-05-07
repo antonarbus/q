@@ -7,8 +7,7 @@ import { useRef } from 'react'
 import { BsBookmarkStar } from 'react-icons/bs'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { useGetItemCategoriesQuery, useSaveItemMutation } from '@entities/item'
-import { type Copyable } from '@entities/quotation'
+import { type Quotation, useGetQuotationCategoriesQuery, useGetQuotationsQuery, useSaveQuotationMutation } from '@entities/quotation'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 import { CardCustom } from '@shared/components/CardCustom'
@@ -22,13 +21,16 @@ import { NameInput } from './NameInput'
 export const EditQuotationModal = (): JSX.Element => {
   const navigate = useNavigate()
   const location = useLocation()
-  const item = location.state.item as Copyable | undefined
+  const quotation = location.state.quotation as Quotation | undefined
+
   const cardRef = useRef<HTMLDivElement>(null)
-  const nameSignal = useSignal(item?.name ?? '')
-  const categorySignal = useSignal(item?.category ?? '')
-  const descSignal = useSignal(item?.desc ?? '')
-  const { mutate: saveItem, data, isSuccess, isPending, isError, error, reset } = useSaveItemMutation()
-  const { refetch: updateCategories } = useGetItemCategoriesQuery()
+  const nameSignal = useSignal(quotation?.name ?? '')
+  const categorySignal = useSignal(quotation?.category ?? '')
+  const descSignal = useSignal(quotation?.desc ?? '')
+
+  const { mutate: saveQuotation, data, isSuccess, isPending, isError, error, reset } = useSaveQuotationMutation()
+  const { refetch: updateQuotationCategories } = useGetQuotationCategoriesQuery()
+  const { refetch: refetchQuotations } = useGetQuotationsQuery()
 
   const isDisabled = nameSignal.value === '' || categorySignal.value === ''
 
@@ -40,7 +42,8 @@ export const EditQuotationModal = (): JSX.Element => {
         notify({ msg: 'Updated', type: 'info', theme: 'dark', position: 'bottom-center' })
       }
 
-      void updateCategories()
+      void updateQuotationCategories()
+      void refetchQuotations()
 
       setTimeout(() => {
         slideElement({
@@ -89,16 +92,16 @@ export const EditQuotationModal = (): JSX.Element => {
               return
             }
 
-            if (!item) return
+            if (!quotation) return
 
-            const itemWithUpdatedValues = {
-              ...item,
+            const quotationWithUpdatedValues = {
+              ...quotation,
               name: nameSignal.value,
               category: categorySignal.value,
               desc: descSignal.value,
             }
 
-            saveItem({ item: itemWithUpdatedValues })
+            saveQuotation({ quotation: quotationWithUpdatedValues })
           }}
         >
           <NameInput nameSignal={nameSignal}/>

@@ -1,14 +1,14 @@
 import { Autocomplete, InputAdornment, TextField } from '@mui/material'
 import { type Signal } from '@preact/signals-react'
 import { BsTags } from 'react-icons/bs'
-import { useGetItemCategoriesQuery } from '@entities/item'
+import { useGetQuotationCategoriesQuery } from '@entities/quotation'
 
 type Props = {
   categorySignal: Signal<string>
 }
 
 export const CategoryAutocomplete = ({ categorySignal }: Props): JSX.Element => {
-  const { data } = useGetItemCategoriesQuery()
+  const { data } = useGetQuotationCategoriesQuery()
 
   return (
     <div style={{ position: 'relative' }}>

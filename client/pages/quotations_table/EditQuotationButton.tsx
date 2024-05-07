@@ -3,20 +3,20 @@ import type { ReqBody } from '@server/api/deleteItemRouter'
 import { AiTwotoneEdit } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { useGetItemMutation } from '@entities/item'
+import { useGetQuotationMutation } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
 
 export const EditQuotationButton = ({ id }: ReqBody): JSX.Element => {
   const navigate = useNavigate()
-  const { mutate: loadItem, isPending, isSuccess, isError, error, data } = useGetItemMutation()
+  const { mutate: loadQuotation, isPending, isSuccess, isError, error, data } = useGetQuotationMutation()
 
   useUpdateEffect(() => {
     if (isSuccess) {
-      const { item } = data
-      if (!item) return
-      navigate(`./${route.editItem}`, { state: { item } })
+      const { quotation } = data
+      if (!quotation) return
+      navigate(`./${route.editQuotation}`, { state: { quotation } })
     }
   }, [isSuccess])
 
@@ -30,7 +30,7 @@ export const EditQuotationButton = ({ id }: ReqBody): JSX.Element => {
     <IconButton
       size='small'
       onClick={() => {
-        loadItem({ id })
+        loadQuotation({ id })
       }}
       sx={{
         translate: '0px 1px',
