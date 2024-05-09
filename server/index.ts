@@ -27,17 +27,15 @@ import { uploadRouter } from './api/uploadRouter'
 import { apiUrl } from './consts/apiUrl'
 import { connectToDb } from './db/connectToDb'
 import { errorHandlerMiddleware } from './middleware/errorHandlerMiddleware'
-import { multerMiddleware } from './middleware/multerMiddleware'
 import type { Req, Res } from './types'
 
 const app = express()
 void connectToDb()
 app.use(morgan('dev')) // http logs in terminal
-app.use(express.json()) // parses incoming requests with JSON because we use lots of json, let it be default
-app.use(cookieParser())
-app.use(cors())
-app.use(multerMiddleware.single('file'))
-app.set('trust proxy', true) // for app engine
+app.use(express.json()) // middleware based on body-parser will parse the JSON payload and add a 'body' property to the req object containing the parsed data
+app.use(cookieParser()) // middleware parses the Cookie header and populates req.cookies with an object keyed by the cookie names
+// app.use(cors())
+// app.set('trust proxy', true) // for app engine
 
 app.get(apiUrl.root, (_req: Req, res: Res) => res.send('i am express.js'))
 app.get(apiUrl.api, (_req: Req, res: Res) => res.json({ message: '/api' }))

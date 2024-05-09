@@ -21,7 +21,7 @@ export const getAccessTokenRouter = express.Router()
 
 getAccessTokenRouter.get('/', async (req: Req, res: ResWithBody<ResBody>, next: Next) => {
   try {
-    const refreshJwtToken = req.cookies.refreshJwtToken
+    const refreshJwtToken = req.cookies?.refreshJwtToken
 
     if (typeof refreshJwtToken !== 'string') {
       return res
