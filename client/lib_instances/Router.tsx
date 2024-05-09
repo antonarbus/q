@@ -131,8 +131,4 @@ export const router = createBrowserRouter([
     path: 'unauthorized',
     element: <Unauthorized />,
   },
-  // {
-  //   path: 'chart',
-  //   element: <BarChart />,
-  // },
 ])
