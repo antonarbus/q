@@ -1,4 +1,3 @@
-import { theme } from '@lib_instances/theme'
 import { useRouteError } from 'react-router-dom'
 
 export const ErrorPage = (): JSX.Element => {

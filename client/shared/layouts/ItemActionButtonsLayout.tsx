@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import type { ReactNode } from 'react'
-import { className } from '@shared/consts/className'
+import { className } from '../consts/className'
 
 type Props = {
   children?: ReactNode
