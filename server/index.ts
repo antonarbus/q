@@ -1,6 +1,6 @@
 import 'dotenv/config'
 import cookieParser from 'cookie-parser'
-import cors from 'cors'
+// import cors from 'cors'
 import express from 'express'
 import morgan from 'morgan'
 import { activateRouter } from './api/activateRouter'

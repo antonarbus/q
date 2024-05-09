@@ -1,6 +1,6 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { AnimatePresence } from 'framer-motion'
-import { onBoqRowDrag } from '@features/items/boq_row_actions/drag_boq_row'
+import { onBoqRowDrag } from '@features/items/drag_boq_row'
 import { hideBoqRowPinsOnRowBlur } from '@features/items/pin'
 import { boqRowsShapeEqualityFn, selectBoqRows, RowProvider, useItem, useIsBoqRowSortDisabled, boqRowKey } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'

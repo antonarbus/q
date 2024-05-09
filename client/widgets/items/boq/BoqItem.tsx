@@ -1,6 +1,12 @@
-import { LeftItemActionButtons, RightItemActionButtons } from '@features/items/item_actions'
+import { CopyItemIcon } from '@features/items/copy_item'
+import { CutItemIcon } from '@features/items/cut_item'
+import { DeleteItemIcon } from '@features/items/delete_item'
+import { DragItemIcon } from '@features/items/drag_item'
+import { InfoItemIcon } from '@features/items/info_item'
 import { onBoqItemResize, onBoqItemResizeStart, onBoqItemResizeStop } from '@features/items/resize_item'
+import { SaveItemIcon } from '@features/items/save_item'
 import { ItemComp } from '@entities/quotation'
+import { ItemActionButtonsLayout } from '@shared/layouts'
 import { BoqHeader } from './boq_header'
 import { BoqTable } from './boq_table'
 
@@ -12,8 +18,20 @@ export const BoqItem = (): JSX.Element => {
       onItemResizeStart={onBoqItemResizeStart}
       onItemResize={onBoqItemResize}
       onItemResizeStop={onBoqItemResizeStop}
-      leftItemActionButtons={<LeftItemActionButtons />}
-      rightItemActionButtons={<RightItemActionButtons />}
+      leftItemActionButtons={(
+        <ItemActionButtonsLayout>
+          <DragItemIcon />
+          <CopyItemIcon />
+          <CutItemIcon />
+        </ItemActionButtonsLayout>
+      )}
+      rightItemActionButtons={(
+        <ItemActionButtonsLayout>
+          <SaveItemIcon />
+          <InfoItemIcon />
+          <DeleteItemIcon />
+        </ItemActionButtonsLayout>
+      )}
     >
       <BoqHeader />
       <BoqTable />

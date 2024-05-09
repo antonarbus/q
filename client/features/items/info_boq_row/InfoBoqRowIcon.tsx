@@ -1,6 +1,5 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { type MouseEvent, type ReactNode } from 'react'
-import { BsBookmarkPlus } from 'react-icons/bs'
 import { HiOutlineInformationCircle } from 'react-icons/hi2'
 import { useNavigate } from 'react-router-dom'
 import { boqRowKey, getBoqRowFromStore, quotationSlice, useItem, useRow } from '@entities/quotation'

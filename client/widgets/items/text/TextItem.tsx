@@ -1,9 +1,15 @@
 import { useRef } from 'react'
-import { LeftItemActionButtons, RightItemActionButtons } from '@features/items/item_actions'
+import { CopyItemIcon } from '@features/items/copy_item'
+import { CutItemIcon } from '@features/items/cut_item'
+import { DeleteItemIcon } from '@features/items/delete_item'
+import { DragItemIcon } from '@features/items/drag_item'
+import { InfoItemIcon } from '@features/items/info_item'
 import { onTextItemResizeStart, onTextItemResizeStop } from '@features/items/resize_item'
+import { SaveItemIcon } from '@features/items/save_item'
 import { updateTextItem } from '@features/items/update_cell'
 import { beforeUpload } from '@features/items/upload'
 import { Froala, ItemComp, getItemTextHtmlFromStore, textItemCellStyle, useItem } from '@entities/quotation'
+import { ItemActionButtonsLayout } from '@shared/layouts'
 import { type FroalaEditor } from '@shared/types/froala'
 
 export const TextItem = (): JSX.Element => {
@@ -14,8 +20,20 @@ export const TextItem = (): JSX.Element => {
     <ItemComp
       onItemResizeStart={onTextItemResizeStart}
       onItemResizeStop={onTextItemResizeStop}
-      leftItemActionButtons={<LeftItemActionButtons />}
-      rightItemActionButtons={<RightItemActionButtons />}
+      leftItemActionButtons={(
+        <ItemActionButtonsLayout>
+          <DragItemIcon />
+          <CopyItemIcon />
+          <CutItemIcon />
+        </ItemActionButtonsLayout>
+      )}
+      rightItemActionButtons={(
+        <ItemActionButtonsLayout>
+          <SaveItemIcon />
+          <InfoItemIcon />
+          <DeleteItemIcon />
+        </ItemActionButtonsLayout>
+      )}
     >
       <Froala
         editorRef={editorRef}
