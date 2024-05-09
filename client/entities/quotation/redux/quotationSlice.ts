@@ -32,6 +32,7 @@ import { updateItemTextReducer } from './reducers/updateItemTextReducer'
 import { updateItemWidthReducer } from './reducers/updateItemWidthReducer'
 import { updatePriceReducer } from './reducers/updatePriceReducer'
 import { updatePriceTitleReducer } from './reducers/updatePriceTitleReducer'
+import { updateQuotationInfoReducer } from './reducers/updateQuotationInfoReducer'
 import { updateSubTotalPriceReducer } from './reducers/updateSubTotalPriceReducer'
 
 const initialState: Quotation = {
@@ -81,6 +82,7 @@ export const quotationSlice = createSlice({
     fixImagesHeightReducer,
     unfixImagesHeightReducer,
     updateItemInfoReducer,
+    updateQuotationInfoReducer,
   },
 })
 
