@@ -4,7 +4,7 @@ import { Avatar } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
 import type { FormEvent } from 'react'
 import { useRef } from 'react'
-import { BsBookmarkStar } from 'react-icons/bs'
+import { FiEdit3 } from 'react-icons/fi'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { type Quotation, useGetQuotationCategoriesQuery, useGetQuotationsQuery, useSaveQuotationMutation } from '@entities/quotation'
@@ -77,7 +77,7 @@ export const EditQuotationModal = (): JSX.Element => {
         title='Edit quotation'
         logo={
           <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }} >
-            <BsBookmarkStar />
+            <FiEdit3 />
           </Avatar>
         }
       >

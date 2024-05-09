@@ -4,7 +4,7 @@ import { Avatar } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
 import type { FormEvent } from 'react'
 import { useRef } from 'react'
-import { BsBookmarkStar } from 'react-icons/bs'
+import { FiEdit3 } from 'react-icons/fi'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetItemCategoriesQuery, useGetItemsQuery, useSaveItemMutation } from '@entities/item'
@@ -78,7 +78,7 @@ export const EditItemModal = (): JSX.Element => {
         title='Edit item'
         logo={
           <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }} >
-            <BsBookmarkStar />
+            <FiEdit3 />
           </Avatar>
         }
       >
