@@ -27,6 +27,7 @@ import { updateBoqHeaderTextReducer } from './reducers/updateBoqHeaderTextReduce
 import { updateBoqRowHeightAndWidthReducer } from './reducers/updateBoqRowHeightAndWidthReducer'
 import { updateColWidthReducer } from './reducers/updateColWidthReducer'
 import { updateItemHeightReducer } from './reducers/updateItemHeightReducer'
+import { updateItemInfoReducer } from './reducers/updateItemInfoReducer'
 import { updateItemTextReducer } from './reducers/updateItemTextReducer'
 import { updateItemWidthReducer } from './reducers/updateItemWidthReducer'
 import { updatePriceReducer } from './reducers/updatePriceReducer'
@@ -79,6 +80,7 @@ export const quotationSlice = createSlice({
     updatePriceReducer,
     fixImagesHeightReducer,
     unfixImagesHeightReducer,
+    updateItemInfoReducer,
   },
 })
 

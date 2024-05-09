@@ -44,7 +44,7 @@ export const CategoryAutocomplete = ({ categorySignal }: Props): JSX.Element => 
               name='category'
               label='Category'
               placeholder='Category'
-              required
+              // required
               InputProps={{
                 ...params.InputProps,
                 startAdornment: (
