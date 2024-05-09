@@ -2,7 +2,7 @@ import { verifyRefreshToken } from '@server/services/jwt'
 import { type ReqWithBody } from '@server/types'
 
 export const getEmailFromRefreshToken = (req: ReqWithBody): string | undefined => {
-  const refreshJwtToken = req.cookies.refreshJwtToken
+  const refreshJwtToken = req.cookies?.refreshJwtToken
 
   if (typeof refreshJwtToken !== 'string') {
     return undefined
