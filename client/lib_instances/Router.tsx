@@ -1,16 +1,18 @@
 import React, { Suspense } from 'react'
 import { type RouteObject, createBrowserRouter } from 'react-router-dom'
-import { ActivationModal } from '@pages/auth/Activation'
-import { Unauthorized } from '@pages/auth/Unauthorized'
+import { ActivationModal } from '@pages/auth/ActivationModal'
+import { UnauthorizedPage } from '@pages/auth/UnauthorizedPage'
 // import { BarChart } from '@pages/chart/Chart'
-import { EditItemModal } from '@pages/edit_item'
-import { EditQuotationModal } from '@pages/edit_quotation/EditQuotationModal'
+import { EditItemModal } from '@pages/edit_item_modal'
+import { EditQuotationModal } from '@pages/edit_quotation_modal/EditQuotationModal'
 import { ErrorPage } from '@pages/error_page'
 // import { ItemsTable } from '@pages/items_table'
 // import { Quotation } from '@pages/quotation'
 // import { QuotationsTable } from '@pages/quotations_table'
-import { SaveItemModal } from '@pages/save_item'
-import { SaveQuotationModal } from '@pages/save_quotation'
+import { ItemInfoModal } from '@pages/item_info_modal'
+import { QuotationInfoModal } from '@pages/quotation_info_modal'
+import { SaveItemModal } from '@pages/save_item_modal'
+import { SaveQuotationModal } from '@pages/save_quotation_modal'
 import { Copy } from '@widgets/copy'
 import { Nav } from '@widgets/nav'
 import { AccessToken } from '@features/auth/get_access_token'
@@ -27,10 +29,10 @@ import { TopMsg } from '@shared/ui/top_msg'
 
 const Quotation = React.lazy(async () => {
   // await asyncDelay(10000)
-  return await import('@pages/quotation')
+  return await import('@pages/quotation_page')
 })
-const QuotationsTable = React.lazy(async () => await import('@pages/quotations_table'))
-const ItemsTable = React.lazy(async () => await import('@pages/items_table'))
+const QuotationsTable = React.lazy(async () => await import('@pages/quotations_page'))
+const ItemsTable = React.lazy(async () => await import('@pages/items_page'))
 
 const authRoutes: RouteObject[] = [
   {
@@ -92,6 +94,14 @@ export const router = createBrowserRouter([
             path: route.saveItem,
             element: <SaveItemModal />,
           },
+          {
+            path: route.quotationInfo,
+            element: <QuotationInfoModal />,
+          },
+          {
+            path: route.itemInfo,
+            element: <ItemInfoModal />,
+          },
         ],
       },
       {
@@ -129,6 +139,6 @@ export const router = createBrowserRouter([
   },
   {
     path: 'unauthorized',
-    element: <Unauthorized />,
+    element: <UnauthorizedPage />,
   },
 ])

@@ -12,6 +12,8 @@ export const route = {
   new: 'new',
   saveQuotation: 'save-quotation',
   editQuotation: 'edit-quotation',
+  quotationInfo: 'quotation-info',
   saveItem: 'save-item',
   editItem: 'edit-item',
+  itemInfo: 'item-info',
 } as const
