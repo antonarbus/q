@@ -5,7 +5,7 @@ import { Box, LinearProgress } from '@mui/material'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef, useEffect } from 'react'
 import { useUpdateEffect } from 'react-use'
-import { useDisableLoadingOverlayWhenQuotationsAreFetched } from '@features/quotation/open_quotations'
+import { useDisableLoadingOverlayWhenQuotationsAreFetched } from '@features/nav/open_quotations'
 import { useGetQuotationsQuery } from '@entities/quotation'
 import { type Quotation } from '@entities/quotation'
 import { LoadingTableOverlay, loadingTableOverlaySignal } from '@shared/components/LoadingTableOverlay'

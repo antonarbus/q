@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import { useNavItemsOnQuotationsOpen } from '@features/quotation/open_quotations'
+import { useNavItemsOnQuotationsOpen } from '@features/nav/open_quotations'
 import { QuotationsAgGrid } from './QuotationsAgGrid'
 import { QuotationsLayout } from './QuotationsLayout'
 
