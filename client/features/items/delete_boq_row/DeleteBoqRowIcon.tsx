@@ -1,7 +1,7 @@
 import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
 import { flushSync } from 'react-dom'
-import { RxCross2 } from 'react-icons/rx'
+import { GoTrash } from 'react-icons/go'
 import { copySlice } from '@entities/copy'
 import { quotationSlice, selectIsLastBoqRow, useItem, useRow } from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
@@ -16,7 +16,7 @@ export const DeleteBoqRowIcon = (): JSX.Element => {
   const disabled = isLastBoqRow || !isDeletable
 
   return (
-      <RxCross2
+    <GoTrash
       tabIndex={-1}
       style={{
         color: disabled ? '#acacac' : '#000',

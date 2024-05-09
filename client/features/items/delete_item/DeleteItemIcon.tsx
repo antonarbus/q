@@ -2,7 +2,7 @@ import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
 import { type MouseEvent } from 'react'
-import { RxCross2 } from 'react-icons/rx'
+import { GoTrash } from 'react-icons/go'
 import { copySlice } from '@entities/copy'
 import { isFroalaSignal, quotationSlice, selectIsLastItem, useItem } from '@entities/quotation'
 import { className } from '@shared/consts/className'
@@ -18,7 +18,7 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
   const disabled = isItemAlone || !isDeletable
 
   return (
-    <RxCross2
+    <GoTrash
       tabIndex={-1}
       style={{
         color: disabled ? '#acacac' : '#000',
