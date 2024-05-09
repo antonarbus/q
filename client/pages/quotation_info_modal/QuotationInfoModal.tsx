@@ -86,7 +86,7 @@ export const QuotationInfoModal = (): JSX.Element => {
     >
       <CardCustom
         reference={cardRef}
-        title='Save quotation'
+        title='Info'
         logo={
           <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }} >
             <BsBookmarkStar />
@@ -122,14 +122,6 @@ export const QuotationInfoModal = (): JSX.Element => {
           <NameInput nameSignal={nameSignal}/>
           <CategoryAutocomplete categorySignal={categorySignal}/>
           <DescriptionTextarea descSignal={descSignal}/>
-          <ButtonCustom
-            disabled={isDisabled}
-            isPending={isPending}
-            isSuccess={isSuccess}
-            isError={isError}
-          >
-            {id === 'new' ? 'SAVE' : 'UPDATE'}
-          </ButtonCustom>
         </form>
       </CardCustom>
     </BackdropWithSlidableContent>

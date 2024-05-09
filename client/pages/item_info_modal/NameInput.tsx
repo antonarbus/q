@@ -15,7 +15,7 @@ export const NameInput = ({ nameSignal }: Props): JSX.Element => {
         name='name'
         placeholder='Item name'
         label='Item name'
-        required
+        // required
         autoFocus
         value={nameSignal.value}
         onChange={(e): void => {
