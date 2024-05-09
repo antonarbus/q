@@ -3,7 +3,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
-export const Unauthorized = (): JSX.Element => {
+export const UnauthorizedPage = (): JSX.Element => {
   const navigate = useNavigate()
 
   return (
