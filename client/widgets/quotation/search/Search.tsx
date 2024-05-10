@@ -33,10 +33,6 @@ export const Search = (): JSX.Element => {
       sx={{
         position: 'relative',
         width: '300px',
-        // transition: 'width 0.3s',
-        // ':has(input:focus)': {
-        //   width: '300px',
-        // },
         zIndex: 0,
       }}
       renderOption={(props, option, { selected, index, inputValue }) => {
