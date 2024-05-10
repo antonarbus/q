@@ -13,8 +13,8 @@ import { getJsxWithBoldSubstr } from '@shared/utils/getJsxWithBoldSubstr'
 
 export const Search = (): JSX.Element => {
   const { data: itemsData, isPending: isPendingItems, refetch } = useGetItemsQuery()
-  const { mutate: loadItem, isPending, isSuccess, isError, error, data: itemData, variables } = useGetItemMutation()
-
+  const { mutate: loadItem, isPending: isPendingGetItem, isSuccess, isError, error, data: itemData, variables } = useGetItemMutation()
+  const options = itemsData?.documents ?? []
   const inputValueSignal = useSignal('')
 
   useEffectOnce(() => {
@@ -43,14 +43,15 @@ export const Search = (): JSX.Element => {
 
   return (
     <Autocomplete
-      freeSolo
+      freeSolo={options.length !== 0} // otherwise noOptionsText will not be shown
       disablePortal
       clearOnBlur
       clearOnEscape
       fullWidth
       loading={isPendingItems}
-      // options={[]}
-      options={itemsData?.documents ?? []}
+      noOptionsText='No saved items found'
+      options={options}
+      popupIcon={null}
       inputValue={inputValueSignal.value}
       onInputChange={(event, newInputValue) => {
         inputValueSignal.value = newInputValue
@@ -81,6 +82,7 @@ export const Search = (): JSX.Element => {
               borderRadius: '6px',
               padding: '5px !important',
               margin: '2px 4px',
+              fontSize: '14px',
               '&:hover': {
                 background: '#dfdfdf !important',
               },
@@ -134,11 +136,11 @@ export const Search = (): JSX.Element => {
                 : option.desc ?? ''
               }
             </div>
-            {isPending && option.id === variables.id && (
+            {isPendingGetItem && option.id === variables.id && (
               <Box sx={{
                 position: 'absolute',
                 inset: 0,
-                background: 'rgba(0, 0, 0, 0.1)',
+                background: 'rgba(0, 0, 0, 0.05)',
                 backdropFilter: 'blur(3px)',
                 display: 'flex',
                 justifyContent: 'center',
