@@ -8,4 +8,6 @@ export const className = {
   boqRows: 'boq-rows',
   boqRow: 'boq-row',
   pin: 'pin',
+  searchAutocomplete: 'search-autocomplete',
+  search: 'search',
 } as const
