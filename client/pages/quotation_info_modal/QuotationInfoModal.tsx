@@ -3,7 +3,7 @@ import { theme } from '@lib_instances/theme'
 import { Avatar } from '@mui/material'
 import { useSignal, useSignalEffect } from '@preact/signals-react'
 import { useRef } from 'react'
-import { BsBookmarkStar } from 'react-icons/bs'
+import { BsInfoLg } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 import { quotationSlice } from '@entities/quotation'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
@@ -46,7 +46,7 @@ export const QuotationInfoModal = (): JSX.Element => {
         title='Info'
         logo={
           <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }} >
-            <BsBookmarkStar />
+            <BsInfoLg />
           </Avatar>
         }
       >
