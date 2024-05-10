@@ -12,7 +12,7 @@ import { notify } from '@shared/ui/top_msg'
 import { getJsxWithBoldSubstr } from '@shared/utils/getJsxWithBoldSubstr'
 
 export const Search = (): JSX.Element => {
-  const { data: itemsData, refetch } = useGetItemsQuery()
+  const { data: itemsData, isPending: isPendingItems, refetch } = useGetItemsQuery()
   const { mutate: loadItem, isPending, isSuccess, isError, error, data: itemData, variables } = useGetItemMutation()
 
   const inputValueSignal = useSignal('')
@@ -48,6 +48,8 @@ export const Search = (): JSX.Element => {
       clearOnBlur
       clearOnEscape
       fullWidth
+      loading={isPendingItems}
+      // options={[]}
       options={itemsData?.documents ?? []}
       inputValue={inputValueSignal.value}
       onInputChange={(event, newInputValue) => {
@@ -61,6 +63,7 @@ export const Search = (): JSX.Element => {
         position: 'relative',
         width: '300px',
         zIndex: 0,
+        translate: '0px 5px',
       }}
       renderOption={(props, option, { selected, index, inputValue }) => {
         return (
@@ -153,7 +156,7 @@ export const Search = (): JSX.Element => {
             {...params}
             name='category'
             variant='standard'
-            placeholder='Search for saved items'
+            placeholder='Search in your items'
             InputProps={{
               ...params.InputProps,
               // endAdornment: (
@@ -188,7 +191,7 @@ export const Search = (): JSX.Element => {
         },
         popper: {
           sx: {
-            zIndex: 2,
+            zIndex: 3,
           },
         },
       }}
