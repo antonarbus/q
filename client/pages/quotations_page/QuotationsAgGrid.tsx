@@ -63,6 +63,7 @@ export const QuotationsAgGrid = (): JSX.Element => {
         defaultColDef={defaultColDef}
         columnDefs={columnDefs}
         suppressCellFocus
+        suppressColumnVirtualisation
         enableCellTextSelection
         reactiveCustomComponents={true}
         loadingOverlayComponent={LoadingTableOverlay}

@@ -1,18 +1,45 @@
-import { Autocomplete, TextField } from '@mui/material'
+import { dispatch } from '@lib_instances/store'
+import { Autocomplete, Box, TextField } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
 import { BsFileEarmarkText, BsTags } from 'react-icons/bs'
 import { PiBooks } from 'react-icons/pi'
-import { useEffectOnce } from 'react-use'
-import { useGetItemsQuery } from '@entities/item'
+import { useEffectOnce, useUpdateEffect } from 'react-use'
+import { copySlice } from '@entities/copy'
+import { useGetItemMutation, useGetItemsQuery } from '@entities/item'
+import { isFroalaSignal } from '@entities/quotation'
+import { RotatingLoaderIcon } from '@shared/components'
+import { notify } from '@shared/ui/top_msg'
 import { getJsxWithBoldSubstr } from '@shared/utils/getJsxWithBoldSubstr'
 
 export const Search = (): JSX.Element => {
-  const { data, refetch } = useGetItemsQuery()
+  const { data: itemsData, refetch } = useGetItemsQuery()
+  const { mutate: loadItem, isPending, isSuccess, isError, error, data: itemData, variables } = useGetItemMutation()
+
   const inputValueSignal = useSignal('')
 
   useEffectOnce(() => {
     void refetch()
   })
+
+  useUpdateEffect(() => {
+    if (isSuccess) {
+      const { item } = itemData
+
+      if (!item) return
+
+      isFroalaSignal.value = false
+
+      dispatch(copySlice.actions.addItemIntoCopyContainer({ item }))
+      dispatch(copySlice.actions.allowToPaste())
+      dispatch(copySlice.actions.showCopyContainer())
+    }
+  }, [isSuccess])
+
+  useUpdateEffect(() => {
+    if (isError) {
+      notify({ msg: error.response?.data.message, type: 'error', theme: 'light' })
+    }
+  }, [isError])
 
   return (
     <Autocomplete
@@ -21,7 +48,7 @@ export const Search = (): JSX.Element => {
       clearOnBlur
       clearOnEscape
       fullWidth
-      options={data?.documents ?? []}
+      options={itemsData?.documents ?? []}
       inputValue={inputValueSignal.value}
       onInputChange={(event, newInputValue) => {
         inputValueSignal.value = newInputValue
@@ -40,10 +67,12 @@ export const Search = (): JSX.Element => {
           <li
             // {...props}
             onClick={() => {
-              console.log('option:', option)
+              // console.log('option:', option)
+              loadItem({ id: option.id })
             }}
             key={option.id}
             css={{
+              position: 'relative',
               cursor: 'pointer',
               display: 'block',
               borderRadius: '6px',
@@ -102,6 +131,19 @@ export const Search = (): JSX.Element => {
                 : option.desc ?? ''
               }
             </div>
+            {isPending && option.id === variables.id && (
+              <Box sx={{
+                position: 'absolute',
+                inset: 0,
+                background: 'rgba(0, 0, 0, 0.1)',
+                backdropFilter: 'blur(3px)',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+                <RotatingLoaderIcon />
+              </Box>
+            )}
           </li>
         )
       }}

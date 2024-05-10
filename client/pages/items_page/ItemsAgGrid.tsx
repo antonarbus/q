@@ -64,6 +64,7 @@ export const ItemsAgGrid = (): JSX.Element => {
         columnDefs={columnDefs}
         suppressCellFocus
         enableCellTextSelection
+        suppressColumnVirtualisation
         reactiveCustomComponents={true}
         loadingOverlayComponent={LoadingTableOverlay}
         noRowsOverlayComponent={NoRowsTableOverlay}
