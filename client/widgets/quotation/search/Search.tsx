@@ -8,6 +8,7 @@ import { copySlice } from '@entities/copy'
 import { useGetItemMutation, useGetItemsQuery } from '@entities/item'
 import { isFroalaSignal } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components'
+import { className } from '@shared/consts/className'
 import { notify } from '@shared/ui/top_msg'
 import { getJsxWithBoldSubstr } from '@shared/utils/getJsxWithBoldSubstr'
 
@@ -43,6 +44,7 @@ export const Search = (): JSX.Element => {
 
   return (
     <Autocomplete
+      className={className.search}
       freeSolo={options.length !== 0} // otherwise noOptionsText will not be shown
       disablePortal
       clearOnBlur
@@ -180,11 +182,9 @@ export const Search = (): JSX.Element => {
       }}
       componentsProps={{
         paper: {
+          className: className.searchAutocomplete,
           elevation: 10,
           sx: {
-            // zIndex: 0,
-            // position: 'absolute',
-            // right: '0px',
             width: '300px',
             translate: '0px 10px',
             borderRadius: '8px',

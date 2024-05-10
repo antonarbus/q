@@ -42,6 +42,20 @@ export const movePasteTextForBoqRow = (e: MouseEvent): void => {
     return
   }
 
+  const isSearchElement = elementsUnderCursor.some(element => element.classList.contains(className.search))
+
+  if (isSearchElement) {
+    removePasteIfNeeded()
+    return
+  }
+
+  const isSearchAutocompleteElement = elementsUnderCursor.some(element => element.classList.contains(className.searchAutocomplete))
+
+  if (isSearchAutocompleteElement) {
+    removePasteIfNeeded()
+    return
+  }
+
   const isPastable = getState().copy.isPastable
 
   if (!isPastable) {
