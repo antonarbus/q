@@ -1,7 +1,8 @@
 import { dispatch } from '@lib_instances/store'
-import { Autocomplete, Box, TextField } from '@mui/material'
+import { Autocomplete, Box, InputAdornment, TextField } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
 import { BsFileEarmarkText, BsTags } from 'react-icons/bs'
+import { GoSearch } from 'react-icons/go'
 import { PiBooks } from 'react-icons/pi'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { copySlice } from '@entities/copy'
@@ -163,15 +164,15 @@ export const Search = (): JSX.Element => {
             placeholder='Search in your items'
             InputProps={{
               ...params.InputProps,
-              // endAdornment: (
-              //   <InputAdornment position='end'>
-              //     <GoSearch/>
-              //   </InputAdornment>
-              // ),
+              endAdornment: (
+                <InputAdornment position='end'>
+                  <GoSearch/>
+                </InputAdornment>
+              ),
             }}
             sx={{
               '.MuiInputBase-root': {
-                padding: '0px 5px',
+                padding: '0px 5px !important',
               },
               input: {
                 textAlign: 'center',
