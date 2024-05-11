@@ -91,8 +91,8 @@ export const Search = (): JSX.Element => {
               },
             }}
           >
-            <div
-              css={{
+            <Box
+              sx={{
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
                 whiteSpace: 'nowrap',
@@ -100,15 +100,15 @@ export const Search = (): JSX.Element => {
               }}
             >
               <span css={{ color: 'grey', marginRight: '5px' }}>
-                <PiBooks style={{ height: '16px', width: '16px', translate: '0px 3px' }} />
+                <PiBooks style={{ height: '16px', width: '16px', translate: '0px 3px' }} /> <span css={{ fontSize: '12px' }}>name:</span>
               </span>
               {inputValueSignal.value
-                ? <span>{getJsxWithBoldSubstr({ text: option.name, boldText: inputValueSignal.value })}</span>
+                ? getJsxWithBoldSubstr({ text: option.name, boldText: inputValueSignal.value })
                 : option.name
               }
-            </div>
-            <div
-              css={{
+            </Box>
+            <Box
+              sx={{
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
                 whiteSpace: 'nowrap',
@@ -116,15 +116,15 @@ export const Search = (): JSX.Element => {
               }}
             >
               <span css={{ color: 'grey', marginRight: '5px' }}>
-                <BsTags style={{ height: '16px', width: '16px', translate: '0px 3px' }} />
+                <BsTags style={{ height: '16px', width: '16px', translate: '0px 3px' }} /> <span css={{ fontSize: '12px' }}>category:</span>
               </span>
               {inputValueSignal.value
-                ? <span>{getJsxWithBoldSubstr({ text: option.category ?? '', boldText: inputValueSignal.value })}</span>
+                ? getJsxWithBoldSubstr({ text: option.category ?? '', boldText: inputValueSignal.value })
                 : option.category ?? ''
               }
-            </div>
-            <div
-              css={{
+            </Box>
+            <Box
+              sx={{
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
                 whiteSpace: 'nowrap',
@@ -132,13 +132,13 @@ export const Search = (): JSX.Element => {
               }}
             >
               <span css={{ color: 'grey', marginRight: '5px' }}>
-                <BsFileEarmarkText style={{ height: '16px', width: '16px', translate: '0px 2px' }} />
+                <BsFileEarmarkText style={{ height: '16px', width: '16px', translate: '0px 2px' }} /> <span css={{ fontSize: '12px' }}>description:</span>
               </span>
               {inputValueSignal.value
-                ? <span>{getJsxWithBoldSubstr({ text: option.desc ?? '', boldText: inputValueSignal.value })}</span>
-                : option.desc ?? ''
+                ? getJsxWithBoldSubstr({ text: option.desc ?? '', boldText: inputValueSignal.value })
+                : option.desc ? option.desc : '-'
               }
-            </div>
+            </Box>
             {isPendingGetItem && option.id === variables.id && (
               <Box sx={{
                 position: 'absolute',
