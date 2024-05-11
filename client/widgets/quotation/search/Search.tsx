@@ -19,7 +19,6 @@ export const Search = (): JSX.Element => {
   const { mutate: loadItem, isPending: isPendingGetItem, isSuccess, isError, error, data: itemData, variables } = useGetItemMutation()
   const options = itemsData?.documents ?? []
   const inputValueSignal = useSignal('')
-  const openAutocompleteSignal = useSignal(false)
 
   useEffectOnce(() => {
     void refetch()
@@ -58,13 +57,7 @@ export const Search = (): JSX.Element => {
       // noOptionsText='No saved items found'
       options={options}
       // popupIcon={null}
-      open={openAutocompleteSignal.value}
-      onOpen={() => {
-        openAutocompleteSignal.value = true
-      }}
-      onClose={() => {
-        openAutocompleteSignal.value = false
-      }}
+
       inputValue={inputValueSignal.value}
       onInputChange={(event, newInputValue) => {
         inputValueSignal.value = newInputValue
@@ -171,7 +164,7 @@ export const Search = (): JSX.Element => {
             {...params}
             name='category'
             variant='standard'
-            placeholder='Search in your items'
+            placeholder='Search'
             InputProps={{
               ...params.InputProps,
               startAdornment: (
@@ -198,6 +191,19 @@ export const Search = (): JSX.Element => {
             {...props}
           >
             {props.children}
+            <Box
+              sx={{
+                fontSize: '14px',
+                color: 'grey',
+                fontWeight: 500,
+                position: 'absolute',
+                top: '6px',
+                left: '50%',
+                translate: '-50% 0',
+              }}
+            >
+              Your items
+            </Box>
             <IconButton
               size='small'
               sx={{
@@ -219,7 +225,7 @@ export const Search = (): JSX.Element => {
             width: '300px',
             translate: '0px 10px',
             borderRadius: '8px',
-            padding: '20px 8px',
+            padding: '30px 8px 8px 8px',
           },
         },
         popper: {
