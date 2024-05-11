@@ -175,7 +175,7 @@ export const Search = (): JSX.Element => {
             }}
             sx={{
               '.MuiInputBase-root': {
-                // padding: '0px 5px !important',
+                padding: '0px 5px !important',
               },
               input: {
                 textAlign: 'center',
