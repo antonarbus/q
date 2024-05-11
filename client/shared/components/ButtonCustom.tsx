@@ -45,6 +45,8 @@ export const ButtonCustom = ({
       fullWidth
       {...restProps}
       sx={{
+        mt: 2,
+        mb: 2,
         alignSelf: 'center',
         padding: '10px',
         display: 'flex',

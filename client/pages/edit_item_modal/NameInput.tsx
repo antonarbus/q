@@ -14,7 +14,7 @@ export const NameInput = ({ nameSignal }: Props): JSX.Element => {
         fullWidth
         name='name'
         placeholder='Item name'
-        label='Item name'
+        label='Name'
         required
         autoFocus
         value={nameSignal.value}
@@ -32,7 +32,6 @@ export const NameInput = ({ nameSignal }: Props): JSX.Element => {
           autoComplete: 'off',
         }}
         sx={{
-          mb: 2,
           '.MuiInputBase-root': {
             pl: '14px !important',
           },
