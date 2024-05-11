@@ -22,7 +22,7 @@ export const CopyContainer = (): JSX.Element => {
       css={{
         borderRadius: 6,
         position: 'fixed',
-        zIndex: 10,
+        zIndex: 1001,
         top: y + 30,
         left: x + 15,
         background: 'white',

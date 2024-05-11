@@ -1,6 +1,6 @@
 import { getState } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
-import { Avatar, Box, FormControl, FormLabel, InputAdornment, InputLabel, TextField } from '@mui/material'
+import { Avatar, Box, DialogContent, FormControl, FormLabel, InputAdornment, InputLabel, TextField } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
 import type { FormEvent } from 'react'
 import { useRef } from 'react'
@@ -112,50 +112,61 @@ export const EditItemModal = (): JSX.Element => {
             saveItem({ item: itemWithUpdatedValues })
           }}
         >
-          <NameInput nameSignal={nameSignal}/>
-          <CategoryAutocomplete categorySignal={categorySignal}/>
-          <DescriptionTextarea descSignal={descSignal} />
-
           <Box
             sx={{
-              position: 'relative',
-              borderRadius: '4px',
-              border: '1px solid #ccc',
-              minHeight: '50px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '20px',
+              overflow: 'auto',
+              maxHeight: 'calc(100vh - 400px)',
+              padding: '10px',
             }}
           >
+
+            <NameInput nameSignal={nameSignal}/>
+            <CategoryAutocomplete categorySignal={categorySignal}/>
+            <DescriptionTextarea descSignal={descSignal} />
+
             <Box
               sx={{
-                position: 'absolute',
-                zIndex: 1,
-                left: 0,
-                top: 0,
-                transformOrigin: 'top left',
-                translate: '7px -10px',
-                scale: '0.75',
-                color: 'rgba(0, 0, 0, 0.6)',
-                fontWeight: 400,
-                fontSize: '1rem',
-                lineHeight: '1.4375em',
-                letterSpacing: '0.00938em',
-                userSelect: 'none',
-                background: 'white',
-                paddingInline: '8px',
+                position: 'relative',
+                borderRadius: '4px',
+                border: '1px solid #ccc',
               }}
             >
-              Item
-            </Box>
-            <Box
-              sx={{
-                overflow: 'auto',
-                margin: '10px',
-                maxHeight: '200px',
-                '.items': {
-                  maxWidth: 'none !important',
-                },
-              }}
-            >
-              <FirstItemOnly />
+              <Box
+                sx={{
+                  position: 'absolute',
+                  zIndex: 1,
+                  left: 0,
+                  top: 0,
+                  transformOrigin: 'top left',
+                  translate: '7px -10px',
+                  scale: '0.75',
+                  color: 'rgba(0, 0, 0, 0.6)',
+                  fontWeight: 400,
+                  fontSize: '1rem',
+                  lineHeight: '1.4375em',
+                  letterSpacing: '0.00938em',
+                  userSelect: 'none',
+                  background: 'white',
+                  paddingInline: '8px',
+                }}
+              >
+                Item
+              </Box>
+              <Box
+                sx={{
+                  overflow: 'auto',
+                  margin: '10px',
+                  // maxHeight: '200px',
+                  '.items': {
+                    maxWidth: 'none !important',
+                  },
+                }}
+              >
+                <FirstItemOnly />
+              </Box>
             </Box>
           </Box>
 
