@@ -3,17 +3,17 @@ import { verifyAccessTokenMiddleware } from '@server/middleware/verifyTokenMiddl
 import { bucket } from '@server/services/storage'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '@server/utils/getEmailFromRefreshTokenOrThrowUnauthorized'
 import { Router } from 'express'
-import { type Copyable } from '@entities/quotation'
+import { type Item } from '@entities/quotation'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { type ResWithBody, type ReqWithBody, type Next } from '../types'
 
 export type ReqBody = {
-  id: Copyable['id']
+  id: Item['id']
 }
 
 export type ResBody = {
   message: 'not logged in' | 'not found' | 'found'
-  item?: Copyable
+  item?: Item
 }
 
 type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>

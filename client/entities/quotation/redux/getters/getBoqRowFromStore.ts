@@ -1,3 +1,5 @@
+import { getState } from '@lib_instances/store'
+import { itemKey } from '@entities/quotation/consts/itemKey'
 import { type Item, type BoqRow } from '../../types'
 import { getBoqItemFromStore } from './getBoqItemFromStore'
 
@@ -12,6 +14,13 @@ export const getBoqRowFromStore = ({
   rowIndex,
   state,
 }: Props): BoqRow | undefined => {
+  const item = getState().quotation.items[itemIndex]
+
+  // special case for when the item is a row for item edit modal
+  if (item?.type === itemKey.row) {
+    return item
+  }
+
   const boqItem = getBoqItemFromStore({ itemIndex })
   if (boqItem === undefined) return
   const boqRow = boqItem.boq.rows[rowIndex]

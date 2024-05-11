@@ -94,7 +94,6 @@ export type {
   Item,
   ItemPaste,
   ItemBoq,
-  Copyable,
   BoqCols,
   BoqHeaderCell,
   BoqHeaderKey,

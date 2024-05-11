@@ -4,13 +4,13 @@ import { bucket } from '@server/services/storage'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '@server/utils/getEmailFromRefreshTokenOrThrowUnauthorized'
 import { Router } from 'express'
 import { type FlattenMaps } from 'mongoose'
-import { type Copyable } from '@entities/item'
+import { type Item } from '@entities/item'
 import { type ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { type ResWithBody, type ReqWithBody, type Next } from '../types'
 
 export type ReqBody = {
-  item: Copyable
+  item: Item
 }
 
 export type ResBody = {
@@ -21,7 +21,7 @@ export type ResBody = {
   | 'name is not provided'
   | 'category is not provided'
   | 'id is not provided'
-  item?: FlattenMaps<Copyable>
+  item?: FlattenMaps<Item>
 }
 
 type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>

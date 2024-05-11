@@ -17,6 +17,7 @@ export const updateDescriptionCell = ({
   rowIndex,
   boqRowCellKey,
 }: Props): void => {
+  console.log(666)
   if (editorRef.current === null) return
 
   const didContentChange = didBoqCellContentChange({

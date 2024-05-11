@@ -2,14 +2,14 @@ import { ItemModel } from '@server/db/models/itemModel'
 import { verifyAccessTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '@server/utils/getEmailFromRefreshTokenOrThrowUnauthorized'
 import { Router } from 'express'
-import { type Copyable } from '@entities/item'
+import { type Item } from '@entities/item'
 import { type ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { type ResWithBody, type Next, type Req } from '../types'
 
 export type ResBody = {
   message: ErrorMessageCommon | 'found' | 'no content' | 'Unhandled error'
-  documents?: Copyable[]
+  documents?: Item[]
 }
 
 type RouterHandler = (req: Req, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>

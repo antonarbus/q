@@ -1,5 +1,4 @@
 import { type FroalaEditorRef } from '@shared/types/froala'
-import { type Pretty } from '@shared/types/Pretty'
 import { type BoqRowKey } from '../consts/boqRowKey'
 import { type itemKey } from '../consts/itemKey'
 
@@ -28,13 +27,13 @@ export type BoqRowCell = {
   pin: BoqRowCellPin
 }
 
-export type BoqRow = Pretty<ItemCommon & {
+export type BoqRow = ItemCommon & {
   type: BoqRowKey
   description: BoqRowCell
   itemPrice: BoqRowCell
   qty: BoqRowCell
   price: BoqRowCell
-}>
+}
 
 export type BoqCol = {
   html: string
@@ -54,7 +53,7 @@ export type BoqHeaderCell = {
   value: number
 }
 
-export type ItemBoq = Pretty<ItemCommon & {
+export type ItemBoq = ItemCommon & {
   type: typeof itemKey.boq
   boq: {
     header: {
@@ -65,21 +64,21 @@ export type ItemBoq = Pretty<ItemCommon & {
     column: BoqCols
     rows: BoqRow[]
   }
-}>
+}
 
 export type BoqHeaderKey = keyof ItemBoq['boq']['header']
 export type BoqColumnKey = keyof BoqCols
 export type BoqRowCellKey = keyof Omit<BoqCols, 'number'>
 
-type ItemText = Pretty<ItemCommon & {
+type ItemText = ItemCommon & {
   type: typeof itemKey.text
   text: {
     html: string
     value: null
   }
-}>
+}
 
-type ItemPrice = Pretty<ItemCommon & {
+type ItemPrice = ItemCommon & {
   type: typeof itemKey.price
   title: {
     html: string
@@ -89,14 +88,14 @@ type ItemPrice = Pretty<ItemCommon & {
     html: string
     value: number
   }
-}>
+}
 
-export type ItemPaste = Pretty<ItemCommon & {
+export type ItemPaste = ItemCommon & {
   type: typeof itemKey.paste
-}>
+}
 
-export type Item = ItemBoq | ItemPaste | ItemText | ItemPrice
-export type Copyable = ItemText | ItemBoq | ItemPrice | BoqRow
+export type Item = ItemBoq | ItemPaste | ItemText | ItemPrice | BoqRow
+// export type Item = ItemText | ItemBoq | ItemPrice | BoqRow
 
 export type Quotation = {
   id: 'new' | Record<never, never> & string

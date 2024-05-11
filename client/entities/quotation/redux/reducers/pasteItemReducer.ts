@@ -3,20 +3,20 @@ import { type PastePos } from '@entities/copy'
 import { nanoid } from '@shared/lib/nanoid'
 import { boqRowKey } from '../../consts/boqRowKey'
 import { itemKey } from '../../consts/itemKey'
-import type { Copyable, Quotation } from '../../types'
+import type { Item, Quotation } from '../../types'
 
 type Payload = {
   itemId: string
   newItemId: string
   pastePos: PastePos
-  item: Copyable
+  item: Item
 }
 
 type Reducer = (state: Quotation, action: PayloadAction<Payload>) => void
 
 export const pasteItemReducer: Reducer = (state, action) => {
   const { itemId, newItemId, pastePos, item } = action.payload
-  const itemToPaste = { ...structuredClone(item), id: newItemId }
+  const itemToPaste: Item = { ...structuredClone(item), id: newItemId }
 
   if (itemToPaste.type === itemKey.boq) {
     const boqRows = itemToPaste.boq.rows
@@ -25,10 +25,8 @@ export const pasteItemReducer: Reducer = (state, action) => {
     })
   }
 
-  // todo: check it, probably should bring item word into the type and then it will be easier to work with
-  // todo: as a next step we may convert type into tags, but that needs a separate experiment
   const isItem = itemToPaste.type === itemKey.boq || itemToPaste.type === itemKey.text || itemToPaste.type === itemKey.price
-  const isBoqRow = !isItem
+  const isBoqRow = itemToPaste.type === itemKey.row
 
   if (isItem) {
     const hoveredItemIndex = state.items.findIndex(item => item.id === itemId)

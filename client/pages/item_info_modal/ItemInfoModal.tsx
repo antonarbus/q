@@ -5,7 +5,7 @@ import { useSignal, useSignalEffect } from '@preact/signals-react'
 import { useRef } from 'react'
 import { BsInfoLg } from 'react-icons/bs'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { quotationSlice, type Copyable } from '@entities/quotation'
+import { quotationSlice, type Item } from '@entities/quotation'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
 import { CardCustom } from '@shared/components/CardCustom'
 import { CategoryAutocomplete } from './CategoryAutocomplete'
@@ -17,7 +17,7 @@ export const ItemInfoModal = (): JSX.Element => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const item = location.state.item as Copyable | undefined
+  const item = location.state.item as Item | undefined
   const itemIndex = location.state.itemIndex as number | undefined
   const rowIndex = location.state.rowIndex as number | undefined
 

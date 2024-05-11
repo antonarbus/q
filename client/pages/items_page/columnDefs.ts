@@ -1,11 +1,11 @@
 import type { ColDef } from 'ag-grid-community'
-import { type Copyable } from '@entities/item'
+import { type Item } from '@entities/item'
 import { ActionButtonsCellRenderer } from './ActionButtonsCellRenderer'
 import { DateCellRenderer } from './DateCellRenderer'
 import { dateFilterComparator } from './dateFilterComparator'
 import { dateValueGetter } from './dateValueGetter'
 
-export const defaultColDef: ColDef<Copyable> = {
+export const defaultColDef: ColDef<Item> = {
   headerClass: ['center'],
   width: 170,
   minWidth: 170,
@@ -19,7 +19,7 @@ export const defaultColDef: ColDef<Copyable> = {
   flex: 1,
 }
 
-export const columnDefs: Array<ColDef<Copyable>> = [
+export const columnDefs: Array<ColDef<Item>> = [
   {
     cellRenderer: ActionButtonsCellRenderer,
     width: 150,

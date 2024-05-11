@@ -27,7 +27,7 @@ export const EditItemButton = ({ id }: ReqBody): JSX.Element => {
           category: 'temp',
           desc: 'temp',
           email: 'temp',
-          items: [item as Item], // todo: make it Copyable type
+          items: [item as Item], // todo: make it Item type
         },
       }))
 

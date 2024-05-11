@@ -1,12 +1,12 @@
 import { type ValueGetterParams } from 'ag-grid-community'
 import { isValid } from 'date-fns'
-import { type Copyable } from '@entities/item'
+import { type Item } from '@entities/item'
 
 type Props = {
-  columnDef: keyof Copyable
+  columnDef: keyof Item
 }
 
-type Params = ValueGetterParams<Copyable, string>
+type Params = ValueGetterParams<Item, string>
 
 export const dateValueGetter = ({ columnDef }: Props) => (params: Params): Date | null => {
   const dateIsoString = params.data?.[columnDef]

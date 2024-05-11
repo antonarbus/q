@@ -1,16 +1,15 @@
 import { getState } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
-import { Avatar, Box, DialogContent, FormControl, FormLabel, InputAdornment, InputLabel, TextField } from '@mui/material'
+import { Avatar, Box, Divider } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
 import type { FormEvent } from 'react'
 import { useRef } from 'react'
 import { FiEdit3 } from 'react-icons/fi'
-import { PiBooks } from 'react-icons/pi'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { FirstItemOnly } from '@widgets/items/FirstItemOnly'
 import { useGetItemCategoriesQuery, useGetItemsQuery, useSaveItemMutation } from '@entities/item'
-import { type Copyable } from '@entities/quotation'
+import { type Item } from '@entities/quotation'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 import { CardCustom } from '@shared/components/CardCustom'
@@ -24,7 +23,7 @@ import { NameInput } from './NameInput'
 export const EditItemModal = (): JSX.Element => {
   const navigate = useNavigate()
   const location = useLocation()
-  const item = location.state.item as Copyable | undefined
+  const item = location.state.item as Item | undefined
   const cardRef = useRef<HTMLDivElement>(null)
 
   const nameSignal = useSignal(item?.name ?? '')
@@ -87,6 +86,7 @@ export const EditItemModal = (): JSX.Element => {
           </Avatar>
         }
       >
+        <Divider />
         <form
           css={{
             display: 'flex',
@@ -169,12 +169,21 @@ export const EditItemModal = (): JSX.Element => {
                   '.items': {
                     maxWidth: 'none !important',
                   },
+                  '.actions-container': {
+                    // display: 'none !important',
+                  },
+                  '.td.number ': {
+                    // display: 'none !important',
+                  },
+
                 }}
               >
                 <FirstItemOnly />
               </Box>
             </Box>
           </Box>
+
+          <Divider />
 
           <ButtonCustom
             disabled={isDisabled}
