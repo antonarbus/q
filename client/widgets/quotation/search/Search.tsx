@@ -1,8 +1,9 @@
 import { dispatch } from '@lib_instances/store'
-import { Autocomplete, Box, InputAdornment, TextField } from '@mui/material'
+import { Autocomplete, Box, IconButton, InputAdornment, Paper, TextField } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
 import { BsFileEarmarkText, BsTags } from 'react-icons/bs'
 import { GoSearch } from 'react-icons/go'
+import { IoClose } from 'react-icons/io5'
 import { PiBooks } from 'react-icons/pi'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { copySlice } from '@entities/copy'
@@ -18,6 +19,7 @@ export const Search = (): JSX.Element => {
   const { mutate: loadItem, isPending: isPendingGetItem, isSuccess, isError, error, data: itemData, variables } = useGetItemMutation()
   const options = itemsData?.documents ?? []
   const inputValueSignal = useSignal('')
+  const openAutocompleteSignal = useSignal(false)
 
   useEffectOnce(() => {
     void refetch()
@@ -46,15 +48,23 @@ export const Search = (): JSX.Element => {
   return (
     <Autocomplete
       className={className.search}
-      freeSolo={options.length !== 0} // otherwise noOptionsText will not be shown
+      // freeSolo={options.length !== 0} // otherwise noOptionsText will not be shown
+      freeSolo
       disablePortal
       clearOnBlur
       clearOnEscape
       fullWidth
       loading={isPendingItems}
-      noOptionsText='No saved items found'
+      // noOptionsText='No saved items found'
       options={options}
-      popupIcon={null}
+      // popupIcon={null}
+      open={openAutocompleteSignal.value}
+      onOpen={() => {
+        openAutocompleteSignal.value = true
+      }}
+      onClose={() => {
+        openAutocompleteSignal.value = false
+      }}
       inputValue={inputValueSignal.value}
       onInputChange={(event, newInputValue) => {
         inputValueSignal.value = newInputValue
@@ -172,13 +182,33 @@ export const Search = (): JSX.Element => {
             }}
             sx={{
               '.MuiInputBase-root': {
-                padding: '0px 5px !important',
+                // padding: '0px 5px !important',
               },
               input: {
                 textAlign: 'center',
               },
             }}
           />
+        )
+      }}
+      PaperComponent={(props) => {
+        return (
+          <Paper
+            elevation={8}
+            {...props}
+          >
+            {props.children}
+            <IconButton
+              size='small'
+              sx={{
+                position: 'absolute',
+                top: '5px',
+                right: '5px',
+              }}
+            >
+              <IoClose />
+            </IconButton>
+          </Paper>
         )
       }}
       componentsProps={{
@@ -189,7 +219,7 @@ export const Search = (): JSX.Element => {
             width: '300px',
             translate: '0px 10px',
             borderRadius: '8px',
-            padding: '2px 8px',
+            padding: '20px 8px',
           },
         },
         popper: {
