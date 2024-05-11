@@ -1,6 +1,7 @@
 import { dispatch } from '@lib_instances/store'
 import { Autocomplete, Box, IconButton, InputAdornment, Paper, TextField } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
+import { type HTMLAttributes, useCallback } from 'react'
 import { BsFileEarmarkText, BsTags } from 'react-icons/bs'
 import { GoSearch } from 'react-icons/go'
 import { IoClose } from 'react-icons/io5'
@@ -187,7 +188,8 @@ export const Search = (): JSX.Element => {
           />
         )
       }}
-      PaperComponent={(props) => {
+      // without useCallback the component will rerender and loose scroll position
+      PaperComponent={useCallback((props: HTMLAttributes<HTMLElement>) => {
         return (
           <Paper
             elevation={8}
@@ -219,7 +221,7 @@ export const Search = (): JSX.Element => {
             </IconButton>
           </Paper>
         )
-      }}
+      }, [])}
       componentsProps={{
         paper: {
           className: className.searchAutocomplete,
