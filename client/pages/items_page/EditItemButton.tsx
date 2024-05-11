@@ -1,9 +1,11 @@
+import { dispatch } from '@lib_instances/store'
 import { IconButton } from '@mui/material'
 import type { ReqBody } from '@server/api/deleteItemRouter'
 import { AiTwotoneEdit } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetItemMutation } from '@entities/item'
+import { type Item, quotationSlice } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
@@ -16,6 +18,20 @@ export const EditItemButton = ({ id }: ReqBody): JSX.Element => {
     if (isSuccess) {
       const { item } = data
       if (!item) return
+
+      // add item into store
+      dispatch(quotationSlice.actions.loadQuotationReducer({
+        quotation: {
+          id: 'temp',
+          name: 'temp',
+          category: 'temp',
+          desc: 'temp',
+          email: 'temp',
+          items: [item as Item], // todo: make it Copyable type
+        },
+      }))
+
+      // todo: as we loaded item into the quotation store, we can take all data from the store and not pass in navigate
       navigate(`./${route.editItem}`, { state: { item } })
     }
   }, [isSuccess])

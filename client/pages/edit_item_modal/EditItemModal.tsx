@@ -1,12 +1,14 @@
 import { getState } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
-import { Avatar } from '@mui/material'
+import { Avatar, Box, FormControl, FormLabel, InputAdornment, InputLabel, TextField } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
 import type { FormEvent } from 'react'
 import { useRef } from 'react'
 import { FiEdit3 } from 'react-icons/fi'
+import { PiBooks } from 'react-icons/pi'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
+import { FirstItemOnly } from '@widgets/items/FirstItemOnly'
 import { useGetItemCategoriesQuery, useGetItemsQuery, useSaveItemMutation } from '@entities/item'
 import { type Copyable } from '@entities/quotation'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
@@ -83,6 +85,11 @@ export const EditItemModal = (): JSX.Element => {
         }
       >
         <form
+          css={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '20px',
+          }}
           onSubmit={(e: FormEvent): void => {
             e.preventDefault()
 
@@ -107,7 +114,51 @@ export const EditItemModal = (): JSX.Element => {
         >
           <NameInput nameSignal={nameSignal}/>
           <CategoryAutocomplete categorySignal={categorySignal}/>
-          <DescriptionTextarea descSignal={descSignal}/>
+          <DescriptionTextarea descSignal={descSignal} />
+
+          <Box
+            sx={{
+              position: 'relative',
+              borderRadius: '4px',
+              border: '1px solid #ccc',
+              minHeight: '50px',
+            }}
+          >
+            <Box
+              sx={{
+                position: 'absolute',
+                zIndex: 1,
+                left: 0,
+                top: 0,
+                transformOrigin: 'top left',
+                translate: '7px -10px',
+                scale: '0.75',
+                color: 'rgba(0, 0, 0, 0.6)',
+                fontWeight: 400,
+                fontSize: '1rem',
+                lineHeight: '1.4375em',
+                letterSpacing: '0.00938em',
+                userSelect: 'none',
+                background: 'white',
+                paddingInline: '8px',
+              }}
+            >
+              Item
+            </Box>
+            <Box
+              sx={{
+                overflow: 'auto',
+                margin: '10px',
+                maxHeight: '200px',
+                '.items': {
+                  maxWidth: 'none !important',
+                },
+              }}
+            >
+              <FirstItemOnly />
+            </Box>
+          </Box>
+
           <ButtonCustom
             disabled={isDisabled}
             isPending={isPending}

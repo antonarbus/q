@@ -16,7 +16,7 @@ export const DescriptionTextarea = ({ descSignal }: Props): JSX.Element => {
         placeholder='Description'
         label='Description'
         multiline
-        rows={4}
+        rows={3}
         value={descSignal.value}
         onChange={(e): void => {
           descSignal.value = e.target.value
@@ -32,7 +32,6 @@ export const DescriptionTextarea = ({ descSignal }: Props): JSX.Element => {
           autoComplete: 'off',
         }}
         sx={{
-          mb: 2,
           '.MuiInputBase-root': {
             alignItems: 'flex-start',
             pl: '14px !important',
