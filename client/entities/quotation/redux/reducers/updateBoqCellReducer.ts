@@ -13,11 +13,20 @@ export const updateBoqCellReducer = (state: Quotation, action: PayloadAction<{
 
   const item = state.items[itemIndex]
   if (!item) return
-  if (item.type !== itemKey.boq) return
 
-  const row = item.boq.rows[rowIndex]
-  if (row === undefined) return
+  // special case for when the item is a row for item edit modal
+  if (item.type === itemKey.row) {
+    const row = item
+    row[boqRowCellKey].html = html
+    row[boqRowCellKey].value = value
+    return
+  }
 
-  row[boqRowCellKey].html = html
-  row[boqRowCellKey].value = value
+  if (item.type === itemKey.boq) {
+    const row = item.boq.rows[rowIndex]
+    if (row === undefined) return
+
+    row[boqRowCellKey].html = html
+    row[boqRowCellKey].value = value
+  }
 }

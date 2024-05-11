@@ -8,7 +8,7 @@ import { BsBookmarkStar } from 'react-icons/bs'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetItemCategoriesQuery, useSaveItemMutation } from '@entities/item'
-import { type Copyable } from '@entities/quotation'
+import { type Item } from '@entities/quotation'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 import { CardCustom } from '@shared/components/CardCustom'
@@ -22,7 +22,7 @@ import { NameInput } from './NameInput'
 export const SaveItemModal = (): JSX.Element => {
   const navigate = useNavigate()
   const location = useLocation()
-  const item = location.state.item as Copyable | undefined
+  const item = location.state.item as Item | undefined
   const cardRef = useRef<HTMLDivElement>(null)
   const nameSignal = useSignal(item?.name ?? '')
   const categorySignal = useSignal(item?.category ?? '')

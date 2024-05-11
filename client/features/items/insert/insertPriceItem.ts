@@ -1,11 +1,11 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { type MouseEvent } from 'react'
 import { copySlice } from '@entities/copy'
-import { type Copyable, isFroalaSignal, itemKey } from '@entities/quotation'
+import { type Item, isFroalaSignal, itemKey } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 
 export const insertPriceItem = (e?: MouseEvent): void => {
-  const item: Copyable = {
+  const item: Item = {
     id: nanoid(5),
     type: itemKey.price,
     email: '',

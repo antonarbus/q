@@ -11,4 +11,4 @@ export { deleteFromItemsCache } from './cacheUpdaters/deleteFromItemsCache'
 export { deleteItemsCache } from './cacheUpdaters/deleteItemsCache'
 
 // types
-export type { Copyable } from '@entities/quotation'
+export type { Item } from '@entities/quotation'

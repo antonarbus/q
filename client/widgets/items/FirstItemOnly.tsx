@@ -2,15 +2,21 @@ import { useSelectorTyped } from '@lib_instances/store'
 import { AnimatePresence } from 'framer-motion'
 import { type ReactNode } from 'react'
 import { onItemDrag } from '@features/items/drag_item'
-import { ItemProvider, itemsShapeEqualityFn, BoqItemProvider, itemKey, DraggableItemsContainer } from '@entities/quotation'
+import { hideBoqRowPinsOnRowBlur } from '@features/items/pin'
+import { ItemProvider, itemsShapeEqualityFn, BoqItemProvider, itemKey, DraggableItemsContainer, type Item, RowProvider } from '@entities/quotation'
+import { BoqRow } from './boq/boq_table/rows/row/BoqRow'
+import { BoqRowSortAndAnimate } from './boq/boq_table/rows/row/BoqRowSortAndAnimate'
 import { BoqItem } from './boq/BoqItem'
 import { TotalPriceItem } from './price/PriceItem'
 import { TextItem } from './text/TextItem'
 
 export const FirstItemOnly = (): ReactNode => {
   const items = useSelectorTyped(state => state.quotation.items, itemsShapeEqualityFn)
+
   if (items.length === 0) return null
-  const firstItem = items[0]
+
+  const firstItem = items[0]!
+
   if (firstItem === undefined) return null
 
   return (
@@ -46,6 +52,30 @@ export const FirstItemOnly = (): ReactNode => {
             return (
               <ItemProvider key={item.id} itemIndex={itemIndex}>
                 <TotalPriceItem />
+              </ItemProvider>
+            )
+          }
+
+          if (item.type === itemKey.row) {
+            return (
+              <ItemProvider key={item.id} itemIndex={itemIndex}>
+                <BoqItemProvider>
+                  <RowProvider
+                    rowIndex={0}
+                    rowId={item.id}
+                  >
+                    <BoqRowSortAndAnimate
+                      index={0} // 'index' is internal prop consumed by SortableElement HOC
+                      disabled={true}
+                    >
+                      <BoqRow
+                        onBlur={(e) => {
+                          hideBoqRowPinsOnRowBlur({ e, itemIndex, rowIndex: 0 })
+                        }}
+                      />
+                    </BoqRowSortAndAnimate>
+                  </RowProvider>
+                </BoqItemProvider>
               </ItemProvider>
             )
           }

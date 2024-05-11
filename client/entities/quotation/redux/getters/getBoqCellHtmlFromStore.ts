@@ -11,9 +11,21 @@ type Props = {
 export const getBoqCellHtmlFromStore = ({ itemIndex, rowIndex, boqRowCellKey }: Props): string => {
   const item = getState().quotation.items[itemIndex]
   if (!item) return ''
-  if (item.type !== itemKey.boq) return ''
-  const row = item.boq.rows[rowIndex]
-  if (row === undefined) return ''
-  const html = row[boqRowCellKey].html
-  return html
+
+  // special case for when the item is a row for item edit modal
+  if (item.type === itemKey.boq) {
+    const row = item.boq.rows[rowIndex]
+    if (row === undefined) return ''
+    const html = row[boqRowCellKey].html
+    return html
+  }
+
+  if (item.type === itemKey.row) {
+    const row = item
+    if (row === undefined) return ''
+    const html = row[boqRowCellKey].html
+    return html
+  }
+
+  return ''
 }

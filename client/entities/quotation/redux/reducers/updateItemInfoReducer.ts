@@ -1,10 +1,10 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { type Copyable, type Quotation } from '../../types'
+import { type Item, type Quotation } from '../../types'
 import { getBoqRowFromState } from '../getters/getBoqRowFromState'
 import { getItemFromState } from '../getters/getItemFromState'
 
 export const updateItemInfoReducer = (state: Quotation, action: PayloadAction<{
-  item: Copyable
+  item: Item
   itemIndex?: number
   rowIndex?: number
 }>): void => {
