@@ -78,6 +78,9 @@ export const EditItemModal = (): JSX.Element => {
       <CardCustom
         reference={cardRef}
         title='Edit item'
+        cssProps={{
+          width: '500px',
+        }}
         logo={
           <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }} >
             <FiEdit3 />
@@ -132,6 +135,9 @@ export const EditItemModal = (): JSX.Element => {
                 position: 'relative',
                 borderRadius: '4px',
                 border: '1px solid #ccc',
+                ':hover': {
+                  border: '1px solid #333',
+                },
               }}
             >
               <Box
