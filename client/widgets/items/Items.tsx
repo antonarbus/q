@@ -24,11 +24,9 @@ export const Items = (): ReactNode => {
     >
       <AnimatePresence initial={false}>
         {items.map((item, itemIndex) => {
-          const key = item.id
-
           if (item.type === itemKey.text) {
             return (
-              <ItemProvider key={key} itemIndex={itemIndex}>
+              <ItemProvider key={item.id} itemIndex={itemIndex}>
                 <TextItem />
               </ItemProvider>
             )
@@ -36,7 +34,7 @@ export const Items = (): ReactNode => {
 
           if (item.type === itemKey.boq) {
             return (
-              <ItemProvider key={key} itemIndex={itemIndex}>
+              <ItemProvider key={item.id} itemIndex={itemIndex}>
                 <BoqItemProvider>
                   <BoqItem />
                 </BoqItemProvider>
@@ -46,14 +44,14 @@ export const Items = (): ReactNode => {
 
           if (item.type === itemKey.price) {
             return (
-              <ItemProvider key={key} itemIndex={itemIndex}>
+              <ItemProvider key={item.id} itemIndex={itemIndex}>
                 <TotalPriceItem />
               </ItemProvider>
             )
           }
 
           if (item.type === itemKey.paste) {
-            return <PasteItem key={key} />
+            return <PasteItem key={item.id} />
           }
 
           return null
