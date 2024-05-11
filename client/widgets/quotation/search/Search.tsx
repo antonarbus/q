@@ -164,8 +164,8 @@ export const Search = (): JSX.Element => {
             placeholder='Search in your items'
             InputProps={{
               ...params.InputProps,
-              endAdornment: (
-                <InputAdornment position='end'>
+              startAdornment: (
+                <InputAdornment position='start'>
                   <GoSearch/>
                 </InputAdornment>
               ),
