@@ -1,1 +1,1 @@
-export { InfoBoqRowIcon } from './InfoBoqRowIcon'
+export { OpenInfoBoqRowModalIcon } from './OpenInfoBoqRowModalIcon'

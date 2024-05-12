@@ -1,1 +1,1 @@
-export { InfoItemIcon } from './InfoItemIcon'
+export { OpenInfoItemModalIcon } from './OpenInfoItemModalIcon'

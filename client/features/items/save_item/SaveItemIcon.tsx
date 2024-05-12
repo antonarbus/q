@@ -14,6 +14,7 @@ export const SaveItemIcon = (): ReactNode => {
 
   return (
     <BsBookmarkPlus
+      className='save-item-icon'
       tabIndex={-1}
       onClick={(e: MouseEvent): void => {
         const email = getState().user.email

@@ -7,6 +7,7 @@ const Handle = (): JSX.Element => {
 
   return (
     <MdDragIndicator
+      className='drag-item-icon'
       tabIndex={-1}
       style={{
         color: isDisabled ? '#acacac' : '#000',

@@ -15,8 +15,8 @@ type Props = {
   onItemResizeStop?: OnItemResizeStop
   autoWidth?: boolean
   minWidth?: ResizableProps['minWidth']
-  leftItemActionButtons: JSX.Element
-  rightItemActionButtons: JSX.Element
+  leftItemActionButtons: ReactNode
+  rightItemActionButtons: ReactNode
 }
 
 export const ItemComp = ({

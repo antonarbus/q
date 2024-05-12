@@ -3,7 +3,7 @@ import { CopyBoqRowIcon } from '@features/items/copy_boq_row'
 import { CutBoqRowIcon } from '@features/items/cut_boq_row'
 import { DeleteBoqRowIcon } from '@features/items/delete_boq_row'
 import { DragBoqRowIcon } from '@features/items/drag_boq_row'
-import { InfoBoqRowIcon } from '@features/items/open_info_boq_row_modal'
+import { OpenInfoBoqRowModalIcon } from '@features/items/open_info_boq_row_modal'
 import { SaveBoqRowIcon } from '@features/items/save_boq_row'
 import { BoqRowActionButtonsLayout } from './BoqRowActionButtonsLayout'
 import { BoqRowLayout } from './BoqRowLayout'
@@ -32,7 +32,7 @@ export const BoqRow = ({ onBlur }: Props): JSX.Element => {
       <PriceCell />
       <BoqRowActionButtonsLayout style={{ right: '-33px' }} >
         <SaveBoqRowIcon />
-        <InfoBoqRowIcon />
+        <OpenInfoBoqRowModalIcon />
         <DeleteBoqRowIcon />
       </BoqRowActionButtonsLayout>
     </BoqRowLayout>

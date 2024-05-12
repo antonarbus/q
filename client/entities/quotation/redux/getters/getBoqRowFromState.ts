@@ -1,4 +1,4 @@
-import { itemKey } from '@entities/quotation/consts/itemKey'
+import { itemKey } from '../../consts/itemKey'
 import { type Quotation, type BoqRow } from '../../types'
 import { getBoqItemFromState } from './getBoqItemFromState'
 

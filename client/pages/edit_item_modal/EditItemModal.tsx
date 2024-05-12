@@ -165,12 +165,17 @@ export const EditItemModal = (): JSX.Element => {
                 sx={{
                   overflow: 'auto',
                   margin: '10px',
-                  // maxHeight: '200px',
+                  padding: '10px',
                   '.items': {
                     maxWidth: 'none !important',
                   },
-                  '.actions-container': {
-                    // display: 'none !important',
+                  '.item': {
+                    marginBottom: '0px !important',
+                  },
+                  '.boq-table-container .boq-rows .actions-container': {
+                    '.save-boq-row-icon, .open-info-boq-row-modal-icon': {
+                      display: 'none !important',
+                    },
                   },
                   '.td.number ': {
                     // display: 'none !important',

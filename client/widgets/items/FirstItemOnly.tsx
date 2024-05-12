@@ -3,12 +3,12 @@ import { AnimatePresence } from 'framer-motion'
 import { type ReactNode } from 'react'
 import { onItemDrag } from '@features/items/drag_item'
 import { hideBoqRowPinsOnRowBlur } from '@features/items/pin'
-import { ItemProvider, itemsShapeEqualityFn, BoqItemProvider, itemKey, DraggableItemsContainer, type Item, RowProvider } from '@entities/quotation'
-import { BoqRow } from './boq/boq_table/rows/row/BoqRow'
+import { ItemProvider, itemsShapeEqualityFn, BoqItemProvider, itemKey, DraggableItemsContainer, RowProvider } from '@entities/quotation'
+import { BoqRowForEditModal } from './boq/boq_table/rows/row/BoqRowForEditModal'
 import { BoqRowSortAndAnimate } from './boq/boq_table/rows/row/BoqRowSortAndAnimate'
-import { BoqItem } from './boq/BoqItem'
-import { TotalPriceItem } from './price/PriceItem'
-import { TextItem } from './text/TextItem'
+import { BoqItemForEditModal } from './boq/BoqItemForEditModal'
+import { PriceItemForEditModal } from './price/PriceItemForEditModal'
+import { TextItemForEditModal } from './text/TextItemForEditModal'
 
 export const FirstItemOnly = (): ReactNode => {
   const items = useSelectorTyped(state => state.quotation.items, itemsShapeEqualityFn)
@@ -33,7 +33,7 @@ export const FirstItemOnly = (): ReactNode => {
           if (item.type === itemKey.text) {
             return (
               <ItemProvider key={item.id} itemIndex={itemIndex}>
-                <TextItem />
+                <TextItemForEditModal />
               </ItemProvider>
             )
           }
@@ -42,7 +42,7 @@ export const FirstItemOnly = (): ReactNode => {
             return (
               <ItemProvider key={item.id} itemIndex={itemIndex}>
                 <BoqItemProvider>
-                  <BoqItem />
+                  <BoqItemForEditModal />
                 </BoqItemProvider>
               </ItemProvider>
             )
@@ -51,7 +51,7 @@ export const FirstItemOnly = (): ReactNode => {
           if (item.type === itemKey.price) {
             return (
               <ItemProvider key={item.id} itemIndex={itemIndex}>
-                <TotalPriceItem />
+                <PriceItemForEditModal />
               </ItemProvider>
             )
           }
@@ -68,7 +68,7 @@ export const FirstItemOnly = (): ReactNode => {
                       index={0} // 'index' is internal prop consumed by SortableElement HOC
                       disabled={true}
                     >
-                      <BoqRow
+                      <BoqRowForEditModal
                         onBlur={(e) => {
                           hideBoqRowPinsOnRowBlur({ e, itemIndex, rowIndex: 0 })
                         }}

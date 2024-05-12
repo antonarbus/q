@@ -13,6 +13,7 @@ export const CopyItemIcon = (): JSX.Element => {
 
   return (
     <MdCopyAll
+      className='copy-item-icon'
       tabIndex={-1}
       style={{
         position: 'relative',

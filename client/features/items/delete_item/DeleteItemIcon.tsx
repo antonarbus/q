@@ -19,6 +19,7 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
 
   return (
     <GoTrash
+      className='delete-item-icon'
       tabIndex={-1}
       style={{
         color: disabled ? '#acacac' : '#000',

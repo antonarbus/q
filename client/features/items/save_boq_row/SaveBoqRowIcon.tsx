@@ -15,6 +15,7 @@ export const SaveBoqRowIcon = (): ReactNode => {
 
   return (
     <BsBookmarkPlus
+      className='save-boq-row-icon'
       tabIndex={-1}
       onClick={(e: MouseEvent): void => {
         const email = getState().user.email

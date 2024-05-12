@@ -1,5 +1,5 @@
 import { getState } from '@lib_instances/store'
-import { itemKey } from '@entities/quotation/consts/itemKey'
+import { itemKey } from '../../consts/itemKey'
 import { type Item, type BoqRow } from '../../types'
 import { getBoqItemFromStore } from './getBoqItemFromStore'
 
