@@ -48,17 +48,13 @@ export const Search = (): JSX.Element => {
   return (
     <Autocomplete
       className={className.search}
-      // freeSolo={options.length !== 0} // otherwise noOptionsText will not be shown
       freeSolo
       disablePortal
       clearOnBlur
+      // open // manual open control
       clearOnEscape
-      fullWidth
       loading={isPendingItems}
-      // noOptionsText='No saved items found'
       options={options}
-      // popupIcon={null}
-
       inputValue={inputValueSignal.value}
       onInputChange={(event, newInputValue) => {
         inputValueSignal.value = newInputValue
@@ -73,12 +69,40 @@ export const Search = (): JSX.Element => {
         zIndex: 0,
         translate: '0px 5px',
       }}
+      renderInput={(params) => {
+        return (
+          <TextField
+            {...params}
+            name='category'
+            variant='standard'
+            placeholder='Search'
+            InputProps={{
+              ...params.InputProps,
+              startAdornment: (
+                <InputAdornment position='start'>
+                  <GoSearch/>
+                </InputAdornment>
+              ),
+            }}
+            sx={{
+              '.MuiInputBase-root': {
+                padding: '0px 5px !important',
+              },
+              '.MuiInput-root': {
+                padding: '4px 30px 0px 0px !important',
+              },
+              input: {
+                textAlign: 'center',
+              },
+            }}
+          />
+        )
+      }}
       renderOption={(props, option, { selected, index, inputValue }) => {
         return (
           <li
             // {...props}
             onClick={() => {
-              // console.log('option:', option)
               loadItem({ id: option.id })
             }}
             key={option.id}
@@ -159,40 +183,21 @@ export const Search = (): JSX.Element => {
           </li>
         )
       }}
-      renderInput={(params) => {
-        return (
-          <TextField
-            {...params}
-            name='category'
-            variant='standard'
-            placeholder='Search'
-            InputProps={{
-              ...params.InputProps,
-              startAdornment: (
-                <InputAdornment position='start'>
-                  <GoSearch/>
-                </InputAdornment>
-              ),
-            }}
-            sx={{
-              '.MuiInputBase-root': {
-                padding: '0px 5px !important',
-              },
-              '.MuiInput-root': {
-                padding: '4px 30px 0px 0px !important',
-              },
-              input: {
-                textAlign: 'center',
-              },
-            }}
-          />
-        )
-      }}
-      // without useCallback the component will rerender and loose scroll position
       PaperComponent={useCallback((props: HTMLAttributes<HTMLElement>) => {
+        // without useCallback() the component will rerender and loose scroll position
         return (
           <Paper
             elevation={8}
+            sx={{
+              width: '300px',
+              translate: '0px 10px',
+              borderRadius: '8px',
+              padding: '30px 8px 8px 8px',
+              // height: '600px',
+              '.MuiAutocomplete-listbox': {
+                maxHeight: '310px',
+              },
+            }}
             {...props}
           >
             {props.children}
@@ -226,12 +231,6 @@ export const Search = (): JSX.Element => {
         paper: {
           className: className.searchAutocomplete,
           elevation: 10,
-          sx: {
-            width: '300px',
-            translate: '0px 10px',
-            borderRadius: '8px',
-            padding: '30px 8px 8px 8px',
-          },
         },
         popper: {
           sx: {

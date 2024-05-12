@@ -7,6 +7,7 @@ const Handle = (): JSX.Element => {
 
   return (
     <MdDragIndicator
+      className='drag-boq-row-icon'
       tabIndex={-1}
       style={{
         cursor: 'move',

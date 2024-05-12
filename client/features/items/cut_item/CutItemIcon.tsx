@@ -15,7 +15,8 @@ export const CutItemIcon = (): JSX.Element => {
   const disabled = isItemAlone || !isCuttable
 
   return (
-      <TbCut
+    <TbCut
+        className='cut-item-icon'
         tabIndex={-1}
         style={{
           color: disabled ? '#acacac' : '#000',

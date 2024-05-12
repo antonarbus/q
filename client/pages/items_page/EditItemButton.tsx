@@ -5,7 +5,7 @@ import { AiTwotoneEdit } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetItemMutation } from '@entities/item'
-import { type Item, quotationSlice } from '@entities/quotation'
+import { quotationSlice } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
@@ -27,7 +27,7 @@ export const EditItemButton = ({ id }: ReqBody): JSX.Element => {
           category: 'temp',
           desc: 'temp',
           email: 'temp',
-          items: [item as Item], // todo: make it Item type
+          items: [item],
         },
       }))
 

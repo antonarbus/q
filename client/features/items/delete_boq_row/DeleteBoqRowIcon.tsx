@@ -17,6 +17,7 @@ export const DeleteBoqRowIcon = (): JSX.Element => {
 
   return (
     <GoTrash
+      className='delete-boq-row-icon'
       tabIndex={-1}
       style={{
         color: disabled ? '#acacac' : '#000',
