@@ -98,6 +98,7 @@ function FirstItemLayout({ children }: { children: React.ReactNode }): JSX.Eleme
         position: 'relative',
         borderRadius: '4px',
         border: '1px solid #ccc',
+        background: 'white',
         ':hover': {
           border: '1px solid #333',
         },

@@ -1,8 +1,8 @@
 import { getState } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
-import { Avatar, Box, Divider } from '@mui/material'
+import { Avatar, Box, Typography } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
-import type { FormEvent } from 'react'
+import type { FormEvent, MouseEvent } from 'react'
 import { useRef } from 'react'
 import { FiEdit3 } from 'react-icons/fi'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -12,8 +12,6 @@ import { useGetItemCategoriesQuery, useGetItemsQuery, useSaveItemMutation } from
 import { type Item } from '@entities/quotation'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
-import { CardCustom } from '@shared/components/CardCustom'
-import { cls } from '@shared/consts/cls'
 import { nanoid } from '@shared/lib/nanoid'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
@@ -75,24 +73,62 @@ export const EditItemModal = (): JSX.Element => {
         navigate('..')
       }}
     >
-      <CardCustom
-        reference={cardRef}
-        title='Edit item'
-        cssProps={{
-          width: '500px',
+      <Box
+        ref={cardRef}
+        onMouseDown={(e: MouseEvent): void => {
+          e.stopPropagation()
         }}
-        logo={
-          <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }} >
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          maxHeight: 'calc(100vh - 64px)',
+          maxWidth: 'calc(100vw - 64px)',
+          minWidth: '300px',
+          width: '500px',
+          background: 'white',
+          color: 'rgba(0, 0, 0, 0.87)',
+          borderRadius: '4px',
+          transition: 'box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+          boxShadow:
+            '0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%)',
+          overflowY: 'hidden',
+          '&:hover, &:focus-within': {
+            boxShadow:
+              '0px 11px 15px -7px rgb(0 0 0 / 40%), 0px 24px 38px 3px rgb(0 0 0 / 28%), 0px 9px 46px 8px rgb(0 0 0 / 24%)',
+          },
+        }}
+      >
+        <Box
+          className='card-header'
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '5px',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '20px 20px 10px 20px',
+            borderBottom: '1px solid rgb(223, 223, 223)',
+            backgroundColor: '#80808017',
+          }}
+        >
+          <Avatar sx={{ bgcolor: theme.colors.darkBackground }}>
             <FiEdit3 />
           </Avatar>
-        }
-      >
-        <Divider />
-        <form
-          css={{
+          <Typography component='h1' variant='h6' >
+            Edit item
+          </Typography>
+        </Box>
+
+        <Box
+          className='card-content'
+          component='form'
+          sx={{
             display: 'flex',
             flexDirection: 'column',
             gap: '20px',
+            padding: '40px 50px',
+            backgroundColor: '#8080800f',
+            overflowY: 'auto',
           }}
           onSubmit={(e: FormEvent): void => {
             e.preventDefault()
@@ -116,34 +152,37 @@ export const EditItemModal = (): JSX.Element => {
             saveItem({ item: itemWithUpdatedValues })
           }}
         >
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '20px',
-              overflow: 'auto',
-              maxHeight: 'calc(100vh - 400px)',
-              padding: '10px',
-            }}
-          >
-            <NameInput nameSignal={nameSignal}/>
-            <CategoryAutocomplete categorySignal={categorySignal}/>
-            <DescriptionTextarea descSignal={descSignal} />
-            <FirstItem />
-          </Box>
+          <NameInput nameSignal={nameSignal}/>
+          <CategoryAutocomplete categorySignal={categorySignal}/>
+          <DescriptionTextarea descSignal={descSignal} />
+          <FirstItem />
+        </Box>
 
-          <Divider />
-
+        <Box
+          className='card-footer'
+          sx={{
+            display: 'flex',
+            padding: '20px',
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderTop: '1px solid rgb(223, 223, 223)',
+            backgroundColor: '#80808017',
+          }}
+        >
           <ButtonCustom
             disabled={isDisabled}
             isPending={isPending}
             isSuccess={isSuccess}
             isError={isError}
+            sx={{
+              width: '200px',
+            }}
           >
             UPDATE
           </ButtonCustom>
-        </form>
-      </CardCustom>
+        </Box>
+
+      </Box>
     </BackdropWithSlidableContent>
   )
 }
