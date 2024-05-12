@@ -7,7 +7,7 @@ import { useRef } from 'react'
 import { FiEdit3 } from 'react-icons/fi'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { FirstItemOnly } from '@widgets/items/FirstItemOnly'
+import { FirstItem } from '@widgets/items/FirstItem'
 import { useGetItemCategoriesQuery, useGetItemsQuery, useSaveItemMutation } from '@entities/item'
 import { type Item } from '@entities/quotation'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
@@ -19,7 +19,6 @@ import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
 import { CategoryAutocomplete } from './CategoryAutocomplete'
 import { DescriptionTextarea } from './DescriptionTextarea'
-import { ItemLabel } from './ItemLabel'
 import { NameInput } from './NameInput'
 
 export const EditItemModal = (): JSX.Element => {
@@ -130,57 +129,7 @@ export const EditItemModal = (): JSX.Element => {
             <NameInput nameSignal={nameSignal}/>
             <CategoryAutocomplete categorySignal={categorySignal}/>
             <DescriptionTextarea descSignal={descSignal} />
-            <Box
-              sx={{
-                position: 'relative',
-                borderRadius: '4px',
-                border: '1px solid #ccc',
-                ':hover': {
-                  border: '1px solid #333',
-                },
-              }}
-            >
-              <ItemLabel />
-              <Box
-                sx={{
-                  overflow: 'auto',
-                  margin: '10px',
-                  padding: '10px',
-                  [`.${cls.items}`]: {
-                    maxWidth: 'none !important',
-                    padding: '10px !important',
-                    [`:has(.${cls.priceItem})`]: {
-                      display: 'block !important',
-                    },
-                    [`:has(.${cls.textItem})`]: {
-                      display: 'block !important',
-                    },
-                  },
-                  [`.${cls.item}`]: {
-                    marginBottom: '0px !important',
-                  },
-                  [`.${cls.item}.${cls.priceItem}`]: {
-                    display: 'block !important',
-                  },
-                  [`.${cls.item}.${cls.textItem}`]: {
-                    display: 'block !important',
-                  },
-                  '.boq-table-container .boq-rows .actions-container': {
-                    '.save-boq-row-icon, .open-info-boq-row-modal-icon': {
-                      display: 'none !important',
-                    },
-                  },
-                }}
-              >
-                <Box
-                  sx={{
-                    width: '2000px',
-                  }}
-                >
-                  <FirstItemOnly />
-                </Box>
-              </Box>
-            </Box>
+            <FirstItem />
           </Box>
 
           <Divider />
