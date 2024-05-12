@@ -3,7 +3,7 @@ import { Box } from '@mui/material'
 import { type ReactNode } from 'react'
 import { VscPinned } from 'react-icons/vsc'
 import { type BoqRowCellKey, selectBoqCellPin, useItem, useRow } from '@entities/quotation'
-import { className } from '@shared/consts/className'
+import { cls } from '@shared/consts/cls'
 
 type Props = {
   boqRowCellKey: BoqRowCellKey
@@ -23,7 +23,7 @@ export const Pin = ({
 
   return (
     <Box
-      className={className.pin}
+      className={cls.pin}
       component='button' // to make it focusable to understand if we click within same row on pins and not hide them at BoqRow onBlur callback // https://stackoverflow.com/a/42764495/7239778
       onClick={onClick}
       sx={{
@@ -36,7 +36,7 @@ export const Pin = ({
       }}
     >
       <VscPinned
-        className={className.pin + ' svg'}
+        className={cls.pin + ' svg'}
         style={{
           rotate: '35deg',
           fill: pin.isPinned ? 'black' : '#b8b8b8',

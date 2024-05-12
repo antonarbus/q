@@ -17,6 +17,7 @@ type Props = {
   minWidth?: ResizableProps['minWidth']
   leftItemActionButtons: ReactNode
   rightItemActionButtons: ReactNode
+  className?: string
 }
 
 export const ItemComp = ({
@@ -29,6 +30,7 @@ export const ItemComp = ({
   minWidth,
   leftItemActionButtons,
   rightItemActionButtons,
+  className,
 }: Props): JSX.Element => {
   const { itemIndex } = useItem()
   const item = getState().quotation.items[itemIndex]
@@ -48,6 +50,7 @@ export const ItemComp = ({
       onItemResizeStop={onItemResizeStop}
       leftItemActionButtons={leftItemActionButtons}
       rightItemActionButtons={rightItemActionButtons}
+      className={className}
     >
       <PasteItemTextOverlay >
         {children}

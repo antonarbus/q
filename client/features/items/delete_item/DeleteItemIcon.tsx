@@ -5,7 +5,7 @@ import { type MouseEvent } from 'react'
 import { GoTrash } from 'react-icons/go'
 import { copySlice } from '@entities/copy'
 import { isFroalaSignal, quotationSlice, selectIsLastItem, useItem } from '@entities/quotation'
-import { className } from '@shared/consts/className'
+import { cls } from '@shared/consts/cls'
 import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 import { fixElementDimensionStyle } from '@shared/utils/fixElementDimensionStyle'
@@ -38,9 +38,9 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
 
         const clickedIconElement = e.target
         if (!(clickedIconElement instanceof Element)) return
-        const itemElement = clickedIconElement.closest(`.${className.item}`)
+        const itemElement = clickedIconElement.closest(`.${cls.item}`)
         if (!(itemElement instanceof Element)) return
-        const paperElement = itemElement.querySelector(`.${className.paper}`)
+        const paperElement = itemElement.querySelector(`.${cls.paper}`)
         if (!(paperElement instanceof HTMLElement)) return
 
         // width of animated element is changed for unknown reason, can't explain the issue, so let's fix it for animation purpose

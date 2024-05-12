@@ -3,7 +3,7 @@ import { type ReactNode, type MouseEvent } from 'react'
 import { BsBookmarkPlus } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 import { getItemFromStore, itemKey, saveItemHeightByIndex, useItem } from '@entities/quotation'
-import { className } from '@shared/consts/className'
+import { cls } from '@shared/consts/cls'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
 import { cleanHtml } from '@shared/utils/itemsUtils'
@@ -30,9 +30,9 @@ export const SaveItemIcon = (): ReactNode => {
         const clickedIconElement = e.target
         if (!(clickedIconElement instanceof Element)) return
 
-        const itemElement = clickedIconElement.closest(`.${className.item}`)
+        const itemElement = clickedIconElement.closest(`.${cls.item}`)
         if (!(itemElement instanceof Element)) return
-        const paperElement = itemElement.querySelector(`.${className.paper}`)
+        const paperElement = itemElement.querySelector(`.${cls.paper}`)
         if (!(paperElement instanceof Element)) return
         const html = paperElement.innerHTML
         const cleanedHtml = cleanHtml(html)

@@ -1,5 +1,5 @@
 import { dispatch } from '@lib_instances/store'
-import { className } from '@shared/consts/className'
+import { cls } from '@shared/consts/cls'
 import { quotationSlice } from '../redux/quotationSlice'
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
 }
 
 export const saveItemHeightByIndex = ({ itemIndex }: Props): void => {
-  const items = document.querySelectorAll(`.${className.paper}`)
+  const items = document.querySelectorAll(`.${cls.paper}`)
   const item = items[itemIndex]
   if (!item) return
   const height = item.clientHeight

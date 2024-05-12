@@ -11,6 +11,7 @@ export const TextItemForEditModal = (): JSX.Element => {
 
   return (
     <ItemComp
+      className='text-item'
       onItemResizeStart={onTextItemResizeStart}
       onItemResizeStop={onTextItemResizeStop}
       leftItemActionButtons={null}

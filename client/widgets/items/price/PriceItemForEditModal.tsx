@@ -6,6 +6,7 @@ import { PriceMain } from './price_main/PriceMain'
 export const PriceItemForEditModal = (): JSX.Element => {
   return (
     <ItemComp
+      className='price-item'
       onItemResizeStop={onPriceItemResizeStop}
       leftItemActionButtons={null}
       rightItemActionButtons={null}

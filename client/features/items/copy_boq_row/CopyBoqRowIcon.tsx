@@ -3,7 +3,7 @@ import type { MouseEvent } from 'react'
 import { MdCopyAll } from 'react-icons/md'
 import { copySlice } from '@entities/copy'
 import { getBoqRowFromStore, isFroalaSignal, quotationSlice, useItem, useRow } from '@entities/quotation'
-import { className } from '@shared/consts/className'
+import { cls } from '@shared/consts/cls'
 import { cleanHtml } from '@shared/utils/itemsUtils'
 
 export const CopyBoqRowIcon = (): JSX.Element => {
@@ -24,7 +24,7 @@ export const CopyBoqRowIcon = (): JSX.Element => {
         const clickedIconElement = e.target
         if (!(clickedIconElement instanceof Element)) return
 
-        const boqRowElement = clickedIconElement.closest(`.${className.boqRow}`)
+        const boqRowElement = clickedIconElement.closest(`.${cls.boqRow}`)
         if (!boqRowElement) return
 
         isFroalaSignal.value = false

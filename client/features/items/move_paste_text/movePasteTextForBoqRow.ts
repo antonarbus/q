@@ -3,7 +3,7 @@ import isEqual from 'lodash.isequal'
 import { copySlice, getPastePlace } from '@entities/copy'
 import { boqRowKey, itemKey, quotationSlice } from '@entities/quotation'
 import { type ItemBoq } from '@entities/quotation'
-import { className } from '@shared/consts/className'
+import { cls } from '@shared/consts/cls'
 
 export const movePasteTextForBoqRow = (e: MouseEvent): void => {
   if (!(e.target instanceof Element)) {
@@ -12,7 +12,7 @@ export const movePasteTextForBoqRow = (e: MouseEvent): void => {
 
   const prevPlace = getState().copy.place
   const isPasteTextShown = getState().copy.isPasteTextShown
-  const boqRowsElement = e.target.closest(`.${className.boqRows}`)
+  const boqRowsElement = e.target.closest(`.${cls.boqRows}`)
 
   const isBoqPasteItem = (getState().quotation.items
     .filter(item => item.type === itemKey.boq) as ItemBoq[])
@@ -35,21 +35,21 @@ export const movePasteTextForBoqRow = (e: MouseEvent): void => {
   }
 
   const elementsUnderCursor = document.elementsFromPoint(e.x, e.y)
-  const isCursorOverActionsContainer = elementsUnderCursor.some(element => element.classList.contains(className.actionsContainer))
+  const isCursorOverActionsContainer = elementsUnderCursor.some(element => element.classList.contains(cls.actionsContainer))
 
   if (isCursorOverActionsContainer) {
     removePasteIfNeeded()
     return
   }
 
-  const isSearchElement = elementsUnderCursor.some(element => element.classList.contains(className.search))
+  const isSearchElement = elementsUnderCursor.some(element => element.classList.contains(cls.search))
 
   if (isSearchElement) {
     removePasteIfNeeded()
     return
   }
 
-  const isSearchAutocompleteElement = elementsUnderCursor.some(element => element.classList.contains(className.searchAutocomplete))
+  const isSearchAutocompleteElement = elementsUnderCursor.some(element => element.classList.contains(cls.searchAutocomplete))
 
   if (isSearchAutocompleteElement) {
     removePasteIfNeeded()
@@ -63,7 +63,7 @@ export const movePasteTextForBoqRow = (e: MouseEvent): void => {
     return
   }
 
-  const boqRowElement = e.target.closest(`.${className.boqRow}`)
+  const boqRowElement = e.target.closest(`.${cls.boqRow}`)
 
   if (!boqRowElement) {
     return

@@ -1,6 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { type BoqColumnKey, quotationSlice, getBoqColumnFromStore, unfixItemImagesHeight, fixItemImagesHeight } from '@entities/quotation'
-import { className } from '@shared/consts/className'
+import { cls } from '@shared/consts/cls'
 import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 
@@ -31,7 +31,7 @@ export const onColumnResizeStop = ({ headerColumnElement, itemIndex, boqColumnKe
   fixItemImagesHeight()
   const columnWidth = headerColumnElement.clientWidth
   dispatch(quotationSlice.actions.updateColWidthReducer({ itemIndex, width: columnWidth, boqColumnKey }))
-  const itemWidth = headerColumnElement.closest(`.${className.paper}`)?.clientWidth
+  const itemWidth = headerColumnElement.closest(`.${cls.paper}`)?.clientWidth
   dispatch(quotationSlice.actions.updateItemWidthReducer({ itemIndex, width: itemWidth ?? 0 }))
   dispatch(quotationSlice.actions.enableFroalaReducer({ itemIndex }))
   dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))

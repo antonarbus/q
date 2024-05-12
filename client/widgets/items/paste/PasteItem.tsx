@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 
 export const PasteItem = (): EmotionJSX.Element => (
   <motion.div
+    className='paste-item'
     initial={{
       height: 0,
       marginBottom: 0,

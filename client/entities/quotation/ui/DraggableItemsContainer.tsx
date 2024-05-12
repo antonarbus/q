@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import type { ComponentClass, ReactNode } from 'react'
 import type { SortableContainerProps } from 'react-sortable-hoc'
 import { SortableContainer } from 'react-sortable-hoc'
-import { className } from '@shared/consts/className'
+import { cls } from '@shared/consts/cls'
 
 // example with TypeScript
 // https://codesandbox.io/s/odfrontendeveloper-react-sortable-hoc-example-t96d8x?file=/src/examples/Items.tsx:518-635
@@ -15,7 +15,7 @@ type SortableBox = ComponentClass<SortableContainerProps & Props>
 export const DraggableItemsContainer: SortableBox =
   SortableContainer(({ children }: Props) => (
     <motion.div
-      className={className.items}
+      className={cls.items}
       initial={{
         opacity: 0,
       }}

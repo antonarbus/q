@@ -18,6 +18,7 @@ import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
 import { CategoryAutocomplete } from './CategoryAutocomplete'
 import { DescriptionTextarea } from './DescriptionTextarea'
+import { ItemLabel } from './ItemLabel'
 import { NameInput } from './NameInput'
 
 export const EditItemModal = (): JSX.Element => {
@@ -125,11 +126,9 @@ export const EditItemModal = (): JSX.Element => {
               padding: '10px',
             }}
           >
-
             <NameInput nameSignal={nameSignal}/>
             <CategoryAutocomplete categorySignal={categorySignal}/>
             <DescriptionTextarea descSignal={descSignal} />
-
             <Box
               sx={{
                 position: 'relative',
@@ -140,27 +139,7 @@ export const EditItemModal = (): JSX.Element => {
                 },
               }}
             >
-              <Box
-                sx={{
-                  position: 'absolute',
-                  zIndex: 1,
-                  left: 0,
-                  top: 0,
-                  transformOrigin: 'top left',
-                  translate: '7px -10px',
-                  scale: '0.75',
-                  color: 'rgba(0, 0, 0, 0.6)',
-                  fontWeight: 400,
-                  fontSize: '1rem',
-                  lineHeight: '1.4375em',
-                  letterSpacing: '0.00938em',
-                  userSelect: 'none',
-                  background: 'white',
-                  paddingInline: '8px',
-                }}
-              >
-                Item
-              </Box>
+              <ItemLabel />
               <Box
                 sx={{
                   overflow: 'auto',
@@ -168,22 +147,37 @@ export const EditItemModal = (): JSX.Element => {
                   padding: '10px',
                   '.items': {
                     maxWidth: 'none !important',
+                    padding: '10px !important',
+                    ':has(.price-item)': {
+                      display: 'block !important',
+                    },
+                    ':has(.text-item)': {
+                      display: 'block !important',
+                    },
                   },
                   '.item': {
                     marginBottom: '0px !important',
+                  },
+                  '.item.price-item': {
+                    display: 'block !important',
+                  },
+                  '.item.text-item': {
+                    display: 'block !important',
                   },
                   '.boq-table-container .boq-rows .actions-container': {
                     '.save-boq-row-icon, .open-info-boq-row-modal-icon': {
                       display: 'none !important',
                     },
                   },
-                  '.td.number ': {
-                    // display: 'none !important',
-                  },
-
                 }}
               >
-                <FirstItemOnly />
+                <Box
+                  sx={{
+                    width: '2000px',
+                  }}
+                >
+                  <FirstItemOnly />
+                </Box>
               </Box>
             </Box>
           </Box>

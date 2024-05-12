@@ -1,4 +1,4 @@
-export const className = {
+export const cls = {
   items: 'items',
   item: 'item',
   paper: 'paper',

@@ -2,7 +2,7 @@ import { dispatch, getState } from '@lib_instances/store'
 import isEqual from 'lodash.isequal'
 import { type CopyPlace, copySlice, getPastePlace } from '@entities/copy'
 import { itemKey, quotationSlice } from '@entities/quotation'
-import { className } from '@shared/consts/className'
+import { cls } from '@shared/consts/cls'
 import { route } from '@shared/consts/route'
 
 export const movePasteTextForItem = (e: MouseEvent): void => {
@@ -34,21 +34,21 @@ export const movePasteTextForItem = (e: MouseEvent): void => {
   }
 
   const elementsUnderCursor = document.elementsFromPoint(e.x, e.y)
-  const isCursorOverActionsContainer = elementsUnderCursor.some(element => element.classList.contains(className.actionsContainer))
+  const isCursorOverActionsContainer = elementsUnderCursor.some(element => element.classList.contains(cls.actionsContainer))
 
   if (isCursorOverActionsContainer) {
     removePasteIfNeeded()
     return
   }
 
-  const isSearchElement = elementsUnderCursor.some(element => element.classList.contains(className.search))
+  const isSearchElement = elementsUnderCursor.some(element => element.classList.contains(cls.search))
 
   if (isSearchElement) {
     removePasteIfNeeded()
     return
   }
 
-  const isSearchAutocompleteElement = elementsUnderCursor.some(element => element.classList.contains(className.searchAutocomplete))
+  const isSearchAutocompleteElement = elementsUnderCursor.some(element => element.classList.contains(cls.searchAutocomplete))
 
   if (isSearchAutocompleteElement) {
     removePasteIfNeeded()
@@ -81,7 +81,7 @@ export const movePasteTextForItem = (e: MouseEvent): void => {
     return
   }
 
-  const item = (e.target).closest(`.${className.item}`)
+  const item = (e.target).closest(`.${cls.item}`)
 
   if (!item) {
     return

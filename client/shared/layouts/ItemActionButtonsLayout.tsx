@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import type { ReactNode } from 'react'
-import { className } from '../consts/className'
+import { cls } from '../consts/cls'
 
 type Props = {
   children?: ReactNode
@@ -8,7 +8,7 @@ type Props = {
 
 export const ItemActionButtonsLayout = ({ children }: Props): JSX.Element => (
   <Box
-    className={className.actionsContainer}
+    className={cls.actionsContainer}
     style={{
       display: 'flex',
       flexDirection: 'column',

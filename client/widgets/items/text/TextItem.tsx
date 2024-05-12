@@ -18,6 +18,7 @@ export const TextItem = (): JSX.Element => {
 
   return (
     <ItemComp
+      className='text-item'
       onItemResizeStart={onTextItemResizeStart}
       onItemResizeStop={onTextItemResizeStop}
       leftItemActionButtons={(

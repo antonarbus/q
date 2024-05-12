@@ -1,16 +1,16 @@
 import { getState } from '@lib_instances/store'
 import { domToJpeg } from 'modern-screenshot'
-import { className } from '@shared/consts/className'
+import { cls } from '@shared/consts/cls'
 import { navItemId } from '@shared/consts/navItemId'
 import { showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@shared/nav'
 
 export const downloadPdf = async (): Promise<void> => {
   showLoadingNavIcon({ navMenuItemIdKey: navItemId.pdf })
 
-  const itemsElement = document.querySelector(`.${className.items}`)
+  const itemsElement = document.querySelector(`.${cls.items}`)
   if (!(itemsElement instanceof HTMLElement)) return
 
-  const paperElements = document.querySelectorAll(`.${className.paper}`)
+  const paperElements = document.querySelectorAll(`.${cls.paper}`)
   if (paperElements === null) return
 
   const maxPaperWidth = Array.from(paperElements).reduce((maxWidth, paperElement) => {
@@ -27,7 +27,7 @@ export const downloadPdf = async (): Promise<void> => {
     scale: 1.5,
     onCloneNode: (node) => {
       if (!(node instanceof HTMLElement)) return
-      const actionElements = node.querySelectorAll(`.${className.actionsContainer}`)
+      const actionElements = node.querySelectorAll(`.${cls.actionsContainer}`)
       actionElements.forEach((element) => { element.remove() })
     },
   })

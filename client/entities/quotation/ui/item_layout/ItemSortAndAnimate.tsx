@@ -5,7 +5,7 @@ import { type ResizableProps } from 're-resizable'
 import type { ComponentClass, ReactNode } from 'react'
 import type { SortableElementProps } from 'react-sortable-hoc'
 import { SortableElement } from 'react-sortable-hoc'
-import { className } from '@shared/consts/className'
+import { cls } from '@shared/consts/cls'
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types/resizablePaper'
 import { ResizablePaper } from './ResizablePaper'
 
@@ -21,6 +21,7 @@ type Props = {
   onItemResizeStart?: OnItemResizeStart
   onItemResize?: OnItemResize
   onItemResizeStop?: OnItemResizeStop
+  className?: string
 }
 
 type SortableItem = ComponentClass<SortableElementProps & Props>
@@ -37,11 +38,12 @@ export const ItemSortAndAnimate: SortableItem = SortableElement(({
   onItemResizeStart,
   onItemResize,
   onItemResizeStop,
+  className,
 }: Props) => {
   return (
     <motion.div
       id={itemId}
-      className={className.item}
+      className={cls.item + (className ? ` ${className}` : '')}
       initial={{
         height: 0,
         marginBottom: 0,
