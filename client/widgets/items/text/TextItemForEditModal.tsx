@@ -3,6 +3,7 @@ import { onTextItemResizeStart, onTextItemResizeStop } from '@features/items/res
 import { updateTextItem } from '@features/items/update_cell'
 import { beforeUpload } from '@features/items/upload'
 import { Froala, ItemComp, getItemTextHtmlFromStore, textItemCellStyle, useItem } from '@entities/quotation'
+import { cls } from '@shared/consts/cls'
 import { type FroalaEditor } from '@shared/types/froala'
 
 export const TextItemForEditModal = (): JSX.Element => {
@@ -11,7 +12,7 @@ export const TextItemForEditModal = (): JSX.Element => {
 
   return (
     <ItemComp
-      className='text-item'
+      className={cls.textItem}
       onItemResizeStart={onTextItemResizeStart}
       onItemResizeStop={onTextItemResizeStop}
       leftItemActionButtons={null}

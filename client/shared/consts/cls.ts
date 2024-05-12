@@ -1,6 +1,8 @@
 export const cls = {
   items: 'items',
   item: 'item',
+  priceItem: 'price-item',
+  textItem: 'text-item',
   paper: 'paper',
   itemActions: 'item-actions',
   boqRowActions: 'item-actions',
