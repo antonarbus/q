@@ -1,7 +1,7 @@
 import { dispatch } from '@lib_instances/store'
 import { type FocusEvent } from 'react'
 import { boqRowCellKey, getBoqRowFromStore, quotationSlice } from '@entities/quotation'
-import { className } from '@shared/consts/className'
+import { cls } from '@shared/consts/cls'
 
 type Props = {
   e: FocusEvent<HTMLDivElement, Element>
@@ -15,7 +15,7 @@ export const hideBoqRowPinsOnRowBlur = ({
   rowIndex,
 }: Props): void => {
   const elementReceivedFocus = e.relatedTarget
-  const pinClicked = elementReceivedFocus?.classList.contains(className.pin)
+  const pinClicked = elementReceivedFocus?.classList.contains(cls.pin)
 
   if (pinClicked) return
 

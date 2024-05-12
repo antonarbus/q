@@ -1,9 +1,9 @@
 import { dispatch } from '@lib_instances/store'
-import { className } from '@shared/consts/className'
+import { cls } from '@shared/consts/cls'
 import { quotationSlice } from '../redux/quotationSlice'
 
 export const unfixItemImagesHeight = (): void => {
-  const itemImages = document.querySelectorAll(`.${className.item} img`)
+  const itemImages = document.querySelectorAll(`.${cls.item} img`)
   if (itemImages === undefined) return
   itemImages.forEach(imageElement => {
     if (!(imageElement instanceof HTMLElement)) return
@@ -14,7 +14,7 @@ export const unfixItemImagesHeight = (): void => {
 }
 
 export const fixItemImagesHeight = (): void => {
-  const itemImages = document.querySelectorAll(`.${className.item} img`)
+  const itemImages = document.querySelectorAll(`.${cls.item} img`)
   if (itemImages === undefined) return
   itemImages.forEach(imageElement => {
     if (!(imageElement instanceof HTMLElement)) return

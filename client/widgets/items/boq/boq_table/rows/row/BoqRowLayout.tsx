@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import type { FocusEvent, ReactNode } from 'react'
 import { useRow } from '@entities/quotation'
-import { className } from '@shared/consts/className'
+import { cls } from '@shared/consts/cls'
 import { PasteHere } from './paste_here_row'
 
 type Props = {
@@ -15,7 +15,7 @@ export const BoqRowLayout = ({ children, onBlur }: Props): JSX.Element => {
   return (
     <Box
       id={rowId}
-      className={className.boqRow}
+      className={cls.boqRow}
       onBlur={(e) => {
         onBlur(e)
       }}

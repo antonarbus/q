@@ -1,7 +1,7 @@
 import { dispatch } from '@lib_instances/store'
 import { type MutableRefObject } from 'react'
 import { quotationSlice } from '@entities/quotation'
-import { className } from '@shared/consts/className'
+import { cls } from '@shared/consts/cls'
 
 type Props = {
   e: MouseEvent
@@ -26,7 +26,7 @@ export const showHideBoqPricePins = ({
 
     const clickedElement = e.target
     if (clickedElement instanceof Element) {
-      const isPin = Boolean(clickedElement.closest(`.${className.pin}`))
+      const isPin = Boolean(clickedElement.closest(`.${cls.pin}`))
 
       if (isPin) return
 

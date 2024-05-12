@@ -1,7 +1,7 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { Resizable, type ResizableProps } from 're-resizable'
 import type { ReactNode } from 'react'
-import { className } from '@shared/consts/className'
+import { cls } from '@shared/consts/cls'
 import type { OnItemResize, OnItemResizeStart, OnItemResizeStop } from '@shared/types/resizablePaper'
 import { useItem } from '../../providers/ItemProvider'
 
@@ -31,7 +31,7 @@ export const ResizablePaper = ({
 
   return (
     <Resizable
-      className={className.paper}
+      className={cls.paper}
       size={{
         width: isAutoWidth ? 'auto' : width,
         height: 'auto',

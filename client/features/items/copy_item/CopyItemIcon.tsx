@@ -3,7 +3,7 @@ import type { MouseEvent } from 'react'
 import { MdCopyAll } from 'react-icons/md'
 import { copySlice } from '@entities/copy'
 import { isFroalaSignal, itemKey, saveItemHeightByIndex, useItem } from '@entities/quotation'
-import { className } from '@shared/consts/className'
+import { cls } from '@shared/consts/cls'
 import { cleanHtml } from '@shared/utils/itemsUtils'
 
 export const CopyItemIcon = (): JSX.Element => {
@@ -32,9 +32,9 @@ export const CopyItemIcon = (): JSX.Element => {
 
         const clickedIconElement = e.target
         if (!(clickedIconElement instanceof Element)) return
-        const itemElement = clickedIconElement.closest(`.${className.item}`)
+        const itemElement = clickedIconElement.closest(`.${cls.item}`)
         if (!(itemElement instanceof Element)) return
-        const paperElement = itemElement.querySelector(`.${className.paper}`)
+        const paperElement = itemElement.querySelector(`.${cls.paper}`)
         if (!(paperElement instanceof Element)) return
 
         const html = paperElement.innerHTML

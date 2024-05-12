@@ -3,7 +3,7 @@ import { theme } from '@lib_instances/theme'
 import { useEffectOnce, useUnmount } from 'react-use'
 import { copySlice } from '@entities/copy'
 import { isFroalaSignal, quotationSlice } from '@entities/quotation'
-import { className } from '@shared/consts/className'
+import { cls } from '@shared/consts/cls'
 import { navItemId } from '@shared/consts/navItemId'
 import { nanoid } from '@shared/lib/nanoid'
 import { navSlice } from '@shared/nav'
@@ -38,7 +38,7 @@ function pasteItemOnClick(): void {
   if (pastePos === 'middle') {
     const elementToBeReplaced = document.getElementById(itemId)
     if (elementToBeReplaced) {
-      const paperElement = elementToBeReplaced.querySelector(`.${className.paper}`)
+      const paperElement = elementToBeReplaced.querySelector(`.${cls.paper}`)
       if (paperElement instanceof HTMLElement) {
         // width of animated element is changed for unknown reason, can't explain the issue, so let's fix it for animation purpose
         fixElementDimensionStyle({ element: paperElement })

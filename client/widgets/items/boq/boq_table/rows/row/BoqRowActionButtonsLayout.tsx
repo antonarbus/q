@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { className } from '@shared/consts/className'
+import { cls } from '@shared/consts/cls'
 
 type Props = {
   children: React.ReactNode
@@ -9,7 +9,7 @@ type Props = {
 export const BoqRowActionButtonsLayout = (props: Props): JSX.Element => {
   return (
     <Box
-      className={className.actionsContainer}
+      className={cls.actionsContainer}
       style={{
         position: 'absolute',
         bottom: 0,

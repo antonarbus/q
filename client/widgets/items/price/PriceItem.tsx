@@ -13,6 +13,7 @@ import { PriceMain } from './price_main/PriceMain'
 export const TotalPriceItem = (): JSX.Element => {
   return (
     <ItemComp
+      className='price-item'
       onItemResizeStop={onPriceItemResizeStop}
       leftItemActionButtons={(
         <ItemActionButtonsLayout>

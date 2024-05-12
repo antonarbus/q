@@ -6742,6 +6742,7 @@ span.fr-img-caption.fr-view.fr-dii.fr-fir {
 }
 .fr-popup.fr-desktop.fr-inline.fr-active {
   translate: -120px 0px;
+  z-index: 10001 !important;
 }
 
 .fr-element.fr-view * {

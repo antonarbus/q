@@ -13,6 +13,7 @@ import { BoqTable } from './boq_table'
 export const BoqItem = (): JSX.Element => {
   return (
     <ItemComp
+      className='boq-item'
       autoWidth={true}
       minWidth='560px'
       onItemResizeStart={onBoqItemResizeStart}
