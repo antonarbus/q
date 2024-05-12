@@ -47,7 +47,7 @@ export const CardCustom = ({ children, cssProps, reference, title, logo }: Props
     {Boolean(title) && (
       <Typography
         component='h1'
-        variant='h5'
+        variant='h6'
         sx={{ alignSelf: 'center', marginBottom: '30px' }}
       >
         {title}
