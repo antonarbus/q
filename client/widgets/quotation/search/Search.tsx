@@ -50,8 +50,8 @@ export const Search = (): JSX.Element => {
       className={cls.search}
       freeSolo
       disablePortal
-      clearOnBlur
       // open // manual open control
+      clearOnBlur
       clearOnEscape
       loading={isPendingItems}
       options={options}
@@ -114,6 +114,7 @@ export const Search = (): JSX.Element => {
               padding: '5px !important',
               margin: '2px 4px',
               fontSize: '14px',
+              border: '1px solid #ccc',
               '&:hover': {
                 background: '#dfdfdf !important',
               },
@@ -193,9 +194,8 @@ export const Search = (): JSX.Element => {
               translate: '0px 10px',
               borderRadius: '8px',
               padding: '30px 8px 8px 8px',
-              // height: '600px',
               '.MuiAutocomplete-listbox': {
-                maxHeight: '310px',
+                maxHeight: '323px',
               },
             }}
             {...props}

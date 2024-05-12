@@ -13,6 +13,7 @@ import { type Item } from '@entities/quotation'
 import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 import { CardCustom } from '@shared/components/CardCustom'
+import { cls } from '@shared/consts/cls'
 import { nanoid } from '@shared/lib/nanoid'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
@@ -145,23 +146,23 @@ export const EditItemModal = (): JSX.Element => {
                   overflow: 'auto',
                   margin: '10px',
                   padding: '10px',
-                  '.items': {
+                  [`.${cls.items}`]: {
                     maxWidth: 'none !important',
                     padding: '10px !important',
-                    ':has(.price-item)': {
+                    [`:has(.${cls.priceItem})`]: {
                       display: 'block !important',
                     },
-                    ':has(.text-item)': {
+                    [`:has(.${cls.textItem})`]: {
                       display: 'block !important',
                     },
                   },
-                  '.item': {
+                  [`.${cls.item}`]: {
                     marginBottom: '0px !important',
                   },
-                  '.item.price-item': {
+                  [`.${cls.item}.${cls.priceItem}`]: {
                     display: 'block !important',
                   },
-                  '.item.text-item': {
+                  [`.${cls.item}.${cls.textItem}`]: {
                     display: 'block !important',
                   },
                   '.boq-table-container .boq-rows .actions-container': {
