@@ -1,10 +1,11 @@
 import { useSelectorTyped } from '@lib_instances/store'
-import { Box } from '@mui/material'
+import { Box, FormControl, FormGroup, FormLabel, TextField } from '@mui/material'
 import { AnimatePresence } from 'framer-motion'
 import { type ReactNode } from 'react'
 import { onItemDrag } from '@features/items/drag_item'
 import { hideBoqRowPinsOnRowBlur } from '@features/items/pin'
 import { ItemProvider, itemsShapeEqualityFn, BoqItemProvider, itemKey, DraggableItemsContainer, RowProvider } from '@entities/quotation'
+import { OutlinedDivWithLabel } from '@shared/components'
 import { cls } from '@shared/consts/cls'
 import { BoqRowForEditModal } from './boq/boq_table/rows/row/BoqRowForEditModal'
 import { BoqRowSortAndAnimate } from './boq/boq_table/rows/row/BoqRowSortAndAnimate'
@@ -93,38 +94,7 @@ export const FirstItem = (): ReactNode => {
 
 function FirstItemLayout({ children }: { children: React.ReactNode }): JSX.Element {
   return (
-    <Box
-      sx={{
-        position: 'relative',
-        borderRadius: '4px',
-        border: '1px solid #ccc',
-        background: 'white',
-        ':hover': {
-          border: '1px solid #333',
-        },
-      }}
-    >
-      <Box
-        sx={{
-          position: 'absolute',
-          zIndex: 1,
-          left: 0,
-          top: 0,
-          transformOrigin: 'top left',
-          translate: '7px -10px',
-          scale: '0.75',
-          color: 'rgba(0, 0, 0, 0.6)',
-          fontWeight: 400,
-          fontSize: '1rem',
-          lineHeight: '1.4375em',
-          letterSpacing: '0.00938em',
-          userSelect: 'none',
-          background: 'white',
-          paddingInline: '8px',
-        }}
-      >
-        Item
-      </Box>
+    <OutlinedDivWithLabel label='Item'>
       <Box
         sx={{
           overflow: 'auto',
@@ -164,6 +134,6 @@ function FirstItemLayout({ children }: { children: React.ReactNode }): JSX.Eleme
           {children}
         </Box>
       </Box>
-    </Box>
+    </OutlinedDivWithLabel>
   )
 }

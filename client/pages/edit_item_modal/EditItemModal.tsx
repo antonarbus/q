@@ -122,6 +122,7 @@ export const EditItemModal = (): JSX.Element => {
         <Box
           className='card-content'
           component='form'
+          id='edit-item-form'
           sx={{
             display: 'flex',
             flexDirection: 'column',
@@ -132,6 +133,10 @@ export const EditItemModal = (): JSX.Element => {
           }}
           onSubmit={(e: FormEvent): void => {
             e.preventDefault()
+
+            alert(666)
+
+            return
 
             const email = getState().user.email
 
@@ -174,6 +179,7 @@ export const EditItemModal = (): JSX.Element => {
             isPending={isPending}
             isSuccess={isSuccess}
             isError={isError}
+            form='edit-item-form'
             sx={{
               width: '200px',
             }}
