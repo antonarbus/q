@@ -6,42 +6,46 @@ import { PiSmileySadBold } from 'react-icons/pi'
 import { RotatingLoaderIcon } from './RotatingLoaderIcon'
 
 type Props = ButtonProps & {
-  isLoading?: boolean
-  isPending?: boolean
-  isSuccess?: boolean
-  isError?: boolean
+  isButtonDisabled?: boolean
+  isButtonLoading?: boolean
+  isButtonPending?: boolean
+  isButtonSuccess?: boolean
+  isButtonError?: boolean
 }
 
 export const ButtonCustom = ({
-  isLoading,
-  isPending,
-  isSuccess,
-  isError,
+  isButtonDisabled,
+  isButtonLoading,
+  isButtonPending,
+  isButtonSuccess,
+  isButtonError,
   ...restProps
 }: Props): JSX.Element => {
   const showSuccessIcon = useSignal(false)
   const showErrorIcon = useSignal(false)
 
   useEffect(() => {
-    if (isError) {
+    if (isButtonError) {
       showErrorIcon.value = true
       setTimeout(() => {
         showErrorIcon.value = false
       }, 2500)
     }
 
-    if (isSuccess) {
+    if (isButtonSuccess) {
       showSuccessIcon.value = true
       setTimeout(() => {
         showSuccessIcon.value = false
       }, 2500)
     }
-  }, [isError, isSuccess])
+  }, [isButtonError, isButtonSuccess])
 
   return (
     <Button
+      className='button'
       variant='contained'
       type='submit'
+      disabled={isButtonDisabled}
       {...restProps}
       sx={{
         alignSelf: 'center',
@@ -56,7 +60,7 @@ export const ButtonCustom = ({
       {(!showSuccessIcon.value && !showErrorIcon.value) &&
         restProps.children
       }
-      {(isLoading === true || isPending === true) && (
+      {(isButtonLoading === true) && (
         <RotatingLoaderIcon style={{ height: '25px', width: '25px', position: 'absolute', color: 'white' }} />
       )}
       {showSuccessIcon.value && (

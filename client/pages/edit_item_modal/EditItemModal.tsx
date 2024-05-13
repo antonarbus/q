@@ -106,9 +106,10 @@ export const EditItemModal = (): JSX.Element => {
             gap: '5px',
             justifyContent: 'center',
             alignItems: 'center',
-            padding: '20px 20px 10px 20px',
+            padding: '15px 20px 5px 20px',
             borderBottom: '1px solid rgb(223, 223, 223)',
             backgroundColor: '#80808017',
+
           }}
         >
           <Avatar sx={{ bgcolor: theme.colors.darkBackground }}>
@@ -122,7 +123,7 @@ export const EditItemModal = (): JSX.Element => {
         <Box
           className='card-content'
           component='form'
-          id='edit-item-form'
+          id='form'
           sx={{
             display: 'flex',
             flexDirection: 'column',
@@ -167,7 +168,7 @@ export const EditItemModal = (): JSX.Element => {
           className='card-footer'
           sx={{
             display: 'flex',
-            padding: '20px',
+            padding: '15px',
             justifyContent: 'center',
             alignItems: 'center',
             borderTop: '1px solid rgb(223, 223, 223)',
@@ -176,10 +177,10 @@ export const EditItemModal = (): JSX.Element => {
         >
           <ButtonCustom
             disabled={isDisabled}
-            isPending={isPending}
-            isSuccess={isSuccess}
-            isError={isError}
-            form='edit-item-form'
+            isButtonPending={isPending}
+            isButtonSuccess={isSuccess}
+            isButtonError={isError}
+            form='form'
             sx={{
               width: '200px',
             }}

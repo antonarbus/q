@@ -88,9 +88,9 @@ export const RequestPasswordResetModal = (): JSX.Element => {
           />
           <ButtonCustom
             disabled={!isEmailOkSignal.value}
-            isPending={isPending}
-            isSuccess={isSuccess}
-            isError={isError}
+            isButtonPending={isPending}
+            isButtonSuccess={isSuccess}
+            isButtonError={isError}
           >
             RESET
           </ButtonCustom>
