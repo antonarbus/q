@@ -1,5 +1,5 @@
 import { useSelectorTyped } from '@lib_instances/store'
-import { Box, FormControl, FormGroup, FormLabel, TextField } from '@mui/material'
+import { Box } from '@mui/material'
 import { AnimatePresence } from 'framer-motion'
 import { type ReactNode } from 'react'
 import { onItemDrag } from '@features/items/drag_item'
