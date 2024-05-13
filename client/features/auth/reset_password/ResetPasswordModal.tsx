@@ -124,9 +124,9 @@ export const ResetPasswordModal = (): ReactNode => {
           />
           <ButtonCustom
             disabled={isButtonDisabledSignal.value}
-            isPending={isPending}
-            isSuccess={isSuccess}
-            isError={isError}
+            isButtonPending={isPending}
+            isButtonSuccess={isSuccess}
+            isButtonError={isError}
           >
             Reset
           </ButtonCustom>

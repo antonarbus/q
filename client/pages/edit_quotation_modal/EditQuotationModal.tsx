@@ -109,9 +109,9 @@ export const EditQuotationModal = (): JSX.Element => {
           <DescriptionTextarea descSignal={descSignal}/>
           <ButtonCustom
             disabled={isDisabled}
-            isPending={isPending}
-            isSuccess={isSuccess}
-            isError={isError}
+            isButtonPending={isPending}
+            isButtonSuccess={isSuccess}
+            isButtonError={isError}
           >
             UPDATE
           </ButtonCustom>

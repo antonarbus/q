@@ -97,9 +97,9 @@ export const RegisterModal = (): JSX.Element => {
           />
           <ButtonCustom
             disabled={isButtonDisabledSignal.value}
-            isPending={isPending}
-            isSuccess={isSuccess}
-            isError={isError}
+            isButtonPending={isPending}
+            isButtonSuccess={isSuccess}
+            isButtonError={isError}
           >
             REGISTER
           </ButtonCustom>

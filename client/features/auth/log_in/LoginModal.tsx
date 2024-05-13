@@ -134,9 +134,9 @@ export const LoginModal = (): JSX.Element => {
           />
           <ButtonCustom
             disabled={!isEmailOkSignal.value || passwordSignal.value === '' || isPending}
-            isPending={isPending}
-            isSuccess={isSuccess}
-            isError={isError}
+            isButtonPending={isPending}
+            isButtonSuccess={isSuccess}
+            isButtonError={isError}
           >
             LOG IN
           </ButtonCustom>

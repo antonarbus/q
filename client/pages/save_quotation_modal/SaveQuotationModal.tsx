@@ -124,9 +124,9 @@ export const SaveQuotationModal = (): JSX.Element => {
           <DescriptionTextarea descSignal={descSignal}/>
           <ButtonCustom
             disabled={isDisabled}
-            isPending={isPending}
-            isSuccess={isSuccess}
-            isError={isError}
+            isButtonPending={isPending}
+            isButtonSuccess={isSuccess}
+            isButtonError={isError}
           >
             {id === 'new' ? 'SAVE' : 'UPDATE'}
           </ButtonCustom>
