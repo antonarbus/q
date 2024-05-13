@@ -32,8 +32,6 @@ export const SaveItemModal = (): JSX.Element => {
 
   const isDisabled = nameSignal.value === '' || categorySignal.value === ''
 
-  // todo: if item already exists return a msg from the back and show the confirmation to update
-
   useUpdateEffect(() => {
     if (isSuccess) {
       if (data.message === 'saved') {
