@@ -1,3 +1,4 @@
+import { clear } from 'console'
 import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
 import { Avatar } from '@mui/material'
@@ -60,7 +61,7 @@ export const SaveQuotationModal = (): JSX.Element => {
         slideElement({
           element: cardRef.current,
           onSlideElementComplete: () => {
-            navigate(`/${id}`, { replace: true, state: nanoid() })
+            navigate(`/${data.quotation?.id ?? 'no id set'}`, { replace: true, state: nanoid() })
           },
         })
       }, 1000)
