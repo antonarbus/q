@@ -91,7 +91,6 @@ export const EditItemModal = (): JSX.Element => {
     }
 
     if (item.type === itemKey.row) {
-      console.log(666)
       const boqRowElement = document.querySelector(`.${cls.boqRow}`)
       if (!boqRowElement) return
 

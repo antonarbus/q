@@ -1,8 +1,8 @@
 import { theme } from '@lib_instances/theme'
 import { Close } from '@mui/icons-material'
 import { Avatar, Box, type SxProps, Typography, IconButton } from '@mui/material'
-import { BackdropWithSlidableModal } from '@shared/components/BackdropWithSlidableModal'
-import { ButtonCustom } from '@shared/components/ButtonCustom'
+import { BackdropWithSlidableModal } from './BackdropWithSlidableModal'
+import { ButtonCustom } from './ButtonCustom'
 
 type Props = {
   onSlideModalInComplete?: () => void

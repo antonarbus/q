@@ -1,4 +1,3 @@
-import { clear } from 'console'
 import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
 import { Avatar } from '@mui/material'
