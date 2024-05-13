@@ -4,7 +4,7 @@ import './froalaPkgd.js'
 import './froalaPkgd.css'
 
 import type { MouseEvent } from 'react'
-import { useEffect } from 'react'
+import { useEffectOnce } from 'react-use'
 import { nanoid } from '@shared/lib/nanoid'
 import { type FroalaEditorRef } from '@shared/types/froala.js'
 import { notify } from '@shared/ui/top_msg/notify.js'
@@ -25,7 +25,7 @@ document.addEventListener('drop', (e) => { e.preventDefault() })
 export const useStartFroala = (): void => {
   const { htmlGetter, froalaElementRef, editorRef, placeholder, onContentChange, onFocus, onClick, onBlur, onKeydown, onInitialized, beforeUpload } = useFroala()
 
-  useEffect(() => {
+  useEffectOnce(() => {
     const initFroalaInstance = (): void => {
       const froalaInstance = new FroalaEditor(
         froalaElementRef.current,
