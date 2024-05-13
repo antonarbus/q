@@ -10,7 +10,7 @@ import { useUpdateEffect } from 'react-use'
 import { useResetPasswordMutation, userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 import { ConfirmPasswordInput, EmailInput, PasswordInput } from '@shared/components'
-import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
+import { BackdropWithSlidableModal } from '@shared/components/BackdropWithSlidableModal'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 import { CardCustom } from '@shared/components/CardCustom'
 import { navItemId } from '@shared/consts/navItemId'
@@ -81,12 +81,12 @@ export const ResetPasswordModal = (): ReactNode => {
   if (resetPasswordKey === undefined) return null
 
   return (
-    <BackdropWithSlidableContent
+    <BackdropWithSlidableModal
       shouldSlideIn={false}
-      onSlideIn={(): void => {
+      onSlideModalInComplete={(): void => {
         /* inputRef.current.focus() */
       }}
-      onSlideOut={(): void => {
+      onSlideModalOutComplete={(): void => {
         navigate('..')
       }}
     >
@@ -144,7 +144,7 @@ export const ResetPasswordModal = (): ReactNode => {
                 e.preventDefault()
                 slideElement({
                   element: cardRef.current,
-                  onSlide: () => {
+                  onSlideElementComplete: () => {
                     navigate(`../${route.register}`)
                   },
                 })
@@ -160,7 +160,7 @@ export const ResetPasswordModal = (): ReactNode => {
 
                 slideElement({
                   element: cardRef.current,
-                  onSlide: () => {
+                  onSlideElementComplete: () => {
                     navigate(`../${route.login}`)
                   },
                 })
@@ -171,6 +171,6 @@ export const ResetPasswordModal = (): ReactNode => {
           </Box>
         </form>
       </CardCustom>
-    </BackdropWithSlidableContent>
+    </BackdropWithSlidableModal>
   )
 }

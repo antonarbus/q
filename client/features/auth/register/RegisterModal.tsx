@@ -8,7 +8,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useRegisterMutation } from '@entities/user'
 import { ConfirmPasswordInput, EmailInput, PasswordInput } from '@shared/components'
-import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
+import { BackdropWithSlidableModal } from '@shared/components/BackdropWithSlidableModal'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 import { CardCustom } from '@shared/components/CardCustom'
 import { route } from '@shared/consts/route'
@@ -57,11 +57,11 @@ export const RegisterModal = (): JSX.Element => {
   }, [isError])
 
   return (
-    <BackdropWithSlidableContent
-      onSlideIn={(): void => {
+    <BackdropWithSlidableModal
+      onSlideModalInComplete={(): void => {
         /* inputRef.current.focus() */
       }}
-      onSlideOut={(): void => {
+      onSlideModalOutComplete={(): void => {
         navigate('..')
       }}
     >
@@ -114,7 +114,7 @@ export const RegisterModal = (): JSX.Element => {
 
                 slideElement({
                   element: cardRef.current,
-                  onSlide: () => {
+                  onSlideElementComplete: () => {
                     navigate(`../${route.login}`)
                   },
                 })
@@ -125,6 +125,6 @@ export const RegisterModal = (): JSX.Element => {
           </Box>
         </form>
       </CardCustom>
-    </BackdropWithSlidableContent>
+    </BackdropWithSlidableModal>
   )
 }

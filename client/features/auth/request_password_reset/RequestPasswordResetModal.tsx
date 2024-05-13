@@ -8,7 +8,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useRequestPasswordResetMutation } from '@entities/user'
 import { EmailInput } from '@shared/components'
-import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
+import { BackdropWithSlidableModal } from '@shared/components/BackdropWithSlidableModal'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 import { CardCustom } from '@shared/components/CardCustom'
 import { route } from '@shared/consts/route'
@@ -33,7 +33,7 @@ export const RequestPasswordResetModal = (): JSX.Element => {
       setTimeout(() => {
         slideElement({
           element: cardRef.current,
-          onSlide: () => {
+          onSlideElementComplete: () => {
             navigate('..')
           },
         })
@@ -58,11 +58,11 @@ export const RequestPasswordResetModal = (): JSX.Element => {
   }, [isError])
 
   return (
-    <BackdropWithSlidableContent
-      onSlideIn={(): void => {
+    <BackdropWithSlidableModal
+      onSlideModalInComplete={(): void => {
         /* inputRef.current.focus() */
       }}
-      onSlideOut={(): void => {
+      onSlideModalOutComplete={(): void => {
         navigate('..')
       }}
     >
@@ -105,7 +105,7 @@ export const RequestPasswordResetModal = (): JSX.Element => {
 
                 slideElement({
                   element: cardRef.current,
-                  onSlide: () => {
+                  onSlideElementComplete: () => {
                     navigate(`../${route.login}`)
                   },
                 })
@@ -116,6 +116,6 @@ export const RequestPasswordResetModal = (): JSX.Element => {
           </Box>
         </form>
       </CardCustom>
-    </BackdropWithSlidableContent>
+    </BackdropWithSlidableModal>
   )
 }

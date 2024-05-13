@@ -1,14 +1,25 @@
 import { TextField } from '@mui/material'
+import { forwardRef } from 'react'
 
-const InputComponent = ({ ...props }): JSX.Element => (
-  <div
-    {...props}
-    css={{
-      overflow: 'hidden',
-      backgroundColor: 'white',
-    }}
-  />
-)
+type InputComponentProps = {
+  ownerState: unknown
+  [key: string]: unknown
+}
+
+const InputComponent = forwardRef((props: InputComponentProps, ref: React.ForwardedRef<HTMLDivElement>): JSX.Element => {
+  const { ownerState, ...other } = props
+
+  return (
+    <div
+      {...other}
+      ref={ref}
+      css={{
+        overflow: 'hidden',
+        backgroundColor: 'white',
+      }}
+    />
+  )
+})
 
 export const OutlinedDivWithLabel = ({ children, label }: { children: React.ReactNode, label: string }): JSX.Element => {
   return (

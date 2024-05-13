@@ -2,13 +2,13 @@ import { gsap } from 'gsap'
 
 type Props = {
   element: HTMLElement | null
-  onSlide?: () => void
+  onSlideElementComplete?: () => void
   intoView?: boolean
 }
 
 let isAnimationPrevented = false // needed to avoid second click on backdrop which launches unwanted second animation
 
-export const slideElement = ({ intoView, element, onSlide }: Props): void => {
+export const slideElement = ({ intoView, element, onSlideElementComplete }: Props): void => {
   if (isAnimationPrevented) return
   if (element === null) return
 
@@ -28,7 +28,7 @@ export const slideElement = ({ intoView, element, onSlide }: Props): void => {
       y: intoView ? 0 : -offsetPosition,
       onComplete: () => {
         isAnimationPrevented = false
-        onSlide?.()
+        onSlideElementComplete?.()
       },
     },
   )

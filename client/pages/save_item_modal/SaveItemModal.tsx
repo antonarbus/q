@@ -9,7 +9,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetItemCategoriesQuery, useSaveItemMutation } from '@entities/item'
 import { type Item } from '@entities/quotation'
-import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
+import { BackdropWithSlidableModal } from '@shared/components/BackdropWithSlidableModal'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 import { CardCustom } from '@shared/components/CardCustom'
 import { nanoid } from '@shared/lib/nanoid'
@@ -47,7 +47,7 @@ export const SaveItemModal = (): JSX.Element => {
       setTimeout(() => {
         slideElement({
           element: cardRef.current,
-          onSlide: () => {
+          onSlideElementComplete: () => {
             navigate('..', { replace: true, state: nanoid() })
           },
         })
@@ -63,11 +63,11 @@ export const SaveItemModal = (): JSX.Element => {
   }, [isError])
 
   return (
-    <BackdropWithSlidableContent
-      onSlideIn={() => {
+    <BackdropWithSlidableModal
+      onSlideModalInComplete={() => {
         /* inputRef.current.focus() */
       }}
-      onSlideOut={() => {
+      onSlideModalOutComplete={() => {
         navigate('..')
       }}
     >
@@ -116,6 +116,6 @@ export const SaveItemModal = (): JSX.Element => {
           </ButtonCustom>
         </form>
       </CardCustom>
-    </BackdropWithSlidableContent>
+    </BackdropWithSlidableModal>
   )
 }

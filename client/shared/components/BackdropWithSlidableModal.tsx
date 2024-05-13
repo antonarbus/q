@@ -5,32 +5,31 @@ import { slideElement } from '../utils/slideElement'
 type Props = {
   children: ReactNode
   color?: string
-  onSlideIn?: () => void
-  onSlideOut?: () => void
+  onSlideModalInComplete?: () => void
+  onSlideModalOutComplete?: () => void
   shouldSlideIn?: boolean
   clickAway?: boolean
 }
 
-export const BackdropWithSlidableContent = ({
+export const BackdropWithSlidableModal = ({
   children,
-  onSlideIn,
-  onSlideOut,
+  onSlideModalInComplete,
+  onSlideModalOutComplete,
   shouldSlideIn = true,
   clickAway = true,
 }: Props): JSX.Element => {
   const contentRef = useRef<HTMLDivElement>(null)
 
   useEffectOnce(() => {
-    if (!contentRef.current) return
-    if (!shouldSlideIn) return
-
-    slideElement({
-      intoView: true,
-      element: contentRef.current,
-      onSlide: () => {
-        onSlideIn?.()
-      },
-    })
+    if (contentRef.current && shouldSlideIn) {
+      slideElement({
+        intoView: true,
+        element: contentRef.current,
+        onSlideElementComplete: () => {
+          onSlideModalInComplete?.()
+        },
+      })
+    }
   })
 
   useEffectOnce(() => {
@@ -42,8 +41,8 @@ export const BackdropWithSlidableContent = ({
       if (e.key === 'Escape') {
         slideElement({
           element: contentRef.current,
-          onSlide: () => {
-            onSlideOut?.()
+          onSlideElementComplete: () => {
+            onSlideModalOutComplete?.()
           },
         })
       }
@@ -59,15 +58,14 @@ export const BackdropWithSlidableContent = ({
   return (
     <div
       onMouseDown={(): void => {
-        if (!contentRef.current) return
-        if (!clickAway) return
-
-        slideElement({
-          element: contentRef.current,
-          onSlide: () => {
-            onSlideOut?.()
-          },
-        })
+        if (contentRef.current && clickAway) {
+          slideElement({
+            element: contentRef.current,
+            onSlideElementComplete: () => {
+              onSlideModalOutComplete?.()
+            },
+          })
+        }
       }}
       style={{
         position: 'fixed',

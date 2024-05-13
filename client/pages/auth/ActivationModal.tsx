@@ -9,7 +9,7 @@ import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { useActivateMutation, userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 import { RotatingLoaderIcon } from '@shared/components'
-import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
+import { BackdropWithSlidableModal } from '@shared/components/BackdropWithSlidableModal'
 import { CardCustom } from '@shared/components/CardCustom'
 import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
@@ -61,9 +61,9 @@ export const ActivationModal = (): JSX.Element => {
   }, [isError])
 
   return (
-    <BackdropWithSlidableContent
+    <BackdropWithSlidableModal
       shouldSlideIn={false}
-      onSlideOut={(): void => {
+      onSlideModalOutComplete={(): void => {
         navigate('..')
       }}
     >
@@ -122,6 +122,6 @@ export const ActivationModal = (): JSX.Element => {
           )}
         </Box>
       </CardCustom>
-    </BackdropWithSlidableContent>
+    </BackdropWithSlidableModal>
   )
 }
