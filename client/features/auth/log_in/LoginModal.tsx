@@ -12,7 +12,7 @@ import { useGetQuotationsQuery } from '@entities/quotation'
 import { useLogInMutation, userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 import { EmailInput, PasswordInput } from '@shared/components'
-import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
+import { BackdropWithSlidableModal } from '@shared/components/BackdropWithSlidableModal'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 import { CardCustom } from '@shared/components/CardCustom'
 import { navItemId } from '@shared/consts/navItemId'
@@ -70,7 +70,7 @@ export const LoginModal = (): JSX.Element => {
       setTimeout(() => {
         slideElement({
           element: cardRef.current,
-          onSlide: () => {
+          onSlideElementComplete: () => {
             navigate('..', { replace: true, state: nanoid() })
           },
         })
@@ -97,11 +97,11 @@ export const LoginModal = (): JSX.Element => {
   }, [isError])
 
   return (
-    <BackdropWithSlidableContent
-      onSlideIn={() => {
+    <BackdropWithSlidableModal
+      onSlideModalInComplete={() => {
         /* inputRef.current.focus() */
       }}
-      onSlideOut={() => {
+      onSlideModalOutComplete={() => {
         navigate('..')
       }}
     >
@@ -154,7 +154,7 @@ export const LoginModal = (): JSX.Element => {
                 if (!cardRef.current) return
                 slideElement({
                   element: cardRef.current,
-                  onSlide: () => {
+                  onSlideElementComplete: () => {
                     navigate(`../${route.requestPasswordReset}`)
                   },
                 })
@@ -169,7 +169,7 @@ export const LoginModal = (): JSX.Element => {
                 e.preventDefault()
                 slideElement({
                   element: cardRef.current,
-                  onSlide: () => {
+                  onSlideElementComplete: () => {
                     navigate(`../${route.register}`)
                   },
                 })
@@ -180,6 +180,6 @@ export const LoginModal = (): JSX.Element => {
           </Box>
         </form>
       </CardCustom>
-    </BackdropWithSlidableContent>
+    </BackdropWithSlidableModal>
   )
 }

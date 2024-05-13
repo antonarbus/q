@@ -1,58 +1,61 @@
 import { theme } from '@lib_instances/theme'
-import { Avatar, Box, type SxProps, Typography } from '@mui/material'
-import type { FormEvent, MouseEvent } from 'react'
-import { useRef } from 'react'
-import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
+import { Close } from '@mui/icons-material'
+import { Avatar, Box, type SxProps, Typography, IconButton } from '@mui/material'
+import { BackdropWithSlidableModal } from '@shared/components/BackdropWithSlidableModal'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 
 type Props = {
-  onSlideIn?: () => void
-  onSlideOut?: () => void
-  sx: SxProps
-  avatarIcon: React.ReactNode
+  onSlideModalInComplete?: () => void
+  onSlideModalOutComplete?: () => void
+  width?: React.CSSProperties['width']
+  sx?: SxProps
+  headerIcon: React.ReactNode
   headerText: string
   children: React.ReactNode
-  onSubmit: (e: FormEvent) => void
+  onSubmit: (e: React.FormEvent) => void
+  onCloseClick: (e: React.MouseEvent) => void
   buttonText: string
   isButtonDisabled?: boolean
   isButtonLoading?: boolean
   isButtonSuccess?: boolean
   isButtonError?: boolean
+  modalRef: React.RefObject<HTMLDivElement>
 }
 
 export const FormModal = ({
-  onSlideIn,
-  onSlideOut,
+  onSlideModalInComplete,
+  onSlideModalOutComplete,
+  width,
   sx,
-  avatarIcon,
+  headerIcon,
   headerText,
   children,
   onSubmit,
+  onCloseClick,
   buttonText,
   isButtonDisabled,
   isButtonLoading,
   isButtonSuccess,
   isButtonError,
+  modalRef,
 }: Props): JSX.Element => {
-  const cardRef = useRef<HTMLDivElement>(null)
-
   return (
-    <BackdropWithSlidableContent
-      onSlideIn={onSlideIn}
-      onSlideOut={onSlideOut}
+    <BackdropWithSlidableModal
+      onSlideModalInComplete={onSlideModalInComplete}
+      onSlideModalOutComplete={onSlideModalOutComplete}
     >
       <Box
-        ref={cardRef}
-        onMouseDown={(e: MouseEvent): void => {
+        ref={modalRef}
+        onMouseDown={(e: React.MouseEvent): void => {
           e.stopPropagation()
         }}
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          maxHeight: 'calc(100vh - 64px)',
+          maxHeight: 'calc(100vh - 80px)',
           maxWidth: 'calc(100vw - 64px)',
           minWidth: '300px',
-          width: '500px',
+          width: width ?? '500px',
           background: 'white',
           color: 'rgba(0, 0, 0, 0.87)',
           borderRadius: '4px',
@@ -81,13 +84,29 @@ export const FormModal = ({
           }}
         >
           <Avatar sx={{ bgcolor: theme.colors.darkBackground }}>
-            {avatarIcon}
+            {headerIcon}
           </Avatar>
           <Typography component='h1' variant='h6' >
             {headerText}
           </Typography>
+          <IconButton
+            sx={{
+              position: 'absolute',
+              top: '-35px',
+              right: '-35px',
+            }}
+            onClick={onCloseClick}
+          >
+            <Close
+              sx={{
+                color: '#aaaaaa',
+                ':hover': {
+                  color: '#c1c1c1',
+                },
+              }}
+            />
+          </IconButton>
         </Box>
-
         <Box
           className='card-content'
           component='form'
@@ -104,7 +123,6 @@ export const FormModal = ({
         >
           {children}
         </Box>
-
         <Box
           className='card-footer'
           sx={{
@@ -129,8 +147,7 @@ export const FormModal = ({
             {buttonText}
           </ButtonCustom>
         </Box>
-
       </Box>
-    </BackdropWithSlidableContent>
+    </BackdropWithSlidableModal>
   )
 }

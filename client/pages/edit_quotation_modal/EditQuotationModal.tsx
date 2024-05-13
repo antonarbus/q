@@ -8,7 +8,7 @@ import { FiEdit3 } from 'react-icons/fi'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { type Quotation, useGetQuotationCategoriesQuery, useGetQuotationsQuery, useSaveQuotationMutation } from '@entities/quotation'
-import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
+import { BackdropWithSlidableModal } from '@shared/components/BackdropWithSlidableModal'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 import { CardCustom } from '@shared/components/CardCustom'
 import { nanoid } from '@shared/lib/nanoid'
@@ -48,7 +48,7 @@ export const EditQuotationModal = (): JSX.Element => {
       setTimeout(() => {
         slideElement({
           element: cardRef.current,
-          onSlide: () => {
+          onSlideElementComplete: () => {
             navigate('..', { replace: true, state: nanoid() })
           },
         })
@@ -64,11 +64,11 @@ export const EditQuotationModal = (): JSX.Element => {
   }, [isError])
 
   return (
-    <BackdropWithSlidableContent
-      onSlideIn={() => {
+    <BackdropWithSlidableModal
+      onSlideModalInComplete={() => {
         /* inputRef.current.focus() */
       }}
-      onSlideOut={() => {
+      onSlideModalOutComplete={() => {
         navigate('..')
       }}
     >
@@ -117,6 +117,6 @@ export const EditQuotationModal = (): JSX.Element => {
           </ButtonCustom>
         </form>
       </CardCustom>
-    </BackdropWithSlidableContent>
+    </BackdropWithSlidableModal>
   )
 }

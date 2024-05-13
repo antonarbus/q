@@ -6,7 +6,7 @@ import { useRef } from 'react'
 import { BsInfoLg } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 import { quotationSlice } from '@entities/quotation'
-import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
+import { BackdropWithSlidableModal } from '@shared/components/BackdropWithSlidableModal'
 import { CardCustom } from '@shared/components/CardCustom'
 import { CategoryAutocomplete } from './CategoryAutocomplete'
 import { DescriptionTextarea } from './DescriptionTextarea'
@@ -33,11 +33,11 @@ export const QuotationInfoModal = (): JSX.Element => {
   })
 
   return (
-    <BackdropWithSlidableContent
-      onSlideIn={() => {
+    <BackdropWithSlidableModal
+      onSlideModalInComplete={() => {
         /* inputRef.current.focus() */
       }}
-      onSlideOut={() => {
+      onSlideModalOutComplete={() => {
         navigate('..')
       }}
     >
@@ -56,6 +56,6 @@ export const QuotationInfoModal = (): JSX.Element => {
           <DescriptionTextarea descSignal={descSignal}/>
         </form>
       </CardCustom>
-    </BackdropWithSlidableContent>
+    </BackdropWithSlidableModal>
   )
 }

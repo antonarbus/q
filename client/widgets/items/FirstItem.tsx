@@ -98,6 +98,7 @@ function FirstItemLayout({ children }: { children: React.ReactNode }): JSX.Eleme
       <Box
         sx={{
           overflow: 'auto',
+          height: '180px',
           margin: '10px',
           padding: '10px',
           [`.${cls.items}`]: {

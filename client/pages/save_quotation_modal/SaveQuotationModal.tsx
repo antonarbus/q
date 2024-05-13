@@ -8,7 +8,7 @@ import { BsBookmarkStar } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { quotationSlice, useGetQuotationCategoriesQuery, useSaveQuotationMutation } from '@entities/quotation'
-import { BackdropWithSlidableContent } from '@shared/components/BackdropWithSlidableContent'
+import { BackdropWithSlidableModal } from '@shared/components/BackdropWithSlidableModal'
 import { ButtonCustom } from '@shared/components/ButtonCustom'
 import { CardCustom } from '@shared/components/CardCustom'
 import { navItemId } from '@shared/consts/navItemId'
@@ -59,7 +59,7 @@ export const SaveQuotationModal = (): JSX.Element => {
       setTimeout(() => {
         slideElement({
           element: cardRef.current,
-          onSlide: () => {
+          onSlideElementComplete: () => {
             navigate(`/${id}`, { replace: true, state: nanoid() })
           },
         })
@@ -76,11 +76,11 @@ export const SaveQuotationModal = (): JSX.Element => {
   }, [isError])
 
   return (
-    <BackdropWithSlidableContent
-      onSlideIn={() => {
+    <BackdropWithSlidableModal
+      onSlideModalInComplete={() => {
         /* inputRef.current.focus() */
       }}
-      onSlideOut={() => {
+      onSlideModalOutComplete={() => {
         navigate('..')
       }}
     >
@@ -132,6 +132,6 @@ export const SaveQuotationModal = (): JSX.Element => {
           </ButtonCustom>
         </form>
       </CardCustom>
-    </BackdropWithSlidableContent>
+    </BackdropWithSlidableModal>
   )
 }
