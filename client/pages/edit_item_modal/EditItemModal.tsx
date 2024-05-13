@@ -2,11 +2,10 @@ import { getState } from '@lib_instances/store'
 import { useSignal } from '@preact/signals-react'
 import { useCallback, useRef } from 'react'
 import { FiEdit3 } from 'react-icons/fi'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { FirstItem } from '@widgets/items/FirstItem'
 import { useGetItemCategoriesQuery, useGetItemsQuery, useSaveItemMutation } from '@entities/item'
-import { type Item } from '@entities/quotation'
 import { FormModal } from '@shared/components'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
@@ -16,8 +15,7 @@ import { NameInput } from './NameInput'
 
 export const EditItemModal = (): JSX.Element => {
   const navigate = useNavigate()
-  const location = useLocation()
-  const item = location.state.item as Item | undefined
+  const item = getState().quotation.items.at(0)
   const modalRef = useRef<HTMLDivElement>(null)
 
   const nameSignal = useSignal(item?.name ?? '')
@@ -74,8 +72,6 @@ export const EditItemModal = (): JSX.Element => {
 
   const onSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault()
-    alert(666)
-    return
 
     const email = getState().user.email
 
@@ -84,7 +80,14 @@ export const EditItemModal = (): JSX.Element => {
       return
     }
 
-    if (!item) return
+    const item = getState().quotation.items.at(0)
+
+    if (!item) {
+      notify({ msg: 'No item loaded', type: 'warn', theme: 'light' })
+      return
+    }
+
+    // todo: also need to save preview and dimensions
 
     const itemWithUpdatedValues = {
       ...item,
