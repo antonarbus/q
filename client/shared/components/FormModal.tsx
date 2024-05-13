@@ -8,6 +8,7 @@ type Props = {
   onSlideModalInComplete?: () => void
   onSlideModalOutComplete?: () => void
   width?: React.CSSProperties['width']
+  paddingContent?: React.CSSProperties['width']
   sx?: SxProps
   headerIcon: React.ReactNode
   headerText: string
@@ -38,6 +39,7 @@ export const FormModal = ({
   isButtonSuccess,
   isButtonError,
   modalRef,
+  paddingContent,
 }: Props): JSX.Element => {
   return (
     <BackdropWithSlidableModal
@@ -115,7 +117,7 @@ export const FormModal = ({
             display: 'flex',
             flexDirection: 'column',
             gap: '20px',
-            padding: '40px 50px',
+            padding: paddingContent ?? '40px 50px',
             backgroundColor: '#8080800f',
             overflowY: 'auto',
           }}

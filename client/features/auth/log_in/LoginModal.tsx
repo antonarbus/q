@@ -1,20 +1,16 @@
 import { dispatch } from '@lib_instances/store'
-import { theme } from '@lib_instances/theme'
 import { LoginRounded } from '@mui/icons-material'
-import { Avatar, Box } from '@mui/material'
+import { Box } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
-import type { FormEvent, MouseEvent } from 'react'
-import { useRef } from 'react'
+import type { MouseEvent } from 'react'
+import { useCallback, useRef } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetItemsQuery } from '@entities/item'
 import { useGetQuotationsQuery } from '@entities/quotation'
 import { useLogInMutation, userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
-import { EmailInput, PasswordInput } from '@shared/components'
-import { BackdropWithSlidableModal } from '@shared/components/BackdropWithSlidableModal'
-import { ButtonCustom } from '@shared/components/ButtonCustom'
-import { CardCustom } from '@shared/components/CardCustom'
+import { EmailInput, FormModal, PasswordInput } from '@shared/components'
 import { navItemId } from '@shared/consts/navItemId'
 import { route } from '@shared/consts/route'
 import { nanoid } from '@shared/lib/nanoid'
@@ -27,7 +23,7 @@ export const LoginModal = (): JSX.Element => {
   const navigate = useNavigate()
   const { id } = useParams()
   const inputRef = useRef<HTMLDivElement>(null)
-  const cardRef = useRef<HTMLDivElement>(null)
+  const modalRef = useRef<HTMLDivElement>(null)
   const emailSignal = useSignal('')
   const passwordSignal = useSignal('')
   const isEmailOkSignal = useSignal(false)
@@ -69,7 +65,7 @@ export const LoginModal = (): JSX.Element => {
 
       setTimeout(() => {
         slideElement({
-          element: cardRef.current,
+          element: modalRef.current,
           onSlideElementComplete: () => {
             navigate('..', { replace: true, state: nanoid() })
           },
@@ -96,90 +92,89 @@ export const LoginModal = (): JSX.Element => {
     }
   }, [isError])
 
-  return (
-    <BackdropWithSlidableModal
-      onSlideModalInComplete={() => {
-        /* inputRef.current.focus() */
-      }}
-      onSlideModalOutComplete={() => {
-        navigate('..')
-      }}
-    >
-      <CardCustom
-        reference={cardRef}
-        title='Log in'
-        logo={
-          <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }} >
-            <LoginRounded />
-          </Avatar>
-        }
-      >
-        <form
-          onSubmit={(e: FormEvent): void => {
-            e.preventDefault()
+  const onSlideModalOutComplete = useCallback(() => {
+    navigate('..')
+  }, [])
 
-            logIn({
-              email: emailSignal.value,
-              password: passwordSignal.value,
+  const onCloseClick = useCallback(() => {
+    slideElement({
+      element: modalRef.current,
+      onSlideElementComplete: () => {
+        navigate('..')
+      },
+    })
+  }, [])
+
+  const onSubmit = (e: React.FormEvent): void => {
+    e.preventDefault()
+
+    logIn({
+      email: emailSignal.value,
+      password: passwordSignal.value,
+    })
+  }
+
+  return (
+    <FormModal
+      modalRef={modalRef}
+      width='350px'
+      paddingContent='50px 40px 10px 40px'
+      headerText='Log in'
+      headerIcon={<LoginRounded />}
+      buttonText='LOG IN'
+      isButtonDisabled={!isEmailOkSignal.value || passwordSignal.value === '' || isPending}
+      isButtonLoading={isPending}
+      isButtonSuccess={isSuccess}
+      isButtonError={isError}
+      onSlideModalOutComplete={onSlideModalOutComplete}
+      onSubmit={onSubmit}
+      onCloseClick={onCloseClick}
+    >
+      <EmailInput
+        inputRef={inputRef}
+        emailSignal={emailSignal}
+        isEmailOkSignal={isEmailOkSignal}
+      />
+      <PasswordInput
+        passwordSignal={passwordSignal}
+      />
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+        }}
+      >
+        <Link
+          to={`../${route.requestPasswordReset}`}
+          onClick={(e: MouseEvent): void => {
+            e.preventDefault()
+            if (!modalRef.current) return
+            slideElement({
+              element: modalRef.current,
+              onSlideElementComplete: () => {
+                navigate(`../${route.requestPasswordReset}`)
+              },
             })
           }}
         >
-          <EmailInput
-            inputRef={inputRef}
-            emailSignal={emailSignal}
-            isEmailOkSignal={isEmailOkSignal}
-          />
-          <PasswordInput
-            passwordSignal={passwordSignal}
-          />
-          <ButtonCustom
-            disabled={!isEmailOkSignal.value || passwordSignal.value === '' || isPending}
-            isButtonPending={isPending}
-            isButtonSuccess={isSuccess}
-            isButtonError={isError}
-          >
-            LOG IN
-          </ButtonCustom>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              marginTop: '20px',
-            }}
-          >
-            <Link
-              to={`../${route.requestPasswordReset}`}
-              onClick={(e: MouseEvent): void => {
-                e.preventDefault()
-                if (!cardRef.current) return
-                slideElement({
-                  element: cardRef.current,
-                  onSlideElementComplete: () => {
-                    navigate(`../${route.requestPasswordReset}`)
-                  },
-                })
-              }}
-            >
-              Reset password?
-            </Link>
-            <Link
-              to={`../${route.register}`}
-              style={{ textAlign: 'right' }}
-              onClick={(e: MouseEvent): void => {
-                e.preventDefault()
-                slideElement({
-                  element: cardRef.current,
-                  onSlideElementComplete: () => {
-                    navigate(`../${route.register}`)
-                  },
-                })
-              }}
-            >
-              Register?
-            </Link>
-          </Box>
-        </form>
-      </CardCustom>
-    </BackdropWithSlidableModal>
+          Reset
+        </Link>
+        <Link
+          to={`../${route.register}`}
+          style={{ textAlign: 'right' }}
+          onClick={(e: MouseEvent): void => {
+            e.preventDefault()
+            slideElement({
+              element: modalRef.current,
+              onSlideElementComplete: () => {
+                navigate(`../${route.register}`)
+              },
+            })
+          }}
+        >
+          Register
+        </Link>
+      </Box>
+    </FormModal>
   )
 }

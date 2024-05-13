@@ -78,6 +78,9 @@ export const EmailInput = ({ emailSignal, isEmailOkSignal, inputRef, disabled }:
           '& .MuiInputLabel-shrink': {
             color: emailLabelSignal.value !== initEmailLabel ? theme.colors.red : '',
           },
+          '.MuiInputBase-root': {
+            background: 'white',
+          },
         }}
       />
       {!!emailSuggestionSignal.value && (
