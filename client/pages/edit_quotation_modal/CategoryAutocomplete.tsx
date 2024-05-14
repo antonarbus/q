@@ -56,6 +56,7 @@ export const CategoryAutocomplete = ({ categorySignal }: Props): JSX.Element => 
               sx={{
                 '.MuiInputBase-root': {
                   pl: '14px',
+                  background: 'white',
                 },
               }}
             />

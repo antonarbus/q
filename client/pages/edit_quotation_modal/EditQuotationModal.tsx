@@ -1,16 +1,11 @@
 import { getState } from '@lib_instances/store'
-import { theme } from '@lib_instances/theme'
-import { Avatar } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
-import type { FormEvent } from 'react'
-import { useRef } from 'react'
+import { useCallback, useRef } from 'react'
 import { FiEdit3 } from 'react-icons/fi'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { type Quotation, useGetQuotationCategoriesQuery, useGetQuotationsQuery, useSaveQuotationMutation } from '@entities/quotation'
-import { BackdropWithSlidableModal } from '@shared/components/BackdropWithSlidableModal'
-import { ButtonCustom } from '@shared/components/ButtonCustom'
-import { CardCustom } from '@shared/components/CardCustom'
+import { FormModal } from '@shared/components'
 import { nanoid } from '@shared/lib/nanoid'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
@@ -23,7 +18,7 @@ export const EditQuotationModal = (): JSX.Element => {
   const location = useLocation()
   const quotation = location.state.quotation as Quotation | undefined
 
-  const cardRef = useRef<HTMLDivElement>(null)
+  const modalRef = useRef<HTMLDivElement>(null)
   const nameSignal = useSignal(quotation?.name ?? '')
   const categorySignal = useSignal(quotation?.category ?? '')
   const descSignal = useSignal(quotation?.desc ?? '')
@@ -47,7 +42,7 @@ export const EditQuotationModal = (): JSX.Element => {
 
       setTimeout(() => {
         slideElement({
-          element: cardRef.current,
+          element: modalRef.current,
           onSlideElementComplete: () => {
             navigate('..', { replace: true, state: nanoid() })
           },
@@ -63,60 +58,60 @@ export const EditQuotationModal = (): JSX.Element => {
     }
   }, [isError])
 
-  return (
-    <BackdropWithSlidableModal
-      onSlideModalInComplete={() => {
-        /* inputRef.current.focus() */
-      }}
-      onSlideModalOutComplete={() => {
+  const onSlideModalOutComplete = useCallback(() => {
+    navigate('..')
+  }, [])
+
+  const onCloseClick = useCallback(() => {
+    slideElement({
+      element: modalRef.current,
+      onSlideElementComplete: () => {
         navigate('..')
-      }}
+      },
+    })
+  }, [])
+
+  const onSubmit = useCallback((e: React.FormEvent) => {
+    e.preventDefault()
+
+    const email = getState().user.email
+
+    if (!email) {
+      notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
+      return
+    }
+
+    if (!quotation) return
+
+    const quotationWithUpdatedValues = {
+      ...quotation,
+      name: nameSignal.value,
+      category: categorySignal.value,
+      desc: descSignal.value,
+    }
+
+    saveQuotation({ quotation: quotationWithUpdatedValues })
+  }, [])
+
+  return (
+    <FormModal
+      width='500px'
+      headerIcon={<FiEdit3 />}
+      headerText='Edit quotation'
+      buttonText='UPDATE'
+      isButtonDisabled={isDisabled}
+      isButtonLoading={isPending}
+      isButtonSuccess={isSuccess}
+      isButtonError={isError}
+      modalRef={modalRef}
+      onCloseClick={onCloseClick}
+      onSlideModalOutComplete={onSlideModalOutComplete}
+      onSubmit={onSubmit}
     >
-      <CardCustom
-        reference={cardRef}
-        title='Edit quotation'
-        logo={
-          <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }} >
-            <FiEdit3 />
-          </Avatar>
-        }
-      >
-        <form
-          onSubmit={(e: FormEvent): void => {
-            e.preventDefault()
-
-            const email = getState().user.email
-
-            if (!email) {
-              notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
-              return
-            }
-
-            if (!quotation) return
-
-            const quotationWithUpdatedValues = {
-              ...quotation,
-              name: nameSignal.value,
-              category: categorySignal.value,
-              desc: descSignal.value,
-            }
-
-            saveQuotation({ quotation: quotationWithUpdatedValues })
-          }}
-        >
-          <NameInput nameSignal={nameSignal}/>
-          <CategoryAutocomplete categorySignal={categorySignal}/>
-          <DescriptionTextarea descSignal={descSignal}/>
-          <ButtonCustom
-            disabled={isDisabled}
-            isButtonPending={isPending}
-            isButtonSuccess={isSuccess}
-            isButtonError={isError}
-          >
-            UPDATE
-          </ButtonCustom>
-        </form>
-      </CardCustom>
-    </BackdropWithSlidableModal>
+      <NameInput nameSignal={nameSignal}/>
+      <CategoryAutocomplete categorySignal={categorySignal}/>
+      <DescriptionTextarea descSignal={descSignal} />
+      {/* <FirstItem /> */}
+    </FormModal>
   )
 }
