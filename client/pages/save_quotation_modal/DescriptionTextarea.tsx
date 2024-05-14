@@ -36,6 +36,7 @@ export const DescriptionTextarea = ({ descSignal }: Props): JSX.Element => {
           '.MuiInputBase-root': {
             alignItems: 'flex-start',
             pl: '14px !important',
+            background: 'white',
           },
         }}
       />

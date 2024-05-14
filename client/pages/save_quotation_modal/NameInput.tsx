@@ -34,6 +34,7 @@ export const NameInput = ({ nameSignal }: Props): JSX.Element => {
         sx={{
           '.MuiInputBase-root': {
             pl: '14px !important',
+            background: 'white',
           },
         }}
       />
