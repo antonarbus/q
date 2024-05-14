@@ -17,7 +17,7 @@ import { Copy } from '@widgets/copy'
 import { Nav } from '@widgets/nav'
 import { AccessToken } from '@features/auth/get_access_token'
 import { LoginModal } from '@features/auth/log_in'
-import { LogoutModal } from '@features/auth/log_out'
+import { Logout } from '@features/auth/log_out'
 import { RegisterModal } from '@features/auth/register'
 import { RequestPasswordResetModal } from '@features/auth/request_password_reset'
 import { ResetPasswordModal } from '@features/auth/reset_password'
@@ -41,7 +41,7 @@ const authRoutes: RouteObject[] = [
   },
   {
     path: route.logout,
-    element: <LogoutModal />,
+    element: <Logout />,
   },
   {
     path: route.register,
