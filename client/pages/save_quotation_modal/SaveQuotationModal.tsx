@@ -1,16 +1,11 @@
 import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
-import { theme } from '@lib_instances/theme'
-import { Avatar } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
-import type { FormEvent } from 'react'
-import { useRef } from 'react'
+import { useCallback, useRef } from 'react'
 import { BsBookmarkStar } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { quotationSlice, useGetQuotationCategoriesQuery, useSaveQuotationMutation } from '@entities/quotation'
-import { BackdropWithSlidableModal } from '@shared/components/BackdropWithSlidableModal'
-import { ButtonCustom } from '@shared/components/ButtonCustom'
-import { CardCustom } from '@shared/components/CardCustom'
+import { FormModal } from '@shared/components'
 import { navItemId } from '@shared/consts/navItemId'
 import { nanoid } from '@shared/lib/nanoid'
 import { navSlice, showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@shared/nav'
@@ -22,7 +17,7 @@ import { NameInput } from './NameInput'
 
 export const SaveQuotationModal = (): JSX.Element => {
   const navigate = useNavigate()
-  const cardRef = useRef<HTMLDivElement>(null)
+  const modalRef = useRef<HTMLDivElement>(null)
   const nameSignal = useSignal(getState().quotation.name ?? '')
   const categorySignal = useSignal(getState().quotation.category ?? '')
   const descSignal = useSignal(getState().quotation.desc ?? '')
@@ -58,7 +53,7 @@ export const SaveQuotationModal = (): JSX.Element => {
 
       setTimeout(() => {
         slideElement({
-          element: cardRef.current,
+          element: modalRef.current,
           onSlideElementComplete: () => {
             navigate(`/${data.quotation?.id ?? 'no id set'}`, { replace: true, state: nanoid() })
           },
@@ -75,63 +70,63 @@ export const SaveQuotationModal = (): JSX.Element => {
     }
   }, [isError])
 
-  return (
-    <BackdropWithSlidableModal
-      onSlideModalInComplete={() => {
-        /* inputRef.current.focus() */
-      }}
-      onSlideModalOutComplete={() => {
+  const onSlideModalOutComplete = useCallback(() => {
+    navigate('..')
+  }, [])
+
+  const onCloseClick = useCallback(() => {
+    slideElement({
+      element: modalRef.current,
+      onSlideElementComplete: () => {
         navigate('..')
-      }}
+      },
+    })
+  }, [])
+
+  const onSubmit = (e: React.FormEvent): void => {
+    e.preventDefault()
+
+    const email = getState().user.email
+
+    if (!email) {
+      notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
+      return
+    }
+
+    const existingId = getState().quotation.id
+    const id = existingId === 'new' ? nanoid(5) : existingId
+
+    const quotation = {
+      ...getState().quotation,
+      id,
+      name: nameSignal.value,
+      category: categorySignal.value,
+      desc: descSignal.value,
+      items: getState().quotation.items,
+    }
+
+    saveQuotation({ quotation })
+  }
+
+  return (
+    <FormModal
+      modalRef={modalRef}
+      width='350px'
+      paddingContent='50px 40px'
+      headerText='Save quotation'
+      headerIcon={<BsBookmarkStar />}
+      buttonText={id === 'new' ? 'SAVE' : 'UPDATE'}
+      isButtonDisabled={isDisabled}
+      isButtonLoading={isPending}
+      isButtonSuccess={isSuccess}
+      isButtonError={isError}
+      onSlideModalOutComplete={onSlideModalOutComplete}
+      onSubmit={onSubmit}
+      onCloseClick={onCloseClick}
     >
-      <CardCustom
-        reference={cardRef}
-        title='Save quotation'
-        logo={
-          <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }} >
-            <BsBookmarkStar />
-          </Avatar>
-        }
-      >
-        <form
-          onSubmit={(e: FormEvent): void => {
-            e.preventDefault()
-
-            const email = getState().user.email
-
-            if (!email) {
-              notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
-              return
-            }
-
-            const existingId = getState().quotation.id
-            const id = existingId === 'new' ? nanoid(5) : existingId
-
-            const quotation = {
-              ...getState().quotation,
-              id,
-              name: nameSignal.value,
-              category: categorySignal.value,
-              desc: descSignal.value,
-              items: getState().quotation.items,
-            }
-
-            saveQuotation({ quotation })
-          }}
-        >
-          <NameInput nameSignal={nameSignal}/>
-          <CategoryAutocomplete categorySignal={categorySignal}/>
-          <DescriptionTextarea descSignal={descSignal}/>
-          <ButtonCustom
-            disabled={isDisabled}
-            isButtonPending={isPending}
-            isButtonSuccess={isSuccess}
-            isButtonError={isError}
-          >
-            {id === 'new' ? 'SAVE' : 'UPDATE'}
-          </ButtonCustom>
-        </form>
-      </CardCustom>
-    </BackdropWithSlidableModal>
+      <NameInput nameSignal={nameSignal}/>
+      <CategoryAutocomplete categorySignal={categorySignal}/>
+      <DescriptionTextarea descSignal={descSignal}/>
+    </FormModal>
   )
 }
