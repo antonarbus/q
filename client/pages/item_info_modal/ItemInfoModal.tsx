@@ -1,16 +1,11 @@
 import { dispatch } from '@lib_instances/store'
-import { theme } from '@lib_instances/theme'
-import { Avatar } from '@mui/material'
 import { useSignal, useSignalEffect } from '@preact/signals-react'
 import { useRef } from 'react'
-import { BsInfoLg } from 'react-icons/bs'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { quotationSlice, type Item } from '@entities/quotation'
 import { BackdropWithSlidableModal } from '@shared/components/BackdropWithSlidableModal'
 import { CardCustom } from '@shared/components/CardCustom'
-import { CategoryAutocomplete } from './CategoryAutocomplete'
-import { DescriptionTextarea } from './DescriptionTextarea'
-import { NameInput } from './NameInput'
+import { InfoTextarea } from './InfoTextarea'
 
 export const ItemInfoModal = (): JSX.Element => {
   const cardRef = useRef<HTMLDivElement>(null)
@@ -21,9 +16,7 @@ export const ItemInfoModal = (): JSX.Element => {
   const itemIndex = location.state.itemIndex as number | undefined
   const rowIndex = location.state.rowIndex as number | undefined
 
-  const nameSignal = useSignal(item?.name ?? '')
-  const categorySignal = useSignal(item?.category ?? '')
-  const descSignal = useSignal(item?.desc ?? '')
+  const infoSignal = useSignal(item?.desc ?? '')
 
   useSignalEffect(() => {
     if (!item) return
@@ -33,36 +26,24 @@ export const ItemInfoModal = (): JSX.Element => {
       rowIndex,
       item: {
         ...item,
-        name: nameSignal.value,
-        category: categorySignal.value,
-        desc: descSignal.value,
+        desc: infoSignal.value, // todo: rename desc --> info
       },
     }))
   })
 
   return (
     <BackdropWithSlidableModal
-      onSlideModalInComplete={() => {
-        /* inputRef.current.focus() */
-      }}
       onSlideModalOutComplete={() => {
         navigate('..')
       }}
     >
       <CardCustom
         reference={cardRef}
-        title='Info'
-        logo={
-          <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }} >
-            <BsInfoLg />
-          </Avatar>
-        }
+        sx={{
+          padding: '30px',
+        }}
       >
-        <form>
-          <NameInput nameSignal={nameSignal}/>
-          <CategoryAutocomplete categorySignal={categorySignal}/>
-          <DescriptionTextarea descSignal={descSignal}/>
-        </form>
+        <InfoTextarea descSignal={infoSignal}/>
       </CardCustom>
     </BackdropWithSlidableModal>
   )
