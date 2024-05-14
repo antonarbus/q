@@ -32,7 +32,6 @@ export const DescriptionTextarea = ({ descSignal }: Props): JSX.Element => {
           autoComplete: 'off',
         }}
         sx={{
-          mb: 2,
           '.MuiInputBase-root': {
             alignItems: 'flex-start',
             pl: '14px !important',

@@ -32,7 +32,6 @@ export const NameInput = ({ nameSignal }: Props): JSX.Element => {
           autoComplete: 'off',
         }}
         sx={{
-          mb: 2,
           '.MuiInputBase-root': {
             pl: '14px !important',
           },

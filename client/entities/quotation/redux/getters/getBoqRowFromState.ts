@@ -13,6 +13,7 @@ export const getBoqRowFromState = ({
   rowIndex,
   state,
 }: Props): BoqRow | undefined => {
+  // todo: move item for edit modal into a different slice
   // special case for when the item is a row for item edit modal
   if (state.items[0]?.type === itemKey.row) {
     return state.items[0]

@@ -46,7 +46,6 @@ export const PasswordInput = ({ passwordSignal, onBlur, label, isLabelRed }: Pro
         ),
       }}
       sx={{
-        mb: 2,
         '& .MuiInputLabel-shrink': {
           color: isLabelRed ? theme.colors.red : '',
         },

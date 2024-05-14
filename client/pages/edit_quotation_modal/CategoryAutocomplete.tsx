@@ -71,9 +71,6 @@ export const CategoryAutocomplete = ({ categorySignal }: Props): JSX.Element => 
             },
           },
         }}
-        sx={{
-          mb: 2,
-        }}
       />
     </div>
   )
