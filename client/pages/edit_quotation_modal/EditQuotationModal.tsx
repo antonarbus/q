@@ -9,9 +9,10 @@ import { FormModal } from '@shared/components'
 import { nanoid } from '@shared/lib/nanoid'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
-import { CategoryAutocomplete } from './CategoryAutocomplete'
-import { DescriptionTextarea } from './DescriptionTextarea'
-import { NameInput } from './NameInput'
+import { CategoryField } from './CategoryField'
+import { DescriptionField } from './DescriptionField'
+import { NameField } from './NameField'
+import { QuotationField } from './QuotationField'
 
 export const EditQuotationModal = (): JSX.Element => {
   const navigate = useNavigate()
@@ -81,6 +82,8 @@ export const EditQuotationModal = (): JSX.Element => {
       return
     }
 
+    const quotation = getState().quotation
+
     if (!quotation) return
 
     const quotationWithUpdatedValues = {
@@ -108,12 +111,10 @@ export const EditQuotationModal = (): JSX.Element => {
       onSlideModalOutComplete={onSlideModalOutComplete}
       onSubmit={onSubmit}
     >
-      <NameInput nameSignal={nameSignal}/>
-      <CategoryAutocomplete categorySignal={categorySignal}/>
-      <DescriptionTextarea descSignal={descSignal} />
-
-      {/* todo: make similar card for quotation as for item */}
-      {/* <FirstItem /> */}
+      <NameField nameSignal={nameSignal}/>
+      <CategoryField categorySignal={categorySignal}/>
+      <DescriptionField descSignal={descSignal} />
+      <QuotationField />
     </FormModal>
   )
 }

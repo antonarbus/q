@@ -1,1 +1,1 @@
-export { EditQuotationModal as EditItemModal } from './EditQuotationModal'
+export { EditQuotationModal } from './EditQuotationModal'

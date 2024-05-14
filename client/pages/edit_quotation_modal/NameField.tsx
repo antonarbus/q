@@ -1,30 +1,30 @@
 import { InputAdornment, TextField } from '@mui/material'
 import { type Signal } from '@preact/signals-react'
-import { BsFileEarmarkText } from 'react-icons/bs'
+import { PiBooks } from 'react-icons/pi'
 
 type Props = {
-  descSignal: Signal<string>
+  nameSignal: Signal<string>
 }
 
-export const DescriptionTextarea = ({ descSignal }: Props): JSX.Element => {
+export const NameField = ({ nameSignal }: Props): JSX.Element => {
   return (
     <div style={{ position: 'relative' }}>
       <TextField
         disabled={false}
         fullWidth
-        name='description'
-        placeholder='Description'
-        label='Description'
-        multiline
-        rows={3}
-        value={descSignal.value}
+        name='name'
+        placeholder='Item name'
+        label='Item name'
+        required
+        autoFocus
+        value={nameSignal.value}
         onChange={(e): void => {
-          descSignal.value = e.target.value
+          nameSignal.value = e.target.value
         }}
         InputProps={{
           startAdornment: (
             <InputAdornment position='start'>
-              <BsFileEarmarkText style={{ height: '22px', width: '22px', translate: '0px 11px' }}/>
+              <PiBooks style={{ height: '22px', width: '22px', translate: '0px' }}/>
             </InputAdornment>
           ),
         }}
@@ -33,7 +33,6 @@ export const DescriptionTextarea = ({ descSignal }: Props): JSX.Element => {
         }}
         sx={{
           '.MuiInputBase-root': {
-            alignItems: 'flex-start',
             pl: '14px !important',
             background: 'white',
           },
