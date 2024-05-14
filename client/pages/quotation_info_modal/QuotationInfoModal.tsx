@@ -1,23 +1,17 @@
 import { dispatch, getState } from '@lib_instances/store'
-import { theme } from '@lib_instances/theme'
-import { Avatar } from '@mui/material'
 import { useSignal, useSignalEffect } from '@preact/signals-react'
-import { useRef } from 'react'
-import { BsInfoLg } from 'react-icons/bs'
+import { useCallback, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { quotationSlice } from '@entities/quotation'
 import { BackdropWithSlidableModal } from '@shared/components/BackdropWithSlidableModal'
 import { CardCustom } from '@shared/components/CardCustom'
-import { CategoryAutocomplete } from './CategoryAutocomplete'
-import { DescriptionTextarea } from './DescriptionTextarea'
-import { NameInput } from './NameInput'
+import { InfoTextarea } from './InfoTextarea'
 
 export const QuotationInfoModal = (): JSX.Element => {
   const navigate = useNavigate()
   const cardRef = useRef<HTMLDivElement>(null)
-  const nameSignal = useSignal(getState().quotation.name ?? '')
-  const categorySignal = useSignal(getState().quotation.category ?? '')
-  const descSignal = useSignal(getState().quotation.desc ?? '')
+  // todo: change desc --> info
+  const infoSignal = useSignal(getState().quotation.desc ?? '')
 
   useSignalEffect(() => {
     const { quotation } = getState()
@@ -25,36 +19,26 @@ export const QuotationInfoModal = (): JSX.Element => {
     dispatch(quotationSlice.actions.updateQuotationInfoReducer({
       quotation: {
         ...quotation,
-        name: nameSignal.value,
-        category: categorySignal.value,
-        desc: descSignal.value,
+        desc: infoSignal.value,
       },
     }))
   })
 
+  const onSlideModalOutComplete = useCallback(() => {
+    navigate('..')
+  }, [])
+
   return (
     <BackdropWithSlidableModal
-      onSlideModalInComplete={() => {
-        /* inputRef.current.focus() */
-      }}
-      onSlideModalOutComplete={() => {
-        navigate('..')
-      }}
+      onSlideModalOutComplete={onSlideModalOutComplete}
     >
       <CardCustom
         reference={cardRef}
-        title='Info'
-        logo={
-          <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }} >
-            <BsInfoLg />
-          </Avatar>
-        }
+        sx={{
+          p: '30px',
+        }}
       >
-        <form>
-          <NameInput nameSignal={nameSignal}/>
-          <CategoryAutocomplete categorySignal={categorySignal}/>
-          <DescriptionTextarea descSignal={descSignal}/>
-        </form>
+        <InfoTextarea infoSignal={infoSignal}/>
       </CardCustom>
     </BackdropWithSlidableModal>
   )
