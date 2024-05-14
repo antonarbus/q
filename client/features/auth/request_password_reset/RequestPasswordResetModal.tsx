@@ -1,22 +1,18 @@
-import { theme } from '@lib_instances/theme'
 import PasswordRoundedIcon from '@mui/icons-material/PasswordRounded'
-import { Avatar, Box } from '@mui/material'
+import { Box } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
-import type { FormEvent, MouseEvent } from 'react'
-import { useRef } from 'react'
+import type { MouseEvent } from 'react'
+import { useCallback, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useRequestPasswordResetMutation } from '@entities/user'
-import { EmailInput } from '@shared/components'
-import { BackdropWithSlidableModal } from '@shared/components/BackdropWithSlidableModal'
-import { ButtonCustom } from '@shared/components/ButtonCustom'
-import { CardCustom } from '@shared/components/CardCustom'
+import { EmailInput, FormModal } from '@shared/components'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
 
 export const RequestPasswordResetModal = (): JSX.Element => {
-  const cardRef = useRef<HTMLDivElement>(null)
+  const modalRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
   const emailSignal = useSignal('')
@@ -25,97 +21,101 @@ export const RequestPasswordResetModal = (): JSX.Element => {
   const { mutate: requestPasswordReset, isPending, data, isSuccess, isError, error } = useRequestPasswordResetMutation()
 
   useUpdateEffect(() => {
-    if (!isSuccess) return
+    if (isSuccess) {
+      if (data.message === 'reset link sent') {
+        notify({ msg: 'Check your mailbox.', theme: 'light' })
 
-    if (data.message === 'reset link sent') {
-      notify({ msg: 'Check your mailbox.', theme: 'light' })
-
-      setTimeout(() => {
-        slideElement({
-          element: cardRef.current,
-          onSlideElementComplete: () => {
-            navigate('..')
-          },
-        })
-      }, 2500)
+        setTimeout(() => {
+          slideElement({
+            element: modalRef.current,
+            onSlideElementComplete: () => {
+              navigate('..')
+            },
+          })
+        }, 2500)
+      }
     }
   }, [isSuccess])
 
   useUpdateEffect(() => {
-    if (!isError) return
+    if (isError) {
+      if (error.response?.data.message === 'does not exists') {
+        notify({ msg: 'Not found', type: 'info', theme: 'light' })
+        return
+      }
 
-    if (error.response?.data.message === 'does not exists') {
-      notify({ msg: 'Not found', type: 'info', theme: 'light' })
-      return
+      if (error.response?.data.message === 'validation error') {
+        notify({ msg: 'Validation error', type: 'warn', theme: 'light' })
+        return
+      }
+
+      notify({ msg: 'Internal error', type: 'error', theme: 'light' })
     }
-
-    if (error.response?.data.message === 'validation error') {
-      notify({ msg: 'Validation error', type: 'warn', theme: 'light' })
-      return
-    }
-
-    notify({ msg: 'Internal error', type: 'error', theme: 'light' })
   }, [isError])
 
-  return (
-    <BackdropWithSlidableModal
-      onSlideModalInComplete={(): void => {
-        /* inputRef.current.focus() */
-      }}
-      onSlideModalOutComplete={(): void => {
-        navigate('..')
-      }}
-    >
-      <CardCustom
-        reference={cardRef}
-        title='Reset password'
-        logo={
-          <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }}>
-            <PasswordRoundedIcon />
-          </Avatar>
-        }
-      >
-        <form
-          onSubmit={async (e: FormEvent): Promise<void> => {
-            e.preventDefault()
-            requestPasswordReset({ email: emailSignal.value })
-          }}
-        >
-          <EmailInput
-            inputRef={inputRef}
-            emailSignal={emailSignal}
-            isEmailOkSignal={isEmailOkSignal}
-          />
-          <ButtonCustom
-            disabled={!isEmailOkSignal.value}
-            isButtonPending={isPending}
-            isButtonSuccess={isSuccess}
-            isButtonError={isError}
-          >
-            RESET
-          </ButtonCustom>
-          <Box
-            sx={{ textAlign: 'right', marginTop: '20px' }}
-          >
-            <Link
-              to={`../${route.login}`}
-              onClick={(e: MouseEvent): void => {
-                if (!cardRef.current) return
-                e.preventDefault()
+  const onSlideModalOutComplete = useCallback(() => {
+    navigate('..')
+  }, [])
 
-                slideElement({
-                  element: cardRef.current,
-                  onSlideElementComplete: () => {
-                    navigate(`../${route.login}`)
-                  },
-                })
-              }}
-            >
-              Log in?
-            </Link>
-          </Box>
-        </form>
-      </CardCustom>
-    </BackdropWithSlidableModal>
+  const onCloseClick = useCallback(() => {
+    slideElement({
+      element: modalRef.current,
+      onSlideElementComplete: () => {
+        navigate('..')
+      },
+    })
+  }, [])
+
+  const onSubmit = (e: React.FormEvent): void => {
+    e.preventDefault()
+
+    requestPasswordReset({ email: emailSignal.value })
+  }
+
+  return (
+    <FormModal
+      modalRef={modalRef}
+      width='350px'
+      paddingContent='50px 40px 10px 40px'
+      headerText='Reset password'
+      headerIcon={<PasswordRoundedIcon />}
+      buttonText='RESET'
+      isButtonDisabled={!isEmailOkSignal.value}
+      isButtonLoading={isPending}
+      isButtonSuccess={isSuccess}
+      isButtonError={isError}
+      onSlideModalOutComplete={onSlideModalOutComplete}
+      onSubmit={onSubmit}
+      onCloseClick={onCloseClick}
+    >
+      <EmailInput
+        inputRef={inputRef}
+        emailSignal={emailSignal}
+        isEmailOkSignal={isEmailOkSignal}
+      />
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'row-reverse',
+          justifyContent: 'space-between',
+        }}
+      >
+      <Link
+        to={`../${route.login}`}
+        onClick={(e: MouseEvent): void => {
+          e.preventDefault()
+
+          slideElement({
+            element: modalRef.current,
+            onSlideElementComplete: () => {
+              navigate(`../${route.login}`)
+            },
+          })
+        }}
+      >
+        Log in
+      </Link>
+      </Box>
+    </FormModal>
   )
 }
