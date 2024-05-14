@@ -116,7 +116,7 @@ export const FormModal = ({
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            gap: '20px',
+            gap: '30px',
             padding: paddingContent ?? '40px 50px',
             backgroundColor: '#8080800f',
             overflowY: 'auto',
