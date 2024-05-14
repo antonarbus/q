@@ -42,9 +42,7 @@ export const ItemInfoModal = (): JSX.Element => {
     >
       <CardCustom
         reference={cardRef}
-        sx={{
-          p: '30px',
-        }}
+        sx={{ p: '30px' }}
       >
         <InfoTextarea infoSignal={infoSignal}/>
       </CardCustom>
