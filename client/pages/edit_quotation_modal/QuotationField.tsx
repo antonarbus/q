@@ -2,7 +2,6 @@ import { Box } from '@mui/material'
 import { type ReactNode } from 'react'
 import { Items } from '@widgets/items'
 import { OutlinedDivWithLabel } from '@shared/components'
-import { cls } from '@shared/consts/cls'
 
 export const QuotationField = (): ReactNode => {
   return (
