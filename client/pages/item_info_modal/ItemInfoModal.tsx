@@ -1,6 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { useSignal, useSignalEffect } from '@preact/signals-react'
-import { useRef } from 'react'
+import { useCallback, useRef } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { quotationSlice, type Item } from '@entities/quotation'
 import { BackdropWithSlidableModal } from '@shared/components/BackdropWithSlidableModal'
@@ -16,6 +16,7 @@ export const ItemInfoModal = (): JSX.Element => {
   const itemIndex = location.state.itemIndex as number | undefined
   const rowIndex = location.state.rowIndex as number | undefined
 
+  // todo: change desc --> info
   const infoSignal = useSignal(item?.desc ?? '')
 
   useSignalEffect(() => {
@@ -26,16 +27,18 @@ export const ItemInfoModal = (): JSX.Element => {
       rowIndex,
       item: {
         ...item,
-        desc: infoSignal.value, // todo: rename desc --> info
+        desc: infoSignal.value,
       },
     }))
   })
 
+  const onSlideModalOutComplete = useCallback(() => {
+    navigate('..')
+  }, [])
+
   return (
     <BackdropWithSlidableModal
-      onSlideModalOutComplete={() => {
-        navigate('..')
-      }}
+      onSlideModalOutComplete={onSlideModalOutComplete}
     >
       <CardCustom
         reference={cardRef}
@@ -43,7 +46,7 @@ export const ItemInfoModal = (): JSX.Element => {
           p: '30px',
         }}
       >
-        <InfoTextarea descSignal={infoSignal}/>
+        <InfoTextarea infoSignal={infoSignal}/>
       </CardCustom>
     </BackdropWithSlidableModal>
   )
