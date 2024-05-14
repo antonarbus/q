@@ -25,7 +25,7 @@ export const EditQuotationModal = (): JSX.Element => {
 
   const { mutate: saveQuotation, data, isSuccess, isPending, isError, error, reset } = useSaveQuotationMutation()
   const { refetch: updateQuotationCategories } = useGetQuotationCategoriesQuery()
-  const { refetch: refetchQuotations } = useGetQuotationsQuery()
+  const { refetch: fetchQuotations } = useGetQuotationsQuery()
 
   const isDisabled = nameSignal.value === '' || categorySignal.value === ''
 
@@ -38,7 +38,7 @@ export const EditQuotationModal = (): JSX.Element => {
       }
 
       void updateQuotationCategories()
-      void refetchQuotations()
+      void fetchQuotations()
 
       setTimeout(() => {
         slideElement({
@@ -111,6 +111,8 @@ export const EditQuotationModal = (): JSX.Element => {
       <NameInput nameSignal={nameSignal}/>
       <CategoryAutocomplete categorySignal={categorySignal}/>
       <DescriptionTextarea descSignal={descSignal} />
+
+      {/* todo: make similar card for quotation as for item */}
       {/* <FirstItem /> */}
     </FormModal>
   )
