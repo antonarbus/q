@@ -2,18 +2,18 @@ import { useSelectorTyped } from '@lib_instances/store'
 import { Box } from '@mui/material'
 import { AnimatePresence } from 'framer-motion'
 import { type ReactNode } from 'react'
+import { BoqRowForEditModal } from '@widgets/items/boq/boq_table/rows/row/BoqRowForEditModal'
+import { BoqRowSortAndAnimate } from '@widgets/items/boq/boq_table/rows/row/BoqRowSortAndAnimate'
+import { BoqItemForEditModal } from '@widgets/items/boq/BoqItemForEditModal'
+import { PriceItemForEditModal } from '@widgets/items/price/PriceItemForEditModal'
+import { TextItemForEditModal } from '@widgets/items/text/TextItemForEditModal'
 import { onItemDrag } from '@features/items/drag_item'
 import { hideBoqRowPinsOnRowBlur } from '@features/items/pin'
 import { ItemProvider, itemsShapeEqualityFn, BoqItemProvider, itemKey, DraggableItemsContainer, RowProvider } from '@entities/quotation'
 import { OutlinedDivWithLabel } from '@shared/components'
 import { cls } from '@shared/consts/cls'
-import { BoqRowForEditModal } from './boq/boq_table/rows/row/BoqRowForEditModal'
-import { BoqRowSortAndAnimate } from './boq/boq_table/rows/row/BoqRowSortAndAnimate'
-import { BoqItemForEditModal } from './boq/BoqItemForEditModal'
-import { PriceItemForEditModal } from './price/PriceItemForEditModal'
-import { TextItemForEditModal } from './text/TextItemForEditModal'
 
-export const FirstItem = (): ReactNode => {
+export const BookmarkField = (): ReactNode => {
   const items = useSelectorTyped(state => state.quotation.items, itemsShapeEqualityFn)
 
   if (items.length === 0) return null
@@ -23,7 +23,7 @@ export const FirstItem = (): ReactNode => {
   if (firstItem === undefined) return null
 
   return (
-    <FirstItemLayout>
+    <BookmarkFieldLayout>
       <DraggableItemsContainer
         useDragHandle
         useWindowAsScrollContainer
@@ -88,11 +88,11 @@ export const FirstItem = (): ReactNode => {
           })}
         </AnimatePresence>
       </DraggableItemsContainer >
-    </FirstItemLayout>
+    </BookmarkFieldLayout>
   )
 }
 
-function FirstItemLayout({ children }: { children: React.ReactNode }): JSX.Element {
+function BookmarkFieldLayout({ children }: { children: React.ReactNode }): JSX.Element {
   return (
     <OutlinedDivWithLabel label='Item'>
       <Box

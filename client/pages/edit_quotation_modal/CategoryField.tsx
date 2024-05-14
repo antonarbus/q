@@ -7,7 +7,7 @@ type Props = {
   categorySignal: Signal<string>
 }
 
-export const CategoryAutocomplete = ({ categorySignal }: Props): JSX.Element => {
+export const CategoryField = ({ categorySignal }: Props): JSX.Element => {
   const { data } = useGetQuotationCategoriesQuery()
 
   return (

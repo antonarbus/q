@@ -1,9 +1,10 @@
+import { dispatch } from '@lib_instances/store'
 import { IconButton } from '@mui/material'
 import type { ReqBody } from '@server/api/deleteItemRouter'
 import { AiTwotoneEdit } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { useGetQuotationMutation } from '@entities/quotation'
+import { quotationSlice, useGetQuotationMutation } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
@@ -16,6 +17,8 @@ export const EditQuotationButton = ({ id }: ReqBody): JSX.Element => {
     if (isSuccess) {
       const { quotation } = data
       if (!quotation) return
+      dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
+      // todo: no need to pass quotation in navigate after we load it into the redux
       navigate(`./${route.editQuotation}`, { state: { quotation } })
     }
   }, [isSuccess])

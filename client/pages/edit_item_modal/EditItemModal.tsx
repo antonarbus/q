@@ -4,7 +4,7 @@ import { useCallback, useRef } from 'react'
 import { FiEdit3 } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { FirstItem } from '@widgets/items/FirstItem'
+import { BookmarkField } from '@pages/edit_item_modal/BookmarkField'
 import { useGetItemCategoriesQuery, useGetItemsQuery, useSaveItemMutation } from '@entities/item'
 import { itemKey, quotationSlice, saveItemHeightByIndex } from '@entities/quotation'
 import { FormModal } from '@shared/components'
@@ -12,9 +12,9 @@ import { cls } from '@shared/consts/cls'
 import { notify } from '@shared/ui/top_msg'
 import { cleanHtml } from '@shared/utils/itemsUtils'
 import { slideElement } from '@shared/utils/slideElement'
-import { CategoryAutocomplete } from './CategoryAutocomplete'
-import { DescriptionTextarea } from './DescriptionTextarea'
-import { NameInput } from './NameInput'
+import { CategoryField } from './CategoryField'
+import { DescriptionField } from './DescriptionField'
+import { NameField } from './NameField'
 
 export const EditItemModal = (): JSX.Element => {
   const navigate = useNavigate()
@@ -158,10 +158,10 @@ export const EditItemModal = (): JSX.Element => {
       onSlideModalOutComplete={onSlideModalOutComplete}
       onSubmit={onSubmit}
     >
-      <NameInput nameSignal={nameSignal}/>
-      <CategoryAutocomplete categorySignal={categorySignal}/>
-      <DescriptionTextarea descSignal={descSignal} />
-      <FirstItem />
+      <NameField nameSignal={nameSignal}/>
+      <CategoryField categorySignal={categorySignal}/>
+      <DescriptionField descSignal={descSignal} />
+      <BookmarkField />
     </FormModal>
   )
 }
