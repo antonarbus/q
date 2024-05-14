@@ -3,13 +3,13 @@ import type { MouseEvent, ReactNode, RefObject } from 'react'
 
 type Props = {
   children?: ReactNode
-  cssProps?: React.CSSProperties
+  sx?: React.CSSProperties
   reference?: RefObject<HTMLDivElement>
   title?: React.ReactNode
   logo?: React.ReactNode
 }
 
-export const CardCustom = ({ children, cssProps, reference, title, logo }: Props): JSX.Element => (
+export const CardCustom = ({ children, sx, reference, title, logo }: Props): JSX.Element => (
   <div
     ref={reference}
     onMouseDown={(e: MouseEvent): void => {
@@ -36,7 +36,7 @@ export const CardCustom = ({ children, cssProps, reference, title, logo }: Props
         boxShadow:
           '0px 11px 15px -7px rgb(0 0 0 / 40%), 0px 24px 38px 3px rgb(0 0 0 / 28%), 0px 9px 46px 8px rgb(0 0 0 / 24%)',
       },
-      ...cssProps,
+      ...sx,
     }}
   >
     {Boolean(logo) && (

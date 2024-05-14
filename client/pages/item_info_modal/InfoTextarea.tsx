@@ -6,15 +6,15 @@ type Props = {
   descSignal: Signal<string>
 }
 
-export const DescriptionTextarea = ({ descSignal }: Props): JSX.Element => {
+export const InfoTextarea = ({ descSignal }: Props): JSX.Element => {
   return (
     <div style={{ position: 'relative' }}>
       <TextField
         disabled={false}
         fullWidth
-        name='description'
-        placeholder='Description'
-        label='Description'
+        name='info'
+        placeholder='Info'
+        label='Info'
         multiline
         rows={4}
         value={descSignal.value}
@@ -32,7 +32,6 @@ export const DescriptionTextarea = ({ descSignal }: Props): JSX.Element => {
           autoComplete: 'off',
         }}
         sx={{
-          mb: 2,
           '.MuiInputBase-root': {
             alignItems: 'flex-start',
             pl: '14px !important',
