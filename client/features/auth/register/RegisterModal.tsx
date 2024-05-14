@@ -1,16 +1,12 @@
-import { theme } from '@lib_instances/theme'
 import { LockOutlined } from '@mui/icons-material'
-import { Avatar, Box } from '@mui/material'
+import { Box } from '@mui/material'
 import { useSignal, useSignalEffect } from '@preact/signals-react'
-import type { FormEvent, MouseEvent } from 'react'
-import { useRef } from 'react'
+import type { MouseEvent } from 'react'
+import { useCallback, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useRegisterMutation } from '@entities/user'
-import { ConfirmPasswordInput, EmailInput, PasswordInput } from '@shared/components'
-import { BackdropWithSlidableModal } from '@shared/components/BackdropWithSlidableModal'
-import { ButtonCustom } from '@shared/components/ButtonCustom'
-import { CardCustom } from '@shared/components/CardCustom'
+import { ConfirmPasswordInput, EmailInput, FormModal, PasswordInput } from '@shared/components'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
@@ -18,7 +14,7 @@ import { slideElement } from '@shared/utils/slideElement'
 export const RegisterModal = (): JSX.Element => {
   const navigate = useNavigate()
   const inputRef = useRef<HTMLDivElement>(null)
-  const cardRef = useRef<HTMLDivElement>(null)
+  const modalRef = useRef<HTMLDivElement>(null)
 
   const emailSignal = useSignal('')
   const passwordSignal = useSignal('')
@@ -33,98 +29,102 @@ export const RegisterModal = (): JSX.Element => {
   })
 
   useUpdateEffect(() => {
-    if (!isSuccess) return
-
-    if (data.message === 'activation link sent') {
-      notify({ msg: 'Check your mailbox.', theme: 'light' })
+    if (isSuccess) {
+      if (data.message === 'activation link sent') {
+        notify({ msg: 'Check your mailbox.', theme: 'light' })
+      }
     }
   }, [isSuccess])
 
   useUpdateEffect(() => {
-    if (!isError) return
+    if (isError) {
+      if (error.response?.data.message === 'already exists') {
+        notify({ msg: 'Already exists', type: 'info', theme: 'light' })
+        return
+      }
 
-    if (error.response?.data.message === 'already exists') {
-      notify({ msg: 'Already exists', type: 'info', theme: 'light' })
-      return
+      if (error.response?.data.message === 'validation error') {
+        notify({ msg: 'Validation error', type: 'warn', theme: 'light' })
+        return
+      }
+
+      notify({ msg: 'Internal error', type: 'error', theme: 'light' })
     }
-
-    if (error.response?.data.message === 'validation error') {
-      notify({ msg: 'Validation error', type: 'warn', theme: 'light' })
-      return
-    }
-
-    notify({ msg: 'Internal error', type: 'error', theme: 'light' })
   }, [isError])
 
-  return (
-    <BackdropWithSlidableModal
-      onSlideModalInComplete={(): void => {
-        /* inputRef.current.focus() */
-      }}
-      onSlideModalOutComplete={(): void => {
-        navigate('..')
-      }}
-    >
-      <CardCustom
-        reference={cardRef}
-        title='Register'
-        logo={
-          <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }}>
-            <LockOutlined />
-          </Avatar>
-        }
-      >
-        <form
-          onSubmit={async (e: FormEvent): Promise<void> => {
-            e.preventDefault()
-            register({
-              email: emailSignal.value,
-              password: passwordSignal.value,
-            })
-          }}
-        >
-          <EmailInput
-            inputRef={inputRef}
-            emailSignal={emailSignal}
-            isEmailOkSignal={isEmailOkSignal}
-          />
-          <PasswordInput
-            passwordSignal={passwordSignal}
-          />
-          <ConfirmPasswordInput
-            originalPasswordSignal={passwordSignal}
-            isConfirmPasswordOkSignal={isConfirmPasswordOkSignal}
-          />
-          <ButtonCustom
-            disabled={isButtonDisabledSignal.value}
-            isButtonPending={isPending}
-            isButtonSuccess={isSuccess}
-            isButtonError={isError}
-          >
-            REGISTER
-          </ButtonCustom>
-          <Box
-            sx={{ textAlign: 'right', marginTop: '20px' }}
-          >
-            <Link
-              to={`../${route.login}`}
-              onClick={(e: MouseEvent): void => {
-                if (!cardRef.current) return
-                e.preventDefault()
+  const onSlideModalOutComplete = useCallback(() => {
+    navigate('..')
+  }, [])
 
-                slideElement({
-                  element: cardRef.current,
-                  onSlideElementComplete: () => {
-                    navigate(`../${route.login}`)
-                  },
-                })
-              }}
-            >
-              Log in?
-            </Link>
-          </Box>
-        </form>
-      </CardCustom>
-    </BackdropWithSlidableModal>
+  const onCloseClick = useCallback(() => {
+    slideElement({
+      element: modalRef.current,
+      onSlideElementComplete: () => {
+        navigate('..')
+      },
+    })
+  }, [])
+
+  const onSubmit = (e: React.FormEvent): void => {
+    e.preventDefault()
+
+    register({
+      email: emailSignal.value,
+      password: passwordSignal.value,
+    })
+  }
+
+  return (
+    <FormModal
+      modalRef={modalRef}
+      width='350px'
+      paddingContent='50px 40px 10px 40px'
+      headerText='Register'
+      headerIcon={<LockOutlined />}
+      buttonText='REGISTER'
+      isButtonDisabled={isButtonDisabledSignal.value}
+      isButtonLoading={isPending}
+      isButtonSuccess={isSuccess}
+      isButtonError={isError}
+      onSlideModalOutComplete={onSlideModalOutComplete}
+      onSubmit={onSubmit}
+      onCloseClick={onCloseClick}
+    >
+      <EmailInput
+        inputRef={inputRef}
+        emailSignal={emailSignal}
+        isEmailOkSignal={isEmailOkSignal}
+      />
+      <PasswordInput
+        passwordSignal={passwordSignal}
+      />
+      <ConfirmPasswordInput
+        originalPasswordSignal={passwordSignal}
+        isConfirmPasswordOkSignal={isConfirmPasswordOkSignal}
+      />
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'row-reverse',
+          justifyContent: 'space-between',
+        }}
+      >
+      <Link
+        to={`../${route.login}`}
+        onClick={(e: MouseEvent): void => {
+          e.preventDefault()
+
+          slideElement({
+            element: modalRef.current,
+            onSlideElementComplete: () => {
+              navigate(`../${route.login}`)
+            },
+          })
+        }}
+      >
+        Log in
+      </Link>
+      </Box>
+    </FormModal>
   )
 }
