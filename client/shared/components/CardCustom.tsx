@@ -1,21 +1,21 @@
-import { Typography } from '@mui/material'
+import { type SxProps, Typography, Box } from '@mui/material'
 import type { MouseEvent, ReactNode, RefObject } from 'react'
 
 type Props = {
   children?: ReactNode
-  sx?: React.CSSProperties
+  sx?: SxProps
   reference?: RefObject<HTMLDivElement>
   title?: React.ReactNode
   logo?: React.ReactNode
 }
 
 export const CardCustom = ({ children, sx, reference, title, logo }: Props): JSX.Element => (
-  <div
+  <Box
     ref={reference}
     onMouseDown={(e: MouseEvent): void => {
       e.stopPropagation()
     }}
-    css={{
+    sx={{
       display: 'flex',
       flexDirection: 'column',
       maxHeight: 'calc(100vh - 64px)',
@@ -54,5 +54,5 @@ export const CardCustom = ({ children, sx, reference, title, logo }: Props): JSX
       </Typography>
     )}
     {children}
-  </div>
+  </Box>
 )
