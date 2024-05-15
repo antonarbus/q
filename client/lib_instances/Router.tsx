@@ -120,7 +120,7 @@ export const router = createBrowserRouter([
         ],
       },
       {
-        path: route.items,
+        path: route.bookmarks,
         element: (
           <Suspense>
             <ItemsTable />

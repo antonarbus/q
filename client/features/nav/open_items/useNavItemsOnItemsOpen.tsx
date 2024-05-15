@@ -10,13 +10,13 @@ export const useNavItemsOnItemsOpen = (): void => {
         navItemId.save,
         navItemId.pdf,
         navItemId.share,
-        navItemId.items,
+        navItemId.bookmarks,
         navItemId.insert,
       ],
     }))
 
     dispatch(navSlice.actions.removeUnderlineFromTopNav())
-    dispatch(navSlice.actions.underlineNavItem({ navItemIdKey: navItemId.items }))
+    dispatch(navSlice.actions.underlineNavItem({ navItemIdKey: navItemId.bookmarks }))
   })
 
   useUnmount(() => {
