@@ -55,7 +55,7 @@ export const LoginModal = (): JSX.Element => {
         void refetchQuotations()
       }
 
-      if (location.pathname.includes(route.items)) {
+      if (location.pathname.includes(route.bookmarks)) {
         void refetchItems()
       }
 

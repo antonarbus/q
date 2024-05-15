@@ -7,7 +7,7 @@ export const navItemId = {
   share: 'share',
   insert: 'insert',
   quotations: 'quotations',
-  items: 'items',
+  bookmarks: 'bookmarks',
   login: 'login',
   account: 'account',
   settings: 'settings',

@@ -1,6 +1,6 @@
 import { getState } from '@lib_instances/store'
 import { type ReactNode, type MouseEvent } from 'react'
-import { BsBookmarkPlus } from 'react-icons/bs'
+import { MdOutlineStarOutline } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import { getItemFromStore, itemKey, saveItemHeightByIndex, useItem } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
@@ -13,7 +13,7 @@ export const SaveItemIcon = (): ReactNode => {
   const { itemIndex } = useItem()
 
   return (
-    <BsBookmarkPlus
+    <MdOutlineStarOutline
       className='save-item-icon'
       tabIndex={-1}
       onClick={(e: MouseEvent): void => {

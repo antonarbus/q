@@ -1,6 +1,6 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { type MouseEvent, type ReactNode } from 'react'
-import { BsBookmarkPlus } from 'react-icons/bs'
+import { MdOutlineStarOutline } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import { boqRowKey, getBoqRowFromStore, quotationSlice, useItem, useRow } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
@@ -14,7 +14,7 @@ export const SaveBoqRowIcon = (): ReactNode => {
   const { rowIndex } = useRow()
 
   return (
-    <BsBookmarkPlus
+    <MdOutlineStarOutline
       className='save-boq-row-icon'
       tabIndex={-1}
       onClick={(e: MouseEvent): void => {

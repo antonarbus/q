@@ -1,11 +1,12 @@
 import { Person, Settings } from '@mui/icons-material'
-import { BsFiletypePdf, BsBookmarkPlus } from 'react-icons/bs'
-import { CgInsertAfter } from 'react-icons/cg'
+import { BsFiletypePdf } from 'react-icons/bs'
 import { CiViewTable } from 'react-icons/ci'
 import { FaRegRectangleList, FaGripLines } from 'react-icons/fa6'
 import { FiLogOut, FiLogIn, FiDollarSign } from 'react-icons/fi'
 import { IoText } from 'react-icons/io5'
-import { MdLineStyle } from 'react-icons/md'
+import { MdSaveAlt, MdOutlineInsertDriveFile } from 'react-icons/md'
+import { PiFolderSimpleStarDuotone } from 'react-icons/pi'
+import { RiMenuAddFill } from 'react-icons/ri'
 import { TbRectangleVertical } from 'react-icons/tb'
 import { VscNewFile } from 'react-icons/vsc'
 import { insertBoqItem, insertBoqRow, insertPriceItem, insertTextItem } from '@features/items/insert'
@@ -35,7 +36,7 @@ export const navStructure: MenuItemType[] = [
       },
       {
         id: navItemId.save,
-        icon: <BsBookmarkPlus />,
+        icon: <MdSaveAlt />,
         isHidden: false,
         name: 'Save',
         // shortcut: ['control', 's'],
@@ -54,7 +55,7 @@ export const navStructure: MenuItemType[] = [
       },
       {
         id: navItemId.insert,
-        icon: <CgInsertAfter />,
+        icon: <RiMenuAddFill />,
         isHidden: false,
         name: 'Insert',
         disabled: true,
@@ -110,11 +111,11 @@ export const navStructure: MenuItemType[] = [
         ],
       },
       {
-        id: navItemId.items,
-        icon: <MdLineStyle />,
+        id: navItemId.bookmarks,
+        icon: <PiFolderSimpleStarDuotone />,
         isHidden: false,
-        name: 'Items',
-        link: route.items,
+        name: 'Bookmarks',
+        link: route.bookmarks,
       },
       {
         id: navItemId.quotations,
