@@ -6,7 +6,7 @@ import { useCallback, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useRequestPasswordResetMutation } from '@entities/user'
-import { EmailInput, FormModal } from '@shared/components'
+import { EmailField, FormModal } from '@shared/components'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
@@ -88,7 +88,7 @@ export const RequestPasswordResetModal = (): JSX.Element => {
       onSubmit={onSubmit}
       onCloseClick={onCloseClick}
     >
-      <EmailInput
+      <EmailField
         inputRef={inputRef}
         emailSignal={emailSignal}
         isEmailOkSignal={isEmailOkSignal}
@@ -100,21 +100,21 @@ export const RequestPasswordResetModal = (): JSX.Element => {
           justifyContent: 'space-between',
         }}
       >
-      <Link
-        to={`../${route.login}`}
-        onClick={(e: MouseEvent): void => {
-          e.preventDefault()
+        <Link
+          to={`../${route.login}`}
+          onClick={(e: MouseEvent): void => {
+            e.preventDefault()
 
-          slideElement({
-            element: modalRef.current,
-            onSlideElementComplete: () => {
-              navigate(`../${route.login}`)
-            },
-          })
-        }}
-      >
-        Log in
-      </Link>
+            slideElement({
+              element: modalRef.current,
+              onSlideElementComplete: () => {
+                navigate(`../${route.login}`)
+              },
+            })
+          }}
+        >
+          Log in
+        </Link>
       </Box>
     </FormModal>
   )

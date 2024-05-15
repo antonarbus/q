@@ -11,9 +11,9 @@ import { nanoid } from '@shared/lib/nanoid'
 import { navSlice, showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@shared/nav'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
-import { CategoryAutocomplete } from './CategoryAutocomplete'
-import { DescriptionTextarea } from './DescriptionTextarea'
-import { NameInput } from './NameInput'
+import { CategoryField } from './CategoryField'
+import { DescriptionField } from './DescriptionField'
+import { NameField } from './NameField'
 
 export const SaveQuotationModal = (): JSX.Element => {
   const navigate = useNavigate()
@@ -124,9 +124,9 @@ export const SaveQuotationModal = (): JSX.Element => {
       onSubmit={onSubmit}
       onCloseClick={onCloseClick}
     >
-      <NameInput nameSignal={nameSignal}/>
-      <CategoryAutocomplete categorySignal={categorySignal}/>
-      <DescriptionTextarea descSignal={descSignal}/>
+      <NameField nameSignal={nameSignal}/>
+      <CategoryField categorySignal={categorySignal}/>
+      <DescriptionField descSignal={descSignal}/>
     </FormModal>
   )
 }

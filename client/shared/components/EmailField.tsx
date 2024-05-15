@@ -21,7 +21,7 @@ type Suggestion = {
   full: string
 }
 
-export const EmailInput = ({ emailSignal, isEmailOkSignal, inputRef, disabled }: Props): JSX.Element => {
+export const EmailField = ({ emailSignal, isEmailOkSignal, inputRef, disabled }: Props): JSX.Element => {
   const emailSuggestionSignal = useSignal('')
   const initEmailLabel = 'Email'
   const emailLabelSignal = useSignal(initEmailLabel)

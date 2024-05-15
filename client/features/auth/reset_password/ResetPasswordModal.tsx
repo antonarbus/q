@@ -8,7 +8,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useResetPasswordMutation, userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
-import { ConfirmPasswordInput, EmailInput, FormModal, PasswordInput } from '@shared/components'
+import { ConfirmPasswordField, EmailField, FormModal, PasswordField } from '@shared/components'
 import { navItemId } from '@shared/consts/navItemId'
 import { route } from '@shared/consts/route'
 import { navSlice } from '@shared/nav'
@@ -116,16 +116,16 @@ export const ResetPasswordModal = (): React.ReactNode => {
       onSubmit={onSubmit}
       onCloseClick={onCloseClick}
     >
-      <EmailInput
+      <EmailField
         disabled
         inputRef={inputRef}
         emailSignal={emailSignal}
         isEmailOkSignal={isEmailOkSignal}
       />
-      <PasswordInput
+      <PasswordField
         passwordSignal={passwordSignal}
       />
-      <ConfirmPasswordInput
+      <ConfirmPasswordField
         originalPasswordSignal={passwordSignal}
         isConfirmPasswordOkSignal={isConfirmPasswordOkSignal}
       />

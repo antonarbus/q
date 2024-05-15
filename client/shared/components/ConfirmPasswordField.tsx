@@ -1,12 +1,12 @@
 import { type Signal, useSignal, useSignalEffect } from '@preact/signals-react'
-import { PasswordInput } from './PasswordInput'
+import { PasswordField } from './PasswordField'
 
 type Props = {
   originalPasswordSignal: Signal<string>
   isConfirmPasswordOkSignal: Signal<boolean>
 }
 
-export const ConfirmPasswordInput = ({ originalPasswordSignal, isConfirmPasswordOkSignal }: Props): JSX.Element => {
+export const ConfirmPasswordField = ({ originalPasswordSignal, isConfirmPasswordOkSignal }: Props): JSX.Element => {
   const confirmPasswordSignal = useSignal('')
   const didBlurSignal = useSignal(false)
   const initLabel = 'Confirm password'
@@ -19,14 +19,8 @@ export const ConfirmPasswordInput = ({ originalPasswordSignal, isConfirmPassword
     labelSignal.value = isLabelRedSignal.value ? 'Passwords do not match' : initLabel
   })
 
-  // useUpdateEffect(() => {
-  // }, [didBlurSignal.value, originalPasswordSignal.value, confirmPasswordSignal.value, isConfirmPasswordOkSignal.value])
-
-  // useUpdateEffect(() => {
-  // }, [isLabelRedSignal.value])
-
   return (
-    <PasswordInput
+    <PasswordField
       passwordSignal={confirmPasswordSignal}
       label={labelSignal.value}
       isLabelRed={isLabelRedSignal.value}
