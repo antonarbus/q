@@ -16,7 +16,6 @@ export const ItemInfoModal = (): JSX.Element => {
   const itemIndex = location.state.itemIndex as number | undefined
   const rowIndex = location.state.rowIndex as number | undefined
 
-  // todo: change desc --> info
   const infoSignal = useSignal(item?.info ?? '')
 
   useSignalEffect(() => {
