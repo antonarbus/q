@@ -10,7 +10,6 @@ import { InfoField } from './InfoField'
 export const QuotationInfoModal = (): JSX.Element => {
   const navigate = useNavigate()
   const cardRef = useRef<HTMLDivElement>(null)
-  // todo: change desc --> info
   const infoSignal = useSignal(getState().quotation.info ?? '')
 
   useSignalEffect(() => {
