@@ -5,8 +5,5 @@ export const updateQuotationInfoReducer = (state: Quotation, action: PayloadActi
   quotation: Quotation
 }>): void => {
   const { quotation } = action.payload
-
-  state.name = quotation.name
-  state.category = quotation.category
-  state.desc = quotation.desc
+  state.info = quotation.info
 }

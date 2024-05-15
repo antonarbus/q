@@ -13,7 +13,7 @@ export const InfoField = ({ infoSignal }: Props): JSX.Element => {
         disabled={false}
         fullWidth
         name='info'
-        placeholder='Info'
+        placeholder='Internal info'
         label='Info'
         multiline
         rows={4}

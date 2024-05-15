@@ -11,7 +11,7 @@ export const QuotationInfoModal = (): JSX.Element => {
   const navigate = useNavigate()
   const cardRef = useRef<HTMLDivElement>(null)
   // todo: change desc --> info
-  const infoSignal = useSignal(getState().quotation.desc ?? '')
+  const infoSignal = useSignal(getState().quotation.info ?? '')
 
   useSignalEffect(() => {
     const { quotation } = getState()
@@ -19,7 +19,7 @@ export const QuotationInfoModal = (): JSX.Element => {
     dispatch(quotationSlice.actions.updateQuotationInfoReducer({
       quotation: {
         ...quotation,
-        desc: infoSignal.value,
+        info: infoSignal.value,
       },
     }))
   })

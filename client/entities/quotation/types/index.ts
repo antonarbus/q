@@ -8,6 +8,7 @@ type ItemCommon = {
   name: string
   category: string
   desc?: string
+  info?: string
   width?: number
   height?: number
   isFroala?: boolean
@@ -102,7 +103,8 @@ export type Quotation = {
   email: string
   name: string
   category: string
-  desc: string
+  desc?: string
+  info?: string
   createdAt?: Date
   updatedAt?: Date
   openedAt?: Date

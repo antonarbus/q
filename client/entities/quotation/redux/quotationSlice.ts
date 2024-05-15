@@ -40,7 +40,6 @@ const initialState: Quotation = {
   email: '',
   name: '',
   category: '',
-  desc: '',
   items: [],
 }
 
