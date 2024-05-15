@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { quotationSlice } from '@entities/quotation'
 import { BackdropWithSlidableModal } from '@shared/components/BackdropWithSlidableModal'
 import { CardCustom } from '@shared/components/CardCustom'
-import { InfoTextarea } from './InfoTextarea'
+import { InfoField } from './InfoField'
 
 export const QuotationInfoModal = (): JSX.Element => {
   const navigate = useNavigate()
@@ -36,7 +36,7 @@ export const QuotationInfoModal = (): JSX.Element => {
         reference={cardRef}
         sx={{ p: '30px' }}
       >
-        <InfoTextarea infoSignal={infoSignal}/>
+        <InfoField infoSignal={infoSignal}/>
       </CardCustom>
     </BackdropWithSlidableModal>
   )

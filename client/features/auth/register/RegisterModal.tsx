@@ -6,7 +6,7 @@ import { useCallback, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useRegisterMutation } from '@entities/user'
-import { ConfirmPasswordInput, EmailInput, FormModal, PasswordInput } from '@shared/components'
+import { ConfirmPasswordField, EmailField, FormModal, PasswordField } from '@shared/components'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
@@ -90,15 +90,15 @@ export const RegisterModal = (): JSX.Element => {
       onSubmit={onSubmit}
       onCloseClick={onCloseClick}
     >
-      <EmailInput
+      <EmailField
         inputRef={inputRef}
         emailSignal={emailSignal}
         isEmailOkSignal={isEmailOkSignal}
       />
-      <PasswordInput
+      <PasswordField
         passwordSignal={passwordSignal}
       />
-      <ConfirmPasswordInput
+      <ConfirmPasswordField
         originalPasswordSignal={passwordSignal}
         isConfirmPasswordOkSignal={isConfirmPasswordOkSignal}
       />

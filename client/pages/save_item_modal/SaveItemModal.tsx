@@ -10,9 +10,9 @@ import { FormModal } from '@shared/components'
 import { nanoid } from '@shared/lib/nanoid'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
-import { CategoryAutocomplete } from './CategoryAutocomplete'
-import { DescriptionTextarea } from './DescriptionTextarea'
-import { NameInput } from './NameInput'
+import { CategoryField } from './CategoryField'
+import { DescriptionField } from './DescriptionField'
+import { NameField } from './NameField'
 
 export const SaveItemModal = (): JSX.Element => {
   const navigate = useNavigate()
@@ -106,9 +106,9 @@ export const SaveItemModal = (): JSX.Element => {
       onSubmit={onSubmit}
       onCloseClick={onCloseClick}
     >
-      <NameInput nameSignal={nameSignal}/>
-      <CategoryAutocomplete categorySignal={categorySignal}/>
-      <DescriptionTextarea descSignal={descSignal}/>
+      <NameField nameSignal={nameSignal}/>
+      <CategoryField categorySignal={categorySignal}/>
+      <DescriptionField descSignal={descSignal}/>
     </FormModal>
   )
 }

@@ -3,24 +3,23 @@ import { type Signal } from '@preact/signals-react'
 import { BsFileEarmarkText } from 'react-icons/bs'
 
 type Props = {
-  descSignal: Signal<string>
+  infoSignal: Signal<string>
 }
 
-export const DescriptionTextarea = ({ descSignal }: Props): JSX.Element => {
+export const InfoField = ({ infoSignal }: Props): JSX.Element => {
   return (
     <div style={{ position: 'relative' }}>
       <TextField
         disabled={false}
         fullWidth
-        name='description'
-        placeholder='Description'
-        label='Description'
+        name='info'
+        placeholder='Info'
+        label='Info'
         multiline
         rows={4}
-        // maxRows={Infinity}
-        value={descSignal.value}
+        value={infoSignal.value}
         onChange={(e): void => {
-          descSignal.value = e.target.value
+          infoSignal.value = e.target.value
         }}
         InputProps={{
           startAdornment: (
@@ -36,7 +35,6 @@ export const DescriptionTextarea = ({ descSignal }: Props): JSX.Element => {
           '.MuiInputBase-root': {
             alignItems: 'flex-start',
             pl: '14px !important',
-            background: 'white',
           },
         }}
       />

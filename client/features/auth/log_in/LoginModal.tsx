@@ -10,7 +10,7 @@ import { useGetItemsQuery } from '@entities/item'
 import { useGetQuotationsQuery } from '@entities/quotation'
 import { useLogInMutation, userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
-import { EmailInput, FormModal, PasswordInput } from '@shared/components'
+import { EmailField, FormModal, PasswordField } from '@shared/components'
 import { navItemId } from '@shared/consts/navItemId'
 import { route } from '@shared/consts/route'
 import { nanoid } from '@shared/lib/nanoid'
@@ -130,12 +130,12 @@ export const LoginModal = (): JSX.Element => {
       onSubmit={onSubmit}
       onCloseClick={onCloseClick}
     >
-      <EmailInput
+      <EmailField
         inputRef={inputRef}
         emailSignal={emailSignal}
         isEmailOkSignal={isEmailOkSignal}
       />
-      <PasswordInput
+      <PasswordField
         passwordSignal={passwordSignal}
       />
       <Box
