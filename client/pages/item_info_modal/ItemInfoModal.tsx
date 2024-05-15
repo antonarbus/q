@@ -17,7 +17,7 @@ export const ItemInfoModal = (): JSX.Element => {
   const rowIndex = location.state.rowIndex as number | undefined
 
   // todo: change desc --> info
-  const infoSignal = useSignal(item?.desc ?? '')
+  const infoSignal = useSignal(item?.info ?? '')
 
   useSignalEffect(() => {
     if (!item) return
@@ -27,7 +27,7 @@ export const ItemInfoModal = (): JSX.Element => {
       rowIndex,
       item: {
         ...item,
-        desc: infoSignal.value,
+        info: infoSignal.value,
       },
     }))
   })

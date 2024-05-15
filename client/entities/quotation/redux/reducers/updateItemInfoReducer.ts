@@ -14,9 +14,7 @@ export const updateItemInfoReducer = (state: Quotation, action: PayloadAction<{
   if (rowIndex !== undefined && itemIndex !== undefined) {
     const boqRow = getBoqRowFromState({ state, itemIndex, rowIndex })
     if (!boqRow) return
-    boqRow.name = item.name
-    boqRow.category = item.category
-    boqRow.desc = item.desc
+    boqRow.info = item.info
     return
   }
 
@@ -24,8 +22,6 @@ export const updateItemInfoReducer = (state: Quotation, action: PayloadAction<{
   if (itemIndex !== undefined) {
     const currentItem = getItemFromState({ itemIndex, state })
     if (!currentItem) return
-    currentItem.name = item.name
-    currentItem.category = item.category
-    currentItem.desc = item.desc
+    currentItem.info = item.info
   }
 }
