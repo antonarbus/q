@@ -11,6 +11,7 @@ import { TbRectangleVertical } from 'react-icons/tb'
 import { VscNewFile } from 'react-icons/vsc'
 import { insertBoqItem, insertBoqRow, insertPriceItem, insertTextItem } from '@features/insert'
 import { openBookmarksPage } from '@features/open_close/open_bookmarks_page'
+import { openLoginModal } from '@features/open_close/open_login_modal'
 import { openNewQuotationPage } from '@features/open_close/open_new_quotation_page'
 import { openQuotationsPage } from '@features/open_close/open_quotations_page'
 import { openSaveQuotationModal } from '@features/open_close/open_save_quotation_modal'
@@ -142,6 +143,9 @@ export const navStructure: MenuItemType[] = [
         isHidden: false,
         name: 'Log in',
         link: `./${route.login}`,
+        func: () => {
+          openLoginModal()
+        },
       },
       {
         id: navItemId.account,

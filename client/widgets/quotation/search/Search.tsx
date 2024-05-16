@@ -1,7 +1,7 @@
-import { dispatch } from '@lib_instances/store'
+import { dispatch, useSelectorTyped } from '@lib_instances/store'
 import { Autocomplete, Box, IconButton, InputAdornment, Paper, TextField } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
-import { type HTMLAttributes, useCallback } from 'react'
+import { type HTMLAttributes, useCallback, useEffect } from 'react'
 import { BsFileEarmarkText, BsTags } from 'react-icons/bs'
 import { GoSearch } from 'react-icons/go'
 import { IoClose } from 'react-icons/io5'
@@ -18,12 +18,14 @@ import { getJsxWithBoldSubstr } from '@shared/utils/getJsxWithBoldSubstr'
 export const Search = (): JSX.Element => {
   const { data: itemsData, isPending: isPendingItems, refetch } = useGetItemsQuery()
   const { mutate: loadItem, isPending: isPendingGetItem, isSuccess, isError, error, data: itemData, variables } = useGetItemMutation()
+  const email = useSelectorTyped(state => state.user.email)
   const options = itemsData?.documents ?? []
   const inputValueSignal = useSignal('')
 
-  useEffectOnce(() => {
+  useEffect(() => {
+    if (!email) return
     void refetch()
-  })
+  }, [email])
 
   useUpdateEffect(() => {
     if (isSuccess) {
