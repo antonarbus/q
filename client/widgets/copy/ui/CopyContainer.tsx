@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
 import { PressEsc } from '@features/copy/close_copy_container_on_esc_key'
-import { usePasteClick } from '@features/items/paste'
-import { useMovePasteText } from '@features/items/paste_text_follow_cursor'
+import { usePasteClick, useMovePasteText } from '@features/items/paste'
 import { cursorPosSignal } from '@shared/utils/cursorPosSignal'
 import { FirstCopiedItem } from './FirstCopiedItem'
 import { RestOfCopiedItems } from './RestOfCopiedItems'
