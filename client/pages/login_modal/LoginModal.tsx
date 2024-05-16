@@ -2,7 +2,7 @@ import { dispatch } from '@lib_instances/store'
 import { LoginRounded } from '@mui/icons-material'
 import { Box } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
-import { useCallback, useRef } from 'react'
+import { useRef } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { OpenRegisterModalLink } from '@features/open_close/open_register_modal'
@@ -93,19 +93,6 @@ export const LoginModal = (): JSX.Element => {
     }
   }, [isError])
 
-  const onSlideModalOutComplete = useCallback(() => {
-    navigate('..')
-  }, [])
-
-  const onCloseClick = useCallback(() => {
-    slideElement({
-      element: modalRef.current,
-      onSlideElementComplete: () => {
-        navigate('..')
-      },
-    })
-  }, [])
-
   const onSubmit = (e: React.FormEvent): void => {
     e.preventDefault()
 
@@ -127,9 +114,8 @@ export const LoginModal = (): JSX.Element => {
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
       isButtonError={isError}
-      onSlideModalOutComplete={onSlideModalOutComplete}
       onSubmit={onSubmit}
-      onCloseClick={onCloseClick}
+      onCloseSlideModalOutAndNavigateUp={true}
     >
       <EmailField
         inputRef={inputRef}

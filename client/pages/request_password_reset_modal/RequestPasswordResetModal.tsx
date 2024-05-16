@@ -1,7 +1,7 @@
 import PasswordRoundedIcon from '@mui/icons-material/PasswordRounded'
 import { Box } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
-import { useCallback, useRef } from 'react'
+import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { OpenLoginModalLink } from '@features/open_close/open_login_modal'
@@ -52,19 +52,6 @@ export const RequestPasswordResetModal = (): JSX.Element => {
     }
   }, [isError])
 
-  const onSlideModalOutComplete = useCallback(() => {
-    navigate('..')
-  }, [])
-
-  const onCloseClick = useCallback(() => {
-    slideElement({
-      element: modalRef.current,
-      onSlideElementComplete: () => {
-        navigate('..')
-      },
-    })
-  }, [])
-
   const onSubmit = (e: React.FormEvent): void => {
     e.preventDefault()
 
@@ -83,9 +70,8 @@ export const RequestPasswordResetModal = (): JSX.Element => {
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
       isButtonError={isError}
-      onSlideModalOutComplete={onSlideModalOutComplete}
       onSubmit={onSubmit}
-      onCloseClick={onCloseClick}
+      onCloseSlideModalOutAndNavigateUp={true}
     >
       <EmailField
         inputRef={inputRef}

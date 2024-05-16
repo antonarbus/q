@@ -1,6 +1,8 @@
 import { theme } from '@lib_instances/theme'
 import { Close } from '@mui/icons-material'
 import { Avatar, Box, type SxProps, Typography, IconButton } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
+import { slideElement } from '../utils/slideElement'
 import { BackdropWithSlidableModal } from './BackdropWithSlidableModal'
 import { ButtonCustom } from './ButtonCustom'
 
@@ -14,13 +16,14 @@ type Props = {
   headerText: string
   children: React.ReactNode
   onSubmit: (e: React.FormEvent) => void
-  onCloseClick: (e: React.MouseEvent) => void
+  onCloseClick?: (e: React.MouseEvent) => void
   buttonText: string
   isButtonDisabled?: boolean
   isButtonLoading?: boolean
   isButtonSuccess?: boolean
   isButtonError?: boolean
   modalRef: React.RefObject<HTMLDivElement>
+  onCloseSlideModalOutAndNavigateUp?: boolean
 }
 
 export const FormModal = ({
@@ -33,6 +36,7 @@ export const FormModal = ({
   children,
   onSubmit,
   onCloseClick,
+  onCloseSlideModalOutAndNavigateUp,
   buttonText,
   isButtonDisabled,
   isButtonLoading,
@@ -41,10 +45,13 @@ export const FormModal = ({
   modalRef,
   paddingContent,
 }: Props): JSX.Element => {
+  const navigate = useNavigate()
+
   return (
     <BackdropWithSlidableModal
       onSlideModalInComplete={onSlideModalInComplete}
       onSlideModalOutComplete={onSlideModalOutComplete}
+      clickAway={false}
     >
       <Box
         ref={modalRef}
@@ -97,7 +104,18 @@ export const FormModal = ({
               top: '-35px',
               right: '-35px',
             }}
-            onClick={onCloseClick}
+            onClick={(e) => {
+              if (onCloseSlideModalOutAndNavigateUp === true) {
+                slideElement({
+                  element: modalRef.current,
+                  onSlideElementComplete: () => {
+                    navigate('..')
+                  },
+                })
+              }
+
+              onCloseClick?.(e)
+            }}
           >
             <Close
               sx={{

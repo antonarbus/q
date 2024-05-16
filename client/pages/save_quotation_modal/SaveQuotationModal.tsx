@@ -1,6 +1,6 @@
 import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
 import { useSignal } from '@preact/signals-react'
-import { useCallback, useRef } from 'react'
+import { useRef } from 'react'
 import { MdSaveAlt } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
@@ -70,19 +70,6 @@ export const SaveQuotationModal = (): JSX.Element => {
     }
   }, [isError])
 
-  const onSlideModalOutComplete = useCallback(() => {
-    navigate('..')
-  }, [])
-
-  const onCloseClick = useCallback(() => {
-    slideElement({
-      element: modalRef.current,
-      onSlideElementComplete: () => {
-        navigate('..')
-      },
-    })
-  }, [])
-
   const onSubmit = (e: React.FormEvent): void => {
     e.preventDefault()
 
@@ -120,9 +107,8 @@ export const SaveQuotationModal = (): JSX.Element => {
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
       isButtonError={isError}
-      onSlideModalOutComplete={onSlideModalOutComplete}
       onSubmit={onSubmit}
-      onCloseClick={onCloseClick}
+      onCloseSlideModalOutAndNavigateUp={true}
     >
       <NameField nameSignal={nameSignal}/>
       <CategoryField categorySignal={categorySignal}/>

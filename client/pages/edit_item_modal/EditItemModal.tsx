@@ -60,19 +60,6 @@ export const EditItemModal = (): JSX.Element => {
     }
   }, [isError])
 
-  const onCloseClick = useCallback(() => {
-    slideElement({
-      element: modalRef.current,
-      onSlideElementComplete: () => {
-        navigate('..')
-      },
-    })
-  }, [])
-
-  const onSlideModalOutComplete = useCallback(() => {
-    navigate('..')
-  }, [])
-
   const onSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault()
 
@@ -154,8 +141,7 @@ export const EditItemModal = (): JSX.Element => {
       isButtonSuccess={isSuccess}
       isButtonError={isError}
       modalRef={modalRef}
-      onCloseClick={onCloseClick}
-      onSlideModalOutComplete={onSlideModalOutComplete}
+      onCloseSlideModalOutAndNavigateUp={true}
       onSubmit={onSubmit}
     >
       <NameField nameSignal={nameSignal}/>
