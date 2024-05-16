@@ -1,1 +1,0 @@
-export { useMovePasteText } from './useMovePasteText'
