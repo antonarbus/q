@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { quotationSlice, useGetQuotationMutation, newQuotationTemplate } from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
+import { route } from '@shared/consts/route'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
 import { navSlice } from '@shared/nav'
 import { reRenderQuotationSignal } from '@shared/signals/reRenderQuotationSignal'
@@ -83,7 +84,7 @@ export function useLoadQuotation(): void {
 
     if (error.response?.data.message === 'not logged in') {
       notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
-      void router.navigate('./login')
+      void router.navigate(`./${route.login}`)
     } else if (error.response?.data.message === 'not found') {
       notify({ msg: 'Not found', type: 'warn', theme: 'light' })
     } else {
