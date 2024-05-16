@@ -1,4 +1,4 @@
-import { onPriceItemResizeStop } from '@features/items/resize_item'
+import { onPriceItemResizeStop } from '@features/items/resize'
 import { ItemComp } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { PriceHeader } from './price_header/PriceHeader'

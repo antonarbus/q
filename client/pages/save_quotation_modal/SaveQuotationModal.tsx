@@ -1,7 +1,7 @@
 import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
 import { useSignal } from '@preact/signals-react'
 import { useCallback, useRef } from 'react'
-import { BsBookmarkStar } from 'react-icons/bs'
+import { MdSaveAlt } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { quotationSlice, useGetQuotationCategoriesQuery, useSaveQuotationMutation } from '@entities/quotation'
@@ -114,7 +114,7 @@ export const SaveQuotationModal = (): JSX.Element => {
       width='350px'
       paddingContent='50px 40px'
       headerText='Save quotation'
-      headerIcon={<BsBookmarkStar />}
+      headerIcon={<MdSaveAlt />}
       buttonText={id === 'new' ? 'SAVE' : 'UPDATE'}
       isButtonDisabled={isDisabled}
       isButtonLoading={isPending}

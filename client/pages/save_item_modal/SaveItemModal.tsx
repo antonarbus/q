@@ -1,7 +1,7 @@
 import { getState } from '@lib_instances/store'
 import { useSignal } from '@preact/signals-react'
 import { useCallback, useRef } from 'react'
-import { BsBookmarkStar } from 'react-icons/bs'
+import { MdOutlineStarOutline } from 'react-icons/md'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetItemCategoriesQuery, useSaveItemMutation } from '@entities/item'
@@ -95,9 +95,9 @@ export const SaveItemModal = (): JSX.Element => {
       modalRef={modalRef}
       width='350px'
       paddingContent='50px 40px'
-      headerText='Save item'
-      headerIcon={<BsBookmarkStar />}
-      buttonText='SAVE'
+      headerText='Bookmark item'
+      headerIcon={<MdOutlineStarOutline />}
+      buttonText='Add'
       isButtonDisabled={isDisabled}
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}

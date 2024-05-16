@@ -1,1 +1,0 @@
-export { OpenInfoItemModalIcon } from './OpenInfoItemModalIcon'
