@@ -11,6 +11,7 @@ import { TbRectangleVertical } from 'react-icons/tb'
 import { VscNewFile } from 'react-icons/vsc'
 import { insertBoqItem, insertBoqRow, insertPriceItem, insertTextItem } from '@features/insert'
 import { openNewQuotationPage } from '@features/open_close/open_new_quotation_page'
+import { openSaveQuotationModal } from '@features/open_close/open_save_quotation_modal'
 import { downloadPdf } from '@features/pdf'
 import { navItemId } from '@shared/consts/navItemId'
 import { route } from '@shared/consts/route'
@@ -41,6 +42,9 @@ export const navStructure: MenuItemType[] = [
         name: 'Save',
         // shortcut: ['control', 's'],
         link: `./${route.saveQuotation}`,
+        func: () => {
+          openSaveQuotationModal()
+        },
 
       },
       {
