@@ -1,0 +1,1 @@
+export { OpenRegisterModalLink } from './OpenRegisterModalLink'

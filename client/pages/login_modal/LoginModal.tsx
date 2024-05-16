@@ -6,6 +6,7 @@ import type { MouseEvent } from 'react'
 import { useCallback, useRef } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
+import { OpenRegisterModalLink, openRegisterModal } from '@features/open_close/open_register_modal'
 import { useGetItemsQuery } from '@entities/item'
 import { useGetQuotationsQuery } from '@entities/quotation'
 import { useLogInMutation, userSlice } from '@entities/user'
@@ -159,21 +160,7 @@ export const LoginModal = (): JSX.Element => {
         >
           Reset
         </Link>
-        <Link
-          to={`../${route.register}`}
-          style={{ textAlign: 'right' }}
-          onClick={(e: MouseEvent): void => {
-            e.preventDefault()
-            slideElement({
-              element: modalRef.current,
-              onSlideElementComplete: () => {
-                navigate(`../${route.register}`)
-              },
-            })
-          }}
-        >
-          Register
-        </Link>
+        <OpenRegisterModalLink modalRef={modalRef} />
       </Box>
     </FormModal>
   )
