@@ -1,9 +1,9 @@
 import { dispatch } from '@lib_instances/store'
 import { Box } from '@mui/material'
 import { useSignal, useSignalEffect } from '@preact/signals-react'
-import { useCallback, useRef } from 'react'
+import { useRef } from 'react'
 import { MdPassword } from 'react-icons/md'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { OpenLoginModalLink } from '@features/open_close/open_login_modal'
 import { OpenRegisterModalLink } from '@features/open_close/open_register_modal'
@@ -13,7 +13,6 @@ import { ConfirmPasswordField, EmailField, FormModal, PasswordField } from '@sha
 import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 import { notify } from '@shared/ui/top_msg'
-import { slideElement } from '@shared/utils/slideElement'
 
 export const ResetPasswordModal = (): React.ReactNode => {
   const { email, resetPasswordKey } = useParams()
@@ -21,7 +20,6 @@ export const ResetPasswordModal = (): React.ReactNode => {
   if (email === undefined) return null
   if (resetPasswordKey === undefined) return null
 
-  const navigate = useNavigate()
   const inputRef = useRef<HTMLDivElement>(null)
   const modalRef = useRef<HTMLDivElement>(null)
 
@@ -77,19 +75,6 @@ export const ResetPasswordModal = (): React.ReactNode => {
     }
   }, [isError])
 
-  const onSlideModalOutComplete = useCallback(() => {
-    navigate('..')
-  }, [])
-
-  const onCloseClick = useCallback(() => {
-    slideElement({
-      element: modalRef.current,
-      onSlideElementComplete: () => {
-        navigate('..')
-      },
-    })
-  }, [])
-
   const onSubmit = (e: React.FormEvent): void => {
     e.preventDefault()
 
@@ -112,9 +97,8 @@ export const ResetPasswordModal = (): React.ReactNode => {
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
       isButtonError={isError}
-      onSlideModalOutComplete={onSlideModalOutComplete}
       onSubmit={onSubmit}
-      onCloseClick={onCloseClick}
+      onCloseSlideModalOutAndNavigateUp={true}
     >
       <EmailField
         disabled

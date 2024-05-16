@@ -1,17 +1,14 @@
 import { LockOutlined } from '@mui/icons-material'
 import { Box } from '@mui/material'
 import { useSignal, useSignalEffect } from '@preact/signals-react'
-import { useCallback, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useRef } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { OpenLoginModalLink } from '@features/open_close/open_login_modal'
 import { useRegisterMutation } from '@entities/user'
 import { ConfirmPasswordField, EmailField, FormModal, PasswordField } from '@shared/components'
 import { notify } from '@shared/ui/top_msg'
-import { slideElement } from '@shared/utils/slideElement'
 
 export const RegisterModal = (): JSX.Element => {
-  const navigate = useNavigate()
   const inputRef = useRef<HTMLDivElement>(null)
   const modalRef = useRef<HTMLDivElement>(null)
 
@@ -51,19 +48,6 @@ export const RegisterModal = (): JSX.Element => {
     }
   }, [isError])
 
-  const onSlideModalOutComplete = useCallback(() => {
-    navigate('..')
-  }, [])
-
-  const onCloseClick = useCallback(() => {
-    slideElement({
-      element: modalRef.current,
-      onSlideElementComplete: () => {
-        navigate('..')
-      },
-    })
-  }, [])
-
   const onSubmit = (e: React.FormEvent): void => {
     e.preventDefault()
 
@@ -85,9 +69,8 @@ export const RegisterModal = (): JSX.Element => {
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
       isButtonError={isError}
-      onSlideModalOutComplete={onSlideModalOutComplete}
       onSubmit={onSubmit}
-      onCloseClick={onCloseClick}
+      onCloseSlideModalOutAndNavigateUp={true}
     >
       <EmailField
         inputRef={inputRef}
