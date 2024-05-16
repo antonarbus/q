@@ -10,7 +10,9 @@ import { RiMenuAddFill } from 'react-icons/ri'
 import { TbRectangleVertical } from 'react-icons/tb'
 import { VscNewFile } from 'react-icons/vsc'
 import { insertBoqItem, insertBoqRow, insertPriceItem, insertTextItem } from '@features/insert'
+import { openBookmarksPage } from '@features/open_close/open_bookmarks_page'
 import { openNewQuotationPage } from '@features/open_close/open_new_quotation_page'
+import { openQuotationsPage } from '@features/open_close/open_quotations_page'
 import { openSaveQuotationModal } from '@features/open_close/open_save_quotation_modal'
 import { downloadPdf } from '@features/pdf'
 import { navItemId } from '@shared/consts/navItemId'
@@ -29,10 +31,10 @@ export const navStructure: MenuItemType[] = [
         isHidden: false,
         name: 'New',
         // shortcut: ['control', 'n'],
+        link: route.new,
         func: () => {
           openNewQuotationPage()
         },
-        link: route.new,
         isActive: true,
       },
       {
@@ -120,6 +122,9 @@ export const navStructure: MenuItemType[] = [
         isHidden: false,
         name: 'Bookmarks',
         link: route.bookmarks,
+        func: () => {
+          openBookmarksPage()
+        },
       },
       {
         id: navItemId.quotations,
@@ -127,6 +132,9 @@ export const navStructure: MenuItemType[] = [
         isHidden: false,
         name: 'Quotations',
         link: route.quotations,
+        func: () => {
+          openQuotationsPage()
+        },
       },
       {
         id: navItemId.login,
