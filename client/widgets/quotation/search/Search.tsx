@@ -47,15 +47,20 @@ export const Search = (): JSX.Element => {
     }
   }, [isError])
 
+  // want to show MUI autocomplete even if no options
+
   return (
     <Autocomplete
       className={cls.search}
-      freeSolo
+      freeSolo={options.length !== 0}
       disablePortal
       // open // manual open control
+      popupIcon={null}
       clearOnBlur
       clearOnEscape
       loading={isPendingItems}
+      loadingText={email ? 'Loading...' : 'Not logged in...'}
+      noOptionsText='No saved bookmarks'
       options={options}
       inputValue={inputValueSignal.value}
       onInputChange={(event, newInputValue) => {
@@ -214,7 +219,7 @@ export const Search = (): JSX.Element => {
                 translate: '-50% 0',
               }}
             >
-              Your items
+              Your bookmarks
             </Box>
             <IconButton
               size='small'
