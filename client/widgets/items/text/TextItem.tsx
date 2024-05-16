@@ -1,12 +1,12 @@
 import { useRef } from 'react'
-import { CopyItemIcon } from '@features/items/copy_item'
-import { CutItemIcon } from '@features/items/cut_item'
-import { DeleteItemIcon } from '@features/items/delete_item'
-import { DragItemIcon } from '@features/items/drag_item'
-import { OpenInfoItemModalIcon } from '@features/items/open_info_item_modal'
-import { onTextItemResizeStart, onTextItemResizeStop } from '@features/items/resize_item'
-import { SaveItemIcon } from '@features/items/save_item'
-import { updateTextItem } from '@features/items/update_cell'
+import { BookmarkItemIcon } from '@features/items/bookmark'
+import { updateTextItem } from '@features/items/cell/update_cell'
+import { CopyItemIcon } from '@features/items/copy'
+import { CutItemIcon } from '@features/items/cut'
+import { DeleteItemIcon } from '@features/items/delete'
+import { DragItemIcon } from '@features/items/drag'
+import { OpenInfoItemModalIcon } from '@features/items/open_info_modal'
+import { onTextItemResizeStart, onTextItemResizeStop } from '@features/items/resize'
 import { beforeUpload } from '@features/items/upload'
 import { Froala, ItemComp, getItemTextHtmlFromStore, textItemCellStyle, useItem } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
@@ -31,7 +31,7 @@ export const TextItem = (): JSX.Element => {
       )}
       rightItemActionButtons={(
         <ItemActionButtonsLayout>
-          <SaveItemIcon />
+          <BookmarkItemIcon />
           <OpenInfoItemModalIcon />
           <DeleteItemIcon />
         </ItemActionButtonsLayout>

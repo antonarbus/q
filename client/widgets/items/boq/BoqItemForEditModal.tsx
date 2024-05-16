@@ -1,4 +1,4 @@
-import { onBoqItemResize, onBoqItemResizeStart, onBoqItemResizeStop } from '@features/items/resize_item'
+import { onBoqItemResize, onBoqItemResizeStart, onBoqItemResizeStop } from '@features/items/resize'
 import { ItemComp } from '@entities/quotation'
 import { BoqHeader } from './boq_header'
 import { BoqTable } from './boq_table'

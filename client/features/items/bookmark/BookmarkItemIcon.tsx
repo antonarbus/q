@@ -1,21 +1,20 @@
-import { dispatch, getState } from '@lib_instances/store'
-import { type MouseEvent, type ReactNode } from 'react'
+import { getState } from '@lib_instances/store'
+import { type ReactNode, type MouseEvent } from 'react'
 import { MdOutlineStarOutline } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
-import { boqRowKey, getBoqRowFromStore, quotationSlice, useItem, useRow } from '@entities/quotation'
+import { getItemFromStore, itemKey, saveItemHeightByIndex, useItem } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
 import { cleanHtml } from '@shared/utils/itemsUtils'
 
-export const SaveBoqRowIcon = (): ReactNode => {
+export const BookmarkItemIcon = (): ReactNode => {
   const navigate = useNavigate()
   const { itemIndex } = useItem()
-  const { rowIndex } = useRow()
 
   return (
     <MdOutlineStarOutline
-      className='save-boq-row-icon'
+      className='save-item-icon'
       tabIndex={-1}
       onClick={(e: MouseEvent): void => {
         const email = getState().user.email
@@ -26,28 +25,24 @@ export const SaveBoqRowIcon = (): ReactNode => {
           return
         }
 
+        saveItemHeightByIndex({ itemIndex })
+
         const clickedIconElement = e.target
         if (!(clickedIconElement instanceof Element)) return
 
-        const boqRowElement = clickedIconElement.closest(`.${cls.boqRow}`)
-        if (!boqRowElement) return
-
-        dispatch(quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
-          itemIndex,
-          rowIndex,
-          height: boqRowElement.clientHeight,
-          width: boqRowElement.clientWidth,
-        }))
-
-        const html = boqRowElement.outerHTML
+        const itemElement = clickedIconElement.closest(`.${cls.item}`)
+        if (!(itemElement instanceof Element)) return
+        const paperElement = itemElement.querySelector(`.${cls.paper}`)
+        if (!(paperElement instanceof Element)) return
+        const html = paperElement.innerHTML
         const cleanedHtml = cleanHtml(html)
 
-        const boqRow = getBoqRowFromStore({ rowIndex, itemIndex })
+        const item = getItemFromStore({ itemIndex })
 
-        if (!boqRow) return
-        if (boqRow.type === boqRowKey.paste) return
+        if (!item) return
+        if (item.type === itemKey.paste) return
 
-        const itemWithUpdatedPreview = structuredClone(boqRow)
+        const itemWithUpdatedPreview = structuredClone(item)
         itemWithUpdatedPreview.preview = cleanedHtml
 
         navigate(`./${route.saveItem}`, { state: { item: itemWithUpdatedPreview } })

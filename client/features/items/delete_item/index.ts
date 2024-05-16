@@ -1,1 +1,0 @@
-export { DeleteItemIcon } from './DeleteItemIcon'

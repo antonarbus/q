@@ -1,1 +1,0 @@
-export { CutItemIcon } from './CutItemIcon'

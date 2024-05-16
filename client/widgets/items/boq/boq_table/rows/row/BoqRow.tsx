@@ -1,10 +1,10 @@
 import { type FocusEvent } from 'react'
-import { CopyBoqRowIcon } from '@features/items/copy_boq_row'
-import { CutBoqRowIcon } from '@features/items/cut_boq_row'
-import { DeleteBoqRowIcon } from '@features/items/delete_boq_row'
-import { DragBoqRowIcon } from '@features/items/drag_boq_row'
-import { OpenInfoBoqRowModalIcon } from '@features/items/open_info_boq_row_modal'
-import { SaveBoqRowIcon } from '@features/items/save_boq_row'
+import { BookmarkBoqRowIcon } from '@features/items/bookmark'
+import { CopyBoqRowIcon } from '@features/items/copy'
+import { CutBoqRowIcon } from '@features/items/cut'
+import { DeleteBoqRowIcon } from '@features/items/delete'
+import { DragBoqRowIcon } from '@features/items/drag'
+import { OpenInfoBoqRowModalIcon } from '@features/items/open_info_modal'
 import { BoqRowActionButtonsLayout } from './BoqRowActionButtonsLayout'
 import { BoqRowLayout } from './BoqRowLayout'
 import { DescriptionCell } from './cells/DescriptionCell'
@@ -31,7 +31,7 @@ export const BoqRow = ({ onBlur }: Props): JSX.Element => {
       <QtyCell />
       <PriceCell />
       <BoqRowActionButtonsLayout style={{ right: '-33px' }} >
-        <SaveBoqRowIcon />
+        <BookmarkBoqRowIcon />
         <OpenInfoBoqRowModalIcon />
         <DeleteBoqRowIcon />
       </BoqRowActionButtonsLayout>
