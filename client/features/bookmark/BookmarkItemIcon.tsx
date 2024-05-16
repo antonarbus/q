@@ -21,7 +21,7 @@ export const BookmarkItemIcon = (): ReactNode => {
 
         if (!email) {
           notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
-          navigate('./login')
+          navigate(`./${route.login}`)
           return
         }
 
