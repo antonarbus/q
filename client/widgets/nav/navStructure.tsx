@@ -9,9 +9,9 @@ import { PiFolderSimpleStarDuotone } from 'react-icons/pi'
 import { RiMenuAddFill } from 'react-icons/ri'
 import { TbRectangleVertical } from 'react-icons/tb'
 import { VscNewFile } from 'react-icons/vsc'
-import { insertBoqItem, insertBoqRow, insertPriceItem, insertTextItem } from '@features/items/insert'
-import { createNewQuotation } from '@features/quotation/create_new_quotation'
-import { downloadPdf } from '@features/quotation/pdf'
+import { insertBoqItem, insertBoqRow, insertPriceItem, insertTextItem } from '@features/insert'
+import { openNewQuotationPage } from '@features/open_close/open_new_quotation_page'
+import { downloadPdf } from '@features/pdf'
 import { navItemId } from '@shared/consts/navItemId'
 import { route } from '@shared/consts/route'
 import type { MenuItemType } from '@shared/nav'
@@ -29,7 +29,7 @@ export const navStructure: MenuItemType[] = [
         name: 'New',
         // shortcut: ['control', 'n'],
         func: () => {
-          createNewQuotation()
+          openNewQuotationPage()
         },
         link: route.new,
         isActive: true,

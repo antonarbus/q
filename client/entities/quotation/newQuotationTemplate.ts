@@ -1,8 +1,9 @@
-import { boqRowKey, itemKey } from '@entities/quotation'
-import { type Quotation } from '@entities/quotation/types'
 import { nanoid } from '@shared/lib/nanoid'
+import { boqRowKey } from './consts/boqRowKey'
+import { itemKey } from './consts/itemKey'
+import { type Quotation } from './types'
 
-export const newQuotation: Quotation = {
+export const newQuotationTemplate: Quotation = {
   id: 'new',
   email: '',
   name: '',

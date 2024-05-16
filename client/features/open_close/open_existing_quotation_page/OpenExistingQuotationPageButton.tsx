@@ -7,7 +7,7 @@ type Props = {
   id: string
 }
 
-export const OpenQuotationButton = ({ id }: Props): ReactNode => {
+export const OpenExistingQuotationPageButton = ({ id }: Props): ReactNode => {
   return (
     <Link
       to={`/${id}`}

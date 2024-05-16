@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import { useNavItemsOnItemsOpen } from '@features/items/open/open_items_page'
+import { useNavItemsOnItemsOpen } from '@features/open_close/open_items_page'
 import { ItemsAgGrid } from './ItemsAgGrid'
 import { ItemsLayout } from './ItemsLayout'
 

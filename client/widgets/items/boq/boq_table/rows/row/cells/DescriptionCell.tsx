@@ -1,6 +1,6 @@
-import { tabFromDescriptionCell } from '@features/items/cell/tab_away_from_cell'
-import { updateDescriptionCell } from '@features/items/cell/update_cell'
-import { beforeUpload } from '@features/items/upload'
+import { tabFromDescriptionCell } from '@features/cell/tab_away_from_cell'
+import { updateDescriptionCell } from '@features/cell/update_cell'
+import { beforeUpload } from '@features/upload'
 import { getBoqCellHtmlFromStore, useRow, useItem, Froala, useStylesForResizableCell, boqRowCellStyle, boqRowCellKey, boqColumnKey } from '@entities/quotation'
 
 export const DescriptionCell = (): JSX.Element => {
