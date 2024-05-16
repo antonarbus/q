@@ -1,13 +1,12 @@
 import { LockOutlined } from '@mui/icons-material'
 import { Box } from '@mui/material'
 import { useSignal, useSignalEffect } from '@preact/signals-react'
-import type { MouseEvent } from 'react'
 import { useCallback, useRef } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
+import { OpenLoginModalLink } from '@features/open_close/open_login_modal'
 import { useRegisterMutation } from '@entities/user'
 import { ConfirmPasswordField, EmailField, FormModal, PasswordField } from '@shared/components'
-import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
 
@@ -109,21 +108,7 @@ export const RegisterModal = (): JSX.Element => {
           justifyContent: 'space-between',
         }}
       >
-      <Link
-        to={`../${route.login}`}
-        onClick={(e: MouseEvent): void => {
-          e.preventDefault()
-
-          slideElement({
-            element: modalRef.current,
-            onSlideElementComplete: () => {
-              navigate(`../${route.login}`)
-            },
-          })
-        }}
-      >
-        Log in
-      </Link>
+        <OpenLoginModalLink modalRef={modalRef} />
       </Box>
     </FormModal>
   )
