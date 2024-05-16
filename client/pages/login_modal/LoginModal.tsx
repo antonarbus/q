@@ -2,11 +2,11 @@ import { dispatch } from '@lib_instances/store'
 import { LoginRounded } from '@mui/icons-material'
 import { Box } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
-import type { MouseEvent } from 'react'
 import { useCallback, useRef } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { OpenRegisterModalLink, openRegisterModal } from '@features/open_close/open_register_modal'
+import { OpenRegisterModalLink } from '@features/open_close/open_register_modal'
+import { OpenResetModalLink } from '@features/open_close/open_reset_modal'
 import { useGetItemsQuery } from '@entities/item'
 import { useGetQuotationsQuery } from '@entities/quotation'
 import { useLogInMutation, userSlice } from '@entities/user'
@@ -145,21 +145,7 @@ export const LoginModal = (): JSX.Element => {
           justifyContent: 'space-between',
         }}
       >
-        <Link
-          to={`../${route.requestPasswordReset}`}
-          onClick={(e: MouseEvent): void => {
-            e.preventDefault()
-            if (!modalRef.current) return
-            slideElement({
-              element: modalRef.current,
-              onSlideElementComplete: () => {
-                navigate(`../${route.requestPasswordReset}`)
-              },
-            })
-          }}
-        >
-          Reset
-        </Link>
+        <OpenResetModalLink modalRef={modalRef} />
         <OpenRegisterModalLink modalRef={modalRef} />
       </Box>
     </FormModal>
