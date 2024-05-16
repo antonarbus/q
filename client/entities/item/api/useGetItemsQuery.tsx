@@ -4,6 +4,7 @@ import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import { type AxiosError, type AxiosResponse } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
 import { axiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
+// import { asyncDelay } from '@shared/utils/delay'
 
 export const useGetItemsQuery = (): UseQueryResult<ResBody, AxiosError<ResBody>> => {
   const query = useQuery({
@@ -13,6 +14,7 @@ export const useGetItemsQuery = (): UseQueryResult<ResBody, AxiosError<ResBody>>
         url: apiUrl.getItems,
         method: 'GET',
       })
+      // await asyncDelay(10000)
 
       return res.data
     },
