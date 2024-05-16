@@ -1,16 +1,16 @@
 import { dispatch } from '@lib_instances/store'
 import { Box } from '@mui/material'
 import { useSignal, useSignalEffect } from '@preact/signals-react'
-import type { MouseEvent } from 'react'
 import { useCallback, useRef } from 'react'
 import { MdPassword } from 'react-icons/md'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
+import { OpenLoginModalLink } from '@features/open_close/open_login_modal'
+import { OpenRegisterModalLink } from '@features/open_close/open_register_modal'
 import { useResetPasswordMutation, userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 import { ConfirmPasswordField, EmailField, FormModal, PasswordField } from '@shared/components'
 import { navItemId } from '@shared/consts/navItemId'
-import { route } from '@shared/consts/route'
 import { navSlice } from '@shared/nav'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
@@ -135,37 +135,8 @@ export const ResetPasswordModal = (): React.ReactNode => {
           justifyContent: 'space-between',
         }}
       >
-        <Link
-          to={`../${route.register}`}
-          style={{ textAlign: 'right' }}
-          onClick={(e: MouseEvent): void => {
-            e.preventDefault()
-
-            slideElement({
-              element: modalRef.current,
-              onSlideElementComplete: () => {
-                navigate(`../${route.register}`)
-              },
-            })
-          }}
-        >
-          Register
-        </Link>
-        <Link
-          to={`../${route.login}`}
-          onClick={(e: MouseEvent): void => {
-            e.preventDefault()
-
-            slideElement({
-              element: modalRef.current,
-              onSlideElementComplete: () => {
-                navigate(`../${route.login}`)
-              },
-            })
-          }}
-        >
-          Log in
-        </Link>
+        <OpenRegisterModalLink modalRef={modalRef} />
+        <OpenLoginModalLink modalRef={modalRef} />
       </Box>
     </FormModal>
   )
