@@ -5,7 +5,7 @@ import { Box, LinearProgress } from '@mui/material'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef, useEffect } from 'react'
 import { useUpdateEffect } from 'react-use'
-import { useDisableLoadingOverlayWhenItemsAreFetched } from '@features/items/open/open_items_page'
+import { useDisableLoadingOverlayWhenItemsAreFetched } from '@features/open_close/open_items_page'
 import { useGetItemsQuery } from '@entities/item'
 import { type Item } from '@entities/item'
 import { LoadingTableOverlay, loadingTableOverlaySignal } from '@shared/components/LoadingTableOverlay'

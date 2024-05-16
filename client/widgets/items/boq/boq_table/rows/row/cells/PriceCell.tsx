@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
-import { Pin, pinBoqRowPriceCell, showBoqRowPins } from '@features/items/cell/pin'
-import { tabFromPriceCell } from '@features/items/cell/tab_away_from_cell'
-import { formatBoqRowPriceCell, updateBoqRowPriceCell, validateBoqRowPrice } from '@features/items/cell/update_cell'
+import { Pin, pinBoqRowPriceCell, showBoqRowPins } from '@features/cell/pin'
+import { tabFromPriceCell } from '@features/cell/tab_away_from_cell'
+import { formatBoqRowPriceCell, updateBoqRowPriceCell, validateBoqRowPrice } from '@features/cell/update_cell'
 import { getBoqCellHtmlFromStore, useBoqItem, useItem, useRow, Froala, boqRowCellStyle, useStylesForResizableCell, boqRowCellKey, boqColumnKey, boqRowCellSx } from '@entities/quotation'
 
 export const PriceCell = (): JSX.Element => {

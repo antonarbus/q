@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
-import { PressEsc } from '@features/copy/close_copy_container_on_esc_key'
-import { usePasteClick, useMovePasteText } from '@features/items/paste'
+import { PressEscIcon } from '@features/open_close/close_copy_container'
+import { usePasteClick, useMovePasteText } from '@features/paste'
 import { cursorPosSignal } from '@shared/utils/cursorPosSignal'
 import { FirstCopiedItem } from './FirstCopiedItem'
 import { RestOfCopiedItems } from './RestOfCopiedItems'
@@ -43,7 +43,7 @@ export const CopyContainer = (): JSX.Element => {
           maxHeight: 240,
         }}
       >
-        <PressEsc />
+        <PressEscIcon />
         <FirstCopiedItem />
         <RestOfCopiedItems />
       </div>
