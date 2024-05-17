@@ -119,9 +119,9 @@ export const FormModal = ({
           >
             <Close
               sx={{
-                color: '#aaaaaa',
+                color: '#bebebe',
                 ':hover': {
-                  color: '#c1c1c1',
+                  color: '#dedede',
                 },
               }}
             />
