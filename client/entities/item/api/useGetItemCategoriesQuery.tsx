@@ -7,10 +7,10 @@ import { axiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
 
 export const useGetItemCategoriesQuery = (): UseQueryResult<ResBody, AxiosError<ResBody>> => {
   const query = useQuery({
-    queryKey: [queryKey.getItemCategories],
+    queryKey: [queryKey.getBookmarkCategories],
     queryFn: async () => {
       const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
-        url: apiUrl.getItemCategories,
+        url: apiUrl.getBookmarkCategories,
         method: 'GET',
       })
 

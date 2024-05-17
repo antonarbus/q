@@ -3,7 +3,7 @@ import { type RouteObject, createBrowserRouter } from 'react-router-dom'
 import { ActivationModal } from '@pages/auth/ActivationModal'
 import { UnauthorizedPage } from '@pages/auth/UnauthorizedPage'
 // import { BarChart } from '@pages/chart/Chart'
-import { EditItemModal } from '@pages/edit_item_modal'
+import { EditBookmarkModal } from '@pages/edit_bookmark_modal'
 import { EditQuotationModal } from '@pages/edit_quotation_modal/EditQuotationModal'
 import { ErrorPage } from '@pages/error_page'
 // import { ItemsTable } from '@pages/items_table'
@@ -15,7 +15,7 @@ import { QuotationInfoModal } from '@pages/quotation_info_modal'
 import { RegisterModal } from '@pages/register_modal'
 import { RequestPasswordResetModal } from '@pages/request_password_reset_modal'
 import { ResetPasswordModal } from '@pages/reset_password_modal'
-import { SaveItemModal } from '@pages/save_item_modal'
+import { SaveBookmarkModal } from '@pages/save_bookmark_modal'
 import { SaveQuotationModal } from '@pages/save_quotation_modal'
 import { Copy } from '@widgets/copy'
 import { Nav } from '@widgets/nav'
@@ -92,14 +92,14 @@ export const router = createBrowserRouter([
           },
           {
             path: route.bookmark,
-            element: <SaveItemModal />,
+            element: <SaveBookmarkModal />,
           },
           {
             path: route.quotationInfo,
             element: <QuotationInfoModal />,
           },
           {
-            path: route.itemInfo,
+            path: route.bookmarkInfo,
             element: <ItemInfoModal />,
           },
         ],
@@ -130,7 +130,7 @@ export const router = createBrowserRouter([
           ...authRoutes,
           {
             path: route.editBookmark,
-            element: <EditItemModal />,
+            element: <EditBookmarkModal />,
           },
         ],
       },

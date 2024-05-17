@@ -17,7 +17,7 @@ export const OpenInfoItemModalIcon = (): ReactNode => {
         if (!item) return
         if (item.type === itemKey.paste) return
 
-        navigate(`./${route.itemInfo}`, {
+        navigate(`./${route.bookmarkInfo}`, {
           state: {
             item,
             itemIndex,

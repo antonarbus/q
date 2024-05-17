@@ -1,19 +1,23 @@
 export const route = {
   root: '/',
+  // auth
   login: 'login',
   logout: 'logout',
   register: 'register',
   requestPasswordReset: 'request-password-reset',
   resetPassword: 'reset-password',
   activate: 'activate',
-  quotations: 'quotations',
-  bookmarks: 'bookmarks',
-  settings: 'settings',
+  // quotation
   new: 'new',
+  quotations: 'quotations',
   saveQuotation: 'save-quotation',
   editQuotation: 'edit-quotation',
   quotationInfo: 'quotation-info',
+  // bookmark
+  bookmarks: 'bookmarks',
   bookmark: 'bookmark',
   editBookmark: 'edit-bookmark',
-  itemInfo: 'item-info',
+  bookmarkInfo: 'bookmark-info',
+  // va
+  settings: 'settings',
 } as const
