@@ -18,7 +18,7 @@ export const BookmarkField = (): ReactNode => {
 
   if (items.length === 0) return null
 
-  const firstItem = items[0]!
+  const firstItem = items[0]
 
   if (firstItem === undefined) return null
 
