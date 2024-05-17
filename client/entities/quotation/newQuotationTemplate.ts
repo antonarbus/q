@@ -9,6 +9,7 @@ export const newQuotationTemplate: Quotation = {
   name: '',
   category: '',
   desc: '',
+  info: '',
   items: [
     {
       id: nanoid(5),
@@ -17,6 +18,7 @@ export const newQuotationTemplate: Quotation = {
       name: '',
       category: '',
       desc: '',
+      info: '',
       width: 600,
       height: 0,
       isFroala: true,
@@ -31,6 +33,8 @@ export const newQuotationTemplate: Quotation = {
       email: '',
       name: '',
       category: '',
+      desc: '',
+      info: '',
       width: 600,
       height: 0,
       isFroala: true,
@@ -79,6 +83,7 @@ export const newQuotationTemplate: Quotation = {
             name: '',
             category: '',
             desc: '',
+            info: '',
             height: 0,
             width: 0,
             description: {
@@ -121,6 +126,7 @@ export const newQuotationTemplate: Quotation = {
             name: '',
             category: '',
             desc: '',
+            info: '',
             height: 0,
             width: 0,
             description: {
@@ -162,6 +168,8 @@ export const newQuotationTemplate: Quotation = {
             email: '',
             name: '',
             category: '',
+            desc: '',
+            info: '',
             height: 0,
             width: 0,
             description: {
@@ -207,6 +215,7 @@ export const newQuotationTemplate: Quotation = {
       name: '',
       category: '',
       desc: '',
+      info: '',
       width: 150,
       height: 0,
       isFroala: true,
@@ -226,6 +235,7 @@ export const newQuotationTemplate: Quotation = {
       name: '',
       category: '',
       desc: '',
+      info: '',
       width: 600,
       height: 0,
       isFroala: true,

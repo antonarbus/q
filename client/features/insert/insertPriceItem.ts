@@ -11,6 +11,8 @@ export const insertPriceItem = (e?: MouseEvent): void => {
     email: '',
     name: '',
     category: '',
+    desc: '',
+    info: '',
     width: 150,
     height: 90,
     isFroala: true,

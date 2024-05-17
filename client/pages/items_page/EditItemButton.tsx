@@ -26,6 +26,7 @@ export const EditItemButton = ({ id }: ReqBody): JSX.Element => {
           name: 'temp',
           category: 'temp',
           desc: 'temp',
+          info: 'temp',
           email: 'temp',
           items: [item],
         },
