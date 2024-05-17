@@ -12,13 +12,12 @@ export const route = {
   quotations: 'quotations',
   saveQuotation: 'save-quotation',
   editQuotation: 'edit-quotation',
-  quotationInfo: 'quotation-info',
   // bookmark
   bookmarks: 'bookmarks',
   bookmark: 'bookmark',
   editBookmark: 'edit-bookmark',
   // item
-  itemInfo: 'item-info',
+  info: 'info',
   // va
   settings: 'settings',
 } as const

@@ -21,7 +21,7 @@ export const Info = (): ReactNode => {
         alignItems: 'center',
         cursor: 'pointer',
         gap: '5px',
-        width: '70px',
+        width: '80px',
         ':hover svg': {
           fill: '#3c5588 !important',
         },
