@@ -1,0 +1,1 @@
+export { useUpdateInfo } from './useUpdateInfo'

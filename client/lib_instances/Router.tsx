@@ -99,7 +99,7 @@ export const router = createBrowserRouter([
             element: <QuotationInfoModal />,
           },
           {
-            path: route.bookmarkInfo,
+            path: route.itemInfo,
             element: <ItemInfoModal />,
           },
         ],

@@ -20,6 +20,8 @@ export const insertPasteItemReducer = (state: Quotation, action: PayloadAction<C
     email: '',
     name: '',
     category: '',
+    desc: '',
+    info: '',
     height: 0,
     width: 0,
     isFroala: true,

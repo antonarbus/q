@@ -11,6 +11,8 @@ export const insertBoqRow = (e?: MouseEvent): void => {
     email: '',
     name: '',
     category: '',
+    desc: '',
+    info: '',
     height: 50,
     width: 570,
     preview: `

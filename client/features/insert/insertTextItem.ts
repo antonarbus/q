@@ -11,6 +11,8 @@ export const insertTextItem = (e?: MouseEvent): void => {
     email: '',
     name: '',
     category: '',
+    desc: '',
+    info: '',
     width: 600,
     height: 79.2,
     isFroala: true,

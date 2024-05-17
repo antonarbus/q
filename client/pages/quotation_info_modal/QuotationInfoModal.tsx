@@ -1,8 +1,8 @@
-import { dispatch, getState } from '@lib_instances/store'
-import { useSignal, useSignalEffect } from '@preact/signals-react'
-import { useCallback, useRef } from 'react'
+import { getState } from '@lib_instances/store'
+import { useSignal } from '@preact/signals-react'
+import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { quotationSlice } from '@entities/quotation'
+import { useUpdateInfo } from '@features/info'
 import { BackdropWithSlidableModal } from '@shared/components/BackdropWithSlidableModal'
 import { CardCustom } from '@shared/components/CardCustom'
 import { InfoField } from './InfoField'
@@ -11,25 +11,13 @@ export const QuotationInfoModal = (): JSX.Element => {
   const navigate = useNavigate()
   const cardRef = useRef<HTMLDivElement>(null)
   const infoSignal = useSignal(getState().quotation.info ?? '')
-
-  useSignalEffect(() => {
-    const { quotation } = getState()
-
-    dispatch(quotationSlice.actions.updateQuotationInfoReducer({
-      quotation: {
-        ...quotation,
-        info: infoSignal.value,
-      },
-    }))
-  })
-
-  const onSlideModalOutComplete = useCallback(() => {
-    navigate('..')
-  }, [])
+  useUpdateInfo({ infoSignal, id: getState().quotation.id })
 
   return (
     <BackdropWithSlidableModal
-      onSlideModalOutComplete={onSlideModalOutComplete}
+      onSlideModalOutComplete={() => {
+        navigate('..')
+      }}
     >
       <CardCustom
         reference={cardRef}

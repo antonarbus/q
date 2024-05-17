@@ -11,6 +11,8 @@ export const insertBoqItem = (e?: MouseEvent): void => {
     email: '',
     name: '',
     category: '',
+    desc: '',
+    info: '',
     width: 600,
     height: 267,
     isFroala: true,
@@ -357,6 +359,8 @@ export const insertBoqItem = (e?: MouseEvent): void => {
           email: '',
           name: '',
           category: '',
+          desc: '',
+          info: '',
           height: 0,
           width: 0,
           description: {
@@ -398,6 +402,8 @@ export const insertBoqItem = (e?: MouseEvent): void => {
           email: '',
           name: '',
           category: '',
+          desc: '',
+          info: '',
           height: 0,
           width: 0,
           description: {
@@ -439,6 +445,8 @@ export const insertBoqItem = (e?: MouseEvent): void => {
           email: '',
           name: '',
           category: '',
+          desc: '',
+          info: '',
           height: 0,
           width: 0,
           description: {

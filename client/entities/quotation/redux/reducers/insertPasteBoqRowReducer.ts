@@ -19,6 +19,8 @@ const pasteText: BoqRow = {
   email: '',
   name: '',
   category: '',
+  desc: '',
+  info: '',
   height: 0,
   width: 0,
   description: defaultCellValues,
