@@ -4,12 +4,14 @@ import { itemKey } from './consts/itemKey'
 import { type Quotation } from './types'
 
 export const newQuotationTemplate: Quotation = {
+  type: itemKey.quotation,
   id: 'new',
   email: '',
   name: '',
   category: '',
   desc: '',
   info: '',
+  preview: '',
   items: [
     {
       id: nanoid(5),

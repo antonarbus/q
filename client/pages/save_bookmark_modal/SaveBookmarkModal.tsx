@@ -2,10 +2,10 @@ import { getState } from '@lib_instances/store'
 import { useSignal } from '@preact/signals-react'
 import { useRef } from 'react'
 import { MdOutlineStarOutline } from 'react-icons/md'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetItemCategoriesQuery, useSaveItemMutation } from '@entities/item'
-import { type Item } from '@entities/quotation'
+import { getItemByIdFromStore, itemKey } from '@entities/quotation'
 import { FormModal } from '@shared/components'
 import { nanoid } from '@shared/lib/nanoid'
 import { notify } from '@shared/ui/top_msg'
@@ -14,14 +14,18 @@ import { CategoryField } from './CategoryField'
 import { DescriptionField } from './DescriptionField'
 import { NameField } from './NameField'
 
-export const SaveBookmarkModal = (): JSX.Element => {
+export const SaveBookmarkModal = (): React.ReactNode => {
   const navigate = useNavigate()
-  const location = useLocation()
-  const item = location.state.item as Item | undefined
+  const { id } = useParams()
+  if (!id) return null
+  const item = getItemByIdFromStore({ id })
+  if (!item) return null
+
   const modalRef = useRef<HTMLDivElement>(null)
-  const nameSignal = useSignal(item?.name ?? '')
-  const categorySignal = useSignal(item?.category ?? '')
-  const descSignal = useSignal(item?.desc ?? '')
+  const nameSignal = useSignal(item.name)
+  const categorySignal = useSignal(item.category)
+  const descSignal = useSignal(item.desc)
+
   const { mutate: saveItem, data, isSuccess, isPending, isError, error, reset } = useSaveItemMutation()
   const { refetch: updateCategories } = useGetItemCategoriesQuery()
 
@@ -65,14 +69,14 @@ export const SaveBookmarkModal = (): JSX.Element => {
       return
     }
 
-    if (!item) return
-
     const itemWithUpdatedValues = {
       ...item,
       name: nameSignal.value,
       category: categorySignal.value,
       desc: descSignal.value,
     }
+
+    if (itemWithUpdatedValues.type === itemKey.quotation) return
 
     saveItem({ item: itemWithUpdatedValues })
   }
