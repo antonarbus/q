@@ -45,7 +45,7 @@ export const BookmarkItemIcon = (): ReactNode => {
         const itemWithUpdatedPreview = structuredClone(item)
         itemWithUpdatedPreview.preview = cleanedHtml
 
-        navigate(`./${route.saveItem}`, { state: { item: itemWithUpdatedPreview } })
+        navigate(`./${route.bookmark}`, { state: { item: itemWithUpdatedPreview } })
       }}
     />
   )

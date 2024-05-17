@@ -22,6 +22,7 @@ export const getAccessTokenRouter = express.Router()
 getAccessTokenRouter.get('/', async (req: Req, res: ResWithBody<ResBody>, next: Next) => {
   try {
     const refreshJwtToken = req.cookies?.refreshJwtToken
+    console.log('🚀 ~ refreshJwtToken:', refreshJwtToken)
 
     if (typeof refreshJwtToken !== 'string') {
       return res
@@ -30,8 +31,10 @@ getAccessTokenRouter.get('/', async (req: Req, res: ResWithBody<ResBody>, next: 
     }
 
     const jwtPayload = verifyRefreshToken(refreshJwtToken)
+    console.log('🚀 ~ jwtPayload:', jwtPayload)
 
     const email = jwtPayload?.email
+    console.log('🚀 ~ email:', email)
 
     if (typeof email !== 'string') {
       return res
@@ -40,6 +43,7 @@ getAccessTokenRouter.get('/', async (req: Req, res: ResWithBody<ResBody>, next: 
     }
 
     const user = await UserModel.findOne({ email, refreshJwtToken })
+    console.log('🚀 ~ user:', user)
 
     if (!user) {
       return res
@@ -48,6 +52,7 @@ getAccessTokenRouter.get('/', async (req: Req, res: ResWithBody<ResBody>, next: 
     }
 
     const accessJwtToken = createAccessToken({ email, roles: user.roles })
+    console.log('🚀 ~ accessJwtToken:', accessJwtToken)
 
     if (!accessJwtToken) {
       return res

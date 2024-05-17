@@ -91,7 +91,7 @@ export const router = createBrowserRouter([
             element: <SaveQuotationModal />,
           },
           {
-            path: route.saveItem,
+            path: route.bookmark,
             element: <SaveItemModal />,
           },
           {
@@ -129,7 +129,7 @@ export const router = createBrowserRouter([
         children: [
           ...authRoutes,
           {
-            path: route.editItem,
+            path: route.editBookmark,
             element: <EditItemModal />,
           },
         ],

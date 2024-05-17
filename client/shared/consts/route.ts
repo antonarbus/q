@@ -13,7 +13,7 @@ export const route = {
   saveQuotation: 'save-quotation',
   editQuotation: 'edit-quotation',
   quotationInfo: 'quotation-info',
-  saveItem: 'save-item',
-  editItem: 'edit-item',
+  bookmark: 'bookmark',
+  editBookmark: 'edit-bookmark',
   itemInfo: 'item-info',
 } as const
