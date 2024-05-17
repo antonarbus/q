@@ -2,7 +2,7 @@ import express from 'express'
 import { type User } from '@entities/user'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { UserModel } from '../db/models/userModel'
-import { createAccessToken, verifyRefreshToken } from '../services/jwt'
+import { createAccessToken, getJwtExpiration, verifyRefreshToken } from '../services/jwt'
 import type { Next, Req, ResWithBody } from '../types'
 
 export type ResBody = {
@@ -15,6 +15,8 @@ export type ResBody = {
   email?: User['email']
   accessJwtToken?: string
   roles?: User['roles']
+  jwtRefreshTokenExpiration?: Date
+  jwtAccessTokenExpiration?: Date
 }
 
 export const getAccessTokenRouter = express.Router()
@@ -22,7 +24,6 @@ export const getAccessTokenRouter = express.Router()
 getAccessTokenRouter.get('/', async (req: Req, res: ResWithBody<ResBody>, next: Next) => {
   try {
     const refreshJwtToken = req.cookies?.refreshJwtToken
-    console.log('🚀 ~ refreshJwtToken:', refreshJwtToken)
 
     if (typeof refreshJwtToken !== 'string') {
       return res
@@ -31,10 +32,8 @@ getAccessTokenRouter.get('/', async (req: Req, res: ResWithBody<ResBody>, next: 
     }
 
     const jwtPayload = verifyRefreshToken(refreshJwtToken)
-    console.log('🚀 ~ jwtPayload:', jwtPayload)
 
     const email = jwtPayload?.email
-    console.log('🚀 ~ email:', email)
 
     if (typeof email !== 'string') {
       return res
@@ -43,7 +42,6 @@ getAccessTokenRouter.get('/', async (req: Req, res: ResWithBody<ResBody>, next: 
     }
 
     const user = await UserModel.findOne({ email, refreshJwtToken })
-    console.log('🚀 ~ user:', user)
 
     if (!user) {
       return res
@@ -52,7 +50,6 @@ getAccessTokenRouter.get('/', async (req: Req, res: ResWithBody<ResBody>, next: 
     }
 
     const accessJwtToken = createAccessToken({ email, roles: user.roles })
-    console.log('🚀 ~ accessJwtToken:', accessJwtToken)
 
     if (!accessJwtToken) {
       return res
@@ -67,6 +64,8 @@ getAccessTokenRouter.get('/', async (req: Req, res: ResWithBody<ResBody>, next: 
         accessJwtToken,
         roles: user.roles,
         email,
+        jwtRefreshTokenExpiration: getJwtExpiration({ token: refreshJwtToken }),
+        jwtAccessTokenExpiration: getJwtExpiration({ token: accessJwtToken }),
       })
   } catch (error) {
     next(error)

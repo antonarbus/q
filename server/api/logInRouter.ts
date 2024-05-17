@@ -3,7 +3,7 @@ import express from 'express'
 import { type User } from '@entities/user'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { UserModel } from '../db/models/userModel'
-import { createAccessToken, createRefreshToken, getJwtExpiration, thirtyDaysInSec } from '../services/jwt'
+import { createAccessToken, createRefreshToken, getJwtExpiration, thirtyDaysInSec, verifyRefreshToken } from '../services/jwt'
 import type { Next, ReqWithBody, ResWithBody } from '../types'
 
 export type ReqBody = {
@@ -12,19 +12,13 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  message:
-  'no user data' |
-  'no password' |
-  'bad password' |
-  'not activated' |
-  'good password' |
-  'failed to create token'
+  message: 'no user data' | 'no password' | 'bad password' | 'not activated' | 'good password' | 'failed to create token'
   name?: 'MongooseError'
   accessJwtToken?: string
   email?: User['email']
   roles?: User['roles']
-  jwtRefreshTokenExpireIn?: Date
-  jwtAccessTokenExpireIn?: Date
+  jwtRefreshTokenExpiration?: Date
+  jwtAccessTokenExpiration?: Date
 }
 
 type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
@@ -69,7 +63,7 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
         .json({ message: 'not activated' })
     }
 
-    const isExistingRefreshJwtToken = Boolean(user.refreshJwtToken)
+    const isExistingRefreshJwtToken = Boolean(verifyRefreshToken(user.refreshJwtToken))
 
     const accessJwtToken = createAccessToken({ email, roles: user.roles })
     const refreshJwtToken = isExistingRefreshJwtToken ? user.refreshJwtToken : createRefreshToken({ email, roles: user.roles })
@@ -100,8 +94,8 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
         accessJwtToken,
         email: user.email,
         roles: user.roles,
-        jwtRefreshTokenExpireIn: getJwtExpiration({ token: refreshJwtToken }),
-        jwtAccessTokenExpireIn: getJwtExpiration({ token: accessJwtToken }),
+        jwtRefreshTokenExpiration: getJwtExpiration({ token: refreshJwtToken }),
+        jwtAccessTokenExpiration: getJwtExpiration({ token: accessJwtToken }),
       })
   } catch (error) {
     next(error)
