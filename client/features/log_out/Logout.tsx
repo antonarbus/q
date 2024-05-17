@@ -1,7 +1,7 @@
 import { dispatch } from '@lib_instances/store'
 import { useNavigate } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
-import { deleteItemsCache } from '@entities/item'
+import { deleteBookmarksCache } from '@entities/bookmark'
 import { deleteQuotationsCache } from '@entities/quotation'
 import { useLogOutMutation, userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
@@ -26,7 +26,7 @@ export const Logout = (): JSX.Element => {
     if (isSuccess) {
       if (data.message === 'logged out') {
         deleteQuotationsCache()
-        deleteItemsCache()
+        deleteBookmarksCache()
 
         accessTokenSignal.value = null
         dispatch(userSlice.actions.forgetLoggedUser())

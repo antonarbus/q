@@ -7,8 +7,8 @@ import { GoSearch } from 'react-icons/go'
 import { IoClose } from 'react-icons/io5'
 import { PiBooks } from 'react-icons/pi'
 import { useUpdateEffect } from 'react-use'
+import { useGetBookmarkMutation, useGetBookmarksQuery } from '@entities/bookmark'
 import { copySlice } from '@entities/copy'
-import { useGetItemMutation, useGetItemsQuery } from '@entities/item'
 import { isFroalaSignal } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components'
 import { cls } from '@shared/consts/cls'
@@ -16,8 +16,8 @@ import { notify } from '@shared/ui/top_msg'
 import { getJsxWithBoldSubstr } from '@shared/utils/getJsxWithBoldSubstr'
 
 export const Search = (): JSX.Element => {
-  const { data: itemsData, isPending: isPendingItems, refetch } = useGetItemsQuery()
-  const { mutate: loadItem, isPending: isPendingGetItem, isSuccess, isError, error, data: itemData, variables } = useGetItemMutation()
+  const { data: itemsData, isPending: isPendingItems, refetch } = useGetBookmarksQuery()
+  const { mutate: loadItem, isPending: isPendingGetItem, isSuccess, isError, error, data: itemData, variables } = useGetBookmarkMutation()
   const email = useSelectorTyped(state => state.user.email)
   const options = itemsData?.documents ?? []
   const inputValueSignal = useSignal('')

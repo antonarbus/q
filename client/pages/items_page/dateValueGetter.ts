@@ -1,6 +1,6 @@
 import { type ValueGetterParams } from 'ag-grid-community'
 import { isValid } from 'date-fns'
-import { type Item } from '@entities/item'
+import { type Item } from '@entities/bookmark'
 
 type Props = {
   columnDef: keyof Item

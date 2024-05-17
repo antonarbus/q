@@ -5,7 +5,7 @@ import { type AxiosResponse, type AxiosError } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
 import { axiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
 
-export const useSaveItemMutation = (): UseMutationResult<ResBody, AxiosError<ResBody>, Payload> => {
+export const useSaveBookmarkMutation = (): UseMutationResult<ResBody, AxiosError<ResBody>, Payload> => {
   const query = useMutation({
     mutationKey: [queryKey.saveBookmark],
     mutationFn: async ({ item }: Payload) => {

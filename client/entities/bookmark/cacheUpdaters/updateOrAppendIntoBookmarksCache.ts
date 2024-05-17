@@ -8,7 +8,7 @@ type Props = {
   item: Item
 }
 
-export const updateOrAppendIntoItemsCache = ({ item }: Props): void => {
+export const updateOrAppendIntoBookmarksCache = ({ item }: Props): void => {
   reactQuery.setQueriesData<ResBody>({ queryKey: [queryKey.getBookmarks] }, (cacheData) => {
     const updatedCacheData = produce(cacheData, (draft) => {
       if (draft?.documents === undefined) return

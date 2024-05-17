@@ -6,7 +6,7 @@ import { queryKey } from '@shared/consts/queryKey'
 import { axiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
 // import { asyncDelay } from '@shared/utils/delay'
 
-export const useGetItemsQuery = (): UseQueryResult<ResBody, AxiosError<ResBody>> => {
+export const useGetBookmarksQuery = (): UseQueryResult<ResBody, AxiosError<ResBody>> => {
   const query = useQuery({
     queryKey: [queryKey.getBookmarks],
     queryFn: async () => {

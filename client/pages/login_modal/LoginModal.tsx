@@ -7,7 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { OpenRegisterModalLink } from '@features/open_close/open_register_modal'
 import { OpenResetModalLink } from '@features/open_close/open_reset_modal'
-import { useGetItemsQuery } from '@entities/item'
+import { useGetBookmarksQuery } from '@entities/bookmark'
 import { useGetQuotationsQuery } from '@entities/quotation'
 import { useLogInMutation, userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
@@ -31,7 +31,7 @@ export const LoginModal = (): JSX.Element => {
 
   const { mutate: logIn, isPending, data, isSuccess, isError, error } = useLogInMutation()
   const { refetch: refetchQuotations } = useGetQuotationsQuery()
-  const { refetch: refetchItems } = useGetItemsQuery()
+  const { refetch: refetchItems } = useGetBookmarksQuery()
 
   useUpdateEffect(() => {
     if (isSuccess) {

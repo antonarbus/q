@@ -3,7 +3,7 @@ import { type ResBody } from '@server/api/getItemsRouter'
 import { produce } from 'immer'
 import { queryKey } from '@shared/consts/queryKey'
 
-export const deleteItemsCache = (): void => {
+export const deleteBookmarksCache = (): void => {
   reactQuery.setQueriesData<ResBody>({ queryKey: [queryKey.getBookmarks] }, (cacheData) => {
     const updatedCacheData = produce(cacheData, (draft) => {
       if (draft?.documents === undefined) return

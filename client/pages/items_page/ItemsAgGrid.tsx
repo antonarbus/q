@@ -6,8 +6,8 @@ import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef, useEffect } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@features/open_close/open_bookmarks_page'
-import { useGetItemsQuery } from '@entities/item'
-import { type Item } from '@entities/item'
+import { useGetBookmarksQuery } from '@entities/bookmark'
+import { type Item } from '@entities/bookmark'
 import { LoadingTableOverlay, loadingTableOverlaySignal } from '@shared/components/LoadingTableOverlay'
 import { notify } from '@shared/ui/top_msg'
 import { addPlaceholderToFloatingFilters } from './addPlaceholderToFloatingFilters'
@@ -19,7 +19,7 @@ import { NoRowsTableOverlay } from './NoRowsTableOverlay'
 
 export const ItemsAgGrid = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
-  const { data, isSuccess, isLoading, isFetching, isFetched, isError, error, refetch } = useGetItemsQuery()
+  const { data, isSuccess, isLoading, isFetching, isFetched, isError, error, refetch } = useGetBookmarksQuery()
   useDisableLoadingOverlayWhenItemsAreFetched({ isFetched })
   const email = useSelectorTyped(state => state.user.email)
 

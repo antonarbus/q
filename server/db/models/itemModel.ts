@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose'
-import { type Item } from '@entities/item'
+import { type Item } from '@entities/bookmark'
 import { nanoid } from '@shared/lib/nanoid'
 
 const itemSchema = new Schema<Item>({
