@@ -59,6 +59,7 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
           name: quotation.name,
           category: quotation.category,
           desc: quotation.desc,
+          info: quotation.info,
           items: 'find in bucket under same id',
           updatedAt: Date.now(),
           ...(isNew && { createdAt: Date.now() }),

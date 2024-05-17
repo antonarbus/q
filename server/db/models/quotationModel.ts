@@ -31,6 +31,10 @@ const quotationSchema = new Schema<Quotation>({
     type: String,
     trim: true,
   },
+  info: {
+    type: String,
+    trim: true,
+  },
   createdAt: Date,
   updatedAt: Date,
   openedAt: Date,

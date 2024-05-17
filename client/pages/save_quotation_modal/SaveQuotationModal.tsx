@@ -89,6 +89,7 @@ export const SaveQuotationModal = (): JSX.Element => {
       name: nameSignal.value,
       category: categorySignal.value,
       desc: descSignal.value,
+      info: getState().quotation.info,
       items: getState().quotation.items,
     }
 

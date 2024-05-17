@@ -2,16 +2,11 @@ import React, { Suspense } from 'react'
 import { type RouteObject, createBrowserRouter } from 'react-router-dom'
 import { ActivationModal } from '@pages/auth/ActivationModal'
 import { UnauthorizedPage } from '@pages/auth/UnauthorizedPage'
-// import { BarChart } from '@pages/chart/Chart'
 import { EditBookmarkModal } from '@pages/edit_bookmark_modal'
 import { EditQuotationModal } from '@pages/edit_quotation_modal/EditQuotationModal'
 import { ErrorPage } from '@pages/error_page'
-// import { ItemsTable } from '@pages/items_table'
-// import { Quotation } from '@pages/quotation'
-// import { QuotationsTable } from '@pages/quotations_table'
-import { ItemInfoModal } from '@pages/item_info_modal'
+import { InfoModal } from '@pages/info_modal'
 import { LoginModal } from '@pages/login_modal'
-import { QuotationInfoModal } from '@pages/quotation_info_modal'
 import { RegisterModal } from '@pages/register_modal'
 import { RequestPasswordResetModal } from '@pages/request_password_reset_modal'
 import { ResetPasswordModal } from '@pages/reset_password_modal'
@@ -95,12 +90,8 @@ export const router = createBrowserRouter([
             element: <SaveBookmarkModal />,
           },
           {
-            path: route.quotationInfo,
-            element: <QuotationInfoModal />,
-          },
-          {
-            path: route.itemInfo,
-            element: <ItemInfoModal />,
+            path: `${route.info}/:id`,
+            element: <InfoModal />,
           },
         ],
       },
