@@ -7,10 +7,10 @@ import { axiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
 
 export const useGetItemMutation = (): UseMutationResult<ResBody, AxiosError<ResBody>, Payload> => {
   const mutation = useMutation({
-    mutationKey: [queryKey.getItem],
+    mutationKey: [queryKey.getBookmark],
     mutationFn: async ({ id }: Payload) => {
       const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>, Payload>({
-        url: apiUrl.getItem,
+        url: apiUrl.getBookmark,
         method: 'POST',
         data: { id },
       })

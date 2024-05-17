@@ -7,10 +7,10 @@ import { axiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
 
 export const useSaveItemMutation = (): UseMutationResult<ResBody, AxiosError<ResBody>, Payload> => {
   const query = useMutation({
-    mutationKey: [queryKey.saveItem],
+    mutationKey: [queryKey.saveBookmark],
     mutationFn: async ({ item }: Payload) => {
       const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>, Payload>({
-        url: apiUrl.saveItem,
+        url: apiUrl.saveBookmark,
         method: 'POST',
         data: { item },
       })

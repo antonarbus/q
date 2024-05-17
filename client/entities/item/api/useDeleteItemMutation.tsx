@@ -7,10 +7,10 @@ import { axiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
 
 export const useDeleteItemMutation = (): UseMutationResult<ResBody, AxiosError<ResBody>, Payload> => {
   const mutation = useMutation({
-    mutationKey: [queryKey.deleteItem],
+    mutationKey: [queryKey.deleteBookmark],
     mutationFn: async (payload: Payload) => {
       const res = await axiosWithAuth<ResBody>({
-        url: apiUrl.deleteItem,
+        url: apiUrl.deleteBookmark,
         method: 'DELETE',
         data: payload,
       })

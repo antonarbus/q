@@ -16,7 +16,7 @@ import { CategoryField } from './CategoryField'
 import { DescriptionField } from './DescriptionField'
 import { NameField } from './NameField'
 
-export const EditItemModal = (): JSX.Element => {
+export const EditBookmarkModal = (): JSX.Element => {
   const navigate = useNavigate()
   const item = getState().quotation.items.at(0)
   const modalRef = useRef<HTMLDivElement>(null)
@@ -134,7 +134,7 @@ export const EditItemModal = (): JSX.Element => {
     <FormModal
       width='500px'
       headerIcon={<FiEdit3 />}
-      headerText='Edit item'
+      headerText='Edit bookmark'
       buttonText='UPDATE'
       isButtonDisabled={isDisabled}
       isButtonLoading={isPending}

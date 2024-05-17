@@ -1,19 +1,22 @@
 export const queryKey = {
-  getQuotation: 'getQuotation',
-  getQuotations: 'getQuotations',
-  getItem: 'getItem',
-  getItems: 'getItems',
-  getItemCategories: 'getItemCategories',
-  getQuotationCategories: 'getQuotationCategories',
-  deleteQuotation: 'deleteQuotation',
-  deleteItem: 'deleteItem',
+  // auth
   logIn: 'logIn',
   logOut: 'logOut',
   activate: 'activate',
   register: 'register',
   requestPasswordReset: 'requestPasswordReset',
   resetPassword: 'resetPassword',
-  saveQuotation: 'saveQuotation',
-  saveItem: 'saveItem',
   getAccessToken: 'getAccessToken',
+  // quotation
+  getQuotation: 'getQuotation',
+  getQuotations: 'getQuotations',
+  getQuotationCategories: 'getQuotationCategories',
+  saveQuotation: 'saveQuotation',
+  deleteQuotation: 'deleteQuotation',
+  // bookmark
+  getBookmark: 'getBookmark',
+  getBookmarks: 'getBookmarks',
+  getBookmarkCategories: 'getBookmarkCategories',
+  deleteBookmark: 'deleteBookmark',
+  saveBookmark: 'saveBookmark',
 } as const

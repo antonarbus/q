@@ -14,7 +14,7 @@ import { CategoryField } from './CategoryField'
 import { DescriptionField } from './DescriptionField'
 import { NameField } from './NameField'
 
-export const SaveItemModal = (): JSX.Element => {
+export const SaveBookmarkModal = (): JSX.Element => {
   const navigate = useNavigate()
   const location = useLocation()
   const item = location.state.item as Item | undefined
@@ -82,9 +82,9 @@ export const SaveItemModal = (): JSX.Element => {
       modalRef={modalRef}
       width='350px'
       paddingContent='50px 40px'
-      headerText='Bookmark item'
+      headerText='Add to bookmarks'
       headerIcon={<MdOutlineStarOutline />}
-      buttonText='Add'
+      buttonText='ADD'
       isButtonDisabled={isDisabled}
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}

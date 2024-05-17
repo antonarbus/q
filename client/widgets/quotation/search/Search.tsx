@@ -24,7 +24,7 @@ export const Search = (): JSX.Element => {
 
   useEffect(() => {
     if (!email) return
-    // void refetch()
+    void refetch()
   }, [email])
 
   useUpdateEffect(() => {

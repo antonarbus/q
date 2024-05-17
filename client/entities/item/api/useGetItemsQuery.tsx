@@ -8,10 +8,10 @@ import { axiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
 
 export const useGetItemsQuery = (): UseQueryResult<ResBody, AxiosError<ResBody>> => {
   const query = useQuery({
-    queryKey: [queryKey.getItems],
+    queryKey: [queryKey.getBookmarks],
     queryFn: async () => {
       const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
-        url: apiUrl.getItems,
+        url: apiUrl.getBookmarks,
         method: 'GET',
       })
       // await asyncDelay(10000)
