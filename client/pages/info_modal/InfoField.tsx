@@ -1,5 +1,6 @@
 import { InputAdornment, TextField } from '@mui/material'
 import { type Signal } from '@preact/signals-react'
+import { useEffect, useRef } from 'react'
 import { BsFileEarmarkText } from 'react-icons/bs'
 
 type Props = {
@@ -7,9 +8,19 @@ type Props = {
 }
 
 export const InfoField = ({ infoSignal }: Props): JSX.Element => {
+  const inputRef = useRef<React.ElementRef<'input'>>(null)
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.selectionStart = inputRef.current.value.length
+      inputRef.current.focus()
+    }
+  }, [])
+
   return (
     <div style={{ position: 'relative' }}>
       <TextField
+        inputRef={inputRef}
         disabled={false}
         fullWidth
         name='info'
@@ -17,6 +28,7 @@ export const InfoField = ({ infoSignal }: Props): JSX.Element => {
         label='Info'
         multiline
         rows={4}
+        // autoFocus
         value={infoSignal.value}
         onChange={(e): void => {
           infoSignal.value = e.target.value
