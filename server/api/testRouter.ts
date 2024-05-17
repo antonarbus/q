@@ -12,8 +12,8 @@ export async function test(req: Req, res: Res, next: Next): Promise<void> {
   try {
     // await QuotationModel.deleteOne({ version: 2 })
     // const dbRes = await QuotationModel.find()
-    // const dbRes = await UserModel.find()
-    const dbRes = await ItemModel.find().distinct('category', { email: 'anton.arbus@gmail.com' })
+    const dbRes = await UserModel.find({ email: 'anton.arbus@gmail.com' })
+    // const dbRes = await ItemModel.find().distinct('category', { email: 'anton.arbus@gmail.com' })
 
     res.status(200).json({ dbRes })
   } catch (error) {

@@ -1,5 +1,5 @@
 import { ItemModel } from '@server/db/models/itemModel'
-import { verifyAccessTokenMiddleware } from '@server/middleware/verifyTokenMiddleware'
+import { verifyAccessTokenMiddleware } from '@server/middleware/verifyAccessTokenMiddleware'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '@server/utils/getEmailFromRefreshTokenOrThrowUnauthorized'
 import { Router } from 'express'
 import { type Item } from '@entities/item'

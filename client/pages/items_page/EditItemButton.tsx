@@ -32,7 +32,7 @@ export const EditItemButton = ({ id }: ReqBody): JSX.Element => {
       }))
 
       // todo: as we loaded item into the quotation store, we can take all data from the store and not pass in navigate
-      navigate(`./${route.editItem}`, { state: { item } })
+      navigate(`./${route.editBookmark}`, { state: { item } })
     }
   }, [isSuccess])
 

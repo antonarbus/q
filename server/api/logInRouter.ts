@@ -3,7 +3,7 @@ import express from 'express'
 import { type User } from '@entities/user'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { UserModel } from '../db/models/userModel'
-import { createAccessToken, createRefreshToken, thirtyDaysInSec } from '../services/jwt'
+import { createAccessToken, createRefreshToken, getJwtExpiration, thirtyDaysInSec } from '../services/jwt'
 import type { Next, ReqWithBody, ResWithBody } from '../types'
 
 export type ReqBody = {
@@ -12,11 +12,19 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  message: 'no user data' | 'no password' | 'bad password' | 'not activated' | 'good password'
+  message:
+  'no user data' |
+  'no password' |
+  'bad password' |
+  'not activated' |
+  'good password' |
+  'failed to create token'
   name?: 'MongooseError'
   accessJwtToken?: string
   email?: User['email']
   roles?: User['roles']
+  jwtRefreshTokenExpireIn?: Date
+  jwtAccessTokenExpireIn?: Date
 }
 
 type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
@@ -66,6 +74,12 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
     const accessJwtToken = createAccessToken({ email, roles: user.roles })
     const refreshJwtToken = isExistingRefreshJwtToken ? user.refreshJwtToken : createRefreshToken({ email, roles: user.roles })
 
+    if (!refreshJwtToken || !accessJwtToken) {
+      return res
+        .status(httpStatus.notFound_404)
+        .json({ message: 'failed to create token' })
+    }
+
     res.cookie('refreshJwtToken', refreshJwtToken, {
       maxAge: thirtyDaysInSec * 1000,
       httpOnly: true,
@@ -86,6 +100,8 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
         accessJwtToken,
         email: user.email,
         roles: user.roles,
+        jwtRefreshTokenExpireIn: getJwtExpiration({ token: refreshJwtToken }),
+        jwtAccessTokenExpireIn: getJwtExpiration({ token: accessJwtToken }),
       })
   } catch (error) {
     next(error)
