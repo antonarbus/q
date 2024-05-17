@@ -4,7 +4,7 @@ import { useCallback, useRef } from 'react'
 import { FiEdit3 } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { useGetItemCategoriesQuery, useGetItemsQuery, useSaveItemMutation } from '@entities/item'
+import { useGetBookmarkCategoriesQuery, useGetBookmarksQuery, useSaveBookmarkMutation } from '@entities/bookmark'
 import { itemKey, quotationSlice, saveItemHeightByIndex } from '@entities/quotation'
 import { FormModal } from '@shared/components'
 import { cls } from '@shared/consts/cls'
@@ -25,9 +25,9 @@ export const EditBookmarkModal = (): JSX.Element => {
   const categorySignal = useSignal(item?.category ?? '')
   const descSignal = useSignal(item?.desc ?? '')
 
-  const { mutate: saveItem, data, isSuccess, isPending, isError, error, reset } = useSaveItemMutation()
-  const { refetch: updateItemCategories } = useGetItemCategoriesQuery()
-  const { refetch: updateItems } = useGetItemsQuery()
+  const { mutate: saveItem, data, isSuccess, isPending, isError, error, reset } = useSaveBookmarkMutation()
+  const { refetch: updateItemCategories } = useGetBookmarkCategoriesQuery()
+  const { refetch: updateItems } = useGetBookmarksQuery()
 
   const isDisabled = nameSignal.value === '' || categorySignal.value === ''
 

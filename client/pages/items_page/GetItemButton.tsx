@@ -3,14 +3,14 @@ import { IconButton } from '@mui/material'
 import type { ReqBody } from '@server/api/deleteItemRouter'
 import { MdCopyAll } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
+import { useGetBookmarkMutation } from '@entities/bookmark'
 import { copySlice } from '@entities/copy'
-import { useGetItemMutation } from '@entities/item'
 import { isFroalaSignal } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components'
 import { notify } from '@shared/ui/top_msg'
 
 export const GetItemButton = ({ id }: ReqBody): JSX.Element => {
-  const { mutate: loadItem, isPending, isSuccess, isError, error, data } = useGetItemMutation()
+  const { mutate: loadItem, isPending, isSuccess, isError, error, data } = useGetBookmarkMutation()
 
   useUpdateEffect(() => {
     if (isSuccess) {

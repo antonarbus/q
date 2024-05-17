@@ -7,7 +7,7 @@ type Props = {
   id: string
 }
 
-export const deleteFromItemsCache = ({ id }: Props): void => {
+export const deleteFromBookmarksCache = ({ id }: Props): void => {
   reactQuery.setQueriesData<ResBody>({ queryKey: [queryKey.getBookmarks] }, (cacheData) => {
     const updatedCacheData = produce(cacheData, (draft) => {
       if (draft?.documents === undefined) return

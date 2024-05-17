@@ -4,7 +4,7 @@ import { useRef } from 'react'
 import { MdOutlineStarOutline } from 'react-icons/md'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { useGetItemCategoriesQuery, useSaveItemMutation } from '@entities/item'
+import { useGetBookmarkCategoriesQuery, useSaveBookmarkMutation } from '@entities/bookmark'
 import { getItemByIdFromStore, itemKey } from '@entities/quotation'
 import { FormModal } from '@shared/components'
 import { nanoid } from '@shared/lib/nanoid'
@@ -26,8 +26,8 @@ export const SaveBookmarkModal = (): React.ReactNode => {
   const categorySignal = useSignal(item.category)
   const descSignal = useSignal(item.desc)
 
-  const { mutate: saveItem, data, isSuccess, isPending, isError, error, reset } = useSaveItemMutation()
-  const { refetch: updateCategories } = useGetItemCategoriesQuery()
+  const { mutate: saveItem, data, isSuccess, isPending, isError, error, reset } = useSaveBookmarkMutation()
+  const { refetch: updateCategories } = useGetBookmarkCategoriesQuery()
 
   const isDisabled = nameSignal.value === '' || categorySignal.value === ''
 

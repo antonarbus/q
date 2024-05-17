@@ -5,7 +5,7 @@ import { type AxiosError } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
 import { axiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
 
-export const useDeleteItemMutation = (): UseMutationResult<ResBody, AxiosError<ResBody>, Payload> => {
+export const useDeleteBookmarkMutation = (): UseMutationResult<ResBody, AxiosError<ResBody>, Payload> => {
   const mutation = useMutation({
     mutationKey: [queryKey.deleteBookmark],
     mutationFn: async (payload: Payload) => {
