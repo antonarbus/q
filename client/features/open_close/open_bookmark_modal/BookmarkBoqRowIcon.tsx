@@ -47,10 +47,12 @@ export const BookmarkBoqRowIcon = (): ReactNode => {
         if (!boqRow) return
         if (boqRow.type === boqRowKey.paste) return
 
-        const itemWithUpdatedPreview = structuredClone(boqRow)
-        itemWithUpdatedPreview.preview = cleanedHtml
+        dispatch(quotationSlice.actions.updateItemPreviewByIdReducer({
+          id: boqRow.id,
+          preview: cleanedHtml,
+        }))
 
-        navigate(`./${route.bookmark}`, { state: { item: itemWithUpdatedPreview } })
+        navigate(`./${route.bookmark}/${boqRow.id}`)
       }}
     />
   )

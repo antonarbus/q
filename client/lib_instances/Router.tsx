@@ -86,7 +86,7 @@ export const router = createBrowserRouter([
             element: <SaveQuotationModal />,
           },
           {
-            path: route.bookmark,
+            path: `${route.bookmark}/:id`,
             element: <SaveBookmarkModal />,
           },
           {

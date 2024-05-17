@@ -3,7 +3,7 @@ import { type BoqRowKey } from '../consts/boqRowKey'
 import { type itemKey } from '../consts/itemKey'
 
 type ItemCommon = {
-  id: string
+  id: 'new' | Record<never, never> & string
   email: string
   name: string
   category: string
@@ -98,13 +98,8 @@ export type ItemPaste = ItemCommon & {
 export type Item = ItemBoq | ItemPaste | ItemText | ItemPrice | BoqRow
 // export type Item = ItemText | ItemBoq | ItemPrice | BoqRow
 
-export type Quotation = {
-  id: 'new' | Record<never, never> & string
-  email: string
-  name: string
-  category: string
-  desc: string
-  info: string
+export type Quotation = ItemCommon & {
+  type: typeof itemKey.quotation
   createdAt?: Date
   updatedAt?: Date
   openedAt?: Date
