@@ -1,17 +1,12 @@
 import { dispatch } from '@lib_instances/store'
-import { LoginRounded } from '@mui/icons-material'
-import { Box } from '@mui/material'
-import { useSignal } from '@preact/signals-react'
-import { useRef } from 'react'
+import { type Signal } from '@preact/signals-react'
+import { type UseMutationResult } from '@tanstack/react-query'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { OpenRegisterModalLink } from '@features/open_close/open_register_modal'
-import { OpenResetModalLink } from '@features/open_close/open_reset_modal'
 import { useGetBookmarksQuery } from '@entities/bookmark'
 import { useGetQuotationsQuery } from '@entities/quotation'
 import { useLogInMutation, userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
-import { EmailField, FormModal, PasswordField } from '@shared/components'
 import { navItemId } from '@shared/consts/navItemId'
 import { route } from '@shared/consts/route'
 import { nanoid } from '@shared/lib/nanoid'
@@ -20,15 +15,22 @@ import { reRenderQuotationSignal } from '@shared/signals/reRenderQuotationSignal
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
 
-export const LoginModal = (): JSX.Element => {
+type Props = {
+  emailSignal: Signal<string>
+  passwordSignal: Signal<string>
+  modalRef: React.RefObject<HTMLDivElement>
+}
+
+type Res = {
+  onSubmit: (e: React.FormEvent) => void
+  isPending: UseMutationResult['isPending']
+  isSuccess: UseMutationResult['isSuccess']
+  isError: UseMutationResult['isError']
+}
+
+export const useLogIn = ({ emailSignal, passwordSignal, modalRef }: Props): Res => {
   const navigate = useNavigate()
   const { id } = useParams()
-  const inputRef = useRef<HTMLDivElement>(null)
-  const modalRef = useRef<HTMLDivElement>(null)
-  const emailSignal = useSignal('')
-  const passwordSignal = useSignal('')
-  const isEmailOkSignal = useSignal(false)
-
   const { mutate: logIn, isPending, data, isSuccess, isError, error } = useLogInMutation()
   const { refetch: refetchQuotations } = useGetQuotationsQuery()
   const { refetch: refetchItems } = useGetBookmarksQuery()
@@ -102,38 +104,5 @@ export const LoginModal = (): JSX.Element => {
     })
   }
 
-  return (
-    <FormModal
-      modalRef={modalRef}
-      width='350px'
-      paddingContent='50px 40px 10px 40px'
-      headerText='Log in'
-      headerIcon={<LoginRounded />}
-      buttonText='LOG IN'
-      isButtonDisabled={!isEmailOkSignal.value || passwordSignal.value === '' || isPending}
-      isButtonLoading={isPending}
-      isButtonSuccess={isSuccess}
-      isButtonError={isError}
-      onSubmit={onSubmit}
-      onCloseSlideModalOutAndNavigateUp={true}
-    >
-      <EmailField
-        inputRef={inputRef}
-        emailSignal={emailSignal}
-        isEmailOkSignal={isEmailOkSignal}
-      />
-      <PasswordField
-        passwordSignal={passwordSignal}
-      />
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-        }}
-      >
-        <OpenResetModalLink modalRef={modalRef} />
-        <OpenRegisterModalLink modalRef={modalRef} />
-      </Box>
-    </FormModal>
-  )
+  return { onSubmit, isPending, isSuccess, isError }
 }

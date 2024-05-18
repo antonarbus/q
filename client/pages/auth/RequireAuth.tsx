@@ -10,7 +10,7 @@ export const RequireAuth = ({ allowedRoles }: Props): JSX.Element => {
   const location = useLocation()
   const isLogged = accessTokenSignal.value !== null
   const roles = useSelectorTyped(state => state.user.roles)
-  const haveRequiredRole = allowedRoles.some((role) => roles.includes(role))
+  const haveRequiredRole = allowedRoles.some(role => roles.includes(role))
 
   if (isLogged && haveRequiredRole) return <Outlet />
   if (isLogged && !haveRequiredRole) { return <Navigate to='/unauthorized' state={{ from: location }} replace /> }
