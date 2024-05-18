@@ -1,4 +1,4 @@
-import { ItemModel } from '@server/db/models/itemModel'
+import { BookmarkModel } from '@server/db/models/bookmarkModel'
 import { verifyAccessTokenMiddleware } from '@server/middleware/verifyAccessTokenMiddleware'
 import { bucket } from '@server/services/storage'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '@server/utils/getEmailFromRefreshTokenOrThrowUnauthorized'
@@ -52,14 +52,14 @@ const saveBookmark: RouterHandler = async (req, res, next) => {
         .json({ message: 'id is not provided' })
     }
 
-    const existingItem = await ItemModel.findOne({
+    const existingItem = await BookmarkModel.findOne({
       email,
       id: item.id,
     })
 
     const isNew = existingItem === null
 
-    const itemDataFromDb = await ItemModel
+    const itemDataFromDb = await BookmarkModel
       .findOneAndUpdate(
         {
           id: item.id,
@@ -89,7 +89,7 @@ const saveBookmark: RouterHandler = async (req, res, next) => {
         .json({ message: 'not saved' })
     }
 
-    const filePath = `${email}/items/${item.id}.json`
+    const filePath = `${email}/bookmarks/${item.id}.json`
     const file = bucket.file(filePath)
     const contents = JSON.stringify({ ...itemDataFromDb, ...item }, null, 2)
     await file.save(contents)

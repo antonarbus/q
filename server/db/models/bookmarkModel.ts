@@ -2,7 +2,7 @@ import { model, Schema } from 'mongoose'
 import { type Item } from '@entities/bookmark'
 import { nanoid } from '@shared/lib/nanoid'
 
-const itemSchema = new Schema<Item>({
+const bookmarkSchema = new Schema<Item>({
   id: {
     type: String,
     default: () => nanoid(5),
@@ -36,4 +36,4 @@ const itemSchema = new Schema<Item>({
   timestamps: true,
 })
 
-export const ItemModel = model<Item>('item', itemSchema)
+export const BookmarkModel = model<Item>('bookmark', bookmarkSchema)

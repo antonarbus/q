@@ -1,4 +1,4 @@
-import { ItemModel } from '@server/db/models/itemModel'
+import { BookmarkModel } from '@server/db/models/bookmarkModel'
 import { verifyAccessTokenMiddleware } from '@server/middleware/verifyAccessTokenMiddleware'
 import { bucket } from '@server/services/storage'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '@server/utils/getEmailFromRefreshTokenOrThrowUnauthorized'
@@ -26,7 +26,7 @@ const deleteBookmark: RouterHandler = async (req, res, next) => {
 
     const { id } = req.body
 
-    const deleteFromDbResult = await ItemModel.deleteOne({ email, id })
+    const deleteFromDbResult = await BookmarkModel.deleteOne({ email, id })
 
     if (deleteFromDbResult.deletedCount === 0) {
       return res
@@ -34,7 +34,7 @@ const deleteBookmark: RouterHandler = async (req, res, next) => {
         .json({ message: 'did not find' })
     }
 
-    const [files] = await bucket.getFiles({ prefix: `${email}/items/${id}.json` })
+    const [files] = await bucket.getFiles({ prefix: `${email}/bookmarks/${id}.json` })
 
     if (files.length === 0) {
       return res

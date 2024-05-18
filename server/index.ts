@@ -1,6 +1,6 @@
+// import cors from 'cors'
 import 'dotenv/config'
 import cookieParser from 'cookie-parser'
-// import cors from 'cors'
 import express from 'express'
 import morgan from 'morgan'
 import { activateRouter } from './api/auth/activateRouter'
@@ -36,8 +36,6 @@ app.use(express.json()) // middleware based on body-parser will parse the JSON p
 app.use(cookieParser()) // middleware parses the Cookie header and populates req.cookies with an object keyed by the cookie names
 // app.use(cors())
 // app.set('trust proxy', true) // for app engine
-
-// todo: rename to item thing to bookmark
 
 // dev
 app.get(apiUrl.root, (_req: Req, res: Res) => res.send('i am express.js'))

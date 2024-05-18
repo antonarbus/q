@@ -1,4 +1,4 @@
-import { ItemModel } from '@server/db/models/itemModel'
+import { BookmarkModel } from '@server/db/models/bookmarkModel'
 import { verifyAccessTokenMiddleware } from '@server/middleware/verifyAccessTokenMiddleware'
 import { bucket } from '@server/services/storage'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '@server/utils/getEmailFromRefreshTokenOrThrowUnauthorized'
@@ -26,7 +26,7 @@ const getBookmark: RouterHandler = async (req, res, next) => {
 
     const email = getEmailFromRefreshTokenOrThrowUnauthorized(req)
 
-    const document = await ItemModel
+    const document = await BookmarkModel
       .findOne({ email, id })
       .lean()
 
@@ -36,7 +36,7 @@ const getBookmark: RouterHandler = async (req, res, next) => {
         .json({ message: 'not found' })
     }
 
-    const filePath = `${email}/items/${id}.json`
+    const filePath = `${email}/bookmarks/${id}.json`
 
     const [fileBuffer] = await bucket.file(filePath).download()
 
