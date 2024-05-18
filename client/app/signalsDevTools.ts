@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { effect } from '@preact/signals-react'
-import { displayedRowsCountSignal } from '@pages/quotations_page/DisplayedRowsCount'
+import { displayedRowsCountSignal } from '@pages/quotations_page/components/DisplayedRowsCount'
 import { isFroalaSignal } from '@entities/quotation'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 import { reRenderQuotationSignal } from '@shared/signals/reRenderQuotationSignal'

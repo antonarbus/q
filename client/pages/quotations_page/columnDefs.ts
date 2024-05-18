@@ -1,9 +1,9 @@
 import type { ColDef } from 'ag-grid-community'
 import { type Quotation } from '@entities/quotation'
-import { ActionButtonsCellRenderer } from './ActionButtonsCellRenderer'
-import { DateCellRenderer } from './DateCellRenderer'
-import { dateFilterComparator } from './dateFilterComparator'
-import { dateValueGetter } from './dateValueGetter'
+import { dateFilterComparator } from './comparators/dateFilterComparator'
+import { ActionButtonsCellRenderer } from './renderers/ActionButtonsCellRenderer'
+import { DateCellRenderer } from './renderers/DateCellRenderer'
+import { dateValueGetter } from './value_getters/dateValueGetter'
 
 export const defaultColDef: ColDef<Quotation> = {
   headerClass: ['center'],
