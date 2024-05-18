@@ -7,7 +7,7 @@ export const renderInput = (params: AutocompleteRenderInputParams): JSX.Element 
       {...params}
       name='category'
       variant='standard'
-      placeholder='Search'
+      placeholder='Search in bookmarked items'
       InputProps={{
         ...params.InputProps,
         startAdornment: (
