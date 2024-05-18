@@ -10,12 +10,12 @@ import { useGetBookmarksQuery } from '@entities/bookmark'
 import { type Item } from '@entities/bookmark'
 import { LoadingTableOverlay, loadingTableOverlaySignal } from '@shared/components/LoadingTableOverlay'
 import { notify } from '@shared/ui/top_msg'
-import { addPlaceholderToFloatingFilters } from './addPlaceholderToFloatingFilters'
-import { AgGridStyles } from './AgGridStyles'
-import { bookmarksAgGridRef } from './bookmarksAgGridRef'
 import { columnDefs, defaultColDef } from './columnDefs'
-import { DisplayedRowsCount, displayedRowsCountSignal } from './DisplayedRowsCount'
-import { NoRowsTableOverlay } from './NoRowsTableOverlay'
+import { DisplayedRowsCount, displayedRowsCountSignal } from './components/DisplayedRowsCount'
+import { NoRowsTableOverlay } from './components/NoRowsTableOverlay'
+import { bookmarksAgGridRef } from './refs/bookmarksAgGridRef'
+import { AgGridStyles } from './styles/AgGridStyles'
+import { addPlaceholderToFloatingFilters } from './utils/addPlaceholderToFloatingFilters'
 
 export const BookmarksAgGrid = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
