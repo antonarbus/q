@@ -4,7 +4,7 @@ import { getEmailFromRefreshToken } from '@server/utils/getEmailFromRefreshToken
 import { Router } from 'express'
 import { type Quotation } from '@entities/quotation'
 import { httpStatus } from '@shared/consts/httpStatus'
-import { type ResWithBody, type ReqWithBody, type Next } from '../types'
+import { type ResWithBody, type ReqWithBody, type Next } from '../../types'
 
 export type ReqBody = {
   id: Quotation['id']

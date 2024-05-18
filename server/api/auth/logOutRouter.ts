@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { httpStatus } from '@shared/consts/httpStatus'
-import type { Next, Req, ResWithBody } from '../types'
+import type { Next, Req, ResWithBody } from '../../types'
 
 export type ResBody = {
   message: 'logged out'

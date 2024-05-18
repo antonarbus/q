@@ -5,29 +5,37 @@ import { Router } from 'express'
 import { type Item } from '@entities/bookmark'
 import { type ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@shared/consts/httpStatus'
-import { type ResWithBody, type Next, type Req } from '../types'
+import { type ResWithBody, type Next, type Req } from '../../types'
 
 export type ResBody = {
-  message: ErrorMessageCommon | 'Found' | 'Unhandled error'
-  categories?: Array<Item['category']>
+  message: ErrorMessageCommon | 'found' | 'no content' | 'Unhandled error'
+  documents?: Item[]
 }
 
 type RouterHandler = (req: Req, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
 
-export const getItemCategoriesRouter = Router()
+export const getBookmarksRouter = Router()
 
-const getItemCategories: RouterHandler = async (req, res, next) => {
+const getBookmarks: RouterHandler = async (req, res, next) => {
   try {
     const email = getEmailFromRefreshTokenOrThrowUnauthorized(req)
 
-    const categories = await ItemModel
+    const documents = await ItemModel
       .find({ email })
-      .distinct('category')
+      // .sort({ updatedAt: -1 })
+      .select({ _id: 0, __v: 0, email: 0 })
+      .lean()
 
-    if (categories) {
+    if (documents.length === 0) {
       return res
         .status(httpStatus.success_200)
-        .json({ message: 'Found', categories })
+        .json({ message: 'no content', documents })
+    }
+
+    if (documents.length) {
+      return res
+        .status(httpStatus.success_200)
+        .json({ message: 'found', documents })
     }
 
     return res
@@ -38,8 +46,8 @@ const getItemCategories: RouterHandler = async (req, res, next) => {
   }
 }
 
-getItemCategoriesRouter.get(
+getBookmarksRouter.get(
   '/',
   verifyAccessTokenMiddleware,
-  getItemCategories,
+  getBookmarks,
 )

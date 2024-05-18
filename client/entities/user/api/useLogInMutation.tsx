@@ -1,4 +1,4 @@
-import type { ResBody, ReqBody as Payload } from '@server/api/logInRouter'
+import type { ResBody, ReqBody as Payload } from '@server/api/auth/logInRouter'
 import { apiUrl } from '@server/consts/apiUrl'
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import axios, { type AxiosError } from 'axios'

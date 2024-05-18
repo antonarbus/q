@@ -3,27 +3,27 @@ import cookieParser from 'cookie-parser'
 // import cors from 'cors'
 import express from 'express'
 import morgan from 'morgan'
-import { activateRouter } from './api/activateRouter'
-import { deleteItemRouter } from './api/deleteItemRouter'
-import { deleteQuotationRouter } from './api/deleteQuotationRouter'
-import { getAccessTokenRouter } from './api/getAccessTokenRouter'
-import { getBucketCors } from './api/getBucketCors'
-import { getItemCategoriesRouter } from './api/getItemCategoriesRouter'
-import { getItemRouter } from './api/getItemRouter'
-import { getItemsRouter } from './api/getItemsRouter'
-import { getQuotationCategoriesRouter } from './api/getQuotationCategoriesRouter'
-import { getQuotationRouter } from './api/getQuotationRouter'
-import { getQuotationsRouter } from './api/getQuotationsRouter'
-import { logInRouter } from './api/logInRouter'
-import { logOutRouter } from './api/logOutRouter'
-import { registerRouter } from './api/registerRouter'
-import { requestPasswordResetRouter } from './api/requestPasswordResetRouter'
-import { resetPasswordRouter } from './api/resetPasswordRouter'
-import { saveItemRouter } from './api/saveItemRouter'
-import { saveQuotationRouter } from './api/saveQuotationRouter'
-import { setBucketCors } from './api/setBucketCors'
-import { testRouter } from './api/testRouter'
-import { uploadRouter } from './api/uploadRouter'
+import { activateRouter } from './api/auth/activateRouter'
+import { getAccessTokenRouter } from './api/auth/getAccessTokenRouter'
+import { logInRouter } from './api/auth/logInRouter'
+import { logOutRouter } from './api/auth/logOutRouter'
+import { registerRouter } from './api/auth/registerRouter'
+import { requestPasswordResetRouter } from './api/auth/requestPasswordResetRouter'
+import { resetPasswordRouter } from './api/auth/resetPasswordRouter'
+import { deleteBookmarkRouter } from './api/bookmark/deleteBookmarkRouter'
+import { getBookmarkCategoriesRouter } from './api/bookmark/getBookmarkCategoriesRouter'
+import { getBookmarkRouter } from './api/bookmark/getBookmarkRouter'
+import { getBookmarksRouter } from './api/bookmark/getBookmarksRouter'
+import { saveBookmarkRouter } from './api/bookmark/saveBookmarkRouter'
+import { getBucketCors } from './api/dev/getBucketCors'
+import { setBucketCors } from './api/dev/setBucketCors'
+import { testRouter } from './api/dev/testRouter'
+import { deleteQuotationRouter } from './api/quotation/deleteQuotationRouter'
+import { getQuotationCategoriesRouter } from './api/quotation/getQuotationCategoriesRouter'
+import { getQuotationRouter } from './api/quotation/getQuotationRouter'
+import { getQuotationsRouter } from './api/quotation/getQuotationsRouter'
+import { saveQuotationRouter } from './api/quotation/saveQuotationRouter'
+import { uploadRouter } from './api/va/uploadRouter'
 import { apiUrl } from './consts/apiUrl'
 import { connectToDb } from './db/connectToDb'
 import { errorHandlerMiddleware } from './middleware/errorHandlerMiddleware'
@@ -62,11 +62,11 @@ app.use(apiUrl.getQuotations, getQuotationsRouter)
 app.use(apiUrl.deleteQuotation, deleteQuotationRouter)
 app.use(apiUrl.getQuotationCategories, getQuotationCategoriesRouter)
 // bookmark
-app.use(apiUrl.getBookmark, getItemRouter)
-app.use(apiUrl.deleteBookmark, deleteItemRouter)
-app.use(apiUrl.saveBookmark, saveItemRouter)
-app.use(apiUrl.getBookmarks, getItemsRouter)
-app.use(apiUrl.getBookmarkCategories, getItemCategoriesRouter)
+app.use(apiUrl.getBookmark, getBookmarkRouter)
+app.use(apiUrl.deleteBookmark, deleteBookmarkRouter)
+app.use(apiUrl.saveBookmark, saveBookmarkRouter)
+app.use(apiUrl.getBookmarks, getBookmarksRouter)
+app.use(apiUrl.getBookmarkCategories, getBookmarkCategoriesRouter)
 // error
 app.use(errorHandlerMiddleware)
 

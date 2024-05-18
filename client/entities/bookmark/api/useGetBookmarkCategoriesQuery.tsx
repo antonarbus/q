@@ -1,4 +1,4 @@
-import type { ResBody } from '@server/api/getItemCategoriesRouter'
+import type { ResBody } from '@server/api/bookmark/getBookmarkCategoriesRouter'
 import { apiUrl } from '@server/consts/apiUrl'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import { type AxiosError, type AxiosResponse } from 'axios'

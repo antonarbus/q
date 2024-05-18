@@ -1,4 +1,4 @@
-import type { ResBody } from '@server/api/getQuotationCategoriesRouter'
+import type { ResBody } from '@server/api/quotation/getQuotationCategoriesRouter'
 import { apiUrl } from '@server/consts/apiUrl'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import { type AxiosError, type AxiosResponse } from 'axios'

@@ -1,5 +1,5 @@
 import { IconButton } from '@mui/material'
-import type { ReqBody } from '@server/api/deleteItemRouter'
+import type { ReqBody } from '@server/api/bookmark/deleteBookmarkRouter'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { useDeleteBookmarkMutation, deleteFromBookmarksCache } from '@entities/bookmark'

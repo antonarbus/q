@@ -1,6 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { IconButton } from '@mui/material'
-import type { ReqBody } from '@server/api/deleteItemRouter'
+import type { ReqBody } from '@server/api/bookmark/deleteBookmarkRouter'
 import { MdCopyAll } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { useGetBookmarkMutation } from '@entities/bookmark'
