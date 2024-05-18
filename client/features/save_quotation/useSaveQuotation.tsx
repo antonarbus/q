@@ -1,19 +1,20 @@
-import { getState } from '@lib_instances/store'
+import { dispatch, getState } from '@lib_instances/store'
 import { type Signal } from '@preact/signals-react'
 import { type UseMutationResult } from '@tanstack/react-query'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { useGetBookmarkCategoriesQuery, useSaveBookmarkMutation } from '@entities/bookmark'
-import { getItemByIdFromStore, itemKey } from '@entities/quotation'
+import { quotationSlice, useGetQuotationCategoriesQuery, useSaveQuotationMutation } from '@entities/quotation'
+import { navItemId } from '@shared/consts/navItemId'
 import { nanoid } from '@shared/lib/nanoid'
+import { navSlice, showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@shared/nav'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
 
 type Props = {
+  modalRef: React.RefObject<HTMLDivElement>
   nameSignal: Signal<string>
   categorySignal: Signal<string>
   descSignal: Signal<string>
-  modalRef: React.RefObject<HTMLDivElement>
 }
 
 type Res = {
@@ -23,13 +24,16 @@ type Res = {
   isError: UseMutationResult['isError']
 }
 
-export const useSaveBookmark = ({ nameSignal, categorySignal, descSignal, modalRef }: Props): Res => {
+export const useSaveQuotation = ({ modalRef, nameSignal, categorySignal, descSignal }: Props): Res => {
   const navigate = useNavigate()
-  const { id } = useParams()
-  const item = getItemByIdFromStore({ id: id ?? 'missing id' })
+  const { mutate: saveQuotation, data, isSuccess, isPending, isError, error, reset } = useSaveQuotationMutation()
+  const { refetch: updateCategories } = useGetQuotationCategoriesQuery()
 
-  const { mutate: saveItem, data, isSuccess, isPending, isError, error, reset } = useSaveBookmarkMutation()
-  const { refetch: updateCategories } = useGetBookmarkCategoriesQuery()
+  useUpdateEffect(() => {
+    if (isPending) {
+      showLoadingNavIcon({ navMenuItemIdKey: navItemId.save })
+    }
+  }, [isPending])
 
   useUpdateEffect(() => {
     if (isSuccess) {
@@ -41,11 +45,19 @@ export const useSaveBookmark = ({ nameSignal, categorySignal, descSignal, modalR
 
       void updateCategories()
 
+      if (data.quotation) {
+        dispatch(quotationSlice.actions.loadQuotationReducer({ quotation: data.quotation }))
+      }
+
+      showSuccessNavIcon({ navMenuItemIdKey: navItemId.save })
+      dispatch(navSlice.actions.disableNavItems({ navItemIdKeys: [navItemId.save] }))
+      dispatch(navSlice.actions.removeUnderlineFromTopNav())
+
       setTimeout(() => {
         slideElement({
           element: modalRef.current,
           onSlideElementComplete: () => {
-            navigate('..', { replace: true, state: nanoid() })
+            navigate(`/${data.quotation?.id ?? 'no id set'}`, { replace: true, state: nanoid() })
           },
         })
       }, 1000)
@@ -55,6 +67,7 @@ export const useSaveBookmark = ({ nameSignal, categorySignal, descSignal, modalR
   useUpdateEffect(() => {
     if (isError) {
       notify({ msg: error.response?.data.message, type: 'error', theme: 'dark', position: 'bottom-center' })
+      showErrorNavIcon({ navMenuItemIdKey: navItemId.save })
       reset()
     }
   }, [isError])
@@ -69,21 +82,20 @@ export const useSaveBookmark = ({ nameSignal, categorySignal, descSignal, modalR
       return
     }
 
-    if (!item) {
-      notify({ msg: 'No item with such id', type: 'warn', theme: 'light' })
-      return
-    }
+    const existingId = getState().quotation.id
+    const id = existingId === 'new' ? nanoid(5) : existingId
 
-    const itemWithUpdatedValues = {
-      ...item,
+    const quotation = {
+      ...getState().quotation,
+      id,
       name: nameSignal.value,
       category: categorySignal.value,
       desc: descSignal.value,
+      info: getState().quotation.info,
+      items: getState().quotation.items,
     }
 
-    if (itemWithUpdatedValues.type === itemKey.quotation) return
-
-    saveItem({ item: itemWithUpdatedValues })
+    saveQuotation({ quotation })
   }
 
   return { onSubmit, isPending, isSuccess, isError }
