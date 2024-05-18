@@ -2,7 +2,7 @@
 import { QuotationModel } from '@server/db/models/quotationModel'
 import { UserModel } from '@server/db/models/userModel'
 import { Router } from 'express'
-import { ItemModel } from '../../db/models/itemModel'
+import { BookmarkModel } from '../../db/models/bookmarkModel'
 import type { Next, Req, Res } from '../../types'
 
 // todo: delete, it is temp file not related to the project

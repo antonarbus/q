@@ -1,4 +1,4 @@
-import { ItemModel } from '@server/db/models/itemModel'
+import { BookmarkModel } from '@server/db/models/bookmarkModel'
 import { verifyAccessTokenMiddleware } from '@server/middleware/verifyAccessTokenMiddleware'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '@server/utils/getEmailFromRefreshTokenOrThrowUnauthorized'
 import { Router } from 'express'
@@ -20,7 +20,7 @@ const getBookmarks: RouterHandler = async (req, res, next) => {
   try {
     const email = getEmailFromRefreshTokenOrThrowUnauthorized(req)
 
-    const documents = await ItemModel
+    const documents = await BookmarkModel
       .find({ email })
       // .sort({ updatedAt: -1 })
       .select({ _id: 0, __v: 0, email: 0 })
