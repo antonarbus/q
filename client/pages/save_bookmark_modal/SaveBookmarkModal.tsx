@@ -1,85 +1,23 @@
-import { getState } from '@lib_instances/store'
 import { useSignal } from '@preact/signals-react'
 import { useRef } from 'react'
 import { MdOutlineStarOutline } from 'react-icons/md'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useUpdateEffect } from 'react-use'
-import { useGetBookmarkCategoriesQuery, useSaveBookmarkMutation } from '@entities/bookmark'
-import { getItemByIdFromStore, itemKey } from '@entities/quotation'
+import { useParams } from 'react-router-dom'
+import { useSaveBookmark } from '@features/save_bookmark'
+import { getItemByIdFromStore } from '@entities/quotation'
 import { FormModal } from '@shared/components'
-import { nanoid } from '@shared/lib/nanoid'
-import { notify } from '@shared/ui/top_msg'
-import { slideElement } from '@shared/utils/slideElement'
 import { CategoryField } from './CategoryField'
 import { DescriptionField } from './DescriptionField'
 import { NameField } from './NameField'
 
 export const SaveBookmarkModal = (): React.ReactNode => {
-  const navigate = useNavigate()
   const { id } = useParams()
-  if (!id) return null
-  const item = getItemByIdFromStore({ id })
-  if (!item) return null
-
+  const item = getItemByIdFromStore({ id: id ?? 'missing id' })
   const modalRef = useRef<HTMLDivElement>(null)
-  const nameSignal = useSignal(item.name)
-  const categorySignal = useSignal(item.category)
-  const descSignal = useSignal(item.desc)
-
-  const { mutate: saveItem, data, isSuccess, isPending, isError, error, reset } = useSaveBookmarkMutation()
-  const { refetch: updateCategories } = useGetBookmarkCategoriesQuery()
-
+  const nameSignal = useSignal(item?.name ?? '')
+  const categorySignal = useSignal(item?.category ?? '')
+  const descSignal = useSignal(item?.desc ?? '')
+  const { onSubmit, isPending, isSuccess, isError } = useSaveBookmark({ nameSignal, categorySignal, descSignal, modalRef })
   const isDisabled = nameSignal.value === '' || categorySignal.value === ''
-
-  useUpdateEffect(() => {
-    if (isSuccess) {
-      if (data.message === 'saved') {
-        notify({ msg: 'Saved', type: 'success', theme: 'dark', position: 'bottom-center' })
-      } else if (data.message === 'updated') {
-        notify({ msg: 'Updated', type: 'info', theme: 'dark', position: 'bottom-center' })
-      }
-
-      void updateCategories()
-
-      setTimeout(() => {
-        slideElement({
-          element: modalRef.current,
-          onSlideElementComplete: () => {
-            navigate('..', { replace: true, state: nanoid() })
-          },
-        })
-      }, 1000)
-    }
-  }, [isSuccess])
-
-  useUpdateEffect(() => {
-    if (isError) {
-      notify({ msg: error.response?.data.message, type: 'error', theme: 'dark', position: 'bottom-center' })
-      reset()
-    }
-  }, [isError])
-
-  const onSubmit = (e: React.FormEvent): void => {
-    e.preventDefault()
-
-    const email = getState().user.email
-
-    if (!email) {
-      notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
-      return
-    }
-
-    const itemWithUpdatedValues = {
-      ...item,
-      name: nameSignal.value,
-      category: categorySignal.value,
-      desc: descSignal.value,
-    }
-
-    if (itemWithUpdatedValues.type === itemKey.quotation) return
-
-    saveItem({ item: itemWithUpdatedValues })
-  }
 
   return (
     <FormModal

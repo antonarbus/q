@@ -13,7 +13,7 @@ export const Quotation = (): JSX.Element => {
       <InfoAndSearchLayout>
         <div css={{ width: '80px' }}></div> {/* Spacer to center the <Search /> */}
         <Search />
-        <Info /> {/* it is also 70px as the spacer */}
+        <Info /> {/* it is also 80px as the spacer */}
       </InfoAndSearchLayout>
       <Items />
       <Outlet />

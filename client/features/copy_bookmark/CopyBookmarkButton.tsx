@@ -9,7 +9,7 @@ import { isFroalaSignal } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components'
 import { notify } from '@shared/ui/top_msg'
 
-export const GetBookmarkButton = ({ id }: ReqBody): JSX.Element => {
+export const CopyBookmarkButton = ({ id }: ReqBody): JSX.Element => {
   const { mutate: loadItem, isPending, isSuccess, isError, error, data } = useGetBookmarkMutation()
 
   useUpdateEffect(() => {
