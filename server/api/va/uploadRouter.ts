@@ -1,4 +1,4 @@
-import { bucket } from '@server/services/storage'
+import { bucket, storageFolderName } from '@server/services/storage'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '@server/utils/getEmailFromRefreshTokenOrThrowUnauthorized'
 import express from 'express'
 import multer from 'multer'
@@ -70,7 +70,7 @@ type Res = Promise<{
 
 async function uploadFileIntoMemory({ file, email }: Props): Res {
   const name = Buffer.from(file.originalname, 'ascii').toString('utf8')
-  const filePath = `${email}/files/${name}`
+  const filePath = `${email}/${storageFolderName.files}/${name}`
   const blob = bucket.file(filePath)
   const blobStream = blob.createWriteStream({ resumable: false })
   const size = file.size / 1024 / 1024

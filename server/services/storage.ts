@@ -9,3 +9,9 @@ const storage = new Storage({
 })
 
 export const bucket = storage.bucket(process.env.BUCKET_NAME!)
+
+export const storageFolderName = {
+  bookmarks: 'bookmarks',
+  quotations: 'quotations',
+  files: 'files',
+} as const

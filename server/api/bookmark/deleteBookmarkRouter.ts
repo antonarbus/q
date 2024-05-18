@@ -1,6 +1,6 @@
 import { BookmarkModel } from '@server/db/models/bookmarkModel'
 import { verifyAccessTokenMiddleware } from '@server/middleware/verifyAccessTokenMiddleware'
-import { bucket } from '@server/services/storage'
+import { bucket, storageFolderName } from '@server/services/storage'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '@server/utils/getEmailFromRefreshTokenOrThrowUnauthorized'
 import { Router } from 'express'
 import { type Item } from '@entities/quotation'
@@ -34,7 +34,9 @@ const deleteBookmark: RouterHandler = async (req, res, next) => {
         .json({ message: 'did not find' })
     }
 
-    const [files] = await bucket.getFiles({ prefix: `${email}/bookmarks/${id}.json` })
+    const [files] = await bucket.getFiles({
+      prefix: `${email}/${storageFolderName.bookmarks}/${id}.json`,
+    })
 
     if (files.length === 0) {
       return res

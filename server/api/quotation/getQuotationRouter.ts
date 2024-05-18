@@ -1,5 +1,5 @@
 import { QuotationModel } from '@server/db/models/quotationModel'
-import { bucket } from '@server/services/storage'
+import { bucket, storageFolderName } from '@server/services/storage'
 import { getEmailFromRefreshToken } from '@server/utils/getEmailFromRefreshToken'
 import { Router } from 'express'
 import { type Quotation } from '@entities/quotation'
@@ -46,7 +46,7 @@ const getQuotation: RouterHandler = async (req, res, next) => {
         .json({ message: 'not found' })
     }
 
-    const filePath = `${email}/quotations/${id}.json`
+    const filePath = `${email}/${storageFolderName.quotations}/${id}.json`
 
     const [fileBuffer] = await bucket.file(filePath).download()
 
