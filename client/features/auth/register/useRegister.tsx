@@ -16,7 +16,7 @@ type Res = {
   isError: UseMutationResult['isError']
 }
 
-export const useRegisterUser = ({ emailSignal, passwordSignal }: Props): Res => {
+export const useRegister = ({ emailSignal, passwordSignal }: Props): Res => {
   const { mutate: registerUser, isPending, data, isSuccess, isError, error } = useRegisterMutation()
 
   useUpdateEffect(() => {
