@@ -1,1 +1,1 @@
-export { BookmarksTable as default } from './BookmarksTable'
+export { BookmarksPage as default } from './BookmarksPage'

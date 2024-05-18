@@ -2,9 +2,9 @@ import { Box } from '@mui/material'
 import type { ICellRendererParams } from 'ag-grid-community'
 import { type ReactNode } from 'react'
 import { type Quotation } from '@entities/quotation'
-import { DeleteBookmarkButton } from './DeleteBookmarkButton'
-import { EditBookmarkButton } from './EditBookmarkButton'
-import { GetBookmarkButton } from './GetBookmarkButton'
+import { DeleteBookmarkButton } from '../buttons/DeleteBookmarkButton'
+import { EditBookmarkButton } from '../buttons/EditBookmarkButton'
+import { GetBookmarkButton } from '../buttons/GetBookmarkButton'
 
 export const ActionButtonsCellRenderer = (params: ICellRendererParams<Partial<Quotation>>): ReactNode => {
   if (params.data?.id === undefined) return null
