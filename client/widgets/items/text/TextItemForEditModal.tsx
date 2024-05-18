@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { updateTextItem } from '@features/cell/update_cell'
+import { updateTextItem } from '@features/items/cell/update_cell'
 import { onTextItemResizeStart, onTextItemResizeStop } from '@features/resize'
 import { beforeUpload } from '@features/upload'
 import { Froala, ItemComp, getItemTextHtmlFromStore, textItemCellStyle, useItem } from '@entities/quotation'

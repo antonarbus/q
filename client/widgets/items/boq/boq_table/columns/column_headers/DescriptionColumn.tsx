@@ -1,5 +1,5 @@
 import { type ReactNode, useRef } from 'react'
-import { updateBoqColumnCell } from '@features/cell/update_cell'
+import { updateBoqColumnCell } from '@features/items/cell/update_cell'
 import { Froala, getBoqColumnHtmlFromStore, useItem, columnHeaderStyle, boqColumnKey } from '@entities/quotation'
 import { type FroalaEditor } from '@shared/types/froala'
 import { ResizableColumn } from '../ResizableColumn'
