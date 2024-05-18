@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { updateTextItem } from '@features/items/cell/update_cell'
-import { onTextItemResizeStart, onTextItemResizeStop } from '@features/resize'
+import { onTextItemResizeStart, onTextItemResizeStop } from '@features/items/resize'
 import { beforeUpload } from '@features/upload'
 import { Froala, ItemComp, getItemTextHtmlFromStore, textItemCellStyle, useItem } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
