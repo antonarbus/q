@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react'
 import { type RouteObject, createBrowserRouter } from 'react-router-dom'
+import { AddBookmarkModal } from '@pages/add_bookmark_modal'
 import { ActivationModal } from '@pages/auth/ActivationModal'
 import { LoginModal } from '@pages/auth/LoginModal'
 import { RegisterModal } from '@pages/auth/RegisterModal'
@@ -10,7 +11,6 @@ import { EditBookmarkModal } from '@pages/edit_bookmark_modal'
 import { EditQuotationModal } from '@pages/edit_quotation_modal/EditQuotationModal'
 import { ErrorPage } from '@pages/error_page'
 import { InfoModal } from '@pages/info_modal'
-import { SaveBookmarkModal } from '@pages/save_bookmark_modal'
 import { SaveQuotationModal } from '@pages/save_quotation_modal'
 import { Copy } from '@widgets/copy'
 import { Nav } from '@widgets/nav'
@@ -20,10 +20,8 @@ import { route } from '@shared/consts/route'
 import { Main } from '@shared/layouts'
 import { LoadingDotsOverlay } from '@shared/loading_dots_overlay'
 import { TopMsg } from '@shared/ui/top_msg'
-// import { asyncDelay } from '@shared/utils/delay'
 
 const Quotation = React.lazy(async () => {
-  // await asyncDelay(10000)
   return await import('@pages/quotation_page')
 })
 const QuotationsTable = React.lazy(async () => await import('@pages/quotations_page'))
@@ -87,7 +85,7 @@ export const router = createBrowserRouter([
           },
           {
             path: `${route.bookmark}/:id`,
-            element: <SaveBookmarkModal />,
+            element: <AddBookmarkModal />,
           },
           {
             path: `${route.info}/:id`,
