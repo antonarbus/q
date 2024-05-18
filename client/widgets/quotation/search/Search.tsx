@@ -1,64 +1,37 @@
-import { dispatch, useSelectorTyped } from '@lib_instances/store'
-import { Autocomplete, Box, IconButton, InputAdornment, Paper, TextField } from '@mui/material'
+import { useSelectorTyped } from '@lib_instances/store'
+import { Autocomplete } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
-import { type HTMLAttributes, useCallback, useEffect } from 'react'
-import { BsFileEarmarkText, BsTags } from 'react-icons/bs'
-import { GoSearch } from 'react-icons/go'
-import { IoClose } from 'react-icons/io5'
-import { PiBooks } from 'react-icons/pi'
-import { useUpdateEffect } from 'react-use'
-import { useGetBookmarkMutation, useGetBookmarksQuery } from '@entities/bookmark'
-import { copySlice } from '@entities/copy'
-import { isFroalaSignal } from '@entities/quotation'
-import { RotatingLoaderIcon } from '@shared/components'
+import { useEffect } from 'react'
+import { useCopyBookmarkAtSearch } from '@features/bookmark/copy_bookmark'
+import { useGetBookmarksQuery } from '@entities/bookmark'
 import { cls } from '@shared/consts/cls'
-import { notify } from '@shared/ui/top_msg'
-import { getJsxWithBoldSubstr } from '@shared/utils/getJsxWithBoldSubstr'
+import { PaperComponent } from './PaperComponent'
+import { renderInput } from './renderInput'
+import { renderOption } from './renderOption'
 
 export const Search = (): JSX.Element => {
-  const { data: itemsData, isPending: isPendingItems, refetch } = useGetBookmarksQuery()
-  const { mutate: loadItem, isPending: isPendingGetItem, isSuccess, isError, error, data: itemData, variables } = useGetBookmarkMutation()
+  const { data: bookmarksData, isPending: isPendingBookmarks, refetch: fetchBookmarks } = useGetBookmarksQuery()
   const email = useSelectorTyped(state => state.user.email)
-  const options = itemsData?.documents ?? []
+  const options = bookmarksData?.documents ?? []
   const inputValueSignal = useSignal('')
+  const { loadBookmark, isPendingBookmark, pendingBookmarkId } = useCopyBookmarkAtSearch()
 
   useEffect(() => {
-    if (!email) return
-    void refetch()
+    if (email) {
+      void fetchBookmarks()
+    }
   }, [email])
-
-  useUpdateEffect(() => {
-    if (isSuccess) {
-      const { item } = itemData
-
-      if (!item) return
-
-      isFroalaSignal.value = false
-
-      dispatch(copySlice.actions.addItemIntoCopyContainer({ item }))
-      dispatch(copySlice.actions.allowToPaste())
-      dispatch(copySlice.actions.showCopyContainer())
-    }
-  }, [isSuccess])
-
-  useUpdateEffect(() => {
-    if (isError) {
-      notify({ msg: error.response?.data.message, type: 'error', theme: 'light' })
-    }
-  }, [isError])
-
-  // want to show MUI autocomplete even if no options
 
   return (
     <Autocomplete
-      className={cls.search}
-      freeSolo={options.length !== 0}
-      disablePortal
       // open // manual open control
+      className={cls.search}
+      freeSolo={options.length !== 0} // show MUI autocomplete even if no options
+      disablePortal
       popupIcon={null}
       clearOnBlur
       clearOnEscape
-      loading={isPendingItems}
+      loading={isPendingBookmarks}
       loadingText={email ? 'Loading...' : 'Not logged in...'}
       noOptionsText='No saved bookmarks'
       options={options}
@@ -70,180 +43,15 @@ export const Search = (): JSX.Element => {
         if (typeof option === 'string') return option
         return option.name + option.category + option.desc
       }}
+      renderInput={renderInput}
+      renderOption={renderOption({ loadBookmark, inputValueSignal, isPendingBookmark, pendingBookmarkId })}
+      PaperComponent={PaperComponent}
+      componentsProps={{ popper: { sx: { zIndex: 3 } } }}
       sx={{
         position: 'relative',
         width: '300px',
         zIndex: 0,
         translate: '0px 5px',
-      }}
-      renderInput={(params) => {
-        return (
-          <TextField
-            {...params}
-            name='category'
-            variant='standard'
-            placeholder='Search'
-            InputProps={{
-              ...params.InputProps,
-              startAdornment: (
-                <InputAdornment position='start'>
-                  <GoSearch/>
-                </InputAdornment>
-              ),
-            }}
-            sx={{
-              '.MuiInputBase-root': {
-                padding: '0px 5px !important',
-              },
-              '.MuiInput-root': {
-                padding: '4px 30px 0px 0px !important',
-              },
-              input: {
-                textAlign: 'center',
-              },
-            }}
-          />
-        )
-      }}
-      renderOption={(props, option, { selected, index, inputValue }) => {
-        return (
-          <li
-            // {...props}
-            onClick={() => {
-              loadItem({ id: option.id })
-            }}
-            key={option.id}
-            css={{
-              position: 'relative',
-              cursor: 'pointer',
-              display: 'block',
-              borderRadius: '6px',
-              padding: '5px !important',
-              margin: '2px 4px',
-              fontSize: '14px',
-              border: '1px solid #ccc',
-              '&:hover': {
-                background: '#dfdfdf !important',
-              },
-            }}
-          >
-            <Box
-              sx={{
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap',
-                width: '100%',
-              }}
-            >
-              <span css={{ color: 'grey', marginRight: '5px' }}>
-                <PiBooks style={{ height: '16px', width: '16px', translate: '0px 3px' }} /> <span css={{ fontSize: '12px' }}>name:</span>
-              </span>
-              {inputValueSignal.value
-                ? getJsxWithBoldSubstr({ text: option.name, boldText: inputValueSignal.value })
-                : option.name
-              }
-            </Box>
-            <Box
-              sx={{
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap',
-                width: '100%',
-              }}
-            >
-              <span css={{ color: 'grey', marginRight: '5px' }}>
-                <BsTags style={{ height: '16px', width: '16px', translate: '0px 3px' }} /> <span css={{ fontSize: '12px' }}>category:</span>
-              </span>
-              {inputValueSignal.value
-                ? getJsxWithBoldSubstr({ text: option.category ?? '', boldText: inputValueSignal.value })
-                : option.category ?? ''
-              }
-            </Box>
-            <Box
-              sx={{
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap',
-                width: '100%',
-              }}
-            >
-              <span css={{ color: 'grey', marginRight: '5px' }}>
-                <BsFileEarmarkText style={{ height: '16px', width: '16px', translate: '0px 2px' }} /> <span css={{ fontSize: '12px' }}>description:</span>
-              </span>
-              {inputValueSignal.value
-                ? getJsxWithBoldSubstr({ text: option.desc ?? '', boldText: inputValueSignal.value })
-                : option.desc ? option.desc : '-'
-              }
-            </Box>
-            {isPendingGetItem && option.id === variables.id && (
-              <Box sx={{
-                position: 'absolute',
-                inset: 0,
-                background: 'rgba(0, 0, 0, 0.05)',
-                backdropFilter: 'blur(3px)',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-                <RotatingLoaderIcon />
-              </Box>
-            )}
-          </li>
-        )
-      }}
-      PaperComponent={useCallback((props: HTMLAttributes<HTMLElement>) => {
-        // without useCallback() the component will rerender and loose scroll position
-        return (
-          <Paper
-            elevation={8}
-            sx={{
-              width: '300px',
-              translate: '0px 10px',
-              borderRadius: '8px',
-              padding: '30px 8px 8px 8px',
-              '.MuiAutocomplete-listbox': {
-                maxHeight: '323px',
-              },
-            }}
-            {...props}
-          >
-            {props.children}
-            <Box
-              sx={{
-                fontSize: '14px',
-                color: 'grey',
-                fontWeight: 500,
-                position: 'absolute',
-                top: '6px',
-                left: '50%',
-                translate: '-50% 0',
-              }}
-            >
-              Your bookmarks
-            </Box>
-            <IconButton
-              size='small'
-              sx={{
-                position: 'absolute',
-                top: '5px',
-                right: '5px',
-              }}
-            >
-              <IoClose />
-            </IconButton>
-          </Paper>
-        )
-      }, [])}
-      componentsProps={{
-        paper: {
-          className: cls.searchAutocomplete,
-          elevation: 10,
-        },
-        popper: {
-          sx: {
-            zIndex: 3,
-          },
-        },
       }}
     />
   )
