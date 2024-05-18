@@ -2,9 +2,9 @@ import { getState } from '@lib_instances/store'
 import { useSignal } from '@preact/signals-react'
 import { useCallback, useRef } from 'react'
 import { FiEdit3 } from 'react-icons/fi'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { type Quotation, useGetQuotationCategoriesQuery, useGetQuotationsQuery, useSaveQuotationMutation } from '@entities/quotation'
+import { useGetQuotationCategoriesQuery, useGetQuotationsQuery, useSaveQuotationMutation } from '@entities/quotation'
 import { FormModal } from '@shared/components'
 import { nanoid } from '@shared/lib/nanoid'
 import { notify } from '@shared/ui/top_msg'
@@ -16,8 +16,7 @@ import { QuotationField } from './QuotationField'
 
 export const EditQuotationModal = (): JSX.Element => {
   const navigate = useNavigate()
-  const location = useLocation()
-  const quotation = location.state.quotation as Quotation | undefined
+  const quotation = getState().quotation
 
   const modalRef = useRef<HTMLDivElement>(null)
   const nameSignal = useSignal(quotation?.name ?? '')

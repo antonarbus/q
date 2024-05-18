@@ -2,9 +2,9 @@ import { Box } from '@mui/material'
 import type { ICellRendererParams } from 'ag-grid-community'
 import { type ReactNode } from 'react'
 import { OpenExistingQuotationPageButton } from '@features/open_close/open_existing_quotation_page'
+import { OpenEditQuotationModalButton } from '@features/open_close/open_quotation_edit_modal'
 import { type Quotation } from '@entities/quotation'
 import { DeleteQuotationButton } from '../buttons/DeleteQuotationButton'
-import { EditQuotationButton } from '../buttons/EditQuotationButton'
 
 export const ActionButtonsCellRenderer = (params: ICellRendererParams<Partial<Quotation>>): ReactNode => {
   if (params.data?.id === undefined) return null
@@ -12,7 +12,7 @@ export const ActionButtonsCellRenderer = (params: ICellRendererParams<Partial<Qu
   return (
     <Box sx={{ display: 'flex', gap: '5px' }}>
       <OpenExistingQuotationPageButton id={params.data.id} />
-      <EditQuotationButton id={params.data.id} />
+      <OpenEditQuotationModalButton id={params.data.id} />
       <DeleteQuotationButton id={params.data.id} />
     </Box>
   )
