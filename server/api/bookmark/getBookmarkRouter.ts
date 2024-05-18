@@ -1,6 +1,6 @@
 import { BookmarkModel } from '@server/db/models/bookmarkModel'
 import { verifyAccessTokenMiddleware } from '@server/middleware/verifyAccessTokenMiddleware'
-import { bucket } from '@server/services/storage'
+import { bucket, storageFolderName } from '@server/services/storage'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '@server/utils/getEmailFromRefreshTokenOrThrowUnauthorized'
 import { Router } from 'express'
 import { type Item } from '@entities/quotation'
@@ -36,7 +36,7 @@ const getBookmark: RouterHandler = async (req, res, next) => {
         .json({ message: 'not found' })
     }
 
-    const filePath = `${email}/bookmarks/${id}.json`
+    const filePath = `${email}/${storageFolderName.bookmarks}/${id}.json`
 
     const [fileBuffer] = await bucket.file(filePath).download()
 

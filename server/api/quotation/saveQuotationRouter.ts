@@ -1,6 +1,6 @@
 import { QuotationModel } from '@server/db/models/quotationModel'
 import { verifyAccessTokenMiddleware } from '@server/middleware/verifyAccessTokenMiddleware'
-import { bucket } from '@server/services/storage'
+import { bucket, storageFolderName } from '@server/services/storage'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '@server/utils/getEmailFromRefreshTokenOrThrowUnauthorized'
 import { Router } from 'express'
 import { type FlattenMaps } from 'mongoose'
@@ -79,7 +79,7 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
         .json({ message: 'not saved' })
     }
 
-    const filePath = `${email}/quotations/${quotation.id}.json`
+    const filePath = `${email}/${storageFolderName.quotations}/${quotation.id}.json`
     const file = bucket.file(filePath)
     const contents = JSON.stringify({ ...quotationDataFromDb, items: quotation.items }, null, 2)
     await file.save(contents)

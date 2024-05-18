@@ -1,6 +1,6 @@
 import { BookmarkModel } from '@server/db/models/bookmarkModel'
 import { verifyAccessTokenMiddleware } from '@server/middleware/verifyAccessTokenMiddleware'
-import { bucket } from '@server/services/storage'
+import { bucket, storageFolderName } from '@server/services/storage'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '@server/utils/getEmailFromRefreshTokenOrThrowUnauthorized'
 import { Router } from 'express'
 import { type FlattenMaps } from 'mongoose'
@@ -89,7 +89,7 @@ const saveBookmark: RouterHandler = async (req, res, next) => {
         .json({ message: 'not saved' })
     }
 
-    const filePath = `${email}/bookmarks/${item.id}.json`
+    const filePath = `${email}/${storageFolderName.bookmarks}/${item.id}.json`
     const file = bucket.file(filePath)
     const contents = JSON.stringify({ ...itemDataFromDb, ...item }, null, 2)
     await file.save(contents)

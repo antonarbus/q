@@ -1,6 +1,6 @@
 import { QuotationModel } from '@server/db/models/quotationModel'
 import { verifyAccessTokenMiddleware } from '@server/middleware/verifyAccessTokenMiddleware'
-import { bucket } from '@server/services/storage'
+import { bucket, storageFolderName } from '@server/services/storage'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '@server/utils/getEmailFromRefreshTokenOrThrowUnauthorized'
 import { Router } from 'express'
 import { type HydratedDocument } from 'mongoose'
@@ -39,7 +39,7 @@ const deleteQuotation: RouterHandler = async (req, res, next) => {
     // const [files] = await bucket.getFiles({ prefix: `${email}/${id}/` })
     // await Promise.all(files.map(async file => await file.delete()))
 
-    const filePath = `${email}/quotations/${id}.json`
+    const filePath = `${email}/${storageFolderName.quotations}/${id}.json`
     const [{ statusCode }] = await bucket.file(filePath).delete()
 
     if (statusCode === 204) {
