@@ -6,7 +6,7 @@ type Props = {
   children: ReactNode
 }
 
-export const QuotationsLayout = ({ children }: Props): JSX.Element => {
+export const QuotationsPageLayout = ({ children }: Props): JSX.Element => {
   return (
     <Box
       sx={{

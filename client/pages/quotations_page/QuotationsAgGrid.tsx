@@ -10,12 +10,12 @@ import { useGetQuotationsQuery } from '@entities/quotation'
 import { type Quotation } from '@entities/quotation'
 import { LoadingTableOverlay, loadingTableOverlaySignal } from '@shared/components/LoadingTableOverlay'
 import { notify } from '@shared/ui/top_msg'
-import { addPlaceholderToFloatingFilters } from './addPlaceholderToFloatingFilters'
-import { AgGridStyles } from './AgGridStyles'
 import { columnDefs, defaultColDef } from './columnDefs'
-import { DisplayedRowsCount, displayedRowsCountSignal } from './DisplayedRowsCount'
-import { NoRowsTableOverlay } from './NoRowsTableOverlay'
-import { quotationsAgGridRef } from './quotationsAgGridRef'
+import { DisplayedRowsCount, displayedRowsCountSignal } from './components/DisplayedRowsCount'
+import { NoRowsTableOverlay } from './components/NoRowsTableOverlay'
+import { quotationsAgGridRef } from './refs/quotationsAgGridRef'
+import { AgGridStyles } from './styles/AgGridStyles'
+import { addPlaceholderToFloatingFilters } from './utils/addPlaceholderToFloatingFilters'
 
 export const QuotationsAgGrid = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
