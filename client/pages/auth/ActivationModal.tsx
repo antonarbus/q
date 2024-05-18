@@ -4,7 +4,7 @@ import { useRef } from 'react'
 import { GrValidate } from 'react-icons/gr'
 import { PiSmileySadBold, PiSmileyBold } from 'react-icons/pi'
 import { useNavigate } from 'react-router-dom'
-import { useActivateUser } from '@features/auth/activate_user'
+import { useActivate } from '@features/auth/activate'
 import { RotatingLoaderIcon } from '@shared/components'
 import { BackdropWithSlidableModal } from '@shared/components/BackdropWithSlidableModal'
 import { CardCustom } from '@shared/components/CardCustom'
@@ -12,7 +12,7 @@ import { CardCustom } from '@shared/components/CardCustom'
 export const ActivationModal = (): JSX.Element => {
   const cardRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
-  const { isSuccess, isPending, isError } = useActivateUser()
+  const { isSuccess, isPending, isError } = useActivate()
 
   return (
     <BackdropWithSlidableModal

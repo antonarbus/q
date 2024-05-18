@@ -14,7 +14,7 @@ type Res = {
   isError: UseMutationResult['isError']
 }
 
-export const useActivateUser = (): Res => {
+export const useActivate = (): Res => {
   const { activationKey } = useParams()
   const { mutate: activate, isPending, data, isSuccess, isError, error } = useActivateMutation()
 
