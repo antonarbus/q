@@ -1,4 +1,4 @@
-import { type ReqBody as Payload, type ResBody } from '@server/api/getItemRouter'
+import { type ReqBody as Payload, type ResBody } from '@server/api/bookmark/getBookmarkRouter'
 import { apiUrl } from '@server/consts/apiUrl'
 import { type UseMutationResult, useMutation } from '@tanstack/react-query'
 import { type AxiosResponse, type AxiosError } from 'axios'

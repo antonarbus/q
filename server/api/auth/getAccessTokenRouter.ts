@@ -1,9 +1,9 @@
 import express from 'express'
 import { type User } from '@entities/user'
 import { httpStatus } from '@shared/consts/httpStatus'
-import { UserModel } from '../db/models/userModel'
-import { createAccessToken, getJwtExpiration, verifyRefreshToken } from '../services/jwt'
-import type { Next, Req, ResWithBody } from '../types'
+import { UserModel } from '../../db/models/userModel'
+import { createAccessToken, getJwtExpiration, verifyRefreshToken } from '../../services/jwt'
+import type { Next, Req, ResWithBody } from '../../types'
 
 export type ResBody = {
   message:

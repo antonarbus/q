@@ -1,16 +1,16 @@
-import { QuotationModel } from '@server/db/models/quotationModel'
+import { ItemModel } from '@server/db/models/itemModel'
 import { verifyAccessTokenMiddleware } from '@server/middleware/verifyAccessTokenMiddleware'
 import { bucket } from '@server/services/storage'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '@server/utils/getEmailFromRefreshTokenOrThrowUnauthorized'
 import { Router } from 'express'
 import { type FlattenMaps } from 'mongoose'
-import { type Quotation } from '@entities/quotation/types'
+import { type Item } from '@entities/bookmark'
 import { type ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@shared/consts/httpStatus'
-import { type ResWithBody, type ReqWithBody, type Next } from '../types'
+import { type ResWithBody, type ReqWithBody, type Next } from '../../types'
 
 export type ReqBody = {
-  quotation: Quotation
+  item: Item
 }
 
 export type ResBody = {
@@ -18,52 +18,62 @@ export type ResBody = {
   | 'not saved'
   | 'saved'
   | 'updated'
-  | 'id is not provided'
   | 'name is not provided'
   | 'category is not provided'
-  quotation?: FlattenMaps<Quotation>
+  | 'id is not provided'
+  item?: FlattenMaps<Item>
 }
 
 type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
 
-export const saveQuotationRouter = Router()
+export const saveBookmarkRouter = Router()
 
-const saveQuotation: RouterHandler = async (req, res, next) => {
+const saveBookmark: RouterHandler = async (req, res, next) => {
   try {
     const email = getEmailFromRefreshTokenOrThrowUnauthorized(req)
 
-    const { quotation } = req.body
+    const { item } = req.body
 
-    if (!quotation.id) {
+    if (!item.name) {
+      return res
+        .status(httpStatus.forbidden_403)
+        .json({ message: 'name is not provided' })
+    }
+
+    if (!item.category) {
+      return res
+        .status(httpStatus.forbidden_403)
+        .json({ message: 'category is not provided' })
+    }
+
+    if (!item.id) {
       return res
         .status(httpStatus.forbidden_403)
         .json({ message: 'id is not provided' })
     }
 
-    const existingQuotation = await QuotationModel.findOne({
-      id: quotation.id,
+    const existingItem = await ItemModel.findOne({
       email,
+      id: item.id,
     })
 
-    const isNew = existingQuotation === null
+    const isNew = existingItem === null
 
-    const quotationDataFromDb = await QuotationModel
+    const itemDataFromDb = await ItemModel
       .findOneAndUpdate(
         {
-          id: quotation.id,
+          id: item.id,
           email,
         },
         {
-          id: quotation.id,
+          id: item.id,
           email,
-          name: quotation.name,
-          category: quotation.category,
-          desc: quotation.desc,
-          info: quotation.info,
-          items: 'find in bucket under same id',
+          type: item.type,
+          name: item.name,
+          category: item.category,
+          desc: item.desc,
           updatedAt: Date.now(),
           ...(isNew && { createdAt: Date.now() }),
-          ...(isNew && { openedAt: Date.now() }),
         },
         {
           new: true,
@@ -73,26 +83,26 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
       .select({ _id: 0, __v: 0 })
       .lean()
 
-    if (!quotationDataFromDb) {
+    if (!itemDataFromDb) {
       return res
         .status(httpStatus.forbidden_403)
         .json({ message: 'not saved' })
     }
 
-    const filePath = `${email}/quotations/${quotation.id}.json`
+    const filePath = `${email}/items/${item.id}.json`
     const file = bucket.file(filePath)
-    const contents = JSON.stringify({ ...quotationDataFromDb, items: quotation.items }, null, 2)
+    const contents = JSON.stringify({ ...itemDataFromDb, ...item }, null, 2)
     await file.save(contents)
 
     return res
       .status(httpStatus.success_200)
       .json({
         message: isNew ? 'saved' : 'updated',
-        quotation: { ...quotationDataFromDb, items: quotation.items },
+        item: { ...itemDataFromDb, ...item },
       })
   } catch (error) {
     next(error)
   }
 }
 
-saveQuotationRouter.post('/', verifyAccessTokenMiddleware, saveQuotation)
+saveBookmarkRouter.post('/', verifyAccessTokenMiddleware, saveBookmark)

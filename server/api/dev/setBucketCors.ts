@@ -1,6 +1,6 @@
 import { bucket } from '@server/services/storage'
 import express from 'express'
-import { type Req, type Res } from '../types'
+import { type Req, type Res } from '../../types'
 
 // https://cloud.google.com/storage/docs/samples/storage-cors-configuration#storage_cors_configuration-nodejs
 

@@ -1,4 +1,4 @@
-import type { ResBody } from '@server/api/getAccessTokenRouter'
+import type { ResBody } from '@server/api/auth/getAccessTokenRouter'
 import { apiUrl } from '@server/consts/apiUrl'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import axios, { type AxiosError, type AxiosResponse } from 'axios'

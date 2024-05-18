@@ -1,5 +1,5 @@
 import { reactQuery } from '@lib_instances/reactQuery'
-import { type ResBody } from '@server/api/getItemsRouter'
+import { type ResBody } from '@server/api/bookmark/getBookmarksRouter'
 import { produce } from 'immer'
 import { queryKey } from '@shared/consts/queryKey'
 

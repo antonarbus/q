@@ -1,4 +1,4 @@
-import type { ResBody, ReqBody as Payload } from '@server/api/saveQuotationRouter'
+import type { ResBody, ReqBody as Payload } from '@server/api/quotation/saveQuotationRouter'
 import { apiUrl } from '@server/consts/apiUrl'
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import { type AxiosResponse, type AxiosError } from 'axios'

@@ -4,63 +4,56 @@ import { bucket } from '@server/services/storage'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '@server/utils/getEmailFromRefreshTokenOrThrowUnauthorized'
 import { Router } from 'express'
 import { type Item } from '@entities/quotation'
+import { type ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@shared/consts/httpStatus'
-import { type ResWithBody, type ReqWithBody, type Next } from '../types'
+import { type ResWithBody, type ReqWithBody, type Next } from '../../types'
 
 export type ReqBody = {
   id: Item['id']
 }
 
 export type ResBody = {
-  message: 'not logged in' | 'not found' | 'found'
-  item?: Item
+  message: ErrorMessageCommon | 'did not find' | 'no item in bucket' | 'deleted'
 }
 
 type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
 
-export const getItemRouter = Router()
+export const deleteBookmarkRouter = Router()
 
-const getItem: RouterHandler = async (req, res, next) => {
+const deleteBookmark: RouterHandler = async (req, res, next) => {
   try {
-    const { id } = req.body
-
     const email = getEmailFromRefreshTokenOrThrowUnauthorized(req)
 
-    const document = await ItemModel
-      .findOne({ email, id })
-      .lean()
+    const { id } = req.body
 
-    if (!document) {
+    const deleteFromDbResult = await ItemModel.deleteOne({ email, id })
+
+    if (deleteFromDbResult.deletedCount === 0) {
       return res
         .status(httpStatus.notFound_404)
-        .json({ message: 'not found' })
+        .json({ message: 'did not find' })
     }
 
-    const filePath = `${email}/items/${id}.json`
+    const [files] = await bucket.getFiles({ prefix: `${email}/items/${id}.json` })
 
-    const [fileBuffer] = await bucket.file(filePath).download()
-
-    if (!fileBuffer) {
+    if (files.length === 0) {
       return res
         .status(httpStatus.notFound_404)
-        .json({ message: 'not found' })
+        .json({ message: 'no item in bucket' })
     }
 
-    const item = JSON.parse(fileBuffer.toString())
+    await Promise.all(files.map(async file => await file.delete()))
 
     return res
       .status(httpStatus.success_200)
-      .json({
-        message: 'found',
-        item: { ...item, ...document },
-      })
+      .json({ message: 'deleted' })
   } catch (error) {
     next(error)
   }
 }
 
-getItemRouter.post(
+deleteBookmarkRouter.delete(
   '/',
   verifyAccessTokenMiddleware,
-  getItem,
+  deleteBookmark,
 )
