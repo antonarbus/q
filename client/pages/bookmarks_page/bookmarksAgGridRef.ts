@@ -2,6 +2,6 @@ import { type AgGridReact } from 'ag-grid-react'
 import { type RefObject } from 'react'
 import { type Item } from '@entities/bookmark'
 
-export const itemsAgGridRef: RefObject<AgGridReact<Item>> = {
+export const bookmarksAgGridRef: RefObject<AgGridReact<Item>> = {
   current: null,
 }

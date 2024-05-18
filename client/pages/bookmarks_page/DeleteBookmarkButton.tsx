@@ -6,7 +6,7 @@ import { useDeleteBookmarkMutation, deleteFromBookmarksCache } from '@entities/b
 import { RotatingLoaderIcon } from '@shared/components'
 import { notify } from '@shared/ui/top_msg'
 
-export const DeleteItemButton = ({ id }: ReqBody): JSX.Element => {
+export const DeleteBookmarkButton = ({ id }: ReqBody): JSX.Element => {
   const { mutate: deleteItem, isPending, isSuccess, isError, error } = useDeleteBookmarkMutation()
 
   useUpdateEffect(() => {

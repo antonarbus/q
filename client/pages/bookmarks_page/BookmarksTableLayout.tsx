@@ -6,7 +6,7 @@ type Props = {
   children: ReactNode
 }
 
-export const ItemsLayout = ({ children }: Props): JSX.Element => {
+export const BookmarksTableLayout = ({ children }: Props): JSX.Element => {
   return (
     <Box
       sx={{

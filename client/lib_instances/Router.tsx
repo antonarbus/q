@@ -27,7 +27,7 @@ const Quotation = React.lazy(async () => {
   return await import('@pages/quotation_page')
 })
 const QuotationsTable = React.lazy(async () => await import('@pages/quotations_page'))
-const ItemsTable = React.lazy(async () => await import('@pages/items_page'))
+const ItemsTable = React.lazy(async () => await import('@pages/bookmarks_page'))
 
 const authRoutes: RouteObject[] = [
   {
@@ -120,7 +120,7 @@ export const router = createBrowserRouter([
         children: [
           ...authRoutes,
           {
-            path: route.editBookmark,
+            path: `${route.editBookmark}/:id`,
             element: <EditBookmarkModal />,
           },
         ],
