@@ -37,9 +37,15 @@ app.use(cookieParser()) // middleware parses the Cookie header and populates req
 // app.use(cors())
 // app.set('trust proxy', true) // for app engine
 
+// todo: rename to item thing to bookmark
+
+// dev
 app.get(apiUrl.root, (_req: Req, res: Res) => res.send('i am express.js'))
 app.get(apiUrl.api, (_req: Req, res: Res) => res.json({ message: '/api' }))
 app.use(apiUrl.test, testRouter)
+app.use(apiUrl.setBucketCors, setBucketCors)
+app.use(apiUrl.getBucketCors, getBucketCors)
+// auth
 app.use(apiUrl.register, registerRouter)
 app.use(apiUrl.resetPassword, resetPasswordRouter)
 app.use(apiUrl.requestPasswordReset, requestPasswordResetRouter)
@@ -47,20 +53,21 @@ app.use(apiUrl.logIn, logInRouter)
 app.use(apiUrl.logOut, logOutRouter)
 app.use(apiUrl.activate, activateRouter)
 app.use(apiUrl.getAccessToken, getAccessTokenRouter)
+// va
 app.use(apiUrl.upload, uploadRouter)
-app.use(apiUrl.setBucketCors, setBucketCors)
-app.use(apiUrl.getBucketCors, getBucketCors)
+// quotation
 app.use(apiUrl.saveQuotation, saveQuotationRouter)
 app.use(apiUrl.getQuotation, getQuotationRouter)
-app.use(apiUrl.getBookmark, getItemRouter)
 app.use(apiUrl.getQuotations, getQuotationsRouter)
 app.use(apiUrl.deleteQuotation, deleteQuotationRouter)
+app.use(apiUrl.getQuotationCategories, getQuotationCategoriesRouter)
+// bookmark
+app.use(apiUrl.getBookmark, getItemRouter)
 app.use(apiUrl.deleteBookmark, deleteItemRouter)
 app.use(apiUrl.saveBookmark, saveItemRouter)
 app.use(apiUrl.getBookmarks, getItemsRouter)
 app.use(apiUrl.getBookmarkCategories, getItemCategoriesRouter)
-app.use(apiUrl.getQuotationCategories, getQuotationCategoriesRouter)
-
+// error
 app.use(errorHandlerMiddleware)
 
 const port = process.env.PORT_BACK_END
