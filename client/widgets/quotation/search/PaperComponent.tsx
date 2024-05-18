@@ -12,9 +12,10 @@ export const PaperComponent = (props: HTMLAttributes<HTMLElement>): JSX.Element 
         width: '300px',
         translate: '0px 10px',
         borderRadius: '8px',
-        padding: '30px 8px 8px 8px',
+        padding: '30px 6px 8px 6px',
         '.MuiAutocomplete-listbox': {
-          maxHeight: '323px',
+          maxHeight: '315px',
+          pt: '0px !important',
         },
       }}
       {...props}
@@ -31,13 +32,13 @@ export const PaperComponent = (props: HTMLAttributes<HTMLElement>): JSX.Element 
           translate: '-50% 0',
         }}
       >
-        Your bookmarks
+        Click to copy
       </Box>
       <IconButton
         size='small'
         sx={{
           position: 'absolute',
-          top: '5px',
+          top: '2px',
           right: '5px',
         }}
       >
