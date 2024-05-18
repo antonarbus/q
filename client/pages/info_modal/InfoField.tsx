@@ -10,6 +10,7 @@ type Props = {
 export const InfoField = ({ infoSignal }: Props): JSX.Element => {
   const inputRef = useRef<React.ElementRef<'input'>>(null)
 
+  // focus on the end of the input
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.selectionStart = inputRef.current.value.length
@@ -28,7 +29,6 @@ export const InfoField = ({ infoSignal }: Props): JSX.Element => {
         label='Info'
         multiline
         rows={4}
-        // autoFocus
         value={infoSignal.value}
         onChange={(e): void => {
           infoSignal.value = e.target.value
