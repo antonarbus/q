@@ -35,7 +35,7 @@ export const useEditBookmark = ({
 
   const { mutate: saveItem, data, isSuccess, isPending, isError, error, reset } = useSaveBookmarkMutation()
   const { refetch: updateItemCategories } = useGetBookmarkCategoriesQuery()
-  const { refetch: updateItems } = useGetBookmarksQuery()
+  const { refetch: updateBookmarks } = useGetBookmarksQuery()
 
   useUpdateEffect(() => {
     if (isSuccess) {
@@ -46,7 +46,7 @@ export const useEditBookmark = ({
       }
 
       void updateItemCategories()
-      void updateItems()
+      void updateBookmarks()
 
       setTimeout(() => {
         slideElement({
