@@ -2,60 +2,23 @@ import { LockOutlined } from '@mui/icons-material'
 import { Box } from '@mui/material'
 import { useSignal, useSignalEffect } from '@preact/signals-react'
 import { useRef } from 'react'
-import { useUpdateEffect } from 'react-use'
+import { useRegisterUser } from '@features/auth/register_user'
 import { OpenLoginModalLink } from '@features/open_close/open_login_modal'
-import { useRegisterMutation } from '@entities/user'
 import { ConfirmPasswordField, EmailField, FormModal, PasswordField } from '@shared/components'
-import { notify } from '@shared/ui/top_msg'
 
 export const RegisterModal = (): JSX.Element => {
   const inputRef = useRef<HTMLDivElement>(null)
   const modalRef = useRef<HTMLDivElement>(null)
-
   const emailSignal = useSignal('')
   const passwordSignal = useSignal('')
   const isEmailOkSignal = useSignal(false)
   const isConfirmPasswordOkSignal = useSignal(false)
   const isButtonDisabledSignal = useSignal(false)
-
-  const { mutate: register, isPending, data, isSuccess, isError, error } = useRegisterMutation()
+  const { onSubmit, isSuccess, isPending, isError } = useRegisterUser({ emailSignal, passwordSignal })
 
   useSignalEffect(() => {
     isButtonDisabledSignal.value = !(isEmailOkSignal.value && isConfirmPasswordOkSignal.value)
   })
-
-  useUpdateEffect(() => {
-    if (isSuccess) {
-      if (data.message === 'activation link sent') {
-        notify({ msg: 'Check your mailbox.', theme: 'light' })
-      }
-    }
-  }, [isSuccess])
-
-  useUpdateEffect(() => {
-    if (isError) {
-      if (error.response?.data.message === 'already exists') {
-        notify({ msg: 'Already exists', type: 'info', theme: 'light' })
-        return
-      }
-
-      if (error.response?.data.message === 'validation error') {
-        notify({ msg: 'Validation error', type: 'warn', theme: 'light' })
-        return
-      }
-
-      notify({ msg: 'Internal error', type: 'error', theme: 'light' })
-    }
-  }, [isError])
-
-  const onSubmit = (e: React.FormEvent): void => {
-    e.preventDefault()
-
-    register({
-      email: emailSignal.value,
-      password: passwordSignal.value,
-    })
-  }
 
   return (
     <FormModal

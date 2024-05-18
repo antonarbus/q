@@ -1,0 +1,1 @@
+export { useActivateUser } from './useActivateUser'
