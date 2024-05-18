@@ -12,12 +12,12 @@ import { LoadingTableOverlay, loadingTableOverlaySignal } from '@shared/componen
 import { notify } from '@shared/ui/top_msg'
 import { addPlaceholderToFloatingFilters } from './addPlaceholderToFloatingFilters'
 import { AgGridStyles } from './AgGridStyles'
+import { bookmarksAgGridRef } from './bookmarksAgGridRef'
 import { columnDefs, defaultColDef } from './columnDefs'
 import { DisplayedRowsCount, displayedRowsCountSignal } from './DisplayedRowsCount'
-import { itemsAgGridRef } from './itemsAgGridRef'
 import { NoRowsTableOverlay } from './NoRowsTableOverlay'
 
-export const ItemsAgGrid = (): JSX.Element => {
+export const BookmarksAgGrid = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
   const { data, isSuccess, isLoading, isFetching, isFetched, isError, error, refetch } = useGetBookmarksQuery()
   useDisableLoadingOverlayWhenItemsAreFetched({ isFetched })
@@ -57,7 +57,7 @@ export const ItemsAgGrid = (): JSX.Element => {
       <DisplayedRowsCount />
       {isFetching && <LinearProgress sx={{ height: '1px', top: '97px', zIndex: 2, mb: '-1px' }} />}
       <AgGridReact<Item>
-        ref={itemsAgGridRef}
+        ref={bookmarksAgGridRef}
         rowData={data?.documents}
         getRowId={params => params.data.id}
         defaultColDef={defaultColDef}

@@ -10,7 +10,7 @@ import { RotatingLoaderIcon } from '@shared/components'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
 
-export const EditItemButton = ({ id }: ReqBody): JSX.Element => {
+export const EditBookmarkButton = ({ id }: ReqBody): JSX.Element => {
   const navigate = useNavigate()
   const { mutate: loadItem, isPending, isSuccess, isError, error, data } = useGetBookmarkMutation()
 

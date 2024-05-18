@@ -2,7 +2,7 @@ import { dispatch, getState } from '@lib_instances/store'
 import { useSignal } from '@preact/signals-react'
 import { useCallback, useRef } from 'react'
 import { FiEdit3 } from 'react-icons/fi'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetBookmarkCategoriesQuery, useGetBookmarksQuery, useSaveBookmarkMutation } from '@entities/bookmark'
 import { itemKey, quotationSlice, saveItemHeightByIndex } from '@entities/quotation'
@@ -17,6 +17,8 @@ import { DescriptionField } from './DescriptionField'
 import { NameField } from './NameField'
 
 export const EditBookmarkModal = (): JSX.Element => {
+  const { id } = useParams()
+  console.log('🚀 ~ id:', id)
   const navigate = useNavigate()
   const item = getState().quotation.items.at(0)
   const modalRef = useRef<HTMLDivElement>(null)
