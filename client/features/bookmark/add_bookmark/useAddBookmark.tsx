@@ -3,7 +3,7 @@ import { type Signal } from '@preact/signals-react'
 import { type UseMutationResult } from '@tanstack/react-query'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { useGetBookmarkCategoriesQuery, useSaveBookmarkMutation } from '@entities/bookmark'
+import { useGetBookmarkCategoriesQuery, useGetBookmarksQuery, useSaveBookmarkMutation } from '@entities/bookmark'
 import { getItemByIdFromStore, itemKey } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 import { notify } from '@shared/ui/top_msg'
@@ -30,6 +30,7 @@ export const useAddBookmark = ({ nameSignal, categorySignal, descSignal, modalRe
 
   const { mutate: saveItem, data, isSuccess, isPending, isError, error, reset } = useSaveBookmarkMutation()
   const { refetch: updateCategories } = useGetBookmarkCategoriesQuery()
+  const { refetch: updateBookmarks } = useGetBookmarksQuery()
 
   useUpdateEffect(() => {
     if (isSuccess) {
@@ -40,6 +41,7 @@ export const useAddBookmark = ({ nameSignal, categorySignal, descSignal, modalRe
       }
 
       void updateCategories()
+      void updateBookmarks()
 
       setTimeout(() => {
         slideElement({
