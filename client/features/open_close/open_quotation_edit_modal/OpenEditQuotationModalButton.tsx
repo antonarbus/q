@@ -9,7 +9,7 @@ import { RotatingLoaderIcon } from '@shared/components'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
 
-export const EditQuotationButton = ({ id }: ReqBody): JSX.Element => {
+export const OpenEditQuotationModalButton = ({ id }: ReqBody): JSX.Element => {
   const navigate = useNavigate()
   const { mutate: loadQuotation, isPending, isSuccess, isError, error, data } = useGetQuotationMutation()
 
@@ -17,9 +17,10 @@ export const EditQuotationButton = ({ id }: ReqBody): JSX.Element => {
     if (isSuccess) {
       const { quotation } = data
       if (!quotation) return
+
       dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
-      // todo: no need to pass quotation in navigate after we load it into the redux
-      navigate(`./${route.editQuotation}`, { state: { quotation } })
+      // id url param doesn't play any role here, it's just for visual representation in the url
+      navigate(`./${route.editQuotation}/${id}`)
     }
   }, [isSuccess])
 

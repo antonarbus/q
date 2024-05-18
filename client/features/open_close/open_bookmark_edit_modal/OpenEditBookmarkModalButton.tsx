@@ -10,32 +10,33 @@ import { RotatingLoaderIcon } from '@shared/components'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
 
-export const EditBookmarkButton = ({ id }: ReqBody): JSX.Element => {
+export const OpenEditBookmarkModalButton = ({ id }: ReqBody): JSX.Element => {
   const navigate = useNavigate()
   const { mutate: loadItem, isPending, isSuccess, isError, error, data } = useGetBookmarkMutation()
 
   useUpdateEffect(() => {
     if (isSuccess) {
       const { item } = data
+
       if (!item) return
 
-      // add item into store
+      // add item into fake quotation with just one item (it will be good to have a separate bookmark slice, but it will require a lot of changes in the items render logic, so I decided to use quotation slice for now)
       dispatch(quotationSlice.actions.loadQuotationReducer({
         quotation: {
           type: itemKey.quotation,
-          id: 'temp',
-          name: 'temp',
-          category: 'temp',
-          desc: 'temp',
-          info: 'temp',
-          email: 'temp',
-          preview: 'temp',
+          id: 'edit-bookmark',
+          name: 'edit-bookmark',
+          category: 'edit-bookmark',
+          desc: 'edit-bookmark',
+          info: 'edit-bookmark',
+          email: 'edit-bookmark',
+          preview: 'edit-bookmark',
           items: [item],
         },
       }))
 
-      // todo: as we loaded item into the quotation store, we can take all data from the store and not pass in navigate
-      navigate(`./${route.editBookmark}`, { state: { item } })
+      // id url param doesn't play any role here, it's just for visual representation in the url
+      navigate(`./${route.editBookmark}/${id}`)
     }
   }, [isSuccess])
 

@@ -17,11 +17,10 @@ import { DescriptionField } from './DescriptionField'
 import { NameField } from './NameField'
 
 export const EditBookmarkModal = (): JSX.Element => {
-  const { id } = useParams()
-  console.log('🚀 ~ id:', id)
   const navigate = useNavigate()
-  const item = getState().quotation.items.at(0)
   const modalRef = useRef<HTMLDivElement>(null)
+
+  const item = getState().quotation.items.at(0)
 
   const nameSignal = useSignal(item?.name ?? '')
   const categorySignal = useSignal(item?.category ?? '')
