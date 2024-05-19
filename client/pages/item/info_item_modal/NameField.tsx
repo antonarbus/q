@@ -13,8 +13,8 @@ export const NameField = ({ nameSignal }: Props): JSX.Element => {
         disabled={false}
         fullWidth
         name='name'
-        placeholder='Quotation name'
-        label='Quotation name'
+        placeholder='Item name'
+        label='Item name'
         // required
         autoFocus
         value={nameSignal.value}
