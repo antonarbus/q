@@ -1,16 +1,13 @@
 import { getState } from '@lib_instances/store'
-import { type Quotation, type Item, type ItemBoq } from '../../types'
+import { type Item, type ItemBoq } from '../../types'
 
 type Props = {
   id: string
 }
 
-export const getItemByIdFromStore = ({ id }: Props): Quotation | Item | undefined => {
+export const getItemByIdFromStore = ({ id }: Props): Item | undefined => {
   const quotation = getState().quotation
 
-  if (quotation.id === id) {
-    return quotation
-  }
   const item = quotation.items.find(item => {
     return item.id === id
   })

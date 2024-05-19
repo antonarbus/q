@@ -15,9 +15,9 @@ type Props = {
   headerIcon: React.ReactNode
   headerText: string
   children: React.ReactNode
-  onSubmit: (e: React.FormEvent) => void
+  onSubmit?: (e: React.FormEvent) => void
   onCloseClick?: (e: React.MouseEvent) => void
-  buttonText: string
+  buttonText?: string
   isButtonDisabled?: boolean
   isButtonLoading?: boolean
   isButtonSuccess?: boolean
@@ -143,30 +143,30 @@ export const FormModal = ({
         >
           {children}
         </Box>
-        <Box
-          className='card-footer'
-          sx={{
-            display: 'flex',
-            padding: '15px',
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderTop: '1px solid rgb(223, 223, 223)',
-            backgroundColor: '#80808017',
-          }}
-        >
-          <ButtonCustom
-            isButtonDisabled={isButtonDisabled}
-            isButtonLoading={isButtonLoading}
-            isButtonSuccess={isButtonSuccess}
-            isButtonError={isButtonError}
-            form='form'
+        {buttonText && (
+          <Box
+            className='card-footer'
             sx={{
-              width: '200px',
+              display: 'flex',
+              padding: '15px',
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderTop: '1px solid rgb(223, 223, 223)',
+              backgroundColor: '#80808017',
             }}
           >
-            {buttonText}
-          </ButtonCustom>
-        </Box>
+            <ButtonCustom
+              isButtonDisabled={isButtonDisabled}
+              isButtonLoading={isButtonLoading}
+              isButtonSuccess={isButtonSuccess}
+              isButtonError={isButtonError}
+              form='form'
+              sx={{ width: '200px' }}
+            >
+              {buttonText}
+            </ButtonCustom>
+          </Box>
+        )}
       </Box>
     </BackdropWithSlidableModal>
   )
