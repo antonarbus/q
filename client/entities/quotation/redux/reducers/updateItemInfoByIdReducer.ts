@@ -4,10 +4,19 @@ import { getItemByIdFromState } from '../getters/getItemByIdFromState'
 
 export const updateItemInfoByIdReducer = (state: Quotation, action: PayloadAction<{
   id: string
+  name: string
+  category: string
+  desc: string
   info: string
 }>): void => {
-  const { id, info } = action.payload
+  const { id, name, category, desc, info } = action.payload
+
   const item = getItemByIdFromState({ id, state })
+
   if (item === undefined) return
+
+  item.name = name
+  item.category = category
+  item.desc = desc
   item.info = info
 }

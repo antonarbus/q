@@ -1,0 +1,1 @@
+export { InfoItemModal } from './InfoItemModal'

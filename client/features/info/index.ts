@@ -1,1 +1,0 @@
-export { useUpdateInfo } from './useUpdateInfo'

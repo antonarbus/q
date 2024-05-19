@@ -17,7 +17,8 @@ export const route = {
   bookmarks: 'bookmarks',
   bookmark: 'bookmark',
   editBookmark: 'edit-bookmark',
-  infoBookmark: 'info-bookmark',
+  // item
+  infoItem: 'info-item',
   // va
   settings: 'settings',
 } as const
