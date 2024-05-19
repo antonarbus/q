@@ -4,7 +4,7 @@ import { type UseMutationResult } from '@tanstack/react-query'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetBookmarkCategoriesQuery, useGetBookmarksQuery, useSaveBookmarkMutation } from '@entities/bookmark'
-import { getItemByIdFromStore, itemKey } from '@entities/quotation'
+import { getItemByIdFromStore } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
@@ -82,8 +82,6 @@ export const useAddBookmark = ({ nameSignal, categorySignal, descSignal, modalRe
       category: categorySignal.value,
       desc: descSignal.value,
     }
-
-    if (itemWithUpdatedValues.type === itemKey.quotation) return
 
     saveItem({ item: itemWithUpdatedValues })
   }

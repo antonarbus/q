@@ -1,17 +1,18 @@
 import React, { Suspense } from 'react'
 import { type RouteObject, createBrowserRouter } from 'react-router-dom'
-import { AddBookmarkModal } from '@pages/add_bookmark_modal'
 import { ActivationModal } from '@pages/auth/ActivationModal'
 import { LoginModal } from '@pages/auth/LoginModal'
 import { RegisterModal } from '@pages/auth/RegisterModal'
 import { RequestPasswordResetModal } from '@pages/auth/RequestPasswordResetModal'
 import { ResetPasswordModal } from '@pages/auth/ResetPasswordModal'
 import { UnauthorizedPage } from '@pages/auth/UnauthorizedPage'
-import { EditBookmarkModal } from '@pages/edit_bookmark_modal'
-import { EditQuotationModal } from '@pages/edit_quotation_modal/EditQuotationModal'
+import { AddBookmarkModal } from '@pages/bookmark/add_bookmark_modal'
+import { EditBookmarkModal } from '@pages/bookmark/edit_bookmark_modal'
 import { ErrorPage } from '@pages/error_page'
 import { InfoModal } from '@pages/info_modal'
-import { SaveQuotationModal } from '@pages/save_quotation_modal'
+import { EditQuotationModal } from '@pages/quotation/edit_quotation_modal/EditQuotationModal'
+import { InfoQuotationModal } from '@pages/quotation/info_quotation_modal'
+import { SaveQuotationModal } from '@pages/quotation/save_quotation_modal'
 import { Copy } from '@widgets/copy'
 import { Nav } from '@widgets/nav'
 import { AccessToken } from '@features/auth/get_access_token'
@@ -22,10 +23,10 @@ import { LoadingDotsOverlay } from '@shared/loading_dots_overlay'
 import { TopMsg } from '@shared/ui/top_msg'
 
 const Quotation = React.lazy(async () => {
-  return await import('@pages/quotation_page')
+  return await import('@pages/quotation/quotation_page')
 })
-const QuotationsTable = React.lazy(async () => await import('@pages/quotations_page'))
-const ItemsTable = React.lazy(async () => await import('@pages/bookmarks_page'))
+const QuotationsTable = React.lazy(async () => await import('@pages/quotation/quotations_page'))
+const ItemsTable = React.lazy(async () => await import('@pages/bookmark/bookmarks_page'))
 
 const authRoutes: RouteObject[] = [
   {
@@ -88,7 +89,11 @@ export const router = createBrowserRouter([
             element: <AddBookmarkModal />,
           },
           {
-            path: `${route.info}/:id`,
+            path: `${route.infoQuotation}/:id`,
+            element: <InfoQuotationModal />,
+          },
+          {
+            path: `${route.infoBookmark}/:id`,
             element: <InfoModal />,
           },
         ],
