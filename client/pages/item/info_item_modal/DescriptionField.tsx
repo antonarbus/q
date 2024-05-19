@@ -1,37 +1,26 @@
 import { InputAdornment, TextField } from '@mui/material'
 import { type Signal } from '@preact/signals-react'
-import { useEffect, useRef } from 'react'
 import { BsFileEarmarkText } from 'react-icons/bs'
 
 type Props = {
-  infoSignal: Signal<string>
+  descSignal: Signal<string>
 }
 
-export const InfoField = ({ infoSignal }: Props): JSX.Element => {
-  const inputRef = useRef<React.ElementRef<'input'>>(null)
-
-  // focus on the end of the input
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.selectionStart = inputRef.current.value.length
-      inputRef.current.focus()
-    }
-  }, [])
-
+export const DescriptionField = ({ descSignal }: Props): JSX.Element => {
   return (
     <div style={{ position: 'relative' }}>
       <TextField
-        inputRef={inputRef}
         disabled={false}
         fullWidth
-        name='info'
-        placeholder='Internal info'
-        label='Info'
+        name='description'
+        placeholder='Short description'
+        label='Description'
         multiline
-        rows={4}
-        value={infoSignal.value}
+        rows={2}
+        // maxRows={Infinity}
+        value={descSignal.value}
         onChange={(e): void => {
-          infoSignal.value = e.target.value
+          descSignal.value = e.target.value
         }}
         InputProps={{
           startAdornment: (
@@ -47,6 +36,7 @@ export const InfoField = ({ infoSignal }: Props): JSX.Element => {
           '.MuiInputBase-root': {
             alignItems: 'flex-start',
             pl: '14px !important',
+            background: 'white',
           },
         }}
       />
