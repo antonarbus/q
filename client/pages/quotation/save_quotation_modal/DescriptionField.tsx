@@ -16,7 +16,7 @@ export const DescriptionField = ({ descSignal }: Props): JSX.Element => {
         placeholder='Description'
         label='Description'
         multiline
-        rows={4}
+        rows={2}
         // maxRows={Infinity}
         value={descSignal.value}
         onChange={(e): void => {

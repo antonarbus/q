@@ -13,17 +13,25 @@ type Props = {
   isEmailOkSignal: Signal<boolean>
   inputRef?: RefObject<HTMLDivElement>
   disabled?: boolean
+  onClickAway?: () => void
 }
 
 type Suggestion = {
   address: string
   domain: string
   full: string
+
 }
 
-export const EmailField = ({ emailSignal, isEmailOkSignal, inputRef, disabled }: Props): JSX.Element => {
+export const EmailField = ({
+  emailSignal,
+  isEmailOkSignal,
+  inputRef,
+  disabled,
+  onClickAway,
+}: Props): JSX.Element => {
   const emailSuggestionSignal = useSignal('')
-  const initEmailLabel = 'Email'
+  const initEmailLabel = 'Share to email'
   const emailLabelSignal = useSignal(initEmailLabel)
   const inputFocusedOutOnesSignal = useSignal(false)
 
@@ -65,6 +73,7 @@ export const EmailField = ({ emailSignal, isEmailOkSignal, inputRef, disabled }:
         onBlur={(): void => {
           inputFocusedOutOnesSignal.value = true
           suggestEmail(emailSignal.value)
+          onClickAway?.()
         }}
         InputProps={{
           startAdornment: (
