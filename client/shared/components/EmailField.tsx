@@ -14,13 +14,13 @@ type Props = {
   inputRef?: RefObject<HTMLDivElement>
   disabled?: boolean
   onClickAway?: () => void
+  label?: string
 }
 
 type Suggestion = {
   address: string
   domain: string
   full: string
-
 }
 
 export const EmailField = ({
@@ -29,9 +29,10 @@ export const EmailField = ({
   inputRef,
   disabled,
   onClickAway,
+  label,
 }: Props): JSX.Element => {
   const emailSuggestionSignal = useSignal('')
-  const initEmailLabel = 'Share to email'
+  const initEmailLabel = label ?? 'Email'
   const emailLabelSignal = useSignal(initEmailLabel)
   const inputFocusedOutOnesSignal = useSignal(false)
 

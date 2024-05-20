@@ -1,3 +1,4 @@
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { getState, useSelectorTyped } from '@lib_instances/store'
 import { Box, Chip, FormControlLabel, Radio, RadioGroup } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
@@ -34,6 +35,9 @@ export const SaveQuotationModal = (): JSX.Element => {
   const isEmailOkSignal = useSignal(false)
   const emailsToShareSignal = useSignal<string[]>([])
 
+  const [emailParent] = useAutoAnimate()
+  const [emailChipsParent] = useAutoAnimate()
+
   console.log('🚀 ~ emailsToShareSignal.value:', emailsToShareSignal.value)
 
   return (
@@ -51,11 +55,11 @@ export const SaveQuotationModal = (): JSX.Element => {
       onSubmit={onSubmit}
       onCloseSlideModalOutAndNavigateUp={true}
     >
-      <NameField key='name-field' nameSignal={nameSignal}/>
-      <CategoryField key='category-field' categorySignal={categorySignal}/>
-      <DescriptionField key='description-field' descSignal={descSignal} />
+      <NameField nameSignal={nameSignal}/>
+      <CategoryField categorySignal={categorySignal}/>
+      <DescriptionField descSignal={descSignal} />
 
-      <OutlinedDivWithLabel key='name-field' label='Share'>
+      <OutlinedDivWithLabel label='Share'>
         <Box
           sx={{
             display: 'flex',
@@ -133,45 +137,54 @@ export const SaveQuotationModal = (): JSX.Element => {
       </OutlinedDivWithLabel>
 
       {sharedToSignal.value === sharedToOptions.persons && (
-        <EmailField
-          key='email-field'
-          emailSignal={emailToShareSignal}
-          isEmailOkSignal={isEmailOkSignal}
-          onClickAway={() => {
-            if (isEmailOkSignal.value) {
-              emailsToShareSignal.value = uniq([...emailsToShareSignal.value, emailToShareSignal.value])
-              emailToShareSignal.value = ''
-            }
-          }}
-        />
-      )}
-
-      {sharedToSignal.value === sharedToOptions.persons && emailsToShareSignal.value.length > 0 && (
         <Box
-          key='emails-chips'
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            flexWrap: 'wrap',
-          }}
+          ref={emailParent}
         >
-          {emailsToShareSignal.value.map(email => {
-            return (
-              <Chip
-                label={email}
-                onDelete={() => {
-                  emailsToShareSignal.value = emailsToShareSignal.value
-                    .filter(emailInArray => emailInArray !== email)
-                }}
-                sx={{
-                  width: 'min-content',
-                  m: '2px',
-                }}
-              />
-            )
-          })}
+          <EmailField
+            emailSignal={emailToShareSignal}
+            isEmailOkSignal={isEmailOkSignal}
+            label='Share with'
+            onClickAway={() => {
+              if (isEmailOkSignal.value) {
+                emailsToShareSignal.value = uniq([...emailsToShareSignal.value, emailToShareSignal.value])
+                emailToShareSignal.value = ''
+              }
+            }}
+          />
+
+          {sharedToSignal.value === sharedToOptions.persons && emailsToShareSignal.value.length > 0 && (
+            <Box
+              ref={emailChipsParent}
+              key='emails-chips'
+              sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                marginTop: '5px',
+              }}
+            >
+              {emailsToShareSignal.value.map(email => {
+                return (
+                  <Chip
+                    key={email}
+                    label={email}
+                    onDelete={() => {
+                      emailsToShareSignal.value = emailsToShareSignal.value
+                        .filter(emailInArray => emailInArray !== email)
+                    }}
+                    sx={{
+                      width: 'min-content',
+                      m: '2px',
+                      fontSize: '12px',
+                    }}
+                  />
+                )
+              })}
+            </Box>
+          )}
+
         </Box>
       )}
+
     </FormModal>
   )
 }
