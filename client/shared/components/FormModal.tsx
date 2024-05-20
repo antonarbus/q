@@ -1,6 +1,8 @@
 import { theme } from '@lib_instances/theme'
 import { Close } from '@mui/icons-material'
 import { Avatar, Box, type SxProps, Typography, IconButton } from '@mui/material'
+import { AnimatePresence, motion } from 'framer-motion'
+import { Children } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { slideElement } from '../utils/slideElement'
 import { BackdropWithSlidableModal } from './BackdropWithSlidableModal'
@@ -131,17 +133,49 @@ export const FormModal = ({
           className='card-content'
           component='form'
           id='form'
-          sx={{
+          css={{
             display: 'flex',
             flexDirection: 'column',
-            gap: '20px',
             padding: paddingContent ?? '40px 50px',
             backgroundColor: '#8080800f',
             overflowY: 'auto',
+            '> *': {
+              marginTop: '25px',
+              ':first-child': {
+                marginTop: '0px !important',
+              },
+            },
           }}
           onSubmit={onSubmit}
         >
-          {children}
+          <AnimatePresence initial={false}>
+            {Children.map(children, (child, index) => {
+              if (child === null) return null
+
+              return (
+                <motion.div
+                  key={`form-child-${index}`}
+                  initial={{
+                    height: 0,
+                    marginTop: 0,
+                    opacity: 0,
+                  }}
+                  animate={{
+                    height: 'auto',
+                    marginTop: '25px',
+                    opacity: 1,
+                  }}
+                  exit={{
+                    height: 0,
+                    marginTop: 0,
+                    opacity: 0,
+                  }}
+                >
+                  {child}
+                </motion.div>
+              )
+            })}
+          </AnimatePresence>
         </Box>
         {buttonText && (
           <Box

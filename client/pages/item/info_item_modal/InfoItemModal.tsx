@@ -38,7 +38,7 @@ export const InfoItemModal = (): React.ReactNode => {
       <NameField nameSignal={nameSignal}/>
       <CategoryField categorySignal={categorySignal}/>
       <DescriptionField descSignal={descSignal}/>
-      <InfoField infoSignal={infoSignal}/>
+      <InfoField infoSignal={infoSignal} />
     </FormModal>
   )
 }

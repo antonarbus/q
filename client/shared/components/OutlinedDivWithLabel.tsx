@@ -16,6 +16,7 @@ const InputComponent = forwardRef((props: InputComponentProps, ref: React.Forwar
       css={{
         overflow: 'hidden',
         backgroundColor: 'white',
+        width: '100%',
       }}
     />
   )
@@ -41,7 +42,6 @@ export const OutlinedDivWithLabel = ({ children, label }: { children: React.Reac
           borderWidth: '1px !important',
         },
       }}
-
     />
   )
 }

@@ -96,7 +96,6 @@ export type ItemPaste = ItemCommon & {
 }
 
 export type Item = ItemBoq | ItemPaste | ItemText | ItemPrice | BoqRow
-// export type Item = ItemText | ItemBoq | ItemPrice | BoqRow
 
 export type Quotation = ItemCommon & {
   type: typeof itemKey.quotation
