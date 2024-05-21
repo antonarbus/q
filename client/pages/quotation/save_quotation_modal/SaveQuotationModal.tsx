@@ -1,13 +1,12 @@
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { getState, useSelectorTyped } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
-import { Box, Chip, FormControlLabel, IconButton, InputAdornment, Radio, RadioGroup, TextField } from '@mui/material'
-import { useSignal, useSignalEffect } from '@preact/signals-react'
+import { Box, Button, Chip, FormControlLabel, InputAdornment, Radio, RadioGroup, TextField } from '@mui/material'
+import { useSignal } from '@preact/signals-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import uniq from 'lodash.uniq'
 import { useEffect, useRef } from 'react'
 import { BsFillPersonPlusFill } from 'react-icons/bs'
-import { IoAddCircleOutline } from 'react-icons/io5'
 import { MdSaveAlt, MdGroups, MdGroupOff } from 'react-icons/md'
 import { useSaveQuotation } from '@features/quotation/save_quotation'
 import { FormModal, OutlinedDivWithLabel } from '@shared/components'
@@ -46,6 +45,12 @@ export const SaveQuotationModal = (): JSX.Element => {
 
   useEffect(() => {
     if (shouldMonitorIfEmailIsOkRef.current) {
+      if (emailToSignal.value === '') {
+        labelSignal.value = 'Share'
+        shouldMonitorIfEmailIsOkRef.current = false
+        return
+      }
+
       const isEmailOk = isEmailPatternOk(emailToSignal.value)
       labelSignal.value = isEmailOk ? 'Share' : 'Check email'
     }
@@ -173,8 +178,14 @@ export const SaveQuotationModal = (): JSX.Element => {
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position='end'>
-                        <IconButton
+                        <Button
+                          variant='contained'
                           size='small'
+                          sx={{
+                            fontSize: '10px',
+                            padding: '0px',
+                            minWidth: '30px',
+                          }}
                           onClick={() => {
                             if (emailToSignal.value === '') return
                             const isEmailOk = isEmailPatternOk(emailToSignal.value)
@@ -193,8 +204,8 @@ export const SaveQuotationModal = (): JSX.Element => {
                             }
                           }}
                         >
-                          <IoAddCircleOutline />
-                        </IconButton>
+                          Add
+                        </Button>
                       </InputAdornment>
                     ),
                   }}
