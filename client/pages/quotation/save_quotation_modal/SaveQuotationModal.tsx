@@ -133,57 +133,52 @@ export const SaveQuotationModal = (): JSX.Element => {
               />
             </Box>
           </RadioGroup>
-        </Box>
-      </OutlinedDivWithLabel>
-
-      {sharedToSignal.value === sharedToOptions.persons && (
-        <Box
-          ref={emailParent}
-        >
-          <EmailField
-            emailSignal={emailToShareSignal}
-            isEmailOkSignal={isEmailOkSignal}
-            label='Share with'
-            onClickAway={() => {
-              if (isEmailOkSignal.value) {
-                emailsToShareSignal.value = uniq([...emailsToShareSignal.value, emailToShareSignal.value])
-                emailToShareSignal.value = ''
-              }
-            }}
-          />
-
-          {sharedToSignal.value === sharedToOptions.persons && emailsToShareSignal.value.length > 0 && (
-            <Box
-              ref={emailChipsParent}
-              key='emails-chips'
-              sx={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                marginTop: '5px',
+          {sharedToSignal.value === sharedToOptions.persons && (
+            <EmailField
+              emailSignal={emailToShareSignal}
+              isEmailOkSignal={isEmailOkSignal}
+              label='Share with'
+              onClickAway={() => {
+                if (isEmailOkSignal.value) {
+                  emailsToShareSignal.value = uniq([...emailsToShareSignal.value, emailToShareSignal.value])
+                  emailToShareSignal.value = ''
+                }
               }}
-            >
-              {emailsToShareSignal.value.map(email => {
-                return (
-                  <Chip
-                    key={email}
-                    label={email}
-                    onDelete={() => {
-                      emailsToShareSignal.value = emailsToShareSignal.value
-                        .filter(emailInArray => emailInArray !== email)
-                    }}
-                    sx={{
-                      width: 'min-content',
-                      m: '2px',
-                      fontSize: '12px',
-                    }}
-                  />
-                )
-              })}
-            </Box>
+            />
           )}
-
         </Box>
-      )}
+        {sharedToSignal.value === sharedToOptions.persons && emailsToShareSignal.value.length > 0 && (
+          <Box
+            ref={emailChipsParent}
+            key='emails-chips'
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              // marginTop: '5px',
+              // top: '-15px',
+              margin: '10px',
+            }}
+          >
+            {emailsToShareSignal.value.map(email => {
+              return (
+                <Chip
+                  key={email}
+                  label={email}
+                  onDelete={() => {
+                    emailsToShareSignal.value = emailsToShareSignal.value
+                      .filter(emailInArray => emailInArray !== email)
+                  }}
+                  sx={{
+                    width: 'min-content',
+                    m: '2px',
+                    fontSize: '12px',
+                  }}
+                />
+              )
+            })}
+          </Box>
+        )}
+      </OutlinedDivWithLabel>
 
     </FormModal>
   )

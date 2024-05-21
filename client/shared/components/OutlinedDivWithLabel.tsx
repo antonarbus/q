@@ -1,4 +1,4 @@
-import { TextField } from '@mui/material'
+import { type SxProps, TextField } from '@mui/material'
 import { forwardRef } from 'react'
 
 type InputComponentProps = {
@@ -22,7 +22,13 @@ const InputComponent = forwardRef((props: InputComponentProps, ref: React.Forwar
   )
 })
 
-export const OutlinedDivWithLabel = ({ children, label }: { children: React.ReactNode, label: string }): JSX.Element => {
+export const OutlinedDivWithLabel = ({ children, label, sx }:
+{
+  children: React.ReactNode
+  label: string
+  sx?: SxProps
+},
+): JSX.Element => {
   return (
     <TextField
       disabled={false}
@@ -41,6 +47,7 @@ export const OutlinedDivWithLabel = ({ children, label }: { children: React.Reac
         fieldset: {
           borderWidth: '1px !important',
         },
+        ...sx,
       }}
     />
   )
