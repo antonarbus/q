@@ -23,8 +23,8 @@ export const slideElement = ({ intoView, element, onSlideElementComplete }: Prop
       y: intoView ? offsetPosition : 0,
     },
     {
-      delay: 0.2,
-      duration: 0.3,
+      delay: 0.1,
+      duration: 0.2,
       y: intoView ? 0 : -offsetPosition,
       onComplete: () => {
         isAnimationPrevented = false
