@@ -52,8 +52,19 @@ export const FormModal = ({
   return (
     <BackdropWithSlidableModal
       onSlideModalInComplete={onSlideModalInComplete}
-      onSlideModalOutComplete={onSlideModalOutComplete}
-      clickAway={false}
+      onSlideModalOutComplete={() => {
+        if (onCloseSlideModalOutAndNavigateUp === true) {
+          slideElement({
+            element: modalRef.current,
+            onSlideElementComplete: () => {
+              navigate('..')
+            },
+          })
+        }
+
+        onSlideModalOutComplete?.()
+      }}
+      clickAway={true}
     >
       <Box
         ref={modalRef}

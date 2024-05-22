@@ -1,5 +1,5 @@
 import { type ReactNode, useRef } from 'react'
-import { useEffectOnce } from 'react-use'
+import { useEffectOnce, useUnmount } from 'react-use'
 import { slideElement } from '../utils/slideElement'
 
 type Props = {
@@ -53,6 +53,14 @@ export const BackdropWithSlidableModal = ({
     return () => {
       document.removeEventListener('keydown', slideAway)
     }
+  })
+
+  useEffectOnce(() => {
+    document.querySelector('body')!.style.overflow = 'hidden'
+  })
+
+  useUnmount(() => {
+    document.querySelector('body')!.style.overflow = 'auto'
   })
 
   return (
