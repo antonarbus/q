@@ -152,7 +152,7 @@ export const FormModal = ({
             overflowY: 'auto',
             '> *': {
               marginTop: '25px',
-              ':first-child': {
+              ':first-of-type': {
                 marginTop: '0px !important',
               },
             },

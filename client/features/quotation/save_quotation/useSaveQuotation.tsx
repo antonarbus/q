@@ -15,6 +15,7 @@ type Props = {
   nameSignal: Signal<string>
   categorySignal: Signal<string>
   descSignal: Signal<string>
+  infoSignal: Signal<string>
 }
 
 type Res = {
@@ -24,7 +25,7 @@ type Res = {
   isError: UseMutationResult['isError']
 }
 
-export const useSaveQuotation = ({ modalRef, nameSignal, categorySignal, descSignal }: Props): Res => {
+export const useSaveQuotation = ({ modalRef, nameSignal, categorySignal, descSignal, infoSignal }: Props): Res => {
   const navigate = useNavigate()
   const { mutate: saveQuotation, data, isSuccess, isPending, isError, error, reset } = useSaveQuotationMutation()
   const { refetch: updateCategories } = useGetQuotationCategoriesQuery()
@@ -91,7 +92,7 @@ export const useSaveQuotation = ({ modalRef, nameSignal, categorySignal, descSig
       name: nameSignal.value,
       category: categorySignal.value,
       desc: descSignal.value,
-      info: getState().quotation.info,
+      info: infoSignal.value,
       items: getState().quotation.items,
     }
 
