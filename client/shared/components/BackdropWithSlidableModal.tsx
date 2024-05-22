@@ -1,5 +1,5 @@
 import { type ReactNode, useRef } from 'react'
-import { useEffectOnce, useUnmount } from 'react-use'
+import { useEffectOnce } from 'react-use'
 import { slideElement } from '../utils/slideElement'
 
 type Props = {
