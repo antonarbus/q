@@ -45,6 +45,7 @@ const initialState: Quotation = {
   category: '',
   desc: '',
   info: '',
+  sharedWith: [],
   preview: '',
   items: [],
 }

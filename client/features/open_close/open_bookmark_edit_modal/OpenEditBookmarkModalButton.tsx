@@ -38,6 +38,7 @@ export const OpenEditBookmarkModalButton = ({ id }: ReqBody): JSX.Element => {
             desc: 'edit-bookmark',
             info: 'edit-bookmark',
             email: 'edit-bookmark',
+            sharedWith: [],
             preview: 'edit-bookmark',
             items: [item],
           },

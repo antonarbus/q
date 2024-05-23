@@ -102,7 +102,7 @@ export type Quotation = ItemCommon & {
   createdAt?: Date
   updatedAt?: Date
   openedAt?: Date
-  sharedAt?: Date
+  sharedWith: string[], //* if empty array, not shared, if '*' inside - with everyone
   from?: {
     email?: string
     name?: string

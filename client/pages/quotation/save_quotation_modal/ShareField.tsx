@@ -1,5 +1,4 @@
 import { useAutoAnimate } from '@formkit/auto-animate/react'
-import { theme } from '@lib_instances/theme'
 import {
   Box,
   Button,
@@ -13,54 +12,40 @@ import {
 import { type Signal, useSignal } from '@preact/signals-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import uniq from 'lodash.uniq'
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { BsFillPersonPlusFill } from 'react-icons/bs'
 import { MdGroups, MdGroupOff } from 'react-icons/md'
+import { type Quotation } from '@entities/quotation'
 import { OutlinedDivWithLabel } from '@shared/components'
+import {
+  type SharedWithOption,
+  sharedWithOption,
+} from '@shared/consts/sharedWithOption'
 import { isEmailPatternOk } from '@shared/utils/isEmailPatternOk'
 
-const sharedWithOptions = {
-  none: 'none',
-  anyone: 'anyone',
-  persons: 'persons',
-} as const
-
-export type SharedOptions =
-  (typeof sharedWithOptions)[keyof typeof sharedWithOptions]
-
 type Props = {
-  shareWithOptionSignal: Signal<SharedOptions>
-  emailsSharedWithSignal: Signal<string[]>
+  shareWithOptionSignal: Signal<SharedWithOption>
+  sharedWithSignal: Signal<Quotation['sharedWith']>
 }
 
 export const ShareField = ({
   shareWithOptionSignal,
-  emailsSharedWithSignal,
+  sharedWithSignal,
 }: Props): JSX.Element => {
   const emailSignal = useSignal('')
-  const labelSignal = useSignal('Share')
-  const shouldMonitorIfEmailIsOkRef = useRef(false)
+  const isButtonDisabledSignal = useSignal(true)
   const [chipsParent] = useAutoAnimate()
 
   useEffect(
-    function monitorIfEmailIsOk() {
-      if (shouldMonitorIfEmailIsOkRef.current) {
-        const isEmailOk = isEmailPatternOk(emailSignal.value)
-        labelSignal.value = isEmailOk ? 'Share' : 'Check email'
-      }
+    function disableButton() {
+      const isEmailOk = isEmailPatternOk(emailSignal.value)
+      isButtonDisabledSignal.value = !isEmailOk
     },
     [emailSignal.value],
   )
 
   return (
-    <OutlinedDivWithLabel
-      label={labelSignal.value}
-      sx={{
-        '.MuiInputLabel-shrink': {
-          color: labelSignal.value !== 'Share' ? theme.colors.red : '',
-        },
-      }}
-    >
+    <OutlinedDivWithLabel label='Share'>
       <Box
         sx={{
           padding: '10px 10px 10px 20px',
@@ -77,8 +62,23 @@ export const ShareField = ({
               name='controlled-radio-buttons-group'
               value={shareWithOptionSignal.value}
               onChange={(event): void => {
-                const value = event.target.value as SharedOptions
+                const value = event.target.value as SharedWithOption
                 shareWithOptionSignal.value = value
+
+                if (
+                  shareWithOptionSignal.value === sharedWithOption.everybody
+                ) {
+                  sharedWithSignal.value = ['*']
+                }
+
+                if (shareWithOptionSignal.value === sharedWithOption.nobody) {
+                  sharedWithSignal.value = []
+                }
+
+                if (shareWithOptionSignal.value === sharedWithOption.persons) {
+                  // to make it empty as initial unshared option
+                  sharedWithSignal.value = []
+                }
               }}
               sx={{
                 '.MuiRadio-root': {
@@ -95,10 +95,10 @@ export const ShareField = ({
               >
                 <MdGroupOff style={{ opacity: 0.7 }} />
                 <FormControlLabel
-                  value={sharedWithOptions.none}
-                  label={sharedWithOptions.none}
+                  value={sharedWithOption.nobody}
+                  label={sharedWithOption.nobody}
                   disabled={
-                    shareWithOptionSignal.value === sharedWithOptions.none
+                    shareWithOptionSignal.value === sharedWithOption.nobody
                   }
                   control={<Radio size='small' />}
                 />
@@ -114,10 +114,10 @@ export const ShareField = ({
                   style={{ opacity: 0.7, scale: '1.2', translate: '-1px 0px' }}
                 />
                 <FormControlLabel
-                  value={sharedWithOptions.anyone}
-                  label={sharedWithOptions.anyone}
+                  value={sharedWithOption.everybody}
+                  label={sharedWithOption.everybody}
                   disabled={
-                    shareWithOptionSignal.value === sharedWithOptions.anyone
+                    shareWithOptionSignal.value === sharedWithOption.everybody
                   }
                   control={<Radio size='small' />}
                 />
@@ -132,16 +132,16 @@ export const ShareField = ({
               >
                 <BsFillPersonPlusFill style={{ opacity: 0.7 }} />
                 <FormControlLabel
-                  value={sharedWithOptions.persons}
-                  label={sharedWithOptions.persons}
+                  value={sharedWithOption.persons}
+                  label={sharedWithOption.persons}
                   disabled={
-                    shareWithOptionSignal.value === sharedWithOptions.persons
+                    shareWithOptionSignal.value === sharedWithOption.persons
                   }
                   control={<Radio size='small' />}
                 />
               </Box>
             </RadioGroup>
-            {shareWithOptionSignal.value === sharedWithOptions.persons && (
+            {shareWithOptionSignal.value === sharedWithOption.persons && (
               <TextField
                 autoFocus
                 focused
@@ -172,25 +172,15 @@ export const ShareField = ({
                           padding: '0px',
                           minWidth: '30px',
                         }}
+                        disabled={isButtonDisabledSignal.value}
                         onClick={() => {
                           if (emailSignal.value === '') return
-                          const isEmailOk = isEmailPatternOk(emailSignal.value)
 
-                          if (isEmailOk) {
-                            shouldMonitorIfEmailIsOkRef.current = false
-                            labelSignal.value = 'Share'
-                            emailsSharedWithSignal.value = uniq([
-                              ...emailsSharedWithSignal.value,
-                              emailSignal.value,
-                            ])
-                            emailSignal.value = ''
-                            return
-                          }
-
-                          if (!isEmailOk) {
-                            shouldMonitorIfEmailIsOkRef.current = true
-                            labelSignal.value = 'Check email'
-                          }
+                          sharedWithSignal.value = uniq([
+                            ...sharedWithSignal.value,
+                            emailSignal.value,
+                          ]).filter((item) => item !== '*')
+                          emailSignal.value = ''
                         }}
                       >
                         Add
@@ -201,8 +191,8 @@ export const ShareField = ({
               />
             )}
           </Box>
-          {shareWithOptionSignal.value === sharedWithOptions.persons &&
-            emailsSharedWithSignal.value.length > 0 && (
+          {shareWithOptionSignal.value === sharedWithOption.persons &&
+            sharedWithSignal.value.length > 0 && (
               <Box
                 ref={chipsParent}
                 key='emails-chips'
@@ -225,25 +215,27 @@ export const ShareField = ({
                   flexDirection: 'row-reverse',
                 }}
               >
-                {emailsSharedWithSignal.value.map((email) => {
-                  return (
-                    <Chip
-                      key={email}
-                      label={email}
-                      onDelete={() => {
-                        emailsSharedWithSignal.value =
-                          emailsSharedWithSignal.value.filter(
-                            (emailInArray) => emailInArray !== email,
-                          )
-                      }}
-                      sx={{
-                        width: 'min-content',
-                        margin: '2px',
-                        fontSize: '12px',
-                      }}
-                    />
-                  )
-                })}
+                {sharedWithSignal.value
+                  .filter((item) => item !== '*')
+                  .map((email) => {
+                    return (
+                      <Chip
+                        key={email}
+                        label={email}
+                        onDelete={() => {
+                          sharedWithSignal.value =
+                            sharedWithSignal.value.filter(
+                              (emailInArray) => emailInArray !== email,
+                            )
+                        }}
+                        sx={{
+                          width: 'min-content',
+                          margin: '2px',
+                          fontSize: '12px',
+                        }}
+                      />
+                    )
+                  })}
               </Box>
             )}
         </AnimatePresence>
