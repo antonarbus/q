@@ -4,7 +4,7 @@ import { Box, Button, Chip, FormControlLabel, InputAdornment, Radio, RadioGroup,
 import { type Signal, useSignal } from '@preact/signals-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import uniq from 'lodash.uniq'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { BsFillPersonPlusFill } from 'react-icons/bs'
 import { MdGroups, MdGroupOff } from 'react-icons/md'
 import { OutlinedDivWithLabel } from '@shared/components'
@@ -29,11 +29,18 @@ export const ShareField = ({ shareWithOptionSignal, emailsSharedWithSignal }: Pr
   const shouldMonitorIfEmailIsOkRef = useRef(false)
   const [chipsParent] = useAutoAnimate()
 
+  useEffect(function monitorIfEmailIsOk() {
+    if (shouldMonitorIfEmailIsOkRef.current) {
+      const isEmailOk = isEmailPatternOk(emailSignal.value)
+      labelSignal.value = isEmailOk ? 'Share' : 'Check email'
+    }
+  }, [emailSignal.value])
+
   return (
     <OutlinedDivWithLabel
         label={labelSignal.value}
         sx={{
-          '& .MuiInputLabel-shrink': {
+          '.MuiInputLabel-shrink': {
             color: labelSignal.value !== 'Share' ? theme.colors.red : '',
           },
         }}

@@ -18,9 +18,14 @@ export const SaveQuotationModal = (): JSX.Element => {
   const infoSignal = useSignal(getState().quotation.info ?? '')
   const shareWithOptionSignal = useSignal<SharedOptions>('none')
   const emailsSharedWithSignal = useSignal([])
-
-  const { onSubmit, isPending, isSuccess, isError } = useSaveQuotation({ modalRef, nameSignal, categorySignal, descSignal, infoSignal })
-  const id = useSelectorTyped(state => state.quotation.id)
+  const { onSubmit, isPending, isSuccess, isError } = useSaveQuotation({
+    modalRef,
+    nameSignal,
+    categorySignal,
+    descSignal,
+    infoSignal,
+  })
+  const id = useSelectorTyped((state) => state.quotation.id)
   const isDisabled = nameSignal.value === '' || categorySignal.value === ''
 
   return (
@@ -38,11 +43,14 @@ export const SaveQuotationModal = (): JSX.Element => {
       onSubmit={onSubmit}
       onCloseSlideModalOutAndNavigateUp={true}
     >
-      <NameField nameSignal={nameSignal}/>
-      <CategoryField categorySignal={categorySignal}/>
+      <NameField nameSignal={nameSignal} />
+      <CategoryField categorySignal={categorySignal} />
       <DescriptionField descSignal={descSignal} />
       <InfoField infoSignal={infoSignal} />
-      <ShareField shareWithOptionSignal={shareWithOptionSignal} emailsSharedWithSignal={emailsSharedWithSignal} />
+      <ShareField
+        shareWithOptionSignal={shareWithOptionSignal}
+        emailsSharedWithSignal={emailsSharedWithSignal}
+      />
     </FormModal>
   )
 }
