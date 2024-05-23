@@ -4,7 +4,11 @@ import type { ReqBody } from '@server/api/bookmark/deleteBookmarkRouter'
 import { AiTwotoneEdit } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { quotationSlice, useGetQuotationMutation } from '@entities/quotation'
+import {
+  isFroalaSignal,
+  quotationSlice,
+  useGetQuotationMutation,
+} from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
@@ -24,6 +28,8 @@ export const OpenEditQuotationModalButton = ({ id }: ReqBody): JSX.Element => {
     if (isSuccess) {
       const { quotation } = data
       if (!quotation) return
+
+      isFroalaSignal.value = false
 
       dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
       // id url param doesn't play any role here, it's just for visual representation in the url
