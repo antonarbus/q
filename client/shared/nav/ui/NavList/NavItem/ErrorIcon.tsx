@@ -4,13 +4,13 @@ import { Icon } from './Icon'
 export const ErrorIcon = (): JSX.Element => {
   return (
     <Icon
-      icon={(
+      icon={
         <BiErrorCircle
           style={{
             color: '#cb4b4b !important',
           }}
         />
-      )}
+      }
     />
   )
 }

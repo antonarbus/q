@@ -1,5 +1,9 @@
 import { type Action, type ThunkAction, configureStore } from '@reduxjs/toolkit'
-import { type TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import {
+  type TypedUseSelectorHook,
+  useDispatch,
+  useSelector,
+} from 'react-redux'
 import { copyReducer } from '@entities/copy/copySlice'
 import { quotationReducer } from '@entities/quotation/redux/quotationSlice'
 import { userReducer } from '@entities/user/redux/userSlice'
@@ -12,7 +16,8 @@ const store = configureStore({
     quotation: quotationReducer,
     copy: copyReducer,
   },
-  middleware: (defaultMiddleware) => defaultMiddleware({ serializableCheck: false }), // we have not serializable components and functions in nav structure
+  middleware: (defaultMiddleware) =>
+    defaultMiddleware({ serializableCheck: false }), // we have not serializable components and functions in nav structure
   devTools: process.env.NODE_ENV !== 'production',
 })
 
@@ -21,9 +26,23 @@ const dispatch = store.dispatch
 
 type RootState = ReturnType<typeof store.getState>
 type AppDispatch = typeof store.dispatch
-type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>
+type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>
 
 const useDispatchTyped = (): AppDispatch => useDispatch<AppDispatch>()
 const useSelectorTyped: TypedUseSelectorHook<RootState> = useSelector
 
-export { store, getState, dispatch, useDispatchTyped, useSelectorTyped, type RootState, type AppDispatch, type AppThunk }
+export {
+  store,
+  getState,
+  dispatch,
+  useDispatchTyped,
+  useSelectorTyped,
+  type RootState,
+  type AppDispatch,
+  type AppThunk,
+}

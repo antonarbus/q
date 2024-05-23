@@ -3,7 +3,9 @@ import { type HTMLAttributes } from 'react'
 import { IoClose } from 'react-icons/io5'
 import { cls } from '@shared/consts/cls'
 
-export const PaperComponent = (props: HTMLAttributes<HTMLElement>): JSX.Element => {
+export const PaperComponent = (
+  props: HTMLAttributes<HTMLElement>,
+): JSX.Element => {
   return (
     <Paper
       className={cls.searchAutocomplete}

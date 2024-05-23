@@ -43,11 +43,11 @@ export const AgGridStyles = (): JSX.Element => {
 
           // remove pin border line
           .ag-pinned-left-header,
-          .ag-cell.ag-cell-last-left-pinned:not(.ag-cell-range-right):not(.ag-cell-range-single-cell) {
+          .ag-cell.ag-cell-last-left-pinned:not(.ag-cell-range-right):not(
+              .ag-cell-range-single-cell
+            ) {
             border-right: 1px dotted #80808045;
           }
-          
-
         }
       `}
     />

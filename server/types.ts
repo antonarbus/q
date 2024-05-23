@@ -5,8 +5,16 @@ export type Req = Request
 export type Res = Response
 export type Next = NextFunction
 
-export type RouteHandler = (req: Request, res: Response, next: NextFunction) => void
-export type RouteHandlerAsync = (req: Request, res: Response, next: NextFunction) => Promise<void>
+export type RouteHandler = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => void
+export type RouteHandlerAsync = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => Promise<void>
 
 // https://plainenglish.io/blog/typed-express-request-and-response-with-typescript
 // export type ReqWithBody<TBodyObject> = Request & {

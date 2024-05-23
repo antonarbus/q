@@ -1,6 +1,17 @@
 import { dispatch } from '@lib_instances/store'
 import { roundTo } from 'round-to'
-import { didBoqHeaderCellContentChange, getBoqHeaderFromStore, getBoqRowsFromStore, updateBoqHeaderCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue, getBoqRowFromStore, type BoqRow, type BoqRowEditorRefs, boqRowCellKey } from '@entities/quotation'
+import {
+  didBoqHeaderCellContentChange,
+  getBoqHeaderFromStore,
+  getBoqRowsFromStore,
+  updateBoqHeaderCellAtStore,
+  updateBoqRowCellWithValue,
+  updateSubTotalPriceWithValue,
+  getBoqRowFromStore,
+  type BoqRow,
+  type BoqRowEditorRefs,
+  boqRowCellKey,
+} from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 import { type FroalaEditor, type FroalaEditorRef } from '@shared/types/froala'
@@ -38,7 +49,9 @@ export const updateSubtotalPriceCell = ({
   })
 
   if (didUpdate) {
-    dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
+    dispatch(
+      navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }),
+    )
   }
 
   const prevSubTotalPriceValue = boqRows.reduce((accumulator, boqRow) => {
@@ -86,11 +99,11 @@ export const updateSubtotalPriceCell = ({
     }
   })
 
-  const areAllCellsPinned = prices.every(price => price.isPinned)
+  const areAllCellsPinned = prices.every((price) => price.isPinned)
 
   if (areAllCellsPinned) {
     notify({
-      msg: 'Can\'t be changed. All row prices are pinned.',
+      msg: "Can't be changed. All row prices are pinned.",
       type: 'info',
     })
 
@@ -163,10 +176,13 @@ export const updateSubtotalPriceCell = ({
   const boqRowsUpdated = getBoqRowsFromStore({ itemIndex })
   if (boqRowsUpdated === undefined) return
 
-  const subTotalPriceValueNew: number = boqRowsUpdated.reduce((accumulator: number, boqRow: BoqRow) => {
-    const price = boqRow.price.value
-    return accumulator + price
-  }, 0)
+  const subTotalPriceValueNew: number = boqRowsUpdated.reduce(
+    (accumulator: number, boqRow: BoqRow) => {
+      const price = boqRow.price.value
+      return accumulator + price
+    },
+    0,
+  )
 
   const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
 

@@ -4,7 +4,9 @@ import { format } from 'date-fns'
 import type { ReactNode } from 'react'
 import { type Quotation } from '@entities/quotation'
 
-export const DateCellRenderer = (params: ICellRendererParams<Quotation, Date>): ReactNode => {
+export const DateCellRenderer = (
+  params: ICellRendererParams<Quotation, Date>,
+): ReactNode => {
   if (params.value === undefined) return null
   if (params.value === null) return null
 
@@ -13,13 +15,14 @@ export const DateCellRenderer = (params: ICellRendererParams<Quotation, Date>): 
 
   return (
     <>
+      <Box sx={{ textAlign: 'center' }}>{date}</Box>
       <Box
-        sx={{ textAlign: 'center' }}
-      >
-        {date}
-      </Box>
-      <Box
-        sx={{ color: 'grey', fontSize: '12px', lineHeight: '12px', textAlign: 'center' }}
+        sx={{
+          color: 'grey',
+          fontSize: '12px',
+          lineHeight: '12px',
+          textAlign: 'center',
+        }}
       >
         {time}
       </Box>

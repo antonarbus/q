@@ -10,7 +10,12 @@ type Props = {
   isLabelRed?: boolean
 }
 
-export const PasswordField = ({ passwordSignal, onBlur, label, isLabelRed }: Props): JSX.Element => {
+export const PasswordField = ({
+  passwordSignal,
+  onBlur,
+  label,
+  isLabelRed,
+}: Props): JSX.Element => {
   const showPassword = useSignal(false)
 
   return (

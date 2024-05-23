@@ -3,12 +3,21 @@ import { type ReqBody as Payload } from '@server/api/quotation/deleteQuotationRo
 import { type ReactNode } from 'react'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
-import { useDeleteQuotationMutation, deleteFromQuotationsCache } from '@entities/quotation'
+import {
+  useDeleteQuotationMutation,
+  deleteFromQuotationsCache,
+} from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components'
 import { notify } from '@shared/ui/top_msg'
 
 export const DeleteQuotationButton = ({ id }: Payload): ReactNode => {
-  const { mutate: deleteQuotation, isPending, isSuccess, isError, error } = useDeleteQuotationMutation()
+  const {
+    mutate: deleteQuotation,
+    isPending,
+    isSuccess,
+    isError,
+    error,
+  } = useDeleteQuotationMutation()
 
   useUpdateEffect(() => {
     if (isSuccess) {
@@ -18,7 +27,11 @@ export const DeleteQuotationButton = ({ id }: Payload): ReactNode => {
 
   useUpdateEffect(() => {
     if (isError) {
-      notify({ msg: error.response?.data.message, type: 'error', theme: 'light' })
+      notify({
+        msg: error.response?.data.message,
+        type: 'error',
+        theme: 'light',
+      })
       deleteFromQuotationsCache({ id })
     }
   }, [isError])

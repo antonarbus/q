@@ -1,5 +1,13 @@
 import { roundTo } from 'round-to'
-import { getBoqRowsFromStore, isBoqRowPriceValid, updateBoqRowCellWithValue, updateSubTotalPriceWithValue, type BoqRow, type BoqRowEditorRefs, boqRowCellKey } from '@entities/quotation'
+import {
+  getBoqRowsFromStore,
+  isBoqRowPriceValid,
+  updateBoqRowCellWithValue,
+  updateSubTotalPriceWithValue,
+  type BoqRow,
+  type BoqRowEditorRefs,
+  boqRowCellKey,
+} from '@entities/quotation'
 import { type FroalaEditorRef } from '@shared/types/froala'
 import { notify } from '@shared/ui/top_msg'
 
@@ -54,10 +62,13 @@ export const validateBoqRowPrices = ({
       const boqRows = getBoqRowsFromStore({ itemIndex })
       if (boqRows === undefined) return
 
-      const subTotalPriceValueNew: number = boqRows.reduce((accumulator: number, boqRow: BoqRow) => {
-        const price = boqRow.price.value
-        return accumulator + price
-      }, 0)
+      const subTotalPriceValueNew: number = boqRows.reduce(
+        (accumulator: number, boqRow: BoqRow) => {
+          const price = boqRow.price.value
+          return accumulator + price
+        },
+        0,
+      )
 
       const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
 

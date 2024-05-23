@@ -4,7 +4,11 @@ import { navSlice } from '../../../../../../navSlice'
 import { getMenuItemByIdsChain } from '../../functions/getMenuItemByIdsChain'
 import { navigateInMenu } from '../../functions/useMenuAnimation'
 
-export const clickOnMenuItem = (e: MouseEvent, menuId: string, disabled: boolean): void => {
+export const clickOnMenuItem = (
+  e: MouseEvent,
+  menuId: string,
+  disabled: boolean,
+): void => {
   const chainToClickedItem = [...getState().nav.idsToCurrentMenuItems, menuId]
   const nextMenu = getMenuItemByIdsChain(chainToClickedItem)
   const isNestedMenuAvailable = !!nextMenu.length

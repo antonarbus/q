@@ -11,8 +11,9 @@ export const selectItemsShape = createSelector(
       resultEqualityCheck: (prevItems: Item[], currentItems: Item[]) => {
         const addedOrDeletedItem = prevItems.length !== currentItems.length
         if (addedOrDeletedItem) return false
-        const itemsIdsDoNotMatch = prevItems
-          .some((item, index) => item.id !== currentItems[index]?.id)
+        const itemsIdsDoNotMatch = prevItems.some(
+          (item, index) => item.id !== currentItems[index]?.id,
+        )
         if (itemsIdsDoNotMatch) return false
         return true
       },

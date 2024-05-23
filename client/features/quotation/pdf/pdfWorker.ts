@@ -1,10 +1,12 @@
 import { jsPDF } from 'jspdf'
 
-self.onmessage = async function (event: MessageEvent<{
-  imageData: string
-  width: number
-  height: number
-}>) {
+self.onmessage = async function (
+  event: MessageEvent<{
+    imageData: string
+    width: number
+    height: number
+  }>,
+) {
   const { imageData, width, height } = event.data
   // eslint-disable-next-line new-cap
   const pdf = new jsPDF({

@@ -35,9 +35,9 @@ export const InfoItemModal = (): React.ReactNode => {
       headerIcon={<BsInfo />}
       onCloseSlideModalOutAndNavigateUp={true}
     >
-      <NameField nameSignal={nameSignal}/>
-      <CategoryField categorySignal={categorySignal}/>
-      <DescriptionField descSignal={descSignal}/>
+      <NameField nameSignal={nameSignal} />
+      <CategoryField categorySignal={categorySignal} />
+      <DescriptionField descSignal={descSignal} />
       <InfoField infoSignal={infoSignal} />
     </FormModal>
   )

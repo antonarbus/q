@@ -1,7 +1,11 @@
 import { getState } from '@lib_instances/store'
 import { type ResizableProps } from 're-resizable'
 import type { ReactNode } from 'react'
-import { type OnItemResize, type OnItemResizeStop, type OnItemResizeStart } from '@shared/types/resizablePaper'
+import {
+  type OnItemResize,
+  type OnItemResizeStop,
+  type OnItemResizeStart,
+} from '@shared/types/resizablePaper'
 import { useIsItemSortDisabled } from '../hooks/useIsItemSortDisabled'
 import { useItem } from '../providers/ItemProvider'
 import { ItemSortAndAnimate } from './item_layout'
@@ -52,9 +56,7 @@ export const ItemComp = ({
       rightItemActionButtons={rightItemActionButtons}
       className={className}
     >
-      <PasteItemTextOverlay >
-        {children}
-      </PasteItemTextOverlay>
+      <PasteItemTextOverlay>{children}</PasteItemTextOverlay>
     </ItemSortAndAnimate>
   )
 }

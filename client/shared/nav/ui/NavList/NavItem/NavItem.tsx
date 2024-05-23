@@ -39,19 +39,21 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
    * - if icon is not provided in navStructure we may generate it dynamically
    * - do it only for such width when only icons are show
    * - for that reason we track window's width with 'useWindowSize' hook
-  */
+   */
   const windowWidth = useWindowSize().width
   const widthWhenIconsAreShown = getState().nav.mediaQueryWidth.icon
   const shouldDisplayIcon = windowWidth < widthWhenIconsAreShown
 
   // needs to open only menu under clicked navItem, otherwise multiple menus are opened under all navItems
-  const shouldOpenThisMenu = useSelectorTyped(state => state.nav.idsToCurrentMenuItems.at(1) === id)
+  const shouldOpenThisMenu = useSelectorTyped(
+    (state) => state.nav.idsToCurrentMenuItems.at(1) === id,
+  )
 
-  const navItem = useSelectorTyped(state => {
+  const navItem = useSelectorTyped((state) => {
     const topNavLevel = state.nav.navStructure[0]
     if (topNavLevel === undefined) return undefined
     if (topNavLevel.menuItems === undefined) return undefined
-    return topNavLevel.menuItems.find(menuItem => menuItem.id === id)
+    return topNavLevel.menuItems.find((menuItem) => menuItem.id === id)
   })
 
   const isNestedMenu = !!navItem?.menuItems
@@ -65,7 +67,10 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
   const disabled = Boolean(navItem?.disabled)
   const isActive = navItem?.isActive
 
-  const fixedLink = (location.pathname + '/' + link).replace('.', '').replace('//', '/').replace('//', '/')
+  const fixedLink = (location.pathname + '/' + link)
+    .replace('.', '')
+    .replace('//', '/')
+    .replace('//', '/')
   const to = link?.includes('.') ? fixedLink : link
 
   return (
@@ -145,12 +150,18 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
         // }}
       >
         {icon && isLoading && <SpinnerIcon />}
-        {icon && isSuccess && <SuccessIcon /> }
-        {icon && isError && <ErrorIcon /> }
-        {icon && !isLoading && !isSuccess && !isError && <Icon icon={icon} disabled={disabled} />}
-        {!icon && shouldDisplayIcon && <Icon icon={name?.[0]} disabled={disabled} />}
+        {icon && isSuccess && <SuccessIcon />}
+        {icon && isError && <ErrorIcon />}
+        {icon && !isLoading && !isSuccess && !isError && (
+          <Icon icon={icon} disabled={disabled} />
+        )}
+        {!icon && shouldDisplayIcon && (
+          <Icon icon={name?.[0]} disabled={disabled} />
+        )}
         {name && <span className='nav-item-name'>{name}</span>}
-        {isNestedMenu && !disabled && <TiArrowSortedDown className='arrow-for-nested-menu' />}
+        {isNestedMenu && !disabled && (
+          <TiArrowSortedDown className='arrow-for-nested-menu' />
+        )}
         {children}
       </Link>
       {shouldOpenThisMenu && <Menu />}

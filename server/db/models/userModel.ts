@@ -3,35 +3,38 @@ import { model, Schema } from 'mongoose'
 import { type User } from '@entities/user'
 
 // define schema for documents in collection
-const userSchema = new Schema<User>({
-  email: {
-    type: String,
-    required: [true, 'email is required'],
-    unique: true,
-    trim: true,
-    match: /.+@.+\..+/,
+const userSchema = new Schema<User>(
+  {
+    email: {
+      type: String,
+      required: [true, 'email is required'],
+      unique: true,
+      trim: true,
+      match: /.+@.+\..+/,
+    },
+    password: {
+      type: String,
+      required: [true, 'password is required'],
+      trim: true,
+    },
+    roles: {
+      type: [String],
+      default: ['user'],
+    },
+    isActivated: {
+      type: Boolean,
+      default: false,
+    },
+    activationKey: String,
+    resetPasswordKey: String,
+    refreshJwtToken: String,
+    createdAt: Date,
+    updatedAt: Date,
   },
-  password: {
-    type: String,
-    required: [true, 'password is required'],
-    trim: true,
+  {
+    timestamps: true,
   },
-  roles: {
-    type: [String],
-    default: ['user'],
-  },
-  isActivated: {
-    type: Boolean,
-    default: false,
-  },
-  activationKey: String,
-  resetPasswordKey: String,
-  refreshJwtToken: String,
-  createdAt: Date,
-  updatedAt: Date,
-}, {
-  timestamps: true,
-})
+)
 
 // define model - a class with which we construct documents
 // each document is a user with props as in schema

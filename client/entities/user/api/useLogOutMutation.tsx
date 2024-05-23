@@ -4,7 +4,12 @@ import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import axios, { type AxiosError } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
 
-export const useLogOutMutation = (): UseMutationResult<ResBody, AxiosError<ResBody>, void, unknown> => {
+export const useLogOutMutation = (): UseMutationResult<
+  ResBody,
+  AxiosError<ResBody>,
+  void,
+  unknown
+> => {
   const query = useMutation({
     mutationKey: [queryKey.logOut],
     mutationFn: async () => {

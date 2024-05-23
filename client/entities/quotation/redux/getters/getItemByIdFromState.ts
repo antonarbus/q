@@ -5,8 +5,11 @@ type Props = {
   state: Quotation
 }
 
-export const getItemByIdFromState = ({ id, state }: Props): Item | undefined => {
-  const item = state.items.find(item => {
+export const getItemByIdFromState = ({
+  id,
+  state,
+}: Props): Item | undefined => {
+  const item = state.items.find((item) => {
     return item.id === id
   })
 

@@ -2,13 +2,18 @@ import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
 import type { MouseEvent } from 'react'
 import { MdCopyAll } from 'react-icons/md'
 import { copySlice } from '@entities/copy'
-import { isFroalaSignal, itemKey, saveItemHeightByIndex, useItem } from '@entities/quotation'
+import {
+  isFroalaSignal,
+  itemKey,
+  saveItemHeightByIndex,
+  useItem,
+} from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { cleanHtml } from '@shared/utils/itemsUtils'
 
 export const CopyItemIcon = (): JSX.Element => {
   const { itemIndex } = useItem()
-  const isCopyable = useSelectorTyped(state => state.copy.isCopyable)
+  const isCopyable = useSelectorTyped((state) => state.copy.isCopyable)
   const disabled = !isCopyable
 
   return (

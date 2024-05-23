@@ -1,6 +1,10 @@
 import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
 import { useUpdateEffect } from 'react-use'
-import { getTotalPriceAbove, itemKey, quotationSlice } from '@entities/quotation'
+import {
+  getTotalPriceAbove,
+  itemKey,
+  quotationSlice,
+} from '@entities/quotation'
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
 import { type FroalaEditorRef } from '@shared/types/froala'
 import { getStringWithNewFormattedNumber } from '@shared/utils'
@@ -14,8 +18,11 @@ export const useUpdateTotalPriceIfPricesAboveWereChanged = ({
   itemIndex,
   editorRef,
 }: Props): void => {
-  const price = useSelectorTyped(state => {
-    const price = getTotalPriceAbove({ itemIndex, items: state.quotation.items })
+  const price = useSelectorTyped((state) => {
+    const price = getTotalPriceAbove({
+      itemIndex,
+      items: state.quotation.items,
+    })
     return price
   })
 
@@ -31,7 +38,13 @@ export const useUpdateTotalPriceIfPricesAboveWereChanged = ({
       newNumber: price,
     })
 
-    dispatch(quotationSlice.actions.updatePriceReducer({ itemIndex, html: updatedHtml, value: price }))
+    dispatch(
+      quotationSlice.actions.updatePriceReducer({
+        itemIndex,
+        html: updatedHtml,
+        value: price,
+      }),
+    )
 
     void updateNumberAtHtmlIncrementally({
       oldNumber: priceItem.price.value,

@@ -38,8 +38,9 @@ export const LoadingDots = ({
             margin: `0 ${margin ?? '1rem'}`,
             background: background ?? '#fff',
             borderRadius: '50%',
-            animation: `${duration ?? '0.8s'
-              } ${bounceLoading} infinite alternate`,
+            animation: `${
+              duration ?? '0.8s'
+            } ${bounceLoading} infinite alternate`,
             '&:nth-of-type(2n + 0)': { animationDelay: '0.3s' },
             '&:nth-of-type(3n + 0)': { animationDelay: '0.6s' },
           }}

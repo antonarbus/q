@@ -12,8 +12,8 @@ export const RotatingLoaderIcon = ({ style }: Props): JSX.Element => {
       css={css`
         animation: rotate 1.5s linear infinite;
         @keyframes rotate {
-          to { 
-            transform: rotate(360deg); 
+          to {
+            transform: rotate(360deg);
           }
         }
       `}

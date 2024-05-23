@@ -15,7 +15,12 @@ export const EditBookmarkModal = (): JSX.Element => {
   const nameSignal = useSignal(item?.name ?? '')
   const categorySignal = useSignal(item?.category ?? '')
   const descSignal = useSignal(item?.desc ?? '')
-  const { onSubmit, isPending, isSuccess, isError } = useEditBookmark({ modalRef, nameSignal, categorySignal, descSignal })
+  const { onSubmit, isPending, isSuccess, isError } = useEditBookmark({
+    modalRef,
+    nameSignal,
+    categorySignal,
+    descSignal,
+  })
   const isDisabled = nameSignal.value === '' || categorySignal.value === ''
 
   return (
@@ -32,8 +37,8 @@ export const EditBookmarkModal = (): JSX.Element => {
       onCloseSlideModalOutAndNavigateUp={true}
       onSubmit={onSubmit}
     >
-      <NameField nameSignal={nameSignal}/>
-      <CategoryField categorySignal={categorySignal}/>
+      <NameField nameSignal={nameSignal} />
+      <CategoryField categorySignal={categorySignal} />
       <DescriptionField descSignal={descSignal} />
       <BookmarkField />
     </FormModal>

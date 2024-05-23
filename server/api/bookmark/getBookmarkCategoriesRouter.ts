@@ -12,7 +12,11 @@ export type ResBody = {
   categories?: Array<Item['category']>
 }
 
-type RouterHandler = (req: Req, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
+type RouterHandler = (
+  req: Req,
+  res: ResWithBody<ResBody>,
+  next: Next,
+) => Promise<ResWithBody<ResBody> | undefined>
 
 export const getBookmarkCategoriesRouter = Router()
 
@@ -20,9 +24,7 @@ const getBookmarkCategories: RouterHandler = async (req, res, next) => {
   try {
     const email = getEmailFromRefreshTokenOrThrowUnauthorized(req)
 
-    const categories = await BookmarkModel
-      .find({ email })
-      .distinct('category')
+    const categories = await BookmarkModel.find({ email }).distinct('category')
 
     if (categories) {
       return res

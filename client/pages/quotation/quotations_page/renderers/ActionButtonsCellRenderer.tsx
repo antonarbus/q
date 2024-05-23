@@ -6,7 +6,9 @@ import { OpenEditQuotationModalButton } from '@features/open_close/open_quotatio
 import { DeleteQuotationButton } from '@features/quotation/delete_quotation'
 import { type Quotation } from '@entities/quotation'
 
-export const ActionButtonsCellRenderer = (params: ICellRendererParams<Partial<Quotation>>): ReactNode => {
+export const ActionButtonsCellRenderer = (
+  params: ICellRendererParams<Partial<Quotation>>,
+): ReactNode => {
   if (params.data?.id === undefined) return null
 
   return (

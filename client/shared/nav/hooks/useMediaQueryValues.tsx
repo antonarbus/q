@@ -12,15 +12,24 @@ type Props = {
 
 export const useMediaQueryValues = ({ navRef, logoRef }: Props): void => {
   const isFirstMount = useFirstMountState()
-  const navStructure = useSelectorTyped(state => state.nav.navStructure)
-  const mediaEnabled = useSelectorTyped(state => state.nav.mediaEnabled)
+  const navStructure = useSelectorTyped((state) => state.nav.navStructure)
+  const mediaEnabled = useSelectorTyped((state) => state.nav.mediaEnabled)
 
   useLayoutEffect(() => {
     // initial calculation of media query values
     if (!navRef.current) return
     if (!logoRef.current) return
-    const { logoExtension, logoPart, icon, name, burger } = calcNavMediaQueryParams(navRef.current, logoRef.current)
-    dispatch(navSlice.actions.setNavMediaQueryWidths({ logoExtension, logoPart, icon, name, burger }))
+    const { logoExtension, logoPart, icon, name, burger } =
+      calcNavMediaQueryParams(navRef.current, logoRef.current)
+    dispatch(
+      navSlice.actions.setNavMediaQueryWidths({
+        logoExtension,
+        logoPart,
+        icon,
+        name,
+        burger,
+      }),
+    )
   }, [])
 
   useLayoutEffect(() => {
@@ -35,8 +44,17 @@ export const useMediaQueryValues = ({ navRef, logoRef }: Props): void => {
     if (mediaEnabled) return
     if (!navRef.current) return
     if (!logoRef.current) return
-    const { logoExtension, logoPart, icon, name, burger } = calcNavMediaQueryParams(navRef.current, logoRef.current)
-    dispatch(navSlice.actions.setNavMediaQueryWidths({ logoExtension, logoPart, icon, name, burger }))
+    const { logoExtension, logoPart, icon, name, burger } =
+      calcNavMediaQueryParams(navRef.current, logoRef.current)
+    dispatch(
+      navSlice.actions.setNavMediaQueryWidths({
+        logoExtension,
+        logoPart,
+        icon,
+        name,
+        burger,
+      }),
+    )
     dispatch(navSlice.actions.enableMedia())
   }, [mediaEnabled])
 }

@@ -3,7 +3,7 @@ import { type BoqRowKey } from '../consts/boqRowKey'
 import { type itemKey } from '../consts/itemKey'
 
 type ItemCommon = {
-  id: 'new' | Record<never, never> & string
+  id: 'new' | (Record<never, never> & string)
   email: string
   name: string
   category: string

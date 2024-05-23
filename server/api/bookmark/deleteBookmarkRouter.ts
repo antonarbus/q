@@ -16,7 +16,11 @@ export type ResBody = {
   message: ErrorMessageCommon | 'did not find' | 'no item in bucket' | 'deleted'
 }
 
-type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
+type RouterHandler = (
+  req: ReqWithBody<ReqBody>,
+  res: ResWithBody<ResBody>,
+  next: Next,
+) => Promise<ResWithBody<ResBody> | undefined>
 
 export const deleteBookmarkRouter = Router()
 
@@ -44,18 +48,12 @@ const deleteBookmark: RouterHandler = async (req, res, next) => {
         .json({ message: 'no item in bucket' })
     }
 
-    await Promise.all(files.map(async file => await file.delete()))
+    await Promise.all(files.map(async (file) => await file.delete()))
 
-    return res
-      .status(httpStatus.success_200)
-      .json({ message: 'deleted' })
+    return res.status(httpStatus.success_200).json({ message: 'deleted' })
   } catch (error) {
     next(error)
   }
 }
 
-deleteBookmarkRouter.delete(
-  '/',
-  verifyAccessTokenMiddleware,
-  deleteBookmark,
-)
+deleteBookmarkRouter.delete('/', verifyAccessTokenMiddleware, deleteBookmark)

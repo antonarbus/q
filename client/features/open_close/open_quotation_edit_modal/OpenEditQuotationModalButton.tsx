@@ -11,7 +11,14 @@ import { notify } from '@shared/ui/top_msg'
 
 export const OpenEditQuotationModalButton = ({ id }: ReqBody): JSX.Element => {
   const navigate = useNavigate()
-  const { mutate: loadQuotation, isPending, isSuccess, isError, error, data } = useGetQuotationMutation()
+  const {
+    mutate: loadQuotation,
+    isPending,
+    isSuccess,
+    isError,
+    error,
+    data,
+  } = useGetQuotationMutation()
 
   useUpdateEffect(() => {
     if (isSuccess) {
@@ -26,7 +33,11 @@ export const OpenEditQuotationModalButton = ({ id }: ReqBody): JSX.Element => {
 
   useUpdateEffect(() => {
     if (isError) {
-      notify({ msg: error.response?.data.message, type: 'error', theme: 'light' })
+      notify({
+        msg: error.response?.data.message,
+        type: 'error',
+        theme: 'light',
+      })
     }
   }, [isError])
 

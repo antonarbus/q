@@ -13,7 +13,11 @@ export type ResBody = {
   size?: number
 }
 
-type RouterHandler = (req: Req, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
+type RouterHandler = (
+  req: Req,
+  res: ResWithBody<ResBody>,
+  next: Next,
+) => Promise<ResWithBody<ResBody> | undefined>
 
 export const uploadRouter = express.Router()
 
@@ -24,9 +28,7 @@ const upload: RouterHandler = async (req, res, next) => {
     const email = getEmailFromRefreshTokenOrThrowUnauthorized(req)
 
     if (file === undefined) {
-      return res
-        .status(httpStatus.badRequest_400)
-        .json({ message: 'no file' })
+      return res.status(httpStatus.badRequest_400).json({ message: 'no file' })
     }
 
     const { name, link, size } = await uploadFileIntoMemory({ file, email })

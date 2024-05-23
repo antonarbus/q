@@ -1,7 +1,13 @@
-import { type AutocompleteRenderInputParams, InputAdornment, TextField } from '@mui/material'
+import {
+  type AutocompleteRenderInputParams,
+  InputAdornment,
+  TextField,
+} from '@mui/material'
 import { GoSearch } from 'react-icons/go'
 
-export const renderInput = (params: AutocompleteRenderInputParams): JSX.Element => {
+export const renderInput = (
+  params: AutocompleteRenderInputParams,
+): JSX.Element => {
   return (
     <TextField
       {...params}
@@ -12,7 +18,7 @@ export const renderInput = (params: AutocompleteRenderInputParams): JSX.Element 
         ...params.InputProps,
         startAdornment: (
           <InputAdornment position='start'>
-            <GoSearch/>
+            <GoSearch />
           </InputAdornment>
         ),
       }}

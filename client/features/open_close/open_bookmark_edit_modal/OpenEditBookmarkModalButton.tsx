@@ -12,7 +12,14 @@ import { notify } from '@shared/ui/top_msg'
 
 export const OpenEditBookmarkModalButton = ({ id }: ReqBody): JSX.Element => {
   const navigate = useNavigate()
-  const { mutate: loadItem, isPending, isSuccess, isError, error, data } = useGetBookmarkMutation()
+  const {
+    mutate: loadItem,
+    isPending,
+    isSuccess,
+    isError,
+    error,
+    data,
+  } = useGetBookmarkMutation()
 
   useUpdateEffect(() => {
     if (isSuccess) {
@@ -21,19 +28,21 @@ export const OpenEditBookmarkModalButton = ({ id }: ReqBody): JSX.Element => {
       if (!item) return
 
       // add item into fake quotation with just one item (it will be good to have a separate bookmark slice, but it will require a lot of changes in the items render logic, so I decided to use quotation slice for now)
-      dispatch(quotationSlice.actions.loadQuotationReducer({
-        quotation: {
-          type: itemKey.quotation,
-          id: 'edit-bookmark',
-          name: 'edit-bookmark',
-          category: 'edit-bookmark',
-          desc: 'edit-bookmark',
-          info: 'edit-bookmark',
-          email: 'edit-bookmark',
-          preview: 'edit-bookmark',
-          items: [item],
-        },
-      }))
+      dispatch(
+        quotationSlice.actions.loadQuotationReducer({
+          quotation: {
+            type: itemKey.quotation,
+            id: 'edit-bookmark',
+            name: 'edit-bookmark',
+            category: 'edit-bookmark',
+            desc: 'edit-bookmark',
+            info: 'edit-bookmark',
+            email: 'edit-bookmark',
+            preview: 'edit-bookmark',
+            items: [item],
+          },
+        }),
+      )
 
       // id url param doesn't play any role here, it's just for visual representation in the url
       navigate(`./${route.editBookmark}/${id}`)
@@ -42,7 +51,11 @@ export const OpenEditBookmarkModalButton = ({ id }: ReqBody): JSX.Element => {
 
   useUpdateEffect(() => {
     if (isError) {
-      notify({ msg: error.response?.data.message, type: 'error', theme: 'light' })
+      notify({
+        msg: error.response?.data.message,
+        type: 'error',
+        theme: 'light',
+      })
     }
   }, [isError])
 

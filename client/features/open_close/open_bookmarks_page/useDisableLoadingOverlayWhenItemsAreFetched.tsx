@@ -5,7 +5,9 @@ type Props = {
   isFetched: boolean
 }
 
-export const useDisableLoadingOverlayWhenItemsAreFetched = ({ isFetched }: Props): void => {
+export const useDisableLoadingOverlayWhenItemsAreFetched = ({
+  isFetched,
+}: Props): void => {
   useEffect(() => {
     if (isFetched) {
       loadingDotsOverlayTextSignal.value = null

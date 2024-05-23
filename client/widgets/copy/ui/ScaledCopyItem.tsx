@@ -6,7 +6,11 @@ type Props = {
   html: string
 }
 
-export const ScaledCopyItem = ({ width, scaleFactor, html }: Props): JSX.Element => {
+export const ScaledCopyItem = ({
+  width,
+  scaleFactor,
+  html,
+}: Props): JSX.Element => {
   const divRef = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {

@@ -8,7 +8,11 @@ type Props = {
   boqRowCellKey: BoqRowCellKey
 }
 
-export const getBoqCellHtmlFromStore = ({ itemIndex, rowIndex, boqRowCellKey }: Props): string => {
+export const getBoqCellHtmlFromStore = ({
+  itemIndex,
+  rowIndex,
+  boqRowCellKey,
+}: Props): string => {
   const item = getState().quotation.items[itemIndex]
   if (!item) return ''
 

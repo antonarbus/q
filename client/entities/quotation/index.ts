@@ -23,7 +23,10 @@ export { itemsShapeEqualityFn } from './redux/selectors/itemsShapeEqualityFn'
 export { selectIsLastItem } from './redux/selectors/selectIsLastItem'
 export { selectIsLastBoqRow } from './redux/selectors/selectIsLastBoqRow'
 export { selectColumnWidth } from './redux/selectors/selectColumnWidth'
-export { selectBoqRows, boqRowsShapeEqualityFn } from './redux/selectors/selectBoqRows'
+export {
+  selectBoqRows,
+  boqRowsShapeEqualityFn,
+} from './redux/selectors/selectBoqRows'
 export { selectBoqCell } from './redux/selectors/selectBoqCell'
 export { selectBoqCellPin } from './redux/selectors/selectBoqCellPin'
 
@@ -37,7 +40,10 @@ export { updateSubTotalPriceWithValue } from './utils/updateSubTotalPriceWithVal
 export { formatBoqRowCellNumber } from './utils/formatBoqRowCellNumber'
 export { getNumberOfBoqItemsAbove } from './utils/getNumberOfBoqItemsAbove'
 export { getTotalPriceAbove } from './utils/getTotalPriceAbove'
-export { fixItemImagesHeight, unfixItemImagesHeight } from './utils/itemImagesHeight'
+export {
+  fixItemImagesHeight,
+  unfixItemImagesHeight,
+} from './utils/itemImagesHeight'
 
 // store item getters
 export { getItemFromStore } from './redux/getters/getItemFromStore'
@@ -80,7 +86,11 @@ export { useIsBoqRowSortDisabled } from './hooks/useIsBoqRowSortDisabled'
 export { useStylesForResizableCell } from './hooks/useStylesForResizableCell'
 
 // providers
-export { BoqItemProvider, useBoqItem, type BoqItemContextType } from './providers/BoqItemProvider'
+export {
+  BoqItemProvider,
+  useBoqItem,
+  type BoqItemContextType,
+} from './providers/BoqItemProvider'
 export { ItemProvider, useItem } from './providers/ItemProvider'
 export { RowProvider, useRow } from './providers/RowProvider'
 export { FroalaProvider, useFroala } from './providers/FroalaProvider'

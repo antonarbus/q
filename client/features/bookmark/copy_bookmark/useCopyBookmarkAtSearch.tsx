@@ -12,7 +12,15 @@ type Res = {
 }
 
 export const useCopyBookmarkAtSearch = (): Res => {
-  const { mutate: loadBookmark, isPending: isPendingBookmark, isSuccess, isError, error, data: bookmarkData, variables } = useGetBookmarkMutation()
+  const {
+    mutate: loadBookmark,
+    isPending: isPendingBookmark,
+    isSuccess,
+    isError,
+    error,
+    data: bookmarkData,
+    variables,
+  } = useGetBookmarkMutation()
 
   useUpdateEffect(() => {
     if (isSuccess) {
@@ -30,9 +38,17 @@ export const useCopyBookmarkAtSearch = (): Res => {
 
   useUpdateEffect(() => {
     if (isError) {
-      notify({ msg: error.response?.data.message, type: 'error', theme: 'light' })
+      notify({
+        msg: error.response?.data.message,
+        type: 'error',
+        theme: 'light',
+      })
     }
   }, [isError])
 
-  return { loadBookmark, isPendingBookmark, pendingBookmarkId: variables?.id ?? 'missing id' }
+  return {
+    loadBookmark,
+    isPendingBookmark,
+    pendingBookmarkId: variables?.id ?? 'missing id',
+  }
 }

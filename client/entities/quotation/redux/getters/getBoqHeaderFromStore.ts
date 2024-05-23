@@ -7,7 +7,10 @@ type Props = {
   boqHeaderKey: BoqHeaderKey
 }
 
-export const getBoqHeaderFromStore = ({ itemIndex, boqHeaderKey }: Props): BoqHeaderCell | undefined => {
+export const getBoqHeaderFromStore = ({
+  itemIndex,
+  boqHeaderKey,
+}: Props): BoqHeaderCell | undefined => {
   const item = getState().quotation.items[itemIndex]
 
   if (!item) return

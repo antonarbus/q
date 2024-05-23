@@ -4,7 +4,13 @@ import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 import type { OnItemResizeStop } from '@shared/types/resizablePaper'
 
-export const onPriceItemResizeStop: OnItemResizeStop = ({ itemIndex, e, direction, elementRef, delta }) => {
+export const onPriceItemResizeStop: OnItemResizeStop = ({
+  itemIndex,
+  e,
+  direction,
+  elementRef,
+  delta,
+}) => {
   const width = parseInt(elementRef.style.width)
   const prevItemWidth = getState().quotation.items[itemIndex]?.width
 

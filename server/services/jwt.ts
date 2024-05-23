@@ -9,7 +9,9 @@ export type JwtPayloadExtended = {
   roles: string[]
 }
 
-export const createAccessToken = (payload: JwtPayloadExtended): string | undefined => {
+export const createAccessToken = (
+  payload: JwtPayloadExtended,
+): string | undefined => {
   const salt = process.env.JWT_ACCESS_SECRET
 
   if (!salt) return undefined
@@ -21,7 +23,9 @@ export const createAccessToken = (payload: JwtPayloadExtended): string | undefin
   return token
 }
 
-export const createRefreshToken = (payload: JwtPayloadExtended): string | undefined => {
+export const createRefreshToken = (
+  payload: JwtPayloadExtended,
+): string | undefined => {
   const salt = process.env.JWT_REFRESH_SECRET
 
   if (!salt) return undefined
@@ -33,7 +37,9 @@ export const createRefreshToken = (payload: JwtPayloadExtended): string | undefi
   return token
 }
 
-export const verifyAccessToken = (accessJwtToken: string): JwtPayload | undefined => {
+export const verifyAccessToken = (
+  accessJwtToken: string,
+): JwtPayload | undefined => {
   try {
     const salt = process.env.JWT_ACCESS_SECRET
     if (!salt) return undefined
@@ -45,7 +51,9 @@ export const verifyAccessToken = (accessJwtToken: string): JwtPayload | undefine
   }
 }
 
-export const verifyRefreshToken = (refreshJwtToken: string): JwtPayload | undefined => {
+export const verifyRefreshToken = (
+  refreshJwtToken: string,
+): JwtPayload | undefined => {
   try {
     const salt = process.env.JWT_REFRESH_SECRET
     if (!salt) return undefined

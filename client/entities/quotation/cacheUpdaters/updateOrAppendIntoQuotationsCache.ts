@@ -8,23 +8,30 @@ type Props = {
   quotation: Quotation
 }
 
-export const updateOrAppendIntoQuotationsCache = ({ quotation }: Props): void => {
-  reactQuery.setQueriesData<ResBodyQuotations>({ queryKey: [queryKey.getQuotations] }, (cacheData) => {
-    const updatedCacheData = produce(cacheData, (draft) => {
-      if (draft?.quotations === undefined) return
+export const updateOrAppendIntoQuotationsCache = ({
+  quotation,
+}: Props): void => {
+  reactQuery.setQueriesData<ResBodyQuotations>(
+    { queryKey: [queryKey.getQuotations] },
+    (cacheData) => {
+      const updatedCacheData = produce(cacheData, (draft) => {
+        if (draft?.quotations === undefined) return
 
-      const quotations = draft.quotations
-      const index = quotations.findIndex(quotationInCache => quotationInCache.id === quotation.id)
-      const foundInCache = index !== -1
+        const quotations = draft.quotations
+        const index = quotations.findIndex(
+          (quotationInCache) => quotationInCache.id === quotation.id,
+        )
+        const foundInCache = index !== -1
 
-      if (!foundInCache) {
-        quotations.unshift(quotation)
-      }
+        if (!foundInCache) {
+          quotations.unshift(quotation)
+        }
 
-      if (foundInCache) {
-        quotations.splice(index, 1, quotation)
-      }
-    })
-    return updatedCacheData
-  })
+        if (foundInCache) {
+          quotations.splice(index, 1, quotation)
+        }
+      })
+      return updatedCacheData
+    },
+  )
 }

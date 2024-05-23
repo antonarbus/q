@@ -13,7 +13,11 @@ export const LoginModal = (): JSX.Element => {
   const emailSignal = useSignal('')
   const passwordSignal = useSignal('')
   const isEmailOkSignal = useSignal(false)
-  const { isPending, isSuccess, isError, onSubmit } = useLogIn({ emailSignal, passwordSignal, modalRef })
+  const { isPending, isSuccess, isError, onSubmit } = useLogIn({
+    emailSignal,
+    passwordSignal,
+    modalRef,
+  })
 
   return (
     <FormModal
@@ -23,7 +27,9 @@ export const LoginModal = (): JSX.Element => {
       headerText='Log in'
       headerIcon={<LoginRounded />}
       buttonText='LOG IN'
-      isButtonDisabled={!isEmailOkSignal.value || passwordSignal.value === '' || isPending}
+      isButtonDisabled={
+        !isEmailOkSignal.value || passwordSignal.value === '' || isPending
+      }
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
       isButtonError={isError}
@@ -35,9 +41,7 @@ export const LoginModal = (): JSX.Element => {
         emailSignal={emailSignal}
         isEmailOkSignal={isEmailOkSignal}
       />
-      <PasswordField
-        passwordSignal={passwordSignal}
-      />
+      <PasswordField passwordSignal={passwordSignal} />
       <Box
         sx={{
           display: 'flex',

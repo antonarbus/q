@@ -11,10 +11,20 @@ type Props = {
   boqHeaderKey: BoqHeaderKey
 }
 
-export const updateSubtotalTextCell = ({ editorRef, itemIndex, boqHeaderKey }: Props): void => {
-  const { didUpdate } = updateBoqHeaderCellAtStore({ editorRef, itemIndex, boqHeaderKey })
+export const updateSubtotalTextCell = ({
+  editorRef,
+  itemIndex,
+  boqHeaderKey,
+}: Props): void => {
+  const { didUpdate } = updateBoqHeaderCellAtStore({
+    editorRef,
+    itemIndex,
+    boqHeaderKey,
+  })
 
   if (didUpdate) {
-    dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
+    dispatch(
+      navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }),
+    )
   }
 }

@@ -4,13 +4,13 @@ import { Icon } from './Icon'
 export const SuccessIcon = (): JSX.Element => {
   return (
     <Icon
-      icon={(
+      icon={
         <GrStatusGood
           style={{
             stroke: '#52cb4b',
           }}
         />
-      )}
+      }
     />
   )
 }

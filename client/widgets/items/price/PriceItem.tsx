@@ -16,20 +16,20 @@ export const TotalPriceItem = (): JSX.Element => {
     <ItemComp
       className={cls.priceItem}
       onItemResizeStop={onPriceItemResizeStop}
-      leftItemActionButtons={(
+      leftItemActionButtons={
         <ItemActionButtonsLayout>
           <DragItemIcon />
           <CopyItemIcon />
           <CutItemIcon />
         </ItemActionButtonsLayout>
-      )}
-      rightItemActionButtons={(
+      }
+      rightItemActionButtons={
         <ItemActionButtonsLayout>
           <BookmarkItemIcon />
           <OpenInfoItemModalIcon />
           <DeleteItemIcon />
         </ItemActionButtonsLayout>
-      )}
+      }
     >
       <PriceHeader />
       <PriceMain />

@@ -24,8 +24,15 @@ const onBoqRowDragEnd = ({ oldIndex, newIndex, itemIndex }: Props): void => {
     const boqRows = getBoqRowsFromStore({ itemIndex })
     if (boqRows === undefined) return
     const reOrderedBoqRows = arrayMoveImmutable(boqRows, oldIndex, newIndex)
-    dispatch(quotationSlice.actions.reOrderBoqRowsReducer({ reOrderedBoqRows, itemIndex }))
-    dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
+    dispatch(
+      quotationSlice.actions.reOrderBoqRowsReducer({
+        reOrderedBoqRows,
+        itemIndex,
+      }),
+    )
+    dispatch(
+      navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }),
+    )
   }
 }
 

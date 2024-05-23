@@ -14,17 +14,22 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  message: ErrorMessageCommon
-  | 'not saved'
-  | 'saved'
-  | 'updated'
-  | 'id is not provided'
-  | 'name is not provided'
-  | 'category is not provided'
+  message:
+    | ErrorMessageCommon
+    | 'not saved'
+    | 'saved'
+    | 'updated'
+    | 'id is not provided'
+    | 'name is not provided'
+    | 'category is not provided'
   quotation?: FlattenMaps<Quotation>
 }
 
-type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
+type RouterHandler = (
+  req: ReqWithBody<ReqBody>,
+  res: ResWithBody<ResBody>,
+  next: Next,
+) => Promise<ResWithBody<ResBody> | undefined>
 
 export const saveQuotationRouter = Router()
 
@@ -47,49 +52,48 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
 
     const isNew = existingQuotation === null
 
-    const quotationDataFromDb = await QuotationModel
-      .findOneAndUpdate(
-        {
-          id: quotation.id,
-          email,
-        },
-        {
-          id: quotation.id,
-          email,
-          name: quotation.name,
-          category: quotation.category,
-          desc: quotation.desc,
-          info: quotation.info,
-          items: 'find in bucket under same id',
-          updatedAt: Date.now(),
-          ...(isNew && { createdAt: Date.now() }),
-          ...(isNew && { openedAt: Date.now() }),
-        },
-        {
-          new: true,
-          upsert: true,
-        },
-      )
+    const quotationDataFromDb = await QuotationModel.findOneAndUpdate(
+      {
+        id: quotation.id,
+        email,
+      },
+      {
+        id: quotation.id,
+        email,
+        name: quotation.name,
+        category: quotation.category,
+        desc: quotation.desc,
+        info: quotation.info,
+        items: 'find in bucket under same id',
+        updatedAt: Date.now(),
+        ...(isNew && { createdAt: Date.now() }),
+        ...(isNew && { openedAt: Date.now() }),
+      },
+      {
+        new: true,
+        upsert: true,
+      },
+    )
       .select({ _id: 0, __v: 0 })
       .lean()
 
     if (!quotationDataFromDb) {
-      return res
-        .status(httpStatus.forbidden_403)
-        .json({ message: 'not saved' })
+      return res.status(httpStatus.forbidden_403).json({ message: 'not saved' })
     }
 
     const filePath = `${email}/${storageFolderName.quotations}/${quotation.id}.json`
     const file = bucket.file(filePath)
-    const contents = JSON.stringify({ ...quotationDataFromDb, items: quotation.items }, null, 2)
+    const contents = JSON.stringify(
+      { ...quotationDataFromDb, items: quotation.items },
+      null,
+      2,
+    )
     await file.save(contents)
 
-    return res
-      .status(httpStatus.success_200)
-      .json({
-        message: isNew ? 'saved' : 'updated',
-        quotation: { ...quotationDataFromDb, items: quotation.items },
-      })
+    return res.status(httpStatus.success_200).json({
+      message: isNew ? 'saved' : 'updated',
+      quotation: { ...quotationDataFromDb, items: quotation.items },
+    })
   } catch (error) {
     next(error)
   }

@@ -1,7 +1,19 @@
 import { useRef } from 'react'
 import { showHideBoqPricePins } from '@features/items/cell/pin'
-import { formatSubtotalPriceCell, updateSubtotalPriceCell, useUpdateSubtotalPrice, validateBoqRowPrices } from '@features/items/cell/update_cell'
-import { getBoqHeaderHtmlFromStore, useBoqItem, useItem, Froala, subTotalPriceCellStyle, type BoqHeaderKey } from '@entities/quotation'
+import {
+  formatSubtotalPriceCell,
+  updateSubtotalPriceCell,
+  useUpdateSubtotalPrice,
+  validateBoqRowPrices,
+} from '@features/items/cell/update_cell'
+import {
+  getBoqHeaderHtmlFromStore,
+  useBoqItem,
+  useItem,
+  Froala,
+  subTotalPriceCellStyle,
+  type BoqHeaderKey,
+} from '@entities/quotation'
 
 const boqHeaderKey: BoqHeaderKey = 'subTotalPrice'
 
@@ -18,14 +30,27 @@ export const SubTotalPrice = (): JSX.Element => {
       placeholder='Price...'
       htmlGetter={() => getBoqHeaderHtmlFromStore({ itemIndex, boqHeaderKey })}
       onClick={(e) => {
-        showHideBoqPricePins({ e: e.nativeEvent, itemIndex, hidePinsClickHandlerRef, isInitClickRef })
+        showHideBoqPricePins({
+          e: e.nativeEvent,
+          itemIndex,
+          hidePinsClickHandlerRef,
+          isInitClickRef,
+        })
       }}
       onContentChange={() => {
-        updateSubtotalPriceCell({ subTotalPriceEditorRef, boqRowEditorRefs, itemIndex })
+        updateSubtotalPriceCell({
+          subTotalPriceEditorRef,
+          boqRowEditorRefs,
+          itemIndex,
+        })
       }}
       onBlur={() => {
         formatSubtotalPriceCell({ itemIndex, subTotalPriceEditorRef })
-        validateBoqRowPrices({ boqRowEditorRefs, itemIndex, subTotalPriceEditorRef })
+        validateBoqRowPrices({
+          boqRowEditorRefs,
+          itemIndex,
+          subTotalPriceEditorRef,
+        })
       }}
       style={subTotalPriceCellStyle}
     />

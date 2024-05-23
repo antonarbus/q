@@ -14,10 +14,13 @@ export const movePasteTextForBoqRow = (e: MouseEvent): void => {
   const isPasteTextShown = getState().copy.isPasteTextShown
   const boqRowsElement = e.target.closest(`.${cls.boqRows}`)
 
-  const isBoqPasteItem = (getState().quotation.items
-    .filter(item => item.type === itemKey.boq) as ItemBoq[])
-    .flatMap(item => item.boq.rows)
-    .some(boqRow => boqRow.type === boqRowKey.paste)
+  const isBoqPasteItem = (
+    getState().quotation.items.filter(
+      (item) => item.type === itemKey.boq,
+    ) as ItemBoq[]
+  )
+    .flatMap((item) => item.boq.rows)
+    .some((boqRow) => boqRow.type === boqRowKey.paste)
 
   const removePasteIfNeeded = (): void => {
     if (isPasteTextShown) {
@@ -35,21 +38,27 @@ export const movePasteTextForBoqRow = (e: MouseEvent): void => {
   }
 
   const elementsUnderCursor = document.elementsFromPoint(e.x, e.y)
-  const isCursorOverActionsContainer = elementsUnderCursor.some(element => element.classList.contains(cls.actionsContainer))
+  const isCursorOverActionsContainer = elementsUnderCursor.some((element) =>
+    element.classList.contains(cls.actionsContainer),
+  )
 
   if (isCursorOverActionsContainer) {
     removePasteIfNeeded()
     return
   }
 
-  const isSearchElement = elementsUnderCursor.some(element => element.classList.contains(cls.search))
+  const isSearchElement = elementsUnderCursor.some((element) =>
+    element.classList.contains(cls.search),
+  )
 
   if (isSearchElement) {
     removePasteIfNeeded()
     return
   }
 
-  const isSearchAutocompleteElement = elementsUnderCursor.some(element => element.classList.contains(cls.searchAutocomplete))
+  const isSearchAutocompleteElement = elementsUnderCursor.some((element) =>
+    element.classList.contains(cls.searchAutocomplete),
+  )
 
   if (isSearchAutocompleteElement) {
     removePasteIfNeeded()
@@ -69,7 +78,11 @@ export const movePasteTextForBoqRow = (e: MouseEvent): void => {
     return
   }
 
-  const pastePlace = getPastePlace({ item: boqRowElement, e, distanceToEdge: 10 })
+  const pastePlace = getPastePlace({
+    item: boqRowElement,
+    e,
+    distanceToEdge: 10,
+  })
 
   if (isEqual(pastePlace, prevPlace) && isPasteTextShown) {
     return

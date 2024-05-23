@@ -2,7 +2,13 @@ import { dispatch, getState } from '@lib_instances/store'
 import { type ReactNode, type MouseEvent } from 'react'
 import { MdOutlineStarOutline } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
-import { getItemFromStore, itemKey, quotationSlice, saveItemHeightByIndex, useItem } from '@entities/quotation'
+import {
+  getItemFromStore,
+  itemKey,
+  quotationSlice,
+  saveItemHeightByIndex,
+  useItem,
+} from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
@@ -42,10 +48,12 @@ export const BookmarkItemIcon = (): ReactNode => {
         if (!item) return
         if (item.type === itemKey.paste) return
 
-        dispatch(quotationSlice.actions.updateItemPreviewByIdReducer({
-          id: item.id,
-          preview: cleanedHtml,
-        }))
+        dispatch(
+          quotationSlice.actions.updateItemPreviewByIdReducer({
+            id: item.id,
+            preview: cleanedHtml,
+          }),
+        )
 
         navigate(`./${route.bookmark}/${item.id}`)
       }}

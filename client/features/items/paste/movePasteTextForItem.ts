@@ -16,7 +16,9 @@ export const movePasteTextForItem = (e: MouseEvent): void => {
 
   const navElement = e.target.closest('nav')
   const isPasteTextShown = getState().copy.isPasteTextShown
-  const isPasteItem = getState().quotation.items.some(item => item.type === itemKey.paste)
+  const isPasteItem = getState().quotation.items.some(
+    (item) => item.type === itemKey.paste,
+  )
 
   const removePasteIfNeeded = (): void => {
     if (isPasteTextShown) {
@@ -34,21 +36,27 @@ export const movePasteTextForItem = (e: MouseEvent): void => {
   }
 
   const elementsUnderCursor = document.elementsFromPoint(e.x, e.y)
-  const isCursorOverActionsContainer = elementsUnderCursor.some(element => element.classList.contains(cls.actionsContainer))
+  const isCursorOverActionsContainer = elementsUnderCursor.some((element) =>
+    element.classList.contains(cls.actionsContainer),
+  )
 
   if (isCursorOverActionsContainer) {
     removePasteIfNeeded()
     return
   }
 
-  const isSearchElement = elementsUnderCursor.some(element => element.classList.contains(cls.search))
+  const isSearchElement = elementsUnderCursor.some((element) =>
+    element.classList.contains(cls.search),
+  )
 
   if (isSearchElement) {
     removePasteIfNeeded()
     return
   }
 
-  const isSearchAutocompleteElement = elementsUnderCursor.some(element => element.classList.contains(cls.searchAutocomplete))
+  const isSearchAutocompleteElement = elementsUnderCursor.some((element) =>
+    element.classList.contains(cls.searchAutocomplete),
+  )
 
   if (isSearchAutocompleteElement) {
     removePasteIfNeeded()
@@ -81,7 +89,7 @@ export const movePasteTextForItem = (e: MouseEvent): void => {
     return
   }
 
-  const item = (e.target).closest(`.${cls.item}`)
+  const item = e.target.closest(`.${cls.item}`)
 
   if (!item) {
     return

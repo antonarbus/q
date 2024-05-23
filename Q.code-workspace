@@ -2,36 +2,36 @@
   "folders": [
     {
       "name": "q (root)",
-      "path": "."
+      "path": ".",
     },
     {
       "name": "server ↗",
-      "path": "server"
+      "path": "server",
     },
     {
       "name": "app ↗",
-      "path": "client/app"
+      "path": "client/app",
     },
     {
       "name": "pages ↗",
-      "path": "client/pages"
+      "path": "client/pages",
     },
     {
       "name": "widgets ↗",
-      "path": "client/widgets"
+      "path": "client/widgets",
     },
     {
       "name": "features ↗",
-      "path": "client/features"
+      "path": "client/features",
     },
     {
       "name": "entities ↗",
-      "path": "client/entities"
+      "path": "client/entities",
     },
     {
       "name": "shared ↗",
-      "path": "client/shared"
+      "path": "client/shared",
     },
   ],
-  "settings": {}
+  "settings": {},
 }

@@ -8,7 +8,7 @@ type Props = {
 export const getItemByIdFromStore = ({ id }: Props): Item | undefined => {
   const quotation = getState().quotation
 
-  const item = quotation.items.find(item => {
+  const item = quotation.items.find((item) => {
     return item.id === id
   })
 
@@ -20,7 +20,9 @@ export const getItemByIdFromStore = ({ id }: Props): Item | undefined => {
     if (item?.type === 'boq') {
       for (let rowIndex = 0; rowIndex < item.boq.rows.length; rowIndex++) {
         if (item.boq.rows[rowIndex]?.id === id) {
-          const boqRow = (quotation.items[itemIndex] as ItemBoq).boq.rows[rowIndex]
+          const boqRow = (quotation.items[itemIndex] as ItemBoq).boq.rows[
+            rowIndex
+          ]
           return boqRow
         }
       }

@@ -3,7 +3,11 @@ import { type Signal } from '@preact/signals-react'
 import { type UseMutationResult } from '@tanstack/react-query'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { useGetBookmarkCategoriesQuery, useGetBookmarksQuery, useSaveBookmarkMutation } from '@entities/bookmark'
+import {
+  useGetBookmarkCategoriesQuery,
+  useGetBookmarksQuery,
+  useSaveBookmarkMutation,
+} from '@entities/bookmark'
 import { getItemByIdFromStore } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 import { notify } from '@shared/ui/top_msg'
@@ -23,21 +27,44 @@ type Res = {
   isError: UseMutationResult['isError']
 }
 
-export const useAddBookmark = ({ nameSignal, categorySignal, descSignal, modalRef }: Props): Res => {
+export const useAddBookmark = ({
+  nameSignal,
+  categorySignal,
+  descSignal,
+  modalRef,
+}: Props): Res => {
   const navigate = useNavigate()
   const { id } = useParams()
   const item = getItemByIdFromStore({ id: id ?? 'missing id' })
 
-  const { mutate: saveItem, data, isSuccess, isPending, isError, error, reset } = useSaveBookmarkMutation()
+  const {
+    mutate: saveItem,
+    data,
+    isSuccess,
+    isPending,
+    isError,
+    error,
+    reset,
+  } = useSaveBookmarkMutation()
   const { refetch: updateCategories } = useGetBookmarkCategoriesQuery()
   const { refetch: updateBookmarks } = useGetBookmarksQuery()
 
   useUpdateEffect(() => {
     if (isSuccess) {
       if (data.message === 'saved') {
-        notify({ msg: 'Saved', type: 'success', theme: 'dark', position: 'bottom-center' })
+        notify({
+          msg: 'Saved',
+          type: 'success',
+          theme: 'dark',
+          position: 'bottom-center',
+        })
       } else if (data.message === 'updated') {
-        notify({ msg: 'Updated', type: 'info', theme: 'dark', position: 'bottom-center' })
+        notify({
+          msg: 'Updated',
+          type: 'info',
+          theme: 'dark',
+          position: 'bottom-center',
+        })
       }
 
       void updateCategories()
@@ -56,7 +83,12 @@ export const useAddBookmark = ({ nameSignal, categorySignal, descSignal, modalRe
 
   useUpdateEffect(() => {
     if (isError) {
-      notify({ msg: error.response?.data.message, type: 'error', theme: 'dark', position: 'bottom-center' })
+      notify({
+        msg: error.response?.data.message,
+        type: 'error',
+        theme: 'dark',
+        position: 'bottom-center',
+      })
       reset()
     }
   }, [isError])

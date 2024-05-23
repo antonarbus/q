@@ -2,14 +2,23 @@ import { useSelectorTyped } from '@lib_instances/store'
 import { AnimatePresence } from 'framer-motion'
 import { type ReactNode } from 'react'
 import { onItemDrag } from '@features/items/drag'
-import { ItemProvider, itemsShapeEqualityFn, BoqItemProvider, itemKey, DraggableItemsContainer } from '@entities/quotation'
+import {
+  ItemProvider,
+  itemsShapeEqualityFn,
+  BoqItemProvider,
+  itemKey,
+  DraggableItemsContainer,
+} from '@entities/quotation'
 import { BoqItem } from './boq/BoqItem'
 import { PasteItem } from './paste/PasteItem'
 import { TotalPriceItem } from './price/PriceItem'
 import { TextItem } from './text/TextItem'
 
 export const Items = (): ReactNode => {
-  const items = useSelectorTyped(state => state.quotation.items, itemsShapeEqualityFn)
+  const items = useSelectorTyped(
+    (state) => state.quotation.items,
+    itemsShapeEqualityFn,
+  )
 
   if (items.length === 0) return null
 
@@ -57,6 +66,6 @@ export const Items = (): ReactNode => {
           return null
         })}
       </AnimatePresence>
-    </DraggableItemsContainer >
+    </DraggableItemsContainer>
   )
 }

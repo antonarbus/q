@@ -1,5 +1,9 @@
 import { dispatch } from '@lib_instances/store'
-import { boqRowCellKey, getBoqCellFromStore, quotationSlice } from '@entities/quotation'
+import {
+  boqRowCellKey,
+  getBoqCellFromStore,
+  quotationSlice,
+} from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 
@@ -9,7 +13,11 @@ type Props = {
 }
 
 export const pinBoqRowQtyCell = ({ itemIndex, rowIndex }: Props): void => {
-  const itemPrice = getBoqCellFromStore({ itemIndex, rowIndex, boqRowCellKey: boqRowCellKey.qty })
+  const itemPrice = getBoqCellFromStore({
+    itemIndex,
+    rowIndex,
+    boqRowCellKey: boqRowCellKey.qty,
+  })
   const isPinned = itemPrice?.pin.isPinned
 
   if (isPinned) return

@@ -29,10 +29,10 @@ export const InfoQuotationModal = (): React.ReactNode => {
       headerIcon={<BsInfo />}
       onCloseSlideModalOutAndNavigateUp={true}
     >
-      <NameField nameSignal={nameSignal}/>
-      <CategoryField categorySignal={categorySignal}/>
-      <DescriptionField descSignal={descSignal}/>
-      <InfoField infoSignal={infoSignal}/>
+      <NameField nameSignal={nameSignal} />
+      <CategoryField categorySignal={categorySignal} />
+      <DescriptionField descSignal={descSignal} />
+      <InfoField infoSignal={infoSignal} />
     </FormModal>
   )
 }

@@ -27,7 +27,13 @@ export type FroalaProps = {
   onInitialized?: () => void
   className?: string
   wrapperStyles?: React.CSSProperties
-  beforeUpload?: ({ editor, files }: { editor: FroalaEditor, files: File[] }) => boolean
+  beforeUpload?: ({
+    editor,
+    files,
+  }: {
+    editor: FroalaEditor
+    files: File[]
+  }) => boolean
 }
 
 export const Froala = ({
@@ -50,7 +56,9 @@ export const Froala = ({
   const { itemIndex } = useItem()
   const { froalaHeightRef } = useFixedHeightForAnimation({ froalaElementRef })
 
-  const isItemFroala = useSelectorTyped(state => state.quotation.items[itemIndex]?.isFroala ?? true)
+  const isItemFroala = useSelectorTyped(
+    (state) => state.quotation.items[itemIndex]?.isFroala ?? true,
+  )
   // todo: disabled viewport observer for time being otherwise total price being out of view is not calculated and pdf produces incorrect file, maybe we do not even need it
   // const { observerRef, isInsideViewPort } = useViewPortObserver()
   const showEditableHtml = isFroalaSignal.value && isItemFroala // && isInsideViewPort
@@ -82,7 +90,11 @@ export const Froala = ({
           selectTextOrCloseToolbar({ e, editorRef })
         }}
         onClick={(e: MouseEvent) => {
-          placeCaretAtTheEndIfToolbarIsNotShown({ e, editorRef, froalaElementRef })
+          placeCaretAtTheEndIfToolbarIsNotShown({
+            e,
+            editorRef,
+            froalaElementRef,
+          })
         }}
         onDoubleClickCapture={(e: MouseEvent) => {
           selectTextOrCloseToolbar({ e, editorRef })
@@ -96,9 +108,7 @@ export const Froala = ({
             position: 'relative',
           }}
         >
-          {!showEditableHtml && (
-            <StaticHtml />
-          )}
+          {!showEditableHtml && <StaticHtml />}
           {showEditableHtml && (
             <>
               <StaticHtmlBackgroundToFixBlinkIssue />

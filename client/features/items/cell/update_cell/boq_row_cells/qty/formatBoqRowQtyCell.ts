@@ -24,6 +24,8 @@ export const formatBoqRowQtyCell = ({
   })
 
   if (didUpdate) {
-    dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
+    dispatch(
+      navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }),
+    )
   }
 }

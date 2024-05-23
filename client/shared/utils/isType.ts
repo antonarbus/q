@@ -1,5 +1,6 @@
 export const isBoolean = (value: unknown): boolean => typeof value === 'boolean'
-export const isUndefined = (value: unknown): boolean => typeof value === 'undefined'
+export const isUndefined = (value: unknown): boolean =>
+  typeof value === 'undefined'
 export const isString = (value: unknown): boolean => typeof value === 'string'
 export const isNumber = (value: unknown): boolean => typeof value === 'number'
 export const isDateString = (value: unknown): boolean => {

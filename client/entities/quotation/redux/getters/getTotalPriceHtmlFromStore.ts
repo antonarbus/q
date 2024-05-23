@@ -3,7 +3,6 @@ import { itemKey } from '../../consts/itemKey'
 
 type Props = {
   itemIndex: number
-
 }
 
 export const getTotalPriceHtmlFromStore = ({ itemIndex }: Props): string => {

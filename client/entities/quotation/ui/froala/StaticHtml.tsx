@@ -7,7 +7,9 @@ type Props = {
   styleAgainstFroalaBlinks?: CSSProperties
 }
 
-export const StaticHtml = ({ styleAgainstFroalaBlinks }: Props): JSX.Element => {
+export const StaticHtml = ({
+  styleAgainstFroalaBlinks,
+}: Props): JSX.Element => {
   const staticHtmlRef = useRef<HTMLDivElement>()
   const { htmlGetter, style, froalaHeightRef, sx } = useFroala()
 
@@ -24,12 +26,8 @@ export const StaticHtml = ({ styleAgainstFroalaBlinks }: Props): JSX.Element => 
   })
 
   return (
-    <Box
-      className='static-html fr-box fr-inline'
-    >
-      <Box
-        className='fr-wrapper'
-      >
+    <Box className='static-html fr-box fr-inline'>
+      <Box className='fr-wrapper'>
         <Box
           ref={staticHtmlRef}
           className='fr-element fr-view'
@@ -40,8 +38,7 @@ export const StaticHtml = ({ styleAgainstFroalaBlinks }: Props): JSX.Element => 
             ...styleAgainstFroalaBlinks,
             ...style,
           }}
-        >
-        </Box>
+        ></Box>
       </Box>
     </Box>
   )

@@ -14,11 +14,20 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  message: ErrorMessageCommon | 'did not find' | 'deleted' | 'internal error' | 'not deleted'
+  message:
+    | ErrorMessageCommon
+    | 'did not find'
+    | 'deleted'
+    | 'internal error'
+    | 'not deleted'
   document?: HydratedDocument<Quotation>
 }
 
-type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
+type RouterHandler = (
+  req: ReqWithBody<ReqBody>,
+  res: ResWithBody<ResBody>,
+  next: Next,
+) => Promise<ResWithBody<ResBody> | undefined>
 
 export const deleteQuotationRouter = Router()
 
@@ -43,21 +52,13 @@ const deleteQuotation: RouterHandler = async (req, res, next) => {
     const [{ statusCode }] = await bucket.file(filePath).delete()
 
     if (statusCode === 204) {
-      return res
-        .status(httpStatus.success_200)
-        .json({ message: 'deleted' })
+      return res.status(httpStatus.success_200).json({ message: 'deleted' })
     }
 
-    return res
-      .status(httpStatus.notFound_404)
-      .json({ message: 'not deleted' })
+    return res.status(httpStatus.notFound_404).json({ message: 'not deleted' })
   } catch (error) {
     next(error)
   }
 }
 
-deleteQuotationRouter.delete(
-  '/',
-  verifyAccessTokenMiddleware,
-  deleteQuotation,
-)
+deleteQuotationRouter.delete('/', verifyAccessTokenMiddleware, deleteQuotation)

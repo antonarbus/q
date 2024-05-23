@@ -6,7 +6,9 @@ type Props = {
   itemIndex: number
 }
 
-export const getBoqItemFromStore = ({ itemIndex }: Props): ItemBoq | undefined => {
+export const getBoqItemFromStore = ({
+  itemIndex,
+}: Props): ItemBoq | undefined => {
   const item = getState().quotation.items[itemIndex]
 
   if (item?.type !== itemKey.boq) return

@@ -8,10 +8,12 @@ type Props = {
 
 type Params = ValueGetterParams<Item, string>
 
-export const dateValueGetter = ({ columnDef }: Props) => (params: Params): Date | null => {
-  const dateIsoString = params.data?.[columnDef]
-  if (typeof dateIsoString !== 'string') return null
-  const dateObj = new Date(dateIsoString)
-  if (!isValid(new Date(dateObj))) return null
-  return dateObj
-}
+export const dateValueGetter =
+  ({ columnDef }: Props) =>
+  (params: Params): Date | null => {
+    const dateIsoString = params.data?.[columnDef]
+    if (typeof dateIsoString !== 'string') return null
+    const dateObj = new Date(dateIsoString)
+    if (!isValid(new Date(dateObj))) return null
+    return dateObj
+  }

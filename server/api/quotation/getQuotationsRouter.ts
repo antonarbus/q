@@ -14,7 +14,11 @@ export type ResBody = Pretty<{
   quotations?: Array<FlattenMaps<Quotation>>
 }>
 
-type RouterHandler = (req: Req, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
+type RouterHandler = (
+  req: Req,
+  res: ResWithBody<ResBody>,
+  next: Next,
+) => Promise<ResWithBody<ResBody> | undefined>
 
 export const getQuotationsRouter = Router()
 
@@ -22,8 +26,7 @@ const getQuotations: RouterHandler = async (req, res, next) => {
   try {
     const email = getEmailFromRefreshTokenOrThrowUnauthorized(req)
 
-    const quotations = await QuotationModel
-      .find({ email })
+    const quotations = await QuotationModel.find({ email })
       // .sort({ openedAt: -1 })
       .select({ _id: 0, __v: 0, email: 0 })
       .lean()
@@ -48,8 +51,4 @@ const getQuotations: RouterHandler = async (req, res, next) => {
   }
 }
 
-getQuotationsRouter.get(
-  '/',
-  verifyAccessTokenMiddleware,
-  getQuotations,
-)
+getQuotationsRouter.get('/', verifyAccessTokenMiddleware, getQuotations)

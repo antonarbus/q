@@ -2,7 +2,11 @@ import { getState } from '@lib_instances/store'
 import { domToJpeg } from 'modern-screenshot'
 import { cls } from '@shared/consts/cls'
 import { navItemId } from '@shared/consts/navItemId'
-import { showErrorNavIcon, showLoadingNavIcon, showSuccessNavIcon } from '@shared/nav'
+import {
+  showErrorNavIcon,
+  showLoadingNavIcon,
+  showSuccessNavIcon,
+} from '@shared/nav'
 
 export const downloadPdf = async (): Promise<void> => {
   showLoadingNavIcon({ navMenuItemIdKey: navItemId.pdf })
@@ -13,11 +17,12 @@ export const downloadPdf = async (): Promise<void> => {
   const paperElements = document.querySelectorAll(`.${cls.paper}`)
   if (paperElements === null) return
 
-  const maxPaperWidth = Array.from(paperElements).reduce((maxWidth, paperElement) => {
-    const paperElementWidth = paperElement.clientWidth
-    if (paperElementWidth > maxWidth) return paperElementWidth
-    return maxWidth
-  }, 0) + 40
+  const maxPaperWidth =
+    Array.from(paperElements).reduce((maxWidth, paperElement) => {
+      const paperElementWidth = paperElement.clientWidth
+      if (paperElementWidth > maxWidth) return paperElementWidth
+      return maxWidth
+    }, 0) + 40
 
   const screenshot = await domToJpeg(itemsElement, {
     width: maxPaperWidth,
@@ -28,11 +33,15 @@ export const downloadPdf = async (): Promise<void> => {
     onCloneNode: (node) => {
       if (!(node instanceof HTMLElement)) return
       const actionElements = node.querySelectorAll(`.${cls.actionsContainer}`)
-      actionElements.forEach((element) => { element.remove() })
+      actionElements.forEach((element) => {
+        element.remove()
+      })
     },
   })
 
-  const worker = new Worker(new URL('./pdfWorker', import.meta.url), { type: 'module' })
+  const worker = new Worker(new URL('./pdfWorker', import.meta.url), {
+    type: 'module',
+  })
 
   worker.postMessage({
     imageData: screenshot,

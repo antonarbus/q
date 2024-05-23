@@ -23,7 +23,9 @@ export const tabFromPriceCell = ({
 
     if (!isLastRow) {
       e.preventDefault()
-      boqRowEditorRefs.at(rowIndex + 1)?.description.current?.commands.selectAll()
+      boqRowEditorRefs
+        .at(rowIndex + 1)
+        ?.description.current?.commands.selectAll()
     }
   }
 }

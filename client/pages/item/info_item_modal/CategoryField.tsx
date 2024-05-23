@@ -49,7 +49,13 @@ export const CategoryField = ({ categorySignal }: Props): JSX.Element => {
                 ...params.InputProps,
                 startAdornment: (
                   <InputAdornment position='start'>
-                    <BsTags style={{ height: '18px', width: '18px', translate: '5px' }}/>
+                    <BsTags
+                      style={{
+                        height: '18px',
+                        width: '18px',
+                        translate: '5px',
+                      }}
+                    />
                   </InputAdornment>
                 ),
               }}

@@ -3,6 +3,9 @@ type Props = {
   thisElement: HTMLElement
 }
 
-export const didClickInsideThisElement = ({ clickedElement, thisElement }: Props): boolean => {
+export const didClickInsideThisElement = ({
+  clickedElement,
+  thisElement,
+}: Props): boolean => {
   return thisElement.contains(clickedElement)
 }

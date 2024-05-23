@@ -27,6 +27,12 @@ export const updateBoqColumnCellAtStore = ({
   const didTextChange = prevHtml !== html
   if (!didTextChange) return
 
-  dispatch(quotationSlice.actions.updateBoqColumnNameTextReducer({ itemIndex, html, boqColumnKey }))
+  dispatch(
+    quotationSlice.actions.updateBoqColumnNameTextReducer({
+      itemIndex,
+      html,
+      boqColumnKey,
+    }),
+  )
   dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
 }

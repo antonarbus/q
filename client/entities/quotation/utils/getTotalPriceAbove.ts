@@ -6,10 +6,7 @@ type Props = {
   items: Item[]
 }
 
-export const getTotalPriceAbove = ({
-  itemIndex,
-  items,
-}: Props): number => {
+export const getTotalPriceAbove = ({ itemIndex, items }: Props): number => {
   let totalPriceAbove = 0
 
   for (let i = itemIndex - 1; i >= 0; i--) {

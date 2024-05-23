@@ -9,14 +9,10 @@ type Props = {
 
 export const OpenExistingQuotationPageButton = ({ id }: Props): ReactNode => {
   return (
-    <Link
-      to={`/${id}`}
-    >
-      <IconButton
-        size='small'
-    >
-      <AiOutlineFolderOpen />
-    </IconButton>
+    <Link to={`/${id}`}>
+      <IconButton size='small'>
+        <AiOutlineFolderOpen />
+      </IconButton>
     </Link>
   )
 }

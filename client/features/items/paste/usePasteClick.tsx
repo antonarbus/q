@@ -48,19 +48,23 @@ function pasteItemOnClick(): void {
 
   const newItemId = nanoid(5)
 
-  dispatch(quotationSlice.actions.pasteItemReducer({
-    item: topItemFromCopyContainer,
-    itemId,
-    newItemId,
-    pastePos,
-  }))
+  dispatch(
+    quotationSlice.actions.pasteItemReducer({
+      item: topItemFromCopyContainer,
+      itemId,
+      newItemId,
+      pastePos,
+    }),
+  )
 
   dispatch(copySlice.actions.removeItemFromCopyContainer())
   dispatch(copySlice.actions.forbidAllActions())
 
   setTimeout(() => {
     dispatch(copySlice.actions.allowAllActions())
-    dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
+    dispatch(
+      navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }),
+    )
   }, 1000 * theme.item.animationDuration)
 
   const itemsInCopyContainer = getState().copy.items
@@ -69,9 +73,12 @@ function pasteItemOnClick(): void {
     dispatch(copySlice.actions.hideCopyContainer())
     dispatch(quotationSlice.actions.removePasteItemReducer())
 
-    setTimeout(() => {
-      isFroalaSignal.value = true
-      dispatch(copySlice.actions.allowAllActions())
-    }, 1000 * theme.item.animationDuration + 500)
+    setTimeout(
+      () => {
+        isFroalaSignal.value = true
+        dispatch(copySlice.actions.allowAllActions())
+      },
+      1000 * theme.item.animationDuration + 500,
+    )
   }
 }

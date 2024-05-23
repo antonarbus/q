@@ -4,7 +4,12 @@ import { theme } from '@lib_instances/theme'
 import { type MouseEvent } from 'react'
 import { GoTrash } from 'react-icons/go'
 import { copySlice } from '@entities/copy'
-import { isFroalaSignal, quotationSlice, selectIsLastItem, useItem } from '@entities/quotation'
+import {
+  isFroalaSignal,
+  quotationSlice,
+  selectIsLastItem,
+  useItem,
+} from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
@@ -14,7 +19,7 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
   const { itemIndex } = useItem()
 
   const isItemAlone = useSelectorTyped(selectIsLastItem)
-  const isDeletable = useSelectorTyped(state => state.copy.isDeletable)
+  const isDeletable = useSelectorTyped((state) => state.copy.isDeletable)
   const disabled = isItemAlone || !isDeletable
 
   return (
@@ -47,7 +52,9 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
         fixElementDimensionStyle({ element: paperElement })
 
         isFroalaSignal.value = false
-        dispatch(quotationSlice.actions.deleteItemReducer({ itemId: itemToDelete.id }))
+        dispatch(
+          quotationSlice.actions.deleteItemReducer({ itemId: itemToDelete.id }),
+        )
         dispatch(copySlice.actions.forbidAllActions())
 
         setTimeout(() => {
@@ -57,10 +64,17 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
         const isCopyContainer = getState().copy.isCopyContainer
 
         if (!isCopyContainer) {
-          setTimeout(() => {
-            isFroalaSignal.value = true
-            dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
-          }, 1000 * theme.item.animationDuration + 500)
+          setTimeout(
+            () => {
+              isFroalaSignal.value = true
+              dispatch(
+                navSlice.actions.enableNavItems({
+                  navItemIdKeys: [navItemId.save],
+                }),
+              )
+            },
+            1000 * theme.item.animationDuration + 500,
+          )
         }
       }}
     />

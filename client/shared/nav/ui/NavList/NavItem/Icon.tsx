@@ -15,15 +15,12 @@ type Props = {
 
 export const Icon = ({ icon, disabled }: Props): JSX.Element => {
   return (
-    <RoundSpanForIcon
-      className='icon-round-wrapper'
-      disabled={disabled}
-    >
-      {
-        typeof icon === 'string'
-          ? <span style={{ fontWeight: 600 }}>{icon}</span>
-          : icon
-      }
+    <RoundSpanForIcon className='icon-round-wrapper' disabled={disabled}>
+      {typeof icon === 'string' ? (
+        <span style={{ fontWeight: 600 }}>{icon}</span>
+      ) : (
+        icon
+      )}
     </RoundSpanForIcon>
   )
 }

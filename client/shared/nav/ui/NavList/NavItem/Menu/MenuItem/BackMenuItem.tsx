@@ -9,7 +9,9 @@ import { MenuItemStyled } from './MenuItemStyled'
 import { TextInMenu } from './TextInMenu'
 
 export const BackMenuItem = (): JSX.Element => {
-  const isHovered = useSelectorTyped(state => state.nav.menuItemHoverIndex === 1)
+  const isHovered = useSelectorTyped(
+    (state) => state.nav.menuItemHoverIndex === 1,
+  )
   const color = theme.colors.topMenuItem
 
   return (

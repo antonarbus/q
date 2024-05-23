@@ -8,10 +8,16 @@ import { useUpdateEffect } from 'react-use'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@features/open_close/open_bookmarks_page'
 import { useGetBookmarksQuery } from '@entities/bookmark'
 import { type Item } from '@entities/bookmark'
-import { LoadingTableOverlay, loadingTableOverlaySignal } from '@shared/components/LoadingTableOverlay'
+import {
+  LoadingTableOverlay,
+  loadingTableOverlaySignal,
+} from '@shared/components/LoadingTableOverlay'
 import { notify } from '@shared/ui/top_msg'
 import { columnDefs, defaultColDef } from './columnDefs'
-import { DisplayedRowsCount, displayedRowsCountSignal } from './components/DisplayedRowsCount'
+import {
+  DisplayedRowsCount,
+  displayedRowsCountSignal,
+} from './components/DisplayedRowsCount'
 import { NoRowsTableOverlay } from './components/NoRowsTableOverlay'
 import { bookmarksAgGridRef } from './refs/bookmarksAgGridRef'
 import { AgGridStyles } from './styles/AgGridStyles'
@@ -19,9 +25,18 @@ import { addPlaceholderToFloatingFilters } from './utils/addPlaceholderToFloatin
 
 export const BookmarksAgGrid = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
-  const { data, isSuccess, isLoading, isFetching, isFetched, isError, error, refetch } = useGetBookmarksQuery()
+  const {
+    data,
+    isSuccess,
+    isLoading,
+    isFetching,
+    isFetched,
+    isError,
+    error,
+    refetch,
+  } = useGetBookmarksQuery()
   useDisableLoadingOverlayWhenItemsAreFetched({ isFetched })
-  const email = useSelectorTyped(state => state.user.email)
+  const email = useSelectorTyped((state) => state.user.email)
 
   useEffect(() => {
     void refetch()
@@ -29,21 +44,34 @@ export const BookmarksAgGrid = (): JSX.Element => {
 
   useUpdateEffect(() => {
     if (isLoading) {
-      loadingTableOverlaySignal.value = { areJumpingDotsShown: true, text: 'Loading' }
+      loadingTableOverlaySignal.value = {
+        areJumpingDotsShown: true,
+        text: 'Loading',
+      }
     }
   }, [isLoading])
 
   useUpdateEffect(() => {
     if (isSuccess) {
       if (data.message === 'no content') {
-        notify({ msg: 'No content', type: 'info', theme: 'dark', position: 'bottom-center' })
+        notify({
+          msg: 'No content',
+          type: 'info',
+          theme: 'dark',
+          position: 'bottom-center',
+        })
       }
     }
   }, [isSuccess])
 
   useUpdateEffect(() => {
     if (isError) {
-      notify({ msg: error.response?.data.message, type: 'error', theme: 'dark', position: 'bottom-center' })
+      notify({
+        msg: error.response?.data.message,
+        type: 'error',
+        theme: 'dark',
+        position: 'bottom-center',
+      })
     }
   }, [isError])
 
@@ -51,15 +79,25 @@ export const BookmarksAgGrid = (): JSX.Element => {
     <Box
       ref={gridContainerRef}
       className='ag-theme-quartz quotations-table'
-      sx={{ flexGrow: 1, position: 'relative', overflow: 'visible', height: '100%', mt: '10px' }}
+      sx={{
+        flexGrow: 1,
+        position: 'relative',
+        overflow: 'visible',
+        height: '100%',
+        mt: '10px',
+      }}
     >
       <AgGridStyles />
       <DisplayedRowsCount />
-      {isFetching && <LinearProgress sx={{ height: '1px', top: '97px', zIndex: 2, mb: '-1px' }} />}
+      {isFetching && (
+        <LinearProgress
+          sx={{ height: '1px', top: '97px', zIndex: 2, mb: '-1px' }}
+        />
+      )}
       <AgGridReact<Item>
         ref={bookmarksAgGridRef}
         rowData={data?.documents}
-        getRowId={params => params.data.id}
+        getRowId={(params) => params.data.id}
         defaultColDef={defaultColDef}
         columnDefs={columnDefs}
         suppressCellFocus

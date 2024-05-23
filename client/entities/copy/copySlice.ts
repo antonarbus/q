@@ -5,7 +5,7 @@ import { type CopyPlace } from './types'
 
 type Props = {
   isCopyContainer: boolean
-  initCords: { x: number, y: number }
+  initCords: { x: number; y: number }
   items: Item[]
   previews: string[]
   place: CopyPlace
@@ -42,9 +42,12 @@ export const copySlice = createSlice({
       state.isCopyContainer = true
     },
     hideCopyContainer: (state) => initialState,
-    addItemIntoCopyContainer: (state, action: PayloadAction<{
-      item: Item
-    }>) => {
+    addItemIntoCopyContainer: (
+      state,
+      action: PayloadAction<{
+        item: Item
+      }>,
+    ) => {
       const { item } = action.payload
       state.isCopying = true
       state.items.unshift(item)

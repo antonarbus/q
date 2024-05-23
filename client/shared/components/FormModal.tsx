@@ -1,6 +1,12 @@
 import { theme } from '@lib_instances/theme'
 import { Close } from '@mui/icons-material'
-import { Avatar, Box, type SxProps, Typography, IconButton } from '@mui/material'
+import {
+  Avatar,
+  Box,
+  type SxProps,
+  Typography,
+  IconButton,
+} from '@mui/material'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Children } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -108,7 +114,7 @@ export const FormModal = ({
           <Avatar sx={{ bgcolor: theme.colors.darkBackground }}>
             {headerIcon}
           </Avatar>
-          <Typography component='h1' variant='h6' >
+          <Typography component='h1' variant='h6'>
             {headerText}
           </Typography>
           <IconButton

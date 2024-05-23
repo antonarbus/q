@@ -16,7 +16,12 @@ export const AddBookmarkModal = (): React.ReactNode => {
   const nameSignal = useSignal(item?.name ?? '')
   const categorySignal = useSignal(item?.category ?? '')
   const descSignal = useSignal(item?.desc ?? '')
-  const { onSubmit, isPending, isSuccess, isError } = useAddBookmark({ nameSignal, categorySignal, descSignal, modalRef })
+  const { onSubmit, isPending, isSuccess, isError } = useAddBookmark({
+    nameSignal,
+    categorySignal,
+    descSignal,
+    modalRef,
+  })
   const isDisabled = nameSignal.value === '' || categorySignal.value === ''
 
   return (
@@ -34,9 +39,9 @@ export const AddBookmarkModal = (): React.ReactNode => {
       onSubmit={onSubmit}
       onCloseSlideModalOutAndNavigateUp={true}
     >
-      <NameField nameSignal={nameSignal}/>
-      <CategoryField categorySignal={categorySignal}/>
-      <DescriptionField descSignal={descSignal}/>
+      <NameField nameSignal={nameSignal} />
+      <CategoryField categorySignal={categorySignal} />
+      <DescriptionField descSignal={descSignal} />
     </FormModal>
   )
 }

@@ -2,7 +2,11 @@ import { CopyItemIcon } from '@features/items/copy'
 import { CutItemIcon } from '@features/items/cut'
 import { DeleteItemIcon } from '@features/items/delete'
 import { DragItemIcon } from '@features/items/drag'
-import { onBoqItemResize, onBoqItemResizeStart, onBoqItemResizeStop } from '@features/items/resize'
+import {
+  onBoqItemResize,
+  onBoqItemResizeStart,
+  onBoqItemResizeStop,
+} from '@features/items/resize'
 import { BookmarkItemIcon } from '@features/open_close/open_bookmark_modal'
 import { OpenInfoItemModalIcon } from '@features/open_close/open_item_info_modal'
 import { ItemComp } from '@entities/quotation'
@@ -19,20 +23,20 @@ export const BoqItem = (): JSX.Element => {
       onItemResizeStart={onBoqItemResizeStart}
       onItemResize={onBoqItemResize}
       onItemResizeStop={onBoqItemResizeStop}
-      leftItemActionButtons={(
+      leftItemActionButtons={
         <ItemActionButtonsLayout>
           <DragItemIcon />
           <CopyItemIcon />
           <CutItemIcon />
         </ItemActionButtonsLayout>
-      )}
-      rightItemActionButtons={(
+      }
+      rightItemActionButtons={
         <ItemActionButtonsLayout>
           <BookmarkItemIcon />
           <OpenInfoItemModalIcon />
           <DeleteItemIcon />
         </ItemActionButtonsLayout>
-      )}
+      }
     >
       <BoqHeader />
       <BoqTable />

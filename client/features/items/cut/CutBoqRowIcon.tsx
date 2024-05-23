@@ -3,7 +3,14 @@ import { theme } from '@lib_instances/theme'
 import type { MouseEvent } from 'react'
 import { TbCut } from 'react-icons/tb'
 import { copySlice } from '@entities/copy'
-import { getBoqRowFromStore, isFroalaSignal, quotationSlice, selectIsLastBoqRow, useItem, useRow } from '@entities/quotation'
+import {
+  getBoqRowFromStore,
+  isFroalaSignal,
+  quotationSlice,
+  selectIsLastBoqRow,
+  useItem,
+  useRow,
+} from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
@@ -12,9 +19,9 @@ import { cleanHtml } from '@shared/utils/itemsUtils'
 export const CutBoqRowIcon = (): JSX.Element => {
   const { itemIndex } = useItem()
   const { rowIndex } = useRow()
-  const isCopyable = useSelectorTyped(state => state.copy.isCopyable)
+  const isCopyable = useSelectorTyped((state) => state.copy.isCopyable)
   const isLastBoqRow = useSelectorTyped(selectIsLastBoqRow({ itemIndex }))
-  const isDeletable = useSelectorTyped(state => state.copy.isDeletable)
+  const isDeletable = useSelectorTyped((state) => state.copy.isDeletable)
   const disabled = isLastBoqRow || !isDeletable || !isCopyable
 
   return (
@@ -37,12 +44,14 @@ export const CutBoqRowIcon = (): JSX.Element => {
 
         isFroalaSignal.value = false
 
-        dispatch(quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
-          itemIndex,
-          rowIndex,
-          height: boqRowElement.clientHeight,
-          width: boqRowElement.clientWidth,
-        }))
+        dispatch(
+          quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
+            itemIndex,
+            rowIndex,
+            height: boqRowElement.clientHeight,
+            width: boqRowElement.clientWidth,
+          }),
+        )
 
         const html = boqRowElement.outerHTML
         const cleanedHtml = cleanHtml(html)
@@ -61,12 +70,18 @@ export const CutBoqRowIcon = (): JSX.Element => {
           dispatch(copySlice.actions.showCopyContainer())
         }
 
-        dispatch(quotationSlice.actions.deleteBoqRowReducer({ itemIndex, rowIndex }))
+        dispatch(
+          quotationSlice.actions.deleteBoqRowReducer({ itemIndex, rowIndex }),
+        )
         dispatch(copySlice.actions.forbidAllActions())
 
         setTimeout(() => {
           dispatch(copySlice.actions.allowAllActions())
-          dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
+          dispatch(
+            navSlice.actions.enableNavItems({
+              navItemIdKeys: [navItemId.save],
+            }),
+          )
         }, 1000 * theme.item.animationDuration)
       }}
     />

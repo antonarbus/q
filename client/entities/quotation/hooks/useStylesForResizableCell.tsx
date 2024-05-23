@@ -18,7 +18,9 @@ export const useStylesForResizableCell = ({
   boqColumnKey,
   minWidth = '100px',
 }: Props): Res => {
-  const columnWidth = useSelectorTyped(selectColumnWidth({ itemIndex, boqColumnKey }))
+  const columnWidth = useSelectorTyped(
+    selectColumnWidth({ itemIndex, boqColumnKey }),
+  )
 
   const stylesForResizableCell: CSSProperties = {
     display: 'flex',

@@ -5,9 +5,11 @@ import { navSlice } from '@shared/nav'
 
 export const useDisableNavItemsExceptNewAndQuotations = (): void => {
   useEffectOnce(() => {
-    dispatch(navSlice.actions.disableAllTopNavItems({
-      exceptNavItemIdKeys: [navItemId.quotations, navItemId.new],
-    }))
+    dispatch(
+      navSlice.actions.disableAllTopNavItems({
+        exceptNavItemIdKeys: [navItemId.quotations, navItemId.new],
+      }),
+    )
   })
 
   useUnmount(() => {

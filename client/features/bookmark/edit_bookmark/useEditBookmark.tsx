@@ -4,8 +4,16 @@ import { type UseMutationResult } from '@tanstack/react-query'
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { useGetBookmarkCategoriesQuery, useGetBookmarksQuery, useSaveBookmarkMutation } from '@entities/bookmark'
-import { itemKey, quotationSlice, saveItemHeightByIndex } from '@entities/quotation'
+import {
+  useGetBookmarkCategoriesQuery,
+  useGetBookmarksQuery,
+  useSaveBookmarkMutation,
+} from '@entities/bookmark'
+import {
+  itemKey,
+  quotationSlice,
+  saveItemHeightByIndex,
+} from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { notify } from '@shared/ui/top_msg'
 import { cleanHtml } from '@shared/utils/itemsUtils'
@@ -33,16 +41,34 @@ export const useEditBookmark = ({
 }: Props): Res => {
   const navigate = useNavigate()
 
-  const { mutate: saveItem, data, isSuccess, isPending, isError, error, reset } = useSaveBookmarkMutation()
+  const {
+    mutate: saveItem,
+    data,
+    isSuccess,
+    isPending,
+    isError,
+    error,
+    reset,
+  } = useSaveBookmarkMutation()
   const { refetch: updateItemCategories } = useGetBookmarkCategoriesQuery()
   const { refetch: updateBookmarks } = useGetBookmarksQuery()
 
   useUpdateEffect(() => {
     if (isSuccess) {
       if (data.message === 'saved') {
-        notify({ msg: 'Saved', type: 'success', theme: 'dark', position: 'bottom-center' })
+        notify({
+          msg: 'Saved',
+          type: 'success',
+          theme: 'dark',
+          position: 'bottom-center',
+        })
       } else if (data.message === 'updated') {
-        notify({ msg: 'Updated', type: 'info', theme: 'dark', position: 'bottom-center' })
+        notify({
+          msg: 'Updated',
+          type: 'info',
+          theme: 'dark',
+          position: 'bottom-center',
+        })
       }
 
       void updateItemCategories()
@@ -61,7 +87,12 @@ export const useEditBookmark = ({
 
   useUpdateEffect(() => {
     if (isError) {
-      notify({ msg: error.response?.data.message, type: 'error', theme: 'dark', position: 'bottom-center' })
+      notify({
+        msg: error.response?.data.message,
+        type: 'error',
+        theme: 'dark',
+        position: 'bottom-center',
+      })
       reset()
     }
   }, [isError])
@@ -87,12 +118,14 @@ export const useEditBookmark = ({
       const boqRowElement = document.querySelector(`.${cls.boqRow}`)
       if (!boqRowElement) return
 
-      dispatch(quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
-        itemIndex: 0,
-        rowIndex: 0,
-        height: boqRowElement.clientHeight,
-        width: boqRowElement.clientWidth,
-      }))
+      dispatch(
+        quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
+          itemIndex: 0,
+          rowIndex: 0,
+          height: boqRowElement.clientHeight,
+          width: boqRowElement.clientWidth,
+        }),
+      )
 
       const item = getState().quotation.items.at(0)
       if (!item) return

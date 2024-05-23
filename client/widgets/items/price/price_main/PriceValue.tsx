@@ -1,6 +1,14 @@
 import { useRef } from 'react'
-import { updatePriceValueCell, useUpdateTotalPriceIfPricesAboveWereChanged, validateTotalPrice } from '@features/items/cell/update_cell'
-import { useItem, Froala, getTotalPriceHtmlFromStore } from '@entities/quotation'
+import {
+  updatePriceValueCell,
+  useUpdateTotalPriceIfPricesAboveWereChanged,
+  validateTotalPrice,
+} from '@features/items/cell/update_cell'
+import {
+  useItem,
+  Froala,
+  getTotalPriceHtmlFromStore,
+} from '@entities/quotation'
 import { type FroalaEditor } from '@shared/types/froala'
 
 export const PriceValue = (): JSX.Element => {

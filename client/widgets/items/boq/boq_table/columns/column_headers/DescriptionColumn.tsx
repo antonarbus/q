@@ -1,6 +1,12 @@
 import { type ReactNode, useRef } from 'react'
 import { updateBoqColumnCell } from '@features/items/cell/update_cell'
-import { Froala, getBoqColumnHtmlFromStore, useItem, columnHeaderStyle, boqColumnKey } from '@entities/quotation'
+import {
+  Froala,
+  getBoqColumnHtmlFromStore,
+  useItem,
+  columnHeaderStyle,
+  boqColumnKey,
+} from '@entities/quotation'
 import { type FroalaEditor } from '@shared/types/froala'
 import { ResizableColumn } from '../ResizableColumn'
 
@@ -18,9 +24,18 @@ export const DescriptionColumn = (): ReactNode => {
       <Froala
         editorRef={editorRef}
         placeholder='Description...'
-        htmlGetter={() => getBoqColumnHtmlFromStore({ itemIndex, boqColumnKey: boqColumnKey.description })}
+        htmlGetter={() =>
+          getBoqColumnHtmlFromStore({
+            itemIndex,
+            boqColumnKey: boqColumnKey.description,
+          })
+        }
         onContentChange={() => {
-          updateBoqColumnCell({ editorRef, itemIndex, boqColumnKey: boqColumnKey.description })
+          updateBoqColumnCell({
+            editorRef,
+            itemIndex,
+            boqColumnKey: boqColumnKey.description,
+          })
         }}
         style={{
           ...columnHeaderStyle,

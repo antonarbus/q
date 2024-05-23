@@ -60,13 +60,15 @@ export const formatBoqRowCellNumber = ({
     }
   }
 
-  dispatch(quotationSlice.actions.updateBoqCellReducer({
-    itemIndex,
-    rowIndex,
-    html: newHtml,
-    value: roundToTwoDecimals ? roundedValue : value,
-    boqRowCellKey,
-  }))
+  dispatch(
+    quotationSlice.actions.updateBoqCellReducer({
+      itemIndex,
+      rowIndex,
+      html: newHtml,
+      value: roundToTwoDecimals ? roundedValue : value,
+      boqRowCellKey,
+    }),
+  )
 
   editorRef.current.html.set(newHtml)
 

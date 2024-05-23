@@ -5,7 +5,7 @@ import { quotationSlice } from '../redux/quotationSlice'
 export const unfixItemImagesHeight = (): void => {
   const itemImages = document.querySelectorAll(`.${cls.item} img`)
   if (itemImages === undefined) return
-  itemImages.forEach(imageElement => {
+  itemImages.forEach((imageElement) => {
     if (!(imageElement instanceof HTMLElement)) return
     imageElement.style.height = 'auto'
   })
@@ -16,12 +16,14 @@ export const unfixItemImagesHeight = (): void => {
 export const fixItemImagesHeight = (): void => {
   const itemImages = document.querySelectorAll(`.${cls.item} img`)
   if (itemImages === undefined) return
-  itemImages.forEach(imageElement => {
+  itemImages.forEach((imageElement) => {
     if (!(imageElement instanceof HTMLElement)) return
     imageElement.style.height = imageElement.clientHeight + 'px'
-    dispatch(quotationSlice.actions.fixImagesHeightReducer({
-      imageHeight: imageElement.clientHeight,
-      imageId: imageElement.id,
-    }))
+    dispatch(
+      quotationSlice.actions.fixImagesHeightReducer({
+        imageHeight: imageElement.clientHeight,
+        imageId: imageElement.id,
+      }),
+    )
   })
 }

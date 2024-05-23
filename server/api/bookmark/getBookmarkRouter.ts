@@ -16,7 +16,11 @@ export type ResBody = {
   item?: Item
 }
 
-type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
+type RouterHandler = (
+  req: ReqWithBody<ReqBody>,
+  res: ResWithBody<ResBody>,
+  next: Next,
+) => Promise<ResWithBody<ResBody> | undefined>
 
 export const getBookmarkRouter = Router()
 
@@ -26,14 +30,10 @@ const getBookmark: RouterHandler = async (req, res, next) => {
 
     const email = getEmailFromRefreshTokenOrThrowUnauthorized(req)
 
-    const document = await BookmarkModel
-      .findOne({ email, id })
-      .lean()
+    const document = await BookmarkModel.findOne({ email, id }).lean()
 
     if (!document) {
-      return res
-        .status(httpStatus.notFound_404)
-        .json({ message: 'not found' })
+      return res.status(httpStatus.notFound_404).json({ message: 'not found' })
     }
 
     const filePath = `${email}/${storageFolderName.bookmarks}/${id}.json`
@@ -41,26 +41,18 @@ const getBookmark: RouterHandler = async (req, res, next) => {
     const [fileBuffer] = await bucket.file(filePath).download()
 
     if (!fileBuffer) {
-      return res
-        .status(httpStatus.notFound_404)
-        .json({ message: 'not found' })
+      return res.status(httpStatus.notFound_404).json({ message: 'not found' })
     }
 
     const item = JSON.parse(fileBuffer.toString())
 
-    return res
-      .status(httpStatus.success_200)
-      .json({
-        message: 'found',
-        item: { ...item, ...document },
-      })
+    return res.status(httpStatus.success_200).json({
+      message: 'found',
+      item: { ...item, ...document },
+    })
   } catch (error) {
     next(error)
   }
 }
 
-getBookmarkRouter.post(
-  '/',
-  verifyAccessTokenMiddleware,
-  getBookmark,
-)
+getBookmarkRouter.post('/', verifyAccessTokenMiddleware, getBookmark)

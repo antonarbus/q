@@ -52,8 +52,8 @@ const variants: Variants = {
 }
 
 export const RestOfCopiedItems = (): JSX.Element | null => {
-  const items = useSelectorTyped(state => state.copy.items)
-  const isCopying = useSelectorTyped(state => state.copy.isCopying)
+  const items = useSelectorTyped((state) => state.copy.items)
+  const isCopying = useSelectorTyped((state) => state.copy.isCopying)
   const prevFirstItemHeightRef = useRef(0)
 
   const firstItem = items[0]
@@ -61,8 +61,10 @@ export const RestOfCopiedItems = (): JSX.Element | null => {
   if (!firstItem?.width) return null
   if (!firstItem?.height) return null
 
-  const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / firstItem.width
-  const firstItemHeight = firstItem.height * scaleFactorForFirstItem + itemMarginBottom
+  const scaleFactorForFirstItem =
+    (containerWidth - 2 * containerPadding) / firstItem.width
+  const firstItemHeight =
+    firstItem.height * scaleFactorForFirstItem + itemMarginBottom
 
   const animationProps: Props = {
     isCopying,
@@ -73,10 +75,7 @@ export const RestOfCopiedItems = (): JSX.Element | null => {
   prevFirstItemHeightRef.current = firstItemHeight
 
   return (
-    <AnimatePresence
-      mode='wait'
-      custom={animationProps}
-    >
+    <AnimatePresence mode='wait' custom={animationProps}>
       <motion.div
         key={items.length}
         custom={animationProps}
@@ -86,7 +85,8 @@ export const RestOfCopiedItems = (): JSX.Element | null => {
         exit='exit'
       >
         {items.map((item, index) => {
-          const scaleFactor = (containerWidth - 2 * containerPadding) / (item.width ?? 1)
+          const scaleFactor =
+            (containerWidth - 2 * containerPadding) / (item.width ?? 1)
           const preview = getState().copy.previews[index]
 
           if (index === 0) return null

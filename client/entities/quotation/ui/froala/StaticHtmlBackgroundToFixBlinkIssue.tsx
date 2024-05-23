@@ -9,7 +9,8 @@ import { StaticHtml } from './StaticHtml'
 // * after froala initiated make "visibility: hidden", otherwise you will see static text when delete dynamic text in Froala
 
 export const StaticHtmlBackgroundToFixBlinkIssue = (): JSX.Element => {
-  const [visibility, setVisibility] = useState<CSSProperties['visibility']>('visible')
+  const [visibility, setVisibility] =
+    useState<CSSProperties['visibility']>('visible')
 
   useEffectOnce(() => {
     const timeoutId = setTimeout(() => {

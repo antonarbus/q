@@ -5,18 +5,22 @@ import { navSlice } from '@shared/nav'
 
 export const useNavItemsOnBookmarksPageOpen = (): void => {
   useEffectOnce(() => {
-    dispatch(navSlice.actions.disableNavItems({
-      navItemIdKeys: [
-        navItemId.save,
-        navItemId.pdf,
-        navItemId.share,
-        navItemId.bookmarks,
-        navItemId.insert,
-      ],
-    }))
+    dispatch(
+      navSlice.actions.disableNavItems({
+        navItemIdKeys: [
+          navItemId.save,
+          navItemId.pdf,
+          navItemId.share,
+          navItemId.bookmarks,
+          navItemId.insert,
+        ],
+      }),
+    )
 
     dispatch(navSlice.actions.removeUnderlineFromTopNav())
-    dispatch(navSlice.actions.underlineNavItem({ navItemIdKey: navItemId.bookmarks }))
+    dispatch(
+      navSlice.actions.underlineNavItem({ navItemIdKey: navItemId.bookmarks }),
+    )
   })
 
   useUnmount(() => {

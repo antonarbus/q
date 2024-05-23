@@ -6,7 +6,10 @@ type Props = {
   title?: string
 }
 
-export const LoadingDotsOverlay = ({ isShowing, title }: Props): JSX.Element | null => {
+export const LoadingDotsOverlay = ({
+  isShowing,
+  title,
+}: Props): JSX.Element | null => {
   if (loadingDotsOverlayTextSignal.value === null && !isShowing) return null
 
   return (

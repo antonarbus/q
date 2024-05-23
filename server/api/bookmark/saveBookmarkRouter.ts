@@ -14,17 +14,22 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  message: ErrorMessageCommon
-  | 'not saved'
-  | 'saved'
-  | 'updated'
-  | 'name is not provided'
-  | 'category is not provided'
-  | 'id is not provided'
+  message:
+    | ErrorMessageCommon
+    | 'not saved'
+    | 'saved'
+    | 'updated'
+    | 'name is not provided'
+    | 'category is not provided'
+    | 'id is not provided'
   item?: FlattenMaps<Item>
 }
 
-type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
+type RouterHandler = (
+  req: ReqWithBody<ReqBody>,
+  res: ResWithBody<ResBody>,
+  next: Next,
+) => Promise<ResWithBody<ResBody> | undefined>
 
 export const saveBookmarkRouter = Router()
 
@@ -59,34 +64,31 @@ const saveBookmark: RouterHandler = async (req, res, next) => {
 
     const isNew = existingItem === null
 
-    const itemDataFromDb = await BookmarkModel
-      .findOneAndUpdate(
-        {
-          id: item.id,
-          email,
-        },
-        {
-          id: item.id,
-          email,
-          type: item.type,
-          name: item.name,
-          category: item.category,
-          desc: item.desc,
-          updatedAt: Date.now(),
-          ...(isNew && { createdAt: Date.now() }),
-        },
-        {
-          new: true,
-          upsert: true,
-        },
-      )
+    const itemDataFromDb = await BookmarkModel.findOneAndUpdate(
+      {
+        id: item.id,
+        email,
+      },
+      {
+        id: item.id,
+        email,
+        type: item.type,
+        name: item.name,
+        category: item.category,
+        desc: item.desc,
+        updatedAt: Date.now(),
+        ...(isNew && { createdAt: Date.now() }),
+      },
+      {
+        new: true,
+        upsert: true,
+      },
+    )
       .select({ _id: 0, __v: 0 })
       .lean()
 
     if (!itemDataFromDb) {
-      return res
-        .status(httpStatus.forbidden_403)
-        .json({ message: 'not saved' })
+      return res.status(httpStatus.forbidden_403).json({ message: 'not saved' })
     }
 
     const filePath = `${email}/${storageFolderName.bookmarks}/${item.id}.json`
@@ -94,12 +96,10 @@ const saveBookmark: RouterHandler = async (req, res, next) => {
     const contents = JSON.stringify({ ...itemDataFromDb, ...item }, null, 2)
     await file.save(contents)
 
-    return res
-      .status(httpStatus.success_200)
-      .json({
-        message: isNew ? 'saved' : 'updated',
-        item: { ...itemDataFromDb, ...item },
-      })
+    return res.status(httpStatus.success_200).json({
+      message: isNew ? 'saved' : 'updated',
+      item: { ...itemDataFromDb, ...item },
+    })
   } catch (error) {
     next(error)
   }

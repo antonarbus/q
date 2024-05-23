@@ -2,14 +2,20 @@ import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
 import type { MouseEvent } from 'react'
 import { MdCopyAll } from 'react-icons/md'
 import { copySlice } from '@entities/copy'
-import { getBoqRowFromStore, isFroalaSignal, quotationSlice, useItem, useRow } from '@entities/quotation'
+import {
+  getBoqRowFromStore,
+  isFroalaSignal,
+  quotationSlice,
+  useItem,
+  useRow,
+} from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { cleanHtml } from '@shared/utils/itemsUtils'
 
 export const CopyBoqRowIcon = (): JSX.Element => {
   const { rowIndex } = useRow()
   const { itemIndex } = useItem()
-  const isCopyable = useSelectorTyped(state => state.copy.isCopyable)
+  const isCopyable = useSelectorTyped((state) => state.copy.isCopyable)
   const disabled = !isCopyable
 
   return (
@@ -29,12 +35,14 @@ export const CopyBoqRowIcon = (): JSX.Element => {
 
         isFroalaSignal.value = false
 
-        dispatch(quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
-          itemIndex,
-          rowIndex,
-          height: boqRowElement.clientHeight,
-          width: boqRowElement.clientWidth,
-        }))
+        dispatch(
+          quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
+            itemIndex,
+            rowIndex,
+            height: boqRowElement.clientHeight,
+            width: boqRowElement.clientWidth,
+          }),
+        )
 
         const html = boqRowElement.outerHTML
         const cleanedHtml = cleanHtml(html)

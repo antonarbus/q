@@ -18,9 +18,19 @@ type Res = {
   isError: UseMutationResult['isError']
 }
 
-export const useRequestPasswordReset = ({ emailSignal, modalRef }: Props): Res => {
+export const useRequestPasswordReset = ({
+  emailSignal,
+  modalRef,
+}: Props): Res => {
   const navigate = useNavigate()
-  const { mutate: requestPasswordReset, isPending, data, isSuccess, isError, error } = useRequestPasswordResetMutation()
+  const {
+    mutate: requestPasswordReset,
+    isPending,
+    data,
+    isSuccess,
+    isError,
+    error,
+  } = useRequestPasswordResetMutation()
 
   useUpdateEffect(() => {
     if (isSuccess) {

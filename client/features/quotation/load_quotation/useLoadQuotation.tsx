@@ -2,7 +2,11 @@ import { router } from '@lib_instances/Router'
 import { dispatch } from '@lib_instances/store'
 import { useEffect } from 'react'
 import { useUpdateEffect } from 'react-use'
-import { quotationSlice, useGetQuotationMutation, newQuotationTemplate } from '@entities/quotation'
+import {
+  quotationSlice,
+  useGetQuotationMutation,
+  newQuotationTemplate,
+} from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
 import { route } from '@shared/consts/route'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
@@ -11,7 +15,14 @@ import { reRenderQuotationSignal } from '@shared/signals/reRenderQuotationSignal
 import { notify } from '@shared/ui/top_msg'
 
 export function useLoadQuotation(): void {
-  const { mutate: getQuotation, data, isSuccess, isPending, isError, error } = useGetQuotationMutation()
+  const {
+    mutate: getQuotation,
+    data,
+    isSuccess,
+    isPending,
+    isError,
+    error,
+  } = useGetQuotationMutation()
   const id = router.state.matches.at(0)?.params.id
 
   useEffect(() => {
@@ -21,17 +32,32 @@ export function useLoadQuotation(): void {
       dispatch(quotationSlice.actions.resetQuotationReducer())
 
       setTimeout(() => {
-        dispatch(quotationSlice.actions.loadQuotationReducer({ quotation: newQuotationTemplate }))
+        dispatch(
+          quotationSlice.actions.loadQuotationReducer({
+            quotation: newQuotationTemplate,
+          }),
+        )
       }, 200)
 
-      dispatch(navSlice.actions.enableNavItems({
-        navItemIdKeys: [navItemId.save, navItemId.pdf, navItemId.share, navItemId.insert],
-      }))
+      dispatch(
+        navSlice.actions.enableNavItems({
+          navItemIdKeys: [
+            navItemId.save,
+            navItemId.pdf,
+            navItemId.share,
+            navItemId.insert,
+          ],
+        }),
+      )
 
       dispatch(navSlice.actions.removeUnderlineFromTopNav())
-      dispatch(navSlice.actions.underlineNavItem({ navItemIdKey: navItemId.new }))
+      dispatch(
+        navSlice.actions.underlineNavItem({ navItemIdKey: navItemId.new }),
+      )
 
-      setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 1000)
+      setTimeout(() => {
+        loadingDotsOverlayTextSignal.value = null
+      }, 1000)
     }
   }, [reRenderQuotationSignal.value])
 
@@ -39,7 +65,9 @@ export function useLoadQuotation(): void {
     if (id !== undefined && id !== 'new') {
       dispatch(navSlice.actions.removeUnderlineFromTopNav())
       loadingDotsOverlayTextSignal.value = `Loading ${id}...`
-      setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 1000)
+      setTimeout(() => {
+        loadingDotsOverlayTextSignal.value = null
+      }, 1000)
 
       dispatch(quotationSlice.actions.resetQuotationReducer())
       dispatch(navSlice.actions.removeUnderlineFromTopNav())
@@ -61,7 +89,9 @@ export function useLoadQuotation(): void {
 
       if (quotation.items === undefined) {
         notify({ msg: 'Quotation corrupted', type: 'warn', theme: 'light' })
-        setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 1000)
+        setTimeout(() => {
+          loadingDotsOverlayTextSignal.value = null
+        }, 1000)
         return
       }
 
@@ -70,11 +100,20 @@ export function useLoadQuotation(): void {
       if (data.message === 'found') {
         dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
 
-        dispatch(navSlice.actions.enableNavItems({
-          navItemIdKeys: [navItemId.save, navItemId.pdf, navItemId.share, navItemId.insert],
-        }))
+        dispatch(
+          navSlice.actions.enableNavItems({
+            navItemIdKeys: [
+              navItemId.save,
+              navItemId.pdf,
+              navItemId.share,
+              navItemId.insert,
+            ],
+          }),
+        )
 
-        setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 1000)
+        setTimeout(() => {
+          loadingDotsOverlayTextSignal.value = null
+        }, 1000)
       }
     }
   }, [isSuccess])
@@ -91,6 +130,8 @@ export function useLoadQuotation(): void {
       notify({ msg: 'Internal error', type: 'error', theme: 'light' })
     }
 
-    setTimeout(() => { loadingDotsOverlayTextSignal.value = null }, 1000)
+    setTimeout(() => {
+      loadingDotsOverlayTextSignal.value = null
+    }, 1000)
   }, [isError])
 }

@@ -1,4 +1,10 @@
-import { createContext, useContext, type ReactNode, type MutableRefObject, type RefObject } from 'react'
+import {
+  createContext,
+  useContext,
+  type ReactNode,
+  type MutableRefObject,
+  type RefObject,
+} from 'react'
 import { type FroalaProps } from '../ui/froala/Froala'
 
 type Context = FroalaProps & {
@@ -33,7 +39,7 @@ export const FroalaProvider = (props: Props): JSX.Element => {
       }}
     >
       {props.children}
-    </FroalaContext.Provider >
+    </FroalaContext.Provider>
   )
 }
 

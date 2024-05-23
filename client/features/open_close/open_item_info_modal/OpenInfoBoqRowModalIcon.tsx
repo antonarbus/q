@@ -1,7 +1,12 @@
 import { type MouseEvent, type ReactNode } from 'react'
 import { HiOutlineInformationCircle } from 'react-icons/hi2'
 import { useNavigate } from 'react-router-dom'
-import { boqRowKey, getBoqRowFromStore, useItem, useRow } from '@entities/quotation'
+import {
+  boqRowKey,
+  getBoqRowFromStore,
+  useItem,
+  useRow,
+} from '@entities/quotation'
 import { route } from '@shared/consts/route'
 
 export const OpenInfoBoqRowModalIcon = (): ReactNode => {

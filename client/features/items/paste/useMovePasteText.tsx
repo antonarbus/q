@@ -5,20 +5,29 @@ import { movePasteTextForBoqRow } from './movePasteTextForBoqRow'
 import { movePasteTextForItem } from './movePasteTextForItem'
 
 export const useMovePasteText = (): void => {
-  const typeOfNextPasteItem = useSelectorTyped(state => state.copy.items.at(0)?.type)
+  const typeOfNextPasteItem = useSelectorTyped(
+    (state) => state.copy.items.at(0)?.type,
+  )
 
-  const isItem = typeOfNextPasteItem === itemKey.boq || typeOfNextPasteItem === itemKey.text || typeOfNextPasteItem === itemKey.price
+  const isItem =
+    typeOfNextPasteItem === itemKey.boq ||
+    typeOfNextPasteItem === itemKey.text ||
+    typeOfNextPasteItem === itemKey.price
   const isBoqRow = typeOfNextPasteItem === boqRowKey.row
 
   useEffect(() => {
     if (isItem) {
       document.body.style.cursor = 'pointer'
-      document.addEventListener('mousemove', movePasteTextForItem, { passive: true })
+      document.addEventListener('mousemove', movePasteTextForItem, {
+        passive: true,
+      })
     }
 
     if (isBoqRow) {
       document.body.style.cursor = 'pointer'
-      document.addEventListener('mousemove', movePasteTextForBoqRow, { passive: true })
+      document.addEventListener('mousemove', movePasteTextForBoqRow, {
+        passive: true,
+      })
     }
 
     return () => {

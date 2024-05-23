@@ -22,7 +22,14 @@ type Res = {
 
 export const useResetPassword = ({ passwordSignal }: Props): Res => {
   const { email, resetPasswordKey } = useParams()
-  const { mutate: resetPassword, isPending, data, isSuccess, isError, error } = useResetPasswordMutation()
+  const {
+    mutate: resetPassword,
+    isPending,
+    data,
+    isSuccess,
+    isError,
+    error,
+  } = useResetPasswordMutation()
 
   useUpdateEffect(() => {
     if (isSuccess) {
@@ -37,8 +44,12 @@ export const useResetPassword = ({ passwordSignal }: Props): Res => {
 
         accessTokenSignal.value = accessJwtToken
         dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
-        dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.login] }))
-        dispatch(navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.account] }))
+        dispatch(
+          navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.login] }),
+        )
+        dispatch(
+          navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.account] }),
+        )
       }
     }
   }, [isSuccess])

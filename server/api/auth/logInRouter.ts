@@ -3,7 +3,13 @@ import express from 'express'
 import { type User } from '@entities/user'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { UserModel } from '../../db/models/userModel'
-import { createAccessToken, createRefreshToken, getJwtExpiration, thirtyDaysInSec, verifyRefreshToken } from '../../services/jwt'
+import {
+  createAccessToken,
+  createRefreshToken,
+  getJwtExpiration,
+  thirtyDaysInSec,
+  verifyRefreshToken,
+} from '../../services/jwt'
 import type { Next, ReqWithBody, ResWithBody } from '../../types'
 
 export type ReqBody = {
@@ -12,7 +18,13 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  message: 'no user data' | 'no password' | 'bad password' | 'not activated' | 'good password' | 'failed to create token'
+  message:
+    | 'no user data'
+    | 'no password'
+    | 'bad password'
+    | 'not activated'
+    | 'good password'
+    | 'failed to create token'
   name?: 'MongooseError'
   accessJwtToken?: string
   email?: User['email']
@@ -21,7 +33,11 @@ export type ResBody = {
   jwtAccessTokenExpiration?: Date
 }
 
-type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
+type RouterHandler = (
+  req: ReqWithBody<ReqBody>,
+  res: ResWithBody<ResBody>,
+  next: Next,
+) => Promise<ResWithBody<ResBody> | undefined>
 
 export const logInRouter = express.Router()
 
@@ -30,9 +46,7 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
     const password = req.body.password
     const email = req.body.email.toLowerCase()
 
-    const user = await UserModel
-      .findOne({ email })
-      .lean()
+    const user = await UserModel.findOne({ email }).lean()
 
     if (!user) {
       return res
@@ -63,10 +77,14 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
         .json({ message: 'not activated' })
     }
 
-    const isExistingRefreshJwtToken = Boolean(verifyRefreshToken(user.refreshJwtToken))
+    const isExistingRefreshJwtToken = Boolean(
+      verifyRefreshToken(user.refreshJwtToken),
+    )
 
     const accessJwtToken = createAccessToken({ email, roles: user.roles })
-    const refreshJwtToken = isExistingRefreshJwtToken ? user.refreshJwtToken : createRefreshToken({ email, roles: user.roles })
+    const refreshJwtToken = isExistingRefreshJwtToken
+      ? user.refreshJwtToken
+      : createRefreshToken({ email, roles: user.roles })
 
     if (!refreshJwtToken || !accessJwtToken) {
       return res
@@ -87,16 +105,14 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
       )
     }
 
-    return res
-      .status(httpStatus.success_200)
-      .json({
-        message: 'good password',
-        accessJwtToken,
-        email: user.email,
-        roles: user.roles,
-        jwtRefreshTokenExpiration: getJwtExpiration({ token: refreshJwtToken }),
-        jwtAccessTokenExpiration: getJwtExpiration({ token: accessJwtToken }),
-      })
+    return res.status(httpStatus.success_200).json({
+      message: 'good password',
+      accessJwtToken,
+      email: user.email,
+      roles: user.roles,
+      jwtRefreshTokenExpiration: getJwtExpiration({ token: refreshJwtToken }),
+      jwtAccessTokenExpiration: getJwtExpiration({ token: accessJwtToken }),
+    })
   } catch (error) {
     next(error)
   }

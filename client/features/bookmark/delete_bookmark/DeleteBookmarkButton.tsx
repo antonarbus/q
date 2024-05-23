@@ -2,12 +2,21 @@ import { IconButton } from '@mui/material'
 import type { ReqBody } from '@server/api/bookmark/deleteBookmarkRouter'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
-import { useDeleteBookmarkMutation, deleteFromBookmarksCache } from '@entities/bookmark'
+import {
+  useDeleteBookmarkMutation,
+  deleteFromBookmarksCache,
+} from '@entities/bookmark'
 import { RotatingLoaderIcon } from '@shared/components'
 import { notify } from '@shared/ui/top_msg'
 
 export const DeleteBookmarkButton = ({ id }: ReqBody): JSX.Element => {
-  const { mutate: deleteItem, isPending, isSuccess, isError, error } = useDeleteBookmarkMutation()
+  const {
+    mutate: deleteItem,
+    isPending,
+    isSuccess,
+    isError,
+    error,
+  } = useDeleteBookmarkMutation()
 
   useUpdateEffect(() => {
     if (isSuccess) {
@@ -17,7 +26,11 @@ export const DeleteBookmarkButton = ({ id }: ReqBody): JSX.Element => {
 
   useUpdateEffect(() => {
     if (isError) {
-      notify({ msg: error.response?.data.message, type: 'error', theme: 'light' })
+      notify({
+        msg: error.response?.data.message,
+        type: 'error',
+        theme: 'light',
+      })
       deleteFromBookmarksCache({ id })
     }
   }, [isError])

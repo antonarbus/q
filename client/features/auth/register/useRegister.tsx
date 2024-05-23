@@ -17,7 +17,14 @@ type Res = {
 }
 
 export const useRegister = ({ emailSignal, passwordSignal }: Props): Res => {
-  const { mutate: registerUser, isPending, data, isSuccess, isError, error } = useRegisterMutation()
+  const {
+    mutate: registerUser,
+    isPending,
+    data,
+    isSuccess,
+    isError,
+    error,
+  } = useRegisterMutation()
 
   useUpdateEffect(() => {
     if (isSuccess) {

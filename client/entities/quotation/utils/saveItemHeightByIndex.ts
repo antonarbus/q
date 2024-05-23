@@ -11,5 +11,7 @@ export const saveItemHeightByIndex = ({ itemIndex }: Props): void => {
   const item = items[itemIndex]
   if (!item) return
   const height = item.clientHeight
-  dispatch(quotationSlice.actions.updateItemHeightReducer({ itemIndex, height }))
+  dispatch(
+    quotationSlice.actions.updateItemHeightReducer({ itemIndex, height }),
+  )
 }
