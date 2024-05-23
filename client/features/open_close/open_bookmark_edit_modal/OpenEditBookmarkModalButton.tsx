@@ -5,7 +5,7 @@ import { AiTwotoneEdit } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetBookmarkMutation } from '@entities/bookmark'
-import { itemKey, quotationSlice } from '@entities/quotation'
+import { isFroalaSignal, itemKey, quotationSlice } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
@@ -26,6 +26,8 @@ export const OpenEditBookmarkModalButton = ({ id }: ReqBody): JSX.Element => {
       const { item } = data
 
       if (!item) return
+
+      isFroalaSignal.value = false
 
       // add item into fake quotation with just one item (it will be good to have a separate bookmark slice, but it will require a lot of changes in the items render logic, so I decided to use quotation slice for now)
       dispatch(

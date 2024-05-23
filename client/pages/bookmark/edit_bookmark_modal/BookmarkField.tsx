@@ -2,6 +2,7 @@ import { useSelectorTyped } from '@lib_instances/store'
 import { Box } from '@mui/material'
 import { AnimatePresence } from 'framer-motion'
 import { type ReactNode } from 'react'
+import { useEffectOnce } from 'react-use'
 import { BoqRowForEditModal } from '@widgets/items/boq/boq_table/rows/row/BoqRowForEditModal'
 import { BoqRowSortAndAnimate } from '@widgets/items/boq/boq_table/rows/row/BoqRowSortAndAnimate'
 import { BoqItemForEditModal } from '@widgets/items/boq/BoqItemForEditModal'
@@ -16,6 +17,7 @@ import {
   itemKey,
   DraggableItemsContainer,
   RowProvider,
+  isFroalaSignal,
 } from '@entities/quotation'
 import { OutlinedDivWithLabel } from '@shared/components'
 import { cls } from '@shared/consts/cls'
@@ -25,6 +27,10 @@ export const BookmarkField = (): ReactNode => {
     (state) => state.quotation.items,
     itemsShapeEqualityFn,
   )
+
+  useEffectOnce(() => {
+    isFroalaSignal.value = true
+  })
 
   if (items.length === 0) return null
 
