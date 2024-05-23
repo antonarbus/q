@@ -38,7 +38,10 @@ const quotationSchema = new Schema<Quotation>({
   createdAt: Date,
   updatedAt: Date,
   openedAt: Date,
-  sharedAt: Date,
+  sharedWith: {
+    type: [String],  //* if empty array, not shared, if '*' inside - with everyone
+    default: () => [],
+  },
   from: {
     email: String,
     name: String,

@@ -15,13 +15,13 @@ export type ReqBody = {
 
 export type ResBody = {
   message:
-    | ErrorMessageCommon
-    | 'not saved'
-    | 'saved'
-    | 'updated'
-    | 'id is not provided'
-    | 'name is not provided'
-    | 'category is not provided'
+  | ErrorMessageCommon
+  | 'not saved'
+  | 'saved'
+  | 'updated'
+  | 'id is not provided'
+  | 'name is not provided'
+  | 'category is not provided'
   quotation?: FlattenMaps<Quotation>
 }
 
@@ -64,6 +64,7 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
         category: quotation.category,
         desc: quotation.desc,
         info: quotation.info,
+        sharedWith: quotation.sharedWith,
         items: 'find in bucket under same id',
         updatedAt: Date.now(),
         ...(isNew && { createdAt: Date.now() }),

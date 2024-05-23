@@ -4,29 +4,48 @@ import { useRef } from 'react'
 import { MdSaveAlt } from 'react-icons/md'
 import { useSaveQuotation } from '@features/quotation/save_quotation'
 import { FormModal } from '@shared/components'
+import {
+  type SharedWithOption,
+  sharedWithOption,
+} from '@shared/consts/sharedWithOption'
 import { CategoryField } from './CategoryField'
 import { DescriptionField } from './DescriptionField'
 import { InfoField } from './InfoField'
 import { NameField } from './NameField'
-import { ShareField, type SharedOptions } from './ShareField'
+import { ShareField } from './ShareField'
 
 export const SaveQuotationModal = (): JSX.Element => {
+  const quotation = getState().quotation
   const modalRef = useRef<HTMLDivElement>(null)
-  const nameSignal = useSignal(getState().quotation.name ?? '')
-  const categorySignal = useSignal(getState().quotation.category ?? '')
-  const descSignal = useSignal(getState().quotation.desc ?? '')
-  const infoSignal = useSignal(getState().quotation.info ?? '')
-  const shareWithOptionSignal = useSignal<SharedOptions>('none')
-  const emailsSharedWithSignal = useSignal([])
+  const nameSignal = useSignal(quotation.name ?? '')
+  const categorySignal = useSignal(quotation.category ?? '')
+  const descSignal = useSignal(quotation.desc ?? '')
+  const infoSignal = useSignal(quotation.info ?? '')
+
+  const getOptionValue = (): SharedWithOption => {
+    if (quotation.sharedWith.length === 0) return sharedWithOption.nobody
+    if (quotation.sharedWith.includes('*')) return sharedWithOption.everybody
+    return sharedWithOption.persons
+  }
+
+  const shareWithOptionSignal = useSignal<SharedWithOption>(getOptionValue())
+
+  const sharedWithSignal = useSignal<string[]>(quotation.sharedWith)
+
   const { onSubmit, isPending, isSuccess, isError } = useSaveQuotation({
     modalRef,
     nameSignal,
     categorySignal,
     descSignal,
     infoSignal,
+    sharedWithSignal,
   })
   const id = useSelectorTyped((state) => state.quotation.id)
   const isDisabled = nameSignal.value === '' || categorySignal.value === ''
+
+  const forgotToAddPerson =
+    shareWithOptionSignal.value === 'persons' &&
+    sharedWithSignal.value.length === 0
 
   return (
     <FormModal
@@ -36,7 +55,7 @@ export const SaveQuotationModal = (): JSX.Element => {
       headerText='Save quotation'
       headerIcon={<MdSaveAlt />}
       buttonText={id === 'new' ? 'SAVE' : 'UPDATE'}
-      isButtonDisabled={isDisabled}
+      isButtonDisabled={isDisabled || forgotToAddPerson}
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
       isButtonError={isError}
@@ -49,7 +68,7 @@ export const SaveQuotationModal = (): JSX.Element => {
       <InfoField infoSignal={infoSignal} />
       <ShareField
         shareWithOptionSignal={shareWithOptionSignal}
-        emailsSharedWithSignal={emailsSharedWithSignal}
+        sharedWithSignal={sharedWithSignal}
       />
     </FormModal>
   )

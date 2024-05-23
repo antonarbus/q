@@ -4,6 +4,7 @@ import { type UseMutationResult } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import {
+  type Quotation,
   quotationSlice,
   useGetQuotationCategoriesQuery,
   useSaveQuotationMutation,
@@ -25,6 +26,7 @@ type Props = {
   categorySignal: Signal<string>
   descSignal: Signal<string>
   infoSignal: Signal<string>
+  sharedWithSignal: Signal<string[]>
 }
 
 type Res = {
@@ -40,6 +42,7 @@ export const useSaveQuotation = ({
   categorySignal,
   descSignal,
   infoSignal,
+  sharedWithSignal,
 }: Props): Res => {
   const navigate = useNavigate()
   const {
@@ -133,13 +136,14 @@ export const useSaveQuotation = ({
     const existingId = getState().quotation.id
     const id = existingId === 'new' ? nanoid(5) : existingId
 
-    const quotation = {
+    const quotation: Quotation = {
       ...getState().quotation,
       id,
       name: nameSignal.value,
       category: categorySignal.value,
       desc: descSignal.value,
       info: infoSignal.value,
+      sharedWith: sharedWithSignal.value,
       items: getState().quotation.items,
     }
 

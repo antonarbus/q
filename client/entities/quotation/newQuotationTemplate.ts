@@ -11,6 +11,7 @@ export const newQuotationTemplate: Quotation = {
   category: '',
   desc: '',
   info: '',
+  sharedWith: [],
   preview: '',
   items: [
     {
