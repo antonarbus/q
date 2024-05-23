@@ -2,7 +2,8 @@ import { type RootState } from '@lib_instances/store'
 import { type MenuItemType } from '../../../../../type'
 
 export const selectMenuItemByIdsChainSelector =
-  (idsToCurrentMenuItems: string[]) => (state: RootState): MenuItemType[] => {
+  (idsToCurrentMenuItems: string[]) =>
+  (state: RootState): MenuItemType[] => {
     const topLevelNavMenu = state.nav.navStructure[0]
     if (!topLevelNavMenu) return state.nav.navStructure
 
@@ -15,7 +16,8 @@ export const selectMenuItemByIdsChainSelector =
         return clicked
       }
       if (id !== 'burger') {
-        clicked = tempMenu.find((menuItem) => menuItem.id === id)?.menuItems ?? []
+        clicked =
+          tempMenu.find((menuItem) => menuItem.id === id)?.menuItems ?? []
       }
       tempMenu = clicked
     })

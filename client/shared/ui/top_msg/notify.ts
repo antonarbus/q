@@ -4,7 +4,13 @@ import { toast, Slide, Bounce, Flip, Zoom } from 'react-toastify'
 
 type Props = {
   msg: ReactNode | string
-  position?: 'bottom-center' | 'bottom-left' | 'bottom-right' | 'top-center' | 'top-left' | 'top-right'
+  position?:
+    | 'bottom-center'
+    | 'bottom-left'
+    | 'bottom-right'
+    | 'top-center'
+    | 'top-left'
+    | 'top-right'
   hideProgressBar?: boolean
   closeAfterMs?: number
   shouldStay?: true
@@ -27,7 +33,7 @@ export const notify = ({
 }: Props): void => {
   const options = {
     position: position ?? 'top-right',
-    autoClose: shouldStay ? false : (closeAfterMs ?? 5000),
+    autoClose: shouldStay ? false : closeAfterMs ?? 5000,
     delay: 0,
     hideProgressBar: hideProgressBar ?? false,
     closeButton: true,

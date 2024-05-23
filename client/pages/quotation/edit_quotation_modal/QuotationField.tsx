@@ -11,7 +11,11 @@ export const QuotationField = (): ReactNode => {
   )
 }
 
-function BookmarkFieldLayout({ children }: { children: React.ReactNode }): JSX.Element {
+function BookmarkFieldLayout({
+  children,
+}: {
+  children: React.ReactNode
+}): JSX.Element {
   return (
     <OutlinedDivWithLabel label='Quotation'>
       <Box

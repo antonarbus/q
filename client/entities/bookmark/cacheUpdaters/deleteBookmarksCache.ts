@@ -4,12 +4,15 @@ import { produce } from 'immer'
 import { queryKey } from '@shared/consts/queryKey'
 
 export const deleteBookmarksCache = (): void => {
-  reactQuery.setQueriesData<ResBody>({ queryKey: [queryKey.getBookmarks] }, (cacheData) => {
-    const updatedCacheData = produce(cacheData, (draft) => {
-      if (draft?.documents === undefined) return
-      draft.documents = []
-    })
+  reactQuery.setQueriesData<ResBody>(
+    { queryKey: [queryKey.getBookmarks] },
+    (cacheData) => {
+      const updatedCacheData = produce(cacheData, (draft) => {
+        if (draft?.documents === undefined) return
+        draft.documents = []
+      })
 
-    return updatedCacheData
-  })
+      return updatedCacheData
+    },
+  )
 }

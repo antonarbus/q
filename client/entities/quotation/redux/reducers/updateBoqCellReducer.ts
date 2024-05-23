@@ -2,13 +2,16 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { itemKey } from '../../consts/itemKey'
 import type { BoqRowCellKey, Quotation } from '../../types'
 
-export const updateBoqCellReducer = (state: Quotation, action: PayloadAction<{
-  itemIndex: number
-  rowIndex: number
-  html: string
-  value: number
-  boqRowCellKey: BoqRowCellKey
-}>): void => {
+export const updateBoqCellReducer = (
+  state: Quotation,
+  action: PayloadAction<{
+    itemIndex: number
+    rowIndex: number
+    html: string
+    value: number
+    boqRowCellKey: BoqRowCellKey
+  }>,
+): void => {
   const { itemIndex, rowIndex, html, value, boqRowCellKey } = action.payload
 
   const item = state.items[itemIndex]

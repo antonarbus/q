@@ -2,14 +2,20 @@ import { dispatch, useSelectorTyped } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
 import { useRef } from 'react'
 import { useEffectOnce } from 'react-use'
-import { navSlice, useMediaQueryValues, useMenuItemActionShortcuts, Logo, NavList } from '@shared/nav'
+import {
+  navSlice,
+  useMediaQueryValues,
+  useMenuItemActionShortcuts,
+  Logo,
+  NavList,
+} from '@shared/nav'
 import { navStructure } from './navStructure'
 
 export const Nav = (): JSX.Element => {
   const navRef = useRef<HTMLDivElement>(null)
   const logoRef = useRef<HTMLDivElement>(null)
-  const mediaQueryWidth = useSelectorTyped(state => state.nav.mediaQueryWidth)
-  const mediaEnabled = useSelectorTyped(state => state.nav.mediaEnabled)
+  const mediaQueryWidth = useSelectorTyped((state) => state.nav.mediaQueryWidth)
+  const mediaEnabled = useSelectorTyped((state) => state.nav.mediaEnabled)
   useMenuItemActionShortcuts({ navStructure })
   useMediaQueryValues({ navRef, logoRef })
 
@@ -40,9 +46,9 @@ export const Nav = (): JSX.Element => {
         fontWeight: 300,
         '& > ul > li > a > .icon-round-wrapper': mediaEnabled && {
           [`@media (max-width: ${mediaQueryWidth.icon}px) and (min-width: ${mediaQueryWidth.name}px)`]:
-          {
-            display: 'none',
-          },
+            {
+              display: 'none',
+            },
           [`@media (max-width: ${mediaQueryWidth.burger}px)`]: {
             display: 'none',
           },

@@ -51,8 +51,8 @@ const variants: Variants = {
 }
 
 export const FirstCopiedItem = (): JSX.Element | null => {
-  const items = useSelectorTyped(state => state.copy.items)
-  const isCopying = useSelectorTyped(state => state.copy.isCopying)
+  const items = useSelectorTyped((state) => state.copy.items)
+  const isCopying = useSelectorTyped((state) => state.copy.isCopying)
 
   const firstItem = items[0]
   const firstPreview = getState().copy.previews[0]
@@ -60,7 +60,8 @@ export const FirstCopiedItem = (): JSX.Element | null => {
   if (!firstItem?.width) return null
   if (!firstItem?.height) return null
 
-  const scaleFactorForFirstItem = (containerWidth - 2 * containerPadding) / firstItem.width
+  const scaleFactorForFirstItem =
+    (containerWidth - 2 * containerPadding) / firstItem.width
   const height = firstItem.height * scaleFactorForFirstItem
   const width = firstItem.width * scaleFactorForFirstItem
 
@@ -71,10 +72,7 @@ export const FirstCopiedItem = (): JSX.Element | null => {
   }
 
   return (
-    <AnimatePresence
-      mode='wait'
-      custom={animationProps}
-    >
+    <AnimatePresence mode='wait' custom={animationProps}>
       <motion.div
         key={items.length}
         custom={animationProps}

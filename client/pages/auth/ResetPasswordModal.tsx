@@ -6,7 +6,12 @@ import { useParams } from 'react-router-dom'
 import { useResetPassword } from '@features/auth/reset_password'
 import { OpenLoginModalLink } from '@features/open_close/open_login_modal'
 import { OpenRegisterModalLink } from '@features/open_close/open_register_modal'
-import { ConfirmPasswordField, EmailField, FormModal, PasswordField } from '@shared/components'
+import {
+  ConfirmPasswordField,
+  EmailField,
+  FormModal,
+  PasswordField,
+} from '@shared/components'
 
 export const ResetPasswordModal = (): React.ReactNode => {
   const { email } = useParams()
@@ -20,7 +25,9 @@ export const ResetPasswordModal = (): React.ReactNode => {
   const isConfirmPasswordOkSignal = useSignal(false)
   const isButtonDisabledSignal = useSignal(false)
 
-  const { onSubmit, isPending, isSuccess, isError } = useResetPassword({ passwordSignal })
+  const { onSubmit, isPending, isSuccess, isError } = useResetPassword({
+    passwordSignal,
+  })
 
   useSignalEffect(() => {
     isButtonDisabledSignal.value = !isConfirmPasswordOkSignal.value
@@ -47,9 +54,7 @@ export const ResetPasswordModal = (): React.ReactNode => {
         emailSignal={emailSignal}
         isEmailOkSignal={isEmailOkSignal}
       />
-      <PasswordField
-        passwordSignal={passwordSignal}
-      />
+      <PasswordField passwordSignal={passwordSignal} />
       <ConfirmPasswordField
         originalPasswordSignal={passwordSignal}
         isConfirmPasswordOkSignal={isConfirmPasswordOkSignal}

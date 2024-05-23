@@ -5,12 +5,16 @@ import type { Next, Req, Res, ResWithBody } from '../types'
 
 export type ResBody = {
   message:
-  'no access token in headers' |
-  'accessJwtToken is not verified' |
-  'accessJwtToken has expired'
+    | 'no access token in headers'
+    | 'accessJwtToken is not verified'
+    | 'accessJwtToken has expired'
 }
 
-export const verifyAccessTokenMiddleware = (req: Req, res: ResWithBody<ResBody>, next: Next): Res | undefined => {
+export const verifyAccessTokenMiddleware = (
+  req: Req,
+  res: ResWithBody<ResBody>,
+  next: Next,
+): Res | undefined => {
   try {
     const accessJwtToken = req.headers[headerName.accessJwtToken]
 

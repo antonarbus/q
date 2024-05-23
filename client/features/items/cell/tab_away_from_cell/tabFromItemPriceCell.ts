@@ -6,10 +6,7 @@ type Props = {
   rowIndex: number
 }
 
-export const tabFromItemPriceCell = ({
-  e,
-  qtyCellEditorRef,
-}: Props): void => {
+export const tabFromItemPriceCell = ({ e, qtyCellEditorRef }: Props): void => {
   const isTabKey = e.key === 'Tab'
 
   if (isTabKey) {

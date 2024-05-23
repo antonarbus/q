@@ -57,17 +57,36 @@ export const ButtonCustom = ({
         ...restProps.sx,
       }}
     >
-      {(!showSuccessIcon.value && !showErrorIcon.value) &&
-        restProps.children
-      }
-      {(isButtonLoading === true) && (
-        <RotatingLoaderIcon style={{ height: '25px', width: '25px', position: 'absolute', color: 'white' }} />
+      {!showSuccessIcon.value && !showErrorIcon.value && restProps.children}
+      {isButtonLoading === true && (
+        <RotatingLoaderIcon
+          style={{
+            height: '25px',
+            width: '25px',
+            position: 'absolute',
+            color: 'white',
+          }}
+        />
       )}
       {showSuccessIcon.value && (
-        <FaCircleCheck style={{ height: '25px', width: '25px', position: 'absolute', color: 'white' }} />
+        <FaCircleCheck
+          style={{
+            height: '25px',
+            width: '25px',
+            position: 'absolute',
+            color: 'white',
+          }}
+        />
       )}
       {showErrorIcon.value && (
-        <PiSmileySadBold style={{ height: '25px', width: '25px', position: 'absolute', color: 'white' }} />
+        <PiSmileySadBold
+          style={{
+            height: '25px',
+            width: '25px',
+            position: 'absolute',
+            color: 'white',
+          }}
+        />
       )}
     </Button>
   )

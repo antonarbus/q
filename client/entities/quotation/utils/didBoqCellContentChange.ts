@@ -19,7 +19,11 @@ export const didBoqCellContentChange = ({
   boqRowCellKey,
 }: Props): boolean => {
   const htmlOnDisplay = editor.html.get()
-  const htmlFromStore = getBoqCellFromStore({ itemIndex, rowIndex, boqRowCellKey })?.html
+  const htmlFromStore = getBoqCellFromStore({
+    itemIndex,
+    rowIndex,
+    boqRowCellKey,
+  })?.html
   const didContentChange = htmlOnDisplay !== htmlFromStore
   return didContentChange
 }

@@ -1,4 +1,7 @@
-export const dateFilterComparator = (filterLocalDateAtMidnight: Date, cellValue: Date): number => {
+export const dateFilterComparator = (
+  filterLocalDateAtMidnight: Date,
+  cellValue: Date,
+): number => {
   const filterDateString = filterLocalDateAtMidnight.toDateString()
   const cellDateString = cellValue.toDateString()
 

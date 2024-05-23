@@ -24,7 +24,9 @@ export const InfoField = ({ infoSignal }: Props): JSX.Element => {
         InputProps={{
           startAdornment: (
             <InputAdornment position='start'>
-              <BsFileEarmarkText style={{ height: '22px', width: '22px', translate: '0px 11px' }}/>
+              <BsFileEarmarkText
+                style={{ height: '22px', width: '22px', translate: '0px 11px' }}
+              />
             </InputAdornment>
           ),
         }}

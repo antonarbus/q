@@ -16,7 +16,9 @@ export const PriceHeaderLayout = ({
     <Box
       sx={{
         '& .layout': {
-          boxShadow: outlinedForDevPurposes ? '0 0 1px 1px #cf5757c3 inset' : 'none',
+          boxShadow: outlinedForDevPurposes
+            ? '0 0 1px 1px #cf5757c3 inset'
+            : 'none',
         },
         '& :where(.item)': {
           visibility: hideContentForDevPurposes ? 'hidden' : 'visible',

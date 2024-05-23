@@ -8,7 +8,11 @@ type Props = {
 
 let isAnimationPrevented = false // needed to avoid second click on backdrop which launches unwanted second animation
 
-export const slideElement = ({ intoView, element, onSlideElementComplete }: Props): void => {
+export const slideElement = ({
+  intoView,
+  element,
+  onSlideElementComplete,
+}: Props): void => {
   if (isAnimationPrevented) return
   if (element === null) return
 

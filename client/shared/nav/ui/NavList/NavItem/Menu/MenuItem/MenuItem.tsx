@@ -19,9 +19,14 @@ type Props = {
   hoveredMenuItemIndex: number
 }
 
-export const MenuItem = ({ menuItem, hoveredMenuItemIndex }: Props): JSX.Element => {
+export const MenuItem = ({
+  menuItem,
+  hoveredMenuItemIndex,
+}: Props): JSX.Element => {
   const location = useLocation()
-  const isHovered = useSelectorTyped(state => state.nav.menuItemHoverIndex === hoveredMenuItemIndex)
+  const isHovered = useSelectorTyped(
+    (state) => state.nav.menuItemHoverIndex === hoveredMenuItemIndex,
+  )
   const isNextMenuAvailable = !!menuItem.menuItems
   const isIcon = !!menuItem.icon
   const menuId = menuItem.id
@@ -33,7 +38,10 @@ export const MenuItem = ({ menuItem, hoveredMenuItemIndex }: Props): JSX.Element
   const isSuccess = menuItem?.isSuccess
   const isError = menuItem?.isError
 
-  const fixedLink = (location.pathname + '/' + link).replace('.', '').replace('//', '/').replace('//', '/')
+  const fixedLink = (location.pathname + '/' + link)
+    .replace('.', '')
+    .replace('//', '/')
+    .replace('//', '/')
   const to = link?.includes('.') ? fixedLink : link
 
   return (
@@ -57,10 +65,12 @@ export const MenuItem = ({ menuItem, hoveredMenuItemIndex }: Props): JSX.Element
         dispatch(navSlice.actions.setMenuItemHoverIndex(hoveredMenuItemIndex))
       }}
     >
-      {isIcon && !isLoading && <Icon icon={menuItem.icon} disabled={disabled} />}
+      {isIcon && !isLoading && (
+        <Icon icon={menuItem.icon} disabled={disabled} />
+      )}
       {isIcon && isLoading && <SpinnerIcon />}
-      {isIcon && isSuccess && <SuccessIcon /> }
-      {isIcon && isError && <ErrorIcon /> }
+      {isIcon && isSuccess && <SuccessIcon />}
+      {isIcon && isError && <ErrorIcon />}
       <TextInMenu
         reserveSpaceForIcon={isNextMenuAvailable}
         name={menuItem.name}

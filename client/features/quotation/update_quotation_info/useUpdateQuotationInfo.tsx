@@ -16,11 +16,13 @@ export const useUpdateQuotationInfo = ({
   infoSignal,
 }: Props): void => {
   useSignalEffect(() => {
-    dispatch(quotationSlice.actions.updateQuotationInfoReducer({
-      name: nameSignal.value,
-      category: categorySignal.value,
-      desc: descSignal.value,
-      info: infoSignal.value,
-    }))
+    dispatch(
+      quotationSlice.actions.updateQuotationInfoReducer({
+        name: nameSignal.value,
+        category: categorySignal.value,
+        desc: descSignal.value,
+        info: infoSignal.value,
+      }),
+    )
   })
 }

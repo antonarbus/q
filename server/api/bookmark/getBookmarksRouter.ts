@@ -12,7 +12,11 @@ export type ResBody = {
   documents?: Item[]
 }
 
-type RouterHandler = (req: Req, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
+type RouterHandler = (
+  req: Req,
+  res: ResWithBody<ResBody>,
+  next: Next,
+) => Promise<ResWithBody<ResBody> | undefined>
 
 export const getBookmarksRouter = Router()
 
@@ -20,8 +24,7 @@ const getBookmarks: RouterHandler = async (req, res, next) => {
   try {
     const email = getEmailFromRefreshTokenOrThrowUnauthorized(req)
 
-    const documents = await BookmarkModel
-      .find({ email })
+    const documents = await BookmarkModel.find({ email })
       // .sort({ updatedAt: -1 })
       .select({ _id: 0, __v: 0, email: 0 })
       .lean()
@@ -46,8 +49,4 @@ const getBookmarks: RouterHandler = async (req, res, next) => {
   }
 }
 
-getBookmarksRouter.get(
-  '/',
-  verifyAccessTokenMiddleware,
-  getBookmarks,
-)
+getBookmarksRouter.get('/', verifyAccessTokenMiddleware, getBookmarks)

@@ -9,12 +9,22 @@ import { PriceItemForEditModal } from '@widgets/items/price/PriceItemForEditModa
 import { TextItemForEditModal } from '@widgets/items/text/TextItemForEditModal'
 import { hideBoqRowPinsOnRowBlur } from '@features/items/cell/pin'
 import { onItemDrag } from '@features/items/drag'
-import { ItemProvider, itemsShapeEqualityFn, BoqItemProvider, itemKey, DraggableItemsContainer, RowProvider } from '@entities/quotation'
+import {
+  ItemProvider,
+  itemsShapeEqualityFn,
+  BoqItemProvider,
+  itemKey,
+  DraggableItemsContainer,
+  RowProvider,
+} from '@entities/quotation'
 import { OutlinedDivWithLabel } from '@shared/components'
 import { cls } from '@shared/consts/cls'
 
 export const BookmarkField = (): ReactNode => {
-  const items = useSelectorTyped(state => state.quotation.items, itemsShapeEqualityFn)
+  const items = useSelectorTyped(
+    (state) => state.quotation.items,
+    itemsShapeEqualityFn,
+  )
 
   if (items.length === 0) return null
 
@@ -64,17 +74,18 @@ export const BookmarkField = (): ReactNode => {
               return (
                 <ItemProvider key={item.id} itemIndex={itemIndex}>
                   <BoqItemProvider>
-                    <RowProvider
-                      rowIndex={0}
-                      rowId={item.id}
-                    >
+                    <RowProvider rowIndex={0} rowId={item.id}>
                       <BoqRowSortAndAnimate
                         index={0} // 'index' is internal prop consumed by SortableElement HOC
                         disabled={true}
                       >
                         <BoqRowForEditModal
                           onBlur={(e) => {
-                            hideBoqRowPinsOnRowBlur({ e, itemIndex, rowIndex: 0 })
+                            hideBoqRowPinsOnRowBlur({
+                              e,
+                              itemIndex,
+                              rowIndex: 0,
+                            })
                           }}
                         />
                       </BoqRowSortAndAnimate>
@@ -87,12 +98,16 @@ export const BookmarkField = (): ReactNode => {
             return null
           })}
         </AnimatePresence>
-      </DraggableItemsContainer >
+      </DraggableItemsContainer>
     </BookmarkFieldLayout>
   )
 }
 
-function BookmarkFieldLayout({ children }: { children: React.ReactNode }): JSX.Element {
+function BookmarkFieldLayout({
+  children,
+}: {
+  children: React.ReactNode
+}): JSX.Element {
   return (
     <OutlinedDivWithLabel label='Item'>
       <Box

@@ -11,7 +11,10 @@ export const sendMail = async ({ to, subject, html }: Props): Promise<void> => {
   // Only needed if you don't have a real mail account for testing
   // const testAccount = await nodemailer.createTestAccount()
 
-  const port = typeof process.env.SMTP_PORT === 'string' ? parseInt(process.env.SMTP_PORT) : 587
+  const port =
+    typeof process.env.SMTP_PORT === 'string'
+      ? parseInt(process.env.SMTP_PORT)
+      : 587
 
   // create reusable transporter object using the default SMTP transport
   const transporter = nodemailer.createTransport({

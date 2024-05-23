@@ -6,7 +6,10 @@ type Props = {
   isConfirmPasswordOkSignal: Signal<boolean>
 }
 
-export const ConfirmPasswordField = ({ originalPasswordSignal, isConfirmPasswordOkSignal }: Props): JSX.Element => {
+export const ConfirmPasswordField = ({
+  originalPasswordSignal,
+  isConfirmPasswordOkSignal,
+}: Props): JSX.Element => {
   const confirmPasswordSignal = useSignal('')
   const didBlurSignal = useSignal(false)
   const initLabel = 'Confirm password'
@@ -14,9 +17,17 @@ export const ConfirmPasswordField = ({ originalPasswordSignal, isConfirmPassword
   const isLabelRedSignal = useSignal(false)
 
   useSignalEffect(() => {
-    isConfirmPasswordOkSignal.value = !!originalPasswordSignal.value && originalPasswordSignal.value === confirmPasswordSignal.value
-    isLabelRedSignal.value = didBlurSignal.value && !!originalPasswordSignal.value && !!confirmPasswordSignal.value && !isConfirmPasswordOkSignal.value
-    labelSignal.value = isLabelRedSignal.value ? 'Passwords do not match' : initLabel
+    isConfirmPasswordOkSignal.value =
+      !!originalPasswordSignal.value &&
+      originalPasswordSignal.value === confirmPasswordSignal.value
+    isLabelRedSignal.value =
+      didBlurSignal.value &&
+      !!originalPasswordSignal.value &&
+      !!confirmPasswordSignal.value &&
+      !isConfirmPasswordOkSignal.value
+    labelSignal.value = isLabelRedSignal.value
+      ? 'Passwords do not match'
+      : initLabel
   })
 
   return (

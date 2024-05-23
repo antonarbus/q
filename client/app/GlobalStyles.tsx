@@ -80,12 +80,15 @@ export const GlobalStyles = (): JSX.Element => (
       }
 
       /* Remove list styles (bullets/numbers) */
-      ol, ul, menu {
+      ol,
+      ul,
+      menu {
         padding-left: 25px;
         list-style-type: inherit;
       }
 
-      ol ol, ul ul {
+      ol ol,
+      ul ul {
         padding-left: 25px;
         list-style-type: inherit;
       }

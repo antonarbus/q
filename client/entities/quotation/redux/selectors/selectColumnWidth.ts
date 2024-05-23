@@ -9,9 +9,9 @@ type Props = {
 
 export const selectColumnWidth =
   ({ itemIndex, boqColumnKey }: Props) =>
-    (state: RootState): number => {
-      const boqItem = getBoqItemFromStore({ itemIndex })
-      if (boqItem === undefined) return 0
-      const width = boqItem.boq.column[boqColumnKey].width
-      return width
-    }
+  (state: RootState): number => {
+    const boqItem = getBoqItemFromStore({ itemIndex })
+    if (boqItem === undefined) return 0
+    const width = boqItem.boq.column[boqColumnKey].width
+    return width
+  }

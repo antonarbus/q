@@ -9,7 +9,13 @@ type Props = {
   logo?: React.ReactNode
 }
 
-export const CardCustom = ({ children, sx, reference, title, logo }: Props): JSX.Element => (
+export const CardCustom = ({
+  children,
+  sx,
+  reference,
+  title,
+  logo,
+}: Props): JSX.Element => (
   <Box
     ref={reference}
     onMouseDown={(e: MouseEvent): void => {
@@ -39,11 +45,7 @@ export const CardCustom = ({ children, sx, reference, title, logo }: Props): JSX
       ...sx,
     }}
   >
-    {Boolean(logo) && (
-      <div style={{ alignSelf: 'center' }} >
-        {logo}
-      </div>
-    )}
+    {Boolean(logo) && <div style={{ alignSelf: 'center' }}>{logo}</div>}
     {Boolean(title) && (
       <Typography
         component='h1'

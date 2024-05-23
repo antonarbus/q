@@ -12,8 +12,8 @@ type Props = {
 
 type SortableBox = ComponentClass<SortableContainerProps & Props>
 
-export const DraggableItemsContainer: SortableBox =
-  SortableContainer(({ children }: Props) => (
+export const DraggableItemsContainer: SortableBox = SortableContainer(
+  ({ children }: Props) => (
     <motion.div
       className={cls.items}
       initial={{
@@ -36,4 +36,5 @@ export const DraggableItemsContainer: SortableBox =
     >
       {children}
     </motion.div>
-  ))
+  ),
+)

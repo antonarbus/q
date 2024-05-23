@@ -1,6 +1,10 @@
 import { dispatch } from '@lib_instances/store'
 import { type FocusEvent } from 'react'
-import { boqRowCellKey, getBoqRowFromStore, quotationSlice } from '@entities/quotation'
+import {
+  boqRowCellKey,
+  getBoqRowFromStore,
+  quotationSlice,
+} from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 
 type Props = {
@@ -25,20 +29,24 @@ export const hideBoqRowPinsOnRowBlur = ({
   const isItemPricePinShown = boqRow.itemPrice.pin.isShown
 
   if (isItemPricePinShown) {
-    dispatch(quotationSlice.actions.hideBoqRowCellPinReducer({
-      itemIndex,
-      rowIndex,
-      boqRowCellKey: boqRowCellKey.itemPrice,
-    }))
+    dispatch(
+      quotationSlice.actions.hideBoqRowCellPinReducer({
+        itemIndex,
+        rowIndex,
+        boqRowCellKey: boqRowCellKey.itemPrice,
+      }),
+    )
   }
 
   const isQtyPinShown = boqRow.qty.pin.isShown
 
   if (isQtyPinShown) {
-    dispatch(quotationSlice.actions.hideBoqRowCellPinReducer({
-      itemIndex,
-      rowIndex,
-      boqRowCellKey: boqRowCellKey.qty,
-    }))
+    dispatch(
+      quotationSlice.actions.hideBoqRowCellPinReducer({
+        itemIndex,
+        rowIndex,
+        boqRowCellKey: boqRowCellKey.qty,
+      }),
+    )
   }
 }

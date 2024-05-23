@@ -71,19 +71,19 @@ A _slice_ consists of _segments_ to separate code by its technical nature, commo
 Authorization - checking if password is correct
 Authentication - checking if a user is the same as authorized initially
 
-(A) At registration we store at db email + hashed password with secrete sault + 
+(A) At registration we store at db email + hashed password with secrete sault +
 `refresh` jwt token with 30d validity which contains email & role payload
 
-(B) Client is authorized by comparing email & password's hash 
+(B) Client is authorized by comparing email & password's hash
 against stored email and hashed password.
 
 (C) On successful authorization the server issues new 15 min `access` jwt token and
-issues new `refresh` jwt token if pervious one is expired. 
+issues new `refresh` jwt token if pervious one is expired.
 
 (D) `refresh` jwt token is needed for future user authentication to avoid
 asking for credentials on every protected http request.
 
-(E) `refresh` token is saved id db and on server in secured cookies on successful login. 
+(E) `refresh` token is saved id db and on server in secured cookies on successful login.
 On every protected api request we verify `refresh` token and check if it is the same as in db.
 
 (F) If we want to forbid user's access we may simply delete `refresh` token from db.
@@ -127,4 +127,3 @@ payload (usually object with user email, role, etc...), validation time
 and a hash based on a secret keys, which are kept on a server.
 Server can validate the token only if it knows the secrete keys.
 Secrete keys are kept in environment variables.
-

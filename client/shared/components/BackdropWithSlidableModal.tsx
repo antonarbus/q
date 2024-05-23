@@ -87,9 +87,7 @@ export const BackdropWithSlidableModal = ({
         zIndex: 1000,
       }}
     >
-      <div ref={contentRef}>
-        {children}
-      </div>
+      <div ref={contentRef}>{children}</div>
     </div>
   )
 }

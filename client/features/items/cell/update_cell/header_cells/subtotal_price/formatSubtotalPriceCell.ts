@@ -33,11 +33,13 @@ export const formatSubtotalPriceCell = ({
 
   if (html === newHtml) return
 
-  dispatch(quotationSlice.actions.updateSubTotalPriceReducer({
-    itemIndex,
-    html: newHtml,
-    value: roundedValue,
-  }))
+  dispatch(
+    quotationSlice.actions.updateSubTotalPriceReducer({
+      itemIndex,
+      html: newHtml,
+      value: roundedValue,
+    }),
+  )
 
   subTotalPriceEditorRef.current.html.set(newHtml)
 }

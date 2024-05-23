@@ -6,29 +6,36 @@ type InputComponentProps = {
   [key: string]: unknown
 }
 
-const InputComponent = forwardRef((props: InputComponentProps, ref: React.ForwardedRef<HTMLDivElement>): JSX.Element => {
-  const { ownerState, ...other } = props
+const InputComponent = forwardRef(
+  (
+    props: InputComponentProps,
+    ref: React.ForwardedRef<HTMLDivElement>,
+  ): JSX.Element => {
+    const { ownerState, ...other } = props
 
-  return (
-    <div
-      {...other}
-      ref={ref}
-      css={{
-        overflow: 'hidden',
-        backgroundColor: 'white',
-        width: '100%',
-      }}
-    />
-  )
-})
+    return (
+      <div
+        {...other}
+        ref={ref}
+        css={{
+          overflow: 'hidden',
+          backgroundColor: 'white',
+          width: '100%',
+        }}
+      />
+    )
+  },
+)
 
-export const OutlinedDivWithLabel = ({ children, label, sx }:
-{
+export const OutlinedDivWithLabel = ({
+  children,
+  label,
+  sx,
+}: {
   children: React.ReactNode
   label: string
   sx?: SxProps
-},
-): JSX.Element => {
+}): JSX.Element => {
   return (
     <TextField
       disabled={false}

@@ -12,7 +12,11 @@ type Props = {
  * - if we have nested menu some space should be reserved for 'go inside' icon
  * - if name is long it will be trimmed ellipsis (... dots)
  */
-export const TextInMenu = ({ reserveSpaceForIcon, name, disabled }: Props): JSX.Element => {
+export const TextInMenu = ({
+  reserveSpaceForIcon,
+  name,
+  disabled,
+}: Props): JSX.Element => {
   return (
     <span
       style={{

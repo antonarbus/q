@@ -12,7 +12,11 @@ type Shortcuts = {
 const shortcuts: Shortcuts[] = []
 let arr: MenuItemType[] = []
 
-const searchForShortcutsInNavStructure = ({ navStructure }: { navStructure: MenuItemType[] }): void => {
+const searchForShortcutsInNavStructure = ({
+  navStructure,
+}: {
+  navStructure: MenuItemType[]
+}): void => {
   arr = navStructure
 
   arr.forEach((menuItem) => {
@@ -64,7 +68,9 @@ export const useMenuItemActionShortcuts = ({ navStructure }: Props): void => {
         return shortcutStr === pressedKeysStr
       })
 
-      keysPressed = keysPressed.filter((key) => key !== e.key.toLocaleLowerCase())
+      keysPressed = keysPressed.filter(
+        (key) => key !== e.key.toLocaleLowerCase(),
+      )
 
       if (shortcutItem === undefined) return
 

@@ -2,7 +2,9 @@ import { useSelectorTyped } from '@lib_instances/store'
 import { selectIsLastItem } from '../redux/selectors/selectIsLastItem'
 
 export const useIsItemSortDisabled = (): boolean => {
-  const isCopyContainer = useSelectorTyped(state => state.copy.isCopyContainer)
+  const isCopyContainer = useSelectorTyped(
+    (state) => state.copy.isCopyContainer,
+  )
   const isLastItem = useSelectorTyped(selectIsLastItem)
   const isItemSortDisabled = isCopyContainer || isLastItem
   return isItemSortDisabled

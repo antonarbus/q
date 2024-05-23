@@ -13,8 +13,7 @@ export const DisplayedRowsCount = (): JSX.Element => {
         zIndex: 2,
       }}
     >
-      Rows
-      {' '}
+      Rows{' '}
       <Chip
         label={displayedRowsCountSignal}
         size='small'

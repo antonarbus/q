@@ -8,6 +8,10 @@ export const remindToSaveQuotationOnInsert = (): void => {
   const id = getState().quotation.id
 
   if (id === 'new' || !id) {
-    notify({ msg: 'Do not forget to save quotation', type: 'info', theme: 'light' })
+    notify({
+      msg: 'Do not forget to save quotation',
+      type: 'info',
+      theme: 'light',
+    })
   }
 }

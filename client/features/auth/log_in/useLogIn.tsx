@@ -28,10 +28,21 @@ type Res = {
   isError: UseMutationResult['isError']
 }
 
-export const useLogIn = ({ emailSignal, passwordSignal, modalRef }: Props): Res => {
+export const useLogIn = ({
+  emailSignal,
+  passwordSignal,
+  modalRef,
+}: Props): Res => {
   const navigate = useNavigate()
   const { id } = useParams()
-  const { mutate: logIn, isPending, data, isSuccess, isError, error } = useLogInMutation()
+  const {
+    mutate: logIn,
+    isPending,
+    data,
+    isSuccess,
+    isError,
+    error,
+  } = useLogInMutation()
   const { refetch: refetchQuotations } = useGetQuotationsQuery()
   const { refetch: refetchItems } = useGetBookmarksQuery()
 
@@ -51,8 +62,12 @@ export const useLogIn = ({ emailSignal, passwordSignal, modalRef }: Props): Res 
 
       accessTokenSignal.value = accessJwtToken
       dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
-      dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.login] }))
-      dispatch(navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.account] }))
+      dispatch(
+        navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.login] }),
+      )
+      dispatch(
+        navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.account] }),
+      )
 
       if (location.pathname.includes(route.quotations)) {
         void refetchQuotations()
@@ -87,7 +102,11 @@ export const useLogIn = ({ emailSignal, passwordSignal, modalRef }: Props): Res 
       }
 
       if (error.response?.data.message === 'not activated') {
-        notify({ msg: 'Account is not activated. Check mailbox.', type: 'info', theme: 'light' })
+        notify({
+          msg: 'Account is not activated. Check mailbox.',
+          type: 'info',
+          theme: 'light',
+        })
         return
       }
 

@@ -2,7 +2,13 @@ import { dispatch, getState } from '@lib_instances/store'
 import { type MouseEvent, type ReactNode } from 'react'
 import { MdOutlineStarOutline } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
-import { boqRowKey, getBoqRowFromStore, quotationSlice, useItem, useRow } from '@entities/quotation'
+import {
+  boqRowKey,
+  getBoqRowFromStore,
+  quotationSlice,
+  useItem,
+  useRow,
+} from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
@@ -32,12 +38,14 @@ export const BookmarkBoqRowIcon = (): ReactNode => {
         const boqRowElement = clickedIconElement.closest(`.${cls.boqRow}`)
         if (!boqRowElement) return
 
-        dispatch(quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
-          itemIndex,
-          rowIndex,
-          height: boqRowElement.clientHeight,
-          width: boqRowElement.clientWidth,
-        }))
+        dispatch(
+          quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
+            itemIndex,
+            rowIndex,
+            height: boqRowElement.clientHeight,
+            width: boqRowElement.clientWidth,
+          }),
+        )
 
         const html = boqRowElement.outerHTML
         const cleanedHtml = cleanHtml(html)
@@ -47,10 +55,12 @@ export const BookmarkBoqRowIcon = (): ReactNode => {
         if (!boqRow) return
         if (boqRow.type === boqRowKey.paste) return
 
-        dispatch(quotationSlice.actions.updateItemPreviewByIdReducer({
-          id: boqRow.id,
-          preview: cleanedHtml,
-        }))
+        dispatch(
+          quotationSlice.actions.updateItemPreviewByIdReducer({
+            id: boqRow.id,
+            preview: cleanedHtml,
+          }),
+        )
 
         navigate(`./${route.bookmark}/${boqRow.id}`)
       }}

@@ -5,7 +5,7 @@ import { FaInfoCircle } from 'react-icons/fa'
 import { openQuotationInfoModal } from '@features/open_close/open_quotation_info_modal'
 
 export const Info = (): ReactNode => {
-  const quotationId = useSelectorTyped(state => state.quotation.id)
+  const quotationId = useSelectorTyped((state) => state.quotation.id)
 
   if (quotationId === '' || quotationId === undefined) return null
 

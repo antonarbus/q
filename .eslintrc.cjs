@@ -9,12 +9,20 @@ module.exports = {
     // 'eslint:recommended', // https://typescript-eslint.io/linting/configs/
     'standard-with-typescript', // https://github.com/standard/eslint-config-standard-with-typescript#example-config
     'plugin:@conarti/feature-sliced/recommended',
+    'prettier',
   ],
-  ignorePatterns: ['dist', 'build', '.eslintrc.cjs', 'vite.config.ts', 'node_modules', 'test-setup.ts'],
+  ignorePatterns: [
+    'dist',
+    'build',
+    '.eslintrc.cjs',
+    'vite.config.ts',
+    'node_modules',
+    'test-setup.ts',
+  ],
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh', '@typescript-eslint'],
   parserOptions: {
-    ecmaFeatures: { jsx: true, },
+    ecmaFeatures: { jsx: true },
     ecmaVersion: 'latest',
     sourceType: 'module',
     project: ['./tsconfig.json'],
@@ -24,7 +32,10 @@ module.exports = {
     'jsx-quotes': ['error', 'prefer-single'],
     'no-console': ['error', { allow: ['error', 'warn', 'info'] }], // no console.log(), but allow console.error/warn()
     'comma-dangle': ['error', 'always-multiline'],
-    '@typescript-eslint/no-misused-promises': ['error', { 'checksVoidReturn': false }],
+    '@typescript-eslint/no-misused-promises': [
+      'error',
+      { checksVoidReturn: false },
+    ],
     '@typescript-eslint/strict-boolean-expressions': 'off',
     '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/consistent-type-definitions': 'off',
@@ -32,7 +43,7 @@ module.exports = {
     '@typescript-eslint/space-before-function-paren': 'off',
     '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
     '@typescript-eslint/unbound-method': 'off', // new rule after upgrade, not clear, take a look later
-    '@typescript-eslint/no-non-null-assertion': 'off'
+    '@typescript-eslint/no-non-null-assertion': 'off',
     // '@typescript-eslint/indent': 'off',
     // '@typescript-eslint/quotes': 'off',
     // 'semi': ['error', 'never'],

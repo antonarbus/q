@@ -20,7 +20,7 @@ type Props = {
 export const BoqRow = ({ onBlur }: Props): JSX.Element => {
   return (
     <BoqRowLayout onBlur={onBlur}>
-      <BoqRowActionButtonsLayout style={{ left: '-33px' }} >
+      <BoqRowActionButtonsLayout style={{ left: '-33px' }}>
         <DragBoqRowIcon />
         <CopyBoqRowIcon />
         <CutBoqRowIcon />
@@ -30,7 +30,7 @@ export const BoqRow = ({ onBlur }: Props): JSX.Element => {
       <ItemPriceCell />
       <QtyCell />
       <PriceCell />
-      <BoqRowActionButtonsLayout style={{ right: '-33px' }} >
+      <BoqRowActionButtonsLayout style={{ right: '-33px' }}>
         <BookmarkBoqRowIcon />
         <OpenInfoBoqRowModalIcon />
         <DeleteBoqRowIcon />

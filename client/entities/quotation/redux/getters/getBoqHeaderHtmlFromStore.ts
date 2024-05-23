@@ -5,10 +5,12 @@ import { type BoqHeaderKey } from '../../types'
 type Props = {
   itemIndex: number
   boqHeaderKey: BoqHeaderKey
-
 }
 
-export const getBoqHeaderHtmlFromStore = ({ itemIndex, boqHeaderKey }: Props): string => {
+export const getBoqHeaderHtmlFromStore = ({
+  itemIndex,
+  boqHeaderKey,
+}: Props): string => {
   const item = getState().quotation.items[itemIndex]
 
   if (!item) return ''

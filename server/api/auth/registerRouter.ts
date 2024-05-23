@@ -1,6 +1,11 @@
 import bcrypt from 'bcryptjs'
 import express from 'express'
-import { type Result, type ValidationError, body, validationResult } from 'express-validator'
+import {
+  type Result,
+  type ValidationError,
+  body,
+  validationResult,
+} from 'express-validator'
 import { type User } from '@entities/user'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { nanoid } from '@shared/lib/nanoid'
@@ -23,7 +28,11 @@ export type ResBody = {
 
 export const registerRouter = express.Router()
 
-type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
+type RouterHandler = (
+  req: ReqWithBody<ReqBody>,
+  res: ResWithBody<ResBody>,
+  next: Next,
+) => Promise<ResWithBody<ResBody> | undefined>
 
 const register: RouterHandler = async (req, res, next) => {
   try {
@@ -31,12 +40,10 @@ const register: RouterHandler = async (req, res, next) => {
     const isValidationError = !validationErrors.isEmpty()
 
     if (isValidationError) {
-      return res
-        .status(httpStatus.forbidden_403)
-        .json({
-          message: 'validation error',
-          validationErrors,
-        })
+      return res.status(httpStatus.forbidden_403).json({
+        message: 'validation error',
+        validationErrors,
+      })
     }
 
     const email = req.body.email.toLowerCase()

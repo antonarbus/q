@@ -10,11 +10,16 @@ import { renderInput } from './renderInput'
 import { renderOption } from './renderOption'
 
 export const Search = (): JSX.Element => {
-  const { data: bookmarksData, isPending: isPendingBookmarks, refetch: fetchBookmarks } = useGetBookmarksQuery()
-  const email = useSelectorTyped(state => state.user.email)
+  const {
+    data: bookmarksData,
+    isPending: isPendingBookmarks,
+    refetch: fetchBookmarks,
+  } = useGetBookmarksQuery()
+  const email = useSelectorTyped((state) => state.user.email)
   const options = bookmarksData?.documents ?? []
   const inputValueSignal = useSignal('')
-  const { loadBookmark, isPendingBookmark, pendingBookmarkId } = useCopyBookmarkAtSearch()
+  const { loadBookmark, isPendingBookmark, pendingBookmarkId } =
+    useCopyBookmarkAtSearch()
 
   useEffect(() => {
     if (email) {
@@ -44,7 +49,12 @@ export const Search = (): JSX.Element => {
         return option.name + option.category + option.desc
       }}
       renderInput={renderInput}
-      renderOption={renderOption({ loadBookmark, inputValueSignal, isPendingBookmark, pendingBookmarkId })}
+      renderOption={renderOption({
+        loadBookmark,
+        inputValueSignal,
+        isPendingBookmark,
+        pendingBookmarkId,
+      })}
       PaperComponent={PaperComponent}
       componentsProps={{ popper: { sx: { zIndex: 3 } } }}
       sx={{

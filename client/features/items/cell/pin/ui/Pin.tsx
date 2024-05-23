@@ -2,7 +2,12 @@ import { useSelectorTyped } from '@lib_instances/store'
 import { Box } from '@mui/material'
 import { type ReactNode } from 'react'
 import { VscPinned } from 'react-icons/vsc'
-import { type BoqRowCellKey, selectBoqCellPin, useItem, useRow } from '@entities/quotation'
+import {
+  type BoqRowCellKey,
+  selectBoqCellPin,
+  useItem,
+  useRow,
+} from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 
 type Props = {
@@ -10,13 +15,12 @@ type Props = {
   onClick: () => void
 }
 
-export const Pin = ({
-  boqRowCellKey,
-  onClick,
-}: Props): ReactNode => {
+export const Pin = ({ boqRowCellKey, onClick }: Props): ReactNode => {
   const { itemIndex } = useItem()
   const { rowIndex } = useRow()
-  const pin = useSelectorTyped(selectBoqCellPin({ itemIndex, rowIndex, boqRowCellKey }))
+  const pin = useSelectorTyped(
+    selectBoqCellPin({ itemIndex, rowIndex, boqRowCellKey }),
+  )
 
   if (pin === undefined) return null
   if (!pin.isShown) return null

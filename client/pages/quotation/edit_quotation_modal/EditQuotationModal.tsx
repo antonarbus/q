@@ -16,7 +16,12 @@ export const EditQuotationModal = (): JSX.Element => {
   const nameSignal = useSignal(quotation?.name ?? '')
   const categorySignal = useSignal(quotation?.category ?? '')
   const descSignal = useSignal(quotation?.desc ?? '')
-  const { onSubmit, isPending, isSuccess, isError } = useEditQuotation({ modalRef, nameSignal, categorySignal, descSignal })
+  const { onSubmit, isPending, isSuccess, isError } = useEditQuotation({
+    modalRef,
+    nameSignal,
+    categorySignal,
+    descSignal,
+  })
   const isDisabled = nameSignal.value === '' || categorySignal.value === ''
 
   return (
@@ -33,8 +38,8 @@ export const EditQuotationModal = (): JSX.Element => {
       onCloseSlideModalOutAndNavigateUp={true}
       onSubmit={onSubmit}
     >
-      <NameField nameSignal={nameSignal}/>
-      <CategoryField categorySignal={categorySignal}/>
+      <NameField nameSignal={nameSignal} />
+      <CategoryField categorySignal={categorySignal} />
       <DescriptionField descSignal={descSignal} />
       <QuotationField />
     </FormModal>

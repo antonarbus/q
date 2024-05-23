@@ -9,10 +9,7 @@ type Props = {
   itemIndex: number
 }
 
-export const updateTextItem = ({
-  editorRef,
-  itemIndex,
-}: Props): void => {
+export const updateTextItem = ({ editorRef, itemIndex }: Props): void => {
   if (editorRef.current === null) return
 
   const item = getState().quotation.items[itemIndex]

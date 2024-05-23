@@ -12,13 +12,19 @@ export type NavItemsMediaQueryWidths = {
   burger: number
 }
 
-export const calcNavMediaQueryParams = (nav: HTMLElement, logo: HTMLElement): NavItemsMediaQueryWidths => {
+export const calcNavMediaQueryParams = (
+  nav: HTMLElement,
+  logo: HTMLElement,
+): NavItemsMediaQueryWidths => {
   type Props = {
     elsToHideClass?: string
     elsToShowClass?: string
   }
 
-  const calcNavWidthWhenLogoIsOverlay = ({ elsToHideClass, elsToShowClass }: Props = {}): number => {
+  const calcNavWidthWhenLogoIsOverlay = ({
+    elsToHideClass,
+    elsToShowClass,
+  }: Props = {}): number => {
     if (elsToHideClass) {
       const elsToHideArr = Array.from(nav.querySelectorAll(elsToHideClass))
 
@@ -28,7 +34,9 @@ export const calcNavMediaQueryParams = (nav: HTMLElement, logo: HTMLElement): Na
       })
 
       const elsToShowArr = Array.from(
-        nav.querySelectorAll(elsToShowClass ?? 'non-existing-class-where-nothing-will-be-found'),
+        nav.querySelectorAll(
+          elsToShowClass ?? 'non-existing-class-where-nothing-will-be-found',
+        ),
       )
 
       elsToShowArr.forEach((el) => {
@@ -42,7 +50,9 @@ export const calcNavMediaQueryParams = (nav: HTMLElement, logo: HTMLElement): Na
       shrinkElementSlightly(nav)
       i++
       if (i > 1000) {
-        console.error('Problem! Over 1000 iterations in calcNavWidthWhenLogoIsOverlay() function')
+        console.error(
+          'Problem! Over 1000 iterations in calcNavWidthWhenLogoIsOverlay() function',
+        )
         break
       }
     }
@@ -71,7 +81,9 @@ export const calcNavMediaQueryParams = (nav: HTMLElement, logo: HTMLElement): Na
     elsToShowClass: '.icon-round-wrapper',
   })
   nav
-    .querySelectorAll('.app-ext, .uotation, .icon-round-wrapper, .nav-item-name')
+    .querySelectorAll(
+      '.app-ext, .uotation, .icon-round-wrapper, .nav-item-name',
+    )
     .forEach((el) => {
       el.setAttribute('style', '')
     })

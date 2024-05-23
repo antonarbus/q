@@ -1,18 +1,23 @@
 import { dispatch, getState } from '@lib_instances/store'
-import { itemKey, quotationSlice, getTotalPriceAbove } from '@entities/quotation'
+import {
+  itemKey,
+  quotationSlice,
+  getTotalPriceAbove,
+} from '@entities/quotation'
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
 import { type FroalaEditorRef } from '@shared/types/froala'
-import { getNumberFromString, getStringWithNewFormattedNumber, getTextContentFromHtml } from '@shared/utils'
+import {
+  getNumberFromString,
+  getStringWithNewFormattedNumber,
+  getTextContentFromHtml,
+} from '@shared/utils'
 
 type Props = {
   editorRef: FroalaEditorRef
   itemIndex: number
 }
 
-export const validateTotalPrice = ({
-  editorRef,
-  itemIndex,
-}: Props): void => {
+export const validateTotalPrice = ({ editorRef, itemIndex }: Props): void => {
   if (editorRef.current === null) return
 
   const priceItem = getState().quotation.items[itemIndex]
@@ -22,7 +27,10 @@ export const validateTotalPrice = ({
   const cellTextContent = getTextContentFromHtml({ html: currentHtml })
   const cellValueFromHtml = getNumberFromString({ string: cellTextContent })
 
-  const price = getTotalPriceAbove({ itemIndex, items: getState().quotation.items })
+  const price = getTotalPriceAbove({
+    itemIndex,
+    items: getState().quotation.items,
+  })
   const isCorrectValue = cellValueFromHtml === price
 
   if (isCorrectValue) return
@@ -33,7 +41,13 @@ export const validateTotalPrice = ({
     newNumber: price,
   })
 
-  dispatch(quotationSlice.actions.updatePriceReducer({ itemIndex, html: updatedHtml, value: price }))
+  dispatch(
+    quotationSlice.actions.updatePriceReducer({
+      itemIndex,
+      html: updatedHtml,
+      value: price,
+    }),
+  )
 
   void updateNumberAtHtmlIncrementally({
     oldNumber: priceItem.price.value,

@@ -10,7 +10,8 @@ import { resolveInitAccessTokenFetching } from '@shared/lib/axios/axiosWithAuth'
 import { navSlice } from '@shared/nav'
 
 export const AccessToken = (): JSX.Element => {
-  const { data, refetch, isFetching, isError, isSuccess } = useGetAccessTokenQuery()
+  const { data, refetch, isFetching, isError, isSuccess } =
+    useGetAccessTokenQuery()
 
   useEffectOnce(() => {
     if (accessTokenSignal.value === null) {
@@ -20,7 +21,10 @@ export const AccessToken = (): JSX.Element => {
 
   useUpdateEffect(() => {
     if (isFetching) {
-      loadingTableOverlaySignal.value = { areJumpingDotsShown: true, text: 'Checking credentials' }
+      loadingTableOverlaySignal.value = {
+        areJumpingDotsShown: true,
+        text: 'Checking credentials',
+      }
     }
   }, [isFetching])
 
@@ -34,20 +38,39 @@ export const AccessToken = (): JSX.Element => {
       if (!email) return
 
       accessTokenSignal.value = data.accessJwtToken
-      loadingTableOverlaySignal.value = { areJumpingDotsShown: false, text: 'Logged in' }
-      dispatch(userSlice.actions.rememberLoggedUser({ email, roles: data.roles ?? ['some role'] }))
-      dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.login] }))
-      dispatch(navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.account] }))
+      loadingTableOverlaySignal.value = {
+        areJumpingDotsShown: false,
+        text: 'Logged in',
+      }
+      dispatch(
+        userSlice.actions.rememberLoggedUser({
+          email,
+          roles: data.roles ?? ['some role'],
+        }),
+      )
+      dispatch(
+        navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.login] }),
+      )
+      dispatch(
+        navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.account] }),
+      )
       resolveInitAccessTokenFetching('fetched')
     }
   }, [isSuccess])
 
   useUpdateEffect(() => {
     if (isError) {
-      loadingTableOverlaySignal.value = { areJumpingDotsShown: false, text: 'Not logged in' }
+      loadingTableOverlaySignal.value = {
+        areJumpingDotsShown: false,
+        text: 'Not logged in',
+      }
       dispatch(userSlice.actions.forgetLoggedUser())
-      dispatch(navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.login] }))
-      dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.account] }))
+      dispatch(
+        navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.login] }),
+      )
+      dispatch(
+        navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.account] }),
+      )
       resolveInitAccessTokenFetching('failed')
     }
   }, [isError])

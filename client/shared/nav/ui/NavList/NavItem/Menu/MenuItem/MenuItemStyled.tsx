@@ -23,5 +23,6 @@ export const MenuItemStyled = styled(Link)`
   text-decoration: none;
   background-color: ${(props: Props): '#525357' | 'initial' =>
     props.state.isHovered ? '#525357' : 'initial'};
-  filter: ${(props: Props): 'brightness(1.2)' | 'none' => (props.state.isHovered ? 'brightness(1.2)' : 'none')};
+  filter: ${(props: Props): 'brightness(1.2)' | 'none' =>
+    props.state.isHovered ? 'brightness(1.2)' : 'none'};
 `

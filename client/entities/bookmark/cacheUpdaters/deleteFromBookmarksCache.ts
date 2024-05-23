@@ -8,19 +8,22 @@ type Props = {
 }
 
 export const deleteFromBookmarksCache = ({ id }: Props): void => {
-  reactQuery.setQueriesData<ResBody>({ queryKey: [queryKey.getBookmarks] }, (cacheData) => {
-    const updatedCacheData = produce(cacheData, (draft) => {
-      if (draft?.documents === undefined) return
+  reactQuery.setQueriesData<ResBody>(
+    { queryKey: [queryKey.getBookmarks] },
+    (cacheData) => {
+      const updatedCacheData = produce(cacheData, (draft) => {
+        if (draft?.documents === undefined) return
 
-      const items = draft.documents
-      const index = items.findIndex(item => item.id === id)
-      const foundInCache = index !== -1
+        const items = draft.documents
+        const index = items.findIndex((item) => item.id === id)
+        const foundInCache = index !== -1
 
-      if (foundInCache) {
-        items.splice(index, 1)
-      }
-    })
+        if (foundInCache) {
+          items.splice(index, 1)
+        }
+      })
 
-    return updatedCacheData
-  })
+      return updatedCacheData
+    },
+  )
 }

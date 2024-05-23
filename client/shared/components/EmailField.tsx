@@ -36,8 +36,13 @@ export const EmailField = ({
 
   useSignalEffect(() => {
     isEmailOkSignal.value = isEmailPatternOk(emailSignal.value)
-    const isMailPatternOk = inputFocusedOutOnesSignal.value && emailSignal.value !== '' && !isEmailOkSignal.value
-    emailLabelSignal.value = isMailPatternOk ? 'Check email pattern' : initEmailLabel
+    const isMailPatternOk =
+      inputFocusedOutOnesSignal.value &&
+      emailSignal.value !== '' &&
+      !isEmailOkSignal.value
+    emailLabelSignal.value = isMailPatternOk
+      ? 'Check email pattern'
+      : initEmailLabel
   })
 
   const suggestEmail = (email: string): void => {
@@ -83,7 +88,8 @@ export const EmailField = ({
         }}
         sx={{
           '& .MuiInputLabel-shrink': {
-            color: emailLabelSignal.value !== initEmailLabel ? theme.colors.red : '',
+            color:
+              emailLabelSignal.value !== initEmailLabel ? theme.colors.red : '',
           },
           '.MuiInputBase-root': {
             background: 'white',

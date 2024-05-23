@@ -9,7 +9,12 @@ import { PiFolderSimpleStarDuotone } from 'react-icons/pi'
 import { RiMenuAddFill } from 'react-icons/ri'
 import { TbRectangleVertical } from 'react-icons/tb'
 import { VscNewFile } from 'react-icons/vsc'
-import { insertBoqItem, insertBoqRow, insertPriceItem, insertTextItem } from '@features/items/insert'
+import {
+  insertBoqItem,
+  insertBoqRow,
+  insertPriceItem,
+  insertTextItem,
+} from '@features/items/insert'
 import { openBookmarksPage } from '@features/open_close/open_bookmarks_page'
 import { openLoginModal } from '@features/open_close/open_login_modal'
 import { openNewQuotationPage } from '@features/open_close/open_new_quotation_page'
@@ -48,7 +53,6 @@ export const navStructure: MenuItemType[] = [
         func: () => {
           openSaveQuotationModal()
         },
-
       },
       {
         id: navItemId.pdf,
@@ -108,7 +112,7 @@ export const navStructure: MenuItemType[] = [
           {
             id: navItemId.boqRow,
             name: 'Row',
-            icon: <FaGripLines/>,
+            icon: <FaGripLines />,
             isHidden: false,
             shortcut: ['control', 'shift', 'r'],
             func: (e) => {

@@ -10,7 +10,14 @@ import { RotatingLoaderIcon } from '@shared/components'
 import { notify } from '@shared/ui/top_msg'
 
 export const CopyBookmarkButton = ({ id }: ReqBody): JSX.Element => {
-  const { mutate: loadItem, isPending, isSuccess, isError, error, data } = useGetBookmarkMutation()
+  const {
+    mutate: loadItem,
+    isPending,
+    isSuccess,
+    isError,
+    error,
+    data,
+  } = useGetBookmarkMutation()
 
   useUpdateEffect(() => {
     if (isSuccess) {
@@ -28,7 +35,11 @@ export const CopyBookmarkButton = ({ id }: ReqBody): JSX.Element => {
 
   useUpdateEffect(() => {
     if (isError) {
-      notify({ msg: error.response?.data.message, type: 'error', theme: 'light' })
+      notify({
+        msg: error.response?.data.message,
+        type: 'error',
+        theme: 'light',
+      })
     }
   }, [isError])
 

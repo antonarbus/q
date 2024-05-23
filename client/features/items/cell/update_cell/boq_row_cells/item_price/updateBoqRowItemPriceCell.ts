@@ -2,7 +2,16 @@ import { dispatch } from '@lib_instances/store'
 import type FroalaEditor from 'froala-editor'
 import { type MutableRefObject } from 'react'
 import { roundTo } from 'round-to'
-import { didBoqCellContentChange, getBoqRowFromStore, getBoqRowsFromStore, updateBoqRowCellAtStore, updateBoqRowCellWithValue, updateSubTotalPriceWithValue, type BoqRow, boqRowCellKey } from '@entities/quotation'
+import {
+  didBoqCellContentChange,
+  getBoqRowFromStore,
+  getBoqRowsFromStore,
+  updateBoqRowCellAtStore,
+  updateBoqRowCellWithValue,
+  updateSubTotalPriceWithValue,
+  type BoqRow,
+  boqRowCellKey,
+} from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 
@@ -56,10 +65,13 @@ export const updateBoqRowItemPriceCell = ({
   const boqRows = getBoqRowsFromStore({ itemIndex })
   if (boqRows === undefined) return
 
-  const subTotalPriceValueNew: number = boqRows.reduce((accumulator: number, boqRow: BoqRow) => {
-    const price = boqRow.price.value
-    return accumulator + price
-  }, 0)
+  const subTotalPriceValueNew: number = boqRows.reduce(
+    (accumulator: number, boqRow: BoqRow) => {
+      const price = boqRow.price.value
+      return accumulator + price
+    },
+    0,
+  )
 
   const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
 

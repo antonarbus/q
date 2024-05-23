@@ -10,9 +10,9 @@ type Props = {
 
 export const selectBoqCell =
   ({ itemIndex, rowIndex, boqRowCellKey }: Props) =>
-    (state: RootState): BoqRowCell | undefined => {
-      const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
-      if (boqRow === undefined) return undefined
-      const boqRowCell = boqRow[boqRowCellKey]
-      return boqRowCell
-    }
+  (state: RootState): BoqRowCell | undefined => {
+    const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
+    if (boqRow === undefined) return undefined
+    const boqRowCell = boqRow[boqRowCellKey]
+    return boqRowCell
+  }

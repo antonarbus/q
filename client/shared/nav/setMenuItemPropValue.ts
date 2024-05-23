@@ -3,7 +3,12 @@ import type { MenuItemType, NavItemIdKey } from './type'
 // https://www.typescriptlang.org/docs/handbook/2/generics.html
 // https://stackoverflow.com/a/49286056/7239778
 
-export const setMenuItemPropValue = <K extends keyof MenuItemType>({ menu, navItemIdKey, prop, value }: {
+export const setMenuItemPropValue = <K extends keyof MenuItemType>({
+  menu,
+  navItemIdKey,
+  prop,
+  value,
+}: {
   menu: MenuItemType[]
   navItemIdKey: NavItemIdKey
   prop: K

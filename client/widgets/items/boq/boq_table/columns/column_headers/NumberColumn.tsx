@@ -10,9 +10,7 @@ export const NumberColumn = (): JSX.Element => {
       minWidth={30}
       flexGrow={0}
     >
-      <Box
-        style={columnHeaderStyle}
-      />
+      <Box style={columnHeaderStyle} />
     </ResizableColumn>
   )
 }

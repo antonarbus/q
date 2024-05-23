@@ -1,7 +1,12 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { type MouseEvent } from 'react'
 import { copySlice } from '@entities/copy'
-import { isFroalaSignal, boqRowKey, itemKey, type Item } from '@entities/quotation'
+import {
+  isFroalaSignal,
+  boqRowKey,
+  itemKey,
+  type Item,
+} from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 
 export const insertBoqItem = (e?: MouseEvent): void => {

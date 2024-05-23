@@ -14,7 +14,9 @@ export const beforeUpload = ({ files, editor }: Props): boolean => {
   const email = getState().user.email
 
   if (!email) {
-    alert('You are not logged in, file will be kept in browser until page is refreshed')
+    alert(
+      'You are not logged in, file will be kept in browser until page is refreshed',
+    )
     removeLoadingBar()
     return false
   }

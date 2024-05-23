@@ -1,7 +1,16 @@
-import { createAccessToken, createRefreshToken, thirtyDaysInSec } from '@server/services/jwt'
+import {
+  createAccessToken,
+  createRefreshToken,
+  thirtyDaysInSec,
+} from '@server/services/jwt'
 import bcrypt from 'bcryptjs'
 import express from 'express'
-import { type Result, type ValidationError, body, validationResult } from 'express-validator'
+import {
+  type Result,
+  type ValidationError,
+  body,
+  validationResult,
+} from 'express-validator'
 import { type User } from '@entities/user'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { UserModel } from '../../db/models/userModel'
@@ -15,7 +24,11 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  message: 'validation error' | 'incorrect reset key' | 'not activated' | 'password was reset'
+  message:
+    | 'validation error'
+    | 'incorrect reset key'
+    | 'not activated'
+    | 'password was reset'
   validationErrors?: Result<ValidationError>
   accessJwtToken?: string
   email?: User['email']
@@ -24,7 +37,11 @@ export type ResBody = {
 
 export const resetPasswordRouter = express.Router()
 
-type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
+type RouterHandler = (
+  req: ReqWithBody<ReqBody>,
+  res: ResWithBody<ResBody>,
+  next: Next,
+) => Promise<ResWithBody<ResBody> | undefined>
 
 const resetPassword: RouterHandler = async (req, res, next) => {
   try {
@@ -69,14 +86,12 @@ const resetPassword: RouterHandler = async (req, res, next) => {
       { new: true },
     ).lean()
 
-    return res
-      .status(httpStatus.created_201)
-      .json({
-        message: 'password was reset',
-        accessJwtToken,
-        email: document?.email,
-        roles: document?.roles,
-      })
+    return res.status(httpStatus.created_201).json({
+      message: 'password was reset',
+      accessJwtToken,
+      email: document?.email,
+      roles: document?.roles,
+    })
   } catch (error) {
     next(error)
   }

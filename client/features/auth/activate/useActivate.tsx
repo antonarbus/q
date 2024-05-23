@@ -16,7 +16,14 @@ type Res = {
 
 export const useActivate = (): Res => {
   const { activationKey } = useParams()
-  const { mutate: activate, isPending, data, isSuccess, isError, error } = useActivateMutation()
+  const {
+    mutate: activate,
+    isPending,
+    data,
+    isSuccess,
+    isError,
+    error,
+  } = useActivateMutation()
 
   useEffectOnce(() => {
     if (activationKey === undefined) return
@@ -37,8 +44,12 @@ export const useActivate = (): Res => {
 
       accessTokenSignal.value = accessJwtToken
       dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
-      dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.login] }))
-      dispatch(navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.account] }))
+      dispatch(
+        navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.login] }),
+      )
+      dispatch(
+        navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.account] }),
+      )
     }
 
     if (data.message === 'already activated') {

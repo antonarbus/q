@@ -11,7 +11,9 @@ import type { MenuItemType } from '../../../../../type'
  * @param idsToCurrentMenuItems array of menu ids from the top to the clicked one
  */
 
-export const getMenuItemByIdsChain = (idsToCurrentMenuItems: string[]): MenuItemType[] => {
+export const getMenuItemByIdsChain = (
+  idsToCurrentMenuItems: string[],
+): MenuItemType[] => {
   const navStructure = getState().nav.navStructure
   let clicked: MenuItemType[] = navStructure
   let tempMenu: MenuItemType[] = navStructure

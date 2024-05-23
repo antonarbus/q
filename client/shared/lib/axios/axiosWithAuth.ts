@@ -6,7 +6,10 @@ import { accessTokenSignal } from '../../auth/accessTokenSignal'
 import { httpStatus } from '../../consts/httpStatus'
 import { route } from '../../consts/route'
 
-export const { promise: initAccessTokenFetchingPromise, resolve: resolveInitAccessTokenFetching } = Promise.withResolvers<'fetched' | 'failed'>()
+export const {
+  promise: initAccessTokenFetchingPromise,
+  resolve: resolveInitAccessTokenFetching,
+} = Promise.withResolvers<'fetched' | 'failed'>()
 
 export const axiosWithAuth = axios.create({ withCredentials: true })
 
@@ -35,7 +38,9 @@ axiosWithAuth.interceptors.response.use(
       originalRequestConfig._isRetry = true
 
       try {
-        const res = await axios.get(apiUrl.getAccessToken, { withCredentials: true })
+        const res = await axios.get(apiUrl.getAccessToken, {
+          withCredentials: true,
+        })
 
         if (res.data.accessJwtToken) {
           accessTokenSignal.value = res.data.accessJwtToken
@@ -43,7 +48,9 @@ axiosWithAuth.interceptors.response.use(
 
         return await axiosWithAuth.request(originalRequestConfig)
       } catch (err: unknown) {
-        const isUnauthorized = err instanceof AxiosError && err.response?.status === httpStatus.unauthorized_401
+        const isUnauthorized =
+          err instanceof AxiosError &&
+          err.response?.status === httpStatus.unauthorized_401
 
         if (isUnauthorized) {
           accessTokenSignal.value = null
@@ -58,4 +65,5 @@ axiosWithAuth.interceptors.response.use(
     }
 
     throw error
-  })
+  },
+)

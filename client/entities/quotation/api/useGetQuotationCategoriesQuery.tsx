@@ -5,7 +5,10 @@ import { type AxiosError, type AxiosResponse } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
 import { axiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
 
-export const useGetQuotationCategoriesQuery = (): UseQueryResult<ResBody, AxiosError<ResBody>> => {
+export const useGetQuotationCategoriesQuery = (): UseQueryResult<
+  ResBody,
+  AxiosError<ResBody>
+> => {
   const query = useQuery({
     queryKey: [queryKey.getQuotationCategories],
     refetchOnMount: false,

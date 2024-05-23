@@ -26,7 +26,7 @@ const customTheme = {
     height: 60,
     marginTop: 10,
     marginBottom: 0,
-    get fullHeight (): number {
+    get fullHeight(): number {
       return this.height + this.marginTop + this.marginBottom
     },
   },

@@ -58,9 +58,19 @@ export const Menu = (): JSX.Element => {
   const currentMenuRef = useRef<HTMLDivElement>(null)
   const nextMenuRef = useRef<HTMLDivElement>(null)
   const fakeMenuRef = useRef<HTMLDivElement>(null)
-  const idsToNextMenuItems = useSelectorTyped(state => state.nav.idsToNextMenuItems)
-  const idsToCurrentMenuItems = useSelectorTyped(state => state.nav.idsToCurrentMenuItems)
-  useMenuAnimation({ currentMenuRef, nextMenuRef, menuContainerRef, fakeMenuRef, idsToNextMenuItems })
+  const idsToNextMenuItems = useSelectorTyped(
+    (state) => state.nav.idsToNextMenuItems,
+  )
+  const idsToCurrentMenuItems = useSelectorTyped(
+    (state) => state.nav.idsToCurrentMenuItems,
+  )
+  useMenuAnimation({
+    currentMenuRef,
+    nextMenuRef,
+    menuContainerRef,
+    fakeMenuRef,
+    idsToNextMenuItems,
+  })
   useKeysForMenuNavigation()
   useCloseMenuOnClickOutside({ menuContainerRef })
   const isMenuOutsideWindow = useIsMenuOutsideWindow()

@@ -15,7 +15,11 @@ export type ResBody = {
   quotation?: Quotation
 }
 
-type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
+type RouterHandler = (
+  req: ReqWithBody<ReqBody>,
+  res: ResWithBody<ResBody>,
+  next: Next,
+) => Promise<ResWithBody<ResBody> | undefined>
 
 export const getQuotationRouter = Router()
 
@@ -32,18 +36,14 @@ const getQuotation: RouterHandler = async (req, res, next) => {
         .json({ message: 'not logged in' })
     }
 
-    const document = await QuotationModel
-      .findOneAndUpdate(
-        { email, id },
-        { openedAt: Date.now() },
-        { new: true },
-      )
-      .lean()
+    const document = await QuotationModel.findOneAndUpdate(
+      { email, id },
+      { openedAt: Date.now() },
+      { new: true },
+    ).lean()
 
     if (document === null) {
-      return res
-        .status(httpStatus.notFound_404)
-        .json({ message: 'not found' })
+      return res.status(httpStatus.notFound_404).json({ message: 'not found' })
     }
 
     const filePath = `${email}/${storageFolderName.quotations}/${id}.json`
@@ -51,9 +51,7 @@ const getQuotation: RouterHandler = async (req, res, next) => {
     const [fileBuffer] = await bucket.file(filePath).download()
 
     if (!fileBuffer) {
-      return res
-        .status(httpStatus.notFound_404)
-        .json({ message: 'not found' })
+      return res.status(httpStatus.notFound_404).json({ message: 'not found' })
     }
 
     const quotation = JSON.parse(fileBuffer.toString())
@@ -66,7 +64,4 @@ const getQuotation: RouterHandler = async (req, res, next) => {
   }
 }
 
-getQuotationRouter.post(
-  '/',
-  getQuotation,
-)
+getQuotationRouter.post('/', getQuotation)

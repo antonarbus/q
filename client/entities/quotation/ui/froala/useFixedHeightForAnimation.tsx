@@ -9,7 +9,9 @@ type Res = {
   froalaHeightRef: MutableRefObject<number>
 }
 
-export const useFixedHeightForAnimation = ({ froalaElementRef }: Props): Res => {
+export const useFixedHeightForAnimation = ({
+  froalaElementRef,
+}: Props): Res => {
   const froalaHeightRef = useRef(0)
 
   useEffect(() => {

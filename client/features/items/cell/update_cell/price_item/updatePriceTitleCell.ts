@@ -9,10 +9,7 @@ type Props = {
   itemIndex: number
 }
 
-export const updatePriceTitleCell = ({
-  editorRef,
-  itemIndex,
-}: Props): void => {
+export const updatePriceTitleCell = ({ editorRef, itemIndex }: Props): void => {
   if (editorRef.current === null) return
 
   const priceItem = getState().quotation.items[itemIndex]

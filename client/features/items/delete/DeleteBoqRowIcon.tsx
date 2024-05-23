@@ -3,7 +3,12 @@ import { theme } from '@lib_instances/theme'
 import { flushSync } from 'react-dom'
 import { GoTrash } from 'react-icons/go'
 import { copySlice } from '@entities/copy'
-import { quotationSlice, selectIsLastBoqRow, useItem, useRow } from '@entities/quotation'
+import {
+  quotationSlice,
+  selectIsLastBoqRow,
+  useItem,
+  useRow,
+} from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 
@@ -12,7 +17,7 @@ export const DeleteBoqRowIcon = (): JSX.Element => {
   const { rowIndex } = useRow()
 
   const isLastBoqRow = useSelectorTyped(selectIsLastBoqRow({ itemIndex }))
-  const isDeletable = useSelectorTyped(state => state.copy.isDeletable)
+  const isDeletable = useSelectorTyped((state) => state.copy.isDeletable)
   const disabled = isLastBoqRow || !isDeletable
 
   return (
@@ -34,20 +39,31 @@ export const DeleteBoqRowIcon = (): JSX.Element => {
           dispatch(quotationSlice.actions.disableFroalaReducer({ itemIndex }))
         })
 
-        dispatch(quotationSlice.actions.deleteBoqRowReducer({ itemIndex, rowIndex }))
+        dispatch(
+          quotationSlice.actions.deleteBoqRowReducer({ itemIndex, rowIndex }),
+        )
         dispatch(copySlice.actions.forbidAllActions())
 
         setTimeout(() => {
           dispatch(copySlice.actions.allowAllActions())
-          dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
+          dispatch(
+            navSlice.actions.enableNavItems({
+              navItemIdKeys: [navItemId.save],
+            }),
+          )
         }, 1000 * theme.item.animationDuration)
 
         const isCopyContainer = getState().copy.isCopyContainer
 
         if (!isCopyContainer) {
-          setTimeout(() => {
-            dispatch(quotationSlice.actions.enableFroalaReducer({ itemIndex }))
-          }, 1000 * theme.item.animationDuration + 500)
+          setTimeout(
+            () => {
+              dispatch(
+                quotationSlice.actions.enableFroalaReducer({ itemIndex }),
+              )
+            },
+            1000 * theme.item.animationDuration + 500,
+          )
         }
       }}
     />

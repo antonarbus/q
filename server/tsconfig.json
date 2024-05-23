@@ -10,9 +10,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
-    "moduleResolution": "node",
+    "moduleResolution": "node"
   },
-  "include": [
-    "./**/*.ts", "../client/shared/consts/httpStatus.ts",
-  ]
+  "include": ["./**/*.ts", "../client/shared/consts/httpStatus.ts"]
 }

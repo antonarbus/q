@@ -8,7 +8,9 @@ type Props = {
   menuContainerRef: MutableRefObject<HTMLDivElement | null>
 }
 
-export const useCloseMenuOnClickOutside = ({ menuContainerRef }: Props): void => {
+export const useCloseMenuOnClickOutside = ({
+  menuContainerRef,
+}: Props): void => {
   /**
    * - menu is absolutely positioned inside NavItem li element
    * - if click outside menu - close
@@ -26,7 +28,9 @@ export const useCloseMenuOnClickOutside = ({ menuContainerRef }: Props): void =>
       didClickInsideThisElement({ clickedElement, thisElement: navItem }) &&
       !didClickInsideThisElement({ clickedElement, thisElement: menuContainer })
     if (isClickOnOpenedNavItem) return
-    if (!didClickInsideThisElement({ clickedElement, thisElement: menuContainer })) {
+    if (
+      !didClickInsideThisElement({ clickedElement, thisElement: menuContainer })
+    ) {
       dispatch(navSlice.actions.closeMenu())
     }
   }

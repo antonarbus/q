@@ -1,5 +1,10 @@
 import express from 'express'
-import { type Result, type ValidationError, body, validationResult } from 'express-validator'
+import {
+  type Result,
+  type ValidationError,
+  body,
+  validationResult,
+} from 'express-validator'
 import { type User } from '@entities/user'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { nanoid } from '@shared/lib/nanoid'
@@ -21,7 +26,11 @@ export type ResBody = {
 
 export const requestPasswordResetRouter = express.Router()
 
-type RouterHandler = (req: ReqWithBody<ReqBody>, res: ResWithBody<ResBody>, next: Next) => Promise<ResWithBody<ResBody> | undefined>
+type RouterHandler = (
+  req: ReqWithBody<ReqBody>,
+  res: ResWithBody<ResBody>,
+  next: Next,
+) => Promise<ResWithBody<ResBody> | undefined>
 
 const requestPasswordReset: RouterHandler = async (req, res, next) => {
   try {
@@ -44,7 +53,11 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
         .json({ message: 'does not exists' })
     }
 
-    await UserModel.findOneAndUpdate({ email }, { resetPasswordKey: nanoid(5) }, { new: true })
+    await UserModel.findOneAndUpdate(
+      { email },
+      { resetPasswordKey: nanoid(5) },
+      { new: true },
+    )
 
     // todo
     // send email with activation link

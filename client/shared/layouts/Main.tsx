@@ -9,7 +9,7 @@ export const Main = (): JSX.Element => {
   )
 }
 
-function MainLayout ({ children }: { children: ReactNode }): JSX.Element {
+function MainLayout({ children }: { children: ReactNode }): JSX.Element {
   return (
     <main
       style={{

@@ -1,10 +1,11 @@
 import { Suspense, lazy, useState } from 'react'
 import { useEffectOnce } from 'react-use'
 
-const ReactQueryDevtoolsProduction = lazy(async () =>
-  await import('@tanstack/react-query-devtools/build/modern/production.js').then(
-    (d) => ({ default: d.ReactQueryDevtools }),
-  ),
+const ReactQueryDevtoolsProduction = lazy(
+  async () =>
+    await import(
+      '@tanstack/react-query-devtools/build/modern/production.js'
+    ).then((d) => ({ default: d.ReactQueryDevtools })),
 )
 
 // press R+Q for several seconds to activate ReactQuery dev tools in production

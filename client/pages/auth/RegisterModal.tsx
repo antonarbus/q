@@ -4,7 +4,12 @@ import { useSignal, useSignalEffect } from '@preact/signals-react'
 import { useRef } from 'react'
 import { useRegister } from '@features/auth/register'
 import { OpenLoginModalLink } from '@features/open_close/open_login_modal'
-import { ConfirmPasswordField, EmailField, FormModal, PasswordField } from '@shared/components'
+import {
+  ConfirmPasswordField,
+  EmailField,
+  FormModal,
+  PasswordField,
+} from '@shared/components'
 
 export const RegisterModal = (): JSX.Element => {
   const inputRef = useRef<HTMLDivElement>(null)
@@ -14,10 +19,15 @@ export const RegisterModal = (): JSX.Element => {
   const isEmailOkSignal = useSignal(false)
   const isConfirmPasswordOkSignal = useSignal(false)
   const isButtonDisabledSignal = useSignal(false)
-  const { onSubmit, isSuccess, isPending, isError } = useRegister({ emailSignal, passwordSignal })
+  const { onSubmit, isSuccess, isPending, isError } = useRegister({
+    emailSignal,
+    passwordSignal,
+  })
 
   useSignalEffect(() => {
-    isButtonDisabledSignal.value = !(isEmailOkSignal.value && isConfirmPasswordOkSignal.value)
+    isButtonDisabledSignal.value = !(
+      isEmailOkSignal.value && isConfirmPasswordOkSignal.value
+    )
   })
 
   return (
@@ -40,9 +50,7 @@ export const RegisterModal = (): JSX.Element => {
         emailSignal={emailSignal}
         isEmailOkSignal={isEmailOkSignal}
       />
-      <PasswordField
-        passwordSignal={passwordSignal}
-      />
+      <PasswordField passwordSignal={passwordSignal} />
       <ConfirmPasswordField
         originalPasswordSignal={passwordSignal}
         isConfirmPasswordOkSignal={isConfirmPasswordOkSignal}

@@ -25,9 +25,12 @@ export const navSlice = createSlice({
   name: 'nav',
   initialState,
   reducers: {
-    addNavStructure: (state, action: PayloadAction<{
-      navStructure: MenuItemType[]
-    }>) => {
+    addNavStructure: (
+      state,
+      action: PayloadAction<{
+        navStructure: MenuItemType[]
+      }>,
+    ) => {
       const { navStructure } = action.payload
       state.navStructure = navStructure
     },
@@ -43,7 +46,10 @@ export const navSlice = createSlice({
     enableMedia: (state) => {
       state.mediaEnabled = true
     },
-    setNavMediaQueryWidths: (state, action: PayloadAction<NavItemsMediaQueryWidths>) => {
+    setNavMediaQueryWidths: (
+      state,
+      action: PayloadAction<NavItemsMediaQueryWidths>,
+    ) => {
       const elementMediaQueryWidths = action.payload
       state.mediaQueryWidth = elementMediaQueryWidths
     },
@@ -52,7 +58,10 @@ export const navSlice = createSlice({
       state.navItemRightPos = rightPos
     },
     openMenuWithId: (state, action: PayloadAction<string>) => {
-      state.idsToCurrentMenuItems = state.idsToNextMenuItems = ['top', action.payload]
+      state.idsToCurrentMenuItems = state.idsToNextMenuItems = [
+        'top',
+        action.payload,
+      ]
     },
     closeMenu: (state) => {
       state.idsToNextMenuItems = state.idsToCurrentMenuItems = ['top']
@@ -60,7 +69,10 @@ export const navSlice = createSlice({
       state.menuItemHoverIndex = 0
     },
     goDownInCurrentMenu: (state, action: PayloadAction<string>) => {
-      state.idsToCurrentMenuItems = [...state.idsToCurrentMenuItems, action.payload]
+      state.idsToCurrentMenuItems = [
+        ...state.idsToCurrentMenuItems,
+        action.payload,
+      ]
     },
     goUpInCurrentMenu: (state) => {
       state.idsToCurrentMenuItems = state.idsToCurrentMenuItems.slice(0, -1)
@@ -74,9 +86,12 @@ export const navSlice = createSlice({
     setMenuItemHoverIndex: (state, action: PayloadAction<number>) => {
       state.menuItemHoverIndex = action.payload
     },
-    showLoadingIcon: (state, action: PayloadAction<{
-      navMenuItemIdKey: NavItemIdKey
-    }>) => {
+    showLoadingIcon: (
+      state,
+      action: PayloadAction<{
+        navMenuItemIdKey: NavItemIdKey
+      }>,
+    ) => {
       const { navMenuItemIdKey } = action.payload
 
       setMenuItemPropValue({
@@ -86,9 +101,12 @@ export const navSlice = createSlice({
         value: true,
       })
     },
-    hideLoadingIcon: (state, action: PayloadAction<{
-      navMenuItemIdKey: NavItemIdKey
-    }>) => {
+    hideLoadingIcon: (
+      state,
+      action: PayloadAction<{
+        navMenuItemIdKey: NavItemIdKey
+      }>,
+    ) => {
       const { navMenuItemIdKey } = action.payload
 
       setMenuItemPropValue({
@@ -98,9 +116,12 @@ export const navSlice = createSlice({
         value: false,
       })
     },
-    showSuccessIcon: (state, action: PayloadAction<{
-      navMenuItemIdKey: NavItemIdKey
-    }>) => {
+    showSuccessIcon: (
+      state,
+      action: PayloadAction<{
+        navMenuItemIdKey: NavItemIdKey
+      }>,
+    ) => {
       const { navMenuItemIdKey } = action.payload
 
       setMenuItemPropValue({
@@ -110,9 +131,12 @@ export const navSlice = createSlice({
         value: true,
       })
     },
-    hideSuccessIcon: (state, action: PayloadAction<{
-      navMenuItemIdKey: NavItemIdKey
-    }>) => {
+    hideSuccessIcon: (
+      state,
+      action: PayloadAction<{
+        navMenuItemIdKey: NavItemIdKey
+      }>,
+    ) => {
       const { navMenuItemIdKey } = action.payload
 
       setMenuItemPropValue({
@@ -122,9 +146,12 @@ export const navSlice = createSlice({
         value: false,
       })
     },
-    showErrorIcon: (state, action: PayloadAction<{
-      navMenuItemIdKey: NavItemIdKey
-    }>) => {
+    showErrorIcon: (
+      state,
+      action: PayloadAction<{
+        navMenuItemIdKey: NavItemIdKey
+      }>,
+    ) => {
       const { navMenuItemIdKey } = action.payload
 
       setMenuItemPropValue({
@@ -134,9 +161,12 @@ export const navSlice = createSlice({
         value: true,
       })
     },
-    hideErrorIcon: (state, action: PayloadAction<{
-      navMenuItemIdKey: NavItemIdKey
-    }>) => {
+    hideErrorIcon: (
+      state,
+      action: PayloadAction<{
+        navMenuItemIdKey: NavItemIdKey
+      }>,
+    ) => {
       const { navMenuItemIdKey } = action.payload
 
       setMenuItemPropValue({
@@ -146,15 +176,20 @@ export const navSlice = createSlice({
         value: false,
       })
     },
-    disableAllTopNavItems: (state, action: PayloadAction<{
-      exceptNavItemIdKeys?: NavItemIdKey[]
-    }>) => {
+    disableAllTopNavItems: (
+      state,
+      action: PayloadAction<{
+        exceptNavItemIdKeys?: NavItemIdKey[]
+      }>,
+    ) => {
       const { exceptNavItemIdKeys } = action.payload
 
       const topLevelNavMenu = state.navStructure[0]
       if (!topLevelNavMenu) return
 
-      const topNavItemsIds = topLevelNavMenu.menuItems?.map((item) => item.id) as (NavItemIdKey[])
+      const topNavItemsIds = topLevelNavMenu.menuItems?.map(
+        (item) => item.id,
+      ) as NavItemIdKey[]
 
       topNavItemsIds?.forEach((id) => {
         if (exceptNavItemIdKeys?.includes(id)) return
@@ -171,7 +206,9 @@ export const navSlice = createSlice({
       const topLevelNavMenu = state.navStructure[0]
       if (!topLevelNavMenu) return
 
-      const topNavItemsIds = topLevelNavMenu.menuItems?.map((item) => item.id) as (NavItemIdKey[])
+      const topNavItemsIds = topLevelNavMenu.menuItems?.map(
+        (item) => item.id,
+      ) as NavItemIdKey[]
 
       topNavItemsIds?.forEach((id) => {
         setMenuItemPropValue({
@@ -182,12 +219,15 @@ export const navSlice = createSlice({
         })
       })
     },
-    disableNavItems: (state, action: PayloadAction<{
-      navItemIdKeys: NavItemIdKey[]
-    }>) => {
+    disableNavItems: (
+      state,
+      action: PayloadAction<{
+        navItemIdKeys: NavItemIdKey[]
+      }>,
+    ) => {
       const { navItemIdKeys } = action.payload
 
-      navItemIdKeys.forEach(navItemIdKey => {
+      navItemIdKeys.forEach((navItemIdKey) => {
         setMenuItemPropValue({
           menu: state.navStructure,
           navItemIdKey,
@@ -196,12 +236,15 @@ export const navSlice = createSlice({
         })
       })
     },
-    enableNavItems: (state, action: PayloadAction<{
-      navItemIdKeys: NavItemIdKey[]
-    }>) => {
+    enableNavItems: (
+      state,
+      action: PayloadAction<{
+        navItemIdKeys: NavItemIdKey[]
+      }>,
+    ) => {
       const { navItemIdKeys } = action.payload
 
-      navItemIdKeys.forEach(navItemIdKey => {
+      navItemIdKeys.forEach((navItemIdKey) => {
         setMenuItemPropValue({
           menu: state.navStructure,
           navItemIdKey,
@@ -210,12 +253,15 @@ export const navSlice = createSlice({
         })
       })
     },
-    hideNavItems: (state, action: PayloadAction<{
-      navItemIdKeys: NavItemIdKey[]
-    }>) => {
+    hideNavItems: (
+      state,
+      action: PayloadAction<{
+        navItemIdKeys: NavItemIdKey[]
+      }>,
+    ) => {
       const { navItemIdKeys } = action.payload
 
-      navItemIdKeys.forEach(navItemIdKey => {
+      navItemIdKeys.forEach((navItemIdKey) => {
         setMenuItemPropValue({
           menu: state.navStructure,
           navItemIdKey,
@@ -224,12 +270,15 @@ export const navSlice = createSlice({
         })
       })
     },
-    showNavItems: (state, action: PayloadAction<{
-      navItemIdKeys: NavItemIdKey[]
-    }>) => {
+    showNavItems: (
+      state,
+      action: PayloadAction<{
+        navItemIdKeys: NavItemIdKey[]
+      }>,
+    ) => {
       const { navItemIdKeys } = action.payload
 
-      navItemIdKeys.forEach(navItemIdKey => {
+      navItemIdKeys.forEach((navItemIdKey) => {
         setMenuItemPropValue({
           menu: state.navStructure,
           navItemIdKey,
@@ -242,7 +291,9 @@ export const navSlice = createSlice({
       const topLevelNavMenu = state.navStructure[0]
       if (!topLevelNavMenu) return
 
-      const topNavItemsIds = topLevelNavMenu.menuItems?.map((item) => item.id) as (NavItemIdKey[])
+      const topNavItemsIds = topLevelNavMenu.menuItems?.map(
+        (item) => item.id,
+      ) as NavItemIdKey[]
 
       topNavItemsIds?.forEach((id) => {
         setMenuItemPropValue({
@@ -253,9 +304,12 @@ export const navSlice = createSlice({
         })
       })
     },
-    underlineNavItem: (state, action: PayloadAction<{
-      navItemIdKey: NavItemIdKey
-    }>) => {
+    underlineNavItem: (
+      state,
+      action: PayloadAction<{
+        navItemIdKey: NavItemIdKey
+      }>,
+    ) => {
       const { navItemIdKey } = action.payload
 
       setMenuItemPropValue({

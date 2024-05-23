@@ -4,7 +4,10 @@ import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import axios, { type AxiosError, type AxiosResponse } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
 
-export const useGetAccessTokenQuery = (): UseQueryResult<ResBody, AxiosError<ResBody>> => {
+export const useGetAccessTokenQuery = (): UseQueryResult<
+  ResBody,
+  AxiosError<ResBody>
+> => {
   const query = useQuery({
     queryKey: [queryKey.getAccessToken],
     queryFn: async () => {

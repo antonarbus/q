@@ -9,7 +9,7 @@ import { containerPadding, containerWidth } from './const'
 export const useCopyContainerAnimation = (): AnimationControls => {
   const copyContainerAnimationControls = useAnimationControls()
   const isFirstMount = useFirstMountState()
-  const items = useSelectorTyped(state => state.copy.items)
+  const items = useSelectorTyped((state) => state.copy.items)
 
   useEffect(() => {
     const newHeight = items.reduce((accumulator, item) => {

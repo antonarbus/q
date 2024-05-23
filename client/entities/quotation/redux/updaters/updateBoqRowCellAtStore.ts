@@ -44,13 +44,15 @@ export const updateBoqRowCellAtStore = ({
     string: cellTextContent,
   })
 
-  dispatch(quotationSlice.actions.updateBoqCellReducer({
-    itemIndex,
-    rowIndex,
-    html,
-    value: cellValueFromHtml,
-    boqRowCellKey,
-  }))
+  dispatch(
+    quotationSlice.actions.updateBoqCellReducer({
+      itemIndex,
+      rowIndex,
+      html,
+      value: cellValueFromHtml,
+      boqRowCellKey,
+    }),
+  )
 
   return {
     didUpdate: true,

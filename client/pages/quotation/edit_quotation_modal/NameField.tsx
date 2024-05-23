@@ -24,7 +24,9 @@ export const NameField = ({ nameSignal }: Props): JSX.Element => {
         InputProps={{
           startAdornment: (
             <InputAdornment position='start'>
-              <PiBooks style={{ height: '22px', width: '22px', translate: '0px' }}/>
+              <PiBooks
+                style={{ height: '22px', width: '22px', translate: '0px' }}
+              />
             </InputAdornment>
           ),
         }}

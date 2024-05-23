@@ -4,7 +4,11 @@ import { type UseMutationResult } from '@tanstack/react-query'
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { useGetQuotationCategoriesQuery, useGetQuotationsQuery, useSaveQuotationMutation } from '@entities/quotation'
+import {
+  useGetQuotationCategoriesQuery,
+  useGetQuotationsQuery,
+  useSaveQuotationMutation,
+} from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
@@ -31,16 +35,35 @@ export const useEditQuotation = ({
 }: Props): Res => {
   const navigate = useNavigate()
 
-  const { mutate: saveQuotation, data, isSuccess, isPending, isError, error, reset } = useSaveQuotationMutation()
-  const { refetch: updateQuotationCategories } = useGetQuotationCategoriesQuery()
+  const {
+    mutate: saveQuotation,
+    data,
+    isSuccess,
+    isPending,
+    isError,
+    error,
+    reset,
+  } = useSaveQuotationMutation()
+  const { refetch: updateQuotationCategories } =
+    useGetQuotationCategoriesQuery()
   const { refetch: fetchQuotations } = useGetQuotationsQuery()
 
   useUpdateEffect(() => {
     if (isSuccess) {
       if (data.message === 'saved') {
-        notify({ msg: 'Saved', type: 'success', theme: 'dark', position: 'bottom-center' })
+        notify({
+          msg: 'Saved',
+          type: 'success',
+          theme: 'dark',
+          position: 'bottom-center',
+        })
       } else if (data.message === 'updated') {
-        notify({ msg: 'Updated', type: 'info', theme: 'dark', position: 'bottom-center' })
+        notify({
+          msg: 'Updated',
+          type: 'info',
+          theme: 'dark',
+          position: 'bottom-center',
+        })
       }
 
       void updateQuotationCategories()
@@ -59,7 +82,12 @@ export const useEditQuotation = ({
 
   useUpdateEffect(() => {
     if (isError) {
-      notify({ msg: error.response?.data.message, type: 'error', theme: 'dark', position: 'bottom-center' })
+      notify({
+        msg: error.response?.data.message,
+        type: 'error',
+        theme: 'dark',
+        position: 'bottom-center',
+      })
       reset()
     }
   }, [isError])

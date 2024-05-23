@@ -10,14 +10,22 @@ type Props = {
   id: string
 }
 
-export const useUpdateItemInfo = ({ id, nameSignal, categorySignal, descSignal, infoSignal }: Props): void => {
+export const useUpdateItemInfo = ({
+  id,
+  nameSignal,
+  categorySignal,
+  descSignal,
+  infoSignal,
+}: Props): void => {
   useSignalEffect(() => {
-    dispatch(quotationSlice.actions.updateItemInfoByIdReducer({
-      id,
-      name: nameSignal.value,
-      category: categorySignal.value,
-      desc: descSignal.value,
-      info: infoSignal.value,
-    }))
+    dispatch(
+      quotationSlice.actions.updateItemInfoByIdReducer({
+        id,
+        name: nameSignal.value,
+        category: categorySignal.value,
+        desc: descSignal.value,
+        info: infoSignal.value,
+      }),
+    )
   })
 }

@@ -1,7 +1,10 @@
 import { signal } from '@preact/signals-react'
 import { LoadingDots } from '../loading_dots_overlay/LoadingDots'
 
-export const loadingTableOverlaySignal = signal({ areJumpingDotsShown: false, text: '' })
+export const loadingTableOverlaySignal = signal({
+  areJumpingDotsShown: false,
+  text: '',
+})
 
 export const LoadingTableOverlay = (): JSX.Element | null => {
   return (
@@ -29,7 +32,9 @@ export const LoadingTableOverlay = (): JSX.Element | null => {
       >
         {loadingTableOverlaySignal.value.text}
       </div>
-      {loadingTableOverlaySignal.value.areJumpingDotsShown && <LoadingDots background='grey' />}
+      {loadingTableOverlaySignal.value.areJumpingDotsShown && (
+        <LoadingDots background='grey' />
+      )}
     </div>
   )
 }

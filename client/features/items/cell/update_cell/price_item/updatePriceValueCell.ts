@@ -10,10 +10,7 @@ type Props = {
   itemIndex: number
 }
 
-export const updatePriceValueCell = ({
-  editorRef,
-  itemIndex,
-}: Props): void => {
+export const updatePriceValueCell = ({ editorRef, itemIndex }: Props): void => {
   if (editorRef.current === null) return
 
   const priceItem = getState().quotation.items[itemIndex]
@@ -28,6 +25,12 @@ export const updatePriceValueCell = ({
   const cellTextContent = getTextContentFromHtml({ html })
   const cellValueFromHtml = getNumberFromString({ string: cellTextContent })
 
-  dispatch(quotationSlice.actions.updatePriceReducer({ itemIndex, html, value: cellValueFromHtml }))
+  dispatch(
+    quotationSlice.actions.updatePriceReducer({
+      itemIndex,
+      html,
+      value: cellValueFromHtml,
+    }),
+  )
   dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
 }

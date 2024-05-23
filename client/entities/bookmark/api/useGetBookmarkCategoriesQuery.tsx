@@ -5,7 +5,10 @@ import { type AxiosError, type AxiosResponse } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
 import { axiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
 
-export const useGetBookmarkCategoriesQuery = (): UseQueryResult<ResBody, AxiosError<ResBody>> => {
+export const useGetBookmarkCategoriesQuery = (): UseQueryResult<
+  ResBody,
+  AxiosError<ResBody>
+> => {
   const query = useQuery({
     queryKey: [queryKey.getBookmarkCategories],
     queryFn: async () => {

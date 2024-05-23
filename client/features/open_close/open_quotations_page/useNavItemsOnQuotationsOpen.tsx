@@ -5,18 +5,22 @@ import { navSlice } from '@shared/nav'
 
 export const useNavItemsOnQuotationsOpen = (): void => {
   useEffectOnce(() => {
-    dispatch(navSlice.actions.disableNavItems({
-      navItemIdKeys: [
-        navItemId.save,
-        navItemId.pdf,
-        navItemId.share,
-        navItemId.quotations,
-        navItemId.insert,
-      ],
-    }))
+    dispatch(
+      navSlice.actions.disableNavItems({
+        navItemIdKeys: [
+          navItemId.save,
+          navItemId.pdf,
+          navItemId.share,
+          navItemId.quotations,
+          navItemId.insert,
+        ],
+      }),
+    )
 
     dispatch(navSlice.actions.removeUnderlineFromTopNav())
-    dispatch(navSlice.actions.underlineNavItem({ navItemIdKey: navItemId.quotations }))
+    dispatch(
+      navSlice.actions.underlineNavItem({ navItemIdKey: navItemId.quotations }),
+    )
   })
 
   useUnmount(() => {

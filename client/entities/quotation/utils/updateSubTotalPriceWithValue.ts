@@ -2,7 +2,11 @@ import { dispatch } from '@lib_instances/store'
 import type FroalaEditor from 'froala-editor'
 import { updateNumberAtHtml } from '@shared/lib/froala/updateNumberAtHtml'
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
-import { getNumberFromString, getTextContentFromHtml, getStringWithNewFormattedNumber } from '@shared/utils'
+import {
+  getNumberFromString,
+  getTextContentFromHtml,
+  getStringWithNewFormattedNumber,
+} from '@shared/utils'
 import { getBoqItemFromStore } from '../redux/getters/getBoqItemFromStore'
 import { quotationSlice } from '../redux/quotationSlice'
 
@@ -60,11 +64,13 @@ export const updateSubTotalPriceWithValue = ({
     newNumber: value,
   })
 
-  dispatch(quotationSlice.actions.updateSubTotalPriceReducer({
-    itemIndex,
-    html: updatedHtml,
-    value,
-  }))
+  dispatch(
+    quotationSlice.actions.updateSubTotalPriceReducer({
+      itemIndex,
+      html: updatedHtml,
+      value,
+    }),
+  )
 
   if (incrementally) {
     void updateNumberAtHtmlIncrementally({

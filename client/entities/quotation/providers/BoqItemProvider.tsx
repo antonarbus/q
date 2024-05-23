@@ -13,9 +13,7 @@ export type BoqItemContextType = {
 
 const BoqItemContext = createContext<BoqItemContextType | null>(null)
 
-export const BoqItemProvider = ({
-  children,
-}: Props): JSX.Element => {
+export const BoqItemProvider = ({ children }: Props): JSX.Element => {
   return (
     <BoqItemContext.Provider
       value={{
@@ -24,7 +22,7 @@ export const BoqItemProvider = ({
       }}
     >
       {children}
-    </BoqItemContext.Provider >
+    </BoqItemContext.Provider>
   )
 }
 

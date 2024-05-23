@@ -9,13 +9,19 @@ type Props = {
   className: string
 }
 
-export const SlidableMenuItemsContainer = ({ reference, idsToMenu, className }: Props): JSX.Element => {
-  const menuItems = useSelectorTyped(selectMenuItemByIdsChainSelector(idsToMenu))
+export const SlidableMenuItemsContainer = ({
+  reference,
+  idsToMenu,
+  className,
+}: Props): JSX.Element => {
+  const menuItems = useSelectorTyped(
+    selectMenuItemByIdsChainSelector(idsToMenu),
+  )
 
   return (
     <div ref={reference} className={className}>
       {menuItems
-        .filter(menuItem => !menuItem.isHidden)
+        .filter((menuItem) => !menuItem.isHidden)
         .map((menuItem, index) => (
           <MenuItem
             menuItem={menuItem}

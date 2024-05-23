@@ -1,5 +1,8 @@
 import type { ReactNode } from 'react'
-import { SortableContainer, type SortableContainerProps } from 'react-sortable-hoc'
+import {
+  SortableContainer,
+  type SortableContainerProps,
+} from 'react-sortable-hoc'
 import { cls } from '@shared/consts/cls'
 
 // example with TypeScript

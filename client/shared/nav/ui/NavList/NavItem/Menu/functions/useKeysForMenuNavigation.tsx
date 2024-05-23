@@ -9,8 +9,12 @@ export const useKeysForMenuNavigation = (): void => {
   const navigate = useNavigate()
 
   const navKeyboardHandler = (e: KeyboardEvent): void => {
-    const currentMenuItems = getMenuItemByIdsChain(getState().nav.idsToCurrentMenuItems)
-    const currentMenuItemsNotHidden = currentMenuItems.filter((menuItem) => !menuItem.isHidden)
+    const currentMenuItems = getMenuItemByIdsChain(
+      getState().nav.idsToCurrentMenuItems,
+    )
+    const currentMenuItemsNotHidden = currentMenuItems.filter(
+      (menuItem) => !menuItem.isHidden,
+    )
     const menuItemsQty = currentMenuItemsNotHidden.length + 1
     const hoveredMenuItemIndex = getState().nav.menuItemHoverIndex
     const isNestedMenu = getState().nav.idsToNextMenuItems.length > 2
@@ -53,11 +57,11 @@ export const useKeysForMenuNavigation = (): void => {
     }
 
     if (e.key === 'Enter') {
-      const nextMenu = getMenuItemByIdsChain(
-        getState().nav.idsToNextMenuItems,
-      )
+      const nextMenu = getMenuItemByIdsChain(getState().nav.idsToNextMenuItems)
       const menuId = nextMenu[hoveredMenuItemIndex - 2]?.id ?? ''
-      const menuItem = currentMenuItemsNotHidden.find((item) => item.id === menuId)
+      const menuItem = currentMenuItemsNotHidden.find(
+        (item) => item.id === menuId,
+      )
 
       const isBackMenuItem = hoveredMenuItemIndex === 1 && isNestedMenu
       if (isBackMenuItem) {
@@ -104,7 +108,9 @@ export const useKeysForMenuNavigation = (): void => {
       }
       // search in items below hovered item
       const index = currentMenuItemsNotHidden.findIndex((menuItem, i) => {
-        const isiKeySameAsFirstItemLetter = menuItem.name.toLowerCase().startsWith(e.key)
+        const isiKeySameAsFirstItemLetter = menuItem.name
+          .toLowerCase()
+          .startsWith(e.key)
         if (!isiKeySameAsFirstItemLetter) return false
         if (i + 2 > hoveredMenuItemIndex) return true
         return false
@@ -115,7 +121,9 @@ export const useKeysForMenuNavigation = (): void => {
       // if no found below hovered item, do it again from the top
       if (index === -1) {
         const newIndex = currentMenuItemsNotHidden.findIndex((menuItem) => {
-          const isiKeySameAsFirstItemLetter = menuItem.name.toLowerCase().startsWith(e.key)
+          const isiKeySameAsFirstItemLetter = menuItem.name
+            .toLowerCase()
+            .startsWith(e.key)
           return isiKeySameAsFirstItemLetter
         })
         if (newIndex > -1) {

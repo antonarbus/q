@@ -12,7 +12,13 @@ import { notify } from '@shared/ui/top_msg'
 
 export const Logout = (): JSX.Element => {
   const navigate = useNavigate()
-  const { mutate: logOut, isPending, data, isSuccess, isError } = useLogOutMutation()
+  const {
+    mutate: logOut,
+    isPending,
+    data,
+    isSuccess,
+    isError,
+  } = useLogOutMutation()
 
   useEffectOnce(logOut)
 
@@ -30,8 +36,12 @@ export const Logout = (): JSX.Element => {
 
         accessTokenSignal.value = null
         dispatch(userSlice.actions.forgetLoggedUser())
-        dispatch(navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.login] }))
-        dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.account] }))
+        dispatch(
+          navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.login] }),
+        )
+        dispatch(
+          navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.account] }),
+        )
         setTimeout(() => {
           loadingDotsOverlayTextSignal.value = null
           navigate('..')
@@ -42,7 +52,11 @@ export const Logout = (): JSX.Element => {
 
   useUpdateEffect(() => {
     if (isError) {
-      notify({ msg: 'Problems with logging out', type: 'error', theme: 'light' })
+      notify({
+        msg: 'Problems with logging out',
+        type: 'error',
+        theme: 'light',
+      })
 
       setTimeout(() => {
         loadingDotsOverlayTextSignal.value = null

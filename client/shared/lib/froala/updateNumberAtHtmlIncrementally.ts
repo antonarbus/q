@@ -25,9 +25,12 @@ export const updateNumberAtHtmlIncrementally = async ({
   const decimalPrecision = getDecimalPrecision({ valueDifference })
 
   const incrementValues = async (): Promise<void> => {
-    await new Promise(resolve => {
+    await new Promise((resolve) => {
       for (let i = 1; i <= steps; i++) {
-        const incrementedValue = roundTo(oldNumber + i * stepValue, decimalPrecision)
+        const incrementedValue = roundTo(
+          oldNumber + i * stepValue,
+          decimalPrecision,
+        )
 
         const textContent = getTextContentFromHtml({ html })
 
@@ -51,7 +54,7 @@ export const updateNumberAtHtmlIncrementally = async ({
     })
   }
 
-  setTimeout(async() => {
+  setTimeout(async () => {
     await incrementValues()
 
     const finalHtml = getStringWithNewFormattedNumber({

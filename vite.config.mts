@@ -18,7 +18,7 @@ export default defineConfig(({ command, mode }) => {
       port: Number(env.PORT_FRONT_END),
       https: true, //* type "thisisunsafe" if chrome says that connection is not private
       proxy: {
-        '/api': `${env.DOMAIN}:${env.PORT_BACK_END}/`
+        '/api': `${env.DOMAIN}:${env.PORT_BACK_END}/`,
         // '/api': `local.quotation.app:${env.PORT_BACK_END}`,
       },
       // hmr: {
@@ -27,7 +27,7 @@ export default defineConfig(({ command, mode }) => {
       // }
     },
     worker: {
-      format: "es"
+      format: 'es',
     },
     esbuild: {
       define: {
@@ -51,7 +51,7 @@ export default defineConfig(({ command, mode }) => {
               },
             ],
             // https://github.com/preactjs/signals/tree/main/packages/react#react-integration
-            ["module:@preact/signals-react-transform"],
+            ['module:@preact/signals-react-transform'],
           ],
         },
       }),
@@ -91,9 +91,9 @@ export default defineConfig(({ command, mode }) => {
             // if (id.includes('node_modules/framer-motion')) return 'framer-motion'
             // if (id.includes('node_modules/react-dom')) return 'react-dom'
             // if (id.includes('froalaPkgd')) return 'froalaPkgd'
-          }
-        }
-      }
+          },
+        },
+      },
     },
   }
 })

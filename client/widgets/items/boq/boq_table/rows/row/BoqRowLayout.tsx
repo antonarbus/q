@@ -29,9 +29,7 @@ export const BoqRowLayout = ({ children, onBlur }: Props): JSX.Element => {
         // background: 'red',
       }}
     >
-      <PasteHere>
-        {children}
-      </PasteHere>
+      <PasteHere>{children}</PasteHere>
     </Box>
   )
 }

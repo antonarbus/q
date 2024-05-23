@@ -11,8 +11,14 @@ type Props = {
   disabled: boolean
 }
 
-export const clickOnNavItem = ({ e, navItem, id, navItemRef, disabled }: Props): void => {
-  (document.activeElement as HTMLElement).blur() // to prevent open an active navItem link on Enter key
+export const clickOnNavItem = ({
+  e,
+  navItem,
+  id,
+  navItemRef,
+  disabled,
+}: Props): void => {
+  ;(document.activeElement as HTMLElement).blur() // to prevent open an active navItem link on Enter key
 
   const link = navItem?.link
   const func = navItem?.func
@@ -43,7 +49,8 @@ export const clickOnNavItem = ({ e, navItem, id, navItemRef, disabled }: Props):
 
   // if click on NavItem for which Menu is opened, then close it, otherwise it closes and opens immediately
   const currentMenuId = getState().nav.idsToCurrentMenuItems.at(-1)
-  const isMenuOpenedUnderThisNavItem = currentMenuId === id && currentMenuId !== 'top'
+  const isMenuOpenedUnderThisNavItem =
+    currentMenuId === id && currentMenuId !== 'top'
 
   if (isMenuOpenedUnderThisNavItem) {
     dispatch(navSlice.actions.closeMenu())

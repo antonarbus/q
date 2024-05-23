@@ -36,12 +36,14 @@ export const updateBoqHeaderCellAtStore = ({
     string: cellTextContent,
   })
 
-  dispatch(quotationSlice.actions.updateBoqHeaderTextReducer({
-    itemIndex,
-    html,
-    value: cellValueFromHtml,
-    boqHeaderKey,
-  }))
+  dispatch(
+    quotationSlice.actions.updateBoqHeaderTextReducer({
+      itemIndex,
+      html,
+      value: cellValueFromHtml,
+      boqHeaderKey,
+    }),
+  )
 
   return { didUpdate: true }
 }
