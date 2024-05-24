@@ -97,7 +97,10 @@ export function useLoadQuotation(): void {
 
       dispatch(quotationSlice.actions.resetQuotationReducer())
 
-      if (data.message === 'found') {
+      if (
+        data.message === 'owner permission' ||
+        data.message === 'viewer permission'
+      ) {
         dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
 
         dispatch(
