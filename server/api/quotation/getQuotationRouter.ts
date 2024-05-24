@@ -29,7 +29,6 @@ const getQuotation: RouterHandler = async (req, res, next) => {
 
     const email = getEmailFromRefreshToken(req)
 
-    // todo: make a logic to return shared offer for non-logged-in user
     if (!email) {
       return res
         .status(httpStatus.forbidden_403)

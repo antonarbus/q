@@ -3,6 +3,7 @@ import { type Quotation } from '@entities/quotation'
 import { dateFilterComparator } from './comparators/dateFilterComparator'
 import { ActionButtonsCellRenderer } from './renderers/ActionButtonsCellRenderer'
 import { DateCellRenderer } from './renderers/DateCellRenderer'
+import { SharedWithRenderer } from './renderers/SharedWithRenderer'
 import { dateValueGetter } from './value_getters/dateValueGetter'
 
 export const defaultColDef: ColDef<Quotation> = {
@@ -83,5 +84,10 @@ export const columnDefs: Array<ColDef<Quotation>> = [
     filterParams: {
       comparator: dateFilterComparator,
     },
+  },
+  {
+    field: 'sharedWith',
+    headerName: 'shared with',
+    cellRenderer: SharedWithRenderer,
   },
 ]
