@@ -6,6 +6,7 @@ import {
   quotationSlice,
   useGetQuotationMutation,
   newQuotationTemplate,
+  backgroundMessageSignal,
 } from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
@@ -100,6 +101,7 @@ export function useLoadQuotation(): void {
         data.message === 'owner permission' ||
         data.message === 'viewer permission'
       ) {
+        backgroundMessageSignal.value = ''
         dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
 
         dispatch(
@@ -124,16 +126,17 @@ export function useLoadQuotation(): void {
     if (!isError) return
 
     if (error.response?.data.message === 'no permission to view') {
-      // todo: show message in the middle
+      backgroundMessageSignal.value = 'No permission to view quotation'
     } else if (
       error.response?.data.message === 'not found in bucket' ||
       error.response?.data.message === 'not found in db'
     ) {
-      // todo: show message in the middle
+      backgroundMessageSignal.value = 'Quotation not found'
     } else if (error.response?.data.message === 'not shared') {
-      // todo: show message in the middle
+      backgroundMessageSignal.value = 'Quotation not shared'
     } else {
       notify({ msg: 'Internal error', type: 'error', theme: 'light' })
+      backgroundMessageSignal.value = 'Internal error'
     }
 
     setTimeout(() => {

@@ -2,6 +2,7 @@ export { newQuotationTemplate } from './newQuotationTemplate'
 
 // signals
 export { isFroalaSignal } from './signals/isFroalaSignal'
+export { backgroundMessageSignal } from './signals/backgroundMessageSignal'
 
 // api
 export { useGetQuotationMutation } from './api/useGetQuotationMutation'
@@ -71,6 +72,7 @@ export { updateBoqRowCellAtStore } from './redux/updaters/updateBoqRowCellAtStor
 export { DraggableItemsContainer } from './ui/DraggableItemsContainer'
 export { ItemComp } from './ui/ItemComp'
 export { Froala } from './ui/froala/Froala'
+export { BackgroundMessage } from './ui/BackgroundMessage'
 
 // styles
 export { textItemCellStyle } from './styles/textItemCellStyle'

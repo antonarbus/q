@@ -25,9 +25,11 @@ import { TopMsg } from '@shared/ui/top_msg'
 const Quotation = React.lazy(async () => {
   return await import('@pages/quotation/quotation_page')
 })
+
 const QuotationsTable = React.lazy(
   async () => await import('@pages/quotation/quotations_page'),
 )
+
 const ItemsTable = React.lazy(
   async () => await import('@pages/bookmark/bookmarks_page'),
 )
