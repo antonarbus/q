@@ -8,11 +8,6 @@ export const insertBoqRow = (e?: MouseEvent): void => {
   const item: Item = {
     id: nanoid(5),
     type: boqRowKey.row,
-    email: '',
-    name: '',
-    category: '',
-    desc: '',
-    info: '',
     height: 50,
     width: 570,
     preview: `

@@ -7,7 +7,7 @@ import { openQuotationInfoModal } from '@features/open_close/open_quotation_info
 export const Info = (): ReactNode => {
   const quotationId = useSelectorTyped((state) => state.quotation.id)
 
-  if (quotationId === '' || quotationId === undefined) return null
+  if (!quotationId) return <div style={{ width: '80px' }} /> // render empty div for symmetry
 
   return (
     <Box

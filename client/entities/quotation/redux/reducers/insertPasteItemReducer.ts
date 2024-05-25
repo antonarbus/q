@@ -24,11 +24,6 @@ export const insertPasteItemReducer = (
   const pasteTextEl: ItemPaste = {
     id: 'paste id',
     type: itemKey.paste,
-    email: '',
-    name: '',
-    category: '',
-    desc: '',
-    info: '',
     height: 0,
     width: 0,
     isFroala: true,
