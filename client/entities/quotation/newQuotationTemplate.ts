@@ -6,22 +6,12 @@ import { type Quotation } from './types'
 export const newQuotationTemplate: Quotation = {
   type: itemKey.quotation,
   id: 'new',
-  email: '',
-  name: '',
-  category: '',
-  desc: '',
-  info: '',
   sharedWith: [],
   preview: '',
   items: [
     {
       id: nanoid(5),
       type: itemKey.text,
-      email: '',
-      name: '',
-      category: '',
-      desc: '',
-      info: '',
       width: 600,
       height: 0,
       isFroala: true,
@@ -33,11 +23,6 @@ export const newQuotationTemplate: Quotation = {
     {
       id: nanoid(5),
       type: itemKey.boq,
-      email: '',
-      name: '',
-      category: '',
-      desc: '',
-      info: '',
       width: 600,
       height: 0,
       isFroala: true,
@@ -82,11 +67,6 @@ export const newQuotationTemplate: Quotation = {
           {
             id: nanoid(5),
             type: boqRowKey.row,
-            email: '',
-            name: '',
-            category: '',
-            desc: '',
-            info: '',
             height: 0,
             width: 0,
             description: {
@@ -125,11 +105,6 @@ export const newQuotationTemplate: Quotation = {
           {
             id: nanoid(5),
             type: boqRowKey.row,
-            email: '',
-            name: '',
-            category: '',
-            desc: '',
-            info: '',
             height: 0,
             width: 0,
             description: {
@@ -168,11 +143,6 @@ export const newQuotationTemplate: Quotation = {
           {
             id: nanoid(5),
             type: boqRowKey.row,
-            email: '',
-            name: '',
-            category: '',
-            desc: '',
-            info: '',
             height: 0,
             width: 0,
             description: {
@@ -214,11 +184,6 @@ export const newQuotationTemplate: Quotation = {
     {
       id: nanoid(5),
       type: itemKey.price,
-      email: '',
-      name: '',
-      category: '',
-      desc: '',
-      info: '',
       width: 150,
       height: 0,
       isFroala: true,
@@ -234,11 +199,6 @@ export const newQuotationTemplate: Quotation = {
     {
       id: nanoid(5),
       type: itemKey.text,
-      email: '',
-      name: '',
-      category: '',
-      desc: '',
-      info: '',
       width: 600,
       height: 0,
       isFroala: true,

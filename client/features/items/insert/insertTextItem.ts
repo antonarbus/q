@@ -8,11 +8,6 @@ export const insertTextItem = (e?: MouseEvent): void => {
   const item: Item = {
     id: nanoid(5),
     type: itemKey.text,
-    email: '',
-    name: '',
-    category: '',
-    desc: '',
-    info: '',
     width: 600,
     height: 79.2,
     isFroala: true,

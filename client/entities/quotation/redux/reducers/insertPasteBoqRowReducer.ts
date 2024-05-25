@@ -16,11 +16,6 @@ const defaultCellValues: BoqRowCell = {
 const pasteText: BoqRow = {
   id: 'id of boq row paste',
   type: boqRowKey.paste,
-  email: '',
-  name: '',
-  category: '',
-  desc: '',
-  info: '',
   height: 0,
   width: 0,
   description: defaultCellValues,
