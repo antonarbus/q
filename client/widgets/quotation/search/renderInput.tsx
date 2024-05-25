@@ -25,6 +25,7 @@ export const renderInput = (
       sx={{
         '.MuiInputBase-root': {
           padding: '0px 5px !important',
+          flexWrap: 'nowrap',
         },
         '.MuiInput-root': {
           padding: '4px 30px 0px 0px !important',
