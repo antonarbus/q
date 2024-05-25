@@ -27,11 +27,20 @@ export const Info = (): ReactNode => {
         },
       }}
     >
-      <FaInfoCircle
-        style={{
-          fill: '#6488cf',
+      <Box
+        sx={{
+          flexGrow: 1,
+          display: 'flex',
+          justifyContent: 'flex-end',
+          alignItems: 'center',
         }}
-      />
+      >
+        <FaInfoCircle
+          style={{
+            fill: '#6488cf',
+          }}
+        />
+      </Box>
       {quotationId}
     </Box>
   )

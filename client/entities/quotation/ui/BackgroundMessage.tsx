@@ -16,6 +16,7 @@ export const BackgroundMessage = (): JSX.Element => {
         fontSize: '20px',
         fontWeight: 500,
         color: 'grey',
+        textAlign: 'center',
       }}
     >
       {backgroundMessageSignal.value}
