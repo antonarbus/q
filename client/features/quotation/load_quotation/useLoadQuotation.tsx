@@ -123,24 +123,24 @@ export function useLoadQuotation(): void {
   }, [isSuccess])
 
   useUpdateEffect(() => {
-    if (!isError) return
+    if (isError) {
+      if (error.response?.data.message === 'no permission to view') {
+        backgroundMessageSignal.value = `No permission to view quotation ${id}`
+      } else if (
+        error.response?.data.message === 'not found in bucket' ||
+        error.response?.data.message === 'not found in db'
+      ) {
+        backgroundMessageSignal.value = `Quotation ${id} is not found`
+      } else if (error.response?.data.message === 'not shared') {
+        backgroundMessageSignal.value = `Quotation ${id} is private`
+      } else {
+        notify({ msg: 'Internal error', type: 'error', theme: 'light' })
+        backgroundMessageSignal.value = 'Internal error'
+      }
 
-    if (error.response?.data.message === 'no permission to view') {
-      backgroundMessageSignal.value = 'No permission to view quotation'
-    } else if (
-      error.response?.data.message === 'not found in bucket' ||
-      error.response?.data.message === 'not found in db'
-    ) {
-      backgroundMessageSignal.value = 'Quotation not found'
-    } else if (error.response?.data.message === 'not shared') {
-      backgroundMessageSignal.value = 'Quotation not shared'
-    } else {
-      notify({ msg: 'Internal error', type: 'error', theme: 'light' })
-      backgroundMessageSignal.value = 'Internal error'
+      setTimeout(() => {
+        loadingDotsOverlayTextSignal.value = null
+      }, 1000)
     }
-
-    setTimeout(() => {
-      loadingDotsOverlayTextSignal.value = null
-    }, 1000)
   }, [isError])
 }

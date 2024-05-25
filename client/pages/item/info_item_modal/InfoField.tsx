@@ -3,7 +3,7 @@ import { type Signal } from '@preact/signals-react'
 import { BsFileEarmarkText } from 'react-icons/bs'
 
 type Props = {
-  infoSignal: Signal<string>
+  infoSignal: Signal<string | undefined>
 }
 
 export const InfoField = ({ infoSignal }: Props): JSX.Element => {

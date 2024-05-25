@@ -23,14 +23,14 @@ export const SaveQuotationModal = (): JSX.Element => {
   const infoSignal = useSignal(quotation.info ?? '')
 
   const getOptionValue = (): SharedWithOption => {
-    if (quotation.sharedWith.length === 0) return sharedWithOption.nobody
-    if (quotation.sharedWith.includes('*')) return sharedWithOption.everybody
+    if (quotation?.sharedWith?.length === 0) return sharedWithOption.nobody
+    if (quotation?.sharedWith?.includes('*')) return sharedWithOption.everybody
     return sharedWithOption.persons
   }
 
   const shareWithOptionSignal = useSignal<SharedWithOption>(getOptionValue())
 
-  const sharedWithSignal = useSignal<string[]>(quotation.sharedWith)
+  const sharedWithSignal = useSignal<string[]>(quotation?.sharedWith ?? [])
 
   const { onSubmit, isPending, isSuccess, isError } = useSaveQuotation({
     modalRef,

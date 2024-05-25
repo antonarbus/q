@@ -3,10 +3,10 @@ import { type Signal, useSignalEffect } from '@preact/signals-react'
 import { quotationSlice } from '@entities/quotation'
 
 type Props = {
-  nameSignal: Signal<string>
-  categorySignal: Signal<string>
-  descSignal: Signal<string>
-  infoSignal: Signal<string>
+  nameSignal: Signal<string | undefined>
+  categorySignal: Signal<string | undefined>
+  descSignal: Signal<string | undefined>
+  infoSignal: Signal<string | undefined>
   id: string
 }
 
