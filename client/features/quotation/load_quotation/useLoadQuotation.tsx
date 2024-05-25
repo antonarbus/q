@@ -8,7 +8,6 @@ import {
   newQuotationTemplate,
 } from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
-import { route } from '@shared/consts/route'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
 import { navSlice } from '@shared/nav'
 import { reRenderQuotationSignal } from '@shared/signals/reRenderQuotationSignal'
@@ -124,11 +123,15 @@ export function useLoadQuotation(): void {
   useUpdateEffect(() => {
     if (!isError) return
 
-    if (error.response?.data.message === 'not logged in') {
-      notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
-      void router.navigate(`./${route.login}`)
-    } else if (error.response?.data.message === 'not found') {
-      notify({ msg: 'Not found', type: 'warn', theme: 'light' })
+    if (error.response?.data.message === 'no permission to view') {
+      // todo: show message in the middle
+    } else if (
+      error.response?.data.message === 'not found in bucket' ||
+      error.response?.data.message === 'not found in db'
+    ) {
+      // todo: show message in the middle
+    } else if (error.response?.data.message === 'not shared') {
+      // todo: show message in the middle
     } else {
       notify({ msg: 'Internal error', type: 'error', theme: 'light' })
     }

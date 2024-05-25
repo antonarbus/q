@@ -49,7 +49,7 @@ const getQuotation: RouterHandler = async (req, res, next) => {
 
     const isOwner = email === document.email
 
-    const isShared = document.sharedWith.length === 0
+    const isShared = document.sharedWith.length !== 0
     const isSharedWithEverybody = document.sharedWith.at(0) === '*'
     const isSharedWithPerson = document.sharedWith.includes(
       email ?? 'no email here',
