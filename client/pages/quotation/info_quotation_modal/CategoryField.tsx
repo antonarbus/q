@@ -4,7 +4,7 @@ import { BsTags } from 'react-icons/bs'
 import { useGetQuotationCategoriesQuery } from '@entities/quotation'
 
 type Props = {
-  categorySignal: Signal<string>
+  categorySignal: Signal<string | undefined>
 }
 
 export const CategoryField = ({ categorySignal }: Props): JSX.Element => {

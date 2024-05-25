@@ -3,7 +3,7 @@ import { type Signal } from '@preact/signals-react'
 import { PiBooks } from 'react-icons/pi'
 
 type Props = {
-  nameSignal: Signal<string>
+  nameSignal: Signal<string | undefined>
 }
 
 export const NameField = ({ nameSignal }: Props): JSX.Element => {

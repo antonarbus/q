@@ -1,6 +1,7 @@
 import { QuotationModel } from '@server/db/models/quotationModel'
 import { bucket, storageFolderName } from '@server/services/storage'
 import { getEmailFromRefreshToken } from '@server/utils/getEmailFromRefreshToken'
+import { removeSensitiveDataFromQuotation } from '@server/utils/removeSensitiveDataFromQuotation'
 import { Router } from 'express'
 import { type Quotation } from '@entities/quotation'
 import { httpStatus } from '@shared/consts/httpStatus'
@@ -49,9 +50,9 @@ const getQuotation: RouterHandler = async (req, res, next) => {
 
     const isOwner = email === document.email
 
-    const isShared = document.sharedWith.length !== 0
-    const isSharedWithEverybody = document.sharedWith.at(0) === '*'
-    const isSharedWithPerson = document.sharedWith.includes(
+    const isShared = (document.sharedWith ?? []).length !== 0
+    const isSharedWithEverybody = (document.sharedWith ?? []).at(0) === '*'
+    const isSharedWithPerson = (document.sharedWith ?? []).includes(
       email ?? 'no email here',
     )
     const isViewer = isSharedWithEverybody || isSharedWithPerson
@@ -78,7 +79,7 @@ const getQuotation: RouterHandler = async (req, res, next) => {
         .json({ message: 'not found in bucket' })
     }
 
-    const quotation = JSON.parse(fileBuffer.toString())
+    const quotation: Quotation = JSON.parse(fileBuffer.toString())
 
     if (isOwner) {
       return res
@@ -87,11 +88,14 @@ const getQuotation: RouterHandler = async (req, res, next) => {
     }
 
     if (isViewer) {
-      // todo: remove sensitive data
+      const quotationWithoutSensitiveData = removeSensitiveDataFromQuotation({
+        quotation,
+      })
 
-      return res
-        .status(httpStatus.success_200)
-        .json({ message: 'viewer permission', quotation })
+      return res.status(httpStatus.success_200).json({
+        message: 'viewer permission',
+        quotation: quotationWithoutSensitiveData,
+      })
     }
   } catch (error) {
     next(error)

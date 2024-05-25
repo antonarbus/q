@@ -46,7 +46,9 @@ export const Search = (): JSX.Element => {
       }}
       getOptionLabel={(option) => {
         if (typeof option === 'string') return option
-        return option.name + option.category + option.desc
+        return (
+          (option.name ?? '') + (option.category ?? '') + (option.desc ?? '')
+        )
       }}
       renderInput={renderInput}
       renderOption={renderOption({

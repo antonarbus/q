@@ -177,7 +177,7 @@ export const ShareField = ({
                           if (emailSignal.value === '') return
 
                           sharedWithSignal.value = uniq([
-                            ...sharedWithSignal.value,
+                            ...(sharedWithSignal.value ?? []),
                             emailSignal.value,
                           ]).filter((item) => item !== '*')
                           emailSignal.value = ''
@@ -192,7 +192,7 @@ export const ShareField = ({
             )}
           </Box>
           {shareWithOptionSignal.value === sharedWithOption.persons &&
-            sharedWithSignal.value.length > 0 && (
+            (sharedWithSignal.value ?? []).length > 0 && (
               <Box
                 ref={chipsParent}
                 key='emails-chips'
@@ -215,7 +215,7 @@ export const ShareField = ({
                   flexDirection: 'row-reverse',
                 }}
               >
-                {sharedWithSignal.value
+                {(sharedWithSignal.value ?? [])
                   .filter((item) => item !== '*')
                   .map((email) => {
                     return (
@@ -223,10 +223,9 @@ export const ShareField = ({
                         key={email}
                         label={email}
                         onDelete={() => {
-                          sharedWithSignal.value =
-                            sharedWithSignal.value.filter(
-                              (emailInArray) => emailInArray !== email,
-                            )
+                          sharedWithSignal.value = (
+                            sharedWithSignal.value ?? []
+                          ).filter((emailInArray) => emailInArray !== email)
                         }}
                         sx={{
                           width: 'min-content',

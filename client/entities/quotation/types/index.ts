@@ -4,11 +4,11 @@ import { type itemKey } from '../consts/itemKey'
 
 type ItemCommon = {
   id: 'new' | (Record<never, never> & string)
-  email: string
-  name: string
-  category: string
-  desc: string
-  info: string
+  email?: string
+  name?: string
+  category?: string
+  desc?: string
+  info?: string
   width?: number
   height?: number
   isFroala?: boolean
@@ -102,7 +102,7 @@ export type Quotation = ItemCommon & {
   createdAt?: Date
   updatedAt?: Date
   openedAt?: Date
-  sharedWith: string[], //* if empty array, not shared, if '*' inside - with everyone
+  sharedWith?: string[] //* if empty array, not shared, if '*' inside - with everyone
   from?: {
     email?: string
     name?: string

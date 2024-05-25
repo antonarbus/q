@@ -70,7 +70,7 @@ export const renderOption =
           </span>
           {inputValueSignal.value
             ? getJsxWithBoldSubstr({
-                text: option.name,
+                text: option.name ?? '',
                 boldText: inputValueSignal.value,
               })
             : option.name}
