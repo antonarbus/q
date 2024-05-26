@@ -11,8 +11,6 @@ import {
   useItem,
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
-import { navItemId } from '@shared/consts/navItemId'
-import { navSlice } from '@shared/nav'
 import { fixElementDimensionStyle } from '@shared/utils/fixElementDimensionStyle'
 
 export const DeleteItemIcon = (): EmotionJSX.Element => {

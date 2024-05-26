@@ -1,4 +1,3 @@
-import { dispatch } from '@lib_instances/store'
 import { roundTo } from 'round-to'
 import {
   didBoqHeaderCellContentChange,
@@ -12,8 +11,6 @@ import {
   type BoqRowEditorRefs,
   boqRowCellKey,
 } from '@entities/quotation'
-import { navItemId } from '@shared/consts/navItemId'
-import { navSlice } from '@shared/nav'
 import { type FroalaEditor, type FroalaEditorRef } from '@shared/types/froala'
 import { notify } from '@shared/ui/top_msg'
 

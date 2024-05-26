@@ -16,7 +16,7 @@ export const Search = (): JSX.Element => {
     refetch: fetchBookmarks,
   } = useGetBookmarksQuery()
   const email = useSelectorTyped((state) => state.user.email)
-  const options = bookmarksData?.documents ?? []
+  const options = bookmarksData?.bookmarks ?? []
   const inputValueSignal = useSignal('')
   const { loadBookmark, isPendingBookmark, pendingBookmarkId } =
     useCopyBookmarkAtSearch()

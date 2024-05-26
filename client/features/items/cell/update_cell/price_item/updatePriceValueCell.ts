@@ -1,7 +1,5 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { itemKey, quotationSlice } from '@entities/quotation'
-import { navItemId } from '@shared/consts/navItemId'
-import { navSlice } from '@shared/nav'
 import { type FroalaEditorRef } from '@shared/types/froala'
 import { getNumberFromString, getTextContentFromHtml } from '@shared/utils'
 

@@ -12,13 +12,13 @@ import {
   LoadingTableOverlay,
   loadingTableOverlaySignal,
 } from '@shared/components/LoadingTableOverlay'
-import { notify } from '@shared/ui/top_msg'
-import { columnDefs, defaultColDef } from './columnDefs'
 import {
   DisplayedRowsCount,
   displayedRowsCountSignal,
-} from './components/DisplayedRowsCount'
-import { NoRowsTableOverlay } from './components/NoRowsTableOverlay'
+} from '@shared/lib/ag_grid/components/DisplayedRowsCount'
+import { NoRowsTableOverlay } from '@shared/lib/ag_grid/components/NoRowsTableOverlay'
+import { notify } from '@shared/ui/top_msg'
+import { columnDefs, defaultColDef } from './columnDefs'
 import { quotationsAgGridRef } from './refs/quotationsAgGridRef'
 import { AgGridStyles } from './styles/AgGridStyles'
 import { addPlaceholderToFloatingFilters } from './utils/addPlaceholderToFloatingFilters'

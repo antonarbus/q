@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import { effect } from '@preact/signals-react'
-import { displayedRowsCountSignal } from '@pages/quotation/quotations_page/components/DisplayedRowsCount'
 import { isFroalaSignal } from '@entities/quotation'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
+import { displayedRowsCountSignal } from '@shared/lib/ag_grid/components/DisplayedRowsCount'
 import { reRenderQuotationSignal } from '@shared/signals/reRenderQuotationSignal'
 
 declare const window: Window &

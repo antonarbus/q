@@ -9,8 +9,6 @@ import {
   useItem,
   useRow,
 } from '@entities/quotation'
-import { navItemId } from '@shared/consts/navItemId'
-import { navSlice } from '@shared/nav'
 
 export const DeleteBoqRowIcon = (): JSX.Element => {
   const { itemIndex } = useItem()

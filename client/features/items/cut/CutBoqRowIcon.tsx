@@ -12,8 +12,6 @@ import {
   useRow,
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
-import { navItemId } from '@shared/consts/navItemId'
-import { navSlice } from '@shared/nav'
 import { cleanHtml } from '@shared/utils/itemsUtils'
 
 export const CutBoqRowIcon = (): JSX.Element => {

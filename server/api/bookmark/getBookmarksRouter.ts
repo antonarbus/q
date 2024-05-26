@@ -9,7 +9,7 @@ import { type ResWithBody, type Next, type Req } from '../../types'
 
 export type ResBody = {
   message: ErrorMessageCommon | 'Found' | 'No content' | 'Unhandled error'
-  documents?: Item[]
+  bookmarks?: Item[]
 }
 
 type RouterHandler = (
@@ -24,21 +24,21 @@ const getBookmarks: RouterHandler = async (req, res, next) => {
   try {
     const email = getEmailFromRefreshTokenOrThrowUnauthorized(req)
 
-    const documents = await BookmarkModel.find({ email })
+    const bookmarks = await BookmarkModel.find({ email })
       // .sort({ updatedAt: -1 })
       .select({ _id: 0, __v: 0, email: 0 })
       .lean()
 
-    if (documents.length === 0) {
+    if (bookmarks.length === 0) {
       return res
         .status(httpStatus.success_200)
-        .json({ message: 'No content', documents })
+        .json({ message: 'No content', bookmarks })
     }
 
-    if (documents.length) {
+    if (bookmarks.length) {
       return res
         .status(httpStatus.success_200)
-        .json({ message: 'Found', documents })
+        .json({ message: 'Found', bookmarks })
     }
 
     return res

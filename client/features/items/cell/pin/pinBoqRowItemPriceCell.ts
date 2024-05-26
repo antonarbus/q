@@ -4,8 +4,6 @@ import {
   getBoqCellFromStore,
   quotationSlice,
 } from '@entities/quotation'
-import { navItemId } from '@shared/consts/navItemId'
-import { navSlice } from '@shared/nav'
 
 type Props = {
   itemIndex: number
