@@ -18,6 +18,7 @@ module.exports = {
     'vite.config.ts',
     'node_modules',
     'test-setup.ts',
+    'froalaPkgd.js',
   ],
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh', '@typescript-eslint'],
