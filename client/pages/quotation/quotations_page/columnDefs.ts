@@ -88,6 +88,7 @@ export const columnDefs: Array<ColDef<Quotation>> = [
   {
     field: 'sharedWith',
     headerName: 'shared with',
+    valueFormatter: (params) => params.value,
     cellRenderer: SharedWithRenderer,
   },
 ]
