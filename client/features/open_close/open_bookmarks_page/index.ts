@@ -1,3 +1,3 @@
 export { useNavItemsOnBookmarksPageOpen } from './useNavItemsOnBookmarksPageOpen'
-export { useDisableLoadingOverlayWhenItemsAreFetched } from './useDisableLoadingOverlayWhenItemsAreFetched'
+export { useDisableLoadingOverlayWhenBookmarksAreFetched } from './useDisableLoadingOverlayWhenBookmarksAreFetched'
 export { openBookmarksPage } from './openBookmarksPage'
