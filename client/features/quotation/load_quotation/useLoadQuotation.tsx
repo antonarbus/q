@@ -1,6 +1,5 @@
 import { router } from '@lib_instances/Router'
 import { dispatch } from '@lib_instances/store'
-import { nanoid } from 'nanoid'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
