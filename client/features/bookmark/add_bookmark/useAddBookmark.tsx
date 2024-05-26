@@ -53,7 +53,7 @@ export const useAddBookmark = ({
     if (isSuccess) {
       if (data.message === 'saved') {
         notify({
-          msg: 'Saved',
+          msg: 'Added',
           type: 'success',
           theme: 'dark',
           position: 'bottom-center',
