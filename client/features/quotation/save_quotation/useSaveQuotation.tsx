@@ -9,7 +9,7 @@ import {
   useGetQuotationCategoriesQuery,
   useSaveQuotationMutation,
 } from '@entities/quotation'
-import { navItemId } from '@shared/consts/navItemId'
+import { navItemKey } from '@shared/consts/navItemKey'
 import { nanoid } from '@shared/lib/nanoid'
 import {
   navSlice,
@@ -61,7 +61,7 @@ export const useSaveQuotation = ({
   useUpdateEffect(
     function showLoadingIcon() {
       if (isPending) {
-        showLoadingNavIcon({ navMenuItemIdKey: navItemId.save })
+        showLoadingNavIcon({ navMenuItemIdKey: navItemKey.save })
       }
     },
     [isPending],
@@ -87,7 +87,7 @@ export const useSaveQuotation = ({
           )
         }
 
-        showSuccessNavIcon({ navMenuItemIdKey: navItemId.save })
+        showSuccessNavIcon({ navMenuItemIdKey: navItemKey.save })
         dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
         setTimeout(() => {
@@ -115,7 +115,7 @@ export const useSaveQuotation = ({
           theme: 'dark',
           position: 'bottom-center',
         })
-        showErrorNavIcon({ navMenuItemIdKey: navItemId.save })
+        showErrorNavIcon({ navMenuItemIdKey: navItemKey.save })
         reset()
       }
     },

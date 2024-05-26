@@ -1,6 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { useEffectOnce, useUnmount } from 'react-use'
-import { navItemId } from '@shared/consts/navItemId'
+import { navItemKey } from '@shared/consts/navItemKey'
 import { navSlice } from '@shared/nav'
 
 export const useDisableNavItemsExceptNewAndQuotations = (): void => {
@@ -8,9 +8,9 @@ export const useDisableNavItemsExceptNewAndQuotations = (): void => {
     dispatch(
       navSlice.actions.disableAllTopNavItems({
         exceptNavItemIdKeys: [
-          navItemId.quotations,
-          navItemId.new,
-          navItemId.back,
+          navItemKey.quotations,
+          navItemKey.new,
+          navItemKey.back,
         ],
       }),
     )

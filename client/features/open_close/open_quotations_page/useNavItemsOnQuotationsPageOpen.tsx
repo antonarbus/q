@@ -1,6 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { useEffectOnce, useUnmount } from 'react-use'
-import { navItemId } from '@shared/consts/navItemId'
+import { navItemKey } from '@shared/consts/navItemKey'
 import { navSlice } from '@shared/nav'
 
 export const useNavItemsOnQuotationsPageOpen = (): void => {
@@ -8,18 +8,20 @@ export const useNavItemsOnQuotationsPageOpen = (): void => {
     dispatch(
       navSlice.actions.disableNavItems({
         navItemIdKeys: [
-          navItemId.save,
-          navItemId.pdf,
-          navItemId.share,
-          navItemId.quotations,
-          navItemId.insert,
+          navItemKey.save,
+          navItemKey.pdf,
+          navItemKey.share,
+          navItemKey.quotations,
+          navItemKey.insert,
         ],
       }),
     )
 
     dispatch(navSlice.actions.removeUnderlineFromTopNav())
     dispatch(
-      navSlice.actions.underlineNavItem({ navItemIdKey: navItemId.quotations }),
+      navSlice.actions.underlineNavItem({
+        navItemIdKey: navItemKey.quotations,
+      }),
     )
   })
 

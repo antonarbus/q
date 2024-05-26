@@ -22,18 +22,18 @@ import { openPreviousQuotation } from '@features/open_close/open_quotation_previ
 import { openQuotationsPage } from '@features/open_close/open_quotations_page'
 import { openSaveQuotationModal } from '@features/open_close/open_save_quotation_modal'
 import { downloadPdf } from '@features/quotation/pdf'
-import { navItemId } from '@shared/consts/navItemId'
+import { navItemKey } from '@shared/consts/navItemKey'
 import { route } from '@shared/consts/route'
 import type { MenuItemType } from '@shared/nav'
 
 export const navStructure: MenuItemType[] = [
   {
-    id: navItemId.top,
+    id: navItemKey.top,
     name: 'top',
     isHidden: false,
     menuItems: [
       {
-        id: navItemId.back,
+        id: navItemKey.back,
         icon: <IoChevronBackOutline />,
         isHidden: true,
         name: 'Back',
@@ -45,7 +45,7 @@ export const navStructure: MenuItemType[] = [
         isActive: true,
       },
       {
-        id: navItemId.new,
+        id: navItemKey.new,
         icon: <VscNewFile />,
         isHidden: false,
         name: 'New',
@@ -57,7 +57,7 @@ export const navStructure: MenuItemType[] = [
         isActive: true,
       },
       {
-        id: navItemId.save,
+        id: navItemKey.save,
         icon: <MdSaveAlt />,
         isHidden: false,
         name: 'Save',
@@ -68,7 +68,7 @@ export const navStructure: MenuItemType[] = [
         },
       },
       {
-        id: navItemId.pdf,
+        id: navItemKey.pdf,
         icon: <BsFiletypePdf />,
         isHidden: false,
         name: 'Pdf',
@@ -78,20 +78,20 @@ export const navStructure: MenuItemType[] = [
         },
       },
       {
-        id: navItemId.insert,
+        id: navItemKey.insert,
         icon: <RiMenuAddFill />,
         isHidden: false,
         name: 'Insert',
         disabled: true,
         menuItems: [
           {
-            id: navItemId.block,
+            id: navItemKey.block,
             name: 'Block',
             icon: <TbRectangleVertical />,
             isHidden: false,
             menuItems: [
               {
-                id: navItemId.textItem,
+                id: navItemKey.textItem,
                 name: 'Text',
                 icon: <IoText />,
                 isHidden: false,
@@ -101,7 +101,7 @@ export const navStructure: MenuItemType[] = [
                 },
               },
               {
-                id: navItemId.boqItem,
+                id: navItemKey.boqItem,
                 name: 'Items',
                 icon: <FaRegRectangleList />,
                 isHidden: false,
@@ -111,7 +111,7 @@ export const navStructure: MenuItemType[] = [
                 },
               },
               {
-                id: navItemId.priceItem,
+                id: navItemKey.priceItem,
                 name: 'Price',
                 icon: <FiDollarSign />,
                 isHidden: false,
@@ -123,7 +123,7 @@ export const navStructure: MenuItemType[] = [
             ],
           },
           {
-            id: navItemId.boqRow,
+            id: navItemKey.boqRow,
             name: 'Row',
             icon: <FaGripLines />,
             isHidden: false,
@@ -135,7 +135,7 @@ export const navStructure: MenuItemType[] = [
         ],
       },
       {
-        id: navItemId.bookmarks,
+        id: navItemKey.bookmarks,
         icon: <PiFolderSimpleStarDuotone />,
         isHidden: false,
         name: 'Bookmarks',
@@ -145,7 +145,7 @@ export const navStructure: MenuItemType[] = [
         },
       },
       {
-        id: navItemId.quotations,
+        id: navItemKey.quotations,
         icon: <CiViewTable />,
         isHidden: false,
         name: 'Quotations',
@@ -155,7 +155,7 @@ export const navStructure: MenuItemType[] = [
         },
       },
       {
-        id: navItemId.login,
+        id: navItemKey.login,
         icon: <FiLogIn />,
         isHidden: false,
         name: 'Log in',
@@ -165,20 +165,20 @@ export const navStructure: MenuItemType[] = [
         },
       },
       {
-        id: navItemId.account,
+        id: navItemKey.account,
         icon: <Person />,
         name: 'Account',
         isHidden: true,
         menuItems: [
           {
-            id: navItemId.settings,
+            id: navItemKey.settings,
             icon: <Settings />,
             isHidden: false,
             name: 'Settings',
             link: route.settings,
           },
           {
-            id: navItemId.logout,
+            id: navItemKey.logout,
             icon: <FiLogOut />,
             isHidden: false,
             name: 'Log out',

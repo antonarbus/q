@@ -1,7 +1,7 @@
 import { getState } from '@lib_instances/store'
 import { domToJpeg } from 'modern-screenshot'
 import { cls } from '@shared/consts/cls'
-import { navItemId } from '@shared/consts/navItemId'
+import { navItemKey } from '@shared/consts/navItemKey'
 import {
   showErrorNavIcon,
   showLoadingNavIcon,
@@ -9,7 +9,7 @@ import {
 } from '@shared/nav'
 
 export const downloadPdf = async (): Promise<void> => {
-  showLoadingNavIcon({ navMenuItemIdKey: navItemId.pdf })
+  showLoadingNavIcon({ navMenuItemIdKey: navItemKey.pdf })
 
   const itemsElement = document.querySelector(`.${cls.items}`)
   if (!(itemsElement instanceof HTMLElement)) return
@@ -60,10 +60,10 @@ export const downloadPdf = async (): Promise<void> => {
     downloadLink.click()
     document.body.removeChild(downloadLink)
     URL.revokeObjectURL(pdfDataUrl) // revoke the data URL to free up resources
-    showSuccessNavIcon({ navMenuItemIdKey: navItemId.pdf })
+    showSuccessNavIcon({ navMenuItemIdKey: navItemKey.pdf })
   }
 
   worker.onerror = function () {
-    showErrorNavIcon({ navMenuItemIdKey: navItemId.pdf })
+    showErrorNavIcon({ navMenuItemIdKey: navItemKey.pdf })
   }
 }

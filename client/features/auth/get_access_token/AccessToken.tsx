@@ -5,7 +5,7 @@ import type { JwtPayloadExtended } from 'server/services/jwt'
 import { useGetAccessTokenQuery, userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 import { loadingTableOverlaySignal } from '@shared/components/LoadingTableOverlay'
-import { navItemId } from '@shared/consts/navItemId'
+import { navItemKey } from '@shared/consts/navItemKey'
 import { resolveInitAccessTokenFetching } from '@shared/lib/axios/axiosWithAuth'
 import { navSlice } from '@shared/nav'
 
@@ -60,11 +60,13 @@ export const AccessToken = (): JSX.Element => {
         )
 
         dispatch(
-          navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.login] }),
+          navSlice.actions.hideNavItems({ navItemIdKeys: [navItemKey.login] }),
         )
 
         dispatch(
-          navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.account] }),
+          navSlice.actions.showNavItems({
+            navItemIdKeys: [navItemKey.account],
+          }),
         )
 
         resolveInitAccessTokenFetching('fetched')
@@ -84,11 +86,13 @@ export const AccessToken = (): JSX.Element => {
         dispatch(userSlice.actions.forgetLoggedUser())
 
         dispatch(
-          navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.login] }),
+          navSlice.actions.showNavItems({ navItemIdKeys: [navItemKey.login] }),
         )
 
         dispatch(
-          navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.account] }),
+          navSlice.actions.hideNavItems({
+            navItemIdKeys: [navItemKey.account],
+          }),
         )
 
         resolveInitAccessTokenFetching('failed')

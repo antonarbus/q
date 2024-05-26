@@ -9,7 +9,7 @@ import {
   backgroundMessageSignal,
   previousQuotationRef,
 } from '@entities/quotation'
-import { navItemId } from '@shared/consts/navItemId'
+import { navItemKey } from '@shared/consts/navItemKey'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
 import { navSlice } from '@shared/nav'
 import { reRenderQuotationSignal } from '@shared/signals/reRenderQuotationSignal'
@@ -20,7 +20,6 @@ export function useLoadQuotation(): void {
     mutate: getQuotation,
     data,
     isSuccess,
-    isPending,
     isError,
     error,
   } = useGetQuotationMutation()
@@ -28,42 +27,41 @@ export function useLoadQuotation(): void {
 
   useEffect(
     function loadQuotation() {
-      dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: ['back'] }))
       const previousQuotation = previousQuotationRef.current
+      dispatch(quotationSlice.actions.resetQuotationReducer())
+      dispatch(navSlice.actions.removeUnderlineFromTopNav())
+      dispatch(
+        navSlice.actions.hideNavItems({ navItemIdKeys: [navItemKey.back] }),
+      )
+      dispatch(
+        navSlice.actions.enableNavItems({
+          navItemIdKeys: [
+            navItemKey.save,
+            navItemKey.pdf,
+            navItemKey.share,
+            navItemKey.insert,
+          ],
+        }),
+      )
 
       // load previous quotation
       if (previousQuotation && id === previousQuotationRef.current?.id) {
         loadingDotsOverlayTextSignal.value = 'Going back...'
 
-        dispatch(quotationSlice.actions.resetQuotationReducer())
-
+        // avoid resetting and loading quotation batching, otherwise there is unwanted items animation
         setTimeout(() => {
           dispatch(
             quotationSlice.actions.loadQuotationReducer({
               quotation: previousQuotation,
             }),
           )
-        }, 200)
-
-        dispatch(
-          navSlice.actions.enableNavItems({
-            navItemIdKeys: [
-              navItemId.save,
-              navItemId.pdf,
-              navItemId.share,
-              navItemId.insert,
-            ],
-          }),
-        )
-
-        dispatch(navSlice.actions.removeUnderlineFromTopNav())
+        }, 100)
 
         setTimeout(() => {
           loadingDotsOverlayTextSignal.value = null
-        }, 500)
+        }, 750)
 
         previousQuotationRef.current = null
-
         return
       }
 
@@ -71,63 +69,43 @@ export function useLoadQuotation(): void {
       if (id === undefined || id === 'new') {
         loadingDotsOverlayTextSignal.value = 'Loading template...'
 
-        dispatch(quotationSlice.actions.resetQuotationReducer())
-
+        // avoid resetting and loading quotation batching, otherwise there is unwanted items animation
         setTimeout(() => {
           dispatch(
             quotationSlice.actions.loadQuotationReducer({
               quotation: newQuotationTemplate,
             }),
           )
-        }, 200)
-
-        dispatch(
-          navSlice.actions.enableNavItems({
-            navItemIdKeys: [
-              navItemId.save,
-              navItemId.pdf,
-              navItemId.share,
-              navItemId.insert,
-            ],
-          }),
-        )
-
-        dispatch(navSlice.actions.removeUnderlineFromTopNav())
-        dispatch(
-          navSlice.actions.underlineNavItem({ navItemIdKey: navItemId.new }),
-        )
+        }, 100)
 
         setTimeout(() => {
           loadingDotsOverlayTextSignal.value = null
-        }, 1000)
+        }, 750)
+
+        dispatch(
+          navSlice.actions.underlineNavItem({ navItemIdKey: navItemKey.new }),
+        )
 
         return
       }
 
       // load quotation from server
       if (id !== undefined && id !== 'new') {
-        dispatch(navSlice.actions.removeUnderlineFromTopNav())
         loadingDotsOverlayTextSignal.value = `Loading ${id}...`
-        setTimeout(() => {
-          loadingDotsOverlayTextSignal.value = null
-        }, 1000)
-
-        dispatch(quotationSlice.actions.resetQuotationReducer())
-        dispatch(navSlice.actions.removeUnderlineFromTopNav())
         getQuotation({ id })
       }
     },
     [reRenderQuotationSignal.value],
   )
 
-  useUpdateEffect(
-    function showDots() {
-      if (isPending) {
-        loadingDotsOverlayTextSignal.value = `Loading ${id}...`
-      }
-    },
-    [isPending],
-  )
+  // useUpdateEffect(
+  //   function showDots() {
+  //     if (isPending) {
+  //       loadingDotsOverlayTextSignal.value = `Loading ${id}...`
+  //     }
+  //   },
+  //   [isPending],
+  // )
 
   useUpdateEffect(
     function handleSuccess() {
@@ -144,8 +122,6 @@ export function useLoadQuotation(): void {
           return
         }
 
-        dispatch(quotationSlice.actions.resetQuotationReducer())
-
         if (
           data.message === 'owner permission' ||
           data.message === 'viewer permission'
@@ -156,17 +132,17 @@ export function useLoadQuotation(): void {
           dispatch(
             navSlice.actions.enableNavItems({
               navItemIdKeys: [
-                navItemId.save,
-                navItemId.pdf,
-                navItemId.share,
-                navItemId.insert,
+                navItemKey.save,
+                navItemKey.pdf,
+                navItemKey.share,
+                navItemKey.insert,
               ],
             }),
           )
 
           setTimeout(() => {
             loadingDotsOverlayTextSignal.value = null
-          }, 1000)
+          }, 750)
         }
       }
     },
@@ -192,7 +168,7 @@ export function useLoadQuotation(): void {
 
         setTimeout(() => {
           loadingDotsOverlayTextSignal.value = null
-        }, 1000)
+        }, 750)
       }
     },
     [isError],
