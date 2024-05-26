@@ -1,10 +1,8 @@
-import { router } from '@lib_instances/Router'
 import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
 import { apiUrl } from 'server/consts/apiUrl'
 import { headerName } from 'server/consts/headerName'
 import { accessTokenSignal } from '../../auth/accessTokenSignal'
 import { httpStatus } from '../../consts/httpStatus'
-import { route } from '../../consts/route'
 
 export const {
   promise: initAccessTokenFetchingPromise,
@@ -27,8 +25,10 @@ axiosWithAuth.interceptors.response.use(
     return config
   },
   async (error) => {
+    // remember original request to use it when we refresh user's access token
     const originalRequestConfig = error.config as ExtendedAxiosRequestConfig
 
+    // most likely access token was expired
     const isUnauthorizedAfterCheckingAccessToken =
       error instanceof AxiosError &&
       error.response?.status === httpStatus.unauthorized_401 &&
@@ -38,6 +38,7 @@ axiosWithAuth.interceptors.response.use(
       originalRequestConfig._isRetry = true
 
       try {
+        // refresh expired or invalid access token
         const res = await axios.get(apiUrl.getAccessToken, {
           withCredentials: true,
         })
@@ -46,6 +47,7 @@ axiosWithAuth.interceptors.response.use(
           accessTokenSignal.value = res.data.accessJwtToken
         }
 
+        // make original request
         return await axiosWithAuth.request(originalRequestConfig)
       } catch (err: unknown) {
         const isUnauthorized =
@@ -53,13 +55,10 @@ axiosWithAuth.interceptors.response.use(
           err.response?.status === httpStatus.unauthorized_401
 
         if (isUnauthorized) {
+          // still unauthorized after attempt to refresh the access token
           accessTokenSignal.value = null
           console.warn('not authorized')
           console.error(err)
-
-          // if (!location.pathname.includes(route.login)) {
-          //   void router.navigate(`./${route.login}`)
-          // }
         }
       }
     }

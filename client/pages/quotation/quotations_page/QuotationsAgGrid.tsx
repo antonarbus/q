@@ -27,16 +27,8 @@ import { addPlaceholderToFloatingFilters } from './utils/addPlaceholderToFloatin
 
 export const QuotationsAgGrid = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
-  const {
-    data,
-    isLoading,
-    isSuccess,
-    isFetching,
-    isFetched,
-    isError,
-    error,
-    refetch,
-  } = useGetQuotationsQuery()
+  const { data, isLoading, isFetching, isFetched, isError, error, refetch } =
+    useGetQuotationsQuery()
   useDisableLoadingOverlayWhenQuotationsAreFetched({ isFetched })
   const email = useSelectorTyped((state) => state.user.email)
 
