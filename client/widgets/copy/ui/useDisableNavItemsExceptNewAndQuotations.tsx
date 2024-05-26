@@ -7,7 +7,11 @@ export const useDisableNavItemsExceptNewAndQuotations = (): void => {
   useEffectOnce(() => {
     dispatch(
       navSlice.actions.disableAllTopNavItems({
-        exceptNavItemIdKeys: [navItemId.quotations, navItemId.new],
+        exceptNavItemIdKeys: [
+          navItemId.quotations,
+          navItemId.new,
+          navItemId.back,
+        ],
       }),
     )
   })
