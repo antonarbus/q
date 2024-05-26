@@ -64,7 +64,7 @@ export const renderOption =
         >
           <span css={{ color: 'grey', marginRight: '5px' }}>
             <PiBooks
-              style={{ height: '16px', width: '16px', translate: '0px 3px' }}
+              style={{ height: '16px', width: '16px', translate: '0px 4px' }}
             />{' '}
             <span css={{ fontSize: '12px' }}>name:</span>
           </span>
@@ -85,7 +85,7 @@ export const renderOption =
         >
           <span css={{ color: 'grey', marginRight: '5px' }}>
             <BsTags
-              style={{ height: '16px', width: '16px', translate: '0px 3px' }}
+              style={{ height: '16px', width: '16px', translate: '0px 4px' }}
             />{' '}
             <span css={{ fontSize: '12px' }}>category:</span>
           </span>
@@ -106,7 +106,7 @@ export const renderOption =
         >
           <span css={{ color: 'grey', marginRight: '5px' }}>
             <BsFileEarmarkText
-              style={{ height: '16px', width: '16px', translate: '0px 2px' }}
+              style={{ height: '16px', width: '16px', translate: '0px 3px' }}
             />{' '}
             <span css={{ fontSize: '12px' }}>description:</span>
           </span>
