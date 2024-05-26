@@ -18,6 +18,8 @@ type Props = {
   nameSignal: Signal<string>
   categorySignal: Signal<string>
   descSignal: Signal<string>
+  infoSignal: Signal<string>
+  sharedWithSignal: Signal<string[]>
 }
 
 type Res = {
@@ -32,6 +34,8 @@ export const useEditQuotation = ({
   nameSignal,
   categorySignal,
   descSignal,
+  infoSignal,
+  sharedWithSignal,
 }: Props): Res => {
   const navigate = useNavigate()
 
@@ -44,53 +48,52 @@ export const useEditQuotation = ({
     error,
     reset,
   } = useSaveQuotationMutation()
+
   const { refetch: updateQuotationCategories } =
     useGetQuotationCategoriesQuery()
+
   const { refetch: fetchQuotations } = useGetQuotationsQuery()
 
-  useUpdateEffect(() => {
-    if (isSuccess) {
-      if (data.message === 'saved') {
+  useUpdateEffect(
+    function handleSuccess() {
+      if (isSuccess) {
         notify({
-          msg: 'Saved',
-          type: 'success',
+          msg: data.message === 'saved' ? 'Saved' : 'Updated',
+          type: data.message === 'saved' ? 'success' : 'info',
           theme: 'dark',
           position: 'bottom-center',
         })
-      } else if (data.message === 'updated') {
-        notify({
-          msg: 'Updated',
-          type: 'info',
-          theme: 'dark',
-          position: 'bottom-center',
-        })
+
+        void updateQuotationCategories()
+        void fetchQuotations()
+
+        setTimeout(() => {
+          slideElement({
+            element: modalRef.current,
+            onSlideElementComplete: () => {
+              navigate('..', { replace: true, state: nanoid() })
+            },
+          })
+        }, 1000)
       }
+    },
+    [isSuccess],
+  )
 
-      void updateQuotationCategories()
-      void fetchQuotations()
-
-      setTimeout(() => {
-        slideElement({
-          element: modalRef.current,
-          onSlideElementComplete: () => {
-            navigate('..', { replace: true, state: nanoid() })
-          },
+  useUpdateEffect(
+    function handleError() {
+      if (isError) {
+        notify({
+          msg: error.response?.data.message,
+          type: 'error',
+          theme: 'dark',
+          position: 'bottom-center',
         })
-      }, 1000)
-    }
-  }, [isSuccess])
-
-  useUpdateEffect(() => {
-    if (isError) {
-      notify({
-        msg: error.response?.data.message,
-        type: 'error',
-        theme: 'dark',
-        position: 'bottom-center',
-      })
-      reset()
-    }
-  }, [isError])
+        reset()
+      }
+    },
+    [isError],
+  )
 
   const onSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault()
@@ -111,6 +114,8 @@ export const useEditQuotation = ({
       name: nameSignal.value,
       category: categorySignal.value,
       desc: descSignal.value,
+      info: infoSignal.value,
+      sharedWith: sharedWithSignal.value,
     }
 
     saveQuotation({ quotation: quotationWithUpdatedValues })

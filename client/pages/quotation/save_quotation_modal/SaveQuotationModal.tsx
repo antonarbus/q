@@ -29,7 +29,6 @@ export const SaveQuotationModal = (): JSX.Element => {
   }
 
   const shareWithOptionSignal = useSignal<SharedWithOption>(getOptionValue())
-
   const sharedWithSignal = useSignal<string[]>(quotation?.sharedWith ?? [])
 
   const { onSubmit, isPending, isSuccess, isError } = useSaveQuotation({

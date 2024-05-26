@@ -29,7 +29,7 @@ export const Search = (): JSX.Element => {
 
   return (
     <Autocomplete
-      // open // manual open control to see for dev purpose
+      open // manual open control to see for dev purpose
       className={cls.search}
       freeSolo={options.length !== 0} // show MUI autocomplete even if no options
       disablePortal

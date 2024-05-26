@@ -45,6 +45,7 @@ export const useSaveQuotation = ({
   sharedWithSignal,
 }: Props): Res => {
   const navigate = useNavigate()
+
   const {
     mutate: saveQuotation,
     data,
@@ -54,6 +55,7 @@ export const useSaveQuotation = ({
     error,
     reset,
   } = useSaveQuotationMutation()
+
   const { refetch: updateCategories } = useGetQuotationCategoriesQuery()
 
   useUpdateEffect(
