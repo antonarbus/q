@@ -28,9 +28,10 @@ export function useLoadQuotation(): void {
 
   useEffect(
     function loadQuotation() {
-      // load previous quotation
+      dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: ['back'] }))
       const previousQuotation = previousQuotationRef.current
 
+      // load previous quotation
       if (previousQuotation && id === previousQuotationRef.current?.id) {
         loadingDotsOverlayTextSignal.value = 'Going back...'
 
