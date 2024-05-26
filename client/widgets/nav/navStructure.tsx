@@ -3,9 +3,10 @@ import { BsFiletypePdf } from 'react-icons/bs'
 import { CiViewTable } from 'react-icons/ci'
 import { FaRegRectangleList, FaGripLines } from 'react-icons/fa6'
 import { FiLogOut, FiLogIn, FiDollarSign } from 'react-icons/fi'
-import { IoText } from 'react-icons/io5'
+import { IoIosArrowRoundBack } from 'react-icons/io'
+import { IoText, IoChevronBackOutline } from 'react-icons/io5'
 import { MdSaveAlt } from 'react-icons/md'
-import { PiFolderSimpleStarDuotone } from 'react-icons/pi'
+import { PiFolderSimpleStarDuotone, PiDoorLight } from 'react-icons/pi'
 import { RiMenuAddFill } from 'react-icons/ri'
 import { TbRectangleVertical } from 'react-icons/tb'
 import { VscNewFile } from 'react-icons/vsc'
@@ -17,7 +18,8 @@ import {
 } from '@features/items/insert'
 import { openBookmarksPage } from '@features/open_close/open_bookmarks_page'
 import { openLoginModal } from '@features/open_close/open_login_modal'
-import { openNewQuotationPage } from '@features/open_close/open_new_quotation_page'
+import { openNewQuotationPage } from '@features/open_close/open_quotation_new_page'
+import { openPreviousQuotation } from '@features/open_close/open_quotation_previous_page'
 import { openQuotationsPage } from '@features/open_close/open_quotations_page'
 import { openSaveQuotationModal } from '@features/open_close/open_save_quotation_modal'
 import { downloadPdf } from '@features/quotation/pdf'
@@ -31,6 +33,18 @@ export const navStructure: MenuItemType[] = [
     name: 'top',
     isHidden: false,
     menuItems: [
+      {
+        id: navItemId.back,
+        icon: <IoChevronBackOutline />,
+        isHidden: true,
+        name: 'Back',
+        // shortcut: ['control', 'n'],
+        // link: route.back,
+        func: () => {
+          openPreviousQuotation()
+        },
+        isActive: true,
+      },
       {
         id: navItemId.new,
         icon: <VscNewFile />,

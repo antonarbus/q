@@ -1,0 +1,1 @@
+export { openPreviousQuotation } from './openPreviousQuotation'

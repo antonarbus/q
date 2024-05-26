@@ -18,4 +18,5 @@ export const navItemId = {
   boqItem: 'boqItem',
   priceItem: 'priceItem',
   boqRow: 'boqRow',
+  back: 'back',
 } as const

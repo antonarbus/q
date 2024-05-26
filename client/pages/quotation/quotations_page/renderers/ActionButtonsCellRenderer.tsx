@@ -1,8 +1,8 @@
 import { Box } from '@mui/material'
 import type { ICellRendererParams } from 'ag-grid-community'
 import { type ReactNode } from 'react'
-import { OpenExistingQuotationPageButton } from '@features/open_close/open_existing_quotation_page'
 import { OpenEditQuotationModalButton } from '@features/open_close/open_quotation_edit_modal'
+import { OpenExistingQuotationPageButton } from '@features/open_close/open_quotation_existing_page'
 import { DeleteQuotationButton } from '@features/quotation/delete_quotation'
 import { type Quotation } from '@entities/quotation'
 
