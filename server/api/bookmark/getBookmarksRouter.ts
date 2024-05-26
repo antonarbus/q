@@ -8,7 +8,7 @@ import { httpStatus } from '@shared/consts/httpStatus'
 import { type ResWithBody, type Next, type Req } from '../../types'
 
 export type ResBody = {
-  message: ErrorMessageCommon | 'found' | 'no content' | 'Unhandled error'
+  message: ErrorMessageCommon | 'Found' | 'No content' | 'Unhandled error'
   documents?: Item[]
 }
 
@@ -32,13 +32,13 @@ const getBookmarks: RouterHandler = async (req, res, next) => {
     if (documents.length === 0) {
       return res
         .status(httpStatus.success_200)
-        .json({ message: 'no content', documents })
+        .json({ message: 'No content', documents })
     }
 
     if (documents.length) {
       return res
         .status(httpStatus.success_200)
-        .json({ message: 'found', documents })
+        .json({ message: 'Found', documents })
     }
 
     return res

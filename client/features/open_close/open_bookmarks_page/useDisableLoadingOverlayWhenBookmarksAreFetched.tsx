@@ -5,7 +5,7 @@ type Props = {
   isFetched: boolean
 }
 
-export const useDisableLoadingOverlayWhenItemsAreFetched = ({
+export const useDisableLoadingOverlayWhenBookmarksAreFetched = ({
   isFetched,
 }: Props): void => {
   useEffect(() => {

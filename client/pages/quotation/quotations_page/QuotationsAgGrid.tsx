@@ -42,38 +42,47 @@ export const QuotationsAgGrid = (): JSX.Element => {
     void refetch()
   }, [email])
 
-  useUpdateEffect(() => {
-    if (isLoading) {
-      loadingTableOverlaySignal.value = {
-        areJumpingDotsShown: true,
-        text: 'Loading',
+  useUpdateEffect(
+    function handleLoading() {
+      if (isLoading) {
+        loadingTableOverlaySignal.value = {
+          areJumpingDotsShown: true,
+          text: 'Loading',
+        }
       }
-    }
-  }, [isLoading])
+    },
+    [isLoading],
+  )
 
-  useUpdateEffect(() => {
-    if (isSuccess) {
-      if (data.message === 'No content') {
+  useUpdateEffect(
+    function handleSuccess() {
+      if (isSuccess) {
+        if (data.message === 'No content') {
+          notify({
+            msg: data.message,
+            type: 'info',
+            theme: 'dark',
+            position: 'bottom-center',
+          })
+        }
+      }
+    },
+    [isSuccess],
+  )
+
+  useUpdateEffect(
+    function handleError() {
+      if (isError) {
         notify({
-          msg: data.message,
-          type: 'info',
+          msg: error.response?.data.message,
+          type: 'warn',
           theme: 'dark',
           position: 'bottom-center',
         })
       }
-    }
-  }, [isSuccess])
-
-  useUpdateEffect(() => {
-    if (isError) {
-      notify({
-        msg: error.response?.data.message,
-        type: 'warn',
-        theme: 'dark',
-        position: 'bottom-center',
-      })
-    }
-  }, [isError])
+    },
+    [isError],
+  )
 
   return (
     <Box
