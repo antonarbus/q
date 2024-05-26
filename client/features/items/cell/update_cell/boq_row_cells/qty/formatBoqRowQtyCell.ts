@@ -15,17 +15,11 @@ export const formatBoqRowQtyCell = ({
   itemIndex,
   rowIndex,
 }: Props): void => {
-  const { didUpdate } = formatBoqRowCellNumber({
+  formatBoqRowCellNumber({
     itemIndex,
     rowIndex,
     boqRowCellKey: boqRowCellKey.qty,
     editorRef: qtyCellEditorRef,
     roundToTwoDecimals: false,
   })
-
-  if (didUpdate) {
-    dispatch(
-      navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }),
-    )
-  }
 }

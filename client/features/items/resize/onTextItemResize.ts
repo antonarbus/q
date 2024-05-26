@@ -50,5 +50,4 @@ export const onTextItemResizeStop: OnItemResizeStop = ({
   if (width === prevItemWidth) return
 
   dispatch(quotationSlice.actions.updateItemWidthReducer({ itemIndex, width }))
-  dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
 }

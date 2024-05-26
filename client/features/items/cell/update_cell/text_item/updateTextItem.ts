@@ -21,5 +21,4 @@ export const updateTextItem = ({ editorRef, itemIndex }: Props): void => {
   if (!didTextChange) return
 
   dispatch(quotationSlice.actions.updateItemTextReducer({ itemIndex, html }))
-  dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
 }

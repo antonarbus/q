@@ -10,5 +10,4 @@ type Props = {
 
 export const pinBoqRowPriceCell = ({ itemIndex, rowIndex }: Props): void => {
   dispatch(quotationSlice.actions.pinPriceReducer({ itemIndex, rowIndex }))
-  dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
 }

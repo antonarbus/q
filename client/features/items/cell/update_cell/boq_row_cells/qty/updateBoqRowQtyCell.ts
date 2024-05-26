@@ -74,14 +74,10 @@ export const updateBoqRowQtyCell = ({
 
   const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
 
-  const { didChange } = updateSubTotalPriceWithValue({
+  updateSubTotalPriceWithValue({
     itemIndex,
     subTotalPriceEditor: subTotalPriceEditorRef.current,
     value: subTotalPriceValueNewRounded,
     incrementally: true,
   })
-
-  if (!didChange) return
-
-  dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
 }

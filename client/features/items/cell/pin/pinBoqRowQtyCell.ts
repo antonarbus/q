@@ -23,5 +23,4 @@ export const pinBoqRowQtyCell = ({ itemIndex, rowIndex }: Props): void => {
   if (isPinned) return
 
   dispatch(quotationSlice.actions.pinQtyReducer({ itemIndex, rowIndex }))
-  dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
 }

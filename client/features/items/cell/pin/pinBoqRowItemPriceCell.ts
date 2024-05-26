@@ -26,5 +26,4 @@ export const pinBoqRowItemPriceCell = ({
   if (isPinned) return
 
   dispatch(quotationSlice.actions.pinItemPriceReducer({ itemIndex, rowIndex }))
-  dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
 }

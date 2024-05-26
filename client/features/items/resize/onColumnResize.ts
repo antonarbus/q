@@ -75,5 +75,4 @@ export const onColumnResizeStop = ({
     }),
   )
   dispatch(quotationSlice.actions.enableFroalaReducer({ itemIndex }))
-  dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
 }

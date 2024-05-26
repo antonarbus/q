@@ -38,18 +38,12 @@ export const useUpdateSubtotalPrice = (): void => {
     const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
 
     setTimeout(() => {
-      const { didChange } = updateSubTotalPriceWithValue({
+      updateSubTotalPriceWithValue({
         itemIndex,
         subTotalPriceEditor: subTotalPriceEditorRef.current,
         value: subTotalPriceValueNewRounded,
         incrementally: true,
       })
-
-      if (!didChange) return
-
-      dispatch(
-        navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }),
-      )
     })
   }, [isItemFroala, isFroalaSignal.value])
 }

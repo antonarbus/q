@@ -56,72 +56,69 @@ export const useSaveQuotation = ({
   } = useSaveQuotationMutation()
   const { refetch: updateCategories } = useGetQuotationCategoriesQuery()
 
-  useUpdateEffect(() => {
-    if (isPending) {
-      showLoadingNavIcon({ navMenuItemIdKey: navItemId.save })
-    }
-  }, [isPending])
+  useUpdateEffect(
+    function showLoadingIcon() {
+      if (isPending) {
+        showLoadingNavIcon({ navMenuItemIdKey: navItemId.save })
+      }
+    },
+    [isPending],
+  )
 
-  useUpdateEffect(() => {
-    if (isSuccess) {
-      if (data.message === 'saved') {
+  useUpdateEffect(
+    function handleSuccess() {
+      if (isSuccess) {
         notify({
-          msg: 'Saved',
-          type: 'success',
+          msg: data.message === 'saved' ? 'Saved' : 'Updated',
+          type: data.message === 'saved' ? 'success' : 'info',
           theme: 'dark',
           position: 'bottom-center',
         })
-      } else if (data.message === 'updated') {
+
+        void updateCategories()
+
+        if (data.quotation) {
+          dispatch(
+            quotationSlice.actions.loadQuotationReducer({
+              quotation: data.quotation,
+            }),
+          )
+        }
+
+        showSuccessNavIcon({ navMenuItemIdKey: navItemId.save })
+        dispatch(navSlice.actions.removeUnderlineFromTopNav())
+
+        setTimeout(() => {
+          slideElement({
+            element: modalRef.current,
+            onSlideElementComplete: () => {
+              navigate(`/${data.quotation?.id ?? 'no id set'}`, {
+                replace: true,
+                state: nanoid(),
+              })
+            },
+          })
+        }, 1000)
+      }
+    },
+    [isSuccess],
+  )
+
+  useUpdateEffect(
+    function handleError() {
+      if (isError) {
         notify({
-          msg: 'Updated',
-          type: 'info',
+          msg: error.response?.data.message,
+          type: 'error',
           theme: 'dark',
           position: 'bottom-center',
         })
+        showErrorNavIcon({ navMenuItemIdKey: navItemId.save })
+        reset()
       }
-
-      void updateCategories()
-
-      if (data.quotation) {
-        dispatch(
-          quotationSlice.actions.loadQuotationReducer({
-            quotation: data.quotation,
-          }),
-        )
-      }
-
-      showSuccessNavIcon({ navMenuItemIdKey: navItemId.save })
-      dispatch(
-        navSlice.actions.disableNavItems({ navItemIdKeys: [navItemId.save] }),
-      )
-      dispatch(navSlice.actions.removeUnderlineFromTopNav())
-
-      setTimeout(() => {
-        slideElement({
-          element: modalRef.current,
-          onSlideElementComplete: () => {
-            navigate(`/${data.quotation?.id ?? 'no id set'}`, {
-              replace: true,
-              state: nanoid(),
-            })
-          },
-        })
-      }, 1000)
-    }
-  }, [isSuccess])
-
-  useUpdateEffect(() => {
-    if (isError) {
-      notify({
-        msg: error.response?.data.message,
-        type: 'error',
-        theme: 'dark',
-        position: 'bottom-center',
-      })
-      showErrorNavIcon({ navMenuItemIdKey: navItemId.save })
-      reset()
-    }
-  }, [isError])
+    },
+    [isError],
+  )
 
   const onSubmit = (e: React.FormEvent): void => {
     e.preventDefault()
