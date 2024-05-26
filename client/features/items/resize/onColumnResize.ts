@@ -7,8 +7,6 @@ import {
   fixItemImagesHeight,
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
-import { navItemId } from '@shared/consts/navItemId'
-import { navSlice } from '@shared/nav'
 
 type Props = {
   headerColumnElement: HTMLElement

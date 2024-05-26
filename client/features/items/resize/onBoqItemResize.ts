@@ -7,8 +7,6 @@ import {
   unfixItemImagesHeight,
   fixItemImagesHeight,
 } from '@entities/quotation'
-import { navItemId } from '@shared/consts/navItemId'
-import { navSlice } from '@shared/nav'
 import type {
   OnItemResize,
   OnItemResizeStart,

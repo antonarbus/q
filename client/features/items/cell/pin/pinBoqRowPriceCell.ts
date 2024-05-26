@@ -1,7 +1,5 @@
 import { dispatch } from '@lib_instances/store'
 import { quotationSlice } from '@entities/quotation'
-import { navItemId } from '@shared/consts/navItemId'
-import { navSlice } from '@shared/nav'
 
 type Props = {
   itemIndex: number

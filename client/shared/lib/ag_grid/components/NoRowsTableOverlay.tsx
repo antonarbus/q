@@ -1,4 +1,4 @@
-import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
+import { accessTokenSignal } from '../../../auth/accessTokenSignal'
 
 export const NoRowsTableOverlay = (): JSX.Element | null => {
   return (

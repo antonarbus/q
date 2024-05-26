@@ -13,9 +13,9 @@ export const updateOrAppendIntoBookmarksCache = ({ item }: Props): void => {
     { queryKey: [queryKey.getBookmarks] },
     (cacheData) => {
       const updatedCacheData = produce(cacheData, (draft) => {
-        if (draft?.documents === undefined) return
+        if (draft?.bookmarks === undefined) return
 
-        const items = draft.documents
+        const items = draft.bookmarks
         const index = items.findIndex(
           (itemInCache) => itemInCache.id === item.id,
         )

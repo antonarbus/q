@@ -1,6 +1,4 @@
 import { dispatch } from '@lib_instances/store'
-import { navItemId } from '@shared/consts/navItemId'
-import { navSlice } from '@shared/nav'
 import { type FroalaEditorRef } from '@shared/types/froala'
 import type { BoqColumnKey } from '../../types'
 import { getBoqItemFromStore } from '../getters/getBoqItemFromStore'

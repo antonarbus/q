@@ -1,4 +1,4 @@
-import { dispatch, useSelectorTyped } from '@lib_instances/store'
+import { useSelectorTyped } from '@lib_instances/store'
 import { useUpdateEffect } from 'react-use'
 import { roundTo } from 'round-to'
 import {
@@ -9,8 +9,6 @@ import {
   updateSubTotalPriceWithValue,
   isFroalaSignal,
 } from '@entities/quotation'
-import { navItemId } from '@shared/consts/navItemId'
-import { navSlice } from '@shared/nav'
 
 export const useUpdateSubtotalPrice = (): void => {
   const { itemIndex } = useItem()

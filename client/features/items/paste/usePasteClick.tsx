@@ -4,9 +4,7 @@ import { useEffectOnce, useUnmount } from 'react-use'
 import { copySlice } from '@entities/copy'
 import { isFroalaSignal, quotationSlice } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
-import { navItemId } from '@shared/consts/navItemId'
 import { nanoid } from '@shared/lib/nanoid'
-import { navSlice } from '@shared/nav'
 import { fixElementDimensionStyle } from '@shared/utils/fixElementDimensionStyle'
 
 export const usePasteClick = (): void => {

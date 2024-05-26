@@ -1,7 +1,5 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { quotationSlice } from '@entities/quotation'
-import { navItemId } from '@shared/consts/navItemId'
-import { navSlice } from '@shared/nav'
 import type { OnItemResizeStop } from '@shared/types/resizablePaper'
 
 export const onPriceItemResizeStop: OnItemResizeStop = ({

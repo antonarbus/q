@@ -1,8 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { arrayMoveImmutable } from 'array-move'
 import { getBoqRowsFromStore, quotationSlice } from '@entities/quotation'
-import { navItemId } from '@shared/consts/navItemId'
-import { navSlice } from '@shared/nav'
 
 type Props = {
   oldIndex: number

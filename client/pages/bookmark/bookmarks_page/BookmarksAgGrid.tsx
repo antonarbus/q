@@ -12,13 +12,13 @@ import {
   LoadingTableOverlay,
   loadingTableOverlaySignal,
 } from '@shared/components/LoadingTableOverlay'
-import { notify } from '@shared/ui/top_msg'
-import { columnDefs, defaultColDef } from './columnDefs'
 import {
   DisplayedRowsCount,
   displayedRowsCountSignal,
-} from './components/DisplayedRowsCount'
-import { NoRowsTableOverlay } from './components/NoRowsTableOverlay'
+} from '@shared/lib/ag_grid/components/DisplayedRowsCount'
+import { NoRowsTableOverlay } from '@shared/lib/ag_grid/components/NoRowsTableOverlay'
+import { notify } from '@shared/ui/top_msg'
+import { columnDefs, defaultColDef } from './columnDefs'
 import { bookmarksAgGridRef } from './refs/bookmarksAgGridRef'
 import { AgGridStyles } from './styles/AgGridStyles'
 import { addPlaceholderToFloatingFilters } from './utils/addPlaceholderToFloatingFilters'
@@ -35,7 +35,6 @@ export const BookmarksAgGrid = (): JSX.Element => {
     error,
     refetch,
   } = useGetBookmarksQuery()
-  console.log('🚀 ~ data:', data)
   useDisableLoadingOverlayWhenBookmarksAreFetched({ isFetched })
   const email = useSelectorTyped((state) => state.user.email)
 
@@ -106,7 +105,7 @@ export const BookmarksAgGrid = (): JSX.Element => {
       )}
       <AgGridReact<Item>
         ref={bookmarksAgGridRef}
-        rowData={data?.documents ?? []}
+        rowData={data?.bookmarks ?? []}
         getRowId={(params) => params.data.id}
         defaultColDef={defaultColDef}
         columnDefs={columnDefs}
