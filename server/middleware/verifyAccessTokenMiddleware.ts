@@ -30,10 +30,16 @@ export const verifyAccessTokenMiddleware = (
         .json({ message: errorMessageCommon.notLoggedIn })
     }
 
+    // if user is validated then go to the next router handler
     next()
   } catch (error) {
-    return res
-      .status(httpStatus.unauthorized_401)
-      .json({ message: errorMessageCommon.notLoggedIn })
+    return (
+      // if user is not validated return 401 status
+      // firstly the client will try to renew the access token and re-try the initial api call
+      // secondly this going to be the response from initial api call and probably we show some message in ui or open a login modal
+      res
+        .status(httpStatus.unauthorized_401)
+        .json({ message: errorMessageCommon.notLoggedIn })
+    )
   }
 }

@@ -27,16 +27,8 @@ import { addPlaceholderToFloatingFilters } from './utils/addPlaceholderToFloatin
 
 export const BookmarksAgGrid = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
-  const {
-    data,
-    isSuccess,
-    isLoading,
-    isFetching,
-    isFetched,
-    isError,
-    error,
-    refetch,
-  } = useGetBookmarksQuery()
+  const { data, isLoading, isFetching, isFetched, isError, error, refetch } =
+    useGetBookmarksQuery()
   useDisableLoadingOverlayWhenBookmarksAreFetched({ isFetched })
   const email = useSelectorTyped((state) => state.user.email)
 
