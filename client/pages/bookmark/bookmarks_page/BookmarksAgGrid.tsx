@@ -1,5 +1,6 @@
 import 'ag-grid-community/styles/ag-grid.css' // Mandatory CSS required by the grid
 import 'ag-grid-community/styles/ag-theme-quartz.css'
+import { router } from '@lib_instances/Router'
 import { useSelectorTyped } from '@lib_instances/store'
 import { Box, LinearProgress } from '@mui/material'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
@@ -12,6 +13,7 @@ import {
   LoadingTableOverlay,
   loadingTableOverlaySignal,
 } from '@shared/components/LoadingTableOverlay'
+import { route } from '@shared/consts/route'
 import {
   DisplayedRowsCount,
   displayedRowsCountSignal,
@@ -73,12 +75,21 @@ export const BookmarksAgGrid = (): JSX.Element => {
   useUpdateEffect(
     function handleError() {
       if (isError) {
-        notify({
-          msg: error.response?.data.message,
-          type: 'error',
-          theme: 'dark',
-          position: 'bottom-center',
-        })
+        if (error.response?.data.message === 'Not logged in') {
+          void router.navigate(`/${route.bookmarks}/${route.login}`)
+        }
+
+        if (
+          error.response?.data.message === 'Internal error' ||
+          error.response?.data.message === 'Unhandled error'
+        ) {
+          notify({
+            msg: 'Internal error',
+            type: 'warn',
+            theme: 'dark',
+            position: 'bottom-center',
+          })
+        }
       }
     },
     [isError],

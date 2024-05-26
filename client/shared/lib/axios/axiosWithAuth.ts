@@ -57,9 +57,9 @@ axiosWithAuth.interceptors.response.use(
           console.warn('not authorized')
           console.error(err)
 
-          if (!location.pathname.includes(route.login)) {
-            void router.navigate(`./${route.login}`)
-          }
+          // if (!location.pathname.includes(route.login)) {
+          //   void router.navigate(`./${route.login}`)
+          // }
         }
       }
     }
