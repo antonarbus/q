@@ -7,6 +7,7 @@ import {
   useGetQuotationMutation,
   newQuotationTemplate,
   backgroundMessageSignal,
+  previousQuotationRef,
 } from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
@@ -26,7 +27,46 @@ export function useLoadQuotation(): void {
   const id = router.state.matches.at(0)?.params.id
 
   useEffect(
-    function loadQuotationTemplate() {
+    function loadQuotation() {
+      // load previous quotation
+      const previousQuotation = previousQuotationRef.current
+
+      if (previousQuotation && id === previousQuotationRef.current?.id) {
+        loadingDotsOverlayTextSignal.value = 'Going back...'
+
+        dispatch(quotationSlice.actions.resetQuotationReducer())
+
+        setTimeout(() => {
+          dispatch(
+            quotationSlice.actions.loadQuotationReducer({
+              quotation: previousQuotation,
+            }),
+          )
+        }, 200)
+
+        dispatch(
+          navSlice.actions.enableNavItems({
+            navItemIdKeys: [
+              navItemId.save,
+              navItemId.pdf,
+              navItemId.share,
+              navItemId.insert,
+            ],
+          }),
+        )
+
+        dispatch(navSlice.actions.removeUnderlineFromTopNav())
+
+        setTimeout(() => {
+          loadingDotsOverlayTextSignal.value = null
+        }, 500)
+
+        previousQuotationRef.current = null
+
+        return
+      }
+
+      // load new quotation template
       if (id === undefined || id === 'new') {
         loadingDotsOverlayTextSignal.value = 'Loading template...'
 
@@ -59,13 +99,11 @@ export function useLoadQuotation(): void {
         setTimeout(() => {
           loadingDotsOverlayTextSignal.value = null
         }, 1000)
-      }
-    },
-    [reRenderQuotationSignal.value],
-  )
 
-  useEffect(
-    function loadQuotationWithId() {
+        return
+      }
+
+      // load quotation from server
       if (id !== undefined && id !== 'new') {
         dispatch(navSlice.actions.removeUnderlineFromTopNav())
         loadingDotsOverlayTextSignal.value = `Loading ${id}...`

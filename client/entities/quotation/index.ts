@@ -4,6 +4,10 @@ export { newQuotationTemplate } from './newQuotationTemplate'
 export { isFroalaSignal } from './signals/isFroalaSignal'
 export { backgroundMessageSignal } from './signals/backgroundMessageSignal'
 
+// ref
+
+export { previousQuotationRef } from './refs/previousQuotationRef'
+
 // api
 export { useGetQuotationMutation } from './api/useGetQuotationMutation'
 export { useGetQuotationsQuery } from './api/useGetQuotationsQuery'
