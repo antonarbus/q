@@ -3,7 +3,7 @@ import { useEffectOnce, useUnmount } from 'react-use'
 import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 
-export const useNavItemsOnQuotationsOpen = (): void => {
+export const useNavItemsOnQuotationsPageOpen = (): void => {
   useEffectOnce(() => {
     dispatch(
       navSlice.actions.disableNavItems({
