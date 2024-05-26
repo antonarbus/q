@@ -24,7 +24,7 @@ export const NoRowsTableOverlay = (): JSX.Element | null => {
           height: '60px',
         }}
       >
-        {accessTokenSignal.value === null ? 'Not logged in' : 'No rows'}
+        {accessTokenSignal.value === null ? 'Not logged in' : 'No content'}
       </div>
     </div>
   )

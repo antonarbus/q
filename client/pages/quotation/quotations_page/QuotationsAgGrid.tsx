@@ -1,7 +1,7 @@
 import 'ag-grid-community/styles/ag-grid.css' // Mandatory CSS required by the grid
 import 'ag-grid-community/styles/ag-theme-quartz.css'
 import { router } from '@lib_instances/Router'
-import { useSelectorTyped } from '@lib_instances/store'
+import { getState, useSelectorTyped } from '@lib_instances/store'
 import { Box, LinearProgress } from '@mui/material'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef, useEffect } from 'react'
@@ -41,7 +41,9 @@ export const QuotationsAgGrid = (): JSX.Element => {
   const email = useSelectorTyped((state) => state.user.email)
 
   useEffect(() => {
-    void refetch()
+    if (getState().user.email) {
+      void refetch()
+    }
   }, [email])
 
   useUpdateEffect(
@@ -54,22 +56,6 @@ export const QuotationsAgGrid = (): JSX.Element => {
       }
     },
     [isLoading],
-  )
-
-  useUpdateEffect(
-    function handleSuccess() {
-      if (isSuccess) {
-        if (data.message === 'No content') {
-          notify({
-            msg: data.message,
-            type: 'info',
-            theme: 'dark',
-            position: 'bottom-center',
-          })
-        }
-      }
-    },
-    [isSuccess],
   )
 
   useUpdateEffect(
