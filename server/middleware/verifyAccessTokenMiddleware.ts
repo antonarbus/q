@@ -1,13 +1,11 @@
+import { errorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { headerName } from '../consts/headerName'
 import { verifyAccessToken } from '../services/jwt'
 import type { Next, Req, Res, ResWithBody } from '../types'
 
 export type ResBody = {
-  message:
-    | 'no access token in headers'
-    | 'accessJwtToken is not verified'
-    | 'accessJwtToken has expired'
+  message: typeof errorMessageCommon.notLoggedIn
 }
 
 export const verifyAccessTokenMiddleware = (
@@ -21,7 +19,7 @@ export const verifyAccessTokenMiddleware = (
     if (typeof accessJwtToken !== 'string') {
       return res
         .status(httpStatus.unauthorized_401)
-        .json({ message: 'no access token in headers' })
+        .json({ message: errorMessageCommon.notLoggedIn })
     }
 
     const jwtPayload = verifyAccessToken(accessJwtToken)
@@ -29,13 +27,13 @@ export const verifyAccessTokenMiddleware = (
     if (jwtPayload === undefined) {
       return res
         .status(httpStatus.unauthorized_401)
-        .json({ message: 'accessJwtToken is not verified' })
+        .json({ message: errorMessageCommon.notLoggedIn })
     }
 
     next()
   } catch (error) {
     return res
       .status(httpStatus.unauthorized_401)
-      .json({ message: 'accessJwtToken is not verified' })
+      .json({ message: errorMessageCommon.notLoggedIn })
   }
 }
