@@ -17,8 +17,10 @@ import {
 } from '@features/items/insert'
 import { openBookmarksPage } from '@features/open_close/open_bookmarks_page'
 import { openLoginModal } from '@features/open_close/open_login_modal'
-import { openNewQuotationPage } from '@features/open_close/open_quotation_new_page'
-import { openPreviousQuotation } from '@features/open_close/open_quotation_previous_page'
+import {
+  openQuotationPageAndLoadNew,
+  openQuotationPageAndLoadPrev,
+} from '@features/open_close/open_quotation_page'
 import { openQuotationsPage } from '@features/open_close/open_quotations_page'
 import { openSaveQuotationModal } from '@features/open_close/open_save_quotation_modal'
 import { downloadPdf } from '@features/quotation/pdf'
@@ -40,7 +42,7 @@ export const navStructure: MenuItemType[] = [
         // shortcut: ['control', 'n'],
         // link: route.back,
         func: () => {
-          openPreviousQuotation()
+          openQuotationPageAndLoadPrev()
         },
         isActive: true,
       },
@@ -52,7 +54,7 @@ export const navStructure: MenuItemType[] = [
         // shortcut: ['control', 'n'],
         link: route.new,
         func: () => {
-          openNewQuotationPage()
+          openQuotationPageAndLoadNew()
         },
         isActive: true,
       },

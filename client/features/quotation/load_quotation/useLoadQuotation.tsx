@@ -1,7 +1,10 @@
 import { router } from '@lib_instances/Router'
 import { dispatch } from '@lib_instances/store'
+import { nanoid } from 'nanoid'
 import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
+import { type QuotationLocationState } from '@features/open_close/open_quotation_page'
 import {
   quotationSlice,
   useGetQuotationMutation,
@@ -24,88 +27,79 @@ export function useLoadQuotation(): void {
     error,
   } = useGetQuotationMutation()
   const id = router.state.matches.at(0)?.params.id
+  const location = useLocation()
+  const quotationType = (location.state as QuotationLocationState)
+    ?.quotationType
 
-  useEffect(
-    function loadQuotation() {
-      const previousQuotation = previousQuotationRef.current
-      dispatch(quotationSlice.actions.resetQuotationReducer())
-      dispatch(navSlice.actions.removeUnderlineFromTopNav())
-      dispatch(
-        navSlice.actions.hideNavItems({ navItemIdKeys: [navItemKey.back] }),
-      )
-      dispatch(
-        navSlice.actions.enableNavItems({
-          navItemIdKeys: [
-            navItemKey.save,
-            navItemKey.pdf,
-            navItemKey.share,
-            navItemKey.insert,
-          ],
-        }),
-      )
+  useEffect(() => {
+    const previousQuotation = previousQuotationRef.current
+    dispatch(quotationSlice.actions.resetQuotationReducer())
+    dispatch(navSlice.actions.removeUnderlineFromTopNav())
+    dispatch(
+      navSlice.actions.hideNavItems({ navItemIdKeys: [navItemKey.back] }),
+    )
+    dispatch(
+      navSlice.actions.enableNavItems({
+        navItemIdKeys: [
+          navItemKey.save,
+          navItemKey.pdf,
+          navItemKey.share,
+          navItemKey.insert,
+        ],
+      }),
+    )
 
-      // load previous quotation
-      if (previousQuotation && id === previousQuotationRef.current?.id) {
-        loadingDotsOverlayTextSignal.value = 'Going back...'
+    // load previous quotation
+    if (quotationType === 'previous' && previousQuotation) {
+      loadingDotsOverlayTextSignal.value = 'Going back...'
 
-        // avoid resetting and loading quotation batching, otherwise there is unwanted items animation
-        setTimeout(() => {
-          dispatch(
-            quotationSlice.actions.loadQuotationReducer({
-              quotation: previousQuotation,
-            }),
-          )
-        }, 100)
-
-        setTimeout(() => {
-          loadingDotsOverlayTextSignal.value = null
-        }, 750)
-
-        previousQuotationRef.current = null
-        return
-      }
-
-      // load new quotation template
-      if (id === undefined || id === 'new') {
-        loadingDotsOverlayTextSignal.value = 'Loading template...'
-
-        // avoid resetting and loading quotation batching, otherwise there is unwanted items animation
-        setTimeout(() => {
-          dispatch(
-            quotationSlice.actions.loadQuotationReducer({
-              quotation: newQuotationTemplate,
-            }),
-          )
-        }, 100)
-
-        setTimeout(() => {
-          loadingDotsOverlayTextSignal.value = null
-        }, 750)
-
+      // avoid resetting and loading quotation batching, otherwise there is unwanted items animation
+      setTimeout(() => {
         dispatch(
-          navSlice.actions.underlineNavItem({ navItemIdKey: navItemKey.new }),
+          quotationSlice.actions.loadQuotationReducer({
+            quotation: previousQuotation,
+          }),
         )
+      }, 100)
 
-        return
-      }
+      setTimeout(() => {
+        loadingDotsOverlayTextSignal.value = null
+      }, 750)
 
-      // load quotation from server
-      if (id !== undefined && id !== 'new') {
-        loadingDotsOverlayTextSignal.value = `Loading ${id}...`
-        getQuotation({ id })
-      }
-    },
-    [reRenderQuotationSignal.value],
-  )
+      previousQuotationRef.current = null
+      return
+    }
 
-  // useUpdateEffect(
-  //   function showDots() {
-  //     if (isPending) {
-  //       loadingDotsOverlayTextSignal.value = `Loading ${id}...`
-  //     }
-  //   },
-  //   [isPending],
-  // )
+    // load new quotation template
+    if (id === undefined || id === 'new') {
+      loadingDotsOverlayTextSignal.value = 'Loading template...'
+
+      // avoid resetting and loading quotation batching, otherwise there is unwanted items animation
+      setTimeout(() => {
+        dispatch(
+          quotationSlice.actions.loadQuotationReducer({
+            quotation: newQuotationTemplate,
+          }),
+        )
+      }, 100)
+
+      setTimeout(() => {
+        loadingDotsOverlayTextSignal.value = null
+      }, 750)
+
+      dispatch(
+        navSlice.actions.underlineNavItem({ navItemIdKey: navItemKey.new }),
+      )
+
+      return
+    }
+
+    // load quotation from server
+    if (id !== undefined && id !== 'new') {
+      loadingDotsOverlayTextSignal.value = `Loading ${id}...`
+      getQuotation({ id })
+    }
+  }, [reRenderQuotationSignal.value])
 
   useUpdateEffect(
     function handleSuccess() {
@@ -118,7 +112,7 @@ export function useLoadQuotation(): void {
           notify({ msg: 'Quotation corrupted', type: 'warn', theme: 'light' })
           setTimeout(() => {
             loadingDotsOverlayTextSignal.value = null
-          }, 1000)
+          }, 750)
           return
         }
 
