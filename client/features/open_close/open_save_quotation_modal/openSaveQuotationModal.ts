@@ -4,7 +4,12 @@ import { route } from '@shared/consts/route'
 
 export const openSaveQuotationModal = (): void => {
   if (!getState().user.email) {
-    void router.navigate(`./${route.login}`)
+    void router.navigate(`./${route.login}`, {
+      state: {
+        navigatedFrom: `/`,
+        navigateTo: `/${route.saveQuotation}`,
+      },
+    })
     return
   }
 

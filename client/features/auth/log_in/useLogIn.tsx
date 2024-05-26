@@ -1,7 +1,7 @@
 import { dispatch } from '@lib_instances/store'
 import { type Signal } from '@preact/signals-react'
 import { type UseMutationResult } from '@tanstack/react-query'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetBookmarksQuery } from '@entities/bookmark'
 import { useGetQuotationsQuery } from '@entities/quotation'
@@ -43,8 +43,9 @@ export const useLogIn = ({
     isError,
     error,
   } = useLogInMutation()
+  const location = useLocation()
   const { refetch: refetchQuotations } = useGetQuotationsQuery()
-  const { refetch: refetchItems } = useGetBookmarksQuery()
+  const { refetch: refetchBookmarks } = useGetBookmarksQuery()
 
   useUpdateEffect(() => {
     if (isSuccess) {
@@ -74,7 +75,7 @@ export const useLogIn = ({
       }
 
       if (location.pathname.includes(route.bookmarks)) {
-        void refetchItems()
+        void refetchBookmarks()
       }
 
       if (id) {
@@ -85,7 +86,20 @@ export const useLogIn = ({
         slideElement({
           element: modalRef.current,
           onSlideElementComplete: () => {
-            navigate('..', { replace: true, state: nanoid() })
+            const navigateTo = location.state?.navigateTo
+
+            if (typeof navigateTo === 'string') {
+              navigate(navigateTo, {
+                replace: true,
+                state: nanoid(),
+              })
+              return
+            }
+
+            navigate('..', {
+              replace: true,
+              state: nanoid(),
+            })
           },
         })
       }, 1500)
