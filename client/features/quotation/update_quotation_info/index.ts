@@ -1,1 +1,1 @@
-export { useUpdateQuotationInfo as useUpdateInfo } from './useUpdateQuotationInfo'
+export { useUpdateQuotationInfo } from './useUpdateQuotationInfo'
