@@ -7,7 +7,7 @@ import { useGetBookmarksQuery } from '@entities/bookmark'
 import { useGetQuotationsQuery } from '@entities/quotation'
 import { useLogInMutation, userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
-import { navItemId } from '@shared/consts/navItemId'
+import { navItemKey } from '@shared/consts/navItemKey'
 import { route } from '@shared/consts/route'
 import { nanoid } from '@shared/lib/nanoid'
 import { navSlice } from '@shared/nav'
@@ -64,10 +64,10 @@ export const useLogIn = ({
       accessTokenSignal.value = accessJwtToken
       dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
       dispatch(
-        navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.login] }),
+        navSlice.actions.hideNavItems({ navItemIdKeys: [navItemKey.login] }),
       )
       dispatch(
-        navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.account] }),
+        navSlice.actions.showNavItems({ navItemIdKeys: [navItemKey.account] }),
       )
 
       if (location.pathname.includes(route.quotations)) {

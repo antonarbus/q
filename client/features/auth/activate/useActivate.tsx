@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { useActivateMutation, userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
-import { navItemId } from '@shared/consts/navItemId'
+import { navItemKey } from '@shared/consts/navItemKey'
 import { navSlice } from '@shared/nav'
 import { notify } from '@shared/ui/top_msg'
 
@@ -45,10 +45,10 @@ export const useActivate = (): Res => {
       accessTokenSignal.value = accessJwtToken
       dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
       dispatch(
-        navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.login] }),
+        navSlice.actions.hideNavItems({ navItemIdKeys: [navItemKey.login] }),
       )
       dispatch(
-        navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.account] }),
+        navSlice.actions.showNavItems({ navItemIdKeys: [navItemKey.account] }),
       )
     }
 

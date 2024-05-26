@@ -1,4 +1,4 @@
-export const navItemId = {
+export const navItemKey = {
   top: 'top',
   pending: 'pending',
   new: 'new',

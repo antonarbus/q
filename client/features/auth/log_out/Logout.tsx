@@ -5,7 +5,7 @@ import { deleteBookmarksCache } from '@entities/bookmark'
 import { deleteQuotationsCache } from '@entities/quotation'
 import { useLogOutMutation, userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
-import { navItemId } from '@shared/consts/navItemId'
+import { navItemKey } from '@shared/consts/navItemKey'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
 import { navSlice } from '@shared/nav'
 import { notify } from '@shared/ui/top_msg'
@@ -37,10 +37,12 @@ export const Logout = (): JSX.Element => {
         accessTokenSignal.value = null
         dispatch(userSlice.actions.forgetLoggedUser())
         dispatch(
-          navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.login] }),
+          navSlice.actions.showNavItems({ navItemIdKeys: [navItemKey.login] }),
         )
         dispatch(
-          navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.account] }),
+          navSlice.actions.hideNavItems({
+            navItemIdKeys: [navItemKey.account],
+          }),
         )
         setTimeout(() => {
           loadingDotsOverlayTextSignal.value = null
