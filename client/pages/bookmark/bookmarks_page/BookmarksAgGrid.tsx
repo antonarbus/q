@@ -35,6 +35,7 @@ export const BookmarksAgGrid = (): JSX.Element => {
     error,
     refetch,
   } = useGetBookmarksQuery()
+  console.log('🚀 ~ data:', data)
   useDisableLoadingOverlayWhenBookmarksAreFetched({ isFetched })
   const email = useSelectorTyped((state) => state.user.email)
 
@@ -105,13 +106,13 @@ export const BookmarksAgGrid = (): JSX.Element => {
       )}
       <AgGridReact<Item>
         ref={bookmarksAgGridRef}
-        rowData={data?.documents}
+        rowData={data?.documents ?? []}
         getRowId={(params) => params.data.id}
         defaultColDef={defaultColDef}
         columnDefs={columnDefs}
         suppressCellFocus
-        enableCellTextSelection
         suppressColumnVirtualisation
+        enableCellTextSelection
         reactiveCustomComponents={true}
         loadingOverlayComponent={LoadingTableOverlay}
         noRowsOverlayComponent={NoRowsTableOverlay}

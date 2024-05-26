@@ -1,6 +1,7 @@
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 
 export const NoRowsTableOverlay = (): JSX.Element | null => {
+  console.log(666)
   return (
     <div
       css={{
