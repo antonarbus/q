@@ -34,5 +34,4 @@ export const updateBoqColumnCellAtStore = ({
       boqColumnKey,
     }),
   )
-  dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
 }

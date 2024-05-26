@@ -42,17 +42,11 @@ export const updateSubtotalPriceCell = ({
 
   if (boqRows === undefined) return
 
-  const { didUpdate } = updateBoqHeaderCellAtStore({
+  updateBoqHeaderCellAtStore({
     editorRef: subTotalPriceEditorRef,
     itemIndex,
     boqHeaderKey: 'subTotalPrice',
   })
-
-  if (didUpdate) {
-    dispatch(
-      navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }),
-    )
-  }
 
   const prevSubTotalPriceValue = boqRows.reduce((accumulator, boqRow) => {
     return accumulator + boqRow.price.value
@@ -186,14 +180,10 @@ export const updateSubtotalPriceCell = ({
 
   const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
 
-  const { didChange } = updateSubTotalPriceWithValue({
+  updateSubTotalPriceWithValue({
     itemIndex,
     subTotalPriceEditor: subTotalPriceEditorRef.current,
     value: subTotalPriceValueNewRounded,
     incrementally: true,
   })
-
-  if (!didChange) return
-
-  dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
 }

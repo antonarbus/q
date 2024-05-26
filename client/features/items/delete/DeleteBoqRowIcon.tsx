@@ -46,11 +46,6 @@ export const DeleteBoqRowIcon = (): JSX.Element => {
 
         setTimeout(() => {
           dispatch(copySlice.actions.allowAllActions())
-          dispatch(
-            navSlice.actions.enableNavItems({
-              navItemIdKeys: [navItemId.save],
-            }),
-          )
         }, 1000 * theme.item.animationDuration)
 
         const isCopyContainer = getState().copy.isCopyContainer

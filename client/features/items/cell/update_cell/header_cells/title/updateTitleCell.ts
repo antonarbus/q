@@ -16,15 +16,9 @@ export const updateTitleCell = ({
   itemIndex,
   boqHeaderKey,
 }: Props): void => {
-  const { didUpdate } = updateBoqHeaderCellAtStore({
+  updateBoqHeaderCellAtStore({
     editorRef,
     itemIndex,
     boqHeaderKey,
   })
-
-  if (didUpdate) {
-    dispatch(
-      navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }),
-    )
-  }
 }

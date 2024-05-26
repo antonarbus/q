@@ -30,9 +30,6 @@ const onBoqRowDragEnd = ({ oldIndex, newIndex, itemIndex }: Props): void => {
         itemIndex,
       }),
     )
-    dispatch(
-      navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }),
-    )
   }
 }
 

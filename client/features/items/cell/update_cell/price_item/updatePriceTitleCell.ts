@@ -22,5 +22,4 @@ export const updatePriceTitleCell = ({ editorRef, itemIndex }: Props): void => {
   if (!didTextChange) return
 
   dispatch(quotationSlice.actions.updatePriceTitleReducer({ itemIndex, html }))
-  dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
 }

@@ -38,6 +38,4 @@ export const updateDescriptionCell = ({
     boqRowCellKey,
     html: editorRef.current.html.get(),
   })
-
-  dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
 }

@@ -32,5 +32,4 @@ export const updatePriceValueCell = ({ editorRef, itemIndex }: Props): void => {
       value: cellValueFromHtml,
     }),
   )
-  dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
 }

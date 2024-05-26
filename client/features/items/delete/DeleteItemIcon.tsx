@@ -67,11 +67,6 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
           setTimeout(
             () => {
               isFroalaSignal.value = true
-              dispatch(
-                navSlice.actions.enableNavItems({
-                  navItemIdKeys: [navItemId.save],
-                }),
-              )
             },
             1000 * theme.item.animationDuration + 500,
           )

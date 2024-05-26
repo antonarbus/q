@@ -90,6 +90,4 @@ export const onBoqItemResizeStop: OnItemResizeStop = ({
       }),
     )
   }
-
-  dispatch(navSlice.actions.enableNavItems({ navItemIdKeys: [navItemId.save] }))
 }
