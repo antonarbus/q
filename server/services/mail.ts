@@ -1,53 +1,24 @@
-import {
-  SendEmailCommand,
-  type SendEmailCommandOutput,
-  SESClient,
-} from '@aws-sdk/client-ses'
+import sgMail from '@sendgrid/mail'
 
 type Props = {
-  to: string | string[]
+  to: string
   subject: string
-  htmlBody: string
+  html: string
 }
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY!)
 
 export const sendEmail = async ({
   to,
-  htmlBody,
   subject,
-}: Props): Promise<SendEmailCommandOutput | undefined> => {
-  const sendEmailCommand = new SendEmailCommand({
-    Destination: {
-      CcAddresses: [],
-      ToAddresses: typeof to === 'string' ? [to] : to,
-    },
-    Message: {
-      Body: {
-        Html: {
-          Charset: 'UTF-8',
-          Data: htmlBody,
-        },
-        // Text: {
-        //   Charset: 'UTF-8',
-        //   Data: 'hello, this is the test',
-        // },
-      },
-      Subject: {
-        Charset: 'UTF-8',
-        Data: subject,
-      },
-    },
-    Source: 'info@quotation.app',
-    ReplyToAddresses: [],
+  html,
+}: Props): Promise<[sgMail.ClientResponse, unknown] | undefined> => {
+  const sgMailRes = await sgMail.send({
+    from: 'info@quotation.app',
+    to,
+    subject,
+    html,
   })
 
-  const sesClient = new SESClient({
-    region: process.env.AWS_REGION,
-    credentials: {
-      accessKeyId: process.env.AWS_KEY ?? 'fallback for TS',
-      secretAccessKey: process.env.AWS_SECRETE_KEY ?? 'fallback for TS',
-    },
-  })
-
-  const emailRes = await sesClient.send(sendEmailCommand)
-  return emailRes
+  return sgMailRes
 }
