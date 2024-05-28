@@ -68,62 +68,65 @@ A _slice_ consists of _segments_ to separate code by its technical nature, commo
 
 # Auth
 
-Authorization - checking if password is correct
+Authorization - checking for password correctness
 Authentication - checking if a user is the same as authorized initially
 
-(A) At registration we store at db email + hashed password with secrete sault +
+(A) At registration we store at db email + hashed salted password +
 `refresh` jwt token with 30d validity which contains email & role payload
 
 (B) Client is authorized by comparing email & password's hash
-against stored email and hashed password.
+against stored email and hashed password at the login stage.
 
-(C) On successful authorization the server issues new 15 min `access` jwt token and
+(C) On successful authorization the server issues 15 min `access` jwt token and
 issues new `refresh` jwt token if pervious one is expired.
 
 (D) `refresh` jwt token is needed for future user authentication to avoid
-asking for credentials on every protected http request.
+asking for credentials on every login and protected http request.
 
-(E) `refresh` token is saved id db and on server in secured cookies on successful login.
+(E) `refresh` token is saved by server in db + in secured cookies on login.
 On every protected api request we verify `refresh` token and check if it is the same as in db.
 
-(F) If we want to forbid user's access we may simply delete `refresh` token from db.
+(F) If we want to forbid user's access we may simply delete or modify `refresh` token from db.
 
 (G) `access` token is stored locally in memory on client side and is
-attached to request http headers `access-jwt-token` for protected api requests.
+attached to request to http headers `access-jwt-token` for protected api requests.
 
-(H) `access` token is attached by 'request' interceptor in `axiosWithAuth`.
+(H) `access` token is attached by 'request' interceptor at `axiosWithAuth`.
 If we do a request to a protected endpoint we just use `axiosWithAuth`
 instance to avoid attaching token manually.
 
-(I) or protected apis the `verifyTokenMiddleware` is used to check the `access` token.
+(I) At protected routes the `verifyTokenMiddleware` is used to check the `access` token.
 Verification is fast and does not require database. If the token is ok
-then the request goes forward, otherwise a response of status `401` is returned.
+then the request goes forward, otherwise en error response of status `401` with
+message "Not logged in" is returned.
 
 (J) `access` token expires in 15 min.
 'Response' interceptor in `axiosWithAuth` checks for `401` status and
-if it is the `401` status, it makes additional request for new `access` token by
-presenting a `refresh` token in cookies, which has 30d expiry time.
+if it is the `401` status, it makes additional request to get new `access` token by
+checking already attached a `refresh` token to cookies, which has 30d expiry time.
 
 (K) `axiosWithAuth` remembers initial request with all parameters when it
-got `401` error and after getting successful refreshed tokens it repeats
-initial http request.
+got first `401` error and after getting successfully refreshed `access` a token it
+repeats initial http request.
 
 (L) If `refresh` token is invalid or old, then `access` token is not
-issued, client is considered as unauthorized and new login action
+issued, client is considered to be unauthorized and new login action
 is required.
 
-(M) If a user is deleted from the database, he is still authorized
+(M) If a user is deleted from the database, the user is still authorized
 for short time until `access` token is expired (15 min).
 We should consider the duration of access token depending on
 sensitivity of our data.
 
-(N) Tokens are also checked and refreshed at the initial app
-load in `useEffect()` on `<Main />` component mount. That's how we determine
-if a known client returned back and avoid prompting for credentials
-on every page refresh.
+(N) Apart from protected routes tokens are also checked and refreshed at
+the initial app load in `<AccessToken />` to avoid prompting a user
+for credentials on every page refresh.
 
-(O) For tokens we use JWT tokens, which contain encrypted (not hashed)
-payload (usually object with user email, role, etc...), validation time
-and a hash based on a secret keys, which are kept on a server.
-Server can validate the token only if it knows the secrete keys.
-Secrete keys are kept in environment variables.
+(O) We use JWT token which contains encrypted not hashed
+payload with user email & role data, validation time
+and a hash based on a secret keys, which are kept on a server in env variable.
+Server can validate the token only if it knows the secrete key.
+
+# Email
+
+(A) For emails sending Sendgrid is used.

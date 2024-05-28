@@ -13,13 +13,13 @@ export async function test(req: Req, res: Res, next: Next): Promise<void> {
     // const dbRes = await ItemModel.find().distinct('category', { email: 'anton.arbus@gmail.com' })
     const dbRes = await QuotationModel.find()
 
-    const mailRes = await sendEmail({
-      to: 'anton.arbus@gmail.com',
-      subject: 'Activate account',
-      htmlBody: 'Activate your account',
-    })
+    // const mailRes = await sendEmail({
+    //   to: 'oleg6787@yandex.ru ',
+    //   subject: 'test mail',
+    //   html: 'test <b>email</b> from node.js server',
+    // })
 
-    console.log('🚀 ~ mailRes:', mailRes)
+    // console.log('🚀 ~ mailRes:', mailRes)
 
     res.status(200).json({ dbRes })
   } catch (error) {
