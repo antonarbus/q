@@ -1,4 +1,5 @@
 import sgMail from '@sendgrid/mail'
+import { isDev } from '@server/utils/isDev'
 import express from 'express'
 import {
   type Result,
@@ -71,10 +72,7 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
 
     sgMail.setApiKey(process.env.SENDGRID_API_KEY!)
 
-    const domain =
-      process.env.NODE_ENV === 'production'
-        ? process.env.DOMAIN_PROD
-        : process.env.DOMAIN_DEV
+    const domain = process.env[isDev ? 'DOMAIN_PROD' : 'DOMAIN_DEV']!
 
     const sendEmailRes = await sgMail.send({
       from: 'info@quotation.app',
