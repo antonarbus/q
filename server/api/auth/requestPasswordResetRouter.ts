@@ -1,5 +1,4 @@
 import sgMail from '@sendgrid/mail'
-import { sendEmail } from '@server/services/mail'
 import express from 'express'
 import {
   type Result,
@@ -18,7 +17,11 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  message: 'validation error' | 'does not exists' | 'reset link sent'
+  message:
+    | 'validation error'
+    | 'does not exists'
+    | 'reset link sent'
+    | 'reset key not issued'
   validationErrors?: Result<ValidationError>
 }
 
@@ -51,16 +54,19 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
         .json({ message: 'does not exists' })
     }
 
-    const resetPasswordKey =  nanoid(5)
-
-    const dbRes = await UserModel.findOneAndUpdate(
+    const updatedUser = await UserModel.findOneAndUpdate(
       { email },
-      { resetPasswordKey },
+      { resetPasswordKey: nanoid(5) },
       { new: true },
     )
-    // todo: check if we got the response and use key from there
-    console.log('🚀 ~ dbRes:', dbRes)
 
+    const resetPasswordKey = updatedUser?.resetPasswordKey
+
+    if (!resetPasswordKey) {
+      return res
+        .status(httpStatus.serverError_500)
+        .json({ message: 'reset key not issued' })
+    }
 
     sgMail.setApiKey(process.env.SENDGRID_API_KEY!)
 
@@ -70,18 +76,20 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
       to: email,
       subject: 'password reset',
       html: `
-        <p>You have requested to reset your password. If you haven't, just ignore this message.</p>
         <p>Follow the link to reset the password.</p>
-        <p><a clicktracking="off" href="https://quotation.app/reset/${resetPasswordKey}">https://quotation.app/reset/${resetPasswordKey}</a></p>
+        <br>
+        <p>
+          <a clicktracking="off" href="https://quotation.app/reset/${resetPasswordKey}">
+            https://quotation.app/reset/${resetPasswordKey}
+          </a>
+        </p>
       `,
       text: `
-        You have requested to reset your password. If you haven't, just ignore this message.
         Please follow the link to reset the password.
         https://quotation.app/reset/${resetPasswordKey}
       `,
     })
 
-    
     console.log('🚀 ~ sendEmailRes:', sendEmailRes)
 
     return res
