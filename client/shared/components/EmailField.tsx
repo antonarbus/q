@@ -13,6 +13,7 @@ type Props = {
   disabled?: boolean
   onClickAway?: () => void
   label?: string
+  autoFocus?: boolean
 }
 
 type Suggestion = {
@@ -28,6 +29,7 @@ export const EmailField = ({
   disabled,
   onClickAway,
   label,
+  autoFocus,
 }: Props): JSX.Element => {
   const emailSuggestionSignal = useSignal('')
   const initEmailLabel = label ?? 'Email'
@@ -69,7 +71,7 @@ export const EmailField = ({
         autoComplete='email'
         placeholder='Email'
         label={emailLabelSignal.value}
-        autoFocus
+        autoFocus={autoFocus}
         value={emailSignal.value}
         onChange={(e): void => {
           emailSignal.value = e.target.value

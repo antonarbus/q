@@ -8,6 +8,7 @@ import {
 } from 'express-validator'
 import { type User } from '@entities/user'
 import { httpStatus } from '@shared/consts/httpStatus'
+import { route } from '@shared/consts/route'
 import { nanoid } from '@shared/lib/nanoid'
 import { UserModel } from '../../db/models/userModel'
 import type { Next, ReqWithBody, ResWithBody } from '../../types'
@@ -70,6 +71,11 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
 
     sgMail.setApiKey(process.env.SENDGRID_API_KEY!)
 
+    const domain =
+      process.env.NODE_ENV === 'production'
+        ? process.env.DOMAIN_PROD
+        : process.env.DOMAIN_DEV
+
     const sendEmailRes = await sgMail.send({
       from: 'info@quotation.app',
       replyTo: 'info@quotation.app',
@@ -79,14 +85,17 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
         <p>Follow the link to reset the password.</p>
         <br>
         <p>
-          <a clicktracking="off" href="https://quotation.app/reset/${resetPasswordKey}">
-            https://quotation.app/reset/${resetPasswordKey}
+          <a
+            clicktracking="off"
+            href="${domain}/${route.resetPassword}/${email}/${resetPasswordKey}"
+          >
+            ${domain}/${route.resetPassword}/${email}/${resetPasswordKey}
           </a>
         </p>
       `,
       text: `
         Please follow the link to reset the password.
-        https://quotation.app/reset/${resetPasswordKey}
+        ${domain}/${route.resetPassword}/${email}/${resetPasswordKey}
       `,
     })
 

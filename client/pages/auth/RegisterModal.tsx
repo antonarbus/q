@@ -49,6 +49,7 @@ export const RegisterModal = (): JSX.Element => {
         inputRef={inputRef}
         emailSignal={emailSignal}
         isEmailOkSignal={isEmailOkSignal}
+        autoFocus
       />
       <PasswordField passwordSignal={passwordSignal} />
       <ConfirmPasswordField

@@ -54,7 +54,10 @@ export const ResetPasswordModal = (): React.ReactNode => {
         emailSignal={emailSignal}
         isEmailOkSignal={isEmailOkSignal}
       />
-      <PasswordField passwordSignal={passwordSignal} />
+      <PasswordField
+        passwordSignal={passwordSignal}
+        autoFocus
+      />
       <ConfirmPasswordField
         originalPasswordSignal={passwordSignal}
         isConfirmPasswordOkSignal={isConfirmPasswordOkSignal}
