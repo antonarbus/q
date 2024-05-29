@@ -35,6 +35,7 @@ export const RequestPasswordResetModal = (): JSX.Element => {
         inputRef={inputRef}
         emailSignal={emailSignal}
         isEmailOkSignal={isEmailOkSignal}
+        autoFocus
       />
       <Box
         sx={{

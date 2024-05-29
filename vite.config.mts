@@ -14,7 +14,7 @@ export default defineConfig(({ command, mode }) => {
 
   return {
     server: {
-      host: 'local.quotation.app',
+      host: env.NODE_ENV === 'production' ? env.HOST_PROD : env.HOST_DEV,
       port: Number(env.PORT_FRONT_END),
       https: true, //* type "thisisunsafe" if chrome says that connection is not private
       proxy: {

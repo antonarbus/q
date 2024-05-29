@@ -8,6 +8,7 @@ type Props = {
   onBlur?: () => void
   label?: string
   isLabelRed?: boolean
+  autoFocus?: boolean
 }
 
 export const PasswordField = ({
@@ -15,6 +16,7 @@ export const PasswordField = ({
   onBlur,
   label,
   isLabelRed,
+  autoFocus,
 }: Props): JSX.Element => {
   const showPassword = useSignal(false)
 
@@ -26,6 +28,7 @@ export const PasswordField = ({
       type={showPassword.value ? 'text' : 'password'}
       autoComplete='current-password'
       placeholder='Password'
+      autoFocus={autoFocus}
       value={passwordSignal.value}
       onBlur={onBlur}
       onChange={(e): void => {

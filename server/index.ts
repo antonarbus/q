@@ -71,6 +71,8 @@ app.use(errorHandlerMiddleware)
 const port = process.env.PORT_BACK_END
 const domain = process.env.DOMAIN
 
+console.log('🚀 ~ process.env.NODE_ENV:', process.env.NODE_ENV)
+
 app.listen(port, () => {
   console.info(`🚀 server started at ${domain}:${port}`)
 })
