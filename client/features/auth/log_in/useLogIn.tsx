@@ -59,13 +59,20 @@ export const useLogIn = ({
       if (message !== 'good password') return
       if (!accessJwtToken) return
       if (!email) return
-      if (!roles) return
 
       accessTokenSignal.value = accessJwtToken
-      dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
+
+      dispatch(
+        userSlice.actions.rememberLoggedUser({
+          email,
+          roles: roles ?? ['user'],
+        }),
+      )
+
       dispatch(
         navSlice.actions.hideNavItems({ navItemIdKeys: [navItemKey.login] }),
       )
+
       dispatch(
         navSlice.actions.showNavItems({ navItemIdKeys: [navItemKey.account] }),
       )

@@ -61,6 +61,15 @@ export const useRequestPasswordReset = ({
         return
       }
 
+      if (error.response?.data.message === 'reset key not issued') {
+        notify({
+          msg: 'Something happened, failed to reset',
+          type: 'warn',
+          theme: 'light',
+        })
+        return
+      }
+
       notify({ msg: 'Internal error', type: 'error', theme: 'light' })
     }
   }, [isError])
