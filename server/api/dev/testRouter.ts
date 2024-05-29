@@ -17,6 +17,7 @@ export async function test(req: Req, res: Res, next: Next): Promise<void> {
     //   to: 'oleg6787@yandex.ru ',
     //   subject: 'test mail',
     //   html: 'test <b>email</b> from node.js server',
+    //   text: 'test email from node.js server',
     // })
 
     // console.log('🚀 ~ mailRes:', mailRes)
