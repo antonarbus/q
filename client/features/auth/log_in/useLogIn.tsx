@@ -96,20 +96,14 @@ export const useLogIn = ({
             const navigateTo = location.state?.navigateTo
 
             if (typeof navigateTo === 'string') {
-              navigate(navigateTo, {
-                replace: true,
-                state: nanoid(),
-              })
+              navigate(navigateTo)
               return
             }
 
-            navigate('..', {
-              replace: true,
-              state: nanoid(),
-            })
+            navigate('..')
           },
         })
-      }, 1500)
+      }, 1000)
     }
   }, [isSuccess])
 

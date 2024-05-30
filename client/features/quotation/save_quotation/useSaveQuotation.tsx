@@ -94,10 +94,7 @@ export const useSaveQuotation = ({
           slideElement({
             element: modalRef.current,
             onSlideElementComplete: () => {
-              navigate(`/${data.quotation?.id ?? 'no id set'}`, {
-                replace: true,
-                state: nanoid(),
-              })
+              navigate(`/${data.quotation?.id ?? 'no id set'}`)
             },
           })
         }, 1000)

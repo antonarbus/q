@@ -74,7 +74,7 @@ export const useAddBookmark = ({
         slideElement({
           element: modalRef.current,
           onSlideElementComplete: () => {
-            navigate('..', { replace: true, state: nanoid() })
+            navigate('..')
           },
         })
       }, 1000)
