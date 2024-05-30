@@ -79,10 +79,7 @@ const saveBookmark: RouterHandler = async (req, res, next) => {
         updatedAt: Date.now(),
         ...(isNew && { createdAt: Date.now() }),
       },
-      {
-        new: true,
-        upsert: true,
-      },
+      { new: true, upsert: true },
     )
       .select({ _id: 0, __v: 0 })
       .lean()

@@ -22,6 +22,7 @@ export const RegisterModal = (): JSX.Element => {
   const { onSubmit, isSuccess, isPending, isError } = useRegister({
     emailSignal,
     passwordSignal,
+    modalRef,
   })
 
   useSignalEffect(() => {

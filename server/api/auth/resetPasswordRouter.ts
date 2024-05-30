@@ -14,7 +14,6 @@ import {
 import { type User } from '@entities/user'
 import { httpStatus } from '@shared/consts/httpStatus'
 import { UserModel } from '../../db/models/userModel'
-// import { sendMail } from '../services/mail/sendMail'
 import type { Next, ReqWithBody, ResWithBody } from '../../types'
 
 export type ReqBody = {

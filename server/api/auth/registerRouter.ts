@@ -1,3 +1,5 @@
+import { sendEmail } from '@server/services/email'
+import { domainClient } from '@server/utils/env'
 import bcrypt from 'bcryptjs'
 import express from 'express'
 import {
@@ -8,6 +10,7 @@ import {
 } from 'express-validator'
 import { type User } from '@entities/user'
 import { httpStatus } from '@shared/consts/httpStatus'
+import { route } from '@shared/consts/route'
 import { nanoid } from '@shared/lib/nanoid'
 import { UserModel } from '../../db/models/userModel'
 import type { Next, ReqWithBody, ResWithBody } from '../../types'
@@ -18,7 +21,12 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  message: 'validation error' | 'already exists' | 'activation link sent'
+  message:
+    | 'validation error'
+    | 'already exists'
+    | 'activation link sent'
+    | 'activation link not sent'
+    | 'activation key not issued'
   validationErrors?: Result<ValidationError>
 }
 
@@ -44,7 +52,7 @@ const register: RouterHandler = async (req, res, next) => {
 
     const email = req.body.email.toLowerCase()
 
-    const user = await UserModel.findOne({ email }).lean()
+    const user = await UserModel.findOne({ email, isActivated: true }).lean()
 
     if (user) {
       return res
@@ -54,20 +62,47 @@ const register: RouterHandler = async (req, res, next) => {
 
     const saltRounds = 10
     const password = await bcrypt.hash(req.body.password, saltRounds)
-    const activationKey = nanoid(5)
 
-    await UserModel.create({ email, password, activationKey })
+    const newUser = await UserModel.findOneAndUpdate(
+      { email },
+      { password, activationKey: nanoid(5) },
+      { new: true, upsert: true },
+    )
 
-    // todo
-    // send email with activation link
-    // const subject = 'Activation for quotation.app'
-    // const activationLink = `${domain}:${port}${apiUrl.activate}/${activationKey}`
-    // const html = `<div><h1>Follow the link to confirm the registration</h1><a href="${activationLink}">${activationLink}</a></div> `
-    // await sendMail({ to: email, subject, html })
+    const activationKey = newUser?.activationKey
+
+    if (!activationKey) {
+      return res
+        .status(httpStatus.serverError_500)
+        .json({ message: 'activation key not issued' })
+    }
+
+    const emailRes = await sendEmail({
+      to: email,
+      subject: 'activate your account',
+      html: `
+        <p>Follow the link to activate your account.</p>
+        <br>
+        <p>
+          <a
+            clicktracking="off"
+            href="${domainClient}/${route.activate}/${activationKey}"
+          >
+            ${domainClient}/${route.activate}/${activationKey}
+          </a>
+        </p>
+      `,
+    })
+
+    if (emailRes?.[0].statusCode === 202) {
+      return res
+        .status(httpStatus.created_201)
+        .json({ message: 'activation link sent' })
+    }
 
     return res
-      .status(httpStatus.created_201)
-      .json({ message: 'activation link sent' })
+      .status(httpStatus.serverError_500)
+      .json({ message: 'activation link not sent' })
   } catch (error) {
     next(error)
   }
