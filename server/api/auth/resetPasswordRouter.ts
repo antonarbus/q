@@ -71,7 +71,8 @@ const resetPassword: RouterHandler = async (req, res, next) => {
         .json({ message: 'not activated' })
     }
 
-    const password = await bcrypt.hash(req.body.password, 10)
+    const saltRounds = 10
+    const password = await bcrypt.hash(req.body.password, saltRounds)
     const accessJwtToken = createAccessToken({ email, roles: user.roles })
     const refreshJwtToken = createRefreshToken({ email, roles: user.roles })
 
@@ -80,7 +81,7 @@ const resetPassword: RouterHandler = async (req, res, next) => {
       httpOnly: true,
     })
 
-    const document = await UserModel.findOneAndUpdate(
+    const updatedUser = await UserModel.findOneAndUpdate(
       { email, resetPasswordKey },
       { password, refreshJwtToken, resetPasswordKey: '' },
       { new: true },
@@ -89,8 +90,8 @@ const resetPassword: RouterHandler = async (req, res, next) => {
     return res.status(httpStatus.created_201).json({
       message: 'password was reset',
       accessJwtToken,
-      email: document?.email,
-      roles: document?.roles,
+      email: updatedUser?.email,
+      roles: updatedUser?.roles,
     })
   } catch (error) {
     next(error)
