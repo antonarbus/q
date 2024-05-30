@@ -52,7 +52,8 @@ const register: RouterHandler = async (req, res, next) => {
         .json({ message: 'already exists' })
     }
 
-    const password = await bcrypt.hash(req.body.password, 10)
+    const saltRounds = 10
+    const password = await bcrypt.hash(req.body.password, saltRounds)
     const activationKey = nanoid(5)
 
     await UserModel.create({ email, password, activationKey })

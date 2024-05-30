@@ -34,16 +34,15 @@ export const useResetPassword = ({ passwordSignal }: Props): Res => {
   useUpdateEffect(() => {
     if (isSuccess) {
       if (data.message === 'password was reset') {
-        notify({ msg: 'Password was reset.', theme: 'light' })
+        notify({ msg: 'Password was reset', theme: 'light' })
 
         const { accessJwtToken, email, roles } = data
 
         if (!accessJwtToken) return
         if (!email) return
-        if (!roles) return
 
         accessTokenSignal.value = accessJwtToken
-        dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
+        dispatch(userSlice.actions.rememberLoggedUser({ email, roles: roles ?? ['user'] }))
         dispatch(
           navSlice.actions.hideNavItems({ navItemIdKeys: [navItemKey.login] }),
         )
