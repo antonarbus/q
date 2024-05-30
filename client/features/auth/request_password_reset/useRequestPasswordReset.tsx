@@ -45,7 +45,7 @@ export const useRequestPasswordReset = ({
               navigate('..')
             },
           })
-        }, 2500)
+        }, 1000)
       }
     }
   }, [isSuccess])
