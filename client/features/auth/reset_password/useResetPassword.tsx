@@ -1,16 +1,18 @@
 import { dispatch } from '@lib_instances/store'
 import { type Signal } from '@preact/signals-react'
 import { type UseMutationResult } from '@tanstack/react-query'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useResetPasswordMutation, userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { navSlice } from '@shared/nav'
 import { notify } from '@shared/ui/top_msg'
+import { slideElement } from '@shared/utils/slideElement'
 
 type Props = {
   passwordSignal: Signal<string>
+  modalRef: React.RefObject<HTMLDivElement>
 }
 
 type Res = {
@@ -20,7 +22,8 @@ type Res = {
   isError: UseMutationResult['isError']
 }
 
-export const useResetPassword = ({ passwordSignal }: Props): Res => {
+export const useResetPassword = ({ passwordSignal, modalRef }: Props): Res => {
+  const navigate = useNavigate()
   const { email, resetPasswordKey } = useParams()
   const {
     mutate: resetPassword,
@@ -51,6 +54,15 @@ export const useResetPassword = ({ passwordSignal }: Props): Res => {
             navItemIdKeys: [navItemKey.account],
           }),
         )
+
+        setTimeout(() => {
+          slideElement({
+            element: modalRef.current,
+            onSlideElementComplete: () => {
+              navigate('..')
+            },
+          })
+        }, 1000)
       }
     }
   }, [isSuccess])

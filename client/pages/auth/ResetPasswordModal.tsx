@@ -27,6 +27,7 @@ export const ResetPasswordModal = (): React.ReactNode => {
 
   const { onSubmit, isPending, isSuccess, isError } = useResetPassword({
     passwordSignal,
+    modalRef,
   })
 
   useSignalEffect(() => {
