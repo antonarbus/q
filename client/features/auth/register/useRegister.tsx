@@ -54,7 +54,7 @@ export const useRegister = ({
   useUpdateEffect(() => {
     if (isError) {
       if (error.response?.data.message === 'already exists') {
-        notify({ msg: 'Already exists', type: 'info', theme: 'light' })
+        notify({ msg: 'Already registered', type: 'info', theme: 'light' })
         return
       }
 
