@@ -11,15 +11,19 @@ export default defineConfig(({ command, mode }) => {
   // Load env file based on `mode` in the current working directory.
   // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
   const env = loadEnv(mode, process.cwd(), '')
+  const isDev = env.NODE_ENV === 'development'
+  const isProd = env.NODE_ENV !== 'development'
+  const host = 'http://localhost'
+  const portClient = 3005
+  const portServer = 3006
 
   return {
     server: {
-      host: env.NODE_ENV === 'production' ? env.HOST_PROD : env.HOST_DEV,
-      port: Number(env.PORT_FRONT_END),
+      host: isProd ? 'quotation.app' : 'local.quotation.app',
+      port: portClient,
       https: true, //* type "thisisunsafe" if chrome says that connection is not private
       proxy: {
-        '/api': `${env.DOMAIN}:${env.PORT_BACK_END}/`,
-        // '/api': `local.quotation.app:${env.PORT_BACK_END}`,
+        '/api': `${host}:${portServer}/`,
       },
     },
     worker: {
