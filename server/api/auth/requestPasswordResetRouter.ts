@@ -1,5 +1,5 @@
 import { sendEmail } from '@server/services/email'
-import { domain } from '@server/utils/env'
+import { domainClient } from '@server/utils/env'
 import express from 'express'
 import {
   type Result,
@@ -87,9 +87,9 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
         <p>
           <a
             clicktracking="off"
-            href="${domain}/${route.resetPassword}/${email}/${resetPasswordKey}"
+            href="${domainClient}/${route.resetPassword}/${email}/${resetPasswordKey}"
           >
-            ${domain}/${route.resetPassword}/${email}/${resetPasswordKey}
+            ${domainClient}/${route.resetPassword}/${email}/${resetPasswordKey}
           </a>
         </p>
       `,
