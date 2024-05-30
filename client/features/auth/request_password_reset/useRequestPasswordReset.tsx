@@ -23,7 +23,7 @@ export const useRequestPasswordReset = ({
   modalRef,
 }: Props): Res => {
   const navigate = useNavigate()
-  
+
   const {
     mutate: requestPasswordReset,
     isPending,
@@ -36,7 +36,7 @@ export const useRequestPasswordReset = ({
   useUpdateEffect(() => {
     if (isSuccess) {
       if (data.message === 'reset link sent') {
-        notify({ msg: 'Check your inbox and spam box', theme: 'light' })
+        notify({ msg: 'Check your inbox or spam', theme: 'light' })
 
         setTimeout(() => {
           slideElement({
