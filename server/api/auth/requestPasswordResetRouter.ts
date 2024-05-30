@@ -1,5 +1,5 @@
-import sgMail from '@sendgrid/mail'
-import { isProd } from '@server/utils/env'
+import { sendEmail } from '@server/services/email'
+import { domain } from '@server/utils/env'
 import express from 'express'
 import {
   type Result,
@@ -23,7 +23,9 @@ export type ResBody = {
     | 'validation error'
     | 'does not exists'
     | 'reset link sent'
+    | 'account not activated'
     | 'reset key not issued'
+    | 'reset link not sent'
   validationErrors?: Result<ValidationError>
 }
 
@@ -56,6 +58,12 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
         .json({ message: 'does not exists' })
     }
 
+    if (!user.isActivated) {
+      return res
+        .status(httpStatus.forbidden_403)
+        .json({ message: 'account not activated' })
+    }
+
     const updatedUser = await UserModel.findOneAndUpdate(
       { email },
       { resetPasswordKey: nanoid(5) },
@@ -70,13 +78,7 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
         .json({ message: 'reset key not issued' })
     }
 
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY!)
-
-    const domain = process.env[isProd ? 'DOMAIN_PROD' : 'DOMAIN_DEV']!
-
-    const sendEmailRes = await sgMail.send({
-      from: 'info@quotation.app',
-      replyTo: 'info@quotation.app',
+    const emailRes = await sendEmail({
       to: email,
       subject: 'password reset',
       html: `
@@ -91,17 +93,17 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
           </a>
         </p>
       `,
-      text: `
-        Please follow the link to reset the password.
-        ${domain}/${route.resetPassword}/${email}/${resetPasswordKey}
-      `,
     })
 
-    console.log('🚀 ~ sendEmailRes:', sendEmailRes)
+    if (emailRes?.[0].statusCode === 202) {
+      return res
+        .status(httpStatus.created_201)
+        .json({ message: 'reset link sent' })
+    }
 
     return res
-      .status(httpStatus.created_201)
-      .json({ message: 'reset link sent' })
+      .status(httpStatus.serverError_500)
+      .json({ message: 'reset link not sent' })
   } catch (error) {
     next(error)
   }

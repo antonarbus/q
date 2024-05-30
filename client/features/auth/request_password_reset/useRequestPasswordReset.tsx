@@ -35,7 +35,7 @@ export const useRequestPasswordReset = ({
   useUpdateEffect(() => {
     if (isSuccess) {
       if (data.message === 'reset link sent') {
-        notify({ msg: 'Check your mailbox.', theme: 'light' })
+        notify({ msg: 'Check your inbox and spam box', theme: 'light' })
 
         setTimeout(() => {
           slideElement({
@@ -52,18 +52,36 @@ export const useRequestPasswordReset = ({
   useUpdateEffect(() => {
     if (isError) {
       if (error.response?.data.message === 'does not exists') {
-        notify({ msg: 'Not found', type: 'info', theme: 'light' })
+        notify({ msg: 'User not found', type: 'info', theme: 'light' })
         return
       }
 
       if (error.response?.data.message === 'validation error') {
-        notify({ msg: 'Validation error', type: 'warn', theme: 'light' })
+        notify({
+          msg: 'Email pattern is not good',
+          type: 'warn',
+          theme: 'light',
+        })
+        return
+      }
+
+      if (error.response?.data.message === 'account not activated') {
+        notify({ msg: 'Account not activated', type: 'warn', theme: 'light' })
+        return
+      }
+
+      if (error.response?.data.message === 'reset link not sent') {
+        notify({
+          msg: 'Something happened, failed to send the mail',
+          type: 'warn',
+          theme: 'light',
+        })
         return
       }
 
       if (error.response?.data.message === 'reset key not issued') {
         notify({
-          msg: 'Something happened, failed to reset',
+          msg: 'Something happened, failed to generate reset link',
           type: 'warn',
           theme: 'light',
         })
