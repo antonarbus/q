@@ -69,8 +69,6 @@ app.use(apiUrl.getBookmarkCategories, getBookmarkCategoriesRouter)
 // error
 app.use(errorHandlerMiddleware)
 
-console.log('🚀 ~ process.env.NODE_ENV:', process.env.NODE_ENV)
-
 app.listen(portServer, () => {
   console.info(`🚀 server started at port ${portServer}`)
 })

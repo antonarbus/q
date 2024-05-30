@@ -9,7 +9,6 @@ import {
   useGetQuotationsQuery,
   useSaveQuotationMutation,
 } from '@entities/quotation'
-import { nanoid } from '@shared/lib/nanoid'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
 
