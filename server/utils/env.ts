@@ -1,3 +1,5 @@
+// process.env.NODE_ENV is set in package.json scripts
+
 export const isDev = process.env.NODE_ENV === 'development'
 export const isProd = process.env.NODE_ENV !== 'development'
 export const env = isDev ? 'dev' : 'prod'

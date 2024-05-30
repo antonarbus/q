@@ -9,7 +9,6 @@ import {
   useSaveBookmarkMutation,
 } from '@entities/bookmark'
 import { getItemByIdFromStore } from '@entities/quotation'
-import { nanoid } from '@shared/lib/nanoid'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
 
