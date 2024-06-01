@@ -18,6 +18,7 @@ import {
   useItem,
   boqRowKey,
 } from '@entities/quotation'
+import { cls } from '@shared/consts/cls'
 import { nanoid } from '@shared/lib/nanoid'
 import { BoqPasteRowTextOverlay } from './row/BoqPasteRowTextOverlay'
 import { BoqRow } from './row/BoqRow'
@@ -35,49 +36,58 @@ export const BoqRows = (): JSX.Element => {
   const sensors = useSensors(useSensor(PointerSensor))
 
   return (
-    <DndContext
-      sensors={sensors}
-      collisionDetection={closestCenter}
-      onDragStart={onBoqRowDragStart({ itemIndex })}
-      onDragEnd={onBoqRowDragEnd({ itemIndex, boqRowIds })}
-      measuring={{
-        droppable: {
-          strategy: MeasuringStrategy.Always,
-        },
+    <div
+      id='boq-rows'
+      className={cls.boqRows}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
       }}
     >
-      <SortableContext
-        items={boqRowIds}
-        strategy={verticalListSortingStrategy}
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragStart={onBoqRowDragStart({ itemIndex })}
+        onDragEnd={onBoqRowDragEnd({ itemIndex, boqRowIds })}
+        measuring={{
+          droppable: {
+            strategy: MeasuringStrategy.Always,
+          },
+        }}
       >
-        <AnimatePresence initial={false}>
-          {boqRows.map((boqRow, rowIndex) => {
-            if (boqRow.type === boqRowKey.row) {
-              return (
-                <RowProvider
-                  rowIndex={rowIndex}
-                  rowId={boqRow.id}
-                  key={boqRow.id}
-                >
-                  <BoqRowAnimate>
-                    <BoqRow
-                      onBlur={(e) => {
-                        hideBoqRowPinsOnRowBlur({ e, itemIndex, rowIndex })
-                      }}
-                    />
-                  </BoqRowAnimate>
-                </RowProvider>
-              )
-            }
+        <SortableContext
+          items={boqRowIds}
+          strategy={verticalListSortingStrategy}
+        >
+          <AnimatePresence initial={false}>
+            {boqRows.map((boqRow, rowIndex) => {
+              if (boqRow.type === boqRowKey.row) {
+                return (
+                  <RowProvider
+                    rowIndex={rowIndex}
+                    rowId={boqRow.id}
+                    key={boqRow.id}
+                  >
+                    <BoqRowAnimate>
+                      <BoqRow
+                        onBlur={(e) => {
+                          hideBoqRowPinsOnRowBlur({ e, itemIndex, rowIndex })
+                        }}
+                      />
+                    </BoqRowAnimate>
+                  </RowProvider>
+                )
+              }
 
-            if (boqRow.type === boqRowKey.paste) {
-              return <BoqPasteRowTextOverlay key={nanoid(5)} />
-            }
+              if (boqRow.type === boqRowKey.paste) {
+                return <BoqPasteRowTextOverlay key={nanoid(5)} />
+              }
 
-            return null
-          })}
-        </AnimatePresence>
-      </SortableContext>
-    </DndContext>
+              return null
+            })}
+          </AnimatePresence>
+        </SortableContext>
+      </DndContext>
+    </div>
   )
 }
