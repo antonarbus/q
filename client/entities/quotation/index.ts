@@ -73,7 +73,6 @@ export { updateBoqHeaderCellAtStore } from './redux/updaters/updateBoqHeaderCell
 export { updateBoqRowCellAtStore } from './redux/updaters/updateBoqRowCellAtStore'
 
 // ui
-export { DraggableItemsContainer } from './ui/DraggableItemsContainer'
 export { ItemComp } from './ui/ItemComp'
 export { Froala } from './ui/froala/Froala'
 export { BackgroundMessage } from './ui/BackgroundMessage'
