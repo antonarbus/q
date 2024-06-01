@@ -1,6 +1,7 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { getState } from '@lib_instances/store'
+import zIndex from '@mui/material/styles/zIndex'
 import { type ResizableProps } from 're-resizable'
 import type { ReactNode } from 'react'
 import {
@@ -41,19 +42,18 @@ export const ItemComp = ({
   const item = getState().quotation.items[itemIndex]
   const { itemId } = useItem()
 
-  const { setNodeRef, transform, transition } = useSortable({
+  const { setNodeRef, transform, transition, isDragging } = useSortable({
     id: itemId,
   })
-
-  const style = {
-    transform: CSS.Translate.toString(transform),
-    transition,
-  }
 
   return (
     <div
       ref={setNodeRef}
-      style={style}
+      style={{
+        transform: CSS.Translate.toString(transform),
+        transition,
+        zIndex: isDragging ? 1000 : 0,
+      }}
     >
       <ItemAnimate
         disableResize={disableResize}

@@ -2,7 +2,6 @@ import {
   DndContext,
   MeasuringStrategy,
   PointerSensor,
-  closestCenter,
   useSensor,
   useSensors,
 } from '@dnd-kit/core'
@@ -36,8 +35,9 @@ export const Items = (): ReactNode => {
 
   return (
     <DndContext
+      autoScroll={{ layoutShiftCompensation: false }}
       sensors={sensors}
-      collisionDetection={closestCenter}
+      // collisionDetection={rectangleIntersection}
       onDragStart={onItemDragStart}
       onDragEnd={onItemDragEnd({ itemIds })}
       measuring={{
