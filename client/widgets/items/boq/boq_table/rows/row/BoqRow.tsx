@@ -22,19 +22,18 @@ type Props = {
 
 export const BoqRow = ({ onBlur }: Props): JSX.Element => {
   const { rowId } = useRow()
-  const { setNodeRef, transform, transition } = useSortable({
+  const { setNodeRef, transform, transition, isDragging } = useSortable({
     id: rowId,
   })
-
-  const style = {
-    transform: CSS.Translate.toString(transform),
-    transition,
-  }
 
   return (
     <div
       ref={setNodeRef}
-      style={style}
+      style={{
+        transform: CSS.Translate.toString(transform),
+        transition,
+        zIndex: isDragging ? 1000 : 0,
+      }}
     >
       <BoqRowLayout onBlur={onBlur}>
         <BoqRowActionButtonsLayout style={{ left: '-33px' }}>
