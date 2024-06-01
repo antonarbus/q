@@ -1,20 +1,25 @@
+import { useSortable } from '@dnd-kit/sortable'
 import { MdDragIndicator } from 'react-icons/md'
-import { SortableHandle } from 'react-sortable-hoc'
-import { useIsItemSortDisabled } from '@entities/quotation'
+import { useIsItemSortDisabled, useItem } from '@entities/quotation'
 
-const Handle = (): JSX.Element => {
-  const isDisabled = useIsItemSortDisabled()
+export const DragItemIcon = (): JSX.Element => {
+  const disabled = useIsItemSortDisabled()
+  const { itemId } = useItem()
+
+  const { listeners } = useSortable({
+    id: itemId,
+    disabled,
+  })
 
   return (
     <MdDragIndicator
+      {...listeners}
       className='drag-item-icon'
       tabIndex={-1}
       style={{
-        color: isDisabled ? '#acacac' : '#000',
-        cursor: isDisabled ? 'default' : 'move',
+        color: disabled ? '#acacac' : '#000',
+        cursor: disabled ? 'default' : 'move',
       }}
     />
   )
 }
-
-export const DragItemIcon = SortableHandle(Handle)

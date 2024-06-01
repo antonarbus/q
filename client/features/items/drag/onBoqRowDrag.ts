@@ -15,6 +15,9 @@ export const onBoqRowDragEnd =
   (event: DragEndEvent): void => {
     const { active, over } = event
 
+    dispatch(quotationSlice.actions.enableFroalaReducer({ itemIndex }))
+    document.body.style.removeProperty('cursor')
+
     if (!over) return
     if (active.id === over.id) return
 
@@ -30,7 +33,4 @@ export const onBoqRowDragEnd =
         itemIndex,
       }),
     )
-
-    dispatch(quotationSlice.actions.enableFroalaReducer({ itemIndex }))
-    document.body.style.removeProperty('cursor')
   }

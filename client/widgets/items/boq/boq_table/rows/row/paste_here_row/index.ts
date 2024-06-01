@@ -1,1 +1,1 @@
-export { PasteHere } from './PasteHere'
+export { PasteBoqRowTextOverlay } from './PasteBoqRowTextOverlay'

@@ -9,7 +9,6 @@ import { BoqItemForEditModal } from '@widgets/items/boq/BoqItemForEditModal'
 import { PriceItemForEditModal } from '@widgets/items/price/PriceItemForEditModal'
 import { TextItemForEditModal } from '@widgets/items/text/TextItemForEditModal'
 import { hideBoqRowPinsOnRowBlur } from '@features/items/cell/pin'
-import { onItemDrag } from '@features/items/drag'
 import {
   ItemProvider,
   itemsShapeEqualityFn,
@@ -54,6 +53,7 @@ export const BookmarkField = (): ReactNode => {
               return (
                 <ItemProvider
                   key={item.id}
+                  itemId={item.id}
                   itemIndex={itemIndex}
                 >
                   <TextItemForEditModal />
@@ -65,6 +65,7 @@ export const BookmarkField = (): ReactNode => {
               return (
                 <ItemProvider
                   key={item.id}
+                  itemId={item.id}
                   itemIndex={itemIndex}
                 >
                   <BoqItemProvider>
@@ -78,6 +79,7 @@ export const BookmarkField = (): ReactNode => {
               return (
                 <ItemProvider
                   key={item.id}
+                  itemId={item.id}
                   itemIndex={itemIndex}
                 >
                   <PriceItemForEditModal />
@@ -89,6 +91,7 @@ export const BookmarkField = (): ReactNode => {
               return (
                 <ItemProvider
                   key={item.id}
+                  itemId={item.id}
                   itemIndex={itemIndex}
                 >
                   <BoqItemProvider>
