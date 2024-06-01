@@ -1,7 +1,6 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { getState } from '@lib_instances/store'
-import zIndex from '@mui/material/styles/zIndex'
 import { type ResizableProps } from 're-resizable'
 import type { ReactNode } from 'react'
 import {
