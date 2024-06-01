@@ -116,7 +116,7 @@ export const useLogIn = ({
         return
       }
 
-      if (error.response?.data.message === 'not activated') {
+      if (error.response?.data.message === 'activation link sent') {
         notify({
           msg: 'Account is not activated. Check mailbox.',
           type: 'info',

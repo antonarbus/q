@@ -9,6 +9,7 @@ export { useRequestPasswordResetMutation } from './api/useRequestPasswordResetMu
 export { useResetPasswordMutation } from './api/useResetPasswordMutation'
 export { useActivateMutation } from './api/useActivateMutation'
 export { useGetAccessTokenQuery } from './api/useGetAccessTokenQuery'
+export { useGetFilesStatsQuery } from './api/useGetFilesStatsQuery'
 
 // types
 export type { User } from './types'

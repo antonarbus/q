@@ -19,4 +19,6 @@ export const queryKey = {
   getBookmarkCategories: 'getBookmarkCategories',
   deleteBookmark: 'deleteBookmark',
   saveBookmark: 'saveBookmark',
+  // settings
+  getFilesStats: 'getFilesStats',
 } as const

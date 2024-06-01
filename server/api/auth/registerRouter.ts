@@ -81,7 +81,7 @@ const register: RouterHandler = async (req, res, next) => {
       to: email,
       subject: 'activate your account',
       html: `
-        <p>Follow the link to activate your account.</p>
+        <p>Follow the link to activate the account.</p>
         <br>
         <p>
           <a

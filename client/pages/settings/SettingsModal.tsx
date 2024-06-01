@@ -2,10 +2,11 @@ import { getState } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
 import { Settings } from '@mui/icons-material'
 import { Avatar, Box } from '@mui/material'
+import bytes from 'bytes'
 import { useRef } from 'react'
-import { PiSmileyBold } from 'react-icons/pi'
+import { GrStorage } from 'react-icons/gr'
 import { useNavigate } from 'react-router-dom'
-import { useActivate } from '@features/auth/activate'
+import { useGetFilesStatsQuery } from '@entities/user'
 import {
   BackdropWithSlidableModal,
   RotatingLoaderIcon,
@@ -15,7 +16,7 @@ import { CardCustom } from '@shared/components/CardCustom'
 export const SettingsModal = (): JSX.Element => {
   const cardRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
-  const { isSuccess, isPending } = useActivate()
+  const { data, isSuccess, isPending } = useGetFilesStatsQuery()
 
   return (
     <BackdropWithSlidableModal
@@ -54,15 +55,24 @@ export const SettingsModal = (): JSX.Element => {
             </>
           )}
           {isSuccess && (
-            <>
-              <PiSmileyBold
-                style={{
-                  height: '30px',
-                  width: '30px',
-                }}
-              />
-              <Box>Activated</Box>
-            </>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '5px',
+              }}
+            >
+              <GrStorage />
+              <Box>{data?.fileStats.fileCount} files</Box>
+              <Box>
+                {bytes.format(data?.fileStats.totalSize, {
+                  unit: 'mb',
+                  thousandsSeparator: ' ',
+                  unitSeparator: ' ',
+                })}
+              </Box>
+            </Box>
           )}
         </Box>
       </CardCustom>
