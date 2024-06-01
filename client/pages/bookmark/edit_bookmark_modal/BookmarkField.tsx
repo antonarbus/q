@@ -3,8 +3,8 @@ import { Box } from '@mui/material'
 import { AnimatePresence } from 'framer-motion'
 import { type ReactNode } from 'react'
 import { useEffectOnce } from 'react-use'
+import { BoqRowAnimate } from '@widgets/items/boq/boq_table/rows/row/BoqRowAnimate'
 import { BoqRowForEditModal } from '@widgets/items/boq/boq_table/rows/row/BoqRowForEditModal'
-import { BoqRowSortAndAnimate } from '@widgets/items/boq/boq_table/rows/row/BoqRowSortAndAnimate'
 import { BoqItemForEditModal } from '@widgets/items/boq/BoqItemForEditModal'
 import { PriceItemForEditModal } from '@widgets/items/price/PriceItemForEditModal'
 import { TextItemForEditModal } from '@widgets/items/text/TextItemForEditModal'
@@ -52,7 +52,10 @@ export const BookmarkField = (): ReactNode => {
           {[firstItem].map((item, itemIndex) => {
             if (item.type === itemKey.text) {
               return (
-                <ItemProvider key={item.id} itemIndex={itemIndex}>
+                <ItemProvider
+                  key={item.id}
+                  itemIndex={itemIndex}
+                >
                   <TextItemForEditModal />
                 </ItemProvider>
               )
@@ -60,7 +63,10 @@ export const BookmarkField = (): ReactNode => {
 
             if (item.type === itemKey.boq) {
               return (
-                <ItemProvider key={item.id} itemIndex={itemIndex}>
+                <ItemProvider
+                  key={item.id}
+                  itemIndex={itemIndex}
+                >
                   <BoqItemProvider>
                     <BoqItemForEditModal />
                   </BoqItemProvider>
@@ -70,7 +76,10 @@ export const BookmarkField = (): ReactNode => {
 
             if (item.type === itemKey.price) {
               return (
-                <ItemProvider key={item.id} itemIndex={itemIndex}>
+                <ItemProvider
+                  key={item.id}
+                  itemIndex={itemIndex}
+                >
                   <PriceItemForEditModal />
                 </ItemProvider>
               )
@@ -78,13 +87,16 @@ export const BookmarkField = (): ReactNode => {
 
             if (item.type === itemKey.row) {
               return (
-                <ItemProvider key={item.id} itemIndex={itemIndex}>
+                <ItemProvider
+                  key={item.id}
+                  itemIndex={itemIndex}
+                >
                   <BoqItemProvider>
-                    <RowProvider rowIndex={0} rowId={item.id}>
-                      <BoqRowSortAndAnimate
-                        index={0} // 'index' is internal prop consumed by SortableElement HOC
-                        disabled={true}
-                      >
+                    <RowProvider
+                      rowIndex={0}
+                      rowId={item.id}
+                    >
+                      <BoqRowAnimate>
                         <BoqRowForEditModal
                           onBlur={(e) => {
                             hideBoqRowPinsOnRowBlur({
@@ -94,7 +106,7 @@ export const BookmarkField = (): ReactNode => {
                             })
                           }}
                         />
-                      </BoqRowSortAndAnimate>
+                      </BoqRowAnimate>
                     </RowProvider>
                   </BoqItemProvider>
                 </ItemProvider>
