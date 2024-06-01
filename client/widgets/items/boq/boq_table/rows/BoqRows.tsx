@@ -19,6 +19,7 @@ import {
   // useIsBoqRowSortDisabled,
   boqRowKey,
   quotationSlice,
+  getBoqRowsFromStore,
 } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 import { BoqPasteRowTextOverlay } from './row/BoqPasteRowTextOverlay'
@@ -59,6 +60,8 @@ export const BoqRows = (): JSX.Element => {
 
         const oldIndex = boqRowIds.indexOf(String(active.id))
         const newIndex = boqRowIds.indexOf(String(over.id))
+        const boqRows = getBoqRowsFromStore({ itemIndex })
+        if (boqRows === undefined) return
         const reOrderedBoqRows = arrayMoveImmutable(boqRows, oldIndex, newIndex)
 
         dispatch(
