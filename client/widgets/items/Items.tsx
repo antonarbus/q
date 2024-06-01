@@ -2,12 +2,13 @@ import {
   DndContext,
   MeasuringStrategy,
   PointerSensor,
+  closestCenter,
   useSensor,
   useSensors,
 } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { useSelectorTyped } from '@lib_instances/store'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 import { type ReactNode } from 'react'
 import { onItemDragEnd, onItemDragStart } from '@features/items/drag'
 import {
@@ -16,8 +17,8 @@ import {
   BoqItemProvider,
   itemKey,
 } from '@entities/quotation'
-import { cls } from '@shared/consts/cls'
 import { BoqItem } from './boq/BoqItem'
+import { FadeInOnInitLoad } from './FadeInOnInitLoad'
 import { PasteItem } from './paste/PasteItem'
 import { TotalPriceItem } from './price/PriceItem'
 import { TextItem } from './text/TextItem'
@@ -35,30 +36,11 @@ export const Items = (): ReactNode => {
   if (items.length === 0) return null
 
   return (
-    <motion.div
-      className={cls.items}
-      initial={{
-        opacity: 0,
-      }}
-      animate={{
-        opacity: 1,
-      }}
-      transition={{
-        delay: 0.7, // to show "Q" logo on init load to avoid some jumps
-      }}
-      style={{
-        display: 'inline-flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        maxWidth: '100%',
-        padding: '20px 10px',
-      }}
-    >
+    <FadeInOnInitLoad>
       <DndContext
         autoScroll={{ layoutShiftCompensation: false }}
         sensors={sensors}
-        // collisionDetection={rectangleIntersection}
+        collisionDetection={closestCenter}
         onDragStart={onItemDragStart}
         onDragEnd={onItemDragEnd({ itemIds })}
         measuring={{
@@ -120,6 +102,6 @@ export const Items = (): ReactNode => {
           </AnimatePresence>
         </SortableContext>
       </DndContext>
-    </motion.div>
+    </FadeInOnInitLoad>
   )
 }
