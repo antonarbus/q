@@ -6,7 +6,11 @@ import { useIsBoqRowSortDisabled, useRow } from '@entities/quotation'
 const Handle = (): JSX.Element => {
   const disabled = useIsBoqRowSortDisabled()
   const { rowId } = useRow()
-  const { listeners } = useSortable({ id: rowId })
+
+  const { listeners } = useSortable({
+    id: rowId,
+    disabled,
+  })
 
   return (
     <MdDragIndicator
