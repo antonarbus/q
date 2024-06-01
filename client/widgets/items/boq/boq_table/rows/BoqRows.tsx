@@ -6,36 +6,24 @@ import {
   useSensor,
   useSensors,
 } from '@dnd-kit/core'
-import {
-  SortableContext,
-  arrayMove,
-  defaultAnimateLayoutChanges,
-  verticalListSortingStrategy,
-} from '@dnd-kit/sortable'
-import { useSelectorTyped } from '@lib_instances/store'
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
+import { dispatch, useSelectorTyped } from '@lib_instances/store'
+import { arrayMoveImmutable } from 'array-move'
 import { AnimatePresence } from 'framer-motion'
 import { hideBoqRowPinsOnRowBlur } from '@features/items/cell/pin'
-import { onBoqRowDrag } from '@features/items/drag'
 import {
   boqRowsShapeEqualityFn,
   selectBoqRows,
   RowProvider,
   useItem,
-  useIsBoqRowSortDisabled,
+  // useIsBoqRowSortDisabled,
   boqRowKey,
+  quotationSlice,
 } from '@entities/quotation'
-import { cls } from '@shared/consts/cls'
 import { nanoid } from '@shared/lib/nanoid'
-import { DraggableBoqRowsContainer } from './DraggableBoqRowsContainer'
 import { BoqPasteRowTextOverlay } from './row/BoqPasteRowTextOverlay'
 import { BoqRow } from './row/BoqRow'
 import { BoqRowAnimate } from './row/BoqRowAnimate'
-
-const measuringConfig = {
-  droppable: {
-    strategy: MeasuringStrategy.Always,
-  },
-}
 
 export const BoqRows = (): JSX.Element => {
   const { itemIndex } = useItem()
@@ -46,41 +34,43 @@ export const BoqRows = (): JSX.Element => {
 
   const boqRowIds = boqRows.map((boqRow) => boqRow.id)
 
-  const isBoqRowSortDisabled = useIsBoqRowSortDisabled()
+  // const isBoqRowSortDisabled = useIsBoqRowSortDisabled()
 
   const sensors = useSensors(useSensor(PointerSensor))
 
   return (
-    // <DraggableBoqRowsContainer
-    //   useDragHandle
-    //   useWindowAsScrollContainer
-    //   onSortStart={() => {
-    //     onBoqRowDrag.start({ itemIndex })
-    //   }}
-    //   onSortEnd={({ oldIndex, newIndex }) => {
-    //     onBoqRowDrag.end({ oldIndex, newIndex, itemIndex })
-    //   }}
-    // >
     <DndContext
       sensors={sensors}
-      measuring={measuringConfig}
+      measuring={{
+        droppable: {
+          strategy: MeasuringStrategy.Always,
+        },
+      }}
       collisionDetection={closestCenter}
       onDragStart={() => {
-        // onBoqRowDrag.start({ itemIndex })
+        document.body.style.cursor = 'move'
+        dispatch(quotationSlice.actions.disableFroalaReducer({ itemIndex }))
       }}
-      onDragEnd={() => {}}
-      // onDragEnd={(event) => {
-      //   const { active, over,  } = event
+      onDragEnd={(event) => {
+        const { active, over } = event
 
-      //   if (active.id !== over.id) {
-      //     setItems((items) => {
-      //       const oldIndex = items.indexOf(active.id)
-      //       const newIndex = items.indexOf(over.id)
+        if (!over) return
+        if (active.id === over.id) return
 
-      //       return arrayMove(items, oldIndex, newIndex)
-      //     })
-      //   }
-      // }}
+        const oldIndex = boqRowIds.indexOf(String(active.id))
+        const newIndex = boqRowIds.indexOf(String(over.id))
+        const reOrderedBoqRows = arrayMoveImmutable(boqRows, oldIndex, newIndex)
+
+        dispatch(
+          quotationSlice.actions.reOrderBoqRowsReducer({
+            reOrderedBoqRows,
+            itemIndex,
+          }),
+        )
+
+        dispatch(quotationSlice.actions.enableFroalaReducer({ itemIndex }))
+        document.body.style.removeProperty('cursor')
+      }}
     >
       <SortableContext
         items={boqRowIds}
@@ -115,6 +105,5 @@ export const BoqRows = (): JSX.Element => {
         </AnimatePresence>
       </SortableContext>
     </DndContext>
-    // </DraggableBoqRowsContainer>
   )
 }
