@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import type { FocusEvent, ReactNode } from 'react'
 import { useRow } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
-import { PasteHere } from './paste_here_row'
+import { PasteBoqRowTextOverlay } from './paste_here_row'
 
 type Props = {
   children: ReactNode
@@ -29,7 +29,7 @@ export const BoqRowLayout = ({ children, onBlur }: Props): JSX.Element => {
         // background: 'red',
       }}
     >
-      <PasteHere>{children}</PasteHere>
+      <PasteBoqRowTextOverlay>{children}</PasteBoqRowTextOverlay>
     </Box>
   )
 }

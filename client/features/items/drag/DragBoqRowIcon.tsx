@@ -1,9 +1,8 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { MdDragIndicator } from 'react-icons/md'
-import { SortableHandle } from 'react-sortable-hoc'
 import { useIsBoqRowSortDisabled, useRow } from '@entities/quotation'
 
-const Handle = (): JSX.Element => {
+export const DragBoqRowIcon = (): JSX.Element => {
   const disabled = useIsBoqRowSortDisabled()
   const { rowId } = useRow()
 
@@ -24,5 +23,3 @@ const Handle = (): JSX.Element => {
     />
   )
 }
-
-export const DragBoqRowIcon = SortableHandle(Handle)

@@ -2,6 +2,7 @@ import { createContext, useContext, type ReactNode } from 'react'
 
 type Context = {
   itemIndex: number
+  itemId: string
 }
 
 type Props = Context & {
@@ -10,9 +11,13 @@ type Props = Context & {
 
 const ItemContext = createContext<Context | null>(null)
 
-export const ItemProvider = ({ children, itemIndex }: Props): JSX.Element => {
+export const ItemProvider = ({
+  children,
+  itemIndex,
+  itemId,
+}: Props): JSX.Element => {
   return (
-    <ItemContext.Provider value={{ itemIndex }}>
+    <ItemContext.Provider value={{ itemIndex, itemId }}>
       {children}
     </ItemContext.Provider>
   )

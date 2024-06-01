@@ -1,1 +1,1 @@
-export { ItemSortAndAnimate } from './ItemSortAndAnimate'
+export { ItemAnimate } from './ItemAnimate'
