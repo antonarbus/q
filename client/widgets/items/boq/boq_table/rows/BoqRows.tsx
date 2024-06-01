@@ -10,7 +10,7 @@ import {
 } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 import { BoqRowsLayout } from './BoqRowsLayout'
-import { DndSortableContext } from './DndSortableContext'
+import { BoqRowsSortableContext } from './BoqRowsSortableContext'
 import { BoqPasteRowTextOverlay } from './row/BoqPasteRowTextOverlay'
 import { BoqRow } from './row/BoqRow'
 import { BoqRowAnimate } from './row/BoqRowAnimate'
@@ -25,7 +25,7 @@ export const BoqRows = (): JSX.Element => {
 
   return (
     <BoqRowsLayout>
-      <DndSortableContext>
+      <BoqRowsSortableContext>
         <AnimatePresence initial={false}>
           {boqRows.map((boqRow, rowIndex) => {
             if (boqRow.type === boqRowKey.row) {
@@ -55,7 +55,7 @@ export const BoqRows = (): JSX.Element => {
             return null
           })}
         </AnimatePresence>
-      </DndSortableContext>
+      </BoqRowsSortableContext>
     </BoqRowsLayout>
   )
 }
