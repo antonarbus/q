@@ -19,6 +19,6 @@ export const route = {
   editBookmark: 'edit-bookmark',
   // item
   infoItem: 'info-item',
-  // va
+  // setting
   settings: 'settings',
 } as const

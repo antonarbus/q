@@ -48,7 +48,7 @@ export const useActivate = (): Res => {
         navSlice.actions.hideNavItems({ navItemIdKeys: [navItemKey.login] }),
       )
       dispatch(
-        navSlice.actions.showNavItems({ navItemIdKeys: [navItemKey.account] }),
+        navSlice.actions.showNavItems({ navItemIdKeys: [navItemKey.profile] }),
       )
     }
 
