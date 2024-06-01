@@ -14,7 +14,6 @@ import {
   itemsShapeEqualityFn,
   BoqItemProvider,
   itemKey,
-  DraggableItemsContainer,
   RowProvider,
   isFroalaSignal,
 } from '@entities/quotation'
@@ -39,87 +38,78 @@ export const BookmarkField = (): ReactNode => {
 
   return (
     <BookmarkFieldLayout>
-      <DraggableItemsContainer
-        useDragHandle
-        useWindowAsScrollContainer
-        onSortStart={onItemDrag.start}
-        onSortEnd={({ oldIndex, newIndex }): void => {
-          onItemDrag.end({ oldIndex, newIndex })
-        }}
-      >
-        <AnimatePresence initial={false}>
-          {[firstItem].map((item, itemIndex) => {
-            if (item.type === itemKey.text) {
-              return (
-                <ItemProvider
-                  key={item.id}
-                  itemId={item.id}
-                  itemIndex={itemIndex}
-                >
-                  <TextItemForEditModal />
-                </ItemProvider>
-              )
-            }
+      <AnimatePresence initial={false}>
+        {[firstItem].map((item, itemIndex) => {
+          if (item.type === itemKey.text) {
+            return (
+              <ItemProvider
+                key={item.id}
+                itemId={item.id}
+                itemIndex={itemIndex}
+              >
+                <TextItemForEditModal />
+              </ItemProvider>
+            )
+          }
 
-            if (item.type === itemKey.boq) {
-              return (
-                <ItemProvider
-                  key={item.id}
-                  itemId={item.id}
-                  itemIndex={itemIndex}
-                >
-                  <BoqItemProvider>
-                    <BoqItemForEditModal />
-                  </BoqItemProvider>
-                </ItemProvider>
-              )
-            }
+          if (item.type === itemKey.boq) {
+            return (
+              <ItemProvider
+                key={item.id}
+                itemId={item.id}
+                itemIndex={itemIndex}
+              >
+                <BoqItemProvider>
+                  <BoqItemForEditModal />
+                </BoqItemProvider>
+              </ItemProvider>
+            )
+          }
 
-            if (item.type === itemKey.price) {
-              return (
-                <ItemProvider
-                  key={item.id}
-                  itemId={item.id}
-                  itemIndex={itemIndex}
-                >
-                  <PriceItemForEditModal />
-                </ItemProvider>
-              )
-            }
+          if (item.type === itemKey.price) {
+            return (
+              <ItemProvider
+                key={item.id}
+                itemId={item.id}
+                itemIndex={itemIndex}
+              >
+                <PriceItemForEditModal />
+              </ItemProvider>
+            )
+          }
 
-            if (item.type === itemKey.row) {
-              return (
-                <ItemProvider
-                  key={item.id}
-                  itemId={item.id}
-                  itemIndex={itemIndex}
-                >
-                  <BoqItemProvider>
-                    <RowProvider
-                      rowIndex={0}
-                      rowId={item.id}
-                    >
-                      <BoqRowAnimate>
-                        <BoqRowForEditModal
-                          onBlur={(e) => {
-                            hideBoqRowPinsOnRowBlur({
-                              e,
-                              itemIndex,
-                              rowIndex: 0,
-                            })
-                          }}
-                        />
-                      </BoqRowAnimate>
-                    </RowProvider>
-                  </BoqItemProvider>
-                </ItemProvider>
-              )
-            }
+          if (item.type === itemKey.row) {
+            return (
+              <ItemProvider
+                key={item.id}
+                itemId={item.id}
+                itemIndex={itemIndex}
+              >
+                <BoqItemProvider>
+                  <RowProvider
+                    rowIndex={0}
+                    rowId={item.id}
+                  >
+                    <BoqRowAnimate>
+                      <BoqRowForEditModal
+                        onBlur={(e) => {
+                          hideBoqRowPinsOnRowBlur({
+                            e,
+                            itemIndex,
+                            rowIndex: 0,
+                          })
+                        }}
+                      />
+                    </BoqRowAnimate>
+                  </RowProvider>
+                </BoqItemProvider>
+              </ItemProvider>
+            )
+          }
 
-            return null
-          })}
-        </AnimatePresence>
-      </DraggableItemsContainer>
+          return null
+        })}
+      </AnimatePresence>
     </BookmarkFieldLayout>
   )
 }

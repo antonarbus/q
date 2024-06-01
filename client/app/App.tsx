@@ -1,4 +1,3 @@
-import '@shared/utils/nonPassiveEventErrorFix'
 import { reactQuery } from '@lib_instances/reactQuery'
 import { router } from '@lib_instances/Router'
 import { store } from '@lib_instances/store'
