@@ -13,7 +13,6 @@ export const InfoAndSearchLayout = ({ children }: Props): JSX.Element => {
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingInline: '5px',
-        marginBottom: '20px',
       }}
     >
       {children}
