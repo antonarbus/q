@@ -22,6 +22,8 @@ export const apiUrl = {
   deleteBookmark: '/api/delete-bookmark',
   // va
   upload: '/api/upload',
+  // settings
+  getFilesStats: '/api/get-files-stats',
   // dev
   api: '/api',
   test: '/api/test',

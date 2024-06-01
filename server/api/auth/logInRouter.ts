@@ -1,7 +1,10 @@
+import { sendEmail } from '@server/services/email'
+import { domainClient } from '@server/utils/env'
 import bcrypt from 'bcryptjs'
 import express from 'express'
 import { type User } from '@entities/user'
 import { httpStatus } from '@shared/consts/httpStatus'
+import { route } from '@shared/consts/route'
 import { UserModel } from '../../db/models/userModel'
 import {
   createAccessToken,
@@ -22,7 +25,8 @@ export type ResBody = {
     | 'no user data'
     | 'no password'
     | 'bad password'
-    | 'not activated'
+    | 'activation link sent'
+    | 'activation link not sent'
     | 'good password'
     | 'failed to create token'
   name?: 'MongooseError'
@@ -71,10 +75,32 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
     }
 
     if (!user.isActivated) {
-      // todo: send email with activation link
+      const emailRes = await sendEmail({
+        to: email,
+        subject: 'activate your account',
+        html: `
+        <p>Follow the link to activate the account.</p>
+        <br>
+        <p>
+          <a
+            clicktracking="off"
+            href="${domainClient}/${route.activate}/${user.activationKey}"
+          >
+            ${domainClient}/${route.activate}/${user.activationKey}
+          </a>
+        </p>
+      `,
+      })
+
+      if (emailRes?.[0].statusCode === 202) {
+        return res
+          .status(httpStatus.forbidden_403)
+          .json({ message: 'activation link sent' })
+      }
+
       return res
-        .status(httpStatus.created_201)
-        .json({ message: 'not activated' })
+        .status(httpStatus.serverError_500)
+        .json({ message: 'activation link not sent' })
     }
 
     const isExistingRefreshJwtToken = Boolean(

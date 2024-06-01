@@ -23,6 +23,7 @@ import { getQuotationCategoriesRouter } from './api/quotation/getQuotationCatego
 import { getQuotationRouter } from './api/quotation/getQuotationRouter'
 import { getQuotationsRouter } from './api/quotation/getQuotationsRouter'
 import { saveQuotationRouter } from './api/quotation/saveQuotationRouter'
+import { getFilesStatsRouter } from './api/settings/getFilesStatsRouter'
 import { uploadRouter } from './api/va/uploadRouter'
 import { apiUrl } from './consts/apiUrl'
 import { connectToDb } from './db/connectToDb'
@@ -52,8 +53,6 @@ app.use(apiUrl.logIn, logInRouter)
 app.use(apiUrl.logOut, logOutRouter)
 app.use(apiUrl.activate, activateRouter)
 app.use(apiUrl.getAccessToken, getAccessTokenRouter)
-// va
-app.use(apiUrl.upload, uploadRouter)
 // quotation
 app.use(apiUrl.saveQuotation, saveQuotationRouter)
 app.use(apiUrl.getQuotation, getQuotationRouter)
@@ -66,6 +65,10 @@ app.use(apiUrl.deleteBookmark, deleteBookmarkRouter)
 app.use(apiUrl.saveBookmark, saveBookmarkRouter)
 app.use(apiUrl.getBookmarks, getBookmarksRouter)
 app.use(apiUrl.getBookmarkCategories, getBookmarkCategoriesRouter)
+// va
+app.use(apiUrl.upload, uploadRouter)
+// settings
+app.use(apiUrl.getFilesStats, getFilesStatsRouter)
 // error
 app.use(errorHandlerMiddleware)
 
