@@ -7,19 +7,16 @@ import {
   useSensors,
 } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
-import { dispatch, useSelectorTyped } from '@lib_instances/store'
-import { arrayMoveImmutable } from 'array-move'
+import { useSelectorTyped } from '@lib_instances/store'
 import { AnimatePresence } from 'framer-motion'
 import { hideBoqRowPinsOnRowBlur } from '@features/items/cell/pin'
+import { onBoqRowDragEnd, onBoqRowDragStart } from '@features/items/drag'
 import {
   boqRowsShapeEqualityFn,
   selectBoqRows,
   RowProvider,
   useItem,
-  // useIsBoqRowSortDisabled,
   boqRowKey,
-  quotationSlice,
-  getBoqRowsFromStore,
 } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 import { BoqPasteRowTextOverlay } from './row/BoqPasteRowTextOverlay'
@@ -35,8 +32,6 @@ export const BoqRows = (): JSX.Element => {
 
   const boqRowIds = boqRows.map((boqRow) => boqRow.id)
 
-  // const isBoqRowSortDisabled = useIsBoqRowSortDisabled()
-
   const sensors = useSensors(useSensor(PointerSensor))
 
   return (
@@ -48,32 +43,8 @@ export const BoqRows = (): JSX.Element => {
         },
       }}
       collisionDetection={closestCenter}
-      onDragStart={() => {
-        document.body.style.cursor = 'move'
-        dispatch(quotationSlice.actions.disableFroalaReducer({ itemIndex }))
-      }}
-      onDragEnd={(event) => {
-        const { active, over } = event
-
-        if (!over) return
-        if (active.id === over.id) return
-
-        const oldIndex = boqRowIds.indexOf(String(active.id))
-        const newIndex = boqRowIds.indexOf(String(over.id))
-        const boqRows = getBoqRowsFromStore({ itemIndex })
-        if (boqRows === undefined) return
-        const reOrderedBoqRows = arrayMoveImmutable(boqRows, oldIndex, newIndex)
-
-        dispatch(
-          quotationSlice.actions.reOrderBoqRowsReducer({
-            reOrderedBoqRows,
-            itemIndex,
-          }),
-        )
-
-        dispatch(quotationSlice.actions.enableFroalaReducer({ itemIndex }))
-        document.body.style.removeProperty('cursor')
-      }}
+      onDragStart={onBoqRowDragStart({ itemIndex })}
+      onDragEnd={onBoqRowDragEnd({ itemIndex, boqRowIds })}
     >
       <SortableContext
         items={boqRowIds}
