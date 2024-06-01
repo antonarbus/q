@@ -23,6 +23,7 @@ import {
 } from '@features/open_close/open_quotation_page'
 import { openQuotationsPage } from '@features/open_close/open_quotations_page'
 import { openSaveQuotationModal } from '@features/open_close/open_save_quotation_modal'
+import { openSettingsModal } from '@features/open_close/open_settings_modal'
 import { downloadPdf } from '@features/quotation/pdf'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { route } from '@shared/consts/route'
@@ -167,9 +168,9 @@ export const navStructure: MenuItemType[] = [
         },
       },
       {
-        id: navItemKey.account,
+        id: navItemKey.profile,
         icon: <Person />,
-        name: 'Account',
+        name: 'Profile',
         isHidden: true,
         menuItems: [
           {
@@ -177,7 +178,10 @@ export const navStructure: MenuItemType[] = [
             icon: <Settings />,
             isHidden: false,
             name: 'Settings',
-            link: route.settings,
+            link: `./${route.settings}`,
+            func: () => {
+              openSettingsModal()
+            },
           },
           {
             id: navItemKey.logout,

@@ -41,7 +41,7 @@ export const Logout = (): JSX.Element => {
         )
         dispatch(
           navSlice.actions.hideNavItems({
-            navItemIdKeys: [navItemKey.account],
+            navItemIdKeys: [navItemKey.profile],
           }),
         )
         setTimeout(() => {

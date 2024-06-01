@@ -65,7 +65,7 @@ export const AccessToken = (): JSX.Element => {
 
         dispatch(
           navSlice.actions.showNavItems({
-            navItemIdKeys: [navItemKey.account],
+            navItemIdKeys: [navItemKey.profile],
           }),
         )
 
@@ -91,7 +91,7 @@ export const AccessToken = (): JSX.Element => {
 
         dispatch(
           navSlice.actions.hideNavItems({
-            navItemIdKeys: [navItemKey.account],
+            navItemIdKeys: [navItemKey.profile],
           }),
         )
 

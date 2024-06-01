@@ -74,7 +74,7 @@ export const useLogIn = ({
       )
 
       dispatch(
-        navSlice.actions.showNavItems({ navItemIdKeys: [navItemKey.account] }),
+        navSlice.actions.showNavItems({ navItemIdKeys: [navItemKey.profile] }),
       )
 
       if (location.pathname.includes(route.quotations)) {

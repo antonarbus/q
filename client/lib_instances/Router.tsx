@@ -8,11 +8,12 @@ import { ResetPasswordModal } from '@pages/auth/ResetPasswordModal'
 import { UnauthorizedPage } from '@pages/auth/UnauthorizedPage'
 import { AddBookmarkModal } from '@pages/bookmark/add_bookmark_modal'
 import { EditBookmarkModal } from '@pages/bookmark/edit_bookmark_modal'
-import { ErrorPage } from '@pages/error_page'
+import { ErrorPage } from '@pages/error'
 import { InfoItemModal } from '@pages/item/info_item_modal'
 import { EditQuotationModal } from '@pages/quotation/edit_quotation_modal/EditQuotationModal'
 import { InfoQuotationModal } from '@pages/quotation/info_quotation_modal'
 import { SaveQuotationModal } from '@pages/quotation/save_quotation_modal'
+import { SettingsModal } from '@pages/settings'
 import { Copy } from '@widgets/copy'
 import { Nav } from '@widgets/nav'
 import { AccessToken } from '@features/auth/get_access_token'
@@ -60,6 +61,10 @@ const authRoutes: RouteObject[] = [
     path: `${route.resetPassword}/:email/:resetPasswordKey`,
     caseSensitive: true,
     element: <ResetPasswordModal />,
+  },
+  {
+    path: route.settings,
+    element: <SettingsModal />,
   },
 ]
 
