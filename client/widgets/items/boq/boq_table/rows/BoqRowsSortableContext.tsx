@@ -19,7 +19,7 @@ type Props = {
   children: React.ReactNode
 }
 
-export const DndSortableContext = ({ children }: Props): JSX.Element => {
+export const BoqRowsSortableContext = ({ children }: Props): JSX.Element => {
   const { itemIndex } = useItem()
 
   const boqRows = useSelectorTyped(
