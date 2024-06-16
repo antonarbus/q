@@ -20,14 +20,11 @@ export const Items = (): ReactNode => {
         <AnimatePresence initial={false}>
           {items.map((item, itemIndex) => {
             return (
-              <ItemProvider
+              <Item
                 key={item.id}
-                itemId={item.id}
-                itemIndex={itemIndex}
                 item={item}
-              >
-                <Item />
-              </ItemProvider>
+                itemIndex={itemIndex}
+              />
             )
           })}
         </AnimatePresence>
