@@ -34,6 +34,9 @@ function QuotationFieldLayout({
           height: '180px',
           margin: '10px',
           padding: '10px',
+          '.actions-container': {
+            display: 'none !important',
+          },
         }}
       >
         <Box
