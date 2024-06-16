@@ -3,20 +3,8 @@ import { Box } from '@mui/material'
 import { AnimatePresence } from 'framer-motion'
 import { type ReactNode } from 'react'
 import { useEffectOnce } from 'react-use'
-import { BoqRowAnimate } from '@widgets/items/boq/boq_table/rows/row/BoqRowAnimate'
-import { BoqRowForEditModal } from '@widgets/items/boq/boq_table/rows/row/BoqRowForEditModal'
-import { BoqItemForEditModal } from '@widgets/items/boq/BoqItemForEditModal'
-import { PriceItemForEditModal } from '@widgets/items/price/PriceItemForEditModal'
-import { TextItemForEditModal } from '@widgets/items/text/TextItemForEditModal'
-import { hideBoqRowPinsOnRowBlur } from '@features/items/cell/pin'
-import {
-  ItemProvider,
-  itemsShapeEqualityFn,
-  BoqItemProvider,
-  itemKey,
-  RowProvider,
-  isFroalaSignal,
-} from '@entities/quotation'
+import { Item } from '@widgets/items/Item'
+import { itemsShapeEqualityFn, isFroalaSignal } from '@entities/quotation'
 import { OutlinedDivWithLabel } from '@shared/components'
 import { cls } from '@shared/consts/cls'
 
@@ -39,76 +27,10 @@ export const BookmarkField = (): ReactNode => {
   return (
     <BookmarkFieldLayout>
       <AnimatePresence initial={false}>
-        {[firstItem].map((item, itemIndex) => {
-          if (item.type === itemKey.text) {
-            return (
-              <ItemProvider
-                key={item.id}
-                itemId={item.id}
-                itemIndex={itemIndex}
-              >
-                <TextItemForEditModal />
-              </ItemProvider>
-            )
-          }
-
-          if (item.type === itemKey.boq) {
-            return (
-              <ItemProvider
-                key={item.id}
-                itemId={item.id}
-                itemIndex={itemIndex}
-              >
-                <BoqItemProvider>
-                  <BoqItemForEditModal />
-                </BoqItemProvider>
-              </ItemProvider>
-            )
-          }
-
-          if (item.type === itemKey.price) {
-            return (
-              <ItemProvider
-                key={item.id}
-                itemId={item.id}
-                itemIndex={itemIndex}
-              >
-                <PriceItemForEditModal />
-              </ItemProvider>
-            )
-          }
-
-          if (item.type === itemKey.row) {
-            return (
-              <ItemProvider
-                key={item.id}
-                itemId={item.id}
-                itemIndex={itemIndex}
-              >
-                <BoqItemProvider>
-                  <RowProvider
-                    rowIndex={0}
-                    rowId={item.id}
-                  >
-                    <BoqRowAnimate>
-                      <BoqRowForEditModal
-                        onBlur={(e) => {
-                          hideBoqRowPinsOnRowBlur({
-                            e,
-                            itemIndex,
-                            rowIndex: 0,
-                          })
-                        }}
-                      />
-                    </BoqRowAnimate>
-                  </RowProvider>
-                </BoqItemProvider>
-              </ItemProvider>
-            )
-          }
-
-          return null
-        })}
+        <Item
+          item={firstItem}
+          itemIndex={0}
+        />
       </AnimatePresence>
     </BookmarkFieldLayout>
   )
@@ -146,10 +68,8 @@ function BookmarkFieldLayout({
           [`.${cls.item}.${cls.textItem}`]: {
             display: 'block !important',
           },
-          '.boq-table-container .boq-rows .actions-container': {
-            '.save-boq-row-icon, .open-info-boq-row-modal-icon': {
-              display: 'none !important',
-            },
+          '.actions-container': {
+            display: 'none !important',
           },
         }}
       >
