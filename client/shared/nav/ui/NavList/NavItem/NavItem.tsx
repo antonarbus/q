@@ -153,10 +153,16 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
         {icon && isSuccess && <SuccessIcon />}
         {icon && isError && <ErrorIcon />}
         {icon && !isLoading && !isSuccess && !isError && (
-          <Icon icon={icon} disabled={disabled} />
+          <Icon
+            icon={icon}
+            disabled={disabled}
+          />
         )}
         {!icon && shouldDisplayIcon && (
-          <Icon icon={name?.[0]} disabled={disabled} />
+          <Icon
+            icon={name?.[0]}
+            disabled={disabled}
+          />
         )}
         {name && <span className='nav-item-name'>{name}</span>}
         {isNestedMenu && !disabled && (
