@@ -2,13 +2,17 @@ import { Box } from '@mui/material'
 import { type ReactNode } from 'react'
 import { useEffectOnce } from 'react-use'
 import { Items } from '@widgets/items'
-import { isFroalaSignal } from '@entities/quotation'
+import { type Item, isFroalaSignal } from '@entities/quotation'
 import { OutlinedDivWithLabel } from '@shared/components'
 
-export const QuotationField = (): ReactNode => {
+type Props = {
+  items: Item[]
+}
+
+export const QuotationField = ({ items }: Props): ReactNode => {
   return (
     <BookmarkFieldLayout>
-      <Items />
+      <Items items={items} />
     </BookmarkFieldLayout>
   )
 }

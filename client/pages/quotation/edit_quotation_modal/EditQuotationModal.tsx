@@ -41,6 +41,7 @@ export const EditQuotationModal = (): JSX.Element => {
     infoSignal,
     sharedWithSignal,
   })
+
   const isDisabled = nameSignal.value === '' || categorySignal.value === ''
 
   return (
@@ -65,7 +66,7 @@ export const EditQuotationModal = (): JSX.Element => {
         shareWithOptionSignal={shareWithOptionSignal}
         sharedWithSignal={sharedWithSignal}
       />
-      <QuotationField />
+      <QuotationField items={quotation.items} />
     </FormModal>
   )
 }

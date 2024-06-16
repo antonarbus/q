@@ -1,17 +1,15 @@
-import { useSelectorTyped } from '@lib_instances/store'
 import { AnimatePresence } from 'framer-motion'
 import { type ReactNode } from 'react'
-import { itemsShapeEqualityFn } from '@entities/quotation'
+import { type Item as ItemType } from '@entities/quotation'
 import { FadeInOnInitLoad } from './FadeInOnInitLoad'
 import { Item } from './Item'
 import { ItemsSortableContext } from './ItemsSortableContext'
 
-export const Items = (): ReactNode => {
-  const items = useSelectorTyped(
-    (state) => state.quotation.items,
-    itemsShapeEqualityFn,
-  )
+type Props = {
+  items: ItemType[]
+}
 
+export const Items = ({ items }: Props): ReactNode => {
   if (items.length === 0) return null
 
   return (
