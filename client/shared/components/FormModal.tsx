@@ -114,7 +114,10 @@ export const FormModal = ({
           <Avatar sx={{ bgcolor: theme.colors.darkBackground }}>
             {headerIcon}
           </Avatar>
-          <Typography component='h1' variant='h6'>
+          <Typography
+            component='h1'
+            variant='h6'
+          >
             {headerText}
           </Typography>
           <IconButton
@@ -207,7 +210,9 @@ export const FormModal = ({
             }}
           >
             <ButtonCustom
-              isButtonDisabled={isButtonDisabled}
+              isButtonDisabled={
+                Boolean(isButtonDisabled) || Boolean(isButtonLoading)
+              }
               isButtonLoading={isButtonLoading}
               isButtonSuccess={isButtonSuccess}
               isButtonError={isButtonError}
