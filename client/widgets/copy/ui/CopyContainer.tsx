@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { usePasteClick, useMovePasteTextOverlay } from '@features/items/paste'
+import { usePasteClick, useMovePasteText } from '@features/items/paste'
 import { PressEscIcon } from '@features/open_close/close_copy_container'
 import { cursorPosSignal } from '@shared/utils/cursorPosSignal'
 import { FirstCopiedItem } from './FirstCopiedItem'
@@ -8,7 +8,7 @@ import { useCopyContainerAnimation } from './useCopyContainerAnimation'
 import { useDisableNavItemsExceptNewAndQuotations } from './useDisableNavItemsExceptNewAndQuotations'
 
 export const CopyContainer = (): JSX.Element => {
-  useMovePasteTextOverlay()
+  useMovePasteText()
   usePasteClick()
   useDisableNavItemsExceptNewAndQuotations()
   const copyContainerAnimationControls = useCopyContainerAnimation()

@@ -7,7 +7,7 @@ import { type ItemBoq } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { route } from '@shared/consts/route'
 
-export const useMovePasteTextOverlay = (): void => {
+export const useMovePasteText = (): void => {
   const typeOfNextPasteItem = useSelectorTyped(
     (state) => state.copy.items.at(0)?.type,
   )
@@ -50,21 +50,23 @@ function movePasteTextItemOverlay(e: MouseEvent): void {
     return
   }
 
-  const navElement = e.target.closest('nav')
   const isPasteTextShown = getState().copy.isPasteTextShown
-  const isPasteItem = getState().quotation.items.some(
-    (item) => item.type === itemKey.paste,
-  )
 
   const removePasteIfNeeded = (): void => {
     if (isPasteTextShown) {
       dispatch(copySlice.actions.hidePasteText())
     }
 
+    const isPasteItem = getState().quotation.items.some(
+      (item) => item.type === itemKey.paste,
+    )
+
     if (isPasteItem) {
       dispatch(quotationSlice.actions.removePasteItemReducer())
     }
   }
+
+  const navElement = e.target.closest('nav')
 
   if (navElement) {
     removePasteIfNeeded()
@@ -72,6 +74,7 @@ function movePasteTextItemOverlay(e: MouseEvent): void {
   }
 
   const elementsUnderCursor = document.elementsFromPoint(e.x, e.y)
+
   const isCursorOverActionsContainer = elementsUnderCursor.some((element) =>
     element.classList.contains(cls.actionsContainer),
   )
@@ -138,6 +141,7 @@ function movePasteTextItemOverlay(e: MouseEvent): void {
     return
   }
 
+  // dispatch(quotationSlice.actions.removePasteItemReducer())
   dispatch(copySlice.actions.updatePastePos(pastePlace))
   dispatch(copySlice.actions.showPasteText())
   dispatch(quotationSlice.actions.insertPasteItemReducer(pastePlace))
