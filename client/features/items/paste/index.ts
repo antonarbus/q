@@ -1,2 +1,2 @@
 export { usePasteClick } from './usePasteClick'
-export { useMovePasteTextOverlay } from './useMovePasteTextOverlay'
+export { useMovePasteText } from './useMovePasteText'
