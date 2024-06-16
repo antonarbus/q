@@ -1,38 +1,36 @@
 import { dispatch, getState } from '@lib_instances/store'
 import isEqual from 'lodash.isequal'
-import { copySlice, getPastePlace } from '@entities/copy'
-import { boqRowKey, itemKey, quotationSlice } from '@entities/quotation'
-import { type ItemBoq } from '@entities/quotation'
+import { type CopyPlace, copySlice, getPastePlace } from '@entities/copy'
+import { itemKey, quotationSlice } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
+import { route } from '@shared/consts/route'
 
-export const movePasteTextForBoqRow = (e: MouseEvent): void => {
+export const movePasteTextItemOverlay = (e: MouseEvent): void => {
   if (!(e.target instanceof Element)) {
     return
   }
 
-  const prevPlace = getState().copy.place
-  const isPasteTextShown = getState().copy.isPasteTextShown
-  const boqRowsElement = e.target.closest(`.${cls.boqRows}`)
+  if (window.location.pathname.includes(route.quotations)) {
+    return
+  }
 
-  const isBoqPasteItem = (
-    getState().quotation.items.filter(
-      (item) => item.type === itemKey.boq,
-    ) as ItemBoq[]
+  const navElement = e.target.closest('nav')
+  const isPasteTextShown = getState().copy.isPasteTextShown
+  const isPasteItem = getState().quotation.items.some(
+    (item) => item.type === itemKey.paste,
   )
-    .flatMap((item) => item.boq.rows)
-    .some((boqRow) => boqRow.type === boqRowKey.paste)
 
   const removePasteIfNeeded = (): void => {
     if (isPasteTextShown) {
       dispatch(copySlice.actions.hidePasteText())
     }
 
-    if (isBoqPasteItem) {
+    if (isPasteItem) {
       dispatch(quotationSlice.actions.removePasteItemReducer())
     }
   }
 
-  if (!boqRowsElement) {
+  if (navElement) {
     removePasteIfNeeded()
     return
   }
@@ -72,17 +70,33 @@ export const movePasteTextForBoqRow = (e: MouseEvent): void => {
     return
   }
 
-  const boqRowElement = e.target.closest(`.${cls.boqRow}`)
+  const isNarrowGapAboveNav = e.clientY < 10
 
-  if (!boqRowElement) {
+  if (isNarrowGapAboveNav) {
     return
   }
 
-  const pastePlace = getPastePlace({
-    item: boqRowElement,
-    e,
-    distanceToEdge: 10,
-  })
+  const isNarrowGapUnderNav = e.clientY > 65 && e.clientY < 75
+
+  if (isNarrowGapUnderNav && !isPasteTextShown) {
+    const firstItem = getState().quotation.items[0]
+    if (!firstItem) return
+    const pastePlace: CopyPlace = { pastePos: 'top', itemId: firstItem.id }
+    dispatch(copySlice.actions.updatePastePos(pastePlace))
+    dispatch(copySlice.actions.showPasteText())
+
+    dispatch(quotationSlice.actions.insertPasteItemReducer(pastePlace))
+    return
+  }
+
+  const item = e.target.closest(`.${cls.item}`)
+
+  if (!item) {
+    return
+  }
+
+  const prevPlace = getState().copy.place
+  const pastePlace = getPastePlace({ item, e, distanceToEdge: 20 })
 
   if (isEqual(pastePlace, prevPlace) && isPasteTextShown) {
     return
@@ -90,5 +104,5 @@ export const movePasteTextForBoqRow = (e: MouseEvent): void => {
 
   dispatch(copySlice.actions.updatePastePos(pastePlace))
   dispatch(copySlice.actions.showPasteText())
-  dispatch(quotationSlice.actions.insertPasteBoqRowReducer(pastePlace))
+  dispatch(quotationSlice.actions.insertPasteItemReducer(pastePlace))
 }
