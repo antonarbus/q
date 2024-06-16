@@ -1,10 +1,10 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { useEffect } from 'react'
 import { boqRowKey, itemKey } from '@entities/quotation'
-import { movePasteTextForBoqRow } from './movePasteTextForBoqRow'
-import { movePasteTextForItem } from './movePasteTextForItem'
+import { movePasteTextBoqRowOverlay } from './movePasteTextBoqRowOverlay'
+import { movePasteTextItemOverlay } from './movePasteTextItemOverlay'
 
-export const useMovePasteText = (): void => {
+export const useMovePasteTextOverlay = (): void => {
   const typeOfNextPasteItem = useSelectorTyped(
     (state) => state.copy.items.at(0)?.type,
   )
@@ -18,22 +18,22 @@ export const useMovePasteText = (): void => {
   useEffect(() => {
     if (isItem) {
       document.body.style.cursor = 'pointer'
-      document.addEventListener('mousemove', movePasteTextForItem, {
+      document.addEventListener('mousemove', movePasteTextItemOverlay, {
         passive: true,
       })
     }
 
     if (isBoqRow) {
       document.body.style.cursor = 'pointer'
-      document.addEventListener('mousemove', movePasteTextForBoqRow, {
+      document.addEventListener('mousemove', movePasteTextBoqRowOverlay, {
         passive: true,
       })
     }
 
     return () => {
       document.body.style.removeProperty('cursor')
-      document.removeEventListener('mousemove', movePasteTextForItem)
-      document.removeEventListener('mousemove', movePasteTextForBoqRow)
+      document.removeEventListener('mousemove', movePasteTextItemOverlay)
+      document.removeEventListener('mousemove', movePasteTextBoqRowOverlay)
     }
   }, [isItem, isBoqRow])
 }
