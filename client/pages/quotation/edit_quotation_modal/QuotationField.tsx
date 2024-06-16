@@ -11,13 +11,13 @@ type Props = {
 
 export const QuotationField = ({ items }: Props): ReactNode => {
   return (
-    <BookmarkFieldLayout>
+    <QuotationFieldLayout>
       <Items items={items} />
-    </BookmarkFieldLayout>
+    </QuotationFieldLayout>
   )
 }
 
-function BookmarkFieldLayout({
+function QuotationFieldLayout({
   children,
 }: {
   children: React.ReactNode
