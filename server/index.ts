@@ -34,7 +34,7 @@ import { portServer } from './utils/env'
 const app = express()
 void connectToDb()
 app.use(morgan('dev')) // http logs in terminal
-app.use(express.json()) // middleware based on body-parser will parse the JSON payload and add a 'body' property to the req object containing the parsed data
+app.use(express.json({ limit: '50mb' })) // middleware based on body-parser will parse the JSON payload and add a 'body' property to the req object containing the parsed data
 app.use(cookieParser()) // middleware parses the Cookie header and populates req.cookies with an object keyed by the cookie names
 // app.use(cors())
 // app.set('trust proxy', true) // for app engine
