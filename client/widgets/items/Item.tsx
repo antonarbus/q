@@ -1,5 +1,4 @@
 import {
-  BoqItemProvider,
   type Item as ItemType,
   ItemProvider,
   itemKey,
@@ -22,11 +21,7 @@ export const Item = ({ item, itemIndex }: Props): React.ReactNode => {
       item={item}
     >
       {item.type === itemKey.text && <TextItem />}
-      {item.type === itemKey.boq && (
-        <BoqItemProvider>
-          <BoqItem />
-        </BoqItemProvider>
-      )}
+      {item.type === itemKey.boq && <BoqItem />}
       {item.type === itemKey.price && <TotalPriceItem />}
       {item.type === itemKey.paste && <PasteItem />}
     </ItemProvider>
