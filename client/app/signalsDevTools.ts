@@ -12,22 +12,28 @@ declare const window: Window &
 
 function signalsOn(): void {
   effect(() => {
-    console.log('🚦 totalRowsSignal.value', displayedRowsCountSignal.value)
+    console.log(
+      '🚦 displayedRowsCountSignal.value',
+      displayedRowsCountSignal.value,
+    )
   })
+
   effect(() => {
-    console.log('🚦 isItemsFroalaSignal.value', isFroalaSignal.value)
+    console.log('🚦 isFroalaSignal.value', isFroalaSignal.value)
   })
+
   effect(() => {
     console.log(
       '🚦 reRenderQuotationSignal.value',
       reRenderQuotationSignal.value,
     )
   })
+
   effect(() => {
     console.log('🚦 accessTokenSignal.value', accessTokenSignal.value)
   })
 }
 
-// signalsOn()
+signalsOn()
 
 window.signalsOn = signalsOn
