@@ -16,32 +16,33 @@ export const useMovePasteText = (): void => {
     typeOfNextPasteItem === itemKey.boq ||
     typeOfNextPasteItem === itemKey.text ||
     typeOfNextPasteItem === itemKey.price
+
   const isBoqRow = typeOfNextPasteItem === boqRowKey.row
 
   useEffect(() => {
     if (isItem) {
       document.body.style.cursor = 'pointer'
-      document.addEventListener('mousemove', movePasteTextItemOverlay, {
+      document.addEventListener('mousemove', movePasteTextItem, {
         passive: true,
       })
     }
 
     if (isBoqRow) {
       document.body.style.cursor = 'pointer'
-      document.addEventListener('mousemove', movePasteTextBoqRowOverlay, {
+      document.addEventListener('mousemove', movePasteTextBoqRow, {
         passive: true,
       })
     }
 
     return () => {
       document.body.style.removeProperty('cursor')
-      document.removeEventListener('mousemove', movePasteTextItemOverlay)
-      document.removeEventListener('mousemove', movePasteTextBoqRowOverlay)
+      document.removeEventListener('mousemove', movePasteTextItem)
+      document.removeEventListener('mousemove', movePasteTextBoqRow)
     }
   }, [isItem, isBoqRow])
 }
 
-function movePasteTextItemOverlay(e: MouseEvent): void {
+function movePasteTextItem(e: MouseEvent): void {
   if (!(e.target instanceof Element)) {
     return
   }
@@ -115,7 +116,7 @@ function movePasteTextItemOverlay(e: MouseEvent): void {
     return
   }
 
-  const isNarrowGapUnderNav = e.clientY > 65 && e.clientY < 75
+  const isNarrowGapUnderNav = e.clientY > 100
 
   if (isNarrowGapUnderNav && !isPasteTextShown) {
     const firstItem = getState().quotation.items[0]
@@ -147,7 +148,7 @@ function movePasteTextItemOverlay(e: MouseEvent): void {
   dispatch(quotationSlice.actions.insertPasteItemReducer(pastePlace))
 }
 
-function movePasteTextBoqRowOverlay(e: MouseEvent): void {
+function movePasteTextBoqRow(e: MouseEvent): void {
   if (!(e.target instanceof Element)) {
     return
   }
