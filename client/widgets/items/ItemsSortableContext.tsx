@@ -14,6 +14,9 @@ type Props = {
   children: React.ReactNode
 }
 
+// example
+// https://codesandbox.io/p/sandbox/dnd-kit-sortable-starter-template-22x1ix
+
 export const ItemsSortableContext = ({ children }: Props): JSX.Element => {
   const items = useSelectorTyped(
     (state) => state.quotation.items,
