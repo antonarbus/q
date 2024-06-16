@@ -32,11 +32,6 @@ export const ItemsSortableContext = ({ children }: Props): JSX.Element => {
       collisionDetection={closestCenter}
       onDragStart={onItemDragStart}
       onDragEnd={onItemDragEnd({ itemIds })}
-      measuring={{
-        droppable: {
-          strategy: MeasuringStrategy.Always,
-        },
-      }}
     >
       <SortableContext
         items={itemIds}
