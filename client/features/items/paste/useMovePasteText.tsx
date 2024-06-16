@@ -3,6 +3,7 @@ import isEqual from 'lodash.isequal'
 import { useEffect } from 'react'
 import { type CopyPlace, copySlice, getPastePlace } from '@entities/copy'
 import { boqRowKey, itemKey, quotationSlice } from '@entities/quotation'
+import { type ItemBoq } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { route } from '@shared/consts/route'
 
@@ -20,27 +21,27 @@ export const useMovePasteText = (): void => {
   useEffect(() => {
     if (isItem) {
       document.body.style.cursor = 'pointer'
-      document.addEventListener('mousemove', movePasteTextItem, {
+      document.addEventListener('mousemove', movePasteTextItemOverlay, {
         passive: true,
       })
     }
 
     if (isBoqRow) {
       document.body.style.cursor = 'pointer'
-      document.addEventListener('mousemove', movePasteTextBoqRow, {
+      document.addEventListener('mousemove', movePasteTextBoqRowOverlay, {
         passive: true,
       })
     }
 
     return () => {
       document.body.style.removeProperty('cursor')
-      document.removeEventListener('mousemove', movePasteTextItem)
-      document.removeEventListener('mousemove', movePasteTextBoqRow)
+      document.removeEventListener('mousemove', movePasteTextItemOverlay)
+      document.removeEventListener('mousemove', movePasteTextBoqRowOverlay)
     }
   }, [isItem, isBoqRow])
 }
 
-function movePasteTextItem(e: MouseEvent): void {
+function movePasteTextItemOverlay(e: MouseEvent): void {
   if (!(e.target instanceof Element)) {
     return
   }
@@ -49,58 +50,80 @@ function movePasteTextItem(e: MouseEvent): void {
     return
   }
 
-  const isCursorOverItemsElement = Boolean(e.target.closest(`.${cls.items}`))
+  const isPasteTextShown = getState().copy.isPasteTextShown
 
-  if (!isCursorOverItemsElement) {
-    removePasteText()
+  const removePasteIfNeeded = (): void => {
+    if (isPasteTextShown) {
+      dispatch(copySlice.actions.hidePasteText())
+    }
+
+    const isPasteItem = getState().quotation.items.some(
+      (item) => item.type === itemKey.paste,
+    )
+
+    if (isPasteItem) {
+      dispatch(quotationSlice.actions.removePasteItemReducer())
+    }
+  }
+
+  const navElement = e.target.closest('nav')
+
+  if (navElement) {
+    removePasteIfNeeded()
     return
   }
 
-  const isCursorOverActionsContainer = Boolean(
-    e.target.closest(`.${cls.actionsContainer}`),
+  const elementsUnderCursor = document.elementsFromPoint(e.x, e.y)
+
+  const isCursorOverActionsContainer = elementsUnderCursor.some((element) =>
+    element.classList.contains(cls.actionsContainer),
   )
 
   if (isCursorOverActionsContainer) {
-    removePasteText()
+    removePasteIfNeeded()
     return
   }
 
-  const isSearchElementUnderCursor = Boolean(e.target.closest(`.${cls.search}`))
-
-  if (isSearchElementUnderCursor) {
-    removePasteText()
-    return
-  }
-
-  const isSearchAutocompleteElementUnderCursor = Boolean(
-    e.target.closest(`.${cls.searchAutocomplete}`),
+  const isSearchElement = elementsUnderCursor.some((element) =>
+    element.classList.contains(cls.search),
   )
 
-  if (isSearchAutocompleteElementUnderCursor) {
-    removePasteText()
+  if (isSearchElement) {
+    removePasteIfNeeded()
+    return
+  }
+
+  const isSearchAutocompleteElement = elementsUnderCursor.some((element) =>
+    element.classList.contains(cls.searchAutocomplete),
+  )
+
+  if (isSearchAutocompleteElement) {
+    removePasteIfNeeded()
     return
   }
 
   const isPastable = getState().copy.isPastable
 
   if (!isPastable) {
-    removePasteText()
+    removePasteIfNeeded()
     return
   }
 
-  const isPasteTextShown = getState().copy.isPasteTextShown
+  const isNarrowGapAboveNav = e.clientY < 10
 
-  if (!isPasteTextShown) {
+  if (isNarrowGapAboveNav) {
+    return
+  }
+
+  const isNarrowGapUnderNav = e.clientY > 65 && e.clientY < 75
+
+  if (isNarrowGapUnderNav && !isPasteTextShown) {
     const firstItem = getState().quotation.items[0]
-
-    if (!firstItem) {
-      return
-    }
-
+    if (!firstItem) return
     const pastePlace: CopyPlace = { pastePos: 'top', itemId: firstItem.id }
-    removePasteText()
     dispatch(copySlice.actions.updatePastePos(pastePlace))
     dispatch(copySlice.actions.showPasteText())
+
     dispatch(quotationSlice.actions.insertPasteItemReducer(pastePlace))
     return
   }
@@ -118,13 +141,13 @@ function movePasteTextItem(e: MouseEvent): void {
     return
   }
 
-  removePasteText()
+  // dispatch(quotationSlice.actions.removePasteItemReducer())
   dispatch(copySlice.actions.updatePastePos(pastePlace))
   dispatch(copySlice.actions.showPasteText())
   dispatch(quotationSlice.actions.insertPasteItemReducer(pastePlace))
 }
 
-function movePasteTextBoqRow(e: MouseEvent): void {
+function movePasteTextBoqRowOverlay(e: MouseEvent): void {
   if (!(e.target instanceof Element)) {
     return
   }
@@ -133,8 +156,26 @@ function movePasteTextBoqRow(e: MouseEvent): void {
   const isPasteTextShown = getState().copy.isPasteTextShown
   const boqRowsElement = e.target.closest(`.${cls.boqRows}`)
 
+  const isBoqPasteItem = (
+    getState().quotation.items.filter(
+      (item) => item.type === itemKey.boq,
+    ) as ItemBoq[]
+  )
+    .flatMap((item) => item.boq.rows)
+    .some((boqRow) => boqRow.type === boqRowKey.paste)
+
+  const removePasteIfNeeded = (): void => {
+    if (isPasteTextShown) {
+      dispatch(copySlice.actions.hidePasteText())
+    }
+
+    if (isBoqPasteItem) {
+      dispatch(quotationSlice.actions.removePasteItemReducer())
+    }
+  }
+
   if (!boqRowsElement) {
-    removePasteText()
+    removePasteIfNeeded()
     return
   }
 
@@ -144,7 +185,7 @@ function movePasteTextBoqRow(e: MouseEvent): void {
   )
 
   if (isCursorOverActionsContainer) {
-    removePasteText()
+    removePasteIfNeeded()
     return
   }
 
@@ -153,7 +194,7 @@ function movePasteTextBoqRow(e: MouseEvent): void {
   )
 
   if (isSearchElement) {
-    removePasteText()
+    removePasteIfNeeded()
     return
   }
 
@@ -162,14 +203,14 @@ function movePasteTextBoqRow(e: MouseEvent): void {
   )
 
   if (isSearchAutocompleteElement) {
-    removePasteText()
+    removePasteIfNeeded()
     return
   }
 
   const isPastable = getState().copy.isPastable
 
   if (!isPastable) {
-    removePasteText()
+    removePasteIfNeeded()
     return
   }
 
@@ -192,9 +233,4 @@ function movePasteTextBoqRow(e: MouseEvent): void {
   dispatch(copySlice.actions.updatePastePos(pastePlace))
   dispatch(copySlice.actions.showPasteText())
   dispatch(quotationSlice.actions.insertPasteBoqRowReducer(pastePlace))
-}
-
-function removePasteText(): void {
-  dispatch(quotationSlice.actions.removePasteItemReducer())
-  dispatch(copySlice.actions.hidePasteText())
 }
