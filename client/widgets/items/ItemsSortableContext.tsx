@@ -26,8 +26,8 @@ export const ItemsSortableContext = ({ children }: Props): JSX.Element => {
 
   return (
     <DndContext
-      autoScroll={{ layoutShiftCompensation: false }}
       sensors={sensors}
+      autoScroll={{ layoutShiftCompensation: false }}
       collisionDetection={closestCenter}
       onDragStart={onItemDragStart}
       onDragEnd={onItemDragEnd({ itemIds })}
