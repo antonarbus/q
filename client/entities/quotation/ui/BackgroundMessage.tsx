@@ -4,6 +4,7 @@ import { backgroundMessageSignal } from '../signals/backgroundMessageSignal'
 export const BackgroundMessage = (): JSX.Element => {
   return (
     <Box
+      className='background-message'
       sx={{
         display: 'flex',
         justifyContent: 'center',
@@ -17,6 +18,8 @@ export const BackgroundMessage = (): JSX.Element => {
         fontWeight: 500,
         color: 'grey',
         textAlign: 'center',
+        // background: 'red',
+        zIndex: -1,
       }}
     >
       {backgroundMessageSignal.value}
