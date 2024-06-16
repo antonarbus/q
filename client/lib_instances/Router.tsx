@@ -89,6 +89,7 @@ export const router = createBrowserRouter([
           </Suspense>
         ),
         caseSensitive: true,
+
         children: [
           ...authRoutes,
           {

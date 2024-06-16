@@ -13,5 +13,9 @@ export const openSaveQuotationModal = (): void => {
     return
   }
 
-  void router.navigate(`./${route.saveQuotation}`)
+  void router.navigate(`./${route.saveQuotation}`, {
+    state: {
+      scrollTop: document.documentElement.scrollTop || document.body.scrollTop,
+    },
+  })
 }

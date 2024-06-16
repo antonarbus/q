@@ -2,6 +2,8 @@ import { getState, useSelectorTyped } from '@lib_instances/store'
 import { useSignal } from '@preact/signals-react'
 import { useRef } from 'react'
 import { MdSaveAlt } from 'react-icons/md'
+import { useLocation } from 'react-router-dom'
+import { useEffectOnce } from 'react-use'
 import { useSaveQuotation } from '@features/quotation/save_quotation'
 import { FormModal } from '@shared/components'
 import {
@@ -21,6 +23,11 @@ export const SaveQuotationModal = (): JSX.Element => {
   const categorySignal = useSignal(quotation.category ?? '')
   const descSignal = useSignal(quotation.desc ?? '')
   const infoSignal = useSignal(quotation.info ?? '')
+  const scrollTop = useLocation().state?.scrollTop ?? 0
+
+  useEffectOnce(() => {
+    document.body.scrollTop = scrollTop
+  })
 
   const getOptionValue = (): SharedWithOption => {
     if (quotation?.sharedWith?.length === 0) return sharedWithOption.nobody
