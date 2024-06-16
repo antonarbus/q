@@ -33,14 +33,10 @@ export const BoqRowsSortableContext = ({ children }: Props): JSX.Element => {
   return (
     <DndContext
       sensors={sensors}
+      autoScroll={{ layoutShiftCompensation: false }}
       collisionDetection={closestCenter}
       onDragStart={onBoqRowDragStart({ itemIndex })}
       onDragEnd={onBoqRowDragEnd({ itemIndex, boqRowIds })}
-      measuring={{
-        droppable: {
-          strategy: MeasuringStrategy.Always,
-        },
-      }}
     >
       <SortableContext
         items={boqRowIds}
