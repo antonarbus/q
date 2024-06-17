@@ -15,5 +15,6 @@
     "noEmit": false,
     "noEmitOnError": false
   },
-  // "include": ["./**/*.ts", "../client/shared/consts/httpStatus.ts"]
+  "include": ["./**/*.ts"],
+  "exclude": ["node_modules", "**/node_modules", "../client"],
 }
