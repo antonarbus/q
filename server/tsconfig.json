@@ -3,14 +3,17 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "target": "ESNext",
-    "outDir": "../build/server",
+    "outDir": "../build_server",
     "module": "ESNext",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "include": ["./**/*.ts"],
+    "noEmit": false,
+    "noEmitOnError": false
   },
-  "include": ["./**/*.ts", "../client/shared/consts/httpStatus.ts"]
+  // "include": ["./**/*.ts", "../client/shared/consts/httpStatus.ts"]
 }
