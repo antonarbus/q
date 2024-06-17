@@ -1,9 +1,9 @@
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
-import { defineConfig, loadEnv } from 'vite'
-import react from '@vitejs/plugin-react'
-import tsconfigPaths from 'vite-tsconfig-paths'
 import basicSsl from '@vitejs/plugin-basic-ssl'
+import react from '@vitejs/plugin-react'
+import { defineConfig, loadEnv } from 'vite'
+import tsconfigPaths from 'vite-tsconfig-paths'
 
 // https://vitejs.dev/config/
 
@@ -19,7 +19,7 @@ export default defineConfig(({ command, mode }) => {
 
   return {
     server: {
-      host: isProd ? 'quotation.app' : 'local.quotation.app',
+      host: isProd ? 'localhost' : 'local.quotation.app',
       port: portClient,
       https: true, //* type "thisisunsafe" if chrome says that connection is not private
       proxy: {
