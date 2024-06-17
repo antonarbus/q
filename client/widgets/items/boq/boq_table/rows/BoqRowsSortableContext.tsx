@@ -1,6 +1,5 @@
 import {
   DndContext,
-  MeasuringStrategy,
   PointerSensor,
   closestCenter,
   useSensor,
