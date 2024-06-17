@@ -75,7 +75,7 @@ export default defineConfig(({ command, mode }) => {
       },
     },
     build: {
-      outDir: 'build',
+      outDir: './build_client',
       rollupOptions: {
         output: {
           // https://rollupjs.org/configuration-options/#output-manualchunks

@@ -10,6 +10,7 @@ node_modules
 coverage
 dist
 build
+build_client
 dist-ssr
 *.local
 .env

@@ -133,7 +133,7 @@
           return (
             this.id ||
             ((this.id = 'rootedQuerySelector_id_'.concat(
-                /* @__PURE__ */ new Date().getTime(),
+                new Date().getTime(),
             )),
               (n2 = true)),
             (t3 = o2.call(
@@ -4064,7 +4064,7 @@
               var e2 = 0,
               t = 'quotationtool.org', //! hack
               n3 = t.split('.'),
-              r2 = '_gd'.concat(/* @__PURE__ */ new Date().getTime());
+              r2 = '_gd'.concat(new Date().getTime());
               e2 < n3.length - 1 &&
               -1 === document.cookie.indexOf(''.concat(r2, '=').concat(r2));
 
@@ -4138,7 +4138,7 @@
                   (null !== (n3 = l2[1]) &&
                     !(0 == n3.indexOf('TRIAL')
                       ? ((n3 = new Date(n3.replace(/TRIAL/, ''))),
-                        new Date(n3) /* @__PURE__ */ < new Date() &&
+                        new Date(n3) < new Date() &&
                         ((y2 = L2), 1))
                       : new Date(n3) < new Date(A2(w2)))) ||
                   !(0 < (_2 || '').length) ||
@@ -23376,7 +23376,7 @@
                 for (a3 in (n3.append(
                   'key',
                   y2.opts.fileUploadToS3.keyStart +
-                  /* @__PURE__ */ new Date().getTime() +
+                  new Date().getTime() +
                   '-' +
                   (r3.name || 'untitled'),
                 ),
@@ -23420,7 +23420,7 @@
                   (l3 = 'PUT'))
               var c3 = y2.core.getXHR(s3, l3)
               if (y2.opts.fileUploadToAzure) {
-                var d3 = /* @__PURE__ */ new Date().toUTCString()
+                var d3 = new Date().toUTCString()
                 if (
                   !y2.opts.fileUploadToAzure.SASToken &&
                   y2.opts.fileUploadToAzure.accessKey
@@ -23872,12 +23872,12 @@
           L2 = 'https://i.froala.com/upload',
           p2 = false,
           t = false,
-          M2 = /* @__PURE__ */ new Map(),
-          N2 = /* @__PURE__ */ new Map(),
-          w2 = /* @__PURE__ */ new Map(),
-          T2 = /* @__PURE__ */ new Map(),
-          O2 = /* @__PURE__ */ new Map(),
-          _2 = /* @__PURE__ */ new Map(),
+          M2 = new Map(),
+          N2 = new Map(),
+          w2 = new Map(),
+          T2 = new Map(),
+          O2 = new Map(),
+          _2 = new Map(),
           o2 = 0,
           a2 = [],
           u2 = -1,
@@ -24364,7 +24364,7 @@
               r3.get(a3).checked = false
             I2 = []
           }
-          ; (O2 = /* @__PURE__ */ new Map()), q()
+          ; (O2 = new Map()), q()
         }
         function Q(e) {
           var t2 = x2.popups.get('filesManager.insert')
@@ -24611,7 +24611,7 @@
                 t3 = e2.toLocaleDateString(void 0, n4)
               }
               return t3 + ''
-            })(/* @__PURE__ */ new Date()),
+            })(new Date()),
             a3 = O2.get(e) ? '' : 'fr-unchecked ',
             o3 =
               "\n        <div id='fr-file-"
@@ -25037,7 +25037,7 @@
               .find('.fr-progress-bar')
               .removeClass('fr-display-block')
               .addClass('fr-none'),
-              (T2 = /* @__PURE__ */ new Map()),
+              (T2 = new Map()),
               (o2 = 0),
               r3
                 .find('.fr-command[data-cmd="filesUpload"]')
@@ -25923,7 +25923,7 @@
             (De(xe(e)) &&
               (e.name ||
                 (e.name =
-                /* @__PURE__ */ new Date().getTime() +
+                new Date().getTime() +
                   '.' +
                   (xe(e) || 'image/jpeg').replace(/image\//g, ''))),
               e.size > x2.opts.filesManagerMaxSize)
@@ -25994,7 +25994,7 @@
               for (o3 in (a3.append(
                 'key',
                 x2.opts.filesManagerUploadToS3.keyStart +
-                /* @__PURE__ */ new Date().getTime() +
+                new Date().getTime() +
                 '-' +
                 (e.name || 'untitled'),
               ),
@@ -26040,7 +26040,7 @@
                 (x2.opts.filesManagerUploadMethod = 'PUT'))
             var c3 = x2.core.getXHR(l3, x2.opts.filesManagerUploadMethod)
             if (x2.opts.filesManagerUploadToAzure) {
-              var d3 = /* @__PURE__ */ new Date().toUTCString()
+              var d3 = new Date().toUTCString()
               if (
                 !x2.opts.filesManagerUploadToAzure.SASToken &&
                 x2.opts.filesManagerUploadToAzure.accessKey
@@ -26720,7 +26720,7 @@
         function Ue(e) {
           var t2 = e.split('/').pop()
           if (t2.split('.').length < 2) {
-            var n3 = /* @__PURE__ */ new Date()
+            var n3 = new Date()
             return (
               t2 +
               '-' +
@@ -27046,7 +27046,7 @@
           return (e = e.replace(/<img /gi, '<img data-fr-image-pasted="true" '))
         }
         function nt(e) {
-          y2 /* @__PURE__ */ &&
+          y2 &&
             ((function t2() {
               return rt
             })() ||
@@ -27918,8 +27918,8 @@
                 .find('.fr-command[data-cmd="filesEmbed"]')
                 .removeClass('fr-disabled'),
               (o2 = 0),
-              (w2 = /* @__PURE__ */ new Map()),
-              (T2 = /* @__PURE__ */ new Map()),
+              (w2 = new Map()),
+              (T2 = new Map()),
               X(),
               x2.popups.hide('filesManager.insert')
           },
@@ -28238,7 +28238,7 @@
                 )
               },
                 n3 =
-                  Object.create /* @__PURE__ */ ||
+                  Object.create ||
                   (function () {
                     function n4() { }
                     return function (e3) {
@@ -33349,7 +33349,7 @@
             if (
               (r3.name ||
                 (r3.name =
-                /* @__PURE__ */ new Date().getTime() +
+                new Date().getTime() +
                   '.' +
                   (r3.type || 'image/jpeg').replace(/image\//g, '')),
                 r3.size > y2.opts.imageMaxSize)
@@ -33370,7 +33370,7 @@
                 for (a3 in (n3.append(
                   'key',
                   y2.opts.imageUploadToS3.keyStart +
-                  /* @__PURE__ */ new Date().getTime() +
+                  new Date().getTime() +
                   '-' +
                   (r3.name || 'untitled'),
                 ),
@@ -33414,7 +33414,7 @@
                   (l3 = 'PUT'))
               var c3 = y2.core.getXHR(s3, l3)
               if (y2.opts.imageUploadToAzure) {
-                var d3 = /* @__PURE__ */ new Date().toUTCString()
+                var d3 = new Date().toUTCString()
                 if (
                   !y2.opts.imageUploadToAzure.SASToken &&
                   y2.opts.imageUploadToAzure.accessKey
@@ -34173,7 +34173,7 @@
             y2.events.trigger('video.hideResizer')
         }
         function pe(e) {
-          L2 /* @__PURE__ */ &&
+          L2 &&
             ((function t2() {
               return ue
             })() ||
@@ -41379,7 +41379,7 @@
           T2.opts.keepTextFormatOnTable &&
           (t2 = u2(
             (function s3(e3) {
-              var t3 = /* @__PURE__ */ new Set(),
+              var t3 = new Set(),
                 n3 = e3.textContent,
                 r3 = 0,
                 a3 = [e3.firstChild]
@@ -45201,7 +45201,7 @@
               for (r3 in (t2.append(
                 'key',
                 E2.opts.videoUploadToS3.keyStart +
-                  /* @__PURE__ */ new Date().getTime() +
+                  new Date().getTime() +
                 '-' +
                 (n3.name || 'untitled'),
               ),
@@ -45245,7 +45245,7 @@
                 (s3 = 'PUT'))
             var l3 = E2.core.getXHR(i3, s3)
             if (E2.opts.videoUploadToAzure) {
-              var c3 = /* @__PURE__ */ new Date().toUTCString()
+              var c3 = new Date().toUTCString()
               if (
                 !E2.opts.videoUploadToAzure.SASToken &&
                 E2.opts.videoUploadToAzure.accessKey
