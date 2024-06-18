@@ -1,6 +1,6 @@
-import styled from '@emotion/styled'
 import { dispatch, useSelectorTyped } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
+import styled from '@emotion/styled'
 import { Fade as BurgerIcon } from 'hamburger-react'
 import { navSlice } from '../../../navSlice'
 // https://hamburger-react.netlify.app/

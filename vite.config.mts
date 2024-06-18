@@ -4,7 +4,12 @@ import basicSsl from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react'
 import { defineConfig, loadEnv } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
-import { portServer, hostServer } from './server/utils/env'
+import {
+  portServer,
+  hostServer,
+  portClient,
+  hostClient,
+} from './server/utils/env'
 
 // https://vitejs.dev/config/
 
@@ -12,16 +17,20 @@ export default defineConfig(({ command, mode }) => {
   // Load env file based on `mode` in the current working directory.
   // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
   const env = loadEnv(mode, process.cwd(), '')
-  const isDev = env.NODE_ENV === 'development'
-  const isProd = env.NODE_ENV !== 'development'
-  // const host = 'http://localhost'
-  const portClient = 3005
 
   return {
     server: {
-      host: isProd ? 'localhost' : 'local.quotation.app',
+      host: hostClient,
       port: portClient,
       https: true, //* type "thisisunsafe" if chrome says that connection is not private
+      proxy: {
+        '/api': `${hostServer}:${portServer}/`,
+      },
+    },
+    preview: {
+      host: hostClient,
+      port: portClient,
+      https: true,
       proxy: {
         '/api': `${hostServer}:${portServer}/`,
       },

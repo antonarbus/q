@@ -1,7 +1,7 @@
 import { dispatch } from '@lib_instances/store'
+import type { JwtPayloadExtended } from 'server/services/jwt'
 import { jwtDecode } from 'jwt-decode'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
-import type { JwtPayloadExtended } from 'server/services/jwt'
 import { useGetAccessTokenQuery, userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 import { loadingTableOverlaySignal } from '@shared/components/LoadingTableOverlay'

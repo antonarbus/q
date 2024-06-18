@@ -1,5 +1,5 @@
-import { type DragEndEvent, type DragStartEvent } from '@dnd-kit/core'
 import { dispatch } from '@lib_instances/store'
+import { type DragEndEvent, type DragStartEvent } from '@dnd-kit/core'
 import { arrayMoveImmutable } from 'array-move'
 import { getBoqRowsFromStore, quotationSlice } from '@entities/quotation'
 
