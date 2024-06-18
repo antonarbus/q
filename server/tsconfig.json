@@ -1,6 +1,5 @@
 // https://www.typescriptlang.org/tsconfig#target
 {
-  "extends": "../tsconfig.json",
   "compilerOptions": {
     "target": "ESNext",
     "outDir": "../build_server",
@@ -11,7 +10,6 @@
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
     "moduleResolution": "node",
-    "include": ["./**/*.ts"],
     "noEmit": false,
     "noEmitOnError": false
   },
