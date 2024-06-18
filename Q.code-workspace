@@ -5,32 +5,32 @@
       "path": ".",
     },
     {
-      "name": "server ↗",
-      "path": "server",
+      "name": "back ↗",
+      "path": "back",
     },
     {
       "name": "app ↗",
-      "path": "client/app",
+      "path": "front/app",
     },
     {
       "name": "pages ↗",
-      "path": "client/pages",
+      "path": "front/pages",
     },
     {
       "name": "widgets ↗",
-      "path": "client/widgets",
+      "path": "front/widgets",
     },
     {
       "name": "features ↗",
-      "path": "client/features",
+      "path": "front/features",
     },
     {
       "name": "entities ↗",
-      "path": "client/entities",
+      "path": "front/entities",
     },
     {
       "name": "shared ↗",
-      "path": "client/shared",
+      "path": "front/shared",
     },
   ],
   "settings": {},
