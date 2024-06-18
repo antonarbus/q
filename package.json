@@ -4,10 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "NODE_ENV=development concurrently \"npm run back\" \"npx wait-on http://localhost:3006 && npm run front\"",
-    "stop": "npx kill-port 3005 3006",
+    "start": "NODE_ENV=development concurrently \"npm run back\" \"wait-on http://localhost:3006 && npm run front\"",
+    "stop": "kill-port 3005 3006",
     "front": "vite",
-    "back": "npx tsx watch server/index.ts",
+    "back": "tsx watch server/index.ts",
     "build_front": "tsc && rm -r ./build/client && vite build",
     "build_back": "tsc && rm -r ./build/server && rollup -c rollup.config.js",
     "build_all": "tsc && rm -r ./build && vite build && rollup -c rollup.config.js",
@@ -74,8 +74,7 @@
     "react-toastify": "^10.0.5",
     "react-use": "^17.5.0",
     "round-to": "^6.0.0",
-    "vite-plugin-babel-macros": "^1.0.6",
-    "wait-on": "^7.2.0"
+    "vite-plugin-babel-macros": "^1.0.6"
   },
   "devDependencies": {
     "@conarti/eslint-plugin-feature-sliced": "^1.0.5",
@@ -123,12 +122,14 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
     "jsdom": "^24.1.0",
+    "kill-port": "^2.0.1",
     "prettier": "3.3.2",
     "rollup": "^4.18.0",
-    "tsx": "^4.15.5",
+    "tsx": "^4.15.6",
     "typescript": "^5.4.5",
     "vite": "^5.3.1",
     "vite-tsconfig-paths": "*",
-    "vitest": "^1.6.0"
+    "vitest": "^1.6.0",
+    "wait-on": "^7.2.0"
   }
 }
