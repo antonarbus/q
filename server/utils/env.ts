@@ -4,7 +4,10 @@ export const isDev = process.env.NODE_ENV === 'development'
 export const isProd = process.env.NODE_ENV !== 'development'
 export const env = isDev ? 'dev' : 'prod'
 
-export const portServer = isDev ? 3006 : 3333
+export const portClient = isDev ? 3005 : 3006
+export const hostClient = isDev ? 'local.quotation.app' : 'localhost'
+
+export const portServer = isDev ? 3006 : 4006
 export const hostServer = 'http://localhost'
 
 export const domainClient = isProd

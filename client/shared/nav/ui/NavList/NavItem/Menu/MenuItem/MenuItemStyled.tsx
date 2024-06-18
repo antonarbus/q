@@ -1,5 +1,5 @@
-import styled from '@emotion/styled'
 import { theme } from '@lib_instances/theme'
+import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
 
 type Props = {
