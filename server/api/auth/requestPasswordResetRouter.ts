@@ -8,9 +8,9 @@ import {
   validationResult,
 } from 'express-validator'
 import { type User } from '@entities/user'
-import { httpStatus } from '@shared/consts/httpStatus'
 import { route } from '@shared/consts/route'
 import { nanoid } from '@shared/lib/nanoid'
+import { httpStatus } from '../../consts/httpStatus'
 import { UserModel } from '../../db/models/userModel'
 import type { Next, ReqWithBody, ResWithBody } from '../../types'
 

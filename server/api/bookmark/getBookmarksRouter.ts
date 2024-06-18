@@ -4,7 +4,7 @@ import { getEmailFromRefreshTokenOrThrowUnauthorized } from '@server/utils/getEm
 import { Router } from 'express'
 import { type Item } from '@entities/bookmark'
 import { type ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
-import { httpStatus } from '@shared/consts/httpStatus'
+import { httpStatus } from '../../consts/httpStatus'
 import { type ResWithBody, type Next, type Req } from '../../types'
 
 export type ResBody = {

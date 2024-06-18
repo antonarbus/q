@@ -1,8 +1,7 @@
-import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
 import { apiUrl } from 'server/consts/apiUrl'
 import { headerName } from 'server/consts/headerName'
+import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
 import { accessTokenSignal } from '../../auth/accessTokenSignal'
-import { httpStatus } from '../../consts/httpStatus'
 
 export const {
   promise: initAccessTokenFetchingPromise,
@@ -31,7 +30,7 @@ axiosWithAuth.interceptors.response.use(
     // most likely access token was expired
     const isUnauthorizedAfterCheckingAccessToken =
       error instanceof AxiosError &&
-      error.response?.status === httpStatus.unauthorized_401 &&
+      error.response?.status === 401 &&
       !(error.config as ExtendedAxiosRequestConfig)._isRetry
 
     if (isUnauthorizedAfterCheckingAccessToken) {
@@ -51,8 +50,7 @@ axiosWithAuth.interceptors.response.use(
         return await axiosWithAuth.request(originalRequestConfig)
       } catch (err: unknown) {
         const isUnauthorized =
-          err instanceof AxiosError &&
-          err.response?.status === httpStatus.unauthorized_401
+          err instanceof AxiosError && err.response?.status === 401
 
         if (isUnauthorized) {
           // still unauthorized after attempt to refresh the access token

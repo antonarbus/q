@@ -5,7 +5,7 @@ import { Router } from 'express'
 import { type FlattenMaps } from 'mongoose'
 import { type Quotation } from '@entities/quotation'
 import { type ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
-import { httpStatus } from '@shared/consts/httpStatus'
+import { httpStatus } from '../../consts/httpStatus'
 import { type Pretty } from '@shared/types/Pretty'
 import type { ResWithBody, Next, Req } from '../../types'
 

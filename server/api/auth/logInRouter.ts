@@ -3,8 +3,8 @@ import { domainClient } from '@server/utils/env'
 import bcrypt from 'bcryptjs'
 import express from 'express'
 import { type User } from '@entities/user'
-import { httpStatus } from '@shared/consts/httpStatus'
 import { route } from '@shared/consts/route'
+import { httpStatus } from '../../consts/httpStatus'
 import { UserModel } from '../../db/models/userModel'
 import {
   createAccessToken,
