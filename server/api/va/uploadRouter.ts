@@ -3,7 +3,7 @@ import { getEmailFromRefreshTokenOrThrowUnauthorized } from '@server/utils/getEm
 import express from 'express'
 import multer from 'multer'
 import { type ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
-import { httpStatus } from '@shared/consts/httpStatus'
+import { httpStatus } from '../../consts/httpStatus'
 import type { Next, Req, ResWithBody } from '../../types'
 
 export type ResBody = {

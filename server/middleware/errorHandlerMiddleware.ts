@@ -2,7 +2,7 @@ import {
   type ErrorMessageCommon,
   errorMessageCommon,
 } from '@shared/consts/errorMessageCommon'
-import { httpStatus } from '@shared/consts/httpStatus'
+import { httpStatus } from '../../consts/httpStatus'
 import type { Next, Req, ResWithBody } from '../types'
 
 export type ErrorHandlerBody = {

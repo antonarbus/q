@@ -1,7 +1,7 @@
 import express from 'express'
 import { type User } from '@entities/user'
 import { type ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
-import { httpStatus } from '@shared/consts/httpStatus'
+import { httpStatus } from '../../consts/httpStatus'
 import { UserModel } from '../../db/models/userModel'
 import {
   createAccessToken,

@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { httpStatus } from '@shared/consts/httpStatus'
+import { httpStatus } from '../../consts/httpStatus'
 import type { Next, Req, ResWithBody } from '../../types'
 
 export type ResBody = {

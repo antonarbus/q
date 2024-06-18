@@ -4,7 +4,7 @@ import { getEmailFromRefreshToken } from '@server/utils/getEmailFromRefreshToken
 import { removeSensitiveDataFromQuotation } from '@server/utils/removeSensitiveDataFromQuotation'
 import { Router } from 'express'
 import { type Quotation } from '@entities/quotation'
-import { httpStatus } from '@shared/consts/httpStatus'
+import { httpStatus } from '../../consts/httpStatus'
 import { type ResWithBody, type ReqWithBody, type Next } from '../../types'
 
 export type ReqBody = {

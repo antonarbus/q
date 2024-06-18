@@ -6,7 +6,7 @@ import { Router } from 'express'
 import { type FlattenMaps } from 'mongoose'
 import { type Quotation } from '@entities/quotation/types'
 import { type ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
-import { httpStatus } from '@shared/consts/httpStatus'
+import { httpStatus } from '../../consts/httpStatus'
 import { type ResWithBody, type ReqWithBody, type Next } from '../../types'
 
 export type ReqBody = {
@@ -15,13 +15,13 @@ export type ReqBody = {
 
 export type ResBody = {
   message:
-  | ErrorMessageCommon
-  | 'not saved'
-  | 'saved'
-  | 'updated'
-  | 'id is not provided'
-  | 'name is not provided'
-  | 'category is not provided'
+    | ErrorMessageCommon
+    | 'not saved'
+    | 'saved'
+    | 'updated'
+    | 'id is not provided'
+    | 'name is not provided'
+    | 'category is not provided'
   quotation?: FlattenMaps<Quotation>
 }
 
