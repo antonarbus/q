@@ -9,7 +9,7 @@
     "front": "vite",
     "back": "npx tsx watch server/index.ts",
     "build_front": "tsc && vite build",
-    "build_back": "cp -r ./server ./build  && cd ./server && tsc && cd -",
+    "build_back": "cd ./server && tsc && cd -",
     "build_all": "npm run build_front && npm run build_back",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx",
