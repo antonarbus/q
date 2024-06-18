@@ -4,6 +4,7 @@ import basicSsl from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react'
 import { defineConfig, loadEnv } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
+import { portServer, hostServer } from './server/utils/env'
 
 // https://vitejs.dev/config/
 
@@ -13,9 +14,8 @@ export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   const isDev = env.NODE_ENV === 'development'
   const isProd = env.NODE_ENV !== 'development'
-  const host = 'http://localhost'
+  // const host = 'http://localhost'
   const portClient = 3005
-  const portServer = 3006
 
   return {
     server: {
@@ -23,7 +23,7 @@ export default defineConfig(({ command, mode }) => {
       port: portClient,
       https: true, //* type "thisisunsafe" if chrome says that connection is not private
       proxy: {
-        '/api': `${host}:${portServer}/`,
+        '/api': `${hostServer}:${portServer}/`,
       },
     },
     worker: {

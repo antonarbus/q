@@ -29,7 +29,7 @@ import { apiUrl } from './consts/apiUrl'
 import { connectToDb } from './db/connectToDb'
 import { errorHandlerMiddleware } from './middleware/errorHandlerMiddleware'
 import type { Req, Res } from './types'
-import { portServer } from './utils/env'
+import { env, hostServer, portServer } from './utils/env'
 
 const app = express()
 void connectToDb()
@@ -73,5 +73,5 @@ app.use(apiUrl.getFilesStats, getFilesStatsRouter)
 app.use(errorHandlerMiddleware)
 
 app.listen(portServer, () => {
-  console.info(`🚀 server started at port ${portServer}`)
+  console.info(`🚀 ${env} server started at ${hostServer}:${portServer}`)
 })
