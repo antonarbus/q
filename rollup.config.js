@@ -1,9 +1,9 @@
 import typescript from '@rollup/plugin-typescript'
 
 export default {
-  input: './server/index.ts',
+  input: './back/index.ts',
   output: {
-    dir: 'build/server',
+    dir: 'build/back',
     format: 'es',
   },
   plugins: [typescript()],

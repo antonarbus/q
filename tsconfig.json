@@ -25,29 +25,29 @@
     // Base directory to resolve non-relative module names.
     "baseUrl": ".",
     "paths": {
-      "@server/*": [
-        "./server/*"
+      "@back/*": [
+        "./back/*"
       ],
       "@app/*": [
-        "./client/app/*"
+        "./front/app/*"
       ],
       "@pages/*": [
-        "./client/pages/*"
+        "./front/pages/*"
       ],
       "@widgets/*": [
-        "./client/widgets/*"
+        "./front/widgets/*"
       ],
       "@features/*": [
-        "./client/features/*"
+        "./front/features/*"
       ],
       "@entities/*": [
-        "./client/entities/*"
+        "./front/entities/*"
       ],
       "@shared/*": [
-        "./client/shared/*"
+        "./front/shared/*"
       ],
       "@lib_instances/*": [
-        "client/lib_instances/*"
+        "front/lib_instances/*"
       ]
     },
     "types": [
@@ -61,11 +61,10 @@
   // folders and files for providing you with file search, code completion etc...
   "include": [
     "index.tsx",
-    "client",
-    "server",
+    "front",
+    "back",
     "utils",
     "index.tsx",
-    "client/entities/items/ui/froala/froalaPkgd.js",
     "rollup.config.js"
   ],
   "exclude": [

@@ -9,10 +9,14 @@
       "request": "launch",
       "name": "Debug",
       "console": "integratedTerminal",
-      "skipFiles": ["<node_internals>/**"],
-      "outFiles": ["${workspaceFolder}/**/*.js"],
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "outFiles": [
+        "${workspaceFolder}/**/*.js"
+      ],
       "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/tsx",
-      "program": "${workspaceFolder}/server/index.ts"
+      "program": "${workspaceFolder}/back/index.ts"
     }
   ]
 }

@@ -1,0 +1,48 @@
+import {
+  DndContext,
+  PointerSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core'
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
+import { useSelectorTyped } from '@lib_instances/store'
+import { onBoqRowDragEnd, onBoqRowDragStart } from '@features/items/drag'
+import {
+  boqRowsShapeEqualityFn,
+  selectBoqRows,
+  useItem,
+} from '@entities/quotation'
+
+type Props = {
+  children: React.ReactNode
+}
+
+export const BoqRowsSortableContext = ({ children }: Props): JSX.Element => {
+  const { itemIndex } = useItem()
+
+  const boqRows = useSelectorTyped(
+    selectBoqRows({ itemIndex }),
+    boqRowsShapeEqualityFn,
+  )
+  const boqRowIds = boqRows.map((boqRow) => boqRow.id)
+
+  const sensors = useSensors(useSensor(PointerSensor))
+
+  return (
+    <DndContext
+      sensors={sensors}
+      autoScroll={{ layoutShiftCompensation: false }}
+      collisionDetection={closestCenter}
+      onDragStart={onBoqRowDragStart({ itemIndex })}
+      onDragEnd={onBoqRowDragEnd({ itemIndex, boqRowIds })}
+    >
+      <SortableContext
+        items={boqRowIds}
+        strategy={verticalListSortingStrategy}
+      >
+        {children}
+      </SortableContext>
+    </DndContext>
+  )
+}
