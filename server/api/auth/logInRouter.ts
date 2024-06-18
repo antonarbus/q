@@ -1,11 +1,9 @@
-import { sendEmail } from '@server/services/email'
-import { domainClient } from '@server/utils/env'
 import bcrypt from 'bcryptjs'
 import express from 'express'
 import { type User } from '@entities/user'
-import { route } from '@shared/consts/route'
 import { httpStatus } from '../../consts/httpStatus'
 import { UserModel } from '../../db/models/userModel'
+import { sendEmail } from '../../services/email'
 import {
   createAccessToken,
   createRefreshToken,
@@ -14,6 +12,7 @@ import {
   verifyRefreshToken,
 } from '../../services/jwt'
 import type { Next, ReqWithBody, ResWithBody } from '../../types'
+import { domainClient } from '../../utils/env'
 
 export type ReqBody = {
   email: User['email']
@@ -84,9 +83,9 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
         <p>
           <a
             clicktracking="off"
-            href="${domainClient}/${route.activate}/${user.activationKey}"
+            href="${domainClient}/activate/${user.activationKey}"
           >
-            ${domainClient}/${route.activate}/${user.activationKey}
+            ${domainClient}/activate/${user.activationKey}
           </a>
         </p>
       `,

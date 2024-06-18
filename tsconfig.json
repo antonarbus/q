@@ -4,7 +4,11 @@
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": false,
@@ -21,16 +25,36 @@
     // Base directory to resolve non-relative module names.
     "baseUrl": ".",
     "paths": {
-      "@server/*": ["./server/*"],
-      "@app/*": ["./client/app/*"],
-      "@pages/*": ["./client/pages/*"],
-      "@widgets/*": ["./client/widgets/*"],
-      "@features/*": ["./client/features/*"],
-      "@entities/*": ["./client/entities/*"],
-      "@shared/*": ["./client/shared/*"],
-      "@lib_instances/*": ["client/lib_instances/*"]
+      "@server/*": [
+        "./server/*"
+      ],
+      "@app/*": [
+        "./client/app/*"
+      ],
+      "@pages/*": [
+        "./client/pages/*"
+      ],
+      "@widgets/*": [
+        "./client/widgets/*"
+      ],
+      "@features/*": [
+        "./client/features/*"
+      ],
+      "@entities/*": [
+        "./client/entities/*"
+      ],
+      "@shared/*": [
+        "./client/shared/*"
+      ],
+      "@lib_instances/*": [
+        "client/lib_instances/*"
+      ]
     },
-    "types": ["vite/client", "vitest/globals", "@emotion/react/types/css-prop"],
+    "types": [
+      "vite/client",
+      "vitest/globals",
+      "@emotion/react/types/css-prop"
+    ],
     "noUncheckedIndexedAccess": true,
     "strictNullChecks": true
   },
@@ -41,9 +65,14 @@
     "server",
     "utils",
     "index.tsx",
-    "client/entities/items/ui/froala/froalaPkgd.js"
+    "client/entities/items/ui/froala/froalaPkgd.js",
+    "rollup.config.js"
   ],
-  "exclude": ["node_modules", "**/node_modules", "build"],
+  "exclude": [
+    "node_modules",
+    "**/node_modules",
+    "build"
+  ],
   "references": [
     {
       "path": "./tsconfig.node.json"

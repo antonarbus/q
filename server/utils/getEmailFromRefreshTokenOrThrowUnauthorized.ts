@@ -1,6 +1,6 @@
-import { verifyRefreshToken } from '@server/services/jwt'
 import { type ReqWithBody } from '@server/types'
 import { errorMessageCommon } from '@shared/consts/errorMessageCommon'
+import { verifyRefreshToken } from '../services/jwt'
 
 export const getEmailFromRefreshTokenOrThrowUnauthorized = (
   req: ReqWithBody,

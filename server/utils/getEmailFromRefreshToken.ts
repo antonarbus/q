@@ -1,5 +1,5 @@
-import { verifyRefreshToken } from '@server/services/jwt'
 import { type ReqWithBody } from '@server/types'
+import { verifyRefreshToken } from '../services/jwt'
 
 export const getEmailFromRefreshToken = (
   req: ReqWithBody,
