@@ -11,7 +11,17 @@
     "allowJs": true,
     "moduleResolution": "node",
     "noEmit": false,
-    "noEmitOnError": false
+    "noEmitOnError": false,
+    "baseUrl": ".",
+    "paths": {
+      "@server/*": ["../server/*"],
+      "@app/*": ["../client/app/*"],
+      "@pages/*": ["../client/pages/*"],
+      "@widgets/*": ["../client/widgets/*"],
+      "@features/*": ["../client/features/*"],
+      "@entities/*": ["../client/entities/*"],
+      "@shared/*": ["../client/shared/*"],
+    },
   },
   "include": ["./**/*.ts"],
   "exclude": ["node_modules", "**/node_modules", "../client"],
