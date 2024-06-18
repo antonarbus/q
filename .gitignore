@@ -11,6 +11,7 @@ coverage
 dist
 build
 build_client
+build_server
 dist-ssr
 *.local
 .env
