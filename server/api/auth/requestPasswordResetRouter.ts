@@ -1,5 +1,3 @@
-import { sendEmail } from '@server/services/email'
-import { domainClient } from '@server/utils/env'
 import express from 'express'
 import {
   type Result,
@@ -8,11 +6,12 @@ import {
   validationResult,
 } from 'express-validator'
 import { type User } from '@entities/user'
-import { route } from '@shared/consts/route'
-import { nanoid } from '@shared/lib/nanoid'
 import { httpStatus } from '../../consts/httpStatus'
 import { UserModel } from '../../db/models/userModel'
+import { nanoid } from '../../lib/nanoid'
+import { sendEmail } from '../../services/email'
 import type { Next, ReqWithBody, ResWithBody } from '../../types'
+import { domainClient } from '../../utils/env'
 
 export type ReqBody = {
   email: User['email']
@@ -87,9 +86,9 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
         <p>
           <a
             clicktracking="off"
-            href="${domainClient}/${route.resetPassword}/${email}/${resetPasswordKey}"
+            href="${domainClient}/reset-password/${email}/${resetPasswordKey}"
           >
-            ${domainClient}/${route.resetPassword}/${email}/${resetPasswordKey}
+            ${domainClient}/reset-password/${email}/${resetPasswordKey}
           </a>
         </p>
       `,

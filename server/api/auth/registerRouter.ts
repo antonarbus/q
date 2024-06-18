@@ -1,5 +1,3 @@
-import { sendEmail } from '@server/services/email'
-import { domainClient } from '@server/utils/env'
 import bcrypt from 'bcryptjs'
 import express from 'express'
 import {
@@ -9,11 +7,12 @@ import {
   validationResult,
 } from 'express-validator'
 import { type User } from '@entities/user'
-import { route } from '@shared/consts/route'
-import { nanoid } from '@shared/lib/nanoid'
 import { httpStatus } from '../../consts/httpStatus'
 import { UserModel } from '../../db/models/userModel'
+import { nanoid } from '../../lib/nanoid'
+import { sendEmail } from '../../services/email'
 import type { Next, ReqWithBody, ResWithBody } from '../../types'
+import { domainClient } from '../../utils/env'
 
 export type ReqBody = {
   email: User['email']
@@ -86,9 +85,9 @@ const register: RouterHandler = async (req, res, next) => {
         <p>
           <a
             clicktracking="off"
-            href="${domainClient}/${route.activate}/${activationKey}"
+            href="${domainClient}/activate/${activationKey}"
           >
-            ${domainClient}/${route.activate}/${activationKey}
+            ${domainClient}/activate/${activationKey}
           </a>
         </p>
       `,

@@ -1,8 +1,3 @@
-import {
-  createAccessToken,
-  createRefreshToken,
-  thirtyDaysInSec,
-} from '@server/services/jwt'
 import bcrypt from 'bcryptjs'
 import express from 'express'
 import {
@@ -14,6 +9,11 @@ import {
 import { type User } from '@entities/user'
 import { httpStatus } from '../../consts/httpStatus'
 import { UserModel } from '../../db/models/userModel'
+import {
+  createAccessToken,
+  createRefreshToken,
+  thirtyDaysInSec,
+} from '../../services/jwt'
 import type { Next, ReqWithBody, ResWithBody } from '../../types'
 
 export type ReqBody = {

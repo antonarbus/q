@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose'
 import { type Quotation } from '@entities/quotation/types'
-// import { nanoid } from '@shared/lib/nanoid'
+// import { nanoid } from '../../lib/nanoid'
 
 // export type QuotationModelType = Omit<Quotation, 'items'>
 
@@ -39,7 +39,7 @@ const quotationSchema = new Schema<Quotation>({
   updatedAt: Date,
   openedAt: Date,
   sharedWith: {
-    type: [String],  //* if empty array, not shared, if '*' inside - with everyone
+    type: [String], //* if empty array, not shared, if '*' inside - with everyone
     default: () => [],
   },
   from: {

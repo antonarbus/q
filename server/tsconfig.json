@@ -2,7 +2,7 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "outDir": "../build_server",
+    "outDir": "../build/server",
     "module": "ESNext",
     "strict": true,
     "esModuleInterop": true,
@@ -12,17 +12,37 @@
     "moduleResolution": "node",
     "noEmit": false,
     "noEmitOnError": false,
-    "baseUrl": ".",
+    // "baseUrl": ".",
     "paths": {
-      "@server/*": ["../server/*"],
-      "@app/*": ["../client/app/*"],
-      "@pages/*": ["../client/pages/*"],
-      "@widgets/*": ["../client/widgets/*"],
-      "@features/*": ["../client/features/*"],
-      "@entities/*": ["../client/entities/*"],
-      "@shared/*": ["../client/shared/*"],
+      "@server/*": [
+        "../server/*"
+      ],
+      "@app/*": [
+        "../client/app/*"
+      ],
+      "@pages/*": [
+        "../client/pages/*"
+      ],
+      "@widgets/*": [
+        "../client/widgets/*"
+      ],
+      "@features/*": [
+        "../client/features/*"
+      ],
+      "@entities/*": [
+        "../client/entities/*"
+      ],
+      "@shared/*": [
+        "../client/shared/*"
+      ],
     },
   },
-  "include": ["./**/*.ts"],
-  "exclude": ["node_modules", "**/node_modules", "**/client"],
+  "include": [
+    "./**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/node_modules",
+    "**/client"
+  ],
 }
