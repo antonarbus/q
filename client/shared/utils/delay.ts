@@ -4,6 +4,7 @@ export const syncDelay = (ms = 1000): void => {
 }
 
 export const asyncDelay = async (ms = 1000): Promise<string> => {
+  // @ts-expect-error: Promise.withResolvers is too new
   const { promise, resolve } = Promise.withResolvers<string>()
 
   setTimeout(() => {
