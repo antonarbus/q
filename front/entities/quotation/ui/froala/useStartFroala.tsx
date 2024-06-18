@@ -1,7 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import './froalaPkgd.js'
-import './froalaPkgd.css'
 
 import type { MouseEvent } from 'react'
 import { useEffectOnce } from 'react-use'
