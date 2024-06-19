@@ -11,7 +11,7 @@ import { UserModel } from '../../db/models/userModel'
 import { nanoid } from '../../lib/nanoid'
 import { sendEmail } from '../../services/email'
 import type { Next, ReqWithBody, ResWithBody } from '../../types'
-import { domainClient } from '../../utils/env'
+import { domain } from '../../utils/env'
 
 export type ReqBody = {
   email: User['email']
@@ -86,9 +86,9 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
         <p>
           <a
             clicktracking="off"
-            href="${domainClient}/reset-password/${email}/${resetPasswordKey}"
+            href="${domain}/reset-password/${email}/${resetPasswordKey}"
           >
-            ${domainClient}/reset-password/${email}/${resetPasswordKey}
+            ${domain}/reset-password/${email}/${resetPasswordKey}
           </a>
         </p>
       `,

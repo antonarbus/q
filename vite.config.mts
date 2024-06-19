@@ -72,14 +72,14 @@ export default defineConfig(({ command, mode }) => {
       globals: true,
       environment: 'jsdom',
       setupFiles: './test-setup.ts',
-      includeSource: ['client/**/*.{js,ts,jsx,tsx}'],
+      includeSource: ['front/**/*.{js,ts,jsx,tsx}'],
       coverage: {
         all: true,
-        src: ['client/'],
+        src: ['front/'],
       },
     },
     build: {
-      outDir: './build/client',
+      outDir: './build/front',
       rollupOptions: {
         output: {
           // https://rollupjs.org/configuration-options/#output-manualchunks

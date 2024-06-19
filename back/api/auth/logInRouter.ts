@@ -12,7 +12,7 @@ import {
   verifyRefreshToken,
 } from '../../services/jwt'
 import type { Next, ReqWithBody, ResWithBody } from '../../types'
-import { domainClient } from '../../utils/env'
+import { domain } from '../../utils/env'
 
 export type ReqBody = {
   email: User['email']
@@ -83,9 +83,9 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
         <p>
           <a
             clicktracking="off"
-            href="${domainClient}/activate/${user.activationKey}"
+            href="${domain}/activate/${user.activationKey}"
           >
-            ${domainClient}/activate/${user.activationKey}
+            ${domain}/activate/${user.activationKey}
           </a>
         </p>
       `,

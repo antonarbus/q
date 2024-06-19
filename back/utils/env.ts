@@ -10,6 +10,6 @@ export const hostFront = isDev ? 'local.quotation.app' : 'localhost'
 export const portBack = isDev ? 3006 : 4006
 export const hostBack = 'http://localhost'
 
-export const domainClient = isProd
+export const domain = isProd
   ? 'https://quotation.app'
   : 'https://local.quotation.app:3005'
