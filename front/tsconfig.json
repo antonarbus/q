@@ -1,4 +1,3 @@
-// It's a configuration file to assist your text editor
 // https://www.typescriptlang.org/tsconfig
 {
   "compilerOptions": {
@@ -26,28 +25,28 @@
     "baseUrl": ".",
     "paths": {
       "@back/*": [
-        "./back/*"
+        "../back/*"
       ],
       "@app/*": [
-        "./front/app/*"
+        "./app/*"
       ],
       "@pages/*": [
-        "./front/pages/*"
+        "./pages/*"
       ],
       "@widgets/*": [
-        "./front/widgets/*"
+        "./widgets/*"
       ],
       "@features/*": [
-        "./front/features/*"
+        "./features/*"
       ],
       "@entities/*": [
-        "./front/entities/*"
+        "./entities/*"
       ],
       "@shared/*": [
-        "./front/shared/*"
+        "./shared/*"
       ],
       "@lib_instances/*": [
-        "front/lib_instances/*"
+        "./lib_instances/*"
       ]
     },
     "types": [
@@ -59,17 +58,18 @@
     "strictNullChecks": true
   },
   // folders and files for providing you with file search, code completion etc...
-  "include": [
-    "index.tsx",
-    "front",
-    "back",
-    "utils",
-    "index.tsx",
-    "rollup.config.js"
-  ],
+  // "include": [
+  //   // "index.tsx",
+  //   // "./",
+  //   // "back",
+  //   // "utils",
+  //   // "front/index.tsx",
+  //   // "rollup.config.js"
+  // ],
   "exclude": [
     "node_modules",
     "**/node_modules",
-    "build"
+    // "vite.config.mts",
+    // "build"
   ]
 }

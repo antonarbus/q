@@ -6,7 +6,6 @@ import { accessTokenSignal } from '../../auth/accessTokenSignal'
 export const {
   promise: initAccessTokenFetchingPromise,
   resolve: resolveInitAccessTokenFetching,
-  // @ts-expect-error: Promise.withResolvers is too new
 } = Promise.withResolvers<'fetched' | 'failed'>()
 
 export const axiosWithAuth = axios.create({ withCredentials: true })
