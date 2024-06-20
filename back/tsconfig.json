@@ -10,9 +10,11 @@
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
     "moduleResolution": "node",
-    "noEmit": false,
+    "noEmit": true,
     "noEmitOnError": false,
-    // "baseUrl": ".",
+    "baseUrl": ".",
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
     "paths": {
       "@back/*": [
         "./*"
@@ -35,14 +37,26 @@
       "@shared/*": [
         "../front/shared/*"
       ],
+      "@lib_instances/*": [
+        "../front/lib_instances/*"
+      ]
     },
+    "types": [
+      "vite/client",
+      "vitest/globals",
+      "@emotion/react/types/css-prop"
+    ],
   },
+  // "include": [
+  //   "index.js"
+  // ],
   "include": [
-    "./**/*.ts"
+    "**/*.ts",
+    "../front/shared/lib/tanstack_query/defaultError.d.ts",
+    // "../front/**/*.ts",
   ],
   "exclude": [
     "node_modules",
     "**/node_modules",
-    "**/front"
   ],
 }
