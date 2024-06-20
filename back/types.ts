@@ -1,5 +1,5 @@
-import type { Query } from 'express-serve-static-core'
 import type { Request, Response, NextFunction } from 'express'
+import type { Query } from 'express-serve-static-core'
 
 export type Req = Request
 export type Res = Response

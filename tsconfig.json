@@ -71,10 +71,5 @@
     "node_modules",
     "**/node_modules",
     "build"
-  ],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
   ]
 }
