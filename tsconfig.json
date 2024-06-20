@@ -1,0 +1,56 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "useDefineForClassFields": true,
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noUncheckedIndexedAccess": true,
+    "strictNullChecks": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
+    "types": [
+      "vite/client",
+      "vitest/globals",
+      "@emotion/react/types/css-prop"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@back/*": [
+        "./back/*"
+      ],
+      "@app/*": [
+        "./front/app/*"
+      ],
+      "@pages/*": [
+        "./front/pages/*"
+      ],
+      "@widgets/*": [
+        "./front/widgets/*"
+      ],
+      "@features/*": [
+        "./front/features/*"
+      ],
+      "@entities/*": [
+        "./front/entities/*"
+      ],
+      "@shared/*": [
+        "./front/shared/*"
+      ],
+      "@lib_instances/*": [
+        "./front/lib_instances/*"
+      ]
+    },
+  },
+}
