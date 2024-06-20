@@ -34,6 +34,6 @@ function signalsOn(): void {
   })
 }
 
-signalsOn()
+// signalsOn()
 
 window.signalsOn = signalsOn
