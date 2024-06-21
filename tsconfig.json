@@ -4,11 +4,7 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "useDefineForClassFields": true,
-    "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ESNext"
-    ],
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "noEmit": true,
     "allowJs": true,
     "skipLibCheck": true,
@@ -21,37 +17,17 @@
     "strictNullChecks": true,
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
-    "types": [
-      "vite/client",
-      "vitest/globals",
-      "@emotion/react/types/css-prop"
-    ],
+    "types": ["vite/client", "vitest/globals", "@emotion/react/types/css-prop"],
     "baseUrl": ".",
     "paths": {
-      "@back/*": [
-        "./back/*"
-      ],
-      "@app/*": [
-        "./front/app/*"
-      ],
-      "@pages/*": [
-        "./front/pages/*"
-      ],
-      "@widgets/*": [
-        "./front/widgets/*"
-      ],
-      "@features/*": [
-        "./front/features/*"
-      ],
-      "@entities/*": [
-        "./front/entities/*"
-      ],
-      "@shared/*": [
-        "./front/shared/*"
-      ],
-      "@lib_instances/*": [
-        "./front/lib_instances/*"
-      ]
+      "@back/*": ["./back/*"],
+      "@app/*": ["./front/app/*"],
+      "@pages/*": ["./front/pages/*"],
+      "@widgets/*": ["./front/widgets/*"],
+      "@features/*": ["./front/features/*"],
+      "@entities/*": ["./front/entities/*"],
+      "@shared/*": ["./front/shared/*"],
+      "@lib_instances/*": ["./front/lib_instances/*"]
     }
   }
 }
