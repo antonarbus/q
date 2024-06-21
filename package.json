@@ -6,7 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=development concurrently \"npm run back\" \"npm run front\"",
     "stop": "kill-port 3005 3006",
-    "front": "cd ./front && vite",
+    "front": "vite",
     "back": "tsx watch back/index.ts",
     "build_front": "rm -rf ./build/front && vite build",
     "build_back": "rm -rf ./build/back && rollup -c rollup.config.js",
