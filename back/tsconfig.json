@@ -5,8 +5,6 @@
     "../front/shared/lib/tanstack_query/defaultError.d.ts"
   ],
   "compilerOptions": {
-    "outDir": "../build/back",
-    "noEmit": true
-    // "noEmitOnError": false,
+    "noEmit": false
   }
 }
