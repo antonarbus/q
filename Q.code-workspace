@@ -9,6 +9,14 @@
       "path": "back",
     },
     {
+      "name": "api ↗",
+      "path": "back/api",
+    },
+    {
+      "name": "front ↗",
+      "path": "front",
+    },
+    {
       "name": "app ↗",
       "path": "front/app",
     },
