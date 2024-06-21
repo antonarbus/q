@@ -80,7 +80,7 @@ export default defineConfig(({ command, mode }) => {
       },
     },
     build: {
-      outDir: '../build/front',
+      outDir: './build',
       rollupOptions: {
         output: {
           // https://rollupjs.org/configuration-options/#output-manualchunks
