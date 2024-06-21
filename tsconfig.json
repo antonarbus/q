@@ -9,6 +9,7 @@
       "DOM.Iterable",
       "ESNext"
     ],
+    "noEmit": true,
     "allowJs": true,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,

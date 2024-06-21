@@ -7,6 +7,6 @@
   "compilerOptions": {
     "outDir": "../build/back",
     "noEmit": true,
-    "noEmitOnError": false,
+    // "noEmitOnError": false,
   },
 }
