@@ -20,7 +20,8 @@
     "test-ui": "vitest --ui",
     "coverage": "vitest run --coverage",
     "lint2": "eslint ./front/**/*.{js,ts,jsx,tsx} ./back/**/*.{js,ts}",
-    "tsc": "tsc --noEmit"
+    "tsc": "tsc --noEmit",
+    "prettier": "prettier --write ."
   },
   "dependencies": {
     "@dnd-kit/core": "^6.1.0",

@@ -75,7 +75,10 @@ export const RestOfCopiedItems = (): JSX.Element | null => {
   prevFirstItemHeightRef.current = firstItemHeight
 
   return (
-    <AnimatePresence mode='wait' custom={animationProps}>
+    <AnimatePresence
+      mode='wait'
+      custom={animationProps}
+    >
       <motion.div
         key={items.length}
         custom={animationProps}

@@ -16,7 +16,10 @@ export const OpenQuotationPageAndLoadFromServerButton = ({
   }
 
   return (
-    <Link to={`/${id}`} state={state}>
+    <Link
+      to={`/${id}`}
+      state={state}
+    >
       <IconButton size='small'>
         <AiOutlineFolderOpen />
       </IconButton>

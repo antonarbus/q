@@ -52,6 +52,6 @@
       "@lib_instances/*": [
         "./front/lib_instances/*"
       ]
-    },
-  },
+    }
+  }
 }

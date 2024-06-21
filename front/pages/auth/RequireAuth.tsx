@@ -14,7 +14,19 @@ export const RequireAuth = ({ allowedRoles }: Props): JSX.Element => {
 
   if (isLogged && haveRequiredRole) return <Outlet />
   if (isLogged && !haveRequiredRole) {
-    return <Navigate to='/unauthorized' state={{ from: location }} replace />
+    return (
+      <Navigate
+        to='/unauthorized'
+        state={{ from: location }}
+        replace
+      />
+    )
   }
-  return <Navigate to='/login' state={{ from: location }} replace />
+  return (
+    <Navigate
+      to='/login'
+      state={{ from: location }}
+      replace
+    />
+  )
 }

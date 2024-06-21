@@ -19,7 +19,10 @@ export const SlidableMenuItemsContainer = ({
   )
 
   return (
-    <div ref={reference} className={className}>
+    <div
+      ref={reference}
+      className={className}
+    >
       {menuItems
         .filter((menuItem) => !menuItem.isHidden)
         .map((menuItem, index) => (
