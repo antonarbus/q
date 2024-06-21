@@ -66,7 +66,10 @@ export const MenuItem = ({
       }}
     >
       {isIcon && !isLoading && (
-        <Icon icon={menuItem.icon} disabled={disabled} />
+        <Icon
+          icon={menuItem.icon}
+          disabled={disabled}
+        />
       )}
       {isIcon && isLoading && <SpinnerIcon />}
       {isIcon && isSuccess && <SuccessIcon />}
@@ -88,7 +91,12 @@ export const MenuItem = ({
           <FaChevronRight />
         </RoundSpanForIcon>
       )}
-      {shortcut && <Shortcut shortcut={shortcut} $isHovered={isHovered} />}
+      {shortcut && (
+        <Shortcut
+          shortcut={shortcut}
+          $isHovered={isHovered}
+        />
+      )}
     </MenuItemStyled>
   )
 }

@@ -15,8 +15,16 @@ export const NavList = (): JSX.Element => {
     >
       {navStructure[0]?.menuItems
         ?.filter((navItem) => !navItem.isHidden)
-        .map((navItem) => <NavItem id={navItem.id} key={navItem.id} />)}
-      <NavItem id={'burger'} key={'burger'}>
+        .map((navItem) => (
+          <NavItem
+            id={navItem.id}
+            key={navItem.id}
+          />
+        ))}
+      <NavItem
+        id={'burger'}
+        key={'burger'}
+      >
         <Burger />
       </NavItem>
     </ul>

@@ -2,11 +2,11 @@
   "extends": "../tsconfig.json",
   "include": [
     "**/*.ts",
-    "../front/shared/lib/tanstack_query/defaultError.d.ts",
+    "../front/shared/lib/tanstack_query/defaultError.d.ts"
   ],
   "compilerOptions": {
     "outDir": "../build/back",
-    "noEmit": true,
+    "noEmit": true
     // "noEmitOnError": false,
-  },
+  }
 }

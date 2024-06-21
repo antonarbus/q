@@ -25,7 +25,10 @@ export const Shortcut = ({ shortcut, $isHovered }: Props): JSX.Element => {
   const keys = shortcut.join('+')
 
   return (
-    <Span className='shortcut' $isHovered={$isHovered}>
+    <Span
+      className='shortcut'
+      $isHovered={$isHovered}
+    >
       {capitalizeKey(keys)}
     </Span>
   )

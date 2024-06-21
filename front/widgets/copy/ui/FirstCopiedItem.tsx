@@ -72,7 +72,10 @@ export const FirstCopiedItem = (): JSX.Element | null => {
   }
 
   return (
-    <AnimatePresence mode='wait' custom={animationProps}>
+    <AnimatePresence
+      mode='wait'
+      custom={animationProps}
+    >
       <motion.div
         key={items.length}
         custom={animationProps}
