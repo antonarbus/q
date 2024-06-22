@@ -6,8 +6,8 @@
 # "FROM" will load the image from the docker hub or local registry if it is already downloaded
 FROM node:22-slim
 WORKDIR /app
-COPY ./build ./back
-WORKDIR /app/back  
+COPY ./back/build .
 RUN npm install
+COPY ./front/build .
 # EXPOSE 4006
 CMD ["node", "index.js"]
