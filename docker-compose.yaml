@@ -1,0 +1,6 @@
+services:
+  back:
+    build: ./back/
+    container_name: back
+    ports:
+      - '4006:4006'

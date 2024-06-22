@@ -1,4 +1,5 @@
 import typescript from '@rollup/plugin-typescript'
+import copy from 'rollup-plugin-copy'
 
 export default {
   input: './back/index.ts',
@@ -6,7 +7,16 @@ export default {
     dir: './back/build/',
     format: 'es',
   },
-  plugins: [typescript()],
+  plugins: [
+    typescript(),
+    copy({
+      targets: [
+        { src: './back/package.json', dest: './back/build' },
+        { src: './back/package-lock.json', dest: './back/build' },
+        { src: './.env', dest: './back/build' },
+      ],
+    }),
+  ],
   external: [
     '@google-cloud/storage',
     '@sendgrid/mail',
