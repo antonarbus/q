@@ -3,6 +3,7 @@
 
 # issue with rollup - https://github.com/vitejs/vite/discussions/15532
 # mount anonymous named volume
+# it seems we create empty volume (folder) on our host machine and later mount /app/node_modules there
 volumes:
   node_modules_persisted: # This is the name you give to the volume
 services:
