@@ -1,13 +1,7 @@
-# docker image is the blueprint of the container
-# docker container is the instance of the image
-# image consists of different ordered layers (instructions)
-
-# runtime image can be found in the docker hub https://hub.docker.com/
-# "FROM" will load the image from the docker hub or local registry if it is already downloaded
 FROM node:22-slim
 WORKDIR /app
 COPY ./back/build .
 RUN npm install
 COPY ./front/build .
-# EXPOSE 4006
+# EXPOSE 4001
 CMD ["node", "index.js"]

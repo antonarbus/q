@@ -1,6 +1,7 @@
+# docker-compose up
 services:
   app:
     build: ./
     container_name: quotation.app
     ports:
-      - '4006:4006'
+      - '4001:4001'
