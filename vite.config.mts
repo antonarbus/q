@@ -16,7 +16,7 @@ export default defineConfig(({ command, mode }) => {
   return {
     root: './front/',
     server: {
-      host: hostFront,
+      host: true,
       port: portFront,
       // https: true, //* type "thisisunsafe" if chrome says that connection is not private
       proxy: {
@@ -24,7 +24,7 @@ export default defineConfig(({ command, mode }) => {
       },
     },
     preview: {
-      host: hostFront,
+      // host: hostFront,
       port: portFront,
       // https: true,
       proxy: {
