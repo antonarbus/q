@@ -2,18 +2,16 @@
 # docker-compose -f docker-compose.dev.yaml up
 
 # issue with rollup - https://github.com/vitejs/vite/discussions/15532
-# mount anonymous named volume
-# it seems we create empty volume (folder) on our host machine and later mount /app/node_modules there
 volumes:
-  node_modules_persisted: # This is the name you give to the volume
+  node_modules_root: # create empty volume (folder) on our host machine and later mount /app/node_modules there
 services:
   app_dev:
+    container_name: quotation.app.dev
     build:
       dockerfile: Dockerfile.dev
-    container_name: quotation.app.dev
     ports:
       - '3000:3000' # maps a container port to a host machine port
       - '4000:4000' # maps a container port to a host machine port
     volumes:
       - ./:/app # to monitor changes in project and live reload server
-      - node_modules_persisted:/app/node_modules
+      - node_modules_root:/app/node_modules
