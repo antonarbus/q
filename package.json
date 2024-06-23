@@ -4,11 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "dev_docker": "docker-compose -f docker-compose.dev.yaml up",
     "start": "NODE_ENV=development concurrently \"npm run back\" \"npm run front\"",
     "stop": "kill-port 3005 3006",
     "front": "vite",
     "back": "tsx watch back/index.ts",
-    "install_all": "concurrently \"npm install\" \"cd back && npm install\" \"cd front && npm install\"",
+    "install_all": "npm i concurrently && concurrently \"npm i\" \"cd back && npm i\" \"cd front && npm i\"",
     "build_front": "vite build",
     "build_back": "rollup -c rollup.config.js",
     "build_all": "concurrently \"npm run build_front\" \"npm run build_back\"",
