@@ -1,0 +1,10 @@
+# docker-compose -f docker-compose.dev.yaml build app_dev
+# docker-compose -f docker-compose.dev.yaml up
+services:
+  app_dev:
+    build: 
+      dockerfile: Dockerfile.dev
+    container_name: quotation.app.dev
+    ports:
+      - '3000:3000'
+      - '4000:4000'
