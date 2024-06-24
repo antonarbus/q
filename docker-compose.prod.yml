@@ -1,0 +1,9 @@
+# docker-compose -f docker-compose.prod.yml build app_prod
+# docker-compose -f docker-compose.prod.yml up
+services:
+  app_prod:
+    build: 
+      dockerfile: Dockerfile.prod
+    container_name: quotation.app.prod
+    ports:
+      - '4001:4001' # maps host machine port to container port
