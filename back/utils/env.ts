@@ -12,4 +12,6 @@ export const portBack = 4000
 // export const portBack = isDev ? 4000 : 4001
 export const hostBack = 'http://localhost'
 
-export const domain = isProd ? 'https://quotation.app' : 'http://localhost:3000'
+export const domain = isProd
+  ? 'https://quotation.app'
+  : 'https://localhost:3000'

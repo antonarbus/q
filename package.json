@@ -4,7 +4,6 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev_docker": "docker-compose -f docker-compose.dev.yaml up",
     "start": "NODE_ENV=development concurrently \"npm run back\" \"npm run front\"",
     "stop": "kill-port 3005 3006",
     "front": "vite",
@@ -22,7 +21,8 @@
     "coverage": "vitest run --coverage",
     "lint": "eslint . --ext .ts,.tsx",
     "tsc": "tsc --noEmit",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "dev_docker": "docker-compose -f docker-compose.dev.yaml up"
   },
   "devDependencies": {
     "@conarti/eslint-plugin-feature-sliced": "^1.0.5",
