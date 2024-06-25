@@ -64,21 +64,6 @@ export default defineConfig(({ command, mode }) => {
       tsconfigPaths(),
       basicSsl(),
     ],
-    // https://vitest.dev/guide/in-source.html
-    define: {
-      'import.meta.vitest': 'undefined',
-    },
-    // https://www.youtube.com/watch?v=oWJpxtAl62w
-    test: {
-      globals: true,
-      environment: 'jsdom',
-      setupFiles: './test-setup.ts',
-      includeSource: ['front/**/*.{js,ts,jsx,tsx}'],
-      coverage: {
-        all: true,
-        src: ['front/'],
-      },
-    },
     build: {
       outDir: './build',
       rollupOptions: {
