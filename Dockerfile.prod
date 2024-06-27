@@ -4,5 +4,5 @@ WORKDIR /app
 COPY ./back/build .
 RUN npm i
 COPY ./front/build .
-# EXPOSE 4001
+# EXPOSE 4000
 CMD ["node", "index.js"]

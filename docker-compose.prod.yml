@@ -1,4 +1,5 @@
 # docker-compose -f docker-compose.prod.yml build app_prod
+# docker-compose -f docker-compose.prod.yml build app_prod --no-cache
 # docker-compose -f docker-compose.prod.yml up
 services:
   app_prod:
