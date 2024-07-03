@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/triple-slash-reference */
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
+import path from 'path'
 import basicSsl from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react'
 import { defineConfig, loadEnv } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
-import { portBack, hostBack, portFront, hostFront } from './back/utils/env'
+import { portBack, hostBack, portFront } from './back/utils/env'
 
 // https://vitejs.dev/config/
 
@@ -36,8 +38,7 @@ export default defineConfig(({ command, mode }) => {
     },
     esbuild: {
       define: {
-        // to suppress warning in terminal: [vite] warning: Top-level "this" will be replaced with undefined since this file is an ECMAScript module
-        this: 'window',
+        this: 'window', // to suppress warning in terminal: [vite] warning: Top-level "this" will be replaced with undefined since this file is an ECMAScript module
       },
     },
     plugins: [
@@ -64,6 +65,17 @@ export default defineConfig(({ command, mode }) => {
       tsconfigPaths(),
       basicSsl(),
     ],
+    resolve: {
+      alias: {
+        '@back': path.resolve(__dirname, 'back'),
+        '@lib_instances': path.resolve(__dirname, 'front', 'lib_instances'),
+        '@pages': path.resolve(__dirname, 'front', 'pages'),
+        '@widgets': path.resolve(__dirname, 'front', 'widgets'),
+        '@features': path.resolve(__dirname, 'front', 'features'),
+        '@entities': path.resolve(__dirname, 'front', 'entities'),
+        '@shared': path.resolve(__dirname, 'front', 'shared'),
+      },
+    },
     build: {
       outDir: './build',
       rollupOptions: {
