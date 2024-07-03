@@ -8,7 +8,7 @@ const storage = new Storage({
   // projectId: process.env.GOOGLE_CLOUD_PROJECT_ID,
   credentials: {
     type: process.env.GOOGLE_CLOUD_PROJECT_TYPE,
-    project_id: process.env.GOOGLE_CLOUD_PROJECT_PROJECT_ID,
+    project_id: process.env.GOOGLE_CLOUD_PROJECT_ID,
     private_key_id: process.env.GOOGLE_CLOUD_PROJECT_PRIVATE_KEY_ID,
     private_key: process.env.GOOGLE_CLOUD_PROJECT_PRIVATE_KEY,
     client_email: process.env.GOOGLE_CLOUD_PROJECT_CLIENT_EMAIL,
