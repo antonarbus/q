@@ -1,4 +1,12 @@
 {
+  "include": [
+    "back/**/*.ts",
+    "back/**/*.tsx",
+    "front/**/*.ts",
+    "front/**/*.tsx",
+    "vite-env.d.ts"
+  ],
+  "exclude": ["**/node_modules", "build"],
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
