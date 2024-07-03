@@ -3,7 +3,6 @@ import isEqual from 'lodash.isequal'
 import { useEffect } from 'react'
 import { type CopyPlace, copySlice, getPastePlace } from '@entities/copy'
 import { boqRowKey, itemKey, quotationSlice } from '@entities/quotation'
-import { type ItemBoq } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { route } from '@shared/consts/route'
 
@@ -157,12 +156,14 @@ function movePasteTextBoqRow(e: MouseEvent): void {
   const isPasteTextShown = getState().copy.isPasteTextShown
   const boqRowsElement = e.target.closest(`.${cls.boqRows}`)
 
-  const isBoqPasteItem = (
-    getState().quotation.items.filter(
-      (item) => item.type === itemKey.boq,
-    ) as ItemBoq[]
-  )
-    .flatMap((item) => item.boq.rows)
+  const isBoqPasteItem = getState()
+    .quotation.items.filter((item) => item.type === itemKey.boq)
+    .flatMap((item) => {
+      if (item.type === 'boq') {
+        return item.boq.rows
+      }
+      return []
+    })
     .some((boqRow) => boqRow.type === boqRowKey.paste)
 
   const removePasteIfNeeded = (): void => {
