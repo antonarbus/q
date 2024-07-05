@@ -141,12 +141,13 @@ Server can validate the token only if it knows the secrete key.
 gcloud projects list 
 ```
 
-- create the folder (repository) for docker in Artifact Registry with name "cloud-run" at "us-central1 (Iowa)" with "Delete artifacts" option
-- dd the "cloud-run" folder name into env var at deployment.yaml
-
 ```bash
 export PROJECT_ID="<your-project-id>" 
 ```
+
+- create the folder (repository) for docker in Artifact Registry with name "cloud-run" at "us-central1 (Iowa)" with "Delete artifacts" option
+- add the "cloud-run" folder name into env var at deployment.yaml
+
 
 - get github user and repo names
 
