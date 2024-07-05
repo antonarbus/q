@@ -1,10 +1,17 @@
-# docker-compose -f docker-compose.prod.yml build app_prod
-# docker-compose -f docker-compose.prod.yml build app_prod --no-cache
+# docker-compose -f docker-compose.prod.yml build
+# docker-compose -f docker-compose.prod.yml build --no-cache
 # docker-compose -f docker-compose.prod.yml up
 services:
-  app_prod:
-    build: 
-      dockerfile: Dockerfile.prod
-    container_name: quotation.app.prod
+  backend:
+    build:
+      dockerfile: ./Dockerfile.prod.back
     ports:
-      - '4001:4001' # maps host machine port to container port
+      - '4000:4000'
+
+  frontend:
+    build:
+      dockerfile: ./Dockerfile.prod.front
+    ports:
+      - '8080:80'
+    depends_on:
+      - backend
