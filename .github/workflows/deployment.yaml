@@ -13,7 +13,10 @@ on:
     types:
       - closed
 env:
-  PROJECT_ID: ${{ secrets.PROJECT_ID }}
+  PROJECT_ID: 'add PROJECT_ID!!!'
+  SERVICE_ACCOUNT: 'add SERVICE_ACCOUNT!!!'
+  WORKLOAD_IDENTITY_PROVIDER: 'add WORKLOAD_IDENTITY_PROVIDER!!!'
+  ARTIFACTS_REGISTRY_FOLDER_NAME: 'cloud-run'
 
 jobs:
   build-and-deploy:
@@ -29,16 +32,16 @@ jobs:
       - name: Set environment variables
         id: set-env
         run: |
-          echo "IMAGE_VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
+          echo "IMAGE_VERSION=${{github.ref_name}}" >> $GITHUB_ENV
 
       - name: Gcloud Auth
         id: gcloud-auth
         uses: google-github-actions/auth@v2
         with:
           token_format: 'access_token'
-          project_id: ${{ secrets.PROJECT_ID }}
-          service_account: ${{ secrets.SERVICE_ACCOUNT }}
-          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          project_id: ${{env.PROJECT_ID}}
+          service_account: ${{env.SERVICE_ACCOUNT}}
+          workload_identity_provider: ${{env.WORKLOAD_IDENTITY_PROVIDER}}
 
       - name: Auth Container Registry
         id: container-registry-auth
@@ -46,30 +49,30 @@ jobs:
         with:
           registry: us-central1-docker.pkg.dev
           username: oauth2accesstoken
-          password: ${{ steps.gcloud-auth.outputs.access_token }}
+          password: ${{steps.gcloud-auth.outputs.access_token}}
 
       - name: Build and push Docker image Backend
         id: build-push-back
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ./Dockerfile.back
+          file: ./Dockerfile.prod.back
           push: true
-          tags: us-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/cloud-run/cloud-run-back:${{ env.IMAGE_VERSION }}
+          tags: us-central1-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.ARTIFACTS_REGISTRY_FOLDER_NAME}}/cloud-run-back:${{env.IMAGE_VERSION}}
 
       - name: Deploy to Cloud Run Backend
         id: deploy-cloud-run-back
         uses: google-github-actions/deploy-cloudrun@v2
         with:
-          service: cloud-run-backend-${{ env.IMAGE_VERSION }}
-          image: us-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/cloud-run/cloud-run-back:${{ env.IMAGE_VERSION }}
+          service: cloud-run-backend-${{env.IMAGE_VERSION}}
+          image: us-central1-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.ARTIFACTS_REGISTRY_FOLDER_NAME}}/cloud-run-back:${{env.IMAGE_VERSION}}
           region: us-central1
-          project_id: ${{ secrets.PROJECT_ID }}
+          project_id: ${{env.PROJECT_ID}}
           flags: --port 4000 --allow-unauthenticated
 
       - name: Change backend stream NGINX config
         run: |
-          DOMAIN=$(echo ${{ steps.deploy-cloud-run-back.outputs.url }} | cut -d'/' -f3)
+          DOMAIN=$(echo ${{steps.deploy-cloud-run-back.outputs.url}} | cut -d'/' -f3)
           sed -i 's|backend:4000|'${DOMAIN}'|g' ./nginx.conf
           sed -i 's|http://backend|https://'${DOMAIN}'|g' ./nginx.conf
           cat ./nginx.conf
@@ -79,21 +82,21 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ./Dockerfile.front
+          file: ./Dockerfile.prod.front
           push: true
-          tags: us-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/cloud-run/cloud-run-front:${{ env.IMAGE_VERSION }}
+          tags: us-central1-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.ARTIFACTS_REGISTRY_FOLDER_NAME}}/cloud-run-front:${{env.IMAGE_VERSION}}
 
       - name: Deploy to Cloud Run Frontend
         id: deploy-cloud-run-front
         uses: google-github-actions/deploy-cloudrun@v2
         with:
-          service: cloud-run-frontend-${{ env.IMAGE_VERSION }}
-          image: us-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/cloud-run/cloud-run-front:${{ env.IMAGE_VERSION }}
+          service: cloud-run-frontend-${{env.IMAGE_VERSION}}
+          image: us-central1-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.ARTIFACTS_REGISTRY_FOLDER_NAME}}/cloud-run-front:${{env.IMAGE_VERSION}}
           region: us-central1
-          project_id: ${{ secrets.PROJECT_ID }}
+          project_id: ${{env.PROJECT_ID}}
           flags: --port 80 --allow-unauthenticated
 
       - name: Test Cloud Run
         run: |
-          curl "${{ steps.deploy-cloud-run-back.outputs.url }}" -I -s | grep "HTTP/2 200"
-          curl "${{ steps.deploy-cloud-run-front.outputs.url }}" -I -s | grep "HTTP/2 200"
+          curl "${{steps.deploy-cloud-run-back.outputs.url}}" -I -s | grep "HTTP/2 200"
+          curl "${{steps.deploy-cloud-run-front.outputs.url}}" -I -s | grep "HTTP/2 200"

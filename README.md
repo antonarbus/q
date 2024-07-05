@@ -130,3 +130,137 @@ Server can validate the token only if it knows the secrete key.
 # Email
 
 (A) For emails sending Sendgrid is used.
+
+# CI/CD
+
+- create the folder in Artifact Registry and add the folder name into env var at deployment.yaml
+
+- get project ID
+
+```bash
+gcloud projects list 
+```
+- add project into session env 
+- add project also into env var at deployment.yaml
+
+
+```bash
+export PROJECT_ID="<your-project-id>" 
+```
+
+- get github user and repo names
+
+```bash
+export REPO_OWNER="<your-github-username>"
+```
+
+```bash
+export REPO_NAME="<your-repo-name>"
+```
+
+- enable service
+
+```bash
+gcloud services enable iamcredentials.googleapis.com \
+run.googleapis.com \
+artifactregistry.googleapis.com --project="${PROJECT_ID}"
+```
+- create Service Account in Google Cloud IAM, Service Account functions as a restriction on access to resources we use later
+
+```bash
+gcloud iam service-accounts create "cloud-run-sa" \
+--project="${PROJECT_ID}" \
+--description="Cloud Run Service Account" \
+--display-name="Cloud Run Service Account"
+```
+
+- set roles as Artifact Registry Admin and Cloud Run Admin 
+
+```bash
+gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
+--member="serviceAccount:cloud-run-sa@${PROJECT_ID}.iam.gserviceaccount.com" \
+--role="roles/artifactregistry.repoAdmin"
+```
+
+```bash
+gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
+--member="serviceAccount:cloud-run-sa@${PROJECT_ID}.iam.gserviceaccount.com" \
+--role="roles/run.admin"
+```
+
+```bash
+gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
+--member="serviceAccount:cloud-run-sa@${PROJECT_ID}.iam.gserviceaccount.com" \
+--role="roles/iam.serviceAccountUser"
+```
+
+- create a Workload Identity Pool we named “github” 
+
+```bash
+gcloud iam workload-identity-pools create "github" \
+--project="${PROJECT_ID}" \
+--location="global" \
+--display-name="GitHub Actions Pool"
+
+```
+
+- check WIP was successfully created or not 
+
+```bash
+gcloud iam workload-identity-pools describe "github" \
+--project="${PROJECT_ID}" \
+--location="global" \
+--format="value(name)"
+
+```
+
+- sets up an OIDC identity provider that allows Google Cloud to trust tokens issued by GitHub Actions
+
+```bash
+gcloud iam workload-identity-pools providers create-oidc "github-repo-provider" \
+--project="${PROJECT_ID}" \
+--location="global" \
+--workload-identity-pool="github" \
+--display-name="My GitHub repo Provider" \
+--attribute-mapping="google.subject=assertion.sub,attribute.actor=assertion.actor,attribute.repository=assertion.repository,attribute.repository_owner=assertion.repository_owner,attribute.repository_id=assertion.repository_id" \
+--issuer-uri="https://token.actions.githubusercontent.com"
+```
+
+- allow GitHub repos to assume the cloud-run-sa service account's identity to interact with Google Cloud resources as this service account. This setup is useful for securely granting permissions to GitHub Actions workflows to interact with Google Cloud
+
+```bash
+export SA_EMAIL="cloud-run-sa@${PROJECT_ID}.iam.gserviceaccount.com"
+```
+
+```bash
+export WORKLOAD_POOL=`gcloud iam workload-identity-pools describe "github" \
+--project="${PROJECT_ID}" \
+--location="global" \
+--format="value(name)"`
+```
+
+```bash
+gcloud iam service-accounts add-iam-policy-binding ${SA_EMAIL} \
+--project="${PROJECT_ID}" \
+--role="roles/iam.workloadIdentityUser" \
+--member="principalSet://iam.googleapis.com/${WORKLOAD_POOL}/attribute.repository/${REPO_OWNER}/${REPO_NAME}"
+```
+
+- add PROJECT_ID, SERVICE_ACCOUNT, WORKLOAD_IDENTITY_PROVIDER to env var at deployment.yaml
+
+```bash
+echo $PROJECT_ID
+```
+
+```bash
+echo $SA_EMAIL
+```
+```bash
+gcloud iam workload-identity-pools providers describe "github-repo-provider" \
+--project="${PROJECT_ID}" \
+--location="global" \
+--workload-identity-pool="github" \
+--format="value(name)"
+```
+
+
