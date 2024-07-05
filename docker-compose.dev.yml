@@ -9,7 +9,7 @@ services:
   app_dev:
     container_name: quotation.app.dev
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile.dev.all
     ports:
       - '3000:3000' # maps host machine port to container port
       - '4000:4000' # maps host machine port to container port
