@@ -133,16 +133,16 @@ Server can validate the token only if it knows the secrete key.
 
 # CI/CD
 
-- create the folder in Artifact Registry and add the folder name into env var at deployment.yaml
-
-- get project ID
+- create the project and get project ID
+- add project into session env 
+- add project also into env var at deployment.yaml
 
 ```bash
 gcloud projects list 
 ```
-- add project into session env 
-- add project also into env var at deployment.yaml
 
+- create the folder (repository) for docker in Artifact Registry with name "cloud-run" at "us-central1 (Iowa)" with "Delete artifacts" option
+- dd the "cloud-run" folder name into env var at deployment.yaml
 
 ```bash
 export PROJECT_ID="<your-project-id>" 
