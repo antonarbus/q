@@ -3,7 +3,7 @@ RUN npm config set legacy-peer-deps true
 WORKDIR /
 COPY . .
 RUN npm i
-RUN npm run build_back
+RUN npm run build:back
 WORKDIR /back/build
 RUN npm i
 EXPOSE 4000

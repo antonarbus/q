@@ -6,7 +6,7 @@ RUN npm i
 WORKDIR /front
 RUN npm i
 WORKDIR /
-RUN npm run build_front
+RUN npm run build:front
 
 FROM nginx:alpine-slim
 COPY --from=builder /front/build /front/build
