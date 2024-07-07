@@ -6,7 +6,7 @@
     "front/**/*.tsx",
     "vite-env.d.ts"
   ],
-  "exclude": ["**/node_modules", "build"],
+  "exclude": ["**/node_modules", "build", "fr.js"],
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
