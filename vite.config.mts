@@ -81,18 +81,13 @@ export default defineConfig(({ command, mode }) => {
       rollupOptions: {
         output: {
           // https://rollupjs.org/configuration-options/#output-manualchunks
-          manualChunks: (id) => {
-            // if (id.includes('node_modules/ag-grid')) return 'ag-grid'
-            // if (id.includes('node_modules/@mui')) return '@mui'
-            // if (id.includes('node_modules/@emotion')) return '@emotion'
-            // if (id.includes('node_modules/axios')) return 'axios'
-            // if (id.includes('node_modules/chart')) return 'chart'
-            // if (id.includes('node_modules/@tanstack')) return '@tanstack'
-            // if (id.includes('node_modules/@remix')) return '@remix'
-            // if (id.includes('node_modules/gsap')) return 'gsap'
-            // if (id.includes('node_modules/framer-motion')) return 'framer-motion'
-            // if (id.includes('node_modules/react-dom')) return 'react-dom'
-            // if (id.includes('froalaPkgd')) return 'froalaPkgd'
+          manualChunks: (id, { getModuleInfo }) => {
+            if (id.includes('froala')) return 'qwerty'
+            if (id.includes('ag-grid')) return 'ag-grid'
+            if (id.includes('gsap')) return 'gsap'
+            if (id.includes('@mui')) return '@mui'
+            if (id.includes('@tanstack')) return '@tanstack'
+            if (id.includes('@remix')) return '@remix'
           },
         },
       },
