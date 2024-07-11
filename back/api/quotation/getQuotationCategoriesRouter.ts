@@ -9,7 +9,7 @@ import { getEmailFromRefreshTokenOrThrowUnauthorized } from '../../utils/getEmai
 
 export type ResBody = {
   message: ErrorMessageCommon | 'Found' | 'Unhandled error'
-  categories?: Array<Quotation['category']>
+  categories?: Quotation['category'][]
 }
 
 type RouterHandler = (

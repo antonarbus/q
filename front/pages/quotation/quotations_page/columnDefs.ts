@@ -20,7 +20,7 @@ export const defaultColDef: ColDef<Quotation> = {
   flex: 1,
 }
 
-export const columnDefs: Array<ColDef<Quotation>> = [
+export const columnDefs: ColDef<Quotation>[] = [
   {
     cellRenderer: ActionButtonsCellRenderer,
     width: 150,

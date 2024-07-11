@@ -15,6 +15,8 @@ export const getItemByIdFromState = ({
 
   if (item) return item
 
+  // todo: convert into for-of
+  // eslint-disable-next-line @typescript-eslint/prefer-for-of
   for (let itemIndex = 0; itemIndex < state.items.length; itemIndex++) {
     const item = state.items[itemIndex]
 

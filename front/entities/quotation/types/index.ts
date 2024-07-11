@@ -116,9 +116,9 @@ export type Quotation = ItemCommon & {
   items: Item[]
 }
 
-export type BoqRowEditorRefs = Array<{
+export type BoqRowEditorRefs = {
   description: FroalaEditorRef
   itemPrice: FroalaEditorRef
   qty: FroalaEditorRef
   price: FroalaEditorRef
-}>
+}[]

@@ -6,7 +6,7 @@ type Props = {
 export const getJsxWithBoldSubstr = ({
   text,
   boldText,
-}: Props): Array<string | JSX.Element> => {
+}: Props): (string | JSX.Element)[] => {
   const regExp = new RegExp(`(${boldText})`, 'gi')
   return text
     .split(regExp)
