@@ -19,7 +19,7 @@ export const defaultColDef: ColDef<Item> = {
   flex: 1,
 }
 
-export const columnDefs: Array<ColDef<Item>> = [
+export const columnDefs: ColDef<Item>[] = [
   {
     cellRenderer: ActionButtonsCellRenderer,
     width: 150,

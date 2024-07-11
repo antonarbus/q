@@ -20,7 +20,9 @@ const boqHeaderKey: BoqHeaderKey = 'subTotalPrice'
 export const SubTotalPrice = (): JSX.Element => {
   const { subTotalPriceEditorRef, boqRowEditorRefs } = useBoqItem()
   const { itemIndex } = useItem()
-  const hidePinsClickHandlerRef = useRef<(e: MouseEvent) => void>((e) => {})
+  const hidePinsClickHandlerRef = useRef<(e: MouseEvent) => void>((e) => {
+    console.warn('hidePinsClickHandlerRef')
+  })
   const isInitClickRef = useRef(true)
   useUpdateSubtotalPrice()
 

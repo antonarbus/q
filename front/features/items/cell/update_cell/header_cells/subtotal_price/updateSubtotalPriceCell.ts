@@ -69,12 +69,12 @@ export const updateSubtotalPriceCell = ({
   const unpinnedPricesSumTarget = newSubTotalPriceValue - pinnedPricesSum
   const unpinnedPricesSum = prevSubTotalPriceValue - pinnedPricesSum
 
-  type Prices = Array<{
+  type Prices = {
     oldValue: number
     isPinned: boolean
     newValue: number
     editor: FroalaEditor | null
-  }>
+  }[]
 
   const prices: Prices = boqRows.map((boqRow, index) => {
     const oldValue = boqRow.price.value

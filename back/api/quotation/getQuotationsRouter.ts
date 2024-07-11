@@ -11,7 +11,7 @@ import { getEmailFromRefreshTokenOrThrowUnauthorized } from '../../utils/getEmai
 
 export type ResBody = Pretty<{
   message: ErrorMessageCommon | 'Found' | 'No content' | 'Unhandled case'
-  quotations?: Array<FlattenMaps<Quotation>>
+  quotations?: FlattenMaps<Quotation>[]
 }>
 
 type RouterHandler = (

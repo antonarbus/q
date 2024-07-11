@@ -14,6 +14,8 @@ export const getItemByIdFromStore = ({ id }: Props): Item | undefined => {
 
   if (item) return item
 
+  // todo: convert into for-of
+  // eslint-disable-next-line @typescript-eslint/prefer-for-of
   for (let itemIndex = 0; itemIndex < quotation.items.length; itemIndex++) {
     const item = quotation.items[itemIndex]
 

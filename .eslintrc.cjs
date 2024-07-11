@@ -39,7 +39,6 @@ module.exports = {
     ],
     '@typescript-eslint/strict-boolean-expressions': 'off',
     '@typescript-eslint/no-explicit-any': 'error',
-    '@typescript-eslint/consistent-type-definitions': 'off',
     '@typescript-eslint/comma-dangle': 'off',
     '@typescript-eslint/space-before-function-paren': 'off',
     '@typescript-eslint/consistent-type-definitions': ['error', 'type'],

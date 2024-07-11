@@ -13,14 +13,13 @@ type Props = {
   pendingBookmarkId: string
 }
 
-export const renderOption =
-  ({
-    loadBookmark,
-    inputValueSignal,
-    isPendingBookmark,
-    pendingBookmarkId,
-  }: Props) =>
-  (
+export const renderOption = ({
+  loadBookmark,
+  inputValueSignal,
+  isPendingBookmark,
+  pendingBookmarkId,
+}: Props) =>
+  function renderOption(
     props: HTMLAttributes<HTMLLIElement>,
     option: Item,
     {
@@ -32,7 +31,7 @@ export const renderOption =
       index: number
       inputValue: string
     },
-  ): JSX.Element => {
+  ): JSX.Element {
     return (
       <li
         // {...props}
