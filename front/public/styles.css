@@ -140,3 +140,7 @@ meter {
 ::placeholder {
   color: unset;
 }
+
+#before-react-load {
+  font-size: 10px;
+}
