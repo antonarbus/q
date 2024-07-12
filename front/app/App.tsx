@@ -12,9 +12,18 @@ import { GlobalStyles } from './GlobalStyles'
 import { ReactQueryDevtoolsProductionHidden } from './ReactQueryDevtoolsProductionHidden'
 import './signalsDevTools'
 import '@shared/utils/cursorPosSignal'
+import { useEffectOnce } from 'react-use'
 
 export const App = (): JSX.Element => {
   useLogoutIfAccessTokenRemoved()
+
+  useEffectOnce(() => {
+    const seoElement = document.getElementById('seo')
+
+    if (seoElement instanceof Element) {
+      seoElement.style.display = 'none'
+    }
+  })
 
   return (
     <Provider store={store}>
