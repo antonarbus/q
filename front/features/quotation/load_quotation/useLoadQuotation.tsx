@@ -71,6 +71,12 @@ export function useLoadQuotation(): void {
 
     // load new quotation template
     if (id === undefined || id === 'new') {
+      const initOverlayElement = document.getElementById('init-overlay')
+
+      if (initOverlayElement instanceof Element) {
+        initOverlayElement.style.display = 'none'
+      }
+
       loadingDotsOverlayTextSignal.value = 'Loading template...'
 
       // avoid resetting and loading quotation batching, otherwise there is unwanted items animation
@@ -91,6 +97,12 @@ export function useLoadQuotation(): void {
       )
 
       return
+    }
+
+    const initOverlayElement = document.getElementById('init-overlay')
+
+    if (initOverlayElement instanceof Element) {
+      initOverlayElement.style.display = 'none'
     }
 
     // load quotation from server
