@@ -10,12 +10,12 @@ export type ErrorHandlerBody = {
   errorAsString?: string
 }
 
-export const errorHandlerMiddleware = async (
+export const errorHandlerMiddleware = (
   error: Error,
   req: Req,
   res: ResWithBody<ErrorHandlerBody>,
   next: Next,
-): Promise<ResWithBody<ErrorHandlerBody>> => {
+): ResWithBody<ErrorHandlerBody> => {
   console.error(error)
   const { message, name, stack } = error
 

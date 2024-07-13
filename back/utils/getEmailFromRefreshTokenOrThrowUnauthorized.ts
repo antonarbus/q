@@ -20,7 +20,7 @@ export const getEmailFromRefreshTokenOrThrowUnauthorized = (
       throw new Error(errorMessageCommon.notLoggedIn)
     }
     return email
-  } catch (error) {
+  } catch {
     throw new Error(errorMessageCommon.notLoggedIn)
   }
 }

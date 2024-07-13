@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { Storage } from '@google-cloud/storage'
 
 //* https://console.cloud.google.com/storage/browser/quotation-app-bucket

@@ -10,7 +10,7 @@ const userSchema = new Schema<User>(
       required: [true, 'email is required'],
       unique: true,
       trim: true,
-      match: /.+@.+\..+/,
+      match: /.+@.+\..+/u,
     },
     password: {
       type: String,

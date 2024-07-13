@@ -19,7 +19,7 @@ export const getEmailFromRefreshToken = (
       return undefined
     }
     return email
-  } catch (error) {
+  } catch {
     return undefined
   }
 }

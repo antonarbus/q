@@ -10,11 +10,11 @@ type RouterHandler = (
   req: Req,
   res: ResWithBody<ResBody>,
   next: Next,
-) => Promise<ResWithBody<ResBody> | undefined>
+) => ResWithBody<ResBody> | undefined
 
 export const logOutRouter = Router()
 
-const logOut: RouterHandler = async (req, res, next) => {
+const logOut: RouterHandler = (req, res, next) => {
   try {
     res.clearCookie('refreshJwtToken')
 

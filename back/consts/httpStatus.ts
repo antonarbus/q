@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /**
   - 200 - fulfilled
   - 201 - fulfilled, and a new resource has been created, good for POST requests

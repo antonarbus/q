@@ -32,7 +32,7 @@ export const verifyAccessTokenMiddleware = (
 
     // if user is validated then go to the next router handler
     next()
-  } catch (error) {
+  } catch {
     return (
       // if user is not validated return 401 status
       // firstly the client will try to renew the access token and re-try the initial api call
