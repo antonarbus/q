@@ -9,8 +9,8 @@ import { OutlinedDivWithLabel } from '@shared/components'
 import { cls } from '@shared/consts/cls'
 
 export const BookmarkField = (): ReactNode => {
-  const items = useSelectorTyped(
-    (state) => state.quotation.items,
+  const blocks = useSelectorTyped(
+    (state) => state.quotation.blocks,
     itemsShapeEqualityFn,
   )
 
@@ -18,17 +18,17 @@ export const BookmarkField = (): ReactNode => {
     isFroalaSignal.value = true
   })
 
-  if (items.length === 0) return null
+  if (blocks.length === 0) return null
 
-  const firstItem = items[0]
+  const firstBlock = blocks[0]
 
-  if (firstItem === undefined) return null
+  if (firstBlock === undefined) return null
 
   return (
     <BookmarkFieldLayout>
       <AnimatePresence initial={false}>
         <Item
-          item={firstItem}
+          item={firstBlock}
           itemIndex={0}
         />
       </AnimatePresence>
@@ -49,23 +49,23 @@ function BookmarkFieldLayout({
           height: '180px',
           margin: '10px',
           padding: '10px',
-          [`.${cls.items}`]: {
+          [`.${cls.blocks}`]: {
             maxWidth: 'none !important',
             padding: '10px !important',
-            [`:has(.${cls.priceItem})`]: {
+            [`:has(.${cls.priceBlock})`]: {
               display: 'block !important',
             },
-            [`:has(.${cls.textItem})`]: {
+            [`:has(.${cls.textBlock})`]: {
               display: 'block !important',
             },
           },
-          [`.${cls.item}`]: {
+          [`.${cls.block}`]: {
             marginBottom: '0px !important',
           },
-          [`.${cls.item}.${cls.priceItem}`]: {
+          [`.${cls.block}.${cls.priceBlock}`]: {
             display: 'block !important',
           },
-          [`.${cls.item}.${cls.textItem}`]: {
+          [`.${cls.block}.${cls.textBlock}`]: {
             display: 'block !important',
           },
           '.actions-container': {

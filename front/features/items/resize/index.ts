@@ -4,10 +4,10 @@ export {
   onColumnResizeStop,
 } from './onColumnResize'
 export {
-  onTextItemResizeStart,
-  onTextItemResize,
-  onTextItemResizeStop,
-} from './onTextItemResize'
+  onTextBlockResizeStart,
+  onTextBlockResize,
+  onTextBlockResizeStop,
+} from './onTextBlockResize'
 export {
   onBoqBlockResizeStart,
   onBoqBlockResize,

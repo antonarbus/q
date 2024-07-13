@@ -36,13 +36,11 @@ export const ShareField = ({
   const isButtonDisabledSignal = useSignal(true)
   const [chipsParent] = useAutoAnimate()
 
-  useEffect(
-    function disableButton() {
-      const isEmailOk = isEmailPatternOk(emailSignal.value)
-      isButtonDisabledSignal.value = !isEmailOk
-    },
-    [emailSignal.value],
-  )
+  // disable button
+  useEffect(() => {
+    const isEmailOk = isEmailPatternOk(emailSignal.value)
+    isButtonDisabledSignal.value = !isEmailOk
+  }, [emailSignal.value])
 
   return (
     <OutlinedDivWithLabel label='Share'>

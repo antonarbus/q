@@ -20,7 +20,9 @@ export const updateNumberAtHtmlIncrementally = async ({
 }: Props): Promise<void> => {
   const steps = 100
   const valueDifference = newNumber - oldNumber
+
   if (valueDifference === 0) return
+
   const stepValue = valueDifference / steps
   const decimalPrecision = getDecimalPrecision({ valueDifference })
 
@@ -54,7 +56,7 @@ export const updateNumberAtHtmlIncrementally = async ({
     })
   }
 
-  setTimeout(async () => {
+  await setTimeout(async () => {
     await incrementValues()
 
     const finalHtml = getStringWithNewFormattedNumber({

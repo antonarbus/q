@@ -100,70 +100,64 @@ export function useLoadQuotation(): void {
     }
   }, [reRenderQuotationSignal.value])
 
-  useUpdateEffect(
-    function handleSuccess() {
-      if (isSuccess) {
-        const quotation = data.quotation
+  useUpdateEffect(() => {
+    if (isSuccess) {
+      const quotation = data.quotation
 
-        if (quotation === undefined) return
+      if (quotation === undefined) return
 
-        if (quotation.items === undefined) {
-          notify({ msg: 'Quotation corrupted', type: 'warn', theme: 'light' })
-          setTimeout(() => {
-            loadingDotsOverlayTextSignal.value = null
-          }, 750)
-          return
-        }
-
-        if (
-          data.message === 'owner permission' ||
-          data.message === 'viewer permission'
-        ) {
-          backgroundMessageSignal.value = ''
-          dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
-
-          dispatch(
-            navSlice.actions.enableNavItems({
-              navItemIdKeys: [
-                navItemKey.save,
-                navItemKey.pdf,
-                navItemKey.share,
-                navItemKey.insert,
-              ],
-            }),
-          )
-
-          setTimeout(() => {
-            loadingDotsOverlayTextSignal.value = null
-          }, 750)
-        }
+      if (quotation.blocks === undefined) {
+        notify({ msg: 'Quotation corrupted', type: 'warn', theme: 'light' })
+        setTimeout(() => {
+          loadingDotsOverlayTextSignal.value = null
+        }, 750)
+        return
       }
-    },
-    [isSuccess],
-  )
 
-  useUpdateEffect(
-    function handleErrors() {
-      if (isError) {
-        if (error.response?.data.message === 'no permission to view') {
-          backgroundMessageSignal.value = `No permission to view quotation ${id}`
-        } else if (
-          error.response?.data.message === 'not found in bucket' ||
-          error.response?.data.message === 'not found in db'
-        ) {
-          backgroundMessageSignal.value = `Quotation ${id} is not found`
-        } else if (error.response?.data.message === 'not shared') {
-          backgroundMessageSignal.value = `Quotation ${id} is private`
-        } else {
-          notify({ msg: 'Internal error', type: 'error', theme: 'light' })
-          backgroundMessageSignal.value = 'Internal error'
-        }
+      if (
+        data.message === 'owner permission' ||
+        data.message === 'viewer permission'
+      ) {
+        backgroundMessageSignal.value = ''
+        dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
+
+        dispatch(
+          navSlice.actions.enableNavItems({
+            navItemIdKeys: [
+              navItemKey.save,
+              navItemKey.pdf,
+              navItemKey.share,
+              navItemKey.insert,
+            ],
+          }),
+        )
 
         setTimeout(() => {
           loadingDotsOverlayTextSignal.value = null
         }, 750)
       }
-    },
-    [isError],
-  )
+    }
+  }, [isSuccess])
+
+  useUpdateEffect(() => {
+    if (isError) {
+      if (error.response?.data.message === 'no permission to view') {
+        backgroundMessageSignal.value = `No permission to view quotation ${id}`
+      } else if (
+        error.response?.data.message === 'not found in bucket' ||
+        error.response?.data.message === 'not found in db'
+      ) {
+        backgroundMessageSignal.value = `Quotation ${id} is not found`
+      } else if (error.response?.data.message === 'not shared') {
+        backgroundMessageSignal.value = `Quotation ${id} is private`
+      } else {
+        notify({ msg: 'Internal error', type: 'error', theme: 'light' })
+        backgroundMessageSignal.value = 'Internal error'
+      }
+
+      setTimeout(() => {
+        loadingDotsOverlayTextSignal.value = null
+      }, 750)
+    }
+  }, [isError])
 }

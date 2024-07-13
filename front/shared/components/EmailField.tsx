@@ -91,14 +91,14 @@ export const EmailField = ({
         sx={{
           '& .MuiInputLabel-shrink': {
             color:
-              emailLabelSignal.value !== initEmailLabel ? theme.colors.red : '',
+              emailLabelSignal.value === initEmailLabel ? '' : theme.colors.red,
           },
           '.MuiInputBase-root': {
             background: 'white',
           },
         }}
       />
-      {!!emailSuggestionSignal.value && (
+      {Boolean(emailSuggestionSignal.value) && (
         <div
           style={{
             position: 'absolute',

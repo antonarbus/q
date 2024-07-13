@@ -7,8 +7,7 @@ import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef, useEffect } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { useDisableLoadingOverlayWhenBookmarksAreFetched } from '@features/open_close/open_bookmarks_page'
-import { useGetBookmarksQuery } from '@entities/bookmark'
-import { type Item } from '@entities/bookmark'
+import { useGetBookmarksQuery, type Item } from '@entities/bookmark'
 import {
   LoadingTableOverlay,
   loadingTableOverlaySignal,
@@ -38,40 +37,34 @@ export const BookmarksAgGrid = (): JSX.Element => {
     }
   }, [email])
 
-  useUpdateEffect(
-    function handleLoading() {
-      if (isLoading) {
-        loadingTableOverlaySignal.value = {
-          areJumpingDotsShown: true,
-          text: 'Loading',
-        }
+  useUpdateEffect(() => {
+    if (isLoading) {
+      loadingTableOverlaySignal.value = {
+        areJumpingDotsShown: true,
+        text: 'Loading',
       }
-    },
-    [isLoading],
-  )
+    }
+  }, [isLoading])
 
-  useUpdateEffect(
-    function handleError() {
-      if (isError) {
-        if (error.response?.data.message === 'Not logged in') {
-          void router.navigate(`/${route.bookmarks}/${route.login}`)
-        }
-
-        if (
-          error.response?.data.message === 'Internal error' ||
-          error.response?.data.message === 'Unhandled error'
-        ) {
-          notify({
-            msg: 'Internal error',
-            type: 'warn',
-            theme: 'dark',
-            position: 'bottom-center',
-          })
-        }
+  useUpdateEffect(() => {
+    if (isError) {
+      if (error.response?.data.message === 'Not logged in') {
+        void router.navigate(`/${route.bookmarks}/${route.login}`)
       }
-    },
-    [isError],
-  )
+
+      if (
+        error.response?.data.message === 'Internal error' ||
+        error.response?.data.message === 'Unhandled error'
+      ) {
+        notify({
+          msg: 'Internal error',
+          type: 'warn',
+          theme: 'dark',
+          position: 'bottom-center',
+        })
+      }
+    }
+  }, [isError])
 
   return (
     <Box

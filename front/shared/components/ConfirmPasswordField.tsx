@@ -18,12 +18,12 @@ export const ConfirmPasswordField = ({
 
   useSignalEffect(() => {
     isConfirmPasswordOkSignal.value =
-      !!originalPasswordSignal.value &&
+      Boolean(originalPasswordSignal.value) &&
       originalPasswordSignal.value === confirmPasswordSignal.value
     isLabelRedSignal.value =
       didBlurSignal.value &&
-      !!originalPasswordSignal.value &&
-      !!confirmPasswordSignal.value &&
+      Boolean(originalPasswordSignal.value) &&
+      Boolean(confirmPasswordSignal.value) &&
       !isConfirmPasswordOkSignal.value
     labelSignal.value = isLabelRedSignal.value
       ? 'Passwords do not match'

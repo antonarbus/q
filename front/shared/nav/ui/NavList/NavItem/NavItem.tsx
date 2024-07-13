@@ -1,8 +1,7 @@
 import { css } from '@emotion/react'
 import { getState, useSelectorTyped } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
-import type { MouseEvent, MutableRefObject } from 'react'
-import { useRef } from 'react'
+import { useRef, type MouseEvent, type MutableRefObject } from 'react'
 import { TiArrowSortedDown } from 'react-icons/ti'
 import { Link, useLocation } from 'react-router-dom'
 import { useWindowSize } from 'react-use'
@@ -56,7 +55,7 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
     return topNavLevel.menuItems.find((menuItem) => menuItem.id === id)
   })
 
-  const isNestedMenu = !!navItem?.menuItems
+  const isNestedMenu = Boolean(navItem?.menuItems)
   const icon = navItem?.icon
   const name = navItem?.name
   const link = navItem?.link ?? ''
@@ -67,7 +66,7 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
   const disabled = Boolean(navItem?.disabled)
   const isActive = navItem?.isActive
 
-  const fixedLink = (location.pathname + '/' + link)
+  const fixedLink = `${location.pathname}/${link}`
     .replace('.', '')
     .replace('//', '/')
     .replace('//', '/')

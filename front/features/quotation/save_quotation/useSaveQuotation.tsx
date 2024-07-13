@@ -58,66 +58,57 @@ export const useSaveQuotation = ({
 
   const { refetch: updateCategories } = useGetQuotationCategoriesQuery()
 
-  useUpdateEffect(
-    function showLoadingIcon() {
-      if (isPending) {
-        showLoadingNavIcon({ navMenuItemIdKey: navItemKey.save })
-      }
-    },
-    [isPending],
-  )
+  useUpdateEffect(() => {
+    if (isPending) {
+      showLoadingNavIcon({ navMenuItemIdKey: navItemKey.save })
+    }
+  }, [isPending])
 
-  useUpdateEffect(
-    function handleSuccess() {
-      if (isSuccess) {
-        notify({
-          msg: data.message === 'saved' ? 'Saved' : 'Updated',
-          type: data.message === 'saved' ? 'success' : 'info',
-          theme: 'dark',
-          position: 'bottom-center',
+  useUpdateEffect(() => {
+    if (isSuccess) {
+      notify({
+        msg: data.message === 'saved' ? 'Saved' : 'Updated',
+        type: data.message === 'saved' ? 'success' : 'info',
+        theme: 'dark',
+        position: 'bottom-center',
+      })
+
+      void updateCategories()
+
+      if (data.quotation) {
+        dispatch(
+          quotationSlice.actions.loadQuotationReducer({
+            quotation: data.quotation,
+          }),
+        )
+      }
+
+      showSuccessNavIcon({ navMenuItemIdKey: navItemKey.save })
+      dispatch(navSlice.actions.removeUnderlineFromTopNav())
+
+      setTimeout(() => {
+        slideElement({
+          element: modalRef.current,
+          onSlideElementComplete: () => {
+            navigate(`/${data.quotation?.id ?? 'no id set'}`)
+          },
         })
+      }, 1000)
+    }
+  }, [isSuccess])
 
-        void updateCategories()
-
-        if (data.quotation) {
-          dispatch(
-            quotationSlice.actions.loadQuotationReducer({
-              quotation: data.quotation,
-            }),
-          )
-        }
-
-        showSuccessNavIcon({ navMenuItemIdKey: navItemKey.save })
-        dispatch(navSlice.actions.removeUnderlineFromTopNav())
-
-        setTimeout(() => {
-          slideElement({
-            element: modalRef.current,
-            onSlideElementComplete: () => {
-              navigate(`/${data.quotation?.id ?? 'no id set'}`)
-            },
-          })
-        }, 1000)
-      }
-    },
-    [isSuccess],
-  )
-
-  useUpdateEffect(
-    function handleError() {
-      if (isError) {
-        notify({
-          msg: error.response?.data.message,
-          type: 'error',
-          theme: 'dark',
-          position: 'bottom-center',
-        })
-        showErrorNavIcon({ navMenuItemIdKey: navItemKey.save })
-        reset()
-      }
-    },
-    [isError],
-  )
+  useUpdateEffect(() => {
+    if (isError) {
+      notify({
+        msg: error.response?.data.message,
+        type: 'error',
+        theme: 'dark',
+        position: 'bottom-center',
+      })
+      showErrorNavIcon({ navMenuItemIdKey: navItemKey.save })
+      reset()
+    }
+  }, [isError])
 
   const onSubmit = (e: React.FormEvent): void => {
     e.preventDefault()
@@ -140,7 +131,7 @@ export const useSaveQuotation = ({
       desc: descSignal.value,
       info: infoSignal.value,
       sharedWith: sharedWithSignal.value,
-      items: getState().quotation.items,
+      blocks: getState().quotation.blocks,
     }
 
     saveQuotation({ quotation })

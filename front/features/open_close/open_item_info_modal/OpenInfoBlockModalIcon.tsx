@@ -1,10 +1,10 @@
 import { type ReactNode, type MouseEvent } from 'react'
 import { HiOutlineInformationCircle } from 'react-icons/hi2'
 import { useNavigate } from 'react-router-dom'
-import { getItemFromStore, itemKey, useItem } from '@entities/quotation'
+import { getBlockFromStore, itemKey, useItem } from '@entities/quotation'
 import { route } from '@shared/consts/route'
 
-export const OpenInfoItemModalIcon = (): ReactNode => {
+export const OpenInfoBlockModalIcon = (): ReactNode => {
   const navigate = useNavigate()
   const { itemIndex } = useItem()
 
@@ -12,7 +12,7 @@ export const OpenInfoItemModalIcon = (): ReactNode => {
     <HiOutlineInformationCircle
       tabIndex={-1}
       onClick={(e: MouseEvent): void => {
-        const item = getItemFromStore({ itemIndex })
+        const item = getBlockFromStore({ itemIndex })
 
         if (!item) return
         if (item.type === itemKey.paste) return

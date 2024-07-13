@@ -1,5 +1,4 @@
-import type { PayloadAction } from '@reduxjs/toolkit'
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import type { NavItemsMediaQueryWidths } from '@widgets/nav'
 import { setMenuItemPropValue } from './setMenuItemPropValue'
 import type { MenuItemType, NavItemIdKey } from './type'
@@ -58,13 +57,12 @@ export const navSlice = createSlice({
       state.navItemRightPos = rightPos
     },
     openMenuWithId: (state, action: PayloadAction<string>) => {
-      state.idsToCurrentMenuItems = state.idsToNextMenuItems = [
-        'top',
-        action.payload,
-      ]
+      state.idsToCurrentMenuItems = ['top', action.payload]
+      state.idsToNextMenuItems = ['top', action.payload]
     },
     closeMenu: (state) => {
-      state.idsToNextMenuItems = state.idsToCurrentMenuItems = ['top']
+      state.idsToNextMenuItems = ['top']
+      state.idsToCurrentMenuItems = ['top']
       state.burger.isOpen = false
       state.menuItemHoverIndex = 0
     },

@@ -5,11 +5,15 @@ import { AiTwotoneEdit } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetBookmarkMutation } from '@entities/bookmark'
-import { isFroalaSignal, itemKey, quotationSlice } from '@entities/quotation'
+import {
+  isFroalaSignal,
+  itemKey,
+  quotationSlice,
+  type Block,
+} from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
-import { Block } from '@entities/quotation'
 
 export const OpenEditBookmarkModalButton = ({ id }: ReqBody): JSX.Element => {
   const navigate = useNavigate()
@@ -52,7 +56,7 @@ export const OpenEditBookmarkModalButton = ({ id }: ReqBody): JSX.Element => {
             email: 'edit-bookmark',
             sharedWith: [],
             preview: 'edit-bookmark',
-            items: [block],
+            blocks: [block],
           },
         }),
       )

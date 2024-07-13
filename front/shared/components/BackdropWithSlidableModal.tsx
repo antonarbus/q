@@ -63,6 +63,7 @@ export const BackdropWithSlidableModal = ({
     }
 
     return () => {
+      // eslint-disable-next-line no-shadow
       const bodyElement = document.querySelector('body')
 
       if (bodyElement instanceof HTMLElement) {

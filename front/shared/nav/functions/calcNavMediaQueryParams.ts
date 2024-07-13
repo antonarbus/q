@@ -1,7 +1,7 @@
 import { isOverflown } from '../../utils/isOverflown'
 
 const shrinkElementSlightly = (el: HTMLElement): void => {
-  el.style.width = el.offsetWidth - 10 + 'px'
+  el.style.width = `${el.offsetWidth - 10}px`
 }
 
 export type NavItemsMediaQueryWidths = {
@@ -66,7 +66,7 @@ export const calcNavMediaQueryParams = (
   const logoContainer = nav.querySelector<HTMLElement>('.logo-container')
   const logoWidth = logoContainer ? logoContainer.offsetWidth : 0
   const minNavWidthToIncludeAllItems = navItemWidth * navItemsQty + logoWidth
-  nav.style.width = minNavWidthToIncludeAllItems + 200 + 'px'
+  nav.style.width = `${minNavWidthToIncludeAllItems + 200}px`
 
   const logoExtension = calcNavWidthWhenLogoIsOverlay()
   const logoPart = calcNavWidthWhenLogoIsOverlay({

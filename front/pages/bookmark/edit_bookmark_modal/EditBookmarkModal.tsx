@@ -11,10 +11,10 @@ import { NameField } from './NameField'
 
 export const EditBookmarkModal = (): JSX.Element => {
   const modalRef = useRef<HTMLDivElement>(null)
-  const item = getState().quotation.items.at(0)
-  const nameSignal = useSignal(item?.name ?? '')
-  const categorySignal = useSignal(item?.category ?? '')
-  const descSignal = useSignal(item?.desc ?? '')
+  const firstBlock = getState().quotation.blocks.at(0)
+  const nameSignal = useSignal(firstBlock?.name ?? '')
+  const categorySignal = useSignal(firstBlock?.category ?? '')
+  const descSignal = useSignal(firstBlock?.desc ?? '')
   const { onSubmit, isPending, isSuccess, isError } = useEditBookmark({
     modalRef,
     nameSignal,

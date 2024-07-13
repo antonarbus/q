@@ -13,6 +13,7 @@ export const beforeUpload = ({ files, editor }: Props): boolean => {
   const email = getState().user.email
 
   if (!email) {
+    // eslint-disable-next-line no-alert
     alert(
       'You are not logged in, file will be kept in browser until page is refreshed',
     )
@@ -20,6 +21,7 @@ export const beforeUpload = ({ files, editor }: Props): boolean => {
     return false
   }
 
+  // eslint-disable-next-line no-alert
   const upload = confirm(`
     File will be uploaded into your profile.
     File size: ${getFileSizeInMbAsText({ file: files['0'] })}

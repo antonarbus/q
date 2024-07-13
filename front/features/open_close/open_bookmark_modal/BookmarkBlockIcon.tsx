@@ -3,10 +3,10 @@ import { type ReactNode, type MouseEvent } from 'react'
 import { MdOutlineStarOutline } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import {
-  getItemFromStore,
+  getBlockFromStore,
   itemKey,
   quotationSlice,
-  saveItemHeightByIndex,
+  saveBlockHeightByIndex,
   useItem,
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
@@ -14,7 +14,7 @@ import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
 import { cleanHtml } from '@shared/utils/itemsUtils'
 
-export const BookmarkItemIcon = (): ReactNode => {
+export const BookmarkBlockIcon = (): ReactNode => {
   const navigate = useNavigate()
   const { itemIndex } = useItem()
 
@@ -31,19 +31,19 @@ export const BookmarkItemIcon = (): ReactNode => {
           return
         }
 
-        saveItemHeightByIndex({ itemIndex })
+        saveBlockHeightByIndex({ itemIndex })
 
         const clickedIconElement = e.target
         if (!(clickedIconElement instanceof Element)) return
 
-        const itemElement = clickedIconElement.closest(`.${cls.item}`)
+        const itemElement = clickedIconElement.closest(`.${cls.block}`)
         if (!(itemElement instanceof Element)) return
         const paperElement = itemElement.querySelector(`.${cls.paper}`)
         if (!(paperElement instanceof Element)) return
         const html = paperElement.innerHTML
         const cleanedHtml = cleanHtml(html)
 
-        const item = getItemFromStore({ itemIndex })
+        const item = getBlockFromStore({ itemIndex })
 
         if (!item) return
         if (item.type === itemKey.paste) return

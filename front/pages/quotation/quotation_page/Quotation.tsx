@@ -10,8 +10,8 @@ import { InfoAndSearchLayout } from './InfoAndSearchLayout'
 export const Quotation = (): JSX.Element => {
   useLoadQuotation()
 
-  const items = useSelectorTyped(
-    (state) => state.quotation.items,
+  const blocks = useSelectorTyped(
+    (state) => state.quotation.blocks,
     itemsShapeEqualityFn,
   )
 
@@ -23,7 +23,7 @@ export const Quotation = (): JSX.Element => {
         <Info css={{ width: '80px' }} />
       </InfoAndSearchLayout>
       <BackgroundMessage />
-      <Items items={items} />
+      <Items items={blocks} />
       <Outlet />
     </>
   )

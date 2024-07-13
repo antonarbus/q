@@ -11,8 +11,8 @@ import {
 export const downloadPdf = async (): Promise<void> => {
   showLoadingNavIcon({ navMenuItemIdKey: navItemKey.pdf })
 
-  const itemsElement = document.querySelector(`.${cls.items}`)
-  if (!(itemsElement instanceof HTMLElement)) return
+  const blocksContainerElement = document.querySelector(`.${cls.blocks}`)
+  if (!(blocksContainerElement instanceof HTMLElement)) return
 
   const paperElements = document.querySelectorAll(`.${cls.paper}`)
   if (paperElements === null) return
@@ -24,9 +24,9 @@ export const downloadPdf = async (): Promise<void> => {
       return maxWidth
     }, 0) + 40
 
-  const screenshot = await domToJpeg(itemsElement, {
+  const screenshot = await domToJpeg(blocksContainerElement, {
     width: maxPaperWidth,
-    height: itemsElement.clientHeight,
+    height: blocksContainerElement.clientHeight,
     backgroundColor: 'grey',
     quality: 1,
     scale: 1.5,
@@ -46,10 +46,10 @@ export const downloadPdf = async (): Promise<void> => {
   worker.postMessage({
     imageData: screenshot,
     width: maxPaperWidth,
-    height: itemsElement.clientHeight,
+    height: blocksContainerElement.clientHeight,
   })
 
-  worker.onmessage = function (event: MessageEvent<Blob>) {
+  worker.onmessage = (event: MessageEvent<Blob>) => {
     const blobImage = event.data
     const pdfDataUrl = URL.createObjectURL(blobImage)
     const downloadLink = document.createElement('a')
@@ -63,7 +63,7 @@ export const downloadPdf = async (): Promise<void> => {
     showSuccessNavIcon({ navMenuItemIdKey: navItemKey.pdf })
   }
 
-  worker.onerror = function () {
+  worker.onerror = () => {
     showErrorNavIcon({ navMenuItemIdKey: navItemKey.pdf })
   }
 }

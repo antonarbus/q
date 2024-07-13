@@ -7,8 +7,7 @@ import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef, useEffect } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { useDisableLoadingOverlayWhenQuotationsAreFetched } from '@features/open_close/open_quotations_page'
-import { useGetQuotationsQuery } from '@entities/quotation'
-import { type Quotation } from '@entities/quotation'
+import { useGetQuotationsQuery, type Quotation } from '@entities/quotation'
 import {
   LoadingTableOverlay,
   loadingTableOverlaySignal,
@@ -38,40 +37,34 @@ export const QuotationsAgGrid = (): JSX.Element => {
     }
   }, [email])
 
-  useUpdateEffect(
-    function handleLoading() {
-      if (isLoading) {
-        loadingTableOverlaySignal.value = {
-          areJumpingDotsShown: true,
-          text: 'Loading',
-        }
+  useUpdateEffect(() => {
+    if (isLoading) {
+      loadingTableOverlaySignal.value = {
+        areJumpingDotsShown: true,
+        text: 'Loading',
       }
-    },
-    [isLoading],
-  )
+    }
+  }, [isLoading])
 
-  useUpdateEffect(
-    function handleError() {
-      if (isError) {
-        if (error.response?.data.message === 'Not logged in') {
-          void router.navigate(`/${route.quotations}/${route.login}`)
-        }
-
-        if (
-          error.response?.data.message === 'Internal error' ||
-          error.response?.data.message === 'Unhandled case'
-        ) {
-          notify({
-            msg: 'Internal error',
-            type: 'warn',
-            theme: 'dark',
-            position: 'bottom-center',
-          })
-        }
+  useUpdateEffect(() => {
+    if (isError) {
+      if (error.response?.data.message === 'Not logged in') {
+        void router.navigate(`/${route.quotations}/${route.login}`)
       }
-    },
-    [isError],
-  )
+
+      if (
+        error.response?.data.message === 'Internal error' ||
+        error.response?.data.message === 'Unhandled case'
+      ) {
+        notify({
+          msg: 'Internal error',
+          type: 'warn',
+          theme: 'dark',
+          position: 'bottom-center',
+        })
+      }
+    }
+  }, [isError])
 
   return (
     <Box

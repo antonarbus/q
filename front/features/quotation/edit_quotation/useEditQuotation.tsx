@@ -53,46 +53,40 @@ export const useEditQuotation = ({
 
   const { refetch: fetchQuotations } = useGetQuotationsQuery()
 
-  useUpdateEffect(
-    function handleSuccess() {
-      if (isSuccess) {
-        notify({
-          msg: data.message === 'saved' ? 'Saved' : 'Updated',
-          type: data.message === 'saved' ? 'success' : 'info',
-          theme: 'dark',
-          position: 'bottom-center',
+  useUpdateEffect(() => {
+    if (isSuccess) {
+      notify({
+        msg: data.message === 'saved' ? 'Saved' : 'Updated',
+        type: data.message === 'saved' ? 'success' : 'info',
+        theme: 'dark',
+        position: 'bottom-center',
+      })
+
+      void updateQuotationCategories()
+      void fetchQuotations()
+
+      setTimeout(() => {
+        slideElement({
+          element: modalRef.current,
+          onSlideElementComplete: () => {
+            navigate('..')
+          },
         })
+      }, 1000)
+    }
+  }, [isSuccess])
 
-        void updateQuotationCategories()
-        void fetchQuotations()
-
-        setTimeout(() => {
-          slideElement({
-            element: modalRef.current,
-            onSlideElementComplete: () => {
-              navigate('..')
-            },
-          })
-        }, 1000)
-      }
-    },
-    [isSuccess],
-  )
-
-  useUpdateEffect(
-    function handleError() {
-      if (isError) {
-        notify({
-          msg: error.response?.data.message,
-          type: 'error',
-          theme: 'dark',
-          position: 'bottom-center',
-        })
-        reset()
-      }
-    },
-    [isError],
-  )
+  useUpdateEffect(() => {
+    if (isError) {
+      notify({
+        msg: error.response?.data.message,
+        type: 'error',
+        theme: 'dark',
+        position: 'bottom-center',
+      })
+      reset()
+    }
+  }, [isError])
 
   const onSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault()
