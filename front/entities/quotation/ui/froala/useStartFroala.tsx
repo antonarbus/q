@@ -1,3 +1,6 @@
+/* eslint-disable object-shorthand */
+/* eslint-disable func-names */
+// /* eslint-disable */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 // import './froalaPlugins.js'
@@ -118,6 +121,7 @@ export const useStartFroala = (): void => {
             const href = link.getAttribute('href')
             const isFileInBucket = href.includes('bucket')
             if (!isFileInBucket) return
+            // eslint-disable-next-line no-alert
             const removeFile = confirm(`
                 Remove file from your profile?
                 ${href}
@@ -134,7 +138,7 @@ export const useStartFroala = (): void => {
           },
           'image.loaded': function (props: { '0': HTMLImageElement }) {
             const imageElement = props['0']
-            imageElement.style.height = imageElement.clientHeight + 'px'
+            imageElement.style.height = `${imageElement.clientHeight}px`
             imageElement.id = `img-${nanoid(5)}`
             imageElement.classList.add('fr-rounded')
           },

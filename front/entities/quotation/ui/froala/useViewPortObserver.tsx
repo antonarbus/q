@@ -1,5 +1,4 @@
-import type { MutableRefObject } from 'react'
-import { useEffect, useRef, useState } from 'react'
+import { type MutableRefObject, useEffect, useRef, useState } from 'react'
 
 type Res = {
   observerRef: MutableRefObject<HTMLDivElement | null>

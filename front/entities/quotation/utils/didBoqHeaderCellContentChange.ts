@@ -1,5 +1,5 @@
 import { type FroalaEditor } from '@shared/types/froala'
-import { getBoqItemFromStore } from '../redux/getters/getBoqItemFromStore'
+import { getBoqBlockFromStore } from '../redux/getters/getBoqBlockFromStore'
 import { type BoqHeaderKey } from '../types'
 
 type Props = {
@@ -17,7 +17,7 @@ export const didBoqHeaderCellContentChange = ({
   boqHeaderKey,
 }: Props): boolean => {
   const htmlOnDisplay = editor.html.get()
-  const htmlFromStore = getBoqItemFromStore({ itemIndex })?.boq.header[
+  const htmlFromStore = getBoqBlockFromStore({ itemIndex })?.boq.header[
     boqHeaderKey
   ].html
   const didContentChange = htmlOnDisplay !== htmlFromStore

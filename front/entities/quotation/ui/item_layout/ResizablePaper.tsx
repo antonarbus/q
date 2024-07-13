@@ -30,7 +30,7 @@ export const ResizablePaper = ({
 }: Props): JSX.Element => {
   const { itemIndex } = useItem()
   const width = useSelectorTyped(
-    (state) => state.quotation.items[itemIndex]?.width,
+    (state) => state.quotation.blocks[itemIndex]?.width,
   )
   const isWidthSetManually = width !== undefined
   const isAutoWidth = !isWidthSetManually || disableResize || autoWidth

@@ -43,7 +43,7 @@ export { isBoqRowPriceValid } from './utils/isBoqRowPriceValid'
 export { updateBoqRowCellWithValue } from './utils/updateBoqRowCellWithValue'
 export { updateSubTotalPriceWithValue } from './utils/updateSubTotalPriceWithValue'
 export { formatBoqRowCellNumber } from './utils/formatBoqRowCellNumber'
-export { getNumberOfBoqItemsAbove } from './utils/getNumberOfBoqItemsAbove'
+export { getNumberOfBoqBlocksAbove } from './utils/getNumberOfBoqBlocksAbove'
 export { getTotalPriceAbove } from './utils/getTotalPriceAbove'
 export {
   fixItemImagesHeight,
