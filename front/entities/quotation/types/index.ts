@@ -64,7 +64,9 @@ type BoqHeader = {
 }
 
 export type BoqHeaderKey = keyof BoqHeader
+
 export type BoqColumnKey = keyof BoqCols
+
 export type BoqRowCellKey = keyof Omit<BoqCols, 'number'>
 
 export type BoqRowEditorRefs = {
@@ -108,7 +110,7 @@ export type BlockPaste = Common & {
   type: typeof itemKey.paste
 }
 
-type Block = BlockBoq | BlockPaste | BlockText | BlockPrice
+export type Block = BlockBoq | BlockPaste | BlockText | BlockPrice
 
 // item
 export type Item = Block | BoqRow
@@ -130,5 +132,5 @@ export type Quotation = Common & {
     name?: string
     company?: string
   }
-  items: Item[]
+  items: Block[]
 }

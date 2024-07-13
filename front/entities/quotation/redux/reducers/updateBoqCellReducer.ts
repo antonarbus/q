@@ -14,19 +14,21 @@ export const updateBoqCellReducer = (
 ): void => {
   const { itemIndex, rowIndex, html, value, boqRowCellKey } = action.payload
 
-  const item = state.items[itemIndex]
-  if (!item) return
+  const block = state.items[itemIndex]
 
+  if (!block) return
+
+  // todo: move item for edit modal into a different slice
   // special case for when the item is a row for item edit modal
-  if (item.type === itemKey.row) {
-    const row = item
-    row[boqRowCellKey].html = html
-    row[boqRowCellKey].value = value
-    return
-  }
+  // if (block.type === itemKey.row) {
+  //   const row = block
+  //   row[boqRowCellKey].html = html
+  //   row[boqRowCellKey].value = value
+  //   return
+  // }
 
-  if (item.type === itemKey.boq) {
-    const row = item.boq.rows[rowIndex]
+  if (block.type === itemKey.boq) {
+    const row = block.boq.rows[rowIndex]
     if (row === undefined) return
 
     row[boqRowCellKey].html = html

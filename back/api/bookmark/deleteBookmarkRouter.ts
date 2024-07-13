@@ -1,5 +1,4 @@
 import { Router } from 'express'
-import { type Item } from '@entities/quotation'
 import { type ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '../../consts/httpStatus'
 import { BookmarkModel } from '../../db/models/bookmarkModel'
@@ -7,6 +6,7 @@ import { verifyAccessTokenMiddleware } from '../../middleware/verifyAccessTokenM
 import { bucket, storageFolderName } from '../../services/storage'
 import { type ResWithBody, type ReqWithBody, type Next } from '../../types'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '../../utils/getEmailFromRefreshTokenOrThrowUnauthorized'
+import { Block, Item } from '@entities/quotation/types'
 
 export type ReqBody = {
   id: Item['id']

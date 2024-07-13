@@ -9,9 +9,11 @@ import { isFroalaSignal, itemKey, quotationSlice } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
+import { Block } from '@entities/quotation/types'
 
 export const OpenEditBookmarkModalButton = ({ id }: ReqBody): JSX.Element => {
   const navigate = useNavigate()
+
   const {
     mutate: loadItem,
     isPending,
@@ -27,9 +29,17 @@ export const OpenEditBookmarkModalButton = ({ id }: ReqBody): JSX.Element => {
 
       if (!item) return
 
+      if (item.type === 'row') return
+
+      const block = item as Block
+
       isFroalaSignal.value = false
 
-      // add item into fake quotation with just one item (it will be good to have a separate bookmark slice, but it will require a lot of changes in the items render logic, so I decided to use quotation slice for now)
+      // todo: use some other slice for bookmarks
+      // add item into fake quotation with just one item
+      // it will be good to have a separate bookmark slice
+      // but it will require a lot of changes in the items render logic
+      // decided to use quotation slice for now
       dispatch(
         quotationSlice.actions.loadQuotationReducer({
           quotation: {
@@ -42,12 +52,13 @@ export const OpenEditBookmarkModalButton = ({ id }: ReqBody): JSX.Element => {
             email: 'edit-bookmark',
             sharedWith: [],
             preview: 'edit-bookmark',
-            items: [item],
+            items: [block],
           },
         }),
       )
 
-      // id url param doesn't play any role here, it's just for visual representation in the url
+      // 'id' url param doesn't play any role here
+      // it's just for visual representation in the url
       navigate(`./${route.editBookmark}/${id}`)
     }
   }, [isSuccess])

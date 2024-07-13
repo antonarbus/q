@@ -1,10 +1,10 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { Item, Quotation } from '../../types'
+import type { Block, Quotation } from '../../types'
 
 export const reOrderItemsReducer = (
   state: Quotation,
   action: PayloadAction<{
-    reOrderedItems: Item[]
+    reOrderedItems: Block[]
   }>,
 ): void => {
   const { reOrderedItems } = action.payload

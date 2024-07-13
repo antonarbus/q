@@ -50,6 +50,7 @@ export const useEditBookmark = ({
     error,
     reset,
   } = useSaveBookmarkMutation()
+
   const { refetch: updateItemCategories } = useGetBookmarkCategoriesQuery()
   const { refetch: updateBookmarks } = useGetBookmarksQuery()
 
@@ -114,59 +115,59 @@ export const useEditBookmark = ({
       return
     }
 
-    if (item.type === itemKey.row) {
-      const boqRowElement = document.querySelector(`.${cls.boqRow}`)
-      if (!boqRowElement) return
+    // if (item.type === itemKey.row) {
+    // const boqRowElement = document.querySelector(`.${cls.boqRow}`)
+    // if (!boqRowElement) return
 
-      dispatch(
-        quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
-          itemIndex: 0,
-          rowIndex: 0,
-          height: boqRowElement.clientHeight,
-          width: boqRowElement.clientWidth,
-        }),
-      )
+    // dispatch(
+    //   quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
+    //     itemIndex: 0,
+    //     rowIndex: 0,
+    //     height: boqRowElement.clientHeight,
+    //     width: boqRowElement.clientWidth,
+    //   }),
+    // )
 
-      const item = getState().quotation.items.at(0)
-      if (!item) return
+    // const item = getState().quotation.items.at(0)
+    // if (!item) return
 
-      const html = boqRowElement.outerHTML
-      const cleanedHtml = cleanHtml(html)
+    // const html = boqRowElement.outerHTML
+    // const cleanedHtml = cleanHtml(html)
 
-      const itemWithUpdatedPreview = structuredClone(item)
-      itemWithUpdatedPreview.preview = cleanedHtml
+    // const itemWithUpdatedPreview = structuredClone(item)
+    // itemWithUpdatedPreview.preview = cleanedHtml
 
-      const itemWithUpdatedValues = {
-        ...itemWithUpdatedPreview,
-        name: nameSignal.value,
-        category: categorySignal.value,
-        desc: descSignal.value,
-      }
+    // const itemWithUpdatedValues = {
+    //   ...itemWithUpdatedPreview,
+    //   name: nameSignal.value,
+    //   category: categorySignal.value,
+    //   desc: descSignal.value,
+    // }
 
-      saveItem({ item: itemWithUpdatedValues })
-    } else {
-      saveItemHeightByIndex({ itemIndex: 0 })
-      const paperElement = document.querySelector(`.${cls.paper}`)
-      if (!(paperElement instanceof Element)) return
+    // saveItem({ item: itemWithUpdatedValues })
+    // } else {
+    saveItemHeightByIndex({ itemIndex: 0 })
+    const paperElement = document.querySelector(`.${cls.paper}`)
+    if (!(paperElement instanceof Element)) return
 
-      const html = paperElement.innerHTML
-      const cleanedHtml = cleanHtml(html)
+    const html = paperElement.innerHTML
+    const cleanedHtml = cleanHtml(html)
 
-      const item = getState().quotation.items.at(0)
-      if (!item) return
+    // const item = getState().quotation.items.at(0)
+    if (!item) return
 
-      const itemWithUpdatedPreview = structuredClone(item)
-      itemWithUpdatedPreview.preview = cleanedHtml
+    const itemWithUpdatedPreview = structuredClone(item)
+    itemWithUpdatedPreview.preview = cleanedHtml
 
-      const itemWithUpdatedValues = {
-        ...itemWithUpdatedPreview,
-        name: nameSignal.value,
-        category: categorySignal.value,
-        desc: descSignal.value,
-      }
-
-      saveItem({ item: itemWithUpdatedValues })
+    const itemWithUpdatedValues = {
+      ...itemWithUpdatedPreview,
+      name: nameSignal.value,
+      category: categorySignal.value,
+      desc: descSignal.value,
     }
+
+    saveItem({ item: itemWithUpdatedValues })
+    // }
   }, [])
 
   return { onSubmit, isPending, isSuccess, isError }
