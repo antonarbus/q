@@ -9,21 +9,16 @@ export const getItemByIdFromState = ({
   id,
   state,
 }: Props): Item | undefined => {
-  const item = state.items.find((item) => {
+  const block = state.items.find((item) => {
     return item.id === id
   })
 
-  if (item) return item
+  if (block) return block
 
-  // todo: convert into for-of
-  // eslint-disable-next-line @typescript-eslint/prefer-for-of
-  for (let itemIndex = 0; itemIndex < state.items.length; itemIndex++) {
-    const item = state.items[itemIndex]
-
-    if (item?.type === 'boq') {
-      for (let rowIndex = 0; rowIndex < item.boq.rows.length; rowIndex++) {
-        if (item.boq.rows[rowIndex]?.id === id) {
-          const boqRow = (state.items[itemIndex] as BlockBoq).boq.rows[rowIndex]
+  for (const block of state.items) {
+    if (block?.type === 'boq') {
+      for (const boqRow of block.boq.rows) {
+        if (boqRow.id === id) {
           return boqRow
         }
       }

@@ -45,6 +45,7 @@ export const useAddBookmark = ({
     error,
     reset,
   } = useSaveBookmarkMutation()
+
   const { refetch: updateCategories } = useGetBookmarkCategoriesQuery()
   const { refetch: updateBookmarks } = useGetBookmarksQuery()
 

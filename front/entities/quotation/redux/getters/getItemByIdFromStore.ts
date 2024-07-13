@@ -8,23 +8,16 @@ type Props = {
 export const getItemByIdFromStore = ({ id }: Props): Item | undefined => {
   const quotation = getState().quotation
 
-  const item = quotation.items.find((item) => {
+  const block = quotation.items.find((item) => {
     return item.id === id
   })
 
-  if (item) return item
+  if (block) return block
 
-  // todo: convert into for-of
-  // eslint-disable-next-line @typescript-eslint/prefer-for-of
-  for (let itemIndex = 0; itemIndex < quotation.items.length; itemIndex++) {
-    const item = quotation.items[itemIndex]
-
-    if (item?.type === 'boq') {
-      for (let rowIndex = 0; rowIndex < item.boq.rows.length; rowIndex++) {
-        if (item.boq.rows[rowIndex]?.id === id) {
-          const boqRow = (quotation.items[itemIndex] as BlockBoq).boq.rows[
-            rowIndex
-          ]
+  for (const block of quotation.items) {
+    if (block.type === 'boq') {
+      for (const boqRow of block.boq.rows) {
+        if (boqRow.id === id) {
           return boqRow
         }
       }

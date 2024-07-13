@@ -17,6 +17,7 @@ export const InfoItemModal = (): React.ReactNode => {
   if (!id) return null
 
   const item = getItemByIdFromStore({ id })
+
   if (!item) return null
 
   const nameSignal = useSignal(item.name)

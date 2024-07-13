@@ -12,6 +12,7 @@ import { NameField } from './NameField'
 export const AddBookmarkModal = (): React.ReactNode => {
   const { id } = useParams()
   const item = getItemByIdFromStore({ id: id ?? 'missing id' })
+
   const modalRef = useRef<HTMLDivElement>(null)
   const nameSignal = useSignal(item?.name ?? '')
   const categorySignal = useSignal(item?.category ?? '')
