@@ -4,18 +4,18 @@ import { nanoid } from '@shared/lib/nanoid'
 import { itemKey } from '../../consts/itemKey'
 import type { Block, PasteBlock, Quotation } from '../../types'
 
-export const insertPasteItemReducer = (
+export const insertPasteBlockReducer = (
   state: Quotation,
   action: PayloadAction<CopyPlace>,
 ): void => {
   const { pastePos, itemId } = action.payload
 
-  const blocksWithoutPasteText: Block[] = state.items.filter(
+  const blocksWithoutPasteText: Block[] = state.blocks.filter(
     (block) => block.type !== itemKey.paste,
   )
 
   if (pastePos === 'middle') {
-    state.items = blocksWithoutPasteText
+    state.blocks = blocksWithoutPasteText
     return
   }
 
@@ -32,5 +32,5 @@ export const insertPasteItemReducer = (
   }
 
   blocksWithoutPasteText.splice(insertAtIndex, 0, pasteBlock)
-  state.items = blocksWithoutPasteText
+  state.blocks = blocksWithoutPasteText
 }

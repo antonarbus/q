@@ -10,7 +10,7 @@ import { hideBoqItemPinsReducer } from './reducers/hideBoqItemPinsReducer'
 import { hideBoqPriceCellPinsReducer } from './reducers/hideBoqPriceCellPinsReducer'
 import { hideBoqRowCellPinReducer } from './reducers/hideBoqRowCellPinReducer'
 import { insertPasteBoqRowReducer } from './reducers/insertPasteBoqRowReducer'
-import { insertPasteItemReducer } from './reducers/insertPasteItemReducer'
+import { insertPasteBlockReducer } from './reducers/insertPasteBlockReducer'
 import { loadQuotationReducer } from './reducers/loadItemsReducer'
 import { pasteItemReducer } from './reducers/pasteItemReducer'
 import { pinItemPriceReducer } from './reducers/pinItemPriceReducer'
@@ -18,7 +18,7 @@ import { pinPriceReducer } from './reducers/pinPriceReducer'
 import { pinQtyReducer } from './reducers/pinQtyReducer'
 import { removePasteItemReducer } from './reducers/removePasteItemReducer'
 import { reOrderBoqRowsReducer } from './reducers/reOrderBoqRowsReducer'
-import { reOrderItemsReducer } from './reducers/reOrderItemsReducer'
+import { reOrderBlocksReducer } from './reducers/reOrderItemsReducer'
 import { showBoqPriceCellPinsReducer } from './reducers/showBoqPriceCellPinsReducer'
 import { showBoqRowCellPinReducer } from './reducers/showBoqRowCellPinReducer'
 import { unfixImagesHeightReducer } from './reducers/unfixImagesHeightReducer'
@@ -56,14 +56,14 @@ export const quotationSlice = createSlice({
     hideBoqItemPinsReducer,
     hideBoqRowCellPinReducer,
     insertPasteBoqRowReducer,
-    insertPasteItemReducer,
+    insertPasteBlockReducer,
     pasteItemReducer,
     pinItemPriceReducer,
     pinQtyReducer,
     pinPriceReducer,
     removePasteItemReducer,
     reOrderBoqRowsReducer,
-    reOrderItemsReducer,
+    reOrderBlocksReducer,
     showBoqRowCellPinReducer,
     showBoqPriceCellPinsReducer,
     hideBoqPriceCellPinsReducer,

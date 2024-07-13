@@ -8,7 +8,7 @@ export const enableFroalaReducer = (
   }>,
 ): void => {
   const { itemIndex } = action.payload
-  const item = state.items[itemIndex]
-  if (item === undefined) return
-  item.isFroala = true
+  const block = state.blocks[itemIndex]
+  if (block === undefined) return
+  block.isFroala = true
 }

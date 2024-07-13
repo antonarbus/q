@@ -11,7 +11,7 @@ export const fixImagesHeightReducer = (
 ): void => {
   const { imageId, imageHeight } = action.payload
 
-  state.items.forEach((item) => {
+  state.blocks.forEach((item) => {
     if (item.type === itemKey.text) {
       if (!item.text.html.includes('img')) return
       if (!item.text.html.includes(imageId)) return
@@ -43,16 +43,22 @@ type Props = {
 }
 
 function makeHeightFixedInHtmlString({ htmlString, newHeight }: Props): string {
-  const pattern = /<img[^>]*style\s*=\s*['"]([^'"]*)['"][^>]*>/gi
+  const styleTagAtImgRegExp =
+    /<img[^>]*style\s*=\s*['"](?<innerStyleTag>[^'"]*)['"][^>]*>/giu
 
   function replaceAutoHeight(match: string, styleAttribute: string): string {
+    const heightAutoRegExp = /height\s*:\s*auto;/giu
+
     const newStyle = styleAttribute.replace(
-      /height\s*:\s*auto;/gi,
+      heightAutoRegExp,
       `height: ${newHeight}px;`,
     )
     return match.replace(styleAttribute, newStyle)
   }
 
-  const modifiedHtml = htmlString.replace(pattern, replaceAutoHeight)
+  const modifiedHtml = htmlString.replace(
+    styleTagAtImgRegExp,
+    replaceAutoHeight,
+  )
   return modifiedHtml
 }

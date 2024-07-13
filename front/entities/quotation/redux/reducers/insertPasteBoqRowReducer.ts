@@ -2,7 +2,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { type CopyPlace } from '@entities/copy'
 import { boqRowKey } from '../../consts/boqRowKey'
 import type { BoqRow, BoqRowCell, Quotation } from '../../types'
-import { getBoqItemFromState } from '../getters/getBoqItemFromState'
+import { getBoqBlockFromState } from '../getters/getBoqBlockFromState'
 
 const defaultCellValues: BoqRowCell = {
   html: '',
@@ -29,8 +29,8 @@ type Type = (state: Quotation, action: PayloadAction<CopyPlace>) => Quotation
 export const insertPasteBoqRowReducer: Type = (state, action) => {
   const { pastePos, itemId } = action.payload
 
-  state.items.forEach((item, itemIndex) => {
-    const boqItem = getBoqItemFromState({ itemIndex, state })
+  state.blocks.forEach((item, itemIndex) => {
+    const boqItem = getBoqBlockFromState({ itemIndex, state })
     if (boqItem === undefined) return state
 
     const boqRowsWithoutPasteText = boqItem.boq.rows.filter(

@@ -25,14 +25,17 @@ export const pasteItemReducer: Reducer = (state, action) => {
     })
   }
 
-  const isItem =
+  const isBlock =
     itemToPaste.type === itemKey.boq ||
     itemToPaste.type === itemKey.text ||
     itemToPaste.type === itemKey.price
+
   const isBoqRow = itemToPaste.type === itemKey.row
 
-  if (isItem) {
-    const hoveredItemIndex = state.items.findIndex((item) => item.id === itemId)
+  if (isBlock) {
+    const hoveredItemIndex = state.blocks.findIndex(
+      (block) => block.id === itemId,
+    )
 
     type SplicingSettings = {
       insertAtIndex: number
@@ -61,23 +64,23 @@ export const pasteItemReducer: Reducer = (state, action) => {
 
     const spliceSettings = getSpliceSettings()
 
-    const itemsWithoutPasteText = state.items.filter(
+    const blocksWithoutPasteText = state.blocks.filter(
       ({ type }) => type !== itemKey.paste,
     )
 
-    itemsWithoutPasteText.splice(
+    blocksWithoutPasteText.splice(
       spliceSettings.insertAtIndex,
       spliceSettings.deleteCount,
       itemToPaste,
     )
 
-    state.items = itemsWithoutPasteText
+    state.blocks = blocksWithoutPasteText
     return
   }
 
   if (isBoqRow) {
-    state.items.forEach((item, index) => {
-      if (item.type !== itemKey.boq) return
+    state.blocks.forEach((block, index) => {
+      if (block.type !== itemKey.boq) return
 
       type SplicingSettings = {
         insertAtIndex: number
@@ -86,27 +89,27 @@ export const pasteItemReducer: Reducer = (state, action) => {
 
       let spliceSettings: SplicingSettings | undefined
 
-      item.boq.rows.forEach((boqRow, hoveredItemIndex) => {
+      block.boq.rows.forEach((boqRow, hoveredItemIndex) => {
         if (boqRow.id !== itemId) return
 
         const getSpliceSettings = (): SplicingSettings => {
-          const spliceSettings = {
+          const spliceParams = {
             insertAtIndex: hoveredItemIndex,
             deleteCount: 0,
           }
 
           if (pastePos === 'top') {
-            spliceSettings.insertAtIndex--
-            return spliceSettings
+            spliceParams.insertAtIndex--
+            return spliceParams
           }
 
           if (pastePos === 'bottom') {
-            spliceSettings.insertAtIndex++
-            return spliceSettings
+            spliceParams.insertAtIndex++
+            return spliceParams
           }
 
-          spliceSettings.deleteCount++
-          return spliceSettings
+          spliceParams.deleteCount++
+          return spliceParams
         }
 
         spliceSettings = getSpliceSettings()
@@ -114,7 +117,7 @@ export const pasteItemReducer: Reducer = (state, action) => {
 
       if (spliceSettings === undefined) return
 
-      const boqRowsWithoutPasteText = item.boq.rows.filter(
+      const boqRowsWithoutPasteText = block.boq.rows.filter(
         (boqRow) => boqRow.type !== boqRowKey.paste,
       )
 
@@ -124,7 +127,7 @@ export const pasteItemReducer: Reducer = (state, action) => {
         itemToPaste,
       )
 
-      item.boq.rows = boqRowsWithoutPasteText
+      block.boq.rows = boqRowsWithoutPasteText
     })
   }
 }
