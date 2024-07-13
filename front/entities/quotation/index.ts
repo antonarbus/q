@@ -45,10 +45,7 @@ export { updateSubTotalPriceWithValue } from './utils/updateSubTotalPriceWithVal
 export { formatBoqRowCellNumber } from './utils/formatBoqRowCellNumber'
 export { getNumberOfBoqBlocksAbove } from './utils/getNumberOfBoqBlocksAbove'
 export { getTotalPriceAbove } from './utils/getTotalPriceAbove'
-export {
-  fixItemImagesHeight,
-  unfixItemImagesHeight,
-} from './utils/itemImagesHeight'
+export { fixImagesHeight, unfixImagesHeight } from './utils/imagesHeight'
 
 // Store item getters
 export { getBlockFromStore } from './redux/getters/getBlockFromStore'
@@ -73,7 +70,7 @@ export { updateBoqHeaderCellAtStore } from './redux/updaters/updateBoqHeaderCell
 export { updateBoqRowCellAtStore } from './redux/updaters/updateBoqRowCellAtStore'
 
 // Ui
-export { ItemComp } from './ui/ItemComp'
+export { BlockComp } from './ui/BlockComp'
 export { Froala } from './ui/froala/Froala'
 export { BackgroundMessage } from './ui/BackgroundMessage'
 

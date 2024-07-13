@@ -9,8 +9,8 @@ export {
   onTextItemResizeStop,
 } from './onTextItemResize'
 export {
-  onBoqItemResizeStart,
-  onBoqItemResize,
-  onBoqItemResizeStop,
-} from './onBoqItemResize'
-export { onPriceItemResizeStop } from './onPriceItemResize'
+  onBoqBlockResizeStart,
+  onBoqBlockResize,
+  onBoqBlockResizeStop,
+} from './onBoqBlockResize'
+export { onPriceBlockResizeStop } from './onPriceBlockResize'

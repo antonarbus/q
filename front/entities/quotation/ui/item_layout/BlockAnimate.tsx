@@ -26,7 +26,7 @@ type Props = {
   className?: string
 }
 
-export const ItemAnimate = ({
+export const BlockAnimate = ({
   children,
   itemHeight,
   itemId,
@@ -43,7 +43,7 @@ export const ItemAnimate = ({
   return (
     <motion.div
       id={itemId}
-      className={cls.item + (className ? ` ${className}` : '')}
+      className={cls.block + (className ? ` ${className}` : '')}
       initial={{
         height: 0,
         marginBottom: 0,

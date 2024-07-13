@@ -1,1 +1,1 @@
-export { ItemAnimate } from './ItemAnimate'
+export { BlockAnimate } from './BlockAnimate'

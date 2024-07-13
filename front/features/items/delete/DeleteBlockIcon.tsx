@@ -41,7 +41,7 @@ export const DeleteBlockIcon = (): EmotionJSX.Element => {
 
         const clickedIconElement = e.target
         if (!(clickedIconElement instanceof Element)) return
-        const blockElement = clickedIconElement.closest(`.${cls.item}`)
+        const blockElement = clickedIconElement.closest(`.${cls.block}`)
         if (!(blockElement instanceof Element)) return
         const paperElement = blockElement.querySelector(`.${cls.paper}`)
         if (!(paperElement instanceof HTMLElement)) return

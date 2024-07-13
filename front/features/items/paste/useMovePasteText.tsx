@@ -57,11 +57,11 @@ function movePasteTextItem(e: MouseEvent): void {
       dispatch(copySlice.actions.hidePasteText())
     }
 
-    const isPasteItem = getState().quotation.items.some(
-      (item) => item.type === itemKey.paste,
+    const isPasteBlock = getState().quotation.blocks.some(
+      (block) => block.type === itemKey.paste,
     )
 
-    if (isPasteItem) {
+    if (isPasteBlock) {
       dispatch(quotationSlice.actions.removePasteItemReducer())
     }
   }
@@ -118,24 +118,30 @@ function movePasteTextItem(e: MouseEvent): void {
   const isNarrowGapUnderNav = e.clientY > 100
 
   if (isNarrowGapUnderNav && !isPasteTextShown) {
-    const firstItem = getState().quotation.items[0]
-    if (!firstItem) return
-    const pastePlace: CopyPlace = { pastePos: 'top', itemId: firstItem.id }
+    const firstBlock = getState().quotation.blocks[0]
+
+    if (!firstBlock) return
+
+    const pastePlace: CopyPlace = { pastePos: 'top', itemId: firstBlock.id }
     dispatch(copySlice.actions.updatePastePos(pastePlace))
     dispatch(copySlice.actions.showPasteText())
 
-    dispatch(quotationSlice.actions.insertPasteItemReducer(pastePlace))
+    dispatch(quotationSlice.actions.insertPasteBlockReducer(pastePlace))
     return
   }
 
-  const item = e.target.closest(`.${cls.item}`)
+  const blockElement = e.target.closest(`.${cls.block}`)
 
-  if (!item) {
+  if (!blockElement) {
     return
   }
 
   const prevPlace = getState().copy.place
-  const pastePlace = getPastePlace({ item, e, distanceToEdge: 20 })
+  const pastePlace = getPastePlace({
+    item: blockElement,
+    e,
+    distanceToEdge: 20,
+  })
 
   if (isEqual(pastePlace, prevPlace) && isPasteTextShown) {
     return
@@ -144,7 +150,7 @@ function movePasteTextItem(e: MouseEvent): void {
   // dispatch(quotationSlice.actions.removePasteItemReducer())
   dispatch(copySlice.actions.updatePastePos(pastePlace))
   dispatch(copySlice.actions.showPasteText())
-  dispatch(quotationSlice.actions.insertPasteItemReducer(pastePlace))
+  dispatch(quotationSlice.actions.insertPasteBlockReducer(pastePlace))
 }
 
 function movePasteTextBoqRow(e: MouseEvent): void {
@@ -156,11 +162,11 @@ function movePasteTextBoqRow(e: MouseEvent): void {
   const isPasteTextShown = getState().copy.isPasteTextShown
   const boqRowsElement = e.target.closest(`.${cls.boqRows}`)
 
-  const isBoqPasteItem = getState()
-    .quotation.items.filter((item) => item.type === itemKey.boq)
-    .flatMap((item) => {
-      if (item.type === 'boq') {
-        return item.boq.rows
+  const isBoqPasteRow = getState()
+    .quotation.blocks.filter((block) => block.type === itemKey.boq)
+    .flatMap((block) => {
+      if (block.type === 'boq') {
+        return block.boq.rows
       }
       return []
     })
@@ -171,7 +177,7 @@ function movePasteTextBoqRow(e: MouseEvent): void {
       dispatch(copySlice.actions.hidePasteText())
     }
 
-    if (isBoqPasteItem) {
+    if (isBoqPasteRow) {
       dispatch(quotationSlice.actions.removePasteItemReducer())
     }
   }

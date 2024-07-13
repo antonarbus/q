@@ -3,8 +3,8 @@ import {
   type BoqColumnKey,
   quotationSlice,
   getBoqColumnFromStore,
-  unfixItemImagesHeight,
-  fixItemImagesHeight,
+  unfixImagesHeight,
+  fixImagesHeight,
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 
@@ -19,7 +19,7 @@ export const onColumnResizeStart = ({
   itemIndex,
   boqColumnKey,
 }: Props): void => {
-  unfixItemImagesHeight()
+  unfixImagesHeight()
   const width = headerColumnElement.clientWidth
   dispatch(quotationSlice.actions.disableFroalaReducer({ itemIndex }))
   dispatch(
@@ -56,7 +56,7 @@ export const onColumnResizeStop = ({
   itemIndex,
   boqColumnKey,
 }: Props): void => {
-  fixItemImagesHeight()
+  fixImagesHeight()
   const columnWidth = headerColumnElement.clientWidth
   dispatch(
     quotationSlice.actions.updateColWidthReducer({
@@ -67,7 +67,7 @@ export const onColumnResizeStop = ({
   )
   const itemWidth = headerColumnElement.closest(`.${cls.paper}`)?.clientWidth
   dispatch(
-    quotationSlice.actions.updateItemWidthReducer({
+    quotationSlice.actions.updateBlockWidthReducer({
       itemIndex,
       width: itemWidth ?? 0,
     }),

@@ -9,7 +9,7 @@ import {
   type OnItemResizeStart,
 } from '@shared/types/resizablePaper'
 import { useItem } from '../providers/ItemProvider'
-import { ItemAnimate } from './item_layout'
+import { BlockAnimate } from './item_layout'
 import { PasteItemTextOverlay } from './paste_item_overlay_text'
 
 type Props = {
@@ -25,7 +25,7 @@ type Props = {
   className?: string
 }
 
-export const ItemComp = ({
+export const BlockComp = ({
   children,
   disableResize,
   onItemResizeStart,
@@ -54,7 +54,7 @@ export const ItemComp = ({
         zIndex: isDragging ? 1000 : 0,
       }}
     >
-      <ItemAnimate
+      <BlockAnimate
         disableResize={disableResize}
         autoWidth={autoWidth}
         minWidth={minWidth}
@@ -68,7 +68,7 @@ export const ItemComp = ({
         className={className}
       >
         <PasteItemTextOverlay>{children}</PasteItemTextOverlay>
-      </ItemAnimate>
+      </BlockAnimate>
     </div>
   )
 }

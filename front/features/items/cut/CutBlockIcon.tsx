@@ -40,9 +40,9 @@ export const CutBlockIcon = (): JSX.Element => {
 
         const clickedIconElement = e.target
         if (!(clickedIconElement instanceof Element)) return
-        const itemElement = clickedIconElement.closest(`.${cls.item}`)
-        if (!(itemElement instanceof Element)) return
-        const paperElement = itemElement.querySelector(`.${cls.paper}`)
+        const blockElement = clickedIconElement.closest(`.${cls.block}`)
+        if (!(blockElement instanceof Element)) return
+        const paperElement = blockElement.querySelector(`.${cls.paper}`)
         if (!(paperElement instanceof HTMLElement)) return
 
         // width of animated element is changed for unknown reason, can't explain the issue, so let's fix it for animation purpose

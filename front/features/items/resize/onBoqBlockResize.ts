@@ -4,8 +4,8 @@ import {
   quotationSlice,
   getBoqColumnFromStore,
   boqColumnKey,
-  unfixItemImagesHeight,
-  fixItemImagesHeight,
+  unfixImagesHeight,
+  fixImagesHeight,
 } from '@entities/quotation'
 import type {
   OnItemResize,
@@ -15,22 +15,22 @@ import type {
 
 let initDescriptionColumnWidth = 0 // can be global var for different boqItems as we can change width of one item at a time
 
-export const onBoqItemResizeStart: OnItemResizeStart = ({
+export const onBoqBlockResizeStart: OnItemResizeStart = ({
   itemIndex,
   e,
   dir,
   elementRef: itemElement,
 }) => {
-  unfixItemImagesHeight()
+  unfixImagesHeight()
   dispatch(quotationSlice.actions.disableFroalaReducer({ itemIndex }))
   dispatch(quotationSlice.actions.hideBoqItemPinsReducer({ itemIndex }))
 
   initDescriptionColumnWidth =
-    (getState().quotation.items[itemIndex] as BoqBlock).boq.column.description
+    (getState().quotation.blocks[itemIndex] as BoqBlock).boq.column.description
       .width ?? 0
 }
 
-export const onBoqItemResize: OnItemResize = ({
+export const onBoqBlockResize: OnItemResize = ({
   itemIndex,
   e,
   direction,
@@ -56,14 +56,14 @@ export const onBoqItemResize: OnItemResize = ({
   )
 }
 
-export const onBoqItemResizeStop: OnItemResizeStop = ({
+export const onBoqBlockResizeStop: OnItemResizeStop = ({
   itemIndex,
   e,
   direction,
   elementRef: itemElement,
   delta,
 }) => {
-  fixItemImagesHeight()
+  fixImagesHeight()
   const descriptionHeaderElement = itemElement.querySelector('.th.description')
   if (!(descriptionHeaderElement instanceof HTMLElement)) return
 
@@ -78,11 +78,11 @@ export const onBoqItemResizeStop: OnItemResizeStop = ({
   dispatch(quotationSlice.actions.enableFroalaReducer({ itemIndex }))
 
   const itemWidth = itemElement.clientWidth
-  const prevItemWidth = getState().quotation.items[itemIndex]?.width
+  const prevItemWidth = getState().quotation.blocks[itemIndex]?.width
 
   if (itemWidth !== prevItemWidth) {
     dispatch(
-      quotationSlice.actions.updateItemWidthReducer({
+      quotationSlice.actions.updateBlockWidthReducer({
         itemIndex,
         width: itemWidth,
       }),
