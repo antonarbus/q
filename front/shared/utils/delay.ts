@@ -1,5 +1,6 @@
 export const syncDelay = (ms = 1000): void => {
   const end = Date.now() + ms
+  // eslint-disable-next-line no-continue
   while (Date.now() < end) continue
 }
 

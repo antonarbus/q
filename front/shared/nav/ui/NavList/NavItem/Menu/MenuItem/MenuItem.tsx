@@ -27,8 +27,8 @@ export const MenuItem = ({
   const isHovered = useSelectorTyped(
     (state) => state.nav.menuItemHoverIndex === hoveredMenuItemIndex,
   )
-  const isNextMenuAvailable = !!menuItem.menuItems
-  const isIcon = !!menuItem.icon
+  const isNextMenuAvailable = Boolean(menuItem.menuItems)
+  const isIcon = Boolean(menuItem.icon)
   const menuId = menuItem.id
   const link = menuItem.link ?? ''
   const isLink = Boolean(menuItem.link)
@@ -38,7 +38,7 @@ export const MenuItem = ({
   const isSuccess = menuItem?.isSuccess
   const isError = menuItem?.isError
 
-  const fixedLink = (location.pathname + '/' + link)
+  const fixedLink = `${location.pathname}/${link}`
     .replace('.', '')
     .replace('//', '/')
     .replace('//', '/')

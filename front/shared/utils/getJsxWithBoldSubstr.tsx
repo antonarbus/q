@@ -7,7 +7,7 @@ export const getJsxWithBoldSubstr = ({
   text,
   boldText,
 }: Props): (string | JSX.Element)[] => {
-  const regExp = new RegExp(`(${boldText})`, 'gi')
+  const regExp = new RegExp(`(${boldText})`, 'giu')
   return text
     .split(regExp)
     .map((str, index) =>

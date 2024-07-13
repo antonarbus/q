@@ -1,6 +1,5 @@
 import { dispatch } from '@lib_instances/store'
-import type { MutableRefObject } from 'react'
-import { useEffect } from 'react'
+import { useEffect, type MutableRefObject } from 'react'
 import { didClickInsideThisElement } from '../../../../../../utils/isClickInsideThisElement'
 import { navSlice } from '../../../../../navSlice'
 

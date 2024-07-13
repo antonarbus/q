@@ -1,7 +1,6 @@
 import { dispatch, useSelectorTyped } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
-import type { MouseEvent } from 'react'
-import { createElement } from 'react'
+import { createElement, type MouseEvent } from 'react'
 import { CgClose as CloseIcon } from 'react-icons/cg'
 import { navSlice } from '../../../../../navSlice'
 import { Icon } from '../../Icon'

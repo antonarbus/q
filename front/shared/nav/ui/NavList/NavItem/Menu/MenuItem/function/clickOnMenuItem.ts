@@ -11,7 +11,7 @@ export const clickOnMenuItem = (
 ): void => {
   const chainToClickedItem = [...getState().nav.idsToCurrentMenuItems, menuId]
   const nextMenu = getMenuItemByIdsChain(chainToClickedItem)
-  const isNestedMenuAvailable = !!nextMenu.length
+  const isNestedMenuAvailable = Boolean(nextMenu.length)
   const menuItems = getMenuItemByIdsChain(getState().nav.idsToCurrentMenuItems)
   const menuItem = menuItems.find((item) => item.id === menuId)
   const link = menuItem?.link

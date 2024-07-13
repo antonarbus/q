@@ -23,6 +23,7 @@ export const getStringWithNewFormattedNumber = ({
   return htmlWithNewNumber
 }
 
+// eslint-disable-next-line func-style
 function findAndReplaceStringOutsideHtmlTags({
   string,
   searchText,
@@ -32,7 +33,9 @@ function findAndReplaceStringOutsideHtmlTags({
   searchText: string
   replacementText: string
 }): string {
+  // eslint-disable-next-line require-unicode-regexp
   const regExpToRemoveGapsBetweenDigits = /(?<=\d)\s+(?=\d)/g
+  // eslint-disable-next-line require-unicode-regexp
   const regExpToFindSearchTextOutsideHtmlTags = new RegExp(
     `([^<>]*)(${searchText})([^<>]*)`,
     'g',

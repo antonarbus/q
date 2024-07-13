@@ -89,14 +89,14 @@ export const useKeysForMenuNavigation = (): void => {
         return
       }
 
-      const isNestedMenuAvailable = !!menuItem?.menuItems
+      const isNestedMenuAvailable = Boolean(menuItem?.menuItems)
       if (isNestedMenuAvailable) {
         navigateInMenu.down?.(menuId)
         return
       }
     }
 
-    const anyLetter = /\w/
+    const anyLetter = /\w/u
     if (anyLetter.exec(e.key)) {
       if (!isNestedMenu && e.key === 'c') {
         dispatch(navSlice.actions.setMenuItemHoverIndex(1))

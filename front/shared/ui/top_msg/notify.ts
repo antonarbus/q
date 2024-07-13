@@ -1,6 +1,13 @@
 // https://fkhadra.github.io/react-toastify/positioning-toast
 import type { ReactNode } from 'react'
-import { toast, Slide, Bounce, Flip, Zoom } from 'react-toastify'
+import {
+  toast,
+  Slide,
+  Bounce,
+  Flip,
+  Zoom,
+  ToastTransitionProps,
+} from 'react-toastify'
 
 type Props = {
   msg: ReactNode | string
@@ -31,6 +38,23 @@ export const notify = ({
   transition,
   onClose,
 }: Props): void => {
+  const getTransitionType = (): (({
+    children,
+    // eslint-disable-next-line no-shadow
+    position,
+    preventExitTransition,
+    done,
+    nodeRef,
+    isIn,
+    playToast,
+  }: ToastTransitionProps) => JSX.Element) => {
+    if (transition === 'slide') return Slide
+    if (transition === 'bounce') return Bounce
+    if (transition === 'flip') return Flip
+    if (transition === 'zoom') return Zoom
+    return Bounce
+  }
+
   const options = {
     position: position ?? 'top-right',
     autoClose: shouldStay ? false : closeAfterMs ?? 5000,
@@ -45,16 +69,7 @@ export const notify = ({
     theme: theme ?? 'dark',
     onClose,
     // onOpen: () => window.alert('Called when I open'),
-    transition:
-      transition === 'slide'
-        ? Slide
-        : transition === 'bounce'
-          ? Bounce
-          : transition === 'flip'
-            ? Flip
-            : transition === 'zoom'
-              ? Zoom
-              : Bounce,
+    transition: getTransitionType(),
   }
 
   if (type === undefined || type === 'success') {

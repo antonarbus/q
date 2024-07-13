@@ -7,8 +7,8 @@ export const getNumberFromString = ({ string }: Props): number => {
   if (string.trim() === '') return 0
 
   const stringWithNumbersOnly = string
-    .replace(/[^-0-9,.]/g, '')
-    .replace(/,/g, '.')
+    .replace(/[^-0-9,.]/gu, '')
+    .replace(/,/gu, '.')
 
   const number = parseFloat(stringWithNumbersOnly)
   if (isNaN(number)) return 0
