@@ -1,5 +1,4 @@
-import type { MutableRefObject } from 'react'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, type MutableRefObject } from 'react'
 
 type Props = {
   froalaElementRef: MutableRefObject<HTMLElement | null>

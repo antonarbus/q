@@ -1,5 +1,4 @@
-import type { CSSProperties } from 'react'
-import { useState } from 'react'
+import { useState, type CSSProperties } from 'react'
 import { useEffectOnce } from 'react-use'
 import { StaticHtml } from './StaticHtml'
 

@@ -76,7 +76,7 @@ export type BoqRowEditorRefs = {
   price: FroalaEditorRef
 }[]
 
-// blocks
+// block
 export type BoqBlock = Common & {
   type: typeof itemKey.boq
   boq: {
@@ -132,5 +132,5 @@ export type Quotation = Common & {
     name?: string
     company?: string
   }
-  items: Block[]
+  blocks: Block[]
 }

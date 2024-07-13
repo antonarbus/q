@@ -1,7 +1,7 @@
 import { dispatch } from '@lib_instances/store'
 import { type FroalaEditorRef } from '@shared/types/froala'
 import type { BoqColumnKey } from '../../types'
-import { getBoqItemFromStore } from '../getters/getBoqItemFromStore'
+import { getBoqBlockFromStore } from '../getters/getBoqBlockFromStore'
 import { quotationSlice } from '../quotationSlice'
 
 type Props = {
@@ -17,10 +17,10 @@ export const updateBoqColumnCellAtStore = ({
 }: Props): void => {
   if (editorRef.current === null) return
 
-  const boqItem = getBoqItemFromStore({ itemIndex })
-  if (boqItem === undefined) return
+  const boqBlock = getBoqBlockFromStore({ itemIndex })
+  if (boqBlock === undefined) return
 
-  const prevHtml = boqItem.boq.column[boqColumnKey].html
+  const prevHtml = boqBlock.boq.column[boqColumnKey].html
   const html = editorRef.current?.html.get()
   const didTextChange = prevHtml !== html
   if (!didTextChange) return

@@ -38,7 +38,7 @@ export const ItemComp = ({
   className,
 }: Props): JSX.Element => {
   const { itemIndex } = useItem()
-  const item = getState().quotation.items[itemIndex]
+  const block = getState().quotation.blocks[itemIndex]
   const { itemId } = useItem()
 
   const { setNodeRef, transform, transition, isDragging } = useSortable({
@@ -58,8 +58,8 @@ export const ItemComp = ({
         disableResize={disableResize}
         autoWidth={autoWidth}
         minWidth={minWidth}
-        itemHeight={item?.height ?? 0}
-        itemId={item?.id ?? 'no id'}
+        itemHeight={block?.height ?? 0}
+        itemId={block?.id ?? 'no id'}
         onItemResizeStart={onItemResizeStart}
         onItemResize={onItemResize}
         onItemResizeStop={onItemResizeStop}
