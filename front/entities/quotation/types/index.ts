@@ -19,6 +19,7 @@ type Common = {
   preview?: string
 }
 
+// boq
 export type BoqRowCellPin = {
   isPinned: boolean
   isShown: boolean
@@ -73,6 +74,7 @@ export type BoqRowEditorRefs = {
   price: FroalaEditorRef
 }[]
 
+// blocks
 export type BlockBoq = Common & {
   type: typeof itemKey.boq
   boq: {
@@ -106,8 +108,10 @@ export type BlockPaste = Common & {
   type: typeof itemKey.paste
 }
 
+// item
 export type Item = BlockBoq | BlockPaste | BlockText | BlockPrice | BoqRow
 
+// quotation
 export type Quotation = Common & {
   type: typeof itemKey.quotation
   createdAt?: Date
