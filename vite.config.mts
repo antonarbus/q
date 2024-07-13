@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/triple-slash-reference */
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
 import path from 'path'
