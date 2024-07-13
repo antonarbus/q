@@ -7,7 +7,7 @@ import {
   getTextContentFromHtml,
   getStringWithNewFormattedNumber,
 } from '@shared/utils'
-import { getBoqItemFromStore } from '../redux/getters/getBoqItemFromStore'
+import { getBoqBlockFromStore } from '../redux/getters/getBoqBlockFromStore'
 import { quotationSlice } from '../redux/quotationSlice'
 
 type Props = {
@@ -33,14 +33,14 @@ export const updateSubTotalPriceWithValue = ({
     }
   }
 
-  const boqItem = getBoqItemFromStore({ itemIndex })
-  if (boqItem === undefined) {
+  const boqBlock = getBoqBlockFromStore({ itemIndex })
+  if (boqBlock === undefined) {
     return {
       didChange: false,
     }
   }
 
-  const subTotalPriceValueCurrent = boqItem.boq.header.subTotalPrice.value
+  const subTotalPriceValueCurrent = boqBlock.boq.header.subTotalPrice.value
 
   const didValueChange = value !== subTotalPriceValueCurrent
 
@@ -51,7 +51,7 @@ export const updateSubTotalPriceWithValue = ({
   }
 
   const subTotalPriceTextContent = getTextContentFromHtml({
-    html: boqItem.boq.header.subTotalPrice.html,
+    html: boqBlock.boq.header.subTotalPrice.html,
   })
 
   const subTotalPriceValueFromHtml = getNumberFromString({
@@ -59,7 +59,7 @@ export const updateSubTotalPriceWithValue = ({
   })
 
   const updatedHtml = getStringWithNewFormattedNumber({
-    string: boqItem.boq.header.subTotalPrice.html,
+    string: boqBlock.boq.header.subTotalPrice.html,
     oldNumber: subTotalPriceValueFromHtml,
     newNumber: value,
   })
@@ -77,14 +77,14 @@ export const updateSubTotalPriceWithValue = ({
       oldNumber: subTotalPriceValueCurrent,
       newNumber: value,
       editor: subTotalPriceEditor,
-      html: boqItem.boq.header.subTotalPrice.html,
+      html: boqBlock.boq.header.subTotalPrice.html,
     })
   } else {
     updateNumberAtHtml({
       oldNumber: subTotalPriceValueCurrent,
       newNumber: value,
       editor: subTotalPriceEditor,
-      html: boqItem.boq.header.subTotalPrice.html,
+      html: boqBlock.boq.header.subTotalPrice.html,
     })
   }
 

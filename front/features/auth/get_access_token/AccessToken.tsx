@@ -18,88 +18,81 @@ export const AccessToken = (): JSX.Element => {
     isSuccess,
   } = useGetAccessTokenQuery()
 
-  useEffectOnce(function getInitialAccessTokenOnAppLoad() {
+  // get initial access token on app load
+  useEffectOnce(() => {
     if (accessTokenSignal.value === null) {
       void getAccessToken()
     }
   })
 
-  useUpdateEffect(
-    function showJumpingDotsAtTable() {
-      if (isFetching) {
-        loadingTableOverlaySignal.value = {
-          areJumpingDotsShown: true,
-          text: 'Checking credentials',
-        }
+  // show jumping dots at table
+  useUpdateEffect(() => {
+    if (isFetching) {
+      loadingTableOverlaySignal.value = {
+        areJumpingDotsShown: true,
+        text: 'Checking credentials',
       }
-    },
-    [isFetching],
-  )
+    }
+  }, [isFetching])
 
-  useUpdateEffect(
-    function handleSuccess() {
-      if (isSuccess) {
-        if (!data.accessJwtToken) return
+  useUpdateEffect(() => {
+    if (isSuccess) {
+      if (!data.accessJwtToken) return
 
-        const jwtPayload = jwtDecode<JwtPayloadExtended>(data.accessJwtToken)
-        const { email } = jwtPayload
+      const jwtPayload = jwtDecode<JwtPayloadExtended>(data.accessJwtToken)
+      const { email } = jwtPayload
 
-        if (!email) return
+      if (!email) return
 
-        accessTokenSignal.value = data.accessJwtToken
-        loadingTableOverlaySignal.value = {
-          areJumpingDotsShown: false,
-          text: 'Logged in',
-        }
-
-        dispatch(
-          userSlice.actions.rememberLoggedUser({
-            email,
-            roles: data.roles ?? ['some role'],
-          }),
-        )
-
-        dispatch(
-          navSlice.actions.hideNavItems({ navItemIdKeys: [navItemKey.login] }),
-        )
-
-        dispatch(
-          navSlice.actions.showNavItems({
-            navItemIdKeys: [navItemKey.profile],
-          }),
-        )
-
-        resolveInitAccessTokenFetching('fetched')
+      accessTokenSignal.value = data.accessJwtToken
+      loadingTableOverlaySignal.value = {
+        areJumpingDotsShown: false,
+        text: 'Logged in',
       }
-    },
-    [isSuccess],
-  )
 
-  useUpdateEffect(
-    function handleError() {
-      if (isError) {
-        loadingTableOverlaySignal.value = {
-          areJumpingDotsShown: false,
-          text: 'Not logged in',
-        }
+      dispatch(
+        userSlice.actions.rememberLoggedUser({
+          email,
+          roles: data.roles ?? ['some role'],
+        }),
+      )
 
-        dispatch(userSlice.actions.forgetLoggedUser())
+      dispatch(
+        navSlice.actions.hideNavItems({ navItemIdKeys: [navItemKey.login] }),
+      )
 
-        dispatch(
-          navSlice.actions.showNavItems({ navItemIdKeys: [navItemKey.login] }),
-        )
+      dispatch(
+        navSlice.actions.showNavItems({
+          navItemIdKeys: [navItemKey.profile],
+        }),
+      )
 
-        dispatch(
-          navSlice.actions.hideNavItems({
-            navItemIdKeys: [navItemKey.profile],
-          }),
-        )
+      resolveInitAccessTokenFetching('fetched')
+    }
+  }, [isSuccess])
 
-        resolveInitAccessTokenFetching('failed')
+  useUpdateEffect(() => {
+    if (isError) {
+      loadingTableOverlaySignal.value = {
+        areJumpingDotsShown: false,
+        text: 'Not logged in',
       }
-    },
-    [isError],
-  )
+
+      dispatch(userSlice.actions.forgetLoggedUser())
+
+      dispatch(
+        navSlice.actions.showNavItems({ navItemIdKeys: [navItemKey.login] }),
+      )
+
+      dispatch(
+        navSlice.actions.hideNavItems({
+          navItemIdKeys: [navItemKey.profile],
+        }),
+      )
+
+      resolveInitAccessTokenFetching('failed')
+    }
+  }, [isError])
 
   return <></>
 }

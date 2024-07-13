@@ -39,16 +39,15 @@ export const useResetPassword = ({ passwordSignal, modalRef }: Props): Res => {
       if (data.message === 'password was reset') {
         notify({ msg: 'Password was reset', theme: 'light' })
 
-        const { accessJwtToken, email, roles } = data
+        if (!data.accessJwtToken) return
 
-        if (!accessJwtToken) return
-        if (!email) return
+        if (!data.email) return
 
-        accessTokenSignal.value = accessJwtToken
+        accessTokenSignal.value = data.accessJwtToken
         dispatch(
           userSlice.actions.rememberLoggedUser({
-            email,
-            roles: roles ?? ['user'],
+            email: data.email,
+            roles: data.roles ?? ['user'],
           }),
         )
         dispatch(

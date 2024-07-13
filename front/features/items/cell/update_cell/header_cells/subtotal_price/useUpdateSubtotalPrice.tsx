@@ -13,13 +13,13 @@ import {
 export const useUpdateSubtotalPrice = (): void => {
   const { itemIndex } = useItem()
   const { subTotalPriceEditorRef } = useBoqItem()
-  const isItemFroala = useSelectorTyped(
-    (state) => state.quotation.items[itemIndex]?.isFroala,
+  const isBlockFroala = useSelectorTyped(
+    (state) => state.quotation.blocks[itemIndex]?.isFroala,
   )
 
   useUpdateEffect(() => {
     if (!isFroalaSignal.value) return
-    if (!isItemFroala) return
+    if (!isBlockFroala) return
 
     const boqRows = getBoqRowsFromStore({ itemIndex })
 
@@ -43,5 +43,5 @@ export const useUpdateSubtotalPrice = (): void => {
         incrementally: true,
       })
     })
-  }, [isItemFroala, isFroalaSignal.value])
+  }, [isBlockFroala, isFroalaSignal.value])
 }

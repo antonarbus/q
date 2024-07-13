@@ -10,10 +10,10 @@ type Props = {
 export const updatePriceTitleCell = ({ editorRef, itemIndex }: Props): void => {
   if (editorRef.current === null) return
 
-  const priceItem = getState().quotation.items[itemIndex]
-  if (priceItem?.type !== itemKey.price) return
+  const priceBlock = getState().quotation.blocks[itemIndex]
+  if (priceBlock?.type !== itemKey.price) return
 
-  const prevHtml = priceItem.title.html
+  const prevHtml = priceBlock.title.html
   const html = editorRef.current.html.get()
   const didTextChange = prevHtml !== html
 

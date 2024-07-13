@@ -20,8 +20,8 @@ type Props = {
 export const validateTotalPrice = ({ editorRef, itemIndex }: Props): void => {
   if (editorRef.current === null) return
 
-  const priceItem = getState().quotation.items[itemIndex]
-  if (priceItem?.type !== itemKey.price) return
+  const priceBlock = getState().quotation.blocks[itemIndex]
+  if (priceBlock?.type !== itemKey.price) return
 
   const currentHtml = editorRef.current.html.get()
   const cellTextContent = getTextContentFromHtml({ html: currentHtml })
@@ -29,15 +29,15 @@ export const validateTotalPrice = ({ editorRef, itemIndex }: Props): void => {
 
   const price = getTotalPriceAbove({
     itemIndex,
-    items: getState().quotation.items,
+    items: getState().quotation.blocks,
   })
   const isCorrectValue = cellValueFromHtml === price
 
   if (isCorrectValue) return
 
   const updatedHtml = getStringWithNewFormattedNumber({
-    string: priceItem.price.html,
-    oldNumber: priceItem.price.value,
+    string: priceBlock.price.html,
+    oldNumber: priceBlock.price.value,
     newNumber: price,
   })
 
@@ -50,9 +50,9 @@ export const validateTotalPrice = ({ editorRef, itemIndex }: Props): void => {
   )
 
   void updateNumberAtHtmlIncrementally({
-    oldNumber: priceItem.price.value,
+    oldNumber: priceBlock.price.value,
     newNumber: price,
     editor: editorRef.current,
-    html: priceItem.price.html,
+    html: priceBlock.price.html,
   })
 }

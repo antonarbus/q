@@ -40,7 +40,7 @@ export const Pin = ({ boqRowCellKey, onClick }: Props): ReactNode => {
       }}
     >
       <VscPinned
-        className={cls.pin + ' svg'}
+        className={`${cls.pin} svg`}
         style={{
           rotate: '35deg',
           fill: pin.isPinned ? 'black' : '#b8b8b8',

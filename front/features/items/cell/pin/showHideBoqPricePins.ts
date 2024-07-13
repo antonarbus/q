@@ -18,13 +18,13 @@ export const showHideBoqPricePins = ({
 }: Props): void => {
   dispatch(quotationSlice.actions.showBoqPriceCellPinsReducer({ itemIndex }))
 
-  const clickHandler = (e: MouseEvent): void => {
+  const clickHandler = (event: MouseEvent): void => {
     if (isInitClickRef.current) {
       isInitClickRef.current = false
       return
     }
 
-    const clickedElement = e.target
+    const clickedElement = event.target
     if (clickedElement instanceof Element) {
       const isPin = Boolean(clickedElement.closest(`.${cls.pin}`))
 

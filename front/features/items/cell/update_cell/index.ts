@@ -1,4 +1,4 @@
-export { updateTextItem } from './text_item/updateTextItem'
+export { updateTextBlock } from './text_block/updateTextBlock'
 
 export { updatePriceTitleCell } from './price_item/updatePriceTitleCell'
 export { updatePriceValueCell } from './price_item/updatePriceValueCell'

@@ -6,12 +6,12 @@ type Props = {
   itemIndex: number
 }
 
-export const saveItemHeightByIndex = ({ itemIndex }: Props): void => {
+export const saveBlockHeightByIndex = ({ itemIndex }: Props): void => {
   const items = document.querySelectorAll(`.${cls.paper}`)
   const item = items[itemIndex]
   if (!item) return
   const height = item.clientHeight
   dispatch(
-    quotationSlice.actions.updateItemHeightReducer({ itemIndex, height }),
+    quotationSlice.actions.updateBlockHeightReducer({ itemIndex, height }),
   )
 }

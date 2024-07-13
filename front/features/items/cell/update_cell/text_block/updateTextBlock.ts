@@ -7,16 +7,16 @@ type Props = {
   itemIndex: number
 }
 
-export const updateTextItem = ({ editorRef, itemIndex }: Props): void => {
+export const updateTextBlock = ({ editorRef, itemIndex }: Props): void => {
   if (editorRef.current === null) return
 
-  const item = getState().quotation.items[itemIndex]
-  if (item?.type !== itemKey.text) return
+  const block = getState().quotation.blocks[itemIndex]
+  if (block?.type !== itemKey.text) return
 
-  const prevHtml = item.text.html
+  const prevHtml = block.text.html
   const html = editorRef.current.html.get()
   const didTextChange = prevHtml !== html
   if (!didTextChange) return
 
-  dispatch(quotationSlice.actions.updateItemTextReducer({ itemIndex, html }))
+  dispatch(quotationSlice.actions.updateBlockTextReducer({ itemIndex, html }))
 }

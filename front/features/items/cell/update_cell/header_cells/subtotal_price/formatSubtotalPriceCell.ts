@@ -1,6 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { roundTo } from 'round-to'
-import { getBoqItemFromStore, quotationSlice } from '@entities/quotation'
+import { getBoqBlockFromStore, quotationSlice } from '@entities/quotation'
 import { type FroalaEditorRef } from '@shared/types/froala'
 import { getStringWithNewFormattedNumber } from '@shared/utils'
 
@@ -15,15 +15,15 @@ export const formatSubtotalPriceCell = ({
 }: Props): void => {
   if (subTotalPriceEditorRef.current === null) return
 
-  const boqItem = getBoqItemFromStore({ itemIndex })
-  if (boqItem === undefined) return
+  const boqBlock = getBoqBlockFromStore({ itemIndex })
+  if (boqBlock === undefined) return
 
-  const value = boqItem.boq.header.subTotalPrice.value
+  const value = boqBlock.boq.header.subTotalPrice.value
   if (value === null) return
 
   const roundedValue = roundTo(value, 2)
 
-  const html = boqItem.boq.header.subTotalPrice.html
+  const html = boqBlock.boq.header.subTotalPrice.html
 
   const newHtml = getStringWithNewFormattedNumber({
     string: html,

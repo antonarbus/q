@@ -1,4 +1,4 @@
-import { dispatch, getState } from '@lib_instances/store'
+import { getState } from '@lib_instances/store'
 import { type Signal } from '@preact/signals-react'
 import { type UseMutationResult } from '@tanstack/react-query'
 import { useCallback } from 'react'
@@ -9,11 +9,7 @@ import {
   useGetBookmarksQuery,
   useSaveBookmarkMutation,
 } from '@entities/bookmark'
-import {
-  itemKey,
-  quotationSlice,
-  saveItemHeightByIndex,
-} from '@entities/quotation'
+import { saveBlockHeightByIndex } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { notify } from '@shared/ui/top_msg'
 import { cleanHtml } from '@shared/utils/itemsUtils'
@@ -108,9 +104,9 @@ export const useEditBookmark = ({
       return
     }
 
-    const item = getState().quotation.items.at(0)
+    const block = getState().quotation.blocks.at(0)
 
-    if (!item) {
+    if (!block) {
       notify({ msg: 'No item loaded', type: 'warn', theme: 'light' })
       return
     }
@@ -146,7 +142,7 @@ export const useEditBookmark = ({
 
     // saveItem({ item: itemWithUpdatedValues })
     // } else {
-    saveItemHeightByIndex({ itemIndex: 0 })
+    saveBlockHeightByIndex({ itemIndex: 0 })
     const paperElement = document.querySelector(`.${cls.paper}`)
     if (!(paperElement instanceof Element)) return
 
@@ -154,9 +150,9 @@ export const useEditBookmark = ({
     const cleanedHtml = cleanHtml(html)
 
     // const item = getState().quotation.items.at(0)
-    if (!item) return
+    if (!block) return
 
-    const itemWithUpdatedPreview = structuredClone(item)
+    const itemWithUpdatedPreview = structuredClone(block)
     itemWithUpdatedPreview.preview = cleanedHtml
 
     const itemWithUpdatedValues = {
