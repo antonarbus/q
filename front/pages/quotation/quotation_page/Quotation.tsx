@@ -1,6 +1,6 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { Outlet } from 'react-router-dom'
-import { Items } from '@widgets/items'
+import { Blocks } from '@widgets/items'
 import { Info } from '@widgets/quotation/info'
 import { Search } from '@widgets/quotation/search'
 import { useLoadQuotation } from '@features/quotation/load_quotation'
@@ -23,7 +23,7 @@ export const Quotation = (): JSX.Element => {
         <Info css={{ width: '80px' }} />
       </InfoAndSearchLayout>
       <BackgroundMessage />
-      <Items items={blocks} />
+      <Blocks items={blocks} />
       <Outlet />
     </>
   )

@@ -3,18 +3,18 @@ import { type ReactNode } from 'react'
 import { type Item as ItemType } from '@entities/quotation'
 import { FadeInOnInitLoad } from './FadeInOnInitLoad'
 import { Item } from './Item'
-import { ItemsSortableContext } from './ItemsSortableContext'
+import { BlocksSortableContext } from './BlocksSortableContext'
 
 type Props = {
   items: ItemType[]
 }
 
-export const Items = ({ items }: Props): ReactNode => {
+export const Blocks = ({ items }: Props): ReactNode => {
   if (items.length === 0) return null
 
   return (
     <FadeInOnInitLoad>
-      <ItemsSortableContext>
+      <BlocksSortableContext>
         <AnimatePresence initial={false}>
           {items.map((item, itemIndex) => (
             <Item
@@ -24,7 +24,7 @@ export const Items = ({ items }: Props): ReactNode => {
             />
           ))}
         </AnimatePresence>
-      </ItemsSortableContext>
+      </BlocksSortableContext>
     </FadeInOnInitLoad>
   )
 }

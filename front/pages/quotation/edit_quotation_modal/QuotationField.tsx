@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { type ReactNode } from 'react'
 import { useEffectOnce } from 'react-use'
-import { Items } from '@widgets/items'
+import { Blocks } from '@widgets/items'
 import { type Item, isFroalaSignal } from '@entities/quotation'
 import { OutlinedDivWithLabel } from '@shared/components'
 
@@ -12,7 +12,7 @@ type Props = {
 export const QuotationField = ({ items }: Props): ReactNode => {
   return (
     <QuotationFieldLayout>
-      <Items items={items} />
+      <Blocks items={items} />
     </QuotationFieldLayout>
   )
 }

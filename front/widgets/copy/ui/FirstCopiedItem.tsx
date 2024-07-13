@@ -1,7 +1,6 @@
 import { getState, useSelectorTyped } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
-import type { Variants } from 'framer-motion'
-import { AnimatePresence, motion } from 'framer-motion'
+import { type Variants, AnimatePresence, motion } from 'framer-motion'
 import { containerPadding, containerWidth, itemMarginBottom } from './const'
 import { ScaledCopyItem } from './ScaledCopyItem'
 

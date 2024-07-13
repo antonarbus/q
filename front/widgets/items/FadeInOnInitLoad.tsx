@@ -8,7 +8,7 @@ type Props = {
 export const FadeInOnInitLoad = ({ children }: Props): JSX.Element => {
   return (
     <motion.div
-      className={cls.items}
+      className={cls.blocks}
       initial={{
         opacity: 0,
       }}

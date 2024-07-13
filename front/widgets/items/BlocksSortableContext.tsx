@@ -7,7 +7,7 @@ import {
 } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { useSelectorTyped } from '@lib_instances/store'
-import { onItemDragEnd, onItemDragStart } from '@features/items/drag'
+import { onBlockDragEnd, onBlockDragStart } from '@features/items/drag'
 import { itemsShapeEqualityFn } from '@entities/quotation'
 
 type Props = {
@@ -17,13 +17,13 @@ type Props = {
 // example
 // https://codesandbox.io/p/sandbox/dnd-kit-sortable-starter-template-22x1ix
 
-export const ItemsSortableContext = ({ children }: Props): JSX.Element => {
-  const items = useSelectorTyped(
-    (state) => state.quotation.items,
+export const BlocksSortableContext = ({ children }: Props): JSX.Element => {
+  const blocks = useSelectorTyped(
+    (block) => block.quotation.blocks,
     itemsShapeEqualityFn,
   )
 
-  const itemIds = items.map((item) => item.id)
+  const blockIds = blocks.map((block) => block.id)
 
   const sensors = useSensors(useSensor(PointerSensor))
 
@@ -32,11 +32,11 @@ export const ItemsSortableContext = ({ children }: Props): JSX.Element => {
       sensors={sensors}
       autoScroll={{ layoutShiftCompensation: false }}
       collisionDetection={closestCenter}
-      onDragStart={onItemDragStart}
-      onDragEnd={onItemDragEnd({ itemIds })}
+      onDragStart={onBlockDragStart}
+      onDragEnd={onBlockDragEnd({ itemIds: blockIds })}
     >
       <SortableContext
-        items={itemIds}
+        items={blockIds}
         strategy={verticalListSortingStrategy}
       >
         {children}
