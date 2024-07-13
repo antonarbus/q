@@ -1,9 +1,9 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { MdDragIndicator } from 'react-icons/md'
-import { useIsItemSortDisabled, useItem } from '@entities/quotation'
+import { useIsBlockSortDisabled, useItem } from '@entities/quotation'
 
-export const DragItemIcon = (): JSX.Element => {
-  const disabled = useIsItemSortDisabled()
+export const DragBlockIcon = (): JSX.Element => {
+  const disabled = useIsBlockSortDisabled()
   const { itemId } = useItem()
 
   const { listeners } = useSortable({

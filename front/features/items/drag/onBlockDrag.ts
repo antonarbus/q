@@ -3,12 +3,12 @@ import { dispatch, getState } from '@lib_instances/store'
 import { arrayMoveImmutable } from 'array-move'
 import { isFroalaSignal, quotationSlice } from '@entities/quotation'
 
-export const onItemDragStart = (event: DragStartEvent): void => {
+export const onBlockDragStart = (event: DragStartEvent): void => {
   document.body.style.cursor = 'move'
   isFroalaSignal.value = false
 }
 
-export const onItemDragEnd =
+export const onBlockDragEnd =
   ({ itemIds }: { itemIds: string[] }) =>
   (event: DragEndEvent): void => {
     const { active, over } = event
@@ -21,7 +21,7 @@ export const onItemDragEnd =
 
     const oldIndex = itemIds.indexOf(String(active.id))
     const newIndex = itemIds.indexOf(String(over.id))
-    const items = getState().quotation.items
-    const reOrderedItems = arrayMoveImmutable(items, oldIndex, newIndex)
-    dispatch(quotationSlice.actions.reOrderItemsReducer({ reOrderedItems }))
+    const blocks = getState().quotation.blocks
+    const reOrderedItems = arrayMoveImmutable(blocks, oldIndex, newIndex)
+    dispatch(quotationSlice.actions.reOrderBlocksReducer({ reOrderedItems }))
   }
