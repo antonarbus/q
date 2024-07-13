@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { type Quotation } from '../../types'
 
-export const updateItemWidthReducer = (
+export const updateBlockWidthReducer = (
   state: Quotation,
   action: PayloadAction<{
     itemIndex: number
@@ -9,9 +9,9 @@ export const updateItemWidthReducer = (
   }>,
 ): void => {
   const { itemIndex, width } = action.payload
-  const item = state.items[itemIndex]
+  const block = state.blocks[itemIndex]
 
-  if (!item) return
+  if (!block) return
 
-  item.width = width
+  block.width = width
 }

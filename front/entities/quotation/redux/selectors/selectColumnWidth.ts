@@ -1,6 +1,6 @@
 import { type RootState } from '@lib_instances/store'
 import type { BoqColumnKey } from '../../types'
-import { getBoqItemFromStore } from '../getters/getBoqItemFromStore'
+import { getBoqBlockFromStore } from '../getters/getBoqBlockFromStore'
 
 type Props = {
   itemIndex: number
@@ -10,8 +10,8 @@ type Props = {
 export const selectColumnWidth =
   ({ itemIndex, boqColumnKey }: Props) =>
   (state: RootState): number => {
-    const boqItem = getBoqItemFromStore({ itemIndex })
-    if (boqItem === undefined) return 0
-    const width = boqItem.boq.column[boqColumnKey].width
+    const boqBlock = getBoqBlockFromStore({ itemIndex })
+    if (boqBlock === undefined) return 0
+    const width = boqBlock.boq.column[boqColumnKey].width
     return width
   }

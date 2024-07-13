@@ -31,7 +31,7 @@ import { updateBlockHeightReducer } from './reducers/updateBlockHeightReducer'
 import { updateItemInfoByIdReducer } from './reducers/updateItemInfoByIdReducer'
 import { updateItemPreviewByIdReducer } from './reducers/updateItemPreviewByIdReducer'
 import { updateBlockTextReducer } from './reducers/updateBlockTextReducer'
-import { updateItemWidthReducer } from './reducers/updateItemWidthReducer'
+import { updateBlockWidthReducer } from './reducers/updateBlockWidthReducer'
 import { updatePriceReducer } from './reducers/updatePriceReducer'
 import { updatePriceTitleReducer } from './reducers/updatePriceTitleReducer'
 import { updateQuotationInfoReducer } from './reducers/updateQuotationInfoReducer'
@@ -74,7 +74,7 @@ export const quotationSlice = createSlice({
     updateColWidthReducer,
     updateBlockHeightReducer,
     updateBlockTextReducer,
-    updateItemWidthReducer,
+    updateBlockWidthReducer,
     updateSubTotalPriceReducer,
     updatePriceTitleReducer,
     updatePriceReducer,

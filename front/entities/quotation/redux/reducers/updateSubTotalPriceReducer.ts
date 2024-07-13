@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { type Quotation } from '../../types'
-import { getBoqItemFromState } from '../getters/getBoqItemFromState'
+import { getBoqBlockFromState } from '../getters/getBoqBlockFromState'
 
 export const updateSubTotalPriceReducer = (
   state: Quotation,
@@ -11,10 +11,10 @@ export const updateSubTotalPriceReducer = (
   }>,
 ): void => {
   const { itemIndex, html, value } = action.payload
-  const boqItem = getBoqItemFromState({ itemIndex, state })
+  const boqBlock = getBoqBlockFromState({ itemIndex, state })
 
-  if (boqItem === undefined) return
+  if (boqBlock === undefined) return
 
-  boqItem.boq.header.subTotalPrice.value = value
-  boqItem.boq.header.subTotalPrice.html = html
+  boqBlock.boq.header.subTotalPrice.value = value
+  boqBlock.boq.header.subTotalPrice.html = html
 }

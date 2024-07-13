@@ -25,7 +25,7 @@ export { quotationSlice } from './redux/quotationSlice'
 
 // Selectors
 export { itemsShapeEqualityFn } from './redux/selectors/itemsShapeEqualityFn'
-export { selectIsLastItem } from './redux/selectors/selectIsLastItem'
+export { selectIsLastBlock } from './redux/selectors/selectIsLastBlock'
 export { selectIsLastBoqRow } from './redux/selectors/selectIsLastBoqRow'
 export { selectColumnWidth } from './redux/selectors/selectColumnWidth'
 export {
@@ -86,7 +86,7 @@ export { subTotalTextCellStyle } from './styles/subTotalTextCellStyle'
 export { titleCellStyle } from './styles/titleCellStyle'
 
 // Hooks
-export { useIsItemSortDisabled } from './hooks/useIsItemSortDisabled'
+export { useIsBlockSortDisabled } from './hooks/useIsBlockSortDisabled'
 export { useIsBoqRowSortDisabled } from './hooks/useIsBoqRowSortDisabled'
 export { useStylesForResizableCell } from './hooks/useStylesForResizableCell'
 
