@@ -1,4 +1,4 @@
-import { type Quotation, type Item, type ItemBoq } from '../../types'
+import { type Quotation, type Item, type Boq } from '../../types'
 
 type Props = {
   id: string
@@ -23,7 +23,7 @@ export const getItemByIdFromState = ({
     if (item?.type === 'boq') {
       for (let rowIndex = 0; rowIndex < item.boq.rows.length; rowIndex++) {
         if (item.boq.rows[rowIndex]?.id === id) {
-          const boqRow = (state.items[itemIndex] as ItemBoq).boq.rows[rowIndex]
+          const boqRow = (state.items[itemIndex] as Boq).boq.rows[rowIndex]
           return boqRow
         }
       }

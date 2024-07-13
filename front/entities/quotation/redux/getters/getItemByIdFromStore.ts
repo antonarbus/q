@@ -1,5 +1,5 @@
 import { getState } from '@lib_instances/store'
-import { type Item, type ItemBoq } from '../../types'
+import { type Item, type Boq } from '../../types'
 
 type Props = {
   id: string
@@ -22,9 +22,7 @@ export const getItemByIdFromStore = ({ id }: Props): Item | undefined => {
     if (item?.type === 'boq') {
       for (let rowIndex = 0; rowIndex < item.boq.rows.length; rowIndex++) {
         if (item.boq.rows[rowIndex]?.id === id) {
-          const boqRow = (quotation.items[itemIndex] as ItemBoq).boq.rows[
-            rowIndex
-          ]
+          const boqRow = (quotation.items[itemIndex] as Boq).boq.rows[rowIndex]
           return boqRow
         }
       }

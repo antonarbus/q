@@ -2,7 +2,7 @@ import { type FroalaEditorRef } from '@shared/types/froala'
 import { type BoqRowKey } from '../consts/boqRowKey'
 import { type itemKey } from '../consts/itemKey'
 
-type ItemCommon = {
+type Common = {
   id: 'new' | (Record<never, never> & string)
   email?: string
   name?: string
@@ -28,7 +28,7 @@ export type BoqRowCell = {
   pin: BoqRowCellPin
 }
 
-export type BoqRow = ItemCommon & {
+export type Row = Common & {
   type: BoqRowKey
   description: BoqRowCell
   itemPrice: BoqRowCell
@@ -54,7 +54,7 @@ export type BoqHeaderCell = {
   value: number
 }
 
-export type ItemBoq = ItemCommon & {
+export type Boq = Common & {
   type: typeof itemKey.boq
   boq: {
     header: {
@@ -63,15 +63,15 @@ export type ItemBoq = ItemCommon & {
       subTotalPrice: BoqHeaderCell
     }
     column: BoqCols
-    rows: BoqRow[]
+    rows: Row[]
   }
 }
 
-export type BoqHeaderKey = keyof ItemBoq['boq']['header']
+export type BoqHeaderKey = keyof Boq['boq']['header']
 export type BoqColumnKey = keyof BoqCols
 export type BoqRowCellKey = keyof Omit<BoqCols, 'number'>
 
-type ItemText = ItemCommon & {
+type Text = Common & {
   type: typeof itemKey.text
   text: {
     html: string
@@ -79,7 +79,7 @@ type ItemText = ItemCommon & {
   }
 }
 
-type ItemPrice = ItemCommon & {
+type Price = Common & {
   type: typeof itemKey.price
   title: {
     html: string
@@ -91,13 +91,13 @@ type ItemPrice = ItemCommon & {
   }
 }
 
-export type ItemPaste = ItemCommon & {
+export type Paste = Common & {
   type: typeof itemKey.paste
 }
 
-export type Item = ItemBoq | ItemPaste | ItemText | ItemPrice | BoqRow
+export type Item = Boq | Paste | Text | Price | Row
 
-export type Quotation = ItemCommon & {
+export type Quotation = Common & {
   type: typeof itemKey.quotation
   createdAt?: Date
   updatedAt?: Date

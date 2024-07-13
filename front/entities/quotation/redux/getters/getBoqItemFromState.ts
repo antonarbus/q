@@ -1,5 +1,5 @@
 import { itemKey } from '../../consts/itemKey'
-import { type Quotation, type ItemBoq } from '../../types'
+import { type Quotation, type Boq } from '../../types'
 
 type Props = {
   itemIndex: number
@@ -9,7 +9,7 @@ type Props = {
 export const getBoqItemFromState = ({
   itemIndex,
   state,
-}: Props): ItemBoq | undefined => {
+}: Props): Boq | undefined => {
   const item = state.items[itemIndex]
   if (item?.type !== itemKey.boq) return
   return item

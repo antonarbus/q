@@ -1,6 +1,6 @@
 import { getState } from '@lib_instances/store'
 import { itemKey } from '../../consts/itemKey'
-import { type Item, type BoqRow } from '../../types'
+import { type Item, type Row } from '../../types'
 import { getBoqItemFromStore } from './getBoqItemFromStore'
 
 type Props = {
@@ -13,7 +13,7 @@ export const getBoqRowFromStore = ({
   itemIndex,
   rowIndex,
   state,
-}: Props): BoqRow | undefined => {
+}: Props): Row | undefined => {
   const item = getState().quotation.items[itemIndex]
 
   // todo: move item for edit modal into a different slice

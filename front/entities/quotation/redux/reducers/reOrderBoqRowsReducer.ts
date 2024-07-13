@@ -1,12 +1,12 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { BoqRow, Quotation } from '../../types'
+import type { Row, Quotation } from '../../types'
 import { getBoqItemFromState } from '../getters/getBoqItemFromState'
 
 export const reOrderBoqRowsReducer = (
   state: Quotation,
   action: PayloadAction<{
     itemIndex: number
-    reOrderedBoqRows: BoqRow[]
+    reOrderedBoqRows: Row[]
   }>,
 ): Quotation | undefined => {
   const { reOrderedBoqRows, itemIndex } = action.payload
