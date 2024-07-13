@@ -108,8 +108,10 @@ export type BlockPaste = Common & {
   type: typeof itemKey.paste
 }
 
+type Block = BlockBoq | BlockPaste | BlockText | BlockPrice
+
 // item
-export type Item = BlockBoq | BlockPaste | BlockText | BlockPrice | BoqRow
+export type Item = Block | BoqRow
 
 // quotation
 export type Quotation = Common & {
