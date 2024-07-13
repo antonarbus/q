@@ -28,7 +28,7 @@ export type BoqRowCell = {
   pin: BoqRowCellPin
 }
 
-export type Row = Common & {
+export type BoqRow = Common & {
   type: BoqRowKey
   description: BoqRowCell
   itemPrice: BoqRowCell
@@ -54,7 +54,7 @@ export type BoqHeaderCell = {
   value: number
 }
 
-export type Boq = Common & {
+export type BlockBoq = Common & {
   type: typeof itemKey.boq
   boq: {
     header: {
@@ -63,15 +63,15 @@ export type Boq = Common & {
       subTotalPrice: BoqHeaderCell
     }
     column: BoqCols
-    rows: Row[]
+    rows: BoqRow[]
   }
 }
 
-export type BoqHeaderKey = keyof Boq['boq']['header']
+export type BoqHeaderKey = keyof BlockBoq['boq']['header']
 export type BoqColumnKey = keyof BoqCols
 export type BoqRowCellKey = keyof Omit<BoqCols, 'number'>
 
-type Text = Common & {
+type BlockText = Common & {
   type: typeof itemKey.text
   text: {
     html: string
@@ -79,7 +79,7 @@ type Text = Common & {
   }
 }
 
-type Price = Common & {
+type BlockPrice = Common & {
   type: typeof itemKey.price
   title: {
     html: string
@@ -91,11 +91,11 @@ type Price = Common & {
   }
 }
 
-export type Paste = Common & {
+export type BlockPaste = Common & {
   type: typeof itemKey.paste
 }
 
-export type Item = Boq | Paste | Text | Price | Row
+export type Item = BlockBoq | BlockPaste | BlockText | BlockPrice | BoqRow
 
 export type Quotation = Common & {
   type: typeof itemKey.quotation

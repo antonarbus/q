@@ -1,5 +1,5 @@
 import { type RootState } from '@lib_instances/store'
-import type { Row } from '../../types'
+import type { BoqRow } from '../../types'
 import { getBoqRowsFromStore } from '../getters/getBoqRowsFromStore'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -7,13 +7,13 @@ type EqualityFn = (a: any, b: any) => boolean
 
 // re-render the list only if boq row is replaced or new row is added
 export const boqRowsShapeEqualityFn: EqualityFn = (
-  prevItems: Row[],
-  currentItems: Row[],
+  prevItems: BoqRow[],
+  currentItems: BoqRow[],
 ): boolean => {
   const isDifferentLength = prevItems.length !== currentItems.length
   if (isDifferentLength) return false
   const idsDoNotMatch = prevItems.some(
-    (item: Row, itemIndex: number) =>
+    (item: BoqRow, itemIndex: number) =>
       prevItems[itemIndex]?.id !== currentItems[itemIndex]?.id,
   )
   if (idsDoNotMatch) return false
@@ -26,7 +26,7 @@ type Props = {
 
 export const selectBoqRows =
   ({ itemIndex }: Props) =>
-  (state: RootState): Row[] => {
+  (state: RootState): BoqRow[] => {
     const boqRows = getBoqRowsFromStore({ itemIndex })
     if (boqRows === undefined) return []
     return boqRows
