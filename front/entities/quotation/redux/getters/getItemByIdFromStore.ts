@@ -1,5 +1,5 @@
 import { getState } from '@lib_instances/store'
-import { type Item, type BoqBlock } from '../../types'
+import { type Item } from '../../types'
 
 type Props = {
   id: string
@@ -8,13 +8,13 @@ type Props = {
 export const getItemByIdFromStore = ({ id }: Props): Item | undefined => {
   const quotation = getState().quotation
 
-  const block = quotation.items.find((item) => {
-    return item.id === id
+  const blockWithSameId = quotation.blocks.find((block) => {
+    return block.id === id
   })
 
-  if (block) return block
+  if (blockWithSameId) return blockWithSameId
 
-  for (const block of quotation.items) {
+  for (const block of quotation.blocks) {
     if (block.type === 'boq') {
       for (const boqRow of block.boq.rows) {
         if (boqRow.id === id) {

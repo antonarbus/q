@@ -51,7 +51,7 @@ export {
 } from './utils/itemImagesHeight'
 
 // Store item getters
-export { getItemFromStore } from './redux/getters/getItemFromStore'
+export { getBlockFromStore } from './redux/getters/getBlockFromStore'
 export { getBoqRowFromStore } from './redux/getters/getBoqRowFromStore'
 export { getBoqRowsFromStore } from './redux/getters/getBoqRowsFromStore'
 export { getBoqBlockFromStore } from './redux/getters/getBoqBlockFromStore'

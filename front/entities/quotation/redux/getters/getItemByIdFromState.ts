@@ -1,4 +1,4 @@
-import { type Quotation, type Item, type BoqBlock } from '../../types'
+import { type Quotation, type Item } from '../../types'
 
 type Props = {
   id: string
@@ -9,13 +9,13 @@ export const getItemByIdFromState = ({
   id,
   state,
 }: Props): Item | undefined => {
-  const block = state.items.find((item) => {
-    return item.id === id
+  const blockWithSameId = state.blocks.find((block) => {
+    return block.id === id
   })
 
-  if (block) return block
+  if (blockWithSameId) return blockWithSameId
 
-  for (const block of state.items) {
+  for (const block of state.blocks) {
     if (block?.type === 'boq') {
       for (const boqRow of block.boq.rows) {
         if (boqRow.id === id) {

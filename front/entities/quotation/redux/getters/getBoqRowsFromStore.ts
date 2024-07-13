@@ -1,5 +1,5 @@
 import { type BoqRow } from '../../types'
-import { getBoqItemFromStore } from './getBoqItemFromStore'
+import { getBoqBlockFromStore } from './getBoqBlockFromStore'
 
 type Props = {
   itemIndex: number
@@ -8,8 +8,8 @@ type Props = {
 export const getBoqRowsFromStore = ({
   itemIndex,
 }: Props): BoqRow[] | undefined => {
-  const boqItem = getBoqItemFromStore({ itemIndex })
-  if (boqItem === undefined) return
-  const boqRows = boqItem.boq.rows
+  const boqBlock = getBoqBlockFromStore({ itemIndex })
+  if (boqBlock === undefined) return
+  const boqRows = boqBlock.boq.rows
   return boqRows
 }

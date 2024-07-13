@@ -5,10 +5,10 @@ type Props = {
   state: Quotation
 }
 
-export const getItemFromState = ({
+export const getBlockFromState = ({
   itemIndex,
   state,
 }: Props): Item | undefined => {
-  const item = state.items[itemIndex]
-  return item
+  const block = state.blocks[itemIndex]
+  return block
 }

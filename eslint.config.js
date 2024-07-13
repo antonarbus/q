@@ -9,7 +9,7 @@ export default [
   { ignores: ['**/build/', '**/froalaPkg.js'] },
   { languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } } },
   { languageOptions: { globals: { ...globals.browser, ...globals.node } } },
-  // PluginJs.configs.recommended,
+  // pluginJs.configs.recommended,
   // ...tseslint.configs.recommended,
   pluginJs.configs.all,
   ...tseslint.configs.strict,
