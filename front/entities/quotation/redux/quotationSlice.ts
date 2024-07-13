@@ -40,7 +40,7 @@ import { updateSubTotalPriceReducer } from './reducers/updateSubTotalPriceReduce
 const initialState: Quotation = {
   type: itemKey.quotation,
   id: '',
-  items: [],
+  blocks: [],
 }
 
 export const quotationSlice = createSlice({

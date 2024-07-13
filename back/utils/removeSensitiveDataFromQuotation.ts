@@ -19,7 +19,7 @@ export const removeSensitiveDataFromQuotation = ({
   delete quotation.to
   delete quotation.sharedWith
 
-  quotation.items.forEach((item) => {
+  quotation.blocks.forEach((item) => {
     delete item.email
     delete item.name
     delete item.category

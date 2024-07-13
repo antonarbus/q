@@ -13,7 +13,7 @@ export const getBoqCellHtmlFromStore = ({
   rowIndex,
   boqRowCellKey,
 }: Props): string => {
-  const block = getState().quotation.items[itemIndex]
+  const block = getState().quotation.blocks[itemIndex]
 
   if (!block) return ''
 

@@ -1,11 +1,11 @@
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
-import path from 'path'
-import basicSsl from '@vitejs/plugin-basic-ssl'
-import react from '@vitejs/plugin-react'
 import { defineConfig, loadEnv } from 'vite'
+import { hostBack, portBack, portFront } from './back/utils/env'
+import basicSsl from '@vitejs/plugin-basic-ssl'
+import path from 'path'
+import react from '@vitejs/plugin-react'
 import tsconfigPaths from 'vite-tsconfig-paths'
-import { portBack, hostBack, portFront } from './back/utils/env'
 
 // https://vitejs.dev/config/
 
@@ -19,15 +19,15 @@ export default defineConfig(({ command, mode }) => {
     server: {
       host: true,
       port: portFront,
-      // https: true, //* type "thisisunsafe" if chrome says that connection is not private
+      // Https: true, //* type "thisisunsafe" if chrome says that connection is not private
       proxy: {
         '/api': `${hostBack}:${portBack}/`,
       },
     },
     preview: {
-      // host: hostFront,
+      // Host: hostFront,
       port: portFront,
-      // https: true,
+      // Https: true,
       proxy: {
         '/api': `${hostBack}:${portBack}/`,
       },
@@ -37,12 +37,13 @@ export default defineConfig(({ command, mode }) => {
     },
     esbuild: {
       define: {
-        this: 'window', // to suppress warning in terminal: [vite] warning: Top-level "this" will be replaced with undefined since this file is an ECMAScript module
+        // To suppress warning in terminal: [vite] warning: Top-level "this" will be replaced with undefined since this file is an ECMAScript module
+        this: 'window',
       },
     },
     plugins: [
       react({
-        // to show readable class names in styled components with vite
+        // To show readable class names in styled components with vite
         // https://github.com/styled-components/babel-plugin-styled-components/issues/350#issuecomment-979873241
         jsxImportSource: '@emotion/react',
         babel: {
@@ -81,12 +82,25 @@ export default defineConfig(({ command, mode }) => {
         output: {
           // https://rollupjs.org/configuration-options/#output-manualchunks
           manualChunks: (id, { getModuleInfo }) => {
-            if (id.includes('froala')) return 'qwerty'
-            if (id.includes('ag-grid')) return 'ag-grid'
-            if (id.includes('gsap')) return 'gsap'
-            if (id.includes('@mui')) return '@mui'
-            if (id.includes('@tanstack')) return '@tanstack'
-            if (id.includes('@remix')) return '@remix'
+            if (id.includes('froala')) {
+              return 'qwerty'
+            }
+            if (id.includes('ag-grid')) {
+              return 'ag-grid'
+            }
+            if (id.includes('gsap')) {
+              return 'gsap'
+            }
+            if (id.includes('@mui')) {
+              return '@mui'
+            }
+            if (id.includes('@tanstack')) {
+              return '@tanstack'
+            }
+            if (id.includes('@remix')) {
+              return '@remix'
+            }
+            return 'rest-of-chunks'
           },
         },
       },

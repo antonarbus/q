@@ -8,7 +8,7 @@ export const newQuotationTemplate: Quotation = {
   id: 'new',
   sharedWith: [],
   preview: '',
-  items: [
+  blocks: [
     {
       id: nanoid(5),
       type: itemKey.text,

@@ -6,12 +6,12 @@ type Props = {
   itemIndex: number
 }
 
-export const getBoqItemFromStore = ({
+export const getBoqBlockFromStore = ({
   itemIndex,
 }: Props): BoqBlock | undefined => {
-  const item = getState().quotation.items[itemIndex]
+  const block = getState().quotation.blocks[itemIndex]
 
-  if (item?.type !== itemKey.boq) return
+  if (block?.type !== itemKey.boq) return
 
-  return item
+  return block
 }

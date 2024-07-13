@@ -10,11 +10,10 @@ export const getBoqColumnHtmlFromStore = ({
   itemIndex,
   boqColumnKey,
 }: Props): string => {
-  const item = getState().quotation.items[itemIndex]
+  const block = getState().quotation.blocks[itemIndex]
 
-  if (!item) return ''
-  if (item.type !== itemKey.boq) return ''
+  if (block?.type !== itemKey.boq) return ''
 
-  const html = item.boq.column[boqColumnKey].html
+  const html = block.boq.column[boqColumnKey].html
   return html
 }

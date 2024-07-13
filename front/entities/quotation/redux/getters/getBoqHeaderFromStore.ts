@@ -11,10 +11,9 @@ export const getBoqHeaderFromStore = ({
   itemIndex,
   boqHeaderKey,
 }: Props): BoqHeaderCell | undefined => {
-  const item = getState().quotation.items[itemIndex]
+  const block = getState().quotation.blocks[itemIndex]
 
-  if (!item) return
-  if (item.type !== itemKey.boq) return
+  if (block?.type !== itemKey.boq) return
 
-  return item.boq.header[boqHeaderKey]
+  return block.boq.header[boqHeaderKey]
 }

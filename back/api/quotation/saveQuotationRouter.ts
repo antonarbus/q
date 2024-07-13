@@ -65,7 +65,7 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
         desc: quotation.desc,
         info: quotation.info,
         sharedWith: quotation.sharedWith,
-        items: 'find in bucket under same id',
+        blocks: 'find in bucket under same id',
         updatedAt: Date.now(),
         ...(isNew && { createdAt: Date.now() }),
         ...(isNew && { openedAt: Date.now() }),
@@ -85,7 +85,7 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
     const filePath = `${email}/${storageFolderName.quotations}/${quotation.id}.json`
     const file = bucket.file(filePath)
     const contents = JSON.stringify(
-      { ...quotationDataFromDb, items: quotation.items },
+      { ...quotationDataFromDb, items: quotation.blocks },
       null,
       2,
     )
@@ -93,7 +93,7 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
 
     return res.status(httpStatus.success_200).json({
       message: isNew ? 'saved' : 'updated',
-      quotation: { ...quotationDataFromDb, items: quotation.items },
+      quotation: { ...quotationDataFromDb, blocks: quotation.blocks },
     })
   } catch (error) {
     next(error)

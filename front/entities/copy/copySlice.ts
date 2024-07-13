@@ -1,5 +1,4 @@
-import type { PayloadAction } from '@reduxjs/toolkit'
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { type Item } from '@entities/quotation'
 import { type CopyPlace } from './types'
 

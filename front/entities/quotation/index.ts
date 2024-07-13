@@ -1,29 +1,29 @@
 export { newQuotationTemplate } from './newQuotationTemplate'
 
-// signals
+// Signals
 export { isFroalaSignal } from './signals/isFroalaSignal'
 export { backgroundMessageSignal } from './signals/backgroundMessageSignal'
 
-// ref
+// Ref
 
 export { previousQuotationRef } from './refs/previousQuotationRef'
 
-// api
+// Api
 export { useGetQuotationMutation } from './api/useGetQuotationMutation'
 export { useGetQuotationsQuery } from './api/useGetQuotationsQuery'
 export { useDeleteQuotationMutation } from './api/useDeleteQuotationMutation'
 export { useSaveQuotationMutation } from './api/useSaveQuotationMutation'
 export { useGetQuotationCategoriesQuery } from './api/useGetQuotationCategoriesQuery'
 
-// cacheUpdaters
+// CacheUpdaters
 export { updateOrAppendIntoQuotationsCache } from './cacheUpdaters/updateOrAppendIntoQuotationsCache'
 export { deleteFromQuotationsCache } from './cacheUpdaters/deleteFromQuotationsCache'
 export { deleteQuotationsCache } from './cacheUpdaters/deleteQuotationsCache'
 
-// slice
+// Slice
 export { quotationSlice } from './redux/quotationSlice'
 
-// selectors
+// Selectors
 export { itemsShapeEqualityFn } from './redux/selectors/itemsShapeEqualityFn'
 export { selectIsLastItem } from './redux/selectors/selectIsLastItem'
 export { selectIsLastBoqRow } from './redux/selectors/selectIsLastBoqRow'
@@ -35,7 +35,7 @@ export {
 export { selectBoqCell } from './redux/selectors/selectBoqCell'
 export { selectBoqCellPin } from './redux/selectors/selectBoqCellPin'
 
-// utils
+// Utils
 export { saveItemHeightByIndex } from './utils/saveItemHeightByIndex'
 export { didBoqCellContentChange } from './utils/didBoqCellContentChange'
 export { didBoqHeaderCellContentChange } from './utils/didBoqHeaderCellContentChange'
@@ -50,34 +50,34 @@ export {
   unfixItemImagesHeight,
 } from './utils/itemImagesHeight'
 
-// store item getters
+// Store item getters
 export { getItemFromStore } from './redux/getters/getItemFromStore'
 export { getBoqRowFromStore } from './redux/getters/getBoqRowFromStore'
 export { getBoqRowsFromStore } from './redux/getters/getBoqRowsFromStore'
-export { getBoqItemFromStore } from './redux/getters/getBoqItemFromStore'
+export { getBoqBlockFromStore } from './redux/getters/getBoqBlockFromStore'
 export { getBoqCellFromStore } from './redux/getters/getBoqCellFromStore'
 export { getBoqHeaderFromStore } from './redux/getters/getBoqHeaderFromStore'
 export { getBoqColumnFromStore } from './redux/getters/getBoqColumnFromStore'
 export { getItemByIdFromStore } from './redux/getters/getItemByIdFromStore'
 
-// store html getters
+// Store html getters
 export { getItemTextHtmlFromStore } from './redux/getters/getItemTextHtmlFromStore'
 export { getBoqColumnHtmlFromStore } from './redux/getters/getBoqColumnHtmlFromStore'
 export { getBoqHeaderHtmlFromStore } from './redux/getters/getBoqHeaderHtmlFromStore'
 export { getBoqCellHtmlFromStore } from './redux/getters/getBoqCellHtmlFromStore'
 export { getTotalPriceHtmlFromStore } from './redux/getters/getTotalPriceHtmlFromStore'
 
-// store cell updaters (html + value)
+// Store cell updaters (html + value)
 export { updateBoqColumnCellAtStore } from './redux/updaters/updateBoqColumnCellAtStore'
 export { updateBoqHeaderCellAtStore } from './redux/updaters/updateBoqHeaderCellAtStore'
 export { updateBoqRowCellAtStore } from './redux/updaters/updateBoqRowCellAtStore'
 
-// ui
+// Ui
 export { ItemComp } from './ui/ItemComp'
 export { Froala } from './ui/froala/Froala'
 export { BackgroundMessage } from './ui/BackgroundMessage'
 
-// styles
+// Styles
 export { textItemCellStyle } from './styles/textItemCellStyle'
 export { boqRowCellStyle, boqRowCellSx } from './styles/boqRowCellStyle'
 export { columnHeaderStyle } from './styles/columnHeaderStyle'
@@ -85,12 +85,12 @@ export { subTotalPriceCellStyle } from './styles/subTotalPriceCellStyle'
 export { subTotalTextCellStyle } from './styles/subTotalTextCellStyle'
 export { titleCellStyle } from './styles/titleCellStyle'
 
-// hooks
+// Hooks
 export { useIsItemSortDisabled } from './hooks/useIsItemSortDisabled'
 export { useIsBoqRowSortDisabled } from './hooks/useIsBoqRowSortDisabled'
 export { useStylesForResizableCell } from './hooks/useStylesForResizableCell'
 
-// providers
+// Providers
 export {
   BoqItemProvider,
   useBoqItem,
@@ -100,13 +100,13 @@ export { ItemProvider, useItem } from './providers/ItemProvider'
 export { RowProvider, useRow } from './providers/RowProvider'
 export { FroalaProvider, useFroala } from './providers/FroalaProvider'
 
-// consts
+// Consts
 export { itemKey } from './consts/itemKey'
 export { boqRowKey } from './consts/boqRowKey'
 export { boqColumnKey } from './consts/boqColumnKey'
 export { boqRowCellKey } from './consts/boqRowCellKey'
 
-// types
+// Types
 export type {
   BoqHeaderCell,
   BoqHeaderKey,

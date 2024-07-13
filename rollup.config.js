@@ -1,5 +1,5 @@
-import typescript from '@rollup/plugin-typescript'
 import copy from 'rollup-plugin-copy'
+import typescript from '@rollup/plugin-typescript'
 
 export default {
   input: './back/index.ts',
@@ -11,9 +11,18 @@ export default {
     typescript(),
     copy({
       targets: [
-        { src: './back/package.json', dest: './back/build' },
-        { src: './back/package-lock.json', dest: './back/build' },
-        { src: './.env', dest: './back/build' },
+        {
+          dest: './back/build',
+          src: './back/package.json',
+        },
+        {
+          dest: './back/build',
+          src: './back/package-lock.json',
+        },
+        {
+          dest: './back/build',
+          src: './.env',
+        },
       ],
     }),
   ],

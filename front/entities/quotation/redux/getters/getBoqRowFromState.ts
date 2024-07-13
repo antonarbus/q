@@ -1,6 +1,6 @@
 import { itemKey } from '../../consts/itemKey'
 import { type Quotation, type BoqRow } from '../../types'
-import { getBoqItemFromState } from './getBoqItemFromState'
+import { getBoqBlockFromState } from './getBoqBlockFromState'
 
 type Props = {
   itemIndex: number
@@ -14,13 +14,13 @@ export const getBoqRowFromState = ({
   state,
 }: Props): BoqRow | undefined => {
   // todo: move item for edit modal into a different slice
-  // special case for when the item is a row for item edit modal
-  // if (state.items[0]?.type === itemKey.row) {
-  //   return state.items[0]
+  // Special case for when the item is a row for item edit modal
+  // If (state.items[0]?.type === itemKey.row) {
+  //   Return state.items[0]
   // }
 
-  const boqItem = getBoqItemFromState({ itemIndex, state })
-  if (boqItem === undefined) return
-  const boqRow = boqItem.boq.rows[rowIndex]
+  const boqBlock = getBoqBlockFromState({ itemIndex, state })
+  if (!boqBlock) return
+  const boqRow = boqBlock.boq.rows[rowIndex]
   return boqRow
 }
