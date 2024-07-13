@@ -12,12 +12,12 @@ export const updateBoqHeaderTextReducer = (
   }>,
 ): void => {
   const { itemIndex, html, boqHeaderKey, value } = action.payload
-  const item = state.items[itemIndex]
+  const block = state.blocks[itemIndex]
 
-  if (!item) return
-  if (item.type !== itemKey.boq) return
+  if (!block) return
+  if (block.type !== itemKey.boq) return
   if (html === undefined) return
 
-  item.boq.header[boqHeaderKey].html = html
-  item.boq.header[boqHeaderKey].value = value
+  block.boq.header[boqHeaderKey].html = html
+  block.boq.header[boqHeaderKey].value = value
 }

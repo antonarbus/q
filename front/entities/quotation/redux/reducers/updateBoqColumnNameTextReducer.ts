@@ -11,10 +11,10 @@ export const updateBoqColumnNameTextReducer = (
   }>,
 ): void => {
   const { itemIndex, html, boqColumnKey } = action.payload
-  const item = state.items[itemIndex]
+  const block = state.blocks[itemIndex]
 
-  if (!item) return
-  if (item.type !== itemKey.boq) return
+  if (!block) return
+  if (block.type !== itemKey.boq) return
 
-  item.boq.column[boqColumnKey].html = html
+  block.boq.column[boqColumnKey].html = html
 }

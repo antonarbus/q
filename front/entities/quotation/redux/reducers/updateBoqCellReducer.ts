@@ -14,7 +14,7 @@ export const updateBoqCellReducer = (
 ): void => {
   const { itemIndex, rowIndex, html, value, boqRowCellKey } = action.payload
 
-  const block = state.items[itemIndex]
+  const block = state.blocks[itemIndex]
 
   if (!block) return
 

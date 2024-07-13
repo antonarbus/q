@@ -27,10 +27,10 @@ import { updateBoqColumnNameTextReducer } from './reducers/updateBoqColumnNameTe
 import { updateBoqHeaderTextReducer } from './reducers/updateBoqHeaderTextReducer'
 import { updateBoqRowHeightAndWidthReducer } from './reducers/updateBoqRowHeightAndWidthReducer'
 import { updateColWidthReducer } from './reducers/updateColWidthReducer'
-import { updateItemHeightReducer } from './reducers/updateItemHeightReducer'
+import { updateBlockHeightReducer } from './reducers/updateBlockHeightReducer'
 import { updateItemInfoByIdReducer } from './reducers/updateItemInfoByIdReducer'
 import { updateItemPreviewByIdReducer } from './reducers/updateItemPreviewByIdReducer'
-import { updateItemTextReducer } from './reducers/updateItemTextReducer'
+import { updateBlockTextReducer } from './reducers/updateBlockTextReducer'
 import { updateItemWidthReducer } from './reducers/updateItemWidthReducer'
 import { updatePriceReducer } from './reducers/updatePriceReducer'
 import { updatePriceTitleReducer } from './reducers/updatePriceTitleReducer'
@@ -72,8 +72,8 @@ export const quotationSlice = createSlice({
     updateBoqHeaderTextReducer,
     updateBoqRowHeightAndWidthReducer,
     updateColWidthReducer,
-    updateItemHeightReducer,
-    updateItemTextReducer,
+    updateBlockHeightReducer,
+    updateBlockTextReducer,
     updateItemWidthReducer,
     updateSubTotalPriceReducer,
     updatePriceTitleReducer,

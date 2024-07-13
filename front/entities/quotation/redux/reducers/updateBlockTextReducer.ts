@@ -2,7 +2,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { itemKey } from '../../consts/itemKey'
 import { type Quotation } from '../../types'
 
-export const updateItemTextReducer = (
+export const updateBlockTextReducer = (
   state: Quotation,
   action: PayloadAction<{
     itemIndex: number
@@ -10,12 +10,12 @@ export const updateItemTextReducer = (
   }>,
 ): void => {
   const { itemIndex, html } = action.payload
-  const item = state.items[itemIndex]
+  const block = state.blocks[itemIndex]
 
-  if (!item) return
-  if (item.type !== itemKey.text) return
+  if (!block) return
+  if (block.type !== itemKey.text) return
 
   if (html !== undefined) {
-    item.text.html = html
+    block.text.html = html
   }
 }

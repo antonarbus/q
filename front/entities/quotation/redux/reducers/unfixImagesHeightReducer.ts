@@ -2,19 +2,24 @@ import { itemKey } from '../../consts/itemKey'
 import { type Quotation } from '../../types'
 
 export const unfixImagesHeightReducer = (state: Quotation): void => {
-  state.items.forEach((item) => {
-    if (item.type === itemKey.text) {
-      if (!item.text.html.includes('img')) return
+  state.blocks.forEach((block) => {
+    if (block.type === itemKey.text) {
+      const isImg = block.text.html.includes('img')
 
-      item.text.html = makeHeightAutoInHtmlString({
-        htmlString: item.text.html,
+      if (!isImg) return
+
+      block.text.html = makeHeightAutoInHtmlString({
+        htmlString: block.text.html,
       })
     }
 
-    if (item.type === itemKey.boq) {
-      const boqRows = item.boq.rows
+    if (block.type === itemKey.boq) {
+      const boqRows = block.boq.rows
+
       boqRows.forEach((boqRow) => {
-        if (!boqRow.description.html.includes('img')) return
+        const isImg = boqRow.description.html.includes('img')
+
+        if (!isImg) return
 
         boqRow.description.html = makeHeightAutoInHtmlString({
           htmlString: boqRow.description.html,
@@ -29,16 +34,15 @@ function makeHeightAutoInHtmlString({
 }: {
   htmlString: string
 }): string {
-  const pattern = /<img[^>]*style\s*=\s*['"]([^'"]*)['"][^>]*>/gi
+  const styleTagAtImgRegExp =
+    /<img[^>]*style\s*=\s*['"](?<innerStyleTag>[^'"]*)['"][^>]*>/giu
 
   function replaceHeight(match: string, styleAttribute: string): string {
-    const newStyle = styleAttribute.replace(
-      /height\s*:\s*[^;]*;/gi,
-      'height: auto;',
-    )
+    const heightRegExp = /height\s*:\s*[^;]*;/giu
+    const newStyle = styleAttribute.replace(heightRegExp, 'height: auto;')
     return match.replace(styleAttribute, newStyle)
   }
 
-  const modifiedHtml = htmlString.replace(pattern, replaceHeight)
+  const modifiedHtml = htmlString.replace(styleTagAtImgRegExp, replaceHeight)
   return modifiedHtml
 }
