@@ -17,7 +17,9 @@ const storage = new Storage({
   },
 })
 
-export const bucket = storage.bucket(process.env.BUCKET_NAME!)
+export const bucket = storage.bucket(
+  process.env.BUCKET_NAME ?? 'fake bucket name to suppress ts check',
+)
 
 export const storageFolderName = {
   bookmarks: 'bookmarks',

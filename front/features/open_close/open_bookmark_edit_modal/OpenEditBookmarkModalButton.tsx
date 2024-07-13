@@ -9,7 +9,7 @@ import { isFroalaSignal, itemKey, quotationSlice } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
-import { Block } from '@entities/quotation/types'
+import { Block } from '@entities/quotation'
 
 export const OpenEditBookmarkModalButton = ({ id }: ReqBody): JSX.Element => {
   const navigate = useNavigate()

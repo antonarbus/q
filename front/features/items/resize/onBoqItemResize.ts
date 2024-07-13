@@ -1,6 +1,6 @@
 import { dispatch, getState } from '@lib_instances/store'
 import {
-  type BlockBoq,
+  type BoqBlock,
   quotationSlice,
   getBoqColumnFromStore,
   boqColumnKey,
@@ -26,7 +26,7 @@ export const onBoqItemResizeStart: OnItemResizeStart = ({
   dispatch(quotationSlice.actions.hideBoqItemPinsReducer({ itemIndex }))
 
   initDescriptionColumnWidth =
-    (getState().quotation.items[itemIndex] as BlockBoq).boq.column.description
+    (getState().quotation.items[itemIndex] as BoqBlock).boq.column.description
       .width ?? 0
 }
 

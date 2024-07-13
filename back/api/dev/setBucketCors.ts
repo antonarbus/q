@@ -22,7 +22,7 @@ async function configureBucketCors(_req: Req, res: Res): Promise<void> {
   ])
 
   console.info(
-    `Bucket ${process.env.BUCKET_NAME!} was updated with a CORS config`,
+    `Bucket ${process.env.BUCKET_NAME ?? 'fake bucket name to suppress ts'} was updated with a CORS config`,
   )
 
   res.json(corsUpdateRes.at(0)?.cors)

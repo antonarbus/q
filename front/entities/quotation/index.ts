@@ -108,11 +108,6 @@ export { boqRowCellKey } from './consts/boqRowCellKey'
 
 // types
 export type {
-  Quotation,
-  Item,
-  PasteBlock as BlockPaste,
-  BoqBlock as BlockBoq,
-  BoqCols,
   BoqHeaderCell,
   BoqHeaderKey,
   BoqColumnKey,
@@ -121,4 +116,9 @@ export type {
   BoqRowCellPin,
   BoqRowCell,
   BoqRowEditorRefs,
+  BoqBlock,
+  Block,
+  BoqCols,
+  Item,
+  Quotation,
 } from './types'
