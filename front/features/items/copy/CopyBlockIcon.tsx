@@ -5,13 +5,13 @@ import { copySlice } from '@entities/copy'
 import {
   isFroalaSignal,
   itemKey,
-  saveItemHeightByIndex,
+  saveBlockHeightByIndex,
   useItem,
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { cleanHtml } from '@shared/utils/itemsUtils'
 
-export const CopyItemIcon = (): JSX.Element => {
+export const CopyBlockIcon = (): JSX.Element => {
   const { itemIndex } = useItem()
   const isCopyable = useSelectorTyped((state) => state.copy.isCopyable)
   const disabled = !isCopyable
@@ -29,11 +29,11 @@ export const CopyItemIcon = (): JSX.Element => {
       onClick={(e: MouseEvent): void => {
         if (disabled) return
 
-        saveItemHeightByIndex({ itemIndex })
+        saveBlockHeightByIndex({ itemIndex })
 
-        const itemToCopy = getState().quotation.items[itemIndex]
-        if (!itemToCopy) return
-        if (itemToCopy.type === itemKey.paste) return
+        const blockToCopy = getState().quotation.blocks[itemIndex]
+        if (!blockToCopy) return
+        if (blockToCopy.type === itemKey.paste) return
 
         const clickedIconElement = e.target
         if (!(clickedIconElement instanceof Element)) return
@@ -46,10 +46,10 @@ export const CopyItemIcon = (): JSX.Element => {
         const cleanedHtml = cleanHtml(html)
         isFroalaSignal.value = false
 
-        const item = structuredClone(itemToCopy)
-        item.preview = cleanedHtml
+        const block = structuredClone(blockToCopy)
+        block.preview = cleanedHtml
 
-        dispatch(copySlice.actions.addItemIntoCopyContainer({ item }))
+        dispatch(copySlice.actions.addItemIntoCopyContainer({ item: block }))
         dispatch(copySlice.actions.allowToPaste())
 
         const isCopyContainer = getState().copy.isCopyContainer

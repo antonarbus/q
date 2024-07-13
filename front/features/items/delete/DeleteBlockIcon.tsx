@@ -7,18 +7,18 @@ import { copySlice } from '@entities/copy'
 import {
   isFroalaSignal,
   quotationSlice,
-  selectIsLastItem,
+  selectIsLastBlock,
   useItem,
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { fixElementDimensionStyle } from '@shared/utils/fixElementDimensionStyle'
 
-export const DeleteItemIcon = (): EmotionJSX.Element => {
+export const DeleteBlockIcon = (): EmotionJSX.Element => {
   const { itemIndex } = useItem()
 
-  const isItemAlone = useSelectorTyped(selectIsLastItem)
+  const isBlockAlone = useSelectorTyped(selectIsLastBlock)
   const isDeletable = useSelectorTyped((state) => state.copy.isDeletable)
-  const disabled = isItemAlone || !isDeletable
+  const disabled = isBlockAlone || !isDeletable
 
   return (
     <GoTrash
@@ -35,24 +35,28 @@ export const DeleteItemIcon = (): EmotionJSX.Element => {
       onClick={(e: MouseEvent): void => {
         if (disabled) return
 
-        const itemToDelete = getState().quotation.items[itemIndex]
+        const blockToDelete = getState().quotation.blocks[itemIndex]
 
-        if (!itemToDelete) return
+        if (!blockToDelete) return
 
         const clickedIconElement = e.target
         if (!(clickedIconElement instanceof Element)) return
-        const itemElement = clickedIconElement.closest(`.${cls.item}`)
-        if (!(itemElement instanceof Element)) return
-        const paperElement = itemElement.querySelector(`.${cls.paper}`)
+        const blockElement = clickedIconElement.closest(`.${cls.item}`)
+        if (!(blockElement instanceof Element)) return
+        const paperElement = blockElement.querySelector(`.${cls.paper}`)
         if (!(paperElement instanceof HTMLElement)) return
 
         // width of animated element is changed for unknown reason, can't explain the issue, so let's fix it for animation purpose
         fixElementDimensionStyle({ element: paperElement })
 
         isFroalaSignal.value = false
+
         dispatch(
-          quotationSlice.actions.deleteItemReducer({ itemId: itemToDelete.id }),
+          quotationSlice.actions.deleteBlockReducer({
+            itemId: blockToDelete.id,
+          }),
         )
+
         dispatch(copySlice.actions.forbidAllActions())
 
         setTimeout(() => {

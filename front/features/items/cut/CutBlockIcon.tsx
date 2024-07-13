@@ -7,19 +7,19 @@ import {
   isFroalaSignal,
   itemKey,
   quotationSlice,
-  saveItemHeightByIndex,
-  selectIsLastItem,
+  saveBlockHeightByIndex,
+  selectIsLastBlock,
   useItem,
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { fixElementDimensionStyle } from '@shared/utils/fixElementDimensionStyle'
 import { cleanHtml } from '@shared/utils/itemsUtils'
 
-export const CutItemIcon = (): JSX.Element => {
+export const CutBlockIcon = (): JSX.Element => {
   const { itemIndex } = useItem()
-  const isItemAlone = useSelectorTyped(selectIsLastItem)
+  const isBlockAlone = useSelectorTyped(selectIsLastBlock)
   const isCuttable = useSelectorTyped((state) => state.copy.isCuttable)
-  const disabled = isItemAlone || !isCuttable
+  const disabled = isBlockAlone || !isCuttable
 
   return (
     <TbCut
@@ -32,11 +32,11 @@ export const CutItemIcon = (): JSX.Element => {
       onClick={(e: MouseEvent): void => {
         if (disabled) return
 
-        saveItemHeightByIndex({ itemIndex })
+        saveBlockHeightByIndex({ itemIndex })
 
-        const itemToCut = getState().quotation.items[itemIndex]
-        if (!itemToCut) return
-        if (itemToCut.type === itemKey.paste) return
+        const blockToCut = getState().quotation.blocks[itemIndex]
+        if (!blockToCut) return
+        if (blockToCut.type === itemKey.paste) return
 
         const clickedIconElement = e.target
         if (!(clickedIconElement instanceof Element)) return
@@ -52,12 +52,12 @@ export const CutItemIcon = (): JSX.Element => {
         const cleanedHtml = cleanHtml(html)
         isFroalaSignal.value = false
 
-        const item = structuredClone(itemToCut)
+        const item = structuredClone(blockToCut)
         item.preview = cleanedHtml
 
         dispatch(copySlice.actions.addItemIntoCopyContainer({ item }))
         dispatch(
-          quotationSlice.actions.deleteItemReducer({ itemId: itemToCut.id }),
+          quotationSlice.actions.deleteBlockReducer({ itemId: blockToCut.id }),
         )
         dispatch(copySlice.actions.forbidAllActions())
 
