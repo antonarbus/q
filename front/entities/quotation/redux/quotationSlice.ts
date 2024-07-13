@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { itemKey } from '../consts/itemKey'
 import { type Quotation } from '../types'
 import { deleteBoqRowReducer } from './reducers/deleteBoqRowReducer'
-import { deleteItemReducer } from './reducers/deleteItemReducer'
+import { deleteBlockReducer } from './reducers/deleteBlockReducer'
 import { disableFroalaReducer } from './reducers/disableFroalaReducer'
 import { enableFroalaReducer } from './reducers/enableFroalaReducer'
 import { fixImagesHeightReducer } from './reducers/fixImagesHeightReducer'
@@ -50,7 +50,7 @@ export const quotationSlice = createSlice({
     loadQuotationReducer,
     resetQuotationReducer: () => initialState,
     deleteBoqRowReducer,
-    deleteItemReducer,
+    deleteBlockReducer,
     disableFroalaReducer,
     enableFroalaReducer,
     hideBoqItemPinsReducer,

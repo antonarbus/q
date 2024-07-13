@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { type Quotation } from '../../types'
-import { getBoqItemFromState } from '../getters/getBoqItemFromState'
+import { getBoqBlockFromState } from '../getters/getBoqBlockFromState'
 
 export const deleteBoqRowReducer = (
   state: Quotation,
@@ -10,9 +10,9 @@ export const deleteBoqRowReducer = (
   }>,
 ): Quotation => {
   const { itemIndex, rowIndex } = action.payload
-  const boqItem = getBoqItemFromState({ itemIndex, state })
-  if (boqItem === undefined) return state
-  const boqRowsWithoutDeletedRow = boqItem.boq.rows.toSpliced(rowIndex, 1)
-  boqItem.boq.rows = boqRowsWithoutDeletedRow
+  const boqBlock = getBoqBlockFromState({ itemIndex, state })
+  if (boqBlock === undefined) return state
+  const boqRowsWithoutDeletedRow = boqBlock.boq.rows.toSpliced(rowIndex, 1)
+  boqBlock.boq.rows = boqRowsWithoutDeletedRow
   return state
 }

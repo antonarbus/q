@@ -61,11 +61,11 @@ export { getBoqColumnFromStore } from './redux/getters/getBoqColumnFromStore'
 export { getItemByIdFromStore } from './redux/getters/getItemByIdFromStore'
 
 // Store html getters
-export { getItemTextHtmlFromStore } from './redux/getters/getItemTextHtmlFromStore'
+export { getTextBlockHtmlFromStore } from './redux/getters/getTextBlockHtmlFromStore'
 export { getBoqColumnHtmlFromStore } from './redux/getters/getBoqColumnHtmlFromStore'
 export { getBoqHeaderHtmlFromStore } from './redux/getters/getBoqHeaderHtmlFromStore'
 export { getBoqCellHtmlFromStore } from './redux/getters/getBoqCellHtmlFromStore'
-export { getTotalPriceHtmlFromStore } from './redux/getters/getTotalPriceHtmlFromStore'
+export { getPriceBlockHtmlFromStore } from './redux/getters/getPriceBlockHtmlFromStore'
 
 // Store cell updaters (html + value)
 export { updateBoqColumnCellAtStore } from './redux/updaters/updateBoqColumnCellAtStore'
