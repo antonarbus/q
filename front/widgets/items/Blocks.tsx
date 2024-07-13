@@ -2,7 +2,7 @@ import { AnimatePresence } from 'framer-motion'
 import { type ReactNode } from 'react'
 import { type Item as ItemType } from '@entities/quotation'
 import { FadeInOnInitLoad } from './FadeInOnInitLoad'
-import { Item } from './Item'
+import { Block } from './Block'
 import { BlocksSortableContext } from './BlocksSortableContext'
 
 type Props = {
@@ -17,7 +17,7 @@ export const Blocks = ({ items }: Props): ReactNode => {
       <BlocksSortableContext>
         <AnimatePresence initial={false}>
           {items.map((item, itemIndex) => (
-            <Item
+            <Block
               key={item.id}
               item={item}
               itemIndex={itemIndex}

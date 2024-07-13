@@ -7,7 +7,7 @@ import {
 import {
   useItem,
   Froala,
-  getTotalPriceHtmlFromStore,
+  getPriceBlockHtmlFromStore,
 } from '@entities/quotation'
 import { type FroalaEditor } from '@shared/types/froala'
 
@@ -20,7 +20,7 @@ export const PriceValue = (): JSX.Element => {
     <Froala
       editorRef={editorRef}
       placeholder='Total price...'
-      htmlGetter={() => getTotalPriceHtmlFromStore({ itemIndex })}
+      htmlGetter={() => getPriceBlockHtmlFromStore({ itemIndex })}
       onContentChange={() => {
         updatePriceValueCell({ editorRef, itemIndex })
       }}

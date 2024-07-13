@@ -6,8 +6,11 @@ import {
   onColumnResizeStart,
   onColumnResizeStop,
 } from '@features/items/resize'
-import { selectColumnWidth, useItem } from '@entities/quotation'
-import type { BoqColumnKey } from '@entities/quotation'
+import {
+  selectColumnWidth,
+  useItem,
+  type BoqColumnKey,
+} from '@entities/quotation'
 
 type Props = {
   children: ReactNode

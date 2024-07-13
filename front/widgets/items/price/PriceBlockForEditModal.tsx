@@ -1,19 +1,19 @@
-import { onPriceItemResizeStop } from '@features/items/resize'
-import { ItemComp } from '@entities/quotation'
+import { onPriceBlockResizeStop } from '@features/items/resize'
+import { BlockComp } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { PriceHeader } from './price_header/PriceHeader'
 import { PriceMain } from './price_main/PriceMain'
 
-export const PriceItemForEditModal = (): JSX.Element => {
+export const PriceBlockForEditModal = (): JSX.Element => {
   return (
-    <ItemComp
-      className={cls.priceItem}
-      onItemResizeStop={onPriceItemResizeStop}
+    <BlockComp
+      className={cls.priceBlock}
+      onItemResizeStop={onPriceBlockResizeStop}
       leftItemActionButtons={null}
       rightItemActionButtons={null}
     >
       <PriceHeader />
       <PriceMain />
-    </ItemComp>
+    </BlockComp>
   )
 }

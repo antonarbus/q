@@ -4,10 +4,12 @@ import { type ReactNode } from 'react'
 import { FaInfoCircle } from 'react-icons/fa'
 import { openQuotationInfoModal } from '@features/open_close/open_quotation_info_modal'
 
+const DivForSymmetry = () => <div style={{ width: '80px' }} />
+
 export const Info = (): ReactNode => {
   const quotationId = useSelectorTyped((state) => state.quotation.id)
 
-  if (!quotationId) return <div style={{ width: '80px' }} /> // render empty div for symmetry
+  if (!quotationId) return <DivForSymmetry />
 
   return (
     <Box

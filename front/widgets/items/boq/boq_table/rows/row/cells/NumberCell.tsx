@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import {
   boqColumnKey,
-  getNumberOfBoqItemsAbove,
+  getNumberOfBoqBlocksAbove,
   useItem,
   useRow,
   useStylesForResizableCell,
@@ -26,7 +26,7 @@ export const NumberCell = (): JSX.Element => {
         paddingBottom: '2px',
       }}
     >
-      {getNumberOfBoqItemsAbove({ itemIndex }) + 1}.{rowIndex + 1}
+      {getNumberOfBoqBlocksAbove({ itemIndex }) + 1}.{rowIndex + 1}
     </Box>
   )
 }

@@ -3,26 +3,26 @@ import {
   ItemProvider,
   itemKey,
 } from '@entities/quotation'
-import { BoqItem } from './boq/BoqItem'
+import { BoqBlock } from './boq/BoqBlock'
 import { PasteItem } from './paste/PasteItem'
-import { TotalPriceItem } from './price/PriceItem'
-import { TextItem } from './text/TextItem'
+import { PriceBlock } from './price/PriceBlock'
+import { TextBlock } from './text/TextBlock'
 
 type Props = {
   item: ItemType
   itemIndex: number
 }
 
-export const Item = ({ item, itemIndex }: Props): React.ReactNode => {
+export const Block = ({ item, itemIndex }: Props): React.ReactNode => {
   return (
     <ItemProvider
       itemId={item.id}
       itemIndex={itemIndex}
       item={item}
     >
-      {item.type === itemKey.text && <TextItem />}
-      {item.type === itemKey.boq && <BoqItem />}
-      {item.type === itemKey.price && <TotalPriceItem />}
+      {item.type === itemKey.text && <TextBlock />}
+      {item.type === itemKey.boq && <BoqBlock />}
+      {item.type === itemKey.price && <PriceBlock />}
       {item.type === itemKey.paste && <PasteItem />}
     </ItemProvider>
   )

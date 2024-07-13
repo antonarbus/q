@@ -1,8 +1,8 @@
+import { BsFileEarmarkText, BsTags } from 'react-icons/bs'
 import { Box } from '@mui/material'
 import { type HTMLAttributes } from 'react'
-import { BsFileEarmarkText, BsTags } from 'react-icons/bs'
-import { PiBooks } from 'react-icons/pi'
 import { type Item } from '@entities/quotation'
+import { PiBooks } from 'react-icons/pi'
 import { RotatingLoaderIcon } from '@shared/components'
 import { getJsxWithBoldSubstr } from '@shared/utils/getJsxWithBoldSubstr'
 
@@ -19,7 +19,7 @@ export const renderOption = ({
   isPendingBookmark,
   pendingBookmarkId,
 }: Props) =>
-  function renderOption(
+  function render(
     props: HTMLAttributes<HTMLLIElement>,
     option: Item,
     {
@@ -32,6 +32,20 @@ export const renderOption = ({
       inputValue: string
     },
   ): JSX.Element {
+    const getHighlightedDescription = () => {
+      if (inputValueSignal.value) {
+        const boldSubString = getJsxWithBoldSubstr({
+          text: option.desc ?? '',
+          boldText: inputValueSignal.value,
+        })
+
+        return boldSubString
+      }
+
+      if (option.desc) return option.desc
+      return '-'
+    }
+
     return (
       <li
         // {...props}
@@ -154,14 +168,7 @@ export const renderOption = ({
               description:
             </span>
           </span>
-          {inputValueSignal.value
-            ? getJsxWithBoldSubstr({
-                text: option.desc ?? '',
-                boldText: inputValueSignal.value,
-              })
-            : option.desc
-              ? option.desc
-              : '-'}
+          {getHighlightedDescription()}
         </Box>
         {isPendingBookmark && option.id === pendingBookmarkId && (
           <Box

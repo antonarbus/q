@@ -5,8 +5,8 @@ import {
   useItem,
   Froala,
   subTotalTextCellStyle,
+  type BoqHeaderKey,
 } from '@entities/quotation'
-import { type BoqHeaderKey } from '@entities/quotation'
 import { type FroalaEditor } from '@shared/types/froala'
 
 const boqHeaderKey: BoqHeaderKey = 'subtotalText'

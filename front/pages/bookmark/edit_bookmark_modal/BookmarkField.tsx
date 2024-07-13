@@ -3,7 +3,7 @@ import { Box } from '@mui/material'
 import { AnimatePresence } from 'framer-motion'
 import { type ReactNode } from 'react'
 import { useEffectOnce } from 'react-use'
-import { Item } from '@widgets/items/Item'
+import { Block } from '@widgets/items/Block'
 import { itemsShapeEqualityFn, isFroalaSignal } from '@entities/quotation'
 import { OutlinedDivWithLabel } from '@shared/components'
 import { cls } from '@shared/consts/cls'
@@ -27,7 +27,7 @@ export const BookmarkField = (): ReactNode => {
   return (
     <BookmarkFieldLayout>
       <AnimatePresence initial={false}>
-        <Item
+        <Block
           item={firstBlock}
           itemIndex={0}
         />
