@@ -110,8 +110,8 @@ export { boqRowCellKey } from './consts/boqRowCellKey'
 export type {
   Quotation,
   Item,
-  BlockPaste,
-  BlockBoq,
+  PasteBlock as BlockPaste,
+  BoqBlock as BlockBoq,
   BoqCols,
   BoqHeaderCell,
   BoqHeaderKey,

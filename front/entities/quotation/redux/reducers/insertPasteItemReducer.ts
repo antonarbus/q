@@ -2,7 +2,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { type CopyPlace } from '@entities/copy'
 import { nanoid } from '@shared/lib/nanoid'
 import { itemKey } from '../../consts/itemKey'
-import type { Block, BlockPaste, Quotation } from '../../types'
+import type { Block, PasteBlock, Quotation } from '../../types'
 
 export const insertPasteItemReducer = (
   state: Quotation,
@@ -23,7 +23,7 @@ export const insertPasteItemReducer = (
     blocksWithoutPasteText.findIndex((block) => block.id === itemId) +
     (pastePos === 'bottom' ? 1 : 0)
 
-  const pasteBlock: BlockPaste = {
+  const pasteBlock: PasteBlock = {
     id: nanoid(3),
     type: itemKey.paste,
     height: 0,

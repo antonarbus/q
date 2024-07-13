@@ -77,7 +77,7 @@ export type BoqRowEditorRefs = {
 }[]
 
 // blocks
-export type BlockBoq = Common & {
+export type BoqBlock = Common & {
   type: typeof itemKey.boq
   boq: {
     header: BoqHeader
@@ -86,7 +86,7 @@ export type BlockBoq = Common & {
   }
 }
 
-type BlockText = Common & {
+type TextBlock = Common & {
   type: typeof itemKey.text
   text: {
     html: string
@@ -94,7 +94,7 @@ type BlockText = Common & {
   }
 }
 
-type BlockPrice = Common & {
+type PriceBlock = Common & {
   type: typeof itemKey.price
   title: {
     html: string
@@ -106,11 +106,11 @@ type BlockPrice = Common & {
   }
 }
 
-export type BlockPaste = Common & {
+export type PasteBlock = Common & {
   type: typeof itemKey.paste
 }
 
-export type Block = BlockBoq | BlockPaste | BlockText | BlockPrice
+export type Block = BoqBlock | PasteBlock | TextBlock | PriceBlock
 
 // item
 export type Item = Block | BoqRow
