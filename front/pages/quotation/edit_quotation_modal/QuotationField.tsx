@@ -2,11 +2,11 @@ import { Box } from '@mui/material'
 import { type ReactNode } from 'react'
 import { useEffectOnce } from 'react-use'
 import { Blocks } from '@widgets/items'
-import { type Item, isFroalaSignal } from '@entities/quotation'
+import { type Block, isFroalaSignal } from '@entities/quotation'
 import { OutlinedDivWithLabel } from '@shared/components'
 
 type Props = {
-  items: Item[]
+  blocks: Block[]
 }
 
 const QuotationFieldLayout = ({
@@ -43,10 +43,10 @@ const QuotationFieldLayout = ({
   )
 }
 
-export const QuotationField = ({ items }: Props): ReactNode => {
+export const QuotationField = ({ blocks }: Props): ReactNode => {
   return (
     <QuotationFieldLayout>
-      <Blocks items={items} />
+      <Blocks blocks={blocks} />
     </QuotationFieldLayout>
   )
 }

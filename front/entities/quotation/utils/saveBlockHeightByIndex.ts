@@ -3,15 +3,21 @@ import { cls } from '@shared/consts/cls'
 import { quotationSlice } from '../redux/quotationSlice'
 
 type Props = {
-  itemIndex: number
+  blockIndex: number
 }
 
-export const saveBlockHeightByIndex = ({ itemIndex }: Props): void => {
-  const items = document.querySelectorAll(`.${cls.paper}`)
-  const item = items[itemIndex]
-  if (!item) return
-  const height = item.clientHeight
+export const saveBlockHeightByIndex = ({ blockIndex }: Props): void => {
+  const paperElements = document.querySelectorAll(`.${cls.paper}`)
+  const paperElement = paperElements[blockIndex]
+
+  if (!paperElement) return
+
+  const height = paperElement.clientHeight
+
   dispatch(
-    quotationSlice.actions.updateBlockHeightReducer({ itemIndex, height }),
+    quotationSlice.actions.updateBlockHeightReducer({
+      blockIndex,
+      height,
+    }),
   )
 }

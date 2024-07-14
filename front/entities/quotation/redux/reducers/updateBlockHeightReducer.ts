@@ -4,12 +4,12 @@ import { type Quotation } from '../../types'
 export const updateBlockHeightReducer = (
   state: Quotation,
   action: PayloadAction<{
-    itemIndex: number
+    blockIndex: number
     height: number
   }>,
 ): void => {
-  const { itemIndex, height } = action.payload
-  const block = state.blocks[itemIndex]
+  const { blockIndex, height } = action.payload
+  const block = state.blocks[blockIndex]
 
   if (!block) return
 

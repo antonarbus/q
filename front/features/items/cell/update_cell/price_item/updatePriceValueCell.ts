@@ -5,13 +5,16 @@ import { getNumberFromString, getTextContentFromHtml } from '@shared/utils'
 
 type Props = {
   editorRef: FroalaEditorRef
-  itemIndex: number
+  blockIndex: number
 }
 
-export const updatePriceValueCell = ({ editorRef, itemIndex }: Props): void => {
+export const updatePriceValueCell = ({
+  editorRef,
+  blockIndex,
+}: Props): void => {
   if (editorRef.current === null) return
 
-  const priceBlock = getState().quotation.blocks[itemIndex]
+  const priceBlock = getState().quotation.blocks[blockIndex]
   if (priceBlock?.type !== itemKey.price) return
 
   const prevHtml = priceBlock.price.html
@@ -25,7 +28,7 @@ export const updatePriceValueCell = ({ editorRef, itemIndex }: Props): void => {
 
   dispatch(
     quotationSlice.actions.updatePriceReducer({
-      itemIndex,
+      blockIndex,
       html,
       value: cellValueFromHtml,
     }),

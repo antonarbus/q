@@ -93,7 +93,7 @@ export {
   useBoqItem,
   type BoqItemContextType,
 } from './providers/BoqItemProvider'
-export { ItemProvider, useItem } from './providers/ItemProvider'
+export { BlockProvider, useBlock } from './providers/BlockProvider'
 export { RowProvider, useRow } from './providers/RowProvider'
 export { FroalaProvider, useFroala } from './providers/FroalaProvider'
 

@@ -29,7 +29,7 @@ export const CopyBlockIcon = (): JSX.Element => {
       onClick={(e: MouseEvent): void => {
         if (disabled) return
 
-        saveBlockHeightByIndex({ itemIndex })
+        saveBlockHeightByIndex({ blockIndex: itemIndex })
 
         const blockToCopy = getState().quotation.blocks[itemIndex]
         if (!blockToCopy) return

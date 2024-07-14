@@ -23,7 +23,7 @@ export const Quotation = (): JSX.Element => {
         <Info css={{ width: '80px' }} />
       </InfoAndSearchLayout>
       <BackgroundMessage />
-      <Blocks items={blocks} />
+      <Blocks blocks={blocks} />
       <Outlet />
     </>
   )

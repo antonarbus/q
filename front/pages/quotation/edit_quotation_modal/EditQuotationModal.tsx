@@ -66,7 +66,7 @@ export const EditQuotationModal = (): JSX.Element => {
         shareWithOptionSignal={shareWithOptionSignal}
         sharedWithSignal={sharedWithSignal}
       />
-      <QuotationField items={quotation.blocks} />
+      <QuotationField blocks={quotation.blocks} />
     </FormModal>
   )
 }

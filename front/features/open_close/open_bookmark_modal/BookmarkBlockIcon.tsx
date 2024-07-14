@@ -31,7 +31,7 @@ export const BookmarkBlockIcon = (): ReactNode => {
           return
         }
 
-        saveBlockHeightByIndex({ itemIndex })
+        saveBlockHeightByIndex({ blockIndex: itemIndex })
 
         const clickedIconElement = e.target
         if (!(clickedIconElement instanceof Element)) return

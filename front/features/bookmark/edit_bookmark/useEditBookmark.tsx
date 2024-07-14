@@ -142,7 +142,7 @@ export const useEditBookmark = ({
 
     // saveItem({ item: itemWithUpdatedValues })
     // } else {
-    saveBlockHeightByIndex({ itemIndex: 0 })
+    saveBlockHeightByIndex({ blockIndex: 0 })
     const paperElement = document.querySelector(`.${cls.paper}`)
     if (!(paperElement instanceof Element)) return
 

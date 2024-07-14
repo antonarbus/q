@@ -14,13 +14,13 @@ import {
 
 type Props = {
   editorRef: FroalaEditorRef
-  itemIndex: number
+  blockIndex: number
 }
 
-export const validateTotalPrice = ({ editorRef, itemIndex }: Props): void => {
+export const validateTotalPrice = ({ editorRef, blockIndex }: Props): void => {
   if (editorRef.current === null) return
 
-  const priceBlock = getState().quotation.blocks[itemIndex]
+  const priceBlock = getState().quotation.blocks[blockIndex]
   if (priceBlock?.type !== itemKey.price) return
 
   const currentHtml = editorRef.current.html.get()
@@ -28,8 +28,8 @@ export const validateTotalPrice = ({ editorRef, itemIndex }: Props): void => {
   const cellValueFromHtml = getNumberFromString({ string: cellTextContent })
 
   const price = getTotalPriceAbove({
-    itemIndex,
-    items: getState().quotation.blocks,
+    blockIndex,
+    blocks: getState().quotation.blocks,
   })
   const isCorrectValue = cellValueFromHtml === price
 
@@ -43,7 +43,7 @@ export const validateTotalPrice = ({ editorRef, itemIndex }: Props): void => {
 
   dispatch(
     quotationSlice.actions.updatePriceReducer({
-      itemIndex,
+      blockIndex,
       html: updatedHtml,
       value: price,
     }),

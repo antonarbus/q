@@ -5,13 +5,13 @@ import { type Quotation } from '../../types'
 export const updatePriceReducer = (
   state: Quotation,
   action: PayloadAction<{
-    itemIndex: number
+    blockIndex: number
     html: string
     value: number
   }>,
 ): void => {
-  const { itemIndex, html, value } = action.payload
-  const block = state.blocks[itemIndex]
+  const { blockIndex, html, value } = action.payload
+  const block = state.blocks[blockIndex]
 
   if (block?.type !== itemKey.price) return
 

@@ -15,8 +15,7 @@ export default [
   pluginJs.configs.all,
   // ...tseslint.configs.strict,
   // ...tseslint.configs.stylistic,
-  // ...tseslint.configs.strictTypeChecked,
-  // ...tseslint.configs.stylisticTypeChecked,
+
   ...tseslint.configs.all,
   // {
   //   languageOptions: {

@@ -32,7 +32,7 @@ export const CutBlockIcon = (): JSX.Element => {
       onClick={(e: MouseEvent): void => {
         if (disabled) return
 
-        saveBlockHeightByIndex({ itemIndex })
+        saveBlockHeightByIndex({ blockIndex: itemIndex })
 
         const blockToCut = getState().quotation.blocks[itemIndex]
         if (!blockToCut) return
@@ -52,10 +52,10 @@ export const CutBlockIcon = (): JSX.Element => {
         const cleanedHtml = cleanHtml(html)
         isFroalaSignal.value = false
 
-        const item = structuredClone(blockToCut)
-        item.preview = cleanedHtml
+        const block = structuredClone(blockToCut)
+        block.preview = cleanedHtml
 
-        dispatch(copySlice.actions.addItemIntoCopyContainer({ item }))
+        dispatch(copySlice.actions.addItemIntoCopyContainer({ item: block }))
         dispatch(
           quotationSlice.actions.deleteBlockReducer({ itemId: blockToCut.id }),
         )

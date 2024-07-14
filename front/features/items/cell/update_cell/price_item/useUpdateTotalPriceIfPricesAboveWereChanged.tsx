@@ -11,17 +11,17 @@ import { getStringWithNewFormattedNumber } from '@shared/utils'
 
 type Props = {
   editorRef: FroalaEditorRef
-  itemIndex: number
+  blockIndex: number
 }
 
 export const useUpdateTotalPriceIfPricesAboveWereChanged = ({
-  itemIndex,
+  blockIndex,
   editorRef,
 }: Props): void => {
   const price = useSelectorTyped((state) => {
     const priceValue = getTotalPriceAbove({
-      itemIndex,
-      items: state.quotation.blocks,
+      blockIndex,
+      blocks: state.quotation.blocks,
     })
     return priceValue
   })
@@ -29,7 +29,7 @@ export const useUpdateTotalPriceIfPricesAboveWereChanged = ({
   useUpdateEffect(() => {
     if (editorRef.current === null) return
 
-    const priceBlock = getState().quotation.blocks[itemIndex]
+    const priceBlock = getState().quotation.blocks[blockIndex]
     if (priceBlock?.type !== itemKey.price) return
 
     const updatedHtml = getStringWithNewFormattedNumber({
@@ -40,7 +40,7 @@ export const useUpdateTotalPriceIfPricesAboveWereChanged = ({
 
     dispatch(
       quotationSlice.actions.updatePriceReducer({
-        itemIndex,
+        blockIndex,
         html: updatedHtml,
         value: price,
       }),
