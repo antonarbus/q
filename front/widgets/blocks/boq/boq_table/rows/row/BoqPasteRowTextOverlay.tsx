@@ -18,7 +18,7 @@ export const BoqPasteRowTextOverlay = (): EmotionJSX.Element => (
     }}
     transition={{
       height: {
-        duration: theme.item.animationDuration,
+        duration: theme.block.animationDuration,
       },
       opacity: {
         duration: 0,

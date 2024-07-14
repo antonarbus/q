@@ -5,12 +5,7 @@ import { AiTwotoneEdit } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetBookmarkMutation } from '@entities/bookmark'
-import {
-  isFroalaSignal,
-  itemKey,
-  quotationSlice,
-  type Block,
-} from '@entities/quotation'
+import { isFroalaSignal, quotationSlice, type Block } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
@@ -47,7 +42,7 @@ export const OpenEditBookmarkModalButton = ({ id }: ReqBody): JSX.Element => {
       dispatch(
         quotationSlice.actions.loadQuotationReducer({
           quotation: {
-            type: itemKey.quotation,
+            type: 'quotation',
             id: 'edit-bookmark',
             name: 'edit-bookmark',
             category: 'edit-bookmark',

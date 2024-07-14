@@ -4,5 +4,4 @@ export const itemType = {
   row: 'row',
   price: 'price',
   paste: 'paste',
-  quotation: 'quotation',
 } as const

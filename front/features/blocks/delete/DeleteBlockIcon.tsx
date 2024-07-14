@@ -61,7 +61,7 @@ export const DeleteBlockIcon = (): EmotionJSX.Element => {
 
         setTimeout(() => {
           dispatch(copySlice.actions.allowAllActions())
-        }, 1000 * theme.item.animationDuration)
+        }, 1000 * theme.block.animationDuration)
 
         const isCopyContainer = getState().copy.isCopyContainer
 
@@ -70,7 +70,7 @@ export const DeleteBlockIcon = (): EmotionJSX.Element => {
             () => {
               isFroalaSignal.value = true
             },
-            1000 * theme.item.animationDuration + 500,
+            1000 * theme.block.animationDuration + 500,
           )
         }
       }}

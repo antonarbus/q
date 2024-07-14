@@ -69,7 +69,7 @@ export const BlockAnimate = ({
         overflow: 'hidden',
       }}
       transition={{
-        duration: theme.item.animationDuration,
+        duration: theme.block.animationDuration,
       }}
       style={{
         display: 'flex',

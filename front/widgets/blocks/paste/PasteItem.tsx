@@ -26,8 +26,8 @@ export const PasteItem = (): EmotionJSX.Element => {
         opacity: 0,
       }}
       transition={{
-        height: { duration: theme.item.animationDuration },
-        marginBottom: { duration: theme.item.animationDuration },
+        height: { duration: theme.block.animationDuration },
+        marginBottom: { duration: theme.block.animationDuration },
         opacity: { duration: 0 },
       }}
       style={{

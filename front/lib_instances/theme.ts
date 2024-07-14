@@ -41,8 +41,7 @@ const customTheme = {
       marginRight: 10,
     },
   },
-  item: {
-    padding: '20px',
+  block: {
     animationDuration: 0.5,
   },
   copy: {

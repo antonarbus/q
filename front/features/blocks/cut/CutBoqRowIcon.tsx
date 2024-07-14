@@ -75,7 +75,7 @@ export const CutBoqRowIcon = (): JSX.Element => {
 
         setTimeout(() => {
           dispatch(copySlice.actions.allowAllActions())
-        }, 1000 * theme.item.animationDuration)
+        }, 1000 * theme.block.animationDuration)
       }}
     />
   )

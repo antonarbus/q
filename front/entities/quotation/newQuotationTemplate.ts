@@ -4,7 +4,7 @@ import { itemType } from './consts/itemType'
 import { type Quotation } from './types'
 
 export const newQuotationTemplate: Quotation = {
-  type: itemType.quotation,
+  type: 'quotation',
   id: 'new',
   sharedWith: [],
   preview: '',

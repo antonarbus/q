@@ -177,7 +177,7 @@ export const ShareField = ({
                           sharedWithSignal.value = uniq([
                             ...(sharedWithSignal.value ?? []),
                             emailSignal.value,
-                          ]).filter((item) => item !== '*')
+                          ]).filter((email) => email !== '*')
                           emailSignal.value = ''
                         }}
                       >
@@ -214,7 +214,7 @@ export const ShareField = ({
                 }}
               >
                 {(sharedWithSignal.value ?? [])
-                  .filter((item) => item !== '*')
+                  .filter((email) => email !== '*')
                   .map((email) => {
                     return (
                       <Chip

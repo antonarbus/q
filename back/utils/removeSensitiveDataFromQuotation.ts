@@ -19,14 +19,14 @@ export const removeSensitiveDataFromQuotation = ({
   delete quotation.to
   delete quotation.sharedWith
 
-  quotation.blocks.forEach((item) => {
-    delete item.email
-    delete item.name
-    delete item.category
-    delete item.desc
-    delete item.info
-    delete item.createdAt
-    delete item.updatedAt
+  quotation.blocks.forEach((block) => {
+    delete block.email
+    delete block.name
+    delete block.category
+    delete block.desc
+    delete block.info
+    delete block.createdAt
+    delete block.updatedAt
   })
 
   return quotation

@@ -50,7 +50,7 @@ const pasteItemOnClick = (): void => {
 
   setTimeout(() => {
     dispatch(copySlice.actions.allowAllActions())
-  }, 1000 * theme.item.animationDuration)
+  }, 1000 * theme.block.animationDuration)
 
   const itemsInCopyContainer = getState().copy.items
 
@@ -63,7 +63,7 @@ const pasteItemOnClick = (): void => {
         isFroalaSignal.value = true
         dispatch(copySlice.actions.allowAllActions())
       },
-      1000 * theme.item.animationDuration + 500,
+      1000 * theme.block.animationDuration + 500,
     )
   }
 }

@@ -117,7 +117,7 @@ export type Item = Block | BoqRow
 
 // quotation
 export type Quotation = Common & {
-  type: typeof itemType.quotation
+  type: 'quotation'
   createdAt?: Date
   updatedAt?: Date
   openedAt?: Date

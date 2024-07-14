@@ -44,7 +44,7 @@ export const useCopyContainerAnimation = (): AnimationControls => {
 
     setTimeout(() => {
       dispatch(copySlice.actions.allowAllActions())
-    }, 1000 * theme.item.animationDuration)
+    }, 1000 * theme.block.animationDuration)
   }, [items.length])
 
   return copyContainerAnimationControls

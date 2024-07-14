@@ -44,7 +44,7 @@ export const DeleteBoqRowIcon = (): JSX.Element => {
 
         setTimeout(() => {
           dispatch(copySlice.actions.allowAllActions())
-        }, 1000 * theme.item.animationDuration)
+        }, 1000 * theme.block.animationDuration)
 
         const isCopyContainer = getState().copy.isCopyContainer
 
@@ -55,7 +55,7 @@ export const DeleteBoqRowIcon = (): JSX.Element => {
                 quotationSlice.actions.enableFroalaReducer({ blockIndex }),
               )
             },
-            1000 * theme.item.animationDuration + 500,
+            1000 * theme.block.animationDuration + 500,
           )
         }
       }}

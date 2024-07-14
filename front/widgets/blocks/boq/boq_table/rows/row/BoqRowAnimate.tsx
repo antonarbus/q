@@ -30,7 +30,7 @@ export const BoqRowAnimate = ({ children }: Props): JSX.Element => {
         overflow: 'hidden',
       }}
       transition={{
-        duration: theme.item.animationDuration,
+        duration: theme.block.animationDuration,
       }}
     >
       {children}
