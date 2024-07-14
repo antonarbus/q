@@ -2,7 +2,7 @@ import { useSelectorTyped, dispatch, getState } from '@lib_instances/store'
 import isEqual from 'lodash.isequal'
 import { useEffect } from 'react'
 import { type CopyPlace, copySlice, getPastePlace } from '@entities/copy'
-import { boqRowKey, itemKey, quotationSlice } from '@entities/quotation'
+import { boqRowKey, itemType, quotationSlice } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { route } from '@shared/consts/route'
 
@@ -23,7 +23,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
     }
 
     const isPasteBlock = getState().quotation.blocks.some(
-      (block) => block.type === itemKey.paste,
+      (block) => block.type === itemType.paste,
     )
 
     if (isPasteBlock) {
@@ -128,7 +128,7 @@ const movePasteTextBoqRow = (e: MouseEvent): void => {
   const boqRowsElement = e.target.closest(`.${cls.boqRows}`)
 
   const isBoqPasteRow = getState()
-    .quotation.blocks.filter((block) => block.type === itemKey.boq)
+    .quotation.blocks.filter((block) => block.type === itemType.boq)
     .flatMap((block) => {
       if (block.type === 'boq') {
         return block.boq.rows
@@ -214,9 +214,9 @@ export const useMovePasteText = (): void => {
   )
 
   const isBlock =
-    typeOfNextPasteItem === itemKey.boq ||
-    typeOfNextPasteItem === itemKey.text ||
-    typeOfNextPasteItem === itemKey.price
+    typeOfNextPasteItem === itemType.boq ||
+    typeOfNextPasteItem === itemType.text ||
+    typeOfNextPasteItem === itemType.price
 
   const isBoqRow = typeOfNextPasteItem === boqRowKey.row
 

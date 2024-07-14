@@ -3,8 +3,8 @@ import { type ReactNode, type MouseEvent } from 'react'
 import { MdOutlineStarOutline } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import {
-  getBlockFromStore,
-  itemKey,
+  getBlockByIndexFromStore,
+  itemType,
   quotationSlice,
   saveBlockHeightByIndex,
   useBlock,
@@ -43,10 +43,10 @@ export const BookmarkBlockIcon = (): ReactNode => {
         const html = paperElement.innerHTML
         const cleanedHtml = cleanHtml(html)
 
-        const item = getBlockFromStore({ blockIndex })
+        const item = getBlockByIndexFromStore({ blockIndex })
 
         if (!item) return
-        if (item.type === itemKey.paste) return
+        if (item.type === itemType.paste) return
 
         dispatch(
           quotationSlice.actions.updateItemPreviewByIdReducer({

@@ -1,5 +1,5 @@
 import { dispatch, getState } from '@lib_instances/store'
-import { itemKey, quotationSlice } from '@entities/quotation'
+import { itemType, quotationSlice } from '@entities/quotation'
 import { type FroalaEditorRef } from '@shared/types/froala'
 
 type Props = {
@@ -11,7 +11,7 @@ export const updateTextBlock = ({ editorRef, blockIndex }: Props): void => {
   if (editorRef.current === null) return
 
   const block = getState().quotation.blocks[blockIndex]
-  if (block?.type !== itemKey.text) return
+  if (block?.type !== itemType.text) return
 
   const prevHtml = block.text.html
   const html = editorRef.current.html.get()

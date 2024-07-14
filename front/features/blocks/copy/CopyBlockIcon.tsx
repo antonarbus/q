@@ -4,7 +4,7 @@ import { MdCopyAll } from 'react-icons/md'
 import { copySlice } from '@entities/copy'
 import {
   isFroalaSignal,
-  itemKey,
+  itemType,
   saveBlockHeightByIndex,
   useBlock,
 } from '@entities/quotation'
@@ -32,7 +32,7 @@ export const CopyBlockIcon = (): JSX.Element => {
 
         const blockToCopy = getState().quotation.blocks[blockIndex]
         if (!blockToCopy) return
-        if (blockToCopy.type === itemKey.paste) return
+        if (blockToCopy.type === itemType.paste) return
 
         const clickedIconElement = e.target
         if (!(clickedIconElement instanceof Element)) return

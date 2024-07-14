@@ -4,7 +4,7 @@ import { Blocks } from '@widgets/blocks'
 import { Info } from '@widgets/quotation/info'
 import { Search } from '@widgets/quotation/search'
 import { useLoadQuotation } from '@features/quotation/load_quotation'
-import { BackgroundMessage, blocksShapeEqualityFn } from '@entities/quotation'
+import { BackgroundMessage, arrayShapeEqualityFn } from '@entities/quotation'
 import { InfoAndSearchLayout } from './InfoAndSearchLayout'
 
 export const Quotation = (): JSX.Element => {
@@ -12,7 +12,7 @@ export const Quotation = (): JSX.Element => {
 
   const blocks = useSelectorTyped(
     (state) => state.quotation.blocks,
-    blocksShapeEqualityFn,
+    arrayShapeEqualityFn,
   )
 
   return (

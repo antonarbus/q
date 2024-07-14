@@ -2,7 +2,7 @@ import { dispatch } from '@lib_instances/store'
 import { roundTo } from 'round-to'
 import { type FroalaEditorRef } from '@shared/types/froala'
 import { getStringWithNewFormattedNumber } from '@shared/utils'
-import { getBoqRowFromStore } from '../redux/getters/getBoqRowFromStore'
+import { getBoqRowByIndexFromStore } from '../redux/getters/getBoqRowByIndexFromStore'
 import { quotationSlice } from '../redux/quotationSlice'
 import { type BoqRowCellKey } from '../types'
 
@@ -31,7 +31,7 @@ export const formatBoqRowCellNumber = ({
     }
   }
 
-  const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
+  const boqRow = getBoqRowByIndexFromStore({ blockIndex, rowIndex })
   if (boqRow === undefined) {
     return {
       didUpdate: false,

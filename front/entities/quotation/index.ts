@@ -24,7 +24,7 @@ export { deleteQuotationsCache } from './cacheUpdaters/deleteQuotationsCache'
 export { quotationSlice } from './redux/quotationSlice'
 
 // Selectors
-export { blocksShapeEqualityFn } from './redux/selectors/itemsShapeEqualityFn'
+export { arrayShapeEqualityFn } from './redux/selectors/arrayShapeEqualityFn'
 export { selectIsLastBlock } from './redux/selectors/selectIsLastBlock'
 export { selectIsLastBoqRow } from './redux/selectors/selectIsLastBoqRow'
 export { selectColumnWidth } from './redux/selectors/selectColumnWidth'
@@ -48,8 +48,8 @@ export { getTotalPriceAbove } from './utils/getTotalPriceAbove'
 export { fixImagesHeight, unfixImagesHeight } from './utils/imagesHeight'
 
 // Store item getters
-export { getBlockFromStore } from './redux/getters/getBlockFromStore'
-export { getBoqRowFromStore } from './redux/getters/getBoqRowFromStore'
+export { getBlockByIndexFromStore } from './redux/getters/getBlockByIndexFromStore'
+export { getBoqRowByIndexFromStore } from './redux/getters/getBoqRowByIndexFromStore'
 export { getBoqRowsFromStore } from './redux/getters/getBoqRowsFromStore'
 export { getBoqBlockFromStore } from './redux/getters/getBoqBlockFromStore'
 export { getBoqCellFromStore } from './redux/getters/getBoqCellFromStore'
@@ -98,12 +98,12 @@ export { RowProvider, useRow } from './providers/RowProvider'
 export { FroalaProvider, useFroala } from './providers/FroalaProvider'
 
 // Consts
-export { itemType as itemKey } from './consts/itemType'
+export { itemType } from './consts/itemType'
 export { boqRowKey } from './consts/boqRowKey'
 export { boqColumnKey } from './consts/boqColumnKey'
 export { boqRowCellKey } from './consts/boqRowCellKey'
 
-// Types
+// types
 export type {
   BoqHeaderCell,
   BoqHeaderKey,
@@ -113,7 +113,9 @@ export type {
   BoqRowCellPin,
   BoqRowCell,
   BoqRowEditorRefs,
+  TextBlock,
   BoqBlock,
+  PriceBlock,
   Block,
   BoqCols,
   Item,

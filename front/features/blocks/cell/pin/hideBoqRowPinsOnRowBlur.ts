@@ -2,7 +2,7 @@ import { dispatch } from '@lib_instances/store'
 import { type FocusEvent } from 'react'
 import {
   boqRowCellKey,
-  getBoqRowFromStore,
+  getBoqRowByIndexFromStore,
   quotationSlice,
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
@@ -23,7 +23,7 @@ export const hideBoqRowPinsOnRowBlur = ({
 
   if (pinClicked) return
 
-  const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
+  const boqRow = getBoqRowByIndexFromStore({ blockIndex, rowIndex })
   if (boqRow === undefined) return
 
   const isItemPricePinShown = boqRow.itemPrice.pin.isShown

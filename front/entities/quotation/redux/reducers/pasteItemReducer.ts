@@ -16,6 +16,7 @@ type Reducer = (state: Quotation, action: PayloadAction<Payload>) => void
 
 export const pasteItemReducer: Reducer = (state, action) => {
   const { id, newItemId, pastePos, item } = action.payload
+
   const itemToPaste: Item = { ...structuredClone(item), id: newItemId }
 
   if (itemToPaste.type === itemType.boq) {
@@ -129,12 +130,4 @@ export const pasteItemReducer: Reducer = (state, action) => {
       block.boq.rows = boqRowsWithoutPasteText
     })
   }
-}
-
-export const splitName = (): string[] | undefined => {
-  let stringOrNull: string | null = null
-  stringOrNull = 'string'
-  if (stringOrNull === null) return
-  const letters = stringOrNull.split('')
-  return letters
 }

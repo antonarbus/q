@@ -1,6 +1,6 @@
 import { dispatch, getState } from '@lib_instances/store'
 import {
-  itemKey,
+  itemType,
   quotationSlice,
   getTotalPriceAbove,
 } from '@entities/quotation'
@@ -21,7 +21,7 @@ export const validateTotalPrice = ({ editorRef, blockIndex }: Props): void => {
   if (editorRef.current === null) return
 
   const priceBlock = getState().quotation.blocks[blockIndex]
-  if (priceBlock?.type !== itemKey.price) return
+  if (priceBlock?.type !== itemType.price) return
 
   const currentHtml = editorRef.current.html.get()
   const cellTextContent = getTextContentFromHtml({ html: currentHtml })

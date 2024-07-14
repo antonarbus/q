@@ -3,7 +3,7 @@ import { type MutableRefObject } from 'react'
 import { roundTo } from 'round-to'
 import {
   didBoqCellContentChange,
-  getBoqRowFromStore,
+  getBoqRowByIndexFromStore,
   getBoqRowsFromStore,
   updateBoqRowCellAtStore,
   updateBoqRowCellWithValue,
@@ -45,7 +45,7 @@ export const updateBoqRowItemPriceCell = ({
     html: itemPriceCellEditorRef.current.html.get(),
   })
 
-  const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
+  const boqRow = getBoqRowByIndexFromStore({ blockIndex, rowIndex })
   if (boqRow === undefined) return
 
   const newPriceValue = boqRow.qty.value * boqRow.itemPrice.value

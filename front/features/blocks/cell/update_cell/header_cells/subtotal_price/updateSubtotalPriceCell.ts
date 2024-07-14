@@ -6,7 +6,7 @@ import {
   updateBoqHeaderCellAtStore,
   updateBoqRowCellWithValue,
   updateSubTotalPriceWithValue,
-  getBoqRowFromStore,
+  getBoqRowByIndexFromStore,
   type BoqRow,
   type BoqRowEditorRefs,
   boqRowCellKey,
@@ -129,7 +129,7 @@ export const updateSubtotalPriceCell = ({
       value: price.newValue,
     })
 
-    const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
+    const boqRow = getBoqRowByIndexFromStore({ blockIndex, rowIndex })
 
     const isItemPricePinned = boqRow?.itemPrice.pin.isPinned
 

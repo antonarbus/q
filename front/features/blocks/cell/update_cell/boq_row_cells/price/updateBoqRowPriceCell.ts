@@ -1,6 +1,6 @@
 import { roundTo } from 'round-to'
 import {
-  getBoqRowFromStore,
+  getBoqRowByIndexFromStore,
   getBoqRowsFromStore,
   updateBoqRowCellAtStore,
   updateBoqRowCellWithValue,
@@ -38,7 +38,7 @@ export const updateBoqRowPriceCell = ({
 
   if (!didUpdate) return
 
-  const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
+  const boqRow = getBoqRowByIndexFromStore({ blockIndex, rowIndex })
 
   const isItemPricePinned = boqRow?.itemPrice.pin.isPinned
 

@@ -3,7 +3,7 @@ import { HiOutlineInformationCircle } from 'react-icons/hi2'
 import { useNavigate } from 'react-router-dom'
 import {
   boqRowKey,
-  getBoqRowFromStore,
+  getBoqRowByIndexFromStore,
   useBlock,
   useRow,
 } from '@entities/quotation'
@@ -19,7 +19,7 @@ export const OpenInfoBoqRowModalIcon = (): ReactNode => {
       className='open-info-boq-row-modal-icon'
       tabIndex={-1}
       onClick={(e: MouseEvent): void => {
-        const boqRow = getBoqRowFromStore({ rowIndex, blockIndex })
+        const boqRow = getBoqRowByIndexFromStore({ rowIndex, blockIndex })
 
         if (!boqRow) return
         if (boqRow.type === boqRowKey.paste) return

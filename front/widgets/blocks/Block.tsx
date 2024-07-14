@@ -1,7 +1,7 @@
 import {
   type Block as BlockType,
   BlockProvider,
-  itemKey,
+  itemType,
 } from '@entities/quotation'
 import { BoqBlock } from './boq/BoqBlock'
 import { PasteItem } from './paste/PasteItem'
@@ -20,10 +20,10 @@ export const Block = ({ block, blockIndex }: Props): React.ReactNode => {
       blockIndex={blockIndex}
       block={block}
     >
-      {block.type === itemKey.text && <TextBlock />}
-      {block.type === itemKey.boq && <BoqBlock />}
-      {block.type === itemKey.price && <PriceBlock />}
-      {block.type === itemKey.paste && <PasteItem />}
+      {block.type === itemType.text && <TextBlock />}
+      {block.type === itemType.boq && <BoqBlock />}
+      {block.type === itemType.price && <PriceBlock />}
+      {block.type === itemType.paste && <PasteItem />}
     </BlockProvider>
   )
 }

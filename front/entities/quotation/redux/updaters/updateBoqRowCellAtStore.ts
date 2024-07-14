@@ -1,7 +1,7 @@
 import { dispatch } from '@lib_instances/store'
 import { getNumberFromString, getTextContentFromHtml } from '@shared/utils'
 import type { BoqRowCellKey } from '../../types'
-import { getBoqRowFromStore } from '../getters/getBoqRowFromStore'
+import { getBoqRowByIndexFromStore } from '../getters/getBoqRowByIndexFromStore'
 import { quotationSlice } from '../quotationSlice'
 
 type Props = {
@@ -21,7 +21,7 @@ export const updateBoqRowCellAtStore = ({
   rowIndex,
   boqRowCellKey,
 }: Props): Res => {
-  const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
+  const boqRow = getBoqRowByIndexFromStore({ blockIndex, rowIndex })
 
   if (boqRow === undefined) {
     return {

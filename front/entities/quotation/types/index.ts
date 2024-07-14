@@ -86,7 +86,7 @@ export type BoqBlock = Common & {
   }
 }
 
-type TextBlock = Common & {
+export type TextBlock = Common & {
   type: typeof itemType.text
   text: {
     html: string
@@ -94,7 +94,7 @@ type TextBlock = Common & {
   }
 }
 
-type PriceBlock = Common & {
+export type PriceBlock = Common & {
   type: typeof itemType.price
   title: {
     html: string

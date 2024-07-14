@@ -5,7 +5,7 @@ import { TbCut } from 'react-icons/tb'
 import { copySlice } from '@entities/copy'
 import {
   isFroalaSignal,
-  itemKey,
+  itemType,
   quotationSlice,
   saveBlockHeightByIndex,
   selectIsLastBlock,
@@ -35,7 +35,7 @@ export const CutBlockIcon = (): JSX.Element => {
 
         const blockToCut = getState().quotation.blocks[blockIndex]
         if (!blockToCut) return
-        if (blockToCut.type === itemKey.paste) return
+        if (blockToCut.type === itemType.paste) return
 
         const clickedIconElement = e.target
         if (!(clickedIconElement instanceof Element)) return
