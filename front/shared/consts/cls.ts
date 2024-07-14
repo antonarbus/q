@@ -4,8 +4,6 @@ export const cls = {
   priceBlock: 'price-block',
   textBlock: 'text-block',
   paper: 'paper',
-  blockActions: 'item-actions',
-  boqRowActions: 'item-actions',
   actionsContainer: 'actions-container',
   boqRows: 'boq-rows',
   boqRow: 'boq-row',

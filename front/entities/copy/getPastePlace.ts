@@ -1,22 +1,24 @@
 import { type CopyPlace } from './types'
 
 type Props = {
-  item: Element
+  hoveredElement: Element
   e: MouseEvent
   distanceToEdge: number
 }
 
 export const getPastePlace = ({
-  item,
+  hoveredElement,
   e,
   distanceToEdge,
 }: Props): CopyPlace => {
-  const { height, top } = item.getBoundingClientRect()
+  const { height, top } = hoveredElement.getBoundingClientRect()
   const yWithinElement = e.clientY - top
   const distToTop = yWithinElement
   const distToBottom = height - yWithinElement
 
-  if (distToTop < distanceToEdge) return { pastePos: 'top', id: item.id }
-  if (distToBottom < distanceToEdge) return { pastePos: 'bottom', id: item.id }
-  return { pastePos: 'middle', id: item.id }
+  if (distToTop < distanceToEdge)
+    return { pastePos: 'top', id: hoveredElement.id }
+  if (distToBottom < distanceToEdge)
+    return { pastePos: 'bottom', id: hoveredElement.id }
+  return { pastePos: 'middle', id: hoveredElement.id }
 }

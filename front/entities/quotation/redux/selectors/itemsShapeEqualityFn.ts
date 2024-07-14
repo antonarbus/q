@@ -4,7 +4,7 @@ import type { Item } from '../../types'
 type EqualityFn = (a: any, b: any) => boolean
 
 // re-render the list only if item is replaced or new item is added
-export const itemsShapeEqualityFn: EqualityFn = (
+export const blocksShapeEqualityFn: EqualityFn = (
   prevItems: Item[],
   currentItems: Item[],
 ): boolean => {

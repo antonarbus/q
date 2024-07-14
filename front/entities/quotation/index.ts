@@ -24,7 +24,7 @@ export { deleteQuotationsCache } from './cacheUpdaters/deleteQuotationsCache'
 export { quotationSlice } from './redux/quotationSlice'
 
 // Selectors
-export { itemsShapeEqualityFn } from './redux/selectors/itemsShapeEqualityFn'
+export { blocksShapeEqualityFn } from './redux/selectors/itemsShapeEqualityFn'
 export { selectIsLastBlock } from './redux/selectors/selectIsLastBlock'
 export { selectIsLastBoqRow } from './redux/selectors/selectIsLastBoqRow'
 export { selectColumnWidth } from './redux/selectors/selectColumnWidth'

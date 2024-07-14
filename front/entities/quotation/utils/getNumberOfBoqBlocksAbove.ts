@@ -7,8 +7,8 @@ type Props = {
 
 export const getNumberOfBoqBlocksAbove = ({ blockIndex }: Props): number => {
   const numberOfBoqBlocksAbove = getState().quotation.blocks.reduce(
-    (accumulator, item, index) => {
-      if (item.type === itemType.boq && index < blockIndex) {
+    (accumulator, block, index) => {
+      if (block.type === itemType.boq && index < blockIndex) {
         return accumulator + 1
       }
 

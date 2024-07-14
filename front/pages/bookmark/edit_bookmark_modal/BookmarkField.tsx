@@ -4,7 +4,7 @@ import { AnimatePresence } from 'framer-motion'
 import { type ReactNode } from 'react'
 import { useEffectOnce } from 'react-use'
 import { Block } from '@widgets/blocks/Block'
-import { itemsShapeEqualityFn, isFroalaSignal } from '@entities/quotation'
+import { blocksShapeEqualityFn, isFroalaSignal } from '@entities/quotation'
 import { OutlinedDivWithLabel } from '@shared/components'
 import { cls } from '@shared/consts/cls'
 
@@ -60,7 +60,7 @@ const BookmarkFieldLayout = ({
 export const BookmarkField = (): ReactNode => {
   const blocks = useSelectorTyped(
     (state) => state.quotation.blocks,
-    itemsShapeEqualityFn,
+    blocksShapeEqualityFn,
   )
 
   useEffectOnce(() => {

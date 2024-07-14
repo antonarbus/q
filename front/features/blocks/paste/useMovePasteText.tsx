@@ -103,7 +103,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
 
   const prevPlace = getState().copy.place
   const pastePlace = getPastePlace({
-    item: blockElement,
+    hoveredElement: blockElement,
     e,
     distanceToEdge: 20,
   })
@@ -194,7 +194,7 @@ const movePasteTextBoqRow = (e: MouseEvent): void => {
   }
 
   const pastePlace = getPastePlace({
-    item: boqRowElement,
+    hoveredElement: boqRowElement,
     e,
     distanceToEdge: 10,
   })

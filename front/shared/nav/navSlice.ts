@@ -186,7 +186,7 @@ export const navSlice = createSlice({
       if (!topLevelNavMenu) return
 
       const topNavItemsIds = topLevelNavMenu.menuItems?.map(
-        (item) => item.id,
+        (menuItem) => menuItem.id,
       ) as NavItemIdKey[]
 
       topNavItemsIds?.forEach((id) => {
@@ -205,7 +205,7 @@ export const navSlice = createSlice({
       if (!topLevelNavMenu) return
 
       const topNavItemsIds = topLevelNavMenu.menuItems?.map(
-        (item) => item.id,
+        (menuItem) => menuItem.id,
       ) as NavItemIdKey[]
 
       topNavItemsIds?.forEach((id) => {
@@ -290,7 +290,7 @@ export const navSlice = createSlice({
       if (!topLevelNavMenu) return
 
       const topNavItemsIds = topLevelNavMenu.menuItems?.map(
-        (item) => item.id,
+        (menuItem) => menuItem.id,
       ) as NavItemIdKey[]
 
       topNavItemsIds?.forEach((id) => {

@@ -4,17 +4,17 @@ import { type Quotation } from '../../types'
 
 export const removePasteItemReducer = (state: Quotation): void => {
   const pasteBlockIndex = state.blocks.findIndex(
-    (item) => item.type === itemType.paste,
+    (block) => block.type === itemType.paste,
   )
 
   if (pasteBlockIndex >= 0) {
     state.blocks.splice(pasteBlockIndex, 1)
   }
 
-  state.blocks.forEach((item) => {
-    if (item.type !== itemType.boq) return
+  state.blocks.forEach((block) => {
+    if (block.type !== itemType.boq) return
 
-    const boqRows = item.boq.rows
+    const boqRows = block.boq.rows
 
     const pasteBoqRowIndex = boqRows.findIndex(
       (boqRow) => boqRow.type === boqRowKey.paste,

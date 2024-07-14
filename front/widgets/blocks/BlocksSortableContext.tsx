@@ -8,7 +8,7 @@ import {
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { useSelectorTyped } from '@lib_instances/store'
 import { onBlockDragEnd, onBlockDragStart } from '@features/blocks/drag'
-import { itemsShapeEqualityFn } from '@entities/quotation'
+import { blocksShapeEqualityFn } from '@entities/quotation'
 
 type Props = {
   children: React.ReactNode
@@ -19,8 +19,8 @@ type Props = {
 
 export const BlocksSortableContext = ({ children }: Props): JSX.Element => {
   const blocks = useSelectorTyped(
-    (block) => block.quotation.blocks,
-    itemsShapeEqualityFn,
+    (state) => state.quotation.blocks,
+    blocksShapeEqualityFn,
   )
 
   const blockIds = blocks.map((block) => block.id)

@@ -5,7 +5,7 @@ import { type Item, isFroalaSignal, itemKey } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 
 export const insertPriceBlock = (e?: MouseEvent): void => {
-  const item: Item = {
+  const block: Item = {
     id: nanoid(5),
     type: itemKey.price,
     width: 150,
@@ -50,7 +50,7 @@ export const insertPriceBlock = (e?: MouseEvent): void => {
 
   isFroalaSignal.value = false
 
-  dispatch(copySlice.actions.addItemIntoCopyContainer({ item }))
+  dispatch(copySlice.actions.addItemIntoCopyContainer({ item: block }))
 
   const isCopyContainer = getState().copy.isCopyContainer
 

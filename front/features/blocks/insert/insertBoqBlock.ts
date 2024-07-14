@@ -10,7 +10,7 @@ import {
 import { nanoid } from '@shared/lib/nanoid'
 
 export const insertBoqBlock = (e?: MouseEvent): void => {
-  const item: Item = {
+  const boqBlock: Item = {
     id: nanoid(5),
     type: itemKey.boq,
     width: 600,
@@ -473,7 +473,7 @@ export const insertBoqBlock = (e?: MouseEvent): void => {
 
   isFroalaSignal.value = false
 
-  dispatch(copySlice.actions.addItemIntoCopyContainer({ item }))
+  dispatch(copySlice.actions.addItemIntoCopyContainer({ item: boqBlock }))
 
   const isCopyContainer = getState().copy.isCopyContainer
 

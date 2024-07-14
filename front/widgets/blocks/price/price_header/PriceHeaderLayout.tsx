@@ -20,13 +20,13 @@ export const PriceHeaderLayout = ({
             ? '0 0 1px 1px #cf5757c3 inset'
             : 'none',
         },
-        '& :where(.item)': {
+        '& :where(.content)': {
           visibility: hideContentForDevPurposes ? 'hidden' : 'visible',
         },
       }}
     >
       <Box
-        className='layout price-header'
+        className='layout content price-header'
         style={{
           background: '#343434e6',
           padding: '15px 15px',

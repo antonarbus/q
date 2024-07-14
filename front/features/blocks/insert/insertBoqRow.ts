@@ -5,7 +5,7 @@ import { isFroalaSignal, boqRowKey, type Item } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 
 export const insertBoqRow = (e?: MouseEvent): void => {
-  const item: Item = {
+  const boqRow: Item = {
     id: nanoid(5),
     type: boqRowKey.row,
     height: 50,
@@ -103,7 +103,7 @@ export const insertBoqRow = (e?: MouseEvent): void => {
 
   isFroalaSignal.value = false
 
-  dispatch(copySlice.actions.addItemIntoCopyContainer({ item }))
+  dispatch(copySlice.actions.addItemIntoCopyContainer({ item: boqRow }))
 
   const isCopyContainer = getState().copy.isCopyContainer
 

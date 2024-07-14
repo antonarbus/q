@@ -24,7 +24,7 @@ export const BoqHeaderLayout = ({
             ? '0 0 1px 1px #cf5757c3 inset'
             : 'none',
         },
-        '& :where(.item)': {
+        '& :where(.content)': {
           visibility: hideContentForDevPurposes ? 'hidden' : 'visible',
         },
       }}
@@ -44,7 +44,7 @@ export const BoqHeaderLayout = ({
         }}
       >
         <Box
-          className='layout item title'
+          className='layout content title'
           style={{
             flexGrow: 1,
           }}
@@ -62,7 +62,7 @@ export const BoqHeaderLayout = ({
           }}
         >
           <Box
-            className='layout item subtotal-text'
+            className='layout content subtotal-text'
             style={{
               width: '100%',
               textAlign: 'right',
@@ -81,7 +81,7 @@ export const BoqHeaderLayout = ({
             }}
           >
             <Box
-              className='layout item price'
+              className='layout content price'
               style={{
                 textAlign: 'right',
                 whiteSpace: 'nowrap',

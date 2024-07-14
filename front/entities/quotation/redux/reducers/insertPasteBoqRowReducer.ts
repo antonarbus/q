@@ -29,7 +29,7 @@ type Type = (state: Quotation, action: PayloadAction<CopyPlace>) => Quotation
 export const insertPasteBoqRowReducer: Type = (state, action) => {
   const { pastePos, id } = action.payload
 
-  state.blocks.forEach((item, blockIndex) => {
+  state.blocks.forEach((block, blockIndex) => {
     const boqItem = getBoqBlockFromState({ blockIndex, state })
     if (boqItem === undefined) return state
 

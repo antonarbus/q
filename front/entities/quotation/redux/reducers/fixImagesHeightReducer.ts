@@ -37,19 +37,19 @@ export const fixImagesHeightReducer = (
 ): void => {
   const { imageId, imageHeight } = action.payload
 
-  state.blocks.forEach((item) => {
-    if (item.type === itemType.text) {
-      if (!item.text.html.includes('img')) return
-      if (!item.text.html.includes(imageId)) return
+  state.blocks.forEach((block) => {
+    if (block.type === itemType.text) {
+      if (!block.text.html.includes('img')) return
+      if (!block.text.html.includes(imageId)) return
 
-      item.text.html = makeHeightFixedInHtmlString({
-        htmlString: item.text.html,
+      block.text.html = makeHeightFixedInHtmlString({
+        htmlString: block.text.html,
         newHeight: imageHeight,
       })
     }
 
-    if (item.type === itemType.boq) {
-      const boqRows = item.boq.rows
+    if (block.type === itemType.boq) {
+      const boqRows = block.boq.rows
       boqRows.forEach((boqRow) => {
         if (!boqRow.description.html.includes('img')) return
         if (!boqRow.description.html.includes(imageId)) return
