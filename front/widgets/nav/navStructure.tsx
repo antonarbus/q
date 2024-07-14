@@ -10,10 +10,10 @@ import { RiMenuAddFill } from 'react-icons/ri'
 import { TbRectangleVertical } from 'react-icons/tb'
 import { VscNewFile } from 'react-icons/vsc'
 import {
-  insertBoqItem,
+  insertBoqBlock,
   insertBoqRow,
-  insertPriceItem,
-  insertTextItem,
+  insertPriceBlock,
+  insertTextBlock,
 } from '@features/blocks/insert'
 import { openBookmarksPage } from '@features/open_close/open_bookmarks_page'
 import { openLoginModal } from '@features/open_close/open_login_modal'
@@ -100,7 +100,7 @@ export const navStructure: MenuItemType[] = [
                 isHidden: false,
                 shortcut: ['control', 'shift', 't'],
                 func: (e?: React.MouseEvent): void => {
-                  insertTextItem(e)
+                  insertTextBlock(e)
                 },
               },
               {
@@ -110,7 +110,7 @@ export const navStructure: MenuItemType[] = [
                 isHidden: false,
                 shortcut: ['control', 'shift', 'i'],
                 func: (e?: React.MouseEvent): void => {
-                  insertBoqItem(e)
+                  insertBoqBlock(e)
                 },
               },
               {
@@ -120,7 +120,7 @@ export const navStructure: MenuItemType[] = [
                 isHidden: false,
                 shortcut: ['control', 'shift', 'p'],
                 func: (e?: React.MouseEvent): void => {
-                  insertPriceItem(e)
+                  insertPriceBlock(e)
                 },
               },
             ],

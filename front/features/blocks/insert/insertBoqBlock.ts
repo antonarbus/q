@@ -9,7 +9,7 @@ import {
 } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 
-export const insertBoqItem = (e?: MouseEvent): void => {
+export const insertBoqBlock = (e?: MouseEvent): void => {
   const item: Item = {
     id: nanoid(5),
     type: itemKey.boq,

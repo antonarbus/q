@@ -5,6 +5,7 @@ type Props = {
   state: Quotation
 }
 
+// todo: better to split the logic into block and boqRow
 export const getItemByIdFromState = ({
   id,
   state,

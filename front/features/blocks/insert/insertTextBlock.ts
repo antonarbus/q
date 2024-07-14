@@ -4,7 +4,7 @@ import { copySlice } from '@entities/copy'
 import { type Item, isFroalaSignal, itemKey } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 
-export const insertTextItem = (e?: MouseEvent): void => {
+export const insertTextBlock = (e?: MouseEvent): void => {
   const item: Item = {
     id: nanoid(5),
     type: itemKey.text,

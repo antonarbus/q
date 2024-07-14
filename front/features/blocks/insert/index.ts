@@ -1,4 +1,4 @@
-export { insertTextItem } from './insertTextItem'
-export { insertPriceItem } from './insertPriceItem'
-export { insertBoqItem } from './insertBoqItem'
+export { insertTextBlock } from './insertTextBlock'
+export { insertPriceBlock } from './insertPriceBlock'
+export { insertBoqBlock } from './insertBoqBlock'
 export { insertBoqRow } from './insertBoqRow'
