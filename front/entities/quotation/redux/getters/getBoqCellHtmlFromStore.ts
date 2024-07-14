@@ -1,5 +1,5 @@
 import { getState } from '@lib_instances/store'
-import { itemKey } from '../../consts/itemKey'
+import { itemType } from '../../consts/itemType'
 import { type BoqRowCellKey } from '../../types'
 
 type Props = {
@@ -17,7 +17,7 @@ export const getBoqCellHtmlFromStore = ({
 
   if (!block) return ''
 
-  if (block.type !== itemKey.boq) return ''
+  if (block.type !== itemType.boq) return ''
 
   // todo: move item for edit modal into a different slice
   // special case for when the item is a row for item edit modal

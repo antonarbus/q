@@ -1,4 +1,4 @@
-import { itemKey } from '../consts/itemKey'
+import { itemType } from '../consts/itemType'
 import { type BoqBlock, type Block } from '../types'
 
 type Props = {
@@ -12,11 +12,11 @@ export const getTotalPriceAbove = ({ blockIndex, blocks }: Props): number => {
   for (let i = blockIndex - 1; i >= 0; i--) {
     if (blockIndex === 0) break
 
-    const isPriceItem = blocks.at(i)?.type === itemKey.price
+    const isPriceItem = blocks.at(i)?.type === itemType.price
 
     if (isPriceItem) break
 
-    const isBoqItem = blocks.at(i)?.type === itemKey.boq
+    const isBoqItem = blocks.at(i)?.type === itemType.boq
 
     if (isBoqItem) {
       const boqItem = blocks.at(i) as BoqBlock

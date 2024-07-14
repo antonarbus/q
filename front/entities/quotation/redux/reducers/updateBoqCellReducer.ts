@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { itemKey } from '../../consts/itemKey'
+import { itemType } from '../../consts/itemType'
 import type { BoqRowCellKey, Quotation } from '../../types'
 
 export const updateBoqCellReducer = (
@@ -27,7 +27,7 @@ export const updateBoqCellReducer = (
   //   return
   // }
 
-  if (block.type === itemKey.boq) {
+  if (block.type === itemType.boq) {
     const row = block.boq.rows[rowIndex]
     if (row === undefined) return
 

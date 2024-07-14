@@ -1,5 +1,5 @@
 import { getState } from '@lib_instances/store'
-import { itemKey } from '../../consts/itemKey'
+import { itemType } from '../../consts/itemType'
 
 type Props = {
   blockIndex: number
@@ -9,7 +9,7 @@ export const getTextBlockHtmlFromStore = ({ blockIndex }: Props): string => {
   const block = getState().quotation.blocks[blockIndex]
 
   if (!block) return ''
-  if (block.type !== itemKey.text) return ''
+  if (block.type !== itemType.text) return ''
 
   return block.text.html
 }

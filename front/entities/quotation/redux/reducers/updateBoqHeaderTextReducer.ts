@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { itemKey } from '../../consts/itemKey'
+import { itemType } from '../../consts/itemType'
 import type { BoqHeaderKey, Quotation } from '../../types'
 
 export const updateBoqHeaderTextReducer = (
@@ -15,7 +15,7 @@ export const updateBoqHeaderTextReducer = (
   const block = state.blocks[blockIndex]
 
   if (!block) return
-  if (block.type !== itemKey.boq) return
+  if (block.type !== itemType.boq) return
   if (html === undefined) return
 
   block.boq.header[boqHeaderKey].html = html

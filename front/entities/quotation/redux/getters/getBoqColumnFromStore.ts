@@ -1,5 +1,5 @@
 import { getState } from '@lib_instances/store'
-import { itemKey } from '../../consts/itemKey'
+import { itemType } from '../../consts/itemType'
 import { type BoqCol, type BoqColumnKey } from '../../types'
 
 type Props = {
@@ -13,7 +13,7 @@ export const getBoqColumnFromStore = ({
 }: Props): BoqCol | undefined => {
   const block = getState().quotation.blocks[blockIndex]
 
-  if (block?.type !== itemKey.boq) return
+  if (block?.type !== itemType.boq) return
 
   const column = block.boq.column[boqColumnKey]
   return column

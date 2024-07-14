@@ -1,6 +1,6 @@
 import { type RootState } from '@lib_instances/store'
-import { itemKey } from '../../consts/itemKey'
+import { itemType } from '../../consts/itemType'
 
 export const selectIsLastBlock = (state: RootState): boolean =>
-  state.quotation.blocks.filter((block) => block.type !== itemKey.paste)
+  state.quotation.blocks.filter((block) => block.type !== itemType.paste)
     .length === 1

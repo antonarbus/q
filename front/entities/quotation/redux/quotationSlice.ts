@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { itemKey } from '../consts/itemKey'
+import { itemType } from '../consts/itemType'
 import { type Quotation } from '../types'
 import { deleteBoqRowReducer } from './reducers/deleteBoqRowReducer'
 import { deleteBlockReducer } from './reducers/deleteBlockReducer'
@@ -38,7 +38,7 @@ import { updateQuotationInfoReducer } from './reducers/updateQuotationInfoReduce
 import { updateSubTotalPriceReducer } from './reducers/updateSubTotalPriceReducer'
 
 const initialState: Quotation = {
-  type: itemKey.quotation,
+  type: itemType.quotation,
   id: '',
   blocks: [],
 }

@@ -1,4 +1,4 @@
-export const itemKey = {
+export const itemType = {
   text: 'text',
   boq: 'boq',
   row: 'row',

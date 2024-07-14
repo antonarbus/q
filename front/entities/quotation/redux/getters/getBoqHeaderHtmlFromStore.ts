@@ -1,5 +1,5 @@
 import { getState } from '@lib_instances/store'
-import { itemKey } from '../../consts/itemKey'
+import { itemType } from '../../consts/itemType'
 import { type BoqHeaderKey } from '../../types'
 
 type Props = {
@@ -13,7 +13,7 @@ export const getBoqHeaderHtmlFromStore = ({
 }: Props): string => {
   const block = getState().quotation.blocks[blockIndex]
 
-  if (block?.type !== itemKey.boq) return ''
+  if (block?.type !== itemType.boq) return ''
 
   return block.boq.header[boqHeaderKey].html
 }

@@ -1,4 +1,4 @@
-import { itemKey } from '../../consts/itemKey'
+import { itemType } from '../../consts/itemType'
 import { type Quotation } from '../../types'
 
 function makeHeightAutoInHtmlString({
@@ -21,7 +21,7 @@ function makeHeightAutoInHtmlString({
 
 export const unfixImagesHeightReducer = (state: Quotation): void => {
   state.blocks.forEach((block) => {
-    if (block.type === itemKey.text) {
+    if (block.type === itemType.text) {
       const isImg = block.text.html.includes('img')
 
       if (!isImg) return
@@ -31,7 +31,7 @@ export const unfixImagesHeightReducer = (state: Quotation): void => {
       })
     }
 
-    if (block.type === itemKey.boq) {
+    if (block.type === itemType.boq) {
       const boqRows = block.boq.rows
 
       boqRows.forEach((boqRow) => {

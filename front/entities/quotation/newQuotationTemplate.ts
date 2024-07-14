@@ -1,17 +1,17 @@
 import { nanoid } from '@shared/lib/nanoid'
 import { boqRowKey } from './consts/boqRowKey'
-import { itemKey } from './consts/itemKey'
+import { itemType } from './consts/itemType'
 import { type Quotation } from './types'
 
 export const newQuotationTemplate: Quotation = {
-  type: itemKey.quotation,
+  type: itemType.quotation,
   id: 'new',
   sharedWith: [],
   preview: '',
   blocks: [
     {
       id: nanoid(5),
-      type: itemKey.text,
+      type: itemType.text,
       width: 600,
       height: 0,
       isFroala: true,
@@ -22,7 +22,7 @@ export const newQuotationTemplate: Quotation = {
     },
     {
       id: nanoid(5),
-      type: itemKey.boq,
+      type: itemType.boq,
       width: 600,
       height: 0,
       isFroala: true,
@@ -183,7 +183,7 @@ export const newQuotationTemplate: Quotation = {
     },
     {
       id: nanoid(5),
-      type: itemKey.price,
+      type: itemType.price,
       width: 150,
       height: 0,
       isFroala: true,
@@ -198,7 +198,7 @@ export const newQuotationTemplate: Quotation = {
     },
     {
       id: nanoid(5),
-      type: itemKey.text,
+      type: itemType.text,
       width: 600,
       height: 0,
       isFroala: true,

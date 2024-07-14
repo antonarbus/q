@@ -1,6 +1,6 @@
 import { type FroalaEditorRef } from '@shared/types/froala'
 import { type BoqRowKey } from '../consts/boqRowKey'
-import { type itemKey } from '../consts/itemKey'
+import { type itemType } from '../consts/itemType'
 
 // this is common field for block + row + quotation
 // a bit stupid but code is simpler if we maintain these fields everywhere, even if we do not need them everywhere
@@ -78,7 +78,7 @@ export type BoqRowEditorRefs = {
 
 // block
 export type BoqBlock = Common & {
-  type: typeof itemKey.boq
+  type: typeof itemType.boq
   boq: {
     header: BoqHeader
     column: BoqCols
@@ -87,7 +87,7 @@ export type BoqBlock = Common & {
 }
 
 type TextBlock = Common & {
-  type: typeof itemKey.text
+  type: typeof itemType.text
   text: {
     html: string
     value: null
@@ -95,7 +95,7 @@ type TextBlock = Common & {
 }
 
 type PriceBlock = Common & {
-  type: typeof itemKey.price
+  type: typeof itemType.price
   title: {
     html: string
     value: null
@@ -107,7 +107,7 @@ type PriceBlock = Common & {
 }
 
 export type PasteBlock = Common & {
-  type: typeof itemKey.paste
+  type: typeof itemType.paste
 }
 
 export type Block = BoqBlock | PasteBlock | TextBlock | PriceBlock
@@ -117,7 +117,7 @@ export type Item = Block | BoqRow
 
 // quotation
 export type Quotation = Common & {
-  type: typeof itemKey.quotation
+  type: typeof itemType.quotation
   createdAt?: Date
   updatedAt?: Date
   openedAt?: Date

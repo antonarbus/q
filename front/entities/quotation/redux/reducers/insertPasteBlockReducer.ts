@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { type CopyPlace } from '@entities/copy'
 import { nanoid } from '@shared/lib/nanoid'
-import { itemKey } from '../../consts/itemKey'
+import { itemType } from '../../consts/itemType'
 import type { Block, PasteBlock, Quotation } from '../../types'
 
 export const insertPasteBlockReducer = (
@@ -11,7 +11,7 @@ export const insertPasteBlockReducer = (
   const { pastePos, id } = action.payload
 
   const blocksWithoutPasteText: Block[] = state.blocks.filter(
-    (block) => block.type !== itemKey.paste,
+    (block) => block.type !== itemType.paste,
   )
 
   if (pastePos === 'middle') {
@@ -25,7 +25,7 @@ export const insertPasteBlockReducer = (
 
   const pasteBlock: PasteBlock = {
     id: nanoid(3),
-    type: itemKey.paste,
+    type: itemType.paste,
     height: 0,
     width: 0,
     isFroala: true,

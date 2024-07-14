@@ -1,5 +1,5 @@
 import { getState } from '@lib_instances/store'
-import { itemKey } from '../consts/itemKey'
+import { itemType } from '../consts/itemType'
 
 type Props = {
   blockIndex: number
@@ -8,7 +8,7 @@ type Props = {
 export const getNumberOfBoqBlocksAbove = ({ blockIndex }: Props): number => {
   const numberOfBoqBlocksAbove = getState().quotation.blocks.reduce(
     (accumulator, item, index) => {
-      if (item.type === itemKey.boq && index < blockIndex) {
+      if (item.type === itemType.boq && index < blockIndex) {
         return accumulator + 1
       }
 

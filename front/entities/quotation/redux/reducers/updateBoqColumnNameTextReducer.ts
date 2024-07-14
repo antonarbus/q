@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { itemKey } from '../../consts/itemKey'
+import { itemType } from '../../consts/itemType'
 import type { BoqColumnKey, Quotation } from '../../types'
 
 export const updateBoqColumnNameTextReducer = (
@@ -14,7 +14,7 @@ export const updateBoqColumnNameTextReducer = (
   const block = state.blocks[blockIndex]
 
   if (!block) return
-  if (block.type !== itemKey.boq) return
+  if (block.type !== itemType.boq) return
 
   block.boq.column[boqColumnKey].html = html
 }

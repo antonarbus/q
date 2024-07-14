@@ -2,7 +2,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { type PastePos } from '@entities/copy'
 import { nanoid } from '@shared/lib/nanoid'
 import { boqRowKey } from '../../consts/boqRowKey'
-import { itemKey } from '../../consts/itemKey'
+import { itemType } from '../../consts/itemType'
 import type { Item, Quotation } from '../../types'
 
 type Payload = {
@@ -18,7 +18,7 @@ export const pasteItemReducer: Reducer = (state, action) => {
   const { id, newItemId, pastePos, item } = action.payload
   const itemToPaste: Item = { ...structuredClone(item), id: newItemId }
 
-  if (itemToPaste.type === itemKey.boq) {
+  if (itemToPaste.type === itemType.boq) {
     const boqRows = itemToPaste.boq.rows
     boqRows.forEach((boqRow) => {
       boqRow.id = nanoid(5)
@@ -26,11 +26,11 @@ export const pasteItemReducer: Reducer = (state, action) => {
   }
 
   const isBlock =
-    itemToPaste.type === itemKey.boq ||
-    itemToPaste.type === itemKey.text ||
-    itemToPaste.type === itemKey.price
+    itemToPaste.type === itemType.boq ||
+    itemToPaste.type === itemType.text ||
+    itemToPaste.type === itemType.price
 
-  const isBoqRow = itemToPaste.type === itemKey.row
+  const isBoqRow = itemToPaste.type === itemType.row
 
   if (isBlock) {
     const hoveredItemIndex = state.blocks.findIndex((block) => block.id === id)
@@ -63,7 +63,7 @@ export const pasteItemReducer: Reducer = (state, action) => {
     const spliceSettings = getSpliceSettings()
 
     const blocksWithoutPasteText = state.blocks.filter(
-      ({ type }) => type !== itemKey.paste,
+      ({ type }) => type !== itemType.paste,
     )
 
     blocksWithoutPasteText.splice(
@@ -78,7 +78,7 @@ export const pasteItemReducer: Reducer = (state, action) => {
 
   if (isBoqRow) {
     state.blocks.forEach((block) => {
-      if (block.type !== itemKey.boq) return
+      if (block.type !== itemType.boq) return
 
       type SplicingSettings = {
         insertAtIndex: number
