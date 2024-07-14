@@ -90,9 +90,9 @@ export { useStylesForResizableCell } from './hooks/useStylesForResizableCell'
 // Providers
 export {
   BoqItemProvider,
-  useBoqItem,
-  type BoqItemContextType,
-} from './providers/BoqItemProvider'
+  useBoqBlock,
+  type BoqBlockContextType,
+} from './providers/BoqBlockProvider'
 export { BlockProvider, useBlock } from './providers/BlockProvider'
 export { RowProvider, useRow } from './providers/RowProvider'
 export { FroalaProvider, useFroala } from './providers/FroalaProvider'

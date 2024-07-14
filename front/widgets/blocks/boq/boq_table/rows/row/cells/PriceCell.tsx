@@ -12,7 +12,7 @@ import {
 } from '@features/blocks/cell/update_cell'
 import {
   getBoqCellHtmlFromStore,
-  useBoqItem,
+  useBoqBlock,
   useBlock,
   useRow,
   Froala,
@@ -31,7 +31,7 @@ export const PriceCell = (): JSX.Element => {
     qtyCellEditorRef,
     itemPriceCellEditorRef,
   } = useRow()
-  const { subTotalPriceEditorRef, boqRowEditorRefs } = useBoqItem()
+  const { subTotalPriceEditorRef, boqRowEditorRefs } = useBoqBlock()
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex,
     boqColumnKey: boqColumnKey.price,

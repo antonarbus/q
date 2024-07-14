@@ -8,7 +8,7 @@ import {
 } from '@features/blocks/cell/update_cell'
 import {
   getBoqHeaderHtmlFromStore,
-  useBoqItem,
+  useBoqBlock,
   useBlock,
   Froala,
   subTotalPriceCellStyle,
@@ -18,7 +18,7 @@ import {
 const boqHeaderKey: BoqHeaderKey = 'subTotalPrice'
 
 export const SubTotalPrice = (): JSX.Element => {
-  const { subTotalPriceEditorRef, boqRowEditorRefs } = useBoqItem()
+  const { subTotalPriceEditorRef, boqRowEditorRefs } = useBoqBlock()
   const { blockIndex } = useBlock()
   const hidePinsClickHandlerRef = useRef<(e: MouseEvent) => void>((e) => {
     console.warn('hidePinsClickHandlerRef')
