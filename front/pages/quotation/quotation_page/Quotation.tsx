@@ -4,8 +4,9 @@ import { Blocks } from '@widgets/blocks'
 import { Info } from '@widgets/quotation/info'
 import { Search } from '@widgets/quotation/search'
 import { useLoadQuotation } from '@features/quotation/load_quotation'
-import { BackgroundMessage, arrayShapesEqualityFn } from '@entities/quotation'
+import { BackgroundMessage } from '@entities/quotation'
 import { InfoAndSearchLayout } from './InfoAndSearchLayout'
+import { arrayShapesEqualityFn } from '@shared/lib/redux/arrayShapesEqualityFn'
 
 export const Quotation = (): JSX.Element => {
   useLoadQuotation()

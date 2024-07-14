@@ -6,7 +6,6 @@ import {
   RowProvider,
   useBlock,
   boqRowKey,
-  arrayShapesEqualityFn,
 } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 import { BoqRowsLayout } from './BoqRowsLayout'
@@ -15,6 +14,7 @@ import { BoqPasteRowTextOverlay } from './row/BoqPasteRowTextOverlay'
 import { BoqRow } from './row/BoqRow'
 import { BoqRowAnimate } from './row/BoqRowAnimate'
 import { BoqRowSortable } from './row/BoqRowSortable'
+import { arrayShapesEqualityFn } from '@shared/lib/redux/arrayShapesEqualityFn'
 
 export const BoqRows = (): JSX.Element => {
   const { blockIndex } = useBlock()

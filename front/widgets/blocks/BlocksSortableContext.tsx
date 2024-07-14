@@ -8,7 +8,7 @@ import {
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { useSelectorTyped } from '@lib_instances/store'
 import { onBlockDragEnd, onBlockDragStart } from '@features/blocks/drag'
-import { arrayShapesEqualityFn } from '@entities/quotation'
+import { arrayShapesEqualityFn } from '@shared/lib/redux/arrayShapesEqualityFn'
 
 type Props = {
   children: React.ReactNode

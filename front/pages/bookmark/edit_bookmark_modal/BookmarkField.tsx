@@ -4,9 +4,10 @@ import { AnimatePresence } from 'framer-motion'
 import { type ReactNode } from 'react'
 import { useEffectOnce } from 'react-use'
 import { Block } from '@widgets/blocks/Block'
-import { arrayShapesEqualityFn, isFroalaSignal } from '@entities/quotation'
+import { isFroalaSignal } from '@entities/quotation'
 import { OutlinedDivWithLabel } from '@shared/components'
 import { cls } from '@shared/consts/cls'
+import { arrayShapesEqualityFn } from '@shared/lib/redux/arrayShapesEqualityFn'
 
 const BookmarkFieldLayout = ({
   children,
