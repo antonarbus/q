@@ -6,10 +6,6 @@ import { bucket, storageFolderName } from '../../services/storage'
 import { type ResWithBody, type ReqWithBody, type Next } from '../../types'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '../../utils/getEmailFromRefreshTokenOrThrowUnauthorized'
 
-export type ReqBody = {
-  // id: Item['id']
-}
-
 export type ResBody = {
   message: ErrorMessageCommon | 'file stats' | 'no item in bucket' | 'deleted'
   fileStats: {
@@ -19,7 +15,7 @@ export type ResBody = {
 }
 
 type RouterHandler = (
-  req: ReqWithBody<ReqBody>,
+  req: ReqWithBody,
   res: ResWithBody<ResBody>,
   next: Next,
 ) => Promise<ResWithBody<ResBody> | undefined>

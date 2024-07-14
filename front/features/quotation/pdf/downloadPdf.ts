@@ -49,7 +49,7 @@ export const downloadPdf = async (): Promise<void> => {
     height: blocksContainerElement.clientHeight,
   })
 
-  worker.onmessage = (event: MessageEvent<Blob>) => {
+  worker.onmessage = (event: MessageEvent<Blob>): void => {
     const blobImage = event.data
     const pdfDataUrl = URL.createObjectURL(blobImage)
     const downloadLink = document.createElement('a')
@@ -63,7 +63,7 @@ export const downloadPdf = async (): Promise<void> => {
     showSuccessNavIcon({ navMenuItemIdKey: navItemKey.pdf })
   }
 
-  worker.onerror = () => {
+  worker.onerror = (): void => {
     showErrorNavIcon({ navMenuItemIdKey: navItemKey.pdf })
   }
 }

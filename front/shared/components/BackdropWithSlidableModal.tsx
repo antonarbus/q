@@ -50,7 +50,7 @@ export const BackdropWithSlidableModal = ({
 
     document.addEventListener('keydown', slideAway)
 
-    return () => {
+    return (): void => {
       document.removeEventListener('keydown', slideAway)
     }
   })
@@ -62,8 +62,8 @@ export const BackdropWithSlidableModal = ({
       bodyElement.style.overflow = 'hidden'
     }
 
-    return () => {
-      // eslint-disable-next-line no-shadow
+    return (): void => {
+      // eslint-disable-next-line @typescript-eslint/no-shadow
       const bodyElement = document.querySelector('body')
 
       if (bodyElement instanceof HTMLElement) {

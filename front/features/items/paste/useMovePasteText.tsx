@@ -6,42 +6,7 @@ import { boqRowKey, itemKey, quotationSlice } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { route } from '@shared/consts/route'
 
-export const useMovePasteText = (): void => {
-  const typeOfNextPasteItem = useSelectorTyped(
-    (state) => state.copy.items.at(0)?.type,
-  )
-
-  const isItem =
-    typeOfNextPasteItem === itemKey.boq ||
-    typeOfNextPasteItem === itemKey.text ||
-    typeOfNextPasteItem === itemKey.price
-
-  const isBoqRow = typeOfNextPasteItem === boqRowKey.row
-
-  useEffect(() => {
-    if (isItem) {
-      document.body.style.cursor = 'pointer'
-      document.addEventListener('mousemove', movePasteTextItem, {
-        passive: true,
-      })
-    }
-
-    if (isBoqRow) {
-      document.body.style.cursor = 'pointer'
-      document.addEventListener('mousemove', movePasteTextBoqRow, {
-        passive: true,
-      })
-    }
-
-    return () => {
-      document.body.style.removeProperty('cursor')
-      document.removeEventListener('mousemove', movePasteTextItem)
-      document.removeEventListener('mousemove', movePasteTextBoqRow)
-    }
-  }, [isItem, isBoqRow])
-}
-
-function movePasteTextItem(e: MouseEvent): void {
+const movePasteTextItem = (e: MouseEvent): void => {
   if (!(e.target instanceof Element)) {
     return
   }
@@ -153,7 +118,7 @@ function movePasteTextItem(e: MouseEvent): void {
   dispatch(quotationSlice.actions.insertPasteBlockReducer(pastePlace))
 }
 
-function movePasteTextBoqRow(e: MouseEvent): void {
+const movePasteTextBoqRow = (e: MouseEvent): void => {
   if (!(e.target instanceof Element)) {
     return
   }
@@ -241,4 +206,39 @@ function movePasteTextBoqRow(e: MouseEvent): void {
   dispatch(copySlice.actions.updatePastePos(pastePlace))
   dispatch(copySlice.actions.showPasteText())
   dispatch(quotationSlice.actions.insertPasteBoqRowReducer(pastePlace))
+}
+
+export const useMovePasteText = (): void => {
+  const typeOfNextPasteItem = useSelectorTyped(
+    (state) => state.copy.items.at(0)?.type,
+  )
+
+  const isItem =
+    typeOfNextPasteItem === itemKey.boq ||
+    typeOfNextPasteItem === itemKey.text ||
+    typeOfNextPasteItem === itemKey.price
+
+  const isBoqRow = typeOfNextPasteItem === boqRowKey.row
+
+  useEffect(() => {
+    if (isItem) {
+      document.body.style.cursor = 'pointer'
+      document.addEventListener('mousemove', movePasteTextItem, {
+        passive: true,
+      })
+    }
+
+    if (isBoqRow) {
+      document.body.style.cursor = 'pointer'
+      document.addEventListener('mousemove', movePasteTextBoqRow, {
+        passive: true,
+      })
+    }
+
+    return (): void => {
+      document.body.style.removeProperty('cursor')
+      document.removeEventListener('mousemove', movePasteTextItem)
+      document.removeEventListener('mousemove', movePasteTextBoqRow)
+    }
+  }, [isItem, isBoqRow])
 }

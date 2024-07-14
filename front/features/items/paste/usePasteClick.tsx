@@ -7,17 +7,7 @@ import { cls } from '@shared/consts/cls'
 import { nanoid } from '@shared/lib/nanoid'
 import { fixElementDimensionStyle } from '@shared/utils/fixElementDimensionStyle'
 
-export const usePasteClick = (): void => {
-  useEffectOnce(() => {
-    document.addEventListener('click', pasteItemOnClick)
-  })
-
-  useUnmount((): void => {
-    document.removeEventListener('click', pasteItemOnClick)
-  })
-}
-
-function pasteItemOnClick(): void {
+const pasteItemOnClick = (): void => {
   const isPasteTextShown = getState().copy.isPasteTextShown
 
   if (!isPasteTextShown) return
@@ -76,4 +66,14 @@ function pasteItemOnClick(): void {
       1000 * theme.item.animationDuration + 500,
     )
   }
+}
+
+export const usePasteClick = (): void => {
+  useEffectOnce(() => {
+    document.addEventListener('click', pasteItemOnClick)
+  })
+
+  useUnmount((): void => {
+    document.removeEventListener('click', pasteItemOnClick)
+  })
 }

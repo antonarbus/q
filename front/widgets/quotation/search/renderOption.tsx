@@ -32,7 +32,7 @@ export const renderOption = ({
       inputValue: string
     },
   ): JSX.Element {
-    const getHighlightedDescription = () => {
+    const getHighlightedDescription = (): string | (string | JSX.Element)[] => {
       if (inputValueSignal.value) {
         const boldSubString = getJsxWithBoldSubstr({
           text: option.desc ?? '',

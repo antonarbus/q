@@ -6,6 +6,41 @@ import { bucket, storageFolderName } from '../../services/storage'
 import type { Next, Req, ResWithBody } from '../../types'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '../../utils/getEmailFromRefreshTokenOrThrowUnauthorized'
 
+// https://medium.com/@olamilekan001/image-upload-with-google-cloud-storage-and-node-js-a1cf9baa1876
+
+type Props = {
+  file: Express.Multer.File
+  email: string
+}
+
+type Res = Promise<{
+  link: string
+  name: string
+  size: number
+}>
+
+async function uploadFileIntoMemory({ file, email }: Props): Res {
+  const name = Buffer.from(file.originalname, 'ascii').toString('utf8')
+  const filePath = `${email}/${storageFolderName.files}/${name}`
+  const blob = bucket.file(filePath)
+  const blobStream = blob.createWriteStream({ resumable: false })
+  const size = file.size / 1024 / 1024
+
+  return await new Promise((resolve, reject) => {
+    blobStream
+      .on('finish', async () => {
+        await bucket.file(filePath).makePublic()
+        const link = `https://storage.googleapis.com/${bucket.name}/${filePath}`
+        resolve({ link, name, size })
+      })
+      .on('error', (error) => {
+        console.error(error)
+        reject(new Error('Unable to upload file, something went wrong'))
+      })
+      .end(file.buffer)
+  })
+}
+
 export type ResBody = {
   message: ErrorMessageCommon | 'not uploaded' | 'no file' | 'uploaded'
   link?: string
@@ -56,38 +91,3 @@ uploadRouter.post(
   // verifyTokenMiddleware, // todo: do not know how to use axios instance with froala file update, so let's validate token manually
   upload,
 )
-
-// https://medium.com/@olamilekan001/image-upload-with-google-cloud-storage-and-node-js-a1cf9baa1876
-
-type Props = {
-  file: Express.Multer.File
-  email: string
-}
-
-type Res = Promise<{
-  link: string
-  name: string
-  size: number
-}>
-
-async function uploadFileIntoMemory({ file, email }: Props): Res {
-  const name = Buffer.from(file.originalname, 'ascii').toString('utf8')
-  const filePath = `${email}/${storageFolderName.files}/${name}`
-  const blob = bucket.file(filePath)
-  const blobStream = blob.createWriteStream({ resumable: false })
-  const size = file.size / 1024 / 1024
-
-  return await new Promise((resolve, reject) => {
-    blobStream
-      .on('finish', async () => {
-        await bucket.file(filePath).makePublic()
-        const link = `https://storage.googleapis.com/${bucket.name}/${filePath}`
-        resolve({ link, name, size })
-      })
-      .on('error', (error) => {
-        console.error(error)
-        reject(new Error('Unable to upload file, something went wrong'))
-      })
-      .end(file.buffer)
-  })
-}

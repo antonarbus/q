@@ -79,7 +79,7 @@ export const pasteItemReducer: Reducer = (state, action) => {
   }
 
   if (isBoqRow) {
-    state.blocks.forEach((block, index) => {
+    state.blocks.forEach((block) => {
       if (block.type !== itemKey.boq) return
 
       type SplicingSettings = {
@@ -87,13 +87,13 @@ export const pasteItemReducer: Reducer = (state, action) => {
         deleteCount: number
       }
 
-      let spliceSettings: SplicingSettings | undefined
+      let spliceSettings: SplicingSettings | null = null
 
       block.boq.rows.forEach((boqRow, hoveredItemIndex) => {
         if (boqRow.id !== itemId) return
 
         const getSpliceSettings = (): SplicingSettings => {
-          const spliceParams = {
+          const spliceParams: SplicingSettings = {
             insertAtIndex: hoveredItemIndex,
             deleteCount: 0,
           }
@@ -109,25 +109,34 @@ export const pasteItemReducer: Reducer = (state, action) => {
           }
 
           spliceParams.deleteCount++
+
           return spliceParams
         }
 
         spliceSettings = getSpliceSettings()
       })
 
-      if (spliceSettings === undefined) return
+      if (spliceSettings === null) return
 
       const boqRowsWithoutPasteText = block.boq.rows.filter(
         (boqRow) => boqRow.type !== boqRowKey.paste,
       )
 
       boqRowsWithoutPasteText.splice(
-        spliceSettings.insertAtIndex,
-        spliceSettings.deleteCount,
+        (spliceSettings as SplicingSettings).insertAtIndex,
+        (spliceSettings as SplicingSettings).deleteCount,
         itemToPaste,
       )
 
       block.boq.rows = boqRowsWithoutPasteText
     })
   }
+}
+
+export const splitName = (): string[] | undefined => {
+  let stringOrNull: string | null = null
+  stringOrNull = 'string'
+  if (stringOrNull === null) return
+  const letters = stringOrNull.split('')
+  return letters
 }

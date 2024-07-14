@@ -1,12 +1,12 @@
 // https://fkhadra.github.io/react-toastify/positioning-toast
 import type { ReactNode } from 'react'
 import {
+  type ToastTransitionProps,
   toast,
   Slide,
   Bounce,
   Flip,
   Zoom,
-  ToastTransitionProps,
 } from 'react-toastify'
 
 type Props = {

@@ -20,7 +20,7 @@ export const useFixedHeightForAnimation = ({
       froalaElementRef.current?.style.removeProperty('height')
     }, 500)
 
-    return () => {
+    return (): void => {
       clearTimeout(timeoutId)
     }
   })

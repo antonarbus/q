@@ -1,3 +1,28 @@
+const findAndReplaceStringOutsideHtmlTags = ({
+  string,
+  searchText,
+  replacementText,
+}: {
+  string: string
+  searchText: string
+  replacementText: string
+}): string => {
+  const regExpToRemoveGapsBetweenDigits = /(?<=\d)\s+(?=\d)/gu
+  const regExpToFindSearchTextOutsideHtmlTags = new RegExp(
+    `([^<>]*)(${searchText})([^<>]*)`,
+    'gu',
+  )
+  const resultString = string
+    .replace(regExpToRemoveGapsBetweenDigits, '')
+    .replace(
+      regExpToFindSearchTextOutsideHtmlTags,
+      (match, before, found, after) => {
+        return before + replacementText + after
+      },
+    )
+  return resultString
+}
+
 type Props = {
   string: string
   oldNumber: string | number
@@ -21,32 +46,4 @@ export const getStringWithNewFormattedNumber = ({
   })
 
   return htmlWithNewNumber
-}
-
-// eslint-disable-next-line func-style
-function findAndReplaceStringOutsideHtmlTags({
-  string,
-  searchText,
-  replacementText,
-}: {
-  string: string
-  searchText: string
-  replacementText: string
-}): string {
-  // eslint-disable-next-line require-unicode-regexp
-  const regExpToRemoveGapsBetweenDigits = /(?<=\d)\s+(?=\d)/g
-  // eslint-disable-next-line require-unicode-regexp
-  const regExpToFindSearchTextOutsideHtmlTags = new RegExp(
-    `([^<>]*)(${searchText})([^<>]*)`,
-    'g',
-  )
-  const resultString = string
-    .replace(regExpToRemoveGapsBetweenDigits, '')
-    .replace(
-      regExpToFindSearchTextOutsideHtmlTags,
-      (match, before, found, after) => {
-        return before + replacementText + after
-      },
-    )
-  return resultString
 }

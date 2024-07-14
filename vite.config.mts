@@ -6,6 +6,7 @@ import basicSsl from '@vitejs/plugin-basic-ssl'
 import path from 'path'
 import react from '@vitejs/plugin-react'
 import tsconfigPaths from 'vite-tsconfig-paths'
+import type { NullValue } from 'rollup'
 
 // https://vitejs.dev/config/
 
@@ -82,7 +83,7 @@ export default defineConfig(({ command, mode }) => {
       rollupOptions: {
         output: {
           // https://rollupjs.org/configuration-options/#output-manualchunks
-          manualChunks: (id, { getModuleInfo }) => {
+          manualChunks: (id, { getModuleInfo }): string | NullValue => {
             if (id.includes('froala')) {
               return 'qwerty'
             }

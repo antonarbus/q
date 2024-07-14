@@ -1,15 +1,7 @@
 import { type ReactNode } from 'react'
 import { Outlet } from 'react-router-dom'
 
-export const Main = (): JSX.Element => {
-  return (
-    <MainLayout>
-      <Outlet />
-    </MainLayout>
-  )
-}
-
-function MainLayout({ children }: { children: ReactNode }): JSX.Element {
+const MainLayout = ({ children }: { children: ReactNode }): JSX.Element => {
   return (
     <main
       style={{
@@ -21,5 +13,13 @@ function MainLayout({ children }: { children: ReactNode }): JSX.Element {
     >
       {children}
     </main>
+  )
+}
+
+export const Main = (): JSX.Element => {
+  return (
+    <MainLayout>
+      <Outlet />
+    </MainLayout>
   )
 }

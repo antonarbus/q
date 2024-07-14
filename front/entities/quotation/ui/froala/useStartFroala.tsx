@@ -52,13 +52,13 @@ export const useStartFroala = (): void => {
         ...froalaDefaultOptions,
         placeholderText: placeholder ?? 'Text...',
         events: {
-          contentChanged: () => {
+          contentChanged: (): void => {
             onContentChange()
           },
-          focus: () => {
+          focus: (): void => {
             onFocus?.()
           },
-          click: (e: MouseEvent) => {
+          click: (e: MouseEvent): void => {
             // close opened inline toolbar
             // there is some bug in froala that it does not close initial toolbar on first 2...3 clicks
             const toolbarElement = froalaInstance.$tb['0']
@@ -69,13 +69,13 @@ export const useStartFroala = (): void => {
 
             onClick?.(e)
           },
-          keydown: (e: KeyboardEvent) => {
+          keydown: (e: KeyboardEvent): void => {
             onKeydown?.(e)
           },
-          blur: (e: MouseEvent) => {
+          blur: (e: MouseEvent): void => {
             onBlur?.(e)
           },
-          'image.beforeUpload': function (files) {
+          'image.beforeUpload': function (files): void {
             if (beforeUpload === undefined) {
               notify({
                 msg: 'may drop files into text block & description cell',
@@ -86,7 +86,7 @@ export const useStartFroala = (): void => {
             }
             beforeUpload({ files, editor: this })
           },
-          'file.beforeUpload': function (files) {
+          'file.beforeUpload': function (files): void {
             if (beforeUpload === undefined) {
               notify({
                 msg: 'may drop files into text block & description cell',
@@ -97,7 +97,7 @@ export const useStartFroala = (): void => {
             }
             beforeUpload({ files, editor: this })
           },
-          'video.beforeUpload': function (files) {
+          'video.beforeUpload': function (files): void {
             if (beforeUpload === undefined) {
               notify({
                 msg: 'may drop files into text block & description cell',
@@ -108,16 +108,16 @@ export const useStartFroala = (): void => {
             }
             beforeUpload({ files, editor: this })
           },
-          'image.inserted': function (response) {
+          'image.inserted': function (response): void {
             remindToSaveQuotationOnInsert()
           },
-          'file.inserted': function (response) {
+          'file.inserted': function (response): void {
             remindToSaveQuotationOnInsert()
           },
-          'video.inserted': function (response) {
+          'video.inserted': function (response): void {
             remindToSaveQuotationOnInsert()
           },
-          'file.unlink': function (link) {
+          'file.unlink': function (link): void {
             const href = link.getAttribute('href')
             const isFileInBucket = href.includes('bucket')
             if (!isFileInBucket) return
@@ -133,10 +133,10 @@ export const useStartFroala = (): void => {
             }
           },
 
-          'image.removed': function ($img) {
+          'image.removed': function ($img): void {
             // console.log($img.attr('src'))
           },
-          'image.loaded': function (props: { '0': HTMLImageElement }) {
+          'image.loaded': function (props: { '0': HTMLImageElement }): void {
             const imageElement = props['0']
             imageElement.style.height = `${imageElement.clientHeight}px`
             imageElement.id = `img-${nanoid(5)}`

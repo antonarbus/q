@@ -16,7 +16,7 @@ export const StaticHtmlBackgroundToFixBlinkIssue = (): JSX.Element => {
       setVisibility('hidden')
     }, 500)
 
-    return () => {
+    return (): void => {
       clearTimeout(timeoutId)
     }
   })

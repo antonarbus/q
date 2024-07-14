@@ -21,7 +21,7 @@ export const useViewPortObserver = (): Res => {
 
     if (observerRef.current) observer.observe(observerRef.current)
 
-    return () => {
+    return (): void => {
       observer.disconnect()
     }
   })

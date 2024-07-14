@@ -9,19 +9,11 @@ type Props = {
   items: Item[]
 }
 
-export const QuotationField = ({ items }: Props): ReactNode => {
-  return (
-    <QuotationFieldLayout>
-      <Blocks items={items} />
-    </QuotationFieldLayout>
-  )
-}
-
-function QuotationFieldLayout({
+const QuotationFieldLayout = ({
   children,
 }: {
   children: React.ReactNode
-}): JSX.Element {
+}): JSX.Element => {
   useEffectOnce(() => {
     isFroalaSignal.value = true
   })
@@ -48,5 +40,13 @@ function QuotationFieldLayout({
         </Box>
       </Box>
     </OutlinedDivWithLabel>
+  )
+}
+
+export const QuotationField = ({ items }: Props): ReactNode => {
+  return (
+    <QuotationFieldLayout>
+      <Blocks items={items} />
+    </QuotationFieldLayout>
   )
 }

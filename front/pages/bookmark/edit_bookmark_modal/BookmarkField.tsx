@@ -8,39 +8,11 @@ import { itemsShapeEqualityFn, isFroalaSignal } from '@entities/quotation'
 import { OutlinedDivWithLabel } from '@shared/components'
 import { cls } from '@shared/consts/cls'
 
-export const BookmarkField = (): ReactNode => {
-  const blocks = useSelectorTyped(
-    (state) => state.quotation.blocks,
-    itemsShapeEqualityFn,
-  )
-
-  useEffectOnce(() => {
-    isFroalaSignal.value = true
-  })
-
-  if (blocks.length === 0) return null
-
-  const firstBlock = blocks[0]
-
-  if (firstBlock === undefined) return null
-
-  return (
-    <BookmarkFieldLayout>
-      <AnimatePresence initial={false}>
-        <Block
-          item={firstBlock}
-          itemIndex={0}
-        />
-      </AnimatePresence>
-    </BookmarkFieldLayout>
-  )
-}
-
-function BookmarkFieldLayout({
+const BookmarkFieldLayout = ({
   children,
 }: {
   children: React.ReactNode
-}): JSX.Element {
+}): JSX.Element => {
   return (
     <OutlinedDivWithLabel label='Item'>
       <Box
@@ -82,5 +54,33 @@ function BookmarkFieldLayout({
         </Box>
       </Box>
     </OutlinedDivWithLabel>
+  )
+}
+
+export const BookmarkField = (): ReactNode => {
+  const blocks = useSelectorTyped(
+    (state) => state.quotation.blocks,
+    itemsShapeEqualityFn,
+  )
+
+  useEffectOnce(() => {
+    isFroalaSignal.value = true
+  })
+
+  if (blocks.length === 0) return null
+
+  const firstBlock = blocks[0]
+
+  if (firstBlock === undefined) return null
+
+  return (
+    <BookmarkFieldLayout>
+      <AnimatePresence initial={false}>
+        <Block
+          item={firstBlock}
+          itemIndex={0}
+        />
+      </AnimatePresence>
+    </BookmarkFieldLayout>
   )
 }

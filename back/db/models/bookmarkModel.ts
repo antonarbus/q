@@ -6,7 +6,7 @@ const bookmarkSchema = new Schema<Item>(
   {
     id: {
       type: String,
-      default: () => nanoid(5),
+      default: (): string => nanoid(5),
       required: true,
       unique: true,
       index: true,

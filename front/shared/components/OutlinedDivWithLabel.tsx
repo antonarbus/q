@@ -2,8 +2,8 @@ import { type SxProps, TextField } from '@mui/material'
 import { forwardRef } from 'react'
 
 type InputComponentProps = {
-  ownerState: unknown
   [key: string]: unknown
+  ownerState: unknown
 }
 
 const InputComponent = forwardRef(
