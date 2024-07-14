@@ -8,6 +8,7 @@ import { BookmarkField } from './BookmarkField'
 import { CategoryField } from './CategoryField'
 import { DescriptionField } from './DescriptionField'
 import { NameField } from './NameField'
+import { InfoField } from './InfoField'
 
 export const EditBookmarkModal = (): JSX.Element => {
   const modalRef = useRef<HTMLDivElement>(null)
@@ -15,13 +16,17 @@ export const EditBookmarkModal = (): JSX.Element => {
   const nameSignal = useSignal(firstBlock?.name ?? '')
   const categorySignal = useSignal(firstBlock?.category ?? '')
   const descSignal = useSignal(firstBlock?.desc ?? '')
+  const infoSignal = useSignal(firstBlock?.info ?? '')
+
+  const isDisabled = nameSignal.value === '' || categorySignal.value === ''
+
   const { onSubmit, isPending, isSuccess, isError } = useEditBookmark({
     modalRef,
     nameSignal,
     categorySignal,
     descSignal,
+    infoSignal,
   })
-  const isDisabled = nameSignal.value === '' || categorySignal.value === ''
 
   return (
     <FormModal
@@ -40,6 +45,7 @@ export const EditBookmarkModal = (): JSX.Element => {
       <NameField nameSignal={nameSignal} />
       <CategoryField categorySignal={categorySignal} />
       <DescriptionField descSignal={descSignal} />
+      <InfoField infoSignal={infoSignal} />
       <BookmarkField />
     </FormModal>
   )

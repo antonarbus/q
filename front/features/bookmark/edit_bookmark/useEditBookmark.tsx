@@ -20,6 +20,7 @@ type Props = {
   nameSignal: Signal<string>
   categorySignal: Signal<string>
   descSignal: Signal<string>
+  infoSignal: Signal<string>
 }
 
 type Res = {
@@ -34,6 +35,7 @@ export const useEditBookmark = ({
   nameSignal,
   categorySignal,
   descSignal,
+  infoSignal,
 }: Props): Res => {
   const navigate = useNavigate()
 
@@ -160,6 +162,7 @@ export const useEditBookmark = ({
       name: nameSignal.value,
       category: categorySignal.value,
       desc: descSignal.value,
+      info: infoSignal.value,
     }
 
     saveItem({ item: itemWithUpdatedValues })
