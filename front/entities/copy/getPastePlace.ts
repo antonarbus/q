@@ -16,8 +16,7 @@ export const getPastePlace = ({
   const distToTop = yWithinElement
   const distToBottom = height - yWithinElement
 
-  if (distToTop < distanceToEdge) return { pastePos: 'top', itemId: item.id }
-  if (distToBottom < distanceToEdge)
-    return { pastePos: 'bottom', itemId: item.id }
-  return { pastePos: 'middle', itemId: item.id }
+  if (distToTop < distanceToEdge) return { pastePos: 'top', id: item.id }
+  if (distToBottom < distanceToEdge) return { pastePos: 'bottom', id: item.id }
+  return { pastePos: 'middle', id: item.id }
 }

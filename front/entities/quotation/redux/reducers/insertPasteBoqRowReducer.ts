@@ -27,7 +27,7 @@ const pasteText: BoqRow = {
 type Type = (state: Quotation, action: PayloadAction<CopyPlace>) => Quotation
 
 export const insertPasteBoqRowReducer: Type = (state, action) => {
-  const { pastePos, itemId } = action.payload
+  const { pastePos, id } = action.payload
 
   state.blocks.forEach((item, blockIndex) => {
     const boqItem = getBoqBlockFromState({ blockIndex, state })
@@ -39,7 +39,7 @@ export const insertPasteBoqRowReducer: Type = (state, action) => {
     boqItem.boq.rows = boqRowsWithoutPasteText
 
     boqRowsWithoutPasteText.forEach((boqRow, boqRowIndex) => {
-      if (boqRow.id !== itemId) return state
+      if (boqRow.id !== id) return state
       if (pastePos === 'middle') return state
       const insertAtIndex = boqRowIndex + (pastePos === 'bottom' ? 1 : 0)
       const boqRowsWithPasteText = boqRowsWithoutPasteText.toSpliced(

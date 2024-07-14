@@ -53,7 +53,7 @@ export const DeleteBlockIcon = (): EmotionJSX.Element => {
 
         dispatch(
           quotationSlice.actions.deleteBlockReducer({
-            itemId: blockToDelete.id,
+            id: blockToDelete.id,
           }),
         )
 

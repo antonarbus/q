@@ -14,7 +14,7 @@ import { ResizablePaper } from './ResizablePaper'
 type Props = {
   children: ReactNode
   itemHeight: number
-  itemId: string
+  id: string
   leftItemActionButtons: ReactNode
   rightItemActionButtons: ReactNode
   disableResize?: boolean
@@ -29,7 +29,7 @@ type Props = {
 export const BlockAnimate = ({
   children,
   itemHeight,
-  itemId,
+  id,
   leftItemActionButtons,
   rightItemActionButtons,
   disableResize,
@@ -42,7 +42,7 @@ export const BlockAnimate = ({
 }: Props): JSX.Element => {
   return (
     <motion.div
-      id={itemId}
+      id={id}
       className={cls.block + (className ? ` ${className}` : '')}
       initial={{
         height: 0,

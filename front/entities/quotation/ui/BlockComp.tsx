@@ -39,10 +39,10 @@ export const BlockComp = ({
 }: Props): JSX.Element => {
   const { blockIndex } = useBlock()
   const block = getState().quotation.blocks[blockIndex]
-  const { id: itemId } = useBlock()
+  const { id } = useBlock()
 
   const { setNodeRef, transform, transition, isDragging } = useSortable({
-    id: itemId,
+    id,
   })
 
   return (
@@ -59,7 +59,7 @@ export const BlockComp = ({
         autoWidth={autoWidth}
         minWidth={minWidth}
         itemHeight={block?.height ?? 0}
-        itemId={block?.id ?? 'no id'}
+        id={block?.id ?? 'no id'}
         onItemResizeStart={onItemResizeStart}
         onItemResize={onItemResize}
         onItemResizeStop={onItemResizeStop}

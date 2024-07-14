@@ -6,7 +6,7 @@ import { itemKey } from '../../consts/itemKey'
 import type { Item, Quotation } from '../../types'
 
 type Payload = {
-  itemId: string
+  id: string
   newItemId: string
   pastePos: PastePos
   item: Item
@@ -15,7 +15,7 @@ type Payload = {
 type Reducer = (state: Quotation, action: PayloadAction<Payload>) => void
 
 export const pasteItemReducer: Reducer = (state, action) => {
-  const { itemId, newItemId, pastePos, item } = action.payload
+  const { id, newItemId, pastePos, item } = action.payload
   const itemToPaste: Item = { ...structuredClone(item), id: newItemId }
 
   if (itemToPaste.type === itemKey.boq) {
@@ -33,9 +33,7 @@ export const pasteItemReducer: Reducer = (state, action) => {
   const isBoqRow = itemToPaste.type === itemKey.row
 
   if (isBlock) {
-    const hoveredItemIndex = state.blocks.findIndex(
-      (block) => block.id === itemId,
-    )
+    const hoveredItemIndex = state.blocks.findIndex((block) => block.id === id)
 
     type SplicingSettings = {
       insertAtIndex: number
@@ -90,7 +88,7 @@ export const pasteItemReducer: Reducer = (state, action) => {
       let spliceSettings: SplicingSettings | null = null
 
       block.boq.rows.forEach((boqRow, hoveredItemIndex) => {
-        if (boqRow.id !== itemId) return
+        if (boqRow.id !== id) return
 
         const getSpliceSettings = (): SplicingSettings => {
           const spliceParams: SplicingSettings = {

@@ -4,7 +4,7 @@ import { useRow } from '@entities/quotation'
 export const useIsPasteHere = (): boolean => {
   const { rowId } = useRow()
   const pastePos = useSelectorTyped((state) => state.copy.place.pastePos)
-  const pasteItemId = useSelectorTyped((state) => state.copy.place.itemId)
+  const pasteItemId = useSelectorTyped((state) => state.copy.place.id)
   const isPasteTextShown = useSelectorTyped(
     (state) => state.copy.isPasteTextShown,
   )

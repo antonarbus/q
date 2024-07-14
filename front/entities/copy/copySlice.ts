@@ -23,7 +23,7 @@ const initialState: Props = {
   previews: [],
   place: {
     pastePos: 'middle',
-    itemId: 'some id',
+    id: 'some id',
   },
   isCopying: false,
   isPasteTextShown: false,

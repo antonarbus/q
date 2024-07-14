@@ -1,6 +1,6 @@
 export type PastePos = 'bottom' | 'middle' | 'top'
 
 export type CopyPlace = {
-  itemId: string
+  id: string
   pastePos: PastePos
 }

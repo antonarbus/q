@@ -57,7 +57,7 @@ export const CutBlockIcon = (): JSX.Element => {
 
         dispatch(copySlice.actions.addItemIntoCopyContainer({ item: block }))
         dispatch(
-          quotationSlice.actions.deleteBlockReducer({ itemId: blockToCut.id }),
+          quotationSlice.actions.deleteBlockReducer({ id: blockToCut.id }),
         )
         dispatch(copySlice.actions.forbidAllActions())
 

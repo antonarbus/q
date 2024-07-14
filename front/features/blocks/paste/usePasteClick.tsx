@@ -18,13 +18,13 @@ const pasteItemOnClick = (): void => {
 
   if (!isPastable) return
 
-  const { itemId, pastePos } = getState().copy.place
+  const { id, pastePos } = getState().copy.place
   const topItemFromCopyContainer = getState().copy.items[0]
 
   if (!topItemFromCopyContainer) return
 
   if (pastePos === 'middle') {
-    const elementToBeReplaced = document.getElementById(itemId)
+    const elementToBeReplaced = document.getElementById(id)
     if (elementToBeReplaced) {
       const paperElement = elementToBeReplaced.querySelector(`.${cls.paper}`)
       if (paperElement instanceof HTMLElement) {
@@ -39,7 +39,7 @@ const pasteItemOnClick = (): void => {
   dispatch(
     quotationSlice.actions.pasteItemReducer({
       item: topItemFromCopyContainer,
-      itemId,
+      id,
       newItemId,
       pastePos,
     }),

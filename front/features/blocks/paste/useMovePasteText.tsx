@@ -87,7 +87,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
 
     if (!firstBlock) return
 
-    const pastePlace: CopyPlace = { pastePos: 'top', itemId: firstBlock.id }
+    const pastePlace: CopyPlace = { pastePos: 'top', id: firstBlock.id }
     dispatch(copySlice.actions.updatePastePos(pastePlace))
     dispatch(copySlice.actions.showPasteText())
 

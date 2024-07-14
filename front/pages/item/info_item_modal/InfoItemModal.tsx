@@ -2,13 +2,13 @@ import { useSignal } from '@preact/signals-react'
 import { useRef } from 'react'
 import { BsInfo } from 'react-icons/bs'
 import { useParams } from 'react-router-dom'
-import { useUpdateItemInfo } from '@features/blocks/update_item_info'
 import { getItemByIdFromStore } from '@entities/quotation'
 import { FormModal } from '@shared/components'
 import { CategoryField } from './CategoryField'
 import { DescriptionField } from './DescriptionField'
 import { InfoField } from './InfoField'
 import { NameField } from './NameField'
+import { useUpdateItemInfo } from '@features/blocks/update_info'
 
 export const InfoItemModal = (): React.ReactNode => {
   const modalRef = useRef<HTMLDivElement>(null)
