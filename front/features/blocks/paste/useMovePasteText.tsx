@@ -213,7 +213,7 @@ export const useMovePasteText = (): void => {
     (state) => state.copy.items.at(0)?.type,
   )
 
-  const isItem =
+  const isBlock =
     typeOfNextPasteItem === itemKey.boq ||
     typeOfNextPasteItem === itemKey.text ||
     typeOfNextPasteItem === itemKey.price
@@ -221,7 +221,7 @@ export const useMovePasteText = (): void => {
   const isBoqRow = typeOfNextPasteItem === boqRowKey.row
 
   useEffect(() => {
-    if (isItem) {
+    if (isBlock) {
       document.body.style.cursor = 'pointer'
       document.addEventListener('mousemove', movePasteTextItem, {
         passive: true,
@@ -240,5 +240,5 @@ export const useMovePasteText = (): void => {
       document.removeEventListener('mousemove', movePasteTextItem)
       document.removeEventListener('mousemove', movePasteTextBoqRow)
     }
-  }, [isItem, isBoqRow])
+  }, [isBlock, isBoqRow])
 }
