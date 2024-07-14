@@ -9,7 +9,6 @@ export const PasteItem = (): EmotionJSX.Element => {
   return (
     <motion.div
       id={id}
-      className='paste-item'
       initial={{
         height: 0,
         marginBottom: 0,

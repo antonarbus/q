@@ -23,7 +23,6 @@ export const CutBlockIcon = (): JSX.Element => {
 
   return (
     <TbCut
-      className='cut-item-icon'
       tabIndex={-1}
       style={{
         color: disabled ? '#acacac' : '#000',

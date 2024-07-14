@@ -18,7 +18,6 @@ export const BoqBlock = (): JSX.Element => {
   return (
     <BoqItemProvider>
       <BlockComp
-        className='boq-item'
         autoWidth={true}
         minWidth='560px'
         onItemResizeStart={onBoqBlockResizeStart}

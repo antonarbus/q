@@ -10,7 +10,6 @@ import { BoqTable } from './boq_table'
 export const BoqBlockForEditModal = (): JSX.Element => {
   return (
     <BlockComp
-      className='boq-item'
       autoWidth={true}
       minWidth='560px'
       onItemResizeStart={onBoqBlockResizeStart}

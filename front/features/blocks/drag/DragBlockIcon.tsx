@@ -14,7 +14,6 @@ export const DragBlockIcon = (): JSX.Element => {
   return (
     <MdDragIndicator
       {...listeners}
-      className='drag-item-icon'
       tabIndex={-1}
       style={{
         color: disabled ? '#acacac' : '#000',
