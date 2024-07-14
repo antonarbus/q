@@ -1,9 +1,9 @@
 import { getState, useSelectorTyped } from '@lib_instances/store'
-import { useItem } from '../../providers/ItemProvider'
+import { useBlock } from '../../providers/BlockProvider'
 
 export const useIsPasteHere = (): boolean => {
-  const { itemIndex } = useItem()
-  const blockId = getState().quotation.blocks[itemIndex]?.id
+  const { blockIndex } = useBlock()
+  const blockId = getState().quotation.blocks[blockIndex]?.id
   const pastePos = useSelectorTyped((state) => state.copy.place.pastePos)
   const pasteItemId = useSelectorTyped((state) => state.copy.place.itemId)
   const isPasteTextShown = useSelectorTyped(

@@ -3,13 +3,13 @@ import { itemKey } from '../../consts/itemKey'
 import { type BoqBlock } from '../../types'
 
 type Props = {
-  itemIndex: number
+  blockIndex: number
 }
 
 export const getBoqBlockFromStore = ({
-  itemIndex,
+  blockIndex,
 }: Props): BoqBlock | undefined => {
-  const block = getState().quotation.blocks[itemIndex]
+  const block = getState().quotation.blocks[blockIndex]
 
   if (block?.type !== itemKey.boq) return
 

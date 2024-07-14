@@ -5,14 +5,14 @@ import { getBoqCellFromState } from '../getters/getBoqCellFromState'
 export const hideBoqRowCellPinReducer = (
   state: Quotation,
   action: PayloadAction<{
-    itemIndex: number
+    blockIndex: number
     rowIndex: number
     boqRowCellKey: BoqRowCellKey
   }>,
 ): void => {
-  const { itemIndex, rowIndex, boqRowCellKey } = action.payload
+  const { blockIndex, rowIndex, boqRowCellKey } = action.payload
   const boqRowCell = getBoqCellFromState({
-    itemIndex,
+    blockIndex,
     rowIndex,
     boqRowCellKey,
     state,

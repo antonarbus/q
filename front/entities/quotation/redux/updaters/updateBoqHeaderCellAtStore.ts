@@ -7,7 +7,7 @@ import { quotationSlice } from '../quotationSlice'
 
 type Props = {
   editorRef: FroalaEditorRef
-  itemIndex: number
+  blockIndex: number
   boqHeaderKey: BoqHeaderKey
 }
 
@@ -17,12 +17,12 @@ type Res = {
 
 export const updateBoqHeaderCellAtStore = ({
   editorRef,
-  itemIndex,
+  blockIndex,
   boqHeaderKey,
 }: Props): Res => {
   if (editorRef.current === null) return { didUpdate: false }
 
-  const boqBlock = getBoqBlockFromStore({ itemIndex })
+  const boqBlock = getBoqBlockFromStore({ blockIndex })
   if (boqBlock === undefined) return { didUpdate: false }
 
   const prevHtml = boqBlock.boq.header[boqHeaderKey].html
@@ -38,7 +38,7 @@ export const updateBoqHeaderCellAtStore = ({
 
   dispatch(
     quotationSlice.actions.updateBoqHeaderTextReducer({
-      itemIndex,
+      blockIndex,
       html,
       value: cellValueFromHtml,
       boqHeaderKey,

@@ -4,7 +4,7 @@ import { beforeUpload } from '@features/upload'
 import {
   getBoqCellHtmlFromStore,
   useRow,
-  useItem,
+  useBlock,
   Froala,
   useStylesForResizableCell,
   boqRowCellStyle,
@@ -13,10 +13,10 @@ import {
 } from '@entities/quotation'
 
 export const DescriptionCell = (): JSX.Element => {
-  const { itemIndex } = useItem()
+  const { blockIndex } = useBlock()
   const { rowIndex, itemPriceCellEditorRef, descriptionEditorRef } = useRow()
   const { stylesForResizableCell } = useStylesForResizableCell({
-    itemIndex,
+    blockIndex,
     boqColumnKey: boqColumnKey.description,
     minWidth: '200px',
   })
@@ -29,7 +29,7 @@ export const DescriptionCell = (): JSX.Element => {
       beforeUpload={beforeUpload}
       htmlGetter={() =>
         getBoqCellHtmlFromStore({
-          itemIndex,
+          blockIndex,
           rowIndex,
           boqRowCellKey: boqRowCellKey.description,
         })
@@ -37,7 +37,7 @@ export const DescriptionCell = (): JSX.Element => {
       onContentChange={() => {
         updateDescriptionCell({
           editorRef: descriptionEditorRef,
-          itemIndex,
+          blockIndex,
           rowIndex,
           boqRowCellKey: boqRowCellKey.description,
         })

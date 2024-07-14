@@ -6,12 +6,12 @@ import {
 } from '@entities/quotation'
 
 type Props = {
-  itemIndex: number
+  blockIndex: number
   rowIndex: number
 }
 
-export const showBoqRowPins = ({ itemIndex, rowIndex }: Props): void => {
-  const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
+export const showBoqRowPins = ({ blockIndex, rowIndex }: Props): void => {
+  const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
   if (boqRow === undefined) return
 
   const isItemPricePinShown = boqRow.itemPrice.pin.isShown
@@ -19,7 +19,7 @@ export const showBoqRowPins = ({ itemIndex, rowIndex }: Props): void => {
   if (!isItemPricePinShown) {
     dispatch(
       quotationSlice.actions.showBoqRowCellPinReducer({
-        itemIndex,
+        blockIndex,
         rowIndex,
         boqRowCellKey: boqRowCellKey.itemPrice,
       }),
@@ -31,7 +31,7 @@ export const showBoqRowPins = ({ itemIndex, rowIndex }: Props): void => {
   if (!isQtyPinShown) {
     dispatch(
       quotationSlice.actions.showBoqRowCellPinReducer({
-        itemIndex,
+        blockIndex,
         rowIndex,
         boqRowCellKey: boqRowCellKey.qty,
       }),

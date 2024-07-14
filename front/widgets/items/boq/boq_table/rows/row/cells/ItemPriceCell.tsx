@@ -7,7 +7,7 @@ import {
 } from '@features/items/cell/update_cell'
 import {
   getBoqCellHtmlFromStore,
-  useItem,
+  useBlock,
   useRow,
   useBoqItem,
   Froala,
@@ -19,7 +19,7 @@ import {
 } from '@entities/quotation'
 
 export const ItemPriceCell = (): JSX.Element => {
-  const { itemIndex } = useItem()
+  const { blockIndex } = useBlock()
   const { subTotalPriceEditorRef } = useBoqItem()
   const {
     rowIndex,
@@ -28,7 +28,7 @@ export const ItemPriceCell = (): JSX.Element => {
     qtyCellEditorRef,
   } = useRow()
   const { stylesForResizableCell } = useStylesForResizableCell({
-    itemIndex,
+    blockIndex,
     boqColumnKey: boqColumnKey.itemPrice,
     minWidth: '100px',
   })
@@ -41,14 +41,14 @@ export const ItemPriceCell = (): JSX.Element => {
         placeholder='Item price...'
         htmlGetter={() =>
           getBoqCellHtmlFromStore({
-            itemIndex,
+            blockIndex,
             rowIndex,
             boqRowCellKey: boqRowCellKey.itemPrice,
           })
         }
         onContentChange={() => {
           updateBoqRowItemPriceCell({
-            itemIndex,
+            blockIndex,
             itemPriceCellEditorRef,
             priceCellEditorRef,
             rowIndex,
@@ -57,7 +57,7 @@ export const ItemPriceCell = (): JSX.Element => {
         }}
         onBlur={() => {
           formatBoqRowItemPriceCell({
-            itemIndex,
+            blockIndex,
             rowIndex,
             itemPriceCellEditorRef,
           })
@@ -72,7 +72,7 @@ export const ItemPriceCell = (): JSX.Element => {
       <Pin
         boqRowCellKey={boqRowCellKey.itemPrice}
         onClick={() => {
-          pinBoqRowItemPriceCell({ itemIndex, rowIndex })
+          pinBoqRowItemPriceCell({ blockIndex, rowIndex })
         }}
       />
     </Box>

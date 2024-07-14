@@ -117,7 +117,7 @@ export const useEditBookmark = ({
 
     // dispatch(
     //   quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
-    //     itemIndex: 0,
+    //     blockIndex: 0,
     //     rowIndex: 0,
     //     height: boqRowElement.clientHeight,
     //     width: boqRowElement.clientWidth,

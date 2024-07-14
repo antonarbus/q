@@ -4,7 +4,7 @@ import { type BoqHeaderKey } from '../types'
 
 type Props = {
   editor: FroalaEditor
-  itemIndex: number
+  blockIndex: number
   boqHeaderKey: BoqHeaderKey
 }
 
@@ -13,11 +13,11 @@ type Props = {
 
 export const didBoqHeaderCellContentChange = ({
   editor,
-  itemIndex,
+  blockIndex,
   boqHeaderKey,
 }: Props): boolean => {
   const htmlOnDisplay = editor.html.get()
-  const htmlFromStore = getBoqBlockFromStore({ itemIndex })?.boq.header[
+  const htmlFromStore = getBoqBlockFromStore({ blockIndex })?.boq.header[
     boqHeaderKey
   ].html
   const didContentChange = htmlOnDisplay !== htmlFromStore

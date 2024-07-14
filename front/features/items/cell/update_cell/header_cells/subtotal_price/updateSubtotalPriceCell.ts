@@ -15,33 +15,33 @@ import { type FroalaEditor, type FroalaEditorRef } from '@shared/types/froala'
 import { notify } from '@shared/ui/top_msg'
 
 type Props = {
-  itemIndex: number
+  blockIndex: number
   subTotalPriceEditorRef: FroalaEditorRef
   boqRowEditorRefs: BoqRowEditorRefs
 }
 
 export const updateSubtotalPriceCell = ({
   subTotalPriceEditorRef,
-  itemIndex,
+  blockIndex,
   boqRowEditorRefs,
 }: Props): void => {
   if (subTotalPriceEditorRef.current === null) return
 
   const didContentChange = didBoqHeaderCellContentChange({
     editor: subTotalPriceEditorRef.current,
-    itemIndex,
+    blockIndex,
     boqHeaderKey: 'subTotalPrice',
   })
 
   if (!didContentChange) return
 
-  const boqRows = getBoqRowsFromStore({ itemIndex })
+  const boqRows = getBoqRowsFromStore({ blockIndex })
 
   if (boqRows === undefined) return
 
   updateBoqHeaderCellAtStore({
     editorRef: subTotalPriceEditorRef,
-    itemIndex,
+    blockIndex,
     boqHeaderKey: 'subTotalPrice',
   })
 
@@ -58,7 +58,7 @@ export const updateSubtotalPriceCell = ({
   }, 0)
 
   const subTotalPriceFromStore = getBoqHeaderFromStore({
-    itemIndex,
+    blockIndex,
     boqHeaderKey: 'subTotalPrice',
   })
 
@@ -99,7 +99,7 @@ export const updateSubtotalPriceCell = ({
     })
 
     updateSubTotalPriceWithValue({
-      itemIndex,
+      blockIndex,
       subTotalPriceEditor: subTotalPriceEditorRef.current,
       value: prevSubTotalPriceValue,
       incrementally: true,
@@ -113,7 +113,7 @@ export const updateSubtotalPriceCell = ({
     })
 
     updateSubTotalPriceWithValue({
-      itemIndex,
+      blockIndex,
       subTotalPriceEditor: subTotalPriceEditorRef.current,
       value: prevSubTotalPriceValue,
       incrementally: true,
@@ -124,12 +124,12 @@ export const updateSubtotalPriceCell = ({
     updateBoqRowCellWithValue({
       boqRowCellKey: boqRowCellKey.price,
       editor: boqRowEditorRefs.at(rowIndex)?.price.current ?? null,
-      itemIndex,
+      blockIndex,
       rowIndex,
       value: price.newValue,
     })
 
-    const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
+    const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
 
     const isItemPricePinned = boqRow?.itemPrice.pin.isPinned
 
@@ -140,7 +140,7 @@ export const updateSubtotalPriceCell = ({
 
       updateBoqRowCellWithValue({
         editor: boqRowEditorRefs.at(rowIndex)?.qty.current ?? null,
-        itemIndex,
+        blockIndex,
         rowIndex,
         boqRowCellKey: boqRowCellKey.qty,
         value: newQtyValueRounded,
@@ -156,7 +156,7 @@ export const updateSubtotalPriceCell = ({
 
       updateBoqRowCellWithValue({
         editor: boqRowEditorRefs.at(rowIndex)?.itemPrice.current ?? null,
-        itemIndex,
+        blockIndex,
         rowIndex,
         boqRowCellKey: boqRowCellKey.itemPrice,
         value: newItemPriceValueRounded,
@@ -164,7 +164,7 @@ export const updateSubtotalPriceCell = ({
     }
   })
 
-  const boqRowsUpdated = getBoqRowsFromStore({ itemIndex })
+  const boqRowsUpdated = getBoqRowsFromStore({ blockIndex })
   if (boqRowsUpdated === undefined) return
 
   const subTotalPriceValueNew: number = boqRowsUpdated.reduce(
@@ -178,7 +178,7 @@ export const updateSubtotalPriceCell = ({
   const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
 
   updateSubTotalPriceWithValue({
-    itemIndex,
+    blockIndex,
     subTotalPriceEditor: subTotalPriceEditorRef.current,
     value: subTotalPriceValueNewRounded,
     incrementally: true,

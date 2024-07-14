@@ -5,18 +5,18 @@ import { cls } from '@shared/consts/cls'
 
 type Props = {
   e: MouseEvent
-  itemIndex: number
+  blockIndex: number
   hidePinsClickHandlerRef: MutableRefObject<(e: MouseEvent) => void>
   isInitClickRef: MutableRefObject<boolean>
 }
 
 export const showHideBoqPricePins = ({
   e,
-  itemIndex,
+  blockIndex,
   hidePinsClickHandlerRef,
   isInitClickRef,
 }: Props): void => {
-  dispatch(quotationSlice.actions.showBoqPriceCellPinsReducer({ itemIndex }))
+  dispatch(quotationSlice.actions.showBoqPriceCellPinsReducer({ blockIndex }))
 
   const clickHandler = (event: MouseEvent): void => {
     if (isInitClickRef.current) {
@@ -33,7 +33,7 @@ export const showHideBoqPricePins = ({
       document.removeEventListener('click', hidePinsClickHandlerRef.current)
     }
 
-    dispatch(quotationSlice.actions.hideBoqPriceCellPinsReducer({ itemIndex }))
+    dispatch(quotationSlice.actions.hideBoqPriceCellPinsReducer({ blockIndex }))
     document.removeEventListener('click', hidePinsClickHandlerRef.current)
     isInitClickRef.current = true
   }

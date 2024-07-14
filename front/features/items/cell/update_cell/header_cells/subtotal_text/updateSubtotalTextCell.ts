@@ -6,18 +6,18 @@ import { type FroalaEditorRef } from '@shared/types/froala'
 
 type Props = {
   editorRef: FroalaEditorRef
-  itemIndex: number
+  blockIndex: number
   boqHeaderKey: BoqHeaderKey
 }
 
 export const updateSubtotalTextCell = ({
   editorRef,
-  itemIndex,
+  blockIndex,
   boqHeaderKey,
 }: Props): void => {
   updateBoqHeaderCellAtStore({
     editorRef,
-    itemIndex,
+    blockIndex,
     boqHeaderKey,
   })
 }

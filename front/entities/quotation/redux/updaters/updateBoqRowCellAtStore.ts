@@ -6,7 +6,7 @@ import { quotationSlice } from '../quotationSlice'
 
 type Props = {
   html: string
-  itemIndex: number
+  blockIndex: number
   rowIndex: number
   boqRowCellKey: BoqRowCellKey
 }
@@ -17,11 +17,11 @@ type Res = {
 
 export const updateBoqRowCellAtStore = ({
   html,
-  itemIndex,
+  blockIndex,
   rowIndex,
   boqRowCellKey,
 }: Props): Res => {
-  const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
+  const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
 
   if (boqRow === undefined) {
     return {
@@ -46,7 +46,7 @@ export const updateBoqRowCellAtStore = ({
 
   dispatch(
     quotationSlice.actions.updateBoqCellReducer({
-      itemIndex,
+      blockIndex,
       rowIndex,
       html,
       value: cellValueFromHtml,

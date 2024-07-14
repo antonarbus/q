@@ -11,7 +11,7 @@ import type {
 } from '@shared/types/resizablePaper'
 
 export const onTextBlockResizeStart: OnItemResizeStart = ({
-  itemIndex,
+  blockIndex,
   e,
   dir,
   elementRef,
@@ -20,20 +20,22 @@ export const onTextBlockResizeStart: OnItemResizeStart = ({
 }
 
 export const onTextBlockResize: OnItemResize = ({
-  itemIndex,
+  blockIndex,
   e,
   direction,
   elementRef,
   delta,
 }) => {
   const width = parseInt(elementRef.style.width, 10)
-  const prevItemWidth = getState().quotation.blocks[itemIndex]?.width
+  const prevItemWidth = getState().quotation.blocks[blockIndex]?.width
   if (width === prevItemWidth) return
-  dispatch(quotationSlice.actions.updateBlockWidthReducer({ itemIndex, width }))
+  dispatch(
+    quotationSlice.actions.updateBlockWidthReducer({ blockIndex, width }),
+  )
 }
 
 export const onTextBlockResizeStop: OnItemResizeStop = ({
-  itemIndex,
+  blockIndex,
   e,
   direction,
   elementRef,
@@ -41,10 +43,12 @@ export const onTextBlockResizeStop: OnItemResizeStop = ({
 }) => {
   fixImagesHeight()
   const width = parseInt(elementRef.style.width, 10)
-  const prevItemWidth = getState().quotation.blocks[itemIndex]?.width
-  dispatch(quotationSlice.actions.enableFroalaReducer({ itemIndex }))
+  const prevItemWidth = getState().quotation.blocks[blockIndex]?.width
+  dispatch(quotationSlice.actions.enableFroalaReducer({ blockIndex }))
 
   if (width === prevItemWidth) return
 
-  dispatch(quotationSlice.actions.updateBlockWidthReducer({ itemIndex, width }))
+  dispatch(
+    quotationSlice.actions.updateBlockWidthReducer({ blockIndex, width }),
+  )
 }

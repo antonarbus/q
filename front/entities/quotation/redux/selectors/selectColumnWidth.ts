@@ -3,14 +3,14 @@ import type { BoqColumnKey } from '../../types'
 import { getBoqBlockFromStore } from '../getters/getBoqBlockFromStore'
 
 type Props = {
-  itemIndex: number
+  blockIndex: number
   boqColumnKey: BoqColumnKey
 }
 
 export const selectColumnWidth =
-  ({ itemIndex, boqColumnKey }: Props) =>
+  ({ blockIndex, boqColumnKey }: Props) =>
   (state: RootState): number => {
-    const boqBlock = getBoqBlockFromStore({ itemIndex })
+    const boqBlock = getBoqBlockFromStore({ blockIndex })
     if (boqBlock === undefined) return 0
     const width = boqBlock.boq.column[boqColumnKey].width
     return width

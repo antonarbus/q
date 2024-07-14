@@ -8,7 +8,7 @@ import {
   type OnItemResizeStop,
   type OnItemResizeStart,
 } from '@shared/types/resizablePaper'
-import { useItem } from '../providers/ItemProvider'
+import { useBlock } from '../providers/BlockProvider'
 import { BlockAnimate } from './item_layout'
 import { PasteItemTextOverlay } from './paste_item_overlay_text'
 
@@ -37,9 +37,9 @@ export const BlockComp = ({
   rightItemActionButtons,
   className,
 }: Props): JSX.Element => {
-  const { itemIndex } = useItem()
-  const block = getState().quotation.blocks[itemIndex]
-  const { itemId } = useItem()
+  const { blockIndex } = useBlock()
+  const block = getState().quotation.blocks[blockIndex]
+  const { id: itemId } = useBlock()
 
   const { setNodeRef, transform, transition, isDragging } = useSortable({
     id: itemId,

@@ -4,18 +4,18 @@ import { arrayMoveImmutable } from 'array-move'
 import { getBoqRowsFromStore, quotationSlice } from '@entities/quotation'
 
 export const onBoqRowDragStart =
-  ({ itemIndex }: { itemIndex: number }) =>
+  ({ blockIndex }: { blockIndex: number }) =>
   (event: DragStartEvent): void => {
     document.body.style.cursor = 'move'
-    dispatch(quotationSlice.actions.disableFroalaReducer({ itemIndex }))
+    dispatch(quotationSlice.actions.disableFroalaReducer({ blockIndex }))
   }
 
 export const onBoqRowDragEnd =
-  ({ itemIndex, boqRowIds }: { itemIndex: number; boqRowIds: string[] }) =>
+  ({ blockIndex, boqRowIds }: { blockIndex: number; boqRowIds: string[] }) =>
   (event: DragEndEvent): void => {
     const { active, over } = event
 
-    dispatch(quotationSlice.actions.enableFroalaReducer({ itemIndex }))
+    dispatch(quotationSlice.actions.enableFroalaReducer({ blockIndex }))
     document.body.style.removeProperty('cursor')
 
     if (!over) return
@@ -23,14 +23,14 @@ export const onBoqRowDragEnd =
 
     const oldIndex = boqRowIds.indexOf(String(active.id))
     const newIndex = boqRowIds.indexOf(String(over.id))
-    const boqRows = getBoqRowsFromStore({ itemIndex })
+    const boqRows = getBoqRowsFromStore({ blockIndex })
     if (boqRows === undefined) return
     const reOrderedBoqRows = arrayMoveImmutable(boqRows, oldIndex, newIndex)
 
     dispatch(
       quotationSlice.actions.reOrderBoqRowsReducer({
         reOrderedBoqRows,
-        itemIndex,
+        blockIndex,
       }),
     )
   }

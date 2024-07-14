@@ -13,21 +13,21 @@ export const boqRowsShapeEqualityFn: EqualityFn = (
   const isDifferentLength = prevItems.length !== currentItems.length
   if (isDifferentLength) return false
   const idsDoNotMatch = prevItems.some(
-    (item: BoqRow, itemIndex: number) =>
-      prevItems[itemIndex]?.id !== currentItems[itemIndex]?.id,
+    (item: BoqRow, blockIndex: number) =>
+      prevItems[blockIndex]?.id !== currentItems[blockIndex]?.id,
   )
   if (idsDoNotMatch) return false
   return true
 }
 
 type Props = {
-  itemIndex: number
+  blockIndex: number
 }
 
 export const selectBoqRows =
-  ({ itemIndex }: Props) =>
+  ({ blockIndex }: Props) =>
   (state: RootState): BoqRow[] => {
-    const boqRows = getBoqRowsFromStore({ itemIndex })
+    const boqRows = getBoqRowsFromStore({ blockIndex })
     if (boqRows === undefined) return []
     return boqRows
   }

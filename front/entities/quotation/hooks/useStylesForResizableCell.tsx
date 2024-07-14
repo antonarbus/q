@@ -4,7 +4,7 @@ import { selectColumnWidth } from '../redux/selectors/selectColumnWidth'
 import { type BoqColumnKey } from '../types'
 
 type Props = {
-  itemIndex: number
+  blockIndex: number
   boqColumnKey: BoqColumnKey
   minWidth: CSSProperties['minWidth']
 }
@@ -14,12 +14,12 @@ type Res = {
 }
 
 export const useStylesForResizableCell = ({
-  itemIndex,
+  blockIndex,
   boqColumnKey,
   minWidth = '100px',
 }: Props): Res => {
   const columnWidth = useSelectorTyped(
-    selectColumnWidth({ itemIndex, boqColumnKey }),
+    selectColumnWidth({ blockIndex, boqColumnKey }),
   )
 
   const stylesForResizableCell: CSSProperties = {

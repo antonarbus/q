@@ -1,10 +1,10 @@
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 import { theme } from '@lib_instances/theme'
 import { motion } from 'framer-motion'
-import { useItem } from '@entities/quotation'
+import { useBlock } from '@entities/quotation'
 
 export const PasteItem = (): EmotionJSX.Element => {
-  const { itemId } = useItem()
+  const { id: itemId } = useBlock()
 
   return (
     <motion.div

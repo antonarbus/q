@@ -4,13 +4,13 @@ import { type FroalaEditorRef } from '@shared/types/froala'
 
 type Props = {
   editorRef: FroalaEditorRef
-  itemIndex: number
+  blockIndex: number
 }
 
-export const updateTextBlock = ({ editorRef, itemIndex }: Props): void => {
+export const updateTextBlock = ({ editorRef, blockIndex }: Props): void => {
   if (editorRef.current === null) return
 
-  const block = getState().quotation.blocks[itemIndex]
+  const block = getState().quotation.blocks[blockIndex]
   if (block?.type !== itemKey.text) return
 
   const prevHtml = block.text.html
@@ -18,5 +18,5 @@ export const updateTextBlock = ({ editorRef, itemIndex }: Props): void => {
   const didTextChange = prevHtml !== html
   if (!didTextChange) return
 
-  dispatch(quotationSlice.actions.updateBlockTextReducer({ itemIndex, html }))
+  dispatch(quotationSlice.actions.updateBlockTextReducer({ blockIndex, html }))
 }

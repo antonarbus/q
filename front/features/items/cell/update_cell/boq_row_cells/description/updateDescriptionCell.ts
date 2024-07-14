@@ -7,14 +7,14 @@ import { type FroalaEditorRef } from '@shared/types/froala'
 
 type Props = {
   editorRef: FroalaEditorRef
-  itemIndex: number
+  blockIndex: number
   rowIndex: number
   boqRowCellKey: BoqRowCellKey
 }
 
 export const updateDescriptionCell = ({
   editorRef,
-  itemIndex,
+  blockIndex,
   rowIndex,
   boqRowCellKey,
 }: Props): void => {
@@ -22,7 +22,7 @@ export const updateDescriptionCell = ({
 
   const didContentChange = didBoqCellContentChange({
     editor: editorRef.current,
-    itemIndex,
+    blockIndex,
     rowIndex,
     boqRowCellKey,
   })
@@ -30,7 +30,7 @@ export const updateDescriptionCell = ({
   if (!didContentChange) return
 
   updateBoqRowCellAtStore({
-    itemIndex,
+    blockIndex,
     rowIndex,
     boqRowCellKey,
     html: editorRef.current.html.get(),

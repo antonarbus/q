@@ -10,7 +10,7 @@ import { updateBoqRowCellAtStore } from '../redux/updaters/updateBoqRowCellAtSto
 import { type BoqRowCellKey } from '../types'
 
 type Props = {
-  itemIndex: number
+  blockIndex: number
   rowIndex: number
   editor: FroalaEditor | null
   boqRowCellKey: BoqRowCellKey
@@ -18,7 +18,7 @@ type Props = {
 }
 
 export const updateBoqRowCellWithValue = ({
-  itemIndex,
+  blockIndex,
   rowIndex,
   editor,
   boqRowCellKey,
@@ -26,7 +26,7 @@ export const updateBoqRowCellWithValue = ({
 }: Props): void => {
   if (editor === null) return
 
-  const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
+  const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
   if (boqRow === undefined) return
 
   const priceTextContent = getTextContentFromHtml({
@@ -44,7 +44,7 @@ export const updateBoqRowCellWithValue = ({
   })
 
   updateBoqRowCellAtStore({
-    itemIndex,
+    blockIndex,
     rowIndex,
     boqRowCellKey,
     html: updatedHtml,

@@ -7,7 +7,7 @@ import {
   itemKey,
   quotationSlice,
   saveBlockHeightByIndex,
-  useItem,
+  useBlock,
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { route } from '@shared/consts/route'
@@ -16,7 +16,7 @@ import { cleanHtml } from '@shared/utils/itemsUtils'
 
 export const BookmarkBlockIcon = (): ReactNode => {
   const navigate = useNavigate()
-  const { itemIndex } = useItem()
+  const { blockIndex } = useBlock()
 
   return (
     <MdOutlineStarOutline
@@ -31,7 +31,7 @@ export const BookmarkBlockIcon = (): ReactNode => {
           return
         }
 
-        saveBlockHeightByIndex({ blockIndex: itemIndex })
+        saveBlockHeightByIndex({ blockIndex })
 
         const clickedIconElement = e.target
         if (!(clickedIconElement instanceof Element)) return
@@ -43,7 +43,7 @@ export const BookmarkBlockIcon = (): ReactNode => {
         const html = paperElement.innerHTML
         const cleanedHtml = cleanHtml(html)
 
-        const item = getBlockFromStore({ itemIndex })
+        const item = getBlockFromStore({ blockIndex })
 
         if (!item) return
         if (item.type === itemKey.paste) return

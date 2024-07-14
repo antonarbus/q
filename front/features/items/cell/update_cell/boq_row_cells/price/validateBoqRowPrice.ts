@@ -13,12 +13,12 @@ import { type FroalaEditorRef } from '@shared/types/froala'
 type Props = {
   priceCellEditorRef: FroalaEditorRef
   subTotalPriceEditorRef: FroalaEditorRef
-  itemIndex: number
+  blockIndex: number
   rowIndex: number
 }
 
 export const validateBoqRowPrice = ({
-  itemIndex,
+  blockIndex,
   priceCellEditorRef,
   subTotalPriceEditorRef,
   rowIndex,
@@ -28,12 +28,12 @@ export const validateBoqRowPrice = ({
 
   const isPriceValid = isBoqRowPriceValid({
     html: priceCellEditorRef.current.html.get(),
-    itemIndex,
+    blockIndex,
     rowIndex,
   })
 
   if (!isPriceValid) {
-    const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
+    const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
     if (boqRow === undefined) return
 
     const newPriceValue = boqRow.qty.value * boqRow.itemPrice.value
@@ -42,12 +42,12 @@ export const validateBoqRowPrice = ({
     updateBoqRowCellWithValue({
       boqRowCellKey: boqRowCellKey.price,
       editor: priceCellEditorRef.current,
-      itemIndex,
+      blockIndex,
       rowIndex,
       value: newPriceValueRounded,
     })
 
-    const boqRows = getBoqRowsFromStore({ itemIndex })
+    const boqRows = getBoqRowsFromStore({ blockIndex })
     if (boqRows === undefined) return
 
     const subTotalPriceValueNew: number = boqRows.reduce(
@@ -61,7 +61,7 @@ export const validateBoqRowPrice = ({
     const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
 
     updateSubTotalPriceWithValue({
-      itemIndex,
+      blockIndex,
       subTotalPriceEditor: subTotalPriceEditorRef.current,
       value: subTotalPriceValueNewRounded,
       incrementally: true,

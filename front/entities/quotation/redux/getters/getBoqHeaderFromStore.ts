@@ -3,15 +3,15 @@ import { itemKey } from '../../consts/itemKey'
 import { type BoqHeaderCell, type BoqHeaderKey } from '../../types'
 
 type Props = {
-  itemIndex: number
+  blockIndex: number
   boqHeaderKey: BoqHeaderKey
 }
 
 export const getBoqHeaderFromStore = ({
-  itemIndex,
+  blockIndex,
   boqHeaderKey,
 }: Props): BoqHeaderCell | undefined => {
-  const block = getState().quotation.blocks[itemIndex]
+  const block = getState().quotation.blocks[blockIndex]
 
   if (block?.type !== itemKey.boq) return
 

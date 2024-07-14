@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { updateSubtotalTextCell } from '@features/items/cell/update_cell'
 import {
   getBoqHeaderHtmlFromStore,
-  useItem,
+  useBlock,
   Froala,
   subTotalTextCellStyle,
   type BoqHeaderKey,
@@ -13,15 +13,15 @@ const boqHeaderKey: BoqHeaderKey = 'subtotalText'
 
 export const SubtotalText = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
-  const { itemIndex } = useItem()
+  const { blockIndex } = useBlock()
 
   return (
     <Froala
       editorRef={editorRef}
       placeholder='Subtotal...'
-      htmlGetter={() => getBoqHeaderHtmlFromStore({ itemIndex, boqHeaderKey })}
+      htmlGetter={() => getBoqHeaderHtmlFromStore({ blockIndex, boqHeaderKey })}
       onContentChange={() => {
-        updateSubtotalTextCell({ editorRef, itemIndex, boqHeaderKey })
+        updateSubtotalTextCell({ editorRef, blockIndex, boqHeaderKey })
       }}
       style={subTotalTextCellStyle}
     />

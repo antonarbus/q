@@ -12,17 +12,17 @@ import { type FroalaEditorRef } from '@shared/types/froala'
 import { notify } from '@shared/ui/top_msg'
 
 type Props = {
-  itemIndex: number
+  blockIndex: number
   subTotalPriceEditorRef: FroalaEditorRef
   boqRowEditorRefs: BoqRowEditorRefs
 }
 
 export const validateBoqRowPrices = ({
-  itemIndex,
+  blockIndex,
   boqRowEditorRefs,
   subTotalPriceEditorRef,
 }: Props): void => {
-  const boqRows = getBoqRowsFromStore({ itemIndex })
+  const boqRows = getBoqRowsFromStore({ blockIndex })
   if (boqRows === undefined) return
 
   let didNotifyAboutInvalidPriceOnes = false
@@ -34,7 +34,7 @@ export const validateBoqRowPrices = ({
 
     const isPriceValid = isBoqRowPriceValid({
       html: priceCellEditorRef.price.current.html.get(),
-      itemIndex,
+      blockIndex,
       rowIndex,
     })
 
@@ -54,12 +54,12 @@ export const validateBoqRowPrices = ({
       updateBoqRowCellWithValue({
         boqRowCellKey: boqRowCellKey.price,
         editor: priceCellEditorRef.price.current,
-        itemIndex,
+        blockIndex,
         rowIndex,
         value: newPriceValueRounded,
       })
 
-      const rows = getBoqRowsFromStore({ itemIndex })
+      const rows = getBoqRowsFromStore({ blockIndex })
       if (rows === undefined) return
 
       const subTotalPriceValueNew: number = rows.reduce(
@@ -73,7 +73,7 @@ export const validateBoqRowPrices = ({
       const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
 
       updateSubTotalPriceWithValue({
-        itemIndex,
+        blockIndex,
         subTotalPriceEditor: subTotalPriceEditorRef.current,
         value: subTotalPriceValueNewRounded,
         incrementally: false,

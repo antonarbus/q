@@ -3,7 +3,7 @@ import { Box, type SxProps } from '@mui/material'
 import { useRef, type MouseEvent } from 'react'
 import { type FroalaEditor, type FroalaEditorRef } from '@shared/types/froala'
 import { FroalaProvider } from '../../providers/FroalaProvider'
-import { useItem } from '../../providers/ItemProvider'
+import { useBlock } from '../../providers/BlockProvider'
 import { isFroalaSignal } from '../../signals/isFroalaSignal'
 import { EditableHtml } from './EditableHtml'
 import { placeCaretAtTheEndIfToolbarIsNotShown } from './placeCaretAtTheEndIfToolbarIsNotShown'
@@ -53,11 +53,11 @@ export const Froala = ({
   beforeUpload,
 }: FroalaProps): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
-  const { itemIndex } = useItem()
+  const { blockIndex } = useBlock()
   const { froalaHeightRef } = useFixedHeightForAnimation({ froalaElementRef })
 
   const isBlockFroala = useSelectorTyped(
-    (state) => state.quotation.blocks[itemIndex]?.isFroala ?? true,
+    (state) => state.quotation.blocks[blockIndex]?.isFroala ?? true,
   )
   // todo: disabled viewport observer for time being otherwise total price being out of view is not calculated and pdf produces incorrect file, maybe we do not even need it
   // const { observerRef, isInsideViewPort } = useViewPortObserver()

@@ -11,7 +11,7 @@ import { getBoqBlockFromStore } from '../redux/getters/getBoqBlockFromStore'
 import { quotationSlice } from '../redux/quotationSlice'
 
 type Props = {
-  itemIndex: number
+  blockIndex: number
   subTotalPriceEditor: FroalaEditor | null
   value: number
   incrementally: boolean
@@ -22,7 +22,7 @@ type Res = {
 }
 
 export const updateSubTotalPriceWithValue = ({
-  itemIndex,
+  blockIndex,
   subTotalPriceEditor,
   value,
   incrementally,
@@ -33,7 +33,7 @@ export const updateSubTotalPriceWithValue = ({
     }
   }
 
-  const boqBlock = getBoqBlockFromStore({ itemIndex })
+  const boqBlock = getBoqBlockFromStore({ blockIndex })
   if (boqBlock === undefined) {
     return {
       didChange: false,
@@ -66,7 +66,7 @@ export const updateSubTotalPriceWithValue = ({
 
   dispatch(
     quotationSlice.actions.updateSubTotalPriceReducer({
-      itemIndex,
+      blockIndex,
       html: updatedHtml,
       value,
     }),

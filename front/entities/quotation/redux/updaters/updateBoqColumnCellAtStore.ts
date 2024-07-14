@@ -6,18 +6,18 @@ import { quotationSlice } from '../quotationSlice'
 
 type Props = {
   editorRef: FroalaEditorRef
-  itemIndex: number
+  blockIndex: number
   boqColumnKey: BoqColumnKey
 }
 
 export const updateBoqColumnCellAtStore = ({
   editorRef,
-  itemIndex,
+  blockIndex,
   boqColumnKey,
 }: Props): void => {
   if (editorRef.current === null) return
 
-  const boqBlock = getBoqBlockFromStore({ itemIndex })
+  const boqBlock = getBoqBlockFromStore({ blockIndex })
   if (boqBlock === undefined) return
 
   const prevHtml = boqBlock.boq.column[boqColumnKey].html
@@ -27,7 +27,7 @@ export const updateBoqColumnCellAtStore = ({
 
   dispatch(
     quotationSlice.actions.updateBoqColumnNameTextReducer({
-      itemIndex,
+      blockIndex,
       html,
       boqColumnKey,
     }),

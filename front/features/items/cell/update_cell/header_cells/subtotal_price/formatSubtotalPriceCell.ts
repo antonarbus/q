@@ -5,17 +5,17 @@ import { type FroalaEditorRef } from '@shared/types/froala'
 import { getStringWithNewFormattedNumber } from '@shared/utils'
 
 type Props = {
-  itemIndex: number
+  blockIndex: number
   subTotalPriceEditorRef: FroalaEditorRef
 }
 
 export const formatSubtotalPriceCell = ({
-  itemIndex,
+  blockIndex,
   subTotalPriceEditorRef,
 }: Props): void => {
   if (subTotalPriceEditorRef.current === null) return
 
-  const boqBlock = getBoqBlockFromStore({ itemIndex })
+  const boqBlock = getBoqBlockFromStore({ blockIndex })
   if (boqBlock === undefined) return
 
   const value = boqBlock.boq.header.subTotalPrice.value
@@ -35,7 +35,7 @@ export const formatSubtotalPriceCell = ({
 
   dispatch(
     quotationSlice.actions.updateSubTotalPriceReducer({
-      itemIndex,
+      blockIndex,
       html: newHtml,
       value: roundedValue,
     }),

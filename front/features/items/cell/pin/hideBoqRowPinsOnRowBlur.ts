@@ -9,13 +9,13 @@ import { cls } from '@shared/consts/cls'
 
 type Props = {
   e: FocusEvent<HTMLDivElement, Element>
-  itemIndex: number
+  blockIndex: number
   rowIndex: number
 }
 
 export const hideBoqRowPinsOnRowBlur = ({
   e,
-  itemIndex,
+  blockIndex,
   rowIndex,
 }: Props): void => {
   const elementReceivedFocus = e.relatedTarget
@@ -23,7 +23,7 @@ export const hideBoqRowPinsOnRowBlur = ({
 
   if (pinClicked) return
 
-  const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
+  const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
   if (boqRow === undefined) return
 
   const isItemPricePinShown = boqRow.itemPrice.pin.isShown
@@ -31,7 +31,7 @@ export const hideBoqRowPinsOnRowBlur = ({
   if (isItemPricePinShown) {
     dispatch(
       quotationSlice.actions.hideBoqRowCellPinReducer({
-        itemIndex,
+        blockIndex,
         rowIndex,
         boqRowCellKey: boqRowCellKey.itemPrice,
       }),
@@ -43,7 +43,7 @@ export const hideBoqRowPinsOnRowBlur = ({
   if (isQtyPinShown) {
     dispatch(
       quotationSlice.actions.hideBoqRowCellPinReducer({
-        itemIndex,
+        blockIndex,
         rowIndex,
         boqRowCellKey: boqRowCellKey.qty,
       }),

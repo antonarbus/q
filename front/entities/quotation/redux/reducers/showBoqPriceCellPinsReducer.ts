@@ -5,11 +5,11 @@ import { getBoqRowsFromState } from '../getters/getBoqRowsFromState'
 export const showBoqPriceCellPinsReducer = (
   state: Quotation,
   action: PayloadAction<{
-    itemIndex: number
+    blockIndex: number
   }>,
 ): void => {
-  const { itemIndex } = action.payload
-  const boqRows = getBoqRowsFromState({ itemIndex, state })
+  const { blockIndex } = action.payload
+  const boqRows = getBoqRowsFromState({ blockIndex, state })
   if (boqRows === undefined) return
   boqRows.forEach((boqRow) => {
     boqRow.price.pin.isShown = true

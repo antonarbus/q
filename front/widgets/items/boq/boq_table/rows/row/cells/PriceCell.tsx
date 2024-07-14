@@ -13,7 +13,7 @@ import {
 import {
   getBoqCellHtmlFromStore,
   useBoqItem,
-  useItem,
+  useBlock,
   useRow,
   Froala,
   boqRowCellStyle,
@@ -24,7 +24,7 @@ import {
 } from '@entities/quotation'
 
 export const PriceCell = (): JSX.Element => {
-  const { itemIndex } = useItem()
+  const { blockIndex } = useBlock()
   const {
     rowIndex,
     priceCellEditorRef,
@@ -33,7 +33,7 @@ export const PriceCell = (): JSX.Element => {
   } = useRow()
   const { subTotalPriceEditorRef, boqRowEditorRefs } = useBoqItem()
   const { stylesForResizableCell } = useStylesForResizableCell({
-    itemIndex,
+    blockIndex,
     boqColumnKey: boqColumnKey.price,
     minWidth: '100px',
   })
@@ -46,17 +46,17 @@ export const PriceCell = (): JSX.Element => {
         placeholder='Price...'
         htmlGetter={() =>
           getBoqCellHtmlFromStore({
-            itemIndex,
+            blockIndex,
             rowIndex,
             boqRowCellKey: boqRowCellKey.price,
           })
         }
         onFocus={() => {
-          showBoqRowPins({ itemIndex, rowIndex })
+          showBoqRowPins({ blockIndex, rowIndex })
         }}
         onContentChange={() => {
           updateBoqRowPriceCell({
-            itemIndex,
+            blockIndex,
             itemPriceCellEditorRef,
             priceCellEditorRef,
             qtyCellEditorRef,
@@ -65,9 +65,9 @@ export const PriceCell = (): JSX.Element => {
           })
         }}
         onBlur={() => {
-          formatBoqRowPriceCell({ rowIndex, priceCellEditorRef, itemIndex })
+          formatBoqRowPriceCell({ rowIndex, priceCellEditorRef, blockIndex })
           validateBoqRowPrice({
-            itemIndex,
+            blockIndex,
             priceCellEditorRef,
             rowIndex,
             subTotalPriceEditorRef,
@@ -83,7 +83,7 @@ export const PriceCell = (): JSX.Element => {
       <Pin
         boqRowCellKey={boqRowCellKey.price}
         onClick={() => {
-          pinBoqRowPriceCell({ itemIndex, rowIndex })
+          pinBoqRowPriceCell({ blockIndex, rowIndex })
         }}
       />
     </Box>

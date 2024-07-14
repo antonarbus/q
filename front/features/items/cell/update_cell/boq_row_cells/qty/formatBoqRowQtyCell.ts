@@ -3,17 +3,17 @@ import { type FroalaEditorRef } from '@shared/types/froala'
 
 type Props = {
   qtyCellEditorRef: FroalaEditorRef
-  itemIndex: number
+  blockIndex: number
   rowIndex: number
 }
 
 export const formatBoqRowQtyCell = ({
   qtyCellEditorRef,
-  itemIndex,
+  blockIndex,
   rowIndex,
 }: Props): void => {
   formatBoqRowCellNumber({
-    itemIndex,
+    blockIndex,
     rowIndex,
     boqRowCellKey: boqRowCellKey.qty,
     editorRef: qtyCellEditorRef,

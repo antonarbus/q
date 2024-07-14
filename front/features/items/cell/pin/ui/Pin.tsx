@@ -5,7 +5,7 @@ import { VscPinned } from 'react-icons/vsc'
 import {
   type BoqRowCellKey,
   selectBoqCellPin,
-  useItem,
+  useBlock,
   useRow,
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
@@ -16,10 +16,10 @@ type Props = {
 }
 
 export const Pin = ({ boqRowCellKey, onClick }: Props): ReactNode => {
-  const { itemIndex } = useItem()
+  const { blockIndex } = useBlock()
   const { rowIndex } = useRow()
   const pin = useSelectorTyped(
-    selectBoqCellPin({ itemIndex, rowIndex, boqRowCellKey }),
+    selectBoqCellPin({ blockIndex, rowIndex, boqRowCellKey }),
   )
 
   if (pin === undefined) return null

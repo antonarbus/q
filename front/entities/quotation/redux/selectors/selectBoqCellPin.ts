@@ -3,15 +3,15 @@ import type { BoqRowCellKey, BoqRowCellPin } from '../../types'
 import { getBoqRowFromStore } from '../getters/getBoqRowFromStore'
 
 type Props = {
-  itemIndex: number
+  blockIndex: number
   rowIndex: number
   boqRowCellKey: BoqRowCellKey
 }
 
 export const selectBoqCellPin =
-  ({ itemIndex, rowIndex, boqRowCellKey }: Props) =>
+  ({ blockIndex, rowIndex, boqRowCellKey }: Props) =>
   (state: RootState): BoqRowCellPin | undefined => {
-    const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
+    const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
     if (boqRow === undefined) return
     const boqRowCellPin = boqRow[boqRowCellKey].pin
     return boqRowCellPin

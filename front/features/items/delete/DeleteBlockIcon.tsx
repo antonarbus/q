@@ -8,13 +8,13 @@ import {
   isFroalaSignal,
   quotationSlice,
   selectIsLastBlock,
-  useItem,
+  useBlock,
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { fixElementDimensionStyle } from '@shared/utils/fixElementDimensionStyle'
 
 export const DeleteBlockIcon = (): EmotionJSX.Element => {
-  const { itemIndex } = useItem()
+  const { blockIndex } = useBlock()
 
   const isBlockAlone = useSelectorTyped(selectIsLastBlock)
   const isDeletable = useSelectorTyped((state) => state.copy.isDeletable)
@@ -35,7 +35,7 @@ export const DeleteBlockIcon = (): EmotionJSX.Element => {
       onClick={(e: MouseEvent): void => {
         if (disabled) return
 
-        const blockToDelete = getState().quotation.blocks[itemIndex]
+        const blockToDelete = getState().quotation.blocks[blockIndex]
 
         if (!blockToDelete) return
 

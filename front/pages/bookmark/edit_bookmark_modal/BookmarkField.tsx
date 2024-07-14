@@ -77,8 +77,8 @@ export const BookmarkField = (): ReactNode => {
     <BookmarkFieldLayout>
       <AnimatePresence initial={false}>
         <Block
-          item={firstBlock}
-          itemIndex={0}
+          block={firstBlock}
+          blockIndex={0}
         />
       </AnimatePresence>
     </BookmarkFieldLayout>

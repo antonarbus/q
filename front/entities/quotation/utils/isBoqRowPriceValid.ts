@@ -3,17 +3,17 @@ import { getNumberFromString, getTextContentFromHtml } from '@shared/utils'
 import { getBoqRowFromStore } from '../redux/getters/getBoqRowFromStore'
 
 type Props = {
-  itemIndex: number
+  blockIndex: number
   rowIndex: number
   html: string
 }
 
 export const isBoqRowPriceValid = ({
-  itemIndex,
+  blockIndex,
   rowIndex,
   html,
 }: Props): boolean => {
-  const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
+  const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
   if (boqRow === undefined) return true
   const priceValue = boqRow.price.value
   const calculatedPriceValue = boqRow.qty.value * boqRow.itemPrice.value

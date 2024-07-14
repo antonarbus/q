@@ -1,26 +1,26 @@
 import { AnimatePresence } from 'framer-motion'
 import { type ReactNode } from 'react'
-import { type Item as ItemType } from '@entities/quotation'
+import { type Block as BlockType } from '@entities/quotation'
 import { FadeInOnInitLoad } from './FadeInOnInitLoad'
 import { Block } from './Block'
 import { BlocksSortableContext } from './BlocksSortableContext'
 
 type Props = {
-  items: ItemType[]
+  blocks: BlockType[]
 }
 
-export const Blocks = ({ items }: Props): ReactNode => {
-  if (items.length === 0) return null
+export const Blocks = ({ blocks }: Props): ReactNode => {
+  if (blocks.length === 0) return null
 
   return (
     <FadeInOnInitLoad>
       <BlocksSortableContext>
         <AnimatePresence initial={false}>
-          {items.map((item, itemIndex) => (
+          {blocks.map((block, bockIndex) => (
             <Block
-              key={item.id}
-              item={item}
-              itemIndex={itemIndex}
+              key={block.id}
+              block={block}
+              blockIndex={bockIndex}
             />
           ))}
         </AnimatePresence>

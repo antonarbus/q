@@ -5,12 +5,12 @@ import { type Quotation } from '../../types'
 export const updateBlockTextReducer = (
   state: Quotation,
   action: PayloadAction<{
-    itemIndex: number
+    blockIndex: number
     html: string
   }>,
 ): void => {
-  const { itemIndex, html } = action.payload
-  const block = state.blocks[itemIndex]
+  const { blockIndex, html } = action.payload
+  const block = state.blocks[blockIndex]
 
   if (!block) return
   if (block.type !== itemKey.text) return

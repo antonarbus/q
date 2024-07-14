@@ -8,7 +8,7 @@ import {
 } from '@features/items/resize'
 import {
   selectColumnWidth,
-  useItem,
+  useBlock,
   type BoqColumnKey,
 } from '@entities/quotation'
 
@@ -27,9 +27,9 @@ export const ResizableColumn = ({
   boqColumnKey,
   minWidth,
 }: Props): JSX.Element => {
-  const { itemIndex } = useItem()
+  const { blockIndex } = useBlock()
   const colWidth = useSelectorTyped(
-    selectColumnWidth({ itemIndex, boqColumnKey }),
+    selectColumnWidth({ blockIndex, boqColumnKey }),
   )
   const isColWidthSetManually = colWidth !== undefined
 
@@ -65,21 +65,21 @@ export const ResizableColumn = ({
       onResizeStart={(event, direction, element): void => {
         onColumnResizeStart({
           headerColumnElement: element,
-          itemIndex,
+          blockIndex,
           boqColumnKey,
         })
       }}
       onResize={(event, direction, element, delta): void => {
         onColumnResize({
           headerColumnElement: element,
-          itemIndex,
+          blockIndex,
           boqColumnKey,
         })
       }}
       onResizeStop={(event, direction, element): void => {
         onColumnResizeStop({
           headerColumnElement: element,
-          itemIndex,
+          blockIndex,
           boqColumnKey,
         })
       }}

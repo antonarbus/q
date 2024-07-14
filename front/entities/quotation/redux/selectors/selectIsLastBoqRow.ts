@@ -2,13 +2,13 @@ import { type RootState } from '@lib_instances/store'
 import { getBoqRowsFromStore } from '../getters/getBoqRowsFromStore'
 
 type Props = {
-  itemIndex: number
+  blockIndex: number
 }
 
 export const selectIsLastBoqRow =
-  ({ itemIndex }: Props) =>
+  ({ blockIndex }: Props) =>
   (state: RootState): boolean => {
-    const boqRows = getBoqRowsFromStore({ itemIndex })
+    const boqRows = getBoqRowsFromStore({ blockIndex })
     if (boqRows === undefined) return false
     const isBoqRowAlone = boqRows.length === 1
     return isBoqRowAlone

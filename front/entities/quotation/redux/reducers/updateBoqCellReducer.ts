@@ -5,16 +5,16 @@ import type { BoqRowCellKey, Quotation } from '../../types'
 export const updateBoqCellReducer = (
   state: Quotation,
   action: PayloadAction<{
-    itemIndex: number
+    blockIndex: number
     rowIndex: number
     html: string
     value: number
     boqRowCellKey: BoqRowCellKey
   }>,
 ): void => {
-  const { itemIndex, rowIndex, html, value, boqRowCellKey } = action.payload
+  const { blockIndex, rowIndex, html, value, boqRowCellKey } = action.payload
 
-  const block = state.blocks[itemIndex]
+  const block = state.blocks[blockIndex]
 
   if (!block) return
 

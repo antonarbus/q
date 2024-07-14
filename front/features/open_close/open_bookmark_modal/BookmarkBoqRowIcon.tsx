@@ -6,7 +6,7 @@ import {
   boqRowKey,
   getBoqRowFromStore,
   quotationSlice,
-  useItem,
+  useBlock,
   useRow,
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
@@ -16,7 +16,7 @@ import { cleanHtml } from '@shared/utils/itemsUtils'
 
 export const BookmarkBoqRowIcon = (): ReactNode => {
   const navigate = useNavigate()
-  const { itemIndex } = useItem()
+  const { blockIndex } = useBlock()
   const { rowIndex } = useRow()
 
   return (
@@ -40,7 +40,7 @@ export const BookmarkBoqRowIcon = (): ReactNode => {
 
         dispatch(
           quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
-            itemIndex,
+            blockIndex,
             rowIndex,
             height: boqRowElement.clientHeight,
             width: boqRowElement.clientWidth,
@@ -50,7 +50,7 @@ export const BookmarkBoqRowIcon = (): ReactNode => {
         const html = boqRowElement.outerHTML
         const cleanedHtml = cleanHtml(html)
 
-        const boqRow = getBoqRowFromStore({ rowIndex, itemIndex })
+        const boqRow = getBoqRowFromStore({ rowIndex, blockIndex })
 
         if (!boqRow) return
         if (boqRow.type === boqRowKey.paste) return

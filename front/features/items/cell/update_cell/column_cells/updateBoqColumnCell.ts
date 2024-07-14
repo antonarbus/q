@@ -6,14 +6,14 @@ import { type FroalaEditorRef } from '@shared/types/froala'
 
 type Props = {
   editorRef: FroalaEditorRef
-  itemIndex: number
+  blockIndex: number
   boqColumnKey: BoqColumnKey
 }
 
 export const updateBoqColumnCell = ({
   editorRef,
-  itemIndex,
+  blockIndex,
   boqColumnKey,
 }: Props): void => {
-  updateBoqColumnCellAtStore({ editorRef, itemIndex, boqColumnKey })
+  updateBoqColumnCellAtStore({ editorRef, blockIndex, boqColumnKey })
 }

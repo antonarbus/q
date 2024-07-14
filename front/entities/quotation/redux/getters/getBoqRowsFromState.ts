@@ -2,15 +2,15 @@ import { type Quotation, type BoqRow } from '../../types'
 import { getBoqBlockFromState } from './getBoqBlockFromState'
 
 type Props = {
-  itemIndex: number
+  blockIndex: number
   state: Quotation
 }
 
 export const getBoqRowsFromState = ({
-  itemIndex,
+  blockIndex,
   state,
 }: Props): BoqRow[] | undefined => {
-  const boqBlock = getBoqBlockFromState({ itemIndex, state })
+  const boqBlock = getBoqBlockFromState({ blockIndex, state })
   if (boqBlock === undefined) return
   const boqRows = boqBlock.boq.rows
   return boqRows

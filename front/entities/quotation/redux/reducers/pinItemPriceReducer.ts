@@ -6,13 +6,13 @@ import { getBoqCellFromState } from '../getters/getBoqCellFromState'
 export const pinItemPriceReducer = (
   state: Quotation,
   action: PayloadAction<{
-    itemIndex: number
+    blockIndex: number
     rowIndex: number
   }>,
 ): void => {
-  const { itemIndex, rowIndex } = action.payload
+  const { blockIndex, rowIndex } = action.payload
   const itemPriceCell = getBoqCellFromState({
-    itemIndex,
+    blockIndex,
     rowIndex,
     boqRowCellKey: boqRowCellKey.itemPrice,
     state,
@@ -22,7 +22,7 @@ export const pinItemPriceReducer = (
   itemPriceCell.pin.isPinned = true
 
   const qtyCell = getBoqCellFromState({
-    itemIndex,
+    blockIndex,
     rowIndex,
     boqRowCellKey: boqRowCellKey.qty,
     state,

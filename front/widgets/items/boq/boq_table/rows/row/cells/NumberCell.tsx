@@ -2,16 +2,16 @@ import { Box } from '@mui/material'
 import {
   boqColumnKey,
   getNumberOfBoqBlocksAbove,
-  useItem,
+  useBlock,
   useRow,
   useStylesForResizableCell,
 } from '@entities/quotation'
 
 export const NumberCell = (): JSX.Element => {
-  const { itemIndex } = useItem()
+  const { blockIndex } = useBlock()
   const { rowIndex } = useRow()
   const { stylesForResizableCell } = useStylesForResizableCell({
-    itemIndex,
+    blockIndex,
     boqColumnKey: boqColumnKey.number,
     minWidth: '30px',
   })
@@ -26,7 +26,7 @@ export const NumberCell = (): JSX.Element => {
         paddingBottom: '2px',
       }}
     >
-      {getNumberOfBoqBlocksAbove({ itemIndex }) + 1}.{rowIndex + 1}
+      {getNumberOfBoqBlocksAbove({ blockIndex }) + 1}.{rowIndex + 1}
     </Box>
   )
 }

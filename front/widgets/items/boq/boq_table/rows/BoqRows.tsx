@@ -5,7 +5,7 @@ import {
   boqRowsShapeEqualityFn,
   selectBoqRows,
   RowProvider,
-  useItem,
+  useBlock,
   boqRowKey,
 } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
@@ -17,9 +17,9 @@ import { BoqRowAnimate } from './row/BoqRowAnimate'
 import { BoqRowSortable } from './row/BoqRowSortable'
 
 export const BoqRows = (): JSX.Element => {
-  const { itemIndex } = useItem()
+  const { blockIndex } = useBlock()
   const boqRows = useSelectorTyped(
-    selectBoqRows({ itemIndex }),
+    selectBoqRows({ blockIndex }),
     boqRowsShapeEqualityFn,
   )
 
@@ -39,7 +39,7 @@ export const BoqRows = (): JSX.Element => {
                     <BoqRowSortable>
                       <BoqRow
                         onBlur={(e) => {
-                          hideBoqRowPinsOnRowBlur({ e, itemIndex, rowIndex })
+                          hideBoqRowPinsOnRowBlur({ e, blockIndex, rowIndex })
                         }}
                       />
                     </BoqRowSortable>

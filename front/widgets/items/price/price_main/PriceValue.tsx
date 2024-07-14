@@ -5,7 +5,7 @@ import {
   validateTotalPrice,
 } from '@features/items/cell/update_cell'
 import {
-  useItem,
+  useBlock,
   Froala,
   getPriceBlockHtmlFromStore,
 } from '@entities/quotation'
@@ -13,22 +13,25 @@ import { type FroalaEditor } from '@shared/types/froala'
 
 export const PriceValue = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
-  const { itemIndex } = useItem()
-  useUpdateTotalPriceIfPricesAboveWereChanged({ itemIndex, editorRef })
+  const { blockIndex } = useBlock()
+  useUpdateTotalPriceIfPricesAboveWereChanged({
+    blockIndex,
+    editorRef,
+  })
 
   return (
     <Froala
       editorRef={editorRef}
       placeholder='Total price...'
-      htmlGetter={() => getPriceBlockHtmlFromStore({ itemIndex })}
+      htmlGetter={() => getPriceBlockHtmlFromStore({ blockIndex })}
       onContentChange={() => {
-        updatePriceValueCell({ editorRef, itemIndex })
+        updatePriceValueCell({ editorRef, blockIndex })
       }}
       onBlur={() => {
-        validateTotalPrice({ editorRef, itemIndex })
+        validateTotalPrice({ editorRef, blockIndex })
       }}
       onInitialized={() => {
-        validateTotalPrice({ editorRef, itemIndex })
+        validateTotalPrice({ editorRef, blockIndex })
       }}
     />
   )

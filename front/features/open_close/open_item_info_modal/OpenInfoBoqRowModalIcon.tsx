@@ -4,14 +4,14 @@ import { useNavigate } from 'react-router-dom'
 import {
   boqRowKey,
   getBoqRowFromStore,
-  useItem,
+  useBlock,
   useRow,
 } from '@entities/quotation'
 import { route } from '@shared/consts/route'
 
 export const OpenInfoBoqRowModalIcon = (): ReactNode => {
   const navigate = useNavigate()
-  const { itemIndex } = useItem()
+  const { blockIndex } = useBlock()
   const { rowIndex } = useRow()
 
   return (
@@ -19,7 +19,7 @@ export const OpenInfoBoqRowModalIcon = (): ReactNode => {
       className='open-info-boq-row-modal-icon'
       tabIndex={-1}
       onClick={(e: MouseEvent): void => {
-        const boqRow = getBoqRowFromStore({ rowIndex, itemIndex })
+        const boqRow = getBoqRowFromStore({ rowIndex, blockIndex })
 
         if (!boqRow) return
         if (boqRow.type === boqRowKey.paste) return

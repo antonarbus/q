@@ -5,13 +5,13 @@ import { getBoqBlockFromState } from '../getters/getBoqBlockFromState'
 export const updateSubTotalPriceReducer = (
   state: Quotation,
   action: PayloadAction<{
-    itemIndex: number
+    blockIndex: number
     value: number
     html: string
   }>,
 ): void => {
-  const { itemIndex, html, value } = action.payload
-  const boqBlock = getBoqBlockFromState({ itemIndex, state })
+  const { blockIndex, html, value } = action.payload
+  const boqBlock = getBoqBlockFromState({ blockIndex, state })
 
   if (boqBlock === undefined) return
 

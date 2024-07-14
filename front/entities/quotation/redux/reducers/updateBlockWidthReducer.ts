@@ -4,12 +4,12 @@ import { type Quotation } from '../../types'
 export const updateBlockWidthReducer = (
   state: Quotation,
   action: PayloadAction<{
-    itemIndex: number
+    blockIndex: number
     width: number
   }>,
 ): void => {
-  const { itemIndex, width } = action.payload
-  const block = state.blocks[itemIndex]
+  const { blockIndex, width } = action.payload
+  const block = state.blocks[blockIndex]
 
   if (!block) return
 

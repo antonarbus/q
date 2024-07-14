@@ -3,7 +3,7 @@ import { useUpdateEffect } from 'react-use'
 import { roundTo } from 'round-to'
 import {
   useBoqItem,
-  useItem,
+  useBlock,
   getBoqRowsFromStore,
   type BoqRow,
   updateSubTotalPriceWithValue,
@@ -11,17 +11,17 @@ import {
 } from '@entities/quotation'
 
 export const useUpdateSubtotalPrice = (): void => {
-  const { itemIndex } = useItem()
+  const { blockIndex } = useBlock()
   const { subTotalPriceEditorRef } = useBoqItem()
   const isBlockFroala = useSelectorTyped(
-    (state) => state.quotation.blocks[itemIndex]?.isFroala,
+    (state) => state.quotation.blocks[blockIndex]?.isFroala,
   )
 
   useUpdateEffect(() => {
     if (!isFroalaSignal.value) return
     if (!isBlockFroala) return
 
-    const boqRows = getBoqRowsFromStore({ itemIndex })
+    const boqRows = getBoqRowsFromStore({ blockIndex })
 
     if (boqRows === undefined) return
 
@@ -37,7 +37,7 @@ export const useUpdateSubtotalPrice = (): void => {
 
     setTimeout(() => {
       updateSubTotalPriceWithValue({
-        itemIndex,
+        blockIndex,
         subTotalPriceEditor: subTotalPriceEditorRef.current,
         value: subTotalPriceValueNewRounded,
         incrementally: true,

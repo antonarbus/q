@@ -3,7 +3,7 @@ import { updateBoqColumnCell } from '@features/items/cell/update_cell'
 import {
   Froala,
   getBoqColumnHtmlFromStore,
-  useItem,
+  useBlock,
   columnHeaderStyle,
   boqColumnKey,
 } from '@entities/quotation'
@@ -12,7 +12,7 @@ import { ResizableColumn } from '../ResizableColumn'
 
 export const QtyColumn = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
-  const { itemIndex } = useItem()
+  const { blockIndex } = useBlock()
 
   return (
     <ResizableColumn
@@ -26,14 +26,14 @@ export const QtyColumn = (): JSX.Element => {
         placeholder='Qty...'
         htmlGetter={() =>
           getBoqColumnHtmlFromStore({
-            itemIndex,
+            blockIndex,
             boqColumnKey: boqColumnKey.qty,
           })
         }
         onContentChange={() => {
           updateBoqColumnCell({
             editorRef,
-            itemIndex,
+            blockIndex,
             boqColumnKey: boqColumnKey.qty,
           })
         }}

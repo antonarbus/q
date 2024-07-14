@@ -10,41 +10,41 @@ import { cls } from '@shared/consts/cls'
 
 type Props = {
   headerColumnElement: HTMLElement
-  itemIndex: number
+  blockIndex: number
   boqColumnKey: BoqColumnKey
 }
 
 export const onColumnResizeStart = ({
   headerColumnElement,
-  itemIndex,
+  blockIndex,
   boqColumnKey,
 }: Props): void => {
   unfixImagesHeight()
   const width = headerColumnElement.clientWidth
-  dispatch(quotationSlice.actions.disableFroalaReducer({ itemIndex }))
+  dispatch(quotationSlice.actions.disableFroalaReducer({ blockIndex }))
   dispatch(
     quotationSlice.actions.updateColWidthReducer({
-      itemIndex,
+      blockIndex,
       width,
       boqColumnKey,
     }),
   )
-  dispatch(quotationSlice.actions.hideBoqItemPinsReducer({ itemIndex }))
+  dispatch(quotationSlice.actions.hideBoqItemPinsReducer({ blockIndex }))
 }
 
 export const onColumnResize = ({
   headerColumnElement,
-  itemIndex,
+  blockIndex,
   boqColumnKey,
 }: Props): void => {
   const width = headerColumnElement.clientWidth
-  const column = getBoqColumnFromStore({ itemIndex, boqColumnKey })
+  const column = getBoqColumnFromStore({ blockIndex, boqColumnKey })
   if (column === undefined) return
   const didWidthChange = column.width !== width
   if (!didWidthChange) return
   dispatch(
     quotationSlice.actions.updateColWidthReducer({
-      itemIndex,
+      blockIndex,
       width,
       boqColumnKey,
     }),
@@ -53,14 +53,14 @@ export const onColumnResize = ({
 
 export const onColumnResizeStop = ({
   headerColumnElement,
-  itemIndex,
+  blockIndex,
   boqColumnKey,
 }: Props): void => {
   fixImagesHeight()
   const columnWidth = headerColumnElement.clientWidth
   dispatch(
     quotationSlice.actions.updateColWidthReducer({
-      itemIndex,
+      blockIndex,
       width: columnWidth,
       boqColumnKey,
     }),
@@ -68,9 +68,9 @@ export const onColumnResizeStop = ({
   const itemWidth = headerColumnElement.closest(`.${cls.paper}`)?.clientWidth
   dispatch(
     quotationSlice.actions.updateBlockWidthReducer({
-      itemIndex,
+      blockIndex,
       width: itemWidth ?? 0,
     }),
   )
-  dispatch(quotationSlice.actions.enableFroalaReducer({ itemIndex }))
+  dispatch(quotationSlice.actions.enableFroalaReducer({ blockIndex }))
 }

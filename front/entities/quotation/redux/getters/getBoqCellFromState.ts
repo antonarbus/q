@@ -6,19 +6,19 @@ import {
 import { getBoqRowFromState } from './getBoqRowFromState'
 
 type Props = {
-  itemIndex: number
+  blockIndex: number
   rowIndex: number
   boqRowCellKey: BoqRowCellKey
   state: Quotation
 }
 
 export const getBoqCellFromState = ({
-  itemIndex,
+  blockIndex,
   rowIndex,
   boqRowCellKey,
   state,
 }: Props): BoqRowCell | undefined => {
-  const boqRow = getBoqRowFromState({ itemIndex, rowIndex, state })
+  const boqRow = getBoqRowFromState({ blockIndex, rowIndex, state })
   if (boqRow === undefined) return
   const boqRowCell = boqRow[boqRowCellKey]
   return boqRowCell

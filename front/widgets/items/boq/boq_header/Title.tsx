@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { updateTitleCell } from '@features/items/cell/update_cell'
 import {
   getBoqHeaderHtmlFromStore,
-  useItem,
+  useBlock,
   Froala,
   titleCellStyle,
   type BoqHeaderKey,
@@ -13,15 +13,15 @@ const boqHeaderKey: BoqHeaderKey = 'title'
 
 export const Title = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
-  const { itemIndex } = useItem()
+  const { blockIndex } = useBlock()
 
   return (
     <Froala
       editorRef={editorRef}
       placeholder='Title...'
-      htmlGetter={() => getBoqHeaderHtmlFromStore({ itemIndex, boqHeaderKey })}
+      htmlGetter={() => getBoqHeaderHtmlFromStore({ blockIndex, boqHeaderKey })}
       onContentChange={() => {
-        updateTitleCell({ editorRef, itemIndex, boqHeaderKey })
+        updateTitleCell({ editorRef, blockIndex, boqHeaderKey })
       }}
       style={titleCellStyle}
     />

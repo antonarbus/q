@@ -8,17 +8,17 @@ import {
   isFroalaSignal,
   quotationSlice,
   selectIsLastBoqRow,
-  useItem,
+  useBlock,
   useRow,
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { cleanHtml } from '@shared/utils/itemsUtils'
 
 export const CutBoqRowIcon = (): JSX.Element => {
-  const { itemIndex } = useItem()
+  const { blockIndex } = useBlock()
   const { rowIndex } = useRow()
   const isCopyable = useSelectorTyped((state) => state.copy.isCopyable)
-  const isLastBoqRow = useSelectorTyped(selectIsLastBoqRow({ itemIndex }))
+  const isLastBoqRow = useSelectorTyped(selectIsLastBoqRow({ blockIndex }))
   const isDeletable = useSelectorTyped((state) => state.copy.isDeletable)
   const disabled = isLastBoqRow || !isDeletable || !isCopyable
 
@@ -44,7 +44,7 @@ export const CutBoqRowIcon = (): JSX.Element => {
 
         dispatch(
           quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
-            itemIndex,
+            blockIndex,
             rowIndex,
             height: boqRowElement.clientHeight,
             width: boqRowElement.clientWidth,
@@ -54,7 +54,7 @@ export const CutBoqRowIcon = (): JSX.Element => {
         const html = boqRowElement.outerHTML
         const cleanedHtml = cleanHtml(html)
 
-        const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
+        const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
         if (boqRow === undefined) return
 
         const item = structuredClone(boqRow)
@@ -69,7 +69,7 @@ export const CutBoqRowIcon = (): JSX.Element => {
         }
 
         dispatch(
-          quotationSlice.actions.deleteBoqRowReducer({ itemIndex, rowIndex }),
+          quotationSlice.actions.deleteBoqRowReducer({ blockIndex, rowIndex }),
         )
         dispatch(copySlice.actions.forbidAllActions())
 

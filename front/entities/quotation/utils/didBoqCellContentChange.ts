@@ -4,7 +4,7 @@ import { type BoqRowCellKey } from '../types'
 
 type Props = {
   editor: FroalaEditor
-  itemIndex: number
+  blockIndex: number
   rowIndex: number
   boqRowCellKey: BoqRowCellKey
 }
@@ -14,13 +14,13 @@ type Props = {
 
 export const didBoqCellContentChange = ({
   editor,
-  itemIndex,
+  blockIndex,
   rowIndex,
   boqRowCellKey,
 }: Props): boolean => {
   const htmlOnDisplay = editor.html.get()
   const htmlFromStore = getBoqCellFromStore({
-    itemIndex,
+    blockIndex,
     rowIndex,
     boqRowCellKey,
   })?.html

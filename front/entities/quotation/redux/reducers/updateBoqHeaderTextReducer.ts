@@ -5,14 +5,14 @@ import type { BoqHeaderKey, Quotation } from '../../types'
 export const updateBoqHeaderTextReducer = (
   state: Quotation,
   action: PayloadAction<{
-    itemIndex: number
+    blockIndex: number
     html: string
     value: number
     boqHeaderKey: BoqHeaderKey
   }>,
 ): void => {
-  const { itemIndex, html, boqHeaderKey, value } = action.payload
-  const block = state.blocks[itemIndex]
+  const { blockIndex, html, boqHeaderKey, value } = action.payload
+  const block = state.blocks[blockIndex]
 
   if (!block) return
   if (block.type !== itemKey.boq) return

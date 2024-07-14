@@ -4,11 +4,11 @@ import { type Quotation } from '../../types'
 export const disableFroalaReducer = (
   state: Quotation,
   action: PayloadAction<{
-    itemIndex: number
+    blockIndex: number
   }>,
 ): void => {
-  const { itemIndex } = action.payload
-  const block = state.blocks[itemIndex]
+  const { blockIndex } = action.payload
+  const block = state.blocks[blockIndex]
   if (block === undefined) return
   block.isFroala = false
 }

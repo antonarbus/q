@@ -5,11 +5,11 @@ import { getBoqRowsFromState } from '../getters/getBoqRowsFromState'
 export const hideBoqItemPinsReducer = (
   state: Quotation,
   action: PayloadAction<{
-    itemIndex: number
+    blockIndex: number
   }>,
 ): void => {
-  const { itemIndex } = action.payload
-  const boqRowRows = getBoqRowsFromState({ itemIndex, state })
+  const { blockIndex } = action.payload
+  const boqRowRows = getBoqRowsFromState({ blockIndex, state })
   if (boqRowRows === undefined) return
 
   boqRowRows.forEach((boqRow) => {

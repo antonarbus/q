@@ -10,14 +10,14 @@ import {
   BlockComp,
   getTextBlockHtmlFromStore,
   textItemCellStyle,
-  useItem,
+  useBlock,
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { type FroalaEditor } from '@shared/types/froala'
 
 export const TextBlockForEditModal = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
-  const { itemIndex } = useItem()
+  const { blockIndex } = useBlock()
 
   return (
     <BlockComp
@@ -29,12 +29,12 @@ export const TextBlockForEditModal = (): JSX.Element => {
     >
       <Froala
         editorRef={editorRef}
-        htmlGetter={() => getTextBlockHtmlFromStore({ itemIndex })}
+        htmlGetter={() => getTextBlockHtmlFromStore({ blockIndex })}
         placeholder='Add text, tables, drop images, files, links, select to format...'
         beforeUpload={beforeUpload}
         style={textItemCellStyle}
         onContentChange={() => {
-          updateTextBlock({ editorRef, itemIndex })
+          updateTextBlock({ editorRef, blockIndex })
         }}
       />
     </BlockComp>

@@ -5,13 +5,13 @@ import type { BoqColumnKey, Quotation } from '../../types'
 export const updateColWidthReducer = (
   state: Quotation,
   action: PayloadAction<{
-    itemIndex: number
+    blockIndex: number
     width: number
     boqColumnKey: BoqColumnKey
   }>,
 ): void => {
-  const { itemIndex, width, boqColumnKey } = action.payload
-  const block = state.blocks[itemIndex]
+  const { blockIndex, width, boqColumnKey } = action.payload
+  const block = state.blocks[blockIndex]
 
   if (!block) return
   if (block.type !== itemKey.boq) return

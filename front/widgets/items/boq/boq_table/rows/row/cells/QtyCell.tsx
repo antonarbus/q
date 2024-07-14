@@ -7,7 +7,7 @@ import {
 } from '@features/items/cell/update_cell'
 import {
   getBoqCellHtmlFromStore,
-  useItem,
+  useBlock,
   useRow,
   useBoqItem,
   Froala,
@@ -19,11 +19,11 @@ import {
 } from '@entities/quotation'
 
 export const QtyCell = (): JSX.Element => {
-  const { itemIndex } = useItem()
+  const { blockIndex } = useBlock()
   const { subTotalPriceEditorRef } = useBoqItem()
   const { rowIndex, qtyCellEditorRef, priceCellEditorRef } = useRow()
   const { stylesForResizableCell } = useStylesForResizableCell({
-    itemIndex,
+    blockIndex,
     boqColumnKey: boqColumnKey.qty,
     minWidth: '100px',
   })
@@ -36,14 +36,14 @@ export const QtyCell = (): JSX.Element => {
         placeholder='Qty...'
         htmlGetter={() =>
           getBoqCellHtmlFromStore({
-            itemIndex,
+            blockIndex,
             rowIndex,
             boqRowCellKey: boqRowCellKey.qty,
           })
         }
         onContentChange={() => {
           updateBoqRowQtyCell({
-            itemIndex,
+            blockIndex,
             priceCellEditorRef,
             qtyCellEditorRef,
             rowIndex,
@@ -51,7 +51,7 @@ export const QtyCell = (): JSX.Element => {
           })
         }}
         onBlur={() => {
-          formatBoqRowQtyCell({ itemIndex, qtyCellEditorRef, rowIndex })
+          formatBoqRowQtyCell({ blockIndex, qtyCellEditorRef, rowIndex })
         }}
         onKeydown={(e) => {
           tabFromQtyCell({ e, rowIndex, priceCellEditorRef })
@@ -63,7 +63,7 @@ export const QtyCell = (): JSX.Element => {
       <Pin
         boqRowCellKey={boqRowCellKey.qty}
         onClick={() => {
-          pinBoqRowQtyCell({ itemIndex, rowIndex })
+          pinBoqRowQtyCell({ blockIndex, rowIndex })
         }}
       />
     </Box>

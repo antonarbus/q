@@ -2,11 +2,11 @@ import { getState } from '@lib_instances/store'
 import { itemKey } from '../../consts/itemKey'
 
 type Props = {
-  itemIndex: number
+  blockIndex: number
 }
 
-export const getTextBlockHtmlFromStore = ({ itemIndex }: Props): string => {
-  const block = getState().quotation.blocks[itemIndex]
+export const getTextBlockHtmlFromStore = ({ blockIndex }: Props): string => {
+  const block = getState().quotation.blocks[blockIndex]
 
   if (!block) return ''
   if (block.type !== itemKey.text) return ''

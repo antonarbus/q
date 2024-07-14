@@ -4,13 +4,16 @@ import { type FroalaEditorRef } from '@shared/types/froala'
 
 type Props = {
   editorRef: FroalaEditorRef
-  itemIndex: number
+  blockIndex: number
 }
 
-export const updatePriceTitleCell = ({ editorRef, itemIndex }: Props): void => {
+export const updatePriceTitleCell = ({
+  editorRef,
+  blockIndex,
+}: Props): void => {
   if (editorRef.current === null) return
 
-  const priceBlock = getState().quotation.blocks[itemIndex]
+  const priceBlock = getState().quotation.blocks[blockIndex]
   if (priceBlock?.type !== itemKey.price) return
 
   const prevHtml = priceBlock.title.html
@@ -19,5 +22,5 @@ export const updatePriceTitleCell = ({ editorRef, itemIndex }: Props): void => {
 
   if (!didTextChange) return
 
-  dispatch(quotationSlice.actions.updatePriceTitleReducer({ itemIndex, html }))
+  dispatch(quotationSlice.actions.updatePriceTitleReducer({ blockIndex, html }))
 }

@@ -16,22 +16,22 @@ import type {
 let initDescriptionColumnWidth = 0 // can be global var for different boqItems as we can change width of one item at a time
 
 export const onBoqBlockResizeStart: OnItemResizeStart = ({
-  itemIndex,
+  blockIndex,
   e,
   dir,
   elementRef: itemElement,
 }) => {
   unfixImagesHeight()
-  dispatch(quotationSlice.actions.disableFroalaReducer({ itemIndex }))
-  dispatch(quotationSlice.actions.hideBoqItemPinsReducer({ itemIndex }))
+  dispatch(quotationSlice.actions.disableFroalaReducer({ blockIndex }))
+  dispatch(quotationSlice.actions.hideBoqItemPinsReducer({ blockIndex }))
 
   initDescriptionColumnWidth =
-    (getState().quotation.blocks[itemIndex] as BoqBlock).boq.column.description
+    (getState().quotation.blocks[blockIndex] as BoqBlock).boq.column.description
       .width ?? 0
 }
 
 export const onBoqBlockResize: OnItemResize = ({
-  itemIndex,
+  blockIndex,
   e,
   direction,
   elementRef: itemElement,
@@ -40,7 +40,7 @@ export const onBoqBlockResize: OnItemResize = ({
   const width = initDescriptionColumnWidth + delta.width
 
   const descriptionColumn = getBoqColumnFromStore({
-    itemIndex,
+    blockIndex,
     boqColumnKey: boqColumnKey.description,
   })
   if (descriptionColumn === undefined) return
@@ -49,7 +49,7 @@ export const onBoqBlockResize: OnItemResize = ({
 
   dispatch(
     quotationSlice.actions.updateColWidthReducer({
-      itemIndex,
+      blockIndex,
       boqColumnKey: boqColumnKey.description,
       width,
     }),
@@ -57,7 +57,7 @@ export const onBoqBlockResize: OnItemResize = ({
 }
 
 export const onBoqBlockResizeStop: OnItemResizeStop = ({
-  itemIndex,
+  blockIndex,
   e,
   direction,
   elementRef: itemElement,
@@ -70,20 +70,20 @@ export const onBoqBlockResizeStop: OnItemResizeStop = ({
   const width = descriptionHeaderElement.clientWidth
   dispatch(
     quotationSlice.actions.updateColWidthReducer({
-      itemIndex,
+      blockIndex,
       boqColumnKey: boqColumnKey.description,
       width,
     }),
   )
-  dispatch(quotationSlice.actions.enableFroalaReducer({ itemIndex }))
+  dispatch(quotationSlice.actions.enableFroalaReducer({ blockIndex }))
 
   const itemWidth = itemElement.clientWidth
-  const prevItemWidth = getState().quotation.blocks[itemIndex]?.width
+  const prevItemWidth = getState().quotation.blocks[blockIndex]?.width
 
   if (itemWidth !== prevItemWidth) {
     dispatch(
       quotationSlice.actions.updateBlockWidthReducer({
-        itemIndex,
+        blockIndex,
         width: itemWidth,
       }),
     )

@@ -9,14 +9,14 @@ import {
   quotationSlice,
   saveBlockHeightByIndex,
   selectIsLastBlock,
-  useItem,
+  useBlock,
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { fixElementDimensionStyle } from '@shared/utils/fixElementDimensionStyle'
 import { cleanHtml } from '@shared/utils/itemsUtils'
 
 export const CutBlockIcon = (): JSX.Element => {
-  const { itemIndex } = useItem()
+  const { blockIndex } = useBlock()
   const isBlockAlone = useSelectorTyped(selectIsLastBlock)
   const isCuttable = useSelectorTyped((state) => state.copy.isCuttable)
   const disabled = isBlockAlone || !isCuttable
@@ -32,9 +32,9 @@ export const CutBlockIcon = (): JSX.Element => {
       onClick={(e: MouseEvent): void => {
         if (disabled) return
 
-        saveBlockHeightByIndex({ blockIndex: itemIndex })
+        saveBlockHeightByIndex({ blockIndex })
 
-        const blockToCut = getState().quotation.blocks[itemIndex]
+        const blockToCut = getState().quotation.blocks[blockIndex]
         if (!blockToCut) return
         if (blockToCut.type === itemKey.paste) return
 

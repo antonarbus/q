@@ -6,7 +6,7 @@ import {
   getBoqRowFromStore,
   isFroalaSignal,
   quotationSlice,
-  useItem,
+  useBlock,
   useRow,
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
@@ -14,7 +14,7 @@ import { cleanHtml } from '@shared/utils/itemsUtils'
 
 export const CopyBoqRowIcon = (): JSX.Element => {
   const { rowIndex } = useRow()
-  const { itemIndex } = useItem()
+  const { blockIndex } = useBlock()
   const isCopyable = useSelectorTyped((state) => state.copy.isCopyable)
   const disabled = !isCopyable
 
@@ -37,7 +37,7 @@ export const CopyBoqRowIcon = (): JSX.Element => {
 
         dispatch(
           quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
-            itemIndex,
+            blockIndex,
             rowIndex,
             height: boqRowElement.clientHeight,
             width: boqRowElement.clientWidth,
@@ -47,7 +47,7 @@ export const CopyBoqRowIcon = (): JSX.Element => {
         const html = boqRowElement.outerHTML
         const cleanedHtml = cleanHtml(html)
 
-        const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
+        const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
         if (boqRow === undefined) return
 
         const item = structuredClone(boqRow)

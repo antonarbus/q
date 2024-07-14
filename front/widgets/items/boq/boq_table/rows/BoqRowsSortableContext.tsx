@@ -11,7 +11,7 @@ import { onBoqRowDragEnd, onBoqRowDragStart } from '@features/items/drag'
 import {
   boqRowsShapeEqualityFn,
   selectBoqRows,
-  useItem,
+  useBlock,
 } from '@entities/quotation'
 
 type Props = {
@@ -19,10 +19,10 @@ type Props = {
 }
 
 export const BoqRowsSortableContext = ({ children }: Props): JSX.Element => {
-  const { itemIndex } = useItem()
+  const { blockIndex } = useBlock()
 
   const boqRows = useSelectorTyped(
-    selectBoqRows({ itemIndex }),
+    selectBoqRows({ blockIndex }),
     boqRowsShapeEqualityFn,
   )
   const boqRowIds = boqRows.map((boqRow) => boqRow.id)
@@ -34,8 +34,8 @@ export const BoqRowsSortableContext = ({ children }: Props): JSX.Element => {
       sensors={sensors}
       autoScroll={{ layoutShiftCompensation: false }}
       collisionDetection={closestCenter}
-      onDragStart={onBoqRowDragStart({ itemIndex })}
-      onDragEnd={onBoqRowDragEnd({ itemIndex, boqRowIds })}
+      onDragStart={onBoqRowDragStart({ blockIndex })}
+      onDragEnd={onBoqRowDragEnd({ blockIndex, boqRowIds })}
     >
       <SortableContext
         items={boqRowIds}

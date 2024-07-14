@@ -16,7 +16,7 @@ type Props = {
   itemPriceCellEditorRef: MutableRefObject<FroalaEditor | null>
   priceCellEditorRef: MutableRefObject<FroalaEditor | null>
   subTotalPriceEditorRef: MutableRefObject<FroalaEditor | null>
-  itemIndex: number
+  blockIndex: number
   rowIndex: number
 }
 
@@ -24,14 +24,14 @@ export const updateBoqRowItemPriceCell = ({
   itemPriceCellEditorRef,
   priceCellEditorRef,
   subTotalPriceEditorRef,
-  itemIndex,
+  blockIndex,
   rowIndex,
 }: Props): void => {
   if (itemPriceCellEditorRef.current === null) return
 
   const didContentChange = didBoqCellContentChange({
     editor: itemPriceCellEditorRef.current,
-    itemIndex,
+    blockIndex,
     rowIndex,
     boqRowCellKey: boqRowCellKey.itemPrice,
   })
@@ -39,13 +39,13 @@ export const updateBoqRowItemPriceCell = ({
   if (!didContentChange) return
 
   updateBoqRowCellAtStore({
-    itemIndex,
+    blockIndex,
     rowIndex,
     boqRowCellKey: boqRowCellKey.itemPrice,
     html: itemPriceCellEditorRef.current.html.get(),
   })
 
-  const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
+  const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
   if (boqRow === undefined) return
 
   const newPriceValue = boqRow.qty.value * boqRow.itemPrice.value
@@ -54,12 +54,12 @@ export const updateBoqRowItemPriceCell = ({
   updateBoqRowCellWithValue({
     boqRowCellKey: boqRowCellKey.price,
     editor: priceCellEditorRef.current,
-    itemIndex,
+    blockIndex,
     rowIndex,
     value: newPriceValueRounded,
   })
 
-  const boqRows = getBoqRowsFromStore({ itemIndex })
+  const boqRows = getBoqRowsFromStore({ blockIndex })
   if (boqRows === undefined) return
 
   const subTotalPriceValueNew: number = boqRows.reduce(
@@ -73,7 +73,7 @@ export const updateBoqRowItemPriceCell = ({
   const subTotalPriceValueNewRounded = roundTo(subTotalPriceValueNew, 2)
 
   updateSubTotalPriceWithValue({
-    itemIndex,
+    blockIndex,
     subTotalPriceEditor: subTotalPriceEditorRef.current,
     value: subTotalPriceValueNewRounded,
     incrementally: true,

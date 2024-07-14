@@ -11,8 +11,8 @@ export const itemsShapeEqualityFn: EqualityFn = (
   const isDifferentLength = prevItems.length !== currentItems.length
   if (isDifferentLength) return false
   const idsDoNotMatch = prevItems.some(
-    (item: Item, itemIndex: number) =>
-      prevItems[itemIndex]?.id !== currentItems[itemIndex]?.id,
+    (item: Item, blockIndex: number) =>
+      prevItems[blockIndex]?.id !== currentItems[blockIndex]?.id,
   )
   if (idsDoNotMatch) return false
   return true

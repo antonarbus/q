@@ -3,17 +3,17 @@ import { itemKey } from '../../consts/itemKey'
 import { type BoqRowCellKey } from '../../types'
 
 type Props = {
-  itemIndex: number
+  blockIndex: number
   rowIndex: number
   boqRowCellKey: BoqRowCellKey
 }
 
 export const getBoqCellHtmlFromStore = ({
-  itemIndex,
+  blockIndex,
   rowIndex,
   boqRowCellKey,
 }: Props): string => {
-  const block = getState().quotation.blocks[itemIndex]
+  const block = getState().quotation.blocks[blockIndex]
 
   if (!block) return ''
 

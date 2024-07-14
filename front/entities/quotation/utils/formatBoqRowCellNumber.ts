@@ -7,7 +7,7 @@ import { quotationSlice } from '../redux/quotationSlice'
 import { type BoqRowCellKey } from '../types'
 
 type Props = {
-  itemIndex: number
+  blockIndex: number
   rowIndex: number
   boqRowCellKey: BoqRowCellKey
   editorRef: FroalaEditorRef
@@ -19,7 +19,7 @@ type Res = {
 }
 
 export const formatBoqRowCellNumber = ({
-  itemIndex,
+  blockIndex,
   rowIndex,
   boqRowCellKey,
   editorRef,
@@ -31,7 +31,7 @@ export const formatBoqRowCellNumber = ({
     }
   }
 
-  const boqRow = getBoqRowFromStore({ itemIndex, rowIndex })
+  const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
   if (boqRow === undefined) {
     return {
       didUpdate: false,
@@ -62,7 +62,7 @@ export const formatBoqRowCellNumber = ({
 
   dispatch(
     quotationSlice.actions.updateBoqCellReducer({
-      itemIndex,
+      blockIndex,
       rowIndex,
       html: newHtml,
       value: roundToTwoDecimals ? roundedValue : value,

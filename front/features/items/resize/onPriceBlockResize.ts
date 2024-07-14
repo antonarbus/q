@@ -3,16 +3,18 @@ import { quotationSlice } from '@entities/quotation'
 import type { OnItemResizeStop } from '@shared/types/resizablePaper'
 
 export const onPriceBlockResizeStop: OnItemResizeStop = ({
-  itemIndex,
+  blockIndex,
   e,
   direction,
   elementRef,
   delta,
 }) => {
   const width = parseInt(elementRef.style.width, 10)
-  const prevItemWidth = getState().quotation.blocks[itemIndex]?.width
+  const prevItemWidth = getState().quotation.blocks[blockIndex]?.width
 
   if (width === prevItemWidth) return
 
-  dispatch(quotationSlice.actions.updateBlockWidthReducer({ itemIndex, width }))
+  dispatch(
+    quotationSlice.actions.updateBlockWidthReducer({ blockIndex, width }),
+  )
 }

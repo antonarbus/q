@@ -6,16 +6,16 @@ import {
 } from '@entities/quotation'
 
 type Props = {
-  itemIndex: number
+  blockIndex: number
   rowIndex: number
 }
 
 export const pinBoqRowItemPriceCell = ({
-  itemIndex,
+  blockIndex,
   rowIndex,
 }: Props): void => {
   const itemPrice = getBoqCellFromStore({
-    itemIndex,
+    blockIndex,
     rowIndex,
     boqRowCellKey: boqRowCellKey.itemPrice,
   })
@@ -23,5 +23,5 @@ export const pinBoqRowItemPriceCell = ({
 
   if (isPinned) return
 
-  dispatch(quotationSlice.actions.pinItemPriceReducer({ itemIndex, rowIndex }))
+  dispatch(quotationSlice.actions.pinItemPriceReducer({ blockIndex, rowIndex }))
 }

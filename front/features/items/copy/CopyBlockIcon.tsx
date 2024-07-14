@@ -6,13 +6,13 @@ import {
   isFroalaSignal,
   itemKey,
   saveBlockHeightByIndex,
-  useItem,
+  useBlock,
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { cleanHtml } from '@shared/utils/itemsUtils'
 
 export const CopyBlockIcon = (): JSX.Element => {
-  const { itemIndex } = useItem()
+  const { blockIndex } = useBlock()
   const isCopyable = useSelectorTyped((state) => state.copy.isCopyable)
   const disabled = !isCopyable
 
@@ -29,9 +29,9 @@ export const CopyBlockIcon = (): JSX.Element => {
       onClick={(e: MouseEvent): void => {
         if (disabled) return
 
-        saveBlockHeightByIndex({ blockIndex: itemIndex })
+        saveBlockHeightByIndex({ blockIndex })
 
-        const blockToCopy = getState().quotation.blocks[itemIndex]
+        const blockToCopy = getState().quotation.blocks[blockIndex]
         if (!blockToCopy) return
         if (blockToCopy.type === itemKey.paste) return
 

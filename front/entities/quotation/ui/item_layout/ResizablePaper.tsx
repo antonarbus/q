@@ -7,7 +7,7 @@ import type {
   OnItemResizeStart,
   OnItemResizeStop,
 } from '@shared/types/resizablePaper'
-import { useItem } from '../../providers/ItemProvider'
+import { useBlock } from '../../providers/BlockProvider'
 
 type Props = {
   children: ReactNode
@@ -28,9 +28,9 @@ export const ResizablePaper = ({
   onItemResizeStop,
   minWidth,
 }: Props): JSX.Element => {
-  const { itemIndex } = useItem()
+  const { blockIndex } = useBlock()
   const width = useSelectorTyped(
-    (state) => state.quotation.blocks[itemIndex]?.width,
+    (state) => state.quotation.blocks[blockIndex]?.width,
   )
   const isWidthSetManually = width !== undefined
   const isAutoWidth = !isWidthSetManually || disableResize || autoWidth
@@ -61,7 +61,7 @@ export const ResizablePaper = ({
         left: !disableResize,
       }}
       onResizeStart={(e, dir, elementRef): void => {
-        onItemResizeStart?.bind(null, { e, dir, elementRef, itemIndex })()
+        onItemResizeStart?.bind(null, { e, dir, elementRef, blockIndex })()
       }}
       onResize={(e, direction, elementRef, delta): void => {
         onItemResize?.bind(null, {
@@ -69,7 +69,7 @@ export const ResizablePaper = ({
           direction,
           elementRef,
           delta,
-          itemIndex,
+          blockIndex,
         })()
       }}
       onResizeStop={(e, direction, elementRef, delta): void => {
@@ -78,7 +78,7 @@ export const ResizablePaper = ({
           direction,
           elementRef,
           delta,
-          itemIndex,
+          blockIndex,
         })()
       }}
     >

@@ -6,15 +6,15 @@ import { copySlice } from '@entities/copy'
 import {
   quotationSlice,
   selectIsLastBoqRow,
-  useItem,
+  useBlock,
   useRow,
 } from '@entities/quotation'
 
 export const DeleteBoqRowIcon = (): JSX.Element => {
-  const { itemIndex } = useItem()
+  const { blockIndex } = useBlock()
   const { rowIndex } = useRow()
 
-  const isLastBoqRow = useSelectorTyped(selectIsLastBoqRow({ itemIndex }))
+  const isLastBoqRow = useSelectorTyped(selectIsLastBoqRow({ blockIndex }))
   const isDeletable = useSelectorTyped((state) => state.copy.isDeletable)
   const disabled = isLastBoqRow || !isDeletable
 
@@ -34,11 +34,11 @@ export const DeleteBoqRowIcon = (): JSX.Element => {
         if (disabled) return
 
         flushSync(() => {
-          dispatch(quotationSlice.actions.disableFroalaReducer({ itemIndex }))
+          dispatch(quotationSlice.actions.disableFroalaReducer({ blockIndex }))
         })
 
         dispatch(
-          quotationSlice.actions.deleteBoqRowReducer({ itemIndex, rowIndex }),
+          quotationSlice.actions.deleteBoqRowReducer({ blockIndex, rowIndex }),
         )
         dispatch(copySlice.actions.forbidAllActions())
 
@@ -52,7 +52,7 @@ export const DeleteBoqRowIcon = (): JSX.Element => {
           setTimeout(
             () => {
               dispatch(
-                quotationSlice.actions.enableFroalaReducer({ itemIndex }),
+                quotationSlice.actions.enableFroalaReducer({ blockIndex }),
               )
             },
             1000 * theme.item.animationDuration + 500,
