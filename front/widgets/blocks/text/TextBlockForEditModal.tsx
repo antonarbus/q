@@ -1,9 +1,9 @@
 import { useRef } from 'react'
-import { updateTextBlock } from '@features/items/cell/update_cell'
+import { updateTextBlock } from '@features/blocks/cell/update_cell'
 import {
   onTextBlockResizeStart,
   onTextBlockResizeStop,
-} from '@features/items/resize'
+} from '@features/blocks/resize'
 import { beforeUpload } from '@features/upload'
 import {
   Froala,

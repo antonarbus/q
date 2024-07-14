@@ -1,6 +1,6 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { AnimatePresence } from 'framer-motion'
-import { hideBoqRowPinsOnRowBlur } from '@features/items/cell/pin'
+import { hideBoqRowPinsOnRowBlur } from '@features/blocks/cell/pin'
 import {
   boqRowsShapeEqualityFn,
   selectBoqRows,

@@ -14,7 +14,7 @@ import {
   insertBoqRow,
   insertPriceItem,
   insertTextItem,
-} from '@features/items/insert'
+} from '@features/blocks/insert'
 import { openBookmarksPage } from '@features/open_close/open_bookmarks_page'
 import { openLoginModal } from '@features/open_close/open_login_modal'
 import {

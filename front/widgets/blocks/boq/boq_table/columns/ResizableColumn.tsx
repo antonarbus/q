@@ -5,7 +5,7 @@ import {
   onColumnResize,
   onColumnResizeStart,
   onColumnResizeStop,
-} from '@features/items/resize'
+} from '@features/blocks/resize'
 import {
   selectColumnWidth,
   useBlock,

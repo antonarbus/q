@@ -1,5 +1,5 @@
-import { tabFromDescriptionCell } from '@features/items/cell/tab_away_from_cell'
-import { updateDescriptionCell } from '@features/items/cell/update_cell'
+import { tabFromDescriptionCell } from '@features/blocks/cell/tab_away_from_cell'
+import { updateDescriptionCell } from '@features/blocks/cell/update_cell'
 import { beforeUpload } from '@features/upload'
 import {
   getBoqCellHtmlFromStore,

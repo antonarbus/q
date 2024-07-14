@@ -1,13 +1,13 @@
 import { useRef } from 'react'
-import { updateTextBlock } from '@features/items/cell/update_cell'
-import { CopyBlockIcon } from '@features/items/copy'
-import { CutBlockIcon } from '@features/items/cut'
-import { DeleteBlockIcon } from '@features/items/delete'
-import { DragBlockIcon } from '@features/items/drag'
+import { updateTextBlock } from '@features/blocks/cell/update_cell'
+import { CopyBlockIcon } from '@features/blocks/copy'
+import { CutBlockIcon } from '@features/blocks/cut'
+import { DeleteBlockIcon } from '@features/blocks/delete'
+import { DragBlockIcon } from '@features/blocks/drag'
 import {
   onTextBlockResizeStart,
   onTextBlockResizeStop,
-} from '@features/items/resize'
+} from '@features/blocks/resize'
 import { BookmarkBlockIcon } from '@features/open_close/open_bookmark_modal'
 import { OpenInfoBlockModalIcon } from '@features/open_close/open_item_info_modal'
 import { beforeUpload } from '@features/upload'

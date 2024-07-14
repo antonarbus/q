@@ -7,7 +7,7 @@ import {
 } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { useSelectorTyped } from '@lib_instances/store'
-import { onBlockDragEnd, onBlockDragStart } from '@features/items/drag'
+import { onBlockDragEnd, onBlockDragStart } from '@features/blocks/drag'
 import { itemsShapeEqualityFn } from '@entities/quotation'
 
 type Props = {

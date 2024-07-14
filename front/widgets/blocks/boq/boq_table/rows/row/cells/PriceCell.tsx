@@ -3,13 +3,13 @@ import {
   Pin,
   pinBoqRowPriceCell,
   showBoqRowPins,
-} from '@features/items/cell/pin'
-import { tabFromPriceCell } from '@features/items/cell/tab_away_from_cell'
+} from '@features/blocks/cell/pin'
+import { tabFromPriceCell } from '@features/blocks/cell/tab_away_from_cell'
 import {
   formatBoqRowPriceCell,
   updateBoqRowPriceCell,
   validateBoqRowPrice,
-} from '@features/items/cell/update_cell'
+} from '@features/blocks/cell/update_cell'
 import {
   getBoqCellHtmlFromStore,
   useBoqItem,

@@ -1,12 +1,12 @@
-import { CopyBlockIcon } from '@features/items/copy'
-import { CutBlockIcon } from '@features/items/cut'
-import { DeleteBlockIcon } from '@features/items/delete'
-import { DragBlockIcon } from '@features/items/drag'
+import { CopyBlockIcon } from '@features/blocks/copy'
+import { CutBlockIcon } from '@features/blocks/cut'
+import { DeleteBlockIcon } from '@features/blocks/delete'
+import { DragBlockIcon } from '@features/blocks/drag'
 import {
   onBoqBlockResize,
   onBoqBlockResizeStart,
   onBoqBlockResizeStop,
-} from '@features/items/resize'
+} from '@features/blocks/resize'
 import { BookmarkBlockIcon } from '@features/open_close/open_bookmark_modal'
 import { OpenInfoBlockModalIcon } from '@features/open_close/open_item_info_modal'
 import { BoqItemProvider, BlockComp } from '@entities/quotation'

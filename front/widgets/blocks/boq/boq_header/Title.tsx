@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { updateTitleCell } from '@features/items/cell/update_cell'
+import { updateTitleCell } from '@features/blocks/cell/update_cell'
 import {
   getBoqHeaderHtmlFromStore,
   useBlock,

@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { updateSubtotalTextCell } from '@features/items/cell/update_cell'
+import { updateSubtotalTextCell } from '@features/blocks/cell/update_cell'
 import {
   getBoqHeaderHtmlFromStore,
   useBlock,

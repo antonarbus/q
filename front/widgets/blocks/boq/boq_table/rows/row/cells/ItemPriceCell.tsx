@@ -1,10 +1,10 @@
 import { Box } from '@mui/material'
-import { Pin, pinBoqRowItemPriceCell } from '@features/items/cell/pin'
-import { tabFromItemPriceCell } from '@features/items/cell/tab_away_from_cell'
+import { Pin, pinBoqRowItemPriceCell } from '@features/blocks/cell/pin'
+import { tabFromItemPriceCell } from '@features/blocks/cell/tab_away_from_cell'
 import {
   formatBoqRowItemPriceCell,
   updateBoqRowItemPriceCell,
-} from '@features/items/cell/update_cell'
+} from '@features/blocks/cell/update_cell'
 import {
   getBoqCellHtmlFromStore,
   useBlock,

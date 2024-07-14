@@ -1,11 +1,11 @@
 import { useRef } from 'react'
-import { showHideBoqPricePins } from '@features/items/cell/pin'
+import { showHideBoqPricePins } from '@features/blocks/cell/pin'
 import {
   formatSubtotalPriceCell,
   updateSubtotalPriceCell,
   useUpdateSubtotalPrice,
   validateBoqRowPrices,
-} from '@features/items/cell/update_cell'
+} from '@features/blocks/cell/update_cell'
 import {
   getBoqHeaderHtmlFromStore,
   useBoqItem,

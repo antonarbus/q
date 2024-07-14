@@ -1,9 +1,9 @@
 export { updateTextBlock } from './text_block/updateTextBlock'
 
-export { updatePriceTitleCell } from './price_item/updatePriceTitleCell'
-export { updatePriceValueCell } from './price_item/updatePriceValueCell'
-export { useUpdateTotalPriceIfPricesAboveWereChanged } from './price_item/useUpdateTotalPriceIfPricesAboveWereChanged'
-export { validateTotalPrice } from './price_item/validateTotalPrice'
+export { updatePriceTitleCell } from './price_block/updatePriceTitleCell'
+export { updatePriceValueCell } from './price_block/updatePriceValueCell'
+export { useUpdateTotalPriceIfPricesAboveWereChanged } from './price_block/useUpdateTotalPriceIfPricesAboveWereChanged'
+export { validateTotalPrice } from './price_block/validateTotalPrice'
 
 export { updateDescriptionCell } from './boq_row_cells/description/updateDescriptionCell'
 

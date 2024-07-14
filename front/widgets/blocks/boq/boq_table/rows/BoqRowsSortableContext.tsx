@@ -7,7 +7,7 @@ import {
 } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { useSelectorTyped } from '@lib_instances/store'
-import { onBoqRowDragEnd, onBoqRowDragStart } from '@features/items/drag'
+import { onBoqRowDragEnd, onBoqRowDragStart } from '@features/blocks/drag'
 import {
   boqRowsShapeEqualityFn,
   selectBoqRows,

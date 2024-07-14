@@ -2,7 +2,7 @@ import {
   onBoqBlockResize,
   onBoqBlockResizeStart,
   onBoqBlockResizeStop,
-} from '@features/items/resize'
+} from '@features/blocks/resize'
 import { BlockComp } from '@entities/quotation'
 import { BoqHeader } from './boq_header'
 import { BoqTable } from './boq_table'

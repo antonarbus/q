@@ -3,7 +3,7 @@ import {
   updatePriceValueCell,
   useUpdateTotalPriceIfPricesAboveWereChanged,
   validateTotalPrice,
-} from '@features/items/cell/update_cell'
+} from '@features/blocks/cell/update_cell'
 import {
   useBlock,
   Froala,

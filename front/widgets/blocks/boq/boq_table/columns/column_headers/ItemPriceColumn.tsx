@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { updateBoqColumnCell } from '@features/items/cell/update_cell'
+import { updateBoqColumnCell } from '@features/blocks/cell/update_cell'
 import {
   Froala,
   getBoqColumnHtmlFromStore,
