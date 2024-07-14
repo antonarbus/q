@@ -9,11 +9,15 @@ export const blocksShapeEqualityFn: EqualityFn = (
   currentItems: Item[],
 ): boolean => {
   const isDifferentLength = prevItems.length !== currentItems.length
+
   if (isDifferentLength) return false
+
   const idsDoNotMatch = prevItems.some(
     (item: Item, blockIndex: number) =>
       prevItems[blockIndex]?.id !== currentItems[blockIndex]?.id,
   )
+
   if (idsDoNotMatch) return false
+
   return true
 }
