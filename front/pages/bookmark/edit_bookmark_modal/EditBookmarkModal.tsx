@@ -28,6 +28,8 @@ export const EditBookmarkModal = (): JSX.Element => {
     infoSignal,
   })
 
+  // todo: row bookmark not opening
+
   return (
     <FormModal
       width='500px'
