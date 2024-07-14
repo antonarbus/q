@@ -4,10 +4,10 @@ import { useIsBoqRowSortDisabled, useRow } from '@entities/quotation'
 
 export const DragBoqRowIcon = (): JSX.Element => {
   const disabled = useIsBoqRowSortDisabled()
-  const { rowId } = useRow()
+  const { id } = useRow()
 
   const { listeners } = useSortable({
-    id: rowId,
+    id,
     disabled,
   })
 

@@ -4,7 +4,7 @@ import { useBoqItem } from './BoqItemProvider'
 
 type Props = {
   rowIndex: number
-  rowId: string
+  id: string
   children: ReactNode
 }
 
@@ -17,11 +17,7 @@ type Context = Omit<Props, 'children'> & {
 
 const RowContext = createContext<Context | null>(null)
 
-export const RowProvider = ({
-  children,
-  rowIndex,
-  rowId,
-}: Props): JSX.Element => {
+export const RowProvider = ({ children, rowIndex, id }: Props): JSX.Element => {
   const { boqRowEditorRefs } = useBoqItem()
 
   const descriptionEditorRef = { current: null }
@@ -40,7 +36,7 @@ export const RowProvider = ({
     <RowContext.Provider
       value={{
         rowIndex,
-        rowId,
+        id,
         descriptionEditorRef,
         itemPriceCellEditorRef,
         qtyCellEditorRef,

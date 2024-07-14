@@ -32,7 +32,7 @@ export const BoqRows = (): JSX.Element => {
               return (
                 <RowProvider
                   rowIndex={rowIndex}
-                  rowId={boqRow.id}
+                  id={boqRow.id}
                   key={boqRow.id}
                 >
                   <BoqRowAnimate>
