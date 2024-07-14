@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { type ReactNode } from 'react'
 import { useEffectOnce } from 'react-use'
-import { Blocks } from '@widgets/items'
+import { Blocks } from '@widgets/blocks'
 import { type Block, isFroalaSignal } from '@entities/quotation'
 import { OutlinedDivWithLabel } from '@shared/components'
 
