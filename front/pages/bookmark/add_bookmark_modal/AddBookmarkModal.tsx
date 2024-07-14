@@ -8,6 +8,7 @@ import { FormModal } from '@shared/components'
 import { CategoryField } from './CategoryField'
 import { DescriptionField } from './DescriptionField'
 import { NameField } from './NameField'
+import { InfoField } from './InfoField'
 
 export const AddBookmarkModal = (): React.ReactNode => {
   const { id } = useParams()
@@ -17,13 +18,17 @@ export const AddBookmarkModal = (): React.ReactNode => {
   const nameSignal = useSignal(item?.name ?? '')
   const categorySignal = useSignal(item?.category ?? '')
   const descSignal = useSignal(item?.desc ?? '')
+  const infoSignal = useSignal(item?.info ?? '')
+
+  const isDisabled = nameSignal.value === '' || categorySignal.value === ''
+
   const { onSubmit, isPending, isSuccess, isError } = useAddBookmark({
     nameSignal,
     categorySignal,
     descSignal,
+    infoSignal,
     modalRef,
   })
-  const isDisabled = nameSignal.value === '' || categorySignal.value === ''
 
   return (
     <FormModal
@@ -43,6 +48,7 @@ export const AddBookmarkModal = (): React.ReactNode => {
       <NameField nameSignal={nameSignal} />
       <CategoryField categorySignal={categorySignal} />
       <DescriptionField descSignal={descSignal} />
+      <InfoField infoSignal={infoSignal} />
     </FormModal>
   )
 }

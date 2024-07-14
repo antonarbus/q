@@ -10,7 +10,7 @@ import { InfoField } from './InfoField'
 import { NameField } from './NameField'
 import { useUpdateItemInfo } from '@features/blocks/update_info'
 
-export const InfoItemModal = (): React.ReactNode => {
+export const InfoModal = (): React.ReactNode => {
   const modalRef = useRef<HTMLDivElement>(null)
 
   const { id } = useParams()

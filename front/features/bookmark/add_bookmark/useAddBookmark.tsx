@@ -16,6 +16,7 @@ type Props = {
   nameSignal: Signal<string>
   categorySignal: Signal<string>
   descSignal: Signal<string>
+  infoSignal: Signal<string>
   modalRef: React.RefObject<HTMLDivElement>
 }
 
@@ -30,6 +31,7 @@ export const useAddBookmark = ({
   nameSignal,
   categorySignal,
   descSignal,
+  infoSignal,
   modalRef,
 }: Props): Res => {
   const navigate = useNavigate()
@@ -113,6 +115,7 @@ export const useAddBookmark = ({
       name: nameSignal.value,
       category: categorySignal.value,
       desc: descSignal.value,
+      info: infoSignal.value,
     }
 
     saveItem({ item: itemWithUpdatedValues })
