@@ -29,6 +29,7 @@ export const EditBookmarkModal = (): JSX.Element => {
   })
 
   // todo: row bookmark not opening
+  // todo: need to create editable item instead of adding item into fake Quotation
 
   return (
     <FormModal
