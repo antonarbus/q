@@ -3,7 +3,7 @@ import { useRef } from 'react'
 import { MdOutlineStarOutline } from 'react-icons/md'
 import { useParams } from 'react-router-dom'
 import { useAddBookmark } from '@features/bookmark/add_bookmark'
-import { getItemByIdFromStore } from '@entities/quotation'
+import { getItemFromStore } from '@entities/quotation'
 import { FormModal } from '@shared/components'
 import { CategoryField } from './CategoryField'
 import { DescriptionField } from './DescriptionField'
@@ -11,7 +11,7 @@ import { NameField } from './NameField'
 
 export const AddBookmarkModal = (): React.ReactNode => {
   const { id } = useParams()
-  const item = getItemByIdFromStore({ id: id ?? 'missing id' })
+  const item = getItemFromStore({ id: id ?? 'missing id' })
 
   const modalRef = useRef<HTMLDivElement>(null)
   const nameSignal = useSignal(item?.name ?? '')

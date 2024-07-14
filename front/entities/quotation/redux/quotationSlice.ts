@@ -27,8 +27,8 @@ import { updateBoqHeaderTextReducer } from './reducers/updateBoqHeaderTextReduce
 import { updateBoqRowHeightAndWidthReducer } from './reducers/updateBoqRowHeightAndWidthReducer'
 import { updateColWidthReducer } from './reducers/updateColWidthReducer'
 import { updateBlockHeightReducer } from './reducers/updateBlockHeightReducer'
-import { updateItemInfoByIdReducer } from './reducers/updateItemInfoByIdReducer'
-import { updateItemPreviewByIdReducer } from './reducers/updateItemPreviewByIdReducer'
+import { updateItemInfoReducer } from './reducers/updateItemInfoReducer'
+import { updateItemPreviewReducer } from './reducers/updateItemPreviewReducer'
 import { updateBlockTextReducer } from './reducers/updateBlockTextReducer'
 import { updateBlockWidthReducer } from './reducers/updateBlockWidthReducer'
 import { updatePriceReducer } from './reducers/updatePriceReducer'
@@ -80,8 +80,8 @@ export const quotationSlice = createSlice({
     fixImagesHeightReducer,
     unfixImagesHeightReducer,
     updateQuotationInfoReducer,
-    updateItemInfoByIdReducer,
-    updateItemPreviewByIdReducer,
+    updateItemInfoByIdReducer: updateItemInfoReducer,
+    updateItemPreviewByIdReducer: updateItemPreviewReducer,
   },
 })
 

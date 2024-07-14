@@ -2,7 +2,7 @@ import { useSignal } from '@preact/signals-react'
 import { useRef } from 'react'
 import { BsInfo } from 'react-icons/bs'
 import { useParams } from 'react-router-dom'
-import { getItemByIdFromStore } from '@entities/quotation'
+import { getItemFromStore } from '@entities/quotation'
 import { FormModal } from '@shared/components'
 import { CategoryField } from './CategoryField'
 import { DescriptionField } from './DescriptionField'
@@ -16,7 +16,7 @@ export const InfoItemModal = (): React.ReactNode => {
   const { id } = useParams()
   if (!id) return null
 
-  const item = getItemByIdFromStore({ id })
+  const item = getItemFromStore({ id })
 
   if (!item) return null
 

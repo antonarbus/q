@@ -9,7 +9,7 @@ import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { useSelectorTyped } from '@lib_instances/store'
 import { onBoqRowDragEnd, onBoqRowDragStart } from '@features/blocks/drag'
 import {
-  boqRowsShapeEqualityFn,
+  arrayShapesEqualityFn,
   selectBoqRows,
   useBlock,
 } from '@entities/quotation'
@@ -23,7 +23,7 @@ export const BoqRowsSortableContext = ({ children }: Props): JSX.Element => {
 
   const boqRows = useSelectorTyped(
     selectBoqRows({ blockIndex }),
-    boqRowsShapeEqualityFn,
+    arrayShapesEqualityFn,
   )
   const boqRowIds = boqRows.map((boqRow) => boqRow.id)
 

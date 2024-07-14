@@ -24,14 +24,11 @@ export { deleteQuotationsCache } from './cacheUpdaters/deleteQuotationsCache'
 export { quotationSlice } from './redux/quotationSlice'
 
 // Selectors
-export { arrayShapeEqualityFn } from './redux/selectors/arrayShapeEqualityFn'
+export { arrayShapesEqualityFn } from './redux/selectors/arrayShapesEqualityFn'
 export { selectIsLastBlock } from './redux/selectors/selectIsLastBlock'
 export { selectIsLastBoqRow } from './redux/selectors/selectIsLastBoqRow'
 export { selectColumnWidth } from './redux/selectors/selectColumnWidth'
-export {
-  selectBoqRows,
-  boqRowsShapeEqualityFn,
-} from './redux/selectors/selectBoqRows'
+export { selectBoqRows } from './redux/selectors/selectBoqRows'
 export { selectBoqCell } from './redux/selectors/selectBoqCell'
 export { selectBoqCellPin } from './redux/selectors/selectBoqCellPin'
 
@@ -48,14 +45,14 @@ export { getTotalPriceAbove } from './utils/getTotalPriceAbove'
 export { fixImagesHeight, unfixImagesHeight } from './utils/imagesHeight'
 
 // Store item getters
-export { getBlockByIndexFromStore } from './redux/getters/getBlockByIndexFromStore'
-export { getBoqRowByIndexFromStore } from './redux/getters/getBoqRowByIndexFromStore'
+export { getBlockFromStore } from './redux/getters/getBlockFromStore'
+export { getBoqRowFromStore } from './redux/getters/getBoqRowFromStore'
 export { getBoqRowsFromStore } from './redux/getters/getBoqRowsFromStore'
 export { getBoqBlockFromStore } from './redux/getters/getBoqBlockFromStore'
 export { getBoqCellFromStore } from './redux/getters/getBoqCellFromStore'
 export { getBoqHeaderFromStore } from './redux/getters/getBoqHeaderFromStore'
 export { getBoqColumnFromStore } from './redux/getters/getBoqColumnFromStore'
-export { getItemByIdFromStore } from './redux/getters/getItemByIdFromStore'
+export { getItemFromStore } from './redux/getters/getItemFromStore'
 
 // Store html getters
 export { getTextBlockHtmlFromStore } from './redux/getters/getTextBlockHtmlFromStore'

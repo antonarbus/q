@@ -5,7 +5,7 @@ type Props = {
   state: Quotation
 }
 
-export const getBlockByIndexFromState = ({
+export const getBlockFromState = ({
   blockIndex,
   state,
 }: Props): Block | undefined => {

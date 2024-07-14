@@ -6,10 +6,7 @@ type Props = {
 }
 
 // todo: better to split the logic into block and boqRow
-export const getItemByIdFromState = ({
-  id,
-  state,
-}: Props): Item | undefined => {
+export const getItemFromState = ({ id, state }: Props): Item | undefined => {
   const blockWithSameId = state.blocks.find((block) => {
     return block.id === id
   })

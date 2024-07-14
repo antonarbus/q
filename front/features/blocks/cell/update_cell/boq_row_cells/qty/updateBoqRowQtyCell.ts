@@ -1,7 +1,7 @@
 import { roundTo } from 'round-to'
 import {
   didBoqCellContentChange,
-  getBoqRowByIndexFromStore,
+  getBoqRowFromStore,
   getBoqRowsFromStore,
   updateBoqRowCellAtStore,
   updateBoqRowCellWithValue,
@@ -44,7 +44,7 @@ export const updateBoqRowQtyCell = ({
     html: qtyCellEditorRef.current.html.get(),
   })
 
-  const boqRow = getBoqRowByIndexFromStore({ blockIndex, rowIndex })
+  const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
   if (boqRow === undefined) return
 
   const newPriceValue = boqRow.qty.value * boqRow.itemPrice.value

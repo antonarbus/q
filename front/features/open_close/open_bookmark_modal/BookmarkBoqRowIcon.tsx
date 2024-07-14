@@ -4,7 +4,7 @@ import { MdOutlineStarOutline } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import {
   boqRowKey,
-  getBoqRowByIndexFromStore,
+  getBoqRowFromStore,
   quotationSlice,
   useBlock,
   useRow,
@@ -50,7 +50,7 @@ export const BookmarkBoqRowIcon = (): ReactNode => {
         const html = boqRowElement.outerHTML
         const cleanedHtml = cleanHtml(html)
 
-        const boqRow = getBoqRowByIndexFromStore({ rowIndex, blockIndex })
+        const boqRow = getBoqRowFromStore({ rowIndex, blockIndex })
 
         if (!boqRow) return
         if (boqRow.type === boqRowKey.paste) return

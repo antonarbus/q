@@ -5,7 +5,7 @@ type Props = {
   id: string
 }
 
-export const getItemByIdFromStore = ({ id }: Props): Item | undefined => {
+export const getItemFromStore = ({ id }: Props): Item | undefined => {
   const quotation = getState().quotation
 
   const blockWithSameId = quotation.blocks.find((block) => {

@@ -7,7 +7,7 @@ type Props = {
   state?: Block[]
 }
 
-export const getBoqRowByIndexFromStore = ({
+export const getBoqRowFromStore = ({
   blockIndex,
   rowIndex,
   state,

@@ -1,6 +1,6 @@
 import { type RootState } from '@lib_instances/store'
 import type { BoqRowCell, BoqRowCellKey } from '../../types'
-import { getBoqRowByIndexFromStore } from '../getters/getBoqRowByIndexFromStore'
+import { getBoqRowFromStore } from '../getters/getBoqRowFromStore'
 
 type Props = {
   blockIndex: number
@@ -11,7 +11,7 @@ type Props = {
 export const selectBoqCell =
   ({ blockIndex, rowIndex, boqRowCellKey }: Props) =>
   (state: RootState): BoqRowCell | undefined => {
-    const boqRow = getBoqRowByIndexFromStore({ blockIndex, rowIndex })
+    const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
     if (boqRow === undefined) return undefined
     const boqRowCell = boqRow[boqRowCellKey]
     return boqRowCell

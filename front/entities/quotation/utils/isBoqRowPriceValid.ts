@@ -1,6 +1,6 @@
 import { roundTo } from 'round-to'
 import { getNumberFromString, getTextContentFromHtml } from '@shared/utils'
-import { getBoqRowByIndexFromStore } from '../redux/getters/getBoqRowByIndexFromStore'
+import { getBoqRowFromStore } from '../redux/getters/getBoqRowFromStore'
 
 type Props = {
   blockIndex: number
@@ -13,7 +13,7 @@ export const isBoqRowPriceValid = ({
   rowIndex,
   html,
 }: Props): boolean => {
-  const boqRow = getBoqRowByIndexFromStore({ blockIndex, rowIndex })
+  const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
   if (boqRow === undefined) return true
   const priceValue = boqRow.price.value
   const calculatedPriceValue = boqRow.qty.value * boqRow.itemPrice.value

@@ -1,7 +1,7 @@
 import { dispatch } from '@lib_instances/store'
 import {
   boqRowCellKey,
-  getBoqRowByIndexFromStore,
+  getBoqRowFromStore,
   quotationSlice,
 } from '@entities/quotation'
 
@@ -11,7 +11,7 @@ type Props = {
 }
 
 export const showBoqRowPins = ({ blockIndex, rowIndex }: Props): void => {
-  const boqRow = getBoqRowByIndexFromStore({ blockIndex, rowIndex })
+  const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
   if (boqRow === undefined) return
 
   const isItemPricePinShown = boqRow.itemPrice.pin.isShown

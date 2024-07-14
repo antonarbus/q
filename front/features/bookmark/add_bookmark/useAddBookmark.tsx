@@ -8,7 +8,7 @@ import {
   useGetBookmarksQuery,
   useSaveBookmarkMutation,
 } from '@entities/bookmark'
-import { getItemByIdFromStore } from '@entities/quotation'
+import { getItemFromStore } from '@entities/quotation'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
 
@@ -34,7 +34,7 @@ export const useAddBookmark = ({
 }: Props): Res => {
   const navigate = useNavigate()
   const { id } = useParams()
-  const item = getItemByIdFromStore({ id: id ?? 'missing id' })
+  const item = getItemFromStore({ id: id ?? 'missing id' })
 
   const {
     mutate: saveItem,

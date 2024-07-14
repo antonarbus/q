@@ -3,7 +3,7 @@ import type { MouseEvent } from 'react'
 import { MdCopyAll } from 'react-icons/md'
 import { copySlice } from '@entities/copy'
 import {
-  getBoqRowByIndexFromStore,
+  getBoqRowFromStore,
   isFroalaSignal,
   quotationSlice,
   useBlock,
@@ -47,7 +47,7 @@ export const CopyBoqRowIcon = (): JSX.Element => {
         const html = boqRowElement.outerHTML
         const cleanedHtml = cleanHtml(html)
 
-        const boqRow = getBoqRowByIndexFromStore({ blockIndex, rowIndex })
+        const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
         if (boqRow === undefined) return
 
         const boqRowCloned = structuredClone(boqRow)

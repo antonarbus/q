@@ -1,5 +1,5 @@
 import { type BoqRowCellKey, type BoqRowCell } from '../../types'
-import { getBoqRowByIndexFromStore } from './getBoqRowByIndexFromStore'
+import { getBoqRowFromStore } from './getBoqRowFromStore'
 
 type Props = {
   blockIndex: number
@@ -12,7 +12,7 @@ export const getBoqCellFromStore = ({
   rowIndex,
   boqRowCellKey,
 }: Props): BoqRowCell | undefined => {
-  const boqRow = getBoqRowByIndexFromStore({ blockIndex, rowIndex })
+  const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
   if (boqRow === undefined) return
   const boqRowCell = boqRow[boqRowCellKey]
   return boqRowCell

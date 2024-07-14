@@ -2,11 +2,11 @@ import { useSelectorTyped } from '@lib_instances/store'
 import { AnimatePresence } from 'framer-motion'
 import { hideBoqRowPinsOnRowBlur } from '@features/blocks/cell/pin'
 import {
-  boqRowsShapeEqualityFn,
   selectBoqRows,
   RowProvider,
   useBlock,
   boqRowKey,
+  arrayShapesEqualityFn,
 } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 import { BoqRowsLayout } from './BoqRowsLayout'
@@ -20,7 +20,7 @@ export const BoqRows = (): JSX.Element => {
   const { blockIndex } = useBlock()
   const boqRows = useSelectorTyped(
     selectBoqRows({ blockIndex }),
-    boqRowsShapeEqualityFn,
+    arrayShapesEqualityFn,
   )
 
   return (

@@ -7,7 +7,7 @@ type Obj = {
 }
 
 // re-render the list only if item is replaced or new item is added
-export const arrayShapeEqualityFn: EqualityFn = (
+export const arrayShapesEqualityFn: EqualityFn = (
   prev: Obj[],
   current: Obj[],
 ): boolean => {

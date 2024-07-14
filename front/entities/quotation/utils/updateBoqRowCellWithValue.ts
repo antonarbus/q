@@ -5,7 +5,7 @@ import {
   getTextContentFromHtml,
   getStringWithNewFormattedNumber,
 } from '@shared/utils'
-import { getBoqRowByIndexFromStore } from '../redux/getters/getBoqRowByIndexFromStore'
+import { getBoqRowFromStore } from '../redux/getters/getBoqRowFromStore'
 import { updateBoqRowCellAtStore } from '../redux/updaters/updateBoqRowCellAtStore'
 import { type BoqRowCellKey } from '../types'
 
@@ -26,7 +26,7 @@ export const updateBoqRowCellWithValue = ({
 }: Props): void => {
   if (editor === null) return
 
-  const boqRow = getBoqRowByIndexFromStore({ blockIndex, rowIndex })
+  const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
   if (boqRow === undefined) return
 
   const priceTextContent = getTextContentFromHtml({

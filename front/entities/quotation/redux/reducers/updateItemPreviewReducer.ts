@@ -1,8 +1,8 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { type Quotation } from '../../types'
-import { getItemByIdFromState } from '../getters/getItemByIdFromState'
+import { getItemFromState } from '../getters/getItemFromState'
 
-export const updateItemPreviewByIdReducer = (
+export const updateItemPreviewReducer = (
   state: Quotation,
   action: PayloadAction<{
     id: string
@@ -10,7 +10,7 @@ export const updateItemPreviewByIdReducer = (
   }>,
 ): void => {
   const { id, preview } = action.payload
-  const item = getItemByIdFromState({ id, state })
+  const item = getItemFromState({ id, state })
   if (item === undefined) return
   item.preview = preview
 }
