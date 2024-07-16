@@ -56,7 +56,7 @@ export const Logo = ({ logoRef }: Prop): JSX.Element => {
       <Box className='logo'>
         <span>Q</span>
         <span className='uotation'>uotation</span>
-        <span className='app-ext'>.app</span>
+        {/* <span className='app-ext'>.app</span> */}
       </Box>
     </div>
   )
