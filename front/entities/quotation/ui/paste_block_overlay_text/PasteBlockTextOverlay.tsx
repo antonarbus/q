@@ -6,7 +6,7 @@ type Props = {
   children: ReactNode
 }
 
-export const PasteItemTextOverlay = ({ children }: Props): JSX.Element => {
+export const PasteBlockTextOverlay = ({ children }: Props): JSX.Element => {
   const isPasteHere = useIsPasteHere()
 
   return (

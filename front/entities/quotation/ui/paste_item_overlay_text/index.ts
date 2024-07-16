@@ -1,1 +1,0 @@
-export { PasteItemTextOverlay } from './PasteItemTextOverlay'

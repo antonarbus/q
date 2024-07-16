@@ -9,7 +9,7 @@ import type {
   OnItemResizeStart,
   OnItemResizeStop,
 } from '@shared/types/resizablePaper'
-import { ResizablePaper } from './ResizablePaper'
+import { ResizableBookmarkPaper } from './ResizableBookmarkPaper'
 
 type Props = {
   children: ReactNode
@@ -26,7 +26,7 @@ type Props = {
   className?: string
 }
 
-export const BlockAnimate = ({
+export const BookmarkAnimate = ({
   children,
   blockHeight,
   id,
@@ -82,7 +82,7 @@ export const BlockAnimate = ({
       {leftItemActionButtons && (
         <Box style={{ paddingTop: '5px' }}>{leftItemActionButtons}</Box>
       )}
-      <ResizablePaper
+      <ResizableBookmarkPaper
         disableResize={disableResize}
         autoWidth={autoWidth}
         onItemResizeStart={onItemResizeStart}
@@ -91,7 +91,7 @@ export const BlockAnimate = ({
         minWidth={minWidth}
       >
         {children}
-      </ResizablePaper>
+      </ResizableBookmarkPaper>
       {rightItemActionButtons && (
         <Box style={{ paddingTop: '5px' }}>{rightItemActionButtons}</Box>
       )}

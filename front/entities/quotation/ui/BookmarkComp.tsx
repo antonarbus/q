@@ -9,8 +9,8 @@ import {
   type OnItemResizeStart,
 } from '@shared/types/resizablePaper'
 import { useBlock } from '../providers/BlockProvider'
-import { BlockAnimate } from './block_layout'
 import { PasteBlockTextOverlay } from './paste_block_overlay_text'
+import { BookmarkAnimate } from './bookmark_layout'
 
 type Props = {
   children: ReactNode
@@ -25,7 +25,7 @@ type Props = {
   className?: string
 }
 
-export const BlockComp = ({
+export const BookmarkComp = ({
   children,
   disableResize,
   onItemResizeStart,
@@ -54,7 +54,7 @@ export const BlockComp = ({
         zIndex: isDragging ? 1000 : 0,
       }}
     >
-      <BlockAnimate
+      <BookmarkAnimate
         disableResize={disableResize}
         autoWidth={autoWidth}
         minWidth={minWidth}
@@ -68,7 +68,7 @@ export const BlockComp = ({
         className={className}
       >
         <PasteBlockTextOverlay>{children}</PasteBlockTextOverlay>
-      </BlockAnimate>
+      </BookmarkAnimate>
     </div>
   )
 }

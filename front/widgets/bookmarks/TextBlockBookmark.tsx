@@ -1,26 +1,19 @@
 import { useRef } from 'react'
-import { CopyBlockIcon } from '@features/blocks/copy'
-import { CutBlockIcon } from '@features/blocks/cut'
-import { DeleteBlockIcon } from '@features/blocks/delete'
-import { DragBlockIcon } from '@features/blocks/drag'
 import {
-  onTextBlockResizeStart,
-  onTextBlockResizeStop,
+  onTextBlockBookmarkResizeStart,
+  onTextBlockBookmarkResizeStop,
 } from '@features/blocks/resize'
-import { BookmarkBlockIcon } from '@features/open_close/open_bookmark_modal'
-import { OpenInfoBlockModalIcon } from '@features/open_close/open_item_info_modal'
 import { beforeUpload } from '@features/upload'
 import {
   Froala,
-  BlockComp,
   textItemCellStyle,
   itemType,
   BlockProvider,
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
-import { ItemActionButtonsLayout } from '@shared/layouts'
 import type { FroalaEditor } from '@shared/types/froala'
 import { bookmarkSignal } from '@entities/bookmark'
+import { BookmarkComp } from '@entities/quotation/ui/BookmarkComp'
 
 export const TextBlockBookmark = (): React.ReactNode => {
   const editorRef = useRef<FroalaEditor | null>(null)
@@ -34,10 +27,10 @@ export const TextBlockBookmark = (): React.ReactNode => {
       blockIndex={0}
       block={bookmarkSignal.value}
     >
-      <BlockComp
+      <BookmarkComp
         className={cls.textBlock}
-        onItemResizeStart={onTextBlockResizeStart}
-        onItemResizeStop={onTextBlockResizeStop}
+        onItemResizeStart={onTextBlockBookmarkResizeStart}
+        onItemResizeStop={onTextBlockBookmarkResizeStop}
       >
         <Froala
           editorRef={editorRef}
@@ -52,14 +45,11 @@ export const TextBlockBookmark = (): React.ReactNode => {
           onContentChange={() => {
             if (editorRef.current === null) return
             if (bookmarkSignal.value?.type !== itemType.text) return
-            const prevHtml = bookmarkSignal.value.text.html
             const html = editorRef.current.html.get()
-            const didTextChange = prevHtml !== html
-            if (!didTextChange) return
             bookmarkSignal.value.text.html = html
           }}
         />
-      </BlockComp>
+      </BookmarkComp>
     </BlockProvider>
   )
 }

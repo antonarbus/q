@@ -1,4 +1,3 @@
-import { useSelectorTyped } from '@lib_instances/store'
 import { Resizable, type ResizableProps } from 're-resizable'
 import { cls } from '@shared/consts/cls'
 import type {
@@ -7,6 +6,7 @@ import type {
   OnItemResizeStop,
 } from '@shared/types/resizablePaper'
 import { useBlock } from '../../providers/BlockProvider'
+import { bookmarkSignal } from '@entities/bookmark'
 
 type Props = {
   children: React.ReactNode
@@ -18,7 +18,7 @@ type Props = {
   onItemResizeStop?: OnItemResizeStop
 }
 
-export const ResizablePaper = ({
+export const ResizableBookmarkPaper = ({
   children,
   disableResize = false,
   autoWidth = false,
@@ -27,15 +27,17 @@ export const ResizablePaper = ({
   onItemResizeStop,
   minWidth,
 }: Props): JSX.Element => {
-  const { block, blockIndex } = useBlock()
-  const isWidthSetManually = block.width !== undefined
+  const { blockIndex } = useBlock()
+
+  const width = bookmarkSignal.value?.width
+  const isWidthSetManually = width !== undefined
   const isAutoWidth = !isWidthSetManually || disableResize || autoWidth
 
   return (
     <Resizable
       className={cls.paper}
       size={{
-        width: isAutoWidth ? 'auto' : block.width,
+        width: isAutoWidth ? 'auto' : width,
         height: 'auto',
       }}
       style={{
@@ -45,7 +47,7 @@ export const ResizablePaper = ({
         position: 'relative',
       }}
       defaultSize={{
-        width: isAutoWidth ? 'auto' : block.width,
+        width: isAutoWidth ? 'auto' : width,
         height: 'auto',
       }}
       // grid={[20, 0]}
