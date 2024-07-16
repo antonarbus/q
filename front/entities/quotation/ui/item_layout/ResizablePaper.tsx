@@ -1,6 +1,5 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { Resizable, type ResizableProps } from 're-resizable'
-import type { ReactNode } from 'react'
 import { cls } from '@shared/consts/cls'
 import type {
   OnItemResize,
@@ -10,7 +9,7 @@ import type {
 import { useBlock } from '../../providers/BlockProvider'
 
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
   disableResize?: boolean
   autoWidth?: boolean
   minWidth?: ResizableProps['minWidth']
@@ -28,18 +27,15 @@ export const ResizablePaper = ({
   onItemResizeStop,
   minWidth,
 }: Props): JSX.Element => {
-  const { blockIndex } = useBlock()
-  const width = useSelectorTyped(
-    (state) => state.quotation.blocks[blockIndex]?.width,
-  )
-  const isWidthSetManually = width !== undefined
+  const { block, blockIndex } = useBlock()
+  const isWidthSetManually = block.width !== undefined
   const isAutoWidth = !isWidthSetManually || disableResize || autoWidth
 
   return (
     <Resizable
       className={cls.paper}
       size={{
-        width: isAutoWidth ? 'auto' : width,
+        width: isAutoWidth ? 'auto' : block.width,
         height: 'auto',
       }}
       style={{
@@ -49,7 +45,7 @@ export const ResizablePaper = ({
         position: 'relative',
       }}
       defaultSize={{
-        width: isAutoWidth ? 'auto' : width,
+        width: isAutoWidth ? 'auto' : block.width,
         height: 'auto',
       }}
       // grid={[20, 0]}

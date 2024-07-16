@@ -10,5 +10,8 @@ export { updateOrAppendIntoBookmarksCache } from './cacheUpdaters/updateOrAppend
 export { deleteFromBookmarksCache } from './cacheUpdaters/deleteFromBookmarksCache'
 export { deleteBookmarksCache } from './cacheUpdaters/deleteBookmarksCache'
 
+// signals
+export { bookmarkSignal } from './bookmarkSignal'
+
 // types
 export type { Item } from '@entities/quotation'

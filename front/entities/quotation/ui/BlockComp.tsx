@@ -20,8 +20,8 @@ type Props = {
   onItemResizeStop?: OnItemResizeStop
   autoWidth?: boolean
   minWidth?: ResizableProps['minWidth']
-  leftItemActionButtons: ReactNode
-  rightItemActionButtons: ReactNode
+  leftItemActionButtons?: ReactNode
+  rightItemActionButtons?: ReactNode
   className?: string
 }
 
@@ -58,7 +58,7 @@ export const BlockComp = ({
         disableResize={disableResize}
         autoWidth={autoWidth}
         minWidth={minWidth}
-        itemHeight={block?.height ?? 0}
+        blockHeight={block?.height ?? 0}
         id={block?.id ?? 'no id'}
         onItemResizeStart={onItemResizeStart}
         onItemResize={onItemResize}

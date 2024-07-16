@@ -13,10 +13,10 @@ import { ResizablePaper } from './ResizablePaper'
 
 type Props = {
   children: ReactNode
-  itemHeight: number
+  blockHeight: number
   id: string
-  leftItemActionButtons: ReactNode
-  rightItemActionButtons: ReactNode
+  leftItemActionButtons?: ReactNode
+  rightItemActionButtons?: ReactNode
   disableResize?: boolean
   autoWidth?: boolean
   minWidth?: ResizableProps['minWidth']
@@ -28,7 +28,7 @@ type Props = {
 
 export const BlockAnimate = ({
   children,
-  itemHeight,
+  blockHeight,
   id,
   leftItemActionButtons,
   rightItemActionButtons,
@@ -52,7 +52,7 @@ export const BlockAnimate = ({
         overflow: 'hidden',
       }}
       animate={{
-        height: itemHeight, // height is being stored on copy/cut icon click
+        height: blockHeight, // height is being stored on copy/cut icon click
         marginBottom: 20,
         opacity: 1,
         y: 0,
@@ -79,7 +79,9 @@ export const BlockAnimate = ({
         width: '100%',
       }}
     >
-      <Box style={{ paddingTop: '5px' }}>{leftItemActionButtons}</Box>
+      {leftItemActionButtons && (
+        <Box style={{ paddingTop: '5px' }}>{leftItemActionButtons}</Box>
+      )}
       <ResizablePaper
         disableResize={disableResize}
         autoWidth={autoWidth}
@@ -90,7 +92,9 @@ export const BlockAnimate = ({
       >
         {children}
       </ResizablePaper>
-      <Box style={{ paddingTop: '5px' }}>{rightItemActionButtons}</Box>
+      {rightItemActionButtons && (
+        <Box style={{ paddingTop: '5px' }}>{rightItemActionButtons}</Box>
+      )}
     </motion.div>
   )
 }

@@ -4,6 +4,7 @@ import { isFroalaSignal } from '@entities/quotation'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 import { displayedRowsCountSignal } from '@shared/lib/ag_grid/components/DisplayedRowsCount'
 import { reRenderQuotationSignal } from '@shared/signals/reRenderQuotationSignal'
+import { bookmarkSignal } from '@entities/bookmark'
 
 declare const window: Window &
   typeof globalThis & {
@@ -32,8 +33,12 @@ function signalsOn(): void {
   effect(() => {
     console.log('🚦 accessTokenSignal.value', accessTokenSignal.value)
   })
+
+  effect(() => {
+    console.log('🚦 bookmarkSignal.value', bookmarkSignal.value)
+  })
 }
 
-// signalsOn()
+signalsOn()
 
 window.signalsOn = signalsOn
