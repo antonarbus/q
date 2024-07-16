@@ -14,5 +14,5 @@ export const portBack = 4000
 export const hostBack = 'http://localhost'
 
 export const domain = isProd
-  ? 'https://quotation.app'
+  ? 'https://sendmequotation.today'
   : 'https://localhost:3000'

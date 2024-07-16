@@ -15,8 +15,8 @@ export const sendEmail = async ({
 }: Props): Promise<[sgMail.ClientResponse, unknown] | undefined> => {
   try {
     const sendEmailRes = await sgMail.send({
-      from: 'info@quotation.app',
-      replyTo: 'info@quotation.app',
+      from: 'info@sendmequotation.today',
+      replyTo: 'info@sendmequotation.today',
       to,
       subject,
       html,

@@ -8,12 +8,12 @@ async function configureBucketCors(_req: Req, res: Res): Promise<void> {
   const corsUpdateRes = await bucket.setCorsConfiguration([
     {
       origin: [
-        'https://quotation.app',
-        'http://quotation.app',
-        'https://*.quotation.app',
-        'http://*.quotation.app',
-        'http://local.quotation.app:3005/', // pdf download does not work without port
-        'https://local.quotation.app:3005/', // pdf download does not work without port
+        'https://sendmequotation.today',
+        'http://sendmequotation.today',
+        'https://*.sendmequotation.today',
+        'http://*.sendmequotation.today',
+        'http://local.sendmequotation.today:3005/', // pdf download does not work without port
+        'https://local.sendmequotation.today:3005/', // pdf download does not work without port
       ],
       method: ['GET'],
       maxAgeSeconds: 3600,
