@@ -46,7 +46,9 @@ export const TextBlockBookmark = (): React.ReactNode => {
             if (editorRef.current === null) return
             if (bookmarkSignal.value?.type !== itemType.text) return
             const html = editorRef.current.html.get()
-            bookmarkSignal.value.text.html = html
+            const newBookmarkValue = structuredClone(bookmarkSignal.value)
+            newBookmarkValue.text.html = html
+            bookmarkSignal.value = newBookmarkValue
           }}
         />
       </BookmarkComp>
