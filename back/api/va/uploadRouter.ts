@@ -86,7 +86,7 @@ uploadRouter.post(
   '/',
   multer({
     storage: multer.memoryStorage(),
-    limits: { fileSize: 20 * 1024 * 1024 },
+    limits: { fileSize: 50 * 1024 * 1024 },
   }).single('file'), // middleware processes single file uploads, where 'file' is the name of the file input field. The file's details will be stored in req.file
   // verifyTokenMiddleware, // todo: do not know how to use axios instance with froala file update, so let's validate token manually
   upload,
