@@ -88,7 +88,7 @@ export const columnDefs: ColDef<Quotation>[] = [
   {
     field: 'sharedWith',
     headerName: 'shared with',
-    valueFormatter: (params) => {
+    valueFormatter: (params): string => {
       return 'cell renderer is used, no need to format the value'
     },
     cellRenderer: SharedWithRenderer,

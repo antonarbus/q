@@ -56,7 +56,7 @@ export const updateNumberAtHtmlIncrementally = ({
     })
   }
 
-  const setHtml = async () => {
+  const setHtml = async (): Promise<void> => {
     await incrementValues()
 
     const finalHtml = getStringWithNewFormattedNumber({

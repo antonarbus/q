@@ -33,7 +33,7 @@ const getAccessToken = async (
   }>,
   res: ResWithBody<ResBody>,
   next: Next,
-) => {
+): Promise<ResWithBody<ResBody> | undefined> => {
   try {
     const refreshJwtToken = req.cookies.refreshJwtToken
 
