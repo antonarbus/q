@@ -9,7 +9,7 @@ export const useGetQuotationsQuery = (): UseQueryResult<
   ResBody,
   AxiosError<ResBody>
 > => {
-  const query = useQuery({
+  const query = useQuery<ResBody, AxiosError<ResBody>>({
     queryKey: [queryKey.getQuotations],
     refetchOnMount: false,
     refetchOnWindowFocus: false,

@@ -47,4 +47,6 @@ const getFilesStats: RouterHandler = async (req, res, next) => {
   }
 }
 
-getFilesStatsRouter.get('/', verifyAccessTokenMiddleware, getFilesStats)
+getFilesStatsRouter.get('/', verifyAccessTokenMiddleware, (req, res, next) => {
+  void getFilesStats(req, res, next)
+})

@@ -24,7 +24,7 @@ const searchForShortcutsInNavStructure = ({
       shortcuts.push({
         name: menuItem.name,
         shortcut: menuItem.shortcut,
-        function: menuItem.func ?? null,
+        function: () => void menuItem.func?.(),
         link: menuItem.link ?? null,
       })
     }

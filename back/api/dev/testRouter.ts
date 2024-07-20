@@ -21,5 +21,7 @@ export async function test(req: Req, res: Res, next: Next): Promise<void> {
 testRouter.get(
   '/',
   // verifyTokenMiddleware,
-  test,
+  (req, res, next) => {
+    void test(req, res, next)
+  },
 )

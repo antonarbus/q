@@ -13,7 +13,7 @@ export const useSaveBookmarkMutation = (): UseMutationResult<
   AxiosError<ResBody>,
   Payload
 > => {
-  const query = useMutation({
+  const query = useMutation<ResBody, AxiosError<ResBody>, Payload>({
     mutationKey: [queryKey.saveBookmark],
     mutationFn: async ({ item }: Payload) => {
       const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>, Payload>(

@@ -25,9 +25,9 @@ export const onBoqBlockResizeStart: OnItemResizeStart = ({
   dispatch(quotationSlice.actions.disableFroalaReducer({ blockIndex }))
   dispatch(quotationSlice.actions.hideBoqItemPinsReducer({ blockIndex }))
 
-  initDescriptionColumnWidth =
-    (getState().quotation.blocks[blockIndex] as BoqBlock).boq.column.description
-      .width ?? 0
+  initDescriptionColumnWidth = (
+    getState().quotation.blocks[blockIndex] as BoqBlock
+  ).boq.column.description.width
 }
 
 export const onBoqBlockResize: OnItemResize = ({

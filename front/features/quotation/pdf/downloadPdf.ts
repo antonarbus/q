@@ -15,7 +15,6 @@ export const downloadPdf = async (): Promise<void> => {
   if (!(blocksContainerElement instanceof HTMLElement)) return
 
   const paperElements = document.querySelectorAll(`.${cls.paper}`)
-  if (paperElements === null) return
 
   const maxPaperWidth =
     Array.from(paperElements).reduce((maxWidth, paperElement) => {

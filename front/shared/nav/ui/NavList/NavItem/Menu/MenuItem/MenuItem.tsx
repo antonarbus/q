@@ -34,15 +34,15 @@ export const MenuItem = ({
   const isLink = Boolean(menuItem.link)
   const shortcut = menuItem.shortcut
   const disabled = Boolean(menuItem.disabled)
-  const isLoading = menuItem?.isLoading
-  const isSuccess = menuItem?.isSuccess
-  const isError = menuItem?.isError
+  const isLoading = menuItem.isLoading
+  const isSuccess = menuItem.isSuccess
+  const isError = menuItem.isError
 
   const fixedLink = `${location.pathname}/${link}`
     .replace('.', '')
     .replace('//', '/')
     .replace('//', '/')
-  const to = link?.includes('.') ? fixedLink : link
+  const to = link.includes('.') ? fixedLink : link
 
   return (
     <MenuItemStyled

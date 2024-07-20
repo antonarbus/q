@@ -111,5 +111,7 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
 requestPasswordResetRouter.post(
   '/',
   body('email').isEmail(),
-  requestPasswordReset,
+  (req, res, next) => {
+    void requestPasswordReset(req, res, next)
+  },
 )

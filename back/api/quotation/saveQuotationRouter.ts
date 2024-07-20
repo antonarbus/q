@@ -78,9 +78,9 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
       .select({ _id: 0, __v: 0 })
       .lean()
 
-    if (!quotationDataFromDb) {
-      return res.status(httpStatus.forbidden_403).json({ message: 'not saved' })
-    }
+    // if (!quotationDataFromDb) {
+    //   return res.status(httpStatus.forbidden_403).json({ message: 'not saved' })
+    // }
 
     const filePath = `${email}/${storageFolderName.quotations}/${quotation.id}.json`
     const file = bucket.file(filePath)
@@ -100,4 +100,6 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
   }
 }
 
-saveQuotationRouter.post('/', verifyAccessTokenMiddleware, saveQuotation)
+saveQuotationRouter.post('/', verifyAccessTokenMiddleware, (req, res, next) => {
+  void saveQuotation(req, res, next)
+})

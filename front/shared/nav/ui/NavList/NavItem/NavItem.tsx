@@ -70,7 +70,7 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
     .replace('.', '')
     .replace('//', '/')
     .replace('//', '/')
-  const to = link?.includes('.') ? fixedLink : link
+  const to = link.includes('.') ? fixedLink : link
 
   return (
     <li

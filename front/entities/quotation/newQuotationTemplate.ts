@@ -4,14 +4,16 @@ import { itemType } from './consts/itemType'
 import { type Quotation } from './types'
 
 export const newQuotationTemplate: Quotation = {
-  type: 'quotation',
   id: 'new',
+  type: 'quotation',
+  email: 'john@mail.com',
   sharedWith: [],
   preview: '',
   blocks: [
     {
       id: nanoid(5),
       type: itemType.text,
+      email: 'john@mail.com',
       width: 600,
       height: 0,
       isFroala: true,
@@ -23,6 +25,7 @@ export const newQuotationTemplate: Quotation = {
     {
       id: nanoid(5),
       type: itemType.boq,
+      email: 'john@mail.com',
       width: 600,
       height: 0,
       isFroala: true,
@@ -67,6 +70,7 @@ export const newQuotationTemplate: Quotation = {
           {
             id: nanoid(5),
             type: boqRowKey.row,
+            email: 'john@mail.com',
             height: 0,
             width: 0,
             description: {
@@ -105,6 +109,7 @@ export const newQuotationTemplate: Quotation = {
           {
             id: nanoid(5),
             type: boqRowKey.row,
+            email: 'john@mail.com',
             height: 0,
             width: 0,
             description: {
@@ -143,6 +148,7 @@ export const newQuotationTemplate: Quotation = {
           {
             id: nanoid(5),
             type: boqRowKey.row,
+            email: 'john@mail.com',
             height: 0,
             width: 0,
             description: {
@@ -184,6 +190,7 @@ export const newQuotationTemplate: Quotation = {
     {
       id: nanoid(5),
       type: itemType.price,
+      email: 'john@mail.com',
       width: 150,
       height: 0,
       isFroala: true,
@@ -199,6 +206,7 @@ export const newQuotationTemplate: Quotation = {
     {
       id: nanoid(5),
       type: itemType.text,
+      email: 'john@mail.com',
       width: 600,
       height: 0,
       isFroala: true,

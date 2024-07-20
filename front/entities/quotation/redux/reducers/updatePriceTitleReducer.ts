@@ -14,7 +14,5 @@ export const updatePriceTitleReducer = (
 
   if (block?.type !== itemType.price) return
 
-  if (html !== undefined) {
-    block.title.html = html
-  }
+  block.title.html = html
 }

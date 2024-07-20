@@ -26,7 +26,7 @@ export const updateBoqHeaderCellAtStore = ({
   if (boqBlock === undefined) return { didUpdate: false }
 
   const prevHtml = boqBlock.boq.header[boqHeaderKey].html
-  const html = editorRef.current?.html.get()
+  const html = editorRef.current.html.get()
   const didTextChange = prevHtml !== html
   if (!didTextChange) return { didUpdate: false }
 

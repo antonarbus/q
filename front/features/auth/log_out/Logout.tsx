@@ -30,25 +30,23 @@ export const Logout = (): JSX.Element => {
 
   useUpdateEffect(() => {
     if (isSuccess) {
-      if (data.message === 'logged out') {
-        deleteQuotationsCache()
-        deleteBookmarksCache()
+      deleteQuotationsCache()
+      deleteBookmarksCache()
 
-        accessTokenSignal.value = null
-        dispatch(userSlice.actions.forgetLoggedUser())
-        dispatch(
-          navSlice.actions.showNavItems({ navItemIdKeys: [navItemKey.login] }),
-        )
-        dispatch(
-          navSlice.actions.hideNavItems({
-            navItemIdKeys: [navItemKey.profile],
-          }),
-        )
-        setTimeout(() => {
-          loadingDotsOverlayTextSignal.value = null
-          navigate('..')
-        }, 1000)
-      }
+      accessTokenSignal.value = null
+      dispatch(userSlice.actions.forgetLoggedUser())
+      dispatch(
+        navSlice.actions.showNavItems({ navItemIdKeys: [navItemKey.login] }),
+      )
+      dispatch(
+        navSlice.actions.hideNavItems({
+          navItemIdKeys: [navItemKey.profile],
+        }),
+      )
+      setTimeout(() => {
+        loadingDotsOverlayTextSignal.value = null
+        navigate('..')
+      }, 1000)
     }
   }, [isSuccess])
 

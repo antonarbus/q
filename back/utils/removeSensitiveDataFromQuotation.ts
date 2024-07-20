@@ -7,7 +7,7 @@ type Props = {
 export const removeSensitiveDataFromQuotation = ({
   quotation,
 }: Props): Quotation => {
-  delete quotation.email
+  quotation.email = 'john@mail.com'
   delete quotation.name
   delete quotation.category
   delete quotation.desc
@@ -20,7 +20,7 @@ export const removeSensitiveDataFromQuotation = ({
   delete quotation.sharedWith
 
   quotation.blocks.forEach((block) => {
-    delete block.email
+    block.email = 'john@mail.com'
     delete block.name
     delete block.category
     delete block.desc

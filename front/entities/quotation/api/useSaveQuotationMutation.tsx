@@ -13,7 +13,7 @@ export const useSaveQuotationMutation = (): UseMutationResult<
   AxiosError<ResBody>,
   Payload
 > => {
-  const query = useMutation({
+  const query = useMutation<ResBody, AxiosError<ResBody>, Payload>({
     mutationKey: [queryKey.saveQuotation],
     mutationFn: async ({ quotation }: Payload) => {
       const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>, Payload>(

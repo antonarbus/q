@@ -9,7 +9,7 @@ export const useActivateMutation = (): UseMutationResult<
   AxiosError<ResBody>,
   Payload
 > => {
-  const query = useMutation({
+  const query = useMutation<ResBody, AxiosError<ResBody>, Payload>({
     mutationKey: [queryKey.activate],
     mutationFn: async ({ activationKey }: Payload) => {
       const res = await axios<ResBody>({

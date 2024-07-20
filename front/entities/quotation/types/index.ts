@@ -6,7 +6,7 @@ import { type itemType } from '../consts/itemType'
 // a bit stupid but code is simpler if we maintain these fields everywhere, even if we do not need them everywhere
 type Common = {
   id: 'new' | (Record<never, never> & string)
-  email?: string
+  email: string
   name?: string
   category?: string
   desc?: string

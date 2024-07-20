@@ -6,6 +6,7 @@ import { verifyAccessTokenMiddleware } from '../../middleware/verifyAccessTokenM
 import { bucket, storageFolderName } from '../../services/storage'
 import { type ResWithBody, type ReqWithBody, type Next } from '../../types'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '../../utils/getEmailFromRefreshTokenOrThrowUnauthorized'
+import { jsonParseSafe } from '@back/utils/jsonParseSafe'
 
 export type ReqBody = {
   id: Item['id']
@@ -40,11 +41,13 @@ const getBookmark: RouterHandler = async (req, res, next) => {
 
     const [fileBuffer] = await bucket.file(filePath).download()
 
-    if (!fileBuffer) {
+    const fileAsString = fileBuffer.toString()
+
+    const item = jsonParseSafe<Item>(fileAsString)
+
+    if (!item) {
       return res.status(httpStatus.notFound_404).json({ message: 'not found' })
     }
-
-    const item = JSON.parse(fileBuffer.toString())
 
     return res.status(httpStatus.success_200).json({
       message: 'found',
@@ -55,4 +58,6 @@ const getBookmark: RouterHandler = async (req, res, next) => {
   }
 }
 
-getBookmarkRouter.post('/', verifyAccessTokenMiddleware, getBookmark)
+getBookmarkRouter.post('/', verifyAccessTokenMiddleware, (req, res, next) => {
+  void getBookmark(req, res, next)
+})

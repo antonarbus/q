@@ -13,7 +13,7 @@ export const useDeleteQuotationMutation = (): UseMutationResult<
   AxiosError<ResBody>,
   Payload
 > => {
-  const mutation = useMutation({
+  const mutation = useMutation<ResBody, AxiosError<ResBody>, Payload>({
     mutationKey: [queryKey.deleteQuotation],
     mutationFn: async (payload: Payload) => {
       const res = await axiosWithAuth<ResBody>({

@@ -48,11 +48,8 @@ export const BoqRows = (): JSX.Element => {
               )
             }
 
-            if (boqRow.type === boqRowKey.paste) {
-              return <BoqPasteRowTextOverlay key={nanoid(5)} />
-            }
-
-            return null
+            // boqRow.type = 'paste'
+            return <BoqPasteRowTextOverlay key={nanoid(5)} />
           })}
         </AnimatePresence>
       </BoqRowsSortableContext>

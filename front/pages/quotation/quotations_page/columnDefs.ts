@@ -1,4 +1,4 @@
-import type { ColDef } from 'ag-grid-community'
+import type { ColDef, ValueFormatterParams } from 'ag-grid-community'
 import { type Quotation } from '@entities/quotation'
 import { dateFilterComparator } from './comparators/dateFilterComparator'
 import { ActionButtonsCellRenderer } from './renderers/ActionButtonsCellRenderer'
@@ -88,7 +88,9 @@ export const columnDefs: ColDef<Quotation>[] = [
   {
     field: 'sharedWith',
     headerName: 'shared with',
-    valueFormatter: (params) => params.value,
+    valueFormatter: (params) => {
+      return 'cell renderer is used, no need to format the value'
+    },
     cellRenderer: SharedWithRenderer,
   },
 ]

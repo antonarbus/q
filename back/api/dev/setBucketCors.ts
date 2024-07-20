@@ -1,10 +1,14 @@
 import express from 'express'
 import { bucket } from '../../services/storage'
-import { type Req, type Res } from '../../types'
+import { Next, type Req, type Res } from '../../types'
 
 // https://cloud.google.com/storage/docs/samples/storage-cors-configuration#storage_cors_configuration-nodejs
 
-async function configureBucketCors(_req: Req, res: Res): Promise<void> {
+async function configureBucketCors(
+  _req: Req,
+  res: Res,
+  next: Next,
+): Promise<void> {
   const corsUpdateRes = await bucket.setCorsConfiguration([
     {
       origin: [
@@ -30,4 +34,6 @@ async function configureBucketCors(_req: Req, res: Res): Promise<void> {
 
 export const setBucketCors = express.Router()
 
-setBucketCors.get('/', configureBucketCors)
+setBucketCors.get('/', (req, res, next) => {
+  void configureBucketCors(req, res, next)
+})

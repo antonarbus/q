@@ -31,7 +31,6 @@ export const ResizableColumn = ({
   const colWidth = useSelectorTyped(
     selectColumnWidth({ blockIndex, boqColumnKey }),
   )
-  const isColWidthSetManually = colWidth !== undefined
 
   return (
     <Resizable
@@ -41,14 +40,14 @@ export const ResizableColumn = ({
       }}
       minWidth={minWidth}
       size={{
-        width: isColWidthSetManually ? colWidth : 'auto',
+        width: colWidth,
         height: 'auto',
       }}
       style={{
-        display: isColWidthSetManually ? 'block' : 'flex',
-        flexGrow: isColWidthSetManually ? 0 : flexGrow,
-        width: isColWidthSetManually ? colWidth : 'auto',
-        maxWidth: isColWidthSetManually ? colWidth : 'auto',
+        display: 'block',
+        flexGrow: 0,
+        width: colWidth,
+        maxWidth: colWidth,
       }}
       css={{
         flexShrink: '1 !important',

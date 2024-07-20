@@ -9,7 +9,7 @@ export const useGetBookmarkCategoriesQuery = (): UseQueryResult<
   ResBody,
   AxiosError<ResBody>
 > => {
-  const query = useQuery({
+  const query = useQuery<ResBody, AxiosError<ResBody>>({
     queryKey: [queryKey.getBookmarkCategories],
     queryFn: async () => {
       const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({

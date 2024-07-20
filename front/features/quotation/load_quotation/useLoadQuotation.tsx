@@ -94,7 +94,7 @@ export function useLoadQuotation(): void {
     }
 
     // load quotation from server
-    if (id !== undefined && id !== 'new') {
+    if (id !== 'new') {
       loadingDotsOverlayTextSignal.value = `Loading ${id}...`
       getQuotation({ id })
     }
@@ -106,6 +106,7 @@ export function useLoadQuotation(): void {
 
       if (quotation === undefined) return
 
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       if (quotation.blocks === undefined) {
         notify({ msg: 'Quotation corrupted', type: 'warn', theme: 'light' })
         setTimeout(() => {
@@ -142,14 +143,14 @@ export function useLoadQuotation(): void {
   useUpdateEffect(() => {
     if (isError) {
       if (error.response?.data.message === 'no permission to view') {
-        backgroundMessageSignal.value = `No permission to view quotation ${id}`
+        backgroundMessageSignal.value = `No permission to view quotation ${String(id)}`
       } else if (
         error.response?.data.message === 'not found in bucket' ||
         error.response?.data.message === 'not found in db'
       ) {
-        backgroundMessageSignal.value = `Quotation ${id} is not found`
+        backgroundMessageSignal.value = `Quotation ${String(id)} is not found`
       } else if (error.response?.data.message === 'not shared') {
-        backgroundMessageSignal.value = `Quotation ${id} is private`
+        backgroundMessageSignal.value = `Quotation ${String(id)} is private`
       } else {
         notify({ msg: 'Internal error', type: 'error', theme: 'light' })
         backgroundMessageSignal.value = 'Internal error'

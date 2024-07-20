@@ -12,12 +12,12 @@ type Props = {
   editor: FroalaEditor
 }
 
-export const updateNumberAtHtmlIncrementally = async ({
+export const updateNumberAtHtmlIncrementally = ({
   oldNumber,
   newNumber,
   html,
   editor,
-}: Props): Promise<void> => {
+}: Props): void => {
   const steps = 100
   const valueDifference = newNumber - oldNumber
 
@@ -56,7 +56,7 @@ export const updateNumberAtHtmlIncrementally = async ({
     })
   }
 
-  await setTimeout(async () => {
+  const setHtml = async () => {
     await incrementValues()
 
     const finalHtml = getStringWithNewFormattedNumber({
@@ -66,5 +66,9 @@ export const updateNumberAtHtmlIncrementally = async ({
     })
 
     editor.html.set(finalHtml)
+  }
+
+  setTimeout(() => {
+    void setHtml()
   })
 }

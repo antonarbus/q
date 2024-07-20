@@ -31,7 +31,7 @@ export const LoadingDots = ({
       .fill('')
       .map((dot, index) => (
         <span
-          key={`dot-${index}`}
+          key={`dot-${String(index)}`}
           css={{
             width: size ?? '1.5rem',
             height: size ?? '1.5rem',

@@ -26,6 +26,7 @@ export const insertPasteBlockReducer = (
   const pasteBlock: PasteBlock = {
     id: nanoid(3),
     type: itemType.paste,
+    email: 'john@mail.com',
     height: 0,
     width: 0,
     isFroala: true,

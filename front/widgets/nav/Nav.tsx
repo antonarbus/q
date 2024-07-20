@@ -33,10 +33,10 @@ export const Nav = (): JSX.Element => {
         alignItems: 'stretch',
         position: 'sticky',
         top: '5px',
-        marginBottom: `${theme.nav.marginBottom}px`,
+        marginBottom: `${String(theme.nav.marginBottom)}px`,
         marginLeft: '10px',
         marginRight: '10px',
-        height: `${theme.nav.height}px`,
+        height: `${String(theme.nav.height)}px`,
         borderRadius: '4px',
         background: theme.colors.darkBackground,
         boxShadow: '0 0px 5px 0 #0000005c',
@@ -44,29 +44,30 @@ export const Nav = (): JSX.Element => {
         contain: 'layout inline-size',
         fontWeight: 300,
         '& > ul > li > a > .icon-round-wrapper': mediaEnabled && {
-          [`@media (max-width: ${mediaQueryWidth.icon}px) and (min-width: ${mediaQueryWidth.name}px)`]:
+          [`@media (max-width: ${String(mediaQueryWidth.icon)}px) and (min-width: ${String(mediaQueryWidth.name)}px)`]:
             {
               display: 'none',
             },
-          [`@media (max-width: ${mediaQueryWidth.burger}px)`]: {
+          [`@media (max-width: ${String(mediaQueryWidth.burger)}px)`]: {
             display: 'none',
           },
         },
         '& .nav-item-name': mediaEnabled && {
-          [`@media (max-width: ${mediaQueryWidth.name}px)`]: {
+          [`@media (max-width: ${String(mediaQueryWidth.name)}px)`]: {
             display: 'none',
           },
         },
         '& li:not(:last-child)': mediaEnabled && {
-          [`@media (max-width: ${mediaQueryWidth.burger}px)`]: {
+          [`@media (max-width: ${String(mediaQueryWidth.burger)}px)`]: {
             display: 'none',
           },
         },
         '& li:last-child': {
           display: 'none',
-          [`@media (max-width: ${mediaQueryWidth.burger}px)`]: mediaEnabled && {
-            display: 'flex',
-          },
+          [`@media (max-width: ${String(mediaQueryWidth.burger)}px)`]:
+            mediaEnabled && {
+              display: 'flex',
+            },
         },
       }}
     >

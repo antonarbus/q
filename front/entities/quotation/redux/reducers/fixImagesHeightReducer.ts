@@ -16,7 +16,7 @@ function makeHeightFixedInHtmlString({ htmlString, newHeight }: Props): string {
 
     const newStyle = styleAttribute.replace(
       heightAutoRegExp,
-      `height: ${newHeight}px;`,
+      `height: ${String(newHeight)}px;`,
     )
     return match.replace(styleAttribute, newStyle)
   }

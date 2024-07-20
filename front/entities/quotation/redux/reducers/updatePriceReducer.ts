@@ -15,8 +15,6 @@ export const updatePriceReducer = (
 
   if (block?.type !== itemType.price) return
 
-  if (html !== undefined) {
-    block.price.html = html
-    block.price.value = value
-  }
+  block.price.html = html
+  block.price.value = value
 }

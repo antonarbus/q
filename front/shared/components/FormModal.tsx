@@ -174,7 +174,7 @@ export const FormModal = ({
 
               return (
                 <motion.div
-                  key={`form-child-${index}`}
+                  key={`form-child-${String(index)}`}
                   initial={{
                     height: 0,
                     marginTop: 0,

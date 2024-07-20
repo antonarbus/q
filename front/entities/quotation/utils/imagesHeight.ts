@@ -5,12 +5,10 @@ import { quotationSlice } from '../redux/quotationSlice'
 export const fixImagesHeight = (): void => {
   const images = document.querySelectorAll(`.${cls.block} img`)
 
-  if (images === undefined) return
-
   images.forEach((imageElement) => {
     if (!(imageElement instanceof HTMLElement)) return
 
-    imageElement.style.height = `${imageElement.clientHeight}px`
+    imageElement.style.height = `${String(imageElement.clientHeight)}px`
 
     dispatch(
       quotationSlice.actions.fixImagesHeightReducer({
@@ -23,8 +21,6 @@ export const fixImagesHeight = (): void => {
 
 export const unfixImagesHeight = (): void => {
   const images = document.querySelectorAll(`.${cls.block} img`)
-
-  if (images === undefined) return
 
   images.forEach((imageElement) => {
     if (!(imageElement instanceof HTMLElement)) return

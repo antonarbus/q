@@ -7,7 +7,7 @@ import { PriceCell } from './cells/PriceCell'
 import { QtyCell } from './cells/QtyCell'
 
 type Props = {
-  onBlur: (e: FocusEvent<HTMLDivElement, Element>) => void
+  onBlur: (e: FocusEvent<HTMLDivElement>) => void
 }
 
 export const BoqRowForEditModal = ({ onBlur }: Props): JSX.Element => {

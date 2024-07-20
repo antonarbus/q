@@ -21,11 +21,11 @@ export type RouteHandlerAsync = (
 //   body: TBodyObject
 // }
 
-export interface ReqWithBody<T = unknown> extends Express.Request {
+export type ReqWithBody<T = unknown> = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [x: string]: any
   body: T
-}
+} & Express.Request
 
 export type ResWithBody<T> = Response<T>
 

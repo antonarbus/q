@@ -17,7 +17,7 @@ const findAndReplaceStringOutsideHtmlTags = ({
     .replace(
       regExpToFindSearchTextOutsideHtmlTags,
       (match, before, found, after) => {
-        return before + replacementText + after
+        return String(before) + replacementText + String(after)
       },
     )
   return resultString

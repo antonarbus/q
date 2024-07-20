@@ -2,7 +2,7 @@ import { getState, useSelectorTyped } from '@lib_instances/store'
 import { useSignal } from '@preact/signals-react'
 import { useRef } from 'react'
 import { MdSaveAlt } from 'react-icons/md'
-import { useLocation } from 'react-router-dom'
+import { Location, useLocation } from 'react-router-dom'
 import { useEffectOnce } from 'react-use'
 import { useSaveQuotation } from '@features/quotation/save_quotation'
 import { FormModal } from '@shared/components'
@@ -15,28 +15,31 @@ import { DescriptionField } from './DescriptionField'
 import { InfoField } from './InfoField'
 import { NameField } from './NameField'
 import { ShareField } from './ShareField'
+import { OpenSaveQuotationModalNavigateState } from '@features/open_close/open_save_quotation_modal/openSaveQuotationModal'
 
 export const SaveQuotationModal = (): JSX.Element => {
+  const location =
+    useLocation() as Location<OpenSaveQuotationModalNavigateState>
   const quotation = getState().quotation
   const modalRef = useRef<HTMLDivElement>(null)
   const nameSignal = useSignal(quotation.name ?? '')
   const categorySignal = useSignal(quotation.category ?? '')
   const descSignal = useSignal(quotation.desc ?? '')
   const infoSignal = useSignal(quotation.info ?? '')
-  const scrollTop = useLocation().state?.scrollTop ?? 0
+  const scrollTop = location.state.scrollTop
 
   useEffectOnce(() => {
     document.body.scrollTop = scrollTop
   })
 
   const getOptionValue = (): SharedWithOption => {
-    if (quotation?.sharedWith?.length === 0) return sharedWithOption.nobody
-    if (quotation?.sharedWith?.includes('*')) return sharedWithOption.everybody
+    if (quotation.sharedWith?.length === 0) return sharedWithOption.nobody
+    if (quotation.sharedWith?.includes('*')) return sharedWithOption.everybody
     return sharedWithOption.persons
   }
 
   const shareWithOptionSignal = useSignal<SharedWithOption>(getOptionValue())
-  const sharedWithSignal = useSignal<string[]>(quotation?.sharedWith ?? [])
+  const sharedWithSignal = useSignal<string[]>(quotation.sharedWith ?? [])
 
   const { onSubmit, isPending, isSuccess, isError } = useSaveQuotation({
     modalRef,

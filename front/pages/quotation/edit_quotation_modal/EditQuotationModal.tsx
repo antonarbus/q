@@ -19,19 +19,19 @@ export const EditQuotationModal = (): JSX.Element => {
   const quotation = getState().quotation
 
   const modalRef = useRef<HTMLDivElement>(null)
-  const nameSignal = useSignal(quotation?.name ?? '')
-  const categorySignal = useSignal(quotation?.category ?? '')
-  const descSignal = useSignal(quotation?.desc ?? '')
+  const nameSignal = useSignal(quotation.name ?? '')
+  const categorySignal = useSignal(quotation.category ?? '')
+  const descSignal = useSignal(quotation.desc ?? '')
   const infoSignal = useSignal(quotation.info ?? '')
 
   const getOptionValue = (): SharedWithOption => {
-    if (quotation?.sharedWith?.length === 0) return sharedWithOption.nobody
-    if (quotation?.sharedWith?.includes('*')) return sharedWithOption.everybody
+    if (quotation.sharedWith?.length === 0) return sharedWithOption.nobody
+    if (quotation.sharedWith?.includes('*')) return sharedWithOption.everybody
     return sharedWithOption.persons
   }
 
   const shareWithOptionSignal = useSignal<SharedWithOption>(getOptionValue())
-  const sharedWithSignal = useSignal<string[]>(quotation?.sharedWith ?? [])
+  const sharedWithSignal = useSignal<string[]>(quotation.sharedWith ?? [])
 
   const { onSubmit, isPending, isSuccess, isError } = useEditQuotation({
     modalRef,

@@ -19,7 +19,7 @@ export const TextBlockBookmark = (): React.ReactNode => {
   const editorRef = useRef<FroalaEditor | null>(null)
 
   if (bookmarkSignal.value === null) return null
-  if (bookmarkSignal.value?.type !== itemType.text) return null
+  if (bookmarkSignal.value.type !== itemType.text) return null
 
   return (
     <BlockProvider

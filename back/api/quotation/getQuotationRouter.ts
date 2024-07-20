@@ -6,12 +6,14 @@ import { bucket, storageFolderName } from '../../services/storage'
 import { type ResWithBody, type ReqWithBody, type Next } from '../../types'
 import { getEmailFromRefreshToken } from '../../utils/getEmailFromRefreshToken'
 import { removeSensitiveDataFromQuotation } from '../../utils/removeSensitiveDataFromQuotation'
+import { jsonParseSafe } from '@back/utils/jsonParseSafe'
 
 export type ReqBody = {
   id: Quotation['id']
 }
 
 export type ResBody = {
+  quotation?: Quotation
   message:
     | 'not found in db'
     | 'not shared'
@@ -19,7 +21,6 @@ export type ResBody = {
     | 'not found in bucket'
     | 'owner permission'
     | 'viewer permission'
-  quotation?: Quotation
 }
 
 type RouterHandler = (
@@ -34,8 +35,6 @@ const getQuotation: RouterHandler = async (req, res, next) => {
   try {
     const { id } = req.body
 
-    const email = getEmailFromRefreshToken(req)
-
     const document = await QuotationModel.findOneAndUpdate(
       { id },
       { openedAt: Date.now() },
@@ -47,6 +46,8 @@ const getQuotation: RouterHandler = async (req, res, next) => {
         .status(httpStatus.notFound_404)
         .json({ message: 'not found in db' })
     }
+
+    const email = getEmailFromRefreshToken(req)
 
     const isOwner = email === document.email
 
@@ -73,13 +74,13 @@ const getQuotation: RouterHandler = async (req, res, next) => {
 
     const [fileBuffer] = await bucket.file(filePath).download()
 
-    if (!fileBuffer) {
+    const quotation = jsonParseSafe<Quotation>(fileBuffer.toString())
+
+    if (!quotation) {
       return res
         .status(httpStatus.notFound_404)
         .json({ message: 'not found in bucket' })
     }
-
-    const quotation: Quotation = JSON.parse(fileBuffer.toString())
 
     if (isOwner) {
       return res
@@ -102,4 +103,6 @@ const getQuotation: RouterHandler = async (req, res, next) => {
   }
 }
 
-getQuotationRouter.post('/', getQuotation)
+getQuotationRouter.post('/', (req, res, next) => {
+  void getQuotation(req, res, next)
+})

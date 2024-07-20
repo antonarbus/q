@@ -1,3 +1,4 @@
+import { jsonParseSafe } from '@back/utils/jsonParseSafe'
 import jwt, { type JwtPayload } from 'jsonwebtoken'
 
 const fifteenMinInSec = 15 * 60
@@ -82,7 +83,11 @@ export const getJwtExpiration = ({ token }: { token: string }): Date => {
   const payloadString = atob(payloadPart)
 
   // Parse the payload JSON
-  const payload = JSON.parse(payloadString)
+  const payload = jsonParseSafe<JwtPayload>(payloadString)
+
+  if (!payload) {
+    throw new Error('Token does not have an expiration (exp) claim')
+  }
 
   // Extract the expiration time (exp) from the payload
   const expiration = payload.exp

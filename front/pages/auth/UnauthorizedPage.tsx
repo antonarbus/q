@@ -10,7 +10,7 @@ export const UnauthorizedPage = (): JSX.Element => {
     <div
       css={{
         height: '100vh',
-        marginTop: `-${theme.nav.fullHeight}px`,
+        marginTop: `-${String(theme.nav.fullHeight)}px`,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
