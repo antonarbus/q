@@ -1,5 +1,6 @@
 import { errorMessageCommon } from '@shared/consts/errorMessageCommon'
-import { JwtPayloadExtended, verifyRefreshToken } from '../services/jwt'
+import type { JwtPayloadExtended } from '../services/jwt'
+import { verifyRefreshToken } from '../services/jwt'
 import { Req, ReqExtended, type ReqWithBody } from '../types'
 
 type ReqWithCookies = {

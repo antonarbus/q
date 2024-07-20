@@ -2,7 +2,8 @@ import { getState, useSelectorTyped } from '@lib_instances/store'
 import { useSignal } from '@preact/signals-react'
 import { useRef } from 'react'
 import { MdSaveAlt } from 'react-icons/md'
-import { Location, useLocation } from 'react-router-dom'
+import type { Location } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useEffectOnce } from 'react-use'
 import { useSaveQuotation } from '@features/quotation/save_quotation'
 import { FormModal } from '@shared/components'
@@ -15,7 +16,7 @@ import { DescriptionField } from './DescriptionField'
 import { InfoField } from './InfoField'
 import { NameField } from './NameField'
 import { ShareField } from './ShareField'
-import { OpenSaveQuotationModalNavigateState } from '@features/open_close/open_save_quotation_modal/openSaveQuotationModal'
+import type { OpenSaveQuotationModalNavigateState } from '@features/open_close/open_save_quotation_modal/openSaveQuotationModal'
 
 export const SaveQuotationModal = (): JSX.Element => {
   const location =
