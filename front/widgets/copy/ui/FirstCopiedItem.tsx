@@ -57,7 +57,7 @@ export const FirstCopiedItem = (): JSX.Element | null => {
   const firstPreview = getState().copy.previews[0]
 
   if (!firstItem?.width) return null
-  if (!firstItem?.height) return null
+  if (!firstItem.height) return null
 
   const scaleFactorForFirstItem =
     (containerWidth - 2 * containerPadding) / firstItem.width
@@ -96,7 +96,7 @@ export const FirstCopiedItem = (): JSX.Element | null => {
         <ScaledCopyItem
           html={firstPreview ?? '∑'}
           width={firstItem.width}
-          scaleFactor={`${scaleFactorForFirstItem}`}
+          scaleFactor={String(scaleFactorForFirstItem)}
         />
       </motion.div>
     </AnimatePresence>

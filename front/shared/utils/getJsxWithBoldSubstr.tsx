@@ -11,6 +11,6 @@ export const getJsxWithBoldSubstr = ({
   return text
     .split(regExp)
     .map((str, index) =>
-      regExp.test(str) ? <b key={`char-${index}`}>{str}</b> : str,
+      regExp.test(str) ? <b key={`char-${String(index)}`}>{str}</b> : str,
     )
 }

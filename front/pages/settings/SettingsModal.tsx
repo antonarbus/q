@@ -64,9 +64,9 @@ export const SettingsModal = (): JSX.Element => {
               }}
             >
               <GrStorage />
-              <Box>{data?.fileStats.fileCount} files</Box>
+              <Box>{data.fileStats.fileCount} files</Box>
               <Box>
-                {bytes.format(data?.fileStats.totalSize, {
+                {bytes.format(data.fileStats.totalSize, {
                   unit: 'mb',
                   thousandsSeparator: ' ',
                   unitSeparator: ' ',

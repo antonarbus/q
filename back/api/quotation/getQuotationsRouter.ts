@@ -51,4 +51,6 @@ const getQuotations: RouterHandler = async (req, res, next) => {
   }
 }
 
-getQuotationsRouter.get('/', verifyAccessTokenMiddleware, getQuotations)
+getQuotationsRouter.get('/', verifyAccessTokenMiddleware, (req, res, next) => {
+  void getQuotations(req, res, next)
+})

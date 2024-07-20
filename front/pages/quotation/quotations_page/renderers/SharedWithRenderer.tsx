@@ -8,7 +8,7 @@ export const SharedWithRenderer = (
 ): ReactNode => {
   if (
     !params.value ||
-    (Array.isArray(params.value) && params.value?.length === 0)
+    (Array.isArray(params.value) && params.value.length === 0)
   ) {
     return (
       <Chip

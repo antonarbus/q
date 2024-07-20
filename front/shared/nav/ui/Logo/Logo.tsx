@@ -25,7 +25,7 @@ export const Logo = ({ logoRef }: Prop): JSX.Element => {
         '& .logo': {
           userSelect: 'none',
           fontSize: '16px',
-          [`@media (max-width: ${mediaQueryWidth.logoPart}px) and (min-width: ${mediaQueryWidth.burger}px)`]:
+          [`@media (max-width: ${String(mediaQueryWidth.logoPart)}px) and (min-width: ${String(mediaQueryWidth.burger)}px)`]:
             mediaEnabled && {
               fontSize: '30px',
             },
@@ -38,14 +38,14 @@ export const Logo = ({ logoRef }: Prop): JSX.Element => {
               color: 'white !important',
               transition: '0.3s ease',
             },
-            [`@media (max-width: ${mediaQueryWidth.logoPart}px) and (min-width: ${mediaQueryWidth.burger}px)`]:
+            [`@media (max-width: ${String(mediaQueryWidth.logoPart)}px) and (min-width: ${String(mediaQueryWidth.burger)}px)`]:
               mediaEnabled && {
                 display: 'none',
               },
           },
           '& span:last-child': {
             color: '#e7e7e7bf',
-            [`@media (max-width: ${mediaQueryWidth.logoExtension}px) and (min-width: ${mediaQueryWidth.burger}px)`]:
+            [`@media (max-width: ${String(mediaQueryWidth.logoExtension)}px) and (min-width: ${String(mediaQueryWidth.burger)}px)`]:
               mediaEnabled && {
                 display: 'none',
               },

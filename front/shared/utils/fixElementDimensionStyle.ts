@@ -4,11 +4,11 @@ type Props = {
 
 export const fixElementDimensionStyle = ({ element }: Props): void => {
   const width = element.clientWidth
-  element.style.maxWidth = `${width}px`
-  element.style.minWidth = `${width}px`
-  element.style.width = `${width}px`
+  element.style.maxWidth = `${String(width)}px`
+  element.style.minWidth = `${String(width)}px`
+  element.style.width = `${String(width)}px`
   const height = element.clientHeight
-  element.style.maxHeight = `${height}px`
-  element.style.minHeight = `${height}px`
-  element.style.height = `${height}px`
+  element.style.maxHeight = `${String(height)}px`
+  element.style.minHeight = `${String(height)}px`
+  element.style.height = `${String(height)}px`
 }

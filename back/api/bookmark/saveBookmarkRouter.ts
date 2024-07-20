@@ -84,9 +84,9 @@ const saveBookmark: RouterHandler = async (req, res, next) => {
       .select({ _id: 0, __v: 0 })
       .lean()
 
-    if (!itemDataFromDb) {
-      return res.status(httpStatus.forbidden_403).json({ message: 'not saved' })
-    }
+    // if (!itemDataFromDb) {
+    //   return res.status(httpStatus.forbidden_403).json({ message: 'not saved' })
+    // }
 
     const filePath = `${email}/${storageFolderName.bookmarks}/${item.id}.json`
     const file = bucket.file(filePath)
@@ -102,4 +102,6 @@ const saveBookmark: RouterHandler = async (req, res, next) => {
   }
 }
 
-saveBookmarkRouter.post('/', verifyAccessTokenMiddleware, saveBookmark)
+saveBookmarkRouter.post('/', verifyAccessTokenMiddleware, (req, res, next) => {
+  void saveBookmark(req, res, next)
+})

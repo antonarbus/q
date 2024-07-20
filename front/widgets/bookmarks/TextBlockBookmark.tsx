@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import { useRef } from 'react'
 import {
   onTextBlockBookmarkResizeStart,
@@ -15,11 +16,11 @@ import type { FroalaEditor } from '@shared/types/froala'
 import { bookmarkSignal } from '@entities/bookmark'
 import { BookmarkComp } from '@entities/quotation/ui/BookmarkComp'
 
-export const TextBlockBookmark = (): React.ReactNode => {
+export const TextBlockBookmark = (): ReactNode => {
   const editorRef = useRef<FroalaEditor | null>(null)
 
   if (bookmarkSignal.value === null) return null
-  if (bookmarkSignal.value?.type !== itemType.text) return null
+  if (bookmarkSignal.value.type !== itemType.text) return null
 
   return (
     <BlockProvider

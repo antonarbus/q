@@ -27,11 +27,15 @@ async function uploadFileIntoMemory({ file, email }: Props): Res {
   const size = file.size / 1024 / 1024
 
   return await new Promise((resolve, reject) => {
+    const makeFilePublic = async (): Promise<void> => {
+      await bucket.file(filePath).makePublic()
+      const link = `https://storage.googleapis.com/${bucket.name}/${filePath}`
+      resolve({ link, name, size })
+    }
+
     blobStream
-      .on('finish', async () => {
-        await bucket.file(filePath).makePublic()
-        const link = `https://storage.googleapis.com/${bucket.name}/${filePath}`
-        resolve({ link, name, size })
+      .on('finish', () => {
+        void makeFilePublic()
       })
       .on('error', (error) => {
         console.error(error)
@@ -89,5 +93,7 @@ uploadRouter.post(
     limits: { fileSize: 50 * 1024 * 1024 },
   }).single('file'), // middleware processes single file uploads, where 'file' is the name of the file input field. The file's details will be stored in req.file
   // verifyTokenMiddleware, // todo: do not know how to use axios instance with froala file update, so let's validate token manually
-  upload,
+  (req, res, next) => {
+    void upload(req, res, next)
+  },
 )

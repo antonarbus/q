@@ -49,7 +49,7 @@ export const validateTotalPrice = ({ editorRef, blockIndex }: Props): void => {
     }),
   )
 
-  void updateNumberAtHtmlIncrementally({
+  updateNumberAtHtmlIncrementally({
     oldNumber: priceBlock.price.value,
     newNumber: price,
     editor: editorRef.current,

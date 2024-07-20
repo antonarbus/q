@@ -13,6 +13,7 @@ export const insertBoqBlock = (e?: MouseEvent): void => {
   const boqBlock: BoqBlock = {
     id: nanoid(5),
     type: itemType.boq,
+    email: 'john@mail.com',
     width: 600,
     height: 267,
     isFroala: true,
@@ -356,6 +357,7 @@ export const insertBoqBlock = (e?: MouseEvent): void => {
         {
           id: nanoid(5),
           type: boqRowKey.row,
+          email: 'john@mail.com',
           height: 0,
           width: 0,
           description: {
@@ -394,6 +396,7 @@ export const insertBoqBlock = (e?: MouseEvent): void => {
         {
           id: nanoid(5),
           type: boqRowKey.row,
+          email: 'john@mail.com',
           height: 0,
           width: 0,
           description: {
@@ -432,6 +435,7 @@ export const insertBoqBlock = (e?: MouseEvent): void => {
         {
           id: nanoid(5),
           type: boqRowKey.row,
+          email: 'john@mail.com',
           height: 0,
           width: 0,
           description: {

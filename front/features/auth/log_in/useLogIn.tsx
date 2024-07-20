@@ -1,6 +1,7 @@
 import { dispatch } from '@lib_instances/store'
 import { type Signal } from '@preact/signals-react'
 import { type UseMutationResult } from '@tanstack/react-query'
+import type { Location } from 'react-router-dom'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetBookmarksQuery } from '@entities/bookmark'
@@ -14,6 +15,7 @@ import { navSlice } from '@shared/nav'
 import { reRenderQuotationSignal } from '@shared/signals/reRenderQuotationSignal'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
+import type { OpenSaveQuotationModalNavigateState } from '@features/open_close/open_save_quotation_modal/openSaveQuotationModal'
 
 type Props = {
   emailSignal: Signal<string>
@@ -43,7 +45,8 @@ export const useLogIn = ({
     isError,
     error,
   } = useLogInMutation()
-  const location = useLocation()
+  const location =
+    useLocation() as Location<OpenSaveQuotationModalNavigateState>
   const { refetch: refetchQuotations } = useGetQuotationsQuery()
   const { refetch: refetchBookmarks } = useGetBookmarksQuery()
 
@@ -93,7 +96,7 @@ export const useLogIn = ({
         slideElement({
           element: modalRef.current,
           onSlideElementComplete: () => {
-            const navigateTo = location.state?.navigateTo
+            const navigateTo = location.state.navigateTo
 
             if (typeof navigateTo === 'string') {
               navigate(navigateTo)

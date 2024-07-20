@@ -100,5 +100,7 @@ const resetPassword: RouterHandler = async (req, res, next) => {
 resetPasswordRouter.post(
   '/',
   body('password').isLength({ min: 3 }),
-  resetPassword,
+  (req, res, next) => {
+    void resetPassword(req, res, next)
+  },
 )

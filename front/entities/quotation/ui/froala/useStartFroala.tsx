@@ -1,8 +1,7 @@
-/* eslint-disable object-shorthand */
-/* eslint-disable func-names */
-// /* eslint-disable */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
+/* eslint-disable */
+
 // import './froalaPlugins.js'
 import './froalaPkg.js'
 import './froalaPkg.css'

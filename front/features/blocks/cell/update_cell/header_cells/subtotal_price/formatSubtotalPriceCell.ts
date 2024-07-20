@@ -19,7 +19,6 @@ export const formatSubtotalPriceCell = ({
   if (boqBlock === undefined) return
 
   const value = boqBlock.boq.header.subTotalPrice.value
-  if (value === null) return
 
   const roundedValue = roundTo(value, 2)
 

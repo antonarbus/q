@@ -8,6 +8,7 @@ export const insertTextBlock = (e?: MouseEvent): void => {
   const block: TextBlock = {
     id: nanoid(5),
     type: itemType.text,
+    email: 'john@mail.com',
     width: 600,
     height: 79.2,
     isFroala: true,

@@ -26,15 +26,13 @@ const getBookmarkCategories: RouterHandler = async (req, res, next) => {
 
     const categories = await BookmarkModel.find({ email }).distinct('category')
 
-    if (categories) {
-      return res
-        .status(httpStatus.success_200)
-        .json({ message: 'Found', categories })
-    }
-
     return res
-      .status(httpStatus.notFound_404)
-      .json({ message: 'Unhandled error' })
+      .status(httpStatus.success_200)
+      .json({ message: 'Found', categories })
+
+    // return res
+    //   .status(httpStatus.notFound_404)
+    //   .json({ message: 'Unhandled error' })
   } catch (error) {
     next(error)
   }
@@ -43,5 +41,7 @@ const getBookmarkCategories: RouterHandler = async (req, res, next) => {
 getBookmarkCategoriesRouter.get(
   '/',
   verifyAccessTokenMiddleware,
-  getBookmarkCategories,
+  (req, res, next) => {
+    void getBookmarkCategories(req, res, next)
+  },
 )

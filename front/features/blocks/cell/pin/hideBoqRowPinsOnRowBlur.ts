@@ -8,7 +8,7 @@ import {
 import { cls } from '@shared/consts/cls'
 
 type Props = {
-  e: FocusEvent<HTMLDivElement, Element>
+  e: FocusEvent<HTMLDivElement>
   blockIndex: number
   rowIndex: number
 }

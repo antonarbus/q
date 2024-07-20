@@ -37,8 +37,9 @@ import { updateQuotationInfoReducer } from './reducers/updateQuotationInfoReduce
 import { updateSubTotalPriceReducer } from './reducers/updateSubTotalPriceReducer'
 
 const initialState: Quotation = {
-  type: 'quotation',
   id: '',
+  type: 'quotation',
+  email: 'john@mail.com',
   blocks: [],
 }
 

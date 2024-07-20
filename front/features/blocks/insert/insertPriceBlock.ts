@@ -8,6 +8,7 @@ export const insertPriceBlock = (e?: MouseEvent): void => {
   const block: PriceBlock = {
     id: nanoid(5),
     type: itemType.price,
+    email: 'john@mail.com',
     width: 150,
     height: 90,
     isFroala: true,

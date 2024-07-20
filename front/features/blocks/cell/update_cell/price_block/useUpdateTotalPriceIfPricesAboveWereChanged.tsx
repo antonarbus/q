@@ -46,7 +46,7 @@ export const useUpdateTotalPriceIfPricesAboveWereChanged = ({
       }),
     )
 
-    void updateNumberAtHtmlIncrementally({
+    updateNumberAtHtmlIncrementally({
       oldNumber: priceBlock.price.value,
       newNumber: price,
       editor: editorRef.current,

@@ -5,16 +5,15 @@ import { boqRowKey } from '../../consts/boqRowKey'
 import { itemType } from '../../consts/itemType'
 import type { Item, Quotation } from '../../types'
 
-type Payload = {
-  id: string
-  newItemId: string
-  pastePos: PastePos
-  item: Item
-}
-
-type Reducer = (state: Quotation, action: PayloadAction<Payload>) => void
-
-export const pasteItemReducer: Reducer = (state, action) => {
+export const pasteItemReducer = (
+  state: Quotation,
+  action: PayloadAction<{
+    id: string
+    newItemId: string
+    pastePos: PastePos
+    item: Item
+  }>,
+): void => {
   const { id, newItemId, pastePos, item } = action.payload
 
   const itemToPaste: Item = { ...structuredClone(item), id: newItemId }
@@ -64,7 +63,7 @@ export const pasteItemReducer: Reducer = (state, action) => {
     const spliceSettings = getSpliceSettings()
 
     const blocksWithoutPasteText = state.blocks.filter(
-      ({ type }) => type !== itemType.paste,
+      (block) => block.type !== itemType.paste,
     )
 
     blocksWithoutPasteText.splice(
@@ -86,7 +85,10 @@ export const pasteItemReducer: Reducer = (state, action) => {
         deleteCount: number
       }
 
-      let spliceSettings: SplicingSettings | null = null
+      const spliceSettings = {
+        insertAtIndex: -1,
+        deleteCount: 0,
+      }
 
       block.boq.rows.forEach((boqRow, hoveredItemIndex) => {
         if (boqRow.id !== id) return
@@ -112,18 +114,17 @@ export const pasteItemReducer: Reducer = (state, action) => {
           return spliceParams
         }
 
-        spliceSettings = getSpliceSettings()
+        spliceSettings.insertAtIndex = getSpliceSettings().insertAtIndex
+        spliceSettings.deleteCount = getSpliceSettings().deleteCount
       })
-
-      if (spliceSettings === null) return
 
       const boqRowsWithoutPasteText = block.boq.rows.filter(
         (boqRow) => boqRow.type !== boqRowKey.paste,
       )
 
       boqRowsWithoutPasteText.splice(
-        (spliceSettings as SplicingSettings).insertAtIndex,
-        (spliceSettings as SplicingSettings).deleteCount,
+        spliceSettings.insertAtIndex,
+        spliceSettings.deleteCount,
         itemToPaste,
       )
 

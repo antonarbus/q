@@ -15,7 +15,5 @@ export const updateBlockTextReducer = (
   if (!block) return
   if (block.type !== itemType.text) return
 
-  if (html !== undefined) {
-    block.text.html = html
-  }
+  block.text.html = html
 }

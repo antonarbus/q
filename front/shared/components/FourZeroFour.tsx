@@ -4,7 +4,7 @@ export const FourZeroFour = (): JSX.Element => (
   <div
     style={{
       height: '100vh',
-      marginTop: `-${theme.nav.fullHeight}px`,
+      marginTop: `-${String(theme.nav.fullHeight)}px`,
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',

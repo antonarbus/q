@@ -151,9 +151,6 @@ export const useEditBookmark = ({
     const html = paperElement.innerHTML
     const cleanedHtml = cleanHtml(html)
 
-    // const item = getState().quotation.items.at(0)
-    if (!block) return
-
     const itemWithUpdatedPreview = structuredClone(block)
     itemWithUpdatedPreview.preview = cleanedHtml
 

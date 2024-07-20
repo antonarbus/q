@@ -73,5 +73,7 @@ app.use(apiUrl.getFilesStats, getFilesStatsRouter)
 app.use(errorHandlerMiddleware)
 
 app.listen(portBack, () => {
-  console.info(`🚀 ${env} backend server started at ${hostBack}:${portBack}`)
+  console.info(
+    `🚀 ${env} backend server started at ${hostBack}:${String(portBack)}`,
+  )
 })

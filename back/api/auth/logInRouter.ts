@@ -143,4 +143,6 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
   }
 }
 
-logInRouter.post('/', checkCredentials)
+logInRouter.post('/', (req, res, next) => {
+  void checkCredentials(req, res, next)
+})

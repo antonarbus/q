@@ -6,7 +6,7 @@ import { PasteBoqRowTextOverlay } from './paste_here_row'
 
 type Props = {
   children: ReactNode
-  onBlur: (e: FocusEvent<HTMLDivElement, Element>) => void
+  onBlur: (e: FocusEvent<HTMLDivElement>) => void
 }
 
 export const BoqRowLayout = ({ children, onBlur }: Props): JSX.Element => {

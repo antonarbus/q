@@ -14,7 +14,7 @@ export const getItemFromState = ({ id, state }: Props): Item | undefined => {
   if (blockWithSameId) return blockWithSameId
 
   for (const block of state.blocks) {
-    if (block?.type === 'boq') {
+    if (block.type === 'boq') {
       for (const boqRow of block.boq.rows) {
         if (boqRow.id === id) {
           return boqRow

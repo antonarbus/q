@@ -68,7 +68,7 @@ const register: RouterHandler = async (req, res, next) => {
       { new: true, upsert: true },
     )
 
-    const activationKey = newUser?.activationKey
+    const activationKey = newUser.activationKey
 
     if (!activationKey) {
       return res
@@ -111,5 +111,7 @@ registerRouter.post(
   '/',
   body('email').isEmail(),
   body('password').isLength({ min: 3 }),
-  register,
+  (req, res, next) => {
+    void register(req, res, next)
+  },
 )

@@ -8,7 +8,7 @@ export const useGetAccessTokenQuery = (): UseQueryResult<
   ResBody,
   AxiosError<ResBody>
 > => {
-  const query = useQuery({
+  const query = useQuery<ResBody, AxiosError<ResBody>>({
     queryKey: [queryKey.getAccessToken],
     queryFn: async () => {
       const res = await axios<ResBody, AxiosResponse<ResBody>>({

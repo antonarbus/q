@@ -2,6 +2,7 @@ import { apiUrl } from '@back/consts/apiUrl'
 import { headerName } from '@back/consts/headerName'
 import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
 import { accessTokenSignal } from '../../auth/accessTokenSignal'
+import type { ResBody as ResBody } from '@back/api/auth/getAccessTokenRouter'
 
 export const {
   promise: initAccessTokenFetchingPromise,
@@ -23,7 +24,7 @@ axiosWithAuth.interceptors.response.use(
   (config) => {
     return config
   },
-  async (error) => {
+  async (error: AxiosError) => {
     // remember original request to use it when we refresh user's access token
     const originalRequestConfig = error.config as ExtendedAxiosRequestConfig
 
@@ -38,7 +39,7 @@ axiosWithAuth.interceptors.response.use(
 
       try {
         // refresh expired or invalid access token
-        const res = await axios.get(apiUrl.getAccessToken, {
+        const res = await axios.get<ResBody>(apiUrl.getAccessToken, {
           withCredentials: true,
         })
 

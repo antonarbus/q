@@ -58,7 +58,7 @@ export const RestOfCopiedItems = (): JSX.Element | null => {
   const firstItem = items[0]
 
   if (!firstItem?.width) return null
-  if (!firstItem?.height) return null
+  if (!firstItem.height) return null
 
   const scaleFactorForFirstItem =
     (containerWidth - 2 * containerPadding) / firstItem.width
@@ -109,7 +109,7 @@ export const RestOfCopiedItems = (): JSX.Element | null => {
               <ScaledCopyItem
                 html={preview ?? ''}
                 width={item.width ?? 0}
-                scaleFactor={`${scaleFactor}`}
+                scaleFactor={String(scaleFactor)}
               />
             </div>
           )

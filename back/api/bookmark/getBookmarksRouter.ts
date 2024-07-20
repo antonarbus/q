@@ -49,4 +49,6 @@ const getBookmarks: RouterHandler = async (req, res, next) => {
   }
 }
 
-getBookmarksRouter.get('/', verifyAccessTokenMiddleware, getBookmarks)
+getBookmarksRouter.get('/', verifyAccessTokenMiddleware, (req, res, next) => {
+  void getBookmarks(req, res, next)
+})

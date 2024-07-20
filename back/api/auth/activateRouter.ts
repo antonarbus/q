@@ -78,4 +78,6 @@ const activate: RouterHandler = async (req, res, next) => {
   }
 }
 
-activateRouter.post('/', activate)
+activateRouter.post('/', (req, res, next) => {
+  void activate(req, res, next)
+})

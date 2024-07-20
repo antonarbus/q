@@ -21,7 +21,7 @@ export const updateBoqColumnCellAtStore = ({
   if (boqBlock === undefined) return
 
   const prevHtml = boqBlock.boq.column[boqColumnKey].html
-  const html = editorRef.current?.html.get()
+  const html = editorRef.current.html.get()
   const didTextChange = prevHtml !== html
   if (!didTextChange) return
 

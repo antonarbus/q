@@ -189,7 +189,7 @@ export const navSlice = createSlice({
         (menuItem) => menuItem.id,
       ) as NavItemIdKey[]
 
-      topNavItemsIds?.forEach((id) => {
+      topNavItemsIds.forEach((id) => {
         if (exceptNavItemIdKeys?.includes(id)) return
 
         setMenuItemPropValue({
@@ -208,7 +208,7 @@ export const navSlice = createSlice({
         (menuItem) => menuItem.id,
       ) as NavItemIdKey[]
 
-      topNavItemsIds?.forEach((id) => {
+      topNavItemsIds.forEach((id) => {
         setMenuItemPropValue({
           menu: state.navStructure,
           navItemIdKey: id,
@@ -293,7 +293,7 @@ export const navSlice = createSlice({
         (menuItem) => menuItem.id,
       ) as NavItemIdKey[]
 
-      topNavItemsIds?.forEach((id) => {
+      topNavItemsIds.forEach((id) => {
         setMenuItemPropValue({
           menu: state.navStructure,
           navItemIdKey: id,

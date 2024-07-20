@@ -17,7 +17,8 @@ export const selectTextOrCloseToolbar = ({ e, editorRef }: Props): void => {
   const outsideEditableZone = isFrBox || isFroalaWrapper
   const insideEditableZone = !outsideEditableZone
 
-  const toolbarElement = editorRef.current.$tb['0']
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+  const toolbarElement = editorRef.current.$tb['0'] as HTMLElement
   const isToolbarOpened = toolbarElement.style.display === 'block'
 
   if (e.type === 'dblclick' && outsideEditableZone) return

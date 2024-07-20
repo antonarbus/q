@@ -16,7 +16,6 @@ export const updateBoqHeaderTextReducer = (
 
   if (!block) return
   if (block.type !== itemType.boq) return
-  if (html === undefined) return
 
   block.boq.header[boqHeaderKey].html = html
   block.boq.header[boqHeaderKey].value = value

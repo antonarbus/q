@@ -50,7 +50,7 @@ export const updateBoqRowCellWithValue = ({
     html: updatedHtml,
   })
 
-  void updateNumberAtHtmlIncrementally({
+  updateNumberAtHtmlIncrementally({
     oldNumber: priceValueFromHtml,
     newNumber: value,
     editor,

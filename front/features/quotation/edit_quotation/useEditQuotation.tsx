@@ -100,8 +100,6 @@ export const useEditQuotation = ({
 
     const quotation = getState().quotation
 
-    if (!quotation) return
-
     const quotationWithUpdatedValues = {
       ...quotation,
       name: nameSignal.value,
