@@ -4,9 +4,9 @@ import { getState } from '@lib_instances/store'
 import { type ResizableProps } from 're-resizable'
 import type { ReactNode } from 'react'
 import {
-  type OnItemResize,
-  type OnItemResizeStop,
-  type OnItemResizeStart,
+  type OnBlockResize,
+  type OnBlockResizeStop,
+  type OnBlockResizeStart,
 } from '@shared/types/resizablePaper'
 import { useBlock } from '../providers/BlockProvider'
 import { BlockAnimate } from './block_layout'
@@ -15,26 +15,26 @@ import { PasteBlockTextOverlay } from './paste_block_overlay_text'
 type Props = {
   children: ReactNode
   disableResize?: boolean
-  onItemResizeStart?: OnItemResizeStart
-  onItemResize?: OnItemResize
-  onItemResizeStop?: OnItemResizeStop
+  onBlockResizeStart?: OnBlockResizeStart
+  onBlockResize?: OnBlockResize
+  onBlockResizeStop?: OnBlockResizeStop
   autoWidth?: boolean
   minWidth?: ResizableProps['minWidth']
-  leftItemActionButtons?: ReactNode
-  rightItemActionButtons?: ReactNode
+  leftBlockActionButtons?: ReactNode
+  rightBlockActionButtons?: ReactNode
   className?: string
 }
 
 export const BlockComp = ({
   children,
   disableResize,
-  onItemResizeStart,
-  onItemResize,
-  onItemResizeStop,
+  onBlockResizeStart,
+  onBlockResize,
+  onBlockResizeStop,
   autoWidth,
   minWidth,
-  leftItemActionButtons,
-  rightItemActionButtons,
+  leftBlockActionButtons,
+  rightBlockActionButtons,
   className,
 }: Props): JSX.Element => {
   const { blockIndex } = useBlock()
@@ -60,11 +60,11 @@ export const BlockComp = ({
         minWidth={minWidth}
         blockHeight={block?.height ?? 0}
         id={block?.id ?? 'no id'}
-        onItemResizeStart={onItemResizeStart}
-        onItemResize={onItemResize}
-        onItemResizeStop={onItemResizeStop}
-        leftItemActionButtons={leftItemActionButtons}
-        rightItemActionButtons={rightItemActionButtons}
+        onItemResizeStart={onBlockResizeStart}
+        onItemResize={onBlockResize}
+        onItemResizeStop={onBlockResizeStop}
+        leftItemActionButtons={leftBlockActionButtons}
+        rightItemActionButtons={rightBlockActionButtons}
         className={className}
       >
         <PasteBlockTextOverlay>{children}</PasteBlockTextOverlay>

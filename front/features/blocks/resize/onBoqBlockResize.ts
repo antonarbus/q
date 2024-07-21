@@ -8,14 +8,14 @@ import {
   fixImagesHeight,
 } from '@entities/quotation'
 import type {
-  OnItemResize,
-  OnItemResizeStart,
-  OnItemResizeStop,
+  OnBlockResize,
+  OnBlockResizeStart,
+  OnBlockResizeStop,
 } from '@shared/types/resizablePaper'
 
 let initDescriptionColumnWidth = 0 // can be global var for different boqItems as we can change width of one item at a time
 
-export const onBoqBlockResizeStart: OnItemResizeStart = ({
+export const onBoqBlockResizeStart: OnBlockResizeStart = ({
   blockIndex,
   e,
   dir,
@@ -30,7 +30,7 @@ export const onBoqBlockResizeStart: OnItemResizeStart = ({
   ).boq.column.description.width
 }
 
-export const onBoqBlockResize: OnItemResize = ({
+export const onBoqBlockResize: OnBlockResize = ({
   blockIndex,
   e,
   direction,
@@ -56,7 +56,7 @@ export const onBoqBlockResize: OnItemResize = ({
   )
 }
 
-export const onBoqBlockResizeStop: OnItemResizeStop = ({
+export const onBoqBlockResizeStop: OnBlockResizeStop = ({
   blockIndex,
   e,
   direction,

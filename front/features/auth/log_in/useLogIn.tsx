@@ -1,8 +1,12 @@
 import { dispatch } from '@lib_instances/store'
 import { type Signal } from '@preact/signals-react'
 import { type UseMutationResult } from '@tanstack/react-query'
-import type { Location } from 'react-router-dom'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import {
+  type Location,
+  useLocation,
+  useNavigate,
+  useParams,
+} from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetBookmarksQuery } from '@entities/bookmark'
 import { useGetQuotationsQuery } from '@entities/quotation'

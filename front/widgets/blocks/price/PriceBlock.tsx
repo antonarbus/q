@@ -15,15 +15,15 @@ export const PriceBlock = (): JSX.Element => {
   return (
     <BlockComp
       className={cls.priceBlock}
-      onItemResizeStop={onPriceBlockResizeStop}
-      leftItemActionButtons={
+      onBlockResizeStop={onPriceBlockResizeStop}
+      leftBlockActionButtons={
         <ItemActionButtonsLayout>
           <DragBlockIcon />
           <CopyBlockIcon />
           <CutBlockIcon />
         </ItemActionButtonsLayout>
       }
-      rightItemActionButtons={
+      rightBlockActionButtons={
         <ItemActionButtonsLayout>
           <BookmarkBlockIcon />
           <OpenInfoBlockModalIcon />

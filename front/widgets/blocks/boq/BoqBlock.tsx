@@ -20,17 +20,17 @@ export const BoqBlock = (): JSX.Element => {
       <BlockComp
         autoWidth={true}
         minWidth='560px'
-        onItemResizeStart={onBoqBlockResizeStart}
-        onItemResize={onBoqBlockResize}
-        onItemResizeStop={onBoqBlockResizeStop}
-        leftItemActionButtons={
+        onBlockResizeStart={onBoqBlockResizeStart}
+        onBlockResize={onBoqBlockResize}
+        onBlockResizeStop={onBoqBlockResizeStop}
+        leftBlockActionButtons={
           <ItemActionButtonsLayout>
             <DragBlockIcon />
             <CopyBlockIcon />
             <CutBlockIcon />
           </ItemActionButtonsLayout>
         }
-        rightItemActionButtons={
+        rightBlockActionButtons={
           <ItemActionButtonsLayout>
             <BookmarkBlockIcon />
             <OpenInfoBlockModalIcon />

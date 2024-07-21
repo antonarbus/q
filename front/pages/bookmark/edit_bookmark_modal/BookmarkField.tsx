@@ -4,6 +4,7 @@ import { useEffectOnce } from 'react-use'
 import { isFroalaSignal } from '@entities/quotation'
 import { BookmarkFieldLayout } from './BookmarkFieldLayout'
 import { TextBlockBookmark } from '@widgets/bookmarks/TextBlockBookmark'
+import { PriceBlockBookmark } from '@widgets/bookmarks/priceBlockBookmark/PriceBlockBookmark'
 
 export const BookmarkField = (): ReactNode => {
   useEffectOnce(() => {
@@ -14,6 +15,7 @@ export const BookmarkField = (): ReactNode => {
     <BookmarkFieldLayout>
       <AnimatePresence initial={false}>
         <TextBlockBookmark />
+        <PriceBlockBookmark />
       </AnimatePresence>
     </BookmarkFieldLayout>
   )

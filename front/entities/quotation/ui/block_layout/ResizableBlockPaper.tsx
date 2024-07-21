@@ -2,9 +2,9 @@ import { useSelectorTyped } from '@lib_instances/store'
 import { Resizable, type ResizableProps } from 're-resizable'
 import { cls } from '@shared/consts/cls'
 import type {
-  OnItemResize,
-  OnItemResizeStart,
-  OnItemResizeStop,
+  OnBlockResize,
+  OnBlockResizeStart,
+  OnBlockResizeStop,
 } from '@shared/types/resizablePaper'
 import { useBlock } from '../../providers/BlockProvider'
 
@@ -13,9 +13,9 @@ type Props = {
   disableResize?: boolean
   autoWidth?: boolean
   minWidth?: ResizableProps['minWidth']
-  onItemResizeStart?: OnItemResizeStart
-  onItemResize?: OnItemResize
-  onItemResizeStop?: OnItemResizeStop
+  onItemResizeStart?: OnBlockResizeStart
+  onItemResize?: OnBlockResize
+  onItemResizeStop?: OnBlockResizeStop
 }
 
 export const ResizableBlockPaper = ({

@@ -2,7 +2,7 @@ import { apiUrl } from '@back/consts/apiUrl'
 import { headerName } from '@back/consts/headerName'
 import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
 import { accessTokenSignal } from '../../auth/accessTokenSignal'
-import type { ResBody as ResBody } from '@back/api/auth/getAccessTokenRouter'
+import type { ResBody } from '@back/api/auth/getAccessTokenRouter'
 
 export const {
   promise: initAccessTokenFetchingPromise,

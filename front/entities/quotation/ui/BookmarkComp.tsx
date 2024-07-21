@@ -4,9 +4,9 @@ import { getState } from '@lib_instances/store'
 import { type ResizableProps } from 're-resizable'
 import type { ReactNode } from 'react'
 import {
-  type OnItemResize,
-  type OnItemResizeStop,
-  type OnItemResizeStart,
+  type OnBlockResize,
+  type OnBlockResizeStop,
+  type OnBlockResizeStart,
 } from '@shared/types/resizablePaper'
 import { useBlock } from '../providers/BlockProvider'
 import { PasteBlockTextOverlay } from './paste_block_overlay_text'
@@ -15,9 +15,9 @@ import { BookmarkAnimate } from './bookmark_layout'
 type Props = {
   children: ReactNode
   disableResize?: boolean
-  onItemResizeStart?: OnItemResizeStart
-  onItemResize?: OnItemResize
-  onItemResizeStop?: OnItemResizeStop
+  onItemResizeStart?: OnBlockResizeStart
+  onItemResize?: OnBlockResize
+  onItemResizeStop?: OnBlockResizeStop
   autoWidth?: boolean
   minWidth?: ResizableProps['minWidth']
   leftItemActionButtons?: ReactNode

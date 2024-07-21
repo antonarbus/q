@@ -1,7 +1,6 @@
 import express from 'express'
 import { bucket } from '../../services/storage'
-import type { Next } from '../../types'
-import { type Req, type Res } from '../../types'
+import type { Next, Req, Res } from '../../types'
 
 // https://cloud.google.com/storage/docs/using-cors#storage-get-bucket-metadata-nodejs
 

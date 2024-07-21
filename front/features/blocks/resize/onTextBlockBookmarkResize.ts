@@ -4,13 +4,13 @@ import {
   unfixImagesHeight,
 } from '@entities/quotation'
 import type {
-  OnItemResize,
-  OnItemResizeStart,
-  OnItemResizeStop,
+  OnBlockResize,
+  OnBlockResizeStart,
+  OnBlockResizeStop,
 } from '@shared/types/resizablePaper'
 import { bookmarkSignal } from '@entities/bookmark'
 
-export const onTextBlockBookmarkResizeStart: OnItemResizeStart = ({
+export const onTextBlockBookmarkResizeStart: OnBlockResizeStart = ({
   blockIndex,
   e,
   dir,
@@ -19,21 +19,21 @@ export const onTextBlockBookmarkResizeStart: OnItemResizeStart = ({
   unfixImagesHeight()
 }
 
-export const onTextBlockBookmarkResize: OnItemResize = ({
+export const onTextBlockBookmarkResize: OnBlockResize = ({
   blockIndex,
   e,
   direction,
   elementRef,
   delta,
 }) => {
-  const width = parseInt(elementRef.style.width, 10)
+  const width = parseInt(elementRef.style.width)
   if (bookmarkSignal.value?.type !== itemType.text) return
   const newBookmarkValue = structuredClone(bookmarkSignal.value)
   newBookmarkValue.width = width
   bookmarkSignal.value = newBookmarkValue
 }
 
-export const onTextBlockBookmarkResizeStop: OnItemResizeStop = ({
+export const onTextBlockBookmarkResizeStop: OnBlockResizeStop = ({
   blockIndex,
   e,
   direction,

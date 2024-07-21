@@ -15,11 +15,14 @@ export const selectMenuItemByIdsChainSelector =
         clicked = topLevelNavMenu.menuItems ?? state.nav.navStructure
         return clicked
       }
+
       if (id !== 'burger') {
         clicked =
           tempMenu.find((menuItem) => menuItem.id === id)?.menuItems ?? []
       }
+
       tempMenu = clicked
     })
+
     return clicked
   }

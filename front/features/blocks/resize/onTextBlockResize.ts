@@ -5,12 +5,12 @@ import {
   unfixImagesHeight,
 } from '@entities/quotation'
 import type {
-  OnItemResize,
-  OnItemResizeStart,
-  OnItemResizeStop,
+  OnBlockResize,
+  OnBlockResizeStart,
+  OnBlockResizeStop,
 } from '@shared/types/resizablePaper'
 
-export const onTextBlockResizeStart: OnItemResizeStart = ({
+export const onTextBlockResizeStart: OnBlockResizeStart = ({
   blockIndex,
   e,
   dir,
@@ -19,7 +19,7 @@ export const onTextBlockResizeStart: OnItemResizeStart = ({
   unfixImagesHeight()
 }
 
-export const onTextBlockResize: OnItemResize = ({
+export const onTextBlockResize: OnBlockResize = ({
   blockIndex,
   e,
   direction,
@@ -34,7 +34,7 @@ export const onTextBlockResize: OnItemResize = ({
   )
 }
 
-export const onTextBlockResizeStop: OnItemResizeStop = ({
+export const onTextBlockResizeStop: OnBlockResizeStop = ({
   blockIndex,
   e,
   direction,

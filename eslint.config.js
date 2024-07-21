@@ -20,33 +20,38 @@ export default [
   {
     languageOptions: {
       parserOptions: {
-        // project: true,
-        // project: ['front/tsconfig.json', 'back/tsconfig.json'],
         project: ['tsconfig.json'],
         tsconfigDirName: import.meta.dirname,
       },
     },
   },
-
-  pluginJs.configs.recommended,
-  ...tseslint.configs.strictTypeChecked,
-  ...tseslint.configs.stylisticTypeChecked,
-  pluginReactConfig,
   { settings: { react: { version: 'detect' } } },
+  pluginJs.configs.recommended,
+  // pluginJs.configs.all,
+  pluginReactConfig,
+  ...tseslint.configs.all,
+  // ...tseslint.configs.strictTypeChecked,
+  // ...tseslint.configs.stylisticTypeChecked,
   prettierConfig,
   {
-    // https://eslint.org/docs/v8.x/rules/
     rules: {
+      // https://eslint.org/docs/v8.x/rules/
+      'object-shorthand': 'error',
       'jsx-quotes': ['error', 'prefer-single'],
       'no-console': ['error', { allow: ['error', 'warn', 'info'] }],
-      'react/react-in-jsx-scope': 'off',
-      'react/no-unknown-property': ['error', { ignore: ['css'] }],
-
+      'no-useless-rename': 'error',
+      'no-duplicate-imports': 'error',
+      // https://typescript-eslint.io/rules/
       '@typescript-eslint/no-unused-vars': ['error', { args: 'none' }],
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
       '@typescript-eslint/explicit-function-return-type': 'error',
       '@typescript-eslint/consistent-type-exports': 'error',
       '@typescript-eslint/consistent-type-imports': 'error',
+      // disable strange ts rules
+
+      // https://github.com/jsx-eslint/eslint-plugin-react?tab=readme-ov-file#list-of-supported-rules
+      'react/react-in-jsx-scope': 'off',
+      'react/no-unknown-property': ['error', { ignore: ['css'] }],
     },
   },
 ]

@@ -5,9 +5,9 @@ import { type ResizableProps } from 're-resizable'
 import type { ReactNode } from 'react'
 import { cls } from '@shared/consts/cls'
 import type {
-  OnItemResize,
-  OnItemResizeStart,
-  OnItemResizeStop,
+  OnBlockResize,
+  OnBlockResizeStart,
+  OnBlockResizeStop,
 } from '@shared/types/resizablePaper'
 import { ResizableBookmarkPaper } from './ResizableBookmarkPaper'
 
@@ -20,9 +20,9 @@ type Props = {
   disableResize?: boolean
   autoWidth?: boolean
   minWidth?: ResizableProps['minWidth']
-  onItemResizeStart?: OnItemResizeStart
-  onItemResize?: OnItemResize
-  onItemResizeStop?: OnItemResizeStop
+  onItemResizeStart?: OnBlockResizeStart
+  onItemResize?: OnBlockResize
+  onItemResizeStop?: OnBlockResizeStop
   className?: string
 }
 

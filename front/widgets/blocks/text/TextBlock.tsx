@@ -29,16 +29,16 @@ export const TextBlock = (): JSX.Element => {
   return (
     <BlockComp
       className={cls.textBlock}
-      onItemResizeStart={onTextBlockResizeStart}
-      onItemResizeStop={onTextBlockResizeStop}
-      leftItemActionButtons={
+      onBlockResizeStart={onTextBlockResizeStart}
+      onBlockResizeStop={onTextBlockResizeStop}
+      leftBlockActionButtons={
         <ItemActionButtonsLayout>
           <DragBlockIcon />
           <CopyBlockIcon />
           <CutBlockIcon />
         </ItemActionButtonsLayout>
       }
-      rightItemActionButtons={
+      rightBlockActionButtons={
         <ItemActionButtonsLayout>
           <BookmarkBlockIcon />
           <OpenInfoBlockModalIcon />

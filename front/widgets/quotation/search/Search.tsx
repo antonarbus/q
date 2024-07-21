@@ -1,13 +1,13 @@
-import { useSelectorTyped } from '@lib_instances/store'
 import { Autocomplete } from '@mui/material'
-import { useSignal } from '@preact/signals-react'
-import { useEffect } from 'react'
-import { useCopyBookmarkAtSearch } from '@features/bookmark/copy_bookmark'
-import { useGetBookmarksQuery } from '@entities/bookmark'
 import { cls } from '@shared/consts/cls'
 import { PaperComponent } from './PaperComponent'
 import { renderInput } from './renderInput'
 import { renderOption } from './renderOption'
+import { useEffect } from 'react'
+import { useSelectorTyped } from '@lib_instances/store'
+import { useGetBookmarksQuery } from '@entities/bookmark'
+import { useSignal } from '@preact/signals-react'
+import { useCopyBookmarkAtSearch } from '@features/bookmark/copy_bookmark'
 
 export const Search = (): JSX.Element => {
   const {

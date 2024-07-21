@@ -1,8 +1,8 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { quotationSlice } from '@entities/quotation'
-import type { OnItemResizeStop } from '@shared/types/resizablePaper'
+import type { OnBlockResizeStop } from '@shared/types/resizablePaper'
 
-export const onPriceBlockResizeStop: OnItemResizeStop = ({
+export const onPriceBlockResizeStop: OnBlockResizeStop = ({
   blockIndex,
   e,
   direction,
