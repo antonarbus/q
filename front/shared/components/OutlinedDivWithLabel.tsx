@@ -10,7 +10,7 @@ const InputComponent = forwardRef(function InputComp(
   props: InputComponentProps,
   ref: React.ForwardedRef<HTMLDivElement>,
 ): JSX.Element {
-  const { ownerState, ...other } = props
+  const { ...other } = props
 
   return (
     <div

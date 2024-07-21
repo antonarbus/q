@@ -12,13 +12,7 @@ import { notify } from '@shared/ui/top_msg'
 
 export const Logout = (): JSX.Element => {
   const navigate = useNavigate()
-  const {
-    mutate: logOut,
-    isPending,
-    data,
-    isSuccess,
-    isError,
-  } = useLogOutMutation()
+  const { mutate: logOut, isPending, isSuccess, isError } = useLogOutMutation()
 
   useEffectOnce(logOut)
 

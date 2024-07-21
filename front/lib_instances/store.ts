@@ -21,6 +21,7 @@ const store = configureStore({
   devTools: process.env.NODE_ENV !== 'production',
 })
 
+// eslint-disable-next-line @typescript-eslint/unbound-method
 const getState = store.getState
 const dispatch = store.dispatch
 

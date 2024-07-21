@@ -39,12 +39,11 @@ export default [
     rules: {
       'jsx-quotes': ['error', 'prefer-single'],
       'no-console': ['error', { allow: ['error', 'warn', 'info'] }],
-      // 'react/display-name': 'off',
       'react/react-in-jsx-scope': 'off',
       'react/no-unknown-property': ['error', { ignore: ['css'] }],
-      '@typescript-eslint/no-unused-vars': 'off',
+
+      '@typescript-eslint/no-unused-vars': ['error', { args: 'none' }],
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
-      '@typescript-eslint/unbound-method': 'off',
       '@typescript-eslint/explicit-function-return-type': 'error',
       '@typescript-eslint/consistent-type-exports': 'error',
       '@typescript-eslint/consistent-type-imports': 'error',

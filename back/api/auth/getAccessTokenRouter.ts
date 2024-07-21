@@ -7,7 +7,7 @@ import {
   getJwtExpiration,
   verifyRefreshToken,
 } from '../../services/jwt'
-import type { Next, Req, ReqExtended, ResWithBody } from '../../types'
+import type { Next, ReqExtended, ResWithBody } from '../../types'
 
 export type ResBody = {
   message:
