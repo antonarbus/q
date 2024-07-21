@@ -75,18 +75,16 @@ export default [
       '@typescript-eslint/explicit-function-return-type': 'error',
       '@typescript-eslint/consistent-type-exports': 'error',
       '@typescript-eslint/consistent-type-imports': 'error',
+      '@typescript-eslint/no-import-type-side-effects': 'error',
+      // turn off strange rules from tseslint.configs.all
       '@typescript-eslint/naming-convention': 'off',
       '@typescript-eslint/prefer-readonly-parameter-types': 'off',
       '@typescript-eslint/strict-boolean-expressions': 'off', // good to use, but to much changes required
+      '@typescript-eslint/no-unnecessary-type-parameters': 'off', // check it later, it may make sense
       '@typescript-eslint/no-magic-numbers': 'off',
-      '@typescript-eslint/no-import-type-side-effects': 'error',
       '@typescript-eslint/prefer-destructuring': 'off',
-      'xxx@': 'off',
-      'xxx@': 'off',
-      'xxx@': 'off',
-      'xxx@': 'off',
-      'xxx@': 'off',
-      'xxx@': 'off',
+      '@typescript-eslint/max-params': 'off',
+      '@typescript-eslint/consistent-return': 'off',
 
       // https://github.com/jsx-eslint/eslint-plugin-react?tab=readme-ov-file#list-of-supported-rules
       'react/react-in-jsx-scope': 'off',

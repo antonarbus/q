@@ -24,9 +24,11 @@ export const getMenuItemByIdsChain = (
       clicked = navStructure[0].menuItems
       return clicked
     }
+
     if (id !== 'burger') {
       clicked = tempMenu.find((menuItem) => menuItem.id === id)?.menuItems ?? []
     }
+
     tempMenu = clicked
   })
   return clicked
