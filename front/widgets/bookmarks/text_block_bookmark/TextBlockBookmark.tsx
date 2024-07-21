@@ -29,8 +29,8 @@ export const TextBlockBookmark = (): React.ReactNode => {
     >
       <BookmarkComp
         className={cls.textBlock}
-        onItemResizeStart={onTextBlockBookmarkResizeStart}
-        onItemResizeStop={onTextBlockBookmarkResizeStop}
+        onBlockResizeStart={onTextBlockBookmarkResizeStart}
+        onBlockResizeStop={onTextBlockBookmarkResizeStop}
       >
         <Froala
           editorRef={editorRef}

@@ -41,7 +41,7 @@ export default [
       'no-console': ['error', { allow: ['error', 'warn', 'info'] }],
       'no-useless-rename': 'error',
       'no-duplicate-imports': 'error',
-      // turn off strange rules from pluginJs.configs.all
+      // turn off some rules from pluginJs.configs.all
       'no-useless-assignment': 'off',
       'sort-keys': 'off',
       'max-lines-per-function': 'off',
@@ -77,7 +77,7 @@ export default [
       '@typescript-eslint/consistent-type-exports': 'error',
       '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/no-import-type-side-effects': 'error',
-      // turn off strange rules from tseslint.configs.all
+      // turn off some rules from tseslint.configs.all
       '@typescript-eslint/naming-convention': 'off',
       '@typescript-eslint/prefer-readonly-parameter-types': 'off',
       '@typescript-eslint/strict-boolean-expressions': 'off', // good to use, but to much changes required

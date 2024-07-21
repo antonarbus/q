@@ -19,7 +19,7 @@ export const PriceBlockBookmark = (): ReactNode => {
     >
       <BookmarkComp
         className={cls.priceBlock}
-        onItemResizeStop={onPriceBlockBookmarkResizeStop}
+        onBlockResizeStop={onPriceBlockBookmarkResizeStop}
       >
         <PriceHeader />
         <PriceMain />

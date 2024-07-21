@@ -3,8 +3,9 @@ import type { ReactNode } from 'react'
 import { useEffectOnce } from 'react-use'
 import { isFroalaSignal } from '@entities/quotation'
 import { BookmarkFieldLayout } from './BookmarkFieldLayout'
-import { TextBlockBookmark } from '@widgets/bookmarks/TextBlockBookmark'
-import { PriceBlockBookmark } from '@widgets/bookmarks/priceBlockBookmark/PriceBlockBookmark'
+import { PriceBlockBookmark } from '@widgets/bookmarks/price_block_bookmark/PriceBlockBookmark'
+import { TextBlockBookmark } from '@widgets/bookmarks/text_block_bookmark'
+import { BoqBlockBookmark } from '@widgets/bookmarks/boq_block_bookmark'
 
 export const BookmarkField = (): ReactNode => {
   useEffectOnce(() => {
@@ -16,6 +17,7 @@ export const BookmarkField = (): ReactNode => {
       <AnimatePresence initial={false}>
         <TextBlockBookmark />
         <PriceBlockBookmark />
+        <BoqBlockBookmark />
       </AnimatePresence>
     </BookmarkFieldLayout>
   )

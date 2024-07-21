@@ -15,9 +15,9 @@ import { BookmarkAnimate } from './bookmark_layout'
 type Props = {
   children: ReactNode
   disableResize?: boolean
-  onItemResizeStart?: OnBlockResizeStart
-  onItemResize?: OnBlockResize
-  onItemResizeStop?: OnBlockResizeStop
+  onBlockResizeStart?: OnBlockResizeStart
+  onBlockResize?: OnBlockResize
+  onBlockResizeStop?: OnBlockResizeStop
   autoWidth?: boolean
   minWidth?: ResizableProps['minWidth']
   leftItemActionButtons?: ReactNode
@@ -28,9 +28,9 @@ type Props = {
 export const BookmarkComp = ({
   children,
   disableResize,
-  onItemResizeStart,
-  onItemResize,
-  onItemResizeStop,
+  onBlockResizeStart: onItemResizeStart,
+  onBlockResize: onItemResize,
+  onBlockResizeStop: onItemResizeStop,
   autoWidth,
   minWidth,
   leftItemActionButtons,
