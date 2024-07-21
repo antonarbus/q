@@ -69,6 +69,7 @@ export default [
       radix: 'off',
       'init-declarations': 'off',
       'new-cap': 'off',
+
       // https://typescript-eslint.io/rules/
       '@typescript-eslint/no-unused-vars': ['error', { args: 'none' }],
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
@@ -85,6 +86,7 @@ export default [
       '@typescript-eslint/prefer-destructuring': 'off',
       '@typescript-eslint/max-params': 'off',
       '@typescript-eslint/consistent-return': 'off',
+      '@typescript-eslint/indent': 'off', // bad for performance
 
       // https://github.com/jsx-eslint/eslint-plugin-react?tab=readme-ov-file#list-of-supported-rules
       'react/react-in-jsx-scope': 'off',
