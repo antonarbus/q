@@ -1,7 +1,7 @@
 import { BsFileEarmarkText, BsTags } from 'react-icons/bs'
 import { Box } from '@mui/material'
-import { type HTMLAttributes } from 'react'
-import { type Item } from '@entities/quotation'
+import type { HTMLAttributes } from 'react'
+import type { Item } from '@entities/quotation'
 import { PiBooks } from 'react-icons/pi'
 import { RotatingLoaderIcon } from '@shared/components'
 import { getJsxWithBoldSubstr } from '@shared/utils/getJsxWithBoldSubstr'
@@ -42,6 +42,7 @@ export const renderOption = ({
         return boldSubString
       }
 
+      if (option.desc === undefined) return '-'
       if (option.desc) return option.desc
       return '-'
     }

@@ -20,7 +20,7 @@ import {
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { ItemActionButtonsLayout } from '@shared/layouts'
-import { type FroalaEditor } from '@shared/types/froala'
+import type { FroalaEditor } from '@shared/types/froala'
 
 export const TextBlock = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)

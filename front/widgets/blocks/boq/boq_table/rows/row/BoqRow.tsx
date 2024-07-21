@@ -1,4 +1,4 @@
-import { type FocusEvent } from 'react'
+import type { FocusEvent } from 'react'
 import { CopyBoqRowIcon } from '@features/blocks/copy'
 import { CutBoqRowIcon } from '@features/blocks/cut'
 import { DeleteBoqRowIcon } from '@features/blocks/delete'

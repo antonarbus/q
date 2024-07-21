@@ -7,7 +7,7 @@ import {
   useBlock,
   boqColumnKey,
 } from '@entities/quotation'
-import { type FroalaEditor } from '@shared/types/froala'
+import type { FroalaEditor } from '@shared/types/froala'
 import { ResizableColumn } from '../ResizableColumn'
 
 export const PriceColumn = (): JSX.Element => {

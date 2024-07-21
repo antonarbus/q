@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { Froala, itemType } from '@entities/quotation'
-import { type FroalaEditor } from '@shared/types/froala'
+import type { FroalaEditor } from '@shared/types/froala'
 import { bookmarkSignal } from '@entities/bookmark'
 
 export const PriceTitle = (): JSX.Element => {

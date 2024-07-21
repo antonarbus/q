@@ -4,7 +4,7 @@ import {
   useUpdateTotalPriceIfPricesAboveWereChanged,
 } from '@features/blocks/cell/update_cell'
 import { useBlock, Froala, itemType } from '@entities/quotation'
-import { type FroalaEditor } from '@shared/types/froala'
+import type { FroalaEditor } from '@shared/types/froala'
 import { bookmarkSignal } from '@entities/bookmark'
 import { getNumberFromString, getTextContentFromHtml } from '@shared/utils'
 

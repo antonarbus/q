@@ -1,4 +1,4 @@
-import { type FocusEvent } from 'react'
+import type { FocusEvent } from 'react'
 import { BoqRowLayout } from './BoqRowLayout'
 import { DescriptionCell } from './cells/DescriptionCell'
 import { ItemPriceCell } from './cells/ItemPriceCell'

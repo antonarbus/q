@@ -9,7 +9,7 @@ import {
   Froala,
   getPriceBlockHtmlFromStore,
 } from '@entities/quotation'
-import { type FroalaEditor } from '@shared/types/froala'
+import type { FroalaEditor } from '@shared/types/froala'
 
 export const PriceValue = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
