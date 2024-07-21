@@ -39,10 +39,9 @@ export default [
     rules: {
       'jsx-quotes': ['error', 'prefer-single'],
       'no-console': ['error', { allow: ['error', 'warn', 'info'] }],
-      'react/display-name': 'off',
+      // 'react/display-name': 'off',
       'react/react-in-jsx-scope': 'off',
       'react/no-unknown-property': ['error', { ignore: ['css'] }],
-      'no-use-before-define': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
       '@typescript-eslint/unbound-method': 'off',
