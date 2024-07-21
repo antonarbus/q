@@ -10,7 +10,8 @@ const InputComponent = forwardRef(function InputComp(
   props: InputComponentProps,
   ref: React.ForwardedRef<HTMLDivElement>,
 ): JSX.Element {
-  const { ...other } = props
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { ownerState, ...other } = props
 
   return (
     <div

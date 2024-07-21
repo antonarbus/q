@@ -1,4 +1,3 @@
-import { AnimatePresence } from 'framer-motion'
 import type { ReactNode } from 'react'
 import { useEffectOnce } from 'react-use'
 import { isFroalaSignal } from '@entities/quotation'
@@ -14,11 +13,9 @@ export const BookmarkField = (): ReactNode => {
 
   return (
     <BookmarkFieldLayout>
-      <AnimatePresence initial={false}>
-        <TextBlockBookmark />
-        <PriceBlockBookmark />
-        <BoqBlockBookmark />
-      </AnimatePresence>
+      <TextBlockBookmark />
+      <PriceBlockBookmark />
+      <BoqBlockBookmark />
     </BookmarkFieldLayout>
   )
 }
