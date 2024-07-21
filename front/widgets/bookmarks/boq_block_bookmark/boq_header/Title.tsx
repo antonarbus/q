@@ -1,29 +1,29 @@
 import { useRef } from 'react'
-import { updateTitleCell } from '@features/blocks/cell/update_cell'
-import {
-  getBoqHeaderHtmlFromStore,
-  useBlock,
-  Froala,
-  titleCellStyle,
-  type BoqHeaderKey,
-} from '@entities/quotation'
+import { Froala, titleCellStyle, itemType } from '@entities/quotation'
 import type { FroalaEditor } from '@shared/types/froala'
-
-const boqHeaderKey: BoqHeaderKey = 'title'
+import { bookmarkSignal } from '@entities/bookmark'
 
 export const Title = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
-  const { blockIndex } = useBlock()
 
   return (
     <Froala
       editorRef={editorRef}
       placeholder='Title...'
-      htmlGetter={() => getBoqHeaderHtmlFromStore({ blockIndex, boqHeaderKey })}
-      onContentChange={() => {
-        updateTitleCell({ editorRef, blockIndex, boqHeaderKey })
-      }}
       style={titleCellStyle}
+      htmlGetter={() => {
+        if (bookmarkSignal.value?.type !== itemType.boq) return ''
+        const titleHtml = bookmarkSignal.value.boq.header.title.html
+        return titleHtml
+      }}
+      onContentChange={() => {
+        if (editorRef.current === null) return
+        if (bookmarkSignal.value?.type !== itemType.boq) return
+        const html = editorRef.current.html.get()
+        const clonedBookmark = structuredClone(bookmarkSignal.value)
+        clonedBookmark.boq.header.title.html = html
+        bookmarkSignal.value = clonedBookmark
+      }}
     />
   )
 }

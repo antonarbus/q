@@ -16,7 +16,10 @@ import {
   boqColumnKey,
   boqRowCellKey,
   boqRowCellSx,
+  itemType,
 } from '@entities/quotation'
+import { bookmarkSignal } from '@entities/bookmark'
+import { getNumberFromString, getTextContentFromHtml } from '@shared/utils'
 
 export const QtyCell = (): JSX.Element => {
   const { blockIndex } = useBlock()
@@ -34,21 +37,27 @@ export const QtyCell = (): JSX.Element => {
         className={`td ${boqRowCellKey.qty}`}
         editorRef={qtyCellEditorRef}
         placeholder='Qty...'
-        htmlGetter={() =>
-          getBoqCellHtmlFromStore({
-            blockIndex,
-            rowIndex,
-            boqRowCellKey: boqRowCellKey.qty,
-          })
-        }
+        htmlGetter={() => {
+          if (bookmarkSignal.value?.type !== itemType.boq) return ''
+          const row = bookmarkSignal.value.boq.rows[rowIndex]
+          if (!row) return ''
+          const html = row.qty.html
+          return html
+        }}
         onContentChange={() => {
-          updateBoqRowQtyCell({
-            blockIndex,
-            priceCellEditorRef,
-            qtyCellEditorRef,
-            rowIndex,
-            subTotalPriceEditorRef,
+          if (qtyCellEditorRef.current === null) return
+          if (bookmarkSignal.value?.type !== itemType.boq) return
+          const html = qtyCellEditorRef.current.html.get()
+          const cellTextContent = getTextContentFromHtml({ html })
+          const cellValueFromHtml = getNumberFromString({
+            string: cellTextContent,
           })
+          const clonedBookmark = structuredClone(bookmarkSignal.value)
+          const row = clonedBookmark.boq.rows[rowIndex]
+          if (!row) return
+          row.qty.html = html
+          row.qty.value = cellValueFromHtml
+          bookmarkSignal.value = clonedBookmark
         }}
         onBlur={() => {
           formatBoqRowQtyCell({ blockIndex, qtyCellEditorRef, rowIndex })

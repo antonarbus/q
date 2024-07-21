@@ -1,12 +1,8 @@
 import { Box } from '@mui/material'
 import { Pin, pinBoqRowItemPriceCell } from '@features/blocks/cell/pin'
 import { tabFromItemPriceCell } from '@features/blocks/cell/tab_away_from_cell'
+import { formatBoqRowItemPriceCell } from '@features/blocks/cell/update_cell'
 import {
-  formatBoqRowItemPriceCell,
-  updateBoqRowItemPriceCell,
-} from '@features/blocks/cell/update_cell'
-import {
-  getBoqCellHtmlFromStore,
   useBlock,
   useRow,
   useBoqBlock,
@@ -16,7 +12,10 @@ import {
   boqRowCellKey,
   boqColumnKey,
   boqRowCellSx,
+  itemType,
 } from '@entities/quotation'
+import { bookmarkSignal } from '@entities/bookmark'
+import { getNumberFromString, getTextContentFromHtml } from '@shared/utils'
 
 export const ItemPriceCell = (): JSX.Element => {
   const { blockIndex } = useBlock()
@@ -39,21 +38,27 @@ export const ItemPriceCell = (): JSX.Element => {
         className={`td ${boqRowCellKey.itemPrice}`}
         editorRef={itemPriceCellEditorRef}
         placeholder='Item price...'
-        htmlGetter={() =>
-          getBoqCellHtmlFromStore({
-            blockIndex,
-            rowIndex,
-            boqRowCellKey: boqRowCellKey.itemPrice,
-          })
-        }
+        htmlGetter={() => {
+          if (bookmarkSignal.value?.type !== itemType.boq) return ''
+          const row = bookmarkSignal.value.boq.rows[rowIndex]
+          if (!row) return ''
+          const html = row.itemPrice.html
+          return html
+        }}
         onContentChange={() => {
-          updateBoqRowItemPriceCell({
-            blockIndex,
-            itemPriceCellEditorRef,
-            priceCellEditorRef,
-            rowIndex,
-            subTotalPriceEditorRef,
+          if (itemPriceCellEditorRef.current === null) return
+          if (bookmarkSignal.value?.type !== itemType.boq) return
+          const html = itemPriceCellEditorRef.current.html.get()
+          const cellTextContent = getTextContentFromHtml({ html })
+          const cellValueFromHtml = getNumberFromString({
+            string: cellTextContent,
           })
+          const clonedBookmark = structuredClone(bookmarkSignal.value)
+          const row = clonedBookmark.boq.rows[rowIndex]
+          if (!row) return
+          row.itemPrice.html = html
+          row.itemPrice.value = cellValueFromHtml
+          bookmarkSignal.value = clonedBookmark
         }}
         onBlur={() => {
           formatBoqRowItemPriceCell({

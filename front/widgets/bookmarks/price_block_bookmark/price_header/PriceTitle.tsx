@@ -19,9 +19,9 @@ export const PriceTitle = (): JSX.Element => {
         if (editorRef.current === null) return
         if (bookmarkSignal.value?.type !== itemType.price) return
         const html = editorRef.current.html.get()
-        const newPriceTotalValue = structuredClone(bookmarkSignal.value)
-        newPriceTotalValue.title.html = html
-        bookmarkSignal.value = newPriceTotalValue
+        const clonedBookmark = structuredClone(bookmarkSignal.value)
+        clonedBookmark.title.html = html
+        bookmarkSignal.value = clonedBookmark
       }}
     />
   )

@@ -1,18 +1,16 @@
 import { useRef } from 'react'
-import { updateBoqColumnCell } from '@features/blocks/cell/update_cell'
 import {
   Froala,
-  getBoqColumnHtmlFromStore,
-  useBlock,
   columnHeaderStyle,
   boqColumnKey,
+  itemType,
 } from '@entities/quotation'
 import type { FroalaEditor } from '@shared/types/froala'
 import { ResizableColumn } from '../ResizableColumn'
+import { bookmarkSignal } from '@entities/bookmark'
 
 export const QtyColumn = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
-  const { blockIndex } = useBlock()
 
   return (
     <ResizableColumn
@@ -24,20 +22,20 @@ export const QtyColumn = (): JSX.Element => {
       <Froala
         editorRef={editorRef}
         placeholder='Qty...'
-        htmlGetter={() =>
-          getBoqColumnHtmlFromStore({
-            blockIndex,
-            boqColumnKey: boqColumnKey.qty,
-          })
-        }
-        onContentChange={() => {
-          updateBoqColumnCell({
-            editorRef,
-            blockIndex,
-            boqColumnKey: boqColumnKey.qty,
-          })
-        }}
         style={columnHeaderStyle}
+        htmlGetter={() => {
+          if (bookmarkSignal.value?.type !== itemType.boq) return ''
+          const html = bookmarkSignal.value.boq.column.qty.html
+          return html
+        }}
+        onContentChange={() => {
+          if (editorRef.current === null) return
+          if (bookmarkSignal.value?.type !== itemType.boq) return
+          const html = editorRef.current.html.get()
+          const clonedBookmark = structuredClone(bookmarkSignal.value)
+          clonedBookmark.boq.column.qty.html = html
+          bookmarkSignal.value = clonedBookmark
+        }}
       />
     </ResizableColumn>
   )

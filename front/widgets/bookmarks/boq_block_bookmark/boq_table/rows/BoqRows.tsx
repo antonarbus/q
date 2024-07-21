@@ -6,6 +6,7 @@ import {
   RowProvider,
   useBlock,
   boqRowKey,
+  itemType,
 } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
 import { BoqRowsLayout } from './BoqRowsLayout'
@@ -14,14 +15,16 @@ import { BoqPasteRowTextOverlay } from './row/BoqPasteRowTextOverlay'
 import { BoqRow } from './row/BoqRow'
 import { BoqRowAnimate } from './row/BoqRowAnimate'
 import { BoqRowSortable } from './row/BoqRowSortable'
-import { arrayShapesEqualityFn } from '@shared/lib/redux/arrayShapesEqualityFn'
+import { bookmarkSignal } from '@entities/bookmark'
+import type { ReactNode } from 'react'
 
-export const BoqRows = (): JSX.Element => {
+export const BoqRows = (): ReactNode => {
   const { blockIndex } = useBlock()
-  const boqRows = useSelectorTyped(
-    selectBoqRows({ blockIndex }),
-    arrayShapesEqualityFn,
-  )
+
+  if (bookmarkSignal.value === null) return null
+  if (bookmarkSignal.value.type !== itemType.boq) return null
+
+  const boqRows = bookmarkSignal.value.boq.rows
 
   return (
     <BoqRowsLayout>
@@ -48,7 +51,6 @@ export const BoqRows = (): JSX.Element => {
               )
             }
 
-            // boqRow.type = 'paste'
             return <BoqPasteRowTextOverlay key={nanoid(5)} />
           })}
         </AnimatePresence>

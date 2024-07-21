@@ -1,8 +1,6 @@
 import { tabFromDescriptionCell } from '@features/blocks/cell/tab_away_from_cell'
-import { updateDescriptionCell } from '@features/blocks/cell/update_cell'
 import { beforeUpload } from '@features/upload'
 import {
-  getBoqCellHtmlFromStore,
   useRow,
   useBlock,
   Froala,
@@ -10,7 +8,9 @@ import {
   boqRowCellStyle,
   boqRowCellKey,
   boqColumnKey,
+  itemType,
 } from '@entities/quotation'
+import { bookmarkSignal } from '@entities/bookmark'
 
 export const DescriptionCell = (): JSX.Element => {
   const { blockIndex } = useBlock()
@@ -27,20 +27,22 @@ export const DescriptionCell = (): JSX.Element => {
       editorRef={descriptionEditorRef}
       placeholder='Description...'
       beforeUpload={beforeUpload}
-      htmlGetter={() =>
-        getBoqCellHtmlFromStore({
-          blockIndex,
-          rowIndex,
-          boqRowCellKey: boqRowCellKey.description,
-        })
-      }
+      htmlGetter={() => {
+        if (bookmarkSignal.value?.type !== itemType.boq) return ''
+        const row = bookmarkSignal.value.boq.rows[rowIndex]
+        if (!row) return ''
+        const html = row.description.html
+        return html
+      }}
       onContentChange={() => {
-        updateDescriptionCell({
-          editorRef: descriptionEditorRef,
-          blockIndex,
-          rowIndex,
-          boqRowCellKey: boqRowCellKey.description,
-        })
+        if (descriptionEditorRef.current === null) return
+        if (bookmarkSignal.value?.type !== itemType.boq) return
+        const html = descriptionEditorRef.current.html.get()
+        const clonedBookmark = structuredClone(bookmarkSignal.value)
+        const row = clonedBookmark.boq.rows[rowIndex]
+        if (!row) return
+        row.description.html = html
+        bookmarkSignal.value = clonedBookmark
       }}
       onKeydown={(e) => {
         tabFromDescriptionCell({ e, rowIndex, itemPriceCellEditorRef })

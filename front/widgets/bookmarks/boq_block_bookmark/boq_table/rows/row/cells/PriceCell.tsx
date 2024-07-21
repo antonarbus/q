@@ -21,7 +21,10 @@ import {
   boqRowCellKey,
   boqColumnKey,
   boqRowCellSx,
+  itemType,
 } from '@entities/quotation'
+import { bookmarkSignal } from '@entities/bookmark'
+import { getNumberFromString, getTextContentFromHtml } from '@shared/utils'
 
 export const PriceCell = (): JSX.Element => {
   const { blockIndex } = useBlock()
@@ -44,25 +47,30 @@ export const PriceCell = (): JSX.Element => {
         className={`td ${boqRowCellKey.price}`}
         editorRef={priceCellEditorRef}
         placeholder='Price...'
-        htmlGetter={() =>
-          getBoqCellHtmlFromStore({
-            blockIndex,
-            rowIndex,
-            boqRowCellKey: boqRowCellKey.price,
-          })
-        }
         onFocus={() => {
           showBoqRowPins({ blockIndex, rowIndex })
         }}
+        htmlGetter={() => {
+          if (bookmarkSignal.value?.type !== itemType.boq) return ''
+          const row = bookmarkSignal.value.boq.rows[rowIndex]
+          if (!row) return ''
+          const html = row.price.html
+          return html
+        }}
         onContentChange={() => {
-          updateBoqRowPriceCell({
-            blockIndex,
-            itemPriceCellEditorRef,
-            priceCellEditorRef,
-            qtyCellEditorRef,
-            rowIndex,
-            subTotalPriceEditorRef,
+          if (priceCellEditorRef.current === null) return
+          if (bookmarkSignal.value?.type !== itemType.boq) return
+          const html = priceCellEditorRef.current.html.get()
+          const cellTextContent = getTextContentFromHtml({ html })
+          const cellValueFromHtml = getNumberFromString({
+            string: cellTextContent,
           })
+          const clonedBookmark = structuredClone(bookmarkSignal.value)
+          const row = clonedBookmark.boq.rows[rowIndex]
+          if (!row) return
+          row.price.html = html
+          row.price.value = cellValueFromHtml
+          bookmarkSignal.value = clonedBookmark
         }}
         onBlur={() => {
           formatBoqRowPriceCell({ rowIndex, priceCellEditorRef, blockIndex })

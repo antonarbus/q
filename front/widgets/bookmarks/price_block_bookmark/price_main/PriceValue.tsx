@@ -37,11 +37,11 @@ export const PriceValue = (): JSX.Element => {
           string: cellTextContent,
         })
 
-        const newBookmarkValue = structuredClone(bookmarkSignal.value)
-        newBookmarkValue.price.html = html
-        newBookmarkValue.price.value = valueFromHtml
+        const clonedBookmark = structuredClone(bookmarkSignal.value)
+        clonedBookmark.price.html = html
+        clonedBookmark.price.value = valueFromHtml
 
-        bookmarkSignal.value = newBookmarkValue
+        bookmarkSignal.value = clonedBookmark
       }}
     />
   )

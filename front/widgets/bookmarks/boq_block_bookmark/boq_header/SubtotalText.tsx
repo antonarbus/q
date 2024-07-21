@@ -1,29 +1,29 @@
 import { useRef } from 'react'
-import { updateSubtotalTextCell } from '@features/blocks/cell/update_cell'
-import {
-  getBoqHeaderHtmlFromStore,
-  useBlock,
-  Froala,
-  subTotalTextCellStyle,
-  type BoqHeaderKey,
-} from '@entities/quotation'
+import { Froala, subTotalTextCellStyle, itemType } from '@entities/quotation'
 import type { FroalaEditor } from '@shared/types/froala'
-
-const boqHeaderKey: BoqHeaderKey = 'subtotalText'
+import { bookmarkSignal } from '@entities/bookmark'
 
 export const SubtotalText = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
-  const { blockIndex } = useBlock()
 
   return (
     <Froala
       editorRef={editorRef}
       placeholder='Subtotal...'
-      htmlGetter={() => getBoqHeaderHtmlFromStore({ blockIndex, boqHeaderKey })}
-      onContentChange={() => {
-        updateSubtotalTextCell({ editorRef, blockIndex, boqHeaderKey })
-      }}
       style={subTotalTextCellStyle}
+      htmlGetter={() => {
+        if (bookmarkSignal.value?.type !== itemType.boq) return ''
+        const titleHtml = bookmarkSignal.value.boq.header.subtotalText.html
+        return titleHtml
+      }}
+      onContentChange={() => {
+        if (editorRef.current === null) return
+        if (bookmarkSignal.value?.type !== itemType.boq) return
+        const html = editorRef.current.html.get()
+        const clonedBookmark = structuredClone(bookmarkSignal.value)
+        clonedBookmark.boq.header.subtotalText.html = html
+        bookmarkSignal.value = clonedBookmark
+      }}
     />
   )
 }
