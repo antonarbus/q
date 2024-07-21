@@ -1,4 +1,4 @@
-import { type Quotation, type Block } from '../../types'
+import type { Quotation, Block } from '../../types'
 
 type Props = {
   blockIndex: number

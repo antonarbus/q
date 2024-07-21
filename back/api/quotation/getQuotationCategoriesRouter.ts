@@ -1,10 +1,10 @@
 import { Router } from 'express'
-import { type Quotation } from '@entities/quotation'
-import { type ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
+import type { Quotation } from '@entities/quotation'
+import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '../../consts/httpStatus'
 import { QuotationModel } from '../../db/models/quotationModel'
 import { verifyAccessTokenMiddleware } from '../../middleware/verifyAccessTokenMiddleware'
-import { type ResWithBody, type Next, type Req } from '../../types'
+import type { ResWithBody, Next, Req } from '../../types'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '../../utils/getEmailFromRefreshTokenOrThrowUnauthorized'
 
 export type ResBody = {

@@ -1,6 +1,6 @@
 import { AnimatePresence } from 'framer-motion'
-import { type ReactNode } from 'react'
-import { type Block as BlockType } from '@entities/quotation'
+import type { ReactNode } from 'react'
+import type { Block as BlockType } from '@entities/quotation'
 import { FadeInOnInitLoad } from './FadeInOnInitLoad'
 import { Block } from './Block'
 import { BlocksSortableContext } from './BlocksSortableContext'

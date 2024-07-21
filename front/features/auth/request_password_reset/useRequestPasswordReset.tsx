@@ -1,5 +1,5 @@
-import { type Signal } from '@preact/signals-react'
-import { type UseMutationResult } from '@tanstack/react-query'
+import type { Signal } from '@preact/signals-react'
+import type { UseMutationResult } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useRequestPasswordResetMutation } from '@entities/user'

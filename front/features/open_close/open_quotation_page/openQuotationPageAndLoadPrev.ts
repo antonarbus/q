@@ -1,6 +1,6 @@
 import { router } from '@lib_instances/Router'
 import { previousQuotationRef } from '@entities/quotation'
-import { type QuotationLocationState } from '.'
+import type { QuotationLocationState } from '.'
 
 export const openQuotationPageAndLoadPrev = (): void => {
   const state: QuotationLocationState = {

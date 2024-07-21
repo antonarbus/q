@@ -4,7 +4,7 @@ import type {
 } from '@back/api/bookmark/saveBookmarkRouter'
 import { apiUrl } from '@back/consts/apiUrl'
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
-import { type AxiosResponse, type AxiosError } from 'axios'
+import type { AxiosResponse, AxiosError } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
 import { axiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
 

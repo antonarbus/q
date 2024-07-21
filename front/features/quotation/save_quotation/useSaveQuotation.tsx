@@ -1,6 +1,6 @@
 import { dispatch, getState } from '@lib_instances/store'
-import { type Signal } from '@preact/signals-react'
-import { type UseMutationResult } from '@tanstack/react-query'
+import type { Signal } from '@preact/signals-react'
+import type { UseMutationResult } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import {

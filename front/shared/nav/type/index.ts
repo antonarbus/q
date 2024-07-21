@@ -1,5 +1,5 @@
-import { type MouseEvent } from 'react'
-import { type navItemKey } from '../../consts/navItemKey'
+import type { MouseEvent } from 'react'
+import type { navItemKey } from '../../consts/navItemKey'
 
 export type MenuItemType = {
   id: string

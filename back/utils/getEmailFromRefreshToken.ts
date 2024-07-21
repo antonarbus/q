@@ -1,5 +1,5 @@
 import { verifyRefreshToken, type JwtPayloadExtended } from '../services/jwt'
-import { type ReqWithBody } from '../types'
+import type { ReqWithBody } from '../types'
 
 type ReqWithCookies = {
   cookies?: {

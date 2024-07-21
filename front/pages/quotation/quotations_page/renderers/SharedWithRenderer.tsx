@@ -1,7 +1,7 @@
 import { Chip } from '@mui/material'
 import type { ICellRendererParams } from 'ag-grid-community'
 import type { ReactNode } from 'react'
-import { type Quotation } from '@entities/quotation'
+import type { Quotation } from '@entities/quotation'
 
 export const SharedWithRenderer = (
   params: ICellRendererParams<Quotation, Quotation['sharedWith']>,

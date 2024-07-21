@@ -1,5 +1,5 @@
 import { dispatch, getState } from '@lib_instances/store'
-import { type MouseEvent } from 'react'
+import type { MouseEvent } from 'react'
 import { copySlice } from '@entities/copy'
 import { type TextBlock, isFroalaSignal, itemType } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'

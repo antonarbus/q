@@ -3,7 +3,7 @@ import { dispatch } from '@lib_instances/store'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { type QuotationLocationState } from '@features/open_close/open_quotation_page'
+import type { QuotationLocationState } from '@features/open_close/open_quotation_page'
 import {
   quotationSlice,
   useGetQuotationMutation,

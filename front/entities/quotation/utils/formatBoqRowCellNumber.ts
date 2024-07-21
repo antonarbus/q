@@ -1,10 +1,10 @@
 import { dispatch } from '@lib_instances/store'
 import { roundTo } from 'round-to'
-import { type FroalaEditorRef } from '@shared/types/froala'
+import type { FroalaEditorRef } from '@shared/types/froala'
 import { getStringWithNewFormattedNumber } from '@shared/utils'
 import { getBoqRowFromStore } from '../redux/getters/getBoqRowFromStore'
 import { quotationSlice } from '../redux/quotationSlice'
-import { type BoqRowCellKey } from '../types'
+import type { BoqRowCellKey } from '../types'
 
 type Props = {
   blockIndex: number

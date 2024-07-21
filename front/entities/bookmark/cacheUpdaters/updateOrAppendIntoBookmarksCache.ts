@@ -1,8 +1,8 @@
-import { type ResBody } from '@back/api/bookmark/getBookmarksRouter'
+import type { ResBody } from '@back/api/bookmark/getBookmarksRouter'
 import { reactQuery } from '@lib_instances/reactQuery'
 import { produce } from 'immer'
 import { queryKey } from '@shared/consts/queryKey'
-import { type Item } from '../index'
+import type { Item } from '../index'
 
 type Props = {
   item: Item

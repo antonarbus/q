@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
-import { type Item } from '@entities/quotation'
-import { type CopyPlace } from './types'
+import type { Item } from '@entities/quotation'
+import type { CopyPlace } from './types'
 
 type Props = {
   isCopyContainer: boolean

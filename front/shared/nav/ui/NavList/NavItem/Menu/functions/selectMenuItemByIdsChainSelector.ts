@@ -1,5 +1,5 @@
-import { type RootState } from '@lib_instances/store'
-import { type MenuItemType } from '../../../../../type'
+import type { RootState } from '@lib_instances/store'
+import type { MenuItemType } from '../../../../../type'
 
 export const selectMenuItemByIdsChainSelector =
   (idsToCurrentMenuItems: string[]) =>

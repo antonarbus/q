@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { type Quotation } from '../types'
+import type { Quotation } from '../types'
 import { deleteBoqRowReducer } from './reducers/deleteBoqRowReducer'
 import { deleteBlockReducer } from './reducers/deleteBlockReducer'
 import { disableFroalaReducer } from './reducers/disableFroalaReducer'

@@ -1,4 +1,4 @@
-import { type RootState } from '@lib_instances/store'
+import type { RootState } from '@lib_instances/store'
 import type { BoqRowCellKey, BoqRowCellPin } from '../../types'
 import { getBoqRowFromStore } from '../getters/getBoqRowFromStore'
 

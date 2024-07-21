@@ -1,6 +1,6 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { itemType, quotationSlice } from '@entities/quotation'
-import { type FroalaEditorRef } from '@shared/types/froala'
+import type { FroalaEditorRef } from '@shared/types/froala'
 
 type Props = {
   editorRef: FroalaEditorRef

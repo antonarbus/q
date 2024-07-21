@@ -1,4 +1,4 @@
-import { type CopyPlace } from './types'
+import type { CopyPlace } from './types'
 
 type Props = {
   hoveredElement: Element

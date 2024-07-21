@@ -1,7 +1,7 @@
 import { nanoid } from '@shared/lib/nanoid'
 import { boqRowKey } from './consts/boqRowKey'
 import { itemType } from './consts/itemType'
-import { type Quotation } from './types'
+import type { Quotation } from './types'
 
 export const newQuotationTemplate: Quotation = {
   id: 'new',

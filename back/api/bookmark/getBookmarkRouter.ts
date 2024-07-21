@@ -1,10 +1,10 @@
 import { Router } from 'express'
-import { type Item } from '@entities/quotation'
+import type { Item } from '@entities/quotation'
 import { httpStatus } from '../../consts/httpStatus'
 import { BookmarkModel } from '../../db/models/bookmarkModel'
 import { verifyAccessTokenMiddleware } from '../../middleware/verifyAccessTokenMiddleware'
 import { bucket, storageFolderName } from '../../services/storage'
-import { type ResWithBody, type ReqWithBody, type Next } from '../../types'
+import type { ResWithBody, ReqWithBody, Next } from '../../types'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '../../utils/getEmailFromRefreshTokenOrThrowUnauthorized'
 import { jsonParseSafe } from '@back/utils/jsonParseSafe'
 

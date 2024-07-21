@@ -11,7 +11,7 @@ import {
   type BoqRowEditorRefs,
   boqRowCellKey,
 } from '@entities/quotation'
-import { type FroalaEditor, type FroalaEditorRef } from '@shared/types/froala'
+import type { FroalaEditor, FroalaEditorRef } from '@shared/types/froala'
 import { notify } from '@shared/ui/top_msg'
 
 type Props = {

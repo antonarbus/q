@@ -1,4 +1,4 @@
-import { type ReactNode, type MouseEvent } from 'react'
+import type { ReactNode, MouseEvent } from 'react'
 import { HiOutlineInformationCircle } from 'react-icons/hi2'
 import { useNavigate } from 'react-router-dom'
 import { getBlockFromStore, itemType, useBlock } from '@entities/quotation'

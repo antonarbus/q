@@ -1,6 +1,6 @@
-import { type PayloadAction } from '@reduxjs/toolkit'
+import type { PayloadAction } from '@reduxjs/toolkit'
 import { itemType } from '../../consts/itemType'
-import { type Quotation } from '../../types'
+import type { Quotation } from '../../types'
 
 type Props = {
   htmlString: string

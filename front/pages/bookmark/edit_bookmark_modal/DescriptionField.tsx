@@ -1,5 +1,5 @@
 import { InputAdornment, TextField } from '@mui/material'
-import { type Signal } from '@preact/signals-react'
+import type { Signal } from '@preact/signals-react'
 import { BsFileEarmarkText } from 'react-icons/bs'
 
 type Props = {

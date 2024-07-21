@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useEffectOnce } from 'react-use'
-import { type MenuItemType } from '../type'
+import type { MenuItemType } from '../type'
 
 type Shortcuts = {
   name: string

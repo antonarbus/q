@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { type CopyPlace } from '@entities/copy'
+import type { CopyPlace } from '@entities/copy'
 import { nanoid } from '@shared/lib/nanoid'
 import { itemType } from '../../consts/itemType'
 import type { Block, PasteBlock, Quotation } from '../../types'

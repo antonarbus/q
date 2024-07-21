@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { type Quotation } from '../../types'
+import type { Quotation } from '../../types'
 import { getBoqBlockFromState } from '../getters/getBoqBlockFromState'
 
 export const deleteBoqRowReducer = (

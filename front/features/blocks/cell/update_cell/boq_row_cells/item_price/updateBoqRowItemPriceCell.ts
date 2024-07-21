@@ -1,5 +1,5 @@
 import type FroalaEditor from 'froala-editor'
-import { type MutableRefObject } from 'react'
+import type { MutableRefObject } from 'react'
 import { roundTo } from 'round-to'
 import {
   didBoqCellContentChange,

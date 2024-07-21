@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { type PastePos } from '@entities/copy'
+import type { PastePos } from '@entities/copy'
 import { nanoid } from '@shared/lib/nanoid'
 import { boqRowKey } from '../../consts/boqRowKey'
 import { itemType } from '../../consts/itemType'

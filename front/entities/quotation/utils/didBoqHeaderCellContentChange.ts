@@ -1,6 +1,6 @@
-import { type FroalaEditor } from '@shared/types/froala'
+import type { FroalaEditor } from '@shared/types/froala'
 import { getBoqBlockFromStore } from '../redux/getters/getBoqBlockFromStore'
-import { type BoqHeaderKey } from '../types'
+import type { BoqHeaderKey } from '../types'
 
 type Props = {
   editor: FroalaEditor

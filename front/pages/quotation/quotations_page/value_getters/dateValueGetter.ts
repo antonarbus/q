@@ -1,6 +1,6 @@
-import { type ValueGetterParams } from 'ag-grid-community'
+import type { ValueGetterParams } from 'ag-grid-community'
 import { isValid } from 'date-fns'
-import { type Quotation } from '@entities/quotation'
+import type { Quotation } from '@entities/quotation'
 
 type Props = {
   columnDef: keyof Quotation

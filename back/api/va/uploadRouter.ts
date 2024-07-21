@@ -1,6 +1,6 @@
 import express from 'express'
 import multer from 'multer'
-import { type ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
+import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '../../consts/httpStatus'
 import { bucket, storageFolderName } from '../../services/storage'
 import type { Next, Req, ResWithBody } from '../../types'
@@ -26,7 +26,7 @@ async function uploadFileIntoMemory({ file, email }: Props): Res {
   const blobStream = blob.createWriteStream({ resumable: false })
   const size = file.size / 1024 / 1024
 
-  return await new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     const makeFilePublic = async (): Promise<void> => {
       await bucket.file(filePath).makePublic()
       const link = `https://storage.googleapis.com/${bucket.name}/${filePath}`

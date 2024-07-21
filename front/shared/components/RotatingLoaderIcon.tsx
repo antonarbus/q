@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { type CSSProperties } from 'react'
+import type { CSSProperties } from 'react'
 import { FiLoader } from 'react-icons/fi'
 
 type Props = {

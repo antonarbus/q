@@ -1,10 +1,10 @@
-import {
-  type ResBody,
-  type ReqBody as Payload,
+import type {
+  ResBody,
+  ReqBody as Payload,
 } from '@back/api/quotation/deleteQuotationRouter'
 import { apiUrl } from '@back/consts/apiUrl'
 import { type UseMutationResult, useMutation } from '@tanstack/react-query'
-import { type AxiosError } from 'axios'
+import type { AxiosError } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
 import { axiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
 

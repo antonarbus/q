@@ -1,5 +1,5 @@
 import { InputAdornment, TextField } from '@mui/material'
-import { type Signal } from '@preact/signals-react'
+import type { Signal } from '@preact/signals-react'
 import { PiBooks } from 'react-icons/pi'
 
 type Props = {

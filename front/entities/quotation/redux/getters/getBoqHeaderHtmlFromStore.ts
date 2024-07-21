@@ -1,6 +1,6 @@
 import { getState } from '@lib_instances/store'
 import { itemType } from '../../consts/itemType'
-import { type BoqHeaderKey } from '../../types'
+import type { BoqHeaderKey } from '../../types'
 
 type Props = {
   blockIndex: number

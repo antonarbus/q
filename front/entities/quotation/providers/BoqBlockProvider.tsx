@@ -1,6 +1,6 @@
 import { createContext, useContext, type ReactNode } from 'react'
-import { type FroalaEditorRef } from '@shared/types/froala'
-import { type BoqRowEditorRefs } from '../types'
+import type { FroalaEditorRef } from '@shared/types/froala'
+import type { BoqRowEditorRefs } from '../types'
 
 type Props = {
   children: ReactNode

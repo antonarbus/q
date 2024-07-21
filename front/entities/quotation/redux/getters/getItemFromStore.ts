@@ -1,5 +1,5 @@
 import { getState } from '@lib_instances/store'
-import { type Item } from '../../types'
+import type { Item } from '../../types'
 
 type Props = {
   id: string

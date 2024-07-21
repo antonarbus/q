@@ -2,7 +2,7 @@ import { IconButton } from '@mui/material'
 import type { ReactNode } from 'react'
 import { AiOutlineFolderOpen } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
-import { type QuotationLocationState } from '.'
+import type { QuotationLocationState } from '.'
 
 type Props = {
   id: string

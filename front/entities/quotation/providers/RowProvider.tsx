@@ -1,5 +1,5 @@
 import { createContext, useContext, type ReactNode } from 'react'
-import { type FroalaEditorRef } from '@shared/types/froala'
+import type { FroalaEditorRef } from '@shared/types/froala'
 import { useBoqBlock } from './BoqBlockProvider'
 
 type Props = {

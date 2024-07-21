@@ -1,6 +1,6 @@
 import { theme } from '@lib_instances/theme'
 import { Box } from '@mui/material'
-import { type ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 type Props = {
   children: ReactNode

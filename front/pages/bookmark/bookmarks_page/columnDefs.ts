@@ -1,5 +1,5 @@
 import type { ColDef } from 'ag-grid-community'
-import { type Item } from '@entities/bookmark'
+import type { Item } from '@entities/bookmark'
 import { dateFilterComparator } from './comparators/dateFilterComparator'
 import { ActionButtonsCellRenderer } from './renderers/ActionButtonsCellRenderer'
 import { DateCellRenderer } from './renderers/DateCellRenderer'

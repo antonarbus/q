@@ -1,5 +1,5 @@
-import { type MouseEvent } from 'react'
-import { type FroalaEditorRef } from '@shared/types/froala'
+import type { MouseEvent } from 'react'
+import type { FroalaEditorRef } from '@shared/types/froala'
 
 type Props = {
   e: MouseEvent

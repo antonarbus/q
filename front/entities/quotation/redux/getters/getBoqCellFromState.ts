@@ -1,7 +1,7 @@
-import {
-  type Quotation,
-  type BoqRowCell,
-  type BoqRowCellKey,
+import type {
+  Quotation,
+  BoqRowCell,
+  BoqRowCellKey,
 } from '../../types'
 import { getBoqRowFromState } from './getBoqRowFromState'
 

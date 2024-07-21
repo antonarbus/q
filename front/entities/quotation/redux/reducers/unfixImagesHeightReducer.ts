@@ -1,5 +1,5 @@
 import { itemType } from '../../consts/itemType'
-import { type Quotation } from '../../types'
+import type { Quotation } from '../../types'
 
 function makeHeightAutoInHtmlString({
   htmlString,

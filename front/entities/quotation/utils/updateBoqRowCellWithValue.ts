@@ -1,5 +1,5 @@
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
-import { type FroalaEditor } from '@shared/types/froala'
+import type { FroalaEditor } from '@shared/types/froala'
 import {
   getNumberFromString,
   getTextContentFromHtml,
@@ -7,7 +7,7 @@ import {
 } from '@shared/utils'
 import { getBoqRowFromStore } from '../redux/getters/getBoqRowFromStore'
 import { updateBoqRowCellAtStore } from '../redux/updaters/updateBoqRowCellAtStore'
-import { type BoqRowCellKey } from '../types'
+import type { BoqRowCellKey } from '../types'
 
 type Props = {
   blockIndex: number

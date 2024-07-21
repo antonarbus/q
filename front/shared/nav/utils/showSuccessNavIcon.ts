@@ -1,6 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { navSlice } from '..'
-import { type NavItemIdKey } from '../type'
+import type { NavItemIdKey } from '../type'
 
 type Props = {
   navMenuItemIdKey: NavItemIdKey

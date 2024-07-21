@@ -1,5 +1,5 @@
 import express from 'express'
-import { type User } from '@entities/user'
+import type { User } from '@entities/user'
 import { httpStatus } from '../../consts/httpStatus'
 import { UserModel } from '../../db/models/userModel'
 import {

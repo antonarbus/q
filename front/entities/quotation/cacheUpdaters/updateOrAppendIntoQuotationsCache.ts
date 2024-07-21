@@ -1,8 +1,8 @@
-import { type ResBody as ResBodyQuotations } from '@back/api/quotation/getQuotationsRouter'
+import type { ResBody as ResBodyQuotations } from '@back/api/quotation/getQuotationsRouter'
 import { reactQuery } from '@lib_instances/reactQuery'
 import { produce } from 'immer'
 import { queryKey } from '@shared/consts/queryKey'
-import { type Quotation } from '../types'
+import type { Quotation } from '../types'
 
 type Props = {
   quotation: Quotation

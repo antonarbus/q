@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { boqRowCellKey } from '../../consts/boqRowCellKey'
-import { type Quotation } from '../../types'
+import type { Quotation } from '../../types'
 import { getBoqCellFromState } from '../getters/getBoqCellFromState'
 
 export const pinItemPriceReducer = (

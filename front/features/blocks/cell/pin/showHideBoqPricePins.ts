@@ -1,5 +1,5 @@
 import { dispatch } from '@lib_instances/store'
-import { type MutableRefObject } from 'react'
+import type { MutableRefObject } from 'react'
 import { quotationSlice } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 

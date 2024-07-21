@@ -1,10 +1,10 @@
 import { Router } from 'express'
-import { type ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
+import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '../../consts/httpStatus'
 import { BookmarkModel } from '../../db/models/bookmarkModel'
 import { verifyAccessTokenMiddleware } from '../../middleware/verifyAccessTokenMiddleware'
 import { bucket, storageFolderName } from '../../services/storage'
-import { type ResWithBody, type ReqWithBody, type Next } from '../../types'
+import type { ResWithBody, ReqWithBody, Next } from '../../types'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '../../utils/getEmailFromRefreshTokenOrThrowUnauthorized'
 import type { Item } from '@entities/quotation/types'
 
@@ -48,7 +48,7 @@ const deleteBookmark: RouterHandler = async (req, res, next) => {
         .json({ message: 'no item in bucket' })
     }
 
-    await Promise.all(files.map(async (file) => await file.delete()))
+    await Promise.all(files.map(async (file) => file.delete()))
 
     return res.status(httpStatus.success_200).json({ message: 'deleted' })
   } catch (error) {

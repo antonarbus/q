@@ -1,7 +1,7 @@
 import { useSelectorTyped } from '@lib_instances/store'
-import { type CSSProperties } from 'react'
+import type { CSSProperties } from 'react'
 import { selectColumnWidth } from '../redux/selectors/selectColumnWidth'
-import { type BoqColumnKey } from '../types'
+import type { BoqColumnKey } from '../types'
 
 type Props = {
   blockIndex: number

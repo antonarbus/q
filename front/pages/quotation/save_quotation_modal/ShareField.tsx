@@ -15,7 +15,7 @@ import uniq from 'lodash.uniq'
 import { useEffect } from 'react'
 import { BsFillPersonPlusFill } from 'react-icons/bs'
 import { MdGroups, MdGroupOff } from 'react-icons/md'
-import { type Quotation } from '@entities/quotation'
+import type { Quotation } from '@entities/quotation'
 import { OutlinedDivWithLabel } from '@shared/components'
 import {
   type SharedWithOption,

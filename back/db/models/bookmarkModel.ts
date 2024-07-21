@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose'
-import { type Item } from '@entities/bookmark'
+import type { Item } from '@entities/bookmark'
 import { nanoid } from '../../lib/nanoid'
 
 const bookmarkSchema = new Schema<Item>(

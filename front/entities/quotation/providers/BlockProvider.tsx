@@ -1,5 +1,5 @@
 import { createContext, useContext, type ReactNode } from 'react'
-import { type Block } from '../types'
+import type { Block } from '../types'
 
 type Context = {
   blockIndex: number

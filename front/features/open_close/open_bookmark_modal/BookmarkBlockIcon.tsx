@@ -1,5 +1,5 @@
 import { dispatch, getState } from '@lib_instances/store'
-import { type ReactNode, type MouseEvent } from 'react'
+import type { ReactNode, MouseEvent } from 'react'
 import { MdOutlineStarOutline } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import {

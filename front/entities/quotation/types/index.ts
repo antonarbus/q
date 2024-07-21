@@ -1,6 +1,6 @@
-import { type FroalaEditorRef } from '@shared/types/froala'
-import { type BoqRowKey } from '../consts/boqRowKey'
-import { type itemType } from '../consts/itemType'
+import type { FroalaEditorRef } from '@shared/types/froala'
+import type { BoqRowKey } from '../consts/boqRowKey'
+import type { itemType } from '../consts/itemType'
 
 // this is common field for block + row + quotation
 // a bit stupid but code is simpler if we maintain these fields everywhere, even if we do not need them everywhere

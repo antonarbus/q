@@ -1,5 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { type CopyPlace } from '@entities/copy'
+import type { CopyPlace } from '@entities/copy'
 import { boqRowKey } from '../../consts/boqRowKey'
 import type { BoqRow, BoqRowCell, Quotation } from '../../types'
 import { getBoqBlockFromState } from '../getters/getBoqBlockFromState'

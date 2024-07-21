@@ -1,10 +1,10 @@
 import { Router } from 'express'
-import { type Item } from '@entities/bookmark'
-import { type ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
+import type { Item } from '@entities/bookmark'
+import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '../../consts/httpStatus'
 import { BookmarkModel } from '../../db/models/bookmarkModel'
 import { verifyAccessTokenMiddleware } from '../../middleware/verifyAccessTokenMiddleware'
-import { type ResWithBody, type Next, type Req } from '../../types'
+import type { ResWithBody, Next, Req } from '../../types'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '../../utils/getEmailFromRefreshTokenOrThrowUnauthorized'
 
 export type ResBody = {

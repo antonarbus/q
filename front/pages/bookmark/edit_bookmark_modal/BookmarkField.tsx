@@ -1,5 +1,5 @@
 import { AnimatePresence } from 'framer-motion'
-import { type ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import { useEffectOnce } from 'react-use'
 import { isFroalaSignal } from '@entities/quotation'
 import { BookmarkFieldLayout } from './BookmarkFieldLayout'

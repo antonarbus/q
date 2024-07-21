@@ -1,4 +1,4 @@
-import { type BoqRow } from '../../types'
+import type { BoqRow } from '../../types'
 import { getBoqBlockFromStore } from './getBoqBlockFromStore'
 
 type Props = {

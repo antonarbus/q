@@ -1,12 +1,12 @@
 import { Router } from 'express'
-import { type HydratedDocument } from 'mongoose'
-import { type Quotation } from '@entities/quotation/types'
-import { type ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
+import type { HydratedDocument } from 'mongoose'
+import type { Quotation } from '@entities/quotation/types'
+import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '../../consts/httpStatus'
 import { QuotationModel } from '../../db/models/quotationModel'
 import { verifyAccessTokenMiddleware } from '../../middleware/verifyAccessTokenMiddleware'
 import { bucket, storageFolderName } from '../../services/storage'
-import { type ResWithBody, type ReqWithBody, type Next } from '../../types'
+import type { ResWithBody, ReqWithBody, Next } from '../../types'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '../../utils/getEmailFromRefreshTokenOrThrowUnauthorized'
 
 export type ReqBody = {

@@ -1,4 +1,4 @@
-import { type Quotation } from '@entities/quotation'
+import type { Quotation } from '@entities/quotation'
 
 type Props = {
   quotation: Quotation

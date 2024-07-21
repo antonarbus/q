@@ -1,6 +1,6 @@
 import { getState } from '@lib_instances/store'
 import { itemType } from '../../consts/itemType'
-import { type BoqBlock } from '../../types'
+import type { BoqBlock } from '../../types'
 
 type Props = {
   blockIndex: number

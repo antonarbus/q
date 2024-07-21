@@ -1,5 +1,5 @@
 import { dispatch } from '@lib_instances/store'
-import { type FocusEvent } from 'react'
+import type { FocusEvent } from 'react'
 import {
   boqRowCellKey,
   getBoqRowFromStore,

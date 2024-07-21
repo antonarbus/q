@@ -6,7 +6,7 @@ import {
   body,
   validationResult,
 } from 'express-validator'
-import { type User } from '@entities/user'
+import type { User } from '@entities/user'
 import { httpStatus } from '../../consts/httpStatus'
 import { UserModel } from '../../db/models/userModel'
 import {

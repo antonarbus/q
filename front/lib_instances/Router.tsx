@@ -24,15 +24,15 @@ import { LoadingDotsOverlay } from '@shared/loading_dots_overlay'
 import { TopMsg } from '@shared/ui/top_msg'
 
 const Quotation = React.lazy(async () => {
-  return await import('@pages/quotation/quotation_page')
+  return import('@pages/quotation/quotation_page')
 })
 
 const QuotationsTable = React.lazy(
-  async () => await import('@pages/quotation/quotations_page'),
+  async () => import('@pages/quotation/quotations_page'),
 )
 
 const ItemsTable = React.lazy(
-  async () => await import('@pages/bookmark/bookmarks_page'),
+  async () => import('@pages/bookmark/bookmarks_page'),
 )
 
 const authRoutes: RouteObject[] = [

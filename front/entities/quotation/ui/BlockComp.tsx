@@ -1,12 +1,12 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { getState } from '@lib_instances/store'
-import { type ResizableProps } from 're-resizable'
+import type { ResizableProps } from 're-resizable'
 import type { ReactNode } from 'react'
-import {
-  type OnBlockResize,
-  type OnBlockResizeStop,
-  type OnBlockResizeStart,
+import type {
+  OnBlockResize,
+  OnBlockResizeStop,
+  OnBlockResizeStart,
 } from '@shared/types/resizablePaper'
 import { useBlock } from '../providers/BlockProvider'
 import { BlockAnimate } from './block_layout'

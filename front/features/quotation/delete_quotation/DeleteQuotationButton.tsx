@@ -1,6 +1,6 @@
-import { type ReqBody as Payload } from '@back/api/quotation/deleteQuotationRouter'
+import type { ReqBody as Payload } from '@back/api/quotation/deleteQuotationRouter'
 import { IconButton } from '@mui/material'
-import { type ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import {
