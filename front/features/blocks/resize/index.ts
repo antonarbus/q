@@ -16,10 +16,4 @@ export {
   onBoqBlockResizeStop,
 } from './onBoqBlockResize'
 
-export {
-  onTextBlockBookmarkResizeStart,
-  onTextBlockBookmarkResize,
-  onTextBlockBookmarkResizeStop,
-} from './onTextBlockBookmarkResize'
-
 export { onPriceBlockResizeStop } from './onPriceBlockResize'

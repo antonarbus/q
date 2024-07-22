@@ -13,11 +13,13 @@ import { BoqItemProvider, BlockComp } from '@entities/quotation'
 import { ItemActionButtonsLayout } from '@shared/layouts'
 import { BoqHeader } from './boq_header'
 import { BoqTable } from './boq_table'
+import { cls } from '@shared/consts/cls'
 
 export const BoqBlock = (): JSX.Element => {
   return (
     <BoqItemProvider>
       <BlockComp
+        className={cls.boqBlock}
         autoWidth={true}
         minWidth='560px'
         onBlockResizeStart={onBoqBlockResizeStart}

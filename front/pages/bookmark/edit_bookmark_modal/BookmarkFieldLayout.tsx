@@ -34,6 +34,9 @@ export const BookmarkFieldLayout = ({ children }: Props): JSX.Element => {
           [`.${cls.block}.${cls.textBlock}`]: {
             display: 'block !important',
           },
+          [`.${cls.block}.${cls.boqBlock}`]: {
+            justifyContent: 'flex-start !important',
+          },
           '.actions-container': {
             display: 'none !important',
           },
