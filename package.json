@@ -6,8 +6,8 @@
   "scripts": {
     "start": "NODE_ENV=development concurrently \"npm run back\" \"npm run front\"",
     "stop": "kill-port 3005 3006",
-    "front": "vite",
-    "back": "tsx watch back/index.ts",
+    "start_front": "vite",
+    "start_back": "tsx watch back/index.ts",
     "build_front": "vite build",
     "build_back": "rollup -c rollup.config.js",
     "build_all": "concurrently \"npm run build_front\" \"npm run build_back\"",
@@ -21,10 +21,10 @@
     "fix": "eslint . --fix",
     "tsc": "tsc --noEmit",
     "prettier": "prettier --write .",
-    "docker_dev_up": "docker-compose -f docker-compose.dev.yml up",
-    "docker_dev_build": "docker-compose -f docker-compose.dev.yml build",
-    "docker_prod_up": "docker-compose -f docker-compose.prod.yml up",
-    "docker_prod_build": "docker-compose -f docker-compose.prod.yml build"
+    "docker_dev_build": "docker compose -f docker-compose.dev.yml build",
+    "docker_dev_up": "docker compose -f docker-compose.dev.yml up",
+    "docker_prod_build": "docker compose -f docker-compose.prod.yml build",
+    "docker_prod_up": "docker compose -f docker-compose.prod.yml up"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.11.0",
