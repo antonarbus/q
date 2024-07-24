@@ -56,8 +56,11 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Disable npm installation checks
+        run: npm config set legacy-peer-deps true
+
       - name: Install dependencies
-        run: npm i -f
+        run: npm run build_all
 
       - name: Run unit tests
         run: npm run test
