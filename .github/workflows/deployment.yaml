@@ -59,8 +59,14 @@ jobs:
       - name: Disable npm installation checks
         run: npm config set legacy-peer-deps true
 
-      - name: Install dependencies
-        run: npm run build_all
+      - name: Install dev dependencies
+        run: npm run install_dev_deps
+
+      - name: Install front dependencies
+        run: npm run install_front
+
+      - name: Install front dependencies
+        run: npm run install_back
 
       - name: Run unit tests
         run: npm run test
