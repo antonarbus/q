@@ -51,6 +51,23 @@ jobs:
           username: oauth2accesstoken
           password: ${{steps.gcloud-auth.outputs.access_token}}
 
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm i -f
+
+      - name: Run unit tests
+        run: npm run test
+
+      - name: Run typescript checks
+        run: npm run tsc
+
+      - name: Run eslint
+        run: npm run lint
+
       - name: Build and push Docker image Backend
         id: build-push-back
         uses: docker/build-push-action@v6
