@@ -1,20 +1,15 @@
-import { boqRowCellKey, formatBoqRowCellNumber } from '@entities/quotation'
+import { boqRowCellKey } from '@entities/quotation'
+import { formatRowBlockCellNumber } from '@entities/quotation/utils/formatRowBlockCellNumber'
 import type { FroalaEditorRef } from '@shared/types/froala'
 
 type Props = {
   itemPriceCellEditorRef: FroalaEditorRef
-  blockIndex: number
-  rowIndex: number
 }
 
-export const formatBoqRowItemPriceCell = ({
+export const formatItemPriceCell = ({
   itemPriceCellEditorRef,
-  blockIndex,
-  rowIndex,
 }: Props): void => {
-  formatBoqRowCellNumber({
-    blockIndex,
-    rowIndex,
+  formatRowBlockCellNumber({
     boqRowCellKey: boqRowCellKey.itemPrice,
     editorRef: itemPriceCellEditorRef,
     roundToTwoDecimals: true,

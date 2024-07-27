@@ -4,10 +4,7 @@ import {
   pinBoqRowPriceCell,
   showBoqRowPins,
 } from '@features/blocks/cell/pin'
-import {
-  formatBoqRowPriceCell,
-  validateBoqRowPrice,
-} from '@features/blocks/cell/update_cell'
+import { validateBoqRowPrice } from '@features/blocks/cell/update_cell'
 import {
   useBoqBlock,
   useRow,
@@ -20,6 +17,7 @@ import {
   getRowCellHtmlFromStore,
 } from '@entities/quotation'
 import { updatePriceCell } from '@features/blocks/cell/update_cell/row_block_cells/price/updatePriceCell'
+import { formatPriceCell } from '@features/blocks/cell/update_cell/row_block_cells/price/formatPriceCell'
 
 export const PriceCell = (): JSX.Element => {
   const { priceCellEditorRef, qtyCellEditorRef, itemPriceCellEditorRef } =
@@ -51,11 +49,7 @@ export const PriceCell = (): JSX.Element => {
           })
         }}
         onBlur={() => {
-          formatBoqRowPriceCell({
-            rowIndex: 0,
-            priceCellEditorRef,
-            blockIndex: 0,
-          })
+          formatPriceCell({ priceCellEditorRef })
           validateBoqRowPrice({
             blockIndex: 0,
             priceCellEditorRef,

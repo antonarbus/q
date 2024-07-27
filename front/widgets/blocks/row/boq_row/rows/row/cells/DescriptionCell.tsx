@@ -1,4 +1,3 @@
-import { tabFromDescriptionCell } from '@features/blocks/cell/tab_away_from_cell'
 import { beforeUpload } from '@features/upload'
 import {
   useRow,

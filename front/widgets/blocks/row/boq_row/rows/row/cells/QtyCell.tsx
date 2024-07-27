@@ -1,6 +1,5 @@
 import { Box } from '@mui/material'
 import { Pin, pinBoqRowQtyCell } from '@features/blocks/cell/pin'
-import { formatBoqRowQtyCell } from '@features/blocks/cell/update_cell'
 import {
   useRow,
   Froala,
@@ -12,6 +11,7 @@ import {
   getRowCellHtmlFromStore,
 } from '@entities/quotation'
 import { updateQtyCell } from '@features/blocks/cell/update_cell/row_block_cells/qty/updateQtyCell'
+import { formatQtyCell } from '@features/blocks/cell/update_cell/row_block_cells/qty/formatQtyCell'
 
 export const QtyCell = (): JSX.Element => {
   const { qtyCellEditorRef, priceCellEditorRef } = useRow()
@@ -37,7 +37,7 @@ export const QtyCell = (): JSX.Element => {
           })
         }}
         onBlur={() => {
-          formatBoqRowQtyCell({ blockIndex: 0, qtyCellEditorRef, rowIndex: 0 })
+          formatQtyCell({ qtyCellEditorRef })
         }}
         wrapperStyles={stylesForResizableCell}
         style={boqRowCellStyle}

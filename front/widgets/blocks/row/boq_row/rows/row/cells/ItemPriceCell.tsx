@@ -1,6 +1,5 @@
 import { Box } from '@mui/material'
 import { Pin, pinBoqRowItemPriceCell } from '@features/blocks/cell/pin'
-import { formatBoqRowItemPriceCell } from '@features/blocks/cell/update_cell'
 import {
   useRow,
   Froala,
@@ -12,6 +11,7 @@ import {
   getRowCellHtmlFromStore,
 } from '@entities/quotation'
 import { updateItemPriceCell } from '@features/blocks/cell/update_cell/row_block_cells/item_price/updateItemPriceCell'
+import { formatItemPriceCell } from '@features/blocks/cell/update_cell/row_block_cells/item_price/formatItemPriceCell'
 
 export const ItemPriceCell = (): JSX.Element => {
   const { itemPriceCellEditorRef, priceCellEditorRef } = useRow()
@@ -37,11 +37,7 @@ export const ItemPriceCell = (): JSX.Element => {
           })
         }}
         onBlur={() => {
-          formatBoqRowItemPriceCell({
-            blockIndex: 0,
-            rowIndex: 0,
-            itemPriceCellEditorRef,
-          })
+          formatItemPriceCell({ itemPriceCellEditorRef })
         }}
         wrapperStyles={stylesForResizableCell}
         style={boqRowCellStyle}
