@@ -22,6 +22,7 @@ import {
   boqRowCellSx,
   getRowCellHtmlFromStore,
 } from '@entities/quotation'
+import { updatePriceCell } from '@features/blocks/cell/update_cell/row_block_cells/price/updatePriceCell'
 
 export const PriceCell = (): JSX.Element => {
   const { blockIndex } = useBlock()
@@ -51,13 +52,10 @@ export const PriceCell = (): JSX.Element => {
           showBoqRowPins({ blockIndex: 0, rowIndex })
         }}
         onContentChange={() => {
-          updateBoqRowPriceCell({
-            blockIndex: 0,
+          updatePriceCell({
             itemPriceCellEditorRef,
             priceCellEditorRef,
             qtyCellEditorRef,
-            rowIndex: 0,
-            subTotalPriceEditorRef,
           })
         }}
         onBlur={() => {
