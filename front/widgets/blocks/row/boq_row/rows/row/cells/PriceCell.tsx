@@ -4,7 +4,6 @@ import {
   pinBoqRowPriceCell,
   showBoqRowPins,
 } from '@features/blocks/cell/pin'
-import { tabFromPriceCell } from '@features/blocks/cell/tab_away_from_cell'
 import {
   formatBoqRowPriceCell,
   validateBoqRowPrice,
@@ -25,7 +24,7 @@ import { updatePriceCell } from '@features/blocks/cell/update_cell/row_block_cel
 export const PriceCell = (): JSX.Element => {
   const { priceCellEditorRef, qtyCellEditorRef, itemPriceCellEditorRef } =
     useRow()
-  const { subTotalPriceEditorRef, boqRowEditorRefs } = useBoqBlock()
+  const { subTotalPriceEditorRef } = useBoqBlock()
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex: 0,
     boqColumnKey: boqColumnKey.price,

@@ -1,6 +1,5 @@
 import { Box } from '@mui/material'
 import { Pin, pinBoqRowQtyCell } from '@features/blocks/cell/pin'
-import { tabFromQtyCell } from '@features/blocks/cell/tab_away_from_cell'
 import { formatBoqRowQtyCell } from '@features/blocks/cell/update_cell'
 import {
   useRow,

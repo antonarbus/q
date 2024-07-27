@@ -1,6 +1,5 @@
 import { Box } from '@mui/material'
 import { Pin, pinBoqRowItemPriceCell } from '@features/blocks/cell/pin'
-import { tabFromItemPriceCell } from '@features/blocks/cell/tab_away_from_cell'
 import { formatBoqRowItemPriceCell } from '@features/blocks/cell/update_cell'
 import {
   useRow,
@@ -15,8 +14,7 @@ import {
 import { updateItemPriceCell } from '@features/blocks/cell/update_cell/row_block_cells/item_price/updateItemPriceCell'
 
 export const ItemPriceCell = (): JSX.Element => {
-  const { itemPriceCellEditorRef, priceCellEditorRef, qtyCellEditorRef } =
-    useRow()
+  const { itemPriceCellEditorRef, priceCellEditorRef } = useRow()
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex: 0,
     boqColumnKey: boqColumnKey.itemPrice,
