@@ -35,6 +35,9 @@ export const PriceCell = (): JSX.Element => {
         className={`td ${boqRowCellKey.price}`}
         editorRef={priceCellEditorRef}
         placeholder='Price...'
+        wrapperStyles={stylesForResizableCell}
+        style={boqRowCellStyle}
+        sx={boqRowCellSx}
         htmlGetter={() =>
           getRowCellHtmlFromStore({ boqRowCellKey: boqRowCellKey.price })
         }
@@ -57,9 +60,6 @@ export const PriceCell = (): JSX.Element => {
             subTotalPriceEditorRef,
           })
         }}
-        wrapperStyles={stylesForResizableCell}
-        style={boqRowCellStyle}
-        sx={boqRowCellSx}
       />
       <Pin
         boqRowCellKey={boqRowCellKey.price}

@@ -24,6 +24,7 @@ export const DescriptionCell = (): JSX.Element => {
       editorRef={descriptionEditorRef}
       placeholder='Description...'
       beforeUpload={beforeUpload}
+      wrapperStyles={stylesForResizableCell}
       htmlGetter={() =>
         getRowCellHtmlFromStore({ boqRowCellKey: boqRowCellKey.description })
       }
@@ -32,7 +33,6 @@ export const DescriptionCell = (): JSX.Element => {
           editorRef: descriptionEditorRef,
         })
       }}
-      wrapperStyles={stylesForResizableCell}
       style={{
         ...boqRowCellStyle,
         textAlign: 'left',

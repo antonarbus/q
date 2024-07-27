@@ -27,6 +27,9 @@ export const QtyCell = (): JSX.Element => {
         className={`td ${boqRowCellKey.qty}`}
         editorRef={qtyCellEditorRef}
         placeholder='Qty...'
+        wrapperStyles={stylesForResizableCell}
+        style={boqRowCellStyle}
+        sx={boqRowCellSx}
         htmlGetter={() =>
           getRowCellHtmlFromStore({ boqRowCellKey: boqRowCellKey.qty })
         }
@@ -39,9 +42,6 @@ export const QtyCell = (): JSX.Element => {
         onBlur={() => {
           formatQtyCell({ qtyCellEditorRef })
         }}
-        wrapperStyles={stylesForResizableCell}
-        style={boqRowCellStyle}
-        sx={boqRowCellSx}
       />
       <Pin
         boqRowCellKey={boqRowCellKey.qty}
