@@ -12,7 +12,7 @@ import {
 import { updateDescriptionCell } from '@features/blocks/cell/update_cell/row_block_cells/description/updateDescriptionCell'
 
 export const DescriptionCell = (): JSX.Element => {
-  const { rowIndex, itemPriceCellEditorRef, descriptionEditorRef } = useRow()
+  const { itemPriceCellEditorRef, descriptionEditorRef } = useRow()
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex: 0,
     boqColumnKey: boqColumnKey.description,
@@ -32,9 +32,6 @@ export const DescriptionCell = (): JSX.Element => {
         updateDescriptionCell({
           editorRef: descriptionEditorRef,
         })
-      }}
-      onKeydown={(e) => {
-        tabFromDescriptionCell({ e, rowIndex, itemPriceCellEditorRef })
       }}
       wrapperStyles={stylesForResizableCell}
       style={{

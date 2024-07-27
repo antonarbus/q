@@ -45,9 +45,6 @@ export const ItemPriceCell = (): JSX.Element => {
             itemPriceCellEditorRef,
           })
         }}
-        onKeydown={(e) => {
-          tabFromItemPriceCell({ e, rowIndex: 0, qtyCellEditorRef })
-        }}
         wrapperStyles={stylesForResizableCell}
         style={boqRowCellStyle}
         sx={boqRowCellSx}
