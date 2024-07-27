@@ -3,7 +3,6 @@ import { Pin, pinBoqRowItemPriceCell } from '@features/blocks/cell/pin'
 import { tabFromItemPriceCell } from '@features/blocks/cell/tab_away_from_cell'
 import { formatBoqRowItemPriceCell } from '@features/blocks/cell/update_cell'
 import {
-  useBlock,
   useRow,
   Froala,
   boqRowCellStyle,
@@ -16,7 +15,6 @@ import {
 import { updateItemPriceCell } from '@features/blocks/cell/update_cell/row_block_cells/item_price/updateItemPriceCell'
 
 export const ItemPriceCell = (): JSX.Element => {
-  const { blockIndex } = useBlock()
   const {
     rowIndex,
     itemPriceCellEditorRef,
@@ -24,7 +22,7 @@ export const ItemPriceCell = (): JSX.Element => {
     qtyCellEditorRef,
   } = useRow()
   const { stylesForResizableCell } = useStylesForResizableCell({
-    blockIndex,
+    blockIndex: 0,
     boqColumnKey: boqColumnKey.itemPrice,
     minWidth: '100px',
   })
@@ -46,7 +44,7 @@ export const ItemPriceCell = (): JSX.Element => {
         }}
         onBlur={() => {
           formatBoqRowItemPriceCell({
-            blockIndex,
+            blockIndex: 0,
             rowIndex,
             itemPriceCellEditorRef,
           })
@@ -61,7 +59,7 @@ export const ItemPriceCell = (): JSX.Element => {
       <Pin
         boqRowCellKey={boqRowCellKey.itemPrice}
         onClick={() => {
-          pinBoqRowItemPriceCell({ blockIndex, rowIndex })
+          pinBoqRowItemPriceCell({ blockIndex: 0, rowIndex: 0 })
         }}
       />
     </Box>

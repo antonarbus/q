@@ -2,7 +2,6 @@ import { tabFromDescriptionCell } from '@features/blocks/cell/tab_away_from_cell
 import { beforeUpload } from '@features/upload'
 import {
   useRow,
-  useBlock,
   Froala,
   useStylesForResizableCell,
   boqRowCellStyle,
@@ -13,7 +12,6 @@ import {
 import { updateDescriptionCell } from '@features/blocks/cell/update_cell/row_block_cells/description/updateDescriptionCell'
 
 export const DescriptionCell = (): JSX.Element => {
-  const { blockIndex } = useBlock()
   const { rowIndex, itemPriceCellEditorRef, descriptionEditorRef } = useRow()
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex: 0,

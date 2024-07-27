@@ -6,11 +6,7 @@ import {
   onColumnResizeStart,
   onColumnResizeStop,
 } from '@features/blocks/resize'
-import {
-  selectColumnWidth,
-  useBlock,
-  type BoqColumnKey,
-} from '@entities/quotation'
+import { selectColumnWidth, type BoqColumnKey } from '@entities/quotation'
 
 type Props = {
   children: ReactNode
@@ -27,9 +23,8 @@ export const ResizableColumn = ({
   boqColumnKey,
   minWidth,
 }: Props): JSX.Element => {
-  const { blockIndex } = useBlock()
   const colWidth = useSelectorTyped(
-    selectColumnWidth({ blockIndex, boqColumnKey }),
+    selectColumnWidth({ blockIndex: 0, boqColumnKey }),
   )
 
   return (
@@ -64,21 +59,21 @@ export const ResizableColumn = ({
       onResizeStart={(event, direction, element): void => {
         onColumnResizeStart({
           headerColumnElement: element,
-          blockIndex,
+          blockIndex: 0,
           boqColumnKey,
         })
       }}
       onResize={(event, direction, element, delta): void => {
         onColumnResize({
           headerColumnElement: element,
-          blockIndex,
+          blockIndex: 0,
           boqColumnKey,
         })
       }}
       onResizeStop={(event, direction, element): void => {
         onColumnResizeStop({
           headerColumnElement: element,
-          blockIndex,
+          blockIndex: 0,
           boqColumnKey,
         })
       }}

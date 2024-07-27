@@ -1,14 +1,9 @@
 import { Box } from '@mui/material'
 import { Pin, pinBoqRowQtyCell } from '@features/blocks/cell/pin'
 import { tabFromQtyCell } from '@features/blocks/cell/tab_away_from_cell'
+import { formatBoqRowQtyCell } from '@features/blocks/cell/update_cell'
 import {
-  formatBoqRowQtyCell,
-  updateBoqRowQtyCell,
-} from '@features/blocks/cell/update_cell'
-import {
-  useBlock,
   useRow,
-  useBoqBlock,
   Froala,
   boqRowCellStyle,
   useStylesForResizableCell,
@@ -20,11 +15,9 @@ import {
 import { updateQtyCell } from '@features/blocks/cell/update_cell/row_block_cells/qty/updateQtyCell'
 
 export const QtyCell = (): JSX.Element => {
-  const { blockIndex } = useBlock()
-  const { subTotalPriceEditorRef } = useBoqBlock()
   const { rowIndex, qtyCellEditorRef, priceCellEditorRef } = useRow()
   const { stylesForResizableCell } = useStylesForResizableCell({
-    blockIndex,
+    blockIndex: 0,
     boqColumnKey: boqColumnKey.qty,
     minWidth: '100px',
   })
@@ -45,7 +38,7 @@ export const QtyCell = (): JSX.Element => {
           })
         }}
         onBlur={() => {
-          formatBoqRowQtyCell({ blockIndex, qtyCellEditorRef, rowIndex })
+          formatBoqRowQtyCell({ blockIndex: 0, qtyCellEditorRef, rowIndex })
         }}
         onKeydown={(e) => {
           tabFromQtyCell({ e, rowIndex, priceCellEditorRef })
@@ -57,7 +50,7 @@ export const QtyCell = (): JSX.Element => {
       <Pin
         boqRowCellKey={boqRowCellKey.qty}
         onClick={() => {
-          pinBoqRowQtyCell({ blockIndex, rowIndex })
+          pinBoqRowQtyCell({ blockIndex: 0, rowIndex: 0 })
         }}
       />
     </Box>
