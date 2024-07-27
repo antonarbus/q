@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "NODE_ENV=development concurrently \"npm run back\" \"npm run front\"",
+    "start": "NODE_ENV=development concurrently \"npm run start_back\" \"npm run start_front\"",
     "stop": "kill-port 3005 3006",
     "start_front": "vite",
     "start_back": "tsx watch back/index.ts",
