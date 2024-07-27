@@ -65,7 +65,7 @@ jobs:
       - name: Install front dependencies
         run: npm run install_front
 
-      - name: Install front dependencies
+      - name: Install back dependencies
         run: npm run install_back
 
       - name: Run unit tests
