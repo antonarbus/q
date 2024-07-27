@@ -28,9 +28,9 @@ export const OpenEditBookmarkModalButton = ({ id }: ReqBody): JSX.Element => {
 
       if (!item) return
 
-      if (item.type === 'row') return
+      // if (item.type === 'row') return
 
-      const block = item as Block
+      const block = item
 
       isFroalaSignal.value = false
 

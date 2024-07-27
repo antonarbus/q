@@ -35,6 +35,7 @@ import { updatePriceReducer } from './reducers/updatePriceReducer'
 import { updatePriceTitleReducer } from './reducers/updatePriceTitleReducer'
 import { updateQuotationInfoReducer } from './reducers/updateQuotationInfoReducer'
 import { updateSubTotalPriceReducer } from './reducers/updateSubTotalPriceReducer'
+import { updateRowBlockCellReducer } from './reducers/updateRowBlockCellReducer'
 
 const initialState: Quotation = {
   id: '',
@@ -68,6 +69,7 @@ export const quotationSlice = createSlice({
     showBoqPriceCellPinsReducer,
     hideBoqPriceCellPinsReducer,
     updateBoqCellReducer,
+    updateRowBlockCellReducer,
     updateBoqColumnNameTextReducer,
     updateBoqHeaderTextReducer,
     updateBoqRowHeightAndWidthReducer,

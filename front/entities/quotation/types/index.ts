@@ -106,11 +106,13 @@ export type PriceBlock = Common & {
   }
 }
 
+export type RowBlock = BoqRow
+
 export type PasteBlock = Common & {
   type: typeof itemType.paste
 }
 
-export type Block = BoqBlock | PasteBlock | TextBlock | PriceBlock
+export type Block = BoqBlock | PasteBlock | TextBlock | PriceBlock | RowBlock
 
 // item
 export type Item = Block | BoqRow

@@ -10,7 +10,7 @@ type Props = {
   onBlur: (e: FocusEvent<HTMLDivElement>) => void
 }
 
-export const BoqRowForEditModal = ({ onBlur }: Props): JSX.Element => {
+export const BoqRow = ({ onBlur }: Props): JSX.Element => {
   return (
     <BoqRowLayout onBlur={onBlur}>
       <NumberCell />
