@@ -15,12 +15,8 @@ import {
 import { updateItemPriceCell } from '@features/blocks/cell/update_cell/row_block_cells/item_price/updateItemPriceCell'
 
 export const ItemPriceCell = (): JSX.Element => {
-  const {
-    rowIndex,
-    itemPriceCellEditorRef,
-    priceCellEditorRef,
-    qtyCellEditorRef,
-  } = useRow()
+  const { itemPriceCellEditorRef, priceCellEditorRef, qtyCellEditorRef } =
+    useRow()
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex: 0,
     boqColumnKey: boqColumnKey.itemPrice,
@@ -45,12 +41,12 @@ export const ItemPriceCell = (): JSX.Element => {
         onBlur={() => {
           formatBoqRowItemPriceCell({
             blockIndex: 0,
-            rowIndex,
+            rowIndex: 0,
             itemPriceCellEditorRef,
           })
         }}
         onKeydown={(e) => {
-          tabFromItemPriceCell({ e, rowIndex, qtyCellEditorRef })
+          tabFromItemPriceCell({ e, rowIndex: 0, qtyCellEditorRef })
         }}
         wrapperStyles={stylesForResizableCell}
         style={boqRowCellStyle}

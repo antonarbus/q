@@ -15,7 +15,7 @@ import {
 import { updateQtyCell } from '@features/blocks/cell/update_cell/row_block_cells/qty/updateQtyCell'
 
 export const QtyCell = (): JSX.Element => {
-  const { rowIndex, qtyCellEditorRef, priceCellEditorRef } = useRow()
+  const { qtyCellEditorRef, priceCellEditorRef } = useRow()
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex: 0,
     boqColumnKey: boqColumnKey.qty,
@@ -38,10 +38,10 @@ export const QtyCell = (): JSX.Element => {
           })
         }}
         onBlur={() => {
-          formatBoqRowQtyCell({ blockIndex: 0, qtyCellEditorRef, rowIndex })
+          formatBoqRowQtyCell({ blockIndex: 0, qtyCellEditorRef, rowIndex: 0 })
         }}
         onKeydown={(e) => {
-          tabFromQtyCell({ e, rowIndex, priceCellEditorRef })
+          tabFromQtyCell({ e, rowIndex: 0, priceCellEditorRef })
         }}
         wrapperStyles={stylesForResizableCell}
         style={boqRowCellStyle}

@@ -23,12 +23,8 @@ import {
 import { updatePriceCell } from '@features/blocks/cell/update_cell/row_block_cells/price/updatePriceCell'
 
 export const PriceCell = (): JSX.Element => {
-  const {
-    rowIndex,
-    priceCellEditorRef,
-    qtyCellEditorRef,
-    itemPriceCellEditorRef,
-  } = useRow()
+  const { priceCellEditorRef, qtyCellEditorRef, itemPriceCellEditorRef } =
+    useRow()
   const { subTotalPriceEditorRef, boqRowEditorRefs } = useBoqBlock()
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex: 0,
@@ -46,7 +42,7 @@ export const PriceCell = (): JSX.Element => {
           getRowCellHtmlFromStore({ boqRowCellKey: boqRowCellKey.price })
         }
         onFocus={() => {
-          showBoqRowPins({ blockIndex: 0, rowIndex })
+          showBoqRowPins({ blockIndex: 0, rowIndex: 0 })
         }}
         onContentChange={() => {
           updatePriceCell({
@@ -56,16 +52,20 @@ export const PriceCell = (): JSX.Element => {
           })
         }}
         onBlur={() => {
-          formatBoqRowPriceCell({ rowIndex, priceCellEditorRef, blockIndex })
+          formatBoqRowPriceCell({
+            rowIndex: 0,
+            priceCellEditorRef,
+            blockIndex: 0,
+          })
           validateBoqRowPrice({
             blockIndex: 0,
             priceCellEditorRef,
-            rowIndex,
+            rowIndex: 0,
             subTotalPriceEditorRef,
           })
         }}
         onKeydown={(e) => {
-          tabFromPriceCell({ e, rowIndex, boqRowEditorRefs })
+          tabFromPriceCell({ e, rowIndex: 0, boqRowEditorRefs })
         }}
         wrapperStyles={stylesForResizableCell}
         style={boqRowCellStyle}
