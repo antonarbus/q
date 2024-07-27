@@ -17,6 +17,7 @@ import {
   boqRowCellSx,
   getRowCellHtmlFromStore,
 } from '@entities/quotation'
+import { updateQtyCell } from '@features/blocks/cell/update_cell/row_block_cells/qty/updateQtyCell'
 
 export const QtyCell = (): JSX.Element => {
   const { blockIndex } = useBlock()
@@ -38,12 +39,9 @@ export const QtyCell = (): JSX.Element => {
           getRowCellHtmlFromStore({ boqRowCellKey: boqRowCellKey.qty })
         }
         onContentChange={() => {
-          updateBoqRowQtyCell({
-            blockIndex: 0,
+          updateQtyCell({
             priceCellEditorRef,
             qtyCellEditorRef,
-            rowIndex: 0,
-            subTotalPriceEditorRef,
           })
         }}
         onBlur={() => {

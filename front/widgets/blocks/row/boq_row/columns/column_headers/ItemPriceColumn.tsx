@@ -10,7 +10,9 @@ export const ItemPriceColumn = (): JSX.Element => {
       minWidth={100}
       flexGrow={0}
     >
-      <Box style={columnHeaderStyle}>Price</Box>
+      <Box style={columnHeaderStyle}>
+        <b>Item price</b>
+      </Box>
     </ResizableColumn>
   )
 }

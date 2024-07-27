@@ -17,7 +17,7 @@ export const DescriptionColumn = (): ReactNode => {
           textAlign: 'left',
         }}
       >
-        Description
+        <b>Description</b>
       </Box>
     </ResizableColumn>
   )

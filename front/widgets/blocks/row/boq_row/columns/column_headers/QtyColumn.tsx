@@ -10,7 +10,9 @@ export const QtyColumn = (): JSX.Element => {
       minWidth={100}
       flexGrow={0}
     >
-      <Box style={columnHeaderStyle}>Qty</Box>
+      <Box style={columnHeaderStyle}>
+        <b>Qty</b>
+      </Box>
     </ResizableColumn>
   )
 }
