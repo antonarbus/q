@@ -1,8 +1,6 @@
-import type { ReactNode } from 'react'
-
 type Props = {
   reserveSpaceForIcon?: boolean
-  name: ReactNode | string
+  name: React.ReactNode | string
   disabled?: boolean
 }
 

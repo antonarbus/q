@@ -1,7 +1,10 @@
-import type { ReactNode } from 'react'
 import { Outlet } from 'react-router-dom'
 
-const MainLayout = ({ children }: { children: ReactNode }): JSX.Element => {
+type Props = {
+  children: React.ReactNode
+}
+
+const MainLayout = ({ children }: Props): JSX.Element => {
   return (
     <main
       style={{

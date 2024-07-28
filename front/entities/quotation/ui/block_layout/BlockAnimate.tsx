@@ -2,7 +2,6 @@ import { theme } from '@lib_instances/theme'
 import { Box } from '@mui/material'
 import { motion } from 'framer-motion'
 import type { ResizableProps } from 're-resizable'
-import type { ReactNode } from 'react'
 import { cls } from '@shared/consts/cls'
 import type {
   OnBlockResize,
@@ -12,11 +11,11 @@ import type {
 import { ResizableBlockPaper } from './ResizableBlockPaper'
 
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
   blockHeight: number
   id: string
-  leftItemActionButtons?: ReactNode
-  rightItemActionButtons?: ReactNode
+  leftItemActionButtons?: React.ReactNode
+  rightItemActionButtons?: React.ReactNode
   disableResize?: boolean
   autoWidth?: boolean
   minWidth?: ResizableProps['minWidth']

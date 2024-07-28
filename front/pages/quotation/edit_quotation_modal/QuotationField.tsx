@@ -1,5 +1,4 @@
 import { Box } from '@mui/material'
-import type { ReactNode } from 'react'
 import { useEffectOnce } from 'react-use'
 import { Blocks } from '@widgets/blocks'
 import { type Block, isFroalaSignal } from '@entities/quotation'
@@ -43,7 +42,7 @@ const QuotationFieldLayout = ({
   )
 }
 
-export const QuotationField = ({ blocks }: Props): ReactNode => {
+export const QuotationField = ({ blocks }: Props): React.ReactNode => {
   return (
     <QuotationFieldLayout>
       <Blocks blocks={blocks} />

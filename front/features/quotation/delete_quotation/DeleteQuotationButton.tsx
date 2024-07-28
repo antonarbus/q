@@ -1,6 +1,5 @@
 import type { ReqBody as Payload } from '@back/api/quotation/deleteQuotationRouter'
 import { IconButton } from '@mui/material'
-import type { ReactNode } from 'react'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import {
@@ -10,7 +9,7 @@ import {
 import { RotatingLoaderIcon } from '@shared/components'
 import { notify } from '@shared/ui/top_msg'
 
-export const DeleteQuotationButton = ({ id }: Payload): ReactNode => {
+export const DeleteQuotationButton = ({ id }: Payload): React.ReactNode => {
   const {
     mutate: deleteQuotation,
     isPending,

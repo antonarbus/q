@@ -1,9 +1,8 @@
-import type { ReactNode } from 'react'
 import { columnHeaderStyle, boqColumnKey } from '@entities/quotation'
 import { ResizableColumn } from '../ResizableColumn'
 import { Box } from '@mui/material'
 
-export const DescriptionColumn = (): ReactNode => {
+export const DescriptionColumn = (): React.ReactNode => {
   return (
     <ResizableColumn
       boqColumnKey={boqColumnKey.description}

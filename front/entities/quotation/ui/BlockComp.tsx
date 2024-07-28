@@ -2,7 +2,6 @@ import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { getState } from '@lib_instances/store'
 import type { ResizableProps } from 're-resizable'
-import type { ReactNode } from 'react'
 import type {
   OnBlockResize,
   OnBlockResizeStop,
@@ -13,15 +12,15 @@ import { BlockAnimate } from './block_layout'
 import { PasteBlockTextOverlay } from './paste_block_overlay_text'
 
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
   disableResize?: boolean
   onBlockResizeStart?: OnBlockResizeStart
   onBlockResize?: OnBlockResize
   onBlockResizeStop?: OnBlockResizeStop
   autoWidth?: boolean
   minWidth?: ResizableProps['minWidth']
-  leftBlockActionButtons?: ReactNode
-  rightBlockActionButtons?: ReactNode
+  leftBlockActionButtons?: React.ReactNode
+  rightBlockActionButtons?: React.ReactNode
   className?: string
 }
 

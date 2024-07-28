@@ -1,9 +1,8 @@
 import { theme } from '@lib_instances/theme'
-import type { ReactNode } from 'react'
 import { useIsPasteHere } from './useIsPasteHere'
 
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
 }
 
 export const PasteBlockTextOverlay = ({ children }: Props): JSX.Element => {

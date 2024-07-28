@@ -1,8 +1,7 @@
 import { css } from '@emotion/react'
-import type { ReactNode } from 'react'
 
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
 }
 
 export const KbdKey = ({ children }: Props): JSX.Element => {

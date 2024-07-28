@@ -1,6 +1,5 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { Box } from '@mui/material'
-import type { ReactNode } from 'react'
 import { VscPinned } from 'react-icons/vsc'
 import {
   type BoqRowCellKey,
@@ -15,7 +14,7 @@ type Props = {
   onClick: () => void
 }
 
-export const Pin = ({ boqRowCellKey, onClick }: Props): ReactNode => {
+export const Pin = ({ boqRowCellKey, onClick }: Props): React.ReactNode => {
   const { blockIndex } = useBlock()
   const { rowIndex } = useRow()
   const pin = useSelectorTyped(

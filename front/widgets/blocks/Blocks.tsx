@@ -1,5 +1,4 @@
 import { AnimatePresence } from 'framer-motion'
-import type { ReactNode } from 'react'
 import type { Block as BlockType } from '@entities/quotation'
 import { FadeInOnInitLoad } from './FadeInOnInitLoad'
 import { Block } from './Block'
@@ -9,7 +8,7 @@ type Props = {
   blocks: BlockType[]
 }
 
-export const Blocks = ({ blocks }: Props): ReactNode => {
+export const Blocks = ({ blocks }: Props): React.ReactNode => {
   if (blocks.length === 0) return null
 
   return (

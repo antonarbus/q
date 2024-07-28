@@ -1,6 +1,5 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { Resizable } from 're-resizable'
-import type { ReactNode } from 'react'
 import {
   onColumnResize,
   onColumnResizeStart,
@@ -13,7 +12,7 @@ import {
 } from '@entities/quotation'
 
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
   className: string
   flexGrow?: number
   boqColumnKey: BoqColumnKey

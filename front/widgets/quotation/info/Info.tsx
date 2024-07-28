@@ -1,12 +1,11 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { Box } from '@mui/material'
-import type { ReactNode } from 'react'
 import { FaInfoCircle } from 'react-icons/fa'
 import { openQuotationInfoModal } from '@features/open_close/open_quotation_info_modal'
 
 const DivForSymmetry = (): JSX.Element => <div style={{ width: '80px' }} />
 
-export const Info = (): ReactNode => {
+export const Info = (): React.ReactNode => {
   const quotationId = useSelectorTyped((state) => state.quotation.id)
 
   if (!quotationId) return <DivForSymmetry />

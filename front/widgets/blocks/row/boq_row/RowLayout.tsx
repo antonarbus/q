@@ -1,8 +1,7 @@
 import { Box } from '@mui/material'
-import type { ReactNode } from 'react'
 
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
 }
 
 export const RowLayout = ({ children }: Props): JSX.Element => {

@@ -1,11 +1,10 @@
 import { Chip } from '@mui/material'
 import type { ICellRendererParams } from 'ag-grid-community'
-import type { ReactNode } from 'react'
 import type { Quotation } from '@entities/quotation'
 
 export const SharedWithRenderer = (
   params: ICellRendererParams<Quotation, Quotation['sharedWith']>,
-): ReactNode => {
+): React.ReactNode => {
   if (
     !params.value ||
     (Array.isArray(params.value) && params.value.length === 0)

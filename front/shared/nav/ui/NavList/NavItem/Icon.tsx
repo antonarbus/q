@@ -1,8 +1,7 @@
-import type { ReactNode } from 'react'
 import { RoundSpanForIcon } from './RoundSpanForIcon'
 
 type Props = {
-  icon: ReactNode | string
+  icon: React.ReactNode | string
   disabled?: boolean
 }
 

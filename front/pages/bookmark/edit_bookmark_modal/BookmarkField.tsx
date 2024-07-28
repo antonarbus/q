@@ -1,13 +1,12 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { AnimatePresence } from 'framer-motion'
-import type { ReactNode } from 'react'
 import { useEffectOnce } from 'react-use'
 import { Block } from '@widgets/blocks/Block'
 import { isFroalaSignal } from '@entities/quotation'
 import { arrayShapesEqualityFn } from '@shared/lib/redux/arrayShapesEqualityFn'
 import { BookmarkFieldLayout } from './BookmarkFieldLayout'
 
-export const BookmarkField = (): ReactNode => {
+export const BookmarkField = (): React.ReactNode => {
   const blocks = useSelectorTyped(
     (state) => state.quotation.blocks,
     arrayShapesEqualityFn,

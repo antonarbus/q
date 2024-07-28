@@ -1,5 +1,4 @@
 import { IconButton } from '@mui/material'
-import type { ReactNode } from 'react'
 import { AiOutlineFolderOpen } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import type { QuotationLocationState } from '.'
@@ -10,7 +9,7 @@ type Props = {
 
 export const OpenQuotationPageAndLoadFromServerButton = ({
   id,
-}: Props): ReactNode => {
+}: Props): React.ReactNode => {
   const state: QuotationLocationState = {
     quotationType: 'server',
   }

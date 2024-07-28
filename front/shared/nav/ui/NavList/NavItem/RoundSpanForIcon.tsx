@@ -1,7 +1,5 @@
-import type { ReactNode } from 'react'
-
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
   css?: React.CSSProperties
   className?: string
   disabled?: boolean
