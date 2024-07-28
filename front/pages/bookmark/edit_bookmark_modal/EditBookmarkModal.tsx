@@ -28,9 +28,6 @@ export const EditBookmarkModal = (): JSX.Element => {
     infoSignal,
   })
 
-  // todo: row bookmark not opening
-  // todo: need to create editable item instead of adding item into fake Quotation
-
   return (
     <FormModal
       width='500px'

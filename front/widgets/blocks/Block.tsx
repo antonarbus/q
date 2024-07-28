@@ -24,8 +24,7 @@ export const Block = ({ block, blockIndex }: Props): React.ReactNode => {
       {block.type === itemType.text && <TextBlock />}
       {block.type === itemType.boq && <BoqBlock />}
       {block.type === itemType.price && <PriceBlock />}
-      {/* only for bookmark edit modal */}
-      {block.type === itemType.row && <RowBlock />}
+      {block.type === itemType.row && <RowBlock /> /* for bookmark modal */}
       {block.type === itemType.paste && <PasteItem />}
     </BlockProvider>
   )

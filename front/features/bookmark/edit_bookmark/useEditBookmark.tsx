@@ -64,7 +64,7 @@ export const useEditBookmark = ({
       } else if (data.message === 'updated') {
         notify({
           msg: 'Updated',
-          type: 'info',
+          type: 'success',
           theme: 'dark',
           position: 'bottom-center',
         })
@@ -113,37 +113,6 @@ export const useEditBookmark = ({
       return
     }
 
-    // if (item.type === itemKey.row) {
-    // const boqRowElement = document.querySelector(`.${cls.boqRow}`)
-    // if (!boqRowElement) return
-
-    // dispatch(
-    //   quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
-    //     blockIndex: 0,
-    //     rowIndex: 0,
-    //     height: boqRowElement.clientHeight,
-    //     width: boqRowElement.clientWidth,
-    //   }),
-    // )
-
-    // const item = getState().quotation.items.at(0)
-    // if (!item) return
-
-    // const html = boqRowElement.outerHTML
-    // const cleanedHtml = cleanHtml(html)
-
-    // const itemWithUpdatedPreview = structuredClone(item)
-    // itemWithUpdatedPreview.preview = cleanedHtml
-
-    // const itemWithUpdatedValues = {
-    //   ...itemWithUpdatedPreview,
-    //   name: nameSignal.value,
-    //   category: categorySignal.value,
-    //   desc: descSignal.value,
-    // }
-
-    // saveItem({ item: itemWithUpdatedValues })
-    // } else {
     saveBlockHeightByIndex({ blockIndex: 0 })
     const paperElement = document.querySelector(`.${cls.paper}`)
     if (!(paperElement instanceof Element)) return
@@ -163,7 +132,6 @@ export const useEditBookmark = ({
     }
 
     saveItem({ item: itemWithUpdatedValues })
-    // }
   }, [])
 
   return { onSubmit, isPending, isSuccess, isError }
