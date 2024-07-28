@@ -71,7 +71,8 @@ export const ItemPriceCell = (): JSX.Element => {
       />
       <Pin
         boqRowCellKey={boqRowCellKey.itemPrice}
-        onClick={() => {
+        onClick={(e: React.MouseEvent) => {
+          e.preventDefault() // otherwise form is submitted (no idea why)
           pinBoqRowItemPriceCell({ blockIndex, rowIndex })
         }}
       />

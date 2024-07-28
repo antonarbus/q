@@ -62,7 +62,8 @@ export const QtyCell = (): JSX.Element => {
       />
       <Pin
         boqRowCellKey={boqRowCellKey.qty}
-        onClick={() => {
+        onClick={(e: React.MouseEvent) => {
+          e.preventDefault() // otherwise form is submitted (no idea why)
           pinBoqRowQtyCell({ blockIndex, rowIndex })
         }}
       />

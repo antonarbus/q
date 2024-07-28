@@ -11,7 +11,7 @@ import { cls } from '@shared/consts/cls'
 
 type Props = {
   boqRowCellKey: BoqRowCellKey
-  onClick: () => void
+  onClick: (e: React.MouseEvent) => void
 }
 
 export const Pin = ({ boqRowCellKey, onClick }: Props): React.ReactNode => {
