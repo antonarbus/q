@@ -34,10 +34,7 @@ export const ItemPriceCell = (): JSX.Element => {
           getRowCellHtmlFromStore({ boqRowCellKey: boqRowCellKey.itemPrice })
         }
         onContentChange={() => {
-          updateItemPriceCell({
-            itemPriceCellEditorRef,
-            priceCellEditorRef,
-          })
+          updateItemPriceCell({ itemPriceCellEditorRef, priceCellEditorRef })
         }}
         onBlur={() => {
           formatItemPriceCell({ itemPriceCellEditorRef })

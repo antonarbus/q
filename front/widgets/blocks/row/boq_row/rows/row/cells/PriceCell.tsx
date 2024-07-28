@@ -4,9 +4,7 @@ import {
   pinBoqRowPriceCell,
   showBoqRowPins,
 } from '@features/blocks/cell/pin'
-import { validateBoqRowPrice } from '@features/blocks/cell/update_cell'
 import {
-  useBoqBlock,
   useRow,
   Froala,
   boqRowCellStyle,
@@ -22,7 +20,6 @@ import { formatPriceCell } from '@features/blocks/cell/update_cell/row_block_cel
 export const PriceCell = (): JSX.Element => {
   const { priceCellEditorRef, qtyCellEditorRef, itemPriceCellEditorRef } =
     useRow()
-  const { subTotalPriceEditorRef } = useBoqBlock()
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex: 0,
     boqColumnKey: boqColumnKey.price,
@@ -53,12 +50,6 @@ export const PriceCell = (): JSX.Element => {
         }}
         onBlur={() => {
           formatPriceCell({ priceCellEditorRef })
-          validateBoqRowPrice({
-            blockIndex: 0,
-            priceCellEditorRef,
-            rowIndex: 0,
-            subTotalPriceEditorRef,
-          })
         }}
       />
       <Pin

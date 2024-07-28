@@ -34,10 +34,7 @@ export const QtyCell = (): JSX.Element => {
           getRowCellHtmlFromStore({ boqRowCellKey: boqRowCellKey.qty })
         }
         onContentChange={() => {
-          updateQtyCell({
-            priceCellEditorRef,
-            qtyCellEditorRef,
-          })
+          updateQtyCell({ priceCellEditorRef, qtyCellEditorRef })
         }}
         onBlur={() => {
           formatQtyCell({ qtyCellEditorRef })
