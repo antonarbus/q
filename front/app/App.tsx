@@ -1,5 +1,5 @@
 import { reactQuery } from '@lib_instances/reactQuery'
-import { router } from '@lib_instances/Router'
+import { router } from '@lib_instances/router'
 import { store } from '@lib_instances/store'
 import { themeClient } from '@lib_instances/theme'
 import { ThemeProvider } from '@mui/material/styles'

@@ -1,4 +1,4 @@
-import { router } from '@lib_instances/Router'
+import { router } from '@lib_instances/router'
 import { dispatch, getState } from '@lib_instances/store'
 import { previousQuotationRef } from '@entities/quotation'
 import { route } from '@shared/consts/route'

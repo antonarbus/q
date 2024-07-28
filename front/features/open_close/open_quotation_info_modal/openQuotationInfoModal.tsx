@@ -1,4 +1,4 @@
-import { router } from '@lib_instances/Router'
+import { router } from '@lib_instances/router'
 import { getState } from '@lib_instances/store'
 import { route } from '@shared/consts/route'
 
