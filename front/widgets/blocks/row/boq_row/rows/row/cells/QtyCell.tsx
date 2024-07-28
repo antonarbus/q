@@ -1,5 +1,4 @@
 import { Box } from '@mui/material'
-import { Pin, pinBoqRowQtyCell } from '@features/blocks/cell/pin'
 import {
   useRow,
   Froala,
@@ -38,12 +37,6 @@ export const QtyCell = (): JSX.Element => {
         }}
         onBlur={() => {
           formatQtyCell({ qtyCellEditorRef })
-        }}
-      />
-      <Pin
-        boqRowCellKey={boqRowCellKey.qty}
-        onClick={() => {
-          pinBoqRowQtyCell({ blockIndex: 0, rowIndex: 0 })
         }}
       />
     </Box>
