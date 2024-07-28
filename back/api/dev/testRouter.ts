@@ -2,7 +2,6 @@ import { Router } from 'express'
 import { QuotationModel } from '../../db/models/quotationModel'
 import type { Next, Req, Res } from '../../types'
 
-// todo: delete, it is temp file not related to the project
 export const testRouter = Router()
 
 export async function test(req: Req, res: Res, next: Next): Promise<void> {

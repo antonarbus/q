@@ -5,7 +5,6 @@ type Props = {
   state: Quotation
 }
 
-// todo: better to split the logic into block and boqRow
 export const getItemFromState = ({ id, state }: Props): Item | undefined => {
   const blockWithSameId = state.blocks.find((block) => {
     return block.id === id
