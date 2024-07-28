@@ -5,7 +5,7 @@ import { route } from '@shared/consts/route'
 import { navSlice } from '@shared/nav'
 
 export const openBookmarksPage = (): void => {
-  // save current quotation into previousQuotationRef to be able to return
+  // save current quotation into previousQuotationRef to be able to return to it with back button
   const currentQuotation = getState().quotation
 
   if (currentQuotation.id) {

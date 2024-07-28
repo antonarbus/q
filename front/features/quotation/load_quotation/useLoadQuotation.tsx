@@ -32,6 +32,7 @@ export function useLoadQuotation(): void {
 
   useEffect(() => {
     const previousQuotation = previousQuotationRef.current
+
     dispatch(quotationSlice.actions.resetQuotationReducer())
     dispatch(navSlice.actions.removeUnderlineFromTopNav())
     dispatch(

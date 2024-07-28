@@ -5,7 +5,6 @@ export { isFroalaSignal } from './signals/isFroalaSignal'
 export { backgroundMessageSignal } from './signals/backgroundMessageSignal'
 
 // Ref
-
 export { previousQuotationRef } from './refs/previousQuotationRef'
 
 // Api
