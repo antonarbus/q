@@ -1,4 +1,4 @@
-import type { ReqBody } from '@back/api/bookmark/deleteBookmarkRouter'
+import type { ReqBody } from '@back/api/bookmark/getBookmarkRouter'
 import { dispatch } from '@lib_instances/store'
 import { IconButton } from '@mui/material'
 import { AiTwotoneEdit } from 'react-icons/ai'
