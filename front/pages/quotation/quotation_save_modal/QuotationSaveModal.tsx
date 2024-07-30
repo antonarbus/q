@@ -16,6 +16,7 @@ import { InfoField } from './InfoField'
 import { NameField } from './NameField'
 import { ShareField } from './ShareField'
 import type { OpenSaveQuotationModalNavigateState } from '@features/open_close/open_save_quotation_modal/openSaveQuotationModal'
+import { QuotationField } from '../quotation_edit_modal/QuotationField'
 
 export const QuotationSaveModal = (): JSX.Element => {
   const location =
@@ -59,8 +60,8 @@ export const QuotationSaveModal = (): JSX.Element => {
   return (
     <FormModal
       modalRef={modalRef}
-      width='450px'
-      paddingContent='50px 40px'
+      width='500px'
+      // paddingContent='50px 40px'
       headerText='Save quotation'
       headerIcon={<MdSaveAlt />}
       buttonText={id === 'new' ? 'SAVE' : 'UPDATE'}
@@ -79,6 +80,7 @@ export const QuotationSaveModal = (): JSX.Element => {
         shareWithOptionSignal={shareWithOptionSignal}
         sharedWithSignal={sharedWithSignal}
       />
+      <QuotationField />
     </FormModal>
   )
 }
