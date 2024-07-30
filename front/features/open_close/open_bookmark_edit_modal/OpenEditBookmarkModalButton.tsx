@@ -49,7 +49,6 @@ export const OpenEditBookmarkModalButton = ({ id }: ReqBody): JSX.Element => {
         }),
       )
 
-      // 'id' url param doesn't play any role here, it's just for visual representation in the url
       navigate(`./${route.editBookmark}/${id}`)
     }
   }, [isSuccess])
