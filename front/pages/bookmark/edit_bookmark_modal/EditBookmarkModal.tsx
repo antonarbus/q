@@ -35,8 +35,6 @@ export const EditBookmarkModal = (): JSX.Element => {
     infoSignal,
   })
 
-  const isDisabled = nameSignal.value === '' || categorySignal.value === ''
-
   const { onSubmit, isPending, isSuccess, isError } = useEditBookmark({
     modalRef,
     nameSignal,
@@ -51,7 +49,7 @@ export const EditBookmarkModal = (): JSX.Element => {
       headerIcon={<FiEdit3 />}
       headerText='Edit bookmark'
       buttonText='UPDATE'
-      isButtonDisabled={isDisabled}
+      isButtonDisabled={nameSignal.value === '' || categorySignal.value === ''}
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
       isButtonError={isError}
