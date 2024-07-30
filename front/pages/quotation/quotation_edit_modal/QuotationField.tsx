@@ -1,18 +1,15 @@
 import { Box } from '@mui/material'
 import { useEffectOnce } from 'react-use'
 import { Blocks } from '@widgets/blocks'
-import { type Block, isFroalaSignal } from '@entities/quotation'
+import { isFroalaSignal } from '@entities/quotation'
 import { OutlinedDivWithLabel } from '@shared/components'
+import { getState } from '@lib_instances/store'
 
 type Props = {
-  blocks: Block[]
+  children: React.ReactNode
 }
 
-const QuotationFieldLayout = ({
-  children,
-}: {
-  children: React.ReactNode
-}): JSX.Element => {
+const QuotationFieldLayout = ({ children }: Props): JSX.Element => {
   useEffectOnce(() => {
     isFroalaSignal.value = true
   })
@@ -42,7 +39,9 @@ const QuotationFieldLayout = ({
   )
 }
 
-export const QuotationField = ({ blocks }: Props): React.ReactNode => {
+export const QuotationField = (): React.ReactNode => {
+  const blocks = getState().quotation.blocks
+
   return (
     <QuotationFieldLayout>
       <Blocks blocks={blocks} />

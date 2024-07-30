@@ -2,7 +2,7 @@ import type { ReqBody } from '@back/api/bookmark/deleteBookmarkRouter'
 import { dispatch } from '@lib_instances/store'
 import { IconButton } from '@mui/material'
 import { AiTwotoneEdit } from 'react-icons/ai'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import {
   isFroalaSignal,
@@ -27,12 +27,16 @@ export const OpenQuotationEditModalButton = ({ id }: ReqBody): JSX.Element => {
 
   useUpdateEffect(() => {
     if (isSuccess) {
-      const { quotation } = data
-      if (!quotation) return
+      if (!data.quotation) return
 
       isFroalaSignal.value = false
 
-      dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
+      dispatch(
+        quotationSlice.actions.loadQuotationReducer({
+          quotation: data.quotation,
+        }),
+      )
+
       navigate(`./${route.editQuotation}/${id}`)
     }
   }, [isSuccess])

@@ -1,3 +1,3 @@
 export { OpenQuotationEditModalButton } from './OpenQuotationEditModalButton'
-export { useLoadQuotationEditModalOpenedWithButton } from './useLoadQuotationEditModalOpenedWithButton'
+export { useLoadInitValuesIntoQuotationEditForm } from './useLoadInitValuesIntoQuotationEditForm'
 export { useLoadQuotationEditModalOpenedWithDirectLink } from './useLoadQuotationEditModalOpenedWithDirectLink'
