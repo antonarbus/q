@@ -2,7 +2,7 @@ import type { ReqBody } from '@back/api/bookmark/deleteBookmarkRouter'
 import { dispatch } from '@lib_instances/store'
 import { IconButton } from '@mui/material'
 import { AiTwotoneEdit } from 'react-icons/ai'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import {
   isFroalaSignal,

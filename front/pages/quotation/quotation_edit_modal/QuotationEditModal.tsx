@@ -1,4 +1,4 @@
-import { getState } from '@lib_instances/store'
+import { dispatch, getState } from '@lib_instances/store'
 import { useSignal } from '@preact/signals-react'
 import { useRef } from 'react'
 import { FiEdit3 } from 'react-icons/fi'
@@ -14,6 +14,13 @@ import { InfoField } from './InfoField'
 import { NameField } from './NameField'
 import { QuotationField } from './QuotationField'
 import { ShareField } from './ShareField'
+import { useParams } from 'react-router-dom'
+import {
+  getWhoQuotationSharedWithOption,
+  quotationSlice,
+  useGetQuotationMutation,
+} from '@entities/quotation'
+import { useEffectOnce, useUpdateEffect } from 'react-use'
 
 export const QuotationEditModal = (): JSX.Element => {
   const modalRef = useRef<HTMLDivElement>(null)
@@ -25,13 +32,9 @@ export const QuotationEditModal = (): JSX.Element => {
   const descSignal = useSignal(quotation.desc ?? '')
   const infoSignal = useSignal(quotation.info ?? '')
 
-  const getOptionValue = (): SharedWithOption => {
-    if (quotation.sharedWith?.length === 0) return sharedWithOption.nobody
-    if (quotation.sharedWith?.includes('*')) return sharedWithOption.everybody
-    return sharedWithOption.persons
-  }
-
-  const shareWithOptionSignal = useSignal<SharedWithOption>(getOptionValue())
+  const shareWithOptionSignal = useSignal<SharedWithOption>(
+    getWhoQuotationSharedWithOption({ quotation }),
+  )
   const sharedWithSignal = useSignal<string[]>(quotation.sharedWith ?? [])
 
   const { onSubmit, isPending, isSuccess, isError } = useEditQuotation({
@@ -43,7 +46,39 @@ export const QuotationEditModal = (): JSX.Element => {
     sharedWithSignal,
   })
 
-  const isDisabled = nameSignal.value === '' || categorySignal.value === ''
+  const { id } = useParams()
+
+  const {
+    mutate: loadQuotation,
+    isSuccess: isLoadQuotationSuccess,
+    data,
+  } = useGetQuotationMutation()
+
+  useEffectOnce(() => {
+    if (!id) return
+    loadQuotation({ id })
+  })
+
+  useUpdateEffect(() => {
+    if (!data?.quotation) return
+
+    dispatch(
+      quotationSlice.actions.loadQuotationReducer({
+        quotation: data.quotation,
+      }),
+    )
+
+    nameSignal.value = data.quotation.name ?? ''
+    categorySignal.value = data.quotation.category ?? ''
+    descSignal.value = data.quotation.desc ?? ''
+    infoSignal.value = data.quotation.info ?? ''
+
+    shareWithOptionSignal.value = getWhoQuotationSharedWithOption({
+      quotation: data.quotation,
+    })
+
+    sharedWithSignal.value = quotation.sharedWith ?? []
+  }, [isLoadQuotationSuccess])
 
   return (
     <FormModal
@@ -51,7 +86,7 @@ export const QuotationEditModal = (): JSX.Element => {
       headerIcon={<FiEdit3 />}
       headerText='Edit quotation'
       buttonText='UPDATE'
-      isButtonDisabled={isDisabled}
+      isButtonDisabled={nameSignal.value === '' || categorySignal.value === ''}
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
       isButtonError={isError}
