@@ -16,9 +16,10 @@ import { QuotationField } from './QuotationField'
 import { ShareField } from './ShareField'
 
 export const QuotationEditModal = (): JSX.Element => {
+  const modalRef = useRef<HTMLDivElement>(null)
+
   const quotation = getState().quotation
 
-  const modalRef = useRef<HTMLDivElement>(null)
   const nameSignal = useSignal(quotation.name ?? '')
   const categorySignal = useSignal(quotation.category ?? '')
   const descSignal = useSignal(quotation.desc ?? '')

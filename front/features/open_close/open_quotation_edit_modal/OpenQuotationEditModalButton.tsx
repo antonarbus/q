@@ -13,8 +13,9 @@ import { RotatingLoaderIcon } from '@shared/components'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
 
-export const OpenEditQuotationModalButton = ({ id }: ReqBody): JSX.Element => {
+export const OpenQuotationEditModalButton = ({ id }: ReqBody): JSX.Element => {
   const navigate = useNavigate()
+
   const {
     mutate: loadQuotation,
     isPending,
@@ -32,7 +33,6 @@ export const OpenEditQuotationModalButton = ({ id }: ReqBody): JSX.Element => {
       isFroalaSignal.value = false
 
       dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
-      // id url param doesn't play any role here, it's just for visual representation in the url
       navigate(`./${route.editQuotation}/${id}`)
     }
   }, [isSuccess])

@@ -9,8 +9,8 @@ import { DescriptionField } from './DescriptionField'
 import { NameField } from './NameField'
 import { InfoField } from './InfoField'
 import {
-  useLoadEditBookmarkModalOpenedWithButton,
-  useLoadEditBookmarkModalOpenedWithDirectLink,
+  useLoadBookmarkEditModalOpenedWithButton,
+  useLoadBookmarkEditModalOpenedWithDirectLink,
 } from '@features/open_close/open_bookmark_edit_modal'
 
 export const BookmarkEditModal = (): JSX.Element => {
@@ -21,14 +21,14 @@ export const BookmarkEditModal = (): JSX.Element => {
   const descSignal = useSignal('')
   const infoSignal = useSignal('')
 
-  useLoadEditBookmarkModalOpenedWithButton({
+  useLoadBookmarkEditModalOpenedWithButton({
     nameSignal,
     categorySignal,
     descSignal,
     infoSignal,
   })
 
-  useLoadEditBookmarkModalOpenedWithDirectLink({
+  useLoadBookmarkEditModalOpenedWithDirectLink({
     nameSignal,
     categorySignal,
     descSignal,
