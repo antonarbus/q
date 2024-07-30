@@ -13,7 +13,7 @@ import {
   useLoadEditBookmarkModalOpenedWithDirectLink,
 } from '@features/open_close/open_bookmark_edit_modal'
 
-export const EditBookmarkModal = (): JSX.Element => {
+export const BookmarkEditModal = (): JSX.Element => {
   const modalRef = useRef<HTMLDivElement>(null)
 
   const nameSignal = useSignal('')

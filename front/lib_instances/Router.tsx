@@ -6,13 +6,12 @@ import { RegisterModal } from '@pages/auth/RegisterModal'
 import { RequestPasswordResetModal } from '@pages/auth/RequestPasswordResetModal'
 import { ResetPasswordModal } from '@pages/auth/ResetPasswordModal'
 import { UnauthorizedPage } from '@pages/auth/UnauthorizedPage'
-import { AddBookmarkModal } from '@pages/bookmark/add_bookmark_modal'
-import { EditBookmarkModal } from '@pages/bookmark/edit_bookmark_modal'
+import { BookmarkSaveModal } from '@pages/bookmark/bookmark_save_modal'
+import { BookmarkEditModal } from '@pages/bookmark/bookmark_edit_modal'
 import { ErrorPage } from '@pages/error'
 import { InfoModal } from '@pages/info/info_modal'
-import { EditQuotationModal } from '@pages/quotation/edit_quotation_modal/EditQuotationModal'
 import { InfoQuotationModal } from '@pages/quotation/info_quotation_modal'
-import { SaveQuotationModal } from '@pages/quotation/save_quotation_modal'
+import { QuotationSaveModal } from '@pages/quotation/quotation_save_modal'
 import { SettingsModal } from '@pages/settings'
 import { Copy } from '@widgets/copy'
 import { Nav } from '@widgets/nav'
@@ -22,6 +21,7 @@ import { route } from '@shared/consts/route'
 import { Main } from '@shared/layouts'
 import { LoadingDotsOverlay } from '@shared/loading_dots_overlay'
 import { TopMsg } from '@shared/ui/top_msg'
+import { QuotationEditModal } from '@pages/quotation/quotation_edit_modal'
 
 const Quotation = React.lazy(async () => {
   return import('@pages/quotation/quotation_page')
@@ -94,11 +94,11 @@ export const router = createBrowserRouter([
           ...authRoutes,
           {
             path: route.saveQuotation,
-            element: <SaveQuotationModal />,
+            element: <QuotationSaveModal />,
           },
           {
             path: `${route.bookmark}/:id`,
-            element: <AddBookmarkModal />,
+            element: <BookmarkSaveModal />,
           },
           {
             path: `${route.infoQuotation}/:id`,
@@ -121,7 +121,7 @@ export const router = createBrowserRouter([
           ...authRoutes,
           {
             path: `${route.editQuotation}/:id`,
-            element: <EditQuotationModal />,
+            element: <QuotationEditModal />,
           },
         ],
       },
@@ -136,7 +136,7 @@ export const router = createBrowserRouter([
           ...authRoutes,
           {
             path: `${route.editBookmark}/:id`,
-            element: <EditBookmarkModal />,
+            element: <BookmarkEditModal />,
           },
         ],
       },

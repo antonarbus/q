@@ -10,7 +10,7 @@ import { DescriptionField } from './DescriptionField'
 import { NameField } from './NameField'
 import { InfoField } from './InfoField'
 
-export const AddBookmarkModal = (): React.ReactNode => {
+export const BookmarkSaveModal = (): React.ReactNode => {
   const { id } = useParams()
   const item = getItemFromStore({ id: id ?? 'missing id' })
 

@@ -8,7 +8,7 @@ import {
   onTextBlockResizeStart,
   onTextBlockResizeStop,
 } from '@features/blocks/resize'
-import { BookmarkBlockIcon } from '@features/open_close/open_bookmark_modal'
+import { BookmarkBlockIcon } from '@features/open_close/open_bookmark_save_modal'
 import { OpenInfoBlockModalIcon } from '@features/open_close/open_item_info_modal'
 import { beforeUpload } from '@features/upload'
 import {
