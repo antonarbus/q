@@ -61,7 +61,6 @@ export const QuotationSaveModal = (): JSX.Element => {
     <FormModal
       modalRef={modalRef}
       width='500px'
-      // paddingContent='50px 40px'
       headerText='Save quotation'
       headerIcon={<MdSaveAlt />}
       buttonText={id === 'new' ? 'SAVE' : 'UPDATE'}
