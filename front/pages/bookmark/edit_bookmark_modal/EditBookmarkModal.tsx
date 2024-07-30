@@ -1,4 +1,3 @@
-import { dispatch, getState } from '@lib_instances/store'
 import { useSignal } from '@preact/signals-react'
 import { useRef } from 'react'
 import { FiEdit3 } from 'react-icons/fi'
@@ -9,10 +8,10 @@ import { CategoryField } from './CategoryField'
 import { DescriptionField } from './DescriptionField'
 import { NameField } from './NameField'
 import { InfoField } from './InfoField'
-import { useParams } from 'react-router-dom'
-import { useEffectOnce, useUpdateEffect } from 'react-use'
-import { useGetBookmarkMutation } from '@entities/bookmark'
-import { quotationSlice } from '@entities/quotation'
+import {
+  useLoadEditBookmarkModalOpenedWithButton,
+  useLoadEditBookmarkModalOpenedWithDirectLink,
+} from '@features/open_close/open_bookmark_edit_modal'
 
 export const EditBookmarkModal = (): JSX.Element => {
   const modalRef = useRef<HTMLDivElement>(null)
@@ -22,60 +21,19 @@ export const EditBookmarkModal = (): JSX.Element => {
   const descSignal = useSignal('')
   const infoSignal = useSignal('')
 
-  useEffectOnce(() => {
-    const firstBlock = getState().quotation.blocks.at(0)
-
-    if (firstBlock) {
-      nameSignal.value = firstBlock.name ?? ''
-      categorySignal.value = firstBlock.category ?? ''
-      descSignal.value = firstBlock.desc ?? ''
-      infoSignal.value = firstBlock.info ?? ''
-    }
+  useLoadEditBookmarkModalOpenedWithButton({
+    nameSignal,
+    categorySignal,
+    descSignal,
+    infoSignal,
   })
 
-  const { id } = useParams()
-
-  const {
-    mutate: loadBookmark,
-    isSuccess: isBookmarkSuccess,
-    data,
-  } = useGetBookmarkMutation()
-
-  useEffectOnce(() => {
-    if (id) {
-      loadBookmark({ id })
-    }
+  useLoadEditBookmarkModalOpenedWithDirectLink({
+    nameSignal,
+    categorySignal,
+    descSignal,
+    infoSignal,
   })
-
-  useUpdateEffect(() => {
-    if (isBookmarkSuccess && data.item) {
-      dispatch(
-        quotationSlice.actions.loadQuotationReducer({
-          quotation: {
-            type: 'quotation',
-            id: 'edit-bookmark',
-            name: 'edit-bookmark',
-            category: 'edit-bookmark',
-            desc: 'edit-bookmark',
-            info: 'edit-bookmark',
-            email: 'edit-bookmark',
-            sharedWith: [],
-            preview: 'edit-bookmark',
-            blocks: [data.item],
-          },
-        }),
-      )
-
-      const firstBlock = getState().quotation.blocks.at(0)
-
-      if (firstBlock) {
-        nameSignal.value = firstBlock.name ?? ''
-        categorySignal.value = firstBlock.category ?? ''
-        descSignal.value = firstBlock.desc ?? ''
-        infoSignal.value = firstBlock.info ?? ''
-      }
-    }
-  }, [isBookmarkSuccess])
 
   const isDisabled = nameSignal.value === '' || categorySignal.value === ''
 
