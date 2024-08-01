@@ -27,15 +27,6 @@ export const QuotationEditModal = (): JSX.Element => {
   const shareWithOptionSignal = useSignal<SharedWithOption>('nobody')
   const sharedWithSignal = useSignal<string[]>([])
 
-  const { onSubmit, isPending, isSuccess, isError } = useEditQuotation({
-    modalRef,
-    nameSignal,
-    categorySignal,
-    descSignal,
-    infoSignal,
-    sharedWithSignal,
-  })
-
   useLoadInitValuesIntoQuotationEditForm({
     nameSignal,
     categorySignal,
@@ -52,6 +43,15 @@ export const QuotationEditModal = (): JSX.Element => {
     infoSignal,
     sharedWithSignal,
     shareWithOptionSignal,
+  })
+
+  const { onSubmit, isPending, isSuccess, isError } = useEditQuotation({
+    modalRef,
+    nameSignal,
+    categorySignal,
+    descSignal,
+    infoSignal,
+    sharedWithSignal,
   })
 
   return (

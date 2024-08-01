@@ -120,7 +120,7 @@ export const router = createBrowserRouter([
         children: [
           ...authRoutes,
           {
-            path: `${route.editQuotation}/:id`,
+            path: `:id/${route.saveQuotation}`,
             element: <QuotationEditModal />,
           },
         ],

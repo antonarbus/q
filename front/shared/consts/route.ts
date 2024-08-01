@@ -11,7 +11,6 @@ export const route = {
   new: 'new',
   quotations: 'quotations',
   saveQuotation: 'save-quotation',
-  editQuotation: 'edit-quotation',
   infoQuotation: 'info-quotation',
   // bookmark
   bookmarks: 'bookmarks',

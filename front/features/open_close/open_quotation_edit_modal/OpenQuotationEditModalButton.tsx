@@ -37,7 +37,7 @@ export const OpenQuotationEditModalButton = ({ id }: ReqBody): JSX.Element => {
         }),
       )
 
-      navigate(`./${route.editQuotation}/${id}`)
+      navigate(`./${id}/${route.saveQuotation}`)
     }
   }, [isSuccess])
 
