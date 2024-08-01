@@ -11,7 +11,7 @@ import { BookmarkEditModal } from '@pages/bookmark/bookmark_edit_modal'
 import { ErrorPage } from '@pages/error'
 import { InfoModal } from '@pages/info/info_modal'
 import { InfoQuotationModal } from '@pages/quotation/info_quotation_modal'
-import { QuotationSaveModal } from '@pages/quotation/quotation_save_modal'
+import { QuotationModal } from '@pages/quotation/quotation_modal'
 import { SettingsModal } from '@pages/settings'
 import { Copy } from '@widgets/copy'
 import { Nav } from '@widgets/nav'
@@ -21,7 +21,6 @@ import { route } from '@shared/consts/route'
 import { Main } from '@shared/layouts'
 import { LoadingDotsOverlay } from '@shared/loading_dots_overlay'
 import { TopMsg } from '@shared/ui/top_msg'
-import { QuotationEditModal } from '@pages/quotation/quotation_edit_modal'
 
 const Quotation = React.lazy(async () => {
   return import('@pages/quotation/quotation_page')
@@ -94,7 +93,7 @@ export const router = createBrowserRouter([
           ...authRoutes,
           {
             path: route.saveQuotation,
-            element: <QuotationSaveModal />,
+            element: <QuotationModal />,
           },
           {
             path: `${route.bookmark}/:id`,
@@ -121,7 +120,7 @@ export const router = createBrowserRouter([
           ...authRoutes,
           {
             path: `:id/${route.saveQuotation}`,
-            element: <QuotationEditModal />,
+            element: <QuotationModal />,
           },
         ],
       },

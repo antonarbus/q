@@ -22,7 +22,7 @@ import {
   openQuotationPageAndLoadPrev,
 } from '@features/open_close/open_quotation_page'
 import { openQuotationsPage } from '@features/open_close/open_quotations_page'
-import { openSaveQuotationModal } from '@features/open_close/open_save_quotation_modal'
+import { openSaveQuotationModal } from '@features/open_close/open_quotation_modal'
 import { openSettingsModal } from '@features/open_close/open_settings_modal'
 import { downloadPdf } from '@features/quotation/pdf'
 import { navItemKey } from '@shared/consts/navItemKey'

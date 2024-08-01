@@ -13,7 +13,7 @@ type Props = {
   shareWithOptionSignal: Signal<SharedWithOption>
 }
 
-export const useLoadInitValuesIntoQuotationEditForm = ({
+export const useLoadInitValuesIntoQuotationModal = ({
   nameSignal,
   categorySignal,
   descSignal,

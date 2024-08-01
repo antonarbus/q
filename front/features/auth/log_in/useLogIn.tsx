@@ -19,7 +19,7 @@ import { navSlice } from '@shared/nav'
 import { reRenderQuotationSignal } from '@shared/signals/reRenderQuotationSignal'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
-import type { OpenSaveQuotationModalNavigateState } from '@features/open_close/open_save_quotation_modal/openSaveQuotationModal'
+import type { OpenQuotationModalNavigateState } from '@features/open_close/open_quotation_modal'
 
 type Props = {
   emailSignal: Signal<string>
@@ -49,8 +49,7 @@ export const useLogIn = ({
     isError,
     error,
   } = useLogInMutation()
-  const location =
-    useLocation() as Location<OpenSaveQuotationModalNavigateState>
+  const location = useLocation() as Location<OpenQuotationModalNavigateState>
   const { refetch: refetchQuotations } = useGetQuotationsQuery()
   const { refetch: refetchBookmarks } = useGetBookmarksQuery()
 

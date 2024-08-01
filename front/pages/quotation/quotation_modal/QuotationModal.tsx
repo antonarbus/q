@@ -1,25 +1,39 @@
+import { getState } from '@lib_instances/store'
 import { useSignal } from '@preact/signals-react'
 import { useRef } from 'react'
-import { FiEdit3 } from 'react-icons/fi'
-import { useEditQuotation } from '@features/quotation/edit_quotation'
+import { MdSaveAlt } from 'react-icons/md'
+import { useLocation, type Location } from 'react-router-dom'
+import { useEffectOnce } from 'react-use'
+import { useSaveQuotation } from '@features/quotation/save_quotation'
 import { FormModal } from '@shared/components'
 import type { SharedWithOption } from '@shared/consts/sharedWithOption'
 import { CategoryField } from './CategoryField'
 import { DescriptionField } from './DescriptionField'
 import { InfoField } from './InfoField'
 import { NameField } from './NameField'
-import { QuotationField } from './QuotationField'
 import { ShareField } from './ShareField'
+import { QuotationField } from './QuotationField'
 import {
-  useLoadInitValuesIntoQuotationEditForm,
-  useLoadQuotationEditModalOpenedWithDirectLink,
-} from '@features/open_close/open_quotation_edit_modal'
+  useLoadInitValuesIntoQuotationModal,
+  useLoadQuotationModalWithDirectLink,
+  type OpenQuotationModalNavigateState,
+} from '@features/open_close/open_quotation_modal'
 
-// todo: remove edit modal and route
+export const QuotationModal = (): JSX.Element => {
+  const location = useLocation() as Location<OpenQuotationModalNavigateState>
+  const scrollTop = location.state.scrollTop
 
-export const QuotationEditModal = (): JSX.Element => {
+  useEffectOnce(() => {
+    document.body.scrollTop = scrollTop
+  })
+
+  const quotation = getState().quotation
+
   const modalRef = useRef<HTMLDivElement>(null)
 
+  // const formValue = {
+
+  // }
   const nameSignal = useSignal('')
   const categorySignal = useSignal('')
   const descSignal = useSignal('')
@@ -27,7 +41,7 @@ export const QuotationEditModal = (): JSX.Element => {
   const shareWithOptionSignal = useSignal<SharedWithOption>('nobody')
   const sharedWithSignal = useSignal<string[]>([])
 
-  useLoadInitValuesIntoQuotationEditForm({
+  useLoadInitValuesIntoQuotationModal({
     nameSignal,
     categorySignal,
     descSignal,
@@ -36,7 +50,7 @@ export const QuotationEditModal = (): JSX.Element => {
     shareWithOptionSignal,
   })
 
-  useLoadQuotationEditModalOpenedWithDirectLink({
+  useLoadQuotationModalWithDirectLink({
     nameSignal,
     categorySignal,
     descSignal,
@@ -45,7 +59,11 @@ export const QuotationEditModal = (): JSX.Element => {
     shareWithOptionSignal,
   })
 
-  const { onSubmit, isPending, isSuccess, isError } = useEditQuotation({
+  const forgotToAddPerson =
+    shareWithOptionSignal.value === 'persons' &&
+    sharedWithSignal.value.length === 0
+
+  const { onSubmit, isPending, isSuccess, isError } = useSaveQuotation({
     modalRef,
     nameSignal,
     categorySignal,
@@ -56,17 +74,21 @@ export const QuotationEditModal = (): JSX.Element => {
 
   return (
     <FormModal
+      modalRef={modalRef}
       width='500px'
-      headerIcon={<FiEdit3 />}
-      headerText='Edit quotation'
-      buttonText='UPDATE'
-      isButtonDisabled={nameSignal.value === '' || categorySignal.value === ''}
+      headerText={`${quotation.id === 'new' ? 'Save' : 'Update'} quotation`}
+      headerIcon={<MdSaveAlt />}
+      buttonText={quotation.id === 'new' ? 'SAVE' : 'UPDATE'}
+      isButtonDisabled={
+        nameSignal.value === '' ||
+        categorySignal.value === '' ||
+        forgotToAddPerson
+      }
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
       isButtonError={isError}
-      modalRef={modalRef}
-      onCloseSlideModalOutAndNavigateUp={true}
       onSubmit={onSubmit}
+      onCloseSlideModalOutAndNavigateUp={true}
     >
       <NameField nameSignal={nameSignal} />
       <CategoryField categorySignal={categorySignal} />

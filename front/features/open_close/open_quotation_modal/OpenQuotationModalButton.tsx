@@ -12,8 +12,9 @@ import {
 import { RotatingLoaderIcon } from '@shared/components'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
+import type { OpenQuotationModalNavigateState } from '.'
 
-export const OpenQuotationEditModalButton = ({ id }: ReqBody): JSX.Element => {
+export const OpenQuotationModalButton = ({ id }: ReqBody): JSX.Element => {
   const navigate = useNavigate()
 
   const {
@@ -37,7 +38,16 @@ export const OpenQuotationEditModalButton = ({ id }: ReqBody): JSX.Element => {
         }),
       )
 
-      navigate(`./${id}/${route.saveQuotation}`)
+      const navigateState: OpenQuotationModalNavigateState = {
+        navigatedFrom: `/`,
+        navigateTo: `/${route.saveQuotation}`,
+        scrollTop:
+          document.documentElement.scrollTop || document.body.scrollTop,
+      }
+
+      navigate(`./${id}/${route.saveQuotation}`, {
+        state: navigateState,
+      })
     }
   }, [isSuccess])
 

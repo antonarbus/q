@@ -18,7 +18,7 @@ type Props = {
   shareWithOptionSignal: Signal<SharedWithOption>
 }
 
-export const useLoadQuotationEditModalOpenedWithDirectLink = ({
+export const useLoadQuotationModalWithDirectLink = ({
   nameSignal,
   categorySignal,
   descSignal,
