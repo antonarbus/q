@@ -7,6 +7,7 @@ import {
   type Quotation,
   quotationSlice,
   useGetQuotationCategoriesQuery,
+  useGetQuotationsQuery,
   useSaveQuotationMutation,
 } from '@entities/quotation'
 import { navItemKey } from '@shared/consts/navItemKey'
@@ -58,6 +59,8 @@ export const useSaveQuotation = ({
 
   const { refetch: updateCategories } = useGetQuotationCategoriesQuery()
 
+  const { refetch: fetchQuotations } = useGetQuotationsQuery()
+
   useUpdateEffect(() => {
     if (isPending) {
       showLoadingNavIcon({ navMenuItemIdKey: navItemKey.save })
@@ -74,6 +77,7 @@ export const useSaveQuotation = ({
       })
 
       void updateCategories()
+      void fetchQuotations()
 
       if (data.quotation) {
         dispatch(
@@ -90,7 +94,7 @@ export const useSaveQuotation = ({
         slideElement({
           element: modalRef.current,
           onSlideElementComplete: () => {
-            navigate(`/${data.quotation?.id ?? 'no id set'}`)
+            navigate(`..`)
           },
         })
       }, 1000)
@@ -105,6 +109,7 @@ export const useSaveQuotation = ({
         theme: 'dark',
         position: 'bottom-center',
       })
+
       showErrorNavIcon({ navMenuItemIdKey: navItemKey.save })
       reset()
     }

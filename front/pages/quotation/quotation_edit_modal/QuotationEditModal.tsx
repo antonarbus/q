@@ -15,6 +15,8 @@ import {
   useLoadQuotationEditModalOpenedWithDirectLink,
 } from '@features/open_close/open_quotation_edit_modal'
 
+// todo: remove edit modal and route
+
 export const QuotationEditModal = (): JSX.Element => {
   const modalRef = useRef<HTMLDivElement>(null)
 

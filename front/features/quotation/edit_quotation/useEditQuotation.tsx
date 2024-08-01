@@ -48,8 +48,7 @@ export const useEditQuotation = ({
     reset,
   } = useSaveQuotationMutation()
 
-  const { refetch: updateQuotationCategories } =
-    useGetQuotationCategoriesQuery()
+  const { refetch: updateCategories } = useGetQuotationCategoriesQuery()
 
   const { refetch: fetchQuotations } = useGetQuotationsQuery()
 
@@ -62,7 +61,7 @@ export const useEditQuotation = ({
         position: 'bottom-center',
       })
 
-      void updateQuotationCategories()
+      void updateCategories()
       void fetchQuotations()
 
       setTimeout(() => {
