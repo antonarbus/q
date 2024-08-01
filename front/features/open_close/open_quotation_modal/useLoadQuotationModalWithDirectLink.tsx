@@ -3,28 +3,17 @@ import {
   quotationSlice,
   useGetQuotationMutation,
 } from '@entities/quotation'
+import type { QuotationFormValues } from '@entities/quotation/types'
 import { dispatch } from '@lib_instances/store'
 import { useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
-import type { Signal } from '@preact/signals-react'
-import type { SharedWithOption } from '@shared/consts/sharedWithOption'
 
 type Props = {
-  nameSignal: Signal<string>
-  categorySignal: Signal<string>
-  descSignal: Signal<string>
-  infoSignal: Signal<string>
-  sharedWithSignal: Signal<string[]>
-  shareWithOptionSignal: Signal<SharedWithOption>
+  quotationFormValues: QuotationFormValues
 }
 
 export const useLoadQuotationModalWithDirectLink = ({
-  nameSignal,
-  categorySignal,
-  descSignal,
-  infoSignal,
-  sharedWithSignal,
-  shareWithOptionSignal,
+  quotationFormValues,
 }: Props): void => {
   const { id } = useParams()
 
@@ -46,11 +35,14 @@ export const useLoadQuotationModalWithDirectLink = ({
 
     dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
 
-    nameSignal.value = quotation.name ?? ''
-    categorySignal.value = quotation.category ?? ''
-    descSignal.value = quotation.desc ?? ''
-    infoSignal.value = quotation.info ?? ''
-    shareWithOptionSignal.value = getWhoQuotationSharedWithOption({ quotation })
-    sharedWithSignal.value = quotation.sharedWith ?? []
+    quotationFormValues.nameSignal.value = quotation.name ?? ''
+    quotationFormValues.categorySignal.value = quotation.category ?? ''
+    quotationFormValues.descSignal.value = quotation.desc ?? ''
+    quotationFormValues.infoSignal.value = quotation.info ?? ''
+    quotationFormValues.shareWithOptionSignal.value =
+      getWhoQuotationSharedWithOption({
+        quotation,
+      })
+    quotationFormValues.sharedWithSignal.value = quotation.sharedWith ?? []
   }, [isLoadQuotationSuccess])
 }

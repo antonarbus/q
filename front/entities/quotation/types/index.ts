@@ -1,6 +1,8 @@
 import type { FroalaEditorRef } from '@shared/types/froala'
 import type { BoqRowKey } from '../consts/boqRowKey'
 import type { itemType } from '../consts/itemType'
+import type { Signal } from '@preact/signals-react'
+import type { SharedWithOption } from '@shared/consts/sharedWithOption'
 
 // this is common field for block + row + quotation
 // a bit stupid but code is simpler if we maintain these fields everywhere, even if we do not need them everywhere
@@ -135,4 +137,13 @@ export type Quotation = Common & {
     company?: string
   }
   blocks: Block[]
+}
+
+export type QuotationFormValues = {
+  nameSignal: Signal<string>
+  categorySignal: Signal<string>
+  descSignal: Signal<string>
+  infoSignal: Signal<string>
+  sharedWithSignal: Signal<string[]>
+  shareWithOptionSignal: Signal<SharedWithOption>
 }

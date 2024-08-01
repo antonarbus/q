@@ -1,38 +1,26 @@
 import { getWhoQuotationSharedWithOption } from '@entities/quotation'
+import type { QuotationFormValues } from '@entities/quotation/types'
 import { getState } from '@lib_instances/store'
-import type { Signal } from '@preact/signals-react'
-import type { SharedWithOption } from '@shared/consts/sharedWithOption'
 import { useEffectOnce } from 'react-use'
 
 type Props = {
-  nameSignal: Signal<string>
-  categorySignal: Signal<string>
-  descSignal: Signal<string>
-  infoSignal: Signal<string>
-  sharedWithSignal: Signal<string[]>
-  shareWithOptionSignal: Signal<SharedWithOption>
+  quotationFormValues: QuotationFormValues
 }
 
 export const useLoadInitValuesIntoQuotationModal = ({
-  nameSignal,
-  categorySignal,
-  descSignal,
-  infoSignal,
-  sharedWithSignal,
-  shareWithOptionSignal,
+  quotationFormValues,
 }: Props): void => {
   useEffectOnce(() => {
     const quotation = getState().quotation
 
-    nameSignal.value = quotation.name ?? ''
-    categorySignal.value = quotation.category ?? ''
-    descSignal.value = quotation.desc ?? ''
-    infoSignal.value = quotation.info ?? ''
-
-    shareWithOptionSignal.value = getWhoQuotationSharedWithOption({
-      quotation,
-    })
-
-    sharedWithSignal.value = quotation.sharedWith ?? []
+    quotationFormValues.nameSignal.value = quotation.name ?? ''
+    quotationFormValues.categorySignal.value = quotation.category ?? ''
+    quotationFormValues.descSignal.value = quotation.desc ?? ''
+    quotationFormValues.infoSignal.value = quotation.info ?? ''
+    quotationFormValues.shareWithOptionSignal.value =
+      getWhoQuotationSharedWithOption({
+        quotation,
+      })
+    quotationFormValues.sharedWithSignal.value = quotation.sharedWith ?? []
   })
 }

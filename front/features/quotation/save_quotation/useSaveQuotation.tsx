@@ -1,5 +1,4 @@
 import { dispatch, getState } from '@lib_instances/store'
-import type { Signal } from '@preact/signals-react'
 import type { UseMutationResult } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
@@ -20,14 +19,11 @@ import {
 } from '@shared/nav'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
+import type { QuotationFormValues } from '@entities/quotation/types'
 
 type Props = {
   modalRef: React.RefObject<HTMLDivElement>
-  nameSignal: Signal<string>
-  categorySignal: Signal<string>
-  descSignal: Signal<string>
-  infoSignal: Signal<string>
-  sharedWithSignal: Signal<string[]>
+  quotationFormValues: QuotationFormValues
 }
 
 type Res = {
@@ -39,11 +35,7 @@ type Res = {
 
 export const useSaveQuotation = ({
   modalRef,
-  nameSignal,
-  categorySignal,
-  descSignal,
-  infoSignal,
-  sharedWithSignal,
+  quotationFormValues,
 }: Props): Res => {
   const navigate = useNavigate()
 
@@ -131,11 +123,11 @@ export const useSaveQuotation = ({
     const quotation: Quotation = {
       ...getState().quotation,
       id,
-      name: nameSignal.value,
-      category: categorySignal.value,
-      desc: descSignal.value,
-      info: infoSignal.value,
-      sharedWith: sharedWithSignal.value,
+      name: quotationFormValues.nameSignal.value,
+      category: quotationFormValues.categorySignal.value,
+      desc: quotationFormValues.descSignal.value,
+      info: quotationFormValues.infoSignal.value,
+      sharedWith: quotationFormValues.sharedWithSignal.value,
       blocks: getState().quotation.blocks,
     }
 
