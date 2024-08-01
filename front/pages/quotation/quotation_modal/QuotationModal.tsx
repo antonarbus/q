@@ -20,7 +20,6 @@ import { useIsButtonDisabled } from './useIsButtonDisabled'
 export const QuotationModal = (): JSX.Element => {
   useFixScrollPositionOnModalOpen()
   const modalRef = useRef<HTMLDivElement>(null)
-  const quotation = getState().quotation
   const { quotationFormValues } = useQuotationFormValues()
   useLoadInitValuesIntoQuotationModal({ quotationFormValues })
   useLoadQuotationModalWithDirectLink({ quotationFormValues })
@@ -34,9 +33,9 @@ export const QuotationModal = (): JSX.Element => {
     <FormModal
       modalRef={modalRef}
       width='500px'
-      headerText={`${quotation.id === 'new' ? 'Save' : 'Update'} quotation`}
+      headerText={`${getState().quotation.id === 'new' ? 'Save' : 'Update'} quotation`}
       headerIcon={<MdSaveAlt />}
-      buttonText={quotation.id === 'new' ? 'SAVE' : 'UPDATE'}
+      buttonText={getState().quotation.id === 'new' ? 'SAVE' : 'UPDATE'}
       isButtonDisabled={isButtonDisabled}
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
