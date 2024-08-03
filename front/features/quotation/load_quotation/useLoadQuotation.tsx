@@ -1,4 +1,4 @@
-import { router } from '@lib_instances/router_'
+import { router } from '@lib_instances/router'
 import { dispatch } from '@lib_instances/store'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
