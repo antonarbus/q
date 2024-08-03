@@ -1,4 +1,4 @@
-import { router } from '@lib_instances/router'
+import { router } from '@lib_instances/router_'
 import { previousQuotationRef } from '@entities/quotation'
 import type { QuotationLocationState } from '.'
 
