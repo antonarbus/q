@@ -40,12 +40,12 @@ export const OpenQuotationModalButton = ({ id }: ReqBody): JSX.Element => {
 
       const navigateState: OpenQuotationModalNavigateState = {
         navigatedFrom: `/`,
-        navigateTo: `/${route.saveQuotation}`,
+        navigateTo: `/${route.save}`,
         scrollTop:
           document.documentElement.scrollTop || document.body.scrollTop,
       }
 
-      navigate(`./${id}/${route.saveQuotation}`, {
+      navigate(`./${id}`, {
         state: navigateState,
       })
     }

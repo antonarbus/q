@@ -49,7 +49,7 @@ export const OpenEditBookmarkModalButton = ({ id }: ReqBody): JSX.Element => {
         }),
       )
 
-      navigate(`./${route.editBookmark}/${id}`)
+      navigate(`./${id}`)
     }
   }, [isSuccess])
 

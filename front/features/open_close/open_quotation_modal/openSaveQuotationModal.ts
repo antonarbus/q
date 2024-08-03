@@ -6,7 +6,7 @@ import type { OpenQuotationModalNavigateState } from '.'
 export const openSaveQuotationModal = (): void => {
   const navigateState: OpenQuotationModalNavigateState = {
     navigatedFrom: `/`,
-    navigateTo: `/${route.saveQuotation}`,
+    navigateTo: `/${route.save}`,
     scrollTop: document.documentElement.scrollTop || document.body.scrollTop,
   }
 
@@ -18,7 +18,7 @@ export const openSaveQuotationModal = (): void => {
     return
   }
 
-  void router.navigate(`./${route.saveQuotation}`, {
+  void router.navigate(`./${route.save}`, {
     state: navigateState,
   })
 }

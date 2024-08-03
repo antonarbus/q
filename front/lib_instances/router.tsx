@@ -88,11 +88,10 @@ export const router = createBrowserRouter([
           </Suspense>
         ),
         caseSensitive: true,
-
         children: [
           ...authRoutes,
           {
-            path: route.saveQuotation,
+            path: route.save,
             element: <QuotationModal />,
           },
           {
@@ -119,7 +118,7 @@ export const router = createBrowserRouter([
         children: [
           ...authRoutes,
           {
-            path: `:id/${route.saveQuotation}`,
+            path: `:id`,
             element: <QuotationModal />,
           },
         ],
@@ -134,7 +133,7 @@ export const router = createBrowserRouter([
         children: [
           ...authRoutes,
           {
-            path: `${route.editBookmark}/:id`,
+            path: `:id`,
             element: <BookmarkEditModal />,
           },
         ],

@@ -65,7 +65,7 @@ export const navStructure: MenuItemType[] = [
         isHidden: false,
         name: 'Save',
         // shortcut: ['control', 's'],
-        link: `./${route.saveQuotation}`,
+        link: `./${route.save}`,
         func: (): void => {
           openSaveQuotationModal()
         },
