@@ -3,7 +3,7 @@ import { getState } from '@lib_instances/store'
 import { route } from '@shared/consts/route'
 import type { OpenQuotationModalNavigateState } from '.'
 
-export const openSaveQuotationModal = (): void => {
+export const openQuotationModal = (): void => {
   const navigateState: OpenQuotationModalNavigateState = {
     navigatedFrom: `/`,
     navigateTo: `/${route.save}`,

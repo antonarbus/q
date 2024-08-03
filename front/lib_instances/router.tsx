@@ -6,8 +6,7 @@ import { RegisterModal } from '@pages/auth/RegisterModal'
 import { RequestPasswordResetModal } from '@pages/auth/RequestPasswordResetModal'
 import { ResetPasswordModal } from '@pages/auth/ResetPasswordModal'
 import { UnauthorizedPage } from '@pages/auth/UnauthorizedPage'
-import { BookmarkSaveModal } from '@pages/bookmark/bookmark_save_modal'
-import { BookmarkEditModal } from '@pages/bookmark/bookmark_edit_modal'
+import { BookmarkModal } from '@pages/bookmark/bookmark_modal'
 import { ErrorPage } from '@pages/error'
 import { InfoModal } from '@pages/info/info_modal'
 import { InfoQuotationModal } from '@pages/quotation/info_quotation_modal'
@@ -96,7 +95,7 @@ export const router = createBrowserRouter([
           },
           {
             path: `${route.bookmark}/:id`,
-            element: <BookmarkSaveModal />,
+            element: <BookmarkModal />,
           },
           {
             path: `${route.infoQuotation}/:id`,
@@ -134,7 +133,7 @@ export const router = createBrowserRouter([
           ...authRoutes,
           {
             path: `:id`,
-            element: <BookmarkEditModal />,
+            element: <BookmarkModal />,
           },
         ],
       },

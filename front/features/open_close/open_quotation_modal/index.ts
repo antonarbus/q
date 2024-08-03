@@ -1,7 +1,7 @@
 export { OpenQuotationModalButton } from './OpenQuotationModalButton'
 export { useLoadInitValuesIntoQuotationModal } from './useLoadInitValuesIntoQuotationModal'
 export { useLoadQuotationModalWithDirectLink } from './useLoadQuotationModalWithDirectLink'
-export { openSaveQuotationModal } from './openSaveQuotationModal'
+export { openQuotationModal } from './openQuotationModal'
 export { useFixScrollPositionOnModalOpen } from './useFixScrollPositionOnModalOpen'
 
 export type OpenQuotationModalNavigateState = {

@@ -7,7 +7,7 @@ import {
   onBoqBlockResizeStart,
   onBoqBlockResizeStop,
 } from '@features/blocks/resize'
-import { BookmarkBlockIcon } from '@features/open_close/open_bookmark_save_modal'
+import { BookmarkBlockIcon } from '@features/open_close/open_bookmark_modal'
 import { OpenInfoBlockModalIcon } from '@features/open_close/open_item_info_modal'
 import { BoqItemProvider, BlockComp } from '@entities/quotation'
 import { ItemActionButtonsLayout } from '@shared/layouts'

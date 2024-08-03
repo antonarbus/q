@@ -12,7 +12,7 @@ type Props = {
   infoSignal: Signal<string>
 }
 
-export const useLoadBookmarkEditModalOpenedWithDirectLink = ({
+export const useLoadBookmarkModalOpenedWithDirectLink = ({
   nameSignal,
   categorySignal,
   descSignal,

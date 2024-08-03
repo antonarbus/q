@@ -1,6 +1,5 @@
 export const route = {
   root: '/',
-  // auth
   login: 'login',
   logout: 'logout',
   register: 'register',

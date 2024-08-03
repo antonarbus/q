@@ -9,7 +9,7 @@ type Props = {
   infoSignal: Signal<string>
 }
 
-export const useLoadInitValuesIntoBookmarkEditModal = ({
+export const useLoadInitValuesIntoBookmarkModal = ({
   nameSignal,
   categorySignal,
   descSignal,
