@@ -24,7 +24,13 @@ export const InfoModal = (): React.ReactNode => {
   const descSignal = useSignal(item.desc)
   const infoSignal = useSignal(item.info)
 
-  useUpdateItemInfo({ id, nameSignal, categorySignal, descSignal, infoSignal })
+  useUpdateItemInfo({
+    id: id ?? 'new',
+    nameSignal,
+    categorySignal,
+    descSignal,
+    infoSignal,
+  })
 
   return (
     <FormModal
