@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { Quotation } from '../../types'
-import { getItemFromState } from '../getters/getItemFromState'
+import { getFromState } from '../getters/getFromState'
 
 export const updateItemInfoReducer = (
   state: Quotation,
@@ -14,7 +14,7 @@ export const updateItemInfoReducer = (
 ): void => {
   const { id, name, category, desc, info } = action.payload
 
-  const item = getItemFromState({ id, state })
+  const item = getFromState({ id, state })
 
   if (item === undefined) return
 

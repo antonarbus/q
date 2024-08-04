@@ -5,7 +5,7 @@ import { AiTwotoneEdit } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetBookmarkMutation } from '@entities/bookmark'
-import { isFroalaSignal, quotationSlice } from '@entities/quotation'
+import { isFroalaSignal, itemType, quotationSlice } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components'
 import { notify } from '@shared/ui/top_msg'
 
@@ -25,7 +25,7 @@ export const OpenBookmarkModalButton = ({ id }: ReqBody): JSX.Element => {
     if (isSuccess) {
       const { item } = data
 
-      if (!item) return
+      if (item?.type !== itemType.boq) return
 
       const block = item
 

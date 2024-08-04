@@ -116,9 +116,6 @@ export type PasteBlock = Common & {
 
 export type Block = BoqBlock | PasteBlock | TextBlock | PriceBlock | RowBlock
 
-// item
-export type Item = Block | BoqRow
-
 // quotation
 export type Quotation = Common & {
   type: 'quotation'
@@ -138,6 +135,9 @@ export type Quotation = Common & {
   }
   blocks: Block[]
 }
+
+// item
+export type Item = Quotation | Block | BoqRow
 
 export type QuotationFormValues = {
   nameSignal: Signal<string>

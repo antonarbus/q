@@ -1,5 +1,5 @@
 import { useGetBookmarkMutation } from '@entities/bookmark'
-import { quotationSlice } from '@entities/quotation'
+import { itemType, quotationSlice } from '@entities/quotation'
 import { dispatch, getState } from '@lib_instances/store'
 import { useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
@@ -37,6 +37,8 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
 
   useUpdateEffect(() => {
     if (isBookmarkSuccess && data.item) {
+      if (data.item.type !== itemType.boq) return
+
       dispatch(
         quotationSlice.actions.loadQuotationReducer({
           quotation: {

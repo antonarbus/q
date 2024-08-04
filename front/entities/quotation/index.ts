@@ -52,7 +52,7 @@ export { getBoqBlockFromStore } from './redux/getters/getBoqBlockFromStore'
 export { getBoqCellFromStore } from './redux/getters/getBoqCellFromStore'
 export { getBoqHeaderFromStore } from './redux/getters/getBoqHeaderFromStore'
 export { getBoqColumnFromStore } from './redux/getters/getBoqColumnFromStore'
-export { getItemFromStore } from './redux/getters/getItemFromStore'
+export { getFromStore } from './redux/getters/getFromStore'
 
 // Store html getters
 export { getTextBlockHtmlFromStore } from './redux/getters/getTextBlockHtmlFromStore'

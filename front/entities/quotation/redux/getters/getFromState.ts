@@ -5,7 +5,12 @@ type Props = {
   state: Quotation
 }
 
-export const getItemFromState = ({ id, state }: Props): Item | undefined => {
+export const getFromState = ({
+  id,
+  state,
+}: Props): Item | Quotation | undefined => {
+  if (state.id === id) return state
+
   const blockWithSameId = state.blocks.find((block) => {
     return block.id === id
   })

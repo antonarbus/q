@@ -11,6 +11,7 @@ import { NameField } from './NameField'
 
 export const InfoQuotationModal = (): React.ReactNode => {
   const modalRef = useRef<HTMLDivElement>(null)
+
   const quotation = getState().quotation
 
   const nameSignal = useSignal(quotation.name)
