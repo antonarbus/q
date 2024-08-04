@@ -51,7 +51,9 @@ export const DescriptionCell = (): JSX.Element => {
         textAlign: 'left',
       }}
       sx={{
-        '.fr-placeholder': { left: 0 },
+        '.fr-placeholder': {
+          left: 0,
+        },
       }}
     />
   )

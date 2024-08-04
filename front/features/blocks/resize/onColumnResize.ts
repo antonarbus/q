@@ -1,4 +1,5 @@
 import { dispatch } from '@lib_instances/store'
+import { cls } from '@shared/consts/cls'
 import {
   type BoqColumnKey,
   quotationSlice,
@@ -6,7 +7,6 @@ import {
   unfixImagesHeight,
   fixImagesHeight,
 } from '@entities/quotation'
-import { cls } from '@shared/consts/cls'
 
 type Props = {
   headerColumnElement: HTMLElement
@@ -20,8 +20,11 @@ export const onColumnResizeStart = ({
   boqColumnKey,
 }: Props): void => {
   unfixImagesHeight()
+
   const width = headerColumnElement.clientWidth
+
   dispatch(quotationSlice.actions.disableFroalaReducer({ blockIndex }))
+
   dispatch(
     quotationSlice.actions.updateColWidthReducer({
       blockIndex,
@@ -29,6 +32,7 @@ export const onColumnResizeStart = ({
       boqColumnKey,
     }),
   )
+
   dispatch(quotationSlice.actions.hideBoqItemPinsReducer({ blockIndex }))
 }
 
@@ -39,9 +43,13 @@ export const onColumnResize = ({
 }: Props): void => {
   const width = headerColumnElement.clientWidth
   const column = getBoqColumnFromStore({ blockIndex, boqColumnKey })
+
   if (column === undefined) return
+
   const didWidthChange = column.width !== width
+
   if (!didWidthChange) return
+
   dispatch(
     quotationSlice.actions.updateColWidthReducer({
       blockIndex,
@@ -58,6 +66,7 @@ export const onColumnResizeStop = ({
 }: Props): void => {
   fixImagesHeight()
   const columnWidth = headerColumnElement.clientWidth
+
   dispatch(
     quotationSlice.actions.updateColWidthReducer({
       blockIndex,
@@ -65,12 +74,15 @@ export const onColumnResizeStop = ({
       boqColumnKey,
     }),
   )
+
   const itemWidth = headerColumnElement.closest(`.${cls.paper}`)?.clientWidth
+
   dispatch(
     quotationSlice.actions.updateBlockWidthReducer({
       blockIndex,
       width: itemWidth ?? 0,
     }),
   )
+
   dispatch(quotationSlice.actions.enableFroalaReducer({ blockIndex }))
 }
