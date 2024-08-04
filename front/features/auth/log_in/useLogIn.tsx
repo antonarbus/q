@@ -99,7 +99,7 @@ export const useLogIn = ({
         slideElement({
           element: modalRef.current,
           onSlideElementComplete: () => {
-            const navigateTo = location.state.navigateTo
+            const navigateTo = location.state?.navigateTo
 
             if (typeof navigateTo === 'string') {
               navigate(navigateTo)

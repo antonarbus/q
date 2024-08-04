@@ -1,16 +1,10 @@
 import React, { Suspense } from 'react'
 import { type RouteObject, createBrowserRouter } from 'react-router-dom'
-import { ActivationModal } from '@pages/auth/ActivationModal'
-import { LoginModal } from '@pages/auth/LoginModal'
-import { RegisterModal } from '@pages/auth/RegisterModal'
-import { RequestPasswordResetModal } from '@pages/auth/RequestPasswordResetModal'
-import { ResetPasswordModal } from '@pages/auth/ResetPasswordModal'
-import { UnauthorizedPage } from '@pages/auth/UnauthorizedPage'
-import { BookmarkModal } from '@pages/bookmark/bookmark_modal'
-import { ErrorPage } from '@pages/error'
-import { InfoModal } from '@pages/info/info_modal'
-import { QuotationModal } from '@pages/quotation/quotation_modal'
-import { SettingsModal } from '@pages/settings'
+import { BookmarkModal } from '@pages/bookmark_modal'
+import { ErrorPage } from '@pages/error_page'
+import { InfoModal } from '@pages/info_modal'
+import { QuotationModal } from '@pages/quotation_modal'
+import { SettingsModal } from '@pages/settings_modal'
 import { CopyModal } from '@widgets/copy_modal'
 import { Nav } from '@widgets/nav'
 import { AccessToken } from '@features/auth/get_access_token'
@@ -19,18 +13,20 @@ import { route } from '@shared/consts/route'
 import { Main } from '@shared/layouts'
 import { LoadingDotsOverlay } from '@shared/loading_dots_overlay'
 import { TopMsg } from '@shared/ui/top_msg'
+import { LoginModal } from '@pages/auth_login_modal'
+import { RegisterModal } from '@pages/auth_register_modal'
+import { RequestPasswordResetModal } from '@pages/auth_request_password_reset_modal'
+import { ActivationModal } from '@pages/auth_activation_modal'
+import { ResetPasswordModal } from '@pages/auth_reset_password_modal'
+import { UnauthorizedPage } from '@pages/auth_unauthorized_page'
 
 const Quotation = React.lazy(async () => {
-  return import('@pages/quotation/quotation_page')
+  return import('@pages/quotation_page')
 })
 
-const QuotationsTable = React.lazy(
-  async () => import('@pages/quotation/quotations_page'),
-)
+const QuotationsTable = React.lazy(async () => import('@pages/quotations_page'))
 
-const ItemsTable = React.lazy(
-  async () => import('@pages/bookmark/bookmarks_page'),
-)
+const ItemsTable = React.lazy(async () => import('@pages/bookmarks_page'))
 
 const authRoutes: RouteObject[] = [
   {

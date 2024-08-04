@@ -5,7 +5,7 @@ export { openQuotationModal } from './openQuotationModal'
 export { useFixScrollPositionOnModalOpen } from './useFixScrollPositionOnModalOpen'
 
 export type OpenQuotationModalNavigateState = {
-  navigatedFrom: string
-  navigateTo: string
-  scrollTop: number
-}
+  navigatedFrom?: string | null
+  navigateTo?: string | null
+  scrollTop?: number | null
+} | null

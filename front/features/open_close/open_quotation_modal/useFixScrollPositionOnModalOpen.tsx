@@ -7,6 +7,8 @@ export const useFixScrollPositionOnModalOpen = (): void => {
   const scrollTop = location.state.scrollTop
 
   useEffectOnce(() => {
-    document.body.scrollTop = scrollTop
+    if (scrollTop) {
+      document.body.scrollTop = scrollTop
+    }
   })
 }
