@@ -14,9 +14,8 @@ export const InfoModal = (): React.ReactNode => {
   const modalRef = useRef<HTMLDivElement>(null)
 
   const { id } = useParams()
-  if (!id) return null
 
-  const item = getFromStore({ id })
+  const item = getFromStore({ id: id ?? 'new' })
 
   if (!item) return null
 
