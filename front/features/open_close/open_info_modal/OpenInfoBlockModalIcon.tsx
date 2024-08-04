@@ -17,7 +17,7 @@ export const OpenInfoBlockModalIcon = (): ReactNode => {
         if (!item) return
         if (item.type === itemType.paste) return
 
-        navigate(`./${route.infoItem}/${item.id}`)
+        navigate(`./${route.info}/${item.id}`)
       }}
     />
   )

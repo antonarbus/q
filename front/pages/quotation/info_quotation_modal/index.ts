@@ -1,1 +1,0 @@
-export { InfoQuotationModal } from './InfoQuotationModal'

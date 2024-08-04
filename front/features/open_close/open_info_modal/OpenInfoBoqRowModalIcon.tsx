@@ -24,7 +24,7 @@ export const OpenInfoBoqRowModalIcon = (): ReactNode => {
         if (!boqRow) return
         if (boqRow.type === boqRowKey.paste) return
 
-        navigate(`./${route.infoItem}/${boqRow.id}`)
+        navigate(`./${route.info}/${boqRow.id}`)
       }}
     />
   )

@@ -27,7 +27,7 @@ type Res = {
   isError: UseMutationResult['isError']
 }
 
-export const useAddBookmark = ({
+export const useSaveBookmark = ({
   nameSignal,
   categorySignal,
   descSignal,

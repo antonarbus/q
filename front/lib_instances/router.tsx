@@ -9,7 +9,6 @@ import { UnauthorizedPage } from '@pages/auth/UnauthorizedPage'
 import { BookmarkModal } from '@pages/bookmark/bookmark_modal'
 import { ErrorPage } from '@pages/error'
 import { InfoModal } from '@pages/info/info_modal'
-import { InfoQuotationModal } from '@pages/quotation/info_quotation_modal'
 import { QuotationModal } from '@pages/quotation/quotation_modal'
 import { SettingsModal } from '@pages/settings'
 import { CopyModal } from '@widgets/copy_modal'
@@ -98,11 +97,11 @@ export const router = createBrowserRouter([
             element: <BookmarkModal />,
           },
           {
-            path: `${route.infoQuotation}/:id`,
-            element: <InfoQuotationModal />,
+            path: route.info,
+            element: <InfoModal />,
           },
           {
-            path: `${route.infoItem}/:id`,
+            path: `${route.info}/:id`,
             element: <InfoModal />,
           },
         ],

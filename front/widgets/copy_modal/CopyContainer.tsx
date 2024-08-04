@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { usePasteClick, useMovePasteText } from '@features/blocks/paste'
-import { PressEscIcon } from '@features/open_close/close_copy_container'
+import { PressEscIcon } from '@features/open_close/close_copy_modal'
 import { cursorPosSignal } from '@shared/utils/cursorPosSignal'
 import { FirstCopiedItem } from './FirstCopiedItem'
 import { RestOfCopiedItems } from './RestOfCopiedItems'

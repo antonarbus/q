@@ -1,1 +1,0 @@
-export { openQuotationInfoModal } from './openQuotationInfoModal'
