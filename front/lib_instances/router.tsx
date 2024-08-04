@@ -12,7 +12,7 @@ import { InfoModal } from '@pages/info/info_modal'
 import { InfoQuotationModal } from '@pages/quotation/info_quotation_modal'
 import { QuotationModal } from '@pages/quotation/quotation_modal'
 import { SettingsModal } from '@pages/settings'
-import { Copy } from '@widgets/copy'
+import { CopyModal } from '@widgets/copy_modal'
 import { Nav } from '@widgets/nav'
 import { AccessToken } from '@features/auth/get_access_token'
 import { Logout } from '@features/auth/log_out'
@@ -74,7 +74,7 @@ export const router = createBrowserRouter([
         <TopMsg />
         <LoadingDotsOverlay />
         <Nav />
-        <Copy />
+        <CopyModal />
         <Main />
       </>
     ),
