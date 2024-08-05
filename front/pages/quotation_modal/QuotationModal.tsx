@@ -22,6 +22,10 @@ export const QuotationModal = (): JSX.Element => {
   const modalRef = useRef<HTMLDivElement>(null)
   const { quotationFormValues } = useQuotationFormValues()
   useLoadInitValuesIntoQuotationModal({ quotationFormValues })
+
+  // todo: now the quotation is loaded in quotationSlice to show details for modal
+  // todo: it makes main quotation reload with prev version
+  // todo: issue should go away as we start to use different slice for it
   useLoadQuotationModalWithDirectLink({ quotationFormValues })
   const isButtonDisabled = useIsButtonDisabled({ quotationFormValues })
   const { onSubmit, isPending, isSuccess, isError } = useSaveQuotation({
