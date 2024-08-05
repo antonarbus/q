@@ -6,6 +6,7 @@ import {
   useRow,
   useStylesForResizableCell,
 } from '@entities/quotation'
+import { columnMinWidth } from '@entities/quotation/consts'
 
 export const NumberCell = (): JSX.Element => {
   const { blockIndex } = useBlock()
@@ -13,7 +14,7 @@ export const NumberCell = (): JSX.Element => {
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex,
     boqColumnKey: boqColumnKey.number,
-    minWidth: '30px',
+    minWidth: `${columnMinWidth.number}px`,
   })
 
   return (

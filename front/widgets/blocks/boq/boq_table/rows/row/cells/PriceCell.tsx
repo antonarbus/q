@@ -22,6 +22,7 @@ import {
   boqColumnKey,
   boqRowCellSx,
 } from '@entities/quotation'
+import { columnMinWidth } from '@entities/quotation/consts'
 
 export const PriceCell = (): JSX.Element => {
   const { blockIndex } = useBlock()
@@ -35,7 +36,7 @@ export const PriceCell = (): JSX.Element => {
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex,
     boqColumnKey: boqColumnKey.price,
-    minWidth: '100px',
+    minWidth: `${columnMinWidth.price}px`,
   })
 
   return (
