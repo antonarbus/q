@@ -11,17 +11,22 @@ type Props = {
 export const Blocks = ({ blocks }: Props): React.ReactNode => {
   if (blocks.length === 0) return null
 
+  const blocksCloned = structuredClone(blocks)
+  blocksCloned[1000] = null
+
   return (
     <FadeInOnInitLoad>
       <BlocksSortableContext>
         <AnimatePresence initial={false}>
-          {blocks.map((block, bockIndex) => (
-            <Block
-              key={block.id}
-              block={block}
-              blockIndex={bockIndex}
-            />
-          ))}
+          {blocksCloned
+            .filter((block) => Boolean(block))
+            .map((block, bockIndex) => (
+              <Block
+                key={block.id}
+                block={block}
+                blockIndex={bockIndex}
+              />
+            ))}
         </AnimatePresence>
       </BlocksSortableContext>
     </FadeInOnInitLoad>
