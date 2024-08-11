@@ -27,7 +27,7 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
   } = useGetBookmarkMutation()
 
   useEffectOnce(() => {
-    const firstBlock = getState().quotation.blocks.at(0)
+    const firstBlock = getState().quotation.blocks.at(1000)
     const isOpenedFromButton = Boolean(firstBlock)
     if (isOpenedFromButton) return
     if (!id) return
@@ -40,23 +40,12 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
       if (data.item.type !== itemType.boq) return
 
       dispatch(
-        quotationSlice.actions.loadQuotationReducer({
-          quotation: {
-            type: 'quotation',
-            id: 'edit-bookmark',
-            name: 'edit-bookmark',
-            category: 'edit-bookmark',
-            desc: 'edit-bookmark',
-            info: 'edit-bookmark',
-            email: 'edit-bookmark',
-            sharedWith: [],
-            preview: 'edit-bookmark',
-            blocks: [data.item],
-          },
+        quotationSlice.actions.loadBookmarkAtPosThousandReducer({
+          block: data.item,
         }),
       )
 
-      const firstBlock = getState().quotation.blocks.at(0)
+      const firstBlock = getState().quotation.blocks.at(1000)
 
       if (firstBlock) {
         nameSignal.value = firstBlock.name ?? ''

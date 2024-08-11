@@ -55,6 +55,12 @@ export const BookmarkBlockIcon = (): ReactNode => {
           }),
         )
 
+        dispatch(
+          quotationSlice.actions.loadBookmarkAtPosThousandReducer({
+            block: item,
+          }),
+        )
+
         navigate(`./${route.bookmark}/${item.id}`)
       }}
     />

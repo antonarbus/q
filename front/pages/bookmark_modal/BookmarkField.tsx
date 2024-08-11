@@ -16,18 +16,16 @@ export const BookmarkField = (): React.ReactNode => {
     isFroalaSignal.value = true
   })
 
-  if (blocks.length === 0) return null
+  const bookmarkBlock = blocks.at(1000)
 
-  const firstBlock = blocks[0]
-
-  if (firstBlock === undefined) return null
+  if (!bookmarkBlock) return null
 
   return (
     <BookmarkFieldLayout>
       <AnimatePresence initial={false}>
         <Block
-          block={firstBlock}
-          blockIndex={0}
+          block={bookmarkBlock}
+          blockIndex={1000}
         />
       </AnimatePresence>
     </BookmarkFieldLayout>

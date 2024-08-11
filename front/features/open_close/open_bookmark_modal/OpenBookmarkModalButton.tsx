@@ -32,20 +32,7 @@ export const OpenBookmarkModalButton = ({ id }: ReqBody): JSX.Element => {
       isFroalaSignal.value = false
 
       dispatch(
-        quotationSlice.actions.loadQuotationReducer({
-          quotation: {
-            type: 'quotation',
-            id: 'edit-bookmark',
-            name: 'edit-bookmark',
-            category: 'edit-bookmark',
-            desc: 'edit-bookmark',
-            info: 'edit-bookmark',
-            email: 'edit-bookmark',
-            sharedWith: [],
-            preview: 'edit-bookmark',
-            blocks: [block],
-          },
-        }),
+        quotationSlice.actions.loadBookmarkAtPosThousandReducer({ block }),
       )
 
       navigate(`./${id}`)

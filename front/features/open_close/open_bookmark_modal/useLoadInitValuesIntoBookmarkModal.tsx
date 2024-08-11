@@ -16,13 +16,13 @@ export const useLoadInitValuesIntoBookmarkModal = ({
   infoSignal,
 }: Props): void => {
   useEffectOnce(() => {
-    const firstBlock = getState().quotation.blocks.at(0)
+    const bookmark = getState().quotation.blocks.at(1000)
 
-    if (firstBlock) {
-      nameSignal.value = firstBlock.name ?? ''
-      categorySignal.value = firstBlock.category ?? ''
-      descSignal.value = firstBlock.desc ?? ''
-      infoSignal.value = firstBlock.info ?? ''
+    if (bookmark) {
+      nameSignal.value = bookmark.name ?? ''
+      categorySignal.value = bookmark.category ?? ''
+      descSignal.value = bookmark.desc ?? ''
+      infoSignal.value = bookmark.info ?? ''
     }
   })
 }

@@ -12,6 +12,9 @@ import {
   useLoadInitValuesIntoBookmarkModal,
   useLoadBookmarkModalOpenedWithDirectLink,
 } from '@features/open_close/open_bookmark_modal'
+import { useUnmount } from 'react-use'
+import { quotationSlice } from '@entities/quotation'
+import { dispatch } from '@lib_instances/store'
 
 export const BookmarkModal = (): JSX.Element => {
   const modalRef = useRef<HTMLDivElement>(null)
@@ -41,6 +44,10 @@ export const BookmarkModal = (): JSX.Element => {
     categorySignal,
     descSignal,
     infoSignal,
+  })
+
+  useUnmount(() => {
+    dispatch(quotationSlice.actions.removeBookmarkReducer())
   })
 
   return (

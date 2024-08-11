@@ -11,6 +11,8 @@ import { hideBoqRowCellPinReducer } from './reducers/hideBoqRowCellPinReducer'
 import { insertPasteBoqRowReducer } from './reducers/insertPasteBoqRowReducer'
 import { insertPasteBlockReducer } from './reducers/insertPasteBlockReducer'
 import { loadQuotationReducer } from './reducers/loadItemsReducer'
+import { loadBookmarkAtPosThousandReducer } from './reducers/loadBookmarkAtPosThousandReducer'
+import { removeBookmarkReducer } from './reducers/removeBookmarkReducer'
 import { pasteItemReducer } from './reducers/pasteItemReducer'
 import { pinItemPriceReducer } from './reducers/pinItemPriceReducer'
 import { pinPriceReducer } from './reducers/pinPriceReducer'
@@ -49,6 +51,8 @@ export const quotationSlice = createSlice({
   initialState,
   reducers: {
     loadQuotationReducer,
+    loadBookmarkAtPosThousandReducer,
+    removeBookmarkReducer,
     resetQuotationReducer: () => initialState,
     deleteBoqRowReducer,
     deleteBlockReducer,

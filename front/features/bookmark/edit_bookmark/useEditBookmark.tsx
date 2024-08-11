@@ -106,7 +106,7 @@ export const useEditBookmark = ({
       return
     }
 
-    const block = getState().quotation.blocks.at(0)
+    const block = getState().quotation.blocks.at(1000)
 
     if (!block) {
       notify({ msg: 'No item loaded', type: 'warn', theme: 'light' })
