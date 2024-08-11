@@ -5,7 +5,7 @@ import { Block } from './Block'
 import { BlocksSortableContext } from './BlocksSortableContext'
 
 type Props = {
-  blocks: BlockType[]
+  blocks: (BlockType | null)[]
 }
 
 export const Blocks = ({ blocks }: Props): React.ReactNode => {
@@ -19,7 +19,7 @@ export const Blocks = ({ blocks }: Props): React.ReactNode => {
       <BlocksSortableContext>
         <AnimatePresence initial={false}>
           {blocksCloned
-            .filter((block) => Boolean(block))
+            .filter((block) => block !== null)
             .map((block, bockIndex) => (
               <Block
                 key={block.id}
