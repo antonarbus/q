@@ -19,10 +19,10 @@ export const FadeInOnInitLoad = ({ children }: Props): JSX.Element => {
         delay: 0.7, // to show "Q" logo on init load to avoid some jumps
       }}
       style={{
-        display: 'inline-flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
+        // display: 'inline-flex',
+        // flexDirection: 'column',
+        // justifyContent: 'center',
+        // alignItems: 'center',
         maxWidth: '100%',
         padding: '20px 10px',
       }}

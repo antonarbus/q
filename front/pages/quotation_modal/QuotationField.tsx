@@ -3,7 +3,7 @@ import { useEffectOnce } from 'react-use'
 import { Blocks } from '@widgets/blocks'
 import { isFroalaSignal } from '@entities/quotation'
 import { OutlinedDivWithLabel } from '@shared/components'
-import { getState } from '@lib_instances/store'
+import { getState, useSelectorTyped } from '@lib_instances/store'
 
 type Props = {
   children: React.ReactNode
@@ -12,6 +12,15 @@ type Props = {
 const QuotationFieldLayout = ({ children }: Props): JSX.Element => {
   useEffectOnce(() => {
     isFroalaSignal.value = true
+  })
+
+  const maxBlockWidth = useSelectorTyped((state) => {
+    const maxWidth = state.quotation.blocks.reduce((accumulator, block) => {
+      if ((block.width ?? 0) > accumulator) return block.width ?? 0
+      return accumulator
+    }, 600)
+
+    return maxWidth
   })
 
   return (
@@ -29,7 +38,7 @@ const QuotationFieldLayout = ({ children }: Props): JSX.Element => {
       >
         <Box
           sx={{
-            width: '2000px',
+            width: `${maxBlockWidth + 200}px`,
           }}
         >
           {children}
