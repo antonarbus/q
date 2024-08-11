@@ -27,7 +27,7 @@ export const formatRowBlockCellNumber = ({
     }
   }
 
-  const block = getState().quotation.blocks[0]
+  const block = getState().quotation.blocks[1000]
   if (block?.type !== itemType.row) {
     return {
       didUpdate: false,

@@ -22,7 +22,7 @@ export const updateItemPriceCell = ({
     html: itemPriceCellEditorRef.current.html.get(),
   })
 
-  const block = getState().quotation.blocks[0]
+  const block = getState().quotation.blocks[1000]
   if (block?.type !== itemType.row) return
 
   const row = block

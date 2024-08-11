@@ -15,7 +15,7 @@ import { formatPriceCell } from '@features/blocks/cell/update_cell/row_block_cel
 export const PriceCell = (): JSX.Element => {
   const { priceCellEditorRef, itemPriceCellEditorRef } = useRow()
   const { stylesForResizableCell } = useStylesForResizableCell({
-    blockIndex: 0,
+    blockIndex: 1000,
     boqColumnKey: boqColumnKey.price,
     minWidth: '100px',
   })

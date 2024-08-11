@@ -12,7 +12,7 @@ export const updateRowBlockCellReducer = (
 ): void => {
   const { html, value, boqRowCellKey } = action.payload
 
-  const block = state.blocks[0]
+  const block = state.blocks[1000]
 
   if (!block) return
 

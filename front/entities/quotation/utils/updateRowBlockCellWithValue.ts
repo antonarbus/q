@@ -23,7 +23,7 @@ export const updateRowBlockCellWithValue = ({
 }: Props): void => {
   if (editor === null) return
 
-  const block = getState().quotation.blocks[0]
+  const block = getState().quotation.blocks[1000]
   if (block?.type !== itemType.row) return
 
   const row = block

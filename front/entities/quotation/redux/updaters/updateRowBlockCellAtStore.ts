@@ -17,7 +17,7 @@ export const updateRowBlockCellAtStore = ({
   html,
   boqRowCellKey,
 }: Props): Res => {
-  const block = getState().quotation.blocks[0]
+  const block = getState().quotation.blocks[1000]
 
   if (block?.type !== itemType.row) {
     return {

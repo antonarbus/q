@@ -7,7 +7,7 @@ type Props = {
 }
 
 export const getRowCellHtmlFromStore = ({ boqRowCellKey }: Props): string => {
-  const block = getState().quotation.blocks[0]
+  const block = getState().quotation.blocks[1000]
 
   if (block?.type !== itemType.row) return ''
 

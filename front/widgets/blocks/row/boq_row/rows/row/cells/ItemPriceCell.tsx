@@ -15,7 +15,7 @@ import { formatItemPriceCell } from '@features/blocks/cell/update_cell/row_block
 export const ItemPriceCell = (): JSX.Element => {
   const { itemPriceCellEditorRef, priceCellEditorRef } = useRow()
   const { stylesForResizableCell } = useStylesForResizableCell({
-    blockIndex: 0,
+    blockIndex: 1000,
     boqColumnKey: boqColumnKey.itemPrice,
     minWidth: '100px',
   })
@@ -23,8 +23,8 @@ export const ItemPriceCell = (): JSX.Element => {
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>
       <Froala
-        className={`td ${boqRowCellKey.itemPrice}`}
         editorRef={itemPriceCellEditorRef}
+        className={`td ${boqRowCellKey.itemPrice}`}
         placeholder='Item price...'
         wrapperStyles={stylesForResizableCell}
         style={boqRowCellStyle}

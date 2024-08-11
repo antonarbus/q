@@ -13,7 +13,7 @@ import { updateDescriptionCell } from '@features/blocks/cell/update_cell/row_blo
 export const DescriptionCell = (): JSX.Element => {
   const { descriptionEditorRef } = useRow()
   const { stylesForResizableCell } = useStylesForResizableCell({
-    blockIndex: 0,
+    blockIndex: 1000,
     boqColumnKey: boqColumnKey.description,
     minWidth: '200px',
   })
