@@ -19,7 +19,7 @@ export const useUpdateItemInfo = ({
 }: Props): void => {
   useSignalEffect(() => {
     dispatch(
-      quotationSlice.actions.updateItemInfoByIdReducer({
+      quotationSlice.actions.updateItemInfoReducer({
         id,
         name: nameSignal.value,
         category: categorySignal.value,

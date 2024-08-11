@@ -12,11 +12,8 @@ import {
   useLoadInitValuesIntoBookmarkModal,
   useLoadBookmarkModalOpenedWithDirectLink,
 } from '@features/open_close/open_bookmark_modal'
-import { useLocation } from 'react-router-dom'
-import { route } from '@shared/consts/route'
 
 export const BookmarkModal = (): JSX.Element => {
-  const { pathname } = useLocation()
   const modalRef = useRef<HTMLDivElement>(null)
 
   const nameSignal = useSignal('')
@@ -64,7 +61,7 @@ export const BookmarkModal = (): JSX.Element => {
       <CategoryField categorySignal={categorySignal} />
       <DescriptionField descSignal={descSignal} />
       <InfoField infoSignal={infoSignal} />
-      {pathname.includes(route.bookmarks) && <BookmarkField />}
+      <BookmarkField />
     </FormModal>
   )
 }

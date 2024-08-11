@@ -83,8 +83,8 @@ export const quotationSlice = createSlice({
     fixImagesHeightReducer,
     unfixImagesHeightReducer,
     updateQuotationInfoReducer,
-    updateItemInfoByIdReducer: updateItemInfoReducer,
-    updateItemPreviewByIdReducer: updateItemPreviewReducer,
+    updateItemInfoReducer,
+    updateItemPreviewReducer,
   },
 })
 

@@ -49,7 +49,7 @@ export const BookmarkBlockIcon = (): ReactNode => {
         if (item.type === itemType.paste) return
 
         dispatch(
-          quotationSlice.actions.updateItemPreviewByIdReducer({
+          quotationSlice.actions.updateItemPreviewReducer({
             id: item.id,
             preview: cleanedHtml,
           }),

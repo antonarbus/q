@@ -56,7 +56,7 @@ export const BookmarkBoqRowIcon = (): ReactNode => {
         if (boqRow.type === boqRowKey.paste) return
 
         dispatch(
-          quotationSlice.actions.updateItemPreviewByIdReducer({
+          quotationSlice.actions.updateItemPreviewReducer({
             id: boqRow.id,
             preview: cleanedHtml,
           }),
