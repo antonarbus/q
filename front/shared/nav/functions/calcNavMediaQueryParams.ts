@@ -46,9 +46,11 @@ export const calcNavMediaQueryParams = (
     }
 
     let i = 0
+
     while (!isOverflown({ element: logo })) {
       shrinkElementSlightly(nav)
       i++
+
       if (i > 1000) {
         console.error(
           'Problem! Over 1000 iterations in calcNavWidthWhenLogoIsOverlay() function',

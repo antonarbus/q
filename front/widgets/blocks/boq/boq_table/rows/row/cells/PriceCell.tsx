@@ -21,8 +21,8 @@ import {
   boqRowCellKey,
   boqColumnKey,
   boqRowCellSx,
+  columnMinWidth,
 } from '@entities/quotation'
-import { columnMinWidth } from '@entities/quotation/consts'
 
 export const PriceCell = (): JSX.Element => {
   const { blockIndex } = useBlock()

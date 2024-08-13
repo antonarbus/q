@@ -10,8 +10,8 @@ import {
   boqRowCellStyle,
   boqRowCellKey,
   boqColumnKey,
+  columnMinWidth,
 } from '@entities/quotation'
-import { columnMinWidth } from '@entities/quotation/consts'
 
 export const DescriptionCell = (): JSX.Element => {
   const { blockIndex } = useBlock()

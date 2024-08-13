@@ -1,5 +1,9 @@
 import { useGetBookmarkMutation } from '@entities/bookmark'
-import { itemType, quotationSlice } from '@entities/quotation'
+import {
+  bookmarkPosAtBlocks,
+  itemType,
+  quotationSlice,
+} from '@entities/quotation'
 import { dispatch, getState } from '@lib_instances/store'
 import { useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
@@ -27,8 +31,9 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
   } = useGetBookmarkMutation()
 
   useEffectOnce(() => {
-    const firstBlock = getState().quotation.blocks.at(1000)
+    const firstBlock = getState().quotation.blocks.at(bookmarkPosAtBlocks)
     const isOpenedFromButton = Boolean(firstBlock)
+
     if (isOpenedFromButton) return
     if (!id) return
 
@@ -45,7 +50,7 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
         }),
       )
 
-      const firstBlock = getState().quotation.blocks.at(1000)
+      const firstBlock = getState().quotation.blocks.at(bookmarkPosAtBlocks)
 
       if (firstBlock) {
         nameSignal.value = firstBlock.name ?? ''

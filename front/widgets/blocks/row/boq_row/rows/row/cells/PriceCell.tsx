@@ -8,6 +8,7 @@ import {
   boqColumnKey,
   boqRowCellSx,
   getRowCellHtmlFromStore,
+  bookmarkPosAtBlocks,
 } from '@entities/quotation'
 import { updatePriceCell } from '@features/blocks/cell/update_cell/row_block_cells/price/updatePriceCell'
 import { formatPriceCell } from '@features/blocks/cell/update_cell/row_block_cells/price/formatPriceCell'
@@ -15,7 +16,7 @@ import { formatPriceCell } from '@features/blocks/cell/update_cell/row_block_cel
 export const PriceCell = (): JSX.Element => {
   const { priceCellEditorRef, itemPriceCellEditorRef } = useRow()
   const { stylesForResizableCell } = useStylesForResizableCell({
-    blockIndex: 1000,
+    blockIndex: bookmarkPosAtBlocks,
     boqColumnKey: boqColumnKey.price,
     minWidth: '100px',
   })

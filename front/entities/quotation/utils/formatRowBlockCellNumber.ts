@@ -5,6 +5,7 @@ import { getStringWithNewFormattedNumber } from '@shared/utils'
 import { quotationSlice } from '../redux/quotationSlice'
 import type { BoqRowCellKey } from '../types'
 import { itemType } from '../consts/itemType'
+import { bookmarkPosAtBlocks } from '../consts/bookmarkPosAtBlocks'
 
 type Props = {
   boqRowCellKey: BoqRowCellKey
@@ -27,7 +28,7 @@ export const formatRowBlockCellNumber = ({
     }
   }
 
-  const block = getState().quotation.blocks[1000]
+  const block = getState().quotation.blocks[bookmarkPosAtBlocks]
   if (block?.type !== itemType.row) {
     return {
       didUpdate: false,

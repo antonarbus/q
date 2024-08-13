@@ -1,5 +1,8 @@
 import { AnimatePresence } from 'framer-motion'
-import type { Block as BlockType } from '@entities/quotation'
+import {
+  bookmarkPosAtBlocks,
+  type Block as BlockType,
+} from '@entities/quotation'
 import { FadeInOnInitLoad } from './FadeInOnInitLoad'
 import { Block } from './Block'
 import { BlocksSortableContext } from './BlocksSortableContext'
@@ -12,7 +15,7 @@ export const Blocks = ({ blocks }: Props): React.ReactNode => {
   if (blocks.length === 0) return null
 
   const blocksCloned = structuredClone(blocks)
-  blocksCloned[1000] = null
+  blocksCloned[bookmarkPosAtBlocks] = null
 
   return (
     <FadeInOnInitLoad>

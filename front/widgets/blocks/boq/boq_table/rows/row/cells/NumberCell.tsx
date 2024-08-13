@@ -5,8 +5,8 @@ import {
   useBlock,
   useRow,
   useStylesForResizableCell,
+  columnMinWidth,
 } from '@entities/quotation'
-import { columnMinWidth } from '@entities/quotation/consts'
 
 export const NumberCell = (): JSX.Element => {
   const { blockIndex } = useBlock()

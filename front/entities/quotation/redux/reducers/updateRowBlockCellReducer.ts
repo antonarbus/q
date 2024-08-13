@@ -1,6 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { itemType } from '../../consts/itemType'
 import type { BoqRowCellKey, Quotation } from '../../types'
+import { bookmarkPosAtBlocks } from '@entities/quotation/consts/bookmarkPosAtBlocks'
 
 export const updateRowBlockCellReducer = (
   state: Quotation,
@@ -12,7 +13,7 @@ export const updateRowBlockCellReducer = (
 ): void => {
   const { html, value, boqRowCellKey } = action.payload
 
-  const block = state.blocks[1000]
+  const block = state.blocks[bookmarkPosAtBlocks]
 
   if (!block) return
 

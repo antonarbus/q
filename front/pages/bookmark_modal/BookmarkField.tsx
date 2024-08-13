@@ -2,7 +2,7 @@ import { useSelectorTyped } from '@lib_instances/store'
 import { AnimatePresence } from 'framer-motion'
 import { useEffectOnce } from 'react-use'
 import { Block } from '@widgets/blocks/Block'
-import { isFroalaSignal } from '@entities/quotation'
+import { bookmarkPosAtBlocks, isFroalaSignal } from '@entities/quotation'
 import { arrayShapesEqualityFn } from '@shared/lib/redux/arrayShapesEqualityFn'
 import { BookmarkFieldLayout } from './BookmarkFieldLayout'
 
@@ -16,7 +16,7 @@ export const BookmarkField = (): React.ReactNode => {
     isFroalaSignal.value = true
   })
 
-  const bookmarkBlock = blocks.at(1000)
+  const bookmarkBlock = blocks.at(bookmarkPosAtBlocks)
 
   if (!bookmarkBlock) return null
 
@@ -25,7 +25,7 @@ export const BookmarkField = (): React.ReactNode => {
       <AnimatePresence initial={false}>
         <Block
           block={bookmarkBlock}
-          blockIndex={1000}
+          blockIndex={bookmarkPosAtBlocks}
         />
       </AnimatePresence>
     </BookmarkFieldLayout>

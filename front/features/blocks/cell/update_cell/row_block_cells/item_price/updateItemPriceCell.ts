@@ -1,7 +1,11 @@
 import type FroalaEditor from 'froala-editor'
 import type { MutableRefObject } from 'react'
 import { roundTo } from 'round-to'
-import { boqRowCellKey, itemType } from '@entities/quotation'
+import {
+  bookmarkPosAtBlocks,
+  boqRowCellKey,
+  itemType,
+} from '@entities/quotation'
 import { updateRowBlockCellAtStore } from '@entities/quotation/redux/updaters/updateRowBlockCellAtStore'
 import { getState } from '@lib_instances/store'
 import { updateRowBlockCellWithValue } from '@entities/quotation/utils/updateRowBlockCellWithValue'
@@ -22,7 +26,7 @@ export const updateItemPriceCell = ({
     html: itemPriceCellEditorRef.current.html.get(),
   })
 
-  const block = getState().quotation.blocks[1000]
+  const block = getState().quotation.blocks[bookmarkPosAtBlocks]
   if (block?.type !== itemType.row) return
 
   const row = block

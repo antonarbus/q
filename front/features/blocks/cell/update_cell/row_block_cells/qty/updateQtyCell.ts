@@ -1,5 +1,9 @@
 import { roundTo } from 'round-to'
-import { boqRowCellKey, itemType } from '@entities/quotation'
+import {
+  bookmarkPosAtBlocks,
+  boqRowCellKey,
+  itemType,
+} from '@entities/quotation'
 import type { FroalaEditorRef } from '@shared/types/froala'
 import { updateRowBlockCellAtStore } from '@entities/quotation/redux/updaters/updateRowBlockCellAtStore'
 import { getState } from '@lib_instances/store'
@@ -21,7 +25,7 @@ export const updateQtyCell = ({
     html: qtyCellEditorRef.current.html.get(),
   })
 
-  const block = getState().quotation.blocks[1000]
+  const block = getState().quotation.blocks[bookmarkPosAtBlocks]
   if (block?.type !== itemType.row) return
 
   const row = block

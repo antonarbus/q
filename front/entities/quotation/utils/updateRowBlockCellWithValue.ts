@@ -9,6 +9,7 @@ import type { BoqRowCellKey } from '../types'
 import { getState } from '@lib_instances/store'
 import { itemType } from '../consts/itemType'
 import { updateRowBlockCellAtStore } from '../redux/updaters/updateRowBlockCellAtStore'
+import { bookmarkPosAtBlocks } from '../consts/bookmarkPosAtBlocks'
 
 type Props = {
   editor: FroalaEditor | null
@@ -23,7 +24,7 @@ export const updateRowBlockCellWithValue = ({
 }: Props): void => {
   if (editor === null) return
 
-  const block = getState().quotation.blocks[1000]
+  const block = getState().quotation.blocks[bookmarkPosAtBlocks]
   if (block?.type !== itemType.row) return
 
   const row = block

@@ -9,7 +9,10 @@ import {
   useGetBookmarksQuery,
   useSaveBookmarkMutation,
 } from '@entities/bookmark'
-import { saveBlockHeightByIndex } from '@entities/quotation'
+import {
+  bookmarkPosAtBlocks,
+  saveBlockHeightByIndex,
+} from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { notify } from '@shared/ui/top_msg'
 import { cleanHtml } from '@shared/utils/itemsUtils'
@@ -106,7 +109,7 @@ export const useEditBookmark = ({
       return
     }
 
-    const block = getState().quotation.blocks.at(1000)
+    const block = getState().quotation.blocks.at(bookmarkPosAtBlocks)
 
     if (!block) {
       notify({ msg: 'No item loaded', type: 'warn', theme: 'light' })

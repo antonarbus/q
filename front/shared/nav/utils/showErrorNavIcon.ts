@@ -11,6 +11,7 @@ export const showErrorNavIcon = ({ navMenuItemIdKey }: Props): void => {
     dispatch(navSlice.actions.hideLoadingIcon({ navMenuItemIdKey }))
     dispatch(navSlice.actions.showErrorIcon({ navMenuItemIdKey }))
   }, 1000)
+
   setTimeout(() => {
     dispatch(navSlice.actions.hideErrorIcon({ navMenuItemIdKey }))
   }, 3000)

@@ -11,6 +11,7 @@ export const showSuccessNavIcon = ({ navMenuItemIdKey }: Props): void => {
     dispatch(navSlice.actions.hideLoadingIcon({ navMenuItemIdKey }))
     dispatch(navSlice.actions.showSuccessIcon({ navMenuItemIdKey }))
   }, 1000)
+
   setTimeout(() => {
     dispatch(navSlice.actions.hideSuccessIcon({ navMenuItemIdKey }))
   }, 3000)

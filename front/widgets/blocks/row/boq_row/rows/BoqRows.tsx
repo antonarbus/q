@@ -1,10 +1,10 @@
-import { getState, useSelectorTyped } from '@lib_instances/store'
+import { getState } from '@lib_instances/store'
 import { hideBoqRowPinsOnRowBlur } from '@features/blocks/cell/pin'
-import { RowProvider } from '@entities/quotation'
+import { bookmarkPosAtBlocks, RowProvider } from '@entities/quotation'
 import { BoqRow } from './row/BoqRow'
 
 export const BoqRows = (): React.ReactNode => {
-  const block = getState().quotation.blocks[1000]
+  const block = getState().quotation.blocks[bookmarkPosAtBlocks]
 
   if (block?.type !== 'row') return null
 
@@ -16,7 +16,11 @@ export const BoqRows = (): React.ReactNode => {
     >
       <BoqRow
         onBlur={(e) => {
-          hideBoqRowPinsOnRowBlur({ e, blockIndex: 1000, rowIndex: 0 })
+          hideBoqRowPinsOnRowBlur({
+            e,
+            blockIndex: bookmarkPosAtBlocks,
+            rowIndex: 0,
+          })
         }}
       />
     </RowProvider>

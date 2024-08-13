@@ -16,8 +16,8 @@ import {
   boqColumnKey,
   boqRowCellKey,
   boqRowCellSx,
+  columnMinWidth,
 } from '@entities/quotation'
-import { columnMinWidth } from '@entities/quotation/consts'
 
 export const QtyCell = (): JSX.Element => {
   const { blockIndex } = useBlock()

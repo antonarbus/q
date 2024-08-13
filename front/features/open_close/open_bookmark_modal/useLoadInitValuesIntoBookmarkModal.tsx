@@ -1,6 +1,7 @@
 import { getState } from '@lib_instances/store'
 import { useEffectOnce } from 'react-use'
 import type { Signal } from '@preact/signals-react'
+import { bookmarkPosAtBlocks } from '@entities/quotation'
 
 type Props = {
   nameSignal: Signal<string>
@@ -16,7 +17,7 @@ export const useLoadInitValuesIntoBookmarkModal = ({
   infoSignal,
 }: Props): void => {
   useEffectOnce(() => {
-    const bookmark = getState().quotation.blocks.at(1000)
+    const bookmark = getState().quotation.blocks.at(bookmarkPosAtBlocks)
 
     if (bookmark) {
       nameSignal.value = bookmark.name ?? ''
