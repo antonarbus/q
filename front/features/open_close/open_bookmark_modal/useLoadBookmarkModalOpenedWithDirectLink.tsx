@@ -45,7 +45,7 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
       if (data.item.type !== itemType.boq) return
 
       dispatch(
-        quotationSlice.actions.loadBookmarkAtPosThousandReducer({
+        quotationSlice.actions.loadBlockAtPosThousandReducer({
           block: data.item,
         }),
       )

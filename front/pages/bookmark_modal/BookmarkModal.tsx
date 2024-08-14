@@ -47,7 +47,7 @@ export const BookmarkModal = (): JSX.Element => {
   })
 
   useUnmount(() => {
-    dispatch(quotationSlice.actions.removeBookmarkReducer())
+    dispatch(quotationSlice.actions.removeBlockFromPosThousandReducer())
   })
 
   return (

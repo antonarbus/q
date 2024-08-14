@@ -56,7 +56,7 @@ export const BookmarkBlockIcon = (): ReactNode => {
         )
 
         dispatch(
-          quotationSlice.actions.loadBookmarkAtPosThousandReducer({
+          quotationSlice.actions.loadBlockAtPosThousandReducer({
             block: item,
           }),
         )

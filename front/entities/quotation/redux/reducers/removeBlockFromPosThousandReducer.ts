@@ -3,7 +3,7 @@ import type { Quotation } from '../../types'
 
 type Reducer = (state: Quotation) => void
 
-export const removeBookmarkReducer: Reducer = (state) => {
+export const removeBlockFromPosThousandReducer: Reducer = (state) => {
   //@ts-expect-error: it is a hack
   state.blocks[bookmarkPosAtBlocks] = null
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
