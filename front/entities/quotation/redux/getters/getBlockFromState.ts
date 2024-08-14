@@ -1,4 +1,4 @@
-import type { Quotation, Block } from '../../types'
+import type { Quotation, Item } from '../../types'
 
 type Props = {
   blockIndex: number
@@ -8,7 +8,7 @@ type Props = {
 export const getBlockFromState = ({
   blockIndex,
   state,
-}: Props): Block | undefined => {
+}: Props): Item | undefined => {
   const block = state.blocks[blockIndex]
   return block
 }

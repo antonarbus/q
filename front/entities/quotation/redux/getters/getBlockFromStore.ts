@@ -1,11 +1,11 @@
 import { getState } from '@lib_instances/store'
-import type { Block } from '../../types'
+import type { Item } from '../../types'
 
 type Props = {
   blockIndex: number
 }
 
-export const getBlockFromStore = ({ blockIndex }: Props): Block | undefined => {
+export const getBlockFromStore = ({ blockIndex }: Props): Item | undefined => {
   const block = getState().quotation.blocks[blockIndex]
 
   if (block === undefined) return

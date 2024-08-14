@@ -114,7 +114,7 @@ export type PasteBlock = Common & {
   type: typeof itemType.paste
 }
 
-export type Block = BoqBlock | PasteBlock | TextBlock | PriceBlock | RowBlock
+export type Item = BoqBlock | PasteBlock | TextBlock | PriceBlock | RowBlock
 
 // quotation
 export type Quotation = Common & {
@@ -133,11 +133,11 @@ export type Quotation = Common & {
     name?: string
     company?: string
   }
-  blocks: Block[]
+  blocks: Item[]
 }
 
 // item
-export type Item = Quotation | Block | BoqRow
+// export type Item = Quotation | Block | BoqRow
 
 export type QuotationFormValues = {
   nameSignal: Signal<string>

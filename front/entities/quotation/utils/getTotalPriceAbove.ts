@@ -1,9 +1,9 @@
 import { itemType } from '../consts/itemType'
-import type { BoqBlock, Block } from '../types'
+import type { BoqBlock, Item } from '../types'
 
 type Props = {
   blockIndex: number
-  blocks: Block[]
+  blocks: Item[]
 }
 
 export const getTotalPriceAbove = ({ blockIndex, blocks }: Props): number => {

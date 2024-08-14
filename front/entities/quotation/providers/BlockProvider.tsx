@@ -1,10 +1,10 @@
 import { createContext, useContext, type ReactNode } from 'react'
-import type { Block } from '../types'
+import type { Item } from '../types'
 
 type Context = {
   blockIndex: number
   id: string
-  block: Block
+  block: Item
 }
 
 type Props = Context & {

@@ -115,7 +115,7 @@ export type {
   TextBlock,
   BoqBlock,
   PriceBlock,
-  Block,
+  Item as Block,
   BoqCols,
   Item,
   Quotation,

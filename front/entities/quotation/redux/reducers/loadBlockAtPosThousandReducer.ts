@@ -1,9 +1,9 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { Block, Quotation } from '../../types'
+import type { Item, Quotation } from '../../types'
 import { bookmarkPosAtBlocks } from '@entities/quotation/consts/bookmarkPosAtBlocks'
 
 type Payload = {
-  block: Block
+  block: Item
 }
 
 type Reducer = (state: Quotation, action: PayloadAction<Payload>) => void

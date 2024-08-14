@@ -1,10 +1,10 @@
-import type { Block, BoqRow } from '../../types'
+import type { Item, BoqRow } from '../../types'
 import { getBoqBlockFromStore } from './getBoqBlockFromStore'
 
 type Props = {
   blockIndex: number
   rowIndex: number
-  state?: Block[]
+  state?: Item[]
 }
 
 export const getBoqRowFromStore = ({
