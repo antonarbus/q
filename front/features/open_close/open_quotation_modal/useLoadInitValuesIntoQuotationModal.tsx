@@ -17,10 +17,8 @@ export const useLoadInitValuesIntoQuotationModal = ({
     quotationFormValues.categorySignal.value = quotation.category ?? ''
     quotationFormValues.descSignal.value = quotation.desc ?? ''
     quotationFormValues.infoSignal.value = quotation.info ?? ''
-    quotationFormValues.shareWithOptionSignal.value =
-      getWhoQuotationSharedWithOption({
-        quotation,
-      })
     quotationFormValues.sharedWithSignal.value = quotation.sharedWith ?? []
+    quotationFormValues.shareWithOptionSignal.value =
+      getWhoQuotationSharedWithOption({ quotation })
   })
 }
