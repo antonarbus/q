@@ -15,7 +15,6 @@ import { BackdropWithSlidableModal } from './BackdropWithSlidableModal'
 import { ButtonCustom } from './ButtonCustom'
 
 type Props = {
-  onSlideModalInComplete?: () => void
   width?: React.CSSProperties['width']
   paddingContent?: React.CSSProperties['width']
   sx?: SxProps
@@ -34,7 +33,6 @@ type Props = {
 }
 
 export const FormModal = ({
-  onSlideModalInComplete,
   width,
   sx,
   headerIcon,
@@ -55,7 +53,6 @@ export const FormModal = ({
 
   return (
     <BackdropWithSlidableModal
-      onMount={onSlideModalInComplete}
       onUnmount={() => {
         if (onCloseSlideModalOutAndNavigateUp === true) {
           navigate('..')
