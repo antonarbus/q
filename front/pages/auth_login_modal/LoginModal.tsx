@@ -18,6 +18,8 @@ export const LoginModal = (): JSX.Element => {
     passwordSignal,
     modalRef,
   })
+  const isButtonDisabled =
+    !isEmailOkSignal.value || passwordSignal.value === '' || isPending
 
   return (
     <FormModal
@@ -27,9 +29,7 @@ export const LoginModal = (): JSX.Element => {
       headerText='Log in'
       headerIcon={<LoginRounded />}
       buttonText='LOG IN'
-      isButtonDisabled={
-        !isEmailOkSignal.value || passwordSignal.value === '' || isPending
-      }
+      isButtonDisabled={isButtonDisabled}
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
       isButtonError={isError}

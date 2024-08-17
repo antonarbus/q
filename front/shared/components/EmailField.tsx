@@ -102,7 +102,7 @@ export const EmailField = ({
         <div
           style={{
             position: 'absolute',
-            bottom: '18px',
+            bottom: '-17px',
             right: '5px',
             fontSize: '12px',
             color: theme.colors.red,
