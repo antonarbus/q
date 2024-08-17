@@ -16,7 +16,6 @@ import { ButtonCustom } from './ButtonCustom'
 
 type Props = {
   onSlideModalInComplete?: () => void
-  onSlideModalOutComplete?: () => void
   width?: React.CSSProperties['width']
   paddingContent?: React.CSSProperties['width']
   sx?: SxProps
@@ -36,7 +35,6 @@ type Props = {
 
 export const FormModal = ({
   onSlideModalInComplete,
-  onSlideModalOutComplete,
   width,
   sx,
   headerIcon,
