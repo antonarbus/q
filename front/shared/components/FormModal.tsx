@@ -63,7 +63,6 @@ export const FormModal = ({
           navigate('..')
         }
       }}
-      shouldCloseOnClickAway={true}
     >
       <Box
         ref={modalRef}
