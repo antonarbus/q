@@ -4,11 +4,10 @@ import { slideElement } from '../utils/slideElement'
 
 type Props = {
   children: ReactNode
-  color?: string
   onOpen?: () => void
   onClose?: () => void
   shouldSlide?: boolean
-  clickAway?: boolean
+  shouldCloseOnClickAway?: boolean
   shouldCloseOnEsc?: boolean
 }
 
@@ -17,7 +16,7 @@ export const BackdropWithSlidableModal = ({
   onOpen,
   onClose,
   shouldSlide = true,
-  clickAway = true,
+  shouldCloseOnClickAway = true,
   shouldCloseOnEsc = true,
 }: Props): JSX.Element => {
   const contentRef = useRef<HTMLDivElement>(null)
@@ -86,7 +85,7 @@ export const BackdropWithSlidableModal = ({
   })
 
   const closeOnClickAway = (): void => {
-    if (contentRef.current && clickAway) {
+    if (contentRef.current && shouldCloseOnClickAway) {
       if (shouldSlide) {
         slideElement({
           element: contentRef.current,

@@ -73,7 +73,7 @@ export const FormModal = ({
 
         // onSlideModalOutComplete?.()
       }}
-      clickAway={true}
+      shouldCloseOnClickAway={true}
     >
       <Box
         ref={modalRef}
