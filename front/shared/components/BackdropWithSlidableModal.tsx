@@ -5,85 +5,104 @@ import { slideElement } from '../utils/slideElement'
 type Props = {
   children: ReactNode
   color?: string
-  onSlideModalInComplete?: () => void
-  onSlideModalOutComplete?: () => void
-  shouldSlideIn?: boolean
+  onOpen?: () => void
+  onClose?: () => void
+  shouldSlide?: boolean
   clickAway?: boolean
+  shouldCloseOnEsc?: boolean
 }
 
 export const BackdropWithSlidableModal = ({
   children,
-  onSlideModalInComplete,
-  onSlideModalOutComplete,
-  shouldSlideIn = true,
+  onOpen,
+  onClose,
+  shouldSlide = true,
   clickAway = true,
+  shouldCloseOnEsc = true,
 }: Props): JSX.Element => {
   const contentRef = useRef<HTMLDivElement>(null)
 
   useEffectOnce(() => {
-    if (contentRef.current && shouldSlideIn) {
-      slideElement({
-        intoView: true,
-        element: contentRef.current,
-        onSlideElementComplete: () => {
-          onSlideModalInComplete?.()
-        },
-      })
+    if (contentRef.current) {
+      if (shouldSlide) {
+        slideElement({
+          intoView: true,
+          element: contentRef.current,
+          onSlideElementComplete: () => {
+            onOpen?.()
+          },
+        })
+      } else {
+        onOpen?.()
+      }
     }
   })
 
   useEffectOnce(() => {
-    if (!clickAway) return
-
-    const slideAway = (e: KeyboardEvent): void => {
-      if (!contentRef.current) return
-
-      if (e.key === 'Escape') {
-        slideElement({
-          element: contentRef.current,
-          onSlideElementComplete: () => {
-            onSlideModalOutComplete?.()
-          },
-        })
+    const closeModalOnEsc = (e: KeyboardEvent): void => {
+      if (shouldCloseOnEsc && contentRef.current) {
+        if (e.key === 'Escape') {
+          if (shouldSlide) {
+            slideElement({
+              element: contentRef.current,
+              onSlideElementComplete: () => {
+                onClose?.()
+              },
+            })
+          } else {
+            onClose?.()
+          }
+        }
       }
     }
 
-    document.addEventListener('keydown', slideAway)
+    document.addEventListener('keydown', closeModalOnEsc)
 
     return (): void => {
-      document.removeEventListener('keydown', slideAway)
+      document.removeEventListener('keydown', closeModalOnEsc)
     }
   })
 
   useEffectOnce(() => {
-    const bodyElement = document.querySelector('body')
+    const disableBackgroundScroll = (): void => {
+      const bodyElement = document.querySelector('body')
 
-    if (bodyElement instanceof HTMLElement) {
-      bodyElement.style.overflow = 'hidden'
+      if (bodyElement instanceof HTMLElement) {
+        bodyElement.style.overflow = 'hidden'
+      }
     }
 
-    return (): void => {
-      // eslint-disable-next-line @typescript-eslint/no-shadow
+    const enableBackgroundScroll = (): void => {
       const bodyElement = document.querySelector('body')
 
       if (bodyElement instanceof HTMLElement) {
         bodyElement.style.overflow = 'auto'
       }
     }
+
+    disableBackgroundScroll()
+
+    return enableBackgroundScroll
   })
+
+  const closeOnClickAway = (): void => {
+    if (contentRef.current && clickAway) {
+      if (shouldSlide) {
+        slideElement({
+          element: contentRef.current,
+          onSlideElementComplete: () => {
+            onClose?.()
+          },
+        })
+      } else {
+        onClose?.()
+      }
+    }
+  }
 
   return (
     <div
-      onMouseDown={(): void => {
-        if (contentRef.current && clickAway) {
-          slideElement({
-            element: contentRef.current,
-            onSlideElementComplete: () => {
-              onSlideModalOutComplete?.()
-            },
-          })
-        }
-      }}
+      onMouseDown={closeOnClickAway}
       style={{
         position: 'fixed',
         inset: 0,

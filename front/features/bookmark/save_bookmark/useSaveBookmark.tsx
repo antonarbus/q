@@ -110,6 +110,15 @@ export const useSaveBookmark = ({
       return
     }
 
+    if (item.type === 'quotation') {
+      notify({
+        msg: 'It is not a bookmark, but complete quotation. Something is wrong.',
+        type: 'warn',
+        theme: 'light',
+      })
+      return
+    }
+
     const itemWithUpdatedValues = {
       ...item,
       name: nameSignal.value,
