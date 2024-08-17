@@ -26,6 +26,8 @@ export const BookmarkBoqRowIcon = (): ReactNode => {
       title='add to bookmarks'
       placement='right'
       disableHoverListener={isDraggingSignal.value}
+      enterDelay={500}
+      enterNextDelay={500}
     >
       <span className={cls.actionIconContainer}>
         <MdOutlineStarOutline

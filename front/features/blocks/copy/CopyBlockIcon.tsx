@@ -23,6 +23,8 @@ export const CopyBlockIcon = (): JSX.Element => {
       title='copy'
       placement='left'
       disableHoverListener={isDraggingSignal.value}
+      enterDelay={500}
+      enterNextDelay={500}
     >
       <span className={cls.actionIconContainer}>
         <MdCopyAll

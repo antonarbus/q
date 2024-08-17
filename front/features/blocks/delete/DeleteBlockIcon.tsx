@@ -27,6 +27,8 @@ export const DeleteBlockIcon = (): EmotionJSX.Element => {
       title='delete'
       placement='right'
       disableHoverListener={isDraggingSignal.value}
+      enterDelay={500}
+      enterNextDelay={500}
     >
       <span className={cls.actionIconContainer}>
         <GoTrash

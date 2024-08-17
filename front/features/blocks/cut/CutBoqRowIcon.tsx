@@ -29,6 +29,8 @@ export const CutBoqRowIcon = (): JSX.Element => {
       title='cut'
       placement='left'
       disableHoverListener={isDraggingSignal.value}
+      enterDelay={500}
+      enterNextDelay={500}
     >
       <span className={cls.actionIconContainer}>
         <TbCut

@@ -26,6 +26,8 @@ export const DeleteBoqRowIcon = (): JSX.Element => {
       title='delete'
       placement='right'
       disableHoverListener={isDraggingSignal.value}
+      enterDelay={500}
+      enterNextDelay={500}
     >
       <span className={cls.actionIconContainer}>
         <GoTrash
