@@ -24,7 +24,7 @@ import { quotationsAgGridRef } from './refs/quotationsAgGridRef'
 import { AgGridStyles } from './styles/AgGridStyles'
 import { addPlaceholderToFloatingFilters } from './utils/addPlaceholderToFloatingFilters'
 
-export const QuotationsAgGrid = (): JSX.Element => {
+export const QuotationsGrid = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
   const { data, isLoading, isFetching, isFetched, isError, error, refetch } =
     useGetQuotationsQuery()

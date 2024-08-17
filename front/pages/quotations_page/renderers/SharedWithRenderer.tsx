@@ -1,4 +1,4 @@
-import { Chip } from '@mui/material'
+import { Chip, Tooltip } from '@mui/material'
 import type { ICellRendererParams } from 'ag-grid-community'
 import type { Quotation } from '@entities/quotation'
 
@@ -41,17 +41,24 @@ export const SharedWithRenderer = (
   return (
     <>
       {params.value.map((email) => {
+        if (!params.value) return ''
+
         return (
-          <Chip
+          <Tooltip
             key={email}
-            label={email}
-            variant='outlined'
-            sx={{
-              width: 'min-content',
-              margin: '2px',
-              fontSize: '10px',
-            }}
-          />
+            title={params.value.length > 1 ? params.value.join('; ') : ''}
+            placement='top'
+          >
+            <Chip
+              label={email}
+              variant='outlined'
+              sx={{
+                width: 'min-content',
+                margin: '2px',
+                fontSize: '10px',
+              }}
+            />
+          </Tooltip>
         )
       })}
     </>

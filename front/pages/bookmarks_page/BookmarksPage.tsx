@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import { useNavItemsOnBookmarksPageOpen } from '@features/open_close/open_bookmarks_page'
-import { BookmarksAgGrid } from './BookmarksAgGrid'
+import { BookmarksGrid } from './BookmarksGrid'
 import { BookmarksPageLayout } from './layouts/BookmarksPageLayout'
 
 export const BookmarksPage = (): JSX.Element => {
@@ -8,7 +8,7 @@ export const BookmarksPage = (): JSX.Element => {
 
   return (
     <BookmarksPageLayout>
-      <BookmarksAgGrid />
+      <BookmarksGrid />
       <Outlet />
     </BookmarksPageLayout>
   )

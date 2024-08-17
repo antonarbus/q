@@ -24,7 +24,7 @@ import { bookmarksAgGridRef } from './refs/bookmarksAgGridRef'
 import { AgGridStyles } from './styles/AgGridStyles'
 import { addPlaceholderToFloatingFilters } from './utils/addPlaceholderToFloatingFilters'
 
-export const BookmarksAgGrid = (): JSX.Element => {
+export const BookmarksGrid = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
   const { data, isLoading, isFetching, isFetched, isError, error, refetch } =
     useGetBookmarksQuery()
