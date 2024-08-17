@@ -1,38 +1,39 @@
 import { type ReactNode, useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 import { slideElement } from '../utils/slideElement'
+import { type Location, useLocation } from 'react-router-dom'
+import type { NavigateState } from '@shared/types/NavigateState'
 
 type Props = {
   children: ReactNode
-  onOpen?: () => void
-  onClose?: () => void
-  shouldSlide?: boolean
+  onMount?: () => void
+  onUnmount?: () => void
   shouldCloseOnClickAway?: boolean
   shouldCloseOnEsc?: boolean
 }
 
 export const BackdropWithSlidableModal = ({
   children,
-  onOpen,
-  onClose,
-  shouldSlide = true,
+  onMount,
+  onUnmount,
   shouldCloseOnClickAway = true,
   shouldCloseOnEsc = true,
 }: Props): JSX.Element => {
   const contentRef = useRef<HTMLDivElement>(null)
+  const location = useLocation() as Location<NavigateState>
 
   useEffectOnce(() => {
     if (contentRef.current) {
-      if (shouldSlide) {
+      if (location.state?.shouldSlide) {
         slideElement({
           intoView: true,
           element: contentRef.current,
           onSlideElementComplete: () => {
-            onOpen?.()
+            onMount?.()
           },
         })
       } else {
-        onOpen?.()
+        onMount?.()
       }
     }
   })
@@ -41,15 +42,15 @@ export const BackdropWithSlidableModal = ({
     const closeModalOnEsc = (e: KeyboardEvent): void => {
       if (shouldCloseOnEsc && contentRef.current) {
         if (e.key === 'Escape') {
-          if (shouldSlide) {
+          if (location.state?.shouldSlide) {
             slideElement({
               element: contentRef.current,
               onSlideElementComplete: () => {
-                onClose?.()
+                onUnmount?.()
               },
             })
           } else {
-            onClose?.()
+            onUnmount?.()
           }
         }
       }
@@ -86,15 +87,15 @@ export const BackdropWithSlidableModal = ({
 
   const closeOnClickAway = (): void => {
     if (contentRef.current && shouldCloseOnClickAway) {
-      if (shouldSlide) {
+      if (location.state?.shouldSlide) {
         slideElement({
           element: contentRef.current,
           onSlideElementComplete: () => {
-            onClose?.()
+            onUnmount?.()
           },
         })
       } else {
-        onClose?.()
+        onUnmount?.()
       }
     }
   }

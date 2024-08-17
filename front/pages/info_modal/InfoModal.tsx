@@ -38,7 +38,6 @@ export const InfoModal = (): React.ReactNode => {
       paddingContent='50px 40px'
       headerText='Info'
       headerIcon={<BsInfo />}
-      shouldSlideIn={false}
       onCloseSlideModalOutAndNavigateUp={true}
     >
       <NameField nameSignal={nameSignal} />

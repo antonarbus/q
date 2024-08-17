@@ -3,9 +3,3 @@ export { useLoadInitValuesIntoQuotationModal } from './useLoadInitValuesIntoQuot
 export { useLoadQuotationModalWithDirectLink } from './useLoadQuotationModalWithDirectLink'
 export { openQuotationModal } from './openQuotationModal'
 export { useFixScrollPositionOnModalOpen } from './useFixScrollPositionOnModalOpen'
-
-export type OpenQuotationModalNavigateState = {
-  navigatedFrom?: string
-  navigateTo?: string
-  scrollTop?: number
-} | null

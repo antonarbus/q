@@ -20,8 +20,7 @@ export const SettingsModal = (): JSX.Element => {
 
   return (
     <BackdropWithSlidableModal
-      shouldSlide={false}
-      onClose={(): void => {
+      onUnmount={(): void => {
         navigate('..')
       }}
     >

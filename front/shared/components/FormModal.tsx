@@ -32,7 +32,6 @@ type Props = {
   isButtonError?: boolean
   modalRef: React.RefObject<HTMLDivElement>
   onCloseSlideModalOutAndNavigateUp?: boolean
-  shouldSlideIn?: boolean
 }
 
 export const FormModal = ({
@@ -53,25 +52,16 @@ export const FormModal = ({
   isButtonError,
   modalRef,
   paddingContent,
-  shouldSlideIn,
 }: Props): JSX.Element => {
   const navigate = useNavigate()
 
   return (
     <BackdropWithSlidableModal
-      shouldSlide={shouldSlideIn}
-      onOpen={onSlideModalInComplete}
-      onClose={() => {
+      onMount={onSlideModalInComplete}
+      onUnmount={() => {
         if (onCloseSlideModalOutAndNavigateUp === true) {
-          // slideElement({
-          //   element: modalRef.current,
-          //   onSlideElementComplete: () => {
           navigate('..')
-          // },
-          // })
         }
-
-        // onSlideModalOutComplete?.()
       }}
       shouldCloseOnClickAway={true}
     >

@@ -16,8 +16,7 @@ export const ActivationModal = (): JSX.Element => {
 
   return (
     <BackdropWithSlidableModal
-      shouldSlide={false}
-      onClose={(): void => {
+      onUnmount={(): void => {
         navigate('..')
       }}
     >
