@@ -1,5 +1,9 @@
 import { theme } from '@lib_instances/theme'
 import { Close } from '@mui/icons-material'
+import { AnimatePresence, motion } from 'framer-motion'
+import { Children } from 'react'
+import { BackdropWithSlidableModal } from './BackdropWithSlidableModal'
+import { ButtonCustom } from './ButtonCustom'
 import {
   Avatar,
   Box,
@@ -7,10 +11,6 @@ import {
   Typography,
   IconButton,
 } from '@mui/material'
-import { AnimatePresence, motion } from 'framer-motion'
-import { Children } from 'react'
-import { BackdropWithSlidableModal } from './BackdropWithSlidableModal'
-import { ButtonCustom } from './ButtonCustom'
 
 type Props = {
   width?: React.CSSProperties['width']
@@ -53,8 +53,8 @@ export const FormModal = ({
 }: Props): JSX.Element => {
   return (
     <BackdropWithSlidableModal
-      shouldUnmountOnClickAway
-      shouldUnmountOnEsc
+      shouldUnmountOnClickAway={shouldUnmountOnClickAway}
+      shouldUnmountOnEsc={shouldUnmountOnEsc}
       onUnmount={onUnmount}
     >
       <Box
@@ -73,7 +73,7 @@ export const FormModal = ({
           color: 'rgba(0, 0, 0, 0.87)',
           borderRadius: '4px',
           transition: 'box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-          overflowY: 'hidden',
+          overflowY: 'visible',
           boxShadow:
             '0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%)',
           '&:hover, &:focus-within': {
@@ -94,6 +94,7 @@ export const FormModal = ({
             padding: '15px 20px 5px 20px',
             borderBottom: '1px solid rgb(223, 223, 223)',
             backgroundColor: '#80808017',
+            position: 'relative',
           }}
         >
           <Avatar sx={{ bgcolor: theme.colors.darkBackground }}>
