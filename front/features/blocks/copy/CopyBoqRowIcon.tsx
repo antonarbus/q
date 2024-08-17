@@ -11,6 +11,7 @@ import {
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { cleanHtml } from '@shared/utils/itemsUtils'
+import { Tooltip } from '@mui/material'
 
 export const CopyBoqRowIcon = (): JSX.Element => {
   const { rowIndex } = useRow()
@@ -19,51 +20,60 @@ export const CopyBoqRowIcon = (): JSX.Element => {
   const disabled = !isCopyable
 
   return (
-    <MdCopyAll
-      className='copy-boq-row-icon'
-      tabIndex={-1}
-      style={{
-        color: disabled ? '#acacac' : '#000',
-      }}
-      onClick={(e: MouseEvent): void => {
-        if (disabled) return
-        const clickedIconElement = e.target
-        if (!(clickedIconElement instanceof Element)) return
+    <Tooltip
+      title='copy'
+      placement='left'
+    >
+      <span className={cls.actionIconContainer}>
+        <MdCopyAll
+          className={cls.actionIcon}
+          tabIndex={-1}
+          style={{
+            color: disabled ? '#acacac' : '#000',
+          }}
+          onClick={(e: MouseEvent): void => {
+            if (disabled) return
+            const clickedIconElement = e.target
+            if (!(clickedIconElement instanceof Element)) return
 
-        const boqRowElement = clickedIconElement.closest(`.${cls.boqRow}`)
-        if (!boqRowElement) return
+            const boqRowElement = clickedIconElement.closest(`.${cls.boqRow}`)
+            if (!boqRowElement) return
 
-        isFroalaSignal.value = false
+            isFroalaSignal.value = false
 
-        dispatch(
-          quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
-            blockIndex,
-            rowIndex,
-            height: boqRowElement.clientHeight,
-            width: boqRowElement.clientWidth,
-          }),
-        )
+            dispatch(
+              quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
+                blockIndex,
+                rowIndex,
+                height: boqRowElement.clientHeight,
+                width: boqRowElement.clientWidth,
+              }),
+            )
 
-        const html = boqRowElement.outerHTML
-        const cleanedHtml = cleanHtml(html)
+            const html = boqRowElement.outerHTML
+            const cleanedHtml = cleanHtml(html)
 
-        const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
-        if (boqRow === undefined) return
+            const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
+            if (boqRow === undefined) return
 
-        const boqRowCloned = structuredClone(boqRow)
-        boqRowCloned.preview = cleanedHtml
+            const boqRowCloned = structuredClone(boqRow)
+            boqRowCloned.preview = cleanedHtml
 
-        dispatch(
-          copySlice.actions.addItemIntoCopyContainer({ item: boqRowCloned }),
-        )
-        dispatch(copySlice.actions.allowToPaste())
+            dispatch(
+              copySlice.actions.addItemIntoCopyContainer({
+                item: boqRowCloned,
+              }),
+            )
+            dispatch(copySlice.actions.allowToPaste())
 
-        const isCopyContainer = getState().copy.isCopyContainer
+            const isCopyContainer = getState().copy.isCopyContainer
 
-        if (!isCopyContainer) {
-          dispatch(copySlice.actions.showCopyContainer())
-        }
-      }}
-    />
+            if (!isCopyContainer) {
+              dispatch(copySlice.actions.showCopyContainer())
+            }
+          }}
+        />
+      </span>
+    </Tooltip>
   )
 }

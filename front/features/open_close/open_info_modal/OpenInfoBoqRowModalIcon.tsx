@@ -8,6 +8,8 @@ import {
   useRow,
 } from '@entities/quotation'
 import { route } from '@shared/consts/route'
+import { Tooltip } from '@mui/material'
+import { cls } from '@shared/consts/cls'
 
 export const OpenInfoBoqRowModalIcon = (): ReactNode => {
   const navigate = useNavigate()
@@ -15,17 +17,24 @@ export const OpenInfoBoqRowModalIcon = (): ReactNode => {
   const { rowIndex } = useRow()
 
   return (
-    <HiOutlineInformationCircle
-      className='open-info-boq-row-modal-icon'
-      tabIndex={-1}
-      onClick={(e: MouseEvent): void => {
-        const boqRow = getBoqRowFromStore({ rowIndex, blockIndex })
+    <Tooltip
+      title='info'
+      placement='right'
+    >
+      <span className={cls.actionIconContainer}>
+        <HiOutlineInformationCircle
+          className={cls.actionIcon}
+          tabIndex={-1}
+          onClick={(e: MouseEvent): void => {
+            const boqRow = getBoqRowFromStore({ rowIndex, blockIndex })
 
-        if (!boqRow) return
-        if (boqRow.type === boqRowKey.paste) return
+            if (!boqRow) return
+            if (boqRow.type === boqRowKey.paste) return
 
-        navigate(`./${route.info}/${boqRow.id}`)
-      }}
-    />
+            navigate(`./${route.info}/${boqRow.id}`)
+          }}
+        />
+      </span>
+    </Tooltip>
   )
 }

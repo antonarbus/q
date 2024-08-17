@@ -13,6 +13,7 @@ import { cls } from '@shared/consts/cls'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
 import { cleanHtml } from '@shared/utils/itemsUtils'
+import { Tooltip } from '@mui/material'
 
 export const BookmarkBoqRowIcon = (): ReactNode => {
   const navigate = useNavigate()
@@ -20,56 +21,63 @@ export const BookmarkBoqRowIcon = (): ReactNode => {
   const { rowIndex } = useRow()
 
   return (
-    <MdOutlineStarOutline
-      className='save-boq-row-icon'
-      tabIndex={-1}
-      onClick={(e: MouseEvent): void => {
-        const email = getState().user.email
+    <Tooltip
+      title='add to bookmarks'
+      placement='right'
+    >
+      <span className={cls.actionIconContainer}>
+        <MdOutlineStarOutline
+          className={cls.actionIcon}
+          tabIndex={-1}
+          onClick={(e: MouseEvent): void => {
+            const email = getState().user.email
 
-        if (!email) {
-          notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
-          navigate(`./${route.login}`)
-          return
-        }
+            if (!email) {
+              notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
+              navigate(`./${route.login}`)
+              return
+            }
 
-        const clickedIconElement = e.target
-        if (!(clickedIconElement instanceof Element)) return
+            const clickedIconElement = e.target
+            if (!(clickedIconElement instanceof Element)) return
 
-        const boqRowElement = clickedIconElement.closest(`.${cls.boqRow}`)
-        if (!boqRowElement) return
+            const boqRowElement = clickedIconElement.closest(`.${cls.boqRow}`)
+            if (!boqRowElement) return
 
-        dispatch(
-          quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
-            blockIndex,
-            rowIndex,
-            height: boqRowElement.clientHeight,
-            width: boqRowElement.clientWidth,
-          }),
-        )
+            dispatch(
+              quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
+                blockIndex,
+                rowIndex,
+                height: boqRowElement.clientHeight,
+                width: boqRowElement.clientWidth,
+              }),
+            )
 
-        const html = boqRowElement.outerHTML
-        const cleanedHtml = cleanHtml(html)
+            const html = boqRowElement.outerHTML
+            const cleanedHtml = cleanHtml(html)
 
-        const boqRow = getBoqRowFromStore({ rowIndex, blockIndex })
+            const boqRow = getBoqRowFromStore({ rowIndex, blockIndex })
 
-        if (!boqRow) return
-        if (boqRow.type === boqRowKey.paste) return
+            if (!boqRow) return
+            if (boqRow.type === boqRowKey.paste) return
 
-        dispatch(
-          quotationSlice.actions.updateItemPreviewReducer({
-            id: boqRow.id,
-            preview: cleanedHtml,
-          }),
-        )
+            dispatch(
+              quotationSlice.actions.updateItemPreviewReducer({
+                id: boqRow.id,
+                preview: cleanedHtml,
+              }),
+            )
 
-        dispatch(
-          quotationSlice.actions.loadBlockAtPosThousandReducer({
-            block: boqRow,
-          }),
-        )
+            dispatch(
+              quotationSlice.actions.loadBlockAtPosThousandReducer({
+                block: boqRow,
+              }),
+            )
 
-        navigate(`./${route.bookmark}/${boqRow.id}`)
-      }}
-    />
+            navigate(`./${route.bookmark}/${boqRow.id}`)
+          }}
+        />
+      </span>
+    </Tooltip>
   )
 }

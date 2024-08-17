@@ -13,6 +13,7 @@ import {
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { cleanHtml } from '@shared/utils/itemsUtils'
+import { Tooltip } from '@mui/material'
 
 export const CutBoqRowIcon = (): JSX.Element => {
   const { blockIndex } = useBlock()
@@ -23,62 +24,74 @@ export const CutBoqRowIcon = (): JSX.Element => {
   const disabled = isLastBoqRow || !isDeletable || !isCopyable
 
   return (
-    <TbCut
-      className='cut-boq-row-icon'
-      tabIndex={-1}
-      style={{
-        color: disabled ? '#acacac' : '#000',
-      }}
-      onClick={(e: MouseEvent): void => {
-        if (disabled) return
+    <Tooltip
+      title='cut'
+      placement='left'
+    >
+      <span className={cls.actionIconContainer}>
+        <TbCut
+          className={cls.actionIcon}
+          tabIndex={-1}
+          style={{
+            color: disabled ? '#acacac' : '#000',
+          }}
+          onClick={(e: MouseEvent): void => {
+            if (disabled) return
 
-        const clickedIconElement = e.target
+            const clickedIconElement = e.target
 
-        if (!(clickedIconElement instanceof Element)) return
+            if (!(clickedIconElement instanceof Element)) return
 
-        const boqRowElement = clickedIconElement.closest(`.${cls.boqRow}`)
+            const boqRowElement = clickedIconElement.closest(`.${cls.boqRow}`)
 
-        if (!boqRowElement) return
+            if (!boqRowElement) return
 
-        isFroalaSignal.value = false
+            isFroalaSignal.value = false
 
-        dispatch(
-          quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
-            blockIndex,
-            rowIndex,
-            height: boqRowElement.clientHeight,
-            width: boqRowElement.clientWidth,
-          }),
-        )
+            dispatch(
+              quotationSlice.actions.updateBoqRowHeightAndWidthReducer({
+                blockIndex,
+                rowIndex,
+                height: boqRowElement.clientHeight,
+                width: boqRowElement.clientWidth,
+              }),
+            )
 
-        const html = boqRowElement.outerHTML
-        const cleanedHtml = cleanHtml(html)
+            const html = boqRowElement.outerHTML
+            const cleanedHtml = cleanHtml(html)
 
-        const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
-        if (boqRow === undefined) return
+            const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
+            if (boqRow === undefined) return
 
-        const bockRowCloned = structuredClone(boqRow)
-        bockRowCloned.preview = cleanedHtml
+            const bockRowCloned = structuredClone(boqRow)
+            bockRowCloned.preview = cleanedHtml
 
-        dispatch(
-          copySlice.actions.addItemIntoCopyContainer({ item: bockRowCloned }),
-        )
+            dispatch(
+              copySlice.actions.addItemIntoCopyContainer({
+                item: bockRowCloned,
+              }),
+            )
 
-        const isCopyContainer = getState().copy.isCopyContainer
+            const isCopyContainer = getState().copy.isCopyContainer
 
-        if (!isCopyContainer) {
-          dispatch(copySlice.actions.showCopyContainer())
-        }
+            if (!isCopyContainer) {
+              dispatch(copySlice.actions.showCopyContainer())
+            }
 
-        dispatch(
-          quotationSlice.actions.deleteBoqRowReducer({ blockIndex, rowIndex }),
-        )
-        dispatch(copySlice.actions.forbidAllActions())
+            dispatch(
+              quotationSlice.actions.deleteBoqRowReducer({
+                blockIndex,
+                rowIndex,
+              }),
+            )
+            dispatch(copySlice.actions.forbidAllActions())
 
-        setTimeout(() => {
-          dispatch(copySlice.actions.allowAllActions())
-        }, 1000 * theme.block.animationDuration)
-      }}
-    />
+            setTimeout(() => {
+              dispatch(copySlice.actions.allowAllActions())
+            }, 1000 * theme.block.animationDuration)
+          }}
+        />
+      </span>
+    </Tooltip>
   )
 }

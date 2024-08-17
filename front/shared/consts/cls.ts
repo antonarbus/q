@@ -11,4 +11,6 @@ export const cls = {
   pin: 'pin',
   searchAutocomplete: 'search-autocomplete',
   search: 'search',
+  actionIconContainer: 'action-icon-container',
+  actionIcon: 'action-icon',
 } as const

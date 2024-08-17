@@ -14,6 +14,7 @@ import {
 import { cls } from '@shared/consts/cls'
 import { fixElementDimensionStyle } from '@shared/utils/fixElementDimensionStyle'
 import { cleanHtml } from '@shared/utils/itemsUtils'
+import { Tooltip } from '@mui/material'
 
 export const CutBlockIcon = (): JSX.Element => {
   const { blockIndex } = useBlock()
@@ -22,57 +23,67 @@ export const CutBlockIcon = (): JSX.Element => {
   const disabled = isBlockAlone || !isCuttable
 
   return (
-    <TbCut
-      tabIndex={-1}
-      style={{
-        color: disabled ? '#acacac' : '#000',
-        cursor: disabled ? 'default' : 'pointer',
-      }}
-      onClick={(e: MouseEvent): void => {
-        if (disabled) return
+    <Tooltip
+      title='cut'
+      placement='left'
+    >
+      <span className={cls.actionIconContainer}>
+        <TbCut
+          tabIndex={-1}
+          className={cls.actionIcon}
+          style={{
+            color: disabled ? '#acacac' : '#000',
+            cursor: disabled ? 'default' : 'pointer',
+          }}
+          onClick={(e: MouseEvent): void => {
+            if (disabled) return
 
-        saveBlockHeightByIndex({ blockIndex })
+            saveBlockHeightByIndex({ blockIndex })
 
-        const blockToCut = getState().quotation.blocks[blockIndex]
-        if (!blockToCut) return
-        if (blockToCut.type === itemType.paste) return
+            const blockToCut = getState().quotation.blocks[blockIndex]
+            if (!blockToCut) return
+            if (blockToCut.type === itemType.paste) return
 
-        const clickedIconElement = e.target
-        if (!(clickedIconElement instanceof Element)) return
-        const blockElement = clickedIconElement.closest(`.${cls.block}`)
-        if (!(blockElement instanceof Element)) return
-        const paperElement = blockElement.querySelector(`.${cls.paper}`)
-        if (!(paperElement instanceof HTMLElement)) return
+            const clickedIconElement = e.target
+            if (!(clickedIconElement instanceof Element)) return
+            const blockElement = clickedIconElement.closest(`.${cls.block}`)
+            if (!(blockElement instanceof Element)) return
+            const paperElement = blockElement.querySelector(`.${cls.paper}`)
+            if (!(paperElement instanceof HTMLElement)) return
 
-        // width of animated element is changed for unknown reason, can't explain the issue, so let's fix it for animation purpose
-        fixElementDimensionStyle({ element: paperElement })
+            // width of animated element is changed for unknown reason, can't explain the issue, so let's fix it for animation purpose
+            fixElementDimensionStyle({ element: paperElement })
 
-        const html = paperElement.innerHTML
-        const cleanedHtml = cleanHtml(html)
-        isFroalaSignal.value = false
+            const html = paperElement.innerHTML
+            const cleanedHtml = cleanHtml(html)
+            isFroalaSignal.value = false
 
-        const block = structuredClone(blockToCut)
-        block.preview = cleanedHtml
+            const block = structuredClone(blockToCut)
+            block.preview = cleanedHtml
 
-        dispatch(copySlice.actions.addItemIntoCopyContainer({ item: block }))
-        dispatch(
-          quotationSlice.actions.deleteBlockReducer({ id: blockToCut.id }),
-        )
-        dispatch(copySlice.actions.forbidAllActions())
+            dispatch(
+              copySlice.actions.addItemIntoCopyContainer({ item: block }),
+            )
+            dispatch(
+              quotationSlice.actions.deleteBlockReducer({ id: blockToCut.id }),
+            )
+            dispatch(copySlice.actions.forbidAllActions())
 
-        const isCopyContainer = getState().copy.isCopyContainer
+            const isCopyContainer = getState().copy.isCopyContainer
 
-        if (!isCopyContainer) {
-          dispatch(copySlice.actions.showCopyContainer())
-        }
+            if (!isCopyContainer) {
+              dispatch(copySlice.actions.showCopyContainer())
+            }
 
-        setTimeout(
-          () => {
-            dispatch(copySlice.actions.allowAllActions())
-          },
-          1000 * theme.block.animationDuration + 500,
-        )
-      }}
-    />
+            setTimeout(
+              () => {
+                dispatch(copySlice.actions.allowAllActions())
+              },
+              1000 * theme.block.animationDuration + 500,
+            )
+          }}
+        />
+      </span>
+    </Tooltip>
   )
 }

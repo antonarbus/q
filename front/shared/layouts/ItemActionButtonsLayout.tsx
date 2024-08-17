@@ -18,14 +18,18 @@ export const ItemActionButtonsLayout = ({ children }: Props): JSX.Element => (
       userSelect: 'none',
     }}
     sx={{
-      '& > *': {
+      [`.${cls.actionIconContainer}`]: {
+        height: '12px',
+        lineHeight: '12px',
+      },
+      [`.${cls.actionIcon}`]: {
         height: '12px',
         width: '12px',
         transition: 'scale 0.2s',
         cursor: 'pointer',
         outline: 0,
       },
-      '& > *:hover': {
+      [`.${cls.actionIcon}:hover`]: {
         scale: '1.5',
       },
     }}

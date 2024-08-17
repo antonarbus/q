@@ -21,14 +21,18 @@ export const BoqRowActionButtonsLayout = (props: Props): JSX.Element => {
         ...props.style,
       }}
       sx={{
-        '& > *': {
+        [`.${cls.actionIconContainer}`]: {
+          height: '10px',
+          lineHeight: '10px',
+        },
+        [`.${cls.actionIcon}`]: {
           height: '10px',
           width: '10px',
           transition: 'scale 0.2s',
           cursor: 'pointer',
           outline: 0,
         },
-        '& > *:hover': {
+        [`.${cls.actionIcon}:hover`]: {
           scale: '1.5',
         },
       }}
