@@ -7,8 +7,6 @@ import { FadeInOnInitLoad } from './FadeInOnInitLoad'
 import { Block } from './Block'
 import { BlocksSortableContext } from './BlocksSortableContext'
 
-// todo: go through commits and find when pdf got broken
-
 type Props = {
   blocks: (BlockType | null)[]
 }
