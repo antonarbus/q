@@ -12,7 +12,6 @@ import { useUpdateItemInfo } from '@features/info/update_info'
 
 export const InfoModal = (): React.ReactNode => {
   const modalRef = useRef<HTMLDivElement>(null)
-
   const { id } = useParams()
 
   const item = getFromStore({ id: id ?? 'new' })
