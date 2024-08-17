@@ -5,6 +5,7 @@ import { useRef } from 'react'
 import { useRequestPasswordReset } from '@features/auth/request_password_reset'
 import { OpenLoginModalLink } from '@features/open_close/open_login_modal'
 import { EmailField, FormModal } from '@shared/components'
+import { router } from '@lib_instances/router'
 
 export const RequestPasswordResetModal = (): JSX.Element => {
   const modalRef = useRef<HTMLDivElement>(null)
@@ -28,8 +29,15 @@ export const RequestPasswordResetModal = (): JSX.Element => {
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
       isButtonError={isError}
+      shouldUnmountOnClickAway
+      shouldUnmountOnEsc
+      onUnmount={() => {
+        void router.navigate('..')
+      }}
+      onCloseClick={() => {
+        void router.navigate('..')
+      }}
       onSubmit={onSubmit}
-      onCloseSlideModalOutAndNavigateUp={true}
     >
       <EmailField
         inputRef={inputRef}

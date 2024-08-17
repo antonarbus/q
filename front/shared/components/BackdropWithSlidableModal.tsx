@@ -8,16 +8,16 @@ type Props = {
   children: ReactNode
   onMount?: () => void
   onUnmount?: () => void
-  shouldCloseOnClickAway?: boolean
-  shouldCloseOnEsc?: boolean
+  shouldUnmountOnClickAway: boolean
+  shouldUnmountOnEsc?: boolean
 }
 
 export const BackdropWithSlidableModal = ({
   children,
   onMount,
   onUnmount,
-  shouldCloseOnClickAway = true,
-  shouldCloseOnEsc = true,
+  shouldUnmountOnClickAway,
+  shouldUnmountOnEsc,
 }: Props): JSX.Element => {
   const contentRef = useRef<HTMLDivElement>(null)
   const location = useLocation() as Location<NavigateState>
@@ -40,7 +40,7 @@ export const BackdropWithSlidableModal = ({
 
   useEffectOnce(() => {
     const closeModalOnEsc = (e: KeyboardEvent): void => {
-      if (shouldCloseOnEsc && contentRef.current) {
+      if (shouldUnmountOnEsc && contentRef.current) {
         if (e.key === 'Escape') {
           if (location.state?.shouldSlide) {
             slideElement({
@@ -85,8 +85,8 @@ export const BackdropWithSlidableModal = ({
     return enableBackgroundScroll
   })
 
-  const closeOnClickAway = (): void => {
-    if (contentRef.current && shouldCloseOnClickAway) {
+  const unmountOnClickAway = (): void => {
+    if (contentRef.current && shouldUnmountOnClickAway) {
       if (location.state?.shouldSlide) {
         slideElement({
           element: contentRef.current,
@@ -102,7 +102,7 @@ export const BackdropWithSlidableModal = ({
 
   return (
     <div
-      onMouseDown={closeOnClickAway}
+      onMouseDown={unmountOnClickAway}
       style={{
         position: 'fixed',
         inset: 0,

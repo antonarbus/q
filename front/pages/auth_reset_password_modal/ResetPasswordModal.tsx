@@ -12,6 +12,7 @@ import {
   FormModal,
   PasswordField,
 } from '@shared/components'
+import { router } from '@lib_instances/router'
 
 export const ResetPasswordModal = (): React.ReactNode => {
   const { email } = useParams()
@@ -46,8 +47,15 @@ export const ResetPasswordModal = (): React.ReactNode => {
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
       isButtonError={isError}
+      shouldUnmountOnClickAway
+      shouldUnmountOnEsc
+      onUnmount={() => {
+        void router.navigate('..')
+      }}
+      onCloseClick={() => {
+        void router.navigate('..')
+      }}
       onSubmit={onSubmit}
-      onCloseSlideModalOutAndNavigateUp={true}
     >
       <EmailField
         disabled

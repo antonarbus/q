@@ -9,8 +9,6 @@ import {
 } from '@mui/material'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Children } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { slideElement } from '../utils/slideElement'
 import { BackdropWithSlidableModal } from './BackdropWithSlidableModal'
 import { ButtonCustom } from './ButtonCustom'
 
@@ -21,6 +19,7 @@ type Props = {
   headerIcon: React.ReactNode
   headerText: string
   children: React.ReactNode
+  onUnmount?: () => void
   onSubmit?: (e: React.FormEvent) => void
   onCloseClick?: (e: React.MouseEvent) => void
   buttonText?: string
@@ -29,7 +28,8 @@ type Props = {
   isButtonSuccess?: boolean
   isButtonError?: boolean
   modalRef: React.RefObject<HTMLDivElement>
-  onCloseSlideModalOutAndNavigateUp?: boolean
+  shouldUnmountOnClickAway: boolean
+  shouldUnmountOnEsc: boolean
 }
 
 export const FormModal = ({
@@ -38,9 +38,9 @@ export const FormModal = ({
   headerIcon,
   headerText,
   children,
+  onUnmount,
   onSubmit,
   onCloseClick,
-  onCloseSlideModalOutAndNavigateUp,
   buttonText,
   isButtonDisabled,
   isButtonLoading,
@@ -48,16 +48,14 @@ export const FormModal = ({
   isButtonError,
   modalRef,
   paddingContent,
+  shouldUnmountOnClickAway,
+  shouldUnmountOnEsc,
 }: Props): JSX.Element => {
-  const navigate = useNavigate()
-
   return (
     <BackdropWithSlidableModal
-      onUnmount={() => {
-        if (onCloseSlideModalOutAndNavigateUp === true) {
-          navigate('..')
-        }
-      }}
+      shouldUnmountOnClickAway
+      shouldUnmountOnEsc
+      onUnmount={onUnmount}
     >
       <Box
         ref={modalRef}
@@ -113,18 +111,7 @@ export const FormModal = ({
               top: '-35px',
               right: '-35px',
             }}
-            onClick={(e) => {
-              if (onCloseSlideModalOutAndNavigateUp === true) {
-                slideElement({
-                  element: modalRef.current,
-                  onSlideElementComplete: () => {
-                    navigate('..')
-                  },
-                })
-              }
-
-              onCloseClick?.(e)
-            }}
+            onClick={onCloseClick}
           >
             <Close
               sx={{

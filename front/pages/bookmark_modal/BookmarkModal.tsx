@@ -15,6 +15,7 @@ import {
 import { useUnmount } from 'react-use'
 import { quotationSlice } from '@entities/quotation'
 import { dispatch } from '@lib_instances/store'
+import { router } from '@lib_instances/router'
 
 export const BookmarkModal = (): JSX.Element => {
   const modalRef = useRef<HTMLDivElement>(null)
@@ -52,6 +53,7 @@ export const BookmarkModal = (): JSX.Element => {
 
   return (
     <FormModal
+      modalRef={modalRef}
       width='500px'
       headerIcon={<FiEdit3 />}
       headerText='Save bookmark'
@@ -60,8 +62,14 @@ export const BookmarkModal = (): JSX.Element => {
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
       isButtonError={isError}
-      modalRef={modalRef}
-      onCloseSlideModalOutAndNavigateUp={true}
+      shouldUnmountOnClickAway
+      shouldUnmountOnEsc
+      onUnmount={() => {
+        void router.navigate('..')
+      }}
+      onCloseClick={() => {
+        void router.navigate('..')
+      }}
       onSubmit={onSubmit}
     >
       <NameField nameSignal={nameSignal} />

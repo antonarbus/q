@@ -16,6 +16,7 @@ import {
 } from '@features/open_close/open_quotation_modal'
 import { useQuotationFormValues } from './useFormValues'
 import { useIsButtonDisabled } from './useIsButtonDisabled'
+import { router } from '@lib_instances/router'
 
 export const QuotationModal = (): JSX.Element => {
   const modalRef = useRef<HTMLDivElement>(null)
@@ -40,8 +41,15 @@ export const QuotationModal = (): JSX.Element => {
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
       isButtonError={isError}
+      shouldUnmountOnClickAway
+      shouldUnmountOnEsc
+      onUnmount={() => {
+        void router.navigate('..')
+      }}
+      onCloseClick={() => {
+        void router.navigate('..')
+      }}
       onSubmit={onSubmit}
-      onCloseSlideModalOutAndNavigateUp={true}
     >
       <NameField nameSignal={quotationFormValues.nameSignal} />
       <CategoryField categorySignal={quotationFormValues.categorySignal} />

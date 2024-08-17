@@ -9,6 +9,7 @@ import { DescriptionField } from './DescriptionField'
 import { InfoField } from './InfoField'
 import { NameField } from './NameField'
 import { useUpdateItemInfo } from '@features/info/update_info'
+import { router } from '@lib_instances/router'
 
 export const InfoModal = (): React.ReactNode => {
   const modalRef = useRef<HTMLDivElement>(null)
@@ -38,7 +39,14 @@ export const InfoModal = (): React.ReactNode => {
       paddingContent='50px 40px'
       headerText='Info'
       headerIcon={<BsInfo />}
-      onCloseSlideModalOutAndNavigateUp={true}
+      shouldUnmountOnClickAway
+      shouldUnmountOnEsc
+      onUnmount={() => {
+        void router.navigate('..')
+      }}
+      onCloseClick={() => {
+        void router.navigate('..')
+      }}
     >
       <NameField nameSignal={nameSignal} />
       <CategoryField categorySignal={categorySignal} />

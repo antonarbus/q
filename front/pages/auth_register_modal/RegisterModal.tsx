@@ -10,6 +10,7 @@ import {
   FormModal,
   PasswordField,
 } from '@shared/components'
+import { router } from '@lib_instances/router'
 
 export const RegisterModal = (): JSX.Element => {
   const inputRef = useRef<HTMLDivElement>(null)
@@ -43,8 +44,15 @@ export const RegisterModal = (): JSX.Element => {
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
       isButtonError={isError}
+      shouldUnmountOnClickAway
+      shouldUnmountOnEsc
+      onUnmount={() => {
+        void router.navigate('..')
+      }}
+      onCloseClick={() => {
+        void router.navigate('..')
+      }}
       onSubmit={onSubmit}
-      onCloseSlideModalOutAndNavigateUp={true}
     >
       <EmailField
         inputRef={inputRef}

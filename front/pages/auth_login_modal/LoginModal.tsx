@@ -6,6 +6,7 @@ import { useLogIn } from '@features/auth/log_in'
 import { OpenRegisterModalLink } from '@features/open_close/open_register_modal'
 import { OpenResetModalLink } from '@features/open_close/open_reset_modal'
 import { EmailField, FormModal, PasswordField } from '@shared/components'
+import { router } from '@lib_instances/router'
 
 export const LoginModal = (): JSX.Element => {
   const inputRef = useRef<HTMLDivElement>(null)
@@ -33,8 +34,15 @@ export const LoginModal = (): JSX.Element => {
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
       isButtonError={isError}
+      shouldUnmountOnClickAway
+      shouldUnmountOnEsc
+      onUnmount={() => {
+        void router.navigate('..')
+      }}
+      onCloseClick={() => {
+        void router.navigate('..')
+      }}
       onSubmit={onSubmit}
-      onCloseSlideModalOutAndNavigateUp={true}
     >
       <EmailField
         inputRef={inputRef}
