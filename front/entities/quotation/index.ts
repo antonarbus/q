@@ -2,6 +2,7 @@ export { newQuotationTemplate } from './newQuotationTemplate'
 
 // signals
 export { isFroalaSignal } from './signals/isFroalaSignal'
+export { isDraggingSignal } from './signals/isDraggingSignal'
 export { backgroundMessageSignal } from './signals/backgroundMessageSignal'
 
 // ref

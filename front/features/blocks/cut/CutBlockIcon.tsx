@@ -4,6 +4,7 @@ import type { MouseEvent } from 'react'
 import { TbCut } from 'react-icons/tb'
 import { copySlice } from '@entities/copy'
 import {
+  isDraggingSignal,
   isFroalaSignal,
   itemType,
   quotationSlice,
@@ -26,6 +27,7 @@ export const CutBlockIcon = (): JSX.Element => {
     <Tooltip
       title='cut'
       placement='left'
+      disableHoverListener={isDraggingSignal.value}
     >
       <span className={cls.actionIconContainer}>
         <TbCut

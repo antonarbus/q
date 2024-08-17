@@ -1,11 +1,16 @@
 import type { DragEndEvent, DragStartEvent } from '@dnd-kit/core'
 import { dispatch, getState } from '@lib_instances/store'
 import { arrayMoveImmutable } from 'array-move'
-import { isFroalaSignal, quotationSlice } from '@entities/quotation'
+import {
+  isFroalaSignal,
+  isDraggingSignal,
+  quotationSlice,
+} from '@entities/quotation'
 
 export const onBlockDragStart = (event: DragStartEvent): void => {
   document.body.style.cursor = 'move'
   isFroalaSignal.value = false
+  isDraggingSignal.value = true
 }
 
 export const onBlockDragEnd =
@@ -14,6 +19,7 @@ export const onBlockDragEnd =
     const { active, over } = event
 
     isFroalaSignal.value = true
+    isDraggingSignal.value = false
     document.body.style.removeProperty('cursor')
 
     if (!over) return

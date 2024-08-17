@@ -1,13 +1,18 @@
 import type { DragEndEvent, DragStartEvent } from '@dnd-kit/core'
 import { dispatch } from '@lib_instances/store'
 import { arrayMoveImmutable } from 'array-move'
-import { getBoqRowsFromStore, quotationSlice } from '@entities/quotation'
+import {
+  getBoqRowsFromStore,
+  isDraggingSignal,
+  quotationSlice,
+} from '@entities/quotation'
 
 export const onBoqRowDragStart =
   ({ blockIndex }: { blockIndex: number }) =>
   (event: DragStartEvent): void => {
     document.body.style.cursor = 'move'
     dispatch(quotationSlice.actions.disableFroalaReducer({ blockIndex }))
+    isDraggingSignal.value = true
   }
 
 export const onBoqRowDragEnd =
@@ -16,6 +21,7 @@ export const onBoqRowDragEnd =
     const { active, over } = event
 
     dispatch(quotationSlice.actions.enableFroalaReducer({ blockIndex }))
+    isDraggingSignal.value = false
     document.body.style.removeProperty('cursor')
 
     if (!over) return

@@ -5,6 +5,7 @@ import type { MouseEvent } from 'react'
 import { GoTrash } from 'react-icons/go'
 import { copySlice } from '@entities/copy'
 import {
+  isDraggingSignal,
   isFroalaSignal,
   quotationSlice,
   selectIsLastBlock,
@@ -25,6 +26,7 @@ export const DeleteBlockIcon = (): EmotionJSX.Element => {
     <Tooltip
       title='delete'
       placement='right'
+      disableHoverListener={isDraggingSignal.value}
     >
       <span className={cls.actionIconContainer}>
         <GoTrash

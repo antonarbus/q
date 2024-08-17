@@ -1,6 +1,10 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { MdDragIndicator } from 'react-icons/md'
-import { useIsBoqRowSortDisabled, useRow } from '@entities/quotation'
+import {
+  isDraggingSignal,
+  useIsBoqRowSortDisabled,
+  useRow,
+} from '@entities/quotation'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/consts/cls'
 
@@ -17,6 +21,7 @@ export const DragBoqRowIcon = (): JSX.Element => {
     <Tooltip
       title='drag'
       placement='left'
+      disableHoverListener={isDraggingSignal.value}
     >
       <span className={cls.actionIconContainer}>
         <MdDragIndicator
