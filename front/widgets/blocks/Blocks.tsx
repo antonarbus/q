@@ -14,6 +14,7 @@ type Props = {
 export const Blocks = ({ blocks }: Props): React.ReactNode => {
   if (blocks.length === 0) return null
 
+  // clean blocks from a bookmark at blocks[1000] which we use to show in in modal view
   const blocksCloned = structuredClone(blocks)
   blocksCloned[bookmarkPosAtBlocks] = null
 

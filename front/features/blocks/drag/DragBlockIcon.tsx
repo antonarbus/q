@@ -1,35 +1,80 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { MdDragIndicator } from 'react-icons/md'
 import { useIsBlockSortDisabled, useBlock } from '@entities/quotation'
-// import { } from '@mui/material'
+import { Tooltip } from '@mui/material'
 import { cls } from '@shared/consts/cls'
+import { useRef, useState } from 'react'
+import { dragTooltipTextSignal } from './dragTooltipTextSignal'
 
 export const DragBlockIcon = (): JSX.Element => {
   const disabled = useIsBlockSortDisabled()
   const { block } = useBlock()
-  const { listeners } = useSortable({ id: block.id, disabled })
+  const { listeners, attributes, isDragging } = useSortable({
+    id: block.id,
+    disabled,
+  })
+  const [openTooltip, setOpenTooltip] = useState(false)
+  const isOverDragIcon = useRef(false)
 
   return (
-    // todo: if drag icon is wrapped with tooltip sorting starts to behave strange, scroll is reset on click
-    // todo: think about controlled tooltip for some shadow element, don't know :(
-    // <Tooltip
-    //   title='drag'
-    //   placement='left'
-    //   enterDelay={500}
-    //   enterNextDelay={500}
-    // >
-    //   <span className={cls.actionIconContainer}>
-    <MdDragIndicator
-      {...listeners}
-      className={cls.actionIcon}
-      tabIndex={-1}
-      style={{
-        color: disabled ? '#acacac' : '#000',
-        cursor: disabled ? 'default' : 'move',
-        touchAction: 'none',
-      }}
-    />
-    //   </span>
-    // </Tooltip>
+    <span
+      className={cls.actionIconContainer}
+      style={{ position: 'relative' }}
+    >
+      {/* if we wrap icon with tooltip dragging works strange, scroll is reset for no reason */}
+      <Tooltip
+        title={dragTooltipTextSignal.value}
+        placement='left'
+        enterDelay={500}
+        enterNextDelay={500}
+        open={openTooltip}
+      >
+        <span
+          style={{
+            position: 'absolute',
+            inset: 0,
+            zIndex: -1,
+          }}
+        ></span>
+      </Tooltip>
+      <MdDragIndicator
+        {...attributes}
+        {...listeners}
+        onPointerEnter={(event) => {
+          isOverDragIcon.current = true
+          setTimeout(() => {
+            if (isOverDragIcon.current) {
+              dragTooltipTextSignal.value = 'drag'
+              setOpenTooltip(true)
+            }
+          }, 500)
+        }}
+        onPointerLeave={(event) => {
+          if (!isDragging) {
+            setOpenTooltip(false)
+            isOverDragIcon.current = false
+          }
+        }}
+        onPointerMove={() => {
+          if (isDragging && dragTooltipTextSignal.value === 'drag') {
+            dragTooltipTextSignal.value = 'drop'
+          }
+        }}
+        onPointerDown={(event) => {
+          dragTooltipTextSignal.value = 'drop'
+
+          setTimeout(() => {
+            listeners?.onPointerDown?.(event)
+          })
+        }}
+        className={cls.actionIcon}
+        tabIndex={-1}
+        style={{
+          color: disabled ? '#acacac' : '#000',
+          cursor: disabled ? 'default' : 'move',
+          touchAction: 'none',
+        }}
+      />
+    </span>
   )
 }
