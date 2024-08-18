@@ -2,6 +2,9 @@ import {
   DndContext,
   PointerSensor,
   closestCenter,
+  // pointerWithin, // bad for large elements
+  // closestCorners, // bad for large elements
+  // rectIntersection, // bad for large elements
   useSensor,
   useSensors,
 } from '@dnd-kit/core'
