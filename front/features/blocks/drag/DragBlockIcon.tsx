@@ -24,6 +24,7 @@ export const DragBlockIcon = (): JSX.Element => {
           style={{
             color: disabled ? '#acacac' : '#000',
             cursor: disabled ? 'default' : 'move',
+            touchAction: 'none',
           }}
         />
       </span>
