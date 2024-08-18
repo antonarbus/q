@@ -11,7 +11,7 @@ import { Icon } from './Icon'
 import { Menu } from './Menu'
 import { SpinnerIcon } from './SpinnerIcon'
 import { SuccessIcon } from './SuccessIcon'
-import { Box, Tooltip } from '@mui/material'
+import { Tooltip } from '@mui/material'
 
 type Props = {
   children?: React.ReactNode
