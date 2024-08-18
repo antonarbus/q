@@ -7,14 +7,14 @@ type Props = {
 export const useIsButtonDisabled = ({
   quotationFormValues,
 }: Props): boolean => {
+  const missingName = quotationFormValues.nameSignal.value === ''
+  const missingCategory = quotationFormValues.categorySignal.value === ''
+
   const forgotToAddPerson =
     quotationFormValues.shareWithOptionSignal.value === 'persons' &&
     quotationFormValues.sharedWithSignal.value.length === 0
 
-  const isButtonDisabled =
-    quotationFormValues.nameSignal.value === '' ||
-    quotationFormValues.categorySignal.value === '' ||
-    forgotToAddPerson
+  const isButtonDisabled = missingName || missingCategory || forgotToAddPerson
 
   return isButtonDisabled
 }
