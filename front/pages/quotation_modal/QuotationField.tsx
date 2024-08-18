@@ -4,6 +4,7 @@ import { Blocks } from '@widgets/blocks'
 import { isFroalaSignal } from '@entities/quotation'
 import { OutlinedDivWithLabel } from '@shared/components'
 import { getState, useSelectorTyped } from '@lib_instances/store'
+import { cls } from '@shared/consts/cls'
 
 type Props = {
   children: React.ReactNode
@@ -31,8 +32,11 @@ const QuotationFieldLayout = ({ children }: Props): JSX.Element => {
           height: '180px',
           margin: '10px',
           padding: '10px',
-          '.actions-container': {
+          [`.${cls.actionsContainer}`]: {
             display: 'none !important',
+          },
+          [`.${cls.blocks}`]: {
+            display: 'block !important',
           },
         }}
       >

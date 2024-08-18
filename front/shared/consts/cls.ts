@@ -5,12 +5,12 @@ export const cls = {
   priceBlock: 'price-block',
   textBlock: 'text-block',
   paper: 'paper',
-  actionsContainer: 'actions-container',
   boqRows: 'boq-rows',
   boqRow: 'boq-row',
   pin: 'pin',
   searchAutocomplete: 'search-autocomplete',
   search: 'search',
+  actionsContainer: 'actions-container',
   actionIconContainer: 'action-icon-container',
   actionIcon: 'action-icon',
 } as const
