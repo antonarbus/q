@@ -60,6 +60,7 @@ export const CopyBlockIcon = (): JSX.Element => {
             dispatch(
               copySlice.actions.addItemIntoCopyContainer({ item: block }),
             )
+
             dispatch(copySlice.actions.allowToPaste())
 
             const isCopyContainer = getState().copy.isCopyContainer
