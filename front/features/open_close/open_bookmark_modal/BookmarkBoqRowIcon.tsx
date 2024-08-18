@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom'
 import {
   boqRowKey,
   getBoqRowFromStore,
-  isDraggingSignal,
   quotationSlice,
   useBlock,
   useRow,
@@ -25,7 +24,6 @@ export const BookmarkBoqRowIcon = (): ReactNode => {
     <Tooltip
       title='add to bookmarks'
       placement='right'
-      disableHoverListener={isDraggingSignal.value}
       enterDelay={500}
       enterNextDelay={500}
     >

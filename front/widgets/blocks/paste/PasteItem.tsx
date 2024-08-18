@@ -4,11 +4,11 @@ import { motion } from 'framer-motion'
 import { useBlock } from '@entities/quotation'
 
 export const PasteItem = (): EmotionJSX.Element => {
-  const { id } = useBlock()
+  const { block } = useBlock()
 
   return (
     <motion.div
-      id={id}
+      id={block.id}
       initial={{
         height: 0,
         marginBottom: 0,

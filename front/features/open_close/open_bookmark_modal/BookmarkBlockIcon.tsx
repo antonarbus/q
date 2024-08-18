@@ -4,7 +4,6 @@ import { MdOutlineStarOutline } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import {
   getBlockFromStore,
-  isDraggingSignal,
   itemType,
   quotationSlice,
   saveBlockHeightByIndex,
@@ -24,7 +23,6 @@ export const BookmarkBlockIcon = (): ReactNode => {
     <Tooltip
       title='add to bookmarks'
       placement='right'
-      disableHoverListener={isDraggingSignal.value}
       enterDelay={500}
       enterNextDelay={500}
     >

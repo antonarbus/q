@@ -5,7 +5,6 @@ import { TbCut } from 'react-icons/tb'
 import { copySlice } from '@entities/copy'
 import {
   getBoqRowFromStore,
-  isDraggingSignal,
   isFroalaSignal,
   quotationSlice,
   selectIsLastBoqRow,
@@ -28,7 +27,6 @@ export const CutBoqRowIcon = (): JSX.Element => {
     <Tooltip
       title='cut'
       placement='left'
-      disableHoverListener={isDraggingSignal.value}
       enterDelay={500}
       enterNextDelay={500}
     >

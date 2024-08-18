@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import {
   boqRowKey,
   getBoqRowFromStore,
-  isDraggingSignal,
   useBlock,
   useRow,
 } from '@entities/quotation'
@@ -21,7 +20,6 @@ export const OpenInfoBoqRowModalIcon = (): ReactNode => {
     <Tooltip
       title='info'
       placement='right'
-      disableHoverListener={isDraggingSignal.value}
       enterDelay={500}
       enterNextDelay={500}
     >

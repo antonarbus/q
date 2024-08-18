@@ -1,27 +1,18 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { MdDragIndicator } from 'react-icons/md'
-import {
-  useIsBlockSortDisabled,
-  useBlock,
-  isDraggingSignal,
-} from '@entities/quotation'
+import { useIsBlockSortDisabled, useBlock } from '@entities/quotation'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/consts/cls'
 
 export const DragBlockIcon = (): JSX.Element => {
   const disabled = useIsBlockSortDisabled()
-  const { id } = useBlock()
-
-  const { listeners } = useSortable({
-    id,
-    disabled,
-  })
+  const { block } = useBlock()
+  const { listeners } = useSortable({ id: block.id, disabled })
 
   return (
     <Tooltip
       title='drag'
       placement='left'
-      disableHoverListener={isDraggingSignal.value}
       enterDelay={500}
       enterNextDelay={500}
     >

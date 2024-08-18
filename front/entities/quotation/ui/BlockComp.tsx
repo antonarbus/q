@@ -36,12 +36,10 @@ export const BlockComp = ({
   rightBlockActionButtons,
   className,
 }: Props): JSX.Element => {
-  const { blockIndex } = useBlock()
-  const block = getState().quotation.blocks[blockIndex]
-  const { id } = useBlock()
+  const { block } = useBlock()
 
   const { setNodeRef, transform, transition, isDragging } = useSortable({
-    id,
+    id: block.id,
   })
 
   return (
@@ -57,8 +55,8 @@ export const BlockComp = ({
         disableResize={disableResize}
         autoWidth={autoWidth}
         minWidth={minWidth}
-        blockHeight={block?.height ?? 0}
-        id={block?.id ?? 'no id'}
+        blockHeight={block.height ?? 0}
+        id={block.id ?? 'no id'}
         onItemResizeStart={onBlockResizeStart}
         onItemResize={onBlockResize}
         onItemResizeStop={onBlockResizeStop}

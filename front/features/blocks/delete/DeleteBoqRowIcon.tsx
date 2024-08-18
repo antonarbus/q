@@ -4,7 +4,6 @@ import { flushSync } from 'react-dom'
 import { GoTrash } from 'react-icons/go'
 import { copySlice } from '@entities/copy'
 import {
-  isDraggingSignal,
   quotationSlice,
   selectIsLastBoqRow,
   useBlock,
@@ -25,7 +24,6 @@ export const DeleteBoqRowIcon = (): JSX.Element => {
     <Tooltip
       title='delete'
       placement='right'
-      disableHoverListener={isDraggingSignal.value}
       enterDelay={500}
       enterNextDelay={500}
     >

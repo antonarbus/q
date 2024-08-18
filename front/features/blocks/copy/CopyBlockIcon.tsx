@@ -4,7 +4,6 @@ import { MdCopyAll } from 'react-icons/md'
 import { copySlice } from '@entities/copy'
 import {
   isFroalaSignal,
-  isDraggingSignal,
   itemType,
   saveBlockHeightByIndex,
   useBlock,
@@ -22,7 +21,6 @@ export const CopyBlockIcon = (): JSX.Element => {
     <Tooltip
       title='copy'
       placement='left'
-      disableHoverListener={isDraggingSignal.value}
       enterDelay={500}
       enterNextDelay={500}
     >

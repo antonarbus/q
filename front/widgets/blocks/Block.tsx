@@ -17,7 +17,6 @@ type Props = {
 export const Block = ({ block, blockIndex }: Props): React.ReactNode => {
   return (
     <BlockProvider
-      id={block.id}
       blockIndex={blockIndex}
       block={block}
     >

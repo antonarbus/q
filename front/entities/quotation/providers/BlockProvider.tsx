@@ -3,7 +3,6 @@ import type { Item } from '../types'
 
 type Context = {
   blockIndex: number
-  id: string
   block: Item
 }
 
@@ -16,14 +15,12 @@ const BlockContext = createContext<Context | null>(null)
 export const BlockProvider = ({
   children,
   blockIndex,
-  id,
   block,
 }: Props): JSX.Element => {
   return (
     <BlockContext.Provider
       value={{
         blockIndex,
-        id,
         block,
       }}
     >

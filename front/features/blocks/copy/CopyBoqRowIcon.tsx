@@ -4,7 +4,6 @@ import { MdCopyAll } from 'react-icons/md'
 import { copySlice } from '@entities/copy'
 import {
   getBoqRowFromStore,
-  isDraggingSignal,
   isFroalaSignal,
   quotationSlice,
   useBlock,
@@ -24,7 +23,6 @@ export const CopyBoqRowIcon = (): JSX.Element => {
     <Tooltip
       title='copy'
       placement='left'
-      disableHoverListener={isDraggingSignal.value}
       enterDelay={500}
       enterNextDelay={500}
     >

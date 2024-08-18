@@ -1,12 +1,7 @@
 import type { ReactNode, MouseEvent } from 'react'
 import { HiOutlineInformationCircle } from 'react-icons/hi2'
 import { useNavigate } from 'react-router-dom'
-import {
-  getBlockFromStore,
-  isDraggingSignal,
-  itemType,
-  useBlock,
-} from '@entities/quotation'
+import { getBlockFromStore, itemType, useBlock } from '@entities/quotation'
 import { route } from '@shared/consts/route'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/consts/cls'
@@ -19,7 +14,6 @@ export const OpenInfoBlockModalIcon = (): ReactNode => {
     <Tooltip
       title='info'
       placement='right'
-      disableHoverListener={isDraggingSignal.value}
       enterDelay={500}
       enterNextDelay={500}
     >
