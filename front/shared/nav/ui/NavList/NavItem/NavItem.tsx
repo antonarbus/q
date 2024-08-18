@@ -11,6 +11,7 @@ import { Icon } from './Icon'
 import { Menu } from './Menu'
 import { SpinnerIcon } from './SpinnerIcon'
 import { SuccessIcon } from './SuccessIcon'
+import { Box, Tooltip } from '@mui/material'
 
 type Props = {
   children?: React.ReactNode
@@ -152,16 +153,34 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
         {icon && isSuccess && <SuccessIcon />}
         {icon && isError && <ErrorIcon />}
         {icon && !isLoading && !isSuccess && !isError && (
-          <Icon
-            icon={icon}
-            disabled={disabled}
-          />
+          <Tooltip
+            title={name}
+            placement='bottom'
+            enterDelay={500}
+            enterNextDelay={500}
+          >
+            <span className='element-that-keep-ref-from-mui'>
+              <Icon
+                icon={icon}
+                disabled={disabled}
+              />
+            </span>
+          </Tooltip>
         )}
         {!icon && shouldDisplayIcon && (
-          <Icon
-            icon={name?.[0]}
-            disabled={disabled}
-          />
+          <Tooltip
+            title={name}
+            placement='bottom'
+            enterDelay={500}
+            enterNextDelay={500}
+          >
+            <span className='element-that-keep-ref-from-mui'>
+              <Icon
+                icon={name?.[0]}
+                disabled={disabled}
+              />
+            </span>
+          </Tooltip>
         )}
         {name && <span className='nav-item-name'>{name}</span>}
         {isNestedMenu && !disabled && (

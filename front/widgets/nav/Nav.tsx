@@ -1,7 +1,10 @@
 import { dispatch, useSelectorTyped } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
 import { useRef } from 'react'
-import { useEffectOnce } from 'react-use'
+import {
+  useEffectOnce,
+  // useWindowSize
+} from 'react-use'
 import {
   navSlice,
   useMediaQueryValues,
@@ -17,7 +20,18 @@ export const Nav = (): JSX.Element => {
   const mediaQueryWidth = useSelectorTyped((state) => state.nav.mediaQueryWidth)
   const mediaEnabled = useSelectorTyped((state) => state.nav.mediaEnabled)
   useMenuItemActionShortcuts({ navStructure })
+
+  // todo: upgrade useMediaQueryValues to let it monitor the window width and return shouldShrinkLogo, shouldHideIcons...
+  // todo: and pass it down instead of media queries
+  // todo: in this case we may show tooltips under icons when text is not shown
   useMediaQueryValues({ navRef, logoRef })
+  // const { width } = useWindowSize()
+  // const shouldShrinkLogo = width < mediaQueryWidth.logoPart
+  // console.log('🚀 ~ shouldShrinkLogo:', shouldShrinkLogo)
+  // const shouldHideIcons =
+  //   width < mediaQueryWidth.icon && width > mediaQueryWidth.name
+  // const shouldHideText = width < mediaQueryWidth.name
+  // const shouldShowHamburger = width < mediaQueryWidth.burger
 
   useEffectOnce(() => {
     dispatch(navSlice.actions.addNavStructure({ navStructure }))
@@ -43,7 +57,7 @@ export const Nav = (): JSX.Element => {
         zIndex: 6,
         contain: 'layout inline-size',
         fontWeight: 300,
-        '& > ul > li > a > .icon-round-wrapper': mediaEnabled && {
+        '& > ul > li > a .icon-round-wrapper': mediaEnabled && {
           [`@media (max-width: ${String(mediaQueryWidth.icon)}px) and (min-width: ${String(mediaQueryWidth.name)}px)`]:
             {
               display: 'none',

@@ -18,8 +18,10 @@ export const useMediaQueryValues = ({ navRef, logoRef }: Props): void => {
     // initial calculation of media query values
     if (!navRef.current) return
     if (!logoRef.current) return
+
     const { logoExtension, logoPart, icon, name, burger } =
       calcNavMediaQueryParams(navRef.current, logoRef.current)
+
     dispatch(
       navSlice.actions.setNavMediaQueryWidths({
         logoExtension,
@@ -34,6 +36,7 @@ export const useMediaQueryValues = ({ navRef, logoRef }: Props): void => {
   useLayoutEffect(() => {
     // if menu item is hidden disable all media queries and get whole nav
     if (isFirstMount) return
+
     dispatch(navSlice.actions.disableMedia())
   }, [navStructure])
 
@@ -43,8 +46,10 @@ export const useMediaQueryValues = ({ navRef, logoRef }: Props): void => {
     if (mediaEnabled) return
     if (!navRef.current) return
     if (!logoRef.current) return
+
     const { logoExtension, logoPart, icon, name, burger } =
       calcNavMediaQueryParams(navRef.current, logoRef.current)
+
     dispatch(
       navSlice.actions.setNavMediaQueryWidths({
         logoExtension,
@@ -54,6 +59,7 @@ export const useMediaQueryValues = ({ navRef, logoRef }: Props): void => {
         burger,
       }),
     )
+
     dispatch(navSlice.actions.enableMedia())
   }, [mediaEnabled])
 }

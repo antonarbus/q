@@ -1,3 +1,4 @@
+import { Box } from '@mui/material'
 import { RoundSpanForIcon } from './RoundSpanForIcon'
 
 type Props = {
