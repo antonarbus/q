@@ -1,6 +1,5 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { getState } from '@lib_instances/store'
 import type { ResizableProps } from 're-resizable'
 import type {
   OnBlockResize,
@@ -56,7 +55,7 @@ export const BlockComp = ({
         autoWidth={autoWidth}
         minWidth={minWidth}
         blockHeight={block.height ?? 0}
-        id={block.id ?? 'no id'}
+        id={block.id}
         onItemResizeStart={onBlockResizeStart}
         onItemResize={onBlockResize}
         onItemResizeStop={onBlockResizeStop}
