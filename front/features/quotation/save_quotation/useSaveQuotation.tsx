@@ -20,6 +20,7 @@ import {
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
 import type { QuotationFormValues } from '@entities/quotation/types'
+import { route } from '@shared/consts/route'
 
 type Props = {
   modalRef: React.RefObject<HTMLDivElement>
@@ -77,19 +78,22 @@ export const useSaveQuotation = ({
             quotation: data.quotation,
           }),
         )
+
+        showSuccessNavIcon({ navMenuItemIdKey: navItemKey.save })
+
+        dispatch(navSlice.actions.removeUnderlineFromTopNav())
+
+        setTimeout(() => {
+          slideElement({
+            element: modalRef.current,
+            onSlideElementComplete: () => {
+              const id = data.quotation?.id
+              if (!id) return
+              navigate(`/${id}`)
+            },
+          })
+        }, 1000)
       }
-
-      showSuccessNavIcon({ navMenuItemIdKey: navItemKey.save })
-      dispatch(navSlice.actions.removeUnderlineFromTopNav())
-
-      setTimeout(() => {
-        slideElement({
-          element: modalRef.current,
-          onSlideElementComplete: () => {
-            navigate(`..`)
-          },
-        })
-      }, 1000)
     }
   }, [isSuccess])
 
