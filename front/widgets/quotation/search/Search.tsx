@@ -15,11 +15,14 @@ export const Search = (): JSX.Element => {
     isPending: isPendingBookmarks,
     refetch: fetchBookmarks,
   } = useGetBookmarksQuery()
-  const email = useSelectorTyped((state) => state.user.email)
   const options = bookmarksData?.bookmarks ?? []
-  const inputValueSignal = useSignal('')
+
   const { loadBookmark, isPendingBookmark, pendingBookmarkId } =
     useCopyBookmarkAtSearch()
+
+  const inputValueSignal = useSignal('')
+
+  const email = useSelectorTyped((state) => state.user.email)
 
   useEffect(() => {
     if (email) {

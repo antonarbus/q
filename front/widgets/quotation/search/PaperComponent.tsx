@@ -23,6 +23,19 @@ export const PaperComponent = (
       {...props}
     >
       {props.children}
+      <Box
+        sx={{
+          fontSize: '14px',
+          color: 'grey',
+          fontWeight: 500,
+          position: 'absolute',
+          top: '6px',
+          left: '50%',
+          translate: '-50% 0',
+        }}
+      >
+        Bookmarks
+      </Box>
       <IconButton
         size='small'
         sx={{
