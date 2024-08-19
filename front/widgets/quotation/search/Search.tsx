@@ -15,6 +15,7 @@ export const Search = (): JSX.Element => {
     isPending: isPendingBookmarks,
     refetch: fetchBookmarks,
   } = useGetBookmarksQuery()
+
   const options = bookmarksData?.bookmarks ?? []
 
   const { loadBookmark, isPendingBookmark, pendingBookmarkId } =
@@ -30,9 +31,18 @@ export const Search = (): JSX.Element => {
     }
   }, [email])
 
+  const isAutocompleteOpen = useSignal(false)
+
+  const isCopyContainer = useSelectorTyped(
+    (state) => state.copy.isCopyContainer,
+  )
+
   return (
     <Autocomplete
-      // open // manual open control to see for dev purpose
+      open={isAutocompleteOpen.value}
+      onOpen={() => (isAutocompleteOpen.value = true)}
+      onClose={() => (isAutocompleteOpen.value = false)}
+      disabled={isCopyContainer}
       className={cls.search}
       freeSolo={options.length !== 0} // show MUI autocomplete even if no options
       disablePortal
@@ -59,9 +69,16 @@ export const Search = (): JSX.Element => {
         inputValueSignal,
         isPendingBookmark,
         pendingBookmarkId,
+        isAutocompleteOpen,
       })}
       PaperComponent={PaperComponent}
-      componentsProps={{ popper: { sx: { zIndex: 3 } } }}
+      componentsProps={{
+        popper: {
+          sx: {
+            zIndex: 3,
+          },
+        },
+      }}
       sx={{
         position: 'relative',
         width: '300px',

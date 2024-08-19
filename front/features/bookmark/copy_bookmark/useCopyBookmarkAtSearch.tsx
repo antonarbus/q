@@ -4,16 +4,28 @@ import { useGetBookmarkMutation } from '@entities/bookmark'
 import { copySlice } from '@entities/copy'
 import { isFroalaSignal } from '@entities/quotation'
 import { notify } from '@shared/ui/top_msg'
+import type { UseMutateAsyncFunction } from '@tanstack/react-query'
+import type {
+  ReqBody as Payload,
+  ResBody,
+} from '@back/api/bookmark/getBookmarkRouter'
+import type { AxiosError } from 'axios'
+
+export type LoadBookmark = UseMutateAsyncFunction<
+  ResBody,
+  AxiosError<ResBody>,
+  Payload
+>
 
 type Res = {
-  loadBookmark: ({ id }: { id: string }) => void
+  loadBookmark: LoadBookmark
   isPendingBookmark: boolean
   pendingBookmarkId: string
 }
 
 export const useCopyBookmarkAtSearch = (): Res => {
   const {
-    mutate: loadBookmark,
+    mutateAsync: loadBookmark,
     isPending: isPendingBookmark,
     isSuccess,
     isError,

@@ -5,12 +5,15 @@ import type { Item } from '@entities/quotation'
 import { PiBooks } from 'react-icons/pi'
 import { RotatingLoaderIcon } from '@shared/components'
 import { getJsxWithBoldSubstr } from '@shared/utils/getJsxWithBoldSubstr'
+import type { Signal } from '@preact/signals-react'
+import type { LoadBookmark } from '@features/bookmark/copy_bookmark'
 
 type Props = {
-  loadBookmark: ({ id }: { id: string }) => void
+  loadBookmark: LoadBookmark
   inputValueSignal: { value: string }
   isPendingBookmark: boolean
   pendingBookmarkId: string
+  isAutocompleteOpen: Signal<boolean>
 }
 
 export const renderOption = ({
@@ -18,6 +21,7 @@ export const renderOption = ({
   inputValueSignal,
   isPendingBookmark,
   pendingBookmarkId,
+  isAutocompleteOpen,
 }: Props) =>
   function render(
     props: HTMLAttributes<HTMLLIElement>,
@@ -50,8 +54,10 @@ export const renderOption = ({
     return (
       <li
         // {...props}
-        onClick={() => {
-          loadBookmark({ id: option.id })
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
+        onClick={async () => {
+          await loadBookmark({ id: option.id })
+          isAutocompleteOpen.value = false
         }}
         key={option.id}
         css={{
