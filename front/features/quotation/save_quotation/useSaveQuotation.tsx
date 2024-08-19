@@ -20,7 +20,6 @@ import {
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
 import type { QuotationFormValues } from '@entities/quotation/types'
-import { route } from '@shared/consts/route'
 
 type Props = {
   modalRef: React.RefObject<HTMLDivElement>
