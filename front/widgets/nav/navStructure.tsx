@@ -37,7 +37,7 @@ export const navStructure: MenuItemType[] = [
     menuItems: [
       {
         id: navItemKey.back,
-        icon: <IoChevronBackOutline />,
+        icon: <IoChevronBackOutline style={{ color: '#3bc3ff' }} />,
         isHidden: true,
         name: 'Back',
         // shortcut: ['control', 'n'],
