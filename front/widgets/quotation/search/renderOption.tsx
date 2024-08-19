@@ -63,9 +63,18 @@ export const renderOption = ({
           margin: '2px 4px',
           fontSize: '14px',
           border: '1px solid #ccc',
-          '&:hover': {
-            background: '#dfdfdf !important',
-          },
+          ...(!isPendingBookmark && {
+            ':hover::after': {
+              content: '"Click to copy"',
+              position: 'absolute',
+              inset: 0,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              background: 'rgba(0, 0, 0, 0.05)',
+              backdropFilter: 'blur(3px)',
+            },
+          }),
         }}
       >
         <Box
