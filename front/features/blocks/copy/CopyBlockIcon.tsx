@@ -10,7 +10,7 @@ import {
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { Tooltip } from '@mui/material'
-import { getPaperElementHtml } from '@shared/utils'
+import { getClosestPaperElementHtml } from '@shared/utils'
 
 export const CopyBlockIcon = (): JSX.Element => {
   const { blockIndex } = useBlock()
@@ -43,7 +43,7 @@ export const CopyBlockIcon = (): JSX.Element => {
             if (!blockToCopy) return
             if (blockToCopy.type === itemType.paste) return
 
-            const html = getPaperElementHtml(e)
+            const html = getClosestPaperElementHtml(e)
             isFroalaSignal.value = false
 
             const block = structuredClone(blockToCopy)

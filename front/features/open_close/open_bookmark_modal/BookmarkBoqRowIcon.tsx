@@ -12,7 +12,7 @@ import {
 import { cls } from '@shared/consts/cls'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
-import { cleanHtml } from '@shared/utils/itemsUtils'
+import { cleanHtml } from '@shared/utils/htmlGetter/itemsUtils'
 import { Tooltip } from '@mui/material'
 
 export const BookmarkBoqRowIcon = (): ReactNode => {

@@ -13,7 +13,7 @@ import {
   saveBlockHeightByIndex,
   useBlock,
 } from '@entities/quotation'
-import { getPaperElementHtml } from '@shared/utils'
+import { getClosestPaperElementHtml } from '@shared/utils'
 
 export const BookmarkBlockIcon = (): ReactNode => {
   const navigate = useNavigate()
@@ -40,7 +40,7 @@ export const BookmarkBlockIcon = (): ReactNode => {
             }
 
             saveBlockHeightByIndex({ blockIndex })
-            const html = getPaperElementHtml(e)
+            const html = getClosestPaperElementHtml(e)
             const block = getBlockFromStore({ blockIndex })
 
             if (!block) return
