@@ -15,6 +15,7 @@ export type MenuItemType = {
   isSuccess?: boolean
   isError?: boolean
   isActive?: boolean
+  tooltip?: string
 }
 
 export type NavItemIdKey = keyof typeof navItemKey

@@ -66,6 +66,7 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
   const isError = navItem?.isError
   const disabled = Boolean(navItem?.disabled)
   const isActive = navItem?.isActive
+  const tooltipText = navItem?.tooltip
 
   const fixedLink = `${location.pathname}/${link}`
     .replace('.', '')
@@ -154,7 +155,7 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
         {icon && isError && <ErrorIcon />}
         {icon && !isLoading && !isSuccess && !isError && (
           <Tooltip
-            title={name}
+            title={tooltipText}
             placement='bottom'
             enterDelay={500}
             enterNextDelay={500}
@@ -169,7 +170,7 @@ export const NavItem = ({ children, id }: Props): JSX.Element => {
         )}
         {!icon && shouldDisplayIcon && (
           <Tooltip
-            title={name}
+            title={tooltipText}
             placement='bottom'
             enterDelay={500}
             enterNextDelay={500}

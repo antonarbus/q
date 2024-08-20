@@ -46,6 +46,7 @@ export const navStructure: MenuItemType[] = [
           openQuotationPageAndLoadPrev()
         },
         isActive: true,
+        tooltip: 'Back to quotation',
       },
       {
         id: navItemKey.new,
@@ -58,6 +59,7 @@ export const navStructure: MenuItemType[] = [
           openQuotationPageAndLoadNew()
         },
         isActive: true,
+        tooltip: 'New quotation',
       },
       {
         id: navItemKey.save,
@@ -69,6 +71,7 @@ export const navStructure: MenuItemType[] = [
         func: (): void => {
           openQuotationModal()
         },
+        tooltip: 'Save or update quotation',
       },
       {
         id: navItemKey.pdf,
@@ -79,6 +82,7 @@ export const navStructure: MenuItemType[] = [
         func: (): void => {
           void downloadPdf()
         },
+        tooltip: 'Save as .pdf',
       },
       {
         id: navItemKey.insert,
@@ -136,6 +140,7 @@ export const navStructure: MenuItemType[] = [
             },
           },
         ],
+        tooltip: 'Insert block or row',
       },
       {
         id: navItemKey.bookmarks,
@@ -146,6 +151,7 @@ export const navStructure: MenuItemType[] = [
         func: (e?: React.MouseEvent): void => {
           openBookmarksPage()
         },
+        tooltip: 'Show your bookmarks',
       },
       {
         id: navItemKey.quotations,
@@ -156,6 +162,7 @@ export const navStructure: MenuItemType[] = [
         func: (e?: React.MouseEvent): void => {
           openQuotationsPage()
         },
+        tooltip: 'Show your quotations',
       },
       {
         id: navItemKey.login,
@@ -166,6 +173,7 @@ export const navStructure: MenuItemType[] = [
         func: (e?: React.MouseEvent): void => {
           openLoginModal()
         },
+        tooltip: 'Log in',
       },
       {
         id: navItemKey.profile,
@@ -191,6 +199,7 @@ export const navStructure: MenuItemType[] = [
             link: `./${route.logout}`,
           },
         ],
+        tooltip: 'Profile',
       },
     ],
   },
