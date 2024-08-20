@@ -67,7 +67,7 @@ export const useEditBookmark = ({
       } else if (data.message === 'updated') {
         notify({
           msg: 'Updated',
-          type: 'success',
+          type: 'info',
           theme: 'dark',
           position: 'bottom-center',
         })
