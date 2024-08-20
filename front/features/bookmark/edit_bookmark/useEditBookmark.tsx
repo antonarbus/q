@@ -117,10 +117,8 @@ export const useEditBookmark = ({
 
     saveBlockHeightByIndex({ blockIndex: 0 })
 
-    const html = getPaperElementHtml()
-
     const itemWithUpdatedPreview = structuredClone(block)
-
+    const html = getPaperElementHtml()
     itemWithUpdatedPreview.preview = html
 
     const itemWithUpdatedValues = {
