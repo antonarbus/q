@@ -1,6 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { getNumberFromString, getTextContentFromHtml } from '@shared/utils'
-import type { BoqRowCellKey } from '../../types'
+import type { RowCellKey } from '../../types'
 import { getBoqRowFromStore } from '../getters/getBoqRowFromStore'
 import { quotationSlice } from '../quotationSlice'
 
@@ -8,7 +8,7 @@ type Props = {
   html: string
   blockIndex: number
   rowIndex: number
-  boqRowCellKey: BoqRowCellKey
+  boqRowCellKey: RowCellKey
 }
 
 type Res = {

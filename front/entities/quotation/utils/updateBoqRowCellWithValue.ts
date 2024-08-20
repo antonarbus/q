@@ -7,13 +7,13 @@ import {
 } from '@shared/utils'
 import { getBoqRowFromStore } from '../redux/getters/getBoqRowFromStore'
 import { updateBoqRowCellAtStore } from '../redux/updaters/updateBoqRowCellAtStore'
-import type { BoqRowCellKey } from '../types'
+import type { RowCellKey } from '../types'
 
 type Props = {
   blockIndex: number
   rowIndex: number
   editor: FroalaEditor | null
-  boqRowCellKey: BoqRowCellKey
+  boqRowCellKey: RowCellKey
   value: number
 }
 

@@ -12,10 +12,10 @@ import {
   useBlock,
   Froala,
   subTotalPriceCellStyle,
-  type BoqHeaderKey,
+  type HeaderKey,
 } from '@entities/quotation'
 
-const boqHeaderKey: BoqHeaderKey = 'subTotalPrice'
+const boqHeaderKey: HeaderKey = 'subTotalPrice'
 
 export const SubTotalPrice = (): JSX.Element => {
   const { subTotalPriceEditorRef, boqRowEditorRefs } = useBoqBlock()

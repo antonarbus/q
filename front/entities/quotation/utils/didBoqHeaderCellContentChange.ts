@@ -1,11 +1,11 @@
 import type { FroalaEditor } from '@shared/types/froala'
 import { getBoqBlockFromStore } from '../redux/getters/getBoqBlockFromStore'
-import type { BoqHeaderKey } from '../types'
+import type { HeaderKey } from '../types'
 
 type Props = {
   editor: FroalaEditor
   blockIndex: number
-  boqHeaderKey: BoqHeaderKey
+  boqHeaderKey: HeaderKey
 }
 
 // froala has a bug, on first render it always thinks that content is changed

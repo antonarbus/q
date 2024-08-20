@@ -1,11 +1,11 @@
 import { createContext, useContext, type ReactNode } from 'react'
 import type { FroalaEditorRef } from '@shared/types/froala'
 import { useBoqBlock } from './BoqBlockProvider'
-import type { BoqRow } from '../types'
+import type { Row } from '../types'
 
 type Props = {
   rowIndex: number
-  row: BoqRow
+  row: Row
   children: ReactNode
 }
 

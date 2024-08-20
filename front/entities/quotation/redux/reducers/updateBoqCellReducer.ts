@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { itemType } from '../../consts/itemType'
-import type { BoqRowCellKey, Quotation } from '../../types'
+import type { RowCellKey, Quotation } from '../../types'
 
 export const updateBoqCellReducer = (
   state: Quotation,
@@ -9,7 +9,7 @@ export const updateBoqCellReducer = (
     rowIndex: number
     html: string
     value: number
-    boqRowCellKey: BoqRowCellKey
+    boqRowCellKey: RowCellKey
   }>,
 ): void => {
   const { blockIndex, rowIndex, html, value, boqRowCellKey } = action.payload

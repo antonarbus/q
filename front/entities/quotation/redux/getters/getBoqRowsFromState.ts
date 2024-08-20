@@ -1,4 +1,4 @@
-import type { Quotation, BoqRow } from '../../types'
+import type { Quotation, Row } from '../../types'
 import { getBoqBlockFromState } from './getBoqBlockFromState'
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 export const getBoqRowsFromState = ({
   blockIndex,
   state,
-}: Props): BoqRow[] | undefined => {
+}: Props): Row[] | undefined => {
   const boqBlock = getBoqBlockFromState({ blockIndex, state })
   if (boqBlock === undefined) return
   const boqRows = boqBlock.boq.rows

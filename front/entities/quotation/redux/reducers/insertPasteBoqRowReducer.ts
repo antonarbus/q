@@ -1,10 +1,10 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { CopyPlace } from '@entities/copy'
 import { boqRowKey } from '../../consts/boqRowKey'
-import type { BoqRow, BoqRowCell, Quotation } from '../../types'
+import type { Row, RowCell, Quotation } from '../../types'
 import { getBoqBlockFromState } from '../getters/getBoqBlockFromState'
 
-const defaultCellValues: BoqRowCell = {
+const defaultCellValues: RowCell = {
   html: '',
   value: 0,
   pin: {
@@ -13,7 +13,7 @@ const defaultCellValues: BoqRowCell = {
   },
 }
 
-const pasteText: BoqRow = {
+const pasteText: Row = {
   id: 'id of boq row paste',
   type: boqRowKey.paste,
   email: 'john@mail.com',

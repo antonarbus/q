@@ -2,7 +2,7 @@ import { useSelectorTyped } from '@lib_instances/store'
 import { Box } from '@mui/material'
 import { VscPinned } from 'react-icons/vsc'
 import {
-  type BoqRowCellKey,
+  type RowCellKey,
   selectBoqCellPin,
   useBlock,
   useRow,
@@ -10,7 +10,7 @@ import {
 import { cls } from '@shared/consts/cls'
 
 type Props = {
-  boqRowCellKey: BoqRowCellKey
+  boqRowCellKey: RowCellKey
   onClick: (e: React.MouseEvent) => void
 }
 

@@ -22,56 +22,56 @@ type Common = {
 }
 
 // boq
-export type BoqRowCellPin = {
+export type RowCellPin = {
   isPinned: boolean
   isShown: boolean
 }
 
-export type BoqRowCell = {
+export type RowCell = {
   html: string
   value: number
-  pin: BoqRowCellPin
+  pin: RowCellPin
 }
 
-export type BoqRow = Common & {
+export type Row = Common & {
   type: BoqRowKey
-  description: BoqRowCell
-  itemPrice: BoqRowCell
-  qty: BoqRowCell
-  price: BoqRowCell
+  description: RowCell
+  itemPrice: RowCell
+  qty: RowCell
+  price: RowCell
 }
 
-export type BoqCol = {
+export type Col = {
   html: string
   width: number
 }
 
-export type BoqCols = {
-  number: BoqCol
-  description: BoqCol
-  itemPrice: BoqCol
-  qty: BoqCol
-  price: BoqCol
+export type Cols = {
+  number: Col
+  description: Col
+  itemPrice: Col
+  qty: Col
+  price: Col
 }
 
-export type BoqHeaderCell = {
+export type HeaderCell = {
   html: string
   value: number
 }
 
-type BoqHeader = {
-  title: BoqHeaderCell
-  subtotalText: BoqHeaderCell
-  subTotalPrice: BoqHeaderCell
+type Header = {
+  title: HeaderCell
+  subtotalText: HeaderCell
+  subTotalPrice: HeaderCell
 }
 
-export type BoqHeaderKey = keyof BoqHeader
+export type HeaderKey = keyof Header
 
-export type BoqColumnKey = keyof BoqCols
+export type ColumnKey = keyof Cols
 
-export type BoqRowCellKey = keyof Omit<BoqCols, 'number'>
+export type RowCellKey = keyof Omit<Cols, 'number'>
 
-export type BoqRowEditorRefs = {
+export type RowEditorRefs = {
   description: FroalaEditorRef
   itemPrice: FroalaEditorRef
   qty: FroalaEditorRef
@@ -82,9 +82,9 @@ export type BoqRowEditorRefs = {
 export type BoqBlock = Common & {
   type: typeof itemType.boq
   boq: {
-    header: BoqHeader
-    column: BoqCols
-    rows: BoqRow[]
+    header: Header
+    column: Cols
+    rows: Row[]
   }
 }
 
@@ -108,7 +108,7 @@ export type PriceBlock = Common & {
   }
 }
 
-export type RowBlock = BoqRow
+export type RowBlock = Row
 
 export type PasteBlock = Common & {
   type: typeof itemType.paste

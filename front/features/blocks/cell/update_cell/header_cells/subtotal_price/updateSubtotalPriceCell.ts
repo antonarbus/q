@@ -7,8 +7,8 @@ import {
   updateBoqRowCellWithValue,
   updateSubTotalPriceWithValue,
   getBoqRowFromStore,
-  type BoqRow,
-  type BoqRowEditorRefs,
+  type Row,
+  type RowEditorRefs,
   boqRowCellKey,
 } from '@entities/quotation'
 import type { FroalaEditor, FroalaEditorRef } from '@shared/types/froala'
@@ -17,7 +17,7 @@ import { notify } from '@shared/ui/top_msg'
 type Props = {
   blockIndex: number
   subTotalPriceEditorRef: FroalaEditorRef
-  boqRowEditorRefs: BoqRowEditorRefs
+  boqRowEditorRefs: RowEditorRefs
 }
 
 export const updateSubtotalPriceCell = ({
@@ -168,7 +168,7 @@ export const updateSubtotalPriceCell = ({
   if (boqRowsUpdated === undefined) return
 
   const subTotalPriceValueNew: number = boqRowsUpdated.reduce(
-    (accumulator: number, boqRow: BoqRow) => {
+    (accumulator: number, boqRow: Row) => {
       const price = boqRow.price.value
       return accumulator + price
     },

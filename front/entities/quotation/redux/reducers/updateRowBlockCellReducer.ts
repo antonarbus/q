@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { itemType } from '../../consts/itemType'
-import type { BoqRowCellKey, Quotation } from '../../types'
+import type { RowCellKey, Quotation } from '../../types'
 import { bookmarkPosAtBlocks } from '@entities/quotation/consts/bookmarkPosAtBlocks'
 
 export const updateRowBlockCellReducer = (
@@ -8,7 +8,7 @@ export const updateRowBlockCellReducer = (
   action: PayloadAction<{
     html: string
     value: number
-    boqRowCellKey: BoqRowCellKey
+    boqRowCellKey: RowCellKey
   }>,
 ): void => {
   const { html, value, boqRowCellKey } = action.payload

@@ -8,7 +8,7 @@ import {
   updateBoqRowCellAtStore,
   updateBoqRowCellWithValue,
   updateSubTotalPriceWithValue,
-  type BoqRow,
+  type Row,
   boqRowCellKey,
 } from '@entities/quotation'
 
@@ -63,7 +63,7 @@ export const updateBoqRowItemPriceCell = ({
   if (boqRows === undefined) return
 
   const subTotalPriceValueNew: number = boqRows.reduce(
-    (accumulator: number, row: BoqRow) => {
+    (accumulator: number, row: Row) => {
       const price = row.price.value
       return accumulator + price
     },

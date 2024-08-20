@@ -5,7 +5,7 @@ import {
   useBoqBlock,
   useBlock,
   getBoqRowsFromStore,
-  type BoqRow,
+  type Row,
   updateSubTotalPriceWithValue,
   isFroalaSignal,
 } from '@entities/quotation'
@@ -26,7 +26,7 @@ export const useUpdateSubtotalPrice = (): void => {
     if (boqRows === undefined) return
 
     const subTotalPriceValueNew: number = boqRows.reduce(
-      (accumulator: number, boqRow: BoqRow) => {
+      (accumulator: number, boqRow: Row) => {
         const price = boqRow.price.value
         return accumulator + price
       },

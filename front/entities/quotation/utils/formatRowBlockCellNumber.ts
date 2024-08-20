@@ -3,12 +3,12 @@ import { roundTo } from 'round-to'
 import type { FroalaEditorRef } from '@shared/types/froala'
 import { getStringWithNewFormattedNumber } from '@shared/utils'
 import { quotationSlice } from '../redux/quotationSlice'
-import type { BoqRowCellKey } from '../types'
+import type { RowCellKey } from '../types'
 import { itemType } from '../consts/itemType'
 import { bookmarkPosAtBlocks } from '../consts/bookmarkPosAtBlocks'
 
 type Props = {
-  boqRowCellKey: BoqRowCellKey
+  boqRowCellKey: RowCellKey
   editorRef: FroalaEditorRef
   roundToTwoDecimals: boolean
 }

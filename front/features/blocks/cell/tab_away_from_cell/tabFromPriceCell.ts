@@ -1,8 +1,8 @@
-import type { BoqRowEditorRefs } from '@entities/quotation'
+import type { RowEditorRefs } from '@entities/quotation'
 
 type Props = {
   e: KeyboardEvent
-  boqRowEditorRefs: BoqRowEditorRefs
+  boqRowEditorRefs: RowEditorRefs
   rowIndex: number
 }
 

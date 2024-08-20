@@ -5,11 +5,11 @@ import {
   useBlock,
   Froala,
   titleCellStyle,
-  type BoqHeaderKey,
+  type HeaderKey,
 } from '@entities/quotation'
 import type { FroalaEditor } from '@shared/types/froala'
 
-const boqHeaderKey: BoqHeaderKey = 'title'
+const boqHeaderKey: HeaderKey = 'title'
 
 export const Title = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)

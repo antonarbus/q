@@ -8,14 +8,14 @@ import {
 import {
   selectColumnWidth,
   useBlock,
-  type BoqColumnKey,
+  type ColumnKey,
 } from '@entities/quotation'
 
 type Props = {
   children: React.ReactNode
   className: string
   flexGrow?: number
-  boqColumnKey: BoqColumnKey
+  boqColumnKey: ColumnKey
   minWidth: number
 }
 

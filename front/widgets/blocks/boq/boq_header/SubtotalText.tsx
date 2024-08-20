@@ -5,11 +5,11 @@ import {
   useBlock,
   Froala,
   subTotalTextCellStyle,
-  type BoqHeaderKey,
+  type HeaderKey,
 } from '@entities/quotation'
 import type { FroalaEditor } from '@shared/types/froala'
 
-const boqHeaderKey: BoqHeaderKey = 'subtotalText'
+const boqHeaderKey: HeaderKey = 'subtotalText'
 
 export const SubtotalText = (): JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)

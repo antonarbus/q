@@ -1,4 +1,4 @@
-import type { Item, BoqRow } from '../../types'
+import type { Item, Row } from '../../types'
 import { getBoqBlockFromStore } from './getBoqBlockFromStore'
 
 type Props = {
@@ -11,7 +11,7 @@ export const getBoqRowFromStore = ({
   blockIndex,
   rowIndex,
   state,
-}: Props): BoqRow | undefined => {
+}: Props): Row | undefined => {
   const boqBlock = getBoqBlockFromStore({ blockIndex })
 
   if (boqBlock === undefined) return

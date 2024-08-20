@@ -1,14 +1,14 @@
 import { dispatch } from '@lib_instances/store'
 import type { FroalaEditorRef } from '@shared/types/froala'
 import { getNumberFromString, getTextContentFromHtml } from '@shared/utils'
-import type { BoqHeaderKey } from '../../types'
+import type { HeaderKey } from '../../types'
 import { getBoqBlockFromStore } from '../getters/getBoqBlockFromStore'
 import { quotationSlice } from '../quotationSlice'
 
 type Props = {
   editorRef: FroalaEditorRef
   blockIndex: number
-  boqHeaderKey: BoqHeaderKey
+  boqHeaderKey: HeaderKey
 }
 
 type Res = {

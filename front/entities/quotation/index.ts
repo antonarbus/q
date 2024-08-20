@@ -104,18 +104,18 @@ export { bookmarkPosAtBlocks } from './consts/bookmarkPosAtBlocks'
 
 // types
 export type {
-  BoqHeaderCell,
-  BoqHeaderKey,
-  BoqColumnKey,
-  BoqRowCellKey,
-  BoqRow,
-  BoqRowCellPin,
-  BoqRowCell,
-  BoqRowEditorRefs,
+  HeaderCell,
+  HeaderKey,
+  ColumnKey,
+  RowCellKey,
+  Row,
+  RowCellPin,
+  RowCell,
+  RowEditorRefs,
   TextBlock,
   BoqBlock,
   PriceBlock,
-  BoqCols,
+  Cols,
   Item,
   Quotation,
 } from './types'

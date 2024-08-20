@@ -1,6 +1,6 @@
 import { createContext, useContext, type ReactNode } from 'react'
 import type { FroalaEditorRef } from '@shared/types/froala'
-import type { BoqRowEditorRefs } from '../types'
+import type { RowEditorRefs } from '../types'
 
 type Props = {
   children: ReactNode
@@ -8,7 +8,7 @@ type Props = {
 
 export type BoqBlockContextType = {
   subTotalPriceEditorRef: FroalaEditorRef
-  boqRowEditorRefs: BoqRowEditorRefs
+  boqRowEditorRefs: RowEditorRefs
 }
 
 const BoqBlockContext = createContext<BoqBlockContextType | null>(null)

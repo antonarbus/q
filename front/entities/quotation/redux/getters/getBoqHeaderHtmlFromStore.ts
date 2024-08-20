@@ -1,10 +1,10 @@
 import { getState } from '@lib_instances/store'
 import { itemType } from '../../consts/itemType'
-import type { BoqHeaderKey } from '../../types'
+import type { HeaderKey } from '../../types'
 
 type Props = {
   blockIndex: number
-  boqHeaderKey: BoqHeaderKey
+  boqHeaderKey: HeaderKey
 }
 
 export const getBoqHeaderHtmlFromStore = ({

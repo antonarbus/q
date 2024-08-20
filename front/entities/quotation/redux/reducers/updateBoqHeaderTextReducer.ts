@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { itemType } from '../../consts/itemType'
-import type { BoqHeaderKey, Quotation } from '../../types'
+import type { HeaderKey, Quotation } from '../../types'
 
 export const updateBoqHeaderTextReducer = (
   state: Quotation,
@@ -8,7 +8,7 @@ export const updateBoqHeaderTextReducer = (
     blockIndex: number
     html: string
     value: number
-    boqHeaderKey: BoqHeaderKey
+    boqHeaderKey: HeaderKey
   }>,
 ): void => {
   const { blockIndex, html, boqHeaderKey, value } = action.payload

@@ -5,7 +5,7 @@ import {
   getTextContentFromHtml,
   getStringWithNewFormattedNumber,
 } from '@shared/utils'
-import type { BoqRowCellKey } from '../types'
+import type { RowCellKey } from '../types'
 import { getState } from '@lib_instances/store'
 import { itemType } from '../consts/itemType'
 import { updateRowBlockCellAtStore } from '../redux/updaters/updateRowBlockCellAtStore'
@@ -13,7 +13,7 @@ import { bookmarkPosAtBlocks } from '../consts/bookmarkPosAtBlocks'
 
 type Props = {
   editor: FroalaEditor | null
-  boqRowCellKey: BoqRowCellKey
+  boqRowCellKey: RowCellKey
   value: number
 }
 
