@@ -4,8 +4,6 @@ import type { itemType } from '../consts/itemType'
 import type { Signal } from '@preact/signals-react'
 import type { SharedWithOption } from '@shared/consts/sharedWithOption'
 
-// this is common field for block + row + quotation
-// a bit stupid but code is simpler if we maintain these fields everywhere, even if we do not need them everywhere
 type Common = {
   id: 'new' | (Record<never, never> & string)
   email: string
@@ -79,7 +77,7 @@ export type RowEditorRefs = {
 }[]
 
 // block
-export type BoqBlock = Common & {
+export type Boq = Common & {
   type: typeof itemType.boq
   boq: {
     header: Header
@@ -88,7 +86,7 @@ export type BoqBlock = Common & {
   }
 }
 
-export type TextBlock = Common & {
+export type Text = Common & {
   type: typeof itemType.text
   text: {
     html: string
@@ -96,7 +94,7 @@ export type TextBlock = Common & {
   }
 }
 
-export type PriceBlock = Common & {
+export type Price = Common & {
   type: typeof itemType.price
   title: {
     html: string
@@ -108,15 +106,12 @@ export type PriceBlock = Common & {
   }
 }
 
-export type RowBlock = Row
-
-export type PasteBlock = Common & {
+export type Paste = Common & {
   type: typeof itemType.paste
 }
 
-export type Item = BoqBlock | PasteBlock | TextBlock | PriceBlock | RowBlock
+export type Item = Boq | Paste | Text | Price | Row
 
-// quotation
 export type Quotation = Common & {
   type: 'quotation'
   createdAt?: Date

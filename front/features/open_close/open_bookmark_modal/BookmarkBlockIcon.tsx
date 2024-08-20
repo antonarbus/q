@@ -2,6 +2,11 @@ import { dispatch, getState } from '@lib_instances/store'
 import type { ReactNode, MouseEvent } from 'react'
 import { MdOutlineStarOutline } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
+import { cls } from '@shared/consts/cls'
+import { route } from '@shared/consts/route'
+import { notify } from '@shared/ui/top_msg'
+import { cleanHtml } from '@shared/utils/itemsUtils'
+import { Tooltip } from '@mui/material'
 import {
   getBlockFromStore,
   itemType,
@@ -9,11 +14,6 @@ import {
   saveBlockHeightByIndex,
   useBlock,
 } from '@entities/quotation'
-import { cls } from '@shared/consts/cls'
-import { route } from '@shared/consts/route'
-import { notify } from '@shared/ui/top_msg'
-import { cleanHtml } from '@shared/utils/itemsUtils'
-import { Tooltip } from '@mui/material'
 
 export const BookmarkBlockIcon = (): ReactNode => {
   const navigate = useNavigate()

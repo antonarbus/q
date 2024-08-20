@@ -2,7 +2,7 @@ import { dispatch, getState } from '@lib_instances/store'
 import type { MouseEvent } from 'react'
 import { copySlice } from '@entities/copy'
 import {
-  type BoqBlock,
+  type Boq,
   isFroalaSignal,
   boqRowKey,
   itemType,
@@ -10,7 +10,7 @@ import {
 import { nanoid } from '@shared/lib/nanoid'
 
 export const insertBoqBlock = (e?: MouseEvent): void => {
-  const boqBlock: BoqBlock = {
+  const boqBlock: Boq = {
     id: nanoid(5),
     type: itemType.boq,
     email: 'john@mail.com',
