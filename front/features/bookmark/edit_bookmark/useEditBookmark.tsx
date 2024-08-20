@@ -13,10 +13,9 @@ import {
   bookmarkPosAtBlocks,
   saveBlockHeightByIndex,
 } from '@entities/quotation'
-import { cls } from '@shared/consts/cls'
 import { notify } from '@shared/ui/top_msg'
-import { cleanHtml } from '@shared/utils/itemsUtils'
 import { slideElement } from '@shared/utils/slideElement'
+import { getPaperElementHtml } from '@shared/utils'
 
 type Props = {
   modalRef: React.RefObject<HTMLDivElement>
@@ -117,14 +116,12 @@ export const useEditBookmark = ({
     }
 
     saveBlockHeightByIndex({ blockIndex: 0 })
-    const paperElement = document.querySelector(`.${cls.paper}`)
-    if (!(paperElement instanceof Element)) return
 
-    const html = paperElement.innerHTML
-    const cleanedHtml = cleanHtml(html)
+    const html = getPaperElementHtml()
 
     const itemWithUpdatedPreview = structuredClone(block)
-    itemWithUpdatedPreview.preview = cleanedHtml
+
+    itemWithUpdatedPreview.preview = html
 
     const itemWithUpdatedValues = {
       ...itemWithUpdatedPreview,

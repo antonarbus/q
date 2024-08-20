@@ -13,8 +13,8 @@ import {
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { fixElementDimensionStyle } from '@shared/utils/fixElementDimensionStyle'
-import { cleanHtml } from '@shared/utils/itemsUtils'
 import { Tooltip } from '@mui/material'
+import { getPaperElementHtml } from '@shared/utils'
 
 export const CutBlockIcon = (): JSX.Element => {
   const { blockIndex } = useBlock()
@@ -56,12 +56,11 @@ export const CutBlockIcon = (): JSX.Element => {
             // width of animated element is changed for unknown reason, can't explain the issue, so let's fix it for animation purpose
             fixElementDimensionStyle({ element: paperElement })
 
-            const html = paperElement.innerHTML
-            const cleanedHtml = cleanHtml(html)
+            const html = getPaperElementHtml(e)
             isFroalaSignal.value = false
 
             const block = structuredClone(blockToCut)
-            block.preview = cleanedHtml
+            block.preview = html
 
             dispatch(
               copySlice.actions.addItemIntoCopyContainer({ item: block }),

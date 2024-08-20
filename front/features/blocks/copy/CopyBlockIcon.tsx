@@ -9,8 +9,8 @@ import {
   useBlock,
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
-import { cleanHtml } from '@shared/utils/itemsUtils'
 import { Tooltip } from '@mui/material'
+import { getPaperElementHtml } from '@shared/utils'
 
 export const CopyBlockIcon = (): JSX.Element => {
   const { blockIndex } = useBlock()
@@ -43,20 +43,11 @@ export const CopyBlockIcon = (): JSX.Element => {
             if (!blockToCopy) return
             if (blockToCopy.type === itemType.paste) return
 
-            const clickedIconElement = e.target
-            if (!(clickedIconElement instanceof Element)) return
-            const blockElement = clickedIconElement.closest(`.${cls.block}`)
-            if (!(blockElement instanceof Element)) return
-            const paperElement = blockElement.querySelector(`.${cls.paper}`)
-            if (!(paperElement instanceof Element)) return
-
-            const html = paperElement.innerHTML
-            const cleanedHtml = cleanHtml(html)
+            const html = getPaperElementHtml(e)
             isFroalaSignal.value = false
 
             const block = structuredClone(blockToCopy)
-            block.preview = cleanedHtml
-
+            block.preview = html
             dispatch(
               copySlice.actions.addItemIntoCopyContainer({ item: block }),
             )

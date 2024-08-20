@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom'
 import { cls } from '@shared/consts/cls'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
-import { cleanHtml } from '@shared/utils/itemsUtils'
 import { Tooltip } from '@mui/material'
 import {
   getBlockFromStore,
@@ -14,6 +13,7 @@ import {
   saveBlockHeightByIndex,
   useBlock,
 } from '@entities/quotation'
+import { getPaperElementHtml } from '@shared/utils'
 
 export const BookmarkBlockIcon = (): ReactNode => {
   const navigate = useNavigate()
@@ -40,36 +40,24 @@ export const BookmarkBlockIcon = (): ReactNode => {
             }
 
             saveBlockHeightByIndex({ blockIndex })
+            const html = getPaperElementHtml(e)
+            const block = getBlockFromStore({ blockIndex })
 
-            const clickedIconElement = e.target
-            if (!(clickedIconElement instanceof Element)) return
-
-            const itemElement = clickedIconElement.closest(`.${cls.block}`)
-            if (!(itemElement instanceof Element)) return
-            const paperElement = itemElement.querySelector(`.${cls.paper}`)
-            if (!(paperElement instanceof Element)) return
-            const html = paperElement.innerHTML
-            const cleanedHtml = cleanHtml(html)
-
-            const item = getBlockFromStore({ blockIndex })
-
-            if (!item) return
-            if (item.type === itemType.paste) return
+            if (!block) return
+            if (block.type === itemType.paste) return
 
             dispatch(
               quotationSlice.actions.updateItemPreviewReducer({
-                id: item.id,
-                preview: cleanedHtml,
+                id: block.id,
+                preview: html,
               }),
             )
 
             dispatch(
-              quotationSlice.actions.loadBlockAtPosThousandReducer({
-                block: item,
-              }),
+              quotationSlice.actions.loadBlockAtPosThousandReducer({ block }),
             )
 
-            navigate(`./${route.bookmark}/${item.id}`)
+            navigate(`./${route.bookmark}/${block.id}`)
           }}
         />
       </span>

@@ -39,6 +39,10 @@ export const ResizableBlockPaper = ({
   return (
     <Resizable
       className={cls.paper}
+      handleClasses={{
+        left: 'left-resize-handle',
+        right: 'right-resize-handle',
+      }}
       size={{
         width: isAutoWidth ? 'auto' : width,
         height: 'auto',
