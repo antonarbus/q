@@ -6,31 +6,31 @@ type Props = {
   children: ReactNode
 }
 
-export type BoqBlockContextType = {
+type BoqContextType = {
   subTotalPriceEditorRef: FroalaEditorRef
   boqRowEditorRefs: RowEditorRefs
 }
 
-const BoqBlockContext = createContext<BoqBlockContextType | null>(null)
+const BoqContext = createContext<BoqContextType | null>(null)
 
-export const BoqItemProvider = ({ children }: Props): JSX.Element => {
+export const BoqProvider = ({ children }: Props): JSX.Element => {
   return (
-    <BoqBlockContext.Provider
+    <BoqContext.Provider
       value={{
         subTotalPriceEditorRef: { current: null },
         boqRowEditorRefs: [],
       }}
     >
       {children}
-    </BoqBlockContext.Provider>
+    </BoqContext.Provider>
   )
 }
 
-export const useBoqBlock = (): BoqBlockContextType => {
-  const context = useContext(BoqBlockContext)
+export const useBoq = (): BoqContextType => {
+  const context = useContext(BoqContext)
 
   if (!context) {
-    throw new Error('useBoqBlock must be used within a BoqBlockProvider')
+    throw new Error('useBoq must be used within a BoqProvider')
   }
 
   return context

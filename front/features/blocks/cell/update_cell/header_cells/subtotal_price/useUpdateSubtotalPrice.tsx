@@ -2,7 +2,7 @@ import { useSelectorTyped } from '@lib_instances/store'
 import { useUpdateEffect } from 'react-use'
 import { roundTo } from 'round-to'
 import {
-  useBoqBlock,
+  useBoq,
   useBlock,
   getBoqRowsFromStore,
   type Row,
@@ -12,7 +12,7 @@ import {
 
 export const useUpdateSubtotalPrice = (): void => {
   const { blockIndex } = useBlock()
-  const { subTotalPriceEditorRef } = useBoqBlock()
+  const { subTotalPriceEditorRef } = useBoq()
   const isBlockFroala = useSelectorTyped(
     (state) => state.quotation.blocks[blockIndex]?.isFroala,
   )

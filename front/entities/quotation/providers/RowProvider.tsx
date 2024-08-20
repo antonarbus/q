@@ -1,6 +1,6 @@
 import { createContext, useContext, type ReactNode } from 'react'
 import type { FroalaEditorRef } from '@shared/types/froala'
-import { useBoqBlock } from './BoqBlockProvider'
+import { useBoq } from './BoqBlockProvider'
 import type { Row } from '../types'
 
 type Props = {
@@ -23,7 +23,7 @@ export const RowProvider = ({
   rowIndex,
   row,
 }: Props): JSX.Element => {
-  const { boqRowEditorRefs } = useBoqBlock()
+  const { boqRowEditorRefs } = useBoq()
 
   const descriptionEditorRef = { current: null }
   const itemPriceCellEditorRef = { current: null }

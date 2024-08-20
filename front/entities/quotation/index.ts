@@ -84,12 +84,8 @@ export { useIsBlockSortDisabled } from './hooks/useIsBlockSortDisabled'
 export { useIsBoqRowSortDisabled } from './hooks/useIsBoqRowSortDisabled'
 export { useStylesForResizableCell } from './hooks/useStylesForResizableCell'
 
-// Providers
-export {
-  BoqItemProvider,
-  useBoqBlock,
-  type BoqBlockContextType,
-} from './providers/BoqBlockProvider'
+// providers
+export { BoqProvider, useBoq } from './providers/BoqBlockProvider'
 export { BlockProvider, useBlock } from './providers/BlockProvider'
 export { RowProvider, useRow } from './providers/RowProvider'
 export { FroalaProvider, useFroala } from './providers/FroalaProvider'

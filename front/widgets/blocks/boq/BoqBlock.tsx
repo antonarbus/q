@@ -9,7 +9,7 @@ import {
 } from '@features/blocks/resize'
 import { BookmarkBlockIcon } from '@features/open_close/open_bookmark_modal'
 import { OpenInfoBlockModalIcon } from '@features/open_close/open_info_modal'
-import { BoqItemProvider, BlockComp } from '@entities/quotation'
+import { BoqProvider, BlockComp } from '@entities/quotation'
 import { ItemActionButtonsLayout } from '@shared/layouts'
 import { BoqHeader } from './boq_header'
 import { BoqTable } from './boq_table'
@@ -17,7 +17,7 @@ import { cls } from '@shared/consts/cls'
 
 export const BoqBlock = (): JSX.Element => {
   return (
-    <BoqItemProvider>
+    <BoqProvider>
       <BlockComp
         className={cls.boqBlock}
         autoWidth={true}
@@ -43,6 +43,6 @@ export const BoqBlock = (): JSX.Element => {
         <BoqHeader />
         <BoqTable />
       </BlockComp>
-    </BoqItemProvider>
+    </BoqProvider>
   )
 }

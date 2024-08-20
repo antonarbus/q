@@ -9,7 +9,7 @@ import {
   getBoqCellHtmlFromStore,
   useBlock,
   useRow,
-  useBoqBlock,
+  useBoq,
   Froala,
   boqRowCellStyle,
   useStylesForResizableCell,
@@ -21,7 +21,7 @@ import {
 
 export const QtyCell = (): JSX.Element => {
   const { blockIndex } = useBlock()
-  const { subTotalPriceEditorRef } = useBoqBlock()
+  const { subTotalPriceEditorRef } = useBoq()
   const { rowIndex, qtyCellEditorRef, priceCellEditorRef } = useRow()
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex,
