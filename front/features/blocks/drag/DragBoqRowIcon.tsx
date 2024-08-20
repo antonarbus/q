@@ -6,10 +6,10 @@ import { cls } from '@shared/consts/cls'
 
 export const DragBoqRowIcon = (): JSX.Element => {
   const disabled = useIsBoqRowSortDisabled()
-  const { id } = useRow()
+  const { row } = useRow()
 
   const { listeners } = useSortable({
-    id,
+    id: row.id,
     disabled,
   })
 

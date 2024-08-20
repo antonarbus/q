@@ -7,9 +7,9 @@ type Props = {
 }
 
 export const BoqRowSortable = ({ children }: Props): JSX.Element => {
-  const { id } = useRow()
+  const { row } = useRow()
   const { setNodeRef, transform, transition, isDragging } = useSortable({
-    id,
+    id: row.id,
   })
 
   return (

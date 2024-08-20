@@ -1,10 +1,11 @@
 import { createContext, useContext, type ReactNode } from 'react'
 import type { FroalaEditorRef } from '@shared/types/froala'
 import { useBoqBlock } from './BoqBlockProvider'
+import type { BoqRow } from '../types'
 
 type Props = {
   rowIndex: number
-  id: string
+  row: BoqRow
   children: ReactNode
 }
 
@@ -17,7 +18,11 @@ type Context = Omit<Props, 'children'> & {
 
 const RowContext = createContext<Context | null>(null)
 
-export const RowProvider = ({ children, rowIndex, id }: Props): JSX.Element => {
+export const RowProvider = ({
+  children,
+  rowIndex,
+  row,
+}: Props): JSX.Element => {
   const { boqRowEditorRefs } = useBoqBlock()
 
   const descriptionEditorRef = { current: null }
@@ -36,7 +41,7 @@ export const RowProvider = ({ children, rowIndex, id }: Props): JSX.Element => {
     <RowContext.Provider
       value={{
         rowIndex,
-        id,
+        row,
         descriptionEditorRef,
         itemPriceCellEditorRef,
         qtyCellEditorRef,
