@@ -11,7 +11,7 @@ export const BoqRows = (): React.ReactNode => {
   return (
     <RowProvider
       rowIndex={0}
-      id={block.id}
+      row={block}
       key={block.id}
     >
       <BoqRow

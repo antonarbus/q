@@ -1,7 +1,7 @@
 import { AnimatePresence } from 'framer-motion'
 import {
   bookmarkPosAtBlocks,
-  type Block as BlockType,
+  type Item as BlockType,
 } from '@entities/quotation'
 import { FadeInOnInitLoad } from './FadeInOnInitLoad'
 import { Block } from './Block'

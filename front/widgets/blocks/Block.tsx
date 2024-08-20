@@ -1,5 +1,5 @@
 import {
-  type Block as BlockType,
+  type Item as BlockType,
   BlockProvider,
   itemType,
 } from '@entities/quotation'

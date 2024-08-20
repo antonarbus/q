@@ -136,9 +136,6 @@ export type Quotation = Common & {
   blocks: Item[]
 }
 
-// item
-// export type Item = Quotation | Block | BoqRow
-
 export type QuotationFormValues = {
   nameSignal: Signal<string>
   categorySignal: Signal<string>
