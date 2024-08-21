@@ -12,8 +12,8 @@ import {
 import { cls } from '@shared/consts/cls'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/ui/top_msg'
-import { cleanHtml } from '@shared/utils/htmlGetter/itemsUtils'
 import { Tooltip } from '@mui/material'
+import { getRowHtmlAtModal } from '@shared/utils'
 
 export const BookmarkBoqRowIcon = (): ReactNode => {
   const navigate = useNavigate()
@@ -55,18 +55,18 @@ export const BookmarkBoqRowIcon = (): ReactNode => {
               }),
             )
 
-            const html = boqRowElement.outerHTML
-            const cleanedHtml = cleanHtml(html)
-
             const boqRow = getBoqRowFromStore({ rowIndex, blockIndex })
 
             if (!boqRow) return
             if (boqRow.type === boqRowKey.paste) return
 
+            const html = getRowHtmlAtModal()
+
+            // todo: do we need it?
             dispatch(
               quotationSlice.actions.updateItemPreviewReducer({
                 id: boqRow.id,
-                preview: cleanedHtml,
+                preview: html,
               }),
             )
 

@@ -17,6 +17,7 @@ import { cls } from '@shared/consts/cls'
 import { notify } from '@shared/ui/top_msg'
 import { cleanHtml } from '@shared/utils/htmlGetter/itemsUtils'
 import { slideElement } from '@shared/utils/slideElement'
+import { getPaperElementHtmlAtModal } from '@shared/utils'
 
 type Props = {
   modalRef: React.RefObject<HTMLDivElement>
@@ -118,15 +119,10 @@ export const useEditBookmark = ({
 
     saveBlockHeightByIndex({ blockIndex: 0 })
 
-    // todo: when we save we need to grab html from the form, make similar func to getClosestPaperElementHtml()
-    const paperElement = document.querySelector(`.${cls.paper}`)
-    if (!(paperElement instanceof Element)) return
-
-    const html = paperElement.innerHTML
-    const cleanedHtml = cleanHtml(html)
+    const html = getPaperElementHtmlAtModal()
 
     const itemWithUpdatedPreview = structuredClone(block)
-    itemWithUpdatedPreview.preview = cleanedHtml
+    itemWithUpdatedPreview.preview = html
 
     const itemWithUpdatedValues = {
       ...itemWithUpdatedPreview,

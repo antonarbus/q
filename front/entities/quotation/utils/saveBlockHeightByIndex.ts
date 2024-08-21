@@ -12,12 +12,10 @@ export const saveBlockHeightByIndex = ({ blockIndex }: Props): void => {
 
   if (!paperElement) return
 
-  const height = paperElement.clientHeight
-
   dispatch(
     quotationSlice.actions.updateBlockHeightReducer({
       blockIndex,
-      height,
+      height: paperElement.clientHeight,
     }),
   )
 }

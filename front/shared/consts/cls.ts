@@ -13,4 +13,7 @@ export const cls = {
   actionsContainer: 'actions-container',
   actionIconContainer: 'action-icon-container',
   actionIcon: 'action-icon',
+  formModal: 'form-modal',
+  cleanFromPaper:
+    '.fr-placeholder,.right-resize-handle,.left-resize-handle,.actions-container,#DndDescribedBy-1,#DndLiveRegion-0',
 } as const

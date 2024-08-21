@@ -10,12 +10,12 @@ import {
   useRow,
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
-import { cleanHtml } from '@shared/utils/htmlGetter/itemsUtils'
 import { Tooltip } from '@mui/material'
+import { getClosestRowHtml } from '@shared/utils'
 
 export const CopyBoqRowIcon = (): JSX.Element => {
-  const { rowIndex } = useRow()
   const { blockIndex } = useBlock()
+  const { rowIndex } = useRow()
   const isCopyable = useSelectorTyped((state) => state.copy.isCopyable)
   const disabled = !isCopyable
 
@@ -35,6 +35,7 @@ export const CopyBoqRowIcon = (): JSX.Element => {
           }}
           onClick={(e: MouseEvent): void => {
             if (disabled) return
+
             const clickedIconElement = e.target
             if (!(clickedIconElement instanceof Element)) return
 
@@ -52,20 +53,19 @@ export const CopyBoqRowIcon = (): JSX.Element => {
               }),
             )
 
-            const html = boqRowElement.outerHTML
-            const cleanedHtml = cleanHtml(html)
-
             const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
             if (boqRow === undefined) return
 
+            const html = getClosestRowHtml(e)
             const boqRowCloned = structuredClone(boqRow)
-            boqRowCloned.preview = cleanedHtml
+            boqRowCloned.preview = html
 
             dispatch(
               copySlice.actions.addItemIntoCopyContainer({
                 item: boqRowCloned,
               }),
             )
+
             dispatch(copySlice.actions.allowToPaste())
 
             const isCopyContainer = getState().copy.isCopyContainer

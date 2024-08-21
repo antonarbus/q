@@ -12,8 +12,8 @@ import {
   useRow,
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
-import { cleanHtml } from '@shared/utils/htmlGetter/itemsUtils'
 import { Tooltip } from '@mui/material'
+import { getClosestRowHtml } from '@shared/utils'
 
 export const CutBoqRowIcon = (): JSX.Element => {
   const { blockIndex } = useBlock()
@@ -41,11 +41,9 @@ export const CutBoqRowIcon = (): JSX.Element => {
             if (disabled) return
 
             const clickedIconElement = e.target
-
             if (!(clickedIconElement instanceof Element)) return
 
             const boqRowElement = clickedIconElement.closest(`.${cls.boqRow}`)
-
             if (!boqRowElement) return
 
             isFroalaSignal.value = false
@@ -59,14 +57,12 @@ export const CutBoqRowIcon = (): JSX.Element => {
               }),
             )
 
-            const html = boqRowElement.outerHTML
-            const cleanedHtml = cleanHtml(html)
-
             const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
             if (boqRow === undefined) return
 
+            const html = getClosestRowHtml(e)
             const bockRowCloned = structuredClone(boqRow)
-            bockRowCloned.preview = cleanedHtml
+            bockRowCloned.preview = html
 
             dispatch(
               copySlice.actions.addItemIntoCopyContainer({
@@ -86,6 +82,7 @@ export const CutBoqRowIcon = (): JSX.Element => {
                 rowIndex,
               }),
             )
+
             dispatch(copySlice.actions.forbidAllActions())
 
             setTimeout(() => {

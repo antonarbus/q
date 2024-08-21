@@ -46,6 +46,7 @@ export const BookmarkBlockIcon = (): ReactNode => {
             if (!block) return
             if (block.type === itemType.paste) return
 
+            // todo: do we need it?
             dispatch(
               quotationSlice.actions.updateItemPreviewReducer({
                 id: block.id,

@@ -11,6 +11,7 @@ import {
   Typography,
   IconButton,
 } from '@mui/material'
+import { cls } from '@shared/consts/cls'
 
 type Props = {
   width?: React.CSSProperties['width']
@@ -59,6 +60,7 @@ export const FormModal = ({
     >
       <Box
         ref={modalRef}
+        className={cls.formModal}
         onMouseDown={(e: React.MouseEvent): void => {
           e.stopPropagation()
         }}
