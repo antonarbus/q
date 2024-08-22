@@ -6,8 +6,12 @@ import { isFroalaSignal, quotationSlice } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { nanoid } from '@shared/lib/nanoid'
 import { fixElementDimensionStyle } from '@shared/utils/fixElementDimensionStyle'
+import { route } from '@shared/consts/route'
 
 const pasteItemOnClick = (): void => {
+  if (window.location.pathname.includes(route.bookmarks)) return
+  if (window.location.pathname.includes(route.quotations)) return
+
   const isPasteTextShown = getState().copy.isPasteTextShown
 
   if (!isPasteTextShown) return
