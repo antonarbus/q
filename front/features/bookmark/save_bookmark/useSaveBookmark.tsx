@@ -106,13 +106,6 @@ export const useSaveBookmark = ({
       return
     }
 
-    const block = getState().quotation.blocks.at(bookmarkPosAtBlocks)
-
-    if (!block) {
-      notify({ msg: 'No item loaded', type: 'warn', theme: 'light' })
-      return
-    }
-
     const paperElement = document.querySelector(
       `.${cls.formModal} .${cls.paper}`,
     )
@@ -125,6 +118,13 @@ export const useSaveBookmark = ({
         height: paperElement.clientHeight,
       }),
     )
+
+    const block = getState().quotation.blocks.at(bookmarkPosAtBlocks)
+
+    if (!block) {
+      notify({ msg: 'No item loaded', type: 'warn', theme: 'light' })
+      return
+    }
 
     const html = getPaperElementHtmlAtModal()
 
