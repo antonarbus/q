@@ -1,23 +1,28 @@
 import { getState } from '@lib_instances/store'
 import type { Signal } from '@preact/signals-react'
 import type { UseMutationResult } from '@tanstack/react-query'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import {
   useGetBookmarkCategoriesQuery,
   useGetBookmarksQuery,
   useSaveBookmarkMutation,
 } from '@entities/bookmark'
-import { getFromStore } from '@entities/quotation'
+import {
+  bookmarkPosAtBlocks,
+  saveBlockHeightByIndex,
+} from '@entities/quotation'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
+import { getPaperElementHtmlAtModal } from '@shared/utils'
 
 type Props = {
+  modalRef: React.RefObject<HTMLDivElement>
   nameSignal: Signal<string>
   categorySignal: Signal<string>
   descSignal: Signal<string>
   infoSignal: Signal<string>
-  modalRef: React.RefObject<HTMLDivElement>
 }
 
 type Res = {
@@ -28,15 +33,13 @@ type Res = {
 }
 
 export const useSaveBookmark = ({
+  modalRef,
   nameSignal,
   categorySignal,
   descSignal,
   infoSignal,
-  modalRef,
 }: Props): Res => {
   const navigate = useNavigate()
-  const { id } = useParams()
-  const item = getFromStore({ id: id ?? 'missing id' })
 
   const {
     mutate: saveItem,
@@ -48,14 +51,14 @@ export const useSaveBookmark = ({
     reset,
   } = useSaveBookmarkMutation()
 
-  const { refetch: updateCategories } = useGetBookmarkCategoriesQuery()
+  const { refetch: updateItemCategories } = useGetBookmarkCategoriesQuery()
   const { refetch: updateBookmarks } = useGetBookmarksQuery()
 
   useUpdateEffect(() => {
     if (isSuccess) {
       if (data.message === 'saved') {
         notify({
-          msg: 'Added',
+          msg: 'Saved',
           type: 'success',
           theme: 'dark',
           position: 'bottom-center',
@@ -69,7 +72,7 @@ export const useSaveBookmark = ({
         })
       }
 
-      void updateCategories()
+      void updateItemCategories()
       void updateBookmarks()
 
       setTimeout(() => {
@@ -95,7 +98,7 @@ export const useSaveBookmark = ({
     }
   }, [isError])
 
-  const onSubmit = (e: React.FormEvent): void => {
+  const onSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault()
 
     const email = getState().user.email
@@ -105,22 +108,23 @@ export const useSaveBookmark = ({
       return
     }
 
-    if (!item) {
-      notify({ msg: 'No item with such id', type: 'warn', theme: 'light' })
+    const block = getState().quotation.blocks.at(bookmarkPosAtBlocks)
+
+    if (!block) {
+      notify({ msg: 'No item loaded', type: 'warn', theme: 'light' })
       return
     }
 
-    if (item.type === 'quotation') {
-      notify({
-        msg: 'It is not a bookmark, but complete quotation. Something is wrong.',
-        type: 'warn',
-        theme: 'light',
-      })
-      return
-    }
+    // todo: check it
+    saveBlockHeightByIndex({ blockIndex: 0 })
+
+    const html = getPaperElementHtmlAtModal()
+
+    const itemWithUpdatedPreview = structuredClone(block)
+    itemWithUpdatedPreview.preview = html
 
     const itemWithUpdatedValues = {
-      ...item,
+      ...itemWithUpdatedPreview,
       name: nameSignal.value,
       category: categorySignal.value,
       desc: descSignal.value,
@@ -128,7 +132,7 @@ export const useSaveBookmark = ({
     }
 
     saveItem({ item: itemWithUpdatedValues })
-  }
+  }, [])
 
   return { onSubmit, isPending, isSuccess, isError }
 }

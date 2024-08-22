@@ -1,7 +1,7 @@
 import { useSignal } from '@preact/signals-react'
 import { useRef } from 'react'
 import { FiEdit3 } from 'react-icons/fi'
-import { useEditBookmark } from '@features/bookmark/edit_bookmark'
+import { useSaveBookmark } from '@features/bookmark/save_bookmark'
 import { FormModal } from '@shared/components'
 import { BookmarkField } from './BookmarkField'
 import { CategoryField } from './CategoryField'
@@ -39,7 +39,8 @@ export const BookmarkModal = (): JSX.Element => {
     infoSignal,
   })
 
-  const { onSubmit, isPending, isSuccess, isError } = useEditBookmark({
+  // todo:
+  const { onSubmit, isPending, isSuccess, isError } = useSaveBookmark({
     modalRef,
     nameSignal,
     categorySignal,

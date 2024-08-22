@@ -14,7 +14,6 @@ export const getRowHtmlAtModal = (): string => {
   })
 
   const html = rowElementClone.outerHTML
-  console.log('🚀 ~ html:', html)
 
   const htmlWithoutContentEditableTag = html.replaceAll(
     'contenteditable="true"',
