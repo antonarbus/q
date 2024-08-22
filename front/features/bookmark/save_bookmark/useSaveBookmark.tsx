@@ -1,4 +1,4 @@
-import { getState } from '@lib_instances/store'
+import { dispatch, getState } from '@lib_instances/store'
 import type { Signal } from '@preact/signals-react'
 import type { UseMutationResult } from '@tanstack/react-query'
 import { useCallback } from 'react'
@@ -9,13 +9,11 @@ import {
   useGetBookmarksQuery,
   useSaveBookmarkMutation,
 } from '@entities/bookmark'
-import {
-  bookmarkPosAtBlocks,
-  saveBlockHeightByIndex,
-} from '@entities/quotation'
+import { bookmarkPosAtBlocks, quotationSlice } from '@entities/quotation'
 import { notify } from '@shared/ui/top_msg'
 import { slideElement } from '@shared/utils/slideElement'
 import { getPaperElementHtmlAtModal } from '@shared/utils'
+import { cls } from '@shared/consts/cls'
 
 type Props = {
   modalRef: React.RefObject<HTMLDivElement>
@@ -115,12 +113,23 @@ export const useSaveBookmark = ({
       return
     }
 
-    // todo: check it
-    saveBlockHeightByIndex({ blockIndex: 0 })
+    const paperElement = document.querySelector(
+      `.${cls.formModal} .${cls.paper}`,
+    )
+
+    if (!paperElement) return
+
+    dispatch(
+      quotationSlice.actions.updateBlockHeightReducer({
+        blockIndex: bookmarkPosAtBlocks,
+        height: paperElement.clientHeight,
+      }),
+    )
 
     const html = getPaperElementHtmlAtModal()
 
     const itemWithUpdatedPreview = structuredClone(block)
+
     itemWithUpdatedPreview.preview = html
 
     const itemWithUpdatedValues = {

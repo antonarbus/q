@@ -39,7 +39,6 @@ export const BookmarkModal = (): JSX.Element => {
     infoSignal,
   })
 
-  // todo:
   const { onSubmit, isPending, isSuccess, isError } = useSaveBookmark({
     modalRef,
     nameSignal,

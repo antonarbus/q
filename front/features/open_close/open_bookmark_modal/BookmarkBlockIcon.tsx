@@ -10,10 +10,8 @@ import {
   getBlockFromStore,
   itemType,
   quotationSlice,
-  saveBlockHeightByIndex,
   useBlock,
 } from '@entities/quotation'
-import { getClosestPaperElementHtml } from '@shared/utils'
 
 export const BookmarkBlockIcon = (): ReactNode => {
   const navigate = useNavigate()
@@ -39,20 +37,10 @@ export const BookmarkBlockIcon = (): ReactNode => {
               return
             }
 
-            saveBlockHeightByIndex({ blockIndex })
-            const html = getClosestPaperElementHtml(e)
             const block = getBlockFromStore({ blockIndex })
 
             if (!block) return
             if (block.type === itemType.paste) return
-
-            // todo: do we need it?
-            dispatch(
-              quotationSlice.actions.updateItemPreviewReducer({
-                id: block.id,
-                preview: html,
-              }),
-            )
 
             dispatch(
               quotationSlice.actions.loadBlockAtPosThousandReducer({ block }),
