@@ -1,11 +1,10 @@
 import { dispatch, getState } from '@lib_instances/store'
-import type { Signal } from '@preact/signals-react'
 import type { UseMutationResult } from '@tanstack/react-query'
-import { useCallback } from 'react'
+import { type RefObject, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import type { BookmarkFromValues } from '@entities/bookmark'
 import {
+  type BookmarkFromValues,
   useGetBookmarkCategoriesQuery,
   useGetBookmarksQuery,
   useSaveBookmarkMutation,
@@ -17,7 +16,7 @@ import { getPaperElementHtmlAtModal } from '@shared/utils'
 import { cls } from '@shared/consts/cls'
 
 type Props = {
-  modalRef: React.RefObject<HTMLDivElement>
+  modalRef: RefObject<HTMLDivElement>
   bookmarkFromValues: BookmarkFromValues
 }
 
@@ -127,7 +126,7 @@ export const useSaveBookmark = ({
 
     itemWithUpdatedPreview.preview = html
 
-    const itemWithUpdatedValues = {
+    const item = {
       ...itemWithUpdatedPreview,
       name: bookmarkFromValues.nameSignal.value,
       category: bookmarkFromValues.categorySignal.value,
@@ -135,7 +134,7 @@ export const useSaveBookmark = ({
       info: bookmarkFromValues.infoSignal.value,
     }
 
-    saveItem({ item: itemWithUpdatedValues })
+    saveItem({ item })
   }, [])
 
   return { onSubmit, isPending, isSuccess, isError }
