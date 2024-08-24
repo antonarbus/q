@@ -12,23 +12,11 @@ import { GlobalStyles } from './GlobalStyles'
 import { ReactQueryDevtoolsProductionHidden } from './ReactQueryDevtoolsProductionHidden'
 import './signalsDevTools'
 import '@shared/utils/cursorPosSignal'
-import { useEffectOnce } from 'react-use'
+import { useHideHtmlElements } from '@features/init_load/useHideHtmlElements'
 
 export const App = (): JSX.Element => {
   useLogoutIfAccessTokenRemoved()
-
-  useEffectOnce(() => {
-    const seoElement = document.getElementById('seo')
-    const waitElement = document.getElementById('wait')
-
-    if (seoElement instanceof Element) {
-      seoElement.style.display = 'none'
-    }
-
-    if (waitElement instanceof Element) {
-      waitElement.style.display = 'none'
-    }
-  })
+  useHideHtmlElements()
 
   return (
     <Provider store={store}>
