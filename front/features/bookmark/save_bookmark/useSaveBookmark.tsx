@@ -4,6 +4,7 @@ import type { UseMutationResult } from '@tanstack/react-query'
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
+import type { BookmarkFromValues } from '@entities/bookmark'
 import {
   useGetBookmarkCategoriesQuery,
   useGetBookmarksQuery,
@@ -17,10 +18,7 @@ import { cls } from '@shared/consts/cls'
 
 type Props = {
   modalRef: React.RefObject<HTMLDivElement>
-  nameSignal: Signal<string>
-  categorySignal: Signal<string>
-  descSignal: Signal<string>
-  infoSignal: Signal<string>
+  bookmarkFromValues: BookmarkFromValues
 }
 
 type Res = {
@@ -32,10 +30,7 @@ type Res = {
 
 export const useSaveBookmark = ({
   modalRef,
-  nameSignal,
-  categorySignal,
-  descSignal,
-  infoSignal,
+  bookmarkFromValues,
 }: Props): Res => {
   const navigate = useNavigate()
 
@@ -134,10 +129,10 @@ export const useSaveBookmark = ({
 
     const itemWithUpdatedValues = {
       ...itemWithUpdatedPreview,
-      name: nameSignal.value,
-      category: categorySignal.value,
-      desc: descSignal.value,
-      info: infoSignal.value,
+      name: bookmarkFromValues.nameSignal.value,
+      category: bookmarkFromValues.categorySignal.value,
+      desc: bookmarkFromValues.descSignal.value,
+      info: bookmarkFromValues.infoSignal.value,
     }
 
     saveItem({ item: itemWithUpdatedValues })

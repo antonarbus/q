@@ -1,4 +1,3 @@
-import { useSignal } from '@preact/signals-react'
 import { useRef } from 'react'
 import { FiEdit3 } from 'react-icons/fi'
 import { useSaveBookmark } from '@features/bookmark/save_bookmark'
@@ -19,37 +18,24 @@ import { router } from '@lib_instances/router'
 
 export const BookmarkModal = (): JSX.Element => {
   const modalRef = useRef<HTMLDivElement>(null)
-
-  const nameSignal = useSignal('')
-  const categorySignal = useSignal('')
-  const descSignal = useSignal('')
-  const infoSignal = useSignal('')
-
-  useLoadInitValuesIntoBookmarkModal({
-    nameSignal,
-    categorySignal,
-    descSignal,
-    infoSignal,
-  })
-
-  useLoadBookmarkModalOpenedWithDirectLink({
-    nameSignal,
-    categorySignal,
-    descSignal,
-    infoSignal,
-  })
-
+  const { bookmarkFromValues } = useLoadInitValuesIntoBookmarkModal()
+  useLoadBookmarkModalOpenedWithDirectLink({ bookmarkFromValues })
   const { onSubmit, isPending, isSuccess, isError } = useSaveBookmark({
     modalRef,
-    nameSignal,
-    categorySignal,
-    descSignal,
-    infoSignal,
+    bookmarkFromValues,
   })
 
   useUnmount(() => {
     dispatch(quotationSlice.actions.removeBlockFromPosThousandReducer())
   })
+
+  const navigateUp = (): void => {
+    void router.navigate('..')
+  }
+
+  const isButtonDisabled =
+    bookmarkFromValues.nameSignal.value === '' ||
+    bookmarkFromValues.categorySignal.value === ''
 
   return (
     <FormModal
@@ -58,24 +44,20 @@ export const BookmarkModal = (): JSX.Element => {
       headerIcon={<FiEdit3 />}
       headerText='Save bookmark'
       buttonText='SAVE'
-      isButtonDisabled={nameSignal.value === '' || categorySignal.value === ''}
+      isButtonDisabled={isButtonDisabled}
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
       isButtonError={isError}
       shouldUnmountOnClickAway
       shouldUnmountOnEsc
-      onUnmount={() => {
-        void router.navigate('..')
-      }}
-      onCloseClick={() => {
-        void router.navigate('..')
-      }}
+      onUnmount={navigateUp}
+      onCloseClick={navigateUp}
       onSubmit={onSubmit}
     >
-      <NameField nameSignal={nameSignal} />
-      <CategoryField categorySignal={categorySignal} />
-      <DescriptionField descSignal={descSignal} />
-      <InfoField infoSignal={infoSignal} />
+      <NameField nameSignal={bookmarkFromValues.nameSignal} />
+      <CategoryField categorySignal={bookmarkFromValues.categorySignal} />
+      <DescriptionField descSignal={bookmarkFromValues.descSignal} />
+      <InfoField infoSignal={bookmarkFromValues.infoSignal} />
       <BookmarkField />
     </FormModal>
   )

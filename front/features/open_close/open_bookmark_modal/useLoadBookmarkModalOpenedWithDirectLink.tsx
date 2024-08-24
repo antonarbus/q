@@ -1,4 +1,7 @@
-import { useGetBookmarkMutation } from '@entities/bookmark'
+import {
+  type BookmarkFromValues,
+  useGetBookmarkMutation,
+} from '@entities/bookmark'
 import {
   bookmarkPosAtBlocks,
   itemType,
@@ -7,20 +10,13 @@ import {
 import { dispatch, getState } from '@lib_instances/store'
 import { useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
-import type { Signal } from '@preact/signals-react'
 
 type Props = {
-  nameSignal: Signal<string>
-  categorySignal: Signal<string>
-  descSignal: Signal<string>
-  infoSignal: Signal<string>
+  bookmarkFromValues: BookmarkFromValues
 }
 
 export const useLoadBookmarkModalOpenedWithDirectLink = ({
-  nameSignal,
-  categorySignal,
-  descSignal,
-  infoSignal,
+  bookmarkFromValues,
 }: Props): void => {
   const { id } = useParams()
 
@@ -53,10 +49,10 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
       const firstBlock = getState().quotation.blocks.at(bookmarkPosAtBlocks)
 
       if (firstBlock) {
-        nameSignal.value = firstBlock.name ?? ''
-        categorySignal.value = firstBlock.category ?? ''
-        descSignal.value = firstBlock.desc ?? ''
-        infoSignal.value = firstBlock.info ?? ''
+        bookmarkFromValues.nameSignal.value = firstBlock.name ?? ''
+        bookmarkFromValues.categorySignal.value = firstBlock.category ?? ''
+        bookmarkFromValues.descSignal.value = firstBlock.desc ?? ''
+        bookmarkFromValues.infoSignal.value = firstBlock.info ?? ''
       }
     }
   }, [isBookmarkSuccess])
