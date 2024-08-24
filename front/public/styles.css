@@ -159,3 +159,14 @@ meter {
   text-align: center;
   font-weight: 300;
 }
+
+#wait {
+  position: fixed;
+  text-align: center;
+  color: grey;
+  font-weight: 600;
+  width: 100%;
+  top: 150px;
+  color: #848484;
+  font-size: 24px;
+}
