@@ -166,7 +166,7 @@ meter {
   color: grey;
   font-weight: 600;
   width: 100%;
-  top:;
+  top: 250px;
   color: #848484;
   font-size: 24px;
   z-index: -1;
