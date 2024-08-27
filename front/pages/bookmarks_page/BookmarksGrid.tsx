@@ -1,10 +1,11 @@
 import 'ag-grid-community/styles/ag-grid.css' // Mandatory CSS required by the grid
 import 'ag-grid-community/styles/ag-theme-quartz.css'
+import type { ModelUpdatedEvent } from 'ag-grid-community'
 import { router } from '@lib_instances/router'
-import { getState, useSelectorTyped } from '@lib_instances/store'
+import { useSelectorTyped } from '@lib_instances/store'
 import { Box, LinearProgress } from '@mui/material'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
-import { type ElementRef, useRef, useEffect } from 'react'
+import { type ElementRef, useRef, useEffect, useCallback } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { useDisableLoadingOverlayWhenBookmarksAreFetched } from '@features/open_close/open_bookmarks_page'
 import { useGetBookmarksQuery, type Item } from '@entities/bookmark'
@@ -26,14 +27,22 @@ import { addPlaceholderToFloatingFilters } from './utils/addPlaceholderToFloatin
 
 export const BookmarksGrid = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
-  const { data, isLoading, isFetching, isFetched, isError, error, refetch } =
-    useGetBookmarksQuery()
+  const {
+    data,
+    isLoading,
+    isFetching,
+    isFetched,
+    isError,
+    error,
+    refetch: getBookmarks,
+  } = useGetBookmarksQuery()
+
   useDisableLoadingOverlayWhenBookmarksAreFetched({ isFetched })
   const email = useSelectorTyped((state) => state.user.email)
 
   useEffect(() => {
-    if (getState().user.email) {
-      void refetch()
+    if (email) {
+      void getBookmarks()
     }
   }, [email])
 
@@ -66,10 +75,21 @@ export const BookmarksGrid = (): JSX.Element => {
     }
   }, [isError])
 
+  const addPlaceholderToInputFilterFields = useCallback((): void => {
+    addPlaceholderToFloatingFilters({ gridContainerRef })
+  }, [])
+
+  const updateRowCount = useCallback(
+    (params: ModelUpdatedEvent<Item>): void => {
+      displayedRowsCountSignal.value = params.api.getDisplayedRowCount()
+    },
+    [],
+  )
+
   return (
     <Box
       ref={gridContainerRef}
-      className='ag-theme-quartz quotations-table'
+      className='ag-theme-quartz q-table'
       sx={{
         flexGrow: 1,
         position: 'relative',
@@ -97,12 +117,8 @@ export const BookmarksGrid = (): JSX.Element => {
         reactiveCustomComponents={true}
         loadingOverlayComponent={LoadingTableOverlay}
         noRowsOverlayComponent={NoRowsTableOverlay}
-        onGridReady={() => {
-          addPlaceholderToFloatingFilters({ gridContainerRef })
-        }}
-        onModelUpdated={(params) => {
-          displayedRowsCountSignal.value = params.api.getDisplayedRowCount()
-        }}
+        onGridReady={addPlaceholderToInputFilterFields}
+        onModelUpdated={updateRowCount}
       />
     </Box>
   )

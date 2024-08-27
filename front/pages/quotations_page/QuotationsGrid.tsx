@@ -69,7 +69,7 @@ export const QuotationsGrid = (): JSX.Element => {
   return (
     <Box
       ref={gridContainerRef}
-      className='ag-theme-quartz quotations-table'
+      className='ag-theme-quartz q-table'
       sx={{
         flexGrow: 1,
         position: 'relative',
