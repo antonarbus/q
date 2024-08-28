@@ -1,7 +1,7 @@
 import 'ag-grid-community/styles/ag-grid.css' // Mandatory CSS required by the grid
 import 'ag-grid-community/styles/ag-theme-quartz.css'
 import { router } from '@lib_instances/router'
-import { getState, useSelectorTyped } from '@lib_instances/store'
+import { useSelectorTyped } from '@lib_instances/store'
 import { Box, LinearProgress } from '@mui/material'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef, useEffect } from 'react'
