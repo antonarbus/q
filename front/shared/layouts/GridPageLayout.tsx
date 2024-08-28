@@ -5,7 +5,7 @@ type Props = {
   children: React.ReactNode
 }
 
-export const QuotationsPageLayout = ({ children }: Props): JSX.Element => {
+export const GridPageLayout = ({ children }: Props): JSX.Element => {
   return (
     <Box
       sx={{

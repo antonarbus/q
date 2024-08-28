@@ -10,7 +10,7 @@ import {
 import { BookmarkBlockIcon } from '@features/open_close/open_bookmark_modal'
 import { OpenInfoBlockModalIcon } from '@features/open_close/open_info_modal'
 import { BoqProvider, BlockComp } from '@entities/quotation'
-import { ItemActionButtonsLayout } from '@shared/layouts'
+import { ItemActionButtonsLayout } from '@shared/layouts/ItemActionButtonsLayout'
 import { BoqHeader } from './boq_header'
 import { BoqTable } from './boq_table'
 import { cls } from '@shared/consts/cls'

@@ -19,7 +19,7 @@ import {
   useBlock,
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
-import { ItemActionButtonsLayout } from '@shared/layouts'
+import { ItemActionButtonsLayout } from '@shared/layouts/ItemActionButtonsLayout'
 import type { FroalaEditor } from '@shared/types/froala'
 
 export const TextBlock = (): JSX.Element => {

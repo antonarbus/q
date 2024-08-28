@@ -7,7 +7,7 @@ import { BookmarkBlockIcon } from '@features/open_close/open_bookmark_modal'
 import { OpenInfoBlockModalIcon } from '@features/open_close/open_info_modal'
 import { BlockComp } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
-import { ItemActionButtonsLayout } from '@shared/layouts'
+import { ItemActionButtonsLayout } from '@shared/layouts/ItemActionButtonsLayout'
 import { PriceHeader } from './price_header/PriceHeader'
 import { PriceMain } from './price_main/PriceMain'
 
