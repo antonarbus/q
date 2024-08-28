@@ -1,19 +1,15 @@
 import 'ag-grid-community/styles/ag-grid.css' // Mandatory CSS required by the grid
 import 'ag-grid-community/styles/ag-theme-quartz.css'
-import { router } from '@lib_instances/router'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef } from 'react'
-import { useUpdateEffect } from 'react-use'
 import { useDisableLoadingOverlayWhenBookmarksAreFetched } from '@features/open_close/open_bookmarks_page'
 import { useGetBookmarksQuery, type Item } from '@entities/bookmark'
 import { LoadingTableOverlay } from '@shared/components/LoadingTableOverlay'
-import { route } from '@shared/consts/route'
 import {
   DisplayedRowsCount,
   displayedRowsCountSignal,
 } from '@shared/lib/ag_grid/components/DisplayedRowsCount'
 import { NoRowsTableOverlay } from '@shared/lib/ag_grid/components/NoRowsTableOverlay'
-import { notify } from '@shared/toast'
 import { columnDefs, defaultColDef } from './columnDefs'
 import { bookmarksAgGridRef } from './refs/bookmarksAgGridRef'
 import { AgGridStyles } from './styles/AgGridStyles'
@@ -27,7 +23,6 @@ export const BookmarksGrid = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
   const { data, isLoading, isFetching, isFetched, refetch } =
     useGetBookmarksQuery()
-
   useDisableLoadingOverlayWhenBookmarksAreFetched({ isFetched })
   useRefetchDataOnEmailChange({ refetch })
   useShowLoadingJumpingDots({ isLoading })

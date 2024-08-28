@@ -1,19 +1,15 @@
 import 'ag-grid-community/styles/ag-grid.css' // Mandatory CSS required by the grid
 import 'ag-grid-community/styles/ag-theme-quartz.css'
-import { router } from '@lib_instances/router'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef } from 'react'
-import { useUpdateEffect } from 'react-use'
 import { useDisableLoadingOverlayWhenQuotationsAreFetched } from '@features/open_close/open_quotations_page'
 import { useGetQuotationsQuery, type Quotation } from '@entities/quotation'
 import { LoadingTableOverlay } from '@shared/components/LoadingTableOverlay'
-import { route } from '@shared/consts/route'
 import {
   DisplayedRowsCount,
   displayedRowsCountSignal,
 } from '@shared/lib/ag_grid/components/DisplayedRowsCount'
 import { NoRowsTableOverlay } from '@shared/lib/ag_grid/components/NoRowsTableOverlay'
-import { notify } from '@shared/toast'
 import { columnDefs, defaultColDef } from './columnDefs'
 import { quotationsAgGridRef } from './refs/quotationsAgGridRef'
 import { AgGridStyles } from './styles/AgGridStyles'
