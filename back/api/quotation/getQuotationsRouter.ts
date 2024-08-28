@@ -5,7 +5,7 @@ import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import type { Pretty } from '@shared/types/Pretty'
 import { httpStatus } from '../../consts/httpStatus'
 import { QuotationModel } from '../../db/models/quotationModel'
-import { verifyAccessTokenMiddleware } from '../../middleware/verifyAccessTokenMiddleware'
+// import { verifyAccessTokenMiddleware } from '../../middleware/verifyAccessTokenMiddleware'
 import type { ResWithBody, Next, Req } from '../../types'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '../../utils/getEmailFromRefreshTokenOrThrowUnauthorized'
 
@@ -51,6 +51,10 @@ const getQuotations: RouterHandler = async (req, res, next) => {
   }
 }
 
-getQuotationsRouter.get('/', verifyAccessTokenMiddleware, (req, res, next) => {
-  void getQuotations(req, res, next)
-})
+getQuotationsRouter.get(
+  '/',
+  // verifyAccessTokenMiddleware,
+  (req, res, next) => {
+    void getQuotations(req, res, next)
+  },
+)

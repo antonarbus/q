@@ -6,10 +6,7 @@ import { type ElementRef, useRef } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { useDisableLoadingOverlayWhenQuotationsAreFetched } from '@features/open_close/open_quotations_page'
 import { useGetQuotationsQuery, type Quotation } from '@entities/quotation'
-import {
-  LoadingTableOverlay,
-  loadingTableOverlaySignal,
-} from '@shared/components/LoadingTableOverlay'
+import { LoadingTableOverlay } from '@shared/components/LoadingTableOverlay'
 import { route } from '@shared/consts/route'
 import {
   DisplayedRowsCount,
@@ -28,26 +25,11 @@ import { useShowLoadingJumpingDots } from '@shared/lib/ag_grid/hooks/useShowLoad
 
 export const QuotationsGrid = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
-  const { data, isLoading, isFetching, isFetched, isError, error, refetch } =
+  const { data, isLoading, isFetching, isFetched, refetch } =
     useGetQuotationsQuery()
   useDisableLoadingOverlayWhenQuotationsAreFetched({ isFetched })
   useRefetchDataOnEmailChange({ refetch })
   useShowLoadingJumpingDots({ isLoading })
-
-  useUpdateEffect(() => {
-    if (isError) {
-      if (error.response?.data.message === 'Not logged in') {
-        void router.navigate(`/${route.quotations}/${route.login}`)
-      }
-
-      notify({
-        msg: 'Internal error',
-        type: 'warn',
-        theme: 'dark',
-        position: 'bottom-center',
-      })
-    }
-  }, [isError])
 
   return (
     <GridLayout gridContainerRef={gridContainerRef}>

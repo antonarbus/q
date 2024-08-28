@@ -6,10 +6,7 @@ import { type ElementRef, useRef } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { useDisableLoadingOverlayWhenBookmarksAreFetched } from '@features/open_close/open_bookmarks_page'
 import { useGetBookmarksQuery, type Item } from '@entities/bookmark'
-import {
-  LoadingTableOverlay,
-  loadingTableOverlaySignal,
-} from '@shared/components/LoadingTableOverlay'
+import { LoadingTableOverlay } from '@shared/components/LoadingTableOverlay'
 import { route } from '@shared/consts/route'
 import {
   DisplayedRowsCount,
@@ -28,27 +25,12 @@ import { useShowLoadingJumpingDots } from '@shared/lib/ag_grid/hooks/useShowLoad
 
 export const BookmarksGrid = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
-  const { data, isLoading, isFetching, isFetched, isError, error, refetch } =
+  const { data, isLoading, isFetching, isFetched, refetch } =
     useGetBookmarksQuery()
 
   useDisableLoadingOverlayWhenBookmarksAreFetched({ isFetched })
   useRefetchDataOnEmailChange({ refetch })
   useShowLoadingJumpingDots({ isLoading })
-
-  useUpdateEffect(() => {
-    if (isError) {
-      if (error.response?.data.message === 'Not logged in') {
-        void router.navigate(`/${route.bookmarks}/${route.login}`)
-      }
-
-      notify({
-        msg: 'Internal error',
-        type: 'warn',
-        theme: 'dark',
-        position: 'bottom-center',
-      })
-    }
-  }, [isError])
 
   return (
     <GridLayout gridContainerRef={gridContainerRef}>

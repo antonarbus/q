@@ -3,7 +3,7 @@ import type { Item } from '@entities/bookmark'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '../../consts/httpStatus'
 import { BookmarkModel } from '../../db/models/bookmarkModel'
-import { verifyAccessTokenMiddleware } from '../../middleware/verifyAccessTokenMiddleware'
+// import { verifyAccessTokenMiddleware } from '../../middleware/verifyAccessTokenMiddleware'
 import type { ResWithBody, Next, Req } from '../../types'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '../../utils/getEmailFromRefreshTokenOrThrowUnauthorized'
 
@@ -49,6 +49,10 @@ const getBookmarks: RouterHandler = async (req, res, next) => {
   }
 }
 
-getBookmarksRouter.get('/', verifyAccessTokenMiddleware, (req, res, next) => {
-  void getBookmarks(req, res, next)
-})
+getBookmarksRouter.get(
+  '/',
+  // verifyAccessTokenMiddleware,
+  (req, res, next) => {
+    void getBookmarks(req, res, next)
+  },
+)
