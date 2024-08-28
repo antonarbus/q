@@ -1,9 +1,9 @@
 import type { ColDef } from 'ag-grid-community'
 import type { Quotation } from '@entities/quotation'
-import { dateFilterComparator } from './comparators/dateFilterComparator'
 import { ActionButtonsCellRenderer } from './renderers/ActionButtonsCellRenderer'
-import { DateCellRenderer } from './renderers/DateCellRenderer'
 import { SharedWithRenderer } from './renderers/SharedWithRenderer'
+import { DateCellRenderer } from '@shared/lib/ag_grid/renderers/DateCellRenderer'
+import { dateFilterComparator } from '@shared/lib/ag_grid/comparators/dateFilterComparator'
 import { dateValueGetter } from './value_getters/dateValueGetter'
 
 export const defaultColDef: ColDef<Quotation> = {

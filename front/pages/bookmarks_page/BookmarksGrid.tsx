@@ -12,12 +12,12 @@ import {
 import { NoRowsTableOverlay } from '@shared/lib/ag_grid/components/NoRowsTableOverlay'
 import { columnDefs, defaultColDef } from './columnDefs'
 import { bookmarksAgGridRef } from './refs/bookmarksAgGridRef'
-import { AgGridStyles } from './styles/AgGridStyles'
 import { addPlaceholderToFloatingFilters } from '@shared/lib/ag_grid/utils/addPlaceholderToFloatingFilters'
 import { GridLayout } from '@shared/lib/ag_grid/GridLayout'
 import { ProgressGridBar } from '@shared/lib/ag_grid/components/ProgressGridBar'
 import { useRefetchDataOnEmailChange } from '@shared/lib/ag_grid/hooks/useRefetchDataOnEmailChange'
 import { useShowLoadingJumpingDots } from '@shared/lib/ag_grid/hooks/useShowLoadingJumpingDots'
+import { AgGridStyles } from '@shared/lib/ag_grid/styles/AgGridStyles'
 
 export const BookmarksGrid = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)

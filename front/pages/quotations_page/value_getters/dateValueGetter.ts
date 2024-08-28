@@ -6,11 +6,9 @@ type Props = {
   columnDef: keyof Quotation
 }
 
-type Params = ValueGetterParams<Quotation, string>
-
 export const dateValueGetter =
   ({ columnDef }: Props) =>
-  (params: Params): Date | null => {
+  (params: ValueGetterParams<Quotation, string>): Date | null => {
     const dateIsoString = params.data?.[columnDef]
     if (typeof dateIsoString !== 'string') return null
     const dateObj = new Date(dateIsoString)
