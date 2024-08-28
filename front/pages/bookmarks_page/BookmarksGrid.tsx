@@ -1,10 +1,9 @@
 import 'ag-grid-community/styles/ag-grid.css' // Mandatory CSS required by the grid
 import 'ag-grid-community/styles/ag-theme-quartz.css'
-import type { ModelUpdatedEvent } from 'ag-grid-community'
 import { router } from '@lib_instances/router'
 import { useSelectorTyped } from '@lib_instances/store'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
-import { type ElementRef, useRef, useEffect, useCallback } from 'react'
+import { type ElementRef, useRef, useEffect } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { useDisableLoadingOverlayWhenBookmarksAreFetched } from '@features/open_close/open_bookmarks_page'
 import { useGetBookmarksQuery, type Item } from '@entities/bookmark'
@@ -22,9 +21,9 @@ import { notify } from '@shared/toast'
 import { columnDefs, defaultColDef } from './columnDefs'
 import { bookmarksAgGridRef } from './refs/bookmarksAgGridRef'
 import { AgGridStyles } from './styles/AgGridStyles'
-import { ProgressBar } from './ProgressBar'
-import { GridLayout } from './GridLayout'
 import { addPlaceholderToFloatingFilters } from '@shared/lib/ag_grid/utils/addPlaceholderToFloatingFilters'
+import { GridLayout } from '@shared/lib/ag_grid/GridLayout'
+import { ProgressGridBar } from '@shared/lib/ag_grid/components/ProgressBar'
 
 export const BookmarksGrid = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
@@ -71,18 +70,11 @@ export const BookmarksGrid = (): JSX.Element => {
     }
   }, [isError])
 
-  const updateRowCount = useCallback(
-    (params: ModelUpdatedEvent<Item>): void => {
-      displayedRowsCountSignal.value = params.api.getDisplayedRowCount()
-    },
-    [],
-  )
-
   return (
     <GridLayout gridContainerRef={gridContainerRef}>
       <AgGridStyles />
       <DisplayedRowsCount />
-      <ProgressBar isShown={isFetching} />
+      <ProgressGridBar isShown={isFetching} />
       <AgGridReact<Item>
         ref={bookmarksAgGridRef}
         rowData={data?.bookmarks}
@@ -98,7 +90,9 @@ export const BookmarksGrid = (): JSX.Element => {
         onGridReady={() => {
           addPlaceholderToFloatingFilters({ gridContainerRef })
         }}
-        onModelUpdated={updateRowCount}
+        onModelUpdated={(params) => {
+          displayedRowsCountSignal.value = params.api.getDisplayedRowCount()
+        }}
       />
     </GridLayout>
   )

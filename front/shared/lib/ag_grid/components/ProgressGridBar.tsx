@@ -4,7 +4,7 @@ type Props = {
   isShown: boolean
 }
 
-export const ProgressBar = ({ isShown }: Props): React.ReactNode => {
+export const ProgressGridBar = ({ isShown }: Props): React.ReactNode => {
   if (!isShown) return null
 
   return (

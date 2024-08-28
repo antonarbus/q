@@ -23,6 +23,8 @@ import { columnDefs, defaultColDef } from './columnDefs'
 import { quotationsAgGridRef } from './refs/quotationsAgGridRef'
 import { AgGridStyles } from './styles/AgGridStyles'
 import { addPlaceholderToFloatingFilters } from '@shared/lib/ag_grid/utils/addPlaceholderToFloatingFilters'
+import { GridLayout } from '@shared/lib/ag_grid/GridLayout'
+import { ProgressGridBar } from '@shared/lib/ag_grid/components/ProgressGridBar'
 
 export const QuotationsGrid = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
@@ -62,27 +64,13 @@ export const QuotationsGrid = (): JSX.Element => {
   }, [isError])
 
   return (
-    <Box
-      ref={gridContainerRef}
-      className='ag-theme-quartz q-table'
-      sx={{
-        flexGrow: 1,
-        position: 'relative',
-        overflow: 'visible',
-        height: '100%',
-        mt: '10px',
-      }}
-    >
+    <GridLayout gridContainerRef={gridContainerRef}>
       <AgGridStyles />
       <DisplayedRowsCount />
-      {isFetching && (
-        <LinearProgress
-          sx={{ height: '1px', top: '97px', zIndex: 2, mb: '-1px' }}
-        />
-      )}
+      <ProgressGridBar isShown={isFetching} />
       <AgGridReact<Quotation>
         ref={quotationsAgGridRef}
-        rowData={data?.quotations ?? []}
+        rowData={data?.quotations}
         getRowId={(params) => params.data.id}
         defaultColDef={defaultColDef}
         columnDefs={columnDefs}
@@ -99,6 +87,6 @@ export const QuotationsGrid = (): JSX.Element => {
           displayedRowsCountSignal.value = params.api.getDisplayedRowCount()
         }}
       />
-    </Box>
+    </GridLayout>
   )
 }
