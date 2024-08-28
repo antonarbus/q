@@ -18,7 +18,7 @@ import {
   displayedRowsCountSignal,
 } from '@shared/lib/ag_grid/components/DisplayedRowsCount'
 import { NoRowsTableOverlay } from '@shared/lib/ag_grid/components/NoRowsTableOverlay'
-import { notify } from '@shared/ui/top_msg'
+import { notify } from '@shared/toast'
 import { columnDefs, defaultColDef } from './columnDefs'
 import { bookmarksAgGridRef } from './refs/bookmarksAgGridRef'
 import { AgGridStyles } from './styles/AgGridStyles'

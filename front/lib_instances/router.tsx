@@ -12,13 +12,13 @@ import { Logout } from '@features/auth/log_out'
 import { route } from '@shared/consts/route'
 import { Main } from '@shared/layouts'
 import { LoadingDotsOverlay } from '@shared/loading_dots_overlay'
-import { TopMsg } from '@shared/ui/top_msg'
 import { LoginModal } from '@pages/auth_login_modal'
 import { RegisterModal } from '@pages/auth_register_modal'
 import { RequestPasswordResetModal } from '@pages/auth_request_password_reset_modal'
 import { ActivationModal } from '@pages/auth_activation_modal'
 import { ResetPasswordModal } from '@pages/auth_reset_password_modal'
 import { UnauthorizedPage } from '@pages/auth_unauthorized_page'
+import { Toast } from '@shared/toast'
 
 const Quotation = React.lazy(async () => {
   return import('@pages/quotation_page')
@@ -66,7 +66,7 @@ export const router = createBrowserRouter([
     element: (
       <>
         <AccessToken />
-        <TopMsg />
+        <Toast />
         <LoadingDotsOverlay />
         <Nav />
         <CopyModal />

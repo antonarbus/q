@@ -1,5 +1,5 @@
 import { getState } from '@lib_instances/store'
-import { notify } from '@shared/ui/top_msg'
+import { notify } from '@shared/toast'
 
 export const remindToSaveQuotationOnInsert = (): void => {
   const isLogged = Boolean(getState().user.email)

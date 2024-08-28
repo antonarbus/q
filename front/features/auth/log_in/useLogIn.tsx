@@ -17,7 +17,7 @@ import { route } from '@shared/consts/route'
 import { nanoid } from '@shared/lib/nanoid'
 import { navSlice } from '@shared/nav'
 import { reRenderQuotationSignal } from '@shared/signals/reRenderQuotationSignal'
-import { notify } from '@shared/ui/top_msg'
+import { notify } from '@shared/toast'
 import { slideElement } from '@shared/utils/slideElement'
 import type { NavigateState } from '@shared/types/NavigateState'
 

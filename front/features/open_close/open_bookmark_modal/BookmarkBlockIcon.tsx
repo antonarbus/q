@@ -4,7 +4,7 @@ import { MdOutlineStarOutline } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import { cls } from '@shared/consts/cls'
 import { route } from '@shared/consts/route'
-import { notify } from '@shared/ui/top_msg'
+import { notify } from '@shared/toast'
 import { Tooltip } from '@mui/material'
 import {
   getBlockFromStore,

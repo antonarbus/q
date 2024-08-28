@@ -11,7 +11,7 @@ import {
 } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components'
 import { route } from '@shared/consts/route'
-import { notify } from '@shared/ui/top_msg'
+import { notify } from '@shared/toast'
 import type { NavigateState } from '@shared/types/NavigateState'
 
 export const OpenQuotationModalButton = ({ id }: ReqBody): JSX.Element => {

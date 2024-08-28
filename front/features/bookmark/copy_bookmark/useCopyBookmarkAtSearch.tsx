@@ -3,7 +3,7 @@ import { useUpdateEffect } from 'react-use'
 import { useGetBookmarkMutation } from '@entities/bookmark'
 import { copySlice } from '@entities/copy'
 import { isFroalaSignal } from '@entities/quotation'
-import { notify } from '@shared/ui/top_msg'
+import { notify } from '@shared/toast'
 import type { UseMutateAsyncFunction } from '@tanstack/react-query'
 import type {
   ReqBody as Payload,

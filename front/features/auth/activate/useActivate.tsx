@@ -6,7 +6,7 @@ import { useActivateMutation, userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { navSlice } from '@shared/nav'
-import { notify } from '@shared/ui/top_msg'
+import { notify } from '@shared/toast'
 
 type Res = {
   isPending: UseMutationResult['isPending']

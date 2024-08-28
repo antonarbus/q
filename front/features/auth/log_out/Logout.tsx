@@ -8,7 +8,7 @@ import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
 import { navSlice } from '@shared/nav'
-import { notify } from '@shared/ui/top_msg'
+import { notify } from '@shared/toast'
 
 export const Logout = (): JSX.Element => {
   const navigate = useNavigate()

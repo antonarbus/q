@@ -11,7 +11,7 @@ import {
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { route } from '@shared/consts/route'
-import { notify } from '@shared/ui/top_msg'
+import { notify } from '@shared/toast'
 import { Tooltip } from '@mui/material'
 
 export const BookmarkBoqRowIcon = (): ReactNode => {

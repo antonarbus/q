@@ -17,7 +17,7 @@ import {
   showLoadingNavIcon,
   showSuccessNavIcon,
 } from '@shared/nav'
-import { notify } from '@shared/ui/top_msg'
+import { notify } from '@shared/toast'
 import { slideElement } from '@shared/utils/slideElement'
 import type { QuotationFormValues } from '@entities/quotation/types'
 

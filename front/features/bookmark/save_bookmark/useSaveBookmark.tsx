@@ -10,7 +10,7 @@ import {
   useSaveBookmarkMutation,
 } from '@entities/bookmark'
 import { bookmarkPosAtBlocks, quotationSlice } from '@entities/quotation'
-import { notify } from '@shared/ui/top_msg'
+import { notify } from '@shared/toast'
 import { slideElement } from '@shared/utils/slideElement'
 import { getPaperElementHtmlAtModal } from '@shared/utils'
 import { cls } from '@shared/consts/cls'

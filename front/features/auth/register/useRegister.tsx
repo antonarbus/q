@@ -3,7 +3,7 @@ import type { UseMutationResult } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useRegisterMutation } from '@entities/user'
-import { notify } from '@shared/ui/top_msg'
+import { notify } from '@shared/toast'
 import { slideElement } from '@shared/utils/slideElement'
 
 type Props = {

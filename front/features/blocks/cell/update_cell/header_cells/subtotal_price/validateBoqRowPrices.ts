@@ -9,7 +9,7 @@ import {
   boqRowCellKey,
 } from '@entities/quotation'
 import type { FroalaEditorRef } from '@shared/types/froala'
-import { notify } from '@shared/ui/top_msg'
+import { notify } from '@shared/toast'
 
 type Props = {
   blockIndex: number

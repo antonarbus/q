@@ -7,7 +7,7 @@ import { useUpdateEffect } from 'react-use'
 import { useGetBookmarkMutation } from '@entities/bookmark'
 import { isFroalaSignal, quotationSlice } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components'
-import { notify } from '@shared/ui/top_msg'
+import { notify } from '@shared/toast'
 
 export const OpenBookmarkModalButton = ({ id }: ReqBody): JSX.Element => {
   const navigate = useNavigate()

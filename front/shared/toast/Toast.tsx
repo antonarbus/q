@@ -657,7 +657,7 @@ const ToastStyled = styled.div`
   }
 `
 
-export const TopMsg = (): JSX.Element => {
+export const Toast = (): JSX.Element => {
   return (
     <ToastStyled>
       <ToastContainer />
