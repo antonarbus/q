@@ -17,10 +17,11 @@ export const useGetQuotationsQuery = (): UseQueryResult<
     staleTime: 0,
     retry: 0,
     enabled: false,
-    queryFn: async () => {
+    queryFn: async ({ signal }) => {
       const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
         url: apiUrl.getQuotations,
-        method: 'GET',
+        method: 'get',
+        signal,
       })
 
       return res.data

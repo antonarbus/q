@@ -14,7 +14,7 @@ export const useRegisterMutation = (): UseMutationResult<
     mutationFn: async ({ email, password }: Payload) => {
       const res = await axios<ResBody>({
         url: apiUrl.register,
-        method: 'POST',
+        method: 'post',
         data: { email, password },
       })
 

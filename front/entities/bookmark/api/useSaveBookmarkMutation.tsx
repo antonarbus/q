@@ -19,7 +19,7 @@ export const useSaveBookmarkMutation = (): UseMutationResult<
       const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>, Payload>(
         {
           url: apiUrl.saveBookmark,
-          method: 'POST',
+          method: 'post',
           data: { item },
         },
       )

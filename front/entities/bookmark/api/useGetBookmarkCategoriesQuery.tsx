@@ -14,7 +14,7 @@ export const useGetBookmarkCategoriesQuery = (): UseQueryResult<
     queryFn: async () => {
       const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
         url: apiUrl.getBookmarkCategories,
-        method: 'GET',
+        method: 'get',
       })
 
       return res.data

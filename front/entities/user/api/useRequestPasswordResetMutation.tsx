@@ -17,7 +17,7 @@ export const useRequestPasswordResetMutation = (): UseMutationResult<
     mutationFn: async ({ email }: Payload) => {
       const res = await axios<ResBody>({
         url: apiUrl.requestPasswordReset,
-        method: 'POST',
+        method: 'post',
         data: { email },
       })
 

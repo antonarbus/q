@@ -19,7 +19,7 @@ export const useSaveQuotationMutation = (): UseMutationResult<
       const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>, Payload>(
         {
           url: apiUrl.saveQuotation,
-          method: 'POST',
+          method: 'post',
           data: { quotation },
         },
       )

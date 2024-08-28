@@ -18,7 +18,7 @@ export const useDeleteQuotationMutation = (): UseMutationResult<
     mutationFn: async (payload: Payload) => {
       const res = await axiosWithAuth<ResBody>({
         url: apiUrl.deleteQuotation,
-        method: 'DELETE',
+        method: 'delete',
         data: payload,
       })
 

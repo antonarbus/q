@@ -14,7 +14,7 @@ export const useLogInMutation = (): UseMutationResult<
     mutationFn: async ({ email, password }: Payload) => {
       const res = await axios<ResBody>({
         url: apiUrl.logIn,
-        method: 'POST',
+        method: 'post',
         data: { email, password },
       })
 

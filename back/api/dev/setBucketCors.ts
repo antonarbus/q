@@ -19,7 +19,7 @@ async function configureBucketCors(
         'http://local.sendmequotation.today:3005/', // pdf download does not work without port
         'https://local.sendmequotation.today:3005/', // pdf download does not work without port
       ],
-      method: ['GET'],
+      method: ['get'],
       maxAgeSeconds: 3600,
       responseHeader: ['Content-Type'],
     },

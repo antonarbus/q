@@ -22,7 +22,7 @@ export const useGetBookmarkMutation = (): UseMutationResult<
         Payload
       >({
         url: apiUrl.getBookmark,
-        method: 'POST',
+        method: 'post',
         data: { id },
       })
 

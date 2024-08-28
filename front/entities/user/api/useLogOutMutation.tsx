@@ -14,7 +14,7 @@ export const useLogOutMutation = (): UseMutationResult<
     mutationFn: async () => {
       const res = await axios<ResBody>({
         url: apiUrl.logOut,
-        method: 'GET',
+        method: 'get',
       })
 
       return res.data

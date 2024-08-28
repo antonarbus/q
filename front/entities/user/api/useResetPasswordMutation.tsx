@@ -17,7 +17,7 @@ export const useResetPasswordMutation = (): UseMutationResult<
     mutationFn: async ({ resetPasswordKey, email, password }: Payload) => {
       const res = await axios<ResBody>({
         url: apiUrl.resetPassword,
-        method: 'POST',
+        method: 'post',
         data: { resetPasswordKey, email, password },
       })
 

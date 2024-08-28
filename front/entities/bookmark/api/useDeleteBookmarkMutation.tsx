@@ -18,7 +18,7 @@ export const useDeleteBookmarkMutation = (): UseMutationResult<
     mutationFn: async (payload: Payload) => {
       const res = await axiosWithAuth<ResBody>({
         url: apiUrl.deleteBookmark,
-        method: 'DELETE',
+        method: 'delete',
         data: payload,
       })
 

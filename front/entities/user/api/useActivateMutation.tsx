@@ -14,7 +14,7 @@ export const useActivateMutation = (): UseMutationResult<
     mutationFn: async ({ activationKey }: Payload) => {
       const res = await axios<ResBody>({
         url: apiUrl.activate,
-        method: 'POST',
+        method: 'post',
         data: { activationKey },
       })
 

@@ -17,7 +17,7 @@ export const useGetQuotationMutation = (): UseMutationResult<
     mutationFn: async ({ id }: Payload) => {
       const { data } = await axios<ResBody, AxiosResponse<ResBody>, Payload>({
         url: apiUrl.getQuotation,
-        method: 'POST',
+        method: 'post',
         data: { id },
       })
 

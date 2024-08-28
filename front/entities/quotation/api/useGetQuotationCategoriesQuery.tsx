@@ -19,7 +19,7 @@ export const useGetQuotationCategoriesQuery = (): UseQueryResult<
     queryFn: async () => {
       const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
         url: apiUrl.getQuotationCategories,
-        method: 'GET',
+        method: 'get',
       })
 
       return res.data

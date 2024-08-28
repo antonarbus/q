@@ -13,8 +13,9 @@ export const useGetAccessTokenQuery = (): UseQueryResult<
     queryFn: async () => {
       const res = await axios<ResBody, AxiosResponse<ResBody>>({
         url: apiUrl.getAccessToken,
-        method: 'GET',
+        method: 'get',
         withCredentials: true,
+        timeout: 5000,
       })
 
       return res.data
