@@ -22,9 +22,9 @@ import { notify } from '@shared/toast'
 import { columnDefs, defaultColDef } from './columnDefs'
 import { bookmarksAgGridRef } from './refs/bookmarksAgGridRef'
 import { AgGridStyles } from './styles/AgGridStyles'
-import { addPlaceholderToFloatingFilters } from './utils/addPlaceholderToFloatingFilters'
 import { ProgressBar } from './ProgressBar'
 import { GridLayout } from './GridLayout'
+import { addPlaceholderToFloatingFilters } from '@shared/lib/ag_grid/utils/addPlaceholderToFloatingFilters'
 
 export const BookmarksGrid = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
@@ -71,10 +71,6 @@ export const BookmarksGrid = (): JSX.Element => {
     }
   }, [isError])
 
-  const addPlaceholderToInputFilterFields = useCallback((): void => {
-    addPlaceholderToFloatingFilters({ gridContainerRef })
-  }, [])
-
   const updateRowCount = useCallback(
     (params: ModelUpdatedEvent<Item>): void => {
       displayedRowsCountSignal.value = params.api.getDisplayedRowCount()
@@ -99,7 +95,9 @@ export const BookmarksGrid = (): JSX.Element => {
         reactiveCustomComponents={true}
         loadingOverlayComponent={LoadingTableOverlay}
         noRowsOverlayComponent={NoRowsTableOverlay}
-        onGridReady={addPlaceholderToInputFilterFields}
+        onGridReady={() => {
+          addPlaceholderToFloatingFilters({ gridContainerRef })
+        }}
         onModelUpdated={updateRowCount}
       />
     </GridLayout>
