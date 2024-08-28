@@ -1,10 +1,8 @@
 import 'ag-grid-community/styles/ag-grid.css' // Mandatory CSS required by the grid
 import 'ag-grid-community/styles/ag-theme-quartz.css'
 import { router } from '@lib_instances/router'
-import { useSelectorTyped } from '@lib_instances/store'
-import { Box, LinearProgress } from '@mui/material'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
-import { type ElementRef, useRef, useEffect } from 'react'
+import { type ElementRef, useRef } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { useDisableLoadingOverlayWhenQuotationsAreFetched } from '@features/open_close/open_quotations_page'
 import { useGetQuotationsQuery, type Quotation } from '@entities/quotation'
@@ -25,28 +23,16 @@ import { AgGridStyles } from './styles/AgGridStyles'
 import { addPlaceholderToFloatingFilters } from '@shared/lib/ag_grid/utils/addPlaceholderToFloatingFilters'
 import { GridLayout } from '@shared/lib/ag_grid/GridLayout'
 import { ProgressGridBar } from '@shared/lib/ag_grid/components/ProgressGridBar'
+import { useRefetchDataOnEmailChange } from '@shared/lib/ag_grid/hooks/useRefetchDataOnEmailChange'
+import { useShowLoadingJumpingDots } from '@shared/lib/ag_grid/hooks/useShowLoadingJumpingDots'
 
 export const QuotationsGrid = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
   const { data, isLoading, isFetching, isFetched, isError, error, refetch } =
     useGetQuotationsQuery()
   useDisableLoadingOverlayWhenQuotationsAreFetched({ isFetched })
-  const email = useSelectorTyped((state) => state.user.email)
-
-  useEffect(() => {
-    if (email) {
-      void refetch()
-    }
-  }, [email])
-
-  useUpdateEffect(() => {
-    if (isLoading) {
-      loadingTableOverlaySignal.value = {
-        areJumpingDotsShown: true,
-        text: 'Loading',
-      }
-    }
-  }, [isLoading])
+  useRefetchDataOnEmailChange({ refetch })
+  useShowLoadingJumpingDots({ isLoading })
 
   useUpdateEffect(() => {
     if (isError) {

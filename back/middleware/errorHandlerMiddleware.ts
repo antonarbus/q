@@ -22,13 +22,15 @@ export const errorHandlerMiddleware = (
   // todo: make some logger to db or text file or maybe there are proven solutions for it
 
   if (message === errorMessageCommon.notLoggedIn) {
-    return res.status(httpStatus.unauthorized_401).json({
-      message: errorMessageCommon.notLoggedIn,
-    })
+    return res
+      .status(httpStatus.unauthorized_401)
+      .json({ message: errorMessageCommon.notLoggedIn })
   }
 
-  return res.status(httpStatus.serverError_500).json({
-    message: errorMessageCommon.internalError,
-    errorAsString: JSON.stringify({ name, message, stack }),
-  })
+  return res
+    .status(httpStatus.serverError_500)
+    .json({
+      message: errorMessageCommon.internalError,
+      errorAsString: JSON.stringify({ name, message, stack }),
+    })
 }

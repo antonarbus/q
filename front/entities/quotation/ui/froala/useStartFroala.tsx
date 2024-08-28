@@ -10,10 +10,10 @@ import type { MouseEvent } from 'react'
 import { useEffectOnce } from 'react-use'
 import { nanoid } from '@shared/lib/nanoid'
 import { type FroalaEditorRef } from '@shared/types/froala.js'
-import { notify } from '@shared/ui/top_msg/notify.js'
 import { useFroala } from '../../providers/FroalaProvider'
 import { froalaDefaultOptions } from './froalaDefaultOptions'
 import { remindToSaveQuotationOnInsert } from './remindToSaveQuotationOnInsert.js'
+import { notify } from '@shared/toast/notify.js'
 
 declare const window: Window &
   typeof globalThis & {

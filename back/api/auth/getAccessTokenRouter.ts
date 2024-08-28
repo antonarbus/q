@@ -38,9 +38,9 @@ const getAccessToken = async (
     const refreshJwtToken = req.cookies.refreshJwtToken
 
     if (typeof refreshJwtToken !== 'string') {
-      return res.status(httpStatus.unauthorized_401).json({
-        message: 'no refresh token found in cookies, not authorized',
-      })
+      return res
+        .status(httpStatus.unauthorized_401)
+        .json({ message: 'no refresh token found in cookies, not authorized' })
     }
 
     const jwtPayload = verifyRefreshToken(refreshJwtToken)
@@ -64,9 +64,9 @@ const getAccessToken = async (
     const accessJwtToken = createAccessToken({ email, roles: user.roles })
 
     if (!accessJwtToken) {
-      return res.status(httpStatus.unauthorized_401).json({
-        message: 'something went wrong during access token creation',
-      })
+      return res
+        .status(httpStatus.unauthorized_401)
+        .json({ message: 'something went wrong during access token creation' })
     }
 
     return res.status(httpStatus.success_200).json({
