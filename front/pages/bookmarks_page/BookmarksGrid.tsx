@@ -24,6 +24,7 @@ import { columnDefs, defaultColDef } from './columnDefs'
 import { bookmarksAgGridRef } from './refs/bookmarksAgGridRef'
 import { AgGridStyles } from './styles/AgGridStyles'
 import { addPlaceholderToFloatingFilters } from './utils/addPlaceholderToFloatingFilters'
+import { ProgressBar } from './ProgressBar'
 
 export const BookmarksGrid = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
@@ -61,17 +62,12 @@ export const BookmarksGrid = (): JSX.Element => {
         void router.navigate(`/${route.bookmarks}/${route.login}`)
       }
 
-      if (
-        error.response?.data.message === 'Internal error' ||
-        error.response?.data.message === 'Unhandled error'
-      ) {
-        notify({
-          msg: 'Internal error',
-          type: 'warn',
-          theme: 'dark',
-          position: 'bottom-center',
-        })
-      }
+      notify({
+        msg: 'Internal error',
+        type: 'warn',
+        theme: 'dark',
+        position: 'bottom-center',
+      })
     }
   }, [isError])
 
@@ -100,14 +96,10 @@ export const BookmarksGrid = (): JSX.Element => {
     >
       <AgGridStyles />
       <DisplayedRowsCount />
-      {isFetching && (
-        <LinearProgress
-          sx={{ height: '1px', top: '97px', zIndex: 2, mb: '-1px' }}
-        />
-      )}
+      <ProgressBar isShown={isFetching} />
       <AgGridReact<Item>
         ref={bookmarksAgGridRef}
-        rowData={data?.bookmarks ?? []}
+        rowData={data?.bookmarks}
         getRowId={(params) => params.data.id}
         defaultColDef={defaultColDef}
         columnDefs={columnDefs}

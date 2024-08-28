@@ -32,7 +32,7 @@ export const QuotationsGrid = (): JSX.Element => {
   const email = useSelectorTyped((state) => state.user.email)
 
   useEffect(() => {
-    if (getState().user.email) {
+    if (email) {
       void refetch()
     }
   }, [email])
@@ -52,17 +52,12 @@ export const QuotationsGrid = (): JSX.Element => {
         void router.navigate(`/${route.quotations}/${route.login}`)
       }
 
-      if (
-        error.response?.data.message === 'Internal error' ||
-        error.response?.data.message === 'Unhandled case'
-      ) {
-        notify({
-          msg: 'Internal error',
-          type: 'warn',
-          theme: 'dark',
-          position: 'bottom-center',
-        })
-      }
+      notify({
+        msg: 'Internal error',
+        type: 'warn',
+        theme: 'dark',
+        position: 'bottom-center',
+      })
     }
   }, [isError])
 

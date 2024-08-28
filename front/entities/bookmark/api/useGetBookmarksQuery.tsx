@@ -4,6 +4,7 @@ import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import type { AxiosError, AxiosResponse } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
 import { axiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
+// import { asyncDelay } from '@shared/utils/delay'
 
 export const useGetBookmarksQuery = (): UseQueryResult<
   ResBody,

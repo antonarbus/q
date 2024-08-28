@@ -1,4 +1,6 @@
 export const cls = {
+  seo: 'seo',
+  initialLoading: 'initial-loading',
   blocks: 'blocks',
   block: 'block',
   boqBlock: 'boq-block',

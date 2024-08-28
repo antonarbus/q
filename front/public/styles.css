@@ -141,26 +141,26 @@ meter {
   color: unset;
 }
 
-#seo {
+.seo {
   padding: 10px;
   position: relative;
   top: 10000px;
   color: grey;
 }
 
-#seo h1 {
+.seo h1 {
   margin: 30px;
   text-align: center;
   font-weight: 400;
 }
 
-#seo h2 {
+.seo h2 {
   margin: 20px;
   text-align: center;
   font-weight: 300;
 }
 
-#loading {
+.initial-loading {
   position: fixed;
   text-align: center;
   color: grey;

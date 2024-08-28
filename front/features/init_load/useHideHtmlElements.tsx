@@ -1,15 +1,16 @@
+import { cls } from '@shared/consts/cls'
 import { useEffectOnce } from 'react-use'
 
 export const useHideHtmlElements = (): void => {
   useEffectOnce(() => {
-    const seoElement = document.getElementById('seo')
-    const waitElement = document.getElementById('loading')
+    const seoElement = document.querySelector(`.${cls.seo}`)
+    const waitElement = document.querySelector(`.${cls.initialLoading}`)
 
-    if (seoElement instanceof Element) {
+    if (seoElement instanceof HTMLElement) {
       seoElement.style.display = 'none'
     }
 
-    if (waitElement instanceof Element) {
+    if (waitElement instanceof HTMLElement) {
       waitElement.style.display = 'none'
     }
   })
