@@ -1,6 +1,6 @@
 export const cls = {
   seo: 'seo',
-  initialLoading: 'initial-loading',
+  waitForInitFilesToLoad: 'wait-for-init-files-to-load',
   blocks: 'blocks',
   block: 'block',
   boqBlock: 'boq-block',

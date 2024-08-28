@@ -160,7 +160,7 @@ meter {
   font-weight: 300;
 }
 
-.initial-loading {
+.wait-for-init-files-to-load {
   position: fixed;
   text-align: center;
   color: grey;

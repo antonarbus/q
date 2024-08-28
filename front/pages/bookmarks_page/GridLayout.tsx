@@ -1,0 +1,27 @@
+import { Box } from '@mui/material'
+
+type Props = {
+  children: React.ReactNode
+  gridContainerRef: React.RefObject<React.ElementRef<'div'>>
+}
+
+export const GridLayout = ({
+  children,
+  gridContainerRef,
+}: Props): JSX.Element => {
+  return (
+    <Box
+      ref={gridContainerRef}
+      className='ag-theme-quartz q-table'
+      sx={{
+        flexGrow: 1,
+        position: 'relative',
+        overflow: 'visible',
+        height: '100%',
+        mt: '10px',
+      }}
+    >
+      {children}
+    </Box>
+  )
+}

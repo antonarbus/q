@@ -3,7 +3,7 @@ import 'ag-grid-community/styles/ag-theme-quartz.css'
 import type { ModelUpdatedEvent } from 'ag-grid-community'
 import { router } from '@lib_instances/router'
 import { useSelectorTyped } from '@lib_instances/store'
-import { Box, LinearProgress } from '@mui/material'
+import { Box } from '@mui/material'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef, useEffect, useCallback } from 'react'
 import { useUpdateEffect } from 'react-use'
@@ -25,6 +25,7 @@ import { bookmarksAgGridRef } from './refs/bookmarksAgGridRef'
 import { AgGridStyles } from './styles/AgGridStyles'
 import { addPlaceholderToFloatingFilters } from './utils/addPlaceholderToFloatingFilters'
 import { ProgressBar } from './ProgressBar'
+import { GridLayout } from './GridLayout'
 
 export const BookmarksGrid = (): JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
@@ -83,17 +84,7 @@ export const BookmarksGrid = (): JSX.Element => {
   )
 
   return (
-    <Box
-      ref={gridContainerRef}
-      className='ag-theme-quartz q-table'
-      sx={{
-        flexGrow: 1,
-        position: 'relative',
-        overflow: 'visible',
-        height: '100%',
-        mt: '10px',
-      }}
-    >
+    <GridLayout gridContainerRef={gridContainerRef}>
       <AgGridStyles />
       <DisplayedRowsCount />
       <ProgressBar isShown={isFetching} />
@@ -112,6 +103,6 @@ export const BookmarksGrid = (): JSX.Element => {
         onGridReady={addPlaceholderToInputFilterFields}
         onModelUpdated={updateRowCount}
       />
-    </Box>
+    </GridLayout>
   )
 }
