@@ -101,8 +101,6 @@ export const Froala = ({
         }}
       >
         <div
-          // ref={observerRef}
-          className='view-port-observer'
           style={{
             width: '100%',
             position: 'relative',

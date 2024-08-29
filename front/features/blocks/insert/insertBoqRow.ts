@@ -16,7 +16,7 @@ export const insertBoqRow = (e?: MouseEvent): void => {
         <div class="paste-here" style="opacity: 1; display: flex; align-items: stretch;">
           <div class="td number MuiBox-root" style="display: flex; align-items: flex-end; position: relative; width: 30px; max-width: 30px; min-width: 30px; font-size: 10px; color: grey; padding-bottom: 2px;">1.1</div>
           <div class="froala-wrapper td description MuiBox-root" style="display: flex; align-items: flex-end; position: relative; width: 240px; max-width: 240px; min-width: 200px; cursor: pointer;">
-            <div class="view-port-observer" style="width: 100%; position: relative;">
+            <div style="width: 100%; position: relative;">
               <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word; text-align: left; padding: 30px 5px 0px; min-height: 50px;">
                 <div class="fr-wrapper">
                   <div class="fr-element fr-view">
@@ -28,7 +28,7 @@ export const insertBoqRow = (e?: MouseEvent): void => {
           </div>
           <div class="MuiBox-root">
             <div class="froala-wrapper td itemPrice MuiBox-root" style="display: flex; align-items: flex-end; position: relative; width: 100px; max-width: 100px; min-width: 100px; cursor: pointer;">
-              <div class="view-port-observer" style="width: 100%; position: relative;">
+              <div style="width: 100%; position: relative;">
                 <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word; text-align: center; padding: 30px 5px 0px; min-height: 50px;">
                   <div class="fr-wrapper">
                     <div class="fr-element fr-view">
@@ -41,7 +41,7 @@ export const insertBoqRow = (e?: MouseEvent): void => {
           </div>
           <div class="MuiBox-root">
             <div class="froala-wrapper td qty MuiBox-root" style="display: flex; align-items: flex-end; position: relative; width: 100px; max-width: 100px; min-width: 100px; cursor: pointer;">
-              <div class="view-port-observer" style="width: 100%; position: relative;">
+              <div style="width: 100%; position: relative;">
                 <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word; text-align: center; padding: 30px 5px 0px; min-height: 50px;">
                   <div class="fr-wrapper">
                     <div class="fr-element fr-view">
@@ -54,7 +54,7 @@ export const insertBoqRow = (e?: MouseEvent): void => {
           </div>
           <div class="MuiBox-root">
             <div class="froala-wrapper td price MuiBox-root" style="display: flex; align-items: flex-end; position: relative; width: 100px; max-width: 100px; min-width: 100px; cursor: pointer;">
-              <div class="view-port-observer" style="width: 100%; position: relative;">
+              <div style="width: 100%; position: relative;">
                 <div class="editable-html MuiBox-root fr-box fr-inline" style="word-break: break-word; text-align: center; padding: 30px 5px 0px; min-height: 50px;">
                   <div class="fr-wrapper">
                     <div class="fr-element fr-view">
