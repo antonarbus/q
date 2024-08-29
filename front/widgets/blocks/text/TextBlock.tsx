@@ -51,6 +51,7 @@ export const TextBlock = (): JSX.Element => {
         htmlGetter={() => getTextBlockHtmlFromStore({ blockIndex })}
         placeholder='Add text, tables, drop images, files, links, select to format...'
         beforeUpload={beforeUpload}
+        droppable
         style={textItemCellStyle}
         onContentChange={() => {
           updateTextBlock({ editorRef, blockIndex })

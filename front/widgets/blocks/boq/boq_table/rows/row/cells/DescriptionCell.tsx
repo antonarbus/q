@@ -28,6 +28,7 @@ export const DescriptionCell = (): JSX.Element => {
       editorRef={descriptionEditorRef}
       placeholder='Description...'
       beforeUpload={beforeUpload}
+      droppable
       htmlGetter={() =>
         getBoqCellHtmlFromStore({
           blockIndex,

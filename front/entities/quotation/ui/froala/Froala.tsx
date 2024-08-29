@@ -11,7 +11,6 @@ import { selectTextOrCloseToolbar } from './selectTextOrCloseToolbar'
 import { StaticHtml } from './StaticHtml'
 import { StaticHtmlBackgroundToFixBlinkIssue } from './StaticHtmlBackgroundToFixBlinkIssue'
 import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
-// import { useViewPortObserver } from './useViewPortObserver'
 
 export type FroalaProps = {
   htmlGetter: () => string
@@ -26,6 +25,7 @@ export type FroalaProps = {
   onKeydown?: (e: KeyboardEvent) => void
   onInitialized?: () => void
   className?: string
+  droppable?: boolean
   wrapperStyles?: React.CSSProperties
   beforeUpload?: ({
     editor,
@@ -51,6 +51,7 @@ export const Froala = ({
   className,
   wrapperStyles,
   beforeUpload,
+  droppable,
 }: FroalaProps): JSX.Element => {
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const { blockIndex } = useBlock()
@@ -59,9 +60,8 @@ export const Froala = ({
   const isBlockFroala = useSelectorTyped(
     (state) => state.quotation.blocks[blockIndex]?.isFroala ?? true,
   )
-  // todo: disabled viewport observer for time being otherwise total price being out of view is not calculated and pdf produces incorrect file, maybe we do not even need it
-  // const { observerRef, isInsideViewPort } = useViewPortObserver()
-  const showEditableHtml = isFroalaSignal.value && isBlockFroala // && isInsideViewPort
+
+  const showEditableHtml = isFroalaSignal.value && isBlockFroala
 
   return (
     <FroalaProvider
@@ -100,7 +100,7 @@ export const Froala = ({
           selectTextOrCloseToolbar({ e, editorRef })
         }}
       >
-        <div
+        <Box
           style={{
             width: '100%',
             position: 'relative',
@@ -108,12 +108,48 @@ export const Froala = ({
         >
           {!showEditableHtml && <StaticHtml />}
           {showEditableHtml && (
-            <>
+            <Box>
               <StaticHtmlBackgroundToFixBlinkIssue />
               <EditableHtml />
-            </>
+            </Box>
           )}
-        </div>
+          {droppable && (
+            <Box
+              className='drag-and-drop'
+              style={{
+                position: 'absolute',
+                inset: '2px',
+                border: '1px dashed grey',
+                borderRadius: '6px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                // zIndex: 1, // when hover
+              }}
+            >
+              <Box
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  right: '3px',
+                  fontSize: '8px',
+                }}
+              >
+                Drag and drop
+              </Box>
+              <Box
+                style={{
+                  fontSize: '20px',
+                  fontWeight: 600,
+                  color: 'grey',
+                  display: 'none',
+                }}
+              >
+                Drop here
+              </Box>
+            </Box>
+          )}
+        </Box>
       </Box>
     </FroalaProvider>
   )
