@@ -12,6 +12,7 @@ import {
   IconButton,
 } from '@mui/material'
 import { cls } from '@shared/consts/cls'
+import { useFixScrollPositionOnModalOpen } from '@shared/utils/useFixScrollPositionOnModalOpen'
 
 type Props = {
   width?: React.CSSProperties['width']
@@ -52,6 +53,8 @@ export const FormModal = ({
   shouldUnmountOnClickAway,
   shouldUnmountOnEsc,
 }: Props): JSX.Element => {
+  useFixScrollPositionOnModalOpen()
+
   return (
     <BackdropWithSlidableModal
       shouldUnmountOnClickAway={shouldUnmountOnClickAway}

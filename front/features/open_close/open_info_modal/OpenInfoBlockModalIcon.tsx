@@ -5,6 +5,7 @@ import { getBlockFromStore, itemType, useBlock } from '@entities/quotation'
 import { route } from '@shared/consts/route'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/consts/cls'
+import type { NavigateState } from '@shared/types/NavigateState'
 
 export const OpenInfoBlockModalIcon = (): ReactNode => {
   const navigate = useNavigate()
@@ -27,7 +28,14 @@ export const OpenInfoBlockModalIcon = (): ReactNode => {
             if (!item) return
             if (item.type === itemType.paste) return
 
-            navigate(`./${route.info}/${item.id}`)
+            const navigateState: NavigateState = {
+              scrollTop:
+                document.documentElement.scrollTop || document.body.scrollTop,
+            }
+
+            navigate(`./${route.info}/${item.id}`, {
+              state: navigateState,
+            })
           }}
         />
       </span>

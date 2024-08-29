@@ -16,13 +16,17 @@ export const OpenLoginModalLink = ({ modalRef }: Props): JSX.Element => {
       onClick={(e: React.MouseEvent): void => {
         e.preventDefault()
 
+        const navigateState: NavigateState = {
+          shouldSlide: true,
+          scrollTop:
+            document.documentElement.scrollTop || document.body.scrollTop,
+        }
+
         slideElement({
           element: modalRef.current,
           onSlideElementComplete: () => {
             navigate(`../${route.login}`, {
-              state: {
-                shouldSlide: true,
-              } as NavigateState,
+              state: navigateState,
             })
           },
         })

@@ -3,9 +3,12 @@ import { route } from '@shared/consts/route'
 import type { NavigateState } from '@shared/types/NavigateState'
 
 export const openRegisterModal = (): void => {
+  const navigateState: NavigateState = {
+    scrollTop: document.documentElement.scrollTop || document.body.scrollTop,
+    shouldSlide: true,
+  }
+
   void router.navigate(`../${route.register}`, {
-    state: {
-      shouldSlide: true,
-    } as NavigateState,
+    state: navigateState,
   })
 }

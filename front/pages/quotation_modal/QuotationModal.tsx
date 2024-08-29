@@ -10,17 +10,17 @@ import { NameField } from './NameField'
 import { ShareField } from './ShareField'
 import { QuotationField } from './QuotationField'
 import {
-  useFixScrollPositionOnModalOpen,
   useLoadInitValuesIntoQuotationModal,
   useLoadQuotationModalWithDirectLink,
 } from '@features/open_close/open_quotation_modal'
 import { useQuotationFormValues } from './useFormValues'
 import { useIsButtonDisabled } from './useIsButtonDisabled'
 import { router } from '@lib_instances/router'
+// import { useFixScrollPositionOnModalOpen } from '@shared/utils/useFixScrollPositionOnModalOpen'
 
 export const QuotationModal = (): JSX.Element => {
   const modalRef = useRef<HTMLDivElement>(null)
-  useFixScrollPositionOnModalOpen()
+  // useFixScrollPositionOnModalOpen()
   const { quotationFormValues } = useQuotationFormValues()
   useLoadInitValuesIntoQuotationModal({ quotationFormValues })
   useLoadQuotationModalWithDirectLink({ quotationFormValues })

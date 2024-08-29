@@ -15,14 +15,20 @@ export const OpenResetModalLink = ({ modalRef }: Props): JSX.Element => {
       to={`../${route.requestPasswordReset}`}
       onClick={(e: React.MouseEvent): void => {
         e.preventDefault()
+
         if (!modalRef.current) return
+
+        const navigateState: NavigateState = {
+          shouldSlide: true,
+          scrollTop:
+            document.documentElement.scrollTop || document.body.scrollTop,
+        }
+
         slideElement({
           element: modalRef.current,
           onSlideElementComplete: () => {
             navigate(`../${route.requestPasswordReset}`, {
-              state: {
-                shouldSlide: true,
-              } as NavigateState,
+              state: navigateState,
             })
           },
         })

@@ -12,6 +12,7 @@ import {
   quotationSlice,
   useBlock,
 } from '@entities/quotation'
+import type { NavigateState } from '@shared/types/NavigateState'
 
 export const BookmarkBlockIcon = (): ReactNode => {
   const navigate = useNavigate()
@@ -46,7 +47,14 @@ export const BookmarkBlockIcon = (): ReactNode => {
               quotationSlice.actions.loadBlockAtPosThousandReducer({ block }),
             )
 
-            navigate(`./${route.bookmark}/${block.id}`)
+            const navigateState: NavigateState = {
+              scrollTop:
+                document.documentElement.scrollTop || document.body.scrollTop,
+            }
+
+            navigate(`./${route.bookmark}/${block.id}`, {
+              state: navigateState,
+            })
           }}
         />
       </span>

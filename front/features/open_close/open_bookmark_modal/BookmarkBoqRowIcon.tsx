@@ -13,6 +13,7 @@ import { cls } from '@shared/consts/cls'
 import { route } from '@shared/consts/route'
 import { notify } from '@shared/toast'
 import { Tooltip } from '@mui/material'
+import type { NavigateState } from '@shared/types/NavigateState'
 
 export const BookmarkBoqRowIcon = (): ReactNode => {
   const navigate = useNavigate()
@@ -56,7 +57,14 @@ export const BookmarkBoqRowIcon = (): ReactNode => {
               }),
             )
 
-            navigate(`./${route.bookmark}/${boqRow.id}`)
+            const navigateState: NavigateState = {
+              scrollTop:
+                document.documentElement.scrollTop || document.body.scrollTop,
+            }
+
+            navigate(`./${route.bookmark}/${boqRow.id}`, {
+              state: navigateState,
+            })
           }}
         />
       </span>
