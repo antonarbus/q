@@ -22,14 +22,6 @@ declare const window: Window &
 
 window.froalas = []
 
-// * prevent image to be opened in browser
-document.addEventListener('dragover', (e) => {
-  e.preventDefault()
-})
-document.addEventListener('drop', (e) => {
-  e.preventDefault()
-})
-
 export const useStartFroala = (): void => {
   const {
     htmlGetter,

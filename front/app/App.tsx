@@ -18,6 +18,14 @@ export const App = (): JSX.Element => {
   useLogoutIfAccessTokenRemoved()
   useHideHtmlElements()
 
+  // * prevent image to be opened in browser
+  document.addEventListener('dragover', (e) => {
+    e.preventDefault()
+  })
+  document.addEventListener('drop', (e) => {
+    e.preventDefault()
+  })
+
   return (
     <Provider store={store}>
       <QueryClientProvider client={reactQuery}>

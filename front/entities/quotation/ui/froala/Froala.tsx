@@ -12,6 +12,9 @@ import { selectTextOrCloseToolbar } from './selectTextOrCloseToolbar'
 import { StaticHtml } from './StaticHtml'
 import { StaticHtmlBackgroundToFixBlinkIssue } from './StaticHtmlBackgroundToFixBlinkIssue'
 import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
+import { Visibility } from '@mui/icons-material'
+import zIndex from '@mui/material/styles/zIndex'
+import { cls } from '@shared/consts/cls'
 
 export type FroalaProps = {
   htmlGetter: () => string
@@ -54,7 +57,7 @@ export const Froala = ({
   beforeUpload,
   droppable,
 }: FroalaProps): JSX.Element => {
-  const dragAndDropRef = useRef<ElementRef<'div'>>(null)
+  const dropFilesTextRef = useRef<ElementRef<'div'>>(null)
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const { blockIndex } = useBlock()
   const { froalaHeightRef } = useFixedHeightForAnimation({ froalaElementRef })
@@ -102,14 +105,14 @@ export const Froala = ({
           selectTextOrCloseToolbar({ e, editorRef })
         }}
         onMouseEnter={() => {
-          const dragAndDropElement = dragAndDropRef.current
+          const dragAndDropElement = dropFilesTextRef.current
           if (!dragAndDropElement) return
-          dragAndDropElement.style.visibility = 'visible'
+          dragAndDropElement.style.opacity = '1'
         }}
         onMouseLeave={() => {
-          const dragAndDropElement = dragAndDropRef.current
+          const dragAndDropElement = dropFilesTextRef.current
           if (!dragAndDropElement) return
-          dragAndDropElement.style.visibility = 'hidden'
+          dragAndDropElement.style.opacity = '0'
         }}
       >
         <Box
@@ -127,39 +130,18 @@ export const Froala = ({
           )}
           {droppable && (
             <Box
-              ref={dragAndDropRef}
-              className='drag-and-drop'
+              ref={dropFilesTextRef}
+              className={cls.dropFilesText}
               style={{
                 position: 'absolute',
-                inset: '2px',
-                border: '1px dashed #d7d7d7',
-                borderRadius: '6px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                // zIndex: 1, // when hover
+                top: '2px',
+                right: '3px',
+                fontSize: '8px',
+                opacity: 0,
+                transition: 'opacity 0.3s ease-in-out 0.8s',
               }}
             >
-              <Box
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  right: '3px',
-                  fontSize: '8px',
-                }}
-              >
-                Drop here
-              </Box>
-              <Box
-                style={{
-                  fontSize: '20px',
-                  fontWeight: 600,
-                  color: 'grey',
-                  display: 'none',
-                }}
-              >
-                Drop here
-              </Box>
+              Drop files
             </Box>
           )}
         </Box>

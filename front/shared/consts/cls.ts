@@ -16,6 +16,7 @@ export const cls = {
   actionIconContainer: 'action-icon-container',
   actionIcon: 'action-icon',
   formModal: 'form-modal',
+  dropFilesText: 'drop-files-text',
   cleanFromPaper:
-    '.fr-placeholder,.right-resize-handle,.left-resize-handle,.actions-container,#DndDescribedBy-1,#DndLiveRegion-0',
+    '.fr-placeholder,.right-resize-handle,.left-resize-handle,.actions-container,#DndDescribedBy-1,#DndLiveRegion-0,.drop-files-text',
 } as const
