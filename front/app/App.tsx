@@ -13,18 +13,12 @@ import { ReactQueryDevtoolsProductionHidden } from './ReactQueryDevtoolsProducti
 import './signalsDevTools'
 import '@shared/utils/cursorPosSignal'
 import { useHideHtmlElements } from '@features/init_load/useHideHtmlElements'
+import { usePreventImageToBeOpenedInBrowserOnDrop } from '@features/upload/usePreventImageToBeOpenedInBrowserOnDrop'
 
 export const App = (): JSX.Element => {
   useLogoutIfAccessTokenRemoved()
   useHideHtmlElements()
-
-  // * prevent image to be opened in browser
-  document.addEventListener('dragover', (e) => {
-    e.preventDefault()
-  })
-  document.addEventListener('drop', (e) => {
-    e.preventDefault()
-  })
+  usePreventImageToBeOpenedInBrowserOnDrop()
 
   return (
     <Provider store={store}>
