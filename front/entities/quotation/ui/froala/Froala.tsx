@@ -1,6 +1,7 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { Box, type SxProps } from '@mui/material'
-import { useRef, type MouseEvent } from 'react'
+import type { ElementRef } from 'react'
+import { RefObject, useRef, type MouseEvent } from 'react'
 import type { FroalaEditor, FroalaEditorRef } from '@shared/types/froala'
 import { FroalaProvider } from '../../providers/FroalaProvider'
 import { useBlock } from '../../providers/BlockProvider'
@@ -53,6 +54,7 @@ export const Froala = ({
   beforeUpload,
   droppable,
 }: FroalaProps): JSX.Element => {
+  const dragAndDropRef = useRef<ElementRef<'div'>>(null)
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const { blockIndex } = useBlock()
   const { froalaHeightRef } = useFixedHeightForAnimation({ froalaElementRef })
@@ -99,6 +101,16 @@ export const Froala = ({
         onDoubleClickCapture={(e: MouseEvent) => {
           selectTextOrCloseToolbar({ e, editorRef })
         }}
+        onMouseEnter={() => {
+          const dragAndDropElement = dragAndDropRef.current
+          if (!dragAndDropElement) return
+          dragAndDropElement.style.visibility = 'visible'
+        }}
+        onMouseLeave={() => {
+          const dragAndDropElement = dragAndDropRef.current
+          if (!dragAndDropElement) return
+          dragAndDropElement.style.visibility = 'hidden'
+        }}
       >
         <Box
           style={{
@@ -115,11 +127,12 @@ export const Froala = ({
           )}
           {droppable && (
             <Box
+              ref={dragAndDropRef}
               className='drag-and-drop'
               style={{
                 position: 'absolute',
                 inset: '2px',
-                border: '1px dashed grey',
+                border: '1px dashed #d7d7d7',
                 borderRadius: '6px',
                 display: 'flex',
                 justifyContent: 'center',
@@ -135,7 +148,7 @@ export const Froala = ({
                   fontSize: '8px',
                 }}
               >
-                Drag and drop
+                Drop here
               </Box>
               <Box
                 style={{
