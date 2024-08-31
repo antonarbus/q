@@ -1,7 +1,6 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { Box, type SxProps } from '@mui/material'
-import type { ElementRef } from 'react'
-import { RefObject, useRef, type MouseEvent } from 'react'
+import { useRef, type MouseEvent, type ElementRef } from 'react'
 import type { FroalaEditor, FroalaEditorRef } from '@shared/types/froala'
 import { FroalaProvider } from '../../providers/FroalaProvider'
 import { useBlock } from '../../providers/BlockProvider'
@@ -12,8 +11,6 @@ import { selectTextOrCloseToolbar } from './selectTextOrCloseToolbar'
 import { StaticHtml } from './StaticHtml'
 import { StaticHtmlBackgroundToFixBlinkIssue } from './StaticHtmlBackgroundToFixBlinkIssue'
 import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
-import { Visibility } from '@mui/icons-material'
-import zIndex from '@mui/material/styles/zIndex'
 import { cls } from '@shared/consts/cls'
 
 export type FroalaProps = {
