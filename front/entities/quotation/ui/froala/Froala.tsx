@@ -16,6 +16,7 @@ import {
   showDropFilesTextOnMouseEnter,
   showDropFilesTextOnMouseLeave,
 } from '@features/upload/showDropFilesTextOnHover'
+import { Visibility } from '@mui/icons-material'
 
 export type FroalaProps = {
   htmlGetter: () => string
@@ -135,6 +136,7 @@ export const Froala = ({
                 right: '3px',
                 fontSize: '8px',
                 opacity: 0,
+                visibility: 'hidden',
                 transition: 'opacity 0.3s ease-in-out 0.8s',
               }}
             >
