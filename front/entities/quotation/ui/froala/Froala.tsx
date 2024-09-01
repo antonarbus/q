@@ -12,6 +12,10 @@ import { StaticHtml } from './StaticHtml'
 import { StaticHtmlBackgroundToFixBlinkIssue } from './StaticHtmlBackgroundToFixBlinkIssue'
 import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
 import { cls } from '@shared/consts/cls'
+import {
+  showDropFilesTextOnMouseEnter,
+  showDropFilesTextOnMouseLeave,
+} from '@features/upload/showDropFilesTextOnHover'
 
 export type FroalaProps = {
   htmlGetter: () => string
@@ -102,14 +106,10 @@ export const Froala = ({
           selectTextOrCloseToolbar({ e, editorRef })
         }}
         onMouseEnter={() => {
-          const dragAndDropElement = dropFilesTextRef.current
-          if (!dragAndDropElement) return
-          dragAndDropElement.style.opacity = '1'
+          showDropFilesTextOnMouseEnter({ dropFilesTextRef })
         }}
         onMouseLeave={() => {
-          const dragAndDropElement = dropFilesTextRef.current
-          if (!dragAndDropElement) return
-          dragAndDropElement.style.opacity = '0'
+          showDropFilesTextOnMouseLeave({ dropFilesTextRef })
         }}
       >
         <Box
