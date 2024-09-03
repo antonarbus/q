@@ -16,7 +16,6 @@ import {
   showDropFilesTextOnMouseEnter,
   showDropFilesTextOnMouseLeave,
 } from '@features/upload/showDropFilesTextOnHover'
-import { Visibility } from '@mui/icons-material'
 
 export type FroalaProps = {
   htmlGetter: () => string
@@ -103,9 +102,6 @@ export const Froala = ({
             froalaElementRef,
           })
         }}
-        onDoubleClickCapture={(e: MouseEvent) => {
-          selectTextOrCloseToolbar({ e, editorRef })
-        }}
         onMouseEnter={() => {
           showDropFilesTextOnMouseEnter({ dropFilesTextRef })
         }}
@@ -121,10 +117,10 @@ export const Froala = ({
         >
           {!showEditableHtml && <StaticHtml />}
           {showEditableHtml && (
-            <Box>
+            <>
               <StaticHtmlBackgroundToFixBlinkIssue />
               <EditableHtml />
-            </Box>
+            </>
           )}
           {droppable && (
             <Box
@@ -138,6 +134,7 @@ export const Froala = ({
                 opacity: 0,
                 visibility: 'hidden',
                 transition: 'opacity 0.3s ease-in-out 0.8s',
+                userSelect: 'none',
               }}
             >
               Drop files
