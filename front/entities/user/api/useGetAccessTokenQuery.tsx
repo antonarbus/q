@@ -15,7 +15,7 @@ export const useGetAccessTokenQuery = (): UseQueryResult<
         url: apiUrl.getAccessToken,
         method: 'get',
         withCredentials: true,
-        // timeout: 5000,
+        timeout: 10000,
       })
 
       return res.data
@@ -24,7 +24,7 @@ export const useGetAccessTokenQuery = (): UseQueryResult<
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     staleTime: 0,
-    retry: 0,
+    retry: 1,
     enabled: false,
   })
 
