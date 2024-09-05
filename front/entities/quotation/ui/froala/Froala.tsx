@@ -41,23 +41,7 @@ export type FroalaProps = {
   }) => boolean
 }
 
-export const Froala = ({
-  editorRef,
-  htmlGetter,
-  style,
-  sx,
-  placeholder,
-  onContentChange,
-  onFocus,
-  onClick,
-  onBlur,
-  onKeydown,
-  onInitialized,
-  className,
-  wrapperStyles,
-  beforeUpload,
-  droppable,
-}: FroalaProps): JSX.Element => {
+export const Froala = (props: FroalaProps): JSX.Element => {
   const dropFilesTextRef = useRef<ElementRef<'div'>>(null)
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const { blockIndex } = useBlock()
@@ -71,34 +55,34 @@ export const Froala = ({
 
   return (
     <FroalaProvider
-      editorRef={editorRef}
-      htmlGetter={htmlGetter}
-      style={style}
-      sx={sx}
-      placeholder={placeholder}
-      onContentChange={onContentChange}
-      onFocus={onFocus}
-      onClick={onClick}
-      onBlur={onBlur}
-      onKeydown={onKeydown}
-      onInitialized={onInitialized}
+      editorRef={props.editorRef}
+      htmlGetter={props.htmlGetter}
+      style={props.style}
+      sx={props.sx}
+      placeholder={props.placeholder}
+      onContentChange={props.onContentChange}
+      onFocus={props.onFocus}
+      onClick={props.onClick}
+      onBlur={props.onBlur}
+      onKeydown={props.onKeydown}
+      onInitialized={props.onInitialized}
       froalaElementRef={froalaElementRef}
       froalaHeightRef={froalaHeightRef}
-      beforeUpload={beforeUpload}
+      beforeUpload={props.beforeUpload}
     >
       <Box
-        className={`froala-wrapper ${className ?? ''}`}
+        className={`froala-wrapper ${props.className ?? ''}`}
         style={{
-          ...wrapperStyles,
+          ...props.wrapperStyles,
           cursor: 'pointer',
         }}
         onMouseDown={(e: MouseEvent) => {
-          selectTextOrCloseToolbar({ e, editorRef })
+          selectTextOrCloseToolbar({ e, editorRef: props.editorRef })
         }}
         onClick={(e: MouseEvent) => {
           placeCaretAtTheEndIfToolbarIsNotShown({
             e,
-            editorRef,
+            editorRef: props.editorRef,
             froalaElementRef,
           })
         }}
@@ -122,7 +106,7 @@ export const Froala = ({
               <EditableHtml />
             </>
           )}
-          {droppable && (
+          {props.droppable && (
             <Box
               ref={dropFilesTextRef}
               className={cls.dropFilesText}
