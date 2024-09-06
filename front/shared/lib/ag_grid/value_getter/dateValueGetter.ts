@@ -1,14 +1,13 @@
 import type { ValueGetterParams } from 'ag-grid-community'
 import { isValid } from 'date-fns'
-import type { Quotation } from '@entities/quotation'
 
-type Props = {
-  columnDef: keyof Quotation
+type Props<ColumnKeys> = {
+  columnDef: keyof ColumnKeys
 }
 
 export const dateValueGetter =
-  ({ columnDef }: Props) =>
-  (params: ValueGetterParams<Quotation, string>): Date | null => {
+  <ColumnKeys>({ columnDef }: Props<ColumnKeys>) =>
+  (params: ValueGetterParams<ColumnKeys, string>): Date | null => {
     const dateIsoString = params.data?.[columnDef]
     if (typeof dateIsoString !== 'string') return null
     const dateObj = new Date(dateIsoString)
