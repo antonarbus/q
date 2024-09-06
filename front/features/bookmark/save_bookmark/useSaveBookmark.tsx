@@ -113,6 +113,13 @@ export const useSaveBookmark = ({
       }),
     )
 
+    dispatch(
+      quotationSlice.actions.updateBlockWidthReducer({
+        blockIndex: bookmarkPosAtBlocks,
+        width: paperElement.clientWidth,
+      }),
+    )
+
     const block = getState().quotation.blocks.at(bookmarkPosAtBlocks)
 
     if (!block) {
