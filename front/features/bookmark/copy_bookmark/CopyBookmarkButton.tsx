@@ -1,6 +1,6 @@
 import type { ReqBody } from '@back/api/bookmark/getBookmarkRouter'
 import { dispatch } from '@lib_instances/store'
-import { IconButton } from '@mui/material'
+import { IconButton, Tooltip } from '@mui/material'
 import { MdCopyAll } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { useGetBookmarkMutation } from '@entities/bookmark'
@@ -44,17 +44,24 @@ export const CopyBookmarkButton = ({ id }: ReqBody): JSX.Element => {
   }, [isError])
 
   return (
-    <IconButton
-      size='small'
-      onClick={() => {
-        loadItem({ id })
-      }}
-      sx={{
-        translate: '0px 1px',
-      }}
+    <Tooltip
+      title='copy'
+      placement='bottom'
+      enterDelay={500}
+      enterNextDelay={500}
     >
-      {!isPending && <MdCopyAll />}
-      {isPending && <RotatingLoaderIcon />}
-    </IconButton>
+      <IconButton
+        size='small'
+        onClick={() => {
+          loadItem({ id })
+        }}
+        sx={{
+          translate: '0px 1px',
+        }}
+      >
+        {!isPending && <MdCopyAll />}
+        {isPending && <RotatingLoaderIcon />}
+      </IconButton>
+    </Tooltip>
   )
 }
