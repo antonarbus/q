@@ -1,7 +1,10 @@
 import { useSelectorTyped } from '@lib_instances/store'
-import { Box, type SxProps } from '@mui/material'
+import {
+  Box,
+  // type SxProps
+} from '@mui/material'
 import { useRef, type MouseEvent, type ElementRef } from 'react'
-import type { FroalaEditor, FroalaEditorRef } from '@shared/types/froala'
+// import type { FroalaEditor, FroalaEditorRef } from '@shared/types/froala'
 import { FroalaProvider } from '../../providers/FroalaProvider'
 import { useBlock } from '../../providers/BlockProvider'
 import { isFroalaSignal } from '../../signals/isFroalaSignal'
@@ -16,30 +19,31 @@ import {
   showDropFilesTextOnMouseEnter,
   showDropFilesTextOnMouseLeave,
 } from '@features/upload/showDropFilesTextOnHover'
+import type { FroalaProps } from './types'
 
-export type FroalaProps = {
-  htmlGetter: () => string
-  editorRef: FroalaEditorRef
-  placeholder?: string
-  style?: React.CSSProperties
-  sx?: SxProps
-  onContentChange: () => void
-  onFocus?: () => void
-  onClick?: (e: MouseEvent) => void
-  onBlur?: (e: MouseEvent) => void
-  onKeydown?: (e: KeyboardEvent) => void
-  onInitialized?: () => void
-  className?: string
-  droppable?: boolean
-  wrapperStyles?: React.CSSProperties
-  beforeUpload?: ({
-    editor,
-    files,
-  }: {
-    editor: FroalaEditor
-    files: File[]
-  }) => boolean
-}
+// export type FroalaProps = {
+//   htmlGetter: () => string
+//   editorRef: FroalaEditorRef
+//   placeholder?: string
+//   style?: React.CSSProperties
+//   sx?: SxProps
+//   onContentChange: () => void
+//   onFocus?: () => void
+//   onClick?: (e: MouseEvent) => void
+//   onBlur?: (e: MouseEvent) => void
+//   onKeydown?: (e: KeyboardEvent) => void
+//   onInitialized?: () => void
+//   className?: string
+//   droppable?: boolean
+//   wrapperStyles?: React.CSSProperties
+//   beforeUpload?: ({
+//     editor,
+//     files,
+//   }: {
+//     editor: FroalaEditor
+//     files: File[]
+//   }) => boolean
+// }
 
 export const Froala = (props: FroalaProps): JSX.Element => {
   const dropFilesTextRef = useRef<ElementRef<'div'>>(null)

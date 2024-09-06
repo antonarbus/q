@@ -5,7 +5,8 @@ import {
   type MutableRefObject,
   type RefObject,
 } from 'react'
-import type { FroalaProps } from '../ui/froala/Froala'
+import type { FroalaProps } from '../ui/froala/types'
+// import type { FroalaProps } from '../ui/froala/Froala'
 
 type Context = FroalaProps & {
   froalaElementRef: RefObject<HTMLDivElement>

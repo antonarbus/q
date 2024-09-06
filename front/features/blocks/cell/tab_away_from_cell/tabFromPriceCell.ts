@@ -1,20 +1,16 @@
 import type { RowEditorRefs } from '@entities/quotation'
 
 type Props = {
-  e: KeyboardEvent
+  e: React.KeyboardEvent
   boqRowEditorRefs: RowEditorRefs
   rowIndex: number
 }
 
-export const tabFromPriceCell = ({
-  e,
-  boqRowEditorRefs,
-  rowIndex,
-}: Props): void => {
-  const isTabKey = e.key === 'Tab'
+export const tabFromPriceCell = (props: Props): void => {
+  const isTabKey = props.e.key === 'Tab'
 
   if (isTabKey) {
-    const isLastRow = boqRowEditorRefs.length === rowIndex + 1
+    const isLastRow = props.boqRowEditorRefs.length === props.rowIndex + 1
 
     if (isLastRow) {
       // do nothing
@@ -22,9 +18,9 @@ export const tabFromPriceCell = ({
     }
 
     if (!isLastRow) {
-      e.preventDefault()
-      boqRowEditorRefs
-        .at(rowIndex + 1)
+      props.e.preventDefault()
+      props.boqRowEditorRefs
+        .at(props.rowIndex + 1)
         ?.description.current?.commands.selectAll()
     }
   }

@@ -31,7 +31,7 @@ export const SubTotalPrice = (): JSX.Element => {
       editorRef={subTotalPriceEditorRef}
       placeholder='Price...'
       htmlGetter={() => getBoqHeaderHtmlFromStore({ blockIndex, boqHeaderKey })}
-      onClick={(e) => {
+      onClick={(e: React.MouseEvent) => {
         showHideBoqPricePins({
           e: e.nativeEvent,
           blockIndex,

@@ -44,7 +44,7 @@ export const DescriptionCell = (): JSX.Element => {
           boqRowCellKey: boqRowCellKey.description,
         })
       }}
-      onKeydown={(e) => {
+      onKeydown={(e: React.KeyboardEvent) => {
         tabFromDescriptionCell({ e, rowIndex, itemPriceCellEditorRef })
       }}
       wrapperStyles={stylesForResizableCell}
