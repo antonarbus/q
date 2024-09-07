@@ -6,7 +6,6 @@ import { useBlock } from '../../providers/BlockProvider'
 import { isFroalaSignal } from '../../signals/isFroalaSignal'
 import { EditableHtml } from './EditableHtml'
 import { placeCaretAtTheEndIfToolbarIsNotShown } from './placeCaretAtTheEndIfToolbarIsNotShown'
-// import { selectTextOrCloseToolbar } from './selectTextOrCloseToolbar'
 import { StaticHtml } from './StaticHtml'
 import { StaticHtmlBackgroundToFixBlinkIssue } from './StaticHtmlBackgroundToFixBlinkIssue'
 import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
@@ -49,9 +48,6 @@ export const Froala = (props: FroalaProps): JSX.Element => {
       <Box
         className={`froala-wrapper ${props.className ?? ''}`}
         style={props.wrapperStyles}
-        onMouseDown={(e: React.MouseEvent) => {
-          // selectTextOrCloseToolbar({ e, editorRef: props.editorRef })
-        }}
         onClick={(e: React.MouseEvent) => {
           placeCaretAtTheEndIfToolbarIsNotShown({
             e,
