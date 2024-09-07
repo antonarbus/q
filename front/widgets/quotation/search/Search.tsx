@@ -50,7 +50,7 @@ export const Search = (): JSX.Element => {
       clearOnBlur
       clearOnEscape
       loading={isPendingBookmarks}
-      loadingText={email ? 'Loading...' : 'Not logged in...'}
+      loadingText={email ? 'Loading...' : 'Not logged in :('}
       noOptionsText='No saved bookmarks'
       options={options}
       inputValue={inputValueSignal.value}
