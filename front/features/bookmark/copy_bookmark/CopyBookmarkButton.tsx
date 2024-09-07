@@ -45,7 +45,7 @@ export const CopyBookmarkButton = ({ id }: ReqBody): JSX.Element => {
 
   return (
     <Tooltip
-      title='copy'
+      title='Copy'
       placement='bottom'
       enterDelay={500}
       enterNextDelay={500}

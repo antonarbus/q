@@ -1,4 +1,4 @@
-import { IconButton } from '@mui/material'
+import { IconButton, Tooltip } from '@mui/material'
 import { AiOutlineFolderOpen } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import type { QuotationLocationState } from '.'
@@ -15,13 +15,20 @@ export const OpenQuotationPageAndLoadFromServerButton = ({
   }
 
   return (
-    <Link
-      to={`/${id}`}
-      state={state}
+    <Tooltip
+      title='Open'
+      placement='bottom'
+      enterDelay={500}
+      enterNextDelay={500}
     >
-      <IconButton size='small'>
-        <AiOutlineFolderOpen />
-      </IconButton>
-    </Link>
+      <Link
+        to={`/${id}`}
+        state={state}
+      >
+        <IconButton size='small'>
+          <AiOutlineFolderOpen />
+        </IconButton>
+      </Link>
+    </Tooltip>
   )
 }

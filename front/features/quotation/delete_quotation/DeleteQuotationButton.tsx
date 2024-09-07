@@ -1,5 +1,5 @@
 import type { ReqBody as Payload } from '@back/api/quotation/deleteQuotationRouter'
-import { IconButton } from '@mui/material'
+import { IconButton, Tooltip } from '@mui/material'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import {
@@ -36,14 +36,21 @@ export const DeleteQuotationButton = ({ id }: Payload): React.ReactNode => {
   }, [isError])
 
   return (
-    <IconButton
-      size='small'
-      onClick={() => {
-        deleteQuotation({ id })
-      }}
+    <Tooltip
+      title='Delete'
+      placement='bottom'
+      enterDelay={500}
+      enterNextDelay={500}
     >
-      {!isPending && <MdDeleteOutline />}
-      {isPending && <RotatingLoaderIcon />}
-    </IconButton>
+      <IconButton
+        size='small'
+        onClick={() => {
+          deleteQuotation({ id })
+        }}
+      >
+        {!isPending && <MdDeleteOutline />}
+        {isPending && <RotatingLoaderIcon />}
+      </IconButton>
+    </Tooltip>
   )
 }

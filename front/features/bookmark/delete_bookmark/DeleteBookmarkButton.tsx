@@ -1,5 +1,5 @@
 import type { ReqBody } from '@back/api/bookmark/deleteBookmarkRouter'
-import { IconButton } from '@mui/material'
+import { IconButton, Tooltip } from '@mui/material'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import {
@@ -36,14 +36,21 @@ export const DeleteBookmarkButton = ({ id }: ReqBody): JSX.Element => {
   }, [isError])
 
   return (
-    <IconButton
-      size='small'
-      onClick={() => {
-        deleteItem({ id })
-      }}
+    <Tooltip
+      title='Delete'
+      placement='bottom'
+      enterDelay={500}
+      enterNextDelay={500}
     >
-      {!isPending && <MdDeleteOutline />}
-      {isPending && <RotatingLoaderIcon />}
-    </IconButton>
+      <IconButton
+        size='small'
+        onClick={() => {
+          deleteItem({ id })
+        }}
+      >
+        {!isPending && <MdDeleteOutline />}
+        {isPending && <RotatingLoaderIcon />}
+      </IconButton>
+    </Tooltip>
   )
 }

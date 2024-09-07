@@ -1,6 +1,6 @@
 import type { ReqBody } from '@back/api/bookmark/getBookmarkRouter'
 import { dispatch } from '@lib_instances/store'
-import { IconButton } from '@mui/material'
+import { IconButton, Tooltip } from '@mui/material'
 import { AiTwotoneEdit } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
@@ -48,17 +48,24 @@ export const OpenBookmarkModalButton = ({ id }: ReqBody): JSX.Element => {
   }, [isError])
 
   return (
-    <IconButton
-      size='small'
-      onClick={() => {
-        loadItem({ id })
-      }}
-      sx={{
-        translate: '0px 1px',
-      }}
+    <Tooltip
+      title='Edit'
+      placement='bottom'
+      enterDelay={500}
+      enterNextDelay={500}
     >
-      {!isPending && <AiTwotoneEdit />}
-      {isPending && <RotatingLoaderIcon />}
-    </IconButton>
+      <IconButton
+        size='small'
+        onClick={() => {
+          loadItem({ id })
+        }}
+        sx={{
+          translate: '0px 1px',
+        }}
+      >
+        {!isPending && <AiTwotoneEdit />}
+        {isPending && <RotatingLoaderIcon />}
+      </IconButton>
+    </Tooltip>
   )
 }
