@@ -31,8 +31,14 @@ export const placeCaretAtTheEndIfToolbarIsNotShown = ({
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     const contentEditableElement = editorRef.current.$el.get(0)
     if (!(contentEditableElement instanceof HTMLElement)) return
-    editorRef.current.selection.setAtEnd(contentEditableElement)
-  }
 
-  editorRef.current.selection.restore()
+    editorRef.current.selection.setAtEnd(contentEditableElement)
+
+    //@ts-expect-error Froala does not provide types for this
+    const isCaret = editorRef.current.selection.get().type === 'Caret'
+
+    if (isCaret) {
+      editorRef.current.selection.restore()
+    }
+  }
 }

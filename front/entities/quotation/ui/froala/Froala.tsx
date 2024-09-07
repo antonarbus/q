@@ -1,16 +1,15 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { Box } from '@mui/material'
-import { useRef, type MouseEvent, type ElementRef } from 'react'
+import { useRef } from 'react'
 import { FroalaProvider } from '../../providers/FroalaProvider'
 import { useBlock } from '../../providers/BlockProvider'
 import { isFroalaSignal } from '../../signals/isFroalaSignal'
 import { EditableHtml } from './EditableHtml'
 import { placeCaretAtTheEndIfToolbarIsNotShown } from './placeCaretAtTheEndIfToolbarIsNotShown'
-import { selectTextOrCloseToolbar } from './selectTextOrCloseToolbar'
+// import { selectTextOrCloseToolbar } from './selectTextOrCloseToolbar'
 import { StaticHtml } from './StaticHtml'
 import { StaticHtmlBackgroundToFixBlinkIssue } from './StaticHtmlBackgroundToFixBlinkIssue'
 import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
-import { cls } from '@shared/consts/cls'
 import {
   showDropFilesTextOnMouseEnter,
   showDropFilesTextOnMouseLeave,
@@ -19,7 +18,7 @@ import type { FroalaProps } from './types'
 import { DropFilesText } from './DropFilesText'
 
 export const Froala = (props: FroalaProps): JSX.Element => {
-  const dropFilesTextRef = useRef<ElementRef<'div'>>(null)
+  const dropFilesTextRef = useRef<React.ElementRef<'div'>>(null)
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const { blockIndex } = useBlock()
   const { froalaHeightRef } = useFixedHeightForAnimation({ froalaElementRef })
@@ -49,14 +48,11 @@ export const Froala = (props: FroalaProps): JSX.Element => {
     >
       <Box
         className={`froala-wrapper ${props.className ?? ''}`}
-        style={{
-          ...props.wrapperStyles,
-          cursor: 'pointer',
+        style={props.wrapperStyles}
+        onMouseDown={(e: React.MouseEvent) => {
+          // selectTextOrCloseToolbar({ e, editorRef: props.editorRef })
         }}
-        onMouseDown={(e: MouseEvent) => {
-          selectTextOrCloseToolbar({ e, editorRef: props.editorRef })
-        }}
-        onClick={(e: MouseEvent) => {
+        onClick={(e: React.MouseEvent) => {
           placeCaretAtTheEndIfToolbarIsNotShown({
             e,
             editorRef: props.editorRef,
