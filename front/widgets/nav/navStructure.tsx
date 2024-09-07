@@ -151,7 +151,7 @@ export const navStructure: MenuItemType[] = [
         func: (e?: React.MouseEvent): void => {
           openBookmarksPage()
         },
-        tooltip: 'Show your bookmarks',
+        tooltip: 'Your bookmarks',
       },
       {
         id: navItemKey.quotations,
@@ -162,7 +162,7 @@ export const navStructure: MenuItemType[] = [
         func: (e?: React.MouseEvent): void => {
           openQuotationsPage()
         },
-        tooltip: 'Show your quotations',
+        tooltip: 'Your quotations',
       },
       {
         id: navItemKey.login,
