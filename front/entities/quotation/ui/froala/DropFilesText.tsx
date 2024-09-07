@@ -1,0 +1,27 @@
+import { Box } from '@mui/material'
+import { cls } from '@shared/consts/cls'
+
+type Props = {
+  dropFilesTextRef: React.RefObject<HTMLDivElement>
+}
+
+export const DropFilesText = (props: Props): JSX.Element => {
+  return (
+    <Box
+      ref={props.dropFilesTextRef}
+      className={cls.dropFilesText}
+      style={{
+        position: 'absolute',
+        top: '2px',
+        right: '3px',
+        fontSize: '8px',
+        opacity: 0,
+        visibility: 'hidden',
+        transition: 'opacity 0.3s ease-in-out 0.8s',
+        userSelect: 'none',
+      }}
+    >
+      Drop files
+    </Box>
+  )
+}
