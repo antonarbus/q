@@ -19,7 +19,7 @@ export const OpenInfoBoqRowModalIcon = (): ReactNode => {
 
   return (
     <Tooltip
-      title='info'
+      title='Info'
       placement='right'
       enterDelay={500}
       enterNextDelay={500}

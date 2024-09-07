@@ -1,3 +1,3 @@
 import { signal } from '@preact/signals-react'
 
-export const dragTooltipTextSignal = signal<'drag' | 'drop'>('drag')
+export const dragTooltipTextSignal = signal<'Drag' | 'Drop'>('Drag')

@@ -21,7 +21,7 @@ export const CopyBoqRowIcon = (): JSX.Element => {
 
   return (
     <Tooltip
-      title='copy'
+      title='Copy'
       placement='left'
       enterDelay={500}
       enterNextDelay={500}

@@ -25,7 +25,7 @@ export const CutBoqRowIcon = (): JSX.Element => {
 
   return (
     <Tooltip
-      title='cut'
+      title='Cut'
       placement='left'
       enterDelay={500}
       enterNextDelay={500}

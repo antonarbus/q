@@ -44,7 +44,7 @@ export const DragBlockIcon = (): JSX.Element => {
           isOverDragIcon.current = true
           setTimeout(() => {
             if (isOverDragIcon.current) {
-              dragTooltipTextSignal.value = 'drag'
+              dragTooltipTextSignal.value = 'Drag'
               setOpenTooltip(true)
             }
           }, 500)
@@ -56,12 +56,12 @@ export const DragBlockIcon = (): JSX.Element => {
           }
         }}
         onPointerMove={() => {
-          if (isDragging && dragTooltipTextSignal.value === 'drag') {
-            dragTooltipTextSignal.value = 'drop'
+          if (isDragging && dragTooltipTextSignal.value === 'Drag') {
+            dragTooltipTextSignal.value = 'Drop'
           }
         }}
         onPointerDown={(event) => {
-          dragTooltipTextSignal.value = 'drop'
+          dragTooltipTextSignal.value = 'Drop'
 
           setTimeout(() => {
             listeners?.onPointerDown?.(event)

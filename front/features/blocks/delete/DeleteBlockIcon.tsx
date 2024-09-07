@@ -23,7 +23,7 @@ export const DeleteBlockIcon = (): EmotionJSX.Element => {
 
   return (
     <Tooltip
-      title='delete'
+      title='Delete'
       placement='right'
       enterDelay={500}
       enterNextDelay={500}

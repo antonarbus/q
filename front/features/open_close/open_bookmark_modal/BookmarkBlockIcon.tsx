@@ -20,7 +20,7 @@ export const BookmarkBlockIcon = (): ReactNode => {
 
   return (
     <Tooltip
-      title='add to bookmarks'
+      title='Add to bookmarks'
       placement='right'
       enterDelay={500}
       enterNextDelay={500}

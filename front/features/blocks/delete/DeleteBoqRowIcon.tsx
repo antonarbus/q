@@ -22,7 +22,7 @@ export const DeleteBoqRowIcon = (): JSX.Element => {
 
   return (
     <Tooltip
-      title='delete'
+      title='Delete'
       placement='right'
       enterDelay={500}
       enterNextDelay={500}

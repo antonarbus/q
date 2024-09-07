@@ -15,7 +15,7 @@ export const DragBoqRowIcon = (): JSX.Element => {
 
   return (
     <Tooltip
-      title='drag'
+      title='Drag'
       placement='left'
       enterDelay={500}
       enterNextDelay={500}
