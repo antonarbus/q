@@ -16,11 +16,9 @@ import {
 import { useQuotationFormValues } from './useFormValues'
 import { useIsButtonDisabled } from './useIsButtonDisabled'
 import { router } from '@lib_instances/router'
-// import { useFixScrollPositionOnModalOpen } from '@shared/utils/useFixScrollPositionOnModalOpen'
 
 export const QuotationModal = (): JSX.Element => {
   const modalRef = useRef<HTMLDivElement>(null)
-  // useFixScrollPositionOnModalOpen()
   const { quotationFormValues } = useQuotationFormValues()
   useLoadInitValuesIntoQuotationModal({ quotationFormValues })
   useLoadQuotationModalWithDirectLink({ quotationFormValues })

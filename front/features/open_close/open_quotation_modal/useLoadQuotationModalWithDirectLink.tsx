@@ -4,7 +4,7 @@ import {
   useGetQuotationMutation,
 } from '@entities/quotation'
 import type { QuotationFormValues } from '@entities/quotation/types'
-import { dispatch } from '@lib_instances/store'
+import { dispatch, getState } from '@lib_instances/store'
 import { useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 
@@ -25,6 +25,10 @@ export const useLoadQuotationModalWithDirectLink = ({
 
   useEffectOnce(() => {
     if (!id) return
+
+    const quotationIsAlreadyLoaded = getState().quotation.id === id
+    if (quotationIsAlreadyLoaded) return
+
     loadQuotation({ id })
   })
 

@@ -40,6 +40,7 @@ export const CopyBlockIcon = (): JSX.Element => {
             saveBlockHeightByIndex({ blockIndex })
 
             const blockToCopy = getState().quotation.blocks[blockIndex]
+
             if (!blockToCopy) return
             if (blockToCopy.type === itemType.paste) return
 
@@ -48,6 +49,7 @@ export const CopyBlockIcon = (): JSX.Element => {
 
             const block = structuredClone(blockToCopy)
             block.preview = html
+
             dispatch(
               copySlice.actions.addItemIntoCopyContainer({ item: block }),
             )
