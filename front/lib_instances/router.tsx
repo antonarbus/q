@@ -24,9 +24,13 @@ const Quotation = React.lazy(async () => {
   return import('@pages/quotation_page')
 })
 
-const QuotationsTable = React.lazy(async () => import('@pages/quotations_page'))
+const QuotationsTable = React.lazy(async () => {
+  return import('@pages/quotations_page')
+})
 
-const ItemsTable = React.lazy(async () => import('@pages/bookmarks_page'))
+const BookmarksTable = React.lazy(async () => {
+  return import('@pages/bookmarks_page')
+})
 
 const authRoutes: RouteObject[] = [
   {
@@ -105,7 +109,14 @@ export const router = createBrowserRouter([
       {
         path: route.quotations,
         element: (
-          <Suspense>
+          <Suspense
+            fallback={
+              <LoadingDotsOverlay
+                title='Loading...'
+                isShowing
+              />
+            }
+          >
             <QuotationsTable />
           </Suspense>
         ),
@@ -120,8 +131,15 @@ export const router = createBrowserRouter([
       {
         path: route.bookmarks,
         element: (
-          <Suspense>
-            <ItemsTable />
+          <Suspense
+            fallback={
+              <LoadingDotsOverlay
+                title='Loading...'
+                isShowing
+              />
+            }
+          >
+            <BookmarksTable />
           </Suspense>
         ),
         children: [

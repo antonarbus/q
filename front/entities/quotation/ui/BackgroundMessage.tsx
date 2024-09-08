@@ -18,7 +18,6 @@ export const BackgroundMessage = (): JSX.Element => {
         fontWeight: 500,
         color: 'grey',
         textAlign: 'center',
-        // background: 'red',
         zIndex: -1,
       }}
     >
