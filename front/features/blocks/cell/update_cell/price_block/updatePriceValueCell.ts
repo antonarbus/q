@@ -1,7 +1,8 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { itemType, quotationSlice } from '@entities/quotation'
 import type { FroalaEditorRef } from '@shared/types/froala'
-import { getNumberFromString, getTextContentFromHtml } from '@shared/utils'
+import { getNumberFromString } from '@shared/utils/getNumberFromString'
+import { getTextContentFromHtml } from '@shared/utils/getTextContentFromHtml'
 
 type Props = {
   editorRef: FroalaEditorRef

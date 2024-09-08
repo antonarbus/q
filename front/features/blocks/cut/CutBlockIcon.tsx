@@ -14,7 +14,7 @@ import {
 import { cls } from '@shared/consts/cls'
 import { fixElementDimensionStyle } from '@shared/utils/fixElementDimensionStyle'
 import { Tooltip } from '@mui/material'
-import { getClosestPaperElementHtml } from '@shared/utils'
+import { getClosestPaperElementHtml } from '@shared/utils/htmlGetter/getClosestPaperElementHtml'
 
 export const CutBlockIcon = (): JSX.Element => {
   const { blockIndex } = useBlock()

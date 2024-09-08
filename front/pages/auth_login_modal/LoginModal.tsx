@@ -5,7 +5,9 @@ import { useRef } from 'react'
 import { useLogIn } from '@features/auth/log_in'
 import { OpenRegisterModalLink } from '@features/open_close/open_register_modal'
 import { OpenResetModalLink } from '@features/open_close/open_reset_modal'
-import { EmailField, FormModal, PasswordField } from '@shared/components'
+import { EmailField } from '@shared/components/EmailField'
+import { FormModal } from '@shared/components/FormModal'
+import { PasswordField } from '@shared/components/PasswordField'
 import { router } from '@lib_instances/router'
 
 export const LoginModal = (): JSX.Element => {

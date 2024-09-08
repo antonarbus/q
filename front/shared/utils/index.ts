@@ -1,8 +1,0 @@
-export { getTextContentFromHtml } from './getTextContentFromHtml'
-export { getNumberFromString } from './getNumberFromString'
-export { getStringWithNewFormattedNumber } from './getStringWithNewFormattedNumber'
-export { getFileSizeInMbAsText } from './getFileSize'
-export { getClosestPaperElementHtml } from './htmlGetter/getClosestPaperElementHtml'
-export { getPaperElementHtmlAtModal } from './htmlGetter/getPaperElementHtmlAtModal'
-export { getClosestRowHtml } from './htmlGetter/getClosestRowHtml'
-export { getRowHtmlAtModal } from './htmlGetter/getRowHtmlAtModal'

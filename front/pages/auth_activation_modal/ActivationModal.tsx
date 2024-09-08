@@ -5,7 +5,7 @@ import { GrValidate } from 'react-icons/gr'
 import { PiSmileySadBold, PiSmileyBold } from 'react-icons/pi'
 import { useNavigate } from 'react-router-dom'
 import { useActivate } from '@features/auth/activate'
-import { RotatingLoaderIcon } from '@shared/components'
+import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
 import { BackdropWithSlidableModal } from '@shared/components/BackdropWithSlidableModal'
 import { CardCustom } from '@shared/components/CardCustom'
 

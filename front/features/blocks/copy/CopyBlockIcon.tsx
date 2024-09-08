@@ -10,7 +10,7 @@ import {
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { Tooltip } from '@mui/material'
-import { getClosestPaperElementHtml } from '@shared/utils'
+import { getClosestPaperElementHtml } from '@shared/utils/htmlGetter/getClosestPaperElementHtml'
 
 export const CopyBlockIcon = (): JSX.Element => {
   const { blockIndex } = useBlock()

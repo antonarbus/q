@@ -6,7 +6,7 @@ import { useUpdateEffect } from 'react-use'
 import { useGetBookmarkMutation } from '@entities/bookmark'
 import { copySlice } from '@entities/copy'
 import { isFroalaSignal } from '@entities/quotation'
-import { RotatingLoaderIcon } from '@shared/components'
+import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
 import { notify } from '@shared/toast'
 
 export const CopyBookmarkButton = ({ id }: ReqBody): JSX.Element => {

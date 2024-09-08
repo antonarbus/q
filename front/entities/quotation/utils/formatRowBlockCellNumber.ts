@@ -1,7 +1,7 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { roundTo } from 'round-to'
 import type { FroalaEditorRef } from '@shared/types/froala'
-import { getStringWithNewFormattedNumber } from '@shared/utils'
+import { getStringWithNewFormattedNumber } from '@shared/utils/getStringWithNewFormattedNumber'
 import { quotationSlice } from '../redux/quotationSlice'
 import type { RowCellKey } from '../types'
 import { itemType } from '../consts/itemType'

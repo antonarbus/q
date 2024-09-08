@@ -4,7 +4,8 @@ import { useSignal } from '@preact/signals-react'
 import { useRef } from 'react'
 import { useRequestPasswordReset } from '@features/auth/request_password_reset'
 import { OpenLoginModalLink } from '@features/open_close/open_login_modal'
-import { EmailField, FormModal } from '@shared/components'
+import { EmailField } from '@shared/components/EmailField'
+import { FormModal } from '@shared/components/FormModal'
 import { router } from '@lib_instances/router'
 
 export const RequestPasswordResetModal = (): JSX.Element => {

@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { OutlinedDivWithLabel } from '@shared/components'
+import { OutlinedDivWithLabel } from '@shared/components/OutlinedDivWithLabel'
 import { cls } from '@shared/consts/cls'
 
 type Props = {

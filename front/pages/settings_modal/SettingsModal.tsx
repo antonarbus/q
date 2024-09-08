@@ -7,10 +7,8 @@ import { useRef } from 'react'
 import { GrStorage } from 'react-icons/gr'
 import { useNavigate } from 'react-router-dom'
 import { useGetFilesStatsQuery } from '@entities/user'
-import {
-  BackdropWithSlidableModal,
-  RotatingLoaderIcon,
-} from '@shared/components'
+import { BackdropWithSlidableModal } from '@shared/components/BackdropWithSlidableModal'
+import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
 import { CardCustom } from '@shared/components/CardCustom'
 
 export const SettingsModal = (): JSX.Element => {

@@ -13,7 +13,7 @@ import {
 } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { Tooltip } from '@mui/material'
-import { getClosestRowHtml } from '@shared/utils'
+import { getClosestRowHtml } from '@shared/utils/htmlGetter/getClosestRowHtml'
 
 export const CutBoqRowIcon = (): JSX.Element => {
   const { blockIndex } = useBlock()

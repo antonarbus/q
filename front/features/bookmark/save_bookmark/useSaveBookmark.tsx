@@ -12,8 +12,8 @@ import {
 import { bookmarkPosAtBlocks, quotationSlice } from '@entities/quotation'
 import { notify } from '@shared/toast'
 import { slideElement } from '@shared/utils/slideElement'
-import { getPaperElementHtmlAtModal } from '@shared/utils'
 import { cls } from '@shared/consts/cls'
+import { getPaperElementHtmlAtModal } from '@shared/utils/htmlGetter/getPaperElementHtmlAtModal'
 
 type Props = {
   modalRef: RefObject<HTMLDivElement>

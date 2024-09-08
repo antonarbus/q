@@ -7,7 +7,7 @@ import {
 } from '@entities/quotation'
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
 import type { FroalaEditorRef } from '@shared/types/froala'
-import { getStringWithNewFormattedNumber } from '@shared/utils'
+import { getStringWithNewFormattedNumber } from '@shared/utils/getStringWithNewFormattedNumber'
 
 type Props = {
   editorRef: FroalaEditorRef

@@ -4,12 +4,10 @@ import { useSignal, useSignalEffect } from '@preact/signals-react'
 import { useRef } from 'react'
 import { useRegister } from '@features/auth/register'
 import { OpenLoginModalLink } from '@features/open_close/open_login_modal'
-import {
-  ConfirmPasswordField,
-  EmailField,
-  FormModal,
-  PasswordField,
-} from '@shared/components'
+import { ConfirmPasswordField } from '@shared/components/ConfirmPasswordField'
+import { EmailField } from '@shared/components/EmailField'
+import { FormModal } from '@shared/components/FormModal'
+import { PasswordField } from '@shared/components/PasswordField'
 import { router } from '@lib_instances/router'
 
 export const RegisterModal = (): JSX.Element => {

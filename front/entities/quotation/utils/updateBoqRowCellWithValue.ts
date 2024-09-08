@@ -1,10 +1,8 @@
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
 import type { FroalaEditor } from '@shared/types/froala'
-import {
-  getNumberFromString,
-  getTextContentFromHtml,
-  getStringWithNewFormattedNumber,
-} from '@shared/utils'
+import { getNumberFromString } from '@shared/utils/getNumberFromString'
+import { getTextContentFromHtml } from '@shared/utils/getTextContentFromHtml'
+import { getStringWithNewFormattedNumber } from '@shared/utils/getStringWithNewFormattedNumber'
 import { getBoqRowFromStore } from '../redux/getters/getBoqRowFromStore'
 import { updateBoqRowCellAtStore } from '../redux/updaters/updateBoqRowCellAtStore'
 import type { RowCellKey } from '../types'

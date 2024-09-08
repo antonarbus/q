@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import { useEffectOnce } from 'react-use'
 import { Blocks } from '@widgets/blocks'
 import { isFroalaSignal } from '@entities/quotation'
-import { OutlinedDivWithLabel } from '@shared/components'
+import { OutlinedDivWithLabel } from '@shared/components/OutlinedDivWithLabel'
 import { getState, useSelectorTyped } from '@lib_instances/store'
 import { cls } from '@shared/consts/cls'
 

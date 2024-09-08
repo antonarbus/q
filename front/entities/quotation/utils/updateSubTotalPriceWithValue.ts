@@ -2,11 +2,9 @@ import { dispatch } from '@lib_instances/store'
 import type FroalaEditor from 'froala-editor'
 import { updateNumberAtHtml } from '@shared/lib/froala/updateNumberAtHtml'
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
-import {
-  getNumberFromString,
-  getTextContentFromHtml,
-  getStringWithNewFormattedNumber,
-} from '@shared/utils'
+import { getNumberFromString } from '@shared/utils/getNumberFromString'
+import { getTextContentFromHtml } from '@shared/utils/getTextContentFromHtml'
+import { getStringWithNewFormattedNumber } from '@shared/utils/getStringWithNewFormattedNumber'
 import { getBoqBlockFromStore } from '../redux/getters/getBoqBlockFromStore'
 import { quotationSlice } from '../redux/quotationSlice'
 

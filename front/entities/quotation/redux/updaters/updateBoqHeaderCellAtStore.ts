@@ -1,6 +1,7 @@
 import { dispatch } from '@lib_instances/store'
 import type { FroalaEditorRef } from '@shared/types/froala'
-import { getNumberFromString, getTextContentFromHtml } from '@shared/utils'
+import { getNumberFromString } from '@shared/utils/getNumberFromString'
+import { getTextContentFromHtml } from '@shared/utils/getTextContentFromHtml'
 import type { HeaderKey } from '../../types'
 import { getBoqBlockFromStore } from '../getters/getBoqBlockFromStore'
 import { quotationSlice } from '../quotationSlice'

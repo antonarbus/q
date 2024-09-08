@@ -2,7 +2,7 @@ import { dispatch } from '@lib_instances/store'
 import { roundTo } from 'round-to'
 import { getBoqBlockFromStore, quotationSlice } from '@entities/quotation'
 import type { FroalaEditorRef } from '@shared/types/froala'
-import { getStringWithNewFormattedNumber } from '@shared/utils'
+import { getStringWithNewFormattedNumber } from '@shared/utils/getStringWithNewFormattedNumber'
 
 type Props = {
   blockIndex: number
