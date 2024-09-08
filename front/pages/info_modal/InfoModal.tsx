@@ -10,11 +10,9 @@ import { InfoField } from './InfoField'
 import { NameField } from './NameField'
 import { useUpdateItemInfo } from '@features/info/update_info'
 import { router } from '@lib_instances/router'
-// import { useFixScrollPositionOnModalOpen } from '@shared/utils/useFixScrollPositionOnModalOpen'
 
 export const InfoModal = (): React.ReactNode => {
   const modalRef = useRef<HTMLDivElement>(null)
-  // useFixScrollPositionOnModalOpen()
   const { id } = useParams()
 
   const item = getFromStore({ id: id ?? 'new' })

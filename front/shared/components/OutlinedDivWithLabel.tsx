@@ -53,6 +53,12 @@ export const OutlinedDivWithLabel = ({
         fieldset: {
           borderWidth: '1px !important',
         },
+        '.MuiInputBase-root': {
+          lineHeight: 1.2,
+          color: 'rgba(0, 0, 0, 0.87)',
+          fontFamily: 'system-ui, sans-serif;',
+          fontWeight: 300,
+        },
         ...sx,
       }}
     />
