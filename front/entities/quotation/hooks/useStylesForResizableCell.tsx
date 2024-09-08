@@ -29,6 +29,7 @@ export const useStylesForResizableCell = ({
     width: columnWidth,
     maxWidth: columnWidth,
     minWidth,
+    padding: '2px',
   }
 
   return { stylesForResizableCell }
