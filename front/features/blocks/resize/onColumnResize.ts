@@ -4,8 +4,6 @@ import {
   type ColumnKey,
   quotationSlice,
   getBoqColumnFromStore,
-  unfixImagesHeight,
-  fixImagesHeight,
 } from '@entities/quotation'
 
 type Props = {
@@ -19,8 +17,6 @@ export const onColumnResizeStart = ({
   blockIndex,
   boqColumnKey,
 }: Props): void => {
-  unfixImagesHeight()
-
   const width = headerColumnElement.clientWidth
 
   dispatch(quotationSlice.actions.disableFroalaReducer({ blockIndex }))
@@ -64,7 +60,6 @@ export const onColumnResizeStop = ({
   blockIndex,
   boqColumnKey,
 }: Props): void => {
-  fixImagesHeight()
   const columnWidth = headerColumnElement.clientWidth
 
   dispatch(

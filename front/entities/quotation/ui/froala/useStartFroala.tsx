@@ -23,31 +23,19 @@ declare const window: Window &
 window.froalas = []
 
 export const useStartFroala = (): void => {
-  const {
-    htmlGetter,
-    froalaElementRef,
-    editorRef,
-    placeholder,
-    onContentChange,
-    onFocus,
-    onClick,
-    onBlur,
-    onKeydown,
-    onInitialized,
-    beforeUpload,
-  } = useFroala()
+  const froala = useFroala()
 
   useEffectOnce(() => {
     const initFroalaInstance = (): void => {
-      const froalaInstance = new FroalaEditor(froalaElementRef.current, {
+      const froalaInstance = new FroalaEditor(froala.froalaElementRef.current, {
         ...froalaDefaultOptions,
-        placeholderText: placeholder ?? 'Text...',
+        placeholderText: froala.placeholder ?? 'Text...',
         events: {
           contentChanged: (): void => {
-            onContentChange()
+            froala.onContentChange()
           },
           focus: (): void => {
-            onFocus?.()
+            froala.onFocus?.()
           },
           click: (e: MouseEvent): void => {
             // close opened inline toolbar
@@ -58,27 +46,28 @@ export const useStartFroala = (): void => {
               froalaInstance.toolbar.hide()
             }
 
-            onClick?.(e)
+            froala.onClick?.(e)
           },
           keydown: (e: KeyboardEvent): void => {
-            onKeydown?.(e)
+            froala.onKeydown?.(e)
           },
           blur: (e: MouseEvent): void => {
-            onBlur?.(e)
+            froala.onBlur?.(e)
           },
           'image.beforeUpload': function (files): void {
-            if (beforeUpload === undefined) {
+            if (froala.beforeUpload === undefined) {
               notify({
                 msg: 'may drop files into text block & description cell',
                 type: 'info',
               })
+
               removeLoadingBar()
               return false
             }
-            beforeUpload({ files, editor: this })
+            froala.beforeUpload({ files, editor: this })
           },
           'file.beforeUpload': function (files): void {
-            if (beforeUpload === undefined) {
+            if (froala.beforeUpload === undefined) {
               notify({
                 msg: 'may drop files into text block & description cell',
                 type: 'info',
@@ -86,10 +75,11 @@ export const useStartFroala = (): void => {
               removeLoadingBar()
               return false
             }
-            beforeUpload({ files, editor: this })
+
+            froala.beforeUpload({ files, editor: this })
           },
           'video.beforeUpload': function (files): void {
-            if (beforeUpload === undefined) {
+            if (froala.beforeUpload === undefined) {
               notify({
                 msg: 'may drop files into text block & description cell',
                 type: 'info',
@@ -97,7 +87,8 @@ export const useStartFroala = (): void => {
               removeLoadingBar()
               return false
             }
-            beforeUpload({ files, editor: this })
+
+            froala.beforeUpload({ files, editor: this })
           },
           'image.inserted': function (response): void {
             remindToSaveQuotationOnInsert()
@@ -129,32 +120,32 @@ export const useStartFroala = (): void => {
           },
           'image.loaded': function (props: { '0': HTMLImageElement }): void {
             const imageElement = props['0']
-            imageElement.style.height = `${imageElement.clientHeight}px`
+            imageElement.style.aspectRatio = `${imageElement.clientWidth}/${imageElement.clientHeight}`
             imageElement.id = `img-${nanoid(5)}`
             imageElement.classList.add('fr-rounded')
           },
           initialized: (): void => {
-            window.froalas.push(editorRef)
-            if (!editorRef.current?.html) return
-            editorRef.current.html.set(htmlGetter())
-            // editorRef.current.undo.saveStep() // triggers contentChange // without it any first click on cell considered as a fresh value and "contentChanged" callback is fired // https://github.com/froala/wysiwyg-editor/issues/1578#issuecomment-256577412
+            window.froalas.push(froala.editorRef)
+            if (!froala.editorRef.current?.html) return
+            froala.editorRef.current.html.set(froala.htmlGetter())
+            // froala.editorRef.current.undo.saveStep() // triggers contentChange // without it any first click on cell considered as a fresh value and "contentChanged" callback is fired // https://github.com/froala/wysiwyg-editor/issues/1578#issuecomment-256577412
             window.froalas = window.froalas.filter(({ current }) =>
               Boolean(current),
             )
-            onInitialized?.()
+            froala.onInitialized?.()
             // console.log('💚 froalas qty after init: ', window.froalas.length)
           },
         },
       })
 
-      editorRef.current = froalaInstance
+      froala.editorRef.current = froalaInstance
     }
 
     initFroalaInstance()
 
     return (): void => {
-      editorRef.current?.destroy()
-      editorRef.current = null
+      froala.editorRef.current?.destroy()
+      froala.editorRef.current = null
       window.froalas = window.froalas.filter(({ current }) => Boolean(current))
       // console.log('💔 froalas qty after destroy: ', window.froalas.length)
     }

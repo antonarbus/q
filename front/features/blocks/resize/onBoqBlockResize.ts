@@ -3,8 +3,6 @@ import {
   quotationSlice,
   getBoqColumnFromStore,
   boqColumnKey,
-  unfixImagesHeight,
-  fixImagesHeight,
   itemType,
   columnMinWidth,
 } from '@entities/quotation'
@@ -33,7 +31,6 @@ export const onBoqBlockResizeStart: OnBlockResizeStart = ({
   dir,
   elementRef: itemElement,
 }) => {
-  unfixImagesHeight()
   dispatch(quotationSlice.actions.disableFroalaReducer({ blockIndex }))
   dispatch(quotationSlice.actions.hideBoqItemPinsReducer({ blockIndex }))
 
@@ -232,7 +229,6 @@ export const onBoqBlockResizeStop: OnBlockResizeStop = ({
   elementRef: itemElement,
   delta,
 }) => {
-  fixImagesHeight()
   const descriptionHeaderElement = itemElement.querySelector('.th.description')
 
   if (!(descriptionHeaderElement instanceof HTMLElement)) return

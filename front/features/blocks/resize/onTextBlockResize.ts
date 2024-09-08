@@ -1,9 +1,5 @@
 import { dispatch, getState } from '@lib_instances/store'
-import {
-  fixImagesHeight,
-  quotationSlice,
-  unfixImagesHeight,
-} from '@entities/quotation'
+import { quotationSlice } from '@entities/quotation'
 import type {
   OnBlockResize,
   OnBlockResizeStart,
@@ -16,7 +12,7 @@ export const onTextBlockResizeStart: OnBlockResizeStart = ({
   dir,
   elementRef,
 }) => {
-  unfixImagesHeight()
+  // nothing yet
 }
 
 export const onTextBlockResize: OnBlockResize = ({
@@ -41,7 +37,6 @@ export const onTextBlockResizeStop: OnBlockResizeStop = ({
   elementRef,
   delta,
 }) => {
-  fixImagesHeight()
   const width = parseInt(elementRef.style.width, 10)
   const prevItemWidth = getState().quotation.blocks[blockIndex]?.width
   dispatch(quotationSlice.actions.enableFroalaReducer({ blockIndex }))

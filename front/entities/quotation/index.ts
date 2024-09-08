@@ -41,7 +41,6 @@ export { formatBoqRowCellNumber } from './utils/formatBoqRowCellNumber'
 export { getNumberOfBoqBlocksAbove } from './utils/getNumberOfBoqBlocksAbove'
 export { getTotalPriceAbove } from './utils/getTotalPriceAbove'
 export { getWhoQuotationSharedWithOption } from './utils/getWhoQuotationSharedWithOption'
-export { fixImagesHeight, unfixImagesHeight } from './utils/imagesHeight'
 
 // store item getters
 export { getRowCellHtmlFromStore } from './redux/getters/getRowCellHtmlFromStore'
