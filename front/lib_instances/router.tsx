@@ -81,7 +81,14 @@ export const router = createBrowserRouter([
       {
         path: ':id?',
         element: (
-          <Suspense>
+          <Suspense
+            fallback={
+              <LoadingDotsOverlay
+                title='Loading...'
+                isShowing
+              />
+            }
+          >
             <Quotation />
           </Suspense>
         ),
