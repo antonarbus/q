@@ -13,7 +13,7 @@ export const DropFilesText = (props: Props): JSX.Element => {
       style={{
         position: 'absolute',
         top: '2px',
-        right: '3px',
+        right: '5px',
         fontSize: '8px',
         opacity: 0,
         visibility: 'hidden',
