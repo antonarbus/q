@@ -19,7 +19,8 @@ type Props = {
 export const useLoadBookmarkModalOpenedWithDirectLink = ({
   bookmarkFromValues,
 }: Props): void => {
-  const { id } = useParams()
+  const { bookmarkId } = useParams()
+  console.log('🚀 ~ bookmarkId:', bookmarkId)
   const navigate = useNavigate()
 
   const {
@@ -35,28 +36,26 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
     const isOpenedFromButton = Boolean(firstBlock)
 
     if (isOpenedFromButton) return
-    if (!id) return
+    if (!bookmarkId) return
 
-    loadBookmark({ id })
+    loadBookmark({ id: bookmarkId })
   })
 
   useUpdateEffect(() => {
     if (isSuccess && data.item) {
-      if (data.item.type !== itemType.boq) return
-
       dispatch(
         quotationSlice.actions.loadBlockAtPosThousandReducer({
           block: data.item,
         }),
       )
 
-      const firstBlock = getState().quotation.blocks.at(bookmarkPosAtBlocks)
+      const block = getState().quotation.blocks.at(bookmarkPosAtBlocks)
 
-      if (firstBlock) {
-        bookmarkFromValues.nameSignal.value = firstBlock.name ?? ''
-        bookmarkFromValues.categorySignal.value = firstBlock.category ?? ''
-        bookmarkFromValues.descSignal.value = firstBlock.desc ?? ''
-        bookmarkFromValues.infoSignal.value = firstBlock.info ?? ''
+      if (block) {
+        bookmarkFromValues.nameSignal.value = block.name ?? ''
+        bookmarkFromValues.categorySignal.value = block.category ?? ''
+        bookmarkFromValues.descSignal.value = block.desc ?? ''
+        bookmarkFromValues.infoSignal.value = block.info ?? ''
       }
     }
   }, [isSuccess])

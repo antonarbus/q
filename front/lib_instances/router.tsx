@@ -79,7 +79,7 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: ':id?',
+        path: ':quotationId?',
         element: (
           <Suspense
             fallback={
@@ -100,7 +100,7 @@ export const router = createBrowserRouter([
             element: <QuotationModal />,
           },
           {
-            path: `${route.bookmark}/:id`,
+            path: `${route.bookmark}/:bookmarkId`,
             element: <BookmarkModal />,
           },
           {
@@ -108,7 +108,7 @@ export const router = createBrowserRouter([
             element: <InfoModal />,
           },
           {
-            path: `${route.info}/:id`,
+            path: `${route.info}/:bookmarkId`,
             element: <InfoModal />,
           },
         ],
@@ -130,7 +130,7 @@ export const router = createBrowserRouter([
         children: [
           ...authRoutes,
           {
-            path: `:id`,
+            path: `:quotationId`,
             element: <QuotationModal />,
           },
         ],
@@ -152,7 +152,7 @@ export const router = createBrowserRouter([
         children: [
           ...authRoutes,
           {
-            path: `:id`,
+            path: `:bookmarkId`,
             element: <BookmarkModal />,
           },
         ],

@@ -15,7 +15,8 @@ type Props = {
 export const useLoadQuotationModalWithDirectLink = ({
   quotationFormValues,
 }: Props): void => {
-  const { id } = useParams()
+  const { quotationId } = useParams()
+  console.log('🚀 ~ quotationId:', quotationId)
 
   const {
     mutate: loadQuotation,
@@ -24,12 +25,12 @@ export const useLoadQuotationModalWithDirectLink = ({
   } = useGetQuotationMutation()
 
   useEffectOnce(() => {
-    if (!id) return
+    if (!quotationId) return
 
-    const quotationIsAlreadyLoaded = getState().quotation.id === id
+    const quotationIsAlreadyLoaded = getState().quotation.id === quotationId
     if (quotationIsAlreadyLoaded) return
 
-    loadQuotation({ id })
+    loadQuotation({ id: quotationId })
   })
 
   useUpdateEffect(() => {

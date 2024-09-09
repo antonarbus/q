@@ -25,7 +25,7 @@ export function useLoadQuotation(): void {
     isError,
     error,
   } = useGetQuotationMutation()
-  const id = router.state.matches.at(0)?.params.id
+  const quotationId = router.state.matches.at(0)?.params.quotationId
   const location = useLocation()
   const quotationType = (location.state as QuotationLocationState)
     ?.quotationType
@@ -71,7 +71,7 @@ export function useLoadQuotation(): void {
     }
 
     // load new quotation template
-    if (id === undefined || id === 'new') {
+    if (quotationId === undefined || quotationId === 'new') {
       loadingDotsOverlayTextSignal.value = 'Loading template...'
 
       // avoid resetting and loading quotation batching, otherwise there is unwanted items animation
@@ -95,9 +95,9 @@ export function useLoadQuotation(): void {
     }
 
     // load quotation from server
-    if (id !== 'new') {
-      loadingDotsOverlayTextSignal.value = `Loading ${id}...`
-      getQuotation({ id })
+    if (quotationId !== 'new') {
+      loadingDotsOverlayTextSignal.value = `Loading ${quotationId}...`
+      getQuotation({ id: quotationId })
     }
   }, [reLoadQuotationSignal.value])
 
@@ -144,14 +144,14 @@ export function useLoadQuotation(): void {
   useUpdateEffect(() => {
     if (isError) {
       if (error.response?.data.message === 'no permission to view') {
-        backgroundMessageSignal.value = `No permission to view quotation ${String(id)}`
+        backgroundMessageSignal.value = `No permission to view quotation ${String(quotationId)}`
       } else if (
         error.response?.data.message === 'not found in bucket' ||
         error.response?.data.message === 'not found in db'
       ) {
-        backgroundMessageSignal.value = `Quotation ${String(id)} is not found`
+        backgroundMessageSignal.value = `Quotation ${String(quotationId)} is not found`
       } else if (error.response?.data.message === 'not shared') {
-        backgroundMessageSignal.value = `Quotation ${String(id)} is private`
+        backgroundMessageSignal.value = `Quotation ${String(quotationId)} is private`
       } else {
         notify({ msg: 'Internal error', type: 'error', theme: 'light' })
         backgroundMessageSignal.value = 'Internal error'

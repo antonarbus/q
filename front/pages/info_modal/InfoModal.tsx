@@ -13,9 +13,9 @@ import { router } from '@lib_instances/router'
 
 export const InfoModal = (): React.ReactNode => {
   const modalRef = useRef<HTMLDivElement>(null)
-  const { id } = useParams()
+  const { quotationId, bookmarkId } = useParams()
 
-  const item = getFromStore({ id: id ?? 'new' })
+  const item = getFromStore({ id: bookmarkId ?? quotationId ?? 'new' })
 
   if (!item) return null
 
@@ -25,7 +25,7 @@ export const InfoModal = (): React.ReactNode => {
   const infoSignal = useSignal(item.info)
 
   useUpdateItemInfo({
-    id: id ?? 'new',
+    id: bookmarkId ?? quotationId ?? 'new',
     nameSignal,
     categorySignal,
     descSignal,

@@ -42,7 +42,7 @@ export const useLogIn = ({
   modalRef,
 }: Props): Res => {
   const navigate = useNavigate()
-  const { id } = useParams()
+  const { quotationId } = useParams()
   const {
     mutate: logIn,
     isPending,
@@ -93,7 +93,7 @@ export const useLogIn = ({
         void refetchBookmarks()
       }
 
-      if (id) {
+      if (quotationId) {
         reLoadQuotationSignal.value = nanoid(5)
       }
 
