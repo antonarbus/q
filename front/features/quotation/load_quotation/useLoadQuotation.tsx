@@ -9,7 +9,7 @@ import {
   useGetQuotationMutation,
   newQuotationTemplate,
   backgroundMessageSignal,
-  previousQuotationRef,
+  backToQuotationRef,
 } from '@entities/quotation'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
@@ -31,7 +31,7 @@ export function useLoadQuotation(): void {
     ?.quotationType
 
   useEffect(() => {
-    const previousQuotation = previousQuotationRef.current
+    const previousQuotation = backToQuotationRef.current
 
     dispatch(quotationSlice.actions.resetQuotationReducer())
     dispatch(navSlice.actions.removeUnderlineFromTopNav())
@@ -66,7 +66,7 @@ export function useLoadQuotation(): void {
         loadingDotsOverlayTextSignal.value = null
       }, 750)
 
-      previousQuotationRef.current = null
+      backToQuotationRef.current = null
       return
     }
 

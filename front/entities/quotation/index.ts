@@ -5,7 +5,7 @@ export { isFroalaSignal } from './signals/isFroalaSignal'
 export { backgroundMessageSignal } from './signals/backgroundMessageSignal'
 
 // ref
-export { previousQuotationRef } from './refs/previousQuotationRef'
+export { backToQuotationRef } from './refs/backToQuotationRef'
 
 // api
 export { useGetQuotationMutation } from './api/useGetQuotationMutation'
@@ -41,6 +41,7 @@ export { formatBoqRowCellNumber } from './utils/formatBoqRowCellNumber'
 export { getNumberOfBoqBlocksAbove } from './utils/getNumberOfBoqBlocksAbove'
 export { getTotalPriceAbove } from './utils/getTotalPriceAbove'
 export { getWhoQuotationSharedWithOption } from './utils/getWhoQuotationSharedWithOption'
+export { setBackToQuotation } from './utils/setBackToQuotation'
 
 // store item getters
 export { getRowCellHtmlFromStore } from './redux/getters/getRowCellHtmlFromStore'
