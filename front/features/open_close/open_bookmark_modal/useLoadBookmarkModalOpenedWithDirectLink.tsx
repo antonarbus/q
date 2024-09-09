@@ -8,7 +8,8 @@ import {
   quotationSlice,
 } from '@entities/quotation'
 import { dispatch, getState } from '@lib_instances/store'
-import { useParams } from 'react-router-dom'
+import { notify } from '@shared/toast'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 
 type Props = {
@@ -19,10 +20,13 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
   bookmarkFromValues,
 }: Props): void => {
   const { id } = useParams()
+  const navigate = useNavigate()
 
   const {
     mutate: loadBookmark,
-    isSuccess: isBookmarkSuccess,
+    isSuccess,
+    isError,
+    error,
     data,
   } = useGetBookmarkMutation()
 
@@ -37,7 +41,7 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
   })
 
   useUpdateEffect(() => {
-    if (isBookmarkSuccess && data.item) {
+    if (isSuccess && data.item) {
       if (data.item.type !== itemType.boq) return
 
       dispatch(
@@ -55,5 +59,19 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
         bookmarkFromValues.infoSignal.value = firstBlock.info ?? ''
       }
     }
-  }, [isBookmarkSuccess])
+  }, [isSuccess])
+
+  useUpdateEffect(() => {
+    if (isError) {
+      if (error.response?.data.message === 'not found') {
+        notify({
+          msg: 'Bookmark not found',
+          type: 'warn',
+          theme: 'light',
+        })
+
+        navigate('..')
+      }
+    }
+  }, [isError])
 }
