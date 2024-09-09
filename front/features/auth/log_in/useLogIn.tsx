@@ -9,14 +9,16 @@ import {
 } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetBookmarksQuery } from '@entities/bookmark'
-import { useGetQuotationsQuery } from '@entities/quotation'
+import {
+  reRenderQuotationSignal,
+  useGetQuotationsQuery,
+} from '@entities/quotation'
 import { useLogInMutation, userSlice } from '@entities/user'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { route } from '@shared/consts/route'
 import { nanoid } from '@shared/lib/nanoid'
 import { navSlice } from '@shared/nav'
-import { reRenderQuotationSignal } from '@shared/signals/reRenderQuotationSignal'
 import { notify } from '@shared/toast'
 import { slideElement } from '@shared/utils/slideElement'
 import type { NavigateState } from '@shared/types/NavigateState'

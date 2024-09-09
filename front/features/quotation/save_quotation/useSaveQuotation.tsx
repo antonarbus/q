@@ -3,6 +3,7 @@ import type { UseMutationResult } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import {
+  isFroalaSignal,
   type Quotation,
   quotationSlice,
   useGetQuotationCategoriesQuery,
@@ -71,6 +72,9 @@ export const useSaveQuotation = ({
       void updateCategories()
       void fetchQuotations()
 
+      const existingId = getState().quotation.id
+      const isNewQuotation = existingId === 'new'
+
       if (data.quotation) {
         dispatch(
           quotationSlice.actions.loadQuotationReducer({
@@ -82,13 +86,20 @@ export const useSaveQuotation = ({
 
         dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
+        isFroalaSignal.value = false
+
+        setTimeout(() => {
+          isFroalaSignal.value = true
+        })
+
         setTimeout(() => {
           slideElement({
             element: modalRef.current,
             onSlideElementComplete: () => {
               const id = data.quotation?.id
               if (!id) return
-              navigate(`/${id}`)
+              const navigateTo = isNewQuotation ? `/${id}` : '..'
+              navigate(navigateTo, { replace: true })
             },
           })
         }, 1000)
