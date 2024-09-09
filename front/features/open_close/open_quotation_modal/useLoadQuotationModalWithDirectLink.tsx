@@ -16,7 +16,6 @@ export const useLoadQuotationModalWithDirectLink = ({
   quotationFormValues,
 }: Props): void => {
   const { quotationId } = useParams()
-  console.log('🚀 ~ quotationId:', quotationId)
 
   const {
     mutate: loadQuotation,

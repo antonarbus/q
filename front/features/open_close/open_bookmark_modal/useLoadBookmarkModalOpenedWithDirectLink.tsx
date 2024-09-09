@@ -2,11 +2,7 @@ import {
   type BookmarkFromValues,
   useGetBookmarkMutation,
 } from '@entities/bookmark'
-import {
-  bookmarkPosAtBlocks,
-  itemType,
-  quotationSlice,
-} from '@entities/quotation'
+import { bookmarkPosAtBlocks, quotationSlice } from '@entities/quotation'
 import { dispatch, getState } from '@lib_instances/store'
 import { notify } from '@shared/toast'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -20,7 +16,6 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
   bookmarkFromValues,
 }: Props): void => {
   const { bookmarkId } = useParams()
-  console.log('🚀 ~ bookmarkId:', bookmarkId)
   const navigate = useNavigate()
 
   const {
