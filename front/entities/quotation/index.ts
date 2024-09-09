@@ -3,7 +3,7 @@ export { newQuotationTemplate } from './newQuotationTemplate'
 // signals
 export { isFroalaSignal } from './signals/isFroalaSignal'
 export { backgroundMessageSignal } from './signals/backgroundMessageSignal'
-export { reRenderQuotationSignal } from './signals/reRenderQuotationSignal'
+export { reLoadQuotationSignal } from './signals/reLoadQuotationSignal'
 
 // ref
 export { backToQuotationRef } from './refs/backToQuotationRef'

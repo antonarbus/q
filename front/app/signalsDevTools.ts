@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { effect } from '@preact/signals-react'
-import { isFroalaSignal, reRenderQuotationSignal } from '@entities/quotation'
+import { isFroalaSignal, reLoadQuotationSignal } from '@entities/quotation'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 import { displayedRowsCountSignal } from '@shared/lib/ag_grid/components/DisplayedRowsCount'
 
@@ -22,10 +22,7 @@ function signalsOn(): void {
   })
 
   effect(() => {
-    console.log(
-      '🚦 reRenderQuotationSignal.value',
-      reRenderQuotationSignal.value,
-    )
+    console.log('🚦 reLoadQuotationSignal.value', reLoadQuotationSignal.value)
   })
 
   effect(() => {

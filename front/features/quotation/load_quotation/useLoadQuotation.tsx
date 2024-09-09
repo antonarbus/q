@@ -10,7 +10,7 @@ import {
   newQuotationTemplate,
   backgroundMessageSignal,
   backToQuotationRef,
-  reRenderQuotationSignal,
+  reLoadQuotationSignal,
 } from '@entities/quotation'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
@@ -99,7 +99,7 @@ export function useLoadQuotation(): void {
       loadingDotsOverlayTextSignal.value = `Loading ${id}...`
       getQuotation({ id })
     }
-  }, [reRenderQuotationSignal.value])
+  }, [reLoadQuotationSignal.value])
 
   useUpdateEffect(() => {
     if (isSuccess) {

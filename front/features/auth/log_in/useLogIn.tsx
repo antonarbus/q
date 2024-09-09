@@ -10,7 +10,7 @@ import {
 import { useUpdateEffect } from 'react-use'
 import { useGetBookmarksQuery } from '@entities/bookmark'
 import {
-  reRenderQuotationSignal,
+  reLoadQuotationSignal,
   useGetQuotationsQuery,
 } from '@entities/quotation'
 import { useLogInMutation, userSlice } from '@entities/user'
@@ -94,7 +94,7 @@ export const useLogIn = ({
       }
 
       if (id) {
-        reRenderQuotationSignal.value = nanoid(5)
+        reLoadQuotationSignal.value = nanoid(5)
       }
 
       setTimeout(() => {
