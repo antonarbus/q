@@ -1,6 +1,7 @@
-import { dispatch, getState } from '@lib_instances/store'
+import { router } from '@lib_instances/router'
+import { dispatch } from '@lib_instances/store'
 import { useEffect } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import type { QuotationLocationState } from '@features/open_close/open_quotation_page'
 import {
@@ -24,9 +25,8 @@ export function useLoadQuotation(): void {
     isError,
     error,
   } = useGetQuotationMutation()
-  const { id } = useParams()
+  const id = router.state.matches.at(0)?.params.id
   const location = useLocation()
-
   const quotationType = (location.state as QuotationLocationState)
     ?.quotationType
 
@@ -34,13 +34,10 @@ export function useLoadQuotation(): void {
     const previousQuotation = backToQuotationRef.current
 
     dispatch(quotationSlice.actions.resetQuotationReducer())
-
     dispatch(navSlice.actions.removeUnderlineFromTopNav())
-
     dispatch(
       navSlice.actions.hideNavItems({ navItemIdKeys: [navItemKey.back] }),
     )
-
     dispatch(
       navSlice.actions.enableNavItems({
         navItemIdKeys: [
@@ -102,16 +99,6 @@ export function useLoadQuotation(): void {
       loadingDotsOverlayTextSignal.value = `Loading ${id}...`
       getQuotation({ id })
     }
-  }, [id])
-
-  useUpdateEffect(() => {
-    const quotation = getState().quotation
-
-    dispatch(quotationSlice.actions.resetQuotationReducer())
-
-    setTimeout(() => {
-      dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
-    })
   }, [reRenderQuotationSignal.value])
 
   useUpdateEffect(() => {
