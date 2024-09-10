@@ -71,6 +71,9 @@ jobs:
       - name: Run unit tests
         run: npm run test
 
+      - name: Formatting check
+        run: npm run prettier_check
+
       - name: Run typescript checks
         run: npm run tsc
 
