@@ -34,6 +34,7 @@
     "@emotion/react": "^11.11.4",
     "@eslint/js": "^9.6.0",
     "@preact/signals-react-transform": "^0.3.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.6",
     "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/react": "^16.0.0",

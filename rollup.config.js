@@ -1,5 +1,6 @@
 import typescript from '@rollup/plugin-typescript'
 import copy from 'rollup-plugin-copy'
+import { nodeResolve } from '@rollup/plugin-node-resolve'
 
 export default {
   input: './back/index.ts',
@@ -7,7 +8,9 @@ export default {
     dir: './back/build/',
     format: 'es',
   },
+  external: [/node_modules/],
   plugins: [
+    nodeResolve(),
     typescript(),
     copy({
       targets: [
@@ -16,20 +19,5 @@ export default {
         { src: './.env', dest: './back/build' },
       ],
     }),
-  ],
-  external: [
-    '@google-cloud/storage',
-    '@sendgrid/mail',
-    'bcryptjs',
-    'cookie-parser',
-    'cors',
-    'dotenv',
-    'express',
-    'express-validator',
-    'jsonwebtoken',
-    'mongoose',
-    'morgan',
-    'multer',
-    'nanoid',
   ],
 }
