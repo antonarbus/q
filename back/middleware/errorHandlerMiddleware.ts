@@ -27,10 +27,8 @@ export const errorHandlerMiddleware = (
       .json({ message: errorMessageCommon.notLoggedIn })
   }
 
-  return res
-    .status(httpStatus.serverError_500)
-    .json({
-      message: errorMessageCommon.internalError,
-      errorAsString: JSON.stringify({ name, message, stack }),
-    })
+  return res.status(httpStatus.serverError_500).json({
+    message: errorMessageCommon.internalError,
+    errorAsString: JSON.stringify({ name, message, stack }),
+  })
 }
