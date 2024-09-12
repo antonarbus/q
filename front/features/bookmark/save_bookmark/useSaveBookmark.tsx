@@ -4,7 +4,7 @@ import { type RefObject, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import {
-  type BookmarkFromValues,
+  type BookmarkFormValues,
   useGetBookmarkCategoriesQuery,
   useGetBookmarksQuery,
   useSaveBookmarkMutation,
@@ -17,7 +17,7 @@ import { getPaperElementHtmlAtModal } from '@shared/utils/htmlGetter/getPaperEle
 
 type Props = {
   modalRef: RefObject<HTMLDivElement>
-  bookmarkFromValues: BookmarkFromValues
+  bookmarkFromValues: BookmarkFormValues
 }
 
 type Res = {

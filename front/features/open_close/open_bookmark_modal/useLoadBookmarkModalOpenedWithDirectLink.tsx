@@ -1,5 +1,5 @@
 import {
-  type BookmarkFromValues,
+  type BookmarkFormValues,
   useGetBookmarkMutation,
 } from '@entities/bookmark'
 import { bookmarkPosAtBlocks, quotationSlice } from '@entities/quotation'
@@ -9,7 +9,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 
 type Props = {
-  bookmarkFromValues: BookmarkFromValues
+  bookmarkFromValues: BookmarkFormValues
 }
 
 export const useLoadBookmarkModalOpenedWithDirectLink = ({

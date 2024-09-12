@@ -1,6 +1,6 @@
 import type { Signal } from '@preact/signals-react'
 
-export type BookmarkFromValues = {
+export type BookmarkFormValues = {
   nameSignal: Signal<string>
   categorySignal: Signal<string>
   descSignal: Signal<string>

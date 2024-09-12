@@ -2,10 +2,10 @@ import { getState } from '@lib_instances/store'
 import { useEffectOnce } from 'react-use'
 import { useSignal } from '@preact/signals-react'
 import { bookmarkPosAtBlocks } from '@entities/quotation'
-import type { BookmarkFromValues } from '@entities/bookmark'
+import type { BookmarkFormValues } from '@entities/bookmark'
 
 type Res = {
-  bookmarkFromValues: BookmarkFromValues
+  bookmarkFromValues: BookmarkFormValues
 }
 
 export const useLoadInitValuesIntoBookmarkModal = (): Res => {

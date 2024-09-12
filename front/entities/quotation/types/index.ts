@@ -139,3 +139,10 @@ export type QuotationFormValues = {
   sharedWithSignal: Signal<string[]>
   shareWithOptionSignal: Signal<SharedWithOption>
 }
+
+export type InfoFormValues = {
+  nameSignal: Signal<string>
+  categorySignal: Signal<string>
+  descSignal: Signal<string>
+  infoSignal: Signal<string>
+}

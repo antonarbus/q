@@ -1,30 +1,22 @@
 import { dispatch } from '@lib_instances/store'
-import { type Signal, useSignalEffect } from '@preact/signals-react'
+import { useSignalEffect } from '@preact/signals-react'
 import { quotationSlice } from '@entities/quotation'
+import type { InfoFormValues } from '@entities/quotation/types'
 
 type Props = {
-  nameSignal: Signal<string | undefined>
-  categorySignal: Signal<string | undefined>
-  descSignal: Signal<string | undefined>
-  infoSignal: Signal<string | undefined>
   id: string
+  infoFormValues: InfoFormValues
 }
 
-export const useUpdateItemInfo = ({
-  id,
-  nameSignal,
-  categorySignal,
-  descSignal,
-  infoSignal,
-}: Props): void => {
+export const useUpdateItemInfo = ({ id, infoFormValues }: Props): void => {
   useSignalEffect(() => {
     dispatch(
       quotationSlice.actions.updateItemInfoReducer({
         id,
-        name: nameSignal.value,
-        category: categorySignal.value,
-        desc: descSignal.value,
-        info: infoSignal.value,
+        name: infoFormValues.nameSignal.value,
+        category: infoFormValues.categorySignal.value,
+        desc: infoFormValues.descSignal.value,
+        info: infoFormValues.infoSignal.value,
       }),
     )
   })
