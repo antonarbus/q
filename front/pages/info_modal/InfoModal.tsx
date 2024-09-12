@@ -16,10 +16,8 @@ export const InfoModal = (): React.ReactNode => {
   const modalRef = useRef<HTMLDivElement>(null)
   const { infoFormValues } = useLoadInitValuesIntoInfoModal()
   useLoadInfoModalOpenedWithDirectLink({ infoFormValues })
-  useUpdateItemInfo({
-    id: bookmarkId ?? quotationId ?? 'new',
-    infoFormValues,
-  })
+  const id = bookmarkId ?? quotationId ?? 'new'
+  useUpdateItemInfo({ id, infoFormValues })
 
   const navigateUp = (): void => {
     void router.navigate('..')
