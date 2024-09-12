@@ -19,8 +19,7 @@ export const FadeInOnInitLoad = ({ children }: Props): JSX.Element => {
         delay: 0.7, // to show "Q" logo on init load to avoid some jumps
       }}
       style={{
-        // needed for .pdf
-        display: 'inline-flex',
+        // display: 'inline-flex', // needed for .pdf
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',

@@ -29,9 +29,12 @@ export const downloadPdf = async (): Promise<void> => {
     backgroundColor: 'grey',
     quality: 1,
     scale: 1.5,
-    onCloneNode: (node) => {
-      if (!(node instanceof HTMLElement)) return
-      const actionElements = node.querySelectorAll(`.${cls.actionsContainer}`)
+    onCloneNode: (blocksElement) => {
+      if (!(blocksElement instanceof HTMLElement)) return
+      blocksElement.style.display = 'inline-flex'
+      const actionElements = blocksElement.querySelectorAll(
+        `.${cls.actionsContainer}`,
+      )
       actionElements.forEach((element) => {
         element.remove()
       })
