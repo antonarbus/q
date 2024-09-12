@@ -17,19 +17,15 @@ export const useLoadQuotationModalWithDirectLink = ({
 }: Props): void => {
   const { quotationId } = useParams()
 
-  const {
-    mutate: loadQuotation,
-    isSuccess: isLoadQuotationSuccess,
-    data,
-  } = useGetQuotationMutation()
+  const { mutate: loadQuotation, isSuccess, data } = useGetQuotationMutation()
 
   useEffectOnce(() => {
-    if (!quotationId) return
+    if (quotationId) {
+      const quotationIsAlreadyLoaded = getState().quotation.id === quotationId
+      if (quotationIsAlreadyLoaded) return
 
-    const quotationIsAlreadyLoaded = getState().quotation.id === quotationId
-    if (quotationIsAlreadyLoaded) return
-
-    loadQuotation({ id: quotationId })
+      loadQuotation({ id: quotationId })
+    }
   })
 
   useUpdateEffect(() => {
@@ -46,5 +42,5 @@ export const useLoadQuotationModalWithDirectLink = ({
     quotationFormValues.sharedWithSignal.value = quotation.sharedWith ?? []
     quotationFormValues.shareWithOptionSignal.value =
       getWhoQuotationSharedWithOption({ quotation })
-  }, [isLoadQuotationSuccess])
+  }, [isSuccess])
 }

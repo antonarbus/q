@@ -9,12 +9,13 @@ import { NameField } from './NameField'
 import { useUpdateItemInfo } from '@features/info/update_info'
 import { router } from '@lib_instances/router'
 import { useLoadInitValuesIntoInfoModal } from '@features/open_close/open_info_modal'
+import { useLoadInfoModalOpenedWithDirectLink } from '@features/open_close/open_info_modal/useLoadInfoModalOpenedWithDirectLink'
 
 export const InfoModal = (): React.ReactNode => {
   const { quotationId, bookmarkId } = useParams()
   const modalRef = useRef<HTMLDivElement>(null)
   const { infoFormValues } = useLoadInitValuesIntoInfoModal()
-
+  useLoadInfoModalOpenedWithDirectLink({ infoFormValues })
   useUpdateItemInfo({
     id: bookmarkId ?? quotationId ?? 'new',
     infoFormValues,
