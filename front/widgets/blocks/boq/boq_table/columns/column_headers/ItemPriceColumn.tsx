@@ -6,6 +6,7 @@ import {
   columnHeaderStyle,
   useBlock,
   boqColumnKey,
+  columnMinWidth,
 } from '@entities/quotation'
 import type { FroalaEditor } from '@shared/types/froala'
 import { ResizableColumn } from '../ResizableColumn'
@@ -18,7 +19,7 @@ export const ItemPriceColumn = (): JSX.Element => {
     <ResizableColumn
       boqColumnKey={boqColumnKey.itemPrice}
       className={`th ${boqColumnKey.itemPrice} resizable`}
-      minWidth={100}
+      minWidth={columnMinWidth.itemPrice}
       flexGrow={0}
     >
       <Froala

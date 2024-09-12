@@ -12,7 +12,7 @@ export const RowBlock = (): JSX.Element => {
     <BlockComp
       className={cls.boqBlock}
       autoWidth={true}
-      minWidth='560px'
+      minWidth={560}
       onBlockResizeStart={onBoqBlockResizeStart}
       onBlockResize={onBoqBlockResize}
       onBlockResizeStop={onBoqBlockResizeStop}

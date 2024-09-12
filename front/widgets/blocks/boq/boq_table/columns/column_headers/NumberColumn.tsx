@@ -1,5 +1,9 @@
 import { Box } from '@mui/material'
-import { columnHeaderStyle, boqColumnKey } from '@entities/quotation'
+import {
+  columnHeaderStyle,
+  boqColumnKey,
+  columnMinWidth,
+} from '@entities/quotation'
 import { ResizableColumn } from '../ResizableColumn'
 
 export const NumberColumn = (): JSX.Element => {
@@ -7,7 +11,7 @@ export const NumberColumn = (): JSX.Element => {
     <ResizableColumn
       boqColumnKey={boqColumnKey.number}
       className={`th ${boqColumnKey.number} resizable`}
-      minWidth={30}
+      minWidth={columnMinWidth.number}
       flexGrow={0}
     >
       <Box style={columnHeaderStyle} />

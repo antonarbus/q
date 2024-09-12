@@ -1,4 +1,8 @@
-import { columnHeaderStyle, boqColumnKey } from '@entities/quotation'
+import {
+  columnHeaderStyle,
+  boqColumnKey,
+  columnMinWidth,
+} from '@entities/quotation'
 import { ResizableColumn } from '../ResizableColumn'
 import { Box } from '@mui/material'
 
@@ -7,7 +11,7 @@ export const DescriptionColumn = (): React.ReactNode => {
     <ResizableColumn
       boqColumnKey={boqColumnKey.description}
       className={`th ${boqColumnKey.description} resizable`}
-      minWidth={200}
+      minWidth={columnMinWidth.description}
       flexGrow={1}
     >
       <Box

@@ -9,6 +9,7 @@ import {
   boqRowCellSx,
   getRowCellHtmlFromStore,
   bookmarkPosAtBlocks,
+  columnMinWidth,
 } from '@entities/quotation'
 import { updateQtyCell } from '@features/blocks/cell/update_cell/row_block_cells/qty/updateQtyCell'
 import { formatQtyCell } from '@features/blocks/cell/update_cell/row_block_cells/qty/formatQtyCell'
@@ -18,7 +19,7 @@ export const QtyCell = (): JSX.Element => {
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex: bookmarkPosAtBlocks,
     boqColumnKey: boqColumnKey.qty,
-    minWidth: '100px',
+    minWidth: columnMinWidth.qty,
   })
 
   return (
