@@ -15,7 +15,7 @@ export const insertBoqBlock = (e?: MouseEvent): void => {
     type: itemType.boq,
     email: 'john@mail.com',
     width: 600,
-    height: 267,
+    height: 279,
     isFroala: true,
     preview: `
       <div class="MuiBox-root">

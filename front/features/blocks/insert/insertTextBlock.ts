@@ -10,7 +10,7 @@ export const insertTextBlock = (e?: MouseEvent): void => {
     type: itemType.text,
     email: 'john@mail.com',
     width: 600,
-    height: 79.2,
+    height: 59.2,
     isFroala: true,
     preview: `
       <div class="froala-wrapper  MuiBox-root">

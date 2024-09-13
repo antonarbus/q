@@ -9,7 +9,7 @@ export const insertBoqRow = (e?: MouseEvent): void => {
     id: nanoid(5),
     type: boqRowKey.row,
     email: 'john@mail.com',
-    height: 50,
+    height: 55,
     width: 570,
     preview: `
       <div class="boq-row MuiBox-root" id="ynT" style="display: flex; flex-direction: column; justify-content: flex-end; position: relative; border-bottom: 1px solid rgb(232, 232, 232);">
