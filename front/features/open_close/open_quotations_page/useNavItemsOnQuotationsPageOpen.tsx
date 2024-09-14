@@ -26,6 +26,6 @@ export const useNavItemsOnQuotationsPageOpen = (): void => {
   })
 
   useUnmount(() => {
-    dispatch(navSlice.actions.enableAllTopNavItems())
+    dispatch(navSlice.actions.enableTopNavItems({}))
   })
 }

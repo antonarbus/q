@@ -24,6 +24,6 @@ export const useNavItemsOnBookmarksPageOpen = (): void => {
   })
 
   useUnmount(() => {
-    dispatch(navSlice.actions.enableAllTopNavItems())
+    dispatch(navSlice.actions.enableTopNavItems({}))
   })
 }

@@ -174,7 +174,7 @@ export const navSlice = createSlice({
         value: false,
       })
     },
-    disableAllTopNavItems: (
+    disableTopNavItems: (
       state,
       action: PayloadAction<{
         exceptNavItemIdKeys?: NavItemIdKey[]
@@ -200,7 +200,14 @@ export const navSlice = createSlice({
         })
       })
     },
-    enableAllTopNavItems: (state) => {
+    enableTopNavItems: (
+      state,
+      action: PayloadAction<{
+        exceptNavItemIdKeys?: NavItemIdKey[]
+      }>,
+    ) => {
+      const { exceptNavItemIdKeys } = action.payload
+
       const topLevelNavMenu = state.navStructure[0]
       if (!topLevelNavMenu) return
 
@@ -209,6 +216,8 @@ export const navSlice = createSlice({
       ) as NavItemIdKey[]
 
       topNavItemsIds.forEach((id) => {
+        if (exceptNavItemIdKeys?.includes(id)) return
+
         setMenuItemPropValue({
           menu: state.navStructure,
           navItemIdKey: id,
@@ -237,12 +246,12 @@ export const navSlice = createSlice({
     enableNavItems: (
       state,
       action: PayloadAction<{
-        navItemIdKeys: NavItemIdKey[]
+        navItemIdKeys?: NavItemIdKey[]
       }>,
     ) => {
       const { navItemIdKeys } = action.payload
 
-      navItemIdKeys.forEach((navItemIdKey) => {
+      navItemIdKeys?.forEach((navItemIdKey) => {
         setMenuItemPropValue({
           menu: state.navStructure,
           navItemIdKey,

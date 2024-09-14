@@ -5,12 +5,12 @@ import { cursorPosSignal } from '@shared/utils/cursorPosSignal'
 import { FirstCopiedItem } from './FirstCopiedItem'
 import { RestOfCopiedItems } from './RestOfCopiedItems'
 import { useCopyContainerAnimation } from './useCopyContainerAnimation'
-import { useDisableNavItemsExceptNewAndQuotations } from './useDisableNavItemsExceptNewAndQuotations'
+import { useDisableNavItemsOnCopyContainer } from './useDisableNavItemsOnCopyContainer'
 
 export const CopyContainer = (): JSX.Element => {
   useMovePasteText()
   usePasteClick()
-  useDisableNavItemsExceptNewAndQuotations()
+  useDisableNavItemsOnCopyContainer()
   const copyContainerAnimationControls = useCopyContainerAnimation()
   const { x, y } = cursorPosSignal.value
   // const { x, y } = { x: 300, y: 0 }
