@@ -31,6 +31,7 @@ export const useDisableNavItemsOnCopyContainer = (): void => {
           ],
         }),
       )
+
       return
     }
 
@@ -48,6 +49,6 @@ export const useDisableNavItemsOnCopyContainer = (): void => {
       return
     }
 
-    dispatch(navSlice.actions.enableTopNavItems({}))
+    dispatch(navSlice.actions.enableTopNavItems())
   })
 }
