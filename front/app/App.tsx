@@ -14,11 +14,13 @@ import './signalsDevTools'
 import '@shared/utils/cursorPosSignal'
 import { useHideHtmlElements } from '@features/init_load/useHideHtmlElements'
 import { usePreventImageToBeOpenedInBrowserOnDrop } from '@features/upload/usePreventImageToBeOpenedInBrowserOnDrop'
+import { useRemoveCookies } from '@features/init_load/useRemoveCookies'
 
 export const App = (): JSX.Element => {
   useLogoutIfAccessTokenRemoved()
   useHideHtmlElements()
   usePreventImageToBeOpenedInBrowserOnDrop()
+  useRemoveCookies()
 
   return (
     <Provider store={store}>
