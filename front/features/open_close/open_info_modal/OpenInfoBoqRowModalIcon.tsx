@@ -11,11 +11,14 @@ import { route } from '@shared/consts/route'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/consts/cls'
 import type { NavigateState } from '@shared/types/NavigateState'
+import { useIsCopyContainer } from '@entities/copy'
 
 export const OpenInfoBoqRowModalIcon = (): ReactNode => {
   const navigate = useNavigate()
   const { blockIndex } = useBlock()
   const { rowIndex } = useRow()
+  const isCopyContainer = useIsCopyContainer()
+  const disabled = isCopyContainer
 
   return (
     <Tooltip
@@ -28,7 +31,14 @@ export const OpenInfoBoqRowModalIcon = (): ReactNode => {
         <HiOutlineInformationCircle
           className={cls.actionIcon}
           tabIndex={-1}
+          style={{
+            color: disabled ? '#acacac' : '#000',
+            cursor: disabled ? 'default' : 'move',
+            touchAction: 'none',
+          }}
           onClick={(e: MouseEvent): void => {
+            if (disabled) return
+
             const boqRow = getBoqRowFromStore({ rowIndex, blockIndex })
 
             if (!boqRow) return

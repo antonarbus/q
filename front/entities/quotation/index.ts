@@ -81,7 +81,7 @@ export { subTotalTextCellStyle } from './styles/subTotalTextCellStyle'
 export { titleCellStyle } from './styles/titleCellStyle'
 
 // hooks
-export { useIsBlockSortDisabled } from './hooks/useIsBlockSortDisabled'
+export { useIsLastBlock } from './hooks/useIsLastBlock'
 export { useIsBoqRowSortDisabled } from './hooks/useIsBoqRowSortDisabled'
 export { useStylesForResizableCell } from './hooks/useStylesForResizableCell'
 

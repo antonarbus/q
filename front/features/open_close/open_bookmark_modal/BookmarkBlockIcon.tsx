@@ -13,10 +13,13 @@ import {
   useBlock,
 } from '@entities/quotation'
 import type { NavigateState } from '@shared/types/NavigateState'
+import { useIsCopyContainer } from '@entities/copy'
 
 export const BookmarkBlockIcon = (): ReactNode => {
   const navigate = useNavigate()
   const { blockIndex } = useBlock()
+  const isCopyContainer = useIsCopyContainer()
+  const disabled = isCopyContainer
 
   return (
     <Tooltip
@@ -29,7 +32,14 @@ export const BookmarkBlockIcon = (): ReactNode => {
         <MdOutlineStarOutline
           tabIndex={-1}
           className={cls.actionIcon}
+          style={{
+            color: disabled ? '#acacac' : '#000',
+            cursor: disabled ? 'default' : 'move',
+            touchAction: 'none',
+          }}
           onClick={(e: MouseEvent): void => {
+            if (disabled) return
+
             const email = getState().user.email
 
             if (!email) {
