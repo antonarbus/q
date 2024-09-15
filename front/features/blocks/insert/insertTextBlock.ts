@@ -18,14 +18,14 @@ export const insertTextBlock = (e?: MouseEvent): void => {
           <div class="fr-wrapper MuiBox-root">
             <div class="fr-element fr-view MuiBox-root"
               style="padding: 30px 20px;">
-              <p>Text, files &amp; images</p>
+              <p>Add text, tables, drop images, files, links, select to format...</p>
             </div>
           </div>
         </div>
       </div>
     `,
     text: {
-      html: '<p>Text, files & images</p>',
+      html: '<p>Add text, tables, drop images, files, links, select to format...</p>',
       value: null,
     },
   }
