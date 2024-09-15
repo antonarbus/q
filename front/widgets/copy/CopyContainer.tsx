@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion'
 import { usePasteClick, useMovePasteText } from '@features/blocks/paste'
-import { PressEscIcon } from '@features/open_close/close_copy_modal'
+import {
+  PressEscIcon,
+  useEnableFroalasOnCloseCopyModal,
+} from '@features/open_close/close_copy_modal'
 import { cursorPosSignal } from '@shared/utils/cursorPosSignal'
 import { FirstCopiedItem } from './FirstCopiedItem'
 import { RestOfCopiedItems } from './RestOfCopiedItems'
@@ -11,6 +14,7 @@ export const CopyContainer = (): JSX.Element => {
   useMovePasteText()
   usePasteClick()
   useDisableNavItemsOnCopyContainer()
+  useEnableFroalasOnCloseCopyModal()
   const copyContainerAnimationControls = useCopyContainerAnimation()
   const { x, y } = cursorPosSignal.value
   // const { x, y } = { x: 300, y: 0 }

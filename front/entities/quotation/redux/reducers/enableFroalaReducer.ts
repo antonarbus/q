@@ -3,12 +3,28 @@ import type { Quotation } from '../../types'
 
 export const enableFroalaReducer = (
   state: Quotation,
-  action: PayloadAction<{
-    blockIndex: number
-  }>,
+  action: PayloadAction<
+    | {
+        blockIndex: number
+      }
+    | undefined
+  >,
 ): void => {
-  const { blockIndex } = action.payload
-  const block = state.blocks[blockIndex]
-  if (block === undefined) return
-  block.isFroala = true
+  const { blockIndex } = action.payload ?? {}
+  const quotation = state
+  const enableSpecificFroalas = blockIndex !== undefined
+
+  if (enableSpecificFroalas) {
+    const block = quotation.blocks[blockIndex]
+    if (block === undefined) return
+    block.isFroala = true
+    return
+  }
+
+  // enable all froalas
+  quotation.isFroala = true
+
+  quotation.blocks.forEach((block) => {
+    block.isFroala = true
+  })
 }
