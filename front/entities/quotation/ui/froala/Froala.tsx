@@ -15,6 +15,8 @@ import {
 } from '@features/upload/showDropFilesTextOnHover'
 import type { FroalaProps } from './types'
 import { DropFilesText } from './DropFilesText'
+import { cls } from '@shared/consts/cls'
+import { DropHereText } from './DropHereText'
 
 export const Froala = (props: FroalaProps): JSX.Element => {
   const dropFilesTextRef = useRef<React.ElementRef<'div'>>(null)
@@ -63,9 +65,11 @@ export const Froala = (props: FroalaProps): JSX.Element => {
         }}
       >
         <Box
+          className={props.droppable ? cls.droppable : ''}
           style={{
             width: '100%',
             position: 'relative',
+            borderRadius: '4px',
           }}
         >
           {!showEditableHtml && <StaticHtml />}
@@ -78,6 +82,7 @@ export const Froala = (props: FroalaProps): JSX.Element => {
           {props.droppable && (
             <DropFilesText dropFilesTextRef={dropFilesTextRef} />
           )}
+          {props.droppable && <DropHereText />}
         </Box>
       </Box>
     </FroalaProvider>
