@@ -12,6 +12,7 @@ import { froalaDefaultOptions } from './froalaDefaultOptions'
 import { remindToSaveQuotationOnInsert } from './remindToSaveQuotationOnInsert.js'
 import { notify } from '@shared/toast/notify.js'
 import { removeLoadingBar } from '@shared/lib/froala/removeLoadingBar.js'
+import { hideDraggableArea } from '@features/upload/usePreventImageToBeOpenedInBrowserOnDrop.js'
 
 declare const window: Window &
   typeof globalThis & {
@@ -54,6 +55,8 @@ export const useStartFroala = (): void => {
             froala.onBlur?.(e)
           },
           'image.beforeUpload': function (files: any): boolean {
+            hideDraggableArea()
+
             if (froala.beforeUpload === undefined) {
               notify({
                 msg: 'May drop files into text block & description cell',
@@ -65,10 +68,12 @@ export const useStartFroala = (): void => {
             }
 
             //@ts-expect-error: some error
-            froala.beforeUpload({ files, editor: this })
-            return true
+            const isAccepted = froala.beforeUpload({ files, editor: this })
+            return isAccepted
           },
           'file.beforeUpload': function (files: any): boolean {
+            hideDraggableArea()
+
             if (froala.beforeUpload === undefined) {
               notify({
                 msg: 'May drop files into text block & description cell',
@@ -80,10 +85,12 @@ export const useStartFroala = (): void => {
             }
 
             //@ts-expect-error: some error
-            froala.beforeUpload({ files, editor: this })
-            return true
+            const isAccepted = froala.beforeUpload({ files, editor: this })
+            return isAccepted
           },
           'video.beforeUpload': function (files: any): boolean {
+            hideDraggableArea()
+
             if (froala.beforeUpload === undefined) {
               notify({
                 msg: 'May drop files into text block & description cell',
@@ -95,8 +102,8 @@ export const useStartFroala = (): void => {
             }
 
             //@ts-expect-error: some error
-            froala.beforeUpload({ files, editor: this })
-            return true
+            const isAccepted = froala.beforeUpload({ files, editor: this })
+            return isAccepted
           },
           'image.inserted': function (_response: any): void {
             remindToSaveQuotationOnInsert()
