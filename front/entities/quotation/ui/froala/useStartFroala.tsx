@@ -64,6 +64,7 @@ export const useStartFroala = (): void => {
               return false
             }
 
+            //@ts-expect-error: some error
             froala.beforeUpload({ files, editor: this })
             return true
           },
@@ -78,6 +79,7 @@ export const useStartFroala = (): void => {
               return false
             }
 
+            //@ts-expect-error: some error
             froala.beforeUpload({ files, editor: this })
             return true
           },
@@ -92,6 +94,7 @@ export const useStartFroala = (): void => {
               return false
             }
 
+            //@ts-expect-error: some error
             froala.beforeUpload({ files, editor: this })
             return true
           },
