@@ -1,4 +1,4 @@
-import { useIsCopyContainer } from '@entities/copy'
+import { useIsCopyModalVisible } from '@entities/copy'
 import { openQuotationInfoModal } from '@features/open_close/open_info_modal'
 import { useSelectorTyped } from '@lib_instances/store'
 import { Box } from '@mui/material'
@@ -8,8 +8,8 @@ const DivForSymmetry = (): JSX.Element => <div style={{ width: '80px' }} />
 
 export const Info = (): React.ReactNode => {
   const quotationId = useSelectorTyped((state) => state.quotation.id)
-  const isCopyContainer = useIsCopyContainer()
-  const disabled = isCopyContainer
+  const isCopyModalVisible = useIsCopyModalVisible()
+  const disabled = isCopyModalVisible
 
   if (!quotationId) return <DivForSymmetry />
 

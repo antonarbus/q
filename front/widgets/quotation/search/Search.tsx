@@ -8,6 +8,7 @@ import { useSelectorTyped } from '@lib_instances/store'
 import { useGetBookmarksQuery } from '@entities/bookmark'
 import { useSignal } from '@preact/signals-react'
 import { useCopyBookmarkAtSearch } from '@features/bookmark/copy_bookmark'
+import { useIsCopyModalVisible } from '@entities/copy'
 
 export const Search = (): JSX.Element => {
   const {
@@ -33,16 +34,14 @@ export const Search = (): JSX.Element => {
 
   const isAutocompleteOpen = useSignal(false)
 
-  const isCopyContainer = useSelectorTyped(
-    (state) => state.copy.isCopyContainer,
-  )
+  const isCopyModalVisible = useIsCopyModalVisible()
 
   return (
     <Autocomplete
       open={isAutocompleteOpen.value}
       onOpen={() => (isAutocompleteOpen.value = true)}
       onClose={() => (isAutocompleteOpen.value = false)}
-      disabled={isCopyContainer}
+      disabled={isCopyModalVisible}
       className={cls.search}
       freeSolo={options.length !== 0} // show MUI autocomplete even if no options
       disablePortal

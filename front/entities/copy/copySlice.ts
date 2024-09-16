@@ -3,7 +3,7 @@ import type { Item } from '@entities/quotation'
 import type { CopyPlace } from './types'
 
 type Props = {
-  isCopyContainer: boolean
+  isVisible: boolean
   initCords: { x: number; y: number }
   items: Item[]
   previews: string[]
@@ -17,7 +17,7 @@ type Props = {
 }
 
 const initialState: Props = {
-  isCopyContainer: false,
+  isVisible: false,
   initCords: { x: 0, y: 0 },
   items: [],
   previews: [],
@@ -37,11 +37,11 @@ export const copySlice = createSlice({
   name: 'copy',
   initialState,
   reducers: {
-    showCopyContainer: (state) => {
-      state.isCopyContainer = true
+    showCopyModal: (state) => {
+      state.isVisible = true
     },
-    hideCopyContainer: (state) => initialState,
-    addItemIntoCopyContainer: (
+    hideCopyModal: (state) => initialState,
+    addItem: (
       state,
       action: PayloadAction<{
         item: Item
@@ -52,7 +52,7 @@ export const copySlice = createSlice({
       state.items.unshift(item)
       state.previews.unshift(item.preview ?? '')
     },
-    removeItemFromCopyContainer: (state) => {
+    removeItem: (state) => {
       state.items.shift()
       state.previews.shift()
       state.isCopying = false

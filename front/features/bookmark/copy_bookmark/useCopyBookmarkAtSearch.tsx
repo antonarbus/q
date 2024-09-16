@@ -42,9 +42,9 @@ export const useCopyBookmarkAtSearch = (): Res => {
 
       isFroalaSignal.value = false
 
-      dispatch(copySlice.actions.addItemIntoCopyContainer({ item }))
+      dispatch(copySlice.actions.addItem({ item }))
       dispatch(copySlice.actions.allowToPaste())
-      dispatch(copySlice.actions.showCopyContainer())
+      dispatch(copySlice.actions.showCopyModal())
     }
   }, [isSuccess])
 

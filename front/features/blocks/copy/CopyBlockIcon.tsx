@@ -50,16 +50,14 @@ export const CopyBlockIcon = (): JSX.Element => {
             const block = structuredClone(blockToCopy)
             block.preview = html
 
-            dispatch(
-              copySlice.actions.addItemIntoCopyContainer({ item: block }),
-            )
+            dispatch(copySlice.actions.addItem({ item: block }))
 
             dispatch(copySlice.actions.allowToPaste())
 
-            const isCopyContainer = getState().copy.isCopyContainer
+            const isCopyModalVisible = getState().copy.isVisible
 
-            if (!isCopyContainer) {
-              dispatch(copySlice.actions.showCopyContainer())
+            if (!isCopyModalVisible) {
+              dispatch(copySlice.actions.showCopyModal())
             }
           }}
         />

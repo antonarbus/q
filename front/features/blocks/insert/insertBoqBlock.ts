@@ -477,11 +477,11 @@ export const insertBoqBlock = (e?: MouseEvent): void => {
 
   isFroalaSignal.value = false
 
-  dispatch(copySlice.actions.addItemIntoCopyContainer({ item: boqBlock }))
+  dispatch(copySlice.actions.addItem({ item: boqBlock }))
 
-  const isCopyContainer = getState().copy.isCopyContainer
+  const isCopyModalVisible = getState().copy.isVisible
 
-  if (!isCopyContainer) {
-    dispatch(copySlice.actions.showCopyContainer())
+  if (!isCopyModalVisible) {
+    dispatch(copySlice.actions.showCopyModal())
   }
 }

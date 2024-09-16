@@ -5,12 +5,12 @@ import { Tooltip } from '@mui/material'
 import { cls } from '@shared/consts/cls'
 import { useRef, useState } from 'react'
 import { dragTooltipTextSignal } from './dragTooltipTextSignal'
-import { useIsCopyContainer } from '@entities/copy'
+import { useIsCopyModalVisible } from '@entities/copy'
 
 export const DragBlockIcon = (): JSX.Element => {
   const isLastBlock = useIsLastBlock()
-  const isCopyContainer = useIsCopyContainer()
-  const disabled = isLastBlock || isCopyContainer
+  const isCopyModalVisible = useIsCopyModalVisible()
+  const disabled = isLastBlock || isCopyModalVisible
   const { block } = useBlock()
   const { listeners, attributes, isDragging } = useSortable({
     id: block.id,

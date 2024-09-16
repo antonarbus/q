@@ -51,11 +51,11 @@ export const insertPriceBlock = (e?: MouseEvent): void => {
 
   isFroalaSignal.value = false
 
-  dispatch(copySlice.actions.addItemIntoCopyContainer({ item: block }))
+  dispatch(copySlice.actions.addItem({ item: block }))
 
-  const isCopyContainer = getState().copy.isCopyContainer
+  const isCopyModalVisible = getState().copy.isVisible
 
-  if (!isCopyContainer) {
-    dispatch(copySlice.actions.showCopyContainer())
+  if (!isCopyModalVisible) {
+    dispatch(copySlice.actions.showCopyModal())
   }
 }

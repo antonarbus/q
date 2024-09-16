@@ -27,9 +27,9 @@ export const CopyBookmarkButton = ({ id }: ReqBody): JSX.Element => {
 
       isFroalaSignal.value = false
 
-      dispatch(copySlice.actions.addItemIntoCopyContainer({ item }))
+      dispatch(copySlice.actions.addItem({ item }))
       dispatch(copySlice.actions.allowToPaste())
-      dispatch(copySlice.actions.showCopyContainer())
+      dispatch(copySlice.actions.showCopyModal())
     }
   }, [isSuccess])
 

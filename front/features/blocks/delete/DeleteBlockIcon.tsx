@@ -71,9 +71,9 @@ export const DeleteBlockIcon = (): EmotionJSX.Element => {
               dispatch(copySlice.actions.allowAllActions())
             }, 1000 * theme.block.animationDuration)
 
-            const isCopyContainer = getState().copy.isCopyContainer
+            const isCopyModalVisible = getState().copy.isVisible
 
-            if (!isCopyContainer) {
+            if (!isCopyModalVisible) {
               setTimeout(
                 () => {
                   isFroalaSignal.value = true

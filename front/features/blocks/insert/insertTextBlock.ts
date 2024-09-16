@@ -18,25 +18,25 @@ export const insertTextBlock = (e?: MouseEvent): void => {
           <div class="fr-wrapper MuiBox-root">
             <div class="fr-element fr-view MuiBox-root"
               style="padding: 30px 20px;">
-              <p>Add text, tables, drop images, files, links, select to format...</p>
+              <p>Add text, tables, drop images, drop <a href="/911.pdf" rel="noopener noreferrer" target="_blank">files</a>, links, select to <span style="color: rgb(226, 80, 65);">format</span>...</p>
             </div>
           </div>
         </div>
       </div>
     `,
     text: {
-      html: '<p>Add text, tables, drop images, files, links, select to format...</p>',
+      html: '<p>Add text, tables, drop images, drop <a href="/911.pdf" rel="noopener noreferrer" target="_blank">files</a>, links, select to <span style="color: rgb(226, 80, 65);">format</span>...</p>',
       value: null,
     },
   }
 
   isFroalaSignal.value = false
 
-  dispatch(copySlice.actions.addItemIntoCopyContainer({ item: block }))
+  dispatch(copySlice.actions.addItem({ item: block }))
 
-  const isCopyContainer = getState().copy.isCopyContainer
+  const isCopyModalVisible = getState().copy.isVisible
 
-  if (!isCopyContainer) {
-    dispatch(copySlice.actions.showCopyContainer())
+  if (!isCopyModalVisible) {
+    dispatch(copySlice.actions.showCopyModal())
   }
 }

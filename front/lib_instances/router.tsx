@@ -5,7 +5,7 @@ import { ErrorPage } from '@pages/error_page'
 import { InfoModal } from '@pages/info_modal'
 import { QuotationModal } from '@pages/quotation_modal'
 import { SettingsModal } from '@pages/settings_modal'
-import { CopyModal } from '@widgets/copy'
+import { Copy } from '@widgets/copy'
 import { Nav } from '@widgets/nav'
 import { AccessToken } from '@features/auth/get_access_token'
 import { Logout } from '@features/auth/log_out'
@@ -73,7 +73,7 @@ export const router = createBrowserRouter([
         <Toast />
         <LoadingDotsOverlay />
         <Nav />
-        <CopyModal />
+        <Copy />
         <Main />
       </>
     ),

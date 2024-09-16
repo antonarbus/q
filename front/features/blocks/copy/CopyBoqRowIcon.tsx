@@ -61,17 +61,17 @@ export const CopyBoqRowIcon = (): JSX.Element => {
             boqRowCloned.preview = html
 
             dispatch(
-              copySlice.actions.addItemIntoCopyContainer({
+              copySlice.actions.addItem({
                 item: boqRowCloned,
               }),
             )
 
             dispatch(copySlice.actions.allowToPaste())
 
-            const isCopyContainer = getState().copy.isCopyContainer
+            const isCopyModalVisible = getState().copy.isVisible
 
-            if (!isCopyContainer) {
-              dispatch(copySlice.actions.showCopyContainer())
+            if (!isCopyModalVisible) {
+              dispatch(copySlice.actions.showCopyModal())
             }
           }}
         />

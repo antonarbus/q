@@ -11,14 +11,14 @@ import { route } from '@shared/consts/route'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/consts/cls'
 import type { NavigateState } from '@shared/types/NavigateState'
-import { useIsCopyContainer } from '@entities/copy'
+import { useIsCopyModalVisible } from '@entities/copy'
 
 export const OpenInfoBoqRowModalIcon = (): ReactNode => {
   const navigate = useNavigate()
   const { blockIndex } = useBlock()
   const { rowIndex } = useRow()
-  const isCopyContainer = useIsCopyContainer()
-  const disabled = isCopyContainer
+  const isisCopyModalVisible = useIsCopyModalVisible()
+  const disabled = isisCopyModalVisible
 
   return (
     <Tooltip

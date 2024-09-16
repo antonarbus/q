@@ -4,7 +4,7 @@ import { navItemKey } from '@shared/consts/navItemKey'
 import { navSlice } from '@shared/nav'
 import { route } from '@shared/consts/route'
 
-export const useDisableNavItemsOnCopyContainer = (): void => {
+export const useDisableNavItemsOnCopyModal = (): void => {
   useEffectOnce(() => {
     dispatch(
       navSlice.actions.disableTopNavItems({

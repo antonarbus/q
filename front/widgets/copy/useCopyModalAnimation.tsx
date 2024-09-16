@@ -6,8 +6,8 @@ import { useFirstMountState } from 'react-use'
 import { copySlice } from '@entities/copy'
 import { containerPadding, containerWidth } from './const'
 
-export const useCopyContainerAnimation = (): AnimationControls => {
-  const copyContainerAnimationControls = useAnimationControls()
+export const useCopyModalAnimation = (): AnimationControls => {
+  const copyModalAnimationControls = useAnimationControls()
   const isFirstMount = useFirstMountState()
   const items = useSelectorTyped((state) => state.copy.items)
 
@@ -21,7 +21,7 @@ export const useCopyContainerAnimation = (): AnimationControls => {
     }, 70)
 
     if (isFirstMount) {
-      void copyContainerAnimationControls.start({
+      void copyModalAnimationControls.start({
         width: 'auto',
         transition: {
           delay: 0,
@@ -31,7 +31,7 @@ export const useCopyContainerAnimation = (): AnimationControls => {
       })
     }
 
-    void copyContainerAnimationControls.start({
+    void copyModalAnimationControls.start({
       height: newHeight,
       transition: {
         delay: 0,
@@ -47,5 +47,5 @@ export const useCopyContainerAnimation = (): AnimationControls => {
     }, 1000 * theme.block.animationDuration)
   }, [items.length])
 
-  return copyContainerAnimationControls
+  return copyModalAnimationControls
 }

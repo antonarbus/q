@@ -1,1 +1,1 @@
-export { CopyModal } from './CopyModal'
+export { Copy } from './Copy'

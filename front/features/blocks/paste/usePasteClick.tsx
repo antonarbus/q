@@ -23,9 +23,9 @@ const pasteItemOnClick = (): void => {
   if (!isPastable) return
 
   const { id, pastePos } = getState().copy.place
-  const topItemFromCopyContainer = getState().copy.items[0]
+  const topItemInCopyModal = getState().copy.items[0]
 
-  if (!topItemFromCopyContainer) return
+  if (!topItemInCopyModal) return
 
   if (pastePos === 'middle') {
     const elementToBeReplaced = document.getElementById(id)
@@ -42,24 +42,24 @@ const pasteItemOnClick = (): void => {
 
   dispatch(
     quotationSlice.actions.pasteItemReducer({
-      item: topItemFromCopyContainer,
+      item: topItemInCopyModal,
       id,
       newItemId,
       pastePos,
     }),
   )
 
-  dispatch(copySlice.actions.removeItemFromCopyContainer())
+  dispatch(copySlice.actions.removeItem())
   dispatch(copySlice.actions.forbidAllActions())
 
   setTimeout(() => {
     dispatch(copySlice.actions.allowAllActions())
   }, 1000 * theme.block.animationDuration)
 
-  const itemsInCopyContainer = getState().copy.items
+  const itemsInCopyModal = getState().copy.items
 
-  if (itemsInCopyContainer.length === 0) {
-    dispatch(copySlice.actions.hideCopyContainer())
+  if (itemsInCopyModal.length === 0) {
+    dispatch(copySlice.actions.hideCopyModal())
     dispatch(quotationSlice.actions.removePasteItemReducer())
 
     setTimeout(

@@ -13,13 +13,13 @@ import {
   useBlock,
 } from '@entities/quotation'
 import type { NavigateState } from '@shared/types/NavigateState'
-import { useIsCopyContainer } from '@entities/copy'
+import { useIsCopyModalVisible } from '@entities/copy'
 
 export const BookmarkBlockIcon = (): ReactNode => {
   const navigate = useNavigate()
   const { blockIndex } = useBlock()
-  const isCopyContainer = useIsCopyContainer()
-  const disabled = isCopyContainer
+  const isCopyModalVisible = useIsCopyModalVisible()
+  const disabled = isCopyModalVisible
 
   return (
     <Tooltip
