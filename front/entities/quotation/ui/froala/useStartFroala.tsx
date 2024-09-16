@@ -1,7 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 /* eslint-disable */
-
 // import './froalaPlugins.js'
 import './froalaPkg.js'
 import './froalaPkg.css'
@@ -14,6 +11,7 @@ import { useFroala } from '../../providers/FroalaProvider'
 import { froalaDefaultOptions } from './froalaDefaultOptions'
 import { remindToSaveQuotationOnInsert } from './remindToSaveQuotationOnInsert.js'
 import { notify } from '@shared/toast/notify.js'
+import { removeLoadingBar } from '@shared/lib/froala/removeLoadingBar.js'
 
 declare const window: Window &
   typeof globalThis & {
@@ -27,6 +25,7 @@ export const useStartFroala = (): void => {
 
   useEffectOnce(() => {
     const initFroalaInstance = (): void => {
+      //@ts-expect-error: some error
       const froalaInstance = new FroalaEditor(froala.froalaElementRef.current, {
         ...froalaDefaultOptions,
         placeholderText: froala.placeholder ?? 'Text...',
@@ -48,58 +47,66 @@ export const useStartFroala = (): void => {
 
             froala.onClick?.(e)
           },
-          keydown: (e: KeyboardEvent): void => {
+          keydown: (e: React.KeyboardEvent<Element>): void => {
             froala.onKeydown?.(e)
           },
           blur: (e: MouseEvent): void => {
             froala.onBlur?.(e)
           },
-          'image.beforeUpload': function (files): void {
+          'image.beforeUpload': function (files: any): boolean {
             if (froala.beforeUpload === undefined) {
               notify({
-                msg: 'may drop files into text block & description cell',
+                msg: 'May drop files into text block & description cell',
                 type: 'info',
               })
 
               removeLoadingBar()
               return false
             }
+
             froala.beforeUpload({ files, editor: this })
+            return true
           },
-          'file.beforeUpload': function (files): void {
+          'file.beforeUpload': function (files: any): boolean {
             if (froala.beforeUpload === undefined) {
               notify({
-                msg: 'may drop files into text block & description cell',
+                msg: 'May drop files into text block & description cell',
                 type: 'info',
               })
+
               removeLoadingBar()
               return false
             }
 
             froala.beforeUpload({ files, editor: this })
+            return true
           },
-          'video.beforeUpload': function (files): void {
+          'video.beforeUpload': function (files: any): boolean {
             if (froala.beforeUpload === undefined) {
               notify({
-                msg: 'may drop files into text block & description cell',
+                msg: 'May drop files into text block & description cell',
                 type: 'info',
               })
+
               removeLoadingBar()
               return false
             }
 
             froala.beforeUpload({ files, editor: this })
+            return true
           },
-          'image.inserted': function (response): void {
+          'image.inserted': function (_response: any): void {
             remindToSaveQuotationOnInsert()
           },
-          'file.inserted': function (response): void {
+          'file.inserted': function (response: any): void {
             remindToSaveQuotationOnInsert()
           },
-          'video.inserted': function (response): void {
+          'video.inserted': function (response: any): void {
             remindToSaveQuotationOnInsert()
           },
-          'file.unlink': function (link): void {
+          'file.unlink': function (link: {
+            getAttribute: (arg0: string) => any
+          }): void {
             const href = link.getAttribute('href')
             const isFileInBucket = href.includes('bucket')
             if (!isFileInBucket) return
@@ -115,7 +122,7 @@ export const useStartFroala = (): void => {
             }
           },
 
-          'image.removed': function ($img): void {
+          'image.removed': function ($img: any): void {
             // console.log($img.attr('src'))
           },
           'image.loaded': function (props: { '0': HTMLImageElement }): void {
