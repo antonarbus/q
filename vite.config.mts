@@ -20,7 +20,7 @@ export default defineConfig(({ command, mode }) => {
   return {
     root: './front/',
     server: {
-      host: true,
+      host: 'local.sendmequotation.today',
       port: portFront,
       // https: true, //* type "thisisunsafe" if chrome says that connection is not private
       proxy: {
