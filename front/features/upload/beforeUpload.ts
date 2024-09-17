@@ -3,6 +3,7 @@ import { getState } from '@lib_instances/store'
 import { removeLoadingBar } from '@shared/lib/froala/removeLoadingBar'
 import type { FroalaEditor } from '@shared/types/froala'
 import { getFileSizeInMb } from '@shared/utils/getFileSizeInMb'
+import { hideDraggableArea } from './showDraggableArea'
 
 type Props = {
   editor: FroalaEditor
@@ -10,6 +11,8 @@ type Props = {
 }
 
 export const beforeUpload = ({ files, editor }: Props): boolean => {
+  hideDraggableArea()
+
   const email = getState().user.email
 
   if (!email) {

@@ -1,7 +1,7 @@
 import { removeCookie } from '@shared/utils/cookie'
 import { useEffectOnce } from 'react-use'
 
-export const useRemoveCookies = (): void => {
+export const useRemoveThirdPartyCookies = (): void => {
   useEffectOnce(() => {
     removeCookie({ name: 'cmapi_gtm_bl' })
     removeCookie({ name: 'euconsent-v2' })
