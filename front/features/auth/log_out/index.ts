@@ -1,2 +1,2 @@
 export { Logout } from './Logout'
-export { useLogoutIfAccessTokenRemoved } from './useLogoutIfAccessTokenRemoved'
+export { useLogoutIfAccessTokenExpired as useLogoutIfAccessTokenRemoved } from './useLogoutIfAccessTokenExpired'
