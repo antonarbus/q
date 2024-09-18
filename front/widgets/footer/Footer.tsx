@@ -1,22 +1,29 @@
+import { MdAlternateEmail } from 'react-icons/md'
+
 export const Footer = (): JSX.Element => {
   return (
     <footer
       style={{
         position: 'fixed',
-        display: 'table',
-        textAlign: 'center',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         width: '100%',
-        margin: '0',
+        height: '24px',
         bottom: '0',
         left: '0',
         right: '0',
-        padding: '2px 0px',
-        backgroundColor: 'rgba(250, 250, 250, 0.9019607843)',
+        padding: '2px',
+        backgroundColor: 'rgba(250, 250, 250, 0.9)',
         borderTop: '1px solid #e0e0e0',
-        zIndex: '6666',
+        zIndex: '666',
       }}
     >
-      footer
+      <MdAlternateEmail
+        style={{
+          cursor: 'pointer',
+        }}
+      />
     </footer>
   )
 }
