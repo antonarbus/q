@@ -12,13 +12,13 @@ import { GlobalStyles } from './GlobalStyles'
 import { ReactQueryDevtoolsProductionHidden } from './ReactQueryDevtoolsProductionHidden'
 import './signalsDevTools'
 import '@shared/utils/cursorPosSignal'
-import { useHideHtmlElements } from '@features/init_load/useHideHtmlElements'
+import { useHideInitHtmlElements } from '@features/init_load/useHideInitHtmlElements'
 import { useOnDragOnDrop } from '@features/upload/useOnDragOnDrop'
 import { useRemoveThirdPartyCookies } from '@features/init_load/useRemoveThirdPartyCookies'
 
 export const App = (): JSX.Element => {
   useLogoutIfAccessTokenRemoved()
-  useHideHtmlElements()
+  useHideInitHtmlElements()
   useOnDragOnDrop()
   useRemoveThirdPartyCookies()
 
