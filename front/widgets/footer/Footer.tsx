@@ -24,7 +24,6 @@ export const Footer = (): JSX.Element => {
       <TooltipWithNoMaxWidth
         title='Ask question, send feedback, bug report or feature request'
         placement='top'
-        leaveDelay={100000}
       >
         <a
           href='mailto:info@sendmequotation.today'
