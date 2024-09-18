@@ -19,6 +19,7 @@ import { ActivationModal } from '@pages/auth_activation_modal'
 import { ResetPasswordModal } from '@pages/auth_reset_password_modal'
 import { UnauthorizedPage } from '@pages/auth_unauthorized_page'
 import { Toast } from '@shared/toast'
+import { Footer } from '@widgets/footer'
 
 const Quotation = React.lazy(async () => {
   return import('@pages/quotation_page')
@@ -75,6 +76,7 @@ export const router = createBrowserRouter([
         <Nav />
         <Copy />
         <Main />
+        <Footer />
       </>
     ),
     children: [
