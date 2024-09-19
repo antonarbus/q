@@ -7,7 +7,7 @@ import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
 import { loadingTableOverlaySignal } from '@shared/components/LoadingTableOverlay'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { resolveInitAccessTokenFetching } from '@shared/lib/axios/axiosWithAuth'
-import { navSlice } from '@shared/nav'
+import { navSlice, showLoadingNavIcon } from '@shared/nav'
 
 export const AccessToken = (): JSX.Element => {
   const {
@@ -28,6 +28,8 @@ export const AccessToken = (): JSX.Element => {
   // show jumping dots at table
   useUpdateEffect(() => {
     if (isFetching) {
+      showLoadingNavIcon({ navMenuItemIdKey: navItemKey.login })
+
       loadingTableOverlaySignal.value = {
         areJumpingDotsShown: true,
         text: 'Checking credentials',
@@ -67,6 +69,12 @@ export const AccessToken = (): JSX.Element => {
         }),
       )
 
+      dispatch(
+        navSlice.actions.hideLoadingIcon({
+          navMenuItemIdKey: navItemKey.login,
+        }),
+      )
+
       resolveInitAccessTokenFetching('fetched')
     }
   }, [isSuccess])
@@ -87,6 +95,12 @@ export const AccessToken = (): JSX.Element => {
       dispatch(
         navSlice.actions.hideNavItems({
           navItemIdKeys: [navItemKey.profile],
+        }),
+      )
+
+      dispatch(
+        navSlice.actions.hideLoadingIcon({
+          navMenuItemIdKey: navItemKey.profile,
         }),
       )
 

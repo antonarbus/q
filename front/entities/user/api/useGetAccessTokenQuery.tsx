@@ -3,6 +3,7 @@ import { apiUrl } from '@back/consts/apiUrl'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import axios, { type AxiosError, type AxiosResponse } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
+import { asyncDelay } from '@shared/utils/delay'
 
 export const useGetAccessTokenQuery = (): UseQueryResult<
   ResBody,
