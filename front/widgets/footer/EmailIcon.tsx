@@ -5,7 +5,7 @@ import { MdAlternateEmail } from 'react-icons/md'
 export const EmailIcon = (): JSX.Element => {
   return (
     <TooltipWithNoMaxWidth
-      title='Ask question, send feedback, bug report or feature request'
+      title='Ask a question, send feedback, report a bug, or a feature request'
       placement='top'
     >
       <a
