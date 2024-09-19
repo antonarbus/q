@@ -11,6 +11,11 @@ export const useGetBookmarkCategoriesQuery = (): UseQueryResult<
 > => {
   const query = useQuery<ResBody, AxiosError<ResBody>>({
     queryKey: [queryKey.getBookmarkCategories],
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    staleTime: 0,
+    retry: 0,
     queryFn: async () => {
       const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
         url: apiUrl.getBookmarkCategories,
@@ -19,13 +24,6 @@ export const useGetBookmarkCategoriesQuery = (): UseQueryResult<
 
       return res.data
     },
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
-    staleTime: 0,
-    retry: 0,
-    // enabled: false,
-    // gcTime: Infinity,
   })
 
   return query

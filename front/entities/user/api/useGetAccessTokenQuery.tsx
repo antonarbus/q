@@ -3,7 +3,6 @@ import { apiUrl } from '@back/consts/apiUrl'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import axios, { type AxiosError, type AxiosResponse } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
-import { asyncDelay } from '@shared/utils/delay'
 
 export const useGetAccessTokenQuery = (): UseQueryResult<
   ResBody,
@@ -11,6 +10,12 @@ export const useGetAccessTokenQuery = (): UseQueryResult<
 > => {
   const query = useQuery<ResBody, AxiosError<ResBody>>({
     queryKey: [queryKey.getAccessToken],
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    staleTime: 0,
+    retry: 1,
+    enabled: false,
     queryFn: async () => {
       const res = await axios<ResBody, AxiosResponse<ResBody>>({
         url: apiUrl.getAccessToken,
@@ -21,12 +26,6 @@ export const useGetAccessTokenQuery = (): UseQueryResult<
 
       return res.data
     },
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
-    staleTime: 0,
-    retry: 1,
-    enabled: false,
   })
 
   return query

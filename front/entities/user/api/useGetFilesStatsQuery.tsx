@@ -11,6 +11,12 @@ export const useGetFilesStatsQuery = (): UseQueryResult<
 > => {
   const query = useQuery<ResBody, AxiosError<ResBody>>({
     queryKey: [queryKey.getFilesStats],
+    refetchOnMount: true,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    staleTime: 0,
+    retry: 0,
+    enabled: true,
     queryFn: async () => {
       const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
         url: apiUrl.getFilesStats,
@@ -20,12 +26,6 @@ export const useGetFilesStatsQuery = (): UseQueryResult<
 
       return res.data
     },
-    refetchOnMount: true,
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
-    staleTime: 0,
-    retry: 0,
-    enabled: true,
   })
 
   return query

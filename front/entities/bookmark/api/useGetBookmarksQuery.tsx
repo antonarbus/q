@@ -12,23 +12,21 @@ export const useGetBookmarksQuery = (): UseQueryResult<
 > => {
   const query = useQuery<ResBody, AxiosError<ResBody>>({
     queryKey: [queryKey.getBookmarks],
-    queryFn: async ({ signal }) => {
-      const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
-        url: apiUrl.getBookmarks,
-        method: 'get',
-        signal,
-      })
-      // await asyncDelay(10000)
-
-      return res.data
-    },
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     staleTime: 0,
     retry: 0,
     enabled: false,
-    // gcTime: Infinity,
+    queryFn: async ({ signal }) => {
+      const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
+        url: apiUrl.getBookmarks,
+        method: 'get',
+        signal,
+      })
+
+      return res.data
+    },
   })
 
   return query
