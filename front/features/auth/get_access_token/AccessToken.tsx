@@ -70,7 +70,7 @@ export const AccessToken = (): JSX.Element => {
       )
 
       dispatch(
-        navSlice.actions.hideLoadingIcon({
+        navSlice.actions.stopLoadingIcon({
           navMenuItemIdKey: navItemKey.login,
         }),
       )
@@ -99,8 +99,8 @@ export const AccessToken = (): JSX.Element => {
       )
 
       dispatch(
-        navSlice.actions.hideLoadingIcon({
-          navMenuItemIdKey: navItemKey.profile,
+        navSlice.actions.stopLoadingIcon({
+          navMenuItemIdKey: navItemKey.login,
         }),
       )
 

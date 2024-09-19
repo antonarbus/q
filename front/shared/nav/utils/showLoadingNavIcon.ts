@@ -7,5 +7,5 @@ type Props = {
 }
 
 export const showLoadingNavIcon = ({ navMenuItemIdKey }: Props): void => {
-  dispatch(navSlice.actions.showLoadingIcon({ navMenuItemIdKey }))
+  dispatch(navSlice.actions.startLoadingIcon({ navMenuItemIdKey }))
 }

@@ -84,7 +84,7 @@ export const navSlice = createSlice({
     setMenuItemHoverIndex: (state, action: PayloadAction<number>) => {
       state.menuItemHoverIndex = action.payload
     },
-    showLoadingIcon: (
+    startLoadingIcon: (
       state,
       action: PayloadAction<{
         navMenuItemIdKey: NavItemIdKey
@@ -99,7 +99,7 @@ export const navSlice = createSlice({
         value: true,
       })
     },
-    hideLoadingIcon: (
+    stopLoadingIcon: (
       state,
       action: PayloadAction<{
         navMenuItemIdKey: NavItemIdKey

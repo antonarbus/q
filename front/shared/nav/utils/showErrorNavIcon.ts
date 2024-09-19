@@ -8,7 +8,7 @@ type Props = {
 
 export const showErrorNavIcon = ({ navMenuItemIdKey }: Props): void => {
   setTimeout(() => {
-    dispatch(navSlice.actions.hideLoadingIcon({ navMenuItemIdKey }))
+    dispatch(navSlice.actions.stopLoadingIcon({ navMenuItemIdKey }))
     dispatch(navSlice.actions.showErrorIcon({ navMenuItemIdKey }))
   }, 1000)
 

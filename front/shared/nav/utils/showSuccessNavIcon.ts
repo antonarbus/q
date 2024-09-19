@@ -8,7 +8,7 @@ type Props = {
 
 export const showSuccessNavIcon = ({ navMenuItemIdKey }: Props): void => {
   setTimeout(() => {
-    dispatch(navSlice.actions.hideLoadingIcon({ navMenuItemIdKey }))
+    dispatch(navSlice.actions.stopLoadingIcon({ navMenuItemIdKey }))
     dispatch(navSlice.actions.showSuccessIcon({ navMenuItemIdKey }))
   }, 1000)
 
