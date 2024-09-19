@@ -27,6 +27,18 @@ export const removeSensitiveDataFromQuotation = ({
     delete block.info
     delete block.createdAt
     delete block.updatedAt
+
+    if (block.type === 'boq') {
+      block.boq.rows.forEach((row) => {
+        row.email = 'john@mail.com'
+        delete row.name
+        delete row.category
+        delete row.desc
+        delete row.info
+        delete row.createdAt
+        delete row.updatedAt
+      })
+    }
   })
 
   return quotation
