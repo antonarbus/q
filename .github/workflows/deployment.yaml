@@ -72,7 +72,7 @@ jobs:
         run: npm run test
 
       - name: Formatting check
-        run: npm run prettier_check
+        run: npm run prettier
 
       - name: Run typescript checks
         run: npm run tsc
