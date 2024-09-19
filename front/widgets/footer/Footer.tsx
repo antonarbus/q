@@ -1,6 +1,4 @@
-import { theme } from '@lib_instances/theme'
-import { TooltipWithNoMaxWidth } from '@shared/components/TooltipWithNoMaxWidth'
-import { MdAlternateEmail } from 'react-icons/md'
+import { EmailIcon } from './EmailIcon'
 
 export const Footer = (): JSX.Element => {
   return (
@@ -21,26 +19,7 @@ export const Footer = (): JSX.Element => {
         zIndex: '666',
       }}
     >
-      <TooltipWithNoMaxWidth
-        title='Ask question, send feedback, bug report or feature request'
-        placement='top'
-      >
-        <a
-          href='mailto:info@sendmequotation.today'
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            color: theme.colors.grey,
-          }}
-        >
-          <MdAlternateEmail
-            style={{
-              cursor: 'pointer',
-            }}
-          />
-        </a>
-      </TooltipWithNoMaxWidth>
+      <EmailIcon />
     </footer>
   )
 }
