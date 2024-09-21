@@ -8,20 +8,24 @@ import { verifyAccessTokenMiddleware } from '../../middleware/verifyAccessTokenM
 import { bucket, storageFolderName } from '../../services/storage'
 import type { ResWithBody, ReqWithBody, Next } from '../../types'
 import { getEmailFromRefreshTokenOrThrowUnauthorized } from '../../utils/getEmailFromRefreshTokenOrThrowUnauthorized'
+import { nanoid } from '@back/lib/nanoid'
 
 export type ReqBody = {
   quotation: Quotation
 }
 
+type Message =
+  | ErrorMessageCommon
+  | 'not saved'
+  | 'saved'
+  | 'updated'
+  | 'copied and saved'
+  | 'id is not provided'
+  | 'name is not provided'
+  | 'category is not provided'
+
 export type ResBody = {
-  message:
-    | ErrorMessageCommon
-    | 'not saved'
-    | 'saved'
-    | 'updated'
-    | 'id is not provided'
-    | 'name is not provided'
-    | 'category is not provided'
+  message: Message
   quotation?: FlattenMaps<Quotation>
 }
 
@@ -45,12 +49,25 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
         .json({ message: 'id is not provided' })
     }
 
-    const existingQuotation = await QuotationModel.findOne({
-      id: quotation.id,
-      email,
-    })
+    const isExistingYourQuotation =
+      (await QuotationModel.findOne({
+        id: quotation.id,
+        email,
+      })) !== null
 
-    const isNew = existingQuotation === null
+    const isNewQuotation =
+      (await QuotationModel.findOne({
+        id: quotation.id,
+      })) === null
+
+    const isExistingForeignQuotationSavedAsYourNew =
+      !isNewQuotation && !isExistingYourQuotation
+
+    const isNew = isNewQuotation || isExistingForeignQuotationSavedAsYourNew
+
+    const id = isExistingForeignQuotationSavedAsYourNew
+      ? nanoid(5)
+      : quotation.id
 
     const quotationDataFromDb = await QuotationModel.findOneAndUpdate(
       {
@@ -58,7 +75,7 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
         email,
       },
       {
-        id: quotation.id,
+        id,
         email,
         name: quotation.name,
         category: quotation.category,
@@ -78,11 +95,7 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
       .select({ _id: 0, __v: 0 })
       .lean()
 
-    // if (!quotationDataFromDb) {
-    //   return res.status(httpStatus.forbidden_403).json({ message: 'not saved' })
-    // }
-
-    const filePath = `${email}/${storageFolderName.quotations}/${quotation.id}.json`
+    const filePath = `${email}/${storageFolderName.quotations}/${id}.json`
     const file = bucket.file(filePath)
     const contents = JSON.stringify(
       { ...quotationDataFromDb, blocks: quotation.blocks },
@@ -91,8 +104,14 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
     )
     await file.save(contents)
 
+    let message: Message = 'saved'
+
+    if (isNewQuotation) message = 'saved'
+    if (isExistingYourQuotation) message = 'updated'
+    if (isExistingForeignQuotationSavedAsYourNew) message = 'copied and saved'
+
     return res.status(httpStatus.success_200).json({
-      message: isNew ? 'saved' : 'updated',
+      message,
       quotation: { ...quotationDataFromDb, blocks: quotation.blocks },
     })
   } catch (error) {

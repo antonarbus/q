@@ -8,14 +8,18 @@ type Props = {
   quotation: Quotation
 }
 
-export const getWhoQuotationSharedWithOption = ({
-  quotation,
-}: Props): SharedWithOption => {
-  if (quotation.sharedWith?.length === 0) {
+type Res = SharedWithOption
+
+export const getWhoQuotationSharedWithOption = (props: Props): Res => {
+  if (props.quotation.sharedWith === undefined) {
     return sharedWithOption.nobody
   }
 
-  if (quotation.sharedWith?.includes('*')) {
+  if (props.quotation.sharedWith.length === 0) {
+    return sharedWithOption.nobody
+  }
+
+  if (props.quotation.sharedWith.includes('*')) {
     return sharedWithOption.everybody
   }
 

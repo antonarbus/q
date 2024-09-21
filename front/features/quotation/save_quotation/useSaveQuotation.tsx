@@ -21,6 +21,7 @@ import {
 import { notify } from '@shared/toast'
 import { slideElement } from '@shared/utils/slideElement'
 import type { QuotationFormValues } from '@entities/quotation/types'
+import { route } from '@shared/consts/route'
 
 type Props = {
   modalRef: React.RefObject<HTMLDivElement>
@@ -62,18 +63,35 @@ export const useSaveQuotation = ({
 
   useUpdateEffect(() => {
     if (isSuccess) {
-      notify({
-        msg: data.message === 'saved' ? 'Saved' : 'Updated',
-        type: data.message === 'saved' ? 'success' : 'info',
-        theme: 'dark',
-        position: 'bottom-center',
-      })
+      if (data.message === 'saved') {
+        notify({
+          msg: 'Saved',
+          type: 'success',
+          theme: 'dark',
+          position: 'bottom-center',
+        })
+      }
+
+      if (data.message === 'updated') {
+        notify({
+          msg: 'Updated',
+          type: 'info',
+          theme: 'dark',
+          position: 'bottom-center',
+        })
+      }
+
+      if (data.message === 'copied and saved') {
+        notify({
+          msg: 'Shared quotation was copied and saved',
+          type: 'success',
+          theme: 'dark',
+          position: 'bottom-center',
+        })
+      }
 
       void updateCategories()
       void fetchQuotations()
-
-      const existingId = getState().quotation.id
-      const isNewQuotation = existingId === 'new'
 
       if (data.quotation) {
         dispatch(
@@ -97,9 +115,15 @@ export const useSaveQuotation = ({
             element: modalRef.current,
             onSlideElementComplete: () => {
               const id = data.quotation?.id
-              if (!id) return
-              const navigateTo = isNewQuotation ? `/${id}` : '..'
-              navigate(navigateTo, { replace: true })
+              const isQuotationsPage = window.location.pathname.includes(
+                route.quotations,
+              )
+
+              if (isQuotationsPage) {
+                navigate('..', { replace: true })
+              } else {
+                navigate(`/${id}`, { replace: true })
+              }
             },
           })
         }, 1000)

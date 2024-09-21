@@ -32,9 +32,9 @@ export const QuotationModal = (): JSX.Element => {
     <FormModal
       modalRef={modalRef}
       width='500px'
-      headerText={`${getState().quotation.id === 'new' ? 'Save' : 'Update'} quotation`}
+      headerText='Save quotation'
       headerIcon={<MdSaveAlt />}
-      buttonText={getState().quotation.id === 'new' ? 'SAVE' : 'UPDATE'}
+      buttonText='Save'
       isButtonDisabled={isButtonDisabled}
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
