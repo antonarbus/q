@@ -33,7 +33,7 @@ export const OpenInfoBoqRowModalIcon = (): ReactNode => {
           tabIndex={-1}
           style={{
             color: disabled ? '#acacac' : '#000',
-            cursor: disabled ? 'default' : 'move',
+            cursor: 'pointer',
             touchAction: 'none',
           }}
           onClick={(e: MouseEvent): void => {
