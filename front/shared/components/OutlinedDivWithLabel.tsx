@@ -1,21 +1,15 @@
 import { type SxProps, TextField } from '@mui/material'
 import { forwardRef } from 'react'
 
-type InputComponentProps = {
-  [key: string]: unknown
-  ownerState: unknown
-}
+type InputComponentProps = Record<string, unknown>
 
 const InputComponent = forwardRef(function InputComp(
   props: InputComponentProps,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { ownerState, ...other } = props
-
   return (
     <div
-      {...other}
+      {...props}
       ref={ref}
       css={{
         overflow: 'hidden',
