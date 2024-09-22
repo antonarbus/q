@@ -7,9 +7,15 @@ const InputComponent = forwardRef(function InputComp(
   props: InputComponentProps,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
+  // remove ownState from props otherwise DOM error is thrown
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { ownerState, ...other } = props
+
   return (
     <div
-      {...props}
+      {...other}
+      // {...other.ownerState}
+      // {...ownerState}
       ref={ref}
       css={{
         overflow: 'hidden',
