@@ -9,7 +9,7 @@ type InputComponentProps = {
 const InputComponent = forwardRef(function InputComp(
   props: InputComponentProps,
   ref: React.ForwardedRef<HTMLDivElement>,
-): React.JSX.Element {
+) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { ownerState, ...other } = props
 
@@ -41,12 +41,14 @@ export const OutlinedDivWithLabel = ({
       fullWidth
       focused
       label={label}
-      inputProps={{
-        children,
-      }}
-      InputProps={{
-        slots: {
-          input: InputComponent,
+      slotProps={{
+        htmlInput: {
+          children,
+        },
+        input: {
+          slots: {
+            input: InputComponent,
+          },
         },
       }}
       sx={{
