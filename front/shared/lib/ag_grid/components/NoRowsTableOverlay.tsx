@@ -1,6 +1,6 @@
 import { accessTokenSignal } from '../../../auth/accessTokenSignal'
 
-export const NoRowsTableOverlay = (): JSX.Element | null => {
+export const NoRowsTableOverlay = (): React.JSX.Element | null => {
   return (
     <div
       css={{

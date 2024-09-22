@@ -6,7 +6,7 @@ export const loadingTableOverlaySignal = signal({
   text: '',
 })
 
-export const LoadingTableOverlay = (): JSX.Element | null => {
+export const LoadingTableOverlay = (): React.JSX.Element | null => {
   return (
     <div
       css={{

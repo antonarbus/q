@@ -1,6 +1,6 @@
 import { useRouteError } from 'react-router-dom'
 
-export const ErrorPage = (): JSX.Element => {
+export const ErrorPage = (): React.JSX.Element => {
   const error = useRouteError() as Error
   console.error(error)
 

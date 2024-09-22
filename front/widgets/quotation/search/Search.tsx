@@ -10,7 +10,7 @@ import { useSignal } from '@preact/signals-react'
 import { useCopyBookmarkAtSearch } from '@features/bookmark/copy_bookmark'
 import { useIsCopyModalVisible } from '@entities/copy'
 
-export const Search = (): JSX.Element => {
+export const Search = (): React.JSX.Element => {
   const {
     data: bookmarksData,
     isPending: isPendingBookmarks,

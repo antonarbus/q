@@ -4,7 +4,7 @@ import { useIsBoqRowSortDisabled, useRow } from '@entities/quotation'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/consts/cls'
 
-export const DragBoqRowIcon = (): JSX.Element => {
+export const DragBoqRowIcon = (): React.JSX.Element => {
   const disabled = useIsBoqRowSortDisabled()
   const { row } = useRow()
 

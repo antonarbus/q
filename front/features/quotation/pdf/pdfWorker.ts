@@ -8,7 +8,7 @@ self.onmessage = (
   }>,
 ): void => {
   const { imageData, width, height } = event.data
-  // eslint-disable-next-line new-cap
+
   const pdf = new jsPDF({
     orientation: width > height ? 'landscape' : 'portrait',
     unit: 'px',

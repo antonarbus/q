@@ -5,7 +5,7 @@ type Props = {
   dropFilesTextRef: React.RefObject<HTMLDivElement>
 }
 
-export const DropFilesText = (props: Props): JSX.Element => {
+export const DropFilesText = (props: Props): React.JSX.Element => {
   return (
     <Box
       ref={props.dropFilesTextRef}

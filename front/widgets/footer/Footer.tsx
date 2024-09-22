@@ -1,7 +1,7 @@
 import { EmailIcon } from './EmailIcon'
 import { FooterLayout } from './FooterLayout'
 
-export const Footer = (): JSX.Element => {
+export const Footer = (): React.JSX.Element => {
   return (
     <FooterLayout>
       <EmailIcon />

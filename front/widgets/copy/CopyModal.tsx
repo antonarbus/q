@@ -10,7 +10,7 @@ import { RestOfCopiedItems } from './RestOfCopiedItems'
 import { useCopyModalAnimation } from './useCopyModalAnimation'
 import { useDisableNavItemsOnCopyModal } from './useDisableNavItemsOnCopyModal'
 
-export const CopyModal = (): JSX.Element => {
+export const CopyModal = (): React.JSX.Element => {
   useMovePasteText()
   usePasteClick()
   useDisableNavItemsOnCopyModal()

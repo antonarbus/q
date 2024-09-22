@@ -7,7 +7,7 @@ type Props = {
   categorySignal: Signal<string>
 }
 
-export const CategoryField = ({ categorySignal }: Props): JSX.Element => {
+export const CategoryField = ({ categorySignal }: Props): React.JSX.Element => {
   const { data } = useGetQuotationCategoriesQuery()
 
   return (

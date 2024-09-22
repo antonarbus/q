@@ -5,28 +5,33 @@ import prettierConfig from 'eslint-config-prettier'
 import tseslint from 'typescript-eslint'
 
 export default [
-  { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
+  {
+    files: [
+      'back/*.{js,mjs,cjs,ts,jsx,tsx}',
+      'front/*.{js,mjs,cjs,ts,jsx,tsx}',
+    ],
+  },
   {
     ignores: [
       '**/build/',
       '**/froalaPkg.js',
       '**/coverage/',
       '**/node_modules/',
-      '/',
     ],
   },
-  { languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } } },
-  { languageOptions: { globals: { ...globals.browser, ...globals.node } } },
   {
     languageOptions: {
+      globals: { ...globals.browser, ...globals.node },
       parserOptions: {
         project: ['tsconfig.json'],
         tsconfigDirName: import.meta.dirname,
+        ecmaFeatures: { jsx: true },
       },
     },
   },
-  { settings: { react: { version: 'detect' } } },
+  { settings: { react: { version: '18' } } },
   // pluginJs.configs.recommended,
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   pluginJs.configs.all,
   pluginReactConfig,
   // ...tseslint.configs.strictTypeChecked,

@@ -16,7 +16,7 @@ import { quotationSlice } from '@entities/quotation'
 import { dispatch } from '@lib_instances/store'
 import { router } from '@lib_instances/router'
 
-export const BookmarkModal = (): JSX.Element => {
+export const BookmarkModal = (): React.JSX.Element => {
   const modalRef = useRef<HTMLDivElement>(null)
   const { bookmarkFromValues } = useLoadInitValuesIntoBookmarkModal()
   useLoadBookmarkModalOpenedWithDirectLink({ bookmarkFromValues })

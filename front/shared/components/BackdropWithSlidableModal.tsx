@@ -18,7 +18,7 @@ export const BackdropWithSlidableModal = ({
   onUnmount,
   shouldUnmountOnClickAway,
   shouldUnmountOnEsc,
-}: Props): JSX.Element => {
+}: Props): React.JSX.Element => {
   const contentRef = useRef<HTMLDivElement>(null)
   const location = useLocation() as Location<NavigateState>
 

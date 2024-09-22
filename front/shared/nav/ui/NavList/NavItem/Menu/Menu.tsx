@@ -53,7 +53,7 @@ export const MenuStyled = styled.div<Props>`
   }
 `
 
-export const Menu = (): JSX.Element => {
+export const Menu = (): React.JSX.Element => {
   const menuContainerRef = useRef<HTMLDivElement>(null)
   const currentMenuRef = useRef<HTMLDivElement>(null)
   const nextMenuRef = useRef<HTMLDivElement>(null)

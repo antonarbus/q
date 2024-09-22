@@ -11,7 +11,7 @@ import { ItemActionButtonsLayout } from '@shared/layouts/ItemActionButtonsLayout
 import { PriceHeader } from './price_header/PriceHeader'
 import { PriceMain } from './price_main/PriceMain'
 
-export const PriceBlock = (): JSX.Element => {
+export const PriceBlock = (): React.JSX.Element => {
   return (
     <BlockComp
       className={cls.priceBlock}

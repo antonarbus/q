@@ -2,7 +2,7 @@ import { useSelectorTyped } from '@lib_instances/store'
 import { NavItem } from './NavItem'
 import { Burger } from './NavItem/Burger'
 
-export const NavList = (): JSX.Element => {
+export const NavList = (): React.JSX.Element => {
   const navStructure = useSelectorTyped((state) => state.nav.navStructure)
 
   return (

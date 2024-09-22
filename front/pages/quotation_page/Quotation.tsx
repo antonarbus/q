@@ -8,7 +8,7 @@ import { BackgroundMessage } from '@entities/quotation'
 import { InfoAndSearchLayout } from './InfoAndSearchLayout'
 import { arrayShapesEqualityFn } from '@shared/lib/redux/arrayShapesEqualityFn'
 
-export const Quotation = (): JSX.Element => {
+export const Quotation = (): React.JSX.Element => {
   useLoadQuotation()
 
   const blocks = useSelectorTyped(

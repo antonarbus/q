@@ -10,7 +10,7 @@ type Props = {
   children: React.ReactNode
 }
 
-const QuotationFieldLayout = ({ children }: Props): JSX.Element => {
+const QuotationFieldLayout = ({ children }: Props): React.JSX.Element => {
   useEffectOnce(() => {
     isFroalaSignal.value = true
   })

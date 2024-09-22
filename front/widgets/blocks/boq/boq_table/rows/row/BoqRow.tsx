@@ -17,7 +17,7 @@ type Props = {
   onBlur: (e: FocusEvent<HTMLDivElement>) => void
 }
 
-export const BoqRow = ({ onBlur }: Props): JSX.Element => {
+export const BoqRow = ({ onBlur }: Props): React.JSX.Element => {
   return (
     <BoqRowLayout onBlur={onBlur}>
       <BoqRowActionButtonsLayout style={{ left: '-33px' }}>

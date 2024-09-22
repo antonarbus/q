@@ -11,7 +11,7 @@ import type { FroalaEditor } from '@shared/types/froala'
 
 const boqHeaderKey: HeaderKey = 'title'
 
-export const Title = (): JSX.Element => {
+export const Title = (): React.JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
   const { blockIndex } = useBlock()
 

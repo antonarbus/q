@@ -6,7 +6,7 @@ import {
 import { ResizableColumn } from '../ResizableColumn'
 import { Box } from '@mui/material'
 
-export const ItemPriceColumn = (): JSX.Element => {
+export const ItemPriceColumn = (): React.JSX.Element => {
   return (
     <ResizableColumn
       boqColumnKey={boqColumnKey.itemPrice}

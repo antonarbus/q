@@ -30,7 +30,7 @@ export const EmailField = ({
   onClickAway,
   label,
   autoFocus,
-}: Props): JSX.Element => {
+}: Props): React.JSX.Element => {
   const emailSuggestionSignal = useSignal('')
   const initEmailLabel = label ?? 'Email'
   const emailLabelSignal = useSignal(initEmailLabel)

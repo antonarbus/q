@@ -6,7 +6,7 @@ type Props = {
   style?: CSSProperties
 }
 
-export const RotatingLoaderIcon = ({ style }: Props): JSX.Element => {
+export const RotatingLoaderIcon = ({ style }: Props): React.JSX.Element => {
   return (
     <FiLoader
       css={css`

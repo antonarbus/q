@@ -6,7 +6,7 @@ type Props = {
   children: React.ReactNode
 }
 
-export const BoqRowSortable = ({ children }: Props): JSX.Element => {
+export const BoqRowSortable = ({ children }: Props): React.JSX.Element => {
   const { row } = useRow()
   const { setNodeRef, transform, transition, isDragging } = useSortable({
     id: row.id,

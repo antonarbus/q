@@ -4,7 +4,7 @@ type Props = {
   children: React.ReactNode
 }
 
-export const InfoAndSearchLayout = ({ children }: Props): JSX.Element => {
+export const InfoAndSearchLayout = ({ children }: Props): React.JSX.Element => {
   return (
     <Box
       sx={{

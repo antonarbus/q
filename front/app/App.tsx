@@ -16,7 +16,7 @@ import { useHideInitHtmlElements } from '@features/init_load/useHideInitHtmlElem
 import { useOnDragOnDrop } from '@features/upload/useOnDragOnDrop'
 import { useRemoveThirdPartyCookies } from '@features/init_load/useRemoveThirdPartyCookies'
 
-export const App = (): JSX.Element => {
+export const App = (): React.JSX.Element => {
   useLogoutIfAccessTokenRemoved()
   useHideInitHtmlElements()
   useOnDragOnDrop()

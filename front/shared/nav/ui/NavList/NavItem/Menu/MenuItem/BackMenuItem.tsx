@@ -8,7 +8,7 @@ import { navigateInMenu } from '../functions/useMenuAnimation'
 import { MenuItemStyled } from './MenuItemStyled'
 import { TextInMenu } from './TextInMenu'
 
-export const BackMenuItem = (): JSX.Element => {
+export const BackMenuItem = (): React.JSX.Element => {
   const isHovered = useSelectorTyped(
     (state) => state.nav.menuItemHoverIndex === 1,
   )

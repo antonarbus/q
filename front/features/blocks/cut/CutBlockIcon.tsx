@@ -16,7 +16,7 @@ import { fixElementDimensionStyle } from '@shared/utils/fixElementDimensionStyle
 import { Tooltip } from '@mui/material'
 import { getClosestPaperElementHtml } from '@shared/utils/htmlGetter/getClosestPaperElementHtml'
 
-export const CutBlockIcon = (): JSX.Element => {
+export const CutBlockIcon = (): React.JSX.Element => {
   const { blockIndex } = useBlock()
   const isBlockAlone = useSelectorTyped(selectIsLastBlock)
   const isCuttable = useSelectorTyped((state) => state.copy.isCuttable)

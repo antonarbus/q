@@ -31,7 +31,7 @@ type Props = {
 export const ShareField = ({
   shareWithOptionSignal,
   sharedWithSignal,
-}: Props): JSX.Element => {
+}: Props): React.JSX.Element => {
   const emailSignal = useSignal('')
   const isButtonDisabledSignal = useSignal(true)
   const [chipsParent] = useAutoAnimate()

@@ -19,7 +19,7 @@ export const BackdropCustom = ({
   children,
   content,
   color,
-}: Props): JSX.Element => (
+}: Props): React.JSX.Element => (
   <div
     onMouseDown={onMouseDown}
     style={{

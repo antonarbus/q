@@ -49,7 +49,7 @@ const variants: Variants = {
   },
 }
 
-export const FirstCopiedItem = (): JSX.Element | null => {
+export const FirstCopiedItem = (): React.JSX.Element | null => {
   const items = useSelectorTyped((state) => state.copy.items)
   const isCopying = useSelectorTyped((state) => state.copy.isCopying)
 

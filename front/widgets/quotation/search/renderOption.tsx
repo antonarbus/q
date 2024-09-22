@@ -35,8 +35,10 @@ export const renderOption = ({
       index: number
       inputValue: string
     },
-  ): JSX.Element {
-    const getHighlightedDescription = (): string | (string | JSX.Element)[] => {
+  ): React.JSX.Element {
+    const getHighlightedDescription = ():
+      | string
+      | (string | React.JSX.Element)[] => {
       if (inputValueSignal.value) {
         const boldSubString = getJsxWithBoldSubstr({
           text: option.desc ?? '',
@@ -153,7 +155,7 @@ export const renderOption = ({
                 text: option.category ?? '',
                 boldText: inputValueSignal.value,
               })
-            : option.category ?? ''}
+            : (option.category ?? '')}
         </Box>
         <Box
           sx={{

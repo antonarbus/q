@@ -2,7 +2,7 @@ type Props = {
   children: React.ReactNode
 }
 
-export const FooterLayout = (props: Props): JSX.Element => {
+export const FooterLayout = (props: Props): React.JSX.Element => {
   return (
     <footer
       style={{

@@ -1,6 +1,6 @@
 import { Global, css } from '@emotion/react'
 
-export const GlobalStyles = (): JSX.Element => (
+export const GlobalStyles = (): React.JSX.Element => (
   <Global
     styles={css`
       /* fix the feature of 'hidden' attribute.

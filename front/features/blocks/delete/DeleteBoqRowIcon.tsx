@@ -12,7 +12,7 @@ import {
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/consts/cls'
 
-export const DeleteBoqRowIcon = (): JSX.Element => {
+export const DeleteBoqRowIcon = (): React.JSX.Element => {
   const { blockIndex } = useBlock()
   const { rowIndex } = useRow()
 

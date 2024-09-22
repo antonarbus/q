@@ -9,7 +9,7 @@ type InputComponentProps = {
 const InputComponent = forwardRef(function InputComp(
   props: InputComponentProps,
   ref: React.ForwardedRef<HTMLDivElement>,
-): JSX.Element {
+): React.JSX.Element {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { ownerState, ...other } = props
 
@@ -34,7 +34,7 @@ export const OutlinedDivWithLabel = ({
   children: React.ReactNode
   label: string
   sx?: SxProps
-}): JSX.Element => {
+}): React.JSX.Element => {
   return (
     <TextField
       disabled={false}

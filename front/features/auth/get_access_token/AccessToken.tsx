@@ -9,7 +9,7 @@ import { navItemKey } from '@shared/consts/navItemKey'
 import { resolveInitAccessTokenFetching } from '@shared/lib/axios/axiosWithAuth'
 import { navSlice, showLoadingNavIcon } from '@shared/nav'
 
-export const AccessToken = (): JSX.Element => {
+export const AccessToken = (): React.JSX.Element => {
   const {
     data,
     refetch: getAccessToken,

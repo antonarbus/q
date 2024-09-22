@@ -3,7 +3,7 @@ import { useNavItemsOnQuotationsPageOpen } from '@features/open_close/open_quota
 import { QuotationsGrid } from './QuotationsGrid'
 import { GridPageLayout } from '@shared/layouts/GridPageLayout'
 
-export const QuotationsPage = (): JSX.Element => {
+export const QuotationsPage = (): React.JSX.Element => {
   useNavItemsOnQuotationsPageOpen()
 
   return (

@@ -2,7 +2,7 @@ import { theme } from '@lib_instances/theme'
 import { TooltipWithNoMaxWidth } from '@shared/components/TooltipWithNoMaxWidth'
 import { MdAlternateEmail } from 'react-icons/md'
 
-export const EmailIcon = (): JSX.Element => {
+export const EmailIcon = (): React.JSX.Element => {
   return (
     <TooltipWithNoMaxWidth
       title='Ask a question, send feedback, report a bug, or a feature request'

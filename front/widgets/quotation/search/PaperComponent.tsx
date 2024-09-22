@@ -5,7 +5,7 @@ import { cls } from '@shared/consts/cls'
 
 export const PaperComponent = (
   props: HTMLAttributes<HTMLElement>,
-): JSX.Element => {
+): React.JSX.Element => {
   return (
     <Paper
       className={cls.searchAutocomplete}

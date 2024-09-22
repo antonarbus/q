@@ -7,7 +7,7 @@ import { useRef, useState } from 'react'
 import { dragTooltipTextSignal } from './dragTooltipTextSignal'
 import { useIsCopyModalVisible } from '@entities/copy'
 
-export const DragBlockIcon = (): JSX.Element => {
+export const DragBlockIcon = (): React.JSX.Element => {
   const isLastBlock = useIsLastBlock()
   const isCopyModalVisible = useIsCopyModalVisible()
   const disabled = isLastBlock || isCopyModalVisible

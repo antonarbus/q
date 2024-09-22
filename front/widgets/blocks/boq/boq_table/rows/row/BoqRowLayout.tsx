@@ -9,7 +9,10 @@ type Props = {
   onBlur: (e: FocusEvent<HTMLDivElement>) => void
 }
 
-export const BoqRowLayout = ({ children, onBlur }: Props): JSX.Element => {
+export const BoqRowLayout = ({
+  children,
+  onBlur,
+}: Props): React.JSX.Element => {
   const { row } = useRow()
 
   return (

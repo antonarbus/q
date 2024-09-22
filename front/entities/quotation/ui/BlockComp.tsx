@@ -34,7 +34,7 @@ export const BlockComp = ({
   leftBlockActionButtons,
   rightBlockActionButtons,
   className,
-}: Props): JSX.Element => {
+}: Props): React.JSX.Element => {
   const { block } = useBlock()
 
   const { setNodeRef, transform, transition, isDragging } = useSortable({

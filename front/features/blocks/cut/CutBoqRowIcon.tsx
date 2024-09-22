@@ -15,7 +15,7 @@ import { cls } from '@shared/consts/cls'
 import { Tooltip } from '@mui/material'
 import { getClosestRowHtml } from '@shared/utils/htmlGetter/getClosestRowHtml'
 
-export const CutBoqRowIcon = (): JSX.Element => {
+export const CutBoqRowIcon = (): React.JSX.Element => {
   const { blockIndex } = useBlock()
   const { rowIndex } = useRow()
   const isCopyable = useSelectorTyped((state) => state.copy.isCopyable)

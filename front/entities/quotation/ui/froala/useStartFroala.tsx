@@ -113,7 +113,7 @@ export const useStartFroala = (): void => {
             const href = link.getAttribute('href')
             const isFileInBucket = href.includes('bucket')
             if (!isFileInBucket) return
-            // eslint-disable-next-line no-alert
+
             const removeFile = confirm(`
                 Remove file from your profile?
                 ${href}

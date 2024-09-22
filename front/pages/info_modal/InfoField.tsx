@@ -6,7 +6,7 @@ type Props = {
   infoSignal: Signal<string | undefined>
 }
 
-export const InfoField = ({ infoSignal }: Props): JSX.Element => {
+export const InfoField = ({ infoSignal }: Props): React.JSX.Element => {
   return (
     <div style={{ position: 'relative' }}>
       <TextField

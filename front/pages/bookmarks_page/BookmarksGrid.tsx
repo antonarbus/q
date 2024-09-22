@@ -19,7 +19,7 @@ import { useRefetchDataOnEmailChange } from '@shared/lib/ag_grid/hooks/useRefetc
 import { useShowLoadingJumpingDots } from '@shared/lib/ag_grid/hooks/useShowLoadingJumpingDots'
 import { AgGridStyles } from '@shared/lib/ag_grid/styles/AgGridStyles'
 
-export const BookmarksGrid = (): JSX.Element => {
+export const BookmarksGrid = (): React.JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
   const { data, isLoading, isFetching, isFetched, refetch } =
     useGetBookmarksQuery()

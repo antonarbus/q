@@ -12,7 +12,7 @@ import {
 } from '@entities/quotation'
 import { updateDescriptionCell } from '@features/blocks/cell/update_cell/row_block_cells/description/updateDescriptionCell'
 
-export const DescriptionCell = (): JSX.Element => {
+export const DescriptionCell = (): React.JSX.Element => {
   const { descriptionEditorRef } = useRow()
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex: bookmarkPosAtBlocks,

@@ -21,7 +21,7 @@ export const ResizableColumn = ({
   flexGrow,
   boqColumnKey,
   minWidth,
-}: Props): JSX.Element => {
+}: Props): React.JSX.Element => {
   const colWidth = useSelectorTyped(
     selectColumnWidth({ blockIndex: 0, boqColumnKey }),
   )

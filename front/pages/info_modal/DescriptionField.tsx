@@ -6,7 +6,7 @@ type Props = {
   descSignal: Signal<string | undefined>
 }
 
-export const DescriptionField = ({ descSignal }: Props): JSX.Element => {
+export const DescriptionField = ({ descSignal }: Props): React.JSX.Element => {
   return (
     <div style={{ position: 'relative' }}>
       <TextField

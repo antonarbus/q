@@ -4,7 +4,7 @@ type Props = {
   children: React.ReactNode
 }
 
-export const KbdKey = ({ children }: Props): JSX.Element => {
+export const KbdKey = ({ children }: Props): React.JSX.Element => {
   return (
     <div
       css={css`

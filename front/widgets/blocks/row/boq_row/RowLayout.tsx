@@ -4,7 +4,7 @@ type Props = {
   children: React.ReactNode
 }
 
-export const RowLayout = ({ children }: Props): JSX.Element => {
+export const RowLayout = ({ children }: Props): React.JSX.Element => {
   return (
     <Box
       className='boq-table-container-with-paddings'

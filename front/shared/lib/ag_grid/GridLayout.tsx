@@ -8,7 +8,7 @@ type Props = {
 export const GridLayout = ({
   children,
   gridContainerRef,
-}: Props): JSX.Element => {
+}: Props): React.JSX.Element => {
   return (
     <Box
       ref={gridContainerRef}

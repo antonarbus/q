@@ -4,9 +4,20 @@
     "back/**/*.tsx",
     "front/**/*.ts",
     "front/**/*.tsx",
-    "vite-env.d.ts"
+    "vite-env.d.ts",
+    "eslint.config.js",
+    "rollup.config.js",
+    "test-setup.ts",
+    "vite.config.mts"
   ],
-  "exclude": ["**/node_modules", "build", "fr.js"],
+  "exclude": [
+    "**/node_modules",
+    "build",
+    "fr.js",
+    "**/build/",
+    "**/froalaPkg.js",
+    "**/coverage"
+  ],
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",

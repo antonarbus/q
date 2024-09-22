@@ -657,7 +657,7 @@ const ToastStyled = styled.div`
   }
 `
 
-export const Toast = (): JSX.Element => {
+export const Toast = (): React.JSX.Element => {
   return (
     <ToastStyled>
       <ToastContainer />

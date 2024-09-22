@@ -52,7 +52,7 @@ export const FormModal = ({
   paddingContent,
   shouldUnmountOnClickAway,
   shouldUnmountOnEsc,
-}: Props): JSX.Element => {
+}: Props): React.JSX.Element => {
   useFixScrollPositionOnModalOpen()
 
   return (

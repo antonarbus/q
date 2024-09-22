@@ -19,7 +19,7 @@ type Props = Context & {
 
 const FroalaContext = createContext<Context | null>(null)
 
-export const FroalaProvider = (props: Props): JSX.Element => {
+export const FroalaProvider = (props: Props): React.JSX.Element => {
   return (
     <FroalaContext.Provider
       value={{

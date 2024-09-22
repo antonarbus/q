@@ -6,7 +6,7 @@ type Props = {
   children: React.ReactNode
 }
 
-export const BookmarkFieldLayout = ({ children }: Props): JSX.Element => {
+export const BookmarkFieldLayout = ({ children }: Props): React.JSX.Element => {
   return (
     <OutlinedDivWithLabel label='Item'>
       <Box

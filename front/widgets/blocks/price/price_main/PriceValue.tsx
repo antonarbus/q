@@ -11,7 +11,7 @@ import {
 } from '@entities/quotation'
 import type { FroalaEditor } from '@shared/types/froala'
 
-export const PriceValue = (): JSX.Element => {
+export const PriceValue = (): React.JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
   const { blockIndex } = useBlock()
   useUpdateTotalPriceIfPricesAboveWereChanged({

@@ -10,7 +10,7 @@ export const ScaledCopyItem = ({
   width,
   scaleFactor,
   html,
-}: Props): JSX.Element => {
+}: Props): React.JSX.Element => {
   const divRef = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {

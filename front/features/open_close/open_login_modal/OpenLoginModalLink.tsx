@@ -7,7 +7,7 @@ type Props = {
   modalRef: React.RefObject<HTMLDivElement>
 }
 
-export const OpenLoginModalLink = ({ modalRef }: Props): JSX.Element => {
+export const OpenLoginModalLink = ({ modalRef }: Props): React.JSX.Element => {
   const navigate = useNavigate()
 
   return (

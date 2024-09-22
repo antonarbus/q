@@ -7,7 +7,9 @@ type Props = {
   modalRef: React.RefObject<HTMLDivElement>
 }
 
-export const OpenRegisterModalLink = ({ modalRef }: Props): JSX.Element => {
+export const OpenRegisterModalLink = ({
+  modalRef,
+}: Props): React.JSX.Element => {
   return (
     <Link
       to={`../${route.register}`}

@@ -13,7 +13,7 @@ export const SlidableMenuItemsContainer = ({
   reference,
   idsToMenu,
   className,
-}: Props): JSX.Element => {
+}: Props): React.JSX.Element => {
   const menuItems = useSelectorTyped(
     selectMenuItemByIdsChainSelector(idsToMenu),
   )

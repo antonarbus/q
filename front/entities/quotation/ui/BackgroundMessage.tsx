@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { backgroundMessageSignal } from '../signals/backgroundMessageSignal'
 
-export const BackgroundMessage = (): JSX.Element => {
+export const BackgroundMessage = (): React.JSX.Element => {
   return (
     <Box
       className='background-message'

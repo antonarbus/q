@@ -15,7 +15,7 @@ import { BoqHeader } from './boq_header'
 import { BoqTable } from './boq_table'
 import { cls } from '@shared/consts/cls'
 
-export const BoqBlock = (): JSX.Element => {
+export const BoqBlock = (): React.JSX.Element => {
   return (
     <BoqProvider>
       <BlockComp

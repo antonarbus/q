@@ -7,7 +7,7 @@ type Props = {
   modalRef: React.RefObject<HTMLDivElement>
 }
 
-export const OpenResetModalLink = ({ modalRef }: Props): JSX.Element => {
+export const OpenResetModalLink = ({ modalRef }: Props): React.JSX.Element => {
   const navigate = useNavigate()
 
   return (

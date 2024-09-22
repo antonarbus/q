@@ -4,7 +4,7 @@ type Props = {
   children: React.ReactNode
 }
 
-export const BoqRowsLayout = ({ children }: Props): JSX.Element => {
+export const BoqRowsLayout = ({ children }: Props): React.JSX.Element => {
   return (
     <div
       id='boq-rows'

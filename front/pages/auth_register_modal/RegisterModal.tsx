@@ -10,7 +10,7 @@ import { FormModal } from '@shared/components/FormModal'
 import { PasswordField } from '@shared/components/PasswordField'
 import { router } from '@lib_instances/router'
 
-export const RegisterModal = (): JSX.Element => {
+export const RegisterModal = (): React.JSX.Element => {
   const inputRef = useRef<HTMLDivElement>(null)
   const modalRef = useRef<HTMLDivElement>(null)
   const emailSignal = useSignal('')

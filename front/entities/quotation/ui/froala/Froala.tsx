@@ -18,7 +18,7 @@ import { DropFilesText } from './DropFilesText'
 import { cls } from '@shared/consts/cls'
 import { DropHereText } from './DropHereText'
 
-export const Froala = (props: FroalaProps): JSX.Element => {
+export const Froala = (props: FroalaProps): React.JSX.Element => {
   const dropFilesTextRef = useRef<React.ElementRef<'div'>>(null)
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const { blockIndex } = useBlock()

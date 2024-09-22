@@ -20,7 +20,7 @@ export const LoadingDots = ({
   background,
   duration,
   dots,
-}: Props): JSX.Element => (
+}: Props): React.JSX.Element => (
   <div
     style={{
       display: 'inline-flex',

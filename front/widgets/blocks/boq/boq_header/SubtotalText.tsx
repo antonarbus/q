@@ -11,7 +11,7 @@ import type { FroalaEditor } from '@shared/types/froala'
 
 const boqHeaderKey: HeaderKey = 'subtotalText'
 
-export const SubtotalText = (): JSX.Element => {
+export const SubtotalText = (): React.JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
   const { blockIndex } = useBlock()
 

@@ -15,7 +15,9 @@ type Props = {
   children: React.ReactNode
 }
 
-export const BoqRowsSortableContext = ({ children }: Props): JSX.Element => {
+export const BoqRowsSortableContext = ({
+  children,
+}: Props): React.JSX.Element => {
   const { blockIndex } = useBlock()
 
   const boqRows = useSelectorTyped(

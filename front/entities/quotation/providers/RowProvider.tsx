@@ -22,7 +22,7 @@ export const RowProvider = ({
   children,
   rowIndex,
   row,
-}: Props): JSX.Element => {
+}: Props): React.JSX.Element => {
   const { boqRowEditorRefs } = useBoq()
 
   const descriptionEditorRef = { current: null }

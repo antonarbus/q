@@ -4,7 +4,7 @@ import { updatePriceTitleCell } from '@features/blocks/cell/update_cell'
 import { useBlock, Froala, itemType } from '@entities/quotation'
 import type { FroalaEditor } from '@shared/types/froala'
 
-export const PriceTitle = (): JSX.Element => {
+export const PriceTitle = (): React.JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
   const { blockIndex } = useBlock()
 

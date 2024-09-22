@@ -9,7 +9,7 @@ type Props = {
 
 export const StaticHtml = ({
   styleAgainstFroalaBlinks,
-}: Props): JSX.Element => {
+}: Props): React.JSX.Element => {
   const staticHtmlRef = useRef<HTMLDivElement>()
   const { htmlGetter, style, froalaHeightRef, sx } = useFroala()
 

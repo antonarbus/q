@@ -17,7 +17,7 @@ export const PasswordField = ({
   label,
   isLabelRed,
   autoFocus,
-}: Props): JSX.Element => {
+}: Props): React.JSX.Element => {
   const showPassword = useSignal(false)
 
   return (

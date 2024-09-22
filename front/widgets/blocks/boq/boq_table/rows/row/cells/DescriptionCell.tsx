@@ -13,7 +13,7 @@ import {
   columnMinWidth,
 } from '@entities/quotation'
 
-export const DescriptionCell = (): JSX.Element => {
+export const DescriptionCell = (): React.JSX.Element => {
   const { blockIndex } = useBlock()
   const { rowIndex, itemPriceCellEditorRef, descriptionEditorRef } = useRow()
   const { stylesForResizableCell } = useStylesForResizableCell({

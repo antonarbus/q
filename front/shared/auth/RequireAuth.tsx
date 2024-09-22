@@ -6,7 +6,7 @@ type Props = {
   allowedRoles: string[]
 }
 
-export const RequireAuth = ({ allowedRoles }: Props): JSX.Element => {
+export const RequireAuth = ({ allowedRoles }: Props): React.JSX.Element => {
   const location = useLocation()
   const isLogged = accessTokenSignal.value !== null
   const roles = useSelectorTyped((state) => state.user.roles)

@@ -8,7 +8,7 @@ import { EmailField } from '@shared/components/EmailField'
 import { FormModal } from '@shared/components/FormModal'
 import { router } from '@lib_instances/router'
 
-export const RequestPasswordResetModal = (): JSX.Element => {
+export const RequestPasswordResetModal = (): React.JSX.Element => {
   const modalRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLDivElement>(null)
   const emailSignal = useSignal('')

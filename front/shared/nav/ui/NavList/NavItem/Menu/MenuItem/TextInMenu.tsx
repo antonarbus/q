@@ -14,7 +14,7 @@ export const TextInMenu = ({
   reserveSpaceForIcon,
   name,
   disabled,
-}: Props): JSX.Element => {
+}: Props): React.JSX.Element => {
   return (
     <span
       style={{

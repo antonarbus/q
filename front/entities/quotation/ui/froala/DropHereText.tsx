@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { cls } from '@shared/consts/cls'
 
-export const DropHereText = (): JSX.Element => {
+export const DropHereText = (): React.JSX.Element => {
   return (
     <Box
       className={cls.dropHereText}

@@ -4,7 +4,9 @@ import { useSelectorTyped } from '@lib_instances/store'
 import { Box } from '@mui/material'
 import { FaInfoCircle } from 'react-icons/fa'
 
-const DivForSymmetry = (): JSX.Element => <div style={{ width: '80px' }} />
+const DivForSymmetry = (): React.JSX.Element => (
+  <div style={{ width: '80px' }} />
+)
 
 export const Info = (): React.ReactNode => {
   const quotationId = useSelectorTyped((state) => state.quotation.id)

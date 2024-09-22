@@ -9,7 +9,7 @@ import {
 import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
 import { notify } from '@shared/toast'
 
-export const DeleteBookmarkButton = ({ id }: ReqBody): JSX.Element => {
+export const DeleteBookmarkButton = ({ id }: ReqBody): React.JSX.Element => {
   const {
     mutate: deleteItem,
     isPending,

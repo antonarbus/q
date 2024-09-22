@@ -5,7 +5,7 @@ type Props = {
   children: React.ReactNode
 }
 
-export const FadeInOnInitLoad = ({ children }: Props): JSX.Element => {
+export const FadeInOnInitLoad = ({ children }: Props): React.JSX.Element => {
   return (
     <motion.div
       className={cls.blocks}

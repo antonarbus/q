@@ -22,7 +22,7 @@ import { cls } from '@shared/consts/cls'
 import { ItemActionButtonsLayout } from '@shared/layouts/ItemActionButtonsLayout'
 import type { FroalaEditor } from '@shared/types/froala'
 
-export const TextBlock = (): JSX.Element => {
+export const TextBlock = (): React.JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
   const { blockIndex } = useBlock()
 

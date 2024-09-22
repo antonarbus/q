@@ -14,7 +14,9 @@ import { route } from '@shared/consts/route'
 import { notify } from '@shared/toast'
 import type { NavigateState } from '@shared/types/NavigateState'
 
-export const OpenQuotationModalButton = ({ id }: ReqBody): JSX.Element => {
+export const OpenQuotationModalButton = ({
+  id,
+}: ReqBody): React.JSX.Element => {
   const navigate = useNavigate()
 
   const {

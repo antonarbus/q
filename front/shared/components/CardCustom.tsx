@@ -15,7 +15,7 @@ export const CardCustom = ({
   reference,
   title,
   logo,
-}: Props): JSX.Element => (
+}: Props): React.JSX.Element => (
   <Box
     ref={reference}
     onMouseDown={(e: MouseEvent): void => {

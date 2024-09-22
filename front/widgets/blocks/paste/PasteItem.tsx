@@ -1,9 +1,8 @@
-import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 import { theme } from '@lib_instances/theme'
 import { motion } from 'framer-motion'
 import { useBlock } from '@entities/quotation'
 
-export const PasteItem = (): EmotionJSX.Element => {
+export const PasteItem = (): React.JSX.Element => {
   const { block } = useBlock()
 
   return (

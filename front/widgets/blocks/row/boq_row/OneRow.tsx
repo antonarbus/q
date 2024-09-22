@@ -3,7 +3,7 @@ import { RowLayout } from './RowLayout'
 import { RowColumns } from './columns'
 import { BoqRows } from './rows'
 
-export const OneRow = (): JSX.Element => {
+export const OneRow = (): React.JSX.Element => {
   return (
     <BoqProvider>
       <RowLayout>

@@ -9,7 +9,7 @@ type Props = {
 export const ConfirmPasswordField = ({
   originalPasswordSignal,
   isConfirmPasswordOkSignal,
-}: Props): JSX.Element => {
+}: Props): React.JSX.Element => {
   const confirmPasswordSignal = useSignal('')
   const didBlurSignal = useSignal(false)
   const initLabel = 'Confirm password'

@@ -39,14 +39,13 @@ export const notify = ({
 }: Props): void => {
   const getTransitionType = (): (({
     children,
-    // eslint-disable-next-line no-shadow
     position,
     preventExitTransition,
     done,
     nodeRef,
     isIn,
     playToast,
-  }: ToastTransitionProps) => JSX.Element) => {
+  }: ToastTransitionProps) => React.JSX.Element) => {
     if (transition === 'slide') return Slide
     if (transition === 'bounce') return Bounce
     if (transition === 'flip') return Flip
@@ -56,7 +55,7 @@ export const notify = ({
 
   const options = {
     position: position ?? 'top-right',
-    autoClose: shouldStay ? false : closeAfterMs ?? 5000,
+    autoClose: shouldStay ? false : (closeAfterMs ?? 5000),
     delay: 0,
     hideProgressBar: hideProgressBar ?? false,
     closeButton: true,

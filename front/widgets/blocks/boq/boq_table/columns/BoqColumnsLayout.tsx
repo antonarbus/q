@@ -4,7 +4,7 @@ type Props = {
   children: React.ReactNode
 }
 
-export const BoqColumnsLayout = ({ children }: Props): JSX.Element => {
+export const BoqColumnsLayout = ({ children }: Props): React.JSX.Element => {
   return (
     <Box
       className='header tr'

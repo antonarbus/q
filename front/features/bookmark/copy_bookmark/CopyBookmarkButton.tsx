@@ -9,7 +9,7 @@ import { isFroalaSignal } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
 import { notify } from '@shared/toast'
 
-export const CopyBookmarkButton = ({ id }: ReqBody): JSX.Element => {
+export const CopyBookmarkButton = ({ id }: ReqBody): React.JSX.Element => {
   const {
     mutate: loadItem,
     isPending,

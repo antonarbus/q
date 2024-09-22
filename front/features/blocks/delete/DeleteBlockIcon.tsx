@@ -1,4 +1,3 @@
-import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
 import type { MouseEvent } from 'react'
@@ -14,7 +13,7 @@ import { cls } from '@shared/consts/cls'
 import { fixElementDimensionStyle } from '@shared/utils/fixElementDimensionStyle'
 import { Tooltip } from '@mui/material'
 
-export const DeleteBlockIcon = (): EmotionJSX.Element => {
+export const DeleteBlockIcon = (): React.JSX.Element => {
   const { blockIndex } = useBlock()
 
   const isBlockAlone = useSelectorTyped(selectIsLastBlock)

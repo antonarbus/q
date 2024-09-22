@@ -13,7 +13,7 @@ type BoqContextType = {
 
 const BoqContext = createContext<BoqContextType | null>(null)
 
-export const BoqProvider = ({ children }: Props): JSX.Element => {
+export const BoqProvider = ({ children }: Props): React.JSX.Element => {
   return (
     <BoqContext.Provider
       value={{

@@ -14,7 +14,7 @@ import {
 } from '@shared/nav'
 import { navStructure } from './navStructure'
 
-export const Nav = (): JSX.Element => {
+export const Nav = (): React.JSX.Element => {
   const navRef = useRef<HTMLDivElement>(null)
   const logoRef = useRef<HTMLDivElement>(null)
   const mediaQueryWidth = useSelectorTyped((state) => state.nav.mediaQueryWidth)

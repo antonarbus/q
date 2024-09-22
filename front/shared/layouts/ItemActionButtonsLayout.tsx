@@ -5,7 +5,9 @@ type Props = {
   children?: React.ReactNode
 }
 
-export const ItemActionButtonsLayout = ({ children }: Props): JSX.Element => (
+export const ItemActionButtonsLayout = ({
+  children,
+}: Props): React.JSX.Element => (
   <Box
     className={cls.actionsContainer}
     style={{

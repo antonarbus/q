@@ -4,7 +4,7 @@ type Props = {
   children: React.ReactNode
 }
 
-const MainLayout = ({ children }: Props): JSX.Element => {
+const MainLayout = ({ children }: Props): React.JSX.Element => {
   return (
     <main
       style={{
@@ -19,7 +19,7 @@ const MainLayout = ({ children }: Props): JSX.Element => {
   )
 }
 
-export const Main = (): JSX.Element => {
+export const Main = (): React.JSX.Element => {
   return (
     <MainLayout>
       <Outlet />

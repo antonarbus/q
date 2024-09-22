@@ -1,7 +1,7 @@
 import { GrStatusGood } from 'react-icons/gr'
 import { Icon } from './Icon'
 
-export const SuccessIcon = (): JSX.Element => {
+export const SuccessIcon = (): React.JSX.Element => {
   return (
     <Icon
       icon={

@@ -19,7 +19,7 @@ import {
   columnMinWidth,
 } from '@entities/quotation'
 
-export const ItemPriceCell = (): JSX.Element => {
+export const ItemPriceCell = (): React.JSX.Element => {
   const { blockIndex } = useBlock()
   const { subTotalPriceEditorRef } = useBoq()
   const {

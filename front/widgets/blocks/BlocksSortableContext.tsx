@@ -19,7 +19,9 @@ type Props = {
 // example
 // https://codesandbox.io/p/sandbox/dnd-kit-sortable-starter-template-22x1ix
 
-export const BlocksSortableContext = ({ children }: Props): JSX.Element => {
+export const BlocksSortableContext = ({
+  children,
+}: Props): React.JSX.Element => {
   const blockIds = getState().quotation.blocks.map((block) => block.id)
   const sensors = useSensors(useSensor(PointerSensor))
 

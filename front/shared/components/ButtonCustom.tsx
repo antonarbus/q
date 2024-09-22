@@ -20,7 +20,7 @@ export const ButtonCustom = ({
   isButtonSuccess,
   isButtonError,
   ...restProps
-}: Props): JSX.Element => {
+}: Props): React.JSX.Element => {
   const showSuccessIcon = useSignal(false)
   const showErrorIcon = useSignal(false)
 

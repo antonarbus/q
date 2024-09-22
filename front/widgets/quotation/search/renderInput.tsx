@@ -7,7 +7,7 @@ import { GoSearch } from 'react-icons/go'
 
 export const renderInput = (
   params: AutocompleteRenderInputParams,
-): JSX.Element => {
+): React.JSX.Element => {
   return (
     <TextField
       {...params}

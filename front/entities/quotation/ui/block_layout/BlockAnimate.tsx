@@ -38,7 +38,7 @@ export const BlockAnimate = ({
   onItemResize,
   onItemResizeStop,
   className,
-}: Props): JSX.Element => {
+}: Props): React.JSX.Element => {
   return (
     <motion.div
       id={id}

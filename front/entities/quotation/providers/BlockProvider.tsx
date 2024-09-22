@@ -16,7 +16,7 @@ export const BlockProvider = ({
   children,
   blockIndex,
   block,
-}: Props): JSX.Element => {
+}: Props): React.JSX.Element => {
   return (
     <BlockContext.Provider
       value={{

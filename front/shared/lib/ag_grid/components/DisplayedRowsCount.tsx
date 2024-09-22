@@ -3,7 +3,7 @@ import { signal } from '@preact/signals-react'
 
 export const displayedRowsCountSignal = signal(0)
 
-export const DisplayedRowsCount = (): JSX.Element => {
+export const DisplayedRowsCount = (): React.JSX.Element => {
   return (
     <Box
       sx={{

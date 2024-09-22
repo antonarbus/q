@@ -2,9 +2,9 @@ import { theme } from '@lib_instances/theme'
 import { Box } from '@mui/material'
 
 type Props = {
-  title: JSX.Element
+  title: React.JSX.Element
   subtotalText: React.ReactNode
-  subTotalPrice: JSX.Element
+  subTotalPrice: React.JSX.Element
   hideContentForDevPurposes?: boolean
   outlinedForDevPurposes?: boolean
 }
@@ -15,7 +15,7 @@ export const BoqHeaderLayout = ({
   subTotalPrice,
   hideContentForDevPurposes = false,
   outlinedForDevPurposes = false,
-}: Props): JSX.Element => {
+}: Props): React.JSX.Element => {
   return (
     <Box
       sx={{

@@ -7,7 +7,7 @@ import {
   onBoqBlockResizeStop,
 } from '@features/blocks/resize'
 
-export const RowBlock = (): JSX.Element => {
+export const RowBlock = (): React.JSX.Element => {
   return (
     <BlockComp
       className={cls.boqBlock}

@@ -11,7 +11,7 @@ import { BackdropWithSlidableModal } from '@shared/components/BackdropWithSlidab
 import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
 import { CardCustom } from '@shared/components/CardCustom'
 
-export const SettingsModal = (): JSX.Element => {
+export const SettingsModal = (): React.JSX.Element => {
   const cardRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
   const { data, isSuccess, isPending } = useGetFilesStatsQuery()

@@ -5,7 +5,7 @@ type Props = {
   children: React.ReactNode
 }
 
-export const BoqRowAnimate = ({ children }: Props): JSX.Element => {
+export const BoqRowAnimate = ({ children }: Props): React.JSX.Element => {
   return (
     <motion.div
       initial={{

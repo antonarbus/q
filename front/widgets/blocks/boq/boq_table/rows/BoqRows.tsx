@@ -16,7 +16,7 @@ import { BoqRowAnimate } from './row/BoqRowAnimate'
 import { BoqRowSortable } from './row/BoqRowSortable'
 import { arrayShapesEqualityFn } from '@shared/lib/redux/arrayShapesEqualityFn'
 
-export const BoqRows = (): JSX.Element => {
+export const BoqRows = (): React.JSX.Element => {
   const { blockIndex } = useBlock()
   const boqRows = useSelectorTyped(
     selectBoqRows({ blockIndex }),

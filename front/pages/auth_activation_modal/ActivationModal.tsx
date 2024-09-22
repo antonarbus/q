@@ -9,7 +9,7 @@ import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
 import { BackdropWithSlidableModal } from '@shared/components/BackdropWithSlidableModal'
 import { CardCustom } from '@shared/components/CardCustom'
 
-export const ActivationModal = (): JSX.Element => {
+export const ActivationModal = (): React.JSX.Element => {
   const cardRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
   const { isSuccess, isPending, isError } = useActivate()

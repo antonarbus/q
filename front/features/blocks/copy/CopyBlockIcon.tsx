@@ -12,7 +12,7 @@ import { cls } from '@shared/consts/cls'
 import { Tooltip } from '@mui/material'
 import { getClosestPaperElementHtml } from '@shared/utils/htmlGetter/getClosestPaperElementHtml'
 
-export const CopyBlockIcon = (): JSX.Element => {
+export const CopyBlockIcon = (): React.JSX.Element => {
   const { blockIndex } = useBlock()
   const isCopyable = useSelectorTyped((state) => state.copy.isCopyable)
   const disabled = !isCopyable

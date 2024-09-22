@@ -26,7 +26,7 @@ export const ResizableBlockPaper = ({
   onItemResize,
   onItemResizeStop,
   minWidth,
-}: Props): JSX.Element => {
+}: Props): React.JSX.Element => {
   const { blockIndex } = useBlock()
 
   const width = useSelectorTyped(

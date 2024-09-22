@@ -12,7 +12,7 @@ type Props = {
  * - if sting is passed it becomes bold
  */
 
-export const Icon = ({ icon, disabled }: Props): JSX.Element => {
+export const Icon = ({ icon, disabled }: Props): React.JSX.Element => {
   return (
     <RoundSpanForIcon
       className='icon-round-wrapper'

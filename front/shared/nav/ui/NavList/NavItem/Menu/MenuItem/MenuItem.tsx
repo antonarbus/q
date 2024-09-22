@@ -22,7 +22,7 @@ type Props = {
 export const MenuItem = ({
   menuItem,
   hoveredMenuItemIndex,
-}: Props): JSX.Element => {
+}: Props): React.JSX.Element => {
   const location = useLocation()
   const isHovered = useSelectorTyped(
     (state) => state.nav.menuItemHoverIndex === hoveredMenuItemIndex,

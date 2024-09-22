@@ -29,7 +29,7 @@ type Props = {
  * - required to avoid Menu to go over the narrow window
  */
 
-export const NavItem = ({ children, id }: Props): JSX.Element => {
+export const NavItem = ({ children, id }: Props): React.JSX.Element => {
   const location = useLocation()
   // required to avoid Menu to go over the narrow window
   const navItemRef = useRef() as MutableRefObject<HTMLLIElement>

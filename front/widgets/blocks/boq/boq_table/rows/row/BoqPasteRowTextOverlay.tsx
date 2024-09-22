@@ -1,8 +1,7 @@
-import type { EmotionJSX } from '@emotion/react/types/jsx-namespace'
 import { theme } from '@lib_instances/theme'
 import { motion } from 'framer-motion'
 
-export const BoqPasteRowTextOverlay = (): EmotionJSX.Element => (
+export const BoqPasteRowTextOverlay = (): React.JSX.Element => (
   <motion.div
     initial={{
       height: 0,

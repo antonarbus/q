@@ -6,7 +6,7 @@ type Props = {
   style?: React.CSSProperties
 }
 
-export const BoqRowActionButtonsLayout = (props: Props): JSX.Element => {
+export const BoqRowActionButtonsLayout = (props: Props): React.JSX.Element => {
   return (
     <Box
       className={cls.actionsContainer}

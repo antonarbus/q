@@ -8,7 +8,7 @@ export default {
     dir: './back/build/',
     format: 'es',
   },
-  external: [/node_modules/],
+  external: [/node_modules/u],
   plugins: [
     nodeResolve(),
     typescript(),

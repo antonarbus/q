@@ -19,7 +19,7 @@ import { useRefetchDataOnEmailChange } from '@shared/lib/ag_grid/hooks/useRefetc
 import { useShowLoadingJumpingDots } from '@shared/lib/ag_grid/hooks/useShowLoadingJumpingDots'
 import { AgGridStyles } from '@shared/lib/ag_grid/styles/AgGridStyles'
 
-export const QuotationsGrid = (): JSX.Element => {
+export const QuotationsGrid = (): React.JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
   const { data, isLoading, isFetching, isFetched, refetch } =
     useGetQuotationsQuery()

@@ -11,7 +11,7 @@ import {
 import type { FroalaEditor } from '@shared/types/froala'
 import { ResizableColumn } from '../ResizableColumn'
 
-export const QtyColumn = (): JSX.Element => {
+export const QtyColumn = (): React.JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)
   const { blockIndex } = useBlock()
 

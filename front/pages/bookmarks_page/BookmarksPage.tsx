@@ -3,7 +3,7 @@ import { useNavItemsOnBookmarksPageOpen } from '@features/open_close/open_bookma
 import { BookmarksGrid } from './BookmarksGrid'
 import { GridPageLayout } from '@shared/layouts/GridPageLayout'
 
-export const BookmarksPage = (): JSX.Element => {
+export const BookmarksPage = (): React.JSX.Element => {
   useNavItemsOnBookmarksPageOpen()
 
   return (

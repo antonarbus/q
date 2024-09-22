@@ -16,7 +16,7 @@ import { useQuotationFormValues } from './useFormValues'
 import { useIsButtonDisabled } from './useIsButtonDisabled'
 import { router } from '@lib_instances/router'
 
-export const QuotationModal = (): JSX.Element => {
+export const QuotationModal = (): React.JSX.Element => {
   const modalRef = useRef<HTMLDivElement>(null)
   const { quotationFormValues } = useQuotationFormValues()
   useLoadInitValuesIntoQuotationModal({ quotationFormValues })
