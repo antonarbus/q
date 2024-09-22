@@ -10,7 +10,7 @@ export const GridPageLayout = ({ children }: Props): React.JSX.Element => {
     <Box
       sx={{
         mt: '5px',
-        height: `calc(100vh - ${String(theme.nav.height + 60)}px)`,
+        height: `calc(100vh - ${String(theme.nav.height + theme.footer.height + 60)}px)`,
       }}
     >
       {children}

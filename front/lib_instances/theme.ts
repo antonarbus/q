@@ -29,6 +29,9 @@ const customTheme = {
       return this.height + this.marginTop + this.marginBottom
     },
   },
+  footer: {
+    height: 24,
+  },
   menu: {
     width: 300,
     paddingTop: 16,

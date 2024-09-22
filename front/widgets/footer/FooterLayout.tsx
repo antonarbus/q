@@ -1,3 +1,5 @@
+import { theme } from '@lib_instances/theme'
+
 type Props = {
   children: React.ReactNode
 }
@@ -11,7 +13,7 @@ export const FooterLayout = (props: Props): React.JSX.Element => {
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
-        height: '24px',
+        height: theme.footer.height,
         bottom: '0',
         left: '0',
         right: '0',
