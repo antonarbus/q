@@ -14,8 +14,6 @@ const InputComponent = forwardRef(function InputComp(
   return (
     <div
       {...other}
-      // {...other.ownerState}
-      // {...ownerState}
       ref={ref}
       css={{
         overflow: 'hidden',
