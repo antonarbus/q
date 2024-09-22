@@ -19,7 +19,7 @@ export const NumberCell = (): React.JSX.Element => {
         ...stylesForResizableCell,
         fontSize: '10px',
         color: 'grey',
-        paddingBottom: '2px',
+        paddingBottom: '4px',
         top: '5px',
       }}
     >
