@@ -16,7 +16,6 @@ export { useSaveQuotationMutation } from './api/useSaveQuotationMutation'
 export { useGetQuotationCategoriesQuery } from './api/useGetQuotationCategoriesQuery'
 
 // cacheUpdaters
-export { updateOrAppendIntoQuotationsCache } from './cacheUpdaters/updateOrAppendIntoQuotationsCache'
 export { deleteFromQuotationsCache } from './cacheUpdaters/deleteFromQuotationsCache'
 export { deleteQuotationsCache } from './cacheUpdaters/deleteQuotationsCache'
 
@@ -28,7 +27,6 @@ export { selectIsLastBlock } from './redux/selectors/selectIsLastBlock'
 export { selectIsLastBoqRow } from './redux/selectors/selectIsLastBoqRow'
 export { selectColumnWidth } from './redux/selectors/selectColumnWidth'
 export { selectBoqRows } from './redux/selectors/selectBoqRows'
-export { selectBoqCell } from './redux/selectors/selectBoqCell'
 export { selectBoqCellPin } from './redux/selectors/selectBoqCellPin'
 
 // utils

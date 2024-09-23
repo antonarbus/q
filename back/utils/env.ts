@@ -13,6 +13,6 @@ const baseUrlFrontProd = `${protocolFront}://${hostnameFrontProd}`
 export const baseUrlFront = isProd ? baseUrlFrontProd : baseUrlFrontDev
 
 const protocolBack = 'http'
-export const hostnameBack = 'localhost'
+const hostnameBack = 'localhost'
 export const portBack = 4000
 export const baseUrlBack = `${protocolBack}://${hostnameBack}:${portBack}`

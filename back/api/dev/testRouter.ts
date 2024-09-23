@@ -5,7 +5,7 @@ import { UserModel } from '@back/db/models/userModel'
 
 export const testRouter = Router()
 
-export async function test(req: Req, res: Res, next: Next): Promise<void> {
+async function test(req: Req, res: Res, next: Next): Promise<void> {
   try {
     // const dbRes = await UserModel.find({ email: 'anton.arbus@gmail.com' })
     await UserModel.deleteOne({ email: 'info@sendmequotation.today' })

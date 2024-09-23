@@ -14,7 +14,7 @@ type Props = {
   isMenuOutsideWindow: boolean
 }
 
-export const MenuStyled = styled.div<Props>`
+const MenuStyled = styled.div<Props>`
   position: absolute;
   top: calc(100% + 5px);
   right: -${theme.menu.navItem.marginRight}px;

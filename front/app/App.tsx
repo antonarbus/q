@@ -7,7 +7,7 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Provider } from 'react-redux'
 import { RouterProvider } from 'react-router-dom'
-import { useLogoutIfAccessTokenRemoved } from '@features/auth/log_out'
+import { useLogoutIfAccessTokenExpired } from '@features/auth/log_out'
 import { GlobalStyles } from './GlobalStyles'
 import { ReactQueryDevtoolsProductionHidden } from './ReactQueryDevtoolsProductionHidden'
 import './signalsDevTools'
@@ -17,7 +17,7 @@ import { useOnDragOnDrop } from '@features/upload/useOnDragOnDrop'
 import { useRemoveThirdPartyCookies } from '@features/init_load/useRemoveThirdPartyCookies'
 
 export const App = (): React.JSX.Element => {
-  useLogoutIfAccessTokenRemoved()
+  useLogoutIfAccessTokenExpired()
   useHideInitHtmlElements()
   useOnDragOnDrop()
   useRemoveThirdPartyCookies()

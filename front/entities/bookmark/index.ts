@@ -6,7 +6,6 @@ export { useGetBookmarkCategoriesQuery } from './api/useGetBookmarkCategoriesQue
 export { useGetBookmarkMutation } from './api/useGetBookmarkMutation'
 
 // cache updaters
-export { updateOrAppendIntoBookmarksCache } from './cacheUpdaters/updateOrAppendIntoBookmarksCache'
 export { deleteFromBookmarksCache } from './cacheUpdaters/deleteFromBookmarksCache'
 export { deleteBookmarksCache } from './cacheUpdaters/deleteBookmarksCache'
 
