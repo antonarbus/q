@@ -23,7 +23,7 @@ export const CategoryField = ({ categorySignal }: Props): React.JSX.Element => {
           return (
             <li
               {...props}
-              // key={hash(option)}
+              key={option}
               css={{
                 borderRadius: '6px',
                 paddingBlock: '10px !important',
