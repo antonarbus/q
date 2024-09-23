@@ -5,7 +5,7 @@ const isProd = process.env.NODE_ENV !== 'development'
 export const env = isDev ? 'dev' : 'prod'
 
 const protocolFront = 'https'
-export const hostnameFrontDev = 'local.sendmequotation.today' // 'localhost'
+export const hostnameFrontDev = 'localhost' // 'local.sendmequotation.today'
 const hostnameFrontProd = 'sendmequotation.today'
 export const portFront = 3000
 const baseUrlFrontDev = `${protocolFront}://${hostnameFrontDev}:${portFront}`
