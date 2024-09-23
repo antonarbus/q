@@ -8,10 +8,7 @@ import {
   useLoadBookmarkModalOpenedWithDirectLink,
 } from '@features/open_close/open_bookmark_modal'
 import { useUnmount } from 'react-use'
-import {
-  quotationSlice,
-  useGetQuotationCategoriesQuery,
-} from '@entities/quotation'
+import { quotationSlice } from '@entities/quotation'
 import { dispatch } from '@lib_instances/store'
 import { router } from '@lib_instances/router'
 import { NameField } from '@shared/components/input_fields/NameField'
