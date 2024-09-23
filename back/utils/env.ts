@@ -1,15 +1,18 @@
 // process.env.NODE_ENV is set in package.json scripts
 
-export const isDev = process.env.NODE_ENV === 'development'
-export const isProd = process.env.NODE_ENV !== 'development'
+const isDev = process.env.NODE_ENV === 'development'
+const isProd = process.env.NODE_ENV !== 'development'
 export const env = isDev ? 'dev' : 'prod'
 
+const protocolFront = 'https'
+export const hostnameFrontDev = 'local.sendmequotation.today' // 'localhost'
+const hostnameFrontProd = 'sendmequotation.today'
 export const portFront = 3000
-export const hostFront = 'localhost'
+const baseUrlFrontDev = `${protocolFront}://${hostnameFrontDev}:${portFront}`
+const baseUrlFrontProd = `${protocolFront}://${hostnameFrontProd}`
+export const baseUrlFront = isProd ? baseUrlFrontProd : baseUrlFrontDev
 
+const protocolBack = 'http'
+export const hostnameBack = 'localhost'
 export const portBack = 4000
-export const hostBack = 'http://localhost'
-
-export const domain = isProd
-  ? 'https://sendmequotation.today'
-  : 'https://localhost:3000'
+export const baseUrlBack = `${protocolBack}://${hostnameBack}:${portBack}`

@@ -12,7 +12,7 @@ import { UserModel } from '../../db/models/userModel'
 import { nanoid } from '../../lib/nanoid'
 import { sendEmail } from '../../services/email'
 import type { Next, ReqWithBody, ResWithBody } from '../../types'
-import { domain } from '../../utils/env'
+import { baseUrlFront } from '../../utils/env'
 
 export type ReqBody = {
   email: User['email']
@@ -85,9 +85,9 @@ const register: RouterHandler = async (req, res, next) => {
         <p>
           <a
             clicktracking="off"
-            href="${domain}/activate/${activationKey}"
+            href="${baseUrlFront}/activate/${activationKey}"
           >
-            ${domain}/activate/${activationKey}
+            ${baseUrlFront}/activate/${activationKey}
           </a>
         </p>
       `,

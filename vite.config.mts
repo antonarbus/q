@@ -8,7 +8,7 @@ import {
   // loadEnv
 } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
-import { portBack, hostBack, portFront } from './back/utils/env'
+import { portFront, hostnameFrontDev, baseUrlBack } from './back/utils/env'
 
 // https://vitejs.dev/config/
 
@@ -20,11 +20,11 @@ export default defineConfig(({ command, mode }) => {
   return {
     root: './front/',
     server: {
-      host: 'local.sendmequotation.today',
+      host: hostnameFrontDev,
       port: portFront,
       // https: true, //* type "thisisunsafe" if chrome says that connection is not private
       proxy: {
-        '/api': `${hostBack}:${portBack}/`,
+        '/api': baseUrlBack,
       },
     },
     preview: {
@@ -32,7 +32,7 @@ export default defineConfig(({ command, mode }) => {
       port: portFront,
       // https: true,
       proxy: {
-        '/api': `${hostBack}:${portBack}/`,
+        '/api': baseUrlBack,
       },
     },
     worker: {
