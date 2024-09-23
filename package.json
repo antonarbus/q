@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "NODE_ENV=development concurrently \"npm run start_back\" \"npm run start_front\"",
-    "stop": "kill-port 3005 3006",
+    "stop": "kill-port 3000 4000",
     "start_front": "vite",
     "start_back": "tsx watch back/index.ts",
     "build_front": "vite build",
@@ -27,11 +27,9 @@
     "prettier": "prettier . --check",
     "prettier_fix": "prettier --write .",
     "check": "npm run tsc && npm run lint && npm run prettier && npm run test",
-    "docker_dev_build": "docker compose -f docker-compose.dev.yml build",
-    "docker_dev_up": "docker compose -f docker-compose.dev.yml up",
+    "knip": "knip",
     "docker_prod_build": "docker compose -f docker-compose.prod.yml build",
-    "docker_prod_up": "docker compose -f docker-compose.prod.yml up",
-    "knip": "knip"
+    "docker_prod_up": "docker compose -f docker-compose.prod.yml up"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.12.0",
