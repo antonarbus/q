@@ -1,20 +1,27 @@
-import { Autocomplete, InputAdornment, TextField } from '@mui/material'
+import {
+  type TextFieldProps,
+  Autocomplete,
+  InputAdornment,
+  TextField,
+} from '@mui/material'
 import type { Signal } from '@preact/signals-react'
 import { BsTags } from 'react-icons/bs'
-import { useGetBookmarkCategoriesQuery } from '@entities/bookmark'
 
 type Props = {
-  categorySignal: Signal<string>
-}
+  categorySignal: Signal<string | undefined>
+  options: string[]
+} & TextFieldProps
 
-export const CategoryField = ({ categorySignal }: Props): React.JSX.Element => {
-  const { data } = useGetBookmarkCategoriesQuery()
-
+export const CategoryField = ({
+  categorySignal,
+  options,
+  ...rest
+}: Props): React.JSX.Element => {
   return (
     <div style={{ position: 'relative' }}>
       <Autocomplete
         freeSolo
-        options={data?.categories ?? []}
+        options={options}
         inputValue={categorySignal.value}
         onInputChange={(event, newInputValue) => {
           categorySignal.value = newInputValue
@@ -44,20 +51,22 @@ export const CategoryField = ({ categorySignal }: Props): React.JSX.Element => {
               name='category'
               label='Category'
               placeholder='Category'
-              required
-              InputProps={{
-                ...params.InputProps,
-                startAdornment: (
-                  <InputAdornment position='start'>
-                    <BsTags
-                      style={{
-                        height: '18px',
-                        width: '18px',
-                        translate: '5px',
-                      }}
-                    />
-                  </InputAdornment>
-                ),
+              {...rest}
+              slotProps={{
+                input: {
+                  ...params.InputProps,
+                  startAdornment: (
+                    <InputAdornment position='start'>
+                      <BsTags
+                        style={{
+                          height: '18px',
+                          width: '18px',
+                          translate: '5px',
+                        }}
+                      />
+                    </InputAdornment>
+                  ),
+                },
               }}
               sx={{
                 '.MuiInputBase-root': {
@@ -68,7 +77,7 @@ export const CategoryField = ({ categorySignal }: Props): React.JSX.Element => {
             />
           )
         }}
-        componentsProps={{
+        slotProps={{
           paper: {
             elevation: 10,
             sx: {

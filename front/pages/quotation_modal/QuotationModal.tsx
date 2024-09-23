@@ -2,10 +2,6 @@ import { useRef } from 'react'
 import { MdSaveAlt } from 'react-icons/md'
 import { useSaveQuotation } from '@features/quotation/save_quotation'
 import { FormModal } from '@shared/components/FormModal'
-import { CategoryField } from './CategoryField'
-import { DescriptionField } from './DescriptionField'
-import { InfoField } from './InfoField'
-import { NameField } from './NameField'
 import { ShareField } from './ShareField'
 import { QuotationField } from './QuotationField'
 import {
@@ -15,6 +11,11 @@ import {
 import { useQuotationFormValues } from './useFormValues'
 import { useIsButtonDisabled } from './useIsButtonDisabled'
 import { router } from '@lib_instances/router'
+import { NameField } from '@shared/components/input_fields/NameField'
+import { CategoryField } from '@shared/components/input_fields/CategoryField'
+import { DescriptionField } from '@shared/components/input_fields/DescriptionField'
+import { InfoField } from '@shared/components/input_fields/InfoField'
+import { useGetQuotationCategoriesQuery } from '@entities/quotation'
 
 export const QuotationModal = (): React.JSX.Element => {
   const modalRef = useRef<HTMLDivElement>(null)
@@ -26,6 +27,13 @@ export const QuotationModal = (): React.JSX.Element => {
     modalRef,
     quotationFormValues,
   })
+
+  const navigateUp = (): void => {
+    void router.navigate('..')
+  }
+
+  const { data } = useGetQuotationCategoriesQuery()
+  const options = (data?.categories ?? []).filter((cat) => cat !== undefined)
 
   return (
     <FormModal
@@ -40,16 +48,19 @@ export const QuotationModal = (): React.JSX.Element => {
       isButtonError={isError}
       shouldUnmountOnClickAway
       shouldUnmountOnEsc
-      onUnmount={() => {
-        void router.navigate('..')
-      }}
-      onCloseClick={() => {
-        void router.navigate('..')
-      }}
+      onUnmount={navigateUp}
+      onCloseClick={navigateUp}
       onSubmit={onSubmit}
     >
-      <NameField nameSignal={quotationFormValues.nameSignal} />
-      <CategoryField categorySignal={quotationFormValues.categorySignal} />
+      <NameField
+        nameSignal={quotationFormValues.nameSignal}
+        required
+      />
+      <CategoryField
+        categorySignal={quotationFormValues.categorySignal}
+        options={options}
+        required
+      />
       <DescriptionField descSignal={quotationFormValues.descSignal} />
       <InfoField infoSignal={quotationFormValues.infoSignal} />
       <ShareField

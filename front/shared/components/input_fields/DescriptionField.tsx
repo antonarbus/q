@@ -1,12 +1,15 @@
-import { InputAdornment, TextField } from '@mui/material'
+import { type TextFieldProps, InputAdornment, TextField } from '@mui/material'
 import type { Signal } from '@preact/signals-react'
 import { BsFileEarmarkText } from 'react-icons/bs'
 
 type Props = {
   descSignal: Signal<string | undefined>
-}
+} & TextFieldProps
 
-export const DescriptionField = ({ descSignal }: Props): React.JSX.Element => {
+export const DescriptionField = ({
+  descSignal,
+  ...props
+}: Props): React.JSX.Element => {
   return (
     <div style={{ position: 'relative' }}>
       <TextField
@@ -17,22 +20,27 @@ export const DescriptionField = ({ descSignal }: Props): React.JSX.Element => {
         label='Description'
         multiline
         rows={2}
-        // maxRows={Infinity}
+        {...props}
         value={descSignal.value}
         onChange={(e): void => {
           descSignal.value = e.target.value
         }}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position='start'>
-              <BsFileEarmarkText
-                style={{ height: '22px', width: '22px', translate: '0px 11px' }}
-              />
-            </InputAdornment>
-          ),
-        }}
-        inputProps={{
-          autoComplete: 'off',
+        slotProps={{
+          input: {
+            startAdornment: (
+              <InputAdornment position='start'>
+                <BsFileEarmarkText
+                  style={{
+                    height: '22px',
+                    width: '22px',
+                  }}
+                />
+              </InputAdornment>
+            ),
+          },
+          htmlInput: {
+            autoComplete: 'off',
+          },
         }}
         sx={{
           '.MuiInputBase-root': {

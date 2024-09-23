@@ -4,7 +4,7 @@ import { InputAdornment, TextField } from '@mui/material'
 import { useSignal, type Signal, useSignalEffect } from '@preact/signals-react'
 import mailcheck from 'mailcheck'
 import type { RefObject } from 'react'
-import { isEmailPatternOk } from '../utils/isEmailPatternOk'
+import { isEmailPatternOk } from '../../utils/isEmailPatternOk'
 
 type Props = {
   emailSignal: Signal<string>
@@ -81,12 +81,14 @@ export const EmailField = ({
           suggestEmail(emailSignal.value)
           onClickAway?.()
         }}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position='start'>
-              <Person />
-            </InputAdornment>
-          ),
+        slotProps={{
+          input: {
+            startAdornment: (
+              <InputAdornment position='start'>
+                <Person />
+              </InputAdornment>
+            ),
+          },
         }}
         sx={{
           '& .MuiInputLabel-shrink': {

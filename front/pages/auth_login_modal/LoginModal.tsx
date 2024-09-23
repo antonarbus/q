@@ -5,9 +5,9 @@ import { useRef } from 'react'
 import { useLogIn } from '@features/auth/log_in'
 import { OpenRegisterModalLink } from '@features/open_close/open_register_modal'
 import { OpenResetModalLink } from '@features/open_close/open_reset_modal'
-import { EmailField } from '@shared/components/EmailField'
+import { EmailField } from '@shared/components/input_fields/EmailField'
 import { FormModal } from '@shared/components/FormModal'
-import { PasswordField } from '@shared/components/PasswordField'
+import { PasswordField } from '@shared/components/input_fields/PasswordField'
 import { router } from '@lib_instances/router'
 
 export const LoginModal = (): React.JSX.Element => {
@@ -21,8 +21,13 @@ export const LoginModal = (): React.JSX.Element => {
     passwordSignal,
     modalRef,
   })
+
   const isButtonDisabled =
     !isEmailOkSignal.value || passwordSignal.value === '' || isPending
+
+  const navigateUp = (): void => {
+    void router.navigate('..')
+  }
 
   return (
     <FormModal
@@ -38,12 +43,8 @@ export const LoginModal = (): React.JSX.Element => {
       isButtonError={isError}
       shouldUnmountOnClickAway
       shouldUnmountOnEsc
-      onUnmount={() => {
-        void router.navigate('..')
-      }}
-      onCloseClick={() => {
-        void router.navigate('..')
-      }}
+      onUnmount={navigateUp}
+      onCloseClick={navigateUp}
       onSubmit={onSubmit}
     >
       <EmailField

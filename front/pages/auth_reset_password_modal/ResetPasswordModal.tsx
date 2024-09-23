@@ -7,9 +7,9 @@ import { useResetPassword } from '@features/auth/reset_password'
 import { OpenLoginModalLink } from '@features/open_close/open_login_modal'
 import { OpenRegisterModalLink } from '@features/open_close/open_register_modal'
 import { ConfirmPasswordField } from '@shared/components/ConfirmPasswordField'
-import { EmailField } from '@shared/components/EmailField'
+import { EmailField } from '@shared/components/input_fields/EmailField'
 import { FormModal } from '@shared/components/FormModal'
-import { PasswordField } from '@shared/components/PasswordField'
+import { PasswordField } from '@shared/components/input_fields/PasswordField'
 import { router } from '@lib_instances/router'
 
 export const ResetPasswordModal = (): React.ReactNode => {
@@ -33,6 +33,10 @@ export const ResetPasswordModal = (): React.ReactNode => {
     isButtonDisabledSignal.value = !isConfirmPasswordOkSignal.value
   })
 
+  const navigateUp = (): void => {
+    void router.navigate('..')
+  }
+
   return (
     <FormModal
       modalRef={modalRef}
@@ -47,12 +51,8 @@ export const ResetPasswordModal = (): React.ReactNode => {
       isButtonError={isError}
       shouldUnmountOnClickAway
       shouldUnmountOnEsc
-      onUnmount={() => {
-        void router.navigate('..')
-      }}
-      onCloseClick={() => {
-        void router.navigate('..')
-      }}
+      onUnmount={navigateUp}
+      onCloseClick={navigateUp}
       onSubmit={onSubmit}
     >
       <EmailField

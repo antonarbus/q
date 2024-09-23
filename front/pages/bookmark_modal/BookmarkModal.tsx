@@ -3,18 +3,22 @@ import { FiEdit3 } from 'react-icons/fi'
 import { useSaveBookmark } from '@features/bookmark/save_bookmark'
 import { FormModal } from '@shared/components/FormModal'
 import { BookmarkField } from './BookmarkField'
-import { CategoryField } from './CategoryField'
-import { DescriptionField } from './DescriptionField'
-import { NameField } from './NameField'
-import { InfoField } from './InfoField'
 import {
   useLoadInitValuesIntoBookmarkModal,
   useLoadBookmarkModalOpenedWithDirectLink,
 } from '@features/open_close/open_bookmark_modal'
 import { useUnmount } from 'react-use'
-import { quotationSlice } from '@entities/quotation'
+import {
+  quotationSlice,
+  useGetQuotationCategoriesQuery,
+} from '@entities/quotation'
 import { dispatch } from '@lib_instances/store'
 import { router } from '@lib_instances/router'
+import { NameField } from '@shared/components/input_fields/NameField'
+import { CategoryField } from '@shared/components/input_fields/CategoryField'
+import { DescriptionField } from '@shared/components/input_fields/DescriptionField'
+import { InfoField } from '@shared/components/input_fields/InfoField'
+import { useGetBookmarkCategoriesQuery } from '@entities/bookmark'
 
 export const BookmarkModal = (): React.JSX.Element => {
   const modalRef = useRef<HTMLDivElement>(null)
@@ -32,6 +36,9 @@ export const BookmarkModal = (): React.JSX.Element => {
   const navigateUp = (): void => {
     void router.navigate('..')
   }
+
+  const { data } = useGetBookmarkCategoriesQuery()
+  const categories = (data?.categories ?? []).filter((cat) => cat !== undefined)
 
   const isButtonDisabled =
     bookmarkFromValues.nameSignal.value === '' ||
@@ -54,8 +61,15 @@ export const BookmarkModal = (): React.JSX.Element => {
       onCloseClick={navigateUp}
       onSubmit={onSubmit}
     >
-      <NameField nameSignal={bookmarkFromValues.nameSignal} />
-      <CategoryField categorySignal={bookmarkFromValues.categorySignal} />
+      <NameField
+        nameSignal={bookmarkFromValues.nameSignal}
+        required
+      />
+      <CategoryField
+        categorySignal={bookmarkFromValues.categorySignal}
+        options={categories}
+        required
+      />
       <DescriptionField descSignal={bookmarkFromValues.descSignal} />
       <InfoField infoSignal={bookmarkFromValues.infoSignal} />
       <BookmarkField />

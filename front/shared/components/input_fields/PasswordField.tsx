@@ -34,24 +34,26 @@ export const PasswordField = ({
       onChange={(e): void => {
         passwordSignal.value = e.target.value
       }}
-      InputProps={{
-        startAdornment: (
-          <InputAdornment position='start'>
-            <Lock />
-          </InputAdornment>
-        ),
-        endAdornment: (
-          <InputAdornment position='end'>
-            <IconButton
-              edge='end'
-              onClick={(): void => {
-                showPassword.value = !showPassword.value
-              }}
-            >
-              {showPassword.value ? <VisibilityOff /> : <Visibility />}
-            </IconButton>
-          </InputAdornment>
-        ),
+      slotProps={{
+        input: {
+          startAdornment: (
+            <InputAdornment position='start'>
+              <Lock />
+            </InputAdornment>
+          ),
+          endAdornment: (
+            <InputAdornment position='end'>
+              <IconButton
+                edge='end'
+                onClick={(): void => {
+                  showPassword.value = !showPassword.value
+                }}
+              >
+                {showPassword.value ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          ),
+        },
       }}
       sx={{
         '& .MuiInputLabel-shrink': {

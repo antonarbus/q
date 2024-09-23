@@ -5,9 +5,9 @@ import { useRef } from 'react'
 import { useRegister } from '@features/auth/register'
 import { OpenLoginModalLink } from '@features/open_close/open_login_modal'
 import { ConfirmPasswordField } from '@shared/components/ConfirmPasswordField'
-import { EmailField } from '@shared/components/EmailField'
+import { EmailField } from '@shared/components/input_fields/EmailField'
 import { FormModal } from '@shared/components/FormModal'
-import { PasswordField } from '@shared/components/PasswordField'
+import { PasswordField } from '@shared/components/input_fields/PasswordField'
 import { router } from '@lib_instances/router'
 
 export const RegisterModal = (): React.JSX.Element => {
@@ -30,6 +30,10 @@ export const RegisterModal = (): React.JSX.Element => {
     )
   })
 
+  const navigateUp = (): void => {
+    void router.navigate('..')
+  }
+
   return (
     <FormModal
       modalRef={modalRef}
@@ -44,12 +48,8 @@ export const RegisterModal = (): React.JSX.Element => {
       isButtonError={isError}
       shouldUnmountOnClickAway
       shouldUnmountOnEsc
-      onUnmount={() => {
-        void router.navigate('..')
-      }}
-      onCloseClick={() => {
-        void router.navigate('..')
-      }}
+      onUnmount={navigateUp}
+      onCloseClick={navigateUp}
       onSubmit={onSubmit}
     >
       <EmailField

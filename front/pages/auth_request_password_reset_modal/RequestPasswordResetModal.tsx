@@ -4,7 +4,7 @@ import { useSignal } from '@preact/signals-react'
 import { useRef } from 'react'
 import { useRequestPasswordReset } from '@features/auth/request_password_reset'
 import { OpenLoginModalLink } from '@features/open_close/open_login_modal'
-import { EmailField } from '@shared/components/EmailField'
+import { EmailField } from '@shared/components/input_fields/EmailField'
 import { FormModal } from '@shared/components/FormModal'
 import { router } from '@lib_instances/router'
 
@@ -17,6 +17,10 @@ export const RequestPasswordResetModal = (): React.JSX.Element => {
     emailSignal,
     modalRef,
   })
+
+  const navigateUp = (): void => {
+    void router.navigate('..')
+  }
 
   return (
     <FormModal
@@ -32,12 +36,8 @@ export const RequestPasswordResetModal = (): React.JSX.Element => {
       isButtonError={isError}
       shouldUnmountOnClickAway
       shouldUnmountOnEsc
-      onUnmount={() => {
-        void router.navigate('..')
-      }}
-      onCloseClick={() => {
-        void router.navigate('..')
-      }}
+      onUnmount={navigateUp}
+      onCloseClick={navigateUp}
       onSubmit={onSubmit}
     >
       <EmailField

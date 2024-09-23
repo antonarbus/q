@@ -29,10 +29,6 @@ const getQuotationCategories: RouterHandler = async (req, res, next) => {
     return res
       .status(httpStatus.success_200)
       .json({ message: 'Found', categories })
-
-    // return res
-    //   .status(httpStatus.notFound_404)
-    //   .json({ message: 'Unhandled error' })
   } catch (error) {
     next(error)
   }
