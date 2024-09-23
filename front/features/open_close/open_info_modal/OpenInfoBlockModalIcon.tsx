@@ -24,6 +24,7 @@ export const OpenInfoBlockModalIcon = (): ReactNode => {
       <span className={cls.actionIconContainer}>
         <HiOutlineInformationCircle
           className={cls.actionIcon}
+          aria-hidden={false} // otherwise error in dev tools
           tabIndex={-1}
           style={{
             color: disabled ? '#acacac' : '#000',

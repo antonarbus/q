@@ -31,6 +31,7 @@ export const OpenInfoBoqRowModalIcon = (): ReactNode => {
         <HiOutlineInformationCircle
           className={cls.actionIcon}
           tabIndex={-1}
+          aria-hidden={false} // otherwise error in dev tools
           style={{
             color: disabled ? '#acacac' : '#000',
             cursor: 'pointer',
