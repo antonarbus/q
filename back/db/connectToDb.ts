@@ -7,7 +7,7 @@ export const connectToDb = async (): Promise<void> => {
   try {
     if (!mongoDbUrl) return
     mongoose.set('strictQuery', false)
-    await mongoose.connect(`${mongoDbUrl}/${db}`)
+    await mongoose.connect(`${mongoDbUrl}/${db}`, { autoIndex: false })
     console.info('🚀 connected to db')
   } catch (error) {
     console.warn('💣 error on db connection')
