@@ -80,26 +80,36 @@ jobs:
       - name: Run ESlint
         run: npm run lint
 
-      - name: Check Docker version
-        run: docker --version
-
-      - name: Build container
-        run: npm run docker_prod_build
-
-      - name: Start container
-        run: npm run docker_prod_up
+      - name: Start dev server
+        run: |
+          npm run start &
+          echo "Dev server is being launched"
 
       - name: Wait for server startup
         run: sleep 10
 
+      - name: Wait for server to be ready
+        run: |
+          for i in {1..30}; do
+            curl -k https://localhost:3000 && break
+            echo "Waiting for server..."
+            sleep 5
+          done
+
       - name: Check if the service is accessible
         run: |
-          curl http://localhost:8080 -I -s | grep "HTTP/2 200"; then
+          curl -k https://localhost:3000 -I -s | grep "HTTP/2 200"; then
             echo "service is reachable"
           else
             echo "service is NOT reachable"
             exit 1
           fi
+
+      - name: Run Playwright tests
+        run: npm run playwright
+
+      - name: Stop server
+        run: npm run stop
 
       - name: Build and push Docker image Backend
         id: build-push-back
