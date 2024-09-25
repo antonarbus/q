@@ -22,6 +22,7 @@
     "test:ui": "vitest --ui",
     "coverage": "vitest run --coverage",
     "playwright": "playwright test",
+    "playwright_record": "playwright codegen https://localhost:3000 --ignore-https-errors",
     "lint": "eslint .",
     "fix": "eslint . --fix",
     "tsc": "tsc --noEmit",
