@@ -85,23 +85,23 @@ jobs:
           npm run start &
           echo "Dev server is being launched"
 
-      - name: Wait for server startup
+      - name: Wait for dev server startup
         run: sleep 10
 
-      - name: Wait for server to be ready
+      - name: Wait for dev server to be ready
         run: |
           for i in {1..30}; do
-            curl -k https://localhost:3000 && break
+            curl -k https://localhost:3000 -I -s | grep "HTTP/2 200" && break
             echo "Waiting for server..."
             sleep 5
           done
 
       - name: Check if the service is accessible
         run: |
-          curl -k https://localhost:3000 -I -s | grep "HTTP/2 200"; then
-            echo "service is reachable"
+          if curl -k https://localhost:3000 -I -s | grep -q "HTTP/2 200"; then
+            echo "app is reachable on dev server"
           else
-            echo "service is NOT reachable"
+            echo "app is NOT reachable on dev server"
             exit 1
           fi
 
