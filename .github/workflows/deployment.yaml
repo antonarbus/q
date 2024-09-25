@@ -51,7 +51,7 @@ jobs:
           username: oauth2accesstoken
           password: ${{steps.gcloud-auth.outputs.access_token}}
 
-      - name: Install Node.js
+      - name: Install NodeJS
         uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -74,11 +74,32 @@ jobs:
       - name: Formatting check
         run: npm run prettier
 
-      - name: Run typescript checks
+      - name: Run TypeScript checks
         run: npm run tsc
 
-      - name: Run eslint
+      - name: Run ESlint
         run: npm run lint
+
+      - name: Check Docker version
+        run: docker --version
+
+      - name: Build container
+        run: npm run docker_prod_build
+
+      - name: Start container
+        run: npm run docker_prod_up
+
+      - name: Wait for server startup
+        run: sleep 10
+
+      - name: Check if the service is accessible
+        run: |
+          curl http://localhost:8080 -I -s | grep "HTTP/2 200"; then
+            echo "service is reachable"
+          else
+            echo "service is NOT reachable"
+            exit 1
+          fi
 
       - name: Build and push Docker image Backend
         id: build-push-back
