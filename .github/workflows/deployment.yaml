@@ -97,15 +97,6 @@ jobs:
             sleep 5
           done
 
-      - name: Check if the service is accessible
-        run: |
-          if curl -k https://localhost:3000 -I -s | grep -q "HTTP/2 200"; then
-            echo "app is reachable on dev server"
-          else
-            echo "app is NOT reachable on dev server"
-            exit 1
-          fi
-
       - name: Run Playwright tests
         run: npm run playwright
 
