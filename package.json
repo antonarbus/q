@@ -27,7 +27,7 @@
     "tsc": "tsc --noEmit",
     "prettier": "prettier . --check",
     "prettier_fix": "prettier --write .",
-    "check": "npm run tsc && npm run lint && npm run prettier && npm run test",
+    "check": "npm run tsc && npm run lint && npm run prettier && npm run test && npm run playwright",
     "knip": "knip",
     "docker_prod_build": "docker compose -f docker-compose.prod.yml build",
     "docker_prod_up": "docker compose -f docker-compose.prod.yml up"
