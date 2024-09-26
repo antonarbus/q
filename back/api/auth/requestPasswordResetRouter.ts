@@ -79,7 +79,7 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
 
     const emailRes = await sendEmail({
       to: email,
-      subject: 'password reset',
+      subject: 'Password reset',
       html: `
         <p>Follow the link to reset the password.</p>
         <br>

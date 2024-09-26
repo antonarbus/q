@@ -78,7 +78,7 @@ const register: RouterHandler = async (req, res, next) => {
 
     const emailRes = await sendEmail({
       to: email,
-      subject: 'activate your account',
+      subject: 'Activate your account',
       html: `
         <p>Follow the link to activate the account.</p>
         <br>

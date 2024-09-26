@@ -8,4 +8,5 @@ export type User = {
   refreshJwtToken: string
   createdAt: Date
   updatedAt: Date
+  loggedAt: Date
 }

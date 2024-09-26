@@ -30,6 +30,7 @@ const userSchema = new Schema<User>(
     refreshJwtToken: String,
     createdAt: Date,
     updatedAt: Date,
+    loggedAt: Date,
   },
   {
     timestamps: true,

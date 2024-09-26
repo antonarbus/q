@@ -39,9 +39,6 @@ const getAccessToken = async (
 
     if (typeof refreshJwtToken !== 'string') {
       throw new Error(errorMessageCommon.notLoggedIn)
-      // return res
-      //   .status(httpStatus.unauthorized_401)
-      //   .json({ message: 'no refresh token found in cookies, not authorized' })
     }
 
     const jwtPayload = verifyRefreshToken(refreshJwtToken)
@@ -50,28 +47,21 @@ const getAccessToken = async (
 
     if (typeof email !== 'string') {
       throw new Error(errorMessageCommon.notLoggedIn)
-      // return res
-      //   .status(httpStatus.unauthorized_401)
-      //   .json({ message: 'refresh token is not validated, not authorized' })
     }
 
-    const user = await UserModel.findOne({ email, refreshJwtToken })
+    const user = await UserModel.findOneAndUpdate(
+      { email, refreshJwtToken },
+      { loggedAt: Date.now() },
+    )
 
     if (!user) {
       throw new Error(errorMessageCommon.notLoggedIn)
-
-      // return res
-      //   .status(httpStatus.unauthorized_401)
-      //   .json({ message: 'no user found with such refresh token' })
     }
 
     const accessJwtToken = createAccessToken({ email, roles: user.roles })
 
     if (!accessJwtToken) {
       throw new Error(errorMessageCommon.notLoggedIn)
-      // return res
-      //   .status(httpStatus.unauthorized_401)
-      //   .json({ message: 'something went wrong during access token creation' })
     }
 
     return res.status(httpStatus.success_200).json({

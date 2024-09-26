@@ -63,7 +63,7 @@ const activate: RouterHandler = async (req, res, next) => {
 
     const document = await UserModel.findOneAndUpdate(
       { email, activationKey },
-      { refreshJwtToken, isActivated: true },
+      { refreshJwtToken, isActivated: true, loggedAt: Date.now() },
       { new: true },
     ).lean()
 

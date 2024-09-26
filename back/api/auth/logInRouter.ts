@@ -76,19 +76,19 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
     if (!user.isActivated) {
       const emailRes = await sendEmail({
         to: email,
-        subject: 'activate your account',
+        subject: 'Activate your account',
         html: `
-        <p>Follow the link to activate the account.</p>
-        <br>
-        <p>
-          <a
-            clicktracking="off"
-            href="${baseUrlFront}/activate/${user.activationKey}"
-          >
-            ${baseUrlFront}/activate/${user.activationKey}
-          </a>
-        </p>
-      `,
+          <p>Follow the link to activate the account.</p>
+          <br>
+          <p>
+            <a
+              clicktracking="off"
+              href="${baseUrlFront}/activate/${user.activationKey}"
+            >
+              ${baseUrlFront}/activate/${user.activationKey}
+            </a>
+          </p>
+        `,
       })
 
       if (emailRes?.[0].statusCode === 202) {
@@ -107,6 +107,7 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
     )
 
     const accessJwtToken = createAccessToken({ email, roles: user.roles })
+
     const refreshJwtToken = isExistingRefreshJwtToken
       ? user.refreshJwtToken
       : createRefreshToken({ email, roles: user.roles })
@@ -125,7 +126,7 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
     if (!isExistingRefreshJwtToken) {
       await UserModel.findOneAndUpdate(
         { email },
-        { refreshJwtToken },
+        { refreshJwtToken, loggedAt: Date.now() },
         { new: true },
       )
     }

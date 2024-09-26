@@ -7,10 +7,20 @@ export const testRouter = Router()
 
 async function test(req: Req, res: Res, next: Next): Promise<void> {
   try {
-    const dbRes = await UserModel.find({ email: 'some random guy' })
+    // const dbRes = await UserModel.find({ email: 'some random guy' })
     // const dbRes = await UserModel.find({ email: 'anton.arbus@gmail.com' })
     // await UserModel.deleteOne({ email: 'info@sendmequotation.today' })
-    // const dbRes = await UserModel.find()
+    const dbRes = await UserModel.find().select({
+      _id: false,
+      __v: false,
+      activationKey: false,
+      activationLink: false,
+      refreshJwtToken: false,
+      resetLink: false,
+      resetPasswordKey: false,
+      roles: false,
+      password: false,
+    })
     // const dbRes = await ItemModel.find().distinct('category', { email: 'anton.arbus@gmail.com' })
     // const dbRes = await QuotationModel.find()
 
