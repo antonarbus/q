@@ -11,11 +11,7 @@ import type { Next, ReqExtended, ResWithBody } from '../../types'
 import { errorMessageCommon } from '@shared/consts/errorMessageCommon'
 
 export type ResBody = {
-  message: // | 'no refresh token found in cookies, not authorized'
-  // | 'refresh token is not validated, not authorized'
-  // | 'no user found with such refresh token'
-  // | 'something went wrong during access token creation'
-  'issued access token'
+  message: 'issued access token'
   email?: User['email']
   accessJwtToken?: string
   roles?: User['roles']
