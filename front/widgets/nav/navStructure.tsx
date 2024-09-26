@@ -37,7 +37,12 @@ export const navStructure: MenuItemType[] = [
     menuItems: [
       {
         id: navItemKey.back,
-        icon: <IoChevronBackOutline style={{ color: '#3bc3ff' }} />,
+        icon: (
+          <IoChevronBackOutline
+            style={{ color: '#3bc3ff' }}
+            data-testid='back icon'
+          />
+        ),
         isHidden: true,
         name: 'Back',
         // shortcut: ['control', 'n'],
@@ -50,7 +55,7 @@ export const navStructure: MenuItemType[] = [
       },
       {
         id: navItemKey.new,
-        icon: <VscNewFile />,
+        icon: <VscNewFile data-testid='new icon' />,
         isHidden: false,
         name: 'New',
         // shortcut: ['control', 'n'],
@@ -63,7 +68,7 @@ export const navStructure: MenuItemType[] = [
       },
       {
         id: navItemKey.save,
-        icon: <MdSaveAlt />,
+        icon: <MdSaveAlt data-testid='save icon' />,
         isHidden: false,
         name: 'Save',
         // shortcut: ['control', 's'],
@@ -75,7 +80,7 @@ export const navStructure: MenuItemType[] = [
       },
       {
         id: navItemKey.pdf,
-        icon: <BsFiletypePdf />,
+        icon: <BsFiletypePdf data-testid='pdf icon' />,
         isHidden: false,
         name: 'Pdf',
         disabled: true,
@@ -86,7 +91,7 @@ export const navStructure: MenuItemType[] = [
       },
       {
         id: navItemKey.insert,
-        icon: <RiMenuAddFill />,
+        icon: <RiMenuAddFill data-testid='insert icon' />,
         isHidden: false,
         name: 'Insert',
         disabled: true,
@@ -144,7 +149,7 @@ export const navStructure: MenuItemType[] = [
       },
       {
         id: navItemKey.bookmarks,
-        icon: <PiFolderSimpleStarDuotone />,
+        icon: <PiFolderSimpleStarDuotone data-testid='bookmarks icon' />,
         isHidden: false,
         name: 'Bookmarks',
         link: route.bookmarks,
@@ -155,7 +160,7 @@ export const navStructure: MenuItemType[] = [
       },
       {
         id: navItemKey.quotations,
-        icon: <CiViewTable />,
+        icon: <CiViewTable data-testid='quotations icon' />,
         isHidden: false,
         name: 'Quotations',
         link: route.quotations,
@@ -166,7 +171,7 @@ export const navStructure: MenuItemType[] = [
       },
       {
         id: navItemKey.login,
-        icon: <FiLogIn />,
+        icon: <FiLogIn data-testid='login icon' />,
         isHidden: false,
         name: 'Log in',
         link: `./${route.login}`,
@@ -177,7 +182,7 @@ export const navStructure: MenuItemType[] = [
       },
       {
         id: navItemKey.profile,
-        icon: <Person />,
+        icon: <Person data-testid='profile icon' />,
         name: 'Profile',
         isHidden: true,
         menuItems: [

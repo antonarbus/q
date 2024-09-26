@@ -24,7 +24,10 @@ export const Burger = (): React.JSX.Element => {
   )
 
   return (
-    <BurgerContainer screenWidthWhenShowBurger={screenWidthWhenShowBurger}>
+    <BurgerContainer
+      screenWidthWhenShowBurger={screenWidthWhenShowBurger}
+      data-testid='hamburger icon'
+    >
       <BurgerIcon
         toggled={isOpen}
         toggle={(): void => {
