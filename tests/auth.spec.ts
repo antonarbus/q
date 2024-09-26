@@ -1,6 +1,5 @@
 import { test, expect } from '@playwright/test'
-
-const url = 'https://localhost:3000'
+import { route } from '@shared/consts/route'
 
 test('log in & out', async ({ page }) => {
   const email = 'anton.arbus@gmail.com'
@@ -9,7 +8,7 @@ test('log in & out', async ({ page }) => {
 
   test.setTimeout(sixtySec)
 
-  await page.goto(url)
+  await page.goto(route.root)
 
   await page.getByRole('link', { name: 'Log in' }).click()
   await page.getByPlaceholder('Email').fill(email)

@@ -1,19 +1,18 @@
 import { test, expect } from '@playwright/test'
-
-const url = 'https://localhost:3000'
+import { route } from '@shared/consts/route'
 
 test('page is accessible', async ({ page }) => {
-  const response = await page.goto(url)
+  const response = await page.goto(route.root)
   expect(response?.status()).toBe(200)
 })
 
 test('has title', async ({ page }) => {
-  await page.goto(url)
+  await page.goto(route.root)
   await expect(page).toHaveTitle(/SendMeQuotation.today/u)
 })
 
 test('has main elements & texts on index page', async ({ page }) => {
-  await page.goto(url)
+  await page.goto(route.root)
 
   const mainElement = await page.$('main')
   expect(mainElement).not.toBeNull()
