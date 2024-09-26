@@ -61,7 +61,7 @@ const activate: RouterHandler = async (req, res, next) => {
       httpOnly: true,
     })
 
-    const document = await UserModel.findOneAndUpdate(
+    const userDocument = await UserModel.findOneAndUpdate(
       { email, activationKey },
       { refreshJwtToken, isActivated: true, loggedAt: Date.now() },
       { new: true },
@@ -70,8 +70,8 @@ const activate: RouterHandler = async (req, res, next) => {
     return res.status(httpStatus.success_200).json({
       message: 'activated',
       accessJwtToken,
-      email: document?.email,
-      roles: document?.roles,
+      email: userDocument?.email,
+      roles: userDocument?.roles,
     })
   } catch (error) {
     next(error)
