@@ -8,7 +8,7 @@ const protocolFront = 'https'
 export const hostnameFrontDev = 'localhost' // 'local.sendmequotation.today'
 const hostnameFrontProd = 'sendmequotation.today'
 export const portFront = 3000
-const baseUrlFrontDev = `${protocolFront}://${hostnameFrontDev}:${portFront}`
+export const baseUrlFrontDev = `${protocolFront}://${hostnameFrontDev}:${portFront}`
 const baseUrlFrontProd = `${protocolFront}://${hostnameFrontProd}`
 export const baseUrlFront = isProd ? baseUrlFrontProd : baseUrlFrontDev
 

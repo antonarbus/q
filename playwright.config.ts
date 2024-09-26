@@ -1,3 +1,4 @@
+import { baseUrlFrontDev } from '@back/utils/env'
 import { defineConfig, devices } from '@playwright/test'
 
 // https://playwright.dev/docs/test-configuration
@@ -11,7 +12,7 @@ export default defineConfig({
   reporter: 'html',
   timeout: 30000,
   use: {
-    baseURL: 'https://localhost:3000',
+    baseURL: baseUrlFrontDev,
     trace: 'on-first-retry',
   },
   projects: [
