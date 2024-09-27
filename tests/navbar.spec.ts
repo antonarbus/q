@@ -1,12 +1,14 @@
 import { test, expect } from '@playwright/test'
 import { route } from '@shared/consts/route'
 
+test.beforeEach(async ({ page }) => {
+  await page.goto(route.root)
+})
+
 test.describe('nav icons & text on wide screen', () => {
   test.use({ viewport: { width: 1600, height: 1200 } })
 
   test('should show icons & text', async ({ page }) => {
-    await page.goto(route.root)
-
     const nav = page.locator('nav')
 
     await expect(nav.locator('[data-testid="new icon"]')).toBeVisible()
@@ -33,8 +35,6 @@ test.describe('nav icons & text on mid screen', () => {
   test.use({ viewport: { width: 800, height: 1200 } })
 
   test('should show only text', async ({ page }) => {
-    await page.goto(route.root)
-
     const nav = page.locator('nav')
 
     await expect(nav.locator('[data-testid="new icon"]')).not.toBeVisible()
@@ -65,8 +65,6 @@ test.describe('nav icons & text on narrow screen', () => {
   test.use({ viewport: { width: 600, height: 1200 } })
 
   test('should show only icons', async ({ page }) => {
-    await page.goto(route.root)
-
     const nav = page.locator('nav')
 
     await expect(nav.locator('[data-testid="new icon"]')).toBeVisible()
@@ -93,8 +91,6 @@ test.describe('nav icons & text on super narrow screen', () => {
   test.use({ viewport: { width: 500, height: 1200 } })
 
   test('should show only hamburger icon', async ({ page }) => {
-    await page.goto(route.root)
-
     const nav = page.locator('nav')
 
     await expect(nav.locator('[data-testid="new icon"]')).not.toBeVisible()
