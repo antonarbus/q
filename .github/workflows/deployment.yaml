@@ -97,8 +97,8 @@ jobs:
       #       sleep 5
       #     done
 
-      - name: Install Playwright
-        run: npx playwright install
+      # - name: Install Playwright
+      #   run: npx playwright install
 
       - name: Run Playwright tests
         run: npm run playwright
