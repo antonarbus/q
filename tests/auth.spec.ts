@@ -7,7 +7,7 @@ test('log in & out', async ({ page }) => {
 
   await page.goto(route.root)
   await page.getByRole('link', { name: 'Log in' }).click()
-  const button = page.locator('button').filter({ hasText: /LOG IN/u })
+  const button = page.locator('button').filter({ hasText: 'LOG IN' })
   await expect(button).toBeDisabled()
   await page.getByPlaceholder('Email').focus()
   await page.getByPlaceholder('Email').fill(email)
