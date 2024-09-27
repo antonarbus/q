@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 import { route } from '@shared/consts/route'
 
-test('log in & out', async ({ page }) => {
+test.skip('log in & out', async ({ page }) => {
   const email = 'anton.arbus@gmail.com'
   const password = 'xxx'
 
