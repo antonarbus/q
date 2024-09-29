@@ -31,7 +31,7 @@ export default defineConfig({
         launchOptions: {
           args: ['--ignore-certificate-errors'],
         },
-        storageState: 'playwright/.auth/user.json',
+        storageState: 'playwright/.auth/authenticated_user.json',
       },
       dependencies: ['setup'],
     },

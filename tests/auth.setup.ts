@@ -16,10 +16,13 @@ setup('authenticate', async () => {
 
   if (response.ok()) {
     const authDir = path.resolve('playwright', '.auth')
-    const filePath = path.join(authDir, 'user.json')
+    const filePath = path.join(authDir, 'authenticated_user.json')
     await fs.mkdir(authDir, { recursive: true })
     await context.storageState({ path: filePath })
   } else {
-    throw new Error(`Failed to authenticate: ${response.status()}`)
+    const responseBody = await response.text() // Get the response body as text
+    throw new Error(
+      `Failed to authenticate: ${response.status()} - ${responseBody}`,
+    )
   }
 })
