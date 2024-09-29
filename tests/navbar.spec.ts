@@ -25,8 +25,8 @@ test.describe('nav icons & text on wide screen', () => {
     await expect(nav).toHaveText(/Bookmarks/u)
     await expect(nav.locator('[data-testid="quotations icon"]')).toBeVisible()
     await expect(nav).toHaveText(/Quotations/u)
-    await expect(nav.locator('[data-testid="login icon"]')).toBeVisible()
-    await expect(nav).toHaveText(/Log in/u, { timeout: 1000 })
+    await expect(nav.locator('[data-testid="profile icon"]')).toBeVisible()
+    await expect(nav).toHaveText(/Profile/u, { timeout: 1000 })
     await expect(
       nav.locator('[data-testid="hamburger icon"]'),
     ).not.toBeVisible()
@@ -54,7 +54,7 @@ test.describe('nav icons & text on mid screen', () => {
     ).not.toBeVisible()
     await expect(nav).toHaveText(/Quotations/u)
     await expect(nav.locator('[data-testid="login icon"]')).not.toBeVisible()
-    await expect(nav).toHaveText(/Log in/u)
+    await expect(nav).toHaveText(/Profile/u)
     await expect(
       nav.locator('[data-testid="hamburger icon"]'),
     ).not.toBeVisible()

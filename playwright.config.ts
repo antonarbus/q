@@ -10,15 +10,20 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
   reporter: process.env.CI ? 'dot' : 'list',
-  // timeout: 30000,
-  // expect: {
-  //   timeout: 5000,
-  // },
   use: {
     baseURL: baseUrlFrontDev,
     trace: 'on-first-retry',
   },
   projects: [
+    {
+      name: 'setup',
+      testMatch: /.*\.setup\.ts/u,
+      use: {
+        launchOptions: {
+          args: ['--ignore-certificate-errors'],
+        },
+      },
+    },
     {
       name: 'chromium',
       use: {
@@ -26,36 +31,10 @@ export default defineConfig({
         launchOptions: {
           args: ['--ignore-certificate-errors'],
         },
+        storageState: 'playwright/.auth/user.json',
       },
+      dependencies: ['setup'],
     },
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
-
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
   ],
 
   /* Run your local dev server before starting the tests */
