@@ -33,6 +33,18 @@ test.describe('nav icons & text on wide screen', () => {
   })
 })
 
+test.describe('nav icons for guest user', () => {
+  test.use({ viewport: { width: 1600, height: 1200 } })
+  test.use({ storageState: 'playwright/.auth/guest_user.json' })
+
+  test('should show icons & text', async ({ page }) => {
+    await expect(nav.locator('[data-testid="login icon"]')).toBeVisible()
+    await expect(nav).toHaveText(/Log in/u, { timeout: 1000 })
+    await expect(nav.locator('[data-testid="profile icon"]')).not.toBeVisible()
+    await expect(nav).not.toHaveText(/Profile/u, { timeout: 1000 })
+  })
+})
+
 test.describe('nav icons & text on mid screen', () => {
   test.use({ viewport: { width: 800, height: 1200 } })
 
