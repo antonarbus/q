@@ -1,5 +1,6 @@
 import { baseUrlFrontDev } from '@back/utils/env'
 import { defineConfig, devices } from '@playwright/test'
+import waitOn from 'wait-on'
 
 // https://playwright.dev/docs/test-configuration
 
@@ -36,12 +37,19 @@ export default defineConfig({
       dependencies: ['setup'],
     },
   ],
-
-  /* Run your local dev server before starting the tests */
-  webServer: {
-    command: 'npm run start',
-    url: 'https://localhost:3000',
-    reuseExistingServer: !process.env.CI,
-    ignoreHTTPSErrors: true,
-  },
+  // https://playwright.dev/docs/test-webserver
+  webServer: [
+    {
+      command: 'npm run start_back',
+      url: 'http://localhost:4000',
+      ignoreHTTPSErrors: true,
+      reuseExistingServer: !process.env.CI,
+    },
+    {
+      command: 'npm run start_front',
+      url: 'https://localhost:3000',
+      ignoreHTTPSErrors: true,
+      reuseExistingServer: !process.env.CI,
+    },
+  ],
 })
