@@ -1,6 +1,5 @@
 import { baseUrlFrontDev } from '@back/utils/env'
 import { defineConfig, devices } from '@playwright/test'
-import waitOn from 'wait-on'
 
 // https://playwright.dev/docs/test-configuration
 
@@ -16,6 +15,7 @@ export default defineConfig({
     trace: 'on-first-retry',
   },
   projects: [
+    // https://playwright.dev/docs/auth#authenticate-with-api-request
     {
       name: 'setup',
       testMatch: /.*\.setup\.ts/u,
