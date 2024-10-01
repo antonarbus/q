@@ -5,13 +5,13 @@ import { getTextContentFromHtml } from '@shared/utils/getTextContentFromHtml'
 import { getStringWithNewFormattedNumber } from '@shared/utils/getStringWithNewFormattedNumber'
 import { getBoqRowFromStore } from '../redux/getters/getBoqRowFromStore'
 import { updateBoqRowCellAtStore } from '../redux/updaters/updateBoqRowCellAtStore'
-import type { RowCellKey } from '../types'
+import type { BoqRowCellKey } from '../consts/boqRowCellKey'
 
 type Props = {
   blockIndex: number
   rowIndex: number
   editor: FroalaEditor | null
-  boqRowCellKey: RowCellKey
+  boqRowCellKey: BoqRowCellKey
   value: number
 }
 

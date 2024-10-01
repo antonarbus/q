@@ -1,15 +1,12 @@
 import { dispatch } from '@lib_instances/store'
 import { cls } from '@shared/consts/cls'
-import {
-  type ColumnKey,
-  quotationSlice,
-  getBoqColumnFromStore,
-} from '@entities/quotation'
+import { quotationSlice, getBoqColumnFromStore } from '@entities/quotation'
+import type { BoqColumnKey } from '@entities/quotation/consts/boqColumnKey'
 
 type Props = {
   headerColumnElement: HTMLElement
   blockIndex: number
-  boqColumnKey: ColumnKey
+  boqColumnKey: BoqColumnKey
 }
 
 export const onColumnResizeStart = ({

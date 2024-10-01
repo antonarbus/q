@@ -1,10 +1,11 @@
-import { updateBoqColumnCellAtStore, type ColumnKey } from '@entities/quotation'
+import { updateBoqColumnCellAtStore } from '@entities/quotation'
+import type { BoqColumnKey } from '@entities/quotation/consts/boqColumnKey'
 import type { FroalaEditorRef } from '@shared/types/froala'
 
 type Props = {
   editorRef: FroalaEditorRef
   blockIndex: number
-  boqColumnKey: ColumnKey
+  boqColumnKey: BoqColumnKey
 }
 
 export const updateBoqColumnCell = ({

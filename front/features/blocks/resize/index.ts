@@ -6,7 +6,7 @@ export {
 
 export {
   onTextBlockResizeStart,
-  onTextBlockResize,
+  // onTextBlockResize,
   onTextBlockResizeStop,
 } from './onTextBlockResize'
 

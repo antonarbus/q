@@ -1,15 +1,15 @@
 import {
-  type RowCellKey,
   didBoqCellContentChange,
   updateBoqRowCellAtStore,
 } from '@entities/quotation'
+import type { BoqRowCellKey } from '@entities/quotation/consts/boqRowCellKey'
 import type { FroalaEditorRef } from '@shared/types/froala'
 
 type Props = {
   editorRef: FroalaEditorRef
   blockIndex: number
   rowIndex: number
-  boqRowCellKey: RowCellKey
+  boqRowCellKey: BoqRowCellKey
 }
 
 export const updateDescriptionCell = ({

@@ -5,13 +5,14 @@ import {
   onColumnResizeStart,
   onColumnResizeStop,
 } from '@features/blocks/resize'
-import { selectColumnWidth, type ColumnKey } from '@entities/quotation'
+import { selectColumnWidth } from '@entities/quotation'
+import type { BoqColumnKey } from '@entities/quotation/consts/boqColumnKey'
 
 type Props = {
   children: React.ReactNode
   className: string
   flexGrow?: number
-  boqColumnKey: ColumnKey
+  boqColumnKey: BoqColumnKey
   minWidth: number
 }
 

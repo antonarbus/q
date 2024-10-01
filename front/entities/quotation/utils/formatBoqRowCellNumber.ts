@@ -4,12 +4,12 @@ import type { FroalaEditorRef } from '@shared/types/froala'
 import { getStringWithNewFormattedNumber } from '@shared/utils/getStringWithNewFormattedNumber'
 import { getBoqRowFromStore } from '../redux/getters/getBoqRowFromStore'
 import { quotationSlice } from '../redux/quotationSlice'
-import type { RowCellKey } from '../types'
+import type { BoqRowCellKey } from '../consts/boqRowCellKey'
 
 type Props = {
   blockIndex: number
   rowIndex: number
-  boqRowCellKey: RowCellKey
+  boqRowCellKey: BoqRowCellKey
   editorRef: FroalaEditorRef
   roundToTwoDecimals: boolean
 }

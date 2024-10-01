@@ -1,10 +1,11 @@
-import type { RowCellKey, RowCell } from '../../types'
+import type { BoqRowCellKey } from '@entities/quotation/consts/boqRowCellKey'
+import type { RowCell } from '../../types'
 import { getBoqRowFromStore } from './getBoqRowFromStore'
 
 type Props = {
   blockIndex: number
   rowIndex: number
-  boqRowCellKey: RowCellKey
+  boqRowCellKey: BoqRowCellKey
 }
 
 export const getBoqCellFromStore = ({

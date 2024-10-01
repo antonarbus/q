@@ -31,7 +31,7 @@
     "prettier": "prettier . --check",
     "prettier_fix": "prettier --write .",
     "check": "npm run tsc && npm run lint && npm run prettier && npm run test && npm run playwright",
-    "knip": "knip",
+    "find_unused_files": "knip",
     "docker_prod_build": "docker compose -f docker-compose.prod.yml build",
     "docker_prod_up": "docker compose -f docker-compose.prod.yml up"
   },
@@ -88,7 +88,6 @@
     "typescript-eslint": "^8.6.0",
     "vite": "^5.4.7",
     "vite-tsconfig-paths": "*",
-    "vitest": "^2.1.1",
-    "wait-on": "^8.0.1"
+    "vitest": "^2.1.1"
   }
 }

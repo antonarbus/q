@@ -5,7 +5,7 @@ import {
 import { httpStatus } from '../consts/httpStatus'
 import type { Next, Req, ResWithBody } from '../types'
 
-export type ErrorHandlerBody = {
+type ErrorHandlerBody = {
   message: ErrorMessageCommon
   errorAsString?: string
 }

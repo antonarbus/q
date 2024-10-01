@@ -1,10 +1,10 @@
 import { getState } from '@lib_instances/store'
 import { itemType } from '../../consts/itemType'
-import type { RowCellKey } from '../../types'
 import { bookmarkPosAtBlocks } from '@entities/quotation/consts/bookmarkPosAtBlocks'
+import type { BoqRowCellKey } from '@entities/quotation/consts/boqRowCellKey'
 
 type Props = {
-  boqRowCellKey: RowCellKey
+  boqRowCellKey: BoqRowCellKey
 }
 
 export const getRowCellHtmlFromStore = ({ boqRowCellKey }: Props): string => {

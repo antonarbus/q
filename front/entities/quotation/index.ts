@@ -101,8 +101,6 @@ export { bookmarkPosAtBlocks } from './consts/bookmarkPosAtBlocks'
 export type {
   HeaderCell,
   HeaderKey,
-  ColumnKey,
-  RowCellKey,
   Row,
   RowCellPin,
   RowCell,
@@ -110,7 +108,6 @@ export type {
   Text,
   Boq,
   Price,
-  Cols,
   Item,
   Quotation,
 } from './types'

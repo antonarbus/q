@@ -1,11 +1,12 @@
 import type { RootState } from '@lib_instances/store'
-import type { RowCellKey, RowCellPin } from '../../types'
+import type { RowCellPin } from '../../types'
 import { getBoqRowFromStore } from '../getters/getBoqRowFromStore'
+import type { BoqRowCellKey } from '@entities/quotation/consts/boqRowCellKey'
 
 type Props = {
   blockIndex: number
   rowIndex: number
-  boqRowCellKey: RowCellKey
+  boqRowCellKey: BoqRowCellKey
 }
 
 export const selectBoqCellPin =

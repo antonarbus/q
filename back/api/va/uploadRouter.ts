@@ -45,7 +45,7 @@ async function uploadFileIntoMemory({ file, email }: Props): Res {
   })
 }
 
-export type ResBody = {
+type ResBody = {
   message: ErrorMessageCommon | 'not uploaded' | 'no file' | 'uploaded'
   link?: string
   name?: string

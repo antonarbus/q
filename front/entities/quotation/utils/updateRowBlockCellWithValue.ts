@@ -3,15 +3,15 @@ import type { FroalaEditor } from '@shared/types/froala'
 import { getNumberFromString } from '@shared/utils/getNumberFromString'
 import { getTextContentFromHtml } from '@shared/utils/getTextContentFromHtml'
 import { getStringWithNewFormattedNumber } from '@shared/utils/getStringWithNewFormattedNumber'
-import type { RowCellKey } from '../types'
 import { getState } from '@lib_instances/store'
 import { itemType } from '../consts/itemType'
 import { updateRowBlockCellAtStore } from '../redux/updaters/updateRowBlockCellAtStore'
 import { bookmarkPosAtBlocks } from '../consts/bookmarkPosAtBlocks'
+import type { BoqRowCellKey } from '../consts/boqRowCellKey'
 
 type Props = {
   editor: FroalaEditor | null
-  boqRowCellKey: RowCellKey
+  boqRowCellKey: BoqRowCellKey
   value: number
 }
 

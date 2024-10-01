@@ -1,8 +1,7 @@
-import { baseUrlFrontDev } from '@back/utils/env'
 import { defineConfig, devices } from '@playwright/test'
+import { baseUrlBack, baseUrlFrontDev } from './back/utils/env'
 
 // https://playwright.dev/docs/test-configuration
-
 export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
@@ -41,13 +40,13 @@ export default defineConfig({
   webServer: [
     {
       command: 'npm run start_back',
-      url: 'http://localhost:4000',
+      url: baseUrlBack,
       ignoreHTTPSErrors: true,
       reuseExistingServer: !process.env.CI,
     },
     {
       command: 'npm run start_front',
-      url: 'https://localhost:3000',
+      url: baseUrlFrontDev,
       ignoreHTTPSErrors: true,
       reuseExistingServer: !process.env.CI,
     },

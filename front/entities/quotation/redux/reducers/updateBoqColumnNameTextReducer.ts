@@ -1,13 +1,14 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { itemType } from '../../consts/itemType'
-import type { ColumnKey, Quotation } from '../../types'
+import type { Quotation } from '../../types'
+import type { BoqColumnKey } from '@entities/quotation/consts/boqColumnKey'
 
 export const updateBoqColumnNameTextReducer = (
   state: Quotation,
   action: PayloadAction<{
     blockIndex: number
     html: string
-    boqColumnKey: ColumnKey
+    boqColumnKey: BoqColumnKey
   }>,
 ): void => {
   const { blockIndex, html, boqColumnKey } = action.payload

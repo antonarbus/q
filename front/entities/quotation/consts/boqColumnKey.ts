@@ -6,4 +6,4 @@ export const boqColumnKey = {
   price: 'price',
 } as const
 
-export type ColumnNameKey = keyof typeof boqColumnKey
+export type BoqColumnKey = keyof typeof boqColumnKey

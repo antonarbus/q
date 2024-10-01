@@ -1,7 +1,11 @@
-import { type Action, type ThunkAction, configureStore } from '@reduxjs/toolkit'
+import {
+  // type Action,
+  // type ThunkAction,
+  configureStore,
+} from '@reduxjs/toolkit'
 import {
   type TypedUseSelectorHook,
-  useDispatch,
+  // useDispatch,
   useSelector,
 } from 'react-redux'
 import { copyReducer } from '@entities/copy/copySlice'
@@ -26,24 +30,24 @@ const getState = store.getState
 const dispatch = store.dispatch
 
 type RootState = ReturnType<typeof store.getState>
-type AppDispatch = typeof store.dispatch
-type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  Action
->
+// type AppDispatch = typeof store.dispatch
+// type AppThunk<ReturnType = void> = ThunkAction<
+//   ReturnType,
+//   RootState,
+//   unknown,
+//   Action
+// >
 
-const useDispatchTyped = (): AppDispatch => useDispatch<AppDispatch>()
+// const useDispatchTyped = (): AppDispatch => useDispatch<AppDispatch>()
 const useSelectorTyped: TypedUseSelectorHook<RootState> = useSelector
 
 export {
   store,
   getState,
   dispatch,
-  useDispatchTyped,
+  // useDispatchTyped,
   useSelectorTyped,
   type RootState,
-  type AppDispatch,
-  type AppThunk,
+  // type AppDispatch,
+  // type AppThunk,
 }

@@ -3,6 +3,7 @@ import type { BoqRowKey } from '../consts/boqRowKey'
 import type { itemType } from '../consts/itemType'
 import type { Signal } from '@preact/signals-react'
 import type { SharedWithOption } from '@shared/consts/sharedWithOption'
+import type { BoqColumnKey } from '../consts/boqColumnKey'
 
 type Common = {
   id: 'new' | (Record<never, never> & string)
@@ -39,17 +40,9 @@ export type Row = Common & {
   price: RowCell
 }
 
-export type Col = {
+export type Column = {
   html: string
   width: number
-}
-
-export type Cols = {
-  number: Col
-  description: Col
-  itemPrice: Col
-  qty: Col
-  price: Col
 }
 
 export type HeaderCell = {
@@ -65,10 +58,6 @@ type Header = {
 
 export type HeaderKey = keyof Header
 
-export type ColumnKey = keyof Cols
-
-export type RowCellKey = keyof Omit<Cols, 'number'>
-
 export type RowEditorRefs = {
   description: FroalaEditorRef
   itemPrice: FroalaEditorRef
@@ -81,7 +70,7 @@ export type Boq = Common & {
   type: typeof itemType.boq
   boq: {
     header: Header
-    column: Cols
+    column: Record<BoqColumnKey, Column>
     rows: Row[]
   }
 }

@@ -1,16 +1,12 @@
 import { useSelectorTyped } from '@lib_instances/store'
 import { Box } from '@mui/material'
 import { VscPinned } from 'react-icons/vsc'
-import {
-  type RowCellKey,
-  selectBoqCellPin,
-  useBlock,
-  useRow,
-} from '@entities/quotation'
+import { selectBoqCellPin, useBlock, useRow } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
+import type { BoqRowCellKey } from '@entities/quotation/consts/boqRowCellKey'
 
 type Props = {
-  boqRowCellKey: RowCellKey
+  boqRowCellKey: BoqRowCellKey
   onClick: (e: React.MouseEvent) => void
 }
 

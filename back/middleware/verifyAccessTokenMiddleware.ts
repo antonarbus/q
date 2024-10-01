@@ -4,7 +4,7 @@ import { httpStatus } from '../consts/httpStatus'
 import { verifyAccessToken } from '../services/jwt'
 import type { Next, Req, Res, ResWithBody } from '../types'
 
-export type ResBody = {
+type ResBody = {
   message: typeof errorMessageCommon.notLoggedIn
 }
 

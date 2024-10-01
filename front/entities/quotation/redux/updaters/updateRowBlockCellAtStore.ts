@@ -1,14 +1,14 @@
 import { dispatch, getState } from '@lib_instances/store'
 import { getNumberFromString } from '@shared/utils/getNumberFromString'
 import { getTextContentFromHtml } from '@shared/utils/getTextContentFromHtml'
-import type { RowCellKey } from '../../types'
 import { quotationSlice } from '../quotationSlice'
 import { itemType } from '@entities/quotation/consts/itemType'
 import { bookmarkPosAtBlocks } from '@entities/quotation/consts/bookmarkPosAtBlocks'
+import type { BoqRowCellKey } from '@entities/quotation/consts/boqRowCellKey'
 
 type Props = {
   html: string
-  boqRowCellKey: RowCellKey
+  boqRowCellKey: BoqRowCellKey
 }
 
 type Res = {

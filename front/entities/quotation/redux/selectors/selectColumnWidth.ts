@@ -1,10 +1,10 @@
 import type { RootState } from '@lib_instances/store'
-import type { ColumnKey } from '../../types'
 import { getBoqBlockFromStore } from '../getters/getBoqBlockFromStore'
+import type { BoqColumnKey } from '@entities/quotation/consts/boqColumnKey'
 
 type Props = {
   blockIndex: number
-  boqColumnKey: ColumnKey
+  boqColumnKey: BoqColumnKey
 }
 
 export const selectColumnWidth =

@@ -1,9 +1,10 @@
 import { getState } from '@lib_instances/store'
 import { itemType } from '../../consts/itemType'
-import type { ColumnKey } from '../../types'
+import type { BoqColumnKey } from '@entities/quotation/consts/boqColumnKey'
+
 type Props = {
   blockIndex: number
-  boqColumnKey: ColumnKey
+  boqColumnKey: BoqColumnKey
 }
 
 export const getBoqColumnHtmlFromStore = ({

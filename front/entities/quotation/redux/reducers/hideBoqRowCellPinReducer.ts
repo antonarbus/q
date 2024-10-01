@@ -1,13 +1,14 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { RowCellKey, Quotation } from '../../types'
+import type { Quotation } from '../../types'
 import { getBoqCellFromState } from '../getters/getBoqCellFromState'
+import type { BoqRowCellKey } from '@entities/quotation/consts/boqRowCellKey'
 
 export const hideBoqRowCellPinReducer = (
   state: Quotation,
   action: PayloadAction<{
     blockIndex: number
     rowIndex: number
-    boqRowCellKey: RowCellKey
+    boqRowCellKey: BoqRowCellKey
   }>,
 ): void => {
   const { blockIndex, rowIndex, boqRowCellKey } = action.payload

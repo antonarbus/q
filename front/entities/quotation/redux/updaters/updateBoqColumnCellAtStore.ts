@@ -1,13 +1,13 @@
 import { dispatch } from '@lib_instances/store'
 import type { FroalaEditorRef } from '@shared/types/froala'
-import type { ColumnKey } from '../../types'
 import { getBoqBlockFromStore } from '../getters/getBoqBlockFromStore'
 import { quotationSlice } from '../quotationSlice'
+import type { BoqColumnKey } from '@entities/quotation/consts/boqColumnKey'
 
 type Props = {
   editorRef: FroalaEditorRef
   blockIndex: number
-  boqColumnKey: ColumnKey
+  boqColumnKey: BoqColumnKey
 }
 
 export const updateBoqColumnCellAtStore = ({
