@@ -5,7 +5,7 @@
       "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFudG9uLmFyYnVzQGdtYWlsLmNvbSIsInJvbGVzIjpbInVzZXIiXSwiaWF0IjoxNzI2NTE4NzM5LCJleHAiOjE3MjkxMTA3Mzl9.-ig09wjRB3Seo6oSP3LAfIn0qE6E7lhrHCgxGaar5g8",
       "domain": "localhost",
       "path": "/",
-      "expires": 1730662928,
+      "expires": 1730663188,
       "httpOnly": true,
       "secure": false,
       "sameSite": "Lax"
