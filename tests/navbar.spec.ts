@@ -1,18 +1,17 @@
-import { test, expect, type Locator } from '@playwright/test'
+import { test, expect } from '@playwright/test'
 import { route } from '@shared/consts/route'
-
-// eslint-disable-next-line @typescript-eslint/init-declarations
-let nav: Locator
+import { userFilePath } from './setup/userFilePath'
 
 test.beforeEach(async ({ page }) => {
   await page.goto(route.root)
-  nav = page.locator('nav')
 })
 
 test.describe('nav icons & text on wide screen', () => {
+  test.use({ storageState: userFilePath.authenticated })
   test.use({ viewport: { width: 1600, height: 1200 } })
 
   test('should show icons & text', async ({ page }) => {
+    const nav = page.locator('nav')
     await expect(nav.locator('[data-testid="new icon"]')).toBeVisible()
     await expect(nav).toHaveText(/New/u)
     await expect(nav.locator('[data-testid="save icon"]')).toBeVisible()
@@ -35,9 +34,10 @@ test.describe('nav icons & text on wide screen', () => {
 
 test.describe('nav icons for guest user', () => {
   test.use({ viewport: { width: 1600, height: 1200 } })
-  test.use({ storageState: 'playwright/.auth/guest_user.json' })
+  test.use({ storageState: userFilePath.guest })
 
   test('should show icons & text', async ({ page }) => {
+    const nav = page.locator('nav')
     await expect(nav.locator('[data-testid="login icon"]')).toBeVisible()
     await expect(nav).toHaveText(/Log in/u, { timeout: 1000 })
     await expect(nav.locator('[data-testid="profile icon"]')).not.toBeVisible()
@@ -49,6 +49,7 @@ test.describe('nav icons & text on mid screen', () => {
   test.use({ viewport: { width: 800, height: 1200 } })
 
   test('should show only text', async ({ page }) => {
+    const nav = page.locator('nav')
     await expect(nav.locator('[data-testid="new icon"]')).not.toBeVisible()
     await expect(nav).toHaveText(/New/u)
     await expect(nav.locator('[data-testid="save icon"]')).not.toBeVisible()
@@ -77,6 +78,7 @@ test.describe('nav icons & text on narrow screen', () => {
   test.use({ viewport: { width: 600, height: 1200 } })
 
   test('should show only icons', async ({ page }) => {
+    const nav = page.locator('nav')
     await expect(nav.locator('[data-testid="new icon"]')).toBeVisible()
     await expect(nav.locator('text=New')).not.toBeVisible()
     await expect(nav.locator('[data-testid="save icon"]')).toBeVisible()
@@ -101,6 +103,7 @@ test.describe('nav icons & text on super narrow screen', () => {
   test.use({ viewport: { width: 500, height: 1200 } })
 
   test('should show only hamburger icon', async ({ page }) => {
+    const nav = page.locator('nav')
     await expect(nav.locator('[data-testid="new icon"]')).not.toBeVisible()
     await expect(nav.locator('text=New')).not.toBeVisible()
     await expect(nav.locator('[data-testid="save icon"]')).not.toBeVisible()

@@ -1,6 +1,5 @@
 import { test as setup, request } from '@playwright/test'
-import fs from 'fs/promises'
-import path from 'path'
+import { userFilePath } from './userFilePath'
 
 setup('authenticate', async () => {
   const context = await request.newContext({
@@ -15,10 +14,8 @@ setup('authenticate', async () => {
   })
 
   if (response.ok()) {
-    const authDir = path.resolve('playwright', '.auth')
-    const filePath = path.join(authDir, 'authenticated_user.json')
-    await fs.mkdir(authDir, { recursive: true })
-    await context.storageState({ path: filePath })
+    await context.storageState({ path: userFilePath.authenticated })
+    console.info('🫡 authenticated before all tests')
   } else {
     const responseBody = await response.text() // Get the response body as text
     throw new Error(

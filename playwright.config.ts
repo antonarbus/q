@@ -1,5 +1,7 @@
 import { defineConfig, devices } from '@playwright/test'
 import { baseUrlBack, baseUrlFrontDev } from './back/utils/env'
+import { userFilePath } from 'tests/setup/userFilePath'
+import 'dotenv/config'
 
 // https://playwright.dev/docs/test-configuration
 export default defineConfig({
@@ -31,7 +33,7 @@ export default defineConfig({
         launchOptions: {
           args: ['--ignore-certificate-errors'],
         },
-        storageState: 'playwright/.auth/authenticated_user.json',
+        storageState: userFilePath.authenticated,
       },
       dependencies: ['setup'],
     },
@@ -43,8 +45,8 @@ export default defineConfig({
       url: baseUrlBack,
       ignoreHTTPSErrors: true,
       reuseExistingServer: !process.env.CI,
-      stdout: process.env.CI ? 'ignore' : 'pipe', // Capture standard output
-      stderr: process.env.CI ? 'ignore' : 'pipe', // Capture standard error
+      // stdout: process.env.CI ? 'ignore' : 'pipe', // Capture standard output
+      // stderr: process.env.CI ? 'ignore' : 'pipe', // Capture standard error
     },
     {
       command: 'npm run start_front',

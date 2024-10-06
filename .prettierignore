@@ -1,7 +1,5 @@
-# Ignore artifacts:
 build
 coverage
 node_modules
 gha-creds-*.json
-# public
-playwright/.auth/*.json
+tests/setup/*.json

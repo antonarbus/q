@@ -1,34 +1,29 @@
 import { apiUrl } from '@back/consts/apiUrl'
+import { connectToDb } from '@back/db/connectToDb'
 import { UserModel } from '@back/db/models/userModel'
 import { baseUrlBack } from '@back/utils/env'
-import type { User } from '@entities/user'
 import { test, expect } from '@playwright/test'
+import { userFilePath } from 'tests/setup/userFilePath'
 
-test.describe.only('activateRouter', () => {
-  // set activation key in db
-  let goodActivationKey: User['activationKey'] = 'bad activation key'
+test.describe.configure({ mode: 'serial' })
 
+test.describe('#activateRouter', () => {
   test.beforeAll(async () => {
-    console.log('🚀 ~ before all started')
-    const users = await UserModel.find()
-    console.log('🚀 ~ users:', users)
-    const userDocument = await UserModel.findOneAndUpdate(
-      { email: 'anton.arbus@gmail.com' },
-      { activationKey: 'good activation key' },
-      { upsert: true, new: true },
-    ).lean()
-
-    if (!userDocument.activationKey) {
-      throw new Error('Activation key in undefined, something is wrong')
-    }
-
-    goodActivationKey = userDocument.activationKey
+    await connectToDb()
   })
+
+  test.afterAll(async ({ request }) => {
+    // console.log('do after test, for ex clean db')
+  })
+
+  test.use({ baseURL: baseUrlBack })
+
+  const email = 'anton.arbus@gmail.com'
 
   test('should not return successful status if key is missing', async ({
     request,
   }) => {
-    const res = await request.post(`${baseUrlBack}${apiUrl.activate}`, {
+    const res = await request.post(apiUrl.activate, {
       data: {
         activationKey: 'bad activation key',
       },
@@ -43,15 +38,42 @@ test.describe.only('activateRouter', () => {
   test('should return successful status if activation key is correct', async ({
     request,
   }) => {
-    const res = await request.post(`${baseUrlBack}${apiUrl.activate}`, {
+    const userDocument = await UserModel.findOneAndUpdate(
+      { email },
+      {
+        activationKey: 'good activation key',
+        isActivated: false,
+      },
+      { upsert: true, new: true },
+    ).lean()
+
+    const res = await request.post(apiUrl.activate, {
       data: {
-        activationKey: goodActivationKey,
+        activationKey: userDocument.activationKey,
+      },
+    })
+
+    await request.storageState({ path: userFilePath.authenticated })
+
+    expect(res.ok()).toBeTruthy()
+    expect(await res.json()).toMatchObject({ message: 'activated' })
+  })
+
+  test('should return successful status if account had been already activated', async ({
+    request,
+  }) => {
+    const userDocument = await UserModel.findOneAndUpdate(
+      { email },
+      { isActivated: true },
+      { upsert: true, new: true },
+    ).lean()
+    const res = await request.post(apiUrl.activate, {
+      data: {
+        activationKey: userDocument.activationKey,
       },
     })
 
     expect(res.ok()).toBeTruthy()
-    expect(await res.json()).toMatchObject({
-      message: 'activated',
-    })
+    expect(await res.json()).toMatchObject({ message: 'already activated' })
   })
 })

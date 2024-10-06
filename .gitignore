@@ -6,4 +6,4 @@ build
 /playwright-report/
 /blob-report/
 /playwright/.cache/
-playwright/.auth/authenticated_user.json
+tests/setup/authenticated_user.json
