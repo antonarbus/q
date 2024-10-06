@@ -1,17 +1,16 @@
 /* eslint-disable */
-// import './froalaPlugins.js'
-import './froalaPkg.js'
+import './froalaPkg'
 import './froalaPkg.css'
 
 import type { MouseEvent } from 'react'
 import { useEffectOnce } from 'react-use'
 import { nanoid } from '@shared/lib/nanoid'
-import { type FroalaEditorRef } from '@shared/types/froala.js'
+import { type FroalaEditorRef } from '@shared/types/froala'
 import { useFroala } from '../../providers/FroalaProvider'
 import { froalaDefaultOptions } from './froalaDefaultOptions'
-import { remindToSaveQuotationOnInsert } from './remindToSaveQuotationOnInsert.js'
-import { notify } from '@shared/toast/notify.js'
-import { removeLoadingBar } from '@shared/lib/froala/removeLoadingBar.js'
+import { remindToSaveQuotationOnInsert } from './remindToSaveQuotationOnInsert'
+import { notify } from '@shared/toast/notify'
+import { removeLoadingBar } from '@shared/lib/froala/removeLoadingBar'
 
 declare const window: Window &
   typeof globalThis & {

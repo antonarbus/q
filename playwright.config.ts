@@ -43,6 +43,8 @@ export default defineConfig({
       url: baseUrlBack,
       ignoreHTTPSErrors: true,
       reuseExistingServer: !process.env.CI,
+      stdout: process.env.CI ? 'ignore' : 'pipe', // Capture standard output
+      stderr: process.env.CI ? 'ignore' : 'pipe', // Capture standard error
     },
     {
       command: 'npm run start_front',

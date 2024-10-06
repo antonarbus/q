@@ -1,14 +1,14 @@
 import express from 'express'
 import type { User } from '@entities/user'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
-import { httpStatus } from '../../consts/httpStatus.js'
-import { UserModel } from '../../db/models/userModel.js'
+import { httpStatus } from '../../consts/httpStatus'
+import { UserModel } from '../../db/models/userModel'
 import {
   createAccessToken,
   createRefreshToken,
   thirtyDaysInSec,
-} from '../../services/jwt.js'
-import type { Next, ReqWithBody, ResWithBody } from '../../types.js'
+} from '../../services/jwt'
+import type { Next, ReqWithBody, ResWithBody } from '../../types'
 
 export type ReqBody = {
   activationKey: User['activationKey']
