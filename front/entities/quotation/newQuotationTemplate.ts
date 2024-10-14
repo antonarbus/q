@@ -18,7 +18,7 @@ export const newQuotationTemplate: Quotation = {
       height: 0,
       isFroala: true,
       text: {
-        html: '<p style="text-align: center; font-size: 24px;">Cover letter</p><p><br></p><p style="text-align: center;"><span>Here goes any technical and commercial information.</span></p><p><br></p><p style="text-align: center;"><span>You may...</span></p><p><br></p><ul><li>write, select and <span style="color: rgb(226, 80, 65);">format</span> text</li><li>insert tables, drop <a href="/911.pdf" rel="noopener noreferrer" target="_blank">files</a>, images, attach videos</li><li>copy, cut, delete, insert, sort, resize blocks and rows</li><li>calculate prices</li><li>store and share quotation as link or .pdf file</li><li>review, track and update quotation</li><li>save and search though bookmarked portfolio</li><li>copy and paste items from other quotations</li><li>all visible elements are editable and customizable</li></ul>',
+        html: '<p style="text-align: center; font-size: 24px;">Cover letter</p><p><br></p><p style="text-align: center;"><span>Here goes any technical and commercial information.</span></p><p><br></p><p style="text-align: center;"><span>You may...</span></p><p><br></p><ul><li>write, select and <span style="color: rgb(226, 80, 65);">format</span> text</li><li>insert tables, drop <a href="/911.pdf" rel="noopener noreferrer" target="_blank">files</a>, images, attach videos</li><li>copy, cut, delete, insert, sort, resize blocks and rows</li><li>calculate prices</li><li>store and share quotation as link or .pdf file</li><li>review, track and update quotation</li><li>save and search through bookmarked portfolio</li><li>copy and paste items from other quotations</li></ul>',
         value: null,
       },
     },
