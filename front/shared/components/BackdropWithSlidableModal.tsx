@@ -68,7 +68,7 @@ export const BackdropWithSlidableModal = ({
       const bodyElement = document.querySelector('body')
 
       if (bodyElement instanceof HTMLElement) {
-        bodyElement.style.overflow = 'hidden'
+        bodyElement.style.setProperty('overflow', 'hidden')
       }
     }
 
@@ -76,7 +76,7 @@ export const BackdropWithSlidableModal = ({
       const bodyElement = document.querySelector('body')
 
       if (bodyElement instanceof HTMLElement) {
-        bodyElement.style.overflow = 'auto'
+        bodyElement.style.removeProperty('overflow')
       }
     }
 
