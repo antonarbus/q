@@ -14,6 +14,7 @@ self.onmessage = (
     unit: 'px',
     format: [width, height],
   })
+
   pdf.addImage(imageData, 'PNG', 0, 0, width, height, undefined, 'FAST')
   const blob = pdf.output('blob')
   self.postMessage(blob)

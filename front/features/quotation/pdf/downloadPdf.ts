@@ -1,15 +1,13 @@
 import { getState } from '@lib_instances/store'
 import { domToJpeg } from 'modern-screenshot'
 import { cls } from '@shared/consts/cls'
-import { navItemKey } from '@shared/consts/navItemKey'
-import {
-  showErrorNavIcon,
-  showLoadingNavIcon,
-  showSuccessNavIcon,
-} from '@shared/nav'
+import { createActor } from 'xstate'
+import { pdfLoadingIconMachine } from './pdfLoadingIconMachine'
+
+const pdfLoadingIconActor = createActor(pdfLoadingIconMachine).start()
 
 export const downloadPdf = async (): Promise<void> => {
-  showLoadingNavIcon({ navMenuItemIdKey: navItemKey.pdf })
+  pdfLoadingIconActor.send({ type: 'show loading icon' })
 
   const blocksContainerElement = document.querySelector(`.${cls.blocks}`)
   if (!(blocksContainerElement instanceof HTMLElement)) return
@@ -62,10 +60,14 @@ export const downloadPdf = async (): Promise<void> => {
     downloadLink.click()
     document.body.removeChild(downloadLink)
     URL.revokeObjectURL(pdfDataUrl) // revoke the data URL to free up resources
-    showSuccessNavIcon({ navMenuItemIdKey: navItemKey.pdf })
+    setTimeout(() => {
+      pdfLoadingIconActor.send({ type: 'show success icon' })
+    }, 1000)
   }
 
   worker.onerror = (): void => {
-    showErrorNavIcon({ navMenuItemIdKey: navItemKey.pdf })
+    setTimeout(() => {
+      pdfLoadingIconActor.send({ type: 'show error icon' })
+    }, 1000)
   }
 }
