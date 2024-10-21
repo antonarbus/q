@@ -3,12 +3,9 @@
 import path from 'path'
 import basicSsl from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react'
-import {
-  defineConfig,
-  // loadEnv
-} from 'vite'
+import { defineConfig } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
-import { portFront, hostnameFrontDev, baseUrlBack } from './back/utils/env'
+import { config } from './back/config'
 
 // https://vitejs.dev/config/
 
@@ -20,19 +17,19 @@ export default defineConfig(({ command, mode }) => {
   return {
     root: './front/',
     server: {
-      host: hostnameFrontDev,
-      port: portFront,
+      host: config.front.dev.hostname,
+      port: config.front.dev.port,
       // https: true, //* type "thisisunsafe" if chrome says that connection is not private
       proxy: {
-        '/api': baseUrlBack,
+        '/api': config.back.baseUrl,
       },
     },
     preview: {
       // host: hostFront,
-      port: portFront,
+      port: config.front.dev.port,
       // https: true,
       proxy: {
-        '/api': baseUrlBack,
+        '/api': config.back.baseUrl,
       },
     },
     worker: {

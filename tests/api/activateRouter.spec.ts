@@ -1,7 +1,7 @@
+import { config } from '@back/config'
 import { apiUrl } from '@back/consts/apiUrl'
 import { connectToDb } from '@back/db/connectToDb'
 import { UserModel } from '@back/db/models/userModel'
-import { baseUrlBack } from '@back/utils/env'
 import { test, expect } from '@playwright/test'
 import { userFilePath } from 'tests/setup/userFilePath'
 
@@ -16,7 +16,7 @@ test.describe('#activateRouter', () => {
     // console.log('do after test, for ex clean db')
   })
 
-  test.use({ baseURL: baseUrlBack })
+  test.use({ baseURL: config.back.baseUrl })
 
   const email = 'anton.arbus@gmail.com'
 

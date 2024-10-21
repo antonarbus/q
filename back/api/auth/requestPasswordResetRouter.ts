@@ -11,7 +11,7 @@ import { UserModel } from '../../db/models/userModel'
 import { nanoid } from '../../lib/nanoid'
 import { sendEmail } from '../../services/email'
 import type { Next, ReqWithBody, ResWithBody } from '../../types'
-import { baseUrlFront } from '../../utils/env'
+import { config } from '@back/config'
 
 export type ReqBody = {
   email: User['email']
@@ -86,9 +86,9 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
         <p>
           <a
             clicktracking="off"
-            href="${baseUrlFront}/reset-password/${email}/${resetPasswordKey}"
+            href="${config.front.baseUrl}/reset-password/${email}/${resetPasswordKey}"
           >
-            ${baseUrlFront}/reset-password/${email}/${resetPasswordKey}
+            ${config.front.baseUrl}/reset-password/${email}/${resetPasswordKey}
           </a>
         </p>
       `,

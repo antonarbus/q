@@ -1,7 +1,7 @@
 import { defineConfig, devices } from '@playwright/test'
-import { baseUrlBack, baseUrlFrontDev } from './back/utils/env'
 import { userFilePath } from 'tests/setup/userFilePath'
 import 'dotenv/config'
+import { config } from './back/config'
 
 // https://playwright.dev/docs/test-configuration
 export default defineConfig({
@@ -12,7 +12,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: process.env.CI ? 'dot' : 'list',
   use: {
-    baseURL: baseUrlFrontDev,
+    baseURL: config.front.dev.baseUrl,
     trace: 'on-first-retry',
   },
   projects: [
@@ -42,7 +42,7 @@ export default defineConfig({
   webServer: [
     {
       command: 'npm run start_back',
-      url: baseUrlBack,
+      url: config.back.baseUrl,
       ignoreHTTPSErrors: true,
       reuseExistingServer: !process.env.CI,
       // stdout: process.env.CI ? 'ignore' : 'pipe', // Capture standard output
@@ -50,7 +50,7 @@ export default defineConfig({
     },
     {
       command: 'npm run start_front',
-      url: baseUrlFrontDev,
+      url: config.front.dev.baseUrl,
       ignoreHTTPSErrors: true,
       reuseExistingServer: !process.env.CI,
     },

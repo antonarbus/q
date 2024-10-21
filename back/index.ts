@@ -29,7 +29,7 @@ import { apiUrl } from './consts/apiUrl'
 import { connectToDb } from './db/connectToDb'
 import { errorHandlerMiddleware } from './middleware/errorHandlerMiddleware'
 import type { Req, Res } from './types'
-import { env, baseUrlBack, portBack } from './utils/env'
+import { config } from './config'
 
 const app = express()
 void connectToDb()
@@ -72,6 +72,8 @@ app.use(apiUrl.getFilesStats, getFilesStatsRouter)
 // error
 app.use(errorHandlerMiddleware)
 
-app.listen(portBack, () => {
-  console.info(`🚀 ${env} backend server started at ${baseUrlBack}`)
+app.listen(config.back.port, () => {
+  console.info(
+    `🚀 ${config.env} backend server started at ${config.back.baseUrl}`,
+  )
 })

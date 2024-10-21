@@ -9,7 +9,7 @@ export const config = {
     hostname: 'localhost',
     port: 4000,
     get baseUrl() {
-      return `${this.protocol}://${this.hostname}:${this.port}`
+      return `${this.protocol}://${this.hostname}:${this.port}` as const
     },
   },
   front: {
@@ -18,7 +18,7 @@ export const config = {
       hostname: 'localhost',
       port: 3000,
       get baseUrl() {
-        return `${this.protocol}://${this.hostname}:${this.port}`
+        return `${this.protocol}://${this.hostname}:${this.port}` as const
       },
     },
     prod: {
@@ -26,7 +26,7 @@ export const config = {
       hostname: 'sendmequotation.today',
       port: 443, // default
       get baseUrl() {
-        return `${this.protocol}://${this.hostname}`
+        return `${this.protocol}://${this.hostname}` as const
       },
     },
     get baseUrl() {
