@@ -10,7 +10,6 @@ import {
 import { route } from '@shared/consts/route'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/consts/cls'
-import type { NavigateState } from '@shared/types/NavigateState'
 import { useIsCopyModalVisible } from '@entities/copy'
 
 export const OpenInfoBoqRowModalIcon = (): ReactNode => {
@@ -45,14 +44,7 @@ export const OpenInfoBoqRowModalIcon = (): ReactNode => {
             if (!boqRow) return
             if (boqRow.type === boqRowKey.paste) return
 
-            const navigateState: NavigateState = {
-              scrollTop:
-                document.documentElement.scrollTop || document.body.scrollTop,
-            }
-
-            navigate(`./${route.info}/${boqRow.id}`, {
-              state: navigateState,
-            })
+            navigate(`./${route.info}/${boqRow.id}`)
           }}
         />
       </span>

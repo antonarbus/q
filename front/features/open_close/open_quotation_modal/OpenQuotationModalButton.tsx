@@ -43,8 +43,6 @@ export const OpenQuotationModalButton = ({
       const navigateState: NavigateState = {
         navigatedFrom: `/`,
         navigateTo: `/${route.save}`,
-        scrollTop:
-          document.documentElement.scrollTop || document.body.scrollTop,
       }
 
       navigate(`./${id}`, {

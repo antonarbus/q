@@ -20,8 +20,6 @@ export const OpenResetModalLink = ({ modalRef }: Props): React.JSX.Element => {
 
         const navigateState: NavigateState = {
           shouldSlide: true,
-          scrollTop:
-            document.documentElement.scrollTop || document.body.scrollTop,
         }
 
         slideElement({

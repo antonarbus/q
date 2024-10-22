@@ -21,6 +21,9 @@ export const BackdropWithSlidableModal = ({
 }: Props): React.JSX.Element => {
   const contentRef = useRef<HTMLDivElement>(null)
   const location = useLocation() as Location<NavigateState>
+  const scrollTopPositionBeforeModalOpen = useRef(
+    document.documentElement.scrollTop,
+  )
 
   useEffectOnce(() => {
     if (contentRef.current) {
@@ -68,7 +71,12 @@ export const BackdropWithSlidableModal = ({
       const bodyElement = document.querySelector('body')
 
       if (bodyElement instanceof HTMLElement) {
+        // i am not sure how it happened that we use overflow on body and not on html
+        // but if use overflow on html then layout shifts when overflow: hidden and scroll disappears
         bodyElement.style.setProperty('overflow', 'hidden')
+        bodyElement.scrollTop = scrollTopPositionBeforeModalOpen.current
+        document.documentElement.scrollTop =
+          scrollTopPositionBeforeModalOpen.current
       }
     }
 
@@ -77,6 +85,8 @@ export const BackdropWithSlidableModal = ({
 
       if (bodyElement instanceof HTMLElement) {
         bodyElement.style.removeProperty('overflow')
+        document.documentElement.scrollTop =
+          scrollTopPositionBeforeModalOpen.current
       }
     }
 

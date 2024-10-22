@@ -4,7 +4,6 @@ import type { NavigateState } from '@shared/types/NavigateState'
 
 export const openRegisterModal = (): void => {
   const navigateState: NavigateState = {
-    scrollTop: document.documentElement.scrollTop || document.body.scrollTop,
     shouldSlide: true,
   }
 

@@ -7,7 +7,6 @@ export const openQuotationModal = (): void => {
   const navigateState: NavigateState = {
     navigatedFrom: `/`,
     navigateTo: `/${route.save}`,
-    scrollTop: document.documentElement.scrollTop || document.body.scrollTop,
   }
 
   if (!getState().user.email) {
