@@ -85,6 +85,12 @@ export const useLogIn = ({
         navSlice.actions.showNavItems({ navItemIdKeys: [navItemKey.profile] }),
       )
 
+      if (roles?.includes('super-admin')) {
+        dispatch(navSlice.actions.showNavItems({ navItemIdKeys: ['admin'] }))
+      } else {
+        dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: ['admin'] }))
+      }
+
       if (location.pathname.includes(route.quotations)) {
         void refetchQuotations()
       }

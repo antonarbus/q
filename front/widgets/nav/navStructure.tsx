@@ -6,7 +6,7 @@ import { FiLogOut, FiLogIn, FiDollarSign } from 'react-icons/fi'
 import { IoText, IoChevronBackOutline } from 'react-icons/io5'
 import { MdSaveAlt } from 'react-icons/md'
 import { PiFolderSimpleStarDuotone } from 'react-icons/pi'
-import { RiMenuAddFill } from 'react-icons/ri'
+import { RiMenuAddFill, RiAdminLine } from 'react-icons/ri'
 import { TbRectangleVertical } from 'react-icons/tb'
 import { VscNewFile } from 'react-icons/vsc'
 import {
@@ -28,6 +28,7 @@ import { downloadPdf } from '@features/quotation/pdf'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { route } from '@shared/consts/route'
 import type { MenuItemType } from '@shared/nav'
+import { openAdminPage } from '@features/open_close/open_admin_page'
 
 export const navStructure: MenuItemType[] = [
   {
@@ -195,6 +196,17 @@ export const navStructure: MenuItemType[] = [
             func: (e?: React.MouseEvent): void => {
               openSettingsModal()
             },
+          },
+          {
+            id: navItemKey.admin,
+            icon: <RiAdminLine data-testid='admin icon' />,
+            isHidden: false,
+            name: 'Admin',
+            link: route.admin,
+            func: (e?: React.MouseEvent): void => {
+              openAdminPage()
+            },
+            tooltip: 'Admin page',
           },
           {
             id: navItemKey.logout,

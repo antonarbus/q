@@ -7,7 +7,7 @@ import { QuotationModel } from '../../db/models/quotationModel'
 import { verifyAccessTokenMiddleware } from '../../middleware/verifyAccessTokenMiddleware'
 import { bucket, storageFolderName } from '../../services/storage'
 import type { ResWithBody, ReqWithBody, Next } from '../../types'
-import { getEmailFromRefreshTokenOrThrowUnauthorized } from '../../utils/getEmailFromRefreshTokenOrThrowUnauthorized'
+import { getUserFromRefreshTokenOrThrowUnauthorized } from '../../utils/getUserFromRefreshTokenOrThrowUnauthorized'
 
 export type ReqBody = {
   id: Quotation['id']
@@ -33,7 +33,7 @@ export const deleteQuotationRouter = Router()
 
 const deleteQuotation: RouterHandler = async (req, res, next) => {
   try {
-    const email = getEmailFromRefreshTokenOrThrowUnauthorized(req)
+    const { email } = getUserFromRefreshTokenOrThrowUnauthorized(req)
 
     const { id } = req.body
 

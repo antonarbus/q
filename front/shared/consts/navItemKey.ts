@@ -18,4 +18,5 @@ export const navItemKey = {
   priceItem: 'priceItem',
   boqRow: 'boqRow',
   back: 'back',
+  admin: 'admin',
 } as const

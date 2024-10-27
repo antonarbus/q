@@ -7,7 +7,7 @@ import { BookmarkModel } from '../../db/models/bookmarkModel'
 import { verifyAccessTokenMiddleware } from '../../middleware/verifyAccessTokenMiddleware'
 import { bucket, storageFolderName } from '../../services/storage'
 import type { ResWithBody, ReqWithBody, Next } from '../../types'
-import { getEmailFromRefreshTokenOrThrowUnauthorized } from '../../utils/getEmailFromRefreshTokenOrThrowUnauthorized'
+import { getUserFromRefreshTokenOrThrowUnauthorized } from '../../utils/getUserFromRefreshTokenOrThrowUnauthorized'
 
 export type ReqBody = {
   item: Item
@@ -35,7 +35,7 @@ export const saveBookmarkRouter = Router()
 
 const saveBookmark: RouterHandler = async (req, res, next) => {
   try {
-    const email = getEmailFromRefreshTokenOrThrowUnauthorized(req)
+    const { email } = getUserFromRefreshTokenOrThrowUnauthorized(req)
 
     const { item } = req.body
 

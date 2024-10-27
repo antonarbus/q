@@ -4,7 +4,7 @@ import { httpStatus } from '../../consts/httpStatus'
 import { QuotationModel } from '../../db/models/quotationModel'
 import { bucket, storageFolderName } from '../../services/storage'
 import type { ResWithBody, ReqWithBody, Next } from '../../types'
-import { getEmailFromRefreshToken } from '../../utils/getEmailFromRefreshToken'
+import { getUserFromRefreshToken } from '../../utils/getUserFromRefreshToken'
 import { removeSensitiveDataFromQuotation } from '../../utils/removeSensitiveDataFromQuotation'
 import { jsonParseSafe } from '@back/utils/jsonParseSafe'
 
@@ -21,6 +21,7 @@ export type ResBody = {
     | 'not found in bucket'
     | 'owner permission'
     | 'viewer permission'
+    | 'super-admin permission'
 }
 
 type RouterHandler = (
@@ -47,24 +48,24 @@ const getQuotation: RouterHandler = async (req, res, next) => {
         .json({ message: 'not found in db' })
     }
 
-    const email = getEmailFromRefreshToken(req)
+    const { email, roles } = getUserFromRefreshToken(req)
 
     const isOwner = email === document.email
 
     const isShared = (document.sharedWith ?? []).length !== 0
     const isSharedWithEverybody = (document.sharedWith ?? []).at(0) === '*'
-    const isSharedWithPerson = (document.sharedWith ?? []).includes(
-      email ?? 'no email here',
-    )
+    const isSharedWithPerson = (document.sharedWith ?? []).includes(email)
     const isViewer = isSharedWithEverybody || isSharedWithPerson
+    const isSuperAdmin =
+      email === 'anton.arbus@gmail.com' && roles.includes('super-admin')
 
-    if (!isOwner && !isShared) {
+    if (!isOwner && !isShared && !isSuperAdmin) {
       return res
         .status(httpStatus.forbidden_403)
         .json({ message: 'not shared' })
     }
 
-    if (!isOwner && isShared && !isViewer) {
+    if (!isOwner && isShared && !isViewer && !isSuperAdmin) {
       return res
         .status(httpStatus.forbidden_403)
         .json({ message: 'no permission to view' })
@@ -80,6 +81,12 @@ const getQuotation: RouterHandler = async (req, res, next) => {
       return res
         .status(httpStatus.notFound_404)
         .json({ message: 'not found in bucket' })
+    }
+
+    if (isSuperAdmin) {
+      return res
+        .status(httpStatus.success_200)
+        .json({ message: 'super-admin permission', quotation })
     }
 
     if (isOwner) {

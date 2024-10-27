@@ -37,6 +37,9 @@ export const Logout = (): React.JSX.Element => {
           navItemIdKeys: [navItemKey.profile],
         }),
       )
+
+      dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: ['admin'] }))
+
       setTimeout(() => {
         loadingDotsOverlayTextSignal.value = null
         navigate('..')

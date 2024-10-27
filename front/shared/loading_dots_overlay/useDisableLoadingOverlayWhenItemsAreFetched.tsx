@@ -5,7 +5,7 @@ type Props = {
   isFetched: boolean
 }
 
-export const useDisableLoadingOverlayWhenQuotationsAreFetched = ({
+export const useDisableLoadingOverlayWhenItemsAreFetched = ({
   isFetched,
 }: Props): void => {
   useEffect(() => {

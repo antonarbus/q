@@ -42,7 +42,7 @@ export const AccessToken = (): React.JSX.Element => {
       if (!data.accessJwtToken) return
 
       const jwtPayload = jwtDecode<JwtPayloadExtended>(data.accessJwtToken)
-      const { email } = jwtPayload
+      const { email, roles } = jwtPayload
 
       if (!email) return
 
@@ -68,6 +68,12 @@ export const AccessToken = (): React.JSX.Element => {
           navItemIdKeys: [navItemKey.profile],
         }),
       )
+
+      if (roles.includes('super-admin')) {
+        dispatch(navSlice.actions.showNavItems({ navItemIdKeys: ['admin'] }))
+      } else {
+        dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: ['admin'] }))
+      }
 
       dispatch(
         navSlice.actions.stopLoadingIcon({

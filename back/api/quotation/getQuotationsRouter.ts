@@ -5,9 +5,8 @@ import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import type { Pretty } from '@shared/types/Pretty'
 import { httpStatus } from '../../consts/httpStatus'
 import { QuotationModel } from '../../db/models/quotationModel'
-// import { verifyAccessTokenMiddleware } from '../../middleware/verifyAccessTokenMiddleware'
 import type { ResWithBody, Next, Req } from '../../types'
-import { getEmailFromRefreshTokenOrThrowUnauthorized } from '../../utils/getEmailFromRefreshTokenOrThrowUnauthorized'
+import { getUserFromRefreshTokenOrThrowUnauthorized } from '../../utils/getUserFromRefreshTokenOrThrowUnauthorized'
 
 export type ResBody = Pretty<{
   message: ErrorMessageCommon | 'Found' | 'No content' | 'Unhandled case'
@@ -24,7 +23,7 @@ export const getQuotationsRouter = Router()
 
 const getQuotations: RouterHandler = async (req, res, next) => {
   try {
-    const email = getEmailFromRefreshTokenOrThrowUnauthorized(req)
+    const { email } = getUserFromRefreshTokenOrThrowUnauthorized(req)
 
     const quotations = await QuotationModel.find({ email })
       // .sort({ openedAt: -1 })

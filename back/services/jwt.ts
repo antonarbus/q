@@ -1,12 +1,13 @@
 import { jsonParseSafe } from '@back/utils/jsonParseSafe'
+import type { User } from '@entities/user'
 import jwt, { type JwtPayload } from 'jsonwebtoken'
 
 const fifteenMinInSec = 15 * 60
 export const thirtyDaysInSec = 30 * 24 * 60 * 60
 
 export type JwtPayloadExtended = {
-  email: string
-  roles: string[]
+  email: User['email']
+  roles: User['roles']
 }
 
 export const createAccessToken = (

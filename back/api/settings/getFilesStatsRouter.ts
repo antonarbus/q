@@ -4,7 +4,7 @@ import { httpStatus } from '../../consts/httpStatus'
 import { verifyAccessTokenMiddleware } from '../../middleware/verifyAccessTokenMiddleware'
 import { bucket, storageFolderName } from '../../services/storage'
 import type { ResWithBody, ReqWithBody, Next } from '../../types'
-import { getEmailFromRefreshTokenOrThrowUnauthorized } from '../../utils/getEmailFromRefreshTokenOrThrowUnauthorized'
+import { getUserFromRefreshTokenOrThrowUnauthorized } from '../../utils/getUserFromRefreshTokenOrThrowUnauthorized'
 
 export type ResBody = {
   message: ErrorMessageCommon | 'file stats' | 'no item in bucket' | 'deleted'
@@ -24,7 +24,7 @@ export const getFilesStatsRouter = Router()
 
 const getFilesStats: RouterHandler = async (req, res, next) => {
   try {
-    const email = getEmailFromRefreshTokenOrThrowUnauthorized(req)
+    const { email } = getUserFromRefreshTokenOrThrowUnauthorized(req)
 
     const [files] = await bucket.getFiles({
       prefix: `${email}/${storageFolderName.files}/`,

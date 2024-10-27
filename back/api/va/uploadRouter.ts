@@ -4,7 +4,7 @@ import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '../../consts/httpStatus'
 import { bucket, storageFolderName } from '../../services/storage'
 import type { Next, Req, ResWithBody } from '../../types'
-import { getEmailFromRefreshTokenOrThrowUnauthorized } from '../../utils/getEmailFromRefreshTokenOrThrowUnauthorized'
+import { getUserFromRefreshTokenOrThrowUnauthorized } from '../../utils/getUserFromRefreshTokenOrThrowUnauthorized'
 
 // https://medium.com/@olamilekan001/image-upload-with-google-cloud-storage-and-node-js-a1cf9baa1876
 
@@ -64,7 +64,7 @@ const upload: RouterHandler = async (req, res, next) => {
   try {
     const { file } = req
 
-    const email = getEmailFromRefreshTokenOrThrowUnauthorized(req)
+    const { email } = getUserFromRefreshTokenOrThrowUnauthorized(req)
 
     if (file === undefined) {
       return res.status(httpStatus.badRequest_400).json({ message: 'no file' })

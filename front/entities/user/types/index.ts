@@ -1,7 +1,7 @@
 export type User = {
   email: string
   password: string
-  roles: string[]
+  roles: ('user' | 'super-admin')[]
   isActivated: boolean
   activationKey: string
   resetPasswordKey: string

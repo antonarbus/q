@@ -2,7 +2,6 @@ import 'ag-grid-community/styles/ag-grid.css' // Mandatory CSS required by the g
 import 'ag-grid-community/styles/ag-theme-quartz.css'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef } from 'react'
-import { useDisableLoadingOverlayWhenQuotationsAreFetched } from '@features/open_close/open_quotations_page'
 import { useGetQuotationsQuery, type Quotation } from '@entities/quotation'
 import { LoadingTableOverlay } from '@shared/components/LoadingTableOverlay'
 import {
@@ -18,12 +17,13 @@ import { ProgressGridBar } from '@shared/lib/ag_grid/components/ProgressGridBar'
 import { useRefetchDataOnEmailChange } from '@shared/lib/ag_grid/hooks/useRefetchDataOnEmailChange'
 import { useShowLoadingJumpingDots } from '@shared/lib/ag_grid/hooks/useShowLoadingJumpingDots'
 import { AgGridStyles } from '@shared/lib/ag_grid/styles/AgGridStyles'
+import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/loading_dots_overlay'
 
 export const QuotationsGrid = (): React.JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
   const { data, isLoading, isFetching, isFetched, refetch } =
     useGetQuotationsQuery()
-  useDisableLoadingOverlayWhenQuotationsAreFetched({ isFetched })
+  useDisableLoadingOverlayWhenItemsAreFetched({ isFetched })
   useRefetchDataOnEmailChange({ refetch })
   useShowLoadingJumpingDots({ isLoading })
 

@@ -8,6 +8,8 @@ export const apiUrl = {
   getAccessToken: '/api/get-access-token',
   requestPasswordReset: '/api/request-password-reset',
   resetPassword: '/api/reset-password',
+  // user
+  getUsers: '/api/get-users',
   // quotation
   saveQuotation: '/api/save-quotation',
   getQuotation: '/api/get-quotation',

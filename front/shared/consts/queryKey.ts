@@ -7,6 +7,8 @@ export const queryKey = {
   requestPasswordReset: 'requestPasswordReset',
   resetPassword: 'resetPassword',
   getAccessToken: 'getAccessToken',
+  // users
+  getUsers: 'getUsers',
   // quotation
   getQuotation: 'getQuotation',
   getQuotations: 'getQuotations',

@@ -19,6 +19,7 @@ const userSchema = new Schema<User>(
     },
     roles: {
       type: [String],
+      enum: ['user', 'super-admin'],
       default: ['user'],
     },
     isActivated: {

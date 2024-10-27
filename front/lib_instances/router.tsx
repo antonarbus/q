@@ -25,12 +25,16 @@ const Quotation = React.lazy(async () => {
   return import('@pages/quotation_page')
 })
 
-const QuotationsTable = React.lazy(async () => {
+const QuotationsPageLazy = React.lazy(async () => {
   return import('@pages/quotations_page')
 })
 
-const BookmarksTable = React.lazy(async () => {
+const BookmarksPageLazy = React.lazy(async () => {
   return import('@pages/bookmarks_page')
+})
+
+const AdminPageLazy = React.lazy(async () => {
+  return import('@pages/admin_page')
 })
 
 const authRoutes: RouteObject[] = [
@@ -126,7 +130,7 @@ export const router = createBrowserRouter([
               />
             }
           >
-            <QuotationsTable />
+            <QuotationsPageLazy />
           </Suspense>
         ),
         children: [
@@ -148,7 +152,7 @@ export const router = createBrowserRouter([
               />
             }
           >
-            <BookmarksTable />
+            <BookmarksPageLazy />
           </Suspense>
         ),
         children: [
@@ -158,6 +162,21 @@ export const router = createBrowserRouter([
             element: <BookmarkModal />,
           },
         ],
+      },
+      {
+        path: route.admin,
+        element: (
+          <Suspense
+            fallback={
+              <LoadingDotsOverlay
+                title='Loading...'
+                isShowing
+              />
+            }
+          >
+            <AdminPageLazy />
+          </Suspense>
+        ),
       },
     ],
     errorElement: <ErrorPage />,

@@ -5,7 +5,7 @@ import { httpStatus } from '../../consts/httpStatus'
 import { BookmarkModel } from '../../db/models/bookmarkModel'
 // import { verifyAccessTokenMiddleware } from '../../middleware/verifyAccessTokenMiddleware'
 import type { ResWithBody, Next, Req } from '../../types'
-import { getEmailFromRefreshTokenOrThrowUnauthorized } from '../../utils/getEmailFromRefreshTokenOrThrowUnauthorized'
+import { getUserFromRefreshTokenOrThrowUnauthorized } from '../../utils/getUserFromRefreshTokenOrThrowUnauthorized'
 
 export type ResBody = {
   message: ErrorMessageCommon | 'Found' | 'No content' | 'Unhandled error'
@@ -22,7 +22,7 @@ export const getBookmarksRouter = Router()
 
 const getBookmarks: RouterHandler = async (req, res, next) => {
   try {
-    const email = getEmailFromRefreshTokenOrThrowUnauthorized(req)
+    const { email } = getUserFromRefreshTokenOrThrowUnauthorized(req)
 
     const bookmarks = await BookmarkModel.find({ email })
       // .sort({ updatedAt: -1 })

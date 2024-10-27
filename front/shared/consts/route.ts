@@ -13,4 +13,5 @@ export const route = {
   bookmark: 'bookmark',
   info: 'info',
   settings: 'settings',
+  admin: 'admin',
 } as const

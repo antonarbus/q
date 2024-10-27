@@ -2,7 +2,7 @@ import 'ag-grid-community/styles/ag-grid.css' // Mandatory CSS required by the g
 import 'ag-grid-community/styles/ag-theme-quartz.css'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef } from 'react'
-import { useGetBookmarksQuery, type Item } from '@entities/bookmark'
+import { useGetUsersQuery, type User } from '@entities/user'
 import { LoadingTableOverlay } from '@shared/components/LoadingTableOverlay'
 import {
   DisplayedRowsCount,
@@ -10,21 +10,18 @@ import {
 } from '@shared/lib/ag_grid/components/DisplayedRowsCount'
 import { NoRowsTableOverlay } from '@shared/lib/ag_grid/components/NoRowsTableOverlay'
 import { columnDefs, defaultColDef } from './columnDefs'
-import { bookmarksAgGridRef } from './refs/bookmarksAgGridRef'
+import { usersAgGridRef } from './refs/usersAgGridRef'
 import { addPlaceholderToFloatingFilters } from '@shared/lib/ag_grid/utils/addPlaceholderToFloatingFilters'
 import { GridLayout } from '@shared/lib/ag_grid/GridLayout'
 import { ProgressGridBar } from '@shared/lib/ag_grid/components/ProgressGridBar'
-import { useRefetchDataOnEmailChange } from '@shared/lib/ag_grid/hooks/useRefetchDataOnEmailChange'
 import { useShowLoadingJumpingDots } from '@shared/lib/ag_grid/hooks/useShowLoadingJumpingDots'
 import { AgGridStyles } from '@shared/lib/ag_grid/styles/AgGridStyles'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/loading_dots_overlay'
 
-export const BookmarksGrid = (): React.JSX.Element => {
+export const UsersGrid = (): React.JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
-  const { data, isLoading, isFetching, isFetched, refetch } =
-    useGetBookmarksQuery()
+  const { data, isLoading, isFetching, isFetched } = useGetUsersQuery()
   useDisableLoadingOverlayWhenItemsAreFetched({ isFetched })
-  useRefetchDataOnEmailChange({ refetch })
   useShowLoadingJumpingDots({ isLoading })
 
   return (
@@ -32,10 +29,10 @@ export const BookmarksGrid = (): React.JSX.Element => {
       <AgGridStyles />
       <DisplayedRowsCount />
       <ProgressGridBar isShown={isFetching} />
-      <AgGridReact<Item>
-        ref={bookmarksAgGridRef}
-        rowData={data?.bookmarks}
-        getRowId={(params) => params.data.id}
+      <AgGridReact<User>
+        ref={usersAgGridRef}
+        rowData={data?.users}
+        getRowId={(params) => params.data.email}
         defaultColDef={defaultColDef}
         columnDefs={columnDefs}
         suppressCellFocus
