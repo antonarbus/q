@@ -117,6 +117,7 @@ export function useLoadQuotation(): void {
       }
 
       if (
+        data.message === 'super-admin permission' ||
         data.message === 'owner permission' ||
         data.message === 'viewer permission'
       ) {
