@@ -18,6 +18,7 @@ import { useRefetchDataOnEmailChange } from '@shared/lib/ag_grid/hooks/useRefetc
 import { useShowLoadingJumpingDots } from '@shared/lib/ag_grid/hooks/useShowLoadingJumpingDots'
 import { AgGridStyles } from '@shared/lib/ag_grid/styles/AgGridStyles'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/loading_dots_overlay'
+import type { ItemPick } from '@back/api/bookmark/getBookmarksRouter'
 
 export const BookmarksGrid = (): React.JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
@@ -32,7 +33,7 @@ export const BookmarksGrid = (): React.JSX.Element => {
       <AgGridStyles />
       <DisplayedRowsCount />
       <ProgressGridBar isShown={isFetching} />
-      <AgGridReact<Item>
+      <AgGridReact<ItemPick>
         ref={bookmarksAgGridRef}
         rowData={data?.bookmarks}
         getRowId={(params) => params.data.id}

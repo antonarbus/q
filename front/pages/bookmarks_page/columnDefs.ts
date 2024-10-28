@@ -1,11 +1,11 @@
 import type { ColDef } from 'ag-grid-community'
-import type { Item } from '@entities/bookmark'
 import { ActionButtonsCellRenderer } from './renderers/ActionButtonsCellRenderer'
 import { DateCellRenderer } from '@shared/lib/ag_grid/renderers/DateCellRenderer'
 import { dateFilterComparator } from '@shared/lib/ag_grid/comparators/dateFilterComparator'
 import { dateValueGetter } from '@shared/lib/ag_grid/value_getter/dateValueGetter'
+import type { ItemPick } from '@back/api/bookmark/getBookmarksRouter'
 
-export const defaultColDef: ColDef<Item> = {
+export const defaultColDef: ColDef<ItemPick> = {
   headerClass: ['center'],
   width: 170,
   minWidth: 170,
@@ -19,7 +19,7 @@ export const defaultColDef: ColDef<Item> = {
   flex: 1,
 }
 
-export const columnDefs: ColDef<Item>[] = [
+export const columnDefs: ColDef<ItemPick>[] = [
   {
     cellRenderer: ActionButtonsCellRenderer,
     width: 150,

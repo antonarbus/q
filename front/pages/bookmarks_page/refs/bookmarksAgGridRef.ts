@@ -1,7 +1,7 @@
 import type { AgGridReact } from 'ag-grid-react'
 import type { RefObject } from 'react'
-import type { Item } from '@entities/bookmark'
+import type { ItemPick } from '@back/api/bookmark/getBookmarksRouter'
 
-export const bookmarksAgGridRef: RefObject<AgGridReact<Item>> = {
+export const bookmarksAgGridRef: RefObject<AgGridReact<ItemPick>> = {
   current: null,
 }

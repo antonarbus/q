@@ -41,15 +41,17 @@ const getUsers: RouterHandler = async (req, res, next) => {
         .json({ message: 'no permission to view', users: [] })
     }
 
-    const users = await UserModel.find()
-      .sort({ loggedAt: -1 })
-      .select({
+    const users = await UserModel.find(
+      {},
+      {
         _id: 0,
         email: 1,
         isActivated: 1,
         loggedAt: 1,
         registeredAt: 1,
-      })
+      },
+    )
+      .sort({ loggedAt: -1 })
       .lean()
 
     if (users.length === 0) {

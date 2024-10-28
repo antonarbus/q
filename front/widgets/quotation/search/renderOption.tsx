@@ -1,12 +1,12 @@
 import { BsFileEarmarkText, BsTags } from 'react-icons/bs'
 import { Box } from '@mui/material'
 import type { HTMLAttributes } from 'react'
-import type { Item } from '@entities/quotation'
 import { PiBooks } from 'react-icons/pi'
 import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
 import { getJsxWithBoldSubstr } from '@shared/utils/getJsxWithBoldSubstr'
 import type { Signal } from '@preact/signals-react'
 import type { LoadBookmark } from '@features/bookmark/copy_bookmark'
+import type { ItemPick } from '@back/api/bookmark/getBookmarksRouter'
 
 type Props = {
   loadBookmark: LoadBookmark
@@ -25,7 +25,7 @@ export const renderOption = ({
 }: Props) =>
   function render(
     props: HTMLAttributes<HTMLLIElement>,
-    option: Item,
+    option: ItemPick,
     {
       selected,
       index,
