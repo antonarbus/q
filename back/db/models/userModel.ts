@@ -29,7 +29,7 @@ const userSchema = new Schema<User>(
     activationKey: String,
     resetPasswordKey: String,
     refreshJwtToken: String,
-    createdAt: Date,
+    registeredAt: Date,
     updatedAt: Date,
     loggedAt: Date,
   },

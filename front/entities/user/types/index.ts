@@ -6,7 +6,7 @@ export type User = {
   activationKey: string
   resetPasswordKey: string
   refreshJwtToken: string
-  createdAt: Date
+  registeredAt: Date
   updatedAt: Date
   loggedAt: Date
 }

@@ -56,8 +56,7 @@ const getQuotation: RouterHandler = async (req, res, next) => {
     const isSharedWithEverybody = (document.sharedWith ?? []).at(0) === '*'
     const isSharedWithPerson = (document.sharedWith ?? []).includes(email)
     const isViewer = isSharedWithEverybody || isSharedWithPerson
-    const isSuperAdmin =
-      email === 'anton.arbus@gmail.com' && roles.includes('super-admin')
+    const isSuperAdmin = roles.includes('super-admin')
 
     if (!isOwner && !isShared && !isSuperAdmin) {
       return res

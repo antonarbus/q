@@ -29,29 +29,18 @@ export const columnDefs: ColDef<User>[] = [
     filter: 'agDateColumnFilter',
     sort: 'desc',
     minWidth: 200,
-    valueGetter: dateValueGetter({ columnDef: 'updatedAt' }),
+    valueGetter: dateValueGetter({ columnDef: 'loggedAt' }),
     cellRenderer: DateCellRenderer,
     filterParams: {
       comparator: dateFilterComparator,
     },
   },
   {
-    field: 'updatedAt',
-    headerName: 'updatedAt',
+    field: 'registeredAt',
+    headerName: 'registeredAt',
     filter: 'agDateColumnFilter',
     minWidth: 200,
-    valueGetter: dateValueGetter({ columnDef: 'updatedAt' }),
-    cellRenderer: DateCellRenderer,
-    filterParams: {
-      comparator: dateFilterComparator,
-    },
-  },
-  {
-    field: 'createdAt',
-    headerName: 'createdAt',
-    filter: 'agDateColumnFilter',
-    minWidth: 200,
-    valueGetter: dateValueGetter({ columnDef: 'updatedAt' }),
+    valueGetter: dateValueGetter({ columnDef: 'registeredAt' }),
     cellRenderer: DateCellRenderer,
     filterParams: {
       comparator: dateFilterComparator,

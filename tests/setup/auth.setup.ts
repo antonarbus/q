@@ -8,7 +8,7 @@ setup('authenticate', async () => {
 
   const response = await context.post('/api/login', {
     data: {
-      email: 'anton.arbus@gmail.com',
+      email: 'test-user@fake-mail.abc',
       password: 'xxx',
     },
   })

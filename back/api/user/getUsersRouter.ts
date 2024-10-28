@@ -28,9 +28,9 @@ export const getUsersRouter = Router()
 
 const getUsers: RouterHandler = async (req, res, next) => {
   try {
-    const { email, roles } = getUserFromRefreshTokenOrThrowUnauthorized(req)
+    const { roles } = getUserFromRefreshTokenOrThrowUnauthorized(req)
 
-    if (email !== 'anton.arbus@gmail.com' || !roles.includes('super-admin')) {
+    if (!roles.includes('super-admin')) {
       return res
         .status(httpStatus.forbidden_403)
         .json({ message: 'no permission to view' })
@@ -43,8 +43,7 @@ const getUsers: RouterHandler = async (req, res, next) => {
         email: 1,
         isActivated: 1,
         loggedAt: 1,
-        createdAt: 1,
-        updatedAt: 1,
+        registeredAt: 1,
       })
       .lean()
 

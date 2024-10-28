@@ -64,7 +64,7 @@ const register: RouterHandler = async (req, res, next) => {
 
     const newUser = await UserModel.findOneAndUpdate(
       { email },
-      { password, activationKey: nanoid(5) },
+      { password, activationKey: nanoid(5), registeredAt: new Date() },
       { new: true, upsert: true },
     )
 
