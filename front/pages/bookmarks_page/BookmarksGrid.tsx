@@ -2,7 +2,7 @@ import 'ag-grid-community/styles/ag-grid.css' // Mandatory CSS required by the g
 import 'ag-grid-community/styles/ag-theme-quartz.css'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef } from 'react'
-import { useGetBookmarksQuery, type Item } from '@entities/bookmark'
+import { useGetBookmarksQuery } from '@entities/bookmark'
 import { LoadingTableOverlay } from '@shared/components/LoadingTableOverlay'
 import {
   DisplayedRowsCount,
