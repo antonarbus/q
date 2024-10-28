@@ -9,7 +9,7 @@ import { getUserFromRefreshTokenOrThrowUnauthorized } from '../../utils/getUserF
 
 export type ResBody = {
   message: ErrorMessageCommon | 'Found' | 'Unhandled error'
-  categories?: Quotation['category'][]
+  categories: Quotation['category'][]
 }
 
 type RouterHandler = (
