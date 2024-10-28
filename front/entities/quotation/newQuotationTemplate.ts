@@ -214,7 +214,7 @@ export const newQuotationTemplate: Quotation = {
         html: `
         <p style="font-size: 24px; text-align: center;">Terms &amp; Conditions</p><p><br></p>
         <p><strong>Parties.</strong> The "Seller" refers to [Seller Name], and the "Buyer" refers to [Buyer Name].</p><p><br></p>
-        <p><strong>Validity.</strong> This quotation is valid for 30 days from the date of issuance.</p><p><br></p>
+        <p><strong>Validity.</strong> This quotation is valid for 14 days from the date of issuance.</p><p><br></p>
         <p><strong>Payment.</strong> Payment is due within 30 days of the invoice date. Late payments may incur penalties.</p><p><br></p>
         <p><strong>Delivery.</strong> Delivery times are estimated at 2-4 weeks from order confirmation.</p><p><br></p>
         <p><strong>Cancellation.</strong> Orders may be canceled within 48 hours of placement without penalty. Cancellations after this period may incur fees.</p><p><br></p>
