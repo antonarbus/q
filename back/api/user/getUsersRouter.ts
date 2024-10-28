@@ -8,6 +8,11 @@ import { getUserFromRefreshTokenOrThrowUnauthorized } from '../../utils/getUserF
 import { UserModel } from '@back/db/models/userModel'
 import type { User } from '@entities/user'
 
+export type UserPicked = Pick<
+  User,
+  'email' | 'isActivated' | 'loggedAt' | 'registeredAt'
+>
+
 export type ResBody = Pretty<{
   message:
     | ErrorMessageCommon
@@ -15,7 +20,7 @@ export type ResBody = Pretty<{
     | 'No content'
     | 'users data'
     | 'Unhandled case'
-  users?: FlattenMaps<User>[]
+  users: FlattenMaps<UserPicked>[]
 }>
 
 type RouterHandler = (
@@ -33,7 +38,7 @@ const getUsers: RouterHandler = async (req, res, next) => {
     if (!roles.includes('super-admin')) {
       return res
         .status(httpStatus.forbidden_403)
-        .json({ message: 'no permission to view' })
+        .json({ message: 'no permission to view', users: [] })
     }
 
     const users = await UserModel.find()
@@ -48,7 +53,9 @@ const getUsers: RouterHandler = async (req, res, next) => {
       .lean()
 
     if (users.length === 0) {
-      return res.status(httpStatus.notFound_404).json({ message: 'No content' })
+      return res
+        .status(httpStatus.notFound_404)
+        .json({ message: 'No content', users: [] })
     }
 
     if (users.length) {
@@ -59,7 +66,7 @@ const getUsers: RouterHandler = async (req, res, next) => {
 
     return res
       .status(httpStatus.notFound_404)
-      .json({ message: 'Unhandled case' })
+      .json({ message: 'Unhandled case', users: [] })
   } catch (error) {
     next(error)
   }

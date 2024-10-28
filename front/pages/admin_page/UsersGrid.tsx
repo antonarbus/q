@@ -2,7 +2,7 @@ import 'ag-grid-community/styles/ag-grid.css' // Mandatory CSS required by the g
 import 'ag-grid-community/styles/ag-theme-quartz.css'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef } from 'react'
-import { useGetUsersQuery, type User } from '@entities/user'
+import { useGetUsersQuery } from '@entities/user'
 import { LoadingTableOverlay } from '@shared/components/LoadingTableOverlay'
 import {
   DisplayedRowsCount,
@@ -17,6 +17,7 @@ import { ProgressGridBar } from '@shared/lib/ag_grid/components/ProgressGridBar'
 import { useShowLoadingJumpingDots } from '@shared/lib/ag_grid/hooks/useShowLoadingJumpingDots'
 import { AgGridStyles } from '@shared/lib/ag_grid/styles/AgGridStyles'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/loading_dots_overlay'
+import type { UserPicked } from '@back/api/user/getUsersRouter'
 
 export const UsersGrid = (): React.JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
@@ -29,7 +30,7 @@ export const UsersGrid = (): React.JSX.Element => {
       <AgGridStyles />
       <DisplayedRowsCount />
       <ProgressGridBar isShown={isFetching} />
-      <AgGridReact<User>
+      <AgGridReact<UserPicked>
         ref={usersAgGridRef}
         rowData={data?.users}
         getRowId={(params) => params.data.email}

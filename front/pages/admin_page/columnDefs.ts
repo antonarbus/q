@@ -2,9 +2,9 @@ import type { ColDef } from 'ag-grid-community'
 import { DateCellRenderer } from '@shared/lib/ag_grid/renderers/DateCellRenderer'
 import { dateFilterComparator } from '@shared/lib/ag_grid/comparators/dateFilterComparator'
 import { dateValueGetter } from '@shared/lib/ag_grid/value_getter/dateValueGetter'
-import type { User } from '@entities/user'
+import type { UserPicked } from '@back/api/user/getUsersRouter'
 
-export const defaultColDef: ColDef<User> = {
+export const defaultColDef: ColDef<UserPicked> = {
   headerClass: ['center'],
   width: 170,
   minWidth: 170,
@@ -18,7 +18,7 @@ export const defaultColDef: ColDef<User> = {
   flex: 1,
 }
 
-export const columnDefs: ColDef<User>[] = [
+export const columnDefs: ColDef<UserPicked>[] = [
   {
     field: 'email',
     headerName: 'email',
