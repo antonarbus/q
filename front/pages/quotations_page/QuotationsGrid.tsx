@@ -2,7 +2,7 @@ import 'ag-grid-community/styles/ag-grid.css' // Mandatory CSS required by the g
 import 'ag-grid-community/styles/ag-theme-quartz.css'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef } from 'react'
-import { useGetQuotationsQuery, type Quotation } from '@entities/quotation'
+import { useGetQuotationsQuery } from '@entities/quotation'
 import { LoadingTableOverlay } from '@shared/components/LoadingTableOverlay'
 import {
   DisplayedRowsCount,
@@ -18,6 +18,7 @@ import { useRefetchDataOnEmailChange } from '@shared/lib/ag_grid/hooks/useRefetc
 import { useShowLoadingJumpingDots } from '@shared/lib/ag_grid/hooks/useShowLoadingJumpingDots'
 import { AgGridStyles } from '@shared/lib/ag_grid/styles/AgGridStyles'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/loading_dots_overlay'
+import type { QuotationPick } from '@back/api/quotation/getQuotationsRouter'
 
 export const QuotationsGrid = (): React.JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
@@ -32,7 +33,7 @@ export const QuotationsGrid = (): React.JSX.Element => {
       <AgGridStyles />
       <DisplayedRowsCount />
       <ProgressGridBar isShown={isFetching} />
-      <AgGridReact<Quotation>
+      <AgGridReact<QuotationPick>
         ref={quotationsAgGridRef}
         rowData={data?.quotations}
         getRowId={(params) => params.data.id}

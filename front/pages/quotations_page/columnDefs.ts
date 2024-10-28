@@ -1,12 +1,12 @@
 import type { ColDef } from 'ag-grid-community'
-import type { Quotation } from '@entities/quotation'
 import { ActionButtonsCellRenderer } from './renderers/ActionButtonsCellRenderer'
 import { SharedWithRenderer } from './renderers/SharedWithRenderer'
 import { DateCellRenderer } from '@shared/lib/ag_grid/renderers/DateCellRenderer'
 import { dateFilterComparator } from '@shared/lib/ag_grid/comparators/dateFilterComparator'
 import { dateValueGetter } from '@shared/lib/ag_grid/value_getter/dateValueGetter'
+import type { QuotationPick } from '@back/api/quotation/getQuotationsRouter'
 
-export const defaultColDef: ColDef<Quotation> = {
+export const defaultColDef: ColDef<QuotationPick> = {
   headerClass: ['center'],
   width: 170,
   minWidth: 170,
@@ -20,7 +20,7 @@ export const defaultColDef: ColDef<Quotation> = {
   flex: 1,
 }
 
-export const columnDefs: ColDef<Quotation>[] = [
+export const columnDefs: ColDef<QuotationPick>[] = [
   {
     cellRenderer: ActionButtonsCellRenderer,
     width: 150,

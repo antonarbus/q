@@ -1,9 +1,9 @@
 import { Chip, Tooltip } from '@mui/material'
 import type { ICellRendererParams } from 'ag-grid-community'
-import type { Quotation } from '@entities/quotation'
+import type { QuotationPick } from '@back/api/quotation/getQuotationsRouter'
 
 export const SharedWithRenderer = (
-  params: ICellRendererParams<Quotation, Quotation['sharedWith']>,
+  params: ICellRendererParams<QuotationPick, QuotationPick['sharedWith']>,
 ): React.ReactNode => {
   if (
     !params.value ||
