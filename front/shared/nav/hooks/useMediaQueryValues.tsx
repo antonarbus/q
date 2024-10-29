@@ -19,18 +19,12 @@ export const useMediaQueryValues = ({ navRef, logoRef }: Props): void => {
     if (!navRef.current) return
     if (!logoRef.current) return
 
-    const { logoExtension, logoPart, icon, name, burger } =
-      calcNavMediaQueryParams(navRef.current, logoRef.current)
-
-    dispatch(
-      navSlice.actions.setNavMediaQueryWidths({
-        logoExtension,
-        logoPart,
-        icon,
-        name,
-        burger,
-      }),
+    const { icon, name, burger } = calcNavMediaQueryParams(
+      navRef.current,
+      logoRef.current,
     )
+
+    dispatch(navSlice.actions.setNavMediaQueryWidths({ icon, name, burger }))
   }, [])
 
   useLayoutEffect(() => {
@@ -47,19 +41,12 @@ export const useMediaQueryValues = ({ navRef, logoRef }: Props): void => {
     if (!navRef.current) return
     if (!logoRef.current) return
 
-    const { logoExtension, logoPart, icon, name, burger } =
-      calcNavMediaQueryParams(navRef.current, logoRef.current)
-
-    dispatch(
-      navSlice.actions.setNavMediaQueryWidths({
-        logoExtension,
-        logoPart,
-        icon,
-        name,
-        burger,
-      }),
+    const { icon, name, burger } = calcNavMediaQueryParams(
+      navRef.current,
+      logoRef.current,
     )
 
+    dispatch(navSlice.actions.setNavMediaQueryWidths({ icon, name, burger }))
     dispatch(navSlice.actions.enableMedia())
   }, [mediaEnabled])
 }

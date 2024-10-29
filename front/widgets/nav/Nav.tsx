@@ -20,19 +20,7 @@ export const Nav = (): React.JSX.Element => {
   const mediaQueryWidth = useSelectorTyped((state) => state.nav.mediaQueryWidth)
   const mediaEnabled = useSelectorTyped((state) => state.nav.mediaEnabled)
   useMenuItemActionShortcuts({ navStructure })
-
-  // todo: upgrade useMediaQueryValues to let it monitor the window width and return shouldShrinkLogo, shouldHideIcons...
-  // todo: and pass it down instead of media queries
-  // todo: in this case we may show tooltips under icons when text is not shown
   useMediaQueryValues({ navRef, logoRef })
-  // const { width } = useWindowSize()
-  // const shouldShrinkLogo = width < mediaQueryWidth.logoPart
-  // console.log('🚀 ~ shouldShrinkLogo:', shouldShrinkLogo)
-  // const shouldHideIcons =
-  //   width < mediaQueryWidth.icon && width > mediaQueryWidth.name
-  // const shouldHideText = width < mediaQueryWidth.name
-  // const shouldShowHamburger = width < mediaQueryWidth.burger
-
   useEffectOnce(() => {
     dispatch(navSlice.actions.addNavStructure({ navStructure }))
   })

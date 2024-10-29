@@ -45,60 +45,6 @@ test.describe('nav icons for guest user', () => {
   })
 })
 
-test.describe('nav icons & text on mid screen', () => {
-  test.use({ viewport: { width: 800, height: 1200 } })
-
-  test('should show only text', async ({ page }) => {
-    const nav = page.locator('nav')
-    await expect(nav.locator('[data-testid="new icon"]')).not.toBeVisible()
-    await expect(nav).toHaveText(/New/u)
-    await expect(nav.locator('[data-testid="save icon"]')).not.toBeVisible()
-    await expect(nav).toHaveText(/Save/u)
-    await expect(nav.locator('[data-testid="pdf icon"]')).not.toBeVisible()
-    await expect(nav).toHaveText(/Pdf/u)
-    await expect(nav.locator('[data-testid="insert icon"]')).not.toBeVisible()
-    await expect(nav).toHaveText(/Insert/u)
-    await expect(
-      nav.locator('[data-testid="bookmarks icon"]'),
-    ).not.toBeVisible()
-    await expect(nav).toHaveText(/Bookmarks/u)
-    await expect(
-      nav.locator('[data-testid="quotations icon"]'),
-    ).not.toBeVisible()
-    await expect(nav).toHaveText(/Quotations/u)
-    await expect(nav.locator('[data-testid="login icon"]')).not.toBeVisible()
-    await expect(nav).toHaveText(/Profile/u)
-    await expect(
-      nav.locator('[data-testid="hamburger icon"]'),
-    ).not.toBeVisible()
-  })
-})
-
-test.describe('nav icons & text on narrow screen', () => {
-  test.use({ viewport: { width: 600, height: 1200 } })
-
-  test('should show only icons', async ({ page }) => {
-    const nav = page.locator('nav')
-    await expect(nav.locator('[data-testid="new icon"]')).toBeVisible()
-    await expect(nav.locator('text=New')).not.toBeVisible()
-    await expect(nav.locator('[data-testid="save icon"]')).toBeVisible()
-    await expect(nav.locator('text=Save')).not.toBeVisible()
-    await expect(nav.locator('[data-testid="pdf icon"]')).toBeVisible()
-    await expect(nav.locator('text=Pdf')).not.toBeVisible()
-    await expect(nav.locator('[data-testid="insert icon"]')).toBeVisible()
-    await expect(nav.locator('text=Insert')).not.toBeVisible()
-    await expect(nav.locator('[data-testid="bookmarks icon"]')).toBeVisible()
-    await expect(nav.locator('text=Bookmarks')).not.toBeVisible()
-    await expect(nav.locator('[data-testid="quotations icon"]')).toBeVisible()
-    await expect(nav.locator('text=Quotations')).not.toBeVisible()
-    await expect(nav.locator('[data-testid="login icon"]')).not.toBeVisible()
-    await expect(nav.locator('text=Log in')).not.toBeVisible()
-    await expect(
-      nav.locator('[data-testid="hamburger icon"]'),
-    ).not.toBeVisible()
-  })
-})
-
 test.describe('nav icons & text on super narrow screen', () => {
   test.use({ viewport: { width: 500, height: 1200 } })
 

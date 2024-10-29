@@ -8,8 +8,6 @@ const initialState = {
   burger: { isOpen: false },
   mediaEnabled: true,
   mediaQueryWidth: {
-    logoExtension: 0,
-    logoPart: 0,
     icon: 0,
     name: 0,
     burger: 0,

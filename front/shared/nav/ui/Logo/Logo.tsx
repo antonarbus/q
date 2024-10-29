@@ -1,15 +1,12 @@
-import { useSelectorTyped } from '@lib_instances/store'
 import { Box } from '@mui/material'
 import type { RefObject } from 'react'
+import logoSrc from './logo.png'
 
 type Prop = {
   logoRef: RefObject<HTMLDivElement>
 }
 
 export const Logo = ({ logoRef }: Prop): React.JSX.Element => {
-  const mediaQueryWidth = useSelectorTyped((state) => state.nav.mediaQueryWidth)
-  const mediaEnabled = useSelectorTyped((state) => state.nav.mediaEnabled)
-
   return (
     <div
       className='logo-container'
@@ -22,41 +19,21 @@ export const Logo = ({ logoRef }: Prop): React.JSX.Element => {
         padding: '3px',
         paddingLeft: '10px',
         overflow: 'auto',
-        '& .logo': {
-          userSelect: 'none',
-          fontSize: '16px',
-          [`@media (max-width: ${String(mediaQueryWidth.logoPart)}px) and (min-width: ${String(mediaQueryWidth.burger)}px)`]:
-            mediaEnabled && {
-              fontSize: '30px',
-            },
-          '& span:first-of-type': {
-            color: 'white',
-          },
-          '& span:nth-of-type(2)': {
-            color: '#e7e7e7bf',
-            '&:hover': {
-              color: 'white !important',
-              transition: '0.3s ease',
-            },
-            [`@media (max-width: ${String(mediaQueryWidth.logoPart)}px) and (min-width: ${String(mediaQueryWidth.burger)}px)`]:
-              mediaEnabled && {
-                display: 'none',
-              },
-          },
-          '& span:last-child': {
-            color: '#e7e7e7bf',
-            [`@media (max-width: ${String(mediaQueryWidth.logoExtension)}px) and (min-width: ${String(mediaQueryWidth.burger)}px)`]:
-              mediaEnabled && {
-                display: 'none',
-              },
-          },
-        },
       }}
     >
       <Box className='logo'>
-        <span>Q</span>
-        <span className='uotation'>uotation</span>
-        {/* <span className='app-ext'>.app</span> */}
+        <img
+          className='logo-image'
+          src={logoSrc}
+          alt='logo'
+          style={{
+            height: 'auto',
+            width: '140px',
+            minWidth: '140px',
+            opacity: 0.7,
+            userSelect: 'none',
+          }}
+        />
       </Box>
     </div>
   )

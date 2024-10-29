@@ -1,12 +1,12 @@
 import { isOverflown } from '../../utils/isOverflown'
 
-const shrinkElementSlightly = (el: HTMLElement): void => {
+// todo: refactor this mess
+
+const shrinkElementIncrementally = (el: HTMLElement): void => {
   el.style.width = `${String(el.offsetWidth - 10)}px`
 }
 
 export type NavItemsMediaQueryWidths = {
-  logoExtension: number
-  logoPart: number
   icon: number
   name: number
   burger: number
@@ -48,7 +48,7 @@ export const calcNavMediaQueryParams = (
     let i = 0
 
     while (!isOverflown({ element: logo })) {
-      shrinkElementSlightly(nav)
+      shrinkElementIncrementally(nav)
       i++
 
       if (i > 1000) {
@@ -63,17 +63,18 @@ export const calcNavMediaQueryParams = (
 
   // calc init min nav width to accumulate all elements
   const navItemsQty = nav.querySelectorAll('.nav-item').length
+
   const navItem = nav.querySelector<HTMLElement>('.nav-item')
   const navItemWidth = navItem ? navItem.offsetWidth : 0
   const logoContainer = nav.querySelector<HTMLElement>('.logo-container')
-  const logoWidth = logoContainer ? logoContainer.offsetWidth : 0
-  const minNavWidthToIncludeAllItems = navItemWidth * navItemsQty + logoWidth
-  nav.style.width = `${String(minNavWidthToIncludeAllItems + 200)}px`
+  const logoContainerWidth = logoContainer ? logoContainer.offsetWidth : 0
 
-  const logoExtension = calcNavWidthWhenLogoIsOverlay()
-  const logoPart = calcNavWidthWhenLogoIsOverlay({
-    elsToHideClass: '.app-ext',
-  })
+  const minNavWidthToIncludeAllItems =
+    navItemWidth * navItemsQty + logoContainerWidth + 350
+
+  nav.style.width = `${minNavWidthToIncludeAllItems}px`
+
+  // todo: there is not such element with class .uotation anymore
   const icon = calcNavWidthWhenLogoIsOverlay({ elsToHideClass: '.uotation' })
   const name = calcNavWidthWhenLogoIsOverlay({
     elsToHideClass: '.icon-round-wrapper',
@@ -82,14 +83,10 @@ export const calcNavMediaQueryParams = (
     elsToHideClass: '.nav-item-name',
     elsToShowClass: '.icon-round-wrapper',
   })
-  nav
-    .querySelectorAll(
-      '.app-ext, .uotation, .icon-round-wrapper, .nav-item-name',
-    )
-    .forEach((el) => {
-      el.setAttribute('style', '')
-    })
+  nav.querySelectorAll('.icon-round-wrapper, .nav-item-name').forEach((el) => {
+    el.setAttribute('style', '')
+  })
   nav.setAttribute('style', '')
 
-  return { logoExtension, logoPart, icon, name, burger }
+  return { icon, name, burger }
 }
