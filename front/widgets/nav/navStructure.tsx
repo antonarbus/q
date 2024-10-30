@@ -108,7 +108,7 @@ export const navStructure: MenuItemType[] = [
                 name: 'Text',
                 icon: <IoText />,
                 isHidden: false,
-                shortcut: ['control', 'shift', 't'],
+                shortcut: ['control', '2'],
                 func: (e?: React.MouseEvent): void => {
                   insertTextBlock(e)
                 },
@@ -118,7 +118,7 @@ export const navStructure: MenuItemType[] = [
                 name: 'Items',
                 icon: <FaRegRectangleList />,
                 isHidden: false,
-                shortcut: ['control', 'shift', 'i'],
+                shortcut: ['control', '3'],
                 func: (e?: React.MouseEvent): void => {
                   insertBoqBlock(e)
                 },
@@ -128,7 +128,7 @@ export const navStructure: MenuItemType[] = [
                 name: 'Price',
                 icon: <FiDollarSign />,
                 isHidden: false,
-                shortcut: ['control', 'shift', 'p'],
+                shortcut: ['control', '4'],
                 func: (e?: React.MouseEvent): void => {
                   insertPriceBlock(e)
                 },
@@ -140,7 +140,7 @@ export const navStructure: MenuItemType[] = [
             name: 'Row',
             icon: <FaGripLines />,
             isHidden: false,
-            shortcut: ['control', 'shift', 'r'],
+            shortcut: ['control', '1'],
             func: (e?: React.MouseEvent): void => {
               insertBoqRow(e)
             },

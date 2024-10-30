@@ -1,25 +1,17 @@
 import { dispatch, useSelectorTyped } from '@lib_instances/store'
 import { theme } from '@lib_instances/theme'
 import { useRef } from 'react'
-import {
-  useEffectOnce,
-  // useWindowSize
-} from 'react-use'
-import {
-  navSlice,
-  useMediaQueryValues,
-  useMenuItemActionShortcuts,
-  Logo,
-  NavList,
-} from '@shared/nav'
+import { useEffectOnce } from 'react-use'
+import { navSlice, useMediaQueryValues, Logo, NavList } from '@shared/nav'
 import { navStructure } from './navStructure'
+import { usePressNavShortcuts } from '@features/nav/press_shortcuts'
 
 export const Nav = (): React.JSX.Element => {
   const navRef = useRef<HTMLDivElement>(null)
   const logoRef = useRef<HTMLDivElement>(null)
   const mediaQueryWidth = useSelectorTyped((state) => state.nav.mediaQueryWidth)
   const mediaEnabled = useSelectorTyped((state) => state.nav.mediaEnabled)
-  useMenuItemActionShortcuts({ navStructure })
+  usePressNavShortcuts({ navStructure })
   useMediaQueryValues({ navRef, logoRef })
   useEffectOnce(() => {
     dispatch(navSlice.actions.addNavStructure({ navStructure }))

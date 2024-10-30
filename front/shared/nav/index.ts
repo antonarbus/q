@@ -7,7 +7,6 @@ export { navSlice } from './navSlice'
 
 // hooks
 export { useMediaQueryValues } from './hooks/useMediaQueryValues'
-export { useMenuItemActionShortcuts } from './hooks/useMenuItemActionShortcuts'
 
 // ui
 export { Logo } from './ui/Logo'
