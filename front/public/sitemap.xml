@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- main page -->
   <url>
     <loc>https://sendmequotation.today/</loc>
-    <lastmod>2024-07-14</lastmod>
+    <lastmod>2024-10-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+  </url>
+    <!-- favicon URL -->
+  <url>
+      <loc>https://sendmequotation.today/favicon.png</loc>
+      <lastmod>2024-10-30</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.1</priority>
   </url>
 </urlset>
