@@ -31,6 +31,7 @@
     "prettier": "prettier . --check",
     "prettier_fix": "prettier --write .",
     "check": "npm run tsc && npm run lint && npm run prettier && npm run test && npm run playwright",
+    "fsd": "npx steiger ./front",
     "find_unused_files": "knip",
     "docker_prod_build": "docker compose -f docker-compose.prod.yml build",
     "docker_prod_up": "docker compose -f docker-compose.prod.yml up"
@@ -84,6 +85,7 @@
     "prettier": "3.3.3",
     "rollup": "^4.22.4",
     "rollup-plugin-copy": "^3.5.0",
+    "steiger": "^0.4.0",
     "tsx": "^4.19.1",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.6.0",
