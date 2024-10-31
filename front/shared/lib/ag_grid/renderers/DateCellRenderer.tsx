@@ -1,10 +1,9 @@
 import { Box } from '@mui/material'
 import type { ICellRendererParams } from 'ag-grid-community'
 import { format } from 'date-fns'
-import type { Quotation } from '@entities/quotation'
 
 export const DateCellRenderer = (
-  params: ICellRendererParams<Quotation, Date>,
+  params: ICellRendererParams<unknown, Date>,
 ): React.ReactNode => {
   if (params.value === undefined) return null
   if (params.value === null) return null

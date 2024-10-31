@@ -11,4 +11,4 @@ export { deleteBookmarksCache } from './cacheUpdaters/deleteBookmarksCache'
 
 // types
 export type { Item } from '@entities/quotation'
-export type { BookmarkFormValues } from './types'
+export type { BookmarkFormValues } from './form'

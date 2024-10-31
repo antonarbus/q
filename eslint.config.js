@@ -9,6 +9,7 @@ export default [
     files: [
       'back/*.{js,mjs,cjs,ts,jsx,tsx}',
       'front/*.{js,mjs,cjs,ts,jsx,tsx}',
+      'steiger.config.ts',
     ],
   },
   {

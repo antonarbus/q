@@ -10,7 +10,8 @@
     "rollup.config.js",
     "test-setup.ts",
     "vite.config.mts",
-    "playwright.config.ts"
+    "playwright.config.ts",
+    "./steiger.config.ts"
   ],
   "exclude": [
     "**/node_modules",

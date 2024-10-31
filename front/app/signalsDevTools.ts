@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { effect } from '@preact/signals-react'
 import { isFroalaSignal, reLoadQuotationSignal } from '@entities/quotation'
 import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
@@ -11,22 +10,22 @@ declare const window: Window &
 
 function signalsOn(): void {
   effect(() => {
-    console.log(
+    console.info(
       '🚦 displayedRowsCountSignal.value',
       displayedRowsCountSignal.value,
     )
   })
 
   effect(() => {
-    console.log('🚦 isFroalaSignal.value', isFroalaSignal.value)
+    console.info('🚦 isFroalaSignal.value', isFroalaSignal.value)
   })
 
   effect(() => {
-    console.log('🚦 reLoadQuotationSignal.value', reLoadQuotationSignal.value)
+    console.info('🚦 reLoadQuotationSignal.value', reLoadQuotationSignal.value)
   })
 
   effect(() => {
-    console.log('🚦 accessTokenSignal.value', accessTokenSignal.value)
+    console.info('🚦 accessTokenSignal.value', accessTokenSignal.value)
   })
 }
 
