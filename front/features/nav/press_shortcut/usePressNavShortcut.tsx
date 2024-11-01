@@ -44,7 +44,7 @@ type Props = {
   navStructure: MenuItemType[]
 }
 
-export const usePressNavShortcuts = ({ navStructure }: Props): void => {
+export const usePressNavShortcut = ({ navStructure }: Props): void => {
   const navigate = useNavigate()
 
   useEffectOnce(() => {
