@@ -1,5 +1,5 @@
 export const config = {
-  isDev: process.env.NODE_ENV === 'development',
+  isDev: process.env.NODE_ENV === 'development', // set at package.json
   isProd: process.env.NODE_ENV !== 'development',
   get env() {
     return this.isDev ? 'dev' : 'prod'
