@@ -1,8 +1,4 @@
-import {
-  type Item as BlockType,
-  BlockProvider,
-  itemType,
-} from '@entities/quotation'
+import { type Item, BlockProvider, itemType } from '@entities/quotation'
 import { BoqBlock } from './boq/BoqBlock'
 import { PasteItem } from './paste/PasteItem'
 import { PriceBlock } from './price/PriceBlock'
@@ -10,7 +6,7 @@ import { TextBlock } from './text/TextBlock'
 import { RowBlock } from './row/RowBlock'
 
 type Props = {
-  block: BlockType
+  block: Item
   blockIndex: number
 }
 

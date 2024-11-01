@@ -131,9 +131,9 @@ Server can validate the token only if it knows the secrete key.
 
 (A) For emails sending Sendgrid is used.
 
-# Block vs Item
+# Item
 
-![Block vs Item](./block_vs_item.png)
+- Item in the code is a thing which can be sorted or bookmarked: text, boq, price, row.
 
 # CI/CD
 

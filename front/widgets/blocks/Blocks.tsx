@@ -1,14 +1,11 @@
 import { AnimatePresence } from 'framer-motion'
-import {
-  bookmarkPosAtBlocks,
-  type Item as BlockType,
-} from '@entities/quotation'
+import { bookmarkPosAtBlocks, type Item } from '@entities/quotation'
 import { FadeInOnInitLoad } from './FadeInOnInitLoad'
 import { Block } from './Block'
 import { BlocksSortableContext } from './BlocksSortableContext'
 
 type Props = {
-  blocks: (BlockType | null)[]
+  blocks: (Item | null)[]
 }
 
 export const Blocks = ({ blocks }: Props): React.ReactNode => {
