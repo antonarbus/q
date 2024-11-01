@@ -1,7 +1,9 @@
-const isDev = process.env.NODE_ENV === 'development' // defined at package.json
-
 export const config = {
-  env: isDev ? 'dev' : 'prod',
+  get env() {
+    if (process.env.NODE_ENV === 'dev') return 'dev'
+    if (process.env.NODE_ENV === 'ci') return 'ci'
+    return 'prod'
+  },
   back: {
     protocol: 'http',
     hostname: 'localhost',
@@ -13,16 +15,22 @@ export const config = {
   front: {
     protocol: 'https',
     get hostname() {
-      if (isDev) return 'localhost'
+      if (config.env === 'dev') return 'localhost'
+      if (config.env === 'ci') return 'localhost'
       return 'sendmequotation.today'
     },
     get port() {
-      if (isDev) return 3000
+      if (config.env === 'dev') return 3000
+      if (config.env === 'ci') return 3000
       return 443 // default, not specified at browser
     },
     get baseUrl() {
-      if (isDev)
+      if (config.env === 'dev')
         return `${this.protocol}://${this.hostname}:${this.port}` as const
+
+      if (config.env === 'ci')
+        return `${this.protocol}://${this.hostname}:${this.port}` as const
+
       return `${this.protocol}://${this.hostname}` as const
     },
   },
