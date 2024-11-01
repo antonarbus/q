@@ -10,6 +10,17 @@ test.describe('nav bar for logged-in vs guest user', () => {
     const password = 'xxx'
 
     await page.goto(route.root)
+    await page.waitForSelector('#my-element', { state: 'hidden' })
+    await page.waitForTimeout(5000)
+
+    const nav = page.locator('nav')
+
+    // at the start we check tokens are spinner is rotating
+    // which blocks the click on login button
+    // so we should wait until spinner is removed
+    const spinner = nav.locator('[data-testid="spinner icon"]')
+    await spinner.waitFor({ state: 'hidden' })
+
     await page.getByRole('link', { name: 'Log in' }).click()
     const button = page.locator('button').filter({ hasText: 'LOG IN' })
     await expect(button).toBeDisabled()
@@ -19,7 +30,7 @@ test.describe('nav bar for logged-in vs guest user', () => {
     await page.getByPlaceholder('Password').fill(password)
     await expect(button).not.toBeDisabled()
     await button.click()
-    const nav = page.locator('nav')
+
     await expect(nav).toHaveText(/Profile/u)
     await page.getByRole('link', { name: 'Profile' }).click()
     await page.getByRole('link', { name: 'Log out' }).nth(0).click()

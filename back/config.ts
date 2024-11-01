@@ -1,9 +1,7 @@
+const isDev = process.env.NODE_ENV === 'development' // defined at package.json
+
 export const config = {
-  isDev: process.env.NODE_ENV === 'development', // set at package.json
-  isProd: process.env.NODE_ENV !== 'development',
-  get env() {
-    return this.isDev ? 'dev' : 'prod'
-  },
+  env: isDev ? 'dev' : 'prod',
   back: {
     protocol: 'http',
     hostname: 'localhost',
@@ -13,24 +11,19 @@ export const config = {
     },
   },
   front: {
-    dev: {
-      protocol: 'https',
-      hostname: 'localhost',
-      port: 3000,
-      get baseUrl() {
-        return `${this.protocol}://${this.hostname}:${this.port}` as const
-      },
+    protocol: 'https',
+    get hostname() {
+      if (isDev) return 'localhost'
+      return 'sendmequotation.today'
     },
-    prod: {
-      protocol: 'https',
-      hostname: 'sendmequotation.today',
-      port: 443, // default
-      get baseUrl() {
-        return `${this.protocol}://${this.hostname}` as const
-      },
+    get port() {
+      if (isDev) return 3000
+      return 443 // default, not specified at browser
     },
     get baseUrl() {
-      return this[config.env].baseUrl
+      if (isDev)
+        return `${this.protocol}://${this.hostname}:${this.port}` as const
+      return `${this.protocol}://${this.hostname}` as const
     },
   },
 } as const

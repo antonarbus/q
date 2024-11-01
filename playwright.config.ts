@@ -12,7 +12,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: process.env.CI ? 'dot' : 'list',
   use: {
-    baseURL: config.front.dev.baseUrl,
+    baseURL: config.front.baseUrl,
     trace: 'on-first-retry',
   },
   projects: [
@@ -50,7 +50,7 @@ export default defineConfig({
     },
     {
       command: 'npm run start_front',
-      url: config.front.dev.baseUrl,
+      url: config.front.baseUrl,
       ignoreHTTPSErrors: true,
       reuseExistingServer: !process.env.CI,
     },
