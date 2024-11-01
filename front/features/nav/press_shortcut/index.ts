@@ -1,1 +1,1 @@
-export { usePressNavShortcut as usePressNavShortcut } from './usePressNavShortcut'
+export { usePressNavShortcut } from './usePressNavShortcut'
