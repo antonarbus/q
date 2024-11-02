@@ -1,15 +1,15 @@
 import { dispatch, useSelectorTyped } from '@lib_instances/store'
 import { useLayoutEffect, type RefObject } from 'react'
 import { useFirstMountState } from 'react-use'
-import { calcNavMediaQueryParams } from '../functions/calcNavMediaQueryParams'
-import { navSlice } from '../navSlice'
+import { calcNavMediaQueryParams } from './calcNavMediaQueryParams'
+import { navSlice } from '@shared/nav'
 
 type Props = {
   navRef: RefObject<HTMLDivElement>
   logoRef: RefObject<HTMLDivElement>
 }
 
-export const useMediaQueryValues = ({ navRef, logoRef }: Props): void => {
+export const useCalculateMediaQueries = ({ navRef, logoRef }: Props): void => {
   const isFirstMount = useFirstMountState()
   const navStructure = useSelectorTyped((state) => state.nav.navStructure)
   const mediaEnabled = useSelectorTyped((state) => state.nav.mediaEnabled)

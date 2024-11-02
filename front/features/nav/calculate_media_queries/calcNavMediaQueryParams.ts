@@ -1,15 +1,10 @@
-import { isOverflown } from '../../utils/isOverflown'
+import type { NavItemsMediaQueryWidths } from '@shared/nav'
+import { isOverflown } from '@shared/utils/isOverflown'
 
 // todo: refactor this mess
 
 const shrinkElementIncrementally = (el: HTMLElement): void => {
   el.style.width = `${String(el.offsetWidth - 10)}px`
-}
-
-export type NavItemsMediaQueryWidths = {
-  icon: number
-  name: number
-  burger: number
 }
 
 export const calcNavMediaQueryParams = (

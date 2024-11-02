@@ -1,7 +1,10 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
-import type { NavItemsMediaQueryWidths } from '@widgets/nav'
 import { setMenuItemPropValue } from './setMenuItemPropValue'
-import type { MenuItemType, NavItemIdKey } from './type'
+import type {
+  MenuItemType,
+  NavItemIdKey,
+  NavItemsMediaQueryWidths,
+} from './type'
 
 const initialState = {
   navStructure: [] as MenuItemType[],

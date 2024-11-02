@@ -1,12 +1,8 @@
 // types
-export type { MenuItemType } from './type'
-export type { NavItemsMediaQueryWidths } from './functions/calcNavMediaQueryParams'
+export type { MenuItemType, NavItemsMediaQueryWidths } from './type'
 
 // redux
 export { navSlice } from './navSlice'
-
-// hooks
-export { useMediaQueryValues } from './hooks/useMediaQueryValues'
 
 // ui
 export { Logo } from './ui/Logo'

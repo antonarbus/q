@@ -19,3 +19,9 @@ export type MenuItemType = {
 }
 
 export type NavItemIdKey = keyof typeof navItemKey
+
+export type NavItemsMediaQueryWidths = {
+  icon: number
+  name: number
+  burger: number
+}
