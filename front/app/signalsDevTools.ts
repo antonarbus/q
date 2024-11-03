@@ -1,6 +1,6 @@
 import { effect } from '@preact/signals-react'
 import { isFroalaSignal, reLoadQuotationSignal } from '@entities/quotation'
-import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
+import { accessTokenSignal } from '@entities/user'
 import { displayedRowsCountSignal } from '@shared/lib/ag_grid/components/DisplayedRowsCount'
 
 declare const window: Window &

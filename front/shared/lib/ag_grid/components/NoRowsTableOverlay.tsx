@@ -1,6 +1,4 @@
-import { accessTokenSignal } from '../../../auth/accessTokenSignal'
-
-export const NoRowsTableOverlay = (): React.JSX.Element | null => {
+export const NoRowsTableOverlay = (): React.JSX.Element => {
   return (
     <div
       css={{
@@ -24,7 +22,7 @@ export const NoRowsTableOverlay = (): React.JSX.Element | null => {
           height: '60px',
         }}
       >
-        {accessTokenSignal.value === null ? 'Not logged in' : 'No content'}
+        No content
       </div>
     </div>
   )

@@ -13,8 +13,7 @@ import {
   reLoadQuotationSignal,
   useGetQuotationsQuery,
 } from '@entities/quotation'
-import { useLogInMutation, userSlice } from '@entities/user'
-import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
+import { useLogInMutation, userSlice, accessTokenSignal } from '@entities/user'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { route } from '@shared/consts/route'
 import { nanoid } from '@shared/lib/nanoid'

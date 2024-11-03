@@ -1,6 +1,9 @@
 // redux
 export { userSlice } from './redux/userSlice'
 
+// signals
+export { accessTokenSignal } from './signals/accessTokenSignal'
+
 // api
 export { useLogInMutation } from './api/useLogInMutation'
 export { useLogOutMutation } from './api/useLogOutMutation'

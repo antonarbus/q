@@ -2,8 +2,11 @@ import { dispatch } from '@lib_instances/store'
 import type { UseMutationResult } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
-import { useActivateMutation, userSlice } from '@entities/user'
-import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
+import {
+  useActivateMutation,
+  userSlice,
+  accessTokenSignal,
+} from '@entities/user'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { navSlice } from '@shared/nav'
 import { notify } from '@shared/toast'

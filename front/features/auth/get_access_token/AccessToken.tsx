@@ -2,8 +2,11 @@ import type { JwtPayloadExtended } from '@back/services/jwt'
 import { dispatch } from '@lib_instances/store'
 import { jwtDecode } from 'jwt-decode'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
-import { useGetAccessTokenQuery, userSlice } from '@entities/user'
-import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
+import {
+  useGetAccessTokenQuery,
+  userSlice,
+  accessTokenSignal,
+} from '@entities/user'
 import { loadingTableOverlaySignal } from '@shared/components/LoadingTableOverlay'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { resolveInitAccessTokenFetching } from '@shared/lib/axios/axiosWithAuth'

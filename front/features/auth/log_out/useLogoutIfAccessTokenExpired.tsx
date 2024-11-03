@@ -1,7 +1,6 @@
 import { dispatch } from '@lib_instances/store'
 import { useUpdateEffect } from 'react-use'
-import { userSlice } from '@entities/user'
-import { accessTokenSignal } from '@shared/auth/accessTokenSignal'
+import { userSlice, accessTokenSignal } from '@entities/user'
 
 export const useLogoutIfAccessTokenExpired = (): void => {
   useUpdateEffect(() => {
