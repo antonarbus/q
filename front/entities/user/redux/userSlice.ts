@@ -1,13 +1,14 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import type { User } from '../types'
 
 type Props = {
   email: string | null
-  roles: string[]
+  roles: User['roles']
 }
 
 const initialState: Props = {
   email: null,
-  roles: ['no role'],
+  roles: ['user'],
 }
 
 export const userSlice = createSlice({

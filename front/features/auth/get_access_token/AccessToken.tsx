@@ -55,7 +55,7 @@ export const AccessToken = (): React.JSX.Element => {
       dispatch(
         userSlice.actions.rememberLoggedUser({
           email,
-          roles: data.roles ?? ['some role'],
+          roles: data.roles ?? ['user'],
         }),
       )
 

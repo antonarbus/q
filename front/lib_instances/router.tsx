@@ -17,9 +17,9 @@ import { RegisterModal } from '@pages/auth_register_modal'
 import { RequestPasswordResetModal } from '@pages/auth_request_password_reset_modal'
 import { ActivationModal } from '@pages/auth_activation_modal'
 import { ResetPasswordModal } from '@pages/auth_reset_password_modal'
-import { UnauthorizedPage } from '@pages/auth_unauthorized_page'
 import { Toast } from '@shared/toast'
 import { Footer } from '@widgets/footer'
+import { RequireRoles } from '@features/auth/check_required_roles'
 
 const Quotation = React.lazy(async () => {
   return import('@pages/quotation_page')
@@ -174,15 +174,13 @@ export const router = createBrowserRouter([
               />
             }
           >
-            <AdminPageLazy />
+            <RequireRoles requiredRoles={['super-admin']}>
+              <AdminPageLazy />
+            </RequireRoles>
           </Suspense>
         ),
       },
     ],
     errorElement: <ErrorPage />,
-  },
-  {
-    path: 'unauthorized',
-    element: <UnauthorizedPage />,
   },
 ])
