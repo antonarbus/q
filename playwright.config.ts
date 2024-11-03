@@ -46,8 +46,8 @@ export default defineConfig({
       url: config.back.baseUrl,
       ignoreHTTPSErrors: true,
       reuseExistingServer: !getEnvVar('CI'),
-      // stdout: getEnvVar('CI') ? 'ignore' : 'pipe', // Capture standard output
-      // stderr: getEnvVar('CI') ? 'ignore' : 'pipe', // Capture standard error
+      stdout: getEnvVar('CI') ? 'ignore' : 'pipe', // Capture standard output
+      stderr: getEnvVar('CI') ? 'ignore' : 'pipe', // Capture standard error
     },
     {
       command: 'npm run start_front',

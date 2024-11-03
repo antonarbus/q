@@ -2,9 +2,8 @@ import { getEnvVar } from './utils/getEnvVar'
 
 export const config = {
   get env() {
-    if (getEnvVar('NODE_ENV') === 'dev') return 'dev'
-    if (getEnvVar('NODE_ENV') === 'ci') return 'ci'
-    return 'prod'
+    if (getEnvVar('NODE_ENV') === 'development') return 'development'
+    return 'production'
   },
   back: {
     protocol: 'http',
@@ -17,20 +16,15 @@ export const config = {
   front: {
     protocol: 'https',
     get hostname() {
-      if (config.env === 'dev') return 'localhost'
-      if (config.env === 'ci') return 'localhost'
+      if (config.env === 'development') return 'localhost'
       return 'sendmequotation.today'
     },
     get port() {
-      if (config.env === 'dev') return 3000
-      if (config.env === 'ci') return 3000
+      if (config.env === 'development') return 3000
       return 443 // default, not specified at browser
     },
     get baseUrl() {
-      if (config.env === 'dev')
-        return `${this.protocol}://${this.hostname}:${this.port}` as const
-
-      if (config.env === 'ci')
+      if (config.env === 'development')
         return `${this.protocol}://${this.hostname}:${this.port}` as const
 
       return `${this.protocol}://${this.hostname}` as const

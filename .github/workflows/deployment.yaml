@@ -17,7 +17,7 @@ env:
   SERVICE_ACCOUNT: 'cloud-run-sa@quotationapp-8014c.iam.gserviceaccount.com'
   WORKLOAD_IDENTITY_PROVIDER: 'projects/665701178658/locations/global/workloadIdentityPools/github/providers/github-repo-provider'
   ARTIFACTS_REGISTRY_FOLDER_NAME: 'cloud-run'
-  NODE_ENV: 'ci'
+  CI: 'true'
 
 jobs:
   build-and-deploy:
@@ -81,31 +81,8 @@ jobs:
       - name: Run ESlint
         run: npm run lint
 
-      # - name: Start dev server
-      #   run: |
-      #     npm run start &
-      #     echo "Dev server is being launched"
-
-      # - name: Wait for dev server startup
-      #   run: sleep 10
-
-      # - name: Wait for dev server to be ready
-      #   run: |
-      #     for i in {1..10}; do
-      #       response=$(curl -k https://localhost:3000 -I -s)
-      #       echo "$response" | grep "200 OK" && break
-      #       echo "Waiting for server..."
-      #       sleep 5
-      #     done
-
-      # - name: Install Playwright
-      #   run: npx playwright install
-
       - name: Run Playwright tests
         run: npm run playwright
-
-      # - name: Stop server
-      #   run: npm run stop
 
       - name: Build and push Docker image Backend
         id: build-push-back
