@@ -1,3 +1,4 @@
+import { getEnvVarOrThrow } from '@back/utils/getEnvVar'
 import { jsonParseSafe } from '@back/utils/jsonParseSafe'
 import type { User } from '@entities/user'
 import jwt, { type JwtPayload } from 'jsonwebtoken'
@@ -13,9 +14,7 @@ export type JwtPayloadExtended = {
 export const createAccessToken = (
   payload: JwtPayloadExtended,
 ): string | undefined => {
-  const salt = process.env.JWT_ACCESS_SECRET
-
-  if (!salt) return undefined
+  const salt = getEnvVarOrThrow('JWT_ACCESS_SECRET')
 
   const token = jwt.sign(payload, salt, {
     expiresIn: fifteenMinInSec,
@@ -27,9 +26,7 @@ export const createAccessToken = (
 export const createRefreshToken = (
   payload: JwtPayloadExtended,
 ): string | undefined => {
-  const salt = process.env.JWT_REFRESH_SECRET
-
-  if (!salt) return undefined
+  const salt = getEnvVarOrThrow('JWT_REFRESH_SECRET')
 
   const token = jwt.sign(payload, salt, {
     expiresIn: thirtyDaysInSec,
@@ -42,8 +39,8 @@ export const verifyAccessToken = (
   accessJwtToken: string,
 ): JwtPayload | undefined => {
   try {
-    const salt = process.env.JWT_ACCESS_SECRET
-    if (!salt) return undefined
+    const salt = getEnvVarOrThrow('JWT_ACCESS_SECRET')
+
     const jwtPayload = jwt.verify(accessJwtToken, salt)
     if (typeof jwtPayload === 'string') return undefined
     return jwtPayload
@@ -56,8 +53,8 @@ export const verifyRefreshToken = (
   refreshJwtToken: string,
 ): JwtPayload | undefined => {
   try {
-    const salt = process.env.JWT_REFRESH_SECRET
-    if (!salt) return undefined
+    const salt = getEnvVarOrThrow('JWT_REFRESH_SECRET')
+
     const jwtPayload = jwt.verify(refreshJwtToken, salt)
     if (typeof jwtPayload === 'string') return undefined
     return jwtPayload

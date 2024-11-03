@@ -1,15 +1,12 @@
 import mongoose from 'mongoose'
 import { isConnectedToDb } from './isConnectedToDb'
-
-const mongoDbUrl = process.env.MONGO_DB_CONNECTION_STRING
-const db = 'q'
+import { getEnvVarOrThrow } from '@back/utils/getEnvVar'
 
 export const connectToDb = async (): Promise<void> => {
-  try {
-    if (!mongoDbUrl) {
-      throw new Error('database connection string not found')
-    }
+  const mongoDbUrl = getEnvVarOrThrow('MONGO_DB_CONNECTION_STRING')
+  const db = 'q'
 
+  try {
     if (isConnectedToDb()) {
       console.info('connection to database is already established')
       return

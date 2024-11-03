@@ -1,6 +1,7 @@
 import express from 'express'
 import { bucket } from '../../services/storage'
 import type { Req, Res, Next } from '../../types'
+import { getEnvVarOrThrow } from '@back/utils/getEnvVar'
 
 // https://cloud.google.com/storage/docs/samples/storage-cors-configuration#storage_cors_configuration-nodejs
 
@@ -28,9 +29,7 @@ async function configureBucketCors(
     },
   ])
 
-  console.info(
-    `Bucket ${process.env.BUCKET_NAME ?? 'fake bucket name to suppress ts'} was updated with a CORS config`,
-  )
+  console.info(`Bucket ${getEnvVarOrThrow('BUCKET_NAME')} CORS were updated`)
 
   res.json(corsUpdateRes.at(0)?.cors)
 }

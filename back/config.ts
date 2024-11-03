@@ -1,7 +1,9 @@
+import { getEnvVar } from './utils/getEnvVar'
+
 export const config = {
   get env() {
-    if (process.env.NODE_ENV === 'dev') return 'dev'
-    if (process.env.NODE_ENV === 'ci') return 'ci'
+    if (getEnvVar('NODE_ENV') === 'dev') return 'dev'
+    if (getEnvVar('NODE_ENV') === 'ci') return 'ci'
     return 'prod'
   },
   back: {

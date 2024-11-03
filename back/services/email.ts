@@ -1,6 +1,7 @@
+import { getEnvVarOrThrow } from '@back/utils/getEnvVar'
 import sgMail, { type MailDataRequired } from '@sendgrid/mail'
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY ?? 'or fake key to suppress ts')
+sgMail.setApiKey(getEnvVarOrThrow('SENDGRID_API_KEY'))
 
 type Props = {
   to: MailDataRequired['to']
