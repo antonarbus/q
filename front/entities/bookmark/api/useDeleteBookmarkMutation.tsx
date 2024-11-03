@@ -6,7 +6,7 @@ import { apiUrl } from '@back/consts/apiUrl'
 import { type UseMutationResult, useMutation } from '@tanstack/react-query'
 import type { AxiosError } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
-import { axiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
+import { axiosWithAuth } from '@lib_instances/axiosWithAuth'
 
 export const useDeleteBookmarkMutation = (): UseMutationResult<
   ResBody,

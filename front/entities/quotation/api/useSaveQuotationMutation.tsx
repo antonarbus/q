@@ -6,7 +6,7 @@ import { apiUrl } from '@back/consts/apiUrl'
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import type { AxiosResponse, AxiosError } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
-import { axiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
+import { axiosWithAuth } from '@lib_instances/axiosWithAuth'
 
 export const useSaveQuotationMutation = (): UseMutationResult<
   ResBody,
