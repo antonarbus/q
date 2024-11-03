@@ -22,7 +22,7 @@ const store = configureStore({
   },
   middleware: (defaultMiddleware) =>
     defaultMiddleware({ serializableCheck: false }), // we have not serializable components and functions in nav structure
-  // devTools: process.env.NODE_ENV !== 'production',
+  devTools: process.env.NODE_ENV !== 'production',
 })
 
 // eslint-disable-next-line @typescript-eslint/unbound-method
