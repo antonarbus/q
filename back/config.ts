@@ -20,10 +20,6 @@ export const config = {
   front: {
     protocol: 'https',
     get hostname() {
-      // console.log('🚀 ~ config.installation:', config.installation)
-      // console.log('🚀 ~ config.env:', config.env)
-      console.log('🚀 ~ getEnvVar(NODE_ENV)', getEnvVar('NODE_ENV'))
-      console.log('🚀 ~ getEnvVar(INSTALLATION)', getEnvVar('INSTALLATION'))
       if (config.installation === 'local') return 'localhost'
       return 'sendmequotation.today'
     },
