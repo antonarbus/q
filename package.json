@@ -6,8 +6,8 @@
   "scripts": {
     "start": "concurrently \"npm run start_back\" \"npm run start_front\"",
     "stop": "kill-port 3000 4000",
-    "start_front": "vite",
-    "start_back": "NODE_ENV=development tsx watch back/index.ts",
+    "start_front": "NODE_ENV=development INSTALLATION=local vite",
+    "start_back": "NODE_ENV=development INSTALLATION=local tsx watch back/index.ts",
     "build_front": "vite build",
     "build_back": "rollup -c rollup.config.js",
     "build_all": "concurrently \"npm run build_front\" \"npm run build_back\"",

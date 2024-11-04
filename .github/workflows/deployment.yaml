@@ -6,6 +6,7 @@ env:
   WORKLOAD_IDENTITY_PROVIDER: 'projects/665701178658/locations/global/workloadIdentityPools/github/providers/github-repo-provider'
   ARTIFACTS_REGISTRY_FOLDER_NAME: 'cloud-run'
   NODE_ENV: 'development'
+  INSTALLATION: 'local'
   CI: 'true'
 
 on:

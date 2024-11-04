@@ -5,6 +5,10 @@ export const config = {
     if (getEnvVar('NODE_ENV') === 'development') return 'development'
     return 'production'
   },
+  get installation() {
+    if (getEnvVar('INSTALLATION') === 'local') return 'local'
+    return 'production'
+  },
   back: {
     protocol: 'http',
     hostname: 'localhost',
@@ -16,15 +20,19 @@ export const config = {
   front: {
     protocol: 'https',
     get hostname() {
-      if (config.env === 'development') return 'localhost'
+      // console.log('🚀 ~ config.installation:', config.installation)
+      // console.log('🚀 ~ config.env:', config.env)
+      console.log('🚀 ~ getEnvVar(NODE_ENV)', getEnvVar('NODE_ENV'))
+      console.log('🚀 ~ getEnvVar(INSTALLATION)', getEnvVar('INSTALLATION'))
+      if (config.installation === 'local') return 'localhost'
       return 'sendmequotation.today'
     },
     get port() {
-      if (config.env === 'development') return 3000
+      if (config.installation === 'local') return 3000
       return 443 // default, not specified at browser
     },
     get baseUrl() {
-      if (config.env === 'development')
+      if (config.installation === 'local')
         return `${this.protocol}://${this.hostname}:${this.port}` as const
 
       return `${this.protocol}://${this.hostname}` as const

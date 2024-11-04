@@ -4,6 +4,7 @@ dotenv.config()
 
 type EnvVarName =
   | 'NODE_ENV'
+  | 'INSTALLATION'
   | 'CI'
   | 'BUCKET_NAME'
   | 'MONGO_DB_CONNECTION_STRING'
