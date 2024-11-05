@@ -43,6 +43,7 @@ const getAccessToken = async (
 
     if (typeof email !== 'string') {
       res.clearCookie('refreshJwtToken')
+
       throw new Error(errorMessageCommon.notLoggedIn)
     }
 
@@ -53,6 +54,7 @@ const getAccessToken = async (
 
     if (!user) {
       res.clearCookie('refreshJwtToken')
+
       throw new Error(errorMessageCommon.notLoggedIn)
     }
 

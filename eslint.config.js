@@ -49,6 +49,8 @@ export default [
         // blank line around block statement
         { blankLine: 'always', prev: '*', next: 'block-like' },
         { blankLine: 'always', prev: 'block-like', next: '*' },
+        // blank before throw statement
+        { blankLine: 'always', prev: '*', next: 'throw' },
       ],
       'object-shorthand': 'error',
       'jsx-quotes': ['error', 'prefer-single'],
