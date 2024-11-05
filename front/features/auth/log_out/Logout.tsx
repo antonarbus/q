@@ -28,9 +28,11 @@ export const Logout = (): React.JSX.Element => {
 
       accessTokenSignal.value = null
       dispatch(userSlice.actions.forgetLoggedUser())
+
       dispatch(
         navSlice.actions.showNavItems({ navItemIdKeys: [navItemKey.login] }),
       )
+
       dispatch(
         navSlice.actions.hideNavItems({
           navItemIdKeys: [navItemKey.profile],

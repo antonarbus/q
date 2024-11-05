@@ -18,6 +18,7 @@ export const useNavItemsOnQuotationsPageOpen = (): void => {
     )
 
     dispatch(navSlice.actions.removeUnderlineFromTopNav())
+
     dispatch(
       navSlice.actions.underlineNavItem({
         navItemIdKey: navItemKey.quotations,

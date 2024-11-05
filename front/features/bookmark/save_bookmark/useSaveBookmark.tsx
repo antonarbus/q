@@ -86,6 +86,7 @@ export const useSaveBookmark = ({
         theme: 'dark',
         position: 'bottom-center',
       })
+
       reset()
     }
   }, [isError])

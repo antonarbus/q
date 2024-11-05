@@ -27,6 +27,7 @@ export const ButtonCustom = ({
   useEffect(() => {
     if (isButtonError) {
       showErrorIcon.value = true
+
       setTimeout(() => {
         showErrorIcon.value = false
       }, 2500)
@@ -34,6 +35,7 @@ export const ButtonCustom = ({
 
     if (isButtonSuccess) {
       showSuccessIcon.value = true
+
       setTimeout(() => {
         showSuccessIcon.value = false
       }, 2500)

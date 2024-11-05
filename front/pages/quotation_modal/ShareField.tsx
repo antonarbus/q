@@ -178,6 +178,7 @@ export const ShareField = ({
                             ...(sharedWithSignal.value ?? []),
                             emailSignal.value,
                           ]).filter((email) => email !== '*')
+
                           emailSignal.value = ''
                         }}
                       >

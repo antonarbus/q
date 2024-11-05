@@ -20,11 +20,13 @@ export const ConfirmPasswordField = ({
     isConfirmPasswordOkSignal.value =
       Boolean(originalPasswordSignal.value) &&
       originalPasswordSignal.value === confirmPasswordSignal.value
+
     isLabelRedSignal.value =
       didBlurSignal.value &&
       Boolean(originalPasswordSignal.value) &&
       Boolean(confirmPasswordSignal.value) &&
       !isConfirmPasswordOkSignal.value
+
     labelSignal.value = isLabelRedSignal.value
       ? 'Passwords do not match'
       : initLabel

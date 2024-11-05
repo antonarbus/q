@@ -74,6 +74,7 @@ export const Menu = (): React.JSX.Element => {
     fakeMenuRef,
     idsToNextMenuItems,
   })
+
   useKeysForMenuNavigation()
   useCloseMenuOnClickOutside({ menuContainerRef })
   const isMenuOutsideWindow = useIsMenuOutsideWindow()

@@ -18,6 +18,7 @@ export const useLoadInitValuesIntoQuotationModal = ({
     quotationFormValues.descSignal.value = quotation.desc ?? ''
     quotationFormValues.infoSignal.value = quotation.info ?? ''
     quotationFormValues.sharedWithSignal.value = quotation.sharedWith ?? []
+
     quotationFormValues.shareWithOptionSignal.value =
       getWhoQuotationSharedWithOption({ quotation })
   })

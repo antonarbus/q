@@ -54,6 +54,7 @@ export const DeleteBoqRowIcon = (): React.JSX.Element => {
                 rowIndex,
               }),
             )
+
             dispatch(copySlice.actions.forbidAllActions())
 
             setTimeout(() => {

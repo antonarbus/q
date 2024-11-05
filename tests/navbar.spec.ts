@@ -27,6 +27,7 @@ test.describe('nav icons & text on wide screen', () => {
     await expect(nav).toHaveText(/Quotations/u)
     await expect(nav.locator('[data-testid="profile icon"]')).toBeVisible()
     await expect(nav).toHaveText(/Profile/u, { timeout: 1000 })
+
     await expect(
       nav.locator('[data-testid="hamburger icon"]'),
     ).not.toBeVisible()
@@ -61,16 +62,21 @@ test.describe('nav icons & text on super narrow screen', () => {
     await expect(nav.locator('text=Pdf')).not.toBeVisible()
     await expect(nav.locator('[data-testid="insert icon"]')).not.toBeVisible()
     await expect(nav.locator('text=Insert')).not.toBeVisible()
+
     await expect(
       nav.locator('[data-testid="bookmarks icon"]'),
     ).not.toBeVisible()
+
     await expect(nav.locator('text=Bookmarks')).not.toBeVisible()
+
     await expect(
       nav.locator('[data-testid="quotations icon"]'),
     ).not.toBeVisible()
+
     await expect(nav.locator('text=Quotations')).not.toBeVisible()
     await expect(nav.locator('[data-testid="login icon"]')).not.toBeVisible()
     await expect(nav.locator('text=Log in')).not.toBeVisible()
+
     await expect(nav.locator('[data-testid="hamburger icon"]')).toBeVisible({
       timeout: 1000,
     })

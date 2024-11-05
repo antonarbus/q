@@ -48,15 +48,18 @@ export const useResetPassword = ({ passwordSignal, modalRef }: Props): Res => {
         if (!data.email) return
 
         accessTokenSignal.value = data.accessJwtToken
+
         dispatch(
           userSlice.actions.rememberLoggedUser({
             email: data.email,
             roles: data.roles ?? ['user'],
           }),
         )
+
         dispatch(
           navSlice.actions.hideNavItems({ navItemIdKeys: [navItemKey.login] }),
         )
+
         dispatch(
           navSlice.actions.showNavItems({
             navItemIdKeys: [navItemKey.profile],

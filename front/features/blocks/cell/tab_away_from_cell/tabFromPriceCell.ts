@@ -19,6 +19,7 @@ export const tabFromPriceCell = (props: Props): void => {
 
     if (!isLastRow) {
       props.e.preventDefault()
+
       props.boqRowEditorRefs
         .at(props.rowIndex + 1)
         ?.description.current?.commands.selectAll()

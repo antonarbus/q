@@ -47,6 +47,7 @@ export const DragBlockIcon = (): React.JSX.Element => {
         {...listeners}
         onPointerEnter={(event) => {
           isOverDragIcon.current = true
+
           setTimeout(() => {
             if (isOverDragIcon.current) {
               dragTooltipTextSignal.value = 'Drag'

@@ -51,6 +51,7 @@ export const SubTotalPrice = (): React.JSX.Element => {
       }}
       onBlur={() => {
         formatSubtotalPriceCell({ blockIndex, subTotalPriceEditorRef })
+
         validateBoqRowPrices({
           boqRowEditorRefs,
           blockIndex,

@@ -76,6 +76,7 @@ export const BackdropWithSlidableModal = ({
         // but if use overflow on html then layout shifts when overflow: hidden and scroll disappears
         bodyElement.style.setProperty('overflow', 'hidden')
         bodyElement.scrollTop = scrollTopPositionBeforeModalOpen.current
+
         document.documentElement.scrollTop =
           scrollTopPositionBeforeModalOpen.current
       }
@@ -86,6 +87,7 @@ export const BackdropWithSlidableModal = ({
 
       if (bodyElement instanceof HTMLElement) {
         bodyElement.style.removeProperty('overflow')
+
         document.documentElement.scrollTop =
           scrollTopPositionBeforeModalOpen.current
       }

@@ -20,6 +20,7 @@ export const beforeUpload = ({ files, editor }: Props): boolean => {
     alert(
       'You are not logged in, file will be kept in browser until page is refreshed',
     )
+
     removeLoadingBar()
 
     return false

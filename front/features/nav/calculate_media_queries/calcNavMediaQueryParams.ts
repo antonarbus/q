@@ -50,6 +50,7 @@ export const calcNavMediaQueryParams = (
         console.error(
           'Problem! Over 1000 iterations in calcNavWidthWhenLogoIsOverlay() function',
         )
+
         break
       }
     }
@@ -85,6 +86,7 @@ export const calcNavMediaQueryParams = (
   nav.querySelectorAll('.icon-round-wrapper, .nav-item-name').forEach((el) => {
     el.setAttribute('style', '')
   })
+
   nav.setAttribute('style', '')
 
   return { icon, name, burger }

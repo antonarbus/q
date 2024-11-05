@@ -31,6 +31,7 @@ export const DeleteBookmarkButton = ({ id }: ReqBody): React.JSX.Element => {
         type: 'error',
         theme: 'light',
       })
+
       deleteFromBookmarksCache({ id })
     }
   }, [isError])

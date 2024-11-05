@@ -16,6 +16,7 @@ export const OpenRegisterModalLink = ({
       style={{ textAlign: 'right' }}
       onClick={(e: React.MouseEvent): void => {
         e.preventDefault()
+
         slideElement({
           element: modalRef.current,
           onSlideElementComplete: openRegisterModal,

@@ -20,6 +20,7 @@ export const pasteItemReducer = (
 
   if (itemToPaste.type === itemType.boq) {
     const boqRows = itemToPaste.boq.rows
+
     boqRows.forEach((boqRow) => {
       boqRow.id = nanoid(5)
     })

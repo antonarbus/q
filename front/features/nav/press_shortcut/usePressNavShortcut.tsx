@@ -33,6 +33,7 @@ const searchForShortcutsInNavStructure = ({
   arrForNavStructureIteration.forEach((menuItem) => {
     if (menuItem.menuItems) {
       arrForNavStructureIteration = menuItem.menuItems
+
       searchForShortcutsInNavStructure({
         navStructure: arrForNavStructureIteration,
       })

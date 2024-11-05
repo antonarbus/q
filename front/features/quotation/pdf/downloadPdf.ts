@@ -63,6 +63,7 @@ export const downloadPdf = async (): Promise<void> => {
     downloadLink.click()
     document.body.removeChild(downloadLink)
     URL.revokeObjectURL(pdfDataUrl) // revoke the data URL to free up resources
+
     setTimeout(() => {
       pdfLoadingIconActor.send({ type: 'show success icon' })
     }, 1000)

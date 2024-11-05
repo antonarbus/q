@@ -31,6 +31,7 @@ export const DeleteQuotationButton = ({ id }: Payload): React.ReactNode => {
         type: 'error',
         theme: 'light',
       })
+
       deleteFromQuotationsCache({ id })
     }
   }, [isError])

@@ -59,11 +59,13 @@ export const useMenuAnimation = ({
     }
 
     dispatch(navSlice.actions.goDownInNextMenu(id))
+
     gsap.fromTo(
       currentMenuRef.current,
       { xPercent: 0 },
       { duration, xPercent: -100 },
     )
+
     gsap.fromTo(
       nextMenuRef.current,
       { xPercent: 0 },
@@ -77,11 +79,13 @@ export const useMenuAnimation = ({
     }
 
     dispatch(navSlice.actions.goUpInNextMenu())
+
     gsap.fromTo(
       currentMenuRef.current,
       { xPercent: 0 },
       { duration, xPercent: 100 },
     )
+
     gsap.fromTo(
       nextMenuRef.current,
       { xPercent: -200 },

@@ -70,6 +70,7 @@ export const PriceCell = (): React.JSX.Element => {
         }}
         onBlur={() => {
           formatBoqRowPriceCell({ rowIndex, priceCellEditorRef, blockIndex })
+
           validateBoqRowPrice({
             blockIndex,
             priceCellEditorRef,

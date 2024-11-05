@@ -48,9 +48,11 @@ export const useActivate = (): Res => {
 
       accessTokenSignal.value = accessJwtToken
       dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
+
       dispatch(
         navSlice.actions.hideNavItems({ navItemIdKeys: [navItemKey.login] }),
       )
+
       dispatch(
         navSlice.actions.showNavItems({ navItemIdKeys: [navItemKey.profile] }),
       )

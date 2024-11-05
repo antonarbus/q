@@ -8,6 +8,7 @@ export const useExitCopyOnEsc = (): void => {
     if (e.key !== 'Escape') return
     dispatch(copySlice.actions.hideCopyModal())
     dispatch(quotationSlice.actions.removePasteItemReducer())
+
     setTimeout(() => {
       isFroalaSignal.value = true
     }, 500)

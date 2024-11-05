@@ -50,6 +50,7 @@ export const AccessToken = (): React.JSX.Element => {
       if (!email) return
 
       accessTokenSignal.value = data.accessJwtToken
+
       loadingTableOverlaySignal.value = {
         areJumpingDotsShown: false,
         text: 'Logged in',

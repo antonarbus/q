@@ -58,6 +58,9 @@ export default [
         { blankLine: 'always', prev: '*', next: 'multiline-const' },
         { blankLine: 'always', prev: '*', next: 'multiline-let' },
         { blankLine: 'always', prev: '*', next: 'multiline-var' },
+        // blank line around expression which spans over several lines
+        { blankLine: 'always', prev: 'multiline-expression', next: '*' },
+        { blankLine: 'always', prev: '*', next: 'multiline-expression' },
       ],
       'object-shorthand': 'error',
       'jsx-quotes': ['error', 'prefer-single'],

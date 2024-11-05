@@ -37,9 +37,11 @@ export function useLoadQuotation(): void {
 
     dispatch(quotationSlice.actions.resetQuotationReducer())
     dispatch(navSlice.actions.removeUnderlineFromTopNav())
+
     dispatch(
       navSlice.actions.hideNavItems({ navItemIdKeys: [navItemKey.back] }),
     )
+
     dispatch(
       navSlice.actions.enableNavItems({
         navItemIdKeys: [
@@ -113,6 +115,7 @@ export function useLoadQuotation(): void {
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       if (quotation.blocks === undefined) {
         notify({ msg: 'Quotation corrupted', type: 'warn', theme: 'light' })
+
         setTimeout(() => {
           loadingDotsOverlayTextSignal.value = null
         }, 750)

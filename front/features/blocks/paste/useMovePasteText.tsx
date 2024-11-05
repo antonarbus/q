@@ -231,6 +231,7 @@ export const useMovePasteText = (): void => {
   useEffect(() => {
     if (isBlock) {
       document.body.style.cursor = 'pointer'
+
       document.addEventListener('mousemove', movePasteTextItem, {
         passive: true,
       })
@@ -238,6 +239,7 @@ export const useMovePasteText = (): void => {
 
     if (isBoqRow) {
       document.body.style.cursor = 'pointer'
+
       document.addEventListener('mousemove', movePasteTextBoqRow, {
         passive: true,
       })

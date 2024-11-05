@@ -63,9 +63,11 @@ export const CutBlockIcon = (): React.JSX.Element => {
             block.preview = html
 
             dispatch(copySlice.actions.addItem({ item: block }))
+
             dispatch(
               quotationSlice.actions.deleteBlockReducer({ id: blockToCut.id }),
             )
+
             dispatch(copySlice.actions.forbidAllActions())
 
             const isCopyModalVisible = getState().copy.isVisible

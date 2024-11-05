@@ -17,6 +17,7 @@ export const getMenuItemByIdsChain = (
   const navStructure = getState().nav.navStructure
   let clicked: MenuItemType[] = navStructure
   let tempMenu: MenuItemType[] = navStructure
+
   idsToCurrentMenuItems.forEach((id: string) => {
     if (id === 'burger') {
       if (!navStructure[0]) return clicked
