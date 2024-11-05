@@ -39,6 +39,7 @@ test.describe('nav icons for guest user', () => {
 
   test('should show icons & text', async ({ page }) => {
     const nav = page.locator('nav')
+
     await expect(nav.locator('[data-testid="login icon"]')).toBeVisible()
     await expect(nav).toHaveText(/Log in/u, { timeout: 1000 })
     await expect(nav.locator('[data-testid="profile icon"]')).not.toBeVisible()
@@ -51,6 +52,7 @@ test.describe('nav icons & text on super narrow screen', () => {
 
   test('should show only hamburger icon', async ({ page }) => {
     const nav = page.locator('nav')
+
     await expect(nav.locator('[data-testid="new icon"]')).not.toBeVisible()
     await expect(nav.locator('text=New')).not.toBeVisible()
     await expect(nav.locator('[data-testid="save icon"]')).not.toBeVisible()

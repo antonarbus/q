@@ -19,10 +19,12 @@ test.describe('nav bar for logged-in vs guest user', () => {
     // which blocks the click on login button
     // so we should wait until spinner is removed
     const spinner = nav.locator('[data-testid="spinner icon"]')
+
     await spinner.waitFor({ state: 'hidden' })
 
     await page.getByRole('link', { name: 'Log in' }).click()
     const button = page.locator('button').filter({ hasText: 'LOG IN' })
+
     await expect(button).toBeDisabled()
     await page.getByPlaceholder('Email').focus()
     await page.getByPlaceholder('Email').fill(email)

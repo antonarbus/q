@@ -48,6 +48,7 @@ export const updateNumberAtHtmlIncrementally = ({
 
         setTimeout(() => {
           editor.html.set(updatedHtml)
+
           if (i === steps) {
             resolve('done')
           }

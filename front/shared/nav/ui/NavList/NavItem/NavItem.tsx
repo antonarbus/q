@@ -138,14 +138,17 @@ export const NavItem = ({ children, id }: Props): React.JSX.Element => {
           if (isFunc) {
             e.preventDefault()
           }
+
           if (isLoading) return
           if (isSuccess) return
           if (isError) return
+
           if (disabled) {
             e.preventDefault()
 
             return
           }
+
           clickOnNavItem({ e, navItem, id, navItemRef, disabled })
         }}
         // onMouseEnter={() => {

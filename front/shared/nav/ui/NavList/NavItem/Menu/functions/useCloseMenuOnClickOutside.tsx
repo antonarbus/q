@@ -27,6 +27,7 @@ export const useCloseMenuOnClickOutside = ({
       didClickInsideThisElement({ clickedElement, thisElement: navItem }) &&
       !didClickInsideThisElement({ clickedElement, thisElement: menuContainer })
     if (isClickOnOpenedNavItem) return
+
     if (
       !didClickInsideThisElement({ clickedElement, thisElement: menuContainer })
     ) {

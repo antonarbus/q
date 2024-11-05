@@ -43,6 +43,7 @@ export const clickOnNavItem = ({
 
   // handle burger close separately
   const isBurger = getState().nav.idsToCurrentMenuItems.includes('burger')
+
   if (isBurger) {
     dispatch(navSlice.actions.closeMenu())
 

@@ -29,8 +29,10 @@ const pasteItemOnClick = (): void => {
 
   if (pastePos === 'middle') {
     const elementToBeReplaced = document.getElementById(id)
+
     if (elementToBeReplaced) {
       const paperElement = elementToBeReplaced.querySelector(`.${cls.paper}`)
+
       if (paperElement instanceof HTMLElement) {
         // width of animated element is changed for unknown reason, can't explain the issue, so let's fix it for animation purpose
         fixElementDimensionStyle({ element: paperElement })

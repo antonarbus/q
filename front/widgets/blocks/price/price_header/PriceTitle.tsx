@@ -14,6 +14,7 @@ export const PriceTitle = (): React.JSX.Element => {
       placeholder='Total price...'
       htmlGetter={() => {
         const priceBlock = getState().quotation.blocks[blockIndex]
+
         if (priceBlock?.type !== itemType.price) return ''
         const titleHtml = priceBlock.title.html
 

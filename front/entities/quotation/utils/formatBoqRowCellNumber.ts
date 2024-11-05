@@ -32,6 +32,7 @@ export const formatBoqRowCellNumber = ({
   }
 
   const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
+
   if (boqRow === undefined) {
     return {
       didUpdate: false,
@@ -49,6 +50,7 @@ export const formatBoqRowCellNumber = ({
     oldNumber: value,
     newNumber: roundToTwoDecimals ? roundedValue : value,
   })
+
   if (html === newHtml) {
     return {
       didUpdate: false,

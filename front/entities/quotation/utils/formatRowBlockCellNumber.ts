@@ -29,6 +29,7 @@ export const formatRowBlockCellNumber = ({
   }
 
   const block = getState().quotation.blocks[bookmarkPosAtBlocks]
+
   if (block?.type !== itemType.row) {
     return {
       didUpdate: false,

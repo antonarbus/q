@@ -44,8 +44,11 @@ export default [
       // https://eslint.org/docs/v8.x/rules/
       'padding-line-between-statements': [
         'error',
-        // blank lines before all return statements
+        // blank line before return statement
         { blankLine: 'always', prev: '*', next: 'return' },
+        // blank line around block statement
+        { blankLine: 'always', prev: '*', next: 'block-like' },
+        { blankLine: 'always', prev: 'block-like', next: '*' },
       ],
       'object-shorthand': 'error',
       'jsx-quotes': ['error', 'prefer-single'],

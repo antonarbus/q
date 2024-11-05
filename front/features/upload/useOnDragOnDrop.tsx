@@ -8,6 +8,7 @@ export const useOnDragOnDrop = (): void => {
       if (e.dataTransfer) {
         e.dataTransfer.dropEffect = 'move'
       }
+
       // to avoid open image in browser
       e.preventDefault()
     })

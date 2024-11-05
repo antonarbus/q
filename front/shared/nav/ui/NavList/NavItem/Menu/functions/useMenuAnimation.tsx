@@ -57,6 +57,7 @@ export const useMenuAnimation = ({
     const cb = (): void => {
       dispatch(navSlice.actions.goDownInCurrentMenu(id))
     }
+
     dispatch(navSlice.actions.goDownInNextMenu(id))
     gsap.fromTo(
       currentMenuRef.current,
@@ -74,6 +75,7 @@ export const useMenuAnimation = ({
     const cb = (): void => {
       dispatch(navSlice.actions.goUpInCurrentMenu())
     }
+
     dispatch(navSlice.actions.goUpInNextMenu())
     gsap.fromTo(
       currentMenuRef.current,

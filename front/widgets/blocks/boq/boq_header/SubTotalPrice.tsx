@@ -24,6 +24,7 @@ export const SubTotalPrice = (): React.JSX.Element => {
     console.warn('hidePinsClickHandlerRef')
   })
   const isInitClickRef = useRef(true)
+
   useUpdateSubtotalPrice()
 
   return (

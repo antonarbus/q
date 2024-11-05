@@ -32,6 +32,7 @@ export const updateSubTotalPriceWithValue = ({
   }
 
   const boqBlock = getBoqBlockFromStore({ blockIndex })
+
   if (boqBlock === undefined) {
     return {
       didChange: false,

@@ -52,14 +52,17 @@ export const MenuItem = ({
         if (!isLink) {
           e.preventDefault()
         }
+
         if (isLoading) return
         if (isSuccess) return
         if (isError) return
+
         if (disabled) {
           e.preventDefault()
 
           return
         }
+
         clickOnMenuItem(e, menuId, disabled)
       }}
       onMouseEnter={(): void => {
