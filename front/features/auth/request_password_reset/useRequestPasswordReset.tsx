@@ -54,6 +54,7 @@ export const useRequestPasswordReset = ({
     if (isError) {
       if (error.response?.data.message === 'does not exists') {
         notify({ msg: 'User not found', type: 'info', theme: 'light' })
+
         return
       }
 
@@ -63,11 +64,13 @@ export const useRequestPasswordReset = ({
           type: 'warn',
           theme: 'light',
         })
+
         return
       }
 
       if (error.response?.data.message === 'account not activated') {
         notify({ msg: 'Account not activated', type: 'warn', theme: 'light' })
+
         return
       }
 
@@ -77,6 +80,7 @@ export const useRequestPasswordReset = ({
           type: 'warn',
           theme: 'light',
         })
+
         return
       }
 
@@ -86,6 +90,7 @@ export const useRequestPasswordReset = ({
           type: 'warn',
           theme: 'light',
         })
+
         return
       }
 

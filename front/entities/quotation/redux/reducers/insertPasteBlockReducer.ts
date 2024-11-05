@@ -16,6 +16,7 @@ export const insertPasteBlockReducer = (
 
   if (pastePos === 'middle') {
     state.blocks = blocksWithoutPasteText
+
     return
   }
 

@@ -11,5 +11,6 @@ export const selectBoqRows =
   (state: RootState): Row[] => {
     const boqRows = getBoqRowsFromStore({ blockIndex })
     if (boqRows === undefined) return []
+
     return boqRows
   }

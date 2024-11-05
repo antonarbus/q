@@ -23,6 +23,7 @@ export const useUpdateTotalPriceIfPricesAboveWereChanged = ({
       blockIndex,
       blocks: state.quotation.blocks,
     })
+
     return priceValue
   })
 

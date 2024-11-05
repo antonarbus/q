@@ -13,6 +13,7 @@ export const selectMenuItemByIdsChainSelector =
     idsToCurrentMenuItems.forEach((id: string) => {
       if (id === 'burger') {
         clicked = topLevelNavMenu.menuItems ?? state.nav.navStructure
+
         return clicked
       }
 

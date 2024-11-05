@@ -65,6 +65,7 @@ export const useActivate = (): Res => {
 
     if (error.response?.data.message === 'activation key not found') {
       notify({ msg: 'Activation key not found', type: 'warn', theme: 'light' })
+
       return
     }
 

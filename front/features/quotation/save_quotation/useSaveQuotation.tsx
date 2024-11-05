@@ -152,6 +152,7 @@ export const useSaveQuotation = ({
 
     if (!email) {
       notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
+
       return
     }
 

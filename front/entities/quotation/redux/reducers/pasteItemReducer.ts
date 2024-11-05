@@ -48,15 +48,18 @@ export const pasteItemReducer = (
 
       if (pastePos === 'top') {
         spliceSettings.insertAtIndex--
+
         return spliceSettings
       }
 
       if (pastePos === 'bottom') {
         spliceSettings.insertAtIndex++
+
         return spliceSettings
       }
 
       spliceSettings.deleteCount++
+
       return spliceSettings
     }
 
@@ -73,6 +76,7 @@ export const pasteItemReducer = (
     )
 
     state.blocks = blocksWithoutPasteText
+
     return
   }
 
@@ -101,11 +105,13 @@ export const pasteItemReducer = (
 
           if (pastePos === 'top') {
             spliceParams.insertAtIndex--
+
             return spliceParams
           }
 
           if (pastePos === 'bottom') {
             spliceParams.insertAtIndex++
+
             return spliceParams
           }
 

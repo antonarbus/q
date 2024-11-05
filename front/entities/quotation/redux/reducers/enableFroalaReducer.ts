@@ -18,6 +18,7 @@ export const enableFroalaReducer = (
     const block = quotation.blocks[blockIndex]
     if (block === undefined) return
     block.isFroala = true
+
     return
   }
 

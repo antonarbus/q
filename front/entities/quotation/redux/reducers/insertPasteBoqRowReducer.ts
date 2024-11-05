@@ -49,6 +49,7 @@ export const insertPasteBoqRowReducer: Type = (state, action) => {
         pasteText,
       )
       boqItem.boq.rows = boqRowsWithPasteText
+
       return state
     })
 

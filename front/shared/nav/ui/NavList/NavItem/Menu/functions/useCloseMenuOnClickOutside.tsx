@@ -38,6 +38,7 @@ export const useCloseMenuOnClickOutside = ({
 
   const hideMenuOnClickOutside = (): FuncReturnType => {
     document.addEventListener('mousedown', mouseDownHandler)
+
     return () => {
       document.removeEventListener('mousedown', mouseDownHandler)
     }

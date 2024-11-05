@@ -12,5 +12,6 @@ export const dateValueGetter =
     if (typeof dateIsoString !== 'string') return null
     const dateObj = new Date(dateIsoString)
     if (!isValid(new Date(dateObj))) return null
+
     return dateObj
   }

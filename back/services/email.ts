@@ -27,6 +27,7 @@ export const sendEmail = async ({
   } catch (error) {
     // todo: log error to some system
     console.error(error)
+
     return undefined
   }
 }

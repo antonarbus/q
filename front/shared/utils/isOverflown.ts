@@ -15,5 +15,6 @@ export const isOverflown = ({ element }: Props): boolean => {
   const overflown =
     element.scrollHeight > element.clientHeight ||
     element.scrollWidth > element.clientWidth
+
   return overflown
 }

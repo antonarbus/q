@@ -12,6 +12,7 @@ test.describe('nav icons & text on wide screen', () => {
 
   test('should show icons & text', async ({ page }) => {
     const nav = page.locator('nav')
+
     await expect(nav.locator('[data-testid="new icon"]')).toBeVisible()
     await expect(nav).toHaveText(/New/u)
     await expect(nav.locator('[data-testid="save icon"]')).toBeVisible()

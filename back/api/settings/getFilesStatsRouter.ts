@@ -34,6 +34,7 @@ const getFilesStats: RouterHandler = async (req, res, next) => {
       (acc, file) => {
         acc.fileCount++
         acc.totalSize += Number(file.metadata.size)
+
         return acc
       },
       { fileCount: 0, totalSize: 0 },

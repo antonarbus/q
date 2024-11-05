@@ -18,6 +18,7 @@ const QuotationFieldLayout = ({ children }: Props): React.JSX.Element => {
   const maxBlockWidth = useSelectorTyped((state) => {
     const maxWidth = state.quotation.blocks.reduce((accumulator, block) => {
       if ((block.width ?? 0) > accumulator) return block.width ?? 0
+
       return accumulator
     }, 600)
 

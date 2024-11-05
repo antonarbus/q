@@ -21,6 +21,7 @@ export const showHideBoqPricePins = ({
   const clickHandler = (event: MouseEvent): void => {
     if (isInitClickRef.current) {
       isInitClickRef.current = false
+
       return
     }
 

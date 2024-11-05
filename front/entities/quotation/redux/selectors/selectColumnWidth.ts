@@ -13,5 +13,6 @@ export const selectColumnWidth =
     const boqBlock = getBoqBlockFromStore({ blockIndex })
     if (boqBlock === undefined) return 0
     const width = boqBlock.boq.column[boqColumnKey].width
+
     return width
   }

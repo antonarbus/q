@@ -8,5 +8,6 @@ export const dateFilterComparator = (
   if (filterDateString === cellDateString) return 0
   if (cellValue < filterLocalDateAtMidnight) return -1
   if (cellValue > filterLocalDateAtMidnight) return 1
+
   return 0
 }

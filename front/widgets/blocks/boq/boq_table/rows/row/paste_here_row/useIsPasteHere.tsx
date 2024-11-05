@@ -10,5 +10,6 @@ export const useIsPasteHere = (): boolean => {
   )
   const isPasteHere =
     isPasteTextShown && row.id === pasteItemId && pastePos === 'middle'
+
   return isPasteHere
 }

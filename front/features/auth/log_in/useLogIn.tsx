@@ -60,6 +60,7 @@ export const useLogIn = ({
 
       if (data.name === 'MongooseError') {
         notify({ msg: 'Database error', type: 'warn', theme: 'light' })
+
         return
       }
 
@@ -110,6 +111,7 @@ export const useLogIn = ({
 
             if (typeof navigateTo === 'string') {
               navigate(navigateTo)
+
               return
             }
 
@@ -126,6 +128,7 @@ export const useLogIn = ({
 
       if (error.response?.data.message === 'bad password') {
         notify({ msg: 'Invalid credentials', type: 'warn', theme: 'light' })
+
         return
       }
 
@@ -135,6 +138,7 @@ export const useLogIn = ({
           type: 'info',
           theme: 'light',
         })
+
         return
       }
 

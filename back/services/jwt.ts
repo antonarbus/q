@@ -43,6 +43,7 @@ export const verifyAccessToken = (
 
     const jwtPayload = jwt.verify(accessJwtToken, salt)
     if (typeof jwtPayload === 'string') return undefined
+
     return jwtPayload
   } catch {
     return undefined // if token is expired it will result in error
@@ -57,6 +58,7 @@ export const verifyRefreshToken = (
 
     const jwtPayload = jwt.verify(refreshJwtToken, salt)
     if (typeof jwtPayload === 'string') return undefined
+
     return jwtPayload
   } catch {
     return undefined // if token is expired it will result in error

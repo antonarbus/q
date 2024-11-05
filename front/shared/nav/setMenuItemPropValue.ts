@@ -17,6 +17,7 @@ export const setMenuItemPropValue = <K extends keyof MenuItemType>({
   menu.forEach((el) => {
     if (el.id === navItemIdKey) {
       el[prop] = value
+
       return
     }
 

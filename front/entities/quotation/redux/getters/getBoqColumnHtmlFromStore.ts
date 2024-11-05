@@ -16,5 +16,6 @@ export const getBoqColumnHtmlFromStore = ({
   if (block?.type !== itemType.boq) return ''
 
   const html = block.boq.column[boqColumnKey].html
+
   return html
 }

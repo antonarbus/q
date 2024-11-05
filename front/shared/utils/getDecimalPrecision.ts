@@ -16,6 +16,7 @@ export const getDecimalPrecision = ({ valueDifference }: Props): number => {
   if (absValDifference >= 0.00001) return 7
   if (absValDifference >= 0.000001) return 8
   if (absValDifference >= 0.0000001) return 9
+
   return 0
 }
 

@@ -18,6 +18,7 @@ export const downloadPdf = async (): Promise<void> => {
     Array.from(paperElements).reduce((maxWidth, paperElement) => {
       const paperElementWidth = paperElement.clientWidth
       if (paperElementWidth > maxWidth) return paperElementWidth
+
       return maxWidth
     }, 0) + 40
 

@@ -97,6 +97,7 @@ export const useSaveBookmark = ({
 
     if (!email) {
       notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
+
       return
     }
 
@@ -124,6 +125,7 @@ export const useSaveBookmark = ({
 
     if (!block) {
       notify({ msg: 'No item loaded', type: 'warn', theme: 'light' })
+
       return
     }
 

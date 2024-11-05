@@ -57,6 +57,7 @@ export const MenuItem = ({
         if (isError) return
         if (disabled) {
           e.preventDefault()
+
           return
         }
         clickOnMenuItem(e, menuId, disabled)

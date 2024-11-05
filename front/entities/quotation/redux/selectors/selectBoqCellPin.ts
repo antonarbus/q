@@ -15,5 +15,6 @@ export const selectBoqCellPin =
     const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
     if (boqRow === undefined) return
     const boqRowCellPin = boqRow[boqRowCellKey].pin
+
     return boqRowCellPin
   }

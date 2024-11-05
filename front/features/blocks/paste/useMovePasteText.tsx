@@ -35,6 +35,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
 
   if (navElement) {
     removePasteIfNeeded()
+
     return
   }
 
@@ -46,6 +47,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
 
   if (isCursorOverActionsContainer) {
     removePasteIfNeeded()
+
     return
   }
 
@@ -55,6 +57,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
 
   if (isSearchElement) {
     removePasteIfNeeded()
+
     return
   }
 
@@ -64,6 +67,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
 
   if (isSearchAutocompleteElement) {
     removePasteIfNeeded()
+
     return
   }
 
@@ -71,6 +75,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
 
   if (!isPastable) {
     removePasteIfNeeded()
+
     return
   }
 
@@ -92,6 +97,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
     dispatch(copySlice.actions.showPasteText())
 
     dispatch(quotationSlice.actions.insertPasteBlockReducer(pastePlace))
+
     return
   }
 
@@ -144,6 +150,7 @@ const movePasteTextBoqRow = (e: MouseEvent): void => {
 
   if (!boqRowsElement) {
     removePasteIfNeeded()
+
     return
   }
 
@@ -154,6 +161,7 @@ const movePasteTextBoqRow = (e: MouseEvent): void => {
 
   if (isCursorOverActionsContainer) {
     removePasteIfNeeded()
+
     return
   }
 
@@ -163,6 +171,7 @@ const movePasteTextBoqRow = (e: MouseEvent): void => {
 
   if (isSearchElement) {
     removePasteIfNeeded()
+
     return
   }
 
@@ -172,6 +181,7 @@ const movePasteTextBoqRow = (e: MouseEvent): void => {
 
   if (isSearchAutocompleteElement) {
     removePasteIfNeeded()
+
     return
   }
 
@@ -179,6 +189,7 @@ const movePasteTextBoqRow = (e: MouseEvent): void => {
 
   if (!isPastable) {
     removePasteIfNeeded()
+
     return
   }
 

@@ -28,6 +28,7 @@ export const clickOnNavItem = ({
   if (link && func) {
     // just follow the link natively and call the func
     void func(e)
+
     return
   }
 
@@ -44,6 +45,7 @@ export const clickOnNavItem = ({
   const isBurger = getState().nav.idsToCurrentMenuItems.includes('burger')
   if (isBurger) {
     dispatch(navSlice.actions.closeMenu())
+
     return
   }
 
@@ -54,11 +56,13 @@ export const clickOnNavItem = ({
 
   if (isMenuOpenedUnderThisNavItem) {
     dispatch(navSlice.actions.closeMenu())
+
     return
   }
 
   if (func) {
     void func(e)
+
     return
   }
 

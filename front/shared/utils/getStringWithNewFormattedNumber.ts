@@ -20,6 +20,7 @@ const findAndReplaceStringOutsideHtmlTags = ({
         return String(before) + replacementText + String(after)
       },
     )
+
   return resultString
 }
 

@@ -8,5 +8,6 @@ export const useIsBoqRowSortDisabled = (): boolean => {
   const { blockIndex } = useBlock()
   const isLastBoqRow = useSelectorTyped(selectIsLastBoqRow({ blockIndex }))
   const isBoqRowSortDisabled = isCopyModalVisible || isLastBoqRow
+
   return isBoqRowSortDisabled
 }

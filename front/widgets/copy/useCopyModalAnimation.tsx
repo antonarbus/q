@@ -17,6 +17,7 @@ export const useCopyModalAnimation = (): AnimationControls => {
       if (!item.height) return 0
 
       const scaleFactor = (containerWidth - 2 * containerPadding) / item.width
+
       return accumulator + scaleFactor * item.height + 5
     }, 70)
 

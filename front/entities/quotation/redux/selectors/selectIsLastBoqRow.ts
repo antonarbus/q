@@ -11,5 +11,6 @@ export const selectIsLastBoqRow =
     const boqRows = getBoqRowsFromStore({ blockIndex })
     if (boqRows === undefined) return false
     const isBoqRowAlone = boqRows.length === 1
+
     return isBoqRowAlone
   }

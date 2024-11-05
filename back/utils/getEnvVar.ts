@@ -21,6 +21,7 @@ type EnvVarName =
 
 export const getEnvVar = (varName: EnvVarName): string | undefined => {
   const value = process.env[varName]
+
   return value
 }
 

@@ -15,6 +15,7 @@ axiosWithAuth.interceptors.request.use(async (config) => {
   // wait till initial access token if fetched, otherwise token is null and another immediate duplicate request for access token will be sent
   await initAccessTokenFetchingPromise
   config.headers[headerName.accessJwtToken] = accessTokenSignal.value
+
   return config
 })
 

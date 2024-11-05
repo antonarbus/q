@@ -18,6 +18,7 @@ const variants: Variants = {
         y: -firstItemHeight,
       }
     }
+
     return {}
   },
   animate: ({ isCopying }: Props) => {
@@ -32,6 +33,7 @@ const variants: Variants = {
         },
       }
     }
+
     return {}
   },
   exit: ({ isCopying, prevFirstItemHeight }: Props) => {
@@ -46,6 +48,7 @@ const variants: Variants = {
         },
       }
     }
+
     return {}
   },
 }

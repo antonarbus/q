@@ -46,6 +46,7 @@ export const useDisableNavItemsOnCopyModal = (): void => {
           ],
         }),
       )
+
       return
     }
 

@@ -10,5 +10,6 @@ export const getFileSizeInMb = ({ file }: Props): number => {
     .exec(sizeInMb.toFixed(20))
     ?.at(0)
   if (firstTwoDecimals === undefined) return 0
+
   return Number(firstTwoDecimals)
 }

@@ -25,5 +25,6 @@ export const didBoqCellContentChange = ({
     boqRowCellKey,
   })?.html
   const didContentChange = htmlOnDisplay !== htmlFromStore
+
   return didContentChange
 }

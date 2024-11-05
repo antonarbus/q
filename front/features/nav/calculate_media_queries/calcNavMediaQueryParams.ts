@@ -53,6 +53,7 @@ export const calcNavMediaQueryParams = (
         break
       }
     }
+
     return nav.offsetWidth + 50
   }
 

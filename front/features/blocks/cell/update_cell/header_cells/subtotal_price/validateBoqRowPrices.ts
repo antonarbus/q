@@ -65,6 +65,7 @@ export const validateBoqRowPrices = ({
       const subTotalPriceValueNew: number = rows.reduce(
         (accumulator: number, row: Row) => {
           const price = row.price.value
+
           return accumulator + price
         },
         0,

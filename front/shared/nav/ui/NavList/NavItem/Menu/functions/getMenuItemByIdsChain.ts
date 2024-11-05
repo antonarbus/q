@@ -22,6 +22,7 @@ export const getMenuItemByIdsChain = (
       if (!navStructure[0]) return clicked
       if (!navStructure[0].menuItems) return clicked
       clicked = navStructure[0].menuItems
+
       return clicked
     }
 
@@ -31,5 +32,6 @@ export const getMenuItemByIdsChain = (
 
     tempMenu = clicked
   })
+
   return clicked
 }

@@ -50,6 +50,7 @@ export const renderOption = ({
 
       if (option.desc === undefined) return '-'
       if (option.desc) return option.desc
+
       return '-'
     }
 

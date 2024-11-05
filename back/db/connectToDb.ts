@@ -9,6 +9,7 @@ export const connectToDb = async (): Promise<void> => {
   try {
     if (isConnectedToDb()) {
       console.info('connection to database is already established')
+
       return
     }
 

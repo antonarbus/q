@@ -18,6 +18,7 @@ setup('authenticate', async () => {
     console.info('🫡 authenticated before all tests')
   } else {
     const responseBody = await response.text() // Get the response body as text
+
     throw new Error(
       `Failed to authenticate: ${response.status()} - ${responseBody}`,
     )

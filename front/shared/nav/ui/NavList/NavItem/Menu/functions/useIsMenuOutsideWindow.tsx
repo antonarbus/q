@@ -12,5 +12,6 @@ import { theme } from '@lib_instances/theme'
 export const useIsMenuOutsideWindow = (): boolean => {
   const navItemRightPos = useSelectorTyped((state) => state.nav.navItemRightPos)
   const isMenuOutsideWindow = theme.menu.width > navItemRightPos
+
   return isMenuOutsideWindow
 }

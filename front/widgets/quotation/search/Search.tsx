@@ -58,6 +58,7 @@ export const Search = (): React.JSX.Element => {
       }}
       getOptionLabel={(option) => {
         if (typeof option === 'string') return option
+
         return (
           (option.name ?? '') + (option.category ?? '') + (option.desc ?? '')
         )

@@ -17,6 +17,7 @@ export const userSlice = createSlice({
   reducers: {
     rememberLoggedUser: (state, action: PayloadAction<Props>) => {
       const { email, roles } = action.payload
+
       return { ...state, email, roles }
     },
     forgetLoggedUser: () => initialState,

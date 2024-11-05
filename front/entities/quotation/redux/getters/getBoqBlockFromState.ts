@@ -12,5 +12,6 @@ export const getBoqBlockFromState = ({
 }: Props): Boq | undefined => {
   const block = state.blocks[blockIndex]
   if (block?.type !== itemType.boq) return
+
   return block
 }

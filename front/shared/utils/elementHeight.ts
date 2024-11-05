@@ -3,5 +3,6 @@
 // calculate height of fake menu div to manually set height to Menu for animation
 export const elementHeight = (el: HTMLElement): number => {
   const height = el.offsetHeight
+
   return height
 }

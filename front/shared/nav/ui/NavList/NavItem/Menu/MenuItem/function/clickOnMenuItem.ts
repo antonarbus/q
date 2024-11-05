@@ -23,12 +23,14 @@ export const clickOnMenuItem = (
     // follow the link natively and call the func
     void func(e)
     dispatch(navSlice.actions.closeMenu())
+
     return
   }
 
   if (link) {
     // just follow the link natively
     dispatch(navSlice.actions.closeMenu())
+
     return
   }
 
@@ -37,6 +39,7 @@ export const clickOnMenuItem = (
   if (func) {
     void func(e)
     dispatch(navSlice.actions.closeMenu())
+
     return
   }
 

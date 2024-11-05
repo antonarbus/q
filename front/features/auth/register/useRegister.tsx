@@ -55,11 +55,13 @@ export const useRegister = ({
     if (isError) {
       if (error.response?.data.message === 'already exists') {
         notify({ msg: 'Already registered', type: 'info', theme: 'light' })
+
         return
       }
 
       if (error.response?.data.message === 'validation error') {
         notify({ msg: 'Validation error', type: 'warn', theme: 'light' })
+
         return
       }
 
@@ -69,6 +71,7 @@ export const useRegister = ({
           type: 'warn',
           theme: 'light',
         })
+
         return
       }
 
@@ -78,6 +81,7 @@ export const useRegister = ({
           type: 'warn',
           theme: 'light',
         })
+
         return
       }
 

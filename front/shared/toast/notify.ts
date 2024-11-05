@@ -50,6 +50,7 @@ export const notify = ({
     if (transition === 'bounce') return Bounce
     if (transition === 'flip') return Flip
     if (transition === 'zoom') return Zoom
+
     return Bounce
   }
 
@@ -74,6 +75,7 @@ export const notify = ({
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     toast.success(msg, options)
+
     return
   }
 
@@ -81,6 +83,7 @@ export const notify = ({
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     toast.error(msg, options)
+
     return
   }
 
@@ -88,6 +91,7 @@ export const notify = ({
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     toast.warn(msg, options)
+
     return
   }
 

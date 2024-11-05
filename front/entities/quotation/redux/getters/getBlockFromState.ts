@@ -10,5 +10,6 @@ export const getBlockFromState = ({
   state,
 }: Props): Item | undefined => {
   const block = state.blocks[blockIndex]
+
   return block
 }

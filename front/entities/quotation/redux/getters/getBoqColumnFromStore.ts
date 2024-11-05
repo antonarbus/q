@@ -17,5 +17,6 @@ export const getBoqColumnFromStore = ({
   if (block?.type !== itemType.boq) return
 
   const column = block.boq.column[boqColumnKey]
+
   return column
 }

@@ -18,5 +18,6 @@ export const getBoqCellFromState = ({
   const boqRow = getBoqRowFromState({ blockIndex, rowIndex, state })
   if (boqRow === undefined) return
   const boqRowCell = boqRow[boqRowCellKey]
+
   return boqRowCell
 }

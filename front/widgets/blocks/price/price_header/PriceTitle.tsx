@@ -16,6 +16,7 @@ export const PriceTitle = (): React.JSX.Element => {
         const priceBlock = getState().quotation.blocks[blockIndex]
         if (priceBlock?.type !== itemType.price) return ''
         const titleHtml = priceBlock.title.html
+
         return titleHtml
       }}
       onContentChange={() => {

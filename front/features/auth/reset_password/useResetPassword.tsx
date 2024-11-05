@@ -78,16 +78,19 @@ export const useResetPassword = ({ passwordSignal, modalRef }: Props): Res => {
     if (isError) {
       if (error.response?.data.message === 'incorrect reset key') {
         notify({ msg: 'Incorrect reset key', type: 'warn', theme: 'light' })
+
         return
       }
 
       if (error.response?.data.message === 'validation error') {
         notify({ msg: 'Validation error', type: 'warn', theme: 'light' })
+
         return
       }
 
       if (error.response?.data.message === 'not activated') {
         notify({ msg: 'Account not activated', type: 'warn', theme: 'light' })
+
         return
       }
 

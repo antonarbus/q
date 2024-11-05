@@ -62,6 +62,7 @@ export const usePressNavShortcut = ({ navStructure }: Props): void => {
         const shortcutStr = item.shortcut.join('')
         const pressedKeysStr = keysBeingPressed.join('')
         const isMatch = shortcutStr === pressedKeysStr
+
         return isMatch
       })
 

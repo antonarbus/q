@@ -170,6 +170,7 @@ export const updateSubtotalPriceCell = ({
   const subTotalPriceValueNew: number = boqRowsUpdated.reduce(
     (accumulator: number, boqRow: Row) => {
       const price = boqRow.price.value
+
       return accumulator + price
     },
     0,

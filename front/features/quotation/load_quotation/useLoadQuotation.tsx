@@ -67,6 +67,7 @@ export function useLoadQuotation(): void {
       }, 750)
 
       backToQuotationRef.current = null
+
       return
     }
 
@@ -113,6 +114,7 @@ export function useLoadQuotation(): void {
         setTimeout(() => {
           loadingDotsOverlayTextSignal.value = null
         }, 750)
+
         return
       }
 
