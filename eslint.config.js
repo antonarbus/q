@@ -42,6 +42,10 @@ export default [
   {
     rules: {
       // https://eslint.org/docs/v8.x/rules/
+      'padding-line-between-statements': [
+        'error',
+        { blankLine: 'always', prev: '*', next: 'return' },
+      ],
       'object-shorthand': 'error',
       'jsx-quotes': ['error', 'prefer-single'],
       'no-console': ['error', { allow: ['error', 'warn', 'info'] }],
