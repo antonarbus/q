@@ -51,7 +51,7 @@ export default [
         { blankLine: 'always', prev: 'block-like', next: '*' },
         // blank line before throw statement
         { blankLine: 'always', prev: '*', next: 'throw' },
-        // blank line around long declaration which spans over several lines
+        // blank line around declaration which spans over several lines
         { blankLine: 'always', prev: 'multiline-const', next: '*' },
         { blankLine: 'always', prev: 'multiline-let', next: '*' },
         { blankLine: 'always', prev: 'multiline-var', next: '*' },
