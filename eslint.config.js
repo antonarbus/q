@@ -49,9 +49,6 @@ export default [
         // blank line around block statement
         { blankLine: 'always', prev: '*', next: 'block-like' },
         { blankLine: 'always', prev: 'block-like', next: '*' },
-        // blank line around if statement
-        // { blankLine: 'always', prev: '*', next: 'if' },
-        // { blankLine: 'always', prev: 'if', next: '*' },
         // blank line before throw statement
         { blankLine: 'always', prev: '*', next: 'throw' },
         // blank line around long declaration which spans over several lines
