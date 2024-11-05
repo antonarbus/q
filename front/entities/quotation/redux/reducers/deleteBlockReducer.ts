@@ -8,8 +8,10 @@ export const deleteBlockReducer = (
   }>,
 ): undefined => {
   const { id } = action.payload
+
   const blocksWithoutDeletedOne = state.blocks.filter(
     (block) => block.id !== id,
   )
+
   state.blocks = blocksWithoutDeletedOne
 }

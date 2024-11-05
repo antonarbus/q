@@ -11,6 +11,7 @@ export const RequireRoles = ({
   children,
 }: Props): React.ReactNode => {
   const userRoles = useSelectorTyped((state) => state.user.roles)
+
   const haveRequiredRole = requiredRoles.some((role) =>
     userRoles.includes(role),
   )

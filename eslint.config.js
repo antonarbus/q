@@ -49,8 +49,18 @@ export default [
         // blank line around block statement
         { blankLine: 'always', prev: '*', next: 'block-like' },
         { blankLine: 'always', prev: 'block-like', next: '*' },
-        // blank before throw statement
+        // blank line around if statement
+        // { blankLine: 'always', prev: '*', next: 'if' },
+        // { blankLine: 'always', prev: 'if', next: '*' },
+        // blank line before throw statement
         { blankLine: 'always', prev: '*', next: 'throw' },
+        // blank line around long declaration which spans over several lines
+        { blankLine: 'always', prev: 'multiline-const', next: '*' },
+        { blankLine: 'always', prev: 'multiline-let', next: '*' },
+        { blankLine: 'always', prev: 'multiline-var', next: '*' },
+        { blankLine: 'always', prev: '*', next: 'multiline-const' },
+        { blankLine: 'always', prev: '*', next: 'multiline-let' },
+        { blankLine: 'always', prev: '*', next: 'multiline-var' },
       ],
       'object-shorthand': 'error',
       'jsx-quotes': ['error', 'prefer-single'],

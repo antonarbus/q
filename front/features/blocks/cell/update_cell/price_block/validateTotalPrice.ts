@@ -29,6 +29,7 @@ export const validateTotalPrice = ({ editorRef, blockIndex }: Props): void => {
     blockIndex,
     blocks: getState().quotation.blocks,
   })
+
   const isCorrectValue = cellValueFromHtml === price
 
   if (isCorrectValue) return

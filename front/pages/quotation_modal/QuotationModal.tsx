@@ -23,6 +23,7 @@ export const QuotationModal = (): React.JSX.Element => {
   useLoadInitValuesIntoQuotationModal({ quotationFormValues })
   useLoadQuotationModalWithDirectLink({ quotationFormValues })
   const isButtonDisabled = useIsButtonDisabled({ quotationFormValues })
+
   const { onSubmit, isPending, isSuccess, isError } = useSaveQuotation({
     modalRef,
     quotationFormValues,

@@ -13,6 +13,7 @@ import {
 export const useUpdateSubtotalPrice = (): void => {
   const { blockIndex } = useBlock()
   const { subTotalPriceEditorRef } = useBoq()
+
   const isBlockFroala = useSelectorTyped(
     (state) => state.quotation.blocks[blockIndex]?.isFroala,
   )

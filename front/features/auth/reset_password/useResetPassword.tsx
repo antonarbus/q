@@ -28,6 +28,7 @@ type Res = {
 export const useResetPassword = ({ passwordSignal, modalRef }: Props): Res => {
   const navigate = useNavigate()
   const { email, resetPasswordKey } = useParams()
+
   const {
     mutate: resetPassword,
     isPending,

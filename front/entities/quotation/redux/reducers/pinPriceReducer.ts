@@ -11,6 +11,7 @@ export const pinPriceReducer = (
   }>,
 ): void => {
   const { blockIndex, rowIndex } = action.payload
+
   const priceCell = getBoqCellFromState({
     blockIndex,
     rowIndex,

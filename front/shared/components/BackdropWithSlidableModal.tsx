@@ -21,6 +21,7 @@ export const BackdropWithSlidableModal = ({
 }: Props): React.JSX.Element => {
   const contentRef = useRef<HTMLDivElement>(null)
   const location = useLocation() as Location<NavigateState>
+
   const scrollTopPositionBeforeModalOpen = useRef(
     document.documentElement.scrollTop,
   )

@@ -31,9 +31,11 @@ export const downloadPdf = async (): Promise<void> => {
     onCloneNode: (blocksElement) => {
       if (!(blocksElement instanceof HTMLElement)) return
       blocksElement.style.display = 'inline-flex'
+
       const actionElements = blocksElement.querySelectorAll(
         `.${cls.actionsContainer}`,
       )
+
       actionElements.forEach((element) => {
         element.remove()
       })

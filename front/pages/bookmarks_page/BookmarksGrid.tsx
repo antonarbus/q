@@ -22,8 +22,10 @@ import type { ItemPick } from '@back/api/bookmark/getBookmarksRouter'
 
 export const BookmarksGrid = (): React.JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
+
   const { data, isLoading, isFetching, isFetched, refetch } =
     useGetBookmarksQuery()
+
   useDisableLoadingOverlayWhenItemsAreFetched({ isFetched })
   useRefetchDataOnEmailChange({ refetch })
   useShowLoadingJumpingDots({ isLoading })

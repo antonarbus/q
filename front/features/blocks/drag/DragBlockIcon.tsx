@@ -12,10 +12,12 @@ export const DragBlockIcon = (): React.JSX.Element => {
   const isCopyModalVisible = useIsCopyModalVisible()
   const disabled = isLastBlock || isCopyModalVisible
   const { block } = useBlock()
+
   const { listeners, attributes, isDragging } = useSortable({
     id: block.id,
     disabled,
   })
+
   const [openTooltip, setOpenTooltip] = useState(false)
   const isOverDragIcon = useRef(false)
 

@@ -37,17 +37,20 @@ export const insertPasteBoqRowReducer: Type = (state, action) => {
     const boqRowsWithoutPasteText = boqItem.boq.rows.filter(
       (boqRow) => boqRow.type === boqRowKey.row,
     )
+
     boqItem.boq.rows = boqRowsWithoutPasteText
 
     boqRowsWithoutPasteText.forEach((boqRow, boqRowIndex) => {
       if (boqRow.id !== id) return state
       if (pastePos === 'middle') return state
       const insertAtIndex = boqRowIndex + (pastePos === 'bottom' ? 1 : 0)
+
       const boqRowsWithPasteText = boqRowsWithoutPasteText.toSpliced(
         insertAtIndex,
         0,
         pasteText,
       )
+
       boqItem.boq.rows = boqRowsWithPasteText
 
       return state

@@ -8,10 +8,12 @@ const findAndReplaceStringOutsideHtmlTags = ({
   replacementText: string
 }): string => {
   const regExpToRemoveGapsBetweenDigits = /(?<=\d)\s+(?=\d)/gu
+
   const regExpToFindSearchTextOutsideHtmlTags = new RegExp(
     `([^<>]*)(${searchText})([^<>]*)`,
     'gu',
   )
+
   const resultString = string
     .replace(regExpToRemoveGapsBetweenDigits, '')
     .replace(

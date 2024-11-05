@@ -17,9 +17,11 @@ export const didBoqHeaderCellContentChange = ({
   boqHeaderKey,
 }: Props): boolean => {
   const htmlOnDisplay = editor.html.get()
+
   const htmlFromStore = getBoqBlockFromStore({ blockIndex })?.boq.header[
     boqHeaderKey
   ].html
+
   const didContentChange = htmlOnDisplay !== htmlFromStore
 
   return didContentChange

@@ -25,6 +25,7 @@ export const useRegister = ({
   modalRef,
 }: Props): Res => {
   const navigate = useNavigate()
+
   const {
     mutate: registerUser,
     isPending,

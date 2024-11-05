@@ -27,6 +27,7 @@ test.describe('#activateRouter', () => {
       { isActivated: true },
       { upsert: true, new: true },
     ).lean()
+
     const res = await request.post(apiUrl.activate, {
       data: {
         activationKey: userDocument.activationKey,

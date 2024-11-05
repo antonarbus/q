@@ -25,8 +25,10 @@ export function useLoadQuotation(): void {
     isError,
     error,
   } = useGetQuotationMutation()
+
   const quotationId = router.state.matches.at(0)?.params.quotationId
   const location = useLocation()
+
   const quotationType = (location.state as QuotationLocationState)
     ?.quotationType
 

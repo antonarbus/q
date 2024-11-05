@@ -23,6 +23,7 @@ export const QtyCell = (): React.JSX.Element => {
   const { blockIndex } = useBlock()
   const { subTotalPriceEditorRef } = useBoq()
   const { rowIndex, qtyCellEditorRef, priceCellEditorRef } = useRow()
+
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex,
     boqColumnKey: boqColumnKey.qty,

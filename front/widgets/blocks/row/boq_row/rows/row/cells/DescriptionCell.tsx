@@ -14,6 +14,7 @@ import { updateDescriptionCell } from '@features/blocks/cell/update_cell/row_blo
 
 export const DescriptionCell = (): React.JSX.Element => {
   const { descriptionEditorRef } = useRow()
+
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex: bookmarkPosAtBlocks,
     boqColumnKey: boqColumnKey.description,

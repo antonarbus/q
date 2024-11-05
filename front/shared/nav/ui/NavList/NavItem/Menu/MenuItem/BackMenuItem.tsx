@@ -12,6 +12,7 @@ export const BackMenuItem = (): React.JSX.Element => {
   const isHovered = useSelectorTyped(
     (state) => state.nav.menuItemHoverIndex === 1,
   )
+
   const color = theme.colors.topMenuItem
 
   return (

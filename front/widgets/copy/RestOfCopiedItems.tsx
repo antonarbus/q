@@ -65,6 +65,7 @@ export const RestOfCopiedItems = (): React.JSX.Element | null => {
 
   const scaleFactorForFirstItem =
     (containerWidth - 2 * containerPadding) / firstItem.width
+
   const firstItemHeight =
     firstItem.height * scaleFactorForFirstItem + itemMarginBottom
 
@@ -92,6 +93,7 @@ export const RestOfCopiedItems = (): React.JSX.Element | null => {
         {items.map((item, index) => {
           const scaleFactor =
             (containerWidth - 2 * containerPadding) / (item.width ?? 1)
+
           const preview = getState().copy.previews[index]
 
           if (index === 0) return null

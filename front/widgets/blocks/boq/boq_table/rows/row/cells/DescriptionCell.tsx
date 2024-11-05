@@ -16,6 +16,7 @@ import {
 export const DescriptionCell = (): React.JSX.Element => {
   const { blockIndex } = useBlock()
   const { rowIndex, itemPriceCellEditorRef, descriptionEditorRef } = useRow()
+
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex,
     boqColumnKey: boqColumnKey.description,

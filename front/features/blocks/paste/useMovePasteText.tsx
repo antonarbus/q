@@ -108,6 +108,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
   }
 
   const prevPlace = getState().copy.place
+
   const pastePlace = getPastePlace({
     hoveredElement: blockElement,
     e,
@@ -155,6 +156,7 @@ const movePasteTextBoqRow = (e: MouseEvent): void => {
   }
 
   const elementsUnderCursor = document.elementsFromPoint(e.x, e.y)
+
   const isCursorOverActionsContainer = elementsUnderCursor.some((element) =>
     element.classList.contains(cls.actionsContainer),
   )

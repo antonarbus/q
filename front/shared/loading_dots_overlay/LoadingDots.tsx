@@ -6,6 +6,7 @@ const bounceLoading = keyframes`
     transform: translate3d(0, -1.5rem, 0);
   }
 `
+
 type Props = {
   size?: string
   margin?: string

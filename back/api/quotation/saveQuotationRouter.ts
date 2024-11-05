@@ -97,11 +97,13 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
 
     const filePath = `${email}/${storageFolderName.quotations}/${id}.json`
     const file = bucket.file(filePath)
+
     const contents = JSON.stringify(
       { ...quotationDataFromDb, blocks: quotation.blocks },
       null,
       2,
     )
+
     await file.save(contents)
 
     let message: Message = 'saved'

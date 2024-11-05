@@ -18,6 +18,7 @@ export const RegisterModal = (): React.JSX.Element => {
   const isEmailOkSignal = useSignal(false)
   const isConfirmPasswordOkSignal = useSignal(false)
   const isButtonDisabledSignal = useSignal(false)
+
   const { onSubmit, isSuccess, isPending, isError } = useRegister({
     emailSignal,
     passwordSignal,

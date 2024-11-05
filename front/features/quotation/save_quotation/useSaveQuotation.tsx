@@ -115,6 +115,7 @@ export const useSaveQuotation = ({
             element: modalRef.current,
             onSlideElementComplete: () => {
               const id = data.quotation?.id
+
               const isQuotationsPage = window.location.pathname.includes(
                 route.quotations,
               )

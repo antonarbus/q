@@ -13,6 +13,7 @@ export const RequestPasswordResetModal = (): React.JSX.Element => {
   const inputRef = useRef<HTMLDivElement>(null)
   const emailSignal = useSignal('')
   const isEmailOkSignal = useSignal(false)
+
   const { onSubmit, isPending, isSuccess, isError } = useRequestPasswordReset({
     emailSignal,
     modalRef,

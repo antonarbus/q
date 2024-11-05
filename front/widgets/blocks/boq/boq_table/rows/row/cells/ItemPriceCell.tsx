@@ -22,12 +22,14 @@ import {
 export const ItemPriceCell = (): React.JSX.Element => {
   const { blockIndex } = useBlock()
   const { subTotalPriceEditorRef } = useBoq()
+
   const {
     rowIndex,
     itemPriceCellEditorRef,
     priceCellEditorRef,
     qtyCellEditorRef,
   } = useRow()
+
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex,
     boqColumnKey: boqColumnKey.itemPrice,

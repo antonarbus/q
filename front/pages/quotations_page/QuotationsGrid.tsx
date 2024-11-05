@@ -22,8 +22,10 @@ import type { QuotationPick } from '@back/api/quotation/getQuotationsRouter'
 
 export const QuotationsGrid = (): React.JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
+
   const { data, isLoading, isFetching, isFetched, refetch } =
     useGetQuotationsQuery()
+
   useDisableLoadingOverlayWhenItemsAreFetched({ isFetched })
   useRefetchDataOnEmailChange({ refetch })
   useShowLoadingJumpingDots({ isLoading })

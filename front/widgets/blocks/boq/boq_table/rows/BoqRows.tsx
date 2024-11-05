@@ -18,6 +18,7 @@ import { arrayShapesEqualityFn } from '@shared/lib/redux/arrayShapesEqualityFn'
 
 export const BoqRows = (): React.JSX.Element => {
   const { blockIndex } = useBlock()
+
   const boqRows = useSelectorTyped(
     selectBoqRows({ blockIndex }),
     arrayShapesEqualityFn,

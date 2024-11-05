@@ -11,6 +11,7 @@ export const pinItemPriceReducer = (
   }>,
 ): void => {
   const { blockIndex, rowIndex } = action.payload
+
   const itemPriceCell = getBoqCellFromState({
     blockIndex,
     rowIndex,
@@ -27,6 +28,7 @@ export const pinItemPriceReducer = (
     boqRowCellKey: boqRowCellKey.qty,
     state,
   })
+
   if (qtyCell === undefined) return
   qtyCell.pin.isPinned = false
 }

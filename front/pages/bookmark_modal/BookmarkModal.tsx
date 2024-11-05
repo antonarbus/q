@@ -21,6 +21,7 @@ export const BookmarkModal = (): React.JSX.Element => {
   const modalRef = useRef<HTMLDivElement>(null)
   const { bookmarkFromValues } = useLoadInitValuesIntoBookmarkModal()
   useLoadBookmarkModalOpenedWithDirectLink({ bookmarkFromValues })
+
   const { onSubmit, isPending, isSuccess, isError } = useSaveBookmark({
     modalRef,
     bookmarkFromValues,

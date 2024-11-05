@@ -42,6 +42,7 @@ export const useLogIn = ({
 }: Props): Res => {
   const navigate = useNavigate()
   const { quotationId } = useParams()
+
   const {
     mutate: logIn,
     isPending,
@@ -50,6 +51,7 @@ export const useLogIn = ({
     isError,
     error,
   } = useLogInMutation()
+
   const location = useLocation() as Location<NavigateState>
   const { refetch: refetchQuotations } = useGetQuotationsQuery()
   const { refetch: refetchBookmarks } = useGetBookmarksQuery()

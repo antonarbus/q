@@ -24,6 +24,7 @@ export const BoqRowsSortableContext = ({
     selectBoqRows({ blockIndex }),
     arrayShapesEqualityFn,
   )
+
   const boqRowIds = boqRows.map((boqRow) => boqRow.id)
 
   const sensors = useSensors(useSensor(PointerSensor))

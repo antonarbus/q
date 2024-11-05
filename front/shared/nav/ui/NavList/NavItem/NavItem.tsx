@@ -73,6 +73,7 @@ export const NavItem = ({ children, id }: Props): React.JSX.Element => {
     .replace('.', '')
     .replace('//', '/')
     .replace('//', '/')
+
   const to = link.includes('.') ? fixedLink : link
 
   return (

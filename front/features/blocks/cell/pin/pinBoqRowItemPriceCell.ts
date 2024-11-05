@@ -19,6 +19,7 @@ export const pinBoqRowItemPriceCell = ({
     rowIndex,
     boqRowCellKey: boqRowCellKey.itemPrice,
   })
+
   const isPinned = itemPrice?.pin.isPinned
 
   if (isPinned) return

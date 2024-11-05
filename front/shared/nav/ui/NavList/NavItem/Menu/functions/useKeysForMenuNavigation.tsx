@@ -12,9 +12,11 @@ export const useKeysForMenuNavigation = (): void => {
     const currentMenuItems = getMenuItemByIdsChain(
       getState().nav.idsToCurrentMenuItems,
     )
+
     const currentMenuItemsNotHidden = currentMenuItems.filter(
       (menuItem) => !menuItem.isHidden,
     )
+
     const menuItemsQty = currentMenuItemsNotHidden.length + 1
     const hoveredMenuItemIndex = getState().nav.menuItemHoverIndex
     const isNestedMenu = getState().nav.idsToNextMenuItems.length > 2
@@ -70,6 +72,7 @@ export const useKeysForMenuNavigation = (): void => {
     if (e.key === 'Enter') {
       const nextMenu = getMenuItemByIdsChain(getState().nav.idsToNextMenuItems)
       const menuId = nextMenu[hoveredMenuItemIndex - 2]?.id ?? ''
+
       const menuItem = currentMenuItemsNotHidden.find(
         (item) => item.id === menuId,
       )
@@ -137,6 +140,7 @@ export const useKeysForMenuNavigation = (): void => {
         const isiKeySameAsFirstItemLetter = menuItem.name
           .toLowerCase()
           .startsWith(e.key)
+
         if (!isiKeySameAsFirstItemLetter) return false
         if (i + 2 > hoveredMenuItemIndex) return true
 

@@ -24,9 +24,11 @@ export const MenuItem = ({
   hoveredMenuItemIndex,
 }: Props): React.JSX.Element => {
   const location = useLocation()
+
   const isHovered = useSelectorTyped(
     (state) => state.nav.menuItemHoverIndex === hoveredMenuItemIndex,
   )
+
   const isNextMenuAvailable = Boolean(menuItem.menuItems)
   const isIcon = Boolean(menuItem.icon)
   const menuId = menuItem.id
@@ -42,6 +44,7 @@ export const MenuItem = ({
     .replace('.', '')
     .replace('//', '/')
     .replace('//', '/')
+
   const to = link.includes('.') ? fixedLink : link
 
   return (

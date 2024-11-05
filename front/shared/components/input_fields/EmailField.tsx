@@ -38,10 +38,12 @@ export const EmailField = ({
 
   useSignalEffect(() => {
     isEmailOkSignal.value = isEmailPatternOk(emailSignal.value)
+
     const isMailPatternOk =
       inputFocusedOutOnesSignal.value &&
       emailSignal.value !== '' &&
       !isEmailOkSignal.value
+
     emailLabelSignal.value = isMailPatternOk
       ? 'Check email pattern'
       : initEmailLabel

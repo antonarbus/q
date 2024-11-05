@@ -20,9 +20,11 @@ const boqHeaderKey: HeaderKey = 'subTotalPrice'
 export const SubTotalPrice = (): React.JSX.Element => {
   const { subTotalPriceEditorRef, boqRowEditorRefs } = useBoq()
   const { blockIndex } = useBlock()
+
   const hidePinsClickHandlerRef = useRef<(e: MouseEvent) => void>((e) => {
     console.warn('hidePinsClickHandlerRef')
   })
+
   const isInitClickRef = useRef(true)
 
   useUpdateSubtotalPrice()

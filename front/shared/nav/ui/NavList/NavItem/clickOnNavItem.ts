@@ -52,6 +52,7 @@ export const clickOnNavItem = ({
 
   // if click on NavItem for which Menu is opened, then close it, otherwise it closes and opens immediately
   const currentMenuId = getState().nav.idsToCurrentMenuItems.at(-1)
+
   const isMenuOpenedUnderThisNavItem =
     currentMenuId === id && currentMenuId !== 'top'
 

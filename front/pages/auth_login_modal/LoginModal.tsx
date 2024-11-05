@@ -16,6 +16,7 @@ export const LoginModal = (): React.JSX.Element => {
   const emailSignal = useSignal('')
   const passwordSignal = useSignal('')
   const isEmailOkSignal = useSignal(false)
+
   const { isPending, isSuccess, isError, onSubmit } = useLogIn({
     emailSignal,
     passwordSignal,

@@ -16,6 +16,7 @@ import { formatQtyCell } from '@features/blocks/cell/update_cell/row_block_cells
 
 export const QtyCell = (): React.JSX.Element => {
   const { qtyCellEditorRef, priceCellEditorRef } = useRow()
+
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex: bookmarkPosAtBlocks,
     boqColumnKey: boqColumnKey.qty,

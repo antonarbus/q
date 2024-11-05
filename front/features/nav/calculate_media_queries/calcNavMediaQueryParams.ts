@@ -72,13 +72,16 @@ export const calcNavMediaQueryParams = (
 
   // todo: there is not such element with class .uotation anymore
   const icon = calcNavWidthWhenLogoIsOverlay({ elsToHideClass: '.uotation' })
+
   const name = calcNavWidthWhenLogoIsOverlay({
     elsToHideClass: '.icon-round-wrapper',
   })
+
   const burger = calcNavWidthWhenLogoIsOverlay({
     elsToHideClass: '.nav-item-name',
     elsToShowClass: '.icon-round-wrapper',
   })
+
   nav.querySelectorAll('.icon-round-wrapper, .nav-item-name').forEach((el) => {
     el.setAttribute('style', '')
   })

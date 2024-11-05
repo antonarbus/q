@@ -18,6 +18,7 @@ export const pinQtyReducer = (
     boqRowCellKey: boqRowCellKey.itemPrice,
     state,
   })
+
   if (itemPriceCell === undefined) return
   itemPriceCell.pin.isPinned = false
 
@@ -27,6 +28,7 @@ export const pinQtyReducer = (
     boqRowCellKey: boqRowCellKey.qty,
     state,
   })
+
   if (qtyCell === undefined) return
   qtyCell.pin.isPinned = true
 }

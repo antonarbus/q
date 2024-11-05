@@ -13,6 +13,7 @@ type Props = {
 export const Pin = ({ boqRowCellKey, onClick }: Props): React.ReactNode => {
   const { blockIndex } = useBlock()
   const { rowIndex } = useRow()
+
   const pin = useSelectorTyped(
     selectBoqCellPin({ blockIndex, rowIndex, boqRowCellKey }),
   )

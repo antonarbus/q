@@ -11,6 +11,7 @@ import {
 export const NumberCell = (): React.JSX.Element => {
   const { blockIndex } = useBlock()
   const { rowIndex } = useRow()
+
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex,
     boqColumnKey: boqColumnKey.number,

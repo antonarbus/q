@@ -16,6 +16,7 @@ import { formatItemPriceCell } from '@features/blocks/cell/update_cell/row_block
 
 export const ItemPriceCell = (): React.JSX.Element => {
   const { itemPriceCellEditorRef, priceCellEditorRef } = useRow()
+
   const { stylesForResizableCell } = useStylesForResizableCell({
     blockIndex: bookmarkPosAtBlocks,
     boqColumnKey: boqColumnKey.itemPrice,

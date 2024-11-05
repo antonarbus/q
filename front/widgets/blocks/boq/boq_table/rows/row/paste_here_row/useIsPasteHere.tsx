@@ -5,9 +5,11 @@ export const useIsPasteHere = (): boolean => {
   const { row } = useRow()
   const pastePos = useSelectorTyped((state) => state.copy.place.pastePos)
   const pasteItemId = useSelectorTyped((state) => state.copy.place.id)
+
   const isPasteTextShown = useSelectorTyped(
     (state) => state.copy.isPasteTextShown,
   )
+
   const isPasteHere =
     isPasteTextShown && row.id === pasteItemId && pastePos === 'middle'
 

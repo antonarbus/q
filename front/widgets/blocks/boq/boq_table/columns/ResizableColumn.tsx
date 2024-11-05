@@ -24,6 +24,7 @@ export const ResizableColumn = ({
   minWidth,
 }: Props): React.JSX.Element => {
   const { blockIndex } = useBlock()
+
   const colWidth = useSelectorTyped(
     selectColumnWidth({ blockIndex, boqColumnKey }),
   )

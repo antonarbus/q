@@ -12,12 +12,14 @@ export const hideBoqRowCellPinReducer = (
   }>,
 ): void => {
   const { blockIndex, rowIndex, boqRowCellKey } = action.payload
+
   const boqRowCell = getBoqCellFromState({
     blockIndex,
     rowIndex,
     boqRowCellKey,
     state,
   })
+
   if (boqRowCell === undefined) return
   boqRowCell.pin.isShown = false
 }
