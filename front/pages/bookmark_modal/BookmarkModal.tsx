@@ -10,7 +10,7 @@ import {
 import { useUnmount } from 'react-use'
 import { quotationSlice } from '@entities/quotation'
 import { dispatch } from '@lib_instances/store'
-import { router } from '@lib_instances/router'
+import { instance } from '@shared/instance'
 import { NameField } from '@shared/components/input_fields/NameField'
 import { CategoryField } from '@shared/components/input_fields/CategoryField'
 import { DescriptionField } from '@shared/components/input_fields/DescriptionField'
@@ -32,7 +32,7 @@ export const BookmarkModal = (): React.JSX.Element => {
   })
 
   const navigateUp = (): void => {
-    void router.navigate('..')
+    void instance.router.navigate('..')
   }
 
   const { data } = useGetBookmarkCategoriesQuery()

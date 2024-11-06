@@ -10,7 +10,7 @@ import { ConfirmPasswordField } from '@shared/components/ConfirmPasswordField'
 import { EmailField } from '@shared/components/input_fields/EmailField'
 import { FormModal } from '@shared/components/FormModal'
 import { PasswordField } from '@shared/components/input_fields/PasswordField'
-import { router } from '@lib_instances/router'
+import { instance } from '@shared/instance'
 
 export const ResetPasswordModal = (): React.ReactNode => {
   const { email } = useParams()
@@ -34,7 +34,7 @@ export const ResetPasswordModal = (): React.ReactNode => {
   })
 
   const navigateUp = (): void => {
-    void router.navigate('..')
+    void instance.router.navigate('..')
   }
 
   return (

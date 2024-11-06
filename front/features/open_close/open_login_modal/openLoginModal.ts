@@ -1,6 +1,6 @@
-import { router } from '@lib_instances/router'
+import { instance } from '@shared/instance'
 import { route } from '@shared/consts/route'
 
 export const openLoginModal = (): void => {
-  void router.navigate(`./${route.login}`)
+  void instance.router.navigate(`./${route.login}`)
 }

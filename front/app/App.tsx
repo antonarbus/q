@@ -1,5 +1,5 @@
+import './router'
 import { reactQuery } from '@lib_instances/reactQuery'
-import { router } from '@lib_instances/router'
 import { store } from '@lib_instances/store'
 import { themeClient } from '@lib_instances/theme'
 import { ThemeProvider } from '@mui/material/styles'
@@ -15,6 +15,7 @@ import '@shared/utils/cursorPosSignal'
 import { useHideInitHtmlElements } from '@features/init_load/useHideInitHtmlElements'
 import { useOnDragOnDrop } from '@features/upload/useOnDragOnDrop'
 import { useRemoveThirdPartyCookies } from '@features/init_load/useRemoveThirdPartyCookies'
+import { instance } from '@shared/instance'
 
 export const App = (): React.JSX.Element => {
   useLogoutIfAccessTokenExpired()
@@ -27,7 +28,7 @@ export const App = (): React.JSX.Element => {
       <QueryClientProvider client={reactQuery}>
         <ThemeProvider theme={themeClient}>
           <GlobalStyles />
-          <RouterProvider router={router} />
+          <RouterProvider router={instance.router} />
           <ReactQueryDevtools />
           <ReactQueryDevtoolsProductionHidden />
         </ThemeProvider>

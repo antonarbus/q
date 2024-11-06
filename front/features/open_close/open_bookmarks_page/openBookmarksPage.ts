@@ -1,8 +1,8 @@
 import { setBackToQuotation } from '@entities/quotation'
 import { route } from '@shared/consts/route'
-import { router } from '@lib_instances/router'
+import { instance } from '@shared/instance'
 
 export const openBookmarksPage = (): void => {
   setBackToQuotation()
-  void router.navigate(`/${route.bookmarks}`)
+  void instance.router.navigate(`/${route.bookmarks}`)
 }

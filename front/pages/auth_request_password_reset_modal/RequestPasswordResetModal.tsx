@@ -6,7 +6,7 @@ import { useRequestPasswordReset } from '@features/auth/request_password_reset'
 import { OpenLoginModalLink } from '@features/open_close/open_login_modal'
 import { EmailField } from '@shared/components/input_fields/EmailField'
 import { FormModal } from '@shared/components/FormModal'
-import { router } from '@lib_instances/router'
+import { instance } from '@shared/instance'
 
 export const RequestPasswordResetModal = (): React.JSX.Element => {
   const modalRef = useRef<HTMLDivElement>(null)
@@ -20,7 +20,7 @@ export const RequestPasswordResetModal = (): React.JSX.Element => {
   })
 
   const navigateUp = (): void => {
-    void router.navigate('..')
+    void instance.router.navigate('..')
   }
 
   return (

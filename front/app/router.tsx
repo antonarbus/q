@@ -20,6 +20,7 @@ import { ResetPasswordModal } from '@pages/auth_reset_password_modal'
 import { Toast } from '@shared/toast'
 import { Footer } from '@widgets/footer'
 import { RequireRoles } from '@features/auth/check_required_roles'
+import { instance } from '@shared/instance'
 
 const Quotation = React.lazy(async () => {
   return import('@pages/quotation_page')
@@ -70,7 +71,7 @@ const authRoutes: RouteObject[] = [
   },
 ]
 
-export const router = createBrowserRouter([
+const router = createBrowserRouter([
   {
     element: (
       <>
@@ -184,3 +185,7 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
 ])
+
+instance.initializeRouter({ routerInstance: router })
+
+export type RouterType = typeof router

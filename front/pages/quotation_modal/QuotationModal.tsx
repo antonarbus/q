@@ -10,7 +10,7 @@ import {
 } from '@features/open_close/open_quotation_modal'
 import { useQuotationFormValues } from './useFormValues'
 import { useIsButtonDisabled } from './useIsButtonDisabled'
-import { router } from '@lib_instances/router'
+import { instance } from '@shared/instance'
 import { NameField } from '@shared/components/input_fields/NameField'
 import { CategoryField } from '@shared/components/input_fields/CategoryField'
 import { DescriptionField } from '@shared/components/input_fields/DescriptionField'
@@ -30,7 +30,7 @@ export const QuotationModal = (): React.JSX.Element => {
   })
 
   const navigateUp = (): void => {
-    void router.navigate('..')
+    void instance.router.navigate('..')
   }
 
   const { data } = useGetQuotationCategoriesQuery()
