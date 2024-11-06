@@ -1,11 +1,15 @@
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
-import path from 'path'
+import { dirname, join } from 'path'
 import basicSsl from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { config } from './back/config'
+import { fileURLToPath } from 'url'
+
+const thisFilePath = fileURLToPath(import.meta.url)
+const thisDirPath = dirname(thisFilePath)
 
 // https://vitejs.dev/config/
 
@@ -66,13 +70,13 @@ export default defineConfig(({ command, mode }) => {
     ],
     resolve: {
       alias: {
-        '@back': path.resolve(__dirname, 'back'),
-        '@lib_instances': path.resolve(__dirname, 'front', 'lib_instances'),
-        '@pages': path.resolve(__dirname, 'front', 'pages'),
-        '@widgets': path.resolve(__dirname, 'front', 'widgets'),
-        '@features': path.resolve(__dirname, 'front', 'features'),
-        '@entities': path.resolve(__dirname, 'front', 'entities'),
-        '@shared': path.resolve(__dirname, 'front', 'shared'),
+        '@back': join(thisDirPath, 'back'),
+        '@lib_instances': join(thisDirPath, 'front', 'lib_instances'),
+        '@pages': join(thisDirPath, 'front', 'pages'),
+        '@widgets': join(thisDirPath, 'front', 'widgets'),
+        '@features': join(thisDirPath, 'front', 'features'),
+        '@entities': join(thisDirPath, 'front', 'entities'),
+        '@shared': join(thisDirPath, 'front', 'shared'),
       },
     },
     build: {
