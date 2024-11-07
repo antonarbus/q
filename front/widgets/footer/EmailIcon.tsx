@@ -1,4 +1,4 @@
-import { theme } from '@lib_instances/theme'
+import { theme } from '@shared/theme'
 import { TooltipWithNoMaxWidth } from '@shared/components/TooltipWithNoMaxWidth'
 import { MdAlternateEmail } from 'react-icons/md'
 

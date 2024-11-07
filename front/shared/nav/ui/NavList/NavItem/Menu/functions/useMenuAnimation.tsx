@@ -1,5 +1,5 @@
 import { dispatch } from '@lib_instances/store'
-import { theme } from '@lib_instances/theme'
+import { theme } from '@shared/theme'
 import { gsap } from 'gsap'
 import { useEffect, type RefObject } from 'react'
 import { useFirstMountState } from 'react-use'

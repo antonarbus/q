@@ -1,5 +1,5 @@
 import { useSelectorTyped } from '@lib_instances/store'
-import { theme } from '@lib_instances/theme'
+import { theme } from '@shared/theme'
 
 /**
  * check if menu width is more than distance to the left side of the window

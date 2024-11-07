@@ -1,4 +1,4 @@
-import { theme } from '@lib_instances/theme'
+import { theme } from '@shared/theme'
 import { Close } from '@mui/icons-material'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Children } from 'react'

@@ -1,4 +1,4 @@
-import { theme } from '@lib_instances/theme'
+import { theme } from '@shared/theme'
 import { Person } from '@mui/icons-material'
 import { InputAdornment, TextField } from '@mui/material'
 import { useSignal, type Signal, useSignalEffect } from '@preact/signals-react'

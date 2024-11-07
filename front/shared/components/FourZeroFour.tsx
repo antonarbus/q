@@ -1,4 +1,4 @@
-import { theme } from '@lib_instances/theme'
+import { theme } from '@shared/theme'
 
 export const FourZeroFour = (): React.JSX.Element => (
   <div

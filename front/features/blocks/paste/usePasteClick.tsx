@@ -1,5 +1,5 @@
 import { dispatch, getState } from '@lib_instances/store'
-import { theme } from '@lib_instances/theme'
+import { theme } from '@shared/theme'
 import { useEffectOnce, useUnmount } from 'react-use'
 import { copySlice } from '@entities/copy'
 import { isFroalaSignal, quotationSlice } from '@entities/quotation'

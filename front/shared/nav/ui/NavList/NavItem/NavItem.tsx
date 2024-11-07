@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import { getState, useSelectorTyped } from '@lib_instances/store'
-import { theme } from '@lib_instances/theme'
+import { theme } from '@shared/theme'
 import { useRef, type MouseEvent, type MutableRefObject } from 'react'
 import { TiArrowSortedDown } from 'react-icons/ti'
 import { Link, useLocation } from 'react-router-dom'

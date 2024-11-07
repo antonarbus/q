@@ -1,5 +1,5 @@
 import { getState } from '@lib_instances/store'
-import { theme } from '@lib_instances/theme'
+import { theme } from '@shared/theme'
 import { Settings } from '@mui/icons-material'
 import { Avatar, Box } from '@mui/material'
 import bytes from 'bytes'

@@ -1,4 +1,4 @@
-import { theme } from '@lib_instances/theme'
+import { theme } from '@shared/theme'
 import { Avatar, Box } from '@mui/material'
 import { useRef } from 'react'
 import { GrValidate } from 'react-icons/gr'

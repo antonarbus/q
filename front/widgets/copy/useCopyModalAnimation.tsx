@@ -1,5 +1,5 @@
 import { dispatch, useSelectorTyped } from '@lib_instances/store'
-import { theme } from '@lib_instances/theme'
+import { theme } from '@shared/theme'
 import { useAnimationControls, type AnimationControls } from 'framer-motion'
 import { useEffect } from 'react'
 import { useFirstMountState } from 'react-use'

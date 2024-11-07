@@ -1,4 +1,4 @@
-import { theme } from '@lib_instances/theme'
+import { theme } from '@shared/theme'
 import { Box } from '@mui/material'
 
 type Props = {

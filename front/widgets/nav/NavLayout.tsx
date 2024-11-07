@@ -1,5 +1,5 @@
 import { useSelectorTyped } from '@lib_instances/store'
-import { theme } from '@lib_instances/theme'
+import { theme } from '@shared/theme'
 import type { RefObject } from 'react'
 
 type Props = {

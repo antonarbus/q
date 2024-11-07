@@ -1,7 +1,7 @@
 import './router'
 import { reactQuery } from '@lib_instances/reactQuery'
 import { store } from '@lib_instances/store'
-import { themeClient } from '@lib_instances/theme'
+import { themeClient } from '@shared/theme'
 import { ThemeProvider } from '@mui/material/styles'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
