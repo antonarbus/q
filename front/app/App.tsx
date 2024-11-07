@@ -1,5 +1,5 @@
 import './router'
-import { reactQuery } from '@lib_instances/reactQuery'
+import './reactQuery'
 import { store } from '@lib_instances/store'
 import { themeClient } from '@shared/theme'
 import { ThemeProvider } from '@mui/material/styles'
@@ -25,7 +25,7 @@ export const App = (): React.JSX.Element => {
 
   return (
     <Provider store={store}>
-      <QueryClientProvider client={reactQuery}>
+      <QueryClientProvider client={instance.reactQuery}>
         <ThemeProvider theme={themeClient}>
           <GlobalStyles />
           <RouterProvider router={instance.router} />
