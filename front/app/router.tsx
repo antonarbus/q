@@ -186,6 +186,6 @@ const router = createBrowserRouter([
   },
 ])
 
-export type RouterType = typeof router
+export type Router = typeof router
 
 instance.router = router
