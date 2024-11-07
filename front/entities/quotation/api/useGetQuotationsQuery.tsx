@@ -3,7 +3,7 @@ import { apiUrl } from '@back/consts/apiUrl'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import type { AxiosError, AxiosResponse } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
-import { axiosWithAuth } from '@lib_instances/axiosWithAuth'
+import { instance } from '@shared/instance'
 
 export const useGetQuotationsQuery = (): UseQueryResult<
   ResBody,
@@ -18,11 +18,13 @@ export const useGetQuotationsQuery = (): UseQueryResult<
     retry: 0,
     enabled: false,
     queryFn: async ({ signal }) => {
-      const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
-        url: apiUrl.getQuotations,
-        method: 'get',
-        signal,
-      })
+      const res = await instance.axiosWithAuth<ResBody, AxiosResponse<ResBody>>(
+        {
+          url: apiUrl.getQuotations,
+          method: 'get',
+          signal,
+        },
+      )
 
       return res.data
     },

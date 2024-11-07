@@ -6,7 +6,7 @@ import { apiUrl } from '@back/consts/apiUrl'
 import { type UseMutationResult, useMutation } from '@tanstack/react-query'
 import type { AxiosResponse, AxiosError } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
-import { axiosWithAuth } from '@lib_instances/axiosWithAuth'
+import { instance } from '@shared/instance'
 
 export const useGetBookmarkMutation = (): UseMutationResult<
   ResBody,
@@ -16,7 +16,7 @@ export const useGetBookmarkMutation = (): UseMutationResult<
   const mutation = useMutation<ResBody, AxiosError<ResBody>, Payload>({
     mutationKey: [queryKey.getBookmark],
     mutationFn: async ({ id }: Payload) => {
-      const { data } = await axiosWithAuth<
+      const { data } = await instance.axiosWithAuth<
         ResBody,
         AxiosResponse<ResBody>,
         Payload

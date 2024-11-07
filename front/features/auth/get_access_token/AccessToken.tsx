@@ -9,8 +9,12 @@ import {
 } from '@entities/user'
 import { loadingTableOverlaySignal } from '@shared/components/LoadingTableOverlay'
 import { navItemKey } from '@shared/consts/navItemKey'
-import { resolveInitAccessTokenFetching } from '@lib_instances/axiosWithAuth'
 import { navSlice, showLoadingNavIcon } from '@shared/nav'
+
+export const {
+  promise: initAccessTokenFetchingPromise,
+  resolve: resolveInitAccessTokenFetching,
+} = Promise.withResolvers<'fetched' | 'failed'>()
 
 export const AccessToken = (): React.JSX.Element => {
   const {

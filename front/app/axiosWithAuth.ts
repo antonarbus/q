@@ -3,13 +3,10 @@ import { headerName } from '@back/consts/headerName'
 import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
 import type { ResBody } from '@back/api/auth/getAccessTokenRouter'
 import { accessTokenSignal } from '@entities/user'
+import { instance } from '@shared/instance'
+import { initAccessTokenFetchingPromise } from '@features/auth/get_access_token/AccessToken'
 
-export const {
-  promise: initAccessTokenFetchingPromise,
-  resolve: resolveInitAccessTokenFetching,
-} = Promise.withResolvers<'fetched' | 'failed'>()
-
-export const axiosWithAuth = axios.create({ withCredentials: true })
+const axiosWithAuth = axios.create({ withCredentials: true })
 
 axiosWithAuth.interceptors.request.use(async (config) => {
   // wait till initial access token if fetched, otherwise token is null and another immediate duplicate request for access token will be sent
@@ -66,3 +63,7 @@ axiosWithAuth.interceptors.response.use(
     throw error
   },
 )
+
+export type AxiosWithAuth = typeof axiosWithAuth
+
+instance.axiosWithAuth = axiosWithAuth

@@ -3,7 +3,7 @@ import { apiUrl } from '@back/consts/apiUrl'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import type { AxiosError, AxiosResponse } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
-import { axiosWithAuth } from '@lib_instances/axiosWithAuth'
+import { instance } from '@shared/instance'
 
 export const useGetUsersQuery = (): UseQueryResult<
   ResBody,
@@ -17,11 +17,13 @@ export const useGetUsersQuery = (): UseQueryResult<
     staleTime: 0,
     retry: 0,
     queryFn: async ({ signal }) => {
-      const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
-        url: apiUrl.getUsers,
-        method: 'get',
-        signal,
-      })
+      const res = await instance.axiosWithAuth<ResBody, AxiosResponse<ResBody>>(
+        {
+          url: apiUrl.getUsers,
+          method: 'get',
+          signal,
+        },
+      )
 
       return res.data
     },
