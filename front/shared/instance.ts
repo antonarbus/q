@@ -5,19 +5,13 @@ class Instance {
 
   public get router(): RouterType {
     if (this.#router === null) {
-      throw new Error(
-        'Router instance is not initialized. Call "initializeRouter" first',
-      )
+      throw new Error('Router instance is not initialized')
     }
 
     return this.#router
   }
 
-  public initializeRouter({
-    routerInstance,
-  }: {
-    routerInstance: RouterType
-  }): void {
+  public set router(routerInstance: RouterType) {
     if (this.#router !== null) {
       throw new Error('Router instance has already been initialized')
     }
