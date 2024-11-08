@@ -62,6 +62,7 @@ export default [
         { blankLine: 'always', prev: 'multiline-expression', next: '*' },
         { blankLine: 'always', prev: '*', next: 'multiline-expression' },
       ],
+      eqeqeq: 'error',
       'object-shorthand': 'error',
       'jsx-quotes': ['error', 'prefer-single'],
       'no-console': ['error', { allow: ['error', 'warn', 'info'] }],
