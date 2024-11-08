@@ -1,5 +1,5 @@
 import { instance } from '@shared/instance'
-import { dispatch } from '@lib_instances/store'
+import { dispatch } from '@shared/lib/redux'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'

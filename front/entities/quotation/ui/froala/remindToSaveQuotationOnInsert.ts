@@ -1,4 +1,4 @@
-import { getState } from '@lib_instances/store'
+import { getState } from '@shared/lib/redux'
 import { notify } from '@shared/toast'
 
 export const remindToSaveQuotationOnInsert = (): void => {

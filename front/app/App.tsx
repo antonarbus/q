@@ -1,9 +1,9 @@
-import './router'
+import './redux'
 import './reactQuery'
+import './router'
 import './axiosWithAuth'
 import './signalsDevTools'
 import '@shared/utils/cursorPosSignal'
-import { store } from '@lib_instances/store'
 import { themeClient } from '@shared/theme'
 import { ThemeProvider } from '@mui/material/styles'
 import { QueryClientProvider } from '@tanstack/react-query'
@@ -17,6 +17,7 @@ import { useHideInitHtmlElements } from '@features/init_load/useHideInitHtmlElem
 import { useOnDragOnDrop } from '@features/upload/useOnDragOnDrop'
 import { useRemoveThirdPartyCookies } from '@features/init_load/useRemoveThirdPartyCookies'
 import { instance } from '@shared/instance'
+import { store } from '@shared/lib/redux'
 
 export const App = (): React.JSX.Element => {
   useLogoutIfAccessTokenExpired()

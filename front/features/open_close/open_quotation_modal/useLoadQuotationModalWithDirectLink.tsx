@@ -4,7 +4,7 @@ import {
   useGetQuotationMutation,
 } from '@entities/quotation'
 import type { QuotationFormValues } from '@entities/quotation/types'
-import { dispatch, getState } from '@lib_instances/store'
+import { dispatch, getState } from '@shared/lib/redux'
 import { useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 

@@ -1,4 +1,4 @@
-import { dispatch, getState } from '@lib_instances/store'
+import { dispatch, getState } from '@shared/lib/redux'
 import { getNumberFromString } from '@shared/utils/getNumberFromString'
 import { getTextContentFromHtml } from '@shared/utils/getTextContentFromHtml'
 import { quotationSlice } from '../quotationSlice'

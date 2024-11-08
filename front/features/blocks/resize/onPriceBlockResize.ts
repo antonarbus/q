@@ -1,4 +1,4 @@
-import { dispatch, getState } from '@lib_instances/store'
+import { dispatch, getState } from '@shared/lib/redux'
 import { quotationSlice } from '@entities/quotation'
 import type { OnBlockResizeStop } from '@shared/types/resizablePaper'
 

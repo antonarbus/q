@@ -3,7 +3,7 @@ import {
   useGetBookmarkMutation,
 } from '@entities/bookmark'
 import { bookmarkPosAtBlocks, quotationSlice } from '@entities/quotation'
-import { dispatch, getState } from '@lib_instances/store'
+import { dispatch, getState } from '@shared/lib/redux'
 import { notify } from '@shared/toast'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'

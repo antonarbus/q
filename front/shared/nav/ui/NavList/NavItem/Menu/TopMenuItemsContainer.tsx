@@ -1,9 +1,9 @@
-import { useSelectorTyped } from '@lib_instances/store'
+import { useSelector } from '@shared/lib/redux'
 import { BackMenuItem } from './MenuItem/BackMenuItem'
 import { CloseMenuItem } from './MenuItem/CloseMenuItem'
 
 export const TopMenuItemsContainer = (): React.JSX.Element => {
-  const isNestedMenu = useSelectorTyped(
+  const isNestedMenu = useSelector(
     (state) => state.nav.idsToNextMenuItems.length > 2,
   )
 

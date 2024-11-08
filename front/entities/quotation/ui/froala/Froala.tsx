@@ -1,4 +1,4 @@
-import { useSelectorTyped } from '@lib_instances/store'
+import { useSelector } from '@shared/lib/redux'
 import { Box } from '@mui/material'
 import { useRef } from 'react'
 import { FroalaProvider } from '../../providers/FroalaProvider'
@@ -24,7 +24,7 @@ export const Froala = (props: FroalaProps): React.JSX.Element => {
   const { blockIndex } = useBlock()
   const { froalaHeightRef } = useFixedHeightForAnimation({ froalaElementRef })
 
-  const isBlockFroala = useSelectorTyped(
+  const isBlockFroala = useSelector(
     (state) => state.quotation.blocks[blockIndex]?.isFroala ?? true,
   )
 

@@ -1,5 +1,5 @@
 import { apiUrl } from '@back/consts/apiUrl'
-import { getState } from '@lib_instances/store'
+import { getState } from '@shared/lib/redux'
 import { removeLoadingBar } from '@shared/lib/froala/removeLoadingBar'
 import type { FroalaEditor } from '@shared/types/froala'
 import { getFileSizeInMb } from '@shared/utils/getFileSizeInMb'

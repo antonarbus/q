@@ -9,7 +9,7 @@ import {
 } from '@features/open_close/open_bookmark_modal'
 import { useUnmount } from 'react-use'
 import { quotationSlice } from '@entities/quotation'
-import { dispatch } from '@lib_instances/store'
+import { dispatch } from '@shared/lib/redux'
 import { instance } from '@shared/instance'
 import { NameField } from '@shared/components/input_fields/NameField'
 import { CategoryField } from '@shared/components/input_fields/CategoryField'

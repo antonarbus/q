@@ -1,4 +1,4 @@
-import { useSelectorTyped, dispatch, getState } from '@lib_instances/store'
+import { useSelector, dispatch, getState } from '@shared/lib/redux'
 import isEqual from 'lodash.isequal'
 import { useEffect } from 'react'
 import { type CopyPlace, copySlice, getPastePlace } from '@entities/copy'
@@ -217,7 +217,7 @@ const movePasteTextBoqRow = (e: MouseEvent): void => {
 }
 
 export const useMovePasteText = (): void => {
-  const typeOfNextPasteItem = useSelectorTyped(
+  const typeOfNextPasteItem = useSelector(
     (state) => state.copy.items.at(0)?.type,
   )
 

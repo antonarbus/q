@@ -1,4 +1,4 @@
-import { dispatch, getState } from '@lib_instances/store'
+import { dispatch, getState } from '@shared/lib/redux'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { navSlice } from '../../../../../navSlice'

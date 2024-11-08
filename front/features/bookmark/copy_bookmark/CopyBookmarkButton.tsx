@@ -1,5 +1,5 @@
 import type { ReqBody } from '@back/api/bookmark/getBookmarkRouter'
-import { dispatch } from '@lib_instances/store'
+import { dispatch } from '@shared/lib/redux'
 import { IconButton, Tooltip } from '@mui/material'
 import { MdCopyAll } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'

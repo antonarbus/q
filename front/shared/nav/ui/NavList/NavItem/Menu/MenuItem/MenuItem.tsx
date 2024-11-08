@@ -1,4 +1,4 @@
-import { dispatch, useSelectorTyped } from '@lib_instances/store'
+import { dispatch, useSelector } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
 import { FaChevronRight } from 'react-icons/fa'
 import { useLocation } from 'react-router-dom'
@@ -25,7 +25,7 @@ export const MenuItem = ({
 }: Props): React.JSX.Element => {
   const location = useLocation()
 
-  const isHovered = useSelectorTyped(
+  const isHovered = useSelector(
     (state) => state.nav.menuItemHoverIndex === hoveredMenuItemIndex,
   )
 

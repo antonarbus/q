@@ -1,4 +1,4 @@
-import type { RootState } from '@lib_instances/store'
+import type { RootState } from '@shared/lib/redux'
 import { itemType } from '../../consts/itemType'
 
 export const selectIsLastBlock = (state: RootState): boolean =>

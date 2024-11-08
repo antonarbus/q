@@ -1,4 +1,4 @@
-import { useSelectorTyped } from '@lib_instances/store'
+import { useSelector } from '@shared/lib/redux'
 import { Box } from '@mui/material'
 import { VscPinned } from 'react-icons/vsc'
 import { selectBoqCellPin, useBlock, useRow } from '@entities/quotation'
@@ -14,7 +14,7 @@ export const Pin = ({ boqRowCellKey, onClick }: Props): React.ReactNode => {
   const { blockIndex } = useBlock()
   const { rowIndex } = useRow()
 
-  const pin = useSelectorTyped(
+  const pin = useSelector(
     selectBoqCellPin({ blockIndex, rowIndex, boqRowCellKey }),
   )
 

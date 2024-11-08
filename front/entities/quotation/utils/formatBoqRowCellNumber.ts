@@ -1,4 +1,4 @@
-import { dispatch } from '@lib_instances/store'
+import { dispatch } from '@shared/lib/redux'
 import { roundTo } from 'round-to'
 import type { FroalaEditorRef } from '@shared/types/froala'
 import { getStringWithNewFormattedNumber } from '@shared/utils/getStringWithNewFormattedNumber'

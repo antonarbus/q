@@ -1,4 +1,4 @@
-import { getState } from '@lib_instances/store'
+import { getState } from '@shared/lib/redux'
 import { useEffectOnce } from 'react-use'
 import { useSignal } from '@preact/signals-react'
 import { bookmarkPosAtBlocks } from '@entities/quotation'

@@ -1,4 +1,4 @@
-import { dispatch, getState } from '@lib_instances/store'
+import { dispatch, getState } from '@shared/lib/redux'
 import { backToQuotationRef } from '../refs/backToQuotationRef'
 import { navSlice } from '@shared/nav'
 

@@ -1,4 +1,4 @@
-import { useSelectorTyped } from '@lib_instances/store'
+import { useSelector } from '@shared/lib/redux'
 import { useUpdateEffect } from 'react-use'
 import { roundTo } from 'round-to'
 import {
@@ -14,7 +14,7 @@ export const useUpdateSubtotalPrice = (): void => {
   const { blockIndex } = useBlock()
   const { subTotalPriceEditorRef } = useBoq()
 
-  const isBlockFroala = useSelectorTyped(
+  const isBlockFroala = useSelector(
     (state) => state.quotation.blocks[blockIndex]?.isFroala,
   )
 

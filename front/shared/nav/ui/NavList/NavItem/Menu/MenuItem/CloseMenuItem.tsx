@@ -1,4 +1,4 @@
-import { dispatch, useSelectorTyped } from '@lib_instances/store'
+import { dispatch, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { createElement, type MouseEvent } from 'react'
 import { CgClose as CloseIcon } from 'react-icons/cg'
@@ -12,9 +12,7 @@ const closeIcon = createElement(CloseIcon, {})
 export const CloseMenuItem = (): React.JSX.Element => {
   const color = theme.colors.topMenuItem
 
-  const isHovered = useSelectorTyped(
-    (state) => state.nav.menuItemHoverIndex === 1,
-  )
+  const isHovered = useSelector((state) => state.nav.menuItemHoverIndex === 1)
 
   return (
     <MenuItemStyled

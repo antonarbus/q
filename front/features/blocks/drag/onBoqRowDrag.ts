@@ -1,5 +1,5 @@
 import type { DragEndEvent, DragStartEvent } from '@dnd-kit/core'
-import { dispatch } from '@lib_instances/store'
+import { dispatch } from '@shared/lib/redux'
 import { arrayMoveImmutable } from 'array-move'
 import { getBoqRowsFromStore, quotationSlice } from '@entities/quotation'
 

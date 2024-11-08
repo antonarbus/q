@@ -1,4 +1,4 @@
-import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
+import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import type { MouseEvent } from 'react'
 import { TbCut } from 'react-icons/tb'
@@ -18,8 +18,8 @@ import { getClosestPaperElementHtml } from '@shared/utils/htmlGetter/getClosestP
 
 export const CutBlockIcon = (): React.JSX.Element => {
   const { blockIndex } = useBlock()
-  const isBlockAlone = useSelectorTyped(selectIsLastBlock)
-  const isCuttable = useSelectorTyped((state) => state.copy.isCuttable)
+  const isBlockAlone = useSelector(selectIsLastBlock)
+  const isCuttable = useSelector((state) => state.copy.isCuttable)
   const disabled = isBlockAlone || !isCuttable
 
   return (

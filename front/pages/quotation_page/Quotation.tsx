@@ -1,4 +1,4 @@
-import { useSelectorTyped } from '@lib_instances/store'
+import { useSelector } from '@shared/lib/redux'
 import { Outlet } from 'react-router-dom'
 import { Blocks } from '@widgets/blocks'
 import { Info } from '@widgets/quotation/info'
@@ -11,7 +11,7 @@ import { arrayShapesEqualityFn } from '@shared/lib/redux/arrayShapesEqualityFn'
 export const Quotation = (): React.JSX.Element => {
   useLoadQuotation()
 
-  const blocks = useSelectorTyped(
+  const blocks = useSelector(
     (state) => state.quotation.blocks,
     arrayShapesEqualityFn,
   )

@@ -1,4 +1,4 @@
-import { dispatch } from '@lib_instances/store'
+import { dispatch } from '@shared/lib/redux'
 import { useEffectOnce } from 'react-use'
 import { copySlice } from '@entities/copy'
 import { isFroalaSignal, quotationSlice } from '@entities/quotation'

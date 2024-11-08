@@ -1,4 +1,4 @@
-import type { RootState } from '@lib_instances/store'
+import type { RootState } from '@shared/lib/redux'
 import { getBoqBlockFromStore } from '../getters/getBoqBlockFromStore'
 import type { BoqColumnKey } from '@entities/quotation/consts/boqColumnKey'
 

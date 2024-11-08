@@ -1,4 +1,4 @@
-import { getState } from '@lib_instances/store'
+import { getState } from '@shared/lib/redux'
 import { itemType } from '../../consts/itemType'
 import type { Column } from '../../types'
 import type { BoqColumnKey } from '@entities/quotation/consts/boqColumnKey'

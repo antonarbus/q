@@ -1,4 +1,4 @@
-import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
+import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { flushSync } from 'react-dom'
 import { GoTrash } from 'react-icons/go'
@@ -16,8 +16,8 @@ export const DeleteBoqRowIcon = (): React.JSX.Element => {
   const { blockIndex } = useBlock()
   const { rowIndex } = useRow()
 
-  const isLastBoqRow = useSelectorTyped(selectIsLastBoqRow({ blockIndex }))
-  const isDeletable = useSelectorTyped((state) => state.copy.isDeletable)
+  const isLastBoqRow = useSelector(selectIsLastBoqRow({ blockIndex }))
+  const isDeletable = useSelector((state) => state.copy.isDeletable)
   const disabled = isLastBoqRow || !isDeletable
 
   return (

@@ -1,4 +1,4 @@
-import { useSelectorTyped } from '@lib_instances/store'
+import { useSelector } from '@shared/lib/redux'
 import { Resizable, type ResizableProps } from 're-resizable'
 import { cls } from '@shared/consts/cls'
 import type {
@@ -29,7 +29,7 @@ export const ResizableBlockPaper = ({
 }: Props): React.JSX.Element => {
   const { blockIndex } = useBlock()
 
-  const width = useSelectorTyped(
+  const width = useSelector(
     (state) => state.quotation.blocks[blockIndex]?.width,
   )
 

@@ -4,7 +4,7 @@ import { PaperComponent } from './PaperComponent'
 import { renderInput } from './renderInput'
 import { renderOption } from './renderOption'
 import { useEffect } from 'react'
-import { useSelectorTyped } from '@lib_instances/store'
+import { useSelector } from '@shared/lib/redux'
 import { useGetBookmarksQuery } from '@entities/bookmark'
 import { useSignal } from '@preact/signals-react'
 import { useCopyBookmarkAtSearch } from '@features/bookmark/copy_bookmark'
@@ -24,7 +24,7 @@ export const Search = (): React.JSX.Element => {
 
   const inputValueSignal = useSignal('')
 
-  const email = useSelectorTyped((state) => state.user.email)
+  const email = useSelector((state) => state.user.email)
 
   useEffect(() => {
     if (email) {

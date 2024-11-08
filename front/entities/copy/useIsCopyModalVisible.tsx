@@ -1,7 +1,7 @@
-import { useSelectorTyped } from '@lib_instances/store'
+import { useSelector } from '@shared/lib/redux'
 
 export const useIsCopyModalVisible = (): boolean => {
-  const isCopyModalVisible = useSelectorTyped((state) => state.copy.isVisible)
+  const isCopyModalVisible = useSelector((state) => state.copy.isVisible)
 
   return isCopyModalVisible
 }

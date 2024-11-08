@@ -1,4 +1,4 @@
-import { getState } from '@lib_instances/store'
+import { getState } from '@shared/lib/redux'
 import { domToJpeg } from 'modern-screenshot'
 import { cls } from '@shared/consts/cls'
 import { createActor } from 'xstate'

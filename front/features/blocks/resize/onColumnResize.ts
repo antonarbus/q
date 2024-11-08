@@ -1,4 +1,4 @@
-import { dispatch } from '@lib_instances/store'
+import { dispatch } from '@shared/lib/redux'
 import { cls } from '@shared/consts/cls'
 import { quotationSlice, getBoqColumnFromStore } from '@entities/quotation'
 import type { BoqColumnKey } from '@entities/quotation/consts/boqColumnKey'

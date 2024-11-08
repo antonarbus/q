@@ -1,6 +1,6 @@
 import { getFromStore } from '@entities/quotation'
 import type { InfoFormValues } from '@entities/quotation/types'
-import { useSelectorTyped } from '@lib_instances/store'
+import { useSelector } from '@shared/lib/redux'
 import { useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 
@@ -11,7 +11,7 @@ type Props = {
 export const useLoadInfoModalOpenedWithDirectLink = ({
   infoFormValues,
 }: Props): void => {
-  const quotation = useSelectorTyped((state) => state.quotation)
+  const quotation = useSelector((state) => state.quotation)
   const { quotationId, bookmarkId } = useParams()
 
   useUpdateEffect(() => {

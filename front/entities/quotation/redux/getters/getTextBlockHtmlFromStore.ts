@@ -1,4 +1,4 @@
-import { getState } from '@lib_instances/store'
+import { getState } from '@shared/lib/redux'
 import { itemType } from '../../consts/itemType'
 
 type Props = {

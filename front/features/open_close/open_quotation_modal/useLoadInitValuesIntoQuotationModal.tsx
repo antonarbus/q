@@ -1,6 +1,6 @@
 import { getWhoQuotationSharedWithOption } from '@entities/quotation'
 import type { QuotationFormValues } from '@entities/quotation/types'
-import { getState } from '@lib_instances/store'
+import { getState } from '@shared/lib/redux'
 import { useEffectOnce } from 'react-use'
 
 type Props = {

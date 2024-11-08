@@ -1,4 +1,4 @@
-import { dispatch } from '@lib_instances/store'
+import { dispatch } from '@shared/lib/redux'
 import { cls } from '@shared/consts/cls'
 import { quotationSlice } from '../redux/quotationSlice'
 

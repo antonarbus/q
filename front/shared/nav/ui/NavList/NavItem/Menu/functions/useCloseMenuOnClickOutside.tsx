@@ -1,4 +1,4 @@
-import { dispatch } from '@lib_instances/store'
+import { dispatch } from '@shared/lib/redux'
 import { useEffect, type MutableRefObject } from 'react'
 import { didClickInsideThisElement } from '../../../../../../utils/isClickInsideThisElement'
 import { navSlice } from '../../../../../navSlice'

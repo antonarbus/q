@@ -9,7 +9,7 @@ import {
   useSensors,
 } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
-import { getState } from '@lib_instances/store'
+import { getState } from '@shared/lib/redux'
 import { onBlockDragEnd, onBlockDragStart } from '@features/blocks/drag'
 
 type Props = {

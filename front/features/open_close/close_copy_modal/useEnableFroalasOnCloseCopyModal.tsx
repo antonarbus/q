@@ -1,5 +1,5 @@
 import { quotationSlice } from '@entities/quotation'
-import { dispatch } from '@lib_instances/store'
+import { dispatch } from '@shared/lib/redux'
 import { useUnmount } from 'react-use'
 
 export const useEnableFroalasOnCloseCopyModal = (): void => {

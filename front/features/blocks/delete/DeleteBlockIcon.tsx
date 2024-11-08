@@ -1,4 +1,4 @@
-import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
+import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import type { MouseEvent } from 'react'
 import { GoTrash } from 'react-icons/go'
@@ -16,8 +16,8 @@ import { Tooltip } from '@mui/material'
 export const DeleteBlockIcon = (): React.JSX.Element => {
   const { blockIndex } = useBlock()
 
-  const isBlockAlone = useSelectorTyped(selectIsLastBlock)
-  const isDeletable = useSelectorTyped((state) => state.copy.isDeletable)
+  const isBlockAlone = useSelector(selectIsLastBlock)
+  const isDeletable = useSelector((state) => state.copy.isDeletable)
   const disabled = isBlockAlone || !isDeletable
 
   return (

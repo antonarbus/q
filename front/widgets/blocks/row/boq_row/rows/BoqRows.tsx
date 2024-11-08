@@ -1,4 +1,4 @@
-import { getState } from '@lib_instances/store'
+import { getState } from '@shared/lib/redux'
 import { hideBoqRowPinsOnRowBlur } from '@features/blocks/cell/pin'
 import { bookmarkPosAtBlocks, RowProvider } from '@entities/quotation'
 import { BoqRow } from './row/BoqRow'

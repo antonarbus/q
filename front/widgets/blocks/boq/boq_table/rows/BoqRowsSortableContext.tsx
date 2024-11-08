@@ -6,7 +6,7 @@ import {
   useSensors,
 } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
-import { useSelectorTyped } from '@lib_instances/store'
+import { useSelector } from '@shared/lib/redux'
 import { onBoqRowDragEnd, onBoqRowDragStart } from '@features/blocks/drag'
 import { selectBoqRows, useBlock } from '@entities/quotation'
 import { arrayShapesEqualityFn } from '@shared/lib/redux/arrayShapesEqualityFn'
@@ -20,7 +20,7 @@ export const BoqRowsSortableContext = ({
 }: Props): React.JSX.Element => {
   const { blockIndex } = useBlock()
 
-  const boqRows = useSelectorTyped(
+  const boqRows = useSelector(
     selectBoqRows({ blockIndex }),
     arrayShapesEqualityFn,
   )

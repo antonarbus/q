@@ -1,4 +1,4 @@
-import { useSelectorTyped } from '@lib_instances/store'
+import { useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import type { RefObject } from 'react'
 
@@ -8,8 +8,8 @@ type Props = {
 }
 
 export const NavLayout = (props: Props): React.JSX.Element => {
-  const mediaQueryWidth = useSelectorTyped((state) => state.nav.mediaQueryWidth)
-  const mediaEnabled = useSelectorTyped((state) => state.nav.mediaEnabled)
+  const mediaQueryWidth = useSelector((state) => state.nav.mediaQueryWidth)
+  const mediaEnabled = useSelector((state) => state.nav.mediaEnabled)
 
   return (
     <nav

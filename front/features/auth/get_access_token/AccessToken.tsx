@@ -1,5 +1,5 @@
 import type { JwtPayloadExtended } from '@back/services/jwt'
-import { dispatch } from '@lib_instances/store'
+import { dispatch } from '@shared/lib/redux'
 import { jwtDecode } from 'jwt-decode'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 import {

@@ -1,6 +1,6 @@
 import { useIsCopyModalVisible } from '@entities/copy'
 import { openQuotationInfoModal } from '@features/open_close/open_info_modal'
-import { useSelectorTyped } from '@lib_instances/store'
+import { useSelector } from '@shared/lib/redux'
 import { Box } from '@mui/material'
 import { FaInfoCircle } from 'react-icons/fa'
 
@@ -9,7 +9,7 @@ const DivForSymmetry = (): React.JSX.Element => (
 )
 
 export const Info = (): React.ReactNode => {
-  const quotationId = useSelectorTyped((state) => state.quotation.id)
+  const quotationId = useSelector((state) => state.quotation.id)
   const isCopyModalVisible = useIsCopyModalVisible()
   const disabled = isCopyModalVisible
 

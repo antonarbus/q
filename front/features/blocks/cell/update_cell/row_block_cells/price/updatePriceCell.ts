@@ -6,7 +6,7 @@ import {
 } from '@entities/quotation'
 import type { FroalaEditorRef } from '@shared/types/froala'
 import { updateRowBlockCellAtStore } from '@entities/quotation/redux/updaters/updateRowBlockCellAtStore'
-import { getState } from '@lib_instances/store'
+import { getState } from '@shared/lib/redux'
 import { updateRowBlockCellWithValue } from '@entities/quotation/utils/updateRowBlockCellWithValue'
 
 type Props = {

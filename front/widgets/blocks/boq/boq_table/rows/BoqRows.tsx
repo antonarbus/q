@@ -1,4 +1,4 @@
-import { useSelectorTyped } from '@lib_instances/store'
+import { useSelector } from '@shared/lib/redux'
 import { AnimatePresence } from 'framer-motion'
 import { hideBoqRowPinsOnRowBlur } from '@features/blocks/cell/pin'
 import {
@@ -19,7 +19,7 @@ import { arrayShapesEqualityFn } from '@shared/lib/redux/arrayShapesEqualityFn'
 export const BoqRows = (): React.JSX.Element => {
   const { blockIndex } = useBlock()
 
-  const boqRows = useSelectorTyped(
+  const boqRows = useSelector(
     selectBoqRows({ blockIndex }),
     arrayShapesEqualityFn,
   )

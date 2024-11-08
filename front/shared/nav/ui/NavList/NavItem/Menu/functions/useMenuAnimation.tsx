@@ -1,4 +1,4 @@
-import { dispatch } from '@lib_instances/store'
+import { dispatch } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { gsap } from 'gsap'
 import { useEffect, type RefObject } from 'react'

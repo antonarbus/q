@@ -1,4 +1,4 @@
-import type { RootState } from '@lib_instances/store'
+import type { RootState } from '@shared/lib/redux'
 import type { RowCellPin } from '../../types'
 import { getBoqRowFromStore } from '../getters/getBoqRowFromStore'
 import type { BoqRowCellKey } from '@entities/quotation/consts/boqRowCellKey'

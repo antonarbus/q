@@ -1,4 +1,4 @@
-import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
+import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import type { MouseEvent } from 'react'
 import { TbCut } from 'react-icons/tb'
@@ -18,9 +18,9 @@ import { getClosestRowHtml } from '@shared/utils/htmlGetter/getClosestRowHtml'
 export const CutBoqRowIcon = (): React.JSX.Element => {
   const { blockIndex } = useBlock()
   const { rowIndex } = useRow()
-  const isCopyable = useSelectorTyped((state) => state.copy.isCopyable)
-  const isLastBoqRow = useSelectorTyped(selectIsLastBoqRow({ blockIndex }))
-  const isDeletable = useSelectorTyped((state) => state.copy.isDeletable)
+  const isCopyable = useSelector((state) => state.copy.isCopyable)
+  const isLastBoqRow = useSelector(selectIsLastBoqRow({ blockIndex }))
+  const isDeletable = useSelector((state) => state.copy.isDeletable)
   const disabled = isLastBoqRow || !isDeletable || !isCopyable
 
   return (

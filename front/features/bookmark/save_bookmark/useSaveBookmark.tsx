@@ -1,4 +1,4 @@
-import { dispatch, getState } from '@lib_instances/store'
+import { dispatch, getState } from '@shared/lib/redux'
 import type { UseMutationResult } from '@tanstack/react-query'
 import { type RefObject, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'

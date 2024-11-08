@@ -1,4 +1,4 @@
-import { getState } from '@lib_instances/store'
+import { getState } from '@shared/lib/redux'
 import { useRef } from 'react'
 import { updatePriceTitleCell } from '@features/blocks/cell/update_cell'
 import { useBlock, Froala, itemType } from '@entities/quotation'

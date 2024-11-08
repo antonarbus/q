@@ -1,4 +1,4 @@
-import { dispatch, useSelectorTyped } from '@lib_instances/store'
+import { dispatch, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import type { MouseEvent } from 'react'
 import { FaChevronLeft } from 'react-icons/fa'
@@ -9,9 +9,7 @@ import { MenuItemStyled } from './MenuItemStyled'
 import { TextInMenu } from './TextInMenu'
 
 export const BackMenuItem = (): React.JSX.Element => {
-  const isHovered = useSelectorTyped(
-    (state) => state.nav.menuItemHoverIndex === 1,
-  )
+  const isHovered = useSelector((state) => state.nav.menuItemHoverIndex === 1)
 
   const color = theme.colors.topMenuItem
 

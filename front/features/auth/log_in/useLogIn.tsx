@@ -1,4 +1,4 @@
-import { dispatch } from '@lib_instances/store'
+import { dispatch } from '@shared/lib/redux'
 import type { Signal } from '@preact/signals-react'
 import type { UseMutationResult } from '@tanstack/react-query'
 import {

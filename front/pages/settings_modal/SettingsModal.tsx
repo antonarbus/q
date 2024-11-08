@@ -1,4 +1,4 @@
-import { getState } from '@lib_instances/store'
+import { getState } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { Settings } from '@mui/icons-material'
 import { Avatar, Box } from '@mui/material'

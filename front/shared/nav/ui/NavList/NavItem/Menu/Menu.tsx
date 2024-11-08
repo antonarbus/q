@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { dispatch, useSelectorTyped } from '@lib_instances/store'
+import { dispatch, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { useRef } from 'react'
 import { navSlice } from '../../../../navSlice'
@@ -59,11 +59,11 @@ export const Menu = (): React.JSX.Element => {
   const nextMenuRef = useRef<HTMLDivElement>(null)
   const fakeMenuRef = useRef<HTMLDivElement>(null)
 
-  const idsToNextMenuItems = useSelectorTyped(
+  const idsToNextMenuItems = useSelector(
     (state) => state.nav.idsToNextMenuItems,
   )
 
-  const idsToCurrentMenuItems = useSelectorTyped(
+  const idsToCurrentMenuItems = useSelector(
     (state) => state.nav.idsToCurrentMenuItems,
   )
 

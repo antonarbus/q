@@ -1,4 +1,4 @@
-import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
+import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
 import { MdCopyAll } from 'react-icons/md'
 import { copySlice } from '@entities/copy'
@@ -14,7 +14,7 @@ import { getClosestPaperElementHtml } from '@shared/utils/htmlGetter/getClosestP
 
 export const CopyBlockIcon = (): React.JSX.Element => {
   const { blockIndex } = useBlock()
-  const isCopyable = useSelectorTyped((state) => state.copy.isCopyable)
+  const isCopyable = useSelector((state) => state.copy.isCopyable)
   const disabled = !isCopyable
 
   return (

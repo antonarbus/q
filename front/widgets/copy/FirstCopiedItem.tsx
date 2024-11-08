@@ -1,4 +1,4 @@
-import { getState, useSelectorTyped } from '@lib_instances/store'
+import { getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { type Variants, AnimatePresence, motion } from 'framer-motion'
 import { containerPadding, containerWidth, itemMarginBottom } from './const'
@@ -53,8 +53,8 @@ const variants: Variants = {
 }
 
 export const FirstCopiedItem = (): React.JSX.Element | null => {
-  const items = useSelectorTyped((state) => state.copy.items)
-  const isCopying = useSelectorTyped((state) => state.copy.isCopying)
+  const items = useSelector((state) => state.copy.items)
+  const isCopying = useSelector((state) => state.copy.isCopying)
 
   const firstItem = items[0]
   const firstPreview = getState().copy.previews[0]

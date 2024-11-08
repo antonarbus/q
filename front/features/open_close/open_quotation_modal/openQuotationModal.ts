@@ -1,5 +1,5 @@
 import { instance } from '@shared/instance'
-import { getState } from '@lib_instances/store'
+import { getState } from '@shared/lib/redux'
 import { route } from '@shared/consts/route'
 import type { NavigateState } from '@shared/types/NavigateState'
 

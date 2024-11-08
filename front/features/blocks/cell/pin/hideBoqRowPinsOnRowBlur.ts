@@ -1,4 +1,4 @@
-import { dispatch } from '@lib_instances/store'
+import { dispatch } from '@shared/lib/redux'
 import type { FocusEvent } from 'react'
 import {
   boqRowCellKey,

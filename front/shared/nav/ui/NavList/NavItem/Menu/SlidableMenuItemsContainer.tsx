@@ -1,4 +1,4 @@
-import { useSelectorTyped } from '@lib_instances/store'
+import { useSelector } from '@shared/lib/redux'
 import type { RefObject } from 'react'
 import { selectMenuItemByIdsChainSelector } from './functions/selectMenuItemByIdsChainSelector'
 import { MenuItem } from './MenuItem'
@@ -14,9 +14,7 @@ export const SlidableMenuItemsContainer = ({
   idsToMenu,
   className,
 }: Props): React.JSX.Element => {
-  const menuItems = useSelectorTyped(
-    selectMenuItemByIdsChainSelector(idsToMenu),
-  )
+  const menuItems = useSelector(selectMenuItemByIdsChainSelector(idsToMenu))
 
   return (
     <div

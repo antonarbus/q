@@ -1,4 +1,4 @@
-import { getState, useSelectorTyped } from '@lib_instances/store'
+import { getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { type Variants, AnimatePresence, motion } from 'framer-motion'
 import { useRef } from 'react'
@@ -54,8 +54,8 @@ const variants: Variants = {
 }
 
 export const RestOfCopiedItems = (): React.JSX.Element | null => {
-  const items = useSelectorTyped((state) => state.copy.items)
-  const isCopying = useSelectorTyped((state) => state.copy.isCopying)
+  const items = useSelector((state) => state.copy.items)
+  const isCopying = useSelector((state) => state.copy.isCopying)
   const prevFirstItemHeightRef = useRef(0)
 
   const firstItem = items[0]

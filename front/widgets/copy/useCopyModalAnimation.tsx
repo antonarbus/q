@@ -1,4 +1,4 @@
-import { dispatch, useSelectorTyped } from '@lib_instances/store'
+import { dispatch, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { useAnimationControls, type AnimationControls } from 'framer-motion'
 import { useEffect } from 'react'
@@ -9,7 +9,7 @@ import { containerPadding, containerWidth } from './const'
 export const useCopyModalAnimation = (): AnimationControls => {
   const copyModalAnimationControls = useAnimationControls()
   const isFirstMount = useFirstMountState()
-  const items = useSelectorTyped((state) => state.copy.items)
+  const items = useSelector((state) => state.copy.items)
 
   useEffect(() => {
     const newHeight = items.reduce((accumulator, item) => {

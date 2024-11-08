@@ -1,4 +1,4 @@
-import { dispatch } from '@lib_instances/store'
+import { dispatch } from '@shared/lib/redux'
 import { navSlice, type MenuItemType } from '@shared/nav'
 import { useEffectOnce } from 'react-use'
 

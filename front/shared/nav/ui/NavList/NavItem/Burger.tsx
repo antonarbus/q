@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { dispatch, useSelectorTyped } from '@lib_instances/store'
+import { dispatch, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { Fade as BurgerIcon } from 'hamburger-react'
 import { navSlice } from '../../../navSlice'
@@ -18,9 +18,9 @@ const BurgerContainer = styled.div<Props>`
 `
 
 export const Burger = (): React.JSX.Element => {
-  const isOpen = useSelectorTyped((state) => state.nav.burger.isOpen)
+  const isOpen = useSelector((state) => state.nav.burger.isOpen)
 
-  const screenWidthWhenShowBurger = useSelectorTyped(
+  const screenWidthWhenShowBurger = useSelector(
     (state) => state.nav.mediaQueryWidth.burger,
   )
 

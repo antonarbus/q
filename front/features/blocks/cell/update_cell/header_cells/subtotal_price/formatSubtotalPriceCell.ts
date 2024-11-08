@@ -1,4 +1,4 @@
-import { dispatch } from '@lib_instances/store'
+import { dispatch } from '@shared/lib/redux'
 import { roundTo } from 'round-to'
 import { getBoqBlockFromStore, quotationSlice } from '@entities/quotation'
 import type { FroalaEditorRef } from '@shared/types/froala'

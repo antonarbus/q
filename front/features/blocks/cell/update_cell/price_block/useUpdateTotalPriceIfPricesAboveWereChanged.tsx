@@ -1,4 +1,4 @@
-import { dispatch, getState, useSelectorTyped } from '@lib_instances/store'
+import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { useUpdateEffect } from 'react-use'
 import {
   getTotalPriceAbove,
@@ -18,7 +18,7 @@ export const useUpdateTotalPriceIfPricesAboveWereChanged = ({
   blockIndex,
   editorRef,
 }: Props): void => {
-  const price = useSelectorTyped((state) => {
+  const price = useSelector((state) => {
     const priceValue = getTotalPriceAbove({
       blockIndex,
       blocks: state.quotation.blocks,

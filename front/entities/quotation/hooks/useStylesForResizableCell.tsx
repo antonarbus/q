@@ -1,4 +1,4 @@
-import { useSelectorTyped } from '@lib_instances/store'
+import { useSelector } from '@shared/lib/redux'
 import type { CSSProperties } from 'react'
 import { selectColumnWidth } from '../redux/selectors/selectColumnWidth'
 import type { BoqColumnKey } from '../consts/boqColumnKey'
@@ -18,7 +18,7 @@ export const useStylesForResizableCell = ({
   boqColumnKey,
   minWidth = '100px',
 }: Props): Res => {
-  const columnWidth = useSelectorTyped(
+  const columnWidth = useSelector(
     selectColumnWidth({ blockIndex, boqColumnKey }),
   )
 

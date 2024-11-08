@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { getState, useSelectorTyped } from '@lib_instances/store'
+import { getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { useRef, type MouseEvent, type MutableRefObject } from 'react'
 import { TiArrowSortedDown } from 'react-icons/ti'
@@ -45,11 +45,11 @@ export const NavItem = ({ children, id }: Props): React.JSX.Element => {
   const shouldDisplayIcon = windowWidth < widthWhenIconsAreShown
 
   // needs to open only menu under clicked navItem, otherwise multiple menus are opened under all navItems
-  const shouldOpenThisMenu = useSelectorTyped(
+  const shouldOpenThisMenu = useSelector(
     (state) => state.nav.idsToCurrentMenuItems.at(1) === id,
   )
 
-  const navItem = useSelectorTyped((state) => {
+  const navItem = useSelector((state) => {
     const topNavLevel = state.nav.navStructure[0]
     if (topNavLevel === undefined) return undefined
     if (topNavLevel.menuItems === undefined) return undefined

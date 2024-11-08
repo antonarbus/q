@@ -1,4 +1,4 @@
-import { getState } from '@lib_instances/store'
+import { getState } from '@shared/lib/redux'
 import { itemType } from '../../consts/itemType'
 import { bookmarkPosAtBlocks } from '@entities/quotation/consts/bookmarkPosAtBlocks'
 import type { BoqRowCellKey } from '@entities/quotation/consts/boqRowCellKey'

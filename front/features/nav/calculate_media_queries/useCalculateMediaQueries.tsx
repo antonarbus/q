@@ -1,4 +1,4 @@
-import { dispatch, useSelectorTyped } from '@lib_instances/store'
+import { dispatch, useSelector } from '@shared/lib/redux'
 import { useLayoutEffect, type RefObject } from 'react'
 import { useFirstMountState } from 'react-use'
 import { calcNavMediaQueryParams } from './calcNavMediaQueryParams'
@@ -11,8 +11,8 @@ type Props = {
 
 export const useCalculateMediaQueries = ({ navRef, logoRef }: Props): void => {
   const isFirstMount = useFirstMountState()
-  const navStructure = useSelectorTyped((state) => state.nav.navStructure)
-  const mediaEnabled = useSelectorTyped((state) => state.nav.mediaEnabled)
+  const navStructure = useSelector((state) => state.nav.navStructure)
+  const mediaEnabled = useSelector((state) => state.nav.mediaEnabled)
 
   useLayoutEffect(() => {
     // initial calculation of media query values

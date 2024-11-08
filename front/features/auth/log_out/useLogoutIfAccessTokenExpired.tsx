@@ -1,4 +1,4 @@
-import { dispatch } from '@lib_instances/store'
+import { dispatch } from '@shared/lib/redux'
 import { useUpdateEffect } from 'react-use'
 import { userSlice, accessTokenSignal } from '@entities/user'
 

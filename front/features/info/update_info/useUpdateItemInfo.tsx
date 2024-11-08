@@ -1,4 +1,4 @@
-import { dispatch } from '@lib_instances/store'
+import { dispatch } from '@shared/lib/redux'
 import { useSignalEffect } from '@preact/signals-react'
 import { quotationSlice } from '@entities/quotation'
 import type { InfoFormValues } from '@entities/quotation/types'

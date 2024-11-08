@@ -1,4 +1,4 @@
-import { useSelectorTyped } from '@lib_instances/store'
+import { useSelector } from '@shared/lib/redux'
 import { Resizable } from 're-resizable'
 import {
   onColumnResize,
@@ -23,7 +23,7 @@ export const ResizableColumn = ({
   boqColumnKey,
   minWidth,
 }: Props): React.JSX.Element => {
-  const colWidth = useSelectorTyped(
+  const colWidth = useSelector(
     selectColumnWidth({ blockIndex: 0, boqColumnKey }),
   )
 

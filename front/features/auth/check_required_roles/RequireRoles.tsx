@@ -1,4 +1,4 @@
-import { useSelectorTyped } from '@lib_instances/store'
+import { useSelector } from '@shared/lib/redux'
 import type { User } from '@entities/user'
 
 type Props = {
@@ -10,7 +10,7 @@ export const RequireRoles = ({
   requiredRoles,
   children,
 }: Props): React.ReactNode => {
-  const userRoles = useSelectorTyped((state) => state.user.roles)
+  const userRoles = useSelector((state) => state.user.roles)
 
   const haveRequiredRole = requiredRoles.some((role) =>
     userRoles.includes(role),
