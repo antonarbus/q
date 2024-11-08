@@ -1,4 +1,4 @@
-import { instance } from '@shared/instance'
+import { router } from '@shared/lib/router'
 import { dispatch } from '@shared/lib/redux'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
@@ -26,7 +26,7 @@ export function useLoadQuotation(): void {
     error,
   } = useGetQuotationMutation()
 
-  const quotationId = instance.router.state.matches.at(0)?.params.quotationId
+  const quotationId = router.state.matches.at(0)?.params.quotationId
   const location = useLocation()
 
   const quotationType = (location.state as QuotationLocationState)

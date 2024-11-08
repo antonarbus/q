@@ -8,7 +8,7 @@ import { OpenResetModalLink } from '@features/open_close/open_reset_modal'
 import { EmailField } from '@shared/components/input_fields/EmailField'
 import { FormModal } from '@shared/components/FormModal'
 import { PasswordField } from '@shared/components/input_fields/PasswordField'
-import { instance } from '@shared/instance'
+import { router } from '@shared/lib/router'
 
 export const LoginModal = (): React.JSX.Element => {
   const inputRef = useRef<HTMLDivElement>(null)
@@ -27,7 +27,7 @@ export const LoginModal = (): React.JSX.Element => {
     !isEmailOkSignal.value || passwordSignal.value === '' || isPending
 
   const navigateUp = (): void => {
-    void instance.router.navigate('..')
+    void router.navigate('..')
   }
 
   return (

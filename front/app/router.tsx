@@ -20,7 +20,7 @@ import { ResetPasswordModal } from '@pages/auth_reset_password_modal'
 import { Toast } from '@shared/toast'
 import { Footer } from '@widgets/footer'
 import { RequireRoles } from '@features/auth/check_required_roles'
-import { instance } from '@shared/instance'
+import { instantiateRouter } from '@shared/lib/router'
 
 const Quotation = React.lazy(async () => {
   return import('@pages/quotation_page')
@@ -188,4 +188,4 @@ const router = createBrowserRouter([
 
 export type Router = typeof router
 
-instance.router = router
+instantiateRouter(router)

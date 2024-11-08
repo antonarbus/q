@@ -1,4 +1,4 @@
-import { instance } from '@shared/instance'
+import { router } from '@shared/lib/router'
 import { getState } from '@shared/lib/redux'
 import { route } from '@shared/consts/route'
 import type { NavigateState } from '@shared/types/NavigateState'
@@ -10,14 +10,14 @@ export const openQuotationModal = (): void => {
   }
 
   if (!getState().user.email) {
-    void instance.router.navigate(`./${route.login}`, {
+    void router.navigate(`./${route.login}`, {
       state: navigateState,
     })
 
     return
   }
 
-  void instance.router.navigate(`./${route.save}`, {
+  void router.navigate(`./${route.save}`, {
     state: navigateState,
   })
 }

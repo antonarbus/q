@@ -1,4 +1,4 @@
-import { instance } from '@shared/instance'
+import { router } from '@shared/lib/router'
 import { route } from '@shared/consts/route'
 import type { NavigateState } from '@shared/types/NavigateState'
 
@@ -7,7 +7,7 @@ export const openRegisterModal = (): void => {
     shouldSlide: true,
   }
 
-  void instance.router.navigate(`../${route.register}`, {
+  void router.navigate(`../${route.register}`, {
     state: navigateState,
   })
 }

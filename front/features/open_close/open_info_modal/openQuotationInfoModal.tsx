@@ -1,6 +1,6 @@
-import { instance } from '@shared/instance'
+import { router } from '@shared/lib/router'
 import { route } from '@shared/consts/route'
 
 export const openQuotationInfoModal = (): void => {
-  void instance.router.navigate(`./${route.info}`)
+  void router.navigate(`./${route.info}`)
 }

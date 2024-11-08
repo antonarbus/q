@@ -3,7 +3,7 @@ import { BsInfo } from 'react-icons/bs'
 import { useParams } from 'react-router-dom'
 import { FormModal } from '@shared/components/FormModal'
 import { useUpdateItemInfo } from '@features/info/update_info'
-import { instance } from '@shared/instance'
+import { router } from '@shared/lib/router'
 import { useLoadInitValuesIntoInfoModal } from '@features/open_close/open_info_modal'
 import { useLoadInfoModalOpenedWithDirectLink } from '@features/open_close/open_info_modal/useLoadInfoModalOpenedWithDirectLink'
 import { NameField } from '@shared/components/input_fields/NameField'
@@ -22,7 +22,7 @@ export const InfoModal = (): React.ReactNode => {
   const { categories } = useCategories()
 
   const navigateUp = (): void => {
-    void instance.router.navigate('..')
+    void router.navigate('..')
   }
 
   return (

@@ -1,4 +1,4 @@
-import { instance } from '@shared/instance'
+import { router } from '@shared/lib/router'
 import { backToQuotationRef } from '@entities/quotation'
 import type { QuotationLocationState } from '.'
 
@@ -7,7 +7,7 @@ export const openQuotationPageAndLoadPrev = (): void => {
     quotationType: 'previous',
   }
 
-  void instance.router.navigate(`/${backToQuotationRef.current?.id ?? 'new'}`, {
+  void router.navigate(`/${backToQuotationRef.current?.id ?? 'new'}`, {
     state,
   })
 }

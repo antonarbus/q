@@ -1,4 +1,4 @@
-import { instance } from '@shared/instance'
+import { router } from '@shared/lib/router'
 import { route } from '@shared/consts/route'
 import { nanoid } from '@shared/lib/nanoid'
 import type { QuotationLocationState } from '.'
@@ -11,7 +11,7 @@ export const openQuotationPageAndLoadNew = (): void => {
 
   reLoadQuotationSignal.value = nanoid(5)
 
-  void instance.router.navigate(`/${route.new}`, {
+  void router.navigate(`/${route.new}`, {
     state,
   })
 }

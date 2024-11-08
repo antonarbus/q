@@ -8,7 +8,7 @@ import { ConfirmPasswordField } from '@shared/components/ConfirmPasswordField'
 import { EmailField } from '@shared/components/input_fields/EmailField'
 import { FormModal } from '@shared/components/FormModal'
 import { PasswordField } from '@shared/components/input_fields/PasswordField'
-import { instance } from '@shared/instance'
+import { router } from '@shared/lib/router'
 
 export const RegisterModal = (): React.JSX.Element => {
   const inputRef = useRef<HTMLDivElement>(null)
@@ -32,7 +32,7 @@ export const RegisterModal = (): React.JSX.Element => {
   })
 
   const navigateUp = (): void => {
-    void instance.router.navigate('..')
+    void router.navigate('..')
   }
 
   return (

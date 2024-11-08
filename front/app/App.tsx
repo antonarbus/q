@@ -18,6 +18,7 @@ import { useOnDragOnDrop } from '@features/upload/useOnDragOnDrop'
 import { useRemoveThirdPartyCookies } from '@features/init_load/useRemoveThirdPartyCookies'
 import { instance } from '@shared/instance'
 import { store } from '@shared/lib/redux'
+import { router } from '@shared/lib/router'
 
 export const App = (): React.JSX.Element => {
   useLogoutIfAccessTokenExpired()
@@ -30,7 +31,7 @@ export const App = (): React.JSX.Element => {
       <QueryClientProvider client={instance.reactQuery}>
         <ThemeProvider theme={themeClient}>
           <GlobalStyles />
-          <RouterProvider router={instance.router} />
+          <RouterProvider router={router} />
           <ReactQueryDevtools />
           <ReactQueryDevtoolsProductionHidden />
         </ThemeProvider>
