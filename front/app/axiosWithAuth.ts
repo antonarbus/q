@@ -3,7 +3,6 @@ import { headerName } from '@back/consts/headerName'
 import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
 import type { ResBody } from '@back/api/auth/getAccessTokenRouter'
 import { accessTokenSignal } from '@entities/user'
-import { instance } from '@shared/instance'
 import { initAccessTokenFetchingPromise } from '@features/auth/get_access_token/AccessToken'
 import { instantiateAxiosWithAuth } from '@shared/lib/axiosWithAuth'
 
