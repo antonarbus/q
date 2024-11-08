@@ -3,7 +3,7 @@ import { apiUrl } from '@back/consts/apiUrl'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import type { AxiosError, AxiosResponse } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
-import { instance } from '@shared/instance'
+import { axiosWithAuth } from '@shared/lib/axiosWithAuth'
 
 export const useGetBookmarkCategoriesQuery = (): UseQueryResult<
   ResBody,
@@ -17,12 +17,10 @@ export const useGetBookmarkCategoriesQuery = (): UseQueryResult<
     staleTime: 0,
     retry: 0,
     queryFn: async () => {
-      const res = await instance.axiosWithAuth<ResBody, AxiosResponse<ResBody>>(
-        {
-          url: apiUrl.getBookmarkCategories,
-          method: 'get',
-        },
-      )
+      const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
+        url: apiUrl.getBookmarkCategories,
+        method: 'get',
+      })
 
       return res.data
     },

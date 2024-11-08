@@ -5,6 +5,7 @@ import type { ResBody } from '@back/api/auth/getAccessTokenRouter'
 import { accessTokenSignal } from '@entities/user'
 import { instance } from '@shared/instance'
 import { initAccessTokenFetchingPromise } from '@features/auth/get_access_token/AccessToken'
+import { instantiateAxiosWithAuth } from '@shared/lib/axiosWithAuth'
 
 const axiosWithAuth = axios.create({ withCredentials: true })
 
@@ -66,4 +67,4 @@ axiosWithAuth.interceptors.response.use(
 
 export type AxiosWithAuth = typeof axiosWithAuth
 
-instance.axiosWithAuth = axiosWithAuth
+instantiateAxiosWithAuth(axiosWithAuth)

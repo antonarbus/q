@@ -3,7 +3,7 @@ import { AnimatePresence } from 'framer-motion'
 import { useEffectOnce } from 'react-use'
 import { Block } from '@widgets/blocks/Block'
 import { bookmarkPosAtBlocks, isFroalaSignal } from '@entities/quotation'
-import { arrayShapesEqualityFn } from '@shared/lib/redux/arrayShapesEqualityFn'
+import { arrayShapesEqualityFn } from '@shared/utils/arrayShapesEqualityFn'
 import { BookmarkFieldLayout } from './BookmarkFieldLayout'
 
 export const BookmarkField = (): React.ReactNode => {

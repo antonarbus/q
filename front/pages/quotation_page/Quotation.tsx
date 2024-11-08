@@ -6,7 +6,7 @@ import { Search } from '@widgets/quotation/search'
 import { useLoadQuotation } from '@features/quotation/load_quotation'
 import { BackgroundMessage } from '@entities/quotation'
 import { InfoAndSearchLayout } from './InfoAndSearchLayout'
-import { arrayShapesEqualityFn } from '@shared/lib/redux/arrayShapesEqualityFn'
+import { arrayShapesEqualityFn } from '@shared/utils/arrayShapesEqualityFn'
 
 export const Quotation = (): React.JSX.Element => {
   useLoadQuotation()

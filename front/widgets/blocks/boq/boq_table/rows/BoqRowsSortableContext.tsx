@@ -9,7 +9,7 @@ import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { useSelector } from '@shared/lib/redux'
 import { onBoqRowDragEnd, onBoqRowDragStart } from '@features/blocks/drag'
 import { selectBoqRows, useBlock } from '@entities/quotation'
-import { arrayShapesEqualityFn } from '@shared/lib/redux/arrayShapesEqualityFn'
+import { arrayShapesEqualityFn } from '@shared/utils/arrayShapesEqualityFn'
 
 type Props = {
   children: React.ReactNode

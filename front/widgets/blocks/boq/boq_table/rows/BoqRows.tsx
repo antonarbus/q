@@ -14,7 +14,7 @@ import { BoqPasteRowTextOverlay } from './row/BoqPasteRowTextOverlay'
 import { BoqRow } from './row/BoqRow'
 import { BoqRowAnimate } from './row/BoqRowAnimate'
 import { BoqRowSortable } from './row/BoqRowSortable'
-import { arrayShapesEqualityFn } from '@shared/lib/redux/arrayShapesEqualityFn'
+import { arrayShapesEqualityFn } from '@shared/utils/arrayShapesEqualityFn'
 
 export const BoqRows = (): React.JSX.Element => {
   const { blockIndex } = useBlock()
