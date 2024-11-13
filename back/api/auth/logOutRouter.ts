@@ -24,4 +24,6 @@ const logOut: RouterHandler = (req, res, next) => {
   }
 }
 
-logOutRouter.get('/', logOut)
+logOutRouter.get('/', (req, res, next) => {
+  void logOut(req, res, next)
+})

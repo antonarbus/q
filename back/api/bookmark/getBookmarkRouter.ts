@@ -31,7 +31,7 @@ const getBookmark: RouterHandler = async (req, res, next) => {
 
     const { email } = getUserFromRefreshTokenOrThrowUnauthorized(req)
 
-    const document = await BookmarkModel.findOne({ email, id }).lean()
+    const document = await BookmarkModel.findOne({ email, id })
 
     if (!document) {
       return res.status(httpStatus.notFound_404).json({ message: 'not found' })
