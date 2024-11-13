@@ -32,7 +32,6 @@ export default [
   },
   { settings: { react: { version: '18' } } },
   // pluginJs.configs.recommended,
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   pluginJs.configs.all,
   pluginReactConfig,
   // ...tseslint.configs.strictTypeChecked,
