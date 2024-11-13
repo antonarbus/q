@@ -18,11 +18,13 @@ import { useShowLoadingJumpingDots } from '@shared/lib/ag_grid/hooks/useShowLoad
 import { AgGridStyles } from '@shared/lib/ag_grid/styles/AgGridStyles'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/loading_dots_overlay'
 import type { UserPicked } from '@back/api/user/getUsersRouter'
+import { useRefetchDataOnEmailChange } from '@shared/lib/ag_grid/hooks/useRefetchDataOnEmailChange'
 
 export const UsersGrid = (): React.JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
-  const { data, isLoading, isFetching, isFetched } = useGetUsersQuery()
+  const { data, isLoading, isFetching, isFetched, refetch } = useGetUsersQuery()
   useDisableLoadingOverlayWhenItemsAreFetched({ isFetched })
+  useRefetchDataOnEmailChange({ refetch })
   useShowLoadingJumpingDots({ isLoading })
 
   return (
@@ -39,7 +41,6 @@ export const UsersGrid = (): React.JSX.Element => {
         suppressCellFocus
         suppressColumnVirtualisation
         enableCellTextSelection
-        reactiveCustomComponents={true}
         loadingOverlayComponent={LoadingTableOverlay}
         noRowsOverlayComponent={NoRowsTableOverlay}
         onGridReady={() => {

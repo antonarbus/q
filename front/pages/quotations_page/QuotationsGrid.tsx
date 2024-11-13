@@ -44,7 +44,6 @@ export const QuotationsGrid = (): React.JSX.Element => {
         suppressCellFocus
         suppressColumnVirtualisation
         enableCellTextSelection
-        reactiveCustomComponents={true}
         loadingOverlayComponent={LoadingTableOverlay}
         noRowsOverlayComponent={NoRowsTableOverlay}
         onGridReady={() => {
