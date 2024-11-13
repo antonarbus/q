@@ -1,5 +1,5 @@
 import { useSelector } from '@shared/lib/redux'
-import type { User } from '@entities/user'
+import { useGetAccessTokenQuery, type User } from '@entities/user'
 
 type Props = {
   requiredRoles: User['roles']
@@ -10,11 +10,30 @@ export const RequireRoles = ({
   requiredRoles,
   children,
 }: Props): React.ReactNode => {
+  const { isLoading } = useGetAccessTokenQuery()
+
   const userRoles = useSelector((state) => state.user.roles)
 
   const haveRequiredRole = requiredRoles.some((role) =>
     userRoles.includes(role),
   )
+
+  if (isLoading) {
+    return (
+      <div
+        style={{
+          position: 'relative',
+          top: '130px',
+          fontSize: '30px',
+          color: 'grey',
+          textAlign: 'center',
+          userSelect: 'none',
+        }}
+      >
+        Checking credentials...
+      </div>
+    )
+  }
 
   if (!haveRequiredRole) {
     return (
