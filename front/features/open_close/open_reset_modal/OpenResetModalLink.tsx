@@ -16,7 +16,9 @@ export const OpenResetModalLink = ({ modalRef }: Props): React.JSX.Element => {
       onClick={(e: React.MouseEvent): void => {
         e.preventDefault()
 
-        if (!modalRef.current) return
+        if (!modalRef.current) {
+          return
+        }
 
         const navigateState: NavigateState = {
           shouldSlide: true,

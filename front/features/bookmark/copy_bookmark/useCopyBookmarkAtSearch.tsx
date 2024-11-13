@@ -38,7 +38,9 @@ export const useCopyBookmarkAtSearch = (): Res => {
     if (isSuccess) {
       const { item } = bookmarkData
 
-      if (!item) return
+      if (!item) {
+        return
+      }
 
       isFroalaSignal.value = false
 

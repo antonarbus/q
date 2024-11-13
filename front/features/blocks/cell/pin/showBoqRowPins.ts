@@ -12,7 +12,10 @@ type Props = {
 
 export const showBoqRowPins = ({ blockIndex, rowIndex }: Props): void => {
   const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
-  if (boqRow === undefined) return
+
+  if (boqRow === undefined) {
+    return
+  }
 
   const isItemPricePinShown = boqRow.itemPrice.pin.isShown
 

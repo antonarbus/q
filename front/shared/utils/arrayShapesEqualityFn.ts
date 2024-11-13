@@ -13,13 +13,17 @@ export const arrayShapesEqualityFn: EqualityFn = (
 ): boolean => {
   const isDifferentLength = prev.length !== current.length
 
-  if (isDifferentLength) return false
+  if (isDifferentLength) {
+    return false
+  }
 
   const idsDoNotMatch = prev.some(
     (item: Obj, index: number) => prev[index]?.id !== current[index]?.id,
   )
 
-  if (idsDoNotMatch) return false
+  if (idsDoNotMatch) {
+    return false
+  }
 
   return true
 }

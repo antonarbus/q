@@ -14,7 +14,11 @@ export const getBoqCellFromStore = ({
   boqRowCellKey,
 }: Props): RowCell | undefined => {
   const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
-  if (boqRow === undefined) return
+
+  if (boqRow === undefined) {
+    return
+  }
+
   const boqRowCell = boqRow[boqRowCellKey]
 
   return boqRowCell

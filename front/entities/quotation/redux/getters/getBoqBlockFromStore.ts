@@ -11,7 +11,9 @@ export const getBoqBlockFromStore = ({
 }: Props): Boq | undefined => {
   const block = getState().quotation.blocks[blockIndex]
 
-  if (block?.type !== itemType.boq) return
+  if (block?.type !== itemType.boq) {
+    return
+  }
 
   return block
 }

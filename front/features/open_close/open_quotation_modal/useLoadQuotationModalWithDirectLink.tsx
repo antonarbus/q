@@ -22,14 +22,19 @@ export const useLoadQuotationModalWithDirectLink = ({
   useEffectOnce(() => {
     if (quotationId) {
       const quotationIsAlreadyLoaded = getState().quotation.id === quotationId
-      if (quotationIsAlreadyLoaded) return
+
+      if (quotationIsAlreadyLoaded) {
+        return
+      }
 
       loadQuotation({ id: quotationId })
     }
   })
 
   useUpdateEffect(() => {
-    if (!data?.quotation) return
+    if (!data?.quotation) {
+      return
+    }
 
     const quotation = data.quotation
 

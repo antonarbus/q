@@ -5,7 +5,9 @@ type Props = {
 }
 
 export const ProgressGridBar = ({ isShown }: Props): React.ReactNode => {
-  if (!isShown) return null
+  if (!isShown) {
+    return null
+  }
 
   return (
     <LinearProgress

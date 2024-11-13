@@ -54,7 +54,10 @@ export const usePressNavShortcut = ({ navStructure }: Props): void => {
     let keysBeingPressed: string[] = []
 
     window.addEventListener('keydown', (e) => {
-      if (!e.key) return
+      if (!e.key) {
+        return
+      }
+
       const keyPressed = e.key.toLowerCase()
       keysBeingPressed.push(keyPressed)
       keysBeingPressed = [...new Set(keysBeingPressed)].toSorted()

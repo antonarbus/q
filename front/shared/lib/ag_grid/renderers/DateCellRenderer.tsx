@@ -5,8 +5,13 @@ import { format } from 'date-fns'
 export const DateCellRenderer = (
   params: ICellRendererParams<unknown, Date>,
 ): React.ReactNode => {
-  if (params.value === undefined) return null
-  if (params.value === null) return null
+  if (params.value === undefined) {
+    return null
+  }
+
+  if (params.value === null) {
+    return null
+  }
 
   const date = format(params.value, 'dd.MM.yyyy')
   const time = format(params.value, 'HH:mm')

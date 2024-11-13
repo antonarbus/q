@@ -12,7 +12,9 @@ export const onPriceBlockResizeStop: OnBlockResizeStop = ({
   const width = parseInt(elementRef.style.width, 10)
   const prevItemWidth = getState().quotation.blocks[blockIndex]?.width
 
-  if (width === prevItemWidth) return
+  if (width === prevItemWidth) {
+    return
+  }
 
   dispatch(
     quotationSlice.actions.updateBlockWidthReducer({ blockIndex, width }),

@@ -7,7 +7,9 @@ export const config = {
     // we set NODE_ENV=development at package.json & Dockerfile.prod & deployment.yaml when launch a server
     // we set NODE_ENV only for potential usage by other packages for their own reasons
 
-    if (getEnvVar('NODE_ENV') === 'development') return 'development'
+    if (getEnvVar('NODE_ENV') === 'development') {
+      return 'development'
+    }
 
     return 'production'
   },
@@ -15,7 +17,9 @@ export const config = {
     // our code logic is not dependent on NODE_ENV, but on INSTALLATION env variable
     // INSTALLATION is also set at package.json & Dockerfile.prod & deployment.yaml
 
-    if (getEnvVar('INSTALLATION') === 'local') return 'local'
+    if (getEnvVar('INSTALLATION') === 'local') {
+      return 'local'
+    }
 
     return 'production'
   },
@@ -30,12 +34,16 @@ export const config = {
   front: {
     protocol: 'https',
     get hostname() {
-      if (config.installation === 'local') return 'localhost'
+      if (config.installation === 'local') {
+        return 'localhost'
+      }
 
       return 'sendmequotation.today'
     },
     get port() {
-      if (config.installation === 'local') return 3000
+      if (config.installation === 'local') {
+        return 3000
+      }
 
       return 443 // default, not specified at browser
     },

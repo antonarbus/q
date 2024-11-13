@@ -13,10 +13,15 @@ export const formatSubtotalPriceCell = ({
   blockIndex,
   subTotalPriceEditorRef,
 }: Props): void => {
-  if (subTotalPriceEditorRef.current === null) return
+  if (subTotalPriceEditorRef.current === null) {
+    return
+  }
 
   const boqBlock = getBoqBlockFromStore({ blockIndex })
-  if (boqBlock === undefined) return
+
+  if (boqBlock === undefined) {
+    return
+  }
 
   const value = boqBlock.boq.header.subTotalPrice.value
 
@@ -30,7 +35,9 @@ export const formatSubtotalPriceCell = ({
     newNumber: roundedValue,
   })
 
-  if (html === newHtml) return
+  if (html === newHtml) {
+    return
+  }
 
   dispatch(
     quotationSlice.actions.updateSubTotalPriceReducer({

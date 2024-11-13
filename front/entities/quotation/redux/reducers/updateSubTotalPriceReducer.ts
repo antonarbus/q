@@ -13,7 +13,9 @@ export const updateSubTotalPriceReducer = (
   const { blockIndex, html, value } = action.payload
   const boqBlock = getBoqBlockFromState({ blockIndex, state })
 
-  if (boqBlock === undefined) return
+  if (boqBlock === undefined) {
+    return
+  }
 
   boqBlock.boq.header.subTotalPrice.value = value
   boqBlock.boq.header.subTotalPrice.html = html

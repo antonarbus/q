@@ -187,14 +187,19 @@ export const navSlice = createSlice({
       const { exceptNavItemIdKeys = [] } = action.payload ?? {}
 
       const topLevelNavMenu = state.navStructure[0]
-      if (!topLevelNavMenu) return
+
+      if (!topLevelNavMenu) {
+        return
+      }
 
       const topNavItemsIds = topLevelNavMenu.menuItems?.map(
         (menuItem) => menuItem.id,
       ) as NavItemIdKey[]
 
       topNavItemsIds.forEach((id) => {
-        if (exceptNavItemIdKeys.includes(id)) return
+        if (exceptNavItemIdKeys.includes(id)) {
+          return
+        }
 
         setMenuItemPropValue({
           menu: state.navStructure,
@@ -216,14 +221,19 @@ export const navSlice = createSlice({
       const { exceptNavItemIdKeys = [] } = action.payload ?? {}
 
       const topLevelNavMenu = state.navStructure[0]
-      if (!topLevelNavMenu) return
+
+      if (!topLevelNavMenu) {
+        return
+      }
 
       const topNavItemsIds = topLevelNavMenu.menuItems?.map(
         (menuItem) => menuItem.id,
       ) as NavItemIdKey[]
 
       topNavItemsIds.forEach((id) => {
-        if (exceptNavItemIdKeys.includes(id)) return
+        if (exceptNavItemIdKeys.includes(id)) {
+          return
+        }
 
         setMenuItemPropValue({
           menu: state.navStructure,
@@ -303,7 +313,10 @@ export const navSlice = createSlice({
     },
     removeUnderlineFromTopNav: (state) => {
       const topLevelNavMenu = state.navStructure[0]
-      if (!topLevelNavMenu) return
+
+      if (!topLevelNavMenu) {
+        return
+      }
 
       const topNavItemsIds = topLevelNavMenu.menuItems?.map(
         (menuItem) => menuItem.id,

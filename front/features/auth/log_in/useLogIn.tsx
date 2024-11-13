@@ -66,9 +66,17 @@ export const useLogIn = ({
         return
       }
 
-      if (message !== 'good password') return
-      if (!accessJwtToken) return
-      if (!email) return
+      if (message !== 'good password') {
+        return
+      }
+
+      if (!accessJwtToken) {
+        return
+      }
+
+      if (!email) {
+        return
+      }
 
       accessTokenSignal.value = accessJwtToken
 

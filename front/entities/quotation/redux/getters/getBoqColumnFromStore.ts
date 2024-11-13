@@ -14,7 +14,9 @@ export const getBoqColumnFromStore = ({
 }: Props): Column | undefined => {
   const block = getState().quotation.blocks[blockIndex]
 
-  if (block?.type !== itemType.boq) return
+  if (block?.type !== itemType.boq) {
+    return
+  }
 
   const column = block.boq.column[boqColumnKey]
 

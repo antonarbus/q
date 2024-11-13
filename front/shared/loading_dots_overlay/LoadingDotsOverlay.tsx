@@ -10,7 +10,9 @@ export const LoadingDotsOverlay = ({
   isShowing,
   title,
 }: Props): React.JSX.Element | null => {
-  if (loadingDotsOverlayTextSignal.value === null && !isShowing) return null
+  if (loadingDotsOverlayTextSignal.value === null && !isShowing) {
+    return null
+  }
 
   return (
     <div

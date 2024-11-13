@@ -106,7 +106,9 @@ export const useMenuAnimation = ({
    */
 
   const animateMenuHeight = (): void => {
-    if (!fakeMenuRef.current) return
+    if (!fakeMenuRef.current) {
+      return
+    }
 
     gsap.to(menuContainerRef.current, {
       duration: isFirstMount ? 0 : duration,

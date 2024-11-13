@@ -85,12 +85,29 @@ export default defineConfig(({ command, mode }) => {
         output: {
           // https://rollupjs.org/configuration-options/#output-manualchunks
           manualChunks: (id, { getModuleInfo }): string | undefined => {
-            if (id.includes('froala')) return 'qwerty'
-            if (id.includes('ag-grid')) return 'ag-grid'
-            if (id.includes('gsap')) return 'gsap'
-            if (id.includes('@mui')) return '@mui'
-            if (id.includes('@tanstack')) return '@tanstack'
-            if (id.includes('@remix')) return '@remix'
+            if (id.includes('froala')) {
+              return 'qwerty'
+            }
+
+            if (id.includes('ag-grid')) {
+              return 'ag-grid'
+            }
+
+            if (id.includes('gsap')) {
+              return 'gsap'
+            }
+
+            if (id.includes('@mui')) {
+              return '@mui'
+            }
+
+            if (id.includes('@tanstack')) {
+              return '@tanstack'
+            }
+
+            if (id.includes('@remix')) {
+              return '@remix'
+            }
           },
         },
       },

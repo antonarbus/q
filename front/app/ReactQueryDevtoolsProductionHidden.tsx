@@ -20,12 +20,26 @@ export const ReactQueryDevtoolsProductionHidden =
     }
 
     const activateReactQueryDevTools = (e: KeyboardEvent): void => {
-      if (!e.key) return
+      if (!e.key) {
+        return
+      }
+
       keysPressed.push(e.key)
-      if (!keysPressed.includes('r')) return
-      if (!keysPressed.includes('q')) return
+
+      if (!keysPressed.includes('r')) {
+        return
+      }
+
+      if (!keysPressed.includes('q')) {
+        return
+      }
+
       const pressedLongEnough = keysPressed.length > 10
-      if (!pressedLongEnough) return
+
+      if (!pressedLongEnough) {
+        return
+      }
+
       setShowDevtools(true)
       keysPressed = []
       window.removeEventListener('keydown', activateReactQueryDevTools)
@@ -45,7 +59,9 @@ export const ReactQueryDevtoolsProductionHidden =
       }, oneMin)
     })
 
-    if (!showDevtools) return null
+    if (!showDevtools) {
+      return null
+    }
 
     return (
       <Suspense fallback={null}>

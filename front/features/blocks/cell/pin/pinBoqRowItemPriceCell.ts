@@ -22,7 +22,9 @@ export const pinBoqRowItemPriceCell = ({
 
   const isPinned = itemPrice?.pin.isPinned
 
-  if (isPinned) return
+  if (isPinned) {
+    return
+  }
 
   dispatch(quotationSlice.actions.pinItemPriceReducer({ blockIndex, rowIndex }))
 }

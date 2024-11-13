@@ -141,8 +141,13 @@ export const useKeysForMenuNavigation = (): void => {
           .toLowerCase()
           .startsWith(e.key)
 
-        if (!isiKeySameAsFirstItemLetter) return false
-        if (i + 2 > hoveredMenuItemIndex) return true
+        if (!isiKeySameAsFirstItemLetter) {
+          return false
+        }
+
+        if (i + 2 > hoveredMenuItemIndex) {
+          return true
+        }
 
         return false
       })

@@ -12,7 +12,9 @@ export const updatePriceTitleReducer = (
   const { blockIndex, html } = action.payload
   const block = state.blocks[blockIndex]
 
-  if (block?.type !== itemType.price) return
+  if (block?.type !== itemType.price) {
+    return
+  }
 
   block.title.html = html
 }

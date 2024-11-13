@@ -27,7 +27,9 @@ export const OpenBookmarkModalButton = ({ id }: ReqBody): React.JSX.Element => {
 
       const block = item
 
-      if (!block) return
+      if (!block) {
+        return
+      }
 
       isFroalaSignal.value = false
 

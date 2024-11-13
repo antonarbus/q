@@ -51,8 +51,14 @@ export const NavItem = ({ children, id }: Props): React.JSX.Element => {
 
   const navItem = useSelector((state) => {
     const topNavLevel = state.nav.navStructure[0]
-    if (topNavLevel === undefined) return undefined
-    if (topNavLevel.menuItems === undefined) return undefined
+
+    if (topNavLevel === undefined) {
+      return undefined
+    }
+
+    if (topNavLevel.menuItems === undefined) {
+      return undefined
+    }
 
     return topNavLevel.menuItems.find((menuItem) => menuItem.id === id)
   })
@@ -140,9 +146,17 @@ export const NavItem = ({ children, id }: Props): React.JSX.Element => {
             e.preventDefault()
           }
 
-          if (isLoading) return
-          if (isSuccess) return
-          if (isError) return
+          if (isLoading) {
+            return
+          }
+
+          if (isSuccess) {
+            return
+          }
+
+          if (isError) {
+            return
+          }
 
           if (disabled) {
             e.preventDefault()

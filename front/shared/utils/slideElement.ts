@@ -13,8 +13,13 @@ export const slideElement = ({
   element,
   onSlideElementComplete,
 }: Props): void => {
-  if (isAnimationPrevented) return
-  if (element === null) return
+  if (isAnimationPrevented) {
+    return
+  }
+
+  if (element === null) {
+    return
+  }
 
   isAnimationPrevented = true
   const screenHeight = window.window.innerHeight

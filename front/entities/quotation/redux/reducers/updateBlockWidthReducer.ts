@@ -11,7 +11,9 @@ export const updateBlockWidthReducer = (
   const { blockIndex, width } = action.payload
   const block = state.blocks[blockIndex]
 
-  if (!block) return
+  if (!block) {
+    return
+  }
 
   block.width = width
 }

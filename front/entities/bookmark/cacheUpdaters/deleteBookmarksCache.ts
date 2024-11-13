@@ -8,7 +8,10 @@ export const deleteBookmarksCache = (): void => {
     { queryKey: [queryKey.getBookmarks] },
     (cacheData) => {
       const updatedCacheData = produce(cacheData, (draft) => {
-        if (draft?.bookmarks === undefined) return
+        if (draft?.bookmarks === undefined) {
+          return
+        }
+
         draft.bookmarks = []
       })
 

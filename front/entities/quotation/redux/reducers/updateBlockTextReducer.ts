@@ -12,8 +12,13 @@ export const updateBlockTextReducer = (
   const { blockIndex, html } = action.payload
   const block = state.blocks[blockIndex]
 
-  if (!block) return
-  if (block.type !== itemType.text) return
+  if (!block) {
+    return
+  }
+
+  if (block.type !== itemType.text) {
+    return
+  }
 
   block.text.html = html
 }

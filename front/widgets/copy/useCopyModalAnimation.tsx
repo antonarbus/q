@@ -13,8 +13,13 @@ export const useCopyModalAnimation = (): AnimationControls => {
 
   useEffect(() => {
     const newHeight = items.reduce((accumulator, item) => {
-      if (!item.width) return 0
-      if (!item.height) return 0
+      if (!item.width) {
+        return 0
+      }
+
+      if (!item.height) {
+        return 0
+      }
 
       const scaleFactor = (containerWidth - 2 * containerPadding) / item.width
 

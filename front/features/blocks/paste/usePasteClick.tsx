@@ -9,23 +9,34 @@ import { fixElementDimensionStyle } from '@shared/utils/fixElementDimensionStyle
 import { route } from '@shared/consts/route'
 
 const pasteItemOnClick = (): void => {
-  if (window.location.pathname.includes(route.bookmarks)) return
-  if (window.location.pathname.includes(route.quotations)) return
+  if (window.location.pathname.includes(route.bookmarks)) {
+    return
+  }
+
+  if (window.location.pathname.includes(route.quotations)) {
+    return
+  }
 
   const isPasteTextShown = getState().copy.isPasteTextShown
 
-  if (!isPasteTextShown) return
+  if (!isPasteTextShown) {
+    return
+  }
 
   dispatch(copySlice.actions.hidePasteText())
 
   const isPastable = getState().copy.isPastable
 
-  if (!isPastable) return
+  if (!isPastable) {
+    return
+  }
 
   const { id, pastePos } = getState().copy.place
   const topItemInCopyModal = getState().copy.items[0]
 
-  if (!topItemInCopyModal) return
+  if (!topItemInCopyModal) {
+    return
+  }
 
   if (pastePos === 'middle') {
     const elementToBeReplaced = document.getElementById(id)

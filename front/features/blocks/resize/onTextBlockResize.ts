@@ -41,7 +41,9 @@ export const onTextBlockResizeStop: OnBlockResizeStop = ({
   const prevItemWidth = getState().quotation.blocks[blockIndex]?.width
   dispatch(quotationSlice.actions.enableFroalaReducer({ blockIndex }))
 
-  if (width === prevItemWidth) return
+  if (width === prevItemWidth) {
+    return
+  }
 
   dispatch(
     quotationSlice.actions.updateBlockWidthReducer({ blockIndex, width }),

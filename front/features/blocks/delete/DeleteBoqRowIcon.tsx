@@ -40,7 +40,9 @@ export const DeleteBoqRowIcon = (): React.JSX.Element => {
             },
           }}
           onClick={(): void => {
-            if (disabled) return
+            if (disabled) {
+              return
+            }
 
             flushSync(() => {
               dispatch(

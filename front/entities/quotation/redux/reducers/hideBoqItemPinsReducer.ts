@@ -10,7 +10,10 @@ export const hideBoqItemPinsReducer = (
 ): void => {
   const { blockIndex } = action.payload
   const boqRowRows = getBoqRowsFromState({ blockIndex, state })
-  if (boqRowRows === undefined) return
+
+  if (boqRowRows === undefined) {
+    return
+  }
 
   boqRowRows.forEach((boqRow) => {
     boqRow.itemPrice.pin.isShown = false

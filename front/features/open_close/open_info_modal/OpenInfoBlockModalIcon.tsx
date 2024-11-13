@@ -31,12 +31,19 @@ export const OpenInfoBlockModalIcon = (): ReactNode => {
             touchAction: 'none',
           }}
           onClick={(e: MouseEvent): void => {
-            if (disabled) return
+            if (disabled) {
+              return
+            }
 
             const item = getBlockFromStore({ blockIndex })
 
-            if (!item) return
-            if (item.type === itemType.paste) return
+            if (!item) {
+              return
+            }
+
+            if (item.type === itemType.paste) {
+              return
+            }
 
             navigate(`./${route.info}/${item.id}`)
           }}

@@ -7,7 +7,9 @@ type Props = {
 }
 
 export const updateDescriptionCell = ({ editorRef }: Props): void => {
-  if (editorRef.current === null) return
+  if (editorRef.current === null) {
+    return
+  }
 
   updateRowBlockCellAtStore({
     boqRowCellKey: boqColumnKey.description,

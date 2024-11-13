@@ -57,7 +57,9 @@ export const Search = (): React.JSX.Element => {
         inputValueSignal.value = newInputValue
       }}
       getOptionLabel={(option) => {
-        if (typeof option === 'string') return option
+        if (typeof option === 'string') {
+          return option
+        }
 
         return (
           (option.name ?? '') + (option.category ?? '') + (option.desc ?? '')

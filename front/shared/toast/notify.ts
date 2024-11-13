@@ -46,10 +46,21 @@ export const notify = ({
     isIn,
     playToast,
   }: ToastTransitionProps) => React.JSX.Element) => {
-    if (transition === 'slide') return Slide
-    if (transition === 'bounce') return Bounce
-    if (transition === 'flip') return Flip
-    if (transition === 'zoom') return Zoom
+    if (transition === 'slide') {
+      return Slide
+    }
+
+    if (transition === 'bounce') {
+      return Bounce
+    }
+
+    if (transition === 'flip') {
+      return Flip
+    }
+
+    if (transition === 'zoom') {
+      return Zoom
+    }
 
     return Bounce
   }

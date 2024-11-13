@@ -25,7 +25,9 @@ export const updateSubtotalPriceCell = ({
   blockIndex,
   boqRowEditorRefs,
 }: Props): void => {
-  if (subTotalPriceEditorRef.current === null) return
+  if (subTotalPriceEditorRef.current === null) {
+    return
+  }
 
   const didContentChange = didBoqHeaderCellContentChange({
     editor: subTotalPriceEditorRef.current,
@@ -33,11 +35,15 @@ export const updateSubtotalPriceCell = ({
     boqHeaderKey: 'subTotalPrice',
   })
 
-  if (!didContentChange) return
+  if (!didContentChange) {
+    return
+  }
 
   const boqRows = getBoqRowsFromStore({ blockIndex })
 
-  if (boqRows === undefined) return
+  if (boqRows === undefined) {
+    return
+  }
 
   updateBoqHeaderCellAtStore({
     editorRef: subTotalPriceEditorRef,
@@ -62,7 +68,9 @@ export const updateSubtotalPriceCell = ({
     boqHeaderKey: 'subTotalPrice',
   })
 
-  if (subTotalPriceFromStore === undefined) return
+  if (subTotalPriceFromStore === undefined) {
+    return
+  }
 
   const newSubTotalPriceValue = subTotalPriceFromStore.value
 
@@ -134,7 +142,10 @@ export const updateSubtotalPriceCell = ({
     const isItemPricePinned = boqRow?.itemPrice.pin.isPinned
 
     if (isItemPricePinned) {
-      if (boqRow.itemPrice.value === 0) return
+      if (boqRow.itemPrice.value === 0) {
+        return
+      }
+
       const newQtyValue = boqRow.price.value / boqRow.itemPrice.value
       const newQtyValueRounded = roundTo(newQtyValue, 3)
 
@@ -150,7 +161,10 @@ export const updateSubtotalPriceCell = ({
     const isQtyPinned = boqRow?.qty.pin.isPinned
 
     if (isQtyPinned) {
-      if (boqRow.qty.value === 0) return
+      if (boqRow.qty.value === 0) {
+        return
+      }
+
       const newItemPriceValue = boqRow.price.value / boqRow.qty.value
       const newItemPriceValueRounded = roundTo(newItemPriceValue, 2)
 
@@ -165,7 +179,10 @@ export const updateSubtotalPriceCell = ({
   })
 
   const boqRowsUpdated = getBoqRowsFromStore({ blockIndex })
-  if (boqRowsUpdated === undefined) return
+
+  if (boqRowsUpdated === undefined) {
+    return
+  }
 
   const subTotalPriceValueNew: number = boqRowsUpdated.reduce(
     (accumulator: number, boqRow: Row) => {

@@ -12,17 +12,27 @@ export const placeCaretAtTheEndIfToolbarIsNotShown = ({
   froalaElementRef,
   editorRef,
 }: Props): void => {
-  if (froalaElementRef.current === null) return
-  if (!editorRef.current) return
+  if (froalaElementRef.current === null) {
+    return
+  }
+
+  if (!editorRef.current) {
+    return
+  }
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   const toolbarElement = editorRef.current.$tb['0'] as HTMLElement
   const isToolbarOpened = toolbarElement.style.display === 'block'
 
-  if (isToolbarOpened) return
+  if (isToolbarOpened) {
+    return
+  }
 
   const clickedElement = e.target
-  if (!(clickedElement instanceof HTMLElement)) return
+
+  if (!(clickedElement instanceof HTMLElement)) {
+    return
+  }
 
   const isFrBox = clickedElement.matches('.fr-box')
   const isFroalaWrapper = clickedElement.matches('.froala-wrapper')
@@ -30,7 +40,10 @@ export const placeCaretAtTheEndIfToolbarIsNotShown = ({
   if (isFrBox || isFroalaWrapper) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     const contentEditableElement = editorRef.current.$el.get(0)
-    if (!(contentEditableElement instanceof HTMLElement)) return
+
+    if (!(contentEditableElement instanceof HTMLElement)) {
+      return
+    }
 
     editorRef.current.selection.setAtEnd(contentEditableElement)
 

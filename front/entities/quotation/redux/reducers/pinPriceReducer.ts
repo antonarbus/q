@@ -19,6 +19,9 @@ export const pinPriceReducer = (
     state,
   })
 
-  if (priceCell === undefined) return
+  if (priceCell === undefined) {
+    return
+  }
+
   priceCell.pin.isPinned = !priceCell.pin.isPinned
 }

@@ -20,8 +20,14 @@ export const getMenuItemByIdsChain = (
 
   idsToCurrentMenuItems.forEach((id: string) => {
     if (id === 'burger') {
-      if (!navStructure[0]) return clicked
-      if (!navStructure[0].menuItems) return clicked
+      if (!navStructure[0]) {
+        return clicked
+      }
+
+      if (!navStructure[0].menuItems) {
+        return clicked
+      }
+
       clicked = navStructure[0].menuItems
 
       return clicked

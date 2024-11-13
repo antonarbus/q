@@ -23,7 +23,9 @@ export const CopyBookmarkButton = ({ id }: ReqBody): React.JSX.Element => {
     if (isSuccess) {
       const { item } = data
 
-      if (!item) return
+      if (!item) {
+        return
+      }
 
       isFroalaSignal.value = false
 

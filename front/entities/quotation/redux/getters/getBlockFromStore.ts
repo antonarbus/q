@@ -8,7 +8,9 @@ type Props = {
 export const getBlockFromStore = ({ blockIndex }: Props): Item | undefined => {
   const block = getState().quotation.blocks[blockIndex]
 
-  if (block === undefined) return
+  if (block === undefined) {
+    return
+  }
 
   return block
 }

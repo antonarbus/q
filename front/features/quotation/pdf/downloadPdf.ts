@@ -10,14 +10,20 @@ export const downloadPdf = async (): Promise<void> => {
   pdfLoadingIconActor.send({ type: 'show loading icon' })
 
   const blocksContainerElement = document.querySelector(`.${cls.blocks}`)
-  if (!(blocksContainerElement instanceof HTMLElement)) return
+
+  if (!(blocksContainerElement instanceof HTMLElement)) {
+    return
+  }
 
   const paperElements = document.querySelectorAll(`.${cls.paper}`)
 
   const maxPaperWidth =
     Array.from(paperElements).reduce((maxWidth, paperElement) => {
       const paperElementWidth = paperElement.clientWidth
-      if (paperElementWidth > maxWidth) return paperElementWidth
+
+      if (paperElementWidth > maxWidth) {
+        return paperElementWidth
+      }
 
       return maxWidth
     }, 0) + 40
@@ -29,7 +35,10 @@ export const downloadPdf = async (): Promise<void> => {
     quality: 1,
     scale: 1.5,
     onCloneNode: (blocksElement) => {
-      if (!(blocksElement instanceof HTMLElement)) return
+      if (!(blocksElement instanceof HTMLElement)) {
+        return
+      }
+
       blocksElement.style.display = 'inline-flex'
 
       const actionElements = blocksElement.querySelectorAll(

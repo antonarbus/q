@@ -5,7 +5,10 @@ export const selectMenuItemByIdsChainSelector =
   (idsToCurrentMenuItems: string[]) =>
   (state: RootState): MenuItemType[] => {
     const topLevelNavMenu = state.nav.navStructure[0]
-    if (!topLevelNavMenu) return state.nav.navStructure
+
+    if (!topLevelNavMenu) {
+      return state.nav.navStructure
+    }
 
     let clicked: MenuItemType[] = state.nav.navStructure
     let tempMenu: MenuItemType[] = state.nav.navStructure

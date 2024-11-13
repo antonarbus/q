@@ -30,8 +30,13 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
     const firstBlock = getState().quotation.blocks.at(bookmarkPosAtBlocks)
     const isOpenedFromButton = Boolean(firstBlock)
 
-    if (isOpenedFromButton) return
-    if (!bookmarkId) return
+    if (isOpenedFromButton) {
+      return
+    }
+
+    if (!bookmarkId) {
+      return
+    }
 
     loadBookmark({ id: bookmarkId })
   })

@@ -43,9 +43,13 @@ export const useResetPassword = ({ passwordSignal, modalRef }: Props): Res => {
       if (data.message === 'password was reset') {
         notify({ msg: 'Password was reset', theme: 'light' })
 
-        if (!data.accessJwtToken) return
+        if (!data.accessJwtToken) {
+          return
+        }
 
-        if (!data.email) return
+        if (!data.email) {
+          return
+        }
 
         accessTokenSignal.value = data.accessJwtToken
 

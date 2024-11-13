@@ -16,8 +16,13 @@ export const onBlockDragEnd =
     isFroalaSignal.value = true
     document.body.style.removeProperty('cursor')
 
-    if (!over) return
-    if (active.id === over.id) return
+    if (!over) {
+      return
+    }
+
+    if (active.id === over.id) {
+      return
+    }
 
     const oldIndex = itemIds.indexOf(String(active.id))
     const newIndex = itemIds.indexOf(String(over.id))

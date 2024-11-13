@@ -9,9 +9,16 @@ export const dateValueGetter =
   <ColumnKeys>({ columnDef }: Props<ColumnKeys>) =>
   (params: ValueGetterParams<ColumnKeys, string>): Date | null => {
     const dateIsoString = params.data?.[columnDef]
-    if (typeof dateIsoString !== 'string') return null
+
+    if (typeof dateIsoString !== 'string') {
+      return null
+    }
+
     const dateObj = new Date(dateIsoString)
-    if (!isValid(new Date(dateObj))) return null
+
+    if (!isValid(new Date(dateObj))) {
+      return null
+    }
 
     return dateObj
   }

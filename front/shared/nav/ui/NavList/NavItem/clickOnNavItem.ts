@@ -23,7 +23,9 @@ export const clickOnNavItem = ({
   const link = navItem?.link
   const func = navItem?.func
 
-  if (disabled) return
+  if (disabled) {
+    return
+  }
 
   if (link && func) {
     // just follow the link natively and call the func

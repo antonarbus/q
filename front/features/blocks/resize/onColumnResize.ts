@@ -37,11 +37,15 @@ export const onColumnResize = ({
   const width = headerColumnElement.clientWidth
   const column = getBoqColumnFromStore({ blockIndex, boqColumnKey })
 
-  if (column === undefined) return
+  if (column === undefined) {
+    return
+  }
 
   const didWidthChange = column.width !== width
 
-  if (!didWidthChange) return
+  if (!didWidthChange) {
+    return
+  }
 
   dispatch(
     quotationSlice.actions.updateColWidthReducer({

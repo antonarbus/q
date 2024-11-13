@@ -18,8 +18,13 @@ export const Pin = ({ boqRowCellKey, onClick }: Props): React.ReactNode => {
     selectBoqCellPin({ blockIndex, rowIndex, boqRowCellKey }),
   )
 
-  if (pin === undefined) return null
-  if (!pin.isShown) return null
+  if (pin === undefined) {
+    return null
+  }
+
+  if (!pin.isShown) {
+    return null
+  }
 
   return (
     <Box

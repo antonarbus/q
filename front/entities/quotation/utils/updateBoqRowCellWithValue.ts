@@ -22,10 +22,15 @@ export const updateBoqRowCellWithValue = ({
   boqRowCellKey,
   value,
 }: Props): void => {
-  if (editor === null) return
+  if (editor === null) {
+    return
+  }
 
   const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
-  if (boqRow === undefined) return
+
+  if (boqRow === undefined) {
+    return
+  }
 
   const priceTextContent = getTextContentFromHtml({
     html: boqRow[boqRowCellKey].html,

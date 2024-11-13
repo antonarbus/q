@@ -14,8 +14,13 @@ export const updateColWidthReducer = (
   const { blockIndex, width, boqColumnKey } = action.payload
   const block = state.blocks[blockIndex]
 
-  if (!block) return
-  if (block.type !== itemType.boq) return
+  if (!block) {
+    return
+  }
+
+  if (block.type !== itemType.boq) {
+    return
+  }
 
   block.boq.column[boqColumnKey].width = width
 }

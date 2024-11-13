@@ -37,12 +37,19 @@ export const OpenInfoBoqRowModalIcon = (): ReactNode => {
             touchAction: 'none',
           }}
           onClick={(e: MouseEvent): void => {
-            if (disabled) return
+            if (disabled) {
+              return
+            }
 
             const boqRow = getBoqRowFromStore({ rowIndex, blockIndex })
 
-            if (!boqRow) return
-            if (boqRow.type === boqRowKey.paste) return
+            if (!boqRow) {
+              return
+            }
+
+            if (boqRow.type === boqRowKey.paste) {
+              return
+            }
 
             navigate(`./${route.info}/${boqRow.id}`)
           }}

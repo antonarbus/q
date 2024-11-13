@@ -21,10 +21,15 @@ export const hideBoqRowPinsOnRowBlur = ({
   const elementReceivedFocus = e.relatedTarget
   const pinClicked = elementReceivedFocus?.classList.contains(cls.pin)
 
-  if (pinClicked) return
+  if (pinClicked) {
+    return
+  }
 
   const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
-  if (boqRow === undefined) return
+
+  if (boqRow === undefined) {
+    return
+  }
 
   const isItemPricePinShown = boqRow.itemPrice.pin.isShown
 

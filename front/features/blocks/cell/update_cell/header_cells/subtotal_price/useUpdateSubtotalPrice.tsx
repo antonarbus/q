@@ -19,12 +19,19 @@ export const useUpdateSubtotalPrice = (): void => {
   )
 
   useUpdateEffect(() => {
-    if (!isFroalaSignal.value) return
-    if (!isBlockFroala) return
+    if (!isFroalaSignal.value) {
+      return
+    }
+
+    if (!isBlockFroala) {
+      return
+    }
 
     const boqRows = getBoqRowsFromStore({ blockIndex })
 
-    if (boqRows === undefined) return
+    if (boqRows === undefined) {
+      return
+    }
 
     const subTotalPriceValueNew: number = boqRows.reduce(
       (accumulator: number, boqRow: Row) => {

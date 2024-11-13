@@ -30,7 +30,9 @@ export const OpenQuotationModalButton = ({
 
   useUpdateEffect(() => {
     if (isSuccess) {
-      if (!data.quotation) return
+      if (!data.quotation) {
+        return
+      }
 
       isFroalaSignal.value = false
 

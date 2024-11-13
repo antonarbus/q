@@ -9,13 +9,17 @@ export const getFromState = ({
   id,
   state,
 }: Props): Item | Quotation | undefined => {
-  if (state.id === id) return state
+  if (state.id === id) {
+    return state
+  }
 
   const blockWithSameId = state.blocks.find((block) => {
     return block.id === id
   })
 
-  if (blockWithSameId) return blockWithSameId
+  if (blockWithSameId) {
+    return blockWithSameId
+  }
 
   for (const block of state.blocks) {
     if (block.type === 'boq') {

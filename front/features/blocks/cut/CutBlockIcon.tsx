@@ -38,20 +38,39 @@ export const CutBlockIcon = (): React.JSX.Element => {
             cursor: disabled ? 'default' : 'pointer',
           }}
           onClick={(e: MouseEvent): void => {
-            if (disabled) return
+            if (disabled) {
+              return
+            }
 
             saveBlockHeightByIndex({ blockIndex })
 
             const blockToCut = getState().quotation.blocks[blockIndex]
-            if (!blockToCut) return
-            if (blockToCut.type === itemType.paste) return
+
+            if (!blockToCut) {
+              return
+            }
+
+            if (blockToCut.type === itemType.paste) {
+              return
+            }
 
             const clickedIconElement = e.target
-            if (!(clickedIconElement instanceof Element)) return
+
+            if (!(clickedIconElement instanceof Element)) {
+              return
+            }
+
             const blockElement = clickedIconElement.closest(`.${cls.block}`)
-            if (!(blockElement instanceof Element)) return
+
+            if (!(blockElement instanceof Element)) {
+              return
+            }
+
             const paperElement = blockElement.querySelector(`.${cls.paper}`)
-            if (!(paperElement instanceof HTMLElement)) return
+
+            if (!(paperElement instanceof HTMLElement)) {
+              return
+            }
 
             // width of animated element is changed for unknown reason, can't explain the issue, so let's fix it for animation purpose
             fixElementDimensionStyle({ element: paperElement })

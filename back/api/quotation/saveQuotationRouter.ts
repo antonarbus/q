@@ -108,9 +108,17 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
 
     let message: Message = 'saved'
 
-    if (isNewQuotation) message = 'saved'
-    if (isExistingYourQuotation) message = 'updated'
-    if (isExistingForeignQuotationSavedAsYourNew) message = 'copied and saved'
+    if (isNewQuotation) {
+      message = 'saved'
+    }
+
+    if (isExistingYourQuotation) {
+      message = 'updated'
+    }
+
+    if (isExistingForeignQuotationSavedAsYourNew) {
+      message = 'copied and saved'
+    }
 
     return res.status(httpStatus.success_200).json({
       message,

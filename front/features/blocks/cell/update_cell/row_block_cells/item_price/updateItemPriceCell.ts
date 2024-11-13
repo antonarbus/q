@@ -19,7 +19,9 @@ export const updateItemPriceCell = ({
   itemPriceCellEditorRef,
   priceCellEditorRef,
 }: Props): void => {
-  if (itemPriceCellEditorRef.current === null) return
+  if (itemPriceCellEditorRef.current === null) {
+    return
+  }
 
   updateRowBlockCellAtStore({
     boqRowCellKey: boqRowCellKey.itemPrice,
@@ -27,7 +29,10 @@ export const updateItemPriceCell = ({
   })
 
   const block = getState().quotation.blocks[bookmarkPosAtBlocks]
-  if (block?.type !== itemType.row) return
+
+  if (block?.type !== itemType.row) {
+    return
+  }
 
   const row = block
 

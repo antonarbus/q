@@ -20,6 +20,9 @@ export const showBoqRowCellPinReducer = (
     state,
   })
 
-  if (boqRowCell === undefined) return
+  if (boqRowCell === undefined) {
+    return
+  }
+
   boqRowCell.pin.isShown = true
 }

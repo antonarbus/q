@@ -9,6 +9,10 @@ export const disableFroalaReducer = (
 ): void => {
   const { blockIndex } = action.payload
   const block = state.blocks[blockIndex]
-  if (block === undefined) return
+
+  if (block === undefined) {
+    return
+  }
+
   block.isFroala = false
 }

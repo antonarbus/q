@@ -48,8 +48,13 @@ export const renderOption = ({
         return boldSubString
       }
 
-      if (option.desc === undefined) return '-'
-      if (option.desc) return option.desc
+      if (option.desc === undefined) {
+        return '-'
+      }
+
+      if (option.desc) {
+        return option.desc
+      }
 
       return '-'
     }

@@ -24,7 +24,10 @@ export const calcNavMediaQueryParams = (
       const elsToHideArr = Array.from(nav.querySelectorAll(elsToHideClass))
 
       elsToHideArr.forEach((el) => {
-        if (!(el instanceof HTMLElement)) return
+        if (!(el instanceof HTMLElement)) {
+          return
+        }
+
         el.style.display = 'none'
       })
 
@@ -35,7 +38,10 @@ export const calcNavMediaQueryParams = (
       )
 
       elsToShowArr.forEach((el) => {
-        if (!(el instanceof HTMLElement)) return
+        if (!(el instanceof HTMLElement)) {
+          return
+        }
+
         el.style.display = ''
       })
     }

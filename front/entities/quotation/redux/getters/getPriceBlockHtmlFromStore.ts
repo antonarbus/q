@@ -7,7 +7,11 @@ type Props = {
 
 export const getPriceBlockHtmlFromStore = ({ blockIndex }: Props): string => {
   const block = getState().quotation.blocks[blockIndex]
-  if (block?.type !== itemType.price) return ''
+
+  if (block?.type !== itemType.price) {
+    return ''
+  }
+
   const html = block.price.html
 
   return html

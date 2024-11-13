@@ -19,7 +19,9 @@ export const pinBoqRowQtyCell = ({ blockIndex, rowIndex }: Props): void => {
 
   const isPinned = itemPrice?.pin.isPinned
 
-  if (isPinned) return
+  if (isPinned) {
+    return
+  }
 
   dispatch(quotationSlice.actions.pinQtyReducer({ blockIndex, rowIndex }))
 }

@@ -3,10 +3,15 @@ import { cls } from '@shared/consts/cls'
 export const getPaperElementHtmlAtModal = (): string => {
   const paperElement = document.querySelector(`.${cls.formModal} .${cls.paper}`)
 
-  if (!(paperElement instanceof Element)) return 'element not found'
+  if (!(paperElement instanceof Element)) {
+    return 'element not found'
+  }
+
   const paperElementClone = paperElement.cloneNode(true)
 
-  if (!(paperElementClone instanceof Element)) return 'element not found'
+  if (!(paperElementClone instanceof Element)) {
+    return 'element not found'
+  }
 
   const elementsToRemove = paperElementClone.querySelectorAll(
     cls.cleanFromPaper,

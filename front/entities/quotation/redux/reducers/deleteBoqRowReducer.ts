@@ -11,7 +11,11 @@ export const deleteBoqRowReducer = (
 ): Quotation => {
   const { blockIndex, rowIndex } = action.payload
   const boqBlock = getBoqBlockFromState({ blockIndex, state })
-  if (boqBlock === undefined) return state
+
+  if (boqBlock === undefined) {
+    return state
+  }
+
   const boqRowsWithoutDeletedRow = boqBlock.boq.rows.toSpliced(rowIndex, 1)
   boqBlock.boq.rows = boqRowsWithoutDeletedRow
 

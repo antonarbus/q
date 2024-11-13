@@ -42,7 +42,10 @@ export const verifyAccessToken = (
     const salt = getEnvVarOrThrow('JWT_ACCESS_SECRET')
 
     const jwtPayload = jwt.verify(accessJwtToken, salt)
-    if (typeof jwtPayload === 'string') return undefined
+
+    if (typeof jwtPayload === 'string') {
+      return undefined
+    }
 
     return jwtPayload
   } catch {
@@ -57,7 +60,10 @@ export const verifyRefreshToken = (
     const salt = getEnvVarOrThrow('JWT_REFRESH_SECRET')
 
     const jwtPayload = jwt.verify(refreshJwtToken, salt)
-    if (typeof jwtPayload === 'string') return undefined
+
+    if (typeof jwtPayload === 'string') {
+      return undefined
+    }
 
     return jwtPayload
   } catch {

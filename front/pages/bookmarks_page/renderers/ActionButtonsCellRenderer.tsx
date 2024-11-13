@@ -8,7 +8,9 @@ import type { Quotation } from '@entities/quotation'
 type Params = ICellRendererParams<Partial<Quotation>>
 
 export const ActionButtonsCellRenderer = (params: Params): React.ReactNode => {
-  if (params.data?.id === undefined) return null
+  if (params.data?.id === undefined) {
+    return null
+  }
 
   return (
     <Box sx={{ display: 'flex', gap: '5px' }}>

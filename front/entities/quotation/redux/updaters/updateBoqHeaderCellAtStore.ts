@@ -21,15 +21,23 @@ export const updateBoqHeaderCellAtStore = ({
   blockIndex,
   boqHeaderKey,
 }: Props): Res => {
-  if (editorRef.current === null) return { didUpdate: false }
+  if (editorRef.current === null) {
+    return { didUpdate: false }
+  }
 
   const boqBlock = getBoqBlockFromStore({ blockIndex })
-  if (boqBlock === undefined) return { didUpdate: false }
+
+  if (boqBlock === undefined) {
+    return { didUpdate: false }
+  }
 
   const prevHtml = boqBlock.boq.header[boqHeaderKey].html
   const html = editorRef.current.html.get()
   const didTextChange = prevHtml !== html
-  if (!didTextChange) return { didUpdate: false }
+
+  if (!didTextChange) {
+    return { didUpdate: false }
+  }
 
   const cellTextContent = getTextContentFromHtml({ html })
 

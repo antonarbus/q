@@ -28,10 +28,15 @@ export const useUpdateTotalPriceIfPricesAboveWereChanged = ({
   })
 
   useUpdateEffect(() => {
-    if (editorRef.current === null) return
+    if (editorRef.current === null) {
+      return
+    }
 
     const priceBlock = getState().quotation.blocks[blockIndex]
-    if (priceBlock?.type !== itemType.price) return
+
+    if (priceBlock?.type !== itemType.price) {
+      return
+    }
 
     const updatedHtml = getStringWithNewFormattedNumber({
       string: priceBlock.price.html,

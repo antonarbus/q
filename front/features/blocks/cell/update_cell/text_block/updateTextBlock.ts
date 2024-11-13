@@ -8,15 +8,23 @@ type Props = {
 }
 
 export const updateTextBlock = ({ editorRef, blockIndex }: Props): void => {
-  if (editorRef.current === null) return
+  if (editorRef.current === null) {
+    return
+  }
 
   const block = getState().quotation.blocks[blockIndex]
-  if (block?.type !== itemType.text) return
+
+  if (block?.type !== itemType.text) {
+    return
+  }
 
   const prevHtml = block.text.html
   const html = editorRef.current.html.get()
   const didTextChange = prevHtml !== html
-  if (!didTextChange) return
+
+  if (!didTextChange) {
+    return
+  }
 
   dispatch(quotationSlice.actions.updateBlockTextReducer({ blockIndex, html }))
 }

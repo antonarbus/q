@@ -35,14 +35,21 @@ export const CopyBlockIcon = (): React.JSX.Element => {
             color: disabled ? '#acacac' : '#000',
           }}
           onClick={(e: MouseEvent): void => {
-            if (disabled) return
+            if (disabled) {
+              return
+            }
 
             saveBlockHeightByIndex({ blockIndex })
 
             const blockToCopy = getState().quotation.blocks[blockIndex]
 
-            if (!blockToCopy) return
-            if (blockToCopy.type === itemType.paste) return
+            if (!blockToCopy) {
+              return
+            }
+
+            if (blockToCopy.type === itemType.paste) {
+              return
+            }
 
             const html = getClosestPaperElementHtml(e)
             isFroalaSignal.value = false

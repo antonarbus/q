@@ -36,7 +36,9 @@ export const onBoqBlockResizeStart: OnBlockResizeStart = ({
 
   const block = getState().quotation.blocks[blockIndex]
 
-  if (block?.type !== itemType.boq) return
+  if (block?.type !== itemType.boq) {
+    return
+  }
 
   initNumberColumnWidth = block.boq.column.number.width
   initDescriptionColumnWidth = block.boq.column.description.width
@@ -72,7 +74,9 @@ export const onBoqBlockResize: OnBlockResize = ({
     boqColumnKey: boqColumnKey.description,
   })
 
-  if (descriptionColumn === undefined) return
+  if (descriptionColumn === undefined) {
+    return
+  }
 
   if (isShrinking) {
     if (descriptionColumn.width > columnMinWidth.description) {
@@ -99,7 +103,9 @@ export const onBoqBlockResize: OnBlockResize = ({
       boqColumnKey: boqColumnKey.number,
     })
 
-    if (numberColumn === undefined) return
+    if (numberColumn === undefined) {
+      return
+    }
 
     if (numberColumn.width > columnMinWidth.number) {
       numberColumnDeltaWidth = delta.width - descriptionColumnDeltaWidth
@@ -124,7 +130,9 @@ export const onBoqBlockResize: OnBlockResize = ({
       boqColumnKey: boqColumnKey.itemPrice,
     })
 
-    if (itemPriceColumn === undefined) return
+    if (itemPriceColumn === undefined) {
+      return
+    }
 
     if (itemPriceColumn.width > columnMinWidth.itemPrice) {
       itemPriceColumnDeltaWidth =
@@ -151,7 +159,9 @@ export const onBoqBlockResize: OnBlockResize = ({
       boqColumnKey: boqColumnKey.qty,
     })
 
-    if (qtyColumn === undefined) return
+    if (qtyColumn === undefined) {
+      return
+    }
 
     if (qtyColumn.width > columnMinWidth.qty) {
       qtyColumnDeltaWidth =
@@ -180,7 +190,9 @@ export const onBoqBlockResize: OnBlockResize = ({
       boqColumnKey: boqColumnKey.price,
     })
 
-    if (priceColumn === undefined) return
+    if (priceColumn === undefined) {
+      return
+    }
 
     if (priceColumn.width > columnMinWidth.price) {
       priceColumnDeltaWidth =
@@ -231,7 +243,9 @@ export const onBoqBlockResizeStop: OnBlockResizeStop = ({
 }) => {
   const descriptionHeaderElement = itemElement.querySelector('.th.description')
 
-  if (!(descriptionHeaderElement instanceof HTMLElement)) return
+  if (!(descriptionHeaderElement instanceof HTMLElement)) {
+    return
+  }
 
   const width = descriptionHeaderElement.clientWidth
 

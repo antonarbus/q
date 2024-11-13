@@ -8,8 +8,13 @@ type Props = {
 export const getTextBlockHtmlFromStore = ({ blockIndex }: Props): string => {
   const block = getState().quotation.blocks[blockIndex]
 
-  if (!block) return ''
-  if (block.type !== itemType.text) return ''
+  if (!block) {
+    return ''
+  }
+
+  if (block.type !== itemType.text) {
+    return ''
+  }
 
   return block.text.html
 }

@@ -18,7 +18,9 @@ export const updateQtyCell = ({
   qtyCellEditorRef,
   priceCellEditorRef,
 }: Props): void => {
-  if (qtyCellEditorRef.current === null) return
+  if (qtyCellEditorRef.current === null) {
+    return
+  }
 
   updateRowBlockCellAtStore({
     boqRowCellKey: boqRowCellKey.qty,
@@ -26,7 +28,10 @@ export const updateQtyCell = ({
   })
 
   const block = getState().quotation.blocks[bookmarkPosAtBlocks]
-  if (block?.type !== itemType.row) return
+
+  if (block?.type !== itemType.row) {
+    return
+  }
 
   const row = block
 

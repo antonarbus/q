@@ -56,9 +56,17 @@ export const MenuItem = ({
           e.preventDefault()
         }
 
-        if (isLoading) return
-        if (isSuccess) return
-        if (isError) return
+        if (isLoading) {
+          return
+        }
+
+        if (isSuccess) {
+          return
+        }
+
+        if (isError) {
+          return
+        }
 
         if (disabled) {
           e.preventDefault()

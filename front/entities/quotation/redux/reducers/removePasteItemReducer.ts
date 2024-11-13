@@ -12,7 +12,9 @@ export const removePasteItemReducer = (state: Quotation): void => {
   }
 
   state.blocks.forEach((block) => {
-    if (block.type !== itemType.boq) return
+    if (block.type !== itemType.boq) {
+      return
+    }
 
     const boqRows = block.boq.rows
 

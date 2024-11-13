@@ -20,6 +20,9 @@ export const hideBoqRowCellPinReducer = (
     state,
   })
 
-  if (boqRowCell === undefined) return
+  if (boqRowCell === undefined) {
+    return
+  }
+
   boqRowCell.pin.isShown = false
 }

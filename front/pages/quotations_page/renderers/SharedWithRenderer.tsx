@@ -41,7 +41,9 @@ export const SharedWithRenderer = (
   return (
     <>
       {params.value.map((email) => {
-        if (!params.value) return ''
+        if (!params.value) {
+          return ''
+        }
 
         return (
           <Tooltip

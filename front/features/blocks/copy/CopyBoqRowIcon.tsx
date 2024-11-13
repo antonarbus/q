@@ -34,13 +34,21 @@ export const CopyBoqRowIcon = (): React.JSX.Element => {
             color: disabled ? '#acacac' : '#000',
           }}
           onClick={(e: MouseEvent): void => {
-            if (disabled) return
+            if (disabled) {
+              return
+            }
 
             const clickedIconElement = e.target
-            if (!(clickedIconElement instanceof Element)) return
+
+            if (!(clickedIconElement instanceof Element)) {
+              return
+            }
 
             const boqRowElement = clickedIconElement.closest(`.${cls.boqRow}`)
-            if (!boqRowElement) return
+
+            if (!boqRowElement) {
+              return
+            }
 
             isFroalaSignal.value = false
 
@@ -54,7 +62,10 @@ export const CopyBoqRowIcon = (): React.JSX.Element => {
             )
 
             const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
-            if (boqRow === undefined) return
+
+            if (boqRow === undefined) {
+              return
+            }
 
             const html = getClosestRowHtml(e)
             const boqRowCloned = structuredClone(boqRow)

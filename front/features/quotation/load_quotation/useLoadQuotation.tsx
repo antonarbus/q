@@ -110,7 +110,9 @@ export function useLoadQuotation(): void {
     if (isSuccess) {
       const quotation = data.quotation
 
-      if (quotation === undefined) return
+      if (quotation === undefined) {
+        return
+      }
 
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       if (quotation.blocks === undefined) {

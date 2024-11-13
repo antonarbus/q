@@ -17,11 +17,15 @@ export const updateBoqCellReducer = (
 
   const block = state.blocks[blockIndex]
 
-  if (block?.type !== itemType.boq) return
+  if (block?.type !== itemType.boq) {
+    return
+  }
 
   const row = block.boq.rows[rowIndex]
 
-  if (row === undefined) return
+  if (row === undefined) {
+    return
+  }
 
   row[boqRowCellKey].html = html
   row[boqRowCellKey].value = value

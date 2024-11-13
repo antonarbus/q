@@ -10,7 +10,10 @@ export const selectBoqRows =
   ({ blockIndex }: Props) =>
   (state: RootState): Row[] => {
     const boqRows = getBoqRowsFromStore({ blockIndex })
-    if (boqRows === undefined) return []
+
+    if (boqRows === undefined) {
+      return []
+    }
 
     return boqRows
   }

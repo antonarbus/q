@@ -17,7 +17,9 @@ export const clickOnMenuItem = (
   const link = menuItem?.link
   const func = menuItem?.func
 
-  if (disabled) return
+  if (disabled) {
+    return
+  }
 
   if (link && func) {
     // follow the link natively and call the func

@@ -147,7 +147,9 @@ export const FormModal = ({
         >
           <AnimatePresence initial={false}>
             {Children.map(children, (child, index) => {
-              if (child === null) return null
+              if (child === null) {
+                return null
+              }
 
               return (
                 <motion.div

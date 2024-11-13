@@ -8,7 +8,10 @@ export const deleteQuotationsCache = (): void => {
     { queryKey: [queryKey.getQuotations] },
     (cacheData) => {
       const updatedCacheData = produce(cacheData, (draft) => {
-        if (draft?.quotations === undefined) return
+        if (draft?.quotations === undefined) {
+          return
+        }
+
         draft.quotations = []
       })
 

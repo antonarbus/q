@@ -3,7 +3,10 @@ import { notify } from '@shared/toast'
 
 export const remindToSaveQuotationOnInsert = (): void => {
   const isLogged = Boolean(getState().user.email)
-  if (!isLogged) return
+
+  if (!isLogged) {
+    return
+  }
 
   const id = getState().quotation.id
 

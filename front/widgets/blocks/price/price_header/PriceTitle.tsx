@@ -15,7 +15,10 @@ export const PriceTitle = (): React.JSX.Element => {
       htmlGetter={() => {
         const priceBlock = getState().quotation.blocks[blockIndex]
 
-        if (priceBlock?.type !== itemType.price) return ''
+        if (priceBlock?.type !== itemType.price) {
+          return ''
+        }
+
         const titleHtml = priceBlock.title.html
 
         return titleHtml

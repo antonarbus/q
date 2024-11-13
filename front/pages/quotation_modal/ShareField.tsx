@@ -172,7 +172,9 @@ export const ShareField = ({
                         }}
                         disabled={isButtonDisabledSignal.value}
                         onClick={() => {
-                          if (emailSignal.value === '') return
+                          if (emailSignal.value === '') {
+                            return
+                          }
 
                           sharedWithSignal.value = uniq([
                             ...(sharedWithSignal.value ?? []),

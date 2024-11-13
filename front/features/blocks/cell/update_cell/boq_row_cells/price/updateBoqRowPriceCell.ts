@@ -27,7 +27,9 @@ export const updateBoqRowPriceCell = ({
   blockIndex,
   rowIndex,
 }: Props): void => {
-  if (priceCellEditorRef.current === null) return
+  if (priceCellEditorRef.current === null) {
+    return
+  }
 
   const { didUpdate } = updateBoqRowCellAtStore({
     html: priceCellEditorRef.current.html.get(),
@@ -36,14 +38,19 @@ export const updateBoqRowPriceCell = ({
     boqRowCellKey: boqRowCellKey.price,
   })
 
-  if (!didUpdate) return
+  if (!didUpdate) {
+    return
+  }
 
   const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
 
   const isItemPricePinned = boqRow?.itemPrice.pin.isPinned
 
   if (isItemPricePinned) {
-    if (boqRow.itemPrice.value === 0) return
+    if (boqRow.itemPrice.value === 0) {
+      return
+    }
+
     const newQtyValue = boqRow.price.value / boqRow.itemPrice.value
     const newQtyValueRounded = roundTo(newQtyValue, 5)
 
@@ -59,7 +66,10 @@ export const updateBoqRowPriceCell = ({
   const isQtyPinned = boqRow?.qty.pin.isPinned
 
   if (isQtyPinned) {
-    if (boqRow.qty.value === 0) return
+    if (boqRow.qty.value === 0) {
+      return
+    }
+
     const newItemPriceValue = boqRow.price.value / boqRow.qty.value
     const newItemPriceValueRounded = roundTo(newItemPriceValue, 2)
 
@@ -75,7 +85,9 @@ export const updateBoqRowPriceCell = ({
   // update subTotalPrice
   const boqRows = getBoqRowsFromStore({ blockIndex })
 
-  if (boqRows === undefined) return
+  if (boqRows === undefined) {
+    return
+  }
 
   const subTotalPriceValueNew: number = boqRows.reduce(
     (accumulator: number, row: Row) => {

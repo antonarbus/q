@@ -21,7 +21,9 @@ export const updateNumberAtHtmlIncrementally = ({
   const steps = 100
   const valueDifference = newNumber - oldNumber
 
-  if (valueDifference === 0) return
+  if (valueDifference === 0) {
+    return
+  }
 
   const stepValue = valueDifference / steps
   const decimalPrecision = getDecimalPrecision({ valueDifference })

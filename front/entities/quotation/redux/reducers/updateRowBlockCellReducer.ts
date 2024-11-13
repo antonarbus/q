@@ -16,7 +16,9 @@ export const updateRowBlockCellReducer = (
 
   const block = state.blocks[bookmarkPosAtBlocks]
 
-  if (!block) return
+  if (!block) {
+    return
+  }
 
   if (block.type === itemType.row) {
     const row = block

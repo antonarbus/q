@@ -20,10 +20,15 @@ export const updateRowBlockCellWithValue = ({
   boqRowCellKey,
   value,
 }: Props): void => {
-  if (editor === null) return
+  if (editor === null) {
+    return
+  }
 
   const block = getState().quotation.blocks[bookmarkPosAtBlocks]
-  if (block?.type !== itemType.row) return
+
+  if (block?.type !== itemType.row) {
+    return
+  }
 
   const row = block
 

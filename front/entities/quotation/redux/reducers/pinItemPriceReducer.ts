@@ -19,7 +19,10 @@ export const pinItemPriceReducer = (
     state,
   })
 
-  if (itemPriceCell === undefined) return
+  if (itemPriceCell === undefined) {
+    return
+  }
+
   itemPriceCell.pin.isPinned = true
 
   const qtyCell = getBoqCellFromState({
@@ -29,6 +32,9 @@ export const pinItemPriceReducer = (
     state,
   })
 
-  if (qtyCell === undefined) return
+  if (qtyCell === undefined) {
+    return
+  }
+
   qtyCell.pin.isPinned = false
 }

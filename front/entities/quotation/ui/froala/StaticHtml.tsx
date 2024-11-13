@@ -15,13 +15,18 @@ export const StaticHtml = ({
 
   // insert html into element
   useEffectOnce(() => {
-    if (!staticHtmlRef.current) return
+    if (!staticHtmlRef.current) {
+      return
+    }
+
     staticHtmlRef.current.innerHTML = htmlGetter()
   })
 
   // save height after loading content
   useEffect(() => {
-    if (!staticHtmlRef.current?.clientHeight) return
+    if (!staticHtmlRef.current?.clientHeight) {
+      return
+    }
 
     froalaHeightRef.current =
       staticHtmlRef.current.getBoundingClientRect().height

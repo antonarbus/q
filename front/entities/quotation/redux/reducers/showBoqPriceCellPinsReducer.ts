@@ -10,7 +10,10 @@ export const showBoqPriceCellPinsReducer = (
 ): void => {
   const { blockIndex } = action.payload
   const boqRows = getBoqRowsFromState({ blockIndex, state })
-  if (boqRows === undefined) return
+
+  if (boqRows === undefined) {
+    return
+  }
 
   boqRows.forEach((boqRow) => {
     boqRow.price.pin.isShown = true

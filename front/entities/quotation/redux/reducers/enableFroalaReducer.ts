@@ -16,7 +16,11 @@ export const enableFroalaReducer = (
 
   if (enableSpecificFroalas) {
     const block = quotation.blocks[blockIndex]
-    if (block === undefined) return
+
+    if (block === undefined) {
+      return
+    }
+
     block.isFroala = true
 
     return

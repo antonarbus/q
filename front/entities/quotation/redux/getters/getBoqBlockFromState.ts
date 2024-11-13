@@ -11,7 +11,10 @@ export const getBoqBlockFromState = ({
   state,
 }: Props): Boq | undefined => {
   const block = state.blocks[blockIndex]
-  if (block?.type !== itemType.boq) return
+
+  if (block?.type !== itemType.boq) {
+    return
+  }
 
   return block
 }

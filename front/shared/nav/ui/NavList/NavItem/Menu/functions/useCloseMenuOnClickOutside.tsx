@@ -18,17 +18,30 @@ export const useCloseMenuOnClickOutside = ({
 
   const mouseDownHandler = (e: Event): void => {
     const menuContainer = menuContainerRef.current
-    if (!menuContainer) return
+
+    if (!menuContainer) {
+      return
+    }
+
     const navItem = menuContainerRef.current?.parentElement
-    if (!navItem) return
+
+    if (!navItem) {
+      return
+    }
+
     const clickedElement = e.target
-    if (!(clickedElement instanceof HTMLElement)) return
+
+    if (!(clickedElement instanceof HTMLElement)) {
+      return
+    }
 
     const isClickOnOpenedNavItem =
       didClickInsideThisElement({ clickedElement, thisElement: navItem }) &&
       !didClickInsideThisElement({ clickedElement, thisElement: menuContainer })
 
-    if (isClickOnOpenedNavItem) return
+    if (isClickOnOpenedNavItem) {
+      return
+    }
 
     if (
       !didClickInsideThisElement({ clickedElement, thisElement: menuContainer })

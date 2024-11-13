@@ -5,7 +5,10 @@ import { isFroalaSignal, quotationSlice } from '@entities/quotation'
 
 export const useExitCopyOnEsc = (): void => {
   const closeOnEsc = (e: KeyboardEvent): void => {
-    if (e.key !== 'Escape') return
+    if (e.key !== 'Escape') {
+      return
+    }
+
     dispatch(copySlice.actions.hideCopyModal())
     dispatch(quotationSlice.actions.removePasteItemReducer())
 

@@ -15,15 +15,23 @@ export const updateBoqColumnCellAtStore = ({
   blockIndex,
   boqColumnKey,
 }: Props): void => {
-  if (editorRef.current === null) return
+  if (editorRef.current === null) {
+    return
+  }
 
   const boqBlock = getBoqBlockFromStore({ blockIndex })
-  if (boqBlock === undefined) return
+
+  if (boqBlock === undefined) {
+    return
+  }
 
   const prevHtml = boqBlock.boq.column[boqColumnKey].html
   const html = editorRef.current.html.get()
   const didTextChange = prevHtml !== html
-  if (!didTextChange) return
+
+  if (!didTextChange) {
+    return
+  }
 
   dispatch(
     quotationSlice.actions.updateBoqColumnNameTextReducer({

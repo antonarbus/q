@@ -106,7 +106,9 @@ export const useSaveBookmark = ({
       `.${cls.formModal} .${cls.paper}`,
     )
 
-    if (!paperElement) return
+    if (!paperElement) {
+      return
+    }
 
     dispatch(
       quotationSlice.actions.updateBlockHeightReducer({

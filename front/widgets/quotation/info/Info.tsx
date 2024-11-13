@@ -13,13 +13,17 @@ export const Info = (): React.ReactNode => {
   const isCopyModalVisible = useIsCopyModalVisible()
   const disabled = isCopyModalVisible
 
-  if (!quotationId) return <DivForSymmetry />
+  if (!quotationId) {
+    return <DivForSymmetry />
+  }
 
   return (
     <Box
       component='button'
       onClick={() => {
-        if (disabled) return
+        if (disabled) {
+          return
+        }
 
         openQuotationInfoModal()
       }}

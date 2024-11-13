@@ -18,7 +18,9 @@ export const updatePriceCell = ({
   itemPriceCellEditorRef,
   priceCellEditorRef,
 }: Props): void => {
-  if (priceCellEditorRef.current === null) return
+  if (priceCellEditorRef.current === null) {
+    return
+  }
 
   updateRowBlockCellAtStore({
     boqRowCellKey: boqRowCellKey.price,
@@ -26,11 +28,16 @@ export const updatePriceCell = ({
   })
 
   const block = getState().quotation.blocks[bookmarkPosAtBlocks]
-  if (block?.type !== itemType.row) return
+
+  if (block?.type !== itemType.row) {
+    return
+  }
 
   const row = block
 
-  if (row.qty.value === 0) return
+  if (row.qty.value === 0) {
+    return
+  }
 
   const newItemPriceValue = row.price.value / row.qty.value
   const newItemPriceValueRounded = roundTo(newItemPriceValue, 2)

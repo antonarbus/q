@@ -23,14 +23,23 @@ export const validateBoqRowPrices = ({
   subTotalPriceEditorRef,
 }: Props): void => {
   const boqRows = getBoqRowsFromStore({ blockIndex })
-  if (boqRows === undefined) return
+
+  if (boqRows === undefined) {
+    return
+  }
 
   let didNotifyAboutInvalidPriceOnes = false
 
   boqRows.forEach((boqRow, rowIndex) => {
     const priceCellEditorRef = boqRowEditorRefs.at(rowIndex)
-    if (priceCellEditorRef === undefined) return
-    if (priceCellEditorRef.price.current === null) return
+
+    if (priceCellEditorRef === undefined) {
+      return
+    }
+
+    if (priceCellEditorRef.price.current === null) {
+      return
+    }
 
     const isPriceValid = isBoqRowPriceValid({
       html: priceCellEditorRef.price.current.html.get(),
@@ -60,7 +69,10 @@ export const validateBoqRowPrices = ({
       })
 
       const rows = getBoqRowsFromStore({ blockIndex })
-      if (rows === undefined) return
+
+      if (rows === undefined) {
+        return
+      }
 
       const subTotalPriceValueNew: number = rows.reduce(
         (accumulator: number, row: Row) => {

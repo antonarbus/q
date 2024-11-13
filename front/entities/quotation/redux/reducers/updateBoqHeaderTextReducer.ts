@@ -14,8 +14,13 @@ export const updateBoqHeaderTextReducer = (
   const { blockIndex, html, boqHeaderKey, value } = action.payload
   const block = state.blocks[blockIndex]
 
-  if (!block) return
-  if (block.type !== itemType.boq) return
+  if (!block) {
+    return
+  }
+
+  if (block.type !== itemType.boq) {
+    return
+  }
 
   block.boq.header[boqHeaderKey].html = html
   block.boq.header[boqHeaderKey].value = value

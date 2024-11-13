@@ -11,16 +11,23 @@ export const updatePriceTitleCell = ({
   editorRef,
   blockIndex,
 }: Props): void => {
-  if (editorRef.current === null) return
+  if (editorRef.current === null) {
+    return
+  }
 
   const priceBlock = getState().quotation.blocks[blockIndex]
-  if (priceBlock?.type !== itemType.price) return
+
+  if (priceBlock?.type !== itemType.price) {
+    return
+  }
 
   const prevHtml = priceBlock.title.html
   const html = editorRef.current.html.get()
   const didTextChange = prevHtml !== html
 
-  if (!didTextChange) return
+  if (!didTextChange) {
+    return
+  }
 
   dispatch(quotationSlice.actions.updatePriceTitleReducer({ blockIndex, html }))
 }

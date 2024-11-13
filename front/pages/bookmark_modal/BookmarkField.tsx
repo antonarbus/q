@@ -18,7 +18,9 @@ export const BookmarkField = (): React.ReactNode => {
 
   const bookmarkBlock = blocks.at(bookmarkPosAtBlocks)
 
-  if (!bookmarkBlock) return null
+  if (!bookmarkBlock) {
+    return null
+  }
 
   return (
     <BookmarkFieldLayout>

@@ -18,13 +18,22 @@ export const onBoqRowDragEnd =
     dispatch(quotationSlice.actions.enableFroalaReducer({ blockIndex }))
     document.body.style.removeProperty('cursor')
 
-    if (!over) return
-    if (active.id === over.id) return
+    if (!over) {
+      return
+    }
+
+    if (active.id === over.id) {
+      return
+    }
 
     const oldIndex = boqRowIds.indexOf(String(active.id))
     const newIndex = boqRowIds.indexOf(String(over.id))
     const boqRows = getBoqRowsFromStore({ blockIndex })
-    if (boqRows === undefined) return
+
+    if (boqRows === undefined) {
+      return
+    }
+
     const reOrderedBoqRows = arrayMoveImmutable(boqRows, oldIndex, newIndex)
 
     dispatch(

@@ -18,7 +18,9 @@ export const updateDescriptionCell = ({
   rowIndex,
   boqRowCellKey,
 }: Props): void => {
-  if (editorRef.current === null) return
+  if (editorRef.current === null) {
+    return
+  }
 
   const didContentChange = didBoqCellContentChange({
     editor: editorRef.current,
@@ -27,7 +29,9 @@ export const updateDescriptionCell = ({
     boqRowCellKey,
   })
 
-  if (!didContentChange) return
+  if (!didContentChange) {
+    return
+  }
 
   updateBoqRowCellAtStore({
     blockIndex,

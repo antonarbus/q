@@ -83,7 +83,9 @@ export const pasteItemReducer = (
 
   if (isBoqRow) {
     state.blocks.forEach((block) => {
-      if (block.type !== itemType.boq) return
+      if (block.type !== itemType.boq) {
+        return
+      }
 
       type SplicingSettings = {
         insertAtIndex: number
@@ -96,7 +98,9 @@ export const pasteItemReducer = (
       }
 
       block.boq.rows.forEach((boqRow, hoveredItemIndex) => {
-        if (boqRow.id !== id) return
+        if (boqRow.id !== id) {
+          return
+        }
 
         const getSpliceSettings = (): SplicingSettings => {
           const spliceParams: SplicingSettings = {

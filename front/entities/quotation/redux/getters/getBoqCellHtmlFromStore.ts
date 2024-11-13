@@ -15,11 +15,15 @@ export const getBoqCellHtmlFromStore = ({
 }: Props): string => {
   const block = getState().quotation.blocks[blockIndex]
 
-  if (block?.type !== itemType.boq) return ''
+  if (block?.type !== itemType.boq) {
+    return ''
+  }
 
   const row = block.boq.rows[rowIndex]
 
-  if (row === undefined) return ''
+  if (row === undefined) {
+    return ''
+  }
 
   const html = row[boqRowCellKey].html
 

@@ -6,7 +6,9 @@ import { BoqRow } from './row/BoqRow'
 export const BoqRows = (): React.ReactNode => {
   const block = getState().quotation.blocks[bookmarkPosAtBlocks]
 
-  if (block?.type !== 'row') return null
+  if (block?.type !== 'row') {
+    return null
+  }
 
   return (
     <RowProvider

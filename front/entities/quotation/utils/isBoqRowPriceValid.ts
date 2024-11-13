@@ -15,12 +15,19 @@ export const isBoqRowPriceValid = ({
   html,
 }: Props): boolean => {
   const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
-  if (boqRow === undefined) return true
+
+  if (boqRow === undefined) {
+    return true
+  }
+
   const priceValue = boqRow.price.value
   const calculatedPriceValue = boqRow.qty.value * boqRow.itemPrice.value
   const calculatedPriceValueRounded = roundTo(calculatedPriceValue, 2)
   const isPriceValueValid = priceValue === calculatedPriceValueRounded
-  if (!isPriceValueValid) return false
+
+  if (!isPriceValueValid) {
+    return false
+  }
 
   const cellTextContent = getTextContentFromHtml({ html })
 
@@ -31,7 +38,9 @@ export const isBoqRowPriceValid = ({
   const doesPriceValueMatchHtmlNumberValue =
     roundTo(cellValueFromHtml, 2) === calculatedPriceValueRounded
 
-  if (!doesPriceValueMatchHtmlNumberValue) return false
+  if (!doesPriceValueMatchHtmlNumberValue) {
+    return false
+  }
 
   return true
 }

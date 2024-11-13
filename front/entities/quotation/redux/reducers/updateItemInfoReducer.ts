@@ -16,7 +16,9 @@ export const updateItemInfoReducer = (
 
   const item = getFromState({ id, state })
 
-  if (item === undefined) return
+  if (item === undefined) {
+    return
+  }
 
   item.name = name
   item.category = category

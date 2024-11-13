@@ -11,7 +11,11 @@ export const selectColumnWidth =
   ({ blockIndex, boqColumnKey }: Props) =>
   (state: RootState): number => {
     const boqBlock = getBoqBlockFromStore({ blockIndex })
-    if (boqBlock === undefined) return 0
+
+    if (boqBlock === undefined) {
+      return 0
+    }
+
     const width = boqBlock.boq.column[boqColumnKey].width
 
     return width

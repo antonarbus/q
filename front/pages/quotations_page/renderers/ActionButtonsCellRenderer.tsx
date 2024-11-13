@@ -8,7 +8,9 @@ import type { QuotationPick } from '@back/api/quotation/getQuotationsRouter'
 type Params = ICellRendererParams<QuotationPick>
 
 export const ActionButtonsCellRenderer = (params: Params): React.ReactNode => {
-  if (params.data?.id === undefined) return null
+  if (params.data?.id === undefined) {
+    return null
+  }
 
   return (
     <Box sx={{ display: 'flex', gap: '5px' }}>

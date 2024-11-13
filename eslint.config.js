@@ -62,6 +62,8 @@ export default [
         { blankLine: 'always', prev: 'multiline-expression', next: '*' },
         { blankLine: 'always', prev: '*', next: 'multiline-expression' },
       ],
+      curly: 'error',
+      'no-else-return': 'error',
       'no-negated-condition': 'error',
       'no-implicit-coercion': 'error',
       eqeqeq: 'error',

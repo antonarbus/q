@@ -30,21 +30,34 @@ export const useActivate = (): Res => {
   } = useActivateMutation()
 
   useEffectOnce(() => {
-    if (activationKey === undefined) return
+    if (activationKey === undefined) {
+      return
+    }
+
     activate({ activationKey })
   })
 
   useUpdateEffect(() => {
-    if (!isSuccess) return
+    if (!isSuccess) {
+      return
+    }
 
     if (data.message === 'activated') {
       notify({ msg: 'Activated', theme: 'light' })
 
       const { accessJwtToken, email, roles } = data
 
-      if (!accessJwtToken) return
-      if (!email) return
-      if (!roles) return
+      if (!accessJwtToken) {
+        return
+      }
+
+      if (!email) {
+        return
+      }
+
+      if (!roles) {
+        return
+      }
 
       accessTokenSignal.value = accessJwtToken
       dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
@@ -64,7 +77,9 @@ export const useActivate = (): Res => {
   }, [isSuccess])
 
   useUpdateEffect(() => {
-    if (!isError) return
+    if (!isError) {
+      return
+    }
 
     if (error.response?.data.message === 'activation key not found') {
       notify({ msg: 'Activation key not found', type: 'warn', theme: 'light' })

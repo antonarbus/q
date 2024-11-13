@@ -90,7 +90,9 @@ const movePasteTextItem = (e: MouseEvent): void => {
   if (isNarrowGapUnderNav && !isPasteTextShown) {
     const firstBlock = getState().quotation.blocks[0]
 
-    if (!firstBlock) return
+    if (!firstBlock) {
+      return
+    }
 
     const pastePlace: CopyPlace = { pastePos: 'top', id: firstBlock.id }
     dispatch(copySlice.actions.updatePastePos(pastePlace))

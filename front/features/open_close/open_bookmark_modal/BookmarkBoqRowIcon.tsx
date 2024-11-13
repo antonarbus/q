@@ -39,7 +39,9 @@ export const BookmarkBoqRowIcon = (): ReactNode => {
             touchAction: 'none',
           }}
           onClick={(e: MouseEvent): void => {
-            if (disabled) return
+            if (disabled) {
+              return
+            }
 
             const email = getState().user.email
 
@@ -51,15 +53,26 @@ export const BookmarkBoqRowIcon = (): ReactNode => {
             }
 
             const clickedIconElement = e.target
-            if (!(clickedIconElement instanceof Element)) return
+
+            if (!(clickedIconElement instanceof Element)) {
+              return
+            }
 
             const boqRowElement = clickedIconElement.closest(`.${cls.boqRow}`)
-            if (!boqRowElement) return
+
+            if (!boqRowElement) {
+              return
+            }
 
             const boqRow = getBoqRowFromStore({ rowIndex, blockIndex })
 
-            if (!boqRow) return
-            if (boqRow.type === boqRowKey.paste) return
+            if (!boqRow) {
+              return
+            }
+
+            if (boqRow.type === boqRowKey.paste) {
+              return
+            }
 
             dispatch(
               quotationSlice.actions.loadBlockAtPosThousandReducer({

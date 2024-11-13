@@ -11,6 +11,10 @@ export const updateItemPreviewReducer = (
 ): void => {
   const { id, preview } = action.payload
   const item = getFromState({ id, state })
-  if (item === undefined) return
+
+  if (item === undefined) {
+    return
+  }
+
   item.preview = preview
 }

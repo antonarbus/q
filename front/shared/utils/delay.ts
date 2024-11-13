@@ -1,7 +1,10 @@
 export const syncDelay = (ms = 1000): void => {
   const end = Date.now() + ms
-  // eslint-disable-next-line no-continue
-  while (Date.now() < end) continue
+
+  while (Date.now() < end) {
+    // eslint-disable-next-line no-continue
+    continue
+  }
 }
 
 export const asyncDelay = async (ms = 1000): Promise<string> => {

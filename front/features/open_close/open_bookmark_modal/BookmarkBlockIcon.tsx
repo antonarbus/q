@@ -37,7 +37,9 @@ export const BookmarkBlockIcon = (): ReactNode => {
             touchAction: 'none',
           }}
           onClick={(e: MouseEvent): void => {
-            if (disabled) return
+            if (disabled) {
+              return
+            }
 
             const email = getState().user.email
 
@@ -50,8 +52,13 @@ export const BookmarkBlockIcon = (): ReactNode => {
 
             const block = getBlockFromStore({ blockIndex })
 
-            if (!block) return
-            if (block.type === itemType.paste) return
+            if (!block) {
+              return
+            }
+
+            if (block.type === itemType.paste) {
+              return
+            }
 
             dispatch(
               quotationSlice.actions.loadBlockAtPosThousandReducer({ block }),
