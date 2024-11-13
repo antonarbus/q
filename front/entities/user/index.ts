@@ -14,6 +14,7 @@ export { useActivateMutation } from './api/useActivateMutation'
 export { useGetAccessTokenQuery } from './api/useGetAccessTokenQuery'
 export { useGetFilesStatsQuery } from './api/useGetFilesStatsQuery'
 export { useGetUsersQuery } from './api/useGetUsersQuery'
+export { useDeleteUserMutation } from './api/useDeleteUserMutation'
 
 // types
 export type { User } from './types'

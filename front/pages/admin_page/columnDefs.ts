@@ -3,6 +3,7 @@ import { DateCellRenderer } from '@shared/lib/ag_grid/renderers/DateCellRenderer
 import { dateFilterComparator } from '@shared/lib/ag_grid/comparators/dateFilterComparator'
 import { dateValueGetter } from '@shared/lib/ag_grid/value_getter/dateValueGetter'
 import type { UserPicked } from '@back/api/user/getUsersRouter'
+import { ActionButtonsCellRenderer } from './renderers/ActionButtonsCellRenderer'
 
 export const defaultColDef: ColDef<UserPicked> = {
   headerClass: ['center'],
@@ -19,6 +20,20 @@ export const defaultColDef: ColDef<UserPicked> = {
 }
 
 export const columnDefs: ColDef<UserPicked>[] = [
+  {
+    cellRenderer: ActionButtonsCellRenderer,
+    width: 150,
+    minWidth: 150,
+    maxWidth: 150,
+    sortable: false,
+    filter: false,
+    resizable: false,
+    suppressMovable: true,
+    lockPosition: 'left',
+    pinned: 'left',
+    suppressColumnsToolPanel: true,
+    suppressNavigable: true,
+  },
   {
     field: 'email',
     headerName: 'email',

@@ -16,7 +16,7 @@ export const useGetUsersQuery = (): UseQueryResult<
     refetchOnReconnect: false,
     staleTime: 0,
     retry: 0,
-    enabled: false,
+    // enabled: false,
     queryFn: async ({ signal }) => {
       const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
         url: apiUrl.getUsers,

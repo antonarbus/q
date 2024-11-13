@@ -31,6 +31,7 @@ import { errorHandlerMiddleware } from './middleware/errorHandlerMiddleware'
 import type { Req, Res } from './types'
 import { config } from './config'
 import { getUsersRouter } from './api/user/getUsersRouter'
+import { deleteUserRouter } from './api/user/deleteUserRouter'
 
 const app = express()
 void connectToDb()
@@ -56,6 +57,7 @@ app.use(apiUrl.activate, activateRouter)
 app.use(apiUrl.getAccessToken, getAccessTokenRouter)
 // user
 app.use(apiUrl.getUsers, getUsersRouter)
+app.use(apiUrl.deleteUser, deleteUserRouter)
 // quotation
 app.use(apiUrl.saveQuotation, saveQuotationRouter)
 app.use(apiUrl.getQuotation, getQuotationRouter)

@@ -10,6 +10,7 @@ export const apiUrl = {
   resetPassword: '/api/reset-password',
   // user
   getUsers: '/api/get-users',
+  deleteUser: '/api/delete-user',
   // quotation
   saveQuotation: '/api/save-quotation',
   getQuotation: '/api/get-quotation',

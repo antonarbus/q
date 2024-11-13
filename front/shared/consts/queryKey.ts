@@ -9,6 +9,7 @@ export const queryKey = {
   getAccessToken: 'getAccessToken',
   // users
   getUsers: 'getUsers',
+  deleteUser: 'deleteUser',
   // quotation
   getQuotation: 'getQuotation',
   getQuotations: 'getQuotations',
