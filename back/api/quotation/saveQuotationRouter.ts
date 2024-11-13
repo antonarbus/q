@@ -129,6 +129,12 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
   }
 }
 
-saveQuotationRouter.post('/', verifyAccessTokenMiddleware, (req, res, next) => {
-  void saveQuotation(req, res, next)
-})
+saveQuotationRouter.post(
+  '/',
+  (req, res, next) => {
+    verifyAccessTokenMiddleware(req, res, next)
+  },
+  (req, res, next) => {
+    void saveQuotation(req, res, next)
+  },
+)

@@ -102,6 +102,12 @@ const saveBookmark: RouterHandler = async (req, res, next) => {
   }
 }
 
-saveBookmarkRouter.post('/', verifyAccessTokenMiddleware, (req, res, next) => {
-  void saveBookmark(req, res, next)
-})
+saveBookmarkRouter.post(
+  '/',
+  (req, res, next) => {
+    verifyAccessTokenMiddleware(req, res, next)
+  },
+  (req, res, next) => {
+    void saveBookmark(req, res, next)
+  },
+)

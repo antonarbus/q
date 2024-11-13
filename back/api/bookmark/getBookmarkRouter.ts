@@ -58,6 +58,12 @@ const getBookmark: RouterHandler = async (req, res, next) => {
   }
 }
 
-getBookmarkRouter.post('/', verifyAccessTokenMiddleware, (req, res, next) => {
-  void getBookmark(req, res, next)
-})
+getBookmarkRouter.post(
+  '/',
+  (req, res, next) => {
+    verifyAccessTokenMiddleware(req, res, next)
+  },
+  (req, res, next) => {
+    void getBookmark(req, res, next)
+  },
+)

@@ -63,7 +63,9 @@ const deleteQuotation: RouterHandler = async (req, res, next) => {
 
 deleteQuotationRouter.delete(
   '/',
-  verifyAccessTokenMiddleware,
+  (req, res, next) => {
+    verifyAccessTokenMiddleware(req, res, next)
+  },
   (req, res, next) => {
     void deleteQuotation(req, res, next)
   },

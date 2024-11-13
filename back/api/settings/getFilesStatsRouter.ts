@@ -48,6 +48,12 @@ const getFilesStats: RouterHandler = async (req, res, next) => {
   }
 }
 
-getFilesStatsRouter.get('/', verifyAccessTokenMiddleware, (req, res, next) => {
-  void getFilesStats(req, res, next)
-})
+getFilesStatsRouter.get(
+  '/',
+  (req, res, next) => {
+    verifyAccessTokenMiddleware(req, res, next)
+  },
+  (req, res, next) => {
+    void getFilesStats(req, res, next)
+  },
+)

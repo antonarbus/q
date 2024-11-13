@@ -41,8 +41,8 @@ app.use(cookieParser()) // middleware parses the Cookie header and populates req
 // app.set('trust proxy', true) // for app engine
 
 // dev
-app.get(apiUrl.root, (_req: Req, res: Res) => res.send('i am express.js'))
-app.get(apiUrl.api, (_req: Req, res: Res) => res.json({ message: '/api' }))
+app.get(apiUrl.root, (_req: Req, res: Res) => void res.send('i am express.js'))
+app.get(apiUrl.api, (_req: Req, res: Res) => void res.json({ message: '/api' }))
 app.use(apiUrl.test, testRouter)
 app.use(apiUrl.setBucketCors, setBucketCors)
 app.use(apiUrl.getBucketCors, getBucketCors)
@@ -73,6 +73,7 @@ app.use(apiUrl.upload, uploadRouter)
 // settings
 app.use(apiUrl.getFilesStats, getFilesStatsRouter)
 // error
+//@ts-expect-error: ts error which I do not understand
 app.use(errorHandlerMiddleware)
 
 app.listen(config.back.port, () => {

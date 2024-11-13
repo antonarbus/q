@@ -58,7 +58,9 @@ const deleteBookmark: RouterHandler = async (req, res, next) => {
 
 deleteBookmarkRouter.delete(
   '/',
-  verifyAccessTokenMiddleware,
+  (req, res, next) => {
+    verifyAccessTokenMiddleware(req, res, next)
+  },
   (req, res, next) => {
     void deleteBookmark(req, res, next)
   },

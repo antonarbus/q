@@ -36,7 +36,9 @@ const getBookmarkCategories: RouterHandler = async (req, res, next) => {
 
 getBookmarkCategoriesRouter.get(
   '/',
-  verifyAccessTokenMiddleware,
+  (req, res, next) => {
+    verifyAccessTokenMiddleware(req, res, next)
+  },
   (req, res, next) => {
     void getBookmarkCategories(req, res, next)
   },
