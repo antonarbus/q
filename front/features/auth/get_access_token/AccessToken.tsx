@@ -51,6 +51,7 @@ export const AccessToken = (): React.JSX.Element => {
       }
 
       const jwtPayload = jwtDecode<JwtPayloadExtended>(data.accessJwtToken)
+
       const { email, roles } = jwtPayload
 
       if (!email) {
