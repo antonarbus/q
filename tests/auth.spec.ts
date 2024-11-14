@@ -6,7 +6,7 @@ test.describe('nav bar for logged-in vs guest user', () => {
   test.use({ storageState: userFilePath.guest })
 
   test('log in & out', async ({ page }) => {
-    const email = 'test-user@fake-mail.abc'
+    const email = 'test-user@sendmequotation.today'
     const password = 'xxx'
 
     await page.goto(route.root)

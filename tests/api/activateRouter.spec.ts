@@ -17,7 +17,7 @@ test.describe('#activateRouter', () => {
 
   test.use({ baseURL: config.back.baseUrl })
 
-  const email = 'test-user@fake-mail.abc'
+  const email = 'test-user@sendmequotation.today'
 
   test('should return successful status if account had been already activated', async ({
     request,
