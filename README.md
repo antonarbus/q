@@ -69,16 +69,17 @@ A _slice_ consists of _segments_ to separate code by its technical nature, commo
 # Auth
 
 Authorization - checking for password correctness
+
 Authentication - checking if a user is the same as authorized initially
 
 (A) At registration we store at db email + hashed salted password +
-`refresh` jwt token with 30d validity which contains email & role payload
+`refresh` jwt token with 30d validity which contains email & role payload.
 
 (B) Client is authorized by comparing email & password's hash
 against stored email and hashed password at the login stage.
 
 (C) On successful authorization the server issues 15 min `access` jwt token and
-issues new `refresh` jwt token if pervious one is expired.
+rarely issues new `refresh` jwt token if pervious one is expired (ones per 30d).
 
 (D) `refresh` jwt token is needed for future user authentication to avoid
 asking for credentials on every login and protected http request.
@@ -96,25 +97,25 @@ If we do a request to a protected endpoint we just use `axiosWithAuth`
 instance to avoid attaching token manually.
 
 (I) At protected routes the `verifyTokenMiddleware` is used to check the `access` token.
-Verification is fast and does not require database. If the token is ok
+Verification is fast and does not involve database. If the token is ok
 then the request goes forward, otherwise en error response of status `401` with
 message "Not logged in" is returned.
 
 (J) `access` token expires in 15 min.
 'Response' interceptor in `axiosWithAuth` checks for `401` status and
 if it is the `401` status, it makes additional request to get new `access` token by
-checking already attached a `refresh` token to cookies, which has 30d expiry time.
+checking already attached `refresh` token from cookies, which has 30d expiry time.
 
 (K) `axiosWithAuth` remembers initial request with all parameters when it
-got first `401` error and after getting successfully refreshed `access` a token it
-repeats initial http request.
+got first `401` error and after getting new refreshed `access` token it
+repeats remembered initial http request.
 
 (L) If `refresh` token is invalid or old, then `access` token is not
 issued, client is considered to be unauthorized and new login action
 is required.
 
-(M) If a user is deleted from the database, the user is still authorized
-for short time until `access` token is expired (15 min).
+(M) If a user is deleted from the database, the user is still authorized for
+current browser session until `access` token is expired (15 min).
 We should consider the duration of access token depending on
 sensitivity of our data.
 
@@ -125,7 +126,8 @@ for credentials on every page refresh.
 (O) We use JWT token which contains encrypted not hashed
 payload with user email & role data, validation time
 and a hash based on a secret keys, which are kept on a server in env variable.
-Server can validate the token only if it knows the secrete key.
+
+(P) Server can validate the token only if it knows the secrete key.
 
 # Email
 
@@ -133,7 +135,8 @@ Server can validate the token only if it knows the secrete key.
 
 # Item
 
-- Item in the code is a thing which can be sorted or bookmarked: text, boq, price, row.
+- `Item` in the code is a thing which can be sorted or bookmarked: text, boq, price, row.
+- `Block` in the code is a direct defendant in quotation document: text, boq, price.
 
 # CI/CD
 
