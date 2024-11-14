@@ -10,8 +10,6 @@ test.describe('nav bar for logged-in vs guest user', () => {
     const password = 'xxx'
 
     await page.goto(route.root)
-    await page.waitForSelector('#my-element', { state: 'hidden' })
-    await page.waitForTimeout(5000)
 
     const nav = page.locator('nav')
 
@@ -19,7 +17,6 @@ test.describe('nav bar for logged-in vs guest user', () => {
     // which blocks the click on login button
     // so we should wait until spinner is removed
     const spinner = nav.locator('[data-testid="spinner icon"]')
-
     await spinner.waitFor({ state: 'hidden' })
 
     await page.getByRole('link', { name: 'Log in' }).click()

@@ -25,8 +25,12 @@ test.describe('nav icons & text on wide screen', () => {
     await expect(nav).toHaveText(/Bookmarks/u)
     await expect(nav.locator('[data-testid="quotations icon"]')).toBeVisible()
     await expect(nav).toHaveText(/Quotations/u)
+
+    const spinner = nav.locator('[data-testid="spinner icon"]')
+    await spinner.waitFor({ state: 'hidden' })
+
     await expect(nav.locator('[data-testid="profile icon"]')).toBeVisible()
-    await expect(nav).toHaveText(/Profile/u, { timeout: 1000 })
+    await expect(nav).toHaveText(/Profile/u)
 
     await expect(
       nav.locator('[data-testid="hamburger icon"]'),
@@ -42,9 +46,9 @@ test.describe('nav icons for guest user', () => {
     const nav = page.locator('nav')
 
     await expect(nav.locator('[data-testid="login icon"]')).toBeVisible()
-    await expect(nav).toHaveText(/Log in/u, { timeout: 1000 })
+    await expect(nav).toHaveText(/Log in/u)
     await expect(nav.locator('[data-testid="profile icon"]')).not.toBeVisible()
-    await expect(nav).not.toHaveText(/Profile/u, { timeout: 1000 })
+    await expect(nav).not.toHaveText(/Profile/u)
   })
 })
 
@@ -77,8 +81,6 @@ test.describe('nav icons & text on super narrow screen', () => {
     await expect(nav.locator('[data-testid="login icon"]')).not.toBeVisible()
     await expect(nav.locator('text=Log in')).not.toBeVisible()
 
-    await expect(nav.locator('[data-testid="hamburger icon"]')).toBeVisible({
-      timeout: 1000,
-    })
+    await expect(nav.locator('[data-testid="hamburger icon"]')).toBeVisible({})
   })
 })

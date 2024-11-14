@@ -216,7 +216,7 @@ export const navStructure: MenuItemType[] = [
             link: `./${route.logout}`,
           },
         ],
-        tooltip: 'Profile',
+        tooltip: 'Profile, settings',
       },
     ],
   },
