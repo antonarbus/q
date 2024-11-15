@@ -49,8 +49,10 @@ const getAccessToken = async (
     })
 
     /*
-    // extend refresh token validity
+    todo: there should be device dedicated token which is automatically extended
+    todo: now all devices will be logged out ones in 3 months
 
+    // extend refresh token validity
 
     if (daysUntilExpiration < 5) {
       const extendedRefreshToken = createRefreshToken({
@@ -58,8 +60,7 @@ const getAccessToken = async (
         roles: jwtPayload.roles,
       })
 
-      // do not await, no need to block execution, not important
-      UserModel.findOneAndUpdate(
+      await UserModel.findOneAndUpdate(
         { email: jwtPayload.email, refreshJwtToken },
         {
           refreshJwtToken: extendedRefreshToken,
@@ -75,12 +76,10 @@ const getAccessToken = async (
     
     */
 
-    // todo: there should be device dedicated token which is automatically extended
-    // todo: now all devices will be logged out ones in 3 months
-
     const user = await UserModel.findOneAndUpdate(
       { email: jwtPayload.email, refreshJwtToken },
       { loggedAt: Date.now() },
+      { new: true },
     )
 
     if (!user) {

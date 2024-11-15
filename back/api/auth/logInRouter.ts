@@ -28,6 +28,7 @@ export type ResBody = {
     | 'activation link not sent'
     | 'good password'
     | 'failed to create token'
+    | 'failed to update timestamp'
   name?: 'MongooseError'
   accessJwtToken?: string
   email?: User['email']
@@ -123,13 +124,16 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
       maxAge: threeMonthsInSec * 1000,
     })
 
-    if (isExistingRefreshJwtToken) {
-      UserModel.findOneAndUpdate({ email }, { loggedAt: Date.now() })
-    } else {
-      UserModel.findOneAndUpdate(
-        { email },
-        { refreshJwtToken, loggedAt: Date.now() },
-      )
+    const userFromDb = await UserModel.findOneAndUpdate(
+      { email },
+      { refreshJwtToken, loggedAt: Date.now() },
+      { new: true },
+    )
+
+    if (!userFromDb) {
+      return res
+        .status(httpStatus.serverError_500)
+        .json({ message: 'failed to update timestamp' })
     }
 
     return res.status(httpStatus.success_200).json({
