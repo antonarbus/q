@@ -83,7 +83,7 @@ const resetPassword: RouterHandler = async (req, res, next) => {
 
     const updatedUser = await UserModel.findOneAndUpdate(
       { email, resetPasswordKey },
-      { password, refreshJwtToken, resetPasswordKey: '' },
+      { password, refreshJwtToken, resetPasswordKey: '', loggedAt: Date.now() },
       { new: true },
     ).lean()
 
