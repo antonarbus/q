@@ -8,7 +8,7 @@ import {
   createAccessToken,
   createRefreshToken,
   getJwtExpirationInDays,
-  thirtyDaysInSec,
+  threeMonthsInSec,
   verifyRefreshToken,
 } from '../../utils/jwt'
 import type { Next, ReqWithBody, ResWithBody } from '../../types'
@@ -120,11 +120,12 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
     res.cookie('refreshJwtToken', refreshJwtToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      maxAge: thirtyDaysInSec * 1000,
+      maxAge: threeMonthsInSec * 1000,
     })
 
     if (!isExistingRefreshJwtToken) {
-      await UserModel.findOneAndUpdate(
+      // no await, no important
+      UserModel.findOneAndUpdate(
         { email },
         { refreshJwtToken, loggedAt: Date.now() },
         { new: true },

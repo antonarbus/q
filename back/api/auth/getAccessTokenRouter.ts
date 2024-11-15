@@ -4,9 +4,7 @@ import { httpStatus } from '../../consts/httpStatus'
 import { UserModel } from '../../db/models/userModel'
 import {
   createAccessToken,
-  createRefreshToken,
   getJwtExpirationInDays,
-  thirtyDaysInSec,
   verifyRefreshToken,
 } from '../../utils/jwt'
 import type { Next, ReqExtended, ResWithBody } from '../../types'
@@ -46,20 +44,13 @@ const getAccessToken = async (
       throw new Error(errorMessageCommon.notLoggedIn)
     }
 
-    if (jwtPayload.exp === undefined) {
-      res.clearCookie('refreshJwtToken')
-
-      throw new Error(errorMessageCommon.notLoggedIn)
-    }
-
     const daysUntilExpiration = getJwtExpirationInDays({
       token: refreshJwtToken,
     })
 
-    const user = await UserModel.findOneAndUpdate(
-      { email: jwtPayload.email, refreshJwtToken },
-      { loggedAt: Date.now() },
-    )
+    /*
+    // extend refresh token validity
+
 
     if (daysUntilExpiration < 5) {
       const extendedRefreshToken = createRefreshToken({
@@ -78,9 +69,19 @@ const getAccessToken = async (
       res.cookie('refreshJwtToken', extendedRefreshToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        maxAge: thirtyDaysInSec * 1000,
+        maxAge: threeMonthsInSec * 1000,
       })
     }
+    
+    */
+
+    // todo: there should be device dedicated token which is automatically extended
+    // todo: now all devices will be logged out ones in 3 months
+
+    const user = await UserModel.findOneAndUpdate(
+      { email: jwtPayload.email, refreshJwtToken },
+      { loggedAt: Date.now() },
+    )
 
     if (!user) {
       res.clearCookie('refreshJwtToken')

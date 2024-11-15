@@ -7,6 +7,7 @@ import type { ReqWithBody } from '../types'
 
 const fifteenMinInSec = 15 * 60
 export const thirtyDaysInSec = 30 * 24 * 60 * 60
+export const threeMonthsInSec = 3 * thirtyDaysInSec
 
 export type JwtPayloadExtended = JwtPayload & {
   email: User['email']
@@ -50,11 +51,15 @@ export const verifyAccessToken = (
     }
 
     if (!('email' in jwtPayload)) {
-      return undefined
+      throw new Error(
+        'JWT payload is wrong, it exists and valid, but there is no "email"',
+      )
     }
 
     if (!('roles' in jwtPayload)) {
-      return undefined
+      throw new Error(
+        'JWT payload is wrong, it exists and valid, but there is no "roles"',
+      )
     }
 
     return jwtPayload as JwtPayloadExtended
@@ -76,11 +81,15 @@ export const verifyRefreshToken = (
     }
 
     if (!('email' in jwtPayload)) {
-      return undefined
+      throw new Error(
+        'JWT payload is wrong, it exists and valid, but there is no "email"',
+      )
     }
 
     if (!('roles' in jwtPayload)) {
-      return undefined
+      throw new Error(
+        'JWT payload is wrong, it exists and valid, but there is no "roles"',
+      )
     }
 
     return jwtPayload as JwtPayloadExtended
