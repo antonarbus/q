@@ -4,9 +4,11 @@ import { httpStatus } from '../../consts/httpStatus'
 import { UserModel } from '../../db/models/userModel'
 import {
   createAccessToken,
-  getJwtExpiration,
+  createRefreshToken,
+  getJwtExpirationInDays,
+  thirtyDaysInSec,
   verifyRefreshToken,
-} from '../../services/jwt'
+} from '../../utils/jwt'
 import type { Next, ReqExtended, ResWithBody } from '../../types'
 import { errorMessageCommon } from '@shared/consts/errorMessageCommon'
 
@@ -15,8 +17,7 @@ export type ResBody = {
   email?: User['email']
   accessJwtToken?: string
   roles?: User['roles']
-  jwtRefreshTokenExpiration?: Date
-  jwtAccessTokenExpiration?: Date
+  jwtRefreshTokenExpirationDays: number
 }
 
 export const getAccessTokenRouter = express.Router()
@@ -39,18 +40,47 @@ const getAccessToken = async (
 
     const jwtPayload = verifyRefreshToken(refreshJwtToken)
 
-    const email = jwtPayload?.email as string | undefined
-
-    if (typeof email !== 'string') {
+    if (jwtPayload === undefined) {
       res.clearCookie('refreshJwtToken')
 
       throw new Error(errorMessageCommon.notLoggedIn)
     }
 
+    if (jwtPayload.exp === undefined) {
+      res.clearCookie('refreshJwtToken')
+
+      throw new Error(errorMessageCommon.notLoggedIn)
+    }
+
+    const daysUntilExpiration = getJwtExpirationInDays({
+      token: refreshJwtToken,
+    })
+
     const user = await UserModel.findOneAndUpdate(
-      { email, refreshJwtToken },
+      { email: jwtPayload.email, refreshJwtToken },
       { loggedAt: Date.now() },
     )
+
+    if (daysUntilExpiration < 5) {
+      const extendedRefreshToken = createRefreshToken({
+        email: jwtPayload.email,
+        roles: jwtPayload.roles,
+      })
+
+      // do not await, no need to block execution, not important
+      UserModel.findOneAndUpdate(
+        { email: jwtPayload.email, refreshJwtToken },
+        {
+          refreshJwtToken: extendedRefreshToken,
+        },
+      )
+
+      res.cookie('refreshJwtToken', extendedRefreshToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: thirtyDaysInSec * 1000,
+      })
+    }
 
     if (!user) {
       res.clearCookie('refreshJwtToken')
@@ -58,19 +88,21 @@ const getAccessToken = async (
       throw new Error(errorMessageCommon.notLoggedIn)
     }
 
-    const accessJwtToken = createAccessToken({ email, roles: user.roles })
+    const accessJwtToken = createAccessToken({
+      email: jwtPayload.email,
+      roles: jwtPayload.roles,
+    })
 
-    if (!accessJwtToken) {
+    if (accessJwtToken === undefined) {
       throw new Error(errorMessageCommon.notLoggedIn)
     }
 
     return res.status(httpStatus.success_200).json({
       message: 'issued access token',
       accessJwtToken,
-      roles: user.roles,
-      email,
-      jwtRefreshTokenExpiration: getJwtExpiration({ token: refreshJwtToken }),
-      jwtAccessTokenExpiration: getJwtExpiration({ token: accessJwtToken }),
+      roles: jwtPayload.roles,
+      email: jwtPayload.email,
+      jwtRefreshTokenExpirationDays: daysUntilExpiration,
     })
   } catch (error) {
     next(error)

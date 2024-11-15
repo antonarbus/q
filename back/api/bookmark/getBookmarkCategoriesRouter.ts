@@ -5,7 +5,7 @@ import { httpStatus } from '../../consts/httpStatus'
 import { BookmarkModel } from '../../db/models/bookmarkModel'
 import { verifyAccessTokenMiddleware } from '../../middleware/verifyAccessTokenMiddleware'
 import type { ResWithBody, Next, Req } from '../../types'
-import { getUserFromRefreshTokenOrThrowUnauthorized } from '../../utils/getUserFromRefreshTokenOrThrowUnauthorized'
+import { getUserFromRefreshTokenOrThrowUnauthorized } from '../../utils/jwt'
 
 export type ResBody = {
   message: ErrorMessageCommon | 'Found' | 'Unhandled error'

@@ -36,7 +36,7 @@ axiosWithAuth.interceptors.response.use(
       originalRequestConfig.isRetry = true
 
       try {
-        // refresh expired or invalid access token
+        // refresh expired or invalid access token & extend refresh token if it is about to expire
         const res = await axios.get<ResBody>(apiUrl.getAccessToken, {
           withCredentials: true,
         })

@@ -7,7 +7,7 @@ import {
   createAccessToken,
   createRefreshToken,
   thirtyDaysInSec,
-} from '../../services/jwt'
+} from '../../utils/jwt'
 import type { Next, ReqWithBody, ResWithBody } from '../../types'
 
 export type ReqBody = {
@@ -57,8 +57,9 @@ const activate: RouterHandler = async (req, res, next) => {
     const refreshJwtToken = createRefreshToken({ email, roles })
 
     res.cookie('refreshJwtToken', refreshJwtToken, {
-      maxAge: thirtyDaysInSec * 1000,
       httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      maxAge: thirtyDaysInSec * 1000,
     })
 
     const userDocument = await UserModel.findOneAndUpdate(

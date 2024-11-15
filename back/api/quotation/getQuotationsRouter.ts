@@ -6,7 +6,7 @@ import type { Pretty } from '@shared/types/Pretty'
 import { httpStatus } from '../../consts/httpStatus'
 import { QuotationModel } from '../../db/models/quotationModel'
 import type { ResWithBody, Next, Req } from '../../types'
-import { getUserFromRefreshTokenOrThrowUnauthorized } from '../../utils/getUserFromRefreshTokenOrThrowUnauthorized'
+import { getUserFromRefreshTokenOrThrowUnauthorized } from '../../utils/jwt'
 
 export type QuotationPick = Pick<
   Quotation,

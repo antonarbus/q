@@ -1,4 +1,4 @@
-import type { JwtPayloadExtended } from '@back/services/jwt'
+import type { JwtPayloadExtended } from '@back/utils/jwt'
 import { dispatch } from '@shared/lib/redux'
 import { jwtDecode } from 'jwt-decode'
 import { useEffectOnce, useUpdateEffect } from 'react-use'

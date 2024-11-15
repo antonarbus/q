@@ -7,7 +7,7 @@ import { QuotationModel } from '../../db/models/quotationModel'
 import { verifyAccessTokenMiddleware } from '../../middleware/verifyAccessTokenMiddleware'
 import { bucket, storageFolderName } from '../../services/storage'
 import type { ResWithBody, ReqWithBody, Next } from '../../types'
-import { getUserFromRefreshTokenOrThrowUnauthorized } from '../../utils/getUserFromRefreshTokenOrThrowUnauthorized'
+import { getUserFromRefreshTokenOrThrowUnauthorized } from '../../utils/jwt'
 
 export type ReqBody = {
   id: Quotation['id']

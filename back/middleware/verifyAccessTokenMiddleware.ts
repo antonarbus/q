@@ -1,7 +1,7 @@
 import { errorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { headerName } from '../consts/headerName'
 import { httpStatus } from '../consts/httpStatus'
-import { verifyAccessToken } from '../services/jwt'
+import { verifyAccessToken } from '../utils/jwt'
 import type { Next, Req, Res, ResWithBody } from '../types'
 
 type ResBody = {

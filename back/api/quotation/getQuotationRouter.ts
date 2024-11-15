@@ -4,7 +4,7 @@ import { httpStatus } from '../../consts/httpStatus'
 import { QuotationModel } from '../../db/models/quotationModel'
 import { bucket, storageFolderName } from '../../services/storage'
 import type { ResWithBody, ReqWithBody, Next } from '../../types'
-import { getUserFromRefreshToken } from '../../utils/getUserFromRefreshToken'
+import { getUserFromRefreshToken } from '../../utils/jwt'
 import { removeSensitiveDataFromQuotation } from '../../utils/removeSensitiveDataFromQuotation'
 import { jsonParseSafe } from '@back/utils/jsonParseSafe'
 

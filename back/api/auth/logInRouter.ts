@@ -7,10 +7,10 @@ import { sendEmail } from '../../services/email'
 import {
   createAccessToken,
   createRefreshToken,
-  getJwtExpiration,
+  getJwtExpirationInDays,
   thirtyDaysInSec,
   verifyRefreshToken,
-} from '../../services/jwt'
+} from '../../utils/jwt'
 import type { Next, ReqWithBody, ResWithBody } from '../../types'
 import { config } from '@back/config'
 
@@ -32,8 +32,7 @@ export type ResBody = {
   accessJwtToken?: string
   email?: User['email']
   roles?: User['roles']
-  jwtRefreshTokenExpiration?: Date
-  jwtAccessTokenExpiration?: Date
+  jwtRefreshTokenExpirationDays?: number
 }
 
 type RouterHandler = (
@@ -119,8 +118,9 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
     }
 
     res.cookie('refreshJwtToken', refreshJwtToken, {
-      maxAge: thirtyDaysInSec * 1000,
       httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      maxAge: thirtyDaysInSec * 1000,
     })
 
     if (!isExistingRefreshJwtToken) {
@@ -136,8 +136,9 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
       accessJwtToken,
       email: user.email,
       roles: user.roles,
-      jwtRefreshTokenExpiration: getJwtExpiration({ token: refreshJwtToken }),
-      jwtAccessTokenExpiration: getJwtExpiration({ token: accessJwtToken }),
+      jwtRefreshTokenExpirationDays: getJwtExpirationInDays({
+        token: refreshJwtToken,
+      }),
     })
   } catch (error) {
     next(error)
