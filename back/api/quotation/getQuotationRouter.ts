@@ -4,9 +4,8 @@ import { httpStatus } from '../../consts/httpStatus'
 import { QuotationModel } from '../../db/models/quotationModel'
 import { bucket, storageFolderName } from '../../services/storage'
 import type { ResWithBody, ReqWithBody, Next } from '../../types'
-import { getUserFromRefreshToken } from '../../utils/jwt'
-import { removeSensitiveDataFromQuotation } from '../../utils/removeSensitiveDataFromQuotation'
 import { jsonParseSafe } from '@back/utils/jsonParseSafe'
+import { getUserFromRefreshToken } from '@back/utils/jwt'
 
 export type ReqBody = {
   id: Quotation['id']
@@ -95,13 +94,44 @@ const getQuotation: RouterHandler = async (req, res, next) => {
     }
 
     if (isViewer) {
-      const quotationWithoutSensitiveData = removeSensitiveDataFromQuotation({
-        quotation,
+      // remove sensitive data from quotation
+      quotation.email = 'john@mail.com'
+      delete quotation.name
+      delete quotation.category
+      delete quotation.desc
+      delete quotation.info
+      delete quotation.createdAt
+      delete quotation.updatedAt
+      delete quotation.openedAt
+      delete quotation.from
+      delete quotation.to
+      delete quotation.sharedWith
+
+      quotation.blocks.forEach((block) => {
+        block.email = 'john@mail.com'
+        delete block.name
+        delete block.category
+        delete block.desc
+        delete block.info
+        delete block.createdAt
+        delete block.updatedAt
+
+        if (block.type === 'boq') {
+          block.boq.rows.forEach((row) => {
+            row.email = 'john@mail.com'
+            delete row.name
+            delete row.category
+            delete row.desc
+            delete row.info
+            delete row.createdAt
+            delete row.updatedAt
+          })
+        }
       })
 
       return res.status(httpStatus.success_200).json({
         message: 'viewer permission',
-        quotation: quotationWithoutSensitiveData,
+        quotation,
       })
     }
   } catch (error) {
