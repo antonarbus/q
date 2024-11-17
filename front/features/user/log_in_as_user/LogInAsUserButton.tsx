@@ -5,29 +5,20 @@ import { useUpdateEffect } from 'react-use'
 import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
 import { notify } from '@shared/toast'
 import { accessTokenSignal, useLogInMutation, userSlice } from '@entities/user'
-import { instance } from '@shared/instance'
-import { queryKey } from '@shared/consts/queryKey'
 import {
   reLoadQuotationSignal,
   useGetQuotationsQuery,
 } from '@entities/quotation'
 import { useGetBookmarksQuery } from '@entities/bookmark'
 import type { NavigateState } from '@shared/types/NavigateState'
-import {
-  type Location,
-  useLocation,
-  useNavigate,
-  useParams,
-} from 'react-router-dom'
+import { type Location, useLocation, useParams } from 'react-router-dom'
 import { dispatch } from '@shared/lib/redux'
 import { navSlice } from '@shared/nav'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { route } from '@shared/consts/route'
 import { nanoid } from '@shared/lib/nanoid'
-import { slideElement } from '@shared/utils/slideElement'
 
 export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
-  const navigate = useNavigate()
   const { quotationId } = useParams()
 
   const {
@@ -35,8 +26,8 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
     isPending,
     data,
     isSuccess,
-    // isError,
-    // error,
+    isError,
+    error,
   } = useLogInMutation()
 
   const location = useLocation() as Location<NavigateState>
@@ -45,8 +36,6 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
 
   useUpdateEffect(() => {
     if (isSuccess) {
-      // const { message } = data
-
       if (!data.accessJwtToken) {
         return
       }
@@ -91,8 +80,26 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
       if (quotationId) {
         reLoadQuotationSignal.value = nanoid(5)
       }
+
+      if (data.message === 'super-admin logged as user') {
+        notify({
+          msg: `Logged as ${data.email}`,
+          type: 'success',
+          theme: 'light',
+        })
+      }
     }
   }, [isSuccess])
+
+  useUpdateEffect(() => {
+    if (isError) {
+      notify({
+        msg: error.response?.data.message,
+        type: 'error',
+        theme: 'light',
+      })
+    }
+  }, [isError])
 
   return (
     <Tooltip
