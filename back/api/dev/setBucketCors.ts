@@ -1,17 +1,20 @@
-import express from 'express'
 import { bucket } from '../../services/storage'
-import type { Req, Res, Next } from '../../types'
+import { Router, type Request, type Response, type NextFunction } from 'express'
 import { getEnvVarOrThrow } from '@back/utils/getEnvVar'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/jwt'
 import { httpStatus } from '@back/consts/httpStatus'
 
 // https://cloud.google.com/storage/docs/samples/storage-cors-configuration#storage_cors_configuration-nodejs
 
-async function configureBucketCors(
-  req: Req,
-  res: Res,
-  next: Next,
-): Promise<void> {
+type RouterHandler = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => Promise<void>
+
+export const setBucketCors = Router()
+
+const configureBucketCors: RouterHandler = async (req, res, next) => {
   const { roles } = getUserFromAccessTokenOrThrowUnauthorized(req)
 
   if (!roles.includes('super-admin')) {
@@ -42,8 +45,4 @@ async function configureBucketCors(
   res.json(corsUpdateRes.at(0)?.cors)
 }
 
-export const setBucketCors = express.Router()
-
-setBucketCors.get('/', (req, res, next) => {
-  void configureBucketCors(req, res, next)
-})
+setBucketCors.get('/', configureBucketCors)

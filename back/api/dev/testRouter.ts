@@ -1,17 +1,24 @@
-import { Router } from 'express'
+import { Router, type Request, type Response, type NextFunction } from 'express'
 // import { QuotationModel } from '../../db/models/quotationModel'
-import type { Next, Req, Res } from '../../types'
 import { UserModel } from '@back/db/models/userModel'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/jwt'
 import { httpStatus } from '@back/consts/httpStatus'
 
+type RouterHandler = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => Promise<void>
+
 export const testRouter = Router()
 
-async function test(req: Req, res: Res, next: Next): Promise<void> {
+const test: RouterHandler = async (req, res, next) => {
   const { roles } = getUserFromAccessTokenOrThrowUnauthorized(req)
 
   if (!roles.includes('super-admin')) {
     res.status(httpStatus.forbidden_403).json({ message: 'forbidden' })
+
+    return
   }
 
   try {
@@ -29,10 +36,4 @@ async function test(req: Req, res: Res, next: Next): Promise<void> {
   }
 }
 
-testRouter.get(
-  '/',
-  // verifyTokenMiddleware,
-  (req, res, next) => {
-    void test(req, res, next)
-  },
-)
+testRouter.get('/', test)

@@ -1,20 +1,25 @@
-import express from 'express'
+import { Router, type Request, type Response, type NextFunction } from 'express'
 import { bucket } from '../../services/storage'
-import type { Next, Req, Res } from '../../types'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/jwt'
 import { httpStatus } from '@back/consts/httpStatus'
 
 // https://cloud.google.com/storage/docs/using-cors#storage-get-bucket-metadata-nodejs
 
-async function getBucketMetadata(
-  req: Req,
-  res: Res,
-  next: Next,
-): Promise<void> {
+type RouterHandler = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => Promise<void>
+
+export const getBucketCors = Router()
+
+const getBucketMetadata: RouterHandler = async (req, res, next) => {
   const { roles } = getUserFromAccessTokenOrThrowUnauthorized(req)
 
   if (!roles.includes('super-admin')) {
     res.status(httpStatus.forbidden_403).json({ message: 'forbidden' })
+
+    return
   }
 
   const [metadata] = await bucket.getMetadata()
@@ -22,8 +27,4 @@ async function getBucketMetadata(
   res.json(metadata.cors)
 }
 
-export const getBucketCors = express.Router()
-
-getBucketCors.get('/', (req, res, next) => {
-  void getBucketMetadata(req, res, next)
-})
+getBucketCors.get('/', getBucketMetadata)
