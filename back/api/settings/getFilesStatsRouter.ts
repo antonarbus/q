@@ -1,8 +1,7 @@
-import { Router } from 'express'
+import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '../../consts/httpStatus'
 import { bucket, storageFolderName } from '../../services/storage'
-import type { ResWithBody, ReqWithBody, Next } from '../../types'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '../../utils/jwt'
 
 export type ResBody = {
@@ -14,10 +13,10 @@ export type ResBody = {
 }
 
 type RouterHandler = (
-  req: ReqWithBody,
-  res: ResWithBody<ResBody>,
-  next: Next,
-) => Promise<ResWithBody<ResBody> | undefined>
+  req: Request,
+  res: Response<ResBody>,
+  next: NextFunction,
+) => Promise<void>
 
 export const getFilesStatsRouter = Router()
 
@@ -39,7 +38,7 @@ const getFilesStats: RouterHandler = async (req, res, next) => {
       { fileCount: 0, totalSize: 0 },
     )
 
-    return res
+    res
       .status(httpStatus.success_200)
       .json({ message: 'file stats', fileStats })
   } catch (error) {
@@ -47,6 +46,4 @@ const getFilesStats: RouterHandler = async (req, res, next) => {
   }
 }
 
-getFilesStatsRouter.get('/', (req, res, next) => {
-  void getFilesStats(req, res, next)
-})
+getFilesStatsRouter.get('/', getFilesStats)
