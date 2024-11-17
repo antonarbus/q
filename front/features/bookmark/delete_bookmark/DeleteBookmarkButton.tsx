@@ -46,6 +46,16 @@ export const DeleteBookmarkButton = ({ id }: ReqBody): React.JSX.Element => {
       <IconButton
         size='small'
         onClick={() => {
+          const askForConfirmation = (): boolean => {
+            const areYouSure = confirm('Are you sure?')
+
+            return areYouSure
+          }
+
+          if (!askForConfirmation()) {
+            return
+          }
+
           deleteItem({ id })
         }}
       >

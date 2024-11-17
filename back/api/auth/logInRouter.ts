@@ -9,6 +9,7 @@ import {
   createAccessToken,
   createRefreshToken,
   getJwtExpirationInDays,
+  getUserFromRefreshToken,
   threeMonthsInSec,
   verifyRefreshToken,
 } from '@back/utils/jwt'
@@ -31,6 +32,7 @@ export type ResBody = {
     | 'activation link sent'
     | 'activation link not sent'
     | 'good password'
+    | 'super-admin logged as user'
     | 'failed to create token'
     | 'failed to update timestamp'
 }
@@ -43,15 +45,62 @@ type RouterHandler = (
 
 export const logInRouter = Router()
 
-const checkCredentials: RouterHandler = async (req, res, next) => {
+const logIn: RouterHandler = async (req, res, next) => {
   try {
     const password = req.body.password
     const email = req.body.email.toLowerCase()
+
+    const { roles } = getUserFromRefreshToken(req)
+    const superAdmin = roles.includes('super-admin')
 
     const user = await UserModel.findOne({ email }).lean()
 
     if (!user) {
       res.status(httpStatus.badRequest_400).json({ message: 'no user data' })
+
+      return
+    }
+
+    if (superAdmin) {
+      const accessJwtToken = createAccessToken({ email, roles: user.roles })
+
+      const isExistingRefreshJwtToken = Boolean(
+        verifyRefreshToken(user.refreshJwtToken),
+      )
+
+      const refreshJwtToken = isExistingRefreshJwtToken
+        ? user.refreshJwtToken
+        : createRefreshToken({ email, roles: user.roles })
+
+      res.cookie('refreshJwtToken', refreshJwtToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: threeMonthsInSec * 1000,
+      })
+
+      const userFromDb = await UserModel.findOneAndUpdate(
+        { email },
+        { refreshJwtToken, loggedAt: Date.now() },
+        { new: true },
+      )
+
+      if (!userFromDb) {
+        res
+          .status(httpStatus.serverError_500)
+          .json({ message: 'failed to update timestamp' })
+
+        return
+      }
+
+      res.status(httpStatus.success_200).json({
+        message: 'super-admin logged as user',
+        accessJwtToken,
+        email: user.email,
+        roles: user.roles,
+        jwtRefreshTokenExpirationDays: getJwtExpirationInDays({
+          token: refreshJwtToken,
+        }),
+      })
 
       return
     }
@@ -115,14 +164,6 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
       ? user.refreshJwtToken
       : createRefreshToken({ email, roles: user.roles })
 
-    if (!refreshJwtToken || !accessJwtToken) {
-      res
-        .status(httpStatus.notFound_404)
-        .json({ message: 'failed to create token' })
-
-      return
-    }
-
     res.cookie('refreshJwtToken', refreshJwtToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
@@ -157,4 +198,4 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
   }
 }
 
-logInRouter.post('/', checkCredentials)
+logInRouter.post('/', logIn)

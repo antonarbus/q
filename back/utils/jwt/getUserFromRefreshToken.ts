@@ -25,30 +25,23 @@ export const getUserFromRefreshToken = (
     }
   }
 
-  try {
-    const jwtPayload = verifyRefreshToken(refreshJwtToken)
+  const jwtPayload = verifyRefreshToken(refreshJwtToken)
 
-    if (jwtPayload === undefined) {
-      return {
-        email: 'no email',
-        roles: ['user'],
-      }
-    }
-
-    const { email, roles } = jwtPayload
-
-    if (typeof email !== 'string') {
-      return {
-        email: 'no email',
-        roles: ['user'],
-      }
-    }
-
-    return { email, roles }
-  } catch {
+  if (jwtPayload === undefined) {
     return {
       email: 'no email',
       roles: ['user'],
     }
   }
+
+  const { email, roles } = jwtPayload
+
+  if (typeof email !== 'string') {
+    return {
+      email: 'no email',
+      roles: ['user'],
+    }
+  }
+
+  return { email, roles }
 }

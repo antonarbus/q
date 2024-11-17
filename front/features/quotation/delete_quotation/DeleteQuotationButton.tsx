@@ -46,6 +46,16 @@ export const DeleteQuotationButton = ({ id }: Payload): React.ReactNode => {
       <IconButton
         size='small'
         onClick={() => {
+          const askForConfirmation = (): boolean => {
+            const areYouSure = confirm('Are you sure?')
+
+            return areYouSure
+          }
+
+          if (!askForConfirmation()) {
+            return
+          }
+
           deleteQuotation({ id })
         }}
       >
