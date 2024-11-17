@@ -31,7 +31,7 @@ html:after {
   left: 50%;
   translate: -50% -50%;
   font-size: 30vh;
-  z-index: -1;
+  z-index: -1000;
 }
 
 body {

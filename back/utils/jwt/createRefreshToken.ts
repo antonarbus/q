@@ -3,9 +3,7 @@ import { getEnvVarOrThrow } from '../getEnvVar'
 import type { JwtPayloadExtended } from './types'
 import { thirtyDaysInSec } from './const'
 
-export const createRefreshToken = (
-  payload: JwtPayloadExtended,
-): string | undefined => {
+export const createRefreshToken = (payload: JwtPayloadExtended): string => {
   const salt = getEnvVarOrThrow('JWT_REFRESH_SECRET')
 
   const token = jwt.sign(payload, salt, {

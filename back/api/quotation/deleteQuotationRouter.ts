@@ -4,10 +4,9 @@ import type { Quotation } from '@entities/quotation/types'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '../../consts/httpStatus'
 import { QuotationModel } from '../../db/models/quotationModel'
-import { verifyAccessTokenMiddleware } from '../../middleware/verifyAccessTokenMiddleware'
 import { bucket, storageFolderName } from '../../services/storage'
 import type { ResWithBody, ReqWithBody, Next } from '../../types'
-import { getUserFromRefreshTokenOrThrowUnauthorized } from '../../utils/jwt'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '../../utils/jwt'
 
 export type ReqBody = {
   id: Quotation['id']
@@ -33,7 +32,7 @@ export const deleteQuotationRouter = Router()
 
 const deleteQuotation: RouterHandler = async (req, res, next) => {
   try {
-    const { email } = getUserFromRefreshTokenOrThrowUnauthorized(req)
+    const { email } = getUserFromAccessTokenOrThrowUnauthorized(req)
 
     const { id } = req.body
 
@@ -61,12 +60,6 @@ const deleteQuotation: RouterHandler = async (req, res, next) => {
   }
 }
 
-deleteQuotationRouter.delete(
-  '/',
-  (req, res, next) => {
-    verifyAccessTokenMiddleware(req, res, next)
-  },
-  (req, res, next) => {
-    void deleteQuotation(req, res, next)
-  },
-)
+deleteQuotationRouter.delete('/', (req, res, next) => {
+  void deleteQuotation(req, res, next)
+})

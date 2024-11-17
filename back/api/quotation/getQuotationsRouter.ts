@@ -6,7 +6,7 @@ import type { Pretty } from '@shared/types/Pretty'
 import { httpStatus } from '../../consts/httpStatus'
 import { QuotationModel } from '../../db/models/quotationModel'
 import type { ResWithBody, Next, Req } from '../../types'
-import { getUserFromRefreshTokenOrThrowUnauthorized } from '../../utils/jwt'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '../../utils/jwt'
 
 export type QuotationPick = Pick<
   Quotation,
@@ -36,7 +36,7 @@ export const getQuotationsRouter = Router()
 
 const getQuotations: RouterHandler = async (req, res, next) => {
   try {
-    const { email } = getUserFromRefreshTokenOrThrowUnauthorized(req)
+    const { email } = getUserFromAccessTokenOrThrowUnauthorized(req)
 
     const quotations = await QuotationModel.find(
       { email },

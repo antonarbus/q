@@ -15,14 +15,14 @@ export type ReqBody = {
 }
 
 export type ResBody = {
+  accessJwtToken?: string
+  email?: User['email']
+  roles?: User['roles']
   message:
     | ErrorMessageCommon
     | 'activation key not found'
     | 'already activated'
     | 'activated'
-  accessJwtToken?: string
-  email?: User['email']
-  roles?: User['roles']
 }
 
 type RouterHandler = (

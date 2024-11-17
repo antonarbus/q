@@ -3,9 +3,7 @@ import type { JwtPayloadExtended } from './types'
 import { getEnvVarOrThrow } from '../getEnvVar'
 import { fifteenMinInSec } from './const'
 
-export const createAccessToken = (
-  payload: JwtPayloadExtended,
-): string | undefined => {
+export const createAccessToken = (payload: JwtPayloadExtended): string => {
   const salt = getEnvVarOrThrow('JWT_ACCESS_SECRET')
 
   const token = jwt.sign(payload, salt, {

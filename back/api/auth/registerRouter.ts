@@ -1,11 +1,5 @@
 import bcrypt from 'bcryptjs'
 import express from 'express'
-import {
-  type Result,
-  type ValidationError,
-  body,
-  validationResult,
-} from 'express-validator'
 import type { User } from '@entities/user'
 import { httpStatus } from '../../consts/httpStatus'
 import { UserModel } from '../../db/models/userModel'
@@ -26,7 +20,6 @@ export type ResBody = {
     | 'activation link sent'
     | 'activation link not sent'
     | 'activation key not issued'
-  validationErrors?: Result<ValidationError>
 }
 
 export const registerRouter = express.Router()
@@ -39,16 +32,6 @@ type RouterHandler = (
 
 const register: RouterHandler = async (req, res, next) => {
   try {
-    const validationErrors = validationResult(req)
-    const isValidationError = !validationErrors.isEmpty()
-
-    if (isValidationError) {
-      return res.status(httpStatus.forbidden_403).json({
-        message: 'validation error',
-        validationErrors,
-      })
-    }
-
     const email = req.body.email.toLowerCase()
 
     const user = await UserModel.findOne({ email, isActivated: true }).lean()
@@ -107,11 +90,6 @@ const register: RouterHandler = async (req, res, next) => {
   }
 }
 
-registerRouter.post(
-  '/',
-  body('email').isEmail(),
-  body('password').isLength({ min: 3 }),
-  (req, res, next) => {
-    void register(req, res, next)
-  },
-)
+registerRouter.post('/', (req, res, next) => {
+  void register(req, res, next)
+})

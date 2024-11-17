@@ -2,10 +2,9 @@ import { Router } from 'express'
 import type { Item } from '@entities/quotation'
 import { httpStatus } from '../../consts/httpStatus'
 import { BookmarkModel } from '../../db/models/bookmarkModel'
-import { verifyAccessTokenMiddleware } from '../../middleware/verifyAccessTokenMiddleware'
 import { bucket, storageFolderName } from '../../services/storage'
 import type { ResWithBody, ReqWithBody, Next } from '../../types'
-import { getUserFromRefreshTokenOrThrowUnauthorized } from '../../utils/jwt'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '../../utils/jwt'
 import { jsonParseSafe } from '@back/utils/jsonParseSafe'
 
 export type ReqBody = {
@@ -29,7 +28,7 @@ const getBookmark: RouterHandler = async (req, res, next) => {
   try {
     const { id } = req.body
 
-    const { email } = getUserFromRefreshTokenOrThrowUnauthorized(req)
+    const { email } = getUserFromAccessTokenOrThrowUnauthorized(req)
 
     const document = await BookmarkModel.findOne({ email, id })
 
@@ -58,12 +57,6 @@ const getBookmark: RouterHandler = async (req, res, next) => {
   }
 }
 
-getBookmarkRouter.post(
-  '/',
-  (req, res, next) => {
-    verifyAccessTokenMiddleware(req, res, next)
-  },
-  (req, res, next) => {
-    void getBookmark(req, res, next)
-  },
-)
+getBookmarkRouter.post('/', (req, res, next) => {
+  void getBookmark(req, res, next)
+})

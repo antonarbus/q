@@ -4,7 +4,7 @@ import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import type { Pretty } from '@shared/types/Pretty'
 import { httpStatus } from '../../consts/httpStatus'
 import type { ResWithBody, Next, Req } from '../../types'
-import { getUserFromRefreshTokenOrThrowUnauthorized } from '../../utils/jwt'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '../../utils/jwt'
 import { UserModel } from '@back/db/models/userModel'
 import type { User } from '@entities/user'
 
@@ -33,7 +33,7 @@ export const getUsersRouter = Router()
 
 const getUsers: RouterHandler = async (req, res, next) => {
   try {
-    const { roles } = getUserFromRefreshTokenOrThrowUnauthorized(req)
+    const { roles } = getUserFromAccessTokenOrThrowUnauthorized(req)
 
     if (!roles.includes('super-admin')) {
       return res

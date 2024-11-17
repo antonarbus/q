@@ -1,42 +1,15 @@
 import type { Request, Response, NextFunction } from 'express'
-// import type { Query } from 'express-serve-static-core'
 
 export type Req = Request
 export type Res = Response
 export type Next = NextFunction
 
-// type RouteHandler = (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction,
-// ) => void
-
-// export type RouteHandlerAsync = (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction,
-// ) => Promise<void>
-
-// https://plainenglish.io/blog/typed-express-request-and-response-with-typescript
-// export type ReqWithBody<TBodyObject> = Request & {
-//   body: TBodyObject
-// }
-
-export type ReqWithBody<T = unknown> = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [x: string]: any
-  body: T
-} & Express.Request
+export type ReqWithBody<T = unknown> = Request<
+  Record<string, unknown> | undefined,
+  unknown,
+  T
+>
 
 export type ResWithBody<T> = Response<T>
 
-// type ReqWithQuery<TQueryObject extends Query> = {
-//   query: TQueryObject
-// } & Request
-
 export type ReqExtended<TOtherProps> = Request & TOtherProps
-
-// type ReqWithBodyAndQuery<T extends Query, U> = {
-//   body: U
-//   query: T
-// } & Request

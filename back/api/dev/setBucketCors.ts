@@ -2,14 +2,22 @@ import express from 'express'
 import { bucket } from '../../services/storage'
 import type { Req, Res, Next } from '../../types'
 import { getEnvVarOrThrow } from '@back/utils/getEnvVar'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/jwt'
+import { httpStatus } from '@back/consts/httpStatus'
 
 // https://cloud.google.com/storage/docs/samples/storage-cors-configuration#storage_cors_configuration-nodejs
 
 async function configureBucketCors(
-  _req: Req,
+  req: Req,
   res: Res,
   next: Next,
 ): Promise<void> {
+  const { roles } = getUserFromAccessTokenOrThrowUnauthorized(req)
+
+  if (!roles.includes('super-admin')) {
+    res.status(httpStatus.forbidden_403).json({ message: 'forbidden' })
+  }
+
   const corsUpdateRes = await bucket.setCorsConfiguration([
     {
       origin: [

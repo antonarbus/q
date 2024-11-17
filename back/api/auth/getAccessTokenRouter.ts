@@ -93,10 +93,6 @@ const getAccessToken = async (
       roles: jwtPayload.roles,
     })
 
-    if (accessJwtToken === undefined) {
-      throw new Error(errorMessageCommon.notLoggedIn)
-    }
-
     return res.status(httpStatus.success_200).json({
       message: 'issued access token',
       accessJwtToken,

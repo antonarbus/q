@@ -1,10 +1,9 @@
 import { Router } from 'express'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '../../consts/httpStatus'
-import { verifyAccessTokenMiddleware } from '../../middleware/verifyAccessTokenMiddleware'
 import { bucket, storageFolderName } from '../../services/storage'
 import type { ResWithBody, ReqWithBody, Next } from '../../types'
-import { getUserFromRefreshTokenOrThrowUnauthorized } from '../../utils/jwt'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '../../utils/jwt'
 import type { User } from '@entities/user'
 import { UserModel } from '@back/db/models/userModel'
 import { QuotationModel } from '@back/db/models/quotationModel'
@@ -30,7 +29,7 @@ export const deleteUserRouter = Router()
 const deleteUser: RouterHandler = async (req, res, next) => {
   try {
     const { email: emailFromToken, roles } =
-      getUserFromRefreshTokenOrThrowUnauthorized(req)
+      getUserFromAccessTokenOrThrowUnauthorized(req)
 
     const isOwner = emailFromToken === req.body.email
     const isSuperAdmin = roles.includes('super-admin')
@@ -189,12 +188,6 @@ const deleteUser: RouterHandler = async (req, res, next) => {
   }
 }
 
-deleteUserRouter.delete(
-  '/',
-  (req, res, next) => {
-    verifyAccessTokenMiddleware(req, res, next)
-  },
-  (req, res, next) => {
-    void deleteUser(req, res, next)
-  },
-)
+deleteUserRouter.delete('/', (req, res, next) => {
+  void deleteUser(req, res, next)
+})

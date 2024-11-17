@@ -2,10 +2,9 @@ import { Router } from 'express'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '../../consts/httpStatus'
 import { BookmarkModel } from '../../db/models/bookmarkModel'
-import { verifyAccessTokenMiddleware } from '../../middleware/verifyAccessTokenMiddleware'
 import { bucket, storageFolderName } from '../../services/storage'
 import type { ResWithBody, ReqWithBody, Next } from '../../types'
-import { getUserFromRefreshTokenOrThrowUnauthorized } from '../../utils/jwt'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '../../utils/jwt'
 import type { Item } from '@entities/quotation/types'
 
 export type ReqBody = {
@@ -26,8 +25,7 @@ export const deleteBookmarkRouter = Router()
 
 const deleteBookmark: RouterHandler = async (req, res, next) => {
   try {
-    const { email } = getUserFromRefreshTokenOrThrowUnauthorized(req)
-
+    const { email } = getUserFromAccessTokenOrThrowUnauthorized(req)
     const { id } = req.body
 
     const deleteFromDbResult = await BookmarkModel.deleteOne({ email, id })
@@ -56,12 +54,6 @@ const deleteBookmark: RouterHandler = async (req, res, next) => {
   }
 }
 
-deleteBookmarkRouter.delete(
-  '/',
-  (req, res, next) => {
-    verifyAccessTokenMiddleware(req, res, next)
-  },
-  (req, res, next) => {
-    void deleteBookmark(req, res, next)
-  },
-)
+deleteBookmarkRouter.delete('/', (req, res, next) => {
+  void deleteBookmark(req, res, next)
+})

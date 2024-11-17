@@ -1,10 +1,9 @@
 import { Router } from 'express'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '../../consts/httpStatus'
-import { verifyAccessTokenMiddleware } from '../../middleware/verifyAccessTokenMiddleware'
 import { bucket, storageFolderName } from '../../services/storage'
 import type { ResWithBody, ReqWithBody, Next } from '../../types'
-import { getUserFromRefreshTokenOrThrowUnauthorized } from '../../utils/jwt'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '../../utils/jwt'
 
 export type ResBody = {
   message: ErrorMessageCommon | 'file stats' | 'no item in bucket' | 'deleted'
@@ -24,7 +23,7 @@ export const getFilesStatsRouter = Router()
 
 const getFilesStats: RouterHandler = async (req, res, next) => {
   try {
-    const { email } = getUserFromRefreshTokenOrThrowUnauthorized(req)
+    const { email } = getUserFromAccessTokenOrThrowUnauthorized(req)
 
     const [files] = await bucket.getFiles({
       prefix: `${email}/${storageFolderName.files}/`,
@@ -48,12 +47,6 @@ const getFilesStats: RouterHandler = async (req, res, next) => {
   }
 }
 
-getFilesStatsRouter.get(
-  '/',
-  (req, res, next) => {
-    verifyAccessTokenMiddleware(req, res, next)
-  },
-  (req, res, next) => {
-    void getFilesStats(req, res, next)
-  },
-)
+getFilesStatsRouter.get('/', (req, res, next) => {
+  void getFilesStats(req, res, next)
+})

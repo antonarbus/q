@@ -4,7 +4,7 @@ import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '../../consts/httpStatus'
 import { BookmarkModel } from '../../db/models/bookmarkModel'
 import type { ResWithBody, Next, Req } from '../../types'
-import { getUserFromRefreshTokenOrThrowUnauthorized } from '../../utils/jwt'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '../../utils/jwt'
 
 export type ItemPick = Pick<
   Item,
@@ -26,7 +26,7 @@ export const getBookmarksRouter = Router()
 
 const getBookmarks: RouterHandler = async (req, res, next) => {
   try {
-    const { email } = getUserFromRefreshTokenOrThrowUnauthorized(req)
+    const { email } = getUserFromAccessTokenOrThrowUnauthorized(req)
 
     const bookmarks = await BookmarkModel.find(
       { email },

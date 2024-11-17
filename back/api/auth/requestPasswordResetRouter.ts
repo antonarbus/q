@@ -1,10 +1,4 @@
 import express from 'express'
-import {
-  type Result,
-  type ValidationError,
-  body,
-  validationResult,
-} from 'express-validator'
 import type { User } from '@entities/user'
 import { httpStatus } from '../../consts/httpStatus'
 import { UserModel } from '../../db/models/userModel'
@@ -25,7 +19,6 @@ export type ResBody = {
     | 'account not activated'
     | 'reset key not issued'
     | 'reset link not sent'
-  validationErrors?: Result<ValidationError>
 }
 
 export const requestPasswordResetRouter = express.Router()
@@ -38,15 +31,6 @@ type RouterHandler = (
 
 const requestPasswordReset: RouterHandler = async (req, res, next) => {
   try {
-    const validationErrors = validationResult(req)
-    const isValidationError = !validationErrors.isEmpty()
-
-    if (isValidationError) {
-      return res
-        .status(httpStatus.forbidden_403)
-        .json({ message: 'validation error', validationErrors })
-    }
-
     const email = req.body.email.toLowerCase()
 
     const user = await UserModel.findOne({ email }).lean()
@@ -108,10 +92,6 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
   }
 }
 
-requestPasswordResetRouter.post(
-  '/',
-  body('email').isEmail(),
-  (req, res, next) => {
-    void requestPasswordReset(req, res, next)
-  },
-)
+requestPasswordResetRouter.post('/', (req, res, next) => {
+  void requestPasswordReset(req, res, next)
+})

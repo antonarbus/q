@@ -1,11 +1,5 @@
 import bcrypt from 'bcryptjs'
 import express from 'express'
-import {
-  type Result,
-  type ValidationError,
-  body,
-  validationResult,
-} from 'express-validator'
 import type { User } from '@entities/user'
 import { httpStatus } from '../../consts/httpStatus'
 import { UserModel } from '../../db/models/userModel'
@@ -28,7 +22,6 @@ export type ResBody = {
     | 'incorrect reset key'
     | 'not activated'
     | 'password was reset'
-  validationErrors?: Result<ValidationError>
   accessJwtToken?: string
   email?: User['email']
   roles?: User['roles']
@@ -44,15 +37,6 @@ type RouterHandler = (
 
 const resetPassword: RouterHandler = async (req, res, next) => {
   try {
-    const validationErrors = validationResult(req)
-    const isValidationError = !validationErrors.isEmpty()
-
-    if (isValidationError) {
-      return res
-        .status(httpStatus.forbidden_403)
-        .json({ message: 'validation error', validationErrors })
-    }
-
     const email = req.body.email.toLowerCase()
     const resetPasswordKey = req.body.resetPasswordKey
 
@@ -98,10 +82,6 @@ const resetPassword: RouterHandler = async (req, res, next) => {
   }
 }
 
-resetPasswordRouter.post(
-  '/',
-  body('password').isLength({ min: 3 }),
-  (req, res, next) => {
-    void resetPassword(req, res, next)
-  },
-)
+resetPasswordRouter.post('/', (req, res, next) => {
+  void resetPassword(req, res, next)
+})

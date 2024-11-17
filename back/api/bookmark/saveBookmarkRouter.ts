@@ -4,10 +4,9 @@ import type { Item } from '@entities/bookmark'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '../../consts/httpStatus'
 import { BookmarkModel } from '../../db/models/bookmarkModel'
-import { verifyAccessTokenMiddleware } from '../../middleware/verifyAccessTokenMiddleware'
 import { bucket, storageFolderName } from '../../services/storage'
 import type { ResWithBody, ReqWithBody, Next } from '../../types'
-import { getUserFromRefreshTokenOrThrowUnauthorized } from '../../utils/jwt'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '../../utils/jwt'
 
 export type ReqBody = {
   item: Item
@@ -35,7 +34,7 @@ export const saveBookmarkRouter = Router()
 
 const saveBookmark: RouterHandler = async (req, res, next) => {
   try {
-    const { email } = getUserFromRefreshTokenOrThrowUnauthorized(req)
+    const { email } = getUserFromAccessTokenOrThrowUnauthorized(req)
 
     const { item } = req.body
 
@@ -102,12 +101,6 @@ const saveBookmark: RouterHandler = async (req, res, next) => {
   }
 }
 
-saveBookmarkRouter.post(
-  '/',
-  (req, res, next) => {
-    verifyAccessTokenMiddleware(req, res, next)
-  },
-  (req, res, next) => {
-    void saveBookmark(req, res, next)
-  },
-)
+saveBookmarkRouter.post('/', (req, res, next) => {
+  void saveBookmark(req, res, next)
+})
