@@ -1,7 +1,7 @@
 // import cors from 'cors'
+import express, { type Request, type Response } from 'express'
 import 'dotenv/config'
 import cookieParser from 'cookie-parser'
-import express from 'express'
 import morgan from 'morgan'
 import { activateRouter } from './api/auth/activateRouter'
 import { getAccessTokenRouter } from './api/auth/getAccessTokenRouter'
@@ -28,7 +28,6 @@ import { uploadRouter } from './api/va/uploadRouter'
 import { apiUrl } from './consts/apiUrl'
 import { connectToDb } from './db/connectToDb'
 import { errorHandlerMiddleware } from './middleware/errorHandlerMiddleware'
-import type { Req, Res } from './types'
 import { config } from './config'
 import { getUsersRouter } from './api/user/getUsersRouter'
 import { deleteUserRouter } from './api/user/deleteUserRouter'
@@ -42,8 +41,16 @@ app.use(cookieParser()) // middleware parses the Cookie header and populates req
 // app.set('trust proxy', true) // for app engine
 
 // dev
-app.get(apiUrl.root, (_req: Req, res: Res) => void res.send('i am express.js'))
-app.get(apiUrl.api, (_req: Req, res: Res) => void res.json({ message: '/api' }))
+app.get(
+  apiUrl.root,
+  (_req: Request, res: Response) => void res.send('i am express.js'),
+)
+
+app.get(
+  apiUrl.api,
+  (_req: Request, res: Response) => void res.json({ message: '/api' }),
+)
+
 app.use(apiUrl.test, testRouter)
 app.use(apiUrl.setBucketCors, setBucketCors)
 app.use(apiUrl.getBucketCors, getBucketCors)
@@ -75,7 +82,6 @@ app.use(apiUrl.upload, uploadRouter)
 // settings
 app.use(apiUrl.getFilesStats, getFilesStatsRouter)
 // error
-//@ts-expect-error: ts error which I do not understand
 app.use(errorHandlerMiddleware)
 
 app.listen(config.back.port, () => {
