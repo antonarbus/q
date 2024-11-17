@@ -1,5 +1,5 @@
+import { Router, type Request, type Response, type NextFunction } from 'express'
 import bcrypt from 'bcryptjs'
-import express from 'express'
 import type { User } from '@entities/user'
 import { httpStatus } from '../../consts/httpStatus'
 import { UserModel } from '../../db/models/userModel'
@@ -8,7 +8,6 @@ import {
   createRefreshToken,
   threeMonthsInSec,
 } from '../../utils/jwt'
-import type { Next, ReqWithBody, ResWithBody } from '../../types'
 
 export type ReqBody = {
   email: User['email']
@@ -17,23 +16,23 @@ export type ReqBody = {
 }
 
 export type ResBody = {
+  accessJwtToken?: string
+  email?: User['email']
+  roles?: User['roles']
   message:
     | 'validation error'
     | 'incorrect reset key'
     | 'not activated'
     | 'password was reset'
-  accessJwtToken?: string
-  email?: User['email']
-  roles?: User['roles']
 }
 
-export const resetPasswordRouter = express.Router()
-
 type RouterHandler = (
-  req: ReqWithBody<ReqBody>,
-  res: ResWithBody<ResBody>,
-  next: Next,
-) => Promise<ResWithBody<ResBody> | undefined>
+  req: Request<unknown, unknown, ReqBody>,
+  res: Response<ResBody>,
+  next: NextFunction,
+) => Promise<void>
+
+export const resetPasswordRouter = Router()
 
 const resetPassword: RouterHandler = async (req, res, next) => {
   try {
@@ -43,15 +42,17 @@ const resetPassword: RouterHandler = async (req, res, next) => {
     const user = await UserModel.findOne({ email, resetPasswordKey }).lean()
 
     if (!user) {
-      return res
+      res
         .status(httpStatus.forbidden_403)
         .json({ message: 'incorrect reset key' })
+
+      return
     }
 
     if (!user.isActivated) {
-      return res
-        .status(httpStatus.forbidden_403)
-        .json({ message: 'not activated' })
+      res.status(httpStatus.forbidden_403).json({ message: 'not activated' })
+
+      return
     }
 
     const saltRounds = 10
@@ -71,7 +72,7 @@ const resetPassword: RouterHandler = async (req, res, next) => {
       { new: true },
     ).lean()
 
-    return res.status(httpStatus.created_201).json({
+    res.status(httpStatus.created_201).json({
       message: 'password was reset',
       accessJwtToken,
       email: updatedUser?.email,
@@ -82,6 +83,4 @@ const resetPassword: RouterHandler = async (req, res, next) => {
   }
 }
 
-resetPasswordRouter.post('/', (req, res, next) => {
-  void resetPassword(req, res, next)
-})
+resetPasswordRouter.post('/', resetPassword)

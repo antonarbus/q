@@ -1,18 +1,17 @@
+import { Router, type Request, type Response, type NextFunction } from 'express'
 import bcrypt from 'bcryptjs'
-import express from 'express'
 import type { User } from '@entities/user'
-import { httpStatus } from '../../consts/httpStatus'
-import { UserModel } from '../../db/models/userModel'
-import { sendEmail } from '../../services/email'
+import { httpStatus } from '@back/consts/httpStatus'
+import { UserModel } from '@back/db/models/userModel'
+import { sendEmail } from '@back/services/email'
+import { config } from '@back/config'
 import {
   createAccessToken,
   createRefreshToken,
   getJwtExpirationInDays,
   threeMonthsInSec,
   verifyRefreshToken,
-} from '../../utils/jwt'
-import type { Next, ReqWithBody, ResWithBody } from '../../types'
-import { config } from '@back/config'
+} from '@back/utils/jwt'
 
 export type ReqBody = {
   email: User['email']
@@ -20,6 +19,11 @@ export type ReqBody = {
 }
 
 export type ResBody = {
+  name?: 'MongooseError'
+  accessJwtToken?: string
+  email?: User['email']
+  roles?: User['roles']
+  jwtRefreshTokenExpirationDays?: number
   message:
     | 'no user data'
     | 'no password'
@@ -29,20 +33,15 @@ export type ResBody = {
     | 'good password'
     | 'failed to create token'
     | 'failed to update timestamp'
-  name?: 'MongooseError'
-  accessJwtToken?: string
-  email?: User['email']
-  roles?: User['roles']
-  jwtRefreshTokenExpirationDays?: number
 }
 
 type RouterHandler = (
-  req: ReqWithBody<ReqBody>,
-  res: ResWithBody<ResBody>,
-  next: Next,
-) => Promise<ResWithBody<ResBody> | undefined>
+  req: Request<unknown, unknown, ReqBody>,
+  res: Response<ResBody>,
+  next: NextFunction,
+) => Promise<void>
 
-export const logInRouter = express.Router()
+export const logInRouter = Router()
 
 const checkCredentials: RouterHandler = async (req, res, next) => {
   try {
@@ -52,25 +51,25 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
     const user = await UserModel.findOne({ email }).lean()
 
     if (!user) {
-      return res
-        .status(httpStatus.badRequest_400)
-        .json({ message: 'no user data' })
+      res.status(httpStatus.badRequest_400).json({ message: 'no user data' })
+
+      return
     }
 
     const passwordFromDB = user.password
 
     if (!user.password) {
-      return res
-        .status(httpStatus.badRequest_400)
-        .json({ message: 'no password' })
+      res.status(httpStatus.badRequest_400).json({ message: 'no password' })
+
+      return
     }
 
     const isPasswordValid = await bcrypt.compare(password, passwordFromDB)
 
     if (!isPasswordValid) {
-      return res
-        .status(httpStatus.forbidden_403)
-        .json({ message: 'bad password' })
+      res.status(httpStatus.forbidden_403).json({ message: 'bad password' })
+
+      return
     }
 
     if (!user.isActivated) {
@@ -92,14 +91,18 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
       })
 
       if (emailRes?.[0].statusCode === 202) {
-        return res
+        res
           .status(httpStatus.forbidden_403)
           .json({ message: 'activation link sent' })
+
+        return
       }
 
-      return res
+      res
         .status(httpStatus.serverError_500)
         .json({ message: 'activation link not sent' })
+
+      return
     }
 
     const isExistingRefreshJwtToken = Boolean(
@@ -113,9 +116,11 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
       : createRefreshToken({ email, roles: user.roles })
 
     if (!refreshJwtToken || !accessJwtToken) {
-      return res
+      res
         .status(httpStatus.notFound_404)
         .json({ message: 'failed to create token' })
+
+      return
     }
 
     res.cookie('refreshJwtToken', refreshJwtToken, {
@@ -131,12 +136,14 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
     )
 
     if (!userFromDb) {
-      return res
+      res
         .status(httpStatus.serverError_500)
         .json({ message: 'failed to update timestamp' })
+
+      return
     }
 
-    return res.status(httpStatus.success_200).json({
+    res.status(httpStatus.success_200).json({
       message: 'good password',
       accessJwtToken,
       email: user.email,
@@ -150,6 +157,4 @@ const checkCredentials: RouterHandler = async (req, res, next) => {
   }
 }
 
-logInRouter.post('/', (req, res, next) => {
-  void checkCredentials(req, res, next)
-})
+logInRouter.post('/', checkCredentials)

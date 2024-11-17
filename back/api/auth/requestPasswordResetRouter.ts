@@ -1,10 +1,9 @@
-import express from 'express'
+import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { User } from '@entities/user'
 import { httpStatus } from '../../consts/httpStatus'
 import { UserModel } from '../../db/models/userModel'
 import { nanoid } from '../../lib/nanoid'
 import { sendEmail } from '../../services/email'
-import type { Next, ReqWithBody, ResWithBody } from '../../types'
 import { config } from '@back/config'
 
 export type ReqBody = {
@@ -21,13 +20,13 @@ export type ResBody = {
     | 'reset link not sent'
 }
 
-export const requestPasswordResetRouter = express.Router()
-
 type RouterHandler = (
-  req: ReqWithBody<ReqBody>,
-  res: ResWithBody<ResBody>,
-  next: Next,
-) => Promise<ResWithBody<ResBody> | undefined>
+  req: Request<unknown, unknown, ReqBody>,
+  res: Response<ResBody>,
+  next: NextFunction,
+) => Promise<void>
+
+export const requestPasswordResetRouter = Router()
 
 const requestPasswordReset: RouterHandler = async (req, res, next) => {
   try {
@@ -36,15 +35,17 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
     const user = await UserModel.findOne({ email }).lean()
 
     if (!user) {
-      return res
-        .status(httpStatus.forbidden_403)
-        .json({ message: 'does not exists' })
+      res.status(httpStatus.forbidden_403).json({ message: 'does not exists' })
+
+      return
     }
 
     if (!user.isActivated) {
-      return res
+      res
         .status(httpStatus.forbidden_403)
         .json({ message: 'account not activated' })
+
+      return
     }
 
     const updatedUser = await UserModel.findOneAndUpdate(
@@ -56,9 +57,11 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
     const resetPasswordKey = updatedUser?.resetPasswordKey
 
     if (!resetPasswordKey) {
-      return res
+      res
         .status(httpStatus.serverError_500)
         .json({ message: 'reset key not issued' })
+
+      return
     }
 
     const emailRes = await sendEmail({
@@ -79,12 +82,12 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
     })
 
     if (emailRes?.[0].statusCode === 202) {
-      return res
-        .status(httpStatus.created_201)
-        .json({ message: 'reset link sent' })
+      res.status(httpStatus.created_201).json({ message: 'reset link sent' })
+
+      return
     }
 
-    return res
+    res
       .status(httpStatus.serverError_500)
       .json({ message: 'reset link not sent' })
   } catch (error) {
@@ -92,6 +95,4 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
   }
 }
 
-requestPasswordResetRouter.post('/', (req, res, next) => {
-  void requestPasswordReset(req, res, next)
-})
+requestPasswordResetRouter.post('/', requestPasswordReset)

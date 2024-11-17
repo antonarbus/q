@@ -1,4 +1,4 @@
-import express from 'express'
+import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { User } from '@entities/user'
 import { httpStatus } from '../../consts/httpStatus'
 import { UserModel } from '../../db/models/userModel'
@@ -7,7 +7,6 @@ import {
   getJwtExpirationInDays,
   verifyRefreshToken,
 } from '../../utils/jwt'
-import type { Next, ReqExtended, ResWithBody } from '../../types'
 import { errorMessageCommon } from '@shared/consts/errorMessageCommon'
 
 export type ResBody = {
@@ -18,19 +17,21 @@ export type ResBody = {
   jwtRefreshTokenExpirationDays: number
 }
 
-export const getAccessTokenRouter = express.Router()
+type Cookies = {
+  refreshJwtToken?: string
+}
 
-const getAccessToken = async (
-  req: ReqExtended<{
-    cookies: {
-      refreshJwtToken?: string
-    }
-  }>,
-  res: ResWithBody<ResBody>,
-  next: Next,
-): Promise<ResWithBody<ResBody> | undefined> => {
+type RouterHandler = (
+  req: Request,
+  res: Response<ResBody>,
+  next: NextFunction,
+) => Promise<void>
+
+export const getAccessTokenRouter = Router()
+
+const getAccessToken: RouterHandler = async (req, res, next) => {
   try {
-    const refreshJwtToken = req.cookies.refreshJwtToken
+    const refreshJwtToken = (req.cookies as Cookies).refreshJwtToken
 
     if (typeof refreshJwtToken !== 'string') {
       throw new Error(errorMessageCommon.notLoggedIn)
@@ -93,7 +94,7 @@ const getAccessToken = async (
       roles: jwtPayload.roles,
     })
 
-    return res.status(httpStatus.success_200).json({
+    res.status(httpStatus.success_200).json({
       message: 'issued access token',
       accessJwtToken,
       roles: jwtPayload.roles,
@@ -105,6 +106,4 @@ const getAccessToken = async (
   }
 }
 
-getAccessTokenRouter.get('/', (req, res, next) => {
-  void getAccessToken(req, res, next)
-})
+getAccessTokenRouter.get('/', getAccessToken)

@@ -1,4 +1,4 @@
-import express from 'express'
+import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { User } from '@entities/user'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '../../consts/httpStatus'
@@ -8,7 +8,6 @@ import {
   createRefreshToken,
   threeMonthsInSec,
 } from '../../utils/jwt'
-import type { Next, ReqWithBody, ResWithBody } from '../../types'
 
 export type ReqBody = {
   activationKey: User['activationKey']
@@ -26,12 +25,12 @@ export type ResBody = {
 }
 
 type RouterHandler = (
-  req: ReqWithBody<ReqBody>,
-  res: ResWithBody<ResBody>,
-  next: Next,
-) => Promise<ResWithBody<ResBody> | undefined>
+  req: Request<unknown, unknown, ReqBody>,
+  res: Response<ResBody>,
+  next: NextFunction,
+) => Promise<void>
 
-export const activateRouter = express.Router()
+export const activateRouter = Router()
 
 const activate: RouterHandler = async (req, res, next) => {
   try {
@@ -40,17 +39,19 @@ const activate: RouterHandler = async (req, res, next) => {
     const user = await UserModel.findOne({ activationKey })
 
     if (!user) {
-      return res
+      res
         .status(httpStatus.badRequest_400)
         .json({ message: 'activation key not found' })
+
+      return
     }
 
     const { email, roles, isActivated } = user
 
     if (isActivated) {
-      return res
-        .status(httpStatus.success_200)
-        .json({ message: 'already activated' })
+      res.status(httpStatus.success_200).json({ message: 'already activated' })
+
+      return
     }
 
     const accessJwtToken = createAccessToken({ email, roles })
@@ -68,7 +69,7 @@ const activate: RouterHandler = async (req, res, next) => {
       { new: true },
     ).lean()
 
-    return res.status(httpStatus.success_200).json({
+    res.status(httpStatus.success_200).json({
       message: 'activated',
       accessJwtToken,
       email: userDocument?.email,
@@ -79,6 +80,4 @@ const activate: RouterHandler = async (req, res, next) => {
   }
 }
 
-activateRouter.post('/', (req, res, next) => {
-  void activate(req, res, next)
-})
+activateRouter.post('/', activate)

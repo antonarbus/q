@@ -1,11 +1,10 @@
+import { Router, type Request, type Response, type NextFunction } from 'express'
 import bcrypt from 'bcryptjs'
-import express from 'express'
 import type { User } from '@entities/user'
 import { httpStatus } from '../../consts/httpStatus'
 import { UserModel } from '../../db/models/userModel'
 import { nanoid } from '../../lib/nanoid'
 import { sendEmail } from '../../services/email'
-import type { Next, ReqWithBody, ResWithBody } from '../../types'
 import { config } from '@back/config'
 
 export type ReqBody = {
@@ -22,13 +21,13 @@ export type ResBody = {
     | 'activation key not issued'
 }
 
-export const registerRouter = express.Router()
-
 type RouterHandler = (
-  req: ReqWithBody<ReqBody>,
-  res: ResWithBody<ResBody>,
-  next: Next,
-) => Promise<ResWithBody<ResBody> | undefined>
+  req: Request<unknown, unknown, ReqBody>,
+  res: Response<ResBody>,
+  next: NextFunction,
+) => Promise<void>
+
+export const registerRouter = Router()
 
 const register: RouterHandler = async (req, res, next) => {
   try {
@@ -37,9 +36,9 @@ const register: RouterHandler = async (req, res, next) => {
     const user = await UserModel.findOne({ email, isActivated: true }).lean()
 
     if (user) {
-      return res
-        .status(httpStatus.forbidden_403)
-        .json({ message: 'already exists' })
+      res.status(httpStatus.forbidden_403).json({ message: 'already exists' })
+
+      return
     }
 
     const saltRounds = 10
@@ -54,9 +53,11 @@ const register: RouterHandler = async (req, res, next) => {
     const activationKey = newUser.activationKey
 
     if (!activationKey) {
-      return res
+      res
         .status(httpStatus.serverError_500)
         .json({ message: 'activation key not issued' })
+
+      return
     }
 
     const emailRes = await sendEmail({
@@ -77,12 +78,14 @@ const register: RouterHandler = async (req, res, next) => {
     })
 
     if (emailRes?.[0].statusCode === 202) {
-      return res
+      res
         .status(httpStatus.created_201)
         .json({ message: 'activation link sent' })
+
+      return
     }
 
-    return res
+    res
       .status(httpStatus.serverError_500)
       .json({ message: 'activation link not sent' })
   } catch (error) {
@@ -90,6 +93,4 @@ const register: RouterHandler = async (req, res, next) => {
   }
 }
 
-registerRouter.post('/', (req, res, next) => {
-  void register(req, res, next)
-})
+registerRouter.post('/', register)
