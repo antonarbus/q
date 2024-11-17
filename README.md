@@ -79,32 +79,30 @@ Authentication - checking if a user is the same as authorized initially
 against stored email and hashed password at the login stage.
 
 (C) On successful authorization the server issues 15 min `access` jwt token and
-rarely issues new `refresh` jwt token if pervious one is expired (ones per 30d).
+rarely issues new `refresh` jwt token if pervious one is expired (ones per 90d).
 
-(D) `refresh` jwt token is needed for future user authentication to avoid
-asking for credentials on every login and protected http request.
+(D) `refresh` jwt token is needed to issue `access` token for a user without
+asking for credentials.
 
 (E) `refresh` token is saved by server in db + in secured cookies on login.
-On every protected api request we verify `refresh` token and check if it is the same as in db.
 
 (F) If we want to forbid user's access we may simply delete or modify `refresh` token from db.
 
 (G) `access` token is stored locally in memory on client side and is
-attached to request to http headers `access-jwt-token` for protected api requests.
+attached to request's http headers `access-jwt-token` for protected api requests.
 
 (H) `access` token is attached by 'request' interceptor at `axiosWithAuth`.
 If we do a request to a protected endpoint we just use `axiosWithAuth`
 instance to avoid attaching token manually.
 
-(I) At protected routes the `verifyTokenMiddleware` is used to check the `access` token.
-Verification is fast and does not involve database. If the token is ok
-then the request goes forward, otherwise en error response of status `401` with
-message "Not logged in" is returned.
+(I) At protected routes we get user details from `access` token.
+Verification is fast and does not involve database. If token is expired or wrong
+en error response of status `401` with message "Not logged in" is returned.
 
-(J) `access` token expires in 15 min.
+(J) `access` token expires every 15 min.
 'Response' interceptor in `axiosWithAuth` checks for `401` status and
 if it is the `401` status, it makes additional request to get new `access` token by
-checking already attached `refresh` token from cookies, which has 30d expiry time.
+checking already attached `refresh` token from cookies, which has 90d expiry time.
 
 (K) `axiosWithAuth` remembers initial request with all parameters when it
 got first `401` error and after getting new refreshed `access` token it
