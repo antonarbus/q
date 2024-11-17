@@ -1,8 +1,8 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { Quotation } from '@entities/quotation'
-import { httpStatus } from '../../consts/httpStatus'
-import { QuotationModel } from '../../db/models/quotationModel'
-import { bucket, storageFolderName } from '../../services/storage'
+import { httpStatus } from '@back/consts/httpStatus'
+import { QuotationModel } from '@back/db/models/quotationModel'
+import { bucket, storageFolderName } from '@back/services/storage'
 import { jsonParseSafe } from '@back/utils/jsonParseSafe'
 import { getUserFromRefreshToken } from '@back/utils/jwt'
 

@@ -1,5 +1,5 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
-import { bucket } from '../../services/storage'
+import { bucket } from '@back/services/storage'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/jwt'
 import { httpStatus } from '@back/consts/httpStatus'
 

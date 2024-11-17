@@ -1,9 +1,9 @@
+import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { Item } from '@entities/bookmark'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
-import { httpStatus } from '../../consts/httpStatus'
-import { BookmarkModel } from '../../db/models/bookmarkModel'
-import { Router, type Request, type Response, type NextFunction } from 'express'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '../../utils/jwt'
+import { httpStatus } from '@back/consts/httpStatus'
+import { BookmarkModel } from '@back/db/models/bookmarkModel'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/jwt'
 
 export type ResBody = {
   message: ErrorMessageCommon | 'Found' | 'Unhandled error'

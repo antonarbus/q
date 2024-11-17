@@ -1,5 +1,5 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
-import { httpStatus } from '../../consts/httpStatus'
+import { httpStatus } from '@back/consts/httpStatus'
 
 export type ResBody = {
   message: 'logged out'

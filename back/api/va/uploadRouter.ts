@@ -1,9 +1,9 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 import multer from 'multer'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
-import { httpStatus } from '../../consts/httpStatus'
-import { bucket, storageFolderName } from '../../services/storage'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '../../utils/jwt'
+import { httpStatus } from '@back/consts/httpStatus'
+import { bucket, storageFolderName } from '@back/services/storage'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/jwt'
 
 // https://medium.com/@olamilekan001/image-upload-with-google-cloud-storage-and-node-js-a1cf9baa1876
 

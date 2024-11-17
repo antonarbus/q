@@ -1,5 +1,5 @@
-import { bucket } from '../../services/storage'
 import { Router, type Request, type Response, type NextFunction } from 'express'
+import { bucket } from '@back/services/storage'
 import { getEnvVarOrThrow } from '@back/utils/getEnvVar'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/jwt'
 import { httpStatus } from '@back/consts/httpStatus'

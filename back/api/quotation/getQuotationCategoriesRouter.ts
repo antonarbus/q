@@ -1,9 +1,9 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { Quotation } from '@entities/quotation'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
-import { httpStatus } from '../../consts/httpStatus'
-import { QuotationModel } from '../../db/models/quotationModel'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '../../utils/jwt'
+import { httpStatus } from '@back/consts/httpStatus'
+import { QuotationModel } from '@back/db/models/quotationModel'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/jwt'
 
 export type ResBody = {
   message: ErrorMessageCommon | 'Found' | 'Unhandled error'

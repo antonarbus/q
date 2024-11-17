@@ -1,13 +1,13 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { User } from '@entities/user'
-import { httpStatus } from '../../consts/httpStatus'
-import { UserModel } from '../../db/models/userModel'
+import { httpStatus } from '@back/consts/httpStatus'
+import { UserModel } from '@back/db/models/userModel'
+import { errorMessageCommon } from '@shared/consts/errorMessageCommon'
 import {
   createAccessToken,
   getJwtExpirationInDays,
   verifyRefreshToken,
-} from '../../utils/jwt'
-import { errorMessageCommon } from '@shared/consts/errorMessageCommon'
+} from '@back/utils/jwt'
 
 export type ResBody = {
   message: 'issued access token'

@@ -1,9 +1,9 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { User } from '@entities/user'
-import { httpStatus } from '../../consts/httpStatus'
-import { UserModel } from '../../db/models/userModel'
-import { nanoid } from '../../lib/nanoid'
-import { sendEmail } from '../../services/email'
+import { httpStatus } from '@back/consts/httpStatus'
+import { UserModel } from '@back/db/models/userModel'
+import { nanoid } from '@back/lib/nanoid'
+import { sendEmail } from '@back/services/email'
 import { config } from '@back/config'
 
 export type ReqBody = {

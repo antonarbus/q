@@ -1,13 +1,13 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 import bcrypt from 'bcryptjs'
 import type { User } from '@entities/user'
-import { httpStatus } from '../../consts/httpStatus'
-import { UserModel } from '../../db/models/userModel'
+import { httpStatus } from '@back/consts/httpStatus'
+import { UserModel } from '@back/db/models/userModel'
 import {
   createAccessToken,
   createRefreshToken,
   threeMonthsInSec,
-} from '../../utils/jwt'
+} from '@back/utils/jwt'
 
 export type ReqBody = {
   email: User['email']

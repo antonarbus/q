@@ -1,8 +1,8 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
-import { httpStatus } from '../../consts/httpStatus'
-import { bucket, storageFolderName } from '../../services/storage'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '../../utils/jwt'
+import { httpStatus } from '@back/consts/httpStatus'
+import { bucket, storageFolderName } from '@back/services/storage'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/jwt'
 
 export type ResBody = {
   message: ErrorMessageCommon | 'file stats' | 'no item in bucket' | 'deleted'
