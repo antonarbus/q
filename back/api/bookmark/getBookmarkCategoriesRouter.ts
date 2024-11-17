@@ -1,9 +1,8 @@
-import { Router } from 'express'
 import type { Item } from '@entities/bookmark'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '../../consts/httpStatus'
 import { BookmarkModel } from '../../db/models/bookmarkModel'
-import type { ResWithBody, Next, Req } from '../../types'
+import { Router, type Request, type Response, type NextFunction } from 'express'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '../../utils/jwt'
 
 export type ResBody = {
@@ -12,10 +11,10 @@ export type ResBody = {
 }
 
 type RouterHandler = (
-  req: Req,
-  res: ResWithBody<ResBody>,
-  next: Next,
-) => Promise<ResWithBody<ResBody> | undefined>
+  req: Request,
+  res: Response<ResBody>,
+  next: NextFunction,
+) => Promise<void>
 
 export const getBookmarkCategoriesRouter = Router()
 
@@ -25,14 +24,10 @@ const getBookmarkCategories: RouterHandler = async (req, res, next) => {
 
     const categories = await BookmarkModel.find({ email }).distinct('category')
 
-    return res
-      .status(httpStatus.success_200)
-      .json({ message: 'Found', categories })
+    res.status(httpStatus.success_200).json({ message: 'Found', categories })
   } catch (error) {
     next(error)
   }
 }
 
-getBookmarkCategoriesRouter.get('/', (req, res, next) => {
-  void getBookmarkCategories(req, res, next)
-})
+getBookmarkCategoriesRouter.get('/', getBookmarkCategories)

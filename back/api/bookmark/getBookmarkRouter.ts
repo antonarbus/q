@@ -1,9 +1,8 @@
-import { Router } from 'express'
+import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { Item } from '@entities/quotation'
 import { httpStatus } from '../../consts/httpStatus'
 import { BookmarkModel } from '../../db/models/bookmarkModel'
 import { bucket, storageFolderName } from '../../services/storage'
-import type { ResWithBody, ReqWithBody, Next } from '../../types'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '../../utils/jwt'
 import { jsonParseSafe } from '@back/utils/jsonParseSafe'
 
@@ -17,10 +16,10 @@ export type ResBody = {
 }
 
 type RouterHandler = (
-  req: ReqWithBody<ReqBody>,
-  res: ResWithBody<ResBody>,
-  next: Next,
-) => Promise<ResWithBody<ResBody> | undefined>
+  req: Request<unknown, unknown, ReqBody>,
+  res: Response<ResBody>,
+  next: NextFunction,
+) => Promise<void>
 
 export const getBookmarkRouter = Router()
 
@@ -33,7 +32,9 @@ const getBookmark: RouterHandler = async (req, res, next) => {
     const document = await BookmarkModel.findOne({ email, id })
 
     if (!document) {
-      return res.status(httpStatus.notFound_404).json({ message: 'not found' })
+      res.status(httpStatus.notFound_404).json({ message: 'not found' })
+
+      return
     }
 
     const filePath = `${email}/${storageFolderName.bookmarks}/${id}.json`
@@ -45,10 +46,12 @@ const getBookmark: RouterHandler = async (req, res, next) => {
     const item = jsonParseSafe<Item>(fileAsString)
 
     if (!item) {
-      return res.status(httpStatus.notFound_404).json({ message: 'not found' })
+      res.status(httpStatus.notFound_404).json({ message: 'not found' })
+
+      return
     }
 
-    return res.status(httpStatus.success_200).json({
+    res.status(httpStatus.success_200).json({
       message: 'found',
       item: { ...item, ...document },
     })
@@ -57,6 +60,4 @@ const getBookmark: RouterHandler = async (req, res, next) => {
   }
 }
 
-getBookmarkRouter.post('/', (req, res, next) => {
-  void getBookmark(req, res, next)
-})
+getBookmarkRouter.post('/', getBookmark)

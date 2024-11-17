@@ -1,11 +1,10 @@
-import { Router } from 'express'
+import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { FlattenMaps } from 'mongoose'
 import type { Item } from '@entities/bookmark'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '../../consts/httpStatus'
 import { BookmarkModel } from '../../db/models/bookmarkModel'
 import { bucket, storageFolderName } from '../../services/storage'
-import type { ResWithBody, ReqWithBody, Next } from '../../types'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '../../utils/jwt'
 
 export type ReqBody = {
@@ -25,10 +24,10 @@ export type ResBody = {
 }
 
 type RouterHandler = (
-  req: ReqWithBody<ReqBody>,
-  res: ResWithBody<ResBody>,
-  next: Next,
-) => Promise<ResWithBody<ResBody> | undefined>
+  req: Request<unknown, unknown, ReqBody>,
+  res: Response<ResBody>,
+  next: NextFunction,
+) => Promise<void>
 
 export const saveBookmarkRouter = Router()
 
@@ -39,21 +38,27 @@ const saveBookmark: RouterHandler = async (req, res, next) => {
     const { item } = req.body
 
     if (!item.name) {
-      return res
+      res
         .status(httpStatus.forbidden_403)
         .json({ message: 'name is not provided' })
+
+      return
     }
 
     if (!item.category) {
-      return res
+      res
         .status(httpStatus.forbidden_403)
         .json({ message: 'category is not provided' })
+
+      return
     }
 
     if (!item.id) {
-      return res
+      res
         .status(httpStatus.forbidden_403)
         .json({ message: 'id is not provided' })
+
+      return
     }
 
     const existingItem = await BookmarkModel.findOne({
@@ -83,16 +88,12 @@ const saveBookmark: RouterHandler = async (req, res, next) => {
       .select({ _id: 0, __v: 0 })
       .lean()
 
-    // if (!itemDataFromDb) {
-    //   return res.status(httpStatus.forbidden_403).json({ message: 'not saved' })
-    // }
-
     const filePath = `${email}/${storageFolderName.bookmarks}/${item.id}.json`
     const file = bucket.file(filePath)
     const contents = JSON.stringify({ ...itemDataFromDb, ...item }, null, 2)
     await file.save(contents)
 
-    return res.status(httpStatus.success_200).json({
+    res.status(httpStatus.success_200).json({
       message: isNew ? 'saved' : 'updated',
       item: { ...itemDataFromDb, ...item },
     })
@@ -101,6 +102,4 @@ const saveBookmark: RouterHandler = async (req, res, next) => {
   }
 }
 
-saveBookmarkRouter.post('/', (req, res, next) => {
-  void saveBookmark(req, res, next)
-})
+saveBookmarkRouter.post('/', saveBookmark)

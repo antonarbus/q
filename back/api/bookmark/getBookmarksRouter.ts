@@ -1,9 +1,8 @@
-import { Router } from 'express'
+import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { Item } from '@entities/bookmark'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '../../consts/httpStatus'
 import { BookmarkModel } from '../../db/models/bookmarkModel'
-import type { ResWithBody, Next, Req } from '../../types'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '../../utils/jwt'
 
 export type ItemPick = Pick<
@@ -17,10 +16,10 @@ export type ResBody = {
 }
 
 type RouterHandler = (
-  req: Req,
-  res: ResWithBody<ResBody>,
-  next: Next,
-) => Promise<ResWithBody<ResBody> | undefined>
+  req: Request,
+  res: Response<ResBody>,
+  next: NextFunction,
+) => Promise<void>
 
 export const getBookmarksRouter = Router()
 
@@ -44,18 +43,20 @@ const getBookmarks: RouterHandler = async (req, res, next) => {
     ).lean()
 
     if (bookmarks.length === 0) {
-      return res
+      res
         .status(httpStatus.success_200)
         .json({ message: 'No content', bookmarks })
+
+      return
     }
 
     if (bookmarks.length) {
-      return res
-        .status(httpStatus.success_200)
-        .json({ message: 'Found', bookmarks })
+      res.status(httpStatus.success_200).json({ message: 'Found', bookmarks })
+
+      return
     }
 
-    return res
+    res
       .status(httpStatus.notFound_404)
       .json({ message: 'Unhandled error', bookmarks: [] })
   } catch (error) {
@@ -63,10 +64,4 @@ const getBookmarks: RouterHandler = async (req, res, next) => {
   }
 }
 
-getBookmarksRouter.get(
-  '/',
-  // verifyAccessTokenMiddleware,
-  (req, res, next) => {
-    void getBookmarks(req, res, next)
-  },
-)
+getBookmarksRouter.get('/', getBookmarks)
