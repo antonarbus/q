@@ -22,8 +22,8 @@ const test: RouterHandler = async (req, res, next) => {
   }
 
   try {
-    // const dbRes = await UserModel.find()
     const dbRes = await UserModel.find({ email: 'some random guy' })
+    // const dbRes = await UserModel.find()
     // const dbRes = await UserModel.find({ email: 'test-user@sendmequotation.today' })
     // await UserModel.deleteOne({ email: 'info@sendmequotation.today' })
     // const dbRes = await UserModel.find().select({ _id: 0, email: 1 })

@@ -1,6 +1,6 @@
 import type { User } from '@entities/user'
 import { verifyRefreshToken } from './verifyRefreshToken'
-import { Router, type Request, type Response, type NextFunction } from 'express'
+import type { Request } from 'express'
 
 type Res = {
   email: User['email']
