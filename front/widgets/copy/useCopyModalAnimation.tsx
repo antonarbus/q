@@ -1,13 +1,13 @@
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
-import { useAnimationControls, type AnimationControls } from 'motion/react'
+import { useAnimation, type AnimationControls } from 'motion/react'
 import { useEffect } from 'react'
 import { useFirstMountState } from 'react-use'
 import { copySlice } from '@entities/copy'
 import { containerPadding, containerWidth } from './const'
 
 export const useCopyModalAnimation = (): AnimationControls => {
-  const copyModalAnimationControls = useAnimationControls()
+  const copyModalAnimationControls = useAnimation()
   const isFirstMount = useFirstMountState()
   const items = useSelector((state) => state.copy.items)
 
