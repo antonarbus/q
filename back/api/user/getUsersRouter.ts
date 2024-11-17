@@ -1,9 +1,8 @@
-import { Router } from 'express'
+import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { FlattenMaps } from 'mongoose'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import type { Pretty } from '@shared/types/Pretty'
 import { httpStatus } from '../../consts/httpStatus'
-import type { ResWithBody, Next, Req } from '../../types'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '../../utils/jwt'
 import { UserModel } from '@back/db/models/userModel'
 import type { User } from '@entities/user'
@@ -14,20 +13,20 @@ export type UserPicked = Pick<
 >
 
 export type ResBody = Pretty<{
+  users: FlattenMaps<UserPicked>[]
   message:
     | ErrorMessageCommon
     | 'no permission to view'
     | 'No content'
     | 'users data'
     | 'Unhandled case'
-  users: FlattenMaps<UserPicked>[]
 }>
 
 type RouterHandler = (
-  req: Req,
-  res: ResWithBody<ResBody>,
-  next: Next,
-) => Promise<ResWithBody<ResBody> | undefined>
+  req: Request,
+  res: Response<ResBody>,
+  next: NextFunction,
+) => Promise<void>
 
 export const getUsersRouter = Router()
 
@@ -36,9 +35,11 @@ const getUsers: RouterHandler = async (req, res, next) => {
     const { roles } = getUserFromAccessTokenOrThrowUnauthorized(req)
 
     if (!roles.includes('super-admin')) {
-      return res
+      res
         .status(httpStatus.forbidden_403)
         .json({ message: 'no permission to view', users: [] })
+
+      return
     }
 
     const users = await UserModel.find(
@@ -55,18 +56,20 @@ const getUsers: RouterHandler = async (req, res, next) => {
       .lean()
 
     if (users.length === 0) {
-      return res
+      res
         .status(httpStatus.notFound_404)
         .json({ message: 'No content', users: [] })
+
+      return
     }
 
     if (users.length) {
-      return res
-        .status(httpStatus.success_200)
-        .json({ message: 'users data', users })
+      res.status(httpStatus.success_200).json({ message: 'users data', users })
+
+      return
     }
 
-    return res
+    res
       .status(httpStatus.notFound_404)
       .json({ message: 'Unhandled case', users: [] })
   } catch (error) {
@@ -74,6 +77,4 @@ const getUsers: RouterHandler = async (req, res, next) => {
   }
 }
 
-getUsersRouter.get('/', (req, res, next) => {
-  void getUsers(req, res, next)
-})
+getUsersRouter.get('/', getUsers)

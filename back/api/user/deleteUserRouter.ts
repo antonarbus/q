@@ -1,8 +1,7 @@
-import { Router } from 'express'
+import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '../../consts/httpStatus'
 import { bucket, storageFolderName } from '../../services/storage'
-import type { ResWithBody, ReqWithBody, Next } from '../../types'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '../../utils/jwt'
 import type { User } from '@entities/user'
 import { UserModel } from '@back/db/models/userModel'
@@ -19,10 +18,10 @@ export type ResBody = {
 }
 
 type RouterHandler = (
-  req: ReqWithBody<ReqBody>,
-  res: ResWithBody<ResBody>,
-  next: Next,
-) => Promise<ResWithBody<ResBody> | undefined>
+  req: Request<unknown, unknown, ReqBody>,
+  res: Response<ResBody>,
+  next: NextFunction,
+) => Promise<void>
 
 export const deleteUserRouter = Router()
 
@@ -35,9 +34,11 @@ const deleteUser: RouterHandler = async (req, res, next) => {
     const isSuperAdmin = roles.includes('super-admin')
 
     if (!isOwner && !isSuperAdmin) {
-      return res
+      res
         .status(httpStatus.forbidden_403)
         .json({ message: 'not allowed', statistics: [] })
+
+      return
     }
 
     const statistics = []
@@ -180,14 +181,10 @@ const deleteUser: RouterHandler = async (req, res, next) => {
       )
     }
 
-    return res
-      .status(httpStatus.success_200)
-      .json({ message: 'deleted', statistics })
+    res.status(httpStatus.success_200).json({ message: 'deleted', statistics })
   } catch (error) {
     next(error)
   }
 }
 
-deleteUserRouter.delete('/', (req, res, next) => {
-  void deleteUser(req, res, next)
-})
+deleteUserRouter.delete('/', deleteUser)
