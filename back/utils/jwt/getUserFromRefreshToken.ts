@@ -1,13 +1,15 @@
 import type { User } from '@entities/user'
-import type { ReqWithBody } from '../../types'
 import { verifyRefreshToken } from './verifyRefreshToken'
+import { Router, type Request, type Response, type NextFunction } from 'express'
 
-export const getUserFromRefreshToken = (
-  req: ReqWithBody,
-): {
+type Res = {
   email: User['email']
   roles: User['roles']
-} => {
+}
+
+export const getUserFromRefreshToken = (
+  req: Request<unknown, unknown, unknown>,
+): Res => {
   type ReqWithCookies = {
     cookies?: {
       refreshJwtToken?: string

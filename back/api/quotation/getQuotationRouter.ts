@@ -1,11 +1,10 @@
-import { Router } from 'express'
 import type { Quotation } from '@entities/quotation'
 import { httpStatus } from '../../consts/httpStatus'
 import { QuotationModel } from '../../db/models/quotationModel'
 import { bucket, storageFolderName } from '../../services/storage'
-import type { ResWithBody, ReqWithBody, Next } from '../../types'
 import { jsonParseSafe } from '@back/utils/jsonParseSafe'
 import { getUserFromRefreshToken } from '@back/utils/jwt'
+import { Router, type Request, type Response, type NextFunction } from 'express'
 
 export type ReqBody = {
   id: Quotation['id']
@@ -24,10 +23,10 @@ export type ResBody = {
 }
 
 type RouterHandler = (
-  req: ReqWithBody<ReqBody>,
-  res: ResWithBody<ResBody>,
-  next: Next,
-) => Promise<ResWithBody<ResBody> | undefined>
+  req: Request<unknown, unknown, ReqBody>,
+  res: Response<ResBody>,
+  next: NextFunction,
+) => Promise<void>
 
 export const getQuotationRouter = Router()
 
@@ -42,11 +41,13 @@ const getQuotation: RouterHandler = async (req, res, next) => {
     ).lean()
 
     if (document === null) {
-      return res
-        .status(httpStatus.notFound_404)
-        .json({ message: 'not found in db' })
+      res.status(httpStatus.notFound_404).json({ message: 'not found in db' })
+
+      return
     }
 
+    // this is probably not very good to do, but i am taking user information from refresh token here
+    // with access token it does not serve the purpose here
     const { email, roles } = getUserFromRefreshToken(req)
 
     const isOwner = email === document.email
@@ -58,15 +59,17 @@ const getQuotation: RouterHandler = async (req, res, next) => {
     const isSuperAdmin = roles.includes('super-admin')
 
     if (!isOwner && !isShared && !isSuperAdmin) {
-      return res
-        .status(httpStatus.forbidden_403)
-        .json({ message: 'not shared' })
+      res.status(httpStatus.forbidden_403).json({ message: 'not shared' })
+
+      return
     }
 
     if (!isOwner && isShared && !isViewer && !isSuperAdmin) {
-      return res
+      res
         .status(httpStatus.forbidden_403)
         .json({ message: 'no permission to view' })
+
+      return
     }
 
     const filePath = `${document.email}/${storageFolderName.quotations}/${id}.json`
@@ -76,25 +79,31 @@ const getQuotation: RouterHandler = async (req, res, next) => {
     const quotation = jsonParseSafe<Quotation>(fileBuffer.toString())
 
     if (!quotation) {
-      return res
+      res
         .status(httpStatus.notFound_404)
         .json({ message: 'not found in bucket' })
+
+      return
     }
 
     if (isSuperAdmin) {
-      return res
+      res
         .status(httpStatus.success_200)
         .json({ message: 'super-admin permission', quotation })
+
+      return
     }
 
     if (isOwner) {
-      return res
+      res
         .status(httpStatus.success_200)
         .json({ message: 'owner permission', quotation })
+
+      return
     }
 
+    // remove sensitive data from quotation
     if (isViewer) {
-      // remove sensitive data from quotation
       quotation.email = 'john@mail.com'
       delete quotation.name
       delete quotation.category
@@ -129,7 +138,7 @@ const getQuotation: RouterHandler = async (req, res, next) => {
         }
       })
 
-      return res.status(httpStatus.success_200).json({
+      res.status(httpStatus.success_200).json({
         message: 'viewer permission',
         quotation,
       })
@@ -139,6 +148,4 @@ const getQuotation: RouterHandler = async (req, res, next) => {
   }
 }
 
-getQuotationRouter.post('/', (req, res, next) => {
-  void getQuotation(req, res, next)
-})
+getQuotationRouter.post('/', getQuotation)
