@@ -1,11 +1,10 @@
-import { Router } from 'express'
+import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { FlattenMaps } from 'mongoose'
 import type { Quotation } from '@entities/quotation/types'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '../../consts/httpStatus'
 import { QuotationModel } from '../../db/models/quotationModel'
 import { bucket, storageFolderName } from '../../services/storage'
-import type { ResWithBody, ReqWithBody, Next } from '../../types'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '../../utils/jwt'
 import { nanoid } from '@back/lib/nanoid'
 
@@ -29,10 +28,10 @@ export type ResBody = {
 }
 
 type RouterHandler = (
-  req: ReqWithBody<ReqBody>,
-  res: ResWithBody<ResBody>,
-  next: Next,
-) => Promise<ResWithBody<ResBody> | undefined>
+  req: Request<unknown, unknown, ReqBody>,
+  res: Response<ResBody>,
+  next: NextFunction,
+) => Promise<void>
 
 export const saveQuotationRouter = Router()
 
@@ -43,9 +42,11 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
     const { quotation } = req.body
 
     if (!quotation.id) {
-      return res
+      res
         .status(httpStatus.forbidden_403)
         .json({ message: 'id is not provided' })
+
+      return
     }
 
     const isExistingYourQuotation =
@@ -119,7 +120,7 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
       message = 'copied and saved'
     }
 
-    return res.status(httpStatus.success_200).json({
+    res.status(httpStatus.success_200).json({
       message,
       quotation: { ...quotationDataFromDb, blocks: quotation.blocks },
     })
@@ -128,6 +129,4 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
   }
 }
 
-saveQuotationRouter.post('/', (req, res, next) => {
-  void saveQuotation(req, res, next)
-})
+saveQuotationRouter.post('/', saveQuotation)

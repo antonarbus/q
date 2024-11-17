@@ -2,7 +2,7 @@ import type { User } from '@entities/user'
 import { errorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { headerName } from '@back/consts/headerName'
 import { verifyAccessToken } from './verifyAccessToken'
-import type { ReqWithBody } from '@back/types'
+import type { Request } from 'express'
 
 type Res = {
   email: User['email']
@@ -10,7 +10,7 @@ type Res = {
 }
 
 export const getUserFromAccessTokenOrThrowUnauthorized = (
-  req: ReqWithBody,
+  req: Request<unknown, unknown, unknown>,
 ): Res => {
   const accessJwtToken = req.headers[headerName.accessJwtToken]
 
