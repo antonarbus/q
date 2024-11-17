@@ -1,4 +1,3 @@
-// import cors from 'cors'
 import express, { type Request, type Response } from 'express'
 import 'dotenv/config'
 import cookieParser from 'cookie-parser'
@@ -31,6 +30,7 @@ import { errorHandlerMiddleware } from './middleware/errorHandlerMiddleware'
 import { config } from './config'
 import { getUsersRouter } from './api/user/getUsersRouter'
 import { deleteUserRouter } from './api/user/deleteUserRouter'
+// import cors from 'cors'
 
 const app = express()
 void connectToDb()
