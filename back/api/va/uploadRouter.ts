@@ -1,9 +1,8 @@
-import express from 'express'
+import { Router, type Request, type Response, type NextFunction } from 'express'
 import multer from 'multer'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '../../consts/httpStatus'
 import { bucket, storageFolderName } from '../../services/storage'
-import type { Next, Req, ResWithBody } from '../../types'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '../../utils/jwt'
 
 // https://medium.com/@olamilekan001/image-upload-with-google-cloud-storage-and-node-js-a1cf9baa1876
@@ -53,12 +52,12 @@ type ResBody = {
 }
 
 type RouterHandler = (
-  req: Req,
-  res: ResWithBody<ResBody>,
-  next: Next,
-) => Promise<ResWithBody<ResBody> | undefined>
+  req: Request,
+  res: Response<ResBody>,
+  next: NextFunction,
+) => Promise<void>
 
-export const uploadRouter = express.Router()
+export const uploadRouter = Router()
 
 const upload: RouterHandler = async (req, res, next) => {
   try {
@@ -67,20 +66,22 @@ const upload: RouterHandler = async (req, res, next) => {
     const { email } = getUserFromAccessTokenOrThrowUnauthorized(req)
 
     if (file === undefined) {
-      return res.status(httpStatus.badRequest_400).json({ message: 'no file' })
+      res.status(httpStatus.badRequest_400).json({ message: 'no file' })
+
+      return
     }
 
     const { name, link, size } = await uploadFileIntoMemory({ file, email })
 
     if (link) {
-      return res
+      res
         .status(httpStatus.success_200)
         .json({ message: 'uploaded', link, name, size })
+
+      return
     }
 
-    return res
-      .status(httpStatus.serverError_500)
-      .json({ message: 'not uploaded' })
+    res.status(httpStatus.serverError_500).json({ message: 'not uploaded' })
   } catch (error) {
     next(error)
   }
@@ -92,9 +93,5 @@ uploadRouter.post(
     storage: multer.memoryStorage(),
     limits: { fileSize: 50 * 1024 * 1024 },
   }).single('file'), // middleware processes single file uploads, where 'file' is the name of the file input field. The file's details will be stored in req.file
-  // verifyTokenMiddleware,
-  // do not know how to use axios instance with froala file update, so let's validate token manually
-  (req, res, next) => {
-    void upload(req, res, next)
-  },
+  upload,
 )
