@@ -1,5 +1,5 @@
 import { useSelector } from '@shared/lib/redux'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence } from 'motion/react'
 import { useEffectOnce } from 'react-use'
 import { Block } from '@widgets/blocks/Block'
 import { bookmarkPosAtBlocks, isFroalaSignal } from '@entities/quotation'

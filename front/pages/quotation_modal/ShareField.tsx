@@ -10,7 +10,7 @@ import {
   TextField,
 } from '@mui/material'
 import { type Signal, useSignal } from '@preact/signals-react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'motion/react'
 import uniq from 'lodash.uniq'
 import { useEffect } from 'react'
 import { BsFillPersonPlusFill } from 'react-icons/bs'

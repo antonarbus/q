@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import { usePasteClick, useMovePasteText } from '@features/blocks/paste'
 import {
   PressEscIcon,

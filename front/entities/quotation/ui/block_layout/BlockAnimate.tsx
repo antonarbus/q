@@ -1,6 +1,6 @@
 import { theme } from '@shared/theme'
 import { Box } from '@mui/material'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import type { ResizableProps } from 're-resizable'
 import { cls } from '@shared/consts/cls'
 import type {

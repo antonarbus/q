@@ -1,4 +1,4 @@
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence } from 'motion/react'
 import { bookmarkPosAtBlocks, type Item } from '@entities/quotation'
 import { FadeInOnInitLoad } from './FadeInOnInitLoad'
 import { Block } from './Block'

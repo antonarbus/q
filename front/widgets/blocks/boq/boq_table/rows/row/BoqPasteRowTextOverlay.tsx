@@ -1,5 +1,5 @@
 import { theme } from '@shared/theme'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 
 export const BoqPasteRowTextOverlay = (): React.JSX.Element => (
   <motion.div

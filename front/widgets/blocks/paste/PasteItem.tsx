@@ -1,5 +1,5 @@
 import { theme } from '@shared/theme'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import { useBlock } from '@entities/quotation'
 
 export const PasteItem = (): React.JSX.Element => {

@@ -1,5 +1,5 @@
 import { useSelector } from '@shared/lib/redux'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence } from 'motion/react'
 import { hideBoqRowPinsOnRowBlur } from '@features/blocks/cell/pin'
 import {
   selectBoqRows,

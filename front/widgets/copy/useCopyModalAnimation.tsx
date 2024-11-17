@@ -1,6 +1,6 @@
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
-import { useAnimationControls, type AnimationControls } from 'framer-motion'
+import { useAnimationControls, type AnimationControls } from 'motion/react'
 import { useEffect } from 'react'
 import { useFirstMountState } from 'react-use'
 import { copySlice } from '@entities/copy'
