@@ -16,17 +16,18 @@ import { DescriptionField } from '@shared/components/input_fields/DescriptionFie
 import { InfoField } from '@shared/components/input_fields/InfoField'
 import { useGetQuotationCategoriesQuery } from '@entities/quotation'
 import { router } from '@shared/lib/router'
+import { useSlide } from '@shared/utils/useSlide'
 
 export const QuotationModal = (): React.JSX.Element => {
-  const modalRef = useRef<HTMLDivElement>(null)
+  const { ref: modalRef, slideOut } = useSlide()
   const { quotationFormValues } = useQuotationFormValues()
   useLoadInitValuesIntoQuotationModal({ quotationFormValues })
   useLoadQuotationModalWithDirectLink({ quotationFormValues })
   const isButtonDisabled = useIsButtonDisabled({ quotationFormValues })
 
   const { onSubmit, isPending, isSuccess, isError } = useSaveQuotation({
-    modalRef,
     quotationFormValues,
+    slideOut,
   })
 
   const navigateUp = (): void => {

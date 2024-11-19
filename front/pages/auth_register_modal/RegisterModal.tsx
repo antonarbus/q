@@ -9,10 +9,11 @@ import { EmailField } from '@shared/components/input_fields/EmailField'
 import { FormModal } from '@shared/components/FormModal'
 import { PasswordField } from '@shared/components/input_fields/PasswordField'
 import { router } from '@shared/lib/router'
+import { useSlide } from '@shared/utils/useSlide'
 
 export const RegisterModal = (): React.JSX.Element => {
+  const { ref: modalRef, slideOut } = useSlide()
   const inputRef = useRef<HTMLDivElement>(null)
-  const modalRef = useRef<HTMLDivElement>(null)
   const emailSignal = useSignal('')
   const passwordSignal = useSignal('')
   const isEmailOkSignal = useSignal(false)
@@ -22,7 +23,7 @@ export const RegisterModal = (): React.JSX.Element => {
   const { onSubmit, isSuccess, isPending, isError } = useRegister({
     emailSignal,
     passwordSignal,
-    modalRef,
+    slideOut,
   })
 
   useSignalEffect(() => {
@@ -32,6 +33,7 @@ export const RegisterModal = (): React.JSX.Element => {
   })
 
   const navigateUp = (): void => {
+    console.log(666)
     void router.navigate('..')
   }
 
@@ -71,7 +73,7 @@ export const RegisterModal = (): React.JSX.Element => {
           justifyContent: 'space-between',
         }}
       >
-        <OpenLoginModalLink modalRef={modalRef} />
+        <OpenLoginModalLink slideOut={slideOut} />
       </Box>
     </FormModal>
   )

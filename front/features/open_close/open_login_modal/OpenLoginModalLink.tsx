@@ -1,13 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { route } from '@shared/consts/route'
-import { useSlide } from '@shared/utils/useSlide'
 import type { NavigateState } from '@shared/types/NavigateState'
 
 type Props = {
-  modalRef: React.RefObject<HTMLDivElement>
+  slideOut: () => Promise<void>
 }
 
-export const OpenLoginModalLink = ({ modalRef }: Props): React.JSX.Element => {
+export const OpenLoginModalLink = ({ slideOut }: Props): React.JSX.Element => {
   const navigate = useNavigate()
 
   return (
@@ -20,14 +19,15 @@ export const OpenLoginModalLink = ({ modalRef }: Props): React.JSX.Element => {
           shouldSlide: true,
         }
 
-        useSlide({
-          element: modalRef.current,
-          onSlideOutComplete: () => {
-            navigate(`../${route.login}`, {
-              state: navigateState,
-            })
-          },
-        })
+        const slideAndNavigate = async (): Promise<void> => {
+          await slideOut()
+
+          navigate(`../${route.login}`, {
+            state: navigateState,
+          })
+        }
+
+        void slideAndNavigate()
       }}
     >
       Log in

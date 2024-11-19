@@ -16,14 +16,15 @@ import { CategoryField } from '@shared/components/input_fields/CategoryField'
 import { DescriptionField } from '@shared/components/input_fields/DescriptionField'
 import { InfoField } from '@shared/components/input_fields/InfoField'
 import { useGetBookmarkCategoriesQuery } from '@entities/bookmark'
+import { useSlide } from '@shared/utils/useSlide'
 
 export const BookmarkModal = (): React.JSX.Element => {
-  const modalRef = useRef<HTMLDivElement>(null)
+  const { ref: modalRef, slideOut } = useSlide()
   const { bookmarkFromValues } = useLoadInitValuesIntoBookmarkModal()
   useLoadBookmarkModalOpenedWithDirectLink({ bookmarkFromValues })
 
   const { onSubmit, isPending, isSuccess, isError } = useSaveBookmark({
-    modalRef,
+    slideOut,
     bookmarkFromValues,
   })
 

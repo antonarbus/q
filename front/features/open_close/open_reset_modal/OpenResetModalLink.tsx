@@ -1,13 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { route } from '@shared/consts/route'
-import { useSlide } from '@shared/utils/useSlide'
 import type { NavigateState } from '@shared/types/NavigateState'
 
 type Props = {
-  modalRef: React.RefObject<HTMLDivElement>
+  slideOut: () => Promise<void>
 }
 
-export const OpenResetModalLink = ({ modalRef }: Props): React.JSX.Element => {
+export const OpenResetModalLink = ({ slideOut }: Props): React.JSX.Element => {
   const navigate = useNavigate()
 
   return (
@@ -16,22 +15,19 @@ export const OpenResetModalLink = ({ modalRef }: Props): React.JSX.Element => {
       onClick={(e: React.MouseEvent): void => {
         e.preventDefault()
 
-        if (!modalRef.current) {
-          return
-        }
-
         const navigateState: NavigateState = {
           shouldSlide: true,
         }
 
-        useSlide({
-          element: modalRef.current,
-          onSlideOutComplete: () => {
-            navigate(`../${route.requestPasswordReset}`, {
-              state: navigateState,
-            })
-          },
-        })
+        const slideAndNavigate = async (): Promise<void> => {
+          await slideOut()
+
+          navigate(`../${route.requestPasswordReset}`, {
+            state: navigateState,
+          })
+        }
+
+        void slideAndNavigate()
       }}
     >
       Reset

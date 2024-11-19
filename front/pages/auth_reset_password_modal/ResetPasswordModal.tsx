@@ -11,13 +11,12 @@ import { EmailField } from '@shared/components/input_fields/EmailField'
 import { FormModal } from '@shared/components/FormModal'
 import { PasswordField } from '@shared/components/input_fields/PasswordField'
 import { router } from '@shared/lib/router'
+import { useSlide } from '@shared/utils/useSlide'
 
 export const ResetPasswordModal = (): React.ReactNode => {
+  const { ref: modalRef, slideOut } = useSlide()
   const { email } = useParams()
-
   const inputRef = useRef<HTMLDivElement>(null)
-  const modalRef = useRef<HTMLDivElement>(null)
-
   const emailSignal = useSignal(email ?? 'email is missing')
   const passwordSignal = useSignal('')
   const isEmailOkSignal = useSignal(true)
@@ -27,6 +26,7 @@ export const ResetPasswordModal = (): React.ReactNode => {
   const { onSubmit, isPending, isSuccess, isError } = useResetPassword({
     passwordSignal,
     modalRef,
+    slideOut,
   })
 
   useSignalEffect(() => {
@@ -75,8 +75,8 @@ export const ResetPasswordModal = (): React.ReactNode => {
           justifyContent: 'space-between',
         }}
       >
-        <OpenRegisterModalLink modalRef={modalRef} />
-        <OpenLoginModalLink modalRef={modalRef} />
+        <OpenRegisterModalLink slideOut={slideOut} />
+        <OpenLoginModalLink slideOut={slideOut} />
       </Box>
     </FormModal>
   )

@@ -1,14 +1,13 @@
 import { Link } from 'react-router-dom'
 import { route } from '@shared/consts/route'
-import { useSlide } from '@shared/utils/useSlide'
 import { openRegisterModal } from './openRegisterModal'
 
 type Props = {
-  modalRef: React.RefObject<HTMLDivElement>
+  slideOut: () => Promise<void>
 }
 
 export const OpenRegisterModalLink = ({
-  modalRef,
+  slideOut,
 }: Props): React.JSX.Element => {
   return (
     <Link
@@ -17,10 +16,12 @@ export const OpenRegisterModalLink = ({
       onClick={(e: React.MouseEvent): void => {
         e.preventDefault()
 
-        useSlide({
-          element: modalRef.current,
-          onSlideOutComplete: openRegisterModal,
-        })
+        const slideAndNavigate = async (): Promise<void> => {
+          await slideOut()
+          openRegisterModal()
+        }
+
+        void slideAndNavigate()
       }}
     >
       Register

@@ -19,7 +19,7 @@ export const BackdropWithSlidableModal = ({
   shouldUnmountOnClickAway,
   shouldUnmountOnEsc,
 }: Props): React.JSX.Element => {
-  const contentRef = useRef<HTMLDivElement>(null)
+  const { ref: contentRef, slideIn, slideOut } = useSlide()
   const location = useLocation() as Location<NavigateState>
 
   const scrollTopPositionBeforeModalOpen = useRef(
@@ -27,35 +27,30 @@ export const BackdropWithSlidableModal = ({
   )
 
   useEffectOnce(() => {
-    if (contentRef.current) {
-      if (location.state?.shouldSlide) {
-        useSlide({
-          intoView: true,
-          element: contentRef.current,
-          onSlideOutComplete: () => {
-            onMount?.()
-          },
-        })
-      } else {
+    if (location.state?.shouldSlide) {
+      const slideInAndSomeAction = async (): Promise<void> => {
+        await slideIn()
         onMount?.()
       }
+
+      void slideInAndSomeAction()
+    } else {
+      onMount?.()
     }
   })
 
   useEffectOnce(() => {
     const closeModalOnEsc = (e: KeyboardEvent): void => {
-      if (shouldUnmountOnEsc && contentRef.current) {
-        if (e.key === 'Escape') {
-          if (location.state?.shouldSlide) {
-            useSlide({
-              element: contentRef.current,
-              onSlideOutComplete: () => {
-                onUnmount?.()
-              },
-            })
-          } else {
+      if (shouldUnmountOnEsc && e.key === 'Escape') {
+        if (location.state?.shouldSlide) {
+          const slideOutAndSomeAction = async (): Promise<void> => {
+            await slideOut()
             onUnmount?.()
           }
+
+          void slideOutAndSomeAction()
+        } else {
+          onUnmount?.()
         }
       }
     }
@@ -99,14 +94,14 @@ export const BackdropWithSlidableModal = ({
   })
 
   const unmountOnClickAway = (): void => {
-    if (contentRef.current && shouldUnmountOnClickAway) {
+    if (shouldUnmountOnClickAway) {
       if (location.state?.shouldSlide) {
-        useSlide({
-          element: contentRef.current,
-          onSlideOutComplete: () => {
-            onUnmount?.()
-          },
-        })
+        const slideOutAndSomeAction = async (): Promise<void> => {
+          await slideOut()
+          onUnmount?.()
+        }
+
+        void slideOutAndSomeAction()
       } else {
         onUnmount?.()
       }

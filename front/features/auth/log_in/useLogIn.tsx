@@ -19,13 +19,13 @@ import { route } from '@shared/consts/route'
 import { nanoid } from '@shared/lib/nanoid'
 import { navSlice } from '@shared/nav'
 import { notify } from '@shared/toast'
-import { useSlide } from '@shared/utils/useSlide'
 import type { NavigateState } from '@shared/types/NavigateState'
+import { asyncDelay } from '@shared/utils/delay'
 
 type Props = {
   emailSignal: Signal<string>
   passwordSignal: Signal<string>
-  modalRef: React.RefObject<HTMLDivElement>
+  slideOut: () => Promise<void>
 }
 
 type Res = {
@@ -38,7 +38,7 @@ type Res = {
 export const useLogIn = ({
   emailSignal,
   passwordSignal,
-  modalRef,
+  slideOut,
 }: Props): Res => {
   const navigate = useNavigate()
   const { quotationId } = useParams()
@@ -113,22 +113,21 @@ export const useLogIn = ({
         reLoadQuotationSignal.value = nanoid(5)
       }
 
-      setTimeout(() => {
-        useSlide({
-          element: modalRef.current,
-          onSlideOutComplete: () => {
-            const navigateTo = location.state?.navigateTo
+      const slideOutAndChangeUrl = async (): Promise<void> => {
+        await asyncDelay(1000)
+        await slideOut()
+        const navigateTo = location.state?.navigateTo
 
-            if (typeof navigateTo === 'string') {
-              navigate(navigateTo)
+        if (typeof navigateTo === 'string') {
+          navigate(navigateTo)
 
-              return
-            }
+          return
+        }
 
-            navigate('..')
-          },
-        })
-      }, 1000)
+        navigate('..')
+      }
+
+      void slideOutAndChangeUrl()
     }
   }, [isSuccess])
 

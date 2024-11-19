@@ -11,11 +11,13 @@ import {
 import { navItemKey } from '@shared/consts/navItemKey'
 import { navSlice } from '@shared/nav'
 import { notify } from '@shared/toast'
-import { useSlide } from '@shared/utils/useSlide'
+import type { AnimationScope } from 'motion/dist/react'
+import { asyncDelay } from '@shared/utils/delay'
 
 type Props = {
   passwordSignal: Signal<string>
-  modalRef: React.RefObject<HTMLDivElement>
+  modalRef: React.RefObject<HTMLElement> | AnimationScope<HTMLElement>
+  slideOut: () => Promise<void>
 }
 
 type Res = {
@@ -25,7 +27,7 @@ type Res = {
   isError: UseMutationResult['isError']
 }
 
-export const useResetPassword = ({ passwordSignal, modalRef }: Props): Res => {
+export const useResetPassword = ({ passwordSignal, slideOut }: Props): Res => {
   const navigate = useNavigate()
   const { email, resetPasswordKey } = useParams()
 
@@ -70,14 +72,13 @@ export const useResetPassword = ({ passwordSignal, modalRef }: Props): Res => {
           }),
         )
 
-        setTimeout(() => {
-          useSlide({
-            element: modalRef.current,
-            onSlideOutComplete: () => {
-              navigate('..')
-            },
-          })
-        }, 1000)
+        const slideOutAndChangeUrl = async (): Promise<void> => {
+          await asyncDelay(1000)
+          await slideOut()
+          navigate('..')
+        }
+
+        void slideOutAndChangeUrl()
       }
     }
   }, [isSuccess])

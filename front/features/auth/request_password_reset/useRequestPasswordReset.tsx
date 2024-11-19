@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useRequestPasswordResetMutation } from '@entities/user'
 import { notify } from '@shared/toast'
-import { useSlide } from '@shared/utils/useSlide'
+import { asyncDelay } from '@shared/utils/delay'
 
 type Props = {
   emailSignal: Signal<string>
-  modalRef: React.RefObject<HTMLDivElement>
+  slideOut: () => Promise<void>
 }
 
 type Res = {
@@ -20,7 +20,7 @@ type Res = {
 
 export const useRequestPasswordReset = ({
   emailSignal,
-  modalRef,
+  slideOut,
 }: Props): Res => {
   const navigate = useNavigate()
 
@@ -38,14 +38,13 @@ export const useRequestPasswordReset = ({
       if (data.message === 'reset link sent') {
         notify({ msg: 'Check your inbox or spam', theme: 'light' })
 
-        setTimeout(() => {
-          useSlide({
-            element: modalRef.current,
-            onSlideOutComplete: () => {
-              navigate('..')
-            },
-          })
-        }, 1000)
+        const slideOutAndChangeUrl = async (): Promise<void> => {
+          await asyncDelay(1000)
+          await slideOut()
+          navigate('..')
+        }
+
+        void slideOutAndChangeUrl()
       }
     }
   }, [isSuccess])

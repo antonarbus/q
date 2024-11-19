@@ -4,12 +4,12 @@ import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useRegisterMutation } from '@entities/user'
 import { notify } from '@shared/toast'
-import { useSlide } from '@shared/utils/useSlide'
+import { asyncDelay } from '@shared/utils/delay'
 
 type Props = {
   emailSignal: Signal<string>
   passwordSignal: Signal<string>
-  modalRef: React.RefObject<HTMLDivElement>
+  slideOut: () => Promise<void>
 }
 
 type Res = {
@@ -22,7 +22,7 @@ type Res = {
 export const useRegister = ({
   emailSignal,
   passwordSignal,
-  modalRef,
+  slideOut,
 }: Props): Res => {
   const navigate = useNavigate()
 
@@ -41,14 +41,13 @@ export const useRegister = ({
         notify({ msg: 'Check your inbox or spam', theme: 'light' })
       }
 
-      setTimeout(() => {
-        useSlide({
-          element: modalRef.current,
-          onSlideOutComplete: () => {
-            navigate('..')
-          },
-        })
-      }, 1000)
+      const slideOutAndChangeUrl = async (): Promise<void> => {
+        await asyncDelay(1000)
+        await slideOut()
+        navigate('..')
+      }
+
+      void slideOutAndChangeUrl()
     }
   }, [isSuccess])
 

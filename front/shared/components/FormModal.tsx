@@ -1,5 +1,6 @@
 import { theme } from '@shared/theme'
 import { Close } from '@mui/icons-material'
+import type { AnimationScope } from 'motion/react'
 import { AnimatePresence, motion } from 'motion/react'
 import { Children } from 'react'
 import { BackdropWithSlidableModal } from './BackdropWithSlidableModal'
@@ -28,7 +29,7 @@ type Props = {
   isButtonLoading?: boolean
   isButtonSuccess?: boolean
   isButtonError?: boolean
-  modalRef: React.RefObject<HTMLDivElement>
+  modalRef: React.RefObject<HTMLDivElement> | AnimationScope<HTMLElement>
   shouldUnmountOnClickAway: boolean
   shouldUnmountOnEsc: boolean
 }

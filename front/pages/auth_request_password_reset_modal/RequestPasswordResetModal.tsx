@@ -7,16 +7,17 @@ import { OpenLoginModalLink } from '@features/open_close/open_login_modal'
 import { EmailField } from '@shared/components/input_fields/EmailField'
 import { FormModal } from '@shared/components/FormModal'
 import { router } from '@shared/lib/router'
+import { useSlide } from '@shared/utils/useSlide'
 
 export const RequestPasswordResetModal = (): React.JSX.Element => {
-  const modalRef = useRef<HTMLDivElement>(null)
+  const { ref: modalRef, slideOut } = useSlide()
   const inputRef = useRef<HTMLDivElement>(null)
   const emailSignal = useSignal('')
   const isEmailOkSignal = useSignal(false)
 
   const { onSubmit, isPending, isSuccess, isError } = useRequestPasswordReset({
     emailSignal,
-    modalRef,
+    slideOut,
   })
 
   const navigateUp = (): void => {
@@ -54,7 +55,7 @@ export const RequestPasswordResetModal = (): React.JSX.Element => {
           justifyContent: 'space-between',
         }}
       >
-        <OpenLoginModalLink modalRef={modalRef} />
+        <OpenLoginModalLink slideOut={slideOut} />
       </Box>
     </FormModal>
   )

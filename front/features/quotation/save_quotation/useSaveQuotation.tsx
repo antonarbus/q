@@ -19,13 +19,13 @@ import {
   showSuccessNavIcon,
 } from '@shared/nav'
 import { notify } from '@shared/toast'
-import { useSlide } from '@shared/utils/useSlide'
 import type { QuotationFormValues } from '@entities/quotation/types'
 import { route } from '@shared/consts/route'
+import { asyncDelay } from '@shared/utils/delay'
 
 type Props = {
-  modalRef: React.RefObject<HTMLDivElement>
   quotationFormValues: QuotationFormValues
+  slideOut: () => Promise<void>
 }
 
 type Res = {
@@ -36,8 +36,8 @@ type Res = {
 }
 
 export const useSaveQuotation = ({
-  modalRef,
   quotationFormValues,
+  slideOut,
 }: Props): Res => {
   const navigate = useNavigate()
 
@@ -110,24 +110,23 @@ export const useSaveQuotation = ({
           isFroalaSignal.value = true
         })
 
-        setTimeout(() => {
-          useSlide({
-            element: modalRef.current,
-            onSlideOutComplete: () => {
-              const id = data.quotation?.id
+        const slideOutAndChangeUrl = async (): Promise<void> => {
+          await asyncDelay(1000)
+          await slideOut()
+          const id = data.quotation?.id
 
-              const isQuotationsPage = window.location.pathname.includes(
-                route.quotations,
-              )
+          const isQuotationsPage = window.location.pathname.includes(
+            route.quotations,
+          )
 
-              if (isQuotationsPage) {
-                navigate('..', { replace: true })
-              } else {
-                navigate(`/${id}`, { replace: true })
-              }
-            },
-          })
-        }, 1000)
+          if (isQuotationsPage) {
+            navigate('..', { replace: true })
+          } else {
+            navigate(`/${id}`, { replace: true })
+          }
+        }
+
+        void slideOutAndChangeUrl()
       }
     }
   }, [isSuccess])

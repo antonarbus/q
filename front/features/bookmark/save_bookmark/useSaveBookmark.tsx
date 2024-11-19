@@ -1,6 +1,6 @@
 import { dispatch, getState } from '@shared/lib/redux'
 import type { UseMutationResult } from '@tanstack/react-query'
-import { type RefObject, useCallback } from 'react'
+import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import {
@@ -11,13 +11,13 @@ import {
 } from '@entities/bookmark'
 import { bookmarkPosAtBlocks, quotationSlice } from '@entities/quotation'
 import { notify } from '@shared/toast'
-import { useSlide } from '@shared/utils/useSlide'
 import { cls } from '@shared/consts/cls'
 import { getPaperElementHtmlAtModal } from '@shared/utils/htmlGetter/getPaperElementHtmlAtModal'
+import { asyncDelay } from '@shared/utils/delay'
 
 type Props = {
-  modalRef: RefObject<HTMLDivElement>
   bookmarkFromValues: BookmarkFormValues
+  slideOut: () => Promise<void>
 }
 
 type Res = {
@@ -28,8 +28,8 @@ type Res = {
 }
 
 export const useSaveBookmark = ({
-  modalRef,
   bookmarkFromValues,
+  slideOut,
 }: Props): Res => {
   const navigate = useNavigate()
 
@@ -67,14 +67,13 @@ export const useSaveBookmark = ({
       void updateItemCategories()
       void updateBookmarks()
 
-      setTimeout(() => {
-        useSlide({
-          element: modalRef.current,
-          onSlideOutComplete: () => {
-            navigate('..')
-          },
-        })
-      }, 1000)
+      const slideOutAndChangeUrl = async (): Promise<void> => {
+        await asyncDelay(1000)
+        await slideOut()
+        navigate('..')
+      }
+
+      void slideOutAndChangeUrl()
     }
   }, [isSuccess])
 
