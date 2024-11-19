@@ -1,4 +1,4 @@
-import { type ReactNode, useRef } from 'react'
+import { useRef } from 'react'
 import { updateBoqColumnCell } from '@features/blocks/cell/update_cell'
 import {
   Froala,
@@ -11,7 +11,7 @@ import {
 import type { FroalaEditor } from '@shared/types/froala'
 import { ResizableColumn } from '../ResizableColumn'
 
-export const DescriptionColumn = (): ReactNode => {
+export const DescriptionColumn = (): React.ReactNode => {
   const editorRef = useRef<FroalaEditor | null>(null)
   const { blockIndex } = useBlock()
 

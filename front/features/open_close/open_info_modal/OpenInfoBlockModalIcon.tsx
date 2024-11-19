@@ -1,4 +1,3 @@
-import type { ReactNode, MouseEvent } from 'react'
 import { HiOutlineInformationCircle } from 'react-icons/hi2'
 import { useNavigate } from 'react-router-dom'
 import { getBlockFromStore, itemType, useBlock } from '@entities/quotation'
@@ -7,7 +6,7 @@ import { Tooltip } from '@mui/material'
 import { cls } from '@shared/consts/cls'
 import { useIsCopyModalVisible } from '@entities/copy'
 
-export const OpenInfoBlockModalIcon = (): ReactNode => {
+export const OpenInfoBlockModalIcon = (): React.ReactNode => {
   const navigate = useNavigate()
   const { blockIndex } = useBlock()
   const isCopyModalVisible = useIsCopyModalVisible()
@@ -30,7 +29,7 @@ export const OpenInfoBlockModalIcon = (): ReactNode => {
             cursor: 'pointer',
             touchAction: 'none',
           }}
-          onClick={(e: MouseEvent): void => {
+          onClick={(e: React.MouseEvent): void => {
             if (disabled) {
               return
             }

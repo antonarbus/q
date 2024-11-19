@@ -1,4 +1,3 @@
-import type { MouseEvent, ReactNode } from 'react'
 import { HiOutlineInformationCircle } from 'react-icons/hi2'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -12,7 +11,7 @@ import { Tooltip } from '@mui/material'
 import { cls } from '@shared/consts/cls'
 import { useIsCopyModalVisible } from '@entities/copy'
 
-export const OpenInfoBoqRowModalIcon = (): ReactNode => {
+export const OpenInfoBoqRowModalIcon = (): React.ReactNode => {
   const navigate = useNavigate()
   const { blockIndex } = useBlock()
   const { rowIndex } = useRow()
@@ -36,7 +35,7 @@ export const OpenInfoBoqRowModalIcon = (): ReactNode => {
             cursor: 'pointer',
             touchAction: 'none',
           }}
-          onClick={(e: MouseEvent): void => {
+          onClick={(e: React.MouseEvent): void => {
             if (disabled) {
               return
             }

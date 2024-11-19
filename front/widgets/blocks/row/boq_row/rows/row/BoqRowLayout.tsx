@@ -1,10 +1,9 @@
 import { Box } from '@mui/material'
-import type { FocusEvent, ReactNode } from 'react'
 import { cls } from '@shared/consts/cls'
 
 type Props = {
-  children: ReactNode
-  onBlur: (e: FocusEvent<HTMLDivElement>) => void
+  children: React.ReactNode
+  onBlur: (e: React.FocusEvent<HTMLDivElement>) => void
 }
 
 export const BoqRowLayout = ({

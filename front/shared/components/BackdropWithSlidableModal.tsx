@@ -1,11 +1,11 @@
-import { type ReactNode, useRef } from 'react'
+import { useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 import { slideElement } from '../utils/slideElement'
 import { type Location, useLocation } from 'react-router-dom'
 import type { NavigateState } from '@shared/types/NavigateState'
 
 type Props = {
-  children: ReactNode
+  children: React.ReactNode
   onMount?: () => void
   onUnmount?: () => void
   shouldUnmountOnClickAway: boolean

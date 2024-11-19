@@ -1,5 +1,4 @@
 import { dispatch, getState } from '@shared/lib/redux'
-import type { MouseEvent, ReactNode } from 'react'
 import { MdOutlineStarOutline } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -15,7 +14,7 @@ import { notify } from '@shared/toast'
 import { Tooltip } from '@mui/material'
 import { useIsCopyModalVisible } from '@entities/copy'
 
-export const BookmarkBoqRowIcon = (): ReactNode => {
+export const BookmarkBoqRowIcon = (): React.ReactNode => {
   const navigate = useNavigate()
   const { blockIndex } = useBlock()
   const { rowIndex } = useRow()
@@ -38,7 +37,7 @@ export const BookmarkBoqRowIcon = (): ReactNode => {
             cursor: 'pointer',
             touchAction: 'none',
           }}
-          onClick={(e: MouseEvent): void => {
+          onClick={(e: React.MouseEvent): void => {
             if (disabled) {
               return
             }

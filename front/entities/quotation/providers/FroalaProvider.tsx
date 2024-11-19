@@ -1,20 +1,14 @@
-import {
-  createContext,
-  useContext,
-  type ReactNode,
-  type MutableRefObject,
-  type RefObject,
-} from 'react'
+import { createContext, useContext } from 'react'
 import type { FroalaProps } from '../ui/froala/types'
 // import type { FroalaProps } from '../ui/froala/Froala'
 
 type Context = FroalaProps & {
-  froalaElementRef: RefObject<HTMLDivElement>
-  froalaHeightRef: MutableRefObject<number>
+  froalaElementRef: React.RefObject<HTMLDivElement>
+  froalaHeightRef: React.MutableRefObject<number>
 }
 
 type Props = Context & {
-  children: ReactNode
+  children: React.ReactNode
 }
 
 const FroalaContext = createContext<Context | null>(null)

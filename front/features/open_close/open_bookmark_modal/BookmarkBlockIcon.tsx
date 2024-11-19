@@ -1,5 +1,4 @@
 import { dispatch, getState } from '@shared/lib/redux'
-import type { ReactNode, MouseEvent } from 'react'
 import { MdOutlineStarOutline } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import { cls } from '@shared/consts/cls'
@@ -14,7 +13,7 @@ import {
 } from '@entities/quotation'
 import { useIsCopyModalVisible } from '@entities/copy'
 
-export const BookmarkBlockIcon = (): ReactNode => {
+export const BookmarkBlockIcon = (): React.ReactNode => {
   const navigate = useNavigate()
   const { blockIndex } = useBlock()
   const isCopyModalVisible = useIsCopyModalVisible()
@@ -36,7 +35,7 @@ export const BookmarkBlockIcon = (): ReactNode => {
             cursor: 'pointer',
             touchAction: 'none',
           }}
-          onClick={(e: MouseEvent): void => {
+          onClick={(e: React.MouseEvent): void => {
             if (disabled) {
               return
             }

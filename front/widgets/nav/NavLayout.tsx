@@ -1,10 +1,9 @@
 import { useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
-import type { RefObject } from 'react'
 
 type Props = {
   children: React.ReactNode
-  navRef: RefObject<HTMLDivElement>
+  navRef: React.RefObject<HTMLDivElement>
 }
 
 export const NavLayout = (props: Props): React.JSX.Element => {

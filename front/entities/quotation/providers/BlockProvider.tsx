@@ -1,4 +1,4 @@
-import { createContext, useContext, type ReactNode } from 'react'
+import { createContext, useContext } from 'react'
 import type { Item } from '../types'
 
 type Context = {
@@ -7,7 +7,7 @@ type Context = {
 }
 
 type Props = Context & {
-  children: ReactNode
+  children: React.ReactNode
 }
 
 const BlockContext = createContext<Context | null>(null)

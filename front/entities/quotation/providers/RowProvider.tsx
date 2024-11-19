@@ -1,4 +1,4 @@
-import { createContext, useContext, type ReactNode } from 'react'
+import { createContext, useContext } from 'react'
 import type { FroalaEditorRef } from '@shared/types/froala'
 import { useBoq } from './BoqBlockProvider'
 import type { Row } from '../types'
@@ -6,7 +6,7 @@ import type { Row } from '../types'
 type Props = {
   rowIndex: number
   row: Row
-  children: ReactNode
+  children: React.ReactNode
 }
 
 type Context = Omit<Props, 'children'> & {
