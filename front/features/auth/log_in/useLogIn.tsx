@@ -19,7 +19,7 @@ import { route } from '@shared/consts/route'
 import { nanoid } from '@shared/lib/nanoid'
 import { navSlice } from '@shared/nav'
 import { notify } from '@shared/toast'
-import { slideElement } from '@shared/utils/slideElement'
+import { useSlide } from '@shared/utils/useSlide'
 import type { NavigateState } from '@shared/types/NavigateState'
 
 type Props = {
@@ -114,9 +114,9 @@ export const useLogIn = ({
       }
 
       setTimeout(() => {
-        slideElement({
+        useSlide({
           element: modalRef.current,
-          onSlideElementComplete: () => {
+          onSlideOutComplete: () => {
             const navigateTo = location.state?.navigateTo
 
             if (typeof navigateTo === 'string') {

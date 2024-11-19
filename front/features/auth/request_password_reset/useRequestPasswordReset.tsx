@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useRequestPasswordResetMutation } from '@entities/user'
 import { notify } from '@shared/toast'
-import { slideElement } from '@shared/utils/slideElement'
+import { useSlide } from '@shared/utils/useSlide'
 
 type Props = {
   emailSignal: Signal<string>
@@ -39,9 +39,9 @@ export const useRequestPasswordReset = ({
         notify({ msg: 'Check your inbox or spam', theme: 'light' })
 
         setTimeout(() => {
-          slideElement({
+          useSlide({
             element: modalRef.current,
-            onSlideElementComplete: () => {
+            onSlideOutComplete: () => {
               navigate('..')
             },
           })

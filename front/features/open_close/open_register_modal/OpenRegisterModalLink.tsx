@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { route } from '@shared/consts/route'
-import { slideElement } from '@shared/utils/slideElement'
+import { useSlide } from '@shared/utils/useSlide'
 import { openRegisterModal } from './openRegisterModal'
 
 type Props = {
@@ -17,9 +17,9 @@ export const OpenRegisterModalLink = ({
       onClick={(e: React.MouseEvent): void => {
         e.preventDefault()
 
-        slideElement({
+        useSlide({
           element: modalRef.current,
-          onSlideElementComplete: openRegisterModal,
+          onSlideOutComplete: openRegisterModal,
         })
       }}
     >

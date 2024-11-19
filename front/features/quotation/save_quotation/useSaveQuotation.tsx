@@ -19,7 +19,7 @@ import {
   showSuccessNavIcon,
 } from '@shared/nav'
 import { notify } from '@shared/toast'
-import { slideElement } from '@shared/utils/slideElement'
+import { useSlide } from '@shared/utils/useSlide'
 import type { QuotationFormValues } from '@entities/quotation/types'
 import { route } from '@shared/consts/route'
 
@@ -111,9 +111,9 @@ export const useSaveQuotation = ({
         })
 
         setTimeout(() => {
-          slideElement({
+          useSlide({
             element: modalRef.current,
-            onSlideElementComplete: () => {
+            onSlideOutComplete: () => {
               const id = data.quotation?.id
 
               const isQuotationsPage = window.location.pathname.includes(

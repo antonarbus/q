@@ -11,7 +11,7 @@ import {
 } from '@entities/bookmark'
 import { bookmarkPosAtBlocks, quotationSlice } from '@entities/quotation'
 import { notify } from '@shared/toast'
-import { slideElement } from '@shared/utils/slideElement'
+import { useSlide } from '@shared/utils/useSlide'
 import { cls } from '@shared/consts/cls'
 import { getPaperElementHtmlAtModal } from '@shared/utils/htmlGetter/getPaperElementHtmlAtModal'
 
@@ -68,9 +68,9 @@ export const useSaveBookmark = ({
       void updateBookmarks()
 
       setTimeout(() => {
-        slideElement({
+        useSlide({
           element: modalRef.current,
-          onSlideElementComplete: () => {
+          onSlideOutComplete: () => {
             navigate('..')
           },
         })

@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { route } from '@shared/consts/route'
-import { slideElement } from '@shared/utils/slideElement'
+import { useSlide } from '@shared/utils/useSlide'
 import type { NavigateState } from '@shared/types/NavigateState'
 
 type Props = {
@@ -20,9 +20,9 @@ export const OpenLoginModalLink = ({ modalRef }: Props): React.JSX.Element => {
           shouldSlide: true,
         }
 
-        slideElement({
+        useSlide({
           element: modalRef.current,
-          onSlideElementComplete: () => {
+          onSlideOutComplete: () => {
             navigate(`../${route.login}`, {
               state: navigateState,
             })

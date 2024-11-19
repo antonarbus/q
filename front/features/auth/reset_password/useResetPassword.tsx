@@ -11,7 +11,7 @@ import {
 import { navItemKey } from '@shared/consts/navItemKey'
 import { navSlice } from '@shared/nav'
 import { notify } from '@shared/toast'
-import { slideElement } from '@shared/utils/slideElement'
+import { useSlide } from '@shared/utils/useSlide'
 
 type Props = {
   passwordSignal: Signal<string>
@@ -71,9 +71,9 @@ export const useResetPassword = ({ passwordSignal, modalRef }: Props): Res => {
         )
 
         setTimeout(() => {
-          slideElement({
+          useSlide({
             element: modalRef.current,
-            onSlideElementComplete: () => {
+            onSlideOutComplete: () => {
               navigate('..')
             },
           })

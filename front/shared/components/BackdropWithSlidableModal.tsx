@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { useEffectOnce } from 'react-use'
-import { slideElement } from '../utils/slideElement'
+import { useSlide } from '../utils/useSlide'
 import { type Location, useLocation } from 'react-router-dom'
 import type { NavigateState } from '@shared/types/NavigateState'
 
@@ -29,10 +29,10 @@ export const BackdropWithSlidableModal = ({
   useEffectOnce(() => {
     if (contentRef.current) {
       if (location.state?.shouldSlide) {
-        slideElement({
+        useSlide({
           intoView: true,
           element: contentRef.current,
-          onSlideElementComplete: () => {
+          onSlideOutComplete: () => {
             onMount?.()
           },
         })
@@ -47,9 +47,9 @@ export const BackdropWithSlidableModal = ({
       if (shouldUnmountOnEsc && contentRef.current) {
         if (e.key === 'Escape') {
           if (location.state?.shouldSlide) {
-            slideElement({
+            useSlide({
               element: contentRef.current,
-              onSlideElementComplete: () => {
+              onSlideOutComplete: () => {
                 onUnmount?.()
               },
             })
@@ -101,9 +101,9 @@ export const BackdropWithSlidableModal = ({
   const unmountOnClickAway = (): void => {
     if (contentRef.current && shouldUnmountOnClickAway) {
       if (location.state?.shouldSlide) {
-        slideElement({
+        useSlide({
           element: contentRef.current,
-          onSlideElementComplete: () => {
+          onSlideOutComplete: () => {
             onUnmount?.()
           },
         })
