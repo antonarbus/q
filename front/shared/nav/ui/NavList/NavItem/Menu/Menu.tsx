@@ -77,16 +77,17 @@ export const Menu = (): React.JSX.Element => {
 
   useKeysForMenuNavigation()
   useCloseMenuOnClickOutside({ menuContainerRef })
+
   const isMenuOutsideWindow = useIsMenuOutsideWindow()
 
   return (
     <MenuStyled
       ref={menuContainerRef}
       isMenuOutsideWindow={isMenuOutsideWindow}
+      className='drop-down-nav-menu'
       onMouseLeave={(): void => {
         dispatch(navSlice.actions.setMenuItemHoverIndex(0))
       }}
-      className='drop-down-nav-menu'
     >
       <TopMenuItemsContainer />
       <SlidableMenuItemsContainer
@@ -97,8 +98,7 @@ export const Menu = (): React.JSX.Element => {
       <SlidableMenuItemsContainer
         reference={nextMenuRef}
         idsToMenu={idsToNextMenuItems}
-        className='slidable
-        next'
+        className='slidable next'
       />
       <SlidableMenuItemsContainer
         reference={fakeMenuRef}

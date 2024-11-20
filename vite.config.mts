@@ -93,10 +93,6 @@ export default defineConfig(({ command, mode }) => {
               return 'ag-grid'
             }
 
-            if (id.includes('gsap')) {
-              return 'gsap'
-            }
-
             if (id.includes('@mui')) {
               return '@mui'
             }
