@@ -46,6 +46,6 @@ export const clickOnMenuItem = (
   }
 
   if (isNestedMenuAvailable) {
-    navigateInMenu.down?.(menuId)
+    void navigateInMenu.down(menuId)
   }
 }
