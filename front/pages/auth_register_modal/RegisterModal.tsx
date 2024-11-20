@@ -33,7 +33,6 @@ export const RegisterModal = (): React.JSX.Element => {
   })
 
   const navigateUp = (): void => {
-    console.log(666)
     void router.navigate('..')
   }
 

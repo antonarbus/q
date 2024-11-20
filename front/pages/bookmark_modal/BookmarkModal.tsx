@@ -1,4 +1,3 @@
-import { useRef } from 'react'
 import { FiEdit3 } from 'react-icons/fi'
 import { useSaveBookmark } from '@features/bookmark/save_bookmark'
 import { FormModal } from '@shared/components/FormModal'

@@ -1,7 +1,6 @@
 import { theme } from '@shared/theme'
 import { Close } from '@mui/icons-material'
-import type { AnimationScope } from 'motion/react'
-import { AnimatePresence, motion } from 'motion/react'
+import { type AnimationScope, AnimatePresence, motion } from 'motion/react'
 import { Children } from 'react'
 import { BackdropWithSlidableModal } from './BackdropWithSlidableModal'
 import { ButtonCustom } from './ButtonCustom'

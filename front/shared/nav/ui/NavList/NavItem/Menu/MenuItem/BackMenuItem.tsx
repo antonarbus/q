@@ -18,7 +18,7 @@ export const BackMenuItem = (): React.JSX.Element => {
       to={'/'}
       onClick={(e: MouseEvent): void => {
         e.preventDefault()
-        navigateInMenu.up?.()
+        void navigateInMenu.up()
       }}
       onMouseEnter={(): void => {
         dispatch(navSlice.actions.setMenuItemHoverIndex(1))

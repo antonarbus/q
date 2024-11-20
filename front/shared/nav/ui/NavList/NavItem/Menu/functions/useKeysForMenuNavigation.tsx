@@ -52,7 +52,7 @@ export const useKeysForMenuNavigation = (): void => {
     }
 
     if (isNestedMenu && e.key === 'Backspace') {
-      navigateInMenu.up?.()
+      void navigateInMenu.up()
 
       return
     }
@@ -80,7 +80,7 @@ export const useKeysForMenuNavigation = (): void => {
       const isBackMenuItem = hoveredMenuItemIndex === 1 && isNestedMenu
 
       if (isBackMenuItem) {
-        navigateInMenu.up?.()
+        void navigateInMenu.up()
 
         return
       }
@@ -114,7 +114,7 @@ export const useKeysForMenuNavigation = (): void => {
       const isNestedMenuAvailable = Boolean(menuItem?.menuItems)
 
       if (isNestedMenuAvailable) {
-        navigateInMenu.down?.(menuId)
+        void navigateInMenu.down(menuId)
 
         return
       }
