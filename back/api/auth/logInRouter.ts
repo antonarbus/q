@@ -26,7 +26,7 @@ export type ResBody = {
   roles?: User['roles']
   jwtRefreshTokenExpirationDays?: number
   message:
-    | 'no user data'
+    | 'not registered'
     | 'no password'
     | 'bad password'
     | 'activation link sent'
@@ -56,7 +56,7 @@ const logIn: RouterHandler = async (req, res, next) => {
     const user = await UserModel.findOne({ email }).lean()
 
     if (!user) {
-      res.status(httpStatus.badRequest_400).json({ message: 'no user data' })
+      res.status(httpStatus.badRequest_400).json({ message: 'not registered' })
 
       return
     }

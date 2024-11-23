@@ -135,6 +135,12 @@ export const useLogIn = ({
     if (isError) {
       accessTokenSignal.value = null
 
+      if (error.response?.data.message === 'not registered') {
+        notify({ msg: 'Not registered', type: 'info', theme: 'light' })
+
+        return
+      }
+
       if (error.response?.data.message === 'bad password') {
         notify({ msg: 'Invalid credentials', type: 'warn', theme: 'light' })
 
