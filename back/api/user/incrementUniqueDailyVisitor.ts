@@ -5,7 +5,6 @@ import {
   type VisitorsCount,
   VisitorsCountModel,
 } from '@back/db/models/visitorsCountModel'
-import { getEnvVar } from '@back/utils/getEnvVar'
 
 export type ReqBody = {
   date: VisitorsCount['date']
