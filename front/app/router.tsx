@@ -21,6 +21,7 @@ import { Toast } from '@shared/toast'
 import { Footer } from '@widgets/footer'
 import { RequireRoles } from '@features/auth/check_required_roles'
 import { instantiateRouter } from '@shared/lib/router'
+import { OnInitLoad } from './OnInitLoad'
 
 const Quotation = React.lazy(async () => {
   return import('@pages/quotation_page')
@@ -75,6 +76,7 @@ const router = createBrowserRouter([
   {
     element: (
       <>
+        <OnInitLoad />
         <AccessToken />
         <Toast />
         <LoadingDotsOverlay />

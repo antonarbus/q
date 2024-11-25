@@ -11,6 +11,7 @@ export const apiUrl = {
   // user
   getUsers: '/api/get-users',
   deleteUser: '/api/delete-user',
+  countUniqueDailyVisitors: '/api/count-unique-daily-visitors',
   // quotation
   saveQuotation: '/api/save-quotation',
   getQuotation: '/api/get-quotation',

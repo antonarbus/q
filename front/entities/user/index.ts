@@ -15,6 +15,7 @@ export { useGetAccessTokenQuery } from './api/useGetAccessTokenQuery'
 export { useGetFilesStatsQuery } from './api/useGetFilesStatsQuery'
 export { useGetUsersQuery } from './api/useGetUsersQuery'
 export { useDeleteUserMutation } from './api/useDeleteUserMutation'
+export { useCountUniqueDailyVisitorsMutation } from './api/useCountUniqueDailyVisitorsMutation'
 
 // types
 export type { User } from './types'

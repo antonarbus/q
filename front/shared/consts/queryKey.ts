@@ -10,6 +10,7 @@ export const queryKey = {
   // users
   getUsers: 'getUsers',
   deleteUser: 'deleteUser',
+  countUniqueDailyVisitors: 'countUniqueDailyVisitors',
   // quotation
   getQuotation: 'getQuotation',
   getQuotations: 'getQuotations',

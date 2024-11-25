@@ -30,6 +30,7 @@ import { errorHandlerMiddleware } from './middleware/errorHandlerMiddleware'
 import { config } from './config'
 import { getUsersRouter } from './api/user/getUsersRouter'
 import { deleteUserRouter } from './api/user/deleteUserRouter'
+import { incrementUniqueDailyVisitorRouter } from './api/user/incrementUniqueDailyVisitor'
 // import cors from 'cors'
 
 const app = express()
@@ -65,6 +66,7 @@ app.use(apiUrl.getAccessToken, getAccessTokenRouter)
 // user
 app.use(apiUrl.getUsers, getUsersRouter)
 app.use(apiUrl.deleteUser, deleteUserRouter)
+app.use(apiUrl.countUniqueDailyVisitors, incrementUniqueDailyVisitorRouter)
 // quotation
 app.use(apiUrl.saveQuotation, saveQuotationRouter)
 app.use(apiUrl.getQuotation, getQuotationRouter)
