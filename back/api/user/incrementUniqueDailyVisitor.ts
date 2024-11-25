@@ -1,15 +1,23 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/consts/httpStatus'
-import { VisitorsCountModel } from '@back/db/models/visitorsCountModel'
-import { format } from 'date-fns'
+import {
+  type VisitorsCount,
+  VisitorsCountModel,
+} from '@back/db/models/visitorsCountModel'
+import { getEnvVar } from '@back/utils/getEnvVar'
+
+export type ReqBody = {
+  date: VisitorsCount['date']
+  isNew: boolean
+}
 
 export type ResBody = {
   message: ErrorMessageCommon | 'visitor counted'
 }
 
 type RouterHandler = (
-  req: Request,
+  req: Request<unknown, unknown, ReqBody>,
   res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
@@ -17,12 +25,15 @@ type RouterHandler = (
 export const incrementUniqueDailyVisitorRouter = Router()
 
 const incrementUniqueDailyVisitor: RouterHandler = async (req, res, next) => {
-  const today = format(new Date(), 'yyyy-MM-dd')
-
   try {
     const visitorsCount = await VisitorsCountModel.findOneAndUpdate(
-      { date: today },
-      { $inc: { count: 1 } },
+      { date: req.body.date },
+      {
+        $inc: {
+          count: 1,
+          new: req.body.isNew ? 1 : 0,
+        },
+      },
       { upsert: true, new: true },
     )
 

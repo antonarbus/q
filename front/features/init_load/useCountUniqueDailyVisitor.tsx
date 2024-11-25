@@ -10,14 +10,17 @@ export const useCountUniqueDailyVisitor = (): void => {
     const countVisitor = async (): Promise<void> => {
       const LAST_VISIT_DATE = 'lastVisitDate'
 
-      const today = format(new Date(), 'yyyy-MM-dd')
       const lastVisitDate = localStorage.getItem(LAST_VISIT_DATE)
+      const today = format(new Date(), 'yyyy-MM-dd')
 
       if (lastVisitDate === today) {
         return
       }
 
-      const res = await countUniqueDailyVisitor({ data: {} })
+      const res = await countUniqueDailyVisitor({
+        date: today,
+        isNew: lastVisitDate === null,
+      })
 
       if (res.message === 'visitor counted') {
         localStorage.setItem(LAST_VISIT_DATE, today)

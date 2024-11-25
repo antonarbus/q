@@ -1,8 +1,9 @@
 import { model, Schema } from 'mongoose'
 
-type VisitorsCount = {
+export type VisitorsCount = {
   date: string
   count: number
+  new: number
 }
 
 const visitorsCountSchema = new Schema<VisitorsCount>({
@@ -12,6 +13,10 @@ const visitorsCountSchema = new Schema<VisitorsCount>({
     unique: true,
   },
   count: {
+    type: Number,
+    default: 0,
+  },
+  new: {
     type: Number,
     default: 0,
   },
