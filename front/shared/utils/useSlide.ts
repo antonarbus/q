@@ -1,4 +1,5 @@
-import { type AnimationScope, useAnimate } from 'motion/react'
+import { useAnimate } from 'motion/react'
+import type { AnimationScope } from 'motion-dom'
 import { useRef } from 'react'
 
 type Res = {
@@ -8,7 +9,7 @@ type Res = {
 }
 
 export const useSlide = (): Res => {
-  const [ref, animate] = useAnimate<HTMLElement>()
+  const [ref, animate] = useAnimate()
   const isAnimationPreventedRef = useRef(false)
 
   const slideIn = async (): Promise<void> => {

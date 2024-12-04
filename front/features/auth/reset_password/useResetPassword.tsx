@@ -11,12 +11,12 @@ import {
 import { navItemKey } from '@shared/consts/navItemKey'
 import { navSlice } from '@shared/nav'
 import { notify } from '@shared/toast'
-import type { AnimationScope } from 'motion/dist/react'
+import type { AnimationScope } from 'motion-dom'
 import { asyncDelay } from '@shared/utils/delay'
 
 type Props = {
   passwordSignal: Signal<string>
-  modalRef: React.RefObject<HTMLElement> | AnimationScope<HTMLElement>
+  modalRef: React.RefObject<HTMLElement> | AnimationScope
   slideOut: () => Promise<void>
 }
 
