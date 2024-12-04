@@ -44,7 +44,7 @@ export const useRegister = ({
       const slideOutAndChangeUrl = async (): Promise<void> => {
         await asyncDelay(1000)
         await slideOut()
-        navigate('..')
+        void navigate('..')
       }
 
       void slideOutAndChangeUrl()

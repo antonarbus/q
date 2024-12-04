@@ -46,7 +46,7 @@ export const BookmarkBoqRowIcon = (): React.ReactNode => {
 
             if (!email) {
               notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
-              navigate(`./${route.login}`)
+              void navigate(`./${route.login}`)
 
               return
             }
@@ -79,7 +79,7 @@ export const BookmarkBoqRowIcon = (): React.ReactNode => {
               }),
             )
 
-            navigate(`./${route.bookmark}/${boqRow.id}`)
+            void navigate(`./${route.bookmark}/${boqRow.id}`)
           }}
         />
       </span>

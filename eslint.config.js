@@ -100,6 +100,7 @@ export default [
       radix: 'off',
       'init-declarations': 'off',
       'new-cap': 'off',
+      'no-unsafe-type-assertion': 'off',
 
       // https://typescript-eslint.io/rules/
       '@typescript-eslint/no-unused-vars': ['error', { args: 'none' }],
@@ -118,6 +119,7 @@ export default [
       '@typescript-eslint/max-params': 'off',
       '@typescript-eslint/consistent-return': 'off',
       '@typescript-eslint/indent': 'off', // bad for performance
+      '@typescript-eslint/no-unsafe-type-assertion': 'off',
 
       // https://github.com/jsx-eslint/eslint-plugin-react?tab=readme-ov-file#list-of-supported-rules
       'react/react-in-jsx-scope': 'off',

@@ -44,7 +44,7 @@ export const BookmarkBlockIcon = (): React.ReactNode => {
 
             if (!email) {
               notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
-              navigate(`./${route.login}`)
+              void navigate(`./${route.login}`)
 
               return
             }
@@ -63,7 +63,7 @@ export const BookmarkBlockIcon = (): React.ReactNode => {
               quotationSlice.actions.loadBlockAtPosThousandReducer({ block }),
             )
 
-            navigate(`./${route.bookmark}/${block.id}`)
+            void navigate(`./${route.bookmark}/${block.id}`)
           }}
         />
       </span>

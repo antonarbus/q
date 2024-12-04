@@ -119,12 +119,12 @@ export const useLogIn = ({
         const navigateTo = location.state?.navigateTo
 
         if (typeof navigateTo === 'string') {
-          navigate(navigateTo)
+          void navigate(navigateTo)
 
           return
         }
 
-        navigate('..')
+        void navigate('..')
       }
 
       void slideOutAndChangeUrl()

@@ -43,7 +43,7 @@ export const Logout = (): React.JSX.Element => {
 
       setTimeout(() => {
         loadingDotsOverlayTextSignal.value = null
-        navigate('..')
+        void navigate('..')
       }, 1000)
     }
   }, [isSuccess])
@@ -58,7 +58,7 @@ export const Logout = (): React.JSX.Element => {
 
       setTimeout(() => {
         loadingDotsOverlayTextSignal.value = null
-        navigate('..')
+        void navigate('..')
       }, 1000)
     }
   }, [isError])

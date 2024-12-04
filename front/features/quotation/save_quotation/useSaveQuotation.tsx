@@ -120,9 +120,9 @@ export const useSaveQuotation = ({
           )
 
           if (isQuotationsPage) {
-            navigate('..', { replace: true })
+            void navigate('..', { replace: true })
           } else {
-            navigate(`/${id}`, { replace: true })
+            void navigate(`/${id}`, { replace: true })
           }
         }
 

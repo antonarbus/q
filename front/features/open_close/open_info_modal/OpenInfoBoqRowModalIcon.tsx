@@ -50,7 +50,7 @@ export const OpenInfoBoqRowModalIcon = (): React.ReactNode => {
               return
             }
 
-            navigate(`./${route.info}/${boqRow.id}`)
+            void navigate(`./${route.info}/${boqRow.id}`)
           }}
         />
       </span>

@@ -76,7 +76,7 @@ export const usePressNavShortcut = ({ navStructure }: Props): void => {
         matchedNavItemByShortcut.function?.()
 
         if (matchedNavItemByShortcut.link) {
-          navigate(matchedNavItemByShortcut.link)
+          void navigate(matchedNavItemByShortcut.link)
         }
       }
     })

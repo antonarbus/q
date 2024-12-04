@@ -19,7 +19,7 @@ export const ActivationModal = (): React.JSX.Element => {
       shouldUnmountOnClickAway
       shouldUnmountOnEsc
       onUnmount={(): void => {
-        navigate('..')
+        void navigate('..')
       }}
     >
       <CardCustom

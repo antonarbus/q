@@ -96,7 +96,7 @@ export const useKeysForMenuNavigation = (): void => {
       const link = menuItem?.link
 
       if (link) {
-        navigate(link)
+        void navigate(link)
         dispatch(navSlice.actions.closeMenu())
 
         return

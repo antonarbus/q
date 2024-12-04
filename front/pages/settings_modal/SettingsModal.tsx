@@ -21,7 +21,7 @@ export const SettingsModal = (): React.JSX.Element => {
       shouldUnmountOnClickAway
       shouldUnmountOnEsc
       onUnmount={(): void => {
-        navigate('..')
+        void navigate('..')
       }}
     >
       <CardCustom

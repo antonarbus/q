@@ -35,7 +35,7 @@ export const OpenBookmarkModalButton = ({ id }: ReqBody): React.JSX.Element => {
 
       dispatch(quotationSlice.actions.loadBlockAtPosThousandReducer({ block }))
 
-      navigate(`./${id}`)
+      void navigate(`./${id}`)
     }
   }, [isSuccess])
 

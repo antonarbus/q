@@ -47,7 +47,7 @@ export const OpenQuotationModalButton = ({
         navigateTo: `/${route.save}`,
       }
 
-      navigate(`./${id}`, {
+      void navigate(`./${id}`, {
         state: navigateState,
       })
     }

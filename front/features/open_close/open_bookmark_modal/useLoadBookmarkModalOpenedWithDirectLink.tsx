@@ -69,7 +69,7 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
           theme: 'light',
         })
 
-        navigate('..')
+        void navigate('..')
       }
     }
   }, [isError])

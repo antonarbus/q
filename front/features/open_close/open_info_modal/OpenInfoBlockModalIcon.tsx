@@ -44,7 +44,7 @@ export const OpenInfoBlockModalIcon = (): React.ReactNode => {
               return
             }
 
-            navigate(`./${route.info}/${item.id}`)
+            void navigate(`./${route.info}/${item.id}`)
           }}
         />
       </span>
