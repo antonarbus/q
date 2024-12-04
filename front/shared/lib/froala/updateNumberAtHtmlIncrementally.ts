@@ -1,4 +1,4 @@
-import type FroalaEditor from 'froala-editor'
+import type { FroalaEditor } from '@shared/types/froala'
 import { roundTo } from 'round-to'
 import { getDecimalPrecision } from '../../utils/getDecimalPrecision'
 import { getNumberFromString } from '../../utils/getNumberFromString'

@@ -1,4 +1,4 @@
-import type FroalaEditor from 'froala-editor'
+import type { FroalaEditor } from '@shared/types/froala'
 import type { MutableRefObject } from 'react'
 import { roundTo } from 'round-to'
 import {

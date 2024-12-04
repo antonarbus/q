@@ -1,4 +1,4 @@
-import type FroalaEditor from 'froala-editor'
+import type { FroalaEditor } from '@shared/types/froala'
 
 type Props = {
   editor: FroalaEditor

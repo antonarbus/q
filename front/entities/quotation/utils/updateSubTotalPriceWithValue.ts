@@ -1,5 +1,5 @@
 import { dispatch } from '@shared/lib/redux'
-import type FroalaEditor from 'froala-editor'
+import type { FroalaEditor } from '@shared/types/froala'
 import { updateNumberAtHtml } from '@shared/lib/froala/updateNumberAtHtml'
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
 import { getNumberFromString } from '@shared/utils/getNumberFromString'
