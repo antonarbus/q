@@ -1,12 +1,9 @@
-import { signal } from '@preact/signals-react'
+import { useSelector } from '@shared/lib/redux'
 import { LoadingDots } from '../loading_dots_overlay/LoadingDots'
 
-export const loadingTableOverlaySignal = signal({
-  areJumpingDotsShown: false,
-  text: '',
-})
-
 export const LoadingTableOverlay = (): React.JSX.Element | null => {
+  const loadingOverlay = useSelector((state) => state.agGrid.loadingOverlay)
+
   return (
     <div
       css={{
@@ -30,11 +27,9 @@ export const LoadingTableOverlay = (): React.JSX.Element | null => {
           height: '60px',
         }}
       >
-        {loadingTableOverlaySignal.value.text}
+        {loadingOverlay.text}
       </div>
-      {loadingTableOverlaySignal.value.areJumpingDotsShown && (
-        <LoadingDots background='grey' />
-      )}
+      {loadingOverlay.showLoader && <LoadingDots background='grey' />}
     </div>
   )
 }

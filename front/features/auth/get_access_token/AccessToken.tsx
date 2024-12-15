@@ -3,9 +3,9 @@ import { dispatch, getState } from '@shared/lib/redux'
 import { jwtDecode } from 'jwt-decode'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { useGetAccessTokenQuery, userSlice } from '@entities/user'
-import { loadingTableOverlaySignal } from '@shared/components/LoadingTableOverlay'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { navSlice, showLoadingNavIcon } from '@shared/nav'
+import { agGridSlice } from '@shared/lib/ag_grid/agGridSlice'
 
 export const {
   promise: initAccessTokenFetchingPromise,
@@ -35,10 +35,12 @@ export const AccessToken = (): React.JSX.Element => {
     if (isFetching) {
       showLoadingNavIcon({ navMenuItemIdKey: navItemKey.login })
 
-      loadingTableOverlaySignal.value = {
-        areJumpingDotsShown: true,
-        text: 'Checking credentials',
-      }
+      dispatch(
+        agGridSlice.actions.showLoadingOverlay({
+          showLoader: true,
+          text: 'Checking credentials',
+        }),
+      )
     }
   }, [isFetching])
 
@@ -62,10 +64,12 @@ export const AccessToken = (): React.JSX.Element => {
         }),
       )
 
-      loadingTableOverlaySignal.value = {
-        areJumpingDotsShown: false,
-        text: 'Logged in',
-      }
+      dispatch(
+        agGridSlice.actions.showLoadingOverlay({
+          showLoader: false,
+          text: 'Logged in',
+        }),
+      )
 
       dispatch(
         userSlice.actions.rememberLoggedUser({
@@ -102,10 +106,12 @@ export const AccessToken = (): React.JSX.Element => {
 
   useUpdateEffect(() => {
     if (isError) {
-      loadingTableOverlaySignal.value = {
-        areJumpingDotsShown: false,
-        text: 'Not logged in',
-      }
+      dispatch(
+        agGridSlice.actions.showLoadingOverlay({
+          showLoader: false,
+          text: 'Not logged in',
+        }),
+      )
 
       dispatch(userSlice.actions.forgetLoggedUser())
 
