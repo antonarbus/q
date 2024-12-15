@@ -28,7 +28,7 @@ export function useLoadQuotation(): void {
   const quotationId = router.state.matches.at(0)?.params.quotationId
   const location = useLocation()
 
-  const quotationKey = useSelector((state) => state.quotationKey)
+  const quotationKey = useSelector((state) => state.app.quotationKey)
 
   const quotationType = (location.state as QuotationLocationState)
     ?.quotationType

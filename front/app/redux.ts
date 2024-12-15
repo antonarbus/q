@@ -7,14 +7,14 @@ import { navReducer } from '@shared/nav/navSlice'
 import { instantiateStore } from '@shared/lib/redux'
 import { agGridReducer } from '@shared/lib/ag_grid/agGridSlice'
 import { textReducer } from '@shared/lib/froala/textSlice'
-import { quotationKeyReducer } from '@entities/quotation/redux/quotationKeySlice'
+import { appReducer } from '@shared/appSlice'
 
 const store = configureStore({
   reducer: {
     user: userReducer,
     nav: navReducer,
     quotation: quotationReducer,
-    quotationKey: quotationKeyReducer,
+    app: appReducer,
     copy: copyReducer,
     agGrid: agGridReducer,
     text: textReducer,

@@ -17,7 +17,7 @@ import { navSlice } from '@shared/nav'
 import { notify } from '@shared/toast'
 import type { NavigateState } from '@shared/types/NavigateState'
 import { asyncDelay } from '@shared/utils/delay'
-import { quotationKeySlice } from '@entities/quotation/redux/quotationKeySlice'
+import { appSlice } from '@shared/appSlice'
 
 type Props = {
   emailSignal: Signal<string>
@@ -111,7 +111,7 @@ export const useLogIn = ({
       }
 
       if (quotationId) {
-        dispatch(quotationKeySlice.actions.reload())
+        dispatch(appSlice.actions.reRenderQuotation())
       }
 
       const slideOutAndChangeUrl = async (): Promise<void> => {

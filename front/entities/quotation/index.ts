@@ -19,7 +19,6 @@ export { deleteQuotationsCache } from './cacheUpdaters/deleteQuotationsCache'
 
 // slice
 export { quotationSlice } from './redux/quotationSlice'
-export { quotationKeySlice } from './redux/quotationKeySlice'
 
 // selectors
 export { selectIsLastBlock } from './redux/selectors/selectIsLastBlock'
