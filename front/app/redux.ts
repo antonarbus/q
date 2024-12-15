@@ -11,10 +11,10 @@ import { appReducer } from '@shared/appSlice'
 
 const store = configureStore({
   reducer: {
+    app: appReducer,
     user: userReducer,
     nav: navReducer,
     quotation: quotationReducer,
-    app: appReducer,
     copy: copyReducer,
     agGrid: agGridReducer,
     text: textReducer,

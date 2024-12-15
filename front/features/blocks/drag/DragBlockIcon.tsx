@@ -4,14 +4,16 @@ import { useIsLastBlock, useBlock } from '@entities/quotation'
 import { Tooltip } from '@mui/material'
 import { cls } from '@shared/consts/cls'
 import { useRef, useState } from 'react'
-import { dragTooltipTextSignal } from './dragTooltipTextSignal'
 import { useIsCopyModalVisible } from '@entities/copy'
+import { useSignal } from '@preact/signals-react'
 
 export const DragBlockIcon = (): React.JSX.Element => {
   const isLastBlock = useIsLastBlock()
   const isCopyModalVisible = useIsCopyModalVisible()
   const disabled = isLastBlock || isCopyModalVisible
   const { block } = useBlock()
+
+  const dragTooltipTextSignal = useSignal<'Drag' | 'Drop'>('Drag')
 
   const { listeners, attributes, isDragging } = useSortable({
     id: block.id,
