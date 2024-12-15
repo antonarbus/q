@@ -1,7 +1,9 @@
 import { Box } from '@mui/material'
-import { backgroundMessageSignal } from '../signals/backgroundMessageSignal'
+import { useSelector } from '@shared/lib/redux'
 
 export const BackgroundMessage = (): React.JSX.Element => {
+  const backgroundMessage = useSelector((state) => state.app.backgroundMessage)
+
   return (
     <Box
       className='background-message'
@@ -21,7 +23,7 @@ export const BackgroundMessage = (): React.JSX.Element => {
         zIndex: -1,
       }}
     >
-      {backgroundMessageSignal.value}
+      {backgroundMessage}
     </Box>
   )
 }

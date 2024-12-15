@@ -8,13 +8,13 @@ import {
   quotationSlice,
   useGetQuotationMutation,
   newQuotationTemplate,
-  backgroundMessageSignal,
   backToQuotationRef,
 } from '@entities/quotation'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
 import { navSlice } from '@shared/nav'
 import { notify } from '@shared/toast'
+import { appSlice } from '@shared/appSlice'
 
 export function useLoadQuotation(): void {
   const {
@@ -131,7 +131,7 @@ export function useLoadQuotation(): void {
         data.message === 'owner permission' ||
         data.message === 'viewer permission'
       ) {
-        backgroundMessageSignal.value = ''
+        dispatch(appSlice.actions.setBackgroundMessage({ message: '' }))
         dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
 
         dispatch(
@@ -155,17 +155,32 @@ export function useLoadQuotation(): void {
   useUpdateEffect(() => {
     if (isError) {
       if (error.response?.data.message === 'no permission to view') {
-        backgroundMessageSignal.value = `No permission to view quotation ${String(quotationId)}`
+        dispatch(
+          appSlice.actions.setBackgroundMessage({
+            message: `No permission to view quotation ${String(quotationId)}`,
+          }),
+        )
       } else if (
         error.response?.data.message === 'not found in bucket' ||
         error.response?.data.message === 'not found in db'
       ) {
-        backgroundMessageSignal.value = `Quotation ${String(quotationId)} is not found`
+        dispatch(
+          appSlice.actions.setBackgroundMessage({
+            message: `Quotation ${String(quotationId)} is not found`,
+          }),
+        )
       } else if (error.response?.data.message === 'not shared') {
-        backgroundMessageSignal.value = `Quotation ${String(quotationId)} is private`
+        dispatch(
+          appSlice.actions.setBackgroundMessage({
+            message: `Quotation ${String(quotationId)} is private`,
+          }),
+        )
       } else {
         notify({ msg: 'Internal error', type: 'error', theme: 'light' })
-        backgroundMessageSignal.value = 'Internal error'
+
+        dispatch(
+          appSlice.actions.setBackgroundMessage({ message: 'Internal error' }),
+        )
       }
 
       setTimeout(() => {

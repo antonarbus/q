@@ -1,8 +1,5 @@
 export { newQuotationTemplate } from './newQuotationTemplate'
 
-// signals
-export { backgroundMessageSignal } from './signals/backgroundMessageSignal'
-
 // ref
 export { backToQuotationRef } from './refs/backToQuotationRef'
 
