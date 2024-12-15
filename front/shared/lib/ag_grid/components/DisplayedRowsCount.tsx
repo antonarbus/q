@@ -1,9 +1,11 @@
 import { Box, Chip } from '@mui/material'
-import { signal } from '@preact/signals-react'
-
-export const displayedRowsCountSignal = signal(0)
+import { useSelector } from '@shared/lib/redux'
 
 export const DisplayedRowsCount = (): React.JSX.Element => {
+  const displayedRowsCount = useSelector(
+    (state) => state.agGrid.displayedRowsCount,
+  )
+
   return (
     <Box
       sx={{
@@ -15,7 +17,7 @@ export const DisplayedRowsCount = (): React.JSX.Element => {
     >
       Rows{' '}
       <Chip
-        label={displayedRowsCountSignal}
+        label={displayedRowsCount}
         size='small'
         sx={{
           color: 'grey',

@@ -5,6 +5,7 @@ import { quotationReducer } from '@entities/quotation/redux/quotationSlice'
 import { userReducer } from '@entities/user/redux/userSlice'
 import { navReducer } from '@shared/nav/navSlice'
 import { instantiateStore } from '@shared/lib/redux'
+import { agGridReducer } from '@shared/lib/ag_grid/agGridSlice'
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     nav: navReducer,
     quotation: quotationReducer,
     copy: copyReducer,
+    agGrid: agGridReducer,
   },
   middleware: (defaultMiddleware) =>
     defaultMiddleware({ serializableCheck: false }), // we have not serializable components and functions in nav structure

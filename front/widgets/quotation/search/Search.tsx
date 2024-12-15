@@ -83,14 +83,6 @@ export const Search = (): React.JSX.Element => {
           },
         },
       }}
-      // PaperComponent={PaperComponent}
-      // componentsProps={{
-      //   popper: {
-      //     sx: {
-      //       zIndex: 3,
-      //     },
-      //   },
-      // }}
       sx={{
         position: 'relative',
         width: '300px',

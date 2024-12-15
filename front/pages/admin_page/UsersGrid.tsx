@@ -7,10 +7,7 @@ import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef } from 'react'
 import { useGetUsersQuery } from '@entities/user'
 import { LoadingTableOverlay } from '@shared/components/LoadingTableOverlay'
-import {
-  DisplayedRowsCount,
-  displayedRowsCountSignal,
-} from '@shared/lib/ag_grid/components/DisplayedRowsCount'
+import { DisplayedRowsCount } from '@shared/lib/ag_grid/components/DisplayedRowsCount'
 import { NoRowsTableOverlay } from '@shared/lib/ag_grid/components/NoRowsTableOverlay'
 import { columnDefs, defaultColDef } from './columnDefs'
 import { usersAgGridRef } from './refs/usersAgGridRef'
@@ -22,6 +19,8 @@ import { AgGridStyles } from '@shared/lib/ag_grid/styles/AgGridStyles'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/loading_dots_overlay'
 import type { UserPicked } from '@back/api/user/getUsersRouter'
 import { useRefetchDataOnEmailChange } from '@shared/lib/ag_grid/hooks/useRefetchDataOnEmailChange'
+import { dispatch } from '@shared/lib/redux'
+import { agGridSlice } from '@shared/lib/ag_grid/agGridSlice'
 
 ModuleRegistry.registerModules([AllCommunityModule])
 
@@ -53,7 +52,8 @@ export const UsersGrid = (): React.JSX.Element => {
           addPlaceholderToFloatingFilters({ gridContainerRef })
         }}
         onModelUpdated={(params) => {
-          displayedRowsCountSignal.value = params.api.getDisplayedRowCount()
+          const count = params.api.getDisplayedRowCount()
+          dispatch(agGridSlice.actions.setCount({ count }))
         }}
       />
     </GridLayout>

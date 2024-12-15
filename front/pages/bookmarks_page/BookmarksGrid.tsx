@@ -7,10 +7,7 @@ import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef } from 'react'
 import { useGetBookmarksQuery } from '@entities/bookmark'
 import { LoadingTableOverlay } from '@shared/components/LoadingTableOverlay'
-import {
-  DisplayedRowsCount,
-  displayedRowsCountSignal,
-} from '@shared/lib/ag_grid/components/DisplayedRowsCount'
+import { DisplayedRowsCount } from '@shared/lib/ag_grid/components/DisplayedRowsCount'
 import { NoRowsTableOverlay } from '@shared/lib/ag_grid/components/NoRowsTableOverlay'
 import { columnDefs, defaultColDef } from './columnDefs'
 import { bookmarksAgGridRef } from './refs/bookmarksAgGridRef'
@@ -22,6 +19,8 @@ import { useShowLoadingJumpingDots } from '@shared/lib/ag_grid/hooks/useShowLoad
 import { AgGridStyles } from '@shared/lib/ag_grid/styles/AgGridStyles'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/loading_dots_overlay'
 import type { ItemPick } from '@back/api/bookmark/getBookmarksRouter'
+import { dispatch } from '@shared/lib/redux'
+import { agGridSlice } from '@shared/lib/ag_grid/agGridSlice'
 
 ModuleRegistry.registerModules([AllCommunityModule])
 
@@ -56,7 +55,8 @@ export const BookmarksGrid = (): React.JSX.Element => {
           addPlaceholderToFloatingFilters({ gridContainerRef })
         }}
         onModelUpdated={(params) => {
-          displayedRowsCountSignal.value = params.api.getDisplayedRowCount()
+          const count = params.api.getDisplayedRowCount()
+          dispatch(agGridSlice.actions.setCount({ count }))
         }}
       />
     </GridLayout>
