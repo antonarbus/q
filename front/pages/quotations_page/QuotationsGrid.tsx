@@ -1,5 +1,8 @@
-import 'ag-grid-community/styles/ag-grid.css' // Mandatory CSS required by the grid
-import 'ag-grid-community/styles/ag-theme-quartz.css'
+import {
+  AllCommunityModule,
+  ModuleRegistry,
+  themeQuartz,
+} from 'ag-grid-community'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef } from 'react'
 import { useGetQuotationsQuery } from '@entities/quotation'
@@ -20,6 +23,8 @@ import { AgGridStyles } from '@shared/lib/ag_grid/styles/AgGridStyles'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/loading_dots_overlay'
 import type { QuotationPick } from '@back/api/quotation/getQuotationsRouter'
 
+ModuleRegistry.registerModules([AllCommunityModule])
+
 export const QuotationsGrid = (): React.JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
 
@@ -37,6 +42,7 @@ export const QuotationsGrid = (): React.JSX.Element => {
       <ProgressGridBar isShown={isFetching} />
       <AgGridReact<QuotationPick>
         ref={quotationsAgGridRef}
+        theme={themeQuartz}
         rowData={data?.quotations}
         getRowId={(params) => params.data.id}
         defaultColDef={defaultColDef}

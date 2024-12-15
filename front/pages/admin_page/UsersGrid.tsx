@@ -1,5 +1,8 @@
-import 'ag-grid-community/styles/ag-grid.css' // Mandatory CSS required by the grid
-import 'ag-grid-community/styles/ag-theme-quartz.css'
+import {
+  AllCommunityModule,
+  ModuleRegistry,
+  themeQuartz,
+} from 'ag-grid-community'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { type ElementRef, useRef } from 'react'
 import { useGetUsersQuery } from '@entities/user'
@@ -20,6 +23,8 @@ import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/loading_dot
 import type { UserPicked } from '@back/api/user/getUsersRouter'
 import { useRefetchDataOnEmailChange } from '@shared/lib/ag_grid/hooks/useRefetchDataOnEmailChange'
 
+ModuleRegistry.registerModules([AllCommunityModule])
+
 export const UsersGrid = (): React.JSX.Element => {
   const gridContainerRef = useRef<ElementRef<'div'>>(null)
   const { data, isLoading, isFetching, isFetched, refetch } = useGetUsersQuery()
@@ -34,6 +39,7 @@ export const UsersGrid = (): React.JSX.Element => {
       <ProgressGridBar isShown={isFetching} />
       <AgGridReact<UserPicked>
         ref={usersAgGridRef}
+        theme={themeQuartz}
         rowData={data?.users}
         getRowId={(params) => params.data.email}
         defaultColDef={defaultColDef}

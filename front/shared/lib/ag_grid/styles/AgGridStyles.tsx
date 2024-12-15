@@ -1,5 +1,5 @@
-import 'ag-grid-community/styles/ag-grid.css'
-import 'ag-grid-community/styles/ag-theme-alpine.css'
+// import 'ag-grid-community/styles/ag-grid.css'
+// import 'ag-grid-community/styles/ag-theme-alpine.css'
 import { Global, css } from '@emotion/react'
 
 export const AgGridStyles = (): React.JSX.Element => {
@@ -35,10 +35,22 @@ export const AgGridStyles = (): React.JSX.Element => {
             justify-content: center;
           }
 
-          // filter placeholder and date pattern
-          .ag-floating-filter input::placeholder,
+          // floating filter
+          .ag-floating-filter input {
+            padding-left: 5px;
+          }
+
+          .ag-floating-filter input::placeholder {
+            opacity: 0.5;
+          }
+
           .ag-input-field-input.ag-text-field-input[type='date'] {
             opacity: 0.5;
+          }
+
+          /* remove magnifying class */
+          .ag-text-field-input-wrapper::before {
+            display: none !important;
           }
 
           // remove pin border line
@@ -47,6 +59,11 @@ export const AgGridStyles = (): React.JSX.Element => {
               .ag-cell-range-single-cell
             ) {
             border-right: 1px dotted #80808045;
+          }
+
+          .ag-floating-filter-button-button {
+            height: auto;
+            width: auto;
           }
         }
       `}

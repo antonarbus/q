@@ -12,7 +12,7 @@ export const GridLayout = ({
   return (
     <Box
       ref={gridContainerRef}
-      className='ag-theme-quartz q-table'
+      className='q-table'
       sx={{
         flexGrow: 1,
         position: 'relative',
