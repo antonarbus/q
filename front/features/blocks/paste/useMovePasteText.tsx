@@ -124,6 +124,15 @@ const movePasteTextItem = (e: MouseEvent): void => {
   // dispatch(quotationSlice.actions.removePasteItemReducer())
   dispatch(copySlice.actions.updatePastePos(pastePlace))
   dispatch(copySlice.actions.showPasteText())
+
+  if (prevPlace.pastePos === 'bottom' && pastePlace.pastePos === 'top') {
+    return
+  }
+
+  if (prevPlace.pastePos === 'top' && pastePlace.pastePos === 'bottom') {
+    return
+  }
+
   dispatch(quotationSlice.actions.insertPasteBlockReducer(pastePlace))
 }
 
