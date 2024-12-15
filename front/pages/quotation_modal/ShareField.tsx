@@ -159,35 +159,37 @@ export const ShareField = ({
                     padding: '4px',
                   },
                 }}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position='end'>
-                      <Button
-                        variant='contained'
-                        size='small'
-                        sx={{
-                          fontSize: '10px',
-                          padding: '0px',
-                          minWidth: '30px',
-                        }}
-                        disabled={isButtonDisabledSignal.value}
-                        onClick={() => {
-                          if (emailSignal.value === '') {
-                            return
-                          }
+                slotProps={{
+                  input: {
+                    endAdornment: (
+                      <InputAdornment position='end'>
+                        <Button
+                          variant='contained'
+                          size='small'
+                          sx={{
+                            fontSize: '10px',
+                            padding: '0px',
+                            minWidth: '30px',
+                          }}
+                          disabled={isButtonDisabledSignal.value}
+                          onClick={() => {
+                            if (emailSignal.value === '') {
+                              return
+                            }
 
-                          sharedWithSignal.value = uniq([
-                            ...(sharedWithSignal.value ?? []),
-                            emailSignal.value,
-                          ]).filter((email) => email !== '*')
+                            sharedWithSignal.value = uniq([
+                              ...(sharedWithSignal.value ?? []),
+                              emailSignal.value,
+                            ]).filter((email) => email !== '*')
 
-                          emailSignal.value = ''
-                        }}
-                      >
-                        Add
-                      </Button>
-                    </InputAdornment>
-                  ),
+                            emailSignal.value = ''
+                          }}
+                        >
+                          Add
+                        </Button>
+                      </InputAdornment>
+                    ),
+                  },
                 }}
               />
             )}

@@ -73,14 +73,24 @@ export const Search = (): React.JSX.Element => {
         pendingBookmarkId,
         isAutocompleteOpen,
       })}
-      PaperComponent={PaperComponent}
-      componentsProps={{
+      slots={{
+        paper: PaperComponent,
+      }}
+      slotProps={{
         popper: {
           sx: {
             zIndex: 3,
           },
         },
       }}
+      // PaperComponent={PaperComponent}
+      // componentsProps={{
+      //   popper: {
+      //     sx: {
+      //       zIndex: 3,
+      //     },
+      //   },
+      // }}
       sx={{
         position: 'relative',
         width: '300px',
