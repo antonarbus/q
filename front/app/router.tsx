@@ -79,7 +79,10 @@ const router = createBrowserRouter([
         <OnInitLoad />
         <AccessToken />
         <Toast />
-        <LoadingDotsOverlay />
+        <LoadingDotsOverlay
+          showLoader={false}
+          text=''
+        />
         <Nav />
         <Copy />
         <Main />
@@ -93,8 +96,8 @@ const router = createBrowserRouter([
           <Suspense
             fallback={
               <LoadingDotsOverlay
-                title='Loading...'
-                isShowing
+                text='Loading...'
+                showLoader
               />
             }
           >
@@ -128,8 +131,8 @@ const router = createBrowserRouter([
           <Suspense
             fallback={
               <LoadingDotsOverlay
-                title='Loading...'
-                isShowing
+                text='Loading...'
+                showLoader
               />
             }
           >
@@ -150,8 +153,8 @@ const router = createBrowserRouter([
           <Suspense
             fallback={
               <LoadingDotsOverlay
-                title='Loading...'
-                isShowing
+                text='Loading...'
+                showLoader
               />
             }
           >
@@ -172,8 +175,8 @@ const router = createBrowserRouter([
           <Suspense
             fallback={
               <LoadingDotsOverlay
-                title='Loading...'
-                isShowing
+                text='Loading...'
+                showLoader
               />
             }
           >

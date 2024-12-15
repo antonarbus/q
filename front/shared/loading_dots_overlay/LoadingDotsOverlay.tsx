@@ -1,16 +1,18 @@
+import { useSelector } from '@shared/lib/redux'
 import { LoadingDots } from './LoadingDots'
-import { loadingDotsOverlayTextSignal } from './loadingDotsOverlayTextSignal'
 
 type Props = {
-  isShowing?: boolean
-  title?: string
+  showLoader: boolean
+  text: string
 }
 
 export const LoadingDotsOverlay = ({
-  isShowing,
-  title,
+  showLoader,
+  text,
 }: Props): React.JSX.Element | null => {
-  if (loadingDotsOverlayTextSignal.value === null && !isShowing) {
+  const loadingOverlay = useSelector((state) => state.app.loadingOverlay)
+
+  if (loadingOverlay.text === '' && !loadingOverlay.showLoader && !showLoader) {
     return null
   }
 
@@ -44,9 +46,9 @@ export const LoadingDotsOverlay = ({
           height: '60px',
         }}
       >
-        {loadingDotsOverlayTextSignal.value ?? title}
+        {loadingOverlay.text || text}
       </div>
-      <LoadingDots />
+      {(loadingOverlay.showLoader || showLoader) && <LoadingDots />}
     </div>
   )
 }

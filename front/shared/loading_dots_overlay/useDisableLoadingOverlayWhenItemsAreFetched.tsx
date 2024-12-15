@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
-import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
+import { dispatch } from '@shared/lib/redux'
+import { appSlice } from '@shared/appSlice'
 
 type Props = {
   isFetched: boolean
@@ -10,7 +11,7 @@ export const useDisableLoadingOverlayWhenItemsAreFetched = ({
 }: Props): void => {
   useEffect(() => {
     if (isFetched) {
-      loadingDotsOverlayTextSignal.value = null
+      dispatch(appSlice.actions.hideLoadingOverlay())
     }
   }, [isFetched])
 }

@@ -5,9 +5,9 @@ import { deleteBookmarksCache } from '@entities/bookmark'
 import { deleteQuotationsCache } from '@entities/quotation'
 import { useLogOutMutation, userSlice } from '@entities/user'
 import { navItemKey } from '@shared/consts/navItemKey'
-import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
 import { navSlice } from '@shared/nav'
 import { notify } from '@shared/toast'
+import { appSlice } from '@shared/appSlice'
 
 export const Logout = (): React.JSX.Element => {
   const navigate = useNavigate()
@@ -17,7 +17,12 @@ export const Logout = (): React.JSX.Element => {
 
   useUpdateEffect(() => {
     if (isPending) {
-      loadingDotsOverlayTextSignal.value = 'Logging out'
+      dispatch(
+        appSlice.actions.showLoadingOverlay({
+          showLoader: true,
+          text: 'Logging out',
+        }),
+      )
     }
   }, [isPending])
 
@@ -42,7 +47,7 @@ export const Logout = (): React.JSX.Element => {
       dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: ['admin'] }))
 
       setTimeout(() => {
-        loadingDotsOverlayTextSignal.value = null
+        dispatch(appSlice.actions.hideLoadingOverlay())
         void navigate('..')
       }, 1000)
     }
@@ -57,7 +62,7 @@ export const Logout = (): React.JSX.Element => {
       })
 
       setTimeout(() => {
-        loadingDotsOverlayTextSignal.value = null
+        dispatch(appSlice.actions.hideLoadingOverlay())
         void navigate('..')
       }, 1000)
     }

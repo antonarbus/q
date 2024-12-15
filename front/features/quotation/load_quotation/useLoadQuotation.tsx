@@ -11,7 +11,6 @@ import {
   backToQuotationRef,
 } from '@entities/quotation'
 import { navItemKey } from '@shared/consts/navItemKey'
-import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
 import { navSlice } from '@shared/nav'
 import { notify } from '@shared/toast'
 import { appSlice } from '@shared/appSlice'
@@ -56,7 +55,12 @@ export function useLoadQuotation(): void {
 
     // load previous quotation
     if (quotationType === 'previous' && previousQuotation) {
-      loadingDotsOverlayTextSignal.value = 'Going back...'
+      dispatch(
+        appSlice.actions.showLoadingOverlay({
+          showLoader: true,
+          text: 'Going back...',
+        }),
+      )
 
       // avoid resetting and loading quotation batching, otherwise there is unwanted items animation
       setTimeout(() => {
@@ -68,7 +72,7 @@ export function useLoadQuotation(): void {
       }, 100)
 
       setTimeout(() => {
-        loadingDotsOverlayTextSignal.value = null
+        dispatch(appSlice.actions.hideLoadingOverlay())
       }, 750)
 
       backToQuotationRef.current = null
@@ -78,7 +82,12 @@ export function useLoadQuotation(): void {
 
     // load new quotation template
     if (quotationId === undefined || quotationId === 'new') {
-      loadingDotsOverlayTextSignal.value = 'Loading template...'
+      dispatch(
+        appSlice.actions.showLoadingOverlay({
+          showLoader: true,
+          text: 'Loading template...',
+        }),
+      )
 
       // avoid resetting and loading quotation batching, otherwise there is unwanted items animation
       setTimeout(() => {
@@ -90,7 +99,7 @@ export function useLoadQuotation(): void {
       }, 100)
 
       setTimeout(() => {
-        loadingDotsOverlayTextSignal.value = null
+        dispatch(appSlice.actions.hideLoadingOverlay())
       }, 750)
 
       dispatch(
@@ -102,7 +111,13 @@ export function useLoadQuotation(): void {
 
     // load quotation from server
     if (quotationId !== 'new') {
-      loadingDotsOverlayTextSignal.value = `Loading ${quotationId}...`
+      dispatch(
+        appSlice.actions.showLoadingOverlay({
+          showLoader: true,
+          text: `Loading ${quotationId}...`,
+        }),
+      )
+
       getQuotation({ id: quotationId })
     }
   }, [quotationKey])
@@ -120,7 +135,7 @@ export function useLoadQuotation(): void {
         notify({ msg: 'Quotation corrupted', type: 'warn', theme: 'light' })
 
         setTimeout(() => {
-          loadingDotsOverlayTextSignal.value = null
+          dispatch(appSlice.actions.hideLoadingOverlay())
         }, 750)
 
         return
@@ -146,7 +161,7 @@ export function useLoadQuotation(): void {
         )
 
         setTimeout(() => {
-          loadingDotsOverlayTextSignal.value = null
+          dispatch(appSlice.actions.hideLoadingOverlay())
         }, 750)
       }
     }
@@ -184,7 +199,7 @@ export function useLoadQuotation(): void {
       }
 
       setTimeout(() => {
-        loadingDotsOverlayTextSignal.value = null
+        dispatch(appSlice.actions.hideLoadingOverlay())
       }, 750)
     }
   }, [isError])
