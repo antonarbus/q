@@ -1,9 +1,7 @@
 export { newQuotationTemplate } from './newQuotationTemplate'
 
 // signals
-export { isFroalaSignal } from './signals/isFroalaSignal'
 export { backgroundMessageSignal } from './signals/backgroundMessageSignal'
-export { reLoadQuotationSignal } from './signals/reLoadQuotationSignal'
 
 // ref
 export { backToQuotationRef } from './refs/backToQuotationRef'
@@ -21,6 +19,7 @@ export { deleteQuotationsCache } from './cacheUpdaters/deleteQuotationsCache'
 
 // slice
 export { quotationSlice } from './redux/quotationSlice'
+export { quotationKeySlice } from './redux/quotationKeySlice'
 
 // selectors
 export { selectIsLastBlock } from './redux/selectors/selectIsLastBlock'

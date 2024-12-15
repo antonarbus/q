@@ -5,9 +5,10 @@ import { AiTwotoneEdit } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetBookmarkMutation } from '@entities/bookmark'
-import { isFroalaSignal, quotationSlice } from '@entities/quotation'
+import { quotationSlice } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
 import { notify } from '@shared/toast'
+import { textSlice } from '@shared/lib/froala/textSlice'
 
 export const OpenBookmarkModalButton = ({ id }: ReqBody): React.JSX.Element => {
   const navigate = useNavigate()
@@ -31,7 +32,7 @@ export const OpenBookmarkModalButton = ({ id }: ReqBody): React.JSX.Element => {
         return
       }
 
-      isFroalaSignal.value = false
+      dispatch(textSlice.actions.setNotEditable())
 
       dispatch(quotationSlice.actions.loadBlockAtPosThousandReducer({ block }))
 

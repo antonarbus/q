@@ -3,7 +3,6 @@ import type { UseMutationResult } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import {
-  isFroalaSignal,
   type Quotation,
   quotationSlice,
   useGetQuotationCategoriesQuery,
@@ -22,6 +21,7 @@ import { notify } from '@shared/toast'
 import type { QuotationFormValues } from '@entities/quotation/types'
 import { route } from '@shared/consts/route'
 import { asyncDelay } from '@shared/utils/delay'
+import { textSlice } from '@shared/lib/froala/textSlice'
 
 type Props = {
   quotationFormValues: QuotationFormValues
@@ -104,10 +104,10 @@ export const useSaveQuotation = ({
 
         dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
-        isFroalaSignal.value = false
+        dispatch(textSlice.actions.setNotEditable())
 
         setTimeout(() => {
-          isFroalaSignal.value = true
+          dispatch(textSlice.actions.setEditable())
         })
 
         const slideOutAndChangeUrl = async (): Promise<void> => {

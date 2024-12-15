@@ -3,7 +3,6 @@ import { Box } from '@mui/material'
 import { useRef } from 'react'
 import { FroalaProvider } from '../../providers/FroalaProvider'
 import { useBlock } from '../../providers/BlockProvider'
-import { isFroalaSignal } from '../../signals/isFroalaSignal'
 import { EditableHtml } from './EditableHtml'
 import { placeCaretAtTheEndIfToolbarIsNotShown } from './placeCaretAtTheEndIfToolbarIsNotShown'
 import { StaticHtml } from './StaticHtml'
@@ -28,7 +27,9 @@ export const Froala = (props: FroalaProps): React.JSX.Element => {
     (state) => state.quotation.blocks[blockIndex]?.isFroala ?? true,
   )
 
-  const showEditableHtml = isFroalaSignal.value && isBlockFroala
+  const isEditable = useSelector((state) => state.text.isEditable)
+
+  const showEditableHtml = isEditable && isBlockFroala
 
   return (
     <FroalaProvider

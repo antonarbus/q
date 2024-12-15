@@ -7,7 +7,6 @@ import {
   getBoqRowsFromStore,
   type Row,
   updateSubTotalPriceWithValue,
-  isFroalaSignal,
 } from '@entities/quotation'
 
 export const useUpdateSubtotalPrice = (): void => {
@@ -18,8 +17,10 @@ export const useUpdateSubtotalPrice = (): void => {
     (state) => state.quotation.blocks[blockIndex]?.isFroala,
   )
 
+  const isEditable = useSelector((state) => state.text.isEditable)
+
   useUpdateEffect(() => {
-    if (!isFroalaSignal.value) {
+    if (!isEditable) {
       return
     }
 
@@ -52,5 +53,5 @@ export const useUpdateSubtotalPrice = (): void => {
         incrementally: true,
       })
     })
-  }, [isBlockFroala, isFroalaSignal.value])
+  }, [isBlockFroala, isEditable])
 }

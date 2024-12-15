@@ -1,10 +1,10 @@
 import { Box } from '@mui/material'
 import { useEffectOnce } from 'react-use'
 import { Blocks } from '@widgets/blocks'
-import { isFroalaSignal } from '@entities/quotation'
 import { OutlinedDivWithLabel } from '@shared/components/OutlinedDivWithLabel'
-import { getState, useSelector } from '@shared/lib/redux'
+import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { cls } from '@shared/consts/cls'
+import { textSlice } from '@shared/lib/froala/textSlice'
 
 type Props = {
   children: React.ReactNode
@@ -12,7 +12,7 @@ type Props = {
 
 const QuotationFieldLayout = ({ children }: Props): React.JSX.Element => {
   useEffectOnce(() => {
-    isFroalaSignal.value = true
+    dispatch(textSlice.actions.setEditable())
   })
 
   const maxBlockWidth = useSelector((state) => {

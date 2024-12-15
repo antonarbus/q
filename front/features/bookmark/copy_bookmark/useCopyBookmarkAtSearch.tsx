@@ -2,7 +2,6 @@ import { dispatch } from '@shared/lib/redux'
 import { useUpdateEffect } from 'react-use'
 import { useGetBookmarkMutation } from '@entities/bookmark'
 import { copySlice } from '@entities/copy'
-import { isFroalaSignal } from '@entities/quotation'
 import { notify } from '@shared/toast'
 import type { UseMutateAsyncFunction } from '@tanstack/react-query'
 import type {
@@ -10,6 +9,7 @@ import type {
   ResBody,
 } from '@back/api/bookmark/getBookmarkRouter'
 import type { AxiosError } from 'axios'
+import { textSlice } from '@shared/lib/froala/textSlice'
 
 export type LoadBookmark = UseMutateAsyncFunction<
   ResBody,
@@ -42,7 +42,7 @@ export const useCopyBookmarkAtSearch = (): Res => {
         return
       }
 
-      isFroalaSignal.value = false
+      dispatch(textSlice.actions.setNotEditable())
 
       dispatch(copySlice.actions.addItem({ item }))
       dispatch(copySlice.actions.allowToPaste())

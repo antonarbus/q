@@ -9,18 +9,15 @@ import {
 } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetBookmarksQuery } from '@entities/bookmark'
-import {
-  reLoadQuotationSignal,
-  useGetQuotationsQuery,
-} from '@entities/quotation'
-import { useLogInMutation, userSlice, accessTokenSignal } from '@entities/user'
+import { useGetQuotationsQuery } from '@entities/quotation'
+import { useLogInMutation, userSlice } from '@entities/user'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { route } from '@shared/consts/route'
-import { nanoid } from '@shared/lib/nanoid'
 import { navSlice } from '@shared/nav'
 import { notify } from '@shared/toast'
 import type { NavigateState } from '@shared/types/NavigateState'
 import { asyncDelay } from '@shared/utils/delay'
+import { quotationKeySlice } from '@entities/quotation/redux/quotationKeySlice'
 
 type Props = {
   emailSignal: Signal<string>
@@ -78,7 +75,11 @@ export const useLogIn = ({
         return
       }
 
-      accessTokenSignal.value = accessJwtToken
+      dispatch(
+        userSlice.actions.setAccessToken({
+          accessToken: accessJwtToken,
+        }),
+      )
 
       dispatch(
         userSlice.actions.rememberLoggedUser({
@@ -110,7 +111,7 @@ export const useLogIn = ({
       }
 
       if (quotationId) {
-        reLoadQuotationSignal.value = nanoid(5)
+        dispatch(quotationKeySlice.actions.reload())
       }
 
       const slideOutAndChangeUrl = async (): Promise<void> => {
@@ -133,7 +134,7 @@ export const useLogIn = ({
 
   useUpdateEffect(() => {
     if (isError) {
-      accessTokenSignal.value = null
+      dispatch(userSlice.actions.setAccessToken({ accessToken: null }))
 
       if (error.response?.data.message === 'not registered') {
         notify({ msg: 'Not registered', type: 'info', theme: 'light' })

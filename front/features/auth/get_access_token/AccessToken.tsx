@@ -1,12 +1,8 @@
 import type { JwtPayloadExtended } from '@back/utils/jwt'
-import { dispatch } from '@shared/lib/redux'
+import { dispatch, getState } from '@shared/lib/redux'
 import { jwtDecode } from 'jwt-decode'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
-import {
-  useGetAccessTokenQuery,
-  userSlice,
-  accessTokenSignal,
-} from '@entities/user'
+import { useGetAccessTokenQuery, userSlice } from '@entities/user'
 import { loadingTableOverlaySignal } from '@shared/components/LoadingTableOverlay'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { navSlice, showLoadingNavIcon } from '@shared/nav'
@@ -27,7 +23,9 @@ export const AccessToken = (): React.JSX.Element => {
 
   // get initial access token on app load
   useEffectOnce(() => {
-    if (accessTokenSignal.value === null) {
+    const accessToken = getState().user.accessToken
+
+    if (accessToken === null) {
       void getAccessToken()
     }
   })
@@ -58,7 +56,11 @@ export const AccessToken = (): React.JSX.Element => {
         return
       }
 
-      accessTokenSignal.value = data.accessJwtToken
+      dispatch(
+        userSlice.actions.setAccessToken({
+          accessToken: data.accessJwtToken,
+        }),
+      )
 
       loadingTableOverlaySignal.value = {
         areJumpingDotsShown: false,

@@ -2,11 +2,12 @@ import { dispatch, getState } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { useEffectOnce, useUnmount } from 'react-use'
 import { copySlice } from '@entities/copy'
-import { isFroalaSignal, quotationSlice } from '@entities/quotation'
+import { quotationSlice } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { nanoid } from '@shared/lib/nanoid'
 import { fixElementDimensionStyle } from '@shared/utils/fixElementDimensionStyle'
 import { route } from '@shared/consts/route'
+import { textSlice } from '@shared/lib/froala/textSlice'
 
 const pasteItemOnClick = (): void => {
   if (window.location.pathname.includes(route.bookmarks)) {
@@ -77,7 +78,7 @@ const pasteItemOnClick = (): void => {
 
     setTimeout(
       () => {
-        isFroalaSignal.value = true
+        dispatch(textSlice.actions.setEditable())
         dispatch(copySlice.actions.allowAllActions())
       },
       1000 * theme.block.animationDuration + 500,

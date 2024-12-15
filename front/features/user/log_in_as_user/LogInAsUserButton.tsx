@@ -4,11 +4,8 @@ import { MdLogin } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
 import { notify } from '@shared/toast'
-import { accessTokenSignal, useLogInMutation, userSlice } from '@entities/user'
-import {
-  reLoadQuotationSignal,
-  useGetQuotationsQuery,
-} from '@entities/quotation'
+import { useLogInMutation, userSlice } from '@entities/user'
+import { quotationKeySlice, useGetQuotationsQuery } from '@entities/quotation'
 import { useGetBookmarksQuery } from '@entities/bookmark'
 import type { NavigateState } from '@shared/types/NavigateState'
 import { type Location, useLocation, useParams } from 'react-router-dom'
@@ -16,7 +13,6 @@ import { dispatch } from '@shared/lib/redux'
 import { navSlice } from '@shared/nav'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { route } from '@shared/consts/route'
-import { nanoid } from '@shared/lib/nanoid'
 
 export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
   const { quotationId } = useParams()
@@ -44,7 +40,11 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
         return
       }
 
-      accessTokenSignal.value = data.accessJwtToken
+      dispatch(
+        userSlice.actions.setAccessToken({
+          accessToken: data.accessJwtToken,
+        }),
+      )
 
       dispatch(
         userSlice.actions.rememberLoggedUser({
@@ -78,7 +78,7 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
       }
 
       if (quotationId) {
-        reLoadQuotationSignal.value = nanoid(5)
+        dispatch(quotationKeySlice.actions.reload())
       }
 
       if (data.message === 'super-admin logged as user') {

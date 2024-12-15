@@ -1,10 +1,11 @@
-import { useSelector } from '@shared/lib/redux'
+import { dispatch, useSelector } from '@shared/lib/redux'
 import { AnimatePresence } from 'motion/react'
 import { useEffectOnce } from 'react-use'
 import { Block } from '@widgets/blocks/Block'
-import { bookmarkPosAtBlocks, isFroalaSignal } from '@entities/quotation'
+import { bookmarkPosAtBlocks } from '@entities/quotation'
 import { arrayShapesEqualityFn } from '@shared/utils/arrayShapesEqualityFn'
 import { BookmarkFieldLayout } from './BookmarkFieldLayout'
+import { textSlice } from '@shared/lib/froala/textSlice'
 
 export const BookmarkField = (): React.ReactNode => {
   const blocks = useSelector(
@@ -13,7 +14,7 @@ export const BookmarkField = (): React.ReactNode => {
   )
 
   useEffectOnce(() => {
-    isFroalaSignal.value = true
+    dispatch(textSlice.actions.setEditable())
   })
 
   const bookmarkBlock = blocks.at(bookmarkPosAtBlocks)

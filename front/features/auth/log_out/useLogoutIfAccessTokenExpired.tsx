@@ -1,11 +1,13 @@
-import { dispatch } from '@shared/lib/redux'
+import { dispatch, useSelector } from '@shared/lib/redux'
 import { useUpdateEffect } from 'react-use'
-import { userSlice, accessTokenSignal } from '@entities/user'
+import { userSlice } from '@entities/user'
 
 export const useLogoutIfAccessTokenExpired = (): void => {
+  const accessToken = useSelector((state) => state.user.accessToken)
+
   useUpdateEffect(() => {
-    if (accessTokenSignal.value === null) {
+    if (accessToken === null) {
       dispatch(userSlice.actions.forgetLoggedUser())
     }
-  }, [accessTokenSignal.value])
+  }, [accessToken])
 }

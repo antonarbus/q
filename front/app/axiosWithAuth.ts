@@ -2,16 +2,17 @@ import { apiUrl } from '@back/consts/apiUrl'
 import { headerName } from '@back/consts/headerName'
 import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
 import type { ResBody } from '@back/api/auth/getAccessTokenRouter'
-import { accessTokenSignal } from '@entities/user'
+import { userSlice } from '@entities/user'
 import { initAccessTokenFetchingPromise } from '@features/auth/get_access_token/AccessToken'
 import { instantiateAxiosWithAuth } from '@shared/lib/axiosWithAuth'
+import { dispatch, getState } from '@shared/lib/redux'
 
 const axiosWithAuth = axios.create({ withCredentials: true })
 
 axiosWithAuth.interceptors.request.use(async (config) => {
   // wait till initial access token if fetched, otherwise token is null and another immediate duplicate request for access token will be sent
   await initAccessTokenFetchingPromise
-  config.headers[headerName.accessJwtToken] = accessTokenSignal.value
+  config.headers[headerName.accessJwtToken] = getState().user.accessToken
 
   return config
 })
@@ -42,7 +43,11 @@ axiosWithAuth.interceptors.response.use(
         })
 
         if (res.data.accessJwtToken) {
-          accessTokenSignal.value = res.data.accessJwtToken
+          dispatch(
+            userSlice.actions.setAccessToken({
+              accessToken: res.data.accessJwtToken,
+            }),
+          )
         }
 
         // make original request
@@ -53,7 +58,12 @@ axiosWithAuth.interceptors.response.use(
 
         if (isUnauthorized) {
           // still unauthorized after attempt to refresh the access token
-          accessTokenSignal.value = null
+          dispatch(
+            userSlice.actions.setAccessToken({
+              accessToken: null,
+            }),
+          )
+
           console.warn('not authorized')
           console.error(err)
         }

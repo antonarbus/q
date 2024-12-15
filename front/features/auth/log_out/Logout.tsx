@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { deleteBookmarksCache } from '@entities/bookmark'
 import { deleteQuotationsCache } from '@entities/quotation'
-import { useLogOutMutation, userSlice, accessTokenSignal } from '@entities/user'
+import { useLogOutMutation, userSlice } from '@entities/user'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
 import { navSlice } from '@shared/nav'
@@ -26,7 +26,7 @@ export const Logout = (): React.JSX.Element => {
       deleteQuotationsCache()
       deleteBookmarksCache()
 
-      accessTokenSignal.value = null
+      dispatch(userSlice.actions.setAccessToken({ accessToken: null }))
       dispatch(userSlice.actions.forgetLoggedUser())
 
       dispatch(

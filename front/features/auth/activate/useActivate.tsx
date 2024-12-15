@@ -2,11 +2,7 @@ import { dispatch } from '@shared/lib/redux'
 import type { UseMutationResult } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
-import {
-  useActivateMutation,
-  userSlice,
-  accessTokenSignal,
-} from '@entities/user'
+import { useActivateMutation, userSlice } from '@entities/user'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { navSlice } from '@shared/nav'
 import { notify } from '@shared/toast'
@@ -59,7 +55,12 @@ export const useActivate = (): Res => {
         return
       }
 
-      accessTokenSignal.value = accessJwtToken
+      dispatch(
+        userSlice.actions.setAccessToken({
+          accessToken: accessJwtToken,
+        }),
+      )
+
       dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
 
       dispatch(

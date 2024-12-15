@@ -4,7 +4,6 @@ import type { MouseEvent } from 'react'
 import { GoTrash } from 'react-icons/go'
 import { copySlice } from '@entities/copy'
 import {
-  isFroalaSignal,
   quotationSlice,
   selectIsLastBlock,
   useBlock,
@@ -12,6 +11,7 @@ import {
 import { cls } from '@shared/consts/cls'
 import { fixElementDimensionStyle } from '@shared/utils/fixElementDimensionStyle'
 import { Tooltip } from '@mui/material'
+import { textSlice } from '@shared/lib/froala/textSlice'
 
 export const DeleteBlockIcon = (): React.JSX.Element => {
   const { blockIndex } = useBlock()
@@ -71,7 +71,7 @@ export const DeleteBlockIcon = (): React.JSX.Element => {
             // width of animated element is changed for unknown reason, can't explain the issue, so let's fix it for animation purpose
             fixElementDimensionStyle({ element: paperElement })
 
-            isFroalaSignal.value = false
+            dispatch(textSlice.actions.setNotEditable())
 
             dispatch(
               quotationSlice.actions.deleteBlockReducer({
@@ -90,7 +90,7 @@ export const DeleteBlockIcon = (): React.JSX.Element => {
             if (!isCopyModalVisible) {
               setTimeout(
                 () => {
-                  isFroalaSignal.value = true
+                  dispatch(textSlice.actions.setEditable())
                 },
                 1000 * theme.block.animationDuration + 500,
               )

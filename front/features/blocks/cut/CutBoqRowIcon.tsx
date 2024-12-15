@@ -5,7 +5,6 @@ import { TbCut } from 'react-icons/tb'
 import { copySlice } from '@entities/copy'
 import {
   getBoqRowFromStore,
-  isFroalaSignal,
   quotationSlice,
   selectIsLastBoqRow,
   useBlock,
@@ -14,6 +13,7 @@ import {
 import { cls } from '@shared/consts/cls'
 import { Tooltip } from '@mui/material'
 import { getClosestRowHtml } from '@shared/utils/htmlGetter/getClosestRowHtml'
+import { textSlice } from '@shared/lib/froala/textSlice'
 
 export const CutBoqRowIcon = (): React.JSX.Element => {
   const { blockIndex } = useBlock()
@@ -54,7 +54,7 @@ export const CutBoqRowIcon = (): React.JSX.Element => {
               return
             }
 
-            isFroalaSignal.value = false
+            dispatch(textSlice.actions.setNotEditable())
 
             dispatch(
               quotationSlice.actions.updateBoqRowHeightAndWidthReducer({

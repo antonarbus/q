@@ -1,8 +1,9 @@
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
 import { copySlice } from '@entities/copy'
-import { type Text, isFroalaSignal, itemType } from '@entities/quotation'
+import { type Text, itemType } from '@entities/quotation'
 import { nanoid } from '@shared/lib/nanoid'
+import { textSlice } from '@shared/lib/froala/textSlice'
 
 export const insertTextBlock = (e?: MouseEvent): void => {
   const block: Text = {
@@ -30,7 +31,7 @@ export const insertTextBlock = (e?: MouseEvent): void => {
     },
   }
 
-  isFroalaSignal.value = false
+  dispatch(textSlice.actions.setNotEditable())
 
   dispatch(copySlice.actions.addItem({ item: block }))
 

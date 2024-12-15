@@ -4,7 +4,6 @@ import type { MouseEvent } from 'react'
 import { TbCut } from 'react-icons/tb'
 import { copySlice } from '@entities/copy'
 import {
-  isFroalaSignal,
   itemType,
   quotationSlice,
   saveBlockHeightByIndex,
@@ -15,6 +14,7 @@ import { cls } from '@shared/consts/cls'
 import { fixElementDimensionStyle } from '@shared/utils/fixElementDimensionStyle'
 import { Tooltip } from '@mui/material'
 import { getClosestPaperElementHtml } from '@shared/utils/htmlGetter/getClosestPaperElementHtml'
+import { textSlice } from '@shared/lib/froala/textSlice'
 
 export const CutBlockIcon = (): React.JSX.Element => {
   const { blockIndex } = useBlock()
@@ -76,7 +76,8 @@ export const CutBlockIcon = (): React.JSX.Element => {
             fixElementDimensionStyle({ element: paperElement })
 
             const html = getClosestPaperElementHtml(e)
-            isFroalaSignal.value = false
+
+            dispatch(textSlice.actions.setNotEditable())
 
             const block = structuredClone(blockToCut)
             block.preview = html

@@ -5,9 +5,9 @@ import { MdCopyAll } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { useGetBookmarkMutation } from '@entities/bookmark'
 import { copySlice } from '@entities/copy'
-import { isFroalaSignal } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
 import { notify } from '@shared/toast'
+import { textSlice } from '@shared/lib/froala/textSlice'
 
 export const CopyBookmarkButton = ({ id }: ReqBody): React.JSX.Element => {
   const {
@@ -27,7 +27,7 @@ export const CopyBookmarkButton = ({ id }: ReqBody): React.JSX.Element => {
         return
       }
 
-      isFroalaSignal.value = false
+      dispatch(textSlice.actions.setNotEditable())
 
       dispatch(copySlice.actions.addItem({ item }))
       dispatch(copySlice.actions.allowToPaste())

@@ -1,7 +1,8 @@
 import { dispatch } from '@shared/lib/redux'
 import { useEffectOnce } from 'react-use'
 import { copySlice } from '@entities/copy'
-import { isFroalaSignal, quotationSlice } from '@entities/quotation'
+import { quotationSlice } from '@entities/quotation'
+import { textSlice } from '@shared/lib/froala/textSlice'
 
 export const useExitCopyOnEsc = (): void => {
   const closeOnEsc = (e: KeyboardEvent): void => {
@@ -13,7 +14,7 @@ export const useExitCopyOnEsc = (): void => {
     dispatch(quotationSlice.actions.removePasteItemReducer())
 
     setTimeout(() => {
-      isFroalaSignal.value = true
+      dispatch(textSlice.actions.setEditable())
     }, 500)
   }
 

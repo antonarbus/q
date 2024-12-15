@@ -1,5 +1,5 @@
 import { router } from '@shared/lib/router'
-import { dispatch } from '@shared/lib/redux'
+import { dispatch, useSelector } from '@shared/lib/redux'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
@@ -10,7 +10,6 @@ import {
   newQuotationTemplate,
   backgroundMessageSignal,
   backToQuotationRef,
-  reLoadQuotationSignal,
 } from '@entities/quotation'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { loadingDotsOverlayTextSignal } from '@shared/loading_dots_overlay'
@@ -28,6 +27,8 @@ export function useLoadQuotation(): void {
 
   const quotationId = router.state.matches.at(0)?.params.quotationId
   const location = useLocation()
+
+  const quotationKey = useSelector((state) => state.quotationKey)
 
   const quotationType = (location.state as QuotationLocationState)
     ?.quotationType
@@ -104,7 +105,7 @@ export function useLoadQuotation(): void {
       loadingDotsOverlayTextSignal.value = `Loading ${quotationId}...`
       getQuotation({ id: quotationId })
     }
-  }, [reLoadQuotationSignal.value])
+  }, [quotationKey])
 
   useUpdateEffect(() => {
     if (isSuccess) {

@@ -1,11 +1,12 @@
 import type { DragEndEvent, DragStartEvent } from '@dnd-kit/core'
 import { dispatch, getState } from '@shared/lib/redux'
 import { arrayMoveImmutable } from 'array-move'
-import { isFroalaSignal, quotationSlice } from '@entities/quotation'
+import { quotationSlice } from '@entities/quotation'
+import { textSlice } from '@shared/lib/froala/textSlice'
 
 export const onBlockDragStart = (event: DragStartEvent): void => {
   document.body.style.cursor = 'move'
-  isFroalaSignal.value = false
+  dispatch(textSlice.actions.setNotEditable())
 }
 
 export const onBlockDragEnd =
@@ -13,7 +14,8 @@ export const onBlockDragEnd =
   (event: DragEndEvent): void => {
     const { active, over } = event
 
-    isFroalaSignal.value = true
+    dispatch(textSlice.actions.setEditable())
+
     document.body.style.removeProperty('cursor')
 
     if (!over) {

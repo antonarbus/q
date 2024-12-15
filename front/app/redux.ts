@@ -6,18 +6,22 @@ import { userReducer } from '@entities/user/redux/userSlice'
 import { navReducer } from '@shared/nav/navSlice'
 import { instantiateStore } from '@shared/lib/redux'
 import { agGridReducer } from '@shared/lib/ag_grid/agGridSlice'
+import { textReducer } from '@shared/lib/froala/textSlice'
+import { quotationKeyReducer } from '@entities/quotation/redux/quotationKeySlice'
 
 const store = configureStore({
   reducer: {
     user: userReducer,
     nav: navReducer,
     quotation: quotationReducer,
+    quotationKey: quotationKeyReducer,
     copy: copyReducer,
     agGrid: agGridReducer,
+    text: textReducer,
   },
+  devTools: process.env.NODE_ENV !== 'production',
   middleware: (defaultMiddleware) =>
     defaultMiddleware({ serializableCheck: false }), // we have not serializable components and functions in nav structure
-  devTools: process.env.NODE_ENV !== 'production',
 })
 
 export type Store = typeof store
