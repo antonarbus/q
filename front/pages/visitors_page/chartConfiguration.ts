@@ -36,11 +36,17 @@ export const chartConfiguration: ChartConfiguration = {
       x: {
         title: { display: true, text: '' },
         stacked: true,
+        grid: {
+          display: false,
+        },
       },
       y: {
         title: { display: true, text: '' },
         beginAtZero: true,
         stacked: false,
+        grid: {
+          display: true,
+        },
       },
     },
   },

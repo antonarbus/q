@@ -85,8 +85,21 @@ export const VisitorsPage = (): React.JSX.Element => {
   }, [startDate, endDate, data])
 
   return (
-    <Box>
-      <canvas ref={chartRef}></canvas>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <Box
+        sx={{
+          width: '800px',
+        }}
+      >
+        <canvas ref={chartRef}></canvas>
+      </Box>
       <Box
         sx={{
           display: 'flex',
