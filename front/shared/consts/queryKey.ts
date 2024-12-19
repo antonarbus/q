@@ -10,7 +10,6 @@ export const queryKey = {
   // users
   getUsers: 'getUsers',
   deleteUser: 'deleteUser',
-  countUniqueDailyVisitors: 'countUniqueDailyVisitors',
   // quotation
   getQuotation: 'getQuotation',
   getQuotations: 'getQuotations',
@@ -23,6 +22,9 @@ export const queryKey = {
   getBookmarkCategories: 'getBookmarkCategories',
   deleteBookmark: 'deleteBookmark',
   saveBookmark: 'saveBookmark',
+  // visitors
+  countUniqueDailyVisitors: 'countUniqueDailyVisitors',
+  getUniqueDailyVisitors: 'getUniqueDailyVisitors',
   // settings
   getFilesStats: 'getFilesStats',
 } as const

@@ -1,9 +1,13 @@
 import { Person, Settings } from '@mui/icons-material'
 import { BsFiletypePdf } from 'react-icons/bs'
 import { CiViewTable } from 'react-icons/ci'
-import { FaRegRectangleList, FaGripLines } from 'react-icons/fa6'
+import { FaRegRectangleList, FaGripLines, FaUsersGear } from 'react-icons/fa6'
 import { FiLogOut, FiLogIn, FiDollarSign } from 'react-icons/fi'
-import { IoText, IoChevronBackOutline } from 'react-icons/io5'
+import {
+  IoText,
+  IoChevronBackOutline,
+  IoStatsChartOutline,
+} from 'react-icons/io5'
 import { MdSaveAlt } from 'react-icons/md'
 import { PiFolderSimpleStarDuotone } from 'react-icons/pi'
 import { RiMenuAddFill, RiAdminLine } from 'react-icons/ri'
@@ -28,7 +32,6 @@ import { downloadPdf } from '@features/quotation/pdf'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { route } from '@shared/consts/route'
 import type { MenuItemType } from '@shared/nav'
-import { openAdminPage } from '@features/open_close/open_admin_page'
 
 export const navStructure: MenuItemType[] = [
   {
@@ -202,11 +205,23 @@ export const navStructure: MenuItemType[] = [
             icon: <RiAdminLine data-testid='admin icon' />,
             isHidden: false,
             name: 'Admin',
-            link: route.admin,
-            func: (e?: React.MouseEvent): void => {
-              openAdminPage()
-            },
-            tooltip: 'Admin page',
+            tooltip: 'Admin links',
+            menuItems: [
+              {
+                id: navItemKey.users,
+                icon: <FaUsersGear />,
+                isHidden: false,
+                name: 'Users',
+                link: `/${route.admin}`,
+              },
+              {
+                id: navItemKey.visitors,
+                icon: <IoStatsChartOutline />,
+                isHidden: false,
+                name: 'Visitors',
+                link: `/${route.visitors}`,
+              },
+            ],
           },
           {
             id: navItemKey.logout,

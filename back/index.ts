@@ -30,7 +30,8 @@ import { errorHandlerMiddleware } from './middleware/errorHandlerMiddleware'
 import { config } from './config'
 import { getUsersRouter } from './api/user/getUsersRouter'
 import { deleteUserRouter } from './api/user/deleteUserRouter'
-import { incrementUniqueDailyVisitorRouter } from './api/user/incrementUniqueDailyVisitor'
+import { countUniqueDailyVisitorsRouter } from './api/visitors/countUniqueDailyVisitorsRouter'
+import { getUniqueDailyVisitorsRouter } from './api/visitors/getUniqueDailyVisitorsRouter'
 // import cors from 'cors'
 
 const app = express()
@@ -66,7 +67,6 @@ app.use(apiUrl.getAccessToken, getAccessTokenRouter)
 // user
 app.use(apiUrl.getUsers, getUsersRouter)
 app.use(apiUrl.deleteUser, deleteUserRouter)
-app.use(apiUrl.countUniqueDailyVisitors, incrementUniqueDailyVisitorRouter)
 // quotation
 app.use(apiUrl.saveQuotation, saveQuotationRouter)
 app.use(apiUrl.getQuotation, getQuotationRouter)
@@ -79,6 +79,9 @@ app.use(apiUrl.deleteBookmark, deleteBookmarkRouter)
 app.use(apiUrl.saveBookmark, saveBookmarkRouter)
 app.use(apiUrl.getBookmarks, getBookmarksRouter)
 app.use(apiUrl.getBookmarkCategories, getBookmarkCategoriesRouter)
+// visitors
+app.use(apiUrl.countUniqueDailyVisitors, countUniqueDailyVisitorsRouter)
+app.use(apiUrl.getUniqueDailyVisitors, getUniqueDailyVisitorsRouter)
 // va
 app.use(apiUrl.upload, uploadRouter)
 // settings

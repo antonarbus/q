@@ -1,9 +1,8 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 // import { QuotationModel } from '@back/db/models/quotationModel'
-// import { UserModel } from '@back/db/models/userModel'
+import { UserModel } from '@back/db/models/userModel'
 import { getUserFromRefreshToken } from '@back/utils/jwt'
 import { httpStatus } from '@back/consts/httpStatus'
-import { VisitorsCountModel } from '@back/db/models/visitorsCountModel'
 
 type RouterHandler = (
   req: Request,
@@ -23,8 +22,7 @@ const test: RouterHandler = async (req, res, next) => {
   }
 
   try {
-    // const dbRes = await UserModel.find({ email: 'some random guy' })
-    const dbRes = await VisitorsCountModel.find().select({ __v: 0, _id: 0 })
+    const dbRes = await UserModel.find({ email: 'some random guy' })
     // const dbRes = await UserModel.find()
     // const dbRes = await UserModel.find({ email: 'test-user@sendmequotation.today' })
     // await UserModel.deleteOne({ email: 'info@sendmequotation.today' })

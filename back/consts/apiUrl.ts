@@ -11,7 +11,6 @@ export const apiUrl = {
   // user
   getUsers: '/api/get-users',
   deleteUser: '/api/delete-user',
-  countUniqueDailyVisitors: '/api/count-unique-daily-visitors',
   // quotation
   saveQuotation: '/api/save-quotation',
   getQuotation: '/api/get-quotation',
@@ -26,6 +25,8 @@ export const apiUrl = {
   deleteBookmark: '/api/delete-bookmark',
   // va
   upload: '/api/upload',
+  countUniqueDailyVisitors: '/api/count-unique-daily-visitors',
+  getUniqueDailyVisitors: '/api/get-unique-daily-visitors',
   // settings
   getFilesStats: '/api/get-files-stats',
   // dev

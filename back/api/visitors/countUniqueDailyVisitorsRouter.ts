@@ -21,7 +21,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const incrementUniqueDailyVisitorRouter = Router()
+export const countUniqueDailyVisitorsRouter = Router()
 
 const incrementUniqueDailyVisitor: RouterHandler = async (req, res, next) => {
   try {
@@ -48,4 +48,4 @@ const incrementUniqueDailyVisitor: RouterHandler = async (req, res, next) => {
   }
 }
 
-incrementUniqueDailyVisitorRouter.post('/', incrementUniqueDailyVisitor)
+countUniqueDailyVisitorsRouter.post('/', incrementUniqueDailyVisitor)

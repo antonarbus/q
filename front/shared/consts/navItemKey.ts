@@ -19,4 +19,6 @@ export const navItemKey = {
   boqRow: 'boqRow',
   back: 'back',
   admin: 'admin',
+  users: 'users',
+  visitors: 'visitors',
 } as const

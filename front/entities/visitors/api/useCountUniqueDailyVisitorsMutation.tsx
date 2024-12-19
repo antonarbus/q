@@ -1,7 +1,7 @@
 import type {
   ResBody,
   ReqBody as Payload,
-} from '@back/api/user/incrementUniqueDailyVisitor'
+} from '@back/api/visitors/countUniqueDailyVisitorsRouter'
 import { apiUrl } from '@back/consts/apiUrl'
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import axios, { type AxiosError } from 'axios'
