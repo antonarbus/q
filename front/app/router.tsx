@@ -39,6 +39,10 @@ const AdminPageLazy = React.lazy(async () => {
   return import('@pages/admin_page')
 })
 
+const VisitorsPageLazy = React.lazy(async () => {
+  return import('@pages/visitors_page')
+})
+
 const authRoutes: RouteObject[] = [
   {
     path: route.login,
@@ -182,6 +186,23 @@ const router = createBrowserRouter([
           >
             <RequireRoles requiredRoles={['super-admin']}>
               <AdminPageLazy />
+            </RequireRoles>
+          </Suspense>
+        ),
+      },
+      {
+        path: route.visitors,
+        element: (
+          <Suspense
+            fallback={
+              <LoadingDotsOverlay
+                text='Loading...'
+                showLoader
+              />
+            }
+          >
+            <RequireRoles requiredRoles={['super-admin']}>
+              <VisitorsPageLazy />
             </RequireRoles>
           </Suspense>
         ),

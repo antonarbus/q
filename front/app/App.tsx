@@ -14,6 +14,9 @@ import { ReactQueryDevtoolsProductionHidden } from './ReactQueryDevtoolsProducti
 import { instance } from '@shared/instance'
 import { store } from '@shared/lib/redux'
 import { router } from '@shared/lib/router'
+import { LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3'
+import { enGB } from 'date-fns/locale'
 
 export const App = (): React.JSX.Element => {
   return (
@@ -21,7 +24,12 @@ export const App = (): React.JSX.Element => {
       <QueryClientProvider client={instance.reactQuery}>
         <ThemeProvider theme={themeClient}>
           <GlobalStyles />
-          <RouterProvider router={router} />
+          <LocalizationProvider
+            dateAdapter={AdapterDateFns}
+            adapterLocale={enGB}
+          >
+            <RouterProvider router={router} />
+          </LocalizationProvider>
           <ReactQueryDevtools />
           <ReactQueryDevtoolsProductionHidden />
         </ThemeProvider>
