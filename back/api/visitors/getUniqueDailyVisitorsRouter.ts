@@ -12,8 +12,13 @@ export type ResBody = {
   message: ErrorMessageCommon | 'forbidden' | 'ok'
 }
 
+export type SearchQuery = {
+  startDate: string
+  endDate: string
+}
+
 type RouterHandler = (
-  req: Request,
+  req: Request<unknown, unknown, unknown, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
@@ -31,8 +36,15 @@ const getUniqueDailyVisitors: RouterHandler = async (req, res, next) => {
     return
   }
 
+  const { startDate, endDate } = req.query
+
   try {
-    const visitorsCount = await VisitorsCountModel.find().select({
+    const visitorsCount = await VisitorsCountModel.find({
+      date: {
+        $gte: startDate,
+        $lte: endDate,
+      },
+    }).select({
       __v: 0,
       _id: 0,
     })

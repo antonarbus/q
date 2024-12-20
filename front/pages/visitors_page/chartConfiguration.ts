@@ -28,6 +28,7 @@ export const chartConfiguration: ChartConfiguration = {
   },
   options: {
     responsive: true,
+    animation: false,
     plugins: {
       legend: { position: 'top' },
       title: { display: true, text: 'Visitors' },

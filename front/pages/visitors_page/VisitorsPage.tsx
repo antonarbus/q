@@ -2,23 +2,26 @@ import 'chart.js/auto'
 import { useState } from 'react'
 import { Box } from '@mui/material'
 import { DatePicker } from '@mui/x-date-pickers'
-import { startOfMonth, endOfMonth, subMonths } from 'date-fns'
+import { format, subDays } from 'date-fns'
 import { useInstantiateChart } from './useInstantiateChart'
 import { useGetUniqueDailyVisitorQuery } from '@entities/visitors'
 import { useUpdateChart } from './useUpdateChart'
 
+const today = new Date()
+const thirtyDaysAgo = subDays(today, 30)
+
 export const VisitorsPage = (): React.JSX.Element => {
   const { canvasRef, chartInstanceRef } = useInstantiateChart()
-  const { data, isLoading } = useGetUniqueDailyVisitorQuery()
+
+  const [startDate, setStartDate] = useState(thirtyDaysAgo)
+  const [endDate, setEndDate] = useState(today)
+
+  const { data, isLoading } = useGetUniqueDailyVisitorQuery({
+    startDate: format(startDate, 'yyyy-MM-dd'),
+    endDate: format(endDate, 'yyyy-MM-dd'),
+  })
+
   useUpdateChart({ chartInstanceRef, visitors: data?.visitorsCount ?? [] })
-
-  const [startDate, setStartDate] = useState<Date>(
-    startOfMonth(subMonths(new Date(), 1)),
-  )
-
-  const [endDate, setEndDate] = useState<Date>(
-    endOfMonth(subMonths(new Date(), 1)),
-  )
 
   return (
     <Box

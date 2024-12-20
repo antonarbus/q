@@ -1,3 +1,5 @@
+import type { SearchQuery } from '@back/api/visitors/getUniqueDailyVisitorsRouter'
+
 export const apiUrl = {
   root: '/',
   // auth
@@ -25,6 +27,7 @@ export const apiUrl = {
   deleteBookmark: '/api/delete-bookmark',
   // va
   upload: '/api/upload',
+  // visitors
   countUniqueDailyVisitors: '/api/count-unique-daily-visitors',
   getUniqueDailyVisitors: '/api/get-unique-daily-visitors',
   // settings
