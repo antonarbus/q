@@ -22,6 +22,7 @@ export const useGetUniqueDailyVisitorQuery = ({
 
       return res.data
     },
+    staleTime: Infinity,
   })
 
   return query
