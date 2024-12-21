@@ -212,7 +212,7 @@ export const navStructure: MenuItemType[] = [
                 icon: <FaUsersGear />,
                 isHidden: false,
                 name: 'Users',
-                link: `/${route.admin}`,
+                link: `/${route.users}`,
               },
               {
                 id: navItemKey.visitors,

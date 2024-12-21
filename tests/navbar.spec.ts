@@ -11,6 +11,13 @@ test.describe('nav icons & text on wide screen', () => {
   test.use({ viewport: { width: 1600, height: 1200 } })
 
   test('should show icons & text', async ({ page }) => {
+    // page.on('request', (request) => {
+    //   if (request.url().includes('count-unique-daily-visitors')) {
+    //     console.log('url', request.url())
+    //     console.log('headers', request.headers())
+    //   }
+    // })
+
     const nav = page.locator('nav')
 
     await expect(nav.locator('[data-testid="new icon"]')).toBeVisible()

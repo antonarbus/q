@@ -3,7 +3,6 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 type EnvVarName =
-  | 'NODE_ENV'
   | 'INSTALLATION'
   | 'CI'
   | 'BUCKET_NAME'

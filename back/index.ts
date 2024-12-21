@@ -91,6 +91,6 @@ app.use(errorHandlerMiddleware)
 
 app.listen(config.back.port, () => {
   console.info(
-    `🚀 ${config.env} backend server started at ${config.back.baseUrl} based on ${config.installation} installation`,
+    `🚀 ${config.installation} backend server started at ${config.back.baseUrl} based on ${config.installation} installation`,
   )
 })

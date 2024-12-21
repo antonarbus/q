@@ -1,22 +1,9 @@
 import { getEnvVar } from './utils/getEnvVar'
 
 export const config = {
-  get env() {
-    // https://nodejs.org/en/learn/getting-started/nodejs-the-difference-between-development-and-production#why-is-node_env-considered-an-antipattern
-    // NODE_ENV usage is anti-pattern
-    // we set NODE_ENV=development at package.json & Dockerfile.prod & deployment.yaml when launch a server
-    // we set NODE_ENV only for potential usage by other packages for their own reasons
-
-    if (getEnvVar('NODE_ENV') === 'development') {
-      return 'development'
-    }
-
-    return 'production'
-  },
   get installation() {
-    // our code logic is not dependent on NODE_ENV, but on INSTALLATION env variable
-    // INSTALLATION is also set at package.json & Dockerfile.prod & deployment.yaml
-
+    // INSTALLATION=local is set at package.json & deployment.yaml
+    // INSTALLATION=production is set at Dockerfile.prod.front & Dockerfile.prod.back
     if (getEnvVar('INSTALLATION') === 'local') {
       return 'local'
     }

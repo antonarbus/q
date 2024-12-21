@@ -15,6 +15,9 @@ export default defineConfig({
   use: {
     baseURL: config.front.baseUrl,
     trace: 'on-first-retry',
+    extraHTTPHeaders: {
+      'playwright-test': 'true',
+    },
   },
   projects: [
     // https://playwright.dev/docs/auth#authenticate-with-api-request

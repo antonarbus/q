@@ -70,7 +70,7 @@ const getAccessToken: RouterHandler = async (req, res, next) => {
 
       res.cookie('refreshJwtToken', extendedRefreshToken, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
+        secure: process.env.INSTALLATION !== 'local',
         maxAge: threeMonthsInSec * 1000,
       })
     }

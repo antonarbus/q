@@ -1,5 +1,3 @@
-import type { SearchQuery } from '@back/api/visitors/getUniqueDailyVisitorsRouter'
-
 export const apiUrl = {
   root: '/',
   // auth

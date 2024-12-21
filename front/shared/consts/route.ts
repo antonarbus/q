@@ -13,6 +13,6 @@ export const route = {
   bookmark: 'bookmark',
   info: 'info',
   settings: 'settings',
-  admin: 'admin',
+  users: 'users',
   visitors: 'visitors',
 } as const

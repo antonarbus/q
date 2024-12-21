@@ -25,6 +25,11 @@ export const countUniqueDailyVisitorsRouter = Router()
 
 const incrementUniqueDailyVisitor: RouterHandler = async (req, res, next) => {
   try {
+    // do not distort statistics by tests
+    if (req.headers['playwright-test'] === 'true') {
+      return
+    }
+
     const visitorsCount = await VisitorsCountModel.findOneAndUpdate(
       { date: req.body.date },
       {

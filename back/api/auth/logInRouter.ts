@@ -74,7 +74,7 @@ const logIn: RouterHandler = async (req, res, next) => {
 
       res.cookie('refreshJwtToken', refreshJwtToken, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
+        secure: process.env.INSTALLATION !== 'local',
         maxAge: threeMonthsInSec * 1000,
       })
 
@@ -166,7 +166,7 @@ const logIn: RouterHandler = async (req, res, next) => {
 
     res.cookie('refreshJwtToken', refreshJwtToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: process.env.INSTALLATION !== 'local',
       maxAge: threeMonthsInSec * 1000,
     })
 

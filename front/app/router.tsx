@@ -174,7 +174,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: route.admin,
+        path: route.users,
         element: (
           <Suspense
             fallback={
