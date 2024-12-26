@@ -17,7 +17,7 @@ export const sendEmail = async ({
   try {
     const sendEmailRes = await sgMail.send({
       from: 'info@sendmequotation.today',
-      replyTo: 'info@sendmequotation.today',
+      replyTo: 'anton.arbus@gmail.com',
       to,
       subject,
       html,

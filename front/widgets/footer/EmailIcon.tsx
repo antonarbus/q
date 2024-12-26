@@ -9,7 +9,7 @@ export const EmailIcon = (): React.JSX.Element => {
       placement='top'
     >
       <a
-        href='mailto:info@sendmequotation.today'
+        href='mailto:anton.arbus@gmail.com'
         style={{
           display: 'flex',
           justifyContent: 'center',
