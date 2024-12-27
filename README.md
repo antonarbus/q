@@ -136,7 +136,7 @@ and a hash based on a secret keys, which are kept on a server in env variable.
 - `Item` in the code is a thing which can be sorted or bookmarked: text, boq, price, row.
 - `Block` in the code is a direct defendant in quotation document: text, boq, price.
 
-# CI/CD
+# CI/CD (outdated)
 
 - create the project and get project ID
 - add project into session env
@@ -269,3 +269,45 @@ gcloud iam workload-identity-pools providers describe "github-repo-provider" \
 --workload-identity-pool="github" \
 --format="value(name)"
 ```
+
+## CI/CD with Github Actions
+
+- Container is automatically build, dockerized, uploaded to Artifact Registry and deployed to Cloud Run with github actions on merge to main and dev branches
+- Configuration is kept at /.github/workflows/deployment.yml
+
+## Database
+
+https://cloud.mongodb.com/v2/62def546ebe15846276a5a82#/serverless/detail/ServerlessInstance
+
+## Cloud Run
+
+- create a cloud run container with unauthenticated access + min 0 instances + 'us-central1' region
+- give it a name "cloud-run" (not sure it is used anywhere)
+- env.REGION goes to workflows/deployment.yml
+- it is possible that on first deployment you have to adjust security --> "Allow unauthenticated invocations"
+- go to Manage custom domains --> Add mapping --> Select domain --> generate dns settings --> add it to your hosting
+
+https://console.cloud.google.com/run?inv=1&invt=AblO7A&project=quotationapp-8014c
+
+## Artifact Registry
+
+- create repository for docker + 'us-central1' region + with delete artifacts option
+- give it a name "cloud-run"
+- env.ARTIFACTS_REGISTRY_NAME goes to workflows/deployment.yml
+
+https://console.cloud.google.com/artifacts?inv=1&invt=AblO7A&project=quotationapp-8014c
+
+## IAM-Admin
+
+- go to Service Accounts --> Create Service Account to let github actions upload docker to Artifact Registery
+- give it a name "github-actions-sa"
+- add roles: 1. "Cloud Run Admin" 2. "Artifact Registry Administrator" 3. "Service Account User"
+- go into created account --> keys --> add key --> create new json key
+- copy full content of the key (big object) and add into github --> settings --> secretes & variables --> actions --> New repository secrets --> under "GCP_SA_KEY" name
+- secrets.GCP_SA_KEY goes to workflows/deployment.yml
+
+https://console.cloud.google.com/iam-admin/serviceaccounts?inv=1&invt=AblPCg&project=quotationapp-8014c&supportedpurview=project
+
+## Email
+
+https://github.com/sendgrid/sendgrid-php
