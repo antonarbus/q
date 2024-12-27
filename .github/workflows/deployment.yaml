@@ -87,14 +87,14 @@ jobs:
           context: .
           file: ./Dockerfile.prod.back
           push: true
-          tags: ${{ env.REGION }}-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.ARTIFACTS_REGISTRY_FOLDER_NAME}}/${{ env.DOCKER_IMAGE_NAME }}-back:${{env.IMAGE_VERSION}}
+          tags: ${{ env.REGION }}-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.ARTIFACTS_REGISTRY_NAME}}/${{ env.DOCKER_IMAGE_NAME }}-back:${{env.IMAGE_VERSION}}
 
       - name: Deploy to Cloud Run Backend
         id: deploy-cloud-run-back
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: cloud-run-backend-${{env.IMAGE_VERSION}}
-          image: ${{ env.REGION }}-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.ARTIFACTS_REGISTRY_FOLDER_NAME}}/${{ env.DOCKER_IMAGE_NAME }}-back:${{env.IMAGE_VERSION}}
+          image: ${{ env.REGION }}-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.ARTIFACTS_REGISTRY_NAME}}/${{ env.DOCKER_IMAGE_NAME }}-back:${{env.IMAGE_VERSION}}
           region: ${{ env.REGION }}
           project_id: ${{env.PROJECT_ID}}
           flags: --port 4000 --allow-unauthenticated
@@ -113,14 +113,14 @@ jobs:
           context: .
           file: ./Dockerfile.prod.front
           push: true
-          tags: ${{ env.REGION }}-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.ARTIFACTS_REGISTRY_FOLDER_NAME}}/${{ env.DOCKER_IMAGE_NAME }}-front:${{env.IMAGE_VERSION}}
+          tags: ${{ env.REGION }}-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.ARTIFACTS_REGISTRY_NAME}}/${{ env.DOCKER_IMAGE_NAME }}-front:${{env.IMAGE_VERSION}}
 
       - name: Deploy to Cloud Run Frontend
         id: deploy-cloud-run-front
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: cloud-run-frontend-${{env.IMAGE_VERSION}}
-          image: ${{ env.REGION }}-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.ARTIFACTS_REGISTRY_FOLDER_NAME}}/${{ env.DOCKER_IMAGE_NAME }}-front:${{env.IMAGE_VERSION}}
+          image: ${{ env.REGION }}-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.ARTIFACTS_REGISTRY_NAME}}/${{ env.DOCKER_IMAGE_NAME }}-front:${{env.IMAGE_VERSION}}
           region: ${{ env.REGION }}
           project_id: ${{env.PROJECT_ID}}
           flags: --port 80 --allow-unauthenticated
