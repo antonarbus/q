@@ -102,6 +102,7 @@ jobs:
       - name: Change backend stream NGINX config
         run: |
           DOMAIN=$(echo ${{steps.deploy-cloud-run-back.outputs.url}} | cut -d'/' -f3)
+          echo "DOMAIN: ${DOMAIN}"
           sed -i 's|backend:4000|'${DOMAIN}'|g' ./nginx.conf
           sed -i 's|http://backend|https://'${DOMAIN}'|g' ./nginx.conf
           cat ./nginx.conf
