@@ -3,14 +3,14 @@
   <!-- main page -->
   <url>
     <loc>https://sendmequotation.today/</loc>
-    <lastmod>2024-10-30</lastmod>
+    <lastmod>2025-01-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <!-- favicon URL -->
   <url>
-      <loc>https://sendmequotation.today/favicon.png?v=4</loc>
-      <lastmod>2024-10-30</lastmod>
+      <loc>https://sendmequotation.today/favicon.png?v=5</loc>
+      <lastmod>2025-01-01</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.1</priority>
   </url>
