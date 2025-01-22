@@ -240,11 +240,14 @@ export const useMovePasteText = (): void => {
   const isBoqRow = typeOfNextPasteItem === boqRowKey.row
 
   useEffect(() => {
+    const controller = new AbortController()
+
     if (isBlock) {
       document.body.style.cursor = 'pointer'
 
       document.addEventListener('mousemove', movePasteTextItem, {
         passive: true,
+        signal: controller.signal,
       })
     }
 
@@ -253,13 +256,13 @@ export const useMovePasteText = (): void => {
 
       document.addEventListener('mousemove', movePasteTextBoqRow, {
         passive: true,
+        signal: controller.signal,
       })
     }
 
     return (): void => {
       document.body.style.removeProperty('cursor')
-      document.removeEventListener('mousemove', movePasteTextItem)
-      document.removeEventListener('mousemove', movePasteTextBoqRow)
+      controller.abort()
     }
   }, [isBlock, isBoqRow])
 }

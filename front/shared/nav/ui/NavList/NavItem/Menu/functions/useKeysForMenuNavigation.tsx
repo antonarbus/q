@@ -174,10 +174,14 @@ export const useKeysForMenuNavigation = (): void => {
   }
 
   useEffect(() => {
-    window.addEventListener('keydown', navKeyboardHandler)
+    const controller = new AbortController()
+
+    window.addEventListener('keydown', navKeyboardHandler, {
+      signal: controller.signal,
+    })
 
     return (): void => {
-      window.removeEventListener('keydown', navKeyboardHandler)
+      controller.abort()
     }
   }, [])
 }

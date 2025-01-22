@@ -11,6 +11,8 @@ const ReactQueryDevtoolsProduction = lazy(async () =>
 // works only within 1st min after the load
 export const ReactQueryDevtoolsProductionHidden =
   (): React.JSX.Element | null => {
+    const controller = new AbortController()
+
     const [showDevtools, setShowDevtools] = useState(false)
 
     let keysPressed: string[] = []
@@ -42,20 +44,25 @@ export const ReactQueryDevtoolsProductionHidden =
 
       setShowDevtools(true)
       keysPressed = []
-      window.removeEventListener('keydown', activateReactQueryDevTools)
-      window.removeEventListener('keyup', emptyKeysPressedArray)
+
+      controller.abort('React Query dev tools is enabled')
     }
 
     useEffectOnce(() => {
-      window.addEventListener('keydown', activateReactQueryDevTools)
-      window.addEventListener('keyup', emptyKeysPressedArray)
+      window.addEventListener('keydown', activateReactQueryDevTools, {
+        signal: controller.signal,
+      })
+
+      window.addEventListener('keyup', emptyKeysPressedArray, {
+        signal: controller.signal,
+      })
 
       // ? probably this part is not needed as it is not that good idea
       const oneMin = 60 * 1000
 
       setTimeout(() => {
-        window.removeEventListener('keydown', activateReactQueryDevTools)
-        window.removeEventListener('keydown', emptyKeysPressedArray)
+        // Calling `.abort()` removes ALL event listeners associated with `controller.signal`
+        controller.abort('shortcut works only during first minute')
       }, oneMin)
     })
 
