@@ -92,10 +92,7 @@ export const pasteItemReducer = (
         deleteCount: number
       }
 
-      const spliceSettings = {
-        insertAtIndex: -1,
-        deleteCount: 0,
-      }
+      let spliceSettings: SplicingSettings | null = null
 
       block.boq.rows.forEach((boqRow, hoveredItemIndex) => {
         if (boqRow.id !== id) {
@@ -125,19 +122,29 @@ export const pasteItemReducer = (
           return spliceParams
         }
 
-        spliceSettings.insertAtIndex = getSpliceSettings().insertAtIndex
-        spliceSettings.deleteCount = getSpliceSettings().deleteCount
+        spliceSettings = getSpliceSettings()
       })
+
+      if ((spliceSettings as SplicingSettings | null) === null) {
+        return
+      }
 
       const boqRowsWithoutPasteText = block.boq.rows.filter(
         (boqRow) => boqRow.type !== boqRowKey.paste,
       )
 
+      // todo: fix it
       boqRowsWithoutPasteText.splice(
+        //@ts-expect-error: some error
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         spliceSettings.insertAtIndex,
+        //@ts-expect-error: some error
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         spliceSettings.deleteCount,
         itemToPaste,
       )
+
+      //@es
 
       block.boq.rows = boqRowsWithoutPasteText
     })
