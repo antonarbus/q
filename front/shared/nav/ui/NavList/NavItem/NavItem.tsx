@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { getState, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
-import { useRef, type MouseEvent, type MutableRefObject } from 'react'
+import { useRef } from 'react'
 import { TiArrowSortedDown } from 'react-icons/ti'
 import { Link, useLocation } from 'react-router-dom'
 import { useWindowSize } from 'react-use'
@@ -32,7 +32,7 @@ type Props = {
 export const NavItem = ({ children, id }: Props): React.JSX.Element => {
   const location = useLocation()
   // required to avoid Menu to go over the narrow window
-  const navItemRef = useRef() as MutableRefObject<HTMLLIElement>
+  const navItemRef = useRef<React.ComponentRef<'li'> | null>(null)
 
   /**
    * - with media query at some width we hide names and show icons
@@ -141,7 +141,7 @@ export const NavItem = ({ children, id }: Props): React.JSX.Element => {
     >
       <Link
         to={to}
-        onClick={(e: MouseEvent): void => {
+        onClick={(e: React.MouseEvent): void => {
           if (isFunc) {
             e.preventDefault()
           }

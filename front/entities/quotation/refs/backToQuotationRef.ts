@@ -1,6 +1,5 @@
-import type { MutableRefObject } from 'react'
 import type { Quotation } from '../types'
 
-export const backToQuotationRef: MutableRefObject<Quotation | null> = {
+export const backToQuotationRef: React.RefObject<Quotation | null> = {
   current: null,
 }

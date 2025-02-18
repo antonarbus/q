@@ -3,8 +3,8 @@ import type { FroalaProps } from '../ui/froala/types'
 // import type { FroalaProps } from '../ui/froala/Froala'
 
 type Context = FroalaProps & {
-  froalaElementRef: React.RefObject<HTMLDivElement>
-  froalaHeightRef: React.MutableRefObject<number>
+  froalaElementRef: React.RefObject<HTMLDivElement | null>
+  froalaHeightRef: React.RefObject<number>
 }
 
 type Props = Context & {

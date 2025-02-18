@@ -3,7 +3,7 @@ import { type SxProps, Typography, Box } from '@mui/material'
 type Props = {
   children?: React.ReactNode
   sx?: SxProps
-  reference?: React.RefObject<HTMLDivElement>
+  reference?: React.RefObject<React.ComponentRef<'div'> | null>
   title?: React.ReactNode
   logo?: React.ReactNode
 }

@@ -30,7 +30,7 @@ type Props = {
   isButtonLoading?: boolean
   isButtonSuccess?: boolean
   isButtonError?: boolean
-  modalRef: React.RefObject<HTMLDivElement> | AnimationScope
+  modalRef: React.RefObject<React.ComponentRef<'div'> | null> | AnimationScope
   shouldUnmountOnClickAway: boolean
   shouldUnmountOnEsc: boolean
 }

@@ -3,7 +3,7 @@ import { theme } from '@shared/theme'
 
 type Props = {
   children: React.ReactNode
-  navRef: React.RefObject<HTMLDivElement>
+  navRef: React.RefObject<React.ComponentRef<'div'> | null>
 }
 
 export const NavLayout = (props: Props): React.JSX.Element => {

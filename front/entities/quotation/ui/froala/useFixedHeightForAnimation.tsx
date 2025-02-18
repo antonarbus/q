@@ -1,11 +1,11 @@
-import { useEffect, useRef, type MutableRefObject } from 'react'
+import { useEffect, useRef } from 'react'
 
 type Props = {
-  froalaElementRef: MutableRefObject<HTMLElement | null>
+  froalaElementRef: React.RefObject<HTMLElement | null>
 }
 
 type Res = {
-  froalaHeightRef: MutableRefObject<number>
+  froalaHeightRef: React.RefObject<number>
 }
 
 export const useFixedHeightForAnimation = ({

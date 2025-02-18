@@ -1,10 +1,10 @@
 import { dispatch } from '@shared/lib/redux'
-import { useEffect, type MutableRefObject } from 'react'
+import { useEffect } from 'react'
 import { didClickInsideThisElement } from '../../../../../../utils/isClickInsideThisElement'
 import { navSlice } from '../../../../../navSlice'
 
 type Props = {
-  menuContainerRef: MutableRefObject<HTMLDivElement | null>
+  menuContainerRef: React.RefObject<React.ComponentRef<'div'> | null>
 }
 
 export const useCloseMenuOnClickOutside = ({
@@ -17,36 +17,40 @@ export const useCloseMenuOnClickOutside = ({
    */
 
   const mouseDownHandler = (e: Event): void => {
-    const menuContainer = menuContainerRef.current
+    if (menuContainerRef.current !== null) {
+      const menuContainer = menuContainerRef.current
 
-    if (!menuContainer) {
-      return
-    }
+      const navItem = menuContainerRef.current.parentElement
 
-    const navItem = menuContainerRef.current?.parentElement
+      if (!navItem) {
+        return
+      }
 
-    if (!navItem) {
-      return
-    }
+      const clickedElement = e.target
 
-    const clickedElement = e.target
+      if (!(clickedElement instanceof HTMLElement)) {
+        return
+      }
 
-    if (!(clickedElement instanceof HTMLElement)) {
-      return
-    }
+      const isClickOnOpenedNavItem =
+        didClickInsideThisElement({ clickedElement, thisElement: navItem }) &&
+        !didClickInsideThisElement({
+          clickedElement,
+          thisElement: menuContainer,
+        })
 
-    const isClickOnOpenedNavItem =
-      didClickInsideThisElement({ clickedElement, thisElement: navItem }) &&
-      !didClickInsideThisElement({ clickedElement, thisElement: menuContainer })
+      if (isClickOnOpenedNavItem) {
+        return
+      }
 
-    if (isClickOnOpenedNavItem) {
-      return
-    }
-
-    if (
-      !didClickInsideThisElement({ clickedElement, thisElement: menuContainer })
-    ) {
-      dispatch(navSlice.actions.closeMenu())
+      if (
+        !didClickInsideThisElement({
+          clickedElement,
+          thisElement: menuContainer,
+        })
+      ) {
+        dispatch(navSlice.actions.closeMenu())
+      }
     }
   }
 

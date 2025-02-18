@@ -3,13 +3,12 @@ import { Person } from '@mui/icons-material'
 import { InputAdornment, TextField } from '@mui/material'
 import { useSignal, type Signal, useSignalEffect } from '@preact/signals-react'
 import mailcheck from 'mailcheck'
-import type { RefObject } from 'react'
 import { isEmailPatternOk } from '../../utils/isEmailPatternOk'
 
 type Props = {
   emailSignal: Signal<string>
   isEmailOkSignal: Signal<boolean>
-  inputRef?: RefObject<HTMLDivElement>
+  inputRef?: React.RefObject<React.ComponentRef<'div'> | null>
   disabled?: boolean
   onClickAway?: () => void
   label?: string

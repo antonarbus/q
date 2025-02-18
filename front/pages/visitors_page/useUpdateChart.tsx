@@ -5,7 +5,7 @@ import { format, parseISO } from 'date-fns'
 
 type Props = {
   visitors: ResBody['visitorsCount']
-  chartInstanceRef: React.MutableRefObject<Chart | null>
+  chartInstanceRef: React.RefObject<Chart | null>
 }
 
 export const useUpdateChart = ({ visitors, chartInstanceRef }: Props): void => {

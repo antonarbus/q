@@ -1,5 +1,4 @@
 import type { FroalaEditor } from '@shared/types/froala'
-import type { MutableRefObject } from 'react'
 import { roundTo } from 'round-to'
 import {
   bookmarkPosAtBlocks,
@@ -11,8 +10,8 @@ import { getState } from '@shared/lib/redux'
 import { updateRowBlockCellWithValue } from '@entities/quotation/utils/updateRowBlockCellWithValue'
 
 type Props = {
-  itemPriceCellEditorRef: MutableRefObject<FroalaEditor | null>
-  priceCellEditorRef: MutableRefObject<FroalaEditor | null>
+  itemPriceCellEditorRef: React.RefObject<FroalaEditor | null>
+  priceCellEditorRef: React.RefObject<FroalaEditor | null>
 }
 
 export const updateItemPriceCell = ({

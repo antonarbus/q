@@ -3,8 +3,8 @@ import { useEffect, useRef } from 'react'
 import { chartConfiguration } from './chartConfiguration'
 
 type Res = {
-  canvasRef: React.MutableRefObject<HTMLCanvasElement | null>
-  chartInstanceRef: React.MutableRefObject<Chart | null>
+  canvasRef: React.RefObject<HTMLCanvasElement | null>
+  chartInstanceRef: React.RefObject<Chart | null>
 }
 
 export const useInstantiateChart = (): Res => {

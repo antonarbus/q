@@ -1,5 +1,5 @@
 import { dispatch, getState } from '@shared/lib/redux'
-import type { MouseEvent, MutableRefObject } from 'react'
+import type { MouseEvent } from 'react'
 import { navSlice } from '../../../navSlice'
 import type { MenuItemType } from '../../../type'
 
@@ -7,7 +7,7 @@ type Props = {
   e: MouseEvent
   navItem: MenuItemType | undefined
   id: string
-  navItemRef: MutableRefObject<HTMLLIElement>
+  navItemRef: React.RefObject<React.ComponentRef<'li'> | null>
   disabled: boolean
 }
 
@@ -70,8 +70,10 @@ export const clickOnNavItem = ({
     return
   }
 
-  // open menu and determine its position (right: 0 OR left: 0)
-  const navItemRightPos = navItemRef.current.getBoundingClientRect().right
-  dispatch(navSlice.actions.setNavItemRightPos(navItemRightPos))
-  dispatch(navSlice.actions.openMenuWithId(id))
+  if (navItemRef.current !== null) {
+    // open menu and determine its position (right: 0 OR left: 0)
+    const navItemRightPos = navItemRef.current.getBoundingClientRect().right
+    dispatch(navSlice.actions.setNavItemRightPos(navItemRightPos))
+    dispatch(navSlice.actions.openMenuWithId(id))
+  }
 }

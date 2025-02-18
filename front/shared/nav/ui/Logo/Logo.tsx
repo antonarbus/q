@@ -1,9 +1,8 @@
 import { Box } from '@mui/material'
-import type { RefObject } from 'react'
 import logoSrc from './logo.png'
 
 type Prop = {
-  logoRef: RefObject<HTMLDivElement>
+  logoRef: React.RefObject<React.ComponentRef<'div'> | null>
 }
 
 export const Logo = ({ logoRef }: Prop): React.JSX.Element => {

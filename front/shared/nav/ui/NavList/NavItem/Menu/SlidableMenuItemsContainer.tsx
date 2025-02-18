@@ -1,10 +1,9 @@
 import { useSelector } from '@shared/lib/redux'
-import type { RefObject } from 'react'
 import { selectMenuItemByIdsChainSelector } from './functions/selectMenuItemByIdsChainSelector'
 import { MenuItem } from './MenuItem'
 
 type Props = {
-  reference: RefObject<HTMLDivElement>
+  reference: React.RefObject<React.ComponentRef<'div'> | null>
   idsToMenu: string[]
   className: string
 }

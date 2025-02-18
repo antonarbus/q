@@ -1,12 +1,12 @@
 import { dispatch, useSelector } from '@shared/lib/redux'
-import { useLayoutEffect, type RefObject } from 'react'
+import { useLayoutEffect } from 'react'
 import { useFirstMountState } from 'react-use'
 import { calcNavMediaQueryParams } from './calcNavMediaQueryParams'
 import { navSlice } from '@shared/nav'
 
 type Props = {
-  navRef: RefObject<HTMLDivElement>
-  logoRef: RefObject<HTMLDivElement>
+  navRef: React.RefObject<React.ComponentRef<'div'> | null>
+  logoRef: React.RefObject<React.ComponentRef<'div'> | null>
 }
 
 export const useCalculateMediaQueries = ({ navRef, logoRef }: Props): void => {

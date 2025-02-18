@@ -54,10 +54,10 @@ const MenuStyled = styled.div<Props>`
 `
 
 export const Menu = (): React.JSX.Element => {
-  const menuContainerRef = useRef<HTMLDivElement>(null)
-  const currentMenuRef = useRef<HTMLDivElement>(null)
-  const nextMenuRef = useRef<HTMLDivElement>(null)
-  const fakeMenuRef = useRef<HTMLDivElement>(null)
+  const menuContainerRef = useRef<React.ComponentRef<'div'> | null>(null)
+  const currentMenuRef = useRef<React.ComponentRef<'div'> | null>(null)
+  const nextMenuRef = useRef<React.ComponentRef<'div'> | null>(null)
+  const fakeMenuRef = useRef<React.ComponentRef<'div'> | null>(null)
 
   const idsToNextMenuItems = useSelector(
     (state) => state.nav.idsToNextMenuItems,

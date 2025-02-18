@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import { cls } from '@shared/consts/cls'
 
 type Props = {
-  dropFilesTextRef: React.RefObject<HTMLDivElement>
+  dropFilesTextRef: React.RefObject<React.ComponentRef<'div'> | null>
 }
 
 export const DropFilesText = (props: Props): React.JSX.Element => {

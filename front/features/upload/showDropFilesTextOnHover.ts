@@ -1,5 +1,5 @@
 type Props = {
-  dropFilesTextRef: React.RefObject<HTMLDivElement>
+  dropFilesTextRef: React.RefObject<React.ComponentRef<'div'> | null>
 }
 
 export const showDropFilesTextOnMouseEnter = ({

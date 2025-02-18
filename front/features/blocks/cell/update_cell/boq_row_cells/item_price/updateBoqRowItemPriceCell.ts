@@ -1,5 +1,4 @@
 import type { FroalaEditor } from '@shared/types/froala'
-import type { MutableRefObject } from 'react'
 import { roundTo } from 'round-to'
 import {
   didBoqCellContentChange,
@@ -13,9 +12,9 @@ import {
 } from '@entities/quotation'
 
 type Props = {
-  itemPriceCellEditorRef: MutableRefObject<FroalaEditor | null>
-  priceCellEditorRef: MutableRefObject<FroalaEditor | null>
-  subTotalPriceEditorRef: MutableRefObject<FroalaEditor | null>
+  itemPriceCellEditorRef: React.RefObject<FroalaEditor | null>
+  priceCellEditorRef: React.RefObject<FroalaEditor | null>
+  subTotalPriceEditorRef: React.RefObject<FroalaEditor | null>
   blockIndex: number
   rowIndex: number
 }

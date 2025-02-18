@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 
 type Props = {
   children: React.ReactNode
-  gridContainerRef: React.RefObject<React.ElementRef<'div'>>
+  gridContainerRef: React.RefObject<React.ComponentRef<'div'> | null>
 }
 
 export const GridLayout = ({

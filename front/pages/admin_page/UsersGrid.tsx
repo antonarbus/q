@@ -25,7 +25,7 @@ import { agGridSlice } from '@shared/lib/ag_grid/agGridSlice'
 ModuleRegistry.registerModules([AllCommunityModule])
 
 export const UsersGrid = (): React.JSX.Element => {
-  const gridContainerRef = useRef<ElementRef<'div'>>(null)
+  const gridContainerRef = useRef<React.ComponentRef<'div'> | null>(null)
   const { data, isLoading, isFetching, isFetched, refetch } = useGetUsersQuery()
   useDisableLoadingOverlayWhenItemsAreFetched({ isFetched })
   useRefetchDataOnEmailChange({ refetch })
