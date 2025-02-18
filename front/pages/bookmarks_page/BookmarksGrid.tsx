@@ -4,7 +4,7 @@ import {
   themeQuartz,
 } from 'ag-grid-community'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
-import { type ElementRef, useRef } from 'react'
+import { useRef } from 'react'
 import { useGetBookmarksQuery } from '@entities/bookmark'
 import { LoadingTableOverlay } from '@shared/components/LoadingTableOverlay'
 import { DisplayedRowsCount } from '@shared/lib/ag_grid/components/DisplayedRowsCount'
@@ -25,7 +25,7 @@ import { agGridSlice } from '@shared/lib/ag_grid/agGridSlice'
 ModuleRegistry.registerModules([AllCommunityModule])
 
 export const BookmarksGrid = (): React.JSX.Element => {
-  const gridContainerRef = useRef<ElementRef<'div'>>(null)
+  const gridContainerRef = useRef<React.ComponentRef<'div'> | null>(null)
 
   const { data, isLoading, isFetching, isFetched, refetch } =
     useGetBookmarksQuery()

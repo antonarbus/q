@@ -1,6 +1,6 @@
 import globals from 'globals'
 import pluginJs from '@eslint/js'
-import pluginReactConfig from 'eslint-plugin-react/configs/recommended.js'
+import reactPlugin from 'eslint-plugin-react'
 import prettierConfig from 'eslint-config-prettier'
 import tseslint from 'typescript-eslint'
 
@@ -30,10 +30,9 @@ export default [
       },
     },
   },
-  { settings: { react: { version: '18' } } },
-  // pluginJs.configs.recommended,
+  { settings: { react: { version: '19' } } },
   pluginJs.configs.all,
-  pluginReactConfig,
+  reactPlugin.configs.flat.recommended,
   // ...tseslint.configs.strictTypeChecked,
   // ...tseslint.configs.stylisticTypeChecked,
   ...tseslint.configs.all,
@@ -120,8 +119,9 @@ export default [
       '@typescript-eslint/consistent-return': 'off',
       '@typescript-eslint/indent': 'off', // bad for performance
       '@typescript-eslint/no-unsafe-type-assertion': 'off',
+      '@typescript-eslint/no-misused-spread': 'off',
 
-      // https://github.com/jsx-eslint/eslint-plugin-react?tab=readme-ov-file#list-of-supported-rules
+      // https://github.com/jsx-eslint/eslint-plugin-react
       'react/react-in-jsx-scope': 'off',
       'react/no-unknown-property': ['error', { ignore: ['css'] }],
     },

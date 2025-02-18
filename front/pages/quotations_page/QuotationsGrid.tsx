@@ -4,7 +4,7 @@ import {
   themeQuartz,
 } from 'ag-grid-community'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
-import { type ElementRef, useRef } from 'react'
+import { useRef } from 'react'
 import { useGetQuotationsQuery } from '@entities/quotation'
 import { LoadingTableOverlay } from '@shared/components/LoadingTableOverlay'
 import { NoRowsTableOverlay } from '@shared/lib/ag_grid/components/NoRowsTableOverlay'
@@ -25,7 +25,7 @@ import { DisplayedRowsCount } from '@shared/lib/ag_grid/components/DisplayedRows
 ModuleRegistry.registerModules([AllCommunityModule])
 
 export const QuotationsGrid = (): React.JSX.Element => {
-  const gridContainerRef = useRef<ElementRef<'div'>>(null)
+  const gridContainerRef = useRef<React.ComponentRef<'div'> | null>(null)
 
   const { data, isLoading, isFetching, isFetched, refetch } =
     useGetQuotationsQuery()

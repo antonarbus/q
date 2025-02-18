@@ -18,7 +18,7 @@ import { cls } from '@shared/consts/cls'
 import { DropHereText } from './DropHereText'
 
 export const Froala = (props: FroalaProps): React.JSX.Element => {
-  const dropFilesTextRef = useRef<React.ElementRef<'div'>>(null)
+  const dropFilesTextRef = useRef<React.ComponentRef<'div'> | null>(null)
   const froalaElementRef = useRef<HTMLDivElement>(null)
   const { blockIndex } = useBlock()
   const { froalaHeightRef } = useFixedHeightForAnimation({ froalaElementRef })
