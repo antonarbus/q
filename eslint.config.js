@@ -60,7 +60,6 @@ export default [
         { blankLine: 'always', prev: 'multiline-expression', next: '*' },
         { blankLine: 'always', prev: '*', next: 'multiline-expression' },
       ],
-      'no-alert': 'off',
       curly: 'error',
       'no-else-return': 'error',
       'no-negated-condition': 'error',
@@ -71,7 +70,17 @@ export default [
       'no-console': ['error', { allow: ['error', 'warn', 'info'] }],
       'no-useless-rename': 'error',
       'no-duplicate-imports': 'error',
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: 'ReturnStatement > CallExpression',
+          message:
+            'Do not return expressions directly. Assign them to a variable first.',
+        },
+      ],
+
       // turn off some rules from pluginJs.configs.all
+      'no-alert': 'off',
       'no-useless-assignment': 'off',
       'sort-keys': 'off',
       'max-lines-per-function': 'off',
@@ -100,15 +109,6 @@ export default [
       'init-declarations': 'off',
       'new-cap': 'off',
       'no-unsafe-type-assertion': 'off',
-      // Do not return expressions directly
-      'no-restricted-syntax': [
-        'error',
-        {
-          selector: 'ReturnStatement > CallExpression',
-          message:
-            'Do not return expressions directly. Assign them to a variable first.',
-        },
-      ],
 
       // https://typescript-eslint.io/rules/
       '@typescript-eslint/no-unused-vars': ['error', { args: 'none' }],
@@ -117,6 +117,7 @@ export default [
       '@typescript-eslint/consistent-type-exports': 'error',
       '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/no-import-type-side-effects': 'error',
+
       // turn off some rules from tseslint.configs.all
       '@typescript-eslint/naming-convention': 'off',
       '@typescript-eslint/prefer-readonly-parameter-types': 'off',
