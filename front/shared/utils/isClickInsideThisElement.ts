@@ -7,5 +7,7 @@ export const didClickInsideThisElement = ({
   clickedElement,
   thisElement,
 }: Props): boolean => {
-  return thisElement.contains(clickedElement)
+  const didClickInside = thisElement.contains(clickedElement)
+
+  return didClickInside
 }

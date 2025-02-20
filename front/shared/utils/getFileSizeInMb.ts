@@ -18,5 +18,7 @@ export const getFileSizeInMb = ({ file }: Props): number => {
     return 0
   }
 
-  return Number(firstTwoDecimals)
+  const decimals = Number(firstTwoDecimals)
+
+  return decimals
 }

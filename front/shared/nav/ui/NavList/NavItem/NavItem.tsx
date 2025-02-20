@@ -60,7 +60,11 @@ export const NavItem = ({ children, id }: Props): React.JSX.Element => {
       return undefined
     }
 
-    return topNavLevel.menuItems.find((menuItem) => menuItem.id === id)
+    const navItemFromTopNavLevel = topNavLevel.menuItems.find(
+      (menuItem) => menuItem.id === id,
+    )
+
+    return navItemFromTopNavLevel
   })
 
   const isNestedMenu = Boolean(navItem?.menuItems)

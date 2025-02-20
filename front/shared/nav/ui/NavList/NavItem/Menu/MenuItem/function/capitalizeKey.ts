@@ -1,5 +1,5 @@
 export const capitalizeKey = (keyStr: string): string => {
-  return keyStr
+  const upperCasedKey = keyStr
     .toUpperCase()
     .replaceAll('CONTROL', 'Ctrl')
     .replaceAll('ALT', 'Alt')
@@ -15,4 +15,6 @@ export const capitalizeKey = (keyStr: string): string => {
     .replaceAll('PAGEDOWN', 'PageDown')
     .replaceAll('PAGEUP', 'PageUp')
     .replaceAll('CLEAR', 'Clear')
+
+  return upperCasedKey
 }

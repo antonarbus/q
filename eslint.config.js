@@ -100,6 +100,15 @@ export default [
       'init-declarations': 'off',
       'new-cap': 'off',
       'no-unsafe-type-assertion': 'off',
+      // Do not return expressions directly
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: 'ReturnStatement > CallExpression',
+          message:
+            'Do not return expressions directly. Assign them to a variable first.',
+        },
+      ],
 
       // https://typescript-eslint.io/rules/
       '@typescript-eslint/no-unused-vars': ['error', { args: 'none' }],

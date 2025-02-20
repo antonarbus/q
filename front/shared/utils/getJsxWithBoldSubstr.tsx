@@ -9,9 +9,11 @@ export const getJsxWithBoldSubstr = ({
 }: Props): (string | React.JSX.Element)[] => {
   const regExp = new RegExp(`(${boldText})`, 'giu')
 
-  return text
+  const jsxWithBoldSubstr = text
     .split(regExp)
     .map((str, index) =>
       regExp.test(str) ? <b key={`char-${String(index)}`}>{str}</b> : str,
     )
+
+  return jsxWithBoldSubstr
 }
