@@ -82,7 +82,7 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
         dispatch(appSlice.actions.reRenderQuotation())
       }
 
-      if (data.message === 'super-admin logged as user') {
+      if (data.message === 'super-admin on behalf of user') {
         notify({
           msg: `Logged as ${data.email}`,
           type: 'success',

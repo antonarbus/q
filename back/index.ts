@@ -42,7 +42,6 @@ app.use(cookieParser()) // middleware parses the Cookie header and populates req
 // app.use(cors())
 // app.set('trust proxy', true) // for app engine
 
-// dev
 app.get(
   apiUrl.root,
   (_req: Request, res: Response) => void res.send('i am express.js'),
@@ -53,6 +52,7 @@ app.get(
   (_req: Request, res: Response) => void res.json({ message: '/api' }),
 )
 
+// dev
 app.use(apiUrl.test, testRouter)
 app.use(apiUrl.setBucketCors, setBucketCors)
 app.use(apiUrl.getBucketCors, getBucketCors)

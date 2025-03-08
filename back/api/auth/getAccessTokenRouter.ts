@@ -8,6 +8,7 @@ import {
   getJwtExpirationInDays,
   verifyRefreshToken,
 } from '@back/utils/jwt'
+import { isNoTraceModeEnabled } from '@back/utils/headers/noTraceMode'
 
 export type ResBody = {
   message: 'issued access token'
@@ -49,39 +50,15 @@ const getAccessToken: RouterHandler = async (req, res, next) => {
       token: refreshJwtToken,
     })
 
-    /*
-    todo: there should be device dedicated token which is automatically extended
-    todo: now all devices will be logged out ones in 3 months
+    const isNoTraceMode = isNoTraceModeEnabled(req)
 
-    // extend refresh token validity
-
-    if (daysUntilExpiration < 5) {
-      const extendedRefreshToken = createRefreshToken({
-        email: jwtPayload.email,
-        roles: jwtPayload.roles,
-      })
-
-      await UserModel.findOneAndUpdate(
-        { email: jwtPayload.email, refreshJwtToken },
-        {
-          refreshJwtToken: extendedRefreshToken,
-        },
-      )
-
-      res.cookie('refreshJwtToken', extendedRefreshToken, {
-        httpOnly: true,
-        secure: process.env.INSTALLATION !== 'local',
-        maxAge: threeMonthsInSec * 1000,
-      })
-    }
-    
-    */
-
-    const user = await UserModel.findOneAndUpdate(
-      { email: jwtPayload.email, refreshJwtToken },
-      { loggedAt: Date.now() },
-      { new: true },
-    )
+    const user = isNoTraceMode
+      ? await UserModel.findOne({ email: jwtPayload.email, refreshJwtToken })
+      : await UserModel.findOneAndUpdate(
+          { email: jwtPayload.email, refreshJwtToken },
+          { loggedAt: Date.now() },
+          { new: true },
+        )
 
     if (!user) {
       res.clearCookie('refreshJwtToken')

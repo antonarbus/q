@@ -5,6 +5,7 @@ import { QuotationModel } from '@back/db/models/quotationModel'
 import { bucket, storageFolderName } from '@back/services/storage'
 import { jsonParseSafe } from '@back/utils/jsonParseSafe'
 import { getUserFromRefreshToken } from '@back/utils/jwt'
+import { isNoTraceModeEnabled } from '@back/utils/headers/noTraceMode'
 
 export type ReqBody = {
   id: Quotation['id']
@@ -34,11 +35,15 @@ const getQuotation: RouterHandler = async (req, res, next) => {
   try {
     const { id } = req.body
 
-    const document = await QuotationModel.findOneAndUpdate(
-      { id },
-      { openedAt: Date.now() },
-      { new: true },
-    ).lean()
+    const isNoTraceMode = isNoTraceModeEnabled(req)
+
+    const document = isNoTraceMode
+      ? await QuotationModel.findOne({ id }).lean()
+      : await QuotationModel.findOneAndUpdate(
+          { id },
+          { openedAt: Date.now() },
+          { new: true },
+        ).lean()
 
     if (document === null) {
       res.status(httpStatus.notFound_404).json({ message: 'not found in db' })
