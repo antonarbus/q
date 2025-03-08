@@ -3,7 +3,7 @@ import type { Item } from '@entities/bookmark'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/consts/httpStatus'
 import { BookmarkModel } from '@back/db/models/bookmarkModel'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/jwt'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/headers'
 
 export type ItemPick = Pick<
   Item,

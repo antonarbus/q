@@ -1,5 +1,5 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
-import { getUserFromRefreshToken } from '@back/utils/jwt'
+import { getUserFromRefreshToken } from '@back/utils/headers'
 import { httpStatus } from '@back/consts/httpStatus'
 import {
   type VisitorsCount,

@@ -1,5 +1,5 @@
 import { apiUrl } from '@back/consts/apiUrl'
-import { headerName } from '@back/consts/headerName'
+import { headerName } from '@back/utils/headers/headerName'
 import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
 import type { ResBody } from '@back/api/auth/getAccessTokenRouter'
 import { userSlice } from '@entities/user'

@@ -3,7 +3,7 @@ import type { Item } from '@entities/quotation'
 import { httpStatus } from '@back/consts/httpStatus'
 import { BookmarkModel } from '@back/db/models/bookmarkModel'
 import { bucket, storageFolderName } from '@back/services/storage'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/jwt'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/headers'
 import { jsonParseSafe } from '@back/utils/jsonParseSafe'
 
 export type ReqBody = {

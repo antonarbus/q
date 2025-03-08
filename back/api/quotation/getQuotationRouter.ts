@@ -4,8 +4,10 @@ import { httpStatus } from '@back/consts/httpStatus'
 import { QuotationModel } from '@back/db/models/quotationModel'
 import { bucket, storageFolderName } from '@back/services/storage'
 import { jsonParseSafe } from '@back/utils/jsonParseSafe'
-import { getUserFromRefreshToken } from '@back/utils/jwt'
-import { isNoTraceModeEnabled } from '@back/utils/headers/noTraceMode'
+import {
+  isNoTraceModeEnabled,
+  getUserFromRefreshToken,
+} from '@back/utils/headers'
 
 export type ReqBody = {
   id: Quotation['id']

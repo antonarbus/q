@@ -9,11 +9,10 @@ import {
   createAccessToken,
   createRefreshToken,
   getJwtExpirationInDays,
-  getUserFromRefreshToken,
   threeMonthsInSec,
   verifyRefreshToken,
 } from '@back/utils/jwt'
-import { enableNoTraceMode } from '@back/utils/headers/noTraceMode'
+import { enableNoTraceMode, getUserFromRefreshToken } from '@back/utils/headers'
 
 export type ReqBody = {
   email: User['email']

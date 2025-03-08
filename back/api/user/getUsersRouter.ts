@@ -3,7 +3,7 @@ import type { FlattenMaps } from 'mongoose'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import type { Pretty } from '@shared/types/Pretty'
 import { httpStatus } from '@back/consts/httpStatus'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/jwt'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/headers'
 import { UserModel } from '@back/db/models/userModel'
 import type { User } from '@entities/user'
 

@@ -1,6 +1,6 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 import { bucket } from '@back/services/storage'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/jwt'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/headers'
 import { httpStatus } from '@back/consts/httpStatus'
 
 // https://cloud.google.com/storage/docs/using-cors#storage-get-bucket-metadata-nodejs

@@ -1,7 +1,7 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 // import { QuotationModel } from '@back/db/models/quotationModel'
 import { UserModel } from '@back/db/models/userModel'
-import { getUserFromRefreshToken } from '@back/utils/jwt'
+import { getUserFromRefreshToken } from '@back/utils/headers'
 import { httpStatus } from '@back/consts/httpStatus'
 
 type RouterHandler = (

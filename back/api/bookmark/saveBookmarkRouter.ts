@@ -5,7 +5,7 @@ import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/consts/httpStatus'
 import { BookmarkModel } from '@back/db/models/bookmarkModel'
 import { bucket, storageFolderName } from '@back/services/storage'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/jwt'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/headers'
 
 export type ReqBody = {
   item: Item

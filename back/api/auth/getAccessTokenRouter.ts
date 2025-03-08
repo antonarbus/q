@@ -8,7 +8,7 @@ import {
   getJwtExpirationInDays,
   verifyRefreshToken,
 } from '@back/utils/jwt'
-import { isNoTraceModeEnabled } from '@back/utils/headers/noTraceMode'
+import { isNoTraceModeEnabled } from '@back/utils/headers'
 
 export type ResBody = {
   message: 'issued access token'

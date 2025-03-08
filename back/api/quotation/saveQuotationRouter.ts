@@ -5,7 +5,7 @@ import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/consts/httpStatus'
 import { QuotationModel } from '@back/db/models/quotationModel'
 import { bucket, storageFolderName } from '@back/services/storage'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/jwt'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/headers'
 import { nanoid } from '@back/lib/nanoid'
 
 export type ReqBody = {

@@ -3,7 +3,7 @@ import type { Quotation } from '@entities/quotation'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/consts/httpStatus'
 import { QuotationModel } from '@back/db/models/quotationModel'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/jwt'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/headers'
 
 export type ResBody = {
   message: ErrorMessageCommon | 'Found' | 'Unhandled error'

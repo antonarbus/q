@@ -3,7 +3,7 @@ import multer from 'multer'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/consts/httpStatus'
 import { bucket, storageFolderName } from '@back/services/storage'
-import { getUserFromRefreshToken } from '@back/utils/jwt'
+import { getUserFromRefreshToken } from '@back/utils/headers'
 
 // https://medium.com/@olamilekan001/image-upload-with-google-cloud-storage-and-node-js-a1cf9baa1876
 

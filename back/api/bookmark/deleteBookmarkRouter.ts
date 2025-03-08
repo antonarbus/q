@@ -3,7 +3,7 @@ import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/consts/httpStatus'
 import { BookmarkModel } from '@back/db/models/bookmarkModel'
 import { bucket, storageFolderName } from '@back/services/storage'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/jwt'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/headers'
 import type { Item } from '@entities/quotation/types'
 
 export type ReqBody = {
