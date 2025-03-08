@@ -83,7 +83,7 @@ export const CategoryField = ({
             sx: {
               translate: '0px 10px',
               borderRadius: '8px',
-              padding: '2px 8px',
+              padding: '0px 8px',
             },
           },
         }}
