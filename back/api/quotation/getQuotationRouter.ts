@@ -1,11 +1,12 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { Quotation } from '@entities/quotation'
-import { httpStatus } from '@back/consts/httpStatus'
-import { QuotationModel } from '@back/db/models/quotationModel'
-import { bucket, storageFolderName } from '@back/services/storage'
-import { jsonParseSafe } from '@back/utils/jsonParseSafe'
-import { isNoTraceCookie, getUserFromRefreshToken } from '@back/utils/headers'
-import { userRole } from '@back/consts/userRole'
+import { httpStatus } from '@back/shared/consts/httpStatus'
+import { QuotationModel } from '@back/shared/db/models/quotationModel'
+import { bucket, storageFolderName } from '@back/shared/services/storage'
+import { jsonParseSafe } from '@back/shared/utils/jsonParseSafe'
+import { isNoTraceCookie } from '@back/shared/headers'
+import { userRole } from '@back/shared/consts/userRole'
+import { getUserFromRefreshToken } from '@back/entities/user'
 
 export type ReqBody = {
   id: Quotation['id']
@@ -35,7 +36,7 @@ const getQuotation: RouterHandler = async (req, res, next) => {
   try {
     const { id } = req.body
 
-    const isNoTraceMode = isNoTraceCookie(req)
+    const isNoTraceMode = isNoTraceCookie({ req })
 
     const document = isNoTraceMode
       ? await QuotationModel.findOne({ id }).lean()
@@ -53,7 +54,7 @@ const getQuotation: RouterHandler = async (req, res, next) => {
 
     // this is probably not very good to do, but i am taking user information from refresh token here
     // with access token it does not serve the purpose here
-    const { email, roles } = getUserFromRefreshToken(req)
+    const { email, roles } = getUserFromRefreshToken({ req })
 
     const isOwner = email === document.email
 

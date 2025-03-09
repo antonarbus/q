@@ -1,22 +1,19 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 import bcrypt from 'bcryptjs'
 import type { User } from '@entities/user'
-import { httpStatus } from '@back/consts/httpStatus'
-import { UserModel } from '@back/db/models/userModel'
-import { sendEmail } from '@back/services/email'
+import { httpStatus } from '@back/shared/consts/httpStatus'
+import { UserModel } from '@back/shared/db/models/userModel'
+import { sendEmail } from '@back/shared/services/email'
 import { config } from '@back/config'
 import {
   createAccessToken,
   createRefreshToken,
   getJwtExpirationInDays,
   verifyRefreshToken,
-} from '@back/utils/jwt'
-import {
-  setNoTraceCookie,
-  getUserFromRefreshToken,
-  setRefreshTokenCookie,
-} from '@back/utils/headers'
-import { userRole } from '@back/consts/userRole'
+} from '@back/shared/lib/jwt'
+import { setNoTraceCookie, setRefreshTokenCookie } from '@back/shared/headers'
+import { userRole } from '@back/shared/consts/userRole'
+import { getUserFromRefreshToken } from '@back/entities/user'
 
 export type ReqBody = {
   email: User['email']
@@ -62,7 +59,9 @@ const logIn: RouterHandler = async (req, res, next) => {
       return
     }
 
-    const { roles, email: emailFromRefreshToken } = getUserFromRefreshToken(req)
+    const { roles, email: emailFromRefreshToken } = getUserFromRefreshToken({
+      req,
+    })
 
     const isSuperAdminOnBehalfOfUser =
       roles.includes(userRole.superAdmin) &&
@@ -82,7 +81,7 @@ const logIn: RouterHandler = async (req, res, next) => {
 
       setRefreshTokenCookie({ res, refreshJwtToken })
 
-      setNoTraceCookie(res)
+      setNoTraceCookie({ res })
 
       res.status(httpStatus.success_200).json({
         message: 'super-admin on behalf of user',

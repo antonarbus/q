@@ -1,9 +1,9 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
-import { httpStatus } from '@back/consts/httpStatus'
+import { httpStatus } from '@back/shared/consts/httpStatus'
 import {
   removeNoTraceCookie,
   removeRefreshTokenCookie,
-} from '@back/utils/headers'
+} from '@back/shared/headers'
 
 export type ResBody = {
   message: 'logged out'
@@ -19,7 +19,7 @@ export const logOutRouter = Router()
 
 const logOut: RouterHandler = (req, res, next) => {
   try {
-    removeNoTraceCookie(res)
+    removeNoTraceCookie({ res })
     removeRefreshTokenCookie({ res })
     res.status(httpStatus.success_200).json({ message: 'logged out' })
   } catch (error) {

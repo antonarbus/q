@@ -1,12 +1,12 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
-import { getUserFromRefreshToken } from '@back/utils/headers'
-import { httpStatus } from '@back/consts/httpStatus'
+import { httpStatus } from '@back/shared/consts/httpStatus'
 import {
   type VisitorsCount,
   VisitorsCountModel,
-} from '@back/db/models/visitorsCountModel'
+} from '@back/shared/db/models/visitorsCountModel'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
-import { userRole } from '@back/consts/userRole'
+import { userRole } from '@back/shared/consts/userRole'
+import { getUserFromRefreshToken } from '@back/entities/user'
 
 export type ResBody = {
   visitorsCount: VisitorsCount[]
@@ -27,7 +27,7 @@ type RouterHandler = (
 export const getUniqueDailyVisitorsRouter = Router()
 
 const getUniqueDailyVisitors: RouterHandler = async (req, res, next) => {
-  const { roles } = getUserFromRefreshToken(req)
+  const { roles } = getUserFromRefreshToken({ req })
 
   if (!roles.includes(userRole.superAdmin)) {
     res

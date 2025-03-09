@@ -1,8 +1,8 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
-import { bucket } from '@back/services/storage'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/headers'
-import { httpStatus } from '@back/consts/httpStatus'
-import { userRole } from '@back/consts/userRole'
+import { bucket } from '@back/shared/services/storage'
+import { httpStatus } from '@back/shared/consts/httpStatus'
+import { userRole } from '@back/shared/consts/userRole'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 
 // https://cloud.google.com/storage/docs/using-cors#storage-get-bucket-metadata-nodejs
 
@@ -15,7 +15,7 @@ type RouterHandler = (
 export const getBucketCors = Router()
 
 const getBucketMetadata: RouterHandler = async (req, res, next) => {
-  const { roles } = getUserFromAccessTokenOrThrowUnauthorized(req)
+  const { roles } = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   if (!roles.includes(userRole.superAdmin)) {
     res.status(httpStatus.forbidden_403).json({ message: 'forbidden' })

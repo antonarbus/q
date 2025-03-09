@@ -1,10 +1,10 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { User } from '@entities/user'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
-import { httpStatus } from '@back/consts/httpStatus'
-import { UserModel } from '@back/db/models/userModel'
-import { createAccessToken, createRefreshToken } from '@back/utils/jwt'
-import { setRefreshTokenCookie } from '@back/utils/headers'
+import { httpStatus } from '@back/shared/consts/httpStatus'
+import { UserModel } from '@back/shared/db/models/userModel'
+import { createAccessToken, createRefreshToken } from '@back/shared/lib/jwt'
+import { setRefreshTokenCookie } from '@back/shared/headers'
 
 export type ReqBody = {
   activationKey: User['activationKey']

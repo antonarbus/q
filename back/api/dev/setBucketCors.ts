@@ -1,9 +1,9 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
-import { bucket } from '@back/services/storage'
-import { getEnvVarOrThrow } from '@back/utils/getEnvVar'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/headers'
-import { httpStatus } from '@back/consts/httpStatus'
-import { userRole } from '@back/consts/userRole'
+import { bucket } from '@back/shared/services/storage'
+import { getEnvVarOrThrow } from '@back/shared/utils/getEnvVar'
+import { httpStatus } from '@back/shared/consts/httpStatus'
+import { userRole } from '@back/shared/consts/userRole'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 
 // https://cloud.google.com/storage/docs/samples/storage-cors-configuration#storage_cors_configuration-nodejs
 
@@ -16,7 +16,7 @@ type RouterHandler = (
 export const setBucketCors = Router()
 
 const configureBucketCors: RouterHandler = async (req, res, next) => {
-  const { roles } = getUserFromAccessTokenOrThrowUnauthorized(req)
+  const { roles } = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   if (!roles.includes(userRole.superAdmin)) {
     res.status(httpStatus.forbidden_403).json({ message: 'forbidden' })

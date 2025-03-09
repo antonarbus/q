@@ -1,4 +1,4 @@
-import { apiUrl } from '@back/consts/apiUrl'
+import { apiUrl } from '@back/shared/consts/apiUrl'
 import { getState } from '@shared/lib/redux'
 import { removeLoadingBar } from '@shared/lib/froala/removeLoadingBar'
 import type { FroalaEditor } from '@shared/types/froala'

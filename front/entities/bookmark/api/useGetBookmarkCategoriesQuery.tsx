@@ -1,5 +1,5 @@
 import type { ResBody } from '@back/api/bookmark/getBookmarkCategoriesRouter'
-import { apiUrl } from '@back/consts/apiUrl'
+import { apiUrl } from '@back/shared/consts/apiUrl'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import type { AxiosError, AxiosResponse } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'

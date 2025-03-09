@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from 'express'
-import { httpStatus } from '../consts/httpStatus'
+import { httpStatus } from '../shared/consts/httpStatus'
 import {
   type ErrorMessageCommon,
   errorMessageCommon,

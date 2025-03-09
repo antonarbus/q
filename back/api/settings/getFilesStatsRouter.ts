@@ -1,8 +1,8 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
-import { httpStatus } from '@back/consts/httpStatus'
-import { bucket, storageFolderName } from '@back/services/storage'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/headers'
+import { httpStatus } from '@back/shared/consts/httpStatus'
+import { bucket, storageFolderName } from '@back/shared/services/storage'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 
 export type ResBody = {
   message: ErrorMessageCommon | 'file stats' | 'no item in bucket' | 'deleted'
@@ -22,7 +22,7 @@ export const getFilesStatsRouter = Router()
 
 const getFilesStats: RouterHandler = async (req, res, next) => {
   try {
-    const { email } = getUserFromAccessTokenOrThrowUnauthorized(req)
+    const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
     const [files] = await bucket.getFiles({
       prefix: `${email}/${storageFolderName.files}/`,

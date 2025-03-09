@@ -1,9 +1,9 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 import multer from 'multer'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
-import { httpStatus } from '@back/consts/httpStatus'
-import { bucket, storageFolderName } from '@back/services/storage'
-import { getUserFromRefreshToken } from '@back/utils/headers'
+import { httpStatus } from '@back/shared/consts/httpStatus'
+import { bucket, storageFolderName } from '@back/shared/services/storage'
+import { getUserFromRefreshToken } from '@back/entities/user'
 
 // https://medium.com/@olamilekan001/image-upload-with-google-cloud-storage-and-node-js-a1cf9baa1876
 
@@ -63,7 +63,7 @@ const upload: RouterHandler = async (req, res, next) => {
   try {
     const { file } = req
 
-    const { email } = getUserFromRefreshToken(req)
+    const { email } = getUserFromRefreshToken({ req })
 
     if (file === undefined) {
       res.status(httpStatus.badRequest_400).json({ message: 'no file' })

@@ -1,10 +1,10 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
-import { httpStatus } from '@back/consts/httpStatus'
-import { BookmarkModel } from '@back/db/models/bookmarkModel'
-import { bucket, storageFolderName } from '@back/services/storage'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/headers'
+import { httpStatus } from '@back/shared/consts/httpStatus'
+import { BookmarkModel } from '@back/shared/db/models/bookmarkModel'
+import { bucket, storageFolderName } from '@back/shared/services/storage'
 import type { Item } from '@entities/quotation/types'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 
 export type ReqBody = {
   id: Item['id']
@@ -24,7 +24,7 @@ export const deleteBookmarkRouter = Router()
 
 const deleteBookmark: RouterHandler = async (req, res, next) => {
   try {
-    const { email } = getUserFromAccessTokenOrThrowUnauthorized(req)
+    const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
     const { id } = req.body
 
     const deleteFromDbResult = await BookmarkModel.deleteOne({ email, id })

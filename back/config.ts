@@ -1,4 +1,4 @@
-import { getEnvVar } from './utils/getEnvVar'
+import { getEnvVar } from './shared/utils/getEnvVar'
 
 export const config = {
   get installation() {

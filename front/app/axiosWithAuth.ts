@@ -1,5 +1,5 @@
-import { apiUrl } from '@back/consts/apiUrl'
-import { headerName } from '@back/utils/headers/const'
+import { apiUrl } from '@back/shared/consts/apiUrl'
+import { headerName } from '@back/shared/headers/const'
 import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
 import type { ResBody } from '@back/api/auth/getAccessTokenRouter'
 import { userSlice } from '@entities/user'

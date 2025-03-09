@@ -2,7 +2,7 @@ import type {
   ReqBody as Payload,
   ResBody,
 } from '@back/api/quotation/getQuotationRouter'
-import { apiUrl } from '@back/consts/apiUrl'
+import { apiUrl } from '@back/shared/consts/apiUrl'
 import { type UseMutationResult, useMutation } from '@tanstack/react-query'
 import axios, { type AxiosResponse, type AxiosError } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'

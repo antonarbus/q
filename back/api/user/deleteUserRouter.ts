@@ -1,13 +1,13 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
-import { httpStatus } from '@back/consts/httpStatus'
-import { bucket, storageFolderName } from '@back/services/storage'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/headers'
+import { httpStatus } from '@back/shared/consts/httpStatus'
+import { bucket, storageFolderName } from '@back/shared/services/storage'
 import type { User } from '@entities/user'
-import { UserModel } from '@back/db/models/userModel'
-import { QuotationModel } from '@back/db/models/quotationModel'
-import { BookmarkModel } from '@back/db/models/bookmarkModel'
-import { userRole } from '@back/consts/userRole'
+import { UserModel } from '@back/shared/db/models/userModel'
+import { QuotationModel } from '@back/shared/db/models/quotationModel'
+import { BookmarkModel } from '@back/shared/db/models/bookmarkModel'
+import { userRole } from '@back/shared/consts/userRole'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 
 export type ReqBody = {
   email: User['email']
@@ -29,7 +29,7 @@ export const deleteUserRouter = Router()
 const deleteUser: RouterHandler = async (req, res, next) => {
   try {
     const { email: emailFromToken, roles } =
-      getUserFromAccessTokenOrThrowUnauthorized(req)
+      getUserFromAccessTokenOrThrowUnauthorized({ req })
 
     const isOwner = emailFromToken === req.body.email
     const isSuperAdmin = roles.includes(userRole.superAdmin)

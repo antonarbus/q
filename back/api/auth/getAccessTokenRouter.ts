@@ -1,18 +1,11 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { User } from '@entities/user'
-import { httpStatus } from '@back/consts/httpStatus'
-import { UserModel } from '@back/db/models/userModel'
+import { httpStatus } from '@back/shared/consts/httpStatus'
+import { UserModel } from '@back/shared/db/models/userModel'
 import { errorMessageCommon } from '@shared/consts/errorMessageCommon'
-import {
-  createAccessToken,
-  getJwtExpirationInDays,
-  verifyRefreshToken,
-} from '@back/utils/jwt'
-import {
-  getRefreshTokenFromCookie,
-  isNoTraceCookie,
-  removeRefreshTokenCookie,
-} from '@back/utils/headers'
+import { createAccessToken } from '@back/shared/lib/jwt'
+import { isNoTraceCookie, removeRefreshTokenCookie } from '@back/shared/headers'
+import { getUserFromRefreshTokenOrNull } from '@back/entities/user'
 
 export type ResBody = {
   message: 'issued access token'
@@ -32,30 +25,21 @@ export const getAccessTokenRouter = Router()
 
 const getAccessToken: RouterHandler = async (req, res, next) => {
   try {
-    const refreshJwtToken = getRefreshTokenFromCookie({ req })
+    const userDataPerviouslyLoggedIn = getUserFromRefreshTokenOrNull({ req })
 
-    if (refreshJwtToken === undefined) {
+    if (userDataPerviouslyLoggedIn === null) {
       throw new Error(errorMessageCommon.notLoggedIn)
     }
 
-    const jwtPayload = verifyRefreshToken(refreshJwtToken)
+    const { email, roles, refreshJwtToken, jwtRefreshTokenExpirationDays } =
+      userDataPerviouslyLoggedIn
 
-    if (jwtPayload === undefined) {
-      removeRefreshTokenCookie({ res })
-
-      throw new Error(errorMessageCommon.notLoggedIn)
-    }
-
-    const daysUntilExpiration = getJwtExpirationInDays({
-      token: refreshJwtToken,
-    })
-
-    const shouldNotTrace = isNoTraceCookie(req)
+    const shouldNotTrace = isNoTraceCookie({ req })
 
     const user = shouldNotTrace
-      ? await UserModel.findOne({ email: jwtPayload.email, refreshJwtToken })
+      ? await UserModel.findOne({ email, refreshJwtToken })
       : await UserModel.findOneAndUpdate(
-          { email: jwtPayload.email, refreshJwtToken },
+          { email, refreshJwtToken },
           { loggedAt: Date.now() },
           { new: true },
         )
@@ -66,17 +50,14 @@ const getAccessToken: RouterHandler = async (req, res, next) => {
       throw new Error(errorMessageCommon.notLoggedIn)
     }
 
-    const accessJwtToken = createAccessToken({
-      email: jwtPayload.email,
-      roles: jwtPayload.roles,
-    })
+    const accessJwtToken = createAccessToken({ email, roles })
 
     res.status(httpStatus.success_200).json({
       message: 'issued access token',
       accessJwtToken,
-      roles: jwtPayload.roles,
-      email: jwtPayload.email,
-      jwtRefreshTokenExpirationDays: daysUntilExpiration,
+      roles,
+      email,
+      jwtRefreshTokenExpirationDays,
     })
   } catch (error) {
     next(error)

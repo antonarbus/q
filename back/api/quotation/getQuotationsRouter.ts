@@ -3,9 +3,9 @@ import type { FlattenMaps } from 'mongoose'
 import type { Quotation } from '@entities/quotation'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import type { Pretty } from '@shared/types/Pretty'
-import { httpStatus } from '@back/consts/httpStatus'
-import { QuotationModel } from '@back/db/models/quotationModel'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/headers'
+import { httpStatus } from '@back/shared/consts/httpStatus'
+import { QuotationModel } from '@back/shared/db/models/quotationModel'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 
 export type QuotationPick = Pick<
   Quotation,
@@ -35,7 +35,7 @@ export const getQuotationsRouter = Router()
 
 const getQuotations: RouterHandler = async (req, res, next) => {
   try {
-    const { email } = getUserFromAccessTokenOrThrowUnauthorized(req)
+    const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
     const quotations = await QuotationModel.find(
       { email },

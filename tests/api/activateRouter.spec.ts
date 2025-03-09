@@ -1,7 +1,7 @@
 import { config } from '@back/config'
-import { apiUrl } from '@back/consts/apiUrl'
-import { connectToDb } from '@back/db/connectToDb'
-import { UserModel } from '@back/db/models/userModel'
+import { apiUrl } from '@back/shared/consts/apiUrl'
+import { connectToDb } from '@back/shared/db/connectToDb'
+import { UserModel } from '@back/shared/db/models/userModel'
 import { test, expect } from '@playwright/test'
 
 test.describe.configure({ mode: 'serial' })

@@ -2,11 +2,11 @@ import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { FlattenMaps } from 'mongoose'
 import type { Quotation } from '@entities/quotation/types'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
-import { httpStatus } from '@back/consts/httpStatus'
-import { QuotationModel } from '@back/db/models/quotationModel'
-import { bucket, storageFolderName } from '@back/services/storage'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/headers'
-import { nanoid } from '@back/lib/nanoid'
+import { httpStatus } from '@back/shared/consts/httpStatus'
+import { QuotationModel } from '@back/shared/db/models/quotationModel'
+import { bucket, storageFolderName } from '@back/shared/services/storage'
+import { nanoid } from '@back/shared/lib/nanoid'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 
 export type ReqBody = {
   quotation: Quotation
@@ -37,7 +37,7 @@ export const saveQuotationRouter = Router()
 
 const saveQuotation: RouterHandler = async (req, res, next) => {
   try {
-    const { email } = getUserFromAccessTokenOrThrowUnauthorized(req)
+    const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
     const { quotation } = req.body
 

@@ -1,10 +1,10 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
-import { httpStatus } from '@back/consts/httpStatus'
+import { httpStatus } from '@back/shared/consts/httpStatus'
 import {
   type VisitorsCount,
   VisitorsCountModel,
-} from '@back/db/models/visitorsCountModel'
+} from '@back/shared/db/models/visitorsCountModel'
 
 export type ReqBody = {
   date: VisitorsCount['date']

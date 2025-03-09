@@ -2,11 +2,11 @@ import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { FlattenMaps } from 'mongoose'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import type { Pretty } from '@shared/types/Pretty'
-import { httpStatus } from '@back/consts/httpStatus'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/headers'
-import { UserModel } from '@back/db/models/userModel'
+import { httpStatus } from '@back/shared/consts/httpStatus'
+import { UserModel } from '@back/shared/db/models/userModel'
 import type { User } from '@entities/user'
-import { userRole } from '@back/consts/userRole'
+import { userRole } from '@back/shared/consts/userRole'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 
 export type UserPicked = Pick<
   User,
@@ -33,7 +33,7 @@ export const getUsersRouter = Router()
 
 const getUsers: RouterHandler = async (req, res, next) => {
   try {
-    const { roles } = getUserFromAccessTokenOrThrowUnauthorized(req)
+    const { roles } = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
     if (!roles.includes(userRole.superAdmin)) {
       res

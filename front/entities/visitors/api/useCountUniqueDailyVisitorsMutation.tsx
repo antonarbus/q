@@ -2,10 +2,10 @@ import type {
   ResBody,
   ReqBody as Payload,
 } from '@back/api/visitors/countUniqueDailyVisitorsRouter'
-import { apiUrl } from '@back/consts/apiUrl'
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import axios, { type AxiosError } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
+import { apiUrl } from '@back/shared/consts/apiUrl'
 
 export const useCountUniqueDailyVisitorsMutation = (): UseMutationResult<
   ResBody,
