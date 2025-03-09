@@ -3,10 +3,12 @@ import type { FlattenMaps } from 'mongoose'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import type { Pretty } from '@shared/types/Pretty'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { UserModel } from '@back/shared/db/models/userModel'
 import type { User } from '@entities/user'
 import { userRole } from '@back/shared/consts/userRole'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
+import {
+  getUserFromAccessTokenOrThrowUnauthorized,
+  UserModel,
+} from '@back/entities/user'
 
 export type UserPicked = Pick<
   User,

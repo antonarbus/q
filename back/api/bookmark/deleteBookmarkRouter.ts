@@ -1,10 +1,10 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { BookmarkModel } from '@back/shared/db/models/bookmarkModel'
 import { bucket, storageFolderName } from '@back/shared/services/storage'
 import type { Item } from '@entities/quotation/types'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
+import { BookmarkModel } from '@back/entities/bookmark'
 
 export type ReqBody = {
   id: Item['id']

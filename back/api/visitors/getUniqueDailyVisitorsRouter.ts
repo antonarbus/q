@@ -1,12 +1,12 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import {
-  type VisitorsCount,
-  VisitorsCountModel,
-} from '@back/shared/db/models/visitorsCountModel'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { userRole } from '@back/shared/consts/userRole'
 import { getUserFromRefreshToken } from '@back/entities/user'
+import {
+  VisitorsCountModel,
+  type VisitorsCount,
+} from '@back/entities/visitors_count'
 
 export type ResBody = {
   visitorsCount: VisitorsCount[]

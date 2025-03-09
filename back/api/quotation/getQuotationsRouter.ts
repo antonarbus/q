@@ -4,8 +4,8 @@ import type { Quotation } from '@entities/quotation'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import type { Pretty } from '@shared/types/Pretty'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { QuotationModel } from '@back/shared/db/models/quotationModel'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
+import { QuotationModel } from '@back/entities/quotation'
 
 export type QuotationPick = Pick<
   Quotation,

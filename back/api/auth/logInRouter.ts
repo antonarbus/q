@@ -2,7 +2,6 @@ import { Router, type Request, type Response, type NextFunction } from 'express'
 import bcrypt from 'bcryptjs'
 import type { User } from '@entities/user'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { UserModel } from '@back/shared/db/models/userModel'
 import { sendEmail } from '@back/shared/services/email'
 import { config } from '@back/config'
 import {
@@ -13,7 +12,7 @@ import {
 } from '@back/shared/lib/jwt'
 import { setNoTraceCookie, setRefreshTokenCookie } from '@back/shared/headers'
 import { userRole } from '@back/shared/consts/userRole'
-import { getUserFromRefreshToken } from '@back/entities/user'
+import { getUserFromRefreshToken, UserModel } from '@back/entities/user'
 
 export type ReqBody = {
   email: User['email']

@@ -1,0 +1,1 @@
+export { QuotationModel } from './quotationModel'

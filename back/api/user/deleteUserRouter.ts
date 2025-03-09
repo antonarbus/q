@@ -3,11 +3,13 @@ import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { bucket, storageFolderName } from '@back/shared/services/storage'
 import type { User } from '@entities/user'
-import { UserModel } from '@back/shared/db/models/userModel'
-import { QuotationModel } from '@back/shared/db/models/quotationModel'
-import { BookmarkModel } from '@back/shared/db/models/bookmarkModel'
 import { userRole } from '@back/shared/consts/userRole'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
+import {
+  getUserFromAccessTokenOrThrowUnauthorized,
+  UserModel,
+} from '@back/entities/user'
+import { QuotationModel } from '@back/entities/quotation'
+import { BookmarkModel } from '@back/entities/bookmark'
 
 export type ReqBody = {
   email: User['email']

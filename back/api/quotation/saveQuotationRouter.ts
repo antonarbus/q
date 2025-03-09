@@ -3,10 +3,10 @@ import type { FlattenMaps } from 'mongoose'
 import type { Quotation } from '@entities/quotation/types'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { QuotationModel } from '@back/shared/db/models/quotationModel'
 import { bucket, storageFolderName } from '@back/shared/services/storage'
 import { nanoid } from '@back/shared/lib/nanoid'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
+import { QuotationModel } from '@back/entities/quotation'
 
 export type ReqBody = {
   quotation: Quotation
@@ -50,15 +50,10 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
     }
 
     const isExistingYourQuotation =
-      (await QuotationModel.findOne({
-        id: quotation.id,
-        email,
-      })) !== null
+      (await QuotationModel.findOne({ id: quotation.id, email })) !== null
 
     const isNewQuotation =
-      (await QuotationModel.findOne({
-        id: quotation.id,
-      })) === null
+      (await QuotationModel.findOne({ id: quotation.id })) === null
 
     const isExistingForeignQuotationSavedAsYourNew =
       !isNewQuotation && !isExistingYourQuotation

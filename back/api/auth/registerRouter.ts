@@ -2,10 +2,10 @@ import { Router, type Request, type Response, type NextFunction } from 'express'
 import bcrypt from 'bcryptjs'
 import type { User } from '@entities/user'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { UserModel } from '@back/shared/db/models/userModel'
 import { nanoid } from '@back/shared/lib/nanoid'
 import { sendEmail } from '@back/shared/services/email'
 import { config } from '@back/config'
+import { UserModel } from '@back/entities/user'
 
 export type ReqBody = {
   email: User['email']

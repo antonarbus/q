@@ -1,12 +1,12 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { Quotation } from '@entities/quotation'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { QuotationModel } from '@back/shared/db/models/quotationModel'
 import { bucket, storageFolderName } from '@back/shared/services/storage'
 import { jsonParseSafe } from '@back/shared/utils/jsonParseSafe'
 import { isNoTraceCookie } from '@back/shared/headers'
 import { userRole } from '@back/shared/consts/userRole'
 import { getUserFromRefreshToken } from '@back/entities/user'
+import { QuotationModel } from '@back/entities/quotation'
 
 export type ReqBody = {
   id: Quotation['id']

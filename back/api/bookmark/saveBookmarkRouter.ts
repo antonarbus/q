@@ -3,9 +3,9 @@ import type { FlattenMaps } from 'mongoose'
 import type { Item } from '@entities/bookmark'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { BookmarkModel } from '@back/shared/db/models/bookmarkModel'
 import { bucket, storageFolderName } from '@back/shared/services/storage'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
+import { BookmarkModel } from '@back/entities/bookmark'
 
 export type ReqBody = {
   item: Item

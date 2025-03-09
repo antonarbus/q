@@ -3,9 +3,9 @@ import type { HydratedDocument } from 'mongoose'
 import type { Quotation } from '@entities/quotation/types'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { QuotationModel } from '@back/shared/db/models/quotationModel'
 import { bucket, storageFolderName } from '@back/shared/services/storage'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
+import { QuotationModel } from '@back/entities/quotation'
 
 export type ReqBody = {
   id: Quotation['id']
