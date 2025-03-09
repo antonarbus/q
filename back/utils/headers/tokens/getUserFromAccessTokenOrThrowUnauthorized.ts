@@ -1,7 +1,7 @@
 import type { User } from '@entities/user'
 import { errorMessageCommon } from '@shared/consts/errorMessageCommon'
-import { headerName } from '@back/utils/headers/headerName'
-import { verifyAccessToken } from '../jwt/verifyAccessToken'
+import { headerName } from '@back/utils/headers/const'
+import { verifyAccessToken } from '../jwt'
 import type { Request } from 'express'
 
 type Res = {

@@ -1,5 +1,5 @@
 import type { User } from '@entities/user'
-import { verifyRefreshToken } from '../jwt/verifyRefreshToken'
+import { verifyRefreshToken } from '../../jwt'
 import type { Request } from 'express'
 
 type Res = {
