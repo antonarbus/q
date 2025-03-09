@@ -3,7 +3,7 @@ import { IconButton, Tooltip } from '@mui/material'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
-import { notify } from '@shared/toast'
+import { toast } from 'sonner'
 import { useDeleteUserMutation } from '@entities/user'
 import { instance } from '@shared/instance'
 import { queryKey } from '@shared/consts/queryKey'
@@ -27,11 +27,7 @@ export const DeleteUserButton = ({ email }: Payload): React.ReactNode => {
 
   useUpdateEffect(() => {
     if (isError) {
-      notify({
-        msg: error.response?.data.message,
-        type: 'error',
-        theme: 'light',
-      })
+      toast.error(error.response?.data.message)
 
       void instance.reactQuery.invalidateQueries({
         queryKey: [queryKey.getUsers],

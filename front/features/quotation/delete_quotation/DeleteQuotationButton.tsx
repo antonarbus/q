@@ -7,7 +7,7 @@ import {
   deleteFromQuotationsCache,
 } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
-import { notify } from '@shared/toast'
+import { toast } from 'sonner'
 
 export const DeleteQuotationButton = ({ id }: Payload): React.ReactNode => {
   const {
@@ -26,11 +26,7 @@ export const DeleteQuotationButton = ({ id }: Payload): React.ReactNode => {
 
   useUpdateEffect(() => {
     if (isError) {
-      notify({
-        msg: error.response?.data.message,
-        type: 'error',
-        theme: 'light',
-      })
+      toast.error(error.response?.data.message)
 
       deleteFromQuotationsCache({ id })
     }

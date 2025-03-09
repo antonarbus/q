@@ -5,7 +5,7 @@ import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { useActivateMutation, userSlice } from '@entities/user'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { navSlice } from '@shared/nav'
-import { notify } from '@shared/toast'
+import { toast } from 'sonner'
 
 type Res = {
   isPending: UseMutationResult['isPending']
@@ -39,7 +39,7 @@ export const useActivate = (): Res => {
     }
 
     if (data.message === 'activated') {
-      notify({ msg: 'Activated', theme: 'light' })
+      toast('Activated')
 
       const { accessJwtToken, email, roles } = data
 
@@ -73,7 +73,7 @@ export const useActivate = (): Res => {
     }
 
     if (data.message === 'already activated') {
-      notify({ msg: 'Already activated', type: 'info', theme: 'light' })
+      toast.info('Already activated')
     }
   }, [isSuccess])
 
@@ -83,12 +83,12 @@ export const useActivate = (): Res => {
     }
 
     if (error.response?.data.message === 'activation key not found') {
-      notify({ msg: 'Activation key not found', type: 'warn', theme: 'light' })
+      toast.warning('Activation key not found')
 
       return
     }
 
-    notify({ msg: 'Internal error', type: 'error', theme: 'light' })
+    toast.error('Internal error')
   }, [isError])
 
   return { isPending, isSuccess, isError }

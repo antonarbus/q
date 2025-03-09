@@ -1,7 +1,6 @@
 /* eslint-disable */
 import './froalaPkg'
 import './froalaPkg.css'
-
 import type { MouseEvent } from 'react'
 import { useEffectOnce } from 'react-use'
 import { nanoid } from '@shared/lib/nanoid'
@@ -9,8 +8,8 @@ import { type FroalaEditorRef } from '@shared/types/froala'
 import { useFroala } from '../../providers/FroalaProvider'
 import { froalaDefaultOptions } from './froalaDefaultOptions'
 import { remindToSaveQuotationOnInsert } from './remindToSaveQuotationOnInsert'
-import { notify } from '@shared/toast/notify'
 import { removeLoadingBar } from '@shared/lib/froala/removeLoadingBar'
+import { toast } from 'sonner'
 
 declare const window: Window &
   typeof globalThis & {
@@ -54,10 +53,7 @@ export const useStartFroala = (): void => {
           },
           'image.beforeUpload': function (files: any): boolean {
             if (!froala.beforeUpload) {
-              notify({
-                msg: 'May drop files into text block & description cell',
-                type: 'info',
-              })
+              toast.info('May drop files into text block & description cell')
 
               removeLoadingBar()
               return false
@@ -69,10 +65,7 @@ export const useStartFroala = (): void => {
           },
           'file.beforeUpload': function (files: any): boolean {
             if (!froala.beforeUpload) {
-              notify({
-                msg: 'May drop files into text block & description cell',
-                type: 'info',
-              })
+              toast.info('May drop files into text block & description cell')
 
               removeLoadingBar()
               return false
@@ -84,11 +77,7 @@ export const useStartFroala = (): void => {
           },
           'video.beforeUpload': function (files: any): boolean {
             if (!froala.beforeUpload) {
-              notify({
-                msg: 'May drop files into text block & description cell',
-                type: 'info',
-              })
-
+              toast.info('May drop files into text block & description cell')
               removeLoadingBar()
               return false
             }

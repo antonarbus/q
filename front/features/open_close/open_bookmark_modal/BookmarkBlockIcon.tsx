@@ -3,7 +3,7 @@ import { MdOutlineStarOutline } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import { cls } from '@shared/consts/cls'
 import { route } from '@shared/consts/route'
-import { notify } from '@shared/toast'
+import { toast } from 'sonner'
 import { Tooltip } from '@mui/material'
 import {
   getBlockFromStore,
@@ -43,7 +43,7 @@ export const BookmarkBlockIcon = (): React.ReactNode => {
             const email = getState().user.email
 
             if (!email) {
-              notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
+              toast.warning('Not logged in')
               void navigate(`./${route.login}`)
 
               return

@@ -2,7 +2,7 @@ import { dispatch } from '@shared/lib/redux'
 import { useUpdateEffect } from 'react-use'
 import { useGetBookmarkMutation } from '@entities/bookmark'
 import { copySlice } from '@entities/copy'
-import { notify } from '@shared/toast'
+import { toast } from 'sonner'
 import type { UseMutateAsyncFunction } from '@tanstack/react-query'
 import type {
   ReqBody as Payload,
@@ -52,11 +52,7 @@ export const useCopyBookmarkAtSearch = (): Res => {
 
   useUpdateEffect(() => {
     if (isError) {
-      notify({
-        msg: error.response?.data.message,
-        type: 'error',
-        theme: 'light',
-      })
+      toast.error(error.response?.data.message)
     }
   }, [isError])
 

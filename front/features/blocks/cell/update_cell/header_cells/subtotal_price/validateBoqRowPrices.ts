@@ -9,7 +9,7 @@ import {
   boqRowCellKey,
 } from '@entities/quotation'
 import type { FroalaEditorRef } from '@shared/types/froala'
-import { notify } from '@shared/toast'
+import { toast } from 'sonner'
 
 type Props = {
   blockIndex: number
@@ -49,10 +49,9 @@ export const validateBoqRowPrices = ({
 
     if (!isPriceValid) {
       if (!didNotifyAboutInvalidPriceOnes) {
-        notify({
-          msg: 'Impossible to set exact price. Did it as close as possible.',
-          type: 'info',
-        })
+        toast.info(
+          'Impossible to set exact price. Did it as close as possible.',
+        )
 
         didNotifyAboutInvalidPriceOnes = true
       }

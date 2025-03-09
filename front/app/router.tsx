@@ -17,12 +17,12 @@ import { RegisterModal } from '@pages/auth_register_modal'
 import { RequestPasswordResetModal } from '@pages/auth_request_password_reset_modal'
 import { ActivationModal } from '@pages/auth_activation_modal'
 import { ResetPasswordModal } from '@pages/auth_reset_password_modal'
-import { Toast } from '@shared/toast'
 import { Footer } from '@widgets/footer'
 import { RequireRoles } from '@features/auth/check_required_roles'
 import { instantiateRouter } from '@shared/lib/router'
 import { OnInitLoad } from './OnInitLoad'
 import { userRole } from '@entities/user'
+import { Toaster } from 'sonner'
 
 const Quotation = React.lazy(async () => {
   return import('@pages/quotation_page')
@@ -83,7 +83,10 @@ const router = createBrowserRouter([
       <>
         <OnInitLoad />
         <AccessToken />
-        <Toast />
+        <Toaster
+          position='top-right'
+          richColors
+        />
         <LoadingDotsOverlay
           showLoader={false}
           text=''

@@ -7,7 +7,7 @@ import {
   deleteFromBookmarksCache,
 } from '@entities/bookmark'
 import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
-import { notify } from '@shared/toast'
+import { toast } from 'sonner'
 
 export const DeleteBookmarkButton = ({ id }: ReqBody): React.JSX.Element => {
   const {
@@ -26,11 +26,7 @@ export const DeleteBookmarkButton = ({ id }: ReqBody): React.JSX.Element => {
 
   useUpdateEffect(() => {
     if (isError) {
-      notify({
-        msg: error.response?.data.message,
-        type: 'error',
-        theme: 'light',
-      })
+      toast.error(error.response?.data.message)
 
       deleteFromBookmarksCache({ id })
     }

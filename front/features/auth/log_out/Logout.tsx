@@ -6,7 +6,7 @@ import { deleteQuotationsCache } from '@entities/quotation'
 import { useLogOutMutation, userSlice } from '@entities/user'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { navSlice } from '@shared/nav'
-import { notify } from '@shared/toast'
+import { toast } from 'sonner'
 import { appSlice } from '@shared/appSlice'
 
 export const Logout = (): React.JSX.Element => {
@@ -55,11 +55,7 @@ export const Logout = (): React.JSX.Element => {
 
   useUpdateEffect(() => {
     if (isError) {
-      notify({
-        msg: 'Problems with logging out',
-        type: 'error',
-        theme: 'light',
-      })
+      toast.error('Problems with logging out')
 
       setTimeout(() => {
         dispatch(appSlice.actions.hideLoadingOverlay())

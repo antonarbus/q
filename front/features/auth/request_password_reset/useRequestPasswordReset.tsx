@@ -3,7 +3,7 @@ import type { UseMutationResult } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useRequestPasswordResetMutation } from '@entities/user'
-import { notify } from '@shared/toast'
+import { toast } from 'sonner'
 import { asyncDelay } from '@shared/utils/delay'
 
 type Props = {
@@ -36,7 +36,7 @@ export const useRequestPasswordReset = ({
   useUpdateEffect(() => {
     if (isSuccess) {
       if (data.message === 'reset link sent') {
-        notify({ msg: 'Check your inbox or spam', theme: 'light' })
+        toast.info('Check your inbox or spam')
 
         const slideOutAndChangeUrl = async (): Promise<void> => {
           await asyncDelay(1000)
@@ -52,48 +52,36 @@ export const useRequestPasswordReset = ({
   useUpdateEffect(() => {
     if (isError) {
       if (error.response?.data.message === 'does not exists') {
-        notify({ msg: 'User not found', type: 'info', theme: 'light' })
+        toast.info('User not found')
 
         return
       }
 
       if (error.response?.data.message === 'validation error') {
-        notify({
-          msg: 'Email pattern is not good',
-          type: 'warn',
-          theme: 'light',
-        })
+        toast.warning('Email pattern is not good')
 
         return
       }
 
       if (error.response?.data.message === 'account not activated') {
-        notify({ msg: 'Account not activated', type: 'warn', theme: 'light' })
+        toast.warning('Account not activated')
 
         return
       }
 
       if (error.response?.data.message === 'reset link not sent') {
-        notify({
-          msg: 'Something happened, failed to send the mail',
-          type: 'warn',
-          theme: 'light',
-        })
+        toast.warning('Something happened, failed to send the mail')
 
         return
       }
 
       if (error.response?.data.message === 'reset key not issued') {
-        notify({
-          msg: 'Something happened, failed to generate reset link',
-          type: 'warn',
-          theme: 'light',
-        })
+        toast.warning('Something happened, failed to generate reset link')
 
         return
       }
 
-      notify({ msg: 'Internal error', type: 'error', theme: 'light' })
+      toast.error('Internal error')
     }
   }, [isError])
 

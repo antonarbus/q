@@ -7,7 +7,7 @@ import { useUpdateEffect } from 'react-use'
 import { quotationSlice, useGetQuotationMutation } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
 import { route } from '@shared/consts/route'
-import { notify } from '@shared/toast'
+import { toast } from 'sonner'
 import type { NavigateState } from '@shared/types/NavigateState'
 import { textSlice } from '@shared/lib/froala/textSlice'
 
@@ -52,11 +52,7 @@ export const OpenQuotationModalButton = ({
 
   useUpdateEffect(() => {
     if (isError) {
-      notify({
-        msg: error.response?.data.message,
-        type: 'error',
-        theme: 'light',
-      })
+      toast.error(error.response?.data.message)
     }
   }, [isError])
 

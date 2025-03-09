@@ -14,7 +14,7 @@ import { useLogInMutation, userRole, userSlice } from '@entities/user'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { route } from '@shared/consts/route'
 import { navSlice } from '@shared/nav'
-import { notify } from '@shared/toast'
+import { toast } from 'sonner'
 import type { NavigateState } from '@shared/types/NavigateState'
 import { asyncDelay } from '@shared/utils/delay'
 import { appSlice } from '@shared/appSlice'
@@ -58,7 +58,7 @@ export const useLogIn = ({
       const { accessJwtToken, email, roles, message } = data
 
       if (data.name === 'MongooseError') {
-        notify({ msg: 'Database error', type: 'warn', theme: 'light' })
+        toast.warning('Database error')
 
         return
       }
@@ -137,28 +137,24 @@ export const useLogIn = ({
       dispatch(userSlice.actions.setAccessToken({ accessToken: null }))
 
       if (error.response?.data.message === 'not registered') {
-        notify({ msg: 'Not registered', type: 'info', theme: 'light' })
+        toast.info('Not registered')
 
         return
       }
 
       if (error.response?.data.message === 'bad password') {
-        notify({ msg: 'Invalid credentials', type: 'warn', theme: 'light' })
+        toast.warning('Invalid credentials')
 
         return
       }
 
       if (error.response?.data.message === 'activation link sent') {
-        notify({
-          msg: 'Account is not activated. Check mailbox.',
-          type: 'info',
-          theme: 'light',
-        })
+        toast.info('Account is not activated. Check mailbox.')
 
         return
       }
 
-      notify({ msg: 'Internal error', type: 'error', theme: 'light' })
+      toast.error('Internal error')
     }
   }, [isError])
 

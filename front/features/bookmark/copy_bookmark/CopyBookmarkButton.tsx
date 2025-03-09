@@ -6,7 +6,7 @@ import { useUpdateEffect } from 'react-use'
 import { useGetBookmarkMutation } from '@entities/bookmark'
 import { copySlice } from '@entities/copy'
 import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
-import { notify } from '@shared/toast'
+import { toast } from 'sonner'
 import { textSlice } from '@shared/lib/froala/textSlice'
 
 export const CopyBookmarkButton = ({ id }: ReqBody): React.JSX.Element => {
@@ -37,11 +37,7 @@ export const CopyBookmarkButton = ({ id }: ReqBody): React.JSX.Element => {
 
   useUpdateEffect(() => {
     if (isError) {
-      notify({
-        msg: error.response?.data.message,
-        type: 'error',
-        theme: 'light',
-      })
+      toast.error(error.response?.data.message)
     }
   }, [isError])
 

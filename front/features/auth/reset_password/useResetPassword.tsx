@@ -6,7 +6,7 @@ import { useUpdateEffect } from 'react-use'
 import { useResetPasswordMutation, userRole, userSlice } from '@entities/user'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { navSlice } from '@shared/nav'
-import { notify } from '@shared/toast'
+import { toast } from 'sonner'
 import type { AnimationScope } from 'motion-dom'
 import { asyncDelay } from '@shared/utils/delay'
 
@@ -39,7 +39,7 @@ export const useResetPassword = ({ passwordSignal, slideOut }: Props): Res => {
   useUpdateEffect(() => {
     if (isSuccess) {
       if (data.message === 'password was reset') {
-        notify({ msg: 'Password was reset', theme: 'light' })
+        toast('Password was reset')
 
         if (!data.accessJwtToken) {
           return
@@ -86,24 +86,24 @@ export const useResetPassword = ({ passwordSignal, slideOut }: Props): Res => {
   useUpdateEffect(() => {
     if (isError) {
       if (error.response?.data.message === 'incorrect reset key') {
-        notify({ msg: 'Incorrect reset key', type: 'warn', theme: 'light' })
+        toast.warning('Incorrect reset key')
 
         return
       }
 
       if (error.response?.data.message === 'validation error') {
-        notify({ msg: 'Validation error', type: 'warn', theme: 'light' })
+        toast.warning('Validation error')
 
         return
       }
 
       if (error.response?.data.message === 'not activated') {
-        notify({ msg: 'Account not activated', type: 'warn', theme: 'light' })
+        toast.warning('Account not activated')
 
         return
       }
 
-      notify({ msg: 'Internal error', type: 'error', theme: 'light' })
+      toast.error('Internal error')
     }
   }, [isError])
 

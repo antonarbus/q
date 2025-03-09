@@ -3,7 +3,7 @@ import { IconButton, Tooltip } from '@mui/material'
 import { MdLogin } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
-import { notify } from '@shared/toast'
+import { toast } from 'sonner'
 import { useLogInMutation, userRole, userSlice } from '@entities/user'
 import { useGetQuotationsQuery } from '@entities/quotation'
 import { useGetBookmarksQuery } from '@entities/bookmark'
@@ -83,22 +83,14 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
       }
 
       if (data.message === 'super-admin on behalf of user') {
-        notify({
-          msg: `Logged as ${data.email}`,
-          type: 'success',
-          theme: 'light',
-        })
+        toast.success(`Logged as ${data.email}`)
       }
     }
   }, [isSuccess])
 
   useUpdateEffect(() => {
     if (isError) {
-      notify({
-        msg: error.response?.data.message,
-        type: 'error',
-        theme: 'light',
-      })
+      toast.error(error.response?.data.message)
     }
   }, [isError])
 

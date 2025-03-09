@@ -1,5 +1,5 @@
 import { getState } from '@shared/lib/redux'
-import { notify } from '@shared/toast'
+import { toast } from 'sonner'
 
 export const remindToSaveQuotationOnInsert = (): void => {
   const isLogged = Boolean(getState().user.email)
@@ -11,10 +11,6 @@ export const remindToSaveQuotationOnInsert = (): void => {
   const id = getState().quotation.id
 
   if (id === 'new' || !id) {
-    notify({
-      msg: 'Do not forget to save quotation',
-      type: 'info',
-      theme: 'light',
-    })
+    toast.info('Do not forget to save quotation')
   }
 }

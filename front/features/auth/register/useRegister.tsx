@@ -3,7 +3,7 @@ import type { UseMutationResult } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useRegisterMutation } from '@entities/user'
-import { notify } from '@shared/toast'
+import { toast } from 'sonner'
 import { asyncDelay } from '@shared/utils/delay'
 
 type Props = {
@@ -38,7 +38,7 @@ export const useRegister = ({
   useUpdateEffect(() => {
     if (isSuccess) {
       if (data.message === 'activation link sent') {
-        notify({ msg: 'Check your inbox or spam', theme: 'light' })
+        toast.info('Check your inbox or spam')
       }
 
       const slideOutAndChangeUrl = async (): Promise<void> => {
@@ -54,38 +54,30 @@ export const useRegister = ({
   useUpdateEffect(() => {
     if (isError) {
       if (error.response?.data.message === 'already exists') {
-        notify({ msg: 'Already registered', type: 'info', theme: 'light' })
+        toast.info('Already registered')
 
         return
       }
 
       if (error.response?.data.message === 'validation error') {
-        notify({ msg: 'Validation error', type: 'warn', theme: 'light' })
+        toast.warning('Validation error')
 
         return
       }
 
       if (error.response?.data.message === 'activation key not issued') {
-        notify({
-          msg: 'Something went wrong, activation key was not issued',
-          type: 'warn',
-          theme: 'light',
-        })
+        toast.warning('Something went wrong, activation key was not issued')
 
         return
       }
 
       if (error.response?.data.message === 'activation link not sent') {
-        notify({
-          msg: 'Something went wrong, activation key was not sent',
-          type: 'warn',
-          theme: 'light',
-        })
+        toast.warning('Something went wrong, activation key was not sent')
 
         return
       }
 
-      notify({ msg: 'Internal error', type: 'error', theme: 'light' })
+      toast.error('Internal error')
     }
   }, [isError])
 

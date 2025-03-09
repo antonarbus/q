@@ -10,7 +10,7 @@ import {
   useSaveBookmarkMutation,
 } from '@entities/bookmark'
 import { bookmarkPosAtBlocks, quotationSlice } from '@entities/quotation'
-import { notify } from '@shared/toast'
+import { toast } from 'sonner'
 import { cls } from '@shared/consts/cls'
 import { getPaperElementHtmlAtModal } from '@shared/utils/htmlGetter/getPaperElementHtmlAtModal'
 import { asyncDelay } from '@shared/utils/delay'
@@ -49,19 +49,9 @@ export const useSaveBookmark = ({
   useUpdateEffect(() => {
     if (isSuccess) {
       if (data.message === 'saved') {
-        notify({
-          msg: 'Saved',
-          type: 'success',
-          theme: 'dark',
-          position: 'bottom-center',
-        })
+        toast.success('Saved', { position: 'bottom-center' })
       } else if (data.message === 'updated') {
-        notify({
-          msg: 'Updated',
-          type: 'info',
-          theme: 'dark',
-          position: 'bottom-center',
-        })
+        toast.info('Updated', { position: 'bottom-center' })
       }
 
       void updateItemCategories()
@@ -79,12 +69,7 @@ export const useSaveBookmark = ({
 
   useUpdateEffect(() => {
     if (isError) {
-      notify({
-        msg: error.response?.data.message,
-        type: 'error',
-        theme: 'dark',
-        position: 'bottom-center',
-      })
+      toast.error(error.response?.data.message)
 
       reset()
     }
@@ -96,7 +81,7 @@ export const useSaveBookmark = ({
     const email = getState().user.email
 
     if (!email) {
-      notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
+      toast.warning('Not logged in')
 
       return
     }
@@ -126,7 +111,7 @@ export const useSaveBookmark = ({
     const block = getState().quotation.blocks.at(bookmarkPosAtBlocks)
 
     if (!block) {
-      notify({ msg: 'No item loaded', type: 'warn', theme: 'light' })
+      toast.warning('No item loaded')
 
       return
     }

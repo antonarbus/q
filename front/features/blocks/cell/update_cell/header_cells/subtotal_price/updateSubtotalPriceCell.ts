@@ -12,7 +12,7 @@ import {
   boqRowCellKey,
 } from '@entities/quotation'
 import type { FroalaEditor, FroalaEditorRef } from '@shared/types/froala'
-import { notify } from '@shared/toast'
+import { toast } from 'sonner'
 
 type Props = {
   blockIndex: number
@@ -101,10 +101,7 @@ export const updateSubtotalPriceCell = ({
   const areAllCellsPinned = prices.every((price) => price.isPinned)
 
   if (areAllCellsPinned) {
-    notify({
-      msg: "Can't be changed. All row prices are pinned.",
-      type: 'info',
-    })
+    toast.info(`Can't be changed. All row prices are pinned.`)
 
     updateSubTotalPriceWithValue({
       blockIndex,
@@ -115,10 +112,9 @@ export const updateSubtotalPriceCell = ({
   }
 
   if (unpinnedPricesSum === 0) {
-    notify({
-      msg: 'Unpinned prices give zero. Impossible to adjust individual prices.',
-      type: 'info',
-    })
+    toast.info(
+      'Unpinned prices give zero. Impossible to adjust individual prices.',
+    )
 
     updateSubTotalPriceWithValue({
       blockIndex,

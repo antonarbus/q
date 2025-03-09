@@ -12,7 +12,7 @@ import {
 } from '@entities/quotation'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { navSlice } from '@shared/nav'
-import { notify } from '@shared/toast'
+import { toast } from 'sonner'
 import { appSlice } from '@shared/appSlice'
 
 export function useLoadQuotation(): void {
@@ -132,7 +132,7 @@ export function useLoadQuotation(): void {
 
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       if (quotation.blocks === undefined) {
-        notify({ msg: 'Quotation corrupted', type: 'warn', theme: 'light' })
+        toast.warning('Quotation corrupted')
 
         setTimeout(() => {
           dispatch(appSlice.actions.hideLoadingOverlay())
@@ -191,7 +191,7 @@ export function useLoadQuotation(): void {
           }),
         )
       } else {
-        notify({ msg: 'Internal error', type: 'error', theme: 'light' })
+        toast.error('Internal error')
 
         dispatch(
           appSlice.actions.setBackgroundMessage({ message: 'Internal error' }),

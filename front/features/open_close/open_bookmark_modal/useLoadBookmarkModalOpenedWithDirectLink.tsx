@@ -4,7 +4,7 @@ import {
 } from '@entities/bookmark'
 import { bookmarkPosAtBlocks, quotationSlice } from '@entities/quotation'
 import { dispatch, getState } from '@shared/lib/redux'
-import { notify } from '@shared/toast'
+import { toast } from 'sonner'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 
@@ -63,12 +63,7 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
   useUpdateEffect(() => {
     if (isError) {
       if (error.response?.data.message === 'not found') {
-        notify({
-          msg: 'Bookmark not found',
-          type: 'warn',
-          theme: 'light',
-        })
-
+        toast.warning('Bookmark not found')
         void navigate('..')
       }
     }

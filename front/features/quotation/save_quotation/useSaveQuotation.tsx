@@ -17,7 +17,7 @@ import {
   showLoadingNavIcon,
   showSuccessNavIcon,
 } from '@shared/nav'
-import { notify } from '@shared/toast'
+import { toast } from 'sonner'
 import type { QuotationFormValues } from '@entities/quotation/types'
 import { route } from '@shared/consts/route'
 import { asyncDelay } from '@shared/utils/delay'
@@ -64,28 +64,15 @@ export const useSaveQuotation = ({
   useUpdateEffect(() => {
     if (isSuccess) {
       if (data.message === 'saved') {
-        notify({
-          msg: 'Saved',
-          type: 'success',
-          theme: 'dark',
-          position: 'bottom-center',
-        })
+        toast.success('Saved', { position: 'bottom-center' })
       }
 
       if (data.message === 'updated') {
-        notify({
-          msg: 'Updated',
-          type: 'info',
-          theme: 'dark',
-          position: 'bottom-center',
-        })
+        toast.info('Updated', { position: 'bottom-center' })
       }
 
       if (data.message === 'copied and saved') {
-        notify({
-          msg: 'Shared quotation was copied and saved',
-          type: 'success',
-          theme: 'dark',
+        toast.success('Shared quotation was copied and saved', {
           position: 'bottom-center',
         })
       }
@@ -133,12 +120,7 @@ export const useSaveQuotation = ({
 
   useUpdateEffect(() => {
     if (isError) {
-      notify({
-        msg: error.response?.data.message,
-        type: 'error',
-        theme: 'dark',
-        position: 'bottom-center',
-      })
+      toast.error(error.response?.data.message)
 
       showErrorNavIcon({ navMenuItemIdKey: navItemKey.save })
       reset()
@@ -151,7 +133,7 @@ export const useSaveQuotation = ({
     const email = getState().user.email
 
     if (!email) {
-      notify({ msg: 'Not logged in', type: 'warn', theme: 'light' })
+      toast.warning('Not logged in')
 
       return
     }

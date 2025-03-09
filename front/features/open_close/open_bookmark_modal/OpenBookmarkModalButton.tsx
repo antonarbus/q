@@ -7,7 +7,7 @@ import { useUpdateEffect } from 'react-use'
 import { useGetBookmarkMutation } from '@entities/bookmark'
 import { quotationSlice } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
-import { notify } from '@shared/toast'
+import { toast } from 'sonner'
 import { textSlice } from '@shared/lib/froala/textSlice'
 
 export const OpenBookmarkModalButton = ({ id }: ReqBody): React.JSX.Element => {
@@ -42,11 +42,7 @@ export const OpenBookmarkModalButton = ({ id }: ReqBody): React.JSX.Element => {
 
   useUpdateEffect(() => {
     if (isError) {
-      notify({
-        msg: error.response?.data.message,
-        type: 'error',
-        theme: 'light',
-      })
+      toast.error(error.response?.data.message)
     }
   }, [isError])
 
