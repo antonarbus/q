@@ -6,6 +6,7 @@ import {
   VisitorsCountModel,
 } from '@back/db/models/visitorsCountModel'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
+import { userRole } from '@back/consts/userRole'
 
 export type ResBody = {
   visitorsCount: VisitorsCount[]
@@ -28,7 +29,7 @@ export const getUniqueDailyVisitorsRouter = Router()
 const getUniqueDailyVisitors: RouterHandler = async (req, res, next) => {
   const { roles } = getUserFromRefreshToken(req)
 
-  if (!roles.includes('super-admin')) {
+  if (!roles.includes(userRole.superAdmin)) {
     res
       .status(httpStatus.forbidden_403)
       .json({ visitorsCount: [], message: 'forbidden' })

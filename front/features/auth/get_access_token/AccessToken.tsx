@@ -2,7 +2,7 @@ import type { JwtPayloadExtended } from '@back/utils/jwt'
 import { dispatch, getState } from '@shared/lib/redux'
 import { jwtDecode } from 'jwt-decode'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
-import { useGetAccessTokenQuery, userSlice } from '@entities/user'
+import { useGetAccessTokenQuery, userRole, userSlice } from '@entities/user'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { navSlice, showLoadingNavIcon } from '@shared/nav'
 import { agGridSlice } from '@shared/lib/ag_grid/agGridSlice'
@@ -74,7 +74,7 @@ export const AccessToken = (): React.JSX.Element => {
       dispatch(
         userSlice.actions.rememberLoggedUser({
           email,
-          roles: data.roles ?? ['user'],
+          roles: data.roles ?? [userRole.user],
         }),
       )
 
@@ -88,7 +88,7 @@ export const AccessToken = (): React.JSX.Element => {
         }),
       )
 
-      if (roles.includes('super-admin')) {
+      if (roles.includes(userRole.superAdmin)) {
         dispatch(navSlice.actions.showNavItems({ navItemIdKeys: ['admin'] }))
       } else {
         dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: ['admin'] }))

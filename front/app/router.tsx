@@ -22,6 +22,7 @@ import { Footer } from '@widgets/footer'
 import { RequireRoles } from '@features/auth/check_required_roles'
 import { instantiateRouter } from '@shared/lib/router'
 import { OnInitLoad } from './OnInitLoad'
+import { userRole } from '@entities/user'
 
 const Quotation = React.lazy(async () => {
   return import('@pages/quotation_page')
@@ -184,7 +185,7 @@ const router = createBrowserRouter([
               />
             }
           >
-            <RequireRoles requiredRoles={['super-admin']}>
+            <RequireRoles requiredRoles={[userRole.superAdmin]}>
               <AdminPageLazy />
             </RequireRoles>
           </Suspense>
@@ -201,7 +202,7 @@ const router = createBrowserRouter([
               />
             }
           >
-            <RequireRoles requiredRoles={['super-admin']}>
+            <RequireRoles requiredRoles={[userRole.superAdmin]}>
               <VisitorsPageLazy />
             </RequireRoles>
           </Suspense>

@@ -10,7 +10,7 @@ import {
 import { useUpdateEffect } from 'react-use'
 import { useGetBookmarksQuery } from '@entities/bookmark'
 import { useGetQuotationsQuery } from '@entities/quotation'
-import { useLogInMutation, userSlice } from '@entities/user'
+import { useLogInMutation, userRole, userSlice } from '@entities/user'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { route } from '@shared/consts/route'
 import { navSlice } from '@shared/nav'
@@ -84,7 +84,7 @@ export const useLogIn = ({
       dispatch(
         userSlice.actions.rememberLoggedUser({
           email,
-          roles: roles ?? ['user'],
+          roles: roles ?? [userRole.user],
         }),
       )
 
@@ -96,7 +96,7 @@ export const useLogIn = ({
         navSlice.actions.showNavItems({ navItemIdKeys: [navItemKey.profile] }),
       )
 
-      if (roles?.includes('super-admin')) {
+      if (roles?.includes(userRole.superAdmin)) {
         dispatch(navSlice.actions.showNavItems({ navItemIdKeys: ['admin'] }))
       } else {
         dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: ['admin'] }))

@@ -1,7 +1,9 @@
+import type { UserRole } from '../const/userRole'
+
 export type User = {
   email: string
   password: string
-  roles: ('user' | 'super-admin')[]
+  roles: UserRole[]
   isActivated: boolean
   activationKey: string
   resetPasswordKey: string

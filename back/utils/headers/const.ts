@@ -13,6 +13,6 @@ export const headerName = {
  * front end
  */
 export const cookieName = {
-  noTraceMode: 'no-trace-mode',
+  noTrace: 'no-trace',
   refreshJwtToken: 'refresh-jwt-token',
 } as const

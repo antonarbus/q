@@ -3,11 +3,8 @@ import bcrypt from 'bcryptjs'
 import type { User } from '@entities/user'
 import { httpStatus } from '@back/consts/httpStatus'
 import { UserModel } from '@back/db/models/userModel'
-import {
-  createAccessToken,
-  createRefreshToken,
-  threeMonthsInSec,
-} from '@back/utils/jwt'
+import { createAccessToken, createRefreshToken } from '@back/utils/jwt'
+import { setRefreshTokenCookie } from '@back/utils/headers'
 
 export type ReqBody = {
   email: User['email']
@@ -59,12 +56,7 @@ const resetPassword: RouterHandler = async (req, res, next) => {
     const password = await bcrypt.hash(req.body.password, saltRounds)
     const accessJwtToken = createAccessToken({ email, roles: user.roles })
     const refreshJwtToken = createRefreshToken({ email, roles: user.roles })
-
-    res.cookie('refreshJwtToken', refreshJwtToken, {
-      httpOnly: true,
-      secure: process.env.INSTALLATION !== 'local',
-      maxAge: threeMonthsInSec * 1000,
-    })
+    setRefreshTokenCookie({ res, refreshJwtToken })
 
     const updatedUser = await UserModel.findOneAndUpdate(
       { email, resetPasswordKey },

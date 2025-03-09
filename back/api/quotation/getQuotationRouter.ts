@@ -4,10 +4,8 @@ import { httpStatus } from '@back/consts/httpStatus'
 import { QuotationModel } from '@back/db/models/quotationModel'
 import { bucket, storageFolderName } from '@back/services/storage'
 import { jsonParseSafe } from '@back/utils/jsonParseSafe'
-import {
-  isNoTraceModeEnabled,
-  getUserFromRefreshToken,
-} from '@back/utils/headers'
+import { isNoTraceCookie, getUserFromRefreshToken } from '@back/utils/headers'
+import { userRole } from '@back/consts/userRole'
 
 export type ReqBody = {
   id: Quotation['id']
@@ -37,7 +35,7 @@ const getQuotation: RouterHandler = async (req, res, next) => {
   try {
     const { id } = req.body
 
-    const isNoTraceMode = isNoTraceModeEnabled(req)
+    const isNoTraceMode = isNoTraceCookie(req)
 
     const document = isNoTraceMode
       ? await QuotationModel.findOne({ id }).lean()
@@ -63,7 +61,7 @@ const getQuotation: RouterHandler = async (req, res, next) => {
     const isSharedWithEverybody = (document.sharedWith ?? []).at(0) === '*'
     const isSharedWithPerson = (document.sharedWith ?? []).includes(email)
     const isViewer = isSharedWithEverybody || isSharedWithPerson
-    const isSuperAdmin = roles.includes('super-admin')
+    const isSuperAdmin = roles.includes(userRole.superAdmin)
 
     if (!isOwner && !isShared && !isSuperAdmin) {
       res.status(httpStatus.forbidden_403).json({ message: 'not shared' })

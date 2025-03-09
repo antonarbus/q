@@ -1,6 +1,7 @@
 // import type { HydratedDocumentFromSchema, InferSchemaType } from 'mongoose'
 import { model, Schema } from 'mongoose'
 import type { User } from '@entities/user'
+import { userRole } from '@back/consts/userRole'
 
 // define schema for documents in collection
 const userSchema = new Schema<User>(
@@ -19,8 +20,8 @@ const userSchema = new Schema<User>(
     },
     roles: {
       type: [String],
-      enum: ['user', 'super-admin'],
-      default: ['user'],
+      enum: [userRole.user, userRole.superAdmin],
+      default: [userRole.user],
     },
     isActivated: {
       type: Boolean,

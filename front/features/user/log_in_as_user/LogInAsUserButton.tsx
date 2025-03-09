@@ -4,7 +4,7 @@ import { MdLogin } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
 import { notify } from '@shared/toast'
-import { useLogInMutation, userSlice } from '@entities/user'
+import { useLogInMutation, userRole, userSlice } from '@entities/user'
 import { useGetQuotationsQuery } from '@entities/quotation'
 import { useGetBookmarksQuery } from '@entities/bookmark'
 import type { NavigateState } from '@shared/types/NavigateState'
@@ -50,7 +50,7 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
       dispatch(
         userSlice.actions.rememberLoggedUser({
           email: data.email,
-          roles: data.roles ?? ['user'],
+          roles: data.roles ?? [userRole.user],
         }),
       )
 
@@ -64,7 +64,7 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
         }),
       )
 
-      if (data.roles?.includes('super-admin')) {
+      if (data.roles?.includes(userRole.superAdmin)) {
         dispatch(navSlice.actions.showNavItems({ navItemIdKeys: ['admin'] }))
       } else {
         dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: ['admin'] }))

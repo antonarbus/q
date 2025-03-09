@@ -8,8 +8,8 @@ import { cookieName } from '../const'
  *
  * We set the 'no-trace-mode': true cookie to header
  */
-export const enableNoTraceMode = (res: Response): void => {
-  res.cookie(cookieName.noTraceMode, true, {
+export const setNoTraceCookie = (res: Response): void => {
+  res.cookie(cookieName.noTrace, true, {
     httpOnly: true,
     secure: process.env.INSTALLATION !== 'local',
     maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days in ms,

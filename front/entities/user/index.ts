@@ -15,3 +15,6 @@ export { useDeleteUserMutation } from './api/useDeleteUserMutation'
 
 // types
 export type { User } from './types'
+
+// const
+export { userRole, type UserRole } from './const/userRole'

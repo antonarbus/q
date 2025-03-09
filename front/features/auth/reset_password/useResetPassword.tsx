@@ -3,7 +3,7 @@ import type { Signal } from '@preact/signals-react'
 import type { UseMutationResult } from '@tanstack/react-query'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { useResetPasswordMutation, userSlice } from '@entities/user'
+import { useResetPasswordMutation, userRole, userSlice } from '@entities/user'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { navSlice } from '@shared/nav'
 import { notify } from '@shared/toast'
@@ -58,7 +58,7 @@ export const useResetPassword = ({ passwordSignal, slideOut }: Props): Res => {
         dispatch(
           userSlice.actions.rememberLoggedUser({
             email: data.email,
-            roles: data.roles ?? ['user'],
+            roles: data.roles ?? [userRole.user],
           }),
         )
 

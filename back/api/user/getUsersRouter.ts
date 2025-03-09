@@ -6,6 +6,7 @@ import { httpStatus } from '@back/consts/httpStatus'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/utils/headers'
 import { UserModel } from '@back/db/models/userModel'
 import type { User } from '@entities/user'
+import { userRole } from '@back/consts/userRole'
 
 export type UserPicked = Pick<
   User,
@@ -34,7 +35,7 @@ const getUsers: RouterHandler = async (req, res, next) => {
   try {
     const { roles } = getUserFromAccessTokenOrThrowUnauthorized(req)
 
-    if (!roles.includes('super-admin')) {
+    if (!roles.includes(userRole.superAdmin)) {
       res
         .status(httpStatus.forbidden_403)
         .json({ message: 'no permission to view', users: [] })

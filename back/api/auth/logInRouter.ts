@@ -9,10 +9,14 @@ import {
   createAccessToken,
   createRefreshToken,
   getJwtExpirationInDays,
-  threeMonthsInSec,
   verifyRefreshToken,
 } from '@back/utils/jwt'
-import { enableNoTraceMode, getUserFromRefreshToken } from '@back/utils/headers'
+import {
+  setNoTraceCookie,
+  getUserFromRefreshToken,
+  setRefreshTokenCookie,
+} from '@back/utils/headers'
+import { userRole } from '@back/consts/userRole'
 
 export type ReqBody = {
   email: User['email']
@@ -61,7 +65,8 @@ const logIn: RouterHandler = async (req, res, next) => {
     const { roles, email: emailFromRefreshToken } = getUserFromRefreshToken(req)
 
     const isSuperAdminOnBehalfOfUser =
-      roles.includes('super-admin') && emailFromInput !== emailFromRefreshToken
+      roles.includes(userRole.superAdmin) &&
+      emailFromInput !== emailFromRefreshToken
 
     if (isSuperAdminOnBehalfOfUser) {
       // just log in as user without password as you are a super-admin
@@ -75,13 +80,9 @@ const logIn: RouterHandler = async (req, res, next) => {
         ? userFromDb.refreshJwtToken
         : createRefreshToken({ email: emailFromInput, roles: userFromDb.roles })
 
-      res.cookie('refreshJwtToken', refreshJwtToken, {
-        httpOnly: true,
-        secure: process.env.INSTALLATION !== 'local',
-        maxAge: threeMonthsInSec * 1000,
-      })
+      setRefreshTokenCookie({ res, refreshJwtToken })
 
-      enableNoTraceMode(res)
+      setNoTraceCookie(res)
 
       res.status(httpStatus.success_200).json({
         message: 'super-admin on behalf of user',
@@ -164,11 +165,7 @@ const logIn: RouterHandler = async (req, res, next) => {
       ? userFromDb.refreshJwtToken
       : createRefreshToken({ email: emailFromInput, roles: userFromDb.roles })
 
-    res.cookie('refreshJwtToken', refreshJwtToken, {
-      httpOnly: true,
-      secure: process.env.INSTALLATION !== 'local',
-      maxAge: threeMonthsInSec * 1000,
-    })
+    setRefreshTokenCookie({ res, refreshJwtToken })
 
     const userUpdated = await UserModel.findOneAndUpdate(
       { email: emailFromInput },

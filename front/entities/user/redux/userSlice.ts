@@ -1,5 +1,6 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import type { User } from '../types'
+import { userRole } from '../const/userRole'
 
 type InitialState = {
   email: string | null
@@ -9,7 +10,7 @@ type InitialState = {
 
 const initialState: InitialState = {
   email: null,
-  roles: ['user'],
+  roles: [userRole.user],
   accessToken: null,
 }
 

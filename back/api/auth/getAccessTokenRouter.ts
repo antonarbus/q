@@ -8,7 +8,11 @@ import {
   getJwtExpirationInDays,
   verifyRefreshToken,
 } from '@back/utils/jwt'
-import { isNoTraceModeEnabled } from '@back/utils/headers'
+import {
+  getRefreshTokenFromCookie,
+  isNoTraceCookie,
+  removeRefreshTokenCookie,
+} from '@back/utils/headers'
 
 export type ResBody = {
   message: 'issued access token'
@@ -16,10 +20,6 @@ export type ResBody = {
   accessJwtToken?: string
   roles?: User['roles']
   jwtRefreshTokenExpirationDays: number
-}
-
-type Cookies = {
-  refreshJwtToken?: string
 }
 
 type RouterHandler = (
@@ -32,16 +32,16 @@ export const getAccessTokenRouter = Router()
 
 const getAccessToken: RouterHandler = async (req, res, next) => {
   try {
-    const refreshJwtToken = (req.cookies as Cookies).refreshJwtToken
+    const refreshJwtToken = getRefreshTokenFromCookie({ req })
 
-    if (typeof refreshJwtToken !== 'string') {
+    if (refreshJwtToken === undefined) {
       throw new Error(errorMessageCommon.notLoggedIn)
     }
 
     const jwtPayload = verifyRefreshToken(refreshJwtToken)
 
     if (jwtPayload === undefined) {
-      res.clearCookie('refreshJwtToken')
+      removeRefreshTokenCookie({ res })
 
       throw new Error(errorMessageCommon.notLoggedIn)
     }
@@ -50,9 +50,9 @@ const getAccessToken: RouterHandler = async (req, res, next) => {
       token: refreshJwtToken,
     })
 
-    const isNoTraceMode = isNoTraceModeEnabled(req)
+    const shouldNotTrace = isNoTraceCookie(req)
 
-    const user = isNoTraceMode
+    const user = shouldNotTrace
       ? await UserModel.findOne({ email: jwtPayload.email, refreshJwtToken })
       : await UserModel.findOneAndUpdate(
           { email: jwtPayload.email, refreshJwtToken },
@@ -61,7 +61,7 @@ const getAccessToken: RouterHandler = async (req, res, next) => {
         )
 
     if (!user) {
-      res.clearCookie('refreshJwtToken')
+      removeRefreshTokenCookie({ res })
 
       throw new Error(errorMessageCommon.notLoggedIn)
     }

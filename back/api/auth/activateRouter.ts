@@ -3,11 +3,8 @@ import type { User } from '@entities/user'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/consts/httpStatus'
 import { UserModel } from '@back/db/models/userModel'
-import {
-  createAccessToken,
-  createRefreshToken,
-  threeMonthsInSec,
-} from '@back/utils/jwt'
+import { createAccessToken, createRefreshToken } from '@back/utils/jwt'
+import { setRefreshTokenCookie } from '@back/utils/headers'
 
 export type ReqBody = {
   activationKey: User['activationKey']
@@ -54,14 +51,8 @@ const activate: RouterHandler = async (req, res, next) => {
       return
     }
 
-    const accessJwtToken = createAccessToken({ email, roles })
     const refreshJwtToken = createRefreshToken({ email, roles })
-
-    res.cookie('refreshJwtToken', refreshJwtToken, {
-      httpOnly: true,
-      secure: process.env.INSTALLATION !== 'local',
-      maxAge: threeMonthsInSec * 1000,
-    })
+    setRefreshTokenCookie({ res, refreshJwtToken })
 
     const userDocument = await UserModel.findOneAndUpdate(
       { email, activationKey },
@@ -71,7 +62,7 @@ const activate: RouterHandler = async (req, res, next) => {
 
     res.status(httpStatus.success_200).json({
       message: 'activated',
-      accessJwtToken,
+      accessJwtToken: createAccessToken({ email, roles }),
       email: userDocument?.email,
       roles: userDocument?.roles,
     })

@@ -3,6 +3,7 @@ import { Router, type Request, type Response, type NextFunction } from 'express'
 import { UserModel } from '@back/db/models/userModel'
 import { getUserFromRefreshToken } from '@back/utils/headers'
 import { httpStatus } from '@back/consts/httpStatus'
+import { userRole } from '@back/consts/userRole'
 
 type RouterHandler = (
   req: Request,
@@ -15,7 +16,7 @@ export const testRouter = Router()
 const test: RouterHandler = async (req, res, next) => {
   const { roles } = getUserFromRefreshToken(req)
 
-  if (!roles.includes('super-admin')) {
+  if (!roles.includes(userRole.superAdmin)) {
     res.status(httpStatus.forbidden_403).json({ message: 'forbidden' })
 
     return

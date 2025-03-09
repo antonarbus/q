@@ -7,6 +7,7 @@ import type { User } from '@entities/user'
 import { UserModel } from '@back/db/models/userModel'
 import { QuotationModel } from '@back/db/models/quotationModel'
 import { BookmarkModel } from '@back/db/models/bookmarkModel'
+import { userRole } from '@back/consts/userRole'
 
 export type ReqBody = {
   email: User['email']
@@ -31,7 +32,7 @@ const deleteUser: RouterHandler = async (req, res, next) => {
       getUserFromAccessTokenOrThrowUnauthorized(req)
 
     const isOwner = emailFromToken === req.body.email
-    const isSuperAdmin = roles.includes('super-admin')
+    const isSuperAdmin = roles.includes(userRole.superAdmin)
 
     if (!isOwner && !isSuperAdmin) {
       res
