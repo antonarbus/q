@@ -5,6 +5,7 @@ import {
   VisitorsCountModel,
   type VisitorsCount,
 } from '@back/entities/visitors_count'
+import { headerName } from '@back/shared/headers'
 
 export type ReqBody = {
   date: VisitorsCount['date']
@@ -26,7 +27,7 @@ export const countUniqueDailyVisitorsRouter = Router()
 const incrementUniqueDailyVisitor: RouterHandler = async (req, res, next) => {
   try {
     // do not distort statistics by tests
-    if (req.headers['playwright-test'] === 'true') {
+    if (req.headers[headerName.playwrightTest] === 'true') {
       return
     }
 

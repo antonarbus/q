@@ -1,5 +1,5 @@
 // const
-export { headerName } from './const'
+export { headerName } from './const/headerName'
 // tokens
 export { setRefreshTokenCookie } from './tokens/setRefreshTokenCookie'
 export { removeRefreshTokenCookie } from './tokens/removeRefreshTokenCookie'

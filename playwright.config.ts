@@ -3,6 +3,7 @@ import { userFilePath } from 'tests/setup/userFilePath'
 import 'dotenv/config'
 import { config } from './back/config'
 import { getEnvVar } from '@back/shared/utils/getEnvVar'
+import { headerName } from '@back/shared/headers'
 
 // https://playwright.dev/docs/test-configuration
 export default defineConfig({
@@ -16,7 +17,7 @@ export default defineConfig({
     baseURL: config.front.baseUrl,
     trace: 'on-first-retry',
     extraHTTPHeaders: {
-      'playwright-test': 'true',
+      [headerName.playwrightTest]: 'true',
     },
   },
   projects: [

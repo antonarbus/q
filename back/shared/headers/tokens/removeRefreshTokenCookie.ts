@@ -1,5 +1,5 @@
 import type { Response } from 'express'
-import { cookieName } from '../const'
+import { cookieName } from '../const/cookieName'
 
 type Props = {
   res: Response

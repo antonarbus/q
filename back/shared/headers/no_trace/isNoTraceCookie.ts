@@ -1,5 +1,5 @@
 import type { Request } from 'express'
-import { cookieName } from '../const'
+import { cookieName } from '../const/cookieName'
 
 type RequestWithCookies = Request<unknown> & {
   cookies: {
