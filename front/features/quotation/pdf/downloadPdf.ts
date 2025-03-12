@@ -63,7 +63,7 @@ export const downloadPdf = async (): Promise<void> => {
   }[] = []
 
   linkElements.forEach((linkElement) => {
-    if (linkElement instanceof HTMLLinkElement) {
+    if (linkElement instanceof HTMLAnchorElement) {
       const linkRect = linkElement.getBoundingClientRect()
       const blocksContainerRect = blocksContainerElement.getBoundingClientRect()
       const offsetX = (maxPaperWidth - blocksContainerRect.width) / 2
