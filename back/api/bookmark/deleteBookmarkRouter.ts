@@ -25,9 +25,12 @@ export const deleteBookmarkRouter = Router()
 const deleteBookmark: RouterHandler = async (req, res, next) => {
   try {
     const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
-    const { id } = req.body
+    const bookmarkId = req.body.id
 
-    const deleteFromDbResult = await BookmarkModel.deleteOne({ email, id })
+    const deleteFromDbResult = await BookmarkModel.deleteOne({
+      email,
+      id: bookmarkId,
+    })
 
     if (deleteFromDbResult.deletedCount === 0) {
       res.status(httpStatus.notFound_404).json({ message: 'did not find' })
@@ -36,7 +39,7 @@ const deleteBookmark: RouterHandler = async (req, res, next) => {
     }
 
     const [files] = await bucket.getFiles({
-      prefix: `${email}/${storageFolderName.bookmarks}/${id}.json`,
+      prefix: `${email}/${storageFolderName.bookmarks}/${bookmarkId}.json`,
     })
 
     if (files.length === 0) {

@@ -2,7 +2,7 @@ import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { User } from '@entities/user'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { createAccessToken, createRefreshToken } from '@back/shared/lib/jwt'
+import { generateAccessToken, generateRefreshToken } from '@back/shared/lib/jwt'
 import { setRefreshTokenCookie } from '@back/shared/headers'
 import { UserModel } from '@back/entities/user'
 
@@ -31,9 +31,11 @@ export const activateRouter = Router()
 
 const activate: RouterHandler = async (req, res, next) => {
   try {
-    const activationKey = req.body.activationKey
+    const activationKeyFromInput = req.body.activationKey
 
-    const user = await UserModel.findOne({ activationKey })
+    const user = await UserModel.findOne({
+      activationKey: activationKeyFromInput,
+    })
 
     if (!user) {
       res
@@ -51,18 +53,18 @@ const activate: RouterHandler = async (req, res, next) => {
       return
     }
 
-    const refreshJwtToken = createRefreshToken({ email, roles })
+    const refreshJwtToken = generateRefreshToken({ email, roles })
     setRefreshTokenCookie({ res, refreshJwtToken })
 
     const userDocument = await UserModel.findOneAndUpdate(
-      { email, activationKey },
+      { email, activationKey: activationKeyFromInput },
       { refreshJwtToken, isActivated: true, loggedAt: Date.now() },
       { new: true },
     ).lean()
 
     res.status(httpStatus.success_200).json({
       message: 'activated',
-      accessJwtToken: createAccessToken({ email, roles }),
+      accessJwtToken: generateAccessToken({ email, roles }),
       email: userDocument?.email,
       roles: userDocument?.roles,
     })

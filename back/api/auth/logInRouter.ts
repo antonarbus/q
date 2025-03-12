@@ -5,8 +5,8 @@ import { httpStatus } from '@back/shared/consts/httpStatus'
 import { sendEmail } from '@back/shared/services/email'
 import { config } from '@back/config'
 import {
-  createAccessToken,
-  createRefreshToken,
+  generateAccessToken,
+  generateRefreshToken,
   getJwtExpirationInDays,
   verifyRefreshToken,
 } from '@back/shared/lib/jwt'
@@ -67,7 +67,7 @@ const logIn: RouterHandler = async (req, res, next) => {
       emailFromInput !== emailFromRefreshToken
 
     if (isSuperAdminOnBehalfOfUser) {
-      // just log in as user without password as you are a super-admin
+      // just log in as a user without password coz you are a super-admin
       // do not leave traces of login + opening quotations & bookmarks
 
       const isExistingRefreshJwtToken = Boolean(
@@ -76,15 +76,17 @@ const logIn: RouterHandler = async (req, res, next) => {
 
       const refreshJwtToken = isExistingRefreshJwtToken
         ? userFromDb.refreshJwtToken
-        : createRefreshToken({ email: emailFromInput, roles: userFromDb.roles })
+        : generateRefreshToken({
+            email: emailFromInput,
+            roles: userFromDb.roles,
+          })
 
       setRefreshTokenCookie({ res, refreshJwtToken })
-
       setNoTraceCookie({ res })
 
       res.status(httpStatus.success_200).json({
         message: 'super-admin on behalf of user',
-        accessJwtToken: createAccessToken({
+        accessJwtToken: generateAccessToken({
           email: emailFromInput,
           roles: userFromDb.roles,
         }),
@@ -98,6 +100,7 @@ const logIn: RouterHandler = async (req, res, next) => {
       return
     }
 
+    // normal login process
     const passwordFromDb = userFromDb.password
 
     if (!passwordFromDb) {
@@ -154,14 +157,9 @@ const logIn: RouterHandler = async (req, res, next) => {
       verifyRefreshToken(userFromDb.refreshJwtToken),
     )
 
-    const accessJwtToken = createAccessToken({
-      email: emailFromInput,
-      roles: userFromDb.roles,
-    })
-
     const refreshJwtToken = isExistingRefreshJwtToken
       ? userFromDb.refreshJwtToken
-      : createRefreshToken({ email: emailFromInput, roles: userFromDb.roles })
+      : generateRefreshToken({ email: emailFromInput, roles: userFromDb.roles })
 
     setRefreshTokenCookie({ res, refreshJwtToken })
 
@@ -181,6 +179,11 @@ const logIn: RouterHandler = async (req, res, next) => {
 
       return
     }
+
+    const accessJwtToken = generateAccessToken({
+      email: emailFromInput,
+      roles: userFromDb.roles,
+    })
 
     res.status(httpStatus.success_200).json({
       message: 'good password',

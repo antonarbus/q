@@ -2,7 +2,7 @@ import { Router, type Request, type Response, type NextFunction } from 'express'
 import bcrypt from 'bcryptjs'
 import type { User } from '@entities/user'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { createAccessToken, createRefreshToken } from '@back/shared/lib/jwt'
+import { generateAccessToken, generateRefreshToken } from '@back/shared/lib/jwt'
 import { setRefreshTokenCookie } from '@back/shared/headers'
 import { UserModel } from '@back/entities/user'
 
@@ -33,10 +33,14 @@ export const resetPasswordRouter = Router()
 
 const resetPassword: RouterHandler = async (req, res, next) => {
   try {
-    const email = req.body.email.toLowerCase()
-    const resetPasswordKey = req.body.resetPasswordKey
+    const emailFromInput = req.body.email.toLowerCase()
+    const passwordFromInput = req.body.password
+    const resetPasswordKeyFromInput = req.body.resetPasswordKey
 
-    const user = await UserModel.findOne({ email, resetPasswordKey }).lean()
+    const user = await UserModel.findOne({
+      email: emailFromInput,
+      resetPasswordKey: resetPasswordKeyFromInput,
+    }).lean()
 
     if (!user) {
       res
@@ -53,14 +57,28 @@ const resetPassword: RouterHandler = async (req, res, next) => {
     }
 
     const saltRounds = 10
-    const password = await bcrypt.hash(req.body.password, saltRounds)
-    const accessJwtToken = createAccessToken({ email, roles: user.roles })
-    const refreshJwtToken = createRefreshToken({ email, roles: user.roles })
+    const passwordEncrypted = await bcrypt.hash(passwordFromInput, saltRounds)
+
+    const accessJwtToken = generateAccessToken({
+      email: emailFromInput,
+      roles: user.roles,
+    })
+
+    const refreshJwtToken = generateRefreshToken({
+      email: emailFromInput,
+      roles: user.roles,
+    })
+
     setRefreshTokenCookie({ res, refreshJwtToken })
 
     const updatedUser = await UserModel.findOneAndUpdate(
-      { email, resetPasswordKey },
-      { password, refreshJwtToken, resetPasswordKey: '', loggedAt: Date.now() },
+      { email: emailFromInput, resetPasswordKey: resetPasswordKeyFromInput },
+      {
+        password: passwordEncrypted,
+        refreshJwtToken,
+        resetPasswordKey: '',
+        loggedAt: Date.now(),
+      },
       { new: true },
     ).lean()
 

@@ -30,9 +30,9 @@ export const requestPasswordResetRouter = Router()
 
 const requestPasswordReset: RouterHandler = async (req, res, next) => {
   try {
-    const email = req.body.email.toLowerCase()
+    const emailFromInput = req.body.email.toLowerCase()
 
-    const user = await UserModel.findOne({ email }).lean()
+    const user = await UserModel.findOne({ email: emailFromInput }).lean()
 
     if (!user) {
       res.status(httpStatus.forbidden_403).json({ message: 'does not exists' })
@@ -49,7 +49,7 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
     }
 
     const updatedUser = await UserModel.findOneAndUpdate(
-      { email },
+      { email: emailFromInput },
       { resetPasswordKey: nanoid(5) },
       { new: true },
     )
@@ -65,7 +65,7 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
     }
 
     const emailRes = await sendEmail({
-      to: email,
+      to: emailFromInput,
       subject: 'Password reset',
       html: `
         <p>Follow the link to reset the password.</p>
@@ -73,9 +73,9 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
         <p>
           <a
             clicktracking="off"
-            href="${config.front.baseUrl}/reset-password/${email}/${resetPasswordKey}"
+            href="${config.front.baseUrl}/reset-password/${emailFromInput}/${resetPasswordKey}"
           >
-            ${config.front.baseUrl}/reset-password/${email}/${resetPasswordKey}
+            ${config.front.baseUrl}/reset-password/${emailFromInput}/${resetPasswordKey}
           </a>
         </p>
       `,

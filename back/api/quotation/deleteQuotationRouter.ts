@@ -32,10 +32,12 @@ export const deleteQuotationRouter = Router()
 const deleteQuotation: RouterHandler = async (req, res, next) => {
   try {
     const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
+    const { id: quotationId } = req.body
 
-    const { id } = req.body
-
-    const deleteFromDbResult = await QuotationModel.deleteOne({ email, id })
+    const deleteFromDbResult = await QuotationModel.deleteOne({
+      email,
+      id: quotationId,
+    })
 
     if (deleteFromDbResult.deletedCount === 0) {
       res.status(httpStatus.notFound_404).json({ message: 'did not find' })
@@ -46,7 +48,7 @@ const deleteQuotation: RouterHandler = async (req, res, next) => {
     // const [files] = await bucket.getFiles({ prefix: `${email}/${id}/` })
     // await Promise.all(files.map(async file => await file.delete()))
 
-    const filePath = `${email}/${storageFolderName.quotations}/${id}.json`
+    const filePath = `${email}/${storageFolderName.quotations}/${quotationId}.json`
     const [{ statusCode }] = await bucket.file(filePath).delete()
 
     if (statusCode === 204) {

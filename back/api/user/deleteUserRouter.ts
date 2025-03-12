@@ -30,10 +30,12 @@ export const deleteUserRouter = Router()
 
 const deleteUser: RouterHandler = async (req, res, next) => {
   try {
+    const userEmailToBeDeleted = req.body.email
+
     const { email: emailFromToken, roles } =
       getUserFromAccessTokenOrThrowUnauthorized({ req })
 
-    const isOwner = emailFromToken === req.body.email
+    const isOwner = emailFromToken === userEmailToBeDeleted
     const isSuperAdmin = roles.includes(userRole.superAdmin)
 
     if (!isOwner && !isSuperAdmin) {
@@ -49,17 +51,17 @@ const deleteUser: RouterHandler = async (req, res, next) => {
     // delete from db
 
     const deleteUserResult = await UserModel.deleteOne({
-      email: req.body.email,
+      email: userEmailToBeDeleted,
     })
 
     if (deleteUserResult.deletedCount === 0) {
-      statistics.push(`${req.body.email} was not found in database ❌`)
+      statistics.push(`${userEmailToBeDeleted} was not found in database ❌`)
     } else {
-      statistics.push(`${req.body.email} was deleted from database ✅`)
+      statistics.push(`${userEmailToBeDeleted} was deleted from database ✅`)
     }
 
     const deleteQuotationsResult = await QuotationModel.deleteMany({
-      email: req.body.email,
+      email: userEmailToBeDeleted,
     })
 
     if (deleteQuotationsResult.deletedCount === 0) {
@@ -71,7 +73,7 @@ const deleteUser: RouterHandler = async (req, res, next) => {
     }
 
     const deleteBookmarksResult = await BookmarkModel.deleteMany({
-      email: req.body.email,
+      email: userEmailToBeDeleted,
     })
 
     if (deleteBookmarksResult.deletedCount === 0) {
@@ -85,7 +87,7 @@ const deleteUser: RouterHandler = async (req, res, next) => {
     // delete quotations from bucket
 
     const [quotationFiles] = await bucket.getFiles({
-      prefix: `${req.body.email}/${storageFolderName.quotations}/`,
+      prefix: `${userEmailToBeDeleted}/${storageFolderName.quotations}/`,
     })
 
     if (quotationFiles.length === 0) {
@@ -119,7 +121,7 @@ const deleteUser: RouterHandler = async (req, res, next) => {
     // delete bookmarks from bucket
 
     const [bookmarkFiles] = await bucket.getFiles({
-      prefix: `${req.body.email}/${storageFolderName.bookmarks}/`,
+      prefix: `${userEmailToBeDeleted}/${storageFolderName.bookmarks}/`,
     })
 
     if (bookmarkFiles.length === 0) {
@@ -153,7 +155,7 @@ const deleteUser: RouterHandler = async (req, res, next) => {
     // delete files from bucket
 
     const [files] = await bucket.getFiles({
-      prefix: `${req.body.email}/${storageFolderName.files}/`,
+      prefix: `${userEmailToBeDeleted}/${storageFolderName.files}/`,
     })
 
     if (files.length === 0) {

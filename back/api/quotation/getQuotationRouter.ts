@@ -34,14 +34,13 @@ export const getQuotationRouter = Router()
 
 const getQuotation: RouterHandler = async (req, res, next) => {
   try {
-    const { id } = req.body
-
+    const { id: quotationId } = req.body
     const isNoTraceMode = isNoTraceCookie({ req })
 
     const document = isNoTraceMode
-      ? await QuotationModel.findOne({ id }).lean()
+      ? await QuotationModel.findOne({ id: quotationId }).lean()
       : await QuotationModel.findOneAndUpdate(
-          { id },
+          { id: quotationId },
           { openedAt: Date.now() },
           { new: true },
         ).lean()
@@ -55,9 +54,7 @@ const getQuotation: RouterHandler = async (req, res, next) => {
     // this is probably not very good to do, but i am taking user information from refresh token here
     // with access token it does not serve the purpose here
     const { email, roles } = getUserFromRefreshToken({ req })
-
     const isOwner = email === document.email
-
     const isShared = (document.sharedWith ?? []).length !== 0
     const isSharedWithEverybody = (document.sharedWith ?? []).at(0) === '*'
     const isSharedWithPerson = (document.sharedWith ?? []).includes(email)
@@ -78,10 +75,8 @@ const getQuotation: RouterHandler = async (req, res, next) => {
       return
     }
 
-    const filePath = `${document.email}/${storageFolderName.quotations}/${id}.json`
-
+    const filePath = `${document.email}/${storageFolderName.quotations}/${quotationId}.json`
     const [fileBuffer] = await bucket.file(filePath).download()
-
     const quotation = jsonParseSafe<Quotation>(fileBuffer.toString())
 
     if (!quotation) {

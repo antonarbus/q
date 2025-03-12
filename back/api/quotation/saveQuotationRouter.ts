@@ -38,7 +38,6 @@ export const saveQuotationRouter = Router()
 const saveQuotation: RouterHandler = async (req, res, next) => {
   try {
     const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
-
     const { quotation } = req.body
 
     if (!quotation.id) {

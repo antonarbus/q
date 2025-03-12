@@ -2,7 +2,7 @@ import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { User } from '@entities/user'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { errorMessageCommon } from '@shared/consts/errorMessageCommon'
-import { createAccessToken } from '@back/shared/lib/jwt'
+import { generateAccessToken } from '@back/shared/lib/jwt'
 import { isNoTraceCookie, removeRefreshTokenCookie } from '@back/shared/headers'
 import { getUserFromRefreshTokenOrNull, UserModel } from '@back/entities/user'
 
@@ -49,7 +49,7 @@ const getAccessToken: RouterHandler = async (req, res, next) => {
       throw new Error(errorMessageCommon.notLoggedIn)
     }
 
-    const accessJwtToken = createAccessToken({ email, roles })
+    const accessJwtToken = generateAccessToken({ email, roles })
 
     res.status(httpStatus.success_200).json({
       message: 'issued access token',

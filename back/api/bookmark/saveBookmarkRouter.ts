@@ -34,10 +34,9 @@ export const saveBookmarkRouter = Router()
 const saveBookmark: RouterHandler = async (req, res, next) => {
   try {
     const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
+    const { item: bookmarkItem } = req.body
 
-    const { item } = req.body
-
-    if (!item.name) {
+    if (!bookmarkItem.name) {
       res
         .status(httpStatus.forbidden_403)
         .json({ message: 'name is not provided' })
@@ -45,7 +44,7 @@ const saveBookmark: RouterHandler = async (req, res, next) => {
       return
     }
 
-    if (!item.category) {
+    if (!bookmarkItem.category) {
       res
         .status(httpStatus.forbidden_403)
         .json({ message: 'category is not provided' })
@@ -53,7 +52,7 @@ const saveBookmark: RouterHandler = async (req, res, next) => {
       return
     }
 
-    if (!item.id) {
+    if (!bookmarkItem.id) {
       res
         .status(httpStatus.forbidden_403)
         .json({ message: 'id is not provided' })
@@ -63,23 +62,23 @@ const saveBookmark: RouterHandler = async (req, res, next) => {
 
     const existingItem = await BookmarkModel.findOne({
       email,
-      id: item.id,
+      id: bookmarkItem.id,
     })
 
     const isNew = existingItem === null
 
     const itemDataFromDb = await BookmarkModel.findOneAndUpdate(
       {
-        id: item.id,
+        id: bookmarkItem.id,
         email,
       },
       {
-        id: item.id,
+        id: bookmarkItem.id,
         email,
-        type: item.type,
-        name: item.name,
-        category: item.category,
-        desc: item.desc,
+        type: bookmarkItem.type,
+        name: bookmarkItem.name,
+        category: bookmarkItem.category,
+        desc: bookmarkItem.desc,
         updatedAt: Date.now(),
         ...(isNew && { createdAt: Date.now() }),
       },
@@ -88,14 +87,20 @@ const saveBookmark: RouterHandler = async (req, res, next) => {
       .select({ _id: 0, __v: 0 })
       .lean()
 
-    const filePath = `${email}/${storageFolderName.bookmarks}/${item.id}.json`
+    const filePath = `${email}/${storageFolderName.bookmarks}/${bookmarkItem.id}.json`
     const file = bucket.file(filePath)
-    const contents = JSON.stringify({ ...itemDataFromDb, ...item }, null, 2)
+
+    const contents = JSON.stringify(
+      { ...itemDataFromDb, ...bookmarkItem },
+      null,
+      2,
+    )
+
     await file.save(contents)
 
     res.status(httpStatus.success_200).json({
       message: isNew ? 'saved' : 'updated',
-      item: { ...itemDataFromDb, ...item },
+      item: { ...itemDataFromDb, ...bookmarkItem },
     })
   } catch (error) {
     next(error)

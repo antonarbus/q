@@ -25,6 +25,9 @@ type RouterHandler = (
 export const countUniqueDailyVisitorsRouter = Router()
 
 const incrementUniqueDailyVisitor: RouterHandler = async (req, res, next) => {
+  const today = req.body.date
+  const isNew = req.body.isNew
+
   try {
     // do not distort statistics by tests
     if (req.headers[headerName.playwrightTest] === 'true') {
@@ -32,11 +35,11 @@ const incrementUniqueDailyVisitor: RouterHandler = async (req, res, next) => {
     }
 
     const visitorsCount = await VisitorsCountModel.findOneAndUpdate(
-      { date: req.body.date },
+      { date: today },
       {
         $inc: {
           count: 1,
-          new: req.body.isNew ? 1 : 0,
+          new: isNew ? 1 : 0,
         },
       },
       { upsert: true, new: true },

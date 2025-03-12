@@ -31,9 +31,13 @@ export const registerRouter = Router()
 
 const register: RouterHandler = async (req, res, next) => {
   try {
-    const email = req.body.email.toLowerCase()
+    const emailFromInput = req.body.email.toLowerCase()
+    const passwordFromInput = req.body.password
 
-    const user = await UserModel.findOne({ email, isActivated: true }).lean()
+    const user = await UserModel.findOne({
+      email: emailFromInput,
+      isActivated: true,
+    }).lean()
 
     if (user) {
       res.status(httpStatus.forbidden_403).json({ message: 'already exists' })
@@ -42,11 +46,15 @@ const register: RouterHandler = async (req, res, next) => {
     }
 
     const saltRounds = 10
-    const password = await bcrypt.hash(req.body.password, saltRounds)
+    const passwordEncrypted = await bcrypt.hash(passwordFromInput, saltRounds)
 
     const newUser = await UserModel.findOneAndUpdate(
-      { email },
-      { password, activationKey: nanoid(5), registeredAt: new Date() },
+      { email: emailFromInput },
+      {
+        password: passwordEncrypted,
+        activationKey: nanoid(5),
+        registeredAt: new Date(),
+      },
       { new: true, upsert: true },
     )
 
@@ -61,7 +69,7 @@ const register: RouterHandler = async (req, res, next) => {
     }
 
     const emailRes = await sendEmail({
-      to: email,
+      to: emailFromInput,
       subject: 'Activate your account',
       html: `
         <p>Follow the link to activate the account.</p>

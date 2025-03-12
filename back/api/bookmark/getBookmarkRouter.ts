@@ -25,11 +25,9 @@ export const getBookmarkRouter = Router()
 
 const getBookmark: RouterHandler = async (req, res, next) => {
   try {
-    const { id } = req.body
-
+    const bookmarkId = req.body.id
     const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
-
-    const document = await BookmarkModel.findOne({ email, id })
+    const document = await BookmarkModel.findOne({ email, id: bookmarkId })
 
     if (!document) {
       res.status(httpStatus.notFound_404).json({ message: 'not found' })
@@ -37,12 +35,9 @@ const getBookmark: RouterHandler = async (req, res, next) => {
       return
     }
 
-    const filePath = `${email}/${storageFolderName.bookmarks}/${id}.json`
-
+    const filePath = `${email}/${storageFolderName.bookmarks}/${bookmarkId}.json`
     const [fileBuffer] = await bucket.file(filePath).download()
-
     const fileAsString = fileBuffer.toString()
-
     const item = jsonParseSafe<Item>(fileAsString)
 
     if (!item) {
