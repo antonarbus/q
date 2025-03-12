@@ -51,6 +51,33 @@ export const downloadPdf = async (): Promise<void> => {
     },
   })
 
+  const linkElements =
+    blocksContainerElement.querySelectorAll('.editable-html a')
+
+  const links: {
+    url: string
+    x: number
+    y: number
+    width: number
+    height: number
+  }[] = []
+
+  linkElements.forEach((linkElement) => {
+    if (linkElement instanceof HTMLLinkElement) {
+      const linkRect = linkElement.getBoundingClientRect()
+      const blocksContainerRect = blocksContainerElement.getBoundingClientRect()
+      const offsetX = (maxPaperWidth - blocksContainerRect.width) / 2
+
+      links.push({
+        url: linkElement.href,
+        x: linkRect.left - blocksContainerRect.left + offsetX,
+        y: linkRect.top - blocksContainerRect.top,
+        width: linkRect.width,
+        height: linkRect.height,
+      })
+    }
+  })
+
   const worker = new Worker(new URL('./pdfWorker', import.meta.url), {
     type: 'module',
   })
@@ -59,6 +86,7 @@ export const downloadPdf = async (): Promise<void> => {
     imageData: screenshot,
     width: maxPaperWidth,
     height: blocksContainerElement.clientHeight,
+    links,
   })
 
   worker.onmessage = (event: MessageEvent<Blob>): void => {
