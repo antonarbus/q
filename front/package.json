@@ -23,6 +23,7 @@
     "bytes": "^3.1.2",
     "chart.js": "^4.4.8",
     "date-fns": "^4.1.0",
+    "exceljs": "^4.4.0",
     "froala-editor": "^4.5.0",
     "hamburger-react": "^2.5.2",
     "immer": "^10.1.1",

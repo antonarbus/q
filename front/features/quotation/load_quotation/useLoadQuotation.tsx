@@ -47,6 +47,7 @@ export function useLoadQuotation(): void {
         navItemIdKeys: [
           navItemKey.save,
           navItemKey.pdf,
+          navItemKey.excel,
           navItemKey.share,
           navItemKey.insert,
         ],
@@ -154,6 +155,7 @@ export function useLoadQuotation(): void {
             navItemIdKeys: [
               navItemKey.save,
               navItemKey.pdf,
+              navItemKey.excel,
               navItemKey.share,
               navItemKey.insert,
             ],

@@ -10,7 +10,7 @@ import {
 } from 'react-icons/io5'
 import { MdSaveAlt } from 'react-icons/md'
 import { PiFolderSimpleStarDuotone } from 'react-icons/pi'
-import { RiMenuAddFill, RiAdminLine } from 'react-icons/ri'
+import { RiMenuAddFill, RiAdminLine, RiFileExcel2Line } from 'react-icons/ri'
 import { TbRectangleVertical } from 'react-icons/tb'
 import { VscNewFile } from 'react-icons/vsc'
 import {
@@ -28,10 +28,11 @@ import {
 import { openQuotationsPage } from '@features/open_close/open_quotations_page'
 import { openQuotationModal } from '@features/open_close/open_quotation_modal'
 import { openSettingsModal } from '@features/open_close/open_settings_modal'
-import { downloadPdf } from '@features/quotation/pdf'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { route } from '@shared/consts/route'
 import type { MenuItemType } from '@shared/nav'
+import { downloadPdf } from '@features/quotation/download_quotation_as_pdf'
+import { downloadExcel } from '@features/quotation/download_quotation_as_excel'
 
 export const navStructure: MenuItemType[] = [
   {
@@ -92,6 +93,17 @@ export const navStructure: MenuItemType[] = [
           void downloadPdf()
         },
         tooltip: 'Save as .pdf',
+      },
+      {
+        id: navItemKey.excel,
+        icon: <RiFileExcel2Line data-testid='excel icon' />,
+        isHidden: false,
+        name: 'Excel',
+        disabled: true,
+        func: (): void => {
+          downloadExcel()
+        },
+        tooltip: 'Save as .xlsx',
       },
       {
         id: navItemKey.insert,

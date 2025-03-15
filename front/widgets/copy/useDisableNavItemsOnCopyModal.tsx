@@ -26,6 +26,7 @@ export const useDisableNavItemsOnCopyModal = (): void => {
           exceptNavItemIdKeys: [
             navItemKey.save,
             navItemKey.pdf,
+            navItemKey.excel,
             navItemKey.insert,
             navItemKey.bookmarks,
           ],
@@ -41,6 +42,7 @@ export const useDisableNavItemsOnCopyModal = (): void => {
           exceptNavItemIdKeys: [
             navItemKey.save,
             navItemKey.pdf,
+            navItemKey.excel,
             navItemKey.insert,
             navItemKey.quotations,
           ],

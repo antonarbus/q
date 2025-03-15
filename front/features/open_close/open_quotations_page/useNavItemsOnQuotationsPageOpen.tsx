@@ -10,6 +10,7 @@ export const useNavItemsOnQuotationsPageOpen = (): void => {
         navItemIdKeys: [
           navItemKey.save,
           navItemKey.pdf,
+          navItemKey.excel,
           navItemKey.share,
           navItemKey.quotations,
           navItemKey.insert,

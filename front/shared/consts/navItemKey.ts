@@ -4,6 +4,7 @@ export const navItemKey = {
   new: 'new',
   save: 'save',
   pdf: 'pdf',
+  excel: 'excel',
   share: 'share',
   insert: 'insert',
   quotations: 'quotations',

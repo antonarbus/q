@@ -1,19 +1,11 @@
 import { jsPDF } from 'jspdf'
+import type { WorkerRequestMessage } from './downloadPdf'
 
-self.onmessage = (
-  event: MessageEvent<{
-    imageData: string
-    width: number
-    height: number
-    links?: {
-      url: string
-      x: number
-      y: number
-      width: number
-      height: number
-    }[]
-  }>,
-): void => {
+export type WorkerResponseMessage = {
+  pdfBlob: Blob
+}
+
+self.onmessage = (event: MessageEvent<WorkerRequestMessage>): void => {
   const { imageData, width, height, links } = event.data
 
   const pdf = new jsPDF({
@@ -22,9 +14,11 @@ self.onmessage = (
     format: [width, height],
   })
 
+  // add quotation as image
   pdf.addImage(imageData, 'PNG', 0, 0, width, height, undefined, 'FAST')
 
-  links?.forEach((link) => {
+  // add real links on top of image
+  links.forEach((link) => {
     // // make border around link for dev purposes
     // pdf.setDrawColor(255, 0, 0) // Red border
     // pdf.setLineWidth(1)
@@ -32,6 +26,9 @@ self.onmessage = (
     pdf.link(link.x, link.y, link.width, link.height, { url: link.url })
   })
 
-  const blob = pdf.output('blob')
-  self.postMessage(blob)
+  const pdfBlob = pdf.output('blob')
+
+  const workerResponseMessage: WorkerResponseMessage = { pdfBlob }
+
+  self.postMessage(workerResponseMessage)
 }

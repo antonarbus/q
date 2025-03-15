@@ -3,11 +3,29 @@ import { domToJpeg } from 'modern-screenshot'
 import { cls } from '@shared/consts/cls'
 import { createActor } from 'xstate'
 import { pdfLoadingIconMachine } from './pdfLoadingIconMachine'
+import type { WorkerResponseMessage } from './pdfWorker'
+
+export type WorkerRequestMessage = {
+  imageData: string
+  width: number
+  height: number
+  links: {
+    url: string
+    x: number
+    y: number
+    width: number
+    height: number
+  }[]
+}
 
 const pdfLoadingIconActor = createActor(pdfLoadingIconMachine).start()
 
 export const downloadPdf = async (): Promise<void> => {
   pdfLoadingIconActor.send({ type: 'show loading icon' })
+
+  const worker = new Worker(new URL('./pdfWorker', import.meta.url), {
+    type: 'module',
+  })
 
   const blocksContainerElement = document.querySelector(`.${cls.blocks}`)
 
@@ -28,7 +46,7 @@ export const downloadPdf = async (): Promise<void> => {
       return maxWidth
     }, 0) + 40
 
-  const screenshot = await domToJpeg(blocksContainerElement, {
+  const quotationScreenshot = await domToJpeg(blocksContainerElement, {
     width: maxPaperWidth,
     height: blocksContainerElement.clientHeight,
     backgroundColor: 'grey',
@@ -54,13 +72,7 @@ export const downloadPdf = async (): Promise<void> => {
   const linkElements =
     blocksContainerElement.querySelectorAll('.editable-html a')
 
-  const links: {
-    url: string
-    x: number
-    y: number
-    width: number
-    height: number
-  }[] = []
+  const links: WorkerRequestMessage['links'] = []
 
   linkElements.forEach((linkElement) => {
     if (linkElement instanceof HTMLAnchorElement) {
@@ -78,28 +90,26 @@ export const downloadPdf = async (): Promise<void> => {
     }
   })
 
-  const worker = new Worker(new URL('./pdfWorker', import.meta.url), {
-    type: 'module',
-  })
-
-  worker.postMessage({
-    imageData: screenshot,
+  const workerRequestMessage: WorkerRequestMessage = {
+    imageData: quotationScreenshot,
     width: maxPaperWidth,
     height: blocksContainerElement.clientHeight,
     links,
-  })
+  }
 
-  worker.onmessage = (event: MessageEvent<Blob>): void => {
-    const blobImage = event.data
-    const pdfDataUrl = URL.createObjectURL(blobImage)
+  worker.postMessage(workerRequestMessage)
+
+  worker.onmessage = (event: MessageEvent<WorkerResponseMessage>): void => {
+    const { pdfBlob } = event.data
+    const pdfUrl = URL.createObjectURL(pdfBlob)
     const downloadLink = document.createElement('a')
-    downloadLink.href = pdfDataUrl
+    downloadLink.href = pdfUrl
     const quotationId = getState().quotation.id
     downloadLink.download = `quotation - ${quotationId}.pdf`
     document.body.appendChild(downloadLink)
     downloadLink.click()
     document.body.removeChild(downloadLink)
-    URL.revokeObjectURL(pdfDataUrl) // revoke the data URL to free up resources
+    URL.revokeObjectURL(pdfUrl)
 
     setTimeout(() => {
       pdfLoadingIconActor.send({ type: 'show success icon' })

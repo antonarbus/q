@@ -10,6 +10,7 @@ export const useNavItemsOnBookmarksPageOpen = (): void => {
         navItemIdKeys: [
           navItemKey.save,
           navItemKey.pdf,
+          navItemKey.excel,
           navItemKey.share,
           navItemKey.bookmarks,
           navItemKey.insert,
