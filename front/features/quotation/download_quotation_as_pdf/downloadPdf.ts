@@ -1,5 +1,4 @@
 import { getState } from '@shared/lib/redux'
-import { domToJpeg } from 'modern-screenshot'
 import { cls } from '@shared/consts/cls'
 import { createActor } from 'xstate'
 import { pdfLoadingIconMachine } from './pdfLoadingIconMachine'
@@ -45,6 +44,8 @@ export const downloadPdf = async (): Promise<void> => {
 
       return maxWidth
     }, 0) + 40
+
+  const { domToJpeg } = await import('modern-screenshot')
 
   const quotationScreenshot = await domToJpeg(blocksContainerElement, {
     width: maxPaperWidth,
