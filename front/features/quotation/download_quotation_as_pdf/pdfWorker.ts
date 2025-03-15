@@ -1,12 +1,16 @@
-import { jsPDF } from 'jspdf'
+// import { jsPDF } from 'jspdf'
 import type { WorkerRequestMessage } from './downloadPdf'
 
 export type WorkerResponseMessage = {
   pdfBlob: Blob
 }
 
-self.onmessage = (event: MessageEvent<WorkerRequestMessage>): void => {
+self.onmessage = async (
+  event: MessageEvent<WorkerRequestMessage>,
+): Promise<void> => {
   const { imageData, width, height, links } = event.data
+
+  const { jsPDF } = await import('jspdf')
 
   const pdf = new jsPDF({
     orientation: width > height ? 'landscape' : 'portrait',

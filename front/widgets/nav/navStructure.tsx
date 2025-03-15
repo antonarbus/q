@@ -1,5 +1,4 @@
 import { Person, Settings } from '@mui/icons-material'
-import { BsFiletypePdf } from 'react-icons/bs'
 import { CiViewTable } from 'react-icons/ci'
 import { FaRegRectangleList, FaGripLines, FaUsersGear } from 'react-icons/fa6'
 import { FiLogOut, FiLogIn, FiDollarSign } from 'react-icons/fi'
@@ -33,6 +32,7 @@ import { route } from '@shared/consts/route'
 import type { MenuItemType } from '@shared/nav'
 import { downloadPdf } from '@features/quotation/download_quotation_as_pdf'
 import { downloadExcel } from '@features/quotation/download_quotation_as_excel'
+import { FaRegFilePdf } from 'react-icons/fa'
 
 export const navStructure: MenuItemType[] = [
   {
@@ -85,7 +85,7 @@ export const navStructure: MenuItemType[] = [
       },
       {
         id: navItemKey.pdf,
-        icon: <BsFiletypePdf data-testid='pdf icon' />,
+        icon: <FaRegFilePdf data-testid='pdf icon' />,
         isHidden: false,
         name: 'Pdf',
         disabled: true,
