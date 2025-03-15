@@ -33,7 +33,7 @@ export const AccessToken = (): React.JSX.Element => {
   // show jumping dots at table
   useUpdateEffect(() => {
     if (isFetching) {
-      showLoadingNavIcon({ navMenuItemIdKey: navItemKey.login })
+      showLoadingNavIcon({ navItemKey: navItemKey.login })
 
       dispatch(
         agGridSlice.actions.showLoadingOverlay({
@@ -96,7 +96,7 @@ export const AccessToken = (): React.JSX.Element => {
 
       dispatch(
         navSlice.actions.stopLoadingIcon({
-          navMenuItemIdKey: navItemKey.login,
+          navItemKey: navItemKey.login,
         }),
       )
 
@@ -127,7 +127,7 @@ export const AccessToken = (): React.JSX.Element => {
 
       dispatch(
         navSlice.actions.stopLoadingIcon({
-          navMenuItemIdKey: navItemKey.login,
+          navItemKey: navItemKey.login,
         }),
       )
 

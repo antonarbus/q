@@ -57,7 +57,7 @@ export const useSaveQuotation = ({
 
   useUpdateEffect(() => {
     if (isPending) {
-      showLoadingNavIcon({ navMenuItemIdKey: navItemKey.save })
+      showLoadingNavIcon({ navItemKey: navItemKey.save })
     }
   }, [isPending])
 
@@ -87,7 +87,7 @@ export const useSaveQuotation = ({
           }),
         )
 
-        showSuccessNavIcon({ navMenuItemIdKey: navItemKey.save })
+        showSuccessNavIcon({ navItemKey: navItemKey.save })
 
         dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
@@ -122,7 +122,7 @@ export const useSaveQuotation = ({
     if (isError) {
       toast.error(error.response?.data.message)
 
-      showErrorNavIcon({ navMenuItemIdKey: navItemKey.save })
+      showErrorNavIcon({ navItemKey: navItemKey.save })
       reset()
     }
   }, [isError])

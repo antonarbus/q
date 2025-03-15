@@ -1,8 +1,9 @@
 import { getState } from '@shared/lib/redux'
 import { cls } from '@shared/consts/cls'
 import { createActor } from 'xstate'
-import { pdfLoadingIconMachine } from './pdfLoadingIconMachine'
 import type { WorkerResponseMessage } from './pdfWorker'
+import { navItemKey } from '@shared/consts/navItemKey'
+import { createLoadingMenuIconMachine } from '@shared/nav'
 
 export type WorkerRequestMessage = {
   imageData: string
@@ -17,7 +18,11 @@ export type WorkerRequestMessage = {
   }[]
 }
 
-const pdfLoadingIconActor = createActor(pdfLoadingIconMachine).start()
+const loadingMenuIconMachine = createLoadingMenuIconMachine({
+  navItemKey: navItemKey.pdf,
+})
+
+const pdfLoadingIconActor = createActor(loadingMenuIconMachine).start()
 
 export const downloadPdf = async (): Promise<void> => {
   pdfLoadingIconActor.send({ type: 'show loading icon' })

@@ -1,5 +1,4 @@
 import type { MouseEvent } from 'react'
-import type { navItemKey } from '../../consts/navItemKey'
 
 export type MenuItemType = {
   id: string
@@ -18,10 +17,10 @@ export type MenuItemType = {
   tooltip?: string
 }
 
-export type NavItemIdKey = keyof typeof navItemKey
-
 export type NavItemsMediaQueryWidths = {
   icon: number
   name: number
   burger: number
 }
+
+export type { NavItemKey } from '../../consts/navItemKey'

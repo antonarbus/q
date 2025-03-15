@@ -1,10 +1,6 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { setMenuItemPropValue } from './setMenuItemPropValue'
-import type {
-  MenuItemType,
-  NavItemIdKey,
-  NavItemsMediaQueryWidths,
-} from './type'
+import type { MenuItemType, NavItemKey, NavItemsMediaQueryWidths } from './type'
 
 const initialState = {
   navStructure: [] as MenuItemType[],
@@ -88,14 +84,14 @@ export const navSlice = createSlice({
     startLoadingIcon: (
       state,
       action: PayloadAction<{
-        navMenuItemIdKey: NavItemIdKey
+        navItemKey: NavItemKey
       }>,
     ) => {
-      const { navMenuItemIdKey } = action.payload
+      const { navItemKey } = action.payload
 
       setMenuItemPropValue({
         menu: state.navStructure,
-        navItemIdKey: navMenuItemIdKey,
+        navItemIdKey: navItemKey,
         prop: 'isLoading',
         value: true,
       })
@@ -103,14 +99,14 @@ export const navSlice = createSlice({
     stopLoadingIcon: (
       state,
       action: PayloadAction<{
-        navMenuItemIdKey: NavItemIdKey
+        navItemKey: NavItemKey
       }>,
     ) => {
-      const { navMenuItemIdKey } = action.payload
+      const { navItemKey } = action.payload
 
       setMenuItemPropValue({
         menu: state.navStructure,
-        navItemIdKey: navMenuItemIdKey,
+        navItemIdKey: navItemKey,
         prop: 'isLoading',
         value: false,
       })
@@ -118,14 +114,14 @@ export const navSlice = createSlice({
     showSuccessIcon: (
       state,
       action: PayloadAction<{
-        navMenuItemIdKey: NavItemIdKey
+        navItemKey: NavItemKey
       }>,
     ) => {
-      const { navMenuItemIdKey } = action.payload
+      const { navItemKey } = action.payload
 
       setMenuItemPropValue({
         menu: state.navStructure,
-        navItemIdKey: navMenuItemIdKey,
+        navItemIdKey: navItemKey,
         prop: 'isSuccess',
         value: true,
       })
@@ -133,14 +129,14 @@ export const navSlice = createSlice({
     hideSuccessIcon: (
       state,
       action: PayloadAction<{
-        navMenuItemIdKey: NavItemIdKey
+        navItemKey: NavItemKey
       }>,
     ) => {
-      const { navMenuItemIdKey } = action.payload
+      const { navItemKey } = action.payload
 
       setMenuItemPropValue({
         menu: state.navStructure,
-        navItemIdKey: navMenuItemIdKey,
+        navItemIdKey: navItemKey,
         prop: 'isSuccess',
         value: false,
       })
@@ -148,14 +144,14 @@ export const navSlice = createSlice({
     showErrorIcon: (
       state,
       action: PayloadAction<{
-        navMenuItemIdKey: NavItemIdKey
+        navItemKey: NavItemKey
       }>,
     ) => {
-      const { navMenuItemIdKey } = action.payload
+      const { navItemKey } = action.payload
 
       setMenuItemPropValue({
         menu: state.navStructure,
-        navItemIdKey: navMenuItemIdKey,
+        navItemIdKey: navItemKey,
         prop: 'isError',
         value: true,
       })
@@ -163,14 +159,14 @@ export const navSlice = createSlice({
     hideErrorIcon: (
       state,
       action: PayloadAction<{
-        navMenuItemIdKey: NavItemIdKey
+        navItemKey: NavItemKey
       }>,
     ) => {
-      const { navMenuItemIdKey } = action.payload
+      const { navItemKey } = action.payload
 
       setMenuItemPropValue({
         menu: state.navStructure,
-        navItemIdKey: navMenuItemIdKey,
+        navItemIdKey: navItemKey,
         prop: 'isError',
         value: false,
       })
@@ -179,7 +175,7 @@ export const navSlice = createSlice({
       state,
       action: PayloadAction<
         | {
-            exceptNavItemIdKeys?: NavItemIdKey[]
+            exceptNavItemIdKeys?: NavItemKey[]
           }
         | undefined
       >,
@@ -194,7 +190,7 @@ export const navSlice = createSlice({
 
       const topNavItemsIds = topLevelNavMenu.menuItems?.map(
         (menuItem) => menuItem.id,
-      ) as NavItemIdKey[]
+      ) as NavItemKey[]
 
       topNavItemsIds.forEach((id) => {
         if (exceptNavItemIdKeys.includes(id)) {
@@ -213,7 +209,7 @@ export const navSlice = createSlice({
       state,
       action: PayloadAction<
         | {
-            exceptNavItemIdKeys?: NavItemIdKey[]
+            exceptNavItemIdKeys?: NavItemKey[]
           }
         | undefined
       >,
@@ -228,7 +224,7 @@ export const navSlice = createSlice({
 
       const topNavItemsIds = topLevelNavMenu.menuItems?.map(
         (menuItem) => menuItem.id,
-      ) as NavItemIdKey[]
+      ) as NavItemKey[]
 
       topNavItemsIds.forEach((id) => {
         if (exceptNavItemIdKeys.includes(id)) {
@@ -246,7 +242,7 @@ export const navSlice = createSlice({
     disableNavItems: (
       state,
       action: PayloadAction<{
-        navItemIdKeys: NavItemIdKey[]
+        navItemIdKeys: NavItemKey[]
       }>,
     ) => {
       const { navItemIdKeys } = action.payload
@@ -263,7 +259,7 @@ export const navSlice = createSlice({
     enableNavItems: (
       state,
       action: PayloadAction<{
-        navItemIdKeys?: NavItemIdKey[]
+        navItemIdKeys?: NavItemKey[]
       }>,
     ) => {
       const { navItemIdKeys } = action.payload
@@ -280,7 +276,7 @@ export const navSlice = createSlice({
     hideNavItems: (
       state,
       action: PayloadAction<{
-        navItemIdKeys: NavItemIdKey[]
+        navItemIdKeys: NavItemKey[]
       }>,
     ) => {
       const { navItemIdKeys } = action.payload
@@ -297,7 +293,7 @@ export const navSlice = createSlice({
     showNavItems: (
       state,
       action: PayloadAction<{
-        navItemIdKeys: NavItemIdKey[]
+        navItemIdKeys: NavItemKey[]
       }>,
     ) => {
       const { navItemIdKeys } = action.payload
@@ -320,7 +316,7 @@ export const navSlice = createSlice({
 
       const topNavItemsIds = topLevelNavMenu.menuItems?.map(
         (menuItem) => menuItem.id,
-      ) as NavItemIdKey[]
+      ) as NavItemKey[]
 
       topNavItemsIds.forEach((id) => {
         setMenuItemPropValue({
@@ -334,7 +330,7 @@ export const navSlice = createSlice({
     underlineNavItem: (
       state,
       action: PayloadAction<{
-        navItemIdKey: NavItemIdKey
+        navItemIdKey: NavItemKey
       }>,
     ) => {
       const { navItemIdKey } = action.payload

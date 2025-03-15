@@ -23,3 +23,5 @@ export const navItemKey = {
   users: 'users',
   visitors: 'visitors',
 } as const
+
+export type NavItemKey = (typeof navItemKey)[keyof typeof navItemKey]
