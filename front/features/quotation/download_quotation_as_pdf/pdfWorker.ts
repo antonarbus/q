@@ -1,4 +1,3 @@
-// import { jsPDF } from 'jspdf'
 import type { WorkerRequestMessage } from './downloadPdf'
 
 export type WorkerResponseMessage = {
