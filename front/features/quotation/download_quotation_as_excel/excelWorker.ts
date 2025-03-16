@@ -1,4 +1,5 @@
 import type { WorkerRequestMessage } from './downloadExcel'
+import striptags from 'striptags'
 
 export type WorkerResponseMessage = {
   excelBlob: Blob
@@ -9,34 +10,60 @@ self.onmessage = async (
 ): Promise<void> => {
   const quotation = event.data.quotation
 
+  // www.npmjs.com/package/exceljs#contents
   const ExcelJS = await import('exceljs')
   const workbook = new ExcelJS.Workbook()
+
   const worksheet = workbook.addWorksheet(`Quotation ${quotation.id}`)
 
-  worksheet.getCell('A1').value = 'Under development'
+  let rowNumber = 1
+  const rowBlockNumber = 1
 
-  let rowNumber = 2
+  worksheet.getCell(`A${rowNumber}`).value = `Quotation ${quotation.id}`
+
+  rowNumber = 3
 
   for (const block of quotation.blocks) {
     if (block.type === 'text') {
-      worksheet.getCell(`A${rowNumber}`).value = 'text block'
-      rowNumber++
+      worksheet.getCell(`A${rowNumber}`).value = striptags(block.text.html)
     }
 
     if (block.type === 'boq') {
-      worksheet.getCell(`A${rowNumber}`).value = 'boq block'
+      worksheet.getCell(`A${rowNumber}`).value = striptags(
+        block.boq.header.title.html,
+      )
+
       rowNumber++
 
+      let rowBoqNumber = 1
+
       for (const row of block.boq.rows) {
-        worksheet.getCell(`A${rowNumber}`).value = 'row'
+        worksheet.getCell(`A${rowNumber}`).value =
+          `${rowBlockNumber}.${rowBoqNumber}`
+
+        worksheet.getCell(`B${rowNumber}`).value = striptags(
+          row.description.html,
+        )
+
+        worksheet.getCell(`C${rowNumber}`).value = striptags(row.itemPrice.html)
+
+        worksheet.getCell(`D${rowNumber}`).value = striptags(row.qty.html)
+
+        worksheet.getCell(`E${rowNumber}`).value = striptags(row.price.html)
+
         rowNumber++
+        rowBoqNumber++
       }
     }
 
     if (block.type === 'price') {
-      worksheet.getCell(`A${rowNumber}`).value = 'price block'
+      worksheet.getCell(`A${rowNumber}`).value = striptags(block.title.html)
+      rowNumber++
+      worksheet.getCell(`A${rowNumber}`).value = striptags(block.price.html)
       rowNumber++
     }
+
+    rowNumber += 2
   }
 
   const buffer = await workbook.xlsx.writeBuffer()
