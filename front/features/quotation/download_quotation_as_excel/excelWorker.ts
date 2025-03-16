@@ -7,9 +7,9 @@ export type WorkerResponseMessage = {
 self.onmessage = async (
   event: MessageEvent<WorkerRequestMessage>,
 ): Promise<void> => {
-  const ExcelJS = await import('exceljs')
   const quotation = event.data.quotation
-  console.log('🚀 ~ quotation:', quotation)
+
+  const ExcelJS = await import('exceljs')
   const workbook = new ExcelJS.Workbook()
   const worksheet = workbook.addWorksheet(`Quotation ${quotation.id}`)
 
