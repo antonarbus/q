@@ -1,11 +1,13 @@
-import { getState } from '@shared/lib/redux'
 import type { WorkerResponseMessage } from './excelWorker'
 import { createLoadingMenuIconMachine } from '@shared/nav'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { createActor } from 'xstate'
+import { getState } from '@shared/lib/redux'
+import type { Quotation } from '@entities/quotation'
 
 export type WorkerRequestMessage = {
   msg: 'send me excel'
+  quotation: Quotation
 }
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
@@ -23,6 +25,7 @@ export const downloadExcel = (): void => {
 
   const workerRequestMessage: WorkerRequestMessage = {
     msg: 'send me excel',
+    quotation: getState().quotation,
   }
 
   worker.postMessage(workerRequestMessage)
