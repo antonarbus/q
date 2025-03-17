@@ -148,7 +148,7 @@ export const useLogIn = ({
         return
       }
 
-      if (error.response?.data.message === 'activation link sent') {
+      if (error.response?.data.message === 'activation link sent again') {
         toast.info(
           'Account registered but not activated. Check mailbox or spam.',
         )

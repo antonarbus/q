@@ -29,7 +29,7 @@ export type ResBody = {
     | 'not registered'
     | 'no password'
     | 'bad password'
-    | 'activation link sent'
+    | 'activation link sent again'
     | 'activation link not sent'
     | 'good password'
     | 'super-admin on behalf of user'
@@ -123,8 +123,9 @@ const logIn: RouterHandler = async (req, res, next) => {
     if (!userFromDb.isActivated) {
       const emailRes = await sendEmail({
         to: emailFromInput,
-        subject: 'Activate your account',
+        subject: 'Activate your account again',
         html: `
+          <p>Looks you did not activate your account during registration.</p>
           <p>Follow the link to activate the account.</p>
           <br>
           <p>
@@ -141,7 +142,7 @@ const logIn: RouterHandler = async (req, res, next) => {
       if (emailRes?.[0].statusCode === 202) {
         res
           .status(httpStatus.forbidden_403)
-          .json({ message: 'activation link sent' })
+          .json({ message: 'activation link sent again' })
 
         return
       }
