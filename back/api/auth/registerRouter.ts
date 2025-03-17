@@ -47,20 +47,19 @@ const register: RouterHandler = async (req, res, next) => {
 
     const saltRounds = 10
     const passwordEncrypted = await bcrypt.hash(passwordFromInput, saltRounds)
+    const activationKey = nanoid(5)
 
     const newUser = await UserModel.findOneAndUpdate(
       { email: emailFromInput },
       {
         password: passwordEncrypted,
-        activationKey: nanoid(5),
+        activationKey,
         registeredAt: new Date(),
       },
       { new: true, upsert: true },
-    )
+    ).lean()
 
-    const activationKey = newUser.activationKey
-
-    if (!activationKey) {
+    if (newUser.activationKey !== activationKey) {
       res
         .status(httpStatus.serverError_500)
         .json({ message: 'activation key not issued' })
