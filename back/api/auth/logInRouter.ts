@@ -125,7 +125,7 @@ const logIn: RouterHandler = async (req, res, next) => {
         to: emailFromInput,
         subject: 'Activate your account again',
         html: `
-          <p>Looks you did not activate your account during registration.</p>
+          <p>Looks like you did not activate your account during registration.</p>
           <p>Follow the link to activate the account.</p>
           <br>
           <p>
