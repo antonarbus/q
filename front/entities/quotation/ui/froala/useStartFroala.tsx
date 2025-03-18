@@ -1,6 +1,4 @@
 /* eslint-disable */
-import './froalaPkg'
-import './froalaPkg.css'
 import type { MouseEvent } from 'react'
 import { useEffectOnce } from 'react-use'
 import { nanoid } from '@shared/lib/nanoid'
@@ -22,7 +20,8 @@ export const useStartFroala = (): void => {
   const froala = useFroala()
 
   useEffectOnce(() => {
-    const initFroalaInstance = (): void => {
+    const initFroalaInstance = async (): Promise<void> => {
+      await Promise.all([import('./froalaPkg'), import('./froalaPkg.css')])
       //@ts-expect-error: some error
       const froalaInstance = new FroalaEditor(froala.froalaElementRef.current, {
         ...froalaDefaultOptions,
