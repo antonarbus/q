@@ -2,7 +2,7 @@
 import type { MouseEvent } from 'react'
 import { useEffectOnce } from 'react-use'
 import { nanoid } from '@shared/lib/nanoid'
-import { type FroalaEditorRef } from '@shared/types/froala'
+import type { FroalaEditorRef } from '@shared/types/froala'
 import { useFroala } from '../../providers/FroalaProvider'
 import { froalaDefaultOptions } from './froalaDefaultOptions'
 import { remindToSaveQuotationOnInsert } from './remindToSaveQuotationOnInsert'
@@ -22,6 +22,7 @@ export const useStartFroala = (): void => {
   useEffectOnce(() => {
     const initFroalaInstance = async (): Promise<void> => {
       await Promise.all([import('./froalaPkg'), import('./froalaPkg.css')])
+
       //@ts-expect-error: some error
       const froalaInstance = new FroalaEditor(froala.froalaElementRef.current, {
         ...froalaDefaultOptions,
@@ -38,68 +39,76 @@ export const useStartFroala = (): void => {
             // there is some bug in froala that it does not close initial toolbar on first 2...3 clicks
             const toolbarElement = froalaInstance.$tb['0']
             const isToolbarOpened = toolbarElement.style.display === 'block'
+
             if (isToolbarOpened) {
               froalaInstance.toolbar.hide()
             }
 
             froala.onClick?.(e)
           },
-          keydown: (e: React.KeyboardEvent<Element>): void => {
+          keydown: (e: React.KeyboardEvent): void => {
             froala.onKeydown?.(e)
           },
           blur: (e: MouseEvent): void => {
             froala.onBlur?.(e)
           },
-          'image.beforeUpload': function (files: any): boolean {
+          'image.beforeUpload'(files: any): boolean {
             if (!froala.beforeUpload) {
               toast.info('May drop files into text block & description cell')
 
               removeLoadingBar()
+
               return false
             }
 
             //@ts-expect-error: some error
             const isAccepted = froala.beforeUpload({ files, editor: this })
+
             return isAccepted
           },
-          'file.beforeUpload': function (files: any): boolean {
+          'file.beforeUpload'(files: any): boolean {
             if (!froala.beforeUpload) {
               toast.info('May drop files into text block & description cell')
 
               removeLoadingBar()
+
               return false
             }
 
             //@ts-expect-error: some error
             const isAccepted = froala.beforeUpload({ files, editor: this })
+
             return isAccepted
           },
-          'video.beforeUpload': function (files: any): boolean {
+          'video.beforeUpload'(files: any): boolean {
             if (!froala.beforeUpload) {
               toast.info('May drop files into text block & description cell')
               removeLoadingBar()
+
               return false
             }
 
             //@ts-expect-error: some error
             const isAccepted = froala.beforeUpload({ files, editor: this })
+
             return isAccepted
           },
-          'image.inserted': function (_response: any): void {
+          'image.inserted'(_response: any): void {
             remindToSaveQuotationOnInsert()
           },
-          'file.inserted': function (response: any): void {
+          'file.inserted'(response: any): void {
             remindToSaveQuotationOnInsert()
           },
-          'video.inserted': function (response: any): void {
+          'video.inserted'(response: any): void {
             remindToSaveQuotationOnInsert()
           },
-          'file.unlink': function (link: {
-            getAttribute: (arg0: string) => any
-          }): void {
+          'file.unlink'(link: { getAttribute: (arg0: string) => any }): void {
             const href = link.getAttribute('href')
             const isFileInBucket = href.includes('bucket')
-            if (!isFileInBucket) return
+
+            if (!isFileInBucket) {
+              return
+            }
 
             const removeFile = confirm(`
                 Remove file from your profile?
@@ -112,10 +121,10 @@ export const useStartFroala = (): void => {
             }
           },
 
-          'image.removed': function ($img: any): void {
+          'image.removed'($img: any): void {
             // console.log($img.attr('src'))
           },
-          'image.loaded': function (props: { '0': HTMLImageElement }): void {
+          'image.loaded'(props: { '0': HTMLImageElement }): void {
             const imageElement = props['0']
             imageElement.style.aspectRatio = `${imageElement.clientWidth}/${imageElement.clientHeight}`
             imageElement.id = `img-${nanoid(5)}`
@@ -123,12 +132,18 @@ export const useStartFroala = (): void => {
           },
           initialized: (): void => {
             window.froalas.push(froala.editorRef)
-            if (!froala.editorRef.current?.html) return
+
+            if (!froala.editorRef.current?.html) {
+              return
+            }
+
             froala.editorRef.current.html.set(froala.htmlGetter())
+
             // froala.editorRef.current.undo.saveStep() // triggers contentChange // without it any first click on cell considered as a fresh value and "contentChanged" callback is fired // https://github.com/froala/wysiwyg-editor/issues/1578#issuecomment-256577412
             window.froalas = window.froalas.filter(({ current }) =>
               Boolean(current),
             )
+
             froala.onInitialized?.()
             // console.log('💚 froalas qty after init: ', window.froalas.length)
           },
