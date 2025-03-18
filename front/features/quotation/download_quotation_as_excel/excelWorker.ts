@@ -16,54 +16,84 @@ self.onmessage = async (
 
   const worksheet = workbook.addWorksheet(`Quotation ${quotation.id}`)
 
-  let rowNumber = 1
+  let excelRowNumber = 1
   const rowBlockNumber = 1
 
-  worksheet.getCell(`A${rowNumber}`).value = `Quotation ${quotation.id}`
+  worksheet.getCell(`A${excelRowNumber}`).value = `Quotation ${quotation.id}`
 
-  rowNumber = 3
+  excelRowNumber = 3
 
   for (const block of quotation.blocks) {
     if (block.type === 'text') {
-      worksheet.getCell(`A${rowNumber}`).value = striptags(block.text.html)
+      worksheet.getCell(`A${excelRowNumber}`).value = striptags(block.text.html)
+      excelRowNumber++
     }
 
     if (block.type === 'boq') {
-      worksheet.getCell(`A${rowNumber}`).value = striptags(
+      worksheet.getCell(`A${excelRowNumber}`).value = striptags(
         block.boq.header.title.html,
       )
 
-      rowNumber++
+      excelRowNumber++
+
+      worksheet.getCell(`B${excelRowNumber}`).value = striptags(
+        block.boq.column.description.html,
+      )
+
+      worksheet.getCell(`C${excelRowNumber}`).value = striptags(
+        block.boq.column.itemPrice.html,
+      )
+
+      worksheet.getCell(`D${excelRowNumber}`).value = striptags(
+        block.boq.column.qty.html,
+      )
+
+      worksheet.getCell(`E${excelRowNumber}`).value = striptags(
+        block.boq.column.price.html,
+      )
+
+      excelRowNumber++
 
       let rowBoqNumber = 1
 
       for (const row of block.boq.rows) {
-        worksheet.getCell(`A${rowNumber}`).value =
+        worksheet.getCell(`A${excelRowNumber}`).value =
           `${rowBlockNumber}.${rowBoqNumber}`
 
-        worksheet.getCell(`B${rowNumber}`).value = striptags(
+        worksheet.getCell(`B${excelRowNumber}`).value = striptags(
           row.description.html,
         )
 
-        worksheet.getCell(`C${rowNumber}`).value = striptags(row.itemPrice.html)
+        worksheet.getCell(`C${excelRowNumber}`).value = striptags(
+          row.itemPrice.html,
+        )
 
-        worksheet.getCell(`D${rowNumber}`).value = striptags(row.qty.html)
+        worksheet.getCell(`D${excelRowNumber}`).value = striptags(row.qty.html)
 
-        worksheet.getCell(`E${rowNumber}`).value = striptags(row.price.html)
+        worksheet.getCell(`E${excelRowNumber}`).value = striptags(
+          row.price.html,
+        )
 
-        rowNumber++
+        excelRowNumber++
         rowBoqNumber++
       }
     }
 
     if (block.type === 'price') {
-      worksheet.getCell(`A${rowNumber}`).value = striptags(block.title.html)
-      rowNumber++
-      worksheet.getCell(`A${rowNumber}`).value = striptags(block.price.html)
-      rowNumber++
+      worksheet.getCell(`A${excelRowNumber}`).value = striptags(
+        block.title.html,
+      )
+
+      excelRowNumber++
+
+      worksheet.getCell(`A${excelRowNumber}`).value = striptags(
+        block.price.html,
+      )
+
+      excelRowNumber++
     }
 
-    rowNumber += 2
+    excelRowNumber++
   }
 
   const buffer = await workbook.xlsx.writeBuffer()
