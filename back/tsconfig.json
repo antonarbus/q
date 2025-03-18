@@ -5,6 +5,6 @@
     "../front/shared/lib/tanstack_query/defaultError.d.ts"
   ],
   "compilerOptions": {
-    "noEmit": false
+    "outDir": "./dist"
   }
 }
