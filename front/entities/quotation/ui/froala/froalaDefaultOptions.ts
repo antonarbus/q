@@ -1,4 +1,6 @@
-export const froalaDefaultOptions = {
+import type { FroalaOptions } from 'froala-editor'
+
+export const froalaDefaultOptions: Partial<FroalaOptions> = {
   initOnClick: false,
   toolbarInline: true,
   keepFormatOnDelete: true,
