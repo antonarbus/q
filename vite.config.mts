@@ -29,7 +29,7 @@ export default defineConfig(({ command, mode }) => {
       },
     },
     preview: {
-      // host: hostFront,
+      host: config.front.hostname,
       port: config.front.port,
       // https: true,
       proxy: {
