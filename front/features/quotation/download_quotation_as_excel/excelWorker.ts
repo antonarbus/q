@@ -1,3 +1,4 @@
+import { stripHtmlWithBreaksPreserve } from '@shared/utils/stripHtmlWithBreaksPreserve'
 import type { WorkerRequestMessage } from './downloadExcel'
 import striptags from 'striptags'
 
@@ -25,8 +26,14 @@ self.onmessage = async (
 
   for (const block of quotation.blocks) {
     if (block.type === 'text') {
-      worksheet.getCell(`A${excelRowNumber}`).value = striptags(block.text.html)
-      excelRowNumber++
+      const text = stripHtmlWithBreaksPreserve(block.text.html)
+      // Split text into lines and write each line to a new row
+      const lines = text.split('\n').filter((line) => line.trim())
+
+      for (const line of lines) {
+        worksheet.getCell(`A${excelRowNumber}`).value = line
+        excelRowNumber++
+      }
     }
 
     if (block.type === 'boq') {
@@ -60,9 +67,8 @@ self.onmessage = async (
         worksheet.getCell(`A${excelRowNumber}`).value =
           `${rowBlockNumber}.${rowBoqNumber}`
 
-        worksheet.getCell(`B${excelRowNumber}`).value = striptags(
-          row.description.html,
-        )
+        worksheet.getCell(`B${excelRowNumber}`).value =
+          stripHtmlWithBreaksPreserve(row.description.html)
 
         worksheet.getCell(`C${excelRowNumber}`).value = striptags(
           row.itemPrice.html,
