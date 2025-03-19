@@ -18,11 +18,7 @@ self.onmessage = async (
   const worksheet = workbook.addWorksheet(`Quotation ${quotation.id}`)
 
   let excelRowNumber = 1
-  const rowBlockNumber = 1
-
-  worksheet.getCell(`A${excelRowNumber}`).value = `Quotation ${quotation.id}`
-
-  excelRowNumber = 3
+  let rowBlockNumber = 1
 
   for (const block of quotation.blocks) {
     if (block.type === 'text') {
@@ -83,6 +79,8 @@ self.onmessage = async (
         excelRowNumber++
         rowBoqNumber++
       }
+
+      rowBlockNumber++
     }
 
     if (block.type === 'price') {
