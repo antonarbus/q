@@ -4,6 +4,7 @@ import {
   removeNoTraceCookie,
   removeRefreshTokenCookie,
 } from '@back/shared/headers'
+import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type ResBody = {
   message: 'logged out'
@@ -18,13 +19,9 @@ type RouterHandler = (
 export const logOutRouter = Router()
 
 const logOut: RouterHandler = (req, res, next) => {
-  try {
-    removeNoTraceCookie({ res })
-    removeRefreshTokenCookie({ res })
-    res.status(httpStatus.success_200).json({ message: 'logged out' })
-  } catch (error) {
-    next(error)
-  }
+  removeNoTraceCookie({ res })
+  removeRefreshTokenCookie({ res })
+  res.status(httpStatus.success_200).json({ message: 'logged out' })
 }
 
-logOutRouter.get('/', logOut)
+logOutRouter.get('/', asyncHandler(logOut))

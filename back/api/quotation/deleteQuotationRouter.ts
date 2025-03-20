@@ -6,6 +6,7 @@ import { httpStatus } from '@back/shared/consts/httpStatus'
 import { bucket, storageFolderName } from '@back/shared/services/storage'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { QuotationModel } from '@back/entities/quotation'
+import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type ReqBody = {
   id: Quotation['id']
@@ -30,37 +31,33 @@ type RouterHandler = (
 export const deleteQuotationRouter = Router()
 
 const deleteQuotation: RouterHandler = async (req, res, next) => {
-  try {
-    const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
-    const { id: quotationId } = req.body
+  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const { id: quotationId } = req.body
 
-    const deleteFromDbResult = await QuotationModel.deleteOne({
-      email,
-      id: quotationId,
-    })
+  const deleteFromDbResult = await QuotationModel.deleteOne({
+    email,
+    id: quotationId,
+  })
 
-    if (deleteFromDbResult.deletedCount === 0) {
-      res.status(httpStatus.notFound_404).json({ message: 'did not find' })
+  if (deleteFromDbResult.deletedCount === 0) {
+    res.status(httpStatus.notFound_404).json({ message: 'did not find' })
 
-      return
-    }
-
-    // const [files] = await bucket.getFiles({ prefix: `${email}/${id}/` })
-    // await Promise.all(files.map(async file => await file.delete()))
-
-    const filePath = `${email}/${storageFolderName.quotations}/${quotationId}.json`
-    const [{ statusCode }] = await bucket.file(filePath).delete()
-
-    if (statusCode === 204) {
-      res.status(httpStatus.success_200).json({ message: 'deleted' })
-
-      return
-    }
-
-    res.status(httpStatus.notFound_404).json({ message: 'not deleted' })
-  } catch (error) {
-    next(error)
+    return
   }
+
+  // const [files] = await bucket.getFiles({ prefix: `${email}/${id}/` })
+  // await Promise.all(files.map(async file => await file.delete()))
+
+  const filePath = `${email}/${storageFolderName.quotations}/${quotationId}.json`
+  const [{ statusCode }] = await bucket.file(filePath).delete()
+
+  if (statusCode === 204) {
+    res.status(httpStatus.success_200).json({ message: 'deleted' })
+
+    return
+  }
+
+  res.status(httpStatus.notFound_404).json({ message: 'not deleted' })
 }
 
-deleteQuotationRouter.delete('/', deleteQuotation)
+deleteQuotationRouter.delete('/', asyncHandler(deleteQuotation))

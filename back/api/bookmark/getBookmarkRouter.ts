@@ -5,6 +5,7 @@ import { bucket, storageFolderName } from '@back/shared/services/storage'
 import { jsonParseSafe } from '@back/shared/utils/jsonParseSafe'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { BookmarkModel } from '@back/entities/bookmark'
+import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type ReqBody = {
   id: Item['id']
@@ -24,35 +25,31 @@ type RouterHandler = (
 export const getBookmarkRouter = Router()
 
 const getBookmark: RouterHandler = async (req, res, next) => {
-  try {
-    const bookmarkId = req.body.id
-    const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
-    const document = await BookmarkModel.findOne({ email, id: bookmarkId })
+  const bookmarkId = req.body.id
+  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const document = await BookmarkModel.findOne({ email, id: bookmarkId })
 
-    if (!document) {
-      res.status(httpStatus.notFound_404).json({ message: 'not found' })
+  if (!document) {
+    res.status(httpStatus.notFound_404).json({ message: 'not found' })
 
-      return
-    }
-
-    const filePath = `${email}/${storageFolderName.bookmarks}/${bookmarkId}.json`
-    const [fileBuffer] = await bucket.file(filePath).download()
-    const fileAsString = fileBuffer.toString()
-    const item = jsonParseSafe<Item>(fileAsString)
-
-    if (!item) {
-      res.status(httpStatus.notFound_404).json({ message: 'not found' })
-
-      return
-    }
-
-    res.status(httpStatus.success_200).json({
-      message: 'found',
-      item: { ...item, ...document },
-    })
-  } catch (error) {
-    next(error)
+    return
   }
+
+  const filePath = `${email}/${storageFolderName.bookmarks}/${bookmarkId}.json`
+  const [fileBuffer] = await bucket.file(filePath).download()
+  const fileAsString = fileBuffer.toString()
+  const item = jsonParseSafe<Item>(fileAsString)
+
+  if (!item) {
+    res.status(httpStatus.notFound_404).json({ message: 'not found' })
+
+    return
+  }
+
+  res.status(httpStatus.success_200).json({
+    message: 'found',
+    item: { ...item, ...document },
+  })
 }
 
-getBookmarkRouter.post('/', getBookmark)
+getBookmarkRouter.post('/', asyncHandler(getBookmark))

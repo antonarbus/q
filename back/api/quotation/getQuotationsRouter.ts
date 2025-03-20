@@ -6,6 +6,7 @@ import type { Pretty } from '@shared/types/Pretty'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { QuotationModel } from '@back/entities/quotation'
+import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type QuotationPick = Pick<
   Quotation,
@@ -34,34 +35,30 @@ type RouterHandler = (
 export const getQuotationsRouter = Router()
 
 const getQuotations: RouterHandler = async (req, res, next) => {
-  try {
-    const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
-    const quotations = await QuotationModel.find(
-      { email },
-      { _id: 0, __v: 0, email: 0 },
-    ).lean()
+  const quotations = await QuotationModel.find(
+    { email },
+    { _id: 0, __v: 0, email: 0 },
+  ).lean()
 
-    if (quotations.length === 0) {
-      res
-        .status(httpStatus.success_200)
-        .json({ message: 'No content', quotations })
-
-      return
-    }
-
-    if (quotations.length) {
-      res.status(httpStatus.success_200).json({ message: 'Found', quotations })
-
-      return
-    }
-
+  if (quotations.length === 0) {
     res
-      .status(httpStatus.notFound_404)
-      .json({ message: 'Unhandled case', quotations: [] })
-  } catch (error) {
-    next(error)
+      .status(httpStatus.success_200)
+      .json({ message: 'No content', quotations })
+
+    return
   }
+
+  if (quotations.length) {
+    res.status(httpStatus.success_200).json({ message: 'Found', quotations })
+
+    return
+  }
+
+  res
+    .status(httpStatus.notFound_404)
+    .json({ message: 'Unhandled case', quotations: [] })
 }
 
-getQuotationsRouter.get('/', getQuotations)
+getQuotationsRouter.get('/', asyncHandler(getQuotations))

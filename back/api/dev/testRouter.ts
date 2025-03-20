@@ -3,6 +3,7 @@ import { Router, type Request, type Response, type NextFunction } from 'express'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { userRole } from '@back/shared/consts/userRole'
 import { getUserFromRefreshToken, UserModel } from '@back/entities/user'
+import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 type RouterHandler = (
   req: Request,
@@ -21,19 +22,15 @@ const test: RouterHandler = async (req, res, next) => {
     return
   }
 
-  try {
-    // const dbRes = await UserModel.find({ email: 'some random guy' })
-    const dbRes = await UserModel.find()
-    // const dbRes = await UserModel.find({ email: 'test-user@sendmequotation.today' })
-    // await UserModel.deleteOne({ email: 'info@sendmequotation.today' })
-    // const dbRes = await UserModel.find().select({ _id: 0, email: 1 })
-    // const dbRes = await ItemModel.find().distinct('category', { email: 'anton.arbus@gmail.com' })
-    // const dbRes = await QuotationModel.find()
+  // const dbRes = await UserModel.find({ email: 'some random guy' })
+  const dbRes = await UserModel.find()
+  // const dbRes = await UserModel.find({ email: 'test-user@sendmequotation.today' })
+  // await UserModel.deleteOne({ email: 'info@sendmequotation.today' })
+  // const dbRes = await UserModel.find().select({ _id: 0, email: 1 })
+  // const dbRes = await ItemModel.find().distinct('category', { email: 'anton.arbus@gmail.com' })
+  // const dbRes = await QuotationModel.find()
 
-    res.status(200).json({ dbRes })
-  } catch (error) {
-    next(error)
-  }
+  res.status(200).json({ dbRes })
 }
 
-testRouter.get('/', test)
+testRouter.get('/', asyncHandler(test))

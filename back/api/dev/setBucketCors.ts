@@ -4,6 +4,7 @@ import { getEnvVarOrThrow } from '@back/shared/utils/getEnvVar'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { userRole } from '@back/shared/consts/userRole'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
+import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 // https://cloud.google.com/storage/docs/samples/storage-cors-configuration#storage_cors_configuration-nodejs
 
@@ -46,4 +47,4 @@ const configureBucketCors: RouterHandler = async (req, res, next) => {
   res.json(corsUpdateRes.at(0)?.cors)
 }
 
-setBucketCors.get('/', configureBucketCors)
+setBucketCors.get('/', asyncHandler(configureBucketCors))

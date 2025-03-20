@@ -6,6 +6,7 @@ import {
   type VisitorsCount,
 } from '@back/entities/visitors_count'
 import { headerName } from '@back/shared/headers'
+import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type ReqBody = {
   date: VisitorsCount['date']
@@ -28,33 +29,32 @@ const incrementUniqueDailyVisitor: RouterHandler = async (req, res, next) => {
   const today = req.body.date
   const isNew = req.body.isNew
 
-  try {
-    // do not distort statistics by tests
-    if (req.headers[headerName.playwrightTest] === 'true') {
-      return
-    }
-
-    const visitorsCount = await VisitorsCountModel.findOneAndUpdate(
-      { date: today },
-      {
-        $inc: {
-          count: 1,
-          new: isNew ? 1 : 0,
-        },
-      },
-      { upsert: true, new: true },
-    )
-
-    if (visitorsCount.count) {
-      res.status(httpStatus.success_200).json({ message: 'visitor counted' })
-
-      return
-    }
-
-    res.status(httpStatus.notFound_404).json({ message: 'Internal error' })
-  } catch (error) {
-    next(error)
+  // do not distort statistics by tests
+  if (req.headers[headerName.playwrightTest] === 'true') {
+    return
   }
+
+  const visitorsCount = await VisitorsCountModel.findOneAndUpdate(
+    { date: today },
+    {
+      $inc: {
+        count: 1,
+        new: isNew ? 1 : 0,
+      },
+    },
+    { upsert: true, new: true },
+  )
+
+  if (visitorsCount.count) {
+    res.status(httpStatus.success_200).json({ message: 'visitor counted' })
+
+    return
+  }
+
+  res.status(httpStatus.notFound_404).json({ message: 'Internal error' })
 }
 
-countUniqueDailyVisitorsRouter.post('/', incrementUniqueDailyVisitor)
+countUniqueDailyVisitorsRouter.post(
+  '/',
+  asyncHandler(incrementUniqueDailyVisitor),
+)

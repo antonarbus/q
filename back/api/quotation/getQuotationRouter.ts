@@ -7,6 +7,7 @@ import { isNoTraceCookie } from '@back/shared/headers'
 import { userRole } from '@back/shared/consts/userRole'
 import { getUserFromRefreshToken } from '@back/entities/user'
 import { QuotationModel } from '@back/entities/quotation'
+import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type ReqBody = {
   id: Quotation['id']
@@ -33,120 +34,114 @@ type RouterHandler = (
 export const getQuotationRouter = Router()
 
 const getQuotation: RouterHandler = async (req, res, next) => {
-  try {
-    const { id: quotationId } = req.body
-    const isNoTraceMode = isNoTraceCookie({ req })
+  const { id: quotationId } = req.body
+  const isNoTraceMode = isNoTraceCookie({ req })
 
-    const document = isNoTraceMode
-      ? await QuotationModel.findOne({ id: quotationId }).lean()
-      : await QuotationModel.findOneAndUpdate(
-          { id: quotationId },
-          { openedAt: Date.now() },
-          { new: true },
-        ).lean()
+  const document = isNoTraceMode
+    ? await QuotationModel.findOne({ id: quotationId }).lean()
+    : await QuotationModel.findOneAndUpdate(
+        { id: quotationId },
+        { openedAt: Date.now() },
+        { new: true },
+      ).lean()
 
-    if (document === null) {
-      res.status(httpStatus.notFound_404).json({ message: 'not found in db' })
+  if (document === null) {
+    res.status(httpStatus.notFound_404).json({ message: 'not found in db' })
 
-      return
-    }
+    return
+  }
 
-    // this is probably not very good to do, but i am taking user information from refresh token here
-    // with access token it does not serve the purpose here
-    const { email, roles } = getUserFromRefreshToken({ req })
-    const isOwner = email === document.email
-    const isShared = (document.sharedWith ?? []).length !== 0
-    const isSharedWithEverybody = (document.sharedWith ?? []).at(0) === '*'
-    const isSharedWithPerson = (document.sharedWith ?? []).includes(email)
-    const isViewer = isSharedWithEverybody || isSharedWithPerson
-    const isSuperAdmin = roles.includes(userRole.superAdmin)
+  // this is probably not very good to do, but i am taking user information from refresh token here
+  // with access token it does not serve the purpose here
+  const { email, roles } = getUserFromRefreshToken({ req })
+  const isOwner = email === document.email
+  const isShared = (document.sharedWith ?? []).length !== 0
+  const isSharedWithEverybody = (document.sharedWith ?? []).at(0) === '*'
+  const isSharedWithPerson = (document.sharedWith ?? []).includes(email)
+  const isViewer = isSharedWithEverybody || isSharedWithPerson
+  const isSuperAdmin = roles.includes(userRole.superAdmin)
 
-    if (!isOwner && !isShared && !isSuperAdmin) {
-      res.status(httpStatus.forbidden_403).json({ message: 'not shared' })
+  if (!isOwner && !isShared && !isSuperAdmin) {
+    res.status(httpStatus.forbidden_403).json({ message: 'not shared' })
 
-      return
-    }
+    return
+  }
 
-    if (!isOwner && isShared && !isViewer && !isSuperAdmin) {
-      res
-        .status(httpStatus.forbidden_403)
-        .json({ message: 'no permission to view' })
+  if (!isOwner && isShared && !isViewer && !isSuperAdmin) {
+    res
+      .status(httpStatus.forbidden_403)
+      .json({ message: 'no permission to view' })
 
-      return
-    }
+    return
+  }
 
-    const filePath = `${document.email}/${storageFolderName.quotations}/${quotationId}.json`
-    const [fileBuffer] = await bucket.file(filePath).download()
-    const quotation = jsonParseSafe<Quotation>(fileBuffer.toString())
+  const filePath = `${document.email}/${storageFolderName.quotations}/${quotationId}.json`
+  const [fileBuffer] = await bucket.file(filePath).download()
+  const quotation = jsonParseSafe<Quotation>(fileBuffer.toString())
 
-    if (!quotation) {
-      res
-        .status(httpStatus.notFound_404)
-        .json({ message: 'not found in bucket' })
+  if (!quotation) {
+    res.status(httpStatus.notFound_404).json({ message: 'not found in bucket' })
 
-      return
-    }
+    return
+  }
 
-    if (isSuperAdmin) {
-      res
-        .status(httpStatus.success_200)
-        .json({ message: 'super-admin permission', quotation })
+  if (isSuperAdmin) {
+    res
+      .status(httpStatus.success_200)
+      .json({ message: 'super-admin permission', quotation })
 
-      return
-    }
+    return
+  }
 
-    if (isOwner) {
-      res
-        .status(httpStatus.success_200)
-        .json({ message: 'owner permission', quotation })
+  if (isOwner) {
+    res
+      .status(httpStatus.success_200)
+      .json({ message: 'owner permission', quotation })
 
-      return
-    }
+    return
+  }
 
-    // remove sensitive data from quotation
-    if (isViewer) {
-      quotation.email = 'john@mail.com'
-      delete quotation.name
-      delete quotation.category
-      delete quotation.desc
-      delete quotation.info
-      delete quotation.createdAt
-      delete quotation.updatedAt
-      delete quotation.openedAt
-      delete quotation.from
-      delete quotation.to
-      delete quotation.sharedWith
+  // remove sensitive data from quotation
+  if (isViewer) {
+    quotation.email = 'john@mail.com'
+    delete quotation.name
+    delete quotation.category
+    delete quotation.desc
+    delete quotation.info
+    delete quotation.createdAt
+    delete quotation.updatedAt
+    delete quotation.openedAt
+    delete quotation.from
+    delete quotation.to
+    delete quotation.sharedWith
 
-      quotation.blocks.forEach((block) => {
-        block.email = 'john@mail.com'
-        delete block.name
-        delete block.category
-        delete block.desc
-        delete block.info
-        delete block.createdAt
-        delete block.updatedAt
+    quotation.blocks.forEach((block) => {
+      block.email = 'john@mail.com'
+      delete block.name
+      delete block.category
+      delete block.desc
+      delete block.info
+      delete block.createdAt
+      delete block.updatedAt
 
-        if (block.type === 'boq') {
-          block.boq.rows.forEach((row) => {
-            row.email = 'john@mail.com'
-            delete row.name
-            delete row.category
-            delete row.desc
-            delete row.info
-            delete row.createdAt
-            delete row.updatedAt
-          })
-        }
-      })
+      if (block.type === 'boq') {
+        block.boq.rows.forEach((row) => {
+          row.email = 'john@mail.com'
+          delete row.name
+          delete row.category
+          delete row.desc
+          delete row.info
+          delete row.createdAt
+          delete row.updatedAt
+        })
+      }
+    })
 
-      res.status(httpStatus.success_200).json({
-        message: 'viewer permission',
-        quotation,
-      })
-    }
-  } catch (error) {
-    next(error)
+    res.status(httpStatus.success_200).json({
+      message: 'viewer permission',
+      quotation,
+    })
   }
 }
 
-getQuotationRouter.post('/', getQuotation)
+getQuotationRouter.post('/', asyncHandler(getQuotation))

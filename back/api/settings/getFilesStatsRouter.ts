@@ -3,6 +3,7 @@ import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { bucket, storageFolderName } from '@back/shared/services/storage'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
+import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type ResBody = {
   message: ErrorMessageCommon | 'file stats' | 'no item in bucket' | 'deleted'
@@ -21,29 +22,23 @@ type RouterHandler = (
 export const getFilesStatsRouter = Router()
 
 const getFilesStats: RouterHandler = async (req, res, next) => {
-  try {
-    const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
-    const [files] = await bucket.getFiles({
-      prefix: `${email}/${storageFolderName.files}/`,
-    })
+  const [files] = await bucket.getFiles({
+    prefix: `${email}/${storageFolderName.files}/`,
+  })
 
-    const fileStats = files.reduce(
-      (acc, file) => {
-        acc.fileCount++
-        acc.totalSize += Number(file.metadata.size)
+  const fileStats = files.reduce(
+    (acc, file) => {
+      acc.fileCount++
+      acc.totalSize += Number(file.metadata.size)
 
-        return acc
-      },
-      { fileCount: 0, totalSize: 0 },
-    )
+      return acc
+    },
+    { fileCount: 0, totalSize: 0 },
+  )
 
-    res
-      .status(httpStatus.success_200)
-      .json({ message: 'file stats', fileStats })
-  } catch (error) {
-    next(error)
-  }
+  res.status(httpStatus.success_200).json({ message: 'file stats', fileStats })
 }
 
-getFilesStatsRouter.get('/', getFilesStats)
+getFilesStatsRouter.get('/', asyncHandler(getFilesStats))

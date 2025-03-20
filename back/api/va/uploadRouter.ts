@@ -4,6 +4,7 @@ import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { bucket, storageFolderName } from '@back/shared/services/storage'
 import { getUserFromRefreshToken } from '@back/entities/user'
+import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 // https://medium.com/@olamilekan001/image-upload-with-google-cloud-storage-and-node-js-a1cf9baa1876
 
@@ -60,31 +61,26 @@ type RouterHandler = (
 export const uploadRouter = Router()
 
 const upload: RouterHandler = async (req, res, next) => {
-  try {
-    const { file } = req
+  const { file } = req
+  const { email } = getUserFromRefreshToken({ req })
 
-    const { email } = getUserFromRefreshToken({ req })
+  if (file === undefined) {
+    res.status(httpStatus.badRequest_400).json({ message: 'no file' })
 
-    if (file === undefined) {
-      res.status(httpStatus.badRequest_400).json({ message: 'no file' })
-
-      return
-    }
-
-    const { name, link, size } = await uploadFileIntoMemory({ file, email })
-
-    if (link) {
-      res
-        .status(httpStatus.success_200)
-        .json({ message: 'uploaded', link, name, size })
-
-      return
-    }
-
-    res.status(httpStatus.serverError_500).json({ message: 'not uploaded' })
-  } catch (error) {
-    next(error)
+    return
   }
+
+  const { name, link, size } = await uploadFileIntoMemory({ file, email })
+
+  if (link) {
+    res
+      .status(httpStatus.success_200)
+      .json({ message: 'uploaded', link, name, size })
+
+    return
+  }
+
+  res.status(httpStatus.serverError_500).json({ message: 'not uploaded' })
 }
 
 uploadRouter.post(
@@ -93,5 +89,5 @@ uploadRouter.post(
     storage: multer.memoryStorage(),
     limits: { fileSize: 50 * 1024 * 1024 },
   }).single('file'), // middleware processes single file uploads, where 'file' is the name of the file input field. The file's details will be stored in req.file
-  upload,
+  asyncHandler(upload),
 )

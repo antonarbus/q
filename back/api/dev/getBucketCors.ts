@@ -3,6 +3,7 @@ import { bucket } from '@back/shared/services/storage'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { userRole } from '@back/shared/consts/userRole'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
+import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 // https://cloud.google.com/storage/docs/using-cors#storage-get-bucket-metadata-nodejs
 
@@ -28,4 +29,4 @@ const getBucketMetadata: RouterHandler = async (req, res, next) => {
   res.json(metadata.cors)
 }
 
-getBucketCors.get('/', getBucketMetadata)
+getBucketCors.get('/', asyncHandler(getBucketMetadata))

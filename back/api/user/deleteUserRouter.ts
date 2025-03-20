@@ -10,6 +10,7 @@ import {
 } from '@back/entities/user'
 import { QuotationModel } from '@back/entities/quotation'
 import { BookmarkModel } from '@back/entities/bookmark'
+import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type ReqBody = {
   email: User['email']
@@ -29,167 +30,161 @@ type RouterHandler = (
 export const deleteUserRouter = Router()
 
 const deleteUser: RouterHandler = async (req, res, next) => {
-  try {
-    const userEmailToBeDeleted = req.body.email
+  const userEmailToBeDeleted = req.body.email
 
-    const { email: emailFromToken, roles } =
-      getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const { email: emailFromToken, roles } =
+    getUserFromAccessTokenOrThrowUnauthorized({ req })
 
-    const isOwner = emailFromToken === userEmailToBeDeleted
-    const isSuperAdmin = roles.includes(userRole.superAdmin)
+  const isOwner = emailFromToken === userEmailToBeDeleted
+  const isSuperAdmin = roles.includes(userRole.superAdmin)
 
-    if (!isOwner && !isSuperAdmin) {
-      res
-        .status(httpStatus.forbidden_403)
-        .json({ message: 'not allowed', statistics: [] })
+  if (!isOwner && !isSuperAdmin) {
+    res
+      .status(httpStatus.forbidden_403)
+      .json({ message: 'not allowed', statistics: [] })
 
-      return
-    }
-
-    const statistics = []
-
-    // delete from db
-
-    const deleteUserResult = await UserModel.deleteOne({
-      email: userEmailToBeDeleted,
-    })
-
-    if (deleteUserResult.deletedCount === 0) {
-      statistics.push(`${userEmailToBeDeleted} was not found in database ❌`)
-    } else {
-      statistics.push(`${userEmailToBeDeleted} was deleted from database ✅`)
-    }
-
-    const deleteQuotationsResult = await QuotationModel.deleteMany({
-      email: userEmailToBeDeleted,
-    })
-
-    if (deleteQuotationsResult.deletedCount === 0) {
-      statistics.push(`quotations were not found in database ❌`)
-    } else {
-      statistics.push(
-        `${deleteQuotationsResult.deletedCount} quotations were deleted from database ✅`,
-      )
-    }
-
-    const deleteBookmarksResult = await BookmarkModel.deleteMany({
-      email: userEmailToBeDeleted,
-    })
-
-    if (deleteBookmarksResult.deletedCount === 0) {
-      statistics.push(`bookmarks were not found in database ❌`)
-    } else {
-      statistics.push(
-        `${deleteBookmarksResult.deletedCount} bookmarks were deleted from database ✅`,
-      )
-    }
-
-    // delete quotations from bucket
-
-    const [quotationFiles] = await bucket.getFiles({
-      prefix: `${userEmailToBeDeleted}/${storageFolderName.quotations}/`,
-    })
-
-    if (quotationFiles.length === 0) {
-      statistics.push('0 quotations were deleted from bucket')
-    }
-
-    const quotationsDeleteRes = await Promise.allSettled(
-      quotationFiles.map(async (file) => file.delete()),
-    )
-
-    const quotationsDeletedQty = quotationsDeleteRes.filter(
-      (quotationDeletionRes) => quotationDeletionRes.status === 'fulfilled',
-    ).length
-
-    if (quotationsDeletedQty > 0) {
-      statistics.push(
-        `${quotationsDeletedQty} quotations were deleted from bucket ✅`,
-      )
-    }
-
-    const quotationsNotDeletedQty = quotationsDeleteRes.filter(
-      (quotationDeletionRes) => quotationDeletionRes.status === 'rejected',
-    ).length
-
-    if (quotationsNotDeletedQty > 0) {
-      statistics.push(
-        `${quotationsNotDeletedQty} quotations were not deleted from bucket ❌`,
-      )
-    }
-
-    // delete bookmarks from bucket
-
-    const [bookmarkFiles] = await bucket.getFiles({
-      prefix: `${userEmailToBeDeleted}/${storageFolderName.bookmarks}/`,
-    })
-
-    if (bookmarkFiles.length === 0) {
-      statistics.push('0 bookmarks were deleted from bucket')
-    }
-
-    const bookmarksDeleteRes = await Promise.allSettled(
-      bookmarkFiles.map(async (file) => file.delete()),
-    )
-
-    const bookmarksDeletedQty = bookmarksDeleteRes.filter(
-      (bookmarkDeletionRes) => bookmarkDeletionRes.status === 'fulfilled',
-    ).length
-
-    if (bookmarksDeletedQty > 0) {
-      statistics.push(
-        `${bookmarksDeletedQty} bookmarks were deleted from bucket ✅`,
-      )
-    }
-
-    const bookmarksNotDeletedQty = bookmarksDeleteRes.filter(
-      (bookmarkDeletionRes) => bookmarkDeletionRes.status === 'rejected',
-    ).length
-
-    if (bookmarksNotDeletedQty > 0) {
-      statistics.push(
-        `${bookmarksNotDeletedQty} bookmarks were not deleted from bucket ❌`,
-      )
-    }
-
-    // delete files from bucket
-
-    const [files] = await bucket.getFiles({
-      prefix: `${userEmailToBeDeleted}/${storageFolderName.files}/`,
-    })
-
-    if (files.length === 0) {
-      statistics.push('0 files were deleted')
-    }
-
-    const filesDeleteRes = await Promise.allSettled(
-      files.map(async (file) => file.delete()),
-    )
-
-    const filesDeletedQty = filesDeleteRes.filter(
-      (bookmarkDeletionRes) => bookmarkDeletionRes.status === 'fulfilled',
-    ).length
-
-    if (filesDeletedQty > 0) {
-      statistics.push(
-        `${filesDeletedQty} bookmarks were deleted from bucket ✅`,
-      )
-    }
-
-    const filesNotDeletedQty = filesDeleteRes.filter(
-      (bookmarkDeletionRes) => bookmarkDeletionRes.status === 'rejected',
-    ).length
-
-    if (filesNotDeletedQty > 0) {
-      statistics.push(
-        `${filesNotDeletedQty} bookmarks were not deleted from bucket ❌`,
-      )
-    }
-
-    res.status(httpStatus.success_200).json({ message: 'deleted', statistics })
-  } catch (error) {
-    next(error)
+    return
   }
+
+  const statistics = []
+
+  // delete from db
+
+  const deleteUserResult = await UserModel.deleteOne({
+    email: userEmailToBeDeleted,
+  })
+
+  if (deleteUserResult.deletedCount === 0) {
+    statistics.push(`${userEmailToBeDeleted} was not found in database ❌`)
+  } else {
+    statistics.push(`${userEmailToBeDeleted} was deleted from database ✅`)
+  }
+
+  const deleteQuotationsResult = await QuotationModel.deleteMany({
+    email: userEmailToBeDeleted,
+  })
+
+  if (deleteQuotationsResult.deletedCount === 0) {
+    statistics.push(`quotations were not found in database ❌`)
+  } else {
+    statistics.push(
+      `${deleteQuotationsResult.deletedCount} quotations were deleted from database ✅`,
+    )
+  }
+
+  const deleteBookmarksResult = await BookmarkModel.deleteMany({
+    email: userEmailToBeDeleted,
+  })
+
+  if (deleteBookmarksResult.deletedCount === 0) {
+    statistics.push(`bookmarks were not found in database ❌`)
+  } else {
+    statistics.push(
+      `${deleteBookmarksResult.deletedCount} bookmarks were deleted from database ✅`,
+    )
+  }
+
+  // delete quotations from bucket
+
+  const [quotationFiles] = await bucket.getFiles({
+    prefix: `${userEmailToBeDeleted}/${storageFolderName.quotations}/`,
+  })
+
+  if (quotationFiles.length === 0) {
+    statistics.push('0 quotations were deleted from bucket')
+  }
+
+  const quotationsDeleteRes = await Promise.allSettled(
+    quotationFiles.map(async (file) => file.delete()),
+  )
+
+  const quotationsDeletedQty = quotationsDeleteRes.filter(
+    (quotationDeletionRes) => quotationDeletionRes.status === 'fulfilled',
+  ).length
+
+  if (quotationsDeletedQty > 0) {
+    statistics.push(
+      `${quotationsDeletedQty} quotations were deleted from bucket ✅`,
+    )
+  }
+
+  const quotationsNotDeletedQty = quotationsDeleteRes.filter(
+    (quotationDeletionRes) => quotationDeletionRes.status === 'rejected',
+  ).length
+
+  if (quotationsNotDeletedQty > 0) {
+    statistics.push(
+      `${quotationsNotDeletedQty} quotations were not deleted from bucket ❌`,
+    )
+  }
+
+  // delete bookmarks from bucket
+
+  const [bookmarkFiles] = await bucket.getFiles({
+    prefix: `${userEmailToBeDeleted}/${storageFolderName.bookmarks}/`,
+  })
+
+  if (bookmarkFiles.length === 0) {
+    statistics.push('0 bookmarks were deleted from bucket')
+  }
+
+  const bookmarksDeleteRes = await Promise.allSettled(
+    bookmarkFiles.map(async (file) => file.delete()),
+  )
+
+  const bookmarksDeletedQty = bookmarksDeleteRes.filter(
+    (bookmarkDeletionRes) => bookmarkDeletionRes.status === 'fulfilled',
+  ).length
+
+  if (bookmarksDeletedQty > 0) {
+    statistics.push(
+      `${bookmarksDeletedQty} bookmarks were deleted from bucket ✅`,
+    )
+  }
+
+  const bookmarksNotDeletedQty = bookmarksDeleteRes.filter(
+    (bookmarkDeletionRes) => bookmarkDeletionRes.status === 'rejected',
+  ).length
+
+  if (bookmarksNotDeletedQty > 0) {
+    statistics.push(
+      `${bookmarksNotDeletedQty} bookmarks were not deleted from bucket ❌`,
+    )
+  }
+
+  // delete files from bucket
+
+  const [files] = await bucket.getFiles({
+    prefix: `${userEmailToBeDeleted}/${storageFolderName.files}/`,
+  })
+
+  if (files.length === 0) {
+    statistics.push('0 files were deleted')
+  }
+
+  const filesDeleteRes = await Promise.allSettled(
+    files.map(async (file) => file.delete()),
+  )
+
+  const filesDeletedQty = filesDeleteRes.filter(
+    (bookmarkDeletionRes) => bookmarkDeletionRes.status === 'fulfilled',
+  ).length
+
+  if (filesDeletedQty > 0) {
+    statistics.push(`${filesDeletedQty} bookmarks were deleted from bucket ✅`)
+  }
+
+  const filesNotDeletedQty = filesDeleteRes.filter(
+    (bookmarkDeletionRes) => bookmarkDeletionRes.status === 'rejected',
+  ).length
+
+  if (filesNotDeletedQty > 0) {
+    statistics.push(
+      `${filesNotDeletedQty} bookmarks were not deleted from bucket ❌`,
+    )
+  }
+
+  res.status(httpStatus.success_200).json({ message: 'deleted', statistics })
 }
 
-deleteUserRouter.delete('/', deleteUser)
+deleteUserRouter.delete('/', asyncHandler(deleteUser))

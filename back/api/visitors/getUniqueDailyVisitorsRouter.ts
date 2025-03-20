@@ -7,6 +7,7 @@ import {
   VisitorsCountModel,
   type VisitorsCount,
 } from '@back/entities/visitors_count'
+import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type ResBody = {
   visitorsCount: VisitorsCount[]
@@ -28,6 +29,7 @@ export const getUniqueDailyVisitorsRouter = Router()
 
 const getUniqueDailyVisitors: RouterHandler = async (req, res, next) => {
   const { roles } = getUserFromRefreshToken({ req })
+  const { startDate, endDate } = req.query
 
   if (!roles.includes(userRole.superAdmin)) {
     res
@@ -37,23 +39,17 @@ const getUniqueDailyVisitors: RouterHandler = async (req, res, next) => {
     return
   }
 
-  const { startDate, endDate } = req.query
+  const visitorsCount = await VisitorsCountModel.find({
+    date: {
+      $gte: startDate,
+      $lte: endDate,
+    },
+  }).select({
+    __v: 0,
+    _id: 0,
+  })
 
-  try {
-    const visitorsCount = await VisitorsCountModel.find({
-      date: {
-        $gte: startDate,
-        $lte: endDate,
-      },
-    }).select({
-      __v: 0,
-      _id: 0,
-    })
-
-    res.status(200).json({ visitorsCount, message: 'ok' })
-  } catch (error) {
-    next(error)
-  }
+  res.status(httpStatus.success_200).json({ visitorsCount, message: 'ok' })
 }
 
-getUniqueDailyVisitorsRouter.get('/', getUniqueDailyVisitors)
+getUniqueDailyVisitorsRouter.get('/', asyncHandler(getUniqueDailyVisitors))

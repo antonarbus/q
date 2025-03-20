@@ -5,6 +5,7 @@ import { nanoid } from '@back/shared/lib/nanoid'
 import { sendEmail } from '@back/shared/services/email'
 import { config } from '@back/config'
 import { UserModel } from '@back/entities/user'
+import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type ReqBody = {
   email: User['email']
@@ -29,45 +30,44 @@ type RouterHandler = (
 export const requestPasswordResetRouter = Router()
 
 const requestPasswordReset: RouterHandler = async (req, res, next) => {
-  try {
-    const emailFromInput = req.body.email.toLowerCase()
+  const emailFromInput = req.body.email.toLowerCase()
 
-    const user = await UserModel.findOne({ email: emailFromInput }).lean()
+  const user = await UserModel.findOne({ email: emailFromInput }).lean()
 
-    if (!user) {
-      res.status(httpStatus.forbidden_403).json({ message: 'does not exists' })
+  if (!user) {
+    res.status(httpStatus.forbidden_403).json({ message: 'does not exists' })
 
-      return
-    }
+    return
+  }
 
-    if (!user.isActivated) {
-      res
-        .status(httpStatus.forbidden_403)
-        .json({ message: 'account not activated' })
+  if (!user.isActivated) {
+    res
+      .status(httpStatus.forbidden_403)
+      .json({ message: 'account not activated' })
 
-      return
-    }
+    return
+  }
 
-    const updatedUser = await UserModel.findOneAndUpdate(
-      { email: emailFromInput },
-      { resetPasswordKey: nanoid(5) },
-      { new: true },
-    )
+  const updatedUser = await UserModel.findOneAndUpdate(
+    { email: emailFromInput },
+    { resetPasswordKey: nanoid(5) },
+    { new: true },
+  )
 
-    const resetPasswordKey = updatedUser?.resetPasswordKey
+  const resetPasswordKey = updatedUser?.resetPasswordKey
 
-    if (!resetPasswordKey) {
-      res
-        .status(httpStatus.serverError_500)
-        .json({ message: 'reset key not issued' })
+  if (!resetPasswordKey) {
+    res
+      .status(httpStatus.serverError_500)
+      .json({ message: 'reset key not issued' })
 
-      return
-    }
+    return
+  }
 
-    const emailRes = await sendEmail({
-      to: emailFromInput,
-      subject: 'Password reset',
-      html: `
+  const emailRes = await sendEmail({
+    to: emailFromInput,
+    subject: 'Password reset',
+    html: `
         <p>Follow the link to reset the password.</p>
         <br>
         <p>
@@ -79,20 +79,17 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
           </a>
         </p>
       `,
-    })
+  })
 
-    if (emailRes?.[0].statusCode === 202) {
-      res.status(httpStatus.created_201).json({ message: 'reset link sent' })
+  if (emailRes?.[0].statusCode === 202) {
+    res.status(httpStatus.created_201).json({ message: 'reset link sent' })
 
-      return
-    }
-
-    res
-      .status(httpStatus.serverError_500)
-      .json({ message: 'reset link not sent' })
-  } catch (error) {
-    next(error)
+    return
   }
+
+  res
+    .status(httpStatus.serverError_500)
+    .json({ message: 'reset link not sent' })
 }
 
-requestPasswordResetRouter.post('/', requestPasswordReset)
+requestPasswordResetRouter.post('/', asyncHandler(requestPasswordReset))

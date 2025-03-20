@@ -13,6 +13,7 @@ import {
 import { setNoTraceCookie, setRefreshTokenCookie } from '@back/shared/headers'
 import { userRole } from '@back/shared/consts/userRole'
 import { getUserFromRefreshToken, UserModel } from '@back/entities/user'
+import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type ReqBody = {
   email: User['email']
@@ -46,85 +47,84 @@ type RouterHandler = (
 export const logInRouter = Router()
 
 const logIn: RouterHandler = async (req, res, next) => {
-  try {
-    const passwordFromInput = req.body.password
-    const emailFromInput = req.body.email.toLowerCase()
+  const passwordFromInput = req.body.password
+  const emailFromInput = req.body.email.toLowerCase()
 
-    const userFromDb = await UserModel.findOne({ email: emailFromInput }).lean()
+  const userFromDb = await UserModel.findOne({ email: emailFromInput }).lean()
 
-    if (!userFromDb) {
-      res.status(httpStatus.badRequest_400).json({ message: 'not registered' })
+  if (!userFromDb) {
+    res.status(httpStatus.badRequest_400).json({ message: 'not registered' })
 
-      return
-    }
+    return
+  }
 
-    const { roles, email: emailFromRefreshToken } = getUserFromRefreshToken({
-      req,
-    })
+  const { roles, email: emailFromRefreshToken } = getUserFromRefreshToken({
+    req,
+  })
 
-    const isSuperAdminOnBehalfOfUser =
-      roles.includes(userRole.superAdmin) &&
-      emailFromInput !== emailFromRefreshToken
+  const isSuperAdminOnBehalfOfUser =
+    roles.includes(userRole.superAdmin) &&
+    emailFromInput !== emailFromRefreshToken
 
-    if (isSuperAdminOnBehalfOfUser) {
-      // just log in as a user without password coz you are a super-admin
-      // do not leave traces of login + opening quotations & bookmarks
+  if (isSuperAdminOnBehalfOfUser) {
+    // just log in as a user without password coz you are a super-admin
+    // do not leave traces of login + opening quotations & bookmarks
 
-      const isExistingRefreshJwtToken = Boolean(
-        verifyRefreshToken(userFromDb.refreshJwtToken),
-      )
-
-      const refreshJwtToken = isExistingRefreshJwtToken
-        ? userFromDb.refreshJwtToken
-        : generateRefreshToken({
-            email: emailFromInput,
-            roles: userFromDb.roles,
-          })
-
-      setRefreshTokenCookie({ res, refreshJwtToken })
-      setNoTraceCookie({ res })
-
-      res.status(httpStatus.success_200).json({
-        message: 'super-admin on behalf of user',
-        accessJwtToken: generateAccessToken({
-          email: emailFromInput,
-          roles: userFromDb.roles,
-        }),
-        email: userFromDb.email,
-        roles: userFromDb.roles,
-        jwtRefreshTokenExpirationDays: getJwtExpirationInDays({
-          token: refreshJwtToken,
-        }),
-      })
-
-      return
-    }
-
-    // normal login process
-    const passwordFromDb = userFromDb.password
-
-    if (!passwordFromDb) {
-      res.status(httpStatus.badRequest_400).json({ message: 'no password' })
-
-      return
-    }
-
-    const isPasswordValid = await bcrypt.compare(
-      passwordFromInput,
-      passwordFromDb,
+    const isExistingRefreshJwtToken = Boolean(
+      verifyRefreshToken(userFromDb.refreshJwtToken),
     )
 
-    if (!isPasswordValid) {
-      res.status(httpStatus.forbidden_403).json({ message: 'bad password' })
+    const refreshJwtToken = isExistingRefreshJwtToken
+      ? userFromDb.refreshJwtToken
+      : generateRefreshToken({
+          email: emailFromInput,
+          roles: userFromDb.roles,
+        })
 
-      return
-    }
+    setRefreshTokenCookie({ res, refreshJwtToken })
+    setNoTraceCookie({ res })
 
-    if (!userFromDb.isActivated) {
-      const emailRes = await sendEmail({
-        to: emailFromInput,
-        subject: 'Activate your account again',
-        html: `
+    res.status(httpStatus.success_200).json({
+      message: 'super-admin on behalf of user',
+      accessJwtToken: generateAccessToken({
+        email: emailFromInput,
+        roles: userFromDb.roles,
+      }),
+      email: userFromDb.email,
+      roles: userFromDb.roles,
+      jwtRefreshTokenExpirationDays: getJwtExpirationInDays({
+        token: refreshJwtToken,
+      }),
+    })
+
+    return
+  }
+
+  // normal login process
+  const passwordFromDb = userFromDb.password
+
+  if (!passwordFromDb) {
+    res.status(httpStatus.badRequest_400).json({ message: 'no password' })
+
+    return
+  }
+
+  const isPasswordValid = await bcrypt.compare(
+    passwordFromInput,
+    passwordFromDb,
+  )
+
+  if (!isPasswordValid) {
+    res.status(httpStatus.forbidden_403).json({ message: 'bad password' })
+
+    return
+  }
+
+  if (!userFromDb.isActivated) {
+    const emailRes = await sendEmail({
+      to: emailFromInput,
+      subject: 'Activate your account again',
+      html: `
           <p>Looks like you did not activate your account during registration.</p>
           <p>Follow the link to activate the account.</p>
           <br>
@@ -137,67 +137,64 @@ const logIn: RouterHandler = async (req, res, next) => {
             </a>
           </p>
         `,
-      })
+    })
 
-      if (emailRes?.[0].statusCode === 202) {
-        res
-          .status(httpStatus.forbidden_403)
-          .json({ message: 'activation link sent again' })
-
-        return
-      }
-
+    if (emailRes?.[0].statusCode === 202) {
       res
-        .status(httpStatus.serverError_500)
-        .json({ message: 'activation link not sent' })
+        .status(httpStatus.forbidden_403)
+        .json({ message: 'activation link sent again' })
 
       return
     }
 
-    const isExistingRefreshJwtToken = Boolean(
-      verifyRefreshToken(userFromDb.refreshJwtToken),
-    )
+    res
+      .status(httpStatus.serverError_500)
+      .json({ message: 'activation link not sent' })
 
-    const refreshJwtToken = isExistingRefreshJwtToken
-      ? userFromDb.refreshJwtToken
-      : generateRefreshToken({ email: emailFromInput, roles: userFromDb.roles })
-
-    setRefreshTokenCookie({ res, refreshJwtToken })
-
-    const userUpdated = await UserModel.findOneAndUpdate(
-      { email: emailFromInput },
-      {
-        refreshJwtToken,
-        loggedAt: Date.now(),
-      },
-      { new: true },
-    )
-
-    if (!userUpdated) {
-      res
-        .status(httpStatus.serverError_500)
-        .json({ message: 'failed to update timestamp' })
-
-      return
-    }
-
-    const accessJwtToken = generateAccessToken({
-      email: emailFromInput,
-      roles: userFromDb.roles,
-    })
-
-    res.status(httpStatus.success_200).json({
-      message: 'good password',
-      accessJwtToken,
-      email: userUpdated.email,
-      roles: userUpdated.roles,
-      jwtRefreshTokenExpirationDays: getJwtExpirationInDays({
-        token: refreshJwtToken,
-      }),
-    })
-  } catch (error) {
-    next(error)
+    return
   }
+
+  const isExistingRefreshJwtToken = Boolean(
+    verifyRefreshToken(userFromDb.refreshJwtToken),
+  )
+
+  const refreshJwtToken = isExistingRefreshJwtToken
+    ? userFromDb.refreshJwtToken
+    : generateRefreshToken({ email: emailFromInput, roles: userFromDb.roles })
+
+  setRefreshTokenCookie({ res, refreshJwtToken })
+
+  const userUpdated = await UserModel.findOneAndUpdate(
+    { email: emailFromInput },
+    {
+      refreshJwtToken,
+      loggedAt: Date.now(),
+    },
+    { new: true },
+  )
+
+  if (!userUpdated) {
+    res
+      .status(httpStatus.serverError_500)
+      .json({ message: 'failed to update timestamp' })
+
+    return
+  }
+
+  const accessJwtToken = generateAccessToken({
+    email: emailFromInput,
+    roles: userFromDb.roles,
+  })
+
+  res.status(httpStatus.success_200).json({
+    message: 'good password',
+    accessJwtToken,
+    email: userUpdated.email,
+    roles: userUpdated.roles,
+    jwtRefreshTokenExpirationDays: getJwtExpirationInDays({
+      token: refreshJwtToken,
+    }),
+  })
 }
 
-logInRouter.post('/', logIn)
+logInRouter.post('/', asyncHandler(logIn))

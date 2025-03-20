@@ -9,6 +9,7 @@ import {
   getUserFromAccessTokenOrThrowUnauthorized,
   UserModel,
 } from '@back/entities/user'
+import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type UserPicked = Pick<
   User,
@@ -34,50 +35,46 @@ type RouterHandler = (
 export const getUsersRouter = Router()
 
 const getUsers: RouterHandler = async (req, res, next) => {
-  try {
-    const { roles } = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const { roles } = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
-    if (!roles.includes(userRole.superAdmin)) {
-      res
-        .status(httpStatus.forbidden_403)
-        .json({ message: 'no permission to view', users: [] })
+  if (!roles.includes(userRole.superAdmin)) {
+    res
+      .status(httpStatus.forbidden_403)
+      .json({ message: 'no permission to view', users: [] })
 
-      return
-    }
+    return
+  }
 
-    const users = await UserModel.find(
-      {},
-      {
-        _id: 0,
-        email: 1,
-        isActivated: 1,
-        loggedAt: 1,
-        registeredAt: 1,
-      },
-    )
-      .sort({ loggedAt: -1 })
-      .lean()
+  const users = await UserModel.find(
+    {},
+    {
+      _id: 0,
+      email: 1,
+      isActivated: 1,
+      loggedAt: 1,
+      registeredAt: 1,
+    },
+  )
+    .sort({ loggedAt: -1 })
+    .lean()
 
-    if (users.length === 0) {
-      res
-        .status(httpStatus.notFound_404)
-        .json({ message: 'No content', users: [] })
-
-      return
-    }
-
-    if (users.length) {
-      res.status(httpStatus.success_200).json({ message: 'users data', users })
-
-      return
-    }
-
+  if (users.length === 0) {
     res
       .status(httpStatus.notFound_404)
-      .json({ message: 'Unhandled case', users: [] })
-  } catch (error) {
-    next(error)
+      .json({ message: 'No content', users: [] })
+
+    return
   }
+
+  if (users.length) {
+    res.status(httpStatus.success_200).json({ message: 'users data', users })
+
+    return
+  }
+
+  res
+    .status(httpStatus.notFound_404)
+    .json({ message: 'Unhandled case', users: [] })
 }
 
-getUsersRouter.get('/', getUsers)
+getUsersRouter.get('/', asyncHandler(getUsers))

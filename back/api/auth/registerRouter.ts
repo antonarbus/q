@@ -6,6 +6,7 @@ import { nanoid } from '@back/shared/lib/nanoid'
 import { sendEmail } from '@back/shared/services/email'
 import { config } from '@back/config'
 import { UserModel } from '@back/entities/user'
+import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type ReqBody = {
   email: User['email']
@@ -30,47 +31,46 @@ type RouterHandler = (
 export const registerRouter = Router()
 
 const register: RouterHandler = async (req, res, next) => {
-  try {
-    const emailFromInput = req.body.email.toLowerCase()
-    const passwordFromInput = req.body.password
+  const emailFromInput = req.body.email.toLowerCase()
+  const passwordFromInput = req.body.password
 
-    const user = await UserModel.findOne({
-      email: emailFromInput,
-      isActivated: true,
-    }).lean()
+  const user = await UserModel.findOne({
+    email: emailFromInput,
+    isActivated: true,
+  }).lean()
 
-    if (user) {
-      res.status(httpStatus.forbidden_403).json({ message: 'already exists' })
+  if (user) {
+    res.status(httpStatus.forbidden_403).json({ message: 'already exists' })
 
-      return
-    }
+    return
+  }
 
-    const saltRounds = 10
-    const passwordEncrypted = await bcrypt.hash(passwordFromInput, saltRounds)
-    const activationKey = nanoid(5)
+  const saltRounds = 10
+  const passwordEncrypted = await bcrypt.hash(passwordFromInput, saltRounds)
+  const activationKey = nanoid(5)
 
-    const newUser = await UserModel.findOneAndUpdate(
-      { email: emailFromInput },
-      {
-        password: passwordEncrypted,
-        activationKey,
-        registeredAt: new Date(),
-      },
-      { new: true, upsert: true },
-    ).lean()
+  const newUser = await UserModel.findOneAndUpdate(
+    { email: emailFromInput },
+    {
+      password: passwordEncrypted,
+      activationKey,
+      registeredAt: new Date(),
+    },
+    { new: true, upsert: true },
+  ).lean()
 
-    if (newUser.activationKey !== activationKey) {
-      res
-        .status(httpStatus.serverError_500)
-        .json({ message: 'activation key not issued' })
+  if (newUser.activationKey !== activationKey) {
+    res
+      .status(httpStatus.serverError_500)
+      .json({ message: 'activation key not issued' })
 
-      return
-    }
+    return
+  }
 
-    const emailRes = await sendEmail({
-      to: emailFromInput,
-      subject: 'Activate your account',
-      html: `
+  const emailRes = await sendEmail({
+    to: emailFromInput,
+    subject: 'Activate your account',
+    html: `
         <p>Follow the link to activate the account.</p>
         <br>
         <p>
@@ -82,22 +82,17 @@ const register: RouterHandler = async (req, res, next) => {
           </a>
         </p>
       `,
-    })
+  })
 
-    if (emailRes?.[0].statusCode === 202) {
-      res
-        .status(httpStatus.created_201)
-        .json({ message: 'activation link sent' })
+  if (emailRes?.[0].statusCode === 202) {
+    res.status(httpStatus.created_201).json({ message: 'activation link sent' })
 
-      return
-    }
-
-    res
-      .status(httpStatus.serverError_500)
-      .json({ message: 'activation link not sent' })
-  } catch (error) {
-    next(error)
+    return
   }
+
+  res
+    .status(httpStatus.serverError_500)
+    .json({ message: 'activation link not sent' })
 }
 
-registerRouter.post('/', register)
+registerRouter.post('/', asyncHandler(register))
