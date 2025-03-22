@@ -4,6 +4,7 @@ import { createActor } from 'xstate'
 import type { WorkerResponseMessage } from './pdfWorker'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { createLoadingMenuIconMachine } from '@shared/nav'
+import { toast } from 'sonner'
 
 export type WorkerRequestMessage = {
   imageData: string
@@ -18,14 +19,14 @@ export type WorkerRequestMessage = {
   }[]
 }
 
-const loadingMenuIconMachine = createLoadingMenuIconMachine({
-  navItemKey: navItemKey.pdf,
+const menuIconMachine = createLoadingMenuIconMachine({
+  navItemKey: navItemKey.share,
 })
 
-const pdfLoadingIconActor = createActor(loadingMenuIconMachine).start()
+const loadingIconActor = createActor(menuIconMachine).start()
 
 export const downloadPdf = async (): Promise<void> => {
-  pdfLoadingIconActor.send({ type: 'show loading icon' })
+  loadingIconActor.send({ type: 'show loading icon' })
 
   const worker = new Worker(new URL('./pdfWorker', import.meta.url), {
     type: 'module',
@@ -118,13 +119,15 @@ export const downloadPdf = async (): Promise<void> => {
     URL.revokeObjectURL(pdfUrl)
 
     setTimeout(() => {
-      pdfLoadingIconActor.send({ type: 'show success icon' })
+      loadingIconActor.send({ type: 'show success icon' })
+      toast.info('File downloaded', { position: 'bottom-center' })
     }, 1000)
   }
 
   worker.onerror = (): void => {
     setTimeout(() => {
-      pdfLoadingIconActor.send({ type: 'show error icon' })
+      loadingIconActor.send({ type: 'show error icon' })
+      toast.error('Error downloading file', { position: 'bottom-center' })
     }, 1000)
   }
 }

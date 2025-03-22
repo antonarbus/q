@@ -4,6 +4,7 @@ import { navItemKey } from '@shared/consts/navItemKey'
 import { createActor } from 'xstate'
 import { getState } from '@shared/lib/redux'
 import type { Quotation } from '@entities/quotation'
+import { toast } from 'sonner'
 
 export type WorkerRequestMessage = {
   msg: 'send me excel'
@@ -11,13 +12,13 @@ export type WorkerRequestMessage = {
 }
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
-  navItemKey: navItemKey.excel,
+  navItemKey: navItemKey.share,
 })
 
-const excelLoadingIconActor = createActor(loadingMenuIconMachine).start()
+const loadingIconActor = createActor(loadingMenuIconMachine).start()
 
 export const downloadExcel = (): void => {
-  excelLoadingIconActor.send({ type: 'show loading icon' })
+  loadingIconActor.send({ type: 'show loading icon' })
 
   const worker = new Worker(new URL('./excelWorker', import.meta.url), {
     type: 'module',
@@ -43,13 +44,15 @@ export const downloadExcel = (): void => {
     URL.revokeObjectURL(excelUrl)
 
     setTimeout(() => {
-      excelLoadingIconActor.send({ type: 'show success icon' })
+      loadingIconActor.send({ type: 'show success icon' })
+      toast.info('File downloaded', { position: 'bottom-center' })
     }, 1000)
   }
 
   worker.onerror = (): void => {
     setTimeout(() => {
-      excelLoadingIconActor.send({ type: 'show error icon' })
+      loadingIconActor.send({ type: 'show error icon' })
+      toast.error('Error downloading file', { position: 'bottom-center' })
     }, 1000)
   }
 }

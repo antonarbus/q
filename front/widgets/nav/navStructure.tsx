@@ -1,6 +1,11 @@
 import { Person, Settings } from '@mui/icons-material'
 import { CiViewTable } from 'react-icons/ci'
-import { FaRegRectangleList, FaGripLines, FaUsersGear } from 'react-icons/fa6'
+import {
+  FaRegRectangleList,
+  FaGripLines,
+  FaUsersGear,
+  FaRegShareFromSquare,
+} from 'react-icons/fa6'
 import { FiLogOut, FiLogIn, FiDollarSign } from 'react-icons/fi'
 import {
   IoText,
@@ -84,27 +89,38 @@ export const navStructure: MenuItemType[] = [
         tooltip: 'Save or update quotation',
       },
       {
-        id: navItemKey.pdf,
-        icon: <FaRegFilePdf data-testid='pdf icon' />,
+        id: navItemKey.share,
+        icon: <FaRegShareFromSquare data-testid='share icon' />,
         isHidden: false,
-        name: 'Pdf',
-        disabled: true,
-        func: (): void => {
-          void downloadPdf()
-        },
-        tooltip: 'Save as .pdf',
+        name: 'Share',
+        disabled: false,
+        tooltip: 'Share quotation',
+        menuItems: [
+          {
+            id: navItemKey.pdf,
+            icon: <FaRegFilePdf data-testid='pdf icon' />,
+            isHidden: false,
+            name: 'Pdf',
+            disabled: true,
+            func: (): void => {
+              void downloadPdf()
+            },
+            tooltip: 'Save as .pdf',
+          },
+          {
+            id: navItemKey.excel,
+            icon: <RiFileExcel2Line data-testid='excel icon' />,
+            isHidden: false,
+            name: 'Excel',
+            disabled: true,
+            func: (): void => {
+              downloadExcel()
+            },
+            tooltip: 'Save as .xlsx',
+          },
+        ],
       },
-      {
-        id: navItemKey.excel,
-        icon: <RiFileExcel2Line data-testid='excel icon' />,
-        isHidden: false,
-        name: 'Excel',
-        disabled: true,
-        func: (): void => {
-          downloadExcel()
-        },
-        tooltip: 'Save as .xlsx',
-      },
+
       {
         id: navItemKey.insert,
         icon: <RiMenuAddFill data-testid='insert icon' />,
