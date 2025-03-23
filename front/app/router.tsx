@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import { lazy, Suspense } from 'react'
 import { type RouteObject, createBrowserRouter } from 'react-router-dom'
 import { BookmarkModal } from '@pages/bookmark_modal'
 import { ErrorPage } from '@pages/error_page'
@@ -25,25 +25,11 @@ import { userRole } from '@entities/user'
 import { Toaster } from 'sonner'
 import { ShareQuotationModal } from '@pages/share_quotation_modal'
 
-const Quotation = React.lazy(async () => {
-  return import('@pages/quotation_page')
-})
-
-const QuotationsPageLazy = React.lazy(async () => {
-  return import('@pages/quotations_page')
-})
-
-const BookmarksPageLazy = React.lazy(async () => {
-  return import('@pages/bookmarks_page')
-})
-
-const AdminPageLazy = React.lazy(async () => {
-  return import('@pages/admin_page')
-})
-
-const VisitorsPageLazy = React.lazy(async () => {
-  return import('@pages/visitors_page')
-})
+const Quotation = lazy(async () => import('@pages/quotation_page'))
+const QuotationsPageLazy = lazy(async () => import('@pages/quotations_page'))
+const BookmarksPageLazy = lazy(async () => import('@pages/bookmarks_page'))
+const AdminPageLazy = lazy(async () => import('@pages/admin_page'))
+const VisitorsPageLazy = lazy(async () => import('@pages/visitors_page'))
 
 const authRoutes: RouteObject[] = [
   {
