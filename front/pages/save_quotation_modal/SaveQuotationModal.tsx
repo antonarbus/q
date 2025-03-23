@@ -7,7 +7,6 @@ import {
   useLoadSaveQuotationModalWithDirectLink,
 } from '@features/open_close/open_save_quotation_modal'
 import { useQuotationSaveFormValues } from './useQuotationSaveFormValues'
-import { useIsButtonDisabled } from './useIsButtonDisabled'
 import { NameField } from '@shared/components/input_fields/NameField'
 import { CategoryField } from '@shared/components/input_fields/CategoryField'
 import { DescriptionField } from '@shared/components/input_fields/DescriptionField'
@@ -26,10 +25,6 @@ export const SaveQuotationModal = (): React.JSX.Element => {
   })
 
   useLoadSaveQuotationModalWithDirectLink({
-    saveQuotationFormValues,
-  })
-
-  const isButtonDisabled = useIsButtonDisabled({
     saveQuotationFormValues,
   })
 
@@ -52,7 +47,6 @@ export const SaveQuotationModal = (): React.JSX.Element => {
       headerText='Save quotation'
       headerIcon={<MdSaveAlt />}
       buttonText='Save'
-      isButtonDisabled={isButtonDisabled}
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
       isButtonError={isError}
@@ -62,14 +56,10 @@ export const SaveQuotationModal = (): React.JSX.Element => {
       onCloseClick={navigateUp}
       onSubmit={onSubmit}
     >
-      <NameField
-        nameSignal={saveQuotationFormValues.nameSignal}
-        required
-      />
+      <NameField nameSignal={saveQuotationFormValues.nameSignal} />
       <CategoryField
         categorySignal={saveQuotationFormValues.categorySignal}
         options={options}
-        required
       />
       <DescriptionField descSignal={saveQuotationFormValues.descSignal} />
       <InfoField infoSignal={saveQuotationFormValues.infoSignal} />

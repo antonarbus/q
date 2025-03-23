@@ -62,9 +62,11 @@ export const useSaveQuotation = ({
   }, [isPending])
 
   useUpdateEffect(() => {
-    if (isSuccess) {
+    if (isSuccess && data.quotation !== undefined) {
       if (data.message === 'saved') {
-        toast.success('Saved', { position: 'bottom-center' })
+        toast.success(`Saved under id ${data.quotation.id}`, {
+          position: 'bottom-center',
+        })
       }
 
       if (data.message === 'updated') {
@@ -80,41 +82,39 @@ export const useSaveQuotation = ({
       void updateCategories()
       void fetchQuotations()
 
-      if (data.quotation) {
-        dispatch(
-          quotationSlice.actions.loadQuotationReducer({
-            quotation: data.quotation,
-          }),
+      dispatch(
+        quotationSlice.actions.loadQuotationReducer({
+          quotation: data.quotation,
+        }),
+      )
+
+      showSuccessNavIcon({ navItemKey: navItemKey.save })
+
+      dispatch(navSlice.actions.removeUnderlineFromTopNav())
+
+      dispatch(textSlice.actions.setNotEditable())
+
+      setTimeout(() => {
+        dispatch(textSlice.actions.setEditable())
+      })
+
+      const slideOutAndChangeUrl = async (): Promise<void> => {
+        await asyncDelay(1000)
+        await slideOut()
+        const id = data.quotation?.id
+
+        const isQuotationsPage = window.location.pathname.includes(
+          route.quotations,
         )
 
-        showSuccessNavIcon({ navItemKey: navItemKey.save })
-
-        dispatch(navSlice.actions.removeUnderlineFromTopNav())
-
-        dispatch(textSlice.actions.setNotEditable())
-
-        setTimeout(() => {
-          dispatch(textSlice.actions.setEditable())
-        })
-
-        const slideOutAndChangeUrl = async (): Promise<void> => {
-          await asyncDelay(1000)
-          await slideOut()
-          const id = data.quotation?.id
-
-          const isQuotationsPage = window.location.pathname.includes(
-            route.quotations,
-          )
-
-          if (isQuotationsPage) {
-            void navigate('..', { replace: true })
-          } else {
-            void navigate(`/${id}`, { replace: true })
-          }
+        if (isQuotationsPage) {
+          void navigate('..', { replace: true })
+        } else {
+          void navigate(`/${id}`, { replace: true })
         }
-
-        void slideOutAndChangeUrl()
       }
+
+      void slideOutAndChangeUrl()
     }
   }, [isSuccess])
 

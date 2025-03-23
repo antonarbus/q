@@ -13,8 +13,8 @@ export const NameField = ({
   return (
     <div style={{ position: 'relative' }}>
       <TextField
-        placeholder='Item name'
-        label='Item name'
+        placeholder='Name'
+        label='Name'
         name='name'
         autoFocus
         fullWidth
