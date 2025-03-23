@@ -16,7 +16,6 @@ import { createLoadingMenuIconMachine, navSlice } from '@shared/nav'
 import { toast } from 'sonner'
 import { route } from '@shared/consts/route'
 import { asyncDelay } from '@shared/utils/delay'
-import { textSlice } from '@shared/lib/froala/textSlice'
 import { createActor } from 'xstate'
 
 type Props = {
@@ -83,19 +82,14 @@ export const useSaveQuotation = ({
       void updateCategories()
       void fetchQuotations()
 
+      loadingIconActor.send({ type: 'show success icon' })
+      dispatch(navSlice.actions.removeUnderlineFromTopNav())
+
       dispatch(
         quotationSlice.actions.loadQuotationReducer({
           quotation: data.quotation,
         }),
       )
-
-      loadingIconActor.send({ type: 'show success icon' })
-      dispatch(navSlice.actions.removeUnderlineFromTopNav())
-      dispatch(textSlice.actions.setNotEditable())
-
-      setTimeout(() => {
-        dispatch(textSlice.actions.setEditable())
-      })
 
       const slideOutAndChangeUrl = async (): Promise<void> => {
         await asyncDelay(1000)

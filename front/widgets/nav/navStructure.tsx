@@ -40,6 +40,8 @@ import { downloadPdf } from '@features/quotation/download_quotation_as_pdf'
 import { downloadExcel } from '@features/quotation/download_quotation_as_excel'
 import { FaRegFilePdf } from 'react-icons/fa'
 import { openShareQuotationModal } from '@features/open_close/open_share_quotation_modal'
+import { getState } from '@shared/lib/redux'
+import { saveQuotation } from '@features/quotation/save_quotation'
 
 export const navStructure: MenuItemType[] = [
   {
@@ -86,7 +88,11 @@ export const navStructure: MenuItemType[] = [
         // shortcut: ['control', 's'],
         link: `./${route.save}`,
         func: (): void => {
-          openSaveQuotationModal()
+          if (getState().quotation.id === 'new') {
+            openSaveQuotationModal()
+          } else {
+            void saveQuotation()
+          }
         },
         tooltip: 'Save or update quotation',
       },

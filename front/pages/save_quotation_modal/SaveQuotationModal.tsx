@@ -14,19 +14,15 @@ import { InfoField } from '@shared/components/input_fields/InfoField'
 import { useGetQuotationCategoriesQuery } from '@entities/quotation'
 import { router } from '@shared/lib/router'
 import { useSlide } from '@shared/utils/useSlide'
+import { useLocation } from 'react-router-dom'
+import { route } from '@shared/consts/route'
 
 export const SaveQuotationModal = (): React.JSX.Element => {
+  const { pathname } = useLocation()
   const { ref: modalRef, slideOut } = useSlide()
-
   const { saveQuotationFormValues } = useQuotationSaveFormValues()
-
-  useLoadInitValuesIntoSaveQuotationModal({
-    saveQuotationFormValues,
-  })
-
-  useLoadSaveQuotationModalWithDirectLink({
-    saveQuotationFormValues,
-  })
+  useLoadInitValuesIntoSaveQuotationModal({ saveQuotationFormValues })
+  useLoadSaveQuotationModalWithDirectLink({ saveQuotationFormValues })
 
   const { onSubmit, isPending, isSuccess, isError } = useSaveQuotation({
     saveQuotationFormValues,
@@ -63,7 +59,7 @@ export const SaveQuotationModal = (): React.JSX.Element => {
       />
       <DescriptionField descSignal={saveQuotationFormValues.descSignal} />
       <InfoField infoSignal={saveQuotationFormValues.infoSignal} />
-      <QuotationPreviewField />
+      {pathname.includes(route.quotations) && <QuotationPreviewField />}
     </FormModal>
   )
 }

@@ -7,7 +7,10 @@ export { backToQuotationRef } from './refs/backToQuotationRef'
 export { useGetQuotationMutation } from './api/useGetQuotationMutation'
 export { useGetQuotationsQuery } from './api/useGetQuotationsQuery'
 export { useDeleteQuotationMutation } from './api/useDeleteQuotationMutation'
-export { useSaveQuotationMutation } from './api/useSaveQuotationMutation'
+export {
+  useSaveQuotationMutation,
+  saveQuotationMutationFn,
+} from './api/useSaveQuotationMutation'
 export { useGetQuotationCategoriesQuery } from './api/useGetQuotationCategoriesQuery'
 
 // cacheUpdaters
