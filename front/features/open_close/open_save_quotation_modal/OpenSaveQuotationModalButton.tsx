@@ -2,7 +2,7 @@ import type { ReqBody } from '@back/api/bookmark/deleteBookmarkRouter'
 import { dispatch } from '@shared/lib/redux'
 import { IconButton, Tooltip } from '@mui/material'
 import { AiTwotoneEdit } from 'react-icons/ai'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { quotationSlice, useGetQuotationMutation } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
@@ -27,26 +27,21 @@ export const OpenSaveQuotationModalButton = ({
 
   useUpdateEffect(() => {
     if (isSuccess) {
-      if (!data.quotation) {
-        return
+      const quotation = data.quotation
+
+      if (quotation !== undefined) {
+        dispatch(textSlice.actions.setNotEditable())
+        dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
+
+        const navigateState: NavigateState = {
+          navigatedFrom: `/`,
+          navigateTo: `/${route.save}`,
+        }
+
+        void navigate(`./${id}`, {
+          state: navigateState,
+        })
       }
-
-      dispatch(textSlice.actions.setNotEditable())
-
-      dispatch(
-        quotationSlice.actions.loadQuotationReducer({
-          quotation: data.quotation,
-        }),
-      )
-
-      const navigateState: NavigateState = {
-        navigatedFrom: `/`,
-        navigateTo: `/${route.save}`,
-      }
-
-      void navigate(`./${id}`, {
-        state: navigateState,
-      })
     }
   }, [isSuccess])
 
@@ -58,23 +53,28 @@ export const OpenSaveQuotationModalButton = ({
 
   return (
     <Tooltip
-      title='Edit'
+      title='Quick edit'
       placement='bottom'
       enterDelay={500}
       enterNextDelay={500}
     >
-      <IconButton
-        size='small'
-        onClick={() => {
+      <Link
+        to={`./${id}`}
+        onClick={(e) => {
+          e.preventDefault()
           loadQuotation({ id })
         }}
-        sx={{
-          translate: '0px 1px',
-        }}
       >
-        {!isPending && <AiTwotoneEdit />}
-        {isPending && <RotatingLoaderIcon />}
-      </IconButton>
+        <IconButton
+          size='small'
+          sx={{
+            translate: '0px 1px',
+          }}
+        >
+          {!isPending && <AiTwotoneEdit />}
+          {isPending && <RotatingLoaderIcon />}
+        </IconButton>
+      </Link>
     </Tooltip>
   )
 }

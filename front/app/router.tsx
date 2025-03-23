@@ -144,6 +144,10 @@ const router = createBrowserRouter([
             path: `:quotationId`,
             element: <SaveQuotationModal />,
           },
+          {
+            path: `${route.share}/:quotationId`,
+            element: <ShareQuotationModal />,
+          },
         ],
       },
       {

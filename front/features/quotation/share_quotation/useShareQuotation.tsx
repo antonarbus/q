@@ -36,6 +36,9 @@ const loadingMenuIconMachine = createLoadingMenuIconMachine({
 
 const loadingIconActor = createActor(loadingMenuIconMachine).start()
 
+// TODO: add open route from quotations page
+// TODO: copy link to clipboard
+
 export const useShareQuotation = ({
   shareQuotationFormValues,
   slideOut,
