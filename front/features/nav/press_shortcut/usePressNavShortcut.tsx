@@ -73,7 +73,11 @@ export const usePressNavShortcut = ({ navStructure }: Props): void => {
       if (matchedNavItemByShortcut) {
         e.preventDefault()
 
-        matchedNavItemByShortcut.function?.()
+        if (matchedNavItemByShortcut.function) {
+          matchedNavItemByShortcut.function()
+
+          return
+        }
 
         if (matchedNavItemByShortcut.link) {
           void navigate(matchedNavItemByShortcut.link)

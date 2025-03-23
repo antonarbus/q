@@ -84,7 +84,7 @@ export const navStructure: MenuItemType[] = [
         icon: <FiSave data-testid='save icon' />,
         isHidden: false,
         name: 'Save',
-        // shortcut: ['control', 's'],
+        shortcut: ['control', 'shift', 's'],
         link: `./${route.save}`,
         func: (): void => {
           if (getState().quotation.id === 'new') {
@@ -155,7 +155,7 @@ export const navStructure: MenuItemType[] = [
                 name: 'Text',
                 icon: <IoText />,
                 isHidden: false,
-                shortcut: ['control', '2'],
+                shortcut: ['control', 'shift', '2'],
                 func: (e?: React.MouseEvent): void => {
                   insertTextBlock(e)
                 },
@@ -165,7 +165,7 @@ export const navStructure: MenuItemType[] = [
                 name: 'Items',
                 icon: <FaRegRectangleList />,
                 isHidden: false,
-                shortcut: ['control', '3'],
+                shortcut: ['control', 'shift', '3'],
                 func: (e?: React.MouseEvent): void => {
                   insertBoqBlock(e)
                 },
@@ -175,7 +175,7 @@ export const navStructure: MenuItemType[] = [
                 name: 'Price',
                 icon: <FiDollarSign />,
                 isHidden: false,
-                shortcut: ['control', '4'],
+                shortcut: ['control', 'shift', '4'],
                 func: (e?: React.MouseEvent): void => {
                   insertPriceBlock(e)
                 },
@@ -187,7 +187,7 @@ export const navStructure: MenuItemType[] = [
             name: 'Row',
             icon: <FaGripLines />,
             isHidden: false,
-            shortcut: ['control', '1'],
+            shortcut: ['control', 'shift', '1'],
             func: (e?: React.MouseEvent): void => {
               insertBoqRow(e)
             },
