@@ -139,7 +139,7 @@ export const AccessToken = (): React.JSX.Element => {
         }),
       )
 
-      loadingIconActor.send({ type: 'show error icon' })
+      // loadingIconActor.send({ type: 'show error icon' })
       resolveInitAccessTokenFetching('failed')
     }
   }, [isError])
