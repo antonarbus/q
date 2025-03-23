@@ -12,16 +12,12 @@ import {
 } from '@entities/quotation'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { nanoid } from '@shared/lib/nanoid'
-import {
-  navSlice,
-  showErrorNavIcon,
-  showLoadingNavIcon,
-  showSuccessNavIcon,
-} from '@shared/nav'
+import { createLoadingMenuIconMachine, navSlice } from '@shared/nav'
 import { toast } from 'sonner'
 import { route } from '@shared/consts/route'
 import { asyncDelay } from '@shared/utils/delay'
 import { textSlice } from '@shared/lib/froala/textSlice'
+import { createActor } from 'xstate'
 
 type Props = {
   saveQuotationFormValues: SaveQuotationFormValues
@@ -34,6 +30,12 @@ type Res = {
   isSuccess: UseMutationResult['isSuccess']
   isError: UseMutationResult['isError']
 }
+
+const loadingMenuIconMachine = createLoadingMenuIconMachine({
+  navItemKey: navItemKey.save,
+})
+
+const loadingIconActor = createActor(loadingMenuIconMachine).start()
 
 export const useSaveQuotation = ({
   saveQuotationFormValues,
@@ -52,12 +54,11 @@ export const useSaveQuotation = ({
   } = useSaveQuotationMutation()
 
   const { refetch: updateCategories } = useGetQuotationCategoriesQuery()
-
   const { refetch: fetchQuotations } = useGetQuotationsQuery()
 
   useUpdateEffect(() => {
     if (isPending) {
-      showLoadingNavIcon({ navItemKey: navItemKey.save })
+      loadingIconActor.send({ type: 'show loading icon' })
     }
   }, [isPending])
 
@@ -88,10 +89,8 @@ export const useSaveQuotation = ({
         }),
       )
 
-      showSuccessNavIcon({ navItemKey: navItemKey.save })
-
+      loadingIconActor.send({ type: 'show success icon' })
       dispatch(navSlice.actions.removeUnderlineFromTopNav())
-
       dispatch(textSlice.actions.setNotEditable())
 
       setTimeout(() => {
@@ -101,6 +100,7 @@ export const useSaveQuotation = ({
       const slideOutAndChangeUrl = async (): Promise<void> => {
         await asyncDelay(1000)
         await slideOut()
+
         const id = data.quotation?.id
 
         const isQuotationsPage = window.location.pathname.includes(
@@ -121,15 +121,14 @@ export const useSaveQuotation = ({
   useUpdateEffect(() => {
     if (isError) {
       toast.error(error.response?.data.message)
+      loadingIconActor.send({ type: 'show error icon' })
 
-      showErrorNavIcon({ navItemKey: navItemKey.save })
       reset()
     }
   }, [isError])
 
   const onSubmit = (e: React.FormEvent): void => {
     e.preventDefault()
-
     const email = getState().user.email
 
     if (!email) {

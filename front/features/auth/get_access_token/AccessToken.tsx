@@ -4,13 +4,20 @@ import { jwtDecode } from 'jwt-decode'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { useGetAccessTokenQuery, userRole, userSlice } from '@entities/user'
 import { navItemKey } from '@shared/consts/navItemKey'
-import { navSlice, showLoadingNavIcon } from '@shared/nav'
+import { createLoadingMenuIconMachine, navSlice } from '@shared/nav'
 import { agGridSlice } from '@shared/lib/ag_grid/agGridSlice'
+import { createActor } from 'xstate'
 
 export const {
   promise: initAccessTokenFetchingPromise,
   resolve: resolveInitAccessTokenFetching,
 } = Promise.withResolvers<'fetched' | 'failed'>()
+
+const loadingMenuIconMachine = createLoadingMenuIconMachine({
+  navItemKey: navItemKey.login,
+})
+
+const loadingIconActor = createActor(loadingMenuIconMachine).start()
 
 export const AccessToken = (): React.JSX.Element => {
   const {
@@ -33,7 +40,7 @@ export const AccessToken = (): React.JSX.Element => {
   // show jumping dots at table
   useUpdateEffect(() => {
     if (isFetching) {
-      showLoadingNavIcon({ navItemKey: navItemKey.login })
+      loadingIconActor.send({ type: 'show loading icon' })
 
       dispatch(
         agGridSlice.actions.showLoadingOverlay({
@@ -100,6 +107,7 @@ export const AccessToken = (): React.JSX.Element => {
         }),
       )
 
+      loadingIconActor.send({ type: 'show success icon' })
       resolveInitAccessTokenFetching('fetched')
     }
   }, [isSuccess])
@@ -131,6 +139,7 @@ export const AccessToken = (): React.JSX.Element => {
         }),
       )
 
+      loadingIconActor.send({ type: 'show error icon' })
       resolveInitAccessTokenFetching('failed')
     }
   }, [isError])

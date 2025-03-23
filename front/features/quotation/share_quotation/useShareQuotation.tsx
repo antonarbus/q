@@ -11,16 +11,12 @@ import {
 } from '@entities/quotation'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { nanoid } from '@shared/lib/nanoid'
-import {
-  navSlice,
-  showErrorNavIcon,
-  showLoadingNavIcon,
-  showSuccessNavIcon,
-} from '@shared/nav'
+import { createLoadingMenuIconMachine, navSlice } from '@shared/nav'
 import { toast } from 'sonner'
 import { route } from '@shared/consts/route'
 import { asyncDelay } from '@shared/utils/delay'
 import { textSlice } from '@shared/lib/froala/textSlice'
+import { createActor } from 'xstate'
 
 type Props = {
   shareQuotationFormValues: ShareQuotationFormValues
@@ -33,6 +29,12 @@ type Res = {
   isSuccess: UseMutationResult['isSuccess']
   isError: UseMutationResult['isError']
 }
+
+const loadingMenuIconMachine = createLoadingMenuIconMachine({
+  navItemKey: navItemKey.share,
+})
+
+const loadingIconActor = createActor(loadingMenuIconMachine).start()
 
 export const useShareQuotation = ({
   shareQuotationFormValues,
@@ -54,7 +56,7 @@ export const useShareQuotation = ({
 
   useUpdateEffect(() => {
     if (isPending) {
-      showLoadingNavIcon({ navItemKey: navItemKey.share })
+      loadingIconActor.send({ type: 'show loading icon' })
     }
   }, [isPending])
 
@@ -83,10 +85,8 @@ export const useShareQuotation = ({
           }),
         )
 
-        showSuccessNavIcon({ navItemKey: navItemKey.save })
-
+        loadingIconActor.send({ type: 'show success icon' })
         dispatch(navSlice.actions.removeUnderlineFromTopNav())
-
         dispatch(textSlice.actions.setNotEditable())
 
         setTimeout(() => {
@@ -117,8 +117,7 @@ export const useShareQuotation = ({
   useUpdateEffect(() => {
     if (isError) {
       toast.error(error.response?.data.message)
-
-      showErrorNavIcon({ navItemKey: navItemKey.save })
+      loadingIconActor.send({ type: 'show error icon' })
       reset()
     }
   }, [isError])

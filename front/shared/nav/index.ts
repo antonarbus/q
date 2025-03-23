@@ -8,10 +8,5 @@ export { navSlice } from './navSlice'
 export { Logo } from './ui/Logo'
 export { NavList } from './ui/NavList'
 
-// utils
-export { showLoadingNavIcon } from './utils/showLoadingNavIcon'
-export { showSuccessNavIcon } from './utils/showSuccessNavIcon'
-export { showErrorNavIcon } from './utils/showErrorNavIcon'
-
 // state machine
 export { createLoadingMenuIconMachine } from './state_machine/createLoadingMenuIconMachine'
