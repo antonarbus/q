@@ -1,65 +1,70 @@
 import { Chip, Tooltip } from '@mui/material'
 import type { ICellRendererParams } from 'ag-grid-community'
 import type { QuotationPick } from '@back/api/quotation/getQuotationsRouter'
+import { Link } from 'react-router-dom'
 
 export const SharedWithRenderer = (
   params: ICellRendererParams<QuotationPick, QuotationPick['sharedWith']>,
 ): React.ReactNode => {
-  if (
-    !params.value ||
-    (Array.isArray(params.value) && params.value.length === 0)
-  ) {
+  const sharedWith = params.value ?? []
+  const isSharedWithEverybody = sharedWith.at(0) === '*'
+  const isSharedWithNobody = sharedWith.length === 0
+  const quotationId = params.data?.id
+
+  if (isSharedWithNobody) {
     return (
-      <Chip
-        label='nobody'
-        variant='outlined'
-        color='warning'
-        sx={{
-          width: 'min-content',
-          margin: '2px',
-          fontSize: '10px',
-        }}
-      />
+      <Link to={`share/${quotationId}`}>
+        <Chip
+          label='nobody'
+          variant='outlined'
+          color='warning'
+          sx={{
+            width: 'min-content',
+            margin: '2px',
+            fontSize: '10px',
+          }}
+        />
+      </Link>
     )
   }
 
-  if (Array.isArray(params.value) && params.value.at(0) === '*') {
+  if (isSharedWithEverybody) {
     return (
-      <Chip
-        label='everybody'
-        variant='outlined'
-        color='info'
-        sx={{
-          width: 'min-content',
-          margin: '2px',
-          fontSize: '10px',
-        }}
-      />
+      <Link to={`share/${quotationId}`}>
+        <Chip
+          label='everybody'
+          variant='outlined'
+          color='info'
+          sx={{
+            width: 'min-content',
+            margin: '2px',
+            fontSize: '10px',
+          }}
+        />
+      </Link>
     )
   }
 
   return (
     <>
-      {params.value.map((email) => {
-        if (!params.value) {
-          return ''
-        }
-
+      {sharedWith.map((email) => {
         return (
           <Tooltip
             key={email}
-            title={params.value.length > 1 ? params.value.join('; ') : ''}
+            title={sharedWith.join('; ')}
             placement='top'
           >
-            <Chip
-              label={email}
-              variant='outlined'
-              sx={{
-                width: 'min-content',
-                margin: '2px',
-                fontSize: '10px',
-              }}
-            />
+            <Link to={`share/${quotationId}`}>
+              <Chip
+                label={email}
+                variant='outlined'
+                sx={{
+                  width: 'min-content',
+                  margin: '2px',
+                  fontSize: '10px',
+                }}
+              />
+            </Link>
           </Tooltip>
         )
       })}

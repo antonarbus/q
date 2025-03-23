@@ -1,6 +1,6 @@
 import { dispatch, getState } from '@shared/lib/redux'
 import type { UseMutationResult } from '@tanstack/react-query'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import {
   type Quotation,
@@ -15,7 +15,6 @@ import { createLoadingMenuIconMachine, navSlice } from '@shared/nav'
 import { toast } from 'sonner'
 import { route } from '@shared/consts/route'
 import { asyncDelay } from '@shared/utils/delay'
-import { textSlice } from '@shared/lib/froala/textSlice'
 import { createActor } from 'xstate'
 
 type Props = {
@@ -36,14 +35,12 @@ const loadingMenuIconMachine = createLoadingMenuIconMachine({
 
 const loadingIconActor = createActor(loadingMenuIconMachine).start()
 
-// TODO: add open route from quotations page
-// TODO: copy link to clipboard
-
 export const useShareQuotation = ({
   shareQuotationFormValues,
   slideOut,
 }: Props): Res => {
   const navigate = useNavigate()
+  const isQuotationsPage = useLocation().pathname.includes(route.quotations)
 
   const {
     mutate: saveQuotation,
@@ -64,56 +61,39 @@ export const useShareQuotation = ({
   }, [isPending])
 
   useUpdateEffect(() => {
-    if (isSuccess) {
+    const quotation = data?.quotation
+
+    if (isSuccess && quotation !== undefined) {
+      // may save new quotation by sharing the link, strange, but maybe nice
       if (data.message === 'saved') {
         toast.success('Saved', { position: 'bottom-center' })
       }
 
+      // usual case
       if (data.message === 'updated') {
         toast.info('Updated', { position: 'bottom-center' })
       }
 
       if (data.message === 'copied and saved') {
-        toast.success('Shared quotation was copied and saved', {
+        toast.success('Shared quotation was copied, saved and shared', {
           position: 'bottom-center',
         })
       }
 
       void fetchQuotations()
+      dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
+      loadingIconActor.send({ type: 'show success icon' })
+      dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
-      if (data.quotation) {
-        dispatch(
-          quotationSlice.actions.loadQuotationReducer({
-            quotation: data.quotation,
-          }),
-        )
-
-        loadingIconActor.send({ type: 'show success icon' })
-        dispatch(navSlice.actions.removeUnderlineFromTopNav())
-        dispatch(textSlice.actions.setNotEditable())
-
-        setTimeout(() => {
-          dispatch(textSlice.actions.setEditable())
-        })
-
-        const slideOutAndChangeUrl = async (): Promise<void> => {
-          await asyncDelay(1000)
-          await slideOut()
-          const id = data.quotation?.id
-
-          const isQuotationsPage = window.location.pathname.includes(
-            route.quotations,
-          )
-
-          if (isQuotationsPage) {
-            void navigate('..', { replace: true })
-          } else {
-            void navigate(`/${id}`, { replace: true })
-          }
-        }
-
-        void slideOutAndChangeUrl()
+      const slideOutAndChangeUrl = async (): Promise<void> => {
+        await asyncDelay(1000)
+        await slideOut()
+        const id = data.quotation?.id
+        const navigateTo = isQuotationsPage ? '..' : `/${id}`
+        void navigate(navigateTo, { replace: true })
       }
+
+      void slideOutAndChangeUrl()
     }
   }, [isSuccess])
 
@@ -128,9 +108,7 @@ export const useShareQuotation = ({
   const onSubmit = (e: React.FormEvent): void => {
     e.preventDefault()
 
-    const email = getState().user.email
-
-    if (!email) {
+    if (!getState().user.email) {
       toast.warning('Not logged in')
 
       return

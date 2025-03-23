@@ -18,7 +18,7 @@ import { useLocation } from 'react-router-dom'
 import { route } from '@shared/consts/route'
 
 export const SaveQuotationModal = (): React.JSX.Element => {
-  const forQuotationsPage = useLocation().pathname.includes(route.quotations)
+  const isQuotationsPage = useLocation().pathname.includes(route.quotations)
   const { ref: modalRef, slideOut } = useSlide()
   const { saveQuotationFormValues } = useQuotationSaveFormValues()
   useLoadInitValuesIntoSaveQuotationModal({ saveQuotationFormValues })
@@ -40,9 +40,9 @@ export const SaveQuotationModal = (): React.JSX.Element => {
     <FormModal
       modalRef={modalRef}
       width='500px'
-      headerText={forQuotationsPage ? 'Quick edit' : 'Save quotation'}
+      headerText={isQuotationsPage ? 'Quick edit' : 'Save quotation'}
       headerIcon={<MdSaveAlt />}
-      buttonText={forQuotationsPage ? 'Update' : 'Save'}
+      buttonText={isQuotationsPage ? 'Update' : 'Save'}
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
       isButtonError={isError}
@@ -59,7 +59,7 @@ export const SaveQuotationModal = (): React.JSX.Element => {
       />
       <DescriptionField descSignal={saveQuotationFormValues.descSignal} />
       <InfoField infoSignal={saveQuotationFormValues.infoSignal} />
-      {forQuotationsPage && <QuotationPreviewField />}
+      {isQuotationsPage && <QuotationPreviewField />}
     </FormModal>
   )
 }

@@ -1,6 +1,6 @@
 import { dispatch, getState } from '@shared/lib/redux'
 import type { UseMutationResult } from '@tanstack/react-query'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import {
   type Quotation,
@@ -41,6 +41,7 @@ export const useSaveQuotation = ({
   slideOut,
 }: Props): Res => {
   const navigate = useNavigate()
+  const isQuotationsPage = useLocation().pathname.includes(route.quotations)
 
   const {
     mutate: saveQuotation,
@@ -101,18 +102,9 @@ export const useSaveQuotation = ({
       const slideOutAndChangeUrl = async (): Promise<void> => {
         await asyncDelay(1000)
         await slideOut()
-
         const id = data.quotation?.id
-
-        const isQuotationsPage = window.location.pathname.includes(
-          route.quotations,
-        )
-
-        if (isQuotationsPage) {
-          void navigate('..', { replace: true })
-        } else {
-          void navigate(`/${id}`, { replace: true })
-        }
+        const navigateTo = isQuotationsPage ? '..' : `/${id}`
+        void navigate(navigateTo, { replace: true })
       }
 
       void slideOutAndChangeUrl()
