@@ -79,7 +79,7 @@ export const navStructure: MenuItemType[] = [
         name: 'Save',
         shortcut: ['control', 'shift', 's'],
         link: `./${route.save}`,
-        tooltip: 'Save or update quotation',
+        tooltip: 'Save or update quotation (shortcut: ctrl+shift+s)',
         func: (): void => {
           if (getState().quotation.id === 'new') {
             openSaveQuotationModal()
