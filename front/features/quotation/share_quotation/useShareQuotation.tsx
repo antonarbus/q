@@ -66,7 +66,9 @@ export const useShareQuotation = ({
     if (isSuccess && quotation !== undefined) {
       // may save new quotation by sharing the link, strange, but maybe nice
       if (data.message === 'saved') {
-        toast.success('Saved', { position: 'bottom-center' })
+        toast.success(`Saved under id ${quotation.id}`, {
+          position: 'bottom-center',
+        })
       }
 
       // usual case

@@ -10,6 +10,7 @@ import {
   useLoadShareQuotationModalWithDirectLink,
 } from '@features/open_close/open_share_quotation_modal'
 import { useShareQuotation } from '@features/quotation/share_quotation'
+import { getState } from '@shared/lib/redux'
 
 export const ShareQuotationModal = (): React.JSX.Element => {
   const { ref: modalRef, slideOut } = useSlide()
@@ -17,6 +18,7 @@ export const ShareQuotationModal = (): React.JSX.Element => {
   useLoadInitValuesIntoShareQuotationModal({ shareQuotationFormValues })
   useLoadShareQuotationModalWithDirectLink({ shareQuotationFormValues })
   const isButtonDisabled = useIsButtonDisabled({ shareQuotationFormValues })
+  const isNewQuotation = getState().quotation.id === 'new'
 
   const { onSubmit, isPending, isSuccess, isError } = useShareQuotation({
     shareQuotationFormValues,
@@ -33,7 +35,7 @@ export const ShareQuotationModal = (): React.JSX.Element => {
       width='500px'
       headerText='Share quotation'
       headerIcon={<ImLink />}
-      buttonText='Save'
+      buttonText={isNewQuotation ? 'Save and share' : 'Update'}
       isButtonDisabled={isButtonDisabled}
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
