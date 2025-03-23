@@ -7,13 +7,12 @@ import {
   FaUsersGear,
   FaRegShareFromSquare,
 } from 'react-icons/fa6'
-import { FiLogOut, FiLogIn, FiDollarSign } from 'react-icons/fi'
+import { FiLogOut, FiLogIn, FiDollarSign, FiSave } from 'react-icons/fi'
 import {
   IoText,
   IoChevronBackOutline,
   IoStatsChartOutline,
 } from 'react-icons/io5'
-import { MdSaveAlt } from 'react-icons/md'
 import { PiFolderSimpleStarDuotone } from 'react-icons/pi'
 import { RiMenuAddFill, RiAdminLine, RiFileExcel2Line } from 'react-icons/ri'
 import { TbRectangleVertical } from 'react-icons/tb'
@@ -82,7 +81,7 @@ export const navStructure: MenuItemType[] = [
       },
       {
         id: navItemKey.save,
-        icon: <MdSaveAlt data-testid='save icon' />,
+        icon: <FiSave data-testid='save icon' />,
         isHidden: false,
         name: 'Save',
         // shortcut: ['control', 's'],
