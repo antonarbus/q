@@ -1,8 +1,5 @@
 import { model, Schema } from 'mongoose'
-import type { Quotation } from '@entities/quotation/types'
-// import { nanoid } from '../../lib/nanoid'
-
-// export type QuotationModelType = Omit<Quotation, 'items'>
+import type { Quotation } from '@entities/quotation'
 
 const quotationSchema = new Schema<Quotation>({
   id: {

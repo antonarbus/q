@@ -1,8 +1,7 @@
 import { useEffectOnce } from 'react-use'
 import { useSignal } from '@preact/signals-react'
-import { getFromStore } from '@entities/quotation'
+import { getFromStore, type InfoFormValues } from '@entities/quotation'
 import { useParams } from 'react-router-dom'
-import type { InfoFormValues } from '@entities/quotation/types'
 
 type Res = {
   infoFormValues: InfoFormValues

@@ -1,6 +1,6 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { FlattenMaps } from 'mongoose'
-import type { Quotation } from '@entities/quotation/types'
+import type { Quotation } from '@entities/quotation'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { bucket, storageFolderName } from '@back/shared/services/storage'

@@ -3,7 +3,7 @@ import { type RouteObject, createBrowserRouter } from 'react-router-dom'
 import { BookmarkModal } from '@pages/bookmark_modal'
 import { ErrorPage } from '@pages/error_page'
 import { InfoModal } from '@pages/info_modal'
-import { QuotationModal } from '@pages/quotation_modal'
+import { SaveQuotationModal } from '@pages/save_quotation_modal'
 import { SettingsModal } from '@pages/settings_modal'
 import { Copy } from '@widgets/copy'
 import { Nav } from '@widgets/nav'
@@ -23,6 +23,7 @@ import { instantiateRouter } from '@shared/lib/router'
 import { OnInitLoad } from './OnInitLoad'
 import { userRole } from '@entities/user'
 import { Toaster } from 'sonner'
+import { ShareQuotationModal } from '@pages/share_quotation_modal'
 
 const Quotation = React.lazy(async () => {
   return import('@pages/quotation_page')
@@ -117,7 +118,11 @@ const router = createBrowserRouter([
           ...authRoutes,
           {
             path: route.save,
-            element: <QuotationModal />,
+            element: <SaveQuotationModal />,
+          },
+          {
+            path: route.share,
+            element: <ShareQuotationModal />,
           },
           {
             path: `${route.bookmark}/:bookmarkId`,
@@ -151,7 +156,7 @@ const router = createBrowserRouter([
           ...authRoutes,
           {
             path: `:quotationId`,
-            element: <QuotationModal />,
+            element: <SaveQuotationModal />,
           },
         ],
       },

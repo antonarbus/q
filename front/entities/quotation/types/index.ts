@@ -120,11 +120,14 @@ export type Quotation = Common & {
   blocks: Item[]
 }
 
-export type QuotationFormValues = {
+export type SaveQuotationFormValues = {
   nameSignal: Signal<string>
   categorySignal: Signal<string>
   descSignal: Signal<string>
   infoSignal: Signal<string>
+}
+
+export type ShareQuotationFormValues = {
   sharedWithSignal: Signal<string[]>
   shareWithOptionSignal: Signal<SharedWithOption>
 }

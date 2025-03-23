@@ -3,10 +3,10 @@ import { getState } from '@shared/lib/redux'
 import { route } from '@shared/consts/route'
 import type { NavigateState } from '@shared/types/NavigateState'
 
-export const openQuotationModal = (): void => {
+export const openShareQuotationModal = (): void => {
   const navigateState: NavigateState = {
     navigatedFrom: `/`,
-    navigateTo: `/${route.save}`,
+    navigateTo: `/${route.share}`,
   }
 
   if (!getState().user.email) {
@@ -17,7 +17,7 @@ export const openQuotationModal = (): void => {
     return
   }
 
-  void router.navigate(`./${route.save}`, {
+  void router.navigate(`./${route.share}`, {
     state: navigateState,
   })
 }

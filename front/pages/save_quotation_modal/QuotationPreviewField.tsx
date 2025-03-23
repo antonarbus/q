@@ -10,7 +10,9 @@ type Props = {
   children: React.ReactNode
 }
 
-const QuotationFieldLayout = ({ children }: Props): React.JSX.Element => {
+const QuotationPreviewFieldLayout = ({
+  children,
+}: Props): React.JSX.Element => {
   useEffectOnce(() => {
     dispatch(textSlice.actions.setEditable())
   })
@@ -55,12 +57,12 @@ const QuotationFieldLayout = ({ children }: Props): React.JSX.Element => {
   )
 }
 
-export const QuotationField = (): React.ReactNode => {
+export const QuotationPreviewField = (): React.ReactNode => {
   const blocks = getState().quotation.blocks
 
   return (
-    <QuotationFieldLayout>
+    <QuotationPreviewFieldLayout>
       <Blocks blocks={blocks} />
-    </QuotationFieldLayout>
+    </QuotationPreviewFieldLayout>
   )
 }

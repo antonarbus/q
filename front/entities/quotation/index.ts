@@ -105,4 +105,7 @@ export type {
   Price,
   Item,
   Quotation,
+  SaveQuotationFormValues,
+  ShareQuotationFormValues,
+  InfoFormValues,
 } from './types'

@@ -1,19 +1,18 @@
 import {
-  getWhoQuotationSharedWithOption,
   quotationSlice,
   useGetQuotationMutation,
+  type SaveQuotationFormValues,
 } from '@entities/quotation'
-import type { QuotationFormValues } from '@entities/quotation/types'
 import { dispatch, getState } from '@shared/lib/redux'
 import { useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 
 type Props = {
-  quotationFormValues: QuotationFormValues
+  saveQuotationFormValues: SaveQuotationFormValues
 }
 
-export const useLoadQuotationModalWithDirectLink = ({
-  quotationFormValues,
+export const useLoadSaveQuotationModalWithDirectLink = ({
+  saveQuotationFormValues,
 }: Props): void => {
   const { quotationId } = useParams()
 
@@ -40,13 +39,9 @@ export const useLoadQuotationModalWithDirectLink = ({
 
     dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
 
-    quotationFormValues.nameSignal.value = quotation.name ?? ''
-    quotationFormValues.categorySignal.value = quotation.category ?? ''
-    quotationFormValues.descSignal.value = quotation.desc ?? ''
-    quotationFormValues.infoSignal.value = quotation.info ?? ''
-    quotationFormValues.sharedWithSignal.value = quotation.sharedWith ?? []
-
-    quotationFormValues.shareWithOptionSignal.value =
-      getWhoQuotationSharedWithOption({ quotation })
+    saveQuotationFormValues.nameSignal.value = quotation.name ?? ''
+    saveQuotationFormValues.categorySignal.value = quotation.category ?? ''
+    saveQuotationFormValues.descSignal.value = quotation.desc ?? ''
+    saveQuotationFormValues.infoSignal.value = quotation.info ?? ''
   }, [isSuccess])
 }

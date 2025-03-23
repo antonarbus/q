@@ -9,6 +9,7 @@ export const route = {
   new: 'new',
   quotations: 'quotations',
   save: 'save',
+  share: 'share',
   bookmarks: 'bookmarks',
   bookmark: 'bookmark',
   info: 'info',

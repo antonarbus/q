@@ -1,5 +1,6 @@
 import { Person, Settings } from '@mui/icons-material'
 import { CiViewTable } from 'react-icons/ci'
+import { ImLink } from 'react-icons/im'
 import {
   FaRegRectangleList,
   FaGripLines,
@@ -30,7 +31,7 @@ import {
   openQuotationPageAndLoadPrev,
 } from '@features/open_close/open_quotation_page'
 import { openQuotationsPage } from '@features/open_close/open_quotations_page'
-import { openQuotationModal } from '@features/open_close/open_quotation_modal'
+import { openSaveQuotationModal } from '@features/open_close/open_save_quotation_modal'
 import { openSettingsModal } from '@features/open_close/open_settings_modal'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { route } from '@shared/consts/route'
@@ -38,6 +39,7 @@ import type { MenuItemType } from '@shared/nav'
 import { downloadPdf } from '@features/quotation/download_quotation_as_pdf'
 import { downloadExcel } from '@features/quotation/download_quotation_as_excel'
 import { FaRegFilePdf } from 'react-icons/fa'
+import { openShareQuotationModal } from '@features/open_close/open_share_quotation_modal'
 
 export const navStructure: MenuItemType[] = [
   {
@@ -84,7 +86,7 @@ export const navStructure: MenuItemType[] = [
         // shortcut: ['control', 's'],
         link: `./${route.save}`,
         func: (): void => {
-          openQuotationModal()
+          openSaveQuotationModal()
         },
         tooltip: 'Save or update quotation',
       },
@@ -97,26 +99,35 @@ export const navStructure: MenuItemType[] = [
         tooltip: 'Share quotation',
         menuItems: [
           {
+            id: navItemKey.link,
+            icon: <ImLink data-testid='link icon' />,
+            name: 'Link',
+            isHidden: false,
+            disabled: false,
+            tooltip: 'Share link for quotation',
+            func: openShareQuotationModal,
+          },
+          {
             id: navItemKey.pdf,
             icon: <FaRegFilePdf data-testid='pdf icon' />,
             isHidden: false,
-            name: 'Pdf',
-            disabled: true,
+            disabled: false,
+            name: 'Download as .pdf',
+            tooltip: 'Download as .pdf',
             func: (): void => {
               void downloadPdf()
             },
-            tooltip: 'Save as .pdf',
           },
           {
             id: navItemKey.excel,
             icon: <RiFileExcel2Line data-testid='excel icon' />,
             isHidden: false,
-            name: 'Excel',
-            disabled: true,
+            disabled: false,
+            name: 'Download as .xlsx',
+            tooltip: 'Download as .xlsx',
             func: (): void => {
               downloadExcel()
             },
-            tooltip: 'Save as .xlsx',
           },
         ],
       },

@@ -1,13 +1,12 @@
 import { MdSaveAlt } from 'react-icons/md'
 import { useSaveQuotation } from '@features/quotation/save_quotation'
 import { FormModal } from '@shared/components/FormModal'
-import { ShareField } from './ShareField'
-import { QuotationField } from './QuotationField'
+import { QuotationPreviewField } from './QuotationPreviewField'
 import {
-  useLoadInitValuesIntoQuotationModal,
-  useLoadQuotationModalWithDirectLink,
-} from '@features/open_close/open_quotation_modal'
-import { useQuotationFormValues } from './useFormValues'
+  useLoadInitValuesIntoSaveQuotationModal,
+  useLoadSaveQuotationModalWithDirectLink,
+} from '@features/open_close/open_save_quotation_modal'
+import { useQuotationSaveFormValues } from './useQuotationSaveFormValues'
 import { useIsButtonDisabled } from './useIsButtonDisabled'
 import { NameField } from '@shared/components/input_fields/NameField'
 import { CategoryField } from '@shared/components/input_fields/CategoryField'
@@ -17,15 +16,25 @@ import { useGetQuotationCategoriesQuery } from '@entities/quotation'
 import { router } from '@shared/lib/router'
 import { useSlide } from '@shared/utils/useSlide'
 
-export const QuotationModal = (): React.JSX.Element => {
+export const SaveQuotationModal = (): React.JSX.Element => {
   const { ref: modalRef, slideOut } = useSlide()
-  const { quotationFormValues } = useQuotationFormValues()
-  useLoadInitValuesIntoQuotationModal({ quotationFormValues })
-  useLoadQuotationModalWithDirectLink({ quotationFormValues })
-  const isButtonDisabled = useIsButtonDisabled({ quotationFormValues })
+
+  const { saveQuotationFormValues } = useQuotationSaveFormValues()
+
+  useLoadInitValuesIntoSaveQuotationModal({
+    saveQuotationFormValues,
+  })
+
+  useLoadSaveQuotationModalWithDirectLink({
+    saveQuotationFormValues,
+  })
+
+  const isButtonDisabled = useIsButtonDisabled({
+    saveQuotationFormValues,
+  })
 
   const { onSubmit, isPending, isSuccess, isError } = useSaveQuotation({
-    quotationFormValues,
+    saveQuotationFormValues,
     slideOut,
   })
 
@@ -54,21 +63,17 @@ export const QuotationModal = (): React.JSX.Element => {
       onSubmit={onSubmit}
     >
       <NameField
-        nameSignal={quotationFormValues.nameSignal}
+        nameSignal={saveQuotationFormValues.nameSignal}
         required
       />
       <CategoryField
-        categorySignal={quotationFormValues.categorySignal}
+        categorySignal={saveQuotationFormValues.categorySignal}
         options={options}
         required
       />
-      <DescriptionField descSignal={quotationFormValues.descSignal} />
-      <InfoField infoSignal={quotationFormValues.infoSignal} />
-      <ShareField
-        shareWithOptionSignal={quotationFormValues.shareWithOptionSignal}
-        sharedWithSignal={quotationFormValues.sharedWithSignal}
-      />
-      <QuotationField />
+      <DescriptionField descSignal={saveQuotationFormValues.descSignal} />
+      <InfoField infoSignal={saveQuotationFormValues.infoSignal} />
+      <QuotationPreviewField />
     </FormModal>
   )
 }

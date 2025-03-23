@@ -1,0 +1,1 @@
+export { useShareQuotation } from './useShareQuotation'

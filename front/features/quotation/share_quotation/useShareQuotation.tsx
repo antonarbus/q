@@ -5,10 +5,9 @@ import { useUpdateEffect } from 'react-use'
 import {
   type Quotation,
   quotationSlice,
-  useGetQuotationCategoriesQuery,
   useGetQuotationsQuery,
   useSaveQuotationMutation,
-  type SaveQuotationFormValues,
+  type ShareQuotationFormValues,
 } from '@entities/quotation'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { nanoid } from '@shared/lib/nanoid'
@@ -24,7 +23,7 @@ import { asyncDelay } from '@shared/utils/delay'
 import { textSlice } from '@shared/lib/froala/textSlice'
 
 type Props = {
-  saveQuotationFormValues: SaveQuotationFormValues
+  shareQuotationFormValues: ShareQuotationFormValues
   slideOut: () => Promise<void>
 }
 
@@ -35,8 +34,8 @@ type Res = {
   isError: UseMutationResult['isError']
 }
 
-export const useSaveQuotation = ({
-  saveQuotationFormValues,
+export const useShareQuotation = ({
+  shareQuotationFormValues,
   slideOut,
 }: Props): Res => {
   const navigate = useNavigate()
@@ -51,13 +50,11 @@ export const useSaveQuotation = ({
     reset,
   } = useSaveQuotationMutation()
 
-  const { refetch: updateCategories } = useGetQuotationCategoriesQuery()
-
   const { refetch: fetchQuotations } = useGetQuotationsQuery()
 
   useUpdateEffect(() => {
     if (isPending) {
-      showLoadingNavIcon({ navItemKey: navItemKey.save })
+      showLoadingNavIcon({ navItemKey: navItemKey.share })
     }
   }, [isPending])
 
@@ -77,7 +74,6 @@ export const useSaveQuotation = ({
         })
       }
 
-      void updateCategories()
       void fetchQuotations()
 
       if (data.quotation) {
@@ -144,11 +140,7 @@ export const useSaveQuotation = ({
     const quotation: Quotation = {
       ...getState().quotation,
       id,
-      name: saveQuotationFormValues.nameSignal.value,
-      category: saveQuotationFormValues.categorySignal.value,
-      desc: saveQuotationFormValues.descSignal.value,
-      info: saveQuotationFormValues.infoSignal.value,
-      blocks: getState().quotation.blocks,
+      sharedWith: shareQuotationFormValues.sharedWithSignal.value,
     }
 
     saveQuotation({ quotation })

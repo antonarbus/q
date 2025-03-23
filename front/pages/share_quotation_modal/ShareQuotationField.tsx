@@ -28,7 +28,7 @@ type Props = {
   sharedWithSignal: Signal<Quotation['sharedWith']>
 }
 
-export const ShareField = ({
+export const ShareQuotationField = ({
   shareWithOptionSignal,
   sharedWithSignal,
 }: Props): React.JSX.Element => {

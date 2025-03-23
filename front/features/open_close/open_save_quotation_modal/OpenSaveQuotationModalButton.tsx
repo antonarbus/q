@@ -11,7 +11,7 @@ import { toast } from 'sonner'
 import type { NavigateState } from '@shared/types/NavigateState'
 import { textSlice } from '@shared/lib/froala/textSlice'
 
-export const OpenQuotationModalButton = ({
+export const OpenSaveQuotationModalButton = ({
   id,
 }: ReqBody): React.JSX.Element => {
   const navigate = useNavigate()
