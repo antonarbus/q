@@ -1,5 +1,9 @@
 import { dispatch, getState } from '@shared/lib/redux'
-import { type Quotation, saveQuotationMutationFn } from '@entities/quotation'
+import {
+  type Quotation,
+  quotationSlice,
+  saveQuotationMutationFn,
+} from '@entities/quotation'
 import { navItemKey } from '@shared/consts/navItemKey'
 import { createLoadingMenuIconMachine, navSlice } from '@shared/nav'
 import { toast } from 'sonner'
@@ -13,7 +17,7 @@ const loadingMenuIconMachine = createLoadingMenuIconMachine({
 
 const loadingIconActor = createActor(loadingMenuIconMachine).start()
 
-export const saveQuotation = async (): Promise<void> => {
+export const saveExistingQuotation = async (): Promise<void> => {
   const { email } = getState().user
 
   if (!email) {
@@ -31,24 +35,24 @@ export const saveQuotation = async (): Promise<void> => {
     const data = await saveQuotationMutationFn({ quotation })
 
     if (data.quotation !== undefined) {
-      // if (data.message === 'saved') {
-      //   toast.success(`Saved under id ${data.quotation.id}`, {
-      //     position: 'bottom-center',
-      //   })
-      // }
-
       if (data.message === 'updated') {
         toast.info('Updated', { position: 'bottom-center' })
       }
 
       if (data.message === 'copied and saved') {
-        toast.success('Shared quotation was copied and saved', {
-          position: 'bottom-center',
-        })
+        toast.success(
+          `Shared quotation was copied and saved under id ${data.quotation.id}`,
+          {
+            position: 'bottom-center',
+          },
+        )
       }
 
-      // void updateCategories()
-      // void fetchQuotations()
+      dispatch(
+        quotationSlice.actions.loadQuotationReducer({
+          quotation: data.quotation,
+        }),
+      )
 
       loadingIconActor.send({ type: 'show success icon' })
       dispatch(navSlice.actions.removeUnderlineFromTopNav())

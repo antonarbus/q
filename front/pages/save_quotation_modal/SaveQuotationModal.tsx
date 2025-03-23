@@ -1,5 +1,5 @@
 import { MdSaveAlt } from 'react-icons/md'
-import { useSaveQuotation } from '@features/quotation/save_quotation'
+import { useSaveNewQuotation } from '@features/quotation/save_quotation'
 import { FormModal } from '@shared/components/FormModal'
 import { QuotationPreviewField } from './QuotationPreviewField'
 import {
@@ -24,7 +24,7 @@ export const SaveQuotationModal = (): React.JSX.Element => {
   useLoadInitValuesIntoSaveQuotationModal({ saveQuotationFormValues })
   useLoadSaveQuotationModalWithDirectLink({ saveQuotationFormValues })
 
-  const { onSubmit, isPending, isSuccess, isError } = useSaveQuotation({
+  const { onSubmit, isPending, isSuccess, isError } = useSaveNewQuotation({
     saveQuotationFormValues,
     slideOut,
   })

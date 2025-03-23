@@ -36,7 +36,7 @@ const loadingMenuIconMachine = createLoadingMenuIconMachine({
 
 const loadingIconActor = createActor(loadingMenuIconMachine).start()
 
-export const useSaveQuotation = ({
+export const useSaveNewQuotation = ({
   saveQuotationFormValues,
   slideOut,
 }: Props): Res => {
@@ -69,14 +69,19 @@ export const useSaveQuotation = ({
         })
       }
 
+      // ths should not be a use case in ui, but we still may open /id/save route directly
       if (data.message === 'updated') {
         toast.info('Updated', { position: 'bottom-center' })
       }
 
+      // this should not be a use case in ui, but we still may open /id/save route directly
       if (data.message === 'copied and saved') {
-        toast.success('Shared quotation was copied and saved', {
-          position: 'bottom-center',
-        })
+        toast.success(
+          `Shared quotation was copied and saved under id ${data.quotation.id}`,
+          {
+            position: 'bottom-center',
+          },
+        )
       }
 
       void updateCategories()
