@@ -1,2 +1,2 @@
-export { useSaveNewQuotation } from './useSaveNewQuotation'
+export { useSaveQuotation } from './useSaveQuotation'
 export { saveExistingQuotation } from './saveExistingQuotation'
