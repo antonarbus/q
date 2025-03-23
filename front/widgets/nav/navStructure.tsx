@@ -58,11 +58,7 @@ export const navStructure: MenuItemType[] = [
         ),
         isHidden: true,
         name: 'Back',
-        // shortcut: ['control', 'n'],
-        // link: route.back,
-        func: (): void => {
-          openQuotationPageAndLoadPrev()
-        },
+        func: openQuotationPageAndLoadPrev,
         isActive: true,
         tooltip: 'Back to quotation',
       },
@@ -71,11 +67,8 @@ export const navStructure: MenuItemType[] = [
         icon: <VscNewFile data-testid='new icon' />,
         isHidden: false,
         name: 'New',
-        // shortcut: ['control', 'n'],
         link: route.new,
-        func: (): void => {
-          openQuotationPageAndLoadNew()
-        },
+        func: openQuotationPageAndLoadNew,
         isActive: true,
         tooltip: 'New quotation',
       },
@@ -86,6 +79,7 @@ export const navStructure: MenuItemType[] = [
         name: 'Save',
         shortcut: ['control', 'shift', 's'],
         link: `./${route.save}`,
+        tooltip: 'Save or update quotation',
         func: (): void => {
           if (getState().quotation.id === 'new') {
             openSaveQuotationModal()
@@ -93,7 +87,6 @@ export const navStructure: MenuItemType[] = [
             void saveExistingQuotation()
           }
         },
-        tooltip: 'Save or update quotation',
       },
       {
         id: navItemKey.share,
@@ -119,9 +112,7 @@ export const navStructure: MenuItemType[] = [
             disabled: false,
             name: 'Download as .pdf',
             tooltip: 'Download as .pdf',
-            func: (): void => {
-              void downloadPdf()
-            },
+            func: downloadPdf,
           },
           {
             id: navItemKey.excel,
@@ -130,9 +121,7 @@ export const navStructure: MenuItemType[] = [
             disabled: false,
             name: 'Download as .xlsx',
             tooltip: 'Download as .xlsx',
-            func: (): void => {
-              downloadExcel()
-            },
+            func: downloadExcel,
           },
         ],
       },
@@ -156,9 +145,7 @@ export const navStructure: MenuItemType[] = [
                 icon: <IoText />,
                 isHidden: false,
                 shortcut: ['control', 'shift', '2'],
-                func: (e?: React.MouseEvent): void => {
-                  insertTextBlock(e)
-                },
+                func: insertTextBlock,
               },
               {
                 id: navItemKey.boqItem,
@@ -166,9 +153,7 @@ export const navStructure: MenuItemType[] = [
                 icon: <FaRegRectangleList />,
                 isHidden: false,
                 shortcut: ['control', 'shift', '3'],
-                func: (e?: React.MouseEvent): void => {
-                  insertBoqBlock(e)
-                },
+                func: insertBoqBlock,
               },
               {
                 id: navItemKey.priceItem,
@@ -176,9 +161,7 @@ export const navStructure: MenuItemType[] = [
                 icon: <FiDollarSign />,
                 isHidden: false,
                 shortcut: ['control', 'shift', '4'],
-                func: (e?: React.MouseEvent): void => {
-                  insertPriceBlock(e)
-                },
+                func: insertPriceBlock,
               },
             ],
           },
@@ -188,9 +171,7 @@ export const navStructure: MenuItemType[] = [
             icon: <FaGripLines />,
             isHidden: false,
             shortcut: ['control', 'shift', '1'],
-            func: (e?: React.MouseEvent): void => {
-              insertBoqRow(e)
-            },
+            func: insertBoqRow,
           },
         ],
         tooltip: 'Insert block or row',
@@ -201,9 +182,7 @@ export const navStructure: MenuItemType[] = [
         isHidden: false,
         name: 'Bookmarks',
         link: route.bookmarks,
-        func: (e?: React.MouseEvent): void => {
-          openBookmarksPage()
-        },
+        func: openBookmarksPage,
         tooltip: 'Your bookmarks',
       },
       {
@@ -212,9 +191,7 @@ export const navStructure: MenuItemType[] = [
         isHidden: false,
         name: 'Quotations',
         link: route.quotations,
-        func: (e?: React.MouseEvent): void => {
-          openQuotationsPage()
-        },
+        func: openQuotationsPage,
         tooltip: 'Your quotations',
       },
       {
@@ -223,9 +200,7 @@ export const navStructure: MenuItemType[] = [
         isHidden: false,
         name: 'Log in',
         link: `./${route.login}`,
-        func: (e?: React.MouseEvent): void => {
-          openLoginModal()
-        },
+        func: openLoginModal,
         tooltip: 'Log in',
       },
       {
@@ -240,9 +215,7 @@ export const navStructure: MenuItemType[] = [
             isHidden: false,
             name: 'Settings',
             link: `./${route.settings}`,
-            func: (e?: React.MouseEvent): void => {
-              openSettingsModal()
-            },
+            func: openSettingsModal,
           },
           {
             id: navItemKey.admin,
