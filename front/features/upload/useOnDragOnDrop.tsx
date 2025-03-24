@@ -1,7 +1,10 @@
 import { useEffectOnce } from 'react-use'
 import { hideDraggableArea, showDraggableArea } from './showDraggableArea'
+import { useRef } from 'react'
 
 export const useOnDragOnDrop = (): void => {
+  const dragCounter = useRef(0)
+
   useEffectOnce(() => {
     document.addEventListener('dragover', (e) => {
       // to remove default green "plus" icon
@@ -16,25 +19,26 @@ export const useOnDragOnDrop = (): void => {
     document.addEventListener('drop', (e) => {
       // to avoid open image in browser
       e.preventDefault()
-
+      dragCounter.current = 0
       hideDraggableArea()
     })
 
-    let draggedFile = false
+    document.addEventListener('dragenter', (e: DragEvent): void => {
+      dragCounter.current++
 
-    document.ondragenter = (e: DragEvent): void => {
-      if (!draggedFile) {
-        draggedFile = true
+      if (dragCounter.current === 1) {
+        console.info('dragenter')
         showDraggableArea()
       }
-    }
+    })
 
-    document.ondragleave = (e: DragEvent): void => {
-      //@ts-expect-error: some hack which I did not understand
-      if (!e.fromElement && draggedFile) {
-        draggedFile = false
+    document.addEventListener('dragleave', (e: DragEvent): void => {
+      dragCounter.current--
+
+      if (dragCounter.current === 0) {
+        console.info('dragleave')
         hideDraggableArea()
       }
-    }
+    })
   })
 }
