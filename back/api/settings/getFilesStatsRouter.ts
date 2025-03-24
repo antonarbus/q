@@ -1,7 +1,7 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { bucket, storageFolderName } from '@back/shared/services/storage'
+import { bucket, getFolderPath } from '@back/shared/services/storage'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
@@ -25,7 +25,7 @@ const getFilesStats: RouterHandler = async (req, res, next) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   const [files] = await bucket.getFiles({
-    prefix: `${email}/${storageFolderName.files}/`,
+    prefix: getFolderPath({ email, fileType: 'file' }),
   })
 
   const fileStats = files.reduce(

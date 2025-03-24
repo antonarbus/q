@@ -3,7 +3,7 @@ import type { HydratedDocument } from 'mongoose'
 import type { Quotation } from '@entities/quotation'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { bucket, storageFolderName } from '@back/shared/services/storage'
+import { bucket, getFilePath } from '@back/shared/services/storage'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { QuotationModel } from '@back/entities/quotation'
 import { asyncHandler } from '@back/shared/utils/asyncHandler'
@@ -45,10 +45,7 @@ const deleteQuotation: RouterHandler = async (req, res, next) => {
     return
   }
 
-  // const [files] = await bucket.getFiles({ prefix: `${email}/${id}/` })
-  // await Promise.all(files.map(async file => await file.delete()))
-
-  const filePath = `${email}/${storageFolderName.quotations}/${quotationId}.json`
+  const filePath = getFilePath({ email, fileType: 'quotation', quotationId })
   const [{ statusCode }] = await bucket.file(filePath).delete()
 
   if (statusCode === 204) {

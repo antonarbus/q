@@ -2,7 +2,7 @@ import { Router, type Request, type Response, type NextFunction } from 'express'
 import multer from 'multer'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { bucket, storageFolderName } from '@back/shared/services/storage'
+import { bucket, fileBaseUrl, getFilePath } from '@back/shared/services/storage'
 import { getUserFromRefreshToken } from '@back/entities/user'
 import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
@@ -20,17 +20,17 @@ type Res = Promise<{
 }>
 
 async function uploadFileIntoMemory({ file, email }: Props): Res {
-  const name = Buffer.from(file.originalname, 'ascii').toString('utf8')
-  const filePath = `${email}/${storageFolderName.files}/${name}`
+  const fileName = Buffer.from(file.originalname, 'ascii').toString('utf8')
+  const filePath = getFilePath({ email, fileType: 'file', fileName })
   const blob = bucket.file(filePath)
   const blobStream = blob.createWriteStream({ resumable: false })
   const size = file.size / 1024 / 1024
 
-  return new Promise((resolve, reject) => {
+  const fileInfo: Res = new Promise((resolve, reject) => {
     const makeFilePublic = async (): Promise<void> => {
       await bucket.file(filePath).makePublic()
-      const link = `https://storage.googleapis.com/${bucket.name}/${filePath}`
-      resolve({ link, name, size })
+      const link = `${fileBaseUrl}/${filePath}`
+      resolve({ link, name: fileName, size })
     }
 
     blobStream
@@ -43,6 +43,8 @@ async function uploadFileIntoMemory({ file, email }: Props): Res {
       })
       .end(file.buffer)
   })
+
+  return fileInfo
 }
 
 type ResBody = {
