@@ -32,6 +32,7 @@ type Res = {
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
   navItemKey: navItemKey.save,
+  navItemNameWhileLoading: 'Saving...',
 })
 
 const loadingIconActor = createActor(loadingMenuIconMachine).start()
@@ -117,9 +118,8 @@ export const useSaveQuotation = ({
 
   const onSubmit = (e: React.FormEvent): void => {
     e.preventDefault()
-    const email = getState().user.email
 
-    if (!email) {
+    if (getState().user.email === null) {
       toast.warning('Not logged in')
 
       return

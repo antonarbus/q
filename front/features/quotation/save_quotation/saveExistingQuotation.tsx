@@ -13,14 +13,13 @@ import type { ResBody } from '@back/api/quotation/saveQuotationRouter'
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
   navItemKey: navItemKey.save,
+  navItemNameWhileLoading: 'Saving...',
 })
 
 const loadingIconActor = createActor(loadingMenuIconMachine).start()
 
 export const saveExistingQuotation = async (): Promise<void> => {
-  const { email } = getState().user
-
-  if (!email) {
+  if (getState().user.email === null) {
     toast.warning('Not logged in')
   }
 

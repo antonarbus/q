@@ -10,3 +10,7 @@ export { NavList } from './ui/NavList'
 
 // state machine
 export { createLoadingMenuIconMachine } from './state_machine/createLoadingMenuIconMachine'
+
+// utilities
+export { setMenuItemPropValue } from './setMenuItemPropValue'
+export { getMenuItemPropValue } from './getMenuItemPropValue'

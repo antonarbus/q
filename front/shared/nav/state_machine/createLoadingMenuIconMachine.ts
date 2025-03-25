@@ -5,11 +5,13 @@ import { navSlice } from '@shared/nav'
 
 type Props = {
   navItemKey: NavItemKey
+  navItemNameWhileLoading?: string
 }
 
 /** @xstate-layout N4IgpgJg5mDOIC5QBsD2BDCBLAdlABALZg4Cu+WAxqjgHQDu6WALrlAMSwAWq9+amNhWo4A2gAYAuolAAHVLBZYaMkAA9EAVgCMATloAWXQYAcu7QGYAbAHYLlkwBoQAT0R7ttHRYBMmi3YWmib+PgC+Yc4C2HhEJORUNLTRbJw8fGAATpmomcI0EtJIIPKKrCrFGggW4uK0NiEG4po2mrVtBs5uCDZWtNZGNjbierpm5hFRGDEExGT5dCl4abz4sKSUlHCwC4WqpUoVoFV2dUM22j4+2i0+BkZdiL39VoPDo+PakyBLs-ELtCyOUy7DUsGY6GYYFo6AAZlDMgAKHy1cQASnYvzi80SdCBuT2xQO5RwqiqFl8XgMVnsJm04isJgMPicrkQLP0jN04gsBk0mnu4hs4UiP2mQjmCREtHWm22oPBkOhcIRyNRGKxkoBsq2sFghLkCkOpMqTys+juF3sPkCml0jwQHNoXJ5fIFTWFEVFOFQEDgqk1-1x+yNJLJ7PuzqsVhuAoGOlsDoAtNp6c7zCYTH5M9ZhlZvoGcdLGEo8CGysoTcctHbaGZNDamtTtNTOmzqpZ+jUfLyaqmmQYC+LYlrcclh1By8bwwg2voDNpbDYDMLhY3kz2XmZbBSTBcF68h4IR0HpfjMlOw6bHbofFGY-yDPHtDYHTcDPVGXzjAKe3SjzM2JSkkOrbJelYznmtC6BcJgjCMQQrhYb4Cp+TJ2nyzIWP+XpAA */
 export const createLoadingMenuIconMachine = ({
   navItemKey,
+  navItemNameWhileLoading,
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/explicit-module-boundary-types
 }: Props) =>
   setup({
@@ -21,10 +23,20 @@ export const createLoadingMenuIconMachine = ({
     },
     actions: {
       'show spinner': () => {
-        dispatch(navSlice.actions.startLoadingIcon({ navItemKey }))
+        dispatch(
+          navSlice.actions.startLoadingIcon({
+            navItemKey,
+            navItemNameWhileLoading,
+          }),
+        )
       },
       'hide spinner': () => {
-        dispatch(navSlice.actions.stopLoadingIcon({ navItemKey }))
+        dispatch(
+          navSlice.actions.stopLoadingIcon({
+            navItemKey,
+            navItemNameWhileLoading,
+          }),
+        )
       },
       'show error icon': () => {
         dispatch(navSlice.actions.showErrorIcon({ navItemKey }))

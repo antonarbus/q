@@ -1,6 +1,8 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { setMenuItemPropValue } from './setMenuItemPropValue'
 import type { MenuItemType, NavItemKey, NavItemsMediaQueryWidths } from './type'
+import { getMenuItemPropValue } from './getMenuItemPropValue'
+import { navStructure as navStructureOriginal } from '@widgets/nav/navStructure'
 
 const initialState = {
   navStructure: [] as MenuItemType[],
@@ -85,9 +87,10 @@ export const navSlice = createSlice({
       state,
       action: PayloadAction<{
         navItemKey: NavItemKey
+        navItemNameWhileLoading?: string
       }>,
     ) => {
-      const { navItemKey } = action.payload
+      const { navItemKey, navItemNameWhileLoading } = action.payload
 
       setMenuItemPropValue({
         menu: state.navStructure,
@@ -95,14 +98,24 @@ export const navSlice = createSlice({
         prop: 'isLoading',
         value: true,
       })
+
+      if (navItemNameWhileLoading !== undefined) {
+        setMenuItemPropValue({
+          menu: state.navStructure,
+          navItemIdKey: navItemKey,
+          prop: 'name',
+          value: navItemNameWhileLoading,
+        })
+      }
     },
     stopLoadingIcon: (
       state,
       action: PayloadAction<{
         navItemKey: NavItemKey
+        navItemNameWhileLoading?: string
       }>,
     ) => {
-      const { navItemKey } = action.payload
+      const { navItemKey, navItemNameWhileLoading } = action.payload
 
       setMenuItemPropValue({
         menu: state.navStructure,
@@ -110,6 +123,21 @@ export const navSlice = createSlice({
         prop: 'isLoading',
         value: false,
       })
+
+      if (navItemNameWhileLoading !== undefined) {
+        const initialMenuItemName = getMenuItemPropValue({
+          menu: navStructureOriginal,
+          navItemIdKey: navItemKey,
+          prop: 'name',
+        })
+
+        setMenuItemPropValue({
+          menu: state.navStructure,
+          navItemIdKey: navItemKey,
+          prop: 'name',
+          value: initialMenuItemName ?? 'no name',
+        })
+      }
     },
     showSuccessIcon: (
       state,
