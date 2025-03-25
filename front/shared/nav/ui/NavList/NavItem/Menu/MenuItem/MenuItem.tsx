@@ -80,15 +80,15 @@ export const MenuItem = ({
         dispatch(navSlice.actions.setMenuItemHoverIndex(hoveredMenuItemIndex))
       }}
     >
-      {isIcon && !isLoading && (
+      {isIcon && isLoading && <SpinnerIcon />}
+      {isIcon && isSuccess && <SuccessIcon />}
+      {isIcon && isError && <ErrorIcon />}
+      {isIcon && !isLoading && !isSuccess && !isError && (
         <Icon
           icon={menuItem.icon}
           disabled={disabled}
         />
       )}
-      {isIcon && isLoading && <SpinnerIcon />}
-      {isIcon && isSuccess && <SuccessIcon />}
-      {isIcon && isError && <ErrorIcon />}
       <TextInMenu
         reserveSpaceForIcon={isNextMenuAvailable}
         name={menuItem.name}
