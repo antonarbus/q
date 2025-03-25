@@ -71,7 +71,7 @@ const router = createBrowserRouter([
         <OnInitLoad />
         <AccessToken />
         <Toaster
-          position='top-right'
+          position='bottom-center'
           richColors
         />
         <LoadingDotsOverlay

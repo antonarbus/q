@@ -66,20 +66,16 @@ export const useShareQuotation = ({
     if (isSuccess && quotation !== undefined) {
       // may save new quotation by sharing the link, strange, but maybe nice
       if (data.message === 'saved') {
-        toast.success(`Saved under id ${quotation.id}`, {
-          position: 'bottom-center',
-        })
+        toast.success(`Saved under id ${quotation.id}`)
       }
 
       // usual case
       if (data.message === 'updated') {
-        toast.info('Updated', { position: 'bottom-center' })
+        toast.info('Updated')
       }
 
       if (data.message === 'copied and saved') {
-        toast.success('Shared quotation was copied, saved and shared', {
-          position: 'bottom-center',
-        })
+        toast.success('Shared quotation was copied, saved and shared')
       }
 
       void fetchQuotations()

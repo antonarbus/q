@@ -120,14 +120,14 @@ export const downloadPdf = async (): Promise<void> => {
 
     setTimeout(() => {
       loadingIconActor.send({ type: 'show success icon' })
-      toast.info('File downloaded', { position: 'bottom-center' })
+      toast.info('File downloaded')
     }, 1000)
   }
 
   worker.onerror = (): void => {
     setTimeout(() => {
       loadingIconActor.send({ type: 'show error icon' })
-      toast.error('Error downloading file', { position: 'bottom-center' })
+      toast.error('Error downloading file')
     }, 1000)
   }
 }

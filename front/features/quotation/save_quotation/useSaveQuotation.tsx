@@ -65,15 +65,13 @@ export const useSaveQuotation = ({
   useUpdateEffect(() => {
     if (isSuccess && data.quotation !== undefined) {
       if (data.message === 'saved') {
-        toast.success(`Saved under id ${data.quotation.id}`, {
-          position: 'bottom-center',
-        })
+        toast.success(`Saved under id ${data.quotation.id}`)
       }
 
       // ths should not be a use case in main page, but we still may open /id/save route directly
       // this may be a use case in quotations page
       if (data.message === 'updated') {
-        toast.info('Updated', { position: 'bottom-center' })
+        toast.info('Updated')
       }
 
       // this should not be a use case in main page, but we still may open /id/save route directly
@@ -81,9 +79,6 @@ export const useSaveQuotation = ({
       if (data.message === 'copied and saved') {
         toast.success(
           `Shared quotation was copied and saved under id ${data.quotation.id}`,
-          {
-            position: 'bottom-center',
-          },
         )
       }
 

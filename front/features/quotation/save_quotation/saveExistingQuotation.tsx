@@ -36,15 +36,12 @@ export const saveExistingQuotation = async (): Promise<void> => {
 
     if (data.quotation !== undefined) {
       if (data.message === 'updated') {
-        toast.info('Updated', { position: 'bottom-center' })
+        toast.info('Updated')
       }
 
       if (data.message === 'copied and saved') {
         toast.success(
           `Shared quotation was copied and saved under id ${data.quotation.id}`,
-          {
-            position: 'bottom-center',
-          },
         )
       }
 
