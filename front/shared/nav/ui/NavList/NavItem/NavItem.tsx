@@ -1,18 +1,16 @@
-import { css } from '@emotion/react'
 import { getState, useSelector } from '@shared/lib/redux'
-import { theme } from '@shared/theme'
 import { useRef } from 'react'
 import { TiArrowSortedDown } from 'react-icons/ti'
 import { Link, useLocation } from 'react-router-dom'
 import { useWindowSize } from 'react-use'
-import { clickOnNavItem } from '../clickOnNavItem'
-import { ErrorIcon } from '../ErrorIcon'
-import { Icon } from '../Icon'
-import { Menu } from '../Menu'
-import { SpinnerIcon } from '../SpinnerIcon'
-import { SuccessIcon } from '../SuccessIcon'
-import { Tooltip } from '@mui/material'
+import { clickOnNavItem } from './clickOnNavItem'
+import { ErrorIcon } from './ErrorIcon'
+import { Icon } from './Icon'
+import { Menu } from './Menu'
+import { SpinnerIcon } from './SpinnerIcon'
+import { SuccessIcon } from './SuccessIcon'
 import { NavName } from './NavName'
+import { NavItemLayout } from './NavItemLayout'
 
 type Props = {
   children?: React.ReactNode
@@ -77,7 +75,7 @@ export const NavItem = ({ children, id }: Props): React.JSX.Element => {
   const isSuccess = navItem?.isSuccess
   const isError = navItem?.isError
   const disabled = Boolean(navItem?.disabled)
-  const isActive = navItem?.isActive
+  const isActive = Boolean(navItem?.isActive)
   const tooltipText = navItem?.tooltip
 
   const fixedLink = `${location.pathname}/${link}`
@@ -88,61 +86,10 @@ export const NavItem = ({ children, id }: Props): React.JSX.Element => {
   const to = link.includes('.') ? fixedLink : link
 
   return (
-    <li
-      ref={navItemRef}
-      className='nav-item'
-      css={css`
-        display: flex;
-        position: relative;
-        align-items: center;
-        justify-content: center;
-        padding: 0px 5px;
-        margin-left: ${theme.menu.navItem.marginLeft}px;
-        margin-right: ${theme.menu.navItem.marginRight}px;
-        user-select: none;
-
-        & > a {
-          display: flex;
-          align-items: center;
-          position: relative;
-          text-decoration: none;
-          -webkit-user-drag: none;
-          cursor: ${disabled ? 'default' : 'pointer'};
-
-          &:hover,
-          &:focus,
-          &:active {
-            filter: brightness(${disabled ? 1 : 1.2});
-          }
-
-          .nav-item-name {
-            margin-left: 5px;
-            margin-right: 5px;
-            color: ${disabled ? '#585858' : theme.colors.greyFont};
-            white-space: nowrap;
-            text-decoration: ${isActive ? 'underline' : 'none'};
-          }
-
-          .arrow-for-nested-menu {
-            display: none;
-            position: absolute;
-            top: calc(50% + 2px);
-            transform: translateY(-50%);
-            right: -12px;
-            color: grey;
-            height: 14px;
-          }
-
-          &:hover > .arrow-for-nested-menu,
-          &:focus > .arrow-for-nested-menu {
-            display: block;
-          }
-        }
-
-        @media screen and (max-width: 480px) {
-          position: static;
-        }
-      `}
+    <NavItemLayout
+      navItemRef={navItemRef}
+      disabled={disabled}
+      isActive={isActive}
     >
       <Link
         to={to}
@@ -151,19 +98,7 @@ export const NavItem = ({ children, id }: Props): React.JSX.Element => {
             e.preventDefault()
           }
 
-          if (isLoading) {
-            return
-          }
-
-          if (isSuccess) {
-            return
-          }
-
-          if (isError) {
-            return
-          }
-
-          if (disabled) {
+          if (isLoading || isSuccess || isError || disabled) {
             e.preventDefault()
 
             return
@@ -179,19 +114,11 @@ export const NavItem = ({ children, id }: Props): React.JSX.Element => {
         {icon && isSuccess && <SuccessIcon />}
         {icon && isError && <ErrorIcon />}
         {icon && !isLoading && !isSuccess && !isError && (
-          <Tooltip
-            title={tooltipText}
-            placement='bottom'
-            enterDelay={500}
-            enterNextDelay={500}
-          >
-            <span className='element-that-keep-ref-from-mui'>
-              <Icon
-                icon={icon}
-                disabled={disabled}
-              />
-            </span>
-          </Tooltip>
+          <Icon
+            icon={icon}
+            disabled={disabled}
+            tooltipText={tooltipText}
+          />
         )}
         {!icon && shouldDisplayIcon && (
           <Icon
@@ -206,6 +133,6 @@ export const NavItem = ({ children, id }: Props): React.JSX.Element => {
         {children}
       </Link>
       {shouldOpenThisMenu && <Menu />}
-    </li>
+    </NavItemLayout>
   )
 }
