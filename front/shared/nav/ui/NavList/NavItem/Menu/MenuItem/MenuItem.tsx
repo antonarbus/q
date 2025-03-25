@@ -33,7 +33,7 @@ export const MenuItem = ({
   const isIcon = Boolean(menuItem.icon)
   const menuId = menuItem.id
   const link = menuItem.link ?? ''
-  const isLink = Boolean(menuItem.link)
+  const isFunc = Boolean(menuItem.func)
   const shortcut = menuItem.shortcut
   const disabled = Boolean(menuItem.disabled)
   const isLoading = menuItem.isLoading
@@ -52,7 +52,7 @@ export const MenuItem = ({
       to={to}
       state={{ isHovered }}
       onClick={(e: MouseEvent): void => {
-        if (!isLink) {
+        if (isFunc) {
           e.preventDefault()
         }
 
