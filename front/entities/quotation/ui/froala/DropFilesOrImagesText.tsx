@@ -6,7 +6,7 @@ type Props = {
   dropFilesTextRef: React.RefObject<React.ComponentRef<'div'> | null>
 }
 
-export const DropFilesText = (props: Props): React.JSX.Element => {
+export const DropFilesOrImagesText = (props: Props): React.JSX.Element => {
   const { editorRef } = useFroala()
 
   return (
@@ -26,7 +26,11 @@ export const DropFilesText = (props: Props): React.JSX.Element => {
     >
       Drop{' '}
       <span
-        style={{ cursor: 'pointer', color: 'black', fontWeight: 400 }}
+        style={{
+          cursor: 'pointer',
+          color: 'black',
+          fontWeight: 400,
+        }}
         onClick={(e) => {
           if (editorRef.current) {
             editorRef.current.file.showInsertPopup()
@@ -38,7 +42,11 @@ export const DropFilesText = (props: Props): React.JSX.Element => {
       </span>{' '}
       or{' '}
       <span
-        style={{ cursor: 'pointer', color: 'black', fontWeight: 400 }}
+        style={{
+          cursor: 'pointer',
+          color: 'black',
+          fontWeight: 400,
+        }}
         onClick={(e) => {
           if (editorRef.current) {
             editorRef.current.image.showInsertPopup()
