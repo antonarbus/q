@@ -60,6 +60,9 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
+// todo: move upload to client side
+// https://chatgpt.com/c/67e1f34c-da00-8004-bf25-8715fd3e8379
+
 export const uploadRouter = Router()
 
 const upload: RouterHandler = async (req, res, next) => {
