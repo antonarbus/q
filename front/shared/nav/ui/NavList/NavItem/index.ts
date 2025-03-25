@@ -1,1 +1,1 @@
-export { NavItem } from './NavItem'
+export { NavItem } from './nav_item/NavItem'

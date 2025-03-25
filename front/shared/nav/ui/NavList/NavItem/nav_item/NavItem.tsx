@@ -5,13 +5,14 @@ import { useRef } from 'react'
 import { TiArrowSortedDown } from 'react-icons/ti'
 import { Link, useLocation } from 'react-router-dom'
 import { useWindowSize } from 'react-use'
-import { clickOnNavItem } from './clickOnNavItem'
-import { ErrorIcon } from './ErrorIcon'
-import { Icon } from './Icon'
-import { Menu } from './Menu'
-import { SpinnerIcon } from './SpinnerIcon'
-import { SuccessIcon } from './SuccessIcon'
+import { clickOnNavItem } from '../clickOnNavItem'
+import { ErrorIcon } from '../ErrorIcon'
+import { Icon } from '../Icon'
+import { Menu } from '../Menu'
+import { SpinnerIcon } from '../SpinnerIcon'
+import { SuccessIcon } from '../SuccessIcon'
 import { Tooltip } from '@mui/material'
+import { NavName } from './NavName'
 
 type Props = {
   children?: React.ReactNode
@@ -193,21 +194,12 @@ export const NavItem = ({ children, id }: Props): React.JSX.Element => {
           </Tooltip>
         )}
         {!icon && shouldDisplayIcon && (
-          <Tooltip
-            title={tooltipText}
-            placement='bottom'
-            enterDelay={500}
-            enterNextDelay={500}
-          >
-            <span className='element-that-keep-ref-from-mui'>
-              <Icon
-                icon={name?.[0]}
-                disabled={disabled}
-              />
-            </span>
-          </Tooltip>
+          <Icon
+            icon={name?.[0]}
+            disabled={disabled}
+          />
         )}
-        {name && <span className='nav-item-name'>{name}</span>}
+        <NavName name={name} />
         {isNestedMenu && !disabled && (
           <TiArrowSortedDown className='arrow-for-nested-menu' />
         )}
