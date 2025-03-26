@@ -30,7 +30,7 @@ type Res = {
 }
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
-  navItemKey: navItemId.share,
+  navItemId: navItemId.share,
 })
 
 const loadingIconActor = createActor(loadingMenuIconMachine).start()

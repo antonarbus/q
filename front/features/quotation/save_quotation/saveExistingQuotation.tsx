@@ -12,7 +12,7 @@ import type { AxiosError } from 'axios'
 import type { ResBody } from '@back/api/quotation/saveQuotationRouter'
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
-  navItemKey: navItemId.save,
+  navItemId: navItemId.save,
   navItemNameWhileLoading: 'Saving',
 })
 

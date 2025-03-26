@@ -14,7 +14,7 @@ export const {
 } = Promise.withResolvers<'fetched' | 'failed'>()
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
-  navItemKey: navItemId.login,
+  navItemId: navItemId.login,
 })
 
 const loadingIconActor = createActor(loadingMenuIconMachine).start()
@@ -103,7 +103,7 @@ export const AccessToken = (): React.JSX.Element => {
 
       dispatch(
         navSlice.actions.stopLoadingIcon({
-          navItemKey: navItemId.login,
+          navItemId: navItemId.login,
         }),
       )
 
@@ -135,7 +135,7 @@ export const AccessToken = (): React.JSX.Element => {
 
       dispatch(
         navSlice.actions.stopLoadingIcon({
-          navItemKey: navItemId.login,
+          navItemId: navItemId.login,
         }),
       )
 

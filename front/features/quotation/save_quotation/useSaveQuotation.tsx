@@ -31,7 +31,7 @@ type Res = {
 }
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
-  navItemKey: navItemId.save,
+  navItemId: navItemId.save,
   navItemNameWhileLoading: 'Saving',
 })
 

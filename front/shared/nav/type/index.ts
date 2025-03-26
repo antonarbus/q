@@ -24,4 +24,4 @@ export type NavItemsMediaQueryWidths = {
   burger: number
 }
 
-export type { NavItemId as NavItemKey } from '../../consts/navItemId'
+export type { NavItemId } from '../../consts/navItemId'

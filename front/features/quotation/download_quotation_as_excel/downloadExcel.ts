@@ -12,7 +12,7 @@ export type WorkerRequestMessage = {
 }
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
-  navItemKey: navItemId.share,
+  navItemId: navItemId.share,
 })
 
 const loadingIconActor = createActor(loadingMenuIconMachine).start()
