@@ -6,22 +6,22 @@ import type { MenuItemType, NavItemId } from './type'
 
 export const getMenuItemPropValue = <K extends keyof MenuItemType>({
   menu = navStructure,
-  navItemIdKey,
+  navItemId,
   prop,
 }: {
   menu?: MenuItemType[]
-  navItemIdKey: NavItemId
+  navItemId: NavItemId
   prop: K
 }): MenuItemType[K] | undefined => {
   for (const el of menu) {
-    if (el.id === navItemIdKey) {
+    if (el.id === navItemId) {
       return el[prop]
     }
 
     if (el.menuItems) {
       const value = getMenuItemPropValue({
         menu: el.menuItems,
-        navItemIdKey,
+        navItemId,
         prop,
       })
 

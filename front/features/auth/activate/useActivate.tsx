@@ -63,12 +63,10 @@ export const useActivate = (): Res => {
 
       dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
 
-      dispatch(
-        navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.login] }),
-      )
+      dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }))
 
       dispatch(
-        navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.profile] }),
+        navSlice.actions.showNavItems({ navItemIds: [navItemId.profile] }),
       )
     }
 

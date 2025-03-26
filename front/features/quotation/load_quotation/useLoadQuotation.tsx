@@ -38,11 +38,11 @@ export function useLoadQuotation(): void {
     dispatch(quotationSlice.actions.resetQuotationReducer())
     dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
-    dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.back] }))
+    dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.back] }))
 
     dispatch(
       navSlice.actions.enableNavItems({
-        navItemIdKeys: [
+        navItemIds: [
           navItemId.save,
           navItemId.pdf,
           navItemId.excel,
@@ -101,9 +101,7 @@ export function useLoadQuotation(): void {
         dispatch(appSlice.actions.hideLoadingOverlay())
       }, 750)
 
-      dispatch(
-        navSlice.actions.underlineNavItem({ navItemIdKey: navItemId.new }),
-      )
+      dispatch(navSlice.actions.underlineNavItem({ navItemId: navItemId.new }))
 
       return
     }
@@ -148,7 +146,7 @@ export function useLoadQuotation(): void {
 
         dispatch(
           navSlice.actions.enableNavItems({
-            navItemIdKeys: [
+            navItemIds: [
               navItemId.save,
               navItemId.pdf,
               navItemId.excel,

@@ -5,24 +5,29 @@ import type { MenuItemType, NavItemId } from './type'
 
 export const setMenuItemPropValue = <K extends keyof MenuItemType>({
   menu,
-  navItemIdKey,
+  navItemId,
   prop,
   value,
 }: {
   menu: MenuItemType[]
-  navItemIdKey: NavItemId
+  navItemId: NavItemId
   prop: K
   value: MenuItemType[K]
 }): void => {
   menu.forEach((el) => {
-    if (el.id === navItemIdKey) {
+    if (el.id === navItemId) {
       el[prop] = value
 
       return
     }
 
     if (el.menuItems) {
-      setMenuItemPropValue({ menu: el.menuItems, navItemIdKey, prop, value })
+      setMenuItemPropValue({
+        menu: el.menuItems,
+        navItemId,
+        prop,
+        value,
+      })
     }
   })
 }

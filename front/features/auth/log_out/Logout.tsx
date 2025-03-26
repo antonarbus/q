@@ -34,17 +34,15 @@ export const Logout = (): React.JSX.Element => {
       dispatch(userSlice.actions.setAccessToken({ accessToken: null }))
       dispatch(userSlice.actions.forgetLoggedUser())
 
-      dispatch(
-        navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.login] }),
-      )
+      dispatch(navSlice.actions.showNavItems({ navItemIds: [navItemId.login] }))
 
       dispatch(
         navSlice.actions.hideNavItems({
-          navItemIdKeys: [navItemId.profile],
+          navItemIds: [navItemId.profile],
         }),
       )
 
-      dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: ['admin'] }))
+      dispatch(navSlice.actions.hideNavItems({ navItemIds: ['admin'] }))
 
       setTimeout(() => {
         dispatch(appSlice.actions.hideLoadingOverlay())

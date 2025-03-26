@@ -94,7 +94,7 @@ export const navSlice = createSlice({
 
       setMenuItemPropValue({
         menu: state.navStructure,
-        navItemIdKey: navItemId,
+        navItemId,
         prop: 'isLoading',
         value: true,
       })
@@ -102,7 +102,7 @@ export const navSlice = createSlice({
       if (navItemNameWhileLoading !== undefined) {
         setMenuItemPropValue({
           menu: state.navStructure,
-          navItemIdKey: navItemId,
+          navItemId,
           prop: 'name',
           value: navItemNameWhileLoading,
         })
@@ -119,7 +119,7 @@ export const navSlice = createSlice({
 
       setMenuItemPropValue({
         menu: state.navStructure,
-        navItemIdKey: navItemId,
+        navItemId,
         prop: 'isLoading',
         value: false,
       })
@@ -127,13 +127,13 @@ export const navSlice = createSlice({
       if (navItemNameWhileLoading !== undefined) {
         const initialMenuItemName = getMenuItemPropValue({
           menu: navStructureOriginal,
-          navItemIdKey: navItemId,
+          navItemId,
           prop: 'name',
         })
 
         setMenuItemPropValue({
           menu: state.navStructure,
-          navItemIdKey: navItemId,
+          navItemId,
           prop: 'name',
           value: initialMenuItemName ?? 'no name',
         })
@@ -149,7 +149,7 @@ export const navSlice = createSlice({
 
       setMenuItemPropValue({
         menu: state.navStructure,
-        navItemIdKey: navItemId,
+        navItemId,
         prop: 'isSuccess',
         value: true,
       })
@@ -164,7 +164,7 @@ export const navSlice = createSlice({
 
       setMenuItemPropValue({
         menu: state.navStructure,
-        navItemIdKey: navItemId,
+        navItemId,
         prop: 'isSuccess',
         value: false,
       })
@@ -179,7 +179,7 @@ export const navSlice = createSlice({
 
       setMenuItemPropValue({
         menu: state.navStructure,
-        navItemIdKey: navItemId,
+        navItemId,
         prop: 'isError',
         value: true,
       })
@@ -194,7 +194,7 @@ export const navSlice = createSlice({
 
       setMenuItemPropValue({
         menu: state.navStructure,
-        navItemIdKey: navItemId,
+        navItemId,
         prop: 'isError',
         value: false,
       })
@@ -203,12 +203,12 @@ export const navSlice = createSlice({
       state,
       action: PayloadAction<
         | {
-            exceptNavItemIdKeys?: NavItemId[]
+            exceptNavItemIds?: NavItemId[]
           }
         | undefined
       >,
     ) => {
-      const { exceptNavItemIdKeys = [] } = action.payload ?? {}
+      const { exceptNavItemIds = [] } = action.payload ?? {}
 
       const topLevelNavMenu = state.navStructure[0]
 
@@ -221,13 +221,13 @@ export const navSlice = createSlice({
       )
 
       topNavItemsIds.forEach((id) => {
-        if (exceptNavItemIdKeys.includes(id)) {
+        if (exceptNavItemIds.includes(id)) {
           return
         }
 
         setMenuItemPropValue({
           menu: state.navStructure,
-          navItemIdKey: id,
+          navItemId: id,
           prop: 'disabled',
           value: true,
         })
@@ -237,12 +237,12 @@ export const navSlice = createSlice({
       state,
       action: PayloadAction<
         | {
-            exceptNavItemIdKeys?: NavItemId[]
+            exceptNavItemIds?: NavItemId[]
           }
         | undefined
       >,
     ) => {
-      const { exceptNavItemIdKeys = [] } = action.payload ?? {}
+      const { exceptNavItemIds = [] } = action.payload ?? {}
 
       const topLevelNavMenu = state.navStructure[0]
 
@@ -255,13 +255,13 @@ export const navSlice = createSlice({
       )
 
       topNavItemsIds.forEach((id) => {
-        if (exceptNavItemIdKeys.includes(id)) {
+        if (exceptNavItemIds.includes(id)) {
           return
         }
 
         setMenuItemPropValue({
           menu: state.navStructure,
-          navItemIdKey: id,
+          navItemId: id,
           prop: 'disabled',
           value: false,
         })
@@ -270,15 +270,15 @@ export const navSlice = createSlice({
     disableNavItems: (
       state,
       action: PayloadAction<{
-        navItemIdKeys: NavItemId[]
+        navItemIds: NavItemId[]
       }>,
     ) => {
-      const { navItemIdKeys } = action.payload
+      const { navItemIds } = action.payload
 
-      navItemIdKeys.forEach((navItemIdKey) => {
+      navItemIds.forEach((navItemId) => {
         setMenuItemPropValue({
           menu: state.navStructure,
-          navItemIdKey,
+          navItemId,
           prop: 'disabled',
           value: true,
         })
@@ -287,15 +287,15 @@ export const navSlice = createSlice({
     enableNavItems: (
       state,
       action: PayloadAction<{
-        navItemIdKeys?: NavItemId[]
+        navItemIds?: NavItemId[]
       }>,
     ) => {
-      const { navItemIdKeys } = action.payload
+      const { navItemIds } = action.payload
 
-      navItemIdKeys?.forEach((navItemIdKey) => {
+      navItemIds?.forEach((navItemId) => {
         setMenuItemPropValue({
           menu: state.navStructure,
-          navItemIdKey,
+          navItemId,
           prop: 'disabled',
           value: false,
         })
@@ -304,15 +304,15 @@ export const navSlice = createSlice({
     hideNavItems: (
       state,
       action: PayloadAction<{
-        navItemIdKeys: NavItemId[]
+        navItemIds: NavItemId[]
       }>,
     ) => {
-      const { navItemIdKeys } = action.payload
+      const { navItemIds } = action.payload
 
-      navItemIdKeys.forEach((navItemIdKey) => {
+      navItemIds.forEach((navItemId) => {
         setMenuItemPropValue({
           menu: state.navStructure,
-          navItemIdKey,
+          navItemId,
           prop: 'isHidden',
           value: true,
         })
@@ -321,15 +321,15 @@ export const navSlice = createSlice({
     showNavItems: (
       state,
       action: PayloadAction<{
-        navItemIdKeys: NavItemId[]
+        navItemIds: NavItemId[]
       }>,
     ) => {
-      const { navItemIdKeys } = action.payload
+      const { navItemIds } = action.payload
 
-      navItemIdKeys.forEach((navItemIdKey) => {
+      navItemIds.forEach((navItemId) => {
         setMenuItemPropValue({
           menu: state.navStructure,
-          navItemIdKey,
+          navItemId,
           prop: 'isHidden',
           value: false,
         })
@@ -349,7 +349,7 @@ export const navSlice = createSlice({
       topNavItemsIds.forEach((id) => {
         setMenuItemPropValue({
           menu: state.navStructure,
-          navItemIdKey: id,
+          navItemId: id,
           prop: 'isActive',
           value: false,
         })
@@ -358,14 +358,14 @@ export const navSlice = createSlice({
     underlineNavItem: (
       state,
       action: PayloadAction<{
-        navItemIdKey: NavItemId
+        navItemId: NavItemId
       }>,
     ) => {
-      const { navItemIdKey } = action.payload
+      const { navItemId } = action.payload
 
       setMenuItemPropValue({
         menu: state.navStructure,
-        navItemIdKey,
+        navItemId,
         prop: 'isActive',
         value: true,
       })

@@ -7,7 +7,7 @@ export const useNavItemsOnBookmarksPageOpen = (): void => {
   useEffectOnce(() => {
     dispatch(
       navSlice.actions.disableNavItems({
-        navItemIdKeys: [
+        navItemIds: [
           navItemId.save,
           navItemId.pdf,
           navItemId.excel,
@@ -21,7 +21,7 @@ export const useNavItemsOnBookmarksPageOpen = (): void => {
     dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
     dispatch(
-      navSlice.actions.underlineNavItem({ navItemIdKey: navItemId.bookmarks }),
+      navSlice.actions.underlineNavItem({ navItemId: navItemId.bookmarks }),
     )
   })
 

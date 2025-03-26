@@ -63,12 +63,12 @@ export const useResetPassword = ({ passwordSignal, slideOut }: Props): Res => {
         )
 
         dispatch(
-          navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.login] }),
+          navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }),
         )
 
         dispatch(
           navSlice.actions.showNavItems({
-            navItemIdKeys: [navItemId.profile],
+            navItemIds: [navItemId.profile],
           }),
         )
 

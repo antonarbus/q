@@ -85,20 +85,18 @@ export const AccessToken = (): React.JSX.Element => {
         }),
       )
 
-      dispatch(
-        navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.login] }),
-      )
+      dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }))
 
       dispatch(
         navSlice.actions.showNavItems({
-          navItemIdKeys: [navItemId.profile],
+          navItemIds: [navItemId.profile],
         }),
       )
 
       if (roles.includes(userRole.superAdmin)) {
-        dispatch(navSlice.actions.showNavItems({ navItemIdKeys: ['admin'] }))
+        dispatch(navSlice.actions.showNavItems({ navItemIds: ['admin'] }))
       } else {
-        dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: ['admin'] }))
+        dispatch(navSlice.actions.hideNavItems({ navItemIds: ['admin'] }))
       }
 
       dispatch(
@@ -123,13 +121,11 @@ export const AccessToken = (): React.JSX.Element => {
 
       dispatch(userSlice.actions.forgetLoggedUser())
 
-      dispatch(
-        navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.login] }),
-      )
+      dispatch(navSlice.actions.showNavItems({ navItemIds: [navItemId.login] }))
 
       dispatch(
         navSlice.actions.hideNavItems({
-          navItemIdKeys: [navItemId.profile],
+          navItemIds: [navItemId.profile],
         }),
       )
 

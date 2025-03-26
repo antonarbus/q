@@ -8,7 +8,7 @@ export const useDisableNavItemsOnCopyModal = (): void => {
   useEffectOnce(() => {
     dispatch(
       navSlice.actions.disableTopNavItems({
-        exceptNavItemIdKeys: [
+        exceptNavItemIds: [
           navItemId.quotations,
           navItemId.bookmarks,
           navItemId.new,
@@ -23,7 +23,7 @@ export const useDisableNavItemsOnCopyModal = (): void => {
     if (window.location.pathname.includes(route.bookmarks)) {
       dispatch(
         navSlice.actions.enableTopNavItems({
-          exceptNavItemIdKeys: [
+          exceptNavItemIds: [
             navItemId.save,
             navItemId.pdf,
             navItemId.excel,
@@ -39,7 +39,7 @@ export const useDisableNavItemsOnCopyModal = (): void => {
     if (window.location.pathname.includes(route.quotations)) {
       dispatch(
         navSlice.actions.enableTopNavItems({
-          exceptNavItemIdKeys: [
+          exceptNavItemIds: [
             navItemId.save,
             navItemId.pdf,
             navItemId.excel,

@@ -7,7 +7,7 @@ export const useNavItemsOnQuotationsPageOpen = (): void => {
   useEffectOnce(() => {
     dispatch(
       navSlice.actions.disableNavItems({
-        navItemIdKeys: [
+        navItemIds: [
           navItemId.save,
           navItemId.pdf,
           navItemId.excel,
@@ -22,7 +22,7 @@ export const useNavItemsOnQuotationsPageOpen = (): void => {
 
     dispatch(
       navSlice.actions.underlineNavItem({
-        navItemIdKey: navItemId.quotations,
+        navItemId: navItemId.quotations,
       }),
     )
   })

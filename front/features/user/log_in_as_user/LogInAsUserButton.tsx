@@ -54,20 +54,18 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
         }),
       )
 
-      dispatch(
-        navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.login] }),
-      )
+      dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }))
 
       dispatch(
         navSlice.actions.showNavItems({
-          navItemIdKeys: [navItemId.profile],
+          navItemIds: [navItemId.profile],
         }),
       )
 
       if (data.roles?.includes(userRole.superAdmin)) {
-        dispatch(navSlice.actions.showNavItems({ navItemIdKeys: ['admin'] }))
+        dispatch(navSlice.actions.showNavItems({ navItemIds: ['admin'] }))
       } else {
-        dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: ['admin'] }))
+        dispatch(navSlice.actions.hideNavItems({ navItemIds: ['admin'] }))
       }
 
       if (location.pathname.includes(route.quotations)) {
