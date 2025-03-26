@@ -4,7 +4,7 @@ import {
   quotationSlice,
   saveQuotationMutationFn,
 } from '@entities/quotation'
-import { navItemKey } from '@shared/consts/navItemKey'
+import { navItemId } from '@shared/consts/navItemId'
 import { createLoadingMenuIconMachine, navSlice } from '@shared/nav'
 import { toast } from 'sonner'
 import { createActor } from 'xstate'
@@ -12,7 +12,7 @@ import type { AxiosError } from 'axios'
 import type { ResBody } from '@back/api/quotation/saveQuotationRouter'
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
-  navItemKey: navItemKey.save,
+  navItemKey: navItemId.save,
   navItemNameWhileLoading: 'Saving',
 })
 

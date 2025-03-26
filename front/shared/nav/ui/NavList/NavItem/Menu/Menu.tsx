@@ -1,4 +1,3 @@
-import styled from '@emotion/styled'
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { useRef } from 'react'
@@ -9,49 +8,8 @@ import { useKeysForMenuNavigation } from './functions/useKeysForMenuNavigation'
 import { useMenuAnimation } from './functions/useMenuAnimation'
 import { SlidableMenuItemsContainer } from './SlidableMenuItemsContainer'
 import { TopMenuItemsContainer } from './TopMenuItemsContainer'
-
-type Props = {
-  isMenuOutsideWindow: boolean
-}
-
-const MenuStyled = styled.div<Props>`
-  position: absolute;
-  top: calc(100% + 5px);
-  right: -${theme.menu.navItem.marginRight}px;
-  /* if right corner goes over the screen fix the left instead of right */
-  left: ${(props): string => (props.isMenuOutsideWindow ? '0' : 'not set')};
-  width: ${theme.menu.width}px;
-  padding-top: ${theme.menu.paddingTop}px;
-  padding-bottom: ${theme.menu.paddingBottom}px;
-  background: ${theme.colors.darkBackground};
-  backdrop-filter: blur(4px);
-  border: 1px solid #474a4d;
-  border-radius: 4px;
-  overflow: hidden;
-  /* z-index: 666; */
-  /* background-color: red; */
-
-  @media screen and (max-width: 480px) {
-    left: 0px;
-    right: 0px;
-    width: auto;
-  }
-
-  .slidable {
-    position: absolute;
-    right: 0px;
-    left: 0px;
-    height: auto;
-  }
-
-  .next {
-    transform: translateX(100%);
-  }
-
-  .measurable-div {
-    transform: translateX(9999px);
-  }
-`
+import { EmailAtBottomOfMenu } from './EmailAtBottomOfMenu'
+import { css } from '@emotion/react'
 
 export const Menu = (): React.JSX.Element => {
   const menuContainerRef = useRef<React.ComponentRef<'div'> | null>(null)
@@ -79,15 +37,51 @@ export const Menu = (): React.JSX.Element => {
   useCloseMenuOnClickOutside({ menuContainerRef })
 
   const isMenuOutsideWindow = useIsMenuOutsideWindow()
+  const isProfileMenu = idsToCurrentMenuItems.includes('profile')
 
   return (
-    <MenuStyled
+    <div
       ref={menuContainerRef}
-      isMenuOutsideWindow={isMenuOutsideWindow}
       className='drop-down-nav-menu'
       onMouseLeave={(): void => {
         dispatch(navSlice.actions.setMenuItemHoverIndex(0))
       }}
+      css={css`
+        position: absolute;
+        top: calc(100% + 5px);
+        right: -${theme.menu.navItem.marginRight}px;
+        /* if right corner goes over the screen fix the left instead of right */
+        left: ${isMenuOutsideWindow ? '0' : 'not set'};
+        width: ${theme.menu.width}px;
+        padding-top: ${theme.menu.paddingTop}px;
+        padding-bottom: ${theme.menu.paddingBottom}px;
+        background: ${theme.colors.darkBackground};
+        backdrop-filter: blur(4px);
+        border: 1px solid #474a4d;
+        border-radius: 4px;
+        overflow: hidden;
+
+        @media screen and (max-width: 480px) {
+          left: 0px;
+          right: 0px;
+          width: auto;
+        }
+
+        .slidable {
+          position: absolute;
+          right: 0px;
+          left: 0px;
+          height: auto;
+        }
+
+        .next {
+          transform: translateX(100%);
+        }
+
+        .measurable-div {
+          transform: translateX(9999px);
+        }
+      `}
     >
       <TopMenuItemsContainer />
       <SlidableMenuItemsContainer
@@ -105,6 +99,7 @@ export const Menu = (): React.JSX.Element => {
         idsToMenu={idsToNextMenuItems}
         className='measurable-div'
       />
-    </MenuStyled>
+      {isProfileMenu && <EmailAtBottomOfMenu />}
+    </div>
   )
 }

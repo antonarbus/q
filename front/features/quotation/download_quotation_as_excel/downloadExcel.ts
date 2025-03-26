@@ -1,6 +1,6 @@
 import type { WorkerResponseMessage } from './excelWorker'
 import { createLoadingMenuIconMachine } from '@shared/nav'
-import { navItemKey } from '@shared/consts/navItemKey'
+import { navItemId } from '@shared/consts/navItemId'
 import { createActor } from 'xstate'
 import { getState } from '@shared/lib/redux'
 import type { Quotation } from '@entities/quotation'
@@ -12,7 +12,7 @@ export type WorkerRequestMessage = {
 }
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
-  navItemKey: navItemKey.share,
+  navItemKey: navItemId.share,
 })
 
 const loadingIconActor = createActor(loadingMenuIconMachine).start()

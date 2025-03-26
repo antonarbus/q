@@ -4,7 +4,7 @@ import { createElement, type MouseEvent } from 'react'
 import { CgClose as CloseIcon } from 'react-icons/cg'
 import { navSlice } from '../../../../../navSlice'
 import { Icon } from '../../Icon'
-import { MenuItemStyled } from './MenuItemStyled'
+import { MenuItemLayout } from './MenuItemStyled'
 import { TextInMenu } from './TextInMenu'
 
 const closeIcon = createElement(CloseIcon, {})
@@ -15,7 +15,7 @@ export const CloseMenuItem = (): React.JSX.Element => {
   const isHovered = useSelector((state) => state.nav.menuItemHoverIndex === 1)
 
   return (
-    <MenuItemStyled
+    <MenuItemLayout
       to='/'
       onClick={(e: MouseEvent): void => {
         e.preventDefault()
@@ -24,10 +24,10 @@ export const CloseMenuItem = (): React.JSX.Element => {
       onMouseEnter={(): void => {
         dispatch(navSlice.actions.setMenuItemHoverIndex(1))
       }}
-      state={{ isHovered }}
+      isHovered={isHovered}
     >
       <Icon icon={closeIcon} />
       <TextInMenu name={<span style={{ color }}>Close</span>} />
-    </MenuItemStyled>
+    </MenuItemLayout>
   )
 }

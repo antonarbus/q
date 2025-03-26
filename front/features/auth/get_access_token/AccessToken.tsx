@@ -3,7 +3,7 @@ import { dispatch, getState } from '@shared/lib/redux'
 import { jwtDecode } from 'jwt-decode'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { useGetAccessTokenQuery, userRole, userSlice } from '@entities/user'
-import { navItemKey } from '@shared/consts/navItemKey'
+import { navItemId } from '@shared/consts/navItemId'
 import { createLoadingMenuIconMachine, navSlice } from '@shared/nav'
 import { agGridSlice } from '@shared/lib/ag_grid/agGridSlice'
 import { createActor } from 'xstate'
@@ -14,7 +14,7 @@ export const {
 } = Promise.withResolvers<'fetched' | 'failed'>()
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
-  navItemKey: navItemKey.login,
+  navItemKey: navItemId.login,
 })
 
 const loadingIconActor = createActor(loadingMenuIconMachine).start()
@@ -86,12 +86,12 @@ export const AccessToken = (): React.JSX.Element => {
       )
 
       dispatch(
-        navSlice.actions.hideNavItems({ navItemIdKeys: [navItemKey.login] }),
+        navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.login] }),
       )
 
       dispatch(
         navSlice.actions.showNavItems({
-          navItemIdKeys: [navItemKey.profile],
+          navItemIdKeys: [navItemId.profile],
         }),
       )
 
@@ -103,7 +103,7 @@ export const AccessToken = (): React.JSX.Element => {
 
       dispatch(
         navSlice.actions.stopLoadingIcon({
-          navItemKey: navItemKey.login,
+          navItemKey: navItemId.login,
         }),
       )
 
@@ -124,18 +124,18 @@ export const AccessToken = (): React.JSX.Element => {
       dispatch(userSlice.actions.forgetLoggedUser())
 
       dispatch(
-        navSlice.actions.showNavItems({ navItemIdKeys: [navItemKey.login] }),
+        navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.login] }),
       )
 
       dispatch(
         navSlice.actions.hideNavItems({
-          navItemIdKeys: [navItemKey.profile],
+          navItemIdKeys: [navItemId.profile],
         }),
       )
 
       dispatch(
         navSlice.actions.stopLoadingIcon({
-          navItemKey: navItemKey.login,
+          navItemKey: navItemId.login,
         }),
       )
 

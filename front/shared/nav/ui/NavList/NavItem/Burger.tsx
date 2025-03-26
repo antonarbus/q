@@ -1,21 +1,10 @@
-import styled from '@emotion/styled'
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { Fade as BurgerIcon } from 'hamburger-react'
 import { navSlice } from '../../../navSlice'
+import { css } from '@emotion/react'
+
 // https://hamburger-react.netlify.app/
-
-type Props = {
-  screenWidthWhenShowBurger: number
-}
-
-const BurgerContainer = styled.div<Props>`
-  display: none;
-
-  @media (max-width: ${(props): number => props.screenWidthWhenShowBurger}px) {
-    display: block;
-  }
-`
 
 export const Burger = (): React.JSX.Element => {
   const isOpen = useSelector((state) => state.nav.burger.isOpen)
@@ -25,9 +14,15 @@ export const Burger = (): React.JSX.Element => {
   )
 
   return (
-    <BurgerContainer
-      screenWidthWhenShowBurger={screenWidthWhenShowBurger}
+    <div
       data-testid='hamburger icon'
+      css={css`
+        display: none;
+
+        @media (max-width: ${screenWidthWhenShowBurger}px) {
+          display: block;
+        }
+      `}
     >
       <BurgerIcon
         toggled={isOpen}
@@ -43,6 +38,6 @@ export const Burger = (): React.JSX.Element => {
           // if (!toggled) dispatch(closeMenu())
         }}
       />
-    </BurgerContainer>
+    </div>
   )
 }

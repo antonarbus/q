@@ -2,7 +2,7 @@ import { getState } from '@shared/lib/redux'
 import { cls } from '@shared/consts/cls'
 import { createActor } from 'xstate'
 import type { WorkerResponseMessage } from './pdfWorker'
-import { navItemKey } from '@shared/consts/navItemKey'
+import { navItemId } from '@shared/consts/navItemId'
 import { createLoadingMenuIconMachine } from '@shared/nav'
 import { toast } from 'sonner'
 
@@ -20,7 +20,7 @@ export type WorkerRequestMessage = {
 }
 
 const menuIconMachine = createLoadingMenuIconMachine({
-  navItemKey: navItemKey.share,
+  navItemKey: navItemId.share,
 })
 
 const loadingIconActor = createActor(menuIconMachine).start()

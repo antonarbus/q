@@ -9,7 +9,7 @@ import {
   useSaveQuotationMutation,
   type ShareQuotationFormValues,
 } from '@entities/quotation'
-import { navItemKey } from '@shared/consts/navItemKey'
+import { navItemId } from '@shared/consts/navItemId'
 import { nanoid } from '@shared/lib/nanoid'
 import { createLoadingMenuIconMachine, navSlice } from '@shared/nav'
 import { toast } from 'sonner'
@@ -30,7 +30,7 @@ type Res = {
 }
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
-  navItemKey: navItemKey.share,
+  navItemKey: navItemId.share,
 })
 
 const loadingIconActor = createActor(loadingMenuIconMachine).start()

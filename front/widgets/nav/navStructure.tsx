@@ -32,7 +32,7 @@ import {
 import { openQuotationsPage } from '@features/open_close/open_quotations_page'
 import { openSaveQuotationModal } from '@features/open_close/open_save_quotation_modal'
 import { openSettingsModal } from '@features/open_close/open_settings_modal'
-import { navItemKey } from '@shared/consts/navItemKey'
+import { navItemId } from '@shared/consts/navItemId'
 import { route } from '@shared/consts/route'
 import type { MenuItemType } from '@shared/nav'
 import { downloadPdf } from '@features/quotation/download_quotation_as_pdf'
@@ -44,12 +44,12 @@ import { saveExistingQuotation } from '@features/quotation/save_quotation'
 
 export const navStructure: MenuItemType[] = [
   {
-    id: navItemKey.top,
+    id: navItemId.top,
     name: 'top',
     isHidden: false,
     menuItems: [
       {
-        id: navItemKey.back,
+        id: navItemId.back,
         icon: (
           <IoChevronBackOutline
             style={{ color: '#3bc3ff' }}
@@ -63,7 +63,7 @@ export const navStructure: MenuItemType[] = [
         tooltip: 'Back to quotation',
       },
       {
-        id: navItemKey.new,
+        id: navItemId.new,
         icon: <VscNewFile data-testid='new icon' />,
         isHidden: false,
         name: 'New',
@@ -73,7 +73,7 @@ export const navStructure: MenuItemType[] = [
         tooltip: 'New quotation',
       },
       {
-        id: navItemKey.save,
+        id: navItemId.save,
         icon: <FiSave data-testid='save icon' />,
         isHidden: false,
         name: 'Save',
@@ -89,7 +89,7 @@ export const navStructure: MenuItemType[] = [
         },
       },
       {
-        id: navItemKey.share,
+        id: navItemId.share,
         icon: <FaRegShareFromSquare data-testid='share icon' />,
         isHidden: false,
         name: 'Share',
@@ -97,7 +97,7 @@ export const navStructure: MenuItemType[] = [
         tooltip: 'Share quotation',
         menuItems: [
           {
-            id: navItemKey.link,
+            id: navItemId.link,
             icon: <ImLink data-testid='link icon' />,
             name: 'Link',
             isHidden: false,
@@ -106,7 +106,7 @@ export const navStructure: MenuItemType[] = [
             func: openShareQuotationModal,
           },
           {
-            id: navItemKey.pdf,
+            id: navItemId.pdf,
             icon: <FaRegFilePdf data-testid='pdf icon' />,
             isHidden: false,
             disabled: false,
@@ -115,7 +115,7 @@ export const navStructure: MenuItemType[] = [
             func: downloadPdf,
           },
           {
-            id: navItemKey.excel,
+            id: navItemId.excel,
             icon: <RiFileExcel2Line data-testid='excel icon' />,
             isHidden: false,
             disabled: false,
@@ -127,20 +127,20 @@ export const navStructure: MenuItemType[] = [
       },
 
       {
-        id: navItemKey.insert,
+        id: navItemId.insert,
         icon: <RiMenuAddFill data-testid='insert icon' />,
         isHidden: false,
         name: 'Insert',
         disabled: true,
         menuItems: [
           {
-            id: navItemKey.block,
+            id: navItemId.block,
             name: 'Block',
             icon: <TbRectangleVertical />,
             isHidden: false,
             menuItems: [
               {
-                id: navItemKey.textItem,
+                id: navItemId.textItem,
                 name: 'Text',
                 icon: <IoText />,
                 isHidden: false,
@@ -148,7 +148,7 @@ export const navStructure: MenuItemType[] = [
                 func: insertTextBlock,
               },
               {
-                id: navItemKey.boqItem,
+                id: navItemId.boqItem,
                 name: 'Items',
                 icon: <FaRegRectangleList />,
                 isHidden: false,
@@ -156,7 +156,7 @@ export const navStructure: MenuItemType[] = [
                 func: insertBoqBlock,
               },
               {
-                id: navItemKey.priceItem,
+                id: navItemId.priceItem,
                 name: 'Price',
                 icon: <FiDollarSign />,
                 isHidden: false,
@@ -166,7 +166,7 @@ export const navStructure: MenuItemType[] = [
             ],
           },
           {
-            id: navItemKey.boqRow,
+            id: navItemId.boqRow,
             name: 'Row',
             icon: <FaGripLines />,
             isHidden: false,
@@ -177,7 +177,7 @@ export const navStructure: MenuItemType[] = [
         tooltip: 'Insert block or row',
       },
       {
-        id: navItemKey.bookmarks,
+        id: navItemId.bookmarks,
         icon: <PiFolderSimpleStarDuotone data-testid='bookmarks icon' />,
         isHidden: false,
         name: 'Bookmarks',
@@ -186,7 +186,7 @@ export const navStructure: MenuItemType[] = [
         tooltip: 'Your bookmarks',
       },
       {
-        id: navItemKey.quotations,
+        id: navItemId.quotations,
         icon: <CiViewTable data-testid='quotations icon' />,
         isHidden: false,
         name: 'Quotations',
@@ -195,7 +195,7 @@ export const navStructure: MenuItemType[] = [
         tooltip: 'Your quotations',
       },
       {
-        id: navItemKey.login,
+        id: navItemId.login,
         icon: <FiLogIn data-testid='login icon' />,
         isHidden: false,
         name: 'Log in',
@@ -204,13 +204,13 @@ export const navStructure: MenuItemType[] = [
         tooltip: 'Log in',
       },
       {
-        id: navItemKey.profile,
+        id: navItemId.profile,
         icon: <Person data-testid='profile icon' />,
         name: 'Profile',
         isHidden: true,
         menuItems: [
           {
-            id: navItemKey.settings,
+            id: navItemId.settings,
             icon: <Settings />,
             isHidden: false,
             name: 'Settings',
@@ -218,21 +218,21 @@ export const navStructure: MenuItemType[] = [
             func: openSettingsModal,
           },
           {
-            id: navItemKey.admin,
+            id: navItemId.admin,
             icon: <RiAdminLine data-testid='admin icon' />,
             isHidden: false,
             name: 'Admin',
             tooltip: 'Admin links',
             menuItems: [
               {
-                id: navItemKey.users,
+                id: navItemId.users,
                 icon: <FaUsersGear />,
                 isHidden: false,
                 name: 'Users',
                 link: `/${route.users}`,
               },
               {
-                id: navItemKey.visitors,
+                id: navItemId.visitors,
                 icon: <IoStatsChartOutline />,
                 isHidden: false,
                 name: 'Visitors',
@@ -241,7 +241,7 @@ export const navStructure: MenuItemType[] = [
             ],
           },
           {
-            id: navItemKey.logout,
+            id: navItemId.logout,
             icon: <FiLogOut />,
             isHidden: false,
             name: 'Log out',

@@ -5,7 +5,7 @@ import { FaChevronLeft } from 'react-icons/fa'
 import { navSlice } from '../../../../../navSlice'
 import { Icon } from '../../Icon'
 import { navigateInMenu } from '../functions/useMenuAnimation'
-import { MenuItemStyled } from './MenuItemStyled'
+import { MenuItemLayout } from './MenuItemStyled'
 import { TextInMenu } from './TextInMenu'
 
 export const BackMenuItem = (): React.JSX.Element => {
@@ -14,7 +14,7 @@ export const BackMenuItem = (): React.JSX.Element => {
   const color = theme.colors.topMenuItem
 
   return (
-    <MenuItemStyled
+    <MenuItemLayout
       to={'/'}
       onClick={(e: MouseEvent): void => {
         e.preventDefault()
@@ -23,10 +23,10 @@ export const BackMenuItem = (): React.JSX.Element => {
       onMouseEnter={(): void => {
         dispatch(navSlice.actions.setMenuItemHoverIndex(1))
       }}
-      state={{ isHovered }}
+      isHovered={isHovered}
     >
       <Icon icon={<FaChevronLeft />} />
       <TextInMenu name={<span style={{ color }}>Back</span>} />
-    </MenuItemStyled>
+    </MenuItemLayout>
   )
 }

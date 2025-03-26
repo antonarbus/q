@@ -1,7 +1,8 @@
 import type { MouseEvent } from 'react'
+import type { NavItemId } from '../../consts/navItemId'
 
 export type MenuItemType = {
-  id: string
+  id: NavItemId
   name: string
   icon?: React.ReactNode | string
   link?: string
@@ -23,4 +24,4 @@ export type NavItemsMediaQueryWidths = {
   burger: number
 }
 
-export type { NavItemKey } from '../../consts/navItemKey'
+export type { NavItemId as NavItemKey } from '../../consts/navItemId'

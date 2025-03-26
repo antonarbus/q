@@ -10,7 +10,7 @@ import {
   newQuotationTemplate,
   backToQuotationRef,
 } from '@entities/quotation'
-import { navItemKey } from '@shared/consts/navItemKey'
+import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 import { toast } from 'sonner'
 import { appSlice } from '@shared/appSlice'
@@ -38,18 +38,16 @@ export function useLoadQuotation(): void {
     dispatch(quotationSlice.actions.resetQuotationReducer())
     dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
-    dispatch(
-      navSlice.actions.hideNavItems({ navItemIdKeys: [navItemKey.back] }),
-    )
+    dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.back] }))
 
     dispatch(
       navSlice.actions.enableNavItems({
         navItemIdKeys: [
-          navItemKey.save,
-          navItemKey.pdf,
-          navItemKey.excel,
-          navItemKey.share,
-          navItemKey.insert,
+          navItemId.save,
+          navItemId.pdf,
+          navItemId.excel,
+          navItemId.share,
+          navItemId.insert,
         ],
       }),
     )
@@ -104,7 +102,7 @@ export function useLoadQuotation(): void {
       }, 750)
 
       dispatch(
-        navSlice.actions.underlineNavItem({ navItemIdKey: navItemKey.new }),
+        navSlice.actions.underlineNavItem({ navItemIdKey: navItemId.new }),
       )
 
       return
@@ -151,11 +149,11 @@ export function useLoadQuotation(): void {
         dispatch(
           navSlice.actions.enableNavItems({
             navItemIdKeys: [
-              navItemKey.save,
-              navItemKey.pdf,
-              navItemKey.excel,
-              navItemKey.share,
-              navItemKey.insert,
+              navItemId.save,
+              navItemId.pdf,
+              navItemId.excel,
+              navItemId.share,
+              navItemId.insert,
             ],
           }),
         )

@@ -10,7 +10,7 @@ import { RoundSpanForIcon } from '../../RoundSpanForIcon'
 import { SpinnerIcon } from '../../SpinnerIcon'
 import { SuccessIcon } from '../../SuccessIcon'
 import { clickOnMenuItem } from './function/clickOnMenuItem'
-import { MenuItemStyled } from './MenuItemStyled'
+import { MenuItemLayout } from './MenuItemStyled'
 import { Shortcut } from './Shortcut'
 import { TextInMenu } from './TextInMenu'
 
@@ -48,9 +48,9 @@ export const MenuItem = ({
   const to = link.includes('.') ? fixedLink : link
 
   return (
-    <MenuItemStyled
+    <MenuItemLayout
       to={to}
-      state={{ isHovered }}
+      isHovered={isHovered}
       onClick={(e: MouseEvent): void => {
         if (isFunc) {
           e.preventDefault()
@@ -112,6 +112,6 @@ export const MenuItem = ({
           $isHovered={isHovered}
         />
       )}
-    </MenuItemStyled>
+    </MenuItemLayout>
   )
 }

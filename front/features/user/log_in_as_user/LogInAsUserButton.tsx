@@ -11,7 +11,7 @@ import type { NavigateState } from '@shared/types/NavigateState'
 import { type Location, useLocation, useParams } from 'react-router-dom'
 import { dispatch } from '@shared/lib/redux'
 import { navSlice } from '@shared/nav'
-import { navItemKey } from '@shared/consts/navItemKey'
+import { navItemId } from '@shared/consts/navItemId'
 import { route } from '@shared/consts/route'
 import { appSlice } from '@shared/appSlice'
 
@@ -55,12 +55,12 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
       )
 
       dispatch(
-        navSlice.actions.hideNavItems({ navItemIdKeys: [navItemKey.login] }),
+        navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.login] }),
       )
 
       dispatch(
         navSlice.actions.showNavItems({
-          navItemIdKeys: [navItemKey.profile],
+          navItemIdKeys: [navItemId.profile],
         }),
       )
 

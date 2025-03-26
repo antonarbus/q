@@ -34,8 +34,8 @@ const customTheme = {
   },
   menu: {
     width: 300,
-    paddingTop: 16,
-    paddingBottom: 16,
+    paddingTop: 20,
+    paddingBottom: 20,
     menuItem: {
       height: 50,
     },

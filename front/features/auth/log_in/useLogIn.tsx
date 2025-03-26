@@ -11,7 +11,7 @@ import { useUpdateEffect } from 'react-use'
 import { useGetBookmarksQuery } from '@entities/bookmark'
 import { useGetQuotationsQuery } from '@entities/quotation'
 import { useLogInMutation, userRole, userSlice } from '@entities/user'
-import { navItemKey } from '@shared/consts/navItemKey'
+import { navItemId } from '@shared/consts/navItemId'
 import { route } from '@shared/consts/route'
 import { navSlice } from '@shared/nav'
 import { toast } from 'sonner'
@@ -89,11 +89,11 @@ export const useLogIn = ({
       )
 
       dispatch(
-        navSlice.actions.hideNavItems({ navItemIdKeys: [navItemKey.login] }),
+        navSlice.actions.hideNavItems({ navItemIdKeys: [navItemId.login] }),
       )
 
       dispatch(
-        navSlice.actions.showNavItems({ navItemIdKeys: [navItemKey.profile] }),
+        navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.profile] }),
       )
 
       if (roles?.includes(userRole.superAdmin)) {

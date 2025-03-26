@@ -4,7 +4,7 @@ import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { deleteBookmarksCache } from '@entities/bookmark'
 import { deleteQuotationsCache } from '@entities/quotation'
 import { useLogOutMutation, userSlice } from '@entities/user'
-import { navItemKey } from '@shared/consts/navItemKey'
+import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 import { toast } from 'sonner'
 import { appSlice } from '@shared/appSlice'
@@ -35,12 +35,12 @@ export const Logout = (): React.JSX.Element => {
       dispatch(userSlice.actions.forgetLoggedUser())
 
       dispatch(
-        navSlice.actions.showNavItems({ navItemIdKeys: [navItemKey.login] }),
+        navSlice.actions.showNavItems({ navItemIdKeys: [navItemId.login] }),
       )
 
       dispatch(
         navSlice.actions.hideNavItems({
-          navItemIdKeys: [navItemKey.profile],
+          navItemIdKeys: [navItemId.profile],
         }),
       )
 

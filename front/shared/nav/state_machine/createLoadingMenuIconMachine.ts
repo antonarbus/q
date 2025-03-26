@@ -1,10 +1,10 @@
 import { dispatch } from '@shared/lib/redux'
 import { setup } from 'xstate'
-import type { NavItemKey } from '@shared/consts/navItemKey'
+import type { NavItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 
 type Props = {
-  navItemKey: NavItemKey
+  navItemKey: NavItemId
   navItemNameWhileLoading?: string
 }
 
