@@ -1,10 +1,10 @@
 import { theme } from '@shared/theme'
-import { TooltipWithNoMaxWidth } from '@shared/components/TooltipWithNoMaxWidth'
 import { MdAlternateEmail } from 'react-icons/md'
+import { Tooltip } from '@mui/material'
 
 export const EmailIcon = (): React.JSX.Element => {
   return (
-    <TooltipWithNoMaxWidth
+    <Tooltip
       title='Ask a question, send feedback, report a bug, or a feature request'
       placement='top'
     >
@@ -23,6 +23,6 @@ export const EmailIcon = (): React.JSX.Element => {
           }}
         />
       </a>
-    </TooltipWithNoMaxWidth>
+    </Tooltip>
   )
 }
