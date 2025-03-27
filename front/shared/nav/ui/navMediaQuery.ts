@@ -1,5 +1,5 @@
 export const navMediaQuery = {
-  iconWidth: 1110,
-  nameWidth: 830,
-  burgerWidth: 630,
+  widthWhenIconsWithNamesDoNotFit: 1110,
+  widthWhenNamesDoNotFit: 830,
+  widthWhenNothingFits: 630,
 } as const

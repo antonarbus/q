@@ -16,7 +16,7 @@ export const Burger = (): React.JSX.Element => {
       css={css`
         display: none;
 
-        @media (width <= ${navMediaQuery.burgerWidth}px) {
+        @media (width <= ${navMediaQuery.widthWhenNothingFits}px) {
           display: block;
         }
       `}
