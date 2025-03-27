@@ -45,7 +45,6 @@ export const NavName = ({ name }: Props): React.ReactNode => {
         className='nav-item-text'
         style={{
           display: 'inline-block',
-          outline: '1px solid green',
         }}
       >
         {name}

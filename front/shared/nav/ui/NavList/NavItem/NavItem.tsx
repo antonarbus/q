@@ -110,7 +110,12 @@ export const NavItem = ({ children, navItemId }: Props): React.JSX.Element => {
         )}
         <NavName name={name} />
         {isNestedMenu && !disabled && (
-          <TiArrowSortedDown className='arrow-for-nested-menu' />
+          <TiArrowSortedDown
+            className='arrow-for-nested-menu'
+            style={{
+              marginLeft: '12px',
+            }}
+          />
         )}
         {children}
       </Link>

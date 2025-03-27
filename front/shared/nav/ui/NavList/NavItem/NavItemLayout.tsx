@@ -70,8 +70,6 @@ export const NavItemLayout = ({
         @media screen and (width <= 480px) {
           position: static;
         }
-
-        outline: 1px solid red;
       `}
     >
       {children}
