@@ -10,31 +10,21 @@ import { SpinnerIcon } from './SpinnerIcon'
 import { SuccessIcon } from './SuccessIcon'
 import { NavName } from './NavName'
 import { NavItemLayout } from './NavItemLayout'
+import type { NavItemId } from '@shared/consts/navItemId'
 
 type Props = {
   children?: React.ReactNode
-  id: string
+  navItemId: NavItemId
 }
 
-/**
- * @descriptions
- * - navItem gets 'menu id' from 'navStructure'
- * - menu is placed under navItem (li)
- * - and we can open corresponding menu on click event
- * - reference to menu item <li> to pass it into menu
- * - needs to calculate how NavItem' is far from the screen to understand how to place Menu
- * - Menu can be placed with style left:0 or right:0
- * - required to avoid Menu to go over the narrow window
- */
-
-export const NavItem = ({ children, id }: Props): React.JSX.Element => {
+export const NavItem = ({ children, navItemId }: Props): React.JSX.Element => {
   const location = useLocation()
   // required to avoid Menu to go over the narrow window
   const navItemRef = useRef<React.ComponentRef<'li'> | null>(null)
 
   // needs to open only menu under clicked navItem, otherwise multiple menus are opened under all navItems
   const shouldOpenThisMenu = useSelector(
-    (state) => state.nav.idsToCurrentMenuItems.at(1) === id,
+    (state) => state.nav.idsToCurrentMenuItems.at(1) === navItemId,
   )
 
   const navItem = useSelector((state) => {
@@ -49,7 +39,7 @@ export const NavItem = ({ children, id }: Props): React.JSX.Element => {
     }
 
     const navItemFromTopNavLevel = topNavLevel.menuItems.find(
-      (menuItem) => menuItem.id === id,
+      (menuItem) => menuItem.id === navItemId,
     )
 
     return navItemFromTopNavLevel
@@ -93,7 +83,7 @@ export const NavItem = ({ children, id }: Props): React.JSX.Element => {
             return
           }
 
-          clickOnNavItem({ e, navItem, id, navItemRef, disabled })
+          clickOnNavItem({ e, navItem, id: navItemId, navItemRef, disabled })
         }}
         css={{
           position: 'relative',

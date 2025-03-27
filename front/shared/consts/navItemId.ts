@@ -23,6 +23,7 @@ export const navItemId = {
   admin: 'admin',
   users: 'users',
   visitors: 'visitors',
+  burger: 'burger',
 } as const
 
 export type NavItemId = (typeof navItemId)[keyof typeof navItemId]

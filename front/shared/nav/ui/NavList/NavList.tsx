@@ -9,7 +9,7 @@ export const NavList = (): React.JSX.Element => {
     ?.filter((navItem) => !navItem.isHidden)
     .map((navItem) => (
       <NavItem
-        id={navItem.id}
+        navItemId={navItem.id}
         key={navItem.id}
       />
     ))
@@ -26,7 +26,7 @@ export const NavList = (): React.JSX.Element => {
     >
       {navItems}
       <NavItem
-        id={'burger'}
+        navItemId={'burger'}
         key={'burger'}
       >
         <Burger />
