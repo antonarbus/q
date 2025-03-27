@@ -1,15 +1,10 @@
 import { Box } from '@mui/material'
 import logoSrc from './logo.png'
 
-type Prop = {
-  logoRef: React.RefObject<React.ComponentRef<'div'> | null>
-}
-
-export const Logo = ({ logoRef }: Prop): React.JSX.Element => {
+export const Logo = (): React.JSX.Element => {
   return (
     <div
       className='logo-container'
-      ref={logoRef}
       css={{
         display: 'flex',
         alignItems: 'center',
