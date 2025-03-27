@@ -50,12 +50,6 @@ export const NavLayout = (props: Props): React.JSX.Element => {
             display: 'flex',
           },
         },
-        '& > *': {
-          outline: '1px solid red',
-        },
-        '& > * > *': {
-          outline: '1px solid green',
-        },
       }}
     >
       {props.children}

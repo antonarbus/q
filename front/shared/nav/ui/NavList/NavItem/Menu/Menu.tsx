@@ -49,7 +49,7 @@ export const Menu = (): React.JSX.Element => {
       css={css`
         position: absolute;
         top: calc(100% + 5px);
-        right: -${theme.menu.navItem.marginRight}px;
+        right: 0;
         /* if right corner goes over the screen fix the left instead of right */
         left: ${isMenuOutsideWindow ? '0' : 'not set'};
         width: ${theme.menu.width}px;

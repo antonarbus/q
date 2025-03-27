@@ -22,6 +22,7 @@ export const NavList = (): React.JSX.Element => {
         justifyContent: 'flex-end',
         paddingLeft: '0px',
         paddingRight: '0px',
+        // gap: '5px',
       }}
     >
       {navItems}

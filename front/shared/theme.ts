@@ -39,10 +39,6 @@ const customTheme = {
     menuItem: {
       height: 50,
     },
-    navItem: {
-      marginLeft: 10,
-      marginRight: 10,
-    },
   },
   block: {
     animationDuration: 0.5,

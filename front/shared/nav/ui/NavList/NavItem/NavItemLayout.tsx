@@ -24,8 +24,6 @@ export const NavItemLayout = ({
         align-items: center;
         justify-content: center;
         padding: 0px 1px;
-        margin-left: ${theme.menu.navItem.marginLeft}px;
-        margin-right: ${theme.menu.navItem.marginRight}px;
         user-select: none;
 
         & > a {
@@ -43,8 +41,8 @@ export const NavItemLayout = ({
           }
 
           .nav-item-name {
-            margin-left: 5px;
-            margin-right: 5px;
+            /* margin-left: 5px;
+            margin-right: 5px; */
           }
 
           .nav-item-text {
@@ -72,6 +70,8 @@ export const NavItemLayout = ({
         @media screen and (width <= 480px) {
           position: static;
         }
+
+        outline: 1px solid red;
       `}
     >
       {children}
