@@ -14,6 +14,15 @@ export const NavList = (): React.JSX.Element => {
       />
     ))
 
+  const burger = (
+    <NavItem
+      navItemId={'burger'}
+      key={'burger'}
+    >
+      <Burger />
+    </NavItem>
+  )
+
   return (
     <ul
       style={{
@@ -22,16 +31,10 @@ export const NavList = (): React.JSX.Element => {
         justifyContent: 'flex-end',
         paddingLeft: '0px',
         paddingRight: '0px',
-        // gap: '5px',
       }}
     >
       {navItems}
-      <NavItem
-        navItemId={'burger'}
-        key={'burger'}
-      >
-        <Burger />
-      </NavItem>
+      {burger}
     </ul>
   )
 }

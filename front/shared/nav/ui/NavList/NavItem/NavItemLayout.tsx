@@ -8,15 +8,10 @@ type Props = {
   isActive?: boolean
 }
 
-export const NavItemLayout = ({
-  children,
-  navItemRef,
-  disabled,
-  isActive,
-}: Props): React.JSX.Element => {
+export const NavItemLayout = (props: Props): React.JSX.Element => {
   return (
     <li
-      ref={navItemRef}
+      ref={props.navItemRef}
       className='nav-item'
       css={css`
         display: flex;
@@ -32,38 +27,18 @@ export const NavItemLayout = ({
           position: relative;
           text-decoration: none;
           -webkit-user-drag: none;
-          cursor: ${disabled ? 'default' : 'pointer'};
+          cursor: ${props.disabled ? 'default' : 'pointer'};
 
           &:hover,
           &:focus,
           &:active {
-            filter: brightness(${disabled ? 1 : 1.2});
-          }
-
-          .nav-item-name {
-            /* margin-left: 5px;
-            margin-right: 5px; */
+            filter: brightness(${props.disabled ? 1 : 1.2});
           }
 
           .nav-item-text {
-            color: ${disabled ? '#585858' : theme.colors.greyFont};
+            color: ${props.disabled ? '#585858' : theme.colors.greyFont};
             white-space: nowrap;
-            text-decoration: ${isActive ? 'underline' : 'none'};
-          }
-
-          .arrow-for-nested-menu {
-            display: none;
-            position: absolute;
-            top: calc(50% + 2px);
-            transform: translateY(-50%);
-            right: -12px;
-            color: grey;
-            height: 14px;
-          }
-
-          &:hover > .arrow-for-nested-menu,
-          &:focus > .arrow-for-nested-menu {
-            display: block;
+            text-decoration: ${props.isActive ? 'underline' : 'none'};
           }
         }
 
@@ -72,7 +47,7 @@ export const NavItemLayout = ({
         }
       `}
     >
-      {children}
+      {props.children}
     </li>
   )
 }

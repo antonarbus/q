@@ -1,6 +1,5 @@
 import { useSelector } from '@shared/lib/redux'
 import { useRef } from 'react'
-import { TiArrowSortedDown } from 'react-icons/ti'
 import { Link, useLocation } from 'react-router-dom'
 import { clickOnNavItem } from './clickOnNavItem'
 import { ErrorIcon } from './ErrorIcon'
@@ -11,6 +10,7 @@ import { SuccessIcon } from './SuccessIcon'
 import { NavName } from './NavName'
 import { NavItemLayout } from './NavItemLayout'
 import type { NavItemId } from '@shared/consts/navItemId'
+import { ArrowForNestedMenu } from './ArrowForNestedMenu'
 
 type Props = {
   children?: React.ReactNode
@@ -45,7 +45,6 @@ export const NavItem = ({ children, navItemId }: Props): React.JSX.Element => {
     return navItemFromTopNavLevel
   })
 
-  const isNestedMenu = Boolean(navItem?.menuItems)
   const icon = navItem?.icon
   const name = navItem?.name
   const link = navItem?.link ?? ''
@@ -109,14 +108,7 @@ export const NavItem = ({ children, navItemId }: Props): React.JSX.Element => {
           />
         )}
         <NavName name={name} />
-        {isNestedMenu && !disabled && (
-          <TiArrowSortedDown
-            className='arrow-for-nested-menu'
-            style={{
-              marginLeft: '12px',
-            }}
-          />
-        )}
+        <ArrowForNestedMenu navItem={navItem} />
         {children}
       </Link>
       {shouldOpenThisMenu && <Menu />}
