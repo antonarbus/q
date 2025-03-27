@@ -52,6 +52,9 @@ export const NavLayout = (props: Props): React.JSX.Element => {
             display: 'flex',
           },
         },
+        'ol,ul,menu': {
+          paddingLeft: '0px',
+        },
       }}
     >
       {props.children}
