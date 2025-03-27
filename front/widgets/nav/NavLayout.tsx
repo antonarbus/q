@@ -1,4 +1,4 @@
-import { useSelector } from '@shared/lib/redux'
+import { navMediaQuery } from '@shared/nav'
 import { theme } from '@shared/theme'
 
 type Props = {
@@ -7,9 +7,6 @@ type Props = {
 }
 
 export const NavLayout = (props: Props): React.JSX.Element => {
-  const mediaQueryWidth = useSelector((state) => state.nav.mediaQueryWidth)
-  const mediaEnabled = useSelector((state) => state.nav.mediaEnabled)
-
   return (
     <nav
       ref={props.navRef}
@@ -20,41 +17,40 @@ export const NavLayout = (props: Props): React.JSX.Element => {
         alignItems: 'stretch',
         position: 'sticky',
         top: '5px',
-        marginBottom: `${String(theme.nav.marginBottom)}px`,
+        marginBottom: `${theme.nav.marginBottom}px`,
         marginLeft: '10px',
         marginRight: '10px',
-        height: `${String(theme.nav.height)}px`,
+        height: `${theme.nav.height}px`,
         borderRadius: '4px',
         background: theme.colors.darkBackground,
         boxShadow: '0 0px 5px 0 #0000005c',
         zIndex: 6,
         contain: 'layout inline-size',
         fontWeight: 300,
-        '& > ul > li > a .icon-round-wrapper': mediaEnabled && {
-          [`@media (max-width: ${String(mediaQueryWidth.icon)}px) and (min-width: ${String(mediaQueryWidth.name)}px)`]:
+        '& > ul > li > a .icon-round-wrapper': {
+          [`@media (max-width: ${navMediaQuery.iconWidth}px) and (min-width: ${navMediaQuery.nameWidth}px)`]:
             {
               display: 'none',
             },
-          [`@media (max-width: ${String(mediaQueryWidth.burger)}px)`]: {
+          [`@media (max-width: ${navMediaQuery.burgerWidth}px)`]: {
             display: 'none',
           },
         },
-        '& .nav-item-name': mediaEnabled && {
-          [`@media (max-width: ${String(mediaQueryWidth.name)}px)`]: {
+        '& .nav-item-name': {
+          [`@media (max-width: ${navMediaQuery.nameWidth}px)`]: {
             display: 'none',
           },
         },
-        '& li:not(:last-child)': mediaEnabled && {
-          [`@media (max-width: ${String(mediaQueryWidth.burger)}px)`]: {
+        '& li:not(:last-child)': {
+          [`@media (max-width: ${navMediaQuery.burgerWidth}px)`]: {
             display: 'none',
           },
         },
         '& li:last-child': {
           display: 'none',
-          [`@media (max-width: ${String(mediaQueryWidth.burger)}px)`]:
-            mediaEnabled && {
-              display: 'flex',
-            },
+          [`@media (max-width: ${navMediaQuery.burgerWidth}px)`]: {
+            display: 'flex',
+          },
         },
       }}
     >

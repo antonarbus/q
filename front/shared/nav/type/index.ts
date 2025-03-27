@@ -18,10 +18,4 @@ export type MenuItemType = {
   tooltip?: string
 }
 
-export type NavItemsMediaQueryWidths = {
-  icon: number
-  name: number
-  burger: number
-}
-
 export type { NavItemId } from '../../consts/navItemId'

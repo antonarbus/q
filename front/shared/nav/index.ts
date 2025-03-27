@@ -1,5 +1,5 @@
 // types
-export type { MenuItemType, NavItemsMediaQueryWidths } from './type'
+export type { MenuItemType } from './type'
 
 // redux
 export { navSlice } from './navSlice'
@@ -14,3 +14,6 @@ export { createLoadingMenuIconMachine } from './state_machine/createLoadingMenuI
 // utilities
 export { setMenuItemPropValue } from './setMenuItemPropValue'
 export { getMenuItemPropValue } from './getMenuItemPropValue'
+
+// media query
+export { navMediaQuery } from './ui/navMediaQuery'

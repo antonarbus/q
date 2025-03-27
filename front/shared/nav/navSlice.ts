@@ -1,18 +1,12 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { setMenuItemPropValue } from './setMenuItemPropValue'
-import type { MenuItemType, NavItemId, NavItemsMediaQueryWidths } from './type'
+import type { MenuItemType, NavItemId } from './type'
 import { getMenuItemPropValue } from './getMenuItemPropValue'
 import { navStructure as navStructureOriginal } from '@widgets/nav/navStructure'
 
 const initialState = {
   navStructure: [] as MenuItemType[],
   burger: { isOpen: false },
-  mediaEnabled: true,
-  mediaQueryWidth: {
-    icon: 0,
-    name: 0,
-    burger: 0,
-  },
   idsToCurrentMenuItems: ['top'],
   idsToNextMenuItems: ['top'],
   navItemRightPos: 0,
@@ -37,19 +31,6 @@ export const navSlice = createSlice({
     },
     toggleBurger: (state) => {
       state.burger.isOpen = !state.burger.isOpen
-    },
-    disableMedia: (state) => {
-      state.mediaEnabled = false
-    },
-    enableMedia: (state) => {
-      state.mediaEnabled = true
-    },
-    setNavMediaQueryWidths: (
-      state,
-      action: PayloadAction<NavItemsMediaQueryWidths>,
-    ) => {
-      const elementMediaQueryWidths = action.payload
-      state.mediaQueryWidth = elementMediaQueryWidths
     },
     setNavItemRightPos: (state, action: PayloadAction<number>) => {
       const rightPos = action.payload

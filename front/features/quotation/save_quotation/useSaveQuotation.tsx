@@ -32,7 +32,7 @@ type Res = {
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
   navItemId: navItemId.save,
-  navItemNameWhileLoading: 'Saving',
+  navItemNameWhileLoading: 'Saving...',
 })
 
 const loadingIconActor = createActor(loadingMenuIconMachine).start()

@@ -78,13 +78,11 @@ button {
 ol,
 ul,
 menu {
-  padding-left: 25px;
   list-style-type: inherit;
 }
 
 ol ol,
 ul ul {
-  padding-left: 25px;
   list-style-type: inherit;
 }
 

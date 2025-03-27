@@ -3,15 +3,12 @@ import { theme } from '@shared/theme'
 import { Fade as BurgerIcon } from 'hamburger-react'
 import { navSlice } from '../../../navSlice'
 import { css } from '@emotion/react'
+import { navMediaQuery } from '../../navMediaQuery'
 
 // https://hamburger-react.netlify.app/
 
 export const Burger = (): React.JSX.Element => {
   const isOpen = useSelector((state) => state.nav.burger.isOpen)
-
-  const screenWidthWhenShowBurger = useSelector(
-    (state) => state.nav.mediaQueryWidth.burger,
-  )
 
   return (
     <div
@@ -19,7 +16,7 @@ export const Burger = (): React.JSX.Element => {
       css={css`
         display: none;
 
-        @media (max-width: ${screenWidthWhenShowBurger}px) {
+        @media (max-width: ${navMediaQuery.burgerWidth}px) {
           display: block;
         }
       `}

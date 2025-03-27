@@ -1,8 +1,7 @@
-import { getState, useSelector } from '@shared/lib/redux'
+import { useSelector } from '@shared/lib/redux'
 import { useRef } from 'react'
 import { TiArrowSortedDown } from 'react-icons/ti'
 import { Link, useLocation } from 'react-router-dom'
-import { useWindowSize } from 'react-use'
 import { clickOnNavItem } from './clickOnNavItem'
 import { ErrorIcon } from './ErrorIcon'
 import { Icon } from './Icon'
@@ -32,16 +31,6 @@ export const NavItem = ({ children, id }: Props): React.JSX.Element => {
   const location = useLocation()
   // required to avoid Menu to go over the narrow window
   const navItemRef = useRef<React.ComponentRef<'li'> | null>(null)
-
-  /**
-   * - with media query at some width we hide names and show icons
-   * - if icon is not provided in navStructure we may generate it dynamically
-   * - do it only for such width when only icons are show
-   * - for that reason we track window's width with 'useWindowSize' hook
-   */
-  const windowWidth = useWindowSize().width
-  const widthWhenIconsAreShown = getState().nav.mediaQueryWidth.icon
-  const shouldDisplayIcon = windowWidth < widthWhenIconsAreShown
 
   // needs to open only menu under clicked navItem, otherwise multiple menus are opened under all navItems
   const shouldOpenThisMenu = useSelector(
@@ -106,6 +95,9 @@ export const NavItem = ({ children, id }: Props): React.JSX.Element => {
 
           clickOnNavItem({ e, navItem, id, navItemRef, disabled })
         }}
+        css={{
+          position: 'relative',
+        }}
         // onMouseEnter={() => {
         //   console.log({ link, to, pathname: location.pathname })
         // }}
@@ -120,7 +112,7 @@ export const NavItem = ({ children, id }: Props): React.JSX.Element => {
             tooltipText={tooltipText}
           />
         )}
-        {!icon && shouldDisplayIcon && (
+        {!icon && (
           <Icon
             icon={name?.[0]}
             disabled={disabled}

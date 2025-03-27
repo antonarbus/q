@@ -23,7 +23,7 @@ export const NavItemLayout = ({
         position: relative;
         align-items: center;
         justify-content: center;
-        padding: 0px 5px;
+        padding: 0px 1px;
         margin-left: ${theme.menu.navItem.marginLeft}px;
         margin-right: ${theme.menu.navItem.marginRight}px;
         user-select: none;
@@ -48,8 +48,6 @@ export const NavItemLayout = ({
           }
 
           .nav-item-text {
-            margin-left: 5px;
-            margin-right: 5px;
             color: ${disabled ? '#585858' : theme.colors.greyFont};
             white-space: nowrap;
             text-decoration: ${isActive ? 'underline' : 'none'};
@@ -68,7 +66,6 @@ export const NavItemLayout = ({
           &:hover > .arrow-for-nested-menu,
           &:focus > .arrow-for-nested-menu {
             display: block;
-            right: -15px;
           }
         }
 

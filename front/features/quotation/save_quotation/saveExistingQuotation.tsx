@@ -13,7 +13,7 @@ import type { ResBody } from '@back/api/quotation/saveQuotationRouter'
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
   navItemId: navItemId.save,
-  navItemNameWhileLoading: 'Saving',
+  navItemNameWhileLoading: 'Saving...',
 })
 
 const loadingIconActor = createActor(loadingMenuIconMachine).start()

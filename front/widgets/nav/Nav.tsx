@@ -4,7 +4,6 @@ import { navStructure } from './navStructure'
 import { usePressNavShortcut } from '@features/nav/press_shortcut'
 import { NavLayout } from './NavLayout'
 import { useLoadNavStructure } from '@features/nav/load_nav_structure'
-import { useCalculateMediaQueries } from '@features/nav/calculate_media_queries'
 
 export const Nav = (): React.JSX.Element => {
   const navRef = useRef<HTMLDivElement>(null)
@@ -12,7 +11,6 @@ export const Nav = (): React.JSX.Element => {
 
   useLoadNavStructure({ navStructure })
   usePressNavShortcut({ navStructure })
-  useCalculateMediaQueries({ navRef, logoRef })
 
   return (
     <NavLayout navRef={navRef}>
