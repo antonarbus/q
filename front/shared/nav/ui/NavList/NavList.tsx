@@ -11,6 +11,8 @@ export const NavList = (): React.JSX.Element => {
         display: 'flex',
         flexGrow: 1,
         justifyContent: 'flex-end',
+        paddingLeft: '0px',
+        paddingRight: '0px',
       }}
     >
       {navStructure[0]?.menuItems

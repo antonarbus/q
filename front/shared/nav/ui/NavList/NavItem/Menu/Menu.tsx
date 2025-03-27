@@ -61,7 +61,7 @@ export const Menu = (): React.JSX.Element => {
         border-radius: 4px;
         overflow: hidden;
 
-        @media screen and (max-width: 480px) {
+        @media screen and (width <= 480px) {
           left: 0px;
           right: 0px;
           width: auto;

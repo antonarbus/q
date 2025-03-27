@@ -28,32 +28,29 @@ export const NavLayout = (props: Props): React.JSX.Element => {
         contain: 'layout inline-size',
         fontWeight: 300,
         '& > ul > li > a .icon-round-wrapper': {
-          [`@media (max-width: ${navMediaQuery.iconWidth}px) and (min-width: ${navMediaQuery.nameWidth}px)`]:
+          [`@media (${navMediaQuery.nameWidth}px <= width <= ${navMediaQuery.iconWidth}px)`]:
             {
               display: 'none',
             },
-          [`@media (max-width: ${navMediaQuery.burgerWidth}px)`]: {
+          [`@media (width <= ${navMediaQuery.burgerWidth}px)`]: {
             display: 'none',
           },
         },
         '& .nav-item-name': {
-          [`@media (max-width: ${navMediaQuery.nameWidth}px)`]: {
+          [`@media (width <= ${navMediaQuery.nameWidth}px)`]: {
             display: 'none',
           },
         },
         '& li:not(:last-child)': {
-          [`@media (max-width: ${navMediaQuery.burgerWidth}px)`]: {
+          [`@media (width <= ${navMediaQuery.burgerWidth}px)`]: {
             display: 'none',
           },
         },
         '& li:last-child': {
           display: 'none',
-          [`@media (max-width: ${navMediaQuery.burgerWidth}px)`]: {
+          [`@media (width <= ${navMediaQuery.burgerWidth}px)`]: {
             display: 'flex',
           },
-        },
-        'ol,ul,menu': {
-          paddingLeft: '0px',
         },
       }}
     >

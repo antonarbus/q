@@ -69,7 +69,7 @@ export const NavItemLayout = ({
           }
         }
 
-        @media screen and (max-width: 480px) {
+        @media screen and (width <= 480px) {
           position: static;
         }
       `}

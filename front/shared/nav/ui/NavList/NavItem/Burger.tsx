@@ -16,7 +16,7 @@ export const Burger = (): React.JSX.Element => {
       css={css`
         display: none;
 
-        @media (max-width: ${navMediaQuery.burgerWidth}px) {
+        @media (width <= ${navMediaQuery.burgerWidth}px) {
           display: block;
         }
       `}

@@ -14,9 +14,8 @@ export const Logo = ({ logoRef }: Prop): React.JSX.Element => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        flexShrink: 1,
-        padding: '3px',
-        paddingLeft: '10px',
+        flexShrink: 0,
+        padding: '3px 10px',
         overflow: 'auto',
       }}
     >
