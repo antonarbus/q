@@ -2,15 +2,12 @@ import { useSelector } from '@shared/lib/redux'
 import { useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { clickOnNavItem } from './clickOnNavItem'
-import { ErrorIcon } from './ErrorIcon'
-import { Icon } from './Icon'
 import { Menu } from './Menu'
-import { SpinnerIcon } from './SpinnerIcon'
-import { SuccessIcon } from './SuccessIcon'
 import { NavName } from './NavName'
 import { NavItemLayout } from './NavItemLayout'
 import type { NavItemId } from '@shared/consts/navItemId'
 import { ArrowForNestedMenu } from './ArrowForNestedMenu'
+import { IconWithLoader } from './IconWithLoader'
 
 type Props = {
   children?: React.ReactNode
@@ -45,7 +42,6 @@ export const NavItem = ({ children, navItemId }: Props): React.JSX.Element => {
     return navItemFromTopNavLevel
   })
 
-  const icon = navItem?.icon
   const name = navItem?.name
   const link = navItem?.link ?? ''
   const isFunc = Boolean(navItem?.func)
@@ -54,7 +50,6 @@ export const NavItem = ({ children, navItemId }: Props): React.JSX.Element => {
   const isError = navItem?.isError
   const disabled = Boolean(navItem?.disabled)
   const isActive = Boolean(navItem?.isActive)
-  const tooltipText = navItem?.tooltip
 
   const fixedLink = `${location.pathname}/${link}`
     .replace('.', '')
@@ -87,26 +82,8 @@ export const NavItem = ({ children, navItemId }: Props): React.JSX.Element => {
         css={{
           position: 'relative',
         }}
-        // onMouseEnter={() => {
-        //   console.log({ link, to, pathname: location.pathname })
-        // }}
       >
-        {icon && isLoading && <SpinnerIcon />}
-        {icon && isSuccess && <SuccessIcon />}
-        {icon && isError && <ErrorIcon />}
-        {icon && !isLoading && !isSuccess && !isError && (
-          <Icon
-            icon={icon}
-            disabled={disabled}
-            tooltipText={tooltipText}
-          />
-        )}
-        {!icon && (
-          <Icon
-            icon={name?.[0]}
-            disabled={disabled}
-          />
-        )}
+        <IconWithLoader navItem={navItem} />
         <NavName name={name} />
         <ArrowForNestedMenu navItem={navItem} />
         {children}
