@@ -22,7 +22,9 @@ export const CloseMenuItem = (): React.JSX.Element => {
         dispatch(navSlice.actions.closeMenu())
       }}
       onMouseEnter={(): void => {
-        dispatch(navSlice.actions.setMenuItemHoverIndex(1))
+        dispatch(
+          navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 1 }),
+        )
       }}
       isHovered={isHovered}
     >

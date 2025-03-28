@@ -16,17 +16,17 @@ import { TextInMenu } from './TextInMenu'
 
 type Props = {
   menuItem: MenuItemType
-  hoveredMenuItemIndex: number
+  menuItemHoverIndex: number
 }
 
 export const MenuItem = ({
   menuItem,
-  hoveredMenuItemIndex,
+  menuItemHoverIndex,
 }: Props): React.JSX.Element => {
   const location = useLocation()
 
   const isHovered = useSelector(
-    (state) => state.nav.menuItemHoverIndex === hoveredMenuItemIndex,
+    (state) => state.nav.menuItemHoverIndex === menuItemHoverIndex,
   )
 
   const isNextMenuAvailable = Boolean(menuItem.menuItems)
@@ -77,7 +77,11 @@ export const MenuItem = ({
         clickOnMenuItem(e, menuId, disabled)
       }}
       onMouseEnter={(): void => {
-        dispatch(navSlice.actions.setMenuItemHoverIndex(hoveredMenuItemIndex))
+        dispatch(
+          navSlice.actions.setMenuItemHoverIndex({
+            menuItemHoverIndex,
+          }),
+        )
       }}
     >
       {isIcon && isLoading && <SpinnerIcon />}

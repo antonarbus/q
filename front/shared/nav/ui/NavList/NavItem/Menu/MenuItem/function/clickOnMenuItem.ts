@@ -3,17 +3,22 @@ import type { MouseEvent } from 'react'
 import { navSlice } from '../../../../../../navSlice'
 import { getMenuItemByIdsChain } from '../../functions/getMenuItemByIdsChain'
 import { navigateInMenu } from '../../functions/useMenuAnimation'
+import type { NavItemId } from '@shared/consts/navItemId'
 
 export const clickOnMenuItem = (
   e: MouseEvent,
-  menuId: string,
+  navItemId: NavItemId,
   disabled: boolean,
 ): void => {
-  const chainToClickedItem = [...getState().nav.idsToCurrentMenuItems, menuId]
+  const chainToClickedItem = [
+    ...getState().nav.idsToCurrentMenuItems,
+    navItemId,
+  ]
+
   const nextMenu = getMenuItemByIdsChain(chainToClickedItem)
   const isNestedMenuAvailable = Boolean(nextMenu.length)
   const menuItems = getMenuItemByIdsChain(getState().nav.idsToCurrentMenuItems)
-  const menuItem = menuItems.find((item) => item.id === menuId)
+  const menuItem = menuItems.find((item) => item.id === navItemId)
   const link = menuItem?.link
   const func = menuItem?.func
 
@@ -46,6 +51,6 @@ export const clickOnMenuItem = (
   }
 
   if (isNestedMenuAvailable) {
-    void navigateInMenu.down(menuId)
+    void navigateInMenu.down({ navItemId })
   }
 }

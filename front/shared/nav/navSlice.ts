@@ -3,12 +3,13 @@ import { setMenuItemPropValue } from './setMenuItemPropValue'
 import type { MenuItemType, NavItemId } from './type'
 import { getMenuItemPropValue } from './getMenuItemPropValue'
 import { navStructure as navStructureOriginal } from '@widgets/nav/navStructure'
+import { navItemId as navItemIdKey } from '@shared/consts/navItemId'
 
 const initialState = {
   navStructure: [] as MenuItemType[],
   burger: { isOpen: false },
-  idsToCurrentMenuItems: ['top'],
-  idsToNextMenuItems: ['top'],
+  idsToCurrentMenuItems: [navItemIdKey.top] as NavItemId[],
+  idsToNextMenuItems: [navItemIdKey.top] as NavItemId[],
   navItemRightPos: 0,
   menuItemHoverIndex: 0,
 }
@@ -32,37 +33,53 @@ export const navSlice = createSlice({
     toggleBurger: (state) => {
       state.burger.isOpen = !state.burger.isOpen
     },
-    setNavItemRightPos: (state, action: PayloadAction<number>) => {
-      const rightPos = action.payload
-      state.navItemRightPos = rightPos
+    setNavItemRightPos: (
+      state,
+      action: PayloadAction<{ navItemRightPos: number }>,
+    ) => {
+      const { navItemRightPos } = action.payload
+      state.navItemRightPos = navItemRightPos
     },
-    openMenuWithId: (state, action: PayloadAction<string>) => {
-      state.idsToCurrentMenuItems = ['top', action.payload]
-      state.idsToNextMenuItems = ['top', action.payload]
+    openMenuWithId: (
+      state,
+      action: PayloadAction<{ navItemId: NavItemId }>,
+    ) => {
+      const { navItemId } = action.payload
+      state.idsToCurrentMenuItems = [navItemIdKey.top, navItemId]
+      state.idsToNextMenuItems = [navItemIdKey.top, navItemId]
     },
     closeMenu: (state) => {
-      state.idsToNextMenuItems = ['top']
-      state.idsToCurrentMenuItems = ['top']
+      state.idsToNextMenuItems = [navItemIdKey.top]
+      state.idsToCurrentMenuItems = [navItemIdKey.top]
       state.burger.isOpen = false
       state.menuItemHoverIndex = 0
     },
-    goDownInCurrentMenu: (state, action: PayloadAction<string>) => {
-      state.idsToCurrentMenuItems = [
-        ...state.idsToCurrentMenuItems,
-        action.payload,
-      ]
+    goDownInCurrentMenu: (
+      state,
+      action: PayloadAction<{ navItemId: NavItemId }>,
+    ) => {
+      const { navItemId } = action.payload
+      state.idsToCurrentMenuItems = [...state.idsToCurrentMenuItems, navItemId]
     },
     goUpInCurrentMenu: (state) => {
       state.idsToCurrentMenuItems = state.idsToCurrentMenuItems.slice(0, -1)
     },
-    goDownInNextMenu: (state, action: PayloadAction<string>) => {
-      state.idsToNextMenuItems = [...state.idsToNextMenuItems, action.payload]
+    goDownInNextMenu: (
+      state,
+      action: PayloadAction<{ navItemId: NavItemId }>,
+    ) => {
+      const { navItemId } = action.payload
+      state.idsToNextMenuItems = [...state.idsToNextMenuItems, navItemId]
     },
     goUpInNextMenu: (state) => {
       state.idsToNextMenuItems = state.idsToNextMenuItems.slice(0, -1)
     },
-    setMenuItemHoverIndex: (state, action: PayloadAction<number>) => {
-      state.menuItemHoverIndex = action.payload
+    setMenuItemHoverIndex: (
+      state,
+      action: PayloadAction<{ menuItemHoverIndex: number }>,
+    ) => {
+      const { menuItemHoverIndex } = action.payload
+      state.menuItemHoverIndex = menuItemHoverIndex
     },
     startLoadingIcon: (
       state,

@@ -21,7 +21,9 @@ export const BackMenuItem = (): React.JSX.Element => {
         void navigateInMenu.up()
       }}
       onMouseEnter={(): void => {
-        dispatch(navSlice.actions.setMenuItemHoverIndex(1))
+        dispatch(
+          navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 1 }),
+        )
       }}
       isHovered={isHovered}
     >
