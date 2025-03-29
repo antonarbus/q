@@ -19,7 +19,7 @@ import { DropHereText } from './DropHereText'
 
 export const Froala = (props: FroalaProps): React.JSX.Element => {
   const dropFilesTextRef = useRef<React.ComponentRef<'div'> | null>(null)
-  const froalaElementRef = useRef<HTMLDivElement>(null)
+  const froalaElementRef = useRef<React.ComponentRef<'div'> | null>(null)
   const { blockIndex } = useBlock()
   const { froalaHeightRef } = useFixedHeightForAnimation({ froalaElementRef })
 
