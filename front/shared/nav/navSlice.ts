@@ -4,12 +4,14 @@ import type { NavItem, NavItemId } from './type'
 import { getMenuItemPropValue } from './getMenuItemPropValue'
 import { navStructure as navStructureOriginal } from '@widgets/nav/navStructure'
 import { navItemId as navItemIdKey } from '@shared/consts/navItemId'
+import { getNavItem } from './ui/NavList/NavItem/Menu/functions/getNavItem'
 
 const initialState = {
   navStructure: [] as NavItem[],
   burger: { isOpen: false },
   idsToCurrentMenuItems: [navItemIdKey.top] as NavItemId[],
-  idsToNextMenuItems: [navItemIdKey.top] as NavItemId[],
+  currentMenuNavItemId: null as NavItemId | null,
+  nextMenuNavItemId: null as NavItemId | null,
   navItemRightPos: 0,
   menuItemHoverIndex: 0,
 }
@@ -46,13 +48,15 @@ export const navSlice = createSlice({
     ) => {
       const { navItemId } = action.payload
       state.idsToCurrentMenuItems = [navItemIdKey.top, navItemId]
-      state.idsToNextMenuItems = [navItemIdKey.top, navItemId]
+      state.currentMenuNavItemId = navItemId
+      state.nextMenuNavItemId = navItemId
     },
     closeMenu: (state) => {
-      state.idsToNextMenuItems = [navItemIdKey.top]
       state.idsToCurrentMenuItems = [navItemIdKey.top]
       state.burger.isOpen = false
       state.menuItemHoverIndex = 0
+      state.currentMenuNavItemId = null
+      state.nextMenuNavItemId = null
     },
     goDownInCurrentMenu: (
       state,
@@ -60,19 +64,43 @@ export const navSlice = createSlice({
     ) => {
       const { navItemId } = action.payload
       state.idsToCurrentMenuItems = [...state.idsToCurrentMenuItems, navItemId]
+      state.currentMenuNavItemId = navItemId
     },
     goUpInCurrentMenu: (state) => {
       state.idsToCurrentMenuItems = state.idsToCurrentMenuItems.slice(0, -1)
+      const currentMenuNavItemId = state.currentMenuNavItemId
+
+      if (currentMenuNavItemId) {
+        const { parentNavItem } = getNavItem({
+          navItemId: currentMenuNavItemId,
+          navState: state,
+        })
+
+        if (parentNavItem) {
+          state.currentMenuNavItemId = parentNavItem.id
+        }
+      }
     },
     goDownInNextMenu: (
       state,
       action: PayloadAction<{ navItemId: NavItemId }>,
     ) => {
       const { navItemId } = action.payload
-      state.idsToNextMenuItems = [...state.idsToNextMenuItems, navItemId]
+      state.nextMenuNavItemId = navItemId
     },
     goUpInNextMenu: (state) => {
-      state.idsToNextMenuItems = state.idsToNextMenuItems.slice(0, -1)
+      const nextMenuNavItemId = state.nextMenuNavItemId
+
+      if (nextMenuNavItemId) {
+        const { parentNavItem } = getNavItem({
+          navItemId: nextMenuNavItemId,
+          navState: state,
+        })
+
+        if (parentNavItem) {
+          state.nextMenuNavItemId = parentNavItem.id
+        }
+      }
     },
     setMenuItemHoverIndex: (
       state,

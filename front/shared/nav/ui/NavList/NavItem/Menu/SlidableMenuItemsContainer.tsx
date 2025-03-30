@@ -1,35 +1,40 @@
-import { useSelector } from '@shared/lib/redux'
-import { selectMenuItemByIdsChainSelector } from './functions/selectMenuItemByIdsChainSelector'
 import { MenuItem } from './MenuItem'
 import type { NavItemId } from '@shared/consts/navItemId'
+import { getNavItem } from './functions/getNavItem'
 
 type Props = {
   reference: React.RefObject<React.ComponentRef<'div'> | null>
-  idsToMenu: NavItemId[]
   className: string
+  menuNavItemId: NavItemId | null
 }
 
 export const SlidableMenuItemsContainer = ({
   reference,
-  idsToMenu,
   className,
-}: Props): React.JSX.Element => {
-  const menuItems = useSelector(selectMenuItemByIdsChainSelector(idsToMenu))
+  menuNavItemId,
+}: Props): React.ReactNode => {
+  if (!menuNavItemId) {
+    return null
+  }
+
+  const { navItem } = getNavItem({ navItemId: menuNavItemId })
+
+  const menuItemsNotHidden = navItem?.navItems
+    ?.filter((menuItem) => !menuItem.isHidden)
+    .map((menuItem, index) => (
+      <MenuItem
+        menuItem={menuItem}
+        key={menuItem.id}
+        menuItemHoverIndex={index + 2}
+      />
+    ))
 
   return (
     <div
       ref={reference}
       className={className}
     >
-      {menuItems
-        .filter((menuItem) => !menuItem.isHidden)
-        .map((menuItem, index) => (
-          <MenuItem
-            menuItem={menuItem}
-            key={menuItem.id}
-            menuItemHoverIndex={index + 2}
-          />
-        ))}
+      {menuItemsNotHidden}
     </div>
   )
 }

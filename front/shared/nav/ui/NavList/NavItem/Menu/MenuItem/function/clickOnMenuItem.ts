@@ -10,15 +10,17 @@ export const clickOnMenuItem = (
   navItemId: NavItemId,
   disabled: boolean,
 ): void => {
-  const nextMenu = getNavItem({ navItemId })?.navItems ?? []
+  const { navItem } = getNavItem({ navItemId })
 
-  const isNestedMenuAvailable = Boolean(nextMenu.length)
+  const nextMenuItems = navItem?.navItems ?? []
 
-  const menuItems =
-    getNavItem({
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      navItemId: getState().nav.idsToCurrentMenuItems.at(-1)!,
-    })?.navItems ?? []
+  const isNestedMenuAvailable = Boolean(nextMenuItems.length)
+
+  const { navItem: currentMenuNavItem } = getNavItem({
+    navItemId: getState().nav.currentMenuNavItemId,
+  })
+
+  const menuItems = currentMenuNavItem?.navItems ?? []
 
   const menuItem = menuItems.find((item) => item.id === navItemId)
   const link = menuItem?.link

@@ -1,35 +1,47 @@
 import type { NavItemId } from '@shared/consts/navItemId'
-import { getState } from '@shared/lib/redux'
+import { type RootState, getState } from '@shared/lib/redux'
 import type { NavItem } from '@shared/nav/type'
 
 type Props = {
-  navItemId: NavItemId
+  navItemId: NavItemId | null
+  navState?: RootState['nav']
 }
 
-export const getNavItem = (props: Props): NavItem | null => {
-  const navLevel = getState().nav.navStructure
+type Res = {
+  navItem: NavItem | null
+  parentNavItem: NavItem | null
+}
 
-  const recursivelySearchForNavItemByNavItemId = (
-    navItems: NavItem[],
-  ): NavItem | null => {
-    for (const navItem of navItems) {
-      if (navItem.id === props.navItemId) {
-        return navItem
+export const getNavItem = (props: Props): Res => {
+  const recursivelySearchForNavItemByNavItemId = (navItem: NavItem): Res => {
+    for (const item of navItem.navItems ?? []) {
+      if (item.id === props.navItemId) {
+        return { navItem: item, parentNavItem: navItem }
       }
 
-      if (navItem.navItems !== undefined) {
-        const found = recursivelySearchForNavItemByNavItemId(navItem.navItems)
+      if (item.navItems !== undefined) {
+        const found = recursivelySearchForNavItemByNavItemId(item)
 
-        if (found) {
-          return found
+        if (found.navItem !== null) {
+          return {
+            navItem: found.navItem,
+            parentNavItem: item,
+          }
         }
       }
     }
 
-    return null
+    return { navItem: null, parentNavItem: null }
   }
 
-  const navItem = recursivelySearchForNavItemByNavItemId(navLevel)
+  const navLevel =
+    props.navState?.navStructure.at(0) ?? getState().nav.navStructure.at(0)
 
-  return navItem
+  if (!navLevel) {
+    return { navItem: null, parentNavItem: null }
+  }
+
+  const data = recursivelySearchForNavItemByNavItemId(navLevel)
+
+  return data
 }

@@ -9,16 +9,18 @@ export const useKeysForMenuNavigation = (): void => {
   const navigate = useNavigate()
 
   const navKeyboardHandler = (e: KeyboardEvent): void => {
-    const currentMenuItems =
-      getNavItem({
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        navItemId: getState().nav.idsToCurrentMenuItems.at(-1)!,
-      })?.navItems ?? []
+    const currentMenuNavItemId = getState().nav.currentMenuNavItemId
+
+    const { navItem: currentNavItem } = getNavItem({
+      navItemId: currentMenuNavItemId,
+    })
+
+    const currentMenuItems = currentNavItem?.navItems ?? []
 
     const menuItemsQty = currentMenuItems.length + 1
     const menuItemHoverIndex = getState().nav.menuItemHoverIndex
 
-    const isNestedMenu = getState().nav.idsToNextMenuItems.length > 2
+    const isNestedMenu = getState().nav.idsToCurrentMenuItems.length > 2
 
     if (e.key === 'ArrowDown') {
       e.preventDefault()
@@ -99,11 +101,13 @@ export const useKeysForMenuNavigation = (): void => {
         return
       }
 
-      const nextMenu =
-        getNavItem({
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          navItemId: getState().nav.idsToNextMenuItems.at(-1)!,
-        })?.navItems ?? []
+      const nextMenuNavItemId = getState().nav.nextMenuNavItemId
+
+      const { navItem: nextNavItem } = getNavItem({
+        navItemId: nextMenuNavItemId,
+      })
+
+      const nextMenu = nextNavItem?.navItems ?? []
 
       const navItemId = nextMenu[menuItemHoverIndex - 2]?.id
 
@@ -111,7 +115,7 @@ export const useKeysForMenuNavigation = (): void => {
         return
       }
 
-      const menuItem = getNavItem({ navItemId })
+      const { navItem: menuItem } = getNavItem({ navItemId })
 
       const link = menuItem?.link
 

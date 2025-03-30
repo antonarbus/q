@@ -10,6 +10,7 @@ import { SlidableMenuItemsContainer } from './SlidableMenuItemsContainer'
 import { TopMenuItemsContainer } from './TopMenuItemsContainer'
 import { EmailAtBottomOfMenu } from './EmailAtBottomOfMenu'
 import { css } from '@emotion/react'
+import { navItemId } from '@shared/consts/navItemId'
 
 export const Menu = (): React.JSX.Element => {
   const menuContainerRef = useRef<React.ComponentRef<'div'> | null>(null)
@@ -17,9 +18,11 @@ export const Menu = (): React.JSX.Element => {
   const nextMenuRef = useRef<React.ComponentRef<'div'> | null>(null)
   const fakeMenuRef = useRef<React.ComponentRef<'div'> | null>(null)
 
-  const idsToNextMenuItems = useSelector(
-    (state) => state.nav.idsToNextMenuItems,
+  const currentMenuNavItemId = useSelector(
+    (state) => state.nav.currentMenuNavItemId,
   )
+
+  const nextMenuNavItemId = useSelector((state) => state.nav.nextMenuNavItemId)
 
   const idsToCurrentMenuItems = useSelector(
     (state) => state.nav.idsToCurrentMenuItems,
@@ -30,14 +33,14 @@ export const Menu = (): React.JSX.Element => {
     nextMenuRef,
     menuContainerRef,
     fakeMenuRef,
-    idsToNextMenuItems,
   })
 
   useKeysForMenuNavigation()
   useCloseMenuOnClickOutside({ menuContainerRef })
 
   const isMenuOutsideWindow = useIsMenuOutsideWindow()
-  const isProfileMenu = idsToCurrentMenuItems.includes('profile')
+
+  const isProfileMenu = idsToCurrentMenuItems.includes(navItemId.profile)
 
   return (
     <div
@@ -88,17 +91,17 @@ export const Menu = (): React.JSX.Element => {
       <TopMenuItemsContainer />
       <SlidableMenuItemsContainer
         reference={currentMenuRef}
-        idsToMenu={idsToCurrentMenuItems}
+        menuNavItemId={currentMenuNavItemId}
         className='slidable current'
       />
       <SlidableMenuItemsContainer
         reference={nextMenuRef}
-        idsToMenu={idsToNextMenuItems}
+        menuNavItemId={nextMenuNavItemId}
         className='slidable next'
       />
       <SlidableMenuItemsContainer
         reference={fakeMenuRef}
-        idsToMenu={idsToNextMenuItems}
+        menuNavItemId={nextMenuNavItemId}
         className='measurable-div'
       />
       {isProfileMenu && <EmailAtBottomOfMenu />}

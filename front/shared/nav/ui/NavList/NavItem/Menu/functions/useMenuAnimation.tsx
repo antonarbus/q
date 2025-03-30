@@ -31,7 +31,6 @@ type Props = {
   nextMenuRef: React.RefObject<React.ComponentRef<'div'> | null>
   menuContainerRef: React.RefObject<React.ComponentRef<'div'> | null>
   fakeMenuRef: React.RefObject<React.ComponentRef<'div'> | null>
-  idsToNextMenuItems: NavItemId[]
 }
 
 export const useMenuAnimation = ({
