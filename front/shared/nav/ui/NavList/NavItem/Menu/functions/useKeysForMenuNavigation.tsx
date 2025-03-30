@@ -83,8 +83,6 @@ export const useKeysForMenuNavigation = (): void => {
     }
 
     if (e.key === 'Enter') {
-      console.log('🚀 ~ menuItemHoverIndex:', menuItemHoverIndex)
-
       const isBackMenuItem = menuItemHoverIndex === 1 && isNestedMenu
 
       if (isBackMenuItem) {
