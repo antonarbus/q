@@ -1,23 +1,25 @@
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
 import { navSlice } from '../../../../../../navSlice'
-import { getMenuItemByIdsChain } from '../../functions/getMenuItemByIdsChain'
 import { navigateInMenu } from '../../functions/useMenuAnimation'
 import type { NavItemId } from '@shared/consts/navItemId'
+import { getNavItem } from '../../functions/getNavItem'
 
 export const clickOnMenuItem = (
   e: MouseEvent,
   navItemId: NavItemId,
   disabled: boolean,
 ): void => {
-  const chainToClickedItem = [
-    ...getState().nav.idsToCurrentMenuItems,
-    navItemId,
-  ]
+  const nextMenu = getNavItem({ navItemId })?.navItems ?? []
 
-  const nextMenu = getMenuItemByIdsChain(chainToClickedItem)
   const isNestedMenuAvailable = Boolean(nextMenu.length)
-  const menuItems = getMenuItemByIdsChain(getState().nav.idsToCurrentMenuItems)
+
+  const menuItems =
+    getNavItem({
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      navItemId: getState().nav.idsToCurrentMenuItems.at(-1)!,
+    })?.navItems ?? []
+
   const menuItem = menuItems.find((item) => item.id === navItemId)
   const link = menuItem?.link
   const func = menuItem?.func

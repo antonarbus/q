@@ -2,16 +2,18 @@ import { dispatch, getState } from '@shared/lib/redux'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { navSlice } from '../../../../../navSlice'
-import { getMenuItemByIdsChain } from './getMenuItemByIdsChain'
 import { navigateInMenu } from './useMenuAnimation'
+import { getNavItem } from './getNavItem'
 
 export const useKeysForMenuNavigation = (): void => {
   const navigate = useNavigate()
 
   const navKeyboardHandler = (e: KeyboardEvent): void => {
-    const currentMenuItems = getMenuItemByIdsChain(
-      getState().nav.idsToCurrentMenuItems,
-    )
+    const currentMenuItems =
+      getNavItem({
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        navItemId: getState().nav.idsToCurrentMenuItems.at(-2)!, // -2 to be -1 when burger will be  on top
+      })?.navItems ?? []
 
     const currentMenuItemsNotHidden = currentMenuItems.filter(
       (menuItem) => !menuItem.isHidden,
@@ -84,8 +86,19 @@ export const useKeysForMenuNavigation = (): void => {
     }
 
     if (e.key === 'Enter') {
-      const nextMenu = getMenuItemByIdsChain(getState().nav.idsToNextMenuItems)
-      const navItemId = nextMenu[menuItemHoverIndex - 2]?.id ?? 'top'
+      // const nextMenu = getMenuItemByIdsChain(getState().nav.idsToNextMenuItems)
+
+      const nextMenu =
+        getNavItem({
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          navItemId: getState().nav.idsToNextMenuItems.at(-2)!, // -2 to be -1 when burger will be  on top
+        })?.navItems ?? []
+
+      const nextMenuNotHidden = nextMenu.filter(
+        (menuItem) => !menuItem.isHidden,
+      )
+
+      const navItemId = nextMenuNotHidden[menuItemHoverIndex - 2]?.id ?? 'top'
 
       const menuItem = currentMenuItemsNotHidden.find(
         (item) => item.id === navItemId,
