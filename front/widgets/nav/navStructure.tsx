@@ -44,8 +44,8 @@ import { saveExistingQuotation } from '@features/quotation/save_quotation'
 
 export const navStructure: NavItem[] = [
   {
-    id: navItemId.top,
-    name: 'top',
+    id: navItemId.burger,
+    name: 'burger',
     isHidden: false,
     navItems: [
       {

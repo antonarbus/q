@@ -43,9 +43,7 @@ export const clickOnNavItem = ({
   e.preventDefault()
 
   // handle burger close separately
-  const isBurger = getState().nav.idsToCurrentMenuItems.includes(
-    navItemId.burger,
-  )
+  const isBurger = getState().nav.currentMenuNavItemId === navItemId.burger
 
   if (isBurger) {
     dispatch(navSlice.actions.closeMenu())
@@ -58,7 +56,7 @@ export const clickOnNavItem = ({
 
   const isMenuOpenedUnderThisNavItem =
     currentMenuNavItemId === navItem.id &&
-    currentMenuNavItemId !== navItemId.top
+    currentMenuNavItemId !== navItemId.burger
 
   if (isMenuOpenedUnderThisNavItem) {
     dispatch(navSlice.actions.closeMenu())

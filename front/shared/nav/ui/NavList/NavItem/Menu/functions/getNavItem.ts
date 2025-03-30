@@ -14,6 +14,10 @@ type Res = {
 
 export const getNavItem = (props: Props): Res => {
   const recursivelySearchForNavItemByNavItemId = (navItem: NavItem): Res => {
+    if (navItem.id === props.navItemId) {
+      return { navItem, parentNavItem: navItem }
+    }
+
     for (const item of navItem.navItems ?? []) {
       if (item.id === props.navItemId) {
         return { navItem: item, parentNavItem: navItem }

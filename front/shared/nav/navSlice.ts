@@ -9,7 +9,7 @@ import { getNavItem } from './ui/NavList/NavItem/Menu/functions/getNavItem'
 const initialState = {
   navStructure: [] as NavItem[],
   burger: { isOpen: false },
-  idsToCurrentMenuItems: [navItemIdKey.top] as NavItemId[],
+  idsToCurrentMenuItems: [navItemIdKey.burger] as NavItemId[],
   currentMenuNavItemId: null as NavItemId | null,
   nextMenuNavItemId: null as NavItemId | null,
   navItemRightPos: 0,
@@ -47,12 +47,12 @@ export const navSlice = createSlice({
       action: PayloadAction<{ navItemId: NavItemId }>,
     ) => {
       const { navItemId } = action.payload
-      state.idsToCurrentMenuItems = [navItemIdKey.top, navItemId]
+      state.idsToCurrentMenuItems = [navItemIdKey.burger, navItemId]
       state.currentMenuNavItemId = navItemId
       state.nextMenuNavItemId = navItemId
     },
     closeMenu: (state) => {
-      state.idsToCurrentMenuItems = [navItemIdKey.top]
+      state.idsToCurrentMenuItems = [navItemIdKey.burger]
       state.burger.isOpen = false
       state.menuItemHoverIndex = 0
       state.currentMenuNavItemId = null
