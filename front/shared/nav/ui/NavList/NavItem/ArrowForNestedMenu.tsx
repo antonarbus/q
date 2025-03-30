@@ -1,13 +1,13 @@
 import { TiArrowSortedDown } from 'react-icons/ti'
 import { css } from '@emotion/react'
-import type { MenuItemType } from '@shared/nav/type'
+import type { NavItem } from '@shared/nav/type'
 
 type Props = {
-  navItem: MenuItemType | undefined
+  navItem: NavItem | undefined
 }
 
 export const ArrowForNestedMenu = (props: Props): React.ReactNode => {
-  const isNestedMenu = Boolean(props.navItem?.menuItems)
+  const isNestedMenu = Boolean(props.navItem?.navItems)
   const disabled = Boolean(props.navItem?.disabled)
 
   if (!isNestedMenu) {

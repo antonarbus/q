@@ -7,11 +7,11 @@ import { NavName } from './NavName'
 import { NavItemLayout } from './NavItemLayout'
 import { ArrowForNestedMenu } from './ArrowForNestedMenu'
 import { IconWithLoader } from './IconWithLoader'
-import type { MenuItemType } from '@shared/nav/type'
+import type { NavItem as NavItemType } from '@shared/nav/type'
 
 type Props = {
   children?: React.ReactNode
-  navItem: MenuItemType
+  navItem: NavItemType
 }
 
 export const NavItem = ({ children, navItem }: Props): React.JSX.Element => {

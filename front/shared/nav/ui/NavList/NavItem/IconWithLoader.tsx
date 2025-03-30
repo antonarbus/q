@@ -1,11 +1,11 @@
-import type { MenuItemType } from '@shared/nav/type'
+import type { NavItem } from '@shared/nav/type'
 import { SpinnerIcon } from './SpinnerIcon'
 import { SuccessIcon } from './SuccessIcon'
 import { ErrorIcon } from './ErrorIcon'
 import { Icon } from './Icon'
 
 type Props = {
-  navItem?: MenuItemType
+  navItem?: NavItem
 }
 
 export const IconWithLoader = (props: Props): React.ReactNode => {

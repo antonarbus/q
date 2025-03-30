@@ -1,5 +1,5 @@
 import { getState } from '@shared/lib/redux'
-import type { MenuItemType } from '../../../../../type'
+import type { NavItem } from '../../../../../type'
 
 /**
  * returns clicked menu object from navStructure
@@ -13,10 +13,10 @@ import type { MenuItemType } from '../../../../../type'
 
 export const getMenuItemByIdsChain = (
   idsToCurrentMenuItems: string[],
-): MenuItemType[] => {
+): NavItem[] => {
   const navStructure = getState().nav.navStructure
-  let clicked: MenuItemType[] = navStructure
-  let tempMenu: MenuItemType[] = navStructure
+  let clicked: NavItem[] = navStructure
+  let tempMenu: NavItem[] = navStructure
 
   idsToCurrentMenuItems.forEach((id: string) => {
     if (id === 'burger') {
@@ -24,17 +24,17 @@ export const getMenuItemByIdsChain = (
         return clicked
       }
 
-      if (!navStructure[0].menuItems) {
+      if (!navStructure[0].navItems) {
         return clicked
       }
 
-      clicked = navStructure[0].menuItems
+      clicked = navStructure[0].navItems
 
       return clicked
     }
 
     if (id !== 'burger') {
-      clicked = tempMenu.find((menuItem) => menuItem.id === id)?.menuItems ?? []
+      clicked = tempMenu.find((menuItem) => menuItem.id === id)?.navItems ?? []
     }
 
     tempMenu = clicked

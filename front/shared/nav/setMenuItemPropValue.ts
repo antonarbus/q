@@ -1,18 +1,18 @@
-import type { MenuItemType, NavItemId } from './type'
+import type { NavItem, NavItemId } from './type'
 
 // https://www.typescriptlang.org/docs/handbook/2/generics.html
 // https://stackoverflow.com/a/49286056/7239778
 
-export const setMenuItemPropValue = <K extends keyof MenuItemType>({
+export const setMenuItemPropValue = <K extends keyof NavItem>({
   menu,
   navItemId,
   prop,
   value,
 }: {
-  menu: MenuItemType[]
+  menu: NavItem[]
   navItemId: NavItemId
   prop: K
-  value: MenuItemType[K]
+  value: NavItem[K]
 }): void => {
   menu.forEach((el) => {
     if (el.id === navItemId) {
@@ -21,9 +21,9 @@ export const setMenuItemPropValue = <K extends keyof MenuItemType>({
       return
     }
 
-    if (el.menuItems) {
+    if (el.navItems) {
       setMenuItemPropValue({
-        menu: el.menuItems,
+        menu: el.navItems,
         navItemId,
         prop,
         value,

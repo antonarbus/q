@@ -34,7 +34,7 @@ import { openSaveQuotationModal } from '@features/open_close/open_save_quotation
 import { openSettingsModal } from '@features/open_close/open_settings_modal'
 import { navItemId } from '@shared/consts/navItemId'
 import { route } from '@shared/consts/route'
-import type { MenuItemType } from '@shared/nav'
+import type { NavItem } from '@shared/nav'
 import { downloadPdf } from '@features/quotation/download_quotation_as_pdf'
 import { downloadExcel } from '@features/quotation/download_quotation_as_excel'
 import { FaRegFilePdf } from 'react-icons/fa'
@@ -42,12 +42,12 @@ import { openShareQuotationModal } from '@features/open_close/open_share_quotati
 import { getState } from '@shared/lib/redux'
 import { saveExistingQuotation } from '@features/quotation/save_quotation'
 
-export const navStructure: MenuItemType[] = [
+export const navStructure: NavItem[] = [
   {
     id: navItemId.top,
     name: 'top',
     isHidden: false,
-    menuItems: [
+    navItems: [
       {
         id: navItemId.back,
         icon: (
@@ -95,7 +95,7 @@ export const navStructure: MenuItemType[] = [
         name: 'Share',
         disabled: false,
         tooltip: 'Share quotation',
-        menuItems: [
+        navItems: [
           {
             id: navItemId.link,
             icon: <ImLink data-testid='link icon' />,
@@ -125,20 +125,19 @@ export const navStructure: MenuItemType[] = [
           },
         ],
       },
-
       {
         id: navItemId.insert,
         icon: <RiMenuAddFill data-testid='insert icon' />,
         isHidden: false,
         name: 'Insert',
         disabled: true,
-        menuItems: [
+        navItems: [
           {
             id: navItemId.block,
             name: 'Block',
             icon: <TbRectangleVertical />,
             isHidden: false,
-            menuItems: [
+            navItems: [
               {
                 id: navItemId.textItem,
                 name: 'Text',
@@ -208,7 +207,7 @@ export const navStructure: MenuItemType[] = [
         icon: <Person data-testid='profile icon' />,
         name: 'Profile',
         isHidden: true,
-        menuItems: [
+        navItems: [
           {
             id: navItemId.settings,
             icon: <Settings />,
@@ -223,7 +222,7 @@ export const navStructure: MenuItemType[] = [
             isHidden: false,
             name: 'Admin',
             tooltip: 'Admin links',
-            menuItems: [
+            navItems: [
               {
                 id: navItemId.users,
                 icon: <FaUsersGear />,

@@ -125,7 +125,7 @@ export const useKeysForMenuNavigation = (): void => {
         return
       }
 
-      const isNestedMenuAvailable = Boolean(menuItem?.menuItems)
+      const isNestedMenuAvailable = Boolean(menuItem?.navItems)
 
       if (isNestedMenuAvailable) {
         void navigateInMenu.down({ navItemId })

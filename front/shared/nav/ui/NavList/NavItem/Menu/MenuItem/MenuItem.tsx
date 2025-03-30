@@ -3,7 +3,7 @@ import type { MouseEvent } from 'react'
 import { FaChevronRight } from 'react-icons/fa'
 import { useLocation } from 'react-router-dom'
 import { navSlice } from '../../../../../navSlice'
-import type { MenuItemType } from '../../../../../type'
+import type { NavItem } from '../../../../../type'
 import { ErrorIcon } from '../../ErrorIcon'
 import { Icon } from '../../Icon'
 import { RoundSpanForIcon } from '../../RoundSpanForIcon'
@@ -15,7 +15,7 @@ import { Shortcut } from './Shortcut'
 import { TextInMenu } from './TextInMenu'
 
 type Props = {
-  menuItem: MenuItemType
+  menuItem: NavItem
   menuItemHoverIndex: number
 }
 
@@ -29,7 +29,7 @@ export const MenuItem = ({
     (state) => state.nav.menuItemHoverIndex === menuItemHoverIndex,
   )
 
-  const isNextMenuAvailable = Boolean(menuItem.menuItems)
+  const isNextMenuAvailable = Boolean(menuItem.navItems)
   const isIcon = Boolean(menuItem.icon)
   const menuId = menuItem.id
   const link = menuItem.link ?? ''

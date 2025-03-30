@@ -1,12 +1,12 @@
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
 import { navSlice } from '../../../navSlice'
-import type { MenuItemType } from '../../../type'
+import type { NavItem } from '../../../type'
 import { navItemId } from '@shared/consts/navItemId'
 
 type Props = {
   e: MouseEvent
-  navItem: MenuItemType
+  navItem: NavItem
   navItemRef: React.RefObject<React.ComponentRef<'li'> | null>
   disabled: boolean
 }

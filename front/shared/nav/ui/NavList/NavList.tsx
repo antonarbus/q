@@ -5,7 +5,7 @@ import { Burger } from './NavItem/Burger'
 export const NavList = (): React.JSX.Element => {
   const navStructure = useSelector((state) => state.nav.navStructure)
 
-  const navItems = navStructure[0]?.menuItems
+  const navItems = navStructure[0]?.navItems
     ?.filter((navItem) => !navItem.isHidden)
     .map((navItem) => (
       <NavItem
@@ -16,12 +16,12 @@ export const NavList = (): React.JSX.Element => {
 
   const burger = (
     <NavItem
+      key={'burger'}
       navItem={{
         id: 'burger',
         name: 'burger',
         isHidden: false,
       }}
-      key={'burger'}
     >
       <Burger />
     </NavItem>

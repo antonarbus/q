@@ -1,28 +1,28 @@
 import type { RootState } from '@shared/lib/redux'
-import type { MenuItemType } from '../../../../../type'
+import type { NavItem } from '../../../../../type'
 
 export const selectMenuItemByIdsChainSelector =
   (idsToCurrentMenuItems: string[]) =>
-  (state: RootState): MenuItemType[] => {
+  (state: RootState): NavItem[] => {
     const topLevelNavMenu = state.nav.navStructure[0]
 
     if (!topLevelNavMenu) {
       return state.nav.navStructure
     }
 
-    let clicked: MenuItemType[] = state.nav.navStructure
-    let tempMenu: MenuItemType[] = state.nav.navStructure
+    let clicked: NavItem[] = state.nav.navStructure
+    let tempMenu: NavItem[] = state.nav.navStructure
 
     idsToCurrentMenuItems.forEach((id: string) => {
       if (id === 'burger') {
-        clicked = topLevelNavMenu.menuItems ?? state.nav.navStructure
+        clicked = topLevelNavMenu.navItems ?? state.nav.navStructure
 
         return clicked
       }
 
       if (id !== 'burger') {
         clicked =
-          tempMenu.find((menuItem) => menuItem.id === id)?.menuItems ?? []
+          tempMenu.find((menuItem) => menuItem.id === id)?.navItems ?? []
       }
 
       tempMenu = clicked

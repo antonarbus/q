@@ -1,5 +1,5 @@
 // types
-export type { MenuItemType } from './type'
+export type { NavItem } from './type'
 
 // redux
 export { navSlice } from './navSlice'

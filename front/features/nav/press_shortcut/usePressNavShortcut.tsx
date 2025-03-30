@@ -1,4 +1,4 @@
-import type { MenuItemType } from '@shared/nav'
+import type { NavItem } from '@shared/nav'
 import { useNavigate } from 'react-router-dom'
 import { useEffectOnce } from 'react-use'
 
@@ -10,12 +10,12 @@ type Shortcuts = {
 }
 
 const shortcuts: Shortcuts[] = []
-let arrForNavStructureIteration: MenuItemType[] = []
+let arrForNavStructureIteration: NavItem[] = []
 
 const searchForShortcutsInNavStructure = ({
   navStructure,
 }: {
-  navStructure: MenuItemType[]
+  navStructure: NavItem[]
 }): void => {
   arrForNavStructureIteration = navStructure
 
@@ -31,8 +31,8 @@ const searchForShortcutsInNavStructure = ({
   })
 
   arrForNavStructureIteration.forEach((menuItem) => {
-    if (menuItem.menuItems) {
-      arrForNavStructureIteration = menuItem.menuItems
+    if (menuItem.navItems) {
+      arrForNavStructureIteration = menuItem.navItems
 
       searchForShortcutsInNavStructure({
         navStructure: arrForNavStructureIteration,
@@ -42,7 +42,7 @@ const searchForShortcutsInNavStructure = ({
 }
 
 type Props = {
-  navStructure: MenuItemType[]
+  navStructure: NavItem[]
 }
 
 export const usePressNavShortcut = ({ navStructure }: Props): void => {

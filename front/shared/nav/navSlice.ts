@@ -1,12 +1,12 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { setMenuItemPropValue } from './setMenuItemPropValue'
-import type { MenuItemType, NavItemId } from './type'
+import type { NavItem, NavItemId } from './type'
 import { getMenuItemPropValue } from './getMenuItemPropValue'
 import { navStructure as navStructureOriginal } from '@widgets/nav/navStructure'
 import { navItemId as navItemIdKey } from '@shared/consts/navItemId'
 
 const initialState = {
-  navStructure: [] as MenuItemType[],
+  navStructure: [] as NavItem[],
   burger: { isOpen: false },
   idsToCurrentMenuItems: [navItemIdKey.top] as NavItemId[],
   idsToNextMenuItems: [navItemIdKey.top] as NavItemId[],
@@ -21,7 +21,7 @@ export const navSlice = createSlice({
     addNavStructure: (
       state,
       action: PayloadAction<{
-        navStructure: MenuItemType[]
+        navStructure: NavItem[]
       }>,
     ) => {
       const { navStructure } = action.payload
@@ -214,7 +214,7 @@ export const navSlice = createSlice({
         return
       }
 
-      const topNavItemsIds = (topLevelNavMenu.menuItems ?? []).map(
+      const topNavItemsIds = (topLevelNavMenu.navItems ?? []).map(
         (menuItem) => menuItem.id,
       )
 
@@ -248,7 +248,7 @@ export const navSlice = createSlice({
         return
       }
 
-      const topNavItemsIds = (topLevelNavMenu.menuItems ?? []).map(
+      const topNavItemsIds = (topLevelNavMenu.navItems ?? []).map(
         (menuItem) => menuItem.id,
       )
 
@@ -340,7 +340,7 @@ export const navSlice = createSlice({
         return
       }
 
-      const topNavItemsIds = (topLevelNavMenu.menuItems ?? []).map(
+      const topNavItemsIds = (topLevelNavMenu.navItems ?? []).map(
         (menuItem) => menuItem.id,
       )
 
