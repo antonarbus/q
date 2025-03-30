@@ -12,15 +12,12 @@ export const useKeysForMenuNavigation = (): void => {
     const currentMenuItems =
       getNavItem({
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        navItemId: getState().nav.idsToCurrentMenuItems.at(-2)!, // -2 to be -1 when burger will be  on top
+        navItemId: getState().nav.idsToCurrentMenuItems.at(-1)!,
       })?.navItems ?? []
 
-    const currentMenuItemsNotHidden = currentMenuItems.filter(
-      (menuItem) => !menuItem.isHidden,
-    )
-
-    const menuItemsQty = currentMenuItemsNotHidden.length + 1
+    const menuItemsQty = currentMenuItems.length + 1
     const menuItemHoverIndex = getState().nav.menuItemHoverIndex
+
     const isNestedMenu = getState().nav.idsToNextMenuItems.length > 2
 
     if (e.key === 'ArrowDown') {
@@ -86,23 +83,7 @@ export const useKeysForMenuNavigation = (): void => {
     }
 
     if (e.key === 'Enter') {
-      // const nextMenu = getMenuItemByIdsChain(getState().nav.idsToNextMenuItems)
-
-      const nextMenu =
-        getNavItem({
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          navItemId: getState().nav.idsToNextMenuItems.at(-2)!, // -2 to be -1 when burger will be  on top
-        })?.navItems ?? []
-
-      const nextMenuNotHidden = nextMenu.filter(
-        (menuItem) => !menuItem.isHidden,
-      )
-
-      const navItemId = nextMenuNotHidden[menuItemHoverIndex - 2]?.id ?? 'top'
-
-      const menuItem = currentMenuItemsNotHidden.find(
-        (item) => item.id === navItemId,
-      )
+      console.log('🚀 ~ menuItemHoverIndex:', menuItemHoverIndex)
 
       const isBackMenuItem = menuItemHoverIndex === 1 && isNestedMenu
 
@@ -119,6 +100,20 @@ export const useKeysForMenuNavigation = (): void => {
 
         return
       }
+
+      const nextMenu =
+        getNavItem({
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          navItemId: getState().nav.idsToNextMenuItems.at(-1)!,
+        })?.navItems ?? []
+
+      const navItemId = nextMenu[menuItemHoverIndex - 2]?.id
+
+      if (!navItemId) {
+        return
+      }
+
+      const menuItem = getNavItem({ navItemId })
 
       const link = menuItem?.link
 
@@ -167,7 +162,7 @@ export const useKeysForMenuNavigation = (): void => {
       }
 
       // search in items below hovered item
-      const index = currentMenuItemsNotHidden.findIndex((menuItem, i) => {
+      const index = currentMenuItems.findIndex((menuItem, i) => {
         const isiKeySameAsFirstItemLetter = menuItem.name
           .toLowerCase()
           .startsWith(e.key)
@@ -193,7 +188,7 @@ export const useKeysForMenuNavigation = (): void => {
 
       // if no found below hovered item, do it again from the top
       if (index === -1) {
-        const newIndex = currentMenuItemsNotHidden.findIndex((menuItem) => {
+        const newIndex = currentMenuItems.findIndex((menuItem) => {
           const isiKeySameAsFirstItemLetter = menuItem.name
             .toLowerCase()
             .startsWith(e.key)
