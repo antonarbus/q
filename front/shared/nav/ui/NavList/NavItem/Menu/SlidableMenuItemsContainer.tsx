@@ -1,10 +1,11 @@
 import { useSelector } from '@shared/lib/redux'
 import { selectMenuItemByIdsChainSelector } from './functions/selectMenuItemByIdsChainSelector'
 import { MenuItem } from './MenuItem'
+import type { NavItemId } from '@shared/consts/navItemId'
 
 type Props = {
   reference: React.RefObject<React.ComponentRef<'div'> | null>
-  idsToMenu: string[]
+  idsToMenu: NavItemId[]
   className: string
 }
 

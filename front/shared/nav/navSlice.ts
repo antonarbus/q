@@ -344,10 +344,10 @@ export const navSlice = createSlice({
         (menuItem) => menuItem.id,
       )
 
-      topNavItemsIds.forEach((id) => {
+      topNavItemsIds.forEach((navItemId) => {
         setMenuItemPropValue({
           menu: state.navStructure,
-          navItemId: id,
+          navItemId,
           prop: 'isActive',
           value: false,
         })
