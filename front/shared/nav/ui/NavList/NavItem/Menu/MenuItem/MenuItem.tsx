@@ -77,11 +77,7 @@ export const MenuItem = ({
         clickOnMenuItem(e, menuId, disabled)
       }}
       onMouseEnter={(): void => {
-        dispatch(
-          navSlice.actions.setMenuItemHoverIndex({
-            menuItemHoverIndex,
-          }),
-        )
+        dispatch(navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex }))
       }}
     >
       {isIcon && isLoading && <SpinnerIcon />}

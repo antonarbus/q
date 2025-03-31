@@ -48,7 +48,7 @@ export const Menu = (): React.JSX.Element => {
       className='drop-down-nav-menu'
       onMouseLeave={(): void => {
         dispatch(
-          navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
+          navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: -1 }),
         )
       }}
       css={css`

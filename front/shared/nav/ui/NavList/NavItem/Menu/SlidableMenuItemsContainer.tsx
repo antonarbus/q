@@ -25,7 +25,7 @@ export const SlidableMenuItemsContainer = ({
       <MenuItem
         menuItem={menuItem}
         key={menuItem.id}
-        menuItemHoverIndex={index + 2}
+        menuItemHoverIndex={index + 1}
       />
     ))
 

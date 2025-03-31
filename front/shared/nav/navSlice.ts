@@ -13,7 +13,7 @@ const initialState = {
   currentMenuNavItemId: null as NavItemId | null,
   nextMenuNavItemId: null as NavItemId | null,
   navItemRightPos: 0,
-  menuItemHoverIndex: 0,
+  menuItemHoverIndex: -1,
 }
 
 export const navSlice = createSlice({
@@ -54,7 +54,7 @@ export const navSlice = createSlice({
     closeMenu: (state) => {
       state.idsToCurrentMenuItems = [navItemIdKey.burger]
       state.burger.isOpen = false
-      state.menuItemHoverIndex = 0
+      state.menuItemHoverIndex = -1
       state.currentMenuNavItemId = null
       state.nextMenuNavItemId = null
     },

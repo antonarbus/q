@@ -9,7 +9,7 @@ import { MenuItemLayout } from './MenuItemStyled'
 import { TextInMenu } from './TextInMenu'
 
 export const BackMenuItem = (): React.JSX.Element => {
-  const isHovered = useSelector((state) => state.nav.menuItemHoverIndex === 1)
+  const isHovered = useSelector((state) => state.nav.menuItemHoverIndex === 0)
 
   const color = theme.colors.topMenuItem
 
@@ -22,7 +22,7 @@ export const BackMenuItem = (): React.JSX.Element => {
       }}
       onMouseEnter={(): void => {
         dispatch(
-          navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 1 }),
+          navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
         )
       }}
       isHovered={isHovered}

@@ -12,7 +12,7 @@ const closeIcon = createElement(CloseIcon, {})
 export const CloseMenuItem = (): React.JSX.Element => {
   const color = theme.colors.topMenuItem
 
-  const isHovered = useSelector((state) => state.nav.menuItemHoverIndex === 1)
+  const isHovered = useSelector((state) => state.nav.menuItemHoverIndex === 0)
 
   return (
     <MenuItemLayout
@@ -23,7 +23,7 @@ export const CloseMenuItem = (): React.JSX.Element => {
       }}
       onMouseEnter={(): void => {
         dispatch(
-          navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 1 }),
+          navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
         )
       }}
       isHovered={isHovered}
