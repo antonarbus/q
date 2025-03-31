@@ -20,6 +20,7 @@ const customTheme = {
     topMenuItem: '#858383',
     darkBackground: 'rgb(52 52 52 / 95%)',
     greyFont: '#bcbcbc',
+    blue: '#0083bf',
   },
   nav: {
     height: 60,

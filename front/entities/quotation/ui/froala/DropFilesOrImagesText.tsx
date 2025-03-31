@@ -1,6 +1,7 @@
 import { useFroala } from '@entities/quotation/providers/FroalaProvider'
 import { Box } from '@mui/material'
 import { cls } from '@shared/consts/cls'
+import { theme } from '@shared/theme'
 
 type Props = {
   dropFilesTextRef: React.RefObject<React.ComponentRef<'div'> | null>
@@ -28,7 +29,7 @@ export const DropFilesOrImagesText = (props: Props): React.JSX.Element => {
       <span
         style={{
           cursor: 'pointer',
-          color: 'black',
+          color: theme.colors.blue,
           fontWeight: 400,
         }}
         onClick={(e) => {
@@ -44,7 +45,7 @@ export const DropFilesOrImagesText = (props: Props): React.JSX.Element => {
       <span
         style={{
           cursor: 'pointer',
-          color: 'black',
+          color: theme.colors.blue,
           fontWeight: 400,
         }}
         onClick={(e) => {
