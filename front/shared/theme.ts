@@ -36,7 +36,7 @@ const customTheme = {
     width: 300,
     paddingTop: 20,
     paddingBottom: 20,
-    menuItem: {
+    navItem: {
       height: 50,
     },
   },

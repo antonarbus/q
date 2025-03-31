@@ -19,7 +19,7 @@ export const MenuItemLayout = ({
       to={to}
       css={css`
         position: relative;
-        height: ${theme.menu.menuItem.height}px;
+        height: ${theme.menu.navItem.height}px;
         display: flex;
         flex-wrap: nowrap;
         align-items: center;

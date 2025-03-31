@@ -13,7 +13,7 @@ const initialState = {
   currentMenuNavItemId: null as NavItemId | null,
   nextMenuNavItemId: null as NavItemId | null,
   navItemRightPos: 0,
-  menuItemHoverIndex: -1,
+  hoverIndex: -1,
 }
 
 export const navSlice = createSlice({
@@ -54,7 +54,7 @@ export const navSlice = createSlice({
     closeMenu: (state) => {
       state.idsToCurrentMenuItems = [navItemIdKey.burger]
       state.burger.isOpen = false
-      state.menuItemHoverIndex = -1
+      state.hoverIndex = -1
       state.currentMenuNavItemId = null
       state.nextMenuNavItemId = null
     },
@@ -107,7 +107,7 @@ export const navSlice = createSlice({
       action: PayloadAction<{ menuItemHoverIndex: number }>,
     ) => {
       const { menuItemHoverIndex } = action.payload
-      state.menuItemHoverIndex = menuItemHoverIndex
+      state.hoverIndex = menuItemHoverIndex
     },
     startLoadingIcon: (
       state,
@@ -243,7 +243,7 @@ export const navSlice = createSlice({
       }
 
       const topNavItemsIds = (topLevelNavMenu.navItems ?? []).map(
-        (menuItem) => menuItem.id,
+        (navItem) => navItem.id,
       )
 
       topNavItemsIds.forEach((id) => {
@@ -277,7 +277,7 @@ export const navSlice = createSlice({
       }
 
       const topNavItemsIds = (topLevelNavMenu.navItems ?? []).map(
-        (menuItem) => menuItem.id,
+        (navItem) => navItem.id,
       )
 
       topNavItemsIds.forEach((id) => {
@@ -369,7 +369,7 @@ export const navSlice = createSlice({
       }
 
       const topNavItemsIds = (topLevelNavMenu.navItems ?? []).map(
-        (menuItem) => menuItem.id,
+        (navItem) => navItem.id,
       )
 
       topNavItemsIds.forEach((navItemId) => {

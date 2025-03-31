@@ -20,12 +20,12 @@ export const SlidableMenuItemsContainer = ({
   const { navItem } = getNavItem({ navItemId: menuNavItemId })
 
   const menuItemsNotHidden = navItem?.navItems
-    ?.filter((menuItem) => !menuItem.isHidden)
-    .map((menuItem, index) => (
+    ?.filter((item) => !item.isHidden)
+    .map((item, index) => (
       <MenuItem
-        menuItem={menuItem}
-        key={menuItem.id}
-        menuItemHoverIndex={index + 1}
+        navItem={item}
+        key={item.id}
+        hoverIndex={index + 1}
       />
     ))
 

@@ -19,20 +19,20 @@ const searchForShortcutsInNavStructure = ({
 }): void => {
   arrForNavStructureIteration = navStructure
 
-  arrForNavStructureIteration.forEach((menuItem) => {
-    if (menuItem.shortcut) {
+  arrForNavStructureIteration.forEach((navItem) => {
+    if (navItem.shortcut) {
       shortcuts.push({
-        name: menuItem.name,
-        shortcut: menuItem.shortcut.toSorted(),
-        function: () => void menuItem.func?.(),
-        link: menuItem.link ?? null,
+        name: navItem.name,
+        shortcut: navItem.shortcut.toSorted(),
+        function: () => void navItem.func?.(),
+        link: navItem.link ?? null,
       })
     }
   })
 
-  arrForNavStructureIteration.forEach((menuItem) => {
-    if (menuItem.navItems) {
-      arrForNavStructureIteration = menuItem.navItems
+  arrForNavStructureIteration.forEach((navItem) => {
+    if (navItem.navItems) {
+      arrForNavStructureIteration = navItem.navItems
 
       searchForShortcutsInNavStructure({
         navStructure: arrForNavStructureIteration,

@@ -54,7 +54,7 @@ export const useMenuAnimation = ({
       elementHeight(fakeMenuRef.current) +
       theme.menu.paddingTop +
       theme.menu.paddingBottom +
-      theme.menu.menuItem.height
+      theme.menu.navItem.height
 
     return height
   }
@@ -68,7 +68,7 @@ export const useMenuAnimation = ({
       elementHeight(currentMenuRef.current) +
       theme.menu.paddingTop +
       theme.menu.paddingBottom +
-      theme.menu.menuItem.height
+      theme.menu.navItem.height
 
     return height
   }

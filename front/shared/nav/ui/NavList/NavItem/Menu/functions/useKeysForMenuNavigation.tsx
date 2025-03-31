@@ -16,19 +16,19 @@ export const useKeysForMenuNavigation = (): void => {
     })
 
     // +1 for "Close" or "Back" item before currentMenuItems
-    const menuItems = (currentNavItem?.navItems ?? []).filter(
+    const navItems = (currentNavItem?.navItems ?? []).filter(
       (item) => !item.isHidden,
     ) // 3 items without first "close" or "Back"
 
-    const menuItemsQty = menuItems.length // 3
+    const menuItemsQty = navItems.length // 3
 
-    const menuItemHoverIndex = getState().nav.menuItemHoverIndex // -1
+    const hoverIndex = getState().nav.hoverIndex // -1
 
     const isNestedMenu = getState().nav.idsToCurrentMenuItems.length > 2
 
     if (e.key === 'ArrowDown') {
       e.preventDefault()
-      const isLastMenuItem = menuItemHoverIndex === menuItemsQty
+      const isLastMenuItem = hoverIndex === menuItemsQty
 
       if (isLastMenuItem) {
         dispatch(
@@ -40,7 +40,7 @@ export const useKeysForMenuNavigation = (): void => {
 
       dispatch(
         navSlice.actions.setMenuItemHoverIndex({
-          menuItemHoverIndex: menuItemHoverIndex + 1,
+          menuItemHoverIndex: hoverIndex + 1,
         }),
       )
 
@@ -49,7 +49,7 @@ export const useKeysForMenuNavigation = (): void => {
 
     if (e.key === 'ArrowUp') {
       e.preventDefault()
-      const isTopMenuItem = menuItemHoverIndex < 1
+      const isTopMenuItem = hoverIndex < 1
 
       if (isTopMenuItem) {
         dispatch(
@@ -63,7 +63,7 @@ export const useKeysForMenuNavigation = (): void => {
 
       dispatch(
         navSlice.actions.setMenuItemHoverIndex({
-          menuItemHoverIndex: menuItemHoverIndex - 1,
+          menuItemHoverIndex: hoverIndex - 1,
         }),
       )
 
@@ -93,7 +93,7 @@ export const useKeysForMenuNavigation = (): void => {
     }
 
     if (e.key === 'Enter') {
-      const isBackMenuItem = menuItemHoverIndex === 0 && isNestedMenu
+      const isBackMenuItem = hoverIndex === 0 && isNestedMenu
 
       if (isBackMenuItem) {
         dispatch(
@@ -105,7 +105,7 @@ export const useKeysForMenuNavigation = (): void => {
         return
       }
 
-      const isCloseMenuItem = menuItemHoverIndex === 0 && !isNestedMenu
+      const isCloseMenuItem = hoverIndex === 0 && !isNestedMenu
 
       if (isCloseMenuItem) {
         dispatch(navSlice.actions.closeMenu())
@@ -113,15 +113,15 @@ export const useKeysForMenuNavigation = (): void => {
         return
       }
 
-      const navItemId = menuItems[menuItemHoverIndex - 1]?.id
+      const navItemId = navItems[hoverIndex - 1]?.id
 
       if (!navItemId) {
         return
       }
 
-      const { navItem: menuItem } = getNavItem({ navItemId })
+      const { navItem } = getNavItem({ navItemId })
 
-      const link = menuItem?.link
+      const link = navItem?.link
 
       if (link) {
         void navigate(link)
@@ -130,7 +130,7 @@ export const useKeysForMenuNavigation = (): void => {
         return
       }
 
-      const func = menuItem?.func
+      const func = navItem?.func
 
       if (func) {
         void func()
@@ -139,7 +139,7 @@ export const useKeysForMenuNavigation = (): void => {
         return
       }
 
-      const isNestedMenuAvailable = Boolean(menuItem?.navItems)
+      const isNestedMenuAvailable = Boolean(navItem?.navItems)
 
       dispatch(
         navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
@@ -173,8 +173,8 @@ export const useKeysForMenuNavigation = (): void => {
       }
 
       // jump to item by letter
-      const index = menuItems.findIndex((menuItem, i) => {
-        const isiKeySameAsFirstItemLetter = menuItem.name
+      const index = navItems.findIndex((navItem, i) => {
+        const isiKeySameAsFirstItemLetter = navItem.name
           .toLowerCase()
           .startsWith(e.key)
 
@@ -182,7 +182,7 @@ export const useKeysForMenuNavigation = (): void => {
           return false
         }
 
-        if (i + 2 > menuItemHoverIndex) {
+        if (i + 2 > hoverIndex) {
           return true
         }
 
@@ -199,8 +199,8 @@ export const useKeysForMenuNavigation = (): void => {
 
       // if no found below hovered item, do it again from the top
       if (index === -1) {
-        const newIndex = menuItems.findIndex((menuItem) => {
-          const isiKeySameAsFirstItemLetter = menuItem.name
+        const newIndex = navItems.findIndex((navItem) => {
+          const isiKeySameAsFirstItemLetter = navItem.name
             .toLowerCase()
             .startsWith(e.key)
 
