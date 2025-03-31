@@ -41,11 +41,13 @@ import { FaRegFilePdf } from 'react-icons/fa'
 import { openShareQuotationModal } from '@features/open_close/open_share_quotation_modal'
 import { getState } from '@shared/lib/redux'
 import { saveExistingQuotation } from '@features/quotation/save_quotation'
+import { Burger } from '@shared/nav/ui/NavList/NavItem/Burger'
 
 export const navStructure: NavItem[] = [
   {
     id: navItemId.burger,
     name: 'burger',
+    icon: <Burger />,
     isHidden: false,
     navItems: [
       {

@@ -1,6 +1,7 @@
 import { TiArrowSortedDown } from 'react-icons/ti'
 import { css } from '@emotion/react'
 import type { NavItem } from '@shared/nav/type'
+import { navMediaQuery } from '../../navMediaQuery'
 
 type Props = {
   navItem: NavItem | undefined
@@ -9,6 +10,12 @@ type Props = {
 export const ArrowForNestedMenu = (props: Props): React.ReactNode => {
   const isNestedMenu = Boolean(props.navItem?.navItems)
   const disabled = Boolean(props.navItem?.disabled)
+
+  const isMobile = window.innerWidth < navMediaQuery.widthWhenNothingFits
+
+  if (isMobile) {
+    return null
+  }
 
   if (!isNestedMenu) {
     return null

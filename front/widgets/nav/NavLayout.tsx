@@ -30,9 +30,6 @@ export const NavLayout = (props: Props): React.JSX.Element => {
             {
               display: 'none',
             },
-          [`@media (width <= ${navMediaQuery.widthWhenNothingFits}px)`]: {
-            display: 'none',
-          },
           [`@media (width <= ${navMediaQuery.widthWhenNamesDoNotFit}px)`]: {
             marginRight: '24px',
           },
@@ -40,17 +37,6 @@ export const NavLayout = (props: Props): React.JSX.Element => {
         '& .nav-item-name': {
           [`@media (width <= ${navMediaQuery.widthWhenNamesDoNotFit}px)`]: {
             display: 'none',
-          },
-        },
-        '& li:not(:last-child)': {
-          [`@media (width <= ${navMediaQuery.widthWhenNothingFits}px)`]: {
-            display: 'none',
-          },
-        },
-        '& li:last-child': {
-          display: 'none',
-          [`@media (width <= ${navMediaQuery.widthWhenNothingFits}px)`]: {
-            display: 'flex',
           },
         },
       }}

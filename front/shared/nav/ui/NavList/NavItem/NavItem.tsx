@@ -10,11 +10,10 @@ import { IconWithLoader } from './IconWithLoader'
 import type { NavItem as NavItemType } from '@shared/nav/type'
 
 type Props = {
-  children?: React.ReactNode
   navItem: NavItemType
 }
 
-export const NavItem = ({ children, navItem }: Props): React.JSX.Element => {
+export const NavItem = ({ navItem }: Props): React.JSX.Element => {
   const location = useLocation()
   // required to avoid Menu to go over the narrow window
   const navItemRef = useRef<React.ComponentRef<'li'> | null>(null)
@@ -68,7 +67,6 @@ export const NavItem = ({ children, navItem }: Props): React.JSX.Element => {
         <IconWithLoader navItem={navItem} />
         <NavName name={name} />
         <ArrowForNestedMenu navItem={navItem} />
-        {children}
       </Link>
       {isMenuOpen && <Menu />}
     </NavItemLayout>

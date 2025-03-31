@@ -71,6 +71,10 @@ export const useKeysForMenuNavigation = (): void => {
     }
 
     if (isNestedMenu && e.key === 'Backspace') {
+      dispatch(
+        navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
+      )
+
       void navigateInMenu.up()
 
       return
@@ -92,6 +96,10 @@ export const useKeysForMenuNavigation = (): void => {
       const isBackMenuItem = menuItemHoverIndex === 0 && isNestedMenu
 
       if (isBackMenuItem) {
+        dispatch(
+          navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
+        )
+
         void navigateInMenu.up()
 
         return
@@ -132,6 +140,10 @@ export const useKeysForMenuNavigation = (): void => {
       }
 
       const isNestedMenuAvailable = Boolean(menuItem?.navItems)
+
+      dispatch(
+        navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
+      )
 
       if (isNestedMenuAvailable) {
         void navigateInMenu.down({ navItemId })

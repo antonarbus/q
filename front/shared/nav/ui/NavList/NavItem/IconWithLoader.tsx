@@ -3,12 +3,15 @@ import { SpinnerIcon } from './SpinnerIcon'
 import { SuccessIcon } from './SuccessIcon'
 import { ErrorIcon } from './ErrorIcon'
 import { Icon } from './Icon'
+import { navMediaQuery } from '../../navMediaQuery'
 
 type Props = {
   navItem?: NavItem
 }
 
 export const IconWithLoader = (props: Props): React.ReactNode => {
+  const isMobile = window.innerWidth < navMediaQuery.widthWhenNothingFits
+
   if (!props.navItem) {
     return null
   }
@@ -20,6 +23,10 @@ export const IconWithLoader = (props: Props): React.ReactNode => {
   const isError = props.navItem.isError
   const disabled = Boolean(props.navItem.disabled)
   const tooltipText = props.navItem.tooltip
+
+  if (isMobile) {
+    return icon
+  }
 
   if (icon && isLoading) {
     return <SpinnerIcon />

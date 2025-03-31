@@ -1,11 +1,16 @@
 import { useSelector } from '@shared/lib/redux'
 import { NavItem } from './NavItem'
-import { Burger } from './NavItem/Burger'
+import { useWindowSize } from 'react-use'
+import { navMediaQuery } from '../navMediaQuery'
 
 export const NavList = (): React.JSX.Element => {
   const navStructure = useSelector((state) => state.nav.navStructure)
+  const { width } = useWindowSize()
 
-  const nonHiddenNavItems = navStructure[0]?.navItems
+  const isMobile = width < navMediaQuery.widthWhenNothingFits
+  const navStructureToLoad = isMobile ? navStructure : navStructure[0]?.navItems
+
+  const nonHiddenNavItems = navStructureToLoad
     ?.filter((navItem) => !navItem.isHidden)
     .map((navItem) => (
       <NavItem
@@ -13,19 +18,6 @@ export const NavList = (): React.JSX.Element => {
         key={navItem.id}
       />
     ))
-
-  const burger = (
-    <NavItem
-      key={'burger'}
-      navItem={{
-        id: 'burger',
-        name: 'burger',
-        isHidden: false,
-      }}
-    >
-      <Burger />
-    </NavItem>
-  )
 
   return (
     <ul
@@ -38,7 +30,6 @@ export const NavList = (): React.JSX.Element => {
       }}
     >
       {nonHiddenNavItems}
-      {burger}
     </ul>
   )
 }
