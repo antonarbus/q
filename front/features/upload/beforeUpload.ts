@@ -16,11 +16,7 @@ type Props = {
 
 type Res = false | undefined
 
-const PREVENT_DEFAULT_BEHAVIOR = false
-
 export const beforeUpload = async ({ files, editor }: Props): Promise<Res> => {
-  console.log('🚀 ~ editor:', editor)
-  console.log('🚀 ~ files:', files)
   hideDraggableArea()
 
   if (!getState().user.email) {
@@ -42,8 +38,6 @@ export const beforeUpload = async ({ files, editor }: Props): Promise<Res> => {
   }
 
   const fileSizeInMb = getFileSizeInMb({ file: files['0'] })
-
-  console.log('🚀 ~ fileSizeInMb:', fileSizeInMb)
 
   const confirmUpload = confirm(`
     File will be uploaded into your profile.
@@ -69,8 +63,6 @@ export const beforeUpload = async ({ files, editor }: Props): Promise<Res> => {
     method: 'get',
   })
 
-  console.log('🚀 ~ signedUrlRes:', signedUrlRes)
-
   if (!signedUrlRes.signedUrl || !signedUrlRes.publicUrl) {
     alert('Failed to get signed url')
 
@@ -81,35 +73,27 @@ export const beforeUpload = async ({ files, editor }: Props): Promise<Res> => {
     url: signedUrlRes.signedUrl,
     method: 'put',
     headers: {
-      // 'Content-Type': file.type,
       'x-goog-content-length-range': '0,104857600', // Allow up to 100MB
     },
     data: file,
   })
 
-  const { data } = await axios<ResBodyMakeFilePublic>({
+  await axios<ResBodyMakeFilePublic>({
     url: `${apiUrl.makeFilePublic}?fileName=${fileName}`,
     method: 'get',
   })
-
-  console.log('🚀 ~ data:', data)
-
-  console.log('🚀 ~ editor.file:', editor.file)
 
   editor.file.insert(signedUrlRes.publicUrl, file.name, {
     link: signedUrlRes.publicUrl,
   })
 
   const quotationId = getState().quotation.id
-  console.log('🚀 ~ quotationId:', quotationId)
 
   if (quotationId === 'new' || !quotationId) {
     toast.info('Do not forget to save quotation')
   }
 
   toast.success('File uploaded')
-
-  return PREVENT_DEFAULT_BEHAVIOR
 
   // * take email from the jwt refresh token at cookies
   // editor.opts.imageUploadParams = { email }
