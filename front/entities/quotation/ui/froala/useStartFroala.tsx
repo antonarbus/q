@@ -7,9 +7,9 @@ import { nanoid } from '@shared/lib/nanoid'
 import type { FroalaEditorRef } from '@shared/types/froala'
 import { useFroala } from '../../providers/FroalaProvider'
 import { froalaDefaultOptions } from './froalaDefaultOptions'
-import { remindToSaveQuotationOnInsert } from './remindToSaveQuotationOnInsert'
 import { removeLoadingBar } from '@shared/lib/froala/removeLoadingBar'
 import { toast } from 'sonner'
+import { getState } from '@shared/lib/redux'
 
 declare const window: Window &
   typeof globalThis & {
@@ -66,26 +66,28 @@ export const useStartFroala = (): void => {
 
             return isAccepted
           },
-          'file.beforeUpload'(files: any): boolean {
-            if (!froala.beforeUpload) {
-              toast.info('May drop files into text block & description cell')
+          'file.beforeUpload': (files: any): false | undefined => {
+            if (
+              froala.editorRef.current !== null &&
+              froala.beforeUpload !== undefined
+            ) {
+              froala.beforeUpload({
+                files,
+                editor: froala.editorRef.current,
+              })
 
-              removeLoadingBar()
-
-              return false
+              if (getState().user.email !== null) {
+                const PREVENT_DEFAULT_BEHAVIOR = false
+                return PREVENT_DEFAULT_BEHAVIOR
+              }
             }
-
-            //@ts-expect-error: some error
-            const isAccepted = froala.beforeUpload({ files, editor: this })
-
-            return isAccepted
           },
           'video.beforeUpload'(files: any): boolean {
             if (!froala.beforeUpload) {
               toast.info('May drop files into text block & description cell')
               removeLoadingBar()
 
-              return false
+              // return false
             }
 
             //@ts-expect-error: some error
@@ -93,15 +95,15 @@ export const useStartFroala = (): void => {
 
             return isAccepted
           },
-          'image.inserted'(_response: any): void {
-            remindToSaveQuotationOnInsert()
-          },
-          'file.inserted'(response: any): void {
-            remindToSaveQuotationOnInsert()
-          },
-          'video.inserted'(response: any): void {
-            remindToSaveQuotationOnInsert()
-          },
+          // 'image.inserted'(_response: any): void {
+          //   remindToSaveQuotationOnInsert()
+          // },
+          // 'file.inserted'(response: any): void {
+          //   remindToSaveQuotationOnInsert()
+          // },
+          // 'video.inserted'(response: any): void {
+          //   remindToSaveQuotationOnInsert()
+          // },
           'file.unlink'(link: { getAttribute: (arg0: string) => any }): void {
             const href = link.getAttribute('href')
             const isFileInBucket = href.includes('bucket')

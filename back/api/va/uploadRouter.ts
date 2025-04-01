@@ -6,8 +6,6 @@ import { bucket, fileBaseUrl, getFilePath } from '@back/shared/services/storage'
 import { getUserFromRefreshToken } from '@back/entities/user'
 import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
-// https://medium.com/@olamilekan001/image-upload-with-google-cloud-storage-and-node-js-a1cf9baa1876
-
 type Props = {
   file: Express.Multer.File
   email: string
@@ -19,6 +17,7 @@ type Res = Promise<{
   size: number
 }>
 
+// todo: not in use, moved upload to client side
 async function uploadFileIntoMemory({ file, email }: Props): Res {
   const fileName = Buffer.from(file.originalname, 'ascii').toString('utf8')
   const filePath = getFilePath({ email, fileType: 'file', fileName })
@@ -59,9 +58,6 @@ type RouterHandler = (
   res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
-
-// todo: move upload to client side
-// https://chatgpt.com/c/67e1f34c-da00-8004-bf25-8715fd3e8379
 
 export const uploadRouter = Router()
 

@@ -22,5 +22,5 @@ export type FroalaProps = {
   }: {
     editor: FroalaEditor
     files: File[]
-  }) => boolean
+  }) => Promise<false | undefined>
 }

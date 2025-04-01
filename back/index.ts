@@ -32,6 +32,8 @@ import { getUsersRouter } from './api/user/getUsersRouter'
 import { deleteUserRouter } from './api/user/deleteUserRouter'
 import { countUniqueDailyVisitorsRouter } from './api/visitors/countUniqueDailyVisitorsRouter'
 import { getUniqueDailyVisitorsRouter } from './api/visitors/getUniqueDailyVisitorsRouter'
+import { getSignedUrlRouter } from './api/va/getSignedUrlRouter'
+import { makeFilePublicRouter } from './api/va/makeFilePublicRouter'
 // import cors from 'cors'
 
 const app = express()
@@ -84,6 +86,8 @@ app.use(apiUrl.countUniqueDailyVisitors, countUniqueDailyVisitorsRouter)
 app.use(apiUrl.getUniqueDailyVisitors, getUniqueDailyVisitorsRouter)
 // va
 app.use(apiUrl.upload, uploadRouter)
+app.use(apiUrl.getSignedUrl, getSignedUrlRouter)
+app.use(apiUrl.makeFilePublic, makeFilePublicRouter)
 // settings
 app.use(apiUrl.getFilesStats, getFilesStatsRouter)
 // error

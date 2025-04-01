@@ -25,6 +25,8 @@ export const apiUrl = {
   deleteBookmark: '/api/delete-bookmark',
   // va
   upload: '/api/upload',
+  getSignedUrl: '/api/get-signed-url',
+  makeFilePublic: '/api/make-file-public',
   // visitors
   countUniqueDailyVisitors: '/api/count-unique-daily-visitors',
   getUniqueDailyVisitors: '/api/get-unique-daily-visitors',
