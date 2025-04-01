@@ -18,13 +18,13 @@ type Res = false | undefined
 
 export const beforeUpload = async ({ files, editor }: Props): Promise<Res> => {
   hideDraggableArea()
+  removeLoadingBar()
 
   if (!getState().user.email) {
+    // todo: make a toast with ok button
     alert(
       'You are not logged in, file will be kept in browser until page is refreshed',
     )
-
-    removeLoadingBar()
 
     return
   }
@@ -32,7 +32,7 @@ export const beforeUpload = async ({ files, editor }: Props): Promise<Res> => {
   const file = files['0']
 
   if (file === undefined) {
-    alert('No file')
+    toast.warning('No file')
 
     return
   }
@@ -44,8 +44,8 @@ export const beforeUpload = async ({ files, editor }: Props): Promise<Res> => {
     File size: ${fileSizeInMb} Mb
   `)
 
-  if (fileSizeInMb > 50) {
-    alert('File is too large')
+  if (fileSizeInMb > 100) {
+    toast.warning('File is too large')
 
     return
   }
@@ -58,42 +58,60 @@ export const beforeUpload = async ({ files, editor }: Props): Promise<Res> => {
 
   const fileName = encodeURIComponent(file.name)
 
-  const { data: signedUrlRes } = await axios<ResBodyGetSignedUrl>({
-    url: `${apiUrl.getSignedUrl}?fileName=${fileName}`,
-    method: 'get',
-  })
+  const toastId = toast.loading(`Uploading ${file.name}...`)
 
-  if (!signedUrlRes.signedUrl || !signedUrlRes.publicUrl) {
-    alert('Failed to get signed url')
+  try {
+    const { data: signedUrlRes } = await axios<ResBodyGetSignedUrl>({
+      url: `${apiUrl.getSignedUrl}?fileName=${fileName}`,
+      method: 'get',
+    })
 
-    return
+    if (!signedUrlRes.signedUrl || !signedUrlRes.publicUrl) {
+      toast.error('Failed', { id: toastId })
+
+      return
+    }
+
+    await axios<unknown>({
+      url: signedUrlRes.signedUrl,
+      method: 'put',
+      headers: {
+        'x-goog-content-length-range': '0,104857600', // Allow up to 100MB
+      },
+      data: file,
+      onUploadProgress: (progressEvent) => {
+        if (progressEvent.lengthComputable && progressEvent.total) {
+          const percentCompleted = Math.round(
+            (progressEvent.loaded * 100) / progressEvent.total,
+          )
+
+          toast.loading(`Uploading... ${percentCompleted}%`, {
+            id: toastId,
+          })
+        }
+      },
+    })
+
+    await axios<ResBodyMakeFilePublic>({
+      url: `${apiUrl.makeFilePublic}?fileName=${fileName}`,
+      method: 'get',
+    })
+
+    editor.file.insert(signedUrlRes.publicUrl, file.name, {
+      link: signedUrlRes.publicUrl,
+    })
+
+    toast.success(`Uploaded`, { id: toastId })
+
+    const quotationId = getState().quotation.id
+
+    if (quotationId === 'new' || !quotationId) {
+      // todo: make a toast with ok button
+      toast.info('Do not forget to save quotation')
+    }
+  } catch {
+    toast.error('Failed', { id: toastId })
   }
-
-  await axios<unknown>({
-    url: signedUrlRes.signedUrl,
-    method: 'put',
-    headers: {
-      'x-goog-content-length-range': '0,104857600', // Allow up to 100MB
-    },
-    data: file,
-  })
-
-  await axios<ResBodyMakeFilePublic>({
-    url: `${apiUrl.makeFilePublic}?fileName=${fileName}`,
-    method: 'get',
-  })
-
-  editor.file.insert(signedUrlRes.publicUrl, file.name, {
-    link: signedUrlRes.publicUrl,
-  })
-
-  const quotationId = getState().quotation.id
-
-  if (quotationId === 'new' || !quotationId) {
-    toast.info('Do not forget to save quotation')
-  }
-
-  toast.success('File uploaded')
 
   // * take email from the jwt refresh token at cookies
   // editor.opts.imageUploadParams = { email }
