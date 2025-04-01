@@ -114,13 +114,4 @@ export const beforeUpload = async ({ files, editor }: Props): Promise<Res> => {
   } catch {
     toast.error('Failed', { id: toastId })
   }
-
-  // * take email from the jwt refresh token at cookies
-  // editor.opts.imageUploadParams = { email }
-  // editor.opts.fileUploadParams = { email }
-  // editor.opts.videoUploadParams = { email }
-
-  // editor.opts.imageUploadURL = apiUrl.upload
-  // editor.opts.fileUploadURL = apiUrl.upload
-  // editor.opts.videoUploadURL = apiUrl.upload
 }
