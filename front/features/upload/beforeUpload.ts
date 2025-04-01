@@ -16,6 +16,8 @@ type Props = {
 
 type Res = false | undefined
 
+// todo: reduce draggable area by padding, now you can't drop on upper part of the page
+
 export const beforeUpload = async ({ files, editor }: Props): Promise<Res> => {
   hideDraggableArea()
   removeLoadingBar()
