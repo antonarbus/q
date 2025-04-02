@@ -10,7 +10,7 @@ import axios from 'axios'
 import { toast } from 'sonner'
 
 type Props = {
-  editor: FroalaEditor
+  editor: FroalaEditor | null
   files: File[]
 }
 
@@ -19,17 +19,29 @@ type Res = false | undefined
 // todo: reduce draggable area by padding, now you can't drop on upper part of the page
 
 export const beforeUpload = async ({ files, editor }: Props): Promise<Res> => {
-  hideDraggableArea()
-  removeLoadingBar()
+  if (editor === null) {
+    throw new Error('Editor passed to beforeUpload method is null')
+  }
 
-  if (!getState().user.email) {
-    // todo: make a toast with ok button
-    alert(
-      'You are not logged in, file will be kept in browser until page is refreshed',
-    )
+  hideDraggableArea()
+
+  if (getState().user.email === null) {
+    toast.success('You are not logged in', {
+      description: 'File will be kept in browser until page is refreshed. ',
+      duration: Infinity,
+      dismissible: true,
+      action: {
+        label: 'Understood',
+        onClick: () => {
+          console.info('Understood')
+        },
+      },
+    })
 
     return
   }
+
+  removeLoadingBar()
 
   const file = files['0']
 
@@ -104,13 +116,6 @@ export const beforeUpload = async ({ files, editor }: Props): Promise<Res> => {
     })
 
     toast.success(`Uploaded`, { id: toastId })
-
-    const quotationId = getState().quotation.id
-
-    if (quotationId === 'new' || !quotationId) {
-      // todo: make a toast with ok button
-      toast.info('Do not forget to save quotation')
-    }
   } catch {
     toast.error('Failed', { id: toastId })
   }

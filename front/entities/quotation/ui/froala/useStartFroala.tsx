@@ -52,7 +52,7 @@ export const useStartFroala = (): void => {
           blur: (e: MouseEvent): void => {
             froala.onBlur?.(e)
           },
-          'image.beforeUpload'(files: any): boolean {
+          'image.beforeUpload'(files: any): boolean | undefined {
             if (!froala.beforeUpload) {
               toast.info('May drop files into text block & description cell')
 
@@ -67,26 +67,20 @@ export const useStartFroala = (): void => {
             return isAccepted
           },
           'file.beforeUpload': (files: any): false | undefined => {
-            if (
-              froala.editorRef.current !== null &&
-              froala.beforeUpload !== undefined
-            ) {
-              // this is async function, but we need to return false or undefined immediately
-              // so we run it without await and assume it will do the job
-              froala.beforeUpload({
-                files,
-                editor: froala.editorRef.current,
-              })
+            // this is async function, but we need to return false or undefined immediately
+            // so we run it without await and assume it will do the job
+            froala.beforeUpload?.({
+              files,
+              editor: froala.editorRef.current,
+            })
 
-              // here we immediately return false to prevent default behavior
-              // to use our own upload logic
-              if (getState().user.email !== null) {
-                const PREVENT_DEFAULT_BEHAVIOR = false
-                return PREVENT_DEFAULT_BEHAVIOR
-              }
+            // here we immediately return false to prevent default behavior to use our own upload logic
+            if (getState().user.email !== null) {
+              const PREVENT_DEFAULT_BEHAVIOR = false
+              return PREVENT_DEFAULT_BEHAVIOR
             }
           },
-          'video.beforeUpload'(files: any): boolean {
+          'video.beforeUpload'(files: any): boolean | undefined {
             if (!froala.beforeUpload) {
               toast.info('May drop files into text block & description cell')
               removeLoadingBar()
