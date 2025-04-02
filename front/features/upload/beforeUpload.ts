@@ -16,13 +16,11 @@ type Props = {
   type: 'image' | 'file'
 }
 
-type Res = false | undefined
-
 /**
  * This is async function, but we need to return false or undefined immediately
  * We run it without await and assume it will do the job
  */
-export const beforeUpload = async (props: Props): Promise<Res> => {
+export const beforeUpload = async (props: Props): Promise<void> => {
   if (props.editor === null) {
     throw new Error('Editor passed to beforeUpload method is null')
   }

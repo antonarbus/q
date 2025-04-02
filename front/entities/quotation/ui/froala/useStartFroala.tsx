@@ -52,7 +52,7 @@ export const useStartFroala = (): void => {
           blur: (e: MouseEvent): void => {
             froala.onBlur?.(e)
           },
-          'image.beforeUpload'(files: any): boolean | undefined {
+          'image.beforeUpload'(files: any): false | undefined {
             froala.beforeUpload?.({
               files,
               editor: froala.editorRef.current,

@@ -24,5 +24,5 @@ export type FroalaProps = {
     editor: FroalaEditor | null
     files: File[]
     type: 'image' | 'file'
-  }) => false | undefined
+  }) => Promise<void>
 }
