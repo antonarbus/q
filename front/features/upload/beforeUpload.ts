@@ -17,7 +17,10 @@ type Props = {
 type Res = false | undefined
 
 // todo: reduce draggable area by padding, now you can't drop on upper part of the page
-
+/**
+ * This is async function, but we need to return false or undefined immediately
+ * We run it without await and assume it will do the job
+ */
 export const beforeUpload = async ({ files, editor }: Props): Promise<Res> => {
   if (editor === null) {
     throw new Error('Editor passed to beforeUpload method is null')

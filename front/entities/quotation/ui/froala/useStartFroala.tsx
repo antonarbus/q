@@ -67,14 +67,12 @@ export const useStartFroala = (): void => {
             return isAccepted
           },
           'file.beforeUpload': (files: any): false | undefined => {
-            // this is async function, but we need to return false or undefined immediately
-            // so we run it without await and assume it will do the job
             froala.beforeUpload?.({
               files,
               editor: froala.editorRef.current,
             })
 
-            // here we immediately return false to prevent default behavior to use our own upload logic
+            // Immediately return `false` to prevent default behavior to use our own upload logic
             if (getState().user.email !== null) {
               const PREVENT_DEFAULT_BEHAVIOR = false
               return PREVENT_DEFAULT_BEHAVIOR
