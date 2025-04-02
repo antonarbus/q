@@ -146,7 +146,6 @@ export const beforeUpload = async ({ files, editor }: Props): Promise<Res> => {
 
     await promise
     await asyncDelay(200)
-
     toast.success(`Uploaded 100%`, { id: toastId })
   } catch {
     toast.error('Failed', { id: toastId })
