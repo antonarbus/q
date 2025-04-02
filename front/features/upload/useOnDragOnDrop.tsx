@@ -39,10 +39,7 @@ export const useOnDragOnDrop = (): void => {
     document.addEventListener('dragenter', (e: DragEvent): void => {
       dragCounter.current++
 
-      console.info('dragCounter:', dragCounter.current)
-
       if (dragCounter.current === 1) {
-        console.info('dragenter')
         showDraggableArea()
       }
     })
@@ -50,10 +47,7 @@ export const useOnDragOnDrop = (): void => {
     document.addEventListener('dragleave', (e: DragEvent): void => {
       dragCounter.current--
 
-      console.info('dragCounter:', dragCounter.current)
-
       if (dragCounter.current === 0) {
-        console.info('dragleave')
         hideDraggableArea()
       }
     })

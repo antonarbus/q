@@ -53,43 +53,28 @@ export const useStartFroala = (): void => {
             froala.onBlur?.(e)
           },
           'image.beforeUpload'(files: any): boolean | undefined {
-            if (!froala.beforeUpload) {
-              toast.info('May drop files into text block & description cell')
-
-              removeLoadingBar()
-
-              return false
-            }
-
-            //@ts-expect-error: some error
-            const isAccepted = froala.beforeUpload({ files, editor: this })
-
-            return isAccepted
-          },
-          'file.beforeUpload': (files: any): false | undefined => {
             froala.beforeUpload?.({
               files,
               editor: froala.editorRef.current,
+              type: 'image',
             })
 
-            // Immediately return `false` to prevent default behavior to use our own upload logic
             if (getState().user.email !== null) {
               const PREVENT_DEFAULT_BEHAVIOR = false
               return PREVENT_DEFAULT_BEHAVIOR
             }
           },
-          'video.beforeUpload'(files: any): boolean | undefined {
-            if (!froala.beforeUpload) {
-              toast.info('May drop files into text block & description cell')
-              removeLoadingBar()
+          'file.beforeUpload': (files: any): false | undefined => {
+            froala.beforeUpload?.({
+              files,
+              editor: froala.editorRef.current,
+              type: 'file',
+            })
 
-              // return false
+            if (getState().user.email !== null) {
+              const PREVENT_DEFAULT_BEHAVIOR = false
+              return PREVENT_DEFAULT_BEHAVIOR
             }
-
-            //@ts-expect-error: some error
-            const isAccepted = froala.beforeUpload({ files, editor: this })
-
-            return isAccepted
           },
           // 'image.inserted'(_response: any): void {
           //   remindToSaveQuotationOnInsert()

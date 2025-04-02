@@ -19,8 +19,10 @@ export type FroalaProps = {
   beforeUpload?: ({
     editor,
     files,
+    type,
   }: {
     editor: FroalaEditor | null
     files: File[]
+    type: 'image' | 'file'
   }) => false | undefined
 }

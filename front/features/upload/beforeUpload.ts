@@ -13,6 +13,7 @@ import { asyncDelay } from '@shared/utils/delay'
 type Props = {
   editor: FroalaEditor | null
   files: File[]
+  type: 'image' | 'file'
 }
 
 type Res = false | undefined
@@ -21,8 +22,8 @@ type Res = false | undefined
  * This is async function, but we need to return false or undefined immediately
  * We run it without await and assume it will do the job
  */
-export const beforeUpload = async ({ files, editor }: Props): Promise<Res> => {
-  if (editor === null) {
+export const beforeUpload = async (props: Props): Promise<Res> => {
+  if (props.editor === null) {
     throw new Error('Editor passed to beforeUpload method is null')
   }
 
@@ -46,7 +47,7 @@ export const beforeUpload = async ({ files, editor }: Props): Promise<Res> => {
 
   removeLoadingBar()
 
-  const file = files['0']
+  const file = props.files['0']
 
   if (file === undefined) {
     toast.warning('No file')
@@ -54,21 +55,10 @@ export const beforeUpload = async ({ files, editor }: Props): Promise<Res> => {
     return
   }
 
-  const fileSizeInMb = getFileSizeInMb({ file: files['0'] })
-
-  const confirmUpload = confirm(`
-    File will be uploaded into your profile.
-    File size: ${fileSizeInMb} Mb
-  `)
+  const fileSizeInMb = getFileSizeInMb({ file: props.files['0'] })
 
   if (fileSizeInMb > 100) {
     toast.warning('File is too large')
-
-    return
-  }
-
-  if (!confirmUpload) {
-    removeLoadingBar()
 
     return
   }
@@ -104,7 +94,7 @@ export const beforeUpload = async ({ files, editor }: Props): Promise<Res> => {
         const showProgress = async (): Promise<void> => {
           eventCount++
 
-          await asyncDelay(200)
+          await asyncDelay(50)
 
           if (progressEvent.lengthComputable && progressEvent.total) {
             const percentCompleted = Math.round(
@@ -118,7 +108,24 @@ export const beforeUpload = async ({ files, editor }: Props): Promise<Res> => {
             }
 
             if (percentCompleted === 100 && eventCount === 1) {
+              await asyncDelay(50)
+              toast.loading(`Uploading... 10%`, { id: toastId })
+              await asyncDelay(50)
+              toast.loading(`Uploading... 20%`, { id: toastId })
+              await asyncDelay(50)
+              toast.loading(`Uploading... 30%`, { id: toastId })
+              await asyncDelay(50)
+              toast.loading(`Uploading... 40%`, { id: toastId })
+              await asyncDelay(50)
               toast.loading(`Uploading... 50%`, { id: toastId })
+              await asyncDelay(50)
+              toast.loading(`Uploading... 60%`, { id: toastId })
+              await asyncDelay(50)
+              toast.loading(`Uploading... 70%`, { id: toastId })
+              await asyncDelay(50)
+              toast.loading(`Uploading... 80%`, { id: toastId })
+              await asyncDelay(50)
+              toast.loading(`Uploading... 90%`, { id: toastId })
             }
 
             if (percentCompleted === 100 && eventCount !== 1) {
@@ -140,12 +147,25 @@ export const beforeUpload = async ({ files, editor }: Props): Promise<Res> => {
       method: 'get',
     })
 
-    editor.file.insert(signedUrlRes.publicUrl, file.name, {
-      link: signedUrlRes.publicUrl,
-    })
+    if (props.type === 'file') {
+      props.editor.file.insert(signedUrlRes.publicUrl, file.name, {
+        link: signedUrlRes.publicUrl,
+      })
+    }
+
+    if (props.type === 'image') {
+      props.editor.image.insert(
+        signedUrlRes.publicUrl,
+        true,
+        {
+          name: file.name,
+        },
+        null,
+      )
+    }
 
     await promise
-    await asyncDelay(200)
+    await asyncDelay(50)
     toast.success(`Uploaded 100%`, { id: toastId })
   } catch {
     toast.error('Failed', { id: toastId })

@@ -11,9 +11,6 @@ export const froalaDefaultOptions: Partial<FroalaOptions> = {
   fontSizeSelection: true,
   fileMaxSize: 1024 * 1024 * 50,
   tabSpaces: 0, // otherwise tab key can not be prevented
-  // imageUploadURL: '/fake-api', // Froala needs an endpoint, but we override it to upload from client side
-  // fileUploadURL: '/fake-api', // Froala needs an endpoint, but we override it to upload from client side
-  // videoUploadURL: '/fake-api', // Froala needs an endpoint, but we override it to upload from client side
   toolbarButtons: {
     moreText: {
       buttons: [
