@@ -8,6 +8,7 @@ import type { ResBody as ResBodyGetSignedUrl } from '@back/api/va/getSignedUrlRo
 import type { ResBody as ResBodyMakeFilePublic } from '@back/api/va/makeFilePublicRouter'
 import axios from 'axios'
 import { toast } from 'sonner'
+import { asyncDelay } from '@shared/utils/delay'
 
 type Props = {
   editor: FroalaEditor | null
@@ -74,7 +75,7 @@ export const beforeUpload = async ({ files, editor }: Props): Promise<Res> => {
 
   const fileName = encodeURIComponent(file.name)
 
-  const toastId = toast.loading(`Uploading ${file.name}...`)
+  const toastId = toast.loading(`Uploading 0%...`)
 
   try {
     const { data: signedUrlRes } = await axios<ResBodyGetSignedUrl>({
@@ -88,6 +89,10 @@ export const beforeUpload = async ({ files, editor }: Props): Promise<Res> => {
       return
     }
 
+    let eventCount = 0
+
+    const { promise, resolve } = Promise.withResolvers()
+
     await axios<unknown>({
       url: signedUrlRes.signedUrl,
       method: 'put',
@@ -96,15 +101,37 @@ export const beforeUpload = async ({ files, editor }: Props): Promise<Res> => {
       },
       data: file,
       onUploadProgress: (progressEvent) => {
-        if (progressEvent.lengthComputable && progressEvent.total) {
-          const percentCompleted = Math.round(
-            (progressEvent.loaded * 100) / progressEvent.total,
-          )
+        const showProgress = async (): Promise<void> => {
+          eventCount++
 
-          toast.loading(`Uploading... ${percentCompleted}%`, {
-            id: toastId,
-          })
+          await asyncDelay(200)
+
+          if (progressEvent.lengthComputable && progressEvent.total) {
+            const percentCompleted = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total,
+            )
+
+            if (percentCompleted <= 95) {
+              toast.loading(`Uploading... ${percentCompleted}%`, {
+                id: toastId,
+              })
+            }
+
+            if (percentCompleted === 100 && eventCount === 1) {
+              toast.loading(`Uploading... 50%`, { id: toastId })
+            }
+
+            if (percentCompleted === 100 && eventCount !== 1) {
+              toast.loading(`Uploading... 95%`, { id: toastId })
+            }
+
+            if (percentCompleted === 100) {
+              resolve('done')
+            }
+          }
         }
+
+        void showProgress()
       },
     })
 
@@ -117,7 +144,10 @@ export const beforeUpload = async ({ files, editor }: Props): Promise<Res> => {
       link: signedUrlRes.publicUrl,
     })
 
-    toast.success(`Uploaded`, { id: toastId })
+    await promise
+    await asyncDelay(200)
+
+    toast.success(`Uploaded 100%`, { id: toastId })
   } catch {
     toast.error('Failed', { id: toastId })
   }
