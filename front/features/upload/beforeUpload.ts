@@ -1,7 +1,6 @@
 import { apiUrl } from '@back/shared/consts/apiUrl'
 import { getState } from '@shared/lib/redux'
 import { removeLoadingBar } from '@shared/lib/froala/removeLoadingBar'
-import type { FroalaEditor } from '@shared/types/froala'
 import { getFileSizeInMb } from '@shared/utils/getFileSizeInMb'
 import { hideDraggableArea } from './showDraggableArea'
 import type { ResBody as ResBodyGetSignedUrl } from '@back/api/va/getSignedUrlRouter'
@@ -9,18 +8,15 @@ import type { ResBody as ResBodyMakeFilePublic } from '@back/api/va/makeFilePubl
 import axios from 'axios'
 import { toast } from 'sonner'
 import { asyncDelay } from '@shared/utils/delay'
+import type { FroalaProps } from '@entities/quotation/ui/froala/types'
 
-type Props = {
-  editor: FroalaEditor | null
-  files: File[]
-  type: 'image' | 'file'
-}
+type BeforeUpload = NonNullable<FroalaProps['beforeUpload']>
 
 /**
  * This is async function, but we need to return false or undefined immediately
  * We run it without await and assume it will do the job
  */
-export const beforeUpload = async (props: Props): Promise<void> => {
+export const beforeUpload: BeforeUpload = async (props) => {
   if (props.editor === null) {
     throw new Error('Editor passed to beforeUpload method is null')
   }
