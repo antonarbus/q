@@ -1,5 +1,6 @@
 export const apiUrl = {
   root: '/',
+  health: '/api/health',
   // auth
   register: '/api/register',
   logIn: '/api/login',
@@ -23,8 +24,8 @@ export const apiUrl = {
   getBookmarks: '/api/get-bookmarks',
   getBookmarkCategories: '/api/get-bookmark-categories',
   deleteBookmark: '/api/delete-bookmark',
-  // va
-  upload: '/api/upload',
+  // upload
+  upload: '/api/upload', // not in use
   getSignedUrl: '/api/get-signed-url',
   makeFilePublic: '/api/make-file-public',
   // visitors
