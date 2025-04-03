@@ -1,7 +1,7 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { bucket, storageFolderName } from '@back/shared/services/storage'
+import { bucket, getFilePath } from '@back/shared/services/storage'
 import type { Item } from '@entities/quotation'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { BookmarkModel } from '@back/entities/bookmark'
@@ -39,7 +39,7 @@ const deleteBookmark: RouterHandler = async (req, res, next) => {
   }
 
   const [files] = await bucket.getFiles({
-    prefix: `${email}/${storageFolderName.bookmarks}/${bookmarkId}.json`,
+    prefix: getFilePath({ email, fileType: 'bookmark', bookmarkId }),
   })
 
   if (files.length === 0) {

@@ -3,7 +3,7 @@ import { dispatch, getState } from '@shared/lib/redux'
 import { jwtDecode } from 'jwt-decode'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { useGetAccessTokenQuery, userRole, userSlice } from '@entities/user'
-import { navItemKey } from '@shared/consts/navItemKey'
+import { navItemId } from '@shared/consts/navItemId'
 import { createLoadingMenuIconMachine, navSlice } from '@shared/nav'
 import { agGridSlice } from '@shared/lib/ag_grid/agGridSlice'
 import { createActor } from 'xstate'
@@ -14,7 +14,7 @@ export const {
 } = Promise.withResolvers<'fetched' | 'failed'>()
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
-  navItemKey: navItemKey.login,
+  navItemId: navItemId.login,
 })
 
 const loadingIconActor = createActor(loadingMenuIconMachine).start()
@@ -85,25 +85,23 @@ export const AccessToken = (): React.JSX.Element => {
         }),
       )
 
-      dispatch(
-        navSlice.actions.hideNavItems({ navItemIdKeys: [navItemKey.login] }),
-      )
+      dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }))
 
       dispatch(
         navSlice.actions.showNavItems({
-          navItemIdKeys: [navItemKey.profile],
+          navItemIds: [navItemId.profile],
         }),
       )
 
       if (roles.includes(userRole.superAdmin)) {
-        dispatch(navSlice.actions.showNavItems({ navItemIdKeys: ['admin'] }))
+        dispatch(navSlice.actions.showNavItems({ navItemIds: ['admin'] }))
       } else {
-        dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: ['admin'] }))
+        dispatch(navSlice.actions.hideNavItems({ navItemIds: ['admin'] }))
       }
 
       dispatch(
         navSlice.actions.stopLoadingIcon({
-          navItemKey: navItemKey.login,
+          navItemId: navItemId.login,
         }),
       )
 
@@ -123,19 +121,17 @@ export const AccessToken = (): React.JSX.Element => {
 
       dispatch(userSlice.actions.forgetLoggedUser())
 
-      dispatch(
-        navSlice.actions.showNavItems({ navItemIdKeys: [navItemKey.login] }),
-      )
+      dispatch(navSlice.actions.showNavItems({ navItemIds: [navItemId.login] }))
 
       dispatch(
         navSlice.actions.hideNavItems({
-          navItemIdKeys: [navItemKey.profile],
+          navItemIds: [navItemId.profile],
         }),
       )
 
       dispatch(
         navSlice.actions.stopLoadingIcon({
-          navItemKey: navItemKey.login,
+          navItemId: navItemId.login,
         }),
       )
 

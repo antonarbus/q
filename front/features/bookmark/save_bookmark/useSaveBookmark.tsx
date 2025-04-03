@@ -49,9 +49,9 @@ export const useSaveBookmark = ({
   useUpdateEffect(() => {
     if (isSuccess) {
       if (data.message === 'saved') {
-        toast.success('Saved', { position: 'bottom-center' })
+        toast.success('Saved')
       } else if (data.message === 'updated') {
-        toast.info('Updated', { position: 'bottom-center' })
+        toast.info('Updated')
       }
 
       void updateItemCategories()

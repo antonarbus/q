@@ -3,7 +3,7 @@ import { bucket } from '@back/shared/services/storage'
 import { getEnvVarOrThrow } from '@back/shared/utils/getEnvVar'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { userRole } from '@back/shared/consts/userRole'
-import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
+import { getUserFromRefreshToken } from '@back/entities/user'
 import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 // https://cloud.google.com/storage/docs/samples/storage-cors-configuration#storage_cors_configuration-nodejs
@@ -17,7 +17,7 @@ type RouterHandler = (
 export const setBucketCors = Router()
 
 const configureBucketCors: RouterHandler = async (req, res, next) => {
-  const { roles } = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const { roles } = getUserFromRefreshToken({ req })
 
   if (!roles.includes(userRole.superAdmin)) {
     res.status(httpStatus.forbidden_403).json({ message: 'forbidden' })
@@ -36,9 +36,9 @@ const configureBucketCors: RouterHandler = async (req, res, next) => {
         'https://localhost:3000', // pdf download does not work without port
         '*', // pdf download does not work without port
       ],
-      method: ['GET'],
+      method: ['PUT', 'POST', 'GET'],
       maxAgeSeconds: 3600,
-      responseHeader: ['Content-Type'],
+      responseHeader: ['Content-Type', 'x-goog-content-length-range'],
     },
   ])
 

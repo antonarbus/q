@@ -11,7 +11,7 @@ import type { NavigateState } from '@shared/types/NavigateState'
 import { type Location, useLocation, useParams } from 'react-router-dom'
 import { dispatch } from '@shared/lib/redux'
 import { navSlice } from '@shared/nav'
-import { navItemKey } from '@shared/consts/navItemKey'
+import { navItemId } from '@shared/consts/navItemId'
 import { route } from '@shared/consts/route'
 import { appSlice } from '@shared/appSlice'
 
@@ -54,20 +54,18 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
         }),
       )
 
-      dispatch(
-        navSlice.actions.hideNavItems({ navItemIdKeys: [navItemKey.login] }),
-      )
+      dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }))
 
       dispatch(
         navSlice.actions.showNavItems({
-          navItemIdKeys: [navItemKey.profile],
+          navItemIds: [navItemId.profile],
         }),
       )
 
       if (data.roles?.includes(userRole.superAdmin)) {
-        dispatch(navSlice.actions.showNavItems({ navItemIdKeys: ['admin'] }))
+        dispatch(navSlice.actions.showNavItems({ navItemIds: ['admin'] }))
       } else {
-        dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: ['admin'] }))
+        dispatch(navSlice.actions.hideNavItems({ navItemIds: ['admin'] }))
       }
 
       if (location.pathname.includes(route.quotations)) {

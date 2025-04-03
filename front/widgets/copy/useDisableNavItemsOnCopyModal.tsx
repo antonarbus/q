@@ -1,6 +1,6 @@
 import { dispatch } from '@shared/lib/redux'
 import { useEffectOnce, useUnmount } from 'react-use'
-import { navItemKey } from '@shared/consts/navItemKey'
+import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 import { route } from '@shared/consts/route'
 
@@ -8,12 +8,12 @@ export const useDisableNavItemsOnCopyModal = (): void => {
   useEffectOnce(() => {
     dispatch(
       navSlice.actions.disableTopNavItems({
-        exceptNavItemIdKeys: [
-          navItemKey.quotations,
-          navItemKey.bookmarks,
-          navItemKey.new,
-          navItemKey.back,
-          navItemKey.profile,
+        exceptNavItemIds: [
+          navItemId.quotations,
+          navItemId.bookmarks,
+          navItemId.new,
+          navItemId.back,
+          navItemId.profile,
         ],
       }),
     )
@@ -23,12 +23,12 @@ export const useDisableNavItemsOnCopyModal = (): void => {
     if (window.location.pathname.includes(route.bookmarks)) {
       dispatch(
         navSlice.actions.enableTopNavItems({
-          exceptNavItemIdKeys: [
-            navItemKey.save,
-            navItemKey.pdf,
-            navItemKey.excel,
-            navItemKey.insert,
-            navItemKey.bookmarks,
+          exceptNavItemIds: [
+            navItemId.save,
+            navItemId.pdf,
+            navItemId.excel,
+            navItemId.insert,
+            navItemId.bookmarks,
           ],
         }),
       )
@@ -39,12 +39,12 @@ export const useDisableNavItemsOnCopyModal = (): void => {
     if (window.location.pathname.includes(route.quotations)) {
       dispatch(
         navSlice.actions.enableTopNavItems({
-          exceptNavItemIdKeys: [
-            navItemKey.save,
-            navItemKey.pdf,
-            navItemKey.excel,
-            navItemKey.insert,
-            navItemKey.quotations,
+          exceptNavItemIds: [
+            navItemId.save,
+            navItemId.pdf,
+            navItemId.excel,
+            navItemId.insert,
+            navItemId.quotations,
           ],
         }),
       )

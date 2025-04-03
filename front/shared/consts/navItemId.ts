@@ -1,5 +1,5 @@
-export const navItemKey = {
-  top: 'top',
+export const navItemId = {
+  burger: 'burger',
   pending: 'pending',
   new: 'new',
   save: 'save',
@@ -25,4 +25,4 @@ export const navItemKey = {
   visitors: 'visitors',
 } as const
 
-export type NavItemKey = (typeof navItemKey)[keyof typeof navItemKey]
+export type NavItemId = (typeof navItemId)[keyof typeof navItemId]

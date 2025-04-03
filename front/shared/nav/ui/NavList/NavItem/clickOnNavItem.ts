@@ -1,12 +1,12 @@
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
 import { navSlice } from '../../../navSlice'
-import type { MenuItemType } from '../../../type'
+import type { NavItem } from '../../../type'
+import { navItemId } from '@shared/consts/navItemId'
 
 type Props = {
   e: MouseEvent
-  navItem: MenuItemType | undefined
-  id: string
+  navItem: NavItem
   navItemRef: React.RefObject<React.ComponentRef<'li'> | null>
   disabled: boolean
 }
@@ -14,14 +14,13 @@ type Props = {
 export const clickOnNavItem = ({
   e,
   navItem,
-  id,
   navItemRef,
   disabled,
 }: Props): void => {
   ;(document.activeElement as HTMLElement).blur() // to prevent open an active navItem link on Enter key
 
-  const link = navItem?.link
-  const func = navItem?.func
+  const link = navItem.link
+  const func = navItem.func
 
   if (disabled) {
     return
@@ -44,7 +43,7 @@ export const clickOnNavItem = ({
   e.preventDefault()
 
   // handle burger close separately
-  const isBurger = getState().nav.idsToCurrentMenuItems.includes('burger')
+  const isBurger = getState().nav.currentMenuNavItemId === navItemId.burger
 
   if (isBurger) {
     dispatch(navSlice.actions.closeMenu())
@@ -53,10 +52,11 @@ export const clickOnNavItem = ({
   }
 
   // if click on NavItem for which Menu is opened, then close it, otherwise it closes and opens immediately
-  const currentMenuId = getState().nav.idsToCurrentMenuItems.at(-1)
+  const currentMenuNavItemId = getState().nav.currentMenuNavItemId
 
   const isMenuOpenedUnderThisNavItem =
-    currentMenuId === id && currentMenuId !== 'top'
+    currentMenuNavItemId === navItem.id &&
+    currentMenuNavItemId !== navItemId.burger
 
   if (isMenuOpenedUnderThisNavItem) {
     dispatch(navSlice.actions.closeMenu())
@@ -73,7 +73,7 @@ export const clickOnNavItem = ({
   if (navItemRef.current !== null) {
     // open menu and determine its position (right: 0 OR left: 0)
     const navItemRightPos = navItemRef.current.getBoundingClientRect().right
-    dispatch(navSlice.actions.setNavItemRightPos(navItemRightPos))
-    dispatch(navSlice.actions.openMenuWithId(id))
+    dispatch(navSlice.actions.setNavItemRightPos({ navItemRightPos }))
+    dispatch(navSlice.actions.openMenuWithId({ navItemId: navItem.id }))
   }
 }

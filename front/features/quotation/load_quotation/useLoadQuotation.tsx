@@ -10,12 +10,14 @@ import {
   newQuotationTemplate,
   backToQuotationRef,
 } from '@entities/quotation'
-import { navItemKey } from '@shared/consts/navItemKey'
+import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 import { toast } from 'sonner'
 import { appSlice } from '@shared/appSlice'
 
 export function useLoadQuotation(): void {
+  const location = useLocation()
+
   const {
     mutate: getQuotation,
     data,
@@ -25,37 +27,37 @@ export function useLoadQuotation(): void {
   } = useGetQuotationMutation()
 
   const quotationId = router.state.matches.at(0)?.params.quotationId
-  const location = useLocation()
-
   const quotationKey = useSelector((state) => state.app.quotationKey)
 
-  const quotationType = (location.state as QuotationLocationState)
-    ?.quotationType
+  const quotationType =
+    (location.state as QuotationLocationState)?.quotationType ?? 'new'
+
+  // todo: it is changed when settings modal is closed, it triggers useEffect, check it
+  // todo: maybe do it via redux, easier to debug
+  console.log('🚀 ~ quotationType:', quotationType)
 
   useEffect(() => {
-    const previousQuotation = backToQuotationRef.current
+    const previousQuotationData = backToQuotationRef.current
 
     dispatch(quotationSlice.actions.resetQuotationReducer())
     dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
-    dispatch(
-      navSlice.actions.hideNavItems({ navItemIdKeys: [navItemKey.back] }),
-    )
+    dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.back] }))
 
     dispatch(
       navSlice.actions.enableNavItems({
-        navItemIdKeys: [
-          navItemKey.save,
-          navItemKey.pdf,
-          navItemKey.excel,
-          navItemKey.share,
-          navItemKey.insert,
+        navItemIds: [
+          navItemId.save,
+          navItemId.pdf,
+          navItemId.excel,
+          navItemId.share,
+          navItemId.insert,
         ],
       }),
     )
 
     // load previous quotation
-    if (quotationType === 'previous' && previousQuotation) {
+    if (quotationType === 'previous' && previousQuotationData) {
       dispatch(
         appSlice.actions.showLoadingOverlay({
           showLoader: true,
@@ -67,7 +69,7 @@ export function useLoadQuotation(): void {
       setTimeout(() => {
         dispatch(
           quotationSlice.actions.loadQuotationReducer({
-            quotation: previousQuotation,
+            quotation: previousQuotationData,
           }),
         )
       }, 100)
@@ -103,9 +105,7 @@ export function useLoadQuotation(): void {
         dispatch(appSlice.actions.hideLoadingOverlay())
       }, 750)
 
-      dispatch(
-        navSlice.actions.underlineNavItem({ navItemIdKey: navItemKey.new }),
-      )
+      dispatch(navSlice.actions.underlineNavItem({ navItemId: navItemId.new }))
 
       return
     }
@@ -121,16 +121,14 @@ export function useLoadQuotation(): void {
 
       getQuotation({ id: quotationId })
     }
-  }, [quotationKey])
+  }, [quotationKey, quotationType])
 
+  // above we triggered quotation loading, now we handle the response
   useUpdateEffect(() => {
-    if (isSuccess) {
-      const quotation = data.quotation
+    const quotation = data?.quotation
 
-      if (quotation === undefined) {
-        return
-      }
-
+    if (isSuccess && quotation !== undefined) {
+      // check if quotation json is corrupted on the server side
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       if (quotation.blocks === undefined) {
         toast.warning('Quotation corrupted')
@@ -152,12 +150,12 @@ export function useLoadQuotation(): void {
 
         dispatch(
           navSlice.actions.enableNavItems({
-            navItemIdKeys: [
-              navItemKey.save,
-              navItemKey.pdf,
-              navItemKey.excel,
-              navItemKey.share,
-              navItemKey.insert,
+            navItemIds: [
+              navItemId.save,
+              navItemId.pdf,
+              navItemId.excel,
+              navItemId.share,
+              navItemId.insert,
             ],
           }),
         )

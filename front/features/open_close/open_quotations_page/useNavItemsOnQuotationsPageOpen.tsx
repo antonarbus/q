@@ -1,19 +1,19 @@
 import { dispatch } from '@shared/lib/redux'
 import { useEffectOnce, useUnmount } from 'react-use'
-import { navItemKey } from '@shared/consts/navItemKey'
+import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 
 export const useNavItemsOnQuotationsPageOpen = (): void => {
   useEffectOnce(() => {
     dispatch(
       navSlice.actions.disableNavItems({
-        navItemIdKeys: [
-          navItemKey.save,
-          navItemKey.pdf,
-          navItemKey.excel,
-          navItemKey.share,
-          navItemKey.quotations,
-          navItemKey.insert,
+        navItemIds: [
+          navItemId.save,
+          navItemId.pdf,
+          navItemId.excel,
+          navItemId.share,
+          navItemId.quotations,
+          navItemId.insert,
         ],
       }),
     )
@@ -22,7 +22,7 @@ export const useNavItemsOnQuotationsPageOpen = (): void => {
 
     dispatch(
       navSlice.actions.underlineNavItem({
-        navItemIdKey: navItemKey.quotations,
+        navItemId: navItemId.quotations,
       }),
     )
   })

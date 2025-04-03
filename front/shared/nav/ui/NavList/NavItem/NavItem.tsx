@@ -1,83 +1,36 @@
-import { css } from '@emotion/react'
-import { getState, useSelector } from '@shared/lib/redux'
-import { theme } from '@shared/theme'
+import { useSelector } from '@shared/lib/redux'
 import { useRef } from 'react'
-import { TiArrowSortedDown } from 'react-icons/ti'
 import { Link, useLocation } from 'react-router-dom'
-import { useWindowSize } from 'react-use'
 import { clickOnNavItem } from './clickOnNavItem'
-import { ErrorIcon } from './ErrorIcon'
-import { Icon } from './Icon'
 import { Menu } from './Menu'
-import { SpinnerIcon } from './SpinnerIcon'
-import { SuccessIcon } from './SuccessIcon'
-import { Tooltip } from '@mui/material'
+import { NavName } from './NavName'
+import { NavItemLayout } from './NavItemLayout'
+import { ArrowForNestedMenu } from './ArrowForNestedMenu'
+import { IconWithLoader } from './IconWithLoader'
+import type { NavItem as NavItemType } from '@shared/nav/type'
 
 type Props = {
-  children?: React.ReactNode
-  id: string
+  navItem: NavItemType
 }
 
-/**
- * @descriptions
- * - navItem gets 'menu id' from 'navStructure'
- * - menu is placed under navItem (li)
- * - and we can open corresponding menu on click event
- * - reference to menu item <li> to pass it into menu
- * - needs to calculate how NavItem' is far from the screen to understand how to place Menu
- * - Menu can be placed with style left:0 or right:0
- * - required to avoid Menu to go over the narrow window
- */
-
-export const NavItem = ({ children, id }: Props): React.JSX.Element => {
+export const NavItem = ({ navItem }: Props): React.JSX.Element => {
   const location = useLocation()
   // required to avoid Menu to go over the narrow window
   const navItemRef = useRef<React.ComponentRef<'li'> | null>(null)
 
-  /**
-   * - with media query at some width we hide names and show icons
-   * - if icon is not provided in navStructure we may generate it dynamically
-   * - do it only for such width when only icons are show
-   * - for that reason we track window's width with 'useWindowSize' hook
-   */
-  const windowWidth = useWindowSize().width
-  const widthWhenIconsAreShown = getState().nav.mediaQueryWidth.icon
-  const shouldDisplayIcon = windowWidth < widthWhenIconsAreShown
-
   // needs to open only menu under clicked navItem, otherwise multiple menus are opened under all navItems
-  const shouldOpenThisMenu = useSelector(
-    (state) => state.nav.idsToCurrentMenuItems.at(1) === id,
+  const isMenuOpen = useSelector(
+    (state) => state.nav.idsToCurrentMenuItems.at(1) === navItem.id,
   )
 
-  const navItem = useSelector((state) => {
-    const topNavLevel = state.nav.navStructure[0]
-
-    if (topNavLevel === undefined) {
-      return undefined
-    }
-
-    if (topNavLevel.menuItems === undefined) {
-      return undefined
-    }
-
-    const navItemFromTopNavLevel = topNavLevel.menuItems.find(
-      (menuItem) => menuItem.id === id,
-    )
-
-    return navItemFromTopNavLevel
-  })
-
-  const isNestedMenu = Boolean(navItem?.menuItems)
-  const icon = navItem?.icon
-  const name = navItem?.name
-  const link = navItem?.link ?? ''
-  const isFunc = Boolean(navItem?.func)
-  const isLoading = navItem?.isLoading
-  const isSuccess = navItem?.isSuccess
-  const isError = navItem?.isError
-  const disabled = Boolean(navItem?.disabled)
-  const isActive = navItem?.isActive
-  const tooltipText = navItem?.tooltip
+  const name = navItem.name
+  const link = navItem.link ?? ''
+  const isFunc = Boolean(navItem.func)
+  const isLoading = navItem.isLoading
+  const isSuccess = navItem.isSuccess
+  const isError = navItem.isError
+  const disabled = Boolean(navItem.disabled)
+  const isActive = Boolean(navItem.isActive)
 
   const fixedLink = `${location.pathname}/${link}`
     .replace('.', '')
@@ -87,61 +40,10 @@ export const NavItem = ({ children, id }: Props): React.JSX.Element => {
   const to = link.includes('.') ? fixedLink : link
 
   return (
-    <li
-      ref={navItemRef}
-      className='nav-item'
-      css={css`
-        display: flex;
-        position: relative;
-        align-items: center;
-        justify-content: center;
-        padding: 0px 5px;
-        margin-left: ${theme.menu.navItem.marginLeft}px;
-        margin-right: ${theme.menu.navItem.marginRight}px;
-        user-select: none;
-
-        & > a {
-          display: flex;
-          align-items: center;
-          position: relative;
-          text-decoration: none;
-          -webkit-user-drag: none;
-          cursor: ${disabled ? 'default' : 'pointer'};
-
-          &:hover,
-          &:focus,
-          &:active {
-            filter: brightness(${disabled ? 1 : 1.2});
-          }
-
-          .nav-item-name {
-            margin-left: 5px;
-            margin-right: 5px;
-            color: ${disabled ? '#585858' : theme.colors.greyFont};
-            white-space: nowrap;
-            text-decoration: ${isActive ? 'underline' : 'none'};
-          }
-
-          .arrow-for-nested-menu {
-            display: none;
-            position: absolute;
-            top: calc(50% + 2px);
-            transform: translateY(-50%);
-            right: -12px;
-            color: grey;
-            height: 14px;
-          }
-
-          &:hover > .arrow-for-nested-menu,
-          &:focus > .arrow-for-nested-menu {
-            display: block;
-          }
-        }
-
-        @media screen and (max-width: 480px) {
-          position: static;
-        }
-      `}
+    <NavItemLayout
+      navItemRef={navItemRef}
+      disabled={disabled}
+      isActive={isActive}
     >
       <Link
         to={to}
@@ -150,70 +52,23 @@ export const NavItem = ({ children, id }: Props): React.JSX.Element => {
             e.preventDefault()
           }
 
-          if (isLoading) {
-            return
-          }
-
-          if (isSuccess) {
-            return
-          }
-
-          if (isError) {
-            return
-          }
-
-          if (disabled) {
+          if (isLoading || isSuccess || isError || disabled) {
             e.preventDefault()
 
             return
           }
 
-          clickOnNavItem({ e, navItem, id, navItemRef, disabled })
+          clickOnNavItem({ e, navItem, navItemRef, disabled })
         }}
-        // onMouseEnter={() => {
-        //   console.log({ link, to, pathname: location.pathname })
-        // }}
+        css={{
+          position: 'relative',
+        }}
       >
-        {icon && isLoading && <SpinnerIcon />}
-        {icon && isSuccess && <SuccessIcon />}
-        {icon && isError && <ErrorIcon />}
-        {icon && !isLoading && !isSuccess && !isError && (
-          <Tooltip
-            title={tooltipText}
-            placement='bottom'
-            enterDelay={500}
-            enterNextDelay={500}
-          >
-            <span className='element-that-keep-ref-from-mui'>
-              <Icon
-                icon={icon}
-                disabled={disabled}
-              />
-            </span>
-          </Tooltip>
-        )}
-        {!icon && shouldDisplayIcon && (
-          <Tooltip
-            title={tooltipText}
-            placement='bottom'
-            enterDelay={500}
-            enterNextDelay={500}
-          >
-            <span className='element-that-keep-ref-from-mui'>
-              <Icon
-                icon={name?.[0]}
-                disabled={disabled}
-              />
-            </span>
-          </Tooltip>
-        )}
-        {name && <span className='nav-item-name'>{name}</span>}
-        {isNestedMenu && !disabled && (
-          <TiArrowSortedDown className='arrow-for-nested-menu' />
-        )}
-        {children}
+        <IconWithLoader navItem={navItem} />
+        <NavName name={name} />
+        <ArrowForNestedMenu navItem={navItem} />
       </Link>
-      {shouldOpenThisMenu && <Menu />}
-    </li>
+      {isMenuOpen && <Menu />}
+    </NavItemLayout>
   )
 }

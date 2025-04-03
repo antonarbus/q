@@ -11,7 +11,5 @@ export const openQuotationPageAndLoadNew = (): void => {
 
   dispatch(appSlice.actions.reRenderQuotation())
 
-  void router.navigate(`/${route.new}`, {
-    state,
-  })
+  void router.navigate(`/${route.new}`, { state })
 }

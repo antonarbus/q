@@ -1,6 +1,6 @@
 import type { WorkerResponseMessage } from './excelWorker'
 import { createLoadingMenuIconMachine } from '@shared/nav'
-import { navItemKey } from '@shared/consts/navItemKey'
+import { navItemId } from '@shared/consts/navItemId'
 import { createActor } from 'xstate'
 import { getState } from '@shared/lib/redux'
 import type { Quotation } from '@entities/quotation'
@@ -12,7 +12,7 @@ export type WorkerRequestMessage = {
 }
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
-  navItemKey: navItemKey.share,
+  navItemId: navItemId.share,
 })
 
 const loadingIconActor = createActor(loadingMenuIconMachine).start()
@@ -45,14 +45,14 @@ export const downloadExcel = (): void => {
 
     setTimeout(() => {
       loadingIconActor.send({ type: 'show success icon' })
-      toast.info('File downloaded', { position: 'bottom-center' })
+      toast.info('File downloaded')
     }, 1000)
   }
 
   worker.onerror = (): void => {
     setTimeout(() => {
       loadingIconActor.send({ type: 'show error icon' })
-      toast.error('Error downloading file', { position: 'bottom-center' })
+      toast.error('Error downloading file')
     }, 1000)
   }
 }

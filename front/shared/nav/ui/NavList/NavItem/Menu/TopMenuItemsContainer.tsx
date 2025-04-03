@@ -4,7 +4,7 @@ import { CloseMenuItem } from './MenuItem/CloseMenuItem'
 
 export const TopMenuItemsContainer = (): React.JSX.Element => {
   const isNestedMenu = useSelector(
-    (state) => state.nav.idsToNextMenuItems.length > 2,
+    (state) => state.nav.idsToCurrentMenuItems.length > 2,
   )
 
   return (

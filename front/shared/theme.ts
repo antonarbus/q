@@ -20,6 +20,7 @@ const customTheme = {
     topMenuItem: '#858383',
     darkBackground: 'rgb(52 52 52 / 95%)',
     greyFont: '#bcbcbc',
+    blue: '#0083bf',
   },
   nav: {
     height: 60,
@@ -34,14 +35,10 @@ const customTheme = {
   },
   menu: {
     width: 300,
-    paddingTop: 16,
-    paddingBottom: 16,
-    menuItem: {
-      height: 50,
-    },
+    paddingTop: 20,
+    paddingBottom: 20,
     navItem: {
-      marginLeft: 10,
-      marginRight: 10,
+      height: 50,
     },
   },
   block: {

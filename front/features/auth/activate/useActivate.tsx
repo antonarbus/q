@@ -3,7 +3,7 @@ import type { UseMutationResult } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { useActivateMutation, userSlice } from '@entities/user'
-import { navItemKey } from '@shared/consts/navItemKey'
+import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 import { toast } from 'sonner'
 
@@ -63,12 +63,10 @@ export const useActivate = (): Res => {
 
       dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
 
-      dispatch(
-        navSlice.actions.hideNavItems({ navItemIdKeys: [navItemKey.login] }),
-      )
+      dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }))
 
       dispatch(
-        navSlice.actions.showNavItems({ navItemIdKeys: [navItemKey.profile] }),
+        navSlice.actions.showNavItems({ navItemIds: [navItemId.profile] }),
       )
     }
 

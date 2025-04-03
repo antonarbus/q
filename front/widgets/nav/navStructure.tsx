@@ -32,24 +32,26 @@ import {
 import { openQuotationsPage } from '@features/open_close/open_quotations_page'
 import { openSaveQuotationModal } from '@features/open_close/open_save_quotation_modal'
 import { openSettingsModal } from '@features/open_close/open_settings_modal'
-import { navItemKey } from '@shared/consts/navItemKey'
+import { navItemId } from '@shared/consts/navItemId'
 import { route } from '@shared/consts/route'
-import type { MenuItemType } from '@shared/nav'
+import type { NavItem } from '@shared/nav'
 import { downloadPdf } from '@features/quotation/download_quotation_as_pdf'
 import { downloadExcel } from '@features/quotation/download_quotation_as_excel'
 import { FaRegFilePdf } from 'react-icons/fa'
 import { openShareQuotationModal } from '@features/open_close/open_share_quotation_modal'
 import { getState } from '@shared/lib/redux'
 import { saveExistingQuotation } from '@features/quotation/save_quotation'
+import { Burger } from '@shared/nav/ui/NavList/NavItem/Burger'
 
-export const navStructure: MenuItemType[] = [
+export const navStructure: NavItem[] = [
   {
-    id: navItemKey.top,
-    name: 'top',
+    id: navItemId.burger,
+    name: 'burger',
+    icon: <Burger />,
     isHidden: false,
-    menuItems: [
+    navItems: [
       {
-        id: navItemKey.back,
+        id: navItemId.back,
         icon: (
           <IoChevronBackOutline
             style={{ color: '#3bc3ff' }}
@@ -58,34 +60,28 @@ export const navStructure: MenuItemType[] = [
         ),
         isHidden: true,
         name: 'Back',
-        // shortcut: ['control', 'n'],
-        // link: route.back,
-        func: (): void => {
-          openQuotationPageAndLoadPrev()
-        },
+        func: openQuotationPageAndLoadPrev,
         isActive: true,
         tooltip: 'Back to quotation',
       },
       {
-        id: navItemKey.new,
+        id: navItemId.new,
         icon: <VscNewFile data-testid='new icon' />,
         isHidden: false,
         name: 'New',
-        // shortcut: ['control', 'n'],
         link: route.new,
-        func: (): void => {
-          openQuotationPageAndLoadNew()
-        },
+        func: openQuotationPageAndLoadNew,
         isActive: true,
         tooltip: 'New quotation',
       },
       {
-        id: navItemKey.save,
+        id: navItemId.save,
         icon: <FiSave data-testid='save icon' />,
         isHidden: false,
         name: 'Save',
-        // shortcut: ['control', 's'],
+        shortcut: ['control', 'shift', 's'],
         link: `./${route.save}`,
+        tooltip: 'Save or update quotation (shortcut: ctrl+shift+s)',
         func: (): void => {
           if (getState().quotation.id === 'new') {
             openSaveQuotationModal()
@@ -93,18 +89,17 @@ export const navStructure: MenuItemType[] = [
             void saveExistingQuotation()
           }
         },
-        tooltip: 'Save or update quotation',
       },
       {
-        id: navItemKey.share,
+        id: navItemId.share,
         icon: <FaRegShareFromSquare data-testid='share icon' />,
         isHidden: false,
         name: 'Share',
         disabled: false,
         tooltip: 'Share quotation',
-        menuItems: [
+        navItems: [
           {
-            id: navItemKey.link,
+            id: navItemId.link,
             icon: <ImLink data-testid='link icon' />,
             name: 'Link',
             isHidden: false,
@@ -113,153 +108,132 @@ export const navStructure: MenuItemType[] = [
             func: openShareQuotationModal,
           },
           {
-            id: navItemKey.pdf,
+            id: navItemId.pdf,
             icon: <FaRegFilePdf data-testid='pdf icon' />,
             isHidden: false,
             disabled: false,
             name: 'Download as .pdf',
             tooltip: 'Download as .pdf',
-            func: (): void => {
-              void downloadPdf()
-            },
+            func: downloadPdf,
           },
           {
-            id: navItemKey.excel,
+            id: navItemId.excel,
             icon: <RiFileExcel2Line data-testid='excel icon' />,
             isHidden: false,
             disabled: false,
             name: 'Download as .xlsx',
             tooltip: 'Download as .xlsx',
-            func: (): void => {
-              downloadExcel()
-            },
+            func: downloadExcel,
           },
         ],
       },
-
       {
-        id: navItemKey.insert,
+        id: navItemId.insert,
         icon: <RiMenuAddFill data-testid='insert icon' />,
         isHidden: false,
         name: 'Insert',
         disabled: true,
-        menuItems: [
+        navItems: [
           {
-            id: navItemKey.block,
+            id: navItemId.block,
             name: 'Block',
             icon: <TbRectangleVertical />,
             isHidden: false,
-            menuItems: [
+            navItems: [
               {
-                id: navItemKey.textItem,
+                id: navItemId.textItem,
                 name: 'Text',
                 icon: <IoText />,
                 isHidden: false,
-                shortcut: ['control', '2'],
-                func: (e?: React.MouseEvent): void => {
-                  insertTextBlock(e)
-                },
+                shortcut: ['control', 'shift', '2'],
+                func: insertTextBlock,
               },
               {
-                id: navItemKey.boqItem,
+                id: navItemId.boqItem,
                 name: 'Items',
                 icon: <FaRegRectangleList />,
                 isHidden: false,
-                shortcut: ['control', '3'],
-                func: (e?: React.MouseEvent): void => {
-                  insertBoqBlock(e)
-                },
+                shortcut: ['control', 'shift', '3'],
+                func: insertBoqBlock,
               },
               {
-                id: navItemKey.priceItem,
+                id: navItemId.priceItem,
                 name: 'Price',
                 icon: <FiDollarSign />,
                 isHidden: false,
-                shortcut: ['control', '4'],
-                func: (e?: React.MouseEvent): void => {
-                  insertPriceBlock(e)
-                },
+                shortcut: ['control', 'shift', '4'],
+                func: insertPriceBlock,
               },
             ],
           },
           {
-            id: navItemKey.boqRow,
+            id: navItemId.boqRow,
             name: 'Row',
             icon: <FaGripLines />,
             isHidden: false,
-            shortcut: ['control', '1'],
-            func: (e?: React.MouseEvent): void => {
-              insertBoqRow(e)
-            },
+            shortcut: ['control', 'shift', '1'],
+            func: insertBoqRow,
           },
         ],
         tooltip: 'Insert block or row',
       },
       {
-        id: navItemKey.bookmarks,
+        id: navItemId.bookmarks,
         icon: <PiFolderSimpleStarDuotone data-testid='bookmarks icon' />,
         isHidden: false,
         name: 'Bookmarks',
         link: route.bookmarks,
-        func: (e?: React.MouseEvent): void => {
-          openBookmarksPage()
-        },
+        func: openBookmarksPage,
         tooltip: 'Your bookmarks',
       },
       {
-        id: navItemKey.quotations,
+        id: navItemId.quotations,
         icon: <CiViewTable data-testid='quotations icon' />,
         isHidden: false,
         name: 'Quotations',
         link: route.quotations,
-        func: (e?: React.MouseEvent): void => {
-          openQuotationsPage()
-        },
+        func: openQuotationsPage,
         tooltip: 'Your quotations',
       },
       {
-        id: navItemKey.login,
+        id: navItemId.login,
         icon: <FiLogIn data-testid='login icon' />,
         isHidden: false,
         name: 'Log in',
         link: `./${route.login}`,
-        func: (e?: React.MouseEvent): void => {
-          openLoginModal()
-        },
+        func: openLoginModal,
         tooltip: 'Log in',
       },
       {
-        id: navItemKey.profile,
+        id: navItemId.profile,
         icon: <Person data-testid='profile icon' />,
         name: 'Profile',
         isHidden: true,
-        menuItems: [
+        navItems: [
           {
-            id: navItemKey.settings,
+            id: navItemId.settings,
             icon: <Settings />,
             isHidden: false,
             name: 'Settings',
             link: `./${route.settings}`,
-            func: (e?: React.MouseEvent): void => {
-              openSettingsModal()
-            },
+            func: openSettingsModal,
           },
           {
-            id: navItemKey.admin,
+            id: navItemId.admin,
             icon: <RiAdminLine data-testid='admin icon' />,
             isHidden: false,
             name: 'Admin',
             tooltip: 'Admin links',
-            menuItems: [
+            navItems: [
               {
-                id: navItemKey.users,
+                id: navItemId.users,
                 icon: <FaUsersGear />,
                 isHidden: false,
                 name: 'Users',
                 link: `/${route.users}`,
               },
               {
-                id: navItemKey.visitors,
+                id: navItemId.visitors,
                 icon: <IoStatsChartOutline />,
                 isHidden: false,
                 name: 'Visitors',
@@ -268,7 +242,7 @@ export const navStructure: MenuItemType[] = [
             ],
           },
           {
-            id: navItemKey.logout,
+            id: navItemId.logout,
             icon: <FiLogOut />,
             isHidden: false,
             name: 'Log out',

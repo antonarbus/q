@@ -9,7 +9,7 @@ import {
   useSaveQuotationMutation,
   type ShareQuotationFormValues,
 } from '@entities/quotation'
-import { navItemKey } from '@shared/consts/navItemKey'
+import { navItemId } from '@shared/consts/navItemId'
 import { nanoid } from '@shared/lib/nanoid'
 import { createLoadingMenuIconMachine, navSlice } from '@shared/nav'
 import { toast } from 'sonner'
@@ -30,7 +30,7 @@ type Res = {
 }
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
-  navItemKey: navItemKey.share,
+  navItemId: navItemId.share,
 })
 
 const loadingIconActor = createActor(loadingMenuIconMachine).start()
@@ -66,18 +66,16 @@ export const useShareQuotation = ({
     if (isSuccess && quotation !== undefined) {
       // may save new quotation by sharing the link, strange, but maybe nice
       if (data.message === 'saved') {
-        toast.success('Saved', { position: 'bottom-center' })
+        toast.success(`Saved under id ${quotation.id}`)
       }
 
       // usual case
       if (data.message === 'updated') {
-        toast.info('Updated', { position: 'bottom-center' })
+        toast.info('Updated')
       }
 
       if (data.message === 'copied and saved') {
-        toast.success('Shared quotation was copied, saved and shared', {
-          position: 'bottom-center',
-        })
+        toast.success('Shared quotation was copied, saved and shared')
       }
 
       void fetchQuotations()

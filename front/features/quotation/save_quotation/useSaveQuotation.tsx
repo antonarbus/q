@@ -10,7 +10,7 @@ import {
   useSaveQuotationMutation,
   type SaveQuotationFormValues,
 } from '@entities/quotation'
-import { navItemKey } from '@shared/consts/navItemKey'
+import { navItemId } from '@shared/consts/navItemId'
 import { nanoid } from '@shared/lib/nanoid'
 import { createLoadingMenuIconMachine, navSlice } from '@shared/nav'
 import { toast } from 'sonner'
@@ -31,7 +31,8 @@ type Res = {
 }
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
-  navItemKey: navItemKey.save,
+  navItemId: navItemId.save,
+  navItemNameWhileLoading: 'Saving...',
 })
 
 const loadingIconActor = createActor(loadingMenuIconMachine).start()
@@ -65,15 +66,13 @@ export const useSaveQuotation = ({
   useUpdateEffect(() => {
     if (isSuccess && data.quotation !== undefined) {
       if (data.message === 'saved') {
-        toast.success(`Saved under id ${data.quotation.id}`, {
-          position: 'bottom-center',
-        })
+        toast.success(`Saved under id ${data.quotation.id}`)
       }
 
       // ths should not be a use case in main page, but we still may open /id/save route directly
       // this may be a use case in quotations page
       if (data.message === 'updated') {
-        toast.info('Updated', { position: 'bottom-center' })
+        toast.info('Updated')
       }
 
       // this should not be a use case in main page, but we still may open /id/save route directly
@@ -81,9 +80,6 @@ export const useSaveQuotation = ({
       if (data.message === 'copied and saved') {
         toast.success(
           `Shared quotation was copied and saved under id ${data.quotation.id}`,
-          {
-            position: 'bottom-center',
-          },
         )
       }
 
@@ -122,9 +118,8 @@ export const useSaveQuotation = ({
 
   const onSubmit = (e: React.FormEvent): void => {
     e.preventDefault()
-    const email = getState().user.email
 
-    if (!email) {
+    if (getState().user.email === null) {
       toast.warning('Not logged in')
 
       return

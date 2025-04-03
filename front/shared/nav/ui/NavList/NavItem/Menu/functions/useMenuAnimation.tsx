@@ -6,10 +6,11 @@ import { elementHeight } from '@shared/utils/elementHeight'
 import { navSlice } from '@shared/nav/navSlice'
 import { animate } from 'motion'
 import { nanoid } from '@reduxjs/toolkit'
+import type { NavItemId } from '@shared/consts/navItemId'
 
 type PropsForNavigateInMenu = {
   up: () => Promise<void> | void
-  down: (id: string) => Promise<void> | void
+  down: ({ navItemId }: { navItemId: NavItemId }) => Promise<void> | void
 }
 
 export const navigateInMenu: PropsForNavigateInMenu = {
@@ -30,7 +31,6 @@ type Props = {
   nextMenuRef: React.RefObject<React.ComponentRef<'div'> | null>
   menuContainerRef: React.RefObject<React.ComponentRef<'div'> | null>
   fakeMenuRef: React.RefObject<React.ComponentRef<'div'> | null>
-  idsToNextMenuItems: string[]
 }
 
 export const useMenuAnimation = ({
@@ -54,7 +54,7 @@ export const useMenuAnimation = ({
       elementHeight(fakeMenuRef.current) +
       theme.menu.paddingTop +
       theme.menu.paddingBottom +
-      theme.menu.menuItem.height
+      theme.menu.navItem.height
 
     return height
   }
@@ -68,12 +68,16 @@ export const useMenuAnimation = ({
       elementHeight(currentMenuRef.current) +
       theme.menu.paddingTop +
       theme.menu.paddingBottom +
-      theme.menu.menuItem.height
+      theme.menu.navItem.height
 
     return height
   }
 
-  const goDownInMenu = async (id: string): Promise<void> => {
+  const goDownInMenu = async ({
+    navItemId,
+  }: {
+    navItemId: NavItemId
+  }): Promise<void> => {
     if (currentMenuRef.current === null) {
       return
     }
@@ -84,7 +88,7 @@ export const useMenuAnimation = ({
 
     isGoingDown.current = true
 
-    dispatch(navSlice.actions.goDownInNextMenu(id))
+    dispatch(navSlice.actions.goDownInNextMenu({ navItemId }))
 
     setAnimateHeight(nanoid())
 
@@ -93,7 +97,7 @@ export const useMenuAnimation = ({
       animate(nextMenuRef.current, { x: ['100%', '0'] }, { duration }),
     ])
 
-    dispatch(navSlice.actions.goDownInCurrentMenu(id))
+    dispatch(navSlice.actions.goDownInCurrentMenu({ navItemId }))
   }
 
   const goUpInMenu = async (): Promise<void> => {

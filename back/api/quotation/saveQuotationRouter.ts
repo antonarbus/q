@@ -3,7 +3,7 @@ import type { FlattenMaps } from 'mongoose'
 import type { Quotation } from '@entities/quotation'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { bucket, storageFolderName } from '@back/shared/services/storage'
+import { bucket, getFilePath } from '@back/shared/services/storage'
 import { nanoid } from '@back/shared/lib/nanoid'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { QuotationModel } from '@back/entities/quotation'
@@ -57,7 +57,9 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
 
   const isNew = isNewQuotation || isExistingForeignQuotationSavedAsYourNew
 
-  const id = isExistingForeignQuotationSavedAsYourNew ? nanoid(5) : quotation.id
+  const quotationId = isExistingForeignQuotationSavedAsYourNew
+    ? nanoid(5)
+    : quotation.id
 
   const quotationDataFromDb = await QuotationModel.findOneAndUpdate(
     {
@@ -65,7 +67,7 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
       email,
     },
     {
-      id,
+      id: quotationId,
       email,
       name: quotation.name,
       category: quotation.category,
@@ -85,7 +87,7 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
     .select({ _id: 0, __v: 0 })
     .lean()
 
-  const filePath = `${email}/${storageFolderName.quotations}/${id}.json`
+  const filePath = getFilePath({ email, fileType: 'quotation', quotationId })
   const file = bucket.file(filePath)
 
   const contents = JSON.stringify(

@@ -1,7 +1,10 @@
 import { cls } from '@shared/consts/cls'
 
+const DROP_ELEMENT_SELECTOR = `.${cls.droppable} .editable-html .fr-wrapper`
+const DROP_HERE_TEXT_SELECTOR = `.${cls.dropHereText}`
+
 export const showDraggableArea = (): void => {
-  const droppableElements = document.querySelectorAll(`.${cls.droppable}`)
+  const droppableElements = document.querySelectorAll(DROP_ELEMENT_SELECTOR)
 
   droppableElements.forEach((element) => {
     if (element instanceof HTMLElement) {
@@ -9,7 +12,9 @@ export const showDraggableArea = (): void => {
     }
   })
 
-  const dropHereTextElements = document.querySelectorAll(`.${cls.dropHereText}`)
+  const dropHereTextElements = document.querySelectorAll(
+    DROP_HERE_TEXT_SELECTOR,
+  )
 
   dropHereTextElements.forEach((element) => {
     if (element instanceof HTMLElement) {
@@ -19,7 +24,7 @@ export const showDraggableArea = (): void => {
 }
 
 export const hideDraggableArea = (): void => {
-  const droppableElements = document.querySelectorAll(`.${cls.droppable}`)
+  const droppableElements = document.querySelectorAll(DROP_ELEMENT_SELECTOR)
 
   droppableElements.forEach((element) => {
     if (element instanceof HTMLElement) {
@@ -27,7 +32,9 @@ export const hideDraggableArea = (): void => {
     }
   })
 
-  const dropHereTextElements = document.querySelectorAll(`.${cls.dropHereText}`)
+  const dropHereTextElements = document.querySelectorAll(
+    DROP_HERE_TEXT_SELECTOR,
+  )
 
   dropHereTextElements.forEach((element) => {
     if (element instanceof HTMLElement) {

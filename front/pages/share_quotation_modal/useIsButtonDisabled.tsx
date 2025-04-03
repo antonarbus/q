@@ -1,4 +1,5 @@
 import type { ShareQuotationFormValues } from '@entities/quotation'
+import { getState } from '@shared/lib/redux'
 
 type Props = {
   shareQuotationFormValues: ShareQuotationFormValues
@@ -11,5 +12,13 @@ export const useIsButtonDisabled = ({
     shareQuotationFormValues.shareWithOptionSignal.value === 'persons' &&
     shareQuotationFormValues.sharedWithSignal.value.length === 0
 
-  return forgotToAddPerson
+  const currentlySharedWith = getState().quotation.sharedWith ?? []
+
+  const sharedWithValueChanged =
+    currentlySharedWith.toString() !==
+    shareQuotationFormValues.sharedWithSignal.value.toString()
+
+  const disabled = forgotToAddPerson || !sharedWithValueChanged
+
+  return disabled
 }

@@ -1,19 +1,19 @@
 import { dispatch } from '@shared/lib/redux'
 import { useEffectOnce, useUnmount } from 'react-use'
-import { navItemKey } from '@shared/consts/navItemKey'
+import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 
 export const useNavItemsOnBookmarksPageOpen = (): void => {
   useEffectOnce(() => {
     dispatch(
       navSlice.actions.disableNavItems({
-        navItemIdKeys: [
-          navItemKey.save,
-          navItemKey.pdf,
-          navItemKey.excel,
-          navItemKey.share,
-          navItemKey.bookmarks,
-          navItemKey.insert,
+        navItemIds: [
+          navItemId.save,
+          navItemId.pdf,
+          navItemId.excel,
+          navItemId.share,
+          navItemId.bookmarks,
+          navItemId.insert,
         ],
       }),
     )
@@ -21,7 +21,7 @@ export const useNavItemsOnBookmarksPageOpen = (): void => {
     dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
     dispatch(
-      navSlice.actions.underlineNavItem({ navItemIdKey: navItemKey.bookmarks }),
+      navSlice.actions.underlineNavItem({ navItemId: navItemId.bookmarks }),
     )
   })
 

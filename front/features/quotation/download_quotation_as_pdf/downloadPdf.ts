@@ -2,7 +2,7 @@ import { getState } from '@shared/lib/redux'
 import { cls } from '@shared/consts/cls'
 import { createActor } from 'xstate'
 import type { WorkerResponseMessage } from './pdfWorker'
-import { navItemKey } from '@shared/consts/navItemKey'
+import { navItemId } from '@shared/consts/navItemId'
 import { createLoadingMenuIconMachine } from '@shared/nav'
 import { toast } from 'sonner'
 
@@ -20,7 +20,7 @@ export type WorkerRequestMessage = {
 }
 
 const menuIconMachine = createLoadingMenuIconMachine({
-  navItemKey: navItemKey.share,
+  navItemId: navItemId.share,
 })
 
 const loadingIconActor = createActor(menuIconMachine).start()
@@ -120,14 +120,14 @@ export const downloadPdf = async (): Promise<void> => {
 
     setTimeout(() => {
       loadingIconActor.send({ type: 'show success icon' })
-      toast.info('File downloaded', { position: 'bottom-center' })
+      toast.info('File downloaded')
     }, 1000)
   }
 
   worker.onerror = (): void => {
     setTimeout(() => {
       loadingIconActor.send({ type: 'show error icon' })
-      toast.error('Error downloading file', { position: 'bottom-center' })
+      toast.error('Error downloading file')
     }, 1000)
   }
 }

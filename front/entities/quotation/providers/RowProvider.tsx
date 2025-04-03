@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useMemo } from 'react'
 import type { FroalaEditorRef } from '@shared/types/froala'
 import { useBoq } from './BoqBlockProvider'
 import type { Row } from '../types'
@@ -25,10 +25,19 @@ export const RowProvider = ({
 }: Props): React.JSX.Element => {
   const { boqRowEditorRefs } = useBoq()
 
-  const descriptionEditorRef = { current: null }
-  const itemPriceCellEditorRef = { current: null }
-  const qtyCellEditorRef = { current: null }
-  const priceCellEditorRef = { current: null }
+  const {
+    descriptionEditorRef,
+    itemPriceCellEditorRef,
+    qtyCellEditorRef,
+    priceCellEditorRef,
+  } = useMemo(() => {
+    return {
+      descriptionEditorRef: { current: null },
+      itemPriceCellEditorRef: { current: null },
+      qtyCellEditorRef: { current: null },
+      priceCellEditorRef: { current: null },
+    }
+  }, [])
 
   boqRowEditorRefs[rowIndex] = {
     description: descriptionEditorRef,

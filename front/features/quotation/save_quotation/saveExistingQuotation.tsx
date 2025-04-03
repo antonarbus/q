@@ -4,7 +4,7 @@ import {
   quotationSlice,
   saveQuotationMutationFn,
 } from '@entities/quotation'
-import { navItemKey } from '@shared/consts/navItemKey'
+import { navItemId } from '@shared/consts/navItemId'
 import { createLoadingMenuIconMachine, navSlice } from '@shared/nav'
 import { toast } from 'sonner'
 import { createActor } from 'xstate'
@@ -12,15 +12,14 @@ import type { AxiosError } from 'axios'
 import type { ResBody } from '@back/api/quotation/saveQuotationRouter'
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
-  navItemKey: navItemKey.save,
+  navItemId: navItemId.save,
+  navItemNameWhileLoading: 'Saving...',
 })
 
 const loadingIconActor = createActor(loadingMenuIconMachine).start()
 
 export const saveExistingQuotation = async (): Promise<void> => {
-  const { email } = getState().user
-
-  if (!email) {
+  if (getState().user.email === null) {
     toast.warning('Not logged in')
   }
 
@@ -36,15 +35,12 @@ export const saveExistingQuotation = async (): Promise<void> => {
 
     if (data.quotation !== undefined) {
       if (data.message === 'updated') {
-        toast.info('Updated', { position: 'bottom-center' })
+        toast.info('Updated')
       }
 
       if (data.message === 'copied and saved') {
         toast.success(
           `Shared quotation was copied and saved under id ${data.quotation.id}`,
-          {
-            position: 'bottom-center',
-          },
         )
       }
 

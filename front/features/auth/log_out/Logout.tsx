@@ -4,7 +4,7 @@ import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { deleteBookmarksCache } from '@entities/bookmark'
 import { deleteQuotationsCache } from '@entities/quotation'
 import { useLogOutMutation, userSlice } from '@entities/user'
-import { navItemKey } from '@shared/consts/navItemKey'
+import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 import { toast } from 'sonner'
 import { appSlice } from '@shared/appSlice'
@@ -34,17 +34,15 @@ export const Logout = (): React.JSX.Element => {
       dispatch(userSlice.actions.setAccessToken({ accessToken: null }))
       dispatch(userSlice.actions.forgetLoggedUser())
 
-      dispatch(
-        navSlice.actions.showNavItems({ navItemIdKeys: [navItemKey.login] }),
-      )
+      dispatch(navSlice.actions.showNavItems({ navItemIds: [navItemId.login] }))
 
       dispatch(
         navSlice.actions.hideNavItems({
-          navItemIdKeys: [navItemKey.profile],
+          navItemIds: [navItemId.profile],
         }),
       )
 
-      dispatch(navSlice.actions.hideNavItems({ navItemIdKeys: ['admin'] }))
+      dispatch(navSlice.actions.hideNavItems({ navItemIds: ['admin'] }))
 
       setTimeout(() => {
         dispatch(appSlice.actions.hideLoadingOverlay())

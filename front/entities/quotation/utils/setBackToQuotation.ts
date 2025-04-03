@@ -7,6 +7,6 @@ export const setBackToQuotation = (): void => {
 
   if (currentQuotation.id) {
     backToQuotationRef.current = currentQuotation
-    dispatch(navSlice.actions.showNavItems({ navItemIdKeys: ['back'] }))
+    dispatch(navSlice.actions.showNavItems({ navItemIds: ['back'] }))
   }
 }

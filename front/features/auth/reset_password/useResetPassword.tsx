@@ -4,7 +4,7 @@ import type { UseMutationResult } from '@tanstack/react-query'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useResetPasswordMutation, userRole, userSlice } from '@entities/user'
-import { navItemKey } from '@shared/consts/navItemKey'
+import { navItemId } from '@shared/consts/navItemId'
 import { navSlice } from '@shared/nav'
 import { toast } from 'sonner'
 import type { AnimationScope } from 'motion-dom'
@@ -63,12 +63,12 @@ export const useResetPassword = ({ passwordSignal, slideOut }: Props): Res => {
         )
 
         dispatch(
-          navSlice.actions.hideNavItems({ navItemIdKeys: [navItemKey.login] }),
+          navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }),
         )
 
         dispatch(
           navSlice.actions.showNavItems({
-            navItemIdKeys: [navItemKey.profile],
+            navItemIds: [navItemId.profile],
           }),
         )
 

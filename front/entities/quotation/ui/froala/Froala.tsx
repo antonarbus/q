@@ -13,13 +13,13 @@ import {
   showDropFilesTextOnMouseLeave,
 } from '@features/upload/showDropFilesTextOnHover'
 import type { FroalaProps } from './types'
-import { DropFilesText } from './DropFilesText'
+import { DropFilesOrImagesText } from './DropFilesOrImagesText'
 import { cls } from '@shared/consts/cls'
 import { DropHereText } from './DropHereText'
 
 export const Froala = (props: FroalaProps): React.JSX.Element => {
   const dropFilesTextRef = useRef<React.ComponentRef<'div'> | null>(null)
-  const froalaElementRef = useRef<HTMLDivElement>(null)
+  const froalaElementRef = useRef<React.ComponentRef<'div'> | null>(null)
   const { blockIndex } = useBlock()
   const { froalaHeightRef } = useFixedHeightForAnimation({ froalaElementRef })
 
@@ -81,7 +81,7 @@ export const Froala = (props: FroalaProps): React.JSX.Element => {
             </>
           )}
           {props.droppable && (
-            <DropFilesText dropFilesTextRef={dropFilesTextRef} />
+            <DropFilesOrImagesText dropFilesTextRef={dropFilesTextRef} />
           )}
           {props.droppable && <DropHereText />}
         </Box>

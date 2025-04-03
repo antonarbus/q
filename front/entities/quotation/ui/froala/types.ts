@@ -19,8 +19,10 @@ export type FroalaProps = {
   beforeUpload?: ({
     editor,
     files,
+    type,
   }: {
-    editor: FroalaEditor
+    editor: FroalaEditor | null
     files: File[]
-  }) => boolean
+    type: 'image' | 'file'
+  }) => Promise<void>
 }

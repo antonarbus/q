@@ -1,4 +1,3 @@
-import styled from '@emotion/styled'
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { useRef } from 'react'
@@ -9,49 +8,9 @@ import { useKeysForMenuNavigation } from './functions/useKeysForMenuNavigation'
 import { useMenuAnimation } from './functions/useMenuAnimation'
 import { SlidableMenuItemsContainer } from './SlidableMenuItemsContainer'
 import { TopMenuItemsContainer } from './TopMenuItemsContainer'
-
-type Props = {
-  isMenuOutsideWindow: boolean
-}
-
-const MenuStyled = styled.div<Props>`
-  position: absolute;
-  top: calc(100% + 5px);
-  right: -${theme.menu.navItem.marginRight}px;
-  /* if right corner goes over the screen fix the left instead of right */
-  left: ${(props): string => (props.isMenuOutsideWindow ? '0' : 'not set')};
-  width: ${theme.menu.width}px;
-  padding-top: ${theme.menu.paddingTop}px;
-  padding-bottom: ${theme.menu.paddingBottom}px;
-  background: ${theme.colors.darkBackground};
-  backdrop-filter: blur(4px);
-  border: 1px solid #474a4d;
-  border-radius: 4px;
-  overflow: hidden;
-  /* z-index: 666; */
-  /* background-color: red; */
-
-  @media screen and (max-width: 480px) {
-    left: 0px;
-    right: 0px;
-    width: auto;
-  }
-
-  .slidable {
-    position: absolute;
-    right: 0px;
-    left: 0px;
-    height: auto;
-  }
-
-  .next {
-    transform: translateX(100%);
-  }
-
-  .measurable-div {
-    transform: translateX(9999px);
-  }
-`
+import { EmailAtBottomOfMenu } from './EmailAtBottomOfMenu'
+import { css } from '@emotion/react'
+import { navItemId } from '@shared/consts/navItemId'
 
 export const Menu = (): React.JSX.Element => {
   const menuContainerRef = useRef<React.ComponentRef<'div'> | null>(null)
@@ -59,9 +18,11 @@ export const Menu = (): React.JSX.Element => {
   const nextMenuRef = useRef<React.ComponentRef<'div'> | null>(null)
   const fakeMenuRef = useRef<React.ComponentRef<'div'> | null>(null)
 
-  const idsToNextMenuItems = useSelector(
-    (state) => state.nav.idsToNextMenuItems,
+  const currentMenuNavItemId = useSelector(
+    (state) => state.nav.currentMenuNavItemId,
   )
+
+  const nextMenuNavItemId = useSelector((state) => state.nav.nextMenuNavItemId)
 
   const idsToCurrentMenuItems = useSelector(
     (state) => state.nav.idsToCurrentMenuItems,
@@ -72,7 +33,6 @@ export const Menu = (): React.JSX.Element => {
     nextMenuRef,
     menuContainerRef,
     fakeMenuRef,
-    idsToNextMenuItems,
   })
 
   useKeysForMenuNavigation()
@@ -80,31 +40,71 @@ export const Menu = (): React.JSX.Element => {
 
   const isMenuOutsideWindow = useIsMenuOutsideWindow()
 
+  const isProfileMenu = idsToCurrentMenuItems.includes(navItemId.profile)
+
   return (
-    <MenuStyled
+    <div
       ref={menuContainerRef}
-      isMenuOutsideWindow={isMenuOutsideWindow}
       className='drop-down-nav-menu'
       onMouseLeave={(): void => {
-        dispatch(navSlice.actions.setMenuItemHoverIndex(0))
+        dispatch(
+          navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: -1 }),
+        )
       }}
+      css={css`
+        position: absolute;
+        top: calc(100% + 5px);
+        right: 0;
+        /* if right corner goes over the screen fix the left instead of right */
+        left: ${isMenuOutsideWindow ? '0' : 'not set'};
+        width: ${theme.menu.width}px;
+        padding-top: ${theme.menu.paddingTop}px;
+        padding-bottom: ${theme.menu.paddingBottom}px;
+        background: ${theme.colors.darkBackground};
+        backdrop-filter: blur(4px);
+        border: 1px solid #474a4d;
+        border-radius: 4px;
+        overflow: hidden;
+
+        @media screen and (width <= 480px) {
+          left: 0px;
+          right: 0px;
+          width: auto;
+        }
+
+        .slidable {
+          position: absolute;
+          right: 0px;
+          left: 0px;
+          height: auto;
+        }
+
+        .next {
+          transform: translateX(100%);
+        }
+
+        .measurable-div {
+          transform: translateX(9999px);
+        }
+      `}
     >
       <TopMenuItemsContainer />
       <SlidableMenuItemsContainer
         reference={currentMenuRef}
-        idsToMenu={idsToCurrentMenuItems}
+        menuNavItemId={currentMenuNavItemId}
         className='slidable current'
       />
       <SlidableMenuItemsContainer
         reference={nextMenuRef}
-        idsToMenu={idsToNextMenuItems}
+        menuNavItemId={nextMenuNavItemId}
         className='slidable next'
       />
       <SlidableMenuItemsContainer
         reference={fakeMenuRef}
-        idsToMenu={idsToNextMenuItems}
+        menuNavItemId={nextMenuNavItemId}
         className='measurable-div'
       />
-    </MenuStyled>
+      {isProfileMenu && <EmailAtBottomOfMenu />}
+    </div>
   )
 }

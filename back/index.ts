@@ -23,7 +23,7 @@ import { getQuotationRouter } from './api/quotation/getQuotationRouter'
 import { getQuotationsRouter } from './api/quotation/getQuotationsRouter'
 import { saveQuotationRouter } from './api/quotation/saveQuotationRouter'
 import { getFilesStatsRouter } from './api/settings/getFilesStatsRouter'
-import { uploadRouter } from './api/va/uploadRouter'
+import { uploadRouter } from './api/upload/uploadRouter'
 import { apiUrl } from './shared/consts/apiUrl'
 import { connectToDb } from './shared/db/connectToDb'
 import { errorHandlerMiddleware } from './middleware/errorHandlerMiddleware'
@@ -32,6 +32,9 @@ import { getUsersRouter } from './api/user/getUsersRouter'
 import { deleteUserRouter } from './api/user/deleteUserRouter'
 import { countUniqueDailyVisitorsRouter } from './api/visitors/countUniqueDailyVisitorsRouter'
 import { getUniqueDailyVisitorsRouter } from './api/visitors/getUniqueDailyVisitorsRouter'
+import { getSignedUrlRouter } from './api/upload/getSignedUrlRouter'
+import { makeFilePublicRouter } from './api/upload/makeFilePublicRouter'
+import { healthRouter } from './api/dev/healthRouter'
 // import cors from 'cors'
 
 const app = express()
@@ -46,6 +49,8 @@ app.get(
   apiUrl.root,
   (_req: Request, res: Response) => void res.send('i am express.js'),
 )
+
+app.use(apiUrl.health, healthRouter)
 
 app.get(
   apiUrl.api,
@@ -82,8 +87,10 @@ app.use(apiUrl.getBookmarkCategories, getBookmarkCategoriesRouter)
 // visitors
 app.use(apiUrl.countUniqueDailyVisitors, countUniqueDailyVisitorsRouter)
 app.use(apiUrl.getUniqueDailyVisitors, getUniqueDailyVisitorsRouter)
-// va
+// upload
 app.use(apiUrl.upload, uploadRouter)
+app.use(apiUrl.getSignedUrl, getSignedUrlRouter)
+app.use(apiUrl.makeFilePublic, makeFilePublicRouter)
 // settings
 app.use(apiUrl.getFilesStats, getFilesStatsRouter)
 // error

@@ -1,7 +1,7 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { Quotation } from '@entities/quotation'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { bucket, storageFolderName } from '@back/shared/services/storage'
+import { bucket, getFilePath } from '@back/shared/services/storage'
 import { jsonParseSafe } from '@back/shared/utils/jsonParseSafe'
 import { isNoTraceCookie } from '@back/shared/headers'
 import { userRole } from '@back/shared/consts/userRole'
@@ -75,7 +75,7 @@ const getQuotation: RouterHandler = async (req, res, next) => {
     return
   }
 
-  const filePath = `${document.email}/${storageFolderName.quotations}/${quotationId}.json`
+  const filePath = getFilePath({ email, fileType: 'quotation', quotationId })
   const [fileBuffer] = await bucket.file(filePath).download()
   const quotation = jsonParseSafe<Quotation>(fileBuffer.toString())
 

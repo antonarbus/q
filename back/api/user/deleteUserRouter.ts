@@ -1,7 +1,7 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { bucket, storageFolderName } from '@back/shared/services/storage'
+import { bucket, getFolderPath } from '@back/shared/services/storage'
 import type { User } from '@entities/user'
 import { userRole } from '@back/shared/consts/userRole'
 import {
@@ -87,7 +87,10 @@ const deleteUser: RouterHandler = async (req, res, next) => {
   // delete quotations from bucket
 
   const [quotationFiles] = await bucket.getFiles({
-    prefix: `${userEmailToBeDeleted}/${storageFolderName.quotations}/`,
+    prefix: getFolderPath({
+      email: userEmailToBeDeleted,
+      fileType: 'quotation',
+    }),
   })
 
   if (quotationFiles.length === 0) {
@@ -121,7 +124,10 @@ const deleteUser: RouterHandler = async (req, res, next) => {
   // delete bookmarks from bucket
 
   const [bookmarkFiles] = await bucket.getFiles({
-    prefix: `${userEmailToBeDeleted}/${storageFolderName.bookmarks}/`,
+    prefix: getFolderPath({
+      email: userEmailToBeDeleted,
+      fileType: 'bookmark',
+    }),
   })
 
   if (bookmarkFiles.length === 0) {
@@ -155,7 +161,10 @@ const deleteUser: RouterHandler = async (req, res, next) => {
   // delete files from bucket
 
   const [files] = await bucket.getFiles({
-    prefix: `${userEmailToBeDeleted}/${storageFolderName.files}/`,
+    prefix: getFolderPath({
+      email: userEmailToBeDeleted,
+      fileType: 'file',
+    }),
   })
 
   if (files.length === 0) {

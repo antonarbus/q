@@ -129,7 +129,7 @@ and a hash based on a secret keys, which are kept on a server in env variable.
 
 # Email
 
-(A) For emails sending Sendgrid is used.
+For emails sending Sendgrid is used.
 
 # Item
 
@@ -307,7 +307,3 @@ https://console.cloud.google.com/artifacts?inv=1&invt=AblO7A&project=quotationap
 - secrets.GCP_SA_KEY goes to workflows/deployment.yml
 
 https://console.cloud.google.com/iam-admin/serviceaccounts?inv=1&invt=AblPCg&project=quotationapp-8014c&supportedpurview=project
-
-## Email
-
-https://github.com/sendgrid/sendgrid-php

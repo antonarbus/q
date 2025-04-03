@@ -1,19 +1,28 @@
 import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
 import { navSlice } from '../../../../../../navSlice'
-import { getMenuItemByIdsChain } from '../../functions/getMenuItemByIdsChain'
 import { navigateInMenu } from '../../functions/useMenuAnimation'
+import type { NavItemId } from '@shared/consts/navItemId'
+import { getNavItem } from '../../functions/getNavItem'
 
 export const clickOnMenuItem = (
   e: MouseEvent,
-  menuId: string,
+  navItemId: NavItemId,
   disabled: boolean,
 ): void => {
-  const chainToClickedItem = [...getState().nav.idsToCurrentMenuItems, menuId]
-  const nextMenu = getMenuItemByIdsChain(chainToClickedItem)
-  const isNestedMenuAvailable = Boolean(nextMenu.length)
-  const menuItems = getMenuItemByIdsChain(getState().nav.idsToCurrentMenuItems)
-  const menuItem = menuItems.find((item) => item.id === menuId)
+  const { navItem } = getNavItem({ navItemId })
+
+  const nextMenuItems = navItem?.navItems ?? []
+
+  const isNestedMenuAvailable = Boolean(nextMenuItems.length)
+
+  const { navItem: currentMenuNavItem } = getNavItem({
+    navItemId: getState().nav.currentMenuNavItemId,
+  })
+
+  const menuItems = currentMenuNavItem?.navItems ?? []
+
+  const menuItem = menuItems.find((item) => item.id === navItemId)
   const link = menuItem?.link
   const func = menuItem?.func
 
@@ -46,6 +55,6 @@ export const clickOnMenuItem = (
   }
 
   if (isNestedMenuAvailable) {
-    void navigateInMenu.down(menuId)
+    void navigateInMenu.down({ navItemId })
   }
 }
