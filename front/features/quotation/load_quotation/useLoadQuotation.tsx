@@ -34,7 +34,6 @@ export function useLoadQuotation(): void {
 
   // todo: it is changed when settings modal is closed, it triggers useEffect, check it
   // todo: maybe do it via redux, easier to debug
-  console.log('🚀 ~ quotationType:', quotationType)
 
   useEffect(() => {
     const previousQuotationData = backToQuotationRef.current
