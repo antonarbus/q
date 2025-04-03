@@ -32,6 +32,10 @@ export function useLoadQuotation(): void {
   const quotationType =
     (location.state as QuotationLocationState)?.quotationType ?? 'new'
 
+  // todo: it is changed when settings modal is closed, it triggers useEffect, check it
+  // todo: maybe do it via redux, easier to debug
+  console.log('🚀 ~ quotationType:', quotationType)
+
   useEffect(() => {
     const previousQuotationData = backToQuotationRef.current
 
