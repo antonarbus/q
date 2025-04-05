@@ -13,8 +13,12 @@ type State = {
 }
 
 const pathSegments = window.location.pathname.split('/')
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-const quotationId = pathSegments.length > 1 ? pathSegments[1]! : 'new'
+const quotationIdFromPath = pathSegments.at(1)
+
+const quotationId =
+  quotationIdFromPath !== undefined && quotationIdFromPath !== ''
+    ? quotationIdFromPath
+    : 'new'
 
 const quotationSource: State['quotationSource'] =
   quotationId === 'new' ? 'template' : 'server'
