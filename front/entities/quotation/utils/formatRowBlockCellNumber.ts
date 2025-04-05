@@ -4,7 +4,7 @@ import type { FroalaEditorRef } from '@shared/types/froala'
 import { getStringWithNewFormattedNumber } from '@shared/utils/getStringWithNewFormattedNumber'
 import { quotationSlice } from '../redux/quotationSlice'
 import { itemType } from '../consts/itemType'
-import { bookmarkPosAtBlocks } from '../consts/bookmarkPosAtBlocks'
+import { BOOKMARK_POS_AT_BLOCKS } from '../consts/bookmarkPosAtBlocks'
 import type { BoqRowCellKey } from '../consts/boqRowCellKey'
 
 type Props = {
@@ -28,7 +28,7 @@ export const formatRowBlockCellNumber = ({
     }
   }
 
-  const block = getState().quotation.blocks[bookmarkPosAtBlocks]
+  const block = getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS]
 
   if (block?.type !== itemType.row) {
     return {

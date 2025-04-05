@@ -6,7 +6,7 @@ import { getStringWithNewFormattedNumber } from '@shared/utils/getStringWithNewF
 import { getState } from '@shared/lib/redux'
 import { itemType } from '../consts/itemType'
 import { updateRowBlockCellAtStore } from '../redux/updaters/updateRowBlockCellAtStore'
-import { bookmarkPosAtBlocks } from '../consts/bookmarkPosAtBlocks'
+import { BOOKMARK_POS_AT_BLOCKS } from '../consts/bookmarkPosAtBlocks'
 import type { BoqRowCellKey } from '../consts/boqRowCellKey'
 
 type Props = {
@@ -24,7 +24,7 @@ export const updateRowBlockCellWithValue = ({
     return
   }
 
-  const block = getState().quotation.blocks[bookmarkPosAtBlocks]
+  const block = getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS]
 
   if (block?.type !== itemType.row) {
     return

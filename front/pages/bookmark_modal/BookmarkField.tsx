@@ -2,22 +2,18 @@ import { dispatch, useSelector } from '@shared/lib/redux'
 import { AnimatePresence } from 'motion/react'
 import { useEffectOnce } from 'react-use'
 import { Block } from '@widgets/blocks/Block'
-import { bookmarkPosAtBlocks } from '@entities/quotation'
-import { arrayShapesEqualityFn } from '@shared/utils/arrayShapesEqualityFn'
+import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation'
 import { BookmarkFieldLayout } from './BookmarkFieldLayout'
 import { textSlice } from '@shared/lib/froala/textSlice'
 
 export const BookmarkField = (): React.ReactNode => {
-  const blocks = useSelector(
-    (state) => state.quotation.blocks,
-    arrayShapesEqualityFn,
-  )
+  const blocks = useSelector((state) => state.quotation.blocks)
 
   useEffectOnce(() => {
     dispatch(textSlice.actions.setEditable())
   })
 
-  const bookmarkBlock = blocks.at(bookmarkPosAtBlocks)
+  const bookmarkBlock = blocks.at(BOOKMARK_POS_AT_BLOCKS)
 
   if (!bookmarkBlock) {
     return null
@@ -28,7 +24,7 @@ export const BookmarkField = (): React.ReactNode => {
       <AnimatePresence initial={false}>
         <Block
           block={bookmarkBlock}
-          blockIndex={bookmarkPosAtBlocks}
+          blockIndex={BOOKMARK_POS_AT_BLOCKS}
         />
       </AnimatePresence>
     </BookmarkFieldLayout>

@@ -1,5 +1,5 @@
 import { AnimatePresence } from 'motion/react'
-import { bookmarkPosAtBlocks, type Item } from '@entities/quotation'
+import { BOOKMARK_POS_AT_BLOCKS, type Item } from '@entities/quotation'
 import { FadeInOnInitLoad } from './FadeInOnInitLoad'
 import { Block } from './Block'
 import { BlocksSortableContext } from './BlocksSortableContext'
@@ -16,7 +16,7 @@ export const Blocks = ({ blocks }: Props): React.ReactNode => {
   // clean blocks from a bookmark at blocks[1000] which we use to show in in modal view
   const blocksCloned = structuredClone(blocks)
 
-  blocksCloned[bookmarkPosAtBlocks] = null
+  blocksCloned[BOOKMARK_POS_AT_BLOCKS] = null
 
   return (
     <FadeInOnInitLoad>

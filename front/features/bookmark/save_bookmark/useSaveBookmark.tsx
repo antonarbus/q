@@ -9,7 +9,7 @@ import {
   useGetBookmarksQuery,
   useSaveBookmarkMutation,
 } from '@entities/bookmark'
-import { bookmarkPosAtBlocks, quotationSlice } from '@entities/quotation'
+import { BOOKMARK_POS_AT_BLOCKS, quotationSlice } from '@entities/quotation'
 import { toast } from 'sonner'
 import { cls } from '@shared/consts/cls'
 import { getPaperElementHtmlAtModal } from '@shared/utils/htmlGetter/getPaperElementHtmlAtModal'
@@ -96,19 +96,19 @@ export const useSaveBookmark = ({
 
     dispatch(
       quotationSlice.actions.updateBlockHeightReducer({
-        blockIndex: bookmarkPosAtBlocks,
+        blockIndex: BOOKMARK_POS_AT_BLOCKS,
         height: paperElement.clientHeight,
       }),
     )
 
     dispatch(
       quotationSlice.actions.updateBlockWidthReducer({
-        blockIndex: bookmarkPosAtBlocks,
+        blockIndex: BOOKMARK_POS_AT_BLOCKS,
         width: paperElement.clientWidth,
       }),
     )
 
-    const block = getState().quotation.blocks.at(bookmarkPosAtBlocks)
+    const block = getState().quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
 
     if (!block) {
       toast.warning('No item loaded')

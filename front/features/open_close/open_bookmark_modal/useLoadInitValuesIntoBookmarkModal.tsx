@@ -1,7 +1,7 @@
 import { getState } from '@shared/lib/redux'
 import { useEffectOnce } from 'react-use'
 import { useSignal } from '@preact/signals-react'
-import { bookmarkPosAtBlocks } from '@entities/quotation'
+import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation'
 import type { BookmarkFormValues } from '@entities/bookmark'
 
 type Res = {
@@ -17,7 +17,7 @@ export const useLoadInitValuesIntoBookmarkModal = (): Res => {
   }
 
   useEffectOnce(() => {
-    const bookmark = getState().quotation.blocks.at(bookmarkPosAtBlocks)
+    const bookmark = getState().quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
 
     if (bookmark) {
       bookmarkFromValues.nameSignal.value = bookmark.name ?? ''

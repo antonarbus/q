@@ -1,6 +1,6 @@
 import { roundTo } from 'round-to'
 import {
-  bookmarkPosAtBlocks,
+  BOOKMARK_POS_AT_BLOCKS,
   boqRowCellKey,
   itemType,
 } from '@entities/quotation'
@@ -27,7 +27,7 @@ export const updateQtyCell = ({
     html: qtyCellEditorRef.current.html.get(),
   })
 
-  const block = getState().quotation.blocks[bookmarkPosAtBlocks]
+  const block = getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS]
 
   if (block?.type !== itemType.row) {
     return

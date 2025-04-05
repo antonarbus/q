@@ -8,7 +8,7 @@ import {
   boqRowCellKey,
   boqRowCellSx,
   getRowCellHtmlFromStore,
-  bookmarkPosAtBlocks,
+  BOOKMARK_POS_AT_BLOCKS,
   columnMinWidth,
 } from '@entities/quotation'
 import { updateQtyCell } from '@features/blocks/cell/update_cell/row_block_cells/qty/updateQtyCell'
@@ -18,7 +18,7 @@ export const QtyCell = (): React.JSX.Element => {
   const { qtyCellEditorRef, priceCellEditorRef } = useRow()
 
   const { stylesForResizableCell } = useStylesForResizableCell({
-    blockIndex: bookmarkPosAtBlocks,
+    blockIndex: BOOKMARK_POS_AT_BLOCKS,
     boqColumnKey: boqColumnKey.qty,
     minWidth: columnMinWidth.qty,
   })

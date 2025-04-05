@@ -2,7 +2,7 @@ import {
   type BookmarkFormValues,
   useGetBookmarkMutation,
 } from '@entities/bookmark'
-import { bookmarkPosAtBlocks, quotationSlice } from '@entities/quotation'
+import { BOOKMARK_POS_AT_BLOCKS, quotationSlice } from '@entities/quotation'
 import { dispatch, getState } from '@shared/lib/redux'
 import { toast } from 'sonner'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -27,7 +27,7 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
   } = useGetBookmarkMutation()
 
   useEffectOnce(() => {
-    const firstBlock = getState().quotation.blocks.at(bookmarkPosAtBlocks)
+    const firstBlock = getState().quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
     const isOpenedFromButton = Boolean(firstBlock)
 
     if (isOpenedFromButton) {
@@ -49,7 +49,7 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
         }),
       )
 
-      const block = getState().quotation.blocks.at(bookmarkPosAtBlocks)
+      const block = getState().quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
 
       if (block) {
         bookmarkFromValues.nameSignal.value = block.name ?? ''

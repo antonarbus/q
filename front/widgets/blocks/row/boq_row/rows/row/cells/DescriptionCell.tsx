@@ -7,7 +7,7 @@ import {
   boqRowCellKey,
   boqColumnKey,
   getRowCellHtmlFromStore,
-  bookmarkPosAtBlocks,
+  BOOKMARK_POS_AT_BLOCKS,
   columnMinWidth,
 } from '@entities/quotation'
 import { updateDescriptionCell } from '@features/blocks/cell/update_cell/row_block_cells/description/updateDescriptionCell'
@@ -16,7 +16,7 @@ export const DescriptionCell = (): React.JSX.Element => {
   const { descriptionEditorRef } = useRow()
 
   const { stylesForResizableCell } = useStylesForResizableCell({
-    blockIndex: bookmarkPosAtBlocks,
+    blockIndex: BOOKMARK_POS_AT_BLOCKS,
     boqColumnKey: boqColumnKey.description,
     minWidth: columnMinWidth.description,
   })

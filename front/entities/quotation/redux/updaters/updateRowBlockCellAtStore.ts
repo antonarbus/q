@@ -3,7 +3,7 @@ import { getNumberFromString } from '@shared/utils/getNumberFromString'
 import { getTextContentFromHtml } from '@shared/utils/getTextContentFromHtml'
 import { quotationSlice } from '../quotationSlice'
 import { itemType } from '@entities/quotation/consts/itemType'
-import { bookmarkPosAtBlocks } from '@entities/quotation/consts/bookmarkPosAtBlocks'
+import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/consts/bookmarkPosAtBlocks'
 import type { BoqRowCellKey } from '@entities/quotation/consts/boqRowCellKey'
 
 type Props = {
@@ -19,7 +19,7 @@ export const updateRowBlockCellAtStore = ({
   html,
   boqRowCellKey,
 }: Props): Res => {
-  const block = getState().quotation.blocks[bookmarkPosAtBlocks]
+  const block = getState().quotation.blocks[BOOKMARK_POS_AT_BLOCKS]
 
   if (block?.type !== itemType.row) {
     return {

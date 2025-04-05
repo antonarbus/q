@@ -93,7 +93,7 @@ export { boqRowKey } from './consts/boqRowKey'
 export { boqColumnKey } from './consts/boqColumnKey'
 export { boqRowCellKey } from './consts/boqRowCellKey'
 export { columnMinWidth } from './consts/columnMinWidth'
-export { bookmarkPosAtBlocks } from './consts/bookmarkPosAtBlocks'
+export { BOOKMARK_POS_AT_BLOCKS } from './consts/bookmarkPosAtBlocks'
 
 // types
 export type {
