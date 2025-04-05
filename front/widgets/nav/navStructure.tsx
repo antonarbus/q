@@ -1,4 +1,4 @@
-import { Person, Settings } from '@mui/icons-material'
+import { RxPerson } from 'react-icons/rx'
 import { CiViewTable } from 'react-icons/ci'
 import { ImLink } from 'react-icons/im'
 import {
@@ -12,6 +12,7 @@ import {
   IoText,
   IoChevronBackOutline,
   IoStatsChartOutline,
+  IoSettingsOutline,
 } from 'react-icons/io5'
 import { PiFolderSimpleStarDuotone } from 'react-icons/pi'
 import { RiMenuAddFill, RiAdminLine, RiFileExcel2Line } from 'react-icons/ri'
@@ -206,13 +207,13 @@ export const navStructure: NavItem[] = [
       },
       {
         id: navItemId.profile,
-        icon: <Person data-testid='profile icon' />,
+        icon: <RxPerson data-testid='profile icon' />,
         name: 'Profile',
         isHidden: true,
         navItems: [
           {
             id: navItemId.settings,
-            icon: <Settings />,
+            icon: <IoSettingsOutline />,
             isHidden: false,
             name: 'Settings',
             link: `./${route.settings}`,

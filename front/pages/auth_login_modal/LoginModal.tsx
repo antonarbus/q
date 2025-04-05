@@ -1,4 +1,4 @@
-import { LoginRounded } from '@mui/icons-material'
+import { FiLogIn } from 'react-icons/fi'
 import { Box } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
 import { useRef } from 'react'
@@ -37,7 +37,7 @@ export const LoginModal = (): React.JSX.Element => {
       width='350px'
       paddingContent='50px 40px 10px 40px'
       headerText='Log in'
-      headerIcon={<LoginRounded />}
+      headerIcon={<FiLogIn />}
       buttonText='LOG IN'
       isButtonDisabled={isButtonDisabled}
       isButtonLoading={isPending}

@@ -1,6 +1,6 @@
 import { getState } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
-import { Settings } from '@mui/icons-material'
+import { IoSettingsOutline } from 'react-icons/io5'
 import { Avatar, Box } from '@mui/material'
 import bytes from 'bytes'
 import { useRef } from 'react'
@@ -29,7 +29,7 @@ export const SettingsModal = (): React.JSX.Element => {
         title={getState().user.email}
         logo={
           <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }}>
-            <Settings />
+            <IoSettingsOutline />
           </Avatar>
         }
       >

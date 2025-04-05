@@ -1,4 +1,4 @@
-import { LockOutlined } from '@mui/icons-material'
+import { MdLockOutline } from 'react-icons/md'
 import { Box } from '@mui/material'
 import { useSignal, useSignalEffect } from '@preact/signals-react'
 import { useRef } from 'react'
@@ -42,7 +42,7 @@ export const RegisterModal = (): React.JSX.Element => {
       width='350px'
       paddingContent='50px 40px 10px 40px'
       headerText='Register'
-      headerIcon={<LockOutlined />}
+      headerIcon={<MdLockOutline />}
       buttonText='REGISTER'
       isButtonDisabled={isButtonDisabledSignal.value}
       isButtonLoading={isPending}

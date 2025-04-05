@@ -1,5 +1,6 @@
 import { theme } from '@shared/theme'
-import { Lock, Visibility, VisibilityOff } from '@mui/icons-material'
+import { VscEye, VscEyeClosed } from 'react-icons/vsc'
+import { MdOutlineLock } from 'react-icons/md'
 import { IconButton, InputAdornment, TextField } from '@mui/material'
 import { useSignal, type Signal } from '@preact/signals-react'
 
@@ -38,7 +39,7 @@ export const PasswordField = ({
         input: {
           startAdornment: (
             <InputAdornment position='start'>
-              <Lock />
+              <MdOutlineLock />
             </InputAdornment>
           ),
           endAdornment: (
@@ -49,7 +50,7 @@ export const PasswordField = ({
                   showPassword.value = !showPassword.value
                 }}
               >
-                {showPassword.value ? <VisibilityOff /> : <Visibility />}
+                {showPassword.value ? <VscEyeClosed /> : <VscEye />}
               </IconButton>
             </InputAdornment>
           ),

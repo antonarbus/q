@@ -1,5 +1,5 @@
 import { theme } from '@shared/theme'
-import { Person } from '@mui/icons-material'
+import { RiUser3Line } from 'react-icons/ri'
 import { InputAdornment, TextField } from '@mui/material'
 import { useSignal, type Signal, useSignalEffect } from '@preact/signals-react'
 import mailcheck from 'mailcheck'
@@ -86,7 +86,7 @@ export const EmailField = ({
           input: {
             startAdornment: (
               <InputAdornment position='start'>
-                <Person />
+                <RiUser3Line />
               </InputAdornment>
             ),
           },

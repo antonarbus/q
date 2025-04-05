@@ -1,5 +1,5 @@
 import { theme } from '@shared/theme'
-import { Close } from '@mui/icons-material'
+import { IoClose } from 'react-icons/io5'
 import { AnimatePresence, motion } from 'motion/react'
 import type { AnimationScope } from 'motion-dom'
 
@@ -118,8 +118,8 @@ export const FormModal = ({
             }}
             onClick={onCloseClick}
           >
-            <Close
-              sx={{
+            <IoClose
+              css={{
                 color: '#bebebe',
                 ':hover': {
                   color: '#dedede',

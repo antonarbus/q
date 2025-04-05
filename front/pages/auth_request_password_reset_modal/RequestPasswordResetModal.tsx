@@ -1,4 +1,4 @@
-import PasswordRoundedIcon from '@mui/icons-material/PasswordRounded'
+import { PiPassword } from 'react-icons/pi'
 import { Box } from '@mui/material'
 import { useSignal } from '@preact/signals-react'
 import { useRef } from 'react'
@@ -30,7 +30,7 @@ export const RequestPasswordResetModal = (): React.JSX.Element => {
       width='350px'
       paddingContent='50px 40px 10px 40px'
       headerText='Reset password'
-      headerIcon={<PasswordRoundedIcon />}
+      headerIcon={<PiPassword />}
       buttonText='RESET'
       isButtonDisabled={!isEmailOkSignal.value}
       isButtonLoading={isPending}
