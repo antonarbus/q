@@ -16,6 +16,8 @@ export const Quotation = (): React.JSX.Element => {
     arrayShapesEqualityFn,
   )
 
+  const quotationKey = useSelector((state) => state.app.quotationKey)
+
   return (
     <>
       <InfoAndSearchLayout>
@@ -24,7 +26,10 @@ export const Quotation = (): React.JSX.Element => {
         <Info css={{ width: '80px' }} />
       </InfoAndSearchLayout>
       <BackgroundMessage />
-      <Blocks blocks={blocks} />
+      <Blocks
+        key={quotationKey}
+        blocks={blocks}
+      />
       <Outlet />
     </>
   )

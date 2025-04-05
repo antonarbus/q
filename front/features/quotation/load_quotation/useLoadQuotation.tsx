@@ -57,18 +57,15 @@ export function useLoadQuotation(): void {
         }),
       )
 
-      // avoid resetting and loading quotation batching, otherwise there is unwanted items animation
-      setTimeout(() => {
-        dispatch(
-          quotationSlice.actions.loadQuotationReducer({
-            quotation: previousQuotationData,
-          }),
-        )
-      }, 100)
+      dispatch(
+        quotationSlice.actions.loadQuotationReducer({
+          quotation: previousQuotationData,
+        }),
+      )
 
       setTimeout(() => {
         dispatch(appSlice.actions.hideLoadingOverlay())
-      }, 750)
+      }, 1250)
 
       backToQuotationRef.current = null
 
@@ -84,18 +81,15 @@ export function useLoadQuotation(): void {
         }),
       )
 
-      // avoid resetting and loading quotation batching, otherwise there is unwanted items animation
-      setTimeout(() => {
-        dispatch(
-          quotationSlice.actions.loadQuotationReducer({
-            quotation: newQuotationTemplate,
-          }),
-        )
-      }, 100)
+      dispatch(
+        quotationSlice.actions.loadQuotationReducer({
+          quotation: newQuotationTemplate,
+        }),
+      )
 
       setTimeout(() => {
         dispatch(appSlice.actions.hideLoadingOverlay())
-      }, 750)
+      }, 1250)
 
       dispatch(navSlice.actions.underlineNavItem({ navItemId: navItemId.new }))
 
@@ -127,7 +121,7 @@ export function useLoadQuotation(): void {
 
         setTimeout(() => {
           dispatch(appSlice.actions.hideLoadingOverlay())
-        }, 750)
+        }, 1250)
 
         return
       }
@@ -154,7 +148,7 @@ export function useLoadQuotation(): void {
 
         setTimeout(() => {
           dispatch(appSlice.actions.hideLoadingOverlay())
-        }, 750)
+        }, 1250)
       }
     }
   }, [isSuccess])
@@ -192,7 +186,7 @@ export function useLoadQuotation(): void {
 
       setTimeout(() => {
         dispatch(appSlice.actions.hideLoadingOverlay())
-      }, 750)
+      }, 1250)
     }
   }, [isError])
 }
