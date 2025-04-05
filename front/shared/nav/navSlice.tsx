@@ -5,6 +5,8 @@ import { getMenuItemPropValue } from './getMenuItemPropValue'
 import { navStructure as navStructureOriginal } from '@widgets/nav/navStructure'
 import { navItemId as navItemIdKey } from '@shared/consts/navItemId'
 import { getNavItem } from './ui/NavList/NavItem/Menu/functions/getNavItem'
+import { RiAdminLine } from 'react-icons/ri'
+import { RxPerson } from 'react-icons/rx'
 
 const initialState = {
   navStructure: [] as NavItem[],
@@ -394,6 +396,22 @@ export const navSlice = createSlice({
         navItemId,
         prop: 'isActive',
         value: true,
+      })
+    },
+    showAdminIcon: (state) => {
+      setMenuItemPropValue({
+        menu: state.navStructure,
+        navItemId: navItemIdKey.profile,
+        prop: 'icon',
+        value: <RiAdminLine />,
+      })
+    },
+    showUserIcon: (state) => {
+      setMenuItemPropValue({
+        menu: state.navStructure,
+        navItemId: navItemIdKey.profile,
+        prop: 'icon',
+        value: <RxPerson data-testid='profile icon' />,
       })
     },
   },

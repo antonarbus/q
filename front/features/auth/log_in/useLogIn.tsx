@@ -96,8 +96,10 @@ export const useLogIn = ({
 
       if (roles?.includes(userRole.superAdmin)) {
         dispatch(navSlice.actions.showNavItems({ navItemIds: ['admin'] }))
+        dispatch(navSlice.actions.showAdminIcon())
       } else {
         dispatch(navSlice.actions.hideNavItems({ navItemIds: ['admin'] }))
+        dispatch(navSlice.actions.showUserIcon())
       }
 
       if (location.pathname.includes(route.quotations)) {
