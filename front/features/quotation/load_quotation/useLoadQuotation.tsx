@@ -1,9 +1,7 @@
-import { router } from '@shared/lib/router'
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import type { QuotationLocationState } from '@features/open_close/open_quotation_page'
 import {
   quotationSlice,
   useGetQuotationMutation,
@@ -16,7 +14,9 @@ import { toast } from 'sonner'
 import { appSlice } from '@shared/appSlice'
 
 export function useLoadQuotation(): void {
-  const location = useLocation()
+  const { quotationId } = useParams()
+  const quotationSource = useSelector((state) => state.app.quotationSource)
+  const quotationKey = useSelector((state) => state.app.quotationKey)
 
   const {
     mutate: getQuotation,
@@ -26,21 +26,11 @@ export function useLoadQuotation(): void {
     error,
   } = useGetQuotationMutation()
 
-  const quotationId = router.state.matches.at(0)?.params.quotationId
-  const quotationKey = useSelector((state) => state.app.quotationKey)
-
-  const quotationType =
-    (location.state as QuotationLocationState)?.quotationType ?? 'new'
-
-  // todo: it is changed when settings modal is closed, it triggers useEffect, check it
-  // todo: maybe do it via redux, easier to debug
-
   useEffect(() => {
     const previousQuotationData = backToQuotationRef.current
 
     dispatch(quotationSlice.actions.resetQuotationReducer())
     dispatch(navSlice.actions.removeUnderlineFromTopNav())
-
     dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.back] }))
 
     dispatch(
@@ -55,8 +45,8 @@ export function useLoadQuotation(): void {
       }),
     )
 
-    // load previous quotation
-    if (quotationType === 'previous' && previousQuotationData) {
+    // load previous quotation when user clicks on back button
+    if (quotationSource === 'previous' && previousQuotationData) {
       dispatch(
         appSlice.actions.showLoadingOverlay({
           showLoader: true,
@@ -83,7 +73,7 @@ export function useLoadQuotation(): void {
     }
 
     // load new quotation template
-    if (quotationId === undefined || quotationId === 'new') {
+    if (quotationSource === 'template') {
       dispatch(
         appSlice.actions.showLoadingOverlay({
           showLoader: true,
@@ -110,7 +100,7 @@ export function useLoadQuotation(): void {
     }
 
     // load quotation from server
-    if (quotationId !== 'new') {
+    if (quotationSource === 'server' && quotationId !== undefined) {
       dispatch(
         appSlice.actions.showLoadingOverlay({
           showLoader: true,
@@ -120,7 +110,7 @@ export function useLoadQuotation(): void {
 
       getQuotation({ id: quotationId })
     }
-  }, [quotationKey, quotationType])
+  }, [quotationKey, quotationSource])
 
   // above we triggered quotation loading, now we handle the response
   useUpdateEffect(() => {
