@@ -1,6 +1,5 @@
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import {
   quotationSlice,
@@ -14,7 +13,10 @@ import { toast } from 'sonner'
 import { appSlice } from '@shared/appSlice'
 
 export function useLoadQuotation(): void {
-  const { quotationId } = useParams()
+  const quotationIdToBeOpened = useSelector(
+    (state) => state.app.quotationIdToBeOpened,
+  )
+
   const quotationSource = useSelector((state) => state.app.quotationSource)
   const quotationKey = useSelector((state) => state.app.quotationKey)
 
@@ -100,15 +102,15 @@ export function useLoadQuotation(): void {
     }
 
     // load quotation from server
-    if (quotationSource === 'server' && quotationId !== undefined) {
+    if (quotationSource === 'server') {
       dispatch(
         appSlice.actions.showLoadingOverlay({
           showLoader: true,
-          text: `Loading ${quotationId}...`,
+          text: `Loading ${quotationIdToBeOpened}...`,
         }),
       )
 
-      getQuotation({ id: quotationId })
+      getQuotation({ id: quotationIdToBeOpened })
     }
   }, [quotationKey, quotationSource])
 
@@ -161,7 +163,7 @@ export function useLoadQuotation(): void {
       if (error.response?.data.message === 'no permission to view') {
         dispatch(
           appSlice.actions.setBackgroundMessage({
-            message: `No permission to view quotation ${String(quotationId)}`,
+            message: `No permission to view quotation ${quotationIdToBeOpened}`,
           }),
         )
       } else if (
@@ -170,13 +172,13 @@ export function useLoadQuotation(): void {
       ) {
         dispatch(
           appSlice.actions.setBackgroundMessage({
-            message: `Quotation ${String(quotationId)} is not found`,
+            message: `Quotation ${quotationIdToBeOpened} is not found`,
           }),
         )
       } else if (error.response?.data.message === 'not shared') {
         dispatch(
           appSlice.actions.setBackgroundMessage({
-            message: `Quotation ${String(quotationId)} is private`,
+            message: `Quotation ${quotationIdToBeOpened} is private`,
           }),
         )
       } else {

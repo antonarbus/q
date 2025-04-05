@@ -24,6 +24,12 @@ export const OpenQuotationPageAndLoadFromServerButton = ({
           dispatch(
             appSlice.actions.setQuotationSource({ quotationSource: 'server' }),
           )
+
+          dispatch(
+            appSlice.actions.setQuotationIdToBeOpened({
+              quotationIdToBeOpened: id,
+            }),
+          )
         }}
       >
         <IconButton size='small'>

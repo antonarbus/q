@@ -4,6 +4,7 @@ import { nanoid } from '@shared/lib/nanoid'
 type State = {
   quotationKey: string
   quotationSource: 'template' | 'server' | 'previous'
+  quotationIdToBeOpened: string
   backgroundMessage: string
   loadingOverlay: {
     showLoader: boolean
@@ -12,14 +13,16 @@ type State = {
 }
 
 const pathSegments = window.location.pathname.split('/')
-const quotationId = pathSegments.length > 1 ? pathSegments[1] : undefined
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const quotationId = pathSegments.length > 1 ? pathSegments[1]! : 'new'
 
 const quotationSource: State['quotationSource'] =
-  quotationId === undefined || quotationId === 'new' ? 'template' : 'server'
+  quotationId === 'new' ? 'template' : 'server'
 
 const initialState: State = {
   quotationKey: nanoid(5),
   quotationSource,
+  quotationIdToBeOpened: quotationId,
   backgroundMessage: '',
   loadingOverlay: {
     showLoader: false,
@@ -61,6 +64,15 @@ export const appSlice = createSlice({
     ) => {
       const { quotationSource: source } = action.payload
       state.quotationSource = source
+    },
+    setQuotationIdToBeOpened: (
+      state,
+      action: PayloadAction<{
+        quotationIdToBeOpened: State['quotationIdToBeOpened']
+      }>,
+    ) => {
+      const { quotationIdToBeOpened } = action.payload
+      state.quotationIdToBeOpened = quotationIdToBeOpened
     },
   },
 })
