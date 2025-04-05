@@ -2,7 +2,7 @@ import { Router, type Request, type Response, type NextFunction } from 'express'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { bucket, fileBaseUrl, getFilePath } from '@back/shared/services/storage'
-import { getUserFromRefreshToken } from '@back/entities/user'
+import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type SearchQuery = {
@@ -28,7 +28,7 @@ type RouterHandler = (
 export const getSignedUrlRouter = Router()
 
 const getSignedUrl: RouterHandler = async (req, res, next) => {
-  const { email } = getUserFromRefreshToken({ req })
+  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
   const { fileName } = req.query
 
   if (!fileName || typeof fileName !== 'string') {

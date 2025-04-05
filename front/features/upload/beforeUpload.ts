@@ -5,10 +5,11 @@ import { getFileSizeInMb } from '@shared/utils/getFileSizeInMb'
 import { hideDraggableArea } from './showDraggableArea'
 import type { ResBody as ResBodyGetSignedUrl } from '@back/api/upload/getSignedUrlRouter'
 import type { ResBody as ResBodyMakeFilePublic } from '@back/api/upload/makeFilePublicRouter'
-import axios from 'axios'
 import { toast } from 'sonner'
 import { asyncDelay } from '@shared/utils/delay'
 import type { FroalaProps } from '@entities/quotation/ui/froala/types'
+import { axiosWithAuth } from '@shared/lib/axiosWithAuth'
+import axios from 'axios'
 
 type BeforeUpload = NonNullable<FroalaProps['beforeUpload']>
 
@@ -62,7 +63,7 @@ export const beforeUpload: BeforeUpload = async (props) => {
   const toastId = toast.loading(`Uploading 0%...`)
 
   try {
-    const { data: signedUrlRes } = await axios<ResBodyGetSignedUrl>({
+    const { data: signedUrlRes } = await axiosWithAuth<ResBodyGetSignedUrl>({
       url: `${apiUrl.getSignedUrl}?fileName=${fileName}`,
       method: 'get',
     })
@@ -136,7 +137,7 @@ export const beforeUpload: BeforeUpload = async (props) => {
       },
     })
 
-    await axios<ResBodyMakeFilePublic>({
+    await axiosWithAuth<ResBodyMakeFilePublic>({
       url: `${apiUrl.makeFilePublic}?fileName=${fileName}`,
       method: 'get',
     })
