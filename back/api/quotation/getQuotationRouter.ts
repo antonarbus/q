@@ -55,6 +55,7 @@ const getQuotation: RouterHandler = async (req, res, next) => {
   // with access token it does not serve the purpose here
   const { email, roles } = getUserFromRefreshToken({ req })
   const isOwner = email === document.email
+
   const isShared = (document.sharedWith ?? []).length !== 0
   const isSharedWithEverybody = (document.sharedWith ?? []).at(0) === '*'
   const isSharedWithPerson = (document.sharedWith ?? []).includes(email)
@@ -75,7 +76,12 @@ const getQuotation: RouterHandler = async (req, res, next) => {
     return
   }
 
-  const filePath = getFilePath({ email, fileType: 'quotation', quotationId })
+  const filePath = getFilePath({
+    email: document.email,
+    fileType: 'quotation',
+    quotationId,
+  })
+
   const [fileBuffer] = await bucket.file(filePath).download()
   const quotation = jsonParseSafe<Quotation>(fileBuffer.toString())
 
