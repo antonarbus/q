@@ -1,10 +1,9 @@
 import { useIsCopyModalVisible } from '@entities/copy'
 import { useSelector } from '@shared/lib/redux'
-import { Box } from '@mui/material'
+import { Box, Tooltip } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { route } from '@shared/consts/route'
 import { PiGlobeX, PiGlobe, PiInfoBold } from 'react-icons/pi'
-import { Tooltip } from '@mui/material'
 
 export const InfoRight = (): React.ReactNode => {
   const quotationId = useSelector((state) => state.quotation.id)

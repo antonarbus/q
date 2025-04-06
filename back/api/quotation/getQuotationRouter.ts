@@ -14,7 +14,7 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  quotation?: Quotation
+  quotation: Quotation
   message:
     | 'not found in db'
     | 'not shared'
@@ -37,6 +37,13 @@ const getQuotation: RouterHandler = async (req, res, next) => {
   const { id: quotationId } = req.body
   const isNoTraceMode = isNoTraceCookie({ req })
 
+  const quotationWithOnlyId: Quotation = {
+    id: quotationId,
+    type: 'quotation',
+    email: 'john@gmail.com',
+    blocks: [],
+  }
+
   const document = isNoTraceMode
     ? await QuotationModel.findOne({ id: quotationId }).lean()
     : await QuotationModel.findOneAndUpdate(
@@ -46,7 +53,9 @@ const getQuotation: RouterHandler = async (req, res, next) => {
       ).lean()
 
   if (document === null) {
-    res.status(httpStatus.notFound_404).json({ message: 'not found in db' })
+    res
+      .status(httpStatus.notFound_404)
+      .json({ message: 'not found in db', quotation: quotationWithOnlyId })
 
     return
   }
@@ -62,15 +71,19 @@ const getQuotation: RouterHandler = async (req, res, next) => {
   const isSuperAdmin = roles.includes(userRole.superAdmin)
 
   if (!isOwner && !isShared && !isSuperAdmin) {
-    res.status(httpStatus.forbidden_403).json({ message: 'not shared' })
+    res.status(httpStatus.forbidden_403).json({
+      message: 'not shared',
+      quotation: quotationWithOnlyId,
+    })
 
     return
   }
 
   if (!isOwner && isShared && !isViewer && !isSuperAdmin) {
-    res
-      .status(httpStatus.forbidden_403)
-      .json({ message: 'no permission to view' })
+    res.status(httpStatus.forbidden_403).json({
+      message: 'no permission to view',
+      quotation: quotationWithOnlyId,
+    })
 
     return
   }
@@ -85,7 +98,9 @@ const getQuotation: RouterHandler = async (req, res, next) => {
   const quotation = jsonParseSafe<Quotation>(fileBuffer.toString())
 
   if (!quotation) {
-    res.status(httpStatus.notFound_404).json({ message: 'not found in bucket' })
+    res
+      .status(httpStatus.notFound_404)
+      .json({ message: 'not found in bucket', quotation: quotationWithOnlyId })
 
     return
   }

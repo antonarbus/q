@@ -155,6 +155,8 @@ export function useLoadQuotation(): void {
 
   useUpdateEffect(() => {
     if (isError) {
+      const quotation = error.response?.data.quotation
+
       if (error.response?.data.message === 'no permission to view') {
         dispatch(
           appSlice.actions.setBackgroundMessage({
@@ -176,6 +178,10 @@ export function useLoadQuotation(): void {
             message: `Quotation ${quotationIdToBeOpened} is private`,
           }),
         )
+
+        if (quotation !== undefined) {
+          dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
+        }
       } else {
         toast.error('Internal error')
 

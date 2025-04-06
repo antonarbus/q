@@ -27,21 +27,22 @@ export const OpenSaveQuotationModalButton = ({
 
   useUpdateEffect(() => {
     if (isSuccess) {
-      const quotation = data.quotation
+      dispatch(textSlice.actions.setNotEditable())
 
-      if (quotation !== undefined) {
-        dispatch(textSlice.actions.setNotEditable())
-        dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
+      dispatch(
+        quotationSlice.actions.loadQuotationReducer({
+          quotation: data.quotation,
+        }),
+      )
 
-        const navigateState: NavigateState = {
-          navigatedFrom: `/`,
-          navigateTo: `/${route.save}`,
-        }
-
-        void navigate(`./${id}`, {
-          state: navigateState,
-        })
+      const navigateState: NavigateState = {
+        navigatedFrom: `/`,
+        navigateTo: `/${route.save}`,
       }
+
+      void navigate(`./${id}`, {
+        state: navigateState,
+      })
     }
   }, [isSuccess])
 
