@@ -16,6 +16,7 @@ export const InfoRight = (): React.ReactNode => {
       sx={{
         all: 'unset',
         display: 'flex',
+        justifyContent: 'flex-end',
         alignItems: 'center',
         width: '100px',
         maxWidth: '100px',

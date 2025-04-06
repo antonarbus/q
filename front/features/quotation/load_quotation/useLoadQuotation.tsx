@@ -111,9 +111,9 @@ export function useLoadQuotation(): void {
 
   // above we triggered quotation loading, now we handle the response
   useUpdateEffect(() => {
-    const quotation = data?.quotation
+    if (isSuccess) {
+      const quotation = data.quotation
 
-    if (isSuccess && quotation !== undefined) {
       // check if quotation json is corrupted on the server side
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       if (quotation.blocks === undefined) {
@@ -157,6 +157,10 @@ export function useLoadQuotation(): void {
     if (isError) {
       const quotation = error.response?.data.quotation
 
+      if (quotation !== undefined) {
+        dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
+      }
+
       if (error.response?.data.message === 'no permission to view') {
         dispatch(
           appSlice.actions.setBackgroundMessage({
@@ -178,10 +182,6 @@ export function useLoadQuotation(): void {
             message: `Quotation ${quotationIdToBeOpened} is private`,
           }),
         )
-
-        if (quotation !== undefined) {
-          dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
-        }
       } else {
         toast.error('Internal error')
 
