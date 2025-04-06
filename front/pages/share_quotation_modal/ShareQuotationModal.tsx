@@ -33,7 +33,7 @@ export const ShareQuotationModal = (): React.JSX.Element => {
     <FormModal
       modalRef={modalRef}
       width='500px'
-      headerText='Share quotation'
+      headerText='Share'
       headerIcon={<ImLink />}
       buttonText={isNewQuotation ? 'Save and share' : 'Update'}
       isButtonDisabled={isButtonDisabled}

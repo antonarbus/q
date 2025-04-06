@@ -1,1 +1,2 @@
-export { Info } from './Info'
+export { InfoRight } from './InfoRight'
+export { InfoLeft } from './InfoLeft'
