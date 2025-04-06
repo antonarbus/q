@@ -118,7 +118,6 @@ const getQuotation: RouterHandler = async (req, res, next) => {
     delete quotation.openedAt
     delete quotation.from
     delete quotation.to
-    delete quotation.sharedWith
 
     quotation.blocks.forEach((block) => {
       block.email = 'john@mail.com'
