@@ -1,9 +1,9 @@
 import type { FroalaEditor } from '@shared/types/froala'
 import { roundTo } from 'round-to'
-import { getDecimalPrecision } from '../../utils/getDecimalPrecision'
 import { getNumberFromString } from '../../utils/getNumberFromString'
 import { getStringWithNewFormattedNumber } from '../../utils/getStringWithNewFormattedNumber'
 import { getTextContentFromHtml } from '../../utils/getTextContentFromHtml'
+import { getDecimalPlaces } from '@shared/utils/getDecimalPlaces'
 
 type Props = {
   oldNumber: number
@@ -26,14 +26,14 @@ export const updateNumberAtHtmlIncrementally = ({
   }
 
   const stepValue = valueDifference / steps
-  const decimalPrecision = getDecimalPrecision({ valueDifference })
+  const decimalPlaces = Math.min(getDecimalPlaces(newNumber), 2)
 
   const incrementValues = async (): Promise<void> => {
     await new Promise((resolve) => {
       for (let i = 1; i <= steps; i++) {
         const incrementedValue = roundTo(
           oldNumber + i * stepValue,
-          decimalPrecision,
+          decimalPlaces,
         )
 
         const textContent = getTextContentFromHtml({ html })
