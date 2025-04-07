@@ -51,4 +51,16 @@ const quotationSchema = new Schema<Quotation>({
   },
 })
 
+// remove _id and __v after converting to object
+quotationSchema.set('toObject', {
+  versionKey: false,
+
+  transform: (_doc, ret) => {
+    // eslint-disable-next-line no-underscore-dangle
+    delete ret._id
+
+    return ret
+  },
+})
+
 export const QuotationModel = model<Quotation>('quotation', quotationSchema)

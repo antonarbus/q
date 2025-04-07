@@ -81,6 +81,10 @@ export const useSaveQuotation = ({
         toast.success(
           `Shared quotation was copied and saved under id ${data.quotation.id}`,
         )
+
+        void navigate(`/${data.quotation.id}`, {
+          replace: true,
+        })
       }
 
       void updateCategories()

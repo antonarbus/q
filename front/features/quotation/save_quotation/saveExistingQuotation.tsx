@@ -10,6 +10,7 @@ import { toast } from 'sonner'
 import { createActor } from 'xstate'
 import type { AxiosError } from 'axios'
 import type { ResBody } from '@back/api/quotation/saveQuotationRouter'
+import { router } from '@shared/lib/router'
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
   navItemId: navItemId.save,
@@ -43,6 +44,10 @@ export const saveExistingQuotation = async (): Promise<void> => {
           `Shared quotation was copied and saved under id ${data.quotation.id}`,
         )
       }
+
+      void router.navigate(`/${data.quotation.id}`, {
+        replace: true,
+      })
 
       dispatch(
         quotationSlice.actions.loadQuotationReducer({

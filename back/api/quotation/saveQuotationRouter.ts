@@ -20,8 +20,6 @@ type Message =
   | 'updated'
   | 'copied and saved'
   | 'id is not provided'
-  | 'name is not provided'
-  | 'category is not provided'
 
 export type ResBody = {
   message: Message
@@ -46,27 +44,29 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
     return
   }
 
-  const isExistingYourQuotation =
-    (await QuotationModel.findOne({ id: quotation.id, email })) !== null
+  const foundQuotation = await QuotationModel.findOne({ id: quotation.id })
 
-  const isNewQuotation =
-    (await QuotationModel.findOne({ id: quotation.id })) === null
+  type QuotationOwnership = 'your new' | 'your existing' | 'foreign existing'
 
-  const isExistingForeignQuotationSavedAsYourNew =
-    !isNewQuotation && !isExistingYourQuotation
+  const getQuotationOwnership = (): QuotationOwnership => {
+    if (foundQuotation === null) {
+      return 'your new'
+    }
 
-  const isNew = isNewQuotation || isExistingForeignQuotationSavedAsYourNew
+    if (foundQuotation.email === email) {
+      return 'your existing'
+    }
 
-  const quotationId = isExistingForeignQuotationSavedAsYourNew
-    ? nanoid(5)
-    : quotation.id
+    // foundQuotation.email !== email
+    return 'foreign existing'
+  }
 
-  const quotationDataFromDb = await QuotationModel.findOneAndUpdate(
-    {
-      id: quotation.id,
-      email,
-    },
-    {
+  const quotationOwnership = getQuotationOwnership()
+
+  if (quotationOwnership === 'your new') {
+    const quotationId = nanoid(5)
+
+    const createResponse = await QuotationModel.create({
       id: quotationId,
       email,
       name: quotation.name,
@@ -76,45 +76,104 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
       sharedWith: quotation.sharedWith,
       blocks: 'find in bucket under same id',
       updatedAt: Date.now(),
-      ...(isNew && { createdAt: Date.now() }),
-      ...(isNew && { openedAt: Date.now() }),
-    },
-    {
-      new: true,
-      upsert: true,
-    },
-  )
-    .select({ _id: 0, __v: 0 })
-    .lean()
+      createdAt: Date.now(),
+      openedAt: Date.now(),
+    })
 
-  const filePath = getFilePath({ email, fileType: 'quotation', quotationId })
+    const quotationDataFromDb = createResponse.toObject()
+    const filePath = getFilePath({ email, fileType: 'quotation', quotationId })
+    const file = bucket.file(filePath)
+    const fullQuotation = { ...quotationDataFromDb, blocks: quotation.blocks }
+    const quotationJson = JSON.stringify(fullQuotation, null, 2)
+    await file.save(quotationJson)
+
+    res.status(httpStatus.success_200).json({
+      message: 'saved',
+      quotation: fullQuotation,
+    })
+
+    return
+  }
+
+  if (quotationOwnership === 'your existing') {
+    const updateResponse = await QuotationModel.findOneAndUpdate(
+      {
+        id: quotation.id,
+        email,
+      },
+      {
+        name: quotation.name,
+        category: quotation.category,
+        desc: quotation.desc,
+        info: quotation.info,
+        sharedWith: quotation.sharedWith,
+        blocks: 'to be found in bucket under same id',
+        updatedAt: Date.now(),
+      },
+      {
+        new: true,
+        upsert: true,
+      },
+    )
+
+    const quotationDataFromDb = updateResponse.toObject()
+
+    const filePath = getFilePath({
+      email,
+      fileType: 'quotation',
+      quotationId: quotation.id,
+    })
+
+    const file = bucket.file(filePath)
+    const fullQuotation = { ...quotationDataFromDb, blocks: quotation.blocks }
+    const quotationJson = JSON.stringify(fullQuotation, null, 2)
+    await file.save(quotationJson)
+
+    res.status(httpStatus.success_200).json({
+      message: 'updated',
+      quotation: fullQuotation,
+    })
+
+    return
+  }
+
+  // quotationOwnership === 'foreign existing'
+  const quotationId = nanoid(5)
+
+  const createResponse = await QuotationModel.create({
+    id: quotationId,
+    email,
+    name: quotation.name,
+    category: quotation.category,
+    desc: quotation.desc,
+    info: quotation.info,
+    sharedWith: quotation.sharedWith,
+    blocks: 'find in bucket under same id',
+    updatedAt: Date.now(),
+    createdAt: Date.now(),
+    openedAt: Date.now(),
+  })
+
+  const quotationDataFromDb = createResponse.toObject()
+
+  const filePath = getFilePath({
+    email,
+    fileType: 'quotation',
+    quotationId,
+  })
+
   const file = bucket.file(filePath)
+  const fullQuotation = { ...quotationDataFromDb, blocks: quotation.blocks }
+  const quotationJson = JSON.stringify(fullQuotation, null, 2)
+  await file.save(quotationJson)
 
-  const contents = JSON.stringify(
-    { ...quotationDataFromDb, blocks: quotation.blocks },
-    null,
-    2,
-  )
-
-  await file.save(contents)
-
-  let message: Message = 'saved'
-
-  if (isNewQuotation) {
-    message = 'saved'
-  }
-
-  if (isExistingYourQuotation) {
-    message = 'updated'
-  }
-
-  if (isExistingForeignQuotationSavedAsYourNew) {
-    message = 'copied and saved'
-  }
+  // todo: copy files and quotation for saving foreign quotation
+  // todo: make it inside separate if statement
+  // todo: need to copy files,get html and replaced links
 
   res.status(httpStatus.success_200).json({
-    message,
-    quotation: { ...quotationDataFromDb, blocks: quotation.blocks },
+    message: 'copied and saved',
+    quotation: fullQuotation,
   })
 }
 
