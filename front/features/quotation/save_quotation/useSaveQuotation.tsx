@@ -82,9 +82,7 @@ export const useSaveQuotation = ({
           `Shared quotation was copied and saved under id ${data.quotation.id}`,
         )
 
-        void navigate(`/${data.quotation.id}`, {
-          replace: true,
-        })
+        void navigate(`/${data.quotation.id}`)
       }
 
       void updateCategories()

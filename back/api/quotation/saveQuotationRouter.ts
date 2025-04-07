@@ -167,6 +167,21 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
   const quotationJson = JSON.stringify(fullQuotation, null, 2)
   await file.save(quotationJson)
 
+  /*
+  const regexp =
+    /https:\/\/storage\.googleapis\.com\/quotation-app-bucket\/[^/]+\/files\/([^"\\\s]+)/g
+
+  const fileNames = []
+  let match: string[] | null = []
+
+  while ((match = regexp.exec(quotationJson)) !== null) {
+    fileNames.push(match[1]) // match[1] = file name
+  }
+
+  console.log(fileNames)
+
+  */
+
   // todo: copy files and quotation for saving foreign quotation
   // todo: make it inside separate if statement
   // todo: need to copy files,get html and replaced links

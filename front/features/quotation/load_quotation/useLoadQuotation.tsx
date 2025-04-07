@@ -1,6 +1,6 @@
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { useEffect } from 'react'
-import { useUpdateEffect } from 'react-use'
+import { useEffectOnce, useUpdateEffect } from 'react-use'
 import {
   quotationSlice,
   useGetQuotationMutation,
@@ -27,6 +27,23 @@ export function useLoadQuotation(): void {
     isError,
     error,
   } = useGetQuotationMutation()
+
+  // re-render quotation when user clicks on back/forward button
+  useEffectOnce(() => {
+    const controller = new AbortController()
+
+    window.addEventListener(
+      'popstate',
+      () => {
+        dispatch(appSlice.actions.reRenderQuotation())
+      },
+      { signal: controller.signal },
+    )
+
+    return (): void => {
+      controller.abort()
+    }
+  })
 
   // quotation loading
   useEffect(() => {
