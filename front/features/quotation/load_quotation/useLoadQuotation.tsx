@@ -15,7 +15,6 @@ import { useParams } from 'react-router-dom'
 
 export function useLoadQuotation(): void {
   const { quotationId } = useParams()
-  console.log('🚀 ~ quotationId:', quotationId)
 
   const quotationKey = useSelector((state) => state.app.quotationKey)
 
