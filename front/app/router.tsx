@@ -24,6 +24,7 @@ import { OnInitLoad } from './OnInitLoad'
 import { userRole } from '@entities/user'
 import { Toaster } from 'sonner'
 import { ShareQuotationModal } from '@pages/share_quotation_modal'
+import { LoadQuotation } from '@features/quotation/load_quotation'
 
 const Quotation = lazy(async () => import('@pages/quotation_page'))
 const QuotationsPageLazy = lazy(async () => import('@pages/quotations_page'))
@@ -97,6 +98,7 @@ const router = createBrowserRouter([
               />
             }
           >
+            <LoadQuotation />
             <Quotation />
           </Suspense>
         ),

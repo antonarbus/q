@@ -1,6 +1,5 @@
+import { backToQuotationRef } from '@entities/quotation'
 import { IconButton, Tooltip } from '@mui/material'
-import { appSlice } from '@shared/appSlice'
-import { dispatch } from '@shared/lib/redux'
 import { AiOutlineFolderOpen } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 
@@ -21,15 +20,7 @@ export const OpenQuotationPageAndLoadFromServerButton = ({
       <Link
         to={`/${id}`}
         onClick={() => {
-          dispatch(
-            appSlice.actions.setQuotationSource({ quotationSource: 'server' }),
-          )
-
-          dispatch(
-            appSlice.actions.setQuotationIdToBeOpened({
-              quotationIdToBeOpened: id,
-            }),
-          )
+          backToQuotationRef.current = null
         }}
       >
         <IconButton size='small'>

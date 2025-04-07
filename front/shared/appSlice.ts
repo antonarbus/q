@@ -3,8 +3,6 @@ import { nanoid } from '@shared/lib/nanoid'
 
 type State = {
   quotationKey: string
-  quotationSource: 'template' | 'server' | 'previous'
-  quotationIdToBeOpened: string
   backgroundMessage: string
   loadingOverlay: {
     showLoader: boolean
@@ -12,21 +10,8 @@ type State = {
   }
 }
 
-const pathSegments = window.location.pathname.split('/')
-const quotationIdFromPath = pathSegments.at(1)
-
-const quotationId =
-  quotationIdFromPath !== undefined && quotationIdFromPath !== ''
-    ? quotationIdFromPath
-    : 'new'
-
-const quotationSource: State['quotationSource'] =
-  quotationId === 'new' ? 'template' : 'server'
-
 const initialState: State = {
   quotationKey: nanoid(5),
-  quotationSource,
-  quotationIdToBeOpened: quotationId,
   backgroundMessage: '',
   loadingOverlay: {
     showLoader: false,
@@ -59,24 +44,6 @@ export const appSlice = createSlice({
     hideLoadingOverlay: (state) => {
       state.loadingOverlay.showLoader = false
       state.loadingOverlay.text = ''
-    },
-    setQuotationSource: (
-      state,
-      action: PayloadAction<{
-        quotationSource: State['quotationSource']
-      }>,
-    ) => {
-      const { quotationSource: source } = action.payload
-      state.quotationSource = source
-    },
-    setQuotationIdToBeOpened: (
-      state,
-      action: PayloadAction<{
-        quotationIdToBeOpened: State['quotationIdToBeOpened']
-      }>,
-    ) => {
-      const { quotationIdToBeOpened } = action.payload
-      state.quotationIdToBeOpened = quotationIdToBeOpened
     },
   },
 })
