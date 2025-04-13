@@ -25,9 +25,9 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const getSignedUrlRouter = Router()
+export const fileUploadSignedUrlRouter = Router()
 
-const getSignedUrl: RouterHandler = async (req, res, next) => {
+const getFileUploadSignedUrl: RouterHandler = async (req, res, next) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
   const { fileName } = req.query
 
@@ -69,4 +69,4 @@ const getSignedUrl: RouterHandler = async (req, res, next) => {
   }
 }
 
-getSignedUrlRouter.get('/', asyncHandler(getSignedUrl))
+fileUploadSignedUrlRouter.get('/', asyncHandler(getFileUploadSignedUrl))

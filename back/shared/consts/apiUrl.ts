@@ -24,15 +24,14 @@ export const apiUrl = {
   getBookmarks: '/api/get-bookmarks',
   getBookmarkCategories: '/api/get-bookmark-categories',
   deleteBookmark: '/api/delete-bookmark',
-  // upload
+  // files
   upload: '/api/upload', // not in use
-  getSignedUrl: '/api/get-signed-url',
+  fileUploadSignedUrl: '/api/file-upload-signed-url',
   makeFilePublic: '/api/make-file-public',
+  getFilesStats: '/api/get-files-stats',
   // visitors
   countUniqueDailyVisitors: '/api/count-unique-daily-visitors',
   getUniqueDailyVisitors: '/api/get-unique-daily-visitors',
-  // settings
-  getFilesStats: '/api/get-files-stats',
   // dev
   api: '/api',
   test: '/api/test',

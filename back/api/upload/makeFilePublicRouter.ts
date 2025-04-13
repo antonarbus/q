@@ -5,21 +5,21 @@ import { bucket, fileBaseUrl, getFilePath } from '@back/shared/services/storage'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
-export type SearchQuery = {
+export type ReqBody = {
   fileName: string
 }
 
 export type ResBody = {
+  link: string | null
   message:
     | ErrorMessageCommon
     | 'invalid file name'
     | 'made file public'
     | 'failed to make file public'
-  link: string | null
 }
 
 type RouterHandler = (
-  req: Request<unknown, unknown, unknown, SearchQuery>,
+  req: Request<unknown, unknown, ReqBody>,
   res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
@@ -28,7 +28,7 @@ export const makeFilePublicRouter = Router()
 
 const makeFilePublic: RouterHandler = async (req, res, next) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
-  const { fileName } = req.query
+  const { fileName } = req.body
 
   if (!fileName || typeof fileName !== 'string') {
     res
@@ -42,6 +42,7 @@ const makeFilePublic: RouterHandler = async (req, res, next) => {
     const filePath = getFilePath({ email, fileType: 'file', fileName })
     await bucket.file(filePath).makePublic()
     const publicUrl = `${fileBaseUrl}/${filePath}`
+    // save filename and filesize in db
 
     res
       .status(httpStatus.success_200)
@@ -54,4 +55,4 @@ const makeFilePublic: RouterHandler = async (req, res, next) => {
   }
 }
 
-makeFilePublicRouter.get('/', asyncHandler(makeFilePublic))
+makeFilePublicRouter.patch('/', asyncHandler(makeFilePublic))

@@ -23,7 +23,6 @@ import { getQuotationRouter } from './api/quotation/getQuotationRouter'
 import { getQuotationsRouter } from './api/quotation/getQuotationsRouter'
 import { saveQuotationRouter } from './api/quotation/saveQuotationRouter'
 import { getFilesStatsRouter } from './api/settings/getFilesStatsRouter'
-import { uploadRouter } from './api/upload/uploadRouter'
 import { apiUrl } from './shared/consts/apiUrl'
 import { connectToDb } from './shared/db/connectToDb'
 import { errorHandlerMiddleware } from './middleware/errorHandlerMiddleware'
@@ -32,7 +31,7 @@ import { getUsersRouter } from './api/user/getUsersRouter'
 import { deleteUserRouter } from './api/user/deleteUserRouter'
 import { countUniqueDailyVisitorsRouter } from './api/visitors/countUniqueDailyVisitorsRouter'
 import { getUniqueDailyVisitorsRouter } from './api/visitors/getUniqueDailyVisitorsRouter'
-import { getSignedUrlRouter } from './api/upload/getSignedUrlRouter'
+import { fileUploadSignedUrlRouter } from './api/upload/fileUploadSignedUrlRouter'
 import { makeFilePublicRouter } from './api/upload/makeFilePublicRouter'
 import { healthRouter } from './api/dev/healthRouter'
 // import cors from 'cors'
@@ -87,11 +86,9 @@ app.use(apiUrl.getBookmarkCategories, getBookmarkCategoriesRouter)
 // visitors
 app.use(apiUrl.countUniqueDailyVisitors, countUniqueDailyVisitorsRouter)
 app.use(apiUrl.getUniqueDailyVisitors, getUniqueDailyVisitorsRouter)
-// upload
-app.use(apiUrl.upload, uploadRouter)
-app.use(apiUrl.getSignedUrl, getSignedUrlRouter)
+// files
+app.use(apiUrl.fileUploadSignedUrl, fileUploadSignedUrlRouter)
 app.use(apiUrl.makeFilePublic, makeFilePublicRouter)
-// settings
 app.use(apiUrl.getFilesStats, getFilesStatsRouter)
 // error
 app.use(errorHandlerMiddleware)

@@ -8,11 +8,12 @@ export const syncDelay = (ms = 1000): void => {
 }
 
 export const asyncDelay = async (ms = 1000): Promise<string> => {
-  const { promise, resolve } = Promise.withResolvers<string>()
+  const { promise: delayPromise, resolve: resolveDelayPromise } =
+    Promise.withResolvers<string>()
 
   setTimeout(() => {
-    resolve(`delayed with ${String(ms)} ms`)
+    resolveDelayPromise(`delayed with ${String(ms)} ms`)
   }, ms)
 
-  return promise
+  return delayPromise
 }

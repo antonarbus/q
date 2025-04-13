@@ -3,13 +3,16 @@ import { getState } from '@shared/lib/redux'
 import { removeLoadingBar } from '@shared/lib/froala/removeLoadingBar'
 import { getFileSizeInMb } from '@shared/utils/getFileSizeInMb'
 import { hideDraggableArea } from './showDraggableArea'
-import type { ResBody as ResBodyGetSignedUrl } from '@back/api/upload/getSignedUrlRouter'
-import type { ResBody as ResBodyMakeFilePublic } from '@back/api/upload/makeFilePublicRouter'
+import type { ResBody as ResBodyGetSignedUrl } from '@back/api/upload/fileUploadSignedUrlRouter'
+import type {
+  ResBody as ResBodyMakeFilePublic,
+  ReqBody as Payload,
+} from '@back/api/upload/makeFilePublicRouter'
 import { toast } from 'sonner'
 import { asyncDelay } from '@shared/utils/delay'
 import type { FroalaProps } from '@entities/quotation/ui/froala/types'
 import { axiosWithAuth } from '@shared/lib/axiosWithAuth'
-import axios from 'axios'
+import axios, { type AxiosError } from 'axios'
 
 type BeforeUpload = NonNullable<FroalaProps['beforeUpload']>
 
@@ -64,7 +67,7 @@ export const beforeUpload: BeforeUpload = async (props) => {
 
   try {
     const { data: signedUrlRes } = await axiosWithAuth<ResBodyGetSignedUrl>({
-      url: `${apiUrl.getSignedUrl}?fileName=${fileName}`,
+      url: `${apiUrl.fileUploadSignedUrl}?fileName=${fileName}`,
       method: 'get',
     })
 
@@ -76,15 +79,18 @@ export const beforeUpload: BeforeUpload = async (props) => {
 
     let eventCount = 0
 
-    const { promise, resolve } = Promise.withResolvers()
+    const {
+      promise: waitForUploadPromise,
+      resolve: resolveWaitForUploadPromise,
+    } = Promise.withResolvers()
 
     await axios<unknown>({
       url: signedUrlRes.signedUrl,
       method: 'put',
+      data: file,
       headers: {
         'x-goog-content-length-range': '0,104857600', // Allow up to 100MB
       },
-      data: file,
       onUploadProgress: (progressEvent) => {
         const showProgress = async (): Promise<void> => {
           eventCount++
@@ -128,7 +134,7 @@ export const beforeUpload: BeforeUpload = async (props) => {
             }
 
             if (percentCompleted === 100) {
-              resolve('done')
+              resolveWaitForUploadPromise('done')
             }
           }
         }
@@ -137,9 +143,16 @@ export const beforeUpload: BeforeUpload = async (props) => {
       },
     })
 
-    await axiosWithAuth<ResBodyMakeFilePublic>({
-      url: `${apiUrl.makeFilePublic}?fileName=${fileName}`,
-      method: 'get',
+    await axiosWithAuth<
+      ResBodyMakeFilePublic,
+      AxiosError<ResBodyMakeFilePublic>,
+      Payload
+    >({
+      url: apiUrl.makeFilePublic,
+      method: 'patch',
+      data: {
+        fileName,
+      },
     })
 
     if (props.type === 'file') {
@@ -159,7 +172,7 @@ export const beforeUpload: BeforeUpload = async (props) => {
       )
     }
 
-    await promise
+    await waitForUploadPromise
     await asyncDelay(50)
     toast.success(`Uploaded 100%`, { id: toastId })
   } catch {

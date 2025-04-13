@@ -8,6 +8,16 @@ import { createLoadingMenuIconMachine, navSlice } from '@shared/nav'
 import { agGridSlice } from '@shared/lib/ag_grid/agGridSlice'
 import { createActor } from 'xstate'
 
+if (typeof Promise.withResolvers !== 'function') {
+  const element = document.querySelector('.wait-for-init-files-to-load')
+
+  if (element instanceof HTMLElement) {
+    element.textContent = 'Your browser is too old, please update :('
+  }
+
+  throw new Error('old browser, please update')
+}
+
 export const {
   promise: initAccessTokenFetchingPromise,
   resolve: resolveInitAccessTokenFetching,
