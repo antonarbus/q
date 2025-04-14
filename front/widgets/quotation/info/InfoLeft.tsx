@@ -6,8 +6,6 @@ export const InfoLeft = (): React.ReactNode => {
     (state) => state.quotation.permissionLevel,
   )
 
-  console.log('🚀 ~ permissionLevel:', permissionLevel)
-
   return (
     <Box
       sx={{
