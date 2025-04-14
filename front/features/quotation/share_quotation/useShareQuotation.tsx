@@ -75,7 +75,9 @@ export const useShareQuotation = ({
       }
 
       if (data.message === 'copied and saved') {
-        toast.success('Shared quotation was copied, saved and shared')
+        toast.success('Shared quotation was copied, saved and shared', {
+          duration: 5000,
+        })
       }
 
       void fetchQuotations()

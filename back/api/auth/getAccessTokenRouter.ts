@@ -3,7 +3,7 @@ import type { User } from '@entities/user'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { errorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { generateAccessToken } from '@back/shared/lib/jwt'
-import { isNoTraceCookie, removeRefreshTokenCookie } from '@back/shared/headers'
+import { isNoTraceMode, removeRefreshTokenCookie } from '@back/shared/headers'
 import { getUserFromRefreshTokenOrNull, UserModel } from '@back/entities/user'
 import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
@@ -33,7 +33,7 @@ const getAccessToken: RouterHandler = async (req, res, next) => {
   const { email, roles, refreshJwtToken, jwtRefreshTokenExpirationDays } =
     userDataPerviouslyLoggedIn
 
-  const shouldNotTrace = isNoTraceCookie({ req })
+  const shouldNotTrace = isNoTraceMode({ req })
 
   const user = shouldNotTrace
     ? await UserModel.findOne({ email, refreshJwtToken })

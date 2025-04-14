@@ -3,7 +3,7 @@ import type { Quotation } from '@entities/quotation'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { bucket, getFilePath } from '@back/shared/services/storage'
 import { jsonParseSafe } from '@back/shared/utils/jsonParseSafe'
-import { isNoTraceCookie } from '@back/shared/headers'
+import { isNoTraceMode } from '@back/shared/headers'
 import { userRole } from '@back/shared/consts/userRole'
 import { getUserFromRefreshToken } from '@back/entities/user'
 import { QuotationModel } from '@back/entities/quotation'
@@ -15,14 +15,8 @@ export type ReqBody = {
 
 export type ResBody = {
   quotation: Quotation
-  message:
-    | 'not found in db'
-    | 'not shared'
-    | 'no permission to view'
-    | 'not found in bucket'
-    | 'owner permission'
-    | 'viewer permission'
-    | 'super-admin permission'
+  // permissionLevel?: PermissionLevel
+  message: 'found' | 'not found'
 }
 
 type RouterHandler = (
@@ -35,57 +29,71 @@ export const getQuotationRouter = Router()
 
 const getQuotation: RouterHandler = async (req, res, next) => {
   const { id: quotationId } = req.body
-  const isNoTraceMode = isNoTraceCookie({ req })
+  const { email, roles } = getUserFromRefreshToken({ req })
 
-  const quotationWithOnlyId: Quotation = {
+  const emptyQuotation: Quotation = {
     id: quotationId,
     type: 'quotation',
     email: 'john@gmail.com',
     blocks: [],
   }
 
-  const document = isNoTraceMode
-    ? await QuotationModel.findOne({ id: quotationId }).lean()
-    : await QuotationModel.findOneAndUpdate(
-        { id: quotationId },
-        { openedAt: Date.now() },
-        { new: true },
-      ).lean()
+  const document = await QuotationModel.findOne({ id: quotationId }).lean()
 
   if (document === null) {
+    res.status(httpStatus.notFound_404).json({
+      message: 'not found',
+      quotation: emptyQuotation,
+    })
+
+    return
+  }
+
+  const getPermissionLevel = (): Quotation['permissionLevel'] => {
+    if (email === document.email) {
+      return 'Owner'
+    }
+
+    if ((document.sharedWith ?? []).includes(email)) {
+      return 'Shared with you'
+    }
+
+    if ((document.sharedWith ?? []).at(0) === '*') {
+      return 'Public'
+    }
+
+    if (isNoTraceMode({ req })) {
+      return 'Super admin on behalf of a user'
+    }
+
+    if (roles.includes(userRole.superAdmin)) {
+      return 'Super admin'
+    }
+
+    return 'Forbidden'
+  }
+
+  const permissionLevel = getPermissionLevel()
+
+  if (permissionLevel === 'Forbidden') {
     res
-      .status(httpStatus.notFound_404)
-      .json({ message: 'not found in db', quotation: quotationWithOnlyId })
+      .status(httpStatus.forbidden_403)
+      .json({ message: 'found', quotation: emptyQuotation })
 
     return
   }
 
-  // this is probably not very good to do, but i am taking user information from refresh token here
-  // with access token it does not serve the purpose here
-  const { email, roles } = getUserFromRefreshToken({ req })
-  const isOwner = email === document.email
-  const isShared = (document.sharedWith ?? []).length !== 0
-  const isSharedWithEverybody = (document.sharedWith ?? []).at(0) === '*'
-  const isSharedWithPerson = (document.sharedWith ?? []).includes(email)
-  const isViewer = isSharedWithEverybody || isSharedWithPerson
-  const isSuperAdmin = roles.includes(userRole.superAdmin)
-
-  if (!isOwner && !isShared && !isSuperAdmin) {
-    res.status(httpStatus.forbidden_403).json({
-      message: 'not shared',
-      quotation: quotationWithOnlyId,
+  if (permissionLevel === 'Owner') {
+    await QuotationModel.updateOne(
+      { id: quotationId },
+      { openedAt: Date.now() },
+    ).catch((error: unknown) => {
+      console.error('failed to update openedAt field', error)
     })
-
-    return
   }
 
-  if (!isOwner && isShared && !isViewer && !isSuperAdmin) {
-    res.status(httpStatus.forbidden_403).json({
-      message: 'no permission to view',
-      quotation: quotationWithOnlyId,
-    })
-
-    return
+  if (permissionLevel === 'Shared with you' || permissionLevel === 'Public') {
+    // todo: add and save new field "viewedAt"
   }
 
   const filePath = getFilePath({
@@ -98,31 +106,16 @@ const getQuotation: RouterHandler = async (req, res, next) => {
   const quotation = jsonParseSafe<Quotation>(fileBuffer.toString())
 
   if (!quotation) {
-    res
-      .status(httpStatus.notFound_404)
-      .json({ message: 'not found in bucket', quotation: quotationWithOnlyId })
+    res.status(httpStatus.notFound_404).json({
+      message: 'not found',
+      quotation: emptyQuotation,
+    })
 
     return
   }
 
-  if (isSuperAdmin) {
-    res
-      .status(httpStatus.success_200)
-      .json({ message: 'super-admin permission', quotation })
-
-    return
-  }
-
-  if (isOwner) {
-    res
-      .status(httpStatus.success_200)
-      .json({ message: 'owner permission', quotation })
-
-    return
-  }
-
-  // remove sensitive data from quotation
-  if (isViewer) {
+  if (permissionLevel === 'Shared with you' || permissionLevel === 'Public') {
+    // remove sensitive data from quotation
     quotation.email = 'john@mail.com'
     delete quotation.name
     delete quotation.category
@@ -155,12 +148,14 @@ const getQuotation: RouterHandler = async (req, res, next) => {
         })
       }
     })
-
-    res.status(httpStatus.success_200).json({
-      message: 'viewer permission',
-      quotation,
-    })
   }
+
+  quotation.permissionLevel = permissionLevel
+
+  res.status(httpStatus.success_200).json({
+    message: 'found',
+    quotation,
+  })
 }
 
 getQuotationRouter.post('/', asyncHandler(getQuotation))

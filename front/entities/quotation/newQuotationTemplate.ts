@@ -7,6 +7,7 @@ export const newQuotationTemplate: Quotation = {
   id: 'new',
   type: 'quotation',
   email: 'john@mail.com',
+  permissionLevel: undefined,
   sharedWith: [],
   preview: '',
   blocks: [

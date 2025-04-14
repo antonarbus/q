@@ -2,10 +2,11 @@ import { Box } from '@mui/material'
 import { useSelector } from '@shared/lib/redux'
 
 export const InfoLeft = (): React.ReactNode => {
-  const yourEmail = useSelector((state) => state.user.email)
-  const quotationEmail = useSelector((state) => state.quotation.email)
+  const permissionLevel = useSelector(
+    (state) => state.quotation.permissionLevel,
+  )
 
-  const isOwner = yourEmail === quotationEmail
+  console.log('🚀 ~ permissionLevel:', permissionLevel)
 
   return (
     <Box
@@ -26,7 +27,7 @@ export const InfoLeft = (): React.ReactNode => {
           userSelect: 'none',
         }}
       >
-        {isOwner ? 'Owner' : 'Viewer'}
+        {permissionLevel ?? ''}
       </Box>
     </Box>
   )

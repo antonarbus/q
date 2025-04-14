@@ -5,6 +5,6 @@ type Props = {
   res: Response
 }
 
-export const removeNoTraceCookie = ({ res }: Props): void => {
+export const removeNoTraceMode = ({ res }: Props): void => {
   res.clearCookie(cookieName.noTrace)
 }

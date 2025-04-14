@@ -7,12 +7,12 @@ type Props = {
 
 /**
  * If super-admin logs into someone user's account we
- * do not want to log timestamp of logging in, open
- * quotation or bookmark
+ * do not want to log timestamp of sign-in, open
+ * quotation or bookmark.
  *
- * We set the 'no-trace-mode': true cookie to header
+ * We set the 'no-trace-mode': true cookie to the header
  */
-export const setNoTraceCookie = ({ res }: Props): void => {
+export const setNoTraceMode = ({ res }: Props): void => {
   res.cookie(cookieName.noTrace, true, {
     httpOnly: true,
     secure: process.env.INSTALLATION !== 'local',

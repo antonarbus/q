@@ -41,6 +41,7 @@ const initialState: Quotation = {
   id: '',
   type: 'quotation',
   email: 'john@mail.com',
+  permissionLevel: undefined,
   blocks: [],
 }
 

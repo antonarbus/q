@@ -10,7 +10,7 @@ import {
   getJwtExpirationInDays,
   verifyRefreshToken,
 } from '@back/shared/lib/jwt'
-import { setNoTraceCookie, setRefreshTokenCookie } from '@back/shared/headers'
+import { setNoTraceMode, setRefreshTokenCookie } from '@back/shared/headers'
 import { userRole } from '@back/shared/consts/userRole'
 import { getUserFromRefreshToken, UserModel } from '@back/entities/user'
 import { asyncHandler } from '@back/shared/utils/asyncHandler'
@@ -82,7 +82,7 @@ const logIn: RouterHandler = async (req, res, next) => {
         })
 
     setRefreshTokenCookie({ res, refreshJwtToken })
-    setNoTraceCookie({ res })
+    setNoTraceMode({ res })
 
     res.status(httpStatus.success_200).json({
       message: 'super-admin on behalf of user',

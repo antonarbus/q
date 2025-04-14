@@ -12,6 +12,7 @@ import { navSlice } from '@shared/nav'
 import { toast } from 'sonner'
 import { appSlice } from '@shared/appSlice'
 import { useParams } from 'react-router-dom'
+import { httpStatus } from '@back/shared/consts/httpStatus'
 
 export function useLoadQuotation(): void {
   const { quotationId } = useParams()
@@ -112,71 +113,50 @@ export function useLoadQuotation(): void {
       const quotation = data.quotation
 
       // check if quotation json is corrupted on the server side
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-      if (quotation.blocks === undefined) {
-        toast.warning('Quotation corrupted')
 
-        setTimeout(() => {
-          dispatch(appSlice.actions.hideLoadingOverlay())
-        }, 1250)
+      // if (quotation.blocks === undefined) {
+      //   toast.warning('Quotation corrupted')
 
-        return
-      }
+      //   setTimeout(() => {
+      //     dispatch(appSlice.actions.hideLoadingOverlay())
+      //   }, 1250)
 
-      if (
-        data.message === 'super-admin permission' ||
-        data.message === 'owner permission' ||
-        data.message === 'viewer permission'
-      ) {
-        dispatch(appSlice.actions.setBackgroundMessage({ message: '' }))
-        dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
+      //   return
+      // }
 
-        dispatch(
-          navSlice.actions.enableNavItems({
-            navItemIds: [
-              navItemId.save,
-              navItemId.pdf,
-              navItemId.excel,
-              navItemId.share,
-              navItemId.insert,
-            ],
-          }),
-        )
+      dispatch(appSlice.actions.setBackgroundMessage({ message: '' }))
+      dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
 
-        setTimeout(() => {
-          dispatch(appSlice.actions.hideLoadingOverlay())
-        }, 1250)
-      }
+      dispatch(
+        navSlice.actions.enableNavItems({
+          navItemIds: [
+            navItemId.save,
+            navItemId.pdf,
+            navItemId.excel,
+            navItemId.share,
+            navItemId.insert,
+          ],
+        }),
+      )
+
+      setTimeout(() => {
+        dispatch(appSlice.actions.hideLoadingOverlay())
+      }, 1250)
     }
   }, [isSuccess])
 
   useUpdateEffect(() => {
     if (isError) {
-      const quotation = error.response?.data.quotation
-
-      if (quotation !== undefined) {
-        dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
-      }
-
-      if (error.response?.data.message === 'no permission to view') {
+      if (error.response?.status === httpStatus.forbidden_403) {
         dispatch(
           appSlice.actions.setBackgroundMessage({
-            message: `No permission to view quotation ${quotationId}`,
+            message: `Forbidden to view quotation ${quotationId}`,
           }),
         )
-      } else if (
-        error.response?.data.message === 'not found in bucket' ||
-        error.response?.data.message === 'not found in db'
-      ) {
+      } else if (error.response?.status === httpStatus.notFound_404) {
         dispatch(
           appSlice.actions.setBackgroundMessage({
             message: `Quotation ${quotationId} is not found`,
-          }),
-        )
-      } else if (error.response?.data.message === 'not shared') {
-        dispatch(
-          appSlice.actions.setBackgroundMessage({
-            message: `Quotation ${quotationId} is private`,
           }),
         )
       } else {

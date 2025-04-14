@@ -80,6 +80,9 @@ export const useSaveQuotation = ({
       if (data.message === 'copied and saved') {
         toast.success(
           `Shared quotation was copied and saved under id ${data.quotation.id}`,
+          {
+            duration: 5000,
+          },
         )
 
         void navigate(`/${data.quotation.id}`)

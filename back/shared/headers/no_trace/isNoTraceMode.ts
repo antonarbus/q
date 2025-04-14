@@ -3,7 +3,7 @@ import { cookieName } from '../const/cookieName'
 
 type RequestWithCookies = Request<unknown> & {
   cookies: {
-    [cookieName.noTrace]?: boolean
+    [cookieName.noTrace]?: true
   }
 }
 
@@ -11,12 +11,12 @@ type Props = {
   req: RequestWithCookies
 }
 
-export const isNoTraceCookie = ({ req }: Props): boolean => {
-  const noTraceMode = req.cookies[cookieName.noTrace]
+export const isNoTraceMode = ({ req }: Props): boolean => {
+  const noTraceCookie = req.cookies[cookieName.noTrace]
 
-  if (noTraceMode === undefined) {
+  if (noTraceCookie === undefined) {
     return false
   }
 
-  return noTraceMode
+  return true
 }

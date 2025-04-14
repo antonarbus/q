@@ -117,6 +117,14 @@ export type Quotation = Common & {
     name?: string
     company?: string
   }
+  permissionLevel?:
+    | 'Public'
+    | 'Shared with you'
+    | 'Owner'
+    | 'Super admin'
+    | 'Super admin on behalf of a user'
+    | 'Forbidden'
+
   blocks: Item[]
 }
 

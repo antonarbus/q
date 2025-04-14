@@ -42,6 +42,9 @@ export const saveExistingQuotation = async (): Promise<void> => {
       if (data.message === 'copied and saved') {
         toast.success(
           `Shared quotation was copied and saved under id ${data.quotation.id}`,
+          {
+            duration: 5000,
+          },
         )
       }
 
