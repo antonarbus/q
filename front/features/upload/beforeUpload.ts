@@ -1,4 +1,4 @@
-import { apiUrl } from '@back/shared/consts/apiUrl'
+import { api } from '@back/shared/consts/api'
 import { getState } from '@shared/lib/redux'
 import { removeLoadingBar } from '@shared/lib/froala/removeLoadingBar'
 import { getFileSizeInMb } from '@shared/utils/getFileSizeInMb'
@@ -67,7 +67,7 @@ export const beforeUpload: BeforeUpload = async (props) => {
 
   try {
     const { data: signedUrlRes } = await axiosWithAuth<ResBodyGetSignedUrl>({
-      url: `${apiUrl.fileUploadSignedUrl}?fileName=${fileName}`,
+      url: `${api.fileUploadSignedUrl}?fileName=${fileName}`,
       method: 'get',
     })
 
@@ -148,7 +148,7 @@ export const beforeUpload: BeforeUpload = async (props) => {
       AxiosError<ResBodyMakeFilePublic>,
       Payload
     >({
-      url: apiUrl.makeFilePublic,
+      url: api.makeFilePublic,
       method: 'patch',
       data: {
         fileName,

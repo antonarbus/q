@@ -5,7 +5,7 @@ import type {
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import axios, { type AxiosError } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
-import { apiUrl } from '@back/shared/consts/apiUrl'
+import { api } from '@back/shared/consts/api'
 
 export const useCountUniqueDailyVisitorsMutation = (): UseMutationResult<
   ResBody,
@@ -16,7 +16,7 @@ export const useCountUniqueDailyVisitorsMutation = (): UseMutationResult<
     mutationKey: [queryKey.countUniqueDailyVisitors],
     mutationFn: async ({ date, isNew }: Payload) => {
       const res = await axios<ResBody>({
-        url: apiUrl.countUniqueDailyVisitors,
+        url: api.countUniqueDailyVisitors,
         method: 'post',
         data: { date, isNew },
       })

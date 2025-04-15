@@ -2,7 +2,7 @@ import type {
   ResBody,
   SearchQuery,
 } from '@back/api/visitors/getUniqueDailyVisitorsRouter'
-import { apiUrl } from '@back/shared/consts/apiUrl'
+import { api } from '@back/shared/consts/api'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import type { AxiosError } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
@@ -16,7 +16,7 @@ export const useGetUniqueDailyVisitorQuery = ({
     queryKey: [queryKey.getUniqueDailyVisitors, { startDate, endDate }],
     queryFn: async () => {
       const res = await axiosWithAuth<ResBody>({
-        url: `${apiUrl.getUniqueDailyVisitors}?startDate=${startDate}&endDate=${endDate}`,
+        url: `${api.getUniqueDailyVisitors}?startDate=${startDate}&endDate=${endDate}`,
         method: 'get',
       })
 

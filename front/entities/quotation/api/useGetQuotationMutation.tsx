@@ -2,7 +2,7 @@ import type {
   ReqBody as Payload,
   ResBody,
 } from '@back/api/quotation/getQuotationRouter'
-import { apiUrl } from '@back/shared/consts/apiUrl'
+import { api } from '@back/shared/consts/api'
 import { type UseMutationResult, useMutation } from '@tanstack/react-query'
 import axios, { type AxiosResponse, type AxiosError } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
@@ -16,7 +16,7 @@ export const useGetQuotationMutation = (): UseMutationResult<
     mutationKey: [queryKey.getQuotation],
     mutationFn: async ({ id }: Payload) => {
       const { data } = await axios<ResBody, AxiosResponse<ResBody>, Payload>({
-        url: apiUrl.getQuotation,
+        url: api.getQuotation,
         method: 'post',
         data: { id },
       })

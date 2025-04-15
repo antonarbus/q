@@ -1,5 +1,5 @@
 import type { ResBody } from '@back/api/user/getUsersRouter'
-import { apiUrl } from '@back/shared/consts/apiUrl'
+import { api } from '@back/shared/consts/api'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import type { AxiosError, AxiosResponse } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
@@ -19,7 +19,7 @@ export const useGetUsersQuery = (): UseQueryResult<
     // enabled: false,
     queryFn: async ({ signal }) => {
       const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
-        url: apiUrl.getUsers,
+        url: api.getUsers,
         method: 'get',
         signal,
       })

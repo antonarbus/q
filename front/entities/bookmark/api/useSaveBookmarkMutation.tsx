@@ -2,7 +2,7 @@ import type {
   ResBody,
   ReqBody as Payload,
 } from '@back/api/bookmark/saveBookmarkRouter'
-import { apiUrl } from '@back/shared/consts/apiUrl'
+import { api } from '@back/shared/consts/api'
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import type { AxiosResponse, AxiosError } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
@@ -18,7 +18,7 @@ export const useSaveBookmarkMutation = (): UseMutationResult<
     mutationFn: async ({ item }: Payload) => {
       const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>, Payload>(
         {
-          url: apiUrl.saveBookmark,
+          url: api.saveBookmark,
           method: 'post',
           data: { item },
         },

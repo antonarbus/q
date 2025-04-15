@@ -2,7 +2,7 @@ import type {
   ReqBody as Payload,
   ResBody,
 } from '@back/api/bookmark/getBookmarkRouter'
-import { apiUrl } from '@back/shared/consts/apiUrl'
+import { api } from '@back/shared/consts/api'
 import { type UseMutationResult, useMutation } from '@tanstack/react-query'
 import type { AxiosResponse, AxiosError } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
@@ -21,7 +21,7 @@ export const useGetBookmarkMutation = (): UseMutationResult<
         AxiosResponse<ResBody>,
         Payload
       >({
-        url: apiUrl.getBookmark,
+        url: api.getBookmark,
         method: 'post',
         data: { id },
       })

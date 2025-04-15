@@ -1,6 +1,5 @@
-import { Router, type Request, type Response, type NextFunction } from 'express'
+import type { Request, Response, NextFunction } from 'express'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { asyncHandler } from '@back/shared/utils/asyncHandler'
 import mongoose from 'mongoose'
 
 export type ResBody = {
@@ -13,9 +12,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => void
 
-export const healthRouter = Router()
-
-const checkDbConnection: RouterHandler = (req, res, next) => {
+export const checkDbConnection: RouterHandler = (req, res, next) => {
   const mongoState = mongoose.connection.readyState
 
   if (mongoState === mongoose.ConnectionStates.connected) {
@@ -26,5 +23,3 @@ const checkDbConnection: RouterHandler = (req, res, next) => {
 
   res.status(httpStatus.serverError_500).json({ message: 'disconnected' })
 }
-
-healthRouter.get('/', asyncHandler(checkDbConnection))

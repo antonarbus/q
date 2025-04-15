@@ -23,7 +23,7 @@ import { getQuotationRouter } from './api/quotation/getQuotationRouter'
 import { getQuotationsRouter } from './api/quotation/getQuotationsRouter'
 import { saveQuotationRouter } from './api/quotation/saveQuotationRouter'
 import { getFilesStatsRouter } from './api/settings/getFilesStatsRouter'
-import { apiUrl } from './shared/consts/apiUrl'
+import { api } from './shared/consts/api'
 import { connectToDb } from './shared/db/connectToDb'
 import { errorHandlerMiddleware } from './middleware/errorHandlerMiddleware'
 import { config } from './config'
@@ -33,7 +33,8 @@ import { countUniqueDailyVisitorsRouter } from './api/visitors/countUniqueDailyV
 import { getUniqueDailyVisitorsRouter } from './api/visitors/getUniqueDailyVisitorsRouter'
 import { fileUploadSignedUrlRouter } from './api/upload/fileUploadSignedUrlRouter'
 import { makeFilePublicRouter } from './api/upload/makeFilePublicRouter'
-import { healthRouter } from './api/dev/healthRouter'
+import { checkDbConnection, healthRouter } from './api/dev/healthRouter'
+import { asyncHandler } from './shared/utils/asyncHandler'
 // import cors from 'cors'
 
 const app = express()
@@ -44,52 +45,53 @@ app.use(cookieParser()) // middleware parses the Cookie header and populates req
 // app.use(cors())
 // app.set('trust proxy', true) // for app engine
 
-app.get(
-  apiUrl.root,
+app[api.root.method](
+  api.root.url,
   (_req: Request, res: Response) => void res.send('i am express.js'),
 )
 
-app.use(apiUrl.health, healthRouter)
+// todo: do like this everywhere
+app[api.health.method](api.health.url, asyncHandler(checkDbConnection))
 
 app.get(
-  apiUrl.api,
+  api.api.url,
   (_req: Request, res: Response) => void res.json({ message: '/api' }),
 )
 
 // dev
-app.use(apiUrl.test, testRouter)
-app.use(apiUrl.setBucketCors, setBucketCors)
-app.use(apiUrl.getBucketCors, getBucketCors)
+app.use(api.test.url, testRouter)
+app.use(api.setBucketCors.url, setBucketCors)
+app.use(api.getBucketCors.url, getBucketCors)
 // auth
-app.use(apiUrl.register, registerRouter)
-app.use(apiUrl.resetPassword, resetPasswordRouter)
-app.use(apiUrl.requestPasswordReset, requestPasswordResetRouter)
-app.use(apiUrl.logIn, logInRouter)
-app.use(apiUrl.logOut, logOutRouter)
-app.use(apiUrl.activate, activateRouter)
-app.use(apiUrl.getAccessToken, getAccessTokenRouter)
+app.use(api.register.url, registerRouter)
+app.use(api.resetPassword.url, resetPasswordRouter)
+app.use(api.requestPasswordReset.url, requestPasswordResetRouter)
+app.use(api.logIn.url, logInRouter)
+app.use(api.logOut.url, logOutRouter)
+app.use(api.activate.url, activateRouter)
+app.use(api.getAccessToken.url, getAccessTokenRouter)
 // user
-app.use(apiUrl.getUsers, getUsersRouter)
-app.use(apiUrl.deleteUser, deleteUserRouter)
+app.use(api.getUsers.url, getUsersRouter)
+app.use(api.deleteUser.url, deleteUserRouter)
 // quotation
-app.use(apiUrl.saveQuotation, saveQuotationRouter)
-app.use(apiUrl.getQuotation, getQuotationRouter)
-app.use(apiUrl.getQuotations, getQuotationsRouter)
-app.use(apiUrl.deleteQuotation, deleteQuotationRouter)
-app.use(apiUrl.getQuotationCategories, getQuotationCategoriesRouter)
+app.use(api.saveQuotation.url, saveQuotationRouter)
+app.use(api.getQuotation.url, getQuotationRouter)
+app.use(api.getQuotations.url, getQuotationsRouter)
+app.use(api.deleteQuotation.url, deleteQuotationRouter)
+app.use(api.getQuotationCategories.url, getQuotationCategoriesRouter)
 // bookmark
-app.use(apiUrl.getBookmark, getBookmarkRouter)
-app.use(apiUrl.deleteBookmark, deleteBookmarkRouter)
-app.use(apiUrl.saveBookmark, saveBookmarkRouter)
-app.use(apiUrl.getBookmarks, getBookmarksRouter)
-app.use(apiUrl.getBookmarkCategories, getBookmarkCategoriesRouter)
+app.use(api.getBookmark.url, getBookmarkRouter)
+app.use(api.deleteBookmark.url, deleteBookmarkRouter)
+app.use(api.saveBookmark.url, saveBookmarkRouter)
+app.use(api.getBookmarks.url, getBookmarksRouter)
+app.use(api.getBookmarkCategories.url, getBookmarkCategoriesRouter)
 // visitors
-app.use(apiUrl.countUniqueDailyVisitors, countUniqueDailyVisitorsRouter)
-app.use(apiUrl.getUniqueDailyVisitors, getUniqueDailyVisitorsRouter)
+app.use(api.countUniqueDailyVisitors.url, countUniqueDailyVisitorsRouter)
+app.use(api.getUniqueDailyVisitors.url, getUniqueDailyVisitorsRouter)
 // files
-app.use(apiUrl.fileUploadSignedUrl, fileUploadSignedUrlRouter)
-app.use(apiUrl.makeFilePublic, makeFilePublicRouter)
-app.use(apiUrl.getFilesStats, getFilesStatsRouter)
+app.use(api.fileUploadSignedUrl.url, fileUploadSignedUrlRouter)
+app.use(api.makeFilePublic.url, makeFilePublicRouter)
+app.use(api.getFilesStats.url, getFilesStatsRouter)
 // error
 app.use(errorHandlerMiddleware)
 

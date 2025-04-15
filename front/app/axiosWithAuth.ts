@@ -1,4 +1,4 @@
-import { apiUrl } from '@back/shared/consts/apiUrl'
+import { api } from '@back/shared/consts/api'
 import { headerName } from '@back/shared/headers'
 import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
 import type { ResBody } from '@back/api/auth/getAccessTokenRouter'
@@ -38,7 +38,7 @@ axiosWithAuth.interceptors.response.use(
 
       try {
         // refresh expired or invalid access token & extend refresh token if it is about to expire
-        const res = await axios.get<ResBody>(apiUrl.getAccessToken, {
+        const res = await axios.get<ResBody>(api.getAccessToken, {
           withCredentials: true,
         })
 

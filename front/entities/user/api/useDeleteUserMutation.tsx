@@ -2,7 +2,7 @@ import type {
   ResBody,
   ReqBody as Payload,
 } from '@back/api/user/deleteUserRouter'
-import { apiUrl } from '@back/shared/consts/apiUrl'
+import { api } from '@back/shared/consts/api'
 import { type UseMutationResult, useMutation } from '@tanstack/react-query'
 import type { AxiosError } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
@@ -17,7 +17,7 @@ export const useDeleteUserMutation = (): UseMutationResult<
     mutationKey: [queryKey.deleteUser],
     mutationFn: async (payload: Payload) => {
       const res = await axiosWithAuth<ResBody>({
-        url: apiUrl.deleteUser,
+        url: api.deleteUser,
         method: 'delete',
         data: payload,
       })
