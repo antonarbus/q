@@ -86,6 +86,17 @@ export const columnDefs: ColDef<QuotationPick>[] = [
     },
   },
   {
+    field: 'viewedAt',
+    headerName: 'viewed',
+    filter: 'agDateColumnFilter',
+    minWidth: 200,
+    valueGetter: dateValueGetter({ columnDef: 'viewedAt' }),
+    cellRenderer: DateCellRenderer,
+    filterParams: {
+      comparator: dateFilterComparator,
+    },
+  },
+  {
     field: 'sharedWith',
     headerName: 'shared with',
     valueFormatter: (): string => {

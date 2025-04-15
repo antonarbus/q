@@ -5,7 +5,7 @@ import { bucket, getFilePath } from '@back/shared/services/storage'
 import { jsonParseSafe } from '@back/shared/utils/jsonParseSafe'
 import { isNoTraceMode } from '@back/shared/headers'
 import { userRole } from '@back/shared/consts/userRole'
-import { getUserFromRefreshToken } from '@back/entities/user'
+import { getUserFromRefreshTokenOrNull } from '@back/entities/user'
 import { QuotationModel } from '@back/entities/quotation'
 import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
@@ -15,7 +15,6 @@ export type ReqBody = {
 
 export type ResBody = {
   quotation: Quotation
-  // permissionLevel?: PermissionLevel
   message: 'found' | 'not found'
 }
 
@@ -29,7 +28,7 @@ export const getQuotationRouter = Router()
 
 const getQuotation: RouterHandler = async (req, res, next) => {
   const { id: quotationId } = req.body
-  const { email, roles } = getUserFromRefreshToken({ req })
+  const userFromRefreshToken = getUserFromRefreshTokenOrNull({ req })
 
   const emptyQuotation: Quotation = {
     id: quotationId,
@@ -50,11 +49,16 @@ const getQuotation: RouterHandler = async (req, res, next) => {
   }
 
   const getPermissionLevel = (): Quotation['permissionLevel'] => {
-    if (email === document.email) {
+    const isLoggedUser = userFromRefreshToken !== null
+
+    if (isLoggedUser && userFromRefreshToken.email === document.email) {
       return 'Owner'
     }
 
-    if ((document.sharedWith ?? []).includes(email)) {
+    if (
+      isLoggedUser &&
+      (document.sharedWith ?? []).includes(userFromRefreshToken.email)
+    ) {
       return 'Shared with you'
     }
 
@@ -62,11 +66,14 @@ const getQuotation: RouterHandler = async (req, res, next) => {
       return 'Public'
     }
 
-    if (isNoTraceMode({ req })) {
+    if (isLoggedUser && isNoTraceMode({ req })) {
       return 'Super admin on behalf of a user'
     }
 
-    if (roles.includes(userRole.superAdmin)) {
+    if (
+      isLoggedUser &&
+      userFromRefreshToken.roles.includes(userRole.superAdmin)
+    ) {
       return 'Super admin'
     }
 
@@ -93,7 +100,12 @@ const getQuotation: RouterHandler = async (req, res, next) => {
   }
 
   if (permissionLevel === 'Shared with you' || permissionLevel === 'Public') {
-    // todo: add and save new field "viewedAt"
+    await QuotationModel.updateOne(
+      { id: quotationId },
+      { viewedAt: Date.now() },
+    ).catch((error: unknown) => {
+      console.error('failed to update viewedAt field', error)
+    })
   }
 
   const filePath = getFilePath({

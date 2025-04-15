@@ -106,6 +106,7 @@ export type Quotation = Common & {
   createdAt?: Date
   updatedAt?: Date
   openedAt?: Date
+  viewedAt?: Date
   sharedWith?: string[] //* if empty array - private, if ['*'] - public
   from?: {
     email?: string

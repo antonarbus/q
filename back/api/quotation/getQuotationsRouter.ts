@@ -18,6 +18,7 @@ export type QuotationPick = Pick<
   | 'name'
   | 'openedAt'
   | 'sharedWith'
+  | 'viewedAt'
   | 'updatedAt'
 >
 
