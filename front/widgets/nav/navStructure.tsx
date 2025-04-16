@@ -43,6 +43,7 @@ import { openShareQuotationModal } from '@features/open_close/open_share_quotati
 import { getState } from '@shared/lib/redux'
 import { saveExistingQuotation } from '@features/quotation/save_quotation'
 import { Burger } from '@shared/nav/ui/NavList/NavItem/Burger'
+import { instance } from '@shared/instance'
 
 export const navStructure: NavItem[] = [
   {
@@ -255,3 +256,5 @@ export const navStructure: NavItem[] = [
     ],
   },
 ]
+
+instance.navStructure = navStructure

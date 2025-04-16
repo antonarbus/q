@@ -1,11 +1,11 @@
-import { navStructure } from '@widgets/nav/navStructure'
 import type { NavItem, NavItemId } from './type'
+import { instance } from '@shared/instance'
 
 // https://www.typescriptlang.org/docs/handbook/2/generics.html
 // https://stackoverflow.com/a/49286056/7239778
 
 export const getMenuItemPropValue = <K extends keyof NavItem>({
-  menu = navStructure,
+  menu = instance.navStructure,
   navItemId,
   prop,
 }: {
