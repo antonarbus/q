@@ -1,10 +1,9 @@
-import { Router, type Request, type Response, type NextFunction } from 'express'
+import type { Request, Response, NextFunction } from 'express'
 import type { Item } from '@entities/bookmark'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { BookmarkModel } from '@back/entities/bookmark'
-import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type ItemPick = Pick<
   Item,
@@ -22,9 +21,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const getBookmarksRouter = Router()
-
-const getBookmarks: RouterHandler = async (req, res, next) => {
+export const getBookmarks: RouterHandler = async (req, res, next) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   const bookmarks = await BookmarkModel.find(
@@ -60,5 +57,3 @@ const getBookmarks: RouterHandler = async (req, res, next) => {
     .status(httpStatus.notFound_404)
     .json({ message: 'Unhandled error', bookmarks: [] })
 }
-
-getBookmarksRouter.get('/', asyncHandler(getBookmarks))

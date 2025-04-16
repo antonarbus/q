@@ -1,7 +1,7 @@
 import type {
   ResBody,
   ReqBody as Payload,
-} from '@back/api/bookmark/deleteBookmarkRouter'
+} from '@back/api/bookmark/deleteBookmark'
 import { api } from '@back/shared/consts/api'
 import { type UseMutationResult, useMutation } from '@tanstack/react-query'
 import type { AxiosError } from 'axios'
@@ -17,8 +17,8 @@ export const useDeleteBookmarkMutation = (): UseMutationResult<
     mutationKey: [queryKey.deleteBookmark],
     mutationFn: async (payload: Payload) => {
       const res = await axiosWithAuth<ResBody>({
-        url: api.deleteBookmark,
-        method: 'delete',
+        url: api.deleteBookmark.url,
+        method: api.deleteBookmark.method,
         data: payload,
       })
 

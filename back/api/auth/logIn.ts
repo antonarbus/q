@@ -1,4 +1,4 @@
-import { Router, type Request, type Response, type NextFunction } from 'express'
+import type { Request, Response, NextFunction } from 'express'
 import bcrypt from 'bcryptjs'
 import type { User } from '@entities/user'
 import { httpStatus } from '@back/shared/consts/httpStatus'
@@ -13,7 +13,6 @@ import {
 import { setNoTraceMode, setRefreshTokenCookie } from '@back/shared/headers'
 import { userRole } from '@back/shared/consts/userRole'
 import { getUserFromRefreshToken, UserModel } from '@back/entities/user'
-import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type ReqBody = {
   email: User['email']
@@ -44,9 +43,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const logInRouter = Router()
-
-const logIn: RouterHandler = async (req, res, next) => {
+export const logIn: RouterHandler = async (req, res, next) => {
   const passwordFromInput = req.body.password
   const emailFromInput = req.body.email.toLowerCase()
 
@@ -196,5 +193,3 @@ const logIn: RouterHandler = async (req, res, next) => {
     }),
   })
 }
-
-logInRouter.post('/', asyncHandler(logIn))

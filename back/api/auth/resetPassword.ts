@@ -1,11 +1,10 @@
-import { Router, type Request, type Response, type NextFunction } from 'express'
+import type { Request, Response, NextFunction } from 'express'
 import bcrypt from 'bcryptjs'
 import type { User } from '@entities/user'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { generateAccessToken, generateRefreshToken } from '@back/shared/lib/jwt'
 import { setRefreshTokenCookie } from '@back/shared/headers'
 import { UserModel } from '@back/entities/user'
-import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type ReqBody = {
   email: User['email']
@@ -30,9 +29,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const resetPasswordRouter = Router()
-
-const resetPassword: RouterHandler = async (req, res, next) => {
+export const resetPassword: RouterHandler = async (req, res, next) => {
   const emailFromInput = req.body.email.toLowerCase()
   const passwordFromInput = req.body.password
   const resetPasswordKeyFromInput = req.body.resetPasswordKey
@@ -89,5 +86,3 @@ const resetPassword: RouterHandler = async (req, res, next) => {
     roles: updatedUser?.roles,
   })
 }
-
-resetPasswordRouter.post('/', asyncHandler(resetPassword))

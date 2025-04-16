@@ -1,4 +1,4 @@
-import { Router, type Request, type Response, type NextFunction } from 'express'
+import type { Request, Response, NextFunction } from 'express'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { userRole } from '@back/shared/consts/userRole'
@@ -7,7 +7,6 @@ import {
   VisitorsCountModel,
   type VisitorsCount,
 } from '@back/entities/visitors_count'
-import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type ResBody = {
   visitorsCount: VisitorsCount[]
@@ -25,9 +24,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const getUniqueDailyVisitorsRouter = Router()
-
-const getUniqueDailyVisitors: RouterHandler = async (req, res, next) => {
+export const getUniqueDailyVisitors: RouterHandler = async (req, res, next) => {
   const { roles } = getUserFromRefreshToken({ req })
   const { startDate, endDate } = req.query
 
@@ -51,5 +48,3 @@ const getUniqueDailyVisitors: RouterHandler = async (req, res, next) => {
 
   res.status(httpStatus.success_200).json({ visitorsCount, message: 'ok' })
 }
-
-getUniqueDailyVisitorsRouter.get('/', asyncHandler(getUniqueDailyVisitors))

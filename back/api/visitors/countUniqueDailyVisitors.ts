@@ -1,4 +1,4 @@
-import { Router, type Request, type Response, type NextFunction } from 'express'
+import type { Request, Response, NextFunction } from 'express'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import {
@@ -6,7 +6,6 @@ import {
   type VisitorsCount,
 } from '@back/entities/visitors_count'
 import { headerName } from '@back/shared/headers'
-import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type ReqBody = {
   date: VisitorsCount['date']
@@ -23,9 +22,11 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const countUniqueDailyVisitorsRouter = Router()
-
-const incrementUniqueDailyVisitor: RouterHandler = async (req, res, next) => {
+export const countUniqueDailyVisitors: RouterHandler = async (
+  req,
+  res,
+  next,
+) => {
   const today = req.body.date
   const isNew = req.body.isNew
 
@@ -53,8 +54,3 @@ const incrementUniqueDailyVisitor: RouterHandler = async (req, res, next) => {
 
   res.status(httpStatus.notFound_404).json({ message: 'Internal error' })
 }
-
-countUniqueDailyVisitorsRouter.post(
-  '/',
-  asyncHandler(incrementUniqueDailyVisitor),
-)

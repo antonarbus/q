@@ -12,7 +12,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => void
 
-export const checkDbConnection: RouterHandler = (req, res, next) => {
+export const health: RouterHandler = (req, res, next) => {
   const mongoState = mongoose.connection.readyState
 
   if (mongoState === mongoose.ConnectionStates.connected) {

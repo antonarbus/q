@@ -1,4 +1,4 @@
-import type { ResBody, ReqBody as Payload } from '@back/api/auth/logInRouter'
+import type { ResBody, ReqBody as Payload } from '@back/api/auth/logIn'
 import { api } from '@back/shared/consts/api'
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import axios, { type AxiosError } from 'axios'
@@ -13,8 +13,8 @@ export const useLogInMutation = (): UseMutationResult<
     mutationKey: [queryKey.logIn],
     mutationFn: async ({ email, password }: Payload) => {
       const res = await axios<ResBody>({
-        url: api.logIn,
-        method: 'post',
+        url: api.logIn.url,
+        method: api.logIn.method,
         data: { email, password },
       })
 

@@ -7,7 +7,7 @@ import type { UseMutateAsyncFunction } from '@tanstack/react-query'
 import type {
   ReqBody as Payload,
   ResBody,
-} from '@back/api/bookmark/getBookmarkRouter'
+} from '@back/api/bookmark/getBookmark'
 import type { AxiosError } from 'axios'
 import { textSlice } from '@shared/lib/froala/textSlice'
 

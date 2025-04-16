@@ -1,11 +1,10 @@
-import { Router, type Request, type Response, type NextFunction } from 'express'
+import type { Request, Response, NextFunction } from 'express'
 import type { User } from '@entities/user'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { generateAccessToken, generateRefreshToken } from '@back/shared/lib/jwt'
 import { setRefreshTokenCookie } from '@back/shared/headers'
 import { UserModel } from '@back/entities/user'
-import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type ReqBody = {
   activationKey: User['activationKey']
@@ -28,9 +27,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const activateRouter = Router()
-
-const activate: RouterHandler = async (req, res, next) => {
+export const activate: RouterHandler = async (req, res, next) => {
   const activationKeyFromInput = req.body.activationKey
 
   const user = await UserModel.findOne({
@@ -69,5 +66,3 @@ const activate: RouterHandler = async (req, res, next) => {
     roles: userDocument?.roles,
   })
 }
-
-activateRouter.post('/', asyncHandler(activate))

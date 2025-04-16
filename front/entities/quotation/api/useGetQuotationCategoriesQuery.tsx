@@ -1,4 +1,4 @@
-import type { ResBody } from '@back/api/quotation/getQuotationCategoriesRouter'
+import type { ResBody } from '@back/api/quotation/getQuotationCategories'
 import { api } from '@back/shared/consts/api'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import type { AxiosError, AxiosResponse } from 'axios'
@@ -18,8 +18,8 @@ export const useGetQuotationCategoriesQuery = (): UseQueryResult<
     retry: 0,
     queryFn: async () => {
       const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
-        url: api.getQuotationCategories,
-        method: 'get',
+        url: api.getQuotationCategories.url,
+        method: api.getQuotationCategories.method,
       })
 
       return res.data

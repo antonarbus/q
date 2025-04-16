@@ -1,4 +1,4 @@
-import { Router, type Request, type Response, type NextFunction } from 'express'
+import type { Request, Response, NextFunction } from 'express'
 import type { FlattenMaps } from 'mongoose'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import type { Pretty } from '@shared/types/Pretty'
@@ -9,7 +9,6 @@ import {
   getUserFromAccessTokenOrThrowUnauthorized,
   UserModel,
 } from '@back/entities/user'
-import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type UserPicked = Pick<
   User,
@@ -32,9 +31,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const getUsersRouter = Router()
-
-const getUsers: RouterHandler = async (req, res, next) => {
+export const getUsers: RouterHandler = async (req, res, next) => {
   const { roles } = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   if (!roles.includes(userRole.superAdmin)) {
@@ -76,5 +73,3 @@ const getUsers: RouterHandler = async (req, res, next) => {
     .status(httpStatus.notFound_404)
     .json({ message: 'Unhandled case', users: [] })
 }
-
-getUsersRouter.get('/', asyncHandler(getUsers))

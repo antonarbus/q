@@ -1,4 +1,4 @@
-import { Router, type Request, type Response, type NextFunction } from 'express'
+import type { Request, Response, NextFunction } from 'express'
 import type { FlattenMaps } from 'mongoose'
 import type { Quotation } from '@entities/quotation'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
@@ -7,7 +7,6 @@ import { bucket, getFilePath } from '@back/shared/services/storage'
 import { nanoid } from '@back/shared/lib/nanoid'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { QuotationModel } from '@back/entities/quotation'
-import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type ReqBody = {
   quotation: Quotation
@@ -32,9 +31,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const saveQuotationRouter = Router()
-
-const saveQuotation: RouterHandler = async (req, res, next) => {
+export const saveQuotation: RouterHandler = async (req, res, next) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
   const { quotation } = req.body
 
@@ -191,5 +188,3 @@ const saveQuotation: RouterHandler = async (req, res, next) => {
     quotation: fullQuotation,
   })
 }
-
-saveQuotationRouter.post('/', asyncHandler(saveQuotation))

@@ -1,6 +1,6 @@
 import { Chip, Tooltip } from '@mui/material'
 import type { ICellRendererParams } from 'ag-grid-community'
-import type { QuotationPick } from '@back/api/quotation/getQuotationsRouter'
+import type { QuotationPick } from '@back/api/quotation/getQuotations'
 import { Link } from 'react-router-dom'
 
 export const SharedWithRenderer = (

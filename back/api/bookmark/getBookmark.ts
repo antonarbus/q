@@ -1,11 +1,10 @@
-import { Router, type Request, type Response, type NextFunction } from 'express'
+import type { Request, Response, NextFunction } from 'express'
 import type { Item } from '@entities/quotation'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { bucket, getFilePath } from '@back/shared/services/storage'
 import { jsonParseSafe } from '@back/shared/utils/jsonParseSafe'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { BookmarkModel } from '@back/entities/bookmark'
-import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type ReqBody = {
   id: Item['id']
@@ -22,9 +21,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const getBookmarkRouter = Router()
-
-const getBookmark: RouterHandler = async (req, res, next) => {
+export const getBookmark: RouterHandler = async (req, res, next) => {
   const bookmarkId = req.body.id
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
   const document = await BookmarkModel.findOne({ email, id: bookmarkId })
@@ -51,5 +48,3 @@ const getBookmark: RouterHandler = async (req, res, next) => {
     item: { ...item, ...document },
   })
 }
-
-getBookmarkRouter.post('/', asyncHandler(getBookmark))

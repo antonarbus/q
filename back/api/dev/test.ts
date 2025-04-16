@@ -1,9 +1,8 @@
-import { Router, type Request, type Response, type NextFunction } from 'express'
+import type { Request, Response, NextFunction } from 'express'
 // import { QuotationModel } from '@back/db/models/quotationModel'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { userRole } from '@back/shared/consts/userRole'
 import { getUserFromRefreshToken, UserModel } from '@back/entities/user'
-import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 type RouterHandler = (
   req: Request,
@@ -11,9 +10,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const testRouter = Router()
-
-const test: RouterHandler = async (req, res, next) => {
+export const test: RouterHandler = async (req, res, next) => {
   const { roles } = getUserFromRefreshToken({ req })
 
   if (!roles.includes(userRole.superAdmin)) {
@@ -32,5 +29,3 @@ const test: RouterHandler = async (req, res, next) => {
 
   res.status(200).json({ dbRes })
 }
-
-testRouter.get('/', asyncHandler(test))

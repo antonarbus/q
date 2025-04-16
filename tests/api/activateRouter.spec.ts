@@ -1,6 +1,6 @@
 import { config } from '@back/config'
 import { UserModel } from '@back/entities/user'
-import { apiUrl } from '@back/shared/consts/apiUrl'
+import { api } from '@back/shared/consts/api'
 import { connectToDb } from '@back/shared/db/connectToDb'
 import { test, expect } from '@playwright/test'
 
@@ -28,7 +28,7 @@ test.describe('#activateRouter', () => {
       { upsert: true, new: true },
     ).lean()
 
-    const res = await request.post(apiUrl.activate, {
+    const res = await request[api.activate.method](api.activate.url, {
       data: {
         activationKey: userDocument.activationKey,
       },

@@ -1,4 +1,4 @@
-import { Router, type Request, type Response, type NextFunction } from 'express'
+import type { Request, Response, NextFunction } from 'express'
 import type { Quotation } from '@entities/quotation'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { bucket, getFilePath } from '@back/shared/services/storage'
@@ -7,7 +7,6 @@ import { isNoTraceMode } from '@back/shared/headers'
 import { userRole } from '@back/shared/consts/userRole'
 import { getUserFromRefreshTokenOrNull } from '@back/entities/user'
 import { QuotationModel } from '@back/entities/quotation'
-import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type ReqBody = {
   id: Quotation['id']
@@ -24,9 +23,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const getQuotationRouter = Router()
-
-const getQuotation: RouterHandler = async (req, res, next) => {
+export const getQuotation: RouterHandler = async (req, res, next) => {
   const { id: quotationId } = req.body
   const userFromRefreshToken = getUserFromRefreshTokenOrNull({ req })
 
@@ -169,5 +166,3 @@ const getQuotation: RouterHandler = async (req, res, next) => {
     quotation,
   })
 }
-
-getQuotationRouter.post('/', asyncHandler(getQuotation))

@@ -1,4 +1,4 @@
-import type { ResBody, ReqBody as Payload } from '@back/api/auth/registerRouter'
+import type { ResBody, ReqBody as Payload } from '@back/api/auth/register'
 import { api } from '@back/shared/consts/api'
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import axios, { type AxiosError } from 'axios'
@@ -13,8 +13,8 @@ export const useRegisterMutation = (): UseMutationResult<
     mutationKey: [queryKey.register],
     mutationFn: async ({ email, password }: Payload) => {
       const res = await axios<ResBody>({
-        url: api.register,
-        method: 'post',
+        url: api.register.url,
+        method: api.register.method,
         data: { email, password },
       })
 

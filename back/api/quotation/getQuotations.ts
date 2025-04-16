@@ -1,4 +1,4 @@
-import { Router, type Request, type Response, type NextFunction } from 'express'
+import type { Request, Response, NextFunction } from 'express'
 import type { FlattenMaps } from 'mongoose'
 import type { Quotation } from '@entities/quotation'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
@@ -6,7 +6,6 @@ import type { Pretty } from '@shared/types/Pretty'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { QuotationModel } from '@back/entities/quotation'
-import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type QuotationPick = Pick<
   Quotation,
@@ -33,9 +32,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const getQuotationsRouter = Router()
-
-const getQuotations: RouterHandler = async (req, res, next) => {
+export const getQuotations: RouterHandler = async (req, res, next) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   const quotations = await QuotationModel.find(
@@ -61,5 +58,3 @@ const getQuotations: RouterHandler = async (req, res, next) => {
     .status(httpStatus.notFound_404)
     .json({ message: 'Unhandled case', quotations: [] })
 }
-
-getQuotationsRouter.get('/', asyncHandler(getQuotations))

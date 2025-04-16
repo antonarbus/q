@@ -1,4 +1,4 @@
-import type { ResBody } from '@back/api/auth/logOutRouter'
+import type { ResBody } from '@back/api/auth/logOut'
 import { api } from '@back/shared/consts/api'
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import axios, { type AxiosError } from 'axios'
@@ -13,8 +13,8 @@ export const useLogOutMutation = (): UseMutationResult<
     mutationKey: [queryKey.logOut],
     mutationFn: async () => {
       const res = await axios<ResBody>({
-        url: api.logOut,
-        method: 'get',
+        url: api.logOut.url,
+        method: api.logOut.method,
       })
 
       return res.data

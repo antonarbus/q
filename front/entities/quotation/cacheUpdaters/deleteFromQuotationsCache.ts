@@ -1,4 +1,4 @@
-import type { ResBody } from '@back/api/quotation/getQuotationsRouter'
+import type { ResBody } from '@back/api/quotation/getQuotations'
 import { produce } from 'immer'
 import { queryKey } from '@shared/consts/queryKey'
 import { instance } from '@shared/instance'

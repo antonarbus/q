@@ -1,4 +1,4 @@
-import type { ResBody } from '@back/api/auth/getAccessTokenRouter'
+import type { ResBody } from '@back/api/auth/getAccessToken'
 import { api } from '@back/shared/consts/api'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import axios, { type AxiosError, type AxiosResponse } from 'axios'
@@ -18,8 +18,8 @@ export const useGetAccessTokenQuery = (): UseQueryResult<
     enabled: false,
     queryFn: async () => {
       const res = await axios<ResBody, AxiosResponse<ResBody>>({
-        url: api.getAccessToken,
-        method: 'get',
+        url: api.getAccessToken.url,
+        method: api.getAccessToken.method,
         withCredentials: true,
         timeout: 10000,
       })

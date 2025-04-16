@@ -1,7 +1,7 @@
 import type {
   ResBody,
   ReqBody as Payload,
-} from '@back/api/quotation/saveQuotationRouter'
+} from '@back/api/quotation/saveQuotation'
 import { api } from '@back/shared/consts/api'
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import type { AxiosResponse, AxiosError } from 'axios'
@@ -12,8 +12,8 @@ export const saveQuotationMutationFn = async ({
   quotation,
 }: Payload): Promise<ResBody> => {
   const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>, Payload>({
-    url: api.saveQuotation,
-    method: 'post',
+    url: api.saveQuotation.url,
+    method: api.saveQuotation.method,
     data: { quotation },
   })
 

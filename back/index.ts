@@ -1,40 +1,42 @@
-import express, { type Request, type Response } from 'express'
+import express from 'express'
 import 'dotenv/config'
 import cookieParser from 'cookie-parser'
 import morgan from 'morgan'
-import { activateRouter } from './api/auth/activateRouter'
-import { getAccessTokenRouter } from './api/auth/getAccessTokenRouter'
-import { logInRouter } from './api/auth/logInRouter'
-import { logOutRouter } from './api/auth/logOutRouter'
-import { registerRouter } from './api/auth/registerRouter'
-import { requestPasswordResetRouter } from './api/auth/requestPasswordResetRouter'
-import { resetPasswordRouter } from './api/auth/resetPasswordRouter'
-import { deleteBookmarkRouter } from './api/bookmark/deleteBookmarkRouter'
-import { getBookmarkCategoriesRouter } from './api/bookmark/getBookmarkCategoriesRouter'
-import { getBookmarkRouter } from './api/bookmark/getBookmarkRouter'
-import { getBookmarksRouter } from './api/bookmark/getBookmarksRouter'
-import { saveBookmarkRouter } from './api/bookmark/saveBookmarkRouter'
+import { activate } from './api/auth/activate'
+import { getAccessToken } from './api/auth/getAccessToken'
+import { logIn } from './api/auth/logIn'
+import { logOut } from './api/auth/logOut'
+import { register } from './api/auth/register'
+import { requestPasswordReset } from './api/auth/requestPasswordReset'
+import { resetPassword } from './api/auth/resetPassword'
+import { deleteBookmark } from './api/bookmark/deleteBookmark'
+import { getBookmarkCategories } from './api/bookmark/getBookmarkCategories'
+import { getBookmark } from './api/bookmark/getBookmark'
+import { getBookmarks } from './api/bookmark/getBookmarks'
+import { saveBookmark } from './api/bookmark/saveBookmark'
 import { getBucketCors } from './api/dev/getBucketCors'
 import { setBucketCors } from './api/dev/setBucketCors'
-import { testRouter } from './api/dev/testRouter'
-import { deleteQuotationRouter } from './api/quotation/deleteQuotationRouter'
-import { getQuotationCategoriesRouter } from './api/quotation/getQuotationCategoriesRouter'
-import { getQuotationRouter } from './api/quotation/getQuotationRouter'
-import { getQuotationsRouter } from './api/quotation/getQuotationsRouter'
-import { saveQuotationRouter } from './api/quotation/saveQuotationRouter'
-import { getFilesStatsRouter } from './api/settings/getFilesStatsRouter'
+import { test } from './api/dev/test'
+import { deleteQuotation } from './api/quotation/deleteQuotation'
+import { getQuotationCategories } from './api/quotation/getQuotationCategories'
+import { getQuotation } from './api/quotation/getQuotation'
+import { getQuotations } from './api/quotation/getQuotations'
+import { saveQuotation } from './api/quotation/saveQuotation'
+import { getFilesStats } from './api/file/getFilesStats'
 import { api } from './shared/consts/api'
 import { connectToDb } from './shared/db/connectToDb'
 import { errorHandlerMiddleware } from './middleware/errorHandlerMiddleware'
 import { config } from './config'
-import { getUsersRouter } from './api/user/getUsersRouter'
-import { deleteUserRouter } from './api/user/deleteUserRouter'
-import { countUniqueDailyVisitorsRouter } from './api/visitors/countUniqueDailyVisitorsRouter'
-import { getUniqueDailyVisitorsRouter } from './api/visitors/getUniqueDailyVisitorsRouter'
-import { fileUploadSignedUrlRouter } from './api/upload/fileUploadSignedUrlRouter'
-import { makeFilePublicRouter } from './api/upload/makeFilePublicRouter'
-import { checkDbConnection, healthRouter } from './api/dev/healthRouter'
+import { getUsers } from './api/user/getUsers'
+import { deleteUser } from './api/user/deleteUser'
+import { countUniqueDailyVisitors } from './api/visitors/countUniqueDailyVisitors'
+import { getUniqueDailyVisitors } from './api/visitors/getUniqueDailyVisitors'
+import { fileUploadSignedUrl } from './api/file/fileUploadSignedUrl'
+import { makeFilePublic } from './api/file/makeFilePublic'
+import { health } from './api/dev/health'
 import { asyncHandler } from './shared/utils/asyncHandler'
+import { root } from './api/dev/root'
+import { rootApi } from './api/dev/rootApi'
 // import cors from 'cors'
 
 const app = express()
@@ -45,53 +47,118 @@ app.use(cookieParser()) // middleware parses the Cookie header and populates req
 // app.use(cors())
 // app.set('trust proxy', true) // for app engine
 
-app[api.root.method](
-  api.root.url,
-  (_req: Request, res: Response) => void res.send('i am express.js'),
-)
-
-// todo: do like this everywhere
-app[api.health.method](api.health.url, asyncHandler(checkDbConnection))
-
-app.get(
-  api.api.url,
-  (_req: Request, res: Response) => void res.json({ message: '/api' }),
-)
-
 // dev
-app.use(api.test.url, testRouter)
-app.use(api.setBucketCors.url, setBucketCors)
-app.use(api.getBucketCors.url, getBucketCors)
+app[api.root.method](api.root.url, root)
+app[api.rootApi.method](api.rootApi.url, rootApi)
+app[api.health.method](api.health.url, asyncHandler(health))
+app[api.test.method](api.test.url, asyncHandler(test))
+
+app[api.setBucketCors.method](
+  api.setBucketCors.url,
+  asyncHandler(setBucketCors),
+)
+
+app[api.getBucketCors.method](
+  api.getBucketCors.url,
+  asyncHandler(getBucketCors),
+)
+
 // auth
-app.use(api.register.url, registerRouter)
-app.use(api.resetPassword.url, resetPasswordRouter)
-app.use(api.requestPasswordReset.url, requestPasswordResetRouter)
-app.use(api.logIn.url, logInRouter)
-app.use(api.logOut.url, logOutRouter)
-app.use(api.activate.url, activateRouter)
-app.use(api.getAccessToken.url, getAccessTokenRouter)
+app[api.register.method](api.register.url, asyncHandler(register))
+
+app[api.resetPassword.method](
+  api.resetPassword.url,
+  asyncHandler(resetPassword),
+)
+
+app[api.requestPasswordReset.method](
+  api.requestPasswordReset.url,
+  asyncHandler(requestPasswordReset),
+)
+
+app[api.logIn.method](api.logIn.url, asyncHandler(logIn))
+
+app[api.logOut.method](api.logOut.url, asyncHandler(logOut))
+
+app[api.activate.method](api.activate.url, asyncHandler(activate))
+
+app[api.getAccessToken.method](
+  api.getAccessToken.url,
+  asyncHandler(getAccessToken),
+)
+
 // user
-app.use(api.getUsers.url, getUsersRouter)
-app.use(api.deleteUser.url, deleteUserRouter)
+app[api.getUsers.method](api.getUsers.url, asyncHandler(getUsers))
+
+app[api.deleteUser.method](api.deleteUser.url, asyncHandler(deleteUser))
+
 // quotation
-app.use(api.saveQuotation.url, saveQuotationRouter)
-app.use(api.getQuotation.url, getQuotationRouter)
-app.use(api.getQuotations.url, getQuotationsRouter)
-app.use(api.deleteQuotation.url, deleteQuotationRouter)
-app.use(api.getQuotationCategories.url, getQuotationCategoriesRouter)
+app[api.saveQuotation.method](
+  api.saveQuotation.url,
+  asyncHandler(saveQuotation),
+)
+
+app[api.getQuotation.method](api.getQuotation.url, asyncHandler(getQuotation))
+
+app[api.getQuotations.method](
+  api.getQuotations.url,
+  asyncHandler(getQuotations),
+)
+
+app[api.deleteQuotation.method](
+  api.deleteQuotation.url,
+  asyncHandler(deleteQuotation),
+)
+
+app[api.getQuotationCategories.method](
+  api.getQuotationCategories.url,
+  asyncHandler(getQuotationCategories),
+)
+
 // bookmark
-app.use(api.getBookmark.url, getBookmarkRouter)
-app.use(api.deleteBookmark.url, deleteBookmarkRouter)
-app.use(api.saveBookmark.url, saveBookmarkRouter)
-app.use(api.getBookmarks.url, getBookmarksRouter)
-app.use(api.getBookmarkCategories.url, getBookmarkCategoriesRouter)
+app[api.getBookmark.method](api.getBookmark.url, asyncHandler(getBookmark))
+
+app[api.deleteBookmark.method](
+  api.deleteBookmark.url,
+  asyncHandler(deleteBookmark),
+)
+
+app[api.saveBookmark.method](api.saveBookmark.url, asyncHandler(saveBookmark))
+
+app[api.getBookmarks.method](api.getBookmarks.url, asyncHandler(getBookmarks))
+
+app[api.getBookmarkCategories.method](
+  api.getBookmarkCategories.url,
+  asyncHandler(getBookmarkCategories),
+)
+
 // visitors
-app.use(api.countUniqueDailyVisitors.url, countUniqueDailyVisitorsRouter)
-app.use(api.getUniqueDailyVisitors.url, getUniqueDailyVisitorsRouter)
+app[api.countUniqueDailyVisitors.method](
+  api.countUniqueDailyVisitors.url,
+  asyncHandler(countUniqueDailyVisitors),
+)
+
+app[api.getUniqueDailyVisitors.method](
+  api.getUniqueDailyVisitors.url,
+  asyncHandler(getUniqueDailyVisitors),
+)
+
 // files
-app.use(api.fileUploadSignedUrl.url, fileUploadSignedUrlRouter)
-app.use(api.makeFilePublic.url, makeFilePublicRouter)
-app.use(api.getFilesStats.url, getFilesStatsRouter)
+app[api.fileUploadSignedUrl.method](
+  api.fileUploadSignedUrl.url,
+  asyncHandler(fileUploadSignedUrl),
+)
+
+app[api.makeFilePublic.method](
+  api.makeFilePublic.url,
+  asyncHandler(makeFilePublic),
+)
+
+app[api.getFilesStats.method](
+  api.getFilesStats.url,
+  asyncHandler(getFilesStats),
+)
+
 // error
 app.use(errorHandlerMiddleware)
 

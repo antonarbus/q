@@ -23,153 +23,148 @@ export const api = {
   // auth
   register: {
     url: '/api/register',
-    method: 'method',
+    method: 'post',
     description: 'description',
   },
   logIn: {
     url: '/api/login',
-    method: 'method',
+    method: 'post',
     description: 'description',
   },
   logOut: {
     url: '/api/logout',
-    method: 'method',
+    method: 'get',
     description: 'description',
   },
   activate: {
     url: '/api/activate',
-    method: 'method',
+    method: 'post',
     description: 'description',
   },
   getAccessToken: {
     url: '/api/get-access-token',
-    method: 'method',
+    method: 'get',
     description: 'description',
   },
   requestPasswordReset: {
     url: '/api/request-password-reset',
-    method: 'method',
+    method: 'post',
     description: 'description',
   },
   resetPassword: {
     url: '/api/reset-password',
-    method: 'method',
+    method: 'post',
     description: 'description',
   },
   // user
   getUsers: {
     url: '/api/get-users',
-    method: 'method',
+    method: 'get',
     description: 'description',
   },
   deleteUser: {
     url: '/api/delete-user',
-    method: 'method',
+    method: 'delete',
     description: 'description',
   },
   // quotation
   saveQuotation: {
     url: '/api/save-quotation',
-    method: 'method',
+    method: 'post',
     description: 'description',
   },
   getQuotation: {
     url: '/api/get-quotation',
-    method: 'method',
+    method: 'post',
     description: 'description',
   },
   getQuotations: {
     url: '/api/get-quotations',
-    method: 'method',
+    method: 'get',
     description: 'description',
   },
   getQuotationCategories: {
     url: '/api/get-quotation-categories',
-    method: 'method',
+    method: 'get',
     description: 'description',
   },
   deleteQuotation: {
     url: '/api/delete-quotation',
-    method: 'method',
+    method: 'delete',
     description: 'description',
   },
   // bookmark
   saveBookmark: {
     url: '/api/save-bookmark',
-    method: 'method',
+    method: 'post',
     description: 'description',
   },
   getBookmark: {
     url: '/api/get-bookmark',
-    method: 'method',
+    method: 'post',
     description: 'description',
   },
   getBookmarks: {
     url: '/api/get-bookmarks',
-    method: 'method',
+    method: 'get',
     description: 'description',
   },
   getBookmarkCategories: {
     url: '/api/get-bookmark-categories',
-    method: 'method',
+    method: 'get',
     description: 'description',
   },
   deleteBookmark: {
     url: '/api/delete-bookmark',
-    method: 'method',
+    method: 'delete',
     description: 'description',
   },
   // files
-  upload: {
-    url: '/api/upload',
-    method: 'method',
-    description: 'description',
-  }, // not in use
   fileUploadSignedUrl: {
     url: '/api/file-upload-signed-url',
-    method: 'method',
+    method: 'get',
     description: 'description',
   },
   makeFilePublic: {
     url: '/api/make-file-public',
-    method: 'method',
+    method: 'patch',
     description: 'description',
   },
   getFilesStats: {
     url: '/api/get-files-stats',
-    method: 'method',
+    method: 'get',
     description: 'description',
   },
   // visitors
   countUniqueDailyVisitors: {
     url: '/api/count-unique-daily-visitors',
-    method: 'method',
+    method: 'post',
     description: 'description',
   },
   getUniqueDailyVisitors: {
     url: '/api/get-unique-daily-visitors',
-    method: 'method',
+    method: 'get',
     description: 'description',
   },
   // dev
-  api: {
+  rootApi: {
     url: '/api',
-    method: 'method',
+    method: 'get',
     description: 'description',
   },
   test: {
     url: '/api/test',
-    method: 'method',
+    method: 'get',
     description: 'description',
   },
   setBucketCors: {
     url: '/api/set-bucket-cors',
-    method: 'method',
+    method: 'get',
     description: 'description',
   },
   getBucketCors: {
     url: '/api/get-bucket-cors',
-    method: 'method',
+    method: 'get',
     description: 'description',
   },
 } as const satisfies Record<string, Api>

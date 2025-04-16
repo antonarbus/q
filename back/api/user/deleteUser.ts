@@ -1,4 +1,4 @@
-import { Router, type Request, type Response, type NextFunction } from 'express'
+import type { Request, Response, NextFunction } from 'express'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { bucket, getFolderPath } from '@back/shared/services/storage'
@@ -10,7 +10,6 @@ import {
 } from '@back/entities/user'
 import { QuotationModel } from '@back/entities/quotation'
 import { BookmarkModel } from '@back/entities/bookmark'
-import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type ReqBody = {
   email: User['email']
@@ -27,9 +26,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const deleteUserRouter = Router()
-
-const deleteUser: RouterHandler = async (req, res, next) => {
+export const deleteUser: RouterHandler = async (req, res, next) => {
   const userEmailToBeDeleted = req.body.email
 
   const { email: emailFromToken, roles } =
@@ -195,5 +192,3 @@ const deleteUser: RouterHandler = async (req, res, next) => {
 
   res.status(httpStatus.success_200).json({ message: 'deleted', statistics })
 }
-
-deleteUserRouter.delete('/', asyncHandler(deleteUser))

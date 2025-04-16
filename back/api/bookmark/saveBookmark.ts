@@ -1,4 +1,4 @@
-import { Router, type Request, type Response, type NextFunction } from 'express'
+import type { Request, Response, NextFunction } from 'express'
 import type { FlattenMaps } from 'mongoose'
 import type { Item } from '@entities/bookmark'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
@@ -6,7 +6,6 @@ import { httpStatus } from '@back/shared/consts/httpStatus'
 import { bucket, getFilePath } from '@back/shared/services/storage'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { BookmarkModel } from '@back/entities/bookmark'
-import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type ReqBody = {
   item: Item
@@ -30,9 +29,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const saveBookmarkRouter = Router()
-
-const saveBookmark: RouterHandler = async (req, res, next) => {
+export const saveBookmark: RouterHandler = async (req, res, next) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
   const { item: bookmarkItem } = req.body
 
@@ -109,5 +106,3 @@ const saveBookmark: RouterHandler = async (req, res, next) => {
     item: { ...itemDataFromDb, ...bookmarkItem },
   })
 }
-
-saveBookmarkRouter.post('/', asyncHandler(saveBookmark))

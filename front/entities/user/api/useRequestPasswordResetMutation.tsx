@@ -1,7 +1,7 @@
 import type {
   ResBody,
   ReqBody as Payload,
-} from '@back/api/auth/requestPasswordResetRouter'
+} from '@back/api/auth/requestPasswordReset'
 import { api } from '@back/shared/consts/api'
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import axios, { type AxiosError } from 'axios'
@@ -16,8 +16,8 @@ export const useRequestPasswordResetMutation = (): UseMutationResult<
     mutationKey: [queryKey.requestPasswordReset],
     mutationFn: async ({ email }: Payload) => {
       const res = await axios<ResBody>({
-        url: api.requestPasswordReset,
-        method: 'post',
+        url: api.requestPasswordReset.url,
+        method: api.requestPasswordReset.method,
         data: { email },
       })
 

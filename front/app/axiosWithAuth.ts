@@ -1,7 +1,7 @@
 import { api } from '@back/shared/consts/api'
 import { headerName } from '@back/shared/headers'
 import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
-import type { ResBody } from '@back/api/auth/getAccessTokenRouter'
+import type { ResBody } from '@back/api/auth/getAccessToken'
 import { userSlice } from '@entities/user'
 import { initAccessTokenFetchingPromise } from '@features/auth/get_access_token/AccessToken'
 import { instantiateAxiosWithAuth } from '@shared/lib/axiosWithAuth'
@@ -38,9 +38,12 @@ axiosWithAuth.interceptors.response.use(
 
       try {
         // refresh expired or invalid access token & extend refresh token if it is about to expire
-        const res = await axios.get<ResBody>(api.getAccessToken, {
-          withCredentials: true,
-        })
+        const res = await axios[api.getAccessToken.method]<ResBody>(
+          api.getAccessToken.url,
+          {
+            withCredentials: true,
+          },
+        )
 
         if (res.data.accessJwtToken) {
           dispatch(

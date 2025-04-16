@@ -6,7 +6,7 @@ import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
 import { getJsxWithBoldSubstr } from '@shared/utils/getJsxWithBoldSubstr'
 import type { Signal } from '@preact/signals-react'
 import type { LoadBookmark } from '@features/bookmark/copy_bookmark'
-import type { ItemPick } from '@back/api/bookmark/getBookmarksRouter'
+import type { ItemPick } from '@back/api/bookmark/getBookmarks'
 
 type Props = {
   loadBookmark: LoadBookmark

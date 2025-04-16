@@ -1,4 +1,4 @@
-import type { ResBody } from '@back/api/bookmark/getBookmarksRouter'
+import type { ResBody } from '@back/api/bookmark/getBookmarks'
 import { api } from '@back/shared/consts/api'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import type { AxiosError, AxiosResponse } from 'axios'
@@ -19,8 +19,8 @@ export const useGetBookmarksQuery = (): UseQueryResult<
     enabled: false,
     queryFn: async ({ signal }) => {
       const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
-        url: api.getBookmarks,
-        method: 'get',
+        url: api.getBookmarks.url,
+        method: api.getBookmarks.method,
         signal,
       })
 

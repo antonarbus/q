@@ -1,11 +1,10 @@
-import { Router, type Request, type Response, type NextFunction } from 'express'
+import type { Request, Response, NextFunction } from 'express'
 import type { User } from '@entities/user'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { nanoid } from '@back/shared/lib/nanoid'
 import { sendEmail } from '@back/shared/services/email'
 import { config } from '@back/config'
 import { UserModel } from '@back/entities/user'
-import { asyncHandler } from '@back/shared/utils/asyncHandler'
 
 export type ReqBody = {
   email: User['email']
@@ -27,9 +26,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const requestPasswordResetRouter = Router()
-
-const requestPasswordReset: RouterHandler = async (req, res, next) => {
+export const requestPasswordReset: RouterHandler = async (req, res, next) => {
   const emailFromInput = req.body.email.toLowerCase()
 
   const user = await UserModel.findOne({ email: emailFromInput }).lean()
@@ -91,5 +88,3 @@ const requestPasswordReset: RouterHandler = async (req, res, next) => {
     .status(httpStatus.serverError_500)
     .json({ message: 'reset link not sent' })
 }
-
-requestPasswordResetRouter.post('/', asyncHandler(requestPasswordReset))

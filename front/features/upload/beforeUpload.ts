@@ -3,11 +3,11 @@ import { getState } from '@shared/lib/redux'
 import { removeLoadingBar } from '@shared/lib/froala/removeLoadingBar'
 import { getFileSizeInMb } from '@shared/utils/getFileSizeInMb'
 import { hideDraggableArea } from './showDraggableArea'
-import type { ResBody as ResBodyGetSignedUrl } from '@back/api/upload/fileUploadSignedUrlRouter'
+import type { ResBody as ResBodyGetSignedUrl } from '@back/api/file/fileUploadSignedUrl'
 import type {
   ResBody as ResBodyMakeFilePublic,
   ReqBody as Payload,
-} from '@back/api/upload/makeFilePublicRouter'
+} from '@back/api/file/makeFilePublic'
 import { toast } from 'sonner'
 import { asyncDelay } from '@shared/utils/delay'
 import type { FroalaProps } from '@entities/quotation/ui/froala/types'
@@ -67,8 +67,8 @@ export const beforeUpload: BeforeUpload = async (props) => {
 
   try {
     const { data: signedUrlRes } = await axiosWithAuth<ResBodyGetSignedUrl>({
-      url: `${api.fileUploadSignedUrl}?fileName=${fileName}`,
-      method: 'get',
+      url: `${api.fileUploadSignedUrl.url}?fileName=${fileName}`,
+      method: api.fileUploadSignedUrl.method,
     })
 
     if (!signedUrlRes.signedUrl || !signedUrlRes.publicUrl) {
@@ -148,8 +148,8 @@ export const beforeUpload: BeforeUpload = async (props) => {
       AxiosError<ResBodyMakeFilePublic>,
       Payload
     >({
-      url: api.makeFilePublic,
-      method: 'patch',
+      url: api.makeFilePublic.url,
+      method: api.makeFilePublic.method,
       data: {
         fileName,
       },

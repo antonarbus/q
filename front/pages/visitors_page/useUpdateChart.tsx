@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import type { Chart } from 'chart.js'
-import type { ResBody } from '@back/api/visitors/getUniqueDailyVisitorsRouter'
+import type { ResBody } from '@back/api/visitors/getUniqueDailyVisitors'
 import { format, parseISO } from 'date-fns'
 
 type Props = {

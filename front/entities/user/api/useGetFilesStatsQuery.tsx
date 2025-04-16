@@ -1,4 +1,4 @@
-import type { ResBody } from '@back/api/settings/getFilesStatsRouter'
+import type { ResBody } from '@back/api/file/getFilesStats'
 import { api } from '@back/shared/consts/api'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import type { AxiosError, AxiosResponse } from 'axios'
@@ -19,8 +19,8 @@ export const useGetFilesStatsQuery = (): UseQueryResult<
     enabled: true,
     queryFn: async () => {
       const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
-        url: api.getFilesStats,
-        method: 'get',
+        url: api.getFilesStats.url,
+        method: api.getFilesStats.method,
         withCredentials: true,
       })
 
