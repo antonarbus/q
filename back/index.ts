@@ -16,7 +16,7 @@ app.use(cookieParser()) // parses Cookie header and adds to req.cookies
 
 Object.entries(api).forEach(([key, apiData]) => {
   const { method, url, handler } = apiData
-  app[method](url, asyncHandler(handler))
+  app[method](url, asyncHandler(handler)) // register route
 })
 
 app.use(errorHandlerMiddleware)
