@@ -37,6 +37,8 @@
     "docker_prod_up": "docker compose -f docker-compose.prod.yml up"
   },
   "devDependencies": {
+    "@babel/core": "^7.26.10",
+    "@babel/preset-typescript": "^7.27.0",
     "@emotion/babel-plugin": "^11.13.5",
     "@emotion/react": "^11.14.0",
     "@eslint/js": "^9.24.0",

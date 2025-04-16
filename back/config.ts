@@ -34,6 +34,7 @@ export const config = {
 
       return 443 // default, not specified at browser
     },
+    portPreview: 3666,
     get baseUrl() {
       if (config.installation === 'local') {
         return `${this.protocol}://${this.hostname}:${this.port}` as const
