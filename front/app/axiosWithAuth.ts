@@ -10,7 +10,7 @@ import { dispatch, getState } from '@shared/lib/redux'
 const axiosWithAuth = axios.create({ withCredentials: true })
 
 axiosWithAuth.interceptors.request.use(async (config) => {
-  // wait till initial access token if fetched, otherwise token is null and another immediate duplicate request for access token will be sent
+  // wait until initial access token if fetched, otherwise token is null and another immediate duplicate request for access token will be sent
   await initAccessTokenFetchingPromise
   config.headers[headerName.accessJwtToken] = getState().user.accessToken
 
