@@ -17,6 +17,8 @@ const thisDirPath = dirname(thisFilePath)
  * Strips the `handler` property from the api routes object in the backend.
  * This is needed because api are shared between front and back ends and
  * Sensitive functions are leaked to the frontend.
+ * Also it breaks the connection between front and back ends, otherwise whole
+ * node_modules will be included in the frontend build.
  */
 const stripHandlerFromApiRoutes = (): unknown => {
   const targetFilePath = resolve(thisDirPath, 'back/api/api.ts')
