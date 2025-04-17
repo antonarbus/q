@@ -2,7 +2,7 @@ import type {
   ResBody,
   ReqBody as Payload,
 } from '@back/api/auth/requestPasswordReset'
-import { api } from '@back/shared/consts/api'
+import { api } from '@back/api'
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import axios, { type AxiosError } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'

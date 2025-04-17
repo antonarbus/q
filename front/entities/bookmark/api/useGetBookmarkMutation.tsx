@@ -2,7 +2,7 @@ import type {
   ReqBody as Payload,
   ResBody,
 } from '@back/api/bookmark/getBookmark'
-import { api } from '@back/shared/consts/api'
+import { api } from '@back/api'
 import { type UseMutationResult, useMutation } from '@tanstack/react-query'
 import type { AxiosResponse, AxiosError } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'

@@ -5,7 +5,7 @@ import type {
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import axios, { type AxiosError } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
-import { api } from '@back/shared/consts/api'
+import { api } from '@back/api'
 
 export const useCountUniqueDailyVisitorsMutation = (): UseMutationResult<
   ResBody,

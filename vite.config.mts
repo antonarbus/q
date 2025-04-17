@@ -19,13 +19,13 @@ const thisDirPath = dirname(thisFilePath)
  * Sensitive functions are leaked to the frontend.
  */
 const stripHandlerFromApiRoutes = (): unknown => {
-  const targetFile = resolve(thisDirPath, 'back/shared/consts/api.ts')
+  const targetFilePath = resolve(thisDirPath, 'back/api/api.ts')
 
   return {
     name: 'vite-strip-handler-from-api-routes',
     enforce: 'pre',
     async transform(code: string, id: string): Promise<BabelFileResult | null> {
-      if (resolve(id) !== targetFile) {
+      if (resolve(id) !== targetFilePath) {
         return null
       }
 

@@ -1,6 +1,6 @@
 import { config } from '@back/config'
 import { UserModel } from '@back/entities/user'
-import { api } from '@back/shared/consts/api'
+import { api } from '@back/api'
 import { connectToDb } from '@back/shared/db/connectToDb'
 import { test, expect } from '@playwright/test'
 

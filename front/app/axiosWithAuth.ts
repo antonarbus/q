@@ -1,4 +1,4 @@
-import { api } from '@back/shared/consts/api'
+import { api } from '@back/api'
 import { headerName } from '@back/shared/headers'
 import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
 import type { ResBody } from '@back/api/auth/getAccessToken'

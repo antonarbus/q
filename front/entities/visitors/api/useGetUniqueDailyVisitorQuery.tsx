@@ -2,7 +2,7 @@ import type {
   ResBody,
   SearchQuery,
 } from '@back/api/visitors/getUniqueDailyVisitors'
-import { api } from '@back/shared/consts/api'
+import { api } from '@back/api'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import type { AxiosError } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'

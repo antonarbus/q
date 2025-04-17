@@ -1,4 +1,4 @@
-import { api } from '@back/shared/consts/api'
+import { api } from '@back/api'
 import { getState } from '@shared/lib/redux'
 import { removeLoadingBar } from '@shared/lib/froala/removeLoadingBar'
 import { getFileSizeInMb } from '@shared/utils/getFileSizeInMb'
