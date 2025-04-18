@@ -79,6 +79,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
     })
 
     const quotationDataFromDb = createQuotationResponse.toObject()
+
     const filePath = getFilePath({ email, fileType: 'quotation', quotationId })
     const file = bucket.file(filePath)
     const fullQuotation = { ...quotationDataFromDb, blocks: quotation.blocks }
@@ -94,7 +95,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
   }
 
   if (quotationOwnership === 'your existing') {
-    const quotationFromDb = await QuotationModel.findOneAndUpdate(
+    const updateQuotationResponse = await QuotationModel.findOneAndUpdate(
       {
         id: quotation.id,
         email,
@@ -115,6 +116,8 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
       },
     )
 
+    const quotationDataFromDb = updateQuotationResponse.toObject()
+
     const filePath = getFilePath({
       email,
       fileType: 'quotation',
@@ -122,7 +125,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
     })
 
     const file = bucket.file(filePath)
-    const fullQuotation = { ...quotationFromDb, blocks: quotation.blocks }
+    const fullQuotation = { ...quotationDataFromDb, blocks: quotation.blocks }
     const quotationJson = JSON.stringify(fullQuotation, null, 2)
     await file.save(quotationJson)
 
@@ -169,20 +172,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
     // todo: copy files from existing email folder to new user folder
     // todo: need to copy files,get html and replaced links
 
-    /*
-  const regexp =
-    /https:\/\/storage\.googleapis\.com\/quotation-app-bucket\/[^/]+\/files\/([^"\\\s]+)/g
-
-  const fileNames = []
-  let match: string[] | null = []
-
-  while ((match = regexp.exec(quotationJson)) !== null) {
-    fileNames.push(match[1]) // match[1] = file name
-  }
-
-  console.log(fileNames)
-
-  */
+    // todo: do not use regexp, we have now info about file in db, we know exactly filename and email and can replace it
 
     res.status(httpStatus.success_200).json({
       message: 'copied and saved',
