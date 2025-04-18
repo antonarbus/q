@@ -14,6 +14,7 @@ export type QuotationPick = Pick<
   | 'desc'
   | 'id'
   | 'info'
+  | 'files'
   | 'name'
   | 'openedAt'
   | 'sharedWith'

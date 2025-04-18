@@ -5,6 +5,7 @@ import { DateCellRenderer } from '@shared/lib/ag_grid/renderers/DateCellRenderer
 import { dateFilterComparator } from '@shared/lib/ag_grid/comparators/dateFilterComparator'
 import { dateValueGetter } from '@shared/lib/ag_grid/value_getter/dateValueGetter'
 import type { QuotationPick } from '@back/api/quotation/getQuotationsHandler'
+import { FilesRenderer } from './renderers/FilesRenderer'
 
 export const defaultColDef: ColDef<QuotationPick> = {
   headerClass: ['center'],
@@ -95,6 +96,12 @@ export const columnDefs: ColDef<QuotationPick>[] = [
     filterParams: {
       comparator: dateFilterComparator,
     },
+  },
+  {
+    field: 'files',
+    headerName: 'files',
+    minWidth: 200,
+    cellRenderer: FilesRenderer,
   },
   {
     field: 'sharedWith',

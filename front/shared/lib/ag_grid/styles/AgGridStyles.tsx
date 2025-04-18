@@ -25,6 +25,7 @@ export const AgGridStyles = (): React.JSX.Element => {
           /* https://css-tricks.com/flexbox-truncated-text/ */
           .ag-cell-wrapper {
             min-width: 0;
+            width: 100%;
           }
 
           .ag-cell-value {
