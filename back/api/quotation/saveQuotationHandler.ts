@@ -63,21 +63,22 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
   if (quotationOwnership === 'your new') {
     const quotationId = nanoid(5)
 
-    const createResponse = await QuotationModel.create({
+    const createQuotationResponse = await QuotationModel.create({
       id: quotationId,
       email,
       name: quotation.name,
       category: quotation.category,
       desc: quotation.desc,
       info: quotation.info,
+      files: quotation.files,
       sharedWith: quotation.sharedWith,
-      blocks: 'find in bucket under same id',
+      blocks: 'too big to keep in db, find it in the bucket under same id',
       updatedAt: Date.now(),
       createdAt: Date.now(),
       openedAt: Date.now(),
     })
 
-    const quotationDataFromDb = createResponse.toObject()
+    const quotationDataFromDb = createQuotationResponse.toObject()
     const filePath = getFilePath({ email, fileType: 'quotation', quotationId })
     const file = bucket.file(filePath)
     const fullQuotation = { ...quotationDataFromDb, blocks: quotation.blocks }
@@ -93,7 +94,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
   }
 
   if (quotationOwnership === 'your existing') {
-    const updateResponse = await QuotationModel.findOneAndUpdate(
+    const quotationFromDb = await QuotationModel.findOneAndUpdate(
       {
         id: quotation.id,
         email,
@@ -103,6 +104,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
         category: quotation.category,
         desc: quotation.desc,
         info: quotation.info,
+        files: quotation.files,
         sharedWith: quotation.sharedWith,
         blocks: 'to be found in bucket under same id',
         updatedAt: Date.now(),
@@ -113,8 +115,6 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
       },
     )
 
-    const quotationDataFromDb = updateResponse.toObject()
-
     const filePath = getFilePath({
       email,
       fileType: 'quotation',
@@ -122,7 +122,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
     })
 
     const file = bucket.file(filePath)
-    const fullQuotation = { ...quotationDataFromDb, blocks: quotation.blocks }
+    const fullQuotation = { ...quotationFromDb, blocks: quotation.blocks }
     const quotationJson = JSON.stringify(fullQuotation, null, 2)
     await file.save(quotationJson)
 
@@ -134,37 +134,42 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
     return
   }
 
-  // quotationOwnership === 'foreign existing'
-  const quotationId = nanoid(5)
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  if (quotationOwnership === 'foreign existing') {
+    const quotationId = nanoid(5)
 
-  const createResponse = await QuotationModel.create({
-    id: quotationId,
-    email,
-    name: quotation.name,
-    category: quotation.category,
-    desc: quotation.desc,
-    info: quotation.info,
-    sharedWith: quotation.sharedWith,
-    blocks: 'find in bucket under same id',
-    updatedAt: Date.now(),
-    createdAt: Date.now(),
-    openedAt: Date.now(),
-  })
+    const createResponse = await QuotationModel.create({
+      id: quotationId,
+      email,
+      name: quotation.name,
+      category: quotation.category,
+      desc: quotation.desc,
+      info: quotation.info,
+      files: quotation.files,
+      sharedWith: quotation.sharedWith,
+      blocks: 'find in bucket under same id',
+      updatedAt: Date.now(),
+      createdAt: Date.now(),
+      openedAt: Date.now(),
+    })
 
-  const quotationDataFromDb = createResponse.toObject()
+    const quotationDataFromDb = createResponse.toObject()
 
-  const filePath = getFilePath({
-    email,
-    fileType: 'quotation',
-    quotationId,
-  })
+    const filePath = getFilePath({
+      email,
+      fileType: 'quotation',
+      quotationId,
+    })
 
-  const file = bucket.file(filePath)
-  const fullQuotation = { ...quotationDataFromDb, blocks: quotation.blocks }
-  const quotationJson = JSON.stringify(fullQuotation, null, 2)
-  await file.save(quotationJson)
+    const file = bucket.file(filePath)
+    const fullQuotation = { ...quotationDataFromDb, blocks: quotation.blocks }
+    const quotationJson = JSON.stringify(fullQuotation, null, 2)
+    await file.save(quotationJson)
 
-  /*
+    // todo: copy files from existing email folder to new user folder
+    // todo: need to copy files,get html and replaced links
+
+    /*
   const regexp =
     /https:\/\/storage\.googleapis\.com\/quotation-app-bucket\/[^/]+\/files\/([^"\\\s]+)/g
 
@@ -179,12 +184,9 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
   */
 
-  // todo: copy files and quotation for saving foreign quotation
-  // todo: make it inside separate if statement
-  // todo: need to copy files,get html and replaced links
-
-  res.status(httpStatus.success_200).json({
-    message: 'copied and saved',
-    quotation: fullQuotation,
-  })
+    res.status(httpStatus.success_200).json({
+      message: 'copied and saved',
+      quotation: fullQuotation,
+    })
+  }
 }
