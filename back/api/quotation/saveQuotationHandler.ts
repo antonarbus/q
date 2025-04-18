@@ -9,6 +9,7 @@ import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { QuotationModel } from '@back/entities/quotation'
 import type {
   CopyResponse,
+  File,
   MakeFilePublicResponse,
 } from '@google-cloud/storage'
 
@@ -176,47 +177,61 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
       (quotationDataFromDb.files ?? []).length > 0
 
     if (shouldCopyFilesToNewUserBucket) {
-      const copyFilePromises: Promise<CopyResponse>[] = []
+      const copyFiles = async (): Promise<File[]> => {
+        const copyFilePromises: Promise<CopyResponse>[] = []
 
-      for (const fileInfo of quotationDataFromDb.files ?? []) {
-        const originalFilePath = getFilePath({
-          email: quotation.email,
-          fileType: 'file',
-          fileName: fileInfo.fileName,
-        })
+        for (const fileInfo of quotationDataFromDb.files ?? []) {
+          const originalFilePath = getFilePath({
+            email: quotation.email,
+            fileType: 'file',
+            fileName: fileInfo.fileName,
+          })
 
-        const newFilePath = getFilePath({
-          email,
-          fileType: 'file',
-          fileName: fileInfo.fileName,
-        })
+          const newFilePath = getFilePath({
+            email,
+            fileType: 'file',
+            fileName: fileInfo.fileName,
+          })
 
-        const originalFile = bucket.file(originalFilePath)
+          const originalFile = bucket.file(originalFilePath)
+          const newFile = bucket.file(newFilePath)
 
-        const newFile = bucket.file(newFilePath)
+          newFile.metadata = {
+            oldOwnerEmail: quotation.email,
+            newOwnerEmail: email,
+            fileName: fileInfo.fileName,
+          }
 
-        newFile.metadata = {
-          oldOwnerEmail: quotation.email,
-          newOwnerEmail: email,
-          fileName: fileInfo.fileName,
+          const copyFilePromise = originalFile.copy(newFile)
+          copyFilePromises.push(copyFilePromise)
         }
 
-        const copyFilePromise = originalFile.copy(newFile)
+        const copyResponses = await Promise.allSettled(copyFilePromises)
 
-        copyFilePromises.push(copyFilePromise)
+        const copiedFiles = copyResponses
+          .filter((copyResponse) => copyResponse.status === 'fulfilled')
+          .map((copyResponse) => copyResponse.value[0])
+
+        return copiedFiles
       }
 
-      const copyResponses = await Promise.allSettled(copyFilePromises)
+      const copiedFiles = await copyFiles()
 
-      const makeFilePublicPromises: Promise<MakeFilePublicResponse>[] = []
+      const makeFilesPublic = async (): Promise<void> => {
+        const makeFilePublicPromises: Promise<MakeFilePublicResponse>[] = []
 
-      copyResponses.forEach((response) => {
-        if (response.status === 'fulfilled') {
-          const copiedFile = response.value[0]
-
+        copiedFiles.forEach((copiedFile) => {
           const makeFilePublicPromise = copiedFile.makePublic()
           makeFilePublicPromises.push(makeFilePublicPromise)
+        })
 
+        await Promise.allSettled(makeFilePublicPromises)
+      }
+
+      await makeFilesPublic()
+
+      const replaceLinksInQuotation = (): void => {
+        copiedFiles.forEach((copiedFile) => {
           const metadata = copiedFile.metadata as {
             oldOwnerEmail: string
             newOwnerEmail: string
@@ -227,10 +242,10 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
           const newText = `${metadata.newOwnerEmail}/files/${metadata.fileName}`
 
           quotationJson = quotationJson.replace(textToReplace, newText)
-        }
-      })
+        })
+      }
 
-      await Promise.all(makeFilePublicPromises)
+      replaceLinksInQuotation()
     }
 
     await quotationFile.save(quotationJson)

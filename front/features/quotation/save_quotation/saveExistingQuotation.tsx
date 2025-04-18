@@ -22,6 +22,8 @@ const loadingIconActor = createActor(loadingMenuIconMachine).start()
 export const saveExistingQuotation = async (): Promise<void> => {
   if (getState().user.email === null) {
     toast.warning('Not logged in')
+
+    return
   }
 
   const quotation: Quotation = {
