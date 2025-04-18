@@ -125,7 +125,11 @@ export type Quotation = Common & {
     | 'Super admin'
     | 'Super admin on behalf of a user'
     | 'Forbidden'
-
+  files?: {
+    fileName: string
+    fileSizeInMb: number
+    fileUploadedAt: Date
+  }[]
   blocks: Item[]
 }
 

@@ -36,6 +36,7 @@ import { updatePriceTitleReducer } from './reducers/updatePriceTitleReducer'
 import { updateQuotationInfoReducer } from './reducers/updateQuotationInfoReducer'
 import { updateSubTotalPriceReducer } from './reducers/updateSubTotalPriceReducer'
 import { updateRowBlockCellReducer } from './reducers/updateRowBlockCellReducer'
+import { addFileInfoReducer } from './reducers/addFileInfoReducer'
 
 const initialState: Quotation = {
   id: '',
@@ -51,6 +52,7 @@ export const quotationSlice = createSlice({
   reducers: {
     loadQuotationReducer,
     loadBlockAtPosThousandReducer,
+    addFileInfoReducer,
     removeBlockFromPosThousandReducer,
     resetQuotationReducer: () => initialState,
     deleteBoqRowReducer,
