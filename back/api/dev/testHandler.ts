@@ -10,7 +10,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const test: RouterHandler = async (req, res, next) => {
+export const testHandler: RouterHandler = async (req, res, next) => {
   const { roles } = getUserFromRefreshToken({ req })
 
   if (!roles.includes(userRole.superAdmin)) {

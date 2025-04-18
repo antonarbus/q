@@ -1,4 +1,4 @@
-import type { ResBody } from '@back/api/user/getUsers'
+import type { ResBody } from '@back/api/user/getUsersHandler'
 import { api } from '@back/api'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import type { AxiosError, AxiosResponse } from 'axios'

@@ -1,4 +1,4 @@
-import type { ReqBody } from '@back/api/bookmark/deleteBookmark'
+import type { ReqBody } from '@back/api/bookmark/deleteBookmarkHandler'
 import { IconButton, Tooltip } from '@mui/material'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'

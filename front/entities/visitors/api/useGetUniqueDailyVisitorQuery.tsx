@@ -1,7 +1,7 @@
 import type {
   ResBody,
   SearchQuery,
-} from '@back/api/visitors/getUniqueDailyVisitors'
+} from '@back/api/visitors/getUniqueDailyVisitorsHandler'
 import { api } from '@back/api'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import type { AxiosError } from 'axios'

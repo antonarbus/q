@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import type { ICellRendererParams } from 'ag-grid-community'
-import type { UserPicked } from '@back/api/user/getUsers'
+import type { UserPicked } from '@back/api/user/getUsersHandler'
 import { DeleteUserButton } from '@features/user/delete_user'
 import { LogInAsUserButton } from '@features/user/log_in_as_user'
 

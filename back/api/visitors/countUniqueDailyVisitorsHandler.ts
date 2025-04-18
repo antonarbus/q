@@ -22,7 +22,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const countUniqueDailyVisitors: RouterHandler = async (
+export const countUniqueDailyVisitorsHandler: RouterHandler = async (
   req,
   res,
   next,

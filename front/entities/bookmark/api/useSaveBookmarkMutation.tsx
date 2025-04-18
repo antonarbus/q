@@ -1,7 +1,7 @@
 import type {
   ResBody,
   ReqBody as Payload,
-} from '@back/api/bookmark/saveBookmark'
+} from '@back/api/bookmark/saveBookmarkHandler'
 import { api } from '@back/api'
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import type { AxiosResponse, AxiosError } from 'axios'

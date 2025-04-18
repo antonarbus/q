@@ -1,7 +1,7 @@
 import type {
   ResBody,
   ReqBody as Payload,
-} from '@back/api/auth/requestPasswordReset'
+} from '@back/api/auth/requestPasswordResetHandler'
 import { api } from '@back/api'
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import axios, { type AxiosError } from 'axios'

@@ -2,7 +2,7 @@ import type { ColDef } from 'ag-grid-community'
 import { DateCellRenderer } from '@shared/lib/ag_grid/renderers/DateCellRenderer'
 import { dateFilterComparator } from '@shared/lib/ag_grid/comparators/dateFilterComparator'
 import { dateValueGetter } from '@shared/lib/ag_grid/value_getter/dateValueGetter'
-import type { UserPicked } from '@back/api/user/getUsers'
+import type { UserPicked } from '@back/api/user/getUsersHandler'
 import { ActionButtonsCellRenderer } from './renderers/ActionButtonsCellRenderer'
 
 export const defaultColDef: ColDef<UserPicked> = {

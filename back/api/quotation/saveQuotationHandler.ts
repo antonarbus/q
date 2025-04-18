@@ -31,7 +31,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const saveQuotation: RouterHandler = async (req, res, next) => {
+export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
   const { quotation } = req.body
 

@@ -3,7 +3,7 @@ import type { ICellRendererParams } from 'ag-grid-community'
 import { OpenQuotationPageAndLoadFromServerButton } from '@features/open_close/open_quotation_page'
 import { DeleteQuotationButton } from '@features/quotation/delete_quotation'
 import { OpenSaveQuotationModalButton } from '@features/open_close/open_save_quotation_modal'
-import type { QuotationPick } from '@back/api/quotation/getQuotations'
+import type { QuotationPick } from '@back/api/quotation/getQuotationsHandler'
 
 type Params = ICellRendererParams<QuotationPick>
 

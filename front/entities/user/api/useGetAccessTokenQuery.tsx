@@ -1,4 +1,4 @@
-import type { ResBody } from '@back/api/auth/getAccessToken'
+import type { ResBody } from '@back/api/auth/getAccessTokenHandler'
 import { api } from '@back/api'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import axios, { type AxiosError, type AxiosResponse } from 'axios'

@@ -9,7 +9,7 @@ import { createLoadingMenuIconMachine, navSlice } from '@shared/nav'
 import { toast } from 'sonner'
 import { createActor } from 'xstate'
 import type { AxiosError } from 'axios'
-import type { ResBody } from '@back/api/quotation/saveQuotation'
+import type { ResBody } from '@back/api/quotation/saveQuotationHandler'
 import { router } from '@shared/lib/router'
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({

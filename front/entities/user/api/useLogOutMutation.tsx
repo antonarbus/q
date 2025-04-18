@@ -1,4 +1,4 @@
-import type { ResBody } from '@back/api/auth/logOut'
+import type { ResBody } from '@back/api/auth/logOutHandler'
 import { api } from '@back/api'
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import axios, { type AxiosError } from 'axios'

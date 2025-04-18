@@ -26,7 +26,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const deleteUser: RouterHandler = async (req, res, next) => {
+export const deleteUserHandler: RouterHandler = async (req, res, next) => {
   const userEmailToBeDeleted = req.body.email
 
   const { email: emailFromToken, roles } =

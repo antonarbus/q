@@ -29,7 +29,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const saveBookmark: RouterHandler = async (req, res, next) => {
+export const saveBookmarkHandler: RouterHandler = async (req, res, next) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
   const { item: bookmarkItem } = req.body
 

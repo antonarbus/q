@@ -1,7 +1,7 @@
 import type {
   ResBody,
   ReqBody as Payload,
-} from '@back/api/visitors/countUniqueDailyVisitors'
+} from '@back/api/visitors/countUniqueDailyVisitorsHandler'
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import axios, { type AxiosError } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'

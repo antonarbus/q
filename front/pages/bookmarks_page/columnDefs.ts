@@ -3,7 +3,7 @@ import { ActionButtonsCellRenderer } from './renderers/ActionButtonsCellRenderer
 import { DateCellRenderer } from '@shared/lib/ag_grid/renderers/DateCellRenderer'
 import { dateFilterComparator } from '@shared/lib/ag_grid/comparators/dateFilterComparator'
 import { dateValueGetter } from '@shared/lib/ag_grid/value_getter/dateValueGetter'
-import type { ItemPick } from '@back/api/bookmark/getBookmarks'
+import type { ItemPick } from '@back/api/bookmark/getBookmarksHandler'
 
 export const defaultColDef: ColDef<ItemPick> = {
   headerClass: ['center'],

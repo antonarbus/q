@@ -16,7 +16,11 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const getBookmarkCategories: RouterHandler = async (req, res, next) => {
+export const getBookmarkCategoriesHandler: RouterHandler = async (
+  req,
+  res,
+  next,
+) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
   const categories = await BookmarkModel.find({ email }).distinct('category')
   res.status(httpStatus.success_200).json({ message: 'Found', categories })

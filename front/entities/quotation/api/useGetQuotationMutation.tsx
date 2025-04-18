@@ -1,7 +1,7 @@
 import type {
   ReqBody as Payload,
   ResBody,
-} from '@back/api/quotation/getQuotation'
+} from '@back/api/quotation/getQuotationHandler'
 import { api } from '@back/api'
 import { type UseMutationResult, useMutation } from '@tanstack/react-query'
 import axios, { type AxiosResponse, type AxiosError } from 'axios'

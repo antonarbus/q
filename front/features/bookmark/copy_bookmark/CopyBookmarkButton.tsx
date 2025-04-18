@@ -1,4 +1,4 @@
-import type { ReqBody } from '@back/api/bookmark/getBookmark'
+import type { ReqBody } from '@back/api/bookmark/getBookmarkHandler'
 import { dispatch } from '@shared/lib/redux'
 import { IconButton, Tooltip } from '@mui/material'
 import { MdCopyAll } from 'react-icons/md'

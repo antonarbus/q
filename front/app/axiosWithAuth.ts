@@ -1,7 +1,7 @@
 import { api } from '@back/api'
 import { headerName } from '@back/shared/headers'
 import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
-import type { ResBody } from '@back/api/auth/getAccessToken'
+import type { ResBody } from '@back/api/auth/getAccessTokenHandler'
 import { userSlice } from '@entities/user'
 import { initAccessTokenFetchingPromise } from '@features/auth/get_access_token/AccessToken'
 import { instantiateAxiosWithAuth } from '@shared/lib/axiosWithAuth'

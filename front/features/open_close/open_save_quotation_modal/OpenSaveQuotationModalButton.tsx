@@ -1,4 +1,4 @@
-import type { ReqBody } from '@back/api/bookmark/deleteBookmark'
+import type { ReqBody } from '@back/api/bookmark/deleteBookmarkHandler'
 import { dispatch } from '@shared/lib/redux'
 import { IconButton, Tooltip } from '@mui/material'
 import { AiTwotoneEdit } from 'react-icons/ai'

@@ -26,7 +26,11 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const requestPasswordReset: RouterHandler = async (req, res, next) => {
+export const requestPasswordResetHandler: RouterHandler = async (
+  req,
+  res,
+  next,
+) => {
   const emailFromInput = req.body.email.toLowerCase()
 
   const user = await UserModel.findOne({ email: emailFromInput }).lean()

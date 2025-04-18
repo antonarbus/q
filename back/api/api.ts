@@ -1,35 +1,35 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { NextFunction, Request, Response } from 'express'
-import { activate } from '@back/api/auth/activate'
-import { getAccessToken } from '@back/api/auth/getAccessToken'
-import { logIn } from '@back/api/auth/logIn'
-import { logOut } from '@back/api/auth/logOut'
-import { register } from '@back/api/auth/register'
-import { requestPasswordReset } from '@back/api/auth/requestPasswordReset'
-import { resetPassword } from '@back/api/auth/resetPassword'
-import { deleteBookmark } from '@back/api/bookmark/deleteBookmark'
-import { getBookmark } from '@back/api/bookmark/getBookmark'
-import { getBookmarkCategories } from '@back/api/bookmark/getBookmarkCategories'
-import { getBookmarks } from '@back/api/bookmark/getBookmarks'
-import { saveBookmark } from '@back/api/bookmark/saveBookmark'
-import { getBucketCors } from '@back/api/dev/getBucketCors'
-import { health } from '@back/api/dev/health'
-import { root } from '@back/api/dev/root'
-import { rootApi } from '@back/api/dev/rootApi'
-import { setBucketCors } from '@back/api/dev/setBucketCors'
-import { test } from '@back/api/dev/test'
-import { fileUploadSignedUrl } from '@back/api/file/fileUploadSignedUrl'
-import { getFilesStats } from '@back/api/file/getFilesStats'
-import { makeFilePublic } from '@back/api/file/makeFilePublic'
-import { deleteQuotation } from '@back/api/quotation/deleteQuotation'
-import { getQuotation } from '@back/api/quotation/getQuotation'
-import { getQuotationCategories } from '@back/api/quotation/getQuotationCategories'
-import { getQuotations } from '@back/api/quotation/getQuotations'
-import { saveQuotation } from '@back/api/quotation/saveQuotation'
-import { deleteUser } from '@back/api/user/deleteUser'
-import { getUsers } from '@back/api/user/getUsers'
-import { countUniqueDailyVisitors } from '@back/api/visitors/countUniqueDailyVisitors'
-import { getUniqueDailyVisitors } from '@back/api/visitors/getUniqueDailyVisitors'
+import { activateHandler } from '@back/api/auth/activateHandler'
+import { getAccessTokenHandler } from '@back/api/auth/getAccessTokenHandler'
+import { logInHandler } from '@back/api/auth/logInHandler'
+import { logOutHandler } from '@back/api/auth/logOutHandler'
+import { registerHandler } from '@back/api/auth/registerHandler'
+import { requestPasswordResetHandler } from '@back/api/auth/requestPasswordResetHandler'
+import { resetPasswordHandler } from '@back/api/auth/resetPasswordHandler'
+import { deleteBookmarkHandler } from '@back/api/bookmark/deleteBookmarkHandler'
+import { getBookmarkHandler } from '@back/api/bookmark/getBookmarkHandler'
+import { getBookmarkCategoriesHandler } from '@back/api/bookmark/getBookmarkCategoriesHandler'
+import { getBookmarksHandler } from '@back/api/bookmark/getBookmarksHandler'
+import { saveBookmarkHandler } from '@back/api/bookmark/saveBookmarkHandler'
+import { getBucketCorsHandler } from '@back/api/dev/getBucketCorsHandler'
+import { healthHandler } from '@back/api/dev/healthHandler'
+import { rootHandler } from '@back/api/dev/rootHandler'
+import { rootApiHandler } from '@back/api/dev/rootApiHandler'
+import { setBucketCorsHandler } from '@back/api/dev/setBucketCorsHandler'
+import { testHandler } from '@back/api/dev/testHandler'
+import { fileUploadSignedUrlHandler } from '@back/api/file/fileUploadSignedUrlHandler'
+import { getFilesStatsHandler } from '@back/api/file/getFilesStatsHandler'
+import { makeFilePublicHandler } from '@back/api/file/makeFilePublicHandler'
+import { deleteQuotationHandler } from '@back/api/quotation/deleteQuotationHandler'
+import { getQuotationHandler } from '@back/api/quotation/getQuotationHandler'
+import { getQuotationCategoriesHandler } from '@back/api/quotation/getQuotationCategories'
+import { getQuotationsHandler } from '@back/api/quotation/getQuotationsHandler'
+import { saveQuotationHandler } from '@back/api/quotation/saveQuotationHandler'
+import { deleteUserHandler } from '@back/api/user/deleteUserHandler'
+import { getUsersHandler } from '@back/api/user/getUsersHandler'
+import { countUniqueDailyVisitorsHandler } from '@back/api/visitors/countUniqueDailyVisitorsHandler'
+import { getUniqueDailyVisitorsHandler } from '@back/api/visitors/getUniqueDailyVisitorsHandler'
 
 type Api = {
   url: string
@@ -47,7 +47,7 @@ export const api = {
   root: {
     url: '/',
     method: 'get',
-    handler: root,
+    handler: rootHandler,
     description: `
       Root endpoint, no real purpose, good to show some info for dev purpose
     `,
@@ -55,7 +55,7 @@ export const api = {
   rootApi: {
     url: '/api',
     method: 'get',
-    handler: rootApi,
+    handler: rootApiHandler,
     description: `
       Root api endpoint, no real purpose, good to show some info for dev purpose
     `,
@@ -63,7 +63,7 @@ export const api = {
   health: {
     url: '/api/health',
     method: 'get',
-    handler: health,
+    handler: healthHandler,
     description: `
       Google Cloud Run checks this endpoint to see if the app is alive. 
       It checks if ExpressJS and DB connection are OK.
@@ -72,50 +72,50 @@ export const api = {
   test: {
     url: '/api/test',
     method: 'get',
-    handler: test,
+    handler: testHandler,
     description: 'Test playground for dev purpose',
   },
   setBucketCors: {
     url: '/api/set-bucket-cors',
     method: 'get',
-    handler: setBucketCors,
+    handler: setBucketCorsHandler,
     description: 'Set CORS for bucket & visit the endpoint to apply',
   },
   getBucketCors: {
     url: '/api/get-bucket-cors',
     method: 'get',
-    handler: getBucketCors,
+    handler: getBucketCorsHandler,
     description: 'Get CORS for bucket. Visit the endpoint to apply.',
   },
   // auth
   register: {
     url: '/api/register',
     method: 'post',
-    handler: register,
+    handler: registerHandler,
     description: 'When user clicks on register button',
   },
   logIn: {
     url: '/api/login',
     method: 'post',
-    handler: logIn,
+    handler: logInHandler,
     description: 'When user clicks on login button',
   },
   logOut: {
     url: '/api/logout',
     method: 'get',
-    handler: logOut,
+    handler: logOutHandler,
     description: 'When user clicks on logout button',
   },
   activate: {
     url: '/api/activate',
     method: 'post',
-    handler: activate,
+    handler: activateHandler,
     description: 'When user clicks on activate link in email',
   },
   getAccessToken: {
     url: '/api/get-access-token',
     method: 'get',
-    handler: getAccessToken,
+    handler: getAccessTokenHandler,
     description: `
       Calls initially on app load (<AccessToken />) to get access token
       and puts it into memory (state.user.accessToken).
@@ -130,7 +130,7 @@ export const api = {
   requestPasswordReset: {
     url: '/api/request-password-reset',
     method: 'post',
-    handler: requestPasswordReset,
+    handler: requestPasswordResetHandler,
     description: `
       When user clicks on forgot password link to get an email with reset link
     `,
@@ -138,89 +138,89 @@ export const api = {
   resetPassword: {
     url: '/api/reset-password',
     method: 'post',
-    handler: resetPassword,
+    handler: resetPasswordHandler,
     description: 'When user clicks on reset password link in email',
   },
   // user
   getUsers: {
     url: '/api/get-users',
     method: 'get',
-    handler: getUsers,
+    handler: getUsersHandler,
     description: 'Users list for admin page',
   },
   deleteUser: {
     url: '/api/delete-user',
     method: 'delete',
-    handler: deleteUser,
+    handler: deleteUserHandler,
     description: 'When admin deletes a user with button in table',
   },
   // quotation
   saveQuotation: {
     url: '/api/save-quotation',
     method: 'post',
-    handler: saveQuotation,
+    handler: saveQuotationHandler,
     description: 'When user clicks on save button in the modal',
   },
   getQuotation: {
     url: '/api/get-quotation',
     method: 'post',
-    handler: getQuotation,
+    handler: getQuotationHandler,
     description: 'When user opens the quotation page',
   },
   getQuotations: {
     url: '/api/get-quotations',
     method: 'get',
-    handler: getQuotations,
+    handler: getQuotationsHandler,
     description: 'For quotations table',
   },
   getQuotationCategories: {
     url: '/api/get-quotation-categories',
     method: 'get',
-    handler: getQuotationCategories,
+    handler: getQuotationCategoriesHandler,
     description: 'For the category field on save quotation modal',
   },
   deleteQuotation: {
     url: '/api/delete-quotation',
     method: 'delete',
-    handler: deleteQuotation,
+    handler: deleteQuotationHandler,
     description: 'When user clicks on delete button in quotations table',
   },
   // bookmark
   saveBookmark: {
     url: '/api/save-bookmark',
     method: 'post',
-    handler: saveBookmark,
+    handler: saveBookmarkHandler,
     description: 'When user clicks on save button in the modal',
   },
   getBookmark: {
     url: '/api/get-bookmark',
     method: 'post',
-    handler: getBookmark,
+    handler: getBookmarkHandler,
     description: 'When user clicks on bookmark in search or on bookmarks page',
   },
   getBookmarks: {
     url: '/api/get-bookmarks',
     method: 'get',
-    handler: getBookmarks,
+    handler: getBookmarksHandler,
     description: 'For bookmarks table',
   },
   getBookmarkCategories: {
     url: '/api/get-bookmark-categories',
     method: 'get',
-    handler: getBookmarkCategories,
+    handler: getBookmarkCategoriesHandler,
     description: 'For the category field on save bookmark modal',
   },
   deleteBookmark: {
     url: '/api/delete-bookmark',
     method: 'delete',
-    handler: deleteBookmark,
+    handler: deleteBookmarkHandler,
     description: 'When user clicks on delete button in bookmarks table',
   },
   // files
   fileUploadSignedUrl: {
     url: '/api/file-upload-signed-url',
     method: 'get',
-    handler: fileUploadSignedUrl,
+    handler: fileUploadSignedUrlHandler,
     description: `
       On file upload we send light request for Google Cloud Storage url
       where file is uploaded on client side
@@ -229,26 +229,26 @@ export const api = {
   makeFilePublic: {
     url: '/api/make-file-public',
     method: 'patch',
-    handler: makeFilePublic,
+    handler: makeFilePublicHandler,
     description: 'After file is uploaded we make it public',
   },
   getFilesStats: {
     url: '/api/get-files-stats',
     method: 'get',
-    handler: getFilesStats,
+    handler: getFilesStatsHandler,
     description: 'Gets total files size and count for settings modal',
   },
   // visitors
   countUniqueDailyVisitors: {
     url: '/api/count-unique-daily-visitors',
     method: 'post',
-    handler: countUniqueDailyVisitors,
+    handler: countUniqueDailyVisitorsHandler,
     description: 'Records unique daily visitors per day',
   },
   getUniqueDailyVisitors: {
     url: '/api/get-unique-daily-visitors',
     method: 'get',
-    handler: getUniqueDailyVisitors,
+    handler: getUniqueDailyVisitorsHandler,
     description: 'Gets unique daily visitors for admin page',
   },
 } as const satisfies Record<string, Api>

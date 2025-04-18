@@ -1,4 +1,4 @@
-import type { ResBody } from '@back/api/file/getFilesStats'
+import type { ResBody } from '@back/api/file/getFilesStatsHandler'
 import { api } from '@back/api'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import type { AxiosError, AxiosResponse } from 'axios'

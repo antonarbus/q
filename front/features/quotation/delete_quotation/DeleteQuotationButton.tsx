@@ -1,4 +1,4 @@
-import type { ReqBody as Payload } from '@back/api/quotation/deleteQuotation'
+import type { ReqBody as Payload } from '@back/api/quotation/deleteQuotationHandler'
 import { IconButton, Tooltip } from '@mui/material'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'

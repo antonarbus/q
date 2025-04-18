@@ -24,7 +24,11 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const getUniqueDailyVisitors: RouterHandler = async (req, res, next) => {
+export const getUniqueDailyVisitorsHandler: RouterHandler = async (
+  req,
+  res,
+  next,
+) => {
   const { roles } = getUserFromRefreshToken({ req })
   const { startDate, endDate } = req.query
 

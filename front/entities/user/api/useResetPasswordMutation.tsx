@@ -1,4 +1,7 @@
-import type { ResBody, ReqBody as Payload } from '@back/api/auth/resetPassword'
+import type {
+  ResBody,
+  ReqBody as Payload,
+} from '@back/api/auth/resetPasswordHandler'
 import { api } from '@back/api'
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import axios, { type AxiosError } from 'axios'

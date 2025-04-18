@@ -31,7 +31,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const getUsers: RouterHandler = async (req, res, next) => {
+export const getUsersHandler: RouterHandler = async (req, res, next) => {
   const { roles } = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   if (!roles.includes(userRole.superAdmin)) {

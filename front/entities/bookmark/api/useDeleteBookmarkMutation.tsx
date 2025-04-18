@@ -1,7 +1,7 @@
 import type {
   ResBody,
   ReqBody as Payload,
-} from '@back/api/bookmark/deleteBookmark'
+} from '@back/api/bookmark/deleteBookmarkHandler'
 import { api } from '@back/api'
 import { type UseMutationResult, useMutation } from '@tanstack/react-query'
 import type { AxiosError } from 'axios'

@@ -32,7 +32,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const getQuotations: RouterHandler = async (req, res, next) => {
+export const getQuotationsHandler: RouterHandler = async (req, res, next) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   const quotations = await QuotationModel.find(

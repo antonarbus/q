@@ -1,4 +1,7 @@
-import type { ResBody, ReqBody as Payload } from '@back/api/user/deleteUser'
+import type {
+  ResBody,
+  ReqBody as Payload,
+} from '@back/api/user/deleteUserHandler'
 import { api } from '@back/api'
 import { type UseMutationResult, useMutation } from '@tanstack/react-query'
 import type { AxiosError } from 'axios'

@@ -23,7 +23,7 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const makeFilePublic: RouterHandler = async (req, res, next) => {
+export const makeFilePublicHandler: RouterHandler = async (req, res, next) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
   const { fileName } = req.body
 
