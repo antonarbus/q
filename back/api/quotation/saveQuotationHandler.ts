@@ -7,6 +7,10 @@ import { bucket, getFilePath } from '@back/shared/services/storage'
 import { nanoid } from '@back/shared/lib/nanoid'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { QuotationModel } from '@back/entities/quotation'
+import type {
+  CopyResponse,
+  MakeFilePublicResponse,
+} from '@google-cloud/storage'
 
 export type ReqBody = {
   quotation: Quotation
@@ -139,17 +143,17 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (quotationOwnership === 'foreign existing') {
-    const quotationId = nanoid(5)
+    const newQuotationId = nanoid(5)
 
     const createResponse = await QuotationModel.create({
-      id: quotationId,
+      id: newQuotationId,
       email,
       name: quotation.name,
       category: quotation.category,
       desc: quotation.desc,
       info: quotation.info,
       files: quotation.files,
-      sharedWith: quotation.sharedWith,
+      sharedWith: [],
       blocks: 'find in bucket under same id',
       updatedAt: Date.now(),
       createdAt: Date.now(),
@@ -158,21 +162,78 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
     const quotationDataFromDb = createResponse.toObject()
 
-    const filePath = getFilePath({
+    const quotationFilePath = getFilePath({
       email,
       fileType: 'quotation',
-      quotationId,
+      quotationId: newQuotationId,
     })
 
-    const file = bucket.file(filePath)
+    const quotationFile = bucket.file(quotationFilePath)
     const fullQuotation = { ...quotationDataFromDb, blocks: quotation.blocks }
-    const quotationJson = JSON.stringify(fullQuotation, null, 2)
-    await file.save(quotationJson)
+    let quotationJson = JSON.stringify(fullQuotation, null, 2)
 
-    // todo: copy files from existing email folder to new user folder
-    // todo: need to copy files,get html and replaced links
+    const shouldCopyFilesToNewUserBucket =
+      (quotationDataFromDb.files ?? []).length > 0
 
-    // todo: do not use regexp, we have now info about file in db, we know exactly filename and email and can replace it
+    if (shouldCopyFilesToNewUserBucket) {
+      const copyFilePromises: Promise<CopyResponse>[] = []
+
+      for (const fileInfo of quotationDataFromDb.files ?? []) {
+        const originalFilePath = getFilePath({
+          email: quotation.email,
+          fileType: 'file',
+          fileName: fileInfo.fileName,
+        })
+
+        const newFilePath = getFilePath({
+          email,
+          fileType: 'file',
+          fileName: fileInfo.fileName,
+        })
+
+        const originalFile = bucket.file(originalFilePath)
+
+        const newFile = bucket.file(newFilePath)
+
+        newFile.metadata = {
+          oldOwnerEmail: quotation.email,
+          newOwnerEmail: email,
+          fileName: fileInfo.fileName,
+        }
+
+        const copyFilePromise = originalFile.copy(newFile)
+
+        copyFilePromises.push(copyFilePromise)
+      }
+
+      const copyResponses = await Promise.allSettled(copyFilePromises)
+
+      const makeFilePublicPromises: Promise<MakeFilePublicResponse>[] = []
+
+      copyResponses.forEach((response) => {
+        if (response.status === 'fulfilled') {
+          const copiedFile = response.value[0]
+
+          const makeFilePublicPromise = copiedFile.makePublic()
+          makeFilePublicPromises.push(makeFilePublicPromise)
+
+          const metadata = copiedFile.metadata as {
+            oldOwnerEmail: string
+            newOwnerEmail: string
+            fileName: string
+          }
+
+          const textToReplace = `${metadata.oldOwnerEmail}/files/${metadata.fileName}`
+          const newText = `${metadata.newOwnerEmail}/files/${metadata.fileName}`
+
+          quotationJson = quotationJson.replace(textToReplace, newText)
+        }
+      })
+
+      await Promise.all(makeFilePublicPromises)
+    }
+
+    await quotationFile.save(quotationJson)
 
     res.status(httpStatus.success_200).json({
       message: 'copied and saved',

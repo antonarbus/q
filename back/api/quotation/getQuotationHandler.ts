@@ -125,7 +125,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
 
   if (permissionLevel === 'Shared with you' || permissionLevel === 'Public') {
     // remove sensitive data from quotation
-    quotation.email = 'john@mail.com'
+    // quotation.email = 'john@mail.com'
     delete quotation.name
     delete quotation.category
     delete quotation.desc
@@ -137,7 +137,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
     delete quotation.to
 
     quotation.blocks.forEach((block) => {
-      block.email = 'john@mail.com'
+      // block.email = 'john@mail.com'
       delete block.name
       delete block.category
       delete block.desc
@@ -147,7 +147,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
 
       if (block.type === 'boq') {
         block.boq.rows.forEach((row) => {
-          row.email = 'john@mail.com'
+          // row.email = 'john@mail.com'
           delete row.name
           delete row.category
           delete row.desc
