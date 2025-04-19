@@ -31,6 +31,7 @@
     "lodash.isequal": "^4.5.0",
     "lodash.throttle": "^4.1.1",
     "lodash.uniq": "^4.5.0",
+    "lodash.uniqby": "^4.7.0",
     "mailcheck": "^1.1.1",
     "modern-screenshot": "^4.6.0",
     "motion": "^12.6.3",

@@ -1,8 +1,14 @@
 import { Tooltip, Box, Chip } from '@mui/material'
 import type { ICellRendererParams } from 'ag-grid-community'
-import type { QuotationPick } from '@back/api/quotation/getQuotationsHandler'
+import type {
+  QuotationPick,
+  ResBody as GetQuotationsRes,
+} from '@back/api/quotation/getQuotationsHandler'
 import { getState } from '@shared/lib/redux'
 import { FiFileText } from 'react-icons/fi'
+import { instance } from '@shared/instance'
+import { queryKey } from '@shared/consts/queryKey'
+import uniqBy from 'lodash.uniqby'
 
 export const FilesRenderer = (
   params: ICellRendererParams<QuotationPick, QuotationPick['files']>,
@@ -13,11 +19,11 @@ export const FilesRenderer = (
     return null
   }
 
-  const links = files.map((item) => {
+  const links = uniqBy(files, 'fileName').map((item) => {
     return (
       <Tooltip
         key={item.fileName}
-        title={`${item.fileSizeInMb} Mb`}
+        title={`Download ${item.fileSizeInMb} Mb`}
         placement='top'
       >
         <Chip
@@ -29,7 +35,42 @@ export const FilesRenderer = (
           sx={{ cursor: 'pointer' }}
           onDelete={(e: Event) => {
             e.preventDefault()
-            alert('Delete file?')
+
+            const shouldDeleteFile = confirm('Delete file?')
+
+            if (!shouldDeleteFile) {
+              return
+            }
+
+            const quotationsRes =
+              instance.queryClient.getQueryData<GetQuotationsRes>([
+                queryKey.getQuotations,
+              ])
+
+            const quotations = quotationsRes?.quotations
+
+            if (quotations) {
+              const quotationsWithSameFile = quotations.filter((quotation) => {
+                const filesInQuotation = quotation.files ?? []
+
+                const hasSameFile = filesInQuotation.some(
+                  (file) => file.fileName === item.fileName,
+                )
+
+                return hasSameFile
+              })
+
+              if (quotationsWithSameFile.length > 1) {
+                const confirmDeletionAtMultipleFiles = confirm(
+                  `Same file is used in ${quotationsWithSameFile.length} quotations. Are you sure?`,
+                )
+
+                if (!confirmDeletionAtMultipleFiles) {
+                  return
+                }
+              }
+            }
+
             alert('Under development')
           }}
         />

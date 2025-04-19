@@ -29,7 +29,7 @@ export const AgGridStyles = (): React.JSX.Element => {
           }
 
           .ag-cell-value {
-            padding: 15px 0px;
+            padding: 0px 0px;
           }
 
           .center .ag-header-cell-comp-wrapper {

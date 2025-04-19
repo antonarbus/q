@@ -4,7 +4,7 @@ import { queryKey } from '@shared/consts/queryKey'
 import { instance } from '@shared/instance'
 
 export const deleteBookmarksCache = (): void => {
-  instance.reactQuery.setQueriesData<ResBody>(
+  instance.queryClient.setQueriesData<ResBody>(
     { queryKey: [queryKey.getBookmarks] },
     (cacheData) => {
       const updatedCacheData = produce(cacheData, (draft) => {

@@ -21,7 +21,7 @@ import { enGB } from 'date-fns/locale'
 export const App = (): React.JSX.Element => {
   return (
     <Provider store={store}>
-      <QueryClientProvider client={instance.reactQuery}>
+      <QueryClientProvider client={instance.queryClient}>
         <ThemeProvider theme={themeClient}>
           <GlobalStyles />
           <LocalizationProvider

@@ -60,6 +60,7 @@
     "@types/lodash.isequal": "^4.5.8",
     "@types/lodash.throttle": "^4.1.9",
     "@types/lodash.uniq": "^4.5.9",
+    "@types/lodash.uniqby": "^4.7.9",
     "@types/mailcheck": "^1.1.37",
     "@types/mongoose": "^5.11.97",
     "@types/morgan": "^1.9.9",

@@ -8,7 +8,7 @@ type Props = {
 }
 
 export const deleteFromBookmarksCache = ({ id }: Props): void => {
-  instance.reactQuery.setQueriesData<ResBody>(
+  instance.queryClient.setQueriesData<ResBody>(
     { queryKey: [queryKey.getBookmarks] },
     (cacheData) => {
       const updatedCacheData = produce(cacheData, (draft) => {

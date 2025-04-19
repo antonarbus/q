@@ -2,6 +2,7 @@ import { Chip, Tooltip } from '@mui/material'
 import type { ICellRendererParams } from 'ag-grid-community'
 import type { QuotationPick } from '@back/api/quotation/getQuotationsHandler'
 import { Link } from 'react-router-dom'
+import { route } from '@shared/consts/route'
 
 export const SharedWithRenderer = (
   params: ICellRendererParams<QuotationPick, QuotationPick['sharedWith']>,
@@ -13,11 +14,12 @@ export const SharedWithRenderer = (
 
   if (isSharedWithNobody) {
     return (
-      <Link to={`share/${quotationId}`}>
+      <Link to={`${route.share}/${quotationId}`}>
         <Chip
           label='nobody'
           variant='outlined'
           color='warning'
+          size='small'
           sx={{
             width: 'min-content',
             margin: '2px',
@@ -35,6 +37,7 @@ export const SharedWithRenderer = (
           label='everybody'
           variant='outlined'
           color='info'
+          size='small'
           sx={{
             width: 'min-content',
             margin: '2px',
@@ -58,6 +61,7 @@ export const SharedWithRenderer = (
               <Chip
                 label={email}
                 variant='outlined'
+                size='small'
                 sx={{
                   width: 'min-content',
                   margin: '2px',

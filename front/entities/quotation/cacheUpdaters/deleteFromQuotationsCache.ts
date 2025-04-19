@@ -8,7 +8,7 @@ type Props = {
 }
 
 export const deleteFromQuotationsCache = ({ id }: Props): void => {
-  instance.reactQuery.setQueriesData<ResBody>(
+  instance.queryClient.setQueriesData<ResBody>(
     { queryKey: [queryKey.getQuotations] },
     (cacheData) => {
       const updatedCacheData = produce(cacheData, (draft) => {
