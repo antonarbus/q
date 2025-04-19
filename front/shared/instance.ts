@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/member-ordering */
-import type { ReactQuery } from '@app/reactQuery'
+import type { QueryClientType } from '@app/queryClient'
 import type { NavItem } from './nav'
 
 class Instance {
-  #queryClientInstance: ReactQuery | null = null
+  #queryClientInstance: QueryClientType | null = null
   #navStructureInstance: NavItem[] | null = null
 
-  public set queryClient(queryClientInstance: ReactQuery) {
+  public set queryClient(queryClientInstance: QueryClientType) {
     if (this.#queryClientInstance !== null) {
       throw new Error('Query client instance has already been initialized')
     }
@@ -14,7 +14,7 @@ class Instance {
     this.#queryClientInstance = queryClientInstance
   }
 
-  public get queryClient(): ReactQuery {
+  public get queryClient(): QueryClientType {
     if (this.#queryClientInstance === null) {
       throw new Error('Query client instance is not initialized')
     }

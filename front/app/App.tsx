@@ -1,5 +1,5 @@
 import './redux'
-import './reactQuery'
+import './queryClient'
 import './router'
 import './axiosWithAuth'
 import '@shared/utils/cursorPosSignal'
@@ -10,7 +10,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Provider } from 'react-redux'
 import { RouterProvider } from 'react-router-dom'
 import { GlobalStyles } from './GlobalStyles'
-import { ReactQueryDevtoolsProductionHidden } from './ReactQueryDevtoolsProductionHidden'
+import { QueryDevtoolsProductionHidden } from './QueryDevtoolsProductionHidden'
 import { instance } from '@shared/instance'
 import { store } from '@shared/lib/redux'
 import { router } from '@shared/lib/router'
@@ -31,7 +31,7 @@ export const App = (): React.JSX.Element => {
             <RouterProvider router={router} />
           </LocalizationProvider>
           <ReactQueryDevtools />
-          <ReactQueryDevtoolsProductionHidden />
+          <QueryDevtoolsProductionHidden />
         </ThemeProvider>
       </QueryClientProvider>
     </Provider>
