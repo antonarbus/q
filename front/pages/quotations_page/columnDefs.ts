@@ -101,6 +101,9 @@ export const columnDefs: ColDef<QuotationPick>[] = [
     field: 'files',
     headerName: 'files',
     minWidth: 200,
+    valueFormatter: (): string => {
+      return 'cell renderer is used, no need to format the value'
+    },
     cellRenderer: FilesCellRenderer,
   },
   {
