@@ -8,7 +8,7 @@ type Props = {
 
 export const DeleteFileIcon = ({ isPending }: Props): React.JSX.Element => {
   if (isPending) {
-    return <RotatingLoaderIcon style={{ marginRight: '4px' }} />
+    return <RotatingLoaderIcon style={{ marginRight: '5px' }} />
   }
 
   return (
@@ -16,7 +16,15 @@ export const DeleteFileIcon = ({ isPending }: Props): React.JSX.Element => {
       title={`Delete`}
       placement='top'
     >
-      <MdDeleteOutline />
+      <MdDeleteOutline
+        css={{
+          marginRight: '5px',
+          color: 'grey',
+          '&:hover': {
+            color: 'black',
+          },
+        }}
+      />
     </Tooltip>
   )
 }

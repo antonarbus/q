@@ -12,7 +12,16 @@ export const DownloadFileIcon = ({ fileInfo }: Props): React.JSX.Element => {
       title={`Download ${fileInfo.fileSizeInMb} Mb`}
       placement='top'
     >
-      <HiDownload style={{ height: '16px' }} />
+      <HiDownload
+        css={{
+          height: '16px',
+          marginLeft: '5px',
+          color: 'grey',
+          '&:hover': {
+            color: 'black',
+          },
+        }}
+      />
     </Tooltip>
   )
 }
