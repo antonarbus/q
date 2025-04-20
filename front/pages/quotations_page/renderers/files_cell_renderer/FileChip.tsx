@@ -25,7 +25,9 @@ export const FileChip = ({ fileInfo }: Props): React.ReactNode => {
       component='a'
       href={getFileUrl({ fileName: fileInfo.fileName })}
       label={fileInfo.fileName}
-      onDelete={onDeleteClick}
+      onDelete={(e: Event) => {
+        onDeleteClick(e)
+      }}
       size='small'
       sx={{
         cursor: 'pointer',

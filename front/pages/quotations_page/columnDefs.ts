@@ -101,17 +101,17 @@ export const columnDefs: ColDef<QuotationPick>[] = [
     field: 'files',
     headerName: 'files',
     minWidth: 200,
+    cellRenderer: FilesCellRenderer,
     valueFormatter: (): string => {
       return 'cell renderer is used, no need to format the value'
     },
-    cellRenderer: FilesCellRenderer,
   },
   {
     field: 'sharedWith',
     headerName: 'shared with',
+    cellRenderer: SharedWithCellRenderer,
     valueFormatter: (): string => {
       return 'cell renderer is used, no need to format the value'
     },
-    cellRenderer: SharedWithCellRenderer,
   },
 ]
