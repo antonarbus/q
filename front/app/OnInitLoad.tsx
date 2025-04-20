@@ -2,7 +2,7 @@ import { useLogoutIfAccessTokenExpired } from '@features/auth/log_out'
 import { useCountUniqueDailyVisitor } from '@features/init_load/useCountUniqueDailyVisitor'
 import { useHideInitHtmlElements } from '@features/init_load/useHideInitHtmlElements'
 import { useRemoveThirdPartyCookies } from '@features/init_load/useRemoveThirdPartyCookies'
-import { useShowDragAndDropArea } from '@features/upload'
+import { useShowDragAndDropArea } from '@features/file/upload_file'
 
 export const OnInitLoad = (): React.ReactNode => {
   useLogoutIfAccessTokenExpired()

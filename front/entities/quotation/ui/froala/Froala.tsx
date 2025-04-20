@@ -11,7 +11,7 @@ import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
 import {
   showDropFilesTextOnMouseEnter,
   showDropFilesTextOnMouseLeave,
-} from '@features/upload/showDropFilesTextOnHover'
+} from '@features/file/upload_file/showDropFilesTextOnHover'
 import type { FroalaProps } from './types'
 import { DropFilesOrImagesText } from './DropFilesOrImagesText'
 import { cls } from '@shared/consts/cls'

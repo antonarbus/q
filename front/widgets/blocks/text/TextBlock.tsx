@@ -10,7 +10,7 @@ import {
 } from '@features/blocks/resize'
 import { BookmarkBlockIcon } from '@features/open_close/open_bookmark_modal'
 import { OpenInfoBlockModalIcon } from '@features/open_close/open_info_modal'
-import { beforeUpload } from '@features/upload'
+import { beforeUpload } from '@features/file/upload_file'
 import {
   Froala,
   BlockComp,

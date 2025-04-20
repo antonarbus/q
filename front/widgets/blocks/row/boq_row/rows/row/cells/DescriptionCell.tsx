@@ -1,4 +1,4 @@
-import { beforeUpload } from '@features/upload'
+import { beforeUpload } from '@features/file/upload_file'
 import {
   useRow,
   Froala,

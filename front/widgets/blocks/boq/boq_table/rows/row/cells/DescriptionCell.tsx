@@ -1,6 +1,6 @@
 import { tabFromDescriptionCell } from '@features/blocks/cell/tab_away_from_cell'
 import { updateDescriptionCell } from '@features/blocks/cell/update_cell'
-import { beforeUpload } from '@features/upload'
+import { beforeUpload } from '@features/file/upload_file'
 import {
   getBoqCellHtmlFromStore,
   useRow,
