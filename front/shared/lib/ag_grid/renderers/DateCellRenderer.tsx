@@ -18,13 +18,21 @@ export const DateCellRenderer = (
 
   return (
     <>
-      <Box sx={{ textAlign: 'center' }}>{date}</Box>
+      <Box
+        sx={{
+          textAlign: 'center',
+          fontSize: '12px',
+          lineHeight: '12px',
+        }}
+      >
+        {date}
+      </Box>
       <Box
         sx={{
           color: 'grey',
-          fontSize: '12px',
-          lineHeight: '12px',
           textAlign: 'center',
+          fontSize: '10px',
+          lineHeight: '10px',
         }}
       >
         {time}

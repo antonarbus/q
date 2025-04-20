@@ -1,11 +1,11 @@
 import type { ColDef } from 'ag-grid-community'
 import { ActionButtonsCellRenderer } from './renderers/ActionButtonsCellRenderer'
-import { SharedWithRenderer } from './renderers/SharedWithRenderer'
+import { SharedWithCellRenderer } from './renderers/SharedWithCellRenderer'
 import { DateCellRenderer } from '@shared/lib/ag_grid/renderers/DateCellRenderer'
 import { dateFilterComparator } from '@shared/lib/ag_grid/comparators/dateFilterComparator'
 import { dateValueGetter } from '@shared/lib/ag_grid/value_getter/dateValueGetter'
 import type { QuotationPick } from '@back/api/quotation/getQuotationsHandler'
-import { FilesRenderer } from './renderers/FilesRenderer'
+import { FilesCellRenderer } from './renderers/FilesCellRenderer'
 
 export const defaultColDef: ColDef<QuotationPick> = {
   headerClass: ['center'],
@@ -101,7 +101,7 @@ export const columnDefs: ColDef<QuotationPick>[] = [
     field: 'files',
     headerName: 'files',
     minWidth: 200,
-    cellRenderer: FilesRenderer,
+    cellRenderer: FilesCellRenderer,
   },
   {
     field: 'sharedWith',
@@ -109,6 +109,6 @@ export const columnDefs: ColDef<QuotationPick>[] = [
     valueFormatter: (): string => {
       return 'cell renderer is used, no need to format the value'
     },
-    cellRenderer: SharedWithRenderer,
+    cellRenderer: SharedWithCellRenderer,
   },
 ]

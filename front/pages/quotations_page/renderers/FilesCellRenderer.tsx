@@ -28,7 +28,7 @@ const DownloadIcon = ({
   )
 }
 
-export const FilesRenderer = (
+export const FilesCellRenderer = (
   params: ICellRendererParams<QuotationPick, QuotationPick['files']>,
 ): React.ReactNode => {
   const files = params.value
@@ -44,6 +44,7 @@ export const FilesRenderer = (
       <Chip
         key={item.fileName}
         icon={icon}
+        variant='outlined'
         onMouseEnter={() => {
           setIcon(
             <Tooltip
@@ -62,7 +63,21 @@ export const FilesRenderer = (
             title={`Delete`}
             placement='top'
           >
-            <MdDeleteOutline />
+            <MdDeleteOutline
+              onMouseEnter={() => {
+                setIcon(<FiFileText style={{ height: '12px' }} />)
+              }}
+              onMouseLeave={() => {
+                setIcon(
+                  <Tooltip
+                    title={`Download ${item.fileSizeInMb} Mb`}
+                    placement='top'
+                  >
+                    <HiDownload style={{ height: '16px' }} />
+                  </Tooltip>,
+                )
+              }}
+            />
           </Tooltip>
         }
         component='a'

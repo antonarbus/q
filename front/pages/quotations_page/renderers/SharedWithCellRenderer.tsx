@@ -4,7 +4,7 @@ import type { QuotationPick } from '@back/api/quotation/getQuotationsHandler'
 import { Link } from 'react-router-dom'
 import { route } from '@shared/consts/route'
 
-export const SharedWithRenderer = (
+export const SharedWithCellRenderer = (
   params: ICellRendererParams<QuotationPick, QuotationPick['sharedWith']>,
 ): React.ReactNode => {
   const sharedWith = params.value ?? []
