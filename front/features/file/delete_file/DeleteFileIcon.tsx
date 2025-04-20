@@ -6,11 +6,15 @@ import { useFileDelete } from './useFileDelete'
 import type { FileInfo } from '@entities/quotation/types'
 
 type Props = {
-  fileInfo: FileInfo
+  fileName: FileInfo['fileName']
+  fileSize: FileInfo['fileSize']
 }
 
-export const DeleteFileIcon = ({ fileInfo }: Props): React.JSX.Element => {
-  const { isPending, onDeleteClick } = useFileDelete({ fileInfo })
+export const DeleteFileIcon = ({
+  fileName,
+  fileSize,
+}: Props): React.JSX.Element => {
+  const { isPending, onDeleteClick } = useFileDelete({ fileName, fileSize })
 
   if (isPending) {
     return <RotatingLoaderIcon style={{ marginRight: '5px' }} />
@@ -28,6 +32,7 @@ export const DeleteFileIcon = ({ fileInfo }: Props): React.JSX.Element => {
           height: '14px',
           marginRight: '5px',
           color: 'grey',
+          cursor: 'pointer',
           '&:hover': {
             color: theme.colors.red,
           },

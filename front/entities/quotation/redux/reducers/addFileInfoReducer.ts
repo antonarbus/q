@@ -5,7 +5,7 @@ export const addFileInfoReducer = (
   state: Quotation,
   action: PayloadAction<{
     fileName: string
-    fileSizeInMb: number
+    fileSize: number
     fileUploadedAt: Date
   }>,
 ): void => {

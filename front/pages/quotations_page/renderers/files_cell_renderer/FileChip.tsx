@@ -11,9 +11,14 @@ export const FileChip = ({ fileInfo }: Props): React.ReactNode => {
   return (
     <Chip
       key={fileInfo.fileName}
-      icon={<DownloadFileIcon fileInfo={fileInfo} />}
+      icon={<DownloadFileIcon fileSize={fileInfo.fileSize} />}
       variant='outlined'
-      deleteIcon={<DeleteFileIcon fileInfo={fileInfo} />}
+      deleteIcon={
+        <DeleteFileIcon
+          fileName={fileInfo.fileName}
+          fileSize={fileInfo.fileSize}
+        />
+      }
       component='a'
       href={getFileUrl({ fileName: fileInfo.fileName })}
       label={fileInfo.fileName}

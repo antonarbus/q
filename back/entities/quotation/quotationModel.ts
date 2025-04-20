@@ -35,7 +35,7 @@ const quotationSchema = new Schema<Quotation>({
   files: [
     {
       fileName: String,
-      fileSizeInMb: Number,
+      fileSize: Number,
       fileUploadedAt: Date,
       _id: false, // Disable automatic _id generation for subdocuments
     },

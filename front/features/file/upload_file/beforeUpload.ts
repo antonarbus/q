@@ -190,7 +190,7 @@ export const beforeUpload: BeforeUpload = async (props) => {
 
   const fileInfo = {
     fileName: file.name,
-    fileSizeInMb,
+    fileSize: file.size,
     fileUploadedAt: new Date(),
   }
 

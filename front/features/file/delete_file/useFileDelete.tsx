@@ -1,6 +1,7 @@
 import { useDeleteFileMutation } from '@entities/quotation'
 import { instance } from '@shared/instance'
 import type { ResBody as GetQuotationsRes } from '@back/api/quotation/getQuotationsHandler'
+import type { ResBody as GetFilesStatsRes } from '@back/api/file/getFilesStatsHandler'
 import { queryKey } from '@shared/consts/queryKey'
 import { useCallback } from 'react'
 import type { FileInfo } from '@entities/quotation/types'
@@ -9,7 +10,8 @@ import { produce } from 'immer'
 import { toast } from 'sonner'
 
 type Props = {
-  fileInfo: FileInfo
+  fileName: FileInfo['fileName']
+  fileSize: FileInfo['fileSize']
 }
 
 type Res = {
@@ -18,17 +20,16 @@ type Res = {
   isPending: boolean
 }
 
-export const useFileDelete = ({ fileInfo }: Props): Res => {
+export const useFileDelete = ({ fileName, fileSize }: Props): Res => {
   const {
     mutate: deleteFile,
-    data,
     isPending,
     isSuccess,
     isError,
   } = useDeleteFileMutation()
 
   useUpdateEffect(() => {
-    if (isSuccess && data.quotationsModifiedCount > 1) {
+    if (isSuccess) {
       instance.queryClient.setQueriesData<GetQuotationsRes>(
         { queryKey: [queryKey.getQuotations] },
         (cacheData) => {
@@ -40,10 +41,30 @@ export const useFileDelete = ({ fileInfo }: Props): Res => {
             draft.quotations.forEach((quotation) => {
               if (quotation.files) {
                 quotation.files = quotation.files.filter(
-                  (file) => file.fileName !== fileInfo.fileName,
+                  (file) => file.fileName !== fileName,
                 )
               }
             })
+          })
+
+          return updatedCacheData
+        },
+      )
+
+      instance.queryClient.setQueriesData<GetFilesStatsRes>(
+        { queryKey: [queryKey.getFilesStats] },
+        (cacheData) => {
+          const updatedCacheData = produce(cacheData, (draft) => {
+            if (draft?.filesInfo !== undefined) {
+              draft.filesInfo = draft.filesInfo.filter(
+                (item) => item.fileName !== fileName,
+              )
+            }
+
+            if (draft?.fileStats !== undefined) {
+              draft.fileStats.fileCount -= 1
+              draft.fileStats.totalSize -= fileSize
+            }
           })
 
           return updatedCacheData
@@ -79,7 +100,7 @@ export const useFileDelete = ({ fileInfo }: Props): Res => {
         const filesInQuotation = quotation.files ?? []
 
         const hasSameFile = filesInQuotation.some(
-          (file) => file.fileName === fileInfo.fileName,
+          (file) => file.fileName === fileName,
         )
 
         return hasSameFile
@@ -96,7 +117,7 @@ export const useFileDelete = ({ fileInfo }: Props): Res => {
       }
     }
 
-    deleteFile({ fileName: fileInfo.fileName })
+    deleteFile({ fileName })
   }, [])
 
   return {

@@ -103,7 +103,7 @@ export type Item = Boq | Paste | Text | Price | Row
 
 export type FileInfo = {
   fileName: string
-  fileSizeInMb: number
+  fileSize: number
   fileUploadedAt: Date
 }
 

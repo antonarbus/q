@@ -10,6 +10,11 @@ export type ResBody = {
     fileCount: number
     totalSize: number
   }
+  filesInfo: {
+    fileName: string
+    fileSize: number
+    fileUpdatedAt: string | undefined
+  }[]
 }
 
 type RouterHandler = (
@@ -20,10 +25,8 @@ type RouterHandler = (
 
 export const getFilesStatsHandler: RouterHandler = async (req, res, next) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
-
-  const [files] = await bucket.getFiles({
-    prefix: getFolderPath({ email, fileType: 'file' }),
-  })
+  const folderPath = getFolderPath({ email, fileType: 'file' })
+  const [files] = await bucket.getFiles({ prefix: folderPath })
 
   const fileStats = files.reduce(
     (acc, file) => {
@@ -35,5 +38,13 @@ export const getFilesStatsHandler: RouterHandler = async (req, res, next) => {
     { fileCount: 0, totalSize: 0 },
   )
 
-  res.status(httpStatus.success_200).json({ message: 'file stats', fileStats })
+  const filesInfo = files.map((file) => ({
+    fileName: file.name.replace(folderPath, ''),
+    fileSize: Number(file.metadata.size ?? 0),
+    fileUpdatedAt: file.metadata.updated,
+  }))
+
+  res
+    .status(httpStatus.success_200)
+    .json({ message: 'file stats', fileStats, filesInfo })
 }
