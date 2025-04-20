@@ -26,7 +26,11 @@ export const FileChip = ({ fileInfo }: Props): React.ReactNode => {
       href={getFileUrl({ fileName: fileInfo.fileName })}
       label={fileInfo.fileName}
       size='small'
-      sx={{ cursor: 'pointer' }}
+      sx={{
+        cursor: 'pointer',
+        fontSize: '10px',
+        '.MuiChip-label': { paddingLeft: '4px' },
+      }}
       onDelete={onDeleteClick}
     />
   )

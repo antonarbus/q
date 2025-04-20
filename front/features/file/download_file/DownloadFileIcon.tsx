@@ -14,7 +14,8 @@ export const DownloadFileIcon = ({ fileInfo }: Props): React.JSX.Element => {
     >
       <HiDownload
         css={{
-          height: '16px',
+          width: '14px',
+          height: '14px',
           marginLeft: '5px',
           color: 'grey',
           '&:hover': {
