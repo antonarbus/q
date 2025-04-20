@@ -16,6 +16,7 @@ export const queryKey = {
   getQuotationCategories: 'getQuotationCategories',
   saveQuotation: 'saveQuotation',
   deleteQuotation: 'deleteQuotation',
+  deleteFile: 'deleteFile',
   // bookmark
   getBookmark: 'getBookmark',
   getBookmarks: 'getBookmarks',

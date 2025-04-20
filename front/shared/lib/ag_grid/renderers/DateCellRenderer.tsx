@@ -17,7 +17,13 @@ export const DateCellRenderer = (
   const time = format(params.value, 'HH:mm')
 
   return (
-    <>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '5px',
+      }}
+    >
       <Box
         sx={{
           textAlign: 'center',
@@ -37,6 +43,6 @@ export const DateCellRenderer = (
       >
         {time}
       </Box>
-    </>
+    </Box>
   )
 }

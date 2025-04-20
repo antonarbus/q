@@ -12,6 +12,7 @@ export {
   saveQuotationMutationFn,
 } from './api/useSaveQuotationMutation'
 export { useGetQuotationCategoriesQuery } from './api/useGetQuotationCategoriesQuery'
+export { useDeleteFileMutation } from './api/useDeleteFileMutation'
 
 // cacheUpdaters
 export { deleteFromQuotationsCache } from './cacheUpdaters/deleteFromQuotationsCache'

@@ -30,6 +30,7 @@ import { deleteUserHandler } from '@back/api/user/deleteUserHandler'
 import { getUsersHandler } from '@back/api/user/getUsersHandler'
 import { countUniqueDailyVisitorsHandler } from '@back/api/visitors/countUniqueDailyVisitorsHandler'
 import { getUniqueDailyVisitorsHandler } from '@back/api/visitors/getUniqueDailyVisitorsHandler'
+import { deleteFileHandler } from './file/deleteFileHandler'
 
 type Api = {
   url: string
@@ -237,6 +238,13 @@ export const api = {
     method: 'get',
     handler: getFilesStatsHandler,
     description: 'Gets total files size and count for settings modal',
+  },
+  deleteFile: {
+    url: '/api/delete-file',
+    method: 'delete',
+    handler: deleteFileHandler,
+    description:
+      'Delete file from the bucket + from quotations db + from quotation json',
   },
   // visitors
   countUniqueDailyVisitors: {

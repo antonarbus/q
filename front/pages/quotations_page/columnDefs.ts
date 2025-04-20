@@ -5,7 +5,7 @@ import { DateCellRenderer } from '@shared/lib/ag_grid/renderers/DateCellRenderer
 import { dateFilterComparator } from '@shared/lib/ag_grid/comparators/dateFilterComparator'
 import { dateValueGetter } from '@shared/lib/ag_grid/value_getter/dateValueGetter'
 import type { QuotationPick } from '@back/api/quotation/getQuotationsHandler'
-import { FilesCellRenderer } from './renderers/FilesCellRenderer'
+import { FilesCellRenderer } from './renderers/files_cell_renderer/FilesCellRenderer'
 
 export const defaultColDef: ColDef<QuotationPick> = {
   headerClass: ['center'],
