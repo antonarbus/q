@@ -6,13 +6,14 @@ import { useCallback } from 'react'
 import type { FileInfo } from '@entities/quotation/types'
 import { useUpdateEffect } from 'react-use'
 import { produce } from 'immer'
+import { toast } from 'sonner'
 
 type Props = {
   fileInfo: FileInfo
 }
 
 type Res = {
-  onDeleteClick: (e: Event) => void
+  onDeleteClick: (e: React.MouseEvent) => void
   isSuccess: boolean
   isPending: boolean
 }
@@ -23,6 +24,7 @@ export const useFileDelete = ({ fileInfo }: Props): Res => {
     data,
     isPending,
     isSuccess,
+    isError,
   } = useDeleteFileMutation()
 
   useUpdateEffect(() => {
@@ -50,8 +52,15 @@ export const useFileDelete = ({ fileInfo }: Props): Res => {
     }
   }, [isSuccess])
 
-  const onDeleteClick = useCallback((e: Event): void => {
+  useUpdateEffect(() => {
+    if (isError) {
+      toast.error('Problem during deletion')
+    }
+  }, [isError])
+
+  const onDeleteClick = useCallback((e: React.MouseEvent): void => {
     e.preventDefault()
+    e.stopPropagation()
 
     const shouldDeleteFile = confirm('Delete file?')
 
