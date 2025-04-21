@@ -7,7 +7,7 @@ import { FileChip } from './FileChip'
 export const FilesCellRenderer = (
   params: ICellRendererParams<QuotationPick, QuotationPick['files']>,
 ): React.ReactNode => {
-  const files = uniqBy(params.value ?? [], 'fileName')
+  const files = uniqBy(params.data?.files ?? [], 'fileName')
 
   if (files.length === 0) {
     return null

@@ -1,4 +1,4 @@
-import type { ColDef } from 'ag-grid-community'
+import type { ColDef, ValueGetterParams } from 'ag-grid-community'
 import { ActionButtonsCellRenderer } from './renderers/ActionButtonsCellRenderer'
 import { SharedWithCellRenderer } from './renderers/SharedWithCellRenderer'
 import { DateCellRenderer } from '@shared/lib/ag_grid/renderers/DateCellRenderer'
@@ -6,6 +6,7 @@ import { dateFilterComparator } from '@shared/lib/ag_grid/comparators/dateFilter
 import { dateValueGetter } from '@shared/lib/ag_grid/value_getter/dateValueGetter'
 import type { QuotationPick } from '@back/api/quotation/getQuotationsHandler'
 import { FilesCellRenderer } from './renderers/files_cell_renderer/FilesCellRenderer'
+import uniqBy from 'lodash.uniqby'
 
 export const defaultColDef: ColDef<QuotationPick> = {
   headerClass: ['center'],
@@ -102,16 +103,44 @@ export const columnDefs: ColDef<QuotationPick>[] = [
     headerName: 'files',
     minWidth: 200,
     cellRenderer: FilesCellRenderer,
-    valueFormatter: (): string => {
-      return 'cell renderer is used, no need to format the value'
+    valueGetter: (
+      params: ValueGetterParams<QuotationPick, QuotationPick['files']>,
+    ): string => {
+      const files = uniqBy(params.data?.files ?? [], 'fileName')
+
+      if (files.length >= 1) {
+        const fileNames = files.map((file) => file.fileName).join(';')
+
+        return fileNames
+      }
+
+      return ''
     },
   },
   {
     field: 'sharedWith',
     headerName: 'shared with',
     cellRenderer: SharedWithCellRenderer,
-    valueFormatter: (): string => {
-      return 'cell renderer is used, no need to format the value'
+    valueGetter: (
+      params: ValueGetterParams<QuotationPick, QuotationPick['sharedWith']>,
+    ): string => {
+      const sharedWith = params.data?.sharedWith ?? []
+
+      if (sharedWith.length === 0) {
+        return 'nobody'
+      }
+
+      if (sharedWith.at(0) === '*') {
+        return 'everybody'
+      }
+
+      if (sharedWith.length > 1) {
+        const emails = sharedWith.join(';')
+
+        return emails
+      }
+
+      return ''
     },
   },
 ]

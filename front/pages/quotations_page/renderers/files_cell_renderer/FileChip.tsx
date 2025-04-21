@@ -21,6 +21,8 @@ export const FileChip = ({ fileInfo }: Props): React.ReactNode => {
       }
       component='a'
       href={getFileUrl({ fileName: fileInfo.fileName })}
+      target='_blank'
+      rel='noopener noreferrer'
       label={fileInfo.fileName}
       onDelete={() => undefined} // handle it manually at DeleteFileIcon
       size='small'

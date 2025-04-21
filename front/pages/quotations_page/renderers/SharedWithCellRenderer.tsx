@@ -7,7 +7,7 @@ import { route } from '@shared/consts/route'
 export const SharedWithCellRenderer = (
   params: ICellRendererParams<QuotationPick, QuotationPick['sharedWith']>,
 ): React.ReactNode => {
-  const sharedWith = params.value ?? []
+  const sharedWith = params.data?.sharedWith ?? []
   const isSharedWithEverybody = sharedWith.at(0) === '*'
   const isSharedWithNobody = sharedWith.length === 0
   const quotationId = params.data?.id
