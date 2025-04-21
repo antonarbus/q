@@ -136,6 +136,12 @@ For emails sending Sendgrid is used.
 - `Item` in the code is a thing which can be sorted or bookmarked: text, boq, price, row.
 - `Block` in the code is a direct defendant in quotation document: text, boq, price.
 
+# Files
+
+- Files are stored at https://console.cloud.google.com/storage/browser/quotation-app-bucket/
+- path: john.wick@gmail.com/files/12345_fileName.jpg (for saved quotations)
+- path: john.wick@gmail.com/files/unsaved_quotation_fileName.jpg (for unsaved quotations)
+
 # CI/CD (outdated)
 
 - create the project and get project ID
