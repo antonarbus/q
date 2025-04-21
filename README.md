@@ -139,8 +139,9 @@ For emails sending Sendgrid is used.
 # Files
 
 - Files are stored at https://console.cloud.google.com/storage/browser/quotation-app-bucket/
-- path: john.wick@gmail.com/files/12345_fileName.jpg (for saved quotations)
-- path: john.wick@gmail.com/files/unsaved_quotation_fileName.jpg (for unsaved quotations)
+- path: email/files/new_fileName.jpg (for unsaved quotations)
+- path: email/files/12345_fileName.jpg (for saved quotations)
+- when quotation is saved file names are modified
 
 # CI/CD (outdated)
 

@@ -63,7 +63,7 @@ export const beforeUpload: BeforeUpload = async (props) => {
     return
   }
 
-  const fileName = encodeURIComponent(file.name)
+  const fileName = `${getState().quotation.id}_${encodeURIComponent(file.name)}`
 
   const toastId = toast.loading(`Uploading 0%...`)
 
@@ -189,7 +189,7 @@ export const beforeUpload: BeforeUpload = async (props) => {
   await asyncDelay(50)
 
   const fileInfo = {
-    fileName: file.name,
+    fileName,
     fileSize: file.size,
     fileUploadedAt: new Date(),
   }

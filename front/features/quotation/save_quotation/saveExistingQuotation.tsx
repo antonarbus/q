@@ -11,6 +11,7 @@ import { createActor } from 'xstate'
 import type { AxiosError } from 'axios'
 import type { ResBody } from '@back/api/quotation/saveQuotationHandler'
 import { router } from '@shared/lib/router'
+import { route } from '@shared/consts/route'
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
   navItemId: navItemId.save,
@@ -26,9 +27,19 @@ export const saveExistingQuotation = async (): Promise<void> => {
     return
   }
 
+  // why?
   const quotation: Quotation = {
     ...getState().quotation,
     id: getState().quotation.id,
+  }
+
+  if (
+    getState().quotation.permissionLevel === 'Public' ||
+    getState().quotation.permissionLevel === 'Shared with you'
+  ) {
+    void router.navigate(`./${route.save}`)
+
+    return
   }
 
   loadingIconActor.send({ type: 'show loading icon' })

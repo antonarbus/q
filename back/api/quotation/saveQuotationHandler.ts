@@ -11,7 +11,9 @@ import type {
   CopyResponse,
   File,
   MakeFilePublicResponse,
+  MoveResponse,
 } from '@google-cloud/storage'
+import type { FileInfo } from '@entities/quotation/types'
 
 export type ReqBody = {
   quotation: Quotation
@@ -46,11 +48,15 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
     return
   }
 
-  const foundQuotation = await QuotationModel.findOne({ id: quotation.id })
-
   type QuotationOwnership = 'your new' | 'your existing' | 'foreign existing'
 
-  const getQuotationOwnership = (): QuotationOwnership => {
+  const getQuotationOwnership = async (): Promise<QuotationOwnership> => {
+    if (quotation.id === 'new') {
+      return 'your new'
+    }
+
+    const foundQuotation = await QuotationModel.findOne({ id: quotation.id })
+
     if (foundQuotation === null) {
       return 'your new'
     }
@@ -63,10 +69,20 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
     return 'foreign existing'
   }
 
-  const quotationOwnership = getQuotationOwnership()
+  const quotationOwnership = await getQuotationOwnership()
 
   if (quotationOwnership === 'your new') {
     const quotationId = nanoid(5)
+
+    const filesWithQuotationIdPrefixName = quotation.files?.map((file) => {
+      const fileInfo: FileInfo = {
+        fileName: file.fileName.replace(`${quotation.id}_`, `${quotationId}_`),
+        fileUploadedAt: file.fileUploadedAt,
+        fileSize: file.fileSize,
+      }
+
+      return fileInfo
+    })
 
     const createQuotationResponse = await QuotationModel.create({
       id: quotationId,
@@ -75,7 +91,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
       category: quotation.category,
       desc: quotation.desc,
       info: quotation.info,
-      files: quotation.files,
+      files: filesWithQuotationIdPrefixName,
       sharedWith: quotation.sharedWith,
       blocks: 'too big to keep in db, find it in the bucket under same id',
       updatedAt: Date.now(),
@@ -85,11 +101,77 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
     const quotationDataFromDb = createQuotationResponse.toObject()
 
-    const filePath = getFilePath({ email, fileType: 'quotation', quotationId })
-    const file = bucket.file(filePath)
+    const quotationFilePath = getFilePath({
+      email,
+      fileType: 'quotation',
+      quotationId,
+    })
+
+    const quotationFile = bucket.file(quotationFilePath)
     const fullQuotation = { ...quotationDataFromDb, blocks: quotation.blocks }
     const quotationJson = JSON.stringify(fullQuotation, null, 2)
-    await file.save(quotationJson)
+
+    const shouldMoveFiles = (quotationDataFromDb.files ?? []).length > 0
+
+    if (shouldMoveFiles) {
+      const moveFiles = async (): Promise<File[]> => {
+        const moveFilePromiseArray: Promise<MoveResponse>[] = []
+
+        for (const fileInfo of quotation.files ?? []) {
+          const originalFilePath = getFilePath({
+            email,
+            fileType: 'file',
+            fileName: fileInfo.fileName,
+          })
+
+          const originalFile = bucket.file(originalFilePath)
+
+          const newFilePath = getFilePath({
+            email,
+            fileType: 'file',
+            fileName: fileInfo.fileName.replace(
+              `${quotation.id}_`,
+              `${quotationId}_`,
+            ),
+          })
+
+          const newFile = bucket.file(newFilePath)
+
+          const moveFilePromise = originalFile.move(newFile)
+          moveFilePromiseArray.push(moveFilePromise)
+        }
+
+        const moveResponseArray = await Promise.allSettled(moveFilePromiseArray)
+
+        const movedFiles = moveResponseArray
+          .filter((moveResponse) => moveResponse.status === 'fulfilled')
+          .map((moveResponse) => moveResponse.value[0])
+
+        return movedFiles as File[]
+      }
+
+      const movedFiles = await moveFiles()
+
+      const makeFilesPublic = async (): Promise<void> => {
+        const makeFilePublicPromiseArray: Promise<MakeFilePublicResponse>[] = []
+
+        movedFiles.forEach((copiedFile) => {
+          const makeFilePublicPromise = copiedFile.makePublic()
+          makeFilePublicPromiseArray.push(makeFilePublicPromise)
+        })
+
+        await Promise.allSettled(makeFilePublicPromiseArray)
+      }
+
+      await makeFilesPublic()
+    }
+
+    const quotationJsonWithPrefixedFilesUrl = quotationJson.replaceAll(
+      `/files/${quotation.id}_`,
+      `/files/${quotationId}_`,
+    )
+
+    await quotationFile.save(quotationJsonWithPrefixedFilesUrl)
 
     res.status(httpStatus.success_200).json({
       message: 'saved',
@@ -146,6 +228,19 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
   if (quotationOwnership === 'foreign existing') {
     const newQuotationId = nanoid(5)
 
+    const filesWithQuotationIdPrefixName = quotation.files?.map((file) => {
+      const fileInfo: FileInfo = {
+        fileName: file.fileName.replace(
+          `${quotation.id}_`,
+          `${newQuotationId}_`,
+        ),
+        fileUploadedAt: file.fileUploadedAt,
+        fileSize: file.fileSize,
+      }
+
+      return fileInfo
+    })
+
     const createResponse = await QuotationModel.create({
       id: newQuotationId,
       email,
@@ -153,7 +248,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
       category: quotation.category,
       desc: quotation.desc,
       info: quotation.info,
-      files: quotation.files,
+      files: filesWithQuotationIdPrefixName,
       sharedWith: [],
       blocks: 'find in bucket under same id',
       updatedAt: Date.now(),
@@ -171,44 +266,42 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
     const quotationFile = bucket.file(quotationFilePath)
     const fullQuotation = { ...quotationDataFromDb, blocks: quotation.blocks }
-    let quotationJson = JSON.stringify(fullQuotation, null, 2)
+    const quotationJson = JSON.stringify(fullQuotation, null, 2)
 
-    const shouldCopyFilesToNewUserBucket =
+    const shouldCopyFilesToNewUserFolder =
       (quotationDataFromDb.files ?? []).length > 0
 
-    if (shouldCopyFilesToNewUserBucket) {
+    if (shouldCopyFilesToNewUserFolder) {
       const copyFiles = async (): Promise<File[]> => {
-        const copyFilePromises: Promise<CopyResponse>[] = []
+        const copyFilePromiseArray: Promise<CopyResponse>[] = []
 
-        for (const fileInfo of quotationDataFromDb.files ?? []) {
+        for (const fileInfo of quotation.files ?? []) {
           const originalFilePath = getFilePath({
             email: quotation.email,
             fileType: 'file',
             fileName: fileInfo.fileName,
           })
 
+          const originalFile = bucket.file(originalFilePath)
+
           const newFilePath = getFilePath({
             email,
             fileType: 'file',
-            fileName: fileInfo.fileName,
+            fileName: fileInfo.fileName.replace(
+              `${quotation.id}_`,
+              `${newQuotationId}_`,
+            ),
           })
 
-          const originalFile = bucket.file(originalFilePath)
           const newFile = bucket.file(newFilePath)
 
-          newFile.metadata = {
-            oldOwnerEmail: quotation.email,
-            newOwnerEmail: email,
-            fileName: fileInfo.fileName,
-          }
-
           const copyFilePromise = originalFile.copy(newFile)
-          copyFilePromises.push(copyFilePromise)
+          copyFilePromiseArray.push(copyFilePromise)
         }
 
-        const copyResponses = await Promise.allSettled(copyFilePromises)
+        const copyResponseArray = await Promise.allSettled(copyFilePromiseArray)
 
-        const copiedFiles = copyResponses
+        const copiedFiles = copyResponseArray
           .filter((copyResponse) => copyResponse.status === 'fulfilled')
           .map((copyResponse) => copyResponse.value[0])
 
@@ -218,37 +311,25 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
       const copiedFiles = await copyFiles()
 
       const makeFilesPublic = async (): Promise<void> => {
-        const makeFilePublicPromises: Promise<MakeFilePublicResponse>[] = []
+        const makeFilePublicPromiseArray: Promise<MakeFilePublicResponse>[] = []
 
-        copiedFiles.forEach((copiedFile) => {
-          const makeFilePublicPromise = copiedFile.makePublic()
-          makeFilePublicPromises.push(makeFilePublicPromise)
+        copiedFiles.forEach((file) => {
+          const makeFilePublicPromise = file.makePublic()
+          makeFilePublicPromiseArray.push(makeFilePublicPromise)
         })
 
-        await Promise.allSettled(makeFilePublicPromises)
+        await Promise.allSettled(makeFilePublicPromiseArray)
       }
 
       await makeFilesPublic()
-
-      const replaceLinksInQuotation = (): void => {
-        copiedFiles.forEach((copiedFile) => {
-          const metadata = copiedFile.metadata as {
-            oldOwnerEmail: string
-            newOwnerEmail: string
-            fileName: string
-          }
-
-          const textToReplace = `${metadata.oldOwnerEmail}/files/${metadata.fileName}`
-          const newText = `${metadata.newOwnerEmail}/files/${metadata.fileName}`
-
-          quotationJson = quotationJson.replace(textToReplace, newText)
-        })
-      }
-
-      replaceLinksInQuotation()
     }
 
-    await quotationFile.save(quotationJson)
+    const quotationJsonWithPrefixedFilesUrl = quotationJson.replaceAll(
+      `${quotation.email}/files/${quotation.id}_`,
+      `${email}/files/${newQuotationId}_`,
+    )
+
+    await quotationFile.save(quotationJsonWithPrefixedFilesUrl)
 
     res.status(httpStatus.success_200).json({
       message: 'copied and saved',

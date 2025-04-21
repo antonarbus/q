@@ -32,18 +32,8 @@ export const fileUploadSignedUrlHandler: RouterHandler = async (
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
   const { fileName } = req.query
 
-  if (!fileName || typeof fileName !== 'string') {
-    res
-      .status(httpStatus.badRequest_400)
-      .json({ message: 'invalid file name', publicUrl: null, signedUrl: null })
-
-    return
-  }
-
   const filePath = getFilePath({ email, fileType: 'file', fileName })
-
-  // Get reference to the file in the bucket
-  const file = bucket.file(filePath)
+  const file = bucket.file(filePath) // Get reference to the file in the bucket
 
   try {
     // Generate signed URL for uploading

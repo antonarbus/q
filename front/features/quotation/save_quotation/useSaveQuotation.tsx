@@ -11,7 +11,6 @@ import {
   type SaveQuotationFormValues,
 } from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
-import { nanoid } from '@shared/lib/nanoid'
 import { createLoadingMenuIconMachine, navSlice } from '@shared/nav'
 import { toast } from 'sonner'
 import { route } from '@shared/consts/route'
@@ -130,12 +129,8 @@ export const useSaveQuotation = ({
       return
     }
 
-    const existingId = getState().quotation.id
-    const id = existingId === 'new' ? nanoid(5) : existingId
-
     const quotation: Quotation = {
       ...getState().quotation,
-      id,
       name: saveQuotationFormValues.nameSignal.value,
       category: saveQuotationFormValues.categorySignal.value,
       desc: saveQuotationFormValues.descSignal.value,
