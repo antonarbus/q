@@ -70,7 +70,9 @@ export const SettingsModal = (): React.JSX.Element => {
                   cursor: 'pointer',
                 }}
                 onClick={() => {
-                  setCollapseOpen(!collapseOpen)
+                  if (data.filesInfo.length > 0) {
+                    setCollapseOpen(!collapseOpen)
+                  }
                 }}
               >
                 <GrStorage />
@@ -82,7 +84,11 @@ export const SettingsModal = (): React.JSX.Element => {
                     unitSeparator: ' ',
                   })}
                 </Box>
-                {collapseOpen ? <MdExpandLess /> : <MdExpandMore />}
+                {data.filesInfo.length > 0 && collapseOpen ? (
+                  <MdExpandLess />
+                ) : (
+                  <MdExpandMore />
+                )}
               </Box>
               <Collapse
                 in={collapseOpen}

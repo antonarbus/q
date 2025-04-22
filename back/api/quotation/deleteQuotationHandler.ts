@@ -3,7 +3,11 @@ import type { HydratedDocument } from 'mongoose'
 import type { Quotation } from '@entities/quotation'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { bucket, getFilePath } from '@back/shared/services/storage'
+import {
+  bucket,
+  getFilePath,
+  getFolderPath,
+} from '@back/shared/services/storage'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { QuotationModel } from '@back/entities/quotation'
 
@@ -13,9 +17,10 @@ export type ReqBody = {
 
 export type ResBody = {
   document?: HydratedDocument<Quotation>
+  filesDeletedQty: number
   message:
     | ErrorMessageCommon
-    | 'did not find'
+    | 'not found'
     | 'deleted'
     | 'internal error'
     | 'not deleted'
@@ -37,19 +42,51 @@ export const deleteQuotationHandler: RouterHandler = async (req, res, next) => {
   })
 
   if (deleteFromDbResult.deletedCount === 0) {
-    res.status(httpStatus.notFound_404).json({ message: 'did not find' })
+    res
+      .status(httpStatus.notFound_404)
+      .json({ message: 'not found', filesDeletedQty: 0 })
 
     return
   }
 
-  const filePath = getFilePath({ email, fileType: 'quotation', quotationId })
-  const [{ statusCode }] = await bucket.file(filePath).delete()
+  const quotationFilePath = getFilePath({
+    email,
+    fileType: 'quotation',
+    quotationId,
+  })
+
+  const [{ statusCode }] = await bucket.file(quotationFilePath).delete()
+
+  const filesFolderPath = getFolderPath({
+    email,
+    fileType: 'file',
+  })
+
+  const filesPrefix = `${filesFolderPath}${quotationId}`
+
+  const [files] = await bucket.getFiles({ prefix: filesPrefix })
+
+  const deleteFilePromiseMany = files.map(async (file) => file.delete())
+
+  const deleteFilesResponse = await Promise.allSettled(deleteFilePromiseMany)
+
+  const filesDeletedQty = deleteFilesResponse.filter((result) => {
+    if (result.status === 'fulfilled') {
+      return true
+    }
+
+    return false
+  }).length
 
   if (statusCode === 204) {
-    res.status(httpStatus.success_200).json({ message: 'deleted' })
+    res
+      .status(httpStatus.success_200)
+      .json({ message: 'deleted', filesDeletedQty })
 
     return
   }
 
-  res.status(httpStatus.notFound_404).json({ message: 'not deleted' })
+  res
+    .status(httpStatus.notFound_404)
+    .json({ message: 'not deleted', filesDeletedQty: 0 })
 }
