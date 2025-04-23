@@ -3,11 +3,10 @@ import { MdDeleteOutline } from 'react-icons/md'
 import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
 import { theme } from '@shared/theme'
 import { useFileDelete } from './useFileDelete'
-import type { FileInfo } from '@entities/quotation/types'
 
 type Props = {
-  fileName: FileInfo['fileName']
-  fileSize: FileInfo['fileSize']
+  fileName: string
+  fileSize: number
 }
 
 export const DeleteFileIcon = ({

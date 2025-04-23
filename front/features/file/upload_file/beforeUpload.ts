@@ -1,5 +1,5 @@
 import { api } from '@back/api'
-import { dispatch, getState } from '@shared/lib/redux'
+import { getState } from '@shared/lib/redux'
 import { removeLoadingBar } from '@shared/lib/froala/removeLoadingBar'
 import { getFileSizeInMb } from '@shared/utils/getFileSizeInMb'
 import { hideDraggableArea } from './showDraggableArea'
@@ -13,7 +13,6 @@ import { asyncDelay } from '@shared/utils/delay'
 import type { FroalaProps } from '@entities/quotation/ui/froala/types'
 import { axiosWithAuth } from '@shared/lib/axiosWithAuth'
 import axios, { type AxiosError } from 'axios'
-import { quotationSlice } from '@entities/quotation'
 
 type BeforeUpload = NonNullable<FroalaProps['beforeUpload']>
 
@@ -63,7 +62,7 @@ export const beforeUpload: BeforeUpload = async (props) => {
     return
   }
 
-  const fileName = `${getState().quotation.id}_${encodeURIComponent(file.name)}`
+  const fileName = encodeURIComponent(file.name)
 
   const toastId = toast.loading(`Uploading 0%...`)
 
@@ -187,14 +186,6 @@ export const beforeUpload: BeforeUpload = async (props) => {
 
   await waitForUploadPromise
   await asyncDelay(50)
-
-  const fileInfo = {
-    fileName,
-    fileSize: file.size,
-    fileUploadedAt: new Date(),
-  }
-
-  dispatch(quotationSlice.actions.addFileInfoReducer(fileInfo))
 
   toast.success(`Uploaded 100%`, { id: toastId })
 }

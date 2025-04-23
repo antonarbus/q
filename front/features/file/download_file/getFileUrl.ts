@@ -1,8 +1,7 @@
-import type { FileInfo } from '@entities/quotation/types'
 import { getState } from '@shared/lib/redux'
 
 type Props = {
-  fileName: FileInfo['fileName']
+  fileName: string
 }
 
 export const getFileUrl = ({ fileName }: Props): string => {

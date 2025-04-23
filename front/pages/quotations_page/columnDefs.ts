@@ -5,8 +5,6 @@ import { DateCellRenderer } from '@shared/lib/ag_grid/renderers/DateCellRenderer
 import { dateFilterComparator } from '@shared/lib/ag_grid/comparators/dateFilterComparator'
 import { dateValueGetter } from '@shared/lib/ag_grid/value_getter/dateValueGetter'
 import type { QuotationPick } from '@back/api/quotation/getQuotationsHandler'
-import { FilesCellRenderer } from './renderers/files_cell_renderer/FilesCellRenderer'
-import uniqBy from 'lodash.uniqby'
 
 export const defaultColDef: ColDef<QuotationPick> = {
   headerClass: ['center'],
@@ -96,25 +94,6 @@ export const columnDefs: ColDef<QuotationPick>[] = [
     cellRenderer: DateCellRenderer,
     filterParams: {
       comparator: dateFilterComparator,
-    },
-  },
-  {
-    field: 'files',
-    headerName: 'files',
-    minWidth: 200,
-    cellRenderer: FilesCellRenderer,
-    valueGetter: (
-      params: ValueGetterParams<QuotationPick, QuotationPick['files']>,
-    ): string => {
-      const files = uniqBy(params.data?.files ?? [], 'fileName')
-
-      if (files.length >= 1) {
-        const fileNames = files.map((file) => file.fileName).join(';')
-
-        return fileNames
-      }
-
-      return ''
     },
   },
   {

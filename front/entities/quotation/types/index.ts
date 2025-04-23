@@ -101,12 +101,6 @@ export type Paste = Common & {
 
 export type Item = Boq | Paste | Text | Price | Row
 
-export type FileInfo = {
-  fileName: string
-  fileSize: number
-  fileUploadedAt: Date
-}
-
 export type Quotation = Common & {
   type: 'quotation'
   createdAt?: Date
@@ -131,7 +125,6 @@ export type Quotation = Common & {
     | 'Super admin'
     | 'Super admin on behalf of a user'
     | 'Forbidden'
-  files?: FileInfo[]
   blocks: Item[]
 }
 

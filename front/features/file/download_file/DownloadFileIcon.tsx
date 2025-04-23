@@ -1,10 +1,9 @@
 import { Tooltip } from '@mui/material'
 import { HiDownload } from 'react-icons/hi'
-import type { FileInfo } from '@entities/quotation/types'
 import { format } from 'bytes'
 
 type Props = {
-  fileSize: FileInfo['fileSize']
+  fileSize: number
 }
 
 export const DownloadFileIcon = ({ fileSize }: Props): React.JSX.Element => {
