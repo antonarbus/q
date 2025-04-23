@@ -33,36 +33,28 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, next) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
   const { item: bookmarkItem } = req.body
 
-  if (!bookmarkItem.name) {
-    res
-      .status(httpStatus.forbidden_403)
-      .json({ message: 'name is not provided' })
-
-    return
-  }
-
-  if (!bookmarkItem.category) {
-    res
-      .status(httpStatus.forbidden_403)
-      .json({ message: 'category is not provided' })
-
-    return
-  }
-
   if (!bookmarkItem.id) {
     res.status(httpStatus.forbidden_403).json({ message: 'id is not provided' })
 
     return
   }
 
-  const existingItem = await BookmarkModel.findOne({
-    email,
-    id: bookmarkItem.id,
-  })
+  const getBookmarkStatus = async (): Promise<'new' | 'existing'> => {
+    const existingItem = await BookmarkModel.findOne({
+      email,
+      id: bookmarkItem.id,
+    })
 
-  const isNew = existingItem === null
+    if (existingItem === null) {
+      return 'new'
+    }
 
-  const itemDataFromDb = await BookmarkModel.findOneAndUpdate(
+    return 'existing'
+  }
+
+  const bookmarkStatus = await getBookmarkStatus()
+
+  const bookmarkFromDb = await BookmarkModel.findOneAndUpdate(
     {
       id: bookmarkItem.id,
       email,
@@ -75,7 +67,7 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, next) => {
       category: bookmarkItem.category,
       desc: bookmarkItem.desc,
       updatedAt: Date.now(),
-      ...(isNew && { createdAt: Date.now() }),
+      ...(bookmarkStatus === 'new' && { createdAt: Date.now() }),
     },
     {
       new: true,
@@ -85,24 +77,24 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, next) => {
     .select({ _id: 0, __v: 0 })
     .lean()
 
-  const filePath = getFilePath({
+  const bookmarkFilePath = getFilePath({
     email,
     fileType: 'bookmark',
     bookmarkId: bookmarkItem.id,
   })
 
-  const file = bucket.file(filePath)
+  const bookmarkFile = bucket.file(bookmarkFilePath)
 
   const contents = JSON.stringify(
-    { ...itemDataFromDb, ...bookmarkItem },
+    { ...bookmarkFromDb, ...bookmarkItem },
     null,
     2,
   )
 
-  await file.save(contents)
+  await bookmarkFile.save(contents)
 
   res.status(httpStatus.success_200).json({
-    message: isNew ? 'saved' : 'updated',
-    item: { ...itemDataFromDb, ...bookmarkItem },
+    message: bookmarkStatus === 'new' ? 'saved' : 'updated',
+    item: { ...bookmarkFromDb, ...bookmarkItem },
   })
 }

@@ -78,7 +78,7 @@ export const useSaveBookmark = ({
   const onSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault()
 
-    const email = getState().user.email
+    const { email } = getState().user
 
     if (!email) {
       toast.warning('Not logged in')
@@ -108,9 +108,9 @@ export const useSaveBookmark = ({
       }),
     )
 
-    const block = getState().quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
+    const bookmarkBlock = getState().quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
 
-    if (!block) {
+    if (!bookmarkBlock) {
       toast.warning('No item loaded')
 
       return
@@ -118,7 +118,7 @@ export const useSaveBookmark = ({
 
     const html = getPaperElementHtmlAtModal()
 
-    const itemWithUpdatedPreview = structuredClone(block)
+    const itemWithUpdatedPreview = structuredClone(bookmarkBlock)
 
     itemWithUpdatedPreview.preview = html
 

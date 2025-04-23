@@ -38,10 +38,6 @@ export const BookmarkModal = (): React.JSX.Element => {
   const { data } = useGetBookmarkCategoriesQuery()
   const categories = (data?.categories ?? []).filter((cat) => cat !== undefined)
 
-  const isButtonDisabled =
-    bookmarkFromValues.nameSignal.value === '' ||
-    bookmarkFromValues.categorySignal.value === ''
-
   return (
     <FormModal
       modalRef={modalRef}
@@ -49,7 +45,6 @@ export const BookmarkModal = (): React.JSX.Element => {
       headerIcon={<FiEdit3 />}
       headerText='Save bookmark'
       buttonText='SAVE'
-      isButtonDisabled={isButtonDisabled}
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
       isButtonError={isError}
@@ -59,14 +54,10 @@ export const BookmarkModal = (): React.JSX.Element => {
       onCloseClick={navigateUp}
       onSubmit={onSubmit}
     >
-      <NameField
-        nameSignal={bookmarkFromValues.nameSignal}
-        required
-      />
+      <NameField nameSignal={bookmarkFromValues.nameSignal} />
       <CategoryField
         categorySignal={bookmarkFromValues.categorySignal}
         options={categories}
-        required
       />
       <DescriptionField descSignal={bookmarkFromValues.descSignal} />
       <InfoField infoSignal={bookmarkFromValues.infoSignal} />
