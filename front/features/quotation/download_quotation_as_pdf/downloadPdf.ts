@@ -5,6 +5,7 @@ import type { WorkerResponseMessage } from './pdfWorker'
 import { navItemId } from '@shared/consts/navItemId'
 import { createLoadingMenuIconMachine } from '@shared/nav'
 import { toast } from 'sonner'
+import { downloadBlobAsFile } from '@shared/utils/downloadBlobAsFile'
 
 export type WorkerRequestMessage = {
   imageData: string
@@ -108,15 +109,11 @@ export const downloadPdf = async (): Promise<void> => {
 
   worker.onmessage = (event: MessageEvent<WorkerResponseMessage>): void => {
     const { pdfBlob } = event.data
-    const pdfUrl = URL.createObjectURL(pdfBlob)
-    const downloadLink = document.createElement('a')
-    downloadLink.href = pdfUrl
-    const quotationId = getState().quotation.id
-    downloadLink.download = `quotation - ${quotationId}.pdf`
-    document.body.appendChild(downloadLink)
-    downloadLink.click()
-    document.body.removeChild(downloadLink)
-    URL.revokeObjectURL(pdfUrl)
+
+    downloadBlobAsFile({
+      blob: pdfBlob,
+      fileName: `quotation - ${getState().quotation.id}.pdf`,
+    })
 
     setTimeout(() => {
       loadingIconActor.send({ type: 'show success icon' })

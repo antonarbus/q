@@ -5,6 +5,7 @@ import { createActor } from 'xstate'
 import { getState } from '@shared/lib/redux'
 import type { Quotation } from '@entities/quotation'
 import { toast } from 'sonner'
+import { downloadBlobAsFile } from '@shared/utils/downloadBlobAsFile'
 
 export type WorkerRequestMessage = {
   msg: 'send me excel'
@@ -33,15 +34,11 @@ export const downloadExcel = (): void => {
 
   worker.onmessage = (event: MessageEvent<WorkerResponseMessage>): void => {
     const { excelBlob } = event.data
-    const excelUrl = URL.createObjectURL(excelBlob)
-    const downloadLink = document.createElement('a')
-    downloadLink.href = excelUrl
-    const quotationId = getState().quotation.id
-    downloadLink.download = `quotation - ${quotationId}.xlsx`
-    document.body.appendChild(downloadLink)
-    downloadLink.click()
-    document.body.removeChild(downloadLink)
-    URL.revokeObjectURL(excelUrl)
+
+    downloadBlobAsFile({
+      blob: excelBlob,
+      fileName: `quotation - ${getState().quotation.id}.xlsx`,
+    })
 
     setTimeout(() => {
       loadingIconActor.send({ type: 'show success icon' })
