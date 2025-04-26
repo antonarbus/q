@@ -121,7 +121,7 @@ export const SettingsModal = (): React.JSX.Element => {
                       <Fragment key={item.id}>
                         <FiFileText color='grey' />
                         <a
-                          href={getFileUrl({ fileName: item.id })}
+                          href={getFileUrl({ fileId: item.id })}
                           target='_blank'
                           rel='noreferrer'
                           style={{
