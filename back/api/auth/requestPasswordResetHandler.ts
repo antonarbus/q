@@ -1,10 +1,10 @@
 import type { Request, Response, NextFunction } from 'express'
 import type { User } from '@entities/user'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { nanoid } from '@back/shared/lib/nanoid'
 import { sendEmail } from '@back/shared/services/email'
 import { config } from '@back/config'
 import { UserModel } from '@back/entities/user'
+import { generateId } from '@back/shared/lib/nanoid'
 
 export type ReqBody = {
   email: User['email']
@@ -51,7 +51,7 @@ export const requestPasswordResetHandler: RouterHandler = async (
 
   const updatedUser = await UserModel.findOneAndUpdate(
     { email: emailFromInput },
-    { resetPasswordKey: nanoid(5) },
+    { resetPasswordKey: generateId() },
     { new: true },
   )
 

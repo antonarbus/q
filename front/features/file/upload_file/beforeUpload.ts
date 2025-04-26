@@ -7,7 +7,7 @@ import type { ResBody as ResBodyGetSignedUrl } from '@back/api/file/fileUploadSi
 import type {
   ResBody as ResBodyMakeFilePublic,
   ReqBody as Payload,
-} from '@back/api/file/makeFilePublicHandler'
+} from '@back/api/file/fileAfterUploadHandler'
 import { toast } from 'sonner'
 import { asyncDelay } from '@shared/utils/delay'
 import type { FroalaProps } from '@entities/quotation/ui/froala/types'
@@ -62,12 +62,10 @@ export const beforeUpload: BeforeUpload = async (props) => {
     return
   }
 
-  const fileName = encodeURIComponent(file.name)
-
   const toastId = toast.loading(`Uploading 0%...`)
 
   const { data: signedUrlRes } = await axiosWithAuth<ResBodyGetSignedUrl>({
-    url: `${api.fileUploadSignedUrl.url}?fileName=${fileName}`,
+    url: api.fileUploadSignedUrl.url,
     method: api.fileUploadSignedUrl.method,
   })
 
@@ -157,7 +155,9 @@ export const beforeUpload: BeforeUpload = async (props) => {
     url: api.makeFilePublic.url,
     method: api.makeFilePublic.method,
     data: {
-      fileName,
+      id: signedUrlRes.fileId,
+      name: file.name,
+      size: file.size,
     },
   })
 

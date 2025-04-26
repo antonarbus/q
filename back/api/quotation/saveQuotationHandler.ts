@@ -4,9 +4,9 @@ import type { Quotation } from '@entities/quotation'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { bucket, getFilePath } from '@back/shared/services/storage'
-import { nanoid } from '@back/shared/lib/nanoid'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { QuotationModel } from '@back/entities/quotation'
+import { generateId } from '@back/shared/lib/nanoid'
 
 export type ReqBody = {
   quotation: Quotation
@@ -65,7 +65,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
   const quotationOwnership = await getQuotationOwnership()
 
   if (quotationOwnership === 'your new') {
-    const quotationId = nanoid(5)
+    const quotationId = generateId()
 
     const createQuotationResponse = await QuotationModel.create({
       id: quotationId,
@@ -84,7 +84,6 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
     const quotationDataFromDb = createQuotationResponse.toObject()
 
     const quotationFilePath = getFilePath({
-      email,
       fileType: 'quotation',
       quotationId,
     })
@@ -127,7 +126,6 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
     const quotationDataFromDb = updateQuotationResponse.toObject()
 
     const filePath = getFilePath({
-      email,
       fileType: 'quotation',
       quotationId: quotation.id,
     })
@@ -147,7 +145,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (quotationOwnership === 'foreign existing') {
-    const newQuotationId = nanoid(5)
+    const newQuotationId = generateId()
 
     const createResponse = await QuotationModel.create({
       id: newQuotationId,
@@ -166,7 +164,6 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
     const quotationDataFromDb = createResponse.toObject()
 
     const quotationFilePath = getFilePath({
-      email,
       fileType: 'quotation',
       quotationId: newQuotationId,
     })

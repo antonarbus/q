@@ -5,15 +5,11 @@ import { theme } from '@shared/theme'
 import { useFileDelete } from './useFileDelete'
 
 type Props = {
-  fileName: string
-  fileSize: number
+  fileId: string
 }
 
-export const DeleteFileIcon = ({
-  fileName,
-  fileSize,
-}: Props): React.JSX.Element => {
-  const { isPending, onDeleteClick } = useFileDelete({ fileName, fileSize })
+export const DeleteFileIcon = ({ fileId }: Props): React.JSX.Element => {
+  const { isPending, onDeleteClick } = useFileDelete({ fileId })
 
   if (isPending) {
     return <RotatingLoaderIcon style={{ marginRight: '5px' }} />

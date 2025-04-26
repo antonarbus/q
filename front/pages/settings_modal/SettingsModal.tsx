@@ -3,7 +3,7 @@ import { theme } from '@shared/theme'
 import { IoSettingsOutline } from 'react-icons/io5'
 import { Avatar, Box, Collapse } from '@mui/material'
 import { format } from 'bytes'
-import { Fragment, useRef, useState } from 'react'
+import { Fragment, useMemo, useRef, useState } from 'react'
 import { GrStorage } from 'react-icons/gr'
 import { useNavigate } from 'react-router-dom'
 import { useGetFilesStatsQuery } from '@entities/user'
@@ -20,6 +20,18 @@ export const SettingsModal = (): React.JSX.Element => {
   const navigate = useNavigate()
   const [collapseOpen, setCollapseOpen] = useState(false)
   const { data, isSuccess, isPending } = useGetFilesStatsQuery()
+
+  const totalSize = useMemo(() => {
+    const size = (data?.fileList ?? []).reduce((accumulator, item) => {
+      const incrementedSum = accumulator + item.size
+
+      return incrementedSum
+    }, 0)
+
+    return size
+  }, [data])
+
+  const totalCount = data?.fileList.length ?? 0
 
   return (
     <BackdropWithSlidableModal
@@ -70,21 +82,21 @@ export const SettingsModal = (): React.JSX.Element => {
                   cursor: 'pointer',
                 }}
                 onClick={() => {
-                  if (data.filesInfo.length > 0) {
+                  if (totalCount > 0) {
                     setCollapseOpen(!collapseOpen)
                   }
                 }}
               >
                 <GrStorage />
-                <Box>{data.fileStats.fileCount} files</Box>
+                <Box>{totalCount} files</Box>
                 <Box>
-                  {format(data.fileStats.totalSize, {
-                    unit: 'mb',
+                  {format(totalSize, {
+                    unit: totalSize < 1_048_576 ? 'kb' : 'mb',
                     thousandsSeparator: ' ',
                     unitSeparator: ' ',
                   })}
                 </Box>
-                {data.filesInfo.length > 0 && collapseOpen ? (
+                {totalCount > 0 && collapseOpen ? (
                   <MdExpandLess />
                 ) : (
                   <MdExpandMore />
@@ -104,12 +116,12 @@ export const SettingsModal = (): React.JSX.Element => {
                     width: '100%',
                   }}
                 >
-                  {data.filesInfo.map((item) => {
+                  {data.fileList.map((item) => {
                     return (
-                      <Fragment key={item.fileName}>
+                      <Fragment key={item.id}>
                         <FiFileText color='grey' />
                         <a
-                          href={getFileUrl({ fileName: item.fileName })}
+                          href={getFileUrl({ fileName: item.id })}
                           target='_blank'
                           rel='noreferrer'
                           style={{
@@ -119,7 +131,7 @@ export const SettingsModal = (): React.JSX.Element => {
                             textOverflow: 'ellipsis',
                           }}
                         >
-                          {item.fileName}
+                          {item.name}
                         </a>
                         <Box
                           sx={{
@@ -127,16 +139,14 @@ export const SettingsModal = (): React.JSX.Element => {
                             fontSize: '12px',
                           }}
                         >
-                          {format(item.fileSize, {
-                            unit: item.fileSize < 1_048_576 ? 'kb' : 'mb',
+                          {format(item.size, {
+                            unit: item.size < 1_048_576 ? 'kb' : 'mb',
                             thousandsSeparator: ' ',
                             unitSeparator: ' ',
+                            decimalPlaces: 0,
                           })}
                         </Box>
-                        <DeleteFileIcon
-                          fileName={item.fileName}
-                          fileSize={item.fileSize}
-                        />
+                        <DeleteFileIcon fileId={item.id} />
                       </Fragment>
                     )
                   })}

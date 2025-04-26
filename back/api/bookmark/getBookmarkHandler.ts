@@ -32,7 +32,7 @@ export const getBookmarkHandler: RouterHandler = async (req, res, next) => {
     return
   }
 
-  const filePath = getFilePath({ email, fileType: 'bookmark', bookmarkId })
+  const filePath = getFilePath({ fileType: 'bookmark', bookmarkId })
   const [fileBuffer] = await bucket.file(filePath).download()
   const fileAsString = fileBuffer.toString()
   const item = jsonParseSafe<Item>(fileAsString)

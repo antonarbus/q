@@ -84,10 +84,7 @@ export const deleteUserHandler: RouterHandler = async (req, res, next) => {
   // delete quotations from bucket
 
   const [quotationFiles] = await bucket.getFiles({
-    prefix: getFolderPath({
-      email: userEmailToBeDeleted,
-      fileType: 'quotation',
-    }),
+    prefix: getFolderPath({ fileType: 'quotation' }),
   })
 
   if (quotationFiles.length === 0) {
@@ -121,10 +118,7 @@ export const deleteUserHandler: RouterHandler = async (req, res, next) => {
   // delete bookmarks from bucket
 
   const [bookmarkFiles] = await bucket.getFiles({
-    prefix: getFolderPath({
-      email: userEmailToBeDeleted,
-      fileType: 'bookmark',
-    }),
+    prefix: getFolderPath({ fileType: 'bookmark' }),
   })
 
   if (bookmarkFiles.length === 0) {
@@ -158,10 +152,7 @@ export const deleteUserHandler: RouterHandler = async (req, res, next) => {
   // delete files from bucket
 
   const [files] = await bucket.getFiles({
-    prefix: getFolderPath({
-      email: userEmailToBeDeleted,
-      fileType: 'file',
-    }),
+    prefix: getFolderPath({ fileType: 'file' }),
   })
 
   if (files.length === 0) {

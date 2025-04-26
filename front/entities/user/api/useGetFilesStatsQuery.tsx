@@ -1,4 +1,4 @@
-import type { ResBody } from '@back/api/file/getFilesStatsHandler'
+import type { ResBody } from '@back/api/file/getFilesHandler'
 import { api } from '@back/api'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import type { AxiosError, AxiosResponse } from 'axios'
@@ -19,8 +19,8 @@ export const useGetFilesStatsQuery = (): UseQueryResult<
     enabled: true,
     queryFn: async () => {
       const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
-        url: api.getFilesStats.url,
-        method: api.getFilesStats.method,
+        url: api.getFileList.url,
+        method: api.getFileList.method,
         withCredentials: true,
       })
 

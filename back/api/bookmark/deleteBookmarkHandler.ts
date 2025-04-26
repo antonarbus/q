@@ -36,7 +36,7 @@ export const deleteBookmarkHandler: RouterHandler = async (req, res, next) => {
   }
 
   const [files] = await bucket.getFiles({
-    prefix: getFilePath({ email, fileType: 'bookmark', bookmarkId }),
+    prefix: getFilePath({ fileType: 'bookmark', bookmarkId }),
   })
 
   if (files.length === 0) {

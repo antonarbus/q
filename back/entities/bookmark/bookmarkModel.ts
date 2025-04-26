@@ -1,12 +1,12 @@
 import { model, Schema } from 'mongoose'
 import type { Item } from '@entities/bookmark'
-import { nanoid } from '@back/shared/lib/nanoid'
+import { generateId } from '@back/shared/lib/nanoid'
 
 const bookmarkSchema = new Schema<Item>(
   {
     id: {
       type: String,
-      default: (): string => nanoid(5),
+      default: (): string => generateId(),
       required: true,
       unique: true,
       index: true,

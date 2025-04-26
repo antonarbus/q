@@ -50,24 +50,15 @@ export const deleteQuotationHandler: RouterHandler = async (req, res, next) => {
   }
 
   const quotationFilePath = getFilePath({
-    email,
     fileType: 'quotation',
     quotationId,
   })
 
   const [{ statusCode }] = await bucket.file(quotationFilePath).delete()
-
-  const filesFolderPath = getFolderPath({
-    email,
-    fileType: 'file',
-  })
-
+  const filesFolderPath = getFolderPath({ fileType: 'file' })
   const filesPrefix = `${filesFolderPath}${quotationId}`
-
   const [files] = await bucket.getFiles({ prefix: filesPrefix })
-
   const deleteFilePromiseMany = files.map(async (file) => file.delete())
-
   const deleteFilesResponse = await Promise.allSettled(deleteFilePromiseMany)
 
   const filesDeletedQty = deleteFilesResponse.filter((result) => {

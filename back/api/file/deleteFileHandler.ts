@@ -6,13 +6,13 @@ import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { QuotationModel } from '@back/entities/quotation'
 
 export type ReqBody = {
-  fileName: string
+  fileId: string
 }
 
 export type ResBody = {
-  deletedFileName: string
+  deletedFileId: string
+  deletedFilesCount: number
   quotationsModifiedCount: number
-  filesDeleted: number
   message:
     | ErrorMessageCommon
     | 'deleted'
@@ -28,13 +28,13 @@ type RouterHandler = (
 
 export const deleteFileHandler: RouterHandler = async (req, res, next) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
-  const { fileName } = req.body
+  const { fileId } = req.body
 
-  if (!fileName || typeof fileName !== 'string') {
+  if (!fileId) {
     res.status(httpStatus.badRequest_400).json({
       message: 'invalid file name',
-      deletedFileName: '',
-      filesDeleted: 0,
+      deletedFileId: '',
+      deletedFilesCount: 0,
       quotationsModifiedCount: 0,
     })
 
@@ -43,14 +43,14 @@ export const deleteFileHandler: RouterHandler = async (req, res, next) => {
 
   try {
     const deleteFileFromQuotationResponse = await QuotationModel.updateMany(
-      { email, 'files.fileName': fileName },
-      { $pull: { files: { fileName } } },
+      { email, 'files.fileId': fileId },
+      { $pull: { files: { fileId } } },
     )
 
     const quotationsModifiedCount =
       deleteFileFromQuotationResponse.modifiedCount
 
-    const filePath = getFilePath({ email, fileType: 'file', fileName })
+    const filePath = getFilePath({ fileType: 'file', fileId })
 
     const deleteFileFromBucketResponse = await bucket.file(filePath).delete()
 
@@ -60,16 +60,16 @@ export const deleteFileHandler: RouterHandler = async (req, res, next) => {
 
     res.status(httpStatus.success_200).json({
       message: 'deleted',
-      deletedFileName: fileName,
+      deletedFileId: fileId,
       quotationsModifiedCount,
-      filesDeleted,
+      deletedFilesCount: filesDeleted,
     })
   } catch {
     res.status(httpStatus.notFound_404).json({
       message: 'failed to delete',
-      deletedFileName: '',
+      deletedFileId: '',
       quotationsModifiedCount: 0,
-      filesDeleted: 0,
+      deletedFilesCount: 0,
     })
   }
 }

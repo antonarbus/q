@@ -106,7 +106,6 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
   }
 
   const filePath = getFilePath({
-    email: document.email,
     fileType: 'quotation',
     quotationId,
   })

@@ -19,8 +19,8 @@ import { rootApiHandler } from '@back/api/dev/rootApiHandler'
 import { setBucketCorsHandler } from '@back/api/dev/setBucketCorsHandler'
 import { testHandler } from '@back/api/dev/testHandler'
 import { fileUploadSignedUrlHandler } from '@back/api/file/fileUploadSignedUrlHandler'
-import { getFilesStatsHandler } from '@back/api/file/getFilesStatsHandler'
-import { makeFilePublicHandler } from '@back/api/file/makeFilePublicHandler'
+import { getFileListHandler } from '@back/api/file/getFilesHandler'
+import { fileAfterUploadHandler } from '@back/api/file/fileAfterUploadHandler'
 import { deleteQuotationHandler } from '@back/api/quotation/deleteQuotationHandler'
 import { getQuotationHandler } from '@back/api/quotation/getQuotationHandler'
 import { getQuotationCategoriesHandler } from '@back/api/quotation/getQuotationCategories'
@@ -228,16 +228,17 @@ export const api = {
     `,
   },
   makeFilePublic: {
-    url: '/api/make-file-public',
+    url: '/api/after-file-upload',
     method: 'patch',
-    handler: makeFilePublicHandler,
-    description: 'After file is uploaded we make it public',
+    handler: fileAfterUploadHandler,
+    description:
+      'After file is uploaded we make it public and add info into File db',
   },
-  getFilesStats: {
-    url: '/api/get-files-stats',
+  getFileList: {
+    url: '/api/get-file-list',
     method: 'get',
-    handler: getFilesStatsHandler,
-    description: 'Gets total files size and count for settings modal',
+    handler: getFileListHandler,
+    description: 'Get file list for settings modal',
   },
   deleteFile: {
     url: '/api/delete-file',

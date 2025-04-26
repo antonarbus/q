@@ -3,6 +3,7 @@ import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { bucket, fileBaseUrl, getFilePath } from '@back/shared/services/storage'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
+import { generateId } from '@back/shared/lib/nanoid'
 
 export type SearchQuery = {
   fileName: string
@@ -16,6 +17,7 @@ export type ResBody = {
     | 'signed url generated'
   signedUrl: string | null
   publicUrl: string | null
+  fileId: string
 }
 
 type RouterHandler = (
@@ -29,10 +31,11 @@ export const fileUploadSignedUrlHandler: RouterHandler = async (
   res,
   next,
 ) => {
-  const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
-  const { fileName } = req.query
+  getUserFromAccessTokenOrThrowUnauthorized({ req })
 
-  const filePath = getFilePath({ email, fileType: 'file', fileName })
+  const fileId = generateId()
+
+  const filePath = getFilePath({ fileType: 'file', fileId })
   const file = bucket.file(filePath) // Get reference to the file in the bucket
 
   try {
@@ -50,12 +53,13 @@ export const fileUploadSignedUrlHandler: RouterHandler = async (
 
     res
       .status(httpStatus.success_200)
-      .json({ message: 'signed url generated', signedUrl, publicUrl })
+      .json({ message: 'signed url generated', signedUrl, publicUrl, fileId })
   } catch {
     res.status(httpStatus.serverError_500).json({
       message: 'failed to generate signed url',
       signedUrl: null,
       publicUrl: null,
+      fileId: '',
     })
   }
 }

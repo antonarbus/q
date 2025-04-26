@@ -6,8 +6,7 @@ import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
 type Props = {
-  fileName: string
-  fileSize: number
+  fileId: string
 }
 
 type Res = {
@@ -16,7 +15,7 @@ type Res = {
   isPending: boolean
 }
 
-export const useFileDelete = ({ fileName }: Props): Res => {
+export const useFileDelete = ({ fileId }: Props): Res => {
   const {
     mutate: deleteFile,
     isPending,
@@ -48,7 +47,7 @@ export const useFileDelete = ({ fileName }: Props): Res => {
       return
     }
 
-    deleteFile({ fileName })
+    deleteFile({ fileId })
   }, [])
 
   return {

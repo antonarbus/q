@@ -2,10 +2,10 @@ import type { Request, Response, NextFunction } from 'express'
 import bcrypt from 'bcryptjs'
 import type { User } from '@entities/user'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { nanoid } from '@back/shared/lib/nanoid'
 import { sendEmail } from '@back/shared/services/email'
 import { config } from '@back/config'
 import { UserModel } from '@back/entities/user'
+import { generateId } from '@back/shared/lib/nanoid'
 
 export type ReqBody = {
   email: User['email']
@@ -44,7 +44,7 @@ export const registerHandler: RouterHandler = async (req, res, next) => {
 
   const saltRounds = 10
   const passwordEncrypted = await bcrypt.hash(passwordFromInput, saltRounds)
-  const activationKey = nanoid(5)
+  const activationKey = generateId()
 
   const newUser = await UserModel.findOneAndUpdate(
     { email: emailFromInput },
