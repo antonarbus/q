@@ -34,12 +34,6 @@ export const fileAfterUploadHandler: RouterHandler = async (req, res, next) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
   const { id: fileId, name: fileName, size: fileSize } = req.body
 
-  if (!fileId) {
-    res.status(httpStatus.badRequest_400).json({ message: 'invalid file id' })
-
-    return
-  }
-
   try {
     const filePath = getFilePath({ fileType: 'file', fileId })
     await bucket.file(filePath).makePublic()

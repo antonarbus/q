@@ -47,7 +47,7 @@ export const useFileDelete = ({ fileId }: Props): Res => {
       return
     }
 
-    deleteFile({ fileId })
+    deleteFile({ fileId: fileId })
   }, [])
 
   return {

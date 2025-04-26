@@ -12,7 +12,6 @@ export type SearchQuery = {
 export type ResBody = {
   message:
     | ErrorMessageCommon
-    | 'invalid file name'
     | 'failed to generate signed url'
     | 'signed url generated'
   signedUrl: string | null
@@ -34,12 +33,10 @@ export const fileUploadSignedUrlHandler: RouterHandler = async (
   getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   const fileId = generateId()
-
   const filePath = getFilePath({ fileType: 'file', fileId })
   const file = bucket.file(filePath) // Get reference to the file in the bucket
 
   try {
-    // Generate signed URL for uploading
     const [signedUrl] = await file.getSignedUrl({
       action: 'write',
       expires: Date.now() + 10 * 60 * 1000, // 10 minutes expiration

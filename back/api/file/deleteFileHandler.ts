@@ -3,21 +3,19 @@ import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { bucket, getFilePath } from '@back/shared/services/storage'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
-import { QuotationModel } from '@back/entities/quotation'
+import { FileModel } from '@back/entities/file'
 
 export type ReqBody = {
   fileId: string
 }
 
 export type ResBody = {
-  deletedFileId: string
-  deletedFilesCount: number
-  quotationsModifiedCount: number
   message:
     | ErrorMessageCommon
     | 'deleted'
     | 'failed to delete'
-    | 'invalid file name'
+    | 'you did not upload this file'
+    | 'not found'
 }
 
 type RouterHandler = (
@@ -30,46 +28,57 @@ export const deleteFileHandler: RouterHandler = async (req, res, next) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
   const { fileId } = req.body
 
-  if (!fileId) {
-    res.status(httpStatus.badRequest_400).json({
-      message: 'invalid file name',
-      deletedFileId: '',
-      deletedFilesCount: 0,
-      quotationsModifiedCount: 0,
-    })
+  type FileOwnerShip = 'file not found' | 'owner' | 'not owner'
+
+  const getFileOwnerShip = async (): Promise<FileOwnerShip> => {
+    const fileInfo = await FileModel.findOne({ id: fileId }).lean()
+
+    if (fileInfo === null) {
+      return 'file not found'
+    }
+
+    if (fileInfo.email !== email) {
+      return 'not owner'
+    }
+
+    return 'owner'
+  }
+
+  const fileOwnerShip = await getFileOwnerShip()
+
+  if (fileOwnerShip === 'file not found') {
+    res.status(httpStatus.notFound_404).json({ message: 'not found' })
 
     return
   }
 
-  try {
-    const deleteFileFromQuotationResponse = await QuotationModel.updateMany(
-      { email, 'files.fileId': fileId },
-      { $pull: { files: { fileId } } },
-    )
+  if (fileOwnerShip === 'not owner') {
+    res
+      .status(httpStatus.notFound_404)
+      .json({ message: 'you did not upload this file' })
 
-    const quotationsModifiedCount =
-      deleteFileFromQuotationResponse.modifiedCount
+    return
+  }
 
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  if (fileOwnerShip === 'owner') {
     const filePath = getFilePath({ fileType: 'file', fileId })
 
-    const deleteFileFromBucketResponse = await bucket.file(filePath).delete()
+    try {
+      const deleteFromBucketPromise = bucket.file(filePath).delete()
 
-    const filesDeleted = deleteFileFromBucketResponse.filter(
-      (item) => item.statusCode === 204,
-    ).length
+      const deleteFromDatabasePromise = FileModel.deleteOne({
+        id: fileId,
+        email,
+      })
 
-    res.status(httpStatus.success_200).json({
-      message: 'deleted',
-      deletedFileId: fileId,
-      quotationsModifiedCount,
-      deletedFilesCount: filesDeleted,
-    })
-  } catch {
-    res.status(httpStatus.notFound_404).json({
-      message: 'failed to delete',
-      deletedFileId: '',
-      quotationsModifiedCount: 0,
-      deletedFilesCount: 0,
-    })
+      await Promise.all([deleteFromBucketPromise, deleteFromDatabasePromise])
+    } catch {
+      res.status(httpStatus.notFound_404).json({ message: 'failed to delete' })
+
+      return
+    }
+
+    res.status(httpStatus.success_200).json({ message: 'deleted' })
   }
 }
