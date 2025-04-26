@@ -69,7 +69,7 @@ export const beforeUpload: BeforeUpload = async (props) => {
     method: api.fileUploadSignedUrl.method,
   })
 
-  if (!signedUrlRes.signedUrl || !signedUrlRes.publicUrl) {
+  if (!signedUrlRes.signedUrl || !signedUrlRes.url) {
     toast.error('Failed', { id: toastId })
 
     return
@@ -168,14 +168,14 @@ export const beforeUpload: BeforeUpload = async (props) => {
   }
 
   if (props.type === 'file') {
-    props.editor.file.insert(signedUrlRes.publicUrl, file.name, {
-      link: signedUrlRes.publicUrl,
+    props.editor.file.insert(signedUrlRes.url, file.name, {
+      link: signedUrlRes.url,
     })
   }
 
   if (props.type === 'image') {
     props.editor.image.insert(
-      signedUrlRes.publicUrl,
+      signedUrlRes.url,
       true,
       {
         name: file.name,

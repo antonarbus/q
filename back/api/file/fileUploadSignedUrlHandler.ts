@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from 'express'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { bucket, fileBaseUrl, getFilePath } from '@back/shared/services/storage'
+import { bucket, gitFileInfo } from '@back/shared/services/storage'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { generateId } from '@back/shared/lib/nanoid'
 
@@ -10,13 +10,13 @@ export type SearchQuery = {
 }
 
 export type ResBody = {
+  signedUrl: string | null
+  url: string | null
+  fileId: string
   message:
     | ErrorMessageCommon
     | 'failed to generate signed url'
     | 'signed url generated'
-  signedUrl: string | null
-  publicUrl: string | null
-  fileId: string
 }
 
 type RouterHandler = (
@@ -33,8 +33,8 @@ export const fileUploadSignedUrlHandler: RouterHandler = async (
   getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   const fileId = generateId()
-  const filePath = getFilePath({ fileType: 'file', fileId })
-  const file = bucket.file(filePath) // Get reference to the file in the bucket
+  const { path, url } = gitFileInfo({ fileType: 'file', fileId })
+  const file = bucket.file(path) // Get reference to the file in the bucket
 
   try {
     const [signedUrl] = await file.getSignedUrl({
@@ -46,16 +46,17 @@ export const fileUploadSignedUrlHandler: RouterHandler = async (
       },
     })
 
-    const publicUrl = `${fileBaseUrl}/${filePath}`
-
-    res
-      .status(httpStatus.success_200)
-      .json({ message: 'signed url generated', signedUrl, publicUrl, fileId })
+    res.status(httpStatus.success_200).json({
+      message: 'signed url generated',
+      signedUrl,
+      url,
+      fileId,
+    })
   } catch {
     res.status(httpStatus.serverError_500).json({
       message: 'failed to generate signed url',
       signedUrl: null,
-      publicUrl: null,
+      url: null,
       fileId: '',
     })
   }

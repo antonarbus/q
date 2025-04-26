@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from 'express'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { bucket, getFolderPath } from '@back/shared/services/storage'
+// import { bucket, getFolderPath } from '@back/shared/services/storage'
 import type { User } from '@entities/user'
 import { userRole } from '@back/shared/consts/userRole'
 import {
@@ -83,6 +83,7 @@ export const deleteUserHandler: RouterHandler = async (req, res, next) => {
 
   // delete quotations from bucket
 
+  /*
   const [quotationFiles] = await bucket.getFiles({
     prefix: getFolderPath({ fileType: 'quotation' }),
   })
@@ -180,6 +181,8 @@ export const deleteUserHandler: RouterHandler = async (req, res, next) => {
       `${filesNotDeletedQty} bookmarks were not deleted from bucket ❌`,
     )
   }
+  
+  */
 
   res.status(httpStatus.success_200).json({ message: 'deleted', statistics })
 }

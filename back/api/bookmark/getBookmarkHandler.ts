@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from 'express'
 import type { Item } from '@entities/quotation'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { bucket, getFilePath } from '@back/shared/services/storage'
+import { bucket, gitFileInfo } from '@back/shared/services/storage'
 import { jsonParseSafe } from '@back/shared/utils/jsonParseSafe'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { BookmarkModel } from '@back/entities/bookmark'
@@ -32,8 +32,8 @@ export const getBookmarkHandler: RouterHandler = async (req, res, next) => {
     return
   }
 
-  const filePath = getFilePath({ fileType: 'bookmark', bookmarkId })
-  const [fileBuffer] = await bucket.file(filePath).download()
+  const { path } = gitFileInfo({ fileType: 'bookmark', bookmarkId })
+  const [fileBuffer] = await bucket.file(path).download()
   const fileAsString = fileBuffer.toString()
   const item = jsonParseSafe<Item>(fileAsString)
 

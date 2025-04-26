@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from 'express'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { bucket, fileBaseUrl, getFilePath } from '@back/shared/services/storage'
+import { bucket, gitFileInfo } from '@back/shared/services/storage'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { FileModel } from '@back/entities/file'
 
@@ -35,9 +35,8 @@ export const fileAfterUploadHandler: RouterHandler = async (req, res, next) => {
   const { id: fileId, name: fileName, size: fileSize } = req.body
 
   try {
-    const filePath = getFilePath({ fileType: 'file', fileId })
-    await bucket.file(filePath).makePublic()
-    const publicUrl = `${fileBaseUrl}/${filePath}`
+    const { path, url } = gitFileInfo({ fileType: 'file', fileId })
+    await bucket.file(path).makePublic()
 
     const createFileDocRes = await FileModel.create({
       id: fileId,
@@ -50,7 +49,7 @@ export const fileAfterUploadHandler: RouterHandler = async (req, res, next) => {
 
     res.status(httpStatus.success_200).json({
       message: 'made file public',
-      link: publicUrl,
+      link: url,
       fileId: fileDocument.id,
       fileName: fileDocument.name,
       fileSize: fileDocument.size,

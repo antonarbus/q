@@ -21,35 +21,41 @@ const bucketName = getEnvVarOrThrow('BUCKET_NAME')
 
 export const bucket = storageInstance.bucket(bucketName)
 
+const STORAGE_BASE_URL = `https://storage.googleapis.com/${bucketName}`
+
 type Props1 = { fileType: 'file'; fileId: string }
 type Props2 = { fileType: 'quotation'; quotationId: string }
 type Props3 = { fileType: 'bookmark'; bookmarkId: string }
 type Props = Props1 | Props2 | Props3
 
-export const getFolderPath = (
-  props: Omit<Props, 'fileId' | 'quotationId' | 'bookmarkId'>,
-): string => {
+type Res = {
+  path: string
+  url: string
+}
+
+export const gitFileInfo = (props: Props): Res => {
   if (props.fileType === 'quotation') {
-    return `quotations/`
+    const fileInfo = {
+      path: `quotations/${props.quotationId}`,
+      url: `${STORAGE_BASE_URL}/quotations/${props.quotationId}`,
+    }
+
+    return fileInfo
   }
 
   if (props.fileType === 'bookmark') {
-    return `bookmarks/`
+    const fileInfo = {
+      path: `bookmarks/${props.bookmarkId}`,
+      url: `${STORAGE_BASE_URL}/bookmarks/${props.bookmarkId}`,
+    }
+
+    return fileInfo
   }
 
-  return `files/`
+  const fileInfo = {
+    path: `files/${props.fileId}`,
+    url: `${STORAGE_BASE_URL}/files/${props.fileId}`,
+  }
+
+  return fileInfo
 }
-
-export const getFilePath = (props: Props): string => {
-  if (props.fileType === 'quotation') {
-    return `quotations/${props.quotationId}`
-  }
-
-  if (props.fileType === 'bookmark') {
-    return `bookmarks/${props.bookmarkId}`
-  }
-
-  return `files/${props.fileId}`
-}
-
-export const fileBaseUrl = `https://storage.googleapis.com/${bucketName}`

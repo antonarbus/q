@@ -1,7 +1,6 @@
 import type { Request, Response, NextFunction } from 'express'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { bucket, getFilePath } from '@back/shared/services/storage'
 import type { Item } from '@entities/quotation'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { BookmarkModel } from '@back/entities/bookmark'
@@ -34,18 +33,6 @@ export const deleteBookmarkHandler: RouterHandler = async (req, res, next) => {
 
     return
   }
-
-  const [files] = await bucket.getFiles({
-    prefix: getFilePath({ fileType: 'bookmark', bookmarkId }),
-  })
-
-  if (files.length === 0) {
-    res.status(httpStatus.notFound_404).json({ message: 'no item in bucket' })
-
-    return
-  }
-
-  await Promise.all(files.map(async (file) => file.delete()))
 
   res.status(httpStatus.success_200).json({ message: 'deleted' })
 }

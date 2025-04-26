@@ -3,11 +3,7 @@ import type { HydratedDocument } from 'mongoose'
 import type { Quotation } from '@entities/quotation'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import {
-  bucket,
-  getFilePath,
-  getFolderPath,
-} from '@back/shared/services/storage'
+import { bucket, gitFileInfo } from '@back/shared/services/storage'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { QuotationModel } from '@back/entities/quotation'
 
@@ -17,7 +13,6 @@ export type ReqBody = {
 
 export type ResBody = {
   document?: HydratedDocument<Quotation>
-  filesDeletedQty: number
   message:
     | ErrorMessageCommon
     | 'not found'
@@ -42,42 +37,23 @@ export const deleteQuotationHandler: RouterHandler = async (req, res, next) => {
   })
 
   if (deleteFromDbResult.deletedCount === 0) {
-    res
-      .status(httpStatus.notFound_404)
-      .json({ message: 'not found', filesDeletedQty: 0 })
+    res.status(httpStatus.notFound_404).json({ message: 'not found' })
 
     return
   }
 
-  const quotationFilePath = getFilePath({
+  const { path } = gitFileInfo({
     fileType: 'quotation',
     quotationId,
   })
 
-  const [{ statusCode }] = await bucket.file(quotationFilePath).delete()
-  const filesFolderPath = getFolderPath({ fileType: 'file' })
-  const filesPrefix = `${filesFolderPath}${quotationId}`
-  const [files] = await bucket.getFiles({ prefix: filesPrefix })
-  const deleteFilePromiseMany = files.map(async (file) => file.delete())
-  const deleteFilesResponse = await Promise.allSettled(deleteFilePromiseMany)
-
-  const filesDeletedQty = deleteFilesResponse.filter((result) => {
-    if (result.status === 'fulfilled') {
-      return true
-    }
-
-    return false
-  }).length
+  const [{ statusCode }] = await bucket.file(path).delete()
 
   if (statusCode === 204) {
-    res
-      .status(httpStatus.success_200)
-      .json({ message: 'deleted', filesDeletedQty })
+    res.status(httpStatus.success_200).json({ message: 'deleted' })
 
     return
   }
 
-  res
-    .status(httpStatus.notFound_404)
-    .json({ message: 'not deleted', filesDeletedQty: 0 })
+  res.status(httpStatus.notFound_404).json({ message: 'not deleted' })
 }

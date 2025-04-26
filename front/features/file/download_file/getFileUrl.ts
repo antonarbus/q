@@ -1,11 +1,9 @@
-import { getState } from '@shared/lib/redux'
-
 type Props = {
   fileName: string
 }
 
 export const getFileUrl = ({ fileName }: Props): string => {
-  const fileUrl = `https://storage.googleapis.com/quotation-app-bucket/${getState().user.email}/files/${fileName}`
+  const fileUrl = `https://storage.googleapis.com/quotation-app-bucket/files/${fileName}`
 
   return fileUrl
 }

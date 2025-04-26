@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from 'express'
 import type { Quotation } from '@entities/quotation'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { bucket, getFilePath } from '@back/shared/services/storage'
+import { bucket, gitFileInfo } from '@back/shared/services/storage'
 import { jsonParseSafe } from '@back/shared/utils/jsonParseSafe'
 import { isNoTraceMode } from '@back/shared/headers'
 import { userRole } from '@back/shared/consts/userRole'
@@ -105,12 +105,8 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
     })
   }
 
-  const filePath = getFilePath({
-    fileType: 'quotation',
-    quotationId,
-  })
-
-  const [fileBuffer] = await bucket.file(filePath).download()
+  const { path } = gitFileInfo({ fileType: 'quotation', quotationId })
+  const [fileBuffer] = await bucket.file(path).download()
   const quotation = jsonParseSafe<Quotation>(fileBuffer.toString())
 
   if (!quotation) {

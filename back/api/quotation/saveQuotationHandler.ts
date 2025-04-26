@@ -3,7 +3,7 @@ import type { FlattenMaps } from 'mongoose'
 import type { Quotation } from '@entities/quotation'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { bucket, getFilePath } from '@back/shared/services/storage'
+import { bucket, gitFileInfo } from '@back/shared/services/storage'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { QuotationModel } from '@back/entities/quotation'
 import { generateId } from '@back/shared/lib/nanoid'
@@ -83,12 +83,12 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
     const quotationDataFromDb = createQuotationResponse.toObject()
 
-    const quotationFilePath = getFilePath({
+    const { path } = gitFileInfo({
       fileType: 'quotation',
       quotationId,
     })
 
-    const quotationFile = bucket.file(quotationFilePath)
+    const quotationFile = bucket.file(path)
     const fullQuotation = { ...quotationDataFromDb, blocks: quotation.blocks }
     const quotationJson = JSON.stringify(fullQuotation, null, 2)
 
@@ -125,12 +125,12 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
     const quotationDataFromDb = updateQuotationResponse.toObject()
 
-    const filePath = getFilePath({
+    const { path } = gitFileInfo({
       fileType: 'quotation',
       quotationId: quotation.id,
     })
 
-    const file = bucket.file(filePath)
+    const file = bucket.file(path)
     const fullQuotation = { ...quotationDataFromDb, blocks: quotation.blocks }
     const quotationJson = JSON.stringify(fullQuotation, null, 2)
     await file.save(quotationJson)
@@ -163,12 +163,12 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
     const quotationDataFromDb = createResponse.toObject()
 
-    const quotationFilePath = getFilePath({
+    const { path } = gitFileInfo({
       fileType: 'quotation',
       quotationId: newQuotationId,
     })
 
-    const quotationFile = bucket.file(quotationFilePath)
+    const quotationFile = bucket.file(path)
     const fullQuotation = { ...quotationDataFromDb, blocks: quotation.blocks }
     const quotationJson = JSON.stringify(fullQuotation, null, 2)
 
