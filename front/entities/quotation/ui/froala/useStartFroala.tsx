@@ -113,6 +113,16 @@ export const useStartFroala = (): void => {
             imageElement.id = `img-${nanoid(5)}`
             imageElement.classList.add('fr-rounded')
           },
+          // 'commands.before'(cmd: string, param1, param2) {
+          //   if (cmd === 'linkOpen') {
+          //     const linkElement = froalaInstance.selection.element()
+
+          //     if (linkElement && linkElement.tagName === 'A') {
+          //       const url = linkElement.getAttribute('href')
+          //       const fileName = linkElement.textContent ?? 'file'
+          //     }
+          //   }
+          // },
           initialized: (): void => {
             window.froalas.push(froala.editorRef)
 
