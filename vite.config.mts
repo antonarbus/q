@@ -73,6 +73,7 @@ export default {
     // https: true, //* type "thisisunsafe" if chrome says that connection is not private
     proxy: {
       '/api': config.back.baseUrl,
+      '/uploads': config.back.baseUrl,
     },
   },
   preview: {
@@ -81,6 +82,7 @@ export default {
     // https: true,
     proxy: {
       '/api': config.back.baseUrl,
+      '/uploads': config.back.baseUrl,
     },
   },
   worker: {

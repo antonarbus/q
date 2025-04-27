@@ -7,7 +7,7 @@ import type { ResBody as ResBodyGetSignedUrl } from '@back/api/file/fileUploadSi
 import type {
   ResBody as ResBodyMakeFilePublic,
   ReqBody as Payload,
-} from '@back/api/file/fileAfterUploadHandler'
+} from '@back/api/file/saveFileInfoHandler'
 import { toast } from 'sonner'
 import { asyncDelay } from '@shared/utils/delay'
 import type { FroalaProps } from '@entities/quotation/ui/froala/types'
@@ -147,13 +147,13 @@ export const beforeUpload: BeforeUpload = async (props) => {
     return
   }
 
-  const makeFilePublicResponse = await axiosWithAuth<
+  const saveFileInfoResponse = await axiosWithAuth<
     ResBodyMakeFilePublic,
     AxiosError<ResBodyMakeFilePublic>,
     Payload
   >({
-    url: api.makeFilePublic.url,
-    method: api.makeFilePublic.method,
+    url: api.saveFileInfo.url,
+    method: api.saveFileInfo.method,
     data: {
       id: signedUrlRes.fileId,
       name: file.name,
@@ -161,21 +161,21 @@ export const beforeUpload: BeforeUpload = async (props) => {
     },
   })
 
-  if (makeFilePublicResponse.status !== 200) {
+  if (saveFileInfoResponse.status !== 200) {
     toast.error('Failed to make file public', { id: toastId })
 
     return
   }
 
   if (props.type === 'file') {
-    props.editor.file.insert(signedUrlRes.url, file.name, {
-      link: signedUrlRes.url,
+    props.editor.file.insert(`./uploads/${signedUrlRes.fileId}`, file.name, {
+      link: `./uploads/${signedUrlRes.fileId}`,
     })
   }
 
   if (props.type === 'image') {
     props.editor.image.insert(
-      signedUrlRes.url,
+      `./uploads/${signedUrlRes.fileId}`,
       true,
       {
         name: file.name,

@@ -1,7 +1,6 @@
 import type { Request, Response, NextFunction } from 'express'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { bucket, getFileInfo } from '@back/shared/services/storage'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { FileModel } from '@back/entities/file'
 
@@ -12,7 +11,6 @@ export type ReqBody = {
 }
 
 export type ResBody = {
-  link?: string
   fileId?: string
   fileName?: string
   fileSize?: number
@@ -20,7 +18,7 @@ export type ResBody = {
   message:
     | ErrorMessageCommon
     | 'invalid file id'
-    | 'made file public'
+    | 'saved file info'
     | 'failed to make file public'
 }
 
@@ -30,14 +28,11 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const fileAfterUploadHandler: RouterHandler = async (req, res, next) => {
+export const saveFileInfoHandler: RouterHandler = async (req, res, next) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
   const { id: fileId, name: fileName, size: fileSize } = req.body
 
   try {
-    const { path, url } = getFileInfo({ fileType: 'file', fileId })
-    await bucket.file(path).makePublic()
-
     const createFileDocRes = await FileModel.create({
       id: fileId,
       email,
@@ -48,12 +43,11 @@ export const fileAfterUploadHandler: RouterHandler = async (req, res, next) => {
     const fileDocument = createFileDocRes.toObject()
 
     res.status(httpStatus.success_200).json({
-      message: 'made file public',
-      link: url,
       fileId: fileDocument.id,
       fileName: fileDocument.name,
       fileSize: fileDocument.size,
       uploadedAt: fileDocument.uploadedAt,
+      message: 'saved file info',
     })
   } catch {
     res.status(httpStatus.serverError_500).json({

@@ -20,7 +20,7 @@ import { setBucketCorsHandler } from '@back/api/dev/setBucketCorsHandler'
 import { testHandler } from '@back/api/dev/testHandler'
 import { fileUploadSignedUrlHandler } from '@back/api/file/fileUploadSignedUrlHandler'
 import { getFileListHandler } from '@back/api/file/getFileListHandler'
-import { fileAfterUploadHandler } from '@back/api/file/fileAfterUploadHandler'
+import { saveFileInfoHandler } from '@back/api/file/saveFileInfoHandler'
 import { deleteQuotationHandler } from '@back/api/quotation/deleteQuotationHandler'
 import { getQuotationHandler } from '@back/api/quotation/getQuotationHandler'
 import { getQuotationCategoriesHandler } from '@back/api/quotation/getQuotationCategories'
@@ -220,7 +220,7 @@ export const api = {
   },
   // files
   proxyFileToBucket: {
-    url: '/api/uploads/:fileId',
+    url: '/uploads/:fileId', // <-- not under /api
     method: 'get',
     handler: proxyFileToBucketHandler,
     description: `
@@ -237,10 +237,10 @@ export const api = {
       where file is uploaded on client side
     `,
   },
-  makeFilePublic: {
-    url: '/api/after-file-upload',
+  saveFileInfo: {
+    url: '/api/save-file-info',
     method: 'patch',
-    handler: fileAfterUploadHandler,
+    handler: saveFileInfoHandler,
     description:
       'After file is uploaded we make it public and add info into File db',
   },

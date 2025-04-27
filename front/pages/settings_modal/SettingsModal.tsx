@@ -12,7 +12,6 @@ import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
 import { CardCustom } from '@shared/components/CardCustom'
 import { MdExpandLess, MdExpandMore } from 'react-icons/md'
 import { FiFileText } from 'react-icons/fi'
-import { getFileUrl } from '@features/file/download_file'
 import { DeleteFileIcon } from '@features/file/delete_file'
 
 export const SettingsModal = (): React.JSX.Element => {
@@ -121,7 +120,7 @@ export const SettingsModal = (): React.JSX.Element => {
                       <Fragment key={item.id}>
                         <FiFileText color='grey' />
                         <a
-                          href={getFileUrl({ fileId: item.id })}
+                          href={`./uploads/${item.id}`}
                           target='_blank'
                           rel='noreferrer'
                           style={{
