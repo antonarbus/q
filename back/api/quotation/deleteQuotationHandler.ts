@@ -3,7 +3,7 @@ import type { HydratedDocument } from 'mongoose'
 import type { Quotation } from '@entities/quotation'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { bucket, gitFileInfo } from '@back/shared/services/storage'
+import { bucket, getFileInfo } from '@back/shared/services/storage'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { QuotationModel } from '@back/entities/quotation'
 
@@ -42,7 +42,7 @@ export const deleteQuotationHandler: RouterHandler = async (req, res, next) => {
     return
   }
 
-  const { path } = gitFileInfo({
+  const { path } = getFileInfo({
     fileType: 'quotation',
     quotationId,
   })

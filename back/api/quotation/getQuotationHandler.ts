@@ -1,11 +1,11 @@
 import type { Request, Response, NextFunction } from 'express'
 import type { Quotation } from '@entities/quotation'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { bucket, gitFileInfo } from '@back/shared/services/storage'
+import { bucket, getFileInfo } from '@back/shared/services/storage'
 import { jsonParseSafe } from '@back/shared/utils/jsonParseSafe'
 import { isNoTraceMode } from '@back/shared/headers'
 import { userRole } from '@back/shared/consts/userRole'
-import { getUserFromRefreshTokenOrNull } from '@back/entities/user'
+import { getUserFromAccessTokenOrNull } from '@back/entities/user'
 import { QuotationModel } from '@back/entities/quotation'
 
 export type ReqBody = {
@@ -25,7 +25,7 @@ type RouterHandler = (
 
 export const getQuotationHandler: RouterHandler = async (req, res, next) => {
   const { id: quotationId } = req.body
-  const userFromRefreshToken = getUserFromRefreshTokenOrNull({ req })
+  const userFromAccessToken = getUserFromAccessTokenOrNull({ req })
 
   const emptyQuotation: Quotation = {
     id: quotationId,
@@ -46,15 +46,15 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
   }
 
   const getPermissionLevel = (): Quotation['permissionLevel'] => {
-    const isLoggedUser = userFromRefreshToken !== null
+    const isLoggedUser = userFromAccessToken !== null
 
-    if (isLoggedUser && userFromRefreshToken.email === document.email) {
+    if (isLoggedUser && userFromAccessToken.email === document.email) {
       return 'Owner'
     }
 
     if (
       isLoggedUser &&
-      (document.sharedWith ?? []).includes(userFromRefreshToken.email)
+      (document.sharedWith ?? []).includes(userFromAccessToken.email)
     ) {
       return 'Shared with you'
     }
@@ -69,7 +69,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
 
     if (
       isLoggedUser &&
-      userFromRefreshToken.roles.includes(userRole.superAdmin)
+      userFromAccessToken.roles.includes(userRole.superAdmin)
     ) {
       return 'Super admin'
     }
@@ -105,7 +105,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
     })
   }
 
-  const { path } = gitFileInfo({ fileType: 'quotation', quotationId })
+  const { path } = getFileInfo({ fileType: 'quotation', quotationId })
   const [fileBuffer] = await bucket.file(path).download()
   const quotation = jsonParseSafe<Quotation>(fileBuffer.toString())
 

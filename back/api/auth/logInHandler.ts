@@ -12,7 +12,7 @@ import {
 } from '@back/shared/lib/jwt'
 import { setNoTraceMode, setRefreshTokenCookie } from '@back/shared/headers'
 import { userRole } from '@back/shared/consts/userRole'
-import { getUserFromRefreshToken, UserModel } from '@back/entities/user'
+import { getUserFromAccessTokenOrNull, UserModel } from '@back/entities/user'
 
 export type ReqBody = {
   email: User['email']
@@ -55,13 +55,13 @@ export const logInHandler: RouterHandler = async (req, res, next) => {
     return
   }
 
-  const { roles, email: emailFromRefreshToken } = getUserFromRefreshToken({
-    req,
-  })
+  const userFromAccessToken = getUserFromAccessTokenOrNull({ req })
+  const rolesFromAccessToken = userFromAccessToken?.roles ?? []
+  const emailFromAccessToken = userFromAccessToken?.email ?? 'john@gmail.com'
 
   const isSuperAdminOnBehalfOfUser =
-    roles.includes(userRole.superAdmin) &&
-    emailFromInput !== emailFromRefreshToken
+    rolesFromAccessToken.includes(userRole.superAdmin) &&
+    emailFromInput !== emailFromAccessToken
 
   if (isSuperAdminOnBehalfOfUser) {
     // just log in as a user without password coz you are a super-admin

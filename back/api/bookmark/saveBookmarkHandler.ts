@@ -3,7 +3,7 @@ import type { FlattenMaps } from 'mongoose'
 import type { Item } from '@entities/bookmark'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { bucket, gitFileInfo } from '@back/shared/services/storage'
+import { bucket, getFileInfo } from '@back/shared/services/storage'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { BookmarkModel } from '@back/entities/bookmark'
 
@@ -77,7 +77,7 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, next) => {
     .select({ _id: 0, __v: 0 })
     .lean()
 
-  const { path } = gitFileInfo({
+  const { path } = getFileInfo({
     fileType: 'bookmark',
     bookmarkId: bookmarkItem.id,
   })

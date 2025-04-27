@@ -2,7 +2,7 @@ import type { Request, Response, NextFunction } from 'express'
 // import { QuotationModel } from '@back/db/models/quotationModel'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { userRole } from '@back/shared/consts/userRole'
-import { getUserFromRefreshToken, UserModel } from '@back/entities/user'
+import { getUserFromRefreshTokenOrJohn, UserModel } from '@back/entities/user'
 
 type RouterHandler = (
   req: Request,
@@ -11,7 +11,7 @@ type RouterHandler = (
 ) => Promise<void>
 
 export const testHandler: RouterHandler = async (req, res, next) => {
-  const { roles } = getUserFromRefreshToken({ req })
+  const { roles } = getUserFromRefreshTokenOrJohn({ req })
 
   if (!roles.includes(userRole.superAdmin)) {
     res.status(httpStatus.forbidden_403).json({ message: 'forbidden' })

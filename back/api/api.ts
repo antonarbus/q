@@ -31,6 +31,7 @@ import { getUsersHandler } from '@back/api/user/getUsersHandler'
 import { countUniqueDailyVisitorsHandler } from '@back/api/visitors/countUniqueDailyVisitorsHandler'
 import { getUniqueDailyVisitorsHandler } from '@back/api/visitors/getUniqueDailyVisitorsHandler'
 import { deleteFileHandler } from './file/deleteFileHandler'
+import { proxyFileToBucketHandler } from './file/proxyFileToBucketHandler'
 
 type Api = {
   url: string
@@ -218,6 +219,15 @@ export const api = {
     description: 'When user clicks on delete button in bookmarks table',
   },
   // files
+  proxyFileToBucket: {
+    url: '/api/uploads/:fileId',
+    method: 'get',
+    handler: proxyFileToBucketHandler,
+    description: `
+      Get file data from db, generate 5 min singed url
+      to Google Cloud Storage and redirect request.
+    `,
+  },
   fileUploadSignedUrl: {
     url: '/api/file-upload-signed-url',
     method: 'get',

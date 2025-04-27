@@ -13,32 +13,35 @@ type Res = {
   roles: User['roles']
 }
 
-export const getUserFromRefreshToken = ({ req }: Props): Res => {
+/**
+ * Used only for dev purposes to access
+ * dev apis directly under super-admin role at
+ * https://sendmequotation.today/api/test
+ * https://sendmequotation.today/api/set-bucket-cors
+ * https://sendmequotation.today/api/get-bucket-cor
+ */
+export const getUserFromRefreshTokenOrJohn = ({ req }: Props): Res => {
   const refreshJwtToken = getRefreshTokenFromCookie({ req })
 
+  const john = {
+    email: 'john@gmail.com',
+    roles: [userRole.user],
+  }
+
   if (refreshJwtToken === undefined) {
-    return {
-      email: 'no email',
-      roles: [userRole.user],
-    }
+    return john
   }
 
   const jwtPayload = verifyRefreshToken(refreshJwtToken)
 
   if (jwtPayload === undefined) {
-    return {
-      email: 'no email',
-      roles: [userRole.user],
-    }
+    return john
   }
 
   const { email, roles } = jwtPayload
 
   if (typeof email !== 'string') {
-    return {
-      email: 'no email',
-      roles: [userRole.user],
-    }
+    return john
   }
 
   return { email, roles }

@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from 'express'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { bucket, gitFileInfo } from '@back/shared/services/storage'
+import { bucket, getFileInfo } from '@back/shared/services/storage'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { generateId } from '@back/shared/lib/nanoid'
 
@@ -33,14 +33,14 @@ export const fileUploadSignedUrlHandler: RouterHandler = async (
   getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   const fileId = generateId()
-  const { path, url } = gitFileInfo({ fileType: 'file', fileId })
+  const { path, url } = getFileInfo({ fileType: 'file', fileId })
   const file = bucket.file(path) // Get reference to the file in the bucket
 
   try {
     const [signedUrl] = await file.getSignedUrl({
-      action: 'write',
-      expires: Date.now() + 10 * 60 * 1000, // 10 minutes expiration
       version: 'v4',
+      action: 'write',
+      expires: Date.now() + 5 * 60 * 1000, // 5 minutes expiration
       extensionHeaders: {
         'x-goog-content-length-range': '0,104857600', // Allow up to 100MB
       },

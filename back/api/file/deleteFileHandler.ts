@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from 'express'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { bucket, gitFileInfo } from '@back/shared/services/storage'
+import { bucket, getFileInfo } from '@back/shared/services/storage'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { FileModel } from '@back/entities/file'
 
@@ -62,7 +62,7 @@ export const deleteFileHandler: RouterHandler = async (req, res, next) => {
 
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (fileOwnerShip === 'owner') {
-    const { path } = gitFileInfo({ fileType: 'file', fileId })
+    const { path } = getFileInfo({ fileType: 'file', fileId })
 
     try {
       const deleteFromBucketPromise = bucket.file(path).delete()

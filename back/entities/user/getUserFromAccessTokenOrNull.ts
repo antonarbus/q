@@ -1,5 +1,4 @@
 import type { User } from '@entities/user'
-import { errorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { headerName } from '@back/shared/headers'
 import type { Request } from 'express'
 import { verifyAccessToken } from '@back/shared/lib/jwt'
@@ -11,24 +10,25 @@ type Props = {
 type Res = {
   email: User['email']
   roles: User['roles']
-}
+} | null
 
 /**
- * Used to get a user details for all protected routes where a user should be logged in
+ * Used for routes which can be visited with or without authentication \
+ * And we want to distinguish such visitors, for ex \
+ * Public quotation can be visited by strangers with restricted data, \
+ * But logged owner gets the same quotation in full access
  */
-export const getUserFromAccessTokenOrThrowUnauthorized = ({
-  req,
-}: Props): Res => {
+export const getUserFromAccessTokenOrNull = ({ req }: Props): Res => {
   const accessJwtToken = req.headers[headerName.accessJwtToken]
 
   if (typeof accessJwtToken !== 'string') {
-    throw new Error(errorMessageCommon.notLoggedIn)
+    return null
   }
 
   const jwtPayload = verifyAccessToken(accessJwtToken)
 
   if (jwtPayload === undefined) {
-    throw new Error(errorMessageCommon.notLoggedIn)
+    return null
   }
 
   const { email, roles } = jwtPayload

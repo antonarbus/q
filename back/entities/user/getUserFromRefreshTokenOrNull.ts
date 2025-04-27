@@ -17,6 +17,9 @@ type Res = {
   jwtRefreshTokenExpirationDays: number
 } | null
 
+/**
+ * Used only to get short lived access token.
+ */
 export const getUserFromRefreshTokenOrNull = ({ req }: Props): Res => {
   const refreshJwtToken = getRefreshTokenFromCookie({ req })
 

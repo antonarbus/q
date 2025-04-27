@@ -3,7 +3,7 @@ import { bucket } from '@back/shared/services/storage'
 import { getEnvVarOrThrow } from '@back/shared/utils/getEnvVar'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { userRole } from '@back/shared/consts/userRole'
-import { getUserFromRefreshToken } from '@back/entities/user'
+import { getUserFromRefreshTokenOrJohn } from '@back/entities/user'
 
 // https://cloud.google.com/storage/docs/samples/storage-cors-configuration#storage_cors_configuration-nodejs
 
@@ -14,7 +14,7 @@ type RouterHandler = (
 ) => Promise<void>
 
 export const setBucketCorsHandler: RouterHandler = async (req, res, next) => {
-  const { roles } = getUserFromRefreshToken({ req })
+  const { roles } = getUserFromRefreshTokenOrJohn({ req })
 
   if (!roles.includes(userRole.superAdmin)) {
     res.status(httpStatus.forbidden_403).json({ message: 'forbidden' })

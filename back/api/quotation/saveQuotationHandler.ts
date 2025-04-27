@@ -3,7 +3,7 @@ import type { FlattenMaps } from 'mongoose'
 import type { Quotation } from '@entities/quotation'
 import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { bucket, gitFileInfo } from '@back/shared/services/storage'
+import { bucket, getFileInfo } from '@back/shared/services/storage'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { QuotationModel } from '@back/entities/quotation'
 import { generateId } from '@back/shared/lib/nanoid'
@@ -83,7 +83,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
     const quotationDataFromDb = createQuotationResponse.toObject()
 
-    const { path } = gitFileInfo({
+    const { path } = getFileInfo({
       fileType: 'quotation',
       quotationId,
     })
@@ -125,7 +125,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
     const quotationDataFromDb = updateQuotationResponse.toObject()
 
-    const { path } = gitFileInfo({
+    const { path } = getFileInfo({
       fileType: 'quotation',
       quotationId: quotation.id,
     })
@@ -163,7 +163,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
     const quotationDataFromDb = createResponse.toObject()
 
-    const { path } = gitFileInfo({
+    const { path } = getFileInfo({
       fileType: 'quotation',
       quotationId: newQuotationId,
     })

@@ -33,7 +33,7 @@ type Res = {
   url: string
 }
 
-export const gitFileInfo = (props: Props): Res => {
+export const getFileInfo = (props: Props): Res => {
   if (props.fileType === 'quotation') {
     const fileInfo = {
       path: `quotations/${props.quotationId}`,
