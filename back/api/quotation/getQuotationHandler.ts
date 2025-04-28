@@ -105,7 +105,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
     })
   }
 
-  const { path } = getFileInfo({ fileType: 'quotation', quotationId })
+  const { path } = getFileInfo({ id: quotationId })
   const [fileBuffer] = await bucket.file(path).download()
   const quotation = jsonParseSafe<Quotation>(fileBuffer.toString())
 

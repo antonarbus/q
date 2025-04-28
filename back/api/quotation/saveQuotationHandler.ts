@@ -121,11 +121,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
     const quotationDataFromDb = updateQuotationResponse.toObject()
 
-    const { path } = getFileInfo({
-      fileType: 'quotation',
-      quotationId: quotation.id,
-    })
-
+    const { path } = getFileInfo({ id: quotation.id })
     const file = bucket.file(path)
     const fullQuotation = { ...quotationDataFromDb, blocks: quotation.blocks }
     const quotationJson = JSON.stringify(fullQuotation, null, 2)
@@ -158,12 +154,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
     })
 
     const quotationDataFromDb = createResponse.toObject()
-
-    const { path } = getFileInfo({
-      fileType: 'quotation',
-      quotationId: newQuotationId,
-    })
-
+    const { path } = getFileInfo({ id: newQuotationId })
     const quotationFile = bucket.file(path)
     const fullQuotation = { ...quotationDataFromDb, blocks: quotation.blocks }
     const quotationJson = JSON.stringify(fullQuotation, null, 2)
