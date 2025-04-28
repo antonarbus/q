@@ -85,7 +85,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
     const { path } = getFileInfo({
       fileType: 'quotation',
-      id: quotationId,
+      quotationId,
     })
 
     const quotationFile = bucket.file(path)
@@ -127,7 +127,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
     const { path } = getFileInfo({
       fileType: 'quotation',
-      id: quotation.id,
+      quotationId: quotation.id,
     })
 
     const file = bucket.file(path)
@@ -165,7 +165,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
     const { path } = getFileInfo({
       fileType: 'quotation',
-      id: newQuotationId,
+      quotationId: newQuotationId,
     })
 
     const quotationFile = bucket.file(path)

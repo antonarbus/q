@@ -33,7 +33,7 @@ export const fileUploadSignedUrlHandler: RouterHandler = async (
   getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   const fileId = generateId()
-  const { path, url } = getFileInfo({ fileType: 'file', id: fileId })
+  const { path, url } = getFileInfo({ fileType: 'file', fileId })
   const file = bucket.file(path) // Get reference to the file in the bucket
 
   try {

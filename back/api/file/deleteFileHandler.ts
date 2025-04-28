@@ -37,7 +37,7 @@ export const deleteFileHandler: RouterHandler = async (req, res, next) => {
       return 'file not found'
     }
 
-    if (fileInfo.uploadedByEmail !== email) {
+    if (fileInfo.email !== email) {
       return 'not owner'
     }
 
@@ -62,14 +62,14 @@ export const deleteFileHandler: RouterHandler = async (req, res, next) => {
 
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (fileOwnerShip === 'owner') {
-    const { path } = getFileInfo({ fileType: 'file', id: fileId })
+    const { path } = getFileInfo({ fileType: 'file', fileId })
 
     try {
       const deleteFromBucketPromise = bucket.file(path).delete()
 
       const deleteFromDatabasePromise = FileModel.deleteOne({
         id: fileId,
-        uploadedByEmail: email,
+        email,
       })
 
       await Promise.all([deleteFromBucketPromise, deleteFromDatabasePromise])

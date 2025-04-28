@@ -101,7 +101,7 @@ export type Paste = Common & {
 
 export type Item = Boq | Paste | Text | Price | Row
 
-// todo: replace "sharedWith" with "access"
+// todo: replaced "sharedWith" with Access
 // type Access =
 //   | { level: 'everyone' }
 //   | { level: 'nobody' }

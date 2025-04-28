@@ -23,9 +23,9 @@ export const bucket = storageInstance.bucket(bucketName)
 
 const STORAGE_BASE_URL = `https://storage.googleapis.com/${bucketName}`
 
-type Props1 = { fileType: 'file'; id: string }
-type Props2 = { fileType: 'quotation'; id: string }
-type Props3 = { fileType: 'bookmark'; id: string }
+type Props1 = { fileType: 'file'; fileId: string }
+type Props2 = { fileType: 'quotation'; quotationId: string }
+type Props3 = { fileType: 'bookmark'; bookmarkId: string }
 type Props = Props1 | Props2 | Props3
 
 type Res = {
@@ -36,8 +36,8 @@ type Res = {
 export const getFileInfo = (props: Props): Res => {
   if (props.fileType === 'quotation') {
     const fileInfo = {
-      path: `documents/${props.id}`,
-      url: `${STORAGE_BASE_URL}/documents/${props.id}`,
+      path: `quotations/${props.quotationId}`,
+      url: `${STORAGE_BASE_URL}/quotations/${props.quotationId}`,
     }
 
     return fileInfo
@@ -45,16 +45,16 @@ export const getFileInfo = (props: Props): Res => {
 
   if (props.fileType === 'bookmark') {
     const fileInfo = {
-      path: `documents/${props.id}`,
-      url: `${STORAGE_BASE_URL}/documents/${props.id}`,
+      path: `bookmarks/${props.bookmarkId}`,
+      url: `${STORAGE_BASE_URL}/bookmarks/${props.bookmarkId}`,
     }
 
     return fileInfo
   }
 
   const fileInfo = {
-    path: `uploads/${props.id}`,
-    url: `${STORAGE_BASE_URL}/uploads/${props.id}`,
+    path: `files/${props.fileId}`,
+    url: `${STORAGE_BASE_URL}/files/${props.fileId}`,
   }
 
   return fileInfo

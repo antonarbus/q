@@ -1,8 +1,8 @@
 export type File = {
   id: string
+  email: string
+  uploadedAt: Date
   name: string
   size: number
-  uploadedByEmail: string
-  uploadedAt: Date
-  usedByDocumentIdList: string[]
+  usedByIdList: string[]
 }
