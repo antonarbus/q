@@ -8,7 +8,7 @@ const fileSchema = new Schema<File>({
     unique: true,
     index: true,
   },
-  email: {
+  uploadedByEmail: {
     type: String,
     required: true,
     index: true,

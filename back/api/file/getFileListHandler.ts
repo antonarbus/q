@@ -23,7 +23,7 @@ type RouterHandler = (
 export const getFileListHandler: RouterHandler = async (req, res, next) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
-  const fileList = await FileModel.find({ email })
+  const fileList = await FileModel.find({ uploadedByEmail: email })
     .select({ _id: 0, id: 1, name: 1, size: 1 })
     .lean()
 

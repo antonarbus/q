@@ -35,7 +35,7 @@ export const saveFileInfoHandler: RouterHandler = async (req, res, next) => {
   try {
     const createFileDocRes = await FileModel.create({
       id: fileId,
-      email,
+      uploadedByEmail: email,
       name: fileName,
       size: fileSize,
     })
