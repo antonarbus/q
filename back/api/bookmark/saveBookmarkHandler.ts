@@ -78,7 +78,7 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, next) => {
     .lean()
 
   const { path } = getFileInfo({
-    fileType: 'bookmark',
+    fileType: 'document',
     id: bookmarkItem.id,
   })
 

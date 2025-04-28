@@ -43,7 +43,7 @@ export const deleteQuotationHandler: RouterHandler = async (req, res, next) => {
   }
 
   const { path } = getFileInfo({
-    fileType: 'quotation',
+    fileType: 'document',
     id: quotationId,
   })
 
