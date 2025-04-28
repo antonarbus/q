@@ -112,7 +112,7 @@ export const SettingsModal = (): React.JSX.Element => {
                 <Box
                   sx={{
                     display: 'grid',
-                    gridTemplateColumns: '20px auto 50px',
+                    gridTemplateColumns: '20px auto 50px 15px',
                     gap: '10px',
                     alignItems: 'center',
                   }}
