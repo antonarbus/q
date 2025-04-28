@@ -104,14 +104,16 @@ export const SettingsModal = (): React.JSX.Element => {
                 in={collapseOpen}
                 timeout='auto'
                 unmountOnExit
+                sx={{
+                  width: '100%',
+                }}
               >
                 <Box
                   sx={{
                     display: 'grid',
-                    gridTemplateColumns: 'auto 1fr auto 20px',
+                    gridTemplateColumns: '20px auto 50px',
                     gap: '10px',
                     alignItems: 'center',
-                    width: '100%',
                   }}
                 >
                   {data.fileList.map((item) => {
