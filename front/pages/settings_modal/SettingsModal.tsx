@@ -12,6 +12,7 @@ import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
 import { CardCustom } from '@shared/components/CardCustom'
 import { MdExpandLess, MdExpandMore } from 'react-icons/md'
 import { FiFileText } from 'react-icons/fi'
+import { DeleteFileIcon } from '@features/file/delete_file'
 
 export const SettingsModal = (): React.JSX.Element => {
   const cardRef = useRef<HTMLDivElement>(null)
@@ -146,6 +147,7 @@ export const SettingsModal = (): React.JSX.Element => {
                             decimalPlaces: 0,
                           })}
                         </Box>
+                        <DeleteFileIcon fileId={item.id} />
                       </Fragment>
                     )
                   })}

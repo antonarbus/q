@@ -1,0 +1,1 @@
+export { DeleteFileIcon } from './DeleteFileIcon'
