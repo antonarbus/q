@@ -101,6 +101,12 @@ export type Paste = Common & {
 
 export type Item = Boq | Paste | Text | Price | Row
 
+// todo: replaced "sharedWith" with Access
+// type Access =
+//   | { level: 'everyone' }
+//   | { level: 'nobody' }
+//   | { level: 'custom'; userList: string[] }
+
 export type Quotation = Common & {
   type: 'quotation'
   createdAt?: Date

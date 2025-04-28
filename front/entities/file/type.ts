@@ -4,4 +4,5 @@ export type File = {
   uploadedAt: Date
   name: string
   size: number
+  usedByIdList: string[]
 }
