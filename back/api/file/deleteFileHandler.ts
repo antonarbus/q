@@ -62,7 +62,7 @@ export const deleteFileHandler: RouterHandler = async (req, res, next) => {
 
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (fileOwnerShip === 'owner') {
-    const { path } = getFileInfo({ fileType: 'file', fileId })
+    const { path } = getFileInfo({ id: fileId })
 
     try {
       const deleteFromBucketPromise = bucket.file(path).delete()

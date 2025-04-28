@@ -23,38 +23,17 @@ export const bucket = storageInstance.bucket(bucketName)
 
 const STORAGE_BASE_URL = `https://storage.googleapis.com/${bucketName}`
 
-type Props1 = { fileType: 'file'; fileId: string }
-type Props2 = { fileType: 'quotation'; quotationId: string }
-type Props3 = { fileType: 'bookmark'; bookmarkId: string }
-type Props = Props1 | Props2 | Props3
+type Props = { id: string }
 
 type Res = {
   path: string
   url: string
 }
 
-export const getFileInfo = (props: Props): Res => {
-  if (props.fileType === 'quotation') {
-    const fileInfo = {
-      path: `quotations/${props.quotationId}`,
-      url: `${STORAGE_BASE_URL}/quotations/${props.quotationId}`,
-    }
-
-    return fileInfo
-  }
-
-  if (props.fileType === 'bookmark') {
-    const fileInfo = {
-      path: `bookmarks/${props.bookmarkId}`,
-      url: `${STORAGE_BASE_URL}/bookmarks/${props.bookmarkId}`,
-    }
-
-    return fileInfo
-  }
-
+export const getFileInfo = ({ id }: Props): Res => {
   const fileInfo = {
-    path: `files/${props.fileId}`,
-    url: `${STORAGE_BASE_URL}/files/${props.fileId}`,
+    path: id,
+    url: `${STORAGE_BASE_URL}/${id}`,
   }
 
   return fileInfo

@@ -83,11 +83,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
 
     const quotationDataFromDb = createQuotationResponse.toObject()
 
-    const { path } = getFileInfo({
-      fileType: 'quotation',
-      quotationId,
-    })
-
+    const { path } = getFileInfo({ id: quotationId })
     const quotationFile = bucket.file(path)
     const fullQuotation = { ...quotationDataFromDb, blocks: quotation.blocks }
     const quotationJson = JSON.stringify(fullQuotation, null, 2)

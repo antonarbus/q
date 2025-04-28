@@ -34,7 +34,7 @@ export const proxyFileToBucketHandler: RouterHandler = async (
   }
 
   try {
-    const { path } = getFileInfo({ fileType: 'file', fileId })
+    const { path } = getFileInfo({ id: fileId })
 
     const [signedUrl] = await bucket.file(path).getSignedUrl({
       version: 'v4',

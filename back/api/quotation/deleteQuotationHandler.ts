@@ -42,11 +42,7 @@ export const deleteQuotationHandler: RouterHandler = async (req, res, next) => {
     return
   }
 
-  const { path } = getFileInfo({
-    fileType: 'quotation',
-    quotationId,
-  })
-
+  const { path } = getFileInfo({ id: quotationId })
   const [{ statusCode }] = await bucket.file(path).delete()
 
   if (statusCode === 204) {
