@@ -2,12 +2,12 @@ import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
 import { copySlice } from '@entities/copy'
 import { type Boq, boqRowKey, itemType } from '@entities/quotation'
-import { nanoid } from '@shared/lib/nanoid'
+import { generateId } from '@shared/lib/nanoid'
 import { textSlice } from '@shared/lib/froala/textSlice'
 
 export const insertBoqBlock = (e?: MouseEvent): void => {
   const boqBlock: Boq = {
-    id: nanoid(5),
+    id: generateId(),
     type: itemType.boq,
     email: 'john@mail.com',
     width: 600,
@@ -351,7 +351,7 @@ export const insertBoqBlock = (e?: MouseEvent): void => {
       },
       rows: [
         {
-          id: nanoid(5),
+          id: generateId(),
           type: boqRowKey.row,
           email: 'john@mail.com',
           height: 0,
@@ -390,7 +390,7 @@ export const insertBoqBlock = (e?: MouseEvent): void => {
           },
         },
         {
-          id: nanoid(5),
+          id: generateId(),
           type: boqRowKey.row,
           email: 'john@mail.com',
           height: 0,
@@ -429,7 +429,7 @@ export const insertBoqBlock = (e?: MouseEvent): void => {
           },
         },
         {
-          id: nanoid(5),
+          id: generateId(),
           type: boqRowKey.row,
           email: 'john@mail.com',
           height: 0,

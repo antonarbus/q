@@ -7,7 +7,7 @@ import {
   useBlock,
   boqRowKey,
 } from '@entities/quotation'
-import { nanoid } from '@shared/lib/nanoid'
+import { generateId } from '@shared/lib/nanoid'
 import { BoqRowsLayout } from './BoqRowsLayout'
 import { BoqRowsSortableContext } from './BoqRowsSortableContext'
 import { BoqPasteRowTextOverlay } from './row/BoqPasteRowTextOverlay'
@@ -50,7 +50,7 @@ export const BoqRows = (): React.JSX.Element => {
             }
 
             // boqRow.type = 'paste'
-            return <BoqPasteRowTextOverlay key={nanoid(5)} />
+            return <BoqPasteRowTextOverlay key={generateId()} />
           })}
         </AnimatePresence>
       </BoqRowsSortableContext>

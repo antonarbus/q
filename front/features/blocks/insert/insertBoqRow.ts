@@ -2,12 +2,12 @@ import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
 import { copySlice } from '@entities/copy'
 import { boqRowKey, type Row } from '@entities/quotation'
-import { nanoid } from '@shared/lib/nanoid'
+import { generateId } from '@shared/lib/nanoid'
 import { textSlice } from '@shared/lib/froala/textSlice'
 
 export const insertBoqRow = (e?: MouseEvent): void => {
   const boqRow: Row = {
-    id: nanoid(5),
+    id: generateId(),
     type: boqRowKey.row,
     email: 'john@mail.com',
     height: 55,

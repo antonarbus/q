@@ -4,7 +4,7 @@ import type { Quotation } from '@entities/quotation'
 const quotationSchema = new Schema<Quotation>({
   id: {
     type: String,
-    // default: () => nanoid(5),
+    // default: () => generateId(),
     required: true,
     unique: true,
     index: true,

@@ -2,12 +2,12 @@ import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
 import { copySlice } from '@entities/copy'
 import { type Text, itemType } from '@entities/quotation'
-import { nanoid } from '@shared/lib/nanoid'
+import { generateId } from '@shared/lib/nanoid'
 import { textSlice } from '@shared/lib/froala/textSlice'
 
 export const insertTextBlock = (e?: MouseEvent): void => {
   const block: Text = {
-    id: nanoid(5),
+    id: generateId(),
     type: itemType.text,
     email: 'john@mail.com',
     width: 600,

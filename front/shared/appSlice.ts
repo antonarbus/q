@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
-import { nanoid } from '@shared/lib/nanoid'
+import { generateId } from '@shared/lib/nanoid'
 
 type State = {
   quotationKey: string
@@ -11,7 +11,7 @@ type State = {
 }
 
 const initialState: State = {
-  quotationKey: nanoid(5),
+  quotationKey: generateId(),
   backgroundMessage: '',
   loadingOverlay: {
     showLoader: false,
@@ -24,7 +24,7 @@ export const appSlice = createSlice({
   initialState,
   reducers: {
     reRenderQuotation: (state) => {
-      state.quotationKey = nanoid(5)
+      state.quotationKey = generateId()
     },
     setBackgroundMessage: (
       state,

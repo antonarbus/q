@@ -3,7 +3,7 @@ import './froalaPkg'
 import './froalaPkg.css'
 import type { MouseEvent } from 'react'
 import { useEffectOnce } from 'react-use'
-import { nanoid } from '@shared/lib/nanoid'
+import { generateId } from '@shared/lib/nanoid'
 import type { FroalaEditorRef } from '@shared/types/froala'
 import { useFroala } from '../../providers/FroalaProvider'
 import { froalaDefaultOptions } from './froalaDefaultOptions'
@@ -110,7 +110,7 @@ export const useStartFroala = (): void => {
           'image.loaded'(props: { '0': HTMLImageElement }): void {
             const imageElement = props['0']
             imageElement.style.aspectRatio = `${imageElement.clientWidth}/${imageElement.clientHeight}`
-            imageElement.id = `img-${nanoid(5)}`
+            imageElement.id = `img-${generateId()}`
             imageElement.classList.add('fr-rounded')
           },
           // 'commands.before'(cmd: string, param1, param2) {

@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { PastePos } from '@entities/copy'
-import { nanoid } from '@shared/lib/nanoid'
+import { generateId } from '@shared/lib/nanoid'
 import { boqRowKey } from '../../consts/boqRowKey'
 import { itemType } from '../../consts/itemType'
 import type { Item, Quotation } from '../../types'
@@ -22,7 +22,7 @@ export const pasteItemReducer = (
     const boqRows = itemToPaste.boq.rows
 
     boqRows.forEach((boqRow) => {
-      boqRow.id = nanoid(5)
+      boqRow.id = generateId()
     })
   }
 

@@ -1,4 +1,4 @@
-import { nanoid } from '@shared/lib/nanoid'
+import { generateId } from '@shared/lib/nanoid'
 import { boqRowKey } from './consts/boqRowKey'
 import { itemType } from './consts/itemType'
 import type { Quotation } from './types'
@@ -12,7 +12,7 @@ export const newQuotationTemplate: Quotation = {
   preview: '',
   blocks: [
     {
-      id: nanoid(5),
+      id: generateId(),
       type: itemType.text,
       email: 'john@mail.com',
       width: 600,
@@ -24,7 +24,7 @@ export const newQuotationTemplate: Quotation = {
       },
     },
     {
-      id: nanoid(5),
+      id: generateId(),
       type: itemType.boq,
       email: 'john@mail.com',
       width: 600,
@@ -69,7 +69,7 @@ export const newQuotationTemplate: Quotation = {
         },
         rows: [
           {
-            id: nanoid(5),
+            id: generateId(),
             type: boqRowKey.row,
             email: 'john@mail.com',
             height: 0,
@@ -108,7 +108,7 @@ export const newQuotationTemplate: Quotation = {
             },
           },
           {
-            id: nanoid(5),
+            id: generateId(),
             type: boqRowKey.row,
             email: 'john@mail.com',
             height: 0,
@@ -147,7 +147,7 @@ export const newQuotationTemplate: Quotation = {
             },
           },
           {
-            id: nanoid(5),
+            id: generateId(),
             type: boqRowKey.row,
             email: 'john@mail.com',
             height: 0,
@@ -189,7 +189,7 @@ export const newQuotationTemplate: Quotation = {
       },
     },
     {
-      id: nanoid(5),
+      id: generateId(),
       type: itemType.price,
       email: 'john@mail.com',
       width: 150,
@@ -205,7 +205,7 @@ export const newQuotationTemplate: Quotation = {
       },
     },
     {
-      id: nanoid(5),
+      id: generateId(),
       type: itemType.text,
       email: 'john@mail.com',
       width: 600,

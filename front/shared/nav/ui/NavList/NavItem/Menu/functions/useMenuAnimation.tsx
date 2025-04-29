@@ -5,8 +5,8 @@ import { useFirstMountState } from 'react-use'
 import { elementHeight } from '@shared/utils/elementHeight'
 import { navSlice } from '@shared/nav/navSlice'
 import { animate } from 'motion'
-import { nanoid } from '@reduxjs/toolkit'
 import type { NavItemId } from '@shared/consts/navItemId'
+import { generateId } from '@shared/lib/nanoid'
 
 type PropsForNavigateInMenu = {
   up: () => Promise<void> | void
@@ -43,7 +43,7 @@ export const useMenuAnimation = ({
   const duration = 0.5
   const isGoingDown = useRef(true)
 
-  const [animateHeight, setAnimateHeight] = useState(nanoid())
+  const [animateHeight, setAnimateHeight] = useState(generateId())
 
   const getFakeElementHeight = (): number => {
     if (!(fakeMenuRef.current instanceof HTMLElement)) {
@@ -90,7 +90,7 @@ export const useMenuAnimation = ({
 
     dispatch(navSlice.actions.goDownInNextMenu({ navItemId }))
 
-    setAnimateHeight(nanoid())
+    setAnimateHeight(generateId())
 
     await Promise.all([
       animate(currentMenuRef.current, { x: ['0%', '-100%'] }, { duration }),
@@ -113,7 +113,7 @@ export const useMenuAnimation = ({
 
     dispatch(navSlice.actions.goUpInCurrentMenu())
 
-    setAnimateHeight(nanoid())
+    setAnimateHeight(generateId())
 
     await Promise.all([
       animate(currentMenuRef.current, { x: ['-100%', '0%'] }, { duration }),
