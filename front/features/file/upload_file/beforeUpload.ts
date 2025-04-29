@@ -168,7 +168,7 @@ export const beforeUpload: BeforeUpload = async (props) => {
   }
 
   if (props.type === 'file') {
-    props.editor.file.insert(`./uploads/${signedUrlRes.fileId}`, file.name, {
+    props.editor.file.insert(`/uploads/${signedUrlRes.fileId}`, file.name, {
       link: `/uploads/${signedUrlRes.fileId}`,
     })
   }

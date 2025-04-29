@@ -128,9 +128,7 @@ export const SettingsModal = (): React.JSX.Element => {
                         style={{ width: '20px' }}
                       />
                       <a
-                        href={`./uploads/${item.id}`}
-                        target='_blank'
-                        rel='noreferrer'
+                        href={`/uploads/${item.id}`}
                         style={{
                           fontSize: '12px',
                           whiteSpace: 'nowrap',
