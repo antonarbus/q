@@ -109,49 +109,56 @@ export const SettingsModal = (): React.JSX.Element => {
                   width: '100%',
                 }}
               >
-                <Box
-                  sx={{
-                    display: 'grid',
-                    gridTemplateColumns: '20px auto 50px 15px',
-                    gap: '10px',
-                    alignItems: 'center',
-                  }}
-                >
-                  {data.fileList.map((item) => {
-                    return (
-                      <Fragment key={item.id}>
-                        <FiFileText color='grey' />
-                        <a
-                          href={`./uploads/${item.id}`}
-                          target='_blank'
-                          rel='noreferrer'
-                          style={{
-                            fontSize: '12px',
-                            whiteSpace: 'nowrap',
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                          }}
-                        >
-                          {item.name}
-                        </a>
-                        <Box
-                          sx={{
-                            textAlign: 'right',
-                            fontSize: '12px',
-                          }}
-                        >
-                          {format(item.size, {
-                            unit: item.size < 1_048_576 ? 'kb' : 'mb',
-                            thousandsSeparator: ' ',
-                            unitSeparator: ' ',
-                            decimalPlaces: 0,
-                          })}
-                        </Box>
-                        <DeleteFileIcon fileId={item.id} />
-                      </Fragment>
-                    )
-                  })}
-                </Box>
+                {data.fileList.map((item) => {
+                  return (
+                    <Box
+                      key={item.id}
+                      sx={{
+                        display: 'flex',
+                        gap: '5px',
+                        padding: '4px',
+                        borderRadius: '2px',
+                        ':hover': {
+                          background: '#a7a7a729',
+                        },
+                      }}
+                    >
+                      <FiFileText
+                        color='grey'
+                        style={{ width: '20px' }}
+                      />
+                      <a
+                        href={`./uploads/${item.id}`}
+                        target='_blank'
+                        rel='noreferrer'
+                        style={{
+                          fontSize: '12px',
+                          whiteSpace: 'nowrap',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          flex: 1,
+                        }}
+                      >
+                        {item.name}
+                      </a>
+                      <Box
+                        sx={{
+                          textAlign: 'right',
+                          fontSize: '12px',
+                          width: '50px',
+                        }}
+                      >
+                        {format(item.size, {
+                          unit: item.size < 1_048_576 ? 'kb' : 'mb',
+                          thousandsSeparator: ' ',
+                          unitSeparator: ' ',
+                          decimalPlaces: 0,
+                        })}
+                      </Box>
+                      <DeleteFileIcon fileId={item.id} />
+                    </Box>
+                  )
+                })}
               </Collapse>
             </>
           )}
