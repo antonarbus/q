@@ -1,4 +1,4 @@
-import type { ResBody } from '@back/api/dev/healthHandler'
+import type { ResBody } from '@back/api/dev/healthCheckHandler'
 import { api } from '@back/api'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import axios, { type AxiosError, type AxiosResponse } from 'axios'

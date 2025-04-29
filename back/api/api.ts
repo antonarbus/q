@@ -13,7 +13,7 @@ import { getBookmarkCategoriesHandler } from '@back/api/bookmark/getBookmarkCate
 import { getBookmarksHandler } from '@back/api/bookmark/getBookmarksHandler'
 import { saveBookmarkHandler } from '@back/api/bookmark/saveBookmarkHandler'
 import { getBucketCorsHandler } from '@back/api/dev/getBucketCorsHandler'
-import { healthHandler } from '@back/api/dev/healthHandler'
+import { healthCheckHandler } from '@back/api/dev/healthCheckHandler'
 import { rootHandler } from '@back/api/dev/rootHandler'
 import { rootApiHandler } from '@back/api/dev/rootApiHandler'
 import { setBucketCorsHandler } from '@back/api/dev/setBucketCorsHandler'
@@ -63,9 +63,9 @@ export const api = {
     `,
   },
   health: {
-    url: '/api/health',
+    url: '/api/health-check',
     method: 'get',
-    handler: healthHandler,
+    handler: healthCheckHandler,
     description: `
       Google Cloud Run checks this endpoint to see if the app is alive. 
       It checks if ExpressJS and DB connection are OK.
