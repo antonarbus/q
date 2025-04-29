@@ -28,4 +28,6 @@ export const queryKey = {
   getUniqueDailyVisitors: 'getUniqueDailyVisitors',
   // settings
   getFilesStats: 'getFilesStats',
+  // dev
+  healthCheck: 'healthCheck',
 } as const

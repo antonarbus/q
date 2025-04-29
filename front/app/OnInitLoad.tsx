@@ -3,6 +3,7 @@ import { useCountUniqueDailyVisitor } from '@features/init_load/useCountUniqueDa
 import { useHideInitHtmlElements } from '@features/init_load/useHideInitHtmlElements'
 import { useRemoveThirdPartyCookies } from '@features/init_load/useRemoveThirdPartyCookies'
 import { useShowDragAndDropArea } from '@features/file/upload_file'
+import { useConnectionToBackendCheck } from '@features/init_load/useConnectionToBackend'
 
 export const OnInitLoad = (): React.ReactNode => {
   useLogoutIfAccessTokenExpired()
@@ -10,6 +11,7 @@ export const OnInitLoad = (): React.ReactNode => {
   useShowDragAndDropArea()
   useRemoveThirdPartyCookies()
   useCountUniqueDailyVisitor()
+  useConnectionToBackendCheck()
 
   return null
 }
