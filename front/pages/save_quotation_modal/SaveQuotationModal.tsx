@@ -34,7 +34,10 @@ export const SaveQuotationModal = (): React.JSX.Element => {
   }
 
   const { data } = useGetQuotationCategoriesQuery()
-  const options = (data?.categories ?? []).filter((cat) => cat !== undefined)
+
+  const options = (data?.categories ?? [])
+    .filter((cat) => cat !== undefined)
+    .filter((cat) => cat !== '')
 
   return (
     <FormModal
