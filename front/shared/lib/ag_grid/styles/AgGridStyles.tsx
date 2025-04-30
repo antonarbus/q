@@ -9,6 +9,7 @@ export const AgGridStyles = (): React.JSX.Element => {
         .q-table {
           // https://www.ag-grid.com/react-data-grid/global-style-customisation-variables/
           --ag-row-hover-color: #dcdcdc24;
+          --ag-data-font-size: 12px;
 
           .ag-header-cell-label {
             justify-content: center;
