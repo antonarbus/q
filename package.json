@@ -33,6 +33,7 @@
     "check": "npm run tsc && npm run lint && npm run prettier && npm run test && npm run playwright",
     "fsd": "npx steiger ./front",
     "find_unused_files": "knip",
+    "circular_deps": "npx madge --circular front/src/",
     "docker_prod_build": "docker compose -f docker-compose.prod.yml build",
     "docker_prod_up": "docker compose -f docker-compose.prod.yml up"
   },
