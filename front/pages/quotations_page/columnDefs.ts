@@ -100,5 +100,6 @@ export const columnDefs: ColDef<QuotationPick>[] = [
     field: 'access',
     headerName: 'shared with',
     cellRenderer: SharedWithCellRenderer,
+    valueFormatter: () => '', // to suppress the warning "Cell data type is "object" but no Value Formatter has been provided"
   },
 ]
