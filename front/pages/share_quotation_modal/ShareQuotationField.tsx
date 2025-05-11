@@ -9,28 +9,22 @@ import {
   RadioGroup,
   TextField,
 } from '@mui/material'
-import { type Signal, useSignal } from '@preact/signals-react'
+import { useSignal } from '@preact/signals-react'
 import { AnimatePresence, motion } from 'motion/react'
 import uniq from 'lodash.uniq'
 import { useEffect } from 'react'
 import { BsFillPersonPlusFill } from 'react-icons/bs'
 import { MdGroups, MdGroupOff } from 'react-icons/md'
-import type { Quotation } from '@entities/quotation'
+import type { AccessFormValuesSignal, Quotation } from '@entities/quotation'
 import { OutlinedDivWithLabel } from '@shared/components/OutlinedDivWithLabel'
-import {
-  type SharedWithOption,
-  sharedWithOption,
-} from '@shared/consts/sharedWithOption'
 import { isEmailPatternOk } from '@shared/utils/isEmailPatternOk'
 
 type Props = {
-  shareWithOptionSignal: Signal<SharedWithOption>
-  sharedWithSignal: Signal<Quotation['sharedWith']>
+  accessFormValuesSignal: AccessFormValuesSignal
 }
 
 export const ShareQuotationField = ({
-  shareWithOptionSignal,
-  sharedWithSignal,
+  accessFormValuesSignal,
 }: Props): React.JSX.Element => {
   const emailSignal = useSignal('')
   const isButtonDisabledSignal = useSignal(true)
@@ -58,24 +52,14 @@ export const ShareQuotationField = ({
           >
             <RadioGroup
               name='controlled-radio-buttons-group'
-              value={shareWithOptionSignal.value}
+              value={accessFormValuesSignal.value.level}
               onChange={(event): void => {
-                const value = event.target.value as SharedWithOption
-                shareWithOptionSignal.value = value
+                const selectedAccessLevel = event.target
+                  .value as Quotation['access']['level']
 
-                if (
-                  shareWithOptionSignal.value === sharedWithOption.everybody
-                ) {
-                  sharedWithSignal.value = ['*']
-                }
-
-                if (shareWithOptionSignal.value === sharedWithOption.nobody) {
-                  sharedWithSignal.value = []
-                }
-
-                if (shareWithOptionSignal.value === sharedWithOption.persons) {
-                  // to make it empty as initial unshared option
-                  sharedWithSignal.value = []
+                accessFormValuesSignal.value = {
+                  level: selectedAccessLevel,
+                  userList: accessFormValuesSignal.value.userList,
                 }
               }}
               sx={{
@@ -93,12 +77,10 @@ export const ShareQuotationField = ({
               >
                 <MdGroupOff style={{ opacity: 0.7 }} />
                 <FormControlLabel
-                  value={sharedWithOption.nobody}
-                  label={sharedWithOption.nobody}
-                  disabled={
-                    shareWithOptionSignal.value === sharedWithOption.nobody
-                  }
+                  value='nobody'
+                  label='Nobody'
                   control={<Radio size='small' />}
+                  disabled={accessFormValuesSignal.value.level === 'nobody'}
                 />
               </Box>
               <Box
@@ -112,12 +94,10 @@ export const ShareQuotationField = ({
                   style={{ opacity: 0.7, scale: '1.2', translate: '-1px 0px' }}
                 />
                 <FormControlLabel
-                  value={sharedWithOption.everybody}
-                  label={sharedWithOption.everybody}
-                  disabled={
-                    shareWithOptionSignal.value === sharedWithOption.everybody
-                  }
+                  value='everyone'
+                  label='Everyone'
                   control={<Radio size='small' />}
+                  disabled={accessFormValuesSignal.value.level === 'everyone'}
                 />
               </Box>
               <Box
@@ -130,16 +110,14 @@ export const ShareQuotationField = ({
               >
                 <BsFillPersonPlusFill style={{ opacity: 0.7 }} />
                 <FormControlLabel
-                  value={sharedWithOption.persons}
-                  label={sharedWithOption.persons}
-                  disabled={
-                    shareWithOptionSignal.value === sharedWithOption.persons
-                  }
+                  value='custom'
+                  label='Custom'
                   control={<Radio size='small' />}
+                  disabled={accessFormValuesSignal.value.level === 'custom'}
                 />
               </Box>
             </RadioGroup>
-            {shareWithOptionSignal.value === sharedWithOption.persons && (
+            {accessFormValuesSignal.value.level === 'custom' && (
               <TextField
                 autoFocus
                 focused
@@ -177,10 +155,15 @@ export const ShareQuotationField = ({
                               return
                             }
 
-                            sharedWithSignal.value = uniq([
-                              ...(sharedWithSignal.value ?? []),
+                            const userListWithAddedItem = uniq([
+                              ...accessFormValuesSignal.value.userList,
                               emailSignal.value,
-                            ]).filter((email) => email !== '*')
+                            ])
+
+                            accessFormValuesSignal.value = {
+                              level: accessFormValuesSignal.value.level,
+                              userList: userListWithAddedItem,
+                            }
 
                             emailSignal.value = ''
                           }}
@@ -194,8 +177,8 @@ export const ShareQuotationField = ({
               />
             )}
           </Box>
-          {shareWithOptionSignal.value === sharedWithOption.persons &&
-            (sharedWithSignal.value ?? []).length > 0 && (
+          {accessFormValuesSignal.value.level === 'custom' &&
+            accessFormValuesSignal.value.userList.length > 0 && (
               <Box
                 ref={chipsParent}
                 key='emails-chips'
@@ -218,26 +201,30 @@ export const ShareQuotationField = ({
                   flexDirection: 'row-reverse',
                 }}
               >
-                {(sharedWithSignal.value ?? [])
-                  .filter((email) => email !== '*')
-                  .map((email) => {
-                    return (
-                      <Chip
-                        key={email}
-                        label={email}
-                        onDelete={() => {
-                          sharedWithSignal.value = (
-                            sharedWithSignal.value ?? []
-                          ).filter((emailInArray) => emailInArray !== email)
-                        }}
-                        sx={{
-                          width: 'min-content',
-                          margin: '2px',
-                          fontSize: '12px',
-                        }}
-                      />
-                    )
-                  })}
+                {accessFormValuesSignal.value.userList.map((email) => {
+                  return (
+                    <Chip
+                      key={email}
+                      label={email}
+                      onDelete={() => {
+                        const userListWithoutDeletedItem =
+                          accessFormValuesSignal.value.userList.filter(
+                            (emailInArray) => emailInArray !== email,
+                          )
+
+                        accessFormValuesSignal.value = {
+                          level: accessFormValuesSignal.value.level,
+                          userList: userListWithoutDeletedItem,
+                        }
+                      }}
+                      sx={{
+                        width: 'min-content',
+                        margin: '2px',
+                        fontSize: '12px',
+                      }}
+                    />
+                  )
+                })}
               </Box>
             )}
         </AnimatePresence>

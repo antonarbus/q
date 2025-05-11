@@ -38,7 +38,6 @@ export { updateSubTotalPriceWithValue } from './utils/updateSubTotalPriceWithVal
 export { formatBoqRowCellNumber } from './utils/formatBoqRowCellNumber'
 export { getNumberOfBoqBlocksAbove } from './utils/getNumberOfBoqBlocksAbove'
 export { getTotalPriceAbove } from './utils/getTotalPriceAbove'
-export { getWhoQuotationSharedWithOption } from './utils/getWhoQuotationSharedWithOption'
 export { setBackToQuotation } from './utils/setBackToQuotation'
 
 // store item getters
@@ -110,6 +109,6 @@ export type {
   Item,
   Quotation,
   SaveQuotationFormValues,
-  ShareQuotationFormValues,
+  AccessFormValuesSignal,
   InfoFormValues,
 } from './types'

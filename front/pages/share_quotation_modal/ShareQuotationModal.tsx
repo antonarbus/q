@@ -5,23 +5,23 @@ import { useIsButtonDisabled } from './useIsButtonDisabled'
 import { router } from '@shared/lib/router'
 import { useSlide } from '@shared/utils/useSlide'
 import { ImLink } from 'react-icons/im'
+import { useShareQuotation } from '@features/quotation/share_quotation'
+import { getState } from '@shared/lib/redux'
 import {
   useLoadInitValuesIntoShareQuotationModal,
   useLoadShareQuotationModalWithDirectLink,
 } from '@features/open_close/open_share_quotation_modal'
-import { useShareQuotation } from '@features/quotation/share_quotation'
-import { getState } from '@shared/lib/redux'
 
 export const ShareQuotationModal = (): React.JSX.Element => {
   const { ref: modalRef, slideOut } = useSlide()
-  const { shareQuotationFormValues } = useShareQuotationFormValues()
-  useLoadInitValuesIntoShareQuotationModal({ shareQuotationFormValues })
-  useLoadShareQuotationModalWithDirectLink({ shareQuotationFormValues })
-  const isButtonDisabled = useIsButtonDisabled({ shareQuotationFormValues })
+  const { accessFormValuesSignal } = useShareQuotationFormValues()
+  useLoadInitValuesIntoShareQuotationModal({ accessFormValuesSignal })
+  useLoadShareQuotationModalWithDirectLink({ accessFormValuesSignal })
+  const isButtonDisabled = useIsButtonDisabled({ accessFormValuesSignal })
   const isNewQuotation = getState().quotation.id === 'new'
 
   const { onSubmit, isPending, isSuccess, isError } = useShareQuotation({
-    shareQuotationFormValues,
+    accessFormValuesSignal,
     slideOut,
   })
 
@@ -46,10 +46,7 @@ export const ShareQuotationModal = (): React.JSX.Element => {
       onCloseClick={navigateUp}
       onSubmit={onSubmit}
     >
-      <ShareQuotationField
-        shareWithOptionSignal={shareQuotationFormValues.shareWithOptionSignal}
-        sharedWithSignal={shareQuotationFormValues.sharedWithSignal}
-      />
+      <ShareQuotationField accessFormValuesSignal={accessFormValuesSignal} />
     </FormModal>
   )
 }

@@ -1,15 +1,15 @@
-import type { ShareQuotationFormValues } from '@entities/quotation'
+import type { AccessFormValuesSignal } from '@entities/quotation'
 import { useSignal } from '@preact/signals-react'
 
 type Res = {
-  shareQuotationFormValues: ShareQuotationFormValues
+  accessFormValuesSignal: AccessFormValuesSignal
 }
 
 export const useShareQuotationFormValues = (): Res => {
-  const shareQuotationFormValues: ShareQuotationFormValues = {
-    shareWithOptionSignal: useSignal('nobody'),
-    sharedWithSignal: useSignal([]),
-  }
+  const accessFormValuesSignal: AccessFormValuesSignal = useSignal({
+    level: 'nobody',
+    userList: [],
+  })
 
-  return { shareQuotationFormValues }
+  return { accessFormValuesSignal }
 }

@@ -1,4 +1,4 @@
-import type { ColDef, ValueGetterParams } from 'ag-grid-community'
+import type { ColDef } from 'ag-grid-community'
 import { ActionButtonsCellRenderer } from './renderers/ActionButtonsCellRenderer'
 import { SharedWithCellRenderer } from './renderers/SharedWithCellRenderer'
 import { DateCellRenderer } from '@shared/lib/ag_grid/renderers/DateCellRenderer'
@@ -97,29 +97,8 @@ export const columnDefs: ColDef<QuotationPick>[] = [
     },
   },
   {
-    field: 'sharedWith',
+    field: 'access',
     headerName: 'shared with',
     cellRenderer: SharedWithCellRenderer,
-    valueGetter: (
-      params: ValueGetterParams<QuotationPick, QuotationPick['sharedWith']>,
-    ): string => {
-      const sharedWith = params.data?.sharedWith ?? []
-
-      if (sharedWith.length === 0) {
-        return 'nobody'
-      }
-
-      if (sharedWith.at(0) === '*') {
-        return 'everybody'
-      }
-
-      if (sharedWith.length > 1) {
-        const emails = sharedWith.join(';')
-
-        return emails
-      }
-
-      return ''
-    },
   },
 ]

@@ -1,23 +1,16 @@
-import {
-  getWhoQuotationSharedWithOption,
-  type ShareQuotationFormValues,
-} from '@entities/quotation'
+import type { AccessFormValuesSignal } from '@entities/quotation'
 import { getState } from '@shared/lib/redux'
 import { useEffectOnce } from 'react-use'
 
 type Props = {
-  shareQuotationFormValues: ShareQuotationFormValues
+  accessFormValuesSignal: AccessFormValuesSignal
 }
 
 export const useLoadInitValuesIntoShareQuotationModal = ({
-  shareQuotationFormValues,
+  accessFormValuesSignal,
 }: Props): void => {
   useEffectOnce(() => {
     const { quotation } = getState()
-
-    shareQuotationFormValues.sharedWithSignal.value = quotation.sharedWith ?? []
-
-    shareQuotationFormValues.shareWithOptionSignal.value =
-      getWhoQuotationSharedWithOption({ quotation })
+    accessFormValuesSignal.value = quotation.access
   })
 }

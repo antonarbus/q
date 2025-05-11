@@ -4,12 +4,12 @@ import { Box, Tooltip } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { route } from '@shared/consts/route'
 import { PiGlobeX, PiGlobe, PiInfoBold } from 'react-icons/pi'
+import { BsPersonFillLock } from 'react-icons/bs'
 
 export const InfoRight = (): React.ReactNode => {
   const quotationId = useSelector((state) => state.quotation.id)
+  const access = useSelector((state) => state.quotation.access)
   const disabled = useIsCopyModalVisible()
-  const sharedWith = useSelector((state) => state.quotation.sharedWith)
-  const isPublic = (sharedWith ?? []).length > 0
 
   return (
     <Box
@@ -58,20 +58,29 @@ export const InfoRight = (): React.ReactNode => {
             css={{
               lineHeight: 0.1,
               height: '100%',
-              color: isPublic ? '#6488cf' : 'grey',
+              color: access.level === 'everyone' ? '#6488cf' : 'grey',
               ':hover': {
                 color: '#3c5588 !important',
               },
             }}
           >
-            {isPublic ? (
+            {access.level === 'everyone' && (
               <PiGlobe
                 css={{
                   height: '100%',
                   width: 'auto',
                 }}
               />
-            ) : (
+            )}
+            {access.level === 'custom' && (
+              <BsPersonFillLock
+                css={{
+                  height: '100%',
+                  width: 'auto',
+                }}
+              />
+            )}
+            {access.level === 'nobody' && (
               <PiGlobeX
                 css={{
                   height: '100%',

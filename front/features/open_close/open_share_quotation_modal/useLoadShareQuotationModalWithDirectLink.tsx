@@ -1,19 +1,18 @@
 import {
-  getWhoQuotationSharedWithOption,
   quotationSlice,
   useGetQuotationMutation,
-  type ShareQuotationFormValues,
+  type AccessFormValuesSignal,
 } from '@entities/quotation'
 import { dispatch, getState } from '@shared/lib/redux'
 import { useParams } from 'react-router-dom'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 
 type Props = {
-  shareQuotationFormValues: ShareQuotationFormValues
+  accessFormValuesSignal: AccessFormValuesSignal
 }
 
 export const useLoadShareQuotationModalWithDirectLink = ({
-  shareQuotationFormValues,
+  accessFormValuesSignal,
 }: Props): void => {
   const { quotationId } = useParams()
   const { mutate: loadQuotation, isSuccess, data } = useGetQuotationMutation()
@@ -35,13 +34,8 @@ export const useLoadShareQuotationModalWithDirectLink = ({
       return
     }
 
-    const quotation = data.quotation
-
+    const { quotation } = data
     dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
-
-    shareQuotationFormValues.sharedWithSignal.value = quotation.sharedWith ?? []
-
-    shareQuotationFormValues.shareWithOptionSignal.value =
-      getWhoQuotationSharedWithOption({ quotation })
+    accessFormValuesSignal.value = quotation.access
   }, [isSuccess])
 }

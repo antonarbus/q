@@ -2,7 +2,6 @@ import type { FroalaEditorRef } from '@shared/types/froala'
 import type { BoqRowKey } from '../consts/boqRowKey'
 import type { itemType } from '../consts/itemType'
 import type { Signal } from '@preact/signals-react'
-import type { SharedWithOption } from '@shared/consts/sharedWithOption'
 import type { BoqColumnKey } from '../consts/boqColumnKey'
 
 type Common = {
@@ -101,18 +100,17 @@ export type Paste = Common & {
 
 export type Item = Boq | Paste | Text | Price | Row
 
-type Access =
-  | { level: 'everyone'; userList: [] }
-  | { level: 'nobody'; userList: [] }
-  | { level: 'custom'; userList: string[] }
-
 export type Quotation = Common & {
   type: 'quotation'
   createdAt?: Date
   updatedAt?: Date
   openedAt?: Date
   viewedAt?: Date
-  access: Access
+  access: {
+    level: 'everyone' | 'nobody' | 'custom'
+    userList: string[]
+  }
+
   from?: {
     email?: string
     name?: string
@@ -140,10 +138,7 @@ export type SaveQuotationFormValues = {
   infoSignal: Signal<string>
 }
 
-export type ShareQuotationFormValues = {
-  sharedWithSignal: Signal<string[]>
-  shareWithOptionSignal: Signal<SharedWithOption>
-}
+export type AccessFormValuesSignal = Signal<Quotation['access']>
 
 export type InfoFormValues = {
   nameSignal: Signal<string>

@@ -7,7 +7,7 @@ import {
   quotationSlice,
   useGetQuotationsQuery,
   useSaveQuotationMutation,
-  type ShareQuotationFormValues,
+  type AccessFormValuesSignal,
 } from '@entities/quotation'
 import { navItemId } from '@shared/consts/navItemId'
 import { generateId } from '@shared/lib/nanoid'
@@ -18,7 +18,7 @@ import { asyncDelay } from '@shared/utils/delay'
 import { createActor } from 'xstate'
 
 type Props = {
-  shareQuotationFormValues: ShareQuotationFormValues
+  accessFormValuesSignal: AccessFormValuesSignal
   slideOut: () => Promise<void>
 }
 
@@ -36,7 +36,7 @@ const loadingMenuIconMachine = createLoadingMenuIconMachine({
 const loadingIconActor = createActor(loadingMenuIconMachine).start()
 
 export const useShareQuotation = ({
-  shareQuotationFormValues,
+  accessFormValuesSignal,
   slideOut,
 }: Props): Res => {
   const navigate = useNavigate()
@@ -120,7 +120,7 @@ export const useShareQuotation = ({
     const quotation: Quotation = {
       ...getState().quotation,
       id,
-      sharedWith: shareQuotationFormValues.sharedWithSignal.value,
+      access: accessFormValuesSignal.value,
     }
 
     saveQuotation({ quotation })

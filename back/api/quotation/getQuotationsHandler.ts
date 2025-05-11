@@ -16,7 +16,7 @@ export type QuotationPick = Pick<
   | 'info'
   | 'name'
   | 'openedAt'
-  | 'sharedWith'
+  | 'access'
   | 'viewedAt'
   | 'updatedAt'
 >
@@ -35,20 +35,21 @@ type RouterHandler = (
 export const getQuotationsHandler: RouterHandler = async (req, res, next) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
-  const quotations = await QuotationModel.find(
+  const documents = await QuotationModel.find(
     { email },
     { _id: 0, __v: 0, email: 0 },
-  ).lean()
+  )
 
-  if (quotations.length === 0) {
+  if (documents.length === 0) {
     res
       .status(httpStatus.success_200)
-      .json({ message: 'No content', quotations })
+      .json({ message: 'No content', quotations: [] })
 
     return
   }
 
-  if (quotations.length) {
+  if (documents.length) {
+    const quotations = documents.map((doc) => doc.toObject({ getters: true }))
     res.status(httpStatus.success_200).json({ message: 'Found', quotations })
 
     return

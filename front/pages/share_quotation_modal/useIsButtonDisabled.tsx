@@ -1,24 +1,23 @@
-import type { ShareQuotationFormValues } from '@entities/quotation'
+import type { AccessFormValuesSignal } from '@entities/quotation'
 import { getState } from '@shared/lib/redux'
 
 type Props = {
-  shareQuotationFormValues: ShareQuotationFormValues
+  accessFormValuesSignal: AccessFormValuesSignal
 }
 
 export const useIsButtonDisabled = ({
-  shareQuotationFormValues,
+  accessFormValuesSignal,
 }: Props): boolean => {
   const forgotToAddPerson =
-    shareQuotationFormValues.shareWithOptionSignal.value === 'persons' &&
-    shareQuotationFormValues.sharedWithSignal.value.length === 0
+    accessFormValuesSignal.value.level === 'custom' &&
+    accessFormValuesSignal.value.userList.length === 0
 
-  const currentlySharedWith = getState().quotation.sharedWith ?? []
+  const currentAccessLevel = getState().quotation.access.level
 
-  const sharedWithValueChanged =
-    currentlySharedWith.toString() !==
-    shareQuotationFormValues.sharedWithSignal.value.toString()
+  const accessLevelChanged =
+    currentAccessLevel !== accessFormValuesSignal.value.level
 
-  const disabled = forgotToAddPerson || !sharedWithValueChanged
+  const disabled = forgotToAddPerson || !accessLevelChanged
 
   return disabled
 }

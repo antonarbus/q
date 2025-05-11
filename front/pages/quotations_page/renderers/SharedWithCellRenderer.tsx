@@ -5,14 +5,17 @@ import { Link } from 'react-router-dom'
 import { route } from '@shared/consts/route'
 
 export const SharedWithCellRenderer = (
-  params: ICellRendererParams<QuotationPick, QuotationPick['sharedWith']>,
+  params: ICellRendererParams<QuotationPick, QuotationPick['access']>,
 ): React.ReactNode => {
-  const sharedWith = params.data?.sharedWith ?? []
-  const isSharedWithEverybody = sharedWith.at(0) === '*'
-  const isSharedWithNobody = sharedWith.length === 0
   const quotationId = params.data?.id
+  const accessLevel = params.data?.access.level
+  const userList = params.data?.access.userList ?? []
 
-  if (isSharedWithNobody) {
+  if (accessLevel === undefined) {
+    return ''
+  }
+
+  if (accessLevel === 'nobody') {
     return (
       <Link to={`${route.share}/${quotationId}`}>
         <Chip
@@ -30,11 +33,11 @@ export const SharedWithCellRenderer = (
     )
   }
 
-  if (isSharedWithEverybody) {
+  if (accessLevel === 'everyone') {
     return (
       <Link to={`share/${quotationId}`}>
         <Chip
-          label='everybody'
+          label='everyone'
           variant='outlined'
           color='info'
           size='small'
@@ -50,11 +53,11 @@ export const SharedWithCellRenderer = (
 
   return (
     <>
-      {sharedWith.map((email) => {
+      {userList.map((email) => {
         return (
           <Tooltip
             key={email}
-            title={sharedWith.join('; ')}
+            title={userList.join('; ')}
             placement='top'
           >
             <Link to={`share/${quotationId}`}>

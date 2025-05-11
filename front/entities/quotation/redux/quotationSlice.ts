@@ -42,6 +42,10 @@ const initialState: Quotation = {
   type: 'quotation',
   email: 'john@mail.com',
   permissionLevel: undefined,
+  access: {
+    level: 'nobody',
+    userList: [],
+  },
   blocks: [],
 }
 

@@ -31,12 +31,16 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
     id: quotationId,
     type: 'quotation',
     email: 'john@gmail.com',
+    access: {
+      level: 'nobody',
+      userList: [],
+    },
     blocks: [],
   }
 
-  const document = await QuotationModel.findOne({ id: quotationId }).lean()
+  const quotationDocumentRaw = await QuotationModel.findOne({ id: quotationId })
 
-  if (document === null) {
+  if (quotationDocumentRaw === null) {
     res.status(httpStatus.notFound_404).json({
       message: 'not found',
       quotation: emptyQuotation,
@@ -45,21 +49,25 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
     return
   }
 
+  const quotationDocument = quotationDocumentRaw.toObject({ getters: true })
+
   const getPermissionLevel = (): Quotation['permissionLevel'] => {
     const isLoggedUser = userFromAccessToken !== null
+    const emailFromToken = userFromAccessToken?.email
 
-    if (isLoggedUser && userFromAccessToken.email === document.email) {
+    if (isLoggedUser && emailFromToken === quotationDocument.email) {
       return 'Owner'
     }
 
     if (
-      isLoggedUser &&
-      (document.sharedWith ?? []).includes(userFromAccessToken.email)
+      emailFromToken &&
+      quotationDocument.access.level === 'custom' &&
+      quotationDocument.access.userList.includes(emailFromToken)
     ) {
       return 'Shared with you'
     }
 
-    if ((document.sharedWith ?? []).at(0) === '*') {
+    if (quotationDocument.access.level === 'everyone') {
       return 'Public'
     }
 
@@ -107,9 +115,10 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
 
   const { path } = getFileInfo({ id: quotationId })
   const [fileBuffer] = await bucket.file(path).download()
-  const quotation = jsonParseSafe<Quotation>(fileBuffer.toString())
+  const quotationJson = fileBuffer.toString()
+  const quotationParsed = jsonParseSafe<Quotation>(quotationJson)
 
-  if (!quotation) {
+  if (!quotationParsed) {
     res.status(httpStatus.notFound_404).json({
       message: 'not found',
       quotation: emptyQuotation,
@@ -121,17 +130,17 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
   if (permissionLevel === 'Shared with you' || permissionLevel === 'Public') {
     // remove sensitive data from quotation
     // quotation.email = 'john@mail.com'
-    delete quotation.name
-    delete quotation.category
-    delete quotation.desc
-    delete quotation.info
-    delete quotation.createdAt
-    delete quotation.updatedAt
-    delete quotation.openedAt
-    delete quotation.from
-    delete quotation.to
+    delete quotationParsed.name
+    delete quotationParsed.category
+    delete quotationParsed.desc
+    delete quotationParsed.info
+    delete quotationParsed.createdAt
+    delete quotationParsed.updatedAt
+    delete quotationParsed.openedAt
+    delete quotationParsed.from
+    delete quotationParsed.to
 
-    quotation.blocks.forEach((block) => {
+    quotationParsed.blocks.forEach((block) => {
       // block.email = 'john@mail.com'
       delete block.name
       delete block.category
@@ -154,10 +163,10 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
     })
   }
 
-  quotation.permissionLevel = permissionLevel
+  quotationParsed.permissionLevel = permissionLevel
 
   res.status(httpStatus.success_200).json({
     message: 'found',
-    quotation,
+    quotation: { ...quotationDocument, ...quotationParsed },
   })
 }

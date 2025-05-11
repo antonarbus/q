@@ -8,7 +8,10 @@ export const newQuotationTemplate: Quotation = {
   type: 'quotation',
   email: 'john@mail.com',
   permissionLevel: undefined,
-  sharedWith: [],
+  access: {
+    level: 'nobody',
+    userList: [],
+  },
   preview: '',
   blocks: [
     {
