@@ -46,6 +46,7 @@ const quotationSchema = new Schema<Quotation>(
         level: 'nobody',
         userList: [],
       }),
+      required: true,
     },
     from: {
       email: String,

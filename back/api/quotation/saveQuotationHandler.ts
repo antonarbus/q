@@ -146,7 +146,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
       category: quotation.category,
       desc: quotation.desc,
       info: quotation.info,
-      sharedWith: [],
+      access: quotation.access,
       blocks: 'find in bucket under same id',
       updatedAt: Date.now(),
       createdAt: Date.now(),
