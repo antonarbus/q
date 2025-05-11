@@ -28,18 +28,46 @@ export const beforeUpload: BeforeUpload = async (props) => {
 
   hideDraggableArea()
 
+  // when user is not logged save files and images as base64 urls
+  // todo 1: check that quotation is not reloaded on save, otherwise we loose files
+  // todo 2: maybe save data inside html even for logged users and do not upload files into bucket
   if (getState().user.email === null) {
-    toast.success('You are not logged in', {
-      description: 'File will be kept in browser until page is refreshed. ',
-      duration: Infinity,
-      dismissible: true,
-      action: {
-        label: 'Understood',
-        onClick: () => {
-          console.info('Understood')
-        },
-      },
-    })
+    const file = props.files['0']
+
+    if (file === undefined) {
+      return
+    }
+
+    const reader = new FileReader()
+
+    reader.onload = (e): void => {
+      const fileAsBase64String = e.target?.result
+
+      if (typeof fileAsBase64String !== 'string') {
+        return
+      }
+
+      if (props.editor === null) {
+        return
+      }
+
+      if (props.type === 'image') {
+        props.editor.image.insert(
+          fileAsBase64String,
+          true,
+          {
+            name: file.name,
+          },
+          null,
+        )
+      }
+
+      if (props.type === 'file') {
+        props.editor.file.insert(fileAsBase64String, file.name, {})
+      }
+    }
+
+    reader.readAsDataURL(file)
 
     return
   }

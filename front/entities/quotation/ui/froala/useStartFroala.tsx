@@ -18,6 +18,8 @@ declare const window: Window &
 
 window.froalas = []
 
+const PREVENT_DEFAULT_BEHAVIOR = false
+
 export const useStartFroala = (): void => {
   const froala = useFroala()
 
@@ -59,10 +61,12 @@ export const useStartFroala = (): void => {
               type: 'image',
             })
 
-            if (getState().user.email !== null) {
-              const PREVENT_DEFAULT_BEHAVIOR = false
-              return PREVENT_DEFAULT_BEHAVIOR
-            }
+            // if (getState().user.email !== null) {
+            //   const PREVENT_DEFAULT_BEHAVIOR = false
+            //   return PREVENT_DEFAULT_BEHAVIOR
+            // }
+
+            return PREVENT_DEFAULT_BEHAVIOR
           },
           'file.beforeUpload': (files: any): false | undefined => {
             froala.beforeUpload?.({
@@ -71,10 +75,12 @@ export const useStartFroala = (): void => {
               type: 'file',
             })
 
-            if (getState().user.email !== null) {
-              const PREVENT_DEFAULT_BEHAVIOR = false
-              return PREVENT_DEFAULT_BEHAVIOR
-            }
+            // if (getState().user.email !== null) {
+            //   const PREVENT_DEFAULT_BEHAVIOR = false
+            //   return PREVENT_DEFAULT_BEHAVIOR
+            // }
+
+            return PREVENT_DEFAULT_BEHAVIOR
           },
           // 'image.inserted'(_response: any): void {
           //   remindToSaveQuotationOnInsert()
