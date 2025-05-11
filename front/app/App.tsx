@@ -15,7 +15,7 @@ import { instance } from '@shared/instance'
 import { store } from '@shared/lib/redux'
 import { router } from '@shared/lib/router'
 import { LocalizationProvider } from '@mui/x-date-pickers'
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3'
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { enGB } from 'date-fns/locale'
 
 export const App = (): React.JSX.Element => {
