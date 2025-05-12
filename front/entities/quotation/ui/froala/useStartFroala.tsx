@@ -61,11 +61,6 @@ export const useStartFroala = (): void => {
               type: 'image',
             })
 
-            // if (getState().user.email !== null) {
-            //   const PREVENT_DEFAULT_BEHAVIOR = false
-            //   return PREVENT_DEFAULT_BEHAVIOR
-            // }
-
             return PREVENT_DEFAULT_BEHAVIOR
           },
           'file.beforeUpload': (files: any): false | undefined => {
@@ -74,11 +69,6 @@ export const useStartFroala = (): void => {
               editor: froala.editorRef.current,
               type: 'file',
             })
-
-            // if (getState().user.email !== null) {
-            //   const PREVENT_DEFAULT_BEHAVIOR = false
-            //   return PREVENT_DEFAULT_BEHAVIOR
-            // }
 
             return PREVENT_DEFAULT_BEHAVIOR
           },
