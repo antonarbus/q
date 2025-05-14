@@ -1,4 +1,3 @@
-import { backToQuotationRef } from '@entities/quotation'
 import { IconButton, Tooltip } from '@mui/material'
 import { AiOutlineFolderOpen } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
@@ -20,7 +19,9 @@ export const OpenQuotationPageAndLoadFromServerButton = ({
       <Link
         to={`/${id}`}
         onClick={() => {
-          backToQuotationRef.current = null
+          // todo: do we really need to re-render quotation?
+          // todo: Now we most likely need to re-load it again
+          // dispatch(appSlice.actions.reRenderQuotation())
         }}
       >
         <IconButton size='small'>

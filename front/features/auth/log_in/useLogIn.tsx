@@ -1,12 +1,7 @@
-import { dispatch } from '@shared/lib/redux'
+import { dispatch, getState } from '@shared/lib/redux'
 import type { Signal } from '@preact/signals-react'
 import type { UseMutationResult } from '@tanstack/react-query'
-import {
-  type Location,
-  useLocation,
-  useNavigate,
-  useParams,
-} from 'react-router-dom'
+import { type Location, useLocation, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetBookmarksQuery } from '@entities/bookmark'
 import { useGetQuotationsQuery } from '@entities/quotation'
@@ -38,7 +33,6 @@ export const useLogIn = ({
   slideOut,
 }: Props): Res => {
   const navigate = useNavigate()
-  const { quotationId } = useParams()
 
   const {
     mutate: logIn,
@@ -110,7 +104,8 @@ export const useLogIn = ({
         void refetchBookmarks()
       }
 
-      if (quotationId) {
+      // todo: check, maybe now we need not to re-render but reload it again
+      if (getState().quotation.permissionLevel === 'Forbidden') {
         dispatch(appSlice.actions.reRenderQuotation())
       }
 

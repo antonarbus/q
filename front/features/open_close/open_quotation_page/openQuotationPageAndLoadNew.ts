@@ -4,7 +4,12 @@ import { dispatch } from '@shared/lib/redux'
 import { appSlice } from '@shared/appSlice'
 
 export const openQuotationPageAndLoadNew = (): void => {
-  dispatch(appSlice.actions.reRenderQuotation())
+  dispatch(
+    appSlice.actions.setShouldLoadQuotation({
+      yesOrNo: 'yes',
+      from: 'template',
+    }),
+  )
 
   void router.navigate(`/${route.new}`)
 }
