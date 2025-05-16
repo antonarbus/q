@@ -13,7 +13,7 @@ type RouterHandler = (
 export const testHandler: RouterHandler = async (req, res, next) => {
   const { roles } = getUserFromRefreshTokenOrJohn({ req })
 
-  if (!roles.includes(userRole.superAdmin)) {
+  if (roles.includes(userRole.superAdmin) === false) {
     res.status(httpStatus.forbidden_403).json({ message: 'forbidden' })
 
     return

@@ -26,7 +26,7 @@ export const getBookmarkHandler: RouterHandler = async (req, res, next) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
   const document = await BookmarkModel.findOne({ email, id: bookmarkId })
 
-  if (!document) {
+  if (document === null) {
     res.status(httpStatus.notFound_404).json({ message: 'not found' })
 
     return
@@ -37,7 +37,7 @@ export const getBookmarkHandler: RouterHandler = async (req, res, next) => {
   const fileAsString = fileBuffer.toString()
   const item = jsonParseSafe<Item>(fileAsString)
 
-  if (!item) {
+  if (item === undefined) {
     res.status(httpStatus.notFound_404).json({ message: 'not found' })
 
     return

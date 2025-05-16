@@ -14,13 +14,13 @@ export const verifyAccessToken = (
       return undefined
     }
 
-    if (!('email' in jwtPayload)) {
+    if ('email' in jwtPayload === false) {
       throw new Error(
         'JWT payload is wrong, it exists and valid, but there is no "email"',
       )
     }
 
-    if (!('roles' in jwtPayload)) {
+    if ('roles' in jwtPayload === false) {
       throw new Error(
         'JWT payload is wrong, it exists and valid, but there is no "roles"',
       )

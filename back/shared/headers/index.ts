@@ -4,6 +4,6 @@ export { headerName } from './const/headerName'
 export { setRefreshTokenCookie } from './tokens/setRefreshTokenCookie'
 export { removeRefreshTokenCookie } from './tokens/removeRefreshTokenCookie'
 // no_trace
-export { isNoTraceMode } from './no_trace/isNoTraceMode'
+export { getShouldNotTrace } from './no_trace/getShouldNotTrace'
 export { setNoTraceMode } from './no_trace/setNoTraceMode'
 export { removeNoTraceMode } from './no_trace/removeNoTraceMode'

@@ -47,7 +47,7 @@ export const PasswordField = ({
               <IconButton
                 edge='end'
                 onClick={(): void => {
-                  showPassword.value = !showPassword.value
+                  showPassword.value = showPassword.value === false
                 }}
               >
                 {showPassword.value ? <VscEyeClosed /> : <VscEye />}

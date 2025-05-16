@@ -17,7 +17,7 @@ export const CopyBoqRowIcon = (): React.JSX.Element => {
   const { blockIndex } = useBlock()
   const { rowIndex } = useRow()
   const isCopyable = useSelector((state) => state.copy.isCopyable)
-  const disabled = !isCopyable
+  const disabled = isCopyable === false
 
   return (
     <Tooltip
@@ -40,13 +40,13 @@ export const CopyBoqRowIcon = (): React.JSX.Element => {
 
             const clickedIconElement = e.target
 
-            if (!(clickedIconElement instanceof Element)) {
+            if (clickedIconElement instanceof Element === false) {
               return
             }
 
             const boqRowElement = clickedIconElement.closest(`.${cls.boqRow}`)
 
-            if (!boqRowElement) {
+            if (boqRowElement === null) {
               return
             }
 
@@ -81,7 +81,7 @@ export const CopyBoqRowIcon = (): React.JSX.Element => {
 
             const isCopyModalVisible = getState().copy.isVisible
 
-            if (!isCopyModalVisible) {
+            if (isCopyModalVisible === false) {
               dispatch(copySlice.actions.showCopyModal())
             }
           }}

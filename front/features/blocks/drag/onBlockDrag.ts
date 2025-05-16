@@ -18,7 +18,7 @@ export const onBlockDragEnd =
 
     document.body.style.removeProperty('cursor')
 
-    if (!over) {
+    if (over === null) {
       return
     }
 

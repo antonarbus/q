@@ -41,11 +41,11 @@ export const useResetPassword = ({ passwordSignal, slideOut }: Props): Res => {
       if (data.message === 'password was reset') {
         toast('Password was reset')
 
-        if (!data.accessJwtToken) {
+        if (data.accessJwtToken === undefined) {
           return
         }
 
-        if (!data.email) {
+        if (data.email === undefined) {
           return
         }
 

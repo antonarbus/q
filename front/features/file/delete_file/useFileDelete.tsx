@@ -43,7 +43,7 @@ export const useFileDelete = ({ fileId }: Props): Res => {
 
     const shouldDeleteFile = confirm('Delete file?')
 
-    if (!shouldDeleteFile) {
+    if (shouldDeleteFile === false) {
       return
     }
 

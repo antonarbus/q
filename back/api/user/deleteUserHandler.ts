@@ -35,7 +35,7 @@ export const deleteUserHandler: RouterHandler = async (req, res, next) => {
   const isOwner = emailFromToken === userEmailToBeDeleted
   const isSuperAdmin = roles.includes(userRole.superAdmin)
 
-  if (!isOwner && !isSuperAdmin) {
+  if (isOwner === false && isSuperAdmin === false) {
     res
       .status(httpStatus.forbidden_403)
       .json({ message: 'not allowed', statistics: [] })

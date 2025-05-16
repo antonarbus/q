@@ -25,7 +25,7 @@ export const isBoqRowPriceValid = ({
   const calculatedPriceValueRounded = roundTo(calculatedPriceValue, 2)
   const isPriceValueValid = priceValue === calculatedPriceValueRounded
 
-  if (!isPriceValueValid) {
+  if (isPriceValueValid === false) {
     return false
   }
 
@@ -38,7 +38,7 @@ export const isBoqRowPriceValid = ({
   const doesPriceValueMatchHtmlNumberValue =
     roundTo(cellValueFromHtml, 2) === calculatedPriceValueRounded
 
-  if (!doesPriceValueMatchHtmlNumberValue) {
+  if (doesPriceValueMatchHtmlNumberValue === false) {
     return false
   }
 

@@ -63,17 +63,13 @@ export const AccessToken = (): React.JSX.Element => {
 
   useUpdateEffect(() => {
     if (isSuccess) {
-      if (!data.accessJwtToken) {
+      if (data.accessJwtToken === undefined) {
         return
       }
 
       const jwtPayload = jwtDecode<JwtPayloadExtended>(data.accessJwtToken)
 
       const { email, roles } = jwtPayload
-
-      if (!email) {
-        return
-      }
 
       dispatch(
         userSlice.actions.setAccessToken({

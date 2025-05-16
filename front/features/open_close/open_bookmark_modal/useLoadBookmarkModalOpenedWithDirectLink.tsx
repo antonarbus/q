@@ -34,7 +34,7 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
       return
     }
 
-    if (!bookmarkId) {
+    if (bookmarkId === undefined) {
       return
     }
 

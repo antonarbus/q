@@ -42,7 +42,7 @@ export const BookmarkBlockIcon = (): React.ReactNode => {
 
             const email = getState().user.email
 
-            if (!email) {
+            if (email === null) {
               toast.warning('Not logged in')
               void navigate(`./${route.login}`)
 
@@ -51,7 +51,7 @@ export const BookmarkBlockIcon = (): React.ReactNode => {
 
             const block = getBlockFromStore({ blockIndex })
 
-            if (!block) {
+            if (block === undefined) {
               return
             }
 

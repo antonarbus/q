@@ -33,7 +33,7 @@ export const saveBookmarkHandler: RouterHandler = async (req, res, next) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
   const { item: bookmarkItem } = req.body
 
-  if (!bookmarkItem.id) {
+  if (bookmarkItem.id === '') {
     res.status(httpStatus.forbidden_403).json({ message: 'id is not provided' })
 
     return

@@ -11,7 +11,7 @@ export const NavList = (): React.JSX.Element => {
   const navStructureToLoad = isMobile ? navStructure : navStructure[0]?.navItems
 
   const nonHiddenNavItems = navStructureToLoad
-    ?.filter((navItem) => !navItem.isHidden)
+    ?.filter((navItem) => navItem.isHidden === false)
     .map((navItem) => (
       <NavItem
         navItem={navItem}

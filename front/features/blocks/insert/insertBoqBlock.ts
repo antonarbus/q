@@ -477,7 +477,7 @@ export const insertBoqBlock = (e?: MouseEvent): void => {
 
   const isCopyModalVisible = getState().copy.isVisible
 
-  if (!isCopyModalVisible) {
+  if (isCopyModalVisible === false) {
     dispatch(copySlice.actions.showCopyModal())
   }
 }

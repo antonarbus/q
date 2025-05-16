@@ -25,7 +25,7 @@ export const LoginModal = (): React.JSX.Element => {
   })
 
   const isButtonDisabled =
-    !isEmailOkSignal.value || passwordSignal.value === '' || isPending
+    isEmailOkSignal.value === false || passwordSignal.value === '' || isPending
 
   const navigateUp = (): void => {
     void router.navigate('..')

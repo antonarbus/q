@@ -20,7 +20,7 @@ const pasteItemOnClick = (): void => {
 
   const isPasteTextShown = getState().copy.isPasteTextShown
 
-  if (!isPasteTextShown) {
+  if (isPasteTextShown === false) {
     return
   }
 
@@ -28,14 +28,14 @@ const pasteItemOnClick = (): void => {
 
   const isPastable = getState().copy.isPastable
 
-  if (!isPastable) {
+  if (isPastable === false) {
     return
   }
 
   const { id, pastePos } = getState().copy.place
   const topItemInCopyModal = getState().copy.items[0]
 
-  if (!topItemInCopyModal) {
+  if (topItemInCopyModal === undefined) {
     return
   }
 

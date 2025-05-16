@@ -38,7 +38,7 @@ export const useCopyBookmarkAtSearch = (): Res => {
     if (isSuccess) {
       const { item } = bookmarkData
 
-      if (!item) {
+      if (item === undefined) {
         return
       }
 

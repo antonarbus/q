@@ -35,7 +35,7 @@ export const downloadPdf = async (): Promise<void> => {
 
   const blocksContainerElement = document.querySelector(`.${cls.blocks}`)
 
-  if (!(blocksContainerElement instanceof HTMLElement)) {
+  if (blocksContainerElement instanceof HTMLElement === false) {
     return
   }
 
@@ -61,7 +61,7 @@ export const downloadPdf = async (): Promise<void> => {
     quality: 1,
     scale: 1.5,
     onCloneNode: (blocksElement) => {
-      if (!(blocksElement instanceof HTMLElement)) {
+      if (blocksElement instanceof HTMLElement === false) {
         return
       }
 

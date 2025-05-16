@@ -41,7 +41,7 @@ export const getNavItem = (props: Props): Res => {
   const navLevel =
     props.navState?.navStructure.at(0) ?? getState().nav.navStructure.at(0)
 
-  if (!navLevel) {
+  if (navLevel === undefined) {
     return { navItem: null, parentNavItem: null }
   }
 

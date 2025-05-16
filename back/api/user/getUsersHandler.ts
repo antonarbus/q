@@ -34,7 +34,7 @@ type RouterHandler = (
 export const getUsersHandler: RouterHandler = async (req, res, next) => {
   const { roles } = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
-  if (!roles.includes(userRole.superAdmin)) {
+  if (roles.includes(userRole.superAdmin) === false) {
     res
       .status(httpStatus.forbidden_403)
       .json({ message: 'no permission to view', users: [] })

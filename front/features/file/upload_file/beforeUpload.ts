@@ -97,7 +97,7 @@ export const beforeUpload: BeforeUpload = async (props) => {
     method: api.fileUploadSignedUrl.method,
   })
 
-  if (!signedUrlRes.signedUrl || !signedUrlRes.url) {
+  if (signedUrlRes.signedUrl === null || signedUrlRes.url === null) {
     toast.error('Failed', { id: toastId })
 
     return

@@ -41,7 +41,7 @@ export const FroalaProvider = (props: Props): React.JSX.Element => {
 export const useFroala = (): Context => {
   const context = useContext(FroalaContext)
 
-  if (!context) {
+  if (context === null) {
     throw new Error('useFroala must be used within a FroalaProvider')
   }
 

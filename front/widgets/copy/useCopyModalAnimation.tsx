@@ -13,11 +13,11 @@ export const useCopyModalAnimation = (): AnimationControls => {
 
   useEffect(() => {
     const newHeight = items.reduce((accumulator, item) => {
-      if (!item.width) {
+      if (item.width === undefined) {
         return 0
       }
 
-      if (!item.height) {
+      if (item.height === undefined) {
         return 0
       }
 

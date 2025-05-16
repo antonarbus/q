@@ -47,8 +47,8 @@ export const validateBoqRowPrices = ({
       rowIndex,
     })
 
-    if (!isPriceValid) {
-      if (!didNotifyAboutInvalidPriceOnes) {
+    if (isPriceValid === false) {
+      if (didNotifyAboutInvalidPriceOnes === false) {
         toast.info(
           'Impossible to set exact price. Did it as close as possible.',
         )

@@ -3,13 +3,13 @@ import { cls } from '@shared/consts/cls'
 export const getRowHtmlAtModal = (): string => {
   const rowElement = document.querySelector(`.${cls.formModal} .${cls.boqRow}`)
 
-  if (!rowElement) {
+  if (rowElement === null) {
     return 'element not found'
   }
 
   const rowElementClone = rowElement.cloneNode(true)
 
-  if (!(rowElementClone instanceof Element)) {
+  if (rowElementClone instanceof Element === false) {
     return 'element not found'
   }
 

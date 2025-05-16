@@ -49,7 +49,7 @@ export const logInHandler: RouterHandler = async (req, res, next) => {
 
   const userFromDb = await UserModel.findOne({ email: emailFromInput }).lean()
 
-  if (!userFromDb) {
+  if (userFromDb === null) {
     res.status(httpStatus.badRequest_400).json({ message: 'not registered' })
 
     return
@@ -100,7 +100,7 @@ export const logInHandler: RouterHandler = async (req, res, next) => {
   // normal login process
   const passwordFromDb = userFromDb.password
 
-  if (!passwordFromDb) {
+  if (Boolean(passwordFromDb) === false) {
     res.status(httpStatus.badRequest_400).json({ message: 'no password' })
 
     return
@@ -111,13 +111,13 @@ export const logInHandler: RouterHandler = async (req, res, next) => {
     passwordFromDb,
   )
 
-  if (!isPasswordValid) {
+  if (isPasswordValid === false) {
     res.status(httpStatus.forbidden_403).json({ message: 'bad password' })
 
     return
   }
 
-  if (!userFromDb.isActivated) {
+  if (userFromDb.isActivated === false) {
     const emailRes = await sendEmail({
       to: emailFromInput,
       subject: 'Activate your account again',
@@ -170,7 +170,7 @@ export const logInHandler: RouterHandler = async (req, res, next) => {
     { new: true },
   )
 
-  if (!userUpdated) {
+  if (userUpdated === null) {
     res
       .status(httpStatus.serverError_500)
       .json({ message: 'failed to update timestamp' })

@@ -18,7 +18,7 @@ export const DeleteBoqRowIcon = (): React.JSX.Element => {
 
   const isLastBoqRow = useSelector(selectIsLastBoqRow({ blockIndex }))
   const isDeletable = useSelector((state) => state.copy.isDeletable)
-  const disabled = isLastBoqRow || !isDeletable
+  const disabled = isLastBoqRow || isDeletable === false
 
   return (
     <Tooltip
@@ -65,7 +65,7 @@ export const DeleteBoqRowIcon = (): React.JSX.Element => {
 
             const isCopyModalVisible = getState().copy.isVisible
 
-            if (!isCopyModalVisible) {
+            if (isCopyModalVisible === false) {
               setTimeout(
                 () => {
                   dispatch(

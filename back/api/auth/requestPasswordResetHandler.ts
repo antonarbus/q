@@ -35,13 +35,13 @@ export const requestPasswordResetHandler: RouterHandler = async (
 
   const user = await UserModel.findOne({ email: emailFromInput }).lean()
 
-  if (!user) {
+  if (user === null) {
     res.status(httpStatus.forbidden_403).json({ message: 'does not exists' })
 
     return
   }
 
-  if (!user.isActivated) {
+  if (user.isActivated === false) {
     res
       .status(httpStatus.forbidden_403)
       .json({ message: 'account not activated' })
@@ -57,7 +57,7 @@ export const requestPasswordResetHandler: RouterHandler = async (
 
   const resetPasswordKey = updatedUser?.resetPasswordKey
 
-  if (!resetPasswordKey) {
+  if (resetPasswordKey === undefined) {
     res
       .status(httpStatus.serverError_500)
       .json({ message: 'reset key not issued' })

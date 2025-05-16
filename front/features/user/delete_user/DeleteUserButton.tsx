@@ -64,22 +64,22 @@ export const DeleteUserButton = ({ email }: Payload): React.ReactNode => {
           const askFinalConfirmation = (): boolean =>
             confirm('This action is irrecoverable, are you really sure?')
 
-          if (!askInitialConfirmation()) {
+          if (askInitialConfirmation() === false) {
             return
           }
 
-          if (!checkMathAnswer()) {
+          if (checkMathAnswer() === false) {
             return
           }
 
-          if (!askFinalConfirmation()) {
+          if (askFinalConfirmation() === false) {
             return
           }
 
           deleteUser({ email })
         }}
       >
-        {!isPending && <MdDeleteOutline />}
+        {isPending === false && <MdDeleteOutline />}
         {isPending && <RotatingLoaderIcon />}
       </IconButton>
     </Tooltip>

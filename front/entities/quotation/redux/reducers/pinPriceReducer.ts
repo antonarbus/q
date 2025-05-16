@@ -23,5 +23,5 @@ export const pinPriceReducer = (
     return
   }
 
-  priceCell.pin.isPinned = !priceCell.pin.isPinned
+  priceCell.pin.isPinned = priceCell.pin.isPinned === false
 }

@@ -10,7 +10,7 @@ export const saveBlockHeightByIndex = ({ blockIndex }: Props): void => {
   const paperElements = document.querySelectorAll(`.${cls.paper}`)
   const paperElement = paperElements[blockIndex]
 
-  if (!paperElement) {
+  if (paperElement === undefined) {
     return
   }
 

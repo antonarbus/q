@@ -22,7 +22,7 @@ export const Pin = ({ boqRowCellKey, onClick }: Props): React.ReactNode => {
     return null
   }
 
-  if (!pin.isShown) {
+  if (pin.isShown === false) {
     return null
   }
 

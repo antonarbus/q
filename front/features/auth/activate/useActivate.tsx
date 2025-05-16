@@ -34,7 +34,7 @@ export const useActivate = (): Res => {
   })
 
   useUpdateEffect(() => {
-    if (!isSuccess) {
+    if (isSuccess === false) {
       return
     }
 
@@ -43,15 +43,11 @@ export const useActivate = (): Res => {
 
       const { accessJwtToken, email, roles } = data
 
-      if (!accessJwtToken) {
+      if (accessJwtToken === undefined) {
         return
       }
 
-      if (!email) {
-        return
-      }
-
-      if (!roles) {
+      if (email === undefined || roles === undefined) {
         return
       }
 
@@ -76,7 +72,7 @@ export const useActivate = (): Res => {
   }, [isSuccess])
 
   useUpdateEffect(() => {
-    if (!isError) {
+    if (isError === false) {
       return
     }
 

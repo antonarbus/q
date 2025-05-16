@@ -30,7 +30,7 @@ export const useLoadShareQuotationModalWithDirectLink = ({
   })
 
   useUpdateEffect(() => {
-    if (!data?.quotation) {
+    if (data?.quotation === undefined) {
       return
     }
 

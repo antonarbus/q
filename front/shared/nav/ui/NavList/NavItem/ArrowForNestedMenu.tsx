@@ -17,7 +17,7 @@ export const ArrowForNestedMenu = (props: Props): React.ReactNode => {
     return null
   }
 
-  if (!isNestedMenu) {
+  if (isNestedMenu === false) {
     return null
   }
 

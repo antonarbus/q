@@ -43,7 +43,7 @@ export const InfoRight = (): React.ReactNode => {
                 height: '100%',
                 width: 'auto',
                 fill: disabled ? '#c6c6c6' : '#6488cf',
-                ...(!disabled && {
+                ...(disabled === false && {
                   ':hover': {
                     fill: '#3c5588 !important',
                   },

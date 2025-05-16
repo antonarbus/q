@@ -21,23 +21,19 @@ export const QueryDevtoolsProductionHidden = (): React.JSX.Element | null => {
   }
 
   const activateQueryDevTools = (e: KeyboardEvent): void => {
-    if (!e.key) {
-      return
-    }
-
     keysPressed.push(e.key)
 
-    if (!keysPressed.includes('r')) {
+    if (keysPressed.includes('r') === false) {
       return
     }
 
-    if (!keysPressed.includes('q')) {
+    if (keysPressed.includes('q') === false) {
       return
     }
 
     const pressedLongEnough = keysPressed.length > 10
 
-    if (!pressedLongEnough) {
+    if (pressedLongEnough === false) {
       return
     }
 
@@ -65,7 +61,7 @@ export const QueryDevtoolsProductionHidden = (): React.JSX.Element | null => {
     }, oneMin)
   })
 
-  if (!showDevtools) {
+  if (showDevtools === false) {
     return null
   }
 

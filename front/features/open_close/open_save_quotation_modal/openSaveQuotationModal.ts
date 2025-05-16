@@ -9,7 +9,7 @@ export const openSaveQuotationModal = (): void => {
     navigateTo: `/${route.save}`,
   }
 
-  if (!getState().user.email) {
+  if (getState().user.email === null) {
     void router.navigate(`./${route.login}`, {
       state: navigateState,
     })

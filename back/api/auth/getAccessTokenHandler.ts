@@ -3,7 +3,10 @@ import type { User } from '@entities/user'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { errorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { generateAccessToken } from '@back/shared/lib/jwt'
-import { isNoTraceMode, removeRefreshTokenCookie } from '@back/shared/headers'
+import {
+  getShouldNotTrace,
+  removeRefreshTokenCookie,
+} from '@back/shared/headers'
 import { getUserFromRefreshTokenOrNull, UserModel } from '@back/entities/user'
 
 export type ResBody = {
@@ -30,7 +33,7 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, next) => {
   const { email, roles, refreshJwtToken, jwtRefreshTokenExpirationDays } =
     userDataPerviouslyLoggedIn
 
-  const shouldNotTrace = isNoTraceMode({ req })
+  const shouldNotTrace = getShouldNotTrace({ req })
 
   const user = shouldNotTrace
     ? await UserModel.findOne({ email, refreshJwtToken })
@@ -40,7 +43,7 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, next) => {
         { new: true },
       )
 
-  if (!user) {
+  if (user === null) {
     removeRefreshTokenCookie({ res })
 
     throw new Error(errorMessageCommon.notLoggedIn)

@@ -38,7 +38,7 @@ export const updateBoqRowPriceCell = ({
     boqRowCellKey: boqRowCellKey.price,
   })
 
-  if (!didUpdate) {
+  if (didUpdate === false) {
     return
   }
 

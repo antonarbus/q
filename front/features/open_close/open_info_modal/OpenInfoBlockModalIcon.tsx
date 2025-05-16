@@ -36,7 +36,7 @@ export const OpenInfoBlockModalIcon = (): React.ReactNode => {
 
             const item = getBlockFromStore({ blockIndex })
 
-            if (!item) {
+            if (item === undefined) {
               return
             }
 

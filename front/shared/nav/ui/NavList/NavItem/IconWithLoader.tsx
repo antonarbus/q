@@ -12,7 +12,7 @@ type Props = {
 export const IconWithLoader = (props: Props): React.ReactNode => {
   const isMobile = window.innerWidth < navMediaQuery.widthWhenNothingFits
 
-  if (!props.navItem) {
+  if (props.navItem === undefined) {
     return null
   }
 
@@ -40,7 +40,7 @@ export const IconWithLoader = (props: Props): React.ReactNode => {
     return <ErrorIcon />
   }
 
-  if (icon && !isLoading && !isSuccess && !isError) {
+  if (icon && isLoading !== true && isSuccess !== true && isError !== true) {
     return (
       <Icon
         icon={icon}
@@ -50,7 +50,7 @@ export const IconWithLoader = (props: Props): React.ReactNode => {
     )
   }
 
-  if (!icon) {
+  if (Boolean(icon) === false) {
     return (
       <Icon
         icon={firstLetter}

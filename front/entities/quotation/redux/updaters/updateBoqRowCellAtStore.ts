@@ -33,7 +33,7 @@ export const updateBoqRowCellAtStore = ({
   const prevHtml = boqRow[boqRowCellKey].html
   const didTextChange = prevHtml !== html
 
-  if (!didTextChange) {
+  if (didTextChange === false) {
     return {
       didUpdate: false,
     }

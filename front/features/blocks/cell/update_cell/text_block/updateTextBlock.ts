@@ -22,7 +22,7 @@ export const updateTextBlock = ({ editorRef, blockIndex }: Props): void => {
   const html = editorRef.current.html.get()
   const didTextChange = prevHtml !== html
 
-  if (!didTextChange) {
+  if (didTextChange === false) {
     return
   }
 

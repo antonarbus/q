@@ -48,14 +48,14 @@ export const DeleteBookmarkButton = ({ id }: ReqBody): React.JSX.Element => {
             return areYouSure
           }
 
-          if (!askForConfirmation()) {
+          if (askForConfirmation() === false) {
             return
           }
 
           deleteItem({ id })
         }}
       >
-        {!isPending && <MdDeleteOutline />}
+        {isPending === false && <MdDeleteOutline />}
         {isPending && <RotatingLoaderIcon />}
       </IconButton>
     </Tooltip>

@@ -42,7 +42,7 @@ export const OpenInfoBoqRowModalIcon = (): React.ReactNode => {
 
             const boqRow = getBoqRowFromStore({ rowIndex, blockIndex })
 
-            if (!boqRow) {
+            if (boqRow === undefined) {
               return
             }
 

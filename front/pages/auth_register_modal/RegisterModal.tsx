@@ -27,9 +27,8 @@ export const RegisterModal = (): React.JSX.Element => {
   })
 
   useSignalEffect(() => {
-    isButtonDisabledSignal.value = !(
-      isEmailOkSignal.value && isConfirmPasswordOkSignal.value
-    )
+    isButtonDisabledSignal.value =
+      (isEmailOkSignal.value && isConfirmPasswordOkSignal.value) === false
   })
 
   const navigateUp = (): void => {

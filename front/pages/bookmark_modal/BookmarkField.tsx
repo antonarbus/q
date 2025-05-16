@@ -15,7 +15,7 @@ export const BookmarkField = (): React.ReactNode => {
 
   const bookmarkBlock = blocks.at(BOOKMARK_POS_AT_BLOCKS)
 
-  if (!bookmarkBlock) {
+  if (bookmarkBlock === undefined) {
     return null
   }
 

@@ -61,11 +61,11 @@ export const useLogIn = ({
         return
       }
 
-      if (!accessJwtToken) {
+      if (accessJwtToken === undefined) {
         return
       }
 
-      if (!email) {
+      if (email === undefined) {
         return
       }
 
@@ -104,9 +104,13 @@ export const useLogIn = ({
         void refetchBookmarks()
       }
 
-      // todo: check, maybe now we need not to re-render but reload it again
       if (getState().quotation.permissionLevel === 'Forbidden') {
-        dispatch(appSlice.actions.reRenderQuotation())
+        dispatch(
+          appSlice.actions.setShouldLoadQuotation({
+            yesOrNo: 'yes',
+            from: 'server',
+          }),
+        )
       }
 
       const slideOutAndChangeUrl = async (): Promise<void> => {

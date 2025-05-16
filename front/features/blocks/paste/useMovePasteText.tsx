@@ -7,7 +7,7 @@ import { cls } from '@shared/consts/cls'
 import { route } from '@shared/consts/route'
 
 const movePasteTextItem = (e: MouseEvent): void => {
-  if (!(e.target instanceof Element)) {
+  if (e.target instanceof Element === false) {
     return
   }
 
@@ -73,7 +73,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
 
   const isPastable = getState().copy.isPastable
 
-  if (!isPastable) {
+  if (isPastable === false) {
     removePasteIfNeeded()
 
     return
@@ -87,10 +87,10 @@ const movePasteTextItem = (e: MouseEvent): void => {
 
   const isNarrowGapUnderNav = e.clientY > 100
 
-  if (isNarrowGapUnderNav && !isPasteTextShown) {
+  if (isNarrowGapUnderNav && isPasteTextShown === false) {
     const firstBlock = getState().quotation.blocks[0]
 
-    if (!firstBlock) {
+    if (firstBlock === undefined) {
       return
     }
 
@@ -105,7 +105,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
 
   const blockElement = e.target.closest(`.${cls.block}`)
 
-  if (!blockElement) {
+  if (blockElement === null) {
     return
   }
 
@@ -137,7 +137,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
 }
 
 const movePasteTextBoqRow = (e: MouseEvent): void => {
-  if (!(e.target instanceof Element)) {
+  if (e.target instanceof Element === false) {
     return
   }
 
@@ -160,7 +160,7 @@ const movePasteTextBoqRow = (e: MouseEvent): void => {
     }
   }
 
-  if (!boqRowsElement) {
+  if (boqRowsElement === null) {
     removePasteIfNeeded()
 
     return
@@ -200,7 +200,7 @@ const movePasteTextBoqRow = (e: MouseEvent): void => {
 
   const isPastable = getState().copy.isPastable
 
-  if (!isPastable) {
+  if (isPastable === false) {
     removePasteIfNeeded()
 
     return
@@ -208,7 +208,7 @@ const movePasteTextBoqRow = (e: MouseEvent): void => {
 
   const boqRowElement = e.target.closest(`.${cls.boqRow}`)
 
-  if (!boqRowElement) {
+  if (boqRowElement === null) {
     return
   }
 

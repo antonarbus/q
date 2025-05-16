@@ -11,7 +11,7 @@ export const updateBlockHeightReducer = (
   const { blockIndex, height } = action.payload
   const block = state.blocks[blockIndex]
 
-  if (!block) {
+  if (block === undefined) {
     return
   }
 

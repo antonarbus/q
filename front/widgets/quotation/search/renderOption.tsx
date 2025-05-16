@@ -61,7 +61,6 @@ export const renderOption = ({
 
     return (
       <li
-        // {...props}
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onClick={async () => {
           await loadBookmark({ id: option.id })
@@ -80,7 +79,7 @@ export const renderOption = ({
           ':hover': {
             background: 'rgba(0, 0, 0, 0.05)',
           },
-          ...(!isPendingBookmark && {
+          ...(isPendingBookmark === false && {
             ':hover::after': {
               content: '"Click to copy"',
               position: 'absolute',

@@ -35,7 +35,7 @@ export const navSlice = createSlice({
       state.burger.isOpen = false
     },
     toggleBurger: (state) => {
-      state.burger.isOpen = !state.burger.isOpen
+      state.burger.isOpen = state.burger.isOpen === false
     },
     setNavItemRightPos: (
       state,
@@ -240,7 +240,7 @@ export const navSlice = createSlice({
 
       const topLevelNavMenu = state.navStructure[0]
 
-      if (!topLevelNavMenu) {
+      if (topLevelNavMenu === undefined) {
         return
       }
 
@@ -274,7 +274,7 @@ export const navSlice = createSlice({
 
       const topLevelNavMenu = state.navStructure[0]
 
-      if (!topLevelNavMenu) {
+      if (topLevelNavMenu === undefined) {
         return
       }
 
@@ -366,7 +366,7 @@ export const navSlice = createSlice({
     removeUnderlineFromTopNav: (state) => {
       const topLevelNavMenu = state.navStructure[0]
 
-      if (!topLevelNavMenu) {
+      if (topLevelNavMenu === undefined) {
         return
       }
 

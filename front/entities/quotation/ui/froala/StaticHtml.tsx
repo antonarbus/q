@@ -15,7 +15,7 @@ export const StaticHtml = ({
 
   // insert html into element
   useEffectOnce(() => {
-    if (!staticHtmlRef.current) {
+    if (staticHtmlRef.current === null) {
       return
     }
 
@@ -24,7 +24,7 @@ export const StaticHtml = ({
 
   // save height after loading content
   useEffect(() => {
-    if (!staticHtmlRef.current?.clientHeight) {
+    if (staticHtmlRef.current?.clientHeight === undefined) {
       return
     }
 

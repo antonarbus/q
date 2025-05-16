@@ -3,7 +3,7 @@ export const removeLoadingBar = (): void => {
     '.fr-popup.fr-desktop.fr-inline.fr-active',
   )
 
-  if (!(progressBarElement instanceof HTMLElement)) {
+  if (progressBarElement instanceof HTMLElement === false) {
     return
   }
 

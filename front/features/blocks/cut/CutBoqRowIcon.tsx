@@ -21,7 +21,7 @@ export const CutBoqRowIcon = (): React.JSX.Element => {
   const isCopyable = useSelector((state) => state.copy.isCopyable)
   const isLastBoqRow = useSelector(selectIsLastBoqRow({ blockIndex }))
   const isDeletable = useSelector((state) => state.copy.isDeletable)
-  const disabled = isLastBoqRow || !isDeletable || !isCopyable
+  const disabled = isLastBoqRow || isDeletable === false || isCopyable === false
 
   return (
     <Tooltip
@@ -44,13 +44,13 @@ export const CutBoqRowIcon = (): React.JSX.Element => {
 
             const clickedIconElement = e.target
 
-            if (!(clickedIconElement instanceof Element)) {
+            if (clickedIconElement instanceof Element === false) {
               return
             }
 
             const boqRowElement = clickedIconElement.closest(`.${cls.boqRow}`)
 
-            if (!boqRowElement) {
+            if (boqRowElement === null) {
               return
             }
 
@@ -83,7 +83,7 @@ export const CutBoqRowIcon = (): React.JSX.Element => {
 
             const isCopyModalVisible = getState().copy.isVisible
 
-            if (!isCopyModalVisible) {
+            if (isCopyModalVisible === false) {
               dispatch(copySlice.actions.showCopyModal())
             }
 

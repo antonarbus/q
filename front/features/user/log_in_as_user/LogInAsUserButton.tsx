@@ -8,16 +8,13 @@ import { useLogInMutation, userRole, userSlice } from '@entities/user'
 import { useGetQuotationsQuery } from '@entities/quotation'
 import { useGetBookmarksQuery } from '@entities/bookmark'
 import type { NavigateState } from '@shared/types/NavigateState'
-import { type Location, useLocation, useParams } from 'react-router-dom'
+import { type Location, useLocation } from 'react-router-dom'
 import { dispatch } from '@shared/lib/redux'
 import { navSlice } from '@shared/nav'
 import { navItemId } from '@shared/consts/navItemId'
 import { route } from '@shared/consts/route'
-import { appSlice } from '@shared/appSlice'
 
 export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
-  const { quotationId } = useParams()
-
   const {
     mutate: logIn,
     isPending,
@@ -33,11 +30,11 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
 
   useUpdateEffect(() => {
     if (isSuccess) {
-      if (!data.accessJwtToken) {
+      if (data.accessJwtToken === undefined) {
         return
       }
 
-      if (!data.email) {
+      if (data.email === undefined) {
         return
       }
 
@@ -76,10 +73,6 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
         void refetchBookmarks()
       }
 
-      if (quotationId) {
-        dispatch(appSlice.actions.reRenderQuotation())
-      }
-
       if (data.message === 'super-admin on behalf of user') {
         toast.success(`Logged as ${data.email}`)
       }
@@ -94,7 +87,7 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
 
   return (
     <Tooltip
-      title='Log in'
+      title='Log in as super admin'
       placement='bottom'
       enterDelay={500}
       enterNextDelay={500}
@@ -108,7 +101,7 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
           })
         }}
       >
-        {!isPending && <MdLogin />}
+        {isPending === false && <MdLogin />}
         {isPending && <RotatingLoaderIcon />}
       </IconButton>
     </Tooltip>

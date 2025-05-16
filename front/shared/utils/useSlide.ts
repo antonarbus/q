@@ -13,7 +13,7 @@ export const useSlide = (): Res => {
   const isAnimationPreventedRef = useRef(false)
 
   const slideIn = async (): Promise<void> => {
-    if (!(ref.current instanceof HTMLElement)) {
+    if (ref.current instanceof HTMLElement === false) {
       return
     }
 
@@ -46,7 +46,7 @@ export const useSlide = (): Res => {
   }
 
   const slideOut = async (): Promise<void> => {
-    if (!(ref.current instanceof HTMLElement)) {
+    if (ref.current instanceof HTMLElement === false) {
       return
     }
 

@@ -34,7 +34,7 @@ export const ResizableBlockPaper = ({
   )
 
   const isWidthSetManually = width !== undefined
-  const isAutoWidth = !isWidthSetManually || disableResize || autoWidth
+  const isAutoWidth = isWidthSetManually === false || disableResize || autoWidth
 
   return (
     <Resizable
@@ -62,8 +62,8 @@ export const ResizableBlockPaper = ({
       maxWidth='100%'
       bounds={'window'}
       enable={{
-        right: !disableResize,
-        left: !disableResize,
+        right: disableResize === false,
+        left: disableResize === false,
       }}
       onResizeStart={(e, dir, elementRef): void => {
         onItemResizeStart?.bind(null, { e, dir, elementRef, blockIndex })()

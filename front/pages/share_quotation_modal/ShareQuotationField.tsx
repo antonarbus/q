@@ -33,7 +33,7 @@ export const ShareQuotationField = ({
   // disable button
   useEffect(() => {
     const isEmailOk = isEmailPatternOk(emailSignal.value)
-    isButtonDisabledSignal.value = !isEmailOk
+    isButtonDisabledSignal.value = isEmailOk === false
   }, [emailSignal.value])
 
   return (

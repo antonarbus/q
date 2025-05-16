@@ -48,14 +48,14 @@ export const DeleteQuotationButton = ({ id }: Payload): React.ReactNode => {
             return areYouSure
           }
 
-          if (!askForConfirmation()) {
+          if (askForConfirmation() === false) {
             return
           }
 
           deleteQuotation({ id })
         }}
       >
-        {!isPending && <MdDeleteOutline />}
+        {isPending === false && <MdDeleteOutline />}
         {isPending && <RotatingLoaderIcon />}
       </IconButton>
     </Tooltip>

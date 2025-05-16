@@ -82,18 +82,21 @@ export const MenuItem = ({ navItem, hoverIndex }: Props): React.JSX.Element => {
       {isIcon && isLoading && <SpinnerIcon />}
       {isIcon && isSuccess && <SuccessIcon />}
       {isIcon && isError && <ErrorIcon />}
-      {isIcon && !isLoading && !isSuccess && !isError && (
-        <Icon
-          icon={navItem.icon}
-          disabled={disabled}
-        />
-      )}
+      {isIcon &&
+        isLoading !== true &&
+        isSuccess !== true &&
+        isError !== true && (
+          <Icon
+            icon={navItem.icon}
+            disabled={disabled}
+          />
+        )}
       <TextInMenu
         reserveSpaceForIcon={isNextMenuAvailable}
         name={navItem.name}
         disabled={disabled}
       />
-      {isNextMenuAvailable && !disabled && (
+      {isNextMenuAvailable && disabled === false && (
         <RoundSpanForIcon
           css={{
             background: 'transparent',

@@ -11,7 +11,7 @@ type Props = {
 export const useUpdateChart = ({ visitors, chartInstanceRef }: Props): void => {
   useEffect(() => {
     const updateChart = (): void => {
-      if (!chartInstanceRef.current) {
+      if (chartInstanceRef.current === null) {
         return
       }
 

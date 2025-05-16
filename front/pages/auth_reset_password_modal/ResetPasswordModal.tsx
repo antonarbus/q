@@ -30,7 +30,7 @@ export const ResetPasswordModal = (): React.ReactNode => {
   })
 
   useSignalEffect(() => {
-    isButtonDisabledSignal.value = !isConfirmPasswordOkSignal.value
+    isButtonDisabledSignal.value = isConfirmPasswordOkSignal.value === false
   })
 
   const navigateUp = (): void => {

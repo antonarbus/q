@@ -4,13 +4,13 @@ import { toast } from 'sonner'
 export const remindToSaveQuotationOnInsert = (): void => {
   const isLogged = Boolean(getState().user.email)
 
-  if (!isLogged) {
+  if (isLogged === false) {
     return
   }
 
   const id = getState().quotation.id
 
-  if (id === 'new' || !id) {
+  if (id === 'new') {
     toast.info('Do not forget to save quotation')
   }
 }

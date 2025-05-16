@@ -27,7 +27,7 @@ export const updatePriceValueCell = ({
   const html = editorRef.current.html.get()
   const didHtmlChange = prevHtml !== html
 
-  if (!didHtmlChange) {
+  if (didHtmlChange === false) {
     return
   }
 

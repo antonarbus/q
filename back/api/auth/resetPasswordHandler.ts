@@ -39,7 +39,7 @@ export const resetPasswordHandler: RouterHandler = async (req, res, next) => {
     resetPasswordKey: resetPasswordKeyFromInput,
   }).lean()
 
-  if (!user) {
+  if (user === null) {
     res
       .status(httpStatus.forbidden_403)
       .json({ message: 'incorrect reset key' })
@@ -47,7 +47,7 @@ export const resetPasswordHandler: RouterHandler = async (req, res, next) => {
     return
   }
 
-  if (!user.isActivated) {
+  if (user.isActivated === false) {
     res.status(httpStatus.forbidden_403).json({ message: 'not activated' })
 
     return

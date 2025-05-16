@@ -37,7 +37,7 @@ const variants: Variants = {
     return {}
   },
   exit: ({ isCopying, prevFirstItemHeight }: Props) => {
-    if (!isCopying) {
+    if (isCopying === false) {
       return {
         y: -prevFirstItemHeight,
         transition: {
@@ -60,11 +60,11 @@ export const RestOfCopiedItems = (): React.JSX.Element | null => {
 
   const firstItem = items[0]
 
-  if (!firstItem?.width) {
+  if (firstItem?.width === undefined) {
     return null
   }
 
-  if (!firstItem.height) {
+  if (firstItem.height === undefined) {
     return null
   }
 

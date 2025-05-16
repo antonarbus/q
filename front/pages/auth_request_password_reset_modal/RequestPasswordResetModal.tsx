@@ -32,7 +32,7 @@ export const RequestPasswordResetModal = (): React.JSX.Element => {
       headerText='Reset password'
       headerIcon={<PiPassword />}
       buttonText='RESET'
-      isButtonDisabled={!isEmailOkSignal.value}
+      isButtonDisabled={isEmailOkSignal.value === false}
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
       isButtonError={isError}

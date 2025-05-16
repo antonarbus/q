@@ -31,7 +31,7 @@ export const useLoadSaveQuotationModalWithDirectLink = ({
   })
 
   useUpdateEffect(() => {
-    if (!data?.quotation) {
+    if (data?.quotation === undefined) {
       return
     }
 

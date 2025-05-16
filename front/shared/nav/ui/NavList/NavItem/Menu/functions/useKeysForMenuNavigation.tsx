@@ -17,7 +17,7 @@ export const useKeysForMenuNavigation = (): void => {
 
     // +1 for "Close" or "Back" item before currentMenuItems
     const navItems = (currentNavItem?.navItems ?? []).filter(
-      (item) => !item.isHidden,
+      (item) => item.isHidden === false,
     ) // 3 items without first "close" or "Back"
 
     const menuItemsQty = navItems.length // 3
@@ -80,7 +80,7 @@ export const useKeysForMenuNavigation = (): void => {
       return
     }
 
-    if (!isNestedMenu && e.key === 'Backspace') {
+    if (isNestedMenu === false && e.key === 'Backspace') {
       dispatch(navSlice.actions.closeMenu())
 
       return
@@ -105,7 +105,7 @@ export const useKeysForMenuNavigation = (): void => {
         return
       }
 
-      const isCloseMenuItem = hoverIndex === 0 && !isNestedMenu
+      const isCloseMenuItem = hoverIndex === 0 && isNestedMenu === false
 
       if (isCloseMenuItem) {
         dispatch(navSlice.actions.closeMenu())
@@ -115,7 +115,7 @@ export const useKeysForMenuNavigation = (): void => {
 
       const navItemId = navItems[hoverIndex - 1]?.id
 
-      if (!navItemId) {
+      if (navItemId === undefined) {
         return
       }
 
@@ -156,7 +156,7 @@ export const useKeysForMenuNavigation = (): void => {
 
     // jump to "Close" & "Back"
     if (anyLetter.exec(e.key)) {
-      if (!isNestedMenu && e.key === 'c') {
+      if (isNestedMenu === false && e.key === 'c') {
         dispatch(
           navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
         )
@@ -178,7 +178,7 @@ export const useKeysForMenuNavigation = (): void => {
           .toLowerCase()
           .startsWith(e.key)
 
-        if (!isiKeySameAsFirstItemLetter) {
+        if (isiKeySameAsFirstItemLetter === false) {
           return false
         }
 

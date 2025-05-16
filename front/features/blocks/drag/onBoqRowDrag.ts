@@ -18,7 +18,7 @@ export const onBoqRowDragEnd =
     dispatch(quotationSlice.actions.enableFroalaReducer({ blockIndex }))
     document.body.style.removeProperty('cursor')
 
-    if (!over) {
+    if (over === null) {
       return
     }
 

@@ -7,7 +7,7 @@ export const showDropFilesTextOnMouseEnter = ({
 }: Props): void => {
   const textElement = dropFilesTextRef.current
 
-  if (!textElement) {
+  if (textElement === null) {
     return
   }
 
@@ -20,7 +20,7 @@ export const showDropFilesTextOnMouseLeave = ({
 }: Props): void => {
   const textElement = dropFilesTextRef.current
 
-  if (!textElement) {
+  if (textElement === null) {
     return
   }
 

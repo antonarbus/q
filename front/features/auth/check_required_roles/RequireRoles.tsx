@@ -35,7 +35,7 @@ export const RequireRoles = ({
     )
   }
 
-  if (!haveRequiredRole) {
+  if (haveRequiredRole === false) {
     return (
       <div
         style={{

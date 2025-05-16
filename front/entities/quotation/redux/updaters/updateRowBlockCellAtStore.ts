@@ -30,7 +30,7 @@ export const updateRowBlockCellAtStore = ({
   const prevHtml = block[boqRowCellKey].html
   const didTextChange = prevHtml !== html
 
-  if (!didTextChange) {
+  if (didTextChange === false) {
     return {
       didUpdate: false,
     }

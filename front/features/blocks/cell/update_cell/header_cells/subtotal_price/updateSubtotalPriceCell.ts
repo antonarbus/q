@@ -35,7 +35,7 @@ export const updateSubtotalPriceCell = ({
     boqHeaderKey: 'subTotalPrice',
   })
 
-  if (!didContentChange) {
+  if (didContentChange === false) {
     return
   }
 

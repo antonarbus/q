@@ -13,14 +13,14 @@ export const SlidableMenuItemsContainer = ({
   className,
   menuNavItemId,
 }: Props): React.ReactNode => {
-  if (!menuNavItemId) {
+  if (menuNavItemId === null) {
     return null
   }
 
   const { navItem } = getNavItem({ navItemId: menuNavItemId })
 
   const menuItemsNotHidden = navItem?.navItems
-    ?.filter((item) => !item.isHidden)
+    ?.filter((item) => item.isHidden === false)
     .map((item, index) => (
       <MenuItem
         navItem={item}

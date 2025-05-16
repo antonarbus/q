@@ -17,7 +17,7 @@ export const useIsButtonDisabled = ({
   const accessLevelChanged =
     currentAccessLevel !== accessFormValuesSignal.value.level
 
-  const disabled = forgotToAddPerson || !accessLevelChanged
+  const disabled = forgotToAddPerson || accessLevelChanged === false
 
   return disabled
 }

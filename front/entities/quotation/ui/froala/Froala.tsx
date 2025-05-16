@@ -73,7 +73,7 @@ export const Froala = (props: FroalaProps): React.JSX.Element => {
             borderRadius: '4px',
           }}
         >
-          {!showEditableHtml && <StaticHtml />}
+          {showEditableHtml === false && <StaticHtml />}
           {showEditableHtml && (
             <>
               <StaticHtmlBackgroundToFixBlinkIssue />

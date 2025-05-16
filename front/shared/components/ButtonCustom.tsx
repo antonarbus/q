@@ -59,7 +59,9 @@ export const ButtonCustom = ({
         ...restProps.sx,
       }}
     >
-      {!showSuccessIcon.value && !showErrorIcon.value && restProps.children}
+      {showSuccessIcon.value === false &&
+        showErrorIcon.value === false &&
+        restProps.children}
       {isButtonLoading === true && (
         <RotatingLoaderIcon
           style={{

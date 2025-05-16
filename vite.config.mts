@@ -57,7 +57,7 @@ const stripHandlerFromApiRoutes = (): unknown => {
         babelrc: false,
       })
 
-      return result ? { code: result.code, map: null } : null
+      return result === null ? null : { code: result.code, map: null }
     },
   }
 }

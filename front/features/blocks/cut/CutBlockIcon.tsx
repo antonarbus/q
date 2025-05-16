@@ -20,7 +20,7 @@ export const CutBlockIcon = (): React.JSX.Element => {
   const { blockIndex } = useBlock()
   const isBlockAlone = useSelector(selectIsLastBlock)
   const isCuttable = useSelector((state) => state.copy.isCuttable)
-  const disabled = isBlockAlone || !isCuttable
+  const disabled = isBlockAlone || isCuttable === false
 
   return (
     <Tooltip
@@ -46,7 +46,7 @@ export const CutBlockIcon = (): React.JSX.Element => {
 
             const blockToCut = getState().quotation.blocks[blockIndex]
 
-            if (!blockToCut) {
+            if (blockToCut === undefined) {
               return
             }
 
@@ -56,19 +56,19 @@ export const CutBlockIcon = (): React.JSX.Element => {
 
             const clickedIconElement = e.target
 
-            if (!(clickedIconElement instanceof Element)) {
+            if (clickedIconElement instanceof Element === false) {
               return
             }
 
             const blockElement = clickedIconElement.closest(`.${cls.block}`)
 
-            if (!(blockElement instanceof Element)) {
+            if (blockElement instanceof Element === false) {
               return
             }
 
             const paperElement = blockElement.querySelector(`.${cls.paper}`)
 
-            if (!(paperElement instanceof HTMLElement)) {
+            if (paperElement instanceof HTMLElement === false) {
               return
             }
 
@@ -92,7 +92,7 @@ export const CutBlockIcon = (): React.JSX.Element => {
 
             const isCopyModalVisible = getState().copy.isVisible
 
-            if (!isCopyModalVisible) {
+            if (isCopyModalVisible === false) {
               dispatch(copySlice.actions.showCopyModal())
             }
 

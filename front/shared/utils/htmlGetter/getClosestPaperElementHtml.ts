@@ -4,25 +4,25 @@ import type { MouseEvent } from 'react'
 export const getClosestPaperElementHtml = (e: MouseEvent): string => {
   const clickedIconElement = e.target
 
-  if (!(clickedIconElement instanceof Element)) {
+  if (clickedIconElement instanceof Element === false) {
     return 'element not found'
   }
 
   const blockElement = clickedIconElement.closest(`.${cls.block}`)
 
-  if (!(blockElement instanceof Element)) {
+  if (blockElement instanceof Element === false) {
     return 'element not found'
   }
 
   const paperElement = blockElement.querySelector(`.${cls.paper}`)
 
-  if (!(paperElement instanceof Element)) {
+  if (paperElement instanceof Element === false) {
     return 'element not found'
   }
 
   const paperElementClone = paperElement.cloneNode(true)
 
-  if (!(paperElementClone instanceof Element)) {
+  if (paperElementClone instanceof Element === false) {
     return 'element not found'
   }
 

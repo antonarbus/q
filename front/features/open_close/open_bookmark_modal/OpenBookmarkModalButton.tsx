@@ -28,7 +28,7 @@ export const OpenBookmarkModalButton = ({ id }: ReqBody): React.JSX.Element => {
 
       const block = item
 
-      if (!block) {
+      if (block === undefined) {
         return
       }
 
@@ -62,7 +62,7 @@ export const OpenBookmarkModalButton = ({ id }: ReqBody): React.JSX.Element => {
           translate: '0px 1px',
         }}
       >
-        {!isPending && <AiTwotoneEdit />}
+        {isPending === false && <AiTwotoneEdit />}
         {isPending && <RotatingLoaderIcon />}
       </IconButton>
     </Tooltip>

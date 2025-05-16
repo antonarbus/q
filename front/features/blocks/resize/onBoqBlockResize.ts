@@ -243,7 +243,7 @@ export const onBoqBlockResizeStop: OnBlockResizeStop = ({
 }) => {
   const descriptionHeaderElement = itemElement.querySelector('.th.description')
 
-  if (!(descriptionHeaderElement instanceof HTMLElement)) {
+  if (descriptionHeaderElement instanceof HTMLElement === false) {
     return
   }
 

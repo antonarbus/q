@@ -82,7 +82,7 @@ export const SettingsModal = (): React.JSX.Element => {
                 }}
                 onClick={() => {
                   if (totalCount > 0) {
-                    setCollapseOpen(!collapseOpen)
+                    setCollapseOpen(collapseOpen === false)
                   }
                 }}
               >

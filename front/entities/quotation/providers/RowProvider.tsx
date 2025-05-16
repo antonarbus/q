@@ -65,7 +65,7 @@ export const RowProvider = ({
 export const useRow = (): Context => {
   const context = useContext(RowContext)
 
-  if (!context) {
+  if (context === null) {
     throw new Error('useRow must be used within a RowProvider')
   }
 

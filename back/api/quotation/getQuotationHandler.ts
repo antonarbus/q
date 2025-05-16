@@ -3,7 +3,7 @@ import type { Quotation } from '@entities/quotation'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { bucket, getFileInfo } from '@back/shared/services/storage'
 import { jsonParseSafe } from '@back/shared/utils/jsonParseSafe'
-import { isNoTraceMode } from '@back/shared/headers'
+import { getShouldNotTrace } from '@back/shared/headers'
 import { userRole } from '@back/shared/consts/userRole'
 import { getUserFromAccessTokenOrNull } from '@back/entities/user'
 import { QuotationModel } from '@back/entities/quotation'
@@ -51,6 +51,8 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
 
   const quotationDocument = quotationDocumentRaw.toObject({ getters: true })
 
+  const shouldNotTrace = getShouldNotTrace({ req })
+
   const getPermissionLevel = (): Quotation['permissionLevel'] => {
     const isLoggedUser = userFromAccessToken !== null
     const emailFromToken = userFromAccessToken?.email
@@ -71,7 +73,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
       return 'Public'
     }
 
-    if (isLoggedUser && isNoTraceMode({ req })) {
+    if (isLoggedUser && shouldNotTrace) {
       return 'Super admin on behalf of a user'
     }
 
@@ -88,29 +90,32 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
   const permissionLevel = getPermissionLevel()
 
   if (permissionLevel === 'Forbidden') {
-    res
-      .status(httpStatus.forbidden_403)
-      .json({ message: 'found', quotation: emptyQuotation })
+    res.status(httpStatus.forbidden_403).json({
+      message: 'found',
+      quotation: { ...emptyQuotation, permissionLevel },
+    })
 
     return
   }
 
-  if (permissionLevel === 'Owner') {
-    await QuotationModel.updateOne(
-      { id: quotationId },
-      { openedAt: Date.now() },
-    ).catch((error: unknown) => {
-      console.error('failed to update openedAt field', error)
-    })
-  }
+  if (shouldNotTrace === false) {
+    if (permissionLevel === 'Owner') {
+      await QuotationModel.updateOne(
+        { id: quotationId },
+        { openedAt: Date.now() },
+      ).catch((error: unknown) => {
+        console.error('failed to update openedAt field', error)
+      })
+    }
 
-  if (permissionLevel === 'Shared with you' || permissionLevel === 'Public') {
-    await QuotationModel.updateOne(
-      { id: quotationId },
-      { viewedAt: Date.now() },
-    ).catch((error: unknown) => {
-      console.error('failed to update viewedAt field', error)
-    })
+    if (permissionLevel === 'Shared with you' || permissionLevel === 'Public') {
+      await QuotationModel.updateOne(
+        { id: quotationId },
+        { viewedAt: Date.now() },
+      ).catch((error: unknown) => {
+        console.error('failed to update viewedAt field', error)
+      })
+    }
   }
 
   const { path } = getFileInfo({ id: quotationId })
@@ -118,7 +123,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
   const quotationJson = fileBuffer.toString()
   const quotationParsed = jsonParseSafe<Quotation>(quotationJson)
 
-  if (!quotationParsed) {
+  if (quotationParsed === undefined) {
     res.status(httpStatus.notFound_404).json({
       message: 'not found',
       quotation: emptyQuotation,
@@ -163,10 +168,8 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
     })
   }
 
-  quotationParsed.permissionLevel = permissionLevel
-
   res.status(httpStatus.success_200).json({
     message: 'found',
-    quotation: { ...quotationDocument, ...quotationParsed },
+    quotation: { ...quotationDocument, ...quotationParsed, permissionLevel },
   })
 }

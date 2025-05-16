@@ -15,7 +15,7 @@ export const placeCaretAtTheEndIfToolbarIsNotShown = ({
     return
   }
 
-  if (!editorRef.current) {
+  if (editorRef.current === null) {
     return
   }
 
@@ -29,7 +29,7 @@ export const placeCaretAtTheEndIfToolbarIsNotShown = ({
 
   const clickedElement = e.target
 
-  if (!(clickedElement instanceof HTMLElement)) {
+  if (clickedElement instanceof HTMLElement === false) {
     return
   }
 
@@ -40,7 +40,7 @@ export const placeCaretAtTheEndIfToolbarIsNotShown = ({
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     const contentEditableElement = editorRef.current.$el.get(0)
 
-    if (!(contentEditableElement instanceof HTMLElement)) {
+    if (contentEditableElement instanceof HTMLElement === false) {
       return
     }
 

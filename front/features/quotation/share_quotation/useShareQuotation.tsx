@@ -108,7 +108,7 @@ export const useShareQuotation = ({
   const onSubmit = (e: React.FormEvent): void => {
     e.preventDefault()
 
-    if (!getState().user.email) {
+    if (getState().user.email === null) {
       toast.warning('Not logged in')
 
       return

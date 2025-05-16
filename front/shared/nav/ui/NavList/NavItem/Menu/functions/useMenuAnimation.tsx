@@ -46,7 +46,7 @@ export const useMenuAnimation = ({
   const [animateHeight, setAnimateHeight] = useState(generateId())
 
   const getFakeElementHeight = (): number => {
-    if (!(fakeMenuRef.current instanceof HTMLElement)) {
+    if (fakeMenuRef.current instanceof HTMLElement === false) {
       return 0
     }
 
@@ -60,7 +60,7 @@ export const useMenuAnimation = ({
   }
 
   const getPrevElementHeight = (): number => {
-    if (!(currentMenuRef.current instanceof HTMLElement)) {
+    if (currentMenuRef.current instanceof HTMLElement === false) {
       return 0
     }
 

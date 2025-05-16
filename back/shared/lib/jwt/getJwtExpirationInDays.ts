@@ -16,7 +16,7 @@ export const getJwtExpirationInDays = ({
   // Base64 decode the payload
   const payloadPart = parts[1]
 
-  if (!payloadPart) {
+  if (payloadPart === undefined) {
     throw new Error('Invalid JWT token format')
   }
 
@@ -25,7 +25,7 @@ export const getJwtExpirationInDays = ({
   // Parse the payload JSON
   const payload = jsonParseSafe<JwtPayload>(payloadString)
 
-  if (!payload) {
+  if (payload === undefined) {
     throw new Error('Token does not have an expiration (exp) claim')
   }
 
@@ -33,7 +33,7 @@ export const getJwtExpirationInDays = ({
   const expiration = payload.exp
 
   // Check if expiration exists
-  if (!expiration) {
+  if (expiration === undefined) {
     throw new Error('Token does not have an expiration (exp) claim')
   }
 

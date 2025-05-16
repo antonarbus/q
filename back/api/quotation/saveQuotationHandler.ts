@@ -35,7 +35,7 @@ export const saveQuotationHandler: RouterHandler = async (req, res, next) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
   const { quotation } = req.body
 
-  if (!quotation.id) {
+  if (quotation.id === '') {
     res.status(httpStatus.forbidden_403).json({ message: 'id is not provided' })
 
     return

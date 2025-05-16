@@ -35,7 +35,7 @@ export const updateBoqHeaderCellAtStore = ({
   const html = editorRef.current.html.get()
   const didTextChange = prevHtml !== html
 
-  if (!didTextChange) {
+  if (didTextChange === false) {
     return { didUpdate: false }
   }
 

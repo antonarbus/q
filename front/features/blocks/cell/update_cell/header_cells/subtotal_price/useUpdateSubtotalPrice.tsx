@@ -20,11 +20,11 @@ export const useUpdateSubtotalPrice = (): void => {
   const isEditable = useSelector((state) => state.text.isEditable)
 
   useUpdateEffect(() => {
-    if (!isEditable) {
+    if (isEditable === false) {
       return
     }
 
-    if (!isBlockFroala) {
+    if (isBlockFroala === undefined) {
       return
     }
 

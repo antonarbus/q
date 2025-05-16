@@ -18,7 +18,7 @@ export const DeleteBlockIcon = (): React.JSX.Element => {
 
   const isBlockAlone = useSelector(selectIsLastBlock)
   const isDeletable = useSelector((state) => state.copy.isDeletable)
-  const disabled = isBlockAlone || !isDeletable
+  const disabled = isBlockAlone || isDeletable === false
 
   return (
     <Tooltip
@@ -46,25 +46,25 @@ export const DeleteBlockIcon = (): React.JSX.Element => {
 
             const blockToDelete = getState().quotation.blocks[blockIndex]
 
-            if (!blockToDelete) {
+            if (blockToDelete === undefined) {
               return
             }
 
             const clickedIconElement = e.target
 
-            if (!(clickedIconElement instanceof Element)) {
+            if (clickedIconElement instanceof Element === false) {
               return
             }
 
             const blockElement = clickedIconElement.closest(`.${cls.block}`)
 
-            if (!(blockElement instanceof Element)) {
+            if (blockElement instanceof Element === false) {
               return
             }
 
             const paperElement = blockElement.querySelector(`.${cls.paper}`)
 
-            if (!(paperElement instanceof HTMLElement)) {
+            if (paperElement instanceof HTMLElement === false) {
               return
             }
 
@@ -87,7 +87,7 @@ export const DeleteBlockIcon = (): React.JSX.Element => {
 
             const isCopyModalVisible = getState().copy.isVisible
 
-            if (!isCopyModalVisible) {
+            if (isCopyModalVisible === false) {
               setTimeout(
                 () => {
                   dispatch(textSlice.actions.setEditable())

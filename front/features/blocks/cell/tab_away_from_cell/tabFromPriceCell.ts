@@ -17,7 +17,7 @@ export const tabFromPriceCell = (props: Props): void => {
       // just use default tabbing to the next focusable area
     }
 
-    if (!isLastRow) {
+    if (isLastRow === false) {
       props.e.preventDefault()
 
       props.boqRowEditorRefs

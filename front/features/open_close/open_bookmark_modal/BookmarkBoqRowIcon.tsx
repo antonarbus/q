@@ -44,7 +44,7 @@ export const BookmarkBoqRowIcon = (): React.ReactNode => {
 
             const email = getState().user.email
 
-            if (!email) {
+            if (email === null) {
               toast.warning('Not logged in')
               void navigate(`./${route.login}`)
 
@@ -53,19 +53,19 @@ export const BookmarkBoqRowIcon = (): React.ReactNode => {
 
             const clickedIconElement = e.target
 
-            if (!(clickedIconElement instanceof Element)) {
+            if (clickedIconElement instanceof Element === false) {
               return
             }
 
             const boqRowElement = clickedIconElement.closest(`.${cls.boqRow}`)
 
-            if (!boqRowElement) {
+            if (boqRowElement === null) {
               return
             }
 
             const boqRow = getBoqRowFromStore({ rowIndex, blockIndex })
 
-            if (!boqRow) {
+            if (boqRow === undefined) {
               return
             }
 

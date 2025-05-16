@@ -58,7 +58,7 @@ export const DragBlockIcon = (): React.JSX.Element => {
           }, 500)
         }}
         onPointerLeave={(event) => {
-          if (!isDragging) {
+          if (isDragging === false) {
             setOpenTooltip(false)
             isOverDragIcon.current = false
           }

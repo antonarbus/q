@@ -248,6 +248,12 @@ export function useLoadQuotation(): void {
     if (isError) {
       if (error.response?.status === httpStatus.forbidden_403) {
         dispatch(
+          quotationSlice.actions.loadQuotationReducer({
+            quotation: error.response.data.quotation,
+          }),
+        )
+
+        dispatch(
           appSlice.actions.setBackgroundMessage({
             message: `Forbidden to view quotation ${quotationId}`,
           }),

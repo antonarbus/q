@@ -29,7 +29,7 @@ export const BoqProvider = ({ children }: Props): React.JSX.Element => {
 export const useBoq = (): BoqContextType => {
   const context = useContext(BoqContext)
 
-  if (!context) {
+  if (context === null) {
     throw new Error('useBoq must be used within a BoqProvider')
   }
 

@@ -41,7 +41,7 @@ export const EmailField = ({
     const isMailPatternOk =
       inputFocusedOutOnesSignal.value &&
       emailSignal.value !== '' &&
-      !isEmailOkSignal.value
+      isEmailOkSignal.value === false
 
     emailLabelSignal.value = isMailPatternOk
       ? 'Check email pattern'

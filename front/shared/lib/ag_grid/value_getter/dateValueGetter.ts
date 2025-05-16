@@ -16,7 +16,7 @@ export const dateValueGetter =
 
     const dateObj = new Date(dateIsoString)
 
-    if (!isValid(new Date(dateObj))) {
+    if (isValid(new Date(dateObj)) === false) {
       return null
     }
 

@@ -11,7 +11,7 @@ import { textSlice } from '@shared/lib/froala/textSlice'
 export const CopyBlockIcon = (): React.JSX.Element => {
   const { blockIndex } = useBlock()
   const isCopyable = useSelector((state) => state.copy.isCopyable)
-  const disabled = !isCopyable
+  const disabled = isCopyable === false
 
   return (
     <Tooltip
@@ -39,7 +39,7 @@ export const CopyBlockIcon = (): React.JSX.Element => {
 
             const blockToCopy = getState().quotation.blocks[blockIndex]
 
-            if (!blockToCopy) {
+            if (blockToCopy === undefined) {
               return
             }
 
@@ -60,7 +60,7 @@ export const CopyBlockIcon = (): React.JSX.Element => {
 
             const isCopyModalVisible = getState().copy.isVisible
 
-            if (!isCopyModalVisible) {
+            if (isCopyModalVisible === false) {
               dispatch(copySlice.actions.showCopyModal())
             }
           }}

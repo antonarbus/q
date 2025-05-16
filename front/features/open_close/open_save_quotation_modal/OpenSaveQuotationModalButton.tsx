@@ -72,7 +72,7 @@ export const OpenSaveQuotationModalButton = ({
             translate: '0px 1px',
           }}
         >
-          {!isPending && <AiTwotoneEdit />}
+          {isPending === false && <AiTwotoneEdit />}
           {isPending && <RotatingLoaderIcon />}
         </IconButton>
       </Link>

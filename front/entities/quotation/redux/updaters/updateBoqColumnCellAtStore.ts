@@ -29,7 +29,7 @@ export const updateBoqColumnCellAtStore = ({
   const html = editorRef.current.html.get()
   const didTextChange = prevHtml !== html
 
-  if (!didTextChange) {
+  if (didTextChange === false) {
     return
   }
 

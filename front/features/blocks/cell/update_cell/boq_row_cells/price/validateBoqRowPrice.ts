@@ -37,7 +37,7 @@ export const validateBoqRowPrice = ({
     rowIndex,
   })
 
-  if (!isPriceValid) {
+  if (isPriceValid === false) {
     const boqRow = getBoqRowFromStore({ blockIndex, rowIndex })
 
     if (boqRow === undefined) {

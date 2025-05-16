@@ -80,7 +80,7 @@ export const useSaveBookmark = ({
 
     const { email } = getState().user
 
-    if (!email) {
+    if (email === null) {
       toast.warning('Not logged in')
 
       return
@@ -90,7 +90,7 @@ export const useSaveBookmark = ({
       `.${cls.formModal} .${cls.paper}`,
     )
 
-    if (!paperElement) {
+    if (paperElement === null) {
       return
     }
 
@@ -110,7 +110,7 @@ export const useSaveBookmark = ({
 
     const bookmarkBlock = getState().quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
 
-    if (!bookmarkBlock) {
+    if (bookmarkBlock === undefined) {
       toast.warning('No item loaded')
 
       return

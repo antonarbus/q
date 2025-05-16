@@ -22,32 +22,32 @@ export const useCloseMenuOnClickOutside = ({
 
       const navItem = menuContainerRef.current.parentElement
 
-      if (!navItem) {
+      if (navItem === null) {
         return
       }
 
       const clickedElement = e.target
 
-      if (!(clickedElement instanceof HTMLElement)) {
+      if (clickedElement instanceof HTMLElement === false) {
         return
       }
 
       const isClickOnOpenedNavItem =
         didClickInsideThisElement({ clickedElement, thisElement: navItem }) &&
-        !didClickInsideThisElement({
+        didClickInsideThisElement({
           clickedElement,
           thisElement: menuContainer,
-        })
+        }) === false
 
       if (isClickOnOpenedNavItem) {
         return
       }
 
       if (
-        !didClickInsideThisElement({
+        didClickInsideThisElement({
           clickedElement,
           thisElement: menuContainer,
-        })
+        }) === false
       ) {
         dispatch(navSlice.actions.closeMenu())
       }

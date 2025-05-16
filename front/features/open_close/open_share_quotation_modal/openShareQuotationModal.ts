@@ -9,7 +9,7 @@ export const openShareQuotationModal = (): void => {
     navigateTo: `/${route.share}`,
   }
 
-  if (!getState().user.email) {
+  if (getState().user.email === null) {
     void router.navigate(`./${route.login}`, {
       state: navigateState,
     })

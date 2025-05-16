@@ -43,7 +43,7 @@ export const updateSubTotalPriceWithValue = ({
 
   const didValueChange = value !== subTotalPriceValueCurrent
 
-  if (!didValueChange) {
+  if (didValueChange === false) {
     return {
       didChange: false,
     }

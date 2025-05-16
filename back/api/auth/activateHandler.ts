@@ -34,7 +34,7 @@ export const activateHandler: RouterHandler = async (req, res, next) => {
     activationKey: activationKeyFromInput,
   })
 
-  if (!user) {
+  if (user === null) {
     res
       .status(httpStatus.badRequest_400)
       .json({ message: 'activation key not found' })

@@ -72,10 +72,29 @@ export default [
       'no-duplicate-imports': 'error',
       'no-restricted-syntax': [
         'error',
+        // {
+        //   selector: 'IfStatement > CallExpression.test',
+        //   message:
+        //     'Do not call expressions directly in if statements. Assign the result to a variable first.',
+        // },
+        // {
+        //   selector: 'IfStatement > LogicalExpression.test',
+        //   message:
+        //     'Do not use logical expressions directly in if statements. Assign to a variable first.',
+        // },
+        // {
+        //   selector: 'IfStatement > UnaryExpression.test',
+        //   message:
+        //     'Avoid negating expressions directly in if statements. Assign to a variable first.',
+        // },
         {
           selector: 'ReturnStatement > CallExpression',
           message:
             'Do not return expressions directly. Assign them to a variable first.',
+        },
+        {
+          selector: 'UnaryExpression[operator="!"]',
+          message: 'Avoid using negation (!condition).',
         },
       ],
 
@@ -119,9 +138,21 @@ export default [
       '@typescript-eslint/no-import-type-side-effects': 'error',
 
       // turn off some rules from tseslint.configs.all
+      '@typescript-eslint/strict-boolean-expressions': [
+        'off',
+        {
+          allowAny: false,
+          allowNullableBoolean: false,
+          allowNullableEnum: false,
+          allowNullableNumber: false,
+          allowNullableObject: false,
+          allowNullableString: false,
+          allowNumber: false,
+          allowString: false,
+        },
+      ],
       '@typescript-eslint/naming-convention': 'off',
       '@typescript-eslint/prefer-readonly-parameter-types': 'off',
-      '@typescript-eslint/strict-boolean-expressions': 'off', // good to use, but to much changes required
       '@typescript-eslint/no-unnecessary-type-parameters': 'off', // check it later, it may make sense
       '@typescript-eslint/no-magic-numbers': 'off',
       '@typescript-eslint/prefer-destructuring': 'off',
@@ -130,6 +161,7 @@ export default [
       '@typescript-eslint/indent': 'off', // bad for performance
       '@typescript-eslint/no-unsafe-type-assertion': 'off',
       '@typescript-eslint/no-misused-spread': 'off',
+      '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'off',
 
       // https://github.com/jsx-eslint/eslint-plugin-react
       'react/react-in-jsx-scope': 'off',

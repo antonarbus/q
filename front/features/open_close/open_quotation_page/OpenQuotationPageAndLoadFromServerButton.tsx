@@ -16,14 +16,7 @@ export const OpenQuotationPageAndLoadFromServerButton = ({
       enterDelay={500}
       enterNextDelay={500}
     >
-      <Link
-        to={`/${id}`}
-        onClick={() => {
-          // todo: do we really need to re-render quotation?
-          // todo: Now we most likely need to re-load it again
-          // dispatch(appSlice.actions.reRenderQuotation())
-        }}
-      >
+      <Link to={`/${id}`}>
         <IconButton size='small'>
           <AiOutlineFolderOpen />
         </IconButton>

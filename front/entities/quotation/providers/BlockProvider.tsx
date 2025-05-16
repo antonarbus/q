@@ -32,7 +32,7 @@ export const BlockProvider = ({
 export const useBlock = (): Context => {
   const context = useContext(BlockContext)
 
-  if (!context) {
+  if (context === null) {
     throw new Error('useBlock must be used within a BlockProvider')
   }
 

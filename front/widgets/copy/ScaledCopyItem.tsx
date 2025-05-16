@@ -14,7 +14,7 @@ export const ScaledCopyItem = ({
   const divRef = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {
-    if (!divRef.current) {
+    if (divRef.current === null) {
       return
     }
 

@@ -37,7 +37,7 @@ export const updateBoqRowQtyCell = ({
     boqRowCellKey: boqRowCellKey.qty,
   })
 
-  if (!didContentChange) {
+  if (didContentChange === false) {
     return
   }
 

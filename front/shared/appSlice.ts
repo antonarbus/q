@@ -1,8 +1,6 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
-import { generateId } from '@shared/lib/nanoid'
 
 type State = {
-  quotationKey: string
   shouldLoadQuotation: {
     yesOrNo: 'yes' | 'no'
     from: 'server' | 'template' | 'memory' | undefined
@@ -15,7 +13,6 @@ type State = {
 }
 
 const initialState: State = {
-  quotationKey: generateId(),
   shouldLoadQuotation: {
     yesOrNo: 'no',
     from: undefined,
@@ -41,11 +38,6 @@ export const appSlice = createSlice({
       const { yesOrNo, from } = action.payload
       state.shouldLoadQuotation.yesOrNo = yesOrNo
       state.shouldLoadQuotation.from = from
-    },
-
-    /** Force to re-render blocks coz they update only if number of blocks are changed */
-    reRenderQuotation: (state) => {
-      state.quotationKey = generateId()
     },
     setBackgroundMessage: (
       state,

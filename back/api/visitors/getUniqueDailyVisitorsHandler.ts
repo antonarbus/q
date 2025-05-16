@@ -34,7 +34,7 @@ export const getUniqueDailyVisitorsHandler: RouterHandler = async (
   const userFromAccessToken = getUserFromAccessTokenOrNull({ req })
   const roles = userFromAccessToken?.roles ?? []
 
-  if (!roles.includes(userRole.superAdmin)) {
+  if (roles.includes(userRole.superAdmin) === false) {
     res
       .status(httpStatus.forbidden_403)
       .json({ visitorsCount: [], message: 'forbidden' })

@@ -43,7 +43,7 @@ export const onColumnResize = ({
 
   const didWidthChange = column.width !== width
 
-  if (!didWidthChange) {
+  if (didWidthChange === false) {
     return
   }
 
