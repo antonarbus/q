@@ -42,10 +42,11 @@ const stripHandlerFromApiRoutes = (): unknown => {
             return {
               visitor: {
                 ObjectProperty(path: NodePath<ObjectProperty>): void {
-                  if (
+                  const isHandlerIdentifier =
                     path.node.key.type === 'Identifier' &&
                     path.node.key.name === 'handler'
-                  ) {
+
+                  if (isHandlerIdentifier) {
                     path.remove()
                   }
                 },

@@ -36,7 +36,9 @@ export const placeCaretAtTheEndIfToolbarIsNotShown = ({
   const isFrBox = clickedElement.matches('.fr-box')
   const isFroalaWrapper = clickedElement.matches('.froala-wrapper')
 
-  if (isFrBox || isFroalaWrapper) {
+  const insideFroala = isFrBox || isFroalaWrapper
+
+  if (insideFroala) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     const contentEditableElement = editorRef.current.$el.get(0)
 

@@ -12,11 +12,12 @@ export const LoadingDotsOverlay = ({
 }: Props): React.JSX.Element | null => {
   const loadingOverlay = useSelector((state) => state.app.loadingOverlay)
 
-  if (
+  const notLoading =
     loadingOverlay.text === '' &&
     loadingOverlay.showLoader === false &&
     showLoader === false
-  ) {
+
+  if (notLoading) {
     return null
   }
 

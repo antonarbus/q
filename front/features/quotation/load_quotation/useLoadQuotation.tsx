@@ -43,8 +43,10 @@ export function useLoadQuotation(): void {
       return 'server'
     }
 
-    // auto detect
-    if (quotationId === undefined || quotationId === 'new') {
+    const shouldAutoDetectFromWhereToLoadQuotation =
+      quotationId === undefined || quotationId === 'new'
+
+    if (shouldAutoDetectFromWhereToLoadQuotation) {
       return 'template'
       // eslint-disable-next-line no-else-return
     } else {
@@ -227,7 +229,7 @@ export function useLoadQuotation(): void {
 
   // above we triggered quotation loading, now we handle the response
   useUpdateEffect(() => {
-    if (isSuccess && quotationId !== 'new' && quotationId !== undefined) {
+    if (isSuccess) {
       const quotation = data.quotation
 
       dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))

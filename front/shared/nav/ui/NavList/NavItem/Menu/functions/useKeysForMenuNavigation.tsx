@@ -70,7 +70,9 @@ export const useKeysForMenuNavigation = (): void => {
       return
     }
 
-    if (isNestedMenu && e.key === 'Backspace') {
+    const shouldGoBack = isNestedMenu && e.key === 'Backspace'
+
+    if (shouldGoBack) {
       dispatch(
         navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
       )
@@ -80,7 +82,9 @@ export const useKeysForMenuNavigation = (): void => {
       return
     }
 
-    if (isNestedMenu === false && e.key === 'Backspace') {
+    const shouldClose = isNestedMenu === false && e.key === 'Backspace'
+
+    if (shouldClose) {
       dispatch(navSlice.actions.closeMenu())
 
       return
@@ -157,7 +161,9 @@ export const useKeysForMenuNavigation = (): void => {
 
     // jump to "Close" & "Back"
     if (anyLetterPressed) {
-      if (isNestedMenu === false && e.key === 'c') {
+      const shouldJumpToClose = isNestedMenu === false && e.key === 'c'
+
+      if (shouldJumpToClose) {
         dispatch(
           navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
         )
@@ -165,7 +171,9 @@ export const useKeysForMenuNavigation = (): void => {
         return
       }
 
-      if (isNestedMenu && e.key === 'b') {
+      const shouldJumpToGoBack = isNestedMenu && e.key === 'b'
+
+      if (shouldJumpToGoBack) {
         dispatch(
           navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
         )

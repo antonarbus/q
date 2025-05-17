@@ -41,7 +41,9 @@ export const BackdropWithSlidableModal = ({
 
   useEffectOnce(() => {
     const closeModalOnEsc = (e: KeyboardEvent): void => {
-      if (shouldUnmountOnEsc && e.key === 'Escape') {
+      const shouldCloseModalOnEsc = shouldUnmountOnEsc && e.key === 'Escape'
+
+      if (shouldCloseModalOnEsc) {
         if (location.state?.shouldSlide) {
           const slideOutAndSomeAction = async (): Promise<void> => {
             await slideOut()

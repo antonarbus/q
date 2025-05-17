@@ -63,7 +63,11 @@ export const useSaveQuotation = ({
   }, [isPending])
 
   useUpdateEffect(() => {
-    if (isSuccess && data.quotation !== undefined) {
+    if (data?.quotation === undefined) {
+      return
+    }
+
+    if (isSuccess) {
       if (data.message === 'saved') {
         toast.success(`Saved under id ${data.quotation.id}`)
       }

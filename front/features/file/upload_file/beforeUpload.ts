@@ -97,7 +97,13 @@ export const beforeUpload: BeforeUpload = async (props) => {
     method: api.fileUploadSignedUrl.method,
   })
 
-  if (signedUrlRes.signedUrl === null || signedUrlRes.url === null) {
+  if (signedUrlRes.signedUrl === null) {
+    toast.error('Failed', { id: toastId })
+
+    return
+  }
+
+  if (signedUrlRes.url === null) {
     toast.error('Failed', { id: toastId })
 
     return
@@ -123,45 +129,57 @@ export const beforeUpload: BeforeUpload = async (props) => {
 
         await asyncDelay(50)
 
-        if (progressEvent.lengthComputable && progressEvent.total) {
-          const percentCompleted = Math.round(
-            (progressEvent.loaded * 100) / progressEvent.total,
-          )
+        if (progressEvent.lengthComputable === false) {
+          return
+        }
 
-          if (percentCompleted <= 95) {
-            toast.loading(`Uploading... ${percentCompleted}%`, {
-              id: toastId,
-            })
-          }
+        if (progressEvent.total === undefined) {
+          return
+        }
 
-          if (percentCompleted === 100 && eventCount === 1) {
-            await asyncDelay(50)
-            toast.loading(`Uploading... 10%`, { id: toastId })
-            await asyncDelay(50)
-            toast.loading(`Uploading... 20%`, { id: toastId })
-            await asyncDelay(50)
-            toast.loading(`Uploading... 30%`, { id: toastId })
-            await asyncDelay(50)
-            toast.loading(`Uploading... 40%`, { id: toastId })
-            await asyncDelay(50)
-            toast.loading(`Uploading... 50%`, { id: toastId })
-            await asyncDelay(50)
-            toast.loading(`Uploading... 60%`, { id: toastId })
-            await asyncDelay(50)
-            toast.loading(`Uploading... 70%`, { id: toastId })
-            await asyncDelay(50)
-            toast.loading(`Uploading... 80%`, { id: toastId })
-            await asyncDelay(50)
-            toast.loading(`Uploading... 90%`, { id: toastId })
-          }
+        const percentCompleted = Math.round(
+          (progressEvent.loaded * 100) / progressEvent.total,
+        )
 
-          if (percentCompleted === 100 && eventCount !== 1) {
-            toast.loading(`Uploading... 95%`, { id: toastId })
-          }
+        if (percentCompleted <= 95) {
+          toast.loading(`Uploading... ${percentCompleted}%`, {
+            id: toastId,
+          })
+        }
 
-          if (percentCompleted === 100) {
-            resolveWaitForUploadPromise('done')
-          }
+        const gotCompletedInOneChunk =
+          percentCompleted === 100 && eventCount === 1
+
+        if (gotCompletedInOneChunk) {
+          await asyncDelay(50)
+          toast.loading(`Uploading... 10%`, { id: toastId })
+          await asyncDelay(50)
+          toast.loading(`Uploading... 20%`, { id: toastId })
+          await asyncDelay(50)
+          toast.loading(`Uploading... 30%`, { id: toastId })
+          await asyncDelay(50)
+          toast.loading(`Uploading... 40%`, { id: toastId })
+          await asyncDelay(50)
+          toast.loading(`Uploading... 50%`, { id: toastId })
+          await asyncDelay(50)
+          toast.loading(`Uploading... 60%`, { id: toastId })
+          await asyncDelay(50)
+          toast.loading(`Uploading... 70%`, { id: toastId })
+          await asyncDelay(50)
+          toast.loading(`Uploading... 80%`, { id: toastId })
+          await asyncDelay(50)
+          toast.loading(`Uploading... 90%`, { id: toastId })
+        }
+
+        const gotCompletedInMultipleChunks =
+          percentCompleted === 100 && eventCount !== 1
+
+        if (gotCompletedInMultipleChunks) {
+          toast.loading(`Uploading... 95%`, { id: toastId })
+        }
+
+        if (percentCompleted === 100) {
+          resolveWaitForUploadPromise('done')
         }
       }
 

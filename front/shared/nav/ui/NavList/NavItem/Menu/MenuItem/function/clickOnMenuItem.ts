@@ -30,9 +30,9 @@ export const clickOnMenuItem = (
     return
   }
 
-  if (link && func) {
+  if (link) {
     // follow the link natively and call the func
-    void func(e)
+    void func?.(e)
     dispatch(navSlice.actions.closeMenu())
 
     return

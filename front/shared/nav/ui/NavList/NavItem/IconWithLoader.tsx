@@ -28,28 +28,6 @@ export const IconWithLoader = (props: Props): React.ReactNode => {
     return icon
   }
 
-  if (icon && isLoading) {
-    return <SpinnerIcon />
-  }
-
-  if (icon && isSuccess) {
-    return <SuccessIcon />
-  }
-
-  if (icon && isError) {
-    return <ErrorIcon />
-  }
-
-  if (icon && isLoading !== true && isSuccess !== true && isError !== true) {
-    return (
-      <Icon
-        icon={icon}
-        disabled={disabled}
-        tooltipText={tooltipText}
-      />
-    )
-  }
-
   if (Boolean(icon) === false) {
     return (
       <Icon
@@ -59,5 +37,23 @@ export const IconWithLoader = (props: Props): React.ReactNode => {
     )
   }
 
-  return null
+  if (isLoading) {
+    return <SpinnerIcon />
+  }
+
+  if (isSuccess) {
+    return <SuccessIcon />
+  }
+
+  if (isError) {
+    return <ErrorIcon />
+  }
+
+  return (
+    <Icon
+      icon={icon}
+      disabled={disabled}
+      tooltipText={tooltipText}
+    />
+  )
 }

@@ -42,7 +42,11 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
   })
 
   useUpdateEffect(() => {
-    if (isSuccess && data.item) {
+    if (data?.item === undefined) {
+      return
+    }
+
+    if (isSuccess) {
       dispatch(
         quotationSlice.actions.loadBlockAtPosThousandReducer({
           block: data.item,

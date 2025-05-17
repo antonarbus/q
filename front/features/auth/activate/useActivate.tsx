@@ -47,7 +47,11 @@ export const useActivate = (): Res => {
         return
       }
 
-      if (email === undefined || roles === undefined) {
+      if (email === undefined) {
+        return
+      }
+
+      if (roles === undefined) {
         return
       }
 

@@ -63,7 +63,11 @@ export const useShareQuotation = ({
   useUpdateEffect(() => {
     const quotation = data?.quotation
 
-    if (isSuccess && quotation !== undefined) {
+    if (quotation === undefined) {
+      return
+    }
+
+    if (isSuccess) {
       // may save new quotation by sharing the link, strange, but maybe nice
       if (data.message === 'saved') {
         toast.success(`Saved under id ${quotation.id}`)

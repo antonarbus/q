@@ -91,7 +91,10 @@ const movePasteTextItem = (e: MouseEvent): void => {
 
   const isNarrowGapUnderNav = e.clientY > 100
 
-  if (isNarrowGapUnderNav && isPasteTextShown === false) {
+  const isCursorAboveUnderNavDuringCopy =
+    isNarrowGapUnderNav && isPasteTextShown === false
+
+  if (isCursorAboveUnderNavDuringCopy) {
     const firstBlock = getState().quotation.blocks[0]
 
     if (firstBlock === undefined) {
@@ -121,7 +124,10 @@ const movePasteTextItem = (e: MouseEvent): void => {
     distanceToEdge: 20,
   })
 
-  if (isEqual(pastePlace, prevPlace) && isPasteTextShown) {
+  const stillMayPasteToTheSamePlace =
+    isEqual(pastePlace, prevPlace) && isPasteTextShown
+
+  if (stillMayPasteToTheSamePlace) {
     return
   }
 
@@ -129,11 +135,17 @@ const movePasteTextItem = (e: MouseEvent): void => {
   dispatch(copySlice.actions.updatePastePos(pastePlace))
   dispatch(copySlice.actions.showPasteText())
 
-  if (prevPlace.pastePos === 'bottom' && pastePlace.pastePos === 'top') {
+  const movedUpBetweenItems =
+    prevPlace.pastePos === 'bottom' && pastePlace.pastePos === 'top'
+
+  if (movedUpBetweenItems) {
     return
   }
 
-  if (prevPlace.pastePos === 'top' && pastePlace.pastePos === 'bottom') {
+  const movedDownBetweenItems =
+    prevPlace.pastePos === 'top' && pastePlace.pastePos === 'bottom'
+
+  if (movedDownBetweenItems) {
     return
   }
 
@@ -222,7 +234,10 @@ const movePasteTextBoqRow = (e: MouseEvent): void => {
     distanceToEdge: 10,
   })
 
-  if (isEqual(pastePlace, prevPlace) && isPasteTextShown) {
+  const shouldPasteToSamePlace =
+    isEqual(pastePlace, prevPlace) && isPasteTextShown
+
+  if (shouldPasteToSamePlace) {
     return
   }
 

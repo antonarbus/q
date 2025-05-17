@@ -64,7 +64,9 @@ export const DragBlockIcon = (): React.JSX.Element => {
           }
         }}
         onPointerMove={() => {
-          if (isDragging && dragTooltipTextSignal.value === 'Drag') {
+          const mayDrop = isDragging && dragTooltipTextSignal.value === 'Drag'
+
+          if (mayDrop) {
             dragTooltipTextSignal.value = 'Drop'
           }
         }}

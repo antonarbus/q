@@ -77,11 +77,11 @@ export default [
           message:
             'Do not call expressions directly in if statements. Assign the result to a variable first.',
         },
-        // {
-        //   selector: 'IfStatement > LogicalExpression.test',
-        //   message:
-        //     'Do not use logical expressions directly in if statements. Assign to a variable first.',
-        // },
+        {
+          selector: 'IfStatement > LogicalExpression.test',
+          message:
+            'Do not use logical expressions directly in if statements. Assign to a variable first.',
+        },
         // {
         //   selector: 'IfStatement > UnaryExpression.test',
         //   message:

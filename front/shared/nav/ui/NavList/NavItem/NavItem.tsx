@@ -52,7 +52,9 @@ export const NavItem = ({ navItem }: Props): React.JSX.Element => {
             e.preventDefault()
           }
 
-          if (isLoading || isSuccess || isError || disabled) {
+          const disableClick = isLoading ?? isSuccess ?? isError ?? disabled
+
+          if (disableClick) {
             e.preventDefault()
 
             return
