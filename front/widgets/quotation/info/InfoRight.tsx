@@ -35,14 +35,14 @@ export const InfoRight = (): React.ReactNode => {
       >
         <Tooltip title='Info'>
           <Link
-            to={disabled ? '' : `./${route.info}`}
+            to={disabled === true ? '' : `./${route.info}`}
             style={{ lineHeight: 0.1, height: '100%' }}
           >
             <PiInfoBold
               css={{
                 height: '100%',
                 width: 'auto',
-                fill: disabled ? '#c6c6c6' : '#6488cf',
+                fill: disabled === true ? '#c6c6c6' : '#6488cf',
                 ...(disabled === false && {
                   ':hover': {
                     fill: '#3c5588 !important',
@@ -54,7 +54,7 @@ export const InfoRight = (): React.ReactNode => {
         </Tooltip>
         <Tooltip title='Share'>
           <Link
-            to={disabled ? '' : `./${route.share}`}
+            to={disabled === true ? '' : `./${route.share}`}
             css={{
               lineHeight: 0.1,
               height: '100%',

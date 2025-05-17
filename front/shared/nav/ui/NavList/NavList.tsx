@@ -8,7 +8,9 @@ export const NavList = (): React.JSX.Element => {
   const { width } = useWindowSize()
 
   const isMobile = width < navMediaQuery.widthWhenNothingFits
-  const navStructureToLoad = isMobile ? navStructure : navStructure[0]?.navItems
+
+  const navStructureToLoad =
+    isMobile === true ? navStructure : navStructure[0]?.navItems
 
   const nonHiddenNavItems = navStructureToLoad
     ?.filter((navItem) => navItem.isHidden === false)

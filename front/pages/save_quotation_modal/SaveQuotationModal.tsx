@@ -43,9 +43,9 @@ export const SaveQuotationModal = (): React.JSX.Element => {
     <FormModal
       modalRef={modalRef}
       width='500px'
-      headerText={isQuotationsPage ? 'Quick edit' : 'Save quotation'}
+      headerText={isQuotationsPage === true ? 'Quick edit' : 'Save quotation'}
       headerIcon={<MdSaveAlt />}
-      buttonText={isQuotationsPage ? 'Update' : 'Save'}
+      buttonText={isQuotationsPage === true ? 'Update' : 'Save'}
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
       isButtonError={isError}

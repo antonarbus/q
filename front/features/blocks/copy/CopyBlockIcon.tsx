@@ -27,8 +27,8 @@ export const CopyBlockIcon = (): React.JSX.Element => {
           style={{
             position: 'relative',
             top: 1,
-            cursor: disabled ? 'default' : 'pointer',
-            color: disabled ? '#acacac' : '#000',
+            cursor: disabled === true ? 'default' : 'pointer',
+            color: disabled === true ? '#acacac' : '#000',
           }}
           onClick={(e: MouseEvent): void => {
             if (disabled === true) {

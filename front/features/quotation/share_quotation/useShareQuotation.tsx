@@ -93,7 +93,7 @@ export const useShareQuotation = ({
         await asyncDelay(1000)
         await slideOut()
         const id = data.quotation?.id
-        const navigateTo = isQuotationsPage ? '..' : `/${id}`
+        const navigateTo = isQuotationsPage === true ? '..' : `/${id}`
         void navigate(navigateTo, { replace: true })
       }
 

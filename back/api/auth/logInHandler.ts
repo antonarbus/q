@@ -71,12 +71,13 @@ export const logInHandler: RouterHandler = async (req, res, next) => {
       verifyRefreshToken(userFromDb.refreshJwtToken),
     )
 
-    const refreshJwtToken = isExistingRefreshJwtToken
-      ? userFromDb.refreshJwtToken
-      : generateRefreshToken({
-          email: emailFromInput,
-          roles: userFromDb.roles,
-        })
+    const refreshJwtToken =
+      isExistingRefreshJwtToken === true
+        ? userFromDb.refreshJwtToken
+        : generateRefreshToken({
+            email: emailFromInput,
+            roles: userFromDb.roles,
+          })
 
     setRefreshTokenCookie({ res, refreshJwtToken })
     setNoTraceMode({ res })
@@ -155,9 +156,10 @@ export const logInHandler: RouterHandler = async (req, res, next) => {
     verifyRefreshToken(userFromDb.refreshJwtToken),
   )
 
-  const refreshJwtToken = isExistingRefreshJwtToken
-    ? userFromDb.refreshJwtToken
-    : generateRefreshToken({ email: emailFromInput, roles: userFromDb.roles })
+  const refreshJwtToken =
+    isExistingRefreshJwtToken === true
+      ? userFromDb.refreshJwtToken
+      : generateRefreshToken({ email: emailFromInput, roles: userFromDb.roles })
 
   setRefreshTokenCookie({ res, refreshJwtToken })
 

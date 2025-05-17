@@ -14,7 +14,7 @@ export const PasteBlockTextOverlay = ({
     <>
       <div
         style={{
-          opacity: isPasteHere ? 0.2 : 1,
+          opacity: isPasteHere === true ? 0.2 : 1,
         }}
       >
         {children}

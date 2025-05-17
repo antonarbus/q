@@ -27,7 +27,7 @@ export const DragBoqRowIcon = (): React.JSX.Element => {
           tabIndex={-1}
           style={{
             cursor: 'move',
-            color: disabled ? '#acacac' : '#000',
+            color: disabled === true ? '#acacac' : '#000',
           }}
         />
       </span>

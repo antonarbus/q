@@ -9,7 +9,7 @@ export const TopMenuItemsContainer = (): React.JSX.Element => {
 
   return (
     <div className='non-slidable'>
-      {isNestedMenu ? <BackMenuItem /> : <CloseMenuItem />}
+      {isNestedMenu === true ? <BackMenuItem /> : <CloseMenuItem />}
     </div>
   )
 }

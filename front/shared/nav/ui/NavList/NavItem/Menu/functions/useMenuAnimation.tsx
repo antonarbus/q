@@ -136,7 +136,7 @@ export const useMenuAnimation = ({
             ? getFakeElementHeight()
             : getPrevElementHeight(),
         },
-        { duration: isFirstMount ? 0 : duration },
+        { duration: isFirstMount === true ? 0 : duration },
       )
     }
 

@@ -16,7 +16,7 @@ export const Shortcut = ({
     <span
       className='shortcut'
       css={css`
-        display: ${$isHovered ? 'block' : 'none'};
+        display: ${$isHovered === true ? 'block' : 'none'};
         position: absolute;
         right: 10px;
         top: 5px;

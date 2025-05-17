@@ -35,7 +35,7 @@ export const ShareQuotationModal = (): React.JSX.Element => {
       width='500px'
       headerText='Share'
       headerIcon={<ImLink />}
-      buttonText={isNewQuotation ? 'Save and share' : 'Update'}
+      buttonText={isNewQuotation === true ? 'Save and share' : 'Update'}
       isButtonDisabled={isButtonDisabled}
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}

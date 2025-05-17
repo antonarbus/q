@@ -45,7 +45,7 @@ export const formatRowBlockCellNumber = ({
   const newHtml = getStringWithNewFormattedNumber({
     string: html,
     oldNumber: value,
-    newNumber: roundToTwoDecimals ? roundedValue : value,
+    newNumber: roundToTwoDecimals === true ? roundedValue : value,
   })
 
   if (html === newHtml) {
@@ -57,7 +57,7 @@ export const formatRowBlockCellNumber = ({
   dispatch(
     quotationSlice.actions.updateRowBlockCellReducer({
       html: newHtml,
-      value: roundToTwoDecimals ? roundedValue : value,
+      value: roundToTwoDecimals === true ? roundedValue : value,
       boqRowCellKey,
     }),
   )

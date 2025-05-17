@@ -32,11 +32,11 @@ export const DeleteBlockIcon = (): React.JSX.Element => {
           tabIndex={-1}
           className={cls.actionIcon}
           style={{
-            color: disabled ? '#acacac' : '#000',
+            color: disabled === true ? '#acacac' : '#000',
           }}
           css={{
             '&:hover': {
-              color: disabled ? '#acacac' : 'red !important',
+              color: disabled === true ? '#acacac' : 'red !important',
             },
           }}
           onClick={(e: MouseEvent): void => {

@@ -100,11 +100,11 @@ export default [
           selector: 'IfStatement[test.type="Identifier"]',
           message: 'Use explicit boolean comparison like `if (x === true)`.',
         },
-        // {
-        //   selector: 'ConditionalExpression[test.type="Identifier"]',
-        //   message:
-        //     'Use explicit boolean comparison in ternary like `x ? y : z` → `x === true ? y : z`.',
-        // },
+        {
+          selector: 'ConditionalExpression[test.type="Identifier"]',
+          message:
+            'Use explicit boolean comparison in ternary like `x ? y : z` → `x === true ? y : z`.',
+        },
       ],
 
       // turn off some rules from pluginJs.configs.all

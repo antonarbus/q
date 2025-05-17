@@ -25,7 +25,7 @@ const variants: Variants = {
       return {
         y: 0,
         transition: {
-          delay: isSoleItem ? theme.copy.animationDuration : 0,
+          delay: isSoleItem === true ? theme.copy.animationDuration : 0,
           duration: theme.copy.animationDuration,
           // type: 'spring',
           ease: 'linear',

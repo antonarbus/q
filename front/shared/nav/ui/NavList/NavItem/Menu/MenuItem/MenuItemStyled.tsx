@@ -29,8 +29,8 @@ export const MenuItemLayout = ({
         color: #dadce1;
         white-space: nowrap;
         text-decoration: none;
-        background-color: ${isHovered ? '#5253575a' : 'initial'};
-        filter: ${isHovered ? 'brightness(1.2)' : 'none'};
+        background-color: ${isHovered === true ? '#5253575a' : 'initial'};
+        filter: ${isHovered === true ? 'brightness(1.2)' : 'none'};
       `}
       {...restProps}
     >

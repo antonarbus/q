@@ -33,7 +33,7 @@ export const BookmarkBoqRowIcon = (): React.ReactNode => {
           className={cls.actionIcon}
           tabIndex={-1}
           style={{
-            color: disabled ? '#acacac' : '#000',
+            color: disabled === true ? '#acacac' : '#000',
             cursor: 'pointer',
             touchAction: 'none',
           }}

@@ -44,7 +44,7 @@ export const ResizableBlockPaper = ({
         right: 'right-resize-handle',
       }}
       size={{
-        width: isAutoWidth ? 'auto' : width,
+        width: isAutoWidth === true ? 'auto' : width,
         height: 'auto',
       }}
       style={{
@@ -54,7 +54,7 @@ export const ResizableBlockPaper = ({
         position: 'relative',
       }}
       defaultSize={{
-        width: isAutoWidth ? 'auto' : width,
+        width: isAutoWidth === true ? 'auto' : width,
         height: 'auto',
       }}
       // grid={[20, 0]}

@@ -35,13 +35,14 @@ export const getAccessTokenHandler: RouterHandler = async (req, res, next) => {
 
   const shouldNotTrace = getShouldNotTrace({ req })
 
-  const user = shouldNotTrace
-    ? await UserModel.findOne({ email, refreshJwtToken })
-    : await UserModel.findOneAndUpdate(
-        { email, refreshJwtToken },
-        { loggedAt: Date.now() },
-        { new: true },
-      )
+  const user =
+    shouldNotTrace === true
+      ? await UserModel.findOne({ email, refreshJwtToken })
+      : await UserModel.findOneAndUpdate(
+          { email, refreshJwtToken },
+          { loggedAt: Date.now() },
+          { new: true },
+        )
 
   if (user === null) {
     removeRefreshTokenCookie({ res })

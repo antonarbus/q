@@ -19,7 +19,7 @@ export const BoqRowSortable = ({ children }: Props): React.JSX.Element => {
       style={{
         transform: CSS.Translate.toString(transform),
         transition,
-        zIndex: isDragging ? 1000 : 0,
+        zIndex: isDragging === true ? 1000 : 0,
       }}
     >
       {children}

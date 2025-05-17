@@ -47,7 +47,7 @@ export const BlockComp = ({
       style={{
         transform: CSS.Translate.toString(transform),
         transition,
-        zIndex: isDragging ? 1000 : 0,
+        zIndex: isDragging === true ? 1000 : 0,
       }}
     >
       <BlockAnimate

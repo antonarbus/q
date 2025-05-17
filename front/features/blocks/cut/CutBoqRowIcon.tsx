@@ -35,7 +35,7 @@ export const CutBoqRowIcon = (): React.JSX.Element => {
           className={cls.actionIcon}
           tabIndex={-1}
           style={{
-            color: disabled ? '#acacac' : '#000',
+            color: disabled === true ? '#acacac' : '#000',
           }}
           onClick={(e: MouseEvent): void => {
             if (disabled === true) {

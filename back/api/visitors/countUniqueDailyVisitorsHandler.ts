@@ -39,7 +39,7 @@ export const countUniqueDailyVisitorsHandler: RouterHandler = async (
     {
       $inc: {
         count: 1,
-        new: isNew ? 1 : 0,
+        new: isNew === true ? 1 : 0,
       },
     },
     { upsert: true, new: true },

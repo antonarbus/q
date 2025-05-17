@@ -80,8 +80,8 @@ export const DragBlockIcon = (): React.JSX.Element => {
         className={cls.actionIcon}
         tabIndex={-1}
         style={{
-          color: disabled ? '#acacac' : '#000',
-          cursor: disabled ? 'default' : 'move',
+          color: disabled === true ? '#acacac' : '#000',
+          cursor: disabled === true ? 'default' : 'move',
           touchAction: 'none',
         }}
       />

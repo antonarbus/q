@@ -46,7 +46,7 @@ export const formatBoqRowCellNumber = ({
   const newHtml = getStringWithNewFormattedNumber({
     string: html,
     oldNumber: value,
-    newNumber: roundToTwoDecimals ? roundedValue : value,
+    newNumber: roundToTwoDecimals === true ? roundedValue : value,
   })
 
   if (html === newHtml) {
@@ -60,7 +60,7 @@ export const formatBoqRowCellNumber = ({
       blockIndex,
       rowIndex,
       html: newHtml,
-      value: roundToTwoDecimals ? roundedValue : value,
+      value: roundToTwoDecimals === true ? roundedValue : value,
       boqRowCellKey,
     }),
   )

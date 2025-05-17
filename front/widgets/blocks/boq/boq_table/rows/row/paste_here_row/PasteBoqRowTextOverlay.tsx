@@ -15,7 +15,7 @@ export const PasteBoqRowTextOverlay = ({
       <div
         className='paste-here'
         style={{
-          opacity: isPasteHere ? 0.2 : 1,
+          opacity: isPasteHere === true ? 0.2 : 1,
           display: 'flex',
           alignItems: 'stretch',
         }}

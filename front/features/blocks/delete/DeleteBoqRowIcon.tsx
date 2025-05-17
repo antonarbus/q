@@ -32,11 +32,11 @@ export const DeleteBoqRowIcon = (): React.JSX.Element => {
           className={cls.actionIcon}
           tabIndex={-1}
           style={{
-            color: disabled ? '#acacac' : '#000',
+            color: disabled === true ? '#acacac' : '#000',
           }}
           css={{
             '&:hover': {
-              color: disabled ? '#acacac' : 'red !important',
+              color: disabled === true ? '#acacac' : 'red !important',
             },
           }}
           onClick={(): void => {

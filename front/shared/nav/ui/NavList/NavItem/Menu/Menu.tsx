@@ -56,7 +56,7 @@ export const Menu = (): React.JSX.Element => {
         top: calc(100% + 5px);
         right: 0;
         /* if right corner goes over the screen fix the left instead of right */
-        left: ${isMenuOutsideWindow ? '0' : 'not set'};
+        left: ${isMenuOutsideWindow === true ? '0' : 'not set'};
         width: ${theme.menu.width}px;
         padding-top: ${theme.menu.paddingTop}px;
         padding-bottom: ${theme.menu.paddingBottom}px;

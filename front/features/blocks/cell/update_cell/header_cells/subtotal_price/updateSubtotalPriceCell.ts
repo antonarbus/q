@@ -93,7 +93,7 @@ export const updateSubtotalPriceCell = ({
     return {
       oldValue,
       isPinned,
-      newValue: isPinned ? oldValue : roundTo(newValue, 2),
+      newValue: isPinned === true ? oldValue : roundTo(newValue, 2),
       editor: boqRowEditorRefs.at(index)?.price.current ?? null,
     }
   })

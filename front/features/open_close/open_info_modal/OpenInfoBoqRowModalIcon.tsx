@@ -31,7 +31,7 @@ export const OpenInfoBoqRowModalIcon = (): React.ReactNode => {
           tabIndex={-1}
           aria-hidden={false} // otherwise error in dev tools
           style={{
-            color: disabled ? '#acacac' : '#000',
+            color: disabled === true ? '#acacac' : '#000',
             cursor: 'pointer',
             touchAction: 'none',
           }}

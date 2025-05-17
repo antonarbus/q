@@ -43,9 +43,8 @@ export const EmailField = ({
       emailSignal.value !== '' &&
       isEmailOkSignal.value === false
 
-    emailLabelSignal.value = isMailPatternOk
-      ? 'Check email pattern'
-      : initEmailLabel
+    emailLabelSignal.value =
+      isMailPatternOk === true ? 'Check email pattern' : initEmailLabel
   })
 
   const suggestEmail = (email: string): void => {

@@ -34,8 +34,8 @@ export const CutBlockIcon = (): React.JSX.Element => {
           tabIndex={-1}
           className={cls.actionIcon}
           style={{
-            color: disabled ? '#acacac' : '#000',
-            cursor: disabled ? 'default' : 'pointer',
+            color: disabled === true ? '#acacac' : '#000',
+            cursor: disabled === true ? 'default' : 'pointer',
           }}
           onClick={(e: MouseEvent): void => {
             if (disabled === true) {
