@@ -5,7 +5,7 @@ import { navSlice } from '@shared/nav'
 export const setBackToQuotation = (): void => {
   const currentQuotation = getState().quotation
 
-  if (currentQuotation.id) {
+  if (Boolean(currentQuotation.id) === true) {
     backToQuotationRef.current = currentQuotation
     dispatch(navSlice.actions.showNavItems({ navItemIds: ['back'] }))
   }

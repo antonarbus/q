@@ -82,11 +82,11 @@ export default [
           message:
             'Do not use logical expressions directly in if statements. Assign to a variable first.',
         },
-        // {
-        //   selector: 'IfStatement > UnaryExpression.test',
-        //   message:
-        //     'Avoid negating expressions directly in if statements. Assign to a variable first.',
-        // },
+        {
+          selector: 'IfStatement > UnaryExpression.test',
+          message:
+            'Avoid negating expressions directly in if statements. Assign to a variable first.',
+        },
         {
           selector: 'ReturnStatement > CallExpression',
           message:
@@ -139,16 +139,16 @@ export default [
 
       // turn off some rules from tseslint.configs.all
       '@typescript-eslint/strict-boolean-expressions': [
-        'off',
+        'error',
         {
           allowAny: false,
-          allowNullableBoolean: false,
-          allowNullableEnum: false,
-          allowNullableNumber: false,
-          allowNullableObject: false,
-          allowNullableString: false,
-          allowNumber: false,
-          allowString: false,
+          allowNullableBoolean: true,
+          allowNullableEnum: true,
+          allowNullableNumber: true,
+          allowNullableObject: true,
+          allowNullableString: true,
+          allowNumber: true,
+          allowString: true,
         },
       ],
       '@typescript-eslint/naming-convention': 'off',

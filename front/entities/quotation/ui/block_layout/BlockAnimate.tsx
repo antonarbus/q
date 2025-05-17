@@ -78,7 +78,7 @@ export const BlockAnimate = ({
         width: '100%',
       }}
     >
-      {leftItemActionButtons && (
+      {Boolean(leftItemActionButtons) && (
         <Box style={{ paddingTop: '5px' }}>{leftItemActionButtons}</Box>
       )}
       <ResizableBlockPaper
@@ -91,7 +91,7 @@ export const BlockAnimate = ({
       >
         {children}
       </ResizableBlockPaper>
-      {rightItemActionButtons && (
+      {Boolean(rightItemActionButtons) && (
         <Box style={{ paddingTop: '5px' }}>{rightItemActionButtons}</Box>
       )}
     </motion.div>
