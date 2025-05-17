@@ -51,8 +51,8 @@ export const PriceCell = (): React.JSX.Element => {
         htmlGetter={() =>
           getBoqCellHtmlFromStore({
             blockIndex,
-            rowIndex,
             boqRowCellKey: boqRowCellKey.price,
+            rowIndex,
           })
         }
         onFocus={() => {
@@ -69,7 +69,11 @@ export const PriceCell = (): React.JSX.Element => {
           })
         }}
         onBlur={() => {
-          formatBoqRowPriceCell({ rowIndex, priceCellEditorRef, blockIndex })
+          formatBoqRowPriceCell({
+            blockIndex,
+            priceCellEditorRef,
+            rowIndex,
+          })
 
           validateBoqRowPrice({
             blockIndex,
@@ -79,7 +83,11 @@ export const PriceCell = (): React.JSX.Element => {
           })
         }}
         onKeydown={(e) => {
-          tabFromPriceCell({ e, rowIndex, boqRowEditorRefs })
+          tabFromPriceCell({
+            boqRowEditorRefs,
+            e,
+            rowIndex,
+          })
         }}
         wrapperStyles={stylesForResizableCell}
         style={boqRowCellStyle}

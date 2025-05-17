@@ -11,8 +11,8 @@ export const BoqRowAnimate = ({ children }: Props): React.JSX.Element => {
       initial={{
         height: 0,
         opacity: 0,
-        y: '100vh',
         overflow: 'hidden',
+        y: '100vh',
       }}
       animate={{
         height: 'auto', // height is being stored on copy/cut icon click
@@ -26,8 +26,8 @@ export const BoqRowAnimate = ({ children }: Props): React.JSX.Element => {
       exit={{
         height: 0,
         opacity: 0,
-        x: '150vw',
         overflow: 'hidden',
+        x: '150vw',
       }}
       transition={{
         duration: theme.block.animationDuration,

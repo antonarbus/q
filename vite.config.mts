@@ -24,8 +24,8 @@ const stripHandlerFromApiRoutes = (): unknown => {
   const targetFilePath = resolve(thisDirPath, 'back/api/api.ts')
 
   return {
-    name: 'vite-strip-handler-from-api-routes',
     enforce: 'pre',
+    name: 'vite-strip-handler-from-api-routes',
     async transform(code: string, id: string): Promise<BabelFileResult | null> {
       if (resolve(id) !== targetFilePath) {
         return null
@@ -34,8 +34,9 @@ const stripHandlerFromApiRoutes = (): unknown => {
       console.info('⛭ Stripping "handler" props from api object')
 
       const result = await transformAsync(code, {
+        babelrc: false,
+        configFile: false,
         filename: id,
-        presets: ['@babel/preset-typescript'],
         plugins: [
           // eslint-disable-next-line func-names, @typescript-eslint/explicit-function-return-type
           function () {
@@ -54,8 +55,7 @@ const stripHandlerFromApiRoutes = (): unknown => {
             }
           },
         ],
-        configFile: false,
-        babelrc: false,
+        presets: ['@babel/preset-typescript'],
       })
 
       return result === null ? null : { code: result.code, map: null }
@@ -122,12 +122,12 @@ export default {
   resolve: {
     alias: {
       '@back': join(thisDirPath, 'back'),
+      '@entities': join(thisDirPath, 'front', 'entities'),
+      '@features': join(thisDirPath, 'front', 'features'),
       '@lib_instances': join(thisDirPath, 'front', 'lib_instances'),
       '@pages': join(thisDirPath, 'front', 'pages'),
-      '@widgets': join(thisDirPath, 'front', 'widgets'),
-      '@features': join(thisDirPath, 'front', 'features'),
-      '@entities': join(thisDirPath, 'front', 'entities'),
       '@shared': join(thisDirPath, 'front', 'shared'),
+      '@widgets': join(thisDirPath, 'front', 'widgets'),
     },
   },
   build: {

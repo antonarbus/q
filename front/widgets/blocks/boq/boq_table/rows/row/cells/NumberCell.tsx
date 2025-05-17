@@ -23,8 +23,8 @@ export const NumberCell = (): React.JSX.Element => {
       className={'td number'}
       style={{
         ...stylesForResizableCell,
-        fontSize: '10px',
         color: 'grey',
+        fontSize: '10px',
         paddingBottom: '4px',
       }}
     >

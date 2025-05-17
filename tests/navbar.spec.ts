@@ -8,7 +8,13 @@ test.beforeEach(async ({ page }) => {
 
 test.describe('nav icons & text on wide screen', () => {
   test.use({ storageState: userFilePath.authenticated })
-  test.use({ viewport: { width: 1600, height: 1200 } })
+
+  test.use({
+    viewport: {
+      height: 1200,
+      width: 1600,
+    },
+  })
 
   test('should show icons & text', async ({ page }) => {
     // page.on('request', (request) => {
@@ -46,7 +52,13 @@ test.describe('nav icons & text on wide screen', () => {
 })
 
 test.describe('nav icons for guest user', () => {
-  test.use({ viewport: { width: 1600, height: 1200 } })
+  test.use({
+    viewport: {
+      height: 1200,
+      width: 1600,
+    },
+  })
+
   test.use({ storageState: userFilePath.guest })
 
   test('should show icons & text', async ({ page }) => {
@@ -60,7 +72,12 @@ test.describe('nav icons for guest user', () => {
 })
 
 test.describe('nav icons & text on super narrow screen', () => {
-  test.use({ viewport: { width: 500, height: 1200 } })
+  test.use({
+    viewport: {
+      height: 1200,
+      width: 500,
+    },
+  })
 
   test('should show only hamburger icon', async ({ page }) => {
     const nav = page.locator('nav')

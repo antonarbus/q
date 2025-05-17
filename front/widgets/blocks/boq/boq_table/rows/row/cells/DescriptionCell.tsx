@@ -33,20 +33,24 @@ export const DescriptionCell = (): React.JSX.Element => {
       htmlGetter={() =>
         getBoqCellHtmlFromStore({
           blockIndex,
-          rowIndex,
           boqRowCellKey: boqRowCellKey.description,
+          rowIndex,
         })
       }
       onContentChange={() => {
         updateDescriptionCell({
-          editorRef: descriptionEditorRef,
           blockIndex,
-          rowIndex,
           boqRowCellKey: boqRowCellKey.description,
+          editorRef: descriptionEditorRef,
+          rowIndex,
         })
       }}
       onKeydown={(e: React.KeyboardEvent) => {
-        tabFromDescriptionCell({ e, rowIndex, itemPriceCellEditorRef })
+        tabFromDescriptionCell({
+          e,
+          itemPriceCellEditorRef,
+          rowIndex,
+        })
       }}
       wrapperStyles={stylesForResizableCell}
       style={{

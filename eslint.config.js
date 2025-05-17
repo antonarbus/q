@@ -1,3 +1,4 @@
+/* eslint-disable sort-keys */
 import globals from 'globals'
 import pluginJs from '@eslint/js'
 import reactPlugin from 'eslint-plugin-react'
@@ -106,11 +107,11 @@ export default [
             'Use explicit boolean comparison in ternary like `x ? y : z` → `x === true ? y : z`.',
         },
       ],
+      'no-useless-assignment': 'error',
 
       // turn off some rules from pluginJs.configs.all
-      'no-alert': 'off',
-      'no-useless-assignment': 'off',
-      'sort-keys': 'off',
+      'no-alert': 'off', // i like alerts more than many popup components
+      'sort-keys': 'error',
       'max-lines-per-function': 'off',
       'no-ternary': 'off',
       'arrow-body-style': 'off',
@@ -160,6 +161,7 @@ export default [
       ],
       '@typescript-eslint/prefer-destructuring': 'error',
       '@typescript-eslint/no-misused-spread': 'error',
+
       // turn off some rules from tseslint.configs.all
       '@typescript-eslint/naming-convention': 'off', // that is too crazy
       '@typescript-eslint/prefer-readonly-parameter-types': 'off', // that is too crazy

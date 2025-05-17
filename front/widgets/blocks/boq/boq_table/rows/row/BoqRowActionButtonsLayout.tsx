@@ -11,13 +11,13 @@ export const BoqRowActionButtonsLayout = (props: Props): React.JSX.Element => {
     <Box
       className={cls.actionsContainer}
       style={{
-        position: 'absolute',
+        alignContent: 'center',
         bottom: 0,
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'flex-end',
-        alignContent: 'center',
         gap: '2px',
+        justifyContent: 'flex-end',
+        position: 'absolute',
         ...props.style,
       }}
       sx={{
@@ -26,11 +26,11 @@ export const BoqRowActionButtonsLayout = (props: Props): React.JSX.Element => {
           lineHeight: '10px',
         },
         [`.${cls.actionIcon}`]: {
-          height: '10px',
-          width: '10px',
-          transition: 'scale 0.2s',
           cursor: 'pointer',
+          height: '10px',
           outline: 0,
+          transition: 'scale 0.2s',
+          width: '10px',
         },
         [`.${cls.actionIcon}:hover`]: {
           scale: '1.5',
