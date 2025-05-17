@@ -21,7 +21,7 @@ export const removeCookie = ({
   let cookieString = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path};`
 
   // If a domain is provided, add it to the cookie string
-  if (domain) {
+  if (domain !== '') {
     cookieString += ` domain=${domain};`
   }
 

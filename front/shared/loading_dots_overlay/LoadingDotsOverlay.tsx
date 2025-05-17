@@ -51,7 +51,7 @@ export const LoadingDotsOverlay = ({
           height: '60px',
         }}
       >
-        {loadingOverlay.text || text}
+        {loadingOverlay.text !== '' || text}
       </div>
       {(loadingOverlay.showLoader || showLoader) && <LoadingDots />}
     </div>

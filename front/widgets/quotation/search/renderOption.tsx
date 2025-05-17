@@ -39,7 +39,7 @@ export const renderOption = ({
     const getHighlightedDescription = ():
       | string
       | (string | React.JSX.Element)[] => {
-      if (inputValueSignal.value) {
+      if (inputValueSignal.value !== '') {
         const boldSubString = getJsxWithBoldSubstr({
           text: option.desc ?? '',
           boldText: inputValueSignal.value,
@@ -52,7 +52,7 @@ export const renderOption = ({
         return '-'
       }
 
-      if (option.desc) {
+      if (option.desc !== '') {
         return option.desc
       }
 
@@ -119,12 +119,12 @@ export const renderOption = ({
               name:
             </span>
           </span>
-          {inputValueSignal.value
-            ? getJsxWithBoldSubstr({
+          {inputValueSignal.value === ''
+            ? option.name
+            : getJsxWithBoldSubstr({
                 text: option.name ?? '',
                 boldText: inputValueSignal.value,
-              })
-            : option.name}
+              })}
         </Box>
         <Box
           sx={{
@@ -155,12 +155,12 @@ export const renderOption = ({
               category:
             </span>
           </span>
-          {inputValueSignal.value
-            ? getJsxWithBoldSubstr({
+          {inputValueSignal.value === ''
+            ? (option.category ?? '')
+            : getJsxWithBoldSubstr({
                 text: option.category ?? '',
                 boldText: inputValueSignal.value,
-              })
-            : (option.category ?? '')}
+              })}
         </Box>
         <Box
           sx={{

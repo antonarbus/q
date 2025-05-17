@@ -24,7 +24,7 @@ self.onmessage = async (
     if (block.type === 'text') {
       const text = stripHtmlWithBreaksPreserve(block.text.html)
       // Split text into lines and write each line to a new row
-      const lines = text.split('\n').filter((line) => line.trim())
+      const lines = text.split('\n').filter((line) => line.trim() !== '')
 
       for (const line of lines) {
         worksheet.getCell(`A${excelRowNumber}`).value = line

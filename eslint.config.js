@@ -136,8 +136,6 @@ export default [
       '@typescript-eslint/consistent-type-exports': 'error',
       '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/no-import-type-side-effects': 'error',
-
-      // turn off some rules from tseslint.configs.all
       '@typescript-eslint/strict-boolean-expressions': [
         'error',
         {
@@ -148,9 +146,10 @@ export default [
           allowNullableObject: false,
           allowNullableString: false,
           allowNumber: false,
-          allowString: true,
+          allowString: false,
         },
       ],
+      // turn off some rules from tseslint.configs.all
       '@typescript-eslint/naming-convention': 'off',
       '@typescript-eslint/prefer-readonly-parameter-types': 'off',
       '@typescript-eslint/no-unnecessary-type-parameters': 'off', // check it later, it may make sense

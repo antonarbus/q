@@ -72,7 +72,7 @@ export const navSlice = createSlice({
       state.idsToCurrentMenuItems = state.idsToCurrentMenuItems.slice(0, -1)
       const currentMenuNavItemId = state.currentMenuNavItemId
 
-      if (currentMenuNavItemId) {
+      if (currentMenuNavItemId !== null) {
         const { parentNavItem } = getNavItem({
           navItemId: currentMenuNavItemId,
           navState: state,
@@ -93,7 +93,7 @@ export const navSlice = createSlice({
     goUpInNextMenu: (state) => {
       const nextMenuNavItemId = state.nextMenuNavItemId
 
-      if (nextMenuNavItemId) {
+      if (nextMenuNavItemId !== null) {
         const { parentNavItem } = getNavItem({
           navItemId: nextMenuNavItemId,
           navState: state,
