@@ -10,7 +10,8 @@ export const useHealthCheck = (): UseQueryResult<
 > => {
   const query = useQuery<ResBody, AxiosError<ResBody>>({
     queryKey: [queryKey.healthCheck],
-    retry: 0,
+    retry: 1,
+    retryDelay: 3000,
     queryFn: async () => {
       const res = await axios<ResBody, AxiosResponse<ResBody>>({
         url: api.health.url,
