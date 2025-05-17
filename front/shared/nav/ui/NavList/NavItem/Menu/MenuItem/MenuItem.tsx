@@ -44,7 +44,7 @@ export const MenuItem = ({ navItem, hoverIndex }: Props): React.JSX.Element => {
       to={to}
       isHovered={isHovered}
       onClick={(e: MouseEvent): void => {
-        if (isFunc) {
+        if (isFunc === true) {
           e.preventDefault()
         }
 
@@ -60,7 +60,7 @@ export const MenuItem = ({ navItem, hoverIndex }: Props): React.JSX.Element => {
           return
         }
 
-        if (disabled) {
+        if (disabled === true) {
           e.preventDefault()
 
           return

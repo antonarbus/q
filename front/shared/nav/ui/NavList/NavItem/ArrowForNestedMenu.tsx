@@ -13,7 +13,7 @@ export const ArrowForNestedMenu = (props: Props): React.ReactNode => {
 
   const isMobile = window.innerWidth < navMediaQuery.widthWhenNothingFits
 
-  if (isMobile) {
+  if (isMobile === true) {
     return null
   }
 
@@ -21,7 +21,7 @@ export const ArrowForNestedMenu = (props: Props): React.ReactNode => {
     return null
   }
 
-  if (disabled) {
+  if (disabled === true) {
     return null
   }
 

@@ -15,7 +15,7 @@ setup('authenticate', async () => {
 
   const isResponseOk = response.ok()
 
-  if (isResponseOk) {
+  if (isResponseOk === true) {
     await context.storageState({ path: userFilePath.authenticated })
     console.info('🫡 authenticated before all tests')
   } else {

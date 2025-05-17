@@ -17,7 +17,7 @@ export const LoadingDotsOverlay = ({
     loadingOverlay.showLoader === false &&
     showLoader === false
 
-  if (notLoading) {
+  if (notLoading === true) {
     return null
   }
 

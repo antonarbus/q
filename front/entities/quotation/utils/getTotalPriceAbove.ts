@@ -16,13 +16,13 @@ export const getTotalPriceAbove = ({ blockIndex, blocks }: Props): number => {
 
     const isPriceItem = blocks.at(i)?.type === itemType.price
 
-    if (isPriceItem) {
+    if (isPriceItem === true) {
       break
     }
 
     const isBoqItem = blocks.at(i)?.type === itemType.boq
 
-    if (isBoqItem) {
+    if (isBoqItem === true) {
       const boqItem = blocks.at(i) as Boq
       const subTotalPrice = boqItem.boq.header.subTotalPrice.value
       totalPriceAbove += subTotalPrice

@@ -24,7 +24,7 @@ export const arrayShapesEqualityFn: EqualityFn = (
 
   const isDifferentLength = prevSliced.length !== currentSliced.length
 
-  if (isDifferentLength) {
+  if (isDifferentLength === true) {
     return false
   }
 
@@ -33,7 +33,7 @@ export const arrayShapesEqualityFn: EqualityFn = (
       prevSliced[index]?.id !== currentSliced[index]?.id,
   )
 
-  if (idsDoNotMatch) {
+  if (idsDoNotMatch === true) {
     return false
   }
 

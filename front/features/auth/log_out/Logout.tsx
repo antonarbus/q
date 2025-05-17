@@ -16,7 +16,7 @@ export const Logout = (): React.JSX.Element => {
   useEffectOnce(logOut)
 
   useUpdateEffect(() => {
-    if (isPending) {
+    if (isPending === true) {
       dispatch(
         appSlice.actions.showLoadingOverlay({
           showLoader: true,
@@ -27,7 +27,7 @@ export const Logout = (): React.JSX.Element => {
   }, [isPending])
 
   useUpdateEffect(() => {
-    if (isSuccess) {
+    if (isSuccess === true) {
       deleteQuotationsCache()
       deleteBookmarksCache()
 
@@ -52,7 +52,7 @@ export const Logout = (): React.JSX.Element => {
   }, [isSuccess])
 
   useUpdateEffect(() => {
-    if (isError) {
+    if (isError === true) {
       toast.error('Problems with logging out')
 
       setTimeout(() => {

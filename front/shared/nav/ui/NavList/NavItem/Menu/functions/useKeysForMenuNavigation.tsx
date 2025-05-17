@@ -30,7 +30,7 @@ export const useKeysForMenuNavigation = (): void => {
       e.preventDefault()
       const isLastMenuItem = hoverIndex === menuItemsQty
 
-      if (isLastMenuItem) {
+      if (isLastMenuItem === true) {
         dispatch(
           navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
         )
@@ -51,7 +51,7 @@ export const useKeysForMenuNavigation = (): void => {
       e.preventDefault()
       const isTopMenuItem = hoverIndex < 1
 
-      if (isTopMenuItem) {
+      if (isTopMenuItem === true) {
         dispatch(
           navSlice.actions.setMenuItemHoverIndex({
             menuItemHoverIndex: menuItemsQty,
@@ -72,7 +72,7 @@ export const useKeysForMenuNavigation = (): void => {
 
     const shouldGoBack = isNestedMenu && e.key === 'Backspace'
 
-    if (shouldGoBack) {
+    if (shouldGoBack === true) {
       dispatch(
         navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
       )
@@ -84,7 +84,7 @@ export const useKeysForMenuNavigation = (): void => {
 
     const shouldClose = isNestedMenu === false && e.key === 'Backspace'
 
-    if (shouldClose) {
+    if (shouldClose === true) {
       dispatch(navSlice.actions.closeMenu())
 
       return
@@ -99,7 +99,7 @@ export const useKeysForMenuNavigation = (): void => {
     if (e.key === 'Enter') {
       const isBackMenuItem = hoverIndex === 0 && isNestedMenu
 
-      if (isBackMenuItem) {
+      if (isBackMenuItem === true) {
         dispatch(
           navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
         )
@@ -111,7 +111,7 @@ export const useKeysForMenuNavigation = (): void => {
 
       const isCloseMenuItem = hoverIndex === 0 && isNestedMenu === false
 
-      if (isCloseMenuItem) {
+      if (isCloseMenuItem === true) {
         dispatch(navSlice.actions.closeMenu())
 
         return
@@ -149,7 +149,7 @@ export const useKeysForMenuNavigation = (): void => {
         navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
       )
 
-      if (isNestedMenuAvailable) {
+      if (isNestedMenuAvailable === true) {
         void navigateInMenu.down({ navItemId })
 
         return
@@ -163,7 +163,7 @@ export const useKeysForMenuNavigation = (): void => {
     if (anyLetterPressed !== null) {
       const shouldJumpToClose = isNestedMenu === false && e.key === 'c'
 
-      if (shouldJumpToClose) {
+      if (shouldJumpToClose === true) {
         dispatch(
           navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
         )
@@ -173,7 +173,7 @@ export const useKeysForMenuNavigation = (): void => {
 
       const shouldJumpToGoBack = isNestedMenu && e.key === 'b'
 
-      if (shouldJumpToGoBack) {
+      if (shouldJumpToGoBack === true) {
         dispatch(
           navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
         )

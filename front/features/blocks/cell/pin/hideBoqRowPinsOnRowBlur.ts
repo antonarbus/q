@@ -33,7 +33,7 @@ export const hideBoqRowPinsOnRowBlur = ({
 
   const isItemPricePinShown = boqRow.itemPrice.pin.isShown
 
-  if (isItemPricePinShown) {
+  if (isItemPricePinShown === true) {
     dispatch(
       quotationSlice.actions.hideBoqRowCellPinReducer({
         blockIndex,
@@ -45,7 +45,7 @@ export const hideBoqRowPinsOnRowBlur = ({
 
   const isQtyPinShown = boqRow.qty.pin.isShown
 
-  if (isQtyPinShown) {
+  if (isQtyPinShown === true) {
     dispatch(
       quotationSlice.actions.hideBoqRowCellPinReducer({
         blockIndex,

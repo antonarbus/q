@@ -21,7 +21,7 @@ export const useLoadShareQuotationModalWithDirectLink = ({
     if (quotationId !== undefined) {
       const quotationIsAlreadyLoaded = getState().quotation.id === quotationId
 
-      if (quotationIsAlreadyLoaded) {
+      if (quotationIsAlreadyLoaded === true) {
         return
       }
 

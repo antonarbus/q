@@ -150,7 +150,7 @@ export const beforeUpload: BeforeUpload = async (props) => {
         const gotCompletedInOneChunk =
           percentCompleted === 100 && eventCount === 1
 
-        if (gotCompletedInOneChunk) {
+        if (gotCompletedInOneChunk === true) {
           await asyncDelay(50)
           toast.loading(`Uploading... 10%`, { id: toastId })
           await asyncDelay(50)
@@ -174,7 +174,7 @@ export const beforeUpload: BeforeUpload = async (props) => {
         const gotCompletedInMultipleChunks =
           percentCompleted === 100 && eventCount !== 1
 
-        if (gotCompletedInMultipleChunks) {
+        if (gotCompletedInMultipleChunks === true) {
           toast.loading(`Uploading... 95%`, { id: toastId })
         }
 

@@ -10,7 +10,7 @@ export const getNumberOfBoqBlocksAbove = ({ blockIndex }: Props): number => {
     (accumulator, block, index) => {
       const isNotLastBoq = block.type === itemType.boq && index < blockIndex
 
-      if (isNotLastBoq) {
+      if (isNotLastBoq === true) {
         return accumulator + 1
       }
 

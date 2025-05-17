@@ -15,14 +15,14 @@ const movePasteTextItem = (e: MouseEvent): void => {
     route.quotationList,
   )
 
-  if (isQuotationListPage) {
+  if (isQuotationListPage === true) {
     return
   }
 
   const { isPasteTextShown } = getState().copy
 
   const removePasteIfNeeded = (): void => {
-    if (isPasteTextShown) {
+    if (isPasteTextShown === true) {
       dispatch(copySlice.actions.hidePasteText())
     }
 
@@ -30,7 +30,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
       (block) => block.type === itemType.paste,
     )
 
-    if (isPasteBlock) {
+    if (isPasteBlock === true) {
       dispatch(quotationSlice.actions.removePasteItemReducer())
     }
   }
@@ -49,7 +49,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
     element.classList.contains(cls.actionsContainer),
   )
 
-  if (isCursorOverActionsContainer) {
+  if (isCursorOverActionsContainer === true) {
     removePasteIfNeeded()
 
     return
@@ -59,7 +59,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
     element.classList.contains(cls.search),
   )
 
-  if (isSearchElement) {
+  if (isSearchElement === true) {
     removePasteIfNeeded()
 
     return
@@ -69,7 +69,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
     element.classList.contains(cls.searchAutocomplete),
   )
 
-  if (isSearchAutocompleteElement) {
+  if (isSearchAutocompleteElement === true) {
     removePasteIfNeeded()
 
     return
@@ -85,7 +85,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
 
   const isNarrowGapAboveNav = e.clientY < 10
 
-  if (isNarrowGapAboveNav) {
+  if (isNarrowGapAboveNav === true) {
     return
   }
 
@@ -94,7 +94,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
   const isCursorAboveUnderNavDuringCopy =
     isNarrowGapUnderNav && isPasteTextShown === false
 
-  if (isCursorAboveUnderNavDuringCopy) {
+  if (isCursorAboveUnderNavDuringCopy === true) {
     const [firstBlock] = getState().quotation.blocks
 
     if (firstBlock === undefined) {
@@ -127,7 +127,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
   const stillMayPasteToTheSamePlace =
     isEqual(pastePlace, prevPlace) && isPasteTextShown
 
-  if (stillMayPasteToTheSamePlace) {
+  if (stillMayPasteToTheSamePlace === true) {
     return
   }
 
@@ -138,14 +138,14 @@ const movePasteTextItem = (e: MouseEvent): void => {
   const movedUpBetweenItems =
     prevPlace.pastePos === 'bottom' && pastePlace.pastePos === 'top'
 
-  if (movedUpBetweenItems) {
+  if (movedUpBetweenItems === true) {
     return
   }
 
   const movedDownBetweenItems =
     prevPlace.pastePos === 'top' && pastePlace.pastePos === 'bottom'
 
-  if (movedDownBetweenItems) {
+  if (movedDownBetweenItems === true) {
     return
   }
 
@@ -167,11 +167,11 @@ const movePasteTextBoqRow = (e: MouseEvent): void => {
     .some((boqRow) => boqRow.type === boqRowKey.paste)
 
   const removePasteIfNeeded = (): void => {
-    if (isPasteTextShown) {
+    if (isPasteTextShown === true) {
       dispatch(copySlice.actions.hidePasteText())
     }
 
-    if (isBoqPasteRow) {
+    if (isBoqPasteRow === true) {
       dispatch(quotationSlice.actions.removePasteItemReducer())
     }
   }
@@ -188,7 +188,7 @@ const movePasteTextBoqRow = (e: MouseEvent): void => {
     element.classList.contains(cls.actionsContainer),
   )
 
-  if (isCursorOverActionsContainer) {
+  if (isCursorOverActionsContainer === true) {
     removePasteIfNeeded()
 
     return
@@ -198,7 +198,7 @@ const movePasteTextBoqRow = (e: MouseEvent): void => {
     element.classList.contains(cls.search),
   )
 
-  if (isSearchElement) {
+  if (isSearchElement === true) {
     removePasteIfNeeded()
 
     return
@@ -208,7 +208,7 @@ const movePasteTextBoqRow = (e: MouseEvent): void => {
     element.classList.contains(cls.searchAutocomplete),
   )
 
-  if (isSearchAutocompleteElement) {
+  if (isSearchAutocompleteElement === true) {
     removePasteIfNeeded()
 
     return
@@ -237,7 +237,7 @@ const movePasteTextBoqRow = (e: MouseEvent): void => {
   const shouldPasteToSamePlace =
     isEqual(pastePlace, prevPlace) && isPasteTextShown
 
-  if (shouldPasteToSamePlace) {
+  if (shouldPasteToSamePlace === true) {
     return
   }
 
@@ -261,7 +261,7 @@ export const useMovePasteText = (): void => {
   useEffect(() => {
     const controller = new AbortController()
 
-    if (isBlock) {
+    if (isBlock === true) {
       document.body.style.cursor = 'pointer'
 
       document.addEventListener('mousemove', movePasteTextItem, {
@@ -270,7 +270,7 @@ export const useMovePasteText = (): void => {
       })
     }
 
-    if (isBoqRow) {
+    if (isBoqRow === true) {
       document.body.style.cursor = 'pointer'
 
       document.addEventListener('mousemove', movePasteTextBoqRow, {

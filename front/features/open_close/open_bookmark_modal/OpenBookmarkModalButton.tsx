@@ -23,7 +23,7 @@ export const OpenBookmarkModalButton = ({ id }: ReqBody): React.JSX.Element => {
   } = useGetBookmarkMutation()
 
   useUpdateEffect(() => {
-    if (isSuccess) {
+    if (isSuccess === true) {
       const { item } = data
 
       const block = item
@@ -41,7 +41,7 @@ export const OpenBookmarkModalButton = ({ id }: ReqBody): React.JSX.Element => {
   }, [isSuccess])
 
   useUpdateEffect(() => {
-    if (isError) {
+    if (isError === true) {
       toast.error(error.response?.data.message)
     }
   }, [isError])

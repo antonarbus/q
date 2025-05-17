@@ -20,7 +20,7 @@ export const deleteFromQuotationsCache = ({ id }: Props): void => {
         const index = quotations.findIndex((quotation) => quotation.id === id)
         const foundInCache = index !== -1
 
-        if (foundInCache) {
+        if (foundInCache === true) {
           quotations.splice(index, 1)
         }
       })

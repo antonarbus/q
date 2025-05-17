@@ -40,7 +40,7 @@ export const DeleteBlockIcon = (): React.JSX.Element => {
             },
           }}
           onClick={(e: MouseEvent): void => {
-            if (disabled) {
+            if (disabled === true) {
               return
             }
 

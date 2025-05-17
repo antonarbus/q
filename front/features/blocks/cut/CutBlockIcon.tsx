@@ -38,7 +38,7 @@ export const CutBlockIcon = (): React.JSX.Element => {
             cursor: disabled ? 'default' : 'pointer',
           }}
           onClick={(e: MouseEvent): void => {
-            if (disabled) {
+            if (disabled === true) {
               return
             }
 

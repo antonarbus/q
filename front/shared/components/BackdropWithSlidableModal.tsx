@@ -44,7 +44,7 @@ export const BackdropWithSlidableModal = ({
       const shouldCloseModalOnEsc =
         shouldUnmountOnEsc === true && e.key === 'Escape'
 
-      if (shouldCloseModalOnEsc) {
+      if (shouldCloseModalOnEsc === true) {
         if (location.state?.shouldSlide === true) {
           const slideOutAndSomeAction = async (): Promise<void> => {
             await slideOut()
@@ -97,7 +97,7 @@ export const BackdropWithSlidableModal = ({
   })
 
   const unmountOnClickAway = (): void => {
-    if (shouldUnmountOnClickAway) {
+    if (shouldUnmountOnClickAway === true) {
       if (location.state?.shouldSlide === true) {
         const slideOutAndSomeAction = async (): Promise<void> => {
           await slideOut()

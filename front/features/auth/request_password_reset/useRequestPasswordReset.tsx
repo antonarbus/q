@@ -34,7 +34,7 @@ export const useRequestPasswordReset = ({
   } = useRequestPasswordResetMutation()
 
   useUpdateEffect(() => {
-    if (isSuccess) {
+    if (isSuccess === true) {
       if (data.message === 'reset link sent') {
         toast.info('Check your inbox or spam')
 
@@ -50,7 +50,7 @@ export const useRequestPasswordReset = ({
   }, [isSuccess])
 
   useUpdateEffect(() => {
-    if (isError) {
+    if (isError === true) {
       if (error.response?.data.message === 'does not exists') {
         toast.info('User not found')
 

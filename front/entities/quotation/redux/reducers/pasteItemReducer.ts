@@ -33,7 +33,7 @@ export const pasteItemReducer = (
 
   const isBoqRow = itemToPaste.type === itemType.row
 
-  if (isBlock) {
+  if (isBlock === true) {
     const hoveredItemIndex = state.blocks.findIndex((block) => block.id === id)
 
     type SplicingSettings = {
@@ -81,7 +81,7 @@ export const pasteItemReducer = (
     return
   }
 
-  if (isBoqRow) {
+  if (isBoqRow === true) {
     state.blocks.forEach((block) => {
       if (block.type !== itemType.boq) {
         return

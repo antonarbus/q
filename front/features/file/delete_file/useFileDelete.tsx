@@ -24,7 +24,7 @@ export const useFileDelete = ({ fileId }: Props): Res => {
   } = useDeleteFileMutation()
 
   useUpdateEffect(() => {
-    if (isSuccess) {
+    if (isSuccess === true) {
       void instance.queryClient.invalidateQueries({
         queryKey: [queryKey.getFilesStats],
       })
@@ -32,7 +32,7 @@ export const useFileDelete = ({ fileId }: Props): Res => {
   }, [isSuccess])
 
   useUpdateEffect(() => {
-    if (isError) {
+    if (isError === true) {
       toast.error('Problem during deletion')
     }
   }, [isError])

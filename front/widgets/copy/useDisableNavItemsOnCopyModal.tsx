@@ -22,7 +22,7 @@ export const useDisableNavItemsOnCopyModal = (): void => {
   useUnmount(() => {
     const isBookmarkPage = window.location.pathname.includes(route.bookmarkList)
 
-    if (isBookmarkPage) {
+    if (isBookmarkPage === true) {
       dispatch(
         navSlice.actions.enableTopNavItems({
           exceptNavItemIds: [
@@ -42,7 +42,7 @@ export const useDisableNavItemsOnCopyModal = (): void => {
       route.quotationList,
     )
 
-    if (isQuotationListPage) {
+    if (isQuotationListPage === true) {
       dispatch(
         navSlice.actions.enableTopNavItems({
           exceptNavItemIds: [

@@ -14,7 +14,7 @@ export const enableFroalaReducer = (
   const quotation = state
   const enableSpecificFroalas = blockIndex !== undefined
 
-  if (enableSpecificFroalas) {
+  if (enableSpecificFroalas === true) {
     const block = quotation.blocks[blockIndex]
 
     if (block === undefined) {

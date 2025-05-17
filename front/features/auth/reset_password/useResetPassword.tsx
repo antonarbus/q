@@ -37,7 +37,7 @@ export const useResetPassword = ({ passwordSignal, slideOut }: Props): Res => {
   } = useResetPasswordMutation()
 
   useUpdateEffect(() => {
-    if (isSuccess) {
+    if (isSuccess === true) {
       if (data.message === 'password was reset') {
         toast('Password was reset')
 
@@ -84,7 +84,7 @@ export const useResetPassword = ({ passwordSignal, slideOut }: Props): Res => {
   }, [isSuccess])
 
   useUpdateEffect(() => {
-    if (isError) {
+    if (isError === true) {
       if (error.response?.data.message === 'incorrect reset key') {
         toast.warning('Incorrect reset key')
 

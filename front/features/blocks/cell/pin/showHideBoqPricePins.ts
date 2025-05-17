@@ -29,7 +29,7 @@ export const showHideBoqPricePins = ({
     if (clickedElement instanceof Element) {
       const isPin = Boolean(clickedElement.closest(`.${cls.pin}`))
 
-      if (isPin) {
+      if (isPin === true) {
         return
       }
 

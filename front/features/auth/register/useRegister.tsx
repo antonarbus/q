@@ -36,7 +36,7 @@ export const useRegister = ({
   } = useRegisterMutation()
 
   useUpdateEffect(() => {
-    if (isSuccess) {
+    if (isSuccess === true) {
       if (data.message === 'activation link sent') {
         toast.info('Check your inbox or spam')
       }
@@ -52,7 +52,7 @@ export const useRegister = ({
   }, [isSuccess])
 
   useUpdateEffect(() => {
-    if (isError) {
+    if (isError === true) {
       if (error.response?.data.message === 'already exists') {
         toast.info('Already registered')
 

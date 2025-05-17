@@ -55,7 +55,7 @@ export const useShareQuotation = ({
   const { refetch: fetchQuotations } = useGetQuotationsQuery()
 
   useUpdateEffect(() => {
-    if (isPending) {
+    if (isPending === true) {
       loadingIconActor.send({ type: 'show loading icon' })
     }
   }, [isPending])
@@ -67,7 +67,7 @@ export const useShareQuotation = ({
       return
     }
 
-    if (isSuccess) {
+    if (isSuccess === true) {
       // may save new quotation by sharing the link, strange, but maybe nice
       if (data.message === 'saved') {
         toast.success(`Saved under id ${quotation.id}`)
@@ -102,7 +102,7 @@ export const useShareQuotation = ({
   }, [isSuccess])
 
   useUpdateEffect(() => {
-    if (isError) {
+    if (isError === true) {
       toast.error(error.response?.data.message)
       loadingIconActor.send({ type: 'show error icon' })
       reset()

@@ -59,7 +59,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
 
     const isOwner = isLoggedUser && emailFromToken === quotationDocument.email
 
-    if (isOwner) {
+    if (isOwner === true) {
       return 'Owner'
     }
 
@@ -68,26 +68,26 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
       quotationDocument.access.level === 'custom' &&
       quotationDocument.access.userList.includes(emailFromToken)
 
-    if (isSharedWithYou) {
+    if (isSharedWithYou === true) {
       return 'Shared with you'
     }
 
     const isSharedWithEveryone = quotationDocument.access.level === 'everyone'
 
-    if (isSharedWithEveryone) {
+    if (isSharedWithEveryone === true) {
       return 'Public'
     }
 
     const isSuperAdminOnBehalfOfUser = isLoggedUser && shouldNotTrace
 
-    if (isSuperAdminOnBehalfOfUser) {
+    if (isSuperAdminOnBehalfOfUser === true) {
       return 'Super admin on behalf of a user'
     }
 
     const isSuperAdmin =
       isLoggedUser && userFromAccessToken.roles.includes(userRole.superAdmin)
 
-    if (isSuperAdmin) {
+    if (isSuperAdmin === true) {
       return 'Super admin'
     }
 
@@ -118,7 +118,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
       })
     }
 
-    if (publicOrSharedWithYou) {
+    if (publicOrSharedWithYou === true) {
       await QuotationModel.updateOne(
         { id: quotationId },
         { viewedAt: Date.now() },
@@ -142,7 +142,7 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
     return
   }
 
-  if (publicOrSharedWithYou) {
+  if (publicOrSharedWithYou === true) {
     // remove sensitive data from quotation
     // quotation.email = 'john@mail.com'
     delete quotationParsed.name

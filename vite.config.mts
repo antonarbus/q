@@ -46,7 +46,7 @@ const stripHandlerFromApiRoutes = (): unknown => {
                     path.node.key.type === 'Identifier' &&
                     path.node.key.name === 'handler'
 
-                  if (isHandlerIdentifier) {
+                  if (isHandlerIdentifier === true) {
                     path.remove()
                   }
                 },
@@ -138,31 +138,31 @@ export default {
         manualChunks: (id: string): string | undefined => {
           const isFroala = id.includes('froala')
 
-          if (isFroala) {
+          if (isFroala === true) {
             return 'qwerty'
           }
 
           const isAgGrid = id.includes('ag-grid')
 
-          if (isAgGrid) {
+          if (isAgGrid === true) {
             return 'ag-grid'
           }
 
           const isMui = id.includes('@mui')
 
-          if (isMui) {
+          if (isMui === true) {
             return '@mui'
           }
 
           const isTanstack = id.includes('@tanstack')
 
-          if (isTanstack) {
+          if (isTanstack === true) {
             return '@tanstack'
           }
 
           const isRemix = id.includes('@remix')
 
-          if (isRemix) {
+          if (isRemix === true) {
             return '@remix'
           }
 

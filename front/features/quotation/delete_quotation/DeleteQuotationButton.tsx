@@ -19,13 +19,13 @@ export const DeleteQuotationButton = ({ id }: Payload): React.ReactNode => {
   } = useDeleteQuotationMutation()
 
   useUpdateEffect(() => {
-    if (isSuccess) {
+    if (isSuccess === true) {
       deleteFromQuotationsCache({ id })
     }
   }, [isSuccess])
 
   useUpdateEffect(() => {
-    if (isError) {
+    if (isError === true) {
       toast.error(error.response?.data.message)
 
       deleteFromQuotationsCache({ id })

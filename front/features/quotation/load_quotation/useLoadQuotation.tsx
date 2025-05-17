@@ -46,7 +46,7 @@ export function useLoadQuotation(): void {
     const shouldAutoDetectFromWhereToLoadQuotation =
       quotationId === undefined || quotationId === 'new'
 
-    if (shouldAutoDetectFromWhereToLoadQuotation) {
+    if (shouldAutoDetectFromWhereToLoadQuotation === true) {
       return 'template'
       // eslint-disable-next-line no-else-return
     } else {
@@ -229,7 +229,7 @@ export function useLoadQuotation(): void {
 
   // above we triggered quotation loading, now we handle the response
   useUpdateEffect(() => {
-    if (isSuccess) {
+    if (isSuccess === true) {
       const { quotation } = data
 
       dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
@@ -253,7 +253,7 @@ export function useLoadQuotation(): void {
   }, [isSuccess])
 
   useUpdateEffect(() => {
-    if (isError) {
+    if (isError === true) {
       if (error.response?.status === httpStatus.forbidden_403) {
         dispatch(
           quotationSlice.actions.loadQuotationReducer({

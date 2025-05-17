@@ -96,10 +96,10 @@ export default [
           selector: 'UnaryExpression[operator="!"]',
           message: 'Avoid using negation (!condition).',
         },
-        // {
-        //   selector: 'IfStatement[test.type="Identifier"]',
-        //   message: 'Use explicit boolean comparison like `if (x === true)`.',
-        // },
+        {
+          selector: 'IfStatement[test.type="Identifier"]',
+          message: 'Use explicit boolean comparison like `if (x === true)`.',
+        },
         // {
         //   selector: 'ConditionalExpression[test.type="Identifier"]',
         //   message:

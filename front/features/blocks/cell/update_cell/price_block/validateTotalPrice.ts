@@ -37,7 +37,7 @@ export const validateTotalPrice = ({ editorRef, blockIndex }: Props): void => {
 
   const isCorrectValue = cellValueFromHtml === price
 
-  if (isCorrectValue) {
+  if (isCorrectValue === true) {
     return
   }
 

@@ -71,7 +71,7 @@ export const updateSubTotalPriceWithValue = ({
     }),
   )
 
-  if (incrementally) {
+  if (incrementally === true) {
     updateNumberAtHtmlIncrementally({
       oldNumber: subTotalPriceValueCurrent,
       newNumber: value,

@@ -47,7 +47,7 @@ export const useSaveBookmark = ({
   const { refetch: updateBookmarks } = useGetBookmarksQuery()
 
   useUpdateEffect(() => {
-    if (isSuccess) {
+    if (isSuccess === true) {
       if (data.message === 'saved') {
         toast.success('Saved')
       } else if (data.message === 'updated') {
@@ -68,7 +68,7 @@ export const useSaveBookmark = ({
   }, [isSuccess])
 
   useUpdateEffect(() => {
-    if (isError) {
+    if (isError === true) {
       toast.error(error.response?.data.message)
 
       reset()

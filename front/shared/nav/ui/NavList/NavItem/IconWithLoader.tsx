@@ -21,7 +21,7 @@ export const IconWithLoader = (props: Props): React.ReactNode => {
   const disabled = Boolean(props.navItem.disabled)
   const tooltipText = props.navItem.tooltip
 
-  if (isMobile) {
+  if (isMobile === true) {
     return icon
   }
 

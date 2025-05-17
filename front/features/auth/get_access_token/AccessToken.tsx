@@ -49,7 +49,7 @@ export const AccessToken = (): React.JSX.Element => {
 
   // show jumping dots at table
   useUpdateEffect(() => {
-    if (isFetching) {
+    if (isFetching === true) {
       loadingIconActor.send({ type: 'show loading icon' })
 
       dispatch(
@@ -62,7 +62,7 @@ export const AccessToken = (): React.JSX.Element => {
   }, [isFetching])
 
   useUpdateEffect(() => {
-    if (isSuccess) {
+    if (isSuccess === true) {
       if (data.accessJwtToken === undefined) {
         return
       }
@@ -101,7 +101,7 @@ export const AccessToken = (): React.JSX.Element => {
 
       const isSuperAdmin = roles.includes(userRole.superAdmin)
 
-      if (isSuperAdmin) {
+      if (isSuperAdmin === true) {
         dispatch(navSlice.actions.showNavItems({ navItemIds: ['admin'] }))
         dispatch(navSlice.actions.showAdminIcon())
       } else {
@@ -121,7 +121,7 @@ export const AccessToken = (): React.JSX.Element => {
   }, [isSuccess])
 
   useUpdateEffect(() => {
-    if (isError) {
+    if (isError === true) {
       dispatch(
         agGridSlice.actions.showLoadingOverlay({
           showLoader: false,

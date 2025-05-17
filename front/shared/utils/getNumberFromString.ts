@@ -18,7 +18,7 @@ export const getNumberFromString = ({ string }: Props): number => {
   const number = parseFloat(stringWithNumbersOnly)
   const isNotANumber = isNaN(number)
 
-  if (isNotANumber) {
+  if (isNotANumber === true) {
     return 0
   }
 

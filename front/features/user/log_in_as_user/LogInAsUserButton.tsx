@@ -29,7 +29,7 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
   const { refetch: refetchBookmarks } = useGetBookmarksQuery()
 
   useUpdateEffect(() => {
-    if (isSuccess) {
+    if (isSuccess === true) {
       if (data.accessJwtToken === undefined) {
         return
       }
@@ -61,7 +61,7 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
 
       const isSuperAdmin = data.roles?.includes(userRole.superAdmin) === true
 
-      if (isSuperAdmin) {
+      if (isSuperAdmin === true) {
         dispatch(navSlice.actions.showNavItems({ navItemIds: ['admin'] }))
       } else {
         dispatch(navSlice.actions.hideNavItems({ navItemIds: ['admin'] }))
@@ -71,13 +71,13 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
         route.quotationList,
       )
 
-      if (isQuotationListPage) {
+      if (isQuotationListPage === true) {
         void refetchQuotations()
       }
 
       const isBookmarkListPage = location.pathname.includes(route.bookmarkList)
 
-      if (isBookmarkListPage) {
+      if (isBookmarkListPage === true) {
         void refetchBookmarks()
       }
 
@@ -88,7 +88,7 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
   }, [isSuccess])
 
   useUpdateEffect(() => {
-    if (isError) {
+    if (isError === true) {
       toast.error(error.response?.data.message)
     }
   }, [isError])

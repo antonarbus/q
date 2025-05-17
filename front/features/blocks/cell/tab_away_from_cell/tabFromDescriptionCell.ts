@@ -12,7 +12,7 @@ export const tabFromDescriptionCell = ({
 }: Props): void => {
   const isTabKey = e.key === 'Tab'
 
-  if (isTabKey) {
+  if (isTabKey === true) {
     e.preventDefault()
     itemPriceCellEditorRef.current?.commands.selectAll()
   }

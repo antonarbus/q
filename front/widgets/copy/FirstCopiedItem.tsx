@@ -12,7 +12,7 @@ type Props = {
 
 const variants: Variants = {
   initial: ({ isCopying, height }: Props) => {
-    if (isCopying) {
+    if (isCopying === true) {
       return {
         y: -height - 100,
       }
@@ -21,7 +21,7 @@ const variants: Variants = {
     return {}
   },
   animate: ({ isCopying, isSoleItem }: Props) => {
-    if (isCopying) {
+    if (isCopying === true) {
       return {
         y: 0,
         transition: {

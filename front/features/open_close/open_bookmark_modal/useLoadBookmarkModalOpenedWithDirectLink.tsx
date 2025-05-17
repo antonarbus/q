@@ -30,7 +30,7 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
     const firstBlock = getState().quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
     const isOpenedFromButton = Boolean(firstBlock)
 
-    if (isOpenedFromButton) {
+    if (isOpenedFromButton === true) {
       return
     }
 
@@ -46,7 +46,7 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
       return
     }
 
-    if (isSuccess) {
+    if (isSuccess === true) {
       dispatch(
         quotationSlice.actions.loadBlockAtPosThousandReducer({
           block: data.item,
@@ -65,7 +65,7 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
   }, [isSuccess])
 
   useUpdateEffect(() => {
-    if (isError) {
+    if (isError === true) {
       if (error.response?.data.message === 'not found') {
         toast.warning('Bookmark not found')
         void navigate('..')

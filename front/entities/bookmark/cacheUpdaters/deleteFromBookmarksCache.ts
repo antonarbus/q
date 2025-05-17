@@ -20,7 +20,7 @@ export const deleteFromBookmarksCache = ({ id }: Props): void => {
         const index = items.findIndex((item) => item.id === id)
         const foundInCache = index !== -1
 
-        if (foundInCache) {
+        if (foundInCache === true) {
           items.splice(index, 1)
         }
       })

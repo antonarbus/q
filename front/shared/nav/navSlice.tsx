@@ -251,7 +251,7 @@ export const navSlice = createSlice({
       topNavItemsIds.forEach((id) => {
         const didPressExcludedNavItem = exceptNavItemIds.includes(id)
 
-        if (didPressExcludedNavItem) {
+        if (didPressExcludedNavItem === true) {
           return
         }
 
@@ -287,7 +287,7 @@ export const navSlice = createSlice({
       topNavItemsIds.forEach((id) => {
         const didPressExcludedNavItem = exceptNavItemIds.includes(id)
 
-        if (didPressExcludedNavItem) {
+        if (didPressExcludedNavItem === true) {
           return
         }
 

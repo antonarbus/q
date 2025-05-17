@@ -18,7 +18,7 @@ export const RequireRoles = ({
     userRoles.includes(role),
   )
 
-  if (isLoading) {
+  if (isLoading === true) {
     return (
       <div
         style={{

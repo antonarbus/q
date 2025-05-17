@@ -39,7 +39,7 @@ export const useCloseMenuOnClickOutside = ({
           thisElement: menuContainer,
         }) === false
 
-      if (isClickOnOpenedNavItem) {
+      if (isClickOnOpenedNavItem === true) {
         return
       }
 

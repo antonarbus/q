@@ -63,7 +63,7 @@ export const logInHandler: RouterHandler = async (req, res, next) => {
     rolesFromAccessToken.includes(userRole.superAdmin) &&
     emailFromInput !== emailFromAccessToken
 
-  if (isSuperAdminOnBehalfOfUser) {
+  if (isSuperAdminOnBehalfOfUser === true) {
     // just log in as a user without password coz you are a super-admin
     // do not leave traces of login + opening quotations & bookmarks
 

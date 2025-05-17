@@ -19,13 +19,13 @@ export const DeleteBookmarkButton = ({ id }: ReqBody): React.JSX.Element => {
   } = useDeleteBookmarkMutation()
 
   useUpdateEffect(() => {
-    if (isSuccess) {
+    if (isSuccess === true) {
       deleteFromBookmarksCache({ id })
     }
   }, [isSuccess])
 
   useUpdateEffect(() => {
-    if (isError) {
+    if (isError === true) {
       toast.error(error.response?.data.message)
 
       deleteFromBookmarksCache({ id })

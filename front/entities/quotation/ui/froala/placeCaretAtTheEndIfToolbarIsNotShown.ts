@@ -23,7 +23,7 @@ export const placeCaretAtTheEndIfToolbarIsNotShown = ({
   const toolbarElement = editorRef.current.$tb['0'] as HTMLElement
   const isToolbarOpened = toolbarElement.style.display === 'block'
 
-  if (isToolbarOpened) {
+  if (isToolbarOpened === true) {
     return
   }
 
@@ -38,7 +38,7 @@ export const placeCaretAtTheEndIfToolbarIsNotShown = ({
 
   const insideFroala = isFrBox || isFroalaWrapper
 
-  if (insideFroala) {
+  if (insideFroala === true) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     const contentEditableElement = editorRef.current.$el.get(0)
 
@@ -51,7 +51,7 @@ export const placeCaretAtTheEndIfToolbarIsNotShown = ({
     //@ts-expect-error Froala does not provide types for this
     const isCaret = editorRef.current.selection.get().type === 'Caret'
 
-    if (isCaret) {
+    if (isCaret === true) {
       editorRef.current.selection.restore()
     }
   }

@@ -26,7 +26,7 @@ export const OpenSaveQuotationModalButton = ({
   } = useGetQuotationMutation()
 
   useUpdateEffect(() => {
-    if (isSuccess) {
+    if (isSuccess === true) {
       dispatch(textSlice.actions.setNotEditable())
 
       dispatch(
@@ -47,7 +47,7 @@ export const OpenSaveQuotationModalButton = ({
   }, [isSuccess])
 
   useUpdateEffect(() => {
-    if (isError) {
+    if (isError === true) {
       toast.error(error.response?.data.message)
     }
   }, [isError])

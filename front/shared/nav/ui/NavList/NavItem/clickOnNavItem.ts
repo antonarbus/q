@@ -21,7 +21,7 @@ export const clickOnNavItem = ({
 
   const { link, func } = navItem
 
-  if (disabled) {
+  if (disabled === true) {
     return
   }
 
@@ -39,7 +39,7 @@ export const clickOnNavItem = ({
   // handle burger close separately
   const isBurger = getState().nav.currentMenuNavItemId === navItemId.burger
 
-  if (isBurger) {
+  if (isBurger === true) {
     dispatch(navSlice.actions.closeMenu())
 
     return
@@ -52,7 +52,7 @@ export const clickOnNavItem = ({
     currentMenuNavItemId === navItem.id &&
     currentMenuNavItemId !== navItemId.burger
 
-  if (isMenuOpenedUnderThisNavItem) {
+  if (isMenuOpenedUnderThisNavItem === true) {
     dispatch(navSlice.actions.closeMenu())
 
     return

@@ -44,7 +44,7 @@ export const activateHandler: RouterHandler = async (req, res, next) => {
 
   const { email, roles, isActivated } = user
 
-  if (isActivated) {
+  if (isActivated === true) {
     res.status(httpStatus.success_200).json({ message: 'already activated' })
 
     return

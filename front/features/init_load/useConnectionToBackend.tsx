@@ -6,7 +6,7 @@ export const useConnectionToBackendCheck = (): void => {
   const { data, isError, isSuccess, error } = useHealthCheck()
 
   useUpdateEffect(() => {
-    if (isSuccess) {
+    if (isSuccess === true) {
       if (data.message === 'disconnected') {
         toast.warning(
           'Ups, looks like we have problems with database connection ☹️',
@@ -16,7 +16,7 @@ export const useConnectionToBackendCheck = (): void => {
   }, [isSuccess])
 
   useUpdateEffect(() => {
-    if (isError) {
+    if (isError === true) {
       console.error(error)
 
       toast.warning(

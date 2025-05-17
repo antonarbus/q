@@ -37,7 +37,7 @@ export const saveExistingQuotation = async (): Promise<void> => {
     getState().quotation.permissionLevel === 'Public' ||
     getState().quotation.permissionLevel === 'Shared with you'
 
-  if (isAbleToSave) {
+  if (isAbleToSave === true) {
     void router.navigate(`./${route.save}`)
 
     return

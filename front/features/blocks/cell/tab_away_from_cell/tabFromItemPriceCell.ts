@@ -9,7 +9,7 @@ type Props = {
 export const tabFromItemPriceCell = (props: Props): void => {
   const isTabKey = props.e.key === 'Tab'
 
-  if (isTabKey) {
+  if (isTabKey === true) {
     props.e.preventDefault()
     props.qtyCellEditorRef.current?.commands.selectAll()
   }

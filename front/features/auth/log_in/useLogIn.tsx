@@ -48,7 +48,7 @@ export const useLogIn = ({
   const { refetch: refetchBookmarks } = useGetBookmarksQuery()
 
   useUpdateEffect(() => {
-    if (isSuccess) {
+    if (isSuccess === true) {
       const { accessJwtToken, email, roles, message } = data
 
       if (data.name === 'MongooseError') {
@@ -90,7 +90,7 @@ export const useLogIn = ({
 
       const isSuperAdmin = roles?.includes(userRole.superAdmin) === true
 
-      if (isSuperAdmin) {
+      if (isSuperAdmin === true) {
         dispatch(navSlice.actions.showNavItems({ navItemIds: ['admin'] }))
         dispatch(navSlice.actions.showAdminIcon())
       } else {
@@ -102,13 +102,13 @@ export const useLogIn = ({
         route.quotationList,
       )
 
-      if (isQuotationListPage) {
+      if (isQuotationListPage === true) {
         void refetchQuotations()
       }
 
       const isBookmarkListPage = location.pathname.includes(route.bookmarkList)
 
-      if (isBookmarkListPage) {
+      if (isBookmarkListPage === true) {
         void refetchBookmarks()
       }
 
@@ -140,7 +140,7 @@ export const useLogIn = ({
   }, [isSuccess])
 
   useUpdateEffect(() => {
-    if (isError) {
+    if (isError === true) {
       dispatch(userSlice.actions.setAccessToken({ accessToken: null }))
 
       if (error.response?.data.message === 'not registered') {

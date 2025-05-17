@@ -11,7 +11,7 @@ type Props = {
 export const DeleteFileIcon = ({ fileId }: Props): React.JSX.Element => {
   const { isPending, onDeleteClick } = useFileDelete({ fileId })
 
-  if (isPending) {
+  if (isPending === true) {
     return <RotatingLoaderIcon style={{ marginRight: '5px' }} />
   }
 

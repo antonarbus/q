@@ -9,10 +9,10 @@ type Props = {
 export const tabFromPriceCell = (props: Props): void => {
   const isTabKey = props.e.key === 'Tab'
 
-  if (isTabKey) {
+  if (isTabKey === true) {
     const isLastRow = props.boqRowEditorRefs.length === props.rowIndex + 1
 
-    if (isLastRow) {
+    if (isLastRow === true) {
       // do nothing
       // just use default tabbing to the next focusable area
     }

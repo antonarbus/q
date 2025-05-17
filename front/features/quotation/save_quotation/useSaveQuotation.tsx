@@ -57,7 +57,7 @@ export const useSaveQuotation = ({
   const { refetch: fetchQuotations } = useGetQuotationsQuery()
 
   useUpdateEffect(() => {
-    if (isPending) {
+    if (isPending === true) {
       loadingIconActor.send({ type: 'show loading icon' })
     }
   }, [isPending])
@@ -67,7 +67,7 @@ export const useSaveQuotation = ({
       return
     }
 
-    if (isSuccess) {
+    if (isSuccess === true) {
       if (data.message === 'saved') {
         toast.success(`Saved under id ${data.quotation.id}`)
       }
@@ -116,7 +116,7 @@ export const useSaveQuotation = ({
   }, [isSuccess])
 
   useUpdateEffect(() => {
-    if (isError) {
+    if (isError === true) {
       toast.error(error.response?.data.message)
       loadingIconActor.send({ type: 'show error icon' })
 

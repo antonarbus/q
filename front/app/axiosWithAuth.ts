@@ -34,7 +34,7 @@ axiosWithAuth.interceptors.response.use(
         (error.config as ExtendedAxiosRequestConfig).isRetry === false) ||
       (error.config as ExtendedAxiosRequestConfig).isRetry === undefined
 
-    if (isUnauthorizedAfterCheckingAccessToken) {
+    if (isUnauthorizedAfterCheckingAccessToken === true) {
       originalRequestConfig.isRetry = true
 
       try {
@@ -60,7 +60,7 @@ axiosWithAuth.interceptors.response.use(
         const isUnauthorized =
           err instanceof AxiosError && err.response?.status === 401
 
-        if (isUnauthorized) {
+        if (isUnauthorized === true) {
           // still unauthorized after attempt to refresh the access token
           dispatch(
             userSlice.actions.setAccessToken({

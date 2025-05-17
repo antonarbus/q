@@ -35,7 +35,7 @@ export const useCopyBookmarkAtSearch = (): Res => {
   } = useGetBookmarkMutation()
 
   useUpdateEffect(() => {
-    if (isSuccess) {
+    if (isSuccess === true) {
       const { item } = bookmarkData
 
       if (item === undefined) {
@@ -51,7 +51,7 @@ export const useCopyBookmarkAtSearch = (): Res => {
   }, [isSuccess])
 
   useUpdateEffect(() => {
-    if (isError) {
+    if (isError === true) {
       toast.error(error.response?.data.message)
     }
   }, [isError])

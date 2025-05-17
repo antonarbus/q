@@ -78,7 +78,7 @@ export const onBoqBlockResize: OnBlockResize = ({
     return
   }
 
-  if (isShrinking) {
+  if (isShrinking === true) {
     if (descriptionColumn.width > columnMinWidth.description) {
       descriptionColumnDeltaWidth = delta.width
 
@@ -218,7 +218,7 @@ export const onBoqBlockResize: OnBlockResize = ({
 
   const isExpanding = delta.width > 0
 
-  if (isExpanding) {
+  if (isExpanding === true) {
     descriptionColumnDeltaWidth = delta.width
 
     const descriptionColumnWidth =

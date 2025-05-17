@@ -14,7 +14,7 @@ const pasteItemOnClick = (): void => {
     route.bookmarkList,
   )
 
-  if (isBookmarkListPage) {
+  if (isBookmarkListPage === true) {
     return
   }
 
@@ -22,7 +22,7 @@ const pasteItemOnClick = (): void => {
     route.quotationList,
   )
 
-  if (isQuotationListPage) {
+  if (isQuotationListPage === true) {
     return
   }
 

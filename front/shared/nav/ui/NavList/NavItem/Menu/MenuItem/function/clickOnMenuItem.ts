@@ -26,7 +26,7 @@ export const clickOnMenuItem = (
   const link = menuItem?.link
   const func = menuItem?.func
 
-  if (disabled) {
+  if (disabled === true) {
     return
   }
 
@@ -47,7 +47,7 @@ export const clickOnMenuItem = (
     return
   }
 
-  if (isNestedMenuAvailable) {
+  if (isNestedMenuAvailable === true) {
     void navigateInMenu.down({ navItemId })
   }
 }

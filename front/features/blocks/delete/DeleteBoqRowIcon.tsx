@@ -40,7 +40,7 @@ export const DeleteBoqRowIcon = (): React.JSX.Element => {
             },
           }}
           onClick={(): void => {
-            if (disabled) {
+            if (disabled === true) {
               return
             }
 

@@ -8,7 +8,7 @@ type Props = {
 
 export const useShowLoadingJumpingDots = ({ isLoading }: Props): void => {
   useUpdateEffect(() => {
-    if (isLoading) {
+    if (isLoading === true) {
       dispatch(
         agGridSlice.actions.showLoadingOverlay({
           showLoader: true,

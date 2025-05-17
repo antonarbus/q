@@ -9,7 +9,7 @@ export const connectToDb = async (): Promise<void> => {
   try {
     const isConnectedToDb = checkDbConnection()
 
-    if (isConnectedToDb) {
+    if (isConnectedToDb === true) {
       console.info('connection to database is already established')
 
       return

@@ -26,7 +26,7 @@ export const useCopyModalAnimation = (): AnimationControls => {
       return accumulator + scaleFactor * item.height + 5
     }, 70)
 
-    if (isFirstMount) {
+    if (isFirstMount === true) {
       void copyModalAnimationControls.start({
         width: 'auto',
         transition: {

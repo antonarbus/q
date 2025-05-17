@@ -100,7 +100,7 @@ export const updateSubtotalPriceCell = ({
 
   const areAllCellsPinned = prices.every((price) => price.isPinned)
 
-  if (areAllCellsPinned) {
+  if (areAllCellsPinned === true) {
     toast.info(`Can't be changed. All row prices are pinned.`)
 
     updateSubTotalPriceWithValue({

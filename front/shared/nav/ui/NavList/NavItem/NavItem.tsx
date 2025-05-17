@@ -45,13 +45,13 @@ export const NavItem = ({ navItem }: Props): React.JSX.Element => {
       <Link
         to={to}
         onClick={(e: React.MouseEvent): void => {
-          if (isFunc) {
+          if (isFunc === true) {
             e.preventDefault()
           }
 
           const disableClick = isLoading ?? isSuccess ?? isError ?? disabled
 
-          if (disableClick) {
+          if (disableClick === true) {
             e.preventDefault()
 
             return

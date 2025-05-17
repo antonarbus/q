@@ -10,7 +10,7 @@ export const useDisableLoadingOverlayWhenItemsAreFetched = ({
   isFetched,
 }: Props): void => {
   useEffect(() => {
-    if (isFetched) {
+    if (isFetched === true) {
       dispatch(appSlice.actions.hideLoadingOverlay())
     }
   }, [isFetched])

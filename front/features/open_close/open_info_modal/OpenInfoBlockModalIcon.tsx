@@ -30,7 +30,7 @@ export const OpenInfoBlockModalIcon = (): React.ReactNode => {
             touchAction: 'none',
           }}
           onClick={(e: React.MouseEvent): void => {
-            if (disabled) {
+            if (disabled === true) {
               return
             }
 

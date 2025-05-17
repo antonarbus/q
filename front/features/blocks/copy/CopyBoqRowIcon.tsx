@@ -34,7 +34,7 @@ export const CopyBoqRowIcon = (): React.JSX.Element => {
             color: disabled ? '#acacac' : '#000',
           }}
           onClick={(e: MouseEvent): void => {
-            if (disabled) {
+            if (disabled === true) {
               return
             }
 
