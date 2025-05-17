@@ -146,7 +146,7 @@ export default [
           allowNullableEnum: false,
           allowNullableNumber: false,
           allowNullableObject: false,
-          allowNullableString: true,
+          allowNullableString: false,
           allowNumber: true,
           allowString: true,
         },

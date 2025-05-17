@@ -10,9 +10,9 @@ export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
   forbidOnly: Boolean(getEnvVar('CI')),
-  retries: getEnvVar('CI') ? 2 : 0,
-  workers: getEnvVar('CI') ? 1 : undefined,
-  reporter: getEnvVar('CI') ? 'dot' : 'list',
+  retries: getEnvVar('CI') === undefined ? 0 : 2,
+  workers: getEnvVar('CI') === undefined ? undefined : 1,
+  reporter: getEnvVar('CI') === undefined ? 'list' : 'dot',
   use: {
     baseURL: config.front.baseUrl,
     trace: 'on-first-retry',
@@ -50,8 +50,8 @@ export default defineConfig({
       url: config.back.baseUrl,
       ignoreHTTPSErrors: true,
       reuseExistingServer: getEnvVar('CI') === undefined,
-      stdout: getEnvVar('CI') ? 'ignore' : 'pipe', // Capture standard output
-      stderr: getEnvVar('CI') ? 'ignore' : 'pipe', // Capture standard error
+      stdout: getEnvVar('CI') === undefined ? 'pipe' : 'ignore', // Capture standard output
+      stderr: getEnvVar('CI') === undefined ? 'pipe' : 'ignore', // Capture standard error
     },
     {
       command: 'npm run start_front',

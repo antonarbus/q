@@ -19,7 +19,7 @@ export const useLoadSaveQuotationModalWithDirectLink = ({
   const { mutate: loadQuotation, isSuccess, data } = useGetQuotationMutation()
 
   useEffectOnce(() => {
-    if (quotationId) {
+    if (quotationId !== undefined) {
       const quotationIsAlreadyLoaded = getState().quotation.id === quotationId
 
       if (quotationIsAlreadyLoaded) {

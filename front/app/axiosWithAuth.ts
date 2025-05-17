@@ -46,7 +46,7 @@ axiosWithAuth.interceptors.response.use(
           },
         )
 
-        if (res.data.accessJwtToken) {
+        if (res.data.accessJwtToken !== undefined) {
           dispatch(
             userSlice.actions.setAccessToken({
               accessToken: res.data.accessJwtToken,

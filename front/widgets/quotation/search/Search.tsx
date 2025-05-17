@@ -27,7 +27,7 @@ export const Search = (): React.JSX.Element => {
   const email = useSelector((state) => state.user.email)
 
   useEffect(() => {
-    if (email) {
+    if (email !== null) {
       void fetchBookmarks()
     }
   }, [email])
@@ -49,7 +49,7 @@ export const Search = (): React.JSX.Element => {
       clearOnBlur
       clearOnEscape
       loading={isPendingBookmarks}
-      loadingText={email ? 'Loading...' : 'Not logged in :('}
+      loadingText={email === null ? 'Not logged in :(' : 'Loading...'}
       noOptionsText='No saved bookmarks'
       options={options}
       inputValue={inputValueSignal.value}

@@ -10,7 +10,7 @@ export const useRefetchDataOnEmailChange = ({ refetch }: Props): void => {
   const email = useSelector((state) => state.user.email)
 
   useEffect(() => {
-    if (email) {
+    if (email !== null) {
       void refetch()
     }
   }, [email])

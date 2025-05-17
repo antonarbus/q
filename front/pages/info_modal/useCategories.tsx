@@ -20,7 +20,8 @@ export const useCategories = (): Res => {
     (cat) => cat !== undefined,
   )
 
-  const categories = bookmarkId ? bookmarkCategories : quotationCategories
+  const categories =
+    bookmarkId === undefined ? quotationCategories : bookmarkCategories
 
   return { categories }
 }

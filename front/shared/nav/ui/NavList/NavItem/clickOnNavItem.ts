@@ -26,15 +26,10 @@ export const clickOnNavItem = ({
     return
   }
 
-  if (link) {
+  if (link !== undefined) {
     // just follow the link natively and call the func
     void func?.(e)
 
-    return
-  }
-
-  if (link) {
-    // just follow the link natively
     return
   }
 

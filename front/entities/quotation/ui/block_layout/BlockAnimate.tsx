@@ -42,7 +42,7 @@ export const BlockAnimate = ({
   return (
     <motion.div
       id={id}
-      className={cls.block + (className ? ` ${className}` : '')}
+      className={cls.block + (className === undefined ? '' : ` ${className}`)}
       initial={{
         height: 0,
         marginBottom: 0,

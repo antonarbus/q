@@ -178,7 +178,7 @@ export const FormModal = ({
             })}
           </AnimatePresence>
         </Box>
-        {buttonText && (
+        {buttonText !== undefined && (
           <Box
             className='card-footer'
             sx={{

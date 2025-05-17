@@ -63,11 +63,10 @@ export const getQuotationHandler: RouterHandler = async (req, res, next) => {
       return 'Owner'
     }
 
-    const isSharedWithYou = Boolean(
-      emailFromToken &&
-        quotationDocument.access.level === 'custom' &&
-        quotationDocument.access.userList.includes(emailFromToken),
-    )
+    const isSharedWithYou =
+      emailFromToken !== undefined &&
+      quotationDocument.access.level === 'custom' &&
+      quotationDocument.access.userList.includes(emailFromToken)
 
     if (isSharedWithYou) {
       return 'Shared with you'
