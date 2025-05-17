@@ -12,25 +12,16 @@ type Props = {
 }
 
 const variants: Variants = {
-  initial: ({ isCopying, firstItemHeight }: Props) => {
-    if (isCopying === true) {
-      return {
-        y: -firstItemHeight,
-      }
-    }
-
-    return {}
-  },
   animate: ({ isCopying }: Props) => {
     if (isCopying === true) {
       return {
-        y: 0,
         transition: {
           delay: 0,
           duration: theme.copy.animationDuration,
           // type: 'spring',
           ease: 'linear',
         },
+        y: 0,
       }
     }
 
@@ -39,13 +30,22 @@ const variants: Variants = {
   exit: ({ isCopying, prevFirstItemHeight }: Props) => {
     if (isCopying === false) {
       return {
-        y: -prevFirstItemHeight,
         transition: {
           delay: 0,
           duration: theme.copy.animationDuration,
           // type: 'spring',
           ease: 'linear',
         },
+        y: -prevFirstItemHeight,
+      }
+    }
+
+    return {}
+  },
+  initial: ({ isCopying, firstItemHeight }: Props) => {
+    if (isCopying === true) {
+      return {
+        y: -firstItemHeight,
       }
     }
 
@@ -75,8 +75,8 @@ export const RestOfCopiedItems = (): React.JSX.Element | null => {
     firstItem.height * scaleFactorForFirstItem + itemMarginBottom
 
   const animationProps: Props = {
-    isCopying,
     firstItemHeight,
+    isCopying,
     prevFirstItemHeight: prevFirstItemHeightRef.current,
   }
 
@@ -109,13 +109,13 @@ export const RestOfCopiedItems = (): React.JSX.Element | null => {
             <div
               key={items.length - index}
               style={{
-                height: (item.height ?? 0) * scaleFactor,
-                width: (item.width ?? 0) * scaleFactor,
-                marginBottom: itemMarginBottom,
                 background: 'white',
                 borderRadius: 4,
                 boxShadow: '#00000033 0px 0px 6px 2px',
+                height: (item.height ?? 0) * scaleFactor,
+                marginBottom: itemMarginBottom,
                 overflow: 'hidden',
+                width: (item.width ?? 0) * scaleFactor,
               }}
             >
               <ScaledCopyItem

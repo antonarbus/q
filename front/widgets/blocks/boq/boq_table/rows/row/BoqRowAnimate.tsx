@@ -17,11 +17,11 @@ export const BoqRowAnimate = ({ children }: Props): React.JSX.Element => {
       animate={{
         height: 'auto', // height is being stored on copy/cut icon click
         opacity: 1,
-        y: 0,
         transitionEnd: {
           height: 'auto',
           overflow: 'visible',
         },
+        y: 0,
       }}
       exit={{
         height: 0,

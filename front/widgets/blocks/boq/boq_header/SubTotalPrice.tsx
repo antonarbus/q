@@ -36,25 +36,25 @@ export const SubTotalPrice = (): React.JSX.Element => {
       htmlGetter={() => getBoqHeaderHtmlFromStore({ blockIndex, boqHeaderKey })}
       onClick={(e: React.MouseEvent) => {
         showHideBoqPricePins({
-          e: e.nativeEvent,
           blockIndex,
+          e: e.nativeEvent,
           hidePinsClickHandlerRef,
           isInitClickRef,
         })
       }}
       onContentChange={() => {
         updateSubtotalPriceCell({
-          subTotalPriceEditorRef,
-          boqRowEditorRefs,
           blockIndex,
+          boqRowEditorRefs,
+          subTotalPriceEditorRef,
         })
       }}
       onBlur={() => {
         formatSubtotalPriceCell({ blockIndex, subTotalPriceEditorRef })
 
         validateBoqRowPrices({
-          boqRowEditorRefs,
           blockIndex,
+          boqRowEditorRefs,
           subTotalPriceEditorRef,
         })
       }}

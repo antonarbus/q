@@ -35,14 +35,14 @@ export const ResizableColumn = ({
       }}
       minWidth={minWidth}
       size={{
-        width: colWidth,
         height: 'auto',
+        width: colWidth,
       }}
       style={{
         display: 'block',
         flexGrow: 0,
-        width: colWidth,
         maxWidth: colWidth,
+        width: colWidth,
       }}
       css={{
         flexShrink: '1 !important',
@@ -50,31 +50,31 @@ export const ResizableColumn = ({
       handleStyles={{
         right: {
           background: '#ebe9e9',
-          width: '3px',
-          right: '-1px',
           borderRadius: '3px',
+          right: '-1px',
+          width: '3px',
           zIndex: 1,
         },
       }}
       onResizeStart={(event, direction, element): void => {
         onColumnResizeStart({
-          headerColumnElement: element,
           blockIndex,
           boqColumnKey,
+          headerColumnElement: element,
         })
       }}
       onResize={(event, direction, element, delta): void => {
         onColumnResize({
-          headerColumnElement: element,
           blockIndex,
           boqColumnKey,
+          headerColumnElement: element,
         })
       }}
       onResizeStop={(event, direction, element): void => {
         onColumnResizeStop({
-          headerColumnElement: element,
           blockIndex,
           boqColumnKey,
+          headerColumnElement: element,
         })
       }}
     >

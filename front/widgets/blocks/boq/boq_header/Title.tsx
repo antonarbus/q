@@ -21,7 +21,11 @@ export const Title = (): React.JSX.Element => {
       placeholder='Title...'
       htmlGetter={() => getBoqHeaderHtmlFromStore({ blockIndex, boqHeaderKey })}
       onContentChange={() => {
-        updateTitleCell({ editorRef, blockIndex, boqHeaderKey })
+        updateTitleCell({
+          blockIndex,
+          boqHeaderKey,
+          editorRef,
+        })
       }}
       style={titleCellStyle}
     />

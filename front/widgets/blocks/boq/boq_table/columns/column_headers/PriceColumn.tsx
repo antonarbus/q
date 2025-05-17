@@ -33,9 +33,9 @@ export const PriceColumn = (): React.JSX.Element => {
         }
         onContentChange={() => {
           updateBoqColumnCell({
-            editorRef,
             blockIndex,
             boqColumnKey: boqColumnKey.price,
+            editorRef,
           })
         }}
         style={columnHeaderStyle}

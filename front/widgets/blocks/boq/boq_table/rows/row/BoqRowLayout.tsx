@@ -23,12 +23,12 @@ export const BoqRowLayout = ({
       }}
       style={{
         // https://stackoverflow.com/questions/8468066/child-inside-parent-with-min-height-100-not-inheriting-height
+        // background: 'red',
+        borderBottom: '1px solid #e8e8e8',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-end',
         position: 'relative',
-        borderBottom: '1px solid #e8e8e8',
-        // background: 'red',
       }}
     >
       <PasteBoqRowTextOverlay>{children}</PasteBoqRowTextOverlay>

@@ -33,9 +33,9 @@ export const QtyColumn = (): React.JSX.Element => {
         }
         onContentChange={() => {
           updateBoqColumnCell({
-            editorRef,
             blockIndex,
             boqColumnKey: boqColumnKey.qty,
+            editorRef,
           })
         }}
         style={columnHeaderStyle}

@@ -40,7 +40,11 @@ export const BoqRows = (): React.JSX.Element => {
                     <BoqRowSortable>
                       <BoqRow
                         onBlur={(e) => {
-                          hideBoqRowPinsOnRowBlur({ e, blockIndex, rowIndex })
+                          hideBoqRowPinsOnRowBlur({
+                            blockIndex,
+                            e,
+                            rowIndex,
+                          })
                         }}
                       />
                     </BoqRowSortable>
