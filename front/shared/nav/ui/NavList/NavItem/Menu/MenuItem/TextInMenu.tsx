@@ -19,11 +19,11 @@ export const TextInMenu = ({
     <span
       style={{
         marginLeft: 10,
-        marginRight: reserveSpaceForIcon ? 30 : 0,
+        marginRight: reserveSpaceForIcon === true ? 30 : 0,
         textOverflow: 'ellipsis',
         overflow: 'hidden',
         whiteSpace: 'nowrap',
-        color: disabled ? 'grey' : 'inherit',
+        color: disabled === true ? 'grey' : 'inherit',
       }}
     >
       {name}

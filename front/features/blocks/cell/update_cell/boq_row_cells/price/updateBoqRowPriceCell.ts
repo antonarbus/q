@@ -46,7 +46,7 @@ export const updateBoqRowPriceCell = ({
 
   const isItemPricePinned = boqRow?.itemPrice.pin.isPinned
 
-  if (isItemPricePinned) {
+  if (isItemPricePinned === true) {
     if (boqRow.itemPrice.value === 0) {
       return
     }
@@ -65,7 +65,7 @@ export const updateBoqRowPriceCell = ({
 
   const isQtyPinned = boqRow?.qty.pin.isPinned
 
-  if (isQtyPinned) {
+  if (isQtyPinned === true) {
     if (boqRow.qty.value === 0) {
       return
     }

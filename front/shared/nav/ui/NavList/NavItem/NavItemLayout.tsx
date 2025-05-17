@@ -38,7 +38,7 @@ export const NavItemLayout = (props: Props): React.JSX.Element => {
           .nav-item-text {
             color: ${props.disabled ? '#585858' : theme.colors.greyFont};
             white-space: nowrap;
-            text-decoration: ${props.isActive ? 'underline' : 'none'};
+            text-decoration: ${props.isActive === true ? 'underline' : 'none'};
           }
         }
 

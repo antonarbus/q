@@ -59,7 +59,9 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
         }),
       )
 
-      if (data.roles?.includes(userRole.superAdmin)) {
+      const isSuperAdmin = data.roles?.includes(userRole.superAdmin) === true
+
+      if (isSuperAdmin) {
         dispatch(navSlice.actions.showNavItems({ navItemIds: ['admin'] }))
       } else {
         dispatch(navSlice.actions.hideNavItems({ navItemIds: ['admin'] }))

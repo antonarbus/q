@@ -27,7 +27,7 @@ export const BackdropWithSlidableModal = ({
   )
 
   useEffectOnce(() => {
-    if (location.state?.shouldSlide) {
+    if (location.state?.shouldSlide === true) {
       const slideInAndSomeAction = async (): Promise<void> => {
         await slideIn()
         onMount?.()
@@ -41,10 +41,11 @@ export const BackdropWithSlidableModal = ({
 
   useEffectOnce(() => {
     const closeModalOnEsc = (e: KeyboardEvent): void => {
-      const shouldCloseModalOnEsc = shouldUnmountOnEsc && e.key === 'Escape'
+      const shouldCloseModalOnEsc =
+        shouldUnmountOnEsc === true && e.key === 'Escape'
 
       if (shouldCloseModalOnEsc) {
-        if (location.state?.shouldSlide) {
+        if (location.state?.shouldSlide === true) {
           const slideOutAndSomeAction = async (): Promise<void> => {
             await slideOut()
             onUnmount?.()
@@ -97,7 +98,7 @@ export const BackdropWithSlidableModal = ({
 
   const unmountOnClickAway = (): void => {
     if (shouldUnmountOnClickAway) {
-      if (location.state?.shouldSlide) {
+      if (location.state?.shouldSlide === true) {
         const slideOutAndSomeAction = async (): Promise<void> => {
           await slideOut()
           onUnmount?.()

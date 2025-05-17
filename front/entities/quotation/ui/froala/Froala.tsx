@@ -66,7 +66,7 @@ export const Froala = (props: FroalaProps): React.JSX.Element => {
         }}
       >
         <Box
-          className={props.droppable ? cls.droppable : ''}
+          className={props.droppable === true ? cls.droppable : ''}
           style={{
             width: '100%',
             position: 'relative',
@@ -80,10 +80,10 @@ export const Froala = (props: FroalaProps): React.JSX.Element => {
               <EditableHtml />
             </>
           )}
-          {props.droppable && (
+          {props.droppable === true && (
             <DropFilesOrImagesText dropFilesTextRef={dropFilesTextRef} />
           )}
-          {props.droppable && <DropHereText />}
+          {props.droppable === true && <DropHereText />}
         </Box>
       </Box>
     </FroalaProvider>

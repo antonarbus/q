@@ -22,7 +22,7 @@ export const pinBoqRowItemPriceCell = ({
 
   const isPinned = itemPrice?.pin.isPinned
 
-  if (isPinned) {
+  if (isPinned === true) {
     return
   }
 

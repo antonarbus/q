@@ -21,7 +21,7 @@ export const hideBoqRowPinsOnRowBlur = ({
   const elementReceivedFocus = e.relatedTarget
   const pinClicked = elementReceivedFocus?.classList.contains(cls.pin)
 
-  if (pinClicked) {
+  if (pinClicked === true) {
     return
   }
 

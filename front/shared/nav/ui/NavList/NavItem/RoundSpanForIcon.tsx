@@ -17,7 +17,7 @@ export const RoundSpanForIcon = ({
       css={{
         width: 30,
         height: 30,
-        backgroundColor: disabled ? 'transparent' : '#484a4d',
+        backgroundColor: disabled === true ? 'transparent' : '#484a4d',
         borderRadius: '50%',
         padding: 5,
         margin: 2,
@@ -27,7 +27,7 @@ export const RoundSpanForIcon = ({
         color: '#dadce1',
         flexShrink: 0, // to avoid logo shrink when menu item text is long
         '& svg': {
-          color: disabled ? 'grey' : '',
+          color: disabled === true ? 'grey' : '',
         },
         ...css,
       }}

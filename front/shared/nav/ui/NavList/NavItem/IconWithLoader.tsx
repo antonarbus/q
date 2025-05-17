@@ -37,15 +37,15 @@ export const IconWithLoader = (props: Props): React.ReactNode => {
     )
   }
 
-  if (isLoading) {
+  if (isLoading === true) {
     return <SpinnerIcon />
   }
 
-  if (isSuccess) {
+  if (isSuccess === true) {
     return <SuccessIcon />
   }
 
-  if (isError) {
+  if (isError === true) {
     return <ErrorIcon />
   }
 

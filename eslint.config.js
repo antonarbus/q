@@ -142,7 +142,7 @@ export default [
         'error',
         {
           allowAny: false,
-          allowNullableBoolean: true,
+          allowNullableBoolean: false,
           allowNullableEnum: true,
           allowNullableNumber: true,
           allowNullableObject: true,

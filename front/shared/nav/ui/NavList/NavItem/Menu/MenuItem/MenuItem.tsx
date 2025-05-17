@@ -51,15 +51,15 @@ export const MenuItem = ({ navItem, hoverIndex }: Props): React.JSX.Element => {
           e.preventDefault()
         }
 
-        if (isLoading) {
+        if (isLoading === true) {
           return
         }
 
-        if (isSuccess) {
+        if (isSuccess === true) {
           return
         }
 
-        if (isError) {
+        if (isError === true) {
           return
         }
 
@@ -79,9 +79,9 @@ export const MenuItem = ({ navItem, hoverIndex }: Props): React.JSX.Element => {
         )
       }}
     >
-      {isIcon && isLoading && <SpinnerIcon />}
-      {isIcon && isSuccess && <SuccessIcon />}
-      {isIcon && isError && <ErrorIcon />}
+      {isIcon && isLoading === true && <SpinnerIcon />}
+      {isIcon && isSuccess === true && <SuccessIcon />}
+      {isIcon && isError === true && <ErrorIcon />}
       {isIcon &&
         isLoading !== true &&
         isSuccess !== true &&

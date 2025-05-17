@@ -88,7 +88,9 @@ export const useLogIn = ({
         navSlice.actions.showNavItems({ navItemIds: [navItemId.profile] }),
       )
 
-      if (roles?.includes(userRole.superAdmin)) {
+      const isSuperAdmin = roles?.includes(userRole.superAdmin) === true
+
+      if (isSuperAdmin) {
         dispatch(navSlice.actions.showNavItems({ navItemIds: ['admin'] }))
         dispatch(navSlice.actions.showAdminIcon())
       } else {

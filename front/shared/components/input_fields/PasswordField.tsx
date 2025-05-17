@@ -58,7 +58,7 @@ export const PasswordField = ({
       }}
       sx={{
         '& .MuiInputLabel-shrink': {
-          color: isLabelRed ? theme.colors.red : '',
+          color: isLabelRed === true ? theme.colors.red : '',
         },
         '.MuiInputBase-root': {
           background: 'white',

@@ -19,7 +19,7 @@ export const pinBoqRowQtyCell = ({ blockIndex, rowIndex }: Props): void => {
 
   const isPinned = itemPrice?.pin.isPinned
 
-  if (isPinned) {
+  if (isPinned === true) {
     return
   }
 
