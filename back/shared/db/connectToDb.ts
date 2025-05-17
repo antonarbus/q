@@ -1,23 +1,25 @@
 import mongoose from 'mongoose'
-import { isConnectedToDb } from './isConnectedToDb'
+import { checkDbConnection } from './checkDbConnection'
 import { getEnvVarOrThrow } from '@back/shared/utils/getEnvVar'
 
 export const connectToDb = async (): Promise<void> => {
   const mongoDbUrl = getEnvVarOrThrow('MONGO_DB_CONNECTION_STRING')
-  const db = 'q'
+  const dbName = 'q'
 
   try {
-    if (isConnectedToDb()) {
+    const isConnectedToDb = checkDbConnection()
+
+    if (isConnectedToDb) {
       console.info('connection to database is already established')
 
       return
     }
 
     mongoose.set('strictQuery', false)
-    await mongoose.connect(`${mongoDbUrl}/${db}`, { autoIndex: false })
-    console.info(`🚀 connected to "${db}" database`)
+    await mongoose.connect(`${mongoDbUrl}/${dbName}`, { autoIndex: false })
+    console.info(`🚀 connected to "${dbName}" database`)
   } catch (error) {
-    console.warn(`💣 error to connect to "${db}" database`)
+    console.warn(`💣 error to connect to "${dbName}" database`)
     console.error(error)
   }
 }

@@ -153,9 +153,10 @@ export const useKeysForMenuNavigation = (): void => {
     }
 
     const anyLetter = /\w/u
+    const anyLetterPressed = anyLetter.exec(e.key)
 
     // jump to "Close" & "Back"
-    if (anyLetter.exec(e.key)) {
+    if (anyLetterPressed) {
       if (isNestedMenu === false && e.key === 'c') {
         dispatch(
           navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),

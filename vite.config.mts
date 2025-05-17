@@ -135,23 +135,33 @@ export default {
       output: {
         // https://rollupjs.org/configuration-options/#output-manualchunks
         manualChunks: (id: string): string | undefined => {
-          if (id.includes('froala')) {
+          const isFroala = id.includes('froala')
+
+          if (isFroala) {
             return 'qwerty'
           }
 
-          if (id.includes('ag-grid')) {
+          const isAgGrid = id.includes('ag-grid')
+
+          if (isAgGrid) {
             return 'ag-grid'
           }
 
-          if (id.includes('@mui')) {
+          const isMui = id.includes('@mui')
+
+          if (isMui) {
             return '@mui'
           }
 
-          if (id.includes('@tanstack')) {
+          const isTanstack = id.includes('@tanstack')
+
+          if (isTanstack) {
             return '@tanstack'
           }
 
-          if (id.includes('@remix')) {
+          const isRemix = id.includes('@remix')
+
+          if (isRemix) {
             return '@remix'
           }
         },

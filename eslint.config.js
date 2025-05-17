@@ -72,11 +72,11 @@ export default [
       'no-duplicate-imports': 'error',
       'no-restricted-syntax': [
         'error',
-        // {
-        //   selector: 'IfStatement > CallExpression.test',
-        //   message:
-        //     'Do not call expressions directly in if statements. Assign the result to a variable first.',
-        // },
+        {
+          selector: 'IfStatement > CallExpression.test',
+          message:
+            'Do not call expressions directly in if statements. Assign the result to a variable first.',
+        },
         // {
         //   selector: 'IfStatement > LogicalExpression.test',
         //   message:

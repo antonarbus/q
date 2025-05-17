@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-export const isConnectedToDb = (): boolean => {
+export const checkDbConnection = (): boolean => {
   const isConnected =
     // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
     mongoose.connection.readyState === 1

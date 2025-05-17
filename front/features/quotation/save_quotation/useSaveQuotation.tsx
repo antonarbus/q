@@ -41,7 +41,7 @@ export const useSaveQuotation = ({
   slideOut,
 }: Props): Res => {
   const navigate = useNavigate()
-  const isQuotationsPage = useLocation().pathname.includes(route.quotations)
+  const isQuotationsPage = useLocation().pathname.includes(route.quotationList)
 
   const {
     mutate: saveQuotation,

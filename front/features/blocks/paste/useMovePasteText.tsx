@@ -11,7 +11,11 @@ const movePasteTextItem = (e: MouseEvent): void => {
     return
   }
 
-  if (window.location.pathname.includes(route.quotations)) {
+  const isQuotationListPage = window.location.pathname.includes(
+    route.quotationList,
+  )
+
+  if (isQuotationListPage) {
     return
   }
 

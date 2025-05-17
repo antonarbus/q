@@ -10,11 +10,19 @@ import { route } from '@shared/consts/route'
 import { textSlice } from '@shared/lib/froala/textSlice'
 
 const pasteItemOnClick = (): void => {
-  if (window.location.pathname.includes(route.bookmarks)) {
+  const isBookmarkListPage = window.location.pathname.includes(
+    route.bookmarkList,
+  )
+
+  if (isBookmarkListPage) {
     return
   }
 
-  if (window.location.pathname.includes(route.quotations)) {
+  const isQuotationListPage = window.location.pathname.includes(
+    route.quotationList,
+  )
+
+  if (isQuotationListPage) {
     return
   }
 

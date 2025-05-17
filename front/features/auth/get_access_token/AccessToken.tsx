@@ -99,7 +99,9 @@ export const AccessToken = (): React.JSX.Element => {
         }),
       )
 
-      if (roles.includes(userRole.superAdmin)) {
+      const isSuperAdmin = roles.includes(userRole.superAdmin)
+
+      if (isSuperAdmin) {
         dispatch(navSlice.actions.showNavItems({ navItemIds: ['admin'] }))
         dispatch(navSlice.actions.showAdminIcon())
       } else {

@@ -65,11 +65,17 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
         dispatch(navSlice.actions.hideNavItems({ navItemIds: ['admin'] }))
       }
 
-      if (location.pathname.includes(route.quotations)) {
+      const isQuotationListPage = location.pathname.includes(
+        route.quotationList,
+      )
+
+      if (isQuotationListPage) {
         void refetchQuotations()
       }
 
-      if (location.pathname.includes(route.bookmarks)) {
+      const isBookmarkListPage = location.pathname.includes(route.bookmarkList)
+
+      if (isBookmarkListPage) {
         void refetchBookmarks()
       }
 

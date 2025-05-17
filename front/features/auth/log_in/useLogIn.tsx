@@ -96,11 +96,17 @@ export const useLogIn = ({
         dispatch(navSlice.actions.showUserIcon())
       }
 
-      if (location.pathname.includes(route.quotations)) {
+      const isQuotationListPage = location.pathname.includes(
+        route.quotationList,
+      )
+
+      if (isQuotationListPage) {
         void refetchQuotations()
       }
 
-      if (location.pathname.includes(route.bookmarks)) {
+      const isBookmarkListPage = location.pathname.includes(route.bookmarkList)
+
+      if (isBookmarkListPage) {
         void refetchBookmarks()
       }
 

@@ -128,7 +128,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: route.quotations,
+        path: route.quotationList,
         element: (
           <Suspense
             fallback={
@@ -154,7 +154,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: route.bookmarks,
+        path: route.bookmarkList,
         element: (
           <Suspense
             fallback={
@@ -176,7 +176,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: route.users,
+        path: route.userList,
         element: (
           <Suspense
             fallback={
@@ -193,7 +193,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: route.visitors,
+        path: route.visitorList,
         element: (
           <Suspense
             fallback={
