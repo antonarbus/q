@@ -165,6 +165,8 @@ export default {
           if (isRemix) {
             return '@remix'
           }
+
+          return undefined
         },
       },
     },

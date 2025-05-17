@@ -149,16 +149,15 @@ export default [
           allowString: false,
         },
       ],
+      '@typescript-eslint/prefer-destructuring': 'error',
       // turn off some rules from tseslint.configs.all
-      '@typescript-eslint/naming-convention': 'off',
-      '@typescript-eslint/prefer-readonly-parameter-types': 'off',
-      '@typescript-eslint/no-unnecessary-type-parameters': 'off',
-      '@typescript-eslint/no-magic-numbers': 'off',
-      '@typescript-eslint/prefer-destructuring': 'error', //! <-- we are here
-      '@typescript-eslint/max-params': 'off',
-      '@typescript-eslint/consistent-return': 'off',
-      '@typescript-eslint/indent': 'off', // bad for performance
-      '@typescript-eslint/no-unsafe-type-assertion': 'off',
+      '@typescript-eslint/naming-convention': 'off', // that is too crazy
+      '@typescript-eslint/prefer-readonly-parameter-types': 'off', // that is too crazy
+      '@typescript-eslint/no-unnecessary-type-parameters': 'off', // does not allow to use generic parameter at jsonParseSafe()
+      '@typescript-eslint/no-magic-numbers': 'off', // that is too crazy
+      '@typescript-eslint/max-params': 'off', // do not like
+      '@typescript-eslint/consistent-return': 'off', // ts takes care of it with "noImplicitReturns": true
+      '@typescript-eslint/no-unsafe-type-assertion': 'error',
       '@typescript-eslint/no-misused-spread': 'off',
       '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'off',
 

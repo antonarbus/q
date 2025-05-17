@@ -37,6 +37,7 @@
     "isolatedModules": true,
     "noUncheckedIndexedAccess": true,
     "strictNullChecks": true,
+    "noImplicitReturns": true,
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
     "types": ["vite/client", "vitest/globals", "@emotion/react/types/css-prop"],

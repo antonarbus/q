@@ -17,4 +17,6 @@ export const reOrderBoqRowsReducer = (
   }
 
   boqBlock.boq.rows = reOrderedBoqRows
+
+  return undefined
 }
