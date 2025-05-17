@@ -59,6 +59,7 @@ export const OutlinedDivWithLabel = ({
           fontFamily: 'system-ui, sans-serif;',
           fontWeight: 300,
         },
+        // eslint-disable-next-line @typescript-eslint/no-misused-spread
         ...sx,
       }}
     />

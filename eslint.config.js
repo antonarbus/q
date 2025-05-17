@@ -150,6 +150,7 @@ export default [
         },
       ],
       '@typescript-eslint/prefer-destructuring': 'error',
+      '@typescript-eslint/no-misused-spread': 'error',
       // turn off some rules from tseslint.configs.all
       '@typescript-eslint/naming-convention': 'off', // that is too crazy
       '@typescript-eslint/prefer-readonly-parameter-types': 'off', // that is too crazy
@@ -157,9 +158,8 @@ export default [
       '@typescript-eslint/no-magic-numbers': 'off', // that is too crazy
       '@typescript-eslint/max-params': 'off', // do not like
       '@typescript-eslint/consistent-return': 'off', // ts takes care of it with "noImplicitReturns": true
-      '@typescript-eslint/no-unsafe-type-assertion': 'error',
-      '@typescript-eslint/no-misused-spread': 'off',
-      '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'off',
+      '@typescript-eslint/no-unsafe-type-assertion': 'off', //! turn it on and make type guard functions with predicates instead of assertions
+      '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'error',
 
       // https://github.com/jsx-eslint/eslint-plugin-react
       'react/react-in-jsx-scope': 'off',
