@@ -19,7 +19,7 @@ export const useLoadInitValuesIntoBookmarkModal = (): Res => {
   useEffectOnce(() => {
     const bookmark = getState().quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
 
-    if (bookmark) {
+    if (bookmark !== undefined) {
       bookmarkFromValues.nameSignal.value = bookmark.name ?? ''
       bookmarkFromValues.categorySignal.value = bookmark.category ?? ''
       bookmarkFromValues.descSignal.value = bookmark.desc ?? ''

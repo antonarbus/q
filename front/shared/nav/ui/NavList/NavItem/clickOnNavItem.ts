@@ -64,7 +64,7 @@ export const clickOnNavItem = ({
     return
   }
 
-  if (func) {
+  if (func !== undefined) {
     void func(e)
 
     return

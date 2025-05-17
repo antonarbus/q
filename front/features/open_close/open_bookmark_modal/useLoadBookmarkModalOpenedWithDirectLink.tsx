@@ -55,7 +55,7 @@ export const useLoadBookmarkModalOpenedWithDirectLink = ({
 
       const block = getState().quotation.blocks.at(BOOKMARK_POS_AT_BLOCKS)
 
-      if (block) {
+      if (block !== undefined) {
         bookmarkFromValues.nameSignal.value = block.name ?? ''
         bookmarkFromValues.categorySignal.value = block.category ?? ''
         bookmarkFromValues.descSignal.value = block.desc ?? ''

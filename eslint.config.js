@@ -143,9 +143,9 @@ export default [
         {
           allowAny: false,
           allowNullableBoolean: false,
-          allowNullableEnum: true,
-          allowNullableNumber: true,
-          allowNullableObject: true,
+          allowNullableEnum: false,
+          allowNullableNumber: false,
+          allowNullableObject: false,
           allowNullableString: true,
           allowNumber: true,
           allowString: true,

@@ -37,7 +37,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
 
   const navElement = e.target.closest('nav')
 
-  if (navElement) {
+  if (navElement !== null) {
     removePasteIfNeeded()
 
     return

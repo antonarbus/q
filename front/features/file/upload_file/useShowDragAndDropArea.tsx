@@ -14,7 +14,7 @@ export const useShowDragAndDropArea = (): void => {
 
     document.addEventListener('dragover', (e) => {
       // to remove default green "plus" icon
-      if (e.dataTransfer) {
+      if (e.dataTransfer !== null) {
         e.dataTransfer.dropEffect = 'move'
       }
 

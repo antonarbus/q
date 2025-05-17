@@ -12,10 +12,10 @@ export const useInstantiateChart = (): Res => {
   const chartInstanceRef = useRef<Chart | null>(null)
 
   useEffect(() => {
-    if (canvasRef.current) {
+    if (canvasRef.current !== null) {
       const ctx = canvasRef.current.getContext('2d')
 
-      if (ctx) {
+      if (ctx !== null) {
         chartInstanceRef.current = new Chart(ctx, chartConfiguration)
       }
     }

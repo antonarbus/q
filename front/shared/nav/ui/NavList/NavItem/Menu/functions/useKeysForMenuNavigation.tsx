@@ -136,7 +136,7 @@ export const useKeysForMenuNavigation = (): void => {
 
       const func = navItem?.func
 
-      if (func) {
+      if (func !== undefined) {
         void func()
         dispatch(navSlice.actions.closeMenu())
 
@@ -160,7 +160,7 @@ export const useKeysForMenuNavigation = (): void => {
     const anyLetterPressed = anyLetter.exec(e.key)
 
     // jump to "Close" & "Back"
-    if (anyLetterPressed) {
+    if (anyLetterPressed !== null) {
       const shouldJumpToClose = isNestedMenu === false && e.key === 'c'
 
       if (shouldJumpToClose) {

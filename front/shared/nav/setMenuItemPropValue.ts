@@ -21,7 +21,7 @@ export const setMenuItemPropValue = <K extends keyof NavItem>({
       return
     }
 
-    if (el.navItems) {
+    if (el.navItems !== undefined) {
       setMenuItemPropValue({
         menu: el.navItems,
         navItemId,

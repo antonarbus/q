@@ -20,7 +20,7 @@ const searchForShortcutsInNavStructure = ({
   arrForNavStructureIteration = navStructure
 
   arrForNavStructureIteration.forEach((navItem) => {
-    if (navItem.shortcut) {
+    if (navItem.shortcut !== undefined) {
       shortcuts.push({
         name: navItem.name,
         shortcut: navItem.shortcut.toSorted(),
@@ -31,7 +31,7 @@ const searchForShortcutsInNavStructure = ({
   })
 
   arrForNavStructureIteration.forEach((navItem) => {
-    if (navItem.navItems) {
+    if (navItem.navItems !== undefined) {
       arrForNavStructureIteration = navItem.navItems
 
       searchForShortcutsInNavStructure({
@@ -66,10 +66,10 @@ export const usePressNavShortcut = ({ navStructure }: Props): void => {
         return isMatch
       })
 
-      if (matchedNavItemByShortcut) {
+      if (matchedNavItemByShortcut !== undefined) {
         e.preventDefault()
 
-        if (matchedNavItemByShortcut.function) {
+        if (matchedNavItemByShortcut.function !== null) {
           matchedNavItemByShortcut.function()
 
           return

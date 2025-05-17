@@ -24,11 +24,11 @@ export const useUpdateChart = ({ visitors, chartInstanceRef }: Props): void => {
 
       chartInstanceRef.current.data.labels = labels
 
-      if (chartInstanceRef.current.data.datasets[0]) {
+      if (chartInstanceRef.current.data.datasets[0] !== undefined) {
         chartInstanceRef.current.data.datasets[0].data = countData
       }
 
-      if (chartInstanceRef.current.data.datasets[1]) {
+      if (chartInstanceRef.current.data.datasets[1] !== undefined) {
         chartInstanceRef.current.data.datasets[1].data = newData
       }
 

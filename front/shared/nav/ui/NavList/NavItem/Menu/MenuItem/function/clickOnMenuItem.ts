@@ -47,7 +47,7 @@ export const clickOnMenuItem = (
 
   e.preventDefault()
 
-  if (func) {
+  if (func !== undefined) {
     void func(e)
     dispatch(navSlice.actions.closeMenu())
 

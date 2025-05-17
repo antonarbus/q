@@ -20,7 +20,7 @@ export const useLoadInitValuesIntoInfoModal = (): Res => {
   useEffectOnce(() => {
     const item = getFromStore({ id: bookmarkId ?? quotationId ?? 'new' })
 
-    if (item) {
+    if (item !== undefined) {
       infoFormValues.nameSignal.value = item.name ?? ''
       infoFormValues.categorySignal.value = item.category ?? ''
       infoFormValues.descSignal.value = item.desc ?? ''

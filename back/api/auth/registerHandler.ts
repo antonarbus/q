@@ -36,7 +36,7 @@ export const registerHandler: RouterHandler = async (req, res, next) => {
     isActivated: true,
   }).lean()
 
-  if (user) {
+  if (user !== null) {
     res.status(httpStatus.forbidden_403).json({ message: 'already exists' })
 
     return

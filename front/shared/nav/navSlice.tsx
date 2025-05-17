@@ -78,7 +78,7 @@ export const navSlice = createSlice({
           navState: state,
         })
 
-        if (parentNavItem) {
+        if (parentNavItem !== null) {
           state.currentMenuNavItemId = parentNavItem.id
         }
       }
@@ -99,7 +99,7 @@ export const navSlice = createSlice({
           navState: state,
         })
 
-        if (parentNavItem) {
+        if (parentNavItem !== null) {
           state.nextMenuNavItemId = parentNavItem.id
         }
       }

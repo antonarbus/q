@@ -108,7 +108,7 @@ export const MenuItem = ({ navItem, hoverIndex }: Props): React.JSX.Element => {
           <FaChevronRight />
         </RoundSpanForIcon>
       )}
-      {shortcut && (
+      {shortcut !== undefined && (
         <Shortcut
           shortcut={shortcut}
           $isHovered={isHovered}

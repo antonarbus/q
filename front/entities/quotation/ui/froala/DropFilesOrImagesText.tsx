@@ -33,7 +33,7 @@ export const DropFilesOrImagesText = (props: Props): React.JSX.Element => {
           fontWeight: 400,
         }}
         onClick={(e) => {
-          if (editorRef.current) {
+          if (editorRef.current !== null) {
             editorRef.current.file.showInsertPopup()
             editorRef.current.popups.show('file.insert', e.pageX, e.pageY)
           }
@@ -49,7 +49,7 @@ export const DropFilesOrImagesText = (props: Props): React.JSX.Element => {
           fontWeight: 400,
         }}
         onClick={(e) => {
-          if (editorRef.current) {
+          if (editorRef.current !== null) {
             editorRef.current.image.showInsertPopup()
             editorRef.current.popups.show('image.insert', e.pageX, e.pageY)
           }

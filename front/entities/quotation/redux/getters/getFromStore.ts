@@ -16,7 +16,7 @@ export const getFromStore = ({ id }: Props): Item | Quotation | undefined => {
     return block.id === id
   })
 
-  if (blockWithSameId) {
+  if (blockWithSameId !== undefined) {
     return blockWithSameId
   }
 

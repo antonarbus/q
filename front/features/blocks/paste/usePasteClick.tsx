@@ -50,7 +50,7 @@ const pasteItemOnClick = (): void => {
   if (pastePos === 'middle') {
     const elementToBeReplaced = document.getElementById(id)
 
-    if (elementToBeReplaced) {
+    if (elementToBeReplaced !== null) {
       const paperElement = elementToBeReplaced.querySelector(`.${cls.paper}`)
 
       if (paperElement instanceof HTMLElement) {
