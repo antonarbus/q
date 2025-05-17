@@ -4,7 +4,7 @@ import {
   newQuotationTemplate,
   backToQuotationRef,
 } from '@entities/quotation'
-import { dispatch, useSelector } from '@shared/lib/redux'
+import { dispatch, getState, useSelector } from '@shared/lib/redux'
 import { useEffect } from 'react'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { navItemId } from '@shared/consts/navItemId'
@@ -52,8 +52,9 @@ export function useLoadQuotation(): void {
     }
   }
 
-  /** Decide which quotation to load on first mount */
+  /** Decide which quotation to load on first mount if it is not decided before */
   useEffectOnce(() => {
+    console.log(1)
     const fromWhereToLoad = getFromWhereToLoadQuotation()
 
     dispatch(
@@ -67,143 +68,161 @@ export function useLoadQuotation(): void {
   // quotation loading
   useEffect(() => {
     const loadQuotation = async (): Promise<void> => {
-      if (shouldLoadQuotation.yesOrNo === 'no') {
-        return
-      }
+      console.log(2)
 
-      const fromWhereToLoad = getFromWhereToLoadQuotation()
+      if (shouldLoadQuotation.yesOrNo === 'yes') {
+        const fromWhereToLoad = getFromWhereToLoadQuotation()
 
-      // load previous quotation when user clicks on "< Back" button
-      if (fromWhereToLoad === 'memory') {
-        dispatch(
-          appSlice.actions.showLoadingOverlay({
-            showLoader: true,
-            text: 'Going back...',
-          }),
-        )
+        // load previous quotation when user clicks on "< Back" button
+        if (fromWhereToLoad === 'memory') {
+          dispatch(
+            appSlice.actions.showLoadingOverlay({
+              showLoader: true,
+              text: 'Going back...',
+            }),
+          )
 
-        dispatch(navSlice.actions.removeUnderlineFromTopNav())
+          dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
-        dispatch(
-          navSlice.actions.hideNavItems({ navItemIds: [navItemId.back] }),
-        )
+          dispatch(
+            navSlice.actions.hideNavItems({ navItemIds: [navItemId.back] }),
+          )
 
-        dispatch(
-          navSlice.actions.enableNavItems({
-            navItemIds: [
-              navItemId.save,
-              navItemId.pdf,
-              navItemId.excel,
-              navItemId.share,
-              navItemId.insert,
-            ],
-          }),
-        )
+          dispatch(
+            navSlice.actions.enableNavItems({
+              navItemIds: [
+                navItemId.save,
+                navItemId.pdf,
+                navItemId.excel,
+                navItemId.share,
+                navItemId.insert,
+              ],
+            }),
+          )
 
-        if (backToQuotationRef.current !== null) {
+          if (backToQuotationRef.current !== null) {
+            dispatch(quotationSlice.actions.resetQuotationReducer())
+
+            await asyncDelay(0)
+
+            dispatch(
+              quotationSlice.actions.loadQuotationReducer({
+                quotation: backToQuotationRef.current,
+              }),
+            )
+
+            dispatch(
+              appSlice.actions.setShouldLoadQuotation({
+                yesOrNo: 'no',
+                from: undefined,
+              }),
+            )
+          }
+
+          setTimeout(() => {
+            dispatch(appSlice.actions.hideLoadingOverlay())
+          }, 1250)
+        }
+
+        // load new quotation template
+        if (fromWhereToLoad === 'template') {
+          dispatch(
+            appSlice.actions.showLoadingOverlay({
+              showLoader: true,
+              text: 'Loading template...',
+            }),
+          )
+
+          dispatch(navSlice.actions.removeUnderlineFromTopNav())
+
+          dispatch(
+            navSlice.actions.hideNavItems({ navItemIds: [navItemId.back] }),
+          )
+
+          dispatch(
+            navSlice.actions.enableNavItems({
+              navItemIds: [
+                navItemId.save,
+                navItemId.pdf,
+                navItemId.excel,
+                navItemId.share,
+                navItemId.insert,
+              ],
+            }),
+          )
+
           dispatch(quotationSlice.actions.resetQuotationReducer())
 
           await asyncDelay(0)
 
           dispatch(
             quotationSlice.actions.loadQuotationReducer({
-              quotation: backToQuotationRef.current,
+              quotation: newQuotationTemplate,
+            }),
+          )
+
+          setTimeout(() => {
+            dispatch(appSlice.actions.hideLoadingOverlay())
+          }, 1250)
+
+          dispatch(
+            navSlice.actions.underlineNavItem({ navItemId: navItemId.new }),
+          )
+
+          dispatch(
+            appSlice.actions.setShouldLoadQuotation({
+              yesOrNo: 'no',
+              from: undefined,
             }),
           )
         }
 
-        setTimeout(() => {
-          dispatch(appSlice.actions.hideLoadingOverlay())
-        }, 1250)
-      }
+        // load quotation from server
+        if (fromWhereToLoad === 'server') {
+          dispatch(
+            appSlice.actions.showLoadingOverlay({
+              showLoader: true,
+              text: `Loading ${quotationId}...`,
+            }),
+          )
 
-      // load new quotation template
-      if (fromWhereToLoad === 'template') {
-        dispatch(
-          appSlice.actions.showLoadingOverlay({
-            showLoader: true,
-            text: 'Loading template...',
-          }),
-        )
+          if (quotationId !== undefined) {
+            getQuotation({ id: quotationId })
+          }
 
-        dispatch(navSlice.actions.removeUnderlineFromTopNav())
+          dispatch(
+            appSlice.actions.setShouldLoadQuotation({
+              yesOrNo: 'no',
+              from: undefined,
+            }),
+          )
 
-        dispatch(
-          navSlice.actions.hideNavItems({ navItemIds: [navItemId.back] }),
-        )
+          dispatch(appSlice.actions.setBackgroundMessage({ message: '' }))
 
-        dispatch(
-          navSlice.actions.enableNavItems({
-            navItemIds: [
-              navItemId.save,
-              navItemId.pdf,
-              navItemId.excel,
-              navItemId.share,
-              navItemId.insert,
-            ],
-          }),
-        )
+          dispatch(quotationSlice.actions.resetQuotationReducer())
 
-        dispatch(quotationSlice.actions.resetQuotationReducer())
+          dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
-        await asyncDelay(0)
+          dispatch(
+            navSlice.actions.hideNavItems({ navItemIds: [navItemId.back] }),
+          )
 
-        dispatch(
-          quotationSlice.actions.loadQuotationReducer({
-            quotation: newQuotationTemplate,
-          }),
-        )
-
-        setTimeout(() => {
-          dispatch(appSlice.actions.hideLoadingOverlay())
-        }, 1250)
-
-        dispatch(
-          navSlice.actions.underlineNavItem({ navItemId: navItemId.new }),
-        )
-      }
-
-      // load quotation from server
-      if (fromWhereToLoad === 'server') {
-        dispatch(
-          appSlice.actions.showLoadingOverlay({
-            showLoader: true,
-            text: `Loading ${quotationId}...`,
-          }),
-        )
-
-        dispatch(navSlice.actions.removeUnderlineFromTopNav())
-
-        dispatch(
-          navSlice.actions.hideNavItems({ navItemIds: [navItemId.back] }),
-        )
-
-        dispatch(
-          navSlice.actions.enableNavItems({
-            navItemIds: [
-              navItemId.save,
-              navItemId.pdf,
-              navItemId.excel,
-              navItemId.share,
-              navItemId.insert,
-            ],
-          }),
-        )
-
-        if (quotationId !== undefined) {
-          getQuotation({ id: quotationId })
+          dispatch(
+            navSlice.actions.enableNavItems({
+              navItemIds: [
+                navItemId.save,
+                navItemId.pdf,
+                navItemId.excel,
+                navItemId.share,
+                navItemId.insert,
+              ],
+            }),
+          )
         }
+
+        // eslint-disable-next-line require-atomic-updates
+        backToQuotationRef.current = null
       }
-
-      dispatch(
-        appSlice.actions.setShouldLoadQuotation({
-          yesOrNo: 'no',
-          from: undefined,
-        }),
-      )
-
-      // eslint-disable-next-line require-atomic-updates
-      backToQuotationRef.current = null
     }
 
     void loadQuotation()
@@ -211,37 +230,30 @@ export function useLoadQuotation(): void {
 
   // above we triggered quotation loading, now we handle the response
   useUpdateEffect(() => {
-    const showLoadedQuotationFromServer = async (): Promise<void> => {
-      if (isSuccess && quotationId !== 'new' && quotationId !== undefined) {
-        const quotation = data.quotation
+    if (isSuccess && quotationId !== 'new' && quotationId !== undefined) {
+      console.log(3)
+      const quotation = data.quotation
 
-        dispatch(appSlice.actions.setBackgroundMessage({ message: '' }))
+      // await asyncDelay(0)
 
-        dispatch(quotationSlice.actions.resetQuotationReducer())
+      dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
 
-        await asyncDelay(0)
+      dispatch(
+        navSlice.actions.enableNavItems({
+          navItemIds: [
+            navItemId.save,
+            navItemId.pdf,
+            navItemId.excel,
+            navItemId.share,
+            navItemId.insert,
+          ],
+        }),
+      )
 
-        dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
-
-        dispatch(
-          navSlice.actions.enableNavItems({
-            navItemIds: [
-              navItemId.save,
-              navItemId.pdf,
-              navItemId.excel,
-              navItemId.share,
-              navItemId.insert,
-            ],
-          }),
-        )
-
-        setTimeout(() => {
-          dispatch(appSlice.actions.hideLoadingOverlay())
-        }, 1250)
-      }
+      setTimeout(() => {
+        dispatch(appSlice.actions.hideLoadingOverlay())
+      }, 1250)
     }
-
-    void showLoadedQuotationFromServer()
   }, [isSuccess])
 
   useUpdateEffect(() => {
