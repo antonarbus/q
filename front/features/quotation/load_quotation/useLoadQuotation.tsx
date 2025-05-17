@@ -4,7 +4,7 @@ import {
   newQuotationTemplate,
   backToQuotationRef,
 } from '@entities/quotation'
-import { dispatch, getState, useSelector } from '@shared/lib/redux'
+import { dispatch, useSelector } from '@shared/lib/redux'
 import { useEffect } from 'react'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { navItemId } from '@shared/consts/navItemId'
@@ -54,7 +54,6 @@ export function useLoadQuotation(): void {
 
   /** Decide which quotation to load on first mount if it is not decided before */
   useEffectOnce(() => {
-    console.log(1)
     const fromWhereToLoad = getFromWhereToLoadQuotation()
 
     dispatch(
@@ -68,8 +67,6 @@ export function useLoadQuotation(): void {
   // quotation loading
   useEffect(() => {
     const loadQuotation = async (): Promise<void> => {
-      console.log(2)
-
       if (shouldLoadQuotation.yesOrNo === 'yes') {
         const fromWhereToLoad = getFromWhereToLoadQuotation()
 
@@ -231,10 +228,7 @@ export function useLoadQuotation(): void {
   // above we triggered quotation loading, now we handle the response
   useUpdateEffect(() => {
     if (isSuccess && quotationId !== 'new' && quotationId !== undefined) {
-      console.log(3)
       const quotation = data.quotation
-
-      // await asyncDelay(0)
 
       dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
 
