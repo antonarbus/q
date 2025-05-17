@@ -39,11 +39,9 @@ export const formatBoqRowCellNumber = ({
     }
   }
 
-  const value = boqRow[boqRowCellKey].value
+  const { value, html } = boqRow[boqRowCellKey]
 
   const roundedValue = roundTo(value, 2)
-
-  const html = boqRow[boqRowCellKey].html
 
   const newHtml = getStringWithNewFormattedNumber({
     string: html,

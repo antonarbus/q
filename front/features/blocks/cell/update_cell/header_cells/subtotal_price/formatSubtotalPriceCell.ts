@@ -23,11 +23,9 @@ export const formatSubtotalPriceCell = ({
     return
   }
 
-  const value = boqBlock.boq.header.subTotalPrice.value
+  const { value, html } = boqBlock.boq.header.subTotalPrice
 
   const roundedValue = roundTo(value, 2)
-
-  const html = boqBlock.boq.header.subTotalPrice.html
 
   const newHtml = getStringWithNewFormattedNumber({
     string: html,

@@ -9,7 +9,7 @@ export const useKeysForMenuNavigation = (): void => {
   const navigate = useNavigate()
 
   const navKeyboardHandler = (e: KeyboardEvent): void => {
-    const currentMenuNavItemId = getState().nav.currentMenuNavItemId
+    const { currentMenuNavItemId } = getState().nav
 
     const { navItem: currentNavItem } = getNavItem({
       navItemId: currentMenuNavItemId,
@@ -22,7 +22,7 @@ export const useKeysForMenuNavigation = (): void => {
 
     const menuItemsQty = navItems.length // 3
 
-    const hoverIndex = getState().nav.hoverIndex // -1
+    const { hoverIndex } = getState().nav // -1
 
     const isNestedMenu = getState().nav.idsToCurrentMenuItems.length > 2
 

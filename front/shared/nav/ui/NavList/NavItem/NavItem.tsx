@@ -23,12 +23,9 @@ export const NavItem = ({ navItem }: Props): React.JSX.Element => {
     (state) => state.nav.idsToCurrentMenuItems.at(1) === navItem.id,
   )
 
-  const name = navItem.name
+  const { name, isLoading, isSuccess, isError } = navItem
   const link = navItem.link ?? ''
   const isFunc = Boolean(navItem.func)
-  const isLoading = navItem.isLoading
-  const isSuccess = navItem.isSuccess
-  const isError = navItem.isError
   const disabled = Boolean(navItem.disabled)
   const isActive = Boolean(navItem.isActive)
 

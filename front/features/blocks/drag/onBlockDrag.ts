@@ -28,7 +28,7 @@ export const onBlockDragEnd =
 
     const oldIndex = itemIds.indexOf(String(active.id))
     const newIndex = itemIds.indexOf(String(over.id))
-    const blocks = getState().quotation.blocks
+    const { blocks } = getState().quotation
     const reOrderedItems = arrayMoveImmutable(blocks, oldIndex, newIndex)
     dispatch(quotationSlice.actions.reOrderBlocksReducer({ reOrderedItems }))
   }

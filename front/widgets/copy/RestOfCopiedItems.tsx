@@ -58,7 +58,7 @@ export const RestOfCopiedItems = (): React.JSX.Element | null => {
   const isCopying = useSelector((state) => state.copy.isCopying)
   const prevFirstItemHeightRef = useRef(0)
 
-  const firstItem = items[0]
+  const [firstItem] = items
 
   if (firstItem?.width === undefined) {
     return null

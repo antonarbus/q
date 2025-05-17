@@ -27,8 +27,7 @@ export const countUniqueDailyVisitorsHandler: RouterHandler = async (
   res,
   next,
 ) => {
-  const today = req.body.date
-  const isNew = req.body.isNew
+  const { isNew, date: today } = req.body
 
   // do not distort statistics by tests
   if (req.headers[headerName.playwrightTest] === 'true') {

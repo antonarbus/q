@@ -35,7 +35,7 @@ export const useLoadSaveQuotationModalWithDirectLink = ({
       return
     }
 
-    const quotation = data.quotation
+    const { quotation } = data
 
     dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
 

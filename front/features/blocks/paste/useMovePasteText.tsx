@@ -19,7 +19,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
     return
   }
 
-  const isPasteTextShown = getState().copy.isPasteTextShown
+  const { isPasteTextShown } = getState().copy
 
   const removePasteIfNeeded = (): void => {
     if (isPasteTextShown) {
@@ -75,7 +75,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
     return
   }
 
-  const isPastable = getState().copy.isPastable
+  const { isPastable } = getState().copy
 
   if (isPastable === false) {
     removePasteIfNeeded()
@@ -95,7 +95,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
     isNarrowGapUnderNav && isPasteTextShown === false
 
   if (isCursorAboveUnderNavDuringCopy) {
-    const firstBlock = getState().quotation.blocks[0]
+    const [firstBlock] = getState().quotation.blocks
 
     if (firstBlock === undefined) {
       return
@@ -158,7 +158,7 @@ const movePasteTextBoqRow = (e: MouseEvent): void => {
   }
 
   const prevPlace = getState().copy.place
-  const isPasteTextShown = getState().copy.isPasteTextShown
+  const { isPasteTextShown } = getState().copy
   const boqRowsElement = e.target.closest(`.${cls.boqRows}`)
 
   const isBoqPasteRow = getState()
@@ -214,7 +214,7 @@ const movePasteTextBoqRow = (e: MouseEvent): void => {
     return
   }
 
-  const isPastable = getState().copy.isPastable
+  const { isPastable } = getState().copy
 
   if (isPastable === false) {
     removePasteIfNeeded()

@@ -152,9 +152,9 @@ export default [
       // turn off some rules from tseslint.configs.all
       '@typescript-eslint/naming-convention': 'off',
       '@typescript-eslint/prefer-readonly-parameter-types': 'off',
-      '@typescript-eslint/no-unnecessary-type-parameters': 'off', // check it later, it may make sense
+      '@typescript-eslint/no-unnecessary-type-parameters': 'off',
       '@typescript-eslint/no-magic-numbers': 'off',
-      '@typescript-eslint/prefer-destructuring': 'off',
+      '@typescript-eslint/prefer-destructuring': 'error', //! <-- we are here
       '@typescript-eslint/max-params': 'off',
       '@typescript-eslint/consistent-return': 'off',
       '@typescript-eslint/indent': 'off', // bad for performance

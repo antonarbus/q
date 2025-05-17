@@ -56,8 +56,8 @@ export const FirstCopiedItem = (): React.JSX.Element | null => {
   const items = useSelector((state) => state.copy.items)
   const isCopying = useSelector((state) => state.copy.isCopying)
 
-  const firstItem = items[0]
-  const firstPreview = getState().copy.previews[0]
+  const [firstItem] = items
+  const [firstPreview] = getState().copy.previews
 
   if (firstItem?.width === undefined) {
     return null

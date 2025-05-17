@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/unbound-method */
+/* eslint-disable @typescript-eslint/prefer-destructuring */
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import type { Dispatch, GetState, Store, UseSelector } from '@app/redux'
 import { useSelector as useSelectorNotTyped } from 'react-redux'
@@ -32,6 +34,5 @@ export const instantiateStore = (instance: Store): void => {
     throw new Error('getState is already instantiated')
   }
 
-  // eslint-disable-next-line @typescript-eslint/unbound-method
   getState = store.getState
 }

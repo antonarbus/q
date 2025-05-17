@@ -9,7 +9,7 @@ export type WorkerResponseMessage = {
 self.onmessage = async (
   event: MessageEvent<WorkerRequestMessage>,
 ): Promise<void> => {
-  const quotation = event.data.quotation
+  const { quotation } = event.data
 
   // www.npmjs.com/package/exceljs#contents
   const ExcelJS = await import('exceljs')

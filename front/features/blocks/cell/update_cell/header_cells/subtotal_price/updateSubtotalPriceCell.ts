@@ -85,8 +85,8 @@ export const updateSubtotalPriceCell = ({
   }[]
 
   const prices: Prices = boqRows.map((boqRow, index) => {
-    const oldValue = boqRow.price.value
-    const isPinned = boqRow.price.pin.isPinned
+    const { value: oldValue } = boqRow.price
+    const { isPinned } = boqRow.price.pin
 
     const newValue = oldValue * (unpinnedPricesSumTarget / unpinnedPricesSum)
 

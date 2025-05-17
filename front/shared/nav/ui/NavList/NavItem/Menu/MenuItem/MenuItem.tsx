@@ -29,11 +29,8 @@ export const MenuItem = ({ navItem, hoverIndex }: Props): React.JSX.Element => {
   const menuId = navItem.id
   const link = navItem.link ?? ''
   const isFunc = Boolean(navItem.func)
-  const shortcut = navItem.shortcut
   const disabled = Boolean(navItem.disabled)
-  const isLoading = navItem.isLoading
-  const isSuccess = navItem.isSuccess
-  const isError = navItem.isError
+  const { shortcut, isLoading, isSuccess, isError } = navItem
 
   const fixedLink = `${location.pathname}/${link}`
     .replace('.', '')

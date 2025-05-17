@@ -16,7 +16,7 @@ export const getRowCellHtmlFromStore = ({ boqRowCellKey }: Props): string => {
 
   const row = block
 
-  const html = row[boqRowCellKey].html
+  const { html } = row[boqRowCellKey]
 
   return html
 }

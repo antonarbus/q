@@ -17,10 +17,7 @@ export const IconWithLoader = (props: Props): React.ReactNode => {
   }
 
   const firstLetter = props.navItem.name.at(0)
-  const icon = props.navItem.icon
-  const isLoading = props.navItem.isLoading
-  const isSuccess = props.navItem.isSuccess
-  const isError = props.navItem.isError
+  const { icon, isLoading, isSuccess, isError } = props.navItem
   const disabled = Boolean(props.navItem.disabled)
   const tooltipText = props.navItem.tooltip
 

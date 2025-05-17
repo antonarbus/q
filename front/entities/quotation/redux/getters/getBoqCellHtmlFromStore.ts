@@ -25,7 +25,7 @@ export const getBoqCellHtmlFromStore = ({
     return ''
   }
 
-  const html = row[boqRowCellKey].html
+  const { html } = row[boqRowCellKey]
 
   return html
 }

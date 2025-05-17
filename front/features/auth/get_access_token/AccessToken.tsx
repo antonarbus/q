@@ -40,7 +40,7 @@ export const AccessToken = (): React.JSX.Element => {
 
   // get initial access token on app load
   useEffectOnce(() => {
-    const accessToken = getState().user.accessToken
+    const { accessToken } = getState().user
 
     if (accessToken === null) {
       void getAccessToken()

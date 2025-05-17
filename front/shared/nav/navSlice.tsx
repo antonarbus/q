@@ -70,7 +70,7 @@ export const navSlice = createSlice({
     },
     goUpInCurrentMenu: (state) => {
       state.idsToCurrentMenuItems = state.idsToCurrentMenuItems.slice(0, -1)
-      const currentMenuNavItemId = state.currentMenuNavItemId
+      const { currentMenuNavItemId } = state
 
       if (currentMenuNavItemId !== null) {
         const { parentNavItem } = getNavItem({
@@ -91,7 +91,7 @@ export const navSlice = createSlice({
       state.nextMenuNavItemId = navItemId
     },
     goUpInNextMenu: (state) => {
-      const nextMenuNavItemId = state.nextMenuNavItemId
+      const { nextMenuNavItemId } = state
 
       if (nextMenuNavItemId !== null) {
         const { parentNavItem } = getNavItem({
@@ -238,7 +238,7 @@ export const navSlice = createSlice({
     ) => {
       const { exceptNavItemIds = [] } = action.payload ?? {}
 
-      const topLevelNavMenu = state.navStructure[0]
+      const [topLevelNavMenu] = state.navStructure
 
       if (topLevelNavMenu === undefined) {
         return
@@ -274,7 +274,7 @@ export const navSlice = createSlice({
     ) => {
       const { exceptNavItemIds = [] } = action.payload ?? {}
 
-      const topLevelNavMenu = state.navStructure[0]
+      const [topLevelNavMenu] = state.navStructure
 
       if (topLevelNavMenu === undefined) {
         return
@@ -368,7 +368,7 @@ export const navSlice = createSlice({
       })
     },
     removeUnderlineFromTopNav: (state) => {
-      const topLevelNavMenu = state.navStructure[0]
+      const [topLevelNavMenu] = state.navStructure
 
       if (topLevelNavMenu === undefined) {
         return

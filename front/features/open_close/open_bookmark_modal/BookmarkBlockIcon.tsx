@@ -40,7 +40,7 @@ export const BookmarkBlockIcon = (): React.ReactNode => {
               return
             }
 
-            const email = getState().user.email
+            const { email } = getState().user
 
             if (email === null) {
               toast.warning('Not logged in')

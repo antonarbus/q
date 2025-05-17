@@ -58,7 +58,7 @@ const QuotationPreviewFieldLayout = ({
 }
 
 export const QuotationPreviewField = (): React.ReactNode => {
-  const blocks = getState().quotation.blocks
+  const { blocks } = getState().quotation
 
   return (
     <QuotationPreviewFieldLayout>

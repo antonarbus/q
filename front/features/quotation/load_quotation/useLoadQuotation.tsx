@@ -230,7 +230,7 @@ export function useLoadQuotation(): void {
   // above we triggered quotation loading, now we handle the response
   useUpdateEffect(() => {
     if (isSuccess) {
-      const quotation = data.quotation
+      const { quotation } = data
 
       dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
 

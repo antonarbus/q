@@ -8,7 +8,7 @@ export const remindToSaveQuotationOnInsert = (): void => {
     return
   }
 
-  const id = getState().quotation.id
+  const { id } = getState().quotation
 
   if (id === 'new') {
     toast.info('Do not forget to save quotation')

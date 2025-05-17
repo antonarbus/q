@@ -26,7 +26,7 @@ const pasteItemOnClick = (): void => {
     return
   }
 
-  const isPasteTextShown = getState().copy.isPasteTextShown
+  const { isPasteTextShown } = getState().copy
 
   if (isPasteTextShown === false) {
     return
@@ -34,14 +34,14 @@ const pasteItemOnClick = (): void => {
 
   dispatch(copySlice.actions.hidePasteText())
 
-  const isPastable = getState().copy.isPastable
+  const { isPastable } = getState().copy
 
   if (isPastable === false) {
     return
   }
 
   const { id, pastePos } = getState().copy.place
-  const topItemInCopyModal = getState().copy.items[0]
+  const [topItemInCopyModal] = getState().copy.items
 
   if (topItemInCopyModal === undefined) {
     return

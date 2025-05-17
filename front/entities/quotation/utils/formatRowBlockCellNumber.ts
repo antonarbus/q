@@ -38,11 +38,9 @@ export const formatRowBlockCellNumber = ({
 
   const row = block
 
-  const value = row[boqRowCellKey].value
+  const { value, html } = row[boqRowCellKey]
 
   const roundedValue = roundTo(value, 2)
-
-  const html = row[boqRowCellKey].html
 
   const newHtml = getStringWithNewFormattedNumber({
     string: html,

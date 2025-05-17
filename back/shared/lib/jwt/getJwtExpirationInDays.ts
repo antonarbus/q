@@ -14,7 +14,7 @@ export const getJwtExpirationInDays = ({
   }
 
   // Base64 decode the payload
-  const payloadPart = parts[1]
+  const [, payloadPart] = parts
 
   if (payloadPart === undefined) {
     throw new Error('Invalid JWT token format')

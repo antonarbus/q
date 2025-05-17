@@ -19,8 +19,7 @@ export const clickOnNavItem = ({
 }: Props): void => {
   ;(document.activeElement as HTMLElement).blur() // to prevent open an active navItem link on Enter key
 
-  const link = navItem.link
-  const func = navItem.func
+  const { link, func } = navItem
 
   if (disabled) {
     return
@@ -47,7 +46,7 @@ export const clickOnNavItem = ({
   }
 
   // if click on NavItem for which Menu is opened, then close it, otherwise it closes and opens immediately
-  const currentMenuNavItemId = getState().nav.currentMenuNavItemId
+  const { currentMenuNavItemId } = getState().nav
 
   const isMenuOpenedUnderThisNavItem =
     currentMenuNavItemId === navItem.id &&

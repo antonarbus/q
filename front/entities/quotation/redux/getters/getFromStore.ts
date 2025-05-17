@@ -6,7 +6,7 @@ type Props = {
 }
 
 export const getFromStore = ({ id }: Props): Item | Quotation | undefined => {
-  const quotation = getState().quotation
+  const { quotation } = getState()
 
   if (quotation.id === id) {
     return quotation
