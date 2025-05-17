@@ -96,6 +96,15 @@ export default [
           selector: 'UnaryExpression[operator="!"]',
           message: 'Avoid using negation (!condition).',
         },
+        // {
+        //   selector: 'IfStatement[test.type="Identifier"]',
+        //   message: 'Use explicit boolean comparison like `if (x === true)`.',
+        // },
+        // {
+        //   selector: 'ConditionalExpression[test.type="Identifier"]',
+        //   message:
+        //     'Use explicit boolean comparison in ternary like `x ? y : z` → `x === true ? y : z`.',
+        // },
       ],
 
       // turn off some rules from pluginJs.configs.all
@@ -159,11 +168,11 @@ export default [
       '@typescript-eslint/max-params': 'off', // do not like
       '@typescript-eslint/consistent-return': 'off', // ts takes care of it with "noImplicitReturns": true
       '@typescript-eslint/no-unsafe-type-assertion': 'off', //! turn it on and make type guard functions with predicates instead of assertions
-      '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'error',
+      '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'off', // forces to omit boolean comparison in if statements // i like to compare explicitly
 
       // https://github.com/jsx-eslint/eslint-plugin-react
-      'react/react-in-jsx-scope': 'off',
-      'react/no-unknown-property': ['error', { ignore: ['css'] }],
+      'react/react-in-jsx-scope': 'off', // suppress error 'React' must be in scope when using JSX
+      'react/no-unknown-property': ['error', { ignore: ['css'] }], // allows css prop coming from Emotion lib
     },
   },
 ]
