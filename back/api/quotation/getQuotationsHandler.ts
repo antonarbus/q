@@ -48,7 +48,7 @@ export const getQuotationsHandler: RouterHandler = async (req, res, next) => {
     return
   }
 
-  if (documents.length) {
+  if (documents.length !== 0) {
     const quotations = documents.map((doc) => doc.toObject({ getters: true }))
     res.status(httpStatus.success_200).json({ message: 'Found', quotations })
 

@@ -47,7 +47,7 @@ export const getBookmarksHandler: RouterHandler = async (req, res, next) => {
     return
   }
 
-  if (bookmarks.length) {
+  if (bookmarks.length !== 0) {
     res.status(httpStatus.success_200).json({ message: 'Found', bookmarks })
 
     return

@@ -46,7 +46,7 @@ export const countUniqueDailyVisitorsHandler: RouterHandler = async (
     { upsert: true, new: true },
   )
 
-  if (visitorsCount.count) {
+  if (visitorsCount.count !== 0) {
     res.status(httpStatus.success_200).json({ message: 'visitor counted' })
 
     return

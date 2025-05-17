@@ -63,7 +63,7 @@ export const getUsersHandler: RouterHandler = async (req, res, next) => {
     return
   }
 
-  if (users.length) {
+  if (users.length !== 0) {
     res.status(httpStatus.success_200).json({ message: 'users data', users })
 
     return

@@ -147,7 +147,7 @@ export default [
           allowNullableNumber: false,
           allowNullableObject: false,
           allowNullableString: false,
-          allowNumber: true,
+          allowNumber: false,
           allowString: true,
         },
       ],
