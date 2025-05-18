@@ -113,6 +113,7 @@ export default [
       'no-warning-comments': 'warn', // warns about "todo" in comments
       'no-plusplus': 'error', // forbids to use i++ operator, easier to understand index = index + 1
       'func-style': 'error', // prefer function expressions (const func = () => {})
+      'prefer-arrow-callback': 'error',
 
       // turn off some rules from pluginJs.configs.all
       'no-alert': 'off', // i like alerts more than many popup components
@@ -133,7 +134,6 @@ export default [
       complexity: 'off', // max complexity is 20, if else if else (complexity = 3)
       'consistent-return': 'off', // arrow function expects no return value
       'operator-assignment': 'off', // forces to use +=, do not like it
-      'prefer-arrow-callback': 'off',
       'no-shadow': 'off',
       radix: 'off',
       'init-declarations': 'off',
@@ -175,6 +175,7 @@ export default [
 
       // https://github.com/jsx-eslint/eslint-plugin-react
       'react/react-in-jsx-scope': 'off', // suppress error 'React' must be in scope when using JSX
+      'react/display-name': 'off', // function inside forward ref can by anonymous
       'react/no-unknown-property': ['error', { ignore: ['css'] }], // allows css prop coming from Emotion lib
     },
   },
