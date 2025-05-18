@@ -42,7 +42,7 @@ export const DragBlockIcon = (): React.JSX.Element => {
             inset: 0,
             zIndex: -1,
           }}
-         />
+        />
       </Tooltip>
       <MdDragIndicator
         {...attributes}

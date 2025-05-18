@@ -45,7 +45,7 @@ export const StaticHtml = ({
             ...style,
           }}
           sx={sx}
-         />
+        />
       </Box>
     </Box>
   )
