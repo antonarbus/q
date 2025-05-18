@@ -125,7 +125,7 @@ export const beforeUpload: BeforeUpload = async (props) => {
     },
     onUploadProgress: (progressEvent) => {
       const showProgress = async (): Promise<void> => {
-        eventCount++
+        eventCount = eventCount + 1
 
         await asyncDelay(50)
 

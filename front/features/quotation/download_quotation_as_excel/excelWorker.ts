@@ -28,7 +28,7 @@ self.onmessage = async (
 
       for (const line of lines) {
         worksheet.getCell(`A${excelRowNumber}`).value = line
-        excelRowNumber++
+        excelRowNumber = excelRowNumber + 1
       }
     }
 
@@ -37,7 +37,7 @@ self.onmessage = async (
         block.boq.header.title.html,
       )
 
-      excelRowNumber++
+      excelRowNumber = excelRowNumber + 1
 
       worksheet.getCell(`B${excelRowNumber}`).value = striptags(
         block.boq.column.description.html,
@@ -55,7 +55,7 @@ self.onmessage = async (
         block.boq.column.price.html,
       )
 
-      excelRowNumber++
+      excelRowNumber = excelRowNumber + 1
 
       let rowBoqNumber = 1
 
@@ -76,11 +76,11 @@ self.onmessage = async (
           row.price.html,
         )
 
-        excelRowNumber++
-        rowBoqNumber++
+        excelRowNumber = excelRowNumber + 1
+        rowBoqNumber = rowBoqNumber + 1
       }
 
-      rowBlockNumber++
+      rowBlockNumber = rowBlockNumber + 1
     }
 
     if (block.type === 'price') {
@@ -88,16 +88,16 @@ self.onmessage = async (
         block.title.html,
       )
 
-      excelRowNumber++
+      excelRowNumber = excelRowNumber + 1
 
       worksheet.getCell(`A${excelRowNumber}`).value = striptags(
         block.price.html,
       )
 
-      excelRowNumber++
+      excelRowNumber = excelRowNumber + 1
     }
 
-    excelRowNumber++
+    excelRowNumber = excelRowNumber + 1
   }
 
   const buffer = await workbook.xlsx.writeBuffer()

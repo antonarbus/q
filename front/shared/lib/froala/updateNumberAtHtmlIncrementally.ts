@@ -30,7 +30,7 @@ export const updateNumberAtHtmlIncrementally = ({
 
   const incrementValues = async (): Promise<void> => {
     await new Promise((resolve) => {
-      for (let index = 1; index <= steps; index++) {
+      for (let index = 1; index <= steps; index = index + 1) {
         const incrementedValue = roundTo(
           oldNumber + index * stepValue,
           decimalPlaces,

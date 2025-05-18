@@ -111,6 +111,7 @@ export default [
       'id-length': ['error', { exceptions: ['x', 'y'] }],
       'prefer-destructuring': 'error',
       'no-warning-comments': 'warn', // warns about "todo" in comments
+      'no-plusplus': 'error', // forbids to use i++ operator, easier to understand index = index + 1
 
       // turn off some rules from pluginJs.configs.all
       'no-alert': 'off', // i like alerts more than many popup components
@@ -125,12 +126,12 @@ export default [
       'one-var': 'off', // wants to do like let a,b, c --> crazy
       'max-statements': 'off', // max 10 statements per function --> do not like it
       'sort-imports': 'off', // nice, do do not care
-      'max-params': 'off', // Arrow function has too many parameters (4). Maximum allowed is 3. --> not your business
-      'no-undefined': 'off',
-      'max-lines': 'off',
-      complexity: 'off',
-      'consistent-return': 'off',
-      'no-plusplus': 'off',
+      'max-params': 'off', // arrow function has too many parameters (4). Maximum allowed is 3. --> not your business
+      'no-undefined': 'off', // not helpful coz there are other rule which prevents using "undefined" as variable
+      'max-lines': 'off', // allows function with max 300 lines
+      complexity: 'off', // max complexity is 20, if else if else (complexity = 3)
+      'consistent-return': 'off', // arrow function expects no return value
+      'operator-assignment': 'off', // forces to use +=, do not like it
       'func-style': 'off',
       'prefer-arrow-callback': 'off',
       'no-shadow': 'off',

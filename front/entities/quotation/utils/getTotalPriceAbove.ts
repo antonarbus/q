@@ -9,7 +9,7 @@ type Props = {
 export const getTotalPriceAbove = ({ blockIndex, blocks }: Props): number => {
   let totalPriceAbove = 0
 
-  for (let index = blockIndex - 1; index >= 0; index--) {
+  for (let index = blockIndex - 1; index >= 0; index = index - 1) {
     if (blockIndex === 0) {
       break
     }

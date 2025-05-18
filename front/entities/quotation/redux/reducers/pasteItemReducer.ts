@@ -48,18 +48,18 @@ export const pasteItemReducer = (
       }
 
       if (pastePos === 'top') {
-        spliceSettings.insertAtIndex--
+        spliceSettings.insertAtIndex = spliceSettings.insertAtIndex - 1
 
         return spliceSettings
       }
 
       if (pastePos === 'bottom') {
-        spliceSettings.insertAtIndex++
+        spliceSettings.insertAtIndex = spliceSettings.insertAtIndex + 1
 
         return spliceSettings
       }
 
-      spliceSettings.deleteCount++
+      spliceSettings.deleteCount = spliceSettings.deleteCount + 1
 
       return spliceSettings
     }
@@ -106,18 +106,18 @@ export const pasteItemReducer = (
           }
 
           if (pastePos === 'top') {
-            spliceParams.insertAtIndex--
+            spliceParams.insertAtIndex = spliceParams.insertAtIndex - 1
 
             return spliceParams
           }
 
           if (pastePos === 'bottom') {
-            spliceParams.insertAtIndex++
+            spliceParams.insertAtIndex = spliceParams.insertAtIndex + 1
 
             return spliceParams
           }
 
-          spliceParams.deleteCount++
+          spliceParams.deleteCount = spliceParams.deleteCount + 1
 
           return spliceParams
         }
