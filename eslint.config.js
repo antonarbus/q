@@ -31,11 +31,10 @@ export default [
     },
   },
   { settings: { react: { version: '19' } } },
-  // file://./node_modules/@eslint/js/src/configs/eslint-all.js
-  jsPlugin.configs.all,
-  reactPlugin.configs.flat.recommended,
-  // file://./node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/all.js
-  ...tsPlugin.configs.all,
+
+  jsPlugin.configs.all, // file://./node_modules/@eslint/js/src/configs/eslint-all.js
+  ...tsPlugin.configs.all, // file://./node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/all.js
+  reactPlugin.configs.flat.all, // file://./node_modules/eslint-plugin-react/lib/rules/index.js
   prettierConfig,
   {
     rules: {
@@ -144,12 +143,25 @@ export default [
       '@typescript-eslint/max-params': 'off', // do not like
       '@typescript-eslint/consistent-return': 'off', // ts takes care of it with "noImplicitReturns": true
       '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'off', // forces to omit boolean comparison in if statements // i like to compare explicitly
-      '@typescript-eslint/no-unsafe-type-assertion': 'off', //! turn it on and make type guard functions with predicates instead of assertions
+      '@typescript-eslint/no-unsafe-type-assertion': 'off', //! enable: make type guard functions with predicates instead of assertions
 
-      // https://github.com/jsx-eslint/eslint-plugin-react
+      // adjust some rules from reactPlugin.configs.flat.all,
       'react/react-in-jsx-scope': 'off', // suppress error 'React' must be in scope when using JSX
       'react/display-name': 'off', // function inside forward ref can by anonymous
+      'react/jsx-no-literals': 'off', // requires to <div>{'text'}</div>
+      'react/jsx-no-bind': 'off', // does not allow arrow functions in prop
+      'react/jsx-props-no-spreading': 'off', // prop spreading is needed
+      'react/prefer-read-only-props': 'off', // too much work to put readonly everywhere, not sure it is even needed
+      'react/forbid-component-props': 'off', // forbids "style" prop
+      'react/destructuring-assignment': 'off', // sometimes it is better to use prop.key
+      'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }],
       'react/no-unknown-property': ['error', { ignore: ['css'] }], // allows css prop coming from Emotion lib
+      'react/jsx-no-leaked-render': 'off', //!  enable: forbids to render like a && b && c && <Comp />
+      'react/jsx-max-depth': 'off', //!  enable: may simplify the complexity
+      'react/function-component-definition': [
+        'error',
+        { namedComponents: 'arrow-function' },
+      ],
     },
   },
 ]
