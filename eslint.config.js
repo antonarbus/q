@@ -1,8 +1,8 @@
 import globals from 'globals'
-import pluginJs from '@eslint/js'
-import reactPlugin from 'eslint-plugin-react'
 import prettierConfig from 'eslint-config-prettier'
-import tseslint from 'typescript-eslint'
+import jsPlugin from '@eslint/js'
+import tsPlugin from 'typescript-eslint'
+import reactPlugin from 'eslint-plugin-react'
 
 export default [
   {
@@ -31,45 +31,39 @@ export default [
     },
   },
   { settings: { react: { version: '19' } } },
-  pluginJs.configs.all,
+  // file://./node_modules/@eslint/js/src/configs/eslint-all.js
+  jsPlugin.configs.all,
   reactPlugin.configs.flat.recommended,
-  // ...tseslint.configs.strictTypeChecked,
-  // ...tseslint.configs.stylisticTypeChecked,
-  ...tseslint.configs.all,
+  // file://./node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/all.js
+  ...tsPlugin.configs.all,
   prettierConfig,
   {
     rules: {
-      // https://eslint.org/docs/v8.x/rules/
-      'padding-line-between-statements': [
-        'error',
-        // blank line before return statement
-        { blankLine: 'always', prev: '*', next: 'return' },
-        // blank line around block statement
-        { blankLine: 'always', prev: '*', next: 'block-like' },
-        { blankLine: 'always', prev: 'block-like', next: '*' },
-        // blank line before throw statement
-        { blankLine: 'always', prev: '*', next: 'throw' },
-        // blank line around declaration which spans over several lines
-        { blankLine: 'always', prev: 'multiline-const', next: '*' },
-        { blankLine: 'always', prev: 'multiline-let', next: '*' },
-        { blankLine: 'always', prev: 'multiline-var', next: '*' },
-        { blankLine: 'always', prev: '*', next: 'multiline-const' },
-        { blankLine: 'always', prev: '*', next: 'multiline-let' },
-        { blankLine: 'always', prev: '*', next: 'multiline-var' },
-        // blank line around expression which spans over several lines
-        { blankLine: 'always', prev: 'multiline-expression', next: '*' },
-        { blankLine: 'always', prev: '*', next: 'multiline-expression' },
-      ],
-      curly: 'error',
-      'no-else-return': 'error',
-      'no-negated-condition': 'error',
-      'no-implicit-coercion': 'error',
-      eqeqeq: 'error',
-      'object-shorthand': 'error',
+      // adjust some rules from pluginJs.configs.all
+      'arrow-body-style': 'off', // blocks with explicit return are good
+      'capitalized-comments': 'off', // commented code gets capitalized automatically
+      'consistent-return': 'off', // arrow function expects no return value
+      'id-length': ['error', { exceptions: ['x', 'y'] }],
       'jsx-quotes': ['error', 'prefer-single'],
+      'max-lines-per-function': 'off', // not your business
+      'max-lines': 'off', // allows function with max 300 lines
+      'max-params': 'off', // arrow function has too many parameters (4). Maximum allowed is 3. --> not your business
+      'max-statements': 'off', // max 10 statements per function --> do not like it
+      'no-alert': 'off', // like alerts more than many popup components
       'no-console': ['error', { allow: ['error', 'warn', 'info'] }],
-      'no-useless-rename': 'error',
-      'no-duplicate-imports': 'error',
+      'no-inline-comments': 'off', // inline comments like this one are necessary
+      'no-magic-numbers': 'off', // that is crazy
+      'no-ternary': 'off', // nested are bad, but normal ternary is ok
+      'no-undefined': 'off', // not helpful coz there are other rule which prevents using "undefined" as variable
+      'no-unused-vars': 'off', // sometimes we should have unused vars + there is another ts rule about it
+      'no-void': 'off', // need void to let TS know that we are not going to await promise
+      'no-warning-comments': 'warn', // warns about "todo" in comments
+      'one-var': 'off', // wants to do like let a,b, c --> crazy
+      'operator-assignment': 'off', // forces to use +=, do not like it
+      'sort-imports': 'off', // nice, do do not care
+      'sort-keys': 'off', // nice, but often you group keys logically and not sort alphabetically
+      complexity: 'off', // max complexity is 20, if else if else (complexity = 3)
+      radix: ['error', 'as-needed'], // disallows providing the 10 radix --> parseInt(var, 10) no need to put 10
       'no-restricted-syntax': [
         'error',
         {
@@ -106,46 +100,30 @@ export default [
             'Use explicit boolean comparison in ternary like `x ? y : z` → `x === true ? y : z`.',
         },
       ],
-      'no-useless-assignment': 'error',
-      'no-nested-ternary': 'error',
-      'id-length': ['error', { exceptions: ['x', 'y'] }],
-      'prefer-destructuring': 'error',
-      'no-warning-comments': 'warn', // warns about "todo" in comments
-      'no-plusplus': 'error', // forbids to use i++ operator, easier to understand index = index + 1
-      'func-style': 'error', // prefer function expressions (const func = () => {})
-      'prefer-arrow-callback': 'error',
-      'no-shadow': 'error', // Disallow variable to shadow variables declared in the outer scope
-      radix: ['error', 'as-needed'], // disallows providing the 10 radix --> parseInt(var, 10) no need to put 10
-      'init-declarations': 'error', // variables must be initialized at declaration
-      'new-cap': 'error', // constructor name should not start with a lowercase letter
+      'padding-line-between-statements': [
+        'error',
+        // blank line before return statement
+        { blankLine: 'always', prev: '*', next: 'return' },
+        // blank line around block statement
+        { blankLine: 'always', prev: '*', next: 'block-like' },
+        { blankLine: 'always', prev: 'block-like', next: '*' },
+        // blank line before throw statement
+        { blankLine: 'always', prev: '*', next: 'throw' },
+        // blank line around declaration which spans over several lines
+        { blankLine: 'always', prev: 'multiline-const', next: '*' },
+        { blankLine: 'always', prev: 'multiline-let', next: '*' },
+        { blankLine: 'always', prev: 'multiline-var', next: '*' },
+        { blankLine: 'always', prev: '*', next: 'multiline-const' },
+        { blankLine: 'always', prev: '*', next: 'multiline-let' },
+        { blankLine: 'always', prev: '*', next: 'multiline-var' },
+        // blank line around expression which spans over several lines
+        { blankLine: 'always', prev: 'multiline-expression', next: '*' },
+        { blankLine: 'always', prev: '*', next: 'multiline-expression' },
+      ],
 
-      // turn off some rules from pluginJs.configs.all
-      'no-alert': 'off', // i like alerts more than many popup components
-      'sort-keys': 'off', // nice, but often you group keys logically and not sort alphabetically
-      'max-lines-per-function': 'off', // not your business
-      'no-ternary': 'off', // nested are bad, but normal ternary is ok
-      'arrow-body-style': 'off', // blocks with explicit return are good
-      'no-inline-comments': 'off', // inline comments like this one are necessary
-      'capitalized-comments': 'off', // commented code gets capitalized automatically
-      'no-magic-numbers': 'off', // that is crazy
-      'no-void': 'off', // need void to let TS know that we are not going to await promise
-      'one-var': 'off', // wants to do like let a,b, c --> crazy
-      'max-statements': 'off', // max 10 statements per function --> do not like it
-      'sort-imports': 'off', // nice, do do not care
-      'max-params': 'off', // arrow function has too many parameters (4). Maximum allowed is 3. --> not your business
-      'no-undefined': 'off', // not helpful coz there are other rule which prevents using "undefined" as variable
-      'max-lines': 'off', // allows function with max 300 lines
-      complexity: 'off', // max complexity is 20, if else if else (complexity = 3)
-      'consistent-return': 'off', // arrow function expects no return value
-      'operator-assignment': 'off', // forces to use +=, do not like it
-
-      // https://typescript-eslint.io/rules/
+      // adjust some rules from tseslint.configs.all
       '@typescript-eslint/no-unused-vars': ['error', { args: 'none' }],
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
-      '@typescript-eslint/explicit-function-return-type': 'error',
-      '@typescript-eslint/consistent-type-exports': 'error',
-      '@typescript-eslint/consistent-type-imports': 'error',
-      '@typescript-eslint/no-import-type-side-effects': 'error',
       '@typescript-eslint/strict-boolean-expressions': [
         'error',
         {
@@ -159,10 +137,6 @@ export default [
           allowString: false,
         },
       ],
-      '@typescript-eslint/prefer-destructuring': 'error',
-      '@typescript-eslint/no-misused-spread': 'error',
-
-      // turn off some rules from tseslint.configs.all
       '@typescript-eslint/naming-convention': 'off', // that is too crazy
       '@typescript-eslint/prefer-readonly-parameter-types': 'off', // that is too crazy
       '@typescript-eslint/no-unnecessary-type-parameters': 'off', // does not allow to use generic parameter at jsonParseSafe()

@@ -26,11 +26,35 @@ import { Toaster } from 'sonner'
 import { ShareQuotationModal } from '@pages/share_quotation_modal'
 import { LoadQuotation } from '@features/quotation/load_quotation'
 
-const Quotation = lazy(async () => import('@pages/quotation_page'))
-const QuotationsPageLazy = lazy(async () => import('@pages/quotations_page'))
-const BookmarksPageLazy = lazy(async () => import('@pages/bookmarks_page'))
-const AdminPageLazy = lazy(async () => import('@pages/admin_page'))
-const VisitorsPageLazy = lazy(async () => import('@pages/visitors_page'))
+const Quotation = lazy(async () => {
+  const module = await import('@pages/quotation_page')
+
+  return module
+})
+
+const QuotationsPageLazy = lazy(async () => {
+  const module = await import('@pages/quotations_page')
+
+  return module
+})
+
+const BookmarksPageLazy = lazy(async () => {
+  const module = await import('@pages/bookmarks_page')
+
+  return module
+})
+
+const AdminPageLazy = lazy(async () => {
+  const module = await import('@pages/admin_page')
+
+  return module
+})
+
+const VisitorsPageLazy = lazy(async () => {
+  const module = await import('@pages/visitors_page')
+
+  return module
+})
 
 const authRoutes: RouteObject[] = [
   {

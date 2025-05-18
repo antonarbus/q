@@ -15,5 +15,7 @@ export const asyncDelay = async (ms = 1000): Promise<string> => {
     resolveDelayPromise(`delayed with ${String(ms)} ms`)
   }, ms)
 
-  return delayPromise
+  const result = await delayPromise
+
+  return result
 }
