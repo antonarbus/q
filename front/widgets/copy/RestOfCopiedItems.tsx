@@ -107,7 +107,7 @@ export const RestOfCopiedItems = (): React.JSX.Element | null => {
 
           return (
             <div
-              key={items.length - index}
+              key={`rest-of-copied-items-${items.length - index}`}
               style={{
                 background: 'white',
                 borderRadius: 4,
