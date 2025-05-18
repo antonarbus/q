@@ -7,3 +7,4 @@ build
 /blob-report/
 /playwright/.cache/
 tests/setup/authenticated_user.json
+.eslintcache

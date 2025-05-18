@@ -27,6 +27,7 @@
     "playwright_record": "INSTALLATION=local playwright codegen https://localhost:3000 --ignore-https-errors",
     "lint": "eslint .",
     "lint:quite": "eslint . --quiet",
+    "lint:cache": "eslint . --cache",
     "lint:fix": "eslint . --fix",
     "tsc": "tsc --noEmit",
     "prettier": "prettier . --check",
