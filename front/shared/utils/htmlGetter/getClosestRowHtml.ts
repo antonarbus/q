@@ -1,8 +1,8 @@
 import { cls } from '@shared/consts/cls'
 import type { MouseEvent } from 'react'
 
-export const getClosestRowHtml = (e: MouseEvent): string => {
-  const clickedIconElement = e.target
+export const getClosestRowHtml = (event: MouseEvent): string => {
+  const clickedIconElement = event.target
 
   if (clickedIconElement instanceof Element === false) {
     return 'element not found'

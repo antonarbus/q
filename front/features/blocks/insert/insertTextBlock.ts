@@ -5,7 +5,7 @@ import { type Text, itemType } from '@entities/quotation'
 import { generateId } from '@shared/lib/nanoid'
 import { textSlice } from '@shared/lib/froala/textSlice'
 
-export const insertTextBlock = (e?: MouseEvent): void => {
+export const insertTextBlock = (event?: MouseEvent): void => {
   const block: Text = {
     id: generateId(),
     type: itemType.text,

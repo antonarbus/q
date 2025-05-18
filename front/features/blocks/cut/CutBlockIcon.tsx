@@ -37,7 +37,7 @@ export const CutBlockIcon = (): React.JSX.Element => {
             color: disabled === true ? '#acacac' : '#000',
             cursor: disabled === true ? 'default' : 'pointer',
           }}
-          onClick={(e: MouseEvent): void => {
+          onClick={(event: MouseEvent): void => {
             if (disabled === true) {
               return
             }
@@ -54,7 +54,7 @@ export const CutBlockIcon = (): React.JSX.Element => {
               return
             }
 
-            const clickedIconElement = e.target
+            const clickedIconElement = event.target
 
             if (clickedIconElement instanceof Element === false) {
               return
@@ -75,7 +75,7 @@ export const CutBlockIcon = (): React.JSX.Element => {
             // width of animated element is changed for unknown reason, can't explain the issue, so let's fix it for animation purpose
             fixElementDimensionStyle({ element: paperElement })
 
-            const html = getClosestPaperElementHtml(e)
+            const html = getClosestPaperElementHtml(event)
 
             dispatch(textSlice.actions.setNotEditable())
 

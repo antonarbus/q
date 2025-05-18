@@ -20,8 +20,8 @@ export const NameField = ({
         fullWidth
         {...props}
         value={nameSignal.value}
-        onChange={(e): void => {
-          nameSignal.value = e.target.value
+        onChange={(event): void => {
+          nameSignal.value = event.target.value
         }}
         slotProps={{
           input: {

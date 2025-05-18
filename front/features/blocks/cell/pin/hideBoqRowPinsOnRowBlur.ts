@@ -8,17 +8,17 @@ import {
 import { cls } from '@shared/consts/cls'
 
 type Props = {
-  e: FocusEvent<HTMLDivElement>
+  event: FocusEvent<HTMLDivElement>
   blockIndex: number
   rowIndex: number
 }
 
 export const hideBoqRowPinsOnRowBlur = ({
-  e,
+  event,
   blockIndex,
   rowIndex,
 }: Props): void => {
-  const elementReceivedFocus = e.relatedTarget
+  const elementReceivedFocus = event.relatedTarget
   const pinClicked = elementReceivedFocus?.classList.contains(cls.pin)
 
   if (pinClicked === true) {

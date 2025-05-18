@@ -30,7 +30,7 @@ export const CopyBlockIcon = (): React.JSX.Element => {
             cursor: disabled === true ? 'default' : 'pointer',
             color: disabled === true ? '#acacac' : '#000',
           }}
-          onClick={(e: MouseEvent): void => {
+          onClick={(event: MouseEvent): void => {
             if (disabled === true) {
               return
             }
@@ -47,7 +47,7 @@ export const CopyBlockIcon = (): React.JSX.Element => {
               return
             }
 
-            const html = getClosestPaperElementHtml(e)
+            const html = getClosestPaperElementHtml(event)
 
             dispatch(textSlice.actions.setNotEditable())
 

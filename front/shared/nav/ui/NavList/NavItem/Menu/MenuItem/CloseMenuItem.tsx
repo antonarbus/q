@@ -17,8 +17,8 @@ export const CloseMenuItem = (): React.JSX.Element => {
   return (
     <MenuItemLayout
       to='/'
-      onClick={(e: MouseEvent): void => {
-        e.preventDefault()
+      onClick={(event: MouseEvent): void => {
+        event.preventDefault()
         dispatch(navSlice.actions.closeMenu())
       }}
       onMouseEnter={(): void => {

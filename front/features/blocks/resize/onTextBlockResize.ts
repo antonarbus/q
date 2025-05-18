@@ -8,7 +8,7 @@ import type {
 
 export const onTextBlockResizeStart: OnBlockResizeStart = ({
   blockIndex,
-  e,
+  event,
   dir,
   elementRef,
 }) => {
@@ -32,7 +32,7 @@ export const onTextBlockResizeStart: OnBlockResizeStart = ({
 
 export const onTextBlockResizeStop: OnBlockResizeStop = ({
   blockIndex,
-  e,
+  event,
   direction,
   elementRef,
   delta,

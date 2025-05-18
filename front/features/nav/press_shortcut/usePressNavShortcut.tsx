@@ -53,8 +53,8 @@ export const usePressNavShortcut = ({ navStructure }: Props): void => {
 
     let keysBeingPressed: string[] = []
 
-    window.addEventListener('keydown', (e) => {
-      const keyPressed = e.key.toLowerCase()
+    window.addEventListener('keydown', (event) => {
+      const keyPressed = event.key.toLowerCase()
       keysBeingPressed.push(keyPressed)
       keysBeingPressed = [...new Set(keysBeingPressed)].toSorted()
 
@@ -67,7 +67,7 @@ export const usePressNavShortcut = ({ navStructure }: Props): void => {
       })
 
       if (matchedNavItemByShortcut !== undefined) {
-        e.preventDefault()
+        event.preventDefault()
 
         if (matchedNavItemByShortcut.function !== null) {
           matchedNavItemByShortcut.function()
@@ -81,8 +81,8 @@ export const usePressNavShortcut = ({ navStructure }: Props): void => {
       }
     })
 
-    window.addEventListener('keyup', (e) => {
-      const keyReleased = e.key.toLowerCase()
+    window.addEventListener('keyup', (event) => {
+      const keyReleased = event.key.toLowerCase()
       keysBeingPressed = keysBeingPressed.filter((key) => key !== keyReleased)
     })
   })

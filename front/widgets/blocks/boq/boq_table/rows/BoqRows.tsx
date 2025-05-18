@@ -39,10 +39,10 @@ export const BoqRows = (): React.JSX.Element => {
                   <BoqRowAnimate>
                     <BoqRowSortable>
                       <BoqRow
-                        onBlur={(e) => {
+                        onBlur={(event) => {
                           hideBoqRowPinsOnRowBlur({
                             blockIndex,
-                            e,
+                            event,
                             rowIndex,
                           })
                         }}

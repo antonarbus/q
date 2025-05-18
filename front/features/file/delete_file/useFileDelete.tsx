@@ -37,9 +37,9 @@ export const useFileDelete = ({ fileId }: Props): Res => {
     }
   }, [isError])
 
-  const onDeleteClick = useCallback((e: React.MouseEvent): void => {
-    e.preventDefault()
-    e.stopPropagation()
+  const onDeleteClick = useCallback((event: React.MouseEvent): void => {
+    event.preventDefault()
+    event.stopPropagation()
 
     const shouldDeleteFile = confirm('Delete file?')
 

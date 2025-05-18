@@ -18,8 +18,8 @@ export const BoqRowLayout = ({
     <Box
       id={row.id}
       className={cls.boqRow}
-      onBlur={(e) => {
-        onBlur(e)
+      onBlur={(event) => {
+        onBlur(event)
       }}
       style={{
         // https://stackoverflow.com/questions/8468066/child-inside-parent-with-min-height-100-not-inheriting-height

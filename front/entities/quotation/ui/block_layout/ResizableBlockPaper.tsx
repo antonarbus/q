@@ -65,21 +65,26 @@ export const ResizableBlockPaper = ({
         right: disableResize === false,
         left: disableResize === false,
       }}
-      onResizeStart={(e, dir, elementRef): void => {
-        onItemResizeStart?.bind(null, { e, dir, elementRef, blockIndex })()
+      onResizeStart={(event, dir, elementRef): void => {
+        onItemResizeStart?.bind(null, {
+          event,
+          dir,
+          elementRef,
+          blockIndex,
+        })()
       }}
-      onResize={(e, direction, elementRef, delta): void => {
+      onResize={(event, direction, elementRef, delta): void => {
         onItemResize?.bind(null, {
-          e,
+          event,
           direction,
           elementRef,
           delta,
           blockIndex,
         })()
       }}
-      onResizeStop={(e, direction, elementRef, delta): void => {
+      onResizeStop={(event, direction, elementRef, delta): void => {
         onItemResizeStop?.bind(null, {
-          e,
+          event,
           direction,
           elementRef,
           delta,

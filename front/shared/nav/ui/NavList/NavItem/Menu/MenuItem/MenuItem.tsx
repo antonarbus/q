@@ -43,9 +43,9 @@ export const MenuItem = ({ navItem, hoverIndex }: Props): React.JSX.Element => {
     <MenuItemLayout
       to={to}
       isHovered={isHovered}
-      onClick={(e: MouseEvent): void => {
+      onClick={(event: MouseEvent): void => {
         if (isFunc === true) {
-          e.preventDefault()
+          event.preventDefault()
         }
 
         if (isLoading === true) {
@@ -61,12 +61,12 @@ export const MenuItem = ({ navItem, hoverIndex }: Props): React.JSX.Element => {
         }
 
         if (disabled === true) {
-          e.preventDefault()
+          event.preventDefault()
 
           return
         }
 
-        clickOnMenuItem(e, menuId, disabled)
+        clickOnMenuItem(event, menuId, disabled)
       }}
       onMouseEnter={(): void => {
         dispatch(

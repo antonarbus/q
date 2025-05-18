@@ -40,9 +40,9 @@ export const BackdropWithSlidableModal = ({
   })
 
   useEffectOnce(() => {
-    const closeModalOnEsc = (e: KeyboardEvent): void => {
+    const closeModalOnEsc = (event: KeyboardEvent): void => {
       const shouldCloseModalOnEsc =
-        shouldUnmountOnEsc === true && e.key === 'Escape'
+        shouldUnmountOnEsc === true && event.key === 'Escape'
 
       if (shouldCloseModalOnEsc === true) {
         if (location.state?.shouldSlide === true) {

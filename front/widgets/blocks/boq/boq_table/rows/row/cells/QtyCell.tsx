@@ -55,8 +55,8 @@ export const QtyCell = (): React.JSX.Element => {
         onBlur={() => {
           formatBoqRowQtyCell({ blockIndex, qtyCellEditorRef, rowIndex })
         }}
-        onKeydown={(e) => {
-          tabFromQtyCell({ e, rowIndex, priceCellEditorRef })
+        onKeydown={(event) => {
+          tabFromQtyCell({ event, rowIndex, priceCellEditorRef })
         }}
         wrapperStyles={stylesForResizableCell}
         style={boqRowCellStyle}
@@ -64,8 +64,8 @@ export const QtyCell = (): React.JSX.Element => {
       />
       <Pin
         boqRowCellKey={boqRowCellKey.qty}
-        onClick={(e: React.MouseEvent) => {
-          e.preventDefault() // otherwise form is submitted (no idea why)
+        onClick={(event: React.MouseEvent) => {
+          event.preventDefault() // otherwise form is submitted (no idea why)
           pinBoqRowQtyCell({ blockIndex, rowIndex })
         }}
       />

@@ -37,12 +37,12 @@ export const CutBoqRowIcon = (): React.JSX.Element => {
           style={{
             color: disabled === true ? '#acacac' : '#000',
           }}
-          onClick={(e: MouseEvent): void => {
+          onClick={(event: MouseEvent): void => {
             if (disabled === true) {
               return
             }
 
-            const clickedIconElement = e.target
+            const clickedIconElement = event.target
 
             if (clickedIconElement instanceof Element === false) {
               return
@@ -71,7 +71,7 @@ export const CutBoqRowIcon = (): React.JSX.Element => {
               return
             }
 
-            const html = getClosestRowHtml(e)
+            const html = getClosestRowHtml(event)
             const bockRowCloned = structuredClone(boqRow)
             bockRowCloned.preview = html
 

@@ -5,7 +5,7 @@ import { boqRowKey, type Row } from '@entities/quotation'
 import { generateId } from '@shared/lib/nanoid'
 import { textSlice } from '@shared/lib/froala/textSlice'
 
-export const insertBoqRow = (e?: MouseEvent): void => {
+export const insertBoqRow = (event?: MouseEvent): void => {
   const boqRow: Row = {
     id: generateId(),
     type: boqRowKey.row,

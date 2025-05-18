@@ -39,7 +39,7 @@ export const DeleteBlockIcon = (): React.JSX.Element => {
               color: disabled === true ? '#acacac' : 'red !important',
             },
           }}
-          onClick={(e: MouseEvent): void => {
+          onClick={(event: MouseEvent): void => {
             if (disabled === true) {
               return
             }
@@ -50,7 +50,7 @@ export const DeleteBlockIcon = (): React.JSX.Element => {
               return
             }
 
-            const clickedIconElement = e.target
+            const clickedIconElement = event.target
 
             if (clickedIconElement instanceof Element === false) {
               return

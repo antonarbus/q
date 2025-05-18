@@ -85,8 +85,8 @@ export const useRequestPasswordReset = ({
     }
   }, [isError])
 
-  const onSubmit = (e: React.FormEvent): void => {
-    e.preventDefault()
+  const onSubmit = (event: React.FormEvent): void => {
+    event.preventDefault()
 
     requestPasswordReset({ email: emailSignal.value })
   }

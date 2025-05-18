@@ -5,8 +5,8 @@ import { quotationSlice } from '@entities/quotation'
 import { textSlice } from '@shared/lib/froala/textSlice'
 
 export const useExitCopyOnEsc = (): void => {
-  const closeOnEsc = (e: KeyboardEvent): void => {
-    if (e.key !== 'Escape') {
+  const closeOnEsc = (event: KeyboardEvent): void => {
+    if (event.key !== 'Escape') {
       return
     }
 

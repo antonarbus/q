@@ -73,8 +73,8 @@ export const EmailField = ({
         label={emailLabelSignal.value}
         autoFocus={autoFocus}
         value={emailSignal.value}
-        onChange={(e): void => {
-          emailSignal.value = e.target.value
+        onChange={(event): void => {
+          emailSignal.value = event.target.value
         }}
         onBlur={(): void => {
           inputFocusedOutOnesSignal.value = true
@@ -113,8 +113,8 @@ export const EmailField = ({
           Did you mean?{' '}
           <a
             style={{ textDecoration: 'underline' }}
-            onClick={(e): void => {
-              e.preventDefault()
+            onClick={(event): void => {
+              event.preventDefault()
               emailSignal.value = emailSuggestionSignal.value
               suggestEmail(emailSuggestionSignal.value)
             }}

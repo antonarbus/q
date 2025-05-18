@@ -27,7 +27,7 @@ let priceColumnDeltaWidth = 0
 
 export const onBoqBlockResizeStart: OnBlockResizeStart = ({
   blockIndex,
-  e,
+  event,
   dir,
   elementRef: itemElement,
 }) => {
@@ -60,7 +60,7 @@ export const onBoqBlockResizeStart: OnBlockResizeStart = ({
  */
 export const onBoqBlockResize: OnBlockResize = ({
   blockIndex,
-  e,
+  event,
   direction,
   elementRef,
   delta,
@@ -236,7 +236,7 @@ export const onBoqBlockResize: OnBlockResize = ({
 
 export const onBoqBlockResizeStop: OnBlockResizeStop = ({
   blockIndex,
-  e,
+  event,
   direction,
   elementRef: itemElement,
   delta,

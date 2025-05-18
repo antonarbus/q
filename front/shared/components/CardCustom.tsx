@@ -17,8 +17,8 @@ export const CardCustom = ({
 }: Props): React.JSX.Element => (
   <Box
     ref={reference}
-    onMouseDown={(e: React.MouseEvent): void => {
-      e.stopPropagation()
+    onMouseDown={(event: React.MouseEvent): void => {
+      event.stopPropagation()
     }}
     sx={{
       display: 'flex',

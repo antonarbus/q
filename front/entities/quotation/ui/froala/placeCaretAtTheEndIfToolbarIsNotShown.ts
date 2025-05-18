@@ -1,13 +1,13 @@
 import type { FroalaEditorRef } from '@shared/types/froala'
 
 type Props = {
-  e: React.MouseEvent
+  event: React.MouseEvent
   froalaElementRef: React.RefObject<React.ComponentRef<'div'> | null>
   editorRef: FroalaEditorRef
 }
 
 export const placeCaretAtTheEndIfToolbarIsNotShown = ({
-  e,
+  event,
   froalaElementRef,
   editorRef,
 }: Props): void => {
@@ -27,7 +27,7 @@ export const placeCaretAtTheEndIfToolbarIsNotShown = ({
     return
   }
 
-  const clickedElement = e.target
+  const clickedElement = event.target
 
   if (clickedElement instanceof HTMLElement === false) {
     return

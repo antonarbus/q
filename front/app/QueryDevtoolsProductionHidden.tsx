@@ -3,7 +3,7 @@ import { useEffectOnce } from 'react-use'
 
 const QueryDevtoolsProduction = lazy(async () =>
   import('@tanstack/react-query-devtools/build/modern/production.js').then(
-    (d) => ({ default: d.ReactQueryDevtools }),
+    (moduleObject) => ({ default: moduleObject.ReactQueryDevtools }),
   ),
 )
 
@@ -20,8 +20,8 @@ export const QueryDevtoolsProductionHidden = (): React.JSX.Element | null => {
     keysPressed = []
   }
 
-  const activateQueryDevTools = (e: KeyboardEvent): void => {
-    keysPressed.push(e.key)
+  const activateQueryDevTools = (event: KeyboardEvent): void => {
+    keysPressed.push(event.key)
 
     if (keysPressed.includes('r') === false) {
       return

@@ -1,19 +1,19 @@
 import type { FroalaEditorRef } from '@shared/types/froala'
 
 type Props = {
-  e: React.KeyboardEvent
+  event: React.KeyboardEvent
   itemPriceCellEditorRef: FroalaEditorRef
   rowIndex: number
 }
 
 export const tabFromDescriptionCell = ({
-  e,
+  event,
   itemPriceCellEditorRef,
 }: Props): void => {
-  const isTabKey = e.key === 'Tab'
+  const isTabKey = event.key === 'Tab'
 
   if (isTabKey === true) {
-    e.preventDefault()
+    event.preventDefault()
     itemPriceCellEditorRef.current?.commands.selectAll()
   }
 }

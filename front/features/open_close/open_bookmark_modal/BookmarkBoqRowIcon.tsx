@@ -37,7 +37,7 @@ export const BookmarkBoqRowIcon = (): React.ReactNode => {
             cursor: 'pointer',
             touchAction: 'none',
           }}
-          onClick={(e: React.MouseEvent): void => {
+          onClick={(event: React.MouseEvent): void => {
             if (disabled === true) {
               return
             }
@@ -51,7 +51,7 @@ export const BookmarkBoqRowIcon = (): React.ReactNode => {
               return
             }
 
-            const clickedIconElement = e.target
+            const clickedIconElement = event.target
 
             if (clickedIconElement instanceof Element === false) {
               return

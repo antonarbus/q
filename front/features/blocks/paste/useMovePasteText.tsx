@@ -6,8 +6,8 @@ import { boqRowKey, itemType, quotationSlice } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 import { route } from '@shared/consts/route'
 
-const movePasteTextItem = (e: MouseEvent): void => {
-  if (e.target instanceof Element === false) {
+const movePasteTextItem = (event: MouseEvent): void => {
+  if (event.target instanceof Element === false) {
     return
   }
 
@@ -35,7 +35,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
     }
   }
 
-  const navElement = e.target.closest('nav')
+  const navElement = event.target.closest('nav')
 
   if (navElement !== null) {
     removePasteIfNeeded()
@@ -43,7 +43,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
     return
   }
 
-  const elementsUnderCursor = document.elementsFromPoint(e.x, e.y)
+  const elementsUnderCursor = document.elementsFromPoint(event.x, event.y)
 
   const isCursorOverActionsContainer = elementsUnderCursor.some((element) =>
     element.classList.contains(cls.actionsContainer),
@@ -83,13 +83,13 @@ const movePasteTextItem = (e: MouseEvent): void => {
     return
   }
 
-  const isNarrowGapAboveNav = e.clientY < 10
+  const isNarrowGapAboveNav = event.clientY < 10
 
   if (isNarrowGapAboveNav === true) {
     return
   }
 
-  const isNarrowGapUnderNav = e.clientY > 100
+  const isNarrowGapUnderNav = event.clientY > 100
 
   const isCursorAboveUnderNavDuringCopy =
     isNarrowGapUnderNav && isPasteTextShown === false
@@ -110,7 +110,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
     return
   }
 
-  const blockElement = e.target.closest(`.${cls.block}`)
+  const blockElement = event.target.closest(`.${cls.block}`)
 
   if (blockElement === null) {
     return
@@ -120,7 +120,7 @@ const movePasteTextItem = (e: MouseEvent): void => {
 
   const pastePlace = getPastePlace({
     hoveredElement: blockElement,
-    e,
+    event,
     distanceToEdge: 20,
   })
 
@@ -152,14 +152,14 @@ const movePasteTextItem = (e: MouseEvent): void => {
   dispatch(quotationSlice.actions.insertPasteBlockReducer(pastePlace))
 }
 
-const movePasteTextBoqRow = (e: MouseEvent): void => {
-  if (e.target instanceof Element === false) {
+const movePasteTextBoqRow = (event: MouseEvent): void => {
+  if (event.target instanceof Element === false) {
     return
   }
 
   const prevPlace = getState().copy.place
   const { isPasteTextShown } = getState().copy
-  const boqRowsElement = e.target.closest(`.${cls.boqRows}`)
+  const boqRowsElement = event.target.closest(`.${cls.boqRows}`)
 
   const isBoqPasteRow = getState()
     .quotation.blocks.filter((block) => block.type === itemType.boq)
@@ -182,7 +182,7 @@ const movePasteTextBoqRow = (e: MouseEvent): void => {
     return
   }
 
-  const elementsUnderCursor = document.elementsFromPoint(e.x, e.y)
+  const elementsUnderCursor = document.elementsFromPoint(event.x, event.y)
 
   const isCursorOverActionsContainer = elementsUnderCursor.some((element) =>
     element.classList.contains(cls.actionsContainer),
@@ -222,7 +222,7 @@ const movePasteTextBoqRow = (e: MouseEvent): void => {
     return
   }
 
-  const boqRowElement = e.target.closest(`.${cls.boqRow}`)
+  const boqRowElement = event.target.closest(`.${cls.boqRow}`)
 
   if (boqRowElement === null) {
     return
@@ -230,7 +230,7 @@ const movePasteTextBoqRow = (e: MouseEvent): void => {
 
   const pastePlace = getPastePlace({
     hoveredElement: boqRowElement,
-    e,
+    event,
     distanceToEdge: 10,
   })
 

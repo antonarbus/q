@@ -22,8 +22,8 @@ export const DescriptionField = ({
         rows={2}
         {...props}
         value={descSignal.value}
-        onChange={(e): void => {
-          descSignal.value = e.target.value
+        onChange={(event): void => {
+          descSignal.value = event.target.value
         }}
         slotProps={{
           input: {

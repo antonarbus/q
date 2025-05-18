@@ -22,8 +22,8 @@ export const InfoField = ({
         rows={4}
         {...props}
         value={infoSignal.value}
-        onChange={(e): void => {
-          infoSignal.value = e.target.value
+        onChange={(event): void => {
+          infoSignal.value = event.target.value
         }}
         slotProps={{
           input: {

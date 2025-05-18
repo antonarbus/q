@@ -16,7 +16,7 @@ export const useCloseMenuOnClickOutside = ({
    * - if click on navItem do not close, but close it in NavItem onClick handler, otherwise it closes and opens immediately
    */
 
-  const mouseDownHandler = (e: Event): void => {
+  const mouseDownHandler = (event: Event): void => {
     if (menuContainerRef.current !== null) {
       const menuContainer = menuContainerRef.current
 
@@ -26,7 +26,7 @@ export const useCloseMenuOnClickOutside = ({
         return
       }
 
-      const clickedElement = e.target
+      const clickedElement = event.target
 
       if (clickedElement instanceof HTMLElement === false) {
         return

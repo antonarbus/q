@@ -21,7 +21,7 @@ export const SubTotalPrice = (): React.JSX.Element => {
   const { subTotalPriceEditorRef, boqRowEditorRefs } = useBoq()
   const { blockIndex } = useBlock()
 
-  const hidePinsClickHandlerRef = useRef<(e: MouseEvent) => void>((e) => {
+  const hidePinsClickHandlerRef = useRef<(e: MouseEvent) => void>((event) => {
     console.warn('hidePinsClickHandlerRef')
   })
 
@@ -34,10 +34,10 @@ export const SubTotalPrice = (): React.JSX.Element => {
       editorRef={subTotalPriceEditorRef}
       placeholder='Price...'
       htmlGetter={() => getBoqHeaderHtmlFromStore({ blockIndex, boqHeaderKey })}
-      onClick={(e: React.MouseEvent) => {
+      onClick={(event: React.MouseEvent) => {
         showHideBoqPricePins({
           blockIndex,
-          e: e.nativeEvent,
+          event: event.nativeEvent,
           hidePinsClickHandlerRef,
           isInitClickRef,
         })

@@ -17,9 +17,9 @@ export const BoqRows = (): React.ReactNode => {
       key={block.id}
     >
       <BoqRow
-        onBlur={(e) => {
+        onBlur={(event) => {
           hideBoqRowPinsOnRowBlur({
-            e,
+            event,
             blockIndex: BOOKMARK_POS_AT_BLOCKS,
             rowIndex: 0,
           })

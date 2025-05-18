@@ -12,31 +12,31 @@ export const useShowDragAndDropArea = (): void => {
       hideDraggableArea()
     }
 
-    document.addEventListener('dragover', (e) => {
+    document.addEventListener('dragover', (event) => {
       // to remove default green "plus" icon
-      if (e.dataTransfer !== null) {
-        e.dataTransfer.dropEffect = 'move'
+      if (event.dataTransfer !== null) {
+        event.dataTransfer.dropEffect = 'move'
       }
 
       // to avoid open image in browser
-      e.preventDefault()
+      event.preventDefault()
     })
 
-    document.addEventListener('drop', (e) => {
-      e.preventDefault() // to avoid open image in browser
+    document.addEventListener('drop', (event) => {
+      event.preventDefault() // to avoid open image in browser
       resetDragState()
     })
 
     // Reset counter when mouse leaves window or on escape key
     document.addEventListener('mouseleave', resetDragState)
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
         resetDragState()
       }
     })
 
-    document.addEventListener('dragenter', (e: DragEvent): void => {
+    document.addEventListener('dragenter', (event: DragEvent): void => {
       dragCounter.current++
 
       if (dragCounter.current === 1) {
@@ -44,7 +44,7 @@ export const useShowDragAndDropArea = (): void => {
       }
     })
 
-    document.addEventListener('dragleave', (e: DragEvent): void => {
+    document.addEventListener('dragleave', (event: DragEvent): void => {
       dragCounter.current--
 
       if (dragCounter.current === 0) {

@@ -124,8 +124,8 @@ export const useSaveQuotation = ({
     }
   }, [isError])
 
-  const onSubmit = (e: React.FormEvent): void => {
-    e.preventDefault()
+  const onSubmit = (event: React.FormEvent): void => {
+    event.preventDefault()
 
     if (getState().user.email === null) {
       toast.warning('Not logged in')

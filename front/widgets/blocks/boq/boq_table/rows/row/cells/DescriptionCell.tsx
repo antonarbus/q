@@ -45,9 +45,9 @@ export const DescriptionCell = (): React.JSX.Element => {
           rowIndex,
         })
       }}
-      onKeydown={(e: React.KeyboardEvent) => {
+      onKeydown={(event: React.KeyboardEvent) => {
         tabFromDescriptionCell({
-          e,
+          event,
           itemPriceCellEditorRef,
           rowIndex,
         })

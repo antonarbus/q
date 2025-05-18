@@ -6,7 +6,7 @@ import type { NavItemId } from '@shared/consts/navItemId'
 import { getNavItem } from '../../functions/getNavItem'
 
 export const clickOnMenuItem = (
-  e: MouseEvent,
+  event: MouseEvent,
   navItemId: NavItemId,
   disabled: boolean,
 ): void => {
@@ -32,16 +32,16 @@ export const clickOnMenuItem = (
 
   if (link !== undefined) {
     // follow the link natively and call the func
-    void func?.(e)
+    void func?.(event)
     dispatch(navSlice.actions.closeMenu())
 
     return
   }
 
-  e.preventDefault()
+  event.preventDefault()
 
   if (func !== undefined) {
-    void func(e)
+    void func(event)
     dispatch(navSlice.actions.closeMenu())
 
     return

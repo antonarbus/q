@@ -75,8 +75,8 @@ export const useSaveBookmark = ({
     }
   }, [isError])
 
-  const onSubmit = useCallback((e: React.FormEvent) => {
-    e.preventDefault()
+  const onSubmit = useCallback((event: React.FormEvent) => {
+    event.preventDefault()
 
     const { email } = getState().user
 

@@ -65,9 +65,9 @@ export const ItemPriceCell = (): React.JSX.Element => {
             rowIndex,
           })
         }}
-        onKeydown={(e) => {
+        onKeydown={(event) => {
           tabFromItemPriceCell({
-            e,
+            event,
             qtyCellEditorRef,
             rowIndex,
           })
@@ -78,8 +78,8 @@ export const ItemPriceCell = (): React.JSX.Element => {
       />
       <Pin
         boqRowCellKey={boqRowCellKey.itemPrice}
-        onClick={(e: React.MouseEvent) => {
-          e.preventDefault() // otherwise form is submitted (no idea why)
+        onClick={(event: React.MouseEvent) => {
+          event.preventDefault() // otherwise form is submitted (no idea why)
           pinBoqRowItemPriceCell({ blockIndex, rowIndex })
         }}
       />

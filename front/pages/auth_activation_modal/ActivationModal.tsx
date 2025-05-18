@@ -26,7 +26,7 @@ export const ActivationModal = (): React.JSX.Element => {
         reference={cardRef}
         title='Activation'
         logo={
-          <Avatar sx={{ m: 1, bgcolor: theme.colors.darkBackground }}>
+          <Avatar sx={{ margin: 1, bgcolor: theme.colors.darkBackground }}>
             <GrValidate />
           </Avatar>
         }

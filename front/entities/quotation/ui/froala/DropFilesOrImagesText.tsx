@@ -32,10 +32,15 @@ export const DropFilesOrImagesText = (props: Props): React.JSX.Element => {
           color: theme.colors.blue,
           fontWeight: 400,
         }}
-        onClick={(e) => {
+        onClick={(event) => {
           if (editorRef.current !== null) {
             editorRef.current.file.showInsertPopup()
-            editorRef.current.popups.show('file.insert', e.pageX, e.pageY)
+
+            editorRef.current.popups.show(
+              'file.insert',
+              event.pageX,
+              event.pageY,
+            )
           }
         }}
       >
@@ -48,10 +53,15 @@ export const DropFilesOrImagesText = (props: Props): React.JSX.Element => {
           color: theme.colors.blue,
           fontWeight: 400,
         }}
-        onClick={(e) => {
+        onClick={(event) => {
           if (editorRef.current !== null) {
             editorRef.current.image.showInsertPopup()
-            editorRef.current.popups.show('image.insert', e.pageX, e.pageY)
+
+            editorRef.current.popups.show(
+              'image.insert',
+              event.pageX,
+              event.pageY,
+            )
           }
         }}
       >

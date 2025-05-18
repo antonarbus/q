@@ -13,8 +13,8 @@ export const OpenRegisterModalLink = ({
     <Link
       to={`../${route.register}`}
       style={{ textAlign: 'right' }}
-      onClick={(e: React.MouseEvent): void => {
-        e.preventDefault()
+      onClick={(event: React.MouseEvent): void => {
+        event.preventDefault()
 
         const slideAndNavigate = async (): Promise<void> => {
           await slideOut()

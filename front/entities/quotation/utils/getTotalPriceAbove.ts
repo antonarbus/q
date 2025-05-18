@@ -9,21 +9,21 @@ type Props = {
 export const getTotalPriceAbove = ({ blockIndex, blocks }: Props): number => {
   let totalPriceAbove = 0
 
-  for (let i = blockIndex - 1; i >= 0; i--) {
+  for (let index = blockIndex - 1; index >= 0; index--) {
     if (blockIndex === 0) {
       break
     }
 
-    const isPriceItem = blocks.at(i)?.type === itemType.price
+    const isPriceItem = blocks.at(index)?.type === itemType.price
 
     if (isPriceItem === true) {
       break
     }
 
-    const isBoqItem = blocks.at(i)?.type === itemType.boq
+    const isBoqItem = blocks.at(index)?.type === itemType.boq
 
     if (isBoqItem === true) {
-      const boqItem = blocks.at(i) as Boq
+      const boqItem = blocks.at(index) as Boq
       const subTotalPrice = boqItem.boq.header.subTotalPrice.value
       totalPriceAbove += subTotalPrice
     }

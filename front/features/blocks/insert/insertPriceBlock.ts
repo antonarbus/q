@@ -5,7 +5,7 @@ import { type Price, itemType } from '@entities/quotation'
 import { generateId } from '@shared/lib/nanoid'
 import { textSlice } from '@shared/lib/froala/textSlice'
 
-export const insertPriceBlock = (e?: MouseEvent): void => {
+export const insertPriceBlock = (event?: MouseEvent): void => {
   const block: Price = {
     id: generateId(),
     type: itemType.price,

@@ -124,8 +124,8 @@ export const ShareQuotationField = ({
                 variant='standard'
                 placeholder='Email'
                 value={emailSignal.value}
-                onChange={(e) => {
-                  emailSignal.value = e.target.value
+                onChange={(event) => {
+                  emailSignal.value = event.target.value
                 }}
                 sx={{
                   position: 'relative',

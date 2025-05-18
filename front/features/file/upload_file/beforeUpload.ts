@@ -40,8 +40,8 @@ export const beforeUpload: BeforeUpload = async (props) => {
 
     const reader = new FileReader()
 
-    reader.onload = (e): void => {
-      const fileAsBase64String = e.target?.result
+    reader.onload = (event): void => {
+      const fileAsBase64String = event.target?.result
 
       if (typeof fileAsBase64String !== 'string') {
         return

@@ -12,8 +12,8 @@ export const OpenLoginModalLink = ({ slideOut }: Props): React.JSX.Element => {
   return (
     <Link
       to={`../${route.login}`}
-      onClick={(e: React.MouseEvent): void => {
-        e.preventDefault()
+      onClick={(event: React.MouseEvent): void => {
+        event.preventDefault()
 
         const navigateState: NavigateState = {
           shouldSlide: true,

@@ -107,8 +107,8 @@ export const useResetPassword = ({ passwordSignal, slideOut }: Props): Res => {
     }
   }, [isError])
 
-  const onSubmit = (e: React.FormEvent): void => {
-    e.preventDefault()
+  const onSubmit = (event: React.FormEvent): void => {
+    event.preventDefault()
 
     resetPassword({
       password: passwordSignal.value,

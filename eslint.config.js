@@ -1,4 +1,3 @@
-/* eslint-disable sort-keys */
 import globals from 'globals'
 import pluginJs from '@eslint/js'
 import reactPlugin from 'eslint-plugin-react'
@@ -108,20 +107,20 @@ export default [
         },
       ],
       'no-useless-assignment': 'error',
-
+      'no-nested-ternary': 'error',
+      'id-length': ['error', { exceptions: ['x', 'y'] }],
       // turn off some rules from pluginJs.configs.all
       'no-alert': 'off', // i like alerts more than many popup components
-      'sort-keys': 'error',
-      'max-lines-per-function': 'off',
-      'no-ternary': 'off',
-      'arrow-body-style': 'off',
-      'no-inline-comments': 'off',
-      'capitalized-comments': 'off',
-      'no-magic-numbers': 'off',
-      'no-void': 'off',
-      'one-var': 'off',
-      'id-length': 'off',
-      'prefer-destructuring': 'off',
+      'sort-keys': 'off', // nice, but often you group keys logically and not sort alphabetically
+      'max-lines-per-function': 'off', // not your business
+      'no-ternary': 'off', // nested are bad, but normal ternary is ok
+      'arrow-body-style': 'off', // blocks with explicit return are good
+      'no-inline-comments': 'off', // inline comments like this one are necessary
+      'capitalized-comments': 'off', // commented code gets capitalized automatically
+      'no-magic-numbers': 'off', // that is crazy
+      'no-void': 'off', // need void to let TS know that we are not going to await promise
+      'one-var': 'off', // wants to do like let a,b, c --> crazy
+      'prefer-destructuring': 'error',
       'max-statements': 'off',
       'sort-imports': 'off',
       'max-params': 'off',

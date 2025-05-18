@@ -61,8 +61,8 @@ export const OpenSaveQuotationModalButton = ({
     >
       <Link
         to={`./${id}`}
-        onClick={(e) => {
-          e.preventDefault()
+        onClick={(event) => {
+          event.preventDefault()
           loadQuotation({ id })
         }}
       >

@@ -3,28 +3,28 @@ import { quotationSlice } from '@entities/quotation'
 import { cls } from '@shared/consts/cls'
 
 type Props = {
-  e: MouseEvent
+  event: MouseEvent
   blockIndex: number
   hidePinsClickHandlerRef: React.RefObject<(e: MouseEvent) => void>
   isInitClickRef: React.RefObject<boolean>
 }
 
 export const showHideBoqPricePins = ({
-  e,
+  event,
   blockIndex,
   hidePinsClickHandlerRef,
   isInitClickRef,
 }: Props): void => {
   dispatch(quotationSlice.actions.showBoqPriceCellPinsReducer({ blockIndex }))
 
-  const clickHandler = (event: MouseEvent): void => {
+  const clickHandler = (mouseEvent: MouseEvent): void => {
     if (isInitClickRef.current) {
       isInitClickRef.current = false
 
       return
     }
 
-    const clickedElement = event.target
+    const clickedElement = mouseEvent.target
 
     if (clickedElement instanceof Element) {
       const isPin = Boolean(clickedElement.closest(`.${cls.pin}`))

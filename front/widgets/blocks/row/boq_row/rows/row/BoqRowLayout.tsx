@@ -13,8 +13,8 @@ export const BoqRowLayout = ({
   return (
     <Box
       className={cls.boqRow}
-      onBlur={(e) => {
-        onBlur(e)
+      onBlur={(event) => {
+        onBlur(event)
       }}
       style={{
         display: 'flex',

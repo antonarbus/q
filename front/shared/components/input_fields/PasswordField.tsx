@@ -32,8 +32,8 @@ export const PasswordField = ({
       autoFocus={autoFocus}
       value={passwordSignal.value}
       onBlur={onBlur}
-      onChange={(e): void => {
-        passwordSignal.value = e.target.value
+      onChange={(event): void => {
+        passwordSignal.value = event.target.value
       }}
       slotProps={{
         input: {

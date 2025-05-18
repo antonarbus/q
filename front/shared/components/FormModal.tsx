@@ -63,8 +63,8 @@ export const FormModal = ({
       <Box
         ref={modalRef}
         className={cls.formModal}
-        onMouseDown={(e: React.MouseEvent): void => {
-          e.stopPropagation()
+        onMouseDown={(event: React.MouseEvent): void => {
+          event.stopPropagation()
         }}
         sx={{
           display: 'flex',

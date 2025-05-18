@@ -51,9 +51,9 @@ export const Froala = (props: FroalaProps): React.JSX.Element => {
       <Box
         className={`froala-wrapper ${props.className ?? ''}`}
         style={props.wrapperStyles}
-        onClick={(e: React.MouseEvent) => {
+        onClick={(event: React.MouseEvent) => {
           placeCaretAtTheEndIfToolbarIsNotShown({
-            e,
+            event,
             editorRef: props.editorRef,
             froalaElementRef,
           })

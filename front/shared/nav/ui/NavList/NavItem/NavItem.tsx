@@ -44,20 +44,20 @@ export const NavItem = ({ navItem }: Props): React.JSX.Element => {
     >
       <Link
         to={to}
-        onClick={(e: React.MouseEvent): void => {
+        onClick={(event: React.MouseEvent): void => {
           if (isFunc === true) {
-            e.preventDefault()
+            event.preventDefault()
           }
 
           const disableClick = isLoading ?? isSuccess ?? isError ?? disabled
 
           if (disableClick === true) {
-            e.preventDefault()
+            event.preventDefault()
 
             return
           }
 
-          clickOnNavItem({ e, navItem, navItemRef, disabled })
+          clickOnNavItem({ event, navItem, navItemRef, disabled })
         }}
         css={{
           position: 'relative',

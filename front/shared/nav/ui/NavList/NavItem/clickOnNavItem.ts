@@ -5,14 +5,14 @@ import type { NavItem } from '../../../type'
 import { navItemId } from '@shared/consts/navItemId'
 
 type Props = {
-  e: MouseEvent
+  event: MouseEvent
   navItem: NavItem
   navItemRef: React.RefObject<React.ComponentRef<'li'> | null>
   disabled: boolean
 }
 
 export const clickOnNavItem = ({
-  e,
+  event,
   navItem,
   navItemRef,
   disabled,
@@ -27,14 +27,14 @@ export const clickOnNavItem = ({
 
   if (link !== undefined) {
     // just follow the link natively and call the func
-    void func?.(e)
+    void func?.(event)
 
     return
   }
 
   // all navItems are links, which were already opened above,
   // but these ones we do not want to follow
-  e.preventDefault()
+  event.preventDefault()
 
   // handle burger close separately
   const isBurger = getState().nav.currentMenuNavItemId === navItemId.burger
@@ -59,7 +59,7 @@ export const clickOnNavItem = ({
   }
 
   if (func !== undefined) {
-    void func(e)
+    void func(event)
 
     return
   }

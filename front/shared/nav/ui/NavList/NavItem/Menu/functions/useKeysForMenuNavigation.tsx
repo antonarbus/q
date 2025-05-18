@@ -8,7 +8,7 @@ import { getNavItem } from './getNavItem'
 export const useKeysForMenuNavigation = (): void => {
   const navigate = useNavigate()
 
-  const navKeyboardHandler = (e: KeyboardEvent): void => {
+  const navKeyboardHandler = (event: KeyboardEvent): void => {
     const { currentMenuNavItemId } = getState().nav
 
     const { navItem: currentNavItem } = getNavItem({
@@ -26,8 +26,8 @@ export const useKeysForMenuNavigation = (): void => {
 
     const isNestedMenu = getState().nav.idsToCurrentMenuItems.length > 2
 
-    if (e.key === 'ArrowDown') {
-      e.preventDefault()
+    if (event.key === 'ArrowDown') {
+      event.preventDefault()
       const isLastMenuItem = hoverIndex === menuItemsQty
 
       if (isLastMenuItem === true) {
@@ -47,8 +47,8 @@ export const useKeysForMenuNavigation = (): void => {
       return
     }
 
-    if (e.key === 'ArrowUp') {
-      e.preventDefault()
+    if (event.key === 'ArrowUp') {
+      event.preventDefault()
       const isTopMenuItem = hoverIndex < 1
 
       if (isTopMenuItem === true) {
@@ -70,7 +70,7 @@ export const useKeysForMenuNavigation = (): void => {
       return
     }
 
-    const shouldGoBack = isNestedMenu && e.key === 'Backspace'
+    const shouldGoBack = isNestedMenu && event.key === 'Backspace'
 
     if (shouldGoBack === true) {
       dispatch(
@@ -82,7 +82,7 @@ export const useKeysForMenuNavigation = (): void => {
       return
     }
 
-    const shouldClose = isNestedMenu === false && e.key === 'Backspace'
+    const shouldClose = isNestedMenu === false && event.key === 'Backspace'
 
     if (shouldClose === true) {
       dispatch(navSlice.actions.closeMenu())
@@ -90,13 +90,13 @@ export const useKeysForMenuNavigation = (): void => {
       return
     }
 
-    if (e.key === 'Escape') {
+    if (event.key === 'Escape') {
       dispatch(navSlice.actions.closeMenu())
 
       return
     }
 
-    if (e.key === 'Enter') {
+    if (event.key === 'Enter') {
       const isBackMenuItem = hoverIndex === 0 && isNestedMenu
 
       if (isBackMenuItem === true) {
@@ -157,11 +157,11 @@ export const useKeysForMenuNavigation = (): void => {
     }
 
     const anyLetter = /\w/u
-    const anyLetterPressed = anyLetter.exec(e.key)
+    const anyLetterPressed = anyLetter.exec(event.key)
 
     // jump to "Close" & "Back"
     if (anyLetterPressed !== null) {
-      const shouldJumpToClose = isNestedMenu === false && e.key === 'c'
+      const shouldJumpToClose = isNestedMenu === false && event.key === 'c'
 
       if (shouldJumpToClose === true) {
         dispatch(
@@ -171,7 +171,7 @@ export const useKeysForMenuNavigation = (): void => {
         return
       }
 
-      const shouldJumpToGoBack = isNestedMenu && e.key === 'b'
+      const shouldJumpToGoBack = isNestedMenu && event.key === 'b'
 
       if (shouldJumpToGoBack === true) {
         dispatch(
@@ -182,16 +182,16 @@ export const useKeysForMenuNavigation = (): void => {
       }
 
       // jump to item by letter
-      const index = navItems.findIndex((navItem, i) => {
+      const index = navItems.findIndex((navItem, navIndex) => {
         const isiKeySameAsFirstItemLetter = navItem.name
           .toLowerCase()
-          .startsWith(e.key)
+          .startsWith(event.key)
 
         if (isiKeySameAsFirstItemLetter === false) {
           return false
         }
 
-        if (i + 2 > hoverIndex) {
+        if (navIndex + 2 > hoverIndex) {
           return true
         }
 
@@ -211,7 +211,7 @@ export const useKeysForMenuNavigation = (): void => {
         const newIndex = navItems.findIndex((navItem) => {
           const isiKeySameAsFirstItemLetter = navItem.name
             .toLowerCase()
-            .startsWith(e.key)
+            .startsWith(event.key)
 
           return isiKeySameAsFirstItemLetter
         })

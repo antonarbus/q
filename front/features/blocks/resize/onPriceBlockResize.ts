@@ -4,7 +4,7 @@ import type { OnBlockResizeStop } from '@shared/types/resizablePaper'
 
 export const onPriceBlockResizeStop: OnBlockResizeStop = ({
   blockIndex,
-  e,
+  event,
   direction,
   elementRef,
   delta,
