@@ -9,7 +9,7 @@ export const onPriceBlockResizeStop: OnBlockResizeStop = ({
   elementRef,
   delta,
 }) => {
-  const width = parseInt(elementRef.style.width, 10)
+  const width = parseInt(elementRef.style.width)
   const prevItemWidth = getState().quotation.blocks[blockIndex]?.width
 
   if (width === prevItemWidth) {
