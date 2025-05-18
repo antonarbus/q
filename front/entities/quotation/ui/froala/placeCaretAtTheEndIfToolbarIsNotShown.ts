@@ -48,7 +48,7 @@ export const placeCaretAtTheEndIfToolbarIsNotShown = ({
 
     editorRef.current.selection.setAtEnd(contentEditableElement)
 
-    //@ts-expect-error Froala does not provide types for this
+    // @ts-expect-error Froala does not provide types for this
     const isCaret = editorRef.current.selection.get().type === 'Caret'
 
     if (isCaret === true) {

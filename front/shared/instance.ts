@@ -4,6 +4,7 @@ import type { NavItem } from './nav'
 
 class Instance {
   #queryClientInstance: QueryClientType | null = null
+
   #navStructureInstance: NavItem[] | null = null
 
   public set queryClient(queryClientInstance: QueryClientType) {

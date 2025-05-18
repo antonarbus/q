@@ -1,4 +1,4 @@
-//@ts-expect-error: some declaration is missing
+// @ts-expect-error: some declaration is missing
 import { defineConfig } from 'steiger'
 // import fsd from '@feature-sliced/steiger-plugin'
 

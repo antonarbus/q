@@ -10,5 +10,5 @@ export { deleteFromBookmarksCache } from './cacheUpdaters/deleteFromBookmarksCac
 export { deleteBookmarksCache } from './cacheUpdaters/deleteBookmarksCache'
 
 // types
-export type { Item } from '@entities/quotation' //! this is against FSD
+export type { Item } from '@entities/quotation' // ! this is against FSD
 export type { BookmarkFormValues } from './form'
