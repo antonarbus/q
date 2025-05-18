@@ -62,8 +62,8 @@ export default [
       'no-warning-comments': 'warn', // warns about "todo" in comments
       'one-var': 'off', // wants to do like let a,b, c --> crazy
       'operator-assignment': 'off', // forces to use +=, do not like it
-      'sort-imports': 'off', // nice, do do not care
-      'sort-keys': 'off', // nice, but often you group keys logically and not sort alphabetically
+      'sort-imports': 'off', // nice, do do not care, pity that it is not auto-fixable
+      'sort-keys': 'off', // nice, but often you group keys logically and not sort alphabetically, pity that it is not auto-fixable
       complexity: 'off', // max complexity is 20, if else if else (complexity = 3)
       radix: ['error', 'as-needed'], // disallows providing the 10 radix --> parseInt(var, 10) no need to put 10
       'no-restricted-syntax': [
