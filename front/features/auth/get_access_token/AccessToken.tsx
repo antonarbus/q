@@ -29,7 +29,7 @@ const loadingMenuIconMachine = createLoadingMenuIconMachine({
 
 const loadingIconActor = createActor(loadingMenuIconMachine).start()
 
-export const AccessToken = (): React.JSX.Element => {
+export const AccessToken = (): React.ReactNode => {
   const {
     data,
     refetch: getAccessToken,
@@ -150,5 +150,5 @@ export const AccessToken = (): React.JSX.Element => {
     }
   }, [isError])
 
-  return <></>
+  return null
 }

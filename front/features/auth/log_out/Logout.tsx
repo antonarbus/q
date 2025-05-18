@@ -9,7 +9,7 @@ import { navSlice } from '@shared/nav'
 import { toast } from 'sonner'
 import { appSlice } from '@shared/appSlice'
 
-export const Logout = (): React.JSX.Element => {
+export const Logout = (): React.ReactNode => {
   const navigate = useNavigate()
   const { mutate: logOut, isPending, isSuccess, isError } = useLogOutMutation()
 
@@ -62,5 +62,5 @@ export const Logout = (): React.JSX.Element => {
     }
   }, [isError])
 
-  return <></>
+  return null
 }

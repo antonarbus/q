@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useMemo } from 'react'
 import type { FroalaProps } from '../ui/froala/types'
 // import type { FroalaProps } from '../ui/froala/Froala'
 
@@ -14,25 +14,27 @@ type Props = Context & {
 const FroalaContext = createContext<Context | null>(null)
 
 export const FroalaProvider = (props: Props): React.JSX.Element => {
+  const froalaContextValue = useMemo(() => {
+    return {
+      editorRef: props.editorRef,
+      placeholder: props.placeholder,
+      htmlGetter: props.htmlGetter,
+      style: props.style,
+      sx: props.sx,
+      onContentChange: props.onContentChange,
+      onFocus: props.onFocus,
+      onClick: props.onClick,
+      onBlur: props.onBlur,
+      onKeydown: props.onKeydown,
+      onInitialized: props.onInitialized,
+      froalaElementRef: props.froalaElementRef,
+      froalaHeightRef: props.froalaHeightRef,
+      beforeUpload: props.beforeUpload,
+    }
+  }, [props])
+
   return (
-    <FroalaContext.Provider
-      value={{
-        editorRef: props.editorRef,
-        placeholder: props.placeholder,
-        htmlGetter: props.htmlGetter,
-        style: props.style,
-        sx: props.sx,
-        onContentChange: props.onContentChange,
-        onFocus: props.onFocus,
-        onClick: props.onClick,
-        onBlur: props.onBlur,
-        onKeydown: props.onKeydown,
-        onInitialized: props.onInitialized,
-        froalaElementRef: props.froalaElementRef,
-        froalaHeightRef: props.froalaHeightRef,
-        beforeUpload: props.beforeUpload,
-      }}
-    >
+    <FroalaContext.Provider value={froalaContextValue}>
       {props.children}
     </FroalaContext.Provider>
   )

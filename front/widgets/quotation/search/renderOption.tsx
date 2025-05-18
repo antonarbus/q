@@ -61,7 +61,6 @@ export const renderOption = ({
 
     return (
       <li
-         
         css={{
           position: 'relative',
           cursor: 'pointer',
@@ -85,6 +84,7 @@ export const renderOption = ({
           }),
         }}
         key={option.id}
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onClick={async () => {
           await loadBookmark({ id: option.id })
           isAutocompleteOpen.value = false

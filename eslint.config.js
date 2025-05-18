@@ -38,7 +38,7 @@ export default [
   prettierConfig,
   {
     rules: {
-      // adjust some rules from pluginJs.configs.all
+      // adjust JS rules
       'arrow-body-style': 'off', // blocks with explicit return are good
       'capitalized-comments': 'off', // commented code gets capitalized automatically
       'consistent-return': 'off', // arrow function expects no return value
@@ -120,7 +120,7 @@ export default [
         { blankLine: 'always', prev: '*', next: 'multiline-expression' },
       ],
 
-      // adjust some rules from tseslint.configs.all
+      // adjust TS rules
       '@typescript-eslint/no-unused-vars': ['error', { args: 'none' }],
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
       '@typescript-eslint/strict-boolean-expressions': [
@@ -145,7 +145,7 @@ export default [
       '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'off', // forces to omit boolean comparison in if statements // i like to compare explicitly
       '@typescript-eslint/no-unsafe-type-assertion': 'off', //! enable: make type guard functions with predicates instead of assertions
 
-      // adjust some rules from reactPlugin.configs.flat.all,
+      // adjust React rules,
       'react/react-in-jsx-scope': 'off', // suppress error 'React' must be in scope when using JSX
       'react/display-name': 'off', // function inside forward ref can by anonymous
       'react/jsx-no-literals': 'off', // requires to <div>{'text'}</div>
@@ -158,6 +158,8 @@ export default [
       'react/no-unknown-property': ['error', { ignore: ['css'] }], // allows css prop coming from Emotion lib
       'react/jsx-no-leaked-render': 'off', //!  enable: forbids to render like a && b && c && <Comp />
       'react/jsx-max-depth': 'off', //!  enable: may simplify the complexity
+      'react/require-default-props': 'off', //!  enable: make sense to use, maybe
+      'react/no-multi-comp': 'off', //!  enable: make sense to use, maybe
       'react/function-component-definition': [
         'error',
         { namedComponents: 'arrow-function' },

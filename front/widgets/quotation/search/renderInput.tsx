@@ -13,6 +13,16 @@ export const renderInput = (
       {...params}
       name='category'
       placeholder='Search in bookmarks'
+      slotProps={{
+        input: {
+          ...params.InputProps,
+          startAdornment: (
+            <InputAdornment position='start'>
+              <GoSearch />
+            </InputAdornment>
+          ),
+        },
+      }}
       sx={{
         '.MuiInputBase-root': {
           padding: '0px 5px !important',
@@ -25,24 +35,6 @@ export const renderInput = (
           textAlign: 'center',
         },
       }}
-      slotProps={{
-        input: {
-          ...params.InputProps,
-          startAdornment: (
-            <InputAdornment position='start'>
-              <GoSearch />
-            </InputAdornment>
-          ),
-        },
-      }}
-      // InputProps={{
-      //   ...params.InputProps,
-      //   startAdornment: (
-      //     <InputAdornment position='start'>
-      //       <GoSearch />
-      //     </InputAdornment>
-      //   ),
-      // }}
       variant='standard'
     />
   )
