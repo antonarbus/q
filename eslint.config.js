@@ -114,6 +114,7 @@ export default [
       'no-plusplus': 'error', // forbids to use i++ operator, easier to understand index = index + 1
       'func-style': 'error', // prefer function expressions (const func = () => {})
       'prefer-arrow-callback': 'error',
+      'no-shadow': 'error', // Disallow variable to shadow variables declared in the outer scope
 
       // turn off some rules from pluginJs.configs.all
       'no-alert': 'off', // i like alerts more than many popup components
@@ -134,7 +135,6 @@ export default [
       complexity: 'off', // max complexity is 20, if else if else (complexity = 3)
       'consistent-return': 'off', // arrow function expects no return value
       'operator-assignment': 'off', // forces to use +=, do not like it
-      'no-shadow': 'off',
       radix: 'off',
       'init-declarations': 'off',
       'new-cap': 'off',
