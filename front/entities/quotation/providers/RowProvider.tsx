@@ -25,12 +25,7 @@ export const RowProvider = ({
 }: Props): React.JSX.Element => {
   const { boqRowEditorRefs } = useBoq()
 
-  const {
-    descriptionEditorRef,
-    itemPriceCellEditorRef,
-    qtyCellEditorRef,
-    priceCellEditorRef,
-  } = useMemo(() => {
+  const rowCellEditorRef = useMemo(() => {
     return {
       descriptionEditorRef: { current: null },
       itemPriceCellEditorRef: { current: null },
@@ -40,25 +35,27 @@ export const RowProvider = ({
   }, [])
 
   boqRowEditorRefs[rowIndex] = {
-    description: descriptionEditorRef,
-    itemPrice: itemPriceCellEditorRef,
-    qty: qtyCellEditorRef,
-    price: priceCellEditorRef,
+    description: rowCellEditorRef.descriptionEditorRef,
+    itemPrice: rowCellEditorRef.itemPriceCellEditorRef,
+    qty: rowCellEditorRef.qtyCellEditorRef,
+    price: rowCellEditorRef.priceCellEditorRef,
   }
 
+  const rowContextData = useMemo(() => {
+    const context = {
+      rowIndex,
+      row,
+      descriptionEditorRef: rowCellEditorRef.descriptionEditorRef,
+      itemPriceCellEditorRef: rowCellEditorRef.itemPriceCellEditorRef,
+      qtyCellEditorRef: rowCellEditorRef.qtyCellEditorRef,
+      priceCellEditorRef: rowCellEditorRef.priceCellEditorRef,
+    }
+
+    return context
+  }, [rowIndex, row, boqRowEditorRefs])
+
   return (
-    <RowContext.Provider
-      value={{
-        rowIndex,
-        row,
-        descriptionEditorRef,
-        itemPriceCellEditorRef,
-        qtyCellEditorRef,
-        priceCellEditorRef,
-      }}
-    >
-      {children}
-    </RowContext.Provider>
+    <RowContext.Provider value={rowContextData}>{children}</RowContext.Provider>
   )
 }
 
