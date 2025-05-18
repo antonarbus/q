@@ -21,10 +21,10 @@ export const Icon = ({
 }: Props): React.JSX.Element => {
   return (
     <Tooltip
-      title={tooltipText}
-      placement='bottom'
       enterDelay={500}
       enterNextDelay={500}
+      placement='bottom'
+      title={tooltipText}
     >
       <span className='element-that-keep-ref-from-mui'>
         <RoundSpanForIcon

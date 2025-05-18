@@ -8,15 +8,12 @@ type Props = {
 export const FadeInOnInitLoad = ({ children }: Props): React.JSX.Element => {
   return (
     <motion.div
-      className={cls.blocks}
-      initial={{
-        opacity: 0,
-      }}
       animate={{
         opacity: 1,
       }}
-      transition={{
-        delay: 0.7, // to show "Q" logo on init load to avoid some jumps
+      className={cls.blocks}
+      initial={{
+        opacity: 0,
       }}
       style={{
         display: 'inline-flex', // needed for .pdf and to avoid problems with boq in narrow window
@@ -25,6 +22,9 @@ export const FadeInOnInitLoad = ({ children }: Props): React.JSX.Element => {
         alignItems: 'center',
         maxWidth: '100%',
         padding: '20px 10px',
+      }}
+      transition={{
+        delay: 0.7, // to show "Q" logo on init load to avoid some jumps
       }}
     >
       {children}

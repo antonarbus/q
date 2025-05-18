@@ -11,7 +11,6 @@ export const PriceTitle = (): React.JSX.Element => {
   return (
     <Froala
       editorRef={editorRef}
-      placeholder='Total price...'
       htmlGetter={() => {
         const priceBlock = getState().quotation.blocks[blockIndex]
 
@@ -26,6 +25,7 @@ export const PriceTitle = (): React.JSX.Element => {
       onContentChange={() => {
         updatePriceTitleCell({ editorRef, blockIndex })
       }}
+      placeholder='Total price...'
     />
   )
 }

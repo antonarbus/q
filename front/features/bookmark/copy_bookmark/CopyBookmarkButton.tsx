@@ -43,16 +43,16 @@ export const CopyBookmarkButton = ({ id }: ReqBody): React.JSX.Element => {
 
   return (
     <Tooltip
-      title='Copy'
-      placement='bottom'
       enterDelay={500}
       enterNextDelay={500}
+      placement='bottom'
+      title='Copy'
     >
       <IconButton
-        size='small'
         onClick={() => {
           loadItem({ id })
         }}
+        size='small'
         sx={{
           translate: '0px 1px',
         }}

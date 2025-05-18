@@ -34,13 +34,12 @@ export const DeleteBookmarkButton = ({ id }: ReqBody): React.JSX.Element => {
 
   return (
     <Tooltip
-      title='Delete'
-      placement='bottom'
       enterDelay={500}
       enterNextDelay={500}
+      placement='bottom'
+      title='Delete'
     >
       <IconButton
-        size='small'
         onClick={() => {
           const askForConfirmation = (): boolean => {
             const areYouSure = confirm('Are you sure?')
@@ -54,6 +53,7 @@ export const DeleteBookmarkButton = ({ id }: ReqBody): React.JSX.Element => {
 
           deleteItem({ id })
         }}
+        size='small'
       >
         {isPending === false && <MdDeleteOutline />}
         {isPending && <RotatingLoaderIcon />}

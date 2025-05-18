@@ -47,7 +47,6 @@ export const PriceCell = (): React.JSX.Element => {
       <Froala
         className={`td ${boqRowCellKey.price}`}
         editorRef={priceCellEditorRef}
-        placeholder='Price...'
         htmlGetter={() =>
           getBoqCellHtmlFromStore({
             blockIndex,
@@ -55,19 +54,6 @@ export const PriceCell = (): React.JSX.Element => {
             rowIndex,
           })
         }
-        onFocus={() => {
-          showBoqRowPins({ blockIndex, rowIndex })
-        }}
-        onContentChange={() => {
-          updateBoqRowPriceCell({
-            blockIndex,
-            itemPriceCellEditorRef,
-            priceCellEditorRef,
-            qtyCellEditorRef,
-            rowIndex,
-            subTotalPriceEditorRef,
-          })
-        }}
         onBlur={() => {
           formatBoqRowPriceCell({
             blockIndex,
@@ -82,6 +68,19 @@ export const PriceCell = (): React.JSX.Element => {
             subTotalPriceEditorRef,
           })
         }}
+        onContentChange={() => {
+          updateBoqRowPriceCell({
+            blockIndex,
+            itemPriceCellEditorRef,
+            priceCellEditorRef,
+            qtyCellEditorRef,
+            rowIndex,
+            subTotalPriceEditorRef,
+          })
+        }}
+        onFocus={() => {
+          showBoqRowPins({ blockIndex, rowIndex })
+        }}
         onKeydown={(event) => {
           tabFromPriceCell({
             boqRowEditorRefs,
@@ -89,9 +88,10 @@ export const PriceCell = (): React.JSX.Element => {
             rowIndex,
           })
         }}
-        wrapperStyles={stylesForResizableCell}
+        placeholder='Price...'
         style={boqRowCellStyle}
         sx={boqRowCellSx}
+        wrapperStyles={stylesForResizableCell}
       />
       <Pin
         boqRowCellKey={boqRowCellKey.price}

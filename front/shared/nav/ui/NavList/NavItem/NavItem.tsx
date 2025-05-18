@@ -38,12 +38,14 @@ export const NavItem = ({ navItem }: Props): React.JSX.Element => {
 
   return (
     <NavItemLayout
-      navItemRef={navItemRef}
       disabled={disabled}
       isActive={isActive}
+      navItemRef={navItemRef}
     >
       <Link
-        to={to}
+        css={{
+          position: 'relative',
+        }}
         onClick={(event: React.MouseEvent): void => {
           if (isFunc === true) {
             event.preventDefault()
@@ -59,9 +61,7 @@ export const NavItem = ({ navItem }: Props): React.JSX.Element => {
 
           clickOnNavItem({ event, navItem, navItemRef, disabled })
         }}
-        css={{
-          position: 'relative',
-        }}
+        to={to}
       >
         <IconWithLoader navItem={navItem} />
         <NavName name={name} />

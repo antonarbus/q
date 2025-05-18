@@ -16,10 +16,10 @@ export const CardCustom = ({
   logo,
 }: Props): React.JSX.Element => (
   <Box
-    ref={reference}
     onMouseDown={(event: React.MouseEvent): void => {
       event.stopPropagation()
     }}
+    ref={reference}
     sx={{
       display: 'flex',
       flexDirection: 'column',
@@ -49,8 +49,8 @@ export const CardCustom = ({
     {Boolean(title) && (
       <Typography
         component='h1'
-        variant='h6'
         sx={{ alignSelf: 'center', marginBottom: '30px' }}
+        variant='h6'
       >
         {title}
       </Typography>

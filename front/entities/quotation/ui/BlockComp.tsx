@@ -51,17 +51,17 @@ export const BlockComp = ({
       }}
     >
       <BlockAnimate
-        disableResize={disableResize}
         autoWidth={autoWidth}
-        minWidth={minWidth}
         blockHeight={block.height ?? 0}
-        id={block.id}
-        onItemResizeStart={onBlockResizeStart}
-        onItemResize={onBlockResize}
-        onItemResizeStop={onBlockResizeStop}
-        leftItemActionButtons={leftBlockActionButtons}
-        rightItemActionButtons={rightBlockActionButtons}
         className={className}
+        disableResize={disableResize}
+        id={block.id}
+        leftItemActionButtons={leftBlockActionButtons}
+        minWidth={minWidth}
+        onItemResize={onBlockResize}
+        onItemResizeStart={onBlockResizeStart}
+        onItemResizeStop={onBlockResizeStop}
+        rightItemActionButtons={rightBlockActionButtons}
       >
         <PasteBlockTextOverlay>{children}</PasteBlockTextOverlay>
       </BlockAnimate>

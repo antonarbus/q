@@ -17,11 +17,10 @@ export const DeleteFileIcon = ({ fileId }: Props): React.JSX.Element => {
 
   return (
     <Tooltip
-      title={`Delete`}
       placement='top'
+      title='Delete'
     >
       <MdDeleteOutline
-        onClick={onDeleteClick}
         css={{
           width: '14px',
           height: '14px',
@@ -32,6 +31,7 @@ export const DeleteFileIcon = ({ fileId }: Props): React.JSX.Element => {
             color: theme.colors.red,
           },
         }}
+        onClick={onDeleteClick}
       />
     </Tooltip>
   )

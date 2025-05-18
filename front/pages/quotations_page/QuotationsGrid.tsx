@@ -40,15 +40,10 @@ export const QuotationsGrid = (): React.JSX.Element => {
       <DisplayedRowsCount />
       <ProgressGridBar isShown={isFetching} />
       <AgGridReact<QuotationPick>
-        ref={quotationsAgGridRef}
-        theme={themeQuartz}
-        rowData={data?.quotations}
-        getRowId={(params) => params.data.id}
-        defaultColDef={defaultColDef}
         columnDefs={columnDefs}
-        suppressCellFocus
-        suppressColumnVirtualisation
+        defaultColDef={defaultColDef}
         enableCellTextSelection
+        getRowId={(params) => params.data.id}
         loadingOverlayComponent={LoadingTableOverlay}
         noRowsOverlayComponent={NoRowsTableOverlay}
         onGridReady={() => {
@@ -58,6 +53,11 @@ export const QuotationsGrid = (): React.JSX.Element => {
           const count = params.api.getDisplayedRowCount()
           dispatch(agGridSlice.actions.setCount({ count }))
         }}
+        ref={quotationsAgGridRef}
+        rowData={data?.quotations}
+        suppressCellFocus
+        suppressColumnVirtualisation
+        theme={themeQuartz}
       />
     </GridLayout>
   )

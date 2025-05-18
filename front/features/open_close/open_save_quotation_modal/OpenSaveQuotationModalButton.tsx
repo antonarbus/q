@@ -54,17 +54,17 @@ export const OpenSaveQuotationModalButton = ({
 
   return (
     <Tooltip
-      title='Quick edit'
-      placement='bottom'
       enterDelay={500}
       enterNextDelay={500}
+      placement='bottom'
+      title='Quick edit'
     >
       <Link
-        to={`./${id}`}
         onClick={(event) => {
           event.preventDefault()
           loadQuotation({ id })
         }}
+        to={`./${id}`}
       >
         <IconButton
           size='small'

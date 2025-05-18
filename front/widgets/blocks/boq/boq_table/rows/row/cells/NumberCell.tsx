@@ -20,7 +20,7 @@ export const NumberCell = (): React.JSX.Element => {
 
   return (
     <Box
-      className={'td number'}
+      className='td number'
       style={{
         ...stylesForResizableCell,
         color: 'grey',

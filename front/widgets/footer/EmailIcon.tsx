@@ -5,8 +5,8 @@ import { Tooltip } from '@mui/material'
 export const EmailIcon = (): React.JSX.Element => {
   return (
     <Tooltip
-      title='Ask a question, send feedback, report a bug, or a feature request'
       placement='top'
+      title='Ask a question, send feedback, report a bug, or a feature request'
     >
       <a
         href='mailto:anton.arbus@gmail.com'

@@ -41,19 +41,19 @@ export const SaveQuotationModal = (): React.JSX.Element => {
 
   return (
     <FormModal
-      modalRef={modalRef}
-      width='500px'
-      headerText={isQuotationsPage === true ? 'Quick edit' : 'Save quotation'}
-      headerIcon={<MdSaveAlt />}
       buttonText={isQuotationsPage === true ? 'Update' : 'Save'}
+      headerIcon={<MdSaveAlt />}
+      headerText={isQuotationsPage === true ? 'Quick edit' : 'Save quotation'}
+      isButtonError={isError}
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
-      isButtonError={isError}
-      shouldUnmountOnClickAway
-      shouldUnmountOnEsc
-      onUnmount={navigateUp}
+      modalRef={modalRef}
       onCloseClick={navigateUp}
       onSubmit={onSubmit}
+      onUnmount={navigateUp}
+      shouldUnmountOnClickAway
+      shouldUnmountOnEsc
+      width='500px'
     >
       <NameField nameSignal={saveQuotationFormValues.nameSignal} />
       <CategoryField

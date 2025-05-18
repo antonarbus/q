@@ -95,19 +95,19 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
 
   return (
     <Tooltip
-      title='Log in as super admin'
-      placement='bottom'
       enterDelay={500}
       enterNextDelay={500}
+      placement='bottom'
+      title='Log in as super admin'
     >
       <IconButton
-        size='small'
         onClick={() => {
           logIn({
             email,
             password: 'no password',
           })
         }}
+        size='small'
       >
         {isPending === false && <MdLogin />}
         {isPending && <RotatingLoaderIcon />}

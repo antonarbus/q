@@ -41,15 +41,6 @@ export const BlockAnimate = ({
 }: Props): React.JSX.Element => {
   return (
     <motion.div
-      id={id}
-      className={cls.block + (className === undefined ? '' : ` ${className}`)}
-      initial={{
-        height: 0,
-        marginBottom: 0,
-        opacity: 0,
-        y: '100vh',
-        overflow: 'hidden',
-      }}
       animate={{
         height: blockHeight, // height is being stored on copy/cut icon click
         marginBottom: 20,
@@ -60,6 +51,7 @@ export const BlockAnimate = ({
           overflow: 'visible',
         },
       }}
+      className={cls.block + (className === undefined ? '' : ` ${className}`)}
       exit={{
         height: 0,
         marginBottom: 0,
@@ -67,8 +59,13 @@ export const BlockAnimate = ({
         x: '110vw',
         overflow: 'hidden',
       }}
-      transition={{
-        duration: theme.block.animationDuration,
+      id={id}
+      initial={{
+        height: 0,
+        marginBottom: 0,
+        opacity: 0,
+        y: '100vh',
+        overflow: 'hidden',
       }}
       style={{
         display: 'flex',
@@ -77,17 +74,20 @@ export const BlockAnimate = ({
         maxWidth: '100%',
         width: '100%',
       }}
+      transition={{
+        duration: theme.block.animationDuration,
+      }}
     >
       {Boolean(leftItemActionButtons) && (
         <Box style={{ paddingTop: '5px' }}>{leftItemActionButtons}</Box>
       )}
       <ResizableBlockPaper
-        disableResize={disableResize}
         autoWidth={autoWidth}
-        onItemResizeStart={onItemResizeStart}
-        onItemResize={onItemResize}
-        onItemResizeStop={onItemResizeStop}
+        disableResize={disableResize}
         minWidth={minWidth}
+        onItemResize={onItemResize}
+        onItemResizeStart={onItemResizeStart}
+        onItemResizeStop={onItemResizeStop}
       >
         {children}
       </ResizableBlockPaper>

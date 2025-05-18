@@ -28,8 +28,8 @@ export const IconWithLoader = (props: Props): React.ReactNode => {
   if (Boolean(icon) === false) {
     return (
       <Icon
-        icon={firstLetter}
         disabled={disabled}
+        icon={firstLetter}
       />
     )
   }
@@ -48,8 +48,8 @@ export const IconWithLoader = (props: Props): React.ReactNode => {
 
   return (
     <Icon
-      icon={icon}
       disabled={disabled}
+      icon={icon}
       tooltipText={tooltipText}
     />
   )

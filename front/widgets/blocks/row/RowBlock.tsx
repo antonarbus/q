@@ -10,11 +10,11 @@ import {
 export const RowBlock = (): React.JSX.Element => {
   return (
     <BlockComp
+      autoWidth
       className={cls.boqBlock}
-      autoWidth={true}
       minWidth={560}
-      onBlockResizeStart={onBoqBlockResizeStart}
       onBlockResize={onBoqBlockResize}
+      onBlockResizeStart={onBoqBlockResizeStart}
       onBlockResizeStop={onBoqBlockResizeStop}
     >
       <OneRow />

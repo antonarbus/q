@@ -23,17 +23,17 @@ export const PriceValue = (): React.JSX.Element => {
   return (
     <Froala
       editorRef={editorRef}
-      placeholder='Total price...'
       htmlGetter={() => getPriceBlockHtmlFromStore({ blockIndex })}
-      onContentChange={() => {
-        updatePriceValueCell({ editorRef, blockIndex })
-      }}
       onBlur={() => {
         validateTotalPrice({ editorRef, blockIndex })
+      }}
+      onContentChange={() => {
+        updatePriceValueCell({ editorRef, blockIndex })
       }}
       onInitialized={() => {
         validateTotalPrice({ editorRef, blockIndex })
       }}
+      placeholder='Total price...'
     />
   )
 }

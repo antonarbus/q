@@ -30,22 +30,11 @@ export const ResizableColumn = ({
   return (
     <Resizable
       className={className}
-      enable={{
-        right: true,
-      }}
-      minWidth={minWidth}
-      size={{
-        width: colWidth,
-        height: 'auto',
-      }}
-      style={{
-        display: 'block',
-        flexGrow: 0,
-        width: colWidth,
-        maxWidth: colWidth,
-      }}
       css={{
         flexShrink: '1 !important',
+      }}
+      enable={{
+        right: true,
       }}
       handleStyles={{
         right: {
@@ -56,15 +45,16 @@ export const ResizableColumn = ({
           zIndex: 1,
         },
       }}
-      onResizeStart={(event, direction, element): void => {
-        onColumnResizeStart({
+      minWidth={minWidth}
+      onResize={(event, direction, element, delta): void => {
+        onColumnResize({
           headerColumnElement: element,
           blockIndex: 0,
           boqColumnKey,
         })
       }}
-      onResize={(event, direction, element, delta): void => {
-        onColumnResize({
+      onResizeStart={(event, direction, element): void => {
+        onColumnResizeStart({
           headerColumnElement: element,
           blockIndex: 0,
           boqColumnKey,
@@ -76,6 +66,16 @@ export const ResizableColumn = ({
           blockIndex: 0,
           boqColumnKey,
         })
+      }}
+      size={{
+        width: colWidth,
+        height: 'auto',
+      }}
+      style={{
+        display: 'block',
+        flexGrow: 0,
+        width: colWidth,
+        maxWidth: colWidth,
       }}
     >
       {children}

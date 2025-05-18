@@ -23,18 +23,16 @@ export const PasswordField = ({
 
   return (
     <TextField
-      fullWidth
-      name='password'
-      label={label ?? 'Password'}
-      type={showPassword.value ? 'text' : 'password'}
       autoComplete='current-password'
-      placeholder='Password'
       autoFocus={autoFocus}
-      value={passwordSignal.value}
+      fullWidth
+      label={label ?? 'Password'}
+      name='password'
       onBlur={onBlur}
       onChange={(event): void => {
         passwordSignal.value = event.target.value
       }}
+      placeholder='Password'
       slotProps={{
         input: {
           startAdornment: (
@@ -64,6 +62,8 @@ export const PasswordField = ({
           background: 'white',
         },
       }}
+      type={showPassword.value ? 'text' : 'password'}
+      value={passwordSignal.value}
     />
   )
 }

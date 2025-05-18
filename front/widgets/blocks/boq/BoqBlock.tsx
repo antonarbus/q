@@ -19,12 +19,8 @@ export const BoqBlock = (): React.JSX.Element => {
   return (
     <BoqProvider>
       <BlockComp
+        autoWidth
         className={cls.boqBlock}
-        autoWidth={true}
-        minWidth={560}
-        onBlockResizeStart={onBoqBlockResizeStart}
-        onBlockResize={onBoqBlockResize}
-        onBlockResizeStop={onBoqBlockResizeStop}
         leftBlockActionButtons={
           <ItemActionButtonsLayout>
             <DragBlockIcon />
@@ -32,6 +28,10 @@ export const BoqBlock = (): React.JSX.Element => {
             <CutBlockIcon />
           </ItemActionButtonsLayout>
         }
+        minWidth={560}
+        onBlockResize={onBoqBlockResize}
+        onBlockResizeStart={onBoqBlockResizeStart}
+        onBlockResizeStop={onBoqBlockResizeStop}
         rightBlockActionButtons={
           <ItemActionButtonsLayout>
             <BookmarkBlockIcon />

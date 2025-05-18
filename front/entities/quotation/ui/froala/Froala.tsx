@@ -33,24 +33,23 @@ export const Froala = (props: FroalaProps): React.JSX.Element => {
 
   return (
     <FroalaProvider
+      beforeUpload={props.beforeUpload}
       editorRef={props.editorRef}
-      htmlGetter={props.htmlGetter}
-      style={props.style}
-      sx={props.sx}
-      placeholder={props.placeholder}
-      onContentChange={props.onContentChange}
-      onFocus={props.onFocus}
-      onClick={props.onClick}
-      onBlur={props.onBlur}
-      onKeydown={props.onKeydown}
-      onInitialized={props.onInitialized}
       froalaElementRef={froalaElementRef}
       froalaHeightRef={froalaHeightRef}
-      beforeUpload={props.beforeUpload}
+      htmlGetter={props.htmlGetter}
+      onBlur={props.onBlur}
+      onClick={props.onClick}
+      onContentChange={props.onContentChange}
+      onFocus={props.onFocus}
+      onInitialized={props.onInitialized}
+      onKeydown={props.onKeydown}
+      placeholder={props.placeholder}
+      style={props.style}
+      sx={props.sx}
     >
       <Box
         className={`froala-wrapper ${props.className ?? ''}`}
-        style={props.wrapperStyles}
         onClick={(event: React.MouseEvent) => {
           placeCaretAtTheEndIfToolbarIsNotShown({
             event,
@@ -64,6 +63,7 @@ export const Froala = (props: FroalaProps): React.JSX.Element => {
         onMouseLeave={() => {
           showDropFilesTextOnMouseLeave({ dropFilesTextRef })
         }}
+        style={props.wrapperStyles}
       >
         <Box
           className={props.droppable === true ? cls.droppable : ''}

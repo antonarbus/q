@@ -34,24 +34,24 @@ export const SettingsModal = (): React.JSX.Element => {
 
   return (
     <BackdropWithSlidableModal
-      shouldUnmountOnClickAway
-      shouldUnmountOnEsc
       onUnmount={(): void => {
         void navigate('..')
       }}
+      shouldUnmountOnClickAway
+      shouldUnmountOnEsc
     >
       <CardCustom
-        reference={cardRef}
-        title={getState().user.email}
         logo={
           <Avatar sx={{ margin: 1, bgcolor: theme.colors.darkBackground }}>
             <IoSettingsOutline />
           </Avatar>
         }
+        reference={cardRef}
         sx={{
           paddingLeft: '20px',
           paddingRight: '20px',
         }}
+        title={getState().user.email}
       >
         <Box
           sx={{
@@ -73,17 +73,17 @@ export const SettingsModal = (): React.JSX.Element => {
           {isSuccess && (
             <>
               <Box
+                onClick={() => {
+                  if (totalCount > 0) {
+                    setCollapseOpen(collapseOpen === false)
+                  }
+                }}
                 sx={{
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
                   gap: '5px',
                   cursor: 'pointer',
-                }}
-                onClick={() => {
-                  if (totalCount > 0) {
-                    setCollapseOpen(collapseOpen === false)
-                  }
                 }}
               >
                 <GrStorage />
@@ -103,11 +103,11 @@ export const SettingsModal = (): React.JSX.Element => {
               </Box>
               <Collapse
                 in={collapseOpen}
-                timeout='auto'
-                unmountOnExit
                 sx={{
                   width: '100%',
                 }}
+                timeout='auto'
+                unmountOnExit
               >
                 {data.fileList.map((item) => {
                   return (

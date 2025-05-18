@@ -21,18 +21,14 @@ export const CopyBoqRowIcon = (): React.JSX.Element => {
 
   return (
     <Tooltip
-      title='Copy'
-      placement='left'
       enterDelay={500}
       enterNextDelay={500}
+      placement='left'
+      title='Copy'
     >
       <span className={cls.actionIconContainer}>
         <MdCopyAll
           className={cls.actionIcon}
-          tabIndex={-1}
-          style={{
-            color: disabled === true ? '#acacac' : '#000',
-          }}
           onClick={(event: MouseEvent): void => {
             if (disabled === true) {
               return
@@ -85,6 +81,10 @@ export const CopyBoqRowIcon = (): React.JSX.Element => {
               dispatch(copySlice.actions.showCopyModal())
             }
           }}
+          style={{
+            color: disabled === true ? '#acacac' : '#000',
+          }}
+          tabIndex={-1}
         />
       </span>
     </Tooltip>

@@ -37,32 +37,32 @@ export const RegisterModal = (): React.JSX.Element => {
 
   return (
     <FormModal
-      modalRef={modalRef}
-      width='350px'
-      paddingContent='50px 40px 10px 40px'
-      headerText='Register'
-      headerIcon={<MdLockOutline />}
       buttonText='REGISTER'
+      headerIcon={<MdLockOutline />}
+      headerText='Register'
       isButtonDisabled={isButtonDisabledSignal.value}
+      isButtonError={isError}
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
-      isButtonError={isError}
-      shouldUnmountOnClickAway
-      shouldUnmountOnEsc
-      onUnmount={navigateUp}
+      modalRef={modalRef}
       onCloseClick={navigateUp}
       onSubmit={onSubmit}
+      onUnmount={navigateUp}
+      paddingContent='50px 40px 10px 40px'
+      shouldUnmountOnClickAway
+      shouldUnmountOnEsc
+      width='350px'
     >
       <EmailField
-        inputRef={inputRef}
-        emailSignal={emailSignal}
-        isEmailOkSignal={isEmailOkSignal}
         autoFocus
+        emailSignal={emailSignal}
+        inputRef={inputRef}
+        isEmailOkSignal={isEmailOkSignal}
       />
       <PasswordField passwordSignal={passwordSignal} />
       <ConfirmPasswordField
-        originalPasswordSignal={passwordSignal}
         isConfirmPasswordOkSignal={isConfirmPasswordOkSignal}
+        originalPasswordSignal={passwordSignal}
       />
       <Box
         sx={{

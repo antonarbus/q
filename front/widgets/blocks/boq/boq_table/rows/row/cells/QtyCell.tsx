@@ -35,7 +35,6 @@ export const QtyCell = (): React.JSX.Element => {
       <Froala
         className={`td ${boqRowCellKey.qty}`}
         editorRef={qtyCellEditorRef}
-        placeholder='Qty...'
         htmlGetter={() =>
           getBoqCellHtmlFromStore({
             blockIndex,
@@ -43,6 +42,9 @@ export const QtyCell = (): React.JSX.Element => {
             boqRowCellKey: boqRowCellKey.qty,
           })
         }
+        onBlur={() => {
+          formatBoqRowQtyCell({ blockIndex, qtyCellEditorRef, rowIndex })
+        }}
         onContentChange={() => {
           updateBoqRowQtyCell({
             blockIndex,
@@ -52,15 +54,13 @@ export const QtyCell = (): React.JSX.Element => {
             subTotalPriceEditorRef,
           })
         }}
-        onBlur={() => {
-          formatBoqRowQtyCell({ blockIndex, qtyCellEditorRef, rowIndex })
-        }}
         onKeydown={(event) => {
           tabFromQtyCell({ event, rowIndex, priceCellEditorRef })
         }}
-        wrapperStyles={stylesForResizableCell}
+        placeholder='Qty...'
         style={boqRowCellStyle}
         sx={boqRowCellSx}
+        wrapperStyles={stylesForResizableCell}
       />
       <Pin
         boqRowCellKey={boqRowCellKey.qty}

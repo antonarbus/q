@@ -32,8 +32,16 @@ export const SubTotalPrice = (): React.JSX.Element => {
   return (
     <Froala
       editorRef={subTotalPriceEditorRef}
-      placeholder='Price...'
       htmlGetter={() => getBoqHeaderHtmlFromStore({ blockIndex, boqHeaderKey })}
+      onBlur={() => {
+        formatSubtotalPriceCell({ blockIndex, subTotalPriceEditorRef })
+
+        validateBoqRowPrices({
+          blockIndex,
+          boqRowEditorRefs,
+          subTotalPriceEditorRef,
+        })
+      }}
       onClick={(event: React.MouseEvent) => {
         showHideBoqPricePins({
           blockIndex,
@@ -49,15 +57,7 @@ export const SubTotalPrice = (): React.JSX.Element => {
           subTotalPriceEditorRef,
         })
       }}
-      onBlur={() => {
-        formatSubtotalPriceCell({ blockIndex, subTotalPriceEditorRef })
-
-        validateBoqRowPrices({
-          blockIndex,
-          boqRowEditorRefs,
-          subTotalPriceEditorRef,
-        })
-      }}
+      placeholder='Price...'
       style={subTotalPriceCellStyle}
     />
   )

@@ -56,16 +56,16 @@ export const FormModal = ({
 }: Props): React.JSX.Element => {
   return (
     <BackdropWithSlidableModal
+      onUnmount={onUnmount}
       shouldUnmountOnClickAway={shouldUnmountOnClickAway}
       shouldUnmountOnEsc={shouldUnmountOnEsc}
-      onUnmount={onUnmount}
     >
       <Box
-        ref={modalRef}
         className={cls.formModal}
         onMouseDown={(event: React.MouseEvent): void => {
           event.stopPropagation()
         }}
+        ref={modalRef}
         sx={{
           display: 'flex',
           flexDirection: 'column',
@@ -112,12 +112,12 @@ export const FormModal = ({
             {headerText}
           </Typography>
           <IconButton
+            onClick={onCloseClick}
             sx={{
               position: 'absolute',
               top: '-35px',
               right: '-35px',
             }}
-            onClick={onCloseClick}
           >
             <IoClose
               css={{
@@ -132,7 +132,6 @@ export const FormModal = ({
         <Box
           className='card-content'
           component='form'
-          id='form'
           css={{
             display: 'flex',
             flexDirection: 'column',
@@ -146,6 +145,7 @@ export const FormModal = ({
               },
             },
           }}
+          id='form'
           onSubmit={onSubmit}
         >
           <AnimatePresence initial={false}>
@@ -156,12 +156,6 @@ export const FormModal = ({
 
               return (
                 <motion.div
-                  key={`form-child-${String(index)}`}
-                  initial={{
-                    height: 0,
-                    marginTop: 0,
-                    opacity: 0,
-                  }}
                   animate={{
                     height: 'auto',
                     marginTop: '25px',
@@ -172,6 +166,12 @@ export const FormModal = ({
                     marginTop: 0,
                     opacity: 0,
                   }}
+                  initial={{
+                    height: 0,
+                    marginTop: 0,
+                    opacity: 0,
+                  }}
+                  key={`form-child-${String(index)}`}
                 >
                   {child}
                 </motion.div>
@@ -192,13 +192,13 @@ export const FormModal = ({
             }}
           >
             <ButtonCustom
+              form='form'
               isButtonDisabled={
                 Boolean(isButtonDisabled) || Boolean(isButtonLoading)
               }
+              isButtonError={isButtonError}
               isButtonLoading={isButtonLoading}
               isButtonSuccess={isButtonSuccess}
-              isButtonError={isButtonError}
-              form='form'
               sx={{ width: '200px' }}
             >
               {buttonText}

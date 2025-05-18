@@ -45,9 +45,9 @@ export const ButtonCustom = ({
   return (
     <Button
       className='button'
-      variant='contained'
-      type='submit'
       disabled={isButtonDisabled}
+      type='submit'
+      variant='contained'
       {...restProps}
       sx={{
         alignSelf: 'center',

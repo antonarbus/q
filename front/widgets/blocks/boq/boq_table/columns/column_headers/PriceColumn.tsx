@@ -19,12 +19,11 @@ export const PriceColumn = (): React.JSX.Element => {
     <ResizableColumn
       boqColumnKey={boqColumnKey.price}
       className={`th ${boqColumnKey.price} resizable`}
-      minWidth={columnMinWidth.price}
       flexGrow={0}
+      minWidth={columnMinWidth.price}
     >
       <Froala
         editorRef={editorRef}
-        placeholder='Price...'
         htmlGetter={() =>
           getBoqColumnHtmlFromStore({
             blockIndex,
@@ -38,6 +37,7 @@ export const PriceColumn = (): React.JSX.Element => {
             editorRef,
           })
         }}
+        placeholder='Price...'
         style={columnHeaderStyle}
       />
     </ResizableColumn>

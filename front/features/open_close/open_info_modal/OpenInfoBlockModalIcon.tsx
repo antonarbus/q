@@ -14,21 +14,15 @@ export const OpenInfoBlockModalIcon = (): React.ReactNode => {
 
   return (
     <Tooltip
-      title='Info'
-      placement='right'
       enterDelay={500}
       enterNextDelay={500}
+      placement='right'
+      title='Info'
     >
       <span className={cls.actionIconContainer}>
         <HiOutlineInformationCircle
-          className={cls.actionIcon}
           aria-hidden={false} // otherwise error in dev tools
-          tabIndex={-1}
-          style={{
-            color: disabled === true ? '#acacac' : '#000',
-            cursor: 'pointer',
-            touchAction: 'none',
-          }}
+          className={cls.actionIcon}
           onClick={(event: React.MouseEvent): void => {
             if (disabled === true) {
               return
@@ -46,6 +40,12 @@ export const OpenInfoBlockModalIcon = (): React.ReactNode => {
 
             void navigate(`./${route.info}/${item.id}`)
           }}
+          style={{
+            color: disabled === true ? '#acacac' : '#000',
+            cursor: 'pointer',
+            touchAction: 'none',
+          }}
+          tabIndex={-1}
         />
       </span>
     </Tooltip>

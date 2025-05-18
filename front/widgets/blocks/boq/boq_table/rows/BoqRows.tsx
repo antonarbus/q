@@ -32,9 +32,9 @@ export const BoqRows = (): React.JSX.Element => {
             if (boqRow.type === boqRowKey.row) {
               return (
                 <RowProvider
-                  rowIndex={rowIndex}
-                  row={boqRow}
                   key={boqRow.id}
+                  row={boqRow}
+                  rowIndex={rowIndex}
                 >
                   <BoqRowAnimate>
                     <BoqRowSortable>

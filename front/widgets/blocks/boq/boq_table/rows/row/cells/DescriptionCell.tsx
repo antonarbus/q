@@ -25,11 +25,10 @@ export const DescriptionCell = (): React.JSX.Element => {
 
   return (
     <Froala
-      className={`td ${boqRowCellKey.description}`}
-      editorRef={descriptionEditorRef}
-      placeholder='Description...'
       beforeUpload={beforeUpload}
+      className={`td ${boqRowCellKey.description}`}
       droppable
+      editorRef={descriptionEditorRef}
       htmlGetter={() =>
         getBoqCellHtmlFromStore({
           blockIndex,
@@ -52,7 +51,7 @@ export const DescriptionCell = (): React.JSX.Element => {
           rowIndex,
         })
       }}
-      wrapperStyles={stylesForResizableCell}
+      placeholder='Description...'
       style={{
         ...boqRowCellStyle,
         textAlign: 'left',
@@ -62,6 +61,7 @@ export const DescriptionCell = (): React.JSX.Element => {
           left: 0,
         },
       }}
+      wrapperStyles={stylesForResizableCell}
     />
   )
 }

@@ -11,10 +11,10 @@ export const OpenQuotationPageAndLoadFromServerButton = ({
 }: Props): React.ReactNode => {
   return (
     <Tooltip
-      title='Open'
-      placement='bottom'
       enterDelay={500}
       enterNextDelay={500}
+      placement='bottom'
+      title='Open'
     >
       <Link to={`/${id}`}>
         <IconButton size='small'>

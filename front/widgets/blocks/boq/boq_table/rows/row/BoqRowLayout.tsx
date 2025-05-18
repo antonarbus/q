@@ -16,8 +16,8 @@ export const BoqRowLayout = ({
 
   return (
     <Box
-      id={row.id}
       className={cls.boqRow}
+      id={row.id}
       onBlur={(event) => {
         onBlur(event)
       }}

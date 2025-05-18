@@ -31,20 +31,20 @@ export const ShareQuotationModal = (): React.JSX.Element => {
 
   return (
     <FormModal
-      modalRef={modalRef}
-      width='500px'
-      headerText='Share'
-      headerIcon={<ImLink />}
       buttonText={isNewQuotation === true ? 'Save and share' : 'Update'}
+      headerIcon={<ImLink />}
+      headerText='Share'
       isButtonDisabled={isButtonDisabled}
+      isButtonError={isError}
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
-      isButtonError={isError}
-      shouldUnmountOnClickAway
-      shouldUnmountOnEsc
-      onUnmount={navigateUp}
+      modalRef={modalRef}
       onCloseClick={navigateUp}
       onSubmit={onSubmit}
+      onUnmount={navigateUp}
+      shouldUnmountOnClickAway
+      shouldUnmountOnEsc
+      width='500px'
     >
       <ShareQuotationField accessFormValuesSignal={accessFormValuesSignal} />
     </FormModal>

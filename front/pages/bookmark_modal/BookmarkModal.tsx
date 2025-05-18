@@ -40,19 +40,19 @@ export const BookmarkModal = (): React.JSX.Element => {
 
   return (
     <FormModal
-      modalRef={modalRef}
-      width='500px'
+      buttonText='SAVE'
       headerIcon={<FiEdit3 />}
       headerText='Save bookmark'
-      buttonText='SAVE'
+      isButtonError={isError}
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
-      isButtonError={isError}
-      shouldUnmountOnClickAway
-      shouldUnmountOnEsc
-      onUnmount={navigateUp}
+      modalRef={modalRef}
       onCloseClick={navigateUp}
       onSubmit={onSubmit}
+      onUnmount={navigateUp}
+      shouldUnmountOnClickAway
+      shouldUnmountOnEsc
+      width='500px'
     >
       <NameField nameSignal={bookmarkFromValues.nameSignal} />
       <CategoryField

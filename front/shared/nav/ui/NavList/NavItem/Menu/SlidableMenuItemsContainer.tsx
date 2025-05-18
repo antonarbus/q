@@ -23,16 +23,16 @@ export const SlidableMenuItemsContainer = ({
     ?.filter((item) => item.isHidden === false)
     .map((item, index) => (
       <MenuItem
-        navItem={item}
-        key={item.id}
         hoverIndex={index + 1}
+        key={item.id}
+        navItem={item}
       />
     ))
 
   return (
     <div
-      ref={reference}
       className={className}
+      ref={reference}
     >
       {menuItemsNotHidden}
     </div>

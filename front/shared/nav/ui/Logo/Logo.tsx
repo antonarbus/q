@@ -16,9 +16,9 @@ export const Logo = (): React.JSX.Element => {
     >
       <Box className='logo'>
         <img
+          alt='logo'
           className='logo-image'
           src={logoSrc}
-          alt='logo'
           style={{
             height: 'auto',
             width: '140px',

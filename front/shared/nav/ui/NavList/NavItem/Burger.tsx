@@ -10,19 +10,19 @@ export const Burger = (): React.JSX.Element => {
 
   return (
     <BurgerIcon
-      data-testid='hamburger icon'
-      toggled={isOpen}
-      toggle={(): void => {
-        dispatch(navSlice.actions.toggleBurger())
-      }}
-      size={20}
       color={theme.colors.greyFont}
-      rounded
+      data-testid='hamburger icon'
       label='Show menu'
       onToggle={(toggled): void => {
         // if (toggled) console.log('menu opened')
         // if (!toggled) dispatch(closeMenu())
       }}
+      rounded
+      size={20}
+      toggle={(): void => {
+        dispatch(navSlice.actions.toggleBurger())
+      }}
+      toggled={isOpen}
     />
   )
 }

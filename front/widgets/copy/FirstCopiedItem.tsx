@@ -81,16 +81,15 @@ export const FirstCopiedItem = (): React.JSX.Element | null => {
 
   return (
     <AnimatePresence
-      mode='wait'
       custom={animationProps}
+      mode='wait'
     >
       <motion.div
-        key={items.length}
-        custom={animationProps}
-        variants={variants}
-        initial='initial'
         animate='animate'
+        custom={animationProps}
         exit='exit'
+        initial='initial'
+        key={items.length}
         style={{
           height,
           width,
@@ -101,11 +100,12 @@ export const FirstCopiedItem = (): React.JSX.Element | null => {
           boxShadow: '#00000033 0px 0px 6px 2px',
           overflow: 'hidden',
         }}
+        variants={variants}
       >
         <ScaledCopyItem
           html={firstPreview ?? '∑'}
-          width={firstItem.width}
           scaleFactor={String(scaleFactorForFirstItem)}
+          width={firstItem.width}
         />
       </motion.div>
     </AnimatePresence>

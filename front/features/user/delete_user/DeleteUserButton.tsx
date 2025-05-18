@@ -37,13 +37,12 @@ export const DeleteUserButton = ({ email }: Payload): React.ReactNode => {
 
   return (
     <Tooltip
-      title='Delete'
-      placement='bottom'
       enterDelay={500}
       enterNextDelay={500}
+      placement='bottom'
+      title='Delete'
     >
       <IconButton
-        size='small'
         onClick={() => {
           // Step 1: Initial confirmation
           const askInitialConfirmation = (): boolean => {
@@ -78,6 +77,7 @@ export const DeleteUserButton = ({ email }: Payload): React.ReactNode => {
 
           deleteUser({ email })
         }}
+        size='small'
       >
         {isPending === false && <MdDeleteOutline />}
         {isPending && <RotatingLoaderIcon />}

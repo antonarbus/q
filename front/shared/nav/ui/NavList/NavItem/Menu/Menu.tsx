@@ -44,13 +44,7 @@ export const Menu = (): React.JSX.Element => {
 
   return (
     <div
-      ref={menuContainerRef}
       className='drop-down-nav-menu'
-      onMouseLeave={(): void => {
-        dispatch(
-          navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: -1 }),
-        )
-      }}
       css={css`
         position: absolute;
         top: calc(100% + 5px);
@@ -87,22 +81,28 @@ export const Menu = (): React.JSX.Element => {
           transform: translateX(9999px);
         }
       `}
+      onMouseLeave={(): void => {
+        dispatch(
+          navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: -1 }),
+        )
+      }}
+      ref={menuContainerRef}
     >
       <TopMenuItemsContainer />
       <SlidableMenuItemsContainer
-        reference={currentMenuRef}
-        menuNavItemId={currentMenuNavItemId}
         className='slidable current'
+        menuNavItemId={currentMenuNavItemId}
+        reference={currentMenuRef}
       />
       <SlidableMenuItemsContainer
-        reference={nextMenuRef}
-        menuNavItemId={nextMenuNavItemId}
         className='slidable next'
+        menuNavItemId={nextMenuNavItemId}
+        reference={nextMenuRef}
       />
       <SlidableMenuItemsContainer
-        reference={fakeMenuRef}
-        menuNavItemId={nextMenuNavItemId}
         className='measurable-div'
+        menuNavItemId={nextMenuNavItemId}
+        reference={fakeMenuRef}
       />
       {isProfileMenu && <EmailAtBottomOfMenu />}
     </div>

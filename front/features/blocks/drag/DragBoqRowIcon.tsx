@@ -15,20 +15,20 @@ export const DragBoqRowIcon = (): React.JSX.Element => {
 
   return (
     <Tooltip
-      title='Drag'
-      placement='left'
       enterDelay={500}
       enterNextDelay={500}
+      placement='left'
+      title='Drag'
     >
       <span className={cls.actionIconContainer}>
         <MdDragIndicator
           {...listeners}
           className={cls.actionIcon}
-          tabIndex={-1}
           style={{
             cursor: 'move',
             color: disabled === true ? '#acacac' : '#000',
           }}
+          tabIndex={-1}
         />
       </span>
     </Tooltip>

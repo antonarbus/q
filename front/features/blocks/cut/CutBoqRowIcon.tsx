@@ -25,18 +25,14 @@ export const CutBoqRowIcon = (): React.JSX.Element => {
 
   return (
     <Tooltip
-      title='Cut'
-      placement='left'
       enterDelay={500}
       enterNextDelay={500}
+      placement='left'
+      title='Cut'
     >
       <span className={cls.actionIconContainer}>
         <TbCut
           className={cls.actionIcon}
-          tabIndex={-1}
-          style={{
-            color: disabled === true ? '#acacac' : '#000',
-          }}
           onClick={(event: MouseEvent): void => {
             if (disabled === true) {
               return
@@ -100,6 +96,10 @@ export const CutBoqRowIcon = (): React.JSX.Element => {
               dispatch(copySlice.actions.allowAllActions())
             }, 1000 * theme.block.animationDuration)
           }}
+          style={{
+            color: disabled === true ? '#acacac' : '#000',
+          }}
+          tabIndex={-1}
         />
       </span>
     </Tooltip>

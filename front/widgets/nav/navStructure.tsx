@@ -56,8 +56,8 @@ export const navStructure: NavItem[] = [
         id: navItemId.back,
         icon: (
           <IoChevronBackOutline
-            style={{ color: '#3bc3ff' }}
             data-testid='back icon'
+            style={{ color: '#3bc3ff' }}
           />
         ),
         isHidden: true,

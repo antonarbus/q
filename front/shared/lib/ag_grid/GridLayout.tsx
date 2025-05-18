@@ -11,8 +11,8 @@ export const GridLayout = ({
 }: Props): React.JSX.Element => {
   return (
     <Box
-      ref={gridContainerRef}
       className='q-table'
+      ref={gridContainerRef}
       sx={{
         flexGrow: 1,
         position: 'relative',

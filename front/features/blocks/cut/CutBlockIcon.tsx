@@ -24,19 +24,14 @@ export const CutBlockIcon = (): React.JSX.Element => {
 
   return (
     <Tooltip
-      title='Cut'
-      placement='left'
       enterDelay={500}
       enterNextDelay={500}
+      placement='left'
+      title='Cut'
     >
       <span className={cls.actionIconContainer}>
         <TbCut
-          tabIndex={-1}
           className={cls.actionIcon}
-          style={{
-            color: disabled === true ? '#acacac' : '#000',
-            cursor: disabled === true ? 'default' : 'pointer',
-          }}
           onClick={(event: MouseEvent): void => {
             if (disabled === true) {
               return
@@ -103,6 +98,11 @@ export const CutBlockIcon = (): React.JSX.Element => {
               1000 * theme.block.animationDuration + 500,
             )
           }}
+          style={{
+            color: disabled === true ? '#acacac' : '#000',
+            cursor: disabled === true ? 'default' : 'pointer',
+          }}
+          tabIndex={-1}
         />
       </span>
     </Tooltip>

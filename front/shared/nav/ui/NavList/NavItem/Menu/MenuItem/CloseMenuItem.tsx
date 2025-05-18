@@ -16,7 +16,7 @@ export const CloseMenuItem = (): React.JSX.Element => {
 
   return (
     <MenuItemLayout
-      to='/'
+      isHovered={isHovered}
       onClick={(event: MouseEvent): void => {
         event.preventDefault()
         dispatch(navSlice.actions.closeMenu())
@@ -26,7 +26,7 @@ export const CloseMenuItem = (): React.JSX.Element => {
           navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
         )
       }}
-      isHovered={isHovered}
+      to='/'
     >
       <Icon icon={closeIcon} />
       <TextInMenu name={<span style={{ color }}>Close</span>} />

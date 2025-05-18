@@ -12,9 +12,9 @@ export const BoqRows = (): React.ReactNode => {
 
   return (
     <RowProvider
-      rowIndex={0}
-      row={block}
       key={block.id}
+      row={block}
+      rowIndex={0}
     >
       <BoqRow
         onBlur={(event) => {

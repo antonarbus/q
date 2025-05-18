@@ -12,12 +12,12 @@ const InputComponent = forwardRef(
     return (
       <div
         {...other}
-        ref={ref}
         css={{
           overflow: 'hidden',
           backgroundColor: 'white',
           width: '100%',
         }}
+        ref={ref}
       />
     )
   },
@@ -35,8 +35,8 @@ export const OutlinedDivWithLabel = ({
   return (
     <TextField
       disabled={false}
-      fullWidth
       focused
+      fullWidth
       label={label}
       slotProps={{
         htmlInput: {

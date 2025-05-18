@@ -15,7 +15,6 @@ export const PriceBlock = (): React.JSX.Element => {
   return (
     <BlockComp
       className={cls.priceBlock}
-      onBlockResizeStop={onPriceBlockResizeStop}
       leftBlockActionButtons={
         <ItemActionButtonsLayout>
           <DragBlockIcon />
@@ -23,6 +22,7 @@ export const PriceBlock = (): React.JSX.Element => {
           <CutBlockIcon />
         </ItemActionButtonsLayout>
       }
+      onBlockResizeStop={onPriceBlockResizeStop}
       rightBlockActionButtons={
         <ItemActionButtonsLayout>
           <BookmarkBlockIcon />

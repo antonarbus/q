@@ -19,15 +19,15 @@ export const SharedWithCellRenderer = (
     return (
       <Link to={`${route.share}/${quotationId}`}>
         <Chip
-          label='nobody'
-          variant='outlined'
           color='warning'
+          label='nobody'
           size='small'
           sx={{
             width: 'min-content',
             margin: '2px',
             fontSize: '10px',
           }}
+          variant='outlined'
         />
       </Link>
     )
@@ -37,15 +37,15 @@ export const SharedWithCellRenderer = (
     return (
       <Link to={`share/${quotationId}`}>
         <Chip
-          label='everyone'
-          variant='outlined'
           color='info'
+          label='everyone'
           size='small'
           sx={{
             width: 'min-content',
             margin: '2px',
             fontSize: '10px',
           }}
+          variant='outlined'
         />
       </Link>
     )
@@ -57,19 +57,19 @@ export const SharedWithCellRenderer = (
         return (
           <Tooltip
             key={email}
-            title={userList.join('; ')}
             placement='top'
+            title={userList.join('; ')}
           >
             <Link to={`share/${quotationId}`}>
               <Chip
                 label={email}
-                variant='outlined'
                 size='small'
                 sx={{
                   width: 'min-content',
                   margin: '2px',
                   fontSize: '10px',
                 }}
+                variant='outlined'
               />
             </Link>
           </Tooltip>

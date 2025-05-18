@@ -62,25 +62,23 @@ export const EmailField = ({
   return (
     <div style={{ position: 'relative' }}>
       <TextField
-        inputRef={inputRef}
+        autoComplete='email'
+        autoFocus={autoFocus}
         disabled={disabled}
         fullWidth
         id='email'
-        type='email'
-        name='email'
-        autoComplete='email'
-        placeholder='Email'
+        inputRef={inputRef}
         label={emailLabelSignal.value}
-        autoFocus={autoFocus}
-        value={emailSignal.value}
-        onChange={(event): void => {
-          emailSignal.value = event.target.value
-        }}
+        name='email'
         onBlur={(): void => {
           inputFocusedOutOnesSignal.value = true
           suggestEmail(emailSignal.value)
           onClickAway?.()
         }}
+        onChange={(event): void => {
+          emailSignal.value = event.target.value
+        }}
+        placeholder='Email'
         slotProps={{
           input: {
             startAdornment: (
@@ -99,6 +97,8 @@ export const EmailField = ({
             background: 'white',
           },
         }}
+        type='email'
+        value={emailSignal.value}
       />
       {Boolean(emailSuggestionSignal.value) && (
         <div
@@ -112,12 +112,12 @@ export const EmailField = ({
         >
           Did you mean?{' '}
           <a
-            style={{ textDecoration: 'underline' }}
             onClick={(event): void => {
               event.preventDefault()
               emailSignal.value = emailSuggestionSignal.value
               suggestEmail(emailSuggestionSignal.value)
             }}
+            style={{ textDecoration: 'underline' }}
           >
             {emailSuggestionSignal.value}
           </a>

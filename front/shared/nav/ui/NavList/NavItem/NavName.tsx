@@ -33,13 +33,13 @@ export const NavName = ({ name }: Props): React.ReactNode => {
 
   return (
     <span
-      ref={ref}
       className='nav-item-name'
       css={{
         display: 'inline-flex',
         alignItems: 'center',
         marginLeft: '5px',
       }}
+      ref={ref}
     >
       <span
         className='nav-item-text'

@@ -15,13 +15,12 @@ export const DescriptionField = ({
       <TextField
         disabled={false}
         fullWidth
-        name='description'
-        placeholder='Short description'
         label='Description'
         multiline
+        name='description'
+        placeholder='Short description'
         rows={2}
         {...props}
-        value={descSignal.value}
         onChange={(event): void => {
           descSignal.value = event.target.value
         }}
@@ -49,6 +48,7 @@ export const DescriptionField = ({
             background: 'white',
           },
         }}
+        value={descSignal.value}
       />
     </div>
   )

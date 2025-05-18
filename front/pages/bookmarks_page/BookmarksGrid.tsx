@@ -40,15 +40,10 @@ export const BookmarksGrid = (): React.JSX.Element => {
       <DisplayedRowsCount />
       <ProgressGridBar isShown={isFetching} />
       <AgGridReact<ItemPick>
-        ref={bookmarksAgGridRef}
-        theme={themeQuartz}
-        rowData={data?.bookmarks}
-        getRowId={(params) => params.data.id}
-        defaultColDef={defaultColDef}
         columnDefs={columnDefs}
-        suppressCellFocus
-        suppressColumnVirtualisation
+        defaultColDef={defaultColDef}
         enableCellTextSelection
+        getRowId={(params) => params.data.id}
         loadingOverlayComponent={LoadingTableOverlay}
         noRowsOverlayComponent={NoRowsTableOverlay}
         onGridReady={() => {
@@ -58,6 +53,11 @@ export const BookmarksGrid = (): React.JSX.Element => {
           const count = params.api.getDisplayedRowCount()
           dispatch(agGridSlice.actions.setCount({ count }))
         }}
+        ref={bookmarksAgGridRef}
+        rowData={data?.bookmarks}
+        suppressCellFocus
+        suppressColumnVirtualisation
+        theme={themeQuartz}
       />
     </GridLayout>
   )

@@ -18,11 +18,11 @@ export const SubtotalText = (): React.JSX.Element => {
   return (
     <Froala
       editorRef={editorRef}
-      placeholder='Subtotal...'
       htmlGetter={() => getBoqHeaderHtmlFromStore({ blockIndex, boqHeaderKey })}
       onContentChange={() => {
         updateSubtotalTextCell({ editorRef, blockIndex, boqHeaderKey })
       }}
+      placeholder='Subtotal...'
       style={subTotalTextCellStyle}
     />
   )

@@ -27,11 +27,11 @@ export const BlocksSortableContext = ({
 
   return (
     <DndContext
-      sensors={sensors}
       autoScroll={{ layoutShiftCompensation: false }}
       collisionDetection={closestCenter}
-      onDragStart={onBlockDragStart}
       onDragEnd={onBlockDragEnd({ itemIds: blockIds })}
+      onDragStart={onBlockDragStart}
+      sensors={sensors}
     >
       <SortableContext
         items={blockIds}

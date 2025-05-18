@@ -15,13 +15,12 @@ export const InfoField = ({
       <TextField
         disabled={false}
         fullWidth
-        name='info'
-        placeholder='Internal info'
         label='Info'
         multiline
+        name='info'
+        placeholder='Internal info'
         rows={4}
         {...props}
-        value={infoSignal.value}
         onChange={(event): void => {
           infoSignal.value = event.target.value
         }}
@@ -49,6 +48,7 @@ export const InfoField = ({
             background: 'white',
           },
         }}
+        value={infoSignal.value}
       />
     </div>
   )

@@ -28,19 +28,19 @@ export const QtyCell = (): React.JSX.Element => {
       <Froala
         className={`td ${boqRowCellKey.qty}`}
         editorRef={qtyCellEditorRef}
-        placeholder='Qty...'
-        wrapperStyles={stylesForResizableCell}
-        style={boqRowCellStyle}
-        sx={boqRowCellSx}
         htmlGetter={() =>
           getRowCellHtmlFromStore({ boqRowCellKey: boqRowCellKey.qty })
         }
-        onContentChange={() => {
-          updateQtyCell({ priceCellEditorRef, qtyCellEditorRef })
-        }}
         onBlur={() => {
           formatQtyCell({ qtyCellEditorRef })
         }}
+        onContentChange={() => {
+          updateQtyCell({ priceCellEditorRef, qtyCellEditorRef })
+        }}
+        placeholder='Qty...'
+        style={boqRowCellStyle}
+        sx={boqRowCellSx}
+        wrapperStyles={stylesForResizableCell}
       />
     </Box>
   )

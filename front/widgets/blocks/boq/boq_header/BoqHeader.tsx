@@ -6,9 +6,9 @@ import { Title } from './Title'
 export const BoqHeader = (): React.JSX.Element => {
   return (
     <BoqHeaderLayout
-      title={<Title />}
-      subtotalText={<SubtotalText />}
       subTotalPrice={<SubTotalPrice />}
+      subtotalText={<SubtotalText />}
+      title={<Title />}
     />
   )
 }

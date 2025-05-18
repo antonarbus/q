@@ -34,12 +34,12 @@ export const ConfirmPasswordField = ({
 
   return (
     <PasswordField
-      passwordSignal={confirmPasswordSignal}
-      label={labelSignal.value}
       isLabelRed={isLabelRedSignal.value}
+      label={labelSignal.value}
       onBlur={(): void => {
         didBlurSignal.value = true
       }}
+      passwordSignal={confirmPasswordSignal}
     />
   )
 }

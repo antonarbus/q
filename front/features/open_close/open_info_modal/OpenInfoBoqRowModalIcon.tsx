@@ -20,21 +20,15 @@ export const OpenInfoBoqRowModalIcon = (): React.ReactNode => {
 
   return (
     <Tooltip
-      title='Info'
-      placement='right'
       enterDelay={500}
       enterNextDelay={500}
+      placement='right'
+      title='Info'
     >
       <span className={cls.actionIconContainer}>
         <HiOutlineInformationCircle
-          className={cls.actionIcon}
-          tabIndex={-1}
           aria-hidden={false} // otherwise error in dev tools
-          style={{
-            color: disabled === true ? '#acacac' : '#000',
-            cursor: 'pointer',
-            touchAction: 'none',
-          }}
+          className={cls.actionIcon}
           onClick={(event: React.MouseEvent): void => {
             if (disabled === true) {
               return
@@ -52,6 +46,12 @@ export const OpenInfoBoqRowModalIcon = (): React.ReactNode => {
 
             void navigate(`./${route.info}/${boqRow.id}`)
           }}
+          style={{
+            color: disabled === true ? '#acacac' : '#000',
+            cursor: 'pointer',
+            touchAction: 'none',
+          }}
+          tabIndex={-1}
         />
       </span>
     </Tooltip>

@@ -11,8 +11,6 @@ export const OpenRegisterModalLink = ({
 }: Props): React.JSX.Element => {
   return (
     <Link
-      to={`../${route.register}`}
-      style={{ textAlign: 'right' }}
       onClick={(event: React.MouseEvent): void => {
         event.preventDefault()
 
@@ -23,6 +21,8 @@ export const OpenRegisterModalLink = ({
 
         void slideAndNavigate()
       }}
+      style={{ textAlign: 'right' }}
+      to={`../${route.register}`}
     >
       Register
     </Link>

@@ -22,18 +22,14 @@ export const DeleteBoqRowIcon = (): React.JSX.Element => {
 
   return (
     <Tooltip
-      title='Delete'
-      placement='right'
       enterDelay={500}
       enterNextDelay={500}
+      placement='right'
+      title='Delete'
     >
       <span className={cls.actionIconContainer}>
         <GoTrash
           className={cls.actionIcon}
-          tabIndex={-1}
-          style={{
-            color: disabled === true ? '#acacac' : '#000',
-          }}
           css={{
             '&:hover': {
               color: disabled === true ? '#acacac' : 'red !important',
@@ -76,6 +72,10 @@ export const DeleteBoqRowIcon = (): React.JSX.Element => {
               )
             }
           }}
+          style={{
+            color: disabled === true ? '#acacac' : '#000',
+          }}
+          tabIndex={-1}
         />
       </span>
     </Tooltip>

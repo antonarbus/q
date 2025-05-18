@@ -36,16 +36,16 @@ export const StaticHtml = ({
     <Box className='static-html fr-box fr-inline'>
       <Box className='fr-wrapper'>
         <Box
-          ref={staticHtmlRef}
           className='fr-element fr-view'
-          sx={sx}
+          ref={staticHtmlRef}
           style={{
             opacity: 0.5,
             wordBreak: 'break-word',
             ...styleAgainstFroalaBlinks,
             ...style,
           }}
-        ></Box>
+          sx={sx}
+         />
       </Box>
     </Box>
   )

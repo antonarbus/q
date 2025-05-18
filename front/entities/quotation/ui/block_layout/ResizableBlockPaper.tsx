@@ -38,47 +38,37 @@ export const ResizableBlockPaper = ({
 
   return (
     <Resizable
+      bounds={'window'}
       className={cls.paper}
+      enable={{
+        right: disableResize === false,
+        left: disableResize === false,
+      }}
       handleClasses={{
         left: 'left-resize-handle',
         right: 'right-resize-handle',
-      }}
-      size={{
-        width: isAutoWidth === true ? 'auto' : width,
-        height: 'auto',
-      }}
-      style={{
-        background: 'white',
-        borderRadius: 6,
-        boxShadow: '#00000033 0px 0px 10px 0px',
-        position: 'relative',
       }}
       defaultSize={{
         width: isAutoWidth === true ? 'auto' : width,
         height: 'auto',
       }}
       // grid={[20, 0]}
-      minWidth={minWidth ?? '150px'}
       maxWidth='100%'
-      bounds={'window'}
-      enable={{
-        right: disableResize === false,
-        left: disableResize === false,
-      }}
-      onResizeStart={(event, dir, elementRef): void => {
-        onItemResizeStart?.bind(null, {
-          event,
-          dir,
-          elementRef,
-          blockIndex,
-        })()
-      }}
+      minWidth={minWidth ?? '150px'}
       onResize={(event, direction, elementRef, delta): void => {
         onItemResize?.bind(null, {
           event,
           direction,
           elementRef,
           delta,
+          blockIndex,
+        })()
+      }}
+      onResizeStart={(event, dir, elementRef): void => {
+        onItemResizeStart?.bind(null, {
+          event,
+          dir,
+          elementRef,
           blockIndex,
         })()
       }}
@@ -90,6 +80,16 @@ export const ResizableBlockPaper = ({
           delta,
           blockIndex,
         })()
+      }}
+      size={{
+        width: isAutoWidth === true ? 'auto' : width,
+        height: 'auto',
+      }}
+      style={{
+        background: 'white',
+        borderRadius: 6,
+        boxShadow: '#00000033 0px 0px 10px 0px',
+        position: 'relative',
       }}
     >
       {children}

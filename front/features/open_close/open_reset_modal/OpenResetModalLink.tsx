@@ -11,7 +11,6 @@ export const OpenResetModalLink = ({ slideOut }: Props): React.JSX.Element => {
 
   return (
     <Link
-      to={`../${route.requestPasswordReset}`}
       onClick={(event: React.MouseEvent): void => {
         event.preventDefault()
 
@@ -29,6 +28,7 @@ export const OpenResetModalLink = ({ slideOut }: Props): React.JSX.Element => {
 
         void slideAndNavigate()
       }}
+      to={`../${route.requestPasswordReset}`}
     >
       Reset
     </Link>

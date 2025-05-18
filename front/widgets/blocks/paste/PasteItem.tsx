@@ -7,12 +7,6 @@ export const PasteItem = (): React.JSX.Element => {
 
   return (
     <motion.div
-      id={block.id}
-      initial={{
-        height: 0,
-        marginBottom: 0,
-        opacity: 0,
-      }}
       animate={{
         height: 20,
         marginBottom: 20,
@@ -23,10 +17,11 @@ export const PasteItem = (): React.JSX.Element => {
         marginBottom: 0,
         opacity: 0,
       }}
-      transition={{
-        height: { duration: theme.block.animationDuration },
-        marginBottom: { duration: theme.block.animationDuration },
-        opacity: { duration: 0 },
+      id={block.id}
+      initial={{
+        height: 0,
+        marginBottom: 0,
+        opacity: 0,
       }}
       style={{
         display: 'grid',
@@ -34,6 +29,11 @@ export const PasteItem = (): React.JSX.Element => {
         fontWeight: 600,
         color: theme.copy.pasteTextColor,
         userSelect: 'none',
+      }}
+      transition={{
+        height: { duration: theme.block.animationDuration },
+        marginBottom: { duration: theme.block.animationDuration },
+        opacity: { duration: 0 },
       }}
     >
       Paste here

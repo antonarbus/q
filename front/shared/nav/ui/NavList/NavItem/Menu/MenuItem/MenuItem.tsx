@@ -41,7 +41,6 @@ export const MenuItem = ({ navItem, hoverIndex }: Props): React.JSX.Element => {
 
   return (
     <MenuItemLayout
-      to={to}
       isHovered={isHovered}
       onClick={(event: MouseEvent): void => {
         if (isFunc === true) {
@@ -75,6 +74,7 @@ export const MenuItem = ({ navItem, hoverIndex }: Props): React.JSX.Element => {
           }),
         )
       }}
+      to={to}
     >
       {isIcon && isLoading === true && <SpinnerIcon />}
       {isIcon && isSuccess === true && <SuccessIcon />}
@@ -84,14 +84,14 @@ export const MenuItem = ({ navItem, hoverIndex }: Props): React.JSX.Element => {
         isSuccess !== true &&
         isError !== true && (
           <Icon
-            icon={navItem.icon}
             disabled={disabled}
+            icon={navItem.icon}
           />
         )}
       <TextInMenu
-        reserveSpaceForIcon={isNextMenuAvailable}
-        name={navItem.name}
         disabled={disabled}
+        name={navItem.name}
+        reserveSpaceForIcon={isNextMenuAvailable}
       />
       {isNextMenuAvailable && disabled === false && (
         <RoundSpanForIcon
@@ -107,8 +107,8 @@ export const MenuItem = ({ navItem, hoverIndex }: Props): React.JSX.Element => {
       )}
       {shortcut !== undefined && (
         <Shortcut
-          shortcut={shortcut}
           $isHovered={isHovered}
+          shortcut={shortcut}
         />
       )}
     </MenuItemLayout>

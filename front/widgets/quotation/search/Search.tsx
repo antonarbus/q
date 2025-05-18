@@ -38,24 +38,12 @@ export const Search = (): React.JSX.Element => {
 
   return (
     <Autocomplete
-      open={isAutocompleteOpen.value}
-      onOpen={() => (isAutocompleteOpen.value = true)}
-      onClose={() => (isAutocompleteOpen.value = false)}
-      disabled={isCopyModalVisible}
       className={cls.search}
-      freeSolo={options.length !== 0} // show MUI autocomplete even if no options
-      disablePortal
-      popupIcon={null}
       clearOnBlur
       clearOnEscape
-      loading={isPendingBookmarks}
-      loadingText={email === null ? 'Not logged in :(' : 'Loading...'}
-      noOptionsText='No saved bookmarks'
-      options={options}
-      inputValue={inputValueSignal.value}
-      onInputChange={(event, newInputValue) => {
-        inputValueSignal.value = newInputValue
-      }}
+      disablePortal
+      disabled={isCopyModalVisible}
+      freeSolo={options.length !== 0} // show MUI autocomplete even if no options
       getOptionLabel={(option) => {
         if (typeof option === 'string') {
           return option
@@ -65,6 +53,18 @@ export const Search = (): React.JSX.Element => {
           (option.name ?? '') + (option.category ?? '') + (option.desc ?? '')
         )
       }}
+      inputValue={inputValueSignal.value}
+      loading={isPendingBookmarks}
+      loadingText={email === null ? 'Not logged in :(' : 'Loading...'}
+      noOptionsText='No saved bookmarks'
+      onClose={() => (isAutocompleteOpen.value = false)}
+      onInputChange={(event, newInputValue) => {
+        inputValueSignal.value = newInputValue
+      }}
+      onOpen={() => (isAutocompleteOpen.value = true)}
+      open={isAutocompleteOpen.value}
+      options={options}
+      popupIcon={null}
       renderInput={renderInput}
       renderOption={renderOption({
         loadBookmark,
@@ -73,15 +73,15 @@ export const Search = (): React.JSX.Element => {
         pendingBookmarkId,
         isAutocompleteOpen,
       })}
-      slots={{
-        paper: PaperComponent,
-      }}
       slotProps={{
         popper: {
           sx: {
             zIndex: 3,
           },
         },
+      }}
+      slots={{
+        paper: PaperComponent,
       }}
       sx={{
         position: 'relative',

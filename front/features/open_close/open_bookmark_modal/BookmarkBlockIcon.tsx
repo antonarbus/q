@@ -21,20 +21,14 @@ export const BookmarkBlockIcon = (): React.ReactNode => {
 
   return (
     <Tooltip
-      title='Add to bookmarks'
-      placement='right'
       enterDelay={500}
       enterNextDelay={500}
+      placement='right'
+      title='Add to bookmarks'
     >
       <span className={cls.actionIconContainer}>
         <MdOutlineStarOutline
-          tabIndex={-1}
           className={cls.actionIcon}
-          style={{
-            color: disabled === true ? '#acacac' : '#000',
-            cursor: 'pointer',
-            touchAction: 'none',
-          }}
           onClick={(event: React.MouseEvent): void => {
             if (disabled === true) {
               return
@@ -65,6 +59,12 @@ export const BookmarkBlockIcon = (): React.ReactNode => {
 
             void navigate(`./${route.bookmark}/${block.id}`)
           }}
+          style={{
+            color: disabled === true ? '#acacac' : '#000',
+            cursor: 'pointer',
+            touchAction: 'none',
+          }}
+          tabIndex={-1}
         />
       </span>
     </Tooltip>

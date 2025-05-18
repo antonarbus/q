@@ -31,11 +31,11 @@ export const BoqRowsSortableContext = ({
 
   return (
     <DndContext
-      sensors={sensors}
       autoScroll={{ layoutShiftCompensation: false }}
       collisionDetection={closestCenter}
-      onDragStart={onBoqRowDragStart({ blockIndex })}
       onDragEnd={onBoqRowDragEnd({ blockIndex, boqRowIds })}
+      onDragStart={onBoqRowDragStart({ blockIndex })}
+      sensors={sensors}
     >
       <SortableContext
         items={boqRowIds}

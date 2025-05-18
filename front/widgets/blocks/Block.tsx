@@ -13,8 +13,8 @@ type Props = {
 export const Block = ({ block, blockIndex }: Props): React.ReactNode => {
   return (
     <BlockProvider
-      blockIndex={blockIndex}
       block={block}
+      blockIndex={blockIndex}
     >
       {block.type === itemType.text && <TextBlock />}
       {block.type === itemType.boq && <BoqBlock />}

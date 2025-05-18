@@ -27,15 +27,15 @@ export const InfoModal = (): React.ReactNode => {
 
   return (
     <FormModal
-      modalRef={modalRef}
-      width='350px'
-      paddingContent='50px 40px'
-      headerText='Info'
       headerIcon={<BsInfo />}
+      headerText='Info'
+      modalRef={modalRef}
+      onCloseClick={navigateUp}
+      onUnmount={navigateUp}
+      paddingContent='50px 40px'
       shouldUnmountOnClickAway
       shouldUnmountOnEsc
-      onUnmount={navigateUp}
-      onCloseClick={navigateUp}
+      width='350px'
     >
       <NameField nameSignal={infoFormValues.nameSignal} />
       <CategoryField

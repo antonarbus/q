@@ -19,12 +19,11 @@ export const DescriptionColumn = (): React.ReactNode => {
     <ResizableColumn
       boqColumnKey={boqColumnKey.description}
       className={`th ${boqColumnKey.description} resizable`}
-      minWidth={columnMinWidth.description}
       flexGrow={1}
+      minWidth={columnMinWidth.description}
     >
       <Froala
         editorRef={editorRef}
-        placeholder='Description...'
         htmlGetter={() =>
           getBoqColumnHtmlFromStore({
             blockIndex,
@@ -38,6 +37,7 @@ export const DescriptionColumn = (): React.ReactNode => {
             boqColumnKey: boqColumnKey.description,
           })
         }}
+        placeholder='Description...'
         style={{
           ...columnHeaderStyle,
           textAlign: 'left',

@@ -13,13 +13,12 @@ export const NameField = ({
   return (
     <div style={{ position: 'relative' }}>
       <TextField
-        placeholder='Name'
-        label='Name'
-        name='name'
         autoFocus
         fullWidth
+        label='Name'
+        name='name'
+        placeholder='Name'
         {...props}
-        value={nameSignal.value}
         onChange={(event): void => {
           nameSignal.value = event.target.value
         }}
@@ -43,6 +42,7 @@ export const NameField = ({
             background: 'white',
           },
         }}
+        value={nameSignal.value}
       />
     </div>
   )

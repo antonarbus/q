@@ -61,12 +61,7 @@ export const renderOption = ({
 
     return (
       <li
-        // eslint-disable-next-line @typescript-eslint/no-misused-promises
-        onClick={async () => {
-          await loadBookmark({ id: option.id })
-          isAutocompleteOpen.value = false
-        }}
-        key={option.id}
+         
         css={{
           position: 'relative',
           cursor: 'pointer',
@@ -88,6 +83,11 @@ export const renderOption = ({
               right: '5px',
             },
           }),
+        }}
+        key={option.id}
+        onClick={async () => {
+          await loadBookmark({ id: option.id })
+          isAutocompleteOpen.value = false
         }}
       >
         <Box

@@ -37,15 +37,10 @@ export const UsersGrid = (): React.JSX.Element => {
       <DisplayedRowsCount />
       <ProgressGridBar isShown={isFetching} />
       <AgGridReact<UserPicked>
-        ref={usersAgGridRef}
-        theme={themeQuartz}
-        rowData={data?.users}
-        getRowId={(params) => params.data.email}
-        defaultColDef={defaultColDef}
         columnDefs={columnDefs}
-        suppressCellFocus
-        suppressColumnVirtualisation
+        defaultColDef={defaultColDef}
         enableCellTextSelection
+        getRowId={(params) => params.data.email}
         loadingOverlayComponent={LoadingTableOverlay}
         noRowsOverlayComponent={NoRowsTableOverlay}
         onGridReady={() => {
@@ -55,6 +50,11 @@ export const UsersGrid = (): React.JSX.Element => {
           const count = params.api.getDisplayedRowCount()
           dispatch(agGridSlice.actions.setCount({ count }))
         }}
+        ref={usersAgGridRef}
+        rowData={data?.users}
+        suppressCellFocus
+        suppressColumnVirtualisation
+        theme={themeQuartz}
       />
     </GridLayout>
   )

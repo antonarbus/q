@@ -18,7 +18,6 @@ export const Title = (): React.JSX.Element => {
   return (
     <Froala
       editorRef={editorRef}
-      placeholder='Title...'
       htmlGetter={() => getBoqHeaderHtmlFromStore({ blockIndex, boqHeaderKey })}
       onContentChange={() => {
         updateTitleCell({
@@ -27,6 +26,7 @@ export const Title = (): React.JSX.Element => {
           editorRef,
         })
       }}
+      placeholder='Title...'
       style={titleCellStyle}
     />
   )

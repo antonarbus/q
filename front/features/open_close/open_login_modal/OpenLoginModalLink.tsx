@@ -11,7 +11,6 @@ export const OpenLoginModalLink = ({ slideOut }: Props): React.JSX.Element => {
 
   return (
     <Link
-      to={`../${route.login}`}
       onClick={(event: React.MouseEvent): void => {
         event.preventDefault()
 
@@ -29,6 +28,7 @@ export const OpenLoginModalLink = ({ slideOut }: Props): React.JSX.Element => {
 
         void slideAndNavigate()
       }}
+      to={`../${route.login}`}
     >
       Log in
     </Link>

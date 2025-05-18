@@ -12,8 +12,8 @@ export const DropFilesOrImagesText = (props: Props): React.JSX.Element => {
 
   return (
     <Box
-      ref={props.dropFilesTextRef}
       className={cls.dropFilesText}
+      ref={props.dropFilesTextRef}
       style={{
         position: 'absolute',
         top: '2px',
@@ -27,11 +27,6 @@ export const DropFilesOrImagesText = (props: Props): React.JSX.Element => {
     >
       Drop{' '}
       <span
-        style={{
-          cursor: 'pointer',
-          color: theme.colors.blue,
-          fontWeight: 400,
-        }}
         onClick={(event) => {
           if (editorRef.current !== null) {
             editorRef.current.file.showInsertPopup()
@@ -43,16 +38,16 @@ export const DropFilesOrImagesText = (props: Props): React.JSX.Element => {
             )
           }
         }}
-      >
-        files
-      </span>{' '}
-      or{' '}
-      <span
         style={{
           cursor: 'pointer',
           color: theme.colors.blue,
           fontWeight: 400,
         }}
+      >
+        files
+      </span>{' '}
+      or{' '}
+      <span
         onClick={(event) => {
           if (editorRef.current !== null) {
             editorRef.current.image.showInsertPopup()
@@ -63,6 +58,11 @@ export const DropFilesOrImagesText = (props: Props): React.JSX.Element => {
               event.pageY,
             )
           }
+        }}
+        style={{
+          cursor: 'pointer',
+          color: theme.colors.blue,
+          fontWeight: 400,
         }}
       >
         images

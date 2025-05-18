@@ -16,7 +16,6 @@ export const MenuItemLayout = ({
 }: Props): React.JSX.Element => {
   return (
     <Link
-      to={to}
       css={css`
         position: relative;
         height: ${theme.menu.navItem.height}px;
@@ -32,6 +31,7 @@ export const MenuItemLayout = ({
         background-color: ${isHovered === true ? '#5253575a' : 'initial'};
         filter: ${isHovered === true ? 'brightness(1.2)' : 'none'};
       `}
+      to={to}
       {...restProps}
     >
       {children}

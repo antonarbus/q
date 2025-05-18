@@ -17,8 +17,8 @@ export const RotatingLoaderIcon = ({ style }: Props): React.JSX.Element => {
           }
         }
       `}
-      style={style}
       data-testid='spinner icon'
+      style={style}
     />
   )
 }

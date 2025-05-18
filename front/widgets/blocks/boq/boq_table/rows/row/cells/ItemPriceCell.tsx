@@ -41,7 +41,6 @@ export const ItemPriceCell = (): React.JSX.Element => {
       <Froala
         className={`td ${boqRowCellKey.itemPrice}`}
         editorRef={itemPriceCellEditorRef}
-        placeholder='Item price...'
         htmlGetter={() =>
           getBoqCellHtmlFromStore({
             blockIndex,
@@ -49,6 +48,13 @@ export const ItemPriceCell = (): React.JSX.Element => {
             rowIndex,
           })
         }
+        onBlur={() => {
+          formatBoqRowItemPriceCell({
+            blockIndex,
+            itemPriceCellEditorRef,
+            rowIndex,
+          })
+        }}
         onContentChange={() => {
           updateBoqRowItemPriceCell({
             blockIndex,
@@ -58,13 +64,6 @@ export const ItemPriceCell = (): React.JSX.Element => {
             subTotalPriceEditorRef,
           })
         }}
-        onBlur={() => {
-          formatBoqRowItemPriceCell({
-            blockIndex,
-            itemPriceCellEditorRef,
-            rowIndex,
-          })
-        }}
         onKeydown={(event) => {
           tabFromItemPriceCell({
             event,
@@ -72,9 +71,10 @@ export const ItemPriceCell = (): React.JSX.Element => {
             rowIndex,
           })
         }}
-        wrapperStyles={stylesForResizableCell}
+        placeholder='Item price...'
         style={boqRowCellStyle}
         sx={boqRowCellSx}
+        wrapperStyles={stylesForResizableCell}
       />
       <Pin
         boqRowCellKey={boqRowCellKey.itemPrice}

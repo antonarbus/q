@@ -22,18 +22,14 @@ export const DeleteBlockIcon = (): React.JSX.Element => {
 
   return (
     <Tooltip
-      title='Delete'
-      placement='right'
       enterDelay={500}
       enterNextDelay={500}
+      placement='right'
+      title='Delete'
     >
       <span className={cls.actionIconContainer}>
         <GoTrash
-          tabIndex={-1}
           className={cls.actionIcon}
-          style={{
-            color: disabled === true ? '#acacac' : '#000',
-          }}
           css={{
             '&:hover': {
               color: disabled === true ? '#acacac' : 'red !important',
@@ -96,6 +92,10 @@ export const DeleteBlockIcon = (): React.JSX.Element => {
               )
             }
           }}
+          style={{
+            color: disabled === true ? '#acacac' : '#000',
+          }}
+          tabIndex={-1}
         />
       </span>
     </Tooltip>

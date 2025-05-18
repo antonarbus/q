@@ -84,16 +84,16 @@ export const RestOfCopiedItems = (): React.JSX.Element | null => {
 
   return (
     <AnimatePresence
-      mode='wait'
       custom={animationProps}
+      mode='wait'
     >
       <motion.div
-        key={items.length}
-        custom={animationProps}
-        variants={variants}
-        initial='initial'
         animate='animate'
+        custom={animationProps}
         exit='exit'
+        initial='initial'
+        key={items.length}
+        variants={variants}
       >
         {items.map((item, index) => {
           const scaleFactor =
@@ -120,8 +120,8 @@ export const RestOfCopiedItems = (): React.JSX.Element | null => {
             >
               <ScaledCopyItem
                 html={preview ?? ''}
-                width={item.width ?? 0}
                 scaleFactor={String(scaleFactor)}
+                width={item.width ?? 0}
               />
             </div>
           )

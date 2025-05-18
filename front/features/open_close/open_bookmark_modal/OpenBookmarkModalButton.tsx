@@ -48,16 +48,16 @@ export const OpenBookmarkModalButton = ({ id }: ReqBody): React.JSX.Element => {
 
   return (
     <Tooltip
-      title='Edit'
-      placement='bottom'
       enterDelay={500}
       enterNextDelay={500}
+      placement='bottom'
+      title='Edit'
     >
       <IconButton
-        size='small'
         onClick={() => {
           loadItem({ id })
         }}
+        size='small'
         sx={{
           translate: '0px 1px',
         }}

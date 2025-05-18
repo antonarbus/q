@@ -11,7 +11,6 @@ type Props = {
 export const NavItemLayout = (props: Props): React.JSX.Element => {
   return (
     <li
-      ref={props.navItemRef}
       className='nav-item'
       css={css`
         display: flex;
@@ -46,6 +45,7 @@ export const NavItemLayout = (props: Props): React.JSX.Element => {
           position: static;
         }
       `}
+      ref={props.navItemRef}
     >
       {props.children}
     </li>

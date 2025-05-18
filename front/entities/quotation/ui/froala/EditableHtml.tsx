@@ -8,8 +8,8 @@ export const EditableHtml = (): React.JSX.Element => {
 
   return (
     <Box
-      ref={froalaElementRef}
       className='editable-html'
+      ref={froalaElementRef}
       style={{
         height: froalaHeightRef.current, // needed for animation, height will be removed after froala is initialized
         wordBreak: 'break-word',

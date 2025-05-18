@@ -15,7 +15,7 @@ export const BackMenuItem = (): React.JSX.Element => {
 
   return (
     <MenuItemLayout
-      to={'/'}
+      isHovered={isHovered}
       onClick={(event: MouseEvent): void => {
         event.preventDefault()
         void navigateInMenu.up()
@@ -25,7 +25,7 @@ export const BackMenuItem = (): React.JSX.Element => {
           navSlice.actions.setMenuItemHoverIndex({ menuItemHoverIndex: 0 }),
         )
       }}
-      isHovered={isHovered}
+      to='/'
     >
       <Icon icon={<FaChevronLeft />} />
       <TextInMenu name={<span style={{ color }}>Back</span>} />

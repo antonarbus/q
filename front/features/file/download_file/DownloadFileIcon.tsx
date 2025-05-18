@@ -15,8 +15,8 @@ export const DownloadFileIcon = ({ fileSize }: Props): React.JSX.Element => {
 
   return (
     <Tooltip
-      title={`Download ${fileSizeFormatted}`}
       placement='top'
+      title={`Download ${fileSizeFormatted}`}
     >
       <HiDownload
         css={{

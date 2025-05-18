@@ -35,8 +35,8 @@ export const InfoRight = (): React.ReactNode => {
       >
         <Tooltip title='Info'>
           <Link
-            to={disabled === true ? '' : `./${route.info}`}
             style={{ lineHeight: 0.1, height: '100%' }}
+            to={disabled === true ? '' : `./${route.info}`}
           >
             <PiInfoBold
               css={{
@@ -54,7 +54,6 @@ export const InfoRight = (): React.ReactNode => {
         </Tooltip>
         <Tooltip title='Share'>
           <Link
-            to={disabled === true ? '' : `./${route.share}`}
             css={{
               lineHeight: 0.1,
               height: '100%',
@@ -63,6 +62,7 @@ export const InfoRight = (): React.ReactNode => {
                 color: '#3c5588 !important',
               },
             }}
+            to={disabled === true ? '' : `./${route.share}`}
           >
             {access.level === 'everyone' && (
               <PiGlobe

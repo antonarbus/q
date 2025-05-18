@@ -21,35 +21,17 @@ export const CategoryField = ({
     <div style={{ position: 'relative' }}>
       <Autocomplete
         freeSolo
-        options={options}
         inputValue={categorySignal.value}
         onInputChange={(event, newInputValue) => {
           categorySignal.value = newInputValue
         }}
-        renderOption={(props, option, { selected, index, inputValue }) => {
-          return (
-            <li
-              {...props}
-              key={option}
-              css={{
-                borderRadius: '6px',
-                paddingBlock: '10px !important',
-                margin: '2px 4px',
-                '&:hover': {
-                  background: '#dfdfdf !important',
-                },
-              }}
-            >
-              {option}
-            </li>
-          )
-        }}
+        options={options}
         renderInput={(params) => {
           return (
             <TextField
               {...params}
-              name='category'
               label='Category'
+              name='category'
               placeholder='Category'
               {...rest}
               slotProps={{
@@ -75,6 +57,24 @@ export const CategoryField = ({
                 },
               }}
             />
+          )
+        }}
+        renderOption={(props, option, { selected, index, inputValue }) => {
+          return (
+            <li
+              {...props}
+              css={{
+                borderRadius: '6px',
+                paddingBlock: '10px !important',
+                margin: '2px 4px',
+                '&:hover': {
+                  background: '#dfdfdf !important',
+                },
+              }}
+              key={option}
+            >
+              {option}
+            </li>
           )
         }}
         slotProps={{

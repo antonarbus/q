@@ -29,8 +29,6 @@ export const TextBlock = (): React.JSX.Element => {
   return (
     <BlockComp
       className={cls.textBlock}
-      onBlockResizeStart={onTextBlockResizeStart}
-      onBlockResizeStop={onTextBlockResizeStop}
       leftBlockActionButtons={
         <ItemActionButtonsLayout>
           <DragBlockIcon />
@@ -38,6 +36,8 @@ export const TextBlock = (): React.JSX.Element => {
           <CutBlockIcon />
         </ItemActionButtonsLayout>
       }
+      onBlockResizeStart={onTextBlockResizeStart}
+      onBlockResizeStop={onTextBlockResizeStop}
       rightBlockActionButtons={
         <ItemActionButtonsLayout>
           <BookmarkBlockIcon />
@@ -47,15 +47,15 @@ export const TextBlock = (): React.JSX.Element => {
       }
     >
       <Froala
-        editorRef={editorRef}
-        htmlGetter={() => getTextBlockHtmlFromStore({ blockIndex })}
-        placeholder='Add text, tables, drop images, files, links, select to format...'
         beforeUpload={beforeUpload}
         droppable
-        style={textItemCellStyle}
+        editorRef={editorRef}
+        htmlGetter={() => getTextBlockHtmlFromStore({ blockIndex })}
         onContentChange={() => {
           updateTextBlock({ editorRef, blockIndex })
         }}
+        placeholder='Add text, tables, drop images, files, links, select to format...'
+        style={textItemCellStyle}
       />
     </BlockComp>
   )

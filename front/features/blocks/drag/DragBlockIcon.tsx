@@ -30,11 +30,11 @@ export const DragBlockIcon = (): React.JSX.Element => {
     >
       {/* if we wrap icon with tooltip dragging works strange, scroll is reset for no reason */}
       <Tooltip
-        title={dragTooltipTextSignal.value}
-        placement='left'
         enterDelay={500}
         enterNextDelay={500}
         open={openTooltip}
+        placement='left'
+        title={dragTooltipTextSignal.value}
       >
         <span
           style={{
@@ -42,11 +42,19 @@ export const DragBlockIcon = (): React.JSX.Element => {
             inset: 0,
             zIndex: -1,
           }}
-        ></span>
+         />
       </Tooltip>
       <MdDragIndicator
         {...attributes}
         {...listeners}
+        className={cls.actionIcon}
+        onPointerDown={(event) => {
+          dragTooltipTextSignal.value = 'Drop'
+
+          setTimeout(() => {
+            listeners?.onPointerDown?.(event)
+          })
+        }}
         onPointerEnter={(event) => {
           isOverDragIcon.current = true
 
@@ -70,20 +78,12 @@ export const DragBlockIcon = (): React.JSX.Element => {
             dragTooltipTextSignal.value = 'Drop'
           }
         }}
-        onPointerDown={(event) => {
-          dragTooltipTextSignal.value = 'Drop'
-
-          setTimeout(() => {
-            listeners?.onPointerDown?.(event)
-          })
-        }}
-        className={cls.actionIcon}
-        tabIndex={-1}
         style={{
           color: disabled === true ? '#acacac' : '#000',
           cursor: disabled === true ? 'default' : 'move',
           touchAction: 'none',
         }}
+        tabIndex={-1}
       />
     </span>
   )

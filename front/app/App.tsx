@@ -25,8 +25,8 @@ export const App = (): React.JSX.Element => {
         <ThemeProvider theme={themeClient}>
           <GlobalStyles />
           <LocalizationProvider
-            dateAdapter={AdapterDateFns}
             adapterLocale={enGB}
+            dateAdapter={AdapterDateFns}
           >
             <RouterProvider router={router} />
           </LocalizationProvider>

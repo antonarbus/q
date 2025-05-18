@@ -16,20 +16,20 @@ export const ActivationModal = (): React.JSX.Element => {
 
   return (
     <BackdropWithSlidableModal
-      shouldUnmountOnClickAway
-      shouldUnmountOnEsc
       onUnmount={(): void => {
         void navigate('..')
       }}
+      shouldUnmountOnClickAway
+      shouldUnmountOnEsc
     >
       <CardCustom
-        reference={cardRef}
-        title='Activation'
         logo={
           <Avatar sx={{ margin: 1, bgcolor: theme.colors.darkBackground }}>
             <GrValidate />
           </Avatar>
         }
+        reference={cardRef}
+        title='Activation'
       >
         <Box
           sx={{

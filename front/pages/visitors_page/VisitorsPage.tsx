@@ -33,7 +33,7 @@ export const VisitorsPage = (): React.JSX.Element => {
       }}
     >
       <Box sx={{ width: '800px' }}>
-        <canvas ref={canvasRef}></canvas>
+        <canvas ref={canvasRef} />
       </Box>
       <Box sx={{ height: '20px' }}>{isLoading && 'Loading...'}</Box>
       <Box
@@ -46,20 +46,20 @@ export const VisitorsPage = (): React.JSX.Element => {
         }}
       >
         <DatePicker
-          label='Start Date'
           format='dd.MM.yyyy'
-          value={startDate}
+          label='Start Date'
           onChange={(newValue) => {
             setStartDate(newValue ?? startDate)
           }}
+          value={startDate}
         />
         <DatePicker
-          label='End Date'
           format='dd.MM.yyyy'
-          value={endDate}
+          label='End Date'
           onChange={(newValue) => {
             setEndDate(newValue ?? endDate)
           }}
+          value={endDate}
         />
       </Box>
     </Box>

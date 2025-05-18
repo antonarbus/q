@@ -8,12 +8,6 @@ type Props = {
 export const BoqRowAnimate = ({ children }: Props): React.JSX.Element => {
   return (
     <motion.div
-      initial={{
-        height: 0,
-        opacity: 0,
-        overflow: 'hidden',
-        y: '100vh',
-      }}
       animate={{
         height: 'auto', // height is being stored on copy/cut icon click
         opacity: 1,
@@ -28,6 +22,12 @@ export const BoqRowAnimate = ({ children }: Props): React.JSX.Element => {
         opacity: 0,
         overflow: 'hidden',
         x: '150vw',
+      }}
+      initial={{
+        height: 0,
+        opacity: 0,
+        overflow: 'hidden',
+        y: '100vh',
       }}
       transition={{
         duration: theme.block.animationDuration,

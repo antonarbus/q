@@ -28,22 +28,22 @@ export const PriceCell = (): React.JSX.Element => {
       <Froala
         className={`td ${boqRowCellKey.price}`}
         editorRef={priceCellEditorRef}
-        placeholder='Price...'
-        wrapperStyles={stylesForResizableCell}
-        style={boqRowCellStyle}
-        sx={boqRowCellSx}
         htmlGetter={() =>
           getRowCellHtmlFromStore({ boqRowCellKey: boqRowCellKey.price })
         }
+        onBlur={() => {
+          formatPriceCell({ priceCellEditorRef })
+        }}
         onContentChange={() => {
           updatePriceCell({
             itemPriceCellEditorRef,
             priceCellEditorRef,
           })
         }}
-        onBlur={() => {
-          formatPriceCell({ priceCellEditorRef })
-        }}
+        placeholder='Price...'
+        style={boqRowCellStyle}
+        sx={boqRowCellSx}
+        wrapperStyles={stylesForResizableCell}
       />
     </Box>
   )

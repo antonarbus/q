@@ -33,27 +33,27 @@ export const LoginModal = (): React.JSX.Element => {
 
   return (
     <FormModal
-      modalRef={modalRef}
-      width='350px'
-      paddingContent='50px 40px 10px 40px'
-      headerText='Log in'
-      headerIcon={<FiLogIn />}
       buttonText='LOG IN'
+      headerIcon={<FiLogIn />}
+      headerText='Log in'
       isButtonDisabled={isButtonDisabled}
+      isButtonError={isError}
       isButtonLoading={isPending}
       isButtonSuccess={isSuccess}
-      isButtonError={isError}
-      shouldUnmountOnClickAway
-      shouldUnmountOnEsc
-      onUnmount={navigateUp}
+      modalRef={modalRef}
       onCloseClick={navigateUp}
       onSubmit={onSubmit}
+      onUnmount={navigateUp}
+      paddingContent='50px 40px 10px 40px'
+      shouldUnmountOnClickAway
+      shouldUnmountOnEsc
+      width='350px'
     >
       <EmailField
-        inputRef={inputRef}
-        emailSignal={emailSignal}
-        isEmailOkSignal={isEmailOkSignal}
         autoFocus
+        emailSignal={emailSignal}
+        inputRef={inputRef}
+        isEmailOkSignal={isEmailOkSignal}
       />
       <PasswordField passwordSignal={passwordSignal} />
       <Box

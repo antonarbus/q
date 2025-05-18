@@ -11,8 +11,8 @@ export const PriceColumn = (): React.JSX.Element => {
     <ResizableColumn
       boqColumnKey={boqColumnKey.price}
       className={`th ${boqColumnKey.price} resizable`}
-      minWidth={columnMinWidth.price}
       flexGrow={0}
+      minWidth={columnMinWidth.price}
     >
       <Box style={columnHeaderStyle}>
         <b>Price</b>

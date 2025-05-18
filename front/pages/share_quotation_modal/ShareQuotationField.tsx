@@ -52,7 +52,6 @@ export const ShareQuotationField = ({
           >
             <RadioGroup
               name='controlled-radio-buttons-group'
-              value={accessFormValuesSignal.value.level}
               onChange={(event): void => {
                 const selectedAccessLevel = event.target
                   .value as Quotation['access']['level']
@@ -67,6 +66,7 @@ export const ShareQuotationField = ({
                   padding: '5px',
                 },
               }}
+              value={accessFormValuesSignal.value.level}
             >
               <Box
                 sx={{
@@ -77,10 +77,10 @@ export const ShareQuotationField = ({
               >
                 <MdGroupOff style={{ opacity: 0.7 }} />
                 <FormControlLabel
-                  value='nobody'
-                  label='Nobody'
                   control={<Radio size='small' />}
                   disabled={accessFormValuesSignal.value.level === 'nobody'}
+                  label='Nobody'
+                  value='nobody'
                 />
               </Box>
               <Box
@@ -94,10 +94,10 @@ export const ShareQuotationField = ({
                   style={{ opacity: 0.7, scale: '1.2', translate: '-1px 0px' }}
                 />
                 <FormControlLabel
-                  value='everyone'
-                  label='Everyone'
                   control={<Radio size='small' />}
                   disabled={accessFormValuesSignal.value.level === 'everyone'}
+                  label='Everyone'
+                  value='everyone'
                 />
               </Box>
               <Box
@@ -110,10 +110,10 @@ export const ShareQuotationField = ({
               >
                 <BsFillPersonPlusFill style={{ opacity: 0.7 }} />
                 <FormControlLabel
-                  value='custom'
-                  label='Custom'
                   control={<Radio size='small' />}
                   disabled={accessFormValuesSignal.value.level === 'custom'}
+                  label='Custom'
+                  value='custom'
                 />
               </Box>
             </RadioGroup>
@@ -121,34 +121,15 @@ export const ShareQuotationField = ({
               <TextField
                 autoFocus
                 focused
-                variant='standard'
-                placeholder='Email'
-                value={emailSignal.value}
                 onChange={(event) => {
                   emailSignal.value = event.target.value
                 }}
-                sx={{
-                  position: 'relative',
-                  bottom: '5px',
-                  flexGrow: 1,
-                  alignSelf: 'self-end',
-                  input: {
-                    fontSize: '12px',
-                    padding: '4px',
-                  },
-                }}
+                placeholder='Email'
                 slotProps={{
                   input: {
                     endAdornment: (
                       <InputAdornment position='end'>
                         <Button
-                          variant='contained'
-                          size='small'
-                          sx={{
-                            fontSize: '10px',
-                            padding: '0px',
-                            minWidth: '30px',
-                          }}
                           disabled={isButtonDisabledSignal.value}
                           onClick={() => {
                             if (emailSignal.value === '') {
@@ -167,6 +148,13 @@ export const ShareQuotationField = ({
 
                             emailSignal.value = ''
                           }}
+                          size='small'
+                          sx={{
+                            fontSize: '10px',
+                            padding: '0px',
+                            minWidth: '30px',
+                          }}
+                          variant='contained'
                         >
                           Add
                         </Button>
@@ -174,27 +162,39 @@ export const ShareQuotationField = ({
                     ),
                   },
                 }}
+                sx={{
+                  position: 'relative',
+                  bottom: '5px',
+                  flexGrow: 1,
+                  alignSelf: 'self-end',
+                  input: {
+                    fontSize: '12px',
+                    padding: '4px',
+                  },
+                }}
+                value={emailSignal.value}
+                variant='standard'
               />
             )}
           </Box>
           {accessFormValuesSignal.value.level === 'custom' &&
             accessFormValuesSignal.value.userList.length > 0 && (
               <Box
-                ref={chipsParent}
-                key='emails-chips'
-                component={motion.div}
-                initial={{
-                  height: 0,
-                  opacity: 0,
-                }}
                 animate={{
                   height: 'auto',
                   opacity: 1,
                 }}
+                component={motion.div}
                 exit={{
                   height: 0,
                   opacity: 0,
                 }}
+                initial={{
+                  height: 0,
+                  opacity: 0,
+                }}
+                key='emails-chips'
+                ref={chipsParent}
                 sx={{
                   display: 'flex',
                   flexWrap: 'wrap',

@@ -26,9 +26,9 @@ export const Blocks = ({ blocks }: Props): React.ReactNode => {
             .filter((block) => block !== null)
             .map((block, bockIndex) => (
               <Block
-                key={block.id}
                 block={block}
                 blockIndex={bockIndex}
+                key={block.id}
               />
             ))}
         </AnimatePresence>
