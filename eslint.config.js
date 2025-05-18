@@ -3,6 +3,7 @@ import prettierConfig from 'eslint-config-prettier'
 import jsPlugin from '@eslint/js'
 import tsPlugin from 'typescript-eslint'
 import reactPlugin from 'eslint-plugin-react'
+import reactHooks from 'eslint-plugin-react-hooks'
 
 export default [
   {
@@ -31,10 +32,10 @@ export default [
     },
   },
   { settings: { react: { version: '19' } } },
-
   jsPlugin.configs.all, // file://./node_modules/@eslint/js/src/configs/eslint-all.js
   ...tsPlugin.configs.all, // file://./node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/all.js
   reactPlugin.configs.flat.all, // file://./node_modules/eslint-plugin-react/lib/rules/index.js
+  reactHooks.configs['recommended-latest'],
   prettierConfig,
   {
     rules: {
