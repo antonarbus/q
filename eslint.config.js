@@ -110,6 +110,7 @@ export default [
       'no-nested-ternary': 'error',
       'id-length': ['error', { exceptions: ['x', 'y'] }],
       'prefer-destructuring': 'error',
+      'no-warning-comments': 'warn', // warns about "todo" in comments
 
       // turn off some rules from pluginJs.configs.all
       'no-alert': 'off', // i like alerts more than many popup components
@@ -122,10 +123,9 @@ export default [
       'no-magic-numbers': 'off', // that is crazy
       'no-void': 'off', // need void to let TS know that we are not going to await promise
       'one-var': 'off', // wants to do like let a,b, c --> crazy
-      'max-statements': 'error',
-      'sort-imports': 'off',
-      'max-params': 'off',
-      'no-warning-comments': 'off',
+      'max-statements': 'off', // max 10 statements per function --> do not like it
+      'sort-imports': 'off', // nice, do do not care
+      'max-params': 'off', // Arrow function has too many parameters (4). Maximum allowed is 3. --> not your business
       'no-undefined': 'off',
       'max-lines': 'off',
       complexity: 'off',

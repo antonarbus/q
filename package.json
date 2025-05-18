@@ -26,6 +26,7 @@
     "playwright_debug": "INSTALLATION=local playwright test --debug",
     "playwright_record": "INSTALLATION=local playwright codegen https://localhost:3000 --ignore-https-errors",
     "lint": "eslint .",
+    "lint:quite": "eslint . --quiet",
     "fix": "eslint . --fix",
     "tsc": "tsc --noEmit",
     "prettier": "prettier . --check",
