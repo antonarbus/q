@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useMemo } from 'react'
 import type { FroalaEditorRef } from '@shared/types/froala'
 import type { RowEditorRefs } from '../types'
 
@@ -14,13 +14,17 @@ type BoqContextType = {
 const BoqContext = createContext<BoqContextType | null>(null)
 
 export const BoqProvider = ({ children }: Props): React.JSX.Element => {
+  const blockContextData = useMemo(() => {
+    const contextData = {
+      subTotalPriceEditorRef: { current: null },
+      boqRowEditorRefs: [],
+    }
+
+    return contextData
+  }, [])
+
   return (
-    <BoqContext.Provider
-      value={{
-        subTotalPriceEditorRef: { current: null },
-        boqRowEditorRefs: [],
-      }}
-    >
+    <BoqContext.Provider value={blockContextData}>
       {children}
     </BoqContext.Provider>
   )

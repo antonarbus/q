@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useMemo } from 'react'
 import type { Item } from '../types'
 
 type Context = {
@@ -17,13 +17,17 @@ export const BlockProvider = ({
   blockIndex,
   block,
 }: Props): React.JSX.Element => {
+  const blockContextData = useMemo(() => {
+    const contextData = {
+      blockIndex,
+      block,
+    }
+
+    return contextData
+  }, [blockIndex, block])
+
   return (
-    <BlockContext.Provider
-      value={{
-        blockIndex,
-        block,
-      }}
-    >
+    <BlockContext.Provider value={blockContextData}>
       {children}
     </BlockContext.Provider>
   )
