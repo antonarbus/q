@@ -15,7 +15,7 @@ import { useParams } from 'react-router-dom'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { asyncDelay } from '@shared/utils/delay'
 
-export function useLoadQuotation(): void {
+export const useLoadQuotation = (): void => {
   const { quotationId } = useParams()
 
   const shouldLoadQuotation = useSelector(
