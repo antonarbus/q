@@ -109,6 +109,8 @@ export default [
       'no-useless-assignment': 'error',
       'no-nested-ternary': 'error',
       'id-length': ['error', { exceptions: ['x', 'y'] }],
+      'prefer-destructuring': 'error',
+
       // turn off some rules from pluginJs.configs.all
       'no-alert': 'off', // i like alerts more than many popup components
       'sort-keys': 'off', // nice, but often you group keys logically and not sort alphabetically
@@ -120,8 +122,7 @@ export default [
       'no-magic-numbers': 'off', // that is crazy
       'no-void': 'off', // need void to let TS know that we are not going to await promise
       'one-var': 'off', // wants to do like let a,b, c --> crazy
-      'prefer-destructuring': 'error',
-      'max-statements': 'off',
+      'max-statements': 'error',
       'sort-imports': 'off',
       'max-params': 'off',
       'no-warning-comments': 'off',
