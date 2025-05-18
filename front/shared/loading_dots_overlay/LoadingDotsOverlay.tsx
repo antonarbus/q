@@ -2,24 +2,48 @@ import { useSelector } from '@shared/lib/redux'
 import { LoadingDots } from './LoadingDots'
 
 type Props = {
-  showLoader: boolean
-  text: string
+  shouldShowLoader: boolean
+  text: string | null
 }
 
-export const LoadingDotsOverlay = ({
-  showLoader,
-  text,
-}: Props): React.JSX.Element | null => {
+export const LoadingDotsOverlay = (props: Props): React.JSX.Element | null => {
   const loadingOverlay = useSelector((state) => state.app.loadingOverlay)
 
   const notLoading =
-    loadingOverlay.text === '' &&
-    loadingOverlay.showLoader === false &&
-    showLoader === false
+    loadingOverlay.shouldShowLoader === false &&
+    props.shouldShowLoader === false
 
   if (notLoading === true) {
     return null
   }
+
+  const getText = (): string => {
+    if (loadingOverlay.text !== null) {
+      return loadingOverlay.text
+    }
+
+    if (props.text !== null) {
+      return props.text
+    }
+
+    return ''
+  }
+
+  const text = getText()
+
+  const getShouldShowLoader = (): boolean => {
+    if (loadingOverlay.shouldShowLoader === true) {
+      return true
+    }
+
+    if (props.shouldShowLoader === true) {
+      return true
+    }
+
+    return false
+  }
+
+  const shouldShowLoader = getShouldShowLoader()
 
   return (
     <div
@@ -51,9 +75,9 @@ export const LoadingDotsOverlay = ({
           height: '60px',
         }}
       >
-        {loadingOverlay.text !== '' || text}
+        {text}
       </div>
-      {(loadingOverlay.showLoader || showLoader) && <LoadingDots />}
+      {shouldShowLoader === true && <LoadingDots />}
     </div>
   )
 }

@@ -54,7 +54,7 @@ export const useLoadQuotation = (): void => {
     }
   }
 
-  /** Decide which quotation to load on first mount if it is not decided before */
+  /** Decide which quotation to load on first mount  */
   useEffectOnce(() => {
     const fromWhereToLoad = getFromWhereToLoadQuotation()
 
@@ -76,7 +76,7 @@ export const useLoadQuotation = (): void => {
         if (fromWhereToLoad === 'memory') {
           dispatch(
             appSlice.actions.showLoadingOverlay({
-              showLoader: true,
+              shouldShowLoader: true,
               text: 'Going back...',
             }),
           )
@@ -127,7 +127,7 @@ export const useLoadQuotation = (): void => {
         if (fromWhereToLoad === 'template') {
           dispatch(
             appSlice.actions.showLoadingOverlay({
-              showLoader: true,
+              shouldShowLoader: true,
               text: 'Loading template...',
             }),
           )
@@ -180,7 +180,7 @@ export const useLoadQuotation = (): void => {
         if (fromWhereToLoad === 'server') {
           dispatch(
             appSlice.actions.showLoadingOverlay({
-              showLoader: true,
+              shouldShowLoader: true,
               text: `Loading ${quotationId}...`,
             }),
           )
@@ -196,7 +196,7 @@ export const useLoadQuotation = (): void => {
             }),
           )
 
-          dispatch(appSlice.actions.setBackgroundMessage({ message: '' }))
+          // dispatch(appSlice.actions.setBackgroundMessage({ message: '' }))
 
           dispatch(quotationSlice.actions.resetQuotationReducer())
 

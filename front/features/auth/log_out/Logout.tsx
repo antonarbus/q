@@ -19,7 +19,7 @@ export const Logout = (): React.JSX.Element => {
     if (isPending === true) {
       dispatch(
         appSlice.actions.showLoadingOverlay({
-          showLoader: true,
+          shouldShowLoader: true,
           text: 'Logging out',
         }),
       )

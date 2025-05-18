@@ -7,8 +7,8 @@ type State = {
   }
   backgroundMessage: string
   loadingOverlay: {
-    showLoader: boolean
-    text: string
+    shouldShowLoader: boolean
+    text: string | null
   }
 }
 
@@ -19,8 +19,8 @@ const initialState: State = {
   },
   backgroundMessage: '',
   loadingOverlay: {
-    showLoader: false,
-    text: '',
+    shouldShowLoader: false,
+    text: null,
   },
 }
 
@@ -50,13 +50,13 @@ export const appSlice = createSlice({
       state,
       action: PayloadAction<State['loadingOverlay']>,
     ) => {
-      const { showLoader, text } = action.payload
-      state.loadingOverlay.showLoader = showLoader
+      const { shouldShowLoader, text } = action.payload
+      state.loadingOverlay.shouldShowLoader = shouldShowLoader
       state.loadingOverlay.text = text
     },
     hideLoadingOverlay: (state) => {
-      state.loadingOverlay.showLoader = false
-      state.loadingOverlay.text = ''
+      state.loadingOverlay.shouldShowLoader = false
+      state.loadingOverlay.text = null
     },
   },
 })
