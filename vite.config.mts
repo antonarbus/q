@@ -1,5 +1,3 @@
-/// <reference types="vitest" />
-/// <reference types="vite/client" />
 import { dirname, join, resolve } from 'path'
 import basicSsl from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react'

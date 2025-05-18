@@ -167,6 +167,9 @@ export default [
         'error',
         { namedComponents: 'arrow-function' },
       ],
+
+      // adjust stylistic rules
+      '@stylistic/multiline-comment-style': 'off',
     },
   },
 ]
