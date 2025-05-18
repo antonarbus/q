@@ -116,6 +116,8 @@ export default [
       'prefer-arrow-callback': 'error',
       'no-shadow': 'error', // Disallow variable to shadow variables declared in the outer scope
       radix: ['error', 'as-needed'], // disallows providing the 10 radix --> parseInt(var, 10) no need to put 10
+      'init-declarations': 'error', // variables must be initialized at declaration
+      'new-cap': 'error', // constructor name should not start with a lowercase letter
 
       // turn off some rules from pluginJs.configs.all
       'no-alert': 'off', // i like alerts more than many popup components
@@ -136,9 +138,6 @@ export default [
       complexity: 'off', // max complexity is 20, if else if else (complexity = 3)
       'consistent-return': 'off', // arrow function expects no return value
       'operator-assignment': 'off', // forces to use +=, do not like it
-      'init-declarations': 'off',
-      'new-cap': 'off',
-      'no-unsafe-type-assertion': 'off',
 
       // https://typescript-eslint.io/rules/
       '@typescript-eslint/no-unused-vars': ['error', { args: 'none' }],
@@ -170,8 +169,8 @@ export default [
       '@typescript-eslint/no-magic-numbers': 'off', // that is too crazy
       '@typescript-eslint/max-params': 'off', // do not like
       '@typescript-eslint/consistent-return': 'off', // ts takes care of it with "noImplicitReturns": true
-      '@typescript-eslint/no-unsafe-type-assertion': 'off', //! turn it on and make type guard functions with predicates instead of assertions
       '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'off', // forces to omit boolean comparison in if statements // i like to compare explicitly
+      '@typescript-eslint/no-unsafe-type-assertion': 'off', //! turn it on and make type guard functions with predicates instead of assertions
 
       // https://github.com/jsx-eslint/eslint-plugin-react
       'react/react-in-jsx-scope': 'off', // suppress error 'React' must be in scope when using JSX

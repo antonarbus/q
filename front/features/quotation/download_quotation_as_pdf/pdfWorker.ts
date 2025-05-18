@@ -11,6 +11,7 @@ self.onmessage = async (
 
   const { jsPDF } = await import('jspdf')
 
+  // eslint-disable-next-line new-cap
   const pdf = new jsPDF({
     orientation: width > height ? 'landscape' : 'portrait',
     unit: 'px',
