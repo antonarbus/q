@@ -35,9 +35,9 @@ export default [
   { settings: { react: { version: '19' } } },
   jsPlugin.configs.all, // file://./node_modules/@eslint/js/src/configs/eslint-all.js
   ...tsPlugin.configs.all, // file://./node_modules/@typescript-eslint/eslint-plugin/dist/configs/flat/all.js
+  stylistic.configs.all, // file://./node_modules/@stylistic/eslint-plugin/dist/configs.js
   reactPlugin.configs.flat.all, // file://./node_modules/eslint-plugin-react/lib/rules/index.js
   reactHooks.configs['recommended-latest'],
-  stylistic.configs.all, // file://./node_modules/@stylistic/eslint-plugin/dist/configs.js
   prettierConfig,
   {
     rules: {
@@ -159,14 +159,14 @@ export default [
       'react/destructuring-assignment': 'off', // sometimes it is better to use prop.key
       'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }],
       'react/no-unknown-property': ['error', { ignore: ['css'] }], // allows css prop coming from Emotion lib
-      'react/jsx-no-leaked-render': 'off', // !  enable: forbids to render like a && b && c && <Comp />
-      'react/jsx-max-depth': 'off', // !  enable: may simplify the complexity
-      'react/require-default-props': 'off', // !  enable: make sense to use, maybe
-      'react/no-multi-comp': 'off', // !  enable: make sense to use, maybe
       'react/function-component-definition': [
         'error',
         { namedComponents: 'arrow-function' },
       ],
+      'react/jsx-no-leaked-render': 'off', // ! enable: forbids to render like a && b && c && <Comp />
+      'react/jsx-max-depth': 'off', // ! enable: may simplify the complexity
+      'react/require-default-props': 'off', // ! enable: make sense to use, maybe
+      'react/no-multi-comp': 'off', // ! enable: make sense to use, maybe
 
       // adjust stylistic rules
       '@stylistic/multiline-comment-style': 'off',
