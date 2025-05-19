@@ -34,7 +34,7 @@ export const fileUploadSignedUrlHandler: RouterHandler = async (
 
   const fileId = generateId()
   const { path, url } = getFileInfo({ id: fileId })
-  const file = bucket.file(path) // Get reference to the file in the bucket
+  const file = bucket.file(path)
 
   try {
     const [signedUrl] = await file.getSignedUrl({
