@@ -38,7 +38,7 @@ export default [
   stylistic.configs.all, // file://./node_modules/@stylistic/eslint-plugin/dist/configs.js
   reactPlugin.configs.flat.all, // file://./node_modules/eslint-plugin-react/lib/rules/index.js
   reactHooks.configs['recommended-latest'],
-  prettierConfig,
+  prettierConfig, //  file://./node_modules/eslint-config-prettier/index.js (disables some stylistic rules)
   {
     rules: {
       // adjust JS rules
