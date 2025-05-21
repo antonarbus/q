@@ -1,18 +1,16 @@
-// @ts-expect-error: some declaration is missing
+/* eslint-disable */
+// @ts-nocheck
 import { defineConfig } from 'steiger'
-// import fsd from '@feature-sliced/steiger-plugin'
+import fsd from '@feature-sliced/steiger-plugin'
 
-// https://github.com/feature-sliced/steiger/tree/master/packages/steiger-plugin-fsd/src/forbidden-imports
-
-// eslint-disable-next-line @typescript-eslint/no-unsafe-call
-export default defineConfig({
-  files: ['./front/**'],
-  rules: {
-    'segments-by-purpose': 'off',
-    'public-api': 'off',
-    'no-segmentless-slices': 'off',
-    'no-reserved-folder-names': 'off',
-    'no-public-api-sidestep': 'off',
-    'insignificant-slice': 'off',
+export default defineConfig([
+  // https://github.com/feature-sliced/steiger/tree/master?tab=readme-ov-file#rules
+  ...fsd.configs.recommended,
+  {
+    // disable the `public-api` rule for files in the Shared layer
+    files: ['./front/**'],
+    rules: {
+      // 'fsd/public-api': 'off',
+    },
   },
-})
+])

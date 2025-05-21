@@ -2,10 +2,10 @@ import { theme } from '@shared/theme'
 import { IoClose } from 'react-icons/io5'
 import { AnimatePresence, motion } from 'motion/react'
 import type { AnimationScope } from 'motion-dom'
-
 import { Children } from 'react'
 import { BackdropWithSlidableModal } from './BackdropWithSlidableModal'
 import { ButtonCustom } from './ButtonCustom'
+import { cls } from '@shared/consts/cls'
 import {
   Avatar,
   Box,
@@ -13,7 +13,6 @@ import {
   Typography,
   IconButton,
 } from '@mui/material'
-import { cls } from '@shared/consts/cls'
 
 type Props = {
   width?: React.CSSProperties['width']
@@ -84,7 +83,6 @@ export const FormModal = ({
             boxShadow:
               '0px 11px 15px -7px rgb(0 0 0 / 40%), 0px 24px 38px 3px rgb(0 0 0 / 28%), 0px 9px 46px 8px rgb(0 0 0 / 24%)',
           },
-          // eslint-disable-next-line @typescript-eslint/no-misused-spread
           ...sx,
         }}
       >

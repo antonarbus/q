@@ -8,11 +8,7 @@ import stylistic from '@stylistic/eslint-plugin'
 
 export default [
   {
-    files: [
-      'back/*.{js,mjs,cjs,ts,jsx,tsx}',
-      'front/*.{js,mjs,cjs,ts,jsx,tsx}',
-      'steiger.config.ts',
-    ],
+    files: ['**.*{js,mjs,cjs,ts,jsx,tsx}'],
   },
   {
     ignores: [
@@ -146,6 +142,14 @@ export default [
       '@typescript-eslint/max-params': 'off', // do not like
       '@typescript-eslint/consistent-return': 'off', // ts takes care of it with "noImplicitReturns": true
       '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'off', // forces to omit boolean comparison in if statements // i like to compare explicitly
+      '@typescript-eslint/no-misused-spread': [
+        'error',
+        {
+          allow: [
+            'sx', // otherwise unable to spread ...sx prop from MUI
+          ],
+        },
+      ],
       '@typescript-eslint/no-unsafe-type-assertion': 'off', // ! enable: make type guard functions with predicates instead of assertions
 
       // adjust React rules,

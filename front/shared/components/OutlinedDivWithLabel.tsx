@@ -1,46 +1,41 @@
 import { type SxProps, TextField } from '@mui/material'
-import { forwardRef } from 'react'
 
-type InputComponentProps = Record<string, unknown>
+type InputComponentProps = Record<string, unknown> & {
+  ref: React.RefObject<HTMLDivElement>
+}
 
-const InputComponent = forwardRef(
-  (props: InputComponentProps, ref: React.ForwardedRef<HTMLDivElement>) => {
-    // remove ownState from props otherwise DOM error is thrown
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { ownerState, ...other } = props
+const InputComponent = (props: InputComponentProps): React.JSX.Element => {
+  const { ownerState, ref, ...other } = props
 
-    return (
-      <div
-        {...other}
-        css={{
-          overflow: 'hidden',
-          backgroundColor: 'white',
-          width: '100%',
-        }}
-        ref={ref}
-      />
-    )
-  },
-)
+  return (
+    <div
+      {...other}
+      css={{
+        overflow: 'hidden',
+        backgroundColor: 'white',
+        width: '100%',
+      }}
+      ref={ref}
+    />
+  )
+}
 
-export const OutlinedDivWithLabel = ({
-  children,
-  label,
-  sx,
-}: {
+type Props = {
   children: React.ReactNode
   label: string
   sx?: SxProps
-}): React.JSX.Element => {
+}
+
+export const OutlinedDivWithLabel = (props: Props): React.JSX.Element => {
   return (
     <TextField
       disabled={false}
       focused
       fullWidth
-      label={label}
+      label={props.label}
       slotProps={{
         htmlInput: {
-          children,
+          children: props.children,
         },
         input: {
           slots: {
@@ -58,8 +53,7 @@ export const OutlinedDivWithLabel = ({
           fontFamily: 'system-ui, sans-serif;',
           fontWeight: 300,
         },
-        // eslint-disable-next-line @typescript-eslint/no-misused-spread
-        ...sx,
+        ...props.sx,
       }}
     />
   )

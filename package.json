@@ -48,6 +48,7 @@
     "@emotion/babel-plugin": "^11.13.5",
     "@emotion/react": "^11.14.0",
     "@eslint/js": "^9.26.0",
+    "@feature-sliced/steiger-plugin": "^0.5.6",
     "@playwright/browser-chromium": "^1.52.0",
     "@playwright/test": "^1.52.0",
     "@preact/signals-react-transform": "^0.5.1",

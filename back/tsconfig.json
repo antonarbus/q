@@ -1,9 +1,5 @@
 {
   "extends": "../tsconfig.json",
-  "include": [
-    "**/*.ts",
-    "../front/shared/lib/tanstack_query/defaultError.d.ts"
-  ],
   "compilerOptions": {
     "outDir": "./dist"
   }
