@@ -56,6 +56,7 @@ export const ButtonCustom = ({
         justifyContent: 'center',
         alignItems: 'center',
         minHeight: '50px',
+        // eslint-disable-next-line @typescript-eslint/no-misused-spread
         ...restProps.sx,
       }}
     >

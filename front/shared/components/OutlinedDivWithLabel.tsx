@@ -5,6 +5,7 @@ type InputComponentProps = Record<string, unknown> & {
 }
 
 const InputComponent = (props: InputComponentProps): React.JSX.Element => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { ownerState, ref, ...other } = props
 
   return (
@@ -53,6 +54,7 @@ export const OutlinedDivWithLabel = (props: Props): React.JSX.Element => {
           fontFamily: 'system-ui, sans-serif;',
           fontWeight: 300,
         },
+        // eslint-disable-next-line @typescript-eslint/no-misused-spread
         ...props.sx,
       }}
     />
