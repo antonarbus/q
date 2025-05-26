@@ -5,7 +5,7 @@ import type { Signal } from '@preact/signals-react'
 import type { BoqColumnKey } from '../consts/boqColumnKey'
 
 type Common = {
-  id: 'new' | (Record<never, never> & string)
+  id: 'new' | (string & {})
   email: string
   name?: string
   category?: string
