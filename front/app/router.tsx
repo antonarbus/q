@@ -25,6 +25,7 @@ import { userRole } from '@entities/user'
 import { Toaster } from 'sonner'
 import { ShareQuotationModal } from '@pages/share_quotation_modal'
 import { LoadQuotation } from '@features/quotation/load_quotation'
+import { TestPage } from '@pages/test_page'
 
 const Quotation = lazy(async () => {
   const module = await import('@pages/quotation_page')
@@ -231,6 +232,14 @@ const router = createBrowserRouter([
               <VisitorsPageLazy />
             </RequireRoles>
           </Suspense>
+        ),
+      },
+      {
+        path: 'test',
+        element: (
+          <RequireRoles requiredRoles={[userRole.superAdmin]}>
+            <TestPage />
+          </RequireRoles>
         ),
       },
     ],
