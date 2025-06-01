@@ -5,7 +5,7 @@ import { useUpdateEffect } from 'react-use'
 import { useRegisterMutation } from '@entities/user'
 import { toast } from 'sonner'
 import { asyncDelay } from '@shared/utils/delay'
-import { trackSignUpEventAtGoogleAds } from '@shared/lib/google_ads/trackSignUpEventAtGoogleAds'
+import { trackSignUpEventAtGoogleTagManager } from '@shared/lib/google_tag_manager/trackSignUpEventAtGoogleTagManager'
 
 type Props = {
   emailSignal: Signal<string>
@@ -90,7 +90,7 @@ export const useRegister = ({
       password: passwordSignal.value,
     })
 
-    trackSignUpEventAtGoogleAds()
+    trackSignUpEventAtGoogleTagManager()
   }
 
   return { onSubmit, isPending, isSuccess, isError }
