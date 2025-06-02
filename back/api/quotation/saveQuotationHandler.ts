@@ -6,7 +6,7 @@ import { httpStatus } from '@back/shared/consts/httpStatus'
 import { bucket, getFileInfo } from '@back/shared/services/storage'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { QuotationModel } from '@back/entities/quotation'
-import { generateId } from '@back/shared/lib/nanoid'
+import { generateId } from '@back/shared/libs/nanoid'
 
 export type ReqBody = {
   quotation: Quotation

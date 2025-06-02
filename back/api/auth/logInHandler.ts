@@ -9,7 +9,7 @@ import {
   generateRefreshToken,
   getJwtExpirationInDays,
   verifyRefreshToken,
-} from '@back/shared/lib/jwt'
+} from '@back/shared/libs/jwt'
 import { setNoTraceMode, setRefreshTokenCookie } from '@back/shared/headers'
 import { userRole } from '@back/shared/consts/userRole'
 import { getUserFromAccessTokenOrNull, UserModel } from '@back/entities/user'

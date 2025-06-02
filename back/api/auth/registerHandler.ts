@@ -5,7 +5,7 @@ import { httpStatus } from '@back/shared/consts/httpStatus'
 import { sendEmail } from '@back/shared/services/email'
 import { config } from '@back/config'
 import { UserModel } from '@back/entities/user'
-import { generateId } from '@back/shared/lib/nanoid'
+import { generateId } from '@back/shared/libs/nanoid'
 
 export type ReqBody = {
   email: User['email']

@@ -3,7 +3,7 @@ import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { bucket, getFileInfo } from '@back/shared/services/storage'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
-import { generateId } from '@back/shared/lib/nanoid'
+import { generateId } from '@back/shared/libs/nanoid'
 
 export type SearchQuery = {
   fileName: string

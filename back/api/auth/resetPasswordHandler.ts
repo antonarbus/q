@@ -2,7 +2,10 @@ import type { Request, Response, NextFunction } from 'express'
 import bcrypt from 'bcryptjs'
 import type { User } from '@entities/user'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { generateAccessToken, generateRefreshToken } from '@back/shared/lib/jwt'
+import {
+  generateAccessToken,
+  generateRefreshToken,
+} from '@back/shared/libs/jwt'
 import { setRefreshTokenCookie } from '@back/shared/headers'
 import { UserModel } from '@back/entities/user'
 

@@ -2,7 +2,7 @@ import type { Request, Response, NextFunction } from 'express'
 import type { User } from '@entities/user'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { errorMessageCommon } from '@shared/consts/errorMessageCommon'
-import { generateAccessToken } from '@back/shared/lib/jwt'
+import { generateAccessToken } from '@back/shared/libs/jwt'
 import {
   getShouldNotTrace,
   removeRefreshTokenCookie,

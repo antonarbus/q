@@ -2,7 +2,7 @@ import { getRefreshTokenFromCookie } from '@back/shared/headers/tokens/getRefres
 import {
   getJwtExpirationInDays,
   verifyRefreshToken,
-} from '@back/shared/lib/jwt'
+} from '@back/shared/libs/jwt'
 import type { User } from '@entities/user'
 import type { Request } from 'express'
 
