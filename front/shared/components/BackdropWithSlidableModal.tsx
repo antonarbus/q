@@ -20,6 +20,7 @@ export const BackdropWithSlidableModal = ({
   shouldUnmountOnEsc,
 }: Props): React.JSX.Element => {
   const { ref: contentRef, slideIn, slideOut } = useSlide()
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   const location = useLocation() as Location<NavigateState>
 
   const scrollTopPositionBeforeModalOpen = useRef(

@@ -52,13 +52,25 @@ export const ShareQuotationField = ({
           >
             <RadioGroup
               name='controlled-radio-buttons-group'
-              onChange={(event): void => {
-                const selectedAccessLevel = event.target
-                  .value as Quotation['access']['level']
+              onChange={(_event, value): void => {
+                const getIsCorrectValue = (
+                  radioButtonValue: string,
+                ): radioButtonValue is Quotation['access']['level'] => {
+                  const isCorrect =
+                    radioButtonValue === 'everyone' ||
+                    radioButtonValue === 'nobody' ||
+                    radioButtonValue === 'custom'
 
-                accessFormValuesSignal.value = {
-                  level: selectedAccessLevel,
-                  userList: accessFormValuesSignal.value.userList,
+                  return isCorrect
+                }
+
+                const isCorrectValue = getIsCorrectValue(value)
+
+                if (isCorrectValue === true) {
+                  accessFormValuesSignal.value = {
+                    level: value,
+                    userList: accessFormValuesSignal.value.userList,
+                  }
                 }
               }}
               sx={{

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
 import type { Router } from '@app/router'
 
 export let router = null as unknown as Router

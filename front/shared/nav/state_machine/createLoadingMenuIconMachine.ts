@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
 import { dispatch } from '@shared/lib/redux'
 import { setup } from 'xstate'
 import type { NavItemId } from '@shared/consts/navItemId'

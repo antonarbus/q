@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
 import { dispatch, getState } from '@shared/lib/redux'
 import {
   type Quotation,

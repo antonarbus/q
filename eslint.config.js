@@ -142,7 +142,6 @@ export default [
       '@typescript-eslint/max-params': 'off', // do not like
       '@typescript-eslint/consistent-return': 'off', // ts takes care of it with "noImplicitReturns": true
       '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'off', // forces to omit boolean comparison in if statements // i like to compare explicitly
-      '@typescript-eslint/no-unsafe-type-assertion': 'off', // ! enable: make type guard functions with predicates instead of assertions
 
       // adjust React rules,
       'react/react-in-jsx-scope': 'off', // suppress error 'React' must be in scope when using JSX

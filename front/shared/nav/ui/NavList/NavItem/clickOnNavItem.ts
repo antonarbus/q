@@ -17,7 +17,11 @@ export const clickOnNavItem = ({
   navItemRef,
   disabled,
 }: Props): void => {
-  ;(document.activeElement as HTMLElement).blur() // to prevent open an active navItem link on Enter key
+  if (document.activeElement instanceof HTMLElement === false) {
+    return
+  }
+
+  document.activeElement.blur() // to prevent open an active navItem link on Enter key
 
   const { link, func } = navItem
 

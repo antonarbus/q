@@ -19,8 +19,13 @@ export const placeCaretAtTheEndIfToolbarIsNotShown = ({
     return
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  const toolbarElement = editorRef.current.$tb['0'] as HTMLElement
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+  const toolbarElement = editorRef.current.$tb['0']
+
+  if (toolbarElement instanceof HTMLElement === false) {
+    return
+  }
+
   const isToolbarOpened = toolbarElement.style.display === 'block'
 
   if (isToolbarOpened === true) {

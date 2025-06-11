@@ -24,6 +24,7 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
     error,
   } = useLogInMutation()
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   const location = useLocation() as Location<NavigateState>
   const { refetch: refetchQuotations } = useGetQuotationsQuery()
   const { refetch: refetchBookmarks } = useGetBookmarksQuery()
