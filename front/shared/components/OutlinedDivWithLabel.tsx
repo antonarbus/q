@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 import { type SxProps, TextField } from '@mui/material'
 
 type InputComponentProps = Record<string, unknown> & {

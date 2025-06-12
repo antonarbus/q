@@ -152,14 +152,13 @@ export default [
       'react/prefer-read-only-props': 'off', // too much work to put readonly everywhere, not sure it is even needed
       'react/forbid-component-props': 'off', // forbids "style" prop
       'react/destructuring-assignment': 'off', // sometimes it is better to use prop.key
+      'react/require-default-props': 'off', // requires to add Hello.propTypes = { foo: PropTypes.string };
       'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }],
       'react/no-unknown-property': ['error', { ignore: ['css'] }], // allows css prop coming from Emotion lib
       'react/function-component-definition': [
         'error',
         { namedComponents: 'arrow-function' },
       ],
-      // 'react/require-default-props': 'off', // ! enable: make sense to use, maybe
-      'react/no-multi-comp': 'off', // ! enable: make sense to use, maybe
 
       // adjust stylistic rules
       '@stylistic/multiline-comment-style': 'off',

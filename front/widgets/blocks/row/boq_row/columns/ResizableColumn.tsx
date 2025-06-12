@@ -11,7 +11,6 @@ import type { BoqColumnKey } from '@entities/quotation/consts/boqColumnKey'
 type Props = {
   children: React.ReactNode
   className: string
-  flexGrow?: number
   boqColumnKey: BoqColumnKey
   minWidth: number
 }
@@ -19,7 +18,6 @@ type Props = {
 export const ResizableColumn = ({
   children,
   className,
-  flexGrow,
   boqColumnKey,
   minWidth,
 }: Props): React.JSX.Element => {
