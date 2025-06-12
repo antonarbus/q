@@ -11,7 +11,6 @@ export const NumberColumn = (): React.JSX.Element => {
     <ResizableColumn
       boqColumnKey={boqColumnKey.number}
       className={`th ${boqColumnKey.number} resizable`}
-      flexGrow={0}
       minWidth={columnMinWidth.number}
     >
       <Box style={columnHeaderStyle} />

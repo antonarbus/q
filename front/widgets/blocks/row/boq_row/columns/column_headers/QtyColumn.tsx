@@ -11,7 +11,6 @@ export const QtyColumn = (): React.JSX.Element => {
     <ResizableColumn
       boqColumnKey={boqColumnKey.qty}
       className={`th ${boqColumnKey.qty} resizable`}
-      flexGrow={0}
       minWidth={columnMinWidth.qty}
     >
       <Box style={columnHeaderStyle}>

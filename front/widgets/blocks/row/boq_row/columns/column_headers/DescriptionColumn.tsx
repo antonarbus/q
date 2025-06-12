@@ -11,7 +11,6 @@ export const DescriptionColumn = (): React.ReactNode => {
     <ResizableColumn
       boqColumnKey={boqColumnKey.description}
       className={`th ${boqColumnKey.description} resizable`}
-      flexGrow={1}
       minWidth={columnMinWidth.description}
     >
       <Box
