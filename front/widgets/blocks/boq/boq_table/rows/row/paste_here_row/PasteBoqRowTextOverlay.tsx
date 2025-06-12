@@ -22,7 +22,7 @@ export const PasteBoqRowTextOverlay = ({
       >
         {children}
       </div>
-      {isPasteHere && (
+      {isPasteHere === true ? (
         <div
           style={{
             color: theme.copy.pasteTextColor,
@@ -37,7 +37,7 @@ export const PasteBoqRowTextOverlay = ({
         >
           Paste here
         </div>
-      )}
+      ) : null}
     </>
   )
 }

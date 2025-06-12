@@ -62,15 +62,15 @@ export const SettingsModal = (): React.JSX.Element => {
             gap: '20px',
           }}
         >
-          {isPending && (
+          {isPending === true ? (
             <RotatingLoaderIcon
               style={{
                 height: '20px',
                 width: '20px',
               }}
             />
-          )}
-          {isSuccess && (
+          ) : null}
+          {isSuccess === true ? (
             <>
               <Box
                 onClick={() => {
@@ -159,7 +159,7 @@ export const SettingsModal = (): React.JSX.Element => {
                 })}
               </Collapse>
             </>
-          )}
+          ) : null}
         </Box>
       </CardCustom>
     </BackdropWithSlidableModal>

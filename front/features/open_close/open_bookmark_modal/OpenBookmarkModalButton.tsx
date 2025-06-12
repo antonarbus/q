@@ -62,8 +62,7 @@ export const OpenBookmarkModalButton = ({ id }: ReqBody): React.JSX.Element => {
           translate: '0px 1px',
         }}
       >
-        {isPending === false && <AiTwotoneEdit />}
-        {isPending && <RotatingLoaderIcon />}
+        {isPending === true ? <RotatingLoaderIcon /> : <AiTwotoneEdit />}
       </IconButton>
     </Tooltip>
   )

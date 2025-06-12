@@ -55,8 +55,7 @@ export const DeleteQuotationButton = ({ id }: Payload): React.ReactNode => {
         }}
         size='small'
       >
-        {isPending === false && <MdDeleteOutline />}
-        {isPending && <RotatingLoaderIcon />}
+        {isPending === true ? <RotatingLoaderIcon /> : <MdDeleteOutline />}
       </IconButton>
     </Tooltip>
   )

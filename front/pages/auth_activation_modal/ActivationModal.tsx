@@ -40,7 +40,7 @@ export const ActivationModal = (): React.JSX.Element => {
             gap: '5px',
           }}
         >
-          {isPending && (
+          {isPending === true ? (
             <>
               <RotatingLoaderIcon
                 style={{
@@ -50,8 +50,8 @@ export const ActivationModal = (): React.JSX.Element => {
               />
               <Box>Please wait...</Box>
             </>
-          )}
-          {isSuccess && (
+          ) : null}
+          {isSuccess === true ? (
             <>
               <PiSmileyBold
                 style={{
@@ -61,8 +61,8 @@ export const ActivationModal = (): React.JSX.Element => {
               />
               <Box>Activated</Box>
             </>
-          )}
-          {isError && (
+          ) : null}
+          {isError === true ? (
             <>
               <PiSmileySadBold
                 style={{
@@ -72,7 +72,7 @@ export const ActivationModal = (): React.JSX.Element => {
               />
               <Box>Something went wrong</Box>
             </>
-          )}
+          ) : null}
         </Box>
       </CardCustom>
     </BackdropWithSlidableModal>

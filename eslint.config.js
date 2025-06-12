@@ -158,7 +158,6 @@ export default [
         'error',
         { namedComponents: 'arrow-function' },
       ],
-      'react/jsx-no-leaked-render': 'off', // ! enable: forbids to render like a && b && c && <Comp />
       'react/jsx-max-depth': 'off', // ! enable: may simplify the complexity
       'react/require-default-props': 'off', // ! enable: make sense to use, maybe
       'react/no-multi-comp': 'off', // ! enable: make sense to use, maybe

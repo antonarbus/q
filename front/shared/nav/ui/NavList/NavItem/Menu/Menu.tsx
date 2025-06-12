@@ -104,7 +104,7 @@ export const Menu = (): React.JSX.Element => {
         menuNavItemId={nextMenuNavItemId}
         reference={fakeMenuRef}
       />
-      {isProfileMenu && <EmailAtBottomOfMenu />}
+      {isProfileMenu === true ? <EmailAtBottomOfMenu /> : null}
     </div>
   )
 }

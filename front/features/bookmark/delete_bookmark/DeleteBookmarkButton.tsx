@@ -55,8 +55,7 @@ export const DeleteBookmarkButton = ({ id }: ReqBody): React.JSX.Element => {
         }}
         size='small'
       >
-        {isPending === false && <MdDeleteOutline />}
-        {isPending && <RotatingLoaderIcon />}
+        {isPending === true ? <RotatingLoaderIcon /> : <MdDeleteOutline />}
       </IconButton>
     </Tooltip>
   )

@@ -79,8 +79,7 @@ export const DeleteUserButton = ({ email }: Payload): React.ReactNode => {
         }}
         size='small'
       >
-        {isPending === false && <MdDeleteOutline />}
-        {isPending && <RotatingLoaderIcon />}
+        {isPending === true ? <RotatingLoaderIcon /> : <MdDeleteOutline />}
       </IconButton>
     </Tooltip>
   )

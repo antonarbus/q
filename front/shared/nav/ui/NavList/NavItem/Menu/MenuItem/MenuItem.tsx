@@ -76,24 +76,24 @@ export const MenuItem = ({ navItem, hoverIndex }: Props): React.JSX.Element => {
       }}
       to={to}
     >
-      {isIcon && isLoading === true && <SpinnerIcon />}
-      {isIcon && isSuccess === true && <SuccessIcon />}
-      {isIcon && isError === true && <ErrorIcon />}
+      {isIcon && isLoading === true ? <SpinnerIcon /> : null}
+      {isIcon && isSuccess === true ? <SuccessIcon /> : null}
+      {isIcon && isError === true ? <ErrorIcon /> : null}
       {isIcon &&
-        isLoading !== true &&
-        isSuccess !== true &&
-        isError !== true && (
-          <Icon
-            disabled={disabled}
-            icon={navItem.icon}
-          />
-        )}
+      isLoading !== true &&
+      isSuccess !== true &&
+      isError !== true ? (
+        <Icon
+          disabled={disabled}
+          icon={navItem.icon}
+        />
+      ) : null}
       <TextInMenu
         disabled={disabled}
         name={navItem.name}
         reserveSpaceForIcon={isNextMenuAvailable}
       />
-      {isNextMenuAvailable && disabled === false && (
+      {isNextMenuAvailable && disabled === false ? (
         <RoundSpanForIcon
           css={{
             background: 'transparent',
@@ -104,7 +104,7 @@ export const MenuItem = ({ navItem, hoverIndex }: Props): React.JSX.Element => {
         >
           <FaChevronRight />
         </RoundSpanForIcon>
-      )}
+      ) : null}
       {shortcut !== undefined && (
         <Shortcut
           $isHovered={isHovered}

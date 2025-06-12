@@ -57,8 +57,7 @@ export const CopyBookmarkButton = ({ id }: ReqBody): React.JSX.Element => {
           translate: '0px 1px',
         }}
       >
-        {isPending === false && <MdCopyAll />}
-        {isPending && <RotatingLoaderIcon />}
+        {isPending === true ? <RotatingLoaderIcon /> : <MdCopyAll />}
       </IconButton>
     </Tooltip>
   )

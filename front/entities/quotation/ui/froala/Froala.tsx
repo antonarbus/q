@@ -73,12 +73,13 @@ export const Froala = (props: FroalaProps): React.JSX.Element => {
             borderRadius: '4px',
           }}
         >
-          {showEditableHtml === false && <StaticHtml />}
-          {showEditableHtml && (
+          {showEditableHtml === true ? (
             <>
               <StaticHtmlBackgroundToFixBlinkIssue />
               <EditableHtml />
             </>
+          ) : (
+            <StaticHtml />
           )}
           {props.droppable === true && (
             <DropFilesOrImagesText dropFilesTextRef={dropFilesTextRef} />

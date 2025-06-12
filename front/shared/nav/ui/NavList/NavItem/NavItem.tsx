@@ -67,7 +67,7 @@ export const NavItem = ({ navItem }: Props): React.JSX.Element => {
         <NavName name={name} />
         <ArrowForNestedMenu navItem={navItem} />
       </Link>
-      {isMenuOpen && <Menu />}
+      {isMenuOpen === true ? <Menu /> : null}
     </NavItemLayout>
   )
 }

@@ -35,7 +35,9 @@ export const VisitorsPage = (): React.JSX.Element => {
       <Box sx={{ width: '800px' }}>
         <canvas ref={canvasRef} />
       </Box>
-      <Box sx={{ height: '20px' }}>{isLoading && 'Loading...'}</Box>
+      <Box sx={{ height: '20px' }}>
+        {isLoading === true ? 'Loading...' : null}
+      </Box>
       <Box
         sx={{
           display: 'flex',

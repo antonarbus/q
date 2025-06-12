@@ -29,7 +29,9 @@ export const LoadingTableOverlay = (): React.JSX.Element | null => {
       >
         {loadingOverlay.text}
       </div>
-      {loadingOverlay.showLoader && <LoadingDots background='grey' />}
+      {loadingOverlay.showLoader === true ? (
+        <LoadingDots background='grey' />
+      ) : null}
     </div>
   )
 }

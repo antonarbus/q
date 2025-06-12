@@ -193,7 +193,7 @@ export const renderOption = ({
           </span>
           {getHighlightedDescription()}
         </Box>
-        {isPendingBookmark && option.id === pendingBookmarkId && (
+        {isPendingBookmark && option.id === pendingBookmarkId ? (
           <Box
             sx={{
               position: 'absolute',
@@ -207,7 +207,7 @@ export const renderOption = ({
           >
             <RotatingLoaderIcon />
           </Box>
-        )}
+        ) : null}
       </li>
     )
   }

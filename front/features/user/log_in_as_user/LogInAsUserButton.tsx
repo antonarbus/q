@@ -110,8 +110,7 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
         }}
         size='small'
       >
-        {isPending === false && <MdLogin />}
-        {isPending && <RotatingLoaderIcon />}
+        {isPending === true ? <RotatingLoaderIcon /> : <MdLogin />}
       </IconButton>
     </Tooltip>
   )

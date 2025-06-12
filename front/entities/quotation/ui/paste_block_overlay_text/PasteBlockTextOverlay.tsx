@@ -19,7 +19,7 @@ export const PasteBlockTextOverlay = ({
       >
         {children}
       </div>
-      {isPasteHere && (
+      {isPasteHere === true ? (
         <div
           style={{
             fontWeight: 600,
@@ -34,7 +34,7 @@ export const PasteBlockTextOverlay = ({
         >
           Paste here
         </div>
-      )}
+      ) : null}
     </>
   )
 }

@@ -62,7 +62,7 @@ export const SaveQuotationModal = (): React.JSX.Element => {
       />
       <DescriptionField descSignal={saveQuotationFormValues.descSignal} />
       <InfoField infoSignal={saveQuotationFormValues.infoSignal} />
-      {isQuotationsPage && <QuotationPreviewField />}
+      {isQuotationsPage === true ? <QuotationPreviewField /> : null}
     </FormModal>
   )
 }

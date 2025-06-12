@@ -73,7 +73,7 @@ export const ButtonCustom = ({
           }}
         />
       )}
-      {showSuccessIcon.value && (
+      {showSuccessIcon.value === true ? (
         <FaCircleCheck
           style={{
             height: '25px',
@@ -82,8 +82,8 @@ export const ButtonCustom = ({
             color: 'white',
           }}
         />
-      )}
-      {showErrorIcon.value && (
+      ) : null}
+      {showErrorIcon.value === true ? (
         <PiSmileySadBold
           style={{
             height: '25px',
@@ -92,7 +92,7 @@ export const ButtonCustom = ({
             color: 'white',
           }}
         />
-      )}
+      ) : null}
     </Button>
   )
 }
