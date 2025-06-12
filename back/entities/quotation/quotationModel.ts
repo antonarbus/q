@@ -4,7 +4,6 @@ import type { Quotation } from '@entities/quotation'
 const quotationSchema = new Schema<Quotation>({
   id: {
     type: String,
-    // default: () => generateId(),
     required: true,
     unique: true,
     index: true,
@@ -37,10 +36,13 @@ const quotationSchema = new Schema<Quotation>({
   openedAt: Date,
   viewedAt: Date,
   access: {
-    type: {
-      level: String,
-      userList: [String],
-    },
+    type: new Schema(
+      {
+        level: String,
+        userList: [String],
+      },
+      { _id: false }, // make new Schema to remove "_id" prop
+    ),
     default: (): Quotation['access'] => ({
       level: 'nobody',
       userList: [],

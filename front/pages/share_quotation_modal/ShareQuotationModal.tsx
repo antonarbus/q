@@ -1,5 +1,5 @@
 import { FormModal } from '@shared/components/FormModal'
-import { ShareQuotationField } from './ShareQuotationField'
+import { ShareQuotationField } from './share_quotation_field/ShareQuotationField'
 import { useShareQuotationFormValues } from './useShareQuotationFormValues'
 import { useIsButtonDisabled } from './useIsButtonDisabled'
 import { router } from '@shared/lib/router'

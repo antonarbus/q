@@ -8,16 +8,46 @@ type Props = {
 export const useIsButtonDisabled = ({
   accessFormValuesSignal,
 }: Props): boolean => {
-  const forgotToAddPerson =
-    accessFormValuesSignal.value.level === 'custom' &&
-    accessFormValuesSignal.value.userList.length === 0
+  const { access } = getState().quotation
+  const currentAccess = accessFormValuesSignal.value
 
-  const currentAccessLevel = getState().quotation.access.level
+  const sameNobodyAccessLevel =
+    access.level === 'nobody' && currentAccess.level === 'nobody'
 
-  const accessLevelChanged =
-    currentAccessLevel !== accessFormValuesSignal.value.level
+  if (sameNobodyAccessLevel === true) {
+    return true
+  }
 
-  const disabled = forgotToAddPerson || accessLevelChanged === false
+  const sameEveryoneAccessLevel =
+    access.level === 'everyone' && currentAccess.level === 'everyone'
 
-  return disabled
+  if (sameEveryoneAccessLevel === true) {
+    return true
+  }
+
+  if (accessFormValuesSignal.value.level === 'custom') {
+    const forgotToAddPerson = accessFormValuesSignal.value.userList.length === 0
+
+    if (forgotToAddPerson === true) {
+      return true
+    }
+  }
+
+  if (accessFormValuesSignal.value.level === 'custom') {
+    const sharedUserList = getState()
+      .quotation.access.userList.toSorted()
+      .toString()
+
+    const currentSharedUserList = accessFormValuesSignal.value.userList
+      .toSorted()
+      .toString()
+
+    const sharedUserListChanged = sharedUserList === currentSharedUserList
+
+    if (sharedUserListChanged === true) {
+      return true
+    }
+  }
+
+  return false
 }

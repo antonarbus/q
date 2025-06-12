@@ -121,6 +121,14 @@ export const useShareQuotation = ({
     const existingId = getState().quotation.id
     const id = existingId === 'new' ? generateId() : existingId
 
+    if (accessFormValuesSignal.value.level === 'everyone') {
+      accessFormValuesSignal.value.userList = []
+    }
+
+    if (accessFormValuesSignal.value.level === 'nobody') {
+      accessFormValuesSignal.value.userList = []
+    }
+
     const quotation: Quotation = {
       ...getState().quotation,
       id,
@@ -128,6 +136,7 @@ export const useShareQuotation = ({
     }
 
     saveQuotation({ quotation })
+    dispatch(quotationSlice.actions.loadQuotationReducer({ quotation }))
   }
 
   return { onSubmit, isPending, isSuccess, isError }

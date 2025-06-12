@@ -1,12 +1,12 @@
-import { BsFileEarmarkText, BsTags } from 'react-icons/bs'
 import { Box } from '@mui/material'
 import type { HTMLAttributes } from 'react'
-import { PiBooks } from 'react-icons/pi'
 import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
-import { getJsxWithBoldSubstr } from '@shared/utils/getJsxWithBoldSubstr'
 import type { Signal } from '@preact/signals-react'
 import type { LoadBookmark } from '@features/bookmark/copy_bookmark'
 import type { ItemPick } from '@back/api/bookmark/getBookmarksHandler'
+import { OptionItemName } from './OptionItemName'
+import { OptionItemCategory } from './OptionItemCategory'
+import { OptionItemDescription } from './OptionItemDescription'
 
 type Props = {
   loadBookmark: LoadBookmark
@@ -36,29 +36,6 @@ export const renderOption = ({
       inputValue: string
     },
   ): React.JSX.Element {
-    const getHighlightedDescription = ():
-      | string
-      | (string | React.JSX.Element)[] => {
-      if (inputValueSignal.value !== '') {
-        const boldSubString = getJsxWithBoldSubstr({
-          text: option.desc ?? '',
-          boldText: inputValueSignal.value,
-        })
-
-        return boldSubString
-      }
-
-      if (option.desc === undefined) {
-        return '-'
-      }
-
-      if (option.desc !== '') {
-        return option.desc
-      }
-
-      return '-'
-    }
-
     return (
       <li
         css={{
@@ -90,109 +67,21 @@ export const renderOption = ({
           isAutocompleteOpen.value = false
         }}
       >
-        <Box
-          sx={{
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap',
-            width: '100%',
-          }}
-        >
-          <span
-            css={{
-              color: 'grey',
-              marginRight: '5px',
-            }}
-          >
-            <PiBooks
-              style={{
-                height: '16px',
-                width: '16px',
-                translate: '0px 4px',
-              }}
-            />{' '}
-            <span
-              css={{
-                fontSize: '12px',
-              }}
-            >
-              name:
-            </span>
-          </span>
-          {inputValueSignal.value === ''
-            ? option.name
-            : getJsxWithBoldSubstr({
-                text: option.name ?? '',
-                boldText: inputValueSignal.value,
-              })}
-        </Box>
-        <Box
-          sx={{
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap',
-            width: '100%',
-          }}
-        >
-          <span
-            css={{
-              color: 'grey',
-              marginRight: '5px',
-            }}
-          >
-            <BsTags
-              style={{
-                height: '16px',
-                width: '16px',
-                translate: '0px 4px',
-              }}
-            />{' '}
-            <span
-              css={{
-                fontSize: '12px',
-              }}
-            >
-              category:
-            </span>
-          </span>
-          {inputValueSignal.value === ''
-            ? (option.category ?? '')
-            : getJsxWithBoldSubstr({
-                text: option.category ?? '',
-                boldText: inputValueSignal.value,
-              })}
-        </Box>
-        <Box
-          sx={{
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap',
-            width: '100%',
-          }}
-        >
-          <span
-            css={{
-              color: 'grey',
-              marginRight: '5px',
-            }}
-          >
-            <BsFileEarmarkText
-              style={{
-                height: '16px',
-                width: '16px',
-                translate: '0px 3px',
-              }}
-            />{' '}
-            <span
-              css={{
-                fontSize: '12px',
-              }}
-            >
-              description:
-            </span>
-          </span>
-          {getHighlightedDescription()}
-        </Box>
+        <OptionItemName
+          inputValueSignal={inputValueSignal}
+          option={option}
+        />
+
+        <OptionItemCategory
+          inputValueSignal={inputValueSignal}
+          option={option}
+        />
+
+        <OptionItemDescription
+          inputValueSignal={inputValueSignal}
+          option={option}
+        />
+
         {isPendingBookmark && option.id === pendingBookmarkId ? (
           <Box
             sx={{

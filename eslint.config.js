@@ -158,8 +158,7 @@ export default [
         'error',
         { namedComponents: 'arrow-function' },
       ],
-      'react/jsx-max-depth': 'off', // ! enable: may simplify the complexity
-      'react/require-default-props': 'off', // ! enable: make sense to use, maybe
+      // 'react/require-default-props': 'off', // ! enable: make sense to use, maybe
       'react/no-multi-comp': 'off', // ! enable: make sense to use, maybe
 
       // adjust stylistic rules

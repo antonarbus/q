@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-max-depth */
 import { theme } from '@shared/theme'
 import { IoClose } from 'react-icons/io5'
 import { AnimatePresence, motion } from 'motion/react'
