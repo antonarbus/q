@@ -81,6 +81,7 @@ export const useLoadQuotation = (): void => {
             }),
           )
 
+          dispatch(appSlice.actions.setBackgroundMessage({ message: '' }))
           dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
           dispatch(
@@ -132,6 +133,7 @@ export const useLoadQuotation = (): void => {
             }),
           )
 
+          dispatch(appSlice.actions.setBackgroundMessage({ message: '' }))
           dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
           dispatch(
@@ -196,10 +198,8 @@ export const useLoadQuotation = (): void => {
             }),
           )
 
-          // dispatch(appSlice.actions.setBackgroundMessage({ message: '' }))
-
+          dispatch(appSlice.actions.setBackgroundMessage({ message: '' }))
           dispatch(quotationSlice.actions.resetQuotationReducer())
-
           dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
           dispatch(
