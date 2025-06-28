@@ -40,7 +40,7 @@ export default [
       // adjust JS rules
       'arrow-body-style': 'off', // blocks with explicit return are good
       'capitalized-comments': 'off', // commented code gets capitalized automatically
-      'consistent-return': 'off', // arrow function expects no return value
+      'consistent-return': 'off', // arrow function expects no return keyword
       'id-length': ['error', { exceptions: ['x', 'y'] }],
       'jsx-quotes': ['error', 'prefer-single'],
       'max-lines-per-function': 'off', // not your business
@@ -142,6 +142,8 @@ export default [
       '@typescript-eslint/max-params': 'off', // do not like
       '@typescript-eslint/consistent-return': 'off', // ts takes care of it with "noImplicitReturns": true
       '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'off', // forces to omit boolean comparison in if statements // i like to compare explicitly
+      '@typescript-eslint/explicit-function-return-type': 'error', // feel that sometimes return type is so complex that it does not make much sense to type it manually, for ex in useQuery hooks, maybe good to use "warn" instead of "error"
+      '@typescript-eslint/explicit-module-boundary-types': 'error', // same as above, but for exported functions
 
       // adjust React rules,
       'react/react-in-jsx-scope': 'off', // suppress error 'React' must be in scope when using JSX
