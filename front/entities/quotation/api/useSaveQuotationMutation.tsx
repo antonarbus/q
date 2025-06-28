@@ -11,20 +11,22 @@ import { axiosWithAuth } from '@shared/lib/axiosWithAuth'
 export const saveQuotationMutationFn = async ({
   quotation,
 }: Payload): Promise<ResBody> => {
-  const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>, Payload>({
+  const { data } = await axiosWithAuth<
+    ResBody,
+    AxiosResponse<ResBody>,
+    Payload
+  >({
     url: api.saveQuotation.url,
     method: api.saveQuotation.method,
     data: { quotation },
   })
 
-  return res.data
+  return data
 }
 
-export const useSaveQuotationMutation = (): UseMutationResult<
-  ResBody,
-  AxiosError<ResBody>,
-  Payload
-> => {
+type Res = UseMutationResult<ResBody, AxiosError<ResBody>, Payload>
+
+export const useSaveQuotationMutation = (): Res => {
   const query = useMutation<ResBody, AxiosError<ResBody>, Payload>({
     mutationKey: [queryKey.saveQuotation],
     mutationFn: saveQuotationMutationFn,

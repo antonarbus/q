@@ -13,13 +13,13 @@ export const useRegisterMutation = (): Res => {
   const query = useMutation<ResBody, AxiosError<ResBody>, Payload>({
     mutationKey: [queryKey.register],
     mutationFn: async ({ email, password }: Payload) => {
-      const res = await axios<ResBody>({
+      const { data } = await axios<ResBody>({
         url: api.register.url,
         method: api.register.method,
         data: { email, password },
       })
 
-      return res.data
+      return data
     },
   })
 

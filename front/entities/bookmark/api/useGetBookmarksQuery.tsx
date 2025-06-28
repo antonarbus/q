@@ -5,10 +5,9 @@ import type { AxiosError, AxiosResponse } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
 import { axiosWithAuth } from '@shared/lib/axiosWithAuth'
 
-export const useGetBookmarksQuery = (): UseQueryResult<
-  ResBody,
-  AxiosError<ResBody>
-> => {
+type Res = UseQueryResult<ResBody, AxiosError<ResBody>>
+
+export const useGetBookmarksQuery = (): Res => {
   const query = useQuery<ResBody, AxiosError<ResBody>>({
     queryKey: [queryKey.getBookmarks],
     refetchOnMount: false,
@@ -18,13 +17,13 @@ export const useGetBookmarksQuery = (): UseQueryResult<
     retry: 0,
     enabled: false,
     queryFn: async ({ signal }) => {
-      const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
+      const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
         url: api.getBookmarks.url,
         method: api.getBookmarks.method,
         signal,
       })
 
-      return res.data
+      return data
     },
   })
 

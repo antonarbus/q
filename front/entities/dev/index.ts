@@ -1,1 +1,1 @@
-export { useHealthCheck } from './api/useHealthCheck'
+export { useHealthCheckQuery } from './api/useHealthCheckQuery'

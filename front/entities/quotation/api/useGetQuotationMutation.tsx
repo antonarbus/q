@@ -8,11 +8,9 @@ import type { AxiosResponse, AxiosError } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
 import { axiosWithAuth } from '@shared/lib/axiosWithAuth'
 
-export const useGetQuotationMutation = (): UseMutationResult<
-  ResBody,
-  AxiosError<ResBody>,
-  Payload
-> => {
+type Res = UseMutationResult<ResBody, AxiosError<ResBody>, Payload>
+
+export const useGetQuotationMutation = (): Res => {
   const mutation = useMutation<ResBody, AxiosError<ResBody>, Payload>({
     mutationKey: [queryKey.getQuotation],
     mutationFn: async ({ id }: Payload) => {

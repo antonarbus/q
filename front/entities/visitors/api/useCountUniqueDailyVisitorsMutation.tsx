@@ -7,21 +7,19 @@ import axios, { type AxiosError } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
 import { api } from '@back/api'
 
-export const useCountUniqueDailyVisitorsMutation = (): UseMutationResult<
-  ResBody,
-  AxiosError<ResBody>,
-  Payload
-> => {
+type Res = UseMutationResult<ResBody, AxiosError<ResBody>, Payload>
+
+export const useCountUniqueDailyVisitorsMutation = (): Res => {
   const query = useMutation<ResBody, AxiosError<ResBody>, Payload>({
     mutationKey: [queryKey.countUniqueDailyVisitors],
     mutationFn: async ({ date, isNew }: Payload) => {
-      const res = await axios<ResBody>({
+      const { data } = await axios<ResBody>({
         url: api.countUniqueDailyVisitors.url,
         method: api.countUniqueDailyVisitors.method,
         data: { date, isNew },
       })
 
-      return res.data
+      return data
     },
   })
 

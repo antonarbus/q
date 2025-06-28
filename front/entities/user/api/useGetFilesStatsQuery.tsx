@@ -5,10 +5,9 @@ import type { AxiosError, AxiosResponse } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
 import { axiosWithAuth } from '@shared/lib/axiosWithAuth'
 
-export const useGetFilesStatsQuery = (): UseQueryResult<
-  ResBody,
-  AxiosError<ResBody>
-> => {
+type Res = UseQueryResult<ResBody, AxiosError<ResBody>>
+
+export const useGetFilesStatsQuery = (): Res => {
   const query = useQuery<ResBody, AxiosError<ResBody>>({
     queryKey: [queryKey.getFilesStats],
     refetchOnMount: true,
@@ -18,13 +17,13 @@ export const useGetFilesStatsQuery = (): UseQueryResult<
     retry: 0,
     enabled: true,
     queryFn: async () => {
-      const res = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
+      const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
         url: api.getFileList.url,
         method: api.getFileList.method,
         withCredentials: true,
       })
 
-      return res.data
+      return data
     },
   })
 

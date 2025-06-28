@@ -5,21 +5,19 @@ import type { AxiosError } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
 import { axiosWithAuth } from '@shared/lib/axiosWithAuth'
 
-export const useLogInMutation = (): UseMutationResult<
-  ResBody,
-  AxiosError<ResBody>,
-  Payload
-> => {
+type Res = UseMutationResult<ResBody, AxiosError<ResBody>, Payload>
+
+export const useLogInMutation = (): Res => {
   const query = useMutation<ResBody, AxiosError<ResBody>, Payload>({
     mutationKey: [queryKey.logIn],
     mutationFn: async ({ email, password }: Payload) => {
-      const res = await axiosWithAuth<ResBody>({
+      const { data } = await axiosWithAuth<ResBody>({
         url: api.logIn.url,
         method: api.logIn.method,
         data: { email, password },
       })
 
-      return res.data
+      return data
     },
   })
 

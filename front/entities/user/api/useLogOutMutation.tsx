@@ -4,20 +4,18 @@ import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import axios, { type AxiosError } from 'axios'
 import { queryKey } from '@shared/consts/queryKey'
 
-export const useLogOutMutation = (): UseMutationResult<
-  ResBody,
-  AxiosError<ResBody>,
-  void
-> => {
+type Res = UseMutationResult<ResBody, AxiosError<ResBody>, void>
+
+export const useLogOutMutation = (): Res => {
   const query = useMutation<ResBody, AxiosError<ResBody>>({
     mutationKey: [queryKey.logOut],
     mutationFn: async () => {
-      const res = await axios<ResBody>({
+      const { data } = await axios<ResBody>({
         url: api.logOut.url,
         method: api.logOut.method,
       })
 
-      return res.data
+      return data
     },
   })
 

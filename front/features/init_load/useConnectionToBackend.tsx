@@ -1,9 +1,9 @@
-import { useHealthCheck } from '@entities/dev'
+import { useHealthCheckQuery } from '@entities/dev'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'
 
 export const useConnectionToBackendCheck = (): void => {
-  const { data, isError, isSuccess, error } = useHealthCheck()
+  const { data, isError, isSuccess, error } = useHealthCheckQuery()
 
   useUpdateEffect(() => {
     if (isSuccess === true) {
