@@ -7,8 +7,7 @@ import { toast } from 'sonner'
 import { useLogInMutation, userRole, userSlice } from '@entities/user'
 import { useGetQuotationsQuery } from '@entities/quotation'
 import { useGetBookmarksQuery } from '@entities/bookmark'
-import type { NavigateState } from '@shared/types/NavigateState'
-import { type Location, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { dispatch } from '@shared/lib/redux'
 import { navSlice } from '@shared/nav'
 import { navItemId } from '@shared/consts/navItemId'
@@ -24,8 +23,7 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
     error,
   } = useLogInMutation()
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-  const location = useLocation() as Location<NavigateState>
+  const location = useLocation()
   const { refetch: refetchQuotations } = useGetQuotationsQuery()
   const { refetch: refetchBookmarks } = useGetBookmarksQuery()
 

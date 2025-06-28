@@ -6,7 +6,7 @@ import { useRegisterMutation, userSlice } from '@entities/user'
 import { toast } from 'sonner'
 import { asyncDelay } from '@shared/utils/delay'
 import { trackSignUpEventAtGoogleTagManager } from '@shared/lib/google_tag_manager/trackSignUpEventAtGoogleTagManager'
-import { dispatch } from '@shared/lib/redux'
+import { dispatch, getState } from '@shared/lib/redux'
 import { navSlice } from '@shared/nav'
 import { navItemId } from '@shared/consts/navItemId'
 
@@ -64,6 +64,15 @@ export const useRegister = ({
       const slideOutAndChangeUrl = async (): Promise<void> => {
         await asyncDelay(1000)
         await slideOut()
+
+        const navigateTo = getState().app.navigate.to
+
+        if (navigateTo !== undefined) {
+          void navigate(navigateTo)
+
+          return
+        }
+
         void navigate('..')
       }
 

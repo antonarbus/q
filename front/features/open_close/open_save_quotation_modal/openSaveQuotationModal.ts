@@ -1,23 +1,22 @@
 import { router } from '@shared/lib/router'
-import { getState } from '@shared/lib/redux'
+import { dispatch, getState } from '@shared/lib/redux'
 import { route } from '@shared/consts/route'
-import type { NavigateState } from '@shared/types/NavigateState'
+import { appSlice } from '@shared/appSlice'
 
 export const openSaveQuotationModal = (): void => {
-  const navigateState: NavigateState = {
-    navigatedFrom: `/`,
-    navigateTo: `/${route.save}`,
-  }
+  dispatch(
+    appSlice.actions.setNavigate({
+      from: `/`,
+      to: `/${route.save}`,
+      shouldSlide: false,
+    }),
+  )
 
   if (getState().user.email === null) {
-    void router.navigate(`./${route.login}`, {
-      state: navigateState,
-    })
+    void router.navigate(`./${route.login}`)
 
     return
   }
 
-  void router.navigate(`./${route.save}`, {
-    state: navigateState,
-  })
+  void router.navigate(`./${route.save}`)
 }

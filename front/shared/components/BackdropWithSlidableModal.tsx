@@ -1,8 +1,7 @@
 import { useRef } from 'react'
 import { useEffectOnce } from 'react-use'
 import { useSlide } from '../utils/useSlide'
-import { type Location, useLocation } from 'react-router-dom'
-import type { NavigateState } from '@shared/types/NavigateState'
+import { getState } from '@shared/lib/redux'
 
 type Props = {
   children: React.ReactNode
@@ -20,15 +19,13 @@ export const BackdropWithSlidableModal = ({
   shouldUnmountOnEsc,
 }: Props): React.JSX.Element => {
   const { ref: contentRef, slideIn, slideOut } = useSlide()
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-  const location = useLocation() as Location<NavigateState>
 
   const scrollTopPositionBeforeModalOpen = useRef(
     document.documentElement.scrollTop,
   )
 
   useEffectOnce(() => {
-    if (location.state?.shouldSlide === true) {
+    if (getState().app.navigate.shouldSlide === true) {
       const slideInAndSomeAction = async (): Promise<void> => {
         await slideIn()
         onMount?.()
@@ -46,7 +43,7 @@ export const BackdropWithSlidableModal = ({
         shouldUnmountOnEsc === true && event.key === 'Escape'
 
       if (shouldCloseModalOnEsc === true) {
-        if (location.state?.shouldSlide === true) {
+        if (getState().app.navigate.shouldSlide === true) {
           const slideOutAndSomeAction = async (): Promise<void> => {
             await slideOut()
             onUnmount?.()
@@ -99,7 +96,7 @@ export const BackdropWithSlidableModal = ({
 
   const unmountOnClickAway = (): void => {
     if (shouldUnmountOnClickAway === true) {
-      if (location.state?.shouldSlide === true) {
+      if (getState().app.navigate.shouldSlide === true) {
         const slideOutAndSomeAction = async (): Promise<void> => {
           await slideOut()
           onUnmount?.()

@@ -8,8 +8,8 @@ import { quotationSlice, useGetQuotationMutation } from '@entities/quotation'
 import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
 import { route } from '@shared/consts/route'
 import { toast } from 'sonner'
-import type { NavigateState } from '@shared/types/NavigateState'
 import { textSlice } from '@shared/lib/froala/textSlice'
+import { appSlice } from '@shared/appSlice'
 
 export const OpenSaveQuotationModalButton = ({
   id,
@@ -35,14 +35,15 @@ export const OpenSaveQuotationModalButton = ({
         }),
       )
 
-      const navigateState: NavigateState = {
-        navigatedFrom: `/`,
-        navigateTo: `/${route.save}`,
-      }
+      dispatch(
+        appSlice.actions.setNavigate({
+          from: `/`,
+          to: `/${route.save}`,
+          shouldSlide: false,
+        }),
+      )
 
-      void navigate(`./${id}`, {
-        state: navigateState,
-      })
+      void navigate(`./${id}`)
     }
   }, [isSuccess])
 

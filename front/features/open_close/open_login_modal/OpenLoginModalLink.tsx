@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { route } from '@shared/consts/route'
-import type { NavigateState } from '@shared/types/NavigateState'
+import { dispatch } from '@shared/lib/redux'
+import { appSlice } from '@shared/appSlice'
 
 type Props = {
   slideOut: () => Promise<void>
@@ -14,16 +15,10 @@ export const OpenLoginModalLink = ({ slideOut }: Props): React.JSX.Element => {
       onClick={(event: React.MouseEvent): void => {
         event.preventDefault()
 
-        const navigateState: NavigateState = {
-          shouldSlide: true,
-        }
-
         const slideAndNavigate = async (): Promise<void> => {
           await slideOut()
-
-          void navigate(`../${route.login}`, {
-            state: navigateState,
-          })
+          dispatch(appSlice.actions.setNavigate({ shouldSlide: true }))
+          void navigate(`../${route.login}`)
         }
 
         void slideAndNavigate()

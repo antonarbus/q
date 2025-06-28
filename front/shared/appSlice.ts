@@ -10,6 +10,11 @@ type State = {
     shouldShowLoader: boolean
     text: string | null
   }
+  navigate: {
+    from?: string
+    to?: string
+    shouldSlide?: boolean
+  }
 }
 
 const initialState: State = {
@@ -21,6 +26,11 @@ const initialState: State = {
   loadingOverlay: {
     shouldShowLoader: false,
     text: null,
+  },
+  navigate: {
+    from: '/',
+    to: '/',
+    shouldSlide: false,
   },
 }
 
@@ -57,6 +67,21 @@ export const appSlice = createSlice({
     hideLoadingOverlay: (state) => {
       state.loadingOverlay.shouldShowLoader = false
       state.loadingOverlay.text = null
+    },
+    setNavigate: (state, action: PayloadAction<State['navigate']>) => {
+      const { from, to, shouldSlide } = action.payload
+
+      if (from !== undefined) {
+        state.navigate.from = from
+      }
+
+      if (to !== undefined) {
+        state.navigate.to = to
+      }
+
+      if (shouldSlide !== undefined) {
+        state.navigate.shouldSlide = shouldSlide
+      }
     },
   },
 })

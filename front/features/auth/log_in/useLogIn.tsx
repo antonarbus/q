@@ -1,7 +1,7 @@
 import { dispatch, getState } from '@shared/lib/redux'
 import type { Signal } from '@preact/signals-react'
 import type { UseMutationResult } from '@tanstack/react-query'
-import { type Location, useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetBookmarksQuery } from '@entities/bookmark'
 import { useGetQuotationsQuery } from '@entities/quotation'
@@ -10,7 +10,6 @@ import { navItemId } from '@shared/consts/navItemId'
 import { route } from '@shared/consts/route'
 import { navSlice } from '@shared/nav'
 import { toast } from 'sonner'
-import type { NavigateState } from '@shared/types/NavigateState'
 import { asyncDelay } from '@shared/utils/delay'
 import { appSlice } from '@shared/appSlice'
 
@@ -43,8 +42,7 @@ export const useLogIn = ({
     error,
   } = useLogInMutation()
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-  const location = useLocation() as Location<NavigateState>
+  const location = useLocation()
   const { refetch: refetchQuotations } = useGetQuotationsQuery()
   const { refetch: refetchBookmarks } = useGetBookmarksQuery()
 
@@ -125,9 +123,10 @@ export const useLogIn = ({
       const slideOutAndChangeUrl = async (): Promise<void> => {
         await asyncDelay(1000)
         await slideOut()
-        const navigateTo = location.state?.navigateTo
 
-        if (typeof navigateTo === 'string') {
+        const navigateTo = getState().app.navigate.to
+
+        if (navigateTo !== undefined) {
           void navigate(navigateTo)
 
           return
