@@ -6,6 +6,12 @@ import { sendEmail } from '@back/shared/services/email'
 import { config } from '@back/config'
 import { UserModel } from '@back/entities/user'
 import { generateId } from '@back/shared/libs/nanoid'
+import {
+  generateAccessToken,
+  generateRefreshToken,
+} from '@back/shared/libs/jwt'
+import { userRole } from '@back/shared/consts/userRole'
+import { setRefreshTokenCookie } from '@back/shared/headers'
 
 export type ReqBody = {
   email: User['email']
@@ -13,6 +19,9 @@ export type ReqBody = {
 }
 
 export type ResBody = {
+  accessJwtToken: string
+  email: User['email']
+  roles: User['roles']
   message:
     | 'validation error'
     | 'already exists'
@@ -37,7 +46,12 @@ export const registerHandler: RouterHandler = async (req, res, next) => {
   }).lean()
 
   if (user !== null) {
-    res.status(httpStatus.forbidden_403).json({ message: 'already exists' })
+    res.status(httpStatus.forbidden_403).json({
+      message: 'already exists',
+      accessJwtToken: 'no access token',
+      email: emailFromInput,
+      roles: [userRole.user],
+    })
 
     return
   }
@@ -46,29 +60,43 @@ export const registerHandler: RouterHandler = async (req, res, next) => {
   const passwordEncrypted = await bcrypt.hash(passwordFromInput, saltRounds)
   const activationKey = generateId()
 
+  const refreshJwtToken = generateRefreshToken({
+    email: emailFromInput,
+    roles: [userRole.user],
+  })
+
+  setRefreshTokenCookie({ res, refreshJwtToken })
+
   const newUser = await UserModel.findOneAndUpdate(
     { email: emailFromInput },
     {
       password: passwordEncrypted,
       activationKey,
+      refreshJwtToken,
+      isActivated: false,
       registeredAt: new Date(),
+      loggedAt: new Date(),
     },
     { new: true, upsert: true },
   ).lean()
 
+  // ? not clear why this is needed, it should always be true
   if (newUser.activationKey !== activationKey) {
-    res
-      .status(httpStatus.serverError_500)
-      .json({ message: 'activation key not issued' })
+    res.status(httpStatus.serverError_500).json({
+      message: 'activation key not issued',
+      accessJwtToken: 'no access token',
+      email: emailFromInput,
+      roles: [userRole.user],
+    })
 
     return
   }
 
   const emailRes = await sendEmail({
     to: emailFromInput,
-    subject: 'Activate your account',
+    subject: 'Confirm your email',
     html: `
-        <p>Follow the link to activate the account.</p>
+        <p>Follow the link to confirm your email.</p>
         <br>
         <p>
           <a
@@ -82,12 +110,23 @@ export const registerHandler: RouterHandler = async (req, res, next) => {
   })
 
   if (emailRes?.[0].statusCode === 202) {
-    res.status(httpStatus.created_201).json({ message: 'activation link sent' })
+    res.status(httpStatus.created_201).json({
+      message: 'activation link sent',
+      accessJwtToken: generateAccessToken({
+        email: emailFromInput,
+        roles: [userRole.user],
+      }),
+      email: emailFromInput,
+      roles: [userRole.user],
+    })
 
     return
   }
 
-  res
-    .status(httpStatus.serverError_500)
-    .json({ message: 'activation link not sent' })
+  res.status(httpStatus.serverError_500).json({
+    message: 'activation link not sent',
+    accessJwtToken: 'no access token',
+    email: emailFromInput,
+    roles: [userRole.user],
+  })
 }

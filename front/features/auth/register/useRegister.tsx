@@ -2,10 +2,13 @@ import type { Signal } from '@preact/signals-react'
 import type { UseMutationResult } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { useRegisterMutation } from '@entities/user'
+import { useRegisterMutation, userSlice } from '@entities/user'
 import { toast } from 'sonner'
 import { asyncDelay } from '@shared/utils/delay'
 import { trackSignUpEventAtGoogleTagManager } from '@shared/lib/google_tag_manager/trackSignUpEventAtGoogleTagManager'
+import { dispatch } from '@shared/lib/redux'
+import { navSlice } from '@shared/nav'
+import { navItemId } from '@shared/consts/navItemId'
 
 type Props = {
   emailSignal: Signal<string>
@@ -41,6 +44,22 @@ export const useRegister = ({
       if (data.message === 'activation link sent') {
         toast.info('Check your inbox or spam')
       }
+
+      const { accessJwtToken, email, roles } = data
+
+      dispatch(
+        userSlice.actions.setAccessToken({
+          accessToken: accessJwtToken,
+        }),
+      )
+
+      dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
+
+      dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }))
+
+      dispatch(
+        navSlice.actions.showNavItems({ navItemIds: [navItemId.profile] }),
+      )
 
       const slideOutAndChangeUrl = async (): Promise<void> => {
         await asyncDelay(1000)

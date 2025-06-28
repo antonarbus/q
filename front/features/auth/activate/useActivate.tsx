@@ -34,44 +34,42 @@ export const useActivate = (): Res => {
   })
 
   useUpdateEffect(() => {
-    if (isSuccess === false) {
-      return
-    }
+    if (isSuccess === true) {
+      if (data.message === 'activated') {
+        const { accessJwtToken, email, roles } = data
 
-    if (data.message === 'activated') {
-      toast('Activated')
+        if (accessJwtToken === undefined) {
+          return
+        }
 
-      const { accessJwtToken, email, roles } = data
+        if (email === undefined) {
+          return
+        }
 
-      if (accessJwtToken === undefined) {
-        return
+        if (roles === undefined) {
+          return
+        }
+
+        dispatch(
+          userSlice.actions.setAccessToken({
+            accessToken: accessJwtToken,
+          }),
+        )
+
+        dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
+
+        dispatch(
+          navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }),
+        )
+
+        dispatch(
+          navSlice.actions.showNavItems({ navItemIds: [navItemId.profile] }),
+        )
       }
 
-      if (email === undefined) {
-        return
+      if (data.message === 'already activated') {
+        toast.info('Already activated')
       }
-
-      if (roles === undefined) {
-        return
-      }
-
-      dispatch(
-        userSlice.actions.setAccessToken({
-          accessToken: accessJwtToken,
-        }),
-      )
-
-      dispatch(userSlice.actions.rememberLoggedUser({ email, roles }))
-
-      dispatch(navSlice.actions.hideNavItems({ navItemIds: [navItemId.login] }))
-
-      dispatch(
-        navSlice.actions.showNavItems({ navItemIds: [navItemId.profile] }),
-      )
-    }
-
-    if (data.message === 'already activated') {
-      toast.info('Already activated')
     }
   }, [isSuccess])
 
