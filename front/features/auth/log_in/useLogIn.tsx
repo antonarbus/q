@@ -124,15 +124,16 @@ export const useLogIn = ({
         await asyncDelay(1000)
         await slideOut()
 
-        const navigateTo = getState().app.navigate.to
+        const navigateTo = getState().app.navigateState.to
 
         if (navigateTo !== undefined) {
-          void navigate(navigateTo)
+          await navigate(navigateTo)
+          dispatch(appSlice.actions.resetNavigateState())
 
           return
         }
 
-        void navigate('..')
+        await navigate('..')
       }
 
       void slideOutAndChangeUrl()

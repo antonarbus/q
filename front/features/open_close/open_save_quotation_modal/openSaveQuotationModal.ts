@@ -4,15 +4,14 @@ import { route } from '@shared/consts/route'
 import { appSlice } from '@shared/appSlice'
 
 export const openSaveQuotationModal = (): void => {
-  dispatch(
-    appSlice.actions.setNavigate({
-      from: `/`,
-      to: `/${route.save}`,
-      shouldSlide: false,
-    }),
-  )
-
   if (getState().user.email === null) {
+    dispatch(
+      appSlice.actions.setNavigateState({
+        to: `/${route.save}`,
+        shouldSlide: true,
+      }),
+    )
+
     void router.navigate(`./${route.login}`)
 
     return

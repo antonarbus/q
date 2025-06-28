@@ -4,6 +4,6 @@ import { dispatch } from '@shared/lib/redux'
 import { appSlice } from '@shared/appSlice'
 
 export const openRegisterModal = (): void => {
-  dispatch(appSlice.actions.setNavigate({ shouldSlide: true }))
+  dispatch(appSlice.actions.setNavigateState({ shouldSlide: true }))
   void router.navigate(`../${route.register}`)
 }

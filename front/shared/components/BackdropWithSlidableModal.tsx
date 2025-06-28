@@ -25,7 +25,7 @@ export const BackdropWithSlidableModal = ({
   )
 
   useEffectOnce(() => {
-    if (getState().app.navigate.shouldSlide === true) {
+    if (getState().app.navigateState.shouldSlide === true) {
       const slideInAndSomeAction = async (): Promise<void> => {
         await slideIn()
         onMount?.()
@@ -43,7 +43,7 @@ export const BackdropWithSlidableModal = ({
         shouldUnmountOnEsc === true && event.key === 'Escape'
 
       if (shouldCloseModalOnEsc === true) {
-        if (getState().app.navigate.shouldSlide === true) {
+        if (getState().app.navigateState.shouldSlide === true) {
           const slideOutAndSomeAction = async (): Promise<void> => {
             await slideOut()
             onUnmount?.()
@@ -96,7 +96,7 @@ export const BackdropWithSlidableModal = ({
 
   const unmountOnClickAway = (): void => {
     if (shouldUnmountOnClickAway === true) {
-      if (getState().app.navigate.shouldSlide === true) {
+      if (getState().app.navigateState.shouldSlide === true) {
         const slideOutAndSomeAction = async (): Promise<void> => {
           await slideOut()
           onUnmount?.()

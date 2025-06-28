@@ -17,7 +17,7 @@ export const OpenResetModalLink = ({ slideOut }: Props): React.JSX.Element => {
 
         const slideAndNavigate = async (): Promise<void> => {
           await slideOut()
-          dispatch(appSlice.actions.setNavigate({ shouldSlide: true }))
+          dispatch(appSlice.actions.setNavigateState({ shouldSlide: true }))
           void navigate(`../${route.requestPasswordReset}`)
         }
 

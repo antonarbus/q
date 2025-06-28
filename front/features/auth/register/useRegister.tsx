@@ -9,6 +9,7 @@ import { trackSignUpEventAtGoogleTagManager } from '@shared/lib/google_tag_manag
 import { dispatch, getState } from '@shared/lib/redux'
 import { navSlice } from '@shared/nav'
 import { navItemId } from '@shared/consts/navItemId'
+import { appSlice } from '@shared/appSlice'
 
 type Props = {
   emailSignal: Signal<string>
@@ -65,10 +66,11 @@ export const useRegister = ({
         await asyncDelay(1000)
         await slideOut()
 
-        const navigateTo = getState().app.navigate.to
+        const navigateTo = getState().app.navigateState.to
 
         if (navigateTo !== undefined) {
-          void navigate(navigateTo)
+          await navigate(navigateTo)
+          dispatch(appSlice.actions.resetNavigateState())
 
           return
         }

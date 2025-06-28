@@ -36,10 +36,9 @@ export const OpenSaveQuotationModalButton = ({
       )
 
       dispatch(
-        appSlice.actions.setNavigate({
-          from: `/`,
+        appSlice.actions.setNavigateState({
           to: `/${route.save}`,
-          shouldSlide: false,
+          shouldSlide: true,
         }),
       )
 
