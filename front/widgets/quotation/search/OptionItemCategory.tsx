@@ -1,6 +1,6 @@
 import { BsTags } from 'react-icons/bs'
 import { Box } from '@mui/material'
-import { getJsxWithBoldSubstr } from '@shared/util/getJsxWithBoldSubstr'
+import { getTextWithBoldSubStringAsJsx } from '@shared/util/getTextWithBoldSubStringAsJsx'
 import type { ItemPick } from '@back/api/bookmark/getBookmarksHandler'
 
 type Props = {
@@ -41,9 +41,9 @@ export const OptionItemCategory = (props: Props): React.JSX.Element => {
       </span>
       {props.inputValueSignal.value === ''
         ? (props.option.category ?? '')
-        : getJsxWithBoldSubstr({
+        : getTextWithBoldSubStringAsJsx({
             text: props.option.category ?? '',
-            boldText: props.inputValueSignal.value,
+            subString: props.inputValueSignal.value,
           })}
     </Box>
   )

@@ -1,4 +1,4 @@
-import type { ColDef } from 'ag-grid-community'
+import type { ColDef, ValueGetterParams } from 'ag-grid-community'
 import { ActionButtonsCellRenderer } from './renderer/ActionButtonsCellRenderer'
 import { SharedWithCellRenderer } from './renderer/SharedWithCellRenderer'
 import { DateCellRenderer } from '@shared/lib/ag-grid/renderers/DateCellRenderer'
@@ -100,6 +100,26 @@ export const columnDefs: ColDef<QuotationPick>[] = [
     field: 'access',
     headerName: 'shared with',
     cellRenderer: SharedWithCellRenderer,
-    valueFormatter: () => '', // to suppress the warning "Cell data type is "object" but no Value Formatter has been provided"
+    valueGetter: (
+      params: ValueGetterParams<QuotationPick, QuotationPick['access']>,
+    ): string => {
+      const access = params.data?.access
+
+      if (access?.level === 'everyone') {
+        return 'everyone'
+      }
+
+      if (access?.level === 'nobody') {
+        return 'nobody'
+      }
+
+      if (access?.level === 'custom') {
+        const userListAsString = access.userList.join(', ')
+
+        return userListAsString
+      }
+
+      return ''
+    },
   },
 ]

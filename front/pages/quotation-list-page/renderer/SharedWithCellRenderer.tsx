@@ -3,24 +3,40 @@ import type { ICellRendererParams } from 'ag-grid-community'
 import type { QuotationPick } from '@back/api/quotation/getQuotationsHandler'
 import { Link } from 'react-router-dom'
 import { route } from '@shared/const/route'
+import { getTextWithBoldSubStringAsJsx } from '@shared/util/getTextWithBoldSubStringAsJsx'
 
 export const SharedWithCellRenderer = (
-  params: ICellRendererParams<QuotationPick, QuotationPick['access']>,
+  params: ICellRendererParams<QuotationPick, string>,
 ): React.ReactNode => {
   const quotationId = params.data?.id
   const accessLevel = params.data?.access.level
   const userList = params.data?.access.userList ?? []
 
+  type FilterModel = {
+    access?: {
+      filter: string
+      type: string
+    }
+  }
+
+  const filterModel = params.api.getFilterModel() as FilterModel
+  const filterValue = filterModel.access?.filter ?? ''
+
   if (accessLevel === undefined) {
     return ''
   }
 
-  if (accessLevel === 'nobody') {
+  if (params.value === 'nobody') {
+    const text = getTextWithBoldSubStringAsJsx({
+      text: 'nobody',
+      subString: filterValue,
+    })
+
     return (
       <Link to={`${route.share}/${quotationId}`}>
         <Chip
           color='warning'
-          label='nobody'
+          label={text}
           size='small'
           sx={{
             width: 'min-content',
@@ -34,11 +50,16 @@ export const SharedWithCellRenderer = (
   }
 
   if (accessLevel === 'everyone') {
+    const text = getTextWithBoldSubStringAsJsx({
+      text: 'everyone',
+      subString: filterValue,
+    })
+
     return (
       <Link to={`share/${quotationId}`}>
         <Chip
           color='info'
-          label='everyone'
+          label={text}
           size='small'
           sx={{
             width: 'min-content',
@@ -54,6 +75,11 @@ export const SharedWithCellRenderer = (
   return (
     <>
       {userList.map((email) => {
+        const text = getTextWithBoldSubStringAsJsx({
+          text: email,
+          subString: filterValue,
+        })
+
         return (
           <Tooltip
             key={email}
@@ -62,7 +88,7 @@ export const SharedWithCellRenderer = (
           >
             <Link to={`share/${quotationId}`}>
               <Chip
-                label={email}
+                label={text}
                 size='small'
                 sx={{
                   width: 'min-content',

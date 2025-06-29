@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { PiBooks } from 'react-icons/pi'
-import { getJsxWithBoldSubstr } from '@shared/util/getJsxWithBoldSubstr'
+import { getTextWithBoldSubStringAsJsx } from '@shared/util/getTextWithBoldSubStringAsJsx'
 import type { ItemPick } from '@back/api/bookmark/getBookmarksHandler'
 
 type Props = {
@@ -41,9 +41,9 @@ export const OptionItemName = (props: Props): React.JSX.Element => {
       </span>
       {props.inputValueSignal.value === ''
         ? props.option.name
-        : getJsxWithBoldSubstr({
+        : getTextWithBoldSubStringAsJsx({
             text: props.option.name ?? '',
-            boldText: props.inputValueSignal.value,
+            subString: props.inputValueSignal.value,
           })}
     </Box>
   )
