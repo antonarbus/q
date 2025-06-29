@@ -9,9 +9,7 @@ type Props = {
 }
 
 export const OptionItemDescription = (props: Props): React.JSX.Element => {
-  const getHighlightedDescription = ():
-    | string
-    | (string | React.JSX.Element)[] => {
+  const getHighlightedDescription = (): React.ReactNode => {
     if (props.inputValueSignal.value !== '') {
       const boldSubString = getTextWithBoldSubStringAsJsx({
         text: props.option.desc ?? '',
