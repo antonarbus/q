@@ -1,12 +1,12 @@
 import type { Request, Response, NextFunction } from 'express'
-import { httpStatus } from '@back/shared/consts/httpStatus'
+import { httpStatus } from '@back/shared/const/httpStatus'
 import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
-import { userRole } from '@back/shared/consts/userRole'
+import { userRole } from '@back/shared/const/userRole'
 import { getUserFromAccessTokenOrNull } from '@back/entities/user'
 import {
   VisitorsCountModel,
   type VisitorsCount,
-} from '@back/entities/visitors_count'
+} from '@back/entities/visitors-count'
 
 export type ResBody = {
   visitorsCount: VisitorsCount[]

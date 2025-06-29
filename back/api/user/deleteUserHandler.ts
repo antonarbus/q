@@ -1,9 +1,9 @@
 import type { Request, Response, NextFunction } from 'express'
 import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/consts/httpStatus'
+import { httpStatus } from '@back/shared/const/httpStatus'
 // import { bucket, getFolderPath } from '@back/shared/services/storage'
 import type { User } from '@entities/user'
-import { userRole } from '@back/shared/consts/userRole'
+import { userRole } from '@back/shared/const/userRole'
 import {
   getUserFromAccessTokenOrThrowUnauthorized,
   UserModel,

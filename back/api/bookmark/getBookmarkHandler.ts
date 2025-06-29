@@ -1,8 +1,8 @@
 import type { Request, Response, NextFunction } from 'express'
 import type { Item } from '@entities/quotation'
-import { httpStatus } from '@back/shared/consts/httpStatus'
-import { bucket, getFileInfo } from '@back/shared/services/storage'
-import { jsonParseSafe } from '@back/shared/utils/jsonParseSafe'
+import { httpStatus } from '@back/shared/const/httpStatus'
+import { bucket, getFileInfo } from '@back/shared/lib/google-cloud-storage'
+import { jsonParseSafe } from '@back/shared/util/jsonParseSafe'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { BookmarkModel } from '@back/entities/bookmark'
 

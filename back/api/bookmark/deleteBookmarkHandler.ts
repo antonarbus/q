@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from 'express'
 import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/consts/httpStatus'
+import { httpStatus } from '@back/shared/const/httpStatus'
 import type { Item } from '@entities/quotation'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { BookmarkModel } from '@back/entities/bookmark'

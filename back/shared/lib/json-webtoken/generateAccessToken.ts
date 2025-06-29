@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import type { JwtPayloadExtended } from './types'
-import { getEnvVarOrThrow } from '../../utils/getEnvVar'
+import { getEnvVarOrThrow } from '../dot-env/getEnvVar'
 
 export const generateAccessToken = (payload: JwtPayloadExtended): string => {
   const salt = getEnvVarOrThrow('JWT_ACCESS_SECRET')

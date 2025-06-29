@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from 'express'
-import { bucket } from '@back/shared/services/storage'
-import { httpStatus } from '@back/shared/consts/httpStatus'
-import { userRole } from '@back/shared/consts/userRole'
+import { bucket } from '@back/shared/lib/google-cloud-storage'
+import { httpStatus } from '@back/shared/const/httpStatus'
+import { userRole } from '@back/shared/const/userRole'
 import { getUserFromRefreshTokenOrJohn } from '@back/entities/user'
 
 // https://cloud.google.com/storage/docs/using-cors#storage-get-bucket-metadata-nodejs

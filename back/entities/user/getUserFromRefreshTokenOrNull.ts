@@ -1,8 +1,8 @@
-import { getRefreshTokenFromCookie } from '@back/shared/headers/tokens/getRefreshTokenFromCookie'
+import { getRefreshTokenFromCookie } from '@back/shared/headers/token/getRefreshTokenFromCookie'
 import {
   getJwtExpirationInDays,
   verifyRefreshToken,
-} from '@back/shared/libs/jwt'
+} from '@back/shared/lib/json-webtoken'
 import type { User } from '@entities/user'
 import type { Request } from 'express'
 

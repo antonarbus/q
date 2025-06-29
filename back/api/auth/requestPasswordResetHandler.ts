@@ -1,10 +1,10 @@
 import type { Request, Response, NextFunction } from 'express'
 import type { User } from '@entities/user'
-import { httpStatus } from '@back/shared/consts/httpStatus'
-import { sendEmail } from '@back/shared/services/email'
+import { httpStatus } from '@back/shared/const/httpStatus'
+import { sendEmail } from '@back/shared/lib/sendgrid'
 import { config } from '@back/config'
 import { UserModel } from '@back/entities/user'
-import { generateId } from '@back/shared/libs/nanoid'
+import { generateId } from '@back/shared/lib/nanoid'
 
 export type ReqBody = {
   email: User['email']

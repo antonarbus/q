@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { getEnvVarOrThrow } from '../../utils/getEnvVar'
+import { getEnvVarOrThrow } from '../dot-env/getEnvVar'
 import type { JwtPayloadExtended } from './types'
 
 export const generateRefreshToken = (payload: JwtPayloadExtended): string => {

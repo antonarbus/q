@@ -1,4 +1,4 @@
-import { jsonParseSafe } from '@back/shared/utils/jsonParseSafe'
+import { jsonParseSafe } from '@back/shared/util/jsonParseSafe'
 import type { JwtPayload } from 'jsonwebtoken'
 
 export const getJwtExpirationInDays = ({

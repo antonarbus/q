@@ -1,11 +1,11 @@
 import type { Request, Response, NextFunction } from 'express'
 import type { User } from '@entities/user'
 import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
-import { httpStatus } from '@back/shared/consts/httpStatus'
+import { httpStatus } from '@back/shared/const/httpStatus'
 import {
   generateAccessToken,
   generateRefreshToken,
-} from '@back/shared/libs/jwt'
+} from '@back/shared/lib/json-webtoken'
 import { setRefreshTokenCookie } from '@back/shared/headers'
 import { UserModel } from '@back/entities/user'
 

@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { getEnvVarOrThrow } from '@back/shared/utils/getEnvVar'
+import { getEnvVarOrThrow } from '@back/shared/lib/dot-env'
 import { Storage } from '@google-cloud/storage'
 
 //* https://console.cloud.google.com/storage/browser/quotation-app-bucket

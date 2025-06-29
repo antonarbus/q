@@ -2,7 +2,7 @@ import { defineConfig, devices } from '@playwright/test'
 import { userFilePath } from 'tests/setup/userFilePath'
 import 'dotenv/config'
 import { config } from './back/config'
-import { getEnvVar } from '@back/shared/utils/getEnvVar'
+import { getEnvVar } from '@back/shared/lib/dot-env'
 import { headerName } from '@back/shared/headers'
 
 // https://playwright.dev/docs/test-configuration

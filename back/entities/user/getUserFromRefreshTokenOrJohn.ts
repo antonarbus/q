@@ -1,8 +1,8 @@
 import type { User } from '@entities/user'
 import type { Request } from 'express'
-import { userRole } from '@back/shared/consts/userRole'
-import { getRefreshTokenFromCookie } from '@back/shared/headers/tokens/getRefreshTokenFromCookie'
-import { verifyRefreshToken } from '@back/shared/libs/jwt'
+import { userRole } from '@back/shared/const/userRole'
+import { getRefreshTokenFromCookie } from '@back/shared/headers/token/getRefreshTokenFromCookie'
+import { verifyRefreshToken } from '@back/shared/lib/json-webtoken'
 
 type Props = {
   req: Request<unknown>

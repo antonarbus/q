@@ -1,16 +1,16 @@
 import type { Request, Response, NextFunction } from 'express'
 import bcrypt from 'bcryptjs'
 import type { User } from '@entities/user'
-import { httpStatus } from '@back/shared/consts/httpStatus'
-import { sendEmail } from '@back/shared/services/email'
+import { httpStatus } from '@back/shared/const/httpStatus'
+import { sendEmail } from '@back/shared/lib/sendgrid'
 import { config } from '@back/config'
 import { UserModel } from '@back/entities/user'
-import { generateId } from '@back/shared/libs/nanoid'
+import { generateId } from '@back/shared/lib/nanoid'
 import {
   generateAccessToken,
   generateRefreshToken,
-} from '@back/shared/libs/jwt'
-import { userRole } from '@back/shared/consts/userRole'
+} from '@back/shared/lib/json-webtoken'
+import { userRole } from '@back/shared/const/userRole'
 import { setRefreshTokenCookie } from '@back/shared/headers'
 
 export type ReqBody = {

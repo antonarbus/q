@@ -1,4 +1,4 @@
-import { getEnvVarOrThrow } from '@back/shared/utils/getEnvVar'
+import { getEnvVarOrThrow } from '@back/shared/lib/dot-env'
 import sgMail, { type MailDataRequired } from '@sendgrid/mail'
 
 sgMail.setApiKey(getEnvVarOrThrow('SENDGRID_API_KEY'))

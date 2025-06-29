@@ -1,4 +1,4 @@
-import { getEnvVar } from './shared/utils/getEnvVar'
+import { getEnvVar } from './shared/lib/dot-env/getEnvVar'
 
 export const config = {
   get installation() {

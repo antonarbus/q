@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from 'express'
-import { httpStatus } from '@back/shared/consts/httpStatus'
+import { httpStatus } from '@back/shared/const/httpStatus'
 import {
   removeNoTraceMode,
   removeRefreshTokenCookie,

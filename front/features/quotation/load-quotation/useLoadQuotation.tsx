@@ -12,7 +12,7 @@ import { navSlice } from '@shared/nav'
 import { toast } from 'sonner'
 import { appSlice } from '@shared/appSlice'
 import { useParams } from 'react-router-dom'
-import { httpStatus } from '@back/shared/consts/httpStatus'
+import { httpStatus } from '@back/shared/const/httpStatus'
 import { asyncDelay } from '@shared/util/delay'
 
 export const useLoadQuotation = (): void => {

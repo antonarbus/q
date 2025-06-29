@@ -1,17 +1,17 @@
 import type { Request, Response, NextFunction } from 'express'
 import bcrypt from 'bcryptjs'
 import type { User } from '@entities/user'
-import { httpStatus } from '@back/shared/consts/httpStatus'
-import { sendEmail } from '@back/shared/services/email'
+import { httpStatus } from '@back/shared/const/httpStatus'
+import { sendEmail } from '@back/shared/lib/sendgrid'
 import { config } from '@back/config'
 import {
   generateAccessToken,
   generateRefreshToken,
   getJwtExpirationInDays,
   verifyRefreshToken,
-} from '@back/shared/libs/jwt'
+} from '@back/shared/lib/json-webtoken'
 import { setNoTraceMode, setRefreshTokenCookie } from '@back/shared/headers'
-import { userRole } from '@back/shared/consts/userRole'
+import { userRole } from '@back/shared/const/userRole'
 import { getUserFromAccessTokenOrNull, UserModel } from '@back/entities/user'
 
 export type ReqBody = {

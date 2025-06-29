@@ -1,4 +1,4 @@
-import type { JwtPayloadExtended } from '@back/shared/libs/jwt'
+import type { JwtPayloadExtended } from '@back/shared/lib/json-webtoken'
 import { dispatch, getState } from '@shared/lib/redux'
 import { jwtDecode } from 'jwt-decode'
 import { useEffectOnce, useUpdateEffect } from 'react-use'

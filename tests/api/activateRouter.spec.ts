@@ -1,7 +1,7 @@
 import { config } from '@back/config'
 import { UserModel } from '@back/entities/user'
 import { api } from '@back/api'
-import { connectToDb } from '@back/shared/libs/mongoose/connectToDb'
+import { connectToDb } from '@back/shared/lib/mongoose/connectToDb'
 import { test, expect } from '@playwright/test'
 
 test.describe.configure({ mode: 'serial' })

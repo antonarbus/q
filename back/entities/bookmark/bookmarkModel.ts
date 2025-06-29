@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose'
 import type { Item } from '@entities/bookmark'
-import { generateId } from '@back/shared/libs/nanoid'
+import { generateId } from '@back/shared/lib/nanoid'
 
 const bookmarkSchema = new Schema<Item>(
   {

@@ -1,9 +1,11 @@
 // const
 export { headerName } from './const/headerName'
+
 // tokens
-export { setRefreshTokenCookie } from './tokens/setRefreshTokenCookie'
-export { removeRefreshTokenCookie } from './tokens/removeRefreshTokenCookie'
+export { setRefreshTokenCookie } from './token/setRefreshTokenCookie'
+export { removeRefreshTokenCookie } from './token/removeRefreshTokenCookie'
+
 // no_trace
-export { getShouldNotTrace } from './no_trace/getShouldNotTrace'
-export { setNoTraceMode } from './no_trace/setNoTraceMode'
-export { removeNoTraceMode } from './no_trace/removeNoTraceMode'
+export { getShouldNotTrace } from './no-trace/getShouldNotTrace'
+export { setNoTraceMode } from './no-trace/setNoTraceMode'
+export { removeNoTraceMode } from './no-trace/removeNoTraceMode'

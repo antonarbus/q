@@ -2,7 +2,7 @@ import type { User } from '@entities/user'
 import { errorMessageCommon } from '@shared/const/errorMessageCommon'
 import { headerName } from '@back/shared/headers'
 import type { Request } from 'express'
-import { verifyAccessToken } from '@back/shared/libs/jwt'
+import { verifyAccessToken } from '@back/shared/lib/json-webtoken'
 
 type Props = {
   req: Request<unknown>
