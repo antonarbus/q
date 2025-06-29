@@ -5,19 +5,20 @@ import { Link } from 'react-router-dom'
 import { route } from '@shared/const/route'
 import { getTextWithBoldSubStringAsJsx } from '@shared/util/getTextWithBoldSubStringAsJsx'
 
+type FilterModel = {
+  access?: {
+    filter: string
+    filterType: string
+    type: string
+  }
+}
+
 export const SharedWithCellRenderer = (
   params: ICellRendererParams<QuotationPick, string>,
 ): React.ReactNode => {
   const quotationId = params.data?.id
   const accessLevel = params.data?.access.level
   const userList = params.data?.access.userList ?? []
-
-  type FilterModel = {
-    access?: {
-      filter: string
-      type: string
-    }
-  }
 
   const filterModel = params.api.getFilterModel() as FilterModel
   const filterValue = filterModel.access?.filter ?? ''

@@ -26,7 +26,11 @@ export const getTextWithBoldSubStringAsJsx = ({
               whiteSpace: 'pre-wrap',
             }}
           >
-            {isMatch === true ? <b>{part}</b> : part}
+            {isMatch === true ? (
+              <span style={{ fontWeight: 600 }}>{part}</span>
+            ) : (
+              part
+            )}
           </span>
         )
       })}

@@ -5,6 +5,10 @@ import { DateCellRenderer } from '@shared/lib/ag-grid/renderers/DateCellRenderer
 import { dateFilterComparator } from '@shared/lib/ag-grid/comparators/dateFilterComparator'
 import { dateValueGetter } from '@shared/lib/ag-grid/value_getter/dateValueGetter'
 import type { QuotationPick } from '@back/api/quotation/getQuotationsHandler'
+import { IdCellRenderer } from './renderer/IdCellRenderer'
+import { NameCellRenderer } from './renderer/NameCellRenderer'
+import { CategoryCellRenderer } from './renderer/CategoryCellRenderer'
+import { DescriptionCellRenderer } from './renderer/DescriptionCellRenderer'
 
 export const defaultColDef: ColDef<QuotationPick> = {
   headerClass: ['center'],
@@ -38,18 +42,22 @@ export const columnDefs: ColDef<QuotationPick>[] = [
   {
     field: 'id',
     headerName: 'id',
+    cellRenderer: IdCellRenderer,
   },
   {
     field: 'name',
     headerName: 'name',
+    cellRenderer: NameCellRenderer,
   },
   {
     field: 'category',
     headerName: 'category',
+    cellRenderer: CategoryCellRenderer,
   },
   {
     field: 'desc',
     headerName: 'description',
+    cellRenderer: DescriptionCellRenderer,
   },
   {
     field: 'openedAt',
