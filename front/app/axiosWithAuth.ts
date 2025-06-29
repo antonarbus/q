@@ -5,7 +5,7 @@ import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
 import type { ResBody } from '@back/api/auth/getAccessTokenHandler'
 import { userSlice } from '@entities/user'
 import { initAccessTokenFetchingPromise } from '@features/auth/get_access_token/AccessToken'
-import { instantiateAxiosWithAuth } from '@shared/lib/axiosWithAuth'
+import { instantiateAxiosWithAuth } from '@shared/lib/axios/axiosWithAuth'
 import { dispatch, getState } from '@shared/lib/redux'
 
 const axiosWithAuth = axios.create({ withCredentials: true })

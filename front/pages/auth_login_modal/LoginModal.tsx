@@ -5,11 +5,11 @@ import { useRef } from 'react'
 import { useLogIn } from '@features/auth/log_in'
 import { OpenRegisterModalLink } from '@features/open_close/open_register_modal'
 import { OpenResetModalLink } from '@features/open_close/open_reset_modal'
-import { EmailField } from '@shared/components/input_fields/EmailField'
-import { FormModal } from '@shared/components/FormModal'
-import { PasswordField } from '@shared/components/input_fields/PasswordField'
-import { router } from '@shared/lib/router'
-import { useSlide } from '@shared/utils/useSlide'
+import { EmailField } from '@shared/component/input_fields/EmailField'
+import { FormModal } from '@shared/component/FormModal'
+import { PasswordField } from '@shared/component/input_fields/PasswordField'
+import { router } from '@shared/lib/react-router-dom'
+import { useSlide } from '@shared/util/useSlide'
 
 export const LoginModal = (): React.JSX.Element => {
   const { ref: modalRef, slideOut } = useSlide()

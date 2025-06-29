@@ -3,7 +3,7 @@ import { httpStatus } from '../shared/consts/httpStatus'
 import {
   type ErrorMessageCommon,
   errorMessageCommon,
-} from '@shared/consts/errorMessageCommon'
+} from '@shared/const/errorMessageCommon'
 
 type ErrorHandlerBody = {
   message: ErrorMessageCommon

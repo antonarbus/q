@@ -3,9 +3,9 @@ import type { MouseEvent } from 'react'
 import { MdCopyAll } from 'react-icons/md'
 import { copySlice } from '@entities/copy'
 import { itemType, saveBlockHeightByIndex, useBlock } from '@entities/quotation'
-import { cls } from '@shared/consts/cls'
+import { cls } from '@shared/const/cls'
 import { Tooltip } from '@mui/material'
-import { getClosestPaperElementHtml } from '@shared/utils/htmlGetter/getClosestPaperElementHtml'
+import { getClosestPaperElementHtml } from '@shared/util/htmlGetter/getClosestPaperElementHtml'
 import { textSlice } from '@shared/lib/froala/textSlice'
 
 export const CopyBlockIcon = (): React.JSX.Element => {

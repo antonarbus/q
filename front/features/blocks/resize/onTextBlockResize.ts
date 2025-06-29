@@ -4,7 +4,7 @@ import type {
   OnBlockResize,
   OnBlockResizeStart,
   OnBlockResizeStop,
-} from '@shared/types/resizablePaper'
+} from '@shared/type/resizablePaper'
 
 export const onTextBlockResizeStart: OnBlockResizeStart = ({
   blockIndex,

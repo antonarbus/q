@@ -1,6 +1,6 @@
-import { router } from '@shared/lib/router'
+import { router } from '@shared/lib/react-router-dom'
 import { dispatch, getState } from '@shared/lib/redux'
-import { route } from '@shared/consts/route'
+import { route } from '@shared/const/route'
 import { appSlice } from '@shared/appSlice'
 
 export const openShareQuotationModal = (): void => {

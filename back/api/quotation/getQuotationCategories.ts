@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from 'express'
 import type { Quotation } from '@entities/quotation'
-import type { ErrorMessageCommon } from '@shared/consts/errorMessageCommon'
+import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/consts/httpStatus'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { QuotationModel } from '@back/entities/quotation'

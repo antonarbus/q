@@ -4,7 +4,7 @@ import {
   boqRowCellKey,
   itemType,
 } from '@entities/quotation'
-import type { FroalaEditorRef } from '@shared/types/froala'
+import type { FroalaEditorRef } from '@shared/type/froala'
 import { updateRowBlockCellAtStore } from '@entities/quotation/redux/updaters/updateRowBlockCellAtStore'
 import { getState } from '@shared/lib/redux'
 import { updateRowBlockCellWithValue } from '@entities/quotation/utils/updateRowBlockCellWithValue'

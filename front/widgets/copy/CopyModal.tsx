@@ -4,7 +4,7 @@ import {
   PressEscIcon,
   useEnableFroalasOnCloseCopyModal,
 } from '@features/open_close/close_copy_modal'
-import { cursorPosSignal } from '@shared/utils/cursorPosSignal'
+import { cursorPosSignal } from '@shared/util/cursorPosSignal'
 import { FirstCopiedItem } from './FirstCopiedItem'
 import { RestOfCopiedItems } from './RestOfCopiedItems'
 import { useCopyModalAnimation } from './useCopyModalAnimation'

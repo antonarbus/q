@@ -10,11 +10,11 @@ import {
   useSaveQuotationMutation,
   type SaveQuotationFormValues,
 } from '@entities/quotation'
-import { navItemId } from '@shared/consts/navItemId'
+import { navItemId } from '@shared/const/navItemId'
 import { createLoadingMenuIconMachine, navSlice } from '@shared/nav'
 import { toast } from 'sonner'
-import { route } from '@shared/consts/route'
-import { asyncDelay } from '@shared/utils/delay'
+import { route } from '@shared/const/route'
+import { asyncDelay } from '@shared/util/delay'
 import { createActor } from 'xstate'
 
 type Props = {

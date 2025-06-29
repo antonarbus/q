@@ -1,7 +1,7 @@
 import { api } from '@back/api'
 import { getState } from '@shared/lib/redux'
 import { removeLoadingBar } from '@shared/lib/froala/removeLoadingBar'
-import { getFileSizeInMb } from '@shared/utils/getFileSizeInMb'
+import { getFileSizeInMb } from '@shared/util/getFileSizeInMb'
 import { hideDraggableArea } from './showDraggableArea'
 import type { ResBody as ResBodyGetSignedUrl } from '@back/api/file/fileUploadSignedUrlHandler'
 import type {
@@ -9,9 +9,9 @@ import type {
   ReqBody as Payload,
 } from '@back/api/file/saveFileInfoHandler'
 import { toast } from 'sonner'
-import { asyncDelay } from '@shared/utils/delay'
+import { asyncDelay } from '@shared/util/delay'
 import type { FroalaProps } from '@entities/quotation/ui/froala/types'
-import { axiosWithAuth } from '@shared/lib/axiosWithAuth'
+import { axiosWithAuth } from '@shared/lib/axios'
 import axios, { type AxiosError } from 'axios'
 
 type BeforeUpload = NonNullable<FroalaProps['beforeUpload']>

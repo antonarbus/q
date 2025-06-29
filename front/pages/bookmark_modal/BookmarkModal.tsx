@@ -1,6 +1,6 @@
 import { FiEdit3 } from 'react-icons/fi'
 import { useSaveBookmark } from '@features/bookmark/save_bookmark'
-import { FormModal } from '@shared/components/FormModal'
+import { FormModal } from '@shared/component/FormModal'
 import { BookmarkField } from './BookmarkField'
 import {
   useLoadInitValuesIntoBookmarkModal,
@@ -9,13 +9,13 @@ import {
 import { useUnmount } from 'react-use'
 import { quotationSlice } from '@entities/quotation'
 import { dispatch } from '@shared/lib/redux'
-import { router } from '@shared/lib/router'
-import { NameField } from '@shared/components/input_fields/NameField'
-import { CategoryField } from '@shared/components/input_fields/CategoryField'
-import { DescriptionField } from '@shared/components/input_fields/DescriptionField'
-import { InfoField } from '@shared/components/input_fields/InfoField'
+import { router } from '@shared/lib/react-router-dom'
+import { NameField } from '@shared/component/input_fields/NameField'
+import { CategoryField } from '@shared/component/input_fields/CategoryField'
+import { DescriptionField } from '@shared/component/input_fields/DescriptionField'
+import { InfoField } from '@shared/component/input_fields/InfoField'
 import { useGetBookmarkCategoriesQuery } from '@entities/bookmark'
-import { useSlide } from '@shared/utils/useSlide'
+import { useSlide } from '@shared/util/useSlide'
 
 export const BookmarkModal = (): React.JSX.Element => {
   const { ref: modalRef, slideOut } = useSlide()

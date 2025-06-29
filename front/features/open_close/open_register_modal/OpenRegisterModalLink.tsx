@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { route } from '@shared/consts/route'
+import { route } from '@shared/const/route'
 import { openRegisterModal } from './openRegisterModal'
 
 type Props = {

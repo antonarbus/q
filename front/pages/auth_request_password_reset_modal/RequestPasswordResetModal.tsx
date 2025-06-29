@@ -4,10 +4,10 @@ import { useSignal } from '@preact/signals-react'
 import { useRef } from 'react'
 import { useRequestPasswordReset } from '@features/auth/request_password_reset'
 import { OpenLoginModalLink } from '@features/open_close/open_login_modal'
-import { EmailField } from '@shared/components/input_fields/EmailField'
-import { FormModal } from '@shared/components/FormModal'
-import { router } from '@shared/lib/router'
-import { useSlide } from '@shared/utils/useSlide'
+import { EmailField } from '@shared/component/input_fields/EmailField'
+import { FormModal } from '@shared/component/FormModal'
+import { router } from '@shared/lib/react-router-dom'
+import { useSlide } from '@shared/util/useSlide'
 
 export const RequestPasswordResetModal = (): React.JSX.Element => {
   const { ref: modalRef, slideOut } = useSlide()

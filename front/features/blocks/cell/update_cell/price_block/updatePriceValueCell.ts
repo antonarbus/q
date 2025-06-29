@@ -1,8 +1,8 @@
 import { dispatch, getState } from '@shared/lib/redux'
 import { itemType, quotationSlice } from '@entities/quotation'
-import type { FroalaEditorRef } from '@shared/types/froala'
-import { getNumberFromString } from '@shared/utils/getNumberFromString'
-import { getTextContentFromHtml } from '@shared/utils/getTextContentFromHtml'
+import type { FroalaEditorRef } from '@shared/type/froala'
+import { getNumberFromString } from '@shared/util/getNumberFromString'
+import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
 
 type Props = {
   editorRef: FroalaEditorRef

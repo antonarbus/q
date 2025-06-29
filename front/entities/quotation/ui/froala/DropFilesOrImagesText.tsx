@@ -1,6 +1,6 @@
 import { useFroala } from '@entities/quotation/providers/FroalaProvider'
 import { Box } from '@mui/material'
-import { cls } from '@shared/consts/cls'
+import { cls } from '@shared/const/cls'
 import { theme } from '@shared/theme'
 
 type Props = {

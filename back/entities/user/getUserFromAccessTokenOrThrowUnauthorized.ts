@@ -1,5 +1,5 @@
 import type { User } from '@entities/user'
-import { errorMessageCommon } from '@shared/consts/errorMessageCommon'
+import { errorMessageCommon } from '@shared/const/errorMessageCommon'
 import { headerName } from '@back/shared/headers'
 import type { Request } from 'express'
 import { verifyAccessToken } from '@back/shared/libs/jwt'

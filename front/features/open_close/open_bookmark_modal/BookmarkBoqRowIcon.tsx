@@ -8,8 +8,8 @@ import {
   useBlock,
   useRow,
 } from '@entities/quotation'
-import { cls } from '@shared/consts/cls'
-import { route } from '@shared/consts/route'
+import { cls } from '@shared/const/cls'
+import { route } from '@shared/const/route'
 import { toast } from 'sonner'
 import { Tooltip } from '@mui/material'
 import { useIsCopyModalVisible } from '@entities/copy'

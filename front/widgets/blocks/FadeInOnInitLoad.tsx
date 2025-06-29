@@ -1,5 +1,5 @@
 import { motion } from 'motion/react'
-import { cls } from '@shared/consts/cls'
+import { cls } from '@shared/const/cls'
 
 type Props = {
   children: React.ReactNode

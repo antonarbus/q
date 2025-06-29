@@ -1,6 +1,6 @@
 import { Tooltip } from '@mui/material'
 import { MdDeleteOutline } from 'react-icons/md'
-import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
+import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { theme } from '@shared/theme'
 import { useFileDelete } from './useFileDelete'
 

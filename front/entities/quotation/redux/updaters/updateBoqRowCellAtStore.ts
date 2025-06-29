@@ -1,6 +1,6 @@
 import { dispatch } from '@shared/lib/redux'
-import { getNumberFromString } from '@shared/utils/getNumberFromString'
-import { getTextContentFromHtml } from '@shared/utils/getTextContentFromHtml'
+import { getNumberFromString } from '@shared/util/getNumberFromString'
+import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
 import { getBoqRowFromStore } from '../getters/getBoqRowFromStore'
 import { quotationSlice } from '../quotationSlice'
 import type { BoqRowCellKey } from '@entities/quotation/consts/boqRowCellKey'

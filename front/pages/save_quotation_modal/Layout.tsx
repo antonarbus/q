@@ -1,8 +1,8 @@
 import { Box } from '@mui/material'
 import { useEffectOnce } from 'react-use'
-import { OutlinedDivWithLabel } from '@shared/components/OutlinedDivWithLabel'
+import { OutlinedDivWithLabel } from '@shared/component/OutlinedDivWithLabel'
 import { dispatch, useSelector } from '@shared/lib/redux'
-import { cls } from '@shared/consts/cls'
+import { cls } from '@shared/const/cls'
 import { textSlice } from '@shared/lib/froala/textSlice'
 
 type Props = {

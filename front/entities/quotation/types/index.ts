@@ -1,4 +1,4 @@
-import type { FroalaEditorRef } from '@shared/types/froala'
+import type { FroalaEditorRef } from '@shared/type/froala'
 import type { BoqRowKey } from '../consts/boqRowKey'
 import type { itemType } from '../consts/itemType'
 import type { Signal } from '@preact/signals-react'

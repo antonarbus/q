@@ -5,8 +5,8 @@ import type {
 import { api } from '@back/api'
 import { type UseQueryResult, useQuery } from '@tanstack/react-query'
 import type { AxiosError } from 'axios'
-import { queryKey } from '@shared/consts/queryKey'
-import { axiosWithAuth } from '@shared/lib/axiosWithAuth'
+import { queryKey } from '@shared/const/queryKey'
+import { axiosWithAuth } from '@shared/lib/axios'
 
 type Res = UseQueryResult<ResBody, AxiosError<ResBody>>
 

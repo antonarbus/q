@@ -3,9 +3,9 @@ import { dispatch, getState } from '@shared/lib/redux'
 import { jwtDecode } from 'jwt-decode'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
 import { useGetAccessTokenQuery, userRole, userSlice } from '@entities/user'
-import { navItemId } from '@shared/consts/navItemId'
+import { navItemId } from '@shared/const/navItemId'
 import { createLoadingMenuIconMachine, navSlice } from '@shared/nav'
-import { agGridSlice } from '@shared/lib/ag_grid/agGridSlice'
+import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'
 import { createActor } from 'xstate'
 
 if (typeof Promise.withResolvers !== 'function') {

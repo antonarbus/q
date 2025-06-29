@@ -2,12 +2,12 @@ import { theme } from '@shared/theme'
 import { Box } from '@mui/material'
 import { motion } from 'motion/react'
 import type { ResizableProps } from 're-resizable'
-import { cls } from '@shared/consts/cls'
+import { cls } from '@shared/const/cls'
 import type {
   OnBlockResize,
   OnBlockResizeStart,
   OnBlockResizeStop,
-} from '@shared/types/resizablePaper'
+} from '@shared/type/resizablePaper'
 import { ResizableBlockPaper } from './ResizableBlockPaper'
 
 type Props = {

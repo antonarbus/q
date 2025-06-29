@@ -4,12 +4,12 @@ import { useSignal, useSignalEffect } from '@preact/signals-react'
 import { useRef } from 'react'
 import { useRegister } from '@features/auth/register'
 import { OpenLoginModalLink } from '@features/open_close/open_login_modal'
-import { ConfirmPasswordField } from '@shared/components/ConfirmPasswordField'
-import { EmailField } from '@shared/components/input_fields/EmailField'
-import { FormModal } from '@shared/components/FormModal'
-import { PasswordField } from '@shared/components/input_fields/PasswordField'
-import { router } from '@shared/lib/router'
-import { useSlide } from '@shared/utils/useSlide'
+import { ConfirmPasswordField } from '@shared/component/ConfirmPasswordField'
+import { EmailField } from '@shared/component/input_fields/EmailField'
+import { FormModal } from '@shared/component/FormModal'
+import { PasswordField } from '@shared/component/input_fields/PasswordField'
+import { router } from '@shared/lib/react-router-dom'
+import { useSlide } from '@shared/util/useSlide'
 
 export const RegisterModal = (): React.JSX.Element => {
   const { ref: modalRef, slideOut } = useSlide()

@@ -5,14 +5,14 @@ import {
   quotationSlice,
   saveQuotationMutationFn,
 } from '@entities/quotation'
-import { navItemId } from '@shared/consts/navItemId'
+import { navItemId } from '@shared/const/navItemId'
 import { createLoadingMenuIconMachine, navSlice } from '@shared/nav'
 import { toast } from 'sonner'
 import { createActor } from 'xstate'
 import type { AxiosError } from 'axios'
 import type { ResBody } from '@back/api/quotation/saveQuotationHandler'
-import { router } from '@shared/lib/router'
-import { route } from '@shared/consts/route'
+import { router } from '@shared/lib/react-router-dom'
+import { route } from '@shared/const/route'
 
 const loadingMenuIconMachine = createLoadingMenuIconMachine({
   navItemId: navItemId.save,

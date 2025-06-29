@@ -1,6 +1,6 @@
-import { router } from '@shared/lib/router'
+import { router } from '@shared/lib/react-router-dom'
 import { setBackToQuotation } from '@entities/quotation'
-import { route } from '@shared/consts/route'
+import { route } from '@shared/const/route'
 
 export const openQuotationsPage = (): void => {
   setBackToQuotation()

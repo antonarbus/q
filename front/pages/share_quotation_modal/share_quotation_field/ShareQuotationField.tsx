@@ -1,7 +1,7 @@
 import { useSignal } from '@preact/signals-react'
 import { useEffect } from 'react'
 import type { AccessFormValuesSignal } from '@entities/quotation'
-import { isEmailPatternOk } from '@shared/utils/isEmailPatternOk'
+import { isEmailPatternOk } from '@shared/util/isEmailPatternOk'
 import { SharedWithRadioButtons } from './SharedWithRadioButtons'
 import { SharedWithEmailInputField } from './SharedWithEmailInputField'
 import { Layout } from './Layout'

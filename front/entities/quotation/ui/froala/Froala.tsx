@@ -14,7 +14,7 @@ import {
 } from '@features/file/upload_file/showDropFilesTextOnHover'
 import type { FroalaProps } from './types'
 import { DropFilesOrImagesText } from './DropFilesOrImagesText'
-import { cls } from '@shared/consts/cls'
+import { cls } from '@shared/const/cls'
 import { DropHereText } from './DropHereText'
 
 export const Froala = (props: FroalaProps): React.JSX.Element => {

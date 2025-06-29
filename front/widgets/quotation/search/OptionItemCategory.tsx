@@ -1,6 +1,6 @@
 import { BsTags } from 'react-icons/bs'
 import { Box } from '@mui/material'
-import { getJsxWithBoldSubstr } from '@shared/utils/getJsxWithBoldSubstr'
+import { getJsxWithBoldSubstr } from '@shared/util/getJsxWithBoldSubstr'
 import type { ItemPick } from '@back/api/bookmark/getBookmarksHandler'
 
 type Props = {

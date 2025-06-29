@@ -3,10 +3,10 @@ import { theme } from '@shared/theme'
 import { useEffectOnce, useUnmount } from 'react-use'
 import { copySlice } from '@entities/copy'
 import { quotationSlice } from '@entities/quotation'
-import { cls } from '@shared/consts/cls'
+import { cls } from '@shared/const/cls'
 import { generateId } from '@shared/lib/nanoid'
-import { fixElementDimensionStyle } from '@shared/utils/fixElementDimensionStyle'
-import { route } from '@shared/consts/route'
+import { fixElementDimensionStyle } from '@shared/util/fixElementDimensionStyle'
+import { route } from '@shared/const/route'
 import { textSlice } from '@shared/lib/froala/textSlice'
 
 const pasteItemOnClick = (): void => {

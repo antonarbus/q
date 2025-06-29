@@ -2,7 +2,7 @@ import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
 import { navSlice } from '../../../navSlice'
 import type { NavItem } from '../../../type'
-import { navItemId } from '@shared/consts/navItemId'
+import { navItemId } from '@shared/const/navItemId'
 
 type Props = {
   event: MouseEvent

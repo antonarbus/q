@@ -9,9 +9,9 @@ import { Copy } from '@widgets/copy'
 import { Nav } from '@widgets/nav'
 import { AccessToken } from '@features/auth/get_access_token'
 import { Logout } from '@features/auth/log_out'
-import { route } from '@shared/consts/route'
-import { Main } from '@shared/layouts/Main'
-import { LoadingDotsOverlay } from '@shared/loading_dots_overlay'
+import { route } from '@shared/const/route'
+import { Main } from '@shared/layout/Main'
+import { LoadingDotsOverlay } from '@shared/component/loading_dots_overlay'
 import { LoginModal } from '@pages/auth_login_modal'
 import { RegisterModal } from '@pages/auth_register_modal'
 import { RequestPasswordResetModal } from '@pages/auth_request_password_reset_modal'
@@ -19,7 +19,7 @@ import { ActivationModal } from '@pages/auth_activation_modal'
 import { ResetPasswordModal } from '@pages/auth_reset_password_modal'
 import { Footer } from '@widgets/footer'
 import { RequireRoles } from '@features/auth/check_required_roles'
-import { instantiateRouter } from '@shared/lib/router'
+import { instantiateRouter } from '@shared/lib/react-router-dom/router'
 import { OnInitLoad } from './OnInitLoad'
 import { userRole } from '@entities/user'
 import { Toaster } from 'sonner'
@@ -34,13 +34,13 @@ const Quotation = lazy(async () => {
 })
 
 const QuotationsPageLazy = lazy(async () => {
-  const module = await import('@pages/quotations_page')
+  const module = await import('@pages/quotation_list_page')
 
   return module
 })
 
 const BookmarksPageLazy = lazy(async () => {
-  const module = await import('@pages/bookmarks_page')
+  const module = await import('@pages/bookmark_list_page')
 
   return module
 })
@@ -52,7 +52,7 @@ const AdminPageLazy = lazy(async () => {
 })
 
 const VisitorsPageLazy = lazy(async () => {
-  const module = await import('@pages/visitors_page')
+  const module = await import('@pages/visitor_list_page')
 
   return module
 })

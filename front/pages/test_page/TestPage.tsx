@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 /* eslint-disable no-console */
-import { asyncDelay } from '@shared/utils/delay'
+import { asyncDelay } from '@shared/util/delay'
 import { useRef } from 'react'
 
 const MIN_SPINNER_TIME = 400

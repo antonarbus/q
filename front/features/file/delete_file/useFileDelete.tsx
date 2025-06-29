@@ -1,6 +1,6 @@
 import { useDeleteFileMutation } from '@entities/quotation'
 import { instance } from '@shared/instance'
-import { queryKey } from '@shared/consts/queryKey'
+import { queryKey } from '@shared/const/queryKey'
 import { useCallback } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { toast } from 'sonner'

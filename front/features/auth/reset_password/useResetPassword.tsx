@@ -4,11 +4,11 @@ import type { UseMutationResult } from '@tanstack/react-query'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useResetPasswordMutation, userRole, userSlice } from '@entities/user'
-import { navItemId } from '@shared/consts/navItemId'
+import { navItemId } from '@shared/const/navItemId'
 import { navSlice } from '@shared/nav'
 import { toast } from 'sonner'
 import type { AnimationScope } from 'motion-dom'
-import { asyncDelay } from '@shared/utils/delay'
+import { asyncDelay } from '@shared/util/delay'
 
 type Props = {
   passwordSignal: Signal<string>

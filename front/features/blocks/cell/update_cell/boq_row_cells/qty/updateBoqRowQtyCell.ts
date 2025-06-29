@@ -9,7 +9,7 @@ import {
   type Row,
   boqRowCellKey,
 } from '@entities/quotation'
-import type { FroalaEditorRef } from '@shared/types/froala'
+import type { FroalaEditorRef } from '@shared/type/froala'
 
 type Props = {
   qtyCellEditorRef: FroalaEditorRef

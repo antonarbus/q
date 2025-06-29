@@ -8,7 +8,7 @@ import {
   updateSubTotalPriceWithValue,
   type Row,
 } from '@entities/quotation'
-import type { FroalaEditorRef } from '@shared/types/froala'
+import type { FroalaEditorRef } from '@shared/type/froala'
 
 type Props = {
   priceCellEditorRef: FroalaEditorRef

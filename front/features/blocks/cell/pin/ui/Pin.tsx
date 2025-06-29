@@ -2,7 +2,7 @@ import { useSelector } from '@shared/lib/redux'
 import { Box } from '@mui/material'
 import { VscPinned } from 'react-icons/vsc'
 import { selectBoqCellPin, useBlock, useRow } from '@entities/quotation'
-import { cls } from '@shared/consts/cls'
+import { cls } from '@shared/const/cls'
 import type { BoqRowCellKey } from '@entities/quotation/consts/boqRowCellKey'
 
 type Props = {

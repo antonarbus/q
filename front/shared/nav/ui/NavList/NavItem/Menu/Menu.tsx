@@ -10,7 +10,7 @@ import { SlidableMenuItemsContainer } from './SlidableMenuItemsContainer'
 import { TopMenuItemsContainer } from './TopMenuItemsContainer'
 import { EmailAtBottomOfMenu } from './EmailAtBottomOfMenu'
 import { css } from '@emotion/react'
-import { navItemId } from '@shared/consts/navItemId'
+import { navItemId } from '@shared/const/navItemId'
 
 export const Menu = (): React.JSX.Element => {
   const menuContainerRef = useRef<React.ComponentRef<'div'> | null>(null)

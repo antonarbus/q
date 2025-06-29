@@ -8,7 +8,7 @@ import {
   boqColumnKey,
   columnMinWidth,
 } from '@entities/quotation'
-import type { FroalaEditor } from '@shared/types/froala'
+import type { FroalaEditor } from '@shared/type/froala'
 import { ResizableColumn } from '../ResizableColumn'
 
 export const QtyColumn = (): React.JSX.Element => {

@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { useRow } from '@entities/quotation'
-import { cls } from '@shared/consts/cls'
+import { cls } from '@shared/const/cls'
 import { PasteBoqRowTextOverlay } from './paste_here_row'
 
 type Props = {

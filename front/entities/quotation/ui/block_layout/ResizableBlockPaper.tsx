@@ -1,11 +1,11 @@
 import { useSelector } from '@shared/lib/redux'
 import { Resizable, type ResizableProps } from 're-resizable'
-import { cls } from '@shared/consts/cls'
+import { cls } from '@shared/const/cls'
 import type {
   OnBlockResize,
   OnBlockResizeStart,
   OnBlockResizeStop,
-} from '@shared/types/resizablePaper'
+} from '@shared/type/resizablePaper'
 import { useBlock } from '../../providers/BlockProvider'
 
 type Props = {

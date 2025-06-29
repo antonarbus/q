@@ -5,7 +5,7 @@ import type {
   OnBlockResize,
   OnBlockResizeStop,
   OnBlockResizeStart,
-} from '@shared/types/resizablePaper'
+} from '@shared/type/resizablePaper'
 import { useBlock } from '../providers/BlockProvider'
 import { BlockAnimate } from './block_layout'
 import { PasteBlockTextOverlay } from './paste_block_overlay_text'

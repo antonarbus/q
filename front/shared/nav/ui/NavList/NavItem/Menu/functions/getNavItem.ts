@@ -1,4 +1,4 @@
-import type { NavItemId } from '@shared/consts/navItemId'
+import type { NavItemId } from '@shared/const/navItemId'
 import { type RootState, getState } from '@shared/lib/redux'
 import type { NavItem } from '@shared/nav/type'
 

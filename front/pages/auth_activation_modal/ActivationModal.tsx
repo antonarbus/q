@@ -5,9 +5,9 @@ import { GrValidate } from 'react-icons/gr'
 import { PiSmileySadBold, PiSmileyBold } from 'react-icons/pi'
 import { useNavigate } from 'react-router-dom'
 import { useActivate } from '@features/auth/activate'
-import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
-import { BackdropWithSlidableModal } from '@shared/components/BackdropWithSlidableModal'
-import { CardCustom } from '@shared/components/CardCustom'
+import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
+import { BackdropWithSlidableModal } from '@shared/component/BackdropWithSlidableModal'
+import { CardCustom } from '@shared/component/CardCustom'
 
 export const ActivationModal = (): React.JSX.Element => {
   const cardRef = useRef<HTMLDivElement>(null)

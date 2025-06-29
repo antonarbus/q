@@ -1,4 +1,4 @@
-import { removeCookie } from '@shared/utils/cookie'
+import { removeCookie } from '@shared/util/cookie'
 import { useEffectOnce } from 'react-use'
 
 export const useRemoveThirdPartyCookies = (): void => {

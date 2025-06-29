@@ -2,10 +2,10 @@ import { dispatch } from '@shared/lib/redux'
 import { theme } from '@shared/theme'
 import { useEffect, useRef, useState } from 'react'
 import { useFirstMountState } from 'react-use'
-import { elementHeight } from '@shared/utils/elementHeight'
+import { elementHeight } from '@shared/util/elementHeight'
 import { navSlice } from '@shared/nav/navSlice'
 import { animate } from 'motion'
-import type { NavItemId } from '@shared/consts/navItemId'
+import type { NavItemId } from '@shared/const/navItemId'
 import { generateId } from '@shared/lib/nanoid'
 
 type PropsForNavigateInMenu = {

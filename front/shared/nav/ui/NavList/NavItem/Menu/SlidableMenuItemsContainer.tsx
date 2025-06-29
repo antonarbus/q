@@ -1,5 +1,5 @@
 import { MenuItem } from './MenuItem'
-import type { NavItemId } from '@shared/consts/navItemId'
+import type { NavItemId } from '@shared/const/navItemId'
 import { getNavItem } from './functions/getNavItem'
 
 type Props = {

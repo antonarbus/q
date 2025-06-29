@@ -1,11 +1,11 @@
 import type { WorkerResponseMessage } from './excelWorker'
 import { createLoadingMenuIconMachine } from '@shared/nav'
-import { navItemId } from '@shared/consts/navItemId'
+import { navItemId } from '@shared/const/navItemId'
 import { createActor } from 'xstate'
 import { getState } from '@shared/lib/redux'
 import type { Quotation } from '@entities/quotation'
 import { toast } from 'sonner'
-import { downloadBlobAsFile } from '@shared/utils/downloadBlobAsFile'
+import { downloadBlobAsFile } from '@shared/util/downloadBlobAsFile'
 
 export type WorkerRequestMessage = {
   msg: 'send me excel'

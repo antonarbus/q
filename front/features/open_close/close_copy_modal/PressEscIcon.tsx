@@ -1,4 +1,4 @@
-import { KbdKey } from '@shared/components/KbdKey'
+import { KbdKey } from '@shared/component/KbdKey'
 import { useExitCopyOnEsc } from './useCloseOnEsc'
 
 export const PressEscIcon = (): React.JSX.Element => {

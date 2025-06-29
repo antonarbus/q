@@ -5,7 +5,7 @@ import { MdCopyAll } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
 import { useGetBookmarkMutation } from '@entities/bookmark'
 import { copySlice } from '@entities/copy'
-import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
+import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { toast } from 'sonner'
 import { textSlice } from '@shared/lib/froala/textSlice'
 

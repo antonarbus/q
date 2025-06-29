@@ -1,4 +1,4 @@
-import type { FroalaEditor } from '@shared/types/froala'
+import type { FroalaEditor } from '@shared/type/froala'
 import { roundTo } from 'round-to'
 import {
   BOOKMARK_POS_AT_BLOCKS,

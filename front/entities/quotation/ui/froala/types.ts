@@ -1,5 +1,5 @@
 import type { SxProps } from '@mui/material'
-import type { FroalaEditor, FroalaEditorRef } from '@shared/types/froala'
+import type { FroalaEditor, FroalaEditorRef } from '@shared/type/froala'
 
 export type FroalaProps = {
   htmlGetter: () => string

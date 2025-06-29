@@ -8,9 +8,9 @@ import {
   useBlock,
   useRow,
 } from '@entities/quotation'
-import { cls } from '@shared/consts/cls'
+import { cls } from '@shared/const/cls'
 import { Tooltip } from '@mui/material'
-import { getClosestRowHtml } from '@shared/utils/htmlGetter/getClosestRowHtml'
+import { getClosestRowHtml } from '@shared/util/htmlGetter/getClosestRowHtml'
 import { textSlice } from '@shared/lib/froala/textSlice'
 
 export const CopyBoqRowIcon = (): React.JSX.Element => {

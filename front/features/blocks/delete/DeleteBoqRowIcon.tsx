@@ -10,7 +10,7 @@ import {
   useRow,
 } from '@entities/quotation'
 import { Tooltip } from '@mui/material'
-import { cls } from '@shared/consts/cls'
+import { cls } from '@shared/const/cls'
 
 export const DeleteBoqRowIcon = (): React.JSX.Element => {
   const { blockIndex } = useBlock()

@@ -6,7 +6,7 @@ import {
   useDeleteQuotationMutation,
   deleteFromQuotationsCache,
 } from '@entities/quotation'
-import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
+import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { toast } from 'sonner'
 
 export const DeleteQuotationButton = ({ id }: Payload): React.ReactNode => {

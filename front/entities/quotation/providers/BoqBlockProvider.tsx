@@ -1,5 +1,5 @@
 import { createContext, useContext, useMemo } from 'react'
-import type { FroalaEditorRef } from '@shared/types/froala'
+import type { FroalaEditorRef } from '@shared/type/froala'
 import type { RowEditorRefs } from '../types'
 
 type Props = {

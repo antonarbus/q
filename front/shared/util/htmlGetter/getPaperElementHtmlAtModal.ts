@@ -1,0 +1,32 @@
+import { cls } from '@shared/const/cls'
+
+export const getPaperElementHtmlAtModal = (): string => {
+  const paperElement = document.querySelector(`.${cls.formModal} .${cls.paper}`)
+
+  if (paperElement instanceof Element === false) {
+    return 'element not found'
+  }
+
+  const paperElementClone = paperElement.cloneNode(true)
+
+  if (paperElementClone instanceof Element === false) {
+    return 'element not found'
+  }
+
+  const elementsToRemove = paperElementClone.querySelectorAll(
+    cls.cleanFromPaper,
+  )
+
+  elementsToRemove.forEach((element) => {
+    element.parentNode?.removeChild(element)
+  })
+
+  const html = paperElementClone.innerHTML
+
+  const htmlWithoutContentEditableTag = html.replaceAll(
+    'contenteditable="true"',
+    '',
+  )
+
+  return htmlWithoutContentEditableTag
+}

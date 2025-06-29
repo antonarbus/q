@@ -1,4 +1,4 @@
-import { cls } from '@shared/consts/cls'
+import { cls } from '@shared/const/cls'
 
 const DROP_ELEMENT_SELECTOR = `.${cls.droppable} .editable-html .fr-wrapper`
 const DROP_HERE_TEXT_SELECTOR = `.${cls.dropHereText}`

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useRequestPasswordResetMutation } from '@entities/user'
 import { toast } from 'sonner'
-import { asyncDelay } from '@shared/utils/delay'
+import { asyncDelay } from '@shared/util/delay'
 
 type Props = {
   emailSignal: Signal<string>

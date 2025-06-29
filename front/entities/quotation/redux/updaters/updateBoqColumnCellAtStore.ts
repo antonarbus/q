@@ -1,5 +1,5 @@
 import { dispatch } from '@shared/lib/redux'
-import type { FroalaEditorRef } from '@shared/types/froala'
+import type { FroalaEditorRef } from '@shared/type/froala'
 import { getBoqBlockFromStore } from '../getters/getBoqBlockFromStore'
 import { quotationSlice } from '../quotationSlice'
 import type { BoqColumnKey } from '@entities/quotation/consts/boqColumnKey'

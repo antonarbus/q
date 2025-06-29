@@ -1,4 +1,4 @@
-import { router } from '@shared/lib/router'
+import { router } from '@shared/lib/react-router-dom'
 import { backToQuotationRef } from '@entities/quotation'
 import { dispatch } from '@shared/lib/redux'
 import { appSlice } from '@shared/appSlice'

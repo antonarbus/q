@@ -6,7 +6,7 @@ import {
   useDeleteBookmarkMutation,
   deleteFromBookmarksCache,
 } from '@entities/bookmark'
-import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
+import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { toast } from 'sonner'
 
 export const DeleteBookmarkButton = ({ id }: ReqBody): React.JSX.Element => {

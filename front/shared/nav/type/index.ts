@@ -1,5 +1,5 @@
 import type { MouseEvent } from 'react'
-import type { NavItemId } from '../../consts/navItemId'
+import type { NavItemId } from '../../const/navItemId'
 
 export type NavItem = {
   id: NavItemId
@@ -18,4 +18,4 @@ export type NavItem = {
   tooltip?: string
 }
 
-export type { NavItemId } from '../../consts/navItemId'
+export type { NavItemId } from '../../const/navItemId'

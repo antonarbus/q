@@ -10,7 +10,7 @@ import type {
   OnBlockResize,
   OnBlockResizeStart,
   OnBlockResizeStop,
-} from '@shared/types/resizablePaper'
+} from '@shared/type/resizablePaper'
 
 // can be global var for different boqItems as we can change width of one item at a time
 let initNumberColumnWidth = 0

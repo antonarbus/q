@@ -1,0 +1,1 @@
+export { chartConfigurationForVisitorList } from './chartConfigurationForVisitorList'

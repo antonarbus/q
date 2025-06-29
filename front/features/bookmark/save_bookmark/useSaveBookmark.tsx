@@ -11,9 +11,9 @@ import {
 } from '@entities/bookmark'
 import { BOOKMARK_POS_AT_BLOCKS, quotationSlice } from '@entities/quotation'
 import { toast } from 'sonner'
-import { cls } from '@shared/consts/cls'
-import { getPaperElementHtmlAtModal } from '@shared/utils/htmlGetter/getPaperElementHtmlAtModal'
-import { asyncDelay } from '@shared/utils/delay'
+import { cls } from '@shared/const/cls'
+import { getPaperElementHtmlAtModal } from '@shared/util/htmlGetter/getPaperElementHtmlAtModal'
+import { asyncDelay } from '@shared/util/delay'
 
 type Props = {
   bookmarkFromValues: BookmarkFormValues

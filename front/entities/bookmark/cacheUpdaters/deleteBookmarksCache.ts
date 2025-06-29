@@ -1,6 +1,6 @@
 import type { ResBody } from '@back/api/bookmark/getBookmarksHandler'
 import { produce } from 'immer'
-import { queryKey } from '@shared/consts/queryKey'
+import { queryKey } from '@shared/const/queryKey'
 import { instance } from '@shared/instance'
 
 export const deleteBookmarksCache = (): void => {

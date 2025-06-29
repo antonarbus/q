@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-max-depth */
 import { Box } from '@mui/material'
 import { AnimatePresence } from 'motion/react'
-import { OutlinedDivWithLabel } from '@shared/components/OutlinedDivWithLabel'
+import { OutlinedDivWithLabel } from '@shared/component/OutlinedDivWithLabel'
 
 type Props = {
   sharedWithRadioButtons: React.ReactNode

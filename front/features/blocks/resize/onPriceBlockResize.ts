@@ -1,6 +1,6 @@
 import { dispatch, getState } from '@shared/lib/redux'
 import { quotationSlice } from '@entities/quotation'
-import type { OnBlockResizeStop } from '@shared/types/resizablePaper'
+import type { OnBlockResizeStop } from '@shared/type/resizablePaper'
 
 export const onPriceBlockResizeStop: OnBlockResizeStop = ({
   blockIndex,

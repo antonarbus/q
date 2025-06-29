@@ -2,7 +2,7 @@ import { dispatch, getState } from '@shared/lib/redux'
 import type { MouseEvent } from 'react'
 import { navSlice } from '../../../../../../navSlice'
 import { navigateInMenu } from '../../functions/useMenuAnimation'
-import type { NavItemId } from '@shared/consts/navItemId'
+import type { NavItemId } from '@shared/const/navItemId'
 import { getNavItem } from '../../functions/getNavItem'
 
 export const clickOnMenuItem = (

@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { PiBooks } from 'react-icons/pi'
-import { getJsxWithBoldSubstr } from '@shared/utils/getJsxWithBoldSubstr'
+import { getJsxWithBoldSubstr } from '@shared/util/getJsxWithBoldSubstr'
 import type { ItemPick } from '@back/api/bookmark/getBookmarksHandler'
 
 type Props = {

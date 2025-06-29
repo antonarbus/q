@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test'
-import { route } from '@shared/consts/route'
+import { route } from '@shared/const/route'
 import { userFilePath } from './setup/userFilePath'
 
 test.describe('nav bar for logged-in vs guest user', () => {

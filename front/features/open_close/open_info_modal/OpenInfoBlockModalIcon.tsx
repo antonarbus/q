@@ -1,9 +1,9 @@
 import { HiOutlineInformationCircle } from 'react-icons/hi2'
 import { useNavigate } from 'react-router-dom'
 import { getBlockFromStore, itemType, useBlock } from '@entities/quotation'
-import { route } from '@shared/consts/route'
+import { route } from '@shared/const/route'
 import { Tooltip } from '@mui/material'
-import { cls } from '@shared/consts/cls'
+import { cls } from '@shared/const/cls'
 import { useIsCopyModalVisible } from '@entities/copy'
 
 export const OpenInfoBlockModalIcon = (): React.ReactNode => {

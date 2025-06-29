@@ -1,6 +1,6 @@
 import { dispatch, getState } from '@shared/lib/redux'
 import { itemType, quotationSlice } from '@entities/quotation'
-import type { FroalaEditorRef } from '@shared/types/froala'
+import type { FroalaEditorRef } from '@shared/type/froala'
 
 type Props = {
   editorRef: FroalaEditorRef

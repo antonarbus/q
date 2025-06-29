@@ -18,9 +18,9 @@ import {
   textItemCellStyle,
   useBlock,
 } from '@entities/quotation'
-import { cls } from '@shared/consts/cls'
-import { ItemActionButtonsLayout } from '@shared/layouts/ItemActionButtonsLayout'
-import type { FroalaEditor } from '@shared/types/froala'
+import { cls } from '@shared/const/cls'
+import { ItemActionButtonsLayout } from '@shared/layout/ItemActionButtonsLayout'
+import type { FroalaEditor } from '@shared/type/froala'
 
 export const TextBlock = (): React.JSX.Element => {
   const editorRef = useRef<FroalaEditor | null>(null)

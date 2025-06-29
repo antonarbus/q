@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
-import { OutlinedDivWithLabel } from '@shared/components/OutlinedDivWithLabel'
-import { cls } from '@shared/consts/cls'
+import { OutlinedDivWithLabel } from '@shared/component/OutlinedDivWithLabel'
+import { cls } from '@shared/const/cls'
 
 type Props = {
   children: React.ReactNode

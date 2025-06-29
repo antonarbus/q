@@ -1,5 +1,5 @@
 import { UsersGrid } from './UsersGrid'
-import { GridPageLayout } from '@shared/layouts/GridPageLayout'
+import { GridPageLayout } from '@shared/layout/GridPageLayout'
 
 export const AdminPage = (): React.JSX.Element => {
   return (

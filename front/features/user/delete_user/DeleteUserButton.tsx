@@ -2,11 +2,11 @@ import type { ReqBody as Payload } from '@back/api/user/deleteUserHandler'
 import { IconButton, Tooltip } from '@mui/material'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useUpdateEffect } from 'react-use'
-import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
+import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { toast } from 'sonner'
 import { useDeleteUserMutation } from '@entities/user'
 import { instance } from '@shared/instance'
-import { queryKey } from '@shared/consts/queryKey'
+import { queryKey } from '@shared/const/queryKey'
 
 export const DeleteUserButton = ({ email }: Payload): React.ReactNode => {
   const {

@@ -2,8 +2,8 @@ import type { ResBody, ReqBody as Payload } from '@back/api/auth/logInHandler'
 import { api } from '@back/api'
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import type { AxiosError } from 'axios'
-import { queryKey } from '@shared/consts/queryKey'
-import { axiosWithAuth } from '@shared/lib/axiosWithAuth'
+import { queryKey } from '@shared/const/queryKey'
+import { axiosWithAuth } from '@shared/lib/axios'
 
 type Res = UseMutationResult<ResBody, AxiosError<ResBody>, Payload>
 

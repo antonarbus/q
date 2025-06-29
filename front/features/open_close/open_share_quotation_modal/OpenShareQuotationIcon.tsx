@@ -1,7 +1,7 @@
 import { useIsCopyModalVisible } from '@entities/copy'
 import { Tooltip } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { route } from '@shared/consts/route'
+import { route } from '@shared/const/route'
 import { PiGlobeX, PiGlobe } from 'react-icons/pi'
 import { BsPersonFillLock } from 'react-icons/bs'
 import { useSelector } from '@shared/lib/redux'

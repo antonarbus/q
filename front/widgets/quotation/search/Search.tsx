@@ -1,5 +1,5 @@
 import { Autocomplete } from '@mui/material'
-import { cls } from '@shared/consts/cls'
+import { cls } from '@shared/const/cls'
 import { PaperComponent } from './PaperComponent'
 import { renderInput } from './renderInput'
 import { renderOption } from './renderOption'

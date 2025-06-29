@@ -1,5 +1,5 @@
 import { updateBoqHeaderCellAtStore, type HeaderKey } from '@entities/quotation'
-import type { FroalaEditorRef } from '@shared/types/froala'
+import type { FroalaEditorRef } from '@shared/type/froala'
 
 type Props = {
   editorRef: FroalaEditorRef

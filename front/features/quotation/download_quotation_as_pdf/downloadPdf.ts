@@ -1,11 +1,11 @@
 import { getState } from '@shared/lib/redux'
-import { cls } from '@shared/consts/cls'
+import { cls } from '@shared/const/cls'
 import { createActor } from 'xstate'
 import type { WorkerResponseMessage } from './pdfWorker'
-import { navItemId } from '@shared/consts/navItemId'
+import { navItemId } from '@shared/const/navItemId'
 import { createLoadingMenuIconMachine } from '@shared/nav'
 import { toast } from 'sonner'
-import { downloadBlobAsFile } from '@shared/utils/downloadBlobAsFile'
+import { downloadBlobAsFile } from '@shared/util/downloadBlobAsFile'
 
 export type WorkerRequestMessage = {
   imageData: string

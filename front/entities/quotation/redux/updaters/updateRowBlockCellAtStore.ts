@@ -1,6 +1,6 @@
 import { dispatch, getState } from '@shared/lib/redux'
-import { getNumberFromString } from '@shared/utils/getNumberFromString'
-import { getTextContentFromHtml } from '@shared/utils/getTextContentFromHtml'
+import { getNumberFromString } from '@shared/util/getNumberFromString'
+import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
 import { quotationSlice } from '../quotationSlice'
 import { itemType } from '@entities/quotation/consts/itemType'
 import { BOOKMARK_POS_AT_BLOCKS } from '@entities/quotation/consts/bookmarkPosAtBlocks'

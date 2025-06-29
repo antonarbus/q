@@ -1,5 +1,5 @@
 import { BlockComp } from '@entities/quotation'
-import { cls } from '@shared/consts/cls'
+import { cls } from '@shared/const/cls'
 import { OneRow } from './boq_row/OneRow'
 import {
   onBoqBlockResize,

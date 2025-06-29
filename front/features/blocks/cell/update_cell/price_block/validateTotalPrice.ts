@@ -5,10 +5,10 @@ import {
   getTotalPriceAbove,
 } from '@entities/quotation'
 import { updateNumberAtHtmlIncrementally } from '@shared/lib/froala/updateNumberAtHtmlIncrementally'
-import type { FroalaEditorRef } from '@shared/types/froala'
-import { getNumberFromString } from '@shared/utils/getNumberFromString'
-import { getStringWithNewFormattedNumber } from '@shared/utils/getStringWithNewFormattedNumber'
-import { getTextContentFromHtml } from '@shared/utils/getTextContentFromHtml'
+import type { FroalaEditorRef } from '@shared/type/froala'
+import { getNumberFromString } from '@shared/util/getNumberFromString'
+import { getStringWithNewFormattedNumber } from '@shared/util/getStringWithNewFormattedNumber'
+import { getTextContentFromHtml } from '@shared/util/getTextContentFromHtml'
 
 type Props = {
   editorRef: FroalaEditorRef

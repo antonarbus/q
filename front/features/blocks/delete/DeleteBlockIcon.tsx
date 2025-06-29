@@ -8,8 +8,8 @@ import {
   selectIsLastBlock,
   useBlock,
 } from '@entities/quotation'
-import { cls } from '@shared/consts/cls'
-import { fixElementDimensionStyle } from '@shared/utils/fixElementDimensionStyle'
+import { cls } from '@shared/const/cls'
+import { fixElementDimensionStyle } from '@shared/util/fixElementDimensionStyle'
 import { Tooltip } from '@mui/material'
 import { textSlice } from '@shared/lib/froala/textSlice'
 

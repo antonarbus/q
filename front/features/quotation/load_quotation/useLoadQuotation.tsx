@@ -7,13 +7,13 @@ import {
 import { dispatch, useSelector } from '@shared/lib/redux'
 import { useEffect } from 'react'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
-import { navItemId } from '@shared/consts/navItemId'
+import { navItemId } from '@shared/const/navItemId'
 import { navSlice } from '@shared/nav'
 import { toast } from 'sonner'
 import { appSlice } from '@shared/appSlice'
 import { useParams } from 'react-router-dom'
 import { httpStatus } from '@back/shared/consts/httpStatus'
-import { asyncDelay } from '@shared/utils/delay'
+import { asyncDelay } from '@shared/util/delay'
 
 export const useLoadQuotation = (): void => {
   const { quotationId } = useParams()

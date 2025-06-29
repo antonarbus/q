@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import type { HTMLAttributes } from 'react'
-import { RotatingLoaderIcon } from '@shared/components/RotatingLoaderIcon'
+import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import type { Signal } from '@preact/signals-react'
 import type { LoadBookmark } from '@features/bookmark/copy_bookmark'
 import type { ItemPick } from '@back/api/bookmark/getBookmarksHandler'

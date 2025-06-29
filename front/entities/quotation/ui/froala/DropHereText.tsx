@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { cls } from '@shared/consts/cls'
+import { cls } from '@shared/const/cls'
 
 export const DropHereText = (): React.JSX.Element => {
   return (

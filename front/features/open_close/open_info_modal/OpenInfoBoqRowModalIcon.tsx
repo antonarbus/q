@@ -6,9 +6,9 @@ import {
   useBlock,
   useRow,
 } from '@entities/quotation'
-import { route } from '@shared/consts/route'
+import { route } from '@shared/const/route'
 import { Tooltip } from '@mui/material'
-import { cls } from '@shared/consts/cls'
+import { cls } from '@shared/const/cls'
 import { useIsCopyModalVisible } from '@entities/copy'
 
 export const OpenInfoBoqRowModalIcon = (): React.ReactNode => {

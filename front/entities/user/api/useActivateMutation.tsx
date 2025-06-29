@@ -5,7 +5,7 @@ import type {
 import { api } from '@back/api'
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import axios, { type AxiosError } from 'axios'
-import { queryKey } from '@shared/consts/queryKey'
+import { queryKey } from '@shared/const/queryKey'
 
 type Res = UseMutationResult<ResBody, AxiosError<ResBody>, Payload>
 

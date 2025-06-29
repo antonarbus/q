@@ -5,8 +5,8 @@ import type {
 import { api } from '@back/api'
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import type { AxiosResponse, AxiosError } from 'axios'
-import { queryKey } from '@shared/consts/queryKey'
-import { axiosWithAuth } from '@shared/lib/axiosWithAuth'
+import { queryKey } from '@shared/const/queryKey'
+import { axiosWithAuth } from '@shared/lib/axios'
 
 export const saveQuotationMutationFn = async ({
   quotation,

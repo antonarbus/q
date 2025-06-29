@@ -1,5 +1,5 @@
-import { router } from '@shared/lib/router'
-import { route } from '@shared/consts/route'
+import { router } from '@shared/lib/react-router-dom'
+import { route } from '@shared/const/route'
 import { dispatch } from '@shared/lib/redux'
 import { appSlice } from '@shared/appSlice'
 
