@@ -1,9 +1,9 @@
-import { useLogoutIfAccessTokenExpired } from '@features/auth/log_out'
-import { useCountUniqueDailyVisitor } from '@features/init_load/useCountUniqueDailyVisitor'
-import { useHideInitHtmlElements } from '@features/init_load/useHideInitHtmlElements'
-import { useRemoveThirdPartyCookies } from '@features/init_load/useRemoveThirdPartyCookies'
-import { useShowDragAndDropArea } from '@features/file/upload_file'
-import { useConnectionToBackendCheck } from '@features/init_load/useConnectionToBackend'
+import { useLogoutIfAccessTokenExpired } from '@features/auth/log-out'
+import { useCountUniqueDailyVisitor } from '@features/init-load/useCountUniqueDailyVisitor'
+import { useHideInitHtmlElements } from '@features/init-load/useHideInitHtmlElements'
+import { useRemoveThirdPartyCookies } from '@features/init-load/useRemoveThirdPartyCookies'
+import { useShowDragAndDropArea } from '@features/file/upload-file'
+import { useConnectionToBackendCheck } from '@features/init-load/useConnectionToBackend'
 
 export const OnInitLoad = (): React.ReactNode => {
   useLogoutIfAccessTokenExpired()

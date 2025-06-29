@@ -7,7 +7,7 @@ import { useEffect } from 'react'
 import { useSelector } from '@shared/lib/redux'
 import { useGetBookmarksQuery } from '@entities/bookmark'
 import { useSignal } from '@preact/signals-react'
-import { useCopyBookmarkAtSearch } from '@features/bookmark/copy_bookmark'
+import { useCopyBookmarkAtSearch } from '@features/bookmark/copy-bookmark'
 import { useIsCopyModalVisible } from '@entities/copy'
 
 export const Search = (): React.JSX.Element => {

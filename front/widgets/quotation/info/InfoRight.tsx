@@ -1,5 +1,5 @@
-import { OpenInfoQuotationIcon } from '@features/open_close/open_info_modal'
-import { OpenShareQuotationIcon } from '@features/open_close/open_share_quotation_modal'
+import { OpenInfoQuotationIcon } from '@features/open-close/open-info-modal'
+import { OpenShareQuotationIcon } from '@features/open-close/open-share-quotation-modal'
 import { QuotationId } from './QuotationId'
 import { Layout } from './Layout'
 

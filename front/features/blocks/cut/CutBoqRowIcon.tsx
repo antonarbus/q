@@ -12,7 +12,7 @@ import {
 } from '@entities/quotation'
 import { cls } from '@shared/const/cls'
 import { Tooltip } from '@mui/material'
-import { getClosestRowHtml } from '@shared/util/htmlGetter/getClosestRowHtml'
+import { getClosestRowHtml } from '@shared/util/html-getter/getClosestRowHtml'
 import { textSlice } from '@shared/lib/froala/textSlice'
 
 export const CutBoqRowIcon = (): React.JSX.Element => {

@@ -1,4 +1,4 @@
-import { useFroala } from '@entities/quotation/providers/FroalaProvider'
+import { useFroala } from '@entities/quotation/provider/FroalaProvider'
 import { Box } from '@mui/material'
 import { cls } from '@shared/const/cls'
 import { theme } from '@shared/theme'

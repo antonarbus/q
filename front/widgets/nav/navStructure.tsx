@@ -24,24 +24,24 @@ import {
   insertPriceBlock,
   insertTextBlock,
 } from '@features/blocks/insert'
-import { openBookmarksPage } from '@features/open_close/open_bookmarks_page'
-import { openLoginModal } from '@features/open_close/open_login_modal'
+import { openBookmarksPage } from '@features/open-close/open-bookmarks-page'
+import { openLoginModal } from '@features/open-close/open-login-modal'
 import {
   openQuotationPageAndLoadNew,
   openQuotationPageAndLoadPrev,
-} from '@features/open_close/open_quotation_page'
-import { openQuotationsPage } from '@features/open_close/open_quotations_page'
-import { openSaveQuotationModal } from '@features/open_close/open_save_quotation_modal'
-import { openSettingsModal } from '@features/open_close/open_settings_modal'
+} from '@features/open-close/open-quotation-page'
+import { openQuotationsPage } from '@features/open-close/open-quotations-page'
+import { openSaveQuotationModal } from '@features/open-close/open-save-quotation-modal'
+import { openSettingsModal } from '@features/open-close/open-settings-modal'
 import { navItemId } from '@shared/const/navItemId'
 import { route } from '@shared/const/route'
 import type { NavItem } from '@shared/nav'
-import { downloadPdf } from '@features/quotation/download_quotation_as_pdf'
-import { downloadExcel } from '@features/quotation/download_quotation_as_excel'
+import { downloadPdf } from '@features/quotation/download-quotation-as-pdf'
+import { downloadExcel } from '@features/quotation/download-quotation-as-excel'
 import { FaRegFilePdf } from 'react-icons/fa'
-import { openShareQuotationModal } from '@features/open_close/open_share_quotation_modal'
+import { openShareQuotationModal } from '@features/open-close/open-share-quotation-modal'
 import { getState } from '@shared/lib/redux'
-import { saveExistingQuotation } from '@features/quotation/save_quotation'
+import { saveExistingQuotation } from '@features/quotation/save-quotation'
 import { Burger } from '@shared/nav/ui/NavList/NavItem/Burger'
 import { instance } from '@shared/instance'
 

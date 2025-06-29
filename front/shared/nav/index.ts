@@ -9,7 +9,7 @@ export { Logo } from './ui/Logo'
 export { NavList } from './ui/NavList'
 
 // state machine
-export { createLoadingMenuIconMachine } from './state_machine/createLoadingMenuIconMachine'
+export { createLoadingMenuIconMachine } from './state-machine/createLoadingMenuIconMachine'
 
 // utilities
 export { setMenuItemPropValue } from './setMenuItemPropValue'

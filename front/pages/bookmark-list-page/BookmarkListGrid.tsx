@@ -1,0 +1,64 @@
+import {
+  AllCommunityModule,
+  ModuleRegistry,
+  themeQuartz,
+} from 'ag-grid-community'
+import { AgGridReact } from 'ag-grid-react' // AG Grid Component
+import { useRef } from 'react'
+import { useGetBookmarksQuery } from '@entities/bookmark'
+import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
+import { DisplayedRowsCount } from '@shared/lib/ag-grid/components/DisplayedRowsCount'
+import { NoRowsTableOverlay } from '@shared/lib/ag-grid/components/NoRowsTableOverlay'
+import { columnDefs, defaultColDef } from './columnDef'
+import { bookmarkListAgGridRef } from './ref/bookmarkListAgGridRef'
+import { addPlaceholderToFloatingFilters } from '@shared/lib/ag-grid/utils/addPlaceholderToFloatingFilters'
+import { GridLayout } from '@shared/lib/ag-grid/GridLayout'
+import { ProgressGridBar } from '@shared/lib/ag-grid/components/ProgressGridBar'
+import { useRefetchDataOnEmailChange } from '@shared/lib/ag-grid/hooks/useRefetchDataOnEmailChange'
+import { useShowLoadingJumpingDots } from '@shared/lib/ag-grid/hooks/useShowLoadingJumpingDots'
+import { AgGridStyles } from '@shared/lib/ag-grid/styles/AgGridStyles'
+import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/component/loading-dots-overlay'
+import type { ItemPick } from '@back/api/bookmark/getBookmarksHandler'
+import { dispatch } from '@shared/lib/redux'
+import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'
+
+ModuleRegistry.registerModules([AllCommunityModule])
+
+export const BookmarkListGrid = (): React.JSX.Element => {
+  const gridContainerRef = useRef<React.ComponentRef<'div'> | null>(null)
+
+  const { data, isLoading, isFetching, isFetched, refetch } =
+    useGetBookmarksQuery()
+
+  useDisableLoadingOverlayWhenItemsAreFetched({ isFetched })
+  useRefetchDataOnEmailChange({ refetch })
+  useShowLoadingJumpingDots({ isLoading })
+
+  return (
+    <GridLayout gridContainerRef={gridContainerRef}>
+      <AgGridStyles />
+      <DisplayedRowsCount />
+      <ProgressGridBar isShown={isFetching} />
+      <AgGridReact<ItemPick>
+        columnDefs={columnDefs}
+        defaultColDef={defaultColDef}
+        enableCellTextSelection
+        getRowId={(params) => params.data.id}
+        loadingOverlayComponent={LoadingTableOverlay}
+        noRowsOverlayComponent={NoRowsTableOverlay}
+        onGridReady={() => {
+          addPlaceholderToFloatingFilters({ gridContainerRef })
+        }}
+        onModelUpdated={(params) => {
+          const count = params.api.getDisplayedRowCount()
+          dispatch(agGridSlice.actions.setCount({ count }))
+        }}
+        ref={bookmarkListAgGridRef}
+        rowData={data?.bookmarks}
+        suppressCellFocus
+        suppressColumnVirtualisation
+        theme={themeQuartz}
+      />
+    </GridLayout>
+  )
+}

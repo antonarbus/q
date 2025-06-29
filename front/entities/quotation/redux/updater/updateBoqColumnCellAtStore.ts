@@ -1,0 +1,43 @@
+import { dispatch } from '@shared/lib/redux'
+import type { FroalaEditorRef } from '@shared/type/froala'
+import { getBoqBlockFromStore } from '../getter/getBoqBlockFromStore'
+import { quotationSlice } from '../quotationSlice'
+import type { BoqColumnKey } from '@entities/quotation/const/boqColumnKey'
+
+type Props = {
+  editorRef: FroalaEditorRef
+  blockIndex: number
+  boqColumnKey: BoqColumnKey
+}
+
+export const updateBoqColumnCellAtStore = ({
+  editorRef,
+  blockIndex,
+  boqColumnKey,
+}: Props): void => {
+  if (editorRef.current === null) {
+    return
+  }
+
+  const boqBlock = getBoqBlockFromStore({ blockIndex })
+
+  if (boqBlock === undefined) {
+    return
+  }
+
+  const prevHtml = boqBlock.boq.column[boqColumnKey].html
+  const html = editorRef.current.html.get()
+  const didTextChange = prevHtml !== html
+
+  if (didTextChange === false) {
+    return
+  }
+
+  dispatch(
+    quotationSlice.actions.updateBoqColumnNameTextReducer({
+      blockIndex,
+      html,
+      boqColumnKey,
+    }),
+  )
+}

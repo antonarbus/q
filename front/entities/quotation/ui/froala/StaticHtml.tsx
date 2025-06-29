@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { type CSSProperties, useEffect, useRef } from 'react'
 import { useEffectOnce } from 'react-use'
-import { useFroala } from '../../providers/FroalaProvider'
+import { useFroala } from '../../provider/FroalaProvider'
 
 type Props = {
   styleAgainstFroalaBlinks?: CSSProperties

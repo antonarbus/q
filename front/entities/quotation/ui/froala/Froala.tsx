@@ -1,8 +1,8 @@
 import { useSelector } from '@shared/lib/redux'
 import { Box } from '@mui/material'
 import { useRef } from 'react'
-import { FroalaProvider } from '../../providers/FroalaProvider'
-import { useBlock } from '../../providers/BlockProvider'
+import { FroalaProvider } from '../../provider/FroalaProvider'
+import { useBlock } from '../../provider/BlockProvider'
 import { EditableHtml } from './EditableHtml'
 import { placeCaretAtTheEndIfToolbarIsNotShown } from './placeCaretAtTheEndIfToolbarIsNotShown'
 import { StaticHtml } from './StaticHtml'
@@ -11,7 +11,7 @@ import { useFixedHeightForAnimation } from './useFixedHeightForAnimation'
 import {
   showDropFilesTextOnMouseEnter,
   showDropFilesTextOnMouseLeave,
-} from '@features/file/upload_file/showDropFilesTextOnHover'
+} from '@features/file/upload-file/showDropFilesTextOnHover'
 import type { FroalaProps } from './types'
 import { DropFilesOrImagesText } from './DropFilesOrImagesText'
 import { cls } from '@shared/const/cls'

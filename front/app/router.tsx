@@ -1,58 +1,58 @@
 import { lazy, Suspense } from 'react'
 import { type RouteObject, createBrowserRouter } from 'react-router-dom'
-import { BookmarkModal } from '@pages/bookmark_modal'
-import { ErrorPage } from '@pages/error_page'
-import { InfoModal } from '@pages/info_modal'
-import { SaveQuotationModal } from '@pages/save_quotation_modal'
-import { SettingsModal } from '@pages/settings_modal'
+import { BookmarkModal } from '@pages/bookmark-modal'
+import { ErrorPage } from '@pages/error-page'
+import { InfoModal } from '@pages/info-modal'
+import { SaveQuotationModal } from '@pages/save-quotation-modal'
+import { SettingsModal } from '@pages/settings-modal'
 import { Copy } from '@widgets/copy'
 import { Nav } from '@widgets/nav'
-import { AccessToken } from '@features/auth/get_access_token'
-import { Logout } from '@features/auth/log_out'
+import { AccessToken } from '@features/auth/get-access-token'
+import { Logout } from '@features/auth/log-out'
 import { route } from '@shared/const/route'
 import { Main } from '@shared/layout/Main'
-import { LoadingDotsOverlay } from '@shared/component/loading_dots_overlay'
-import { LoginModal } from '@pages/auth_login_modal'
-import { RegisterModal } from '@pages/auth_register_modal'
-import { RequestPasswordResetModal } from '@pages/auth_request_password_reset_modal'
-import { ActivationModal } from '@pages/auth_activation_modal'
-import { ResetPasswordModal } from '@pages/auth_reset_password_modal'
+import { LoadingDotsOverlay } from '@shared/component/loading-dots-overlay'
+import { LoginModal } from '@pages/auth-login-modal'
+import { RegisterModal } from '@pages/auth-register-modal'
+import { RequestPasswordResetModal } from '@pages/auth-request-password-reset-modal'
+import { ActivationModal } from '@pages/auth-activation-modal'
+import { ResetPasswordModal } from '@pages/auth-reset-password-modal'
 import { Footer } from '@widgets/footer'
-import { RequireRoles } from '@features/auth/check_required_roles'
+import { RequireRoles } from '@features/auth/check-required-roles'
 import { instantiateRouter } from '@shared/lib/react-router-dom/router'
 import { OnInitLoad } from './OnInitLoad'
 import { userRole } from '@entities/user'
 import { Toaster } from 'sonner'
-import { ShareQuotationModal } from '@pages/share_quotation_modal'
-import { LoadQuotation } from '@features/quotation/load_quotation'
-import { TestPage } from '@pages/test_page'
+import { ShareQuotationModal } from '@pages/share-quotation-modal'
+import { LoadQuotation } from '@features/quotation/load-quotation'
+import { TestPage } from '@pages/test-page'
 
 const Quotation = lazy(async () => {
-  const module = await import('@pages/quotation_page')
+  const module = await import('@pages/quotation-page')
 
   return module
 })
 
 const QuotationsPageLazy = lazy(async () => {
-  const module = await import('@pages/quotation_list_page')
+  const module = await import('@pages/quotation-list-page')
 
   return module
 })
 
 const BookmarksPageLazy = lazy(async () => {
-  const module = await import('@pages/bookmark_list_page')
+  const module = await import('@pages/bookmark-list-page')
 
   return module
 })
 
 const AdminPageLazy = lazy(async () => {
-  const module = await import('@pages/admin_page')
+  const module = await import('@pages/admin-page')
 
   return module
 })
 
 const VisitorsPageLazy = lazy(async () => {
-  const module = await import('@pages/visitor_list_page')
+  const module = await import('@pages/visitor-list-page')
 
   return module
 })

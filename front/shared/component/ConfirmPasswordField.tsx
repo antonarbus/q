@@ -1,5 +1,5 @@
 import { type Signal, useSignal, useSignalEffect } from '@preact/signals-react'
-import { PasswordField } from './input_fields/PasswordField'
+import { PasswordField } from './input-field/PasswordField'
 
 type Props = {
   originalPasswordSignal: Signal<string>

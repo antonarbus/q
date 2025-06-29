@@ -6,8 +6,8 @@ export { useGetBookmarkCategoriesQuery } from './api/useGetBookmarkCategoriesQue
 export { useGetBookmarkMutation } from './api/useGetBookmarkMutation'
 
 // cache updaters
-export { deleteFromBookmarksCache } from './cacheUpdaters/deleteFromBookmarksCache'
-export { deleteBookmarksCache } from './cacheUpdaters/deleteBookmarksCache'
+export { deleteFromBookmarksCache } from './cache-updater/deleteFromBookmarksCache'
+export { deleteBookmarksCache } from './cache-updater/deleteBookmarksCache'
 
 // types
 export type { Item } from '@entities/quotation' // ! this is against FSD

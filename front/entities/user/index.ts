@@ -14,7 +14,7 @@ export { useGetUsersQuery } from './api/useGetUsersQuery'
 export { useDeleteUserMutation } from './api/useDeleteUserMutation'
 
 // types
-export type { User } from './types'
+export type { User } from './type'
 
 // const
 export { userRole, type UserRole } from './const/userRole'

@@ -5,7 +5,7 @@ import { copySlice } from '@entities/copy'
 import { itemType, saveBlockHeightByIndex, useBlock } from '@entities/quotation'
 import { cls } from '@shared/const/cls'
 import { Tooltip } from '@mui/material'
-import { getClosestPaperElementHtml } from '@shared/util/htmlGetter/getClosestPaperElementHtml'
+import { getClosestPaperElementHtml } from '@shared/util/html-getter/getClosestPaperElementHtml'
 import { textSlice } from '@shared/lib/froala/textSlice'
 
 export const CopyBlockIcon = (): React.JSX.Element => {

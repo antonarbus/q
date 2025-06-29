@@ -3,7 +3,7 @@ import { usePasteClick, useMovePasteText } from '@features/blocks/paste'
 import {
   PressEscIcon,
   useEnableFroalasOnCloseCopyModal,
-} from '@features/open_close/close_copy_modal'
+} from '@features/open-close/close-copy-modal'
 import { cursorPosSignal } from '@shared/util/cursorPosSignal'
 import { FirstCopiedItem } from './FirstCopiedItem'
 import { RestOfCopiedItems } from './RestOfCopiedItems'

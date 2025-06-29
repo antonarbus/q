@@ -6,9 +6,9 @@ import type {
   OnBlockResizeStop,
   OnBlockResizeStart,
 } from '@shared/type/resizablePaper'
-import { useBlock } from '../providers/BlockProvider'
-import { BlockAnimate } from './block_layout'
-import { PasteBlockTextOverlay } from './paste_block_overlay_text'
+import { useBlock } from '../provider/BlockProvider'
+import { BlockAnimate } from './block-layout'
+import { PasteBlockTextOverlay } from './paste-block-overlay-text'
 
 type Props = {
   children: React.ReactNode
