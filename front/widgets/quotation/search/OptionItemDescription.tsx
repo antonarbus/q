@@ -2,6 +2,7 @@ import { BsFileEarmarkText } from 'react-icons/bs'
 import { Box } from '@mui/material'
 import { getTextWithBoldSubStringAsJsx } from '@shared/util/getTextWithBoldSubStringAsJsx'
 import type { ItemPick } from '@back/api/bookmark/getBookmarksHandler'
+import { useCallback } from 'react'
 
 type Props = {
   inputValueSignal: { value: string }
@@ -9,7 +10,7 @@ type Props = {
 }
 
 export const OptionItemDescription = (props: Props): React.JSX.Element => {
-  const getHighlightedDescription = (): React.ReactNode => {
+  const getHighlightedDescription = useCallback((): React.ReactNode => {
     if (props.inputValueSignal.value !== '') {
       const boldSubString = getTextWithBoldSubStringAsJsx({
         text: props.option.desc ?? '',
@@ -28,7 +29,7 @@ export const OptionItemDescription = (props: Props): React.JSX.Element => {
     }
 
     return '-'
-  }
+  }, [props.inputValueSignal.value, props.option.desc])
 
   return (
     <Box
