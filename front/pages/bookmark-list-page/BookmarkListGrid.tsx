@@ -2,6 +2,7 @@ import {
   AllCommunityModule,
   ModuleRegistry,
   themeQuartz,
+  type FilterChangedEvent,
 } from 'ag-grid-community'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { useRef } from 'react'
@@ -46,6 +47,10 @@ export const BookmarkListGrid = (): React.JSX.Element => {
         getRowId={(params) => params.data.id}
         loadingOverlayComponent={LoadingTableOverlay}
         noRowsOverlayComponent={NoRowsTableOverlay}
+        onFilterChanged={(event: FilterChangedEvent) => {
+          // refresh cells on filter text input to show bold substring
+          event.api.refreshCells({ force: true })
+        }}
         onGridReady={() => {
           addPlaceholderToFloatingFilters({ gridContainerRef })
         }}
