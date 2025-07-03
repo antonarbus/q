@@ -19,7 +19,7 @@ import { useRefetchDataOnEmailChange } from '@shared/lib/ag-grid/hooks/useRefetc
 import { useShowLoadingJumpingDots } from '@shared/lib/ag-grid/hooks/useShowLoadingJumpingDots'
 import { AgGridStyles } from '@shared/lib/ag-grid/styles/AgGridStyles'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/component/loading-dots-overlay'
-import type { ItemPick } from '@back/api/bookmark/getBookmarksHandler'
+import type { ItemPick } from '@back/api/bookmark/getBookmarkListHandler'
 import { dispatch } from '@shared/lib/redux'
 import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'
 

@@ -10,7 +10,7 @@ import { resetPasswordHandler } from '@back/api/auth/resetPasswordHandler'
 import { deleteBookmarkHandler } from '@back/api/bookmark/deleteBookmarkHandler'
 import { getBookmarkHandler } from '@back/api/bookmark/getBookmarkHandler'
 import { getBookmarkCategoriesHandler } from '@back/api/bookmark/getBookmarkCategoriesHandler'
-import { getBookmarksHandler } from '@back/api/bookmark/getBookmarksHandler'
+import { getBookmarkListHandler } from '@back/api/bookmark/getBookmarkListHandler'
 import { saveBookmarkHandler } from '@back/api/bookmark/saveBookmarkHandler'
 import { getBucketCorsHandler } from '@back/api/dev/getBucketCorsHandler'
 import { healthCheckHandler } from '@back/api/dev/healthCheckHandler'
@@ -24,10 +24,10 @@ import { saveFileInfoHandler } from '@back/api/file/saveFileInfoHandler'
 import { deleteQuotationHandler } from '@back/api/quotation/deleteQuotationHandler'
 import { getQuotationHandler } from '@back/api/quotation/getQuotationHandler'
 import { getQuotationCategoriesHandler } from '@back/api/quotation/getQuotationCategories'
-import { getQuotationsHandler } from '@back/api/quotation/getQuotationsHandler'
+import { getQuotationListHandler } from '@back/api/quotation/getQuotationListHandler'
 import { saveQuotationHandler } from '@back/api/quotation/saveQuotationHandler'
 import { deleteUserHandler } from '@back/api/user/deleteUserHandler'
-import { getUsersHandler } from '@back/api/user/getUsersHandler'
+import { getUserListHandler } from '@back/api/user/getUserListHandler'
 import { countUniqueDailyVisitorsHandler } from '@back/api/visitors/countUniqueDailyVisitorsHandler'
 import { getUniqueDailyVisitorsHandler } from '@back/api/visitors/getUniqueDailyVisitorsHandler'
 import { deleteFileHandler } from './file/deleteFileHandler'
@@ -147,7 +147,7 @@ export const api = {
   getUsers: {
     url: '/api/get-users',
     method: 'get',
-    handler: getUsersHandler,
+    handler: getUserListHandler,
     description: 'Users list for admin page',
   },
   deleteUser: {
@@ -172,7 +172,7 @@ export const api = {
   getQuotations: {
     url: '/api/get-quotations',
     method: 'get',
-    handler: getQuotationsHandler,
+    handler: getQuotationListHandler,
     description: 'For quotations table',
   },
   getQuotationCategories: {
@@ -203,7 +203,7 @@ export const api = {
   getBookmarks: {
     url: '/api/get-bookmarks',
     method: 'get',
-    handler: getBookmarksHandler,
+    handler: getBookmarkListHandler,
     description: 'For bookmarks table',
   },
   getBookmarkCategories: {

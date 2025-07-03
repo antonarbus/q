@@ -1,4 +1,4 @@
-import type { ResBody } from '@back/api/bookmark/getBookmarksHandler'
+import type { ResBody } from '@back/api/bookmark/getBookmarkListHandler'
 import { produce } from 'immer'
 import { queryKey } from '@shared/const/queryKey'
 import { instance } from '@shared/instance'

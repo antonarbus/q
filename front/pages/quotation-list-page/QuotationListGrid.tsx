@@ -18,7 +18,7 @@ import { useRefetchDataOnEmailChange } from '@shared/lib/ag-grid/hooks/useRefetc
 import { useShowLoadingJumpingDots } from '@shared/lib/ag-grid/hooks/useShowLoadingJumpingDots'
 import { AgGridStyles } from '@shared/lib/ag-grid/styles/AgGridStyles'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/component/loading-dots-overlay'
-import type { QuotationPick } from '@back/api/quotation/getQuotationsHandler'
+import type { QuotationPick } from '@back/api/quotation/getQuotationListHandler'
 import { dispatch } from '@shared/lib/redux'
 import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'
 import { DisplayedRowsCount } from '@shared/lib/ag-grid/components/DisplayedRowsCount'

@@ -1,5 +1,5 @@
 import type { ICellRendererParams } from 'ag-grid-community'
-import type { QuotationPick } from '@back/api/quotation/getQuotationsHandler'
+import type { QuotationPick } from '@back/api/quotation/getQuotationListHandler'
 import { getTextWithBoldSubStringAsJsx } from '@shared/util/getTextWithBoldSubStringAsJsx'
 
 type FilterModel = {

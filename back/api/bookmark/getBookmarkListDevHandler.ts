@@ -21,7 +21,11 @@ type RouterHandler = (
   next: NextFunction,
 ) => Promise<void>
 
-export const getBookmarksHandler: RouterHandler = async (req, res, next) => {
+export const getBookmarkListDevHandler: RouterHandler = async (
+  req,
+  res,
+  next,
+) => {
   const { email } = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
   const bookmarks = await BookmarkModel.find(

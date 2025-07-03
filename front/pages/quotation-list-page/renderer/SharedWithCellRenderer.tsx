@@ -1,6 +1,6 @@
 import { Chip, Tooltip } from '@mui/material'
 import type { ICellRendererParams } from 'ag-grid-community'
-import type { QuotationPick } from '@back/api/quotation/getQuotationsHandler'
+import type { QuotationPick } from '@back/api/quotation/getQuotationListHandler'
 import { Link } from 'react-router-dom'
 import { route } from '@shared/const/route'
 import { getTextWithBoldSubStringAsJsx } from '@shared/util/getTextWithBoldSubStringAsJsx'

@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { PiBooks } from 'react-icons/pi'
 import { getTextWithBoldSubStringAsJsx } from '@shared/util/getTextWithBoldSubStringAsJsx'
-import type { ItemPick } from '@back/api/bookmark/getBookmarksHandler'
+import type { ItemPick } from '@back/api/bookmark/getBookmarkListHandler'
 
 type Props = {
   inputValueSignal: { value: string }
