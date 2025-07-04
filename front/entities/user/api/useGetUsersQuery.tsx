@@ -18,8 +18,8 @@ export const useGetUsersQuery = (): Res => {
     // enabled: false,
     queryFn: async ({ signal }) => {
       const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
-        url: api.getUsers.url,
-        method: api.getUsers.method,
+        url: api.getUserList.url,
+        method: api.getUserList.method,
         signal,
       })
 

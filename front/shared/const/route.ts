@@ -11,6 +11,7 @@ export const route = {
   save: 'save',
   share: 'share',
   bookmarkList: 'bookmark-list',
+  bookmarkListAll: 'bookmark-list-all',
   bookmark: 'bookmark',
   info: 'info',
   settings: 'settings',

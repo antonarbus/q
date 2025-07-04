@@ -18,8 +18,8 @@ export const useGetQuotationsQuery = (): Res => {
     enabled: false,
     queryFn: async ({ signal }) => {
       const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
-        url: api.getQuotations.url,
-        method: api.getQuotations.method,
+        url: api.getQuotationList.url,
+        method: api.getQuotationList.method,
         signal,
       })
 

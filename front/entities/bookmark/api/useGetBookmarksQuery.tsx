@@ -18,8 +18,8 @@ export const useGetBookmarksQuery = (): Res => {
     enabled: false,
     queryFn: async ({ signal }) => {
       const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
-        url: api.getBookmarks.url,
-        method: api.getBookmarks.method,
+        url: api.getBookmarkList.url,
+        method: api.getBookmarkList.method,
         signal,
       })
 

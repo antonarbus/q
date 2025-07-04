@@ -32,6 +32,7 @@ import { countUniqueDailyVisitorsHandler } from '@back/api/visitors/countUniqueD
 import { getUniqueDailyVisitorsHandler } from '@back/api/visitors/getUniqueDailyVisitorsHandler'
 import { deleteFileHandler } from './file/deleteFileHandler'
 import { proxyFileToBucketHandler } from './file/proxyFileToBucketHandler'
+import { getBookmarkListAllHandler } from './bookmark/getBookmarkListAllHandler'
 
 type Api = {
   url: string
@@ -144,8 +145,8 @@ export const api = {
     description: 'When user clicks on reset password link in email',
   },
   // user
-  getUsers: {
-    url: '/api/get-users',
+  getUserList: {
+    url: '/api/get-user-list',
     method: 'get',
     handler: getUserListHandler,
     description: 'Users list for admin page',
@@ -169,14 +170,14 @@ export const api = {
     handler: getQuotationHandler,
     description: 'When user opens the quotation page',
   },
-  getQuotations: {
-    url: '/api/get-quotations',
+  getQuotationList: {
+    url: '/api/get-quotation-list',
     method: 'get',
     handler: getQuotationListHandler,
     description: 'For quotations table',
   },
-  getQuotationCategories: {
-    url: '/api/get-quotation-categories',
+  getUniqueQuotationCategoryList: {
+    url: '/api/get-unique-quotation-category-list',
     method: 'get',
     handler: getQuotationCategoriesHandler,
     description: 'For the category field on save quotation modal',
@@ -200,14 +201,20 @@ export const api = {
     handler: getBookmarkHandler,
     description: 'When user clicks on bookmark in search or on bookmarks page',
   },
-  getBookmarks: {
-    url: '/api/get-bookmarks',
+  getBookmarkList: {
+    url: '/api/get-bookmark-list',
     method: 'get',
     handler: getBookmarkListHandler,
     description: 'For bookmarks table',
   },
-  getBookmarkCategories: {
-    url: '/api/get-bookmark-categories',
+  getBookmarkListAll: {
+    url: '/api/get-bookmark-list-all',
+    method: 'get',
+    handler: getBookmarkListAllHandler,
+    description: 'For all bookmarks table',
+  },
+  getUniqueBookmarkCategoryList: {
+    url: '/api/get-unique-bookmark-category-list',
     method: 'get',
     handler: getBookmarkCategoriesHandler,
     description: 'For the category field on save bookmark modal',

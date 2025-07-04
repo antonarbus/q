@@ -10,6 +10,11 @@ export type ItemPick = Pick<
   'id' | 'name' | 'category' | 'desc' | 'type' | 'createdAt' | 'updatedAt'
 >
 
+export type SearchQuery = {
+  startRow: number
+  endRow: number
+}
+
 export type ResBody = {
   message: ErrorMessageCommon | 'Found' | 'No content' | 'Unhandled error'
   bookmarks: ItemPick[]
@@ -17,33 +22,20 @@ export type ResBody = {
 }
 
 type RouterHandler = (
-  req: Request,
+  req: Request<unknown, unknown, unknown, SearchQuery>,
   res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
 
-export const getBookmarkListDevHandler: RouterHandler = async (
+// todo: remove this route if not in use
+export const getBookmarkListAllHandler: RouterHandler = async (
   req,
   res,
   next,
 ) => {
   try {
     // Parse pagination params from ag-Grid (startRow, endRow)
-    const startRowRaw = req.query.startRow
-    const endRowRaw = req.query.endRow
-    let startRow = 0
-    let endRow = 100
-
-    if (typeof startRowRaw === 'string') {
-      const parsed = parseInt(startRowRaw)
-      startRow = parsed
-    }
-
-    if (typeof endRowRaw === 'string') {
-      const parsed = parseInt(endRowRaw)
-      endRow = parsed
-    }
-
+    const { startRow = 0, endRow = 100 } = req.query
     const limit = endRow - startRow
     const skip = startRow
 
