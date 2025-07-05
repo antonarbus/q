@@ -12,7 +12,7 @@ export const useNavItemsOnQuotationsPageOpen = (): void => {
           navItemId.pdf,
           navItemId.excel,
           navItemId.share,
-          navItemId.quotations,
+          navItemId.quotationList,
           navItemId.insert,
         ],
       }),
@@ -22,7 +22,7 @@ export const useNavItemsOnQuotationsPageOpen = (): void => {
 
     dispatch(
       navSlice.actions.underlineNavItem({
-        navItemId: navItemId.quotations,
+        navItemId: navItemId.quotationList,
       }),
     )
   })

@@ -9,8 +9,8 @@ export const useDisableNavItemsOnCopyModal = (): void => {
     dispatch(
       navSlice.actions.disableTopNavItems({
         exceptNavItemIds: [
-          navItemId.quotations,
-          navItemId.bookmarks,
+          navItemId.quotationList,
+          navItemId.bookmarkList,
           navItemId.new,
           navItemId.back,
           navItemId.profile,
@@ -30,7 +30,7 @@ export const useDisableNavItemsOnCopyModal = (): void => {
             navItemId.pdf,
             navItemId.excel,
             navItemId.insert,
-            navItemId.bookmarks,
+            navItemId.bookmarkList,
           ],
         }),
       )
@@ -50,7 +50,7 @@ export const useDisableNavItemsOnCopyModal = (): void => {
             navItemId.pdf,
             navItemId.excel,
             navItemId.insert,
-            navItemId.quotations,
+            navItemId.quotationList,
           ],
         }),
       )

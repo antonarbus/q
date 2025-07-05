@@ -12,7 +12,7 @@ export const useNavItemsOnBookmarksPageOpen = (): void => {
           navItemId.pdf,
           navItemId.excel,
           navItemId.share,
-          navItemId.bookmarks,
+          navItemId.bookmarkList,
           navItemId.insert,
         ],
       }),
@@ -21,7 +21,7 @@ export const useNavItemsOnBookmarksPageOpen = (): void => {
     dispatch(navSlice.actions.removeUnderlineFromTopNav())
 
     dispatch(
-      navSlice.actions.underlineNavItem({ navItemId: navItemId.bookmarks }),
+      navSlice.actions.underlineNavItem({ navItemId: navItemId.bookmarkList }),
     )
   })
 

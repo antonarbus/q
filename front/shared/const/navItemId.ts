@@ -8,8 +8,9 @@ export const navItemId = {
   link: 'link',
   excel: 'excel',
   insert: 'insert',
-  quotations: 'quotations',
-  bookmarks: 'bookmarks',
+  quotationList: 'quotation-list',
+  bookmarkList: 'bookmark-list',
+  bookmarkListAll: 'bookmark-list-all',
   login: 'login',
   profile: 'profile',
   settings: 'settings',
@@ -21,7 +22,7 @@ export const navItemId = {
   boqRow: 'boqRow',
   back: 'back',
   admin: 'admin',
-  users: 'users',
+  userList: 'user-list',
   visitors: 'visitors',
 } as const
 

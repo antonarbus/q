@@ -180,7 +180,7 @@ export const navStructure: NavItem[] = [
         tooltip: 'Insert block or row',
       },
       {
-        id: navItemId.bookmarks,
+        id: navItemId.bookmarkList,
         icon: <PiFolderSimpleStarDuotone data-testid='bookmarks icon' />,
         isHidden: false,
         name: 'Bookmarks',
@@ -189,7 +189,7 @@ export const navStructure: NavItem[] = [
         tooltip: 'Your bookmarks',
       },
       {
-        id: navItemId.quotations,
+        id: navItemId.quotationList,
         icon: <CiViewTable data-testid='quotations icon' />,
         isHidden: false,
         name: 'Quotations',
@@ -228,7 +228,7 @@ export const navStructure: NavItem[] = [
             tooltip: 'Admin links',
             navItems: [
               {
-                id: navItemId.users,
+                id: navItemId.userList,
                 icon: <FaUsersGear />,
                 isHidden: false,
                 name: 'Users',
@@ -240,6 +240,13 @@ export const navStructure: NavItem[] = [
                 isHidden: false,
                 name: 'Visitors',
                 link: `/${route.visitorList}`,
+              },
+              {
+                id: navItemId.bookmarkListAll,
+                icon: <PiFolderSimpleStarDuotone />,
+                isHidden: false,
+                name: 'Bookmarks',
+                link: `/${route.bookmarkListAll}`,
               },
             ],
           },
