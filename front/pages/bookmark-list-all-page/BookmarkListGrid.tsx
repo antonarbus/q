@@ -24,6 +24,9 @@ import { AgGridStyles } from '@shared/lib/ag-grid/styles/AgGridStyles'
 import type { ItemPick } from '@back/api/bookmark/getBookmarkListHandler'
 import { dispatch } from '@shared/lib/redux'
 import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'
+import { api } from '@back/api'
+import type { ResBody } from '@back/api/bookmark/getBookmarkListAllHandler'
+import type { AxiosResponse } from 'axios'
 
 ModuleRegistry.registerModules([AllCommunityModule])
 
@@ -40,34 +43,32 @@ export const BookmarkListAllGrid = (): React.JSX.Element => {
   // Infinite row model datasource for ag-Grid
   // Infinite row model datasource for ag-Grid
   const datasource: IDatasource = {
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     async getRows(params) {
-      // ag-Grid provides startRow, endRow for pagination
       const { startRow, endRow } = params
 
       try {
-        const response = await axiosWithAuth({
-          url: '/api/get-bookmark-list-all',
-          method: 'get',
+        const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
+          url: api.getBookmarkListAll.url,
           params: { startRow, endRow },
+          method: api.getBookmarkListAll.method,
         })
-
-        const result: unknown = response.data
 
         let isValid = false
         let bookmarksResult: ItemPick[] = []
         let totalCountResult: number | undefined
 
-        const isObj = typeof result === 'object' && result !== null
+        const isObj = typeof data === 'object' && data !== null
 
         if (isObj === true) {
-          const hasBookmarks = Object.hasOwn(result, 'bookmarks')
+          const hasBookmarks = Object.hasOwn(data, 'bookmarks')
 
           const bookmarksArr =
             hasBookmarks === true &&
-            Array.isArray((result as { bookmarks?: unknown }).bookmarks)
+            Array.isArray((data as { bookmarks?: unknown }).bookmarks)
 
           if (bookmarksArr === true) {
-            const maybeResult = result as Record<string, unknown>
+            const maybeResult = data as Record<string, unknown>
             const bookmarks = maybeResult.bookmarks as ItemPick[]
 
             const totalCount =
