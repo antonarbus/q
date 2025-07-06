@@ -5,6 +5,8 @@ import { api } from '@back/api'
 import type { ResBody } from '@back/api/bookmark/getBookmarkListAllHandler'
 import type { AxiosResponse } from 'axios'
 import type { IDatasource } from 'ag-grid-community'
+import { useFirstMountState } from 'react-use'
+import { useMemo, useState } from 'react'
 
 type Props = {
   startRow: number
@@ -24,43 +26,72 @@ const getBookmarkListAll = async ({
   return data
 }
 
-export const useBookmarkListAllDatasource = (): IDatasource => {
-  const datasource: IDatasource = {
-    rowCount: undefined,
-    getRows: async (params) => {
-      const { startRow, endRow, successCallback, failCallback } = params
+type Res = {
+  datasource: IDatasource
+  isLoading: boolean
+  isFetching: boolean
+  isFetched: boolean
+}
 
-      try {
-        const { bookmarkList, bookmarkListTotalCount } =
-          await getBookmarkListAll({
-            startRow,
-            endRow,
-          })
+export const useBookmarkListAllDatasource = (): Res => {
+  const [isLoading, setIsLoading] = useState(false)
+  const [isFetching, setIsFetching] = useState(false)
+  const [isFetched, setIsFetched] = useState(false)
+  const isFirstMount = useFirstMountState()
 
-        const getLastRow = (): number => {
-          const bookmarkListCount = bookmarkList.length
-          const didReachEndOfTheList = bookmarkListCount >= endRow - startRow
+  const datasource = useMemo(() => {
+    const ds: IDatasource = {
+      rowCount: undefined,
+      getRows: async (params) => {
+        const { startRow, endRow, successCallback, failCallback } = params
 
-          if (didReachEndOfTheList === false) {
-            const lastRow = startRow + bookmarkListCount
+        try {
+          if (isFirstMount === true) {
+            setIsLoading(true)
+            setIsFetching(true)
+          }
+
+          if (isFirstMount === false) {
+            setIsFetching(true)
+          }
+
+          const { bookmarkList, bookmarkListTotalCount } =
+            await getBookmarkListAll({
+              startRow,
+              endRow,
+            })
+
+          const getLastRow = (): number => {
+            const bookmarkListCount = bookmarkList.length
+            const didReachEndOfTheList = bookmarkListCount >= endRow - startRow
+
+            if (didReachEndOfTheList === false) {
+              const lastRow = startRow + bookmarkListCount
+
+              return lastRow
+            }
+
+            // reached the end of the list
+            const lastRow = bookmarkListTotalCount
 
             return lastRow
           }
 
-          // reached the end of the list
-          const lastRow = bookmarkListTotalCount
+          const lastRow = getLastRow()
 
-          return lastRow
+          successCallback(bookmarkList, lastRow)
+        } catch {
+          failCallback()
+        } finally {
+          setIsLoading(false)
+          setIsFetching(false)
+          setIsFetched(true)
         }
+      },
+    }
 
-        const lastRow = getLastRow()
+    return ds
+  }, [isFirstMount])
 
-        successCallback(bookmarkList, lastRow)
-      } catch {
-        failCallback()
-      }
-    },
-  }
-
-  return datasource
+  return { datasource, isLoading, isFetching, isFetched }
 }

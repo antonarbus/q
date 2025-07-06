@@ -21,28 +21,23 @@ import { AgGridStyles } from '@shared/lib/ag-grid/styles/AgGridStyles'
 import type { ItemPick } from '@back/api/bookmark/getBookmarkListHandler'
 import { dispatch } from '@shared/lib/redux'
 import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'
-// import { api } from '@back/api'
-// import type { ResBody } from '@back/api/bookmark/getBookmarkListAllHandler'
-// import type { AxiosResponse } from 'axios'
 
 ModuleRegistry.registerModules([AllCommunityModule])
 
 export const BookmarkListAllGrid = (): React.JSX.Element => {
   const gridContainerRef = useRef<React.ComponentRef<'div'> | null>(null)
 
-  // const { data, isLoading, isFetching, isFetched, refetch } =
-  //   useGetBookmarksQuery()
+  const { datasource, isLoading, isFetching, isFetched } =
+    useBookmarkListAllDatasource()
 
-  // useDisableLoadingOverlayWhenItemsAreFetched({ isFetched })
-  // useShowLoadingJumpingDots({ isLoading })
-
-  const datasource = useBookmarkListAllDatasource()
+  useShowLoadingJumpingDots({ isLoading })
+  useDisableLoadingOverlayWhenItemsAreFetched({ isFetched })
 
   return (
     <GridLayout gridContainerRef={gridContainerRef}>
       <AgGridStyles />
       <DisplayedRowsCount />
-      {/* <ProgressGridBar isShown={isFetching} /> */}
+      <ProgressGridBar isShown={isFetching} />
       <AgGridReact<ItemPick>
         columnDefs={columnDefs}
         datasource={datasource}
