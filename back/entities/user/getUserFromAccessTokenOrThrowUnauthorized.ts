@@ -5,7 +5,7 @@ import type { Request } from 'express'
 import { verifyAccessToken } from '@back/shared/lib/json-webtoken'
 
 type Props = {
-  req: Request<unknown>
+  req: Request<unknown, unknown, unknown, unknown>
 }
 
 type Res = {
