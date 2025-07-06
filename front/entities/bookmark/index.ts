@@ -2,7 +2,7 @@
 export { useSaveBookmarkMutation } from './api/useSaveBookmarkMutation'
 export { useDeleteBookmarkMutation } from './api/useDeleteBookmarkMutation'
 export { useGetBookmarkListQuery } from './api/useGetBookmarkListQuery'
-export { useBookmarkListAllDatasource } from './api/bookmarkListAllDatasource'
+export { useBookmarkListAllDatasource } from './api/useBookmarkListAllDatasource'
 export { useGetBookmarkCategoryListQuery } from './api/useGetBookmarkCategoryListQuery'
 export { useGetBookmarkMutation } from './api/useGetBookmarkMutation'
 
