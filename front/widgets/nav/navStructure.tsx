@@ -38,7 +38,7 @@ import { route } from '@shared/const/route'
 import type { NavItem } from '@shared/nav'
 import { downloadPdf } from '@features/quotation/download-quotation-as-pdf'
 import { downloadExcel } from '@features/quotation/download-quotation-as-excel'
-import { FaRegFilePdf } from 'react-icons/fa'
+import { FaRegFilePdf, FaRegFileImage } from 'react-icons/fa'
 import { openShareQuotationModal } from '@features/open-close/open-share-quotation-modal'
 import { getState } from '@shared/lib/redux'
 import { saveExistingQuotation } from '@features/quotation/save-quotation'
@@ -228,6 +228,27 @@ export const navStructure: NavItem[] = [
             tooltip: 'Admin links',
             navItems: [
               {
+                id: navItemId.quotationListAll,
+                icon: <CiViewTable />,
+                isHidden: false,
+                name: 'Quotations',
+                link: `/${route.quotationListAll}`,
+              },
+              {
+                id: navItemId.bookmarkListAll,
+                icon: <PiFolderSimpleStarDuotone />,
+                isHidden: false,
+                name: 'Bookmarks',
+                link: `/${route.bookmarkListAll}`,
+              },
+              {
+                id: navItemId.fileListAll,
+                icon: <FaRegFileImage />,
+                isHidden: false,
+                name: 'Files',
+                link: `/${route.fileListAll}`,
+              },
+              {
                 id: navItemId.userList,
                 icon: <FaUsersGear />,
                 isHidden: false,
@@ -240,13 +261,6 @@ export const navStructure: NavItem[] = [
                 isHidden: false,
                 name: 'Visitors',
                 link: `/${route.visitorList}`,
-              },
-              {
-                id: navItemId.bookmarkListAll,
-                icon: <PiFolderSimpleStarDuotone />,
-                isHidden: false,
-                name: 'Bookmarks',
-                link: `/${route.bookmarkListAll}`,
               },
             ],
           },
