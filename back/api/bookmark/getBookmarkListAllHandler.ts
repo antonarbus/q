@@ -5,6 +5,8 @@ import { httpStatus } from '@back/shared/const/httpStatus'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { BookmarkModel } from '@back/entities/bookmark'
 import { userRole } from '@back/shared/const/userRole'
+
+import { z } from 'zod'
 import type { SortModelItem } from '@shared/lib/ag-grid/types/SortModelItem'
 
 export type ItemPick = Pick<
@@ -13,9 +15,9 @@ export type ItemPick = Pick<
 >
 
 export type SearchQuery = {
-  startRow: number
-  endRow: number
-  sortModel: SortModelItem[]
+  startRow: string
+  endRow: string
+  sortModel: string
   filterModel?: string
 }
 
@@ -56,21 +58,37 @@ export const getBookmarkListAllHandler: RouterHandler = async (
   const { startRow = 0, endRow = 100, sortModel, filterModel } = req.query
   console.log('🚀 ~ req.query:', req.query)
 
-  // Parse sortModel and filterModel from JSON strings
-  const sort: Record<string, 1 | -1> = {}
+  const sortModelSchema = z.array(
+    z.object({
+      colId: z.string(),
+      sort: z.enum(['asc', 'desc']),
+    }),
+  )
 
-  if (Boolean(sortModel) === true) {
-    try {
-      const sortArr = JSON.parse(sortModel) as {
-        colId: string
-        sort: 'asc' | 'desc'
-      }[]
+  const {
+    success,
+    error,
+    data: parsedSortModel,
+  } = sortModelSchema.safeParse(JSON.parse(sortModel))
 
-      sortArr.forEach(({ colId, sort: dir }) => {
-        sort[colId] = dir === 'asc' ? 1 : -1
-      })
-    } catch {}
+  if (success === false) {
+    throw new Error('Invalid sortModel format', error)
   }
+
+  const sort = parsedSortModel.reduce<Record<string, 1 | -1>>(
+    (accumulator, item) => {
+      if (item.sort === 'asc') {
+        accumulator[item.colId] = 1
+      }
+
+      if (item.sort === 'desc') {
+        accumulator[item.colId] = -1
+      }
+
+      return accumulator
+    },
+    {},
+  )
 
   const filter: Record<string, any> = {}
 
@@ -102,8 +120,8 @@ export const getBookmarkListAllHandler: RouterHandler = async (
     email: 1,
   })
     .sort(sort)
-    .skip(startRow)
-    .limit(endRow - startRow)
+    .skip(Number(startRow))
+    .limit(Number(endRow) - Number(startRow))
     .lean()
 
   const bookmarkListTotalCountPromise = BookmarkModel.countDocuments(filter)
