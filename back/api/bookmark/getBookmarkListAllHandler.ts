@@ -5,9 +5,7 @@ import { httpStatus } from '@back/shared/const/httpStatus'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { BookmarkModel } from '@back/entities/bookmark'
 import { userRole } from '@back/shared/const/userRole'
-
 import { z } from 'zod'
-import type { SortModelItem } from '@shared/lib/ag-grid/types/SortModelItem'
 
 export type ItemPick = Pick<
   Item,
@@ -56,7 +54,6 @@ export const getBookmarkListAllHandler: RouterHandler = async (
 
   // Parse pagination, sort, and filter params from ag-Grid (startRow, endRow, sortModel, filterModel)
   const { startRow = 0, endRow = 100, sortModel, filterModel } = req.query
-  console.log('🚀 ~ req.query:', req.query)
 
   const sortModelSchema = z.array(
     z.object({
