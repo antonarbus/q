@@ -1,14 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/unbound-method */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { axiosWithAuth } from '@shared/lib/axios'
 import { api } from '@back/api'
 import type { ResBody } from '@back/api/bookmark/getBookmarkListAllHandler'
 import type { AxiosResponse } from 'axios'
-import type { IDatasource, IGetRowsParams } from 'ag-grid-community'
+import type { IDatasource } from 'ag-grid-community'
 import { useFirstMountState } from 'react-use'
 import { useMemo, useState } from 'react'
-
-// type FilterModel = Record<string, any>
 
 type Res = {
   datasource: IDatasource
@@ -31,13 +30,10 @@ export const useBookmarkListAllDatasource = (): Res => {
           startRow,
           endRow,
           sortModel,
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           filterModel,
           successCallback,
           failCallback,
         } = params
-
-        console.log('🚀 ~ params:', params)
 
         try {
           if (isFirstMount === true) {
