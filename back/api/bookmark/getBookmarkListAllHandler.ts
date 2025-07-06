@@ -38,58 +38,65 @@ export const getBookmarkListAllHandler: RouterHandler = async (
   res,
   next,
 ) => {
-  try {
-    const { roles } = getUserFromAccessTokenOrThrowUnauthorized({ req })
+  const { roles } = getUserFromAccessTokenOrThrowUnauthorized({ req })
 
-    if (roles.includes(userRole.superAdmin) === false) {
-      res.status(httpStatus.forbidden_403).json({
-        message: 'no permission to view',
-        bookmarkList: [],
-        bookmarkListTotalCount: 0,
-      })
+  if (roles.includes(userRole.superAdmin) === false) {
+    res.status(httpStatus.forbidden_403).json({
+      message: 'no permission to view',
+      bookmarkList: [],
+      bookmarkListTotalCount: 0,
+    })
 
-      return
-    }
+    return
+  }
 
-    // Parse pagination params from ag-Grid (startRow, endRow)
-    const { startRow = 0, endRow = 100 } = req.query
+  // Parse pagination params from ag-Grid (startRow, endRow)
+  const { startRow = 0, endRow = 100 } = req.query
 
-    // Query all bookmarks (no user filter)
-    const bookmarkListPromise = BookmarkModel.find(
-      {},
-      {
-        _id: 0,
-        id: 1,
-        name: 1,
-        category: 1,
-        desc: 1,
-        type: 1,
-        createdAt: 1,
-        updatedAt: 1,
-        email: 1,
-      },
-    )
-      .skip(startRow)
-      .limit(endRow - startRow)
-      .lean()
+  // Query all bookmarks (no user filter)
+  const bookmarkListPromise = BookmarkModel.find(
+    {},
+    {
+      _id: 0,
+      id: 1,
+      name: 1,
+      category: 1,
+      desc: 1,
+      type: 1,
+      createdAt: 1,
+      updatedAt: 1,
+      email: 1,
+    },
+  )
+    .skip(startRow)
+    .limit(endRow - startRow)
+    .lean()
 
-    const bookmarkListTotalCountPromise = BookmarkModel.countDocuments()
+  const bookmarkListTotalCountPromise = BookmarkModel.countDocuments()
 
-    const [bookmarkList, bookmarkListTotalCount] = await Promise.all([
+  const [bookmarkListResponse, bookmarkListTotalCountResponse] =
+    await Promise.allSettled([
       bookmarkListPromise,
       bookmarkListTotalCountPromise,
     ])
 
-    res.status(httpStatus.success_200).json({
-      message: bookmarkList.length === 0 ? 'No content' : 'Found',
-      bookmarkList,
-      bookmarkListTotalCount, // ag-Grid uses this for infinite scroll
-    })
-  } catch {
+  const fulfilled =
+    bookmarkListResponse.status === 'fulfilled' &&
+    bookmarkListTotalCountResponse.status === 'fulfilled'
+
+  if (fulfilled === false) {
     res.status(httpStatus.notFound_404).json({
       message: 'Unhandled error',
       bookmarkList: [],
       bookmarkListTotalCount: 0,
+    })
+  }
+
+  if (fulfilled === true) {
+    res.status(httpStatus.success_200).json({
+      message: 'Found',
+      bookmarkList: bookmarkListResponse.value,
+      bookmarkListTotalCount: bookmarkListTotalCountResponse.value, // ag-Grid uses this for infinite scroll
     })
   }
 }
