@@ -16,7 +16,7 @@ export type SearchQuery = {
   startRow: string
   endRow: string
   sortModel: string
-  filterModel?: string
+  filterModel: string
 }
 
 export type ResBody = {
@@ -52,7 +52,6 @@ export const getBookmarkListAllHandler: RouterHandler = async (
     return
   }
 
-  // Parse pagination, sort, and filter params from ag-Grid (startRow, endRow, sortModel, filterModel)
   const { startRow = 0, endRow = 100, sortModel, filterModel } = req.query
 
   const sortModelSchema = z.array(
@@ -62,14 +61,17 @@ export const getBookmarkListAllHandler: RouterHandler = async (
     }),
   )
 
+  // ? maybe it is not a good idea to pass parameters in search query params, coz they are strings
+  // ? to type we need to have parse it with schema, dah...
+  // but it is a good example how to do it
   const {
-    success,
-    error,
+    success: parseSortModelSuccess,
+    error: parseSortModelError,
     data: parsedSortModel,
   } = sortModelSchema.safeParse(JSON.parse(sortModel))
 
-  if (success === false) {
-    throw new Error('Invalid sortModel format', error)
+  if (parseSortModelSuccess === false) {
+    throw new Error('Invalid sortModel format', parseSortModelError)
   }
 
   const sort = parsedSortModel.reduce<Record<string, 1 | -1>>(
@@ -87,22 +89,33 @@ export const getBookmarkListAllHandler: RouterHandler = async (
     {},
   )
 
-  const filter: Record<string, any> = {}
+  const filterModelSchema = z.record(
+    z.string(),
+    z.object({
+      filterType: z.string(),
+      type: z.string(),
+      filter: z.string(),
+    }),
+  )
 
-  if (filterModel) {
-    try {
-      const filterObj = JSON.parse(filterModel)
+  const {
+    success: parseFilterModelSuccess,
+    error: parseFilterModelError,
+    data: parsedFilterModel,
+  } = filterModelSchema.safeParse(JSON.parse(filterModel))
 
-      // Basic string/text filter support (ag-Grid default)
-      Object.entries(filterObj).forEach(([field, filterDef]: [string, any]) => {
-        if (filterDef.filter != null) {
-          // For text filter, use case-insensitive partial match
-          filter[field] = { $regex: filterDef.filter, $options: 'i' }
-        }
-        // Add more filter types as needed (e.g., date, number)
-      })
-    } catch {}
+  if (parseFilterModelSuccess === false) {
+    throw new Error('Invalid filterModel format', parseFilterModelError)
   }
+
+  const filter = Object.entries(parsedFilterModel).reduce<
+    Record<string, { ['$regex']: string; ['$options']: 'i' }>
+  >((accumulator, item) => {
+    const [field, filterDef] = item
+    accumulator[field] = { $regex: filterDef.filter, $options: 'i' }
+
+    return accumulator
+  }, {})
 
   // Query all bookmarks (no user filter)
   const bookmarkListPromise = BookmarkModel.find(filter, {
@@ -146,6 +159,6 @@ export const getBookmarkListAllHandler: RouterHandler = async (
   res.status(httpStatus.success_200).json({
     message: 'Found',
     bookmarkList: bookmarkListResponse.value,
-    bookmarkListTotalCount: bookmarkListTotalCountResponse.value, // ag-Grid uses this for infinite scroll
+    bookmarkListTotalCount: bookmarkListTotalCountResponse.value,
   })
 }

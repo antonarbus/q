@@ -4,7 +4,7 @@ import { axiosWithAuth } from '@shared/lib/axios'
 import { api } from '@back/api'
 import type { ResBody } from '@back/api/bookmark/getBookmarkListAllHandler'
 import type { AxiosResponse } from 'axios'
-import type { IDatasource } from 'ag-grid-community'
+import type { IDatasource, IGetRowsParams } from 'ag-grid-community'
 import { useFirstMountState } from 'react-use'
 import { useMemo, useState } from 'react'
 
@@ -31,6 +31,7 @@ export const useBookmarkListAllDatasource = (): Res => {
           startRow,
           endRow,
           sortModel,
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           filterModel,
           successCallback,
           failCallback,
@@ -47,14 +48,6 @@ export const useBookmarkListAllDatasource = (): Res => {
           if (isFirstMount === false) {
             setIsFetching(true)
           }
-
-          // const { bookmarkList, bookmarkListTotalCount } =
-          //   await getBookmarkListAll({
-          //     startRow,
-          //     endRow,
-          //     sortModel,
-          //     filterModel,
-          //   })
 
           const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>(
             {
