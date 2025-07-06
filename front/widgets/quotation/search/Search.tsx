@@ -5,7 +5,7 @@ import { renderInput } from './renderInput'
 import { renderOption } from './renderOption'
 import { useEffect } from 'react'
 import { useSelector } from '@shared/lib/redux'
-import { useGetBookmarksQuery } from '@entities/bookmark'
+import { useGetBookmarkListQuery } from '@entities/bookmark'
 import { useSignal } from '@preact/signals-react'
 import { useCopyBookmarkAtSearch } from '@features/bookmark/copy-bookmark'
 import { useIsCopyModalVisible } from '@entities/copy'
@@ -15,7 +15,7 @@ export const Search = (): React.JSX.Element => {
     data: bookmarksData,
     isPending: isPendingBookmarks,
     refetch: fetchBookmarks,
-  } = useGetBookmarksQuery()
+  } = useGetBookmarkListQuery()
 
   const options = bookmarksData?.bookmarks ?? []
 

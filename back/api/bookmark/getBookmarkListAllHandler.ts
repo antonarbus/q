@@ -17,8 +17,8 @@ export type SearchQuery = {
 
 export type ResBody = {
   message: ErrorMessageCommon | 'Found' | 'No content' | 'Unhandled error'
-  bookmarks: ItemPick[]
-  totalCount?: number
+  bookmarkList: ItemPick[]
+  bookmarkListTotalCount: number
 }
 
 type RouterHandler = (
@@ -40,7 +40,7 @@ export const getBookmarkListAllHandler: RouterHandler = async (
     const skip = startRow
 
     // Query all bookmarks (no user filter)
-    const [bookmarks, totalCount] = await Promise.all([
+    const [bookmarkList, bookmarkListTotalCount] = await Promise.all([
       BookmarkModel.find(
         {},
         {
@@ -63,15 +63,15 @@ export const getBookmarkListAllHandler: RouterHandler = async (
 
     // ag-Grid expects bookmarks and totalCount
     res.status(httpStatus.success_200).json({
-      message: bookmarks.length === 0 ? 'No content' : 'Found',
-      bookmarks,
-      totalCount, // ag-Grid can use this for infinite scroll
+      message: bookmarkList.length === 0 ? 'No content' : 'Found',
+      bookmarkList,
+      bookmarkListTotalCount, // ag-Grid can use this for infinite scroll
     })
   } catch {
     res.status(httpStatus.notFound_404).json({
       message: 'Unhandled error',
-      bookmarks: [],
-      totalCount: 0,
+      bookmarkList: [],
+      bookmarkListTotalCount: 0,
     })
   }
 }

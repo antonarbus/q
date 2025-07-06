@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import {
   type BookmarkFormValues,
-  useGetBookmarkCategoriesQuery,
-  useGetBookmarksQuery,
+  useGetBookmarkCategoryListQuery,
+  useGetBookmarkListQuery,
   useSaveBookmarkMutation,
 } from '@entities/bookmark'
 import { BOOKMARK_POS_AT_BLOCKS, quotationSlice } from '@entities/quotation'
@@ -43,8 +43,8 @@ export const useSaveBookmark = ({
     reset,
   } = useSaveBookmarkMutation()
 
-  const { refetch: updateItemCategories } = useGetBookmarkCategoriesQuery()
-  const { refetch: updateBookmarks } = useGetBookmarksQuery()
+  const { refetch: updateItemCategories } = useGetBookmarkCategoryListQuery()
+  const { refetch: updateBookmarks } = useGetBookmarkListQuery()
 
   useUpdateEffect(() => {
     if (isSuccess === true) {

@@ -3,7 +3,7 @@ import type { Signal } from '@preact/signals-react'
 import type { UseMutationResult } from '@tanstack/react-query'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
-import { useGetBookmarksQuery } from '@entities/bookmark'
+import { useGetBookmarkListQuery } from '@entities/bookmark'
 import { useGetQuotationsQuery } from '@entities/quotation'
 import { useLogInMutation, userRole, userSlice } from '@entities/user'
 import { navItemId } from '@shared/const/navItemId'
@@ -44,7 +44,7 @@ export const useLogIn = ({
 
   const location = useLocation()
   const { refetch: refetchQuotations } = useGetQuotationsQuery()
-  const { refetch: refetchBookmarks } = useGetBookmarksQuery()
+  const { refetch: refetchBookmarks } = useGetBookmarkListQuery()
 
   useUpdateEffect(() => {
     if (isSuccess === true) {

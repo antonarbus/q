@@ -14,7 +14,7 @@ import { NameField } from '@shared/component/input-field/NameField'
 import { CategoryField } from '@shared/component/input-field/CategoryField'
 import { DescriptionField } from '@shared/component/input-field/DescriptionField'
 import { InfoField } from '@shared/component/input-field/InfoField'
-import { useGetBookmarkCategoriesQuery } from '@entities/bookmark'
+import { useGetBookmarkCategoryListQuery } from '@entities/bookmark'
 import { useSlide } from '@shared/util/useSlide'
 
 export const BookmarkModal = (): React.JSX.Element => {
@@ -35,7 +35,7 @@ export const BookmarkModal = (): React.JSX.Element => {
     void router.navigate('..')
   }
 
-  const { data } = useGetBookmarkCategoriesQuery()
+  const { data } = useGetBookmarkCategoryListQuery()
   const categories = (data?.categories ?? []).filter((cat) => cat !== undefined)
 
   return (

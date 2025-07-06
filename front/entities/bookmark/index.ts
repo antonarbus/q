@@ -1,8 +1,9 @@
 // api
 export { useSaveBookmarkMutation } from './api/useSaveBookmarkMutation'
 export { useDeleteBookmarkMutation } from './api/useDeleteBookmarkMutation'
-export { useGetBookmarksQuery } from './api/useGetBookmarksQuery'
-export { useGetBookmarkCategoriesQuery } from './api/useGetBookmarkCategoriesQuery'
+export { useGetBookmarkListQuery } from './api/useGetBookmarkListQuery'
+export { bookmarkListAllDatasource } from './api/bookmarkListAllDatasource'
+export { useGetBookmarkCategoryListQuery } from './api/useGetBookmarkCategoryListQuery'
 export { useGetBookmarkMutation } from './api/useGetBookmarkMutation'
 
 // cache updaters

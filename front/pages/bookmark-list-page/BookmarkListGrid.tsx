@@ -6,7 +6,7 @@ import {
 } from 'ag-grid-community'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { useRef } from 'react'
-import { useGetBookmarksQuery } from '@entities/bookmark'
+import { useGetBookmarkListQuery } from '@entities/bookmark'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
 import { DisplayedRowsCount } from '@shared/lib/ag-grid/components/DisplayedRowsCount'
 import { NoRowsTableOverlay } from '@shared/lib/ag-grid/components/NoRowsTableOverlay'
@@ -29,7 +29,7 @@ export const BookmarkListGrid = (): React.JSX.Element => {
   const gridContainerRef = useRef<React.ComponentRef<'div'> | null>(null)
 
   const { data, isLoading, isFetching, isFetched, refetch } =
-    useGetBookmarksQuery()
+    useGetBookmarkListQuery()
 
   useDisableLoadingOverlayWhenItemsAreFetched({ isFetched })
   useRefetchDataOnEmailChange({ refetch })
