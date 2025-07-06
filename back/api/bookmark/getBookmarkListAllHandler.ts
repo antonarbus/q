@@ -21,7 +21,6 @@ export type ResBody = {
     | ErrorMessageCommon
     | 'no permission to view'
     | 'Found'
-    | 'No content'
     | 'Unhandled error'
   bookmarkList: ItemPick[]
   bookmarkListTotalCount: number
@@ -90,13 +89,13 @@ export const getBookmarkListAllHandler: RouterHandler = async (
       bookmarkList: [],
       bookmarkListTotalCount: 0,
     })
+
+    return
   }
 
-  if (fulfilled === true) {
-    res.status(httpStatus.success_200).json({
-      message: 'Found',
-      bookmarkList: bookmarkListResponse.value,
-      bookmarkListTotalCount: bookmarkListTotalCountResponse.value, // ag-Grid uses this for infinite scroll
-    })
-  }
+  res.status(httpStatus.success_200).json({
+    message: 'Found',
+    bookmarkList: bookmarkListResponse.value,
+    bookmarkListTotalCount: bookmarkListTotalCountResponse.value, // ag-Grid uses this for infinite scroll
+  })
 }
