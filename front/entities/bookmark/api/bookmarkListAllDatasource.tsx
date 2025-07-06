@@ -91,7 +91,7 @@ export const useBookmarkListAllDatasource = (): Res => {
     }
 
     return ds
-  }, [isFirstMount])
+  }, [])
 
   return { datasource, isLoading, isFetching, isFetched }
 }
