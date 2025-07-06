@@ -55,25 +55,29 @@ export const getBookmarkListAllHandler: RouterHandler = async (
     const { startRow = 0, endRow = 100 } = req.query
 
     // Query all bookmarks (no user filter)
+    const bookmarkListPromise = BookmarkModel.find(
+      {},
+      {
+        _id: 0,
+        id: 1,
+        name: 1,
+        category: 1,
+        desc: 1,
+        type: 1,
+        createdAt: 1,
+        updatedAt: 1,
+        email: 1,
+      },
+    )
+      .skip(startRow)
+      .limit(endRow - startRow)
+      .lean()
+
+    const bookmarkListTotalCountPromise = BookmarkModel.countDocuments()
+
     const [bookmarkList, bookmarkListTotalCount] = await Promise.all([
-      BookmarkModel.find(
-        {},
-        {
-          _id: 0,
-          id: 1,
-          name: 1,
-          category: 1,
-          desc: 1,
-          type: 1,
-          createdAt: 1,
-          updatedAt: 1,
-          email: 1,
-        },
-      )
-        .skip(startRow)
-        .limit(endRow - startRow)
-        .lean(),
-      BookmarkModel.countDocuments(),
+      bookmarkListPromise,
+      bookmarkListTotalCountPromise,
     ])
 
     res.status(httpStatus.success_200).json({
