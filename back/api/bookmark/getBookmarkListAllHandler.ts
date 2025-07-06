@@ -54,6 +54,7 @@ export const getBookmarkListAllHandler: RouterHandler = async (
 
   // Parse pagination, sort, and filter params from ag-Grid (startRow, endRow, sortModel, filterModel)
   const { startRow = 0, endRow = 100, sortModel, filterModel } = req.query
+  console.log('🚀 ~ sortModel:', sortModel)
 
   // Parse sortModel and filterModel from JSON strings
   const sort: Record<string, 1 | -1> = {}

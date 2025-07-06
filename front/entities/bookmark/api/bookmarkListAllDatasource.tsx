@@ -4,43 +4,11 @@ import { axiosWithAuth } from '@shared/lib/axios'
 import { api } from '@back/api'
 import type { ResBody } from '@back/api/bookmark/getBookmarkListAllHandler'
 import type { AxiosResponse } from 'axios'
-import type { IDatasource, SortModelItem } from 'ag-grid-community'
+import type { IDatasource } from 'ag-grid-community'
 import { useFirstMountState } from 'react-use'
 import { useMemo, useState } from 'react'
 
-// type SortModel = {
-//   colId: string
-//   sort: 'asc' | 'desc'
-// }[]
-
-type FilterModel = Record<string, any>
-
-type Props = {
-  startRow: number
-  endRow: number
-  sortModel: SortModelItem[]
-  filterModel?: FilterModel
-}
-
-const getBookmarkListAll = async ({
-  startRow,
-  endRow,
-  sortModel,
-  filterModel,
-}: Props): Promise<ResBody> => {
-  const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
-    url: api.getBookmarkListAll.url,
-    params: {
-      startRow,
-      endRow,
-      sortModel: JSON.stringify(sortModel),
-      filterModel: JSON.stringify(filterModel),
-    },
-    method: api.getBookmarkListAll.method,
-  })
-
-  return data
-}
+// type FilterModel = Record<string, any>
 
 type Res = {
   datasource: IDatasource
@@ -68,6 +36,8 @@ export const useBookmarkListAllDatasource = (): Res => {
           failCallback,
         } = params
 
+        console.log('🚀 ~ params:', params)
+
         try {
           if (isFirstMount === true) {
             setIsLoading(true)
@@ -78,16 +48,29 @@ export const useBookmarkListAllDatasource = (): Res => {
             setIsFetching(true)
           }
 
-          const { bookmarkList, bookmarkListTotalCount } =
-            await getBookmarkListAll({
-              startRow,
-              endRow,
-              sortModel,
-              filterModel,
-            })
+          // const { bookmarkList, bookmarkListTotalCount } =
+          //   await getBookmarkListAll({
+          //     startRow,
+          //     endRow,
+          //     sortModel,
+          //     filterModel,
+          //   })
+
+          const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>(
+            {
+              url: api.getBookmarkListAll.url,
+              params: {
+                startRow,
+                endRow,
+                sortModel: JSON.stringify(sortModel),
+                filterModel: JSON.stringify(filterModel),
+              },
+              method: api.getBookmarkListAll.method,
+            },
+          )
 
           const getLastRow = (): number => {
-            const bookmarkListCount = bookmarkList.length
+            const bookmarkListCount = data.bookmarkList.length
             const didReachEndOfTheList = bookmarkListCount >= endRow - startRow
 
             if (didReachEndOfTheList === false) {
@@ -97,13 +80,13 @@ export const useBookmarkListAllDatasource = (): Res => {
             }
 
             // reached the end of the list
-            const lastRow = bookmarkListTotalCount
+            const lastRow = data.bookmarkListTotalCount
 
             return lastRow
           }
 
           const lastRow = getLastRow()
-          successCallback(bookmarkList, lastRow)
+          successCallback(data.bookmarkList, lastRow)
         } catch {
           failCallback()
         } finally {
