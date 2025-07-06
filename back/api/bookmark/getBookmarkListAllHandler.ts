@@ -17,13 +17,13 @@ export type SearchQuery = {
 }
 
 export type ResBody = {
+  bookmarkList: ItemPick[]
+  bookmarkListTotalCount: number
   message:
     | ErrorMessageCommon
     | 'no permission to view'
     | 'Found'
     | 'Unhandled error'
-  bookmarkList: ItemPick[]
-  bookmarkListTotalCount: number
 }
 
 type RouterHandler = (
