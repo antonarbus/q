@@ -5,6 +5,7 @@ import { httpStatus } from '@back/shared/const/httpStatus'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { BookmarkModel } from '@back/entities/bookmark'
 import { userRole } from '@back/shared/const/userRole'
+import type { SortModelItem } from '@shared/lib/ag-grid/types/SortModelItem'
 
 export type ItemPick = Pick<
   Item,
@@ -14,6 +15,8 @@ export type ItemPick = Pick<
 export type SearchQuery = {
   startRow: number
   endRow: number
+  sortModel: SortModelItem[]
+  filterModel?: string
 }
 
 export type ResBody = {
@@ -49,29 +52,60 @@ export const getBookmarkListAllHandler: RouterHandler = async (
     return
   }
 
-  // Parse pagination params from ag-Grid (startRow, endRow)
-  const { startRow = 0, endRow = 100 } = req.query
+  // Parse pagination, sort, and filter params from ag-Grid (startRow, endRow, sortModel, filterModel)
+  const { startRow = 0, endRow = 100, sortModel, filterModel } = req.query
+
+  // Parse sortModel and filterModel from JSON strings
+  const sort: Record<string, 1 | -1> = {}
+
+  if (Boolean(sortModel) === true) {
+    try {
+      const sortArr = JSON.parse(sortModel) as {
+        colId: string
+        sort: 'asc' | 'desc'
+      }[]
+
+      sortArr.forEach(({ colId, sort: dir }) => {
+        sort[colId] = dir === 'asc' ? 1 : -1
+      })
+    } catch {}
+  }
+
+  const filter: Record<string, any> = {}
+
+  if (filterModel) {
+    try {
+      const filterObj = JSON.parse(filterModel)
+
+      // Basic string/text filter support (ag-Grid default)
+      Object.entries(filterObj).forEach(([field, filterDef]: [string, any]) => {
+        if (filterDef.filter != null) {
+          // For text filter, use case-insensitive partial match
+          filter[field] = { $regex: filterDef.filter, $options: 'i' }
+        }
+        // Add more filter types as needed (e.g., date, number)
+      })
+    } catch {}
+  }
 
   // Query all bookmarks (no user filter)
-  const bookmarkListPromise = BookmarkModel.find(
-    {},
-    {
-      _id: 0,
-      id: 1,
-      name: 1,
-      category: 1,
-      desc: 1,
-      type: 1,
-      createdAt: 1,
-      updatedAt: 1,
-      email: 1,
-    },
-  )
-    .skip(startRow)
-    .limit(endRow - startRow)
+  const bookmarkListPromise = BookmarkModel.find(filter, {
+    _id: 0,
+    id: 1,
+    name: 1,
+    category: 1,
+    desc: 1,
+    type: 1,
+    createdAt: 1,
+    updatedAt: 1,
+    email: 1,
+  })
+    .sort(sort)
+    .skip(Number(startRow))
+    .limit(Number(endRow) - Number(startRow))
     .lean()
 
-  const bookmarkListTotalCountPromise = BookmarkModel.countDocuments()
+  const bookmarkListTotalCountPromise = BookmarkModel.countDocuments(filter)
 
   const [bookmarkListResponse, bookmarkListTotalCountResponse] =
     await Promise.allSettled([

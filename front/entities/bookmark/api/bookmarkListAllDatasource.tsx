@@ -4,22 +4,38 @@ import { axiosWithAuth } from '@shared/lib/axios'
 import { api } from '@back/api'
 import type { ResBody } from '@back/api/bookmark/getBookmarkListAllHandler'
 import type { AxiosResponse } from 'axios'
-import type { IDatasource } from 'ag-grid-community'
+import type { IDatasource, SortModelItem } from 'ag-grid-community'
 import { useFirstMountState } from 'react-use'
 import { useMemo, useState } from 'react'
+
+// type SortModel = {
+//   colId: string
+//   sort: 'asc' | 'desc'
+// }[]
+
+type FilterModel = Record<string, any>
 
 type Props = {
   startRow: number
   endRow: number
+  sortModel: SortModelItem[]
+  filterModel?: FilterModel
 }
 
 const getBookmarkListAll = async ({
   startRow,
   endRow,
+  sortModel,
+  filterModel,
 }: Props): Promise<ResBody> => {
   const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>({
     url: api.getBookmarkListAll.url,
-    params: { startRow, endRow },
+    params: {
+      startRow,
+      endRow,
+      sortModel: JSON.stringify(sortModel),
+      filterModel: JSON.stringify(filterModel),
+    },
     method: api.getBookmarkListAll.method,
   })
 
@@ -43,7 +59,14 @@ export const useBookmarkListAllDatasource = (): Res => {
     const ds: IDatasource = {
       rowCount: undefined,
       getRows: async (params) => {
-        const { startRow, endRow, successCallback, failCallback } = params
+        const {
+          startRow,
+          endRow,
+          sortModel,
+          filterModel,
+          successCallback,
+          failCallback,
+        } = params
 
         try {
           if (isFirstMount === true) {
@@ -59,6 +82,8 @@ export const useBookmarkListAllDatasource = (): Res => {
             await getBookmarkListAll({
               startRow,
               endRow,
+              sortModel,
+              filterModel,
             })
 
           const getLastRow = (): number => {
@@ -78,7 +103,6 @@ export const useBookmarkListAllDatasource = (): Res => {
           }
 
           const lastRow = getLastRow()
-
           successCallback(bookmarkList, lastRow)
         } catch {
           failCallback()
