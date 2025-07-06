@@ -11,14 +11,14 @@ import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
 import { DisplayedRowsCount } from '@shared/lib/ag-grid/components/DisplayedRowsCount'
 import { NoRowsTableOverlay } from '@shared/lib/ag-grid/components/NoRowsTableOverlay'
 import { columnDefs, defaultColDef } from './columnDef'
-import { bookmarkListAgGridRef } from './ref/bookmarkListAgGridRef'
+import { bookmarkListAllAgGridRef } from './ref/bookmarkListAllAgGridRef'
 import { addPlaceholderToFloatingFilters } from '@shared/lib/ag-grid/utils/addPlaceholderToFloatingFilters'
 import { GridLayout } from '@shared/lib/ag-grid/GridLayout'
 import { ProgressGridBar } from '@shared/lib/ag-grid/components/ProgressGridBar'
 import { useShowLoadingJumpingDots } from '@shared/lib/ag-grid/hooks/useShowLoadingJumpingDots'
 import { useDisableLoadingOverlayWhenItemsAreFetched } from '@shared/component/loading-dots-overlay'
 import { AgGridStyles } from '@shared/lib/ag-grid/styles/AgGridStyles'
-import type { ItemPick } from '@back/api/bookmark/getBookmarkListHandler'
+import type { ItemPick } from '@back/api/bookmark/getBookmarkListAllHandler'
 import { dispatch } from '@shared/lib/redux'
 import { agGridSlice } from '@shared/lib/ag-grid/agGridSlice'
 
@@ -57,7 +57,7 @@ export const BookmarkListAllGrid = (): React.JSX.Element => {
           const count = params.api.getDisplayedRowCount()
           dispatch(agGridSlice.actions.setCount({ count }))
         }}
-        ref={bookmarkListAgGridRef}
+        ref={bookmarkListAllAgGridRef}
         rowModelType='infinite'
         suppressCellFocus
         suppressColumnVirtualisation

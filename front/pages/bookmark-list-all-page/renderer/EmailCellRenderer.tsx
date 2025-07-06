@@ -3,18 +3,18 @@ import type { QuotationPick } from '@back/api/quotation/getQuotationListHandler'
 import { getTextWithBoldSubStringAsJsx } from '@shared/util/getTextWithBoldSubStringAsJsx'
 
 type FilterModel = {
-  desc?: {
+  email?: {
     filter: string
     filterType: string
     type: string
   }
 }
 
-export const DescriptionCellRenderer = (
+export const EmailCellRenderer = (
   params: ICellRendererParams<QuotationPick, string>,
 ): React.ReactNode => {
   const filterModel = params.api.getFilterModel() as FilterModel
-  const filterValue = filterModel.desc?.filter ?? ''
+  const filterValue = filterModel.email?.filter ?? ''
 
   const text = getTextWithBoldSubStringAsJsx({
     text: params.value ?? '',

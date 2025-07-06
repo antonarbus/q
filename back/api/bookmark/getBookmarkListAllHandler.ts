@@ -8,7 +8,7 @@ import { userRole } from '@back/shared/const/userRole'
 
 export type ItemPick = Pick<
   Item,
-  'id' | 'name' | 'category' | 'desc' | 'type' | 'createdAt' | 'updatedAt'
+  'id' | 'email' | 'name' | 'type' | 'createdAt' | 'updatedAt'
 >
 
 export type SearchQuery = {

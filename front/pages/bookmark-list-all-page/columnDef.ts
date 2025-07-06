@@ -3,12 +3,11 @@ import { ActionButtonsCellRenderer } from './renderer/ActionButtonsCellRenderer'
 import { DateCellRenderer } from '@shared/lib/ag-grid/renderers/DateCellRenderer'
 import { dateFilterComparator } from '@shared/lib/ag-grid/comparators/dateFilterComparator'
 import { dateValueGetter } from '@shared/lib/ag-grid/value_getter/dateValueGetter'
-import type { ItemPick } from '@back/api/bookmark/getBookmarkListHandler'
+import type { ItemPick } from '@back/api/bookmark/getBookmarkListAllHandler'
 import { IdCellRenderer } from './renderer/IdCellRenderer'
 import { NameCellRenderer } from './renderer/NameCellRenderer'
-import { CategoryCellRenderer } from './renderer/CategoryCellRenderer'
-import { DescriptionCellRenderer } from './renderer/DescriptionCellRenderer'
 import { TypeCellRenderer } from './renderer/TypeCellRenderer'
+import { EmailCellRenderer } from './renderer/EmailCellRenderer'
 
 export const defaultColDef: ColDef<ItemPick> = {
   headerClass: ['center'],
@@ -45,21 +44,15 @@ export const columnDefs: ColDef<ItemPick>[] = [
     cellRenderer: IdCellRenderer,
   },
   {
+    field: 'email',
+    headerName: 'email',
+    cellRenderer: EmailCellRenderer,
+  },
+  {
     field: 'name',
     headerName: 'name',
     cellRenderer: NameCellRenderer,
   },
-  {
-    field: 'category',
-    headerName: 'category',
-    cellRenderer: CategoryCellRenderer,
-  },
-  {
-    field: 'desc',
-    headerName: 'description',
-    cellRenderer: DescriptionCellRenderer,
-  },
-
   {
     field: 'type',
     headerName: 'type',
