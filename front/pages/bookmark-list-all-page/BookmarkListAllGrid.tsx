@@ -6,7 +6,7 @@ import {
 } from 'ag-grid-community'
 import { AgGridReact } from 'ag-grid-react' // AG Grid Component
 import { useRef } from 'react'
-import { bookmarkListAllDatasource } from '@entities/bookmark'
+import { useBookmarkListAllDatasource } from '@entities/bookmark'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
 import { DisplayedRowsCount } from '@shared/lib/ag-grid/components/DisplayedRowsCount'
 import { NoRowsTableOverlay } from '@shared/lib/ag-grid/components/NoRowsTableOverlay'
@@ -36,6 +36,8 @@ export const BookmarkListAllGrid = (): React.JSX.Element => {
   // useDisableLoadingOverlayWhenItemsAreFetched({ isFetched })
   // useShowLoadingJumpingDots({ isLoading })
 
+  const datasource = useBookmarkListAllDatasource()
+
   return (
     <GridLayout gridContainerRef={gridContainerRef}>
       <AgGridStyles />
@@ -43,7 +45,7 @@ export const BookmarkListAllGrid = (): React.JSX.Element => {
       {/* <ProgressGridBar isShown={isFetching} /> */}
       <AgGridReact<ItemPick>
         columnDefs={columnDefs}
-        datasource={bookmarkListAllDatasource}
+        datasource={datasource}
         defaultColDef={defaultColDef}
         enableCellTextSelection
         getRowId={(params) => params.data.id}

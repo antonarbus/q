@@ -24,40 +24,43 @@ const getBookmarkListAll = async ({
   return data
 }
 
-export const bookmarkListAllDatasource: IDatasource = {
-  rowCount: undefined,
-  getRows: async (params) => {
-    const { startRow, endRow, successCallback, failCallback } = params
+export const useBookmarkListAllDatasource = (): IDatasource => {
+  const datasource: IDatasource = {
+    rowCount: undefined,
+    getRows: async (params) => {
+      const { startRow, endRow, successCallback, failCallback } = params
 
-    try {
-      const { bookmarkList, bookmarkListTotalCount } = await getBookmarkListAll(
-        {
-          startRow,
-          endRow,
-        },
-      )
+      try {
+        const { bookmarkList, bookmarkListTotalCount } =
+          await getBookmarkListAll({
+            startRow,
+            endRow,
+          })
 
-      const getLastRow = (): number => {
-        const bookmarkListCount = bookmarkList.length
-        const didReachEndOfTheList = bookmarkListCount >= endRow - startRow
+        const getLastRow = (): number => {
+          const bookmarkListCount = bookmarkList.length
+          const didReachEndOfTheList = bookmarkListCount >= endRow - startRow
 
-        if (didReachEndOfTheList === false) {
-          const lastRow = startRow + bookmarkListCount
+          if (didReachEndOfTheList === false) {
+            const lastRow = startRow + bookmarkListCount
+
+            return lastRow
+          }
+
+          // reached the end of the list
+          const lastRow = bookmarkListTotalCount
 
           return lastRow
         }
 
-        // reached the end of the list
-        const lastRow = bookmarkListTotalCount
+        const lastRow = getLastRow()
 
-        return lastRow
+        successCallback(bookmarkList, lastRow)
+      } catch {
+        failCallback()
       }
+    },
+  }
 
-      const lastRow = getLastRow()
-
-      successCallback(bookmarkList, lastRow)
-    } catch {
-      failCallback()
-    }
-  },
+  return datasource
 }
