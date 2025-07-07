@@ -33,6 +33,7 @@ import { getUniqueDailyVisitorsHandler } from '@back/api/visitors/getUniqueDaily
 import { deleteFileHandler } from './file/deleteFileHandler'
 import { proxyFileToBucketHandler } from './file/proxyFileToBucketHandler'
 import { getBookmarkListAllHandler } from './bookmark/getBookmarkListAllHandler'
+import { getQuotationListAllHandler } from './quotation/getQuotationListAllHandler'
 
 type Api = {
   url: string
@@ -174,7 +175,13 @@ export const api = {
     url: '/api/get-quotation-list',
     method: 'get',
     handler: getQuotationListHandler,
-    description: 'For quotations table',
+    description: 'User quotations table',
+  },
+  getQuotationListAll: {
+    url: '/api/get-quotation-list-all',
+    method: 'get',
+    handler: getQuotationListAllHandler,
+    description: 'All quotations table',
   },
   getUniqueQuotationCategoryList: {
     url: '/api/get-unique-quotation-category-list',
@@ -205,13 +212,13 @@ export const api = {
     url: '/api/get-bookmark-list',
     method: 'get',
     handler: getBookmarkListHandler,
-    description: 'For bookmarks table',
+    description: 'User bookmarks table',
   },
   getBookmarkListAll: {
     url: '/api/get-bookmark-list-all',
     method: 'get',
     handler: getBookmarkListAllHandler,
-    description: 'For all bookmarks table',
+    description: 'All bookmarks table',
   },
   getUniqueBookmarkCategoryList: {
     url: '/api/get-unique-bookmark-category-list',

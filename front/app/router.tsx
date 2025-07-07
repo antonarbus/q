@@ -45,6 +45,12 @@ const BookmarksPageLazy = lazy(async () => {
   return module
 })
 
+const QuotationListAllPageLazy = lazy(async () => {
+  const module = await import('@pages/quotation-list-all-page')
+
+  return module
+})
+
 const BookmarkListAllPageLazy = lazy(async () => {
   const module = await import('@pages/bookmark-list-all-page')
 
@@ -236,6 +242,23 @@ const router = createBrowserRouter([
           >
             <RequireRoles requiredRoles={[userRole.superAdmin]}>
               <VisitorsPageLazy />
+            </RequireRoles>
+          </Suspense>
+        ),
+      },
+      {
+        path: route.quotationListAll,
+        element: (
+          <Suspense
+            fallback={
+              <LoadingDotsOverlay
+                shouldShowLoader
+                text='Loading...'
+              />
+            }
+          >
+            <RequireRoles requiredRoles={[userRole.superAdmin]}>
+              <QuotationListAllPageLazy />
             </RequireRoles>
           </Suspense>
         ),
