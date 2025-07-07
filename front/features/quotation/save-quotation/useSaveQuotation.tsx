@@ -6,7 +6,7 @@ import {
   type Quotation,
   quotationSlice,
   useGetQuotationCategoriesQuery,
-  useGetQuotationsQuery,
+  useGetQuotationListQuery,
   useSaveQuotationMutation,
   type SaveQuotationFormValues,
 } from '@entities/quotation'
@@ -54,7 +54,7 @@ export const useSaveQuotation = ({
   } = useSaveQuotationMutation()
 
   const { refetch: updateCategories } = useGetQuotationCategoriesQuery()
-  const { refetch: fetchQuotations } = useGetQuotationsQuery()
+  const { refetch: fetchQuotations } = useGetQuotationListQuery()
 
   useUpdateEffect(() => {
     if (isPending === true) {

@@ -7,7 +7,7 @@ import { axiosWithAuth } from '@shared/lib/axios'
 
 type Res = UseQueryResult<ResBody, AxiosError<ResBody>>
 
-export const useGetQuotationsQuery = (): Res => {
+export const useGetQuotationListQuery = (): Res => {
   const query = useQuery<ResBody, AxiosError<ResBody>>({
     queryKey: [queryKey.getQuotations],
     refetchOnMount: false,

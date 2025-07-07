@@ -179,7 +179,7 @@ export const api = {
   },
   getQuotationListAll: {
     url: '/api/get-quotation-list-all',
-    method: 'get',
+    method: 'post', // idiomatically not correct, here "post" is used instead of "get" to send data in body which is automatically stringified and parsed
     handler: getQuotationListAllHandler,
     description: 'All quotations table',
   },

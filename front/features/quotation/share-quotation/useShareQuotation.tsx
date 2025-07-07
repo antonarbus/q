@@ -5,7 +5,7 @@ import { useUpdateEffect } from 'react-use'
 import {
   type Quotation,
   quotationSlice,
-  useGetQuotationsQuery,
+  useGetQuotationListQuery,
   useSaveQuotationMutation,
   type AccessFormValuesSignal,
 } from '@entities/quotation'
@@ -52,7 +52,7 @@ export const useShareQuotation = ({
     reset,
   } = useSaveQuotationMutation()
 
-  const { refetch: fetchQuotations } = useGetQuotationsQuery()
+  const { refetch: fetchQuotations } = useGetQuotationListQuery()
 
   useUpdateEffect(() => {
     if (isPending === true) {

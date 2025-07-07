@@ -6,7 +6,7 @@ export { backToQuotationRef } from './ref/backToQuotationRef'
 // api
 export { useGetQuotationMutation } from './api/useGetQuotationMutation'
 export { useQuotationListAllDatasource } from './api/useQuotationListAllDatasource'
-export { useGetQuotationsQuery } from './api/useGetQuotationsQuery'
+export { useGetQuotationListQuery } from './api/useGetQuotationListQuery'
 export { useDeleteQuotationMutation } from './api/useDeleteQuotationMutation'
 export {
   useSaveQuotationMutation,

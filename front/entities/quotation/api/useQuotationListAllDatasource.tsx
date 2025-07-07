@@ -3,7 +3,10 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { axiosWithAuth } from '@shared/lib/axios'
 import { api } from '@back/api'
-import type { ResBody } from '@back/api/quotation/getQuotationListAllHandler'
+import type {
+  ReqBody as Payload,
+  ResBody,
+} from '@back/api/quotation/getQuotationListAllHandler'
 import type { AxiosResponse } from 'axios'
 import type { IDatasource } from 'ag-grid-community'
 import { useFirstMountState } from 'react-use'
@@ -45,18 +48,20 @@ export const useQuotationListAllDatasource = (): Res => {
             setIsFetching(true)
           }
 
-          const { data } = await axiosWithAuth<ResBody, AxiosResponse<ResBody>>(
-            {
-              url: api.getQuotationListAll.url,
-              params: {
-                startRow,
-                endRow,
-                sortModel: JSON.stringify(sortModel),
-                filterModel: JSON.stringify(filterModel),
-              },
-              method: api.getQuotationListAll.method,
+          const { data } = await axiosWithAuth<
+            ResBody,
+            AxiosResponse<ResBody>,
+            Payload
+          >({
+            url: api.getQuotationListAll.url,
+            method: api.getQuotationListAll.method,
+            data: {
+              startRow,
+              endRow,
+              sortModel,
+              filterModel,
             },
-          )
+          })
 
           const getLastRow = (): number => {
             const quotationListCount = data.quotationList.length

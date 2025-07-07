@@ -5,7 +5,7 @@ import { useUpdateEffect } from 'react-use'
 import { RotatingLoaderIcon } from '@shared/component/RotatingLoaderIcon'
 import { toast } from 'sonner'
 import { useLogInMutation, userRole, userSlice } from '@entities/user'
-import { useGetQuotationsQuery } from '@entities/quotation'
+import { useGetQuotationListQuery } from '@entities/quotation'
 import { useGetBookmarkListQuery } from '@entities/bookmark'
 import { useLocation } from 'react-router-dom'
 import { dispatch } from '@shared/lib/redux'
@@ -24,7 +24,7 @@ export const LogInAsUserButton = ({ email }: Payload): React.ReactNode => {
   } = useLogInMutation()
 
   const location = useLocation()
-  const { refetch: refetchQuotations } = useGetQuotationsQuery()
+  const { refetch: refetchQuotations } = useGetQuotationListQuery()
   const { refetch: refetchBookmarks } = useGetBookmarkListQuery()
 
   useUpdateEffect(() => {

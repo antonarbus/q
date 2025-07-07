@@ -4,7 +4,6 @@ import type { ErrorMessageCommon } from '@shared/const/errorMessageCommon'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { getUserFromAccessTokenOrThrowUnauthorized } from '@back/entities/user'
 import { userRole } from '@back/shared/const/userRole'
-import { z } from 'zod'
 import { QuotationModel } from '@back/entities/quotation'
 
 export type ItemPick = Pick<
@@ -12,11 +11,21 @@ export type ItemPick = Pick<
   'id' | 'email' | 'name' | 'type' | 'createdAt' | 'updatedAt'
 >
 
-export type SearchQuery = {
-  startRow: string
-  endRow: string
-  sortModel: string
-  filterModel: string
+export type ReqBody = {
+  startRow: number
+  endRow: number
+  sortModel: {
+    colId: string
+    sort: 'asc' | 'desc'
+  }[]
+  filterModel: Record<
+    string,
+    {
+      filterType: string
+      type: string
+      filter: string
+    }
+  >
 }
 
 export type ResBody = {
@@ -30,7 +39,7 @@ export type ResBody = {
 }
 
 type RouterHandler = (
-  req: Request<unknown, unknown, unknown, SearchQuery>,
+  req: Request<unknown, unknown, ReqBody>,
   res: Response<ResBody>,
   next: NextFunction,
 ) => Promise<void>
@@ -52,63 +61,21 @@ export const getQuotationListAllHandler: RouterHandler = async (
     return
   }
 
-  const { startRow = 0, endRow = 100, sortModel, filterModel } = req.query
+  const { startRow = 0, endRow = 100, sortModel, filterModel } = req.body
 
-  const sortModelSchema = z.array(
-    z.object({
-      colId: z.string(),
-      sort: z.enum(['asc', 'desc']),
-    }),
-  )
+  const sort = sortModel.reduce<Record<string, 1 | -1>>((accumulator, item) => {
+    if (item.sort === 'asc') {
+      accumulator[item.colId] = 1
+    }
 
-  // ? maybe it is not a good idea to pass parameters in search query params, coz they are strings
-  // ? to type we need to have parse it with schema, dah...
-  // but it is a good example how to do it
-  const {
-    success: parseSortModelSuccess,
-    error: parseSortModelError,
-    data: parsedSortModel,
-  } = sortModelSchema.safeParse(JSON.parse(sortModel))
+    if (item.sort === 'desc') {
+      accumulator[item.colId] = -1
+    }
 
-  if (parseSortModelSuccess === false) {
-    throw new Error('Invalid sortModel format', parseSortModelError)
-  }
+    return accumulator
+  }, {})
 
-  const sort = parsedSortModel.reduce<Record<string, 1 | -1>>(
-    (accumulator, item) => {
-      if (item.sort === 'asc') {
-        accumulator[item.colId] = 1
-      }
-
-      if (item.sort === 'desc') {
-        accumulator[item.colId] = -1
-      }
-
-      return accumulator
-    },
-    {},
-  )
-
-  const filterModelSchema = z.record(
-    z.string(),
-    z.object({
-      filterType: z.string(),
-      type: z.string(),
-      filter: z.string(),
-    }),
-  )
-
-  const {
-    success: parseFilterModelSuccess,
-    error: parseFilterModelError,
-    data: parsedFilterModel,
-  } = filterModelSchema.safeParse(JSON.parse(filterModel))
-
-  if (parseFilterModelSuccess === false) {
-    throw new Error('Invalid filterModel format', parseFilterModelError)
-  }
-
-  const filter = Object.entries(parsedFilterModel).reduce<
+  const filter = Object.entries(filterModel).reduce<
     Record<string, { ['$regex']: string; ['$options']: 'i' }>
   >((accumulator, item) => {
     const [field, filterDef] = item
@@ -130,8 +97,8 @@ export const getQuotationListAllHandler: RouterHandler = async (
     email: 1,
   })
     .sort(sort)
-    .skip(Number(startRow))
-    .limit(Number(endRow) - Number(startRow))
+    .skip(startRow)
+    .limit(endRow - startRow)
     .lean()
 
   const quotationListTotalCountPromise = QuotationModel.countDocuments(filter)

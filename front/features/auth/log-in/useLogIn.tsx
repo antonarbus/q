@@ -4,7 +4,7 @@ import type { UseMutationResult } from '@tanstack/react-query'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useUpdateEffect } from 'react-use'
 import { useGetBookmarkListQuery } from '@entities/bookmark'
-import { useGetQuotationsQuery } from '@entities/quotation'
+import { useGetQuotationListQuery } from '@entities/quotation'
 import { useLogInMutation, userRole, userSlice } from '@entities/user'
 import { navItemId } from '@shared/const/navItemId'
 import { route } from '@shared/const/route'
@@ -43,7 +43,7 @@ export const useLogIn = ({
   } = useLogInMutation()
 
   const location = useLocation()
-  const { refetch: refetchQuotations } = useGetQuotationsQuery()
+  const { refetch: refetchQuotations } = useGetQuotationListQuery()
   const { refetch: refetchBookmarks } = useGetBookmarkListQuery()
 
   useUpdateEffect(() => {
