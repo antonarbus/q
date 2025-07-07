@@ -1,5 +1,4 @@
 import type { Request, Response, NextFunction } from 'express'
-// import { QuotationModel } from '@back/db/models/quotationModel'
 import { httpStatus } from '@back/shared/const/httpStatus'
 import { userRole } from '@back/shared/const/userRole'
 import { getUserFromRefreshTokenOrJohn, UserModel } from '@back/entities/user'
@@ -19,8 +18,8 @@ export const testHandler: RouterHandler = async (req, res, next) => {
     return
   }
 
-  // const dbRes = await UserModel.find({ email: 'some random guy' })
-  const dbRes = await UserModel.find()
+  const dbRes = await UserModel.find({ email: 'some random guy' })
+  // const dbRes = await UserModel.find()
   // const dbRes = await UserModel.find({ email: 'test-user@sendmequotation.today' })
   // await UserModel.deleteOne({ email: 'info@sendmequotation.today' })
   // const dbRes = await UserModel.find().select({ _id: 0, email: 1 })

@@ -69,6 +69,12 @@ const VisitorsPageLazy = lazy(async () => {
   return module
 })
 
+const FileListAllPageLazy = lazy(async () => {
+  const module = await import('@pages/file-list-all-page')
+
+  return module
+})
+
 const authRoutes: RouteObject[] = [
   {
     path: route.login,
@@ -276,6 +282,23 @@ const router = createBrowserRouter([
           >
             <RequireRoles requiredRoles={[userRole.superAdmin]}>
               <BookmarkListAllPageLazy />
+            </RequireRoles>
+          </Suspense>
+        ),
+      },
+      {
+        path: route.fileListAll,
+        element: (
+          <Suspense
+            fallback={
+              <LoadingDotsOverlay
+                shouldShowLoader
+                text='Loading...'
+              />
+            }
+          >
+            <RequireRoles requiredRoles={[userRole.superAdmin]}>
+              <FileListAllPageLazy />
             </RequireRoles>
           </Suspense>
         ),

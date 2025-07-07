@@ -34,6 +34,7 @@ import { deleteFileHandler } from './file/deleteFileHandler'
 import { proxyFileToBucketHandler } from './file/proxyFileToBucketHandler'
 import { getBookmarkListAllHandler } from './bookmark/getBookmarkListAllHandler'
 import { getQuotationListAllHandler } from './quotation/getQuotationListAllHandler'
+import { getFileListAllHandler } from './file/getFileListAllHandler'
 
 type Api = {
   url: string
@@ -263,6 +264,12 @@ export const api = {
     method: 'get',
     handler: getFileListHandler,
     description: 'Get file list for settings modal',
+  },
+  getFileListAll: {
+    url: '/api/get-file-list-all',
+    method: 'post', // idiomatically not correct, here "post" is used instead of "get" to send data in body which is automatically stringified and parsed
+    handler: getFileListAllHandler,
+    description: 'All files table',
   },
   deleteFile: {
     url: '/api/delete-file',
