@@ -3,7 +3,7 @@ import {
   ModuleRegistry,
   themeQuartz,
 } from 'ag-grid-community'
-import { AgGridReact } from 'ag-grid-react' // AG Grid Component
+import { AgGridReact } from 'ag-grid-react'
 import { useRef } from 'react'
 import { useGetUsersQuery } from '@entities/user'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'

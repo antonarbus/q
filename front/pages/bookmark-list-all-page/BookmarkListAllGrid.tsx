@@ -4,7 +4,7 @@ import {
   themeQuartz,
   type FilterChangedEvent,
 } from 'ag-grid-community'
-import { AgGridReact } from 'ag-grid-react' // AG Grid Component
+import { AgGridReact } from 'ag-grid-react'
 import { useRef } from 'react'
 import { useBookmarkListAllDatasource } from '@entities/bookmark'
 import { LoadingTableOverlay } from '@shared/component/LoadingTableOverlay'
